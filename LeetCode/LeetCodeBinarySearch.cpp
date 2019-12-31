@@ -327,7 +327,7 @@ int LeetCode::hIndexII(vector<int>& citations)
 ///  
 /// A peak element is an element that is greater than its neighbors.
 ///
-/// Given an input array nums, where nums[i] ¡Ù nums[i+1], find a peak element 
+/// Given an input array nums, where nums[i] Â¡Ã™ nums[i+1], find a peak element 
 /// and return its index.
 ///
 /// The array may contain multiple peaks, in that case return the index to 
@@ -790,8 +790,8 @@ int LeetCodeBinarySearch::findMedianSortedArrays(vector<int>& nums1, vector<int>
 /// If n is the length of array, assume the following constraints are 
 /// satisfied:
 ///
-/// 1. 1 ¡Ü n ¡Ü 1000
-/// 2. 1 ¡Ü m ¡Ü min(50, n)
+/// 1. 1 Â¡Ãœ n Â¡Ãœ 1000
+/// 2. 1 Â¡Ãœ m Â¡Ãœ min(50, n)
 ///
 /// Examples:
 /// Input:
