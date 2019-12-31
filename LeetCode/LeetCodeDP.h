@@ -85,7 +85,7 @@ public:
     ///
     /// 1. 1 is a super ugly number for any given primes.
     /// 2. The given numbers in primes are in ascending order.
-    /// 3. 0 < k ¡Ü 100, 0 < n ¡Ü 106, 0 < primes[i] < 1000.
+    /// 3. 0 < k â‰¤ 100, 0 < n â‰¤ 106, 0 < primes[i] < 1000.
     /// 4. The nth super ugly number is guaranteed to fit in a 32-bit signed 
     ///    integer.
     /// </summary>
@@ -109,7 +109,7 @@ public:
     ///
     /// Note:
     ///
-    /// The number of stones is ¡İ 2 and is < 1,100.
+    /// The number of stones is â‰¥ 2 and is < 1,100.
     /// Each stone's position will be a non-negative integer < 231.
     /// The first stone's position is always 0.
     ///
@@ -634,9 +634,9 @@ public:
     /// Given an array A (index starts at 1) consisting of N integers: A1, A2,
     ///	..., AN and an integer B. The integer B denotes that from any place 
     /// (suppose the index is i) in the array A, you can jump to any one of 
-    /// the place in the array A indexed i+1, i+2, ¡­, i+B if this place can 
+    /// the place in the array A indexed i+1, i+2, â€¦, i+B if this place can 
     /// be jumped to. Also, if you step on the index i, you have to pay Ai 
-    /// coins. If Ai is -1, it means you can¡¯t jump to the place indexed i in 
+    /// coins. If Ai is -1, it means you canâ€™t jump to the place indexed i in 
     /// the array.
     ///
     /// Now, you start from the place indexed 1 in the array A, and your aim 
@@ -816,7 +816,7 @@ public:
     /// Input: Array = {"10", "0001", "111001", "1", "0"}, m = 5, n = 3
     /// Output: 4
     ///
-    /// Explanation: This are totally 4 strings can be formed by the using of 5 0s and 3 1s, which are ¡°10,¡±0001¡±,¡±1¡±,¡±0¡±
+    /// Explanation: This are totally 4 strings can be formed by the using of 5 0s and 3 1s, which are â€œ10,â€0001â€,â€1â€,â€0â€
     ///
     /// Example 2:
     /// Input: Array = {"10", "0", "1"}, m = 1, n = 1
