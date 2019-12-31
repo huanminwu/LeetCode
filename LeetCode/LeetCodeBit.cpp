@@ -42,9 +42,9 @@ int LeetCode::getSum(int a, int b)
 /// <summary>
 /// Leet code # 191. Number of 1 Bits
 /// 
-/// Write a function that takes an unsigned integer and returns the number of ¡¯1' 
+/// Write a function that takes an unsigned integer and returns the number of Â¡Â¯1' 
 /// bits it has (also known as the Hamming weight). 
-/// For example, the 32-bit integer ¡¯11' has binary representation 
+/// For example, the 32-bit integer Â¡Â¯11' has binary representation 
 /// 00000000000000000000000000001011, so the function should return 3. 
 /// </summary>
 int LeetCode::hammingWeight(uint32_t n)
@@ -60,7 +60,7 @@ int LeetCode::hammingWeight(uint32_t n)
 
 /// <summary>
 /// Leet code #338. Counting Bits    
-/// Given a non negative integer number num. For every numbers i in the range 0 ¡Ü i ¡Ü num 
+/// Given a non negative integer number num. For every numbers i in the range 0 Â¡Ãœ i Â¡Ãœ num 
 /// calculate the number of 1's in their binary representation and return them as an array. 
 /// Example:
 /// For num = 5 you should return [0,1,1,2,1,2].
@@ -184,7 +184,7 @@ vector<int> LeetCode::grayCode(int n)
 
 /// <summary>
 /// Leet code #405. Convert a Number to Hexadecimal 
-/// Given an integer, write an algorithm to convert it to hexadecimal. For negative integer, two¡¯s complement method is used.  
+/// Given an integer, write an algorithm to convert it to hexadecimal. For negative integer, twoÂ¡Â¯s complement method is used.  
 /// Note: 
 /// 1.All letters in hexadecimal (a-f) must be in lowercase.
 /// 2.The hexadecimal string must not contain extra leading 0s. If the number is zero, it is represented by a single zero character '0'; otherwise, 
@@ -456,8 +456,8 @@ vector<int> LeetCode::singleNumberIII(vector<int>& nums)
 
 /// <summary>
 /// Leet code #421. Maximum XOR of Two Numbers in an Array Add to List 
-/// Given a non-empty array of numbers, a0, a1, a2, ¡­ , an-1, where 0 ¡Ü ai < 231.
-/// Find the maximum result of ai XOR aj, where 0 ¡Ü i, j < n. 
+/// Given a non-empty array of numbers, a0, a1, a2, Â¡Â­ , an-1, where 0 Â¡Ãœ ai < 231.
+/// Find the maximum result of ai XOR aj, where 0 Â¡Ãœ i, j < n. 
 ///
 /// Could you do this in O(n) runtime? 
 /// Example:
@@ -500,7 +500,7 @@ int LeetCode::findMaximumXOR(vector<int>& nums)
 /// corresponding bits are different.
 /// Given two integers x and y, calculate the Hamming distance.
 /// Note:
-/// 0 ¡Ü x, y < 231. 
+/// 0 Â¡Ãœ x, y < 231. 
 /// Example: 
 /// Input: x = 1, y = 4
 /// Output: 2
@@ -612,7 +612,7 @@ int LeetCode::lastRemaining(int n)
 /// strategy is to flip the bits of its binary representation.
 /// Note:
 /// 1.The given integer is guaranteed to fit within the range of a 32-bit signed integer.
-/// 2.You could assume no leading zero bit in the integer¡¯s binary representation.
+/// 2.You could assume no leading zero bit in the integerÂ¡Â¯s binary representation.
 /// Example 1:
 /// Input: 5
 /// Output: 2
