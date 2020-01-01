@@ -125,8 +125,35 @@ void TestLeetCode1307(void)
     Logger::WriteMessage("result = " + result + "; is_solvable = " + (string)(is_solvable ? "true" : "false"));
 }
 
+void TestLeetCode1066(void)
+{
+    Logger::WriteMessage("Test Leet Code 1066");
+    LeetCodeDFS leetCode;
+    vector<vector<int>> workers = { {0,0},{1,1},{2,0} };
+    vector<vector<int>> bikes = { {1,0},{2,2},{2,1} };
+    int result = leetCode.assignBikesII(workers, bikes);
+    Logger::WriteMessage(workers);
+    Logger::WriteMessage(bikes);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    workers = { {0, 0},{2, 1} };
+    bikes = { {1, 2}, {3, 3} };
+    result = leetCode.assignBikesII(workers, bikes);
+    Logger::WriteMessage(workers);
+    Logger::WriteMessage(bikes);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    workers = { {0, 0},{1, 0},{2, 0},{3, 0},{4, 0},{5, 0},{6, 0},{7, 0} };
+    bikes = { {0, 999},{1, 999},{2, 999},{3, 999},{4, 999},{5, 999},{6, 999},{7, 999},{8, 999} };
+    result = leetCode.assignBikesII(workers, bikes);
+    Logger::WriteMessage(workers);
+    Logger::WriteMessage(bikes);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode1066();
     TestLeetCode1307();
     TestLeetCode1286();
     TestLeetCode1240();
