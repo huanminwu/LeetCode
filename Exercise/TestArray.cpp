@@ -689,8 +689,19 @@ void TestLeetCode1306(void)
     Logger::WriteMessage("start = " + to_string(start) + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode448(void)
+{
+    Logger::WriteMessage("Test Leet Code 448");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 4, 3, 2, 7, 8, 2, 3, 1 };
+    Logger::WriteMessage(nums);
+    vector<int> result = leetCode.findDisappearedNumbers(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode448();
     TestLeetCode1306();
     TestLeetCode1299();
     TestLeetCode1296();

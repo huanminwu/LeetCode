@@ -3215,16 +3215,6 @@ void TestLeetCode461(void)
     Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; Haming Distance = " + to_string(count));
 }
 
-void TestLeetCode448(void)
-{
-    Logger::WriteMessage("Test Leet Code 448");
-    LeetCode leetCode;
-    vector<int> nums = { 4, 3, 2, 7, 8, 2, 3, 1 };
-    Logger::WriteMessage(nums);
-    vector<int> result = leetCode.findDisappearedNumbers(nums);
-    Logger::WriteMessage(result);
-}
-
 void TestLeetCode442(void)
 {
     Logger::WriteMessage("Test Leet Code 442");
@@ -17539,11 +17529,11 @@ void TestLeetCode1238(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeArray();
     TestLeetCodeDFS();
     TestLeetCodeDP();
     TestLeetCodeBinarySearch();
     TestLeetCodeTree();
-    TestLeetCodeArray();
     TestLeetCodeGraph();
     TestLeetCodeString();
     TestLeetCodeMath();
@@ -18353,7 +18343,6 @@ void main(int argc, char* argv[])
     TestLeetCode432();
     TestLeetCode475();
     TestLeetCode442();
-    TestLeetCode448();
     TestLeetCode461();
     TestLeetCode347();
     TestLeetCode230();
