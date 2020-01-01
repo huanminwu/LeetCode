@@ -4486,7 +4486,7 @@ vector<string> LeetCode::expand(string S)
 /// <summary>
 /// Leet code #1066. Campus Bikes II
 /// </summary>
-int LeetCode::assignBikesII(vector<vector<pair<int, int>>> &worker_distance, int worker,
+int LeetCodeDFS::assignBikesII(vector<vector<pair<int, int>>> &worker_distance, int worker,
     vector<int> &visited, int sum, unordered_map<int, int>& cache, int& result)
 {
     if (worker == worker_distance.size())
@@ -4552,7 +4552,7 @@ int LeetCode::assignBikesII(vector<vector<pair<int, int>>> &worker_distance, int
 /// 2. All worker and bike locations are distinct.
 /// 3. 1 <= workers.length <= bikes.length <= 10
 /// </summary>
-int LeetCode::assignBikesII(vector<vector<int>>& workers, vector<vector<int>>& bikes)
+int LeetCodeDFS::assignBikesII(vector<vector<int>>& workers, vector<vector<int>>& bikes)
 {
     vector<vector<pair<int, int>>> worker_distance(workers.size());
     for (size_t i = 0; i < workers.size(); i++)
