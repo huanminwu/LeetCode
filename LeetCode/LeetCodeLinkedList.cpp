@@ -450,7 +450,7 @@ ListNode* LeetCode::reverseList(ListNode* head)
 /// return 1->4->3->2->5->NULL. 
 /// Note:
 /// Given m, n satisfy the following condition:
-/// 1 ¡Ü m ¡Ü n ¡Ü length of list.
+/// 1 Â¡Ãœ m Â¡Ãœ n Â¡Ãœ length of list.
 /// </summary>
 ListNode* LeetCode::reverseBetween(ListNode* head, int m, int n)
 {
@@ -610,11 +610,11 @@ void LeetCode::deleteNode(ListNode* node)
 /// LeetCode #160. Intersection of Two Linked Lists    
 /// Write a program to find the node at which the intersection of two singly linked lists begins.
 /// For example, the following two linked lists: 
-/// A:          a1 ¡ú a2
-///                    ¨K
-///                      c1 ¡ú c2 ¡ú c3
-///                    ¨J      
-/// B:     b1 ¡ú b2 ¡ú b3
+/// A:          a1 Â¡Ãº a2
+///                    Â¨K
+///                      c1 Â¡Ãº c2 Â¡Ãº c3
+///                    Â¨J      
+/// B:     b1 Â¡Ãº b2 Â¡Ãº b3
 /// begin to intersect at node c1.
 /// Notes: 
 /// If the two linked lists have no intersection at all, return null.
@@ -874,8 +874,8 @@ ListNode* LeetCode::addTwoNumbersII(ListNode* l1, ListNode* l2)
 /// <summary>
 /// Leet code #143. Reorder List      
 ///
-/// Given a singly linked list L: L0¡úL1¡ú¡­¡úLn-1¡úLn,
-/// reorder it to: L0¡úLn¡úL1¡úLn-1¡úL2¡úLn-2¡ú¡­
+/// Given a singly linked list L: L0Â¡ÃºL1Â¡ÃºÂ¡Â­Â¡ÃºLn-1Â¡ÃºLn,
+/// reorder it to: L0Â¡ÃºLnÂ¡ÃºL1Â¡ÃºLn-1Â¡ÃºL2Â¡ÃºLn-2Â¡ÃºÂ¡Â­
 ///
 /// You may not modify the values in the list's nodes, only nodes itself 
 /// may be changed.
