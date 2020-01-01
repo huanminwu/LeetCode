@@ -4811,37 +4811,82 @@ int LeetCodeDFS::tilingRectangle(int n, int m)
 /// <summary>
 /// Leetcode #1307. Verbal Arithmetic Puzzle
 /// </summary>
-bool LeetCodeDFS::isSolvable(vector<int>& chars, int index, vector<int>& digits,
-    vector<int>& left_count, vector<int>& right_count,
-    int& left_sum, int& right_sum, vector<int>& leading_chars)
+bool LeetCodeDFS::isSolvable(vector<int>& chars, int col, int row, vector<int>& digits,
+    vector<string>& reverse_words, string& reverse_result, int sum, int max_len)
 {
-    if (index == chars.size())
+    if (col == max_len)
     {
-        if (left_sum == right_sum)
-        {
-            return true;
-        }
-        else return false;
+        return (sum == 0) ? true : false; 
     }
-    int letter = chars[index];
-    for (int i = 0; i < 10; i++)
+    if (row == reverse_words.size())
     {
-        // used
-        if (digits[i] == 1) continue;
-        // if leading 0?
-        if (leading_chars[letter] > 0 && i == 0)
+        int letter = reverse_result[col] - 'A';       
+        int d = sum % 10;
+        if (chars[letter] != -1 && chars[letter] != d)
         {
-            continue;
+            return false;
         }
-        digits[i] = 1;
-        left_sum += left_count[letter] * i;
-        right_sum += right_count[letter] * i;
-        bool result = isSolvable(chars, index + 1, digits, left_count, right_count, 
-            left_sum, right_sum, leading_chars);
-        if (result) return result;
-        digits[i] = 0;
-        left_sum -= left_count[letter] * i;
-        right_sum -= right_count[letter] * i;
+        else
+        {
+            if (chars[letter] == -1)
+            {
+                if (digits[d] > 0) return false;
+                chars[letter] = d;
+            }
+            digits[d]++;
+            sum = sum / 10;
+            bool ret = isSolvable(chars, col + 1, 0, digits, reverse_words, reverse_result, sum, max_len);
+            if (ret) return true;
+            // revert right digit
+            digits[d]--;
+            if (digits[d] == 0) chars[letter] = -1;
+            return false;
+        }
+    }
+    else
+    {
+        // exceed the current word length
+        if (col >= (int)reverse_words[row].size())
+        {
+            bool ret = isSolvable(chars, col, row + 1, digits, reverse_words, reverse_result, sum, max_len);
+            if (ret) return true;
+            else return false;
+        }
+        else
+        {
+            int letter = reverse_words[row][col] - 'A';
+            if (chars[letter] != -1)
+            {
+                sum += chars[letter];
+                bool ret = isSolvable(chars, col, row + 1, digits, reverse_words, reverse_result, sum, max_len);
+                if (ret) return true;
+                else
+                {
+                    sum -= chars[letter];
+                    return false;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    // used?
+                    if (digits[i] > 0) continue;
+                    digits[i] = 1;
+                    chars[letter] = i;
+                    sum += chars[letter];
+                    bool ret = isSolvable(chars, col, row + 1, digits, reverse_words, reverse_result, sum, max_len);
+                    if (ret) return true;
+                    else
+                    {
+                        sum -= chars[letter];
+                        digits[i] = 0;
+                        chars[letter] = -1;
+                    }
+                }
+                return false;
+            }
+        }
     }
     return false;
 }
@@ -4897,44 +4942,21 @@ bool LeetCodeDFS::isSolvable(vector<int>& chars, int index, vector<int>& digits,
 /// </summary>
 bool LeetCodeDFS::isSolvable(vector<string>& words, string result)
 {
-    vector<int> left_count(26);
-    vector<int> right_count(26);
+    vector<string> reverse_words;
+    string reverse_result = result;
+    std::reverse(reverse_result.begin(), reverse_result.end());
     vector<int> digits(10);
-    vector<int> chars;
-    vector<int> leading_chars(26);
-
+    vector<int> chars(26, -1);
+    size_t max_len = 0;
+    int sum = 0;
     for (string str : words)
     {
         std::reverse(str.begin(), str.end());
-        int pow = 1;
-        for (size_t i = 0; i < str.size(); i++)
-        {
-            if (left_count[str[i] - 'A'] == 0)
-            {
-                chars.push_back(str[i] - 'A');
-            }
-            left_count[str[i] - 'A'] += pow;
-            pow *= 10;
-            if (i == str.size() - 1) leading_chars[str[i] - 'A'] = 1;
-        }
+        reverse_words.push_back(str);
+        max_len = max(max_len, str.size());
     }
-    string str = result;
-    std::reverse(str.begin(), str.end());
-    int pow = 1;
-    for (size_t i = 0; i < str.size(); i++)
-    {
-        if (left_count[str[i] - 'A'] == 0 && right_count[str[i] - 'A'] == 0)
-        {
-            chars.push_back(str[i] - 'A');
-        }
-        right_count[str[i] - 'A'] += pow;
-        pow *= 10;
-        if (i == str.size() - 1) leading_chars[str[i] - 'A'] = 1;
-    }
-    int left_sum = 0;
-    int right_sum = 0;
-    return isSolvable(chars, 0, digits, left_count, right_count, 
-        left_sum, right_sum, leading_chars);
+    max_len = max(max_len, reverse_result.size());
+    return isSolvable(chars, 0, 0, digits, reverse_words, reverse_result, sum, max_len);
 }
 #pragma endregion
 

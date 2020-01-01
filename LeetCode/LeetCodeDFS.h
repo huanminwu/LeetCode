@@ -111,12 +111,12 @@ public:
     /// </summary>
     int tilingRectangle(int n, int m);
 
+ 
     /// <summary>
     /// Leetcode #1307. Verbal Arithmetic Puzzle
     /// </summary>
-    bool isSolvable(vector<int>& chars, int index, vector<int>& digits,
-        vector<int>& left_count, vector<int>& right_count, 
-        int &left_sum, int &right_sum, vector<int> &leading_chars);
+    bool isSolvable(vector<int>& chars, int col, int row, vector<int>& digits,
+        vector<string>& reverse_words, string& reverse_result, int sum, int max_len);
 
     /// <summary>
     /// Leetcode #1307. Verbal Arithmetic Puzzle

@@ -153,8 +153,8 @@ void TestLeetCode1066(void)
 
 void TestLeetCodeDFS(void)
 {
-    TestLeetCode1066();
     TestLeetCode1307();
+    TestLeetCode1066();
     TestLeetCode1286();
     TestLeetCode1240();
     TestLeetCode1219();
