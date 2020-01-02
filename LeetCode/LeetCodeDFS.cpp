@@ -19,63 +19,11 @@
 #include "LeetCodeDFS.h"
 
 #pragma region BackTracking
-/// <summary>
-/// Leet code #36. Valid Sudoku
-/// Determine if a Sudoku is valid, according to : Sudoku Puzzles - The Rules.
-/// The Sudoku board could be partially filled, where empty cells are filled with the character '.'.
-/// </summary>
-bool LeetCode::isValidSudoku(vector<vector<char>>&  board)
-{
-    size_t size = board.size();
-    size_t square_size = (size_t)sqrt((double)size);
-    vector<unordered_set<int>> row_map = vector<unordered_set<int>>(size);
-    vector<unordered_set<int>> col_map = vector<unordered_set<int>>(size);
-    vector<unordered_set<int>> square_map = vector<unordered_set<int>>(size);
-    // first scan, set up the flag in the memory map, which will help us to immediately identify 
-    // the bad candidate in the cell.
-    for (size_t i = 0; i < size; i++)
-    {
-        for (size_t j = 0; j < size; j++)
-        {
-            size_t pos = i * size + j;
-            char value = board[i][j];
-            if (board[i][j] != '.')
-            {
-                int s = (i / square_size) * square_size + (j / square_size);
-                if (row_map[i].find(value) == row_map[i].end())
-                {
-                    row_map[i].insert(value);
-                }
-                else
-                {
-                    return false;
-                }
-                if (col_map[j].find(value) == col_map[j].end())
-                {
-                    col_map[j].insert(value);
-                }
-                else
-                {
-                    return false;
-                }
-                if (square_map[s].find(value) == square_map[s].end())
-                {
-                    square_map[s].insert(value);
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-    }
-    return true;
-}
 
 /// <summary>
 /// Leet code #37. Sudoku Solver
 /// </summary>
-bool LeetCode::solveSudoku(
+bool LeetCodeDFS::solveSudoku(
     vector<vector<char>>& board, vector<vector<int>> &row_visited,
     vector<vector<int>> &col_visited, vector<vector<int>> &square_visited,
     int r, int c)
@@ -155,7 +103,7 @@ bool LeetCode::solveSudoku(
 ///   287419635
 ///   345286179
 /// </summary>
-void LeetCode::solveSudoku(vector<vector<char>>&  board)
+void LeetCodeDFS::solveSudoku(vector<vector<char>>&  board)
 {
     vector<vector<int>> row_visited(9, vector<int>(9));
     vector<vector<int>> col_visited(9, vector<int>(9));
@@ -180,95 +128,9 @@ void LeetCode::solveSudoku(vector<vector<char>>&  board)
 
 /// <summary>
 /// Leet code # 51. N-Queens 
-/// 
-/// The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other. 
-/// Given an integer n, return all distinct solutions to the n-queens puzzle.
-///	
-/// Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' 
-/// both indicate a queen and an empty space respectively. 
-/// For example,
-/// There exist two distinct solutions to the 4-queens puzzle:
-/// [
-///   [".Q..",  // Solution 1
-///    "...Q",
-///    "Q...",
-///    "..Q."],
-///
-///   ["..Q.",  // Solution 2
-///    "Q...",
-///    "...Q",
-///    ".Q.."]
-/// ]	
 /// </summary>
-vector<vector<string>> LeetCode::solveNQueensII(int n)
-{
-    vector<vector<string>> result;
-    vector<string> board;
-
-    unordered_set<int> column, degree45, degree135;
-    vector<int> queenList;
-    int row = 0;
-    int col = 0;
-
-    while (true)
-    {
-        if (queenList.size() == n)
-        {
-            board.clear();
-            for (int i = 0; i < n; i++)
-            {
-                board.push_back(string(n, '.'));
-            }
-            for (size_t i = 0; i < queenList.size(); i++)
-            {
-                int j = queenList[i];
-                board[i][j] = 'Q';
-            }
-            result.push_back(board);
-            col = n;
-        }
-
-        if (col == n)
-        {
-            if (queenList.empty())
-            {
-                break;
-            }
-            col = queenList.back();
-            queenList.pop_back();
-            row = queenList.size();
-            column.erase(col);
-            degree45.erase(row - col);
-            degree135.erase(row + col);
-            col++;
-        }
-        else
-        {
-            if ((column.find(col) == column.end()) &&
-                (degree45.find(row - col) == degree45.end()) &&
-                (degree135.find(row + col) == degree135.end()))
-            {
-                queenList.push_back(col);
-                column.insert(col);
-                degree45.insert(row - col);
-                degree135.insert(row + col);
-                col = 0;
-                row = queenList.size();
-            }
-            else
-            {
-                col++;
-            }
-        }
-    }
-    return result;
-}
-
-/// <summary>
-/// Leet code # 51. N-Queens 
-/// </summary>
-void LeetCode::solveNQueens(vector<string> &board, int row, vector<int> &columns,
-    vector<int>&diag, vector<vector<string>> &result)
+void LeetCodeDFS::solveNQueens(vector<string> &board, int row, 
+    vector<int> &columns, vector<int>&diag, vector<vector<string>> &result)
 {
     size_t n = board.size();
     if (row == n)
@@ -320,7 +182,7 @@ void LeetCode::solveNQueens(vector<string> &board, int row, vector<int> &columns
 ///    ".Q.."]
 /// ]	
 /// </summary>
-vector<vector<string>> LeetCode::solveNQueens(int n)
+vector<vector<string>> LeetCodeDFS::solveNQueens(int n)
 {
     vector<string> board(n, string(n, '.'));
     vector<int> columns(n);
@@ -333,7 +195,7 @@ vector<vector<string>> LeetCode::solveNQueens(int n)
 /// <summary>
 /// Leet code # 52. N-Queens II 
 /// </summary>
-void LeetCode::totalNQueens(int n, int row, vector<int> &columns, vector<int>&diag, int &count)
+void LeetCodeDFS::totalNQueens(int n, int row, vector<int> &columns, vector<int>&diag, int &count)
 {
     if (row == n)
     {
@@ -363,7 +225,7 @@ void LeetCode::totalNQueens(int n, int row, vector<int> &columns, vector<int>&di
 /// Follow up for N-Queens problem. 
 /// Now, instead outputting board configurations, return the total number of distinct solutions.
 /// </summary>
-int LeetCode::totalNQueens(int n)
+int LeetCodeDFS::totalNQueens(int n)
 {
     vector<int> columns(n);
     vector<int>diag(4 * n);
@@ -375,14 +237,9 @@ int LeetCode::totalNQueens(int n)
 /// <summary>
 /// Leet code #17. Letter Combinations of a Phone Number 
 /// </summary>
-void LeetCode::letterCombinations(string& digits, string &path, vector<string> &result)
+void LeetCodeDFS::letterCombinations(string& digits, string &path, 
+    unordered_map<char, string>& phone_keyboard, vector<string> &result)
 {
-    unordered_map<char, string> phone_keyboard =
-    {
-        { '2', "abc" },{ '3', "def" },{ '4', "ghi" },{ '5', "jkl" },
-        { '6', "mno" },{ '7', "pqrs" },{ '8', "tuv" },{ '9', "wxyz" },
-        { '*', "+" }
-    };
     if (path.size() == digits.size())
     {
         if (!path.empty()) result.push_back(path);
@@ -393,31 +250,49 @@ void LeetCode::letterCombinations(string& digits, string &path, vector<string> &
     for (char ch : target_str)
     {
         path.push_back(ch);
-        letterCombinations(digits, path, result);
+        letterCombinations(digits, path, phone_keyboard, result);
         path.pop_back();
     }
 }
 
 /// <summary>
-/// Leet code #17. Letter Combinations of a Phone Number 
-/// A mapping of digit to letters (just like on the telephone buttons) is given below.
-/// Input:Digit string "23"
+/// Leet code #17. Letter Combinations of a Phone Number
+///
+/// Medium
+///
+/// Given a string containing digits from 2-9 inclusive, return all 
+/// possible letter combinations that the number could represent.
+///
+/// A mapping of digit to letters (just like on the telephone buttons)
+/// is given below. Note that 1 does not map to any letters.
+///
+/// Example:
+///
+/// Input: "23"
 /// Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
 /// Note:
-/// Although the above answer is in lexicographical order, your answer could be in any order you want. 
+/// Although the above answer is in lexicographical order, your answer 
+/// could be in any order you want.
 /// </summary>
-vector<string> LeetCode::letterCombinations(string digits)
+vector<string> LeetCodeDFS::letterCombinations(string digits)
 {
+    unordered_map<char, string> phone_keyboard =
+    {
+        { '2', "abc" },{ '3', "def" },{ '4', "ghi" },{ '5', "jkl" },
+        { '6', "mno" },{ '7', "pqrs" },{ '8', "tuv" },{ '9', "wxyz" },
+        { '*', "+" }
+    };
     string path;
     vector<string> result;
-    letterCombinations(digits, path, result);
+    letterCombinations(digits, path, phone_keyboard, result);
     return result;
 }
 
 /// <summary>
 /// Leet code #22. Generate Parentheses 
 /// </summary>
-void LeetCode::generateParenthesis(string &path, int n, int left, int right, vector<string> &result)
+void LeetCodeDFS::generateParenthesis(string &path, int n, int left, 
+    int right, vector<string> &result)
 {
     if (path.size() == 2 * n)
     {
@@ -447,7 +322,9 @@ void LeetCode::generateParenthesis(string &path, int n, int left, int right, vec
 
 /// <summary>
 /// Leet code #22. Generate Parentheses 
-/// Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses. 
+///
+/// Given n pairs of parentheses, write a function to generate all 
+/// combinations of well-formed parentheses. 
 /// For example, given n = 3, a solution set is: 
 /// [
 ///   "((()))",
@@ -457,7 +334,7 @@ void LeetCode::generateParenthesis(string &path, int n, int left, int right, vec
 ///   "()()()"
 /// ]
 /// </summary>
-vector<string> LeetCode::generateParenthesis(int n)
+vector<string> LeetCodeDFS::generateParenthesis(int n)
 {
     vector<string> result;
     string path;
@@ -469,8 +346,8 @@ vector<string> LeetCode::generateParenthesis(int n)
 /// <summary>
 /// Leet code #39. Combination Sum
 /// </summary>
-void LeetCode::combinationSum(vector<int>& candidates, int target, int index, vector<int>& path,
-    vector<vector<int>>&result)
+void LeetCodeDFS::combinationSum(vector<int>& candidates, int target, int index, 
+    vector<int>& path, vector<vector<int>>&result)
 {
     if (target == 0)
     {
@@ -504,7 +381,7 @@ void LeetCode::combinationSum(vector<int>& candidates, int target, int index, ve
 ///   [2, 2, 3]
 /// ]
 /// </summary>
-vector<vector<int>> LeetCode::combinationSum(vector<int>& candidates, int target)
+vector<vector<int>> LeetCodeDFS::combinationSum(vector<int>& candidates, int target)
 {
     vector<int> path;
     vector<vector<int>> result;
@@ -516,8 +393,8 @@ vector<vector<int>> LeetCode::combinationSum(vector<int>& candidates, int target
 /// <summary>
 /// Leet code #40. Combination Sum II
 /// </summary>
-void LeetCode::combinationSum2(vector<int>& candidates, int target, int index, vector<int>& path,
-    vector<vector<int>>&result)
+void LeetCodeDFS::combinationSum2(vector<int>& candidates, int target, int index, 
+    vector<int>& path, vector<vector<int>>&result)
 {
     if (target == 0)
     {
@@ -538,23 +415,42 @@ void LeetCode::combinationSum2(vector<int>& candidates, int target, int index, v
 }
 
 /// <summary>
-/// Leet code #40. Combination Sum II 
-/// Given a collection of candidate numbers (C) and a target number (T), 
-/// find all unique combinations in C where the candidate numbers sums to T. 
-/// Each number in C may only be used once in the combination. 
+/// Leet code #40. Combination Sum II
+///
+/// Medium
+///
+/// Given a collection of candidate numbers (candidates) and a target 
+/// number (target), find all unique combinations in candidates where 
+/// the candidate numbers sums to target.
+///
+/// Each number in candidates may only be used once in the combination.
+///
 /// Note:
+///
 /// All numbers (including target) will be positive integers.
 /// The solution set must not contain duplicate combinations.
-/// For example, given candidate set [10, 1, 2, 7, 6, 1, 5] and target 8, 
-/// A solution set is: 
+///
+/// Example 1:
+/// Input: candidates = [10,1,2,7,6,1,5], target = 8,
+/// A solution set is:
 /// [
 ///   [1, 7],
 ///   [1, 2, 5],
 ///   [2, 6],
 ///   [1, 1, 6]
 /// ]
+///
+/// Example 2:
+///
+/// Input: candidates = [2,5,2,1,2], target = 5,
+/// A solution set is:
+/// [
+///   [1,2,2],
+///   [5]
+/// ]
 /// </summary>
-vector<vector<int>> LeetCode::combinationSum2(vector<int>& candidates, int target)
+vector<vector<int>> LeetCodeDFS::combinationSum2(vector<int>& candidates, 
+    int target)
 {
     vector<int> path;
     vector<vector<int>> result;
@@ -566,7 +462,8 @@ vector<vector<int>> LeetCode::combinationSum2(vector<int>& candidates, int targe
 /// <summary>
 /// Leet code #77. Combinations
 /// </summary>
-void LeetCode::combine(int n, int k, vector<int>& path, vector<vector<int>>&result)
+void LeetCodeDFS::combine(int n, int k, vector<int>& path, 
+    vector<vector<int>>&result)
 {
     if (path.size() == k)
     {
@@ -597,7 +494,7 @@ void LeetCode::combine(int n, int k, vector<int>& path, vector<vector<int>>&resu
 ///  [1,4],
 /// ]
 /// </summary>
-vector<vector<int>> LeetCode::combine(int n, int k)
+vector<vector<int>> LeetCodeDFS::combine(int n, int k)
 {
     vector<vector<int>> result;
     vector<int> path;
@@ -608,7 +505,7 @@ vector<vector<int>> LeetCode::combine(int n, int k)
 /// <summary>
 /// Leet code #46. Permutations 
 /// </summary>
-void LeetCode::permute(vector<int>& nums, vector<int>&path,
+void LeetCodeDFS::permute(vector<int>& nums, vector<int>&path,
     vector<int>&visited, vector<vector<int>> &result)
 {
     if (path.size() == nums.size())
@@ -641,7 +538,7 @@ void LeetCode::permute(vector<int>& nums, vector<int>&path,
 ///   [3,2,1]
 /// ]
 /// </summary>
-vector<vector<int>> LeetCode::permute(vector<int>& nums)
+vector<vector<int>> LeetCodeDFS::permute(vector<int>& nums)
 {
     vector<int> visited(nums.size());
     vector<int> path;
@@ -653,7 +550,7 @@ vector<vector<int>> LeetCode::permute(vector<int>& nums)
 /// <summary>
 /// Leet code #47. Permutations II 
 /// </summary>
-void LeetCode::permuteUnique(vector<int>& nums, vector<int>&path,
+void LeetCodeDFS::permuteUnique(vector<int>& nums, vector<int>&path,
     vector<int>&visited, vector<vector<int>> &result)
 {
     if (path.size() == nums.size())
@@ -677,7 +574,8 @@ void LeetCode::permuteUnique(vector<int>& nums, vector<int>&path,
 
 /// <summary>
 /// Leet code #47. Permutations II 
-/// Given a collection of numbers that might contain duplicates, return all possible unique permutations. 
+/// Given a collection of numbers that might contain duplicates,
+/// return all possible unique permutations. 
 /// For example,
 /// [1,1,2] have the following unique permutations:
 /// [
@@ -686,7 +584,7 @@ void LeetCode::permuteUnique(vector<int>& nums, vector<int>&path,
 ///   [2,1,1]
 /// ]
 /// </summary>
-vector<vector<int>> LeetCode::permuteUnique(vector<int>& nums)
+vector<vector<int>> LeetCodeDFS::permuteUnique(vector<int>& nums)
 {
     vector<int> visited(nums.size());
     vector<int> path;
@@ -815,7 +713,8 @@ vector<string> LeetCode::readBinaryWatchII(int num)
 /// <summary>
 /// Leet code #78. Subsets
 /// </summary>
-void LeetCode::subsets(vector<int>& nums, int index, vector<int>& path, vector<vector<int>> &result)
+void LeetCodeDFS::subsets(vector<int>& nums, int index, vector<int>& path, 
+    vector<vector<int>> &result)
 {
     result.push_back(path);
     for (size_t i = index; i < nums.size(); i++)
@@ -843,7 +742,7 @@ void LeetCode::subsets(vector<int>& nums, int index, vector<int>& path, vector<v
 ///  []
 /// ]
 /// </summary>
-vector<vector<int>> LeetCode::subsets(vector<int>& nums)
+vector<vector<int>> LeetCodeDFS::subsets(vector<int>& nums)
 {
     vector<vector<int>> result;
     vector<int> path;
@@ -854,7 +753,8 @@ vector<vector<int>> LeetCode::subsets(vector<int>& nums)
 /// <summary>
 /// Leet code #90. Subsets II
 /// </summary>
-void LeetCode::subsetsWithDup(vector<int>& nums, int index, vector<int>& path, vector<vector<int>> &result)
+void LeetCodeDFS::subsetsWithDup(vector<int>& nums, int index, vector<int>& path, 
+    vector<vector<int>> &result)
 {
     result.push_back(path);
     for (size_t i = index; i < nums.size(); i++)
@@ -868,7 +768,9 @@ void LeetCode::subsetsWithDup(vector<int>& nums, int index, vector<int>& path, v
 
 /// <summary>
 /// Leet code #90. Subsets II
-/// Given a collection of integers that might contain duplicates, nums, return all possible subsets.  
+///
+/// Given a collection of integers that might contain duplicates, nums, 
+/// return all possible subsets.  
 /// Note: The solution set must not contain duplicate subsets. 
 ///	For example,
 /// If nums = [1,2,2], a solution is: 
@@ -881,7 +783,7 @@ void LeetCode::subsetsWithDup(vector<int>& nums, int index, vector<int>& path, v
 ///  []
 /// ] 
 /// </summary>
-vector<vector<int>> LeetCode::subsetsWithDup(vector<int>& nums)
+vector<vector<int>> LeetCodeDFS::subsetsWithDup(vector<int>& nums)
 {
     vector<vector<int>> result;
     vector<int> path;
@@ -893,7 +795,8 @@ vector<vector<int>> LeetCode::subsetsWithDup(vector<int>& nums)
 /// <summary>
 /// Leet code #79. Word Search
 /// </summary>
-bool LeetCode::wordSearch(vector<vector<char>>& board, vector<vector<bool>>& flag, string word, int x, int y, int pos)
+bool LeetCodeDFS::wordSearch(vector<vector<char>>& board, 
+    vector<vector<bool>>& flag, string word, int x, int y, int pos)
 {
     if (pos == word.size()) return true;
     if ((x < 0) || (x == board.size()) || (y < 0) || (y == board[0].size()))
@@ -920,9 +823,12 @@ bool LeetCode::wordSearch(vector<vector<char>>& board, vector<vector<bool>>& fla
 
 /// <summary>
 /// Leet code #79. Word Search  
+///
 /// Given a 2D board and a word, find if the word exists in the grid. 
-/// The word can be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those 
-/// horizontally or vertically neighboring. The same letter cell may not be used more than once. 
+/// The word can be constructed from letters of sequentially adjacent 
+/// cell, where "adjacent" cells are those 
+/// horizontally or vertically neighboring. The same letter cell may not 
+/// be used more than once. 
 /// For example,
 /// Given board = 
 /// [
@@ -934,7 +840,7 @@ bool LeetCode::wordSearch(vector<vector<char>>& board, vector<vector<bool>>& fla
 /// word = "SEE", -> returns true,
 /// word = "ABCB", -> returns false.	
 /// </summary>
-bool LeetCode::wordSearch(vector<vector<char>>& board, string word)
+bool LeetCodeDFS::wordSearch(vector<vector<char>>& board, string word)
 {
     vector<vector<bool>> flag(board.size(), vector<bool>(board[0].size()));
     for (size_t x = 0; x < board.size(); x++)
@@ -1264,27 +1170,26 @@ int LeetCode::minCutPalindrome(string s)
 /// <summary>
 /// Leet code #464. Can I Win
 /// </summary>
-bool LeetCode::canIWin(string signature, int desiredTotal, unordered_map<string, bool> &game_map)
+bool LeetCodeDFS::canIWin(int maxChoosableInteger, int desiredTotal, 
+    int signature, unordered_map<int, bool> &game_map)
 {
-    if (game_map.find(signature) != game_map.end())
+    if (game_map.count(signature) > 0)
     {
         return game_map[signature];
     }
-    for (int i = signature.size() - 1; i >= 0; i--)
+    for (int i = maxChoosableInteger; i > 0; i--)
     {
-        if (signature[i] == '0')
+        int bit = (1 << (i - 1));
+        if ((signature & bit) == 0)
         {
-            signature[i] = '1';
-            if (desiredTotal <= (i + 1) || !canIWin(signature, desiredTotal - (i + 1), game_map))
+            desiredTotal = desiredTotal - i;
+            if ((desiredTotal <= 0) || 
+                !canIWin(maxChoosableInteger, desiredTotal, signature | bit, game_map))
             {
-                signature[i] = '0';
                 game_map[signature] = true;
                 return true;
             }
-            else
-            {
-                signature[i] = '0';
-            }
+            desiredTotal = desiredTotal + i;
         }
     }
     game_map[signature] = false;
@@ -1294,15 +1199,18 @@ bool LeetCode::canIWin(string signature, int desiredTotal, unordered_map<string,
 /// <summary>
 /// Leet code #464. Can I Win
 ///
-/// In the "100 game," two players take turns adding, to a running total, any integer from 1..10. 
+/// In the "100 game," two players take turns adding, to a running total, 
+/// any integer from 1..10. 
 /// The player who first causes the running total to reach or exceed 100 wins. 
 /// What if we change the game so that players cannot re-use integers? 
-/// For example, two players might take turns drawing from a common pool of numbers 
-/// of 1..15 without replacement until they reach a total >= 100.
-/// Given an integer maxChoosableInteger and another integer desiredTotal, determine 
-/// if the first player to move can force a win, assuming both players play optimally. 
-/// You can always assume that maxChoosableInteger will not be larger than 20 and 
-/// desiredTotal will not be larger than 300. 
+/// For example, two players might take turns drawing from a common pool of 
+/// numbers of 1..15 without replacement until they reach a total >= 100.
+/// Given an integer maxChoosableInteger and another integer desiredTotal, 
+/// determine if the first player to move can force a win, assuming both 
+/// players play optimally. 
+/// You can always assume that maxChoosableInteger will not be larger than 20 
+/// and desiredTotal will not be larger than 300. 
+///
 /// Example 
 /// Input:
 /// maxChoosableInteger = 10
@@ -1312,36 +1220,24 @@ bool LeetCode::canIWin(string signature, int desiredTotal, unordered_map<string,
 /// Explanation:
 /// No matter which integer the first player choose, the first player will lose.
 /// The first player can choose an integer from 1 up to 10.
-/// If the first player choose 1, the second player can only choose integers from 2 up to 10.
-/// The second player will win by choosing 10 and get a total = 11, which is >= desiredTotal.
-/// Same with other integers chosen by the first player, the second player will always win.
+/// If the first player choose 1, the second player can only choose integers 
+/// from 2 up to 10.
+/// The second player will win by choosing 10 and get a total = 11, which 
+/// is >= desiredTotal.
+/// Same with other integers chosen by the first player, the second player will
+/// always win.
 /// </summary>
-bool LeetCode::canIWin(int maxChoosableInteger, int desiredTotal)
+bool LeetCodeDFS::canIWin(int maxChoosableInteger, int desiredTotal)
 {
-    unordered_map<string, bool> game_map;
-    string signature = string(maxChoosableInteger, '0');
+    unordered_map<int, bool> game_map;
+    int signature = 0;
 
     // No one can win
-    if ((1 + maxChoosableInteger) * maxChoosableInteger < desiredTotal * 2) return false;
-
-    for (int i = signature.size() - 1; i >= 0; i--)
+    if ((1 + maxChoosableInteger) * maxChoosableInteger < desiredTotal * 2)
     {
-        signature[i] = '1';
-        desiredTotal = desiredTotal - (i + 1);
-        if ((desiredTotal <= 0) || !canIWin(signature, desiredTotal, game_map))
-        {
-            signature[i] = '0';
-            game_map[signature] = true;
-            return true;
-        }
-        else
-        {
-            signature[i] = '0';
-        }
-        desiredTotal = desiredTotal + (i + 1);
+        return false;
     }
-    game_map[signature] = false;
-    return false;
+    return canIWin(maxChoosableInteger, desiredTotal, signature, game_map);
 }
 
 
@@ -2742,7 +2638,7 @@ int LeetCode::numberOfPatterns(int m, int n)
 /// <summary>
 /// Leet code #526. Beautiful Arrangement
 /// </summary>
-int LeetCode::countArrangement(int N, int index, string&visited, unordered_map<string, int>& cache)
+int LeetCodeDFS::countArrangement(int N, int index, int visited, unordered_map<int, int>& cache)
 {
     int result = 0;
     if (index == N)
@@ -2756,11 +2652,12 @@ int LeetCode::countArrangement(int N, int index, string&visited, unordered_map<s
 
     for (int i = 1; i <= N; i++)
     {
+        int bit = (1 << (i - 1));
         if (((index + 1) % i != 0) && (i % (index + 1) != 0)) continue;
-        if (visited[i - 1] == '1') continue;
-        visited[i - 1] = '1';
-        result += countArrangement(N, index + 1, visited, cache);
-        visited[i - 1] = '0';
+        if ((visited & bit) == 0)
+        {
+            result += countArrangement(N, index + 1, visited | bit, cache);
+        }
     }
     cache[visited] = result;
     return result;
@@ -2794,10 +2691,10 @@ int LeetCode::countArrangement(int N, int index, string&visited, unordered_map<s
 /// Note:
 /// 1.N is a positive integer and will not exceed 15.
 /// </summary>
-int LeetCode::countArrangement(int N)
+int LeetCodeDFS::countArrangement(int N)
 {
-    string visited = string(N, '0');
-    unordered_map<string, int> cache;
+    int visited = 0 ;
+    unordered_map<int, int> cache;
     return countArrangement(N, 0, visited, cache);
 }
 

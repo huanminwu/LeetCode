@@ -699,8 +699,40 @@ void TestLeetCode448(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode36(void)
+{
+    Logger::WriteMessage("Test Leet Code 36");
+    LeetCodeArray leetCode;
+    vector<vector<char>> board =
+    {
+        { '5','3','.','.','7','.','.','.','.' },{ '6','.','.','1','9','5','.','.','.' },
+        { '.','9','8','.','.','.','.','6','.' },{ '8','.','.','.','6','.','.','.','3' },
+        { '4','.','.','8','.','3','.','.','1' },{ '7','.','.','.','2','.','.','.','6' },
+        { '.','6','.','.','.','.','2','8','.' },{ '.','.','.','4','1','9','.','.','5' },
+        { '.','.','.','.','8','.','.','7','9' }
+    };
+    Logger::WriteMessage(board);
+
+    bool result = leetCode.isValidSudoku(board);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    board =
+    {
+        { '8','3','.','.','7','.','.','.','.' },{ '6','.','.','1','9','5','.','.','.' },
+        { '.','9','8','.','.','.','.','6','.' },{ '8','.','.','.','6','.','.','.','3' },
+        { '4','.','.','8','.','3','.','.','1' },{ '7','.','.','.','2','.','.','.','6' },
+        { '.','6','.','.','.','.','2','8','.' },{ '.','.','.','4','1','9','.','.','5' },
+        { '.','.','.','.','8','.','.','7','9' }
+    };
+    Logger::WriteMessage(board);
+
+    result = leetCode.isValidSudoku(board);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode36();
     TestLeetCode448();
     TestLeetCode1306();
     TestLeetCode1299();

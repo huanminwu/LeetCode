@@ -5049,4 +5049,385 @@ int LeetCodeGraph::maxCandies(vector<int>& status, vector<int>& candies,
     return result;
 }
 
+/// <summary>
+/// Leet code #505. The Maze II   
+/// </summary>
+void LeetCodeGraph::shortestDistance(vector<vector<int>>& maze, vector<vector<int>>& visited,
+    vector<int>& start, priority_queue<pair<int, vector<int>>>& process_queue)
+{
+    vector<vector<int>> next_list;
+    int distance = visited[start[0]][start[1]];
+    vector<vector<int>> directions = { {-1, 0}, {1,0}, {0, -1}, {0,1} };
+    for (size_t i = 0; i < 4; i++)
+    {
+        int step = 0;
+        vector<int> pos = start;
+        while (true)
+        {
+            pos[0] += directions[i][0];
+            pos[1] += directions[i][1];
+            if ((pos[0] >= 0) && (pos[0] < (int)maze.size()) &&
+                (pos[1] >= 0) && (pos[1] < (int)maze[0].size()) &&
+                (maze[pos[0]][pos[1]] == 0))
+            {
+                step++;
+            }
+            else
+            {
+                pos[0] -= directions[i][0];
+                pos[1] -= directions[i][1];
+                break;
+            }
+        }
+        if (pos == start) continue;
+        if (visited[pos[0]][pos[1]] > distance + step)
+        {
+            visited[pos[0]][pos[1]] = distance + step;
+            process_queue.push(make_pair(-visited[pos[0]][pos[1]], pos));
+        }
+    }
+}
+
+/// <summary>
+/// Leet code #505. The Maze II   
+/// 
+/// There is a ball in a maze with empty spaces and walls. The ball can 
+/// go through empty spaces by rolling up, down, left or right, but it 
+/// won't stop rolling until hitting a wall. When the ball stops, it could 
+/// choose the next direction.
+/// 
+/// Given the ball's start position, the destination and the maze, find the 
+/// shortest distance for the ball to stop at the destination. The distance 
+/// is defined by the number of empty spaces traveled by the ball from the 
+/// start position (excluded) to the destination (included). If the ball 
+/// cannot stop at the destination, return -1.
+///     
+/// The maze is represented by a binary 2D array. 1 means the wall and 0 means 
+/// the empty space. You may assume that the borders of the maze are all walls. 
+/// The start and destination coordinates are represented by row and column 
+/// indexes.
+///
+/// Example 1 
+/// Input 1: a maze represented by a 2D array
+///
+/// 0 0 1 0 0
+/// 0 0 0 0 0
+/// 0 0 0 1 0
+/// 1 1 0 1 1
+/// 0 0 0 0 0
+/// Input 2: start coordinate (rowStart, colStart) = (0, 4)
+/// Input 3: destination coordinate (rowDest, colDest) = (4, 4)
+///
+/// Output: 12
+/// Explanation: One shortest way is : 
+/// left -> down -> left -> down -> right -> down -> right.
+/// The total distance is 1 + 1 + 3 + 1 + 2 + 2 + 2 = 12.
+///
+/// Example 2 
+/// Input 1: a maze represented by a 2D array
+///
+/// 0 0 1 0 0
+/// 0 0 0 0 0
+/// 0 0 0 1 0
+/// 1 1 0 1 1
+/// 0 0 0 0 0
+/// Input 2: start coordinate (rowStart, colStart) = (0, 4)
+/// Input 3: destination coordinate (rowDest, colDest) = (3, 2)
+/// Output: -1
+/// Explanation: There is no way for the ball to stop at the destination.
+/// 
+/// Note:
+/// 1.There is only one ball and one destination in the maze.
+/// 2.Both the ball and the destination exist on an empty space, 
+///   and they will not be at the same position initially.
+/// 3.The given maze does not contain border (like the red rectangle in the 
+///   example pictures), but you could assume the border of the maze are all 
+///   walls.
+/// 4.The maze contains at least 2 empty spaces, and both the width and height 
+///   of the maze won't exceed 100.
+/// </summary>
+int LeetCodeGraph::shortestDistance(vector<vector<int>>& maze, vector<int>& start, vector<int>& destination)
+{
+    if (maze.empty() || maze[0].empty()) return -1;
+    vector<vector<int>> visited(maze.size(), vector<int>(maze[0].size(), INT_MAX));
+    visited[start[0]][start[1]] = 0;
+    priority_queue<pair<int, vector<int>>> process_queue;
+    process_queue.push(make_pair(0, start));
+    while (!process_queue.empty())
+    {
+        start = process_queue.top().second;
+        process_queue.pop();
+        if (start == destination) break;
+        shortestDistance(maze, visited, start, process_queue);
+    }
+    int shortest_distance = visited[destination[0]][destination[1]];
+    if (shortest_distance == INT_MAX) return -1;
+    else return shortest_distance;
+}
+
+/// <summary>
+/// Leet code #499. The Maze III   
+/// </summary>
+void LeetCodeGraph::findShortestWay(vector<vector<int>>& maze, vector<vector<pair<int, string>>>& visited,
+    vector<int>& ball, vector<int>& hole, priority_queue<pair<int, vector<int>>>& process_queue)
+{
+    vector<vector<int>> next_list;
+    int distance = visited[ball[0]][ball[1]].first;
+    for (size_t i = 0; i < 4; i++)
+    {
+        int step = 0;
+        vector<int> pos = ball;
+        if (i == 0)
+        {
+            while ((pos != hole) && (pos[0] > 0) && (maze[pos[0] - 1][pos[1]] == 0))
+            {
+                step++;
+                pos[0]--;
+            }
+        }
+        else if (i == 1)
+        {
+            while ((pos != hole) && (pos[0] < (int)maze.size() - 1) && (maze[pos[0] + 1][pos[1]] == 0))
+            {
+                step++;
+                pos[0]++;
+            }
+        }
+        else if (i == 2)
+        {
+            while ((pos != hole) && (pos[1] > 0) && (maze[pos[0]][pos[1] - 1] == 0))
+            {
+                step++;
+                pos[1]--;
+            }
+        }
+        else
+        {
+            while ((pos != hole) && (pos[1] < (int)maze[0].size() - 1) && (maze[pos[0]][pos[1] + 1] == 0))
+            {
+                step++;
+                pos[1]++;
+            }
+        }
+        if (pos == ball) continue;
+        if (visited[pos[0]][pos[1]].first >= distance + step)
+        {
+            visited[pos[0]][pos[1]].first = distance + step;
+            string path = visited[ball[0]][ball[1]].second;
+            if (i == 0) path.push_back('u');
+            else if (i == 1) path.push_back('d');
+            else if (i == 2) path.push_back('l');
+            else path.push_back('r');
+            if (visited[pos[0]][pos[1]].second.empty())
+            {
+                visited[pos[0]][pos[1]].second = path;
+            }
+            else
+            {
+                visited[pos[0]][pos[1]].second = min(path, visited[pos[0]][pos[1]].second);
+            }
+            process_queue.push(make_pair(-(distance + step), pos));
+        }
+    }
+}
+
+/// <summary>
+/// Leet code #499. The Maze III   
+/// 
+/// There is a ball in a maze with empty spaces and walls. The ball can 
+/// go through empty spaces by rolling up (u), down (d), left (l) or right (r), 
+/// but it won't stop rolling until hitting a wall. When the ball stops, 
+/// it could choose the next direction. There is also a hole in this maze. 
+/// The ball will drop into the hole if it rolls on to the hole.
+/// 
+/// Given the ball position, the hole position and the maze, find out how the 
+/// ball could drop into the hole by moving the shortest distance. The distance 
+/// is defined by the number of empty spaces traveled by the ball from the start 
+/// position (excluded) to the hole (included). Output the moving directions by 
+/// using 'u', 'd', 'l' and 'r'. Since there could be several different shortest 
+/// ways, you should output the lexicographically smallest way. If the ball 
+/// cannot reach the hole, output "impossible".
+///
+/// The maze is represented by a binary 2D array. 1 means the wall and 0 means the 
+/// empty space. You may assume that the borders of the maze are all walls. 
+/// The ball and the hole coordinates are represented by row and column indexes.
+///
+/// Example 1 
+/// Input 1: a maze represented by a 2D array
+///
+/// 0 0 0 0 0
+/// 1 1 0 0 1
+/// 0 0 0 0 0
+/// 0 1 0 0 1
+/// 0 1 0 0 0
+///
+/// Input 2: ball coordinate (rowBall, colBall) = (4, 3)
+/// Input 3: hole coordinate (rowHole, colHole) = (0, 1)
+///
+/// Output: "lul"
+/// Explanation: There are two shortest ways for the ball to drop into the hole.
+/// The first way is left -> up -> left, represented by "lul".
+/// The second way is up -> left, represented by 'ul'.
+/// Both ways have shortest distance 6, but the first way is lexicographically 
+/// smaller because 'l' < 'u'. So the output is "lul".
+///
+/// Example 2 
+/// Input 1: a maze represented by a 2D array
+///
+/// 0 0 0 0 0
+/// 1 1 0 0 1
+/// 0 0 0 0 0
+/// 0 1 0 0 1
+/// 0 1 0 0 0
+///
+/// Input 2: ball coordinate (rowBall, colBall) = (4, 3)
+/// Input 3: hole coordinate (rowHole, colHole) = (3, 0)
+/// Output: "impossible"
+/// Explanation: The ball cannot reach the hole.
+///
+/// Note:
+/// 1.There is only one ball and one hole in the maze.
+/// 2.Both the ball and hole exist on an empty space, and they will not be at 
+///   the same position initially.
+/// 3.The given maze does not contain border (like the red rectangle in the 
+///   example pictures), but you could assume the border of the maze are all walls.
+/// 4.The maze contains at least 2 empty spaces, and the width and the height of 
+///   the maze won't exceed 30.
+/// </summary>
+string LeetCodeGraph::findShortestWay(vector<vector<int>>& maze, vector<int>& ball, vector<int>& hole)
+{
+    int shortest_distance = INT_MAX;
+    string shortest_path = "impossible";
+    if (maze.empty() || maze[0].empty()) return shortest_path;
+    vector<vector<pair<int, string>>> visited(maze.size(), vector<pair<int, string>>(maze[0].size(), make_pair(INT_MAX, "")));
+    visited[ball[0]][ball[1]] = make_pair(0, "");
+    priority_queue<pair<int, vector<int>>> process_queue;
+    process_queue.push(make_pair(0, ball));
+    while (!process_queue.empty())
+    {
+        int distance = 0 - process_queue.top().first;
+        if (shortest_distance < distance) break;
+        ball = process_queue.top().second;
+        process_queue.pop();
+        if (ball == hole)
+        {
+            if (distance < shortest_distance)
+            {
+                shortest_distance = distance;
+                shortest_path = visited[ball[0]][ball[1]].second;
+            }
+            else if (distance == shortest_distance)
+            {
+                shortest_path = min(shortest_path, visited[ball[0]][ball[1]].second);
+            }
+        }
+        else
+        {
+            findShortestWay(maze, visited, ball, hole, process_queue);
+        }
+    }
+    return shortest_path;
+}
+
+/// <summary>
+/// Leet code #490. The Maze  
+/// </summary>
+bool LeetCodeGraph::hasPath(vector<vector<int>>& maze, vector<vector<int>>& visited, vector<int>& start, vector<int>& destination)
+{
+    vector<vector<int>> next_list;
+    for (size_t i = 0; i < 4; i++)
+    {
+        vector<int> pos = start;
+        if (i == 0)
+        {
+            while ((pos[0] > 0) && (maze[pos[0] - 1][pos[1]] == 0))
+            {
+                pos[0]--;
+            }
+        }
+        else if (i == 1)
+        {
+            while ((pos[0] < (int)maze.size() - 1) && (maze[pos[0] + 1][pos[1]] == 0)) pos[0]++;
+        }
+        else if (i == 2)
+        {
+            while ((pos[1] > 0) && (maze[pos[0]][pos[1] - 1] == 0)) pos[1]--;
+        }
+        else
+        {
+            while ((pos[1] < (int)maze[0].size() - 1) && (maze[pos[0]][pos[1] + 1] == 0)) pos[1]++;
+        }
+        if (visited[pos[0]][pos[1]] == 1) continue;
+        if (pos == destination) return true;
+        if (pos != start) next_list.push_back(pos);
+        visited[pos[0]][pos[1]] = 1;
+    }
+    for (size_t i = 0; i < next_list.size(); i++)
+    {
+        if (hasPath(maze, visited, next_list[i], destination))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+/// <summary>
+/// Leet code #490. The Maze   
+/// 
+/// There is a ball in a maze with empty spaces and walls. The ball can 
+/// go through empty spaces by rolling up, down, left or right, but it 
+/// won't stop rolling until hitting a wall. When the ball stops, it could 
+/// choose the next direction.
+/// 
+/// Given the ball's start position, the destination and the maze, determine 
+/// whether the ball could stop at the destination.
+/// The maze is represented by a binary 2D array. 1 means the wall and 0 means 
+/// the empty space. You may assume that the borders of the maze are all walls. 
+/// The start and destination coordinates are represented by row and column indexes.
+///
+/// Example 1 
+/// Input 1: a maze represented by a 2D array
+///
+/// 0 0 1 0 0
+/// 0 0 0 0 0
+/// 0 0 0 1 0
+/// 1 1 0 1 1
+/// 0 0 0 0 0
+/// Input 2: start coordinate (rowStart, colStart) = (0, 4)
+/// Input 3: destination coordinate (rowDest, colDest) = (4, 4)
+///
+/// Output: true
+/// Explanation: One possible way is : 
+/// left -> down -> left -> down -> right -> down -> right.
+///
+/// Example 2 
+/// Input 1: a maze represented by a 2D array
+///
+/// 0 0 1 0 0
+/// 0 0 0 0 0
+/// 0 0 0 1 0
+/// 1 1 0 1 1
+/// 0 0 0 0 0
+/// Input 2: start coordinate (rowStart, colStart) = (0, 4)
+/// Input 3: destination coordinate (rowDest, colDest) = (3, 2)
+/// Output: false
+/// Explanation: There is no way for the ball to stop at the destination.
+/// 
+/// Note: 
+/// 1.There is only one ball and one destination in the maze.
+/// 2.Both the ball and the destination exist on an empty space, and they will not 
+///   be at the same position initially.
+/// 3.The given maze does not contain border (like the red rectangle in the example 
+///   pictures), but you could assume the border of the maze are all walls.
+/// 4.The maze contains at least 2 empty spaces, and both the width and height of the 
+///   maze won't exceed 100.
+/// </summary>
+bool LeetCodeGraph::hasPath(vector<vector<int>>& maze, vector<int>& start, vector<int>& destination)
+{
+    if (maze.empty() || maze[0].empty()) return false;
+    vector<vector<int>> visited(maze.size(), vector<int>(maze[0].size()));
+    return hasPath(maze, visited, start, destination);
+}
+
 #pragma endregion

@@ -44,54 +44,54 @@ struct TreeNode {
 };
 
 struct DoublyLinkedNode {
-	int val;
-	DoublyLinkedNode* prev;
-	DoublyLinkedNode* next;
-	DoublyLinkedNode* child;
+    int val;
+    DoublyLinkedNode* prev;
+    DoublyLinkedNode* next;
+    DoublyLinkedNode* child;
     DoublyLinkedNode() { prev = nullptr; next = nullptr; child = nullptr; val = 0; }
-	DoublyLinkedNode(int _val)
-	{
-		val = _val;
-		prev = nullptr; 
-		next = nullptr; 
-		child = nullptr;
-	}
+    DoublyLinkedNode(int _val)
+    {
+        val = _val;
+        prev = nullptr; 
+        next = nullptr; 
+        child = nullptr;
+    }
 };
 
 struct QuadNode {
 public:
-	bool val;
-	bool isLeaf;
-	QuadNode* topLeft;
-	QuadNode* topRight;
-	QuadNode* bottomLeft;
-	QuadNode* bottomRight;
+    bool val;
+    bool isLeaf;
+    QuadNode* topLeft;
+    QuadNode* topRight;
+    QuadNode* bottomLeft;
+    QuadNode* bottomRight;
 
     QuadNode() { val = 0; isLeaf = false; topLeft = nullptr; topRight = nullptr; bottomLeft = nullptr; bottomRight = nullptr; }
     
 
-	QuadNode(bool _val, bool _isLeaf, QuadNode* _topLeft, QuadNode* _topRight, QuadNode* _bottomLeft, QuadNode* _bottomRight)
-	{
-		val = _val;
-		isLeaf = _isLeaf;
-		topLeft = _topLeft;
-		topRight = _topRight;
-		bottomLeft = _bottomLeft;
-		bottomRight = _bottomRight;
-	}
+    QuadNode(bool _val, bool _isLeaf, QuadNode* _topLeft, QuadNode* _topRight, QuadNode* _bottomLeft, QuadNode* _bottomRight)
+    {
+        val = _val;
+        isLeaf = _isLeaf;
+        topLeft = _topLeft;
+        topRight = _topRight;
+        bottomLeft = _bottomLeft;
+        bottomRight = _bottomRight;
+    }
 };
 
 struct Node {
-	int val;
-	vector<Node*> children;
+    int val;
+    vector<Node*> children;
 
-	Node() { val = 0; }
+    Node() { val = 0; }
 
-	Node(int _val, vector<Node*> _children) 
-	{
-		val = _val;
-		children = _children;
-	}
+    Node(int _val, vector<Node*> _children) 
+    {
+        val = _val;
+        children = _children;
+    }
 };
 
 struct Point {
@@ -887,7 +887,7 @@ class Twitter
 private:
     long m_TimeTicks;
 
-	unordered_map<int, vector<pair<long, int>>> m_TwitterList;
+    unordered_map<int, vector<pair<long, int>>> m_TwitterList;
     unordered_map<int, unordered_set<int>> m_FollowList;
 
 public:
@@ -923,7 +923,7 @@ public:
     /// <summary>
     /// Retrieve the 10 most recent tweet ids in the user's news feed. 
     /// Each item in the news feed must be posted by users who the user 
-	/// followed or by the user herself. 
+    /// followed or by the user herself. 
     /// Tweets must be ordered from most recent to least recent.
     /// </summary>
     /// <returns></returns>
@@ -931,49 +931,49 @@ public:
     {
         vector<int> result;
         priority_queue <pair<long, pair<int,int>>> candidate_list;
-		if (!m_TwitterList[userId].empty())
-		{
-			int clock = m_TwitterList[userId].back().first;
-			int index = (int)m_TwitterList[userId].size() - 1;
-			candidate_list.push(make_pair(clock, make_pair(userId, index)));
-		}
-		for (int followee : m_FollowList[userId])
-		{
-			if (!m_TwitterList[followee].empty())
-			{
-				int clock = m_TwitterList[followee].back().first;
-				int index = (int)m_TwitterList[followee].size() - 1;
-				candidate_list.push(make_pair(clock, make_pair(followee, index)));
-			}
-		}
+        if (!m_TwitterList[userId].empty())
+        {
+            int clock = m_TwitterList[userId].back().first;
+            int index = (int)m_TwitterList[userId].size() - 1;
+            candidate_list.push(make_pair(clock, make_pair(userId, index)));
+        }
+        for (int followee : m_FollowList[userId])
+        {
+            if (!m_TwitterList[followee].empty())
+            {
+                int clock = m_TwitterList[followee].back().first;
+                int index = (int)m_TwitterList[followee].size() - 1;
+                candidate_list.push(make_pair(clock, make_pair(followee, index)));
+            }
+        }
 
-		for (size_t i = 0; i < 10; i++)
-		{
-			if (candidate_list.empty())
-			{
-				break;
-			}
-			pair<long, pair<int, int>> tweet_itr = candidate_list.top();
-			candidate_list.pop();
-			int user_id = tweet_itr.second.first;
-			int index = tweet_itr.second.second;
-			int tweet_id = m_TwitterList[user_id][index].second;
-			result.push_back(tweet_id);
-			// push the next tweet of this user to priority queue
-			if (index > 0)
-			{
-				index--;
-				int clock = m_TwitterList[user_id][index].first;
-				candidate_list.push(make_pair(clock, make_pair(user_id, index)));
-			}
-		}
+        for (size_t i = 0; i < 10; i++)
+        {
+            if (candidate_list.empty())
+            {
+                break;
+            }
+            pair<long, pair<int, int>> tweet_itr = candidate_list.top();
+            candidate_list.pop();
+            int user_id = tweet_itr.second.first;
+            int index = tweet_itr.second.second;
+            int tweet_id = m_TwitterList[user_id][index].second;
+            result.push_back(tweet_id);
+            // push the next tweet of this user to priority queue
+            if (index > 0)
+            {
+                index--;
+                int clock = m_TwitterList[user_id][index].first;
+                candidate_list.push(make_pair(clock, make_pair(user_id, index)));
+            }
+        }
 
         return result;
     }
 
     /// <summary>
     /// Follower follows a followee. If the operation is invalid, it should 
-	/// be a no-op.
+    /// be a no-op.
     /// </summary>
     /// <param name="followerId">The follower id</param>
     /// <param name="followeeId">The followee id</param>
@@ -988,7 +988,7 @@ public:
 
     /// <summary>
     /// Follower unfollows a followee. If the operation is invalid, it should 
-	/// be a no-op.
+    /// be a no-op.
     /// </summary>
     /// <param name="followerId">The follower id</param>
     /// <param name="followeeId">The followee id</param>
@@ -1697,91 +1697,91 @@ public:
 class NaryTreeCodec 
 {
 private:
-	// Encodes a tree to a single string.
-	string serializeNode(Node* root)
-	{
-		string result;
-		if (root == nullptr) return result;
-		result.append(to_string(root->val));
-		if (root->children.empty()) return result;
-		result.push_back('[');
-		for (size_t i = 0; i < root->children.size(); i++)
-		{
-			if (i > 0) result.append(" ");
-			result.append(serializeNode(root->children[i]));
-		}
-		result.push_back(']');
-		return result;
-	};
+    // Encodes a tree to a single string.
+    string serializeNode(Node* root)
+    {
+        string result;
+        if (root == nullptr) return result;
+        result.append(to_string(root->val));
+        if (root->children.empty()) return result;
+        result.push_back('[');
+        for (size_t i = 0; i < root->children.size(); i++)
+        {
+            if (i > 0) result.append(" ");
+            result.append(serializeNode(root->children[i]));
+        }
+        result.push_back(']');
+        return result;
+    };
 
-	// Decodes your encoded data to tree.
-	void deserializeNode(vector<Node*> &children, string data, size_t& index)
-	{
-		string token;
-		Node * node = nullptr;
-		while (index <= data.size())
-		{
-			if ((index == data.size()) || (isspace(data[index]))) 
-			{
-				if (!token.empty() && (node != nullptr))
-				{
-					node->val = atoi(token.c_str());
-					token.clear();
-				}
-				index++;
-			}
-			else if (isdigit(data[index]))
-			{
-				if (token.empty())
-				{
-					node = new Node();
-					children.push_back(node);
-				}
-				token.push_back(data[index]);
-				index++;
-			}
-			else if (data[index] == '[')
-			{
-				if (!token.empty() && (node != nullptr))
-				{
-					node->val = atoi(token.c_str());
-					token.clear();
-				}
-				index++;
-				if (node != nullptr)
-				{
-					deserializeNode(node->children, data, index);
-				}
-			}
-			else if (data[index] == ']')
-			{
-				if (!token.empty() && (node != nullptr))
-				{
-					node->val = atoi(token.c_str());
-					token.clear();
-				}
-				index++;
-				break;
-			}
-		}
-	}
+    // Decodes your encoded data to tree.
+    void deserializeNode(vector<Node*> &children, string data, size_t& index)
+    {
+        string token;
+        Node * node = nullptr;
+        while (index <= data.size())
+        {
+            if ((index == data.size()) || (isspace(data[index]))) 
+            {
+                if (!token.empty() && (node != nullptr))
+                {
+                    node->val = atoi(token.c_str());
+                    token.clear();
+                }
+                index++;
+            }
+            else if (isdigit(data[index]))
+            {
+                if (token.empty())
+                {
+                    node = new Node();
+                    children.push_back(node);
+                }
+                token.push_back(data[index]);
+                index++;
+            }
+            else if (data[index] == '[')
+            {
+                if (!token.empty() && (node != nullptr))
+                {
+                    node->val = atoi(token.c_str());
+                    token.clear();
+                }
+                index++;
+                if (node != nullptr)
+                {
+                    deserializeNode(node->children, data, index);
+                }
+            }
+            else if (data[index] == ']')
+            {
+                if (!token.empty() && (node != nullptr))
+                {
+                    node->val = atoi(token.c_str());
+                    token.clear();
+                }
+                index++;
+                break;
+            }
+        }
+    }
 
 public:
-	// Encodes a tree to a single string.
-	string serialize(Node* root) 
-	{
-		return "[" + serializeNode(root) + "]";
-	};
+    // Encodes a tree to a single string.
+    string serialize(Node* root) 
+    {
+        return "[" + serializeNode(root) + "]";
+    };
 
-	// Decodes your encoded data to tree.
-	Node* deserialize(string data) 
-	{
-		vector<Node*> nodeList;
-		size_t index = 0;
-		deserializeNode(nodeList, data, index);
-		if (nodeList.empty()) return nullptr;
-		else return nodeList[0];
-	}
+    // Decodes your encoded data to tree.
+    Node* deserialize(string data) 
+    {
+        vector<Node*> nodeList;
+        size_t index = 0;
+        deserializeNode(nodeList, data, index);
+        if (nodeList.empty()) return nullptr;
+        else return nodeList[0];
+    }
 };
 
 /// <summary>
@@ -1812,58 +1812,58 @@ public:
 class NaryTreeBinaryCodec
 {
 private:
-	// Encodes an n-ary tree to a binary tree.
-	TreeNode* encode(queue<Node*> sibling_queue) 
-	{
-		TreeNode  * result = nullptr;
-		if (sibling_queue.empty()) return result;
-		Node * node = sibling_queue.front();
-		sibling_queue.pop();
-		result = new TreeNode(node->val);
-		queue<Node *> children_queue;
-		for (size_t i = 0; i < node->children.size(); i++)
-		{
-			children_queue.push(node->children[i]);
-		}
-		result->left = encode(children_queue);
-		result->right = encode(sibling_queue);
-		return result;
-	}
+    // Encodes an n-ary tree to a binary tree.
+    TreeNode* encode(queue<Node*> sibling_queue) 
+    {
+        TreeNode  * result = nullptr;
+        if (sibling_queue.empty()) return result;
+        Node * node = sibling_queue.front();
+        sibling_queue.pop();
+        result = new TreeNode(node->val);
+        queue<Node *> children_queue;
+        for (size_t i = 0; i < node->children.size(); i++)
+        {
+            children_queue.push(node->children[i]);
+        }
+        result->left = encode(children_queue);
+        result->right = encode(sibling_queue);
+        return result;
+    }
 
-	// Decodes your binary tree to an n-ary tree.
-	void decode(TreeNode * tree_node, vector<Node *>& children_queue)
-	{
-		if (tree_node == nullptr) return;
-		Node * node = new Node();
-		node->val = tree_node->val;
-		decode(tree_node->left, node->children);
-		children_queue.push_back(node);
-		decode(tree_node->right, children_queue);
-	}
+    // Decodes your binary tree to an n-ary tree.
+    void decode(TreeNode * tree_node, vector<Node *>& children_queue)
+    {
+        if (tree_node == nullptr) return;
+        Node * node = new Node();
+        node->val = tree_node->val;
+        decode(tree_node->left, node->children);
+        children_queue.push_back(node);
+        decode(tree_node->right, children_queue);
+    }
 
 public:
 
-	// Encodes an n-ary tree to a binary tree.
-	TreeNode* encode(Node* root) 
-	{
-		TreeNode * result = nullptr;
-		if (root == nullptr) return result;
-		queue<Node*> sibling_queue;
-		sibling_queue.push(root);
-		result = encode(sibling_queue);
-		return result;
-	}
+    // Encodes an n-ary tree to a binary tree.
+    TreeNode* encode(Node* root) 
+    {
+        TreeNode * result = nullptr;
+        if (root == nullptr) return result;
+        queue<Node*> sibling_queue;
+        sibling_queue.push(root);
+        result = encode(sibling_queue);
+        return result;
+    }
 
-	// Decodes your binary tree to an n-ary tree.
-	Node* decode(TreeNode* root) 
-	{
-		Node * result = nullptr;
-		if (root == nullptr) return result;
-		vector<Node *>children_queue;
-		decode(root, children_queue);
-		result = children_queue[0];
-		return result;
-	}
+    // Decodes your binary tree to an n-ary tree.
+    Node* decode(TreeNode* root) 
+    {
+        Node * result = nullptr;
+        if (root == nullptr) return result;
+        vector<Node *>children_queue;
+        decode(root, children_queue);
+        result = children_queue[0];
+        return result;
+    }
 };
 
 
@@ -3282,25 +3282,25 @@ public:
 class Master
 {
 private:
-	string secret;
+    string secret;
 
 public:
-	Master(string str)
-	{
-		secret = str;
-	}
-	int guess(string str)
-	{
-		int result = 0;
-		for (size_t i = 0; i < str.size(); i++)
-		{
-			if (str[i] == secret[i])
-			{
-				result++;
-			}
-		}
-		return result;
-	}
+    Master(string str)
+    {
+        secret = str;
+    }
+    int guess(string str)
+    {
+        int result = 0;
+        for (size_t i = 0; i < str.size(); i++)
+        {
+            if (str[i] == secret[i])
+            {
+                result++;
+            }
+        }
+        return result;
+    }
 };
 
 /// <summary>
@@ -3337,55 +3337,55 @@ public:
 /// </summary>
 class MyHashSet {
 private:
-	int m_Size = 10000;
-	vector<list<int>> m_Data;
+    int m_Size = 10000;
+    vector<list<int>> m_Data;
 public:
 
-	// Initialize your data structure here.
-	MyHashSet() 
-	{
-		m_Data = vector<list<int>>(m_Size);
-	}
+    // Initialize your data structure here.
+    MyHashSet() 
+    {
+        m_Data = vector<list<int>>(m_Size);
+    }
 
-	void add(int key) 
-	{
-		int index = key % m_Size;
-		auto itr = m_Data[index].begin();
-		while (itr != m_Data[index].end())
-		{
-			if (*itr == key) return;
-			itr++;
-		}
-		m_Data[index].push_back(key);
-	}
+    void add(int key) 
+    {
+        int index = key % m_Size;
+        auto itr = m_Data[index].begin();
+        while (itr != m_Data[index].end())
+        {
+            if (*itr == key) return;
+            itr++;
+        }
+        m_Data[index].push_back(key);
+    }
 
 
-	void remove(int key) 
-	{
-		int index = key % m_Size;
-		auto itr = m_Data[index].begin();
-		while (itr != m_Data[index].end())
-		{
-			if (*itr == key)
-			{
-				m_Data[index].erase(itr);
-				return;
-			}
-			itr++;
-		}
-	}
-	/** Returns true if this set contains the specified element */
-	bool contains(int key) 
-	{
-		int index = key % m_Size;
-		auto itr = m_Data[index].begin();
-		while (itr != m_Data[index].end())
-		{
-			if (*itr == key) return true;
-			itr++;
-		}
-		return false;
-	}
+    void remove(int key) 
+    {
+        int index = key % m_Size;
+        auto itr = m_Data[index].begin();
+        while (itr != m_Data[index].end())
+        {
+            if (*itr == key)
+            {
+                m_Data[index].erase(itr);
+                return;
+            }
+            itr++;
+        }
+    }
+    /** Returns true if this set contains the specified element */
+    bool contains(int key) 
+    {
+        int index = key % m_Size;
+        auto itr = m_Data[index].begin();
+        while (itr != m_Data[index].end())
+        {
+            if (*itr == key) return true;
+            itr++;
+        }
+        return false;
+    }
 };
 
 /// <summary>
@@ -3420,62 +3420,62 @@ public:
 /// 3. Please do not use the built-in HashMap library.
 /// </summary>
 class MyHashMap {
-	int m_Size = 10000;
-	vector<list<pair<int, int>>> m_Data;
+    int m_Size = 10000;
+    vector<list<pair<int, int>>> m_Data;
 public:
-	/** Initialize your data structure here. */
-	MyHashMap() {
-		m_Data = vector<list<pair<int, int>>>(m_Size);
-	}
+    /** Initialize your data structure here. */
+    MyHashMap() {
+        m_Data = vector<list<pair<int, int>>>(m_Size);
+    }
 
-	/** value will always be non-negative. */
-	void put(int key, int value) 
-	{
-		int index = key % m_Size;
-		auto itr = m_Data[index].begin();
-		while (itr != m_Data[index].end())
-		{
-			if (itr->first == key)
-			{
-				itr->second = value;
-				return;
-			}
-			itr++;
-		}
-		m_Data[index].push_back(make_pair(key, value));
-	}
+    /** value will always be non-negative. */
+    void put(int key, int value) 
+    {
+        int index = key % m_Size;
+        auto itr = m_Data[index].begin();
+        while (itr != m_Data[index].end())
+        {
+            if (itr->first == key)
+            {
+                itr->second = value;
+                return;
+            }
+            itr++;
+        }
+        m_Data[index].push_back(make_pair(key, value));
+    }
 
-	/** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
-	int get(int key) 
-	{
-		int index = key % m_Size;
-		auto itr = m_Data[index].begin();
-		while (itr != m_Data[index].end())
-		{
-			if (itr->first == key)
-			{
-				return itr->second;
-			}
-			itr++;
-		}
-		return -1;
-	}
+    /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
+    int get(int key) 
+    {
+        int index = key % m_Size;
+        auto itr = m_Data[index].begin();
+        while (itr != m_Data[index].end())
+        {
+            if (itr->first == key)
+            {
+                return itr->second;
+            }
+            itr++;
+        }
+        return -1;
+    }
 
-	/** Removes the mapping of the specified value key if this map contains a mapping for the key */
-	void remove(int key) 
-	{
-		int index = key % m_Size;
-		auto itr = m_Data[index].begin();
-		while (itr != m_Data[index].end())
-		{
-			if (itr->first == key)
-			{
-				m_Data[index].erase(itr);
-				return;
-			}
-			itr++;
-		}
-	}
+    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
+    void remove(int key) 
+    {
+        int index = key % m_Size;
+        auto itr = m_Data[index].begin();
+        while (itr != m_Data[index].end())
+        {
+            if (itr->first == key)
+            {
+                m_Data[index].erase(itr);
+                return;
+            }
+            itr++;
+        }
+    }
 };
 
 /// <summary>
@@ -3521,128 +3521,128 @@ public:
 /// </summary>
 class MyLinkedList {
 private:
-	struct LinkedNode
-	{
-		LinkedNode * prev;
-		LinkedNode * next;
-		int value;
-		LinkedNode(int val)
-		{
-			prev = nullptr;
-			next = nullptr;
-			value = val;
-		}
-	};
-	LinkedNode * m_Head;
-	LinkedNode * m_Tail;	
+    struct LinkedNode
+    {
+        LinkedNode * prev;
+        LinkedNode * next;
+        int value;
+        LinkedNode(int val)
+        {
+            prev = nullptr;
+            next = nullptr;
+            value = val;
+        }
+    };
+    LinkedNode * m_Head;
+    LinkedNode * m_Tail;	
 public:
-	/** Initialize your data structure here. */
-	MyLinkedList() 
-	{
-		m_Head = nullptr;
-		m_Tail = nullptr;
-	}
+    /** Initialize your data structure here. */
+    MyLinkedList() 
+    {
+        m_Head = nullptr;
+        m_Tail = nullptr;
+    }
 
-	/** Initialize your data structure here. */
-	~MyLinkedList()
-	{
-		LinkedNode * node = m_Head;
-		if (node != nullptr)
-		{
-			LinkedNode * next = node->next;
-			delete node;
-			node = next;
-		}
-		m_Head = nullptr;
-		m_Tail = nullptr;
-	}
+    /** Initialize your data structure here. */
+    ~MyLinkedList()
+    {
+        LinkedNode * node = m_Head;
+        if (node != nullptr)
+        {
+            LinkedNode * next = node->next;
+            delete node;
+            node = next;
+        }
+        m_Head = nullptr;
+        m_Tail = nullptr;
+    }
 
-	/** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
-	int get(int index) 
-	{
-		LinkedNode * node = m_Head;
-		for (int i = 0; i < index; i++)
-		{
-			if (node == nullptr) return -1;
-			node = node->next;
-		}
-		if (node != nullptr) return node->value;
-		else return -1;
-	}
+    /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
+    int get(int index) 
+    {
+        LinkedNode * node = m_Head;
+        for (int i = 0; i < index; i++)
+        {
+            if (node == nullptr) return -1;
+            node = node->next;
+        }
+        if (node != nullptr) return node->value;
+        else return -1;
+    }
 
-	/** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
-	void addAtHead(int val) 
-	{
-		LinkedNode * node = new LinkedNode(val);
-		node->next = m_Head;
-		if (m_Head != nullptr)
-		{
-			m_Head->prev = node;
-		}
-		m_Head = node;
-		if (m_Tail == nullptr) m_Tail = node;
-	}
+    /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
+    void addAtHead(int val) 
+    {
+        LinkedNode * node = new LinkedNode(val);
+        node->next = m_Head;
+        if (m_Head != nullptr)
+        {
+            m_Head->prev = node;
+        }
+        m_Head = node;
+        if (m_Tail == nullptr) m_Tail = node;
+    }
 
-	/** Append a node of value val to the last element of the linked list. */
-	void addAtTail(int val) 
-	{
-		LinkedNode * node = new LinkedNode(val);
-		node->prev = m_Tail;
-		if (m_Tail != nullptr)
-		{
-			m_Tail->next = node;
-		}
-		m_Tail = node;
-		if (m_Head == nullptr) m_Head = node;
-	}
+    /** Append a node of value val to the last element of the linked list. */
+    void addAtTail(int val) 
+    {
+        LinkedNode * node = new LinkedNode(val);
+        node->prev = m_Tail;
+        if (m_Tail != nullptr)
+        {
+            m_Tail->next = node;
+        }
+        m_Tail = node;
+        if (m_Head == nullptr) m_Head = node;
+    }
 
-	/** Add a node of value val before the index-th node in the linked list. 
-	/// If index equals to the length of linked list, the node will be appended to the end of linked list. 
-	/// If index is greater than the length, the node will not be inserted. */
-	void addAtIndex(int index, int val) 
-	{
-		LinkedNode * node = m_Head;
-		for (int i = 0; i < index; i++)
-		{
-			if (node == nullptr) return;
-			node = node->next;
-		}
-		if (node != nullptr)
-		{
-			LinkedNode * new_node = new LinkedNode(val);
-			LinkedNode * prev_node = node->prev;
-			new_node->prev = prev_node;
-			new_node->next = node;
-			if (prev_node != nullptr) prev_node->next = new_node;
-			node->prev = new_node;
-			if (node == m_Head) m_Head = new_node;
-		}
-		else
-		{
-			addAtTail(val);
-		}
-	}
+    /** Add a node of value val before the index-th node in the linked list. 
+    /// If index equals to the length of linked list, the node will be appended to the end of linked list. 
+    /// If index is greater than the length, the node will not be inserted. */
+    void addAtIndex(int index, int val) 
+    {
+        LinkedNode * node = m_Head;
+        for (int i = 0; i < index; i++)
+        {
+            if (node == nullptr) return;
+            node = node->next;
+        }
+        if (node != nullptr)
+        {
+            LinkedNode * new_node = new LinkedNode(val);
+            LinkedNode * prev_node = node->prev;
+            new_node->prev = prev_node;
+            new_node->next = node;
+            if (prev_node != nullptr) prev_node->next = new_node;
+            node->prev = new_node;
+            if (node == m_Head) m_Head = new_node;
+        }
+        else
+        {
+            addAtTail(val);
+        }
+    }
 
-	/** Delete the index-th node in the linked list, if the index is valid. */
-	void deleteAtIndex(int index) 
-	{
-		LinkedNode * node = m_Head;
-		for (int i = 0; i < index; i++)
-		{
-			if (node == nullptr) return;
-			node = node->next;
-		}
-		if (node != nullptr)
-		{
-			LinkedNode * prev_node = node->prev;
-			LinkedNode * next_node = node->next;
-			if (prev_node != nullptr) prev_node->next = next_node;
-			if (next_node != nullptr) next_node->prev = prev_node;
-			if (node == m_Head) m_Head = next_node;
-			if (node == m_Tail) m_Tail = prev_node;
-			delete node;
-		}
-	}
+    /** Delete the index-th node in the linked list, if the index is valid. */
+    void deleteAtIndex(int index) 
+    {
+        LinkedNode * node = m_Head;
+        for (int i = 0; i < index; i++)
+        {
+            if (node == nullptr) return;
+            node = node->next;
+        }
+        if (node != nullptr)
+        {
+            LinkedNode * prev_node = node->prev;
+            LinkedNode * next_node = node->next;
+            if (prev_node != nullptr) prev_node->next = next_node;
+            if (next_node != nullptr) next_node->prev = prev_node;
+            if (node == m_Head) m_Head = next_node;
+            if (node == m_Tail) m_Tail = prev_node;
+            delete node;
+        }
+    }
 };
 
 /// <summary>
@@ -3695,61 +3695,61 @@ public:
 class MyCircularQueue 
 {
 private:
-	vector<int>m_Queue;
-	int m_First = 0;
-	int m_Last = 0;
-	int m_Count = 0;
+    vector<int>m_Queue;
+    int m_First = 0;
+    int m_Last = 0;
+    int m_Count = 0;
 public:
-	/** Initialize your data structure here. Set the size of the queue to be k. */
-	MyCircularQueue(int k) 
-	{
-		m_Queue = vector<int>(k);
-	}
+    /** Initialize your data structure here. Set the size of the queue to be k. */
+    MyCircularQueue(int k) 
+    {
+        m_Queue = vector<int>(k);
+    }
 
-	/** Insert an element into the circular queue. Return true if the operation is successful. */
-	bool enQueue(int value) 
-	{
-		if (m_Count == m_Queue.size()) return false;
-		m_Queue[m_Last] = value;
-		m_Last = (m_Last + 1) % m_Queue.size();
-		m_Count++;
-		return true;
-	}
+    /** Insert an element into the circular queue. Return true if the operation is successful. */
+    bool enQueue(int value) 
+    {
+        if (m_Count == m_Queue.size()) return false;
+        m_Queue[m_Last] = value;
+        m_Last = (m_Last + 1) % m_Queue.size();
+        m_Count++;
+        return true;
+    }
 
 
-	/** Delete an element from the circular queue. Return true if the operation is successful. */
-	bool deQueue() 
-	{
-		if (m_Count == 0) return false;
-		m_First = (m_First + 1) % m_Queue.size();
-		m_Count--;
-		return true;
-	}
-	/** Get the front item from the queue. */
-	int Front() 
-	{
-		if (m_Count == 0) return -1;
-		return m_Queue[m_First];
-	}
+    /** Delete an element from the circular queue. Return true if the operation is successful. */
+    bool deQueue() 
+    {
+        if (m_Count == 0) return false;
+        m_First = (m_First + 1) % m_Queue.size();
+        m_Count--;
+        return true;
+    }
+    /** Get the front item from the queue. */
+    int Front() 
+    {
+        if (m_Count == 0) return -1;
+        return m_Queue[m_First];
+    }
 
-	/** Get the last item from the queue. */
-	int Rear() 
-	{
-		if (m_Count == 0) return -1;
-		return m_Queue[(m_Last - 1 + m_Queue.size()) % m_Queue.size()];
-	}
+    /** Get the last item from the queue. */
+    int Rear() 
+    {
+        if (m_Count == 0) return -1;
+        return m_Queue[(m_Last - 1 + m_Queue.size()) % m_Queue.size()];
+    }
 
-	/** Checks whether the circular queue is empty or not. */
-	bool isEmpty() 
-	{
-		return (m_Count == 0);
-	}
+    /** Checks whether the circular queue is empty or not. */
+    bool isEmpty() 
+    {
+        return (m_Count == 0);
+    }
 
-	/** Checks whether the circular queue is full or not. */
-	bool isFull() 
-	{
-		return (m_Count == m_Queue.size());
-	}
+    /** Checks whether the circular queue is full or not. */
+    bool isFull() 
+    {
+        return (m_Count == m_Queue.size());
+    }
 };
 
 /// <summary>
@@ -3798,80 +3798,80 @@ public:
 class MyCircularDeque 
 {
 private:
-	vector<int>m_Queue;
-	int m_First = 0;
-	int m_Last = 0;
-	int m_Count = 0;
+    vector<int>m_Queue;
+    int m_First = 0;
+    int m_Last = 0;
+    int m_Count = 0;
 public:
-	/** Initialize your data structure here. Set the size of the deque to be k. */
-	MyCircularDeque(int k) 
-	{
-		m_Queue = vector<int>(k);
-	}
+    /** Initialize your data structure here. Set the size of the deque to be k. */
+    MyCircularDeque(int k) 
+    {
+        m_Queue = vector<int>(k);
+    }
 
-	/** Adds an item at the front of Deque. Return true if the operation is successful. */
-	bool insertFront(int value) 
-	{
-		if (m_Count == m_Queue.size()) return false;
-		m_First = (m_First - 1 + m_Queue.size()) % m_Queue.size();
-		m_Queue[m_First] = value;
-		m_Count++;
-		return true;
-	}
+    /** Adds an item at the front of Deque. Return true if the operation is successful. */
+    bool insertFront(int value) 
+    {
+        if (m_Count == m_Queue.size()) return false;
+        m_First = (m_First - 1 + m_Queue.size()) % m_Queue.size();
+        m_Queue[m_First] = value;
+        m_Count++;
+        return true;
+    }
 
-	/** Adds an item at the rear of Deque. Return true if the operation is successful. */
-	bool insertLast(int value) 
-	{
-		if (m_Count == m_Queue.size()) return false;
-		m_Queue[m_Last] = value;
-		m_Last = (m_Last + 1) % m_Queue.size();
-		m_Count++;
-		return true;
-	}
+    /** Adds an item at the rear of Deque. Return true if the operation is successful. */
+    bool insertLast(int value) 
+    {
+        if (m_Count == m_Queue.size()) return false;
+        m_Queue[m_Last] = value;
+        m_Last = (m_Last + 1) % m_Queue.size();
+        m_Count++;
+        return true;
+    }
 
-	/** Deletes an item from the front of Deque. Return true if the operation is successful. */
-	bool deleteFront() 
-	{
-		if (m_Count == 0) return false;
-		m_First = (m_First + 1) % m_Queue.size();
-		m_Count--;
-		return true;
-	}
+    /** Deletes an item from the front of Deque. Return true if the operation is successful. */
+    bool deleteFront() 
+    {
+        if (m_Count == 0) return false;
+        m_First = (m_First + 1) % m_Queue.size();
+        m_Count--;
+        return true;
+    }
 
-	/** Deletes an item from the rear of Deque. Return true if the operation is successful. */
-	bool deleteLast() 
-	{
-		if (m_Count == 0) return false;
-		m_Last = (m_Last - 1 + m_Queue.size()) % m_Queue.size();
-		m_Count--;
-		return true;
-	}
+    /** Deletes an item from the rear of Deque. Return true if the operation is successful. */
+    bool deleteLast() 
+    {
+        if (m_Count == 0) return false;
+        m_Last = (m_Last - 1 + m_Queue.size()) % m_Queue.size();
+        m_Count--;
+        return true;
+    }
 
-	/** Get the front item from the deque. */
-	int getFront() 
-	{
-		if (m_Count == 0) return -1;
-		return m_Queue[m_First];
-	}
+    /** Get the front item from the deque. */
+    int getFront() 
+    {
+        if (m_Count == 0) return -1;
+        return m_Queue[m_First];
+    }
 
-	/** Get the last item from the deque. */
-	int getRear() 
-	{
-		if (m_Count == 0) return -1;
-		return m_Queue[(m_Last - 1 + m_Queue.size()) % m_Queue.size()];
-	}
+    /** Get the last item from the deque. */
+    int getRear() 
+    {
+        if (m_Count == 0) return -1;
+        return m_Queue[(m_Last - 1 + m_Queue.size()) % m_Queue.size()];
+    }
 
-	/** Checks whether the circular deque is empty or not. */
-	bool isEmpty() 
-	{
-		return (m_Count == 0);
-	}
+    /** Checks whether the circular deque is empty or not. */
+    bool isEmpty() 
+    {
+        return (m_Count == 0);
+    }
 
-	/** Checks whether the circular deque is full or not. */
-	bool isFull() 
-	{
-		return (m_Count == m_Queue.size());
-	}
+    /** Checks whether the circular deque is full or not. */
+    bool isFull() 
+    {
+        return (m_Count == m_Queue.size());
+    }
 };
 
 /// <summary>
@@ -3902,25 +3902,25 @@ public:
 class KthLargest 
 {
 private:
-	priority_queue<int> heap;
-	size_t size;
+    priority_queue<int> heap;
+    size_t size;
 public:
-	KthLargest(int k, vector<int> nums) 
-	{
-		size = k;
-		for (size_t i = 0; i < nums.size(); i++)
-		{
-			heap.push(0 - nums[i]);
-			if (heap.size() > size) heap.pop();
-		}
-	}
+    KthLargest(int k, vector<int> nums) 
+    {
+        size = k;
+        for (size_t i = 0; i < nums.size(); i++)
+        {
+            heap.push(0 - nums[i]);
+            if (heap.size() > size) heap.pop();
+        }
+    }
 
-	int add(int val) 
-	{
-		heap.push(0 - val);
-		if (heap.size() > size) heap.pop();
-		return (0 - heap.top());
-	}
+    int add(int val) 
+    {
+        heap.push(0 - val);
+        if (heap.size() > size) heap.pop();
+        return (0 - heap.top());
+    }
 };
 
 
@@ -3965,50 +3965,50 @@ public:
 /// </summary>
 class CBTInserter {
 private:
-	deque<TreeNode*> m_Parent;
-	TreeNode * m_Root;
+    deque<TreeNode*> m_Parent;
+    TreeNode * m_Root;
 public:
-	CBTInserter(TreeNode* root) 
-	{
-		m_Root = root;
+    CBTInserter(TreeNode* root) 
+    {
+        m_Root = root;
 
-		queue<TreeNode *> search;
-		search.push(root);
-		while (!search.empty())
-		{
-			TreeNode * node = search.front();
-			search.pop();
+        queue<TreeNode *> search;
+        search.push(root);
+        while (!search.empty())
+        {
+            TreeNode * node = search.front();
+            search.pop();
 
-			if (node->left != nullptr) search.push(node->left);
-			if (node->right != nullptr) search.push(node->right);
-			if (node->left == nullptr || node->right == nullptr)
-			{
-				m_Parent.push_back(node);
-			}
-		}
-	}
+            if (node->left != nullptr) search.push(node->left);
+            if (node->right != nullptr) search.push(node->right);
+            if (node->left == nullptr || node->right == nullptr)
+            {
+                m_Parent.push_back(node);
+            }
+        }
+    }
 
-	int insert(int v) 
-	{
-		TreeNode * node = new TreeNode(v);
-		TreeNode * parent = m_Parent.front();
-		if (parent->left == nullptr)
-		{
-			parent->left = node;
-		}
-		else
-		{
-			parent->right = node;
-			m_Parent.pop_front();
-		}
-		m_Parent.push_back(node);
-		return parent->val;
-	}
+    int insert(int v) 
+    {
+        TreeNode * node = new TreeNode(v);
+        TreeNode * parent = m_Parent.front();
+        if (parent->left == nullptr)
+        {
+            parent->left = node;
+        }
+        else
+        {
+            parent->right = node;
+            m_Parent.pop_front();
+        }
+        m_Parent.push_back(node);
+        return parent->val;
+    }
 
-	TreeNode* get_root() 
-	{
-		return m_Root;
-	}
+    TreeNode* get_root() 
+    {
+        return m_Root;
+    }
 };
 
 /// <summary>
@@ -4042,29 +4042,29 @@ public:
 /// </summary>
 class RecentCounter {
 private:
-	map<int, int> m_PingCount;
-	int m_Total;
+    map<int, int> m_PingCount;
+    int m_Total;
 
 public:
-	RecentCounter() 
-	{
-		m_Total = 0;
-	}
+    RecentCounter() 
+    {
+        m_Total = 0;
+    }
 
-	int ping(int t) 
-	{
-		m_Total++;
-		m_PingCount[t] = m_Total;
-		auto itr = m_PingCount.lower_bound(t - 3000);
-		int prev = 0;
-		if (itr == m_PingCount.begin()) prev = 0;
-		else
-		{
-			itr--;
-			prev = itr->second;
-		}
-		return m_Total - prev;
-	}
+    int ping(int t) 
+    {
+        m_Total++;
+        m_PingCount[t] = m_Total;
+        auto itr = m_PingCount.lower_bound(t - 3000);
+        int prev = 0;
+        if (itr == m_PingCount.begin()) prev = 0;
+        else
+        {
+            itr--;
+            prev = itr->second;
+        }
+        return m_Total - prev;
+    }
 };
 
 
@@ -4252,33 +4252,33 @@ public:
     /// </summary>
     ListNode* generateListNodes(vector<int> integers);
 
-	/// <summary>
-	/// Helper function which generate a cyclic linked list of a integers
-	/// </summary>
-	ListNode* generateCyclicListNodes(vector<int> integers);
+    /// <summary>
+    /// Helper function which generate a cyclic linked list of a integers
+    /// </summary>
+    ListNode* generateCyclicListNodes(vector<int> integers);
 
     /// <summary>
     /// Free list nodes
     /// </summary>
     void freeListNodes(ListNode * head);
 
-	/// <summary>
-	/// Free a cyclic linked list nodes
-	/// </summary>
-	void freeCyclicListNodes(ListNode * head);
-	
+    /// <summary>
+    /// Free a cyclic linked list nodes
+    /// </summary>
+    void freeCyclicListNodes(ListNode * head);
+    
     /// <summary>
     /// Free link tree nodes
     /// </summary>
     void freeLinkTreeNodes(TreeLinkNode * root);
 
 
-	/// <summary>
-	/// Free nodes
-	/// </summary>
-	void freeNodes(Node * root);
-	
-	/// <summary>
+    /// <summary>
+    /// Free nodes
+    /// </summary>
+    void freeNodes(Node * root);
+    
+    /// <summary>
     /// Find a list node with value
     /// </summary>
     ListNode* findListNode(ListNode *head, int value);
@@ -4293,32 +4293,32 @@ public:
     /// </summary>
     ListNode* addListNodes(ListNode * head, ListNode *tail);
 
-	/// <summary>
-	/// Output a cyclic linked list nodes
-	/// </summary>
-	vector<int> outputCyclicListNodes(ListNode * head);
+    /// <summary>
+    /// Output a cyclic linked list nodes
+    /// </summary>
+    vector<int> outputCyclicListNodes(ListNode * head);
 #pragma endregion
 
 #pragma region TwoPointers
-	/// <summary>
-	/// Leet code #11. Container With Most Water 
-	/// 
-	/// Given n non-negative integers a1, a2, ..., an, where each represents 
-	/// a point at coordinate (i, ai). n vertical lines are drawn such that 
-	/// the two endpoints of line i is at (i, ai) and (i, 0). 
-	/// Find two lines, which together with x-axis forms a container, such 
-	/// that the container contains the most water. 
-	/// Note: You may not slant the container. 
-	/// </summary>
-
-	/// <summary>
+    /// <summary>
     /// Leet code #11. Container With Most Water 
     /// 
     /// Given n non-negative integers a1, a2, ..., an, where each represents 
-	/// a point at coordinate (i, ai). n vertical lines are drawn such that 
-	/// the two endpoints of line i is at (i, ai) and (i, 0). 
+    /// a point at coordinate (i, ai). n vertical lines are drawn such that 
+    /// the two endpoints of line i is at (i, ai) and (i, 0). 
     /// Find two lines, which together with x-axis forms a container, such 
-	/// that the container contains the most water. 
+    /// that the container contains the most water. 
+    /// Note: You may not slant the container. 
+    /// </summary>
+
+    /// <summary>
+    /// Leet code #11. Container With Most Water 
+    /// 
+    /// Given n non-negative integers a1, a2, ..., an, where each represents 
+    /// a point at coordinate (i, ai). n vertical lines are drawn such that 
+    /// the two endpoints of line i is at (i, ai) and (i, 0). 
+    /// Find two lines, which together with x-axis forms a container, such 
+    /// that the container contains the most water. 
     /// Note: You may not slant the container. 
     /// </summary>
     int maxArea(vector<int>& height);
@@ -4598,284 +4598,284 @@ public:
     /// </summary>
     int compress(vector<char>& chars);
 
-	/// <summary>
-	/// Leet code #755. Pour Water    
-	/// We are given an elevation map, heights[i] representing the height of the 
-	/// terrain at that index. The width at each index is 1. After V units of 
-	/// water fall at index K, how much water is at each index?
-	///
-	/// Water first drops at index K and rests on top of the highest terrain or 
-	/// water at that index. Then, it flows according to the following rules:
-	///
-	/// If the droplet would eventually fall by moving left, then move left.
-	/// Otherwise, if the droplet would eventually fall by moving right, then 
-	/// move right.
-	/// Otherwise, rise at it's current position.
-	/// Here, "eventually fall" means that the droplet will eventually be at a 
-	/// lower level if it moves in that direction. Also, "level" means the height 
-	/// of the terrain plus any water in that column.
-	/// We can assume there's infinitely high terrain on the two sides out of 
-	/// bounds of the array. Also, there could not be partial water being spread 
-	/// out evenly on more than 1 grid block - each unit of water has to be in 
-	/// exactly one block.
-	///
-	/// Example 1:
-	/// Input: heights = [2,1,1,2,1,2,2], V = 4, K = 3
-	/// Output: [2,2,2,3,2,2,2]
-	/// Explanation:
-	/// #       #
-	/// #       #
-	/// ##  # ###
-	/// #########
-	///  0123456    <- index
-	///
-	/// The first drop of water lands at index K = 3:
-	/// 
-	/// #       #
-	/// #   w   #
-	/// ##  # ###
-	/// #########
-	///  0123456    
-	/// 
-	/// When moving left or right, the water can only move to the same level or a 
-	/// lower level.
-	/// (By level, we mean the total height of the terrain plus any water in that 
-	/// column.)
-	/// Since moving left will eventually make it fall, it moves left.
-	/// (A droplet "made to fall" means go to a lower height than it was at 
-	/// previously.)
-	///
-	/// #       #
-	/// #       #
-	/// ## w# ###
-	/// #########
-	///  0123456    
-	///
-	/// Since moving left will not make it fall, it stays in place.  The next 
-	/// droplet falls:
-	///
-	/// #       #
-	/// #   w   #
-	/// ## w# ###
-	/// #########
-	///  0123456  
-	///
-	/// Since the new droplet moving left will eventually make it fall, it moves 
-	/// left.
-	/// Notice that the droplet still preferred to move left,
-	/// even though it could move right (and moving right makes it fall quicker.)
-	/// 
-	/// #       #
-	/// #  w    #
-	/// ## w# ###
-	/// #########
-	/// 0123456  
-	///
-	/// #       #
-	/// #       #
-	/// ##ww# ###
-	/// #########
-	///  0123456  
-	///
-	/// After those steps, the third droplet falls.
-	/// Since moving left would not eventually make it fall, it tries to move 
-	/// right.
-	/// Since moving right would eventually make it fall, it moves right.
-	///
-	/// #       #
-	/// #   w   #
-	/// ##ww# ###
-	/// #########
-	///  0123456  
-	/// 
-	/// #       #
-	/// #       #
-	/// ##ww#w###
-	/// #########
-	///  0123456  
-	/// 
-	/// Finally, the fourth droplet falls.
-	/// Since moving left would not eventually make it fall, it tries to move 
-	/// right.
-	/// Since moving right would not eventually make it fall, it stays in place:
-	/// 
-	/// #       #
-	/// #   w   #
-	/// ##ww#w###
-	/// #########
-	///  0123456  
-	///
-	/// The final answer is [2,2,2,3,2,2,2]:
-	///
-	///    #    
-	/// ####### 
-	/// ####### 
-	///  0123456 
-	/// Example 2:
-	/// Input: heights = [1,2,3,4], V = 2, K = 2
-	/// Output: [2,3,3,4]
-	/// Explanation:
-	/// The last droplet settles at index 1, since moving further left would not 
-	/// cause it to eventually fall to a lower height.
-	/// Example 3:
-	/// Input: heights = [3,1,3], V = 5, K = 1
-	/// Output: [4,4,4]
-	/// Note:
-	///
-	/// heights will have length in [1, 100] and contain integers in [0, 99].
-	/// 1. V will be in range [0, 2000].
-	/// 2. K will be in range [0, heights.length - 1].
-	/// </summary>
-	vector<int> pourWater(vector<int>& heights, int V, int K);
+    /// <summary>
+    /// Leet code #755. Pour Water    
+    /// We are given an elevation map, heights[i] representing the height of the 
+    /// terrain at that index. The width at each index is 1. After V units of 
+    /// water fall at index K, how much water is at each index?
+    ///
+    /// Water first drops at index K and rests on top of the highest terrain or 
+    /// water at that index. Then, it flows according to the following rules:
+    ///
+    /// If the droplet would eventually fall by moving left, then move left.
+    /// Otherwise, if the droplet would eventually fall by moving right, then 
+    /// move right.
+    /// Otherwise, rise at it's current position.
+    /// Here, "eventually fall" means that the droplet will eventually be at a 
+    /// lower level if it moves in that direction. Also, "level" means the height 
+    /// of the terrain plus any water in that column.
+    /// We can assume there's infinitely high terrain on the two sides out of 
+    /// bounds of the array. Also, there could not be partial water being spread 
+    /// out evenly on more than 1 grid block - each unit of water has to be in 
+    /// exactly one block.
+    ///
+    /// Example 1:
+    /// Input: heights = [2,1,1,2,1,2,2], V = 4, K = 3
+    /// Output: [2,2,2,3,2,2,2]
+    /// Explanation:
+    /// #       #
+    /// #       #
+    /// ##  # ###
+    /// #########
+    ///  0123456    <- index
+    ///
+    /// The first drop of water lands at index K = 3:
+    /// 
+    /// #       #
+    /// #   w   #
+    /// ##  # ###
+    /// #########
+    ///  0123456    
+    /// 
+    /// When moving left or right, the water can only move to the same level or a 
+    /// lower level.
+    /// (By level, we mean the total height of the terrain plus any water in that 
+    /// column.)
+    /// Since moving left will eventually make it fall, it moves left.
+    /// (A droplet "made to fall" means go to a lower height than it was at 
+    /// previously.)
+    ///
+    /// #       #
+    /// #       #
+    /// ## w# ###
+    /// #########
+    ///  0123456    
+    ///
+    /// Since moving left will not make it fall, it stays in place.  The next 
+    /// droplet falls:
+    ///
+    /// #       #
+    /// #   w   #
+    /// ## w# ###
+    /// #########
+    ///  0123456  
+    ///
+    /// Since the new droplet moving left will eventually make it fall, it moves 
+    /// left.
+    /// Notice that the droplet still preferred to move left,
+    /// even though it could move right (and moving right makes it fall quicker.)
+    /// 
+    /// #       #
+    /// #  w    #
+    /// ## w# ###
+    /// #########
+    /// 0123456  
+    ///
+    /// #       #
+    /// #       #
+    /// ##ww# ###
+    /// #########
+    ///  0123456  
+    ///
+    /// After those steps, the third droplet falls.
+    /// Since moving left would not eventually make it fall, it tries to move 
+    /// right.
+    /// Since moving right would eventually make it fall, it moves right.
+    ///
+    /// #       #
+    /// #   w   #
+    /// ##ww# ###
+    /// #########
+    ///  0123456  
+    /// 
+    /// #       #
+    /// #       #
+    /// ##ww#w###
+    /// #########
+    ///  0123456  
+    /// 
+    /// Finally, the fourth droplet falls.
+    /// Since moving left would not eventually make it fall, it tries to move 
+    /// right.
+    /// Since moving right would not eventually make it fall, it stays in place:
+    /// 
+    /// #       #
+    /// #   w   #
+    /// ##ww#w###
+    /// #########
+    ///  0123456  
+    ///
+    /// The final answer is [2,2,2,3,2,2,2]:
+    ///
+    ///    #    
+    /// ####### 
+    /// ####### 
+    ///  0123456 
+    /// Example 2:
+    /// Input: heights = [1,2,3,4], V = 2, K = 2
+    /// Output: [2,3,3,4]
+    /// Explanation:
+    /// The last droplet settles at index 1, since moving further left would not 
+    /// cause it to eventually fall to a lower height.
+    /// Example 3:
+    /// Input: heights = [3,1,3], V = 5, K = 1
+    /// Output: [4,4,4]
+    /// Note:
+    ///
+    /// heights will have length in [1, 100] and contain integers in [0, 99].
+    /// 1. V will be in range [0, 2000].
+    /// 2. K will be in range [0, heights.length - 1].
+    /// </summary>
+    vector<int> pourWater(vector<int>& heights, int V, int K);
 
-	/// <summary>
-	/// Leet code #830. Positions of Large Groups
-	/// 
-	/// In a string S of lowercase letters, these letters form consecutive 
-	/// groups of the same character.
-	///
-	/// For example, a string like S = "abbxxxxzyy" has the groups "a", "bb", 
-	/// "xxxx", "z" and "yy".
-	///
-	/// Call a group large if it has 3 or more characters.  We would like the 
-	/// starting and ending positions of every large group.
-	/// 
-	/// The final answer should be in lexicographic order.
-	///
-	/// Example 1:
-	///
-	/// Input: "abbxxxxzzy"
-	/// Output: [[3,6]]
-	/// Explanation: "xxxx" is the single large group with starting  3 and 
-	/// ending positions 6.
-	///
-	/// Example 2:
-	///
-	/// Input: "abc"
-	/// Output: []
-	/// Explanation: We have "a","b" and "c" but no large group.
-	///
-	/// Example 3:
-	///
-	/// Input: "abcdddeeeeaabbbcd"
-	/// Output: [[3,5],[6,9],[12,14]]
-	///
-	/// Note:  1. 1 <= S.length <= 1000
-	/// </summary>
-	vector<vector<int>> largeGroupPositions(string S);
+    /// <summary>
+    /// Leet code #830. Positions of Large Groups
+    /// 
+    /// In a string S of lowercase letters, these letters form consecutive 
+    /// groups of the same character.
+    ///
+    /// For example, a string like S = "abbxxxxzyy" has the groups "a", "bb", 
+    /// "xxxx", "z" and "yy".
+    ///
+    /// Call a group large if it has 3 or more characters.  We would like the 
+    /// starting and ending positions of every large group.
+    /// 
+    /// The final answer should be in lexicographic order.
+    ///
+    /// Example 1:
+    ///
+    /// Input: "abbxxxxzzy"
+    /// Output: [[3,6]]
+    /// Explanation: "xxxx" is the single large group with starting  3 and 
+    /// ending positions 6.
+    ///
+    /// Example 2:
+    ///
+    /// Input: "abc"
+    /// Output: []
+    /// Explanation: We have "a","b" and "c" but no large group.
+    ///
+    /// Example 3:
+    ///
+    /// Input: "abcdddeeeeaabbbcd"
+    /// Output: [[3,5],[6,9],[12,14]]
+    ///
+    /// Note:  1. 1 <= S.length <= 1000
+    /// </summary>
+    vector<vector<int>> largeGroupPositions(string S);
 
-	/// <summary>
-	/// Leet code #904. Fruit Into Baskets
-	/// 
-	/// In a row of trees, the i-th tree produces fruit with type tree[i].
-	///
-	/// You start at any tree of your choice, then repeatedly perform the 
-	/// following steps:
-	///
-	/// 1. Add one piece of fruit from this tree to your baskets.  If you cannot, 
-	/// stop.
-	/// 2. Move to the next tree to the right of the current tree.  If there is no 
-	/// tree to the right, stop.
-	/// Note that you do not have any choice after the initial choice of starting 
-	/// tree: you must perform step 1, then step 2, then back to step 1, then 
-	/// step 2, and so on until you stop.
-	///
-	/// You have two baskets, and each basket can carry any quantity of fruit, but 
-	/// you want each basket to only carry one type of fruit each.
-	///
-	/// What is the total amount of fruit you can collect with this procedure?
-	///
-	/// Example 1:
-	/// Input: [1,2,1]
-	/// Output: 3
-	/// Explanation: We can collect [1,2,1].
-	///
-	/// Example 2:
-	/// Input: [0,1,2,2]
-	/// Output: 3
-	/// Explanation: We can collect [1,2,2].
-	/// If we started at the first tree, we would only collect [0, 1].
-	///
-	/// Example 3:
-	/// Input: [1,2,3,2,2]
-	/// Output: 4
-	/// Explanation: We can collect [2,3,2,2].
-	/// If we started at the first tree, we would only collect [1, 2].
-	///
-	/// Example 4:
-	/// Input: [3,3,3,1,2,1,1,2,3,3,4]
-	/// Output: 5
-	/// Explanation: We can collect [1,2,1,1,2].
-	/// If we started at the first tree or the eighth tree, we would only collect 
-	/// 4 fruits.
-	/// 
-	/// Note:
-	///
-	/// 1. 1 <= tree.length <= 40000
-	/// 2. 0 <= tree[i] < tree.length
-	/// </summary>
-	int totalFruit(vector<int>& tree);
+    /// <summary>
+    /// Leet code #904. Fruit Into Baskets
+    /// 
+    /// In a row of trees, the i-th tree produces fruit with type tree[i].
+    ///
+    /// You start at any tree of your choice, then repeatedly perform the 
+    /// following steps:
+    ///
+    /// 1. Add one piece of fruit from this tree to your baskets.  If you cannot, 
+    /// stop.
+    /// 2. Move to the next tree to the right of the current tree.  If there is no 
+    /// tree to the right, stop.
+    /// Note that you do not have any choice after the initial choice of starting 
+    /// tree: you must perform step 1, then step 2, then back to step 1, then 
+    /// step 2, and so on until you stop.
+    ///
+    /// You have two baskets, and each basket can carry any quantity of fruit, but 
+    /// you want each basket to only carry one type of fruit each.
+    ///
+    /// What is the total amount of fruit you can collect with this procedure?
+    ///
+    /// Example 1:
+    /// Input: [1,2,1]
+    /// Output: 3
+    /// Explanation: We can collect [1,2,1].
+    ///
+    /// Example 2:
+    /// Input: [0,1,2,2]
+    /// Output: 3
+    /// Explanation: We can collect [1,2,2].
+    /// If we started at the first tree, we would only collect [0, 1].
+    ///
+    /// Example 3:
+    /// Input: [1,2,3,2,2]
+    /// Output: 4
+    /// Explanation: We can collect [2,3,2,2].
+    /// If we started at the first tree, we would only collect [1, 2].
+    ///
+    /// Example 4:
+    /// Input: [3,3,3,1,2,1,1,2,3,3,4]
+    /// Output: 5
+    /// Explanation: We can collect [1,2,1,1,2].
+    /// If we started at the first tree or the eighth tree, we would only collect 
+    /// 4 fruits.
+    /// 
+    /// Note:
+    ///
+    /// 1. 1 <= tree.length <= 40000
+    /// 2. 0 <= tree[i] < tree.length
+    /// </summary>
+    int totalFruit(vector<int>& tree);
 
-	/// <summary>
-	/// Leet code #917. Reverse Only Letters
-	/// 
-	/// Given a string S, return the "reversed" string where all characters that 
-	/// are not a letter stay in the same place, and all letters reverse their 
-	/// positions.
-	///
-	/// Example 1:
-	///
-	/// Input: "ab-cd"
-	/// Output: "dc-ba"g
-	///
-	/// Input: "a-bC-dEf-ghIj"
-	/// Output: "j-Ih-gfE-dCba"
-	///
-	/// Example 3:
-	/// Input: "Test1ng-Leet=code-Q!"
-	/// Output: "Qedo1ct-eeLg=ntse-T!"
-	///  
-	/// Note:
-	/// 
-	/// 1. S.length <= 100
-	/// 2. 33 <= S[i].ASCIIcode <= 122 
-	/// 3. S doesn't contain \ or "
-	/// </summary>
-	string reverseOnlyLetters(string S);
+    /// <summary>
+    /// Leet code #917. Reverse Only Letters
+    /// 
+    /// Given a string S, return the "reversed" string where all characters that 
+    /// are not a letter stay in the same place, and all letters reverse their 
+    /// positions.
+    ///
+    /// Example 1:
+    ///
+    /// Input: "ab-cd"
+    /// Output: "dc-ba"g
+    ///
+    /// Input: "a-bC-dEf-ghIj"
+    /// Output: "j-Ih-gfE-dCba"
+    ///
+    /// Example 3:
+    /// Input: "Test1ng-Leet=code-Q!"
+    /// Output: "Qedo1ct-eeLg=ntse-T!"
+    ///  
+    /// Note:
+    /// 
+    /// 1. S.length <= 100
+    /// 2. 33 <= S[i].ASCIIcode <= 122 
+    /// 3. S doesn't contain \ or "
+    /// </summary>
+    string reverseOnlyLetters(string S);
 
-	/// <summary>
-	/// Leet code #915. Partition Array into Disjoint Intervals
-	/// 
-	/// Given an array A, partition it into two (contiguous) subarrays left and 
-	/// right so that:
-	///
-	/// Every element in left is less than or equal to every element in right.
-	/// left and right are non-empty.
-	/// left has the smallest possible size.
-	/// Return the length of left after such a partitioning.  It is guaranteed 
-	/// that such a partitioning exists.
-	///
-	/// 
-	/// Example 1:
-	///
-	/// Input: [5,0,3,8,6]
-	/// Output: 3
-	/// Explanation: left = [5,0,3], right = [8,6]
-	///
-	/// Example 2:
-	///
-	/// Input: [1,1,1,0,6,12]
-	/// Output: 4
-	/// Explanation: left = [1,1,1,0], right = [6,12]
-	/// 
-	///
-	/// Note:
-	///
-	/// 2 <= A.length <= 30000
-	/// 0 <= A[i] <= 10^6
-	/// It is guaranteed there is at least one way to partition A as described.
-	/// </summary>
-	int partitionDisjoint(vector<int>& A);
+    /// <summary>
+    /// Leet code #915. Partition Array into Disjoint Intervals
+    /// 
+    /// Given an array A, partition it into two (contiguous) subarrays left and 
+    /// right so that:
+    ///
+    /// Every element in left is less than or equal to every element in right.
+    /// left and right are non-empty.
+    /// left has the smallest possible size.
+    /// Return the length of left after such a partitioning.  It is guaranteed 
+    /// that such a partitioning exists.
+    ///
+    /// 
+    /// Example 1:
+    ///
+    /// Input: [5,0,3,8,6]
+    /// Output: 3
+    /// Explanation: left = [5,0,3], right = [8,6]
+    ///
+    /// Example 2:
+    ///
+    /// Input: [1,1,1,0,6,12]
+    /// Output: 4
+    /// Explanation: left = [1,1,1,0], right = [6,12]
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 2 <= A.length <= 30000
+    /// 0 <= A[i] <= 10^6
+    /// It is guaranteed there is at least one way to partition A as described.
+    /// </summary>
+    int partitionDisjoint(vector<int>& A);
 
     /// <summary>
     /// Leet code #1100. Find K-Length Substrings With No Repeated Characters
@@ -5291,7 +5291,7 @@ public:
     /// <summary>
     /// Leet code #110. Balanced Binary Tree
     /// </summary>
-	bool isBalanced(TreeNode* root, int& depth);
+    bool isBalanced(TreeNode* root, int& depth);
   
     /// <summary>
     /// Leet code #110. Balanced Binary Tree
@@ -6065,7 +6065,7 @@ public:
     vector<int> findFrequentTreeSum(TreeNode* root);
 
     /// <summary>
-    /// Leet code #515. Find Largest Value in Each Tree Row         
+    /// Leet code #515. Find Largest Value in Each Tree Row   
     /// 
     /// You need to find the largest value in each row of a binary tree. 
     /// Example:
@@ -6083,7 +6083,7 @@ public:
     vector<int> largestValues(TreeNode* root);
 
     /// <summary>
-    /// Leet code #513. Find Bottom Left Tree Value         
+    /// Leet code #513. Find Bottom Left Tree Value
     /// 
     /// Given a binary tree, find the leftmost value in the last row of the tree. 
     /// Example 1:
@@ -7111,36 +7111,36 @@ public:
     /// </summary>
     int findClosestLeaf(TreeNode* root, int k);
 
-	/// <summary>
-	/// Leetcode #776. Split BST
-	///
-	/// Given a Binary Search Tree (BST) with root node root, and a target 
-	/// value V, split the tree into two subtrees where one subtree has 
-	/// nodes that are all smaller or equal to the target value, while the 
-	/// other subtree has all nodes that are greater than the target value.  
-	/// It's not necessarily the case that the tree contains a node with 
-	/// value V.
-	///
-	/// Additionally, most of the structure of the original tree should 
-	/// remain.  Formally, for any child C with parent P in the original 
-	/// tree, if they are both in the same subtree after the split, then 
-	/// node C should still have the parent P.
-	///
-	/// You should output the root TreeNode of both subtrees after splitting, 
-	/// in any order.
-	///
-	/// Example 1:
-	///
-	/// Input: root = [4,2,6,1,3,5,7], V = 2
-	/// Output: [[2,1],[4,3,6,null,null,5,7]]
-	/// Explanation:
-	/// Note that root, output[0], and output[1] are TreeNode objects, not 
-	/// arrays.
-	/// 
-	/// The given tree [4,2,6,1,3,5,7] is represented by the following diagram:
-	///
-	///      4
-	///    /    \
+    /// <summary>
+    /// Leetcode #776. Split BST
+    ///
+    /// Given a Binary Search Tree (BST) with root node root, and a target 
+    /// value V, split the tree into two subtrees where one subtree has 
+    /// nodes that are all smaller or equal to the target value, while the 
+    /// other subtree has all nodes that are greater than the target value.  
+    /// It's not necessarily the case that the tree contains a node with 
+    /// value V.
+    ///
+    /// Additionally, most of the structure of the original tree should 
+    /// remain.  Formally, for any child C with parent P in the original 
+    /// tree, if they are both in the same subtree after the split, then 
+    /// node C should still have the parent P.
+    ///
+    /// You should output the root TreeNode of both subtrees after splitting, 
+    /// in any order.
+    ///
+    /// Example 1:
+    ///
+    /// Input: root = [4,2,6,1,3,5,7], V = 2
+    /// Output: [[2,1],[4,3,6,null,null,5,7]]
+    /// Explanation:
+    /// Note that root, output[0], and output[1] are TreeNode objects, not 
+    /// arrays.
+    /// 
+    /// The given tree [4,2,6,1,3,5,7] is represented by the following diagram:
+    ///
+    ///      4
+    ///    /    \
     ///   2      6
     ///  / \    / \
     /// 1   3  5   7
@@ -7156,32 +7156,32 @@ public:
     /// 1. The size of the BST will not exceed 50.
     /// 2. The BST is always valid and each node's value is different.
     /// </summary>
-	vector<TreeNode*> splitBST(TreeNode* root, int V);
+    vector<TreeNode*> splitBST(TreeNode* root, int V);
 
-	/// <summary>
-	/// Leetcode #783. Minimum Distance Between BST Nodes
+    /// <summary>
+    /// Leetcode #783. Minimum Distance Between BST Nodes
     /// </summary>
-	void minDiffInBST(TreeNode* node, TreeNode* &prev_node, int &min_diff);
+    void minDiffInBST(TreeNode* node, TreeNode* &prev_node, int &min_diff);
 
-	/// <summary>
-	/// Leetcode #783. Minimum Distance Between BST Nodes
-	///
-	/// Given a Binary Search Tree (BST) with the root node root, return the 
-	/// minimum difference between the values of any two different nodes in 
-	/// the tree.
-	/// 
-	/// Example :
-	///
-	/// Input: root = [4,2,6,1,3,null,null]
-	/// Output: 1
-	/// Explanation:
-	/// Note that root is a TreeNode object, not an array.
-	///
-	/// The given tree [4,2,6,1,3,null,null] is represented by the following 
-	/// diagram:
-	///         4
-	///        /  \
-	///       2    6
+    /// <summary>
+    /// Leetcode #783. Minimum Distance Between BST Nodes
+    ///
+    /// Given a Binary Search Tree (BST) with the root node root, return the 
+    /// minimum difference between the values of any two different nodes in 
+    /// the tree.
+    /// 
+    /// Example :
+    ///
+    /// Input: root = [4,2,6,1,3,null,null]
+    /// Output: 1
+    /// Explanation:
+    /// Note that root is a TreeNode object, not an array.
+    ///
+    /// The given tree [4,2,6,1,3,null,null] is represented by the following 
+    /// diagram:
+    ///         4
+    ///        /  \
+    ///       2    6
     ///      / \    
     ///     1   3  
     /// while the minimum difference in this tree is 1, it occurs between 
@@ -7192,28 +7192,28 @@ public:
     /// 2. The BST is always valid, each node's value is an integer, and each 
     ///    node's value is different.
     /// </summary>
-	int minDiffInBST(TreeNode* root);
+    int minDiffInBST(TreeNode* root);
 
-	/// <summary>
-	/// Leet code #814. Binary Tree Pruning
-	/// 
-	/// We are given the head node root of a binary tree, where additionally 
-	/// every node's value is either a 0 or a 1. 
-	/// 
-	/// Return the same tree where every subtree (of the given tree) not 
-	/// containing a 1 has been removed.
-	///
-	/// (Recall that the subtree of a node X is X, plus every node that is a 
-	/// descendant of X.)
-	/// 
-	/// Example 1:
-	/// Input: [1,null,0,0,1]
-	/// Output: [1,null,0,null,1]
-	///  1               1
-	///   \               \ 
-	///    0      =>       0
-	///   / \               \
-	///  0   1               1
+    /// <summary>
+    /// Leet code #814. Binary Tree Pruning
+    /// 
+    /// We are given the head node root of a binary tree, where additionally 
+    /// every node's value is either a 0 or a 1. 
+    /// 
+    /// Return the same tree where every subtree (of the given tree) not 
+    /// containing a 1 has been removed.
+    ///
+    /// (Recall that the subtree of a node X is X, plus every node that is a 
+    /// descendant of X.)
+    /// 
+    /// Example 1:
+    /// Input: [1,null,0,0,1]
+    /// Output: [1,null,0,null,1]
+    ///  1               1
+    ///   \               \ 
+    ///    0      =>       0
+    ///   / \               \
+    ///  0   1               1
     /// Explanation: 
     /// Only the red nodes satisfy the property "every subtree not containing 
     /// a 1".
@@ -7226,7 +7226,7 @@ public:
     ///    /   \              \ 
     ///   0     1      =>      1
     ///  / \   / \              \
-	/// 0   0 0   1              1
+    /// 0   0 0   1              1
     /// 
     /// Example 3:
     /// Input: [1,1,0,1,1,0,1,0]
@@ -7244,125 +7244,125 @@ public:
     /// 1. The binary tree will have at most 100 nodes.
     /// 2. The value of each node will only be 0 or 1.
     /// </summary>
-	TreeNode* pruneTree(TreeNode* root);
+    TreeNode* pruneTree(TreeNode* root);
 
-	/// <summary>
-	/// Leet code #863. All Nodes Distance K in Binary Tree
-	/// </summary>
-	int distanceK(TreeNode* root, TreeNode* target, int K, int distance, vector<int>& result);
+    /// <summary>
+    /// Leet code #863. All Nodes Distance K in Binary Tree
+    /// </summary>
+    int distanceK(TreeNode* root, TreeNode* target, int K, int distance, vector<int>& result);
 
-	/// <summary>
-	/// Leet code #863. All Nodes Distance K in Binary Tree
-	/// 
-	/// We are given a binary tree (with root node root), a target node, and an 
-	/// integer value `K`.
-	///
-	/// Return a list of the values of all nodes that have a distance K from the 
-	/// target node.  The answer can be returned in any order.
-	///
-	/// 
-	///
-	/// Example 1:
-	/// Input: root = [3,5,1,6,2,0,8,null,null,7,4], target = 5, K = 2
-	/// Output: [7,4,1]
-	/// Explanation: 
-	/// The nodes that are a distance 2 from the target node (with value 5)
-	/// have values 7, 4, and 1.
-	///
-	/// Note that the inputs "root" and "target" are actually TreeNodes.
-	/// The descriptions of the inputs above are just serializations of these objects.
-	///
-	/// Note:
-	///
-	/// 1. The given tree is non-empty.
-	/// 2. Each node in the tree has unique values 0 <= node.val <= 500.
-	/// 3. The target node is a node in the tree.
-	/// 4. 0 <= K <= 1000.
-	/// </summary>
-	vector<int> distanceK(TreeNode* root, TreeNode* target, int K);
+    /// <summary>
+    /// Leet code #863. All Nodes Distance K in Binary Tree
+    /// 
+    /// We are given a binary tree (with root node root), a target node, and an 
+    /// integer value `K`.
+    ///
+    /// Return a list of the values of all nodes that have a distance K from the 
+    /// target node.  The answer can be returned in any order.
+    ///
+    /// 
+    ///
+    /// Example 1:
+    /// Input: root = [3,5,1,6,2,0,8,null,null,7,4], target = 5, K = 2
+    /// Output: [7,4,1]
+    /// Explanation: 
+    /// The nodes that are a distance 2 from the target node (with value 5)
+    /// have values 7, 4, and 1.
+    ///
+    /// Note that the inputs "root" and "target" are actually TreeNodes.
+    /// The descriptions of the inputs above are just serializations of these objects.
+    ///
+    /// Note:
+    ///
+    /// 1. The given tree is non-empty.
+    /// 2. Each node in the tree has unique values 0 <= node.val <= 500.
+    /// 3. The target node is a node in the tree.
+    /// 4. 0 <= K <= 1000.
+    /// </summary>
+    vector<int> distanceK(TreeNode* root, TreeNode* target, int K);
 
-	/// <summary>
-	/// Leet code #865. Smallest Subtree with all the Deepest Nodes
-	/// </summary>
-	pair<TreeNode*, int> subtreeWithAllDeepest(TreeNode* root, int depth);
+    /// <summary>
+    /// Leet code #865. Smallest Subtree with all the Deepest Nodes
+    /// </summary>
+    pair<TreeNode*, int> subtreeWithAllDeepest(TreeNode* root, int depth);
 
-	/// <summary>
-	/// Leet code #865. Smallest Subtree with all the Deepest Nodes
-	/// 
-	/// Given a binary tree rooted at root, the depth of each node is the 
-	/// shortest distance to the root.
-	///
-	/// A node is deepest if it has the largest depth possible among any node 
-	/// in the entire tree. 
-	/// 
-	/// The subtree of a node is that node, plus the set of all descendants of 
-	/// that node.
-	///
-	/// Return the node with the largest depth such that it contains all the 
-	/// deepest nodes in it's subtree.
-	///
-	/// 
-	///
-	/// Example 1:
-	///
-	/// Input: [3,5,1,6,2,0,8,null,null,7,4]
-	/// Output: [2,7,4]
-	///
-	/// Explanation:
-	/// 
-	/// We return the node with value 2, colored in yellow in the diagram.
-	/// The nodes colored in blue are the deepest nodes of the tree.
-	/// The input "[3, 5, 1, 6, 2, 0, 8, null, null, 7, 4]" is a serialization 
-	/// of the given tree.
-	/// The output "[2, 7, 4]" is a serialization of the subtree rooted at the 
-	/// node with value 2.
-	/// Both the input and output have TreeNode type.
-	/// 
-	/// Note:
-	/// 1. The number of nodes in the tree will be between 1 and 500.
-	/// 2. The values of each node are unique.
-	/// </summary>
-	TreeNode* subtreeWithAllDeepest(TreeNode* root);
+    /// <summary>
+    /// Leet code #865. Smallest Subtree with all the Deepest Nodes
+    /// 
+    /// Given a binary tree rooted at root, the depth of each node is the 
+    /// shortest distance to the root.
+    ///
+    /// A node is deepest if it has the largest depth possible among any node 
+    /// in the entire tree. 
+    /// 
+    /// The subtree of a node is that node, plus the set of all descendants of 
+    /// that node.
+    ///
+    /// Return the node with the largest depth such that it contains all the 
+    /// deepest nodes in it's subtree.
+    ///
+    /// 
+    ///
+    /// Example 1:
+    ///
+    /// Input: [3,5,1,6,2,0,8,null,null,7,4]
+    /// Output: [2,7,4]
+    ///
+    /// Explanation:
+    /// 
+    /// We return the node with value 2, colored in yellow in the diagram.
+    /// The nodes colored in blue are the deepest nodes of the tree.
+    /// The input "[3, 5, 1, 6, 2, 0, 8, null, null, 7, 4]" is a serialization 
+    /// of the given tree.
+    /// The output "[2, 7, 4]" is a serialization of the subtree rooted at the 
+    /// node with value 2.
+    /// Both the input and output have TreeNode type.
+    /// 
+    /// Note:
+    /// 1. The number of nodes in the tree will be between 1 and 500.
+    /// 2. The values of each node are unique.
+    /// </summary>
+    TreeNode* subtreeWithAllDeepest(TreeNode* root);
 
-	/// <summary>
-	/// Leet code #872. Leaf-Similar Trees
-	/// </summary>
-	void getLeaves(TreeNode* root1, vector<int> &leaves);		
+    /// <summary>
+    /// Leet code #872. Leaf-Similar Trees
+    /// </summary>
+    void getLeaves(TreeNode* root1, vector<int> &leaves);		
 
-	/// <summary>
-	/// Leet code #872. Leaf-Similar Trees
-	/// 
-	/// Consider all the leaves of a binary tree.  From left to right order, 
-	/// the values of those leaves form a leaf value sequence.
-	///
-	/// For example, in the given tree above, the leaf value sequence is 
-	/// (6, 7, 4, 9, 8).
-	///
-	/// Two binary trees are considered leaf-similar if their leaf value 
-	/// sequence is the same.
-	///
-	/// Return true if and only if the two given trees with head nodes root1 
-	/// and root2 are leaf-similar.
-	///
-	/// Note:
-	/// 1. Both of the given trees will have between 1 and 100 nodes.
-	/// </summary>
-	bool leafSimilar(TreeNode* root1, TreeNode* root2);
+    /// <summary>
+    /// Leet code #872. Leaf-Similar Trees
+    /// 
+    /// Consider all the leaves of a binary tree.  From left to right order, 
+    /// the values of those leaves form a leaf value sequence.
+    ///
+    /// For example, in the given tree above, the leaf value sequence is 
+    /// (6, 7, 4, 9, 8).
+    ///
+    /// Two binary trees are considered leaf-similar if their leaf value 
+    /// sequence is the same.
+    ///
+    /// Return true if and only if the two given trees with head nodes root1 
+    /// and root2 are leaf-similar.
+    ///
+    /// Note:
+    /// 1. Both of the given trees will have between 1 and 100 nodes.
+    /// </summary>
+    bool leafSimilar(TreeNode* root1, TreeNode* root2);
 
-	/// <summary>
-	/// Leet code #700. Search in a Binary Search Tree
-	/// 
-	/// Given the root node of a binary search tree (BST) and a value. You 
-	/// need to find the node in the BST that the node's value equals the 
-	/// given value. Return the subtree rooted with that node. If such node 
-	/// doesn't exist, you should return NULL.
-	///
-	/// For example, 
-	///
-	/// Given the tree:
-	///        4
-	///       / \
-	///      2   7
+    /// <summary>
+    /// Leet code #700. Search in a Binary Search Tree
+    /// 
+    /// Given the root node of a binary search tree (BST) and a value. You 
+    /// need to find the node in the BST that the node's value equals the 
+    /// given value. Return the subtree rooted with that node. If such node 
+    /// doesn't exist, you should return NULL.
+    ///
+    /// For example, 
+    ///
+    /// Given the tree:
+    ///        4
+    ///       / \
+    ///      2   7
     ///     / \
     ///    1   3
     ///
@@ -7378,25 +7378,25 @@ public:
     /// Note that an empty tree is represented by NULL, therefore you would 
     /// see the expected output (serialized tree format) as [], not null.
     /// </summary>
-	TreeNode* searchBST(TreeNode* root, int val);
+    TreeNode* searchBST(TreeNode* root, int val);
 
-	/// <summary>
-	/// Leet code #701. Insert into a Binary Search Tree
-	/// 
-	/// Given the root node of a binary search tree (BST) and a value to be 
-	/// inserted into the tree, insert the value into the BST. Return the 
-	/// root node of the BST after the insertion. It is guaranteed that the 
-	/// new value does not exist in the original BST.
-	///
-	/// Note that there may exist multiple valid ways for the insertion, as 
-	/// long as the tree remains a BST after insertion. You can return any of 
-	/// them.
-	///
-	/// For example, 
-	///
-	/// Given the tree:
-	///        4
-	///       / \
+    /// <summary>
+    /// Leet code #701. Insert into a Binary Search Tree
+    /// 
+    /// Given the root node of a binary search tree (BST) and a value to be 
+    /// inserted into the tree, insert the value into the BST. Return the 
+    /// root node of the BST after the insertion. It is guaranteed that the 
+    /// new value does not exist in the original BST.
+    ///
+    /// Note that there may exist multiple valid ways for the insertion, as 
+    /// long as the tree remains a BST after insertion. You can return any of 
+    /// them.
+    ///
+    /// For example, 
+    ///
+    /// Given the tree:
+    ///        4
+    ///       / \
     ///      2   7
     ///     / \
     ///    1   3
@@ -7418,342 +7418,342 @@ public:
     ///         \
     ///          4
     /// </summary>
-	TreeNode* insertIntoBST(TreeNode* root, int val);
+    TreeNode* insertIntoBST(TreeNode* root, int val);
 
-	/// <summary>
-	/// Leet code #559. Maximum Depth of N-ary Tree
-	/// 
-	/// Given a n-ary tree, find its maximum depth.
-	///
-	/// The maximum depth is the number of nodes along the longest path from 
-	/// the root node down to the farthest leaf node.
-	///
-	/// For example, given a 3-ary tree:
-	///  
-	/// We should return its max depth, which is 3.
-	/// 
-	/// Note:
-	/// 
-	/// The depth of the tree is at most 1000.
-	/// The total number of nodes is at most 5000.
-	/// </summary>
-	int maxDepth(Node* root);
-
-	/// <summary>
-	/// Leet code #589. N-ary Tree Preorder Traversal
-	/// 
-	/// Given an n-ary tree, return the preorder traversal of its 
-	/// nodes' values.
-	///
-	/// For example, given a 3-ary tree:
-	///   
-	/// Return its preorder traversal as: [1,3,5,6,2,4].
-	///
-	/// Note: Recursive solution is trivial, could you do it iteratively?
-	/// </summary>
-	vector<int> preorder(Node* root);
-
-	/// <summary>
-	/// Leet code #429. N-ary Tree Level Order Traversal
-	/// 
-	/// Given an n-ary tree, return the level order traversal of its 
-	/// nodes' values. (ie, from left to right, level by level).
-	///
-	/// For example, given a 3-ary tree:
-	/// We should return its level order traversal:
-	/// [
-	///   [1],
-	///   [3,2,4],
-	///   [5,6]
-	/// ]
-	/// Note:
-	/// The depth of the tree is at most 1000.
-	/// The total number of nodes is at most 5000.
-	/// </summary>
-	vector<vector<int>> levelOrder(Node* root);
-
-	/// <summary>
-	/// Leet code #590. N-ary Tree Postorder Traversal
-	/// 
-	/// Given an n-ary tree, return the postorder traversal of its 
-	/// nodes' values.
-	/// 
-	/// For example, given a 3-ary tree:
-	/// 
-	/// Return its postorder traversal as: [5,6,3,2,4,1].
-	///
-	/// Note: Recursive solution is trivial, could you do it iteratively?
-	/// </summary>
-	vector<int> postorder(Node* root);
-
-	/// <summary>
-	/// Leet code #426. Convert Binary Search Tree to Sorted Doubly Linked List
-	/// </summary>
-	void treeToDoublyList(TreeNode* root, TreeNode*& head, TreeNode *&tail);
-
-	/// <summary>
-	/// Leet code #426. Convert Binary Search Tree to Sorted Doubly Linked List
-	/// 
-	/// Convert a BST to a sorted circular doubly-linked list in-place. Think of 
-	/// the left and right pointers as synonymous to the previous and next 
-	/// pointers in a doubly-linked list.
-	///
-	/// Let's take the following BST as an example, it may help you understand 
-	/// the problem better:
-	///
-	/// We want to transform this BST into a circular doubly linked list. Each 
-	/// node in a doubly linked list has a predecessor and successor. For a 
-	/// circular doubly linked list, the predecessor of the first element is the 
-	/// last element, and the successor of the last element is the first element.
-	///
-	/// The figure below shows the circular doubly linked list for the BST above. 
-	/// The "head" symbol means the node it points to is the smallest element of 
-	/// the linked list.
-	///
-	/// Specifically, we want to do the transformation in place. After the 
-	/// transformation, the left pointer of the tree node should point to its 
-	/// predecessor, and the right pointer should point to its successor. We 
-	/// should return the pointer to the first element of the linked list.
-	///
-	/// The figure below shows the transformed BST. The solid line indicates the 
-	/// successor relationship, while the dashed line means the predecessor 
-	/// relationship.
-	/// </summary>
-	TreeNode* treeToDoublyList(TreeNode* root);
-
-	/// <summary>
-	/// Leet code #430. Flatten a Multilevel Doubly Linked List
-	/// 
-	/// You are given a doubly linked list which in addition to the next and 
-	/// previous pointers, it could have a child pointer, which may or may 
-	/// not point to a separate doubly linked list. These child lists may 
-	/// have one or more children of their own, and so on, to produce a 
-	/// multilevel data structure, as shown in the example below.
-	///
-	/// Flatten the list so that all the nodes appear in a single-level, 
-	/// doubly linked list. You are given the head of the first level of the list.
-	///
-	/// Example:
-	///
-	/// Input:
-	/// 1---2---3---4---5---6--NULL
-	///         |
-	///         7---8---9---10--NULL
-	///             |
-	///             11--12--NULL
-	///
-	/// Output:
-	/// 1-2-3-7-8-11-12-9-10-4-5-6-NULL
-	/// </summary>
-	DoublyLinkedNode* flatten(DoublyLinkedNode * head);
-
-	/// <summary>
-	/// Leet code #427. Construct Quad Tree
-	/// </summary>
-	bool isQuadTreeLeaf(vector<vector<int>>& grid, int up, int left, int down, int right);
-
-	/// <summary>
-	/// Leet code #427. Construct Quad Tree
-	/// </summary>
-	QuadNode* constructQuadTree(vector<vector<int>>& grid, int up, int left, int down, int right);
-
-	/// <summary>
-	/// Leet code #427. Construct Quad Tree
-	/// 
-	/// We want to use quad trees to store an N x N boolean grid. Each cell in the 
-	/// grid can only be true or false. The root node represents the whole grid. 
-	/// For each node, it will be subdivided into four children nodes until the 
-	/// values in the region it represents are all the same.
-	///
-	/// Each node has another two boolean attributes : isLeaf and val. isLeaf is 
-	/// true if and only if the node is a leaf node. The val attribute for a leaf 
-	/// node contains the value of the region it represents.
-	///
-	/// Your task is to use a quad tree to represent a given grid. The following 
-	/// example may help you understand the problem better:
-	///
-	/// Given the 8 x 8 grid below, we want to construct the corresponding quad 
-	/// tree:
-	///
-	///
-	/// It can be divided according to the definition above:
-	/// The corresponding quad tree should be as following, where each node is 
-	/// represented as a (isLeaf, val) pair.
-	///
-	/// For the non-leaf nodes, val can be arbitrary, so it is represented as *.
-	///
-	/// Note:
-	///
-	/// N is less than 1000 and guaranteened to be a power of 2.
-	/// </summary>
-	QuadNode* constructQuadTree(vector<vector<int>>& grid);
-
-	/// <summary>
-	/// Leet code #558. Quad Tree Intersection
-	/// </summary>
-	QuadNode* collapse(QuadNode* quadTree);
-
-	/// <summary>
-	/// Leet code #558. Quad Tree Intersection
-	/// </summary>
-	QuadNode* clone(QuadNode* quadTree);
-
-	/// <summary>
-	/// Leet code #558. Quad Tree Intersection
-	/// 
-	/// A quadtree is a tree data in which each internal node has exactly four 
-	/// children: topLeft, topRight, bottomLeft and bottomRight. Quad trees are 
-	/// often used to partition a two-dimensional space by recursively subdividing 
-	/// it into four quadrants or regions.
-	///
-	/// We want to store True/False information in our quad tree. The quad tree is 
-	/// used to represent a N * N boolean grid. For each node, it will be 
-	/// subdivided into four children nodes until the values in the region it 
-	/// represents are all the same. Each node has another two boolean 
-	/// attributes : isLeaf and val. isLeaf is true if and only if the node is a 
-	/// leaf node. The val attribute for a leaf node contains the value of the 
-	/// region it represents.
-	///
-	/// For example, below are two quad trees A and B:
-	///
-	/// A:
-	/// +-------+-------+   T: true
-	/// |       |       |   F: false
-	/// |   T   |   T   |
-	/// |       |       |
-	/// +-------+-------+
-	/// |       |       |
-	/// |   F   |   F   |
-	/// |       |       |
-	/// +-------+-------+
-	/// topLeft: T
-	/// topRight: T
-	/// bottomLeft: F
-	/// bottomRight: F
-	///
-	/// B:               
-	/// +-------+---+---+
-	/// |       | F | F |
-	/// |   T   +---+---+
-	/// |       | T | T |
-	/// +-------+---+---+
-	/// |       |       |
-	/// |   T   |   F   |
-	/// |       |       |
-	/// +-------+-------+
-	/// topLeft: T
-	/// topRight:
-	///     topLeft: F
-	///     topRight: F
-	///     bottomLeft: T
-	///     bottomRight: T
-	/// bottomLeft: T
-	/// bottomRight: F
-	/// 
-	/// Your task is to implement a function that will take two quadtrees and 
-	/// return a quadtree that represents the logical OR (or union) of the two 
-	/// trees.
-	///
-	/// A:                 B:                 C (A or B):
-	/// +-------+-------+  +-------+---+---+  +-------+-------+
-	/// |       |       |  |       | F | F |  |       |       |
-	/// |   T   |   T   |  |   T   +---+---+  |   T   |   T   |
-	/// |       |       |  |       | T | T |  |       |       |
-	/// +-------+-------+  +-------+---+---+  +-------+-------+
-	/// |       |       |  |       |       |  |       |       |
-	/// |   F   |   F   |  |   T   |   F   |  |   T   |   F   |
-	/// |       |       |  |       |       |  |       |       |
-	/// +-------+-------+  +-------+-------+  +-------+-------+
-	/// Note:
-	/// 
-	/// Both A and B represent grids of size N * N.
-	/// N is guaranteed to be a power of 2.
-	/// If you want to know more about the quad tree, you can refer to its wiki.
-	/// The logic OR operation is defined as this: "A or B" is true if A is true, 
-	/// or if B is true, or if both A and B are true.
-	/// </summary>
-	QuadNode* intersect(QuadNode* quadTree1, QuadNode* quadTree2);
-
-	/// <summary>
-	/// Leet code #889. Construct Binary Tree from Preorder and Postorder Traversal
-	/// </summary>
-	TreeNode* constructFromPrePost(
-		vector<int>::iterator pre_begin, 
-		vector<int>::iterator pre_end,                           
-		vector<int>::iterator post_begin, 
-		vector<int>::iterator post_end);
-
-	/// <summary>
-	/// Leet code #889. Construct Binary Tree from Preorder and Postorder Traversal
-	/// 
-	/// Return any binary tree that matches the given preorder and postorder 
-	/// traversals.
-	///
-	/// Values in the traversals pre and post are distinct positive integers.
-	///
-	/// Example 1:
-	/// Input: pre = [1,2,4,5,3,6,7], post = [4,5,2,6,7,3,1]
-	/// Output: [1,2,3,4,5,6,7]
-	/// 
-	/// Note:
-	/// 1 <= pre.length == post.length <= 30
-	/// pre[] and post[] are both permutations of 1, 2, ..., pre.length.
-	/// It is guaranteed an answer exists. If there exists multiple answers, 
-	/// you can return any of them.
-	/// </summary>
-	TreeNode* constructFromPrePost(vector<int>& pre, vector<int>& post);
-
-	/// <summary>
-	/// Leet code #894. All Possible Full Binary Trees
-	/// </summary>
-	TreeNode* clone(TreeNode *);
-
-	/// <summary>
-	/// Leet code #894. All Possible Full Binary Trees
-	/// 
-	/// A full binary tree is a binary tree where each node has exactly 0 or 2 
-	/// children.
-	///
-	/// Return a list of all possible full binary trees with N nodes.  Each 
-	/// element of the answer is the root node of one possible tree.
-	///
-	/// Each node of each tree in the answer must have node.val = 0.
-	///
-	/// You may return the final list of trees in any order.
-	///
-	/// Example 1:
-	///
-	/// Input: 7
-	/// Output: 
-	/// [
-	///  [0,0,0,null,null,0,0,null,null,0,0],[0,0,0,null,null,0,0,0,0],
-	///  [0,0,0,0,0,0,0],[0,0,0,0,0,null,null,null,null,0,0],[0,0,0,0,0,null,null,0,0]
-	/// ]
-	/// Explanation:
-	/// 
-	/// Note:
-	/// 1 <= N <= 20
-	/// </summary>
-	vector<TreeNode*> allPossibleFBT(int N);
-
-	/// <summary>
-	/// Leet code #897. Increasing Order Search Tree 
+    /// <summary>
+    /// Leet code #559. Maximum Depth of N-ary Tree
+    /// 
+    /// Given a n-ary tree, find its maximum depth.
+    ///
+    /// The maximum depth is the number of nodes along the longest path from 
+    /// the root node down to the farthest leaf node.
+    ///
+    /// For example, given a 3-ary tree:
+    ///  
+    /// We should return its max depth, which is 3.
+    /// 
+    /// Note:
+    /// 
+    /// The depth of the tree is at most 1000.
+    /// The total number of nodes is at most 5000.
     /// </summary>
-	void increasingBST(TreeNode *& new_root, TreeNode *&new_child, TreeNode* root);
+    int maxDepth(Node* root);
 
-	/// <summary>
-	/// Leet code #897. Increasing Order Search Tree 
-	/// 
-	/// Given a tree, rearrange the tree in in-order so that the leftmost node in 
-	/// the tree is now the root of the tree, and every node has no left child 
-	/// and only 1 right child.
-	///
-	/// Example 1:
-	/// Input: [5,3,6,2,4,null,8,1,null,null,null,7,9]
-	///
-	///       5
-	///      / \
-	///     3   6
+    /// <summary>
+    /// Leet code #589. N-ary Tree Preorder Traversal
+    /// 
+    /// Given an n-ary tree, return the preorder traversal of its 
+    /// nodes' values.
+    ///
+    /// For example, given a 3-ary tree:
+    ///   
+    /// Return its preorder traversal as: [1,3,5,6,2,4].
+    ///
+    /// Note: Recursive solution is trivial, could you do it iteratively?
+    /// </summary>
+    vector<int> preorder(Node* root);
+
+    /// <summary>
+    /// Leet code #429. N-ary Tree Level Order Traversal
+    /// 
+    /// Given an n-ary tree, return the level order traversal of its 
+    /// nodes' values. (ie, from left to right, level by level).
+    ///
+    /// For example, given a 3-ary tree:
+    /// We should return its level order traversal:
+    /// [
+    ///   [1],
+    ///   [3,2,4],
+    ///   [5,6]
+    /// ]
+    /// Note:
+    /// The depth of the tree is at most 1000.
+    /// The total number of nodes is at most 5000.
+    /// </summary>
+    vector<vector<int>> levelOrder(Node* root);
+
+    /// <summary>
+    /// Leet code #590. N-ary Tree Postorder Traversal
+    /// 
+    /// Given an n-ary tree, return the postorder traversal of its 
+    /// nodes' values.
+    /// 
+    /// For example, given a 3-ary tree:
+    /// 
+    /// Return its postorder traversal as: [5,6,3,2,4,1].
+    ///
+    /// Note: Recursive solution is trivial, could you do it iteratively?
+    /// </summary>
+    vector<int> postorder(Node* root);
+
+    /// <summary>
+    /// Leet code #426. Convert Binary Search Tree to Sorted Doubly Linked List
+    /// </summary>
+    void treeToDoublyList(TreeNode* root, TreeNode*& head, TreeNode *&tail);
+
+    /// <summary>
+    /// Leet code #426. Convert Binary Search Tree to Sorted Doubly Linked List
+    /// 
+    /// Convert a BST to a sorted circular doubly-linked list in-place. Think of 
+    /// the left and right pointers as synonymous to the previous and next 
+    /// pointers in a doubly-linked list.
+    ///
+    /// Let's take the following BST as an example, it may help you understand 
+    /// the problem better:
+    ///
+    /// We want to transform this BST into a circular doubly linked list. Each 
+    /// node in a doubly linked list has a predecessor and successor. For a 
+    /// circular doubly linked list, the predecessor of the first element is the 
+    /// last element, and the successor of the last element is the first element.
+    ///
+    /// The figure below shows the circular doubly linked list for the BST above. 
+    /// The "head" symbol means the node it points to is the smallest element of 
+    /// the linked list.
+    ///
+    /// Specifically, we want to do the transformation in place. After the 
+    /// transformation, the left pointer of the tree node should point to its 
+    /// predecessor, and the right pointer should point to its successor. We 
+    /// should return the pointer to the first element of the linked list.
+    ///
+    /// The figure below shows the transformed BST. The solid line indicates the 
+    /// successor relationship, while the dashed line means the predecessor 
+    /// relationship.
+    /// </summary>
+    TreeNode* treeToDoublyList(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #430. Flatten a Multilevel Doubly Linked List
+    /// 
+    /// You are given a doubly linked list which in addition to the next and 
+    /// previous pointers, it could have a child pointer, which may or may 
+    /// not point to a separate doubly linked list. These child lists may 
+    /// have one or more children of their own, and so on, to produce a 
+    /// multilevel data structure, as shown in the example below.
+    ///
+    /// Flatten the list so that all the nodes appear in a single-level, 
+    /// doubly linked list. You are given the head of the first level of the list.
+    ///
+    /// Example:
+    ///
+    /// Input:
+    /// 1---2---3---4---5---6--NULL
+    ///         |
+    ///         7---8---9---10--NULL
+    ///             |
+    ///             11--12--NULL
+    ///
+    /// Output:
+    /// 1-2-3-7-8-11-12-9-10-4-5-6-NULL
+    /// </summary>
+    DoublyLinkedNode* flatten(DoublyLinkedNode * head);
+
+    /// <summary>
+    /// Leet code #427. Construct Quad Tree
+    /// </summary>
+    bool isQuadTreeLeaf(vector<vector<int>>& grid, int up, int left, int down, int right);
+
+    /// <summary>
+    /// Leet code #427. Construct Quad Tree
+    /// </summary>
+    QuadNode* constructQuadTree(vector<vector<int>>& grid, int up, int left, int down, int right);
+
+    /// <summary>
+    /// Leet code #427. Construct Quad Tree
+    /// 
+    /// We want to use quad trees to store an N x N boolean grid. Each cell in the 
+    /// grid can only be true or false. The root node represents the whole grid. 
+    /// For each node, it will be subdivided into four children nodes until the 
+    /// values in the region it represents are all the same.
+    ///
+    /// Each node has another two boolean attributes : isLeaf and val. isLeaf is 
+    /// true if and only if the node is a leaf node. The val attribute for a leaf 
+    /// node contains the value of the region it represents.
+    ///
+    /// Your task is to use a quad tree to represent a given grid. The following 
+    /// example may help you understand the problem better:
+    ///
+    /// Given the 8 x 8 grid below, we want to construct the corresponding quad 
+    /// tree:
+    ///
+    ///
+    /// It can be divided according to the definition above:
+    /// The corresponding quad tree should be as following, where each node is 
+    /// represented as a (isLeaf, val) pair.
+    ///
+    /// For the non-leaf nodes, val can be arbitrary, so it is represented as *.
+    ///
+    /// Note:
+    ///
+    /// N is less than 1000 and guaranteened to be a power of 2.
+    /// </summary>
+    QuadNode* constructQuadTree(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet code #558. Quad Tree Intersection
+    /// </summary>
+    QuadNode* collapse(QuadNode* quadTree);
+
+    /// <summary>
+    /// Leet code #558. Quad Tree Intersection
+    /// </summary>
+    QuadNode* clone(QuadNode* quadTree);
+
+    /// <summary>
+    /// Leet code #558. Quad Tree Intersection
+    /// 
+    /// A quadtree is a tree data in which each internal node has exactly four 
+    /// children: topLeft, topRight, bottomLeft and bottomRight. Quad trees are 
+    /// often used to partition a two-dimensional space by recursively subdividing 
+    /// it into four quadrants or regions.
+    ///
+    /// We want to store True/False information in our quad tree. The quad tree is 
+    /// used to represent a N * N boolean grid. For each node, it will be 
+    /// subdivided into four children nodes until the values in the region it 
+    /// represents are all the same. Each node has another two boolean 
+    /// attributes : isLeaf and val. isLeaf is true if and only if the node is a 
+    /// leaf node. The val attribute for a leaf node contains the value of the 
+    /// region it represents.
+    ///
+    /// For example, below are two quad trees A and B:
+    ///
+    /// A:
+    /// +-------+-------+   T: true
+    /// |       |       |   F: false
+    /// |   T   |   T   |
+    /// |       |       |
+    /// +-------+-------+
+    /// |       |       |
+    /// |   F   |   F   |
+    /// |       |       |
+    /// +-------+-------+
+    /// topLeft: T
+    /// topRight: T
+    /// bottomLeft: F
+    /// bottomRight: F
+    ///
+    /// B:               
+    /// +-------+---+---+
+    /// |       | F | F |
+    /// |   T   +---+---+
+    /// |       | T | T |
+    /// +-------+---+---+
+    /// |       |       |
+    /// |   T   |   F   |
+    /// |       |       |
+    /// +-------+-------+
+    /// topLeft: T
+    /// topRight:
+    ///     topLeft: F
+    ///     topRight: F
+    ///     bottomLeft: T
+    ///     bottomRight: T
+    /// bottomLeft: T
+    /// bottomRight: F
+    /// 
+    /// Your task is to implement a function that will take two quadtrees and 
+    /// return a quadtree that represents the logical OR (or union) of the two 
+    /// trees.
+    ///
+    /// A:                 B:                 C (A or B):
+    /// +-------+-------+  +-------+---+---+  +-------+-------+
+    /// |       |       |  |       | F | F |  |       |       |
+    /// |   T   |   T   |  |   T   +---+---+  |   T   |   T   |
+    /// |       |       |  |       | T | T |  |       |       |
+    /// +-------+-------+  +-------+---+---+  +-------+-------+
+    /// |       |       |  |       |       |  |       |       |
+    /// |   F   |   F   |  |   T   |   F   |  |   T   |   F   |
+    /// |       |       |  |       |       |  |       |       |
+    /// +-------+-------+  +-------+-------+  +-------+-------+
+    /// Note:
+    /// 
+    /// Both A and B represent grids of size N * N.
+    /// N is guaranteed to be a power of 2.
+    /// If you want to know more about the quad tree, you can refer to its wiki.
+    /// The logic OR operation is defined as this: "A or B" is true if A is true, 
+    /// or if B is true, or if both A and B are true.
+    /// </summary>
+    QuadNode* intersect(QuadNode* quadTree1, QuadNode* quadTree2);
+
+    /// <summary>
+    /// Leet code #889. Construct Binary Tree from Preorder and Postorder Traversal
+    /// </summary>
+    TreeNode* constructFromPrePost(
+        vector<int>::iterator pre_begin, 
+        vector<int>::iterator pre_end,                           
+        vector<int>::iterator post_begin, 
+        vector<int>::iterator post_end);
+
+    /// <summary>
+    /// Leet code #889. Construct Binary Tree from Preorder and Postorder Traversal
+    /// 
+    /// Return any binary tree that matches the given preorder and postorder 
+    /// traversals.
+    ///
+    /// Values in the traversals pre and post are distinct positive integers.
+    ///
+    /// Example 1:
+    /// Input: pre = [1,2,4,5,3,6,7], post = [4,5,2,6,7,3,1]
+    /// Output: [1,2,3,4,5,6,7]
+    /// 
+    /// Note:
+    /// 1 <= pre.length == post.length <= 30
+    /// pre[] and post[] are both permutations of 1, 2, ..., pre.length.
+    /// It is guaranteed an answer exists. If there exists multiple answers, 
+    /// you can return any of them.
+    /// </summary>
+    TreeNode* constructFromPrePost(vector<int>& pre, vector<int>& post);
+
+    /// <summary>
+    /// Leet code #894. All Possible Full Binary Trees
+    /// </summary>
+    TreeNode* clone(TreeNode *);
+
+    /// <summary>
+    /// Leet code #894. All Possible Full Binary Trees
+    /// 
+    /// A full binary tree is a binary tree where each node has exactly 0 or 2 
+    /// children.
+    ///
+    /// Return a list of all possible full binary trees with N nodes.  Each 
+    /// element of the answer is the root node of one possible tree.
+    ///
+    /// Each node of each tree in the answer must have node.val = 0.
+    ///
+    /// You may return the final list of trees in any order.
+    ///
+    /// Example 1:
+    ///
+    /// Input: 7
+    /// Output: 
+    /// [
+    ///  [0,0,0,null,null,0,0,null,null,0,0],[0,0,0,null,null,0,0,0,0],
+    ///  [0,0,0,0,0,0,0],[0,0,0,0,0,null,null,null,null,0,0],[0,0,0,0,0,null,null,0,0]
+    /// ]
+    /// Explanation:
+    /// 
+    /// Note:
+    /// 1 <= N <= 20
+    /// </summary>
+    vector<TreeNode*> allPossibleFBT(int N);
+
+    /// <summary>
+    /// Leet code #897. Increasing Order Search Tree 
+    /// </summary>
+    void increasingBST(TreeNode *& new_root, TreeNode *&new_child, TreeNode* root);
+
+    /// <summary>
+    /// Leet code #897. Increasing Order Search Tree 
+    /// 
+    /// Given a tree, rearrange the tree in in-order so that the leftmost node in 
+    /// the tree is now the root of the tree, and every node has no left child 
+    /// and only 1 right child.
+    ///
+    /// Example 1:
+    /// Input: [5,3,6,2,4,null,8,1,null,null,null,7,9]
+    ///
+    ///       5
+    ///      / \
+    ///     3   6
     ///    / \   \
     ///   2   4   8
     ///  /       / \ 
@@ -7783,62 +7783,62 @@ public:
     /// 1. The number of nodes in the given tree will be between 1 and 100.
     /// 2. Each node will have a unique integer value from 0 to 1000.
     /// </summary>
-	TreeNode* increasingBST(TreeNode* root);
+    TreeNode* increasingBST(TreeNode* root);
 
-	/// <summary>
-	/// Leet code #938. Range Sum of BST
-	/// 
-	/// Given the root node of a binary search tree, return the sum of values of 
-	/// all nodes with value between L and R (inclusive).
-	///
-	/// The binary search tree is guaranteed to have unique values.
-	///
-	/// Example 1:
-	///
-	/// Input: root = [10,5,15,3,7,null,18], L = 7, R = 15
-	/// Output: 32
-	/// Example 2:
-	///
-	/// Input: root = [10,5,15,3,7,13,18,1,null,6], L = 6, R = 10
-	/// Output: 23
-	///  
-	///
-	/// Note:
-	///
-	/// The number of nodes in the tree is at most 10000.
-	/// The final answer is guaranteed to be less than 2^31.
-	///
-	/// </summary>
-	int rangeSumBST(TreeNode* root, int L, int R);
+    /// <summary>
+    /// Leet code #938. Range Sum of BST
+    /// 
+    /// Given the root node of a binary search tree, return the sum of values of 
+    /// all nodes with value between L and R (inclusive).
+    ///
+    /// The binary search tree is guaranteed to have unique values.
+    ///
+    /// Example 1:
+    ///
+    /// Input: root = [10,5,15,3,7,null,18], L = 7, R = 15
+    /// Output: 32
+    /// Example 2:
+    ///
+    /// Input: root = [10,5,15,3,7,13,18,1,null,6], L = 6, R = 10
+    /// Output: 23
+    ///  
+    ///
+    /// Note:
+    ///
+    /// The number of nodes in the tree is at most 10000.
+    /// The final answer is guaranteed to be less than 2^31.
+    ///
+    /// </summary>
+    int rangeSumBST(TreeNode* root, int L, int R);
 
-	/// <summary>
-	/// Leet code #951. Flip Equivalent Binary Trees
-	/// 
-	/// For a binary tree T, we can define a flip operation as follows: choose 
-	/// any node, and swap the left and right child subtrees.
-	/// 
-	/// A binary tree X is flip equivalent to a binary tree Y if and only if 
-	/// we can make X equal to Y after some number of flip operations.
-	///
-	/// Write a function that determines whether two binary trees are flip 
-	/// equivalent.  The trees are given by root nodes root1 and root2.
-	/// 
-	/// 
-	/// Example 1:
-	///
-	/// Input: root1 = [1,2,3,4,5,6,null,null,null,7,8], 
-	///        root2 = [1,3,2,null,6,4,5,null,null,null,null,8,7]
-	/// Output: true
-	/// Explanation: We flipped at nodes with values 1, 3, and 5.
-	/// Flipped Trees Diagram
-	/// 
-	/// Note:
-	/// 
-	/// 1. Each tree will have at most 100 nodes.
-	/// 2. Each value in each tree will be a unique integer in the range 
-	/// [0, 99].
-	/// </summary>
-	bool flipEquiv(TreeNode* root1, TreeNode* root2);
+    /// <summary>
+    /// Leet code #951. Flip Equivalent Binary Trees
+    /// 
+    /// For a binary tree T, we can define a flip operation as follows: choose 
+    /// any node, and swap the left and right child subtrees.
+    /// 
+    /// A binary tree X is flip equivalent to a binary tree Y if and only if 
+    /// we can make X equal to Y after some number of flip operations.
+    ///
+    /// Write a function that determines whether two binary trees are flip 
+    /// equivalent.  The trees are given by root nodes root1 and root2.
+    /// 
+    /// 
+    /// Example 1:
+    ///
+    /// Input: root1 = [1,2,3,4,5,6,null,null,null,7,8], 
+    ///        root2 = [1,3,2,null,6,4,5,null,null,null,null,8,7]
+    /// Output: true
+    /// Explanation: We flipped at nodes with values 1, 3, and 5.
+    /// Flipped Trees Diagram
+    /// 
+    /// Note:
+    /// 
+    /// 1. Each tree will have at most 100 nodes.
+    /// 2. Each value in each tree will be a unique integer in the range 
+    /// [0, 99].
+    /// </summary>
+    bool flipEquiv(TreeNode* root1, TreeNode* root2);
 
     /// <summary>
     /// Leet code #958. Check Completeness of a Binary Tree
@@ -8930,301 +8930,301 @@ public:
     /// </summary>
     vector<int> selfDividingNumbers(int left, int right);
 
-	/// <summary>
-	/// Leet code #782. Transform to Chessboard    
-	/// </summary>
-	void countBoardPattern(int row, int col, vector<vector<int>>& board, int& pattern, int &one);
+    /// <summary>
+    /// Leet code #782. Transform to Chessboard    
+    /// </summary>
+    void countBoardPattern(int row, int col, vector<vector<int>>& board, int& pattern, int &one);
 
-	/// <summary>
-	/// Leet code #782. Transform to Chessboard    
-	/// </summary>
-	bool checkBoardPattern(int one, int N);
+    /// <summary>
+    /// Leet code #782. Transform to Chessboard    
+    /// </summary>
+    bool checkBoardPattern(int one, int N);
 
-	/// <summary>
-	/// Leet code #782. Transform to Chessboard    
-	/// </summary>
-	bool checkBoardPatternMap(unordered_set<int> &pattern_map);
+    /// <summary>
+    /// Leet code #782. Transform to Chessboard    
+    /// </summary>
+    bool checkBoardPatternMap(unordered_set<int> &pattern_map);
 
-	/// <summary>
-	/// Leet code #782. Transform to Chessboard    
-	/// </summary>
-	int calculateBoardPattern(int pattern, int N);
+    /// <summary>
+    /// Leet code #782. Transform to Chessboard    
+    /// </summary>
+    int calculateBoardPattern(int pattern, int N);
 
-	/// <summary>
-	/// Leet code #782. Transform to Chessboard    
-	///
-	/// An N x N board contains only 0s and 1s. In each move, you can swap 
-	/// any 2 rows with each other, or any 2 columns with each other.
-	///
-	/// What is the minimum number of moves to transform the board into a 
-	/// "chessboard" - a board where no 0s and no 1s are 4-directionally 
-	/// adjacent? If the task is impossible, return -1.
-	///
-	/// Examples:
-	/// Input: board = [[0,1,1,0],[0,1,1,0],[1,0,0,1],[1,0,0,1]]
-	/// Output: 2
-	/// Explanation:
-	/// One potential sequence of moves is shown below, from left to right:
-	///
-	/// 0110     1010     1010
-	/// 0110 --> 1010 --> 0101
-	/// 1001     0101     1010
-	/// 1001     0101     0101
-	///
-	/// The first move swaps the first and second column.
-	/// The second move swaps the second and third row.
-	///
-	/// Input: board = [[0, 1], [1, 0]]
-	/// Output: 0
-	/// Explanation:
-	/// Also note that the board with 0 in the top left corner,
-	/// 01
-	/// 10
-	///
-	/// is also a valid chessboard.
-	/// 
-	/// Input: board = [[1, 0], [1, 0]]
-	/// Output: -1
-	/// Explanation:
-	/// No matter what sequence of moves you make, you cannot end with a valid 
-	/// chessboard.
-	/// 
-	/// Note:
-	/// 1. board will have the same number of rows and columns, a number in the 
-	///    range [2, 30].
-	/// 2. board[i][j] will be only 0s or 1s.
-	/// </summary>
-	int movesToChessboard(vector<vector<int>>& board);
+    /// <summary>
+    /// Leet code #782. Transform to Chessboard    
+    ///
+    /// An N x N board contains only 0s and 1s. In each move, you can swap 
+    /// any 2 rows with each other, or any 2 columns with each other.
+    ///
+    /// What is the minimum number of moves to transform the board into a 
+    /// "chessboard" - a board where no 0s and no 1s are 4-directionally 
+    /// adjacent? If the task is impossible, return -1.
+    ///
+    /// Examples:
+    /// Input: board = [[0,1,1,0],[0,1,1,0],[1,0,0,1],[1,0,0,1]]
+    /// Output: 2
+    /// Explanation:
+    /// One potential sequence of moves is shown below, from left to right:
+    ///
+    /// 0110     1010     1010
+    /// 0110 --> 1010 --> 0101
+    /// 1001     0101     1010
+    /// 1001     0101     0101
+    ///
+    /// The first move swaps the first and second column.
+    /// The second move swaps the second and third row.
+    ///
+    /// Input: board = [[0, 1], [1, 0]]
+    /// Output: 0
+    /// Explanation:
+    /// Also note that the board with 0 in the top left corner,
+    /// 01
+    /// 10
+    ///
+    /// is also a valid chessboard.
+    /// 
+    /// Input: board = [[1, 0], [1, 0]]
+    /// Output: -1
+    /// Explanation:
+    /// No matter what sequence of moves you make, you cannot end with a valid 
+    /// chessboard.
+    /// 
+    /// Note:
+    /// 1. board will have the same number of rows and columns, a number in the 
+    ///    range [2, 30].
+    /// 2. board[i][j] will be only 0s or 1s.
+    /// </summary>
+    int movesToChessboard(vector<vector<int>>& board);
 
-	/// <summary>
-	/// Leet code #789. Escape The Ghosts
-	/// 
-	/// You are playing a simplified Pacman game. You start at the point 
-	/// (0, 0), and your destination is (target[0], target[1]). There are 
-	/// several ghosts on the map, the i-th ghost starts at (ghosts[i][0], 
-	/// ghosts[i][1]).
-	/// Each turn, you and all ghosts simultaneously *may* move in one of 
-	/// 4 cardinal directions: north, east, west, or south, going from the 
-	/// previous point to a new point 1 unit of distance away.
-	/// You escape if and only if you can reach the target before any ghost 
-	/// reaches you (for any given moves the ghosts may take.)  If you reach 
-	/// any square (including the target) at the same time as a ghost, it 
-	/// doesn't count as an escape.
-	/// Return True if and only if it is possible to escape.
-	/// Example 1:
-	/// Input: 
-	/// ghosts = [[1, 0], [0, 3]]
-	/// target = [0, 1]
-	/// Output: true
-	/// Explanation: 
-	/// You can directly reach the destination (0, 1) at time 1, while the 
-	/// ghosts located at (1, 0) or (0, 3) have no way to catch up with you.
-	/// Example 2:
-	/// Input: 
-	/// ghosts = [[1, 0]]
-	/// target = [2, 0]
-	/// Output: false
-	/// Explanation: 
-	/// You need to reach the destination (2, 0), but the ghost at (1, 0) 
-	/// lies between you and the destination.
-	/// Example 3:
-	/// Input: 
-	/// ghosts = [[2, 0]]
-	/// target = [1, 0]
-	/// Output: false
-	/// Explanation: 
-	/// The ghost can reach the target at the same time as you.
-	/// Note:
-	/// 1. All points have coordinates with absolute value <= 10000.
-	/// 2. The number of ghosts will not exceed 100.
-	/// </summary>
-	bool escapeGhosts(vector<vector<int>>& ghosts, vector<int>& target);
+    /// <summary>
+    /// Leet code #789. Escape The Ghosts
+    /// 
+    /// You are playing a simplified Pacman game. You start at the point 
+    /// (0, 0), and your destination is (target[0], target[1]). There are 
+    /// several ghosts on the map, the i-th ghost starts at (ghosts[i][0], 
+    /// ghosts[i][1]).
+    /// Each turn, you and all ghosts simultaneously *may* move in one of 
+    /// 4 cardinal directions: north, east, west, or south, going from the 
+    /// previous point to a new point 1 unit of distance away.
+    /// You escape if and only if you can reach the target before any ghost 
+    /// reaches you (for any given moves the ghosts may take.)  If you reach 
+    /// any square (including the target) at the same time as a ghost, it 
+    /// doesn't count as an escape.
+    /// Return True if and only if it is possible to escape.
+    /// Example 1:
+    /// Input: 
+    /// ghosts = [[1, 0], [0, 3]]
+    /// target = [0, 1]
+    /// Output: true
+    /// Explanation: 
+    /// You can directly reach the destination (0, 1) at time 1, while the 
+    /// ghosts located at (1, 0) or (0, 3) have no way to catch up with you.
+    /// Example 2:
+    /// Input: 
+    /// ghosts = [[1, 0]]
+    /// target = [2, 0]
+    /// Output: false
+    /// Explanation: 
+    /// You need to reach the destination (2, 0), but the ghost at (1, 0) 
+    /// lies between you and the destination.
+    /// Example 3:
+    /// Input: 
+    /// ghosts = [[2, 0]]
+    /// target = [1, 0]
+    /// Output: false
+    /// Explanation: 
+    /// The ghost can reach the target at the same time as you.
+    /// Note:
+    /// 1. All points have coordinates with absolute value <= 10000.
+    /// 2. The number of ghosts will not exceed 100.
+    /// </summary>
+    bool escapeGhosts(vector<vector<int>>& ghosts, vector<int>& target);
 
-	/// <summary>
-	/// Leet code #829. Consecutive Numbers Sum
-	/// 
-	/// Given a positive integer N, how many ways can we write it as a sum of 
-	/// consecutive positive integers?
-	///
-	/// Example 1:
-	/// Input: 5
-	/// Output: 2
-	/// Explanation: 5 = 5 = 2 + 3
-	///
-	/// Example 2:
-	/// Input: 9
-	/// Output: 3
-	/// Explanation: 9 = 9 = 4 + 5 = 2 + 3 + 4
-	/// 
-	/// Example 3:
-	/// Input: 15
-	/// Output: 4
-	/// Explanation: 15 = 15 = 8 + 7 = 4 + 5 + 6 = 1 + 2 + 3 + 4 + 5
-	///
-	/// 1. Note: 1 <= N <= 10 ^ 9.
-	/// </summary>
-	int consecutiveNumbersSum(int N);
+    /// <summary>
+    /// Leet code #829. Consecutive Numbers Sum
+    /// 
+    /// Given a positive integer N, how many ways can we write it as a sum of 
+    /// consecutive positive integers?
+    ///
+    /// Example 1:
+    /// Input: 5
+    /// Output: 2
+    /// Explanation: 5 = 5 = 2 + 3
+    ///
+    /// Example 2:
+    /// Input: 9
+    /// Output: 3
+    /// Explanation: 9 = 9 = 4 + 5 = 2 + 3 + 4
+    /// 
+    /// Example 3:
+    /// Input: 15
+    /// Output: 4
+    /// Explanation: 15 = 15 = 8 + 7 = 4 + 5 + 6 = 1 + 2 + 3 + 4 + 5
+    ///
+    /// 1. Note: 1 <= N <= 10 ^ 9.
+    /// </summary>
+    int consecutiveNumbersSum(int N);
 
-	/// <summary>
-	/// Leet code #836. Rectangle Overlap
-	/// 
-	/// A rectangle is represented as a list [x1, y1, x2, y2], where (x1, y1) 
-	/// are the coordinates of its bottom-left corner, and (x2, y2) are the 
-	/// coordinates of its top-right corner.
-	///
-	/// Two rectangles overlap if the area of their intersection is positive.  
-	/// To be clear, two rectangles that only touch at the corner or edges do 
-	/// not overlap.
-	///
-	/// Given two rectangles, return whether they overlap.
-	///
-	/// Example 1:
-	///
-	/// Input: rec1 = [0,0,2,2], rec2 = [1,1,3,3]
-	/// Output: true
-	///
-	/// Example 2:
-	///
-	/// Input: rec1 = [0,0,1,1], rec2 = [1,0,2,1]
-	/// Output: false
-	/// Notes:
-	///
-	/// Both rectangles rec1 and rec2 are lists of 4 integers.
-	/// All coordinates in rectangles will be between -10^9 and 10^9.
-	/// </summary>
-	bool isRectangleOverlap(vector<int>& rec1, vector<int>& rec2);
+    /// <summary>
+    /// Leet code #836. Rectangle Overlap
+    /// 
+    /// A rectangle is represented as a list [x1, y1, x2, y2], where (x1, y1) 
+    /// are the coordinates of its bottom-left corner, and (x2, y2) are the 
+    /// coordinates of its top-right corner.
+    ///
+    /// Two rectangles overlap if the area of their intersection is positive.  
+    /// To be clear, two rectangles that only touch at the corner or edges do 
+    /// not overlap.
+    ///
+    /// Given two rectangles, return whether they overlap.
+    ///
+    /// Example 1:
+    ///
+    /// Input: rec1 = [0,0,2,2], rec2 = [1,1,3,3]
+    /// Output: true
+    ///
+    /// Example 2:
+    ///
+    /// Input: rec1 = [0,0,1,1], rec2 = [1,0,2,1]
+    /// Output: false
+    /// Notes:
+    ///
+    /// Both rectangles rec1 and rec2 are lists of 4 integers.
+    /// All coordinates in rectangles will be between -10^9 and 10^9.
+    /// </summary>
+    bool isRectangleOverlap(vector<int>& rec1, vector<int>& rec2);
 
 
-	/// <summary>
-	/// Leet code #891. Sum of Subsequence Widths
-	/// 
-	/// Given an array of integers A, consider all non-empty subsequences of A.
-	///
-	/// For any sequence S, let the width of S be the difference between the 
-	/// maximum and minimum element of S.
-	///
-	/// Return the sum of the widths of all subsequences of A. 
-	///
-	/// As the answer may be very large, return the answer modulo 10^9 + 7.
-	///
-	/// Example 1:
-	///
-	/// Input: [2,1,3]
-	/// Output: 6
-	/// Explanation:
-	/// Subsequences are [1], [2], [3], [2,1], [2,3], [1,3], [2,1,3].
-	/// The corresponding widths are 0, 0, 0, 1, 1, 2, 2.
-	/// The sum of these widths is 6.
-	///
-	/// Note:
-	///
-	/// 1 <= A.length <= 20000
-	/// 1 <= A[i] <= 20000
-	/// </summary>
-	int sumSubseqWidths(vector<int>& A);
+    /// <summary>
+    /// Leet code #891. Sum of Subsequence Widths
+    /// 
+    /// Given an array of integers A, consider all non-empty subsequences of A.
+    ///
+    /// For any sequence S, let the width of S be the difference between the 
+    /// maximum and minimum element of S.
+    ///
+    /// Return the sum of the widths of all subsequences of A. 
+    ///
+    /// As the answer may be very large, return the answer modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    ///
+    /// Input: [2,1,3]
+    /// Output: 6
+    /// Explanation:
+    /// Subsequences are [1], [2], [3], [2,1], [2,3], [1,3], [2,1,3].
+    /// The corresponding widths are 0, 0, 0, 1, 1, 2, 2.
+    /// The sum of these widths is 6.
+    ///
+    /// Note:
+    ///
+    /// 1 <= A.length <= 20000
+    /// 1 <= A[i] <= 20000
+    /// </summary>
+    int sumSubseqWidths(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #908. Smallest Range I
-	/// 
-	/// Given an array A of integers, for each integer A[i] we may choose any x 
-	/// with -K <= x <= K, and add x to A[i].
-	///
-	/// After this process, we have some array B.
-	///
-	/// Return the smallest possible difference between the maximum value of B 
-	/// and the minimum value of B.
-	///
-	/// 
-	/// Example 1:
-	///
-	/// Input: A = [1], K = 0
-	/// Output: 0
-	/// Explanation: B = [1]
-	/// Example 2:
-	///
-	/// Input: A = [0,10], K = 2
-	/// Output: 6
-	/// Explanation: B = [2,8]
-	/// Example 3:
-	///
-	/// Input: A = [1,3,6], K = 3
-	/// Output: 0
-	/// Explanation: B = [3,3,3] or B = [4,4,4]
-	/// 
-	///
-	/// Note:
-	///
-	/// 1. 1 <= A.length <= 10000
-	/// 2. 0 <= A[i] <= 10000
-	/// 3. 0 <= K <= 10000
-	/// </summary>
-	int smallestRangeI(vector<int>& A, int K);
+    /// <summary>
+    /// Leet code #908. Smallest Range I
+    /// 
+    /// Given an array A of integers, for each integer A[i] we may choose any x 
+    /// with -K <= x <= K, and add x to A[i].
+    ///
+    /// After this process, we have some array B.
+    ///
+    /// Return the smallest possible difference between the maximum value of B 
+    /// and the minimum value of B.
+    ///
+    /// 
+    /// Example 1:
+    ///
+    /// Input: A = [1], K = 0
+    /// Output: 0
+    /// Explanation: B = [1]
+    /// Example 2:
+    ///
+    /// Input: A = [0,10], K = 2
+    /// Output: 6
+    /// Explanation: B = [2,8]
+    /// Example 3:
+    ///
+    /// Input: A = [1,3,6], K = 3
+    /// Output: 0
+    /// Explanation: B = [3,3,3] or B = [4,4,4]
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. 1 <= A.length <= 10000
+    /// 2. 0 <= A[i] <= 10000
+    /// 3. 0 <= K <= 10000
+    /// </summary>
+    int smallestRangeI(vector<int>& A, int K);
 
-	/// <summary>
-	/// Leet code #910. Smallest Range II
-	/// 
-	/// Given an array A of integers, for each integer A[i] we need to choose 
-	/// either x = -K or x = K, and add x to A[i] (only once).
-	///
-	/// After this process, we have some array B.
-	///
-	/// Return the smallest possible difference between the maximum value of B 
-	/// and the minimum value of B.
-	///
-	/// Example 1:
-	/// Input: A = [1], K = 0
-	/// Output: 0
-	/// Explanation: B = [1]
-	///
-	/// Example 2:
-	/// Input: A = [0,10], K = 2
-	/// Output: 6
-	/// Explanation: B = [2,8]
-	///
-	/// Example 3:
-	/// 
-	/// Input: A = [1,3,6], K = 3
-	/// Output: 3
-	/// Explanation: B = [4,6,3]
-	/// 
-	/// Note:
-	/// 
-	/// 1. 1 <= A.length <= 10000
-	/// 2. 0 <= A[i] <= 10000
-	/// 3. 0 <= K <= 10000
-	/// </summary>
-	int smallestRangeII(vector<int>& A, int K);
+    /// <summary>
+    /// Leet code #910. Smallest Range II
+    /// 
+    /// Given an array A of integers, for each integer A[i] we need to choose 
+    /// either x = -K or x = K, and add x to A[i] (only once).
+    ///
+    /// After this process, we have some array B.
+    ///
+    /// Return the smallest possible difference between the maximum value of B 
+    /// and the minimum value of B.
+    ///
+    /// Example 1:
+    /// Input: A = [1], K = 0
+    /// Output: 0
+    /// Explanation: B = [1]
+    ///
+    /// Example 2:
+    /// Input: A = [0,10], K = 2
+    /// Output: 6
+    /// Explanation: B = [2,8]
+    ///
+    /// Example 3:
+    /// 
+    /// Input: A = [1,3,6], K = 3
+    /// Output: 3
+    /// Explanation: B = [4,6,3]
+    /// 
+    /// Note:
+    /// 
+    /// 1. 1 <= A.length <= 10000
+    /// 2. 0 <= A[i] <= 10000
+    /// 3. 0 <= K <= 10000
+    /// </summary>
+    int smallestRangeII(vector<int>& A, int K);
 
-	/// <summary>
-	/// Leet code #932. Beautiful Array
-	/// </summary>
-	vector<int> beautifulArray(int N, unordered_map<int, vector<int>>& memo);
+    /// <summary>
+    /// Leet code #932. Beautiful Array
+    /// </summary>
+    vector<int> beautifulArray(int N, unordered_map<int, vector<int>>& memo);
 
-	/// <summary>
-	/// Leet code #932. Beautiful Array
-	/// 
-	/// For some fixed N, an array A is beautiful if it is a permutation of the 
-	/// integers 1, 2, ..., N, such that:
-	///
-	/// For every i < j, there is no k with i < k < j such that 
-	//// A[k] * 2 = A[i] + A[j].
-	///
-	/// Given N, return any beautiful array A.  (It is guaranteed that one exists.)
-	///
-	/// Example 1:
-	/// Input: 4
-	/// Output: [2,1,4,3]
-	/// Example 2:
-	/// 
-	/// Input: 5
-	/// Output: [3,1,2,5,4]
-	/// 
-	///
-	/// Note:
-	///
-	/// 1. 1 <= N <= 1000
-	/// </summary>
-	vector<int> beautifulArray(int N);
+    /// <summary>
+    /// Leet code #932. Beautiful Array
+    /// 
+    /// For some fixed N, an array A is beautiful if it is a permutation of the 
+    /// integers 1, 2, ..., N, such that:
+    ///
+    /// For every i < j, there is no k with i < k < j such that 
+    //// A[k] * 2 = A[i] + A[j].
+    ///
+    /// Given N, return any beautiful array A.  (It is guaranteed that one exists.)
+    ///
+    /// Example 1:
+    /// Input: 4
+    /// Output: [2,1,4,3]
+    /// Example 2:
+    /// 
+    /// Input: 5
+    /// Output: [3,1,2,5,4]
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. 1 <= N <= 1000
+    /// </summary>
+    vector<int> beautifulArray(int N);
 
     /// <summary>
     /// Leet code #970. Powerful Integers
@@ -9790,137 +9790,137 @@ public:
     /// </summary>
     bool hasAlternatingBits(int n);
 
-	/// <summary>
-	/// Leet code #762. Prime Number of Set Bits in Binary Representation    
-	///
-	/// Given two integers L and R, find the count of numbers in the range 
-	/// [L, R] (inclusive) having a prime number of set bits in their binary 
-	/// representation. 
-	/// (Recall that the number of set bits an integer has is the number of 1s 
-	/// present when written in binary. For example, 21 written in binary is 
-	/// 10101 which has 3 set bits. Also, 1 is not a prime.) 
-	///
-	///
-	///
-	/// Example 1:
-	///
-	/// Input: L = 6, R = 10
-	/// Output: 4
-	/// Explanation:
-	/// 6 -> 110 (2 set bits, 2 is prime)
-	/// 7 -> 111 (3 set bits, 3 is prime)
-	/// 9 -> 1001 (2 set bits , 2 is prime)
-	/// 10->1010 (2 set bits , 2 is prime)
-	///
-	/// Example 2:
-	///
-	/// Input: L = 10, R = 15
-	/// Output: 5
-	/// Explanation:
-	/// 10 -> 1010 (2 set bits, 2 is prime)
-	/// 11 -> 1011 (3 set bits, 3 is prime)
-	/// 12 -> 1100 (2 set bits, 2 is prime)
-	/// 13 -> 1101 (3 set bits, 3 is prime)
-	/// 14 -> 1110 (3 set bits, 3 is prime)
-	/// 15 -> 1111 (4 set bits, 4 is not prime)
-	///
-	/// 
-	/// Note:
-	/// 1.L, R will be integers L <= R in the range [1, 10^6].
-	/// 2.R - L will be at most 10000.
-	/// </summary>
-	int countPrimeSetBits(int L, int R);
+    /// <summary>
+    /// Leet code #762. Prime Number of Set Bits in Binary Representation    
+    ///
+    /// Given two integers L and R, find the count of numbers in the range 
+    /// [L, R] (inclusive) having a prime number of set bits in their binary 
+    /// representation. 
+    /// (Recall that the number of set bits an integer has is the number of 1s 
+    /// present when written in binary. For example, 21 written in binary is 
+    /// 10101 which has 3 set bits. Also, 1 is not a prime.) 
+    ///
+    ///
+    ///
+    /// Example 1:
+    ///
+    /// Input: L = 6, R = 10
+    /// Output: 4
+    /// Explanation:
+    /// 6 -> 110 (2 set bits, 2 is prime)
+    /// 7 -> 111 (3 set bits, 3 is prime)
+    /// 9 -> 1001 (2 set bits , 2 is prime)
+    /// 10->1010 (2 set bits , 2 is prime)
+    ///
+    /// Example 2:
+    ///
+    /// Input: L = 10, R = 15
+    /// Output: 5
+    /// Explanation:
+    /// 10 -> 1010 (2 set bits, 2 is prime)
+    /// 11 -> 1011 (3 set bits, 3 is prime)
+    /// 12 -> 1100 (2 set bits, 2 is prime)
+    /// 13 -> 1101 (3 set bits, 3 is prime)
+    /// 14 -> 1110 (3 set bits, 3 is prime)
+    /// 15 -> 1111 (4 set bits, 4 is not prime)
+    ///
+    /// 
+    /// Note:
+    /// 1.L, R will be integers L <= R in the range [1, 10^6].
+    /// 2.R - L will be at most 10000.
+    /// </summary>
+    int countPrimeSetBits(int L, int R);
 
-	/// <summary>
-	/// Leet code #805. Split Array With Same Average
-	/// 
-	/// In a given integer array A, we must move every element of A to either 
-	/// list B or list C. (B and C initially start empty.)
-	///
-	/// Return true if and only if after such a move, it is possible that the 
-	/// average value of B is equal to the average value of C, and B and C are 
-	/// both non-empty.
-	///
-	/// Example :
-	/// Input: 
-	/// [1,2,3,4,5,6,7,8]
-	/// Output: true
-	/// Explanation: We can split the array into [1,4,5,8] and [2,3,6,7], and 
-	/// both of them have the average of 4.5.
-	/// Note:
-	///
-	/// 1. The length of A will be in the range [1, 30].
-	/// 2. A[i] will be in the range of [0, 10000].
-	/// </summary>
-	bool splitArraySameAverage(vector<int>& A);
+    /// <summary>
+    /// Leet code #805. Split Array With Same Average
+    /// 
+    /// In a given integer array A, we must move every element of A to either 
+    /// list B or list C. (B and C initially start empty.)
+    ///
+    /// Return true if and only if after such a move, it is possible that the 
+    /// average value of B is equal to the average value of C, and B and C are 
+    /// both non-empty.
+    ///
+    /// Example :
+    /// Input: 
+    /// [1,2,3,4,5,6,7,8]
+    /// Output: true
+    /// Explanation: We can split the array into [1,4,5,8] and [2,3,6,7], and 
+    /// both of them have the average of 4.5.
+    /// Note:
+    ///
+    /// 1. The length of A will be in the range [1, 30].
+    /// 2. A[i] will be in the range of [0, 10000].
+    /// </summary>
+    bool splitArraySameAverage(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #805. Split Array With Same Average
-	/// 
-	/// In a given integer array A, we must move every element of A to either 
-	/// list B or list C. (B and C initially start empty.)
-	///
-	/// Return true if and only if after such a move, it is possible that the 
-	/// average value of B is equal to the average value of C, and B and C are 
-	/// both non-empty.
-	///
-	/// Example :
-	/// Input: 
-	/// [1,2,3,4,5,6,7,8]
-	/// Output: true
-	/// Explanation: We can split the array into [1,4,5,8] and [2,3,6,7], and 
-	/// both of them have the average of 4.5.
-	/// Note:
-	///
-	/// 1. The length of A will be in the range [1, 30].
-	/// 2. A[i] will be in the range of [0, 10000].
-	/// </summary>
-	bool splitArraySameAverageII(vector<int>& A);
+    /// <summary>
+    /// Leet code #805. Split Array With Same Average
+    /// 
+    /// In a given integer array A, we must move every element of A to either 
+    /// list B or list C. (B and C initially start empty.)
+    ///
+    /// Return true if and only if after such a move, it is possible that the 
+    /// average value of B is equal to the average value of C, and B and C are 
+    /// both non-empty.
+    ///
+    /// Example :
+    /// Input: 
+    /// [1,2,3,4,5,6,7,8]
+    /// Output: true
+    /// Explanation: We can split the array into [1,4,5,8] and [2,3,6,7], and 
+    /// both of them have the average of 4.5.
+    /// Note:
+    ///
+    /// 1. The length of A will be in the range [1, 30].
+    /// 2. A[i] will be in the range of [0, 10000].
+    /// </summary>
+    bool splitArraySameAverageII(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #868. Binary Gap
-	/// 
-	/// Given a positive integer N, find and return the longest distance 
-	/// between two consecutive 1's in the binary representation of N.
-	///
-	/// If there aren't two consecutive 1's, return 0.
-	/// 
-	///
-	/// Example 1:
-	///
-	/// Input: 22
-	/// Output: 2
-	/// Explanation: 
-	/// 22 in binary is 0b10110.
-	/// In the binary representation of 22, there are three ones, and two 
-	/// consecutive pairs of 1's.
-	/// The first consecutive pair of 1's have distance 2.
-	/// The second consecutive pair of 1's have distance 1.
-	/// The answer is the largest of these two distances, which is 2.
-	///
-	/// Example 2:
-	/// Input: 5
-	/// Output: 2
-	/// Explanation: 
-	/// 5 in binary is 0b101.
-	///
-	/// Example 3:
-	/// Input: 6
-	/// Output: 1
-	/// Explanation: 
-	/// 6 in binary is 0b110.
-	///
-	/// Example 4:
-	/// Input: 8
-	/// Output: 0
-	/// Explanation: 
-	/// 8 in binary is 0b1000.
-	/// There aren't any consecutive pairs of 1's in the binary representation 
-	/// of 8, so we return 0.
-	/// Note:
-	/// 1 <= N <= 10^9
-	/// </summary>
-	int binaryGap(int N);
+    /// <summary>
+    /// Leet code #868. Binary Gap
+    /// 
+    /// Given a positive integer N, find and return the longest distance 
+    /// between two consecutive 1's in the binary representation of N.
+    ///
+    /// If there aren't two consecutive 1's, return 0.
+    /// 
+    ///
+    /// Example 1:
+    ///
+    /// Input: 22
+    /// Output: 2
+    /// Explanation: 
+    /// 22 in binary is 0b10110.
+    /// In the binary representation of 22, there are three ones, and two 
+    /// consecutive pairs of 1's.
+    /// The first consecutive pair of 1's have distance 2.
+    /// The second consecutive pair of 1's have distance 1.
+    /// The answer is the largest of these two distances, which is 2.
+    ///
+    /// Example 2:
+    /// Input: 5
+    /// Output: 2
+    /// Explanation: 
+    /// 5 in binary is 0b101.
+    ///
+    /// Example 3:
+    /// Input: 6
+    /// Output: 1
+    /// Explanation: 
+    /// 6 in binary is 0b110.
+    ///
+    /// Example 4:
+    /// Input: 8
+    /// Output: 0
+    /// Explanation: 
+    /// 8 in binary is 0b1000.
+    /// There aren't any consecutive pairs of 1's in the binary representation 
+    /// of 8, so we return 0.
+    /// Note:
+    /// 1 <= N <= 10^9
+    /// </summary>
+    int binaryGap(int N);
 
     /// <summary>
     /// Leet code #1009. Complement of Base 10 Integer
@@ -10571,7 +10571,7 @@ public:
     int wordsTyping(vector<string>& sentence, int rows, int cols);
 
     /// <summary>
-    /// Leet code #498. Diagonal Traverse          
+    /// Leet code #498. Diagonal Traverse  
     /// 
     /// Given a matrix of M x N elements (M rows, N columns), return all elements of the matrix 
     /// in diagonal order as shown in the below image. 
@@ -11232,55 +11232,55 @@ public:
     /// </summary>
     bool isPossible(vector<int>& nums); 
 
-	/// <summary>
-	/// Leet code #682. Baseball Game
-	/// 
-	/// Given a list of strings, each string can be one of the 4 following 
-	/// types:
-	///
-	/// Integer (one round's score): Directly represents the number of points 
-	/// you get in this round.
-	/// "+" (one round's score): Represents that the points you get in this 
-	///  round are the sum of the last two valid round's points.
-	/// "D" (one round's score): Represents that the points you get in this 
-	/// round are the doubled data of the last valid round's points.
-	/// "C" (an operation, which isn't a round's score): Represents the last 
-	/// valid round's points you get were invalid and should be removed.
-	/// Each round's operation is permanent and could have an impact on the 
-	/// round before and the round after.
-	///
-	/// You need to return the sum of the points you could get in all the 
-	/// rounds.
-	///
-	/// Example 1:
-	/// Input: ["5","2","C","D","+"]
-	/// Output: 30
-	/// Explanation: 
-	/// Round 1: You could get 5 points. The sum is: 5.
-	/// Round 2: You could get 2 points. The sum is: 7.
-	/// Operation 1: The round 2's data was invalid. The sum is: 5.  
-	/// Round 3: You could get 10 points (the round 2's data has been 
-	/// removed). The sum is: 15.
-	/// Round 4: You could get 5 + 10 = 15 points. The sum is: 30.
-	/// Example 2:
-	/// Input: ["5","-2","4","C","D","9","+","+"]
-	/// Output: 27
-	/// Explanation: 
-	/// Round 1: You could get 5 points. The sum is: 5.
-	/// Round 2: You could get -2 points. The sum is: 3.
-	/// Round 3: You could get 4 points. The sum is: 7.
-	/// Operation 1: The round 3's data is invalid. The sum is: 3.  
-	/// Round 4: You could get -4 points (the round 3's data has been removed). 
-	/// The sum is: -1.
-	/// Round 5: You could get 9 points. The sum is: 8.
-	/// Round 6: You could get -4 + 9 = 5 points. The sum is 13.
-	/// Round 7: You could get 9 + 5 = 14 points. The sum is 27.
-	/// Note:
-	/// 1.The size of the input list will be between 1 and 1000.
-	/// 2.Every integer represented in the list will be between -30000 
-	///   and 30000.
-	/// </summary>
-	int calPoints(vector<string>& ops);
+    /// <summary>
+    /// Leet code #682. Baseball Game
+    /// 
+    /// Given a list of strings, each string can be one of the 4 following 
+    /// types:
+    ///
+    /// Integer (one round's score): Directly represents the number of points 
+    /// you get in this round.
+    /// "+" (one round's score): Represents that the points you get in this 
+    ///  round are the sum of the last two valid round's points.
+    /// "D" (one round's score): Represents that the points you get in this 
+    /// round are the doubled data of the last valid round's points.
+    /// "C" (an operation, which isn't a round's score): Represents the last 
+    /// valid round's points you get were invalid and should be removed.
+    /// Each round's operation is permanent and could have an impact on the 
+    /// round before and the round after.
+    ///
+    /// You need to return the sum of the points you could get in all the 
+    /// rounds.
+    ///
+    /// Example 1:
+    /// Input: ["5","2","C","D","+"]
+    /// Output: 30
+    /// Explanation: 
+    /// Round 1: You could get 5 points. The sum is: 5.
+    /// Round 2: You could get 2 points. The sum is: 7.
+    /// Operation 1: The round 2's data was invalid. The sum is: 5.  
+    /// Round 3: You could get 10 points (the round 2's data has been 
+    /// removed). The sum is: 15.
+    /// Round 4: You could get 5 + 10 = 15 points. The sum is: 30.
+    /// Example 2:
+    /// Input: ["5","-2","4","C","D","9","+","+"]
+    /// Output: 27
+    /// Explanation: 
+    /// Round 1: You could get 5 points. The sum is: 5.
+    /// Round 2: You could get -2 points. The sum is: 3.
+    /// Round 3: You could get 4 points. The sum is: 7.
+    /// Operation 1: The round 3's data is invalid. The sum is: 3.  
+    /// Round 4: You could get -4 points (the round 3's data has been removed). 
+    /// The sum is: -1.
+    /// Round 5: You could get 9 points. The sum is: 8.
+    /// Round 6: You could get -4 + 9 = 5 points. The sum is 13.
+    /// Round 7: You could get 9 + 5 = 14 points. The sum is 27.
+    /// Note:
+    /// 1.The size of the input list will be between 1 and 1000.
+    /// 2.Every integer represented in the list will be between -30000 
+    ///   and 30000.
+    /// </summary>
+    int calPoints(vector<string>& ops);
 
     /// <summary>
     /// Leet code #696. Count Binary Substrings
@@ -11548,1288 +11548,1288 @@ public:
     /// </summary>
     int dominantIndex(vector<int>& nums);
 
-	/// <summary>
-	/// Leet code #766. Toeplitz Matrix    
-	///
-	/// A matrix is Toeplitz if every diagonal from top-left to bottom-right 
-	/// has the same element.
-	///
-	/// Now given an M x N matrix, return True if and only if the matrix is 
-	/// Toeplitz.
-	///
-	///
-	/// Example 1:
-	///
-	/// Input: matrix = [[1,2,3,4],[5,1,2,3],[9,5,1,2]]
-	/// Output: True
-	/// Explanation:
-	/// 1234
-	/// 5123
-	/// 9512
-	///
-	/// In the above grid, the diagonals are "[9]", "[5, 5]", "[1, 1, 1]", 
-	/// "[2, 2, 2]", "[3, 3]", "[4]", and in each diagonal all elements are 
-	/// the same, so the answer is True.
-	///
-	/// Example 2:
-	///
-	/// Input: matrix = [[1,2],[2,2]]
-	/// Output: False
-	/// Explanation:
-	/// The diagonal "[1, 2]" has different elements.
-	/// Note:
-	///
-	/// matrix will be a 2D array of integers.
-	/// matrix will have a number of rows and columns in range [1, 20].
-	/// matrix[i][j] will be integers in range [0, 99].
-	/// </summary>
-	bool isToeplitzMatrix(vector<vector<int>>& matrix);
+    /// <summary>
+    /// Leet code #766. Toeplitz Matrix    
+    ///
+    /// A matrix is Toeplitz if every diagonal from top-left to bottom-right 
+    /// has the same element.
+    ///
+    /// Now given an M x N matrix, return True if and only if the matrix is 
+    /// Toeplitz.
+    ///
+    ///
+    /// Example 1:
+    ///
+    /// Input: matrix = [[1,2,3,4],[5,1,2,3],[9,5,1,2]]
+    /// Output: True
+    /// Explanation:
+    /// 1234
+    /// 5123
+    /// 9512
+    ///
+    /// In the above grid, the diagonals are "[9]", "[5, 5]", "[1, 1, 1]", 
+    /// "[2, 2, 2]", "[3, 3]", "[4]", and in each diagonal all elements are 
+    /// the same, so the answer is True.
+    ///
+    /// Example 2:
+    ///
+    /// Input: matrix = [[1,2],[2,2]]
+    /// Output: False
+    /// Explanation:
+    /// The diagonal "[1, 2]" has different elements.
+    /// Note:
+    ///
+    /// matrix will be a 2D array of integers.
+    /// matrix will have a number of rows and columns in range [1, 20].
+    /// matrix[i][j] will be integers in range [0, 99].
+    /// </summary>
+    bool isToeplitzMatrix(vector<vector<int>>& matrix);
 
-	/// <summary>
-	/// Leetcode #779. K-th Symbol in Grammar
-	///
-	/// On the first row, we write a 0. Now in every subsequent row, we look 
-	/// at the previous row and replace each occurrence of 0 with 01, and each 
-	/// occurrence of 1 with 10.
-	///
-	/// Given row N and index K, return the K-th indexed symbol in row N. 
-	/// (The values of K are 1-indexed.) (1 indexed).
-	///
-	/// Examples:
-	/// Input: N = 1, K = 1
-	/// Output: 0
-	/// 
-	/// Input: N = 2, K = 1
-	/// Output: 0
-	///
-	/// Input: N = 2, K = 2
-	/// Output: 1
-	///
-	/// Input: N = 4, K = 5 
-	/// Output: 1
-	/// 
-	/// Explanation:
-	/// row 1: 0
-	/// row 2: 01
-	/// row 3: 0110
-	/// row 4: 01101001
-	/// Note:
-	/// 1. N will be an integer in the range [1, 30].
-	/// 2. K will be an integer in the range [1, 2^(N-1)].
-	/// </summary>
-	int kthGrammar(int N, int K);
+    /// <summary>
+    /// Leetcode #779. K-th Symbol in Grammar
+    ///
+    /// On the first row, we write a 0. Now in every subsequent row, we look 
+    /// at the previous row and replace each occurrence of 0 with 01, and each 
+    /// occurrence of 1 with 10.
+    ///
+    /// Given row N and index K, return the K-th indexed symbol in row N. 
+    /// (The values of K are 1-indexed.) (1 indexed).
+    ///
+    /// Examples:
+    /// Input: N = 1, K = 1
+    /// Output: 0
+    /// 
+    /// Input: N = 2, K = 1
+    /// Output: 0
+    ///
+    /// Input: N = 2, K = 2
+    /// Output: 1
+    ///
+    /// Input: N = 4, K = 5 
+    /// Output: 1
+    /// 
+    /// Explanation:
+    /// row 1: 0
+    /// row 2: 01
+    /// row 3: 0110
+    /// row 4: 01101001
+    /// Note:
+    /// 1. N will be an integer in the range [1, 30].
+    /// 2. K will be an integer in the range [1, 2^(N-1)].
+    /// </summary>
+    int kthGrammar(int N, int K);
 
-	/// <summary>
-	/// Leet code #807. Max Increase to Keep City Skyline
-	/// 
-	/// In a 2 dimensional array grid, each value grid[i][j] represents the 
-	/// height of a building located there. We are allowed to increase the 
-	/// height of any number of buildings, by any amount (the amounts can be 
-	/// different for different buildings). Height 0 is considered to be a 
-	/// building as well. 
-	///
-	/// At the end, the "skyline" when viewed from all four directions of the 
-	/// grid, i.e. top, bottom, left, and right, must be the same as the 
-	/// skyline of the original grid. A city's skyline is the outer contour 
-	/// of the rectangles formed by all the buildings when viewed from a 
-	/// distance. See the following example.
-	///
-	/// What is the maximum total sum that the height of the buildings can be 
-	/// increased?
-	/// 
-	/// Example:
-	/// Input: grid = [[3,0,8,4],[2,4,5,7],[9,2,6,3],[0,3,1,0]]
-	/// Output: 35
-	/// Explanation: 
-	/// The grid is:
-	/// [ 
-	///   [3, 0, 8, 4], 
-	///   [2, 4, 5, 7],
-	///   [9, 2, 6, 3],
-	///   [0, 3, 1, 0] 
-	/// ]
-	///
-	/// The skyline viewed from top or bottom is: [9, 4, 8, 7]
-	/// The skyline viewed from left or right is: [8, 7, 9, 3]
-	///
-	/// The grid after increasing the height of buildings without affecting 
-	/// skylines is:
-	/// gridNew = 
-	/// [ 
-	///   [8, 4, 8, 7],
-	///   [7, 4, 7, 7],
-	///   [9, 4, 8, 7],
-	///   [3, 3, 3, 3] 
-	/// ]
-	///
-	/// Notes:
-	///
-	/// 1. 1 < grid.length = grid[0].length <= 50.
-	/// 2. All heights grid[i][j] are in the range [0, 100].
-	/// 3. All buildings in grid[i][j] occupy the entire grid cell: that is, they 
-	///   are a 1 x 1 x grid[i][j] rectangular prism.
-	/// </summary>
-	int maxIncreaseKeepingSkyline(vector<vector<int>>& grid);
+    /// <summary>
+    /// Leet code #807. Max Increase to Keep City Skyline
+    /// 
+    /// In a 2 dimensional array grid, each value grid[i][j] represents the 
+    /// height of a building located there. We are allowed to increase the 
+    /// height of any number of buildings, by any amount (the amounts can be 
+    /// different for different buildings). Height 0 is considered to be a 
+    /// building as well. 
+    ///
+    /// At the end, the "skyline" when viewed from all four directions of the 
+    /// grid, i.e. top, bottom, left, and right, must be the same as the 
+    /// skyline of the original grid. A city's skyline is the outer contour 
+    /// of the rectangles formed by all the buildings when viewed from a 
+    /// distance. See the following example.
+    ///
+    /// What is the maximum total sum that the height of the buildings can be 
+    /// increased?
+    /// 
+    /// Example:
+    /// Input: grid = [[3,0,8,4],[2,4,5,7],[9,2,6,3],[0,3,1,0]]
+    /// Output: 35
+    /// Explanation: 
+    /// The grid is:
+    /// [ 
+    ///   [3, 0, 8, 4], 
+    ///   [2, 4, 5, 7],
+    ///   [9, 2, 6, 3],
+    ///   [0, 3, 1, 0] 
+    /// ]
+    ///
+    /// The skyline viewed from top or bottom is: [9, 4, 8, 7]
+    /// The skyline viewed from left or right is: [8, 7, 9, 3]
+    ///
+    /// The grid after increasing the height of buildings without affecting 
+    /// skylines is:
+    /// gridNew = 
+    /// [ 
+    ///   [8, 4, 8, 7],
+    ///   [7, 4, 7, 7],
+    ///   [9, 4, 8, 7],
+    ///   [3, 3, 3, 3] 
+    /// ]
+    ///
+    /// Notes:
+    ///
+    /// 1. 1 < grid.length = grid[0].length <= 50.
+    /// 2. All heights grid[i][j] are in the range [0, 100].
+    /// 3. All buildings in grid[i][j] occupy the entire grid cell: that is, they 
+    ///   are a 1 x 1 x grid[i][j] rectangular prism.
+    /// </summary>
+    int maxIncreaseKeepingSkyline(vector<vector<int>>& grid);
 
-	/// <summary>
-	/// Leet code #821. Shortest Distance to a Character
-	/// 
-	/// Given a string S and a character C, return an array of integers   
-	/// representing the shortest distance from the character C in the string.
-	///
-	/// Example 1: 
-	/// 1. Input: S = "loveleetcode", C = 'e'
-	/// 2. Output: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0] 
-	/// 3. All letters in S and C are lowercase.
-	/// </summary>
-	vector<int> shortestToChar(string S, char C);
+    /// <summary>
+    /// Leet code #821. Shortest Distance to a Character
+    /// 
+    /// Given a string S and a character C, return an array of integers   
+    /// representing the shortest distance from the character C in the string.
+    ///
+    /// Example 1: 
+    /// 1. Input: S = "loveleetcode", C = 'e'
+    /// 2. Output: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0] 
+    /// 3. All letters in S and C are lowercase.
+    /// </summary>
+    vector<int> shortestToChar(string S, char C);
 
-	/// <summary>
-	/// Leet code #816. Ambiguous Coordinates
-	/// </summary>
-	vector<string> getAllDecimals(string S);
+    /// <summary>
+    /// Leet code #816. Ambiguous Coordinates
+    /// </summary>
+    vector<string> getAllDecimals(string S);
 
-	/// <summary>
-	/// Leet code #816. Ambiguous Coordinates
-	/// 
-	/// We had some 2-dimensional coordinates, like "(1, 3)" or "(2, 0.5)".  
-	/// Then, we removed all commas, decimal points, and spaces, and ended up 
-	/// with the string S.  Return a list of strings representing all 
-	/// possibilities for what our original coordinates could have been.
-	///
-	/// Our original representation never had extraneous zeroes, so we never 
-	/// started with numbers like "00", "0.0", "0.00", "1.0", "001", "00.01", 
-	/// or any other number that can be represented with less digits.  Also, a 
-	/// decimal point within a number never occurs without at least one digit 
-	/// occuring before it, so we never started with numbers like ".1".
-	/// The final answer list can be returned in any order.  Also note that all 
-	/// coordinates in the final answer have exactly one space between them 
-	/// (occurring after the comma.)
-	/// 
-	/// Example 1:
-	/// Input: "(123)"
-	/// Output: ["(1, 23)", "(12, 3)", "(1.2, 3)", "(1, 2.3)"]
-	/// Example 2:
-	/// Input: "(00011)"
-	/// Output:  ["(0.001, 1)", "(0, 0.011)"]
-	/// Explanation: 
-	/// 0.0, 00, 0001 or 00.01 are not allowed.
-	/// Example 3:
-	/// Input: "(0123)"
-	/// Output: ["(0, 123)", "(0, 12.3)", "(0, 1.23)", "(0.1, 23)", 
-	/// "(0.1, 2.3)", "(0.12, 3)"]
-	/// Example 4:
-	/// Input: "(100)"
-	/// Output: [(10, 0)]
-	/// Explanation: 
-	/// 1.0 is not allowed.
-	/// 
-	/// Note:
-	///
-	/// 4 <= S.length <= 12.
-	/// S[0] = "(", S[S.length - 1] = ")", and the other elements in S are 
-	/// digits.
-	/// </summary>
-	vector<string> ambiguousCoordinates(string S);
+    /// <summary>
+    /// Leet code #816. Ambiguous Coordinates
+    /// 
+    /// We had some 2-dimensional coordinates, like "(1, 3)" or "(2, 0.5)".  
+    /// Then, we removed all commas, decimal points, and spaces, and ended up 
+    /// with the string S.  Return a list of strings representing all 
+    /// possibilities for what our original coordinates could have been.
+    ///
+    /// Our original representation never had extraneous zeroes, so we never 
+    /// started with numbers like "00", "0.0", "0.00", "1.0", "001", "00.01", 
+    /// or any other number that can be represented with less digits.  Also, a 
+    /// decimal point within a number never occurs without at least one digit 
+    /// occuring before it, so we never started with numbers like ".1".
+    /// The final answer list can be returned in any order.  Also note that all 
+    /// coordinates in the final answer have exactly one space between them 
+    /// (occurring after the comma.)
+    /// 
+    /// Example 1:
+    /// Input: "(123)"
+    /// Output: ["(1, 23)", "(12, 3)", "(1.2, 3)", "(1, 2.3)"]
+    /// Example 2:
+    /// Input: "(00011)"
+    /// Output:  ["(0.001, 1)", "(0, 0.011)"]
+    /// Explanation: 
+    /// 0.0, 00, 0001 or 00.01 are not allowed.
+    /// Example 3:
+    /// Input: "(0123)"
+    /// Output: ["(0, 123)", "(0, 12.3)", "(0, 1.23)", "(0.1, 23)", 
+    /// "(0.1, 2.3)", "(0.12, 3)"]
+    /// Example 4:
+    /// Input: "(100)"
+    /// Output: [(10, 0)]
+    /// Explanation: 
+    /// 1.0 is not allowed.
+    /// 
+    /// Note:
+    ///
+    /// 4 <= S.length <= 12.
+    /// S[0] = "(", S[S.length - 1] = ")", and the other elements in S are 
+    /// digits.
+    /// </summary>
+    vector<string> ambiguousCoordinates(string S);
 
-	/// <summary>
-	/// Leet code #822. Card Flipping Game
-	/// 
-	/// On a table are N cards, with a positive integer printed on the front 
-	/// and back of each card (possibly different).
-	///
-	/// We flip any number of cards, and after we choose one card. 
-	///
-	/// If the number X on the back of the chosen card is not on the front of 
-	/// any card, then this number X is good.
-	///
-	/// What is the smallest number that is good?  If no number is good, 
-	/// output 0.
-	///
-	/// Here, fronts[i] and backs[i] represent the number on the front and 
-	/// back of card i. 
-	///
-	/// A flip swaps the front and back numbers, so the value on the front is 
-	/// now on the back and vice versa.
-	///
-	/// Example:
-	///
-	/// Input: fronts = [1,2,4,4,7], backs = [1,3,4,1,3]
-	/// Output: 2
-	/// Explanation: If we flip the second card, the fronts are [1,3,4,4,7] 
-	/// and the backs are [1,2,4,1,3].
-	/// We choose the second card, which has number 2 on the back, and it 
-	/// isn't on the front of any card, so 2 is good.
-	///
-	/// Note:
-	/// 1.1 <= fronts.length == backs.length <= 1000.
-	/// 2.1 <= fronts[i] <= 2000.
-	/// 3.1 <= backs[i] <= 2000.
-	/// </summary>
-	int flipgame(vector<int>& fronts, vector<int>& backs);
+    /// <summary>
+    /// Leet code #822. Card Flipping Game
+    /// 
+    /// On a table are N cards, with a positive integer printed on the front 
+    /// and back of each card (possibly different).
+    ///
+    /// We flip any number of cards, and after we choose one card. 
+    ///
+    /// If the number X on the back of the chosen card is not on the front of 
+    /// any card, then this number X is good.
+    ///
+    /// What is the smallest number that is good?  If no number is good, 
+    /// output 0.
+    ///
+    /// Here, fronts[i] and backs[i] represent the number on the front and 
+    /// back of card i. 
+    ///
+    /// A flip swaps the front and back numbers, so the value on the front is 
+    /// now on the back and vice versa.
+    ///
+    /// Example:
+    ///
+    /// Input: fronts = [1,2,4,4,7], backs = [1,3,4,1,3]
+    /// Output: 2
+    /// Explanation: If we flip the second card, the fronts are [1,3,4,4,7] 
+    /// and the backs are [1,2,4,1,3].
+    /// We choose the second card, which has number 2 on the back, and it 
+    /// isn't on the front of any card, so 2 is good.
+    ///
+    /// Note:
+    /// 1.1 <= fronts.length == backs.length <= 1000.
+    /// 2.1 <= fronts[i] <= 2000.
+    /// 3.1 <= backs[i] <= 2000.
+    /// </summary>
+    int flipgame(vector<int>& fronts, vector<int>& backs);
 
-	/// <summary>
-	/// Leet code #825. Friends Of Appropriate Ages
-	/// 
-	/// Some people will make friend requests. The list of their ages is given 
-	/// and ages[i] is the age of the ith person. 
-	///
-	/// Person A will NOT friend request person B (B != A) if any of the 
-	/// following conditions are true:
-	///
-	/// age[B] <= 0.5 * age[A] + 7
-	/// age[B] > age[A]
-	/// age[B] > 100 && age[A] < 100
-	/// Otherwise, A will friend request B.
-	///
-	/// Note that if A requests B, B does not necessarily request A.  Also, 
-	/// people will not friend request themselves.
-	///
-	/// How many total friend requests are made?
-	///
-	/// Example 1:
-	///
-	/// Input: [16,16]
-	/// Output: 2
-	/// Explanation: 2 people friend request each other.
-	/// Example 2:
-	///
-	/// Input: [16,17,18]
-	/// Output: 2
-	/// Explanation: Friend requests are made 17 -> 16, 18 -> 17.
-	///
-	/// Example 3:
-	/// Input: [20,30,100,110,120]
-	/// Output: 
-	/// Explanation: Friend requests are made 110 -> 100, 120 -> 110, 
-	/// 120 -> 100.
-	///
-	///
-	/// Notes:
-	///
-	/// 1. 1 <= ages.length <= 20000.
-	/// 2. 1 <= ages[i] <= 120.
-	/// </summary>
-	int numFriendRequests(vector<int>& ages);
+    /// <summary>
+    /// Leet code #825. Friends Of Appropriate Ages
+    /// 
+    /// Some people will make friend requests. The list of their ages is given 
+    /// and ages[i] is the age of the ith person. 
+    ///
+    /// Person A will NOT friend request person B (B != A) if any of the 
+    /// following conditions are true:
+    ///
+    /// age[B] <= 0.5 * age[A] + 7
+    /// age[B] > age[A]
+    /// age[B] > 100 && age[A] < 100
+    /// Otherwise, A will friend request B.
+    ///
+    /// Note that if A requests B, B does not necessarily request A.  Also, 
+    /// people will not friend request themselves.
+    ///
+    /// How many total friend requests are made?
+    ///
+    /// Example 1:
+    ///
+    /// Input: [16,16]
+    /// Output: 2
+    /// Explanation: 2 people friend request each other.
+    /// Example 2:
+    ///
+    /// Input: [16,17,18]
+    /// Output: 2
+    /// Explanation: Friend requests are made 17 -> 16, 18 -> 17.
+    ///
+    /// Example 3:
+    /// Input: [20,30,100,110,120]
+    /// Output: 
+    /// Explanation: Friend requests are made 110 -> 100, 120 -> 110, 
+    /// 120 -> 100.
+    ///
+    ///
+    /// Notes:
+    ///
+    /// 1. 1 <= ages.length <= 20000.
+    /// 2. 1 <= ages[i] <= 120.
+    /// </summary>
+    int numFriendRequests(vector<int>& ages);
 
-	/// <summary>
-	/// Leet code #826. Most Profit Assigning Work
-	/// 
-	/// We have jobs: difficulty[i] is the difficulty of the ith job, and 
-	/// profit[i] is the profit of the ith job. 
-	///
-	/// Now we have some workers. worker[i] is the ability of the ith worker, 
-	/// which means that this worker can only complete a job with difficulty 
-	/// at most worker[i]. 
-	/// 
-	/// Every worker can be assigned at most one job, but one job can be 
-	/// completed multiple times.
-	///
-	/// For example, if 3 people attempt the same job that pays $1, then the 
-	/// total profit will be $3.  If a worker cannot complete any job, his 
-	/// profit is $0.
-	///
-	/// What is the most profit we can make?
-	///
-	/// Example 1:
-	///
-	/// Input: difficulty = [2,4,6,8,10], profit = [10,20,30,40,50], 
-	/// worker = [4,5,6,7]
-	/// Output: 100 
-	/// Explanation: Workers are assigned jobs of difficulty [4,4,6,6] and 
-	/// they get profit of [20,20,30,30] seperately.
-	/// Notes:
-	///
-	/// 1. 1 <= difficulty.length = profit.length <= 10000
-	/// 2. 1 <= worker.length <= 10000
-	/// 3. difficulty[i], profit[i], worker[i]  are in range [1, 10^5]
-	/// </summary>
-	int maxProfitAssignment(vector<int>& difficulty, vector<int>& profit,
-   		                    vector<int>& worker);
+    /// <summary>
+    /// Leet code #826. Most Profit Assigning Work
+    /// 
+    /// We have jobs: difficulty[i] is the difficulty of the ith job, and 
+    /// profit[i] is the profit of the ith job. 
+    ///
+    /// Now we have some workers. worker[i] is the ability of the ith worker, 
+    /// which means that this worker can only complete a job with difficulty 
+    /// at most worker[i]. 
+    /// 
+    /// Every worker can be assigned at most one job, but one job can be 
+    /// completed multiple times.
+    ///
+    /// For example, if 3 people attempt the same job that pays $1, then the 
+    /// total profit will be $3.  If a worker cannot complete any job, his 
+    /// profit is $0.
+    ///
+    /// What is the most profit we can make?
+    ///
+    /// Example 1:
+    ///
+    /// Input: difficulty = [2,4,6,8,10], profit = [10,20,30,40,50], 
+    /// worker = [4,5,6,7]
+    /// Output: 100 
+    /// Explanation: Workers are assigned jobs of difficulty [4,4,6,6] and 
+    /// they get profit of [20,20,30,30] seperately.
+    /// Notes:
+    ///
+    /// 1. 1 <= difficulty.length = profit.length <= 10000
+    /// 2. 1 <= worker.length <= 10000
+    /// 3. difficulty[i], profit[i], worker[i]  are in range [1, 10^5]
+    /// </summary>
+    int maxProfitAssignment(vector<int>& difficulty, vector<int>& profit,
+                            vector<int>& worker);
 
-	/// <summary>
-	/// Leet code #832. Flipping an Image
-	/// 
-	/// Given a binary matrix A, we want to flip the image horizontally, then 
-	/// invert it, and return the resulting image.
-	///
-	/// To flip an image horizontally means that each row of the image is 
-	/// reversed.  For example, flipping [1, 1, 0] horizontally results in 
-	/// [0, 1, 1].
-	///
-	/// To invert an image means that each 0 is replaced by 1, and each 1 is 
-	/// replaced by 0. For example, inverting [0, 1, 1] results in [1, 0, 0].
-	///
-	/// Example 1:
-	///
-	/// Input: [[1,1,0],[1,0,1],[0,0,0]]
-	/// Output: [[1,0,0],[0,1,0],[1,1,1]]
-	/// Explanation: First reverse each row: [[0,1,1],[1,0,1],[0,0,0]].
-	/// Then, invert the image: [[1,0,0],[0,1,0],[1,1,1]]
-	///
-	/// Example 2:
-	///
-	/// Input: [[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]
-	/// Output: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
-	/// Explanation: First reverse each row: [[0,0,1,1],[1,0,0,1],[1,1,1,0],
-	/// [0,1,0,1]].
-	/// Then invert the image: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
-	/// Notes:
-	/// 1. 1 <= A.length = A[0].length <= 20
-	/// 2. 0 <= A[i][j] <= 1
-	/// </summary>
-	vector<vector<int>> flipAndInvertImage(vector<vector<int>>& A);
+    /// <summary>
+    /// Leet code #832. Flipping an Image
+    /// 
+    /// Given a binary matrix A, we want to flip the image horizontally, then 
+    /// invert it, and return the resulting image.
+    ///
+    /// To flip an image horizontally means that each row of the image is 
+    /// reversed.  For example, flipping [1, 1, 0] horizontally results in 
+    /// [0, 1, 1].
+    ///
+    /// To invert an image means that each 0 is replaced by 1, and each 1 is 
+    /// replaced by 0. For example, inverting [0, 1, 1] results in [1, 0, 0].
+    ///
+    /// Example 1:
+    ///
+    /// Input: [[1,1,0],[1,0,1],[0,0,0]]
+    /// Output: [[1,0,0],[0,1,0],[1,1,1]]
+    /// Explanation: First reverse each row: [[0,1,1],[1,0,1],[0,0,0]].
+    /// Then, invert the image: [[1,0,0],[0,1,0],[1,1,1]]
+    ///
+    /// Example 2:
+    ///
+    /// Input: [[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]
+    /// Output: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
+    /// Explanation: First reverse each row: [[0,0,1,1],[1,0,0,1],[1,1,1,0],
+    /// [0,1,0,1]].
+    /// Then invert the image: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
+    /// Notes:
+    /// 1. 1 <= A.length = A[0].length <= 20
+    /// 2. 0 <= A[i][j] <= 1
+    /// </summary>
+    vector<vector<int>> flipAndInvertImage(vector<vector<int>>& A);
 
-	/// <summary>
-	/// Leet code #835. Image Overlap
-	/// 
-	/// Two images A and B are given, represented as binary, square matrices 
-	/// of the same size.  (A binary matrix has only 0s and 1s as values.)
-	///
-	/// We translate one image however we choose (sliding it left, right, up, 
-	/// or down any number of units), and place it on top of the other image.  
-	/// After, the overlap of this translation is the number of positions that 
-	/// have a 1 in both images.
-	///
-	/// (Note also that a translation does not include any kind of rotation.)
-	///
-	/// What is the largest possible overlap?
-	///
-	/// Example 1:
-	///
-	/// Input: A = [[1,1,0],
-	///             [0,1,0],
-	///             [0,1,0]]
-	///        B = [[0,0,0],
-	///             [0,1,1],
-	///             [0,0,1]]
-	/// Output: 3
-	/// Explanation: We slide A to right by 1 unit and down by 1 unit.
-	/// Notes: 
-	///
-	/// 1. 1 <= A.length = A[0].length = B.length = B[0].length <= 30
-	/// 2. 0 <= A[i][j], B[i][j] <= 1
-	/// </summary>
-	int largestOverlap(vector<vector<int>>& A, vector<vector<int>>& B);
+    /// <summary>
+    /// Leet code #835. Image Overlap
+    /// 
+    /// Two images A and B are given, represented as binary, square matrices 
+    /// of the same size.  (A binary matrix has only 0s and 1s as values.)
+    ///
+    /// We translate one image however we choose (sliding it left, right, up, 
+    /// or down any number of units), and place it on top of the other image.  
+    /// After, the overlap of this translation is the number of positions that 
+    /// have a 1 in both images.
+    ///
+    /// (Note also that a translation does not include any kind of rotation.)
+    ///
+    /// What is the largest possible overlap?
+    ///
+    /// Example 1:
+    ///
+    /// Input: A = [[1,1,0],
+    ///             [0,1,0],
+    ///             [0,1,0]]
+    ///        B = [[0,0,0],
+    ///             [0,1,1],
+    ///             [0,0,1]]
+    /// Output: 3
+    /// Explanation: We slide A to right by 1 unit and down by 1 unit.
+    /// Notes: 
+    ///
+    /// 1. 1 <= A.length = A[0].length = B.length = B[0].length <= 30
+    /// 2. 0 <= A[i][j], B[i][j] <= 1
+    /// </summary>
+    int largestOverlap(vector<vector<int>>& A, vector<vector<int>>& B);
 
-	/// <summary>
-	/// Leet code #838. Push Dominoes
-	/// 
-	/// There are N dominoes in a line, and we place each domino vertically 
-	/// upright.
-	/// In the beginning, we simultaneously push some of the dominoes either 
-	/// to the left or to the right.
-	///
-	/// After each second, each domino that is falling to the left pushes the 
-	/// adjacent domino on the left.
-	///
-	/// Similarly, the dominoes falling to the right push their adjacent 
-	/// dominoes standing on the right.
-	///
-	/// When a vertical domino has dominoes falling on it from both sides, it 
-	/// stays still due to the balance of the forces.
-	///
-	/// For the purposes of this question, we will consider that a falling 
-	/// domino expends no additional force to a falling or already fallen 
-	/// domino.
-	///
-	/// Given a string "S" representing the initial state. S[i] = 'L', if the 
-	/// i-th domino has been pushed to the left; S[i] = 'R', if the i-th domino 
-	/// has been pushed to the right; S[i] = '.', if the i-th domino has not 
-	/// been pushed.
-	///
-	/// Return a string representing the final state. 
-	/// 
-	/// Example 1:
-	///
-	/// Input: ".L.R...LR..L.."
-	/// Output: "LL.RR.LLRRLL.."
-	/// Example 2:
-	/// 
-	/// Input: "RR.L"
-	/// Output: "RR.L"
-	/// Explanation: The first domino expends no additional force on the second
-	/// domino.
-	/// Note:
-	/// 
-	/// 1. 0 <= N <= 10^5
-	/// 2. String dominoes contains only 'L', 'R' and '.'
-	/// </summary>
-	string pushDominoes(string dominoes);
+    /// <summary>
+    /// Leet code #838. Push Dominoes
+    /// 
+    /// There are N dominoes in a line, and we place each domino vertically 
+    /// upright.
+    /// In the beginning, we simultaneously push some of the dominoes either 
+    /// to the left or to the right.
+    ///
+    /// After each second, each domino that is falling to the left pushes the 
+    /// adjacent domino on the left.
+    ///
+    /// Similarly, the dominoes falling to the right push their adjacent 
+    /// dominoes standing on the right.
+    ///
+    /// When a vertical domino has dominoes falling on it from both sides, it 
+    /// stays still due to the balance of the forces.
+    ///
+    /// For the purposes of this question, we will consider that a falling 
+    /// domino expends no additional force to a falling or already fallen 
+    /// domino.
+    ///
+    /// Given a string "S" representing the initial state. S[i] = 'L', if the 
+    /// i-th domino has been pushed to the left; S[i] = 'R', if the i-th domino 
+    /// has been pushed to the right; S[i] = '.', if the i-th domino has not 
+    /// been pushed.
+    ///
+    /// Return a string representing the final state. 
+    /// 
+    /// Example 1:
+    ///
+    /// Input: ".L.R...LR..L.."
+    /// Output: "LL.RR.LLRRLL.."
+    /// Example 2:
+    /// 
+    /// Input: "RR.L"
+    /// Output: "RR.L"
+    /// Explanation: The first domino expends no additional force on the second
+    /// domino.
+    /// Note:
+    /// 
+    /// 1. 0 <= N <= 10^5
+    /// 2. String dominoes contains only 'L', 'R' and '.'
+    /// </summary>
+    string pushDominoes(string dominoes);
 
-	/// <summary>
-	/// Leet code #840. Magic Squares In Grid
-	/// 
-	/// A 3 x 3 magic square is a 3 x 3 grid filled with distinct numbers 
-	/// from 1 to 9 such that each row, column, and both diagonals all have 
-	/// the same sum.
-	///
-	/// Given an grid of integers, how many 3 x 3 "magic square" subgrids are 
-	/// there?  (Each subgrid is contiguous).
-	///
-	/// Example 1:
-	///
-	/// Input: [
-	///         [4,3,8,4],
-	///         [9,5,1,9],
-	///         [2,7,6,2]
-	///        ]
-	/// Output: 1
-	/// Explanation: 
-	/// The following subgrid is a 3 x 3 magic square:
-	/// 438
-	/// 951
-	/// 276
-	///
-	/// while this one is not:
-	/// 384
-	/// 519
-	/// 762
-	///
-	/// In total, there is only one magic square inside the given grid.
-	/// Note:
-	///
-	/// 1. 1 <= grid.length <= 10
-	/// 2. 1 <= grid[0].length <= 10
-	/// 3. 0 <= grid[i][j] <= 15
-	/// </summary>
-	int numMagicSquaresInside(vector<vector<int>>& grid);
+    /// <summary>
+    /// Leet code #840. Magic Squares In Grid
+    /// 
+    /// A 3 x 3 magic square is a 3 x 3 grid filled with distinct numbers 
+    /// from 1 to 9 such that each row, column, and both diagonals all have 
+    /// the same sum.
+    ///
+    /// Given an grid of integers, how many 3 x 3 "magic square" subgrids are 
+    /// there?  (Each subgrid is contiguous).
+    ///
+    /// Example 1:
+    ///
+    /// Input: [
+    ///         [4,3,8,4],
+    ///         [9,5,1,9],
+    ///         [2,7,6,2]
+    ///        ]
+    /// Output: 1
+    /// Explanation: 
+    /// The following subgrid is a 3 x 3 magic square:
+    /// 438
+    /// 951
+    /// 276
+    ///
+    /// while this one is not:
+    /// 384
+    /// 519
+    /// 762
+    ///
+    /// In total, there is only one magic square inside the given grid.
+    /// Note:
+    ///
+    /// 1. 1 <= grid.length <= 10
+    /// 2. 1 <= grid[0].length <= 10
+    /// 3. 0 <= grid[i][j] <= 15
+    /// </summary>
+    int numMagicSquaresInside(vector<vector<int>>& grid);
 
-	/// <summary>
-	/// Leet code #845. Longest Mountain in Array
-	/// 
-	/// Let's call any (contiguous) subarray B (of A) a mountain if the 
-	/// following properties hold:
-	///
-	/// B.length >= 3
-	/// There exists some 0 < i < B.length - 1 such that B[0] < B[1] < ... 
-	/// B[i-1] < B[i] > B[i+1] > ... > B[B.length - 1]
-	/// (Note that B could be any subarray of A, including the entire array A.)
-	///
-	/// Given an array A of integers, return the length of the longest 
-	/// mountain.
-	///  
-	/// Return 0 if there is no mountain.
-	/// 
-	/// Example 1:
-	/// Input: [2,1,4,7,3,2,5]
-	/// Output: 5
-	/// Explanation: The largest mountain is [1,4,7,3,2] which has length 5.
-	/// 
-	/// Example 2:
-	/// Input: [2,2,2]
-	/// Output: 0
-	/// Explanation: There is no mountain.
-	///
-	/// Note:
-	/// 1. 0 <= A.length <= 10000
-	/// 2. 0 <= A[i] <= 10000
-	/// </summary>
-	int longestMountain(vector<int>& A);
+    /// <summary>
+    /// Leet code #845. Longest Mountain in Array
+    /// 
+    /// Let's call any (contiguous) subarray B (of A) a mountain if the 
+    /// following properties hold:
+    ///
+    /// B.length >= 3
+    /// There exists some 0 < i < B.length - 1 such that B[0] < B[1] < ... 
+    /// B[i-1] < B[i] > B[i+1] > ... > B[B.length - 1]
+    /// (Note that B could be any subarray of A, including the entire array A.)
+    ///
+    /// Given an array A of integers, return the length of the longest 
+    /// mountain.
+    ///  
+    /// Return 0 if there is no mountain.
+    /// 
+    /// Example 1:
+    /// Input: [2,1,4,7,3,2,5]
+    /// Output: 5
+    /// Explanation: The largest mountain is [1,4,7,3,2] which has length 5.
+    /// 
+    /// Example 2:
+    /// Input: [2,2,2]
+    /// Output: 0
+    /// Explanation: There is no mountain.
+    ///
+    /// Note:
+    /// 1. 0 <= A.length <= 10000
+    /// 2. 0 <= A[i] <= 10000
+    /// </summary>
+    int longestMountain(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #849. Maximize Distance to Closest Person
-	/// 
-	/// In a row of seats, 1 represents a person sitting in that seat, and 0 
-	/// represents that the seat is empty. 
-	/// 
-	/// There is at least one empty seat, and at least one person sitting.
-	///
-	/// Alex wants to sit in the seat such that the distance between him and the 
-	/// closest person to him is maximized. 
-	///
-	/// Return that maximum distance to closest person.
-	///
-	/// Example 1:
-	///
-	/// Input: [1,0,0,0,1,0,1]
-	/// Output: 2
-	/// Explanation: 
-	/// If Alex sits in the second open seat (seats[2]), then the closest person 
-	/// has distance 2.
-	/// If Alex sits in any other open seat, the closest person has distance 1.
-	/// Thus, the maximum distance to the closest person is 2.
-	/// Example 2:
-	///
-	/// Input: [1,0,0,0]
-	/// Output: 3
-	/// Explanation: 
-	/// If Alex sits in the last seat, the closest person is 3 seats away.
-	/// This is the maximum distance possible, so the answer is 3.
-	/// Note:
-	///
-	/// 1. 1 <= seats.length <= 20000
-	/// 2. seats contains only 0s or 1s, at least one 0, and at least one 1.
-	/// </summary>
-	int maxDistToClosest(vector<int>& seats);
+    /// <summary>
+    /// Leet code #849. Maximize Distance to Closest Person
+    /// 
+    /// In a row of seats, 1 represents a person sitting in that seat, and 0 
+    /// represents that the seat is empty. 
+    /// 
+    /// There is at least one empty seat, and at least one person sitting.
+    ///
+    /// Alex wants to sit in the seat such that the distance between him and the 
+    /// closest person to him is maximized. 
+    ///
+    /// Return that maximum distance to closest person.
+    ///
+    /// Example 1:
+    ///
+    /// Input: [1,0,0,0,1,0,1]
+    /// Output: 2
+    /// Explanation: 
+    /// If Alex sits in the second open seat (seats[2]), then the closest person 
+    /// has distance 2.
+    /// If Alex sits in any other open seat, the closest person has distance 1.
+    /// Thus, the maximum distance to the closest person is 2.
+    /// Example 2:
+    ///
+    /// Input: [1,0,0,0]
+    /// Output: 3
+    /// Explanation: 
+    /// If Alex sits in the last seat, the closest person is 3 seats away.
+    /// This is the maximum distance possible, so the answer is 3.
+    /// Note:
+    ///
+    /// 1. 1 <= seats.length <= 20000
+    /// 2. seats contains only 0s or 1s, at least one 0, and at least one 1.
+    /// </summary>
+    int maxDistToClosest(vector<int>& seats);
 
-	/// <summary>
-	/// Leet code #860. Lemonade Change
-	/// 
-	/// At a lemonade stand, each lemonade costs $5. 
-	///
-	/// Customers are standing in a queue to buy from you, and order one at a time 
-	/// (in the order specified by bills).
-	///
-	/// Each customer will only buy one lemonade and pay with either a $5, $10, or 
-	/// $20 bill.  You must provide the correct change to each customer, so that 
-	/// the net transaction is that the customer pays $5.
-	///
-	/// Note that you don't have any change in hand at first.
-	///
-	/// Return true if and only if you can provide every customer with correct 
-	/// change.
-	/// 
-	/// Example 1:
-	/// 
-	/// Input: [5,5,5,10,20]
-	/// Output: true
-	/// Explanation: 
-	/// From the first 3 customers, we collect three $5 bills in order.
-	/// From the fourth customer, we collect a $10 bill and give back a $5.
-	/// From the fifth customer, we give a $10 bill and a $5 bill.
-	/// Since all customers got correct change, we output true.
-	///
-	/// Example 2: 
-	/// Input: [5,5,10]
-	/// Output: true
-	/// Example 3:
-	/// 
-	/// Input: [10,10]
-	/// Output: false
-	/// Example 4:
-	///
-	/// Input: [5,5,10,10,20]
-	/// Output: false
-	/// Explanation: 
-	/// From the first two customers in order, we collect two $5 bills.
-	/// For the next two customers in order, we collect a $10 bill and give back a 
-	/// $5 bill.
-	/// For the last customer, we can't give change of $15 back because we only 
-	/// have two $10 bills.
-	/// Since not every customer received correct change, the answer is false.
-	/// 
-	/// Note:
-	///
-	/// 1. 0 <= bills.length <= 10000
-	/// 2. bills[i] will be either 5, 10, or 20.
-	/// </summary>
-	bool lemonadeChange(vector<int>& bills);
+    /// <summary>
+    /// Leet code #860. Lemonade Change
+    /// 
+    /// At a lemonade stand, each lemonade costs $5. 
+    ///
+    /// Customers are standing in a queue to buy from you, and order one at a time 
+    /// (in the order specified by bills).
+    ///
+    /// Each customer will only buy one lemonade and pay with either a $5, $10, or 
+    /// $20 bill.  You must provide the correct change to each customer, so that 
+    /// the net transaction is that the customer pays $5.
+    ///
+    /// Note that you don't have any change in hand at first.
+    ///
+    /// Return true if and only if you can provide every customer with correct 
+    /// change.
+    /// 
+    /// Example 1:
+    /// 
+    /// Input: [5,5,5,10,20]
+    /// Output: true
+    /// Explanation: 
+    /// From the first 3 customers, we collect three $5 bills in order.
+    /// From the fourth customer, we collect a $10 bill and give back a $5.
+    /// From the fifth customer, we give a $10 bill and a $5 bill.
+    /// Since all customers got correct change, we output true.
+    ///
+    /// Example 2: 
+    /// Input: [5,5,10]
+    /// Output: true
+    /// Example 3:
+    /// 
+    /// Input: [10,10]
+    /// Output: false
+    /// Example 4:
+    ///
+    /// Input: [5,5,10,10,20]
+    /// Output: false
+    /// Explanation: 
+    /// From the first two customers in order, we collect two $5 bills.
+    /// For the next two customers in order, we collect a $10 bill and give back a 
+    /// $5 bill.
+    /// For the last customer, we can't give change of $15 back because we only 
+    /// have two $10 bills.
+    /// Since not every customer received correct change, the answer is false.
+    /// 
+    /// Note:
+    ///
+    /// 1. 0 <= bills.length <= 10000
+    /// 2. bills[i] will be either 5, 10, or 20.
+    /// </summary>
+    bool lemonadeChange(vector<int>& bills);
 
-	/// <summary>
-	/// Leet code #861. Score After Flipping Matrix
-	/// 
-	/// We have a two dimensional matrix A where each value is 0 or 1.
-	///
-	/// A move consists of choosing any row or column, and toggling each value 
-	/// in that row or column: changing all 0s to 1s, and all 1s to 0s.
-	///
-	/// After making any number of moves, every row of this matrix is interpreted 
-	/// as a binary number, and the score of the matrix is the sum of these 
-	/// numbers.
-	///
-	/// Return the highest possible score.
-	///
-	/// 
-	///
-	/// Example 1:
-	///
-	/// Input: [[0,0,1,1],[1,0,1,0],[1,1,0,0]]
-	/// Output: 39
-	/// Explanation:
-	/// Toggled to [[1,1,1,1],[1,0,0,1],[1,1,1,1]].
-	/// 0b1111 + 0b1001 + 0b1111 = 15 + 9 + 15 = 39
-	/// 
-	/// 
-	/// Note:
-	///
-	/// 1. 1 <= A.length <= 20
-	/// 2. 1 <= A[0].length <= 20
-	/// 3. A[i][j] is 0 or 1.
-	/// </summary>
-	int matrixScore(vector<vector<int>>& A);
+    /// <summary>
+    /// Leet code #861. Score After Flipping Matrix
+    /// 
+    /// We have a two dimensional matrix A where each value is 0 or 1.
+    ///
+    /// A move consists of choosing any row or column, and toggling each value 
+    /// in that row or column: changing all 0s to 1s, and all 1s to 0s.
+    ///
+    /// After making any number of moves, every row of this matrix is interpreted 
+    /// as a binary number, and the score of the matrix is the sum of these 
+    /// numbers.
+    ///
+    /// Return the highest possible score.
+    ///
+    /// 
+    ///
+    /// Example 1:
+    ///
+    /// Input: [[0,0,1,1],[1,0,1,0],[1,1,0,0]]
+    /// Output: 39
+    /// Explanation:
+    /// Toggled to [[1,1,1,1],[1,0,0,1],[1,1,1,1]].
+    /// 0b1111 + 0b1001 + 0b1111 = 15 + 9 + 15 = 39
+    /// 
+    /// 
+    /// Note:
+    ///
+    /// 1. 1 <= A.length <= 20
+    /// 2. 1 <= A[0].length <= 20
+    /// 3. A[i][j] is 0 or 1.
+    /// </summary>
+    int matrixScore(vector<vector<int>>& A);
 
-	/// <summary>
-	/// Leet code #862. Shortest Subarray with Sum at Least K
-	/// 
-	/// Return the length of the shortest, non-empty, contiguous subarray of A 
-	/// with sum at least K.
-	///
-	/// If there is no non-empty subarray with sum at least K, return -1.
-	///
-	/// Example 1:
-	/// Input: A = [1], K = 1
-	/// Output: 1
-	///
-	/// Example 2:
-	/// Input: A = [1,2], K = 4
-	/// Output: -1
-	///
-	/// Example 3:
-	/// Input: A = [2,-1,2], K = 3
-	/// Output: 3
-	///
-	/// Note:
-	/// 1. 1 <= A.length <= 50000
-	/// 2. -10 ^ 5 <= A[i] <= 10 ^ 5
-	/// 3. 1 <= K <= 10 ^ 9
-	/// </summary>
-	int shortestSubarray(vector<int>& A, int K);
+    /// <summary>
+    /// Leet code #862. Shortest Subarray with Sum at Least K
+    /// 
+    /// Return the length of the shortest, non-empty, contiguous subarray of A 
+    /// with sum at least K.
+    ///
+    /// If there is no non-empty subarray with sum at least K, return -1.
+    ///
+    /// Example 1:
+    /// Input: A = [1], K = 1
+    /// Output: 1
+    ///
+    /// Example 2:
+    /// Input: A = [1,2], K = 4
+    /// Output: -1
+    ///
+    /// Example 3:
+    /// Input: A = [2,-1,2], K = 3
+    /// Output: 3
+    ///
+    /// Note:
+    /// 1. 1 <= A.length <= 50000
+    /// 2. -10 ^ 5 <= A[i] <= 10 ^ 5
+    /// 3. 1 <= K <= 10 ^ 9
+    /// </summary>
+    int shortestSubarray(vector<int>& A, int K);
 
-	/// <summary>
-	/// Leet code #867. Transpose Matrix
-	/// 
-	/// Given a matrix A, return the transpose of A.
-	///
-	/// The transpose of a matrix is the matrix flipped over it's main 
-	/// diagonal, switching the row and column indices of the matrix.
-	///
-	/// Example 1:
-	///
-	/// Input: [[1,2,3],[4,5,6],[7,8,9]]
-	/// Output: [[1,4,7],[2,5,8],[3,6,9]]
-	///
-	/// Example 2:
-	///
-	/// Input: [[1,2,3],[4,5,6]]
-	/// Output: [[1,4],[2,5],[3,6]]
-	///
-	/// Note:
-	///
-	/// 1. 1 <= A.length <= 1000
-	/// 2. 1 <= A[0].length <= 1000
-	/// </summary>
-	vector<vector<int>> transpose(vector<vector<int>>& A);
+    /// <summary>
+    /// Leet code #867. Transpose Matrix
+    /// 
+    /// Given a matrix A, return the transpose of A.
+    ///
+    /// The transpose of a matrix is the matrix flipped over it's main 
+    /// diagonal, switching the row and column indices of the matrix.
+    ///
+    /// Example 1:
+    ///
+    /// Input: [[1,2,3],[4,5,6],[7,8,9]]
+    /// Output: [[1,4,7],[2,5,8],[3,6,9]]
+    ///
+    /// Example 2:
+    ///
+    /// Input: [[1,2,3],[4,5,6]]
+    /// Output: [[1,4],[2,5],[3,6]]
+    ///
+    /// Note:
+    ///
+    /// 1. 1 <= A.length <= 1000
+    /// 2. 1 <= A[0].length <= 1000
+    /// </summary>
+    vector<vector<int>> transpose(vector<vector<int>>& A);
 
-	/// <summary>
-	/// Leet code #874. Walking Robot Simulation
-	/// 
-	/// A robot on an infinite grid starts at point (0, 0) and faces north.  
-	/// The robot can receive one of three possible types of commands:
-	///
-	/// -2: turn left 90 degrees
-	/// -1: turn right 90 degrees
-	/// 1 <= x <= 9: move forward x units
-	/// Some of the grid squares are obstacles. 
-	///
-	/// The i-th obstacle is at grid point (obstacles[i][0], obstacles[i][1])
-	///
-	/// If the robot would try to move onto them, the robot stays on the 
-	/// previous grid square instead (but still continues following the rest 
-	/// of the route.)
-	///
-	/// Return the square of the maximum Euclidean distance that the robot 
-	/// will be from the origin.
-	///  
-	/// Example 1:
-	///
-	/// Input: commands = [4,-1,3], obstacles = []
-	/// Output: 25
-	/// Explanation: robot will go to (3, 4)
-	/// 
-	/// Example 2:
-	///
-	/// Input: commands = [4,-1,4,-2,4], obstacles = [[2,4]]
-	/// Output: 65
-	/// Explanation: robot will be stuck at (1, 4) before turning left and 
-	/// going to (1, 8)
-	///
-	/// Note:
-	/// 1. 0 <= commands.length <= 10000
-	/// 2. 0 <= obstacles.length <= 10000
-	/// 3. -30000 <= obstacle[i][0] <= 30000
-	/// 4. -30000 <= obstacle[i][1] <= 30000
-	/// 5. The answer is guaranteed to be less than 2 ^ 31.
-	/// </summary>
-	int robotSim(vector<int>& commands, vector<vector<int>>& obstacles);
+    /// <summary>
+    /// Leet code #874. Walking Robot Simulation
+    /// 
+    /// A robot on an infinite grid starts at point (0, 0) and faces north.  
+    /// The robot can receive one of three possible types of commands:
+    ///
+    /// -2: turn left 90 degrees
+    /// -1: turn right 90 degrees
+    /// 1 <= x <= 9: move forward x units
+    /// Some of the grid squares are obstacles. 
+    ///
+    /// The i-th obstacle is at grid point (obstacles[i][0], obstacles[i][1])
+    ///
+    /// If the robot would try to move onto them, the robot stays on the 
+    /// previous grid square instead (but still continues following the rest 
+    /// of the route.)
+    ///
+    /// Return the square of the maximum Euclidean distance that the robot 
+    /// will be from the origin.
+    ///  
+    /// Example 1:
+    ///
+    /// Input: commands = [4,-1,3], obstacles = []
+    /// Output: 25
+    /// Explanation: robot will go to (3, 4)
+    /// 
+    /// Example 2:
+    ///
+    /// Input: commands = [4,-1,4,-2,4], obstacles = [[2,4]]
+    /// Output: 65
+    /// Explanation: robot will be stuck at (1, 4) before turning left and 
+    /// going to (1, 8)
+    ///
+    /// Note:
+    /// 1. 0 <= commands.length <= 10000
+    /// 2. 0 <= obstacles.length <= 10000
+    /// 3. -30000 <= obstacle[i][0] <= 30000
+    /// 4. -30000 <= obstacle[i][1] <= 30000
+    /// 5. The answer is guaranteed to be less than 2 ^ 31.
+    /// </summary>
+    int robotSim(vector<int>& commands, vector<vector<int>>& obstacles);
 
-	/// <summary>
-	/// Leet code #883. Projection Area of 3D Shapes
-	/// 
-	/// On a N * N grid, we place some 1 * 1 * 1 cubes that are axis-aligned 
-	/// with the x, y, and z axes.
-	///
-	/// Each value v = grid[i][j] represents a tower of v cubes placed on top 
-	/// of grid cell (i, j).
-	///
-	/// Now we view the projection of these cubes onto the xy, yz, and zx planes.
-	///
-	/// A projection is like a shadow, that maps our 3 dimensional figure to a 2 
-	/// dimensional plane. 
-	///
-	/// Here, we are viewing the "shadow" when looking at the cubes from the top, 
-	/// the front, and the side.
-	///
-	/// Return the total area of all three projections.
-	///
-	/// Example 1:
-	/// Input: [[2]]
-	/// Output: 5
-	///
-	/// Example 2:
-	/// Input: [[1,2],[3,4]]
-	/// Output: 17
-	/// Explanation: 
-	/// Here are the three projections ("shadows") of the shape made with each 
-	/// axis-aligned plane.
-	///
-	/// Example 3:
-	/// Input: [[1,0],[0,2]]
-	/// Output: 8
-	///
-	/// Example 4:
-	/// Input: [[1,1,1],[1,0,1],[1,1,1]]
-	/// Output: 14
-	///
-	/// Example 5:
-	/// Input: [[2,2,2],[2,1,2],[2,2,2]]
-	/// Output: 21
-	///  
-	/// Note:
-	/// 1. 1 <= grid.length = grid[0].length <= 50
-	/// 2. 0 <= grid[i][j] <= 50
-	/// </summary>
-	int projectionArea(vector<vector<int>>& grid);
+    /// <summary>
+    /// Leet code #883. Projection Area of 3D Shapes
+    /// 
+    /// On a N * N grid, we place some 1 * 1 * 1 cubes that are axis-aligned 
+    /// with the x, y, and z axes.
+    ///
+    /// Each value v = grid[i][j] represents a tower of v cubes placed on top 
+    /// of grid cell (i, j).
+    ///
+    /// Now we view the projection of these cubes onto the xy, yz, and zx planes.
+    ///
+    /// A projection is like a shadow, that maps our 3 dimensional figure to a 2 
+    /// dimensional plane. 
+    ///
+    /// Here, we are viewing the "shadow" when looking at the cubes from the top, 
+    /// the front, and the side.
+    ///
+    /// Return the total area of all three projections.
+    ///
+    /// Example 1:
+    /// Input: [[2]]
+    /// Output: 5
+    ///
+    /// Example 2:
+    /// Input: [[1,2],[3,4]]
+    /// Output: 17
+    /// Explanation: 
+    /// Here are the three projections ("shadows") of the shape made with each 
+    /// axis-aligned plane.
+    ///
+    /// Example 3:
+    /// Input: [[1,0],[0,2]]
+    /// Output: 8
+    ///
+    /// Example 4:
+    /// Input: [[1,1,1],[1,0,1],[1,1,1]]
+    /// Output: 14
+    ///
+    /// Example 5:
+    /// Input: [[2,2,2],[2,1,2],[2,2,2]]
+    /// Output: 21
+    ///  
+    /// Note:
+    /// 1. 1 <= grid.length = grid[0].length <= 50
+    /// 2. 0 <= grid[i][j] <= 50
+    /// </summary>
+    int projectionArea(vector<vector<int>>& grid);
 
-	/// <summary>
-	/// Leet code #457. Circular Array Loop
-	/// 
-	/// You are given an array of positive and negative integers. If a number n 
-	/// at an index is positive, then move forward n steps. Conversely, if 
-	/// it's negative (-n), move backward n steps. Assume the first element of 
-	/// the array is forward next to the last element, and the last element is 
-	/// backward next to the first element. Determine if there is a loop in this 
-	/// array. A loop starts and ends at a particular index with more than 1 
-	/// element along the loop. The loop must be "forward" or "backward'.
-	///
-	/// Example 1: Given the array [2, -1, 1, 2, 2], there is a loop, from index 
-	/// 0 -> 2 -> 3 -> 0.
-	///
-	/// Example 2: Given the array [-1, 2], there is no loop.
-	///
-	/// Note: The given array is guaranteed to contain no element "0".
-	/// Can you do it in O(n) time complexity and O(1) space complexity?
-	/// </summary>
-	bool circularArrayLoop(vector<int>& nums);
+    /// <summary>
+    /// Leet code #457. Circular Array Loop
+    /// 
+    /// You are given an array of positive and negative integers. If a number n 
+    /// at an index is positive, then move forward n steps. Conversely, if 
+    /// it's negative (-n), move backward n steps. Assume the first element of 
+    /// the array is forward next to the last element, and the last element is 
+    /// backward next to the first element. Determine if there is a loop in this 
+    /// array. A loop starts and ends at a particular index with more than 1 
+    /// element along the loop. The loop must be "forward" or "backward'.
+    ///
+    /// Example 1: Given the array [2, -1, 1, 2, 2], there is a loop, from index 
+    /// 0 -> 2 -> 3 -> 0.
+    ///
+    /// Example 2: Given the array [-1, 2], there is no loop.
+    ///
+    /// Note: The given array is guaranteed to contain no element "0".
+    /// Can you do it in O(n) time complexity and O(1) space complexity?
+    /// </summary>
+    bool circularArrayLoop(vector<int>& nums);
 
-	/// <summary>
-	/// Leet code #885. Spiral Matrix III
-	/// 
-	/// On a 2 dimensional grid with R rows and C columns, we start at (r0, c0) 
-	/// facing east.
-	///
-	/// Here, the north-west corner of the grid is at the first row and column, 
-	/// and the south-east corner of the grid is at the last row and column.
-	///
-	/// Now, we walk in a clockwise spiral shape to visit every position in this 
-	/// grid. 
-	///
-	/// Whenever we would move outside the boundary of the grid, we continue our 
-	/// walk outside the grid (but may return to the grid boundary later.) 
-	///
-	/// Eventually, we reach all R * C spaces of the grid.
-	///
-	/// Return a list of coordinates representing the positions of the grid in 
-	/// the order they were visited.
-	///
-	/// Example 1:
-	///
-	/// Input: R = 1, C = 4, r0 = 0, c0 = 0
-	/// Output: [[0,0],[0,1],[0,2],[0,3]]
-	///
-	/// Example 2:
-	///
-	/// Input: R = 5, C = 6, r0 = 1, c0 = 4
-	/// Output: 
-	/// [[1,4],[1,5],[2,5],[2,4],[2,3],[1,3],[0,3],[0,4],[0,5],[3,5],[3,4],[3,3],
-	///  [3,2],[2,2],[1,2],[0,2],[4,5],[4,4],[4,3],[4,2],[4,1],[3,1],[2,1],[1,1],
-	///  [0,1],[4,0],[3,0],[2,0],[1,0],[0,0]]
-	///
-	/// Note:
-	/// 1. 1 <= R <= 100
-	/// 2. 1 <= C <= 100
-	/// 3. 0 <= r0 < R
-	/// 4. 0 <= c0 < C
-	/// </summary>
-	vector<vector<int>> spiralMatrixIII(int R, int C, int r0, int c0);
-	
-	/// <summary>
-	/// Leet code #888. Fair Candy Swap
-	/// 
-	/// Alice and Bob have candy bars of different sizes: A[i] is the size of the 
-	/// i-th bar of candy that Alice has, and B[j] is the size of the j-th bar of 
-	/// candy that Bob has.
-	///
-	/// Since they are friends, they would like to exchange one candy bar each so 
-	/// that after the exchange, they both have the same total amount of candy.  
-	/// (The total amount of candy a person has is the sum of the sizes of candy 
-	/// bars they have.)
-	///
-	/// Return an integer array ans where ans[0] is the size of the candy bar that 
-	/// Alice must exchange, and ans[1] is the size of the candy bar that Bob must 
-	/// exchange.
-	///
-	/// If there are multiple answers, you may return any one of them.  It is 
-	/// guaranteed an answer exists.
-	///
-	/// Example 1:
-	/// Input: A = [1,1], B = [2,2]
-	/// Output: [1,2]
-	///
-	/// Example 2:
-	/// Input: A = [1,2], B = [2,3]
-	/// Output: [1,2]
-	///
-	/// Example 3:
-	/// Input: A = [2], B = [1,3]
-	/// Output: [2,3]
-	///
-	/// Example 4:
-	/// Input: A = [1,2,5], B = [2,4]
-	/// Output: [5,4]
-	/// 
-	/// Note:
-	/// 1. 1 <= A.length <= 10000
-	/// 2. 1 <= B.length <= 10000
-	/// 3. 1 <= A[i] <= 100000
-	/// 4. 1 <= B[i] <= 100000
-	/// 5. It is guaranteed that Alice and Bob have different total amounts of 
-	///    candy.
-	/// 6. It is guaranteed there exists an answer.
-	/// </summary>
-	vector<int> fairCandySwap(vector<int>& A, vector<int>& B);
+    /// <summary>
+    /// Leet code #885. Spiral Matrix III
+    /// 
+    /// On a 2 dimensional grid with R rows and C columns, we start at (r0, c0) 
+    /// facing east.
+    ///
+    /// Here, the north-west corner of the grid is at the first row and column, 
+    /// and the south-east corner of the grid is at the last row and column.
+    ///
+    /// Now, we walk in a clockwise spiral shape to visit every position in this 
+    /// grid. 
+    ///
+    /// Whenever we would move outside the boundary of the grid, we continue our 
+    /// walk outside the grid (but may return to the grid boundary later.) 
+    ///
+    /// Eventually, we reach all R * C spaces of the grid.
+    ///
+    /// Return a list of coordinates representing the positions of the grid in 
+    /// the order they were visited.
+    ///
+    /// Example 1:
+    ///
+    /// Input: R = 1, C = 4, r0 = 0, c0 = 0
+    /// Output: [[0,0],[0,1],[0,2],[0,3]]
+    ///
+    /// Example 2:
+    ///
+    /// Input: R = 5, C = 6, r0 = 1, c0 = 4
+    /// Output: 
+    /// [[1,4],[1,5],[2,5],[2,4],[2,3],[1,3],[0,3],[0,4],[0,5],[3,5],[3,4],[3,3],
+    ///  [3,2],[2,2],[1,2],[0,2],[4,5],[4,4],[4,3],[4,2],[4,1],[3,1],[2,1],[1,1],
+    ///  [0,1],[4,0],[3,0],[2,0],[1,0],[0,0]]
+    ///
+    /// Note:
+    /// 1. 1 <= R <= 100
+    /// 2. 1 <= C <= 100
+    /// 3. 0 <= r0 < R
+    /// 4. 0 <= c0 < C
+    /// </summary>
+    vector<vector<int>> spiralMatrixIII(int R, int C, int r0, int c0);
+    
+    /// <summary>
+    /// Leet code #888. Fair Candy Swap
+    /// 
+    /// Alice and Bob have candy bars of different sizes: A[i] is the size of the 
+    /// i-th bar of candy that Alice has, and B[j] is the size of the j-th bar of 
+    /// candy that Bob has.
+    ///
+    /// Since they are friends, they would like to exchange one candy bar each so 
+    /// that after the exchange, they both have the same total amount of candy.  
+    /// (The total amount of candy a person has is the sum of the sizes of candy 
+    /// bars they have.)
+    ///
+    /// Return an integer array ans where ans[0] is the size of the candy bar that 
+    /// Alice must exchange, and ans[1] is the size of the candy bar that Bob must 
+    /// exchange.
+    ///
+    /// If there are multiple answers, you may return any one of them.  It is 
+    /// guaranteed an answer exists.
+    ///
+    /// Example 1:
+    /// Input: A = [1,1], B = [2,2]
+    /// Output: [1,2]
+    ///
+    /// Example 2:
+    /// Input: A = [1,2], B = [2,3]
+    /// Output: [1,2]
+    ///
+    /// Example 3:
+    /// Input: A = [2], B = [1,3]
+    /// Output: [2,3]
+    ///
+    /// Example 4:
+    /// Input: A = [1,2,5], B = [2,4]
+    /// Output: [5,4]
+    /// 
+    /// Note:
+    /// 1. 1 <= A.length <= 10000
+    /// 2. 1 <= B.length <= 10000
+    /// 3. 1 <= A[i] <= 100000
+    /// 4. 1 <= B[i] <= 100000
+    /// 5. It is guaranteed that Alice and Bob have different total amounts of 
+    ///    candy.
+    /// 6. It is guaranteed there exists an answer.
+    /// </summary>
+    vector<int> fairCandySwap(vector<int>& A, vector<int>& B);
 
-	/// <summary>
-	/// Leet code #892. Surface Area of 3D Shapes
-	/// 
-	/// On a N * N grid, we place some 1 * 1 * 1 cubes.
-	///
-	/// Each value v = grid[i][j] represents a tower of v cubes placed on top of 
-	/// grid cell (i, j).
-	///
-	/// Return the total surface area of the resulting shapes. 
-	///
-	/// Example 1:
-	/// Input: [[2]]
-	/// Output: 10
-	///
-	/// Example 2: 
-	/// Input: [[1,2],[3,4]]
-	/// Output: 34
-	///
-	/// Example 3:
-	/// Input: [[1,0],[0,2]]
-	/// Output: 16
-	///
-	/// Example 4:
-	/// Input: [[1,1,1],[1,0,1],[1,1,1]]
-	/// Output: 32
-	///
-	/// Example 5: 
-	/// Input: [[2,2,2],[2,1,2],[2,2,2]]
-	/// Output: 46
-	/// 
-	/// Note:
-	/// 
-	/// 1. 1 <= N <= 50
-	/// 2. 0 <= grid[i][j] <= 50
-	/// </summary>
-	int surfaceArea(vector<vector<int>>& grid);
+    /// <summary>
+    /// Leet code #892. Surface Area of 3D Shapes
+    /// 
+    /// On a N * N grid, we place some 1 * 1 * 1 cubes.
+    ///
+    /// Each value v = grid[i][j] represents a tower of v cubes placed on top of 
+    /// grid cell (i, j).
+    ///
+    /// Return the total surface area of the resulting shapes. 
+    ///
+    /// Example 1:
+    /// Input: [[2]]
+    /// Output: 10
+    ///
+    /// Example 2: 
+    /// Input: [[1,2],[3,4]]
+    /// Output: 34
+    ///
+    /// Example 3:
+    /// Input: [[1,0],[0,2]]
+    /// Output: 16
+    ///
+    /// Example 4:
+    /// Input: [[1,1,1],[1,0,1],[1,1,1]]
+    /// Output: 32
+    ///
+    /// Example 5: 
+    /// Input: [[2,2,2],[2,1,2],[2,2,2]]
+    /// Output: 46
+    /// 
+    /// Note:
+    /// 
+    /// 1. 1 <= N <= 50
+    /// 2. 0 <= grid[i][j] <= 50
+    /// </summary>
+    int surfaceArea(vector<vector<int>>& grid);
 
-	/// <summary>
-	/// Leet code #896. Monotonic Array 
-	/// 
-	/// An array is monotonic if it is either monotone increasing or monotone 
-	/// decreasing.
-	///
-	/// An array A is monotone increasing if for all i <= j, A[i] <= A[j].  
-	/// An array A is monotone decreasing if for all i <= j, A[i] >= A[j].
-	///
-	/// Return true if and only if the given array A is monotonic.
-	///
-	/// Example 1:
-	/// Input: [1,2,2,3]
-	/// Output: true
-	///
-	/// Example 2:
-	/// Input: [6,5,4,4]
-	/// Output: true
-	///
-	/// Example 3:
-	/// Input: [1,3,2]
-	/// Output: false
-	///
-	/// Example 4:
-	/// Input: [1,2,4,5]
-	/// Output: true
-	///
-	/// Example 5:
-	/// Input: [1,1,1]
-	/// Output: true
-	/// Note:
-	/// 1. 1 <= A.length <= 50000
-	/// 2. -100000 <= A[i] <= 100000
-	/// </summary>
-	bool isMonotonic(vector<int>& A);
+    /// <summary>
+    /// Leet code #896. Monotonic Array 
+    /// 
+    /// An array is monotonic if it is either monotone increasing or monotone 
+    /// decreasing.
+    ///
+    /// An array A is monotone increasing if for all i <= j, A[i] <= A[j].  
+    /// An array A is monotone decreasing if for all i <= j, A[i] >= A[j].
+    ///
+    /// Return true if and only if the given array A is monotonic.
+    ///
+    /// Example 1:
+    /// Input: [1,2,2,3]
+    /// Output: true
+    ///
+    /// Example 2:
+    /// Input: [6,5,4,4]
+    /// Output: true
+    ///
+    /// Example 3:
+    /// Input: [1,3,2]
+    /// Output: false
+    ///
+    /// Example 4:
+    /// Input: [1,2,4,5]
+    /// Output: true
+    ///
+    /// Example 5:
+    /// Input: [1,1,1]
+    /// Output: true
+    /// Note:
+    /// 1. 1 <= A.length <= 50000
+    /// 2. -100000 <= A[i] <= 100000
+    /// </summary>
+    bool isMonotonic(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #905. Sort Array By Parity
-	/// 
-	/// Given an array A of non-negative integers, return an array 
-	/// consisting of all the even elements of A, followed by all 
-	/// the odd elements of A.
-	///
-	/// You may return any answer array that satisfies this condition.
-	///
-	/// Example 1:
-	/// Input: [3,1,2,4]
-	/// Output: [2,4,3,1]
-	/// The outputs [4,2,3,1], [2,4,1,3], and [4,2,1,3] would also be accepted.
-	/// 
-	/// Note:
-	/// 1. 1 <= A.length <= 5000
-	/// 2. 0 <= A[i] <= 5000
-	/// </summary>
-	vector<int> sortArrayByParity(vector<int>& A);
+    /// <summary>
+    /// Leet code #905. Sort Array By Parity
+    /// 
+    /// Given an array A of non-negative integers, return an array 
+    /// consisting of all the even elements of A, followed by all 
+    /// the odd elements of A.
+    ///
+    /// You may return any answer array that satisfies this condition.
+    ///
+    /// Example 1:
+    /// Input: [3,1,2,4]
+    /// Output: [2,4,3,1]
+    /// The outputs [4,2,3,1], [2,4,1,3], and [4,2,1,3] would also be accepted.
+    /// 
+    /// Note:
+    /// 1. 1 <= A.length <= 5000
+    /// 2. 0 <= A[i] <= 5000
+    /// </summary>
+    vector<int> sortArrayByParity(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #918. Maximum Sum Circular Subarray
-	/// 
-	/// Given a circular array C of integers represented by A, find the maximum 
-	/// possible sum of a non-empty subarray of C.
-	///
-	/// Here, a circular array means the end of the array connects to the 
-	/// beginning of the array.  (Formally, C[i] = A[i] when 0 <= i < A.length, 
-	/// and C[i+A.length] = C[i] when i >= 0.)
-	///
-	/// Also, a subarray may only include each element of the fixed buffer A at 
-	/// most once.  (Formally, for a subarray C[i], C[i+1], ..., C[j], there does 
-	/// not exist i <= k1, k2 <= j with k1 % A.length = k2 % A.length.)
-	///
-	///
-	/// Example 1:
-	/// Input: [1,-2,3,-2]
-	/// Output: 3
-	/// Explanation: Subarray [3] has maximum sum 3
-	///
-	/// Example 2:
-	/// Input: [5,-3,5]
-	/// Output: 10
-	/// Explanation: Subarray [5,5] has maximum sum 5 + 5 = 10
-	///
-	/// Example 3:
-	/// Input: [3,-1,2,-1]
-	/// Output: 4
-	/// Explanation: Subarray [2,-1,3] has maximum sum 2 + (-1) + 3 = 4
-	///
-	/// Example 4:
-	/// Input: [3,-2,2,-3]
-	/// Output: 3
-	/// Explanation: Subarray [3] and [3,-2,2] both have maximum sum 3
-	///
-	/// Example 5:
-	/// Input: [-2,-3,-1]
-	/// Output: -1
-	/// Explanation: Subarray [-1] has maximum sum -1
-	///  
-	///
-	/// Note:
-	///
-	/// 1. -30000 <= A[i] <= 30000
-	/// 2. 1 <= A.length <= 30000
-	/// 
-	/// </summary>
-	int maxSubarraySumCircular(vector<int>& A);
+    /// <summary>
+    /// Leet code #918. Maximum Sum Circular Subarray
+    /// 
+    /// Given a circular array C of integers represented by A, find the maximum 
+    /// possible sum of a non-empty subarray of C.
+    ///
+    /// Here, a circular array means the end of the array connects to the 
+    /// beginning of the array.  (Formally, C[i] = A[i] when 0 <= i < A.length, 
+    /// and C[i+A.length] = C[i] when i >= 0.)
+    ///
+    /// Also, a subarray may only include each element of the fixed buffer A at 
+    /// most once.  (Formally, for a subarray C[i], C[i+1], ..., C[j], there does 
+    /// not exist i <= k1, k2 <= j with k1 % A.length = k2 % A.length.)
+    ///
+    ///
+    /// Example 1:
+    /// Input: [1,-2,3,-2]
+    /// Output: 3
+    /// Explanation: Subarray [3] has maximum sum 3
+    ///
+    /// Example 2:
+    /// Input: [5,-3,5]
+    /// Output: 10
+    /// Explanation: Subarray [5,5] has maximum sum 5 + 5 = 10
+    ///
+    /// Example 3:
+    /// Input: [3,-1,2,-1]
+    /// Output: 4
+    /// Explanation: Subarray [2,-1,3] has maximum sum 2 + (-1) + 3 = 4
+    ///
+    /// Example 4:
+    /// Input: [3,-2,2,-3]
+    /// Output: 3
+    /// Explanation: Subarray [3] and [3,-2,2] both have maximum sum 3
+    ///
+    /// Example 5:
+    /// Input: [-2,-3,-1]
+    /// Output: -1
+    /// Explanation: Subarray [-1] has maximum sum -1
+    ///  
+    ///
+    /// Note:
+    ///
+    /// 1. -30000 <= A[i] <= 30000
+    /// 2. 1 <= A.length <= 30000
+    /// 
+    /// </summary>
+    int maxSubarraySumCircular(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #922. Sort Array By Parity II
-	/// 
-	/// Given an array A of non-negative integers, half of the integers in A are 
-	/// odd, and half of the integers are even.
-	///
-	/// Sort the array so that whenever A[i] is odd, i is odd; and whenever A[i] 
-	/// is even, i is even.
-	///
-	/// You may return any answer array that satisfies this condition.
-	///
-	/// 
-	/// Example 1:
-	///
-	/// Input: [4,2,5,7]
-	/// Output: [4,5,2,7]
-	/// Explanation: [4,7,2,5], [2,5,4,7], [2,7,4,5] would also have been accepted.
-	/// 
-	///
-	/// Note:
-	///
-	/// 1. 2 <= A.length <= 20000
-	/// 2. A.length % 2 == 0
-	/// 3. 0 <= A[i] <= 1000
-	/// </summary>
-	vector<int> sortArrayByParityII(vector<int>& A);
+    /// <summary>
+    /// Leet code #922. Sort Array By Parity II
+    /// 
+    /// Given an array A of non-negative integers, half of the integers in A are 
+    /// odd, and half of the integers are even.
+    ///
+    /// Sort the array so that whenever A[i] is odd, i is odd; and whenever A[i] 
+    /// is even, i is even.
+    ///
+    /// You may return any answer array that satisfies this condition.
+    ///
+    /// 
+    /// Example 1:
+    ///
+    /// Input: [4,2,5,7]
+    /// Output: [4,5,2,7]
+    /// Explanation: [4,7,2,5], [2,5,4,7], [2,7,4,5] would also have been accepted.
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. 2 <= A.length <= 20000
+    /// 2. A.length % 2 == 0
+    /// 3. 0 <= A[i] <= 1000
+    /// </summary>
+    vector<int> sortArrayByParityII(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #926. Flip String to Monotone Increasing 
-	/// 
-	/// A string of '0's and '1's is monotone increasing if it consists of some 
-	/// number of '0's (possibly 0), followed by some number of '1's (also 
-	/// possibly 0.)
-	///
-	/// We are given a string S of '0's and '1's, and we may flip any '0' to a '1' 
-	/// or a '1' to a '0'.
-	///
-	/// Return the minimum number of flips to make S monotone increasing.
-	///
-	/// 
-	/// Example 1:
-	/// Input: "00110"
-	/// Output: 1
-	/// Explanation: We flip the last digit to get 00111.
-	///
-	/// Example 2:
-	/// Input: "010110"
-	/// Output: 2
-	/// Explanation: We flip to get 011111, or alternatively 000111.
-	///
-	/// Example 3:
-	/// Input: "00011000"
-	/// Output: 2
-	/// Explanation: We flip to get 00000000.
-	/// 
-	/// Note:
-	///
-	/// 1. 1 <= S.length <= 20000
-	/// 2. S only consists of '0' and '1' characters.
-	/// </summary>
-	int minFlipsMonoIncr(string S);
+    /// <summary>
+    /// Leet code #926. Flip String to Monotone Increasing 
+    /// 
+    /// A string of '0's and '1's is monotone increasing if it consists of some 
+    /// number of '0's (possibly 0), followed by some number of '1's (also 
+    /// possibly 0.)
+    ///
+    /// We are given a string S of '0's and '1's, and we may flip any '0' to a '1' 
+    /// or a '1' to a '0'.
+    ///
+    /// Return the minimum number of flips to make S monotone increasing.
+    ///
+    /// 
+    /// Example 1:
+    /// Input: "00110"
+    /// Output: 1
+    /// Explanation: We flip the last digit to get 00111.
+    ///
+    /// Example 2:
+    /// Input: "010110"
+    /// Output: 2
+    /// Explanation: We flip to get 011111, or alternatively 000111.
+    ///
+    /// Example 3:
+    /// Input: "00011000"
+    /// Output: 2
+    /// Explanation: We flip to get 00000000.
+    /// 
+    /// Note:
+    ///
+    /// 1. 1 <= S.length <= 20000
+    /// 2. S only consists of '0' and '1' characters.
+    /// </summary>
+    int minFlipsMonoIncr(string S);
 
-	/// <summary>
-	/// Leet code #927. Three Equal Parts
-	/// 
-	/// Given an array A of 0s and 1s, divide the array into 3 non-empty parts 
-	/// such that all of these parts represent the same binary value.
-	///
-	/// If it is possible, return any [i, j] with i+1 < j, such that:
-	///
-	/// A[0], A[1], ..., A[i] is the first part;
-	/// A[i+1], A[i+2], ..., A[j-1] is the second part, and
-	/// A[j], A[j+1], ..., A[A.length - 1] is the third part.
-	/// All three parts have equal binary value.
-	/// If it is not possible, return [-1, -1].
-	///
-	/// Note that the entire part is used when considering what binary value it 
-	/// represents.  For example, [1,1,0] represents 6 in decimal, not 3.  Also, 
-	/// leading zeros are allowed, so [0,1,1] and [1,1] represent the same value.
-	///
-	/// Example 1:
-	/// Input: [1,0,1,0,1]
-	/// Output: [0,3]
-	///
-	/// Example 2:
-	/// Input: [1,1,0,1,1]
-	/// Output: [-1,-1]
-	///
-	/// Note:
-	/// 
-	/// 1. 3 <= A.length <= 30000
-	/// 2. A[i] == 0 or A[i] == 1
-	/// </summary>
-	vector<int> threeEqualParts(vector<int>& A);
+    /// <summary>
+    /// Leet code #927. Three Equal Parts
+    /// 
+    /// Given an array A of 0s and 1s, divide the array into 3 non-empty parts 
+    /// such that all of these parts represent the same binary value.
+    ///
+    /// If it is possible, return any [i, j] with i+1 < j, such that:
+    ///
+    /// A[0], A[1], ..., A[i] is the first part;
+    /// A[i+1], A[i+2], ..., A[j-1] is the second part, and
+    /// A[j], A[j+1], ..., A[A.length - 1] is the third part.
+    /// All three parts have equal binary value.
+    /// If it is not possible, return [-1, -1].
+    ///
+    /// Note that the entire part is used when considering what binary value it 
+    /// represents.  For example, [1,1,0] represents 6 in decimal, not 3.  Also, 
+    /// leading zeros are allowed, so [0,1,1] and [1,1] represent the same value.
+    ///
+    /// Example 1:
+    /// Input: [1,0,1,0,1]
+    /// Output: [0,3]
+    ///
+    /// Example 2:
+    /// Input: [1,1,0,1,1]
+    /// Output: [-1,-1]
+    ///
+    /// Note:
+    /// 
+    /// 1. 3 <= A.length <= 30000
+    /// 2. A[i] == 0 or A[i] == 1
+    /// </summary>
+    vector<int> threeEqualParts(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #936. Stamping The Sequence
-	/// </summary>
-	vector<int> searchStamp(string &stamp, string& target, int &reduce);
+    /// <summary>
+    /// Leet code #936. Stamping The Sequence
+    /// </summary>
+    vector<int> searchStamp(string &stamp, string& target, int &reduce);
 
-	/// <summary>
-	/// Leet code #936. Stamping The Sequence
-	/// 
-	/// You want to form a target string of lowercase letters.
-	///
-	/// At the beginning, your sequence is target.length '?' marks.  You also 
-	/// have a stamp of lowercase letters.
-	///
-	/// On each turn, you may place the stamp over the sequence, and replace 
-	/// every letter in the sequence with the corresponding letter from the stamp.
-	/// You can make up to 10 * target.length turns.
-	///
-	/// For example, if the initial sequence is "?????", and your stamp is "abc",  
-	/// then you may make "abc??", "?abc?", "??abc" in the first turn.  (Note that 
-	/// the stamp must be fully contained in the boundaries of the sequence in 
-	/// order to stamp.)
-	///
-	/// If the sequence is possible to stamp, then return an array of the index of 
-	/// the left-most letter being stamped at each turn.  If the sequence is not 
-	/// possible to stamp, return an empty array.
-	///
-	/// For example, if the sequence is "ababc", and the stamp is "abc", then we 
-	/// could return the answer [0, 2], corresponding to the moves "?????" -> 
-	/// "abc??" -> "ababc".
-	///
-	/// Also, if the sequence is possible to stamp, it is guaranteed it is possible
-	/// to stamp within 10 * target.length moves.  Any answers specifying more than
-	/// this number of moves will not be accepted.
-	///
-	/// Example 1:
-	/// Input: stamp = "abc", target = "ababc"
-	/// Output: [0,2]
-	/// ([1,0,2] would also be accepted as an answer, as well as some other 
-	///  answers.)
-	///
-	/// Example 2:
-	/// 
-	/// Input: stamp = "abca", target = "aabcaca"
-	/// Output: [3,0,1]
-	/// 
-	///
-	/// Note:
-	/// 1. 1 <= stamp.length <= target.length <= 1000
-	/// 2. stamp and target only contain lowercase letters.
-	/// </summary>
-	vector<int> movesToStamp(string stamp, string target);
+    /// <summary>
+    /// Leet code #936. Stamping The Sequence
+    /// 
+    /// You want to form a target string of lowercase letters.
+    ///
+    /// At the beginning, your sequence is target.length '?' marks.  You also 
+    /// have a stamp of lowercase letters.
+    ///
+    /// On each turn, you may place the stamp over the sequence, and replace 
+    /// every letter in the sequence with the corresponding letter from the stamp.
+    /// You can make up to 10 * target.length turns.
+    ///
+    /// For example, if the initial sequence is "?????", and your stamp is "abc",  
+    /// then you may make "abc??", "?abc?", "??abc" in the first turn.  (Note that 
+    /// the stamp must be fully contained in the boundaries of the sequence in 
+    /// order to stamp.)
+    ///
+    /// If the sequence is possible to stamp, then return an array of the index of 
+    /// the left-most letter being stamped at each turn.  If the sequence is not 
+    /// possible to stamp, return an empty array.
+    ///
+    /// For example, if the sequence is "ababc", and the stamp is "abc", then we 
+    /// could return the answer [0, 2], corresponding to the moves "?????" -> 
+    /// "abc??" -> "ababc".
+    ///
+    /// Also, if the sequence is possible to stamp, it is guaranteed it is possible
+    /// to stamp within 10 * target.length moves.  Any answers specifying more than
+    /// this number of moves will not be accepted.
+    ///
+    /// Example 1:
+    /// Input: stamp = "abc", target = "ababc"
+    /// Output: [0,2]
+    /// ([1,0,2] would also be accepted as an answer, as well as some other 
+    ///  answers.)
+    ///
+    /// Example 2:
+    /// 
+    /// Input: stamp = "abca", target = "aabcaca"
+    /// Output: [3,0,1]
+    /// 
+    ///
+    /// Note:
+    /// 1. 1 <= stamp.length <= target.length <= 1000
+    /// 2. stamp and target only contain lowercase letters.
+    /// </summary>
+    vector<int> movesToStamp(string stamp, string target);
 
-	/// <summary>
-	/// Leet code #939. Minimum Area Rectangle
-	/// 
-	/// Given a set of points in the xy-plane, determine the minimum area of a 
-	/// rectangle formed from these points, with sides parallel to the x and y 
-	/// axes.
-	///
-	/// If there isn't any rectangle, return 0.
-	/// 
-	/// Example 1:
-	///
-	/// Input: [[1,1],[1,3],[3,1],[3,3],[2,2]]
-	/// Output: 4
-	///
-	/// Example 2:
-	/// 
-	/// Input: [[1,1],[1,3],[3,1],[3,3],[4,1],[4,3]]
-	/// Output: 2
-	///  
-	/// Note:
-	///
-	/// 1. 1 <= points.length <= 500
-	/// 2. 0 <= points[i][0] <= 40000
-	/// 3. 0 <= points[i][1] <= 40000
-	/// 4. All points are distinct.
-	/// </summary>
-	int minAreaRect(vector<vector<int>>& points);
+    /// <summary>
+    /// Leet code #939. Minimum Area Rectangle
+    /// 
+    /// Given a set of points in the xy-plane, determine the minimum area of a 
+    /// rectangle formed from these points, with sides parallel to the x and y 
+    /// axes.
+    ///
+    /// If there isn't any rectangle, return 0.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: [[1,1],[1,3],[3,1],[3,3],[2,2]]
+    /// Output: 4
+    ///
+    /// Example 2:
+    /// 
+    /// Input: [[1,1],[1,3],[3,1],[3,3],[4,1],[4,3]]
+    /// Output: 2
+    ///  
+    /// Note:
+    ///
+    /// 1. 1 <= points.length <= 500
+    /// 2. 0 <= points[i][0] <= 40000
+    /// 3. 0 <= points[i][1] <= 40000
+    /// 4. All points are distinct.
+    /// </summary>
+    int minAreaRect(vector<vector<int>>& points);
 
-	/// <summary>
-	/// Leet code #944. Delete Columns to Make Sorted
-	/// 
-	/// We are given an array A of N lowercase letter strings, all of the same 
-	/// length.
-	///
-	/// Now, we may choose any set of deletion indices, and for each string, we 
-	/// delete all the characters in those indices.
-	///
-	/// For example, if we have a string "abcdef" and deletion indices {0, 2, 3}, 
-	/// then the final string after deletion is "bef".
-	///
-	/// Suppose we chose a set of deletion indices D such that after deletions, 
-	/// each remaining column in A is in non-decreasing sorted order.
-	///
-	/// Formally, the c-th column is [A[0][c], A[1][c], ..., A[A.length-1][c]]
-	///
-	/// Return the minimum possible value of D.length.
-	///
-	/// 
-	/// Example 1:
-	/// Input: ["cba","daf","ghi"]
-	/// Output: 1
-	///
-	/// Example 2:
-	/// Input: ["a","b"]
-	/// Output: 0
-	///
-	/// Example 3:
-	/// Input: ["zyx","wvu","tsr"]
-	/// Output: 3
-	/// Note:
-	/// 1. 1 <= A.length <= 100
-	/// 2. 1 <= A[i].length <= 1000
-	/// </summary>
-	int minDeletionSize(vector<string>& A);
+    /// <summary>
+    /// Leet code #944. Delete Columns to Make Sorted
+    /// 
+    /// We are given an array A of N lowercase letter strings, all of the same 
+    /// length.
+    ///
+    /// Now, we may choose any set of deletion indices, and for each string, we 
+    /// delete all the characters in those indices.
+    ///
+    /// For example, if we have a string "abcdef" and deletion indices {0, 2, 3}, 
+    /// then the final string after deletion is "bef".
+    ///
+    /// Suppose we chose a set of deletion indices D such that after deletions, 
+    /// each remaining column in A is in non-decreasing sorted order.
+    ///
+    /// Formally, the c-th column is [A[0][c], A[1][c], ..., A[A.length-1][c]]
+    ///
+    /// Return the minimum possible value of D.length.
+    ///
+    /// 
+    /// Example 1:
+    /// Input: ["cba","daf","ghi"]
+    /// Output: 1
+    ///
+    /// Example 2:
+    /// Input: ["a","b"]
+    /// Output: 0
+    ///
+    /// Example 3:
+    /// Input: ["zyx","wvu","tsr"]
+    /// Output: 3
+    /// Note:
+    /// 1. 1 <= A.length <= 100
+    /// 2. 1 <= A[i].length <= 1000
+    /// </summary>
+    int minDeletionSize(vector<string>& A);
 
-	/// <summary>
-	/// Leet code #945. Minimum Increment to Make Array Unique
-	/// 
-	/// Given an array of integers A, a move consists of choosing any A[i], 
-	/// and incrementing it by 1.
-	///
-	/// Return the least number of moves to make every value in A unique.
-	///
-	/// Example 1:
-	/// Input: [1,2,2]
-	/// Output: 1
-	/// Explanation:  After 1 move, the array could be [1, 2, 3].
-	///
-	/// Example 2:
-	/// Input: [3,2,1,2,1,7]
-	/// Output: 6
-	/// Explanation:  After 6 moves, the array could be [3, 4, 1, 2, 5, 7].
-	/// It can be shown with 5 or less moves that it is impossible for the 
-	/// array to have all unique values.
-	/// 
-	/// Note:
-	/// 1. 0 <= A.length <= 40000
-	/// 2. 0 <= A[i] < 40000
-	/// </summary>
-	int minIncrementForUnique(vector<int>& A);
+    /// <summary>
+    /// Leet code #945. Minimum Increment to Make Array Unique
+    /// 
+    /// Given an array of integers A, a move consists of choosing any A[i], 
+    /// and incrementing it by 1.
+    ///
+    /// Return the least number of moves to make every value in A unique.
+    ///
+    /// Example 1:
+    /// Input: [1,2,2]
+    /// Output: 1
+    /// Explanation:  After 1 move, the array could be [1, 2, 3].
+    ///
+    /// Example 2:
+    /// Input: [3,2,1,2,1,7]
+    /// Output: 6
+    /// Explanation:  After 6 moves, the array could be [3, 4, 1, 2, 5, 7].
+    /// It can be shown with 5 or less moves that it is impossible for the 
+    /// array to have all unique values.
+    /// 
+    /// Note:
+    /// 1. 0 <= A.length <= 40000
+    /// 2. 0 <= A[i] < 40000
+    /// </summary>
+    int minIncrementForUnique(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #950. Reveal Cards In Increasing Order
-	/// 
-	/// In a deck of cards, every card has a unique integer.  You can order 
-	/// the deck in any order you want.
-	///
-	/// Initially, all the cards start face down (unrevealed) in one deck.
-	///
-	/// Now, you do the following steps repeatedly, until all cards are 
-	/// revealed:
-	///
-	/// Take the top card of the deck, reveal it, and take it out of the deck.
-	/// If there are still cards in the deck, put the next top card of the  
-	/// deck at the bottom of the deck.
-	/// If there are still unrevealed cards, go back to step 1.  Otherwise, 
-	/// stop.
-	/// Return an ordering of the deck that would reveal the cards in 
-	/// increasing order.
-	/// 
-	/// The first entry in the answer is considered to be the top of the deck.
-	///
-	///
-	///
-	/// Example 1:
-	///
-	/// Input: [17,13,11,2,3,5,7]
-	/// Output: [2,13,3,11,5,17,7]
-	/// Explanation: 
-	/// We get the deck in the order [17,13,11,2,3,5,7] (this order doesn't 
-	/// matter), and reorder it.
-	/// After reordering, the deck starts as [2,13,3,11,5,17,7], where 2 is 
-	/// the top of the deck.
-	/// We reveal 2, and move 13 to the bottom.  The deck is now 
-	/// [3,11,5,17,7,13].
-	/// We reveal 3, and move 11 to the bottom.  The deck is now 
-	/// [5,17,7,13,11].
-	/// We reveal 5, and move 17 to the bottom.  The deck is now [7,13,11,17].
-	/// We reveal 7, and move 13 to the bottom.  The deck is now [11,17,13].
-	/// We reveal 11, and move 17 to the bottom.  The deck is now [13,17].
-	/// We reveal 13, and move 17 to the bottom.  The deck is now [17].
-	/// We reveal 17.
-	/// Since all the cards revealed are in increasing order, the answer is 
-	/// correct.
-	///
-	///
-	/// Note:
-	/// 1. 1 <= A.length <= 1000
-	/// 2. 1 <= A[i] <= 10^6
-	/// 3. A[i] != A[j] for all i != j
-	/// </summary>
-	vector<int> deckRevealedIncreasing(vector<int>& deck);
+    /// <summary>
+    /// Leet code #950. Reveal Cards In Increasing Order
+    /// 
+    /// In a deck of cards, every card has a unique integer.  You can order 
+    /// the deck in any order you want.
+    ///
+    /// Initially, all the cards start face down (unrevealed) in one deck.
+    ///
+    /// Now, you do the following steps repeatedly, until all cards are 
+    /// revealed:
+    ///
+    /// Take the top card of the deck, reveal it, and take it out of the deck.
+    /// If there are still cards in the deck, put the next top card of the  
+    /// deck at the bottom of the deck.
+    /// If there are still unrevealed cards, go back to step 1.  Otherwise, 
+    /// stop.
+    /// Return an ordering of the deck that would reveal the cards in 
+    /// increasing order.
+    /// 
+    /// The first entry in the answer is considered to be the top of the deck.
+    ///
+    ///
+    ///
+    /// Example 1:
+    ///
+    /// Input: [17,13,11,2,3,5,7]
+    /// Output: [2,13,3,11,5,17,7]
+    /// Explanation: 
+    /// We get the deck in the order [17,13,11,2,3,5,7] (this order doesn't 
+    /// matter), and reorder it.
+    /// After reordering, the deck starts as [2,13,3,11,5,17,7], where 2 is 
+    /// the top of the deck.
+    /// We reveal 2, and move 13 to the bottom.  The deck is now 
+    /// [3,11,5,17,7,13].
+    /// We reveal 3, and move 11 to the bottom.  The deck is now 
+    /// [5,17,7,13,11].
+    /// We reveal 5, and move 17 to the bottom.  The deck is now [7,13,11,17].
+    /// We reveal 7, and move 13 to the bottom.  The deck is now [11,17,13].
+    /// We reveal 11, and move 17 to the bottom.  The deck is now [13,17].
+    /// We reveal 13, and move 17 to the bottom.  The deck is now [17].
+    /// We reveal 17.
+    /// Since all the cards revealed are in increasing order, the answer is 
+    /// correct.
+    ///
+    ///
+    /// Note:
+    /// 1. 1 <= A.length <= 1000
+    /// 2. 1 <= A[i] <= 10^6
+    /// 3. A[i] != A[j] for all i != j
+    /// </summary>
+    vector<int> deckRevealedIncreasing(vector<int>& deck);
 
     /// <summary>
     /// Leet code #961. N-Repeated Element in Size 2N Array
@@ -15587,104 +15587,104 @@ public:
     /// </summary>
     int evaluate(string expression);
 
-	/// <summary>
-	/// Leet code #736. Parse Lisp Expression
-	/// </summary>
-	int processLispExpression(vector<string>& tokens, int& index, unordered_map<string, int> variables);
+    /// <summary>
+    /// Leet code #736. Parse Lisp Expression
+    /// </summary>
+    int processLispExpression(vector<string>& tokens, int& index, unordered_map<string, int> variables);
 
-	/// <summary>
-	/// Leet code #736. Parse Lisp Expression
-	/// </summary>
-	int processLispCommand(vector<string>& tokens, int& index, unordered_map<string, int> variables);
+    /// <summary>
+    /// Leet code #736. Parse Lisp Expression
+    /// </summary>
+    int processLispCommand(vector<string>& tokens, int& index, unordered_map<string, int> variables);
 
-	/// <summary>
-	/// Leet code #736. Parse Lisp Expression
-	///
-	/// You are given a string expression representing a Lisp-like expression to 
-	/// return the integer value of.
-	///
-	/// The syntax for these expressions is given as follows.
-	///
-	/// An expression is either an integer, a let-expression, an add-expression, 
-	/// a mult-expression, or an assigned variable. Expressions always evaluate to 
-	/// a single integer.
-	/// (An integer could be positive or negative.)
-	/// A let-expression takes the form (let v1 e1 v2 e2 ... vn en expr), where 
-	/// let is always the string "let", then there are 1 or more pairs of 
-	/// alternating variables and expressions, meaning that the first variable v1 
-	/// is assigned the value of the expression e1, the second variable v2 is 
-	/// assigned the value of the expression e2, and so on sequentially; and then 
-	/// the value of this let-expression is the value of the expression expr.
-	///
-	/// An add-expression takes the form (add e1 e2) where add is always the string
-	/// "add", there are always two expressions e1, e2, and this expression 
-	/// evaluates to the addition of the evaluation of e1 and the evaluation of e2.
-	///
-	/// A mult-expression takes the form (mult e1 e2) where mult is always the 
-	/// string "mult", there are always two expressions e1, e2, and this expression
-	/// evaluates to the multiplication of the evaluation of e1 and the evaluation 
-	/// of e2.
-	///
-	/// For the purposes of this question, we will use a smaller subset of variable 
-	/// names. A variable starts with a lowercase letter, then zero or more 
-	/// lowercase letters or digits. Additionally for your convenience, the names 
-	/// "add", "let", or "mult" are protected and will never be used as variable 
-	/// names.
-	/// Finally, there is the concept of scope. When an expression of a variable 
-	/// name is evaluated, within the context of that evaluation, the innermost 
-	/// scope (in terms of parentheses) is checked first for the value of that 
-	/// variable, and then outer scopes are checked sequentially. It is guaranteed 
-	/// that every expression is legal. Please see the examples for more details on
-	/// scope.
-	/// Evaluation Examples:
-	/// Input: (add 1 2)
-	/// Output: 3
-	/// 
-	/// Input: (mult 3 (add 2 3))
-	/// Output: 15
-	///
-	/// Input: (let x 2 (mult x 5))
-	/// Output: 10
-	///
-	/// Input: (let x 2 (mult x (let x 3 y 4 (add x y))))
-	/// Output: 14
-	/// Explanation: In the expression (add x y), when checking for the value of 
-	/// the variable x,
-	/// we check from the innermost scope to the outermost in the context of the 
-	/// variable we are trying to evaluate.
-	/// Since x = 3 is found first, the value of x is 3.
-	///
-	/// Input: (let x 3 x 2 x)
-	/// Output: 2
-	/// Explanation: Assignment in let statements is processed sequentially.
-	///
-	/// Input: (let x 1 y 2 x (add x y) (add x y))
-	/// Output: 5
-	/// Explanation: The first (add x y) evaluates as 3, and is assigned to x.
-	/// The second (add x y) evaluates as 3+2 = 5.
-	///
-	/// Input: (let x 2 (add (let x 3 (let x 4 x)) x))
-	/// Output: 6
-	/// Explanation: Even though (let x 4 x) has a deeper scope, it is outside 
-	/// the context
-	/// of the final x in the add-expression.  That final x will equal 2.
-	///
-	/// Input: (let a1 3 b2 (add a1 1) b2) 
-	/// Output 4
-	/// Explanation: Variable names can contain digits after the first character.
-	/// 
-	/// Note:
-	///
-	/// 1. The given string expression is well formatted: There are no leading or 
-	/// trailing spaces, there is only a single space separating different 
-	/// components of the string, and no space between adjacent parentheses. 
-	/// 2. The expression is guaranteed to be legal and evaluate to an integer.
-	/// 3. The length of expression is at most 2000. (It is also non-empty, as that 
-	/// would not be a legal expression.)
-	/// 4. The answer and all intermediate calculations of that answer are guaranteed 
-	/// to fit in a 32-bit integer.
-	/// </summary>
-	int evaluate_V2(string expression);
+    /// <summary>
+    /// Leet code #736. Parse Lisp Expression
+    ///
+    /// You are given a string expression representing a Lisp-like expression to 
+    /// return the integer value of.
+    ///
+    /// The syntax for these expressions is given as follows.
+    ///
+    /// An expression is either an integer, a let-expression, an add-expression, 
+    /// a mult-expression, or an assigned variable. Expressions always evaluate to 
+    /// a single integer.
+    /// (An integer could be positive or negative.)
+    /// A let-expression takes the form (let v1 e1 v2 e2 ... vn en expr), where 
+    /// let is always the string "let", then there are 1 or more pairs of 
+    /// alternating variables and expressions, meaning that the first variable v1 
+    /// is assigned the value of the expression e1, the second variable v2 is 
+    /// assigned the value of the expression e2, and so on sequentially; and then 
+    /// the value of this let-expression is the value of the expression expr.
+    ///
+    /// An add-expression takes the form (add e1 e2) where add is always the string
+    /// "add", there are always two expressions e1, e2, and this expression 
+    /// evaluates to the addition of the evaluation of e1 and the evaluation of e2.
+    ///
+    /// A mult-expression takes the form (mult e1 e2) where mult is always the 
+    /// string "mult", there are always two expressions e1, e2, and this expression
+    /// evaluates to the multiplication of the evaluation of e1 and the evaluation 
+    /// of e2.
+    ///
+    /// For the purposes of this question, we will use a smaller subset of variable 
+    /// names. A variable starts with a lowercase letter, then zero or more 
+    /// lowercase letters or digits. Additionally for your convenience, the names 
+    /// "add", "let", or "mult" are protected and will never be used as variable 
+    /// names.
+    /// Finally, there is the concept of scope. When an expression of a variable 
+    /// name is evaluated, within the context of that evaluation, the innermost 
+    /// scope (in terms of parentheses) is checked first for the value of that 
+    /// variable, and then outer scopes are checked sequentially. It is guaranteed 
+    /// that every expression is legal. Please see the examples for more details on
+    /// scope.
+    /// Evaluation Examples:
+    /// Input: (add 1 2)
+    /// Output: 3
+    /// 
+    /// Input: (mult 3 (add 2 3))
+    /// Output: 15
+    ///
+    /// Input: (let x 2 (mult x 5))
+    /// Output: 10
+    ///
+    /// Input: (let x 2 (mult x (let x 3 y 4 (add x y))))
+    /// Output: 14
+    /// Explanation: In the expression (add x y), when checking for the value of 
+    /// the variable x,
+    /// we check from the innermost scope to the outermost in the context of the 
+    /// variable we are trying to evaluate.
+    /// Since x = 3 is found first, the value of x is 3.
+    ///
+    /// Input: (let x 3 x 2 x)
+    /// Output: 2
+    /// Explanation: Assignment in let statements is processed sequentially.
+    ///
+    /// Input: (let x 1 y 2 x (add x y) (add x y))
+    /// Output: 5
+    /// Explanation: The first (add x y) evaluates as 3, and is assigned to x.
+    /// The second (add x y) evaluates as 3+2 = 5.
+    ///
+    /// Input: (let x 2 (add (let x 3 (let x 4 x)) x))
+    /// Output: 6
+    /// Explanation: Even though (let x 4 x) has a deeper scope, it is outside 
+    /// the context
+    /// of the final x in the add-expression.  That final x will equal 2.
+    ///
+    /// Input: (let a1 3 b2 (add a1 1) b2) 
+    /// Output 4
+    /// Explanation: Variable names can contain digits after the first character.
+    /// 
+    /// Note:
+    ///
+    /// 1. The given string expression is well formatted: There are no leading or 
+    /// trailing spaces, there is only a single space separating different 
+    /// components of the string, and no space between adjacent parentheses. 
+    /// 2. The expression is guaranteed to be legal and evaluate to an integer.
+    /// 3. The length of expression is at most 2000. (It is also non-empty, as that 
+    /// would not be a legal expression.)
+    /// 4. The answer and all intermediate calculations of that answer are guaranteed 
+    /// to fit in a 32-bit integer.
+    /// </summary>
+    int evaluate_V2(string expression);
 
     /// <summary>
     /// Leet code #751. Convert IPV4 to Ineteger
@@ -15756,1168 +15756,1168 @@ public:
     /// </summary>
     vector<string> ipToCIDR(string ip, int range);
 
-	/// <summary>
-	/// Leet code #761. Special Binary String    
-	///
-	/// Special binary strings are binary strings with the following two 
-	/// properties:
-	///
-	/// The number of 0's is equal to the number of 1's.
-	/// Every prefix of the binary string has at least as many 1's as 0's.
-	/// Given a special string S, a move consists of choosing two consecutive, 
-	/// non-empty, special substrings of S, and swapping them. (Two strings 
-	/// are consecutive if the last character of the first string is exactly one 
-	/// index before the first character of the second string.)
-	///
-	/// At the end of any number of moves, what is the lexicographically largest 
-	/// resulting string possible?
-	///
-	/// Example 1:
-	/// Input: S = "11011000"
-	/// Output: "11100100"
-	/// Explanation:
-	/// The strings "10" [occuring at S[1]] and "1100" [at S[3]] are swapped.
-	/// This is the lexicographically largest string possible after some number 
-	/// of swaps.
-	/// Note:
-	///
-	/// 1. S has length at most 50.
-	/// 2. S is guaranteed to be a special binary string as defined above.	
-	/// </summary>
-	string makeLargestSpecial(string S);
+    /// <summary>
+    /// Leet code #761. Special Binary String    
+    ///
+    /// Special binary strings are binary strings with the following two 
+    /// properties:
+    ///
+    /// The number of 0's is equal to the number of 1's.
+    /// Every prefix of the binary string has at least as many 1's as 0's.
+    /// Given a special string S, a move consists of choosing two consecutive, 
+    /// non-empty, special substrings of S, and swapping them. (Two strings 
+    /// are consecutive if the last character of the first string is exactly one 
+    /// index before the first character of the second string.)
+    ///
+    /// At the end of any number of moves, what is the lexicographically largest 
+    /// resulting string possible?
+    ///
+    /// Example 1:
+    /// Input: S = "11011000"
+    /// Output: "11100100"
+    /// Explanation:
+    /// The strings "10" [occuring at S[1]] and "1100" [at S[3]] are swapped.
+    /// This is the lexicographically largest string possible after some number 
+    /// of swaps.
+    /// Note:
+    ///
+    /// 1. S has length at most 50.
+    /// 2. S is guaranteed to be a special binary string as defined above.	
+    /// </summary>
+    string makeLargestSpecial(string S);
 
-	/// <summary>
-	/// Leet code #758. Bold Words in String    
-	///
-	/// Given a set of keywords words and a string S, make all appearances of 
-	/// all keywords in S bold. Any letters between <b> and </b> tags become 
-	/// bold. 
-	///
-	/// The returned string should use the least number of tags possible, and 
-	/// of course the tags should form a valid combination. 
-	///
-	/// For example, given that words = ["ab", "bc"] and S = "aabcd", we should 
-	/// return "a<b>abc</b>d". Note that returning "a<b>a<b>b</b>c</b>d" would 
-	/// use more tags, so it is incorrect. 
-	///
-	/// Note:
-	/// 1.words has length in range [0, 50].
-	/// 2.words[i] has length in range [1, 10].
-	/// 3.S has length in range [0, 500].
-	/// 4.All characters in words[i] and S are lowercase letters.
-	/// </summary>
-	string boldWords(vector<string>& words, string S);
+    /// <summary>
+    /// Leet code #758. Bold Words in String    
+    ///
+    /// Given a set of keywords words and a string S, make all appearances of 
+    /// all keywords in S bold. Any letters between <b> and </b> tags become 
+    /// bold. 
+    ///
+    /// The returned string should use the least number of tags possible, and 
+    /// of course the tags should form a valid combination. 
+    ///
+    /// For example, given that words = ["ab", "bc"] and S = "aabcd", we should 
+    /// return "a<b>abc</b>d". Note that returning "a<b>a<b>b</b>c</b>d" would 
+    /// use more tags, so it is incorrect. 
+    ///
+    /// Note:
+    /// 1.words has length in range [0, 50].
+    /// 2.words[i] has length in range [1, 10].
+    /// 3.S has length in range [0, 500].
+    /// 4.All characters in words[i] and S are lowercase letters.
+    /// </summary>
+    string boldWords(vector<string>& words, string S);
 
-	/// <summary>
-	/// Leet code #772. Basic Calculator III   
-	/// </summary>
-	string parseExpressionToken(string s, int& index);
+    /// <summary>
+    /// Leet code #772. Basic Calculator III   
+    /// </summary>
+    string parseExpressionToken(string s, int& index);
 
-	/// <summary>
-	/// Leet code #772. Basic Calculator III   
-	///
-	/// Implement a basic calculator to evaluate a simple expression string.
-	/// The expression string may contain open ( and closing parentheses ), 
-	/// the plus + or minus sign -, non-negative integers and empty spaces.
-	/// 
-	/// The expression string contains only non-negative integers, +, -, *, / 
-	/// operators , open ( and closing parentheses ) and empty spaces . 
-	/// The integer division should truncate toward zero.
-	///
-	/// You may assume that the given expression is always valid. All 
-	/// intermediate results will be in the range of [-2147483648, 2147483647].
-	///
-	/// Some examples:
-	///
-	/// "1 + 1" = 2
-	/// " 6-4 / 2 " = 4
-	/// "2*(5+5*2)/3+(6/2+8)" = 21
-	/// "(2+6* 3+5- (3*14/7+2)*5)+3"=-12
-	/// </summary>
-	int calculateIII(string s);
+    /// <summary>
+    /// Leet code #772. Basic Calculator III   
+    ///
+    /// Implement a basic calculator to evaluate a simple expression string.
+    /// The expression string may contain open ( and closing parentheses ), 
+    /// the plus + or minus sign -, non-negative integers and empty spaces.
+    /// 
+    /// The expression string contains only non-negative integers, +, -, *, / 
+    /// operators , open ( and closing parentheses ) and empty spaces . 
+    /// The integer division should truncate toward zero.
+    ///
+    /// You may assume that the given expression is always valid. All 
+    /// intermediate results will be in the range of [-2147483648, 2147483647].
+    ///
+    /// Some examples:
+    ///
+    /// "1 + 1" = 2
+    /// " 6-4 / 2 " = 4
+    /// "2*(5+5*2)/3+(6/2+8)" = 21
+    /// "(2+6* 3+5- (3*14/7+2)*5)+3"=-12
+    /// </summary>
+    int calculateIII(string s);
 
-	/// <summary>
-	/// Leet code #772. Basic Calculator III   
-	/// </summary>
-	int parseTerm(vector<string>& tokens, int& index);
+    /// <summary>
+    /// Leet code #772. Basic Calculator III   
+    /// </summary>
+    int parseTerm(vector<string>& tokens, int& index);
 
-	/// <summary>
-	/// Leet code #772. Basic Calculator III   
-	/// </summary>
-	int parseFactor(vector<string>& tokens, int& index);
+    /// <summary>
+    /// Leet code #772. Basic Calculator III   
+    /// </summary>
+    int parseFactor(vector<string>& tokens, int& index);
 
-	/// <summary>
-	/// Leet code #772. Basic Calculator III   
-	/// </summary>
-	int parseExpression(vector<string>& tokens, int& index);
+    /// <summary>
+    /// Leet code #772. Basic Calculator III   
+    /// </summary>
+    int parseExpression(vector<string>& tokens, int& index);
 
-	/// <summary>
-	/// Leet code #770. Basic Calculator IV   
-	/// </summary>
-	vector<string> polyToString(map<vector<string>, int> &ploy_map);
+    /// <summary>
+    /// Leet code #770. Basic Calculator IV   
+    /// </summary>
+    vector<string> polyToString(map<vector<string>, int> &ploy_map);
 
-	/// <summary>
-	/// Leet code #770. Basic Calculator IV   
-	/// </summary>
-	void calculatePolyExpression(
-		stack<map<vector<string>, int>>& operands, 
-		stack<string>& operators);
+    /// <summary>
+    /// Leet code #770. Basic Calculator IV   
+    /// </summary>
+    void calculatePolyExpression(
+        stack<map<vector<string>, int>>& operands, 
+        stack<string>& operators);
 
-	/// <summary>
-	/// Leet code #770. Basic Calculator IV   
-	/// </summary>
-	map<vector<string>, int> parsePolyExpression(string& s, int& index,
-		unordered_map<string, int>& eval_map);
+    /// <summary>
+    /// Leet code #770. Basic Calculator IV   
+    /// </summary>
+    map<vector<string>, int> parsePolyExpression(string& s, int& index,
+        unordered_map<string, int>& eval_map);
 
-	/// <summary>
-	/// Leet code #770. Basic Calculator IV    
-	///
-	/// Given an expression such as expression = "e + 8 - a + 5" and an 
-	/// evaluation map such as {"e": 1} (given in terms of evalvars = ["e"] 
-	/// and evalints = [1]), return a list of tokens representing the 
-	/// simplified expression, such as ["-1*a","14"]
-	///
-	/// An expression alternates chunks and symbols, with a space separating 
-	/// each chunk and symbol.
-	/// A chunk is either an expression in parentheses, a variable, or a 
-	/// non-negative integer.
-	/// A variable is a string of lowercase letters (not including digits.) 
-	/// Note that variables can be multiple letters, and note that variables 
-	/// never have a leading coefficient or unary operator like "2x" or "-x".
-	/// 
-	/// Expressions are evaluated in the usual order: brackets first, then 
-	/// multiplication, then addition and subtraction. For example, 
-	/// expression = "1 + 2 * 3" has an answer of ["7"].
-	///
-	/// The format of the output is as follows:
-	///
-	/// For each term of free variables with non-zero coefficient, we write 
-	/// the free variables within a term in sorted order lexicographically. 
-	/// For example, we would never write a term like "b*a*c", only "a*b*c".
-	/// Terms have degree equal to the number of free variables being 
-	/// multiplied, counting multiplicity. (For example, "a*a*b*c" has degree 
-	/// 4.) We write the largest degree terms of our answer first, breaking 
-	/// ties by lexicographic order ignoring the leading coefficient of the 
-	/// term.
-	/// The leading coefficient of the term is placed directly to the left 
-	/// with an asterisk separating it from the variables (if they exist.)  
-	/// A leading coefficient of 1 is still printed.
-	/// An example of a well formatted answer is ["-2*a*a*a", "3*a*a*b", 
-	/// "3*b*b", "4*a", "5*c", "-6"] 
-	/// Terms (including constant terms) with coefficient 0 are not included.  
-	/// For example, an expression of "0" has an output of [].
-	///
-	/// Examples:
-	///
-	/// Input: expression = "e + 8 - a + 5", evalvars = ["e"], evalints = [1]
-	/// Output: ["-1*a","14"]
-	///
-	/// Input: expression = "e - 8 + temperature - pressure",
-	/// evalvars = ["e", "temperature"], evalints = [1, 12]
-	/// Output: ["-1*pressure","5"]
-	///
-	/// Input: expression = "(e + 8) * (e - 8)", evalvars = [], evalints = []
-	/// Output: ["1*e*e","-64"]
-	///
-	/// Input: expression = "7 - 7", evalvars = [], evalints = []
-	/// Output: []
-	///
-	/// Input: expression = "a * b * c + b * a * c * 4", evalvars = [], 
-	/// evalints = []
-	/// Output: ["5*a*b*c"]
-	///
-	/// Input: expression = "((a - b) * (b - c) + (c - a)) * ((a - b) + 
-	///                       (b - c) * (c - a))",
-	/// evalvars = [], evalints = []
-	/// Output: 
-	/// ["-1*a*a*b*b","2*a*a*b*c","-1*a*a*c*c","1*a*b*b*b","-1*a*b*b*c",
-	///  "-1*a*b*c*c","1*a*c*c*c","-1*b*b*b*c","2*b*b*c*c","-1*b*c*c*c",
-	///  "2*a*a*b", "-2*a*a*c","-2*a*b*b","2*a*c*c","1*b*b*b","-1*b*b*c",
-	///  "1*b*c*c","-1*c*c*c","-1*a*a","1*a*b","1*a*c","-1*b*c"]
-	/// Note:
-	/// 1. expression will have length in range [1, 250].
-	/// 2. evalvars, evalints will have equal lengths in range [0, 100].
-	/// </summary>
-	vector<string> basicCalculatorIV(string expression, vector<string>& evalvars, 
-		                             vector<int>& evalints);
-	/// <summary>
-	/// Leet code #771. Jewels and Stones    
-	///
-	/// You're given strings J representing the types of stones that are 
-	/// jewels, and S representing the stones you have.  Each character 
-	/// in S is a type of stone you have.  You want to know how many of 
-	/// the stones you have are also jewels.
-	///
-	/// The letters in J are guaranteed distinct, and all characters in J 
-	/// and S are letters. Letters are case sensitive, so "a" is considered 
-	/// a different type of stone from "A".
-	///
-	/// Example 1:
-	///
-	/// Input: J = "aA", S = "aAAbbbb"
-	/// Output: 3
-	/// Example 2:
-	///
-	/// Input: J = "z", S = "ZZ"
-	/// Output: 0
-	/// Note:
-	///
-	/// 1. S and J will consist of letters and have length at most 50.
-	/// 2. The characters in J are distinct.
-	/// </summary>
-	int numJewelsInStones(string J, string S);
+    /// <summary>
+    /// Leet code #770. Basic Calculator IV    
+    ///
+    /// Given an expression such as expression = "e + 8 - a + 5" and an 
+    /// evaluation map such as {"e": 1} (given in terms of evalvars = ["e"] 
+    /// and evalints = [1]), return a list of tokens representing the 
+    /// simplified expression, such as ["-1*a","14"]
+    ///
+    /// An expression alternates chunks and symbols, with a space separating 
+    /// each chunk and symbol.
+    /// A chunk is either an expression in parentheses, a variable, or a 
+    /// non-negative integer.
+    /// A variable is a string of lowercase letters (not including digits.) 
+    /// Note that variables can be multiple letters, and note that variables 
+    /// never have a leading coefficient or unary operator like "2x" or "-x".
+    /// 
+    /// Expressions are evaluated in the usual order: brackets first, then 
+    /// multiplication, then addition and subtraction. For example, 
+    /// expression = "1 + 2 * 3" has an answer of ["7"].
+    ///
+    /// The format of the output is as follows:
+    ///
+    /// For each term of free variables with non-zero coefficient, we write 
+    /// the free variables within a term in sorted order lexicographically. 
+    /// For example, we would never write a term like "b*a*c", only "a*b*c".
+    /// Terms have degree equal to the number of free variables being 
+    /// multiplied, counting multiplicity. (For example, "a*a*b*c" has degree 
+    /// 4.) We write the largest degree terms of our answer first, breaking 
+    /// ties by lexicographic order ignoring the leading coefficient of the 
+    /// term.
+    /// The leading coefficient of the term is placed directly to the left 
+    /// with an asterisk separating it from the variables (if they exist.)  
+    /// A leading coefficient of 1 is still printed.
+    /// An example of a well formatted answer is ["-2*a*a*a", "3*a*a*b", 
+    /// "3*b*b", "4*a", "5*c", "-6"] 
+    /// Terms (including constant terms) with coefficient 0 are not included.  
+    /// For example, an expression of "0" has an output of [].
+    ///
+    /// Examples:
+    ///
+    /// Input: expression = "e + 8 - a + 5", evalvars = ["e"], evalints = [1]
+    /// Output: ["-1*a","14"]
+    ///
+    /// Input: expression = "e - 8 + temperature - pressure",
+    /// evalvars = ["e", "temperature"], evalints = [1, 12]
+    /// Output: ["-1*pressure","5"]
+    ///
+    /// Input: expression = "(e + 8) * (e - 8)", evalvars = [], evalints = []
+    /// Output: ["1*e*e","-64"]
+    ///
+    /// Input: expression = "7 - 7", evalvars = [], evalints = []
+    /// Output: []
+    ///
+    /// Input: expression = "a * b * c + b * a * c * 4", evalvars = [], 
+    /// evalints = []
+    /// Output: ["5*a*b*c"]
+    ///
+    /// Input: expression = "((a - b) * (b - c) + (c - a)) * ((a - b) + 
+    ///                       (b - c) * (c - a))",
+    /// evalvars = [], evalints = []
+    /// Output: 
+    /// ["-1*a*a*b*b","2*a*a*b*c","-1*a*a*c*c","1*a*b*b*b","-1*a*b*b*c",
+    ///  "-1*a*b*c*c","1*a*c*c*c","-1*b*b*b*c","2*b*b*c*c","-1*b*c*c*c",
+    ///  "2*a*a*b", "-2*a*a*c","-2*a*b*b","2*a*c*c","1*b*b*b","-1*b*b*c",
+    ///  "1*b*c*c","-1*c*c*c","-1*a*a","1*a*b","1*a*c","-1*b*c"]
+    /// Note:
+    /// 1. expression will have length in range [1, 250].
+    /// 2. evalvars, evalints will have equal lengths in range [0, 100].
+    /// </summary>
+    vector<string> basicCalculatorIV(string expression, vector<string>& evalvars, 
+                                     vector<int>& evalints);
+    /// <summary>
+    /// Leet code #771. Jewels and Stones    
+    ///
+    /// You're given strings J representing the types of stones that are 
+    /// jewels, and S representing the stones you have.  Each character 
+    /// in S is a type of stone you have.  You want to know how many of 
+    /// the stones you have are also jewels.
+    ///
+    /// The letters in J are guaranteed distinct, and all characters in J 
+    /// and S are letters. Letters are case sensitive, so "a" is considered 
+    /// a different type of stone from "A".
+    ///
+    /// Example 1:
+    ///
+    /// Input: J = "aA", S = "aAAbbbb"
+    /// Output: 3
+    /// Example 2:
+    ///
+    /// Input: J = "z", S = "ZZ"
+    /// Output: 0
+    /// Note:
+    ///
+    /// 1. S and J will consist of letters and have length at most 50.
+    /// 2. The characters in J are distinct.
+    /// </summary>
+    int numJewelsInStones(string J, string S);
 
-	/// <summary>
-	/// Leet code #763. Partition Labels    
-	///
-	/// A string S of lowercase letters is given. We want to partition this 
-	/// string into as many parts as possible so that each letter appears in 
-	/// at most one part, and return a list of integers representing the size 
-	/// of these parts.
-	/// 
-	/// Example 1:
-	/// Input: S = "ababcbacadefegdehijhklij"
-	/// Output: [9,7,8]
-	/// Explanation:
-	/// The partition is "ababcbaca", "defegde", "hijhklij".
-	/// This is a partition so that each letter appears in at most one part.
-	/// A partition like "ababcbacadefegde", "hijhklij" is incorrect, because 
-	/// it splits S into less parts.
-	/// Note:
-	///
-	/// 1. S will have length in range [1, 500].
-	/// 2. S will consist of lowercase letters ('a' to 'z') only.
-	/// </summary>
-	vector<int> partitionLabels(string S);
+    /// <summary>
+    /// Leet code #763. Partition Labels    
+    ///
+    /// A string S of lowercase letters is given. We want to partition this 
+    /// string into as many parts as possible so that each letter appears in 
+    /// at most one part, and return a list of integers representing the size 
+    /// of these parts.
+    /// 
+    /// Example 1:
+    /// Input: S = "ababcbacadefegdehijhklij"
+    /// Output: [9,7,8]
+    /// Explanation:
+    /// The partition is "ababcbaca", "defegde", "hijhklij".
+    /// This is a partition so that each letter appears in at most one part.
+    /// A partition like "ababcbacadefegde", "hijhklij" is incorrect, because 
+    /// it splits S into less parts.
+    /// Note:
+    ///
+    /// 1. S will have length in range [1, 500].
+    /// 2. S will consist of lowercase letters ('a' to 'z') only.
+    /// </summary>
+    vector<int> partitionLabels(string S);
 
-	/// <summary>
-	/// Leetcode #767. Reorganize String
-	///
-	/// Given a string S, check if the letters can be rearranged so that two 
-	/// characters that are adjacent to each other are not the same.
-	///
-	/// If possible, output any possible result.  If not possible, return the 
-	/// empty string.
-	///
-	/// Example 1:
-	/// Input: S = "aab"
-	/// Output: "aba"
-	///
-	/// Example 2:
-	/// Input: S = "aaab"
-	/// Output: ""
-	///
-	/// Note:
-	/// S will consist of lowercase letters and have length in range [1, 500].
-	/// </summary>
-	string reorganizeString(string S);
+    /// <summary>
+    /// Leetcode #767. Reorganize String
+    ///
+    /// Given a string S, check if the letters can be rearranged so that two 
+    /// characters that are adjacent to each other are not the same.
+    ///
+    /// If possible, output any possible result.  If not possible, return the 
+    /// empty string.
+    ///
+    /// Example 1:
+    /// Input: S = "aab"
+    /// Output: "aba"
+    ///
+    /// Example 2:
+    /// Input: S = "aaab"
+    /// Output: ""
+    ///
+    /// Note:
+    /// S will consist of lowercase letters and have length in range [1, 500].
+    /// </summary>
+    string reorganizeString(string S);
 
-	/// <summary>
-	/// Leetcode #777. Swap Adjacent in LR String
-	///
-	/// In a string composed of 'L', 'R', and 'X' characters, like "RXXLRXRXL", 
-	/// a move consists of either replacing one occurrence of "XL" with "LX", 
-	/// or replacing one occurrence of "RX" with "XR". Given the starting 
-	/// string start and the ending string end, return True if and only if 
-	/// there exists a sequence of moves to transform one string to the other.
-	/// 
-	/// Example:
-	/// Input: start = "RXXLRXRXL", end = "XRLXXRRLX"
-	/// Output: True
-	/// Explanation:
-	/// We can transform start to end following these steps:
-	/// RXXLRXRXL ->
-	/// XRXLRXRXL ->
-	/// XRLXRXRXL ->
-	/// XRLXXRRXL ->
-	/// XRLXXRRLX
-	/// Note:
-	/// 1. 1 <= len(start) = len(end) <= 10000.
-	/// 2. Both start and end will only consist of characters in 
-	/// {'L', 'R', 'X'}.
-	/// </summary>
-	bool canTransform(string start, string end);
+    /// <summary>
+    /// Leetcode #777. Swap Adjacent in LR String
+    ///
+    /// In a string composed of 'L', 'R', and 'X' characters, like "RXXLRXRXL", 
+    /// a move consists of either replacing one occurrence of "XL" with "LX", 
+    /// or replacing one occurrence of "RX" with "XR". Given the starting 
+    /// string start and the ending string end, return True if and only if 
+    /// there exists a sequence of moves to transform one string to the other.
+    /// 
+    /// Example:
+    /// Input: start = "RXXLRXRXL", end = "XRLXXRRLX"
+    /// Output: True
+    /// Explanation:
+    /// We can transform start to end following these steps:
+    /// RXXLRXRXL ->
+    /// XRXLRXRXL ->
+    /// XRLXRXRXL ->
+    /// XRLXXRRXL ->
+    /// XRLXXRRLX
+    /// Note:
+    /// 1. 1 <= len(start) = len(end) <= 10000.
+    /// 2. Both start and end will only consist of characters in 
+    /// {'L', 'R', 'X'}.
+    /// </summary>
+    bool canTransform(string start, string end);
 
-	/// <summary>
-	/// Leet code #791. Custom Sort String
-	/// 
-	/// S and T are strings composed of lowercase letters. In S, no letter 
-	/// occurs more than once.
-	///
-	/// S was sorted in some custom order previously. We want to permute the 
-	/// characters of T so that they match the order that S was sorted. More 
-	/// specifically, if x occurs before y in S, then x should occur before 
-	/// y in the returned string.
-	///
-	/// Return any permutation of T (as a string) that satisfies this property.
-	///
-	/// Example :
-	/// Input: 
-	/// S = "cba"
-	/// T = "abcd"
-	/// Output: "cbad"
-	/// Explanation: 
-	/// "a", "b", "c" appear in S, so the order of "a", "b", "c" should be "c",
-	/// "b", and "a". 
-	/// Since "d" does not appear in S, it can be at any position in T. "dcba",
-	/// "cdba", "cbda" are also valid outputs.
-	///
-	/// Note:
-	/// 1. S has length at most 26, and no character is repeated in S.
-	/// 2. T has length at most 200.
-	/// 3. S and T consist of lowercase letters only.
-	/// </summary>
-	string customSortString(string S, string T);
+    /// <summary>
+    /// Leet code #791. Custom Sort String
+    /// 
+    /// S and T are strings composed of lowercase letters. In S, no letter 
+    /// occurs more than once.
+    ///
+    /// S was sorted in some custom order previously. We want to permute the 
+    /// characters of T so that they match the order that S was sorted. More 
+    /// specifically, if x occurs before y in S, then x should occur before 
+    /// y in the returned string.
+    ///
+    /// Return any permutation of T (as a string) that satisfies this property.
+    ///
+    /// Example :
+    /// Input: 
+    /// S = "cba"
+    /// T = "abcd"
+    /// Output: "cbad"
+    /// Explanation: 
+    /// "a", "b", "c" appear in S, so the order of "a", "b", "c" should be "c",
+    /// "b", and "a". 
+    /// Since "d" does not appear in S, it can be at any position in T. "dcba",
+    /// "cdba", "cbda" are also valid outputs.
+    ///
+    /// Note:
+    /// 1. S has length at most 26, and no character is repeated in S.
+    /// 2. T has length at most 200.
+    /// 3. S and T consist of lowercase letters only.
+    /// </summary>
+    string customSortString(string S, string T);
 
-	/// <summary>
-	/// Leet code #796. Rotate String
-	/// 
-	/// We are given two strings, A and B. 
-	/// A shift on A consists of taking string A and moving the leftmost 
-	/// character to the rightmost position. For example, if A = 'abcde', 
-	/// then it will be 'bcdea' after one shift on A. Return True if and 
-	/// only if A can become B after some number of shifts on A.
-	///
-	/// Example 1:
-	/// Input: A = 'abcde', B = 'cdeab' 
-	/// Output: true
-	///
-	/// Example 2:
-	/// Input: A = 'abcde', B = 'abced' 
-	/// Output: false
-	/// Note:
-	/// 1. A and B will have length at most 100.
-	/// </summary>
-	bool rotateString(string A, string B);
+    /// <summary>
+    /// Leet code #796. Rotate String
+    /// 
+    /// We are given two strings, A and B. 
+    /// A shift on A consists of taking string A and moving the leftmost 
+    /// character to the rightmost position. For example, if A = 'abcde', 
+    /// then it will be 'bcdea' after one shift on A. Return True if and 
+    /// only if A can become B after some number of shifts on A.
+    ///
+    /// Example 1:
+    /// Input: A = 'abcde', B = 'cdeab' 
+    /// Output: true
+    ///
+    /// Example 2:
+    /// Input: A = 'abcde', B = 'abced' 
+    /// Output: false
+    /// Note:
+    /// 1. A and B will have length at most 100.
+    /// </summary>
+    bool rotateString(string A, string B);
 
-	/// <summary>
-	/// Leet code #804. Unique Morse Code Words
-	/// 
-	/// International Morse Code defines a standard encoding where each 
-	/// letter is mapped to a series of dots and dashes, as follows: "a" 
-	/// maps to ".-", "b" maps to "-...", "c" maps to "-.-.", and so on.
-	/// 
-	/// For convenience, the full table for the 26 letters of the English 
-	/// alphabet is given below:
-	///
-	/// [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",
-	///  ".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",
-	///  ".--","-..-","-.--","--.."]
-	/// Now, given a list of words, each word can be written as a concatenation
-	/// of the Morse code of each letter. For example, "cab" can be written as 
-	/// "-.-.-....-", (which is the concatenation "-.-." + "-..." + ".-"). 
-	/// We'll call such a concatenation, the transformation of a word.
-	///
-	/// Return the number of different transformations among all words we have.
-	///
-	/// Example:
-	/// Input: words = ["gin", "zen", "gig", "msg"]
-	/// Output: 2
-	/// Explanation: 
-	/// The transformation of each word is:
-	/// "gin" -> "--...-."
-	/// "zen" -> "--...-."
-	/// "gig" -> "--...--."
-	/// "msg" -> "--...--."
-	///
-	/// There are 2 different transformations, "--...-." and "--...--.".
-	///
-	/// Note:
-	///
-	/// 1. The length of words will be at most 100.
-	/// 2. Each words[i] will have length in range [1, 12].
-	/// 3. words[i] will only consist of lowercase letters.
-	/// </summary>
-	int uniqueMorseRepresentations(vector<string>& words);
+    /// <summary>
+    /// Leet code #804. Unique Morse Code Words
+    /// 
+    /// International Morse Code defines a standard encoding where each 
+    /// letter is mapped to a series of dots and dashes, as follows: "a" 
+    /// maps to ".-", "b" maps to "-...", "c" maps to "-.-.", and so on.
+    /// 
+    /// For convenience, the full table for the 26 letters of the English 
+    /// alphabet is given below:
+    ///
+    /// [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",
+    ///  ".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",
+    ///  ".--","-..-","-.--","--.."]
+    /// Now, given a list of words, each word can be written as a concatenation
+    /// of the Morse code of each letter. For example, "cab" can be written as 
+    /// "-.-.-....-", (which is the concatenation "-.-." + "-..." + ".-"). 
+    /// We'll call such a concatenation, the transformation of a word.
+    ///
+    /// Return the number of different transformations among all words we have.
+    ///
+    /// Example:
+    /// Input: words = ["gin", "zen", "gig", "msg"]
+    /// Output: 2
+    /// Explanation: 
+    /// The transformation of each word is:
+    /// "gin" -> "--...-."
+    /// "zen" -> "--...-."
+    /// "gig" -> "--...--."
+    /// "msg" -> "--...--."
+    ///
+    /// There are 2 different transformations, "--...-." and "--...--.".
+    ///
+    /// Note:
+    ///
+    /// 1. The length of words will be at most 100.
+    /// 2. Each words[i] will have length in range [1, 12].
+    /// 3. words[i] will only consist of lowercase letters.
+    /// </summary>
+    int uniqueMorseRepresentations(vector<string>& words);
 
-	/// <summary>
-	/// Leet code #806. Number of Lines To Write String
-	/// 
-	/// We are to write the letters of a given string S, from left to right 
-	/// into lines. Each line has maximum width 100 units, and if writing a 
-	/// letter would cause the width of the line to exceed 100 units, it is 
-	/// written on the next line. We are given an array widths, an array where 
-	/// widths[0] is the width of 'a', widths[1] is the width of 'b', ..., and 
-	/// widths[25] is the width of 'z'.
-	///
-	/// Now answer two questions: how many lines have at least one character 
-	/// from S, and what is the width used by the last such line? Return your 
-	/// answer as an integer list of length 2.
-	///
-	/// Example :
-	/// Input: 
-	/// widths = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,
-	///           10,10,10,10,10,10,10]
-	/// S = "abcdefghijklmnopqrstuvwxyz"
-	/// Output: [3, 60]
-	/// Explanation: 
-	/// All letters have the same length of 10. To write all 26 letters,
-	/// we need two full lines and one line with 60 units.
-	/// Example :
-	/// Input: 
-	/// widths = [4,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
-	/// S = "bbbcccdddaaa"
-	/// Output: [2, 4]
-	/// Explanation: 
-	/// All letters except 'a' have the same length of 10, and 
-	/// "bbbcccdddaa" will cover 9 * 10 + 2 * 4 = 98 units.
-	/// For the last 'a', it is written on the second line because
-	/// there is only 2 units left in the first line.
-	/// So the answer is 2 lines, plus 4 units in the second line.
-	///
-	/// Note:
-	///
-	/// 1. The length of S will be in the range [1, 1000].
-	/// 2. S will only contain lowercase letters.
-	/// 3. widths is an array of length 26.
-	/// 4. widths[i] will be in the range of [2, 10].
-	/// </summary>
-	vector<int> numberOfLines(vector<int>& widths, string S);
+    /// <summary>
+    /// Leet code #806. Number of Lines To Write String
+    /// 
+    /// We are to write the letters of a given string S, from left to right 
+    /// into lines. Each line has maximum width 100 units, and if writing a 
+    /// letter would cause the width of the line to exceed 100 units, it is 
+    /// written on the next line. We are given an array widths, an array where 
+    /// widths[0] is the width of 'a', widths[1] is the width of 'b', ..., and 
+    /// widths[25] is the width of 'z'.
+    ///
+    /// Now answer two questions: how many lines have at least one character 
+    /// from S, and what is the width used by the last such line? Return your 
+    /// answer as an integer list of length 2.
+    ///
+    /// Example :
+    /// Input: 
+    /// widths = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,
+    ///           10,10,10,10,10,10,10]
+    /// S = "abcdefghijklmnopqrstuvwxyz"
+    /// Output: [3, 60]
+    /// Explanation: 
+    /// All letters have the same length of 10. To write all 26 letters,
+    /// we need two full lines and one line with 60 units.
+    /// Example :
+    /// Input: 
+    /// widths = [4,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
+    /// S = "bbbcccdddaaa"
+    /// Output: [2, 4]
+    /// Explanation: 
+    /// All letters except 'a' have the same length of 10, and 
+    /// "bbbcccdddaa" will cover 9 * 10 + 2 * 4 = 98 units.
+    /// For the last 'a', it is written on the second line because
+    /// there is only 2 units left in the first line.
+    /// So the answer is 2 lines, plus 4 units in the second line.
+    ///
+    /// Note:
+    ///
+    /// 1. The length of S will be in the range [1, 1000].
+    /// 2. S will only contain lowercase letters.
+    /// 3. widths is an array of length 26.
+    /// 4. widths[i] will be in the range of [2, 10].
+    /// </summary>
+    vector<int> numberOfLines(vector<int>& widths, string S);
 
-	/// <summary>
-	/// Leet code #809. Expressive Words
-	/// </summary>
-	void expressiveWords(string str, vector<pair<char, int>>& str_code);
+    /// <summary>
+    /// Leet code #809. Expressive Words
+    /// </summary>
+    void expressiveWords(string str, vector<pair<char, int>>& str_code);
 
-	/// <summary>
-	/// Leet code #809. Expressive Words
-	/// 
-	/// Sometimes people repeat letters to represent extra feeling, such as 
-	/// "hello" -> "heeellooo", "hi" -> "hiiii".  Here, we have groups, of 
-	/// adjacent letters that are all the same character, and adjacent 
-	/// characters to the group are different.  A group is extended if that 
-	/// group is length 3 or more, so "e" and "o" would be extended in the 
-	/// first example, and "i" would be extended in the second example.  As 
-	/// another example, the groups of "abbcccaaaa" would be "a", "bb", "ccc", 
-	/// and "aaaa"; and "ccc" and "aaaa" are the extended groups of that 
-	/// string.
-	///
-	/// For some given string S, a query word is stretchy if it can be made to 
-	/// be equal to S by extending some groups.  Formally, we are allowed to 
-	/// repeatedly choose a group (as defined above) of characters c, and add 
-	/// some number of the same character c to it so that the length of the 
-	/// group is 3 or more.  Note that we cannot extend a group of size one 
-	/// like "h" to a group of size two like "hh" - all extensions must leave 
-	/// the group extended - ie., at least 3 characters long.
-	///
-	/// Given a list of query words, return the number of words that are 
-	/// stretchy. 
-	///
-	/// Example:
-	/// Input: 
-	/// S = "heeellooo"
-	/// words = ["hello", "hi", "helo"]
-	/// Output: 1
-	/// Explanation: 
-	/// We can extend "e" and "o" in the word "hello" to get "heeellooo".
-	/// We can't extend "helo" to get "heeellooo" because the group "ll" is 
-	/// not extended.
-	/// Notes:
-	/// 
-	/// 1. 0 <= len(S) <= 100.
-	/// 2. 0 <= len(words) <= 100.
-	/// 3. 0 <= len(words[i]) <= 100.
-	/// 4. S and all words in words consist only of lowercase letters
-	/// </summary>
-	int expressiveWords(string S, vector<string>& words);
+    /// <summary>
+    /// Leet code #809. Expressive Words
+    /// 
+    /// Sometimes people repeat letters to represent extra feeling, such as 
+    /// "hello" -> "heeellooo", "hi" -> "hiiii".  Here, we have groups, of 
+    /// adjacent letters that are all the same character, and adjacent 
+    /// characters to the group are different.  A group is extended if that 
+    /// group is length 3 or more, so "e" and "o" would be extended in the 
+    /// first example, and "i" would be extended in the second example.  As 
+    /// another example, the groups of "abbcccaaaa" would be "a", "bb", "ccc", 
+    /// and "aaaa"; and "ccc" and "aaaa" are the extended groups of that 
+    /// string.
+    ///
+    /// For some given string S, a query word is stretchy if it can be made to 
+    /// be equal to S by extending some groups.  Formally, we are allowed to 
+    /// repeatedly choose a group (as defined above) of characters c, and add 
+    /// some number of the same character c to it so that the length of the 
+    /// group is 3 or more.  Note that we cannot extend a group of size one 
+    /// like "h" to a group of size two like "hh" - all extensions must leave 
+    /// the group extended - ie., at least 3 characters long.
+    ///
+    /// Given a list of query words, return the number of words that are 
+    /// stretchy. 
+    ///
+    /// Example:
+    /// Input: 
+    /// S = "heeellooo"
+    /// words = ["hello", "hi", "helo"]
+    /// Output: 1
+    /// Explanation: 
+    /// We can extend "e" and "o" in the word "hello" to get "heeellooo".
+    /// We can't extend "helo" to get "heeellooo" because the group "ll" is 
+    /// not extended.
+    /// Notes:
+    /// 
+    /// 1. 0 <= len(S) <= 100.
+    /// 2. 0 <= len(words) <= 100.
+    /// 3. 0 <= len(words[i]) <= 100.
+    /// 4. S and all words in words consist only of lowercase letters
+    /// </summary>
+    int expressiveWords(string S, vector<string>& words);
 
-	/// <summary>
-	/// Leet code #819. Most Common Word
-	/// 
-	/// Given a paragraph and a list of banned words, return the most frequent 
-	/// word that is not in the list of banned words.  It is guaranteed there 
-	/// is at least one word that isn't banned, and that the answer is unique.
-	///
-	/// Words in the list of banned words are given in lowercase, and free of 
-	/// punctuation.  Words in the paragraph are not case sensitive.  
-	/// The answer is in lowercase.
-	///
-	/// Example:
-	/// Input: 
-	/// paragraph = "Bob hit a ball, the hit BALL flew far after it was hit."
-	/// banned = ["hit"]
-	/// Output: "ball"
-	/// Explanation: 
-	/// "hit" occurs 3 times, but it is a banned word.
-	/// "ball" occurs twice (and no other word does), so it is the most 
-	/// frequent non-banned word in the paragraph. 
-	/// Note that words in the paragraph are not case sensitive,
-	/// that punctuation is ignored (even if adjacent to words, such as 
-	/// "ball,"), 
-	/// and that "hit" isn't the answer even though it occurs more because it 
-	/// is banned.
-	///
-	///
-	/// Note:
-	///
-	/// 1. 1 <= paragraph.length <= 1000.
-	/// 2. 1 <= banned.length <= 100.
-	/// 3. 1 <= banned[i].length <= 10.
-	/// 4. The answer is unique, and written in lowercase (even if its 
-	///    occurrences in paragraph may have uppercase symbols, and even if it 
-	///    is a proper noun.)
-	/// 5. paragraph only consists of letters, spaces, or the punctuation 
-	///    symbols !?',;.
-	/// 6. Different words in paragraph are always separated by a space.
-	/// 7. There are no hyphens or hyphenated words.
-	/// 8. Words only consist of letters, never apostrophes or other 
-	///    punctuation symbols.
-	/// </summary>
-	string mostCommonWord(string paragraph, vector<string>& banned);
+    /// <summary>
+    /// Leet code #819. Most Common Word
+    /// 
+    /// Given a paragraph and a list of banned words, return the most frequent 
+    /// word that is not in the list of banned words.  It is guaranteed there 
+    /// is at least one word that isn't banned, and that the answer is unique.
+    ///
+    /// Words in the list of banned words are given in lowercase, and free of 
+    /// punctuation.  Words in the paragraph are not case sensitive.  
+    /// The answer is in lowercase.
+    ///
+    /// Example:
+    /// Input: 
+    /// paragraph = "Bob hit a ball, the hit BALL flew far after it was hit."
+    /// banned = ["hit"]
+    /// Output: "ball"
+    /// Explanation: 
+    /// "hit" occurs 3 times, but it is a banned word.
+    /// "ball" occurs twice (and no other word does), so it is the most 
+    /// frequent non-banned word in the paragraph. 
+    /// Note that words in the paragraph are not case sensitive,
+    /// that punctuation is ignored (even if adjacent to words, such as 
+    /// "ball,"), 
+    /// and that "hit" isn't the answer even though it occurs more because it 
+    /// is banned.
+    ///
+    ///
+    /// Note:
+    ///
+    /// 1. 1 <= paragraph.length <= 1000.
+    /// 2. 1 <= banned.length <= 100.
+    /// 3. 1 <= banned[i].length <= 10.
+    /// 4. The answer is unique, and written in lowercase (even if its 
+    ///    occurrences in paragraph may have uppercase symbols, and even if it 
+    ///    is a proper noun.)
+    /// 5. paragraph only consists of letters, spaces, or the punctuation 
+    ///    symbols !?',;.
+    /// 6. Different words in paragraph are always separated by a space.
+    /// 7. There are no hyphens or hyphenated words.
+    /// 8. Words only consist of letters, never apostrophes or other 
+    ///    punctuation symbols.
+    /// </summary>
+    string mostCommonWord(string paragraph, vector<string>& banned);
 
-	/// <summary>
-	/// Leet code #820. Short Encoding of Words
-	/// 
-	/// Given a list of words, we may encode it by writing a reference string 
-	/// S and a list of indexes A.
-	///
-	/// For example, if the list of words is ["time", "me", "bell"], we can 
-	/// write it as S = "time#bell#" and indexes = [0, 2, 5].
-	///
-	/// Then for each index, we will recover the word by reading from the 
-	/// reference string from that index until we reach a "#" character.
-	///
-	/// What is the length of the shortest reference string S possible that 
-	/// encodes the given words?
-	///
-	/// Example:
-	///
-	/// Input: words = ["time", "me", "bell"]
-	/// Output: 10
-	/// Explanation: S = "time#bell#" and indexes = [0, 2, 5].
-	/// Note:
-	///
-	/// 1. 1 <= words.length <= 2000.
-	/// 2. 1 <= words[i].length <= 7.
-	/// 3. Each word has only lowercase letters.
-	/// </summary>
-	int minimumLengthEncoding(vector<string>& words);
+    /// <summary>
+    /// Leet code #820. Short Encoding of Words
+    /// 
+    /// Given a list of words, we may encode it by writing a reference string 
+    /// S and a list of indexes A.
+    ///
+    /// For example, if the list of words is ["time", "me", "bell"], we can 
+    /// write it as S = "time#bell#" and indexes = [0, 2, 5].
+    ///
+    /// Then for each index, we will recover the word by reading from the 
+    /// reference string from that index until we reach a "#" character.
+    ///
+    /// What is the length of the shortest reference string S possible that 
+    /// encodes the given words?
+    ///
+    /// Example:
+    ///
+    /// Input: words = ["time", "me", "bell"]
+    /// Output: 10
+    /// Explanation: S = "time#bell#" and indexes = [0, 2, 5].
+    /// Note:
+    ///
+    /// 1. 1 <= words.length <= 2000.
+    /// 2. 1 <= words[i].length <= 7.
+    /// 3. Each word has only lowercase letters.
+    /// </summary>
+    int minimumLengthEncoding(vector<string>& words);
 
-	/// <summary>
-	/// Leet code #824. Goat Latin
-	/// 
-	/// A sentence S is given, composed of words separated by spaces. Each 
-	/// word consists of lowercase and uppercase letters only.
-	/// We would like to convert the sentence to "Goat Latin" (a made-up 
-	/// language similar to Pig Latin.)
-	///
-	/// The rules of Goat Latin are as follows:
-	///
-	/// If a word begins with a vowel (a, e, i, o, or u), append "ma" to the 
-	/// end of the word.
-	/// For example, the word 'apple' becomes 'applema'.
-	///
-	/// If a word begins with a consonant (i.e. not a vowel), remove the first 
-	/// letter and append it to the end, then add "ma".
-	/// For example, the word "goat" becomes "oatgma".
-	///
-	/// Add one letter 'a' to the end of each word per its word index in the 
-	/// sentence, starting with 1.
-	/// For example, the first word gets "a" added to the end, the second word
-	/// gets "aa" added to the end and so on.
-	/// Return the final sentence representing the conversion from S to Goat 
-	/// Latin. 
-	/// Example 1:
-	///
-	/// Input: "I speak Goat Latin"
-	/// Output: "Imaa peaksmaaa oatGmaaaa atinLmaaaaa"
-	/// Example 2:
-	///
-	/// Input: "The quick brown fox jumped over the lazy dog"
-	/// Output: "heTmaa uickqmaaa rownbmaaaa oxfmaaaaa umpedjmaaaaaa 
-	/// overmaaaaaaa hetmaaaaaaaa azylmaaaaaaaaa ogdmaaaaaaaaaa"
-	///
-	/// Notes: 
-	/// S contains only uppercase, lowercase and spaces. Exactly one space 
-	/// between each word.
-	/// 1 <= S.length <= 150.
-	/// </summary>
-	string toGoatLatin(string S);
+    /// <summary>
+    /// Leet code #824. Goat Latin
+    /// 
+    /// A sentence S is given, composed of words separated by spaces. Each 
+    /// word consists of lowercase and uppercase letters only.
+    /// We would like to convert the sentence to "Goat Latin" (a made-up 
+    /// language similar to Pig Latin.)
+    ///
+    /// The rules of Goat Latin are as follows:
+    ///
+    /// If a word begins with a vowel (a, e, i, o, or u), append "ma" to the 
+    /// end of the word.
+    /// For example, the word 'apple' becomes 'applema'.
+    ///
+    /// If a word begins with a consonant (i.e. not a vowel), remove the first 
+    /// letter and append it to the end, then add "ma".
+    /// For example, the word "goat" becomes "oatgma".
+    ///
+    /// Add one letter 'a' to the end of each word per its word index in the 
+    /// sentence, starting with 1.
+    /// For example, the first word gets "a" added to the end, the second word
+    /// gets "aa" added to the end and so on.
+    /// Return the final sentence representing the conversion from S to Goat 
+    /// Latin. 
+    /// Example 1:
+    ///
+    /// Input: "I speak Goat Latin"
+    /// Output: "Imaa peaksmaaa oatGmaaaa atinLmaaaaa"
+    /// Example 2:
+    ///
+    /// Input: "The quick brown fox jumped over the lazy dog"
+    /// Output: "heTmaa uickqmaaa rownbmaaaa oxfmaaaaa umpedjmaaaaaa 
+    /// overmaaaaaaa hetmaaaaaaaa azylmaaaaaaaaa ogdmaaaaaaaaaa"
+    ///
+    /// Notes: 
+    /// S contains only uppercase, lowercase and spaces. Exactly one space 
+    /// between each word.
+    /// 1 <= S.length <= 150.
+    /// </summary>
+    string toGoatLatin(string S);
 
-	/// <summary>
-	/// Leet code #831. Masking Personal Information
-	/// 
-	/// We are given a personal information string S, which may represent 
-	/// either an email address or a phone number.
-	///
-	/// We would like to mask this personal information according to the 
-	/// following rules:
-	///
-	///
-	/// 1. Email address:
-	///
-	/// We define a name to be a string of length ≥ 2 consisting of only 
-	/// lowercase letters a-z or uppercase letters A-Z.
-	///
-	/// An email address starts with a name, followed by the symbol '@', 
-	/// followed by a name, followed by the dot '.' and followed by a name. 
-	///
-	/// All email addresses are guaranteed to be valid and in the format 
-	/// of "name1@name2.name3".
-	///
-	/// To mask an email, all names must be converted to lowercase and all 
-	/// letters between the first and last letter of the first name must be 
-	/// replaced by 5 asterisks '*'.
-	///
-	///
-	/// 2. Phone number:
-	///
-	/// A phone number is a string consisting of only the digits 0-9 or the 
-	/// characters from the set {'+', '-', '(', ')', ' '}. You may assume a 
-	/// phone number contains 10 to 13 digits.
-	/// 
-	/// The last 10 digits make up the local number, while the digits before 
-	/// those make up the country code. Note that the country code is optional. 
-	/// We want to expose only the last 4 digits and mask all other digits.
-	/// 
-	/// The local number should be formatted and masked as "***-***-1111", 
-	/// where 1 represents the exposed digits.
-	/// 
-	/// To mask a phone number with country code like "+111 111 111 1111", we 
-	/// write it in the form "+***-***-***-1111".  The '+' sign and the first 
-	/// '-' sign before the local number should only exist if there is a 
-	/// country code.  For example, a 12 digit phone number mask should start 
-	/// with "+**-".
-	///
-	/// Note that extraneous characters like "(", ")", " ", as well as extra 
-	/// dashes or plus signs not part of the above formatting scheme should 
-	/// be removed.
-	///
-	/// Return the correct "mask" of the information provided.
-	/// 
-	/// Example 1:
-	/// Input: "LeetCode@LeetCode.com"
-	/// Output: "l*****e@leetcode.com"
-	/// Explanation: All names are converted to lowercase, and the letters between the
-	///         first and last letter of the first name is replaced by 5 asterisks.
-	///         Therefore, "leetcode" -> "l*****e".
-	///
-	/// Example 2:
-	///
-	/// Input: "AB@qq.com"
-	/// Output: "a*****b@qq.com"
-	/// Explanation: There must be 5 asterisks between the first and last letter 
-	///         of the first name "ab". Therefore, "ab" -> "a*****b".
-	///
-	/// Example 3:
-	/// Input: "1(234)567-890"
-	/// Output: "***-***-7890"
-	/// Explanation: 10 digits in the phone number, which means all digits make up the local number.
-	///
-	/// Example 4:
-	///
-	/// Input: "86-(10)12345678"
-	/// Output: "+**-***-***-5678"
-	/// Explanation: 12 digits, 2 digits for country code and 10 digits for local number. 
-	///
-	/// Notes:
-	///
-	/// 1. S.length <= 40.
-	/// 2. Emails have length at least 8.
-	/// 3. Phone numbers have length at least 10.
-	/// </summary>
-	string maskPII(string S);
+    /// <summary>
+    /// Leet code #831. Masking Personal Information
+    /// 
+    /// We are given a personal information string S, which may represent 
+    /// either an email address or a phone number.
+    ///
+    /// We would like to mask this personal information according to the 
+    /// following rules:
+    ///
+    ///
+    /// 1. Email address:
+    ///
+    /// We define a name to be a string of length ≥ 2 consisting of only 
+    /// lowercase letters a-z or uppercase letters A-Z.
+    ///
+    /// An email address starts with a name, followed by the symbol '@', 
+    /// followed by a name, followed by the dot '.' and followed by a name. 
+    ///
+    /// All email addresses are guaranteed to be valid and in the format 
+    /// of "name1@name2.name3".
+    ///
+    /// To mask an email, all names must be converted to lowercase and all 
+    /// letters between the first and last letter of the first name must be 
+    /// replaced by 5 asterisks '*'.
+    ///
+    ///
+    /// 2. Phone number:
+    ///
+    /// A phone number is a string consisting of only the digits 0-9 or the 
+    /// characters from the set {'+', '-', '(', ')', ' '}. You may assume a 
+    /// phone number contains 10 to 13 digits.
+    /// 
+    /// The last 10 digits make up the local number, while the digits before 
+    /// those make up the country code. Note that the country code is optional. 
+    /// We want to expose only the last 4 digits and mask all other digits.
+    /// 
+    /// The local number should be formatted and masked as "***-***-1111", 
+    /// where 1 represents the exposed digits.
+    /// 
+    /// To mask a phone number with country code like "+111 111 111 1111", we 
+    /// write it in the form "+***-***-***-1111".  The '+' sign and the first 
+    /// '-' sign before the local number should only exist if there is a 
+    /// country code.  For example, a 12 digit phone number mask should start 
+    /// with "+**-".
+    ///
+    /// Note that extraneous characters like "(", ")", " ", as well as extra 
+    /// dashes or plus signs not part of the above formatting scheme should 
+    /// be removed.
+    ///
+    /// Return the correct "mask" of the information provided.
+    /// 
+    /// Example 1:
+    /// Input: "LeetCode@LeetCode.com"
+    /// Output: "l*****e@leetcode.com"
+    /// Explanation: All names are converted to lowercase, and the letters between the
+    ///         first and last letter of the first name is replaced by 5 asterisks.
+    ///         Therefore, "leetcode" -> "l*****e".
+    ///
+    /// Example 2:
+    ///
+    /// Input: "AB@qq.com"
+    /// Output: "a*****b@qq.com"
+    /// Explanation: There must be 5 asterisks between the first and last letter 
+    ///         of the first name "ab". Therefore, "ab" -> "a*****b".
+    ///
+    /// Example 3:
+    /// Input: "1(234)567-890"
+    /// Output: "***-***-7890"
+    /// Explanation: 10 digits in the phone number, which means all digits make up the local number.
+    ///
+    /// Example 4:
+    ///
+    /// Input: "86-(10)12345678"
+    /// Output: "+**-***-***-5678"
+    /// Explanation: 12 digits, 2 digits for country code and 10 digits for local number. 
+    ///
+    /// Notes:
+    ///
+    /// 1. S.length <= 40.
+    /// 2. Emails have length at least 8.
+    /// 3. Phone numbers have length at least 10.
+    /// </summary>
+    string maskPII(string S);
 
-	/// <summary>
-	/// Leet code #833. Find And Replace in String
-	/// 
-	/// To some string S, we will perform some replacement operations that 
-	/// replace groups of letters with new ones (not necessarily the same 
-	/// size).
-	///
-	/// Each replacement operation has 3 parameters: a starting index i, a 
-	/// source word x and a target word y.  The rule is that if x starts at 
-	/// position i in the original string S, then we will replace that 
-	/// occurrence of x with y.  If not, we do nothing.
-	/// 
-	/// For example, if we have S = "abcd" and we have some replacement 
-	/// operation i = 2, x = "cd", y = "ffff", then because "cd" starts at 
-	/// position 2 in the original string S, we will replace it with "ffff".
-	///
-	/// Using another example on S = "abcd", if we have both the replacement 
-	/// operation i = 0, x = "ab", y = "eee", as well as another replacement 
-	/// operation i = 2, x = "ec", y = "ffff", this second operation does 
-	/// nothing because in the original string S[2] = 'c', which doesn't 
-	/// match x[0] = 'e'.
-	///
-	/// All these operations occur simultaneously.  It's guaranteed that there 
-	/// won't be any overlap in replacement: for example, S = "abc", indexes = 
-	/// [0, 1], sources = ["ab","bc"] is not a valid test case.
-	/// 
-	/// Example 1:
-	///
-	/// Input: S = "abcd", indexes = [0,2], sources = ["a","cd"], 
-	/// targets = ["eee","ffff"]
-	/// Output: "eeebffff"
-	/// Explanation: "a" starts at index 0 in S, so it's replaced by "eee".
-	/// "cd" starts at index 2 in S, so it's replaced by "ffff".
-	///
-	/// Example 2:
-	///
-	/// Input: S = "abcd", indexes = [0,2], sources = ["ab","ec"], 
-	/// targets = ["eee","ffff"]
-	/// Output: "eeecd"
-	/// Explanation: "ab" starts at index 0 in S, so it's replaced by "eee". 
-	/// "ec" doesn't starts at index 2 in the original S, so we do nothing.
-	/// Notes:
-	/// 
-	/// 1. 0 <= indexes.length = sources.length = targets.length <= 100
-	/// 2. 0 < indexes[i] < S.length <= 1000
-	/// 3. All characters in given inputs are lowercase letters.
-	/// </summary>
-	string findReplaceString(string S, vector<int>& indexes,
-		vector<string>& sources, vector<string>& targets);
+    /// <summary>
+    /// Leet code #833. Find And Replace in String
+    /// 
+    /// To some string S, we will perform some replacement operations that 
+    /// replace groups of letters with new ones (not necessarily the same 
+    /// size).
+    ///
+    /// Each replacement operation has 3 parameters: a starting index i, a 
+    /// source word x and a target word y.  The rule is that if x starts at 
+    /// position i in the original string S, then we will replace that 
+    /// occurrence of x with y.  If not, we do nothing.
+    /// 
+    /// For example, if we have S = "abcd" and we have some replacement 
+    /// operation i = 2, x = "cd", y = "ffff", then because "cd" starts at 
+    /// position 2 in the original string S, we will replace it with "ffff".
+    ///
+    /// Using another example on S = "abcd", if we have both the replacement 
+    /// operation i = 0, x = "ab", y = "eee", as well as another replacement 
+    /// operation i = 2, x = "ec", y = "ffff", this second operation does 
+    /// nothing because in the original string S[2] = 'c', which doesn't 
+    /// match x[0] = 'e'.
+    ///
+    /// All these operations occur simultaneously.  It's guaranteed that there 
+    /// won't be any overlap in replacement: for example, S = "abc", indexes = 
+    /// [0, 1], sources = ["ab","bc"] is not a valid test case.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: S = "abcd", indexes = [0,2], sources = ["a","cd"], 
+    /// targets = ["eee","ffff"]
+    /// Output: "eeebffff"
+    /// Explanation: "a" starts at index 0 in S, so it's replaced by "eee".
+    /// "cd" starts at index 2 in S, so it's replaced by "ffff".
+    ///
+    /// Example 2:
+    ///
+    /// Input: S = "abcd", indexes = [0,2], sources = ["ab","ec"], 
+    /// targets = ["eee","ffff"]
+    /// Output: "eeecd"
+    /// Explanation: "ab" starts at index 0 in S, so it's replaced by "eee". 
+    /// "ec" doesn't starts at index 2 in the original S, so we do nothing.
+    /// Notes:
+    /// 
+    /// 1. 0 <= indexes.length = sources.length = targets.length <= 100
+    /// 2. 0 < indexes[i] < S.length <= 1000
+    /// 3. All characters in given inputs are lowercase letters.
+    /// </summary>
+    string findReplaceString(string S, vector<int>& indexes,
+        vector<string>& sources, vector<string>& targets);
 
-	/// <summary>
-	/// Leet code #843. Guess the Word
-	/// </summary>
-	int match(string strA, string strB);
+    /// <summary>
+    /// Leet code #843. Guess the Word
+    /// </summary>
+    int match(string strA, string strB);
 
-	/// <summary>
-	/// Leet code #843. Guess the Word
-	/// 
-	/// This problem is an interactive problem new to the LeetCode platform.
-	///  
-	/// We are given a word list of unique words, each word is 6 letters long, 
-	/// and one word in this list is chosen as secret.
-	/// 
-	/// You may call master.guess(word) to guess a word.  The guessed word 
-	/// should have type string and must be from the original list with 6 
-	/// lowercase letters.
-	///
-	/// This function returns an integer type, representing the number of 
-	/// exact matches (value and position) of your guess to the secret word.  
-	/// Also, if your guess is not in the given wordlist, it will return -1 
-	/// instead.
-	///
-	/// For each test case, you have 10 guesses to guess the word. At the end 
-	/// of any number of calls, if you have made 10 or less calls to 
-	/// master.guess and at least one of these guesses was the secret, you
-	/// pass the testcase.
-	///
-	/// Besides the example test case below, there will be 5 additional test 
-	/// cases, each with 100 words in the word list.  The letters of each word 
-	/// in those testcases were chosen independently at random from 'a' to 'z', 
-	/// such that every word in the given word lists is unique.
-	///
-	/// Example 1:
-	/// Input: secret = "acckzz", wordlist = ["acckzz","ccbazz","eiowzz",
-	/// "abcczz"]
-	/// 
-	/// Explanation:
-	/// master.guess("aaaaaa") returns -1, because "aaaaaa" is not in wordlist.
-	/// master.guess("acckzz") returns 6, because "acckzz" is secret and has 
-	/// all 6 matches.
-	/// master.guess("ccbazz") returns 3, because "ccbazz" has 3 matches.
-	/// master.guess("eiowzz") returns 2, because "eiowzz" has 2 matches.
-	/// master.guess("abcczz") returns 4, because "abcczz" has 4 matches.
-	///
-	/// We made 5 calls to master.guess and one of them was the secret, so we 
-	/// pass the test case.
-	/// Note:  Any solutions that attempt to circumvent the judge will 
-	/// result in disqualification.
-	/// </summary>
-	string findSecretWord(vector<string>& wordlist, Master& master);
+    /// <summary>
+    /// Leet code #843. Guess the Word
+    /// 
+    /// This problem is an interactive problem new to the LeetCode platform.
+    ///  
+    /// We are given a word list of unique words, each word is 6 letters long, 
+    /// and one word in this list is chosen as secret.
+    /// 
+    /// You may call master.guess(word) to guess a word.  The guessed word 
+    /// should have type string and must be from the original list with 6 
+    /// lowercase letters.
+    ///
+    /// This function returns an integer type, representing the number of 
+    /// exact matches (value and position) of your guess to the secret word.  
+    /// Also, if your guess is not in the given wordlist, it will return -1 
+    /// instead.
+    ///
+    /// For each test case, you have 10 guesses to guess the word. At the end 
+    /// of any number of calls, if you have made 10 or less calls to 
+    /// master.guess and at least one of these guesses was the secret, you
+    /// pass the testcase.
+    ///
+    /// Besides the example test case below, there will be 5 additional test 
+    /// cases, each with 100 words in the word list.  The letters of each word 
+    /// in those testcases were chosen independently at random from 'a' to 'z', 
+    /// such that every word in the given word lists is unique.
+    ///
+    /// Example 1:
+    /// Input: secret = "acckzz", wordlist = ["acckzz","ccbazz","eiowzz",
+    /// "abcczz"]
+    /// 
+    /// Explanation:
+    /// master.guess("aaaaaa") returns -1, because "aaaaaa" is not in wordlist.
+    /// master.guess("acckzz") returns 6, because "acckzz" is secret and has 
+    /// all 6 matches.
+    /// master.guess("ccbazz") returns 3, because "ccbazz" has 3 matches.
+    /// master.guess("eiowzz") returns 2, because "eiowzz" has 2 matches.
+    /// master.guess("abcczz") returns 4, because "abcczz" has 4 matches.
+    ///
+    /// We made 5 calls to master.guess and one of them was the secret, so we 
+    /// pass the test case.
+    /// Note:  Any solutions that attempt to circumvent the judge will 
+    /// result in disqualification.
+    /// </summary>
+    string findSecretWord(vector<string>& wordlist, Master& master);
 
-	/// <summary>
-	/// Leet code #842. Split Array into Fibonacci Sequence
-	/// 
-	/// Given a string S of digits, such as S = "123456579", we can split it 
-	/// into a Fibonacci-like sequence [123, 456, 579].
-	///
-	/// Formally, a Fibonacci-like sequence is a list F of non-negative 
-	/// integers such that:
-	///
-	/// 0 <= F[i] <= 2^31 - 1, (that is, each integer fits a 32-bit signed 
-	/// integer type);
-	/// F.length >= 3;
-	/// and F[i] + F[i+1] = F[i+2] for all 0 <= i < F.length - 2.
-	/// Also, note that when splitting the string into pieces, each piece must 
-	/// not have extra leading zeroes, except if the piece is the number 0 
-	/// itself.
-	///
-	/// Return any Fibonacci-like sequence split from S, or return [] if it 
-	/// cannot be done.
-	///
-	/// Example 1:
-	/// Input: "123456579"
-	/// Output: [123,456,579]
-	///
-	/// Example 2:
-	/// Input: "11235813"
-	/// Output: [1,1,2,3,5,8,13]
-	///
-	/// Example 3:
-	/// Input: "112358130"
-	/// Output: []
-	/// Explanation: The task is impossible.
-	///
-	/// Example 4:
-	/// Input: "0123"
-	/// Output: []
-	/// Explanation: Leading zeroes are not allowed, so "01", "2", "3" is not 
-	/// valid.
-	///
-	/// Example 5:
-	/// Input: "1101111"
-	/// Output: [110, 1, 111]
-	/// Explanation: The output [11, 0, 11, 11] would also be accepted.
-	///
-	/// Note:
-	/// 1. 1 <= S.length <= 200
-	/// 2. S contains only digits.
-	/// </summary>
-	vector<int> splitIntoFibonacci(string S);
+    /// <summary>
+    /// Leet code #842. Split Array into Fibonacci Sequence
+    /// 
+    /// Given a string S of digits, such as S = "123456579", we can split it 
+    /// into a Fibonacci-like sequence [123, 456, 579].
+    ///
+    /// Formally, a Fibonacci-like sequence is a list F of non-negative 
+    /// integers such that:
+    ///
+    /// 0 <= F[i] <= 2^31 - 1, (that is, each integer fits a 32-bit signed 
+    /// integer type);
+    /// F.length >= 3;
+    /// and F[i] + F[i+1] = F[i+2] for all 0 <= i < F.length - 2.
+    /// Also, note that when splitting the string into pieces, each piece must 
+    /// not have extra leading zeroes, except if the piece is the number 0 
+    /// itself.
+    ///
+    /// Return any Fibonacci-like sequence split from S, or return [] if it 
+    /// cannot be done.
+    ///
+    /// Example 1:
+    /// Input: "123456579"
+    /// Output: [123,456,579]
+    ///
+    /// Example 2:
+    /// Input: "11235813"
+    /// Output: [1,1,2,3,5,8,13]
+    ///
+    /// Example 3:
+    /// Input: "112358130"
+    /// Output: []
+    /// Explanation: The task is impossible.
+    ///
+    /// Example 4:
+    /// Input: "0123"
+    /// Output: []
+    /// Explanation: Leading zeroes are not allowed, so "01", "2", "3" is not 
+    /// valid.
+    ///
+    /// Example 5:
+    /// Input: "1101111"
+    /// Output: [110, 1, 111]
+    /// Explanation: The output [11, 0, 11, 11] would also be accepted.
+    ///
+    /// Note:
+    /// 1. 1 <= S.length <= 200
+    /// 2. S contains only digits.
+    /// </summary>
+    vector<int> splitIntoFibonacci(string S);
 
-	/// <summary>
-	/// Leet code #844. Backspace String Compare
-	/// 
-	/// Given two strings S and T, return if they are equal when both are 
-	/// typed  into empty text editors. # means a backspace character.
-	///  
-	/// Example 1:
-	/// Input: S = "ab#c", T = "ad#c"
-	/// Output: true
-	/// Explanation: Both S and T become "ac".
-	///
-	/// Example 2:
-	///
-	/// Input: S = "ab##", T = "c#d#"
-	/// Output: true
-	/// Explanation: Both S and T become "".
-	///
-	/// Example 3:
-	///
-	/// Input: S = "a##c", T = "#a#c"
-	/// Output: true
-	/// Explanation: Both S and T become "c".
-	/// Example 4:
-	///
-	/// Input: S = "a#c", T = "b"
-	/// Output: false
-	/// Explanation: S becomes "c" while T becomes "b".
-	/// 
-	/// Note:
-	/// 1. 1 <= S.length <= 200
-	/// 2. 1 <= T.length <= 200
-	/// 3. S and T only contain lowercase letters and '#' characters.
-	/// </summary>
-	bool backspaceCompare(string S, string T);
+    /// <summary>
+    /// Leet code #844. Backspace String Compare
+    /// 
+    /// Given two strings S and T, return if they are equal when both are 
+    /// typed  into empty text editors. # means a backspace character.
+    ///  
+    /// Example 1:
+    /// Input: S = "ab#c", T = "ad#c"
+    /// Output: true
+    /// Explanation: Both S and T become "ac".
+    ///
+    /// Example 2:
+    ///
+    /// Input: S = "ab##", T = "c#d#"
+    /// Output: true
+    /// Explanation: Both S and T become "".
+    ///
+    /// Example 3:
+    ///
+    /// Input: S = "a##c", T = "#a#c"
+    /// Output: true
+    /// Explanation: Both S and T become "c".
+    /// Example 4:
+    ///
+    /// Input: S = "a#c", T = "b"
+    /// Output: false
+    /// Explanation: S becomes "c" while T becomes "b".
+    /// 
+    /// Note:
+    /// 1. 1 <= S.length <= 200
+    /// 2. 1 <= T.length <= 200
+    /// 3. S and T only contain lowercase letters and '#' characters.
+    /// </summary>
+    bool backspaceCompare(string S, string T);
 
-	/// <summary>
-	/// Leet code #848. Shifting Letters
-	/// 
-	/// We have a string S of lowercase letters, and an integer array shifts.
-	/// Call the shift of a letter, the next letter in the alphabet, (wrapping 
-	/// around so that 'z' becomes 'a'). 
-	///
-	/// For example, shift('a') = 'b', shift('t') = 'u', and shift('z') = 'a'.
-	/// Now for each shifts[i] = x, we want to shift the first i+1 letters of S, 
-	/// x times.
-	///
-	/// Return the final string after all such shifts to S are applied.
-	///
-	/// Example 1:
-	///
-	/// Input: S = "abc", shifts = [3,5,9]
-	/// Output: "rpl"
-	/// Explanation: 
-	/// We start with "abc".
-	/// After shifting the first 1 letters of S by 3, we have "dbc".
-	/// After shifting the first 2 letters of S by 5, we have "igc".
-	/// After shifting the first 3 letters of S by 9, we have "rpl", the answer.
-	/// Note:
-	///
-	/// 1 <= S.length = shifts.length <= 20000
-	/// 0 <= shifts[i] <= 10 ^ 9
-	/// Seen this question in a real interview before?  
-	/// </summary>
-	string shiftingLetters(string S, vector<int>& shifts);
+    /// <summary>
+    /// Leet code #848. Shifting Letters
+    /// 
+    /// We have a string S of lowercase letters, and an integer array shifts.
+    /// Call the shift of a letter, the next letter in the alphabet, (wrapping 
+    /// around so that 'z' becomes 'a'). 
+    ///
+    /// For example, shift('a') = 'b', shift('t') = 'u', and shift('z') = 'a'.
+    /// Now for each shifts[i] = x, we want to shift the first i+1 letters of S, 
+    /// x times.
+    ///
+    /// Return the final string after all such shifts to S are applied.
+    ///
+    /// Example 1:
+    ///
+    /// Input: S = "abc", shifts = [3,5,9]
+    /// Output: "rpl"
+    /// Explanation: 
+    /// We start with "abc".
+    /// After shifting the first 1 letters of S by 3, we have "dbc".
+    /// After shifting the first 2 letters of S by 5, we have "igc".
+    /// After shifting the first 3 letters of S by 9, we have "rpl", the answer.
+    /// Note:
+    ///
+    /// 1 <= S.length = shifts.length <= 20000
+    /// 0 <= shifts[i] <= 10 ^ 9
+    /// Seen this question in a real interview before?  
+    /// </summary>
+    string shiftingLetters(string S, vector<int>& shifts);
 
-	/// <summary>
-	/// Leet code #859. Buddy Strings
-	/// 
-	/// Given two strings A and B of lowercase letters, return true if and only 
-	/// if we can swap two letters in A so that the result equals B.
-	///
-	/// Example 1:
-	/// Input: A = "ab", B = "ba"
-	/// Output: true
-	///
-	/// Example 2:
-	/// Input: A = "ab", B = "ab"
-	/// Output: false
-	///
-	/// Example 3:
-	/// Input: A = "aa", B = "aa"
-	/// Output: true
-	///
-	/// Example 4:
-	/// Input: A = "aaaaaaabc", B = "aaaaaaacb"
-	/// Output: true
-	///
-	/// Example 5:
-	/// Input: A = "", B = "aa"
-	/// Output: false
-	/// 
-	/// Note:
-	/// 1. 0 <= A.length <= 20000
-	/// 2. 0 <= B.length <= 20000
-	/// 3. A and B consist only of lowercase letters.
-	/// </summary>
-	bool buddyStrings(string A, string B);
+    /// <summary>
+    /// Leet code #859. Buddy Strings
+    /// 
+    /// Given two strings A and B of lowercase letters, return true if and only 
+    /// if we can swap two letters in A so that the result equals B.
+    ///
+    /// Example 1:
+    /// Input: A = "ab", B = "ba"
+    /// Output: true
+    ///
+    /// Example 2:
+    /// Input: A = "ab", B = "ab"
+    /// Output: false
+    ///
+    /// Example 3:
+    /// Input: A = "aa", B = "aa"
+    /// Output: true
+    ///
+    /// Example 4:
+    /// Input: A = "aaaaaaabc", B = "aaaaaaacb"
+    /// Output: true
+    ///
+    /// Example 5:
+    /// Input: A = "", B = "aa"
+    /// Output: false
+    /// 
+    /// Note:
+    /// 1. 0 <= A.length <= 20000
+    /// 2. 0 <= B.length <= 20000
+    /// 3. A and B consist only of lowercase letters.
+    /// </summary>
+    bool buddyStrings(string A, string B);
 
-	/// <summary>
-	/// Leet code #893. Groups of Special-Equivalent Strings
-	/// 
-	/// You are given an array A of strings.
-	///
-	/// Two strings S and T are special-equivalent if after any number of moves, 
-	/// S == T.
-	///
-	/// A move consists of choosing two indices i and j with i % 2 == j % 2, and 
-	/// swapping S[i] with S[j].
-	///
-	/// Now, a group of special-equivalent strings from A is a non-empty subset S 
-	/// of A such that any string not in S is not special-equivalent with any 
-	/// string in S.
-	///
-	/// Return the number of groups of special-equivalent strings from A.
-	///
-	/// 
-	/// Example 1:
-	/// Input: ["a","b","c","a","c","c"]
-	/// Output: 3
-	/// Explanation: 3 groups ["a","a"], ["b"], ["c","c","c"]
-	///
-	/// Example 2:
-	/// Input: ["aa","bb","ab","ba"]
-	/// Output: 4
-	/// Explanation: 4 groups ["aa"], ["bb"], ["ab"], ["ba"]
-	///
-	/// Example 3:
-	/// Input: ["abc","acb","bac","bca","cab","cba"]
-	/// Output: 3
-	/// Explanation: 3 groups ["abc","cba"], ["acb","bca"], ["bac","cab"]
-	///
-	/// Example 4:
-	/// Input: ["abcd","cdab","adcb","cbad"]
-	/// Output: 1
-	/// Explanation: 1 group ["abcd","cdab","adcb","cbad"]
-	///
-	/// Note:
-	/// 1. 1 <= A.length <= 1000
-	/// 2. 1 <= A[i].length <= 20
-	/// 3. All A[i] have the same length.
-	/// 4. All A[i] consist of only lowercase letters.
-	/// </summary>
-	int numSpecialEquivGroups(vector<string>& A);
+    /// <summary>
+    /// Leet code #893. Groups of Special-Equivalent Strings
+    /// 
+    /// You are given an array A of strings.
+    ///
+    /// Two strings S and T are special-equivalent if after any number of moves, 
+    /// S == T.
+    ///
+    /// A move consists of choosing two indices i and j with i % 2 == j % 2, and 
+    /// swapping S[i] with S[j].
+    ///
+    /// Now, a group of special-equivalent strings from A is a non-empty subset S 
+    /// of A such that any string not in S is not special-equivalent with any 
+    /// string in S.
+    ///
+    /// Return the number of groups of special-equivalent strings from A.
+    ///
+    /// 
+    /// Example 1:
+    /// Input: ["a","b","c","a","c","c"]
+    /// Output: 3
+    /// Explanation: 3 groups ["a","a"], ["b"], ["c","c","c"]
+    ///
+    /// Example 2:
+    /// Input: ["aa","bb","ab","ba"]
+    /// Output: 4
+    /// Explanation: 4 groups ["aa"], ["bb"], ["ab"], ["ba"]
+    ///
+    /// Example 3:
+    /// Input: ["abc","acb","bac","bca","cab","cba"]
+    /// Output: 3
+    /// Explanation: 3 groups ["abc","cba"], ["acb","bca"], ["bac","cab"]
+    ///
+    /// Example 4:
+    /// Input: ["abcd","cdab","adcb","cbad"]
+    /// Output: 1
+    /// Explanation: 1 group ["abcd","cdab","adcb","cbad"]
+    ///
+    /// Note:
+    /// 1. 1 <= A.length <= 1000
+    /// 2. 1 <= A[i].length <= 20
+    /// 3. All A[i] have the same length.
+    /// 4. All A[i] consist of only lowercase letters.
+    /// </summary>
+    int numSpecialEquivGroups(vector<string>& A);
 
-	/// <summary>
-	/// Leet code #9900. Count number of substrings with exactly k distinct 
-	/// characters
-	/// 
-	/// Given a string of lowercase alphabets, count all possible substrings 
-	/// (not necessarily distinct) that has exactly k distinct characters.
-	///
-	/// Examples:
-	///
-	/// Input: abc, k = 2
-	/// Output: 2
-	/// Possible substrings are {"ab", "bc"}
-	///
-	/// Input: aba, k = 2
-	/// Output: 3
-	/// Possible substrings are {"ab", "ba", "aba"}
-	///
-	/// Input: aa, k = 1
-	/// Output: 3
-	/// Possible substrings are {"a", "a", "aa"}
-	/// </summary>
-	int countkDist(string str, int k);
+    /// <summary>
+    /// Leet code #9900. Count number of substrings with exactly k distinct 
+    /// characters
+    /// 
+    /// Given a string of lowercase alphabets, count all possible substrings 
+    /// (not necessarily distinct) that has exactly k distinct characters.
+    ///
+    /// Examples:
+    ///
+    /// Input: abc, k = 2
+    /// Output: 2
+    /// Possible substrings are {"ab", "bc"}
+    ///
+    /// Input: aba, k = 2
+    /// Output: 3
+    /// Possible substrings are {"ab", "ba", "aba"}
+    ///
+    /// Input: aa, k = 1
+    /// Output: 3
+    /// Possible substrings are {"a", "a", "aa"}
+    /// </summary>
+    int countkDist(string str, int k);
 
-	/// <summary>
-	/// Leet code #899. Orderly Queue 
-	/// 
-	/// A string S of lowercase letters is given.  Then, we may make any 
-	/// number of moves.
-	///
-	/// In each move, we choose one of the first K letters (starting from 
-	/// the left), remove it, and place it at the end of the string.
-	/// Return the lexicographically smallest string we could have after 
-	/// any number of moves.
-	///
-	/// Example 1:
-	/// Input: S = "cba", K = 1
-	/// Output: "acb"
-	/// Explanation: 
-	/// In the first move, we move the 1st character ("c") to the end, obtaining 
-	/// the string "bac".
-	/// In the second move, we move the 1st character ("b") to the end, obtaining 
-	/// the final result "acb".
-	///
-	/// Example 2:
-	/// Input: S = "baaca", K = 3
-	/// Output: "aaabc"
-	/// Explanation: 
-	/// In the first move, we move the 1st character ("b") to the end, obtaining 
-	/// the string "aacab".
-	/// In the second move, we move the 3rd character ("c") to the end, obtaining 
-	/// the final result "aaabc".
-	/// 
-	/// Note:
-	/// 1. 1 <= K <= S.length <= 1000
-	/// 2. S consists of lowercase letters only.
-	/// </summary>
-	string orderlyQueue(string S, int K);
+    /// <summary>
+    /// Leet code #899. Orderly Queue 
+    /// 
+    /// A string S of lowercase letters is given.  Then, we may make any 
+    /// number of moves.
+    ///
+    /// In each move, we choose one of the first K letters (starting from 
+    /// the left), remove it, and place it at the end of the string.
+    /// Return the lexicographically smallest string we could have after 
+    /// any number of moves.
+    ///
+    /// Example 1:
+    /// Input: S = "cba", K = 1
+    /// Output: "acb"
+    /// Explanation: 
+    /// In the first move, we move the 1st character ("c") to the end, obtaining 
+    /// the string "bac".
+    /// In the second move, we move the 1st character ("b") to the end, obtaining 
+    /// the final result "acb".
+    ///
+    /// Example 2:
+    /// Input: S = "baaca", K = 3
+    /// Output: "aaabc"
+    /// Explanation: 
+    /// In the first move, we move the 1st character ("b") to the end, obtaining 
+    /// the string "aacab".
+    /// In the second move, we move the 3rd character ("c") to the end, obtaining 
+    /// the final result "aaabc".
+    /// 
+    /// Note:
+    /// 1. 1 <= K <= S.length <= 1000
+    /// 2. S consists of lowercase letters only.
+    /// </summary>
+    string orderlyQueue(string S, int K);
 
-	/// <summary>
-	/// Leet code #925. Long Pressed Name 
-	/// 
-	/// Your friend is typing his name into a keyboard.  Sometimes, when typing 
-	/// a character c, the key might get long pressed, and the character will be 
-	/// typed 1 or more times.
-	///
-	/// You examine the typed characters of the keyboard.  Return True if it is 
-	/// possible that it was your friends name, with some characters (possibly 
-	/// none) being long pressed.
-	/// 
-	/// Example 1:
-	/// Input: name = "alex", typed = "aaleex"
-	/// Output: true
-	/// Explanation: 'a' and 'e' in 'alex' were long pressed.
-	///
-	/// Example 2:
-	/// Input: name = "saeed", typed = "ssaaedd"
-	/// Output: false
-	/// Explanation: 'e' must have been pressed twice, but it wasn't in 
-	/// the typed output.
-	///
-	/// Example 3:
-	/// Input: name = "leelee", typed = "lleeelee"
-	/// Output: true
-	///
-	/// Example 4:
-	/// Input: name = "laiden", typed = "laiden"
-	/// Output: true
-	/// Explanation: It's not necessary to long press any character.
-	/// 
-	/// Note:
-	///
-	/// 1. name.length <= 1000
-	/// 2. typed.length <= 1000
-	/// 3. The characters of name and typed are lowercase letters.
-	/// </summary>
-	bool isLongPressedName(string name, string typed);
+    /// <summary>
+    /// Leet code #925. Long Pressed Name 
+    /// 
+    /// Your friend is typing his name into a keyboard.  Sometimes, when typing 
+    /// a character c, the key might get long pressed, and the character will be 
+    /// typed 1 or more times.
+    ///
+    /// You examine the typed characters of the keyboard.  Return True if it is 
+    /// possible that it was your friends name, with some characters (possibly 
+    /// none) being long pressed.
+    /// 
+    /// Example 1:
+    /// Input: name = "alex", typed = "aaleex"
+    /// Output: true
+    /// Explanation: 'a' and 'e' in 'alex' were long pressed.
+    ///
+    /// Example 2:
+    /// Input: name = "saeed", typed = "ssaaedd"
+    /// Output: false
+    /// Explanation: 'e' must have been pressed twice, but it wasn't in 
+    /// the typed output.
+    ///
+    /// Example 3:
+    /// Input: name = "leelee", typed = "lleeelee"
+    /// Output: true
+    ///
+    /// Example 4:
+    /// Input: name = "laiden", typed = "laiden"
+    /// Output: true
+    /// Explanation: It's not necessary to long press any character.
+    /// 
+    /// Note:
+    ///
+    /// 1. name.length <= 1000
+    /// 2. typed.length <= 1000
+    /// 3. The characters of name and typed are lowercase letters.
+    /// </summary>
+    bool isLongPressedName(string name, string typed);
 
-	/// <summary>
-	/// Leet code #929. Unique Email Addresses
-	/// 
-	/// Every email consists of a local name and a domain name, separated by the @ 
-	/// sign.
-	/// 
-	/// For example, in alice@leetcode.com, alice is the local name, and 
-	/// leetcode.com is the domain name.
-	///
-	/// Besides lowercase letters, these emails may contain '.'s or '+'s.
-	///
-	/// If you add periods ('.') between some characters in the local name part of 
-	/// an email address, mail sent there will be forwarded to the same address 
-	/// without dots in the local name.  For example, "alice.z@leetcode.com" and 
-	/// "alicez@leetcode.com" forward to the same email address.  (Note that this 
-	/// rule does not apply for domain names.)
-	///
-	/// If you add a plus ('+') in the local name, everything after the first plus 
-	/// sign will be ignored. This allows certain emails to be filtered, for 
-	/// example m.y+name@email.com will be forwarded to my@email.com.  (Again, 
-	/// this rule does not apply for domain names.)
-	///
-	/// It is possible to use both of these rules at the same time.
-	///
-	/// Given a list of emails, we send one email to each address in the list.  
-	/// How many different addresses actually receive mails? 
-	///
-	/// 
-	/// Example 1:
-	/// Input: ["test.email+alex@leetcode.com",
-	/// "test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"]
-	/// Output: 2
-	/// Explanation: "testemail@leetcode.com" and "testemail@lee.tcode.com" 
-	/// actually receive mails
-	/// Note:
-	/// 1. 1 <= emails[i].length <= 100
-	/// 2. 1 <= emails.length <= 100
-	/// 3. Each emails[i] contains exactly one '@' character.
-	/// </summary>
-	int numUniqueEmails(vector<string>& emails);
+    /// <summary>
+    /// Leet code #929. Unique Email Addresses
+    /// 
+    /// Every email consists of a local name and a domain name, separated by the @ 
+    /// sign.
+    /// 
+    /// For example, in alice@leetcode.com, alice is the local name, and 
+    /// leetcode.com is the domain name.
+    ///
+    /// Besides lowercase letters, these emails may contain '.'s or '+'s.
+    ///
+    /// If you add periods ('.') between some characters in the local name part of 
+    /// an email address, mail sent there will be forwarded to the same address 
+    /// without dots in the local name.  For example, "alice.z@leetcode.com" and 
+    /// "alicez@leetcode.com" forward to the same email address.  (Note that this 
+    /// rule does not apply for domain names.)
+    ///
+    /// If you add a plus ('+') in the local name, everything after the first plus 
+    /// sign will be ignored. This allows certain emails to be filtered, for 
+    /// example m.y+name@email.com will be forwarded to my@email.com.  (Again, 
+    /// this rule does not apply for domain names.)
+    ///
+    /// It is possible to use both of these rules at the same time.
+    ///
+    /// Given a list of emails, we send one email to each address in the list.  
+    /// How many different addresses actually receive mails? 
+    ///
+    /// 
+    /// Example 1:
+    /// Input: ["test.email+alex@leetcode.com",
+    /// "test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"]
+    /// Output: 2
+    /// Explanation: "testemail@leetcode.com" and "testemail@lee.tcode.com" 
+    /// actually receive mails
+    /// Note:
+    /// 1. 1 <= emails[i].length <= 100
+    /// 2. 1 <= emails.length <= 100
+    /// 3. Each emails[i] contains exactly one '@' character.
+    /// </summary>
+    int numUniqueEmails(vector<string>& emails);
 
-	/// <summary>
-	/// Leet code #9904. CSV Parser
-	/// </summary>
-	string parsePhrase(string& line, int &pos);
+    /// <summary>
+    /// Leet code #9904. CSV Parser
+    /// </summary>
+    string parsePhrase(string& line, int &pos);
 
-	/// <summary>
-	/// Leet code #9904. CSV Parser
-	/// </summary>
-	vector<string> parseLine(string& line);
+    /// <summary>
+    /// Leet code #9904. CSV Parser
+    /// </summary>
+    vector<string> parseLine(string& line);
 
-	/// <summary>
-	/// Leet code #9904. CSV Parser
-	/// 
-	/// The CSV file contains lines of phrase delimited by , when there is 
-	/// a , in the phrase, we use double quote to qoute it, for example
-	/// "San Francisco, CA", if there is a double quote in the phrase, 
-	/// we use another double quote in front of it to escape it. 
-	/// 
-	/// For example, assuming we have following lines
-	/// John,Smith,john.smith@gmail.com,Los Angeles,1
-	/// Jane, Roberts, janer@msn.com, "San Francisco, CA", 0
-	///	"Alexandra ""Alex""", Menendez, alex.menendez@gmail.com, Miami, 1
-	///	"""Alexandra Alex"""
-	///
-	/// After we parse it, it become the followng vector of strings.
-	///	John | Smith | john.smith@gmail.com | Los Angeles | 1
-	///	Jane | Roberts | janer@msn.com | San Francisco, CA | 0
-	///	Alexandra "Alex" | Menendez | alex.menendez@gmail.com | Miami | 1
-	///	"Alexandra Alex"
-	/// </summary>
-	vector<vector<string>>  parseCSV (vector<string>& lines);
-	
-	/// <summary>
+    /// <summary>
+    /// Leet code #9904. CSV Parser
+    /// 
+    /// The CSV file contains lines of phrase delimited by , when there is 
+    /// a , in the phrase, we use double quote to qoute it, for example
+    /// "San Francisco, CA", if there is a double quote in the phrase, 
+    /// we use another double quote in front of it to escape it. 
+    /// 
+    /// For example, assuming we have following lines
+    /// John,Smith,john.smith@gmail.com,Los Angeles,1
+    /// Jane, Roberts, janer@msn.com, "San Francisco, CA", 0
+    ///	"Alexandra ""Alex""", Menendez, alex.menendez@gmail.com, Miami, 1
+    ///	"""Alexandra Alex"""
+    ///
+    /// After we parse it, it become the followng vector of strings.
+    ///	John | Smith | john.smith@gmail.com | Los Angeles | 1
+    ///	Jane | Roberts | janer@msn.com | San Francisco, CA | 0
+    ///	Alexandra "Alex" | Menendez | alex.menendez@gmail.com | Miami | 1
+    ///	"Alexandra Alex"
+    /// </summary>
+    vector<vector<string>>  parseCSV (vector<string>& lines);
+    
+    /// <summary>
     /// Leet code #937. Reorder Log Files
     /// 
-	/// You have an array of logs.  Each log is a space delimited string of words.
-	///
-	/// For each log, the first word in each log is an alphanumeric identifier.  
-	/// Then, either:
-	///
-	/// Each word after the identifier will consist only of lowercase letters, or;
-	/// Each word after the identifier will consist only of digits.
-	/// We will call these two varieties of logs letter-logs and digit-logs.  
-	/// It is guaranteed that each log has at least one word after its identifier.
-	///
-	/// Reorder the logs so that all of the letter-logs come before any digit-log.  
-	/// The letter-logs are ordered lexicographically ignoring identifier, with 
-	/// the identifier used in case of ties.  The digit-logs should be put in 
-	/// their original order.
-	///
-	/// Return the final order of the logs.
-	/// 
-	///  1. Example 1:
-	///
-	/// Input: ["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"]
-	/// Output: ["g1 act car","a8 act zoo","ab1 off key dog","a1 9 2 3 1","zo4 
-	/// 4 7"]
-	/// 
-	///
-	/// Note:
-	///
-	/// 1. 0 <= logs.length <= 100
-	/// 2. 3 <= logs[i].length <= 100
-	/// 3. logs[i] is guaranteed to have an identifier, and a word after the 
-	/// identifier.
-	/// </summary>
-	vector<string> reorderLogFiles(vector<string>& logs);
+    /// You have an array of logs.  Each log is a space delimited string of words.
+    ///
+    /// For each log, the first word in each log is an alphanumeric identifier.  
+    /// Then, either:
+    ///
+    /// Each word after the identifier will consist only of lowercase letters, or;
+    /// Each word after the identifier will consist only of digits.
+    /// We will call these two varieties of logs letter-logs and digit-logs.  
+    /// It is guaranteed that each log has at least one word after its identifier.
+    ///
+    /// Reorder the logs so that all of the letter-logs come before any digit-log.  
+    /// The letter-logs are ordered lexicographically ignoring identifier, with 
+    /// the identifier used in case of ties.  The digit-logs should be put in 
+    /// their original order.
+    ///
+    /// Return the final order of the logs.
+    /// 
+    ///  1. Example 1:
+    ///
+    /// Input: ["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"]
+    /// Output: ["g1 act car","a8 act zoo","ab1 off key dog","a1 9 2 3 1","zo4 
+    /// 4 7"]
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. 0 <= logs.length <= 100
+    /// 2. 3 <= logs[i].length <= 100
+    /// 3. logs[i] is guaranteed to have an identifier, and a word after the 
+    /// identifier.
+    /// </summary>
+    vector<string> reorderLogFiles(vector<string>& logs);
 
     /// <summary>
     /// Leet code #966. Vowel Spellchecker
@@ -17811,7 +17811,7 @@ public:
 #pragma endregion
 
 #pragma region HashTable
-	/// <summary>
+    /// <summary>
     /// Leet code #30. Substring with Concatenation of All Words 
     /// You are given a string, s, and a list of words, words, that are all of the same length. Find all starting indices of 
     /// substring(s) in s that is a concatenation of each word in words exactly once and without any intervening characters. 
@@ -18223,220 +18223,220 @@ public:
     /// </summary>
     string shortestCompletingWord(string licensePlate, vector<string>& words);
 
-	/// <summary>
-	/// Leet code #760. Find Anagram Mappings    
-	///
-	/// Given two lists A and B, and B is an anagram of A. B is an anagram of A 
-	/// means B is made by randomizing the order of the elements in A.
-	///
-	/// We want to find an index mapping P, from A to B. A mapping P[i] = j means 
-	/// the ith element in A appears in B at index j.
-	///
-	/// These lists A and B may contain duplicates. If there are multiple answers, 
-	/// output any of them.
-	///
-	/// For example, given
-	///
-	/// A = [12, 28, 46, 32, 50]
-	/// B = [50, 12, 32, 46, 28]
-	/// We should return
-	/// [1, 4, 3, 2, 0]
-	/// as P[0] = 1 because the 0th element of A appears at B[1], and P[1] = 4 
-	/// because the 1st element of A appears at B[4], and so on.
-	/// Note:
-	///
-	/// 1. A, B have equal lengths in range [1, 100].
-	/// 2. A[i], B[i] are integers in range [0, 10^5].
-	/// </summary>
-	vector<int> anagramMappings(vector<int>& A, vector<int>& B);
+    /// <summary>
+    /// Leet code #760. Find Anagram Mappings    
+    ///
+    /// Given two lists A and B, and B is an anagram of A. B is an anagram of A 
+    /// means B is made by randomizing the order of the elements in A.
+    ///
+    /// We want to find an index mapping P, from A to B. A mapping P[i] = j means 
+    /// the ith element in A appears in B at index j.
+    ///
+    /// These lists A and B may contain duplicates. If there are multiple answers, 
+    /// output any of them.
+    ///
+    /// For example, given
+    ///
+    /// A = [12, 28, 46, 32, 50]
+    /// B = [50, 12, 32, 46, 28]
+    /// We should return
+    /// [1, 4, 3, 2, 0]
+    /// as P[0] = 1 because the 0th element of A appears at B[1], and P[1] = 4 
+    /// because the 1st element of A appears at B[4], and so on.
+    /// Note:
+    ///
+    /// 1. A, B have equal lengths in range [1, 100].
+    /// 2. A[i], B[i] are integers in range [0, 10^5].
+    /// </summary>
+    vector<int> anagramMappings(vector<int>& A, vector<int>& B);
 
-	/// <summary>
-	/// Leet code #792. Number of Matching Subsequences
-	///
-	/// Given string S and a dictionary of words words, find the number of 
-	/// words[i] that is a subsequence of S.
-	///
-	/// Example :
-	/// Input: 
-	/// S = "abcde"
-	/// words = ["a", "bb", "acd", "ace"]
-	/// Output: 3
-	/// Explanation: There are three words in words that are a subsequence 
-	/// of S: "a", "acd", "ace".
-	/// Note:
-	///
-	/// 1. All words in words and S will only consists of lowercase letters.
-	/// 2. The length of S will be in the range of [1, 50000].
-	/// 3. The length of words will be in the range of [1, 5000].
-	/// 4. The length of words[i] will be in the range of [1, 50].
-	/// </summary>
-	int numMatchingSubseq(string S, vector<string>& words);
+    /// <summary>
+    /// Leet code #792. Number of Matching Subsequences
+    ///
+    /// Given string S and a dictionary of words words, find the number of 
+    /// words[i] that is a subsequence of S.
+    ///
+    /// Example :
+    /// Input: 
+    /// S = "abcde"
+    /// words = ["a", "bb", "acd", "ace"]
+    /// Output: 3
+    /// Explanation: There are three words in words that are a subsequence 
+    /// of S: "a", "acd", "ace".
+    /// Note:
+    ///
+    /// 1. All words in words and S will only consists of lowercase letters.
+    /// 2. The length of S will be in the range of [1, 50000].
+    /// 3. The length of words will be in the range of [1, 5000].
+    /// 4. The length of words[i] will be in the range of [1, 50].
+    /// </summary>
+    int numMatchingSubseq(string S, vector<string>& words);
 
-	/// <summary>
-	/// Leet code #811. Subdomain Visit Count
-	/// 
-	/// A website domain like "discuss.leetcode.com" consists of various 
-	/// subdomains. At the top level, we have "com", at the next level, 
-	/// we have "leetcode.com", and at the lowest level, 
-	/// "discuss.leetcode.com". When we visit a domain like 
-	/// "discuss.leetcode.com", we will also visit the parent domains 
-	/// "leetcode.com" and "com" implicitly.
-	/// 
-	/// Now, call a "count-paired domain" to be a count (representing 
-	/// the number of visits this domain received), followed by a space, 
-	/// followed by the address. An example of a count-paired domain might 
-	/// be "9001 discuss.leetcode.com".
-	///
-	/// We are given a list cpdomains of count-paired domains. We would like 
-	/// a list of count-paired domains, (in the same format as the input, and 
-	/// in any order), that explicitly counts the number of visits to each 
-	/// subdomain.
-	///
-	/// Example 1:
-	/// Input: 
-	/// ["9001 discuss.leetcode.com"]
-	/// Output: 
-	/// ["9001 discuss.leetcode.com", "9001 leetcode.com", "9001 com"]
-	/// Explanation: 
-	/// We only have one website domain: "discuss.leetcode.com". As discussed 
-	/// above, the subdomain "leetcode.com" and "com" will also be visited. So 
-	/// they will all be visited 9001 times.
-	///
-	/// Example 2:
-	/// Input: 
-	/// ["900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", 
-	/// "5 wiki.org"]
-	/// Output: 
-	/// ["901 mail.com","50 yahoo.com","900 google.mail.com","5 wiki.org",
-	///  "5 org","1 intel.mail.com","951 com"]
-	/// Explanation: 
-	/// We will visit "google.mail.com" 900 times, "yahoo.com" 50 times, 
-	/// "intel.mail.com" once and "wiki.org" 5 times. For the subdomains, we 
-	/// will visit "mail.com" 900 + 1 = 901 times, "com" 900 + 50 + 1 = 951 
-	/// times, and "org" 5 times.
-	/// 
-	/// Notes:
-	///
-	/// 1. The length of cpdomains will not exceed 100. 
-	/// 2. The length of each domain name will not exceed 100.
-	/// 3. Each address will have either 1 or 2 "." characters.
-	/// 4. The input count in any count-paired domain will not exceed 10000.
-	/// </summary>
-	vector<string> subdomainVisits(vector<string>& cpdomains);
+    /// <summary>
+    /// Leet code #811. Subdomain Visit Count
+    /// 
+    /// A website domain like "discuss.leetcode.com" consists of various 
+    /// subdomains. At the top level, we have "com", at the next level, 
+    /// we have "leetcode.com", and at the lowest level, 
+    /// "discuss.leetcode.com". When we visit a domain like 
+    /// "discuss.leetcode.com", we will also visit the parent domains 
+    /// "leetcode.com" and "com" implicitly.
+    /// 
+    /// Now, call a "count-paired domain" to be a count (representing 
+    /// the number of visits this domain received), followed by a space, 
+    /// followed by the address. An example of a count-paired domain might 
+    /// be "9001 discuss.leetcode.com".
+    ///
+    /// We are given a list cpdomains of count-paired domains. We would like 
+    /// a list of count-paired domains, (in the same format as the input, and 
+    /// in any order), that explicitly counts the number of visits to each 
+    /// subdomain.
+    ///
+    /// Example 1:
+    /// Input: 
+    /// ["9001 discuss.leetcode.com"]
+    /// Output: 
+    /// ["9001 discuss.leetcode.com", "9001 leetcode.com", "9001 com"]
+    /// Explanation: 
+    /// We only have one website domain: "discuss.leetcode.com". As discussed 
+    /// above, the subdomain "leetcode.com" and "com" will also be visited. So 
+    /// they will all be visited 9001 times.
+    ///
+    /// Example 2:
+    /// Input: 
+    /// ["900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", 
+    /// "5 wiki.org"]
+    /// Output: 
+    /// ["901 mail.com","50 yahoo.com","900 google.mail.com","5 wiki.org",
+    ///  "5 org","1 intel.mail.com","951 com"]
+    /// Explanation: 
+    /// We will visit "google.mail.com" 900 times, "yahoo.com" 50 times, 
+    /// "intel.mail.com" once and "wiki.org" 5 times. For the subdomains, we 
+    /// will visit "mail.com" 900 + 1 = 901 times, "com" 900 + 50 + 1 = 951 
+    /// times, and "org" 5 times.
+    /// 
+    /// Notes:
+    ///
+    /// 1. The length of cpdomains will not exceed 100. 
+    /// 2. The length of each domain name will not exceed 100.
+    /// 3. Each address will have either 1 or 2 "." characters.
+    /// 4. The input count in any count-paired domain will not exceed 10000.
+    /// </summary>
+    vector<string> subdomainVisits(vector<string>& cpdomains);
 
-	/// <summary>
-	/// Leet code #884. Uncommon Words from Two Sentences
-	/// 
-	/// We are given two sentences A and B.  (A sentence is a string of space 
-	/// separated words.  Each word consists only of lowercase letters.)
-	///
-	/// A word is uncommon if it appears exactly once in one of the sentences, 
-	/// and does not appear in the other sentence.
-	///
-	/// Return a list of all uncommon words. 
-	///
-	/// You may return the list in any order.
-	///
-	/// Example 1:
-	///
-	/// Input: A = "this apple is sweet", B = "this apple is sour"
-	/// Output: ["sweet","sour"]
-	/// Example 2:
-	///
-	/// Input: A = "apple apple", B = "banana"
-	/// Output: ["banana"]
-	/// 
-	/// Note:
-	/// 1. 0 <= A.length <= 200
-	/// 2. 0 <= B.length <= 200
-	/// 3. A and B both contain only spaces and lowercase letters.
-	/// </summary>
-	vector<string> uncommonFromSentences(string A, string B);
+    /// <summary>
+    /// Leet code #884. Uncommon Words from Two Sentences
+    /// 
+    /// We are given two sentences A and B.  (A sentence is a string of space 
+    /// separated words.  Each word consists only of lowercase letters.)
+    ///
+    /// A word is uncommon if it appears exactly once in one of the sentences, 
+    /// and does not appear in the other sentence.
+    ///
+    /// Return a list of all uncommon words. 
+    ///
+    /// You may return the list in any order.
+    ///
+    /// Example 1:
+    ///
+    /// Input: A = "this apple is sweet", B = "this apple is sour"
+    /// Output: ["sweet","sour"]
+    /// Example 2:
+    ///
+    /// Input: A = "apple apple", B = "banana"
+    /// Output: ["banana"]
+    /// 
+    /// Note:
+    /// 1. 0 <= A.length <= 200
+    /// 2. 0 <= B.length <= 200
+    /// 3. A and B both contain only spaces and lowercase letters.
+    /// </summary>
+    vector<string> uncommonFromSentences(string A, string B);
 
-	/// <summary>
-	/// Leet code #890. Find and Replace Pattern
-	/// 
-	/// You have a list of words and a pattern, and you want to know which words 
-	/// in words matches the pattern.
-	///
-	/// A word matches the pattern if there exists a permutation of letters p so 
-	/// that after replacing every letter x in the pattern with p(x), we get the 
-	/// desired word.
-	///
-	/// (Recall that a permutation of letters is a bijection from letters to 
-	/// letters: every letter maps to another letter, and no two letters map to 
-	/// the same letter.)
-	///
-	/// Return a list of the words in words that match the given pattern. 
-	///
-	/// You may return the answer in any order.
-	///
-	/// 
-	/// Example 1:
-	///
-	/// Input: words = ["abc","deq","mee","aqq","dkd","ccc"], pattern = "abb"
-	/// Output: ["mee","aqq"]
-	/// Explanation: "mee" matches the pattern because there is a permutation 
-	/// {a -> m, b -> e, ...}. 
-	/// "ccc" does not match the pattern because {a -> c, b -> c, ...} is not a 
-	/// permutation, since a and b map to the same letter.
-	/// 
-	/// Note:
-	/// 1 <= words.length <= 50
-	/// 1 <= pattern.length = words[i].length <= 20
-	/// </summary>
-	vector<string> findAndReplacePattern(vector<string>& words, string pattern);
+    /// <summary>
+    /// Leet code #890. Find and Replace Pattern
+    /// 
+    /// You have a list of words and a pattern, and you want to know which words 
+    /// in words matches the pattern.
+    ///
+    /// A word matches the pattern if there exists a permutation of letters p so 
+    /// that after replacing every letter x in the pattern with p(x), we get the 
+    /// desired word.
+    ///
+    /// (Recall that a permutation of letters is a bijection from letters to 
+    /// letters: every letter maps to another letter, and no two letters map to 
+    /// the same letter.)
+    ///
+    /// Return a list of the words in words that match the given pattern. 
+    ///
+    /// You may return the answer in any order.
+    ///
+    /// 
+    /// Example 1:
+    ///
+    /// Input: words = ["abc","deq","mee","aqq","dkd","ccc"], pattern = "abb"
+    /// Output: ["mee","aqq"]
+    /// Explanation: "mee" matches the pattern because there is a permutation 
+    /// {a -> m, b -> e, ...}. 
+    /// "ccc" does not match the pattern because {a -> c, b -> c, ...} is not a 
+    /// permutation, since a and b map to the same letter.
+    /// 
+    /// Note:
+    /// 1 <= words.length <= 50
+    /// 1 <= pattern.length = words[i].length <= 20
+    /// </summary>
+    vector<string> findAndReplacePattern(vector<string>& words, string pattern);
 
-	/// <summary>
-	/// Leet code #916. Word Subsets
-	/// 
-	/// We are given two arrays A and B of words.  Each word is a string of 
-	/// lowercase letters.
-	///
-	/// Now, say that word b is a subset of word a if every letter in b occurs in 
-	/// a, including multiplicity.  For example, "wrr" is a subset of "warrior", 
-	/// but is not a subset of "world".
-	///
-	/// Now say a word a from A is universal if for every b in B, b is a subset of 
-	/// a. 
-	///
-	/// Return a list of all universal words in A.  You can return the words in 
-	/// any order.
-	///
-	/// Example 1:
-	///
-	/// Input: A = ["amazon","apple","facebook","google","leetcode"], B = ["e","o"]
-	/// Output: ["facebook","google","leetcode"]
-	///
-	/// Example 2:
-	///
-	/// Input: A = ["amazon","apple","facebook","google","leetcode"], B = ["l","e"]
-	/// Output: ["apple","google","leetcode"]
-	///
-	/// Example 3:
-	///
-	/// Input: A = ["amazon","apple","facebook","google","leetcode"], B = ["e","oo"]
-	/// Output: ["facebook","google"]
-	///
-	/// Example 4:
-	///
-	/// Input: A = ["amazon","apple","facebook","google","leetcode"], B = ["lo","eo"]
-	/// Output: ["google","leetcode"]
-	///
-	/// Example 5:
-	///
-	/// Input: A = ["amazon","apple","facebook","google","leetcode"], B = ["ec","oc","ceo"]
-	/// Output: ["facebook","leetcode"]
-	/// 
-	///
-	/// Note:
-	///
-	/// 1. 1 <= A.length, B.length <= 10000
-	/// 2. 1 <= A[i].length, B[i].length <= 10
-	/// 3. A[i] and B[i] consist only of lowercase letters.
-	/// 4. All words in A[i] are unique: there isn't i != j with A[i] == A[j].
-	/// </summary>
-	vector<string> wordSubsets(vector<string>& A, vector<string>& B);
+    /// <summary>
+    /// Leet code #916. Word Subsets
+    /// 
+    /// We are given two arrays A and B of words.  Each word is a string of 
+    /// lowercase letters.
+    ///
+    /// Now, say that word b is a subset of word a if every letter in b occurs in 
+    /// a, including multiplicity.  For example, "wrr" is a subset of "warrior", 
+    /// but is not a subset of "world".
+    ///
+    /// Now say a word a from A is universal if for every b in B, b is a subset of 
+    /// a. 
+    ///
+    /// Return a list of all universal words in A.  You can return the words in 
+    /// any order.
+    ///
+    /// Example 1:
+    ///
+    /// Input: A = ["amazon","apple","facebook","google","leetcode"], B = ["e","o"]
+    /// Output: ["facebook","google","leetcode"]
+    ///
+    /// Example 2:
+    ///
+    /// Input: A = ["amazon","apple","facebook","google","leetcode"], B = ["l","e"]
+    /// Output: ["apple","google","leetcode"]
+    ///
+    /// Example 3:
+    ///
+    /// Input: A = ["amazon","apple","facebook","google","leetcode"], B = ["e","oo"]
+    /// Output: ["facebook","google"]
+    ///
+    /// Example 4:
+    ///
+    /// Input: A = ["amazon","apple","facebook","google","leetcode"], B = ["lo","eo"]
+    /// Output: ["google","leetcode"]
+    ///
+    /// Example 5:
+    ///
+    /// Input: A = ["amazon","apple","facebook","google","leetcode"], B = ["ec","oc","ceo"]
+    /// Output: ["facebook","leetcode"]
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. 1 <= A.length, B.length <= 10000
+    /// 2. 1 <= A[i].length, B[i].length <= 10
+    /// 3. A[i] and B[i] consist only of lowercase letters.
+    /// 4. All words in A[i] are unique: there isn't i != j with A[i] == A[j].
+    /// </summary>
+    vector<string> wordSubsets(vector<string>& A, vector<string>& B);
 
     /// <summary>
     /// Leet code #957. Prison Cells After N Days
@@ -18518,74 +18518,74 @@ public:
     /// </summary>
     int numPairsDivisibleBy60(vector<int>& time);
 
-	/// <summary>
-	/// Leet code #1041. Robot Bounded In Circle
-	/// 
-	/// On an infinite plane, a robot initially stands at (0, 0) and faces north.  
-	/// The robot can receive one of three instructions:
-	///
-	/// "G": go straight 1 unit;
-	/// "L": turn 90 degrees to the left;
-	/// "R": turn 90 degress to the right.
-	/// The robot performs the instructions given in order, and repeats them 
-	/// forever.
-	///
-	/// Return true if and only if there exists a circle in the plane such that 
-	/// the robot never leaves the circle.
-	/// 
-	/// Example 1:
-	///
-	/// Input: "GGLLGG"
-	/// Output: true
-	/// Explanation: 
-	/// The robot moves from (0,0) to (0,2), turns 180 degrees, and then returns to
-	/// (0,0).
-	/// When repeating these instructions, the robot remains in the circle of 
-	/// radius 2 centered at the origin.
-	///
-	/// Example 2:
-	///
-	/// Input: "GG"
-	/// Output: false
-	/// Explanation: 
-	/// The robot moves north indefinitely.
-	///
-	/// Example 3:
-	///
-	/// Input: "GL"
-	/// Output: true
-	/// Explanation: 
-	/// The robot moves from (0, 0) -> (0, 1) -> (-1, 1) -> (-1, 0) -> (0, 0) -> 
-	/// ...
-	/// 
-	/// Note:
-	/// 1. 1 <= instructions.length <= 100
-	/// 2. instructions[i] is in {'G', 'L', 'R'}
-	/// </summary>
-	bool isRobotBounded(string instructions);
+    /// <summary>
+    /// Leet code #1041. Robot Bounded In Circle
+    /// 
+    /// On an infinite plane, a robot initially stands at (0, 0) and faces north.  
+    /// The robot can receive one of three instructions:
+    ///
+    /// "G": go straight 1 unit;
+    /// "L": turn 90 degrees to the left;
+    /// "R": turn 90 degress to the right.
+    /// The robot performs the instructions given in order, and repeats them 
+    /// forever.
+    ///
+    /// Return true if and only if there exists a circle in the plane such that 
+    /// the robot never leaves the circle.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: "GGLLGG"
+    /// Output: true
+    /// Explanation: 
+    /// The robot moves from (0,0) to (0,2), turns 180 degrees, and then returns to
+    /// (0,0).
+    /// When repeating these instructions, the robot remains in the circle of 
+    /// radius 2 centered at the origin.
+    ///
+    /// Example 2:
+    ///
+    /// Input: "GG"
+    /// Output: false
+    /// Explanation: 
+    /// The robot moves north indefinitely.
+    ///
+    /// Example 3:
+    ///
+    /// Input: "GL"
+    /// Output: true
+    /// Explanation: 
+    /// The robot moves from (0, 0) -> (0, 1) -> (-1, 1) -> (-1, 0) -> (0, 0) -> 
+    /// ...
+    /// 
+    /// Note:
+    /// 1. 1 <= instructions.length <= 100
+    /// 2. instructions[i] is in {'G', 'L', 'R'}
+    /// </summary>
+    bool isRobotBounded(string instructions);
 
-	/// <summary>
-	/// Leet code #1128. Number of Equivalent Domino Pairs
-	/// 
-	/// Given a list of dominoes, dominoes[i] = [a, b] is equivalent to 
-	/// dominoes[j] = [c, d] if and only if either (a==c and b==d), or 
-	/// (a==d and b==c) - that is, one domino can be rotated to be equal 
-	/// to another domino.
-	///
-	/// Return the number of pairs (i, j) for which 
-	/// 0 <= i < j < dominoes.length, and dominoes[i] is equivalent to 
-	/// dominoes[j].
-	///
-	/// Example 1:
-	/// 
-	/// Input: dominoes = [[1,2],[2,1],[3,4],[5,6]]
-	/// Output: 1
-	///
-	/// Constraints:
-	/// 1. 1 <= dominoes.length <= 40000
-	/// 2. 1 <= dominoes[i][j] <= 9
-	/// </summary>
-	int numEquivDominoPairs(vector<vector<int>>& dominoes);
+    /// <summary>
+    /// Leet code #1128. Number of Equivalent Domino Pairs
+    /// 
+    /// Given a list of dominoes, dominoes[i] = [a, b] is equivalent to 
+    /// dominoes[j] = [c, d] if and only if either (a==c and b==d), or 
+    /// (a==d and b==c) - that is, one domino can be rotated to be equal 
+    /// to another domino.
+    ///
+    /// Return the number of pairs (i, j) for which 
+    /// 0 <= i < j < dominoes.length, and dominoes[i] is equivalent to 
+    /// dominoes[j].
+    ///
+    /// Example 1:
+    /// 
+    /// Input: dominoes = [[1,2],[2,1],[3,4],[5,6]]
+    /// Output: 1
+    ///
+    /// Constraints:
+    /// 1. 1 <= dominoes.length <= 40000
+    /// 2. 1 <= dominoes[i][j] <= 9
+    /// </summary>
+    int numEquivDominoPairs(vector<vector<int>>& dominoes);
 
     /// <summary>
     /// Leet code #1152. Analyze User Website Visit Pattern
@@ -18917,101 +18917,101 @@ public:
     /// </summary>
     vector<ListNode*> splitListToParts(ListNode* root, int k);
 
-	/// <summary>
-	/// Leet code #817. Linked List Components
-	/// 
-	/// We are given head, the head node of a linked list containing unique 
-	/// integer values.
-	/// 
-	/// We are also given the list G, a subset of the values in the linked 
-	/// list.
-	///  
-	/// Return the number of connected components in G, where two values are 
-	/// connected if they appear consecutively in the linked list.
-	///
-	/// Example 1:
-	///
-	/// Input: 
-	/// head: 0->1->2->3
-	/// G = [0, 1, 3]
-	/// Output: 2
-	/// Explanation: 
-	/// 0 and 1 are connected, so [0, 1] and [3] are the two connected 
-	/// components.
-	/// Example 2:
-	///
-	/// Input: 
-	/// head: 0->1->2->3->4
-	/// G = [0, 3, 1, 4]
-	/// Output: 2
-	/// Explanation: 
-	/// 0 and 1 are connected, 3 and 4 are connected, so [0, 1] and [3, 4] 
-	/// are the two connected components.
-	/// Note:
-	///
-	/// 1. If N is the length of the linked list given by head, 
-	///    1 <= N <= 10000.
-	/// 2. The value of each node in the linked list will be in the range 
-	///    [0, N - 1].
-	/// 3. 1 <= G.length <= 10000.
-	/// 4. G is a subset of all values in the linked list.
-	/// </summary>
-	int numComponents(ListNode* head, vector<int>& G);
+    /// <summary>
+    /// Leet code #817. Linked List Components
+    /// 
+    /// We are given head, the head node of a linked list containing unique 
+    /// integer values.
+    /// 
+    /// We are also given the list G, a subset of the values in the linked 
+    /// list.
+    ///  
+    /// Return the number of connected components in G, where two values are 
+    /// connected if they appear consecutively in the linked list.
+    ///
+    /// Example 1:
+    ///
+    /// Input: 
+    /// head: 0->1->2->3
+    /// G = [0, 1, 3]
+    /// Output: 2
+    /// Explanation: 
+    /// 0 and 1 are connected, so [0, 1] and [3] are the two connected 
+    /// components.
+    /// Example 2:
+    ///
+    /// Input: 
+    /// head: 0->1->2->3->4
+    /// G = [0, 3, 1, 4]
+    /// Output: 2
+    /// Explanation: 
+    /// 0 and 1 are connected, 3 and 4 are connected, so [0, 1] and [3, 4] 
+    /// are the two connected components.
+    /// Note:
+    ///
+    /// 1. If N is the length of the linked list given by head, 
+    ///    1 <= N <= 10000.
+    /// 2. The value of each node in the linked list will be in the range 
+    ///    [0, N - 1].
+    /// 3. 1 <= G.length <= 10000.
+    /// 4. G is a subset of all values in the linked list.
+    /// </summary>
+    int numComponents(ListNode* head, vector<int>& G);
 
-	/// <summary>
-	/// Leet code #876. Middle of the Linked List
-	/// 
-	/// Given a non-empty, singly linked list with head node head, return a 
-	/// middle node of linked list.
-	/// If there are two middle nodes, return the second middle node.
-	///
-	/// Example 1:
-	/// Input: [1,2,3,4,5]
-	/// Output: Node 3 from this list (Serialization: [3,4,5])
-	/// The returned node has value 3.  (The judge's serialization of this 
-	/// node is [3,4,5]).
-	/// Note that we returned a ListNode object ans, such that:
-	/// ans.val = 3, ans.next.val = 4, ans.next.next.val = 5, and 
-	/// ans.next.next.next = NULL.
-	///
-	/// Example 2:
-	/// Input: [1,2,3,4,5,6]
-	/// Output: Node 4 from this list (Serialization: [4,5,6])
-	/// Since the list has two middle nodes with values 3 and 4, we return 
-	/// the second one.
-	///
-	/// Note:
-	/// 1. The number of nodes in the given list will be between 1 and 100.
-	/// </summary>
-	ListNode* middleNode(ListNode* head);
+    /// <summary>
+    /// Leet code #876. Middle of the Linked List
+    /// 
+    /// Given a non-empty, singly linked list with head node head, return a 
+    /// middle node of linked list.
+    /// If there are two middle nodes, return the second middle node.
+    ///
+    /// Example 1:
+    /// Input: [1,2,3,4,5]
+    /// Output: Node 3 from this list (Serialization: [3,4,5])
+    /// The returned node has value 3.  (The judge's serialization of this 
+    /// node is [3,4,5]).
+    /// Note that we returned a ListNode object ans, such that:
+    /// ans.val = 3, ans.next.val = 4, ans.next.next.val = 5, and 
+    /// ans.next.next.next = NULL.
+    ///
+    /// Example 2:
+    /// Input: [1,2,3,4,5,6]
+    /// Output: Node 4 from this list (Serialization: [4,5,6])
+    /// Since the list has two middle nodes with values 3 and 4, we return 
+    /// the second one.
+    ///
+    /// Note:
+    /// 1. The number of nodes in the given list will be between 1 and 100.
+    /// </summary>
+    ListNode* middleNode(ListNode* head);
 
-	/// <summary>
-	/// Leet code #708. Insert into a Cyclic Sorted List
-	/// 
-	/// Given a node from a cyclic linked list which is sorted in ascending order, 
-	/// write a function to insert a value into the list such that it remains a 
-	/// cyclic sorted list. The given node can be a reference to any single node 
-	/// in the list, and may not be necessarily the smallest value in the cyclic 
-	/// list.
-	///
-	/// If there are multiple suitable places for insertion, you may choose any 
-	/// place to insert the new value. After the insertion, the cyclic list should 
-	/// remain sorted.
-	///
-	/// If the list is empty (i.e., given node is null), you should create a new 
-	/// single cyclic list and return the reference to that single node. Otherwise, 
-	/// you should return the original given node.
-	///
-	/// The following example may help you understand the problem better:
-	///
-	/// In the figure above, there is a cyclic sorted list of three elements. You 
-	/// are given a reference to the node with value 3, and we need to insert 2 
-	/// into the list.
-	///
-	/// The new node should insert between node 1 and node 3. After the insertion, 
-	/// the list should look like this, and we should still return node 3.
-	/// </summary>
-	ListNode* insert(ListNode* head, int insertVal);
+    /// <summary>
+    /// Leet code #708. Insert into a Cyclic Sorted List
+    /// 
+    /// Given a node from a cyclic linked list which is sorted in ascending order, 
+    /// write a function to insert a value into the list such that it remains a 
+    /// cyclic sorted list. The given node can be a reference to any single node 
+    /// in the list, and may not be necessarily the smallest value in the cyclic 
+    /// list.
+    ///
+    /// If there are multiple suitable places for insertion, you may choose any 
+    /// place to insert the new value. After the insertion, the cyclic list should 
+    /// remain sorted.
+    ///
+    /// If the list is empty (i.e., given node is null), you should create a new 
+    /// single cyclic list and return the reference to that single node. Otherwise, 
+    /// you should return the original given node.
+    ///
+    /// The following example may help you understand the problem better:
+    ///
+    /// In the figure above, there is a cyclic sorted list of three elements. You 
+    /// are given a reference to the node with value 3, and we need to insert 2 
+    /// into the list.
+    ///
+    /// The new node should insert between node 1 and node 3. After the insertion, 
+    /// the list should look like this, and we should still return node 3.
+    /// </summary>
+    ListNode* insert(ListNode* head, int insertVal);
 
     /// <summary>
     /// Leet code #1171. Remove Zero Sum Consecutive Nodes from Linked List
@@ -19290,10 +19290,10 @@ public:
     /// <summary>
     /// Leet code #62. Unique Paths 
     /// A robot is located at the top-left corner of a m x n grid (marked 
-	/// 'Start' in the diagram below). 
+    /// 'Start' in the diagram below). 
     /// The robot can only move either down or right at any point in time. 
-	/// The robot is trying to reach the bottom-right corner of the grid 
-	/// (marked 'Finish' in the diagram below). 
+    /// The robot is trying to reach the bottom-right corner of the grid 
+    /// (marked 'Finish' in the diagram below). 
     ///	How many possible unique paths are there?
     /// Above is a 3 x 7 grid. How many possible unique paths are there?  
     /// Note: m and n will be at most 100.
@@ -19304,7 +19304,7 @@ public:
     /// Leet code #63. Unique Paths II  
     /// Follow up for "Unique Paths": 
     /// Now consider if some obstacles are added to the grids. How many unique 
-	/// paths would there be? 
+    /// paths would there be? 
     /// An obstacle and empty space is marked as 1 and 0 respectively in the grid. 
     ///	For example,
     /// [
@@ -19633,7 +19633,7 @@ public:
     int getMoneyAmount(int n);
 
     /// <summary>
-    /// Leet code #516. Longest Palindromic Subsequence         
+    /// Leet code #516. Longest Palindromic Subsequence   
     /// 
     /// Given a string s, find the longest palindromic subsequence's length in s. You may 
     /// assume that the maximum length of s is 1000. 
@@ -19887,33 +19887,6 @@ public:
     /// 2. Characters in given words can only be lower-case letters.
     /// </summary>
     int minDeleteDistance(string word1, string word2);
-
-    /// <summary>
-    /// Leet code #576. Out of Boundary Paths
-    /// 
-    /// There is an m by n grid with a ball. Given the start coordinate (i,j) of 
-    /// the ball, you can move the ball to adjacent cell or cross the grid boundary 
-    /// in four directions (up, down, left, right). However, you can at most move N
-    /// times. Find out the number of paths to move the ball out of grid boundary. 
-    /// The answer may be very large, return it after mod 10^9 + 7.
-    ///
-    /// Example 1:
-    /// Input:m = 2, n = 2, N = 2, i = 0, j = 0
-    /// Output: 6
-    /// Explanation:
-    ///
-    ///
-    /// Example 2:
-    /// Input:m = 1, n = 3, N = 3, i = 0, j = 1
-    /// Output: 12
-    /// Explanation:
-    /// 
-    /// Note:
-    /// Once you move the ball out of boundary, you cannot move it back.
-    /// The length and height of the grid is in range [1,50].
-    /// N is in range [0,50].
-    /// </summary>
-    int findPaths(int m, int n, int N, int i, int j);
 
     /// <summary>
     /// Leet code #600. Non-negative Integers without Consecutive Ones
@@ -20484,453 +20457,453 @@ public:
     /// </summary>
     int minCostClimbingStairs(vector<int>& cost);
 
-	/// <summary>
-	/// Leetcode #764. Largest Plus Sign
-	///
-	/// In a 2D grid from (0, 0) to (N-1, N-1), every cell contains a 1, except 
-	/// those cells in the given list mines which are 0. What is the largest 
-	/// axis-aligned plus sign of 1s contained in the grid? Return the order of 
-	/// the plus sign. If there is none, return 0.
-	///
-	/// An "axis-aligned plus sign of 1s of order k" has some center 
-	/// grid[x][y] = 1 along with 4 arms of length k-1 going up, down, left, 
-	/// and right, and made of 1s. This is demonstrated in the diagrams below. 
-	/// Note that there could be 0s or 1s beyond the arms of the plus sign, 
-	/// only the relevant area of the plus sign is checked for 1s.
-	///
-	/// Examples of Axis-Aligned Plus Signs of Order k:
-	/// Order 1:
-	/// 000
-	/// 010
-	/// 000
-	///
-	/// Order 2:
-	/// 00000
-	/// 00100
-	/// 01110
-	/// 00100
-	/// 00000
-	///
-	/// Order 3:
-	/// 0000000
-	/// 0001000
-	/// 0001000
-	/// 0111110
-	/// 0001000
-	/// 0001000
-	/// 0000000
-	///
-	/// Example 1:
-	/// Input: N = 5, mines = [[4, 2]]
-	/// Output: 2
-	/// Explanation:
-	/// 11111
-	/// 11111
-	/// 11111
-	/// 11111
-	/// 11011
-	/// In the above grid, the largest plus sign can only be order 2.  One of 
-	/// them is marked in bold.
-	///
-	/// Example 2:
-	/// Input: N = 2, mines = []
-	/// Output: 1
-	/// Explanation:
-	/// There is no plus sign of order 2, but there is of order 1.
-	///
-	/// Example 3:
-	/// Input: N = 1, mines = [[0, 0]]
-	/// Output: 0
-	/// Explanation:
-	/// There is no plus sign, so return 0.
-	/// Note:
-	/// 1. N will be an integer in the range [1, 500].
-	/// 2. mines will have length at most 5000.
-	/// 3. mines[i] will be length 2 and consist of integers in the range 
-	/// [0, N-1].
-	/// (Additionally, programs submitted in C, C++, or C# will be judged 
-	/// with a slightly smaller time limit.)
-	/// </summary>
-	int orderOfLargestPlusSign(int N, vector<vector<int>>& mines);
-
-	/// <summary>
-	/// Leetcode #788. Rotated Digits
-	/// </summary>
-	int rotatedDigits(int N, bool is_diff);
-
-	/// <summary>
-	/// Leetcode #788. Rotated Digits
-	/// </summary>
-	int checkIfRotateDigits(int N);
-
-	/// <summary>
-	/// Leetcode #788. Rotated Digits
-	///
-	/// X is a good number if after rotating each digit individually by 180 
-	/// degrees, we get a valid number that is different from X. A number is 
-	/// valid if each digit remains a digit after rotation. 0, 1, and 8 rotate 
-	/// to themselves; 2 and 5 rotate to each other; 6 and 9 rotate to each 
-	/// other, and the rest of the numbers do not rotate to any other number.
-	///
-	/// Now given a positive number N, how many numbers X from 1 to N are good?
-	///
-	/// Example:
-	/// Input: 10
-	/// Output: 4
-	/// Explanation: 
-	/// There are four good numbers in the range [1, 10] : 2, 5, 6, 9.
-	/// Note that 1 and 10 are not good numbers, since they remain unchanged 
-	/// after rotating.
-	/// Note:
-	///
-	/// 1. N  will be in range [1, 10000].
-	/// </summary>
-	int rotatedDigits(int N);
-
-	/// <summary>
-	/// Leet code #790. Domino and Tromino Tiling
-	/// 
-	/// We have two types of tiles: a 2x1 domino shape, and an "L" tromino 
-	/// shape. These shapes may be rotated.
-	///
-	/// XX  <- domino
-	///
-	/// XX  <- "L" tromino
-	/// X
-	/// Given N, how many ways are there to tile a 2 x N board? Return your 
-	/// answer modulo 10^9 + 7.
-	///
-	/// (In a tiling, every square must be covered by a tile. Two tilings 
-	/// are different if and only if there are two 4-directionally adjacent 
-	/// cells on the board such that exactly one of the tilings has both 
-	/// squares occupied by a tile.)
-	///
-	/// Example:
-	/// Input: 3
-	/// Output: 5
-	/// Explanation: 
-	/// The five different ways are listed below, different letters indicates 
-	/// different tiles:
-	/// XYZ XXZ XYY XXY XYY
-	/// XYZ YYZ XZZ XYY XXY
-	/// Note:
-	///
-	/// 1. N  will be in range [1, 1000].
-	/// </summary>
-	int numTilings(int N);
-
-	/// <summary>
-	/// Leet code #795. Number of Subarrays with Bounded Maximum
-	///
-	/// We are given an array A of positive integers, and two positive 
-	/// integers L and R (L <= R).
-	///
-	/// Return the number of (contiguous, non-empty) subarrays such that the 
-	/// value of the maximum array element in that subarray is at least L and 
-	/// at most R.
-	///
-	/// Example :
-	/// Input: 
-	/// A = [2, 1, 4, 3]
-	/// L = 2
-	/// R = 3
-	/// Output: 3
-	/// Explanation: There are three subarrays that meet the requirements: 
-	/// [2], [2, 1], [3].
-	/// Note:
-	/// 1. L, R  and A[i] will be an integer in the range [0, 10^9].
-	/// 2. The length of A will be in the range of [1, 50000].
-	/// </summary>
-	int numSubarrayBoundedMax(vector<int>& A, int L, int R);
-
-	/// <summary>
-	/// Leet code #793. Preimage Size of Factorial Zeroes Function
-	///
-	/// Let f(x) be the number of zeroes at the end of x!. (Recall that x! = 
-	/// 1 * 2 * 3 * ... * x, and by convention, 0! = 1.)
-	/// For example, f(3) = 0 because 3! = 6 has no zeroes at the end, while 
-	/// f(11) = 2 because 11! = 39916800 has 2 zeroes at the end. Given K, 
-	/// find how many non-negative integers x have the property that f(x) = K.
-	/// Example 1:
-	/// Input: K = 0
-	/// Output: 5
-	/// Explanation: 0!, 1!, 2!, 3!, and 4! end with K = 0 zeroes.
-	///
-	/// Example 2:
-	/// Input: K = 5
-	/// Output: 0
-	/// Explanation: There is no x such that x! ends in K = 5 zeroes.
-	/// Note:
-	/// 1. K will be an integer in the range [0, 10^9].
-	/// </summary>
-	int preimageSizeFZF(int K);
-
-	/// <summary>
-	/// Leet code #799. Champagne Tower
-	/// 
-	/// We stack glasses in a pyramid, where the first row has 1 glass, the 
-	/// second row has 2 glasses, and so on until the 100th row.  Each glass 
-	/// holds one cup (250ml) of champagne.
-	///
-	/// Then, some champagne is poured in the first glass at the top.  When 
-	/// the top most glass is full, any excess liquid poured will fall equally 
-	/// to the glass immediately to the left and right of it.  When those 
-	/// glasses become full, any excess champagne will fall equally to the left
-	/// and right of those glasses, and so on.  (A glass at the bottom row has 
-	/// it's excess champagne fall on the floor.)
-	///
-	/// For example, after one cup of champagne is poured, the top most glass 
-	/// is full.  After two cups of champagne are poured, the two glasses on 
-	/// the second row are half full.  After three cups of champagne are 
-	/// poured, those two cups become full - there are 3 full glasses total 
-	/// now.  After four cups of champagne are poured, the third row has the 
-	/// middle glass half full, and the two outside glasses are a quarter 
-	/// full, as pictured below.
-	///
-	/// Then, some champagne is poured in the first glass at the top.  When 
-	/// the top most glass is full, any excess liquid poured will fall equally 
-	/// to the glass immediately to the left and right of it.  When those 
-	/// glasses become full, any excess champagne will fall equally to the left 
-	/// and right of those glasses, and so on.  (A glass at the bottom row has 
-	/// it's excess champagne fall on the floor.)
-	///
-	/// For example, after one cup of champagne is poured, the top most glass 
-	/// is full.  After two cups of champagne are poured, the two glasses on 
-	/// the second row are half full.  After three cups of champagne are 
-	/// poured, those two cups become full - there are 3 full glasses total 
-	/// now.  After four cups of champagne are poured, the third row has the 
-	/// middle glass half full, and the two outside glasses are a quarter 
-	/// full, as pictured below.
-	///
-	/// Example 1:
-	/// Input: poured = 1, query_glass = 1, query_row = 1
-	/// Output: 0.0
-	/// Explanation: We poured 1 cup of champange to the top glass of the tower 
-	/// (which is indexed as (0, 0)). There will be no excess liquid so all the 
-	/// glasses under the top glass will remain empty.
-	///
-	/// Example 2:
-	/// Input: poured = 2, query_glass = 1, query_row = 1
-	/// Output: 0.5
-	/// Explanation: We poured 2 cups of champange to the top glass of the 
-	/// tower (which is indexed as (0, 0)). There is one cup of excess liquid. 
-	/// The glass indexed as (1, 0) and the glass indexed as (1, 1) will share 
-	/// the excess liquid equally, and each will get half cup of champange.
-	///
-	/// Now after pouring some non-negative integer cups of champagne, return 
-	/// how full the j-th glass in the i-th row is (both i and j are 0 indexed.)
-	///
-	/// Note:
-	/// 1. poured will be in the range of [0, 10 ^ 9].
-	/// 2. query_glass and query_row will be in the range of [0, 99].
-	/// </summary>
-	double champagneTower(int poured, int query_row, int query_glass);
-
-	/// <summary>
-	/// Leet code #801. Minimum Swaps To Make Sequences Increasing
-	/// 
-	/// We have two integer sequences A and B of the same non-zero length.
-	/// We are allowed to swap elements A[i] and B[i].  Note that both elements
-	/// are in the same index position in their respective sequences.
-	///
-	/// At the end of some number of swaps, A and B are both strictly 
-	/// increasing.  (A sequence is strictly increasing if and only if 
-	/// A[0] < A[1] < A[2] < ... < A[A.length - 1].)
-	///
-	/// Given A and B, return the minimum number of swaps to make both 
-	/// sequences strictly increasing.  It is guaranteed that the given 
-	/// input always makes it possible.
-	///
-	/// Example:
-	/// Input: A = [1,3,5,4], B = [1,2,3,7]
-	/// Output: 1
-	/// Explanation: 
-	/// Swap A[3] and B[3].  Then the sequences are:
-	/// A = [1, 3, 5, 7] and B = [1, 2, 3, 4]
-	/// which are both strictly increasing.
-	/// Note:
-	///
-	/// 1. A, B are arrays with the same length, and that length will be in the 
-	///    range [1, 1000].
-	/// 2. A[i], B[i] are integer values in the range [0, 2000].
-	/// </summary>
-	int minSwap(vector<int>& A, vector<int>& B);
-
-	/// <summary>
-	/// Leet code #808. Soup Servings
-	/// </summary>
-	double soupServings(int A, int B, unordered_map<int, unordered_map<int, double>> &possibility);
-
-	/// <summary>
-	/// Leet code #808. Soup Servings
-	/// 
-	/// There are two types of soup: type A and type B. Initially we have N ml
-	/// of each type of soup. There are four kinds of operations:
-	///
-	/// Serve 100 ml of soup A and 0 ml of soup B
-	/// Serve 75 ml of soup A and 25 ml of soup B
-	/// Serve 50 ml of soup A and 50 ml of soup B
-	/// Serve 25 ml of soup A and 75 ml of soup B
-	/// When we serve some soup, we give it to someone and we no longer have 
-	/// it.  Each turn, we will choose from the four operations with equal 
-	/// probability 0.25. If the remaining volume of soup is not enough to 
-	/// complete the operation, we will serve as much as we can.  We stop 
-	/// once we no longer have some quantity of both types of soup.
-	///
-	/// Note that we do not have the operation where all 100 ml's of soup B are 
-	/// used first.  
-	///
-	/// Return the probability that soup A will be empty first, plus half the 
-	/// probability that A and B become empty at the same time.
-	///  
-	/// Example:
-	/// Input: N = 50
-	/// Output: 0.625
-	/// Explanation: 
-	/// If we choose the first two operations, A will become empty first. For 
-	/// the third operation, A and B will become empty at the same time. For 
-	/// the fourth operation, B will become empty first. So the total 
-	/// probability of A becoming empty first plus half the probability that A 
-	/// and B become empty at the same time, is 0.25 * (1 + 1 + 0.5 + 0) = 
-	/// 0.625.
-	/// Notes:
-	/// 1. 0 <= N <= 10^9. 
-	/// 2. Answers within 10^-6 of the true value will be accepted as correct.
-	/// </summary>
-	double soupServings(int N);
-
-	/// <summary>
-	/// Leet code #813. Largest Sum of Averages
-	/// 
-	/// We partition a row of numbers A into at most K adjacent (non-empty) 
-	/// groups, then our score is the sum of the average of each group. 
-	/// What is the largest score we can achieve?
-	///
-	/// Note that our partition must use every number in A, and that scores 
-	/// are not necessarily integers.
-	///
-	/// Example:
-	/// Input: 
-	/// A = [9,1,2,3,9]
-	/// K = 3
-	/// Output: 20
-	/// Explanation: 
-	/// The best choice is to partition A into [9], [1, 2, 3], [9]. The 
-	/// answer is 9 + (1 + 2 + 3) / 3 + 9 = 20.
-	/// We could have also partitioned A into [9, 1], [2], [3, 9], for example.
-	/// That partition would lead to a score of 5 + 2 + 6 = 13, which is worse.
-	///
-	/// Note:
-	/// 1. 1 <= A.length <= 100.
-	/// 2. 1 <= A[i] <= 10000.
-	/// 3. 1 <= K <= A.length.
-	/// 4. Answers within 10^-6 of the correct answer will be accepted as 
-	///    correct.
-	/// </summary>
-	double largestSumOfAverages(vector<int>& A, int K);
-
-	/// <summary>
-	/// Leet code #823. Binary Trees With Factors
-	/// 
-	/// Given an array of unique integers, each integer is strictly greater 
-	/// than 1.
-	///
-	/// We make a binary tree using these integers and each number may be used 
-	/// for any number of times.
-	///
-	/// Each non-leaf node's value should be equal to the product of the 
-	/// values of it's children.
-	///
-	/// How many binary trees can we make?  Return the answer modulo 
-	/// 10 ** 9 + 7.
-	/// 
-	/// Example 1:
-	///
-	/// Input: A = [2, 4]
-	/// Output: 3
-	/// Explanation: We can make these trees: [2], [4], [4, 2, 2]
-	///  
-	/// Example 2:
-	///
-	/// Input: A = [2, 4, 5, 10]
-	/// Output: 7
-	/// Explanation: We can make these trees: [2], [4], [5], [10], [4, 2, 2], 
-	/// [10, 2, 5], [10, 5, 2].
-	/// 
-	/// Note:
-	/// 1. 1 <= A.length <= 1000.
-	/// 2. 2 <= A[i] <= 10 ^ 9.
-	/// </summary>
-	int numFactoredBinaryTrees(vector<int>& A);
-
-	/// <summary>
-	/// Leet code #828. Unique Letter String
-	/// 
-	/// A character is unique in string S if it occurs exactly once in it.
-	///
-	/// For example, in string S = "LETTER", the only unique characters are 
-	/// "L" and "R".
-	///
-	/// Let's define UNIQ(S) as the number of unique characters in string S.
-	///
-	/// For example, UNIQ("LETTER") =  2.
-	///
-	/// Given a string S with only uppercases, calculate the sum of 
-	/// UNIQ(substring) over all non-empty substrings of S.
-	///
-	/// If there are two or more equal substrings at different positions in S, 
-	/// we consider them different.
-	///
-	/// Since the answer can be very large, retrun the answer modulo 
-	/// 10 ^ 9 + 7.
-	///
-	/// Example 1:
-	/// Input: "ABC"
-	/// Output: 10
-	/// Explanation: All possible substrings are: "A","B","C","AB","BC" and 
-	/// "ABC".
-	/// Evey substring is composed with only unique letters.
-	/// Sum of lengths of all substring is 1 + 1 + 1 + 2 + 2 + 3 = 10
-	///
-	/// Example 2:
-	/// Input: "ABA"
-	/// Output: 8
-	/// Explanation: The same as example 1, except uni("ABA") = 1.
-	///
-	/// Note: 0 <= S.length <= 10000.
-	/// </summary>
-	int uniqueLetterString(string S);
-
-	/// <summary>
-	/// Leet code #834. Sum of Distances in Tree
+    /// <summary>
+    /// Leetcode #764. Largest Plus Sign
+    ///
+    /// In a 2D grid from (0, 0) to (N-1, N-1), every cell contains a 1, except 
+    /// those cells in the given list mines which are 0. What is the largest 
+    /// axis-aligned plus sign of 1s contained in the grid? Return the order of 
+    /// the plus sign. If there is none, return 0.
+    ///
+    /// An "axis-aligned plus sign of 1s of order k" has some center 
+    /// grid[x][y] = 1 along with 4 arms of length k-1 going up, down, left, 
+    /// and right, and made of 1s. This is demonstrated in the diagrams below. 
+    /// Note that there could be 0s or 1s beyond the arms of the plus sign, 
+    /// only the relevant area of the plus sign is checked for 1s.
+    ///
+    /// Examples of Axis-Aligned Plus Signs of Order k:
+    /// Order 1:
+    /// 000
+    /// 010
+    /// 000
+    ///
+    /// Order 2:
+    /// 00000
+    /// 00100
+    /// 01110
+    /// 00100
+    /// 00000
+    ///
+    /// Order 3:
+    /// 0000000
+    /// 0001000
+    /// 0001000
+    /// 0111110
+    /// 0001000
+    /// 0001000
+    /// 0000000
+    ///
+    /// Example 1:
+    /// Input: N = 5, mines = [[4, 2]]
+    /// Output: 2
+    /// Explanation:
+    /// 11111
+    /// 11111
+    /// 11111
+    /// 11111
+    /// 11011
+    /// In the above grid, the largest plus sign can only be order 2.  One of 
+    /// them is marked in bold.
+    ///
+    /// Example 2:
+    /// Input: N = 2, mines = []
+    /// Output: 1
+    /// Explanation:
+    /// There is no plus sign of order 2, but there is of order 1.
+    ///
+    /// Example 3:
+    /// Input: N = 1, mines = [[0, 0]]
+    /// Output: 0
+    /// Explanation:
+    /// There is no plus sign, so return 0.
+    /// Note:
+    /// 1. N will be an integer in the range [1, 500].
+    /// 2. mines will have length at most 5000.
+    /// 3. mines[i] will be length 2 and consist of integers in the range 
+    /// [0, N-1].
+    /// (Additionally, programs submitted in C, C++, or C# will be judged 
+    /// with a slightly smaller time limit.)
     /// </summary>
-	void calcuateChildrenDistance(int root, int parent, vector<vector<int>> &tree, unordered_map<int, pair<int, int>> &tree_stat);
+    int orderOfLargestPlusSign(int N, vector<vector<int>>& mines);
 
-	/// <summary>
-	/// Leet code #834. Sum of Distances in Tree
-	/// </summary>
-	void calcuateAllDistance(int root, int parent, vector<vector<int>> &tree, unordered_map<int, pair<int, int>> &tree_stat);
+    /// <summary>
+    /// Leetcode #788. Rotated Digits
+    /// </summary>
+    int rotatedDigits(int N, bool is_diff);
 
-	/// <summary>
-	/// Leet code #834. Sum of Distances in Tree
-	/// 
-	/// An undirected, connected tree with N nodes labelled 0...N-1 and N-1 
-	/// edges are given.
-	///
-	/// The ith edge connects nodes edges[i][0] and edges[i][1] together.
-	///
-	/// Return a list ans, where ans[i] is the sum of the distances between 
-	/// node i and all other nodes.
-	///
-	/// Example 1:
-	///
-	/// Input: N = 6, edges = [[0,1],[0,2],[2,3],[2,4],[2,5]]
-	/// Output: [8,12,6,10,10,10]
-	/// Explanation: 
-	/// Here is a diagram of the given tree:
-	///   0
-	///  / \
-	/// 1   2
+    /// <summary>
+    /// Leetcode #788. Rotated Digits
+    /// </summary>
+    int checkIfRotateDigits(int N);
+
+    /// <summary>
+    /// Leetcode #788. Rotated Digits
+    ///
+    /// X is a good number if after rotating each digit individually by 180 
+    /// degrees, we get a valid number that is different from X. A number is 
+    /// valid if each digit remains a digit after rotation. 0, 1, and 8 rotate 
+    /// to themselves; 2 and 5 rotate to each other; 6 and 9 rotate to each 
+    /// other, and the rest of the numbers do not rotate to any other number.
+    ///
+    /// Now given a positive number N, how many numbers X from 1 to N are good?
+    ///
+    /// Example:
+    /// Input: 10
+    /// Output: 4
+    /// Explanation: 
+    /// There are four good numbers in the range [1, 10] : 2, 5, 6, 9.
+    /// Note that 1 and 10 are not good numbers, since they remain unchanged 
+    /// after rotating.
+    /// Note:
+    ///
+    /// 1. N  will be in range [1, 10000].
+    /// </summary>
+    int rotatedDigits(int N);
+
+    /// <summary>
+    /// Leet code #790. Domino and Tromino Tiling
+    /// 
+    /// We have two types of tiles: a 2x1 domino shape, and an "L" tromino 
+    /// shape. These shapes may be rotated.
+    ///
+    /// XX  <- domino
+    ///
+    /// XX  <- "L" tromino
+    /// X
+    /// Given N, how many ways are there to tile a 2 x N board? Return your 
+    /// answer modulo 10^9 + 7.
+    ///
+    /// (In a tiling, every square must be covered by a tile. Two tilings 
+    /// are different if and only if there are two 4-directionally adjacent 
+    /// cells on the board such that exactly one of the tilings has both 
+    /// squares occupied by a tile.)
+    ///
+    /// Example:
+    /// Input: 3
+    /// Output: 5
+    /// Explanation: 
+    /// The five different ways are listed below, different letters indicates 
+    /// different tiles:
+    /// XYZ XXZ XYY XXY XYY
+    /// XYZ YYZ XZZ XYY XXY
+    /// Note:
+    ///
+    /// 1. N  will be in range [1, 1000].
+    /// </summary>
+    int numTilings(int N);
+
+    /// <summary>
+    /// Leet code #795. Number of Subarrays with Bounded Maximum
+    ///
+    /// We are given an array A of positive integers, and two positive 
+    /// integers L and R (L <= R).
+    ///
+    /// Return the number of (contiguous, non-empty) subarrays such that the 
+    /// value of the maximum array element in that subarray is at least L and 
+    /// at most R.
+    ///
+    /// Example :
+    /// Input: 
+    /// A = [2, 1, 4, 3]
+    /// L = 2
+    /// R = 3
+    /// Output: 3
+    /// Explanation: There are three subarrays that meet the requirements: 
+    /// [2], [2, 1], [3].
+    /// Note:
+    /// 1. L, R  and A[i] will be an integer in the range [0, 10^9].
+    /// 2. The length of A will be in the range of [1, 50000].
+    /// </summary>
+    int numSubarrayBoundedMax(vector<int>& A, int L, int R);
+
+    /// <summary>
+    /// Leet code #793. Preimage Size of Factorial Zeroes Function
+    ///
+    /// Let f(x) be the number of zeroes at the end of x!. (Recall that x! = 
+    /// 1 * 2 * 3 * ... * x, and by convention, 0! = 1.)
+    /// For example, f(3) = 0 because 3! = 6 has no zeroes at the end, while 
+    /// f(11) = 2 because 11! = 39916800 has 2 zeroes at the end. Given K, 
+    /// find how many non-negative integers x have the property that f(x) = K.
+    /// Example 1:
+    /// Input: K = 0
+    /// Output: 5
+    /// Explanation: 0!, 1!, 2!, 3!, and 4! end with K = 0 zeroes.
+    ///
+    /// Example 2:
+    /// Input: K = 5
+    /// Output: 0
+    /// Explanation: There is no x such that x! ends in K = 5 zeroes.
+    /// Note:
+    /// 1. K will be an integer in the range [0, 10^9].
+    /// </summary>
+    int preimageSizeFZF(int K);
+
+    /// <summary>
+    /// Leet code #799. Champagne Tower
+    /// 
+    /// We stack glasses in a pyramid, where the first row has 1 glass, the 
+    /// second row has 2 glasses, and so on until the 100th row.  Each glass 
+    /// holds one cup (250ml) of champagne.
+    ///
+    /// Then, some champagne is poured in the first glass at the top.  When 
+    /// the top most glass is full, any excess liquid poured will fall equally 
+    /// to the glass immediately to the left and right of it.  When those 
+    /// glasses become full, any excess champagne will fall equally to the left
+    /// and right of those glasses, and so on.  (A glass at the bottom row has 
+    /// it's excess champagne fall on the floor.)
+    ///
+    /// For example, after one cup of champagne is poured, the top most glass 
+    /// is full.  After two cups of champagne are poured, the two glasses on 
+    /// the second row are half full.  After three cups of champagne are 
+    /// poured, those two cups become full - there are 3 full glasses total 
+    /// now.  After four cups of champagne are poured, the third row has the 
+    /// middle glass half full, and the two outside glasses are a quarter 
+    /// full, as pictured below.
+    ///
+    /// Then, some champagne is poured in the first glass at the top.  When 
+    /// the top most glass is full, any excess liquid poured will fall equally 
+    /// to the glass immediately to the left and right of it.  When those 
+    /// glasses become full, any excess champagne will fall equally to the left 
+    /// and right of those glasses, and so on.  (A glass at the bottom row has 
+    /// it's excess champagne fall on the floor.)
+    ///
+    /// For example, after one cup of champagne is poured, the top most glass 
+    /// is full.  After two cups of champagne are poured, the two glasses on 
+    /// the second row are half full.  After three cups of champagne are 
+    /// poured, those two cups become full - there are 3 full glasses total 
+    /// now.  After four cups of champagne are poured, the third row has the 
+    /// middle glass half full, and the two outside glasses are a quarter 
+    /// full, as pictured below.
+    ///
+    /// Example 1:
+    /// Input: poured = 1, query_glass = 1, query_row = 1
+    /// Output: 0.0
+    /// Explanation: We poured 1 cup of champange to the top glass of the tower 
+    /// (which is indexed as (0, 0)). There will be no excess liquid so all the 
+    /// glasses under the top glass will remain empty.
+    ///
+    /// Example 2:
+    /// Input: poured = 2, query_glass = 1, query_row = 1
+    /// Output: 0.5
+    /// Explanation: We poured 2 cups of champange to the top glass of the 
+    /// tower (which is indexed as (0, 0)). There is one cup of excess liquid. 
+    /// The glass indexed as (1, 0) and the glass indexed as (1, 1) will share 
+    /// the excess liquid equally, and each will get half cup of champange.
+    ///
+    /// Now after pouring some non-negative integer cups of champagne, return 
+    /// how full the j-th glass in the i-th row is (both i and j are 0 indexed.)
+    ///
+    /// Note:
+    /// 1. poured will be in the range of [0, 10 ^ 9].
+    /// 2. query_glass and query_row will be in the range of [0, 99].
+    /// </summary>
+    double champagneTower(int poured, int query_row, int query_glass);
+
+    /// <summary>
+    /// Leet code #801. Minimum Swaps To Make Sequences Increasing
+    /// 
+    /// We have two integer sequences A and B of the same non-zero length.
+    /// We are allowed to swap elements A[i] and B[i].  Note that both elements
+    /// are in the same index position in their respective sequences.
+    ///
+    /// At the end of some number of swaps, A and B are both strictly 
+    /// increasing.  (A sequence is strictly increasing if and only if 
+    /// A[0] < A[1] < A[2] < ... < A[A.length - 1].)
+    ///
+    /// Given A and B, return the minimum number of swaps to make both 
+    /// sequences strictly increasing.  It is guaranteed that the given 
+    /// input always makes it possible.
+    ///
+    /// Example:
+    /// Input: A = [1,3,5,4], B = [1,2,3,7]
+    /// Output: 1
+    /// Explanation: 
+    /// Swap A[3] and B[3].  Then the sequences are:
+    /// A = [1, 3, 5, 7] and B = [1, 2, 3, 4]
+    /// which are both strictly increasing.
+    /// Note:
+    ///
+    /// 1. A, B are arrays with the same length, and that length will be in the 
+    ///    range [1, 1000].
+    /// 2. A[i], B[i] are integer values in the range [0, 2000].
+    /// </summary>
+    int minSwap(vector<int>& A, vector<int>& B);
+
+    /// <summary>
+    /// Leet code #808. Soup Servings
+    /// </summary>
+    double soupServings(int A, int B, unordered_map<int, unordered_map<int, double>> &possibility);
+
+    /// <summary>
+    /// Leet code #808. Soup Servings
+    /// 
+    /// There are two types of soup: type A and type B. Initially we have N ml
+    /// of each type of soup. There are four kinds of operations:
+    ///
+    /// Serve 100 ml of soup A and 0 ml of soup B
+    /// Serve 75 ml of soup A and 25 ml of soup B
+    /// Serve 50 ml of soup A and 50 ml of soup B
+    /// Serve 25 ml of soup A and 75 ml of soup B
+    /// When we serve some soup, we give it to someone and we no longer have 
+    /// it.  Each turn, we will choose from the four operations with equal 
+    /// probability 0.25. If the remaining volume of soup is not enough to 
+    /// complete the operation, we will serve as much as we can.  We stop 
+    /// once we no longer have some quantity of both types of soup.
+    ///
+    /// Note that we do not have the operation where all 100 ml's of soup B are 
+    /// used first.  
+    ///
+    /// Return the probability that soup A will be empty first, plus half the 
+    /// probability that A and B become empty at the same time.
+    ///  
+    /// Example:
+    /// Input: N = 50
+    /// Output: 0.625
+    /// Explanation: 
+    /// If we choose the first two operations, A will become empty first. For 
+    /// the third operation, A and B will become empty at the same time. For 
+    /// the fourth operation, B will become empty first. So the total 
+    /// probability of A becoming empty first plus half the probability that A 
+    /// and B become empty at the same time, is 0.25 * (1 + 1 + 0.5 + 0) = 
+    /// 0.625.
+    /// Notes:
+    /// 1. 0 <= N <= 10^9. 
+    /// 2. Answers within 10^-6 of the true value will be accepted as correct.
+    /// </summary>
+    double soupServings(int N);
+
+    /// <summary>
+    /// Leet code #813. Largest Sum of Averages
+    /// 
+    /// We partition a row of numbers A into at most K adjacent (non-empty) 
+    /// groups, then our score is the sum of the average of each group. 
+    /// What is the largest score we can achieve?
+    ///
+    /// Note that our partition must use every number in A, and that scores 
+    /// are not necessarily integers.
+    ///
+    /// Example:
+    /// Input: 
+    /// A = [9,1,2,3,9]
+    /// K = 3
+    /// Output: 20
+    /// Explanation: 
+    /// The best choice is to partition A into [9], [1, 2, 3], [9]. The 
+    /// answer is 9 + (1 + 2 + 3) / 3 + 9 = 20.
+    /// We could have also partitioned A into [9, 1], [2], [3, 9], for example.
+    /// That partition would lead to a score of 5 + 2 + 6 = 13, which is worse.
+    ///
+    /// Note:
+    /// 1. 1 <= A.length <= 100.
+    /// 2. 1 <= A[i] <= 10000.
+    /// 3. 1 <= K <= A.length.
+    /// 4. Answers within 10^-6 of the correct answer will be accepted as 
+    ///    correct.
+    /// </summary>
+    double largestSumOfAverages(vector<int>& A, int K);
+
+    /// <summary>
+    /// Leet code #823. Binary Trees With Factors
+    /// 
+    /// Given an array of unique integers, each integer is strictly greater 
+    /// than 1.
+    ///
+    /// We make a binary tree using these integers and each number may be used 
+    /// for any number of times.
+    ///
+    /// Each non-leaf node's value should be equal to the product of the 
+    /// values of it's children.
+    ///
+    /// How many binary trees can we make?  Return the answer modulo 
+    /// 10 ** 9 + 7.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: A = [2, 4]
+    /// Output: 3
+    /// Explanation: We can make these trees: [2], [4], [4, 2, 2]
+    ///  
+    /// Example 2:
+    ///
+    /// Input: A = [2, 4, 5, 10]
+    /// Output: 7
+    /// Explanation: We can make these trees: [2], [4], [5], [10], [4, 2, 2], 
+    /// [10, 2, 5], [10, 5, 2].
+    /// 
+    /// Note:
+    /// 1. 1 <= A.length <= 1000.
+    /// 2. 2 <= A[i] <= 10 ^ 9.
+    /// </summary>
+    int numFactoredBinaryTrees(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #828. Unique Letter String
+    /// 
+    /// A character is unique in string S if it occurs exactly once in it.
+    ///
+    /// For example, in string S = "LETTER", the only unique characters are 
+    /// "L" and "R".
+    ///
+    /// Let's define UNIQ(S) as the number of unique characters in string S.
+    ///
+    /// For example, UNIQ("LETTER") =  2.
+    ///
+    /// Given a string S with only uppercases, calculate the sum of 
+    /// UNIQ(substring) over all non-empty substrings of S.
+    ///
+    /// If there are two or more equal substrings at different positions in S, 
+    /// we consider them different.
+    ///
+    /// Since the answer can be very large, retrun the answer modulo 
+    /// 10 ^ 9 + 7.
+    ///
+    /// Example 1:
+    /// Input: "ABC"
+    /// Output: 10
+    /// Explanation: All possible substrings are: "A","B","C","AB","BC" and 
+    /// "ABC".
+    /// Evey substring is composed with only unique letters.
+    /// Sum of lengths of all substring is 1 + 1 + 1 + 2 + 2 + 3 = 10
+    ///
+    /// Example 2:
+    /// Input: "ABA"
+    /// Output: 8
+    /// Explanation: The same as example 1, except uni("ABA") = 1.
+    ///
+    /// Note: 0 <= S.length <= 10000.
+    /// </summary>
+    int uniqueLetterString(string S);
+
+    /// <summary>
+    /// Leet code #834. Sum of Distances in Tree
+    /// </summary>
+    void calcuateChildrenDistance(int root, int parent, vector<vector<int>> &tree, unordered_map<int, pair<int, int>> &tree_stat);
+
+    /// <summary>
+    /// Leet code #834. Sum of Distances in Tree
+    /// </summary>
+    void calcuateAllDistance(int root, int parent, vector<vector<int>> &tree, unordered_map<int, pair<int, int>> &tree_stat);
+
+    /// <summary>
+    /// Leet code #834. Sum of Distances in Tree
+    /// 
+    /// An undirected, connected tree with N nodes labelled 0...N-1 and N-1 
+    /// edges are given.
+    ///
+    /// The ith edge connects nodes edges[i][0] and edges[i][1] together.
+    ///
+    /// Return a list ans, where ans[i] is the sum of the distances between 
+    /// node i and all other nodes.
+    ///
+    /// Example 1:
+    ///
+    /// Input: N = 6, edges = [[0,1],[0,2],[2,3],[2,4],[2,5]]
+    /// Output: [8,12,6,10,10,10]
+    /// Explanation: 
+    /// Here is a diagram of the given tree:
+    ///   0
+    ///  / \
+    /// 1   2
     ///    /|\
     ///   3 4 5
     /// We can see that dist(0,1) + dist(0,2) + dist(0,3) + dist(0,4) + 
@@ -20938,448 +20911,448 @@ public:
     /// equals 1 + 1 + 2 + 2 + 2 = 8.  Hence, answer[0] = 8, and so on.
     /// Note: 1 <= N <= 10000
     /// </summary>
-	vector<int> sumOfDistancesInTree(int N, vector<vector<int>>& edges);
-
-	/// <summary>
-	/// Leet code #837. New 21 Game
-	/// 
-	/// Alice plays the following game, loosely based on the card game "21".
-	///
-	/// Alice starts with 0 points, and draws numbers while she has less than 
-	/// K points.  During each draw, she gains an integer number of points 
-	/// randomly from the range [1, W], where W is an integer.  Each draw is 
-	/// independent and the outcomes have equal probabilities.
-	///
-	/// Alice stops drawing numbers when she gets K or more points.  What is 
-	/// the probability that she has N or less points?
-	///
-	/// Example 1:
-	///
-	/// Input: N = 10, K = 1, W = 10
-	/// Output: 1.00000
-	/// Explanation:  Alice gets a single card, then stops.
-	///
-	/// Example 2:
-	///
-	/// Input: N = 6, K = 1, W = 10
-	/// Output: 0.60000
-	/// Explanation:  Alice gets a single card, then stops.
-	/// In 6 out of W = 10 possibilities, she is at or below N = 6 points.
-	/// Example 3:
-	///
-	/// Input: N = 21, K = 17, W = 10
-	/// Output: 0.73278
-	/// Note:
-	///
-	/// 1. 0 <= K <= N <= 10000
-	/// 2. 1 <= W <= 10000
-	/// 3. Answers will be accepted as correct if they are within 10^-5 of 
-	///    the correct answer.
-	/// 4. The judging time limit has been reduced for this question.
-	/// </summary>
-	double new21Game(int N, int K, int W);
-
-	/// <summary>
-	/// Leet code #873. Length of Longest Fibonacci Subsequence
-	/// 
-	/// A sequence X_1, X_2, ..., X_n is fibonacci-like if:
-	///
-	/// n >= 3
-	/// X_i + X_{i+1} = X_{i+2} for all i + 2 <= n
-	/// Given a strictly increasing array A of positive integers forming a 
-	/// sequence, find the length of the longest fibonacci-like subsequence 
-	/// of A.  If one does not exist, return 0.
-	///
-	/// (Recall that a subsequence is derived from another sequence A by 
-	/// deleting any number of elements (including none) from A, without 
-	/// changing the order of the remaining elements.  For example, 
-	/// [3, 5, 8] is a subsequence of [3, 4, 5, 6, 7, 8].)
-	/// 
-	/// Example 1:
-	/// Input: [1,2,3,4,5,6,7,8]
-	/// Output: 5
-	/// Explanation:
-	/// The longest subsequence that is fibonacci-like: [1,2,3,5,8].
-	///
-	/// Example 2:
-	/// Input: [1,3,7,11,12,14,18]
-	/// Output: 3
-	/// Explanation:
-	/// The longest subsequence that is fibonacci-like:
-	/// [1,11,12], [3,11,14] or [7,11,18].
-	///
-	/// Note:
-	/// 
-	/// 1. 3 <= A.length <= 1000
-	/// 2. 1 <= A[0] < A[1] < ... < A[A.length - 1] <= 10^9	/// </summary>
-	/// </summary>
-	int lenLongestFibSubseq(vector<int>& A);
-
-	/// <summary>
-	/// Leet code #877. Stone Game
-	/// 
-	/// Alex and Lee play a game with piles of stones.  There are an even 
-	/// number of piles arranged in a row, and each pile has a positive 
-	/// integer number of stones piles[i].
-	///
-	/// The objective of the game is to end with the most stones.  The 
-	/// total number of stones is odd, so there are no ties.
-	///
-	/// Alex and Lee take turns, with Alex starting first.  Each turn, 
-	/// a player takes the entire pile of stones from either the beginning 
-	/// or the end of the row.  This continues until there are no more piles 
-	/// left, at which point the person with the most stones wins.
-	///
-	/// Assuming Alex and Lee play optimally, return True if and only if Alex 
-	/// wins the game.
-	///
-	/// Example 1:
-	/// Input: [5,3,4,5]
-	/// Output: true
-	/// Explanation: 
-	/// Alex starts first, and can only take the first 5 or the last 5.
-	/// Say he takes the first 5, so that the row becomes [3, 4, 5].
-	/// If Lee takes 3, then the board is [4, 5], and Alex takes 5 to win 
-	/// with 10 points.
-	/// If Lee takes the last 5, then the board is [3, 4], and Alex takes 4 
-	/// to win with 9 points.
-	/// This demonstrated that taking the first 5 was a winning move for 
-	/// Alex, so we return true.
-	/// 
-	/// Note:
-	/// 1. 2 <= piles.length <= 500
-	/// 2. piles.length is even.
-	/// 3. 1 <= piles[i] <= 500
-	/// 4. sum(piles) is odd.
-	/// </summary>
-	bool stoneGame(vector<int>& piles);
+    vector<int> sumOfDistancesInTree(int N, vector<vector<int>>& edges);
 
     /// <summary>
-	/// Leet code #887. Super Egg Drop
-	/// 
-	/// You are given K eggs, and you have access to a building with N floors from 
-	/// 1 to N. 
-	///
-	/// Each egg is identical in function, and if an egg breaks, you cannot drop 
-	/// it again.
-	///
-	/// You know that there exists a floor F with 0 <= F <= N such that any egg 
-	/// dropped at a floor higher than F will break, and any egg dropped at or 
-	/// below floor F will not break.
-	///
-	/// Each move, you may take an egg (if you have an unbroken one) and drop it 
-	/// from any floor X (with 1 <= X <= N). 
-	///
-	/// Your goal is to know with certainty what the value of F is.
-	///
-	/// What is the minimum number of moves that you need to know with certainty 
-	/// what F is, regardless of the initial value of F?
-	///
-	/// Example 1:
-	///
-	/// Input: K = 1, N = 2
-	/// Output: 2
-	/// Explanation: 
-	/// Drop the egg from floor 1.  If it breaks, we know with certainty that 
-	/// F = 0.
-	/// Otherwise, drop the egg from floor 2.  If it breaks, we know with 
-	/// certainty that F = 1.
-	/// If it didn't break, then we know with certainty F = 2.
-	/// Hence, we needed 2 moves in the worst case to know what F is with 
-	/// certainty.
-	///
-	/// Example 2:
-	/// Input: K = 2, N = 6
-	/// Output: 3
-	///
-	/// Example 3
-	/// Input: K = 3, N = 14
-	/// Output: 4
-	/// Note:
-	/// 1 <= K <= 100
-	/// 1 <= N <= 10000
-	/// </summary>
-	int superEggDrop(int K, int N);
+    /// Leet code #837. New 21 Game
+    /// 
+    /// Alice plays the following game, loosely based on the card game "21".
+    ///
+    /// Alice starts with 0 points, and draws numbers while she has less than 
+    /// K points.  During each draw, she gains an integer number of points 
+    /// randomly from the range [1, W], where W is an integer.  Each draw is 
+    /// independent and the outcomes have equal probabilities.
+    ///
+    /// Alice stops drawing numbers when she gets K or more points.  What is 
+    /// the probability that she has N or less points?
+    ///
+    /// Example 1:
+    ///
+    /// Input: N = 10, K = 1, W = 10
+    /// Output: 1.00000
+    /// Explanation:  Alice gets a single card, then stops.
+    ///
+    /// Example 2:
+    ///
+    /// Input: N = 6, K = 1, W = 10
+    /// Output: 0.60000
+    /// Explanation:  Alice gets a single card, then stops.
+    /// In 6 out of W = 10 possibilities, she is at or below N = 6 points.
+    /// Example 3:
+    ///
+    /// Input: N = 21, K = 17, W = 10
+    /// Output: 0.73278
+    /// Note:
+    ///
+    /// 1. 0 <= K <= N <= 10000
+    /// 2. 1 <= W <= 10000
+    /// 3. Answers will be accepted as correct if they are within 10^-5 of 
+    ///    the correct answer.
+    /// 4. The judging time limit has been reduced for this question.
+    /// </summary>
+    double new21Game(int N, int K, int W);
 
-	/// <summary>
-	/// Leet code #880. Decoded String at Index
-	/// 
-	/// An encoded string S is given.  To find and write the decoded string to a 
-	/// tape, the encoded string is read one character at a time and the following 
-	/// steps are taken:
-	///
-	/// If the character read is a letter, that letter is written onto the tape.
-	/// If the character read is a digit (say d), the entire current tape is 
-	/// repeatedly written d-1 more times in total.
-	/// Now for some encoded string S, and an index K, find and return the K-th 
-	/// letter (1 indexed) in the decoded string.
-	///
-	/// Example 1:
-	/// Input: S = "leet2code3", K = 10
-	/// Output: "o"
-	/// Explanation: 
-	/// The decoded string is "leetleetcodeleetleetcodeleetleetcode".
-	/// The 10th letter in the string is "o".
-	///
-	/// Example 2:
-	/// Input: S = "ha22", K = 5
-	/// Output: "h"
-	/// Explanation: 
-	/// The decoded string is "hahahaha".  The 5th letter is "h".
-	///
-	/// Example 3:
-	/// Input: S = "a2345678999999999999999", K = 1
-	/// Output: "a"
-	/// Explanation: 
-	/// The decoded string is "a" repeated 8301530446056247680 times.  The 1st 
-	/// letter is "a".
-	/// 
-	/// Note:
-	/// 1. 2 <= S.length <= 100
-	/// 2. S will only contain lowercase letters and digits 2 through 9.
-	/// 3. S starts with a letter.
-	/// 4. 1 <= K <= 10^9
-	/// 5. The decoded string is guaranteed to have less than 2^63 letters.
-	/// </summary>
-	string decodeAtIndex(string S, int K);
+    /// <summary>
+    /// Leet code #873. Length of Longest Fibonacci Subsequence
+    /// 
+    /// A sequence X_1, X_2, ..., X_n is fibonacci-like if:
+    ///
+    /// n >= 3
+    /// X_i + X_{i+1} = X_{i+2} for all i + 2 <= n
+    /// Given a strictly increasing array A of positive integers forming a 
+    /// sequence, find the length of the longest fibonacci-like subsequence 
+    /// of A.  If one does not exist, return 0.
+    ///
+    /// (Recall that a subsequence is derived from another sequence A by 
+    /// deleting any number of elements (including none) from A, without 
+    /// changing the order of the remaining elements.  For example, 
+    /// [3, 5, 8] is a subsequence of [3, 4, 5, 6, 7, 8].)
+    /// 
+    /// Example 1:
+    /// Input: [1,2,3,4,5,6,7,8]
+    /// Output: 5
+    /// Explanation:
+    /// The longest subsequence that is fibonacci-like: [1,2,3,5,8].
+    ///
+    /// Example 2:
+    /// Input: [1,3,7,11,12,14,18]
+    /// Output: 3
+    /// Explanation:
+    /// The longest subsequence that is fibonacci-like:
+    /// [1,11,12], [3,11,14] or [7,11,18].
+    ///
+    /// Note:
+    /// 
+    /// 1. 3 <= A.length <= 1000
+    /// 2. 1 <= A[0] < A[1] < ... < A[A.length - 1] <= 10^9	/// </summary>
+    /// </summary>
+    int lenLongestFibSubseq(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #898. Bitwise ORs of Subarrays 
-	/// 
-	/// We have an array A of non-negative integers.
-	///
-	/// For every (contiguous) subarray B = [A[i], A[i+1], ..., A[j]] 
-	/// (with i <= j), we take the bitwise OR of all the elements in B, 
-	/// obtaining a result A[i] | A[i+1] | ... | A[j].
-	///
-	/// Return the number of possible results.  (Results that occur more 
-	/// than once are only counted once in the final answer.)
-	///
-	/// Example 1:
-	///
-	/// Input: [0]
-	/// Output: 1
-	/// Explanation: 
-	/// There is only one possible result: 0.
-	/// Example 2:
-	///
-	/// Input: [1,1,2]
-	/// Output: 3
-	/// Explanation: 
-	/// The possible subarrays are [1], [1], [2], [1, 1], [1, 2], [1, 1, 2].
-	/// These yield the results 1, 1, 2, 1, 3, 3.
-	/// There are 3 unique values, so the answer is 3.
-	/// Example 3:
-	///
-	/// Input: [1,2,4]
-	/// Output: 6
-	/// Explanation: 
-	/// The possible results are 1, 2, 3, 4, 6, and 7.
-	///  
-	/// Note:
-	/// 
-	/// 1. 1 <= A.length <= 50000
-	/// 2. 0 <= A[i] <= 10^9
-	/// </summary>
-	int subarrayBitwiseORs(vector<int>& A);
+    /// <summary>
+    /// Leet code #877. Stone Game
+    /// 
+    /// Alex and Lee play a game with piles of stones.  There are an even 
+    /// number of piles arranged in a row, and each pile has a positive 
+    /// integer number of stones piles[i].
+    ///
+    /// The objective of the game is to end with the most stones.  The 
+    /// total number of stones is odd, so there are no ties.
+    ///
+    /// Alex and Lee take turns, with Alex starting first.  Each turn, 
+    /// a player takes the entire pile of stones from either the beginning 
+    /// or the end of the row.  This continues until there are no more piles 
+    /// left, at which point the person with the most stones wins.
+    ///
+    /// Assuming Alex and Lee play optimally, return True if and only if Alex 
+    /// wins the game.
+    ///
+    /// Example 1:
+    /// Input: [5,3,4,5]
+    /// Output: true
+    /// Explanation: 
+    /// Alex starts first, and can only take the first 5 or the last 5.
+    /// Say he takes the first 5, so that the row becomes [3, 4, 5].
+    /// If Lee takes 3, then the board is [4, 5], and Alex takes 5 to win 
+    /// with 10 points.
+    /// If Lee takes the last 5, then the board is [3, 4], and Alex takes 4 
+    /// to win with 9 points.
+    /// This demonstrated that taking the first 5 was a winning move for 
+    /// Alex, so we return true.
+    /// 
+    /// Note:
+    /// 1. 2 <= piles.length <= 500
+    /// 2. piles.length is even.
+    /// 3. 1 <= piles[i] <= 500
+    /// 4. sum(piles) is odd.
+    /// </summary>
+    bool stoneGame(vector<int>& piles);
 
-	/// <summary>
-	/// Leet code #902. Numbers At Most N Given Digit Set 
-	/// 
-	/// We have a sorted set of digits D, a non-empty subset of 
-	/// {'1','2','3','4','5','6','7','8','9'}.  (Note that '0' is not included.)
-	/// Now, we write numbers using these digits, using each digit as many times 
-	/// as we want.  For example, if D = {'1','3','5'}, we may write numbers such 
-	/// as '13', '551', '1351315'.
-	///
-	/// Return the number of positive integers that can be written (using the 
-	/// digits of D) that are less than or equal to N.
-	///
-	/// Example 1:
-	/// Input: D = ["1","3","5","7"], N = 100
-	/// Output: 20
-	/// Explanation: 
-	/// The 20 numbers that can be written are:
-	/// 1, 3, 5, 7, 11, 13, 15, 17, 31, 33, 35, 37, 51, 53, 55, 57, 71, 73, 75, 77.
-	/// Example 2:
-	///
-	/// Input: D = ["1","4","9"], N = 1000000000
-	/// Output: 29523
-	/// Explanation: 
-	/// We can write 3 one digit numbers, 9 two digit numbers, 27 three digit 
-	/// numbers,
-	/// 81 four digit numbers, 243 five digit numbers, 729 six digit numbers,
-	/// 2187 seven digit numbers, 6561 eight digit numbers, and 19683 nine digit 
-	/// numbers.
-	/// In total, this is 29523 integers that can be written using the digits of D.
-	///
-	/// Note:
-	/// D is a subset of digits '1'-'9' in sorted order.
-	/// 1 <= N <= 10^9
-	/// </summary>
-	int atMostNGivenDigitSet(vector<string>& D, int N);
+    /// <summary>
+    /// Leet code #887. Super Egg Drop
+    /// 
+    /// You are given K eggs, and you have access to a building with N floors from 
+    /// 1 to N. 
+    ///
+    /// Each egg is identical in function, and if an egg breaks, you cannot drop 
+    /// it again.
+    ///
+    /// You know that there exists a floor F with 0 <= F <= N such that any egg 
+    /// dropped at a floor higher than F will break, and any egg dropped at or 
+    /// below floor F will not break.
+    ///
+    /// Each move, you may take an egg (if you have an unbroken one) and drop it 
+    /// from any floor X (with 1 <= X <= N). 
+    ///
+    /// Your goal is to know with certainty what the value of F is.
+    ///
+    /// What is the minimum number of moves that you need to know with certainty 
+    /// what F is, regardless of the initial value of F?
+    ///
+    /// Example 1:
+    ///
+    /// Input: K = 1, N = 2
+    /// Output: 2
+    /// Explanation: 
+    /// Drop the egg from floor 1.  If it breaks, we know with certainty that 
+    /// F = 0.
+    /// Otherwise, drop the egg from floor 2.  If it breaks, we know with 
+    /// certainty that F = 1.
+    /// If it didn't break, then we know with certainty F = 2.
+    /// Hence, we needed 2 moves in the worst case to know what F is with 
+    /// certainty.
+    ///
+    /// Example 2:
+    /// Input: K = 2, N = 6
+    /// Output: 3
+    ///
+    /// Example 3
+    /// Input: K = 3, N = 14
+    /// Output: 4
+    /// Note:
+    /// 1 <= K <= 100
+    /// 1 <= N <= 10000
+    /// </summary>
+    int superEggDrop(int K, int N);
 
-	/// <summary>
-	/// Leet code #903. Valid Permutations for DI Sequence
-	/// 
-	/// We are given S, a length n string of characters from the set {'D', 'I'}. 
-	/// (These letters stand for "decreasing" and "increasing".)
-	///
-	/// A valid permutation is a permutation P[0], P[1], ..., P[n] of integers 
-	/// {0, 1, ..., n}, such that for all i:
-	///
-	/// If S[i] == 'D', then P[i] > P[i+1], and;
-	/// If S[i] == 'I', then P[i] < P[i+1].
-	/// How many valid permutations are there?  Since the answer may be large, 
-	/// return your answer modulo 10^9 + 7.
-	///
-	/// Example 1:
-	/// Input: "DID"
-	/// Output: 5
-	/// Explanation: 
-	/// The 5 valid permutations of (0, 1, 2, 3) are:
-	/// (1, 0, 3, 2)
-	/// (2, 0, 3, 1)
-	/// (2, 1, 3, 0)
-	/// (3, 0, 2, 1)
-	/// (3, 1, 2, 0)
-	/// 
-	/// Note:
-	/// 1. 1 <= S.length <= 200
-	/// 2. S consists only of characters from the set {'D', 'I'}.
-	/// </summary>
-	int numPermsDISequence(string S);
+    /// <summary>
+    /// Leet code #880. Decoded String at Index
+    /// 
+    /// An encoded string S is given.  To find and write the decoded string to a 
+    /// tape, the encoded string is read one character at a time and the following 
+    /// steps are taken:
+    ///
+    /// If the character read is a letter, that letter is written onto the tape.
+    /// If the character read is a digit (say d), the entire current tape is 
+    /// repeatedly written d-1 more times in total.
+    /// Now for some encoded string S, and an index K, find and return the K-th 
+    /// letter (1 indexed) in the decoded string.
+    ///
+    /// Example 1:
+    /// Input: S = "leet2code3", K = 10
+    /// Output: "o"
+    /// Explanation: 
+    /// The decoded string is "leetleetcodeleetleetcodeleetleetcode".
+    /// The 10th letter in the string is "o".
+    ///
+    /// Example 2:
+    /// Input: S = "ha22", K = 5
+    /// Output: "h"
+    /// Explanation: 
+    /// The decoded string is "hahahaha".  The 5th letter is "h".
+    ///
+    /// Example 3:
+    /// Input: S = "a2345678999999999999999", K = 1
+    /// Output: "a"
+    /// Explanation: 
+    /// The decoded string is "a" repeated 8301530446056247680 times.  The 1st 
+    /// letter is "a".
+    /// 
+    /// Note:
+    /// 1. 2 <= S.length <= 100
+    /// 2. S will only contain lowercase letters and digits 2 through 9.
+    /// 3. S starts with a letter.
+    /// 4. 1 <= K <= 10^9
+    /// 5. The decoded string is guaranteed to have less than 2^63 letters.
+    /// </summary>
+    string decodeAtIndex(string S, int K);
 
-	/// <summary>
-	/// Leet code #931. Minimum Falling Path Sum
-	/// 
-	/// Given a square array of integers A, we want the minimum sum of a falling 
-	/// path through A.
-	///
-	/// A falling path starts at any element in the first row, and chooses one 
-	/// element from each row.  The next row's choice must be in a column that is 
-	/// different from the previous row's column by at most one.
-	/// 
-	/// Example 1:
-	///
-	/// Input: [[1,2,3],[4,5,6],[7,8,9]]
-	/// Output: 12
-	/// Explanation: 
-	/// The possible falling paths are:
-	/// [1,4,7], [1,4,8], [1,5,7], [1,5,8], [1,5,9]
-	/// [2,4,7], [2,4,8], [2,5,7], [2,5,8], [2,5,9], [2,6,8], [2,6,9]
-	/// [3,5,7], [3,5,8], [3,5,9], [3,6,8], [3,6,9]
-	/// The falling path with the smallest sum is [1,4,7], so the answer is 12.
-	///
-	/// Note:
-	/// 1. 1 <= A.length == A[0].length <= 100
-	/// 2. -100 <= A[i][j] <= 100
-	/// </summary>
-	int minFallingPathSum(vector<vector<int>>& A);
+    /// <summary>
+    /// Leet code #898. Bitwise ORs of Subarrays 
+    /// 
+    /// We have an array A of non-negative integers.
+    ///
+    /// For every (contiguous) subarray B = [A[i], A[i+1], ..., A[j]] 
+    /// (with i <= j), we take the bitwise OR of all the elements in B, 
+    /// obtaining a result A[i] | A[i+1] | ... | A[j].
+    ///
+    /// Return the number of possible results.  (Results that occur more 
+    /// than once are only counted once in the final answer.)
+    ///
+    /// Example 1:
+    ///
+    /// Input: [0]
+    /// Output: 1
+    /// Explanation: 
+    /// There is only one possible result: 0.
+    /// Example 2:
+    ///
+    /// Input: [1,1,2]
+    /// Output: 3
+    /// Explanation: 
+    /// The possible subarrays are [1], [1], [2], [1, 1], [1, 2], [1, 1, 2].
+    /// These yield the results 1, 1, 2, 1, 3, 3.
+    /// There are 3 unique values, so the answer is 3.
+    /// Example 3:
+    ///
+    /// Input: [1,2,4]
+    /// Output: 6
+    /// Explanation: 
+    /// The possible results are 1, 2, 3, 4, 6, and 7.
+    ///  
+    /// Note:
+    /// 
+    /// 1. 1 <= A.length <= 50000
+    /// 2. 0 <= A[i] <= 10^9
+    /// </summary>
+    int subarrayBitwiseORs(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #935. Knight Dialer
-	/// 
-	/// A chess knight can move as indicated in the chess diagram below:
-	///
-	/// This time, we place our chess knight on any numbered key of a phone pad 
-	/// (indicated above), and the knight makes N-1 hops.  Each hop must be from 
-	/// one key to another numbered key.
-	///
-	/// Each time it lands on a key (including the initial placement of the 
-	/// knight), it presses the number of that key, pressing N digits total.
-	///
-	/// How many distinct numbers can you dial in this manner?
-	///
-	/// Since the answer may be large, output the answer modulo 10^9 + 7.
-	///
-	/// Example 1:
-	/// Input: 1
-	/// Output: 10
-	///
-	/// Example 2:
-	/// Input: 2
-	/// Output: 20
-	///
-	/// Example 3:
-	/// Input: 3
-	/// Output: 46
-	/// Note:
-	/// 
-	/// 1 <= N <= 5000
-	/// </summary>
-	int knightDialer(int N);
+    /// <summary>
+    /// Leet code #902. Numbers At Most N Given Digit Set 
+    /// 
+    /// We have a sorted set of digits D, a non-empty subset of 
+    /// {'1','2','3','4','5','6','7','8','9'}.  (Note that '0' is not included.)
+    /// Now, we write numbers using these digits, using each digit as many times 
+    /// as we want.  For example, if D = {'1','3','5'}, we may write numbers such 
+    /// as '13', '551', '1351315'.
+    ///
+    /// Return the number of positive integers that can be written (using the 
+    /// digits of D) that are less than or equal to N.
+    ///
+    /// Example 1:
+    /// Input: D = ["1","3","5","7"], N = 100
+    /// Output: 20
+    /// Explanation: 
+    /// The 20 numbers that can be written are:
+    /// 1, 3, 5, 7, 11, 13, 15, 17, 31, 33, 35, 37, 51, 53, 55, 57, 71, 73, 75, 77.
+    /// Example 2:
+    ///
+    /// Input: D = ["1","4","9"], N = 1000000000
+    /// Output: 29523
+    /// Explanation: 
+    /// We can write 3 one digit numbers, 9 two digit numbers, 27 three digit 
+    /// numbers,
+    /// 81 four digit numbers, 243 five digit numbers, 729 six digit numbers,
+    /// 2187 seven digit numbers, 6561 eight digit numbers, and 19683 nine digit 
+    /// numbers.
+    /// In total, this is 29523 integers that can be written using the digits of D.
+    ///
+    /// Note:
+    /// D is a subset of digits '1'-'9' in sorted order.
+    /// 1 <= N <= 10^9
+    /// </summary>
+    int atMostNGivenDigitSet(vector<string>& D, int N);
 
-	/// <summary>
-	/// Leet code #940. Distinct Subsequences II
-	/// 
-	/// Given a string S, count the number of distinct, non-empty subsequences of 
-	/// S.
-	///
-	/// Since the result may be large, return the answer modulo 10^9 + 7.
-	///
-	/// Example 1:
-	/// Input: "abc"
-	/// Output: 7
-	/// Explanation: The 7 distinct subsequences are "a", "b", "c", "ab", "ac", 
-	/// "bc", and "abc".
-	///
-	/// Example 2:
-	/// Input: "aba"
-	/// Output: 6
-	/// Explanation: The 6 distinct subsequences are "a", "b", "ab", "ba", "aa" 
-	/// and "aba".
-	///
-	/// Example 3:
-	/// 
-	/// Input: "aaa"
-	/// Output: 3
-	/// Explanation: The 3 distinct subsequences are "a", "aa" and "aaa".
-	///  
-	/// Note:
-	///
-	/// 1. S contains only lowercase letters.
-	/// 2. 1 <= S.length <= 2000
-	/// </summary>
-	int distinctSubseqII(string S);
+    /// <summary>
+    /// Leet code #903. Valid Permutations for DI Sequence
+    /// 
+    /// We are given S, a length n string of characters from the set {'D', 'I'}. 
+    /// (These letters stand for "decreasing" and "increasing".)
+    ///
+    /// A valid permutation is a permutation P[0], P[1], ..., P[n] of integers 
+    /// {0, 1, ..., n}, such that for all i:
+    ///
+    /// If S[i] == 'D', then P[i] > P[i+1], and;
+    /// If S[i] == 'I', then P[i] < P[i+1].
+    /// How many valid permutations are there?  Since the answer may be large, 
+    /// return your answer modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: "DID"
+    /// Output: 5
+    /// Explanation: 
+    /// The 5 valid permutations of (0, 1, 2, 3) are:
+    /// (1, 0, 3, 2)
+    /// (2, 0, 3, 1)
+    /// (2, 1, 3, 0)
+    /// (3, 0, 2, 1)
+    /// (3, 1, 2, 0)
+    /// 
+    /// Note:
+    /// 1. 1 <= S.length <= 200
+    /// 2. S consists only of characters from the set {'D', 'I'}.
+    /// </summary>
+    int numPermsDISequence(string S);
 
-	/// <summary>
-	/// Leet code #956. Tallest Billboard
-	/// 
-	/// You are installing a billboard and want it to have the largest height.
-	/// The billboard will have two steel supports, one on each side.  
-	/// Each steel support must be an equal height.
-	/// You have a collection of rods which can be welded together.  
-	/// For example, if you have rods of lengths 1, 2, and 3, you can weld 
-	/// them together to make a support of length 6.
-	///
-	/// Return the largest possible height of your billboard installation.  
-	/// If you cannot support the billboard, return 0.
-	///
-	/// 
-	/// Example 1:
-	/// Input: [1,2,3,6]
-	/// Output: 6
-	/// Explanation: We have two disjoint subsets {1,2,3} and {6}, which have 
-	/// the same sum = 6.
-	///
-	/// Example 2:
-	/// Input: [1,2,3,4,5,6]
-	/// Output: 10
-	/// Explanation: We have two disjoint subsets {2,3,5} and {4,6}, which 
-	/// have the same sum = 10.
-	///
-	/// Example 3:
-	/// Input: [1,2]
-	/// Output: 0
-	/// Explanation: The billboard cannot be supported, so we return 0.
-	///
-	/// Note:
-	/// 1. 0 <= rods.length <= 20
-	/// 2. 1 <= rods[i] <= 1000
-	/// 3. The sum of rods is at most 5000.
-	/// </summary>
-	int tallestBillboard(vector<int>& rods);
+    /// <summary>
+    /// Leet code #931. Minimum Falling Path Sum
+    /// 
+    /// Given a square array of integers A, we want the minimum sum of a falling 
+    /// path through A.
+    ///
+    /// A falling path starts at any element in the first row, and chooses one 
+    /// element from each row.  The next row's choice must be in a column that is 
+    /// different from the previous row's column by at most one.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: [[1,2,3],[4,5,6],[7,8,9]]
+    /// Output: 12
+    /// Explanation: 
+    /// The possible falling paths are:
+    /// [1,4,7], [1,4,8], [1,5,7], [1,5,8], [1,5,9]
+    /// [2,4,7], [2,4,8], [2,5,7], [2,5,8], [2,5,9], [2,6,8], [2,6,9]
+    /// [3,5,7], [3,5,8], [3,5,9], [3,6,8], [3,6,9]
+    /// The falling path with the smallest sum is [1,4,7], so the answer is 12.
+    ///
+    /// Note:
+    /// 1. 1 <= A.length == A[0].length <= 100
+    /// 2. -100 <= A[i][j] <= 100
+    /// </summary>
+    int minFallingPathSum(vector<vector<int>>& A);
+
+    /// <summary>
+    /// Leet code #935. Knight Dialer
+    /// 
+    /// A chess knight can move as indicated in the chess diagram below:
+    ///
+    /// This time, we place our chess knight on any numbered key of a phone pad 
+    /// (indicated above), and the knight makes N-1 hops.  Each hop must be from 
+    /// one key to another numbered key.
+    ///
+    /// Each time it lands on a key (including the initial placement of the 
+    /// knight), it presses the number of that key, pressing N digits total.
+    ///
+    /// How many distinct numbers can you dial in this manner?
+    ///
+    /// Since the answer may be large, output the answer modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: 1
+    /// Output: 10
+    ///
+    /// Example 2:
+    /// Input: 2
+    /// Output: 20
+    ///
+    /// Example 3:
+    /// Input: 3
+    /// Output: 46
+    /// Note:
+    /// 
+    /// 1 <= N <= 5000
+    /// </summary>
+    int knightDialer(int N);
+
+    /// <summary>
+    /// Leet code #940. Distinct Subsequences II
+    /// 
+    /// Given a string S, count the number of distinct, non-empty subsequences of 
+    /// S.
+    ///
+    /// Since the result may be large, return the answer modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: "abc"
+    /// Output: 7
+    /// Explanation: The 7 distinct subsequences are "a", "b", "c", "ab", "ac", 
+    /// "bc", and "abc".
+    ///
+    /// Example 2:
+    /// Input: "aba"
+    /// Output: 6
+    /// Explanation: The 6 distinct subsequences are "a", "b", "ab", "ba", "aa" 
+    /// and "aba".
+    ///
+    /// Example 3:
+    /// 
+    /// Input: "aaa"
+    /// Output: 3
+    /// Explanation: The 3 distinct subsequences are "a", "aa" and "aaa".
+    ///  
+    /// Note:
+    ///
+    /// 1. S contains only lowercase letters.
+    /// 2. 1 <= S.length <= 2000
+    /// </summary>
+    int distinctSubseqII(string S);
+
+    /// <summary>
+    /// Leet code #956. Tallest Billboard
+    /// 
+    /// You are installing a billboard and want it to have the largest height.
+    /// The billboard will have two steel supports, one on each side.  
+    /// Each steel support must be an equal height.
+    /// You have a collection of rods which can be welded together.  
+    /// For example, if you have rods of lengths 1, 2, and 3, you can weld 
+    /// them together to make a support of length 6.
+    ///
+    /// Return the largest possible height of your billboard installation.  
+    /// If you cannot support the billboard, return 0.
+    ///
+    /// 
+    /// Example 1:
+    /// Input: [1,2,3,6]
+    /// Output: 6
+    /// Explanation: We have two disjoint subsets {1,2,3} and {6}, which have 
+    /// the same sum = 6.
+    ///
+    /// Example 2:
+    /// Input: [1,2,3,4,5,6]
+    /// Output: 10
+    /// Explanation: We have two disjoint subsets {2,3,5} and {4,6}, which 
+    /// have the same sum = 10.
+    ///
+    /// Example 3:
+    /// Input: [1,2]
+    /// Output: 0
+    /// Explanation: The billboard cannot be supported, so we return 0.
+    ///
+    /// Note:
+    /// 1. 0 <= rods.length <= 20
+    /// 2. 1 <= rods[i] <= 1000
+    /// 3. The sum of rods is at most 5000.
+    /// </summary>
+    int tallestBillboard(vector<int>& rods);
 
     /// <summary>
     /// Leet code #960. Delete Columns to Make Sorted III
@@ -22271,260 +22244,6 @@ public:
 
 #pragma region BackTracking
     /// <summary>
-    /// Leet code #36. Valid Sudoku
-    /// Determine if a Sudoku is valid, according to : Sudoku Puzzles - The Rules.
-    /// The Sudoku board could be partially filled, where empty cells are filled with the character '.'.
-    /// </summary>
-    bool isValidSudoku(vector<vector<char>>&  board);
-
-    /// <summary>
-    /// Leet code #37. Sudoku Solver
-    /// </summary>
-    bool solveSudoku(
-        vector<vector<char>>&  board, vector<vector<int>> &row_visited, 
-        vector<vector<int>> &col_visited, vector<vector<int>> &square_visited, 
-        int x, int y);
-
-    /// <summary>
-    /// Leet code #37. Sudoku Solver
-    /// Write a program to solve a Sudoku puzzle by filling the empty cells.
-    /// Empty cells are indicated by the character '.'.
-    /// You may assume that there will be only one unique solution.
-    /// For example, the input is
-    ///   53..7....
-    ///   6..195...
-    ///   .98....6.
-    ///   8...6...3
-    ///   4..8.3..1
-    ///   7...2...6
-    ///   .6....28.
-    ///   ...419..5
-    ///   ....8..79
-    /// The output is:
-    ///   534678912
-    ///   672195348
-    ///   198342567
-    ///   859761423
-    ///   426853791
-    ///   713924856
-    ///   961537284
-    ///   287419635
-    ///   345286179
-    /// </summary>
-    void solveSudoku(vector<vector<char>>&  board);
-
-    /// <summary>
-    /// Leet code # 51. N-Queens 
-    /// 
-    /// The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other. 
-    /// Given an integer n, return all distinct solutions to the n-queens puzzle.
-    ///	
-    /// Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' 
-    /// both indicate a queen and an empty space respectively. 
-    /// For example,
-    /// There exist two distinct solutions to the 4-queens puzzle:
-    /// [
-    ///   [".Q..",  // Solution 1
-    ///    "...Q",
-    ///    "Q...",
-    ///    "..Q."],
-    ///
-    ///   ["..Q.",  // Solution 2
-    ///    "Q...",
-    ///    "...Q",
-    ///    ".Q.."]
-    /// ]	
-    /// </summary>
-    vector<vector<string>> solveNQueensII(int n);
-
-    /// <summary>
-    /// Leet code # 51. N-Queens 
-    /// </summary>
-    void solveNQueens(vector<string> &board, int row, vector<int> &columns, 
-        vector<int>&diag, vector<vector<string>> &result);                                        
-
-    /// <summary>
-    /// Leet code # 51. N-Queens 
-    /// 
-    /// The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other. 
-    /// Given an integer n, return all distinct solutions to the n-queens puzzle.
-    ///	
-    /// Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' 
-    /// both indicate a queen and an empty space respectively. 
-    /// For example,
-    /// There exist two distinct solutions to the 4-queens puzzle:
-    /// [
-    ///   [".Q..",  // Solution 1
-    ///    "...Q",
-    ///    "Q...",
-    ///    "..Q."],
-    ///
-    ///   ["..Q.",  // Solution 2
-    ///    "Q...",
-    ///    "...Q",
-    ///    ".Q.."]
-    /// ]	
-    /// </summary>
-    vector<vector<string>> solveNQueens(int n);
-
-    /// <summary>
-    /// Leet code # 52. N-Queens II 
-    /// </summary>
-    void totalNQueens(int n, int row, vector<int> &columns, vector<int>&diag, int &count);
-
-    /// <summary>
-    /// Leet code # 52. N-Queens II 
-    /// 
-    /// Follow up for N-Queens problem. 
-    /// Now, instead outputting board configurations, return the total number of distinct solutions.
-    /// </summary>
-    int totalNQueens(int n);
-
-    /// <summary>
-    /// Leet code #22. Generate Parentheses 
-    /// </summary>
-    void generateParenthesis(string &path, int n, int left, int right, vector<string> &result);
-
-    /// <summary>
-    /// Leet code #22. Generate Parentheses 
-    /// Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses. 
-    /// For example, given n = 3, a solution set is: 
-    /// [
-    ///   "((()))",
-    ///   "(()())",
-    ///   "(())()",
-    ///   "()(())",
-    ///   "()()()"
-    /// ]
-    /// </summary>
-    vector<string> generateParenthesis(int n);
-
-    /// <summary>
-    /// Leet code #17. Letter Combinations of a Phone Number 
-    /// </summary>
-    void letterCombinations(string& digits, string& path, vector<string> &result);
-
-    /// <summary>
-    /// Leet code #17. Letter Combinations of a Phone Number 
-    /// A mapping of digit to letters (just like on the telephone buttons) is given below.
-    /// Input:Digit string "23"
-    /// Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
-    /// Note:
-    /// Although the above answer is in lexicographical order, your answer could be in any order you want. 
-    /// </summary>
-    vector<string> letterCombinations(string digits);
-
-    /// <summary>
-    /// Leet code #39. Combination Sum
-    /// </summary>
-    void combinationSum(vector<int>& candidates, int target, int index, vector<int>& path, 
-        vector<vector<int>>&result);
-
-    /// <summary>
-    /// Leet code #39. Combination Sum
-    /// Given a set of candidate numbers (C) and a target number (T), 
-    /// find all unique combinations in C where the candidate numbers sums to T. 
-    /// The same repeated number may be chosen from C unlimited number of times. 
-    /// Note:
-    /// All numbers (including target) will be positive integers.
-    /// The solution set must not contain duplicate combinations.
-    /// For example, given candidate set [2, 3, 6, 7] and target 7, 
-    /// A solution set is: 
-    /// [
-    ///   [7],
-    ///   [2, 2, 3]
-    /// ]
-    /// </summary>
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target);
-
-    /// <summary>
-    /// Leet code #40. Combination Sum II
-    /// </summary>
-    void combinationSum2(vector<int>& candidates, int target, int index, vector<int>& path,
-        vector<vector<int>>&result);
-
-    /// <summary>
-    /// Leet code #40. Combination Sum II 
-    /// Given a collection of candidate numbers (C) and a target number (T), find all unique combinations in C where the candidate numbers sums to T. 
-    /// Each number in C may only be used once in the combination. 
-    /// Note:
-    /// All numbers (including target) will be positive integers.
-    /// The solution set must not contain duplicate combinations.
-    /// For example, given candidate set [10, 1, 2, 7, 6, 1, 5] and target 8, 
-    /// A solution set is: 
-    /// [
-    ///   [1, 7],
-    ///   [1, 2, 5],
-    ///   [2, 6],
-    ///   [1, 1, 6]
-    /// ]
-    /// </summary>
-    vector<vector<int>> combinationSum2(vector<int>& candidates, int target);
-
-    /// <summary>
-    /// Leet code #77. Combinations
-    /// </summary>
-    void combine(int n, int k, vector<int>& path, vector<vector<int>>&result);
-
-    /// <summary>
-    /// Leet code #77. Combinations 
-    /// Given two integers n and k, return all possible combinations of k numbers out of 1 ... n. 
-    /// For example,
-    /// If n = 4 and k = 2, a solution is: 
-    /// [
-    ///  [2,4],
-    ///  [3,4],
-    ///  [2,3],
-    ///  [1,2],
-    ///  [1,3],
-    ///  [1,4],
-    /// ]
-    /// </summary>
-    vector<vector<int>> combine(int n, int k);
-
-    /// <summary>
-    /// Leet code #46. Permutations 
-    /// </summary>
-    void permute(vector<int>& nums, vector<int>&path, 
-        vector<int>&visited, vector<vector<int>> &result);
-
-
-    /// <summary>
-    /// Leet code #46. Permutations 
-    /// Given a collection of distinct numbers, return all possible permutations. 
-    /// For example,
-    /// [1,2,3] have the following permutations:
-    /// [
-    ///   [1,2,3],
-    ///   [1,3,2],
-    ///   [2,1,3],
-    ///   [2,3,1],
-    ///   [3,1,2],
-    ///   [3,2,1]
-    /// ]
-    /// </summary>
-    vector<vector<int>> permute(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #47. Permutations II 
-    /// </summary>
-    void permuteUnique(vector<int>& nums, vector<int>&path,
-        vector<int>&visited, vector<vector<int>> &result);
-
-    /// <summary>
-    /// Leet code #47. Permutations II 
-    /// Given a collection of numbers that might contain duplicates, return all possible unique permutations. 
-    /// For example,
-    /// [1,1,2] have the following unique permutations:
-    /// [
-    ///   [1,1,2],
-    ///   [1,2,1],
-    ///   [2,1,1]
-    /// ]
-    /// </summary>
-    vector<vector<int>> permuteUnique(vector<int>& nums);
-
-    /// <summary>
     /// Leet code #401. Binary Watch  
     /// </summary> 
     void readBinaryWatch(int num, vector<int>&path, int sum, vector<string> &result);
@@ -22562,84 +22281,21 @@ public:
     vector<string> readBinaryWatchII(int num);
 
     /// <summary>
-    /// Leet code #78. Subsets
+    /// Leet code #212. Word Search II
     /// </summary>
-    void subsets(vector<int>& nums, int index, vector<int>& path, vector<vector<int>> &result);
-    
-    /// <summary>
-    /// Leet code #78. Subsets
-    /// Given a set of distinct integers, nums, return all possible subsets.  
-    /// Note: The solution set must not contain duplicate subsets. 
-    ///	For example,
-    /// If nums = [1,2,3], a solution is: 
-    /// [
-    ///  [3],
-    ///  [1],
-    ///  [2],
-    ///  [1,2,3],
-    ///  [1,3],
-    ///  [2,3],
-    ///  [1,2],
-    ///  []
-    /// ]
-    /// </summary>
-    vector<vector<int>> subsets(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #90. Subsets II
-    /// </summary>
-    void subsetsWithDup(vector<int>& nums, int index, vector<int>& path, vector<vector<int>> &result);
-
-    /// <summary>
-    /// Leet code #90. Subsets II
-    /// Given a collection of integers that might contain duplicates, nums, return all possible subsets.  
-    /// Note: The solution set must not contain duplicate subsets. 
-    ///	For example,
-    /// If nums = [1,2,2], a solution is: 
-    /// [
-    ///  [2],
-    ///  [1],
-    ///  [1,2,2],
-    ///  [2,2],
-    ///  [1,2],
-    ///  []
-    /// ] 
-    /// </summary>
-    vector<vector<int>> subsetsWithDup(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #79. Word Search
-    /// </summary>
-    bool wordSearch(vector<vector<char>>& board, vector<vector<bool>>& flag, string word, int x, int y, int pos);
-
-    /// <summary>
-    /// Leet code #79. Word Search  
-    /// Given a 2D board and a word, find if the word exists in the grid. 
-    /// The word can be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those 
-    /// horizontally or vertically neighboring. The same letter cell may not be used more than once. 
-    /// For example,
-    /// Given board = 
-    /// [
-    ///   ['A','B','C','E'],
-    ///   ['S','F','C','S'],
-    ///   ['A','D','E','E']
-    /// ]
-    /// word = "ABCCED", -> returns true,
-    /// word = "SEE", -> returns true,
-    /// word = "ABCB", -> returns false.	
-    /// </summary>
-    bool wordSearch(vector<vector<char>>& board, string word);
+    void wordSearch(vector<vector<char>>& board, TrieNode * trie_node, 
+        int x, int y, vector<string> &word_list);
 
     /// <summary>
     /// Leet code #212. Word Search II
-    /// </summary>
-    void wordSearch(vector<vector<char>>& board, TrieNode * trie_node, int x, int y, vector<string> &word_list);
-
-    /// <summary>
-    /// Leet code #212. Word Search II  
-    /// Given a 2D board and a list of words from the dictionary, find all words in the board. 
-    /// Each word must be constructed from letters of sequentially adjacent cell, where "adjacent" cells are 
-    /// those horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.  
+    ///
+    /// Given a 2D board and a list of words from the dictionary, find all 
+    /// words in the board. 
+    /// Each word must be constructed from letters of sequentially adjacent 
+    /// cell, where "adjacent" cells are those horizontally or vertically 
+    /// neighboring.
+    /// The same letter cell may not be used more than once in a word.  
+    ///
     /// For example,
     /// Given words = ["oath","pea","eat","rain"] and board = 
     /// [
@@ -22735,38 +22391,6 @@ public:
     /// Return 1 since the palindrome partitioning ["aa","b"] could be produced using 1 cut. 
     /// </summary>
     int minCutPalindrome(string s);
-
-    /// <summary>
-    /// Leet code #464. Can I Win
-    /// </summary>
-    bool canIWin(string signature, int desiredTotal, unordered_map<string, bool> &game_map);
-
-    /// <summary>
-    /// Leet code #464. Can I Win
-    ///
-    /// In the "100 game," two players take turns adding, to a running total, any integer from 1..10. 
-    /// The player who first causes the running total to reach or exceed 100 wins. 
-    /// What if we change the game so that players cannot re-use integers? 
-    /// For example, two players might take turns drawing from a common pool of numbers 
-    /// of 1..15 without replacement until they reach a total >= 100.
-    /// Given an integer maxChoosableInteger and another integer desiredTotal, determine 
-    /// if the first player to move can force a win, assuming both players play optimally. 
-    /// You can always assume that maxChoosableInteger will not be larger than 20 and 
-    /// desiredTotal will not be larger than 300. 
-    /// Example 
-    /// Input:
-    /// maxChoosableInteger = 10
-    /// desiredTotal = 11
-    /// Output:
-    /// false
-    /// Explanation:
-    /// No matter which integer the first player choose, the first player will lose.
-    /// The first player can choose an integer from 1 up to 10.
-    /// If the first player choose 1, the second player can only choose integers from 2 up to 10.
-    /// The second player will win by choosing 10 and get a total = 11, which is >= desiredTotal.
-    /// Same with other integers chosen by the first player, the second player will always win.
-    /// </summary>
-    bool canIWin(int maxChoosableInteger, int desiredTotal);
 
     /// <summary>
     /// Leet code #416. Partition Equal Subset Sum 
@@ -22928,17 +22552,17 @@ public:
     vector<string> generateAbbreviationsII(string word);
 
     /// <summary>
-    /// Leet code #411. Minimum Unique Word Abbreviation         
+    /// Leet code #411. Minimum Unique Word Abbreviation  
     /// </summary>
     void getAbbrBits(int index, int digits, int target_digits, string &abbr_bits, vector<string> &result);
 
     /// <summary>
-    /// Leet code #411. Minimum Unique Word Abbreviation         
+    /// Leet code #411. Minimum Unique Word Abbreviation  
     /// </summary>
     string getAbbrWord(string word, string abbr_bits, int& length);
 
     /// <summary>
-    /// Leet code #411. Minimum Unique Word Abbreviation         
+    /// Leet code #411. Minimum Unique Word Abbreviation  
     /// 
     /// A string such as "word" contains the following abbreviations:
     /// ["word", "1ord", "w1rd", "wo1d", "wor1", "2rd", "w2d", "wo2", "1o1d", "1or1", "w1r1", "1o2", 
@@ -23066,12 +22690,12 @@ public:
     bool wordPatternMatch(string pattern, string str);
 
     /// <summary>
-    /// Leet code #491. Increasing Subsequences        
+    /// Leet code #491. Increasing Subsequences 
     /// </summary>
     void findSubsequences(vector<int>& nums, size_t start_index, vector<int> &sequence, vector<vector<int>> &result);
 
     /// <summary>
-    /// Leet code #491. Increasing Subsequences        
+    /// Leet code #491. Increasing Subsequences 
     /// 
     /// Given an integer array, your task is to find all the different possible increasing subsequences of the given 
     /// array, and the length of an increasing subsequence should be at least 2 . 
@@ -23332,41 +22956,6 @@ public:
     /// Given m = 1, n = 1, return 9. 
     /// </summary>
     int numberOfPatterns(int m, int n);
-
-    /// <summary>
-    /// Leet code #526. Beautiful Arrangement
-    /// </summary>
-    int countArrangement(int N, int index, string&visited, unordered_map<string, int>& cache);
-
-    /// <summary>
-    /// Leet code #526. Beautiful Arrangement
-    ///
-    /// Suppose you have N integers from 1 to N. We define a beautiful 
-    /// arrangement as an array that is constructed by these N numbers 
-    /// successfully if one of the following is true for the ith position 
-    /// (1 ≤ i ≤ N) in this array: 
-    /// 1.The number at the ith position is divisible by i.
-    /// 2.i is divisible by the number at the ith position.
-    ///
-    /// Now given N, how many beautiful arrangements can you construct? 
-    ///
-    /// Example 1:
-    /// 
-    /// Input: 2
-    /// Output: 2
-    ///
-    /// Explanation: 
-    /// The first beautiful arrangement is [1, 2]:
-    /// Number at the 1st position (i=1) is 1, and 1 is divisible by i (i=1).
-    /// Number at the 2nd position (i=2) is 2, and 2 is divisible by i (i=2).
-    ///
-    /// The second beautiful arrangement is [2, 1]:
-    /// Number at the 1st position (i=1) is 2, and 2 is divisible by i (i=1).
-    /// Number at the 2nd position (i=2) is 1, and i (i=2) is divisible by 1.
-    /// Note:
-    /// 1.N is a positive integer and will not exceed 15.
-    /// </summary>
-    int countArrangement(int N);
 
     /// <summary>
     /// Generate tree based on id list.
@@ -23732,41 +23321,41 @@ public:
     /// </summary>
     string crackSafe(int n, int k);
 
-	/// <summary>
-	/// Leet code #756. Pyramid Transition Matrix
-	/// </summary>
-	void nextPyramidTop(string& bottom, string &top, unordered_map<char, unordered_map<char, set<char>>> &allowed_map);
-
-	/// <summary>
-	/// Leet code #756. Pyramid Transition Matrix
+    /// <summary>
+    /// Leet code #756. Pyramid Transition Matrix
     /// </summary>
-	bool buildPyramidTransition(string& bottom, unordered_map<char, unordered_map<char, set<char>>> &allowed_map);
+    void nextPyramidTop(string& bottom, string &top, unordered_map<char, unordered_map<char, set<char>>> &allowed_map);
 
-	/// <summary>
-	/// Leet code #756. Pyramid Transition Matrix
-	///
-	/// We are stacking blocks to form a pyramid. Each block has a color which 
-	/// is a one letter string, like 'Z'.
-	///
-	/// For every block of color 'C' we place not in the bottom row, we are 
-	/// placing it on top of a left block of color 'A' and right block of 
-	/// color 'B'. We are allowed to place the block there only if '(A, B, C)' 
-	/// is an allowed triple.
-	///
-	/// We start with a bottom row of bottom, represented as a single string. 
-	/// We also start with a list of allowed triples allowed. Each allowed 
-	/// triple is represented as a string of length 3.
-	///
-	/// Return true if we can build the pyramid all the way to the top, 
-	/// otherwise false.
-	///
-	/// Example 1:
-	/// Input: bottom = "XYZ", allowed = ["XYD", "YZE", "DEA", "FFF"]
-	/// Output: true
-	/// Explanation:
-	/// We can stack the pyramid like this:
-	///      A
-	///     / \
+    /// <summary>
+    /// Leet code #756. Pyramid Transition Matrix
+    /// </summary>
+    bool buildPyramidTransition(string& bottom, unordered_map<char, unordered_map<char, set<char>>> &allowed_map);
+
+    /// <summary>
+    /// Leet code #756. Pyramid Transition Matrix
+    ///
+    /// We are stacking blocks to form a pyramid. Each block has a color which 
+    /// is a one letter string, like 'Z'.
+    ///
+    /// For every block of color 'C' we place not in the bottom row, we are 
+    /// placing it on top of a left block of color 'A' and right block of 
+    /// color 'B'. We are allowed to place the block there only if '(A, B, C)' 
+    /// is an allowed triple.
+    ///
+    /// We start with a bottom row of bottom, represented as a single string. 
+    /// We also start with a list of allowed triples allowed. Each allowed 
+    /// triple is represented as a string of length 3.
+    ///
+    /// Return true if we can build the pyramid all the way to the top, 
+    /// otherwise false.
+    ///
+    /// Example 1:
+    /// Input: bottom = "XYZ", allowed = ["XYD", "YZE", "DEA", "FFF"]
+    /// Output: true
+    /// Explanation:
+    /// We can stack the pyramid like this:
+    ///      A
+    ///     / \
     ///    D   E
     ///   / \ / \
     ///  X   Y   Z
@@ -23786,194 +23375,194 @@ public:
     /// 3. Letters in all strings will be chosen from the set 
     ///    {'A', 'B', 'C', 'D', 'E', 'F', 'G'}.
     /// </summary>
-	bool pyramidTransition(string bottom, vector<string>& allowed);
+    bool pyramidTransition(string bottom, vector<string>& allowed);
 
-	/// <summary>
-	/// Leetcode #784. Letter Case Permutation
-	///
-	/// Given a string S, we can transform every letter individually to be 
-	/// lowercase or uppercase to create another string.  Return a list of 
-	/// all possible strings we could create.
-	///
-	/// Examples:
-	/// Input: S = "a1b2"
-	/// Output: ["a1b2", "a1B2", "A1b2", "A1B2"]
-	///
-	/// Input: S = "3z4"
-	/// Output: ["3z4", "3Z4"]
-	///
-	/// Input: S = "12345"
-	/// Output: ["12345"]
-	/// Note:
-	///
-	/// 1. S will be a string with length at most 12.
-	/// 2. S will consist only of letters or digits.
-	/// </summary>
-	vector<string> letterCasePermutation(string S);
-	
-	/// <summary>
-	/// Leet code #797. All Paths From Source to Target
-	/// </summary>
-	void allPathsSourceTarget(vector<vector<int>>& graph, vector<int> &path, unordered_set<int> &visited, vector<vector<int>>& result);
+    /// <summary>
+    /// Leetcode #784. Letter Case Permutation
+    ///
+    /// Given a string S, we can transform every letter individually to be 
+    /// lowercase or uppercase to create another string.  Return a list of 
+    /// all possible strings we could create.
+    ///
+    /// Examples:
+    /// Input: S = "a1b2"
+    /// Output: ["a1b2", "a1B2", "A1b2", "A1B2"]
+    ///
+    /// Input: S = "3z4"
+    /// Output: ["3z4", "3Z4"]
+    ///
+    /// Input: S = "12345"
+    /// Output: ["12345"]
+    /// Note:
+    ///
+    /// 1. S will be a string with length at most 12.
+    /// 2. S will consist only of letters or digits.
+    /// </summary>
+    vector<string> letterCasePermutation(string S);
+    
+    /// <summary>
+    /// Leet code #797. All Paths From Source to Target
+    /// </summary>
+    void allPathsSourceTarget(vector<vector<int>>& graph, vector<int> &path, unordered_set<int> &visited, vector<vector<int>>& result);
 
-	/// <summary>
-	/// Leet code #797. All Paths From Source to Target
-	/// 
-	/// Given a directed, acyclic graph of N nodes.  Find all possible paths 
-	/// from node 0 to node N-1, and return them in any order.
-	///
-	/// The graph is given as follows:  the nodes are 0, 1, ..., 
-	/// graph.length - 1.  graph[i] is a list of all nodes j for which the 
-	/// edge (i, j) exists.
-	///
-	/// Example:
-	/// Input: [[1,2], [3], [3], []] 
-	/// Output: [[0,1,3],[0,2,3]] 
-	/// Explanation: The graph looks like this:
-	/// 0--->1
-	/// |    |
-	/// v    v
-	/// 2--->3
-	/// There are two paths: 0 -> 1 -> 3 and 0 -> 2 -> 3.
-	/// Note:
-	///
-	/// 1. The number of nodes in the graph will be in the range [2, 15].
-	/// 2. You can print different paths in any order, but you should keep the 
-	///    order of nodes inside one path.
-	/// </summary>
-	vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph);
+    /// <summary>
+    /// Leet code #797. All Paths From Source to Target
+    /// 
+    /// Given a directed, acyclic graph of N nodes.  Find all possible paths 
+    /// from node 0 to node N-1, and return them in any order.
+    ///
+    /// The graph is given as follows:  the nodes are 0, 1, ..., 
+    /// graph.length - 1.  graph[i] is a list of all nodes j for which the 
+    /// edge (i, j) exists.
+    ///
+    /// Example:
+    /// Input: [[1,2], [3], [3], []] 
+    /// Output: [[0,1,3],[0,2,3]] 
+    /// Explanation: The graph looks like this:
+    /// 0--->1
+    /// |    |
+    /// v    v
+    /// 2--->3
+    /// There are two paths: 0 -> 1 -> 3 and 0 -> 2 -> 3.
+    /// Note:
+    ///
+    /// 1. The number of nodes in the graph will be in the range [2, 15].
+    /// 2. You can print different paths in any order, but you should keep the 
+    ///    order of nodes inside one path.
+    /// </summary>
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph);
 
-	/// <summary>
-	/// Leet code #856. Score of Parentheses
-	/// </summary>
-	int scoreOfParentheses(string S, int &index);
+    /// <summary>
+    /// Leet code #856. Score of Parentheses
+    /// </summary>
+    int scoreOfParentheses(string S, int &index);
 
-	/// <summary>
-	/// Leet code #856. Score of Parentheses
-	/// 
-	/// Given a balanced parentheses string S, compute the score of the 
-	/// string based on the following rule:
-	///
-	/// () has score 1
-	/// AB has score A + B, where A and B are balanced parentheses strings.
-	/// (A) has score 2 * A, where A is a balanced parentheses string.
-	/// 
-	/// Example 1:
-	///
-	/// Input: "()"
-	/// Output: 1
-	///
-	/// Example 2:
-	/// Input: "(())"
-	/// Output: 2
-	///
-	/// Example 3:
-	/// Input: "()()"
-	/// Output: 2
-	///
-	/// Example 4:
-	/// Input: "(()(()))"
-	/// Output: 6
-	///
-	/// Note:
-	/// 1. S is a balanced parentheses string, containing only ( and ).
-	/// 2. 2 <= S.length <= 50
-	/// </summary>
-	int scoreOfParentheses(string S);
+    /// <summary>
+    /// Leet code #856. Score of Parentheses
+    /// 
+    /// Given a balanced parentheses string S, compute the score of the 
+    /// string based on the following rule:
+    ///
+    /// () has score 1
+    /// AB has score A + B, where A and B are balanced parentheses strings.
+    /// (A) has score 2 * A, where A is a balanced parentheses string.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: "()"
+    /// Output: 1
+    ///
+    /// Example 2:
+    /// Input: "(())"
+    /// Output: 2
+    ///
+    /// Example 3:
+    /// Input: "()()"
+    /// Output: 2
+    ///
+    /// Example 4:
+    /// Input: "(()(()))"
+    /// Output: 6
+    ///
+    /// Note:
+    /// 1. S is a balanced parentheses string, containing only ( and ).
+    /// 2. 2 <= S.length <= 50
+    /// </summary>
+    int scoreOfParentheses(string S);
 
-	/// <summary>
-	/// Leet code #489. Robot Room Cleaner
-	/// </summary>
-	void robotClean(vector<vector<int>>& room, int row, int col);
+    /// <summary>
+    /// Leet code #489. Robot Room Cleaner
+    /// </summary>
+    void robotClean(vector<vector<int>>& room, int row, int col);
 
-	/// <summary>
-	/// Leet code #489. Robot Room Cleaner
-	/// </summary>
-	bool robotMove(vector<vector<int>>& room, int &row, int &col, int direction);
+    /// <summary>
+    /// Leet code #489. Robot Room Cleaner
+    /// </summary>
+    bool robotMove(vector<vector<int>>& room, int &row, int &col, int direction);
 
-	/// <summary>
-	/// Leet code #489. Robot Room Cleaner
-	/// </summary>
-	int robotTurnRight(int direction);
+    /// <summary>
+    /// Leet code #489. Robot Room Cleaner
+    /// </summary>
+    int robotTurnRight(int direction);
 
-	/// <summary>
-	/// Leet code #489. Robot Room Cleaner
-	/// </summary>
-	int robotTurnLeft(int direction);
+    /// <summary>
+    /// Leet code #489. Robot Room Cleaner
+    /// </summary>
+    int robotTurnLeft(int direction);
 
-	/// <summary>
-	/// Leet code #489. Robot Room Cleaner
-	/// </summary>
-	void robotMoveNext(vector<vector<int>>& room, unordered_map<int, unordered_set<int>>& visited, 
-		int& row, int& col, int& direction);
+    /// <summary>
+    /// Leet code #489. Robot Room Cleaner
+    /// </summary>
+    void robotMoveNext(vector<vector<int>>& room, unordered_map<int, unordered_set<int>>& visited, 
+        int& row, int& col, int& direction);
 
-	/// <summary>
-	/// Leet code #489. Robot Room Cleaner
-	/// </summary>
-	void robotMoveBack(vector<vector<int>>& room, unordered_map<int, unordered_set<int>>& visited, 
-		int& row, int& col, int& direction);
+    /// <summary>
+    /// Leet code #489. Robot Room Cleaner
+    /// </summary>
+    void robotMoveBack(vector<vector<int>>& room, unordered_map<int, unordered_set<int>>& visited, 
+        int& row, int& col, int& direction);
 
-	/// <summary>
-	/// Leet code #489. Robot Room Cleaner
-	/// 
-	/// Given a robot cleaner in a room modeled as a grid.
-	/// Each cell in the grid can be empty or blocked.
-	///
-	/// The robot cleaner with 4 given APIs can move forward, turn left or turn 
-	/// right. Each turn it made is 90 degrees.
-	///
-	/// When it tries to move into a blocked cell, its bumper sensor detects 
-	/// the obstacle and it stays on the current cell.
-	///
-	/// Design an algorithm to clean the entire room using only the 4 given APIs 
-	/// shown below.
-	///
-	/// interface Robot {
-	///  // returns true if next cell is open and robot moves into the cell.
-	///  // returns false if next cell is obstacle and robot stays on the current 
-	///  // cell.
-	///  boolean move();
-	///
-	///  // Robot will stay on the same cell after calling turnLeft/turnRight.
-	///  // Each turn will be 90 degrees.
-	///  void turnLeft();
-	///  void turnRight();
-	///
-	///  // Clean the current cell.
-	///  void clean();
-	/// }
-	/// Example:
-	///
-	/// Input:
-	/// room = [
-	///  [1,1,1,1,1,0,1,1],
-	///  [1,1,1,1,1,0,1,1],
-	///  [1,0,1,1,1,1,1,1],
-	///  [0,0,0,1,0,0,0,0],
-	///  [1,1,1,1,1,1,1,1]
-	/// ],
-	/// row = 1,
-	/// col = 3
-	///
-	/// Explanation:
-	/// All grids in the room are marked by either 0 or 1.
-	/// 0 means the cell is blocked, while 1 means the cell is accessible.
-	/// The robot initially starts at the position of row=1, col=3.
-	/// From the top left corner, its position is one row below and three columns 
-	/// right.
-	/// Notes:
-	///
-	/// The input is only given to initialize the room and the robot's position 
-	/// internally. You must solve this problem "blindfolded". In other words, 
-	/// you must control the robot using only the mentioned 4 APIs, without 
-	/// knowing the room layout and the initial robot's position.
-	/// The robot's initial position will always be in an accessible cell.
-	/// The initial direction of the robot will be facing up.
-	/// All accessible cells are connected, which means the all cells marked 
-	/// as 1 will be accessible by the robot.
-	/// Assume all four edges of the grid are all surrounded by wall.
-	/// </summary>
-	void cleanRoom(vector<vector<int>>& room, int row, int col);
+    /// <summary>
+    /// Leet code #489. Robot Room Cleaner
+    /// 
+    /// Given a robot cleaner in a room modeled as a grid.
+    /// Each cell in the grid can be empty or blocked.
+    ///
+    /// The robot cleaner with 4 given APIs can move forward, turn left or turn 
+    /// right. Each turn it made is 90 degrees.
+    ///
+    /// When it tries to move into a blocked cell, its bumper sensor detects 
+    /// the obstacle and it stays on the current cell.
+    ///
+    /// Design an algorithm to clean the entire room using only the 4 given APIs 
+    /// shown below.
+    ///
+    /// interface Robot {
+    ///  // returns true if next cell is open and robot moves into the cell.
+    ///  // returns false if next cell is obstacle and robot stays on the current 
+    ///  // cell.
+    ///  boolean move();
+    ///
+    ///  // Robot will stay on the same cell after calling turnLeft/turnRight.
+    ///  // Each turn will be 90 degrees.
+    ///  void turnLeft();
+    ///  void turnRight();
+    ///
+    ///  // Clean the current cell.
+    ///  void clean();
+    /// }
+    /// Example:
+    ///
+    /// Input:
+    /// room = [
+    ///  [1,1,1,1,1,0,1,1],
+    ///  [1,1,1,1,1,0,1,1],
+    ///  [1,0,1,1,1,1,1,1],
+    ///  [0,0,0,1,0,0,0,0],
+    ///  [1,1,1,1,1,1,1,1]
+    /// ],
+    /// row = 1,
+    /// col = 3
+    ///
+    /// Explanation:
+    /// All grids in the room are marked by either 0 or 1.
+    /// 0 means the cell is blocked, while 1 means the cell is accessible.
+    /// The robot initially starts at the position of row=1, col=3.
+    /// From the top left corner, its position is one row below and three columns 
+    /// right.
+    /// Notes:
+    ///
+    /// The input is only given to initialize the room and the robot's position 
+    /// internally. You must solve this problem "blindfolded". In other words, 
+    /// you must control the robot using only the mentioned 4 APIs, without 
+    /// knowing the room layout and the initial robot's position.
+    /// The robot's initial position will always be in an accessible cell.
+    /// The initial direction of the robot will be facing up.
+    /// All accessible cells are connected, which means the all cells marked 
+    /// as 1 will be accessible by the robot.
+    /// Assume all four edges of the grid are all surrounded by wall.
+    /// </summary>
+    void cleanRoom(vector<vector<int>>& room, int row, int col);
 
     /// <summary>
     /// Leet code #980. Unique Paths III
@@ -24301,13 +23890,7 @@ public:
     int minArea(vector<vector<char>>& image, int x, int y);
 
     /// <summary>
-    /// Leet code #407. Trapping Rain Water II         
-    /// </summary>
-    int checkTrapWaterPoint(int floor_level, int row, int col, vector<vector<int>>& heightMap, 
-        map<int, vector<pair<int, int>>> &edges, vector<vector<int>>& visited);
-
-    /// <summary>
-    /// Leet code #407. Trapping Rain Water II         
+    /// Leet code #407. Trapping Rain Water II  
     /// 
     /// Given an m x n matrix of positive integers representing the height of each unit cell 
     /// in a 2D elevation map, compute the volume of water it is able to trap after raining. 
@@ -24326,200 +23909,7 @@ public:
     int trapRainWater(vector<vector<int>>& heightMap);
 
     /// <summary>
-    /// Leet code #490. The Maze         
-    /// </summary>
-    bool hasPath(vector<vector<int>>& maze, vector<vector<int>>& visited, vector<int>& start, vector<int>& destination);
-
-    /// <summary>
-    /// Leet code #490. The Maze         
-    /// 
-    /// There is a ball in a maze with empty spaces and walls. The ball can 
-    /// go through empty spaces by rolling up, down, left or right, but it 
-    /// won't stop rolling until hitting a wall. When the ball stops, it could 
-    /// choose the next direction.
-    /// 
-    /// Given the ball's start position, the destination and the maze, determine 
-    /// whether the ball could stop at the destination.
-    /// The maze is represented by a binary 2D array. 1 means the wall and 0 means 
-    /// the empty space. You may assume that the borders of the maze are all walls. 
-    /// The start and destination coordinates are represented by row and column indexes.
-    ///
-    /// Example 1 
-    /// Input 1: a maze represented by a 2D array
-    ///
-    /// 0 0 1 0 0
-    /// 0 0 0 0 0
-    /// 0 0 0 1 0
-    /// 1 1 0 1 1
-    /// 0 0 0 0 0
-    /// Input 2: start coordinate (rowStart, colStart) = (0, 4)
-    /// Input 3: destination coordinate (rowDest, colDest) = (4, 4)
-    ///
-    /// Output: true
-    /// Explanation: One possible way is : 
-    /// left -> down -> left -> down -> right -> down -> right.
-    ///
-    /// Example 2 
-    /// Input 1: a maze represented by a 2D array
-    ///
-    /// 0 0 1 0 0
-    /// 0 0 0 0 0
-    /// 0 0 0 1 0
-    /// 1 1 0 1 1
-    /// 0 0 0 0 0
-    /// Input 2: start coordinate (rowStart, colStart) = (0, 4)
-    /// Input 3: destination coordinate (rowDest, colDest) = (3, 2)
-    /// Output: false
-    /// Explanation: There is no way for the ball to stop at the destination.
-    /// 
-    /// Note: 
-    /// 1.There is only one ball and one destination in the maze.
-    /// 2.Both the ball and the destination exist on an empty space, and they will not 
-    ///   be at the same position initially.
-    /// 3.The given maze does not contain border (like the red rectangle in the example 
-    ///   pictures), but you could assume the border of the maze are all walls.
-    /// 4.The maze contains at least 2 empty spaces, and both the width and height of the 
-    ///   maze won't exceed 100.
-    /// </summary>
-    bool hasPath(vector<vector<int>>& maze, vector<int>& start, vector<int>& destination);
-
-    /// <summary>
-    /// Leet code #505. The Maze II         
-    /// </summary>
-    void shortestDistance(vector<vector<int>>& maze, vector<vector<int>>& visited, vector<int>& start,
-        priority_queue<pair<int, vector<int>>> &process_queue);
-
-    /// <summary>
-    /// Leet code #505. The Maze II         
-    /// 
-    /// There is a ball in a maze with empty spaces and walls. The ball can 
-    /// go through empty spaces by rolling up, down, left or right, but it 
-    /// won't stop rolling until hitting a wall. When the ball stops, it could 
-    /// choose the next direction.
-    /// 
-    /// Given the ball's start position, the destination and the maze, find the 
-    /// shortest distance for the ball to stop at the destination. The distance 
-    /// is defined by the number of empty spaces traveled by the ball from the 
-    /// start position (excluded) to the destination (included). If the ball 
-    /// cannot stop at the destination, return -1.
-    ///     
-    /// The maze is represented by a binary 2D array. 1 means the wall and 0 means 
-    /// the empty space. You may assume that the borders of the maze are all walls. 
-    /// The start and destination coordinates are represented by row and column indexes.
-    ///
-    /// Example 1 
-    /// Input 1: a maze represented by a 2D array
-    ///
-    /// 0 0 1 0 0
-    /// 0 0 0 0 0
-    /// 0 0 0 1 0
-    /// 1 1 0 1 1
-    /// 0 0 0 0 0
-    /// Input 2: start coordinate (rowStart, colStart) = (0, 4)
-    /// Input 3: destination coordinate (rowDest, colDest) = (4, 4)
-    ///
-    /// Output: 12
-    /// Explanation: One shortest way is : 
-    /// left -> down -> left -> down -> right -> down -> right.
-    /// The total distance is 1 + 1 + 3 + 1 + 2 + 2 + 2 = 12.
-    ///
-    /// Example 2 
-    /// Input 1: a maze represented by a 2D array
-    ///
-    /// 0 0 1 0 0
-    /// 0 0 0 0 0
-    /// 0 0 0 1 0
-    /// 1 1 0 1 1
-    /// 0 0 0 0 0
-    /// Input 2: start coordinate (rowStart, colStart) = (0, 4)
-    /// Input 3: destination coordinate (rowDest, colDest) = (3, 2)
-    /// Output: -1
-    /// Explanation: There is no way for the ball to stop at the destination.
-    /// 
-    /// Note:
-    /// 1.There is only one ball and one destination in the maze.
-    /// 2.Both the ball and the destination exist on an empty space, 
-    ///   and they will not be at the same position initially.
-    /// 3.The given maze does not contain border (like the red rectangle in the example 
-    ///   pictures), but you could assume the border of the maze are all walls.
-    /// 4.The maze contains at least 2 empty spaces, and both the width and height of the 
-    ///   maze won't exceed 100.
-    /// </summary>
-    int shortestDistance(vector<vector<int>>& maze, vector<int>& start, vector<int>& destination);
-
-    /// <summary>
-    /// Leet code #499. The Maze III         
-    /// </summary>
-    void findShortestWay(vector<vector<int>>& maze, vector<vector<pair<int, string>>>& visited, 
-        vector<int>& ball, vector<int>& hole,  priority_queue<pair<int, vector<int>>> &process_queue);
-
-    /// <summary>
-    /// Leet code #499. The Maze III         
-    /// 
-    /// There is a ball in a maze with empty spaces and walls. The ball can 
-    /// go through empty spaces by rolling up (u), down (d), left (l) or right (r), 
-    /// but it won't stop rolling until hitting a wall. When the ball stops, 
-    /// it could choose the next direction. There is also a hole in this maze. 
-    /// The ball will drop into the hole if it rolls on to the hole.
-    /// 
-    /// Given the ball position, the hole position and the maze, find out how the 
-    /// ball could drop into the hole by moving the shortest distance. The distance 
-    /// is defined by the number of empty spaces traveled by the ball from the start 
-    /// position (excluded) to the hole (included). Output the moving directions by 
-    /// using 'u', 'd', 'l' and 'r'. Since there could be several different shortest 
-    /// ways, you should output the lexicographically smallest way. If the ball 
-    /// cannot reach the hole, output "impossible".
-    ///
-    /// The maze is represented by a binary 2D array. 1 means the wall and 0 means the 
-    /// empty space. You may assume that the borders of the maze are all walls. 
-    /// The ball and the hole coordinates are represented by row and column indexes.
-    ///
-    /// Example 1 
-    /// Input 1: a maze represented by a 2D array
-    ///
-    /// 0 0 0 0 0
-    /// 1 1 0 0 1
-    /// 0 0 0 0 0
-    /// 0 1 0 0 1
-    /// 0 1 0 0 0
-    ///
-    /// Input 2: ball coordinate (rowBall, colBall) = (4, 3)
-    /// Input 3: hole coordinate (rowHole, colHole) = (0, 1)
-    ///
-    /// Output: "lul"
-    /// Explanation: There are two shortest ways for the ball to drop into the hole.
-    /// The first way is left -> up -> left, represented by "lul".
-    /// The second way is up -> left, represented by 'ul'.
-    /// Both ways have shortest distance 6, but the first way is lexicographically 
-    /// smaller because 'l' < 'u'. So the output is "lul".
-    ///
-    /// Example 2 
-    /// Input 1: a maze represented by a 2D array
-    ///
-    /// 0 0 0 0 0
-    /// 1 1 0 0 1
-    /// 0 0 0 0 0
-    /// 0 1 0 0 1
-    /// 0 1 0 0 0
-    ///
-    /// Input 2: ball coordinate (rowBall, colBall) = (4, 3)
-    /// Input 3: hole coordinate (rowHole, colHole) = (3, 0)
-    /// Output: "impossible"
-    /// Explanation: The ball cannot reach the hole.
-    ///
-    /// Note:
-    /// 1.There is only one ball and one hole in the maze.
-    /// 2.Both the ball and hole exist on an empty space, and they will not be at 
-    ///   the same position initially.
-    /// 3.The given maze does not contain border (like the red rectangle in the 
-    ///   example pictures), but you could assume the border of the maze are all walls.
-    /// 4.The maze contains at least 2 empty spaces, and the width and the height of 
-    ///   the maze won't exceed 30.
-    /// </summary>
-    string findShortestWay(vector<vector<int>>& maze, vector<int>& ball, vector<int>& hole);
-
-    /// <summary>
-    /// Leet code #542. 01 Matrix       
+    /// Leet code #542. 01 Matrix 
     /// 
     /// Given a matrix consists of 0 and 1, find the distance of the nearest 0 
     /// for each cell.
@@ -24750,540 +24140,540 @@ public:
     /// </summary>
     int openLock(vector<string>& deadends, string target);
 
-	/// <summary>
-	/// Leetcode #773. Sliding Puzzle
-	///
-	/// On a 2x3 board, there are 5 tiles represented by the integers 1 
-	/// through 5, and an empty square represented by 0.
-	///
-	/// A move consists of choosing 0 and a 4-directionally adjacent number 
-	/// and swapping it.
-	///
-	/// The state of the board is solved if and only if the board is 
-	/// [[1,2,3],[4,5,0]].
-	///
-	/// Given a puzzle board, return the least number of moves required so 
-	/// that the state of the board is solved. If it is impossible for the 
-	/// state of the board to be solved, return -1.
-	///
-	/// Examples:
-	///
-	/// Input: board = [[1,2,3],[4,0,5]]
-	/// Output: 1
-	/// Explanation: Swap the 0 and the 5 in one move.
-	///
-	/// Input: board = [[1,2,3],[5,4,0]]
-	/// Output: -1
-	/// Explanation: No number of moves will make the board solved.
-	///
-	/// Input: board = [[4,1,2],[5,0,3]]
-	/// Output: 5
-	/// Explanation: 5 is the smallest number of moves that solves the board.
-	/// An example path:
-	/// After move 0: [[4,1,2],[5,0,3]]
-	/// After move 1: [[4,1,2],[0,5,3]]
-	/// After move 2: [[0,1,2],[4,5,3]]
-	/// After move 3: [[1,0,2],[4,5,3]]
-	/// After move 4: [[1,2,0],[4,5,3]]
-	/// After move 5: [[1,2,3],[4,5,0]]
-	///
-	/// Input: board = [[3,2,4],[1,5,0]]
-	/// Output: 14
-	/// Note:
-	/// board will be a 2 x 3 array as described above.
-	/// board[i][j] will be a permutation of [0, 1, 2, 3, 4, 5].
-	/// </summary>
-	int slidingPuzzle(vector<vector<int>>& board);
+    /// <summary>
+    /// Leetcode #773. Sliding Puzzle
+    ///
+    /// On a 2x3 board, there are 5 tiles represented by the integers 1 
+    /// through 5, and an empty square represented by 0.
+    ///
+    /// A move consists of choosing 0 and a 4-directionally adjacent number 
+    /// and swapping it.
+    ///
+    /// The state of the board is solved if and only if the board is 
+    /// [[1,2,3],[4,5,0]].
+    ///
+    /// Given a puzzle board, return the least number of moves required so 
+    /// that the state of the board is solved. If it is impossible for the 
+    /// state of the board to be solved, return -1.
+    ///
+    /// Examples:
+    ///
+    /// Input: board = [[1,2,3],[4,0,5]]
+    /// Output: 1
+    /// Explanation: Swap the 0 and the 5 in one move.
+    ///
+    /// Input: board = [[1,2,3],[5,4,0]]
+    /// Output: -1
+    /// Explanation: No number of moves will make the board solved.
+    ///
+    /// Input: board = [[4,1,2],[5,0,3]]
+    /// Output: 5
+    /// Explanation: 5 is the smallest number of moves that solves the board.
+    /// An example path:
+    /// After move 0: [[4,1,2],[5,0,3]]
+    /// After move 1: [[4,1,2],[0,5,3]]
+    /// After move 2: [[0,1,2],[4,5,3]]
+    /// After move 3: [[1,0,2],[4,5,3]]
+    /// After move 4: [[1,2,0],[4,5,3]]
+    /// After move 5: [[1,2,3],[4,5,0]]
+    ///
+    /// Input: board = [[3,2,4],[1,5,0]]
+    /// Output: 14
+    /// Note:
+    /// board will be a 2 x 3 array as described above.
+    /// board[i][j] will be a permutation of [0, 1, 2, 3, 4, 5].
+    /// </summary>
+    int slidingPuzzle(vector<vector<int>>& board);
 
-	/// <summary>
-	/// Leet code #785. Is Graph Bipartite?    
-	///
-	/// Given a graph, return true if and only if it is bipartite.
-	///
-	/// Recall that a graph is bipartite if we can split it's set of nodes 
-	/// into two independent subsets A and B such that every edge in the 
-	/// graph has one node in A and another node in B.
-	/// 
-	/// The graph is given in the following form: graph[i] is a list of 
-	/// indexes j for which the edge between nodes i and j exists.  Each node 
-	/// is an integer between 0 and graph.length - 1.  There are no self edges 
-	/// or parallel edges: graph[i] does not contain i, and it doesn't contain 
-	/// any element twice.
-	///
-	/// Example 1:
-	/// Input: [[1,3], [0,2], [1,3], [0,2]]
-	/// Output: true
-	/// Explanation: 
-	/// The graph looks like this:
-	/// 0----1
-	/// |    |
-	/// |    |
-	/// 3----2
-	/// We can divide the vertices into two groups: {0, 2} and {1, 3}.
-	///
-	/// Example 2:
-	/// Input: [[1,2,3], [0,2], [0,1,3], [0,2]]
-	/// Output: false
-	/// Explanation: 
-	/// The graph looks like this:
-	/// 0----1
-	/// | \  |
-	/// |  \ |
-	/// 3----2
-	/// We cannot find a way to divide the set of nodes into two independent 
-	/// ubsets.
-	/// 
-	/// Note:
-	/// graph will have length in range [1, 100].
-	/// graph[i] will contain integers in range [0, graph.length - 1].
-	/// graph[i] will not contain i or duplicate values.
-	/// </summary>
-	bool isBipartite(vector<vector<int>>& graph);
+    /// <summary>
+    /// Leet code #785. Is Graph Bipartite?    
+    ///
+    /// Given a graph, return true if and only if it is bipartite.
+    ///
+    /// Recall that a graph is bipartite if we can split it's set of nodes 
+    /// into two independent subsets A and B such that every edge in the 
+    /// graph has one node in A and another node in B.
+    /// 
+    /// The graph is given in the following form: graph[i] is a list of 
+    /// indexes j for which the edge between nodes i and j exists.  Each node 
+    /// is an integer between 0 and graph.length - 1.  There are no self edges 
+    /// or parallel edges: graph[i] does not contain i, and it doesn't contain 
+    /// any element twice.
+    ///
+    /// Example 1:
+    /// Input: [[1,3], [0,2], [1,3], [0,2]]
+    /// Output: true
+    /// Explanation: 
+    /// The graph looks like this:
+    /// 0----1
+    /// |    |
+    /// |    |
+    /// 3----2
+    /// We can divide the vertices into two groups: {0, 2} and {1, 3}.
+    ///
+    /// Example 2:
+    /// Input: [[1,2,3], [0,2], [0,1,3], [0,2]]
+    /// Output: false
+    /// Explanation: 
+    /// The graph looks like this:
+    /// 0----1
+    /// | \  |
+    /// |  \ |
+    /// 3----2
+    /// We cannot find a way to divide the set of nodes into two independent 
+    /// ubsets.
+    /// 
+    /// Note:
+    /// graph will have length in range [1, 100].
+    /// graph[i] will contain integers in range [0, graph.length - 1].
+    /// graph[i] will not contain i or duplicate values.
+    /// </summary>
+    bool isBipartite(vector<vector<int>>& graph);
 
-	/// <summary>
-	/// Leet code #787. Cheapest Flights Within K Stops    
-	///
-	/// There are n cities connected by m flights. Each fight starts from 
-	/// city u and arrives at v with a price w.
-	///
-	/// Now given all the cities and fights, together with starting city src 
-	/// and the destination dst, your task is to find the cheapest price from 
-	/// src to dst with up to k stops. If there is no such route, output -1.
-	///
-	/// Example 1:
-	/// Input: 
-	/// n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
-	/// src = 0, dst = 2, k = 1
-	/// Output: 200
-	/// Explanation: 
-	/// The graph looks like this:
-	///
-	/// The cheapest price from city 0 to city 2 with at most 1 stop costs 200, 
-	/// as marked red in the picture.
-	/// Example 2:
-	/// Input: 
-	/// n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
-	/// src = 0, dst = 2, k = 0
-	/// Output: 500
-	/// Explanation: 
-	/// The graph looks like this:
-	///
-	/// The cheapest price from city 0 to city 2 with at most 0 stop costs 500, 
-	/// as marked blue in the picture.
-	/// Note:
-	///
-	/// 1. The number of nodes n will be in range [1, 100], with nodes labeled 
-	///    from 0 to n - 1.
-	/// 2. The size of flights will be in range [0, n * (n - 1) / 2].
-	/// 3. The format of each flight will be (src, dst, price).
-	/// 4. The price of each flight will be in the range [1, 10000].
-	/// 5. k is in the range of [0, n - 1].
-	/// 6. There will not be any duplicated flights or self cycles.
-	/// </summary>
-	int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K);
+    /// <summary>
+    /// Leet code #787. Cheapest Flights Within K Stops    
+    ///
+    /// There are n cities connected by m flights. Each fight starts from 
+    /// city u and arrives at v with a price w.
+    ///
+    /// Now given all the cities and fights, together with starting city src 
+    /// and the destination dst, your task is to find the cheapest price from 
+    /// src to dst with up to k stops. If there is no such route, output -1.
+    ///
+    /// Example 1:
+    /// Input: 
+    /// n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
+    /// src = 0, dst = 2, k = 1
+    /// Output: 200
+    /// Explanation: 
+    /// The graph looks like this:
+    ///
+    /// The cheapest price from city 0 to city 2 with at most 1 stop costs 200, 
+    /// as marked red in the picture.
+    /// Example 2:
+    /// Input: 
+    /// n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
+    /// src = 0, dst = 2, k = 0
+    /// Output: 500
+    /// Explanation: 
+    /// The graph looks like this:
+    ///
+    /// The cheapest price from city 0 to city 2 with at most 0 stop costs 500, 
+    /// as marked blue in the picture.
+    /// Note:
+    ///
+    /// 1. The number of nodes n will be in range [1, 100], with nodes labeled 
+    ///    from 0 to n - 1.
+    /// 2. The size of flights will be in range [0, n * (n - 1) / 2].
+    /// 3. The format of each flight will be (src, dst, price).
+    /// 4. The price of each flight will be in the range [1, 10000].
+    /// 5. k is in the range of [0, n - 1].
+    /// 6. There will not be any duplicated flights or self cycles.
+    /// </summary>
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K);
 
-	/// <summary>
-	/// Leet code #818. Race Car
-	/// 
-	/// Your car starts at position 0 and speed +1 on an infinite number line.  
-	/// (Your car can go into negative positions.)
-	///
-	/// Your car drives automatically according to a sequence of instructions 
-	/// A (accelerate) and R (reverse).
-	///
-	/// When you get an instruction "A", your car does the following: 
-	/// position += speed, speed *= 2.
-	///
-	/// When you get an instruction "R", your car does the following: if your 
-	/// speed is positive then speed = -1 , otherwise speed = 1.  
-	/// (Your position stays the same.)
-	///
-	/// For example, after commands "AAR", your car goes to positions 
-	/// 0->1->3->3, and your speed goes to 1->2->4->-1.
-	/// 
-	/// Now for some target position, say the length of the shortest sequence 
-	/// of instructions to get there.
-	///
-	/// Example 1:
-	/// Input: 
-	/// target = 3
-	/// Output: 2
-	/// Explanation: 
-	/// The shortest instruction sequence is "AA".
-	/// Your position goes from 0->1->3.
-	/// Example 2:
-	/// Input: 
-	/// target = 6
-	/// Output: 5
-	/// Explanation: 
-	/// The shortest instruction sequence is "AAARA".
-	/// Your position goes from 0->1->3->7->7->6.
-	///
-	/// Note:
-	/// 1. 1 <= target <= 10000.
-	/// </summary>
-	int racecar(int target);
+    /// <summary>
+    /// Leet code #818. Race Car
+    /// 
+    /// Your car starts at position 0 and speed +1 on an infinite number line.  
+    /// (Your car can go into negative positions.)
+    ///
+    /// Your car drives automatically according to a sequence of instructions 
+    /// A (accelerate) and R (reverse).
+    ///
+    /// When you get an instruction "A", your car does the following: 
+    /// position += speed, speed *= 2.
+    ///
+    /// When you get an instruction "R", your car does the following: if your 
+    /// speed is positive then speed = -1 , otherwise speed = 1.  
+    /// (Your position stays the same.)
+    ///
+    /// For example, after commands "AAR", your car goes to positions 
+    /// 0->1->3->3, and your speed goes to 1->2->4->-1.
+    /// 
+    /// Now for some target position, say the length of the shortest sequence 
+    /// of instructions to get there.
+    ///
+    /// Example 1:
+    /// Input: 
+    /// target = 3
+    /// Output: 2
+    /// Explanation: 
+    /// The shortest instruction sequence is "AA".
+    /// Your position goes from 0->1->3.
+    /// Example 2:
+    /// Input: 
+    /// target = 6
+    /// Output: 5
+    /// Explanation: 
+    /// The shortest instruction sequence is "AAARA".
+    /// Your position goes from 0->1->3->7->7->6.
+    ///
+    /// Note:
+    /// 1. 1 <= target <= 10000.
+    /// </summary>
+    int racecar(int target);
 
-	/// <summary>
-	/// Leet code #854. K-Similar Strings
-	/// 
-	/// Strings A and B are K-similar (for some non-negative integer K) if we 
-	/// can swap the positions of two letters in A exactly K times so that the 
-	/// resulting string equals B.
-	///
-	/// Given two anagrams A and B, return the smallest K for which A and B are 
-	/// K-similar.
-	///
-	/// Example 1:
-	/// Input: A = "ab", B = "ba"
-	/// Output: 1
-	///
-	/// Example 2:
-	/// Input: A = "abc", B = "bca"
-	/// Output: 2
-	///
-	/// Example 3:
-	/// Input: A = "abac", B = "baca"
-	/// Output: 2
+    /// <summary>
+    /// Leet code #854. K-Similar Strings
+    /// 
+    /// Strings A and B are K-similar (for some non-negative integer K) if we 
+    /// can swap the positions of two letters in A exactly K times so that the 
+    /// resulting string equals B.
+    ///
+    /// Given two anagrams A and B, return the smallest K for which A and B are 
+    /// K-similar.
+    ///
+    /// Example 1:
+    /// Input: A = "ab", B = "ba"
+    /// Output: 1
+    ///
+    /// Example 2:
+    /// Input: A = "abc", B = "bca"
+    /// Output: 2
+    ///
+    /// Example 3:
+    /// Input: A = "abac", B = "baca"
+    /// Output: 2
 
-	/// Example 4:
-	/// Input: A = "aabc", B = "abca"
-	/// Output: 2
-	/// Note:
-	///
-	/// 1 <= A.length == B.length <= 20
-	/// A and B contain only lowercase letters from the set {'a', 'b', 'c', 'd', 
-	/// 'e', 'f'}
-	/// </summary>
-	int kSimilarity(string A, string B);
+    /// Example 4:
+    /// Input: A = "aabc", B = "abca"
+    /// Output: 2
+    /// Note:
+    ///
+    /// 1 <= A.length == B.length <= 20
+    /// A and B contain only lowercase letters from the set {'a', 'b', 'c', 'd', 
+    /// 'e', 'f'}
+    /// </summary>
+    int kSimilarity(string A, string B);
 
-	/// <summary>
-	/// Leet code #864. Shortest Path to Get All Keys
-	/// 
-	/// We are given a 2-dimensional grid. "." is an empty cell, "#" is a 
-	/// wall, "@" is the starting point, ("a", "b", ...) are keys, and 
-	/// ("A", "B", ...) are locks.
-	///
-	/// We start at the starting point, and one move consists of walking one 
-	/// space in one of the 4 cardinal directions.  We cannot walk outside 
-	/// the grid, or walk into a wall.  If we walk over a key, we pick it up. 
-	/// We can't walk over a lock unless we have the corresponding key.
-	///
-	/// For some 1 <= K <= 6, there is exactly one lowercase and one uppercase 
-	/// letter of the first K letters of the English alphabet in the grid.  
-	/// This means that there is exactly one key for each lock, and one lock 
-	/// for each key; and also that the letters used to represent the keys and 
-	/// locks were chosen in the same order as the English alphabet.
-	///
-	/// Return the lowest number of moves to acquire all keys.  If it's 
-	/// impossible, return -1.
-	///
-	/// Example 1:
-	/// Input: ["@.a.#","###.#","b.A.B"]
-	/// Output: 8
-	///
-	/// Example 2:
-	/// Input: ["@..aA","..B#.","....b"]
-	/// Output: 6
-	///
-	/// Note:
-	/// 1. 1 <= grid.length <= 30
-	/// 2. 1 <= grid[0].length <= 30
-	/// 3. grid[i][j] contains only '.', '#', '@', 'a'-'f' and 'A'-'F'
-	/// 4. The number of keys is in [1, 6].  Each key has a different letter 
-	/// and opens exactly one lock.
-	/// </summary>
-	int shortestPathAllKeys(vector<string>& grid);
+    /// <summary>
+    /// Leet code #864. Shortest Path to Get All Keys
+    /// 
+    /// We are given a 2-dimensional grid. "." is an empty cell, "#" is a 
+    /// wall, "@" is the starting point, ("a", "b", ...) are keys, and 
+    /// ("A", "B", ...) are locks.
+    ///
+    /// We start at the starting point, and one move consists of walking one 
+    /// space in one of the 4 cardinal directions.  We cannot walk outside 
+    /// the grid, or walk into a wall.  If we walk over a key, we pick it up. 
+    /// We can't walk over a lock unless we have the corresponding key.
+    ///
+    /// For some 1 <= K <= 6, there is exactly one lowercase and one uppercase 
+    /// letter of the first K letters of the English alphabet in the grid.  
+    /// This means that there is exactly one key for each lock, and one lock 
+    /// for each key; and also that the letters used to represent the keys and 
+    /// locks were chosen in the same order as the English alphabet.
+    ///
+    /// Return the lowest number of moves to acquire all keys.  If it's 
+    /// impossible, return -1.
+    ///
+    /// Example 1:
+    /// Input: ["@.a.#","###.#","b.A.B"]
+    /// Output: 8
+    ///
+    /// Example 2:
+    /// Input: ["@..aA","..B#.","....b"]
+    /// Output: 6
+    ///
+    /// Note:
+    /// 1. 1 <= grid.length <= 30
+    /// 2. 1 <= grid[0].length <= 30
+    /// 3. grid[i][j] contains only '.', '#', '@', 'a'-'f' and 'A'-'F'
+    /// 4. The number of keys is in [1, 6].  Each key has a different letter 
+    /// and opens exactly one lock.
+    /// </summary>
+    int shortestPathAllKeys(vector<string>& grid);
 
-	/// <summary>
-	/// Leet code #433. Minimum Genetic Mutation
-	/// 
-	/// A gene string can be represented by an 8-character long string, with 
-	/// choices from "A", "C", "G", "T".
-	///
-	/// Suppose we need to investigate about a mutation (mutation from "start" 
-	/// to "end"), where ONE mutation is defined as ONE single character changed 
-	/// in the gene string.
-	///
-	/// For example, "AACCGGTT" -> "AACCGGTA" is 1 mutation.
-	///
-	/// Also, there is a given gene "bank", which records all the valid gene 
-	/// mutations. A gene must be in the bank to make it a valid gene string.
-	///
-	/// Now, given 3 things - start, end, bank, your task is to determine 
-	/// what is the minimum number of mutations needed to mutate from 
-	/// "start" to "end". If there is no such a mutation, return -1.
-	///
-	/// Note:
-	///
-	/// Starting point is assumed to be valid, so it might not be included in 
-	/// the bank.
-	/// If multiple mutations are needed, all mutations during in the sequence 
-	/// must be valid.
-	/// You may assume start and end string is not the same.
-	///
-	///
-	/// Example 1:
-	/// start: "AACCGGTT"
-	/// end:   "AACCGGTA"
-	/// bank: ["AACCGGTA"]
-	/// return: 1
-	/// 
-	///
-	/// Example 2:
-	/// start: "AACCGGTT"
-	/// end:   "AAACGGTA"
-	/// bank: ["AACCGGTA", "AACCGCTA", "AAACGGTA"]
-	/// return: 2
-	/// 
-	///
-	/// Example 3:
-	/// start: "AAAAACCC"
-	/// end:   "AACCCCCC"
-	/// bank: ["AAAACCCC", "AAACCCCC", "AACCCCCC"]
-	/// return: 3
-	/// </summary>
-	int minMutation(string start, string end, vector<string>& bank);
+    /// <summary>
+    /// Leet code #433. Minimum Genetic Mutation
+    /// 
+    /// A gene string can be represented by an 8-character long string, with 
+    /// choices from "A", "C", "G", "T".
+    ///
+    /// Suppose we need to investigate about a mutation (mutation from "start" 
+    /// to "end"), where ONE mutation is defined as ONE single character changed 
+    /// in the gene string.
+    ///
+    /// For example, "AACCGGTT" -> "AACCGGTA" is 1 mutation.
+    ///
+    /// Also, there is a given gene "bank", which records all the valid gene 
+    /// mutations. A gene must be in the bank to make it a valid gene string.
+    ///
+    /// Now, given 3 things - start, end, bank, your task is to determine 
+    /// what is the minimum number of mutations needed to mutate from 
+    /// "start" to "end". If there is no such a mutation, return -1.
+    ///
+    /// Note:
+    ///
+    /// Starting point is assumed to be valid, so it might not be included in 
+    /// the bank.
+    /// If multiple mutations are needed, all mutations during in the sequence 
+    /// must be valid.
+    /// You may assume start and end string is not the same.
+    ///
+    ///
+    /// Example 1:
+    /// start: "AACCGGTT"
+    /// end:   "AACCGGTA"
+    /// bank: ["AACCGGTA"]
+    /// return: 1
+    /// 
+    ///
+    /// Example 2:
+    /// start: "AACCGGTT"
+    /// end:   "AAACGGTA"
+    /// bank: ["AACCGGTA", "AACCGCTA", "AAACGGTA"]
+    /// return: 2
+    /// 
+    ///
+    /// Example 3:
+    /// start: "AAAAACCC"
+    /// end:   "AACCCCCC"
+    /// bank: ["AAAACCCC", "AAACCCCC", "AACCCCCC"]
+    /// return: 3
+    /// </summary>
+    int minMutation(string start, string end, vector<string>& bank);
 
-	/// <summary>
-	/// Leet code #882. Reachable Nodes In Subdivided Graph
-	/// 
-	/// Starting with an undirected graph (the "original graph") with nodes from 
-	/// 0 to N-1, subdivisions are made to some of the edges.
-	///
-	/// The graph is given as follows: edges[k] is a list of integer pairs 
-	/// (i, j, n) such that (i, j) is an edge of the original graph,
-	/// 
-	/// and n is the total number of new nodes on that edge. 
-	///
-	/// Then, the edge (i, j) is deleted from the original graph, n new nodes 
-	/// (x_1, x_2, ..., x_n) are added to the original graph,
-	///
-	/// and n+1 new edges (i, x_1), (x_1, x_2), (x_2, x_3), ..., (x_{n-1}, x_n), 
-	/// (x_n, j) are added to the original graph.
-	///
-	/// Now, you start at node 0 from the original graph, and in each move, you 
-	/// travel along one edge. 
-	///
-	/// Return how many nodes you can reach in at most M moves.
-	/// 
-	/// Example 1:
-	///
-	/// Input: edges = [[0,1,10],[0,2,1],[1,2,2]], M = 6, N = 3
-	/// Output: 13
-	/// Explanation: 
-	/// The nodes that are reachable in the final graph after M = 6 moves are 
-	/// indicated below.
-	///
-	/// Example 2:
-	///
-	/// Input: edges = [[0,1,4],[1,2,6],[0,2,8],[1,3,1]], M = 10, N = 4
-	/// Output: 23
-	///
-	/// Note:
-	///
-	/// 1. 0 <= edges.length <= 10000
-	/// 2. 0 <= edges[i][0] < edges[i][1] < N
-	/// 3. There does not exist any i != j for which edges[i][0] == edges[j][0] and 
-	///    edges[i][1] == edges[j][1].
-	/// 4. The original graph has no parallel edges.
-	/// 5. 0 <= edges[i][2] <= 10000
-	/// 6. 0 <= M <= 10^9
-	/// 7. 1 <= N <= 3000
-	/// 8. reachable node is a node that can be travelled to using at most M moves 
-	///    starting from node 0.
-	/// </summary>
-	int reachableNodes(vector<vector<int>>& edges, int M, int N);
+    /// <summary>
+    /// Leet code #882. Reachable Nodes In Subdivided Graph
+    /// 
+    /// Starting with an undirected graph (the "original graph") with nodes from 
+    /// 0 to N-1, subdivisions are made to some of the edges.
+    ///
+    /// The graph is given as follows: edges[k] is a list of integer pairs 
+    /// (i, j, n) such that (i, j) is an edge of the original graph,
+    /// 
+    /// and n is the total number of new nodes on that edge. 
+    ///
+    /// Then, the edge (i, j) is deleted from the original graph, n new nodes 
+    /// (x_1, x_2, ..., x_n) are added to the original graph,
+    ///
+    /// and n+1 new edges (i, x_1), (x_1, x_2), (x_2, x_3), ..., (x_{n-1}, x_n), 
+    /// (x_n, j) are added to the original graph.
+    ///
+    /// Now, you start at node 0 from the original graph, and in each move, you 
+    /// travel along one edge. 
+    ///
+    /// Return how many nodes you can reach in at most M moves.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: edges = [[0,1,10],[0,2,1],[1,2,2]], M = 6, N = 3
+    /// Output: 13
+    /// Explanation: 
+    /// The nodes that are reachable in the final graph after M = 6 moves are 
+    /// indicated below.
+    ///
+    /// Example 2:
+    ///
+    /// Input: edges = [[0,1,4],[1,2,6],[0,2,8],[1,3,1]], M = 10, N = 4
+    /// Output: 23
+    ///
+    /// Note:
+    ///
+    /// 1. 0 <= edges.length <= 10000
+    /// 2. 0 <= edges[i][0] < edges[i][1] < N
+    /// 3. There does not exist any i != j for which edges[i][0] == edges[j][0] and 
+    ///    edges[i][1] == edges[j][1].
+    /// 4. The original graph has no parallel edges.
+    /// 5. 0 <= edges[i][2] <= 10000
+    /// 6. 0 <= M <= 10^9
+    /// 7. 1 <= N <= 3000
+    /// 8. reachable node is a node that can be travelled to using at most M moves 
+    ///    starting from node 0.
+    /// </summary>
+    int reachableNodes(vector<vector<int>>& edges, int M, int N);
 
-	/// <summary>
-	/// Leet code #909. Snakes and Ladders
-	/// 
-	/// On an N x N board, the numbers from 1 to N*N are written 
-	/// boustrophedonically starting from the bottom left of the board, and 
-	/// alternating direction each row.  For example, for a 6 x 6 board, the 
-	/// numbers are written as follows:
-	/// 
-	/// You start on square 1 of the board (which is always in the last row 
-	/// and first column).  Each move, starting from square x, consists of 
-	/// the following:
-	///
-	/// You choose a destination square S with number x+1, x+2, x+3, x+4, x+5, 
-	/// or x+6, provided this number is <= N*N.
-	/// (This choice simulates the result of a standard 6-sided die roll: ie., 
-	/// there are always at most 6 destinations.)
-	/// If S has a snake or ladder, you move to the destination of that snake 
-	/// or ladder.  Otherwise, you move to S.
-	/// A board square on row r and column c has a "snake or ladder" if 
-	/// board[r][c] != -1.  The destination of that snake or ladder is board[r][c].
-	///
-	/// Note that you only take a snake or ladder at most once per move: if the 
-	/// destination to a snake or ladder is the start of another snake or ladder, 
-	/// you do not continue moving.  (For example, if the board is 
-	/// "[[4,-1],[-1,3]]", and on the first move your destination square is "2", 
-	/// then you finish your first move at "3", because you do not continue moving
-	/// to "4".)
-	///
-	/// Return the least number of moves required to reach square N*N.  If it is 
-	/// not possible, return -1.
-	///
-	/// Example 1:
-	///
-	/// Input: [
-	/// [-1,-1,-1,-1,-1,-1],
-	/// [-1,-1,-1,-1,-1,-1],
-	/// [-1,-1,-1,-1,-1,-1],
-	/// [-1,35,-1,-1,13,-1],
-	/// [-1,-1,-1,-1,-1,-1],
-	/// [-1,15,-1,-1,-1,-1]]
-	/// Output: 4
-	/// Explanation: 
-	/// At the beginning, you start at square 1 [at row 5, column 0].
-	/// You decide to move to square 2, and must take the ladder to square 15.
-	/// You then decide to move to square 17 (row 3, column 5), and must take 
-	/// the snake to square 13.
-	/// You then decide to move to square 14, and must take the ladder to square 35.
-	/// You then decide to move to square 36, ending the game.
-	/// It can be shown that you need at least 4 moves to reach the N*N-th square, 
-	/// so the answer is 4.
-	/// Note:
-	///
-	/// 2 <= board.length = board[0].length <= 20
-	/// board[i][j] is between 1 and N*N or is equal to -1.
-	/// The board square with number 1 has no snake or ladder.
-	/// The board square with number N*N has no snake or ladder.
-	/// </summary>
-	int snakesAndLadders(vector<vector<int>>& board);
+    /// <summary>
+    /// Leet code #909. Snakes and Ladders
+    /// 
+    /// On an N x N board, the numbers from 1 to N*N are written 
+    /// boustrophedonically starting from the bottom left of the board, and 
+    /// alternating direction each row.  For example, for a 6 x 6 board, the 
+    /// numbers are written as follows:
+    /// 
+    /// You start on square 1 of the board (which is always in the last row 
+    /// and first column).  Each move, starting from square x, consists of 
+    /// the following:
+    ///
+    /// You choose a destination square S with number x+1, x+2, x+3, x+4, x+5, 
+    /// or x+6, provided this number is <= N*N.
+    /// (This choice simulates the result of a standard 6-sided die roll: ie., 
+    /// there are always at most 6 destinations.)
+    /// If S has a snake or ladder, you move to the destination of that snake 
+    /// or ladder.  Otherwise, you move to S.
+    /// A board square on row r and column c has a "snake or ladder" if 
+    /// board[r][c] != -1.  The destination of that snake or ladder is board[r][c].
+    ///
+    /// Note that you only take a snake or ladder at most once per move: if the 
+    /// destination to a snake or ladder is the start of another snake or ladder, 
+    /// you do not continue moving.  (For example, if the board is 
+    /// "[[4,-1],[-1,3]]", and on the first move your destination square is "2", 
+    /// then you finish your first move at "3", because you do not continue moving
+    /// to "4".)
+    ///
+    /// Return the least number of moves required to reach square N*N.  If it is 
+    /// not possible, return -1.
+    ///
+    /// Example 1:
+    ///
+    /// Input: [
+    /// [-1,-1,-1,-1,-1,-1],
+    /// [-1,-1,-1,-1,-1,-1],
+    /// [-1,-1,-1,-1,-1,-1],
+    /// [-1,35,-1,-1,13,-1],
+    /// [-1,-1,-1,-1,-1,-1],
+    /// [-1,15,-1,-1,-1,-1]]
+    /// Output: 4
+    /// Explanation: 
+    /// At the beginning, you start at square 1 [at row 5, column 0].
+    /// You decide to move to square 2, and must take the ladder to square 15.
+    /// You then decide to move to square 17 (row 3, column 5), and must take 
+    /// the snake to square 13.
+    /// You then decide to move to square 14, and must take the ladder to square 35.
+    /// You then decide to move to square 36, ending the game.
+    /// It can be shown that you need at least 4 moves to reach the N*N-th square, 
+    /// so the answer is 4.
+    /// Note:
+    ///
+    /// 2 <= board.length = board[0].length <= 20
+    /// board[i][j] is between 1 and N*N or is equal to -1.
+    /// The board square with number 1 has no snake or ladder.
+    /// The board square with number N*N has no snake or ladder.
+    /// </summary>
+    int snakesAndLadders(vector<vector<int>>& board);
 
-	/// <summary>
-	/// Leet code #924. Minimize Malware Spread
-	/// 
-	/// In a network of nodes, each node i is directly connected to another node j 
-	/// if and only if graph[i][j] = 1.
-	///
-	/// Some nodes initial are initially infected by malware.  Whenever two nodes 
-	/// are directly connected and at least one of those two nodes is infected by 
-	/// malware, both nodes will be infected by malware.  This spread of malware 
-	/// will continue until no more nodes can be infected in this manner.
-	///
-	/// Suppose M(initial) is the final number of nodes infected with malware in 
-	/// the entire network, after the spread of malware stops.
-	///
-	/// We will remove one node from the initial list.  Return the node that if 
-	/// removed, would minimize M(initial).  If multiple nodes could be removed to 
-	/// minimize M(initial), return such a node with the smallest index.
-	///
-	/// Note that if a node was removed from the initial list of infected nodes, 
-	/// it may still be infected later as a result of the malware spread.
-	///
-	/// Example 1:
-	/// Input: graph = [[1,1,0],[1,1,0],[0,0,1]], initial = [0,1]
-	/// Output: 0
-	///
-	/// Example 2:
-	/// Input: graph = [[1,0,0],[0,1,0],[0,0,1]], initial = [0,2]
-	/// Output: 0
-	///
-	/// Example 3:
-	/// Input: graph = [[1,1,1],[1,1,1],[1,1,1]], initial = [1,2]
-	/// Output: 1
-	/// 
-	/// Note:
-	/// 
-	/// 1. 1 < graph.length = graph[0].length <= 300
-	/// 2. 0 <= graph[i][j] == graph[j][i] <= 1
-	/// 3. graph[i][i] = 1
-	/// 4. 1 <= initial.length < graph.length
-	/// 5. 0 <= initial[i] < graph.length
-	/// </summary>
-	int minMalwareSpread(vector<vector<int>>& graph, vector<int>& initial);
+    /// <summary>
+    /// Leet code #924. Minimize Malware Spread
+    /// 
+    /// In a network of nodes, each node i is directly connected to another node j 
+    /// if and only if graph[i][j] = 1.
+    ///
+    /// Some nodes initial are initially infected by malware.  Whenever two nodes 
+    /// are directly connected and at least one of those two nodes is infected by 
+    /// malware, both nodes will be infected by malware.  This spread of malware 
+    /// will continue until no more nodes can be infected in this manner.
+    ///
+    /// Suppose M(initial) is the final number of nodes infected with malware in 
+    /// the entire network, after the spread of malware stops.
+    ///
+    /// We will remove one node from the initial list.  Return the node that if 
+    /// removed, would minimize M(initial).  If multiple nodes could be removed to 
+    /// minimize M(initial), return such a node with the smallest index.
+    ///
+    /// Note that if a node was removed from the initial list of infected nodes, 
+    /// it may still be infected later as a result of the malware spread.
+    ///
+    /// Example 1:
+    /// Input: graph = [[1,1,0],[1,1,0],[0,0,1]], initial = [0,1]
+    /// Output: 0
+    ///
+    /// Example 2:
+    /// Input: graph = [[1,0,0],[0,1,0],[0,0,1]], initial = [0,2]
+    /// Output: 0
+    ///
+    /// Example 3:
+    /// Input: graph = [[1,1,1],[1,1,1],[1,1,1]], initial = [1,2]
+    /// Output: 1
+    /// 
+    /// Note:
+    /// 
+    /// 1. 1 < graph.length = graph[0].length <= 300
+    /// 2. 0 <= graph[i][j] == graph[j][i] <= 1
+    /// 3. graph[i][i] = 1
+    /// 4. 1 <= initial.length < graph.length
+    /// 5. 0 <= initial[i] < graph.length
+    /// </summary>
+    int minMalwareSpread(vector<vector<int>>& graph, vector<int>& initial);
 
-	/// <summary>
-	/// Leet code #928. Minimize Malware Spread II
-	/// 
-	/// In a network of nodes, each node i is directly connected to another node j 
-	/// if and only if graph[i][j] = 1.
-	///
-	/// Some nodes initial are initially infected by malware.  Whenever two nodes 
-	/// are directly connected and at least one of those two nodes is infected by 
-	/// malware, both nodes will be infected by malware.  This spread of malware 
-	/// will continue until no more nodes can be infected in this manner.
-	///
-	/// Suppose M(initial) is the final number of nodes infected with malware in 
-	/// the entire network, after the spread of malware stops.
-	///
-	/// We will remove one node from the initial list, completely removing it and 
-	/// any connections from this node to any other node. Return the node that if 
-	/// removed, would minimize M(initial).  If multiple nodes could be removed to 
-	/// minimize M(initial), return such a node with the smallest index.
-	///
-	/// Note that if a node was removed from the initial list of infected nodes, 
-	/// it may still be infected later as a result of the malware spread.
-	///
-	/// Example 1:
-	/// Input: graph = [[1,1,0],[1,1,0],[0,0,1]], initial = [0,1]
-	/// Output: 0
-	///
-	/// Example 2:
-	/// Input: graph = [[1,1,0],[1,1,1],[0,1,1]], initial = [0,1]
-	/// Output: 1
-	///
-	/// Example 3:
-	/// Input: graph = [[1,1,0,0],[1,1,1,0],[0,1,1,1],[0,0,1,1]], initial = [0,1]
-	/// Output: 1
-	/// 
-	/// Note:
-	/// 
-	/// 1. 1 < graph.length = graph[0].length <= 300
-	/// 2. 0 <= graph[i][j] == graph[j][i] <= 1
-	/// 3. graph[i][i] = 1
-	/// 4. 1 <= initial.length < graph.length
-	/// 5. 0 <= initial[i] < graph.length
-	/// </summary>
-	int minMalwareSpreadII(vector<vector<int>>& graph, vector<int>& initial);
+    /// <summary>
+    /// Leet code #928. Minimize Malware Spread II
+    /// 
+    /// In a network of nodes, each node i is directly connected to another node j 
+    /// if and only if graph[i][j] = 1.
+    ///
+    /// Some nodes initial are initially infected by malware.  Whenever two nodes 
+    /// are directly connected and at least one of those two nodes is infected by 
+    /// malware, both nodes will be infected by malware.  This spread of malware 
+    /// will continue until no more nodes can be infected in this manner.
+    ///
+    /// Suppose M(initial) is the final number of nodes infected with malware in 
+    /// the entire network, after the spread of malware stops.
+    ///
+    /// We will remove one node from the initial list, completely removing it and 
+    /// any connections from this node to any other node. Return the node that if 
+    /// removed, would minimize M(initial).  If multiple nodes could be removed to 
+    /// minimize M(initial), return such a node with the smallest index.
+    ///
+    /// Note that if a node was removed from the initial list of infected nodes, 
+    /// it may still be infected later as a result of the malware spread.
+    ///
+    /// Example 1:
+    /// Input: graph = [[1,1,0],[1,1,0],[0,0,1]], initial = [0,1]
+    /// Output: 0
+    ///
+    /// Example 2:
+    /// Input: graph = [[1,1,0],[1,1,1],[0,1,1]], initial = [0,1]
+    /// Output: 1
+    ///
+    /// Example 3:
+    /// Input: graph = [[1,1,0,0],[1,1,1,0],[0,1,1,1],[0,0,1,1]], initial = [0,1]
+    /// Output: 1
+    /// 
+    /// Note:
+    /// 
+    /// 1. 1 < graph.length = graph[0].length <= 300
+    /// 2. 0 <= graph[i][j] == graph[j][i] <= 1
+    /// 3. graph[i][i] = 1
+    /// 4. 1 <= initial.length < graph.length
+    /// 5. 0 <= initial[i] < graph.length
+    /// </summary>
+    int minMalwareSpreadII(vector<vector<int>>& graph, vector<int>& initial);
 
-	/// <summary>
-	/// Leet code #934. Shortest Bridge
-	/// </summary>
-	int shortestBridgePath(vector<vector<int>>& A);
+    /// <summary>
+    /// Leet code #934. Shortest Bridge
+    /// </summary>
+    int shortestBridgePath(vector<vector<int>>& A);
 
-	/// <summary>
-	/// Leet code #934. Shortest Bridge
-	/// </summary>
-	void shortestBridgeFill(vector<vector<int>>& A, int row, int col);
+    /// <summary>
+    /// Leet code #934. Shortest Bridge
+    /// </summary>
+    void shortestBridgeFill(vector<vector<int>>& A, int row, int col);
 
-	/// <summary>
-	/// Leet code #934. Shortest Bridge
-	/// 
-	/// In a given 2D binary array A, there are two islands.  (An island is a 
-	/// 4-directionally connected group of 1s not connected to any other 1s.)
-	///
-	/// Now, we may change 0s to 1s so as to connect the two islands together 
-	/// to form 1 island.
-	///
-	/// Return the smallest number of 0s that must be flipped.  (It is guaranteed 
-	/// that the answer is at least 1.)
-	///
-	/// Example 1:
-	///
-	/// Input: [[0,1],[1,0]]
-	/// Output: 1
-	/// Example 2:
-	///
-	/// Input: [[0,1,0],[0,0,0],[0,0,1]]
-	/// Output: 2
-	///
-	/// Example 3:
-	///
-	/// Input: [[1,1,1,1,1],[1,0,0,0,1],[1,0,1,0,1],[1,0,0,0,1],[1,1,1,1,1]]
-	/// Output: 1
-	/// 
-	///
-	/// Note:
-	///
-	/// 1 <= A.length = A[0].length <= 100
-	/// A[i][j] == 0 or A[i][j] == 1
-	/// </summary>
-	int shortestBridge(vector<vector<int>>& A);
+    /// <summary>
+    /// Leet code #934. Shortest Bridge
+    /// 
+    /// In a given 2D binary array A, there are two islands.  (An island is a 
+    /// 4-directionally connected group of 1s not connected to any other 1s.)
+    ///
+    /// Now, we may change 0s to 1s so as to connect the two islands together 
+    /// to form 1 island.
+    ///
+    /// Return the smallest number of 0s that must be flipped.  (It is guaranteed 
+    /// that the answer is at least 1.)
+    ///
+    /// Example 1:
+    ///
+    /// Input: [[0,1],[1,0]]
+    /// Output: 1
+    /// Example 2:
+    ///
+    /// Input: [[0,1,0],[0,0,0],[0,0,1]]
+    /// Output: 2
+    ///
+    /// Example 3:
+    ///
+    /// Input: [[1,1,1,1,1],[1,0,0,0,1],[1,0,1,0,1],[1,0,0,0,1],[1,1,1,1,1]]
+    /// Output: 1
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1 <= A.length = A[0].length <= 100
+    /// A[i][j] == 0 or A[i][j] == 1
+    /// </summary>
+    int shortestBridge(vector<vector<int>>& A);
 
     /// <summary>
     /// Leet code #967. Numbers With Same Consecutive Differences
@@ -25820,7 +25210,7 @@ public:
     /// the three lines of height 5 should be merged into one in the final output 
     /// as such: [...[2 3], [4 5], [12 7], ...]
     /// </summary>
-	vector<vector<int>> getSkyline(vector<vector<int>>& buildings);
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings);
 
     /// <summary>
     /// Leet code #252. Meeting Rooms   
@@ -25860,7 +25250,7 @@ public:
     vector<string> findMissingRanges(vector<int>& nums, int lower, int upper);
 
     /// <summary>
-    /// Leet code #495. Teemo Attacking         
+    /// Leet code #495. Teemo Attacking   
     /// 
     /// In LLP world, there is a hero called Teemo and his attacking can make his enemy 
     /// Ashe be in poisoned condition. Now, given the Teemo's attacking ascending time 
@@ -26198,142 +25588,142 @@ public:
     /// </summary>
     vector<int> fallingSquares(vector<pair<int, int>>& positions);
 
-	/// <summary>
-	/// Leet code #757. Set Intersection Size At Least Two
-	///
-	/// An integer interval [a, b] (for integers a < b) is a set of all 
-	/// consecutive integers from a to b, including a and b.
-	///
-	/// Find the minimum size of a set S such that for every integer interval 
-	/// A in intervals, the intersection of S with A has size at least 2.
-	///
-	/// Example 1:
-	/// Input: intervals = [[1, 3], [1, 4], [2, 5], [3, 5]]
-	/// Output: 3
-	/// Explanation:
-	/// Consider the set S = {2, 3, 4}.  For each interval, there are at least 2 
-	/// elements from S in the interval.
-	/// Also, there isn't a smaller size set that fulfills the above condition.
-	/// Thus, we output the size of this set, which is 3.
-	///
-	/// Example 2:
-	/// Input: intervals = [[1, 2], [2, 3], [2, 4], [4, 5]]
-	/// Output: 5
-	/// Explanation:
-	/// An example of a minimum sized set is {1, 2, 3, 4, 5}.
-	/// Note:
-	/// 1. intervals will have length in range [1, 3000].
-	/// 2. intervals[i] will have length 2, representing some integer interval.
-	/// 3. intervals[i][j] will be an integer in [0, 10^8].
-	/// </summary>
-	int intersectionSizeTwo(vector<vector<int>>& intervals);
+    /// <summary>
+    /// Leet code #757. Set Intersection Size At Least Two
+    ///
+    /// An integer interval [a, b] (for integers a < b) is a set of all 
+    /// consecutive integers from a to b, including a and b.
+    ///
+    /// Find the minimum size of a set S such that for every integer interval 
+    /// A in intervals, the intersection of S with A has size at least 2.
+    ///
+    /// Example 1:
+    /// Input: intervals = [[1, 3], [1, 4], [2, 5], [3, 5]]
+    /// Output: 3
+    /// Explanation:
+    /// Consider the set S = {2, 3, 4}.  For each interval, there are at least 2 
+    /// elements from S in the interval.
+    /// Also, there isn't a smaller size set that fulfills the above condition.
+    /// Thus, we output the size of this set, which is 3.
+    ///
+    /// Example 2:
+    /// Input: intervals = [[1, 2], [2, 3], [2, 4], [4, 5]]
+    /// Output: 5
+    /// Explanation:
+    /// An example of a minimum sized set is {1, 2, 3, 4, 5}.
+    /// Note:
+    /// 1. intervals will have length in range [1, 3000].
+    /// 2. intervals[i] will have length 2, representing some integer interval.
+    /// 3. intervals[i][j] will be an integer in [0, 10^8].
+    /// </summary>
+    int intersectionSizeTwo(vector<vector<int>>& intervals);
 
-	/// <summary>
-	/// Leet code #759. Employee Free Time    
-	///
-	/// We are given a list schedule of employees, which represents the working 
-	/// time for each employee.
-	///
-	/// Each employee has a list of non-overlapping Intervals, and these 
-	/// intervals are in sorted order.
-	///
-	/// Return the list of finite intervals representing common, positive-length 
-	/// free time for all employees, also in sorted order.
-	/// 
-	/// Example 1:
-	/// Input: schedule = [[[1,2],[5,6]],[[1,3]],[[4,10]]]
-	/// Output: [[3,4]]
-	/// Explanation:
-	/// There are a total of three employees, and all common
-	/// free time intervals would be [-inf, 1], [3, 4], [10, inf].
-	/// We discard any intervals that contain inf as they aren't finite.
-	/// Example 2:
-	/// Input: schedule = [[[1,3],[6,7]],[[2,4]],[[2,5],[9,12]]]
-	/// Output: [[5,6],[7,9]]
-	/// (Even though we are representing Intervals in the form [x, y], the objects
-	/// inside are Intervals, not lists or arrays. For example, 
-	/// schedule[0][0].start = 1, schedule[0][0].end = 2, and schedule[0][0][0] 
-	/// is not defined.)
-	/// 
-	/// Also, we wouldn't include intervals like [5, 5] in our answer, as they 
-	/// have zero length.
-	/// 
-	/// Note:
-	/// 1. schedule and schedule[i] are lists with lengths in range [1, 50].
-	/// 2. 0 <= schedule[i].start < schedule[i].end <= 10^8.
-	/// </summary>
-	vector<Interval> employeeFreeTime(vector<vector<Interval>>& schedule);
+    /// <summary>
+    /// Leet code #759. Employee Free Time    
+    ///
+    /// We are given a list schedule of employees, which represents the working 
+    /// time for each employee.
+    ///
+    /// Each employee has a list of non-overlapping Intervals, and these 
+    /// intervals are in sorted order.
+    ///
+    /// Return the list of finite intervals representing common, positive-length 
+    /// free time for all employees, also in sorted order.
+    /// 
+    /// Example 1:
+    /// Input: schedule = [[[1,2],[5,6]],[[1,3]],[[4,10]]]
+    /// Output: [[3,4]]
+    /// Explanation:
+    /// There are a total of three employees, and all common
+    /// free time intervals would be [-inf, 1], [3, 4], [10, inf].
+    /// We discard any intervals that contain inf as they aren't finite.
+    /// Example 2:
+    /// Input: schedule = [[[1,3],[6,7]],[[2,4]],[[2,5],[9,12]]]
+    /// Output: [[5,6],[7,9]]
+    /// (Even though we are representing Intervals in the form [x, y], the objects
+    /// inside are Intervals, not lists or arrays. For example, 
+    /// schedule[0][0].start = 1, schedule[0][0].end = 2, and schedule[0][0][0] 
+    /// is not defined.)
+    /// 
+    /// Also, we wouldn't include intervals like [5, 5] in our answer, as they 
+    /// have zero length.
+    /// 
+    /// Note:
+    /// 1. schedule and schedule[i] are lists with lengths in range [1, 50].
+    /// 2. 0 <= schedule[i].start < schedule[i].end <= 10^8.
+    /// </summary>
+    vector<Interval> employeeFreeTime(vector<vector<Interval>>& schedule);
 
-	/// <summary>
-	/// Leet code #850. Rectangle Area II
-	/// 
-	/// We are given a list of (axis-aligned) rectangles.  Each rectangle[i] = 
-	/// [x1, y1, x2, y2] , where (x1, y1) are the coordinates of the bottom-left 
-	/// corner, and (x2, y2) are the coordinates of the top-right corner of the ith 
-	/// rectangle.
-	///
-	/// Find the total area covered by all rectangles in the plane.  Since the 
-	/// answer may be too large, return it modulo 10^9 + 7.
-	///
-	/// Example 1:
-	///
-	/// Input: [[0,0,2,2],[1,0,2,3],[1,0,3,1]]
-	/// Output: 6
-	/// Explanation: As illustrated in the picture.
-	///
-	/// Example 2:
-	///
-	/// Input: [[0,0,1000000000,1000000000]]
-	/// Output: 49
-	/// Explanation: The answer is 10^18 modulo (10^9 + 7), 
-	/// which is (10^9)^2 = (-7)^2 = 49.
-	/// Note:
-	///
-	/// 1 <= rectangles.length <= 200
-	/// rectanges[i].length = 4
-	/// 0 <= rectangles[i][j] <= 10^9
-	/// The total area covered by all rectangles will never exceed 2^63 - 1 and 
-	/// thus will fit in a 64-bit signed integer.
-	/// </summary>
-	int rectangleArea(vector<vector<int>>& rectangles);
+    /// <summary>
+    /// Leet code #850. Rectangle Area II
+    /// 
+    /// We are given a list of (axis-aligned) rectangles.  Each rectangle[i] = 
+    /// [x1, y1, x2, y2] , where (x1, y1) are the coordinates of the bottom-left 
+    /// corner, and (x2, y2) are the coordinates of the top-right corner of the ith 
+    /// rectangle.
+    ///
+    /// Find the total area covered by all rectangles in the plane.  Since the 
+    /// answer may be too large, return it modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    ///
+    /// Input: [[0,0,2,2],[1,0,2,3],[1,0,3,1]]
+    /// Output: 6
+    /// Explanation: As illustrated in the picture.
+    ///
+    /// Example 2:
+    ///
+    /// Input: [[0,0,1000000000,1000000000]]
+    /// Output: 49
+    /// Explanation: The answer is 10^18 modulo (10^9 + 7), 
+    /// which is (10^9)^2 = (-7)^2 = 49.
+    /// Note:
+    ///
+    /// 1 <= rectangles.length <= 200
+    /// rectanges[i].length = 4
+    /// 0 <= rectangles[i][j] <= 10^9
+    /// The total area covered by all rectangles will never exceed 2^63 - 1 and 
+    /// thus will fit in a 64-bit signed integer.
+    /// </summary>
+    int rectangleArea(vector<vector<int>>& rectangles);
 
-	/// <summary>
-	/// Leet code #948. Bag of Tokens
-	/// 
-	/// You have an initial power P, an initial score of 0 points, and a bag 
-	/// of tokens.
-	/// 
-	/// Each token can be used at most once, has a value token[i], and has 
-	/// potentially two ways to use it.
-	///
-	/// If we have at least token[i] power, we may play the token face up, 
-	/// losing token[i] power, and gaining 1 point.
-	/// If we have at least 1 point, we may play the token face down, gaining 
-	/// token[i] power, and losing 1 point.
-	/// Return the largest number of points we can have after playing any 
-	/// number of tokens.
-	///
-	/// Example 1:
-	///
-	/// Input: tokens = [100], P = 50
-	/// Output: 0
-	///
-	/// Example 2:
-	///
-	/// Input: tokens = [100,200], P = 150
-	/// Output: 1
-	///
-	/// Example 3:
-	///
-	/// Input: tokens = [100,200,300,400], P = 200
-	/// Output: 2
-	/// Note:
-	///
-	/// 1. tokens.length <= 1000
-	/// 2. 0 <= tokens[i] < 10000
-	/// 3. 0 <= P < 10000
-	/// </summary>
-	int bagOfTokensScore(vector<int>& tokens, int P);
+    /// <summary>
+    /// Leet code #948. Bag of Tokens
+    /// 
+    /// You have an initial power P, an initial score of 0 points, and a bag 
+    /// of tokens.
+    /// 
+    /// Each token can be used at most once, has a value token[i], and has 
+    /// potentially two ways to use it.
+    ///
+    /// If we have at least token[i] power, we may play the token face up, 
+    /// losing token[i] power, and gaining 1 point.
+    /// If we have at least 1 point, we may play the token face down, gaining 
+    /// token[i] power, and losing 1 point.
+    /// Return the largest number of points we can have after playing any 
+    /// number of tokens.
+    ///
+    /// Example 1:
+    ///
+    /// Input: tokens = [100], P = 50
+    /// Output: 0
+    ///
+    /// Example 2:
+    ///
+    /// Input: tokens = [100,200], P = 150
+    /// Output: 1
+    ///
+    /// Example 3:
+    ///
+    /// Input: tokens = [100,200,300,400], P = 200
+    /// Output: 2
+    /// Note:
+    ///
+    /// 1. tokens.length <= 1000
+    /// 2. 0 <= tokens[i] < 10000
+    /// 3. 0 <= P < 10000
+    /// </summary>
+    int bagOfTokensScore(vector<int>& tokens, int P);
 
     /// <summary>
     /// Leet code #984. String Without AAA or BBB
@@ -26603,17 +25993,17 @@ public:
 
 #pragma region UnionFind
     /// <summary>
-    /// Leet code #305. Number of Islands II         
+    /// Leet code #305. Number of Islands II  
     /// </summary>
     int checkIslands(int island_id, int row, int col, vector<vector<int>>&grid_map, vector<int>& island_map);
 
     /// <summary>
-    /// Leet code #305. Number of Islands II         
+    /// Leet code #305. Number of Islands II  
     /// </summary>
     int mergeIslands(int island1, int island2, vector<vector<int>>&grid_map, vector<int>& island_map);
     
     /// <summary>
-    /// Leet code #305. Number of Islands II         
+    /// Leet code #305. Number of Islands II  
     /// 
     /// A 2d grid map of m rows and n columns is initially filled with water. We may perform 
     /// an addLand operation which turns the water at position (row, col) into a land. Given 
@@ -26735,102 +26125,102 @@ public:
     /// </summary>
     int maxAreaOfIsland(vector<vector<int>>& grid);
 
-	/// <summary>
-	/// Leet code #803. Bricks Falling When Hit
-	/// </summary>
-	int unionBricks(int source, int target, int size, unordered_map<int, pair<int, int>> &union_map);
+    /// <summary>
+    /// Leet code #803. Bricks Falling When Hit
+    /// </summary>
+    int unionBricks(int source, int target, int size, unordered_map<int, pair<int, int>> &union_map);
 
-	/// <summary>
-	/// Leet code #803. Bricks Falling When Hit
-	/// </summary>
-	int unionNeighbors(int row, int col, vector<vector<int>>& grid, unordered_map<int, pair<int, int>> &union_map);
+    /// <summary>
+    /// Leet code #803. Bricks Falling When Hit
+    /// </summary>
+    int unionNeighbors(int row, int col, vector<vector<int>>& grid, unordered_map<int, pair<int, int>> &union_map);
 
-	/// <summary>
-	/// Leet code #803. Bricks Falling When Hit
-	/// 
-	/// We have a grid of 1s and 0s; the 1s in a cell represent bricks.  A 
-	/// brick will not drop if and only if it is directly connected to the 
-	/// top of the grid, or at least one of its (4-way) adjacent bricks will 
-	/// not drop.
-	///
-	/// We will do some erasures sequentially. Each time we want to do the 
-	/// erasure at the location (i, j), the brick (if it exists) on that 
-	/// location will disappear, and then some other bricks may drop because 
-	/// of that erasure.
-	///
-	/// Return an array representing the number of bricks that will drop after 
-	/// each erasure in sequence.
-	///
-	/// Example 1:
-	/// Input: 
-	/// grid = [[1,0,0,0],[1,1,1,0]]
-	/// hits = [[1,0]]
-	/// Output: [2]
-	/// Explanation: 
-	/// If we erase the brick at (1, 0), the brick at (1, 1) and (1, 2) will 
-	/// drop. So we should return 2.
-	/// Example 2:
-	/// Input: 
-	/// grid = [[1,0,0,0],[1,1,0,0]]
-	/// hits = [[1,1],[1,0]]
-	/// Output: [0,0]
-	/// Explanation: 
-	/// When we erase the brick at (1, 0), the brick at (1, 1) has already 
-	/// disappeared due to the last move. So each erasure will cause no bricks 
-	/// dropping.  Note that the erased brick (1, 0) will not be counted as a 
-	/// dropped brick.
-	/// 
-	///
-	/// Note:
-	///
-	/// 1. The number of rows and columns in the grid will be in the range 
-	///    [1, 200].
-	/// 2. The number of erasures will not exceed the area of the grid.
-	/// 3. It is guaranteed that each erasure will be different from any other 
-	///    erasure, and located inside the grid.
-	/// 4. An erasure may refer to a location with no brick - if it does, 
-	///    no bricks drop.
-	/// </summary>
-	vector<int> hitBricks(vector<vector<int>>& grid, vector<vector<int>>& hits);
+    /// <summary>
+    /// Leet code #803. Bricks Falling When Hit
+    /// 
+    /// We have a grid of 1s and 0s; the 1s in a cell represent bricks.  A 
+    /// brick will not drop if and only if it is directly connected to the 
+    /// top of the grid, or at least one of its (4-way) adjacent bricks will 
+    /// not drop.
+    ///
+    /// We will do some erasures sequentially. Each time we want to do the 
+    /// erasure at the location (i, j), the brick (if it exists) on that 
+    /// location will disappear, and then some other bricks may drop because 
+    /// of that erasure.
+    ///
+    /// Return an array representing the number of bricks that will drop after 
+    /// each erasure in sequence.
+    ///
+    /// Example 1:
+    /// Input: 
+    /// grid = [[1,0,0,0],[1,1,1,0]]
+    /// hits = [[1,0]]
+    /// Output: [2]
+    /// Explanation: 
+    /// If we erase the brick at (1, 0), the brick at (1, 1) and (1, 2) will 
+    /// drop. So we should return 2.
+    /// Example 2:
+    /// Input: 
+    /// grid = [[1,0,0,0],[1,1,0,0]]
+    /// hits = [[1,1],[1,0]]
+    /// Output: [0,0]
+    /// Explanation: 
+    /// When we erase the brick at (1, 0), the brick at (1, 1) has already 
+    /// disappeared due to the last move. So each erasure will cause no bricks 
+    /// dropping.  Note that the erased brick (1, 0) will not be counted as a 
+    /// dropped brick.
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. The number of rows and columns in the grid will be in the range 
+    ///    [1, 200].
+    /// 2. The number of erasures will not exceed the area of the grid.
+    /// 3. It is guaranteed that each erasure will be different from any other 
+    ///    erasure, and located inside the grid.
+    /// 4. An erasure may refer to a location with no brick - if it does, 
+    ///    no bricks drop.
+    /// </summary>
+    vector<int> hitBricks(vector<vector<int>>& grid, vector<vector<int>>& hits);
 
-	/// <summary>
-	/// Leet code #827. Making A Large Island
-	/// </summary>
-	int mergeIsland(int source, int target, unordered_map<int, pair<int, int>>& union_map);
+    /// <summary>
+    /// Leet code #827. Making A Large Island
+    /// </summary>
+    int mergeIsland(int source, int target, unordered_map<int, pair<int, int>>& union_map);
 
-	/// <summary>
-	/// Leet code #827. Making A Large Island
-	/// 
-	/// In a 2D grid of 0s and 1s, we change at most one 0 to a 1.
-	///
-	/// After, what is the size of the largest island? (An island is a 
-	/// 4-directionally connected group of 1s).
-	///
-	/// Example 1:
-	///
-	/// Input: [[1, 0], [0, 1]]
-	/// Output: 3
-	/// Explanation: Change one 0 to 1 and connect two 1s, then we get an 
-	/// island with area = 3.
-	/// Example 2:
-	///
-	/// Input: [[1, 1], [1, 0]]
-	/// Output: 4
-	/// Explanation: Change the 0 to 1 and make the island bigger, only one 
-	/// island with area = 1.
-	/// Example 3:
-	///
-	/// Input: [[1, 1], [1, 1]]
-	/// Output: 4
-	/// Explanation: Can't change any 0 to 1, only one island with area = 1.
-	/// 
-	///
-	/// Notes:
-	///
-	/// 1. 1 <= grid.length = grid[0].length <= 50.
-	/// 2. 0 <= grid[i][j] <= 1.
-	/// </summary>
-	int largestIsland(vector<vector<int>>& grid);
+    /// <summary>
+    /// Leet code #827. Making A Large Island
+    /// 
+    /// In a 2D grid of 0s and 1s, we change at most one 0 to a 1.
+    ///
+    /// After, what is the size of the largest island? (An island is a 
+    /// 4-directionally connected group of 1s).
+    ///
+    /// Example 1:
+    ///
+    /// Input: [[1, 0], [0, 1]]
+    /// Output: 3
+    /// Explanation: Change one 0 to 1 and connect two 1s, then we get an 
+    /// island with area = 3.
+    /// Example 2:
+    ///
+    /// Input: [[1, 1], [1, 0]]
+    /// Output: 4
+    /// Explanation: Change the 0 to 1 and make the island bigger, only one 
+    /// island with area = 1.
+    /// Example 3:
+    ///
+    /// Input: [[1, 1], [1, 1]]
+    /// Output: 4
+    /// Explanation: Can't change any 0 to 1, only one island with area = 1.
+    /// 
+    ///
+    /// Notes:
+    ///
+    /// 1. 1 <= grid.length = grid[0].length <= 50.
+    /// 2. 0 <= grid[i][j] <= 1.
+    /// </summary>
+    int largestIsland(vector<vector<int>>& grid);
 
     /// <summary>
     /// Leet code #9903. Check Radar 
@@ -27403,91 +26793,91 @@ public:
     /// </summary>
     int findKthNumber(int m, int n, int k);
 
-	
-	/// <summary>
-	/// Leet code #852. Peak Index in a Mountain Array
-	/// 
-	/// Let's call an array A a mountain if the following properties hold:
-	///
-	/// A.length >= 3
-	/// There exists some 0 < i < A.length - 1 such that A[0] < A[1] < ... A[i-1] 
-	/// < A[i] > A[i+1] > ... > A[A.length - 1]
-	/// Given an array that is definitely a mountain, return any i such that 
-	/// A[0] < A[1] < ... A[i-1] < A[i] > A[i+1] > ... > A[A.length - 1].
-	///
-	/// Example 1:
-	///
-	/// Input: [0,1,0]
-	/// Output: 1
-	///
-	/// Example 2:
-	///
-	/// Input: [0,2,1,0]
-	/// Output: 1
-	/// Note:
-	/// 
-	/// 1. 3 <= A.length <= 10000
-	/// 2. 0 <= A[i] <= 10^6
-	/// 3. A is a mountain, as defined above.
-	/// </summary>
-	int peakIndexInMountainArray(vector<int>& A);
+    
+    /// <summary>
+    /// Leet code #852. Peak Index in a Mountain Array
+    /// 
+    /// Let's call an array A a mountain if the following properties hold:
+    ///
+    /// A.length >= 3
+    /// There exists some 0 < i < A.length - 1 such that A[0] < A[1] < ... A[i-1] 
+    /// < A[i] > A[i+1] > ... > A[A.length - 1]
+    /// Given an array that is definitely a mountain, return any i such that 
+    /// A[0] < A[1] < ... A[i-1] < A[i] > A[i+1] > ... > A[A.length - 1].
+    ///
+    /// Example 1:
+    ///
+    /// Input: [0,1,0]
+    /// Output: 1
+    ///
+    /// Example 2:
+    ///
+    /// Input: [0,2,1,0]
+    /// Output: 1
+    /// Note:
+    /// 
+    /// 1. 3 <= A.length <= 10000
+    /// 2. 0 <= A[i] <= 10^6
+    /// 3. A is a mountain, as defined above.
+    /// </summary>
+    int peakIndexInMountainArray(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #704. Binary Search
-	/// 
-	/// Given a sorted (in ascending order) integer array nums of n elements 
-	/// and a target value, write a function to search target in nums. If 
-	/// target exists, then return its index, otherwise return -1.
-	///
-	/// Example 1:
-	///
-	/// Input: nums = [-1,0,3,5,9,12], target = 9
-	/// Output: 4
-	/// Explanation: 9 exists in nums and its index is 4
-	///
-	/// Example 2:
-	///
-	/// Input: nums = [-1,0,3,5,9,12], target = 2
-	/// Output: -1
-	/// Explanation: 2 does not exist in nums so return -1
-	/// 
-	/// Note:
-	/// 1. You may assume that all elements in nums are unique.
-	/// 2. n will be in the range [1, 10000].
-	/// 3. The value of each element in nums will be in the range 
-	/// [-9999, 9999].
-	/// </summary>
-	int binarySearchI(vector<int>& nums, int target);
+    /// <summary>
+    /// Leet code #704. Binary Search
+    /// 
+    /// Given a sorted (in ascending order) integer array nums of n elements 
+    /// and a target value, write a function to search target in nums. If 
+    /// target exists, then return its index, otherwise return -1.
+    ///
+    /// Example 1:
+    ///
+    /// Input: nums = [-1,0,3,5,9,12], target = 9
+    /// Output: 4
+    /// Explanation: 9 exists in nums and its index is 4
+    ///
+    /// Example 2:
+    ///
+    /// Input: nums = [-1,0,3,5,9,12], target = 2
+    /// Output: -1
+    /// Explanation: 2 does not exist in nums so return -1
+    /// 
+    /// Note:
+    /// 1. You may assume that all elements in nums are unique.
+    /// 2. n will be in the range [1, 10000].
+    /// 3. The value of each element in nums will be in the range 
+    /// [-9999, 9999].
+    /// </summary>
+    int binarySearchI(vector<int>& nums, int target);
 
-	/// <summary>
-	/// Leet code #702. Search in a Sorted Array of Unknown Size
-	/// 
-	/// Given an integer array sorted in ascending order, write a function to 
-	/// search target in nums.  If target exists, then return its index, otherwise 
-	/// return -1. However, the array size is unknown to you. You may only access 
-	/// the array using an ArrayReader interface, where ArrayReader.get(k) 
-	/// returns the element of the array at index k (0-indexed).
-	///
-	/// You may assume all integers in the array are less than 10000, and if you 
-	/// access the array out of bounds, ArrayReader.get will return 2147483647.
-	///
-	/// Example 1:
-	/// Input: array = [-1,0,3,5,9,12], target = 9
-	/// Output: 4
-	/// Explanation: 9 exists in nums and its index is 4
-	///
-	/// Example 2:
-	/// Input: array = [-1,0,3,5,9,12], target = 2
-	/// Output: -1
-	/// Explanation: 2 does not exist in nums so return -1
-	/// 
-	/// Note:
-	///
-	/// 1. You may assume that all elements in the array are unique.
-	/// 2. The value of each element in the array will be in the range 
-	///    [-9999, 9999].
-	/// </summary>
-	int searchStream(const vector<int>&reader, int target);
+    /// <summary>
+    /// Leet code #702. Search in a Sorted Array of Unknown Size
+    /// 
+    /// Given an integer array sorted in ascending order, write a function to 
+    /// search target in nums.  If target exists, then return its index, otherwise 
+    /// return -1. However, the array size is unknown to you. You may only access 
+    /// the array using an ArrayReader interface, where ArrayReader.get(k) 
+    /// returns the element of the array at index k (0-indexed).
+    ///
+    /// You may assume all integers in the array are less than 10000, and if you 
+    /// access the array out of bounds, ArrayReader.get will return 2147483647.
+    ///
+    /// Example 1:
+    /// Input: array = [-1,0,3,5,9,12], target = 9
+    /// Output: 4
+    /// Explanation: 9 exists in nums and its index is 4
+    ///
+    /// Example 2:
+    /// Input: array = [-1,0,3,5,9,12], target = 2
+    /// Output: -1
+    /// Explanation: 2 does not exist in nums so return -1
+    /// 
+    /// Note:
+    ///
+    /// 1. You may assume that all elements in the array are unique.
+    /// 2. The value of each element in the array will be in the range 
+    ///    [-9999, 9999].
+    /// </summary>
+    int searchStream(const vector<int>&reader, int target);
 
 
     /// <summary>
@@ -28076,467 +27466,467 @@ public:
     /// </summary> 
     char nextGreatestLetter(vector<char>& letters, char target);
 
-	/// <summary>
-	/// Leet code #769. Max Chunks To Make Sorted   
-	///
-	/// Given an array arr that is a permutation of 
-	/// [0, 1, ..., arr.length - 1], we split the array into some number of 
-	/// "chunks" (partitions), and individually sort each chunk.  After 
-	/// concatenating them, the result equals the sorted array.
-	///
-	/// What is the most number of chunks we could have made?
-	///
-	/// Example 1:
-	///
-	/// Input: arr = [4,3,2,1,0]
-	/// Output: 1
-	/// Explanation:
-	/// Splitting into two or more chunks will not return the required result.
-	/// For example, splitting into [4, 3], [2, 1, 0] will result in 
-	/// [3, 4, 0, 1, 2], which isn't sorted.
-	///
-	/// Example 2:
-	///
-	/// Input: arr = [1,0,2,3,4]
-	/// Output: 4
-	/// Explanation:
-	/// We can split into two chunks, such as [1, 0], [2, 3, 4].
-	/// However, splitting into [1, 0], [2], [3], [4] is the highest number of
-	/// chunks possible.
-	/// Note:
-	/// arr will have length in range [1, 10].
-	/// arr[i] will be a permutation of [0, 1, ..., arr.length - 1].
-	/// </summary>
-	int maxChunksToSorted(vector<int>& arr);
+    /// <summary>
+    /// Leet code #769. Max Chunks To Make Sorted   
+    ///
+    /// Given an array arr that is a permutation of 
+    /// [0, 1, ..., arr.length - 1], we split the array into some number of 
+    /// "chunks" (partitions), and individually sort each chunk.  After 
+    /// concatenating them, the result equals the sorted array.
+    ///
+    /// What is the most number of chunks we could have made?
+    ///
+    /// Example 1:
+    ///
+    /// Input: arr = [4,3,2,1,0]
+    /// Output: 1
+    /// Explanation:
+    /// Splitting into two or more chunks will not return the required result.
+    /// For example, splitting into [4, 3], [2, 1, 0] will result in 
+    /// [3, 4, 0, 1, 2], which isn't sorted.
+    ///
+    /// Example 2:
+    ///
+    /// Input: arr = [1,0,2,3,4]
+    /// Output: 4
+    /// Explanation:
+    /// We can split into two chunks, such as [1, 0], [2, 3, 4].
+    /// However, splitting into [1, 0], [2], [3], [4] is the highest number of
+    /// chunks possible.
+    /// Note:
+    /// arr will have length in range [1, 10].
+    /// arr[i] will be a permutation of [0, 1, ..., arr.length - 1].
+    /// </summary>
+    int maxChunksToSorted(vector<int>& arr);
 
-	/// <summary>
-	/// Leetcode #768. Max Chunks To Make Sorted II
-	///
-	/// This question is the same as "Max Chunks to Make Sorted" except the 
-	/// integers of the given array are not necessarily distinct, the input 
-	/// array could be up to length 2000, and the elements could be up to 
-	/// 10**8.
-	///
-	/// Given an array arr of integers (not necessarily distinct), we split 
-	/// the array into some number of "chunks" (partitions), and individually 
-	/// sort each chunk.  After concatenating them, the result equals the 
-	/// sorted array.
-	///
-	/// What is the most number of chunks we could have made?
-	///
-	/// Example 1:
-	///
-	/// Input: arr = [5,4,3,2,1]
-	/// Output: 1
-	/// Explanation:
-	/// Splitting into two or more chunks will not return the required result.
-	/// For example, splitting into [5, 4], [3, 2, 1] will result in [4, 5, 1, 
-	/// 2, 3], which isn't sorted.
-	///
-	/// Example 2:
-	/// Input: arr = [2,1,3,4,4]
-	/// Output: 4
-	/// Explanation:
-	/// We can split into two chunks, such as [2, 1], [3, 4, 4].
-	/// However, splitting into [2, 1], [3], [4], [4] is the highest number of 
-	/// chunks possible.
-	///
-	/// Note:
-	/// arr will have length in range [1, 2000].
-	/// arr[i] will be an integer in range [0, 10**8].
-	/// </summary>
-	int maxChunksToSortedII(vector<int>& arr);
+    /// <summary>
+    /// Leetcode #768. Max Chunks To Make Sorted II
+    ///
+    /// This question is the same as "Max Chunks to Make Sorted" except the 
+    /// integers of the given array are not necessarily distinct, the input 
+    /// array could be up to length 2000, and the elements could be up to 
+    /// 10**8.
+    ///
+    /// Given an array arr of integers (not necessarily distinct), we split 
+    /// the array into some number of "chunks" (partitions), and individually 
+    /// sort each chunk.  After concatenating them, the result equals the 
+    /// sorted array.
+    ///
+    /// What is the most number of chunks we could have made?
+    ///
+    /// Example 1:
+    ///
+    /// Input: arr = [5,4,3,2,1]
+    /// Output: 1
+    /// Explanation:
+    /// Splitting into two or more chunks will not return the required result.
+    /// For example, splitting into [5, 4], [3, 2, 1] will result in [4, 5, 1, 
+    /// 2, 3], which isn't sorted.
+    ///
+    /// Example 2:
+    /// Input: arr = [2,1,3,4,4]
+    /// Output: 4
+    /// Explanation:
+    /// We can split into two chunks, such as [2, 1], [3, 4, 4].
+    /// However, splitting into [2, 1], [3], [4], [4] is the highest number of 
+    /// chunks possible.
+    ///
+    /// Note:
+    /// arr will have length in range [1, 2000].
+    /// arr[i] will be an integer in range [0, 10**8].
+    /// </summary>
+    int maxChunksToSortedII(vector<int>& arr);
 
-	/// <summary>
-	/// Leetcode #775. Global and Local Inversions
-	///
-	/// We have some permutation A of [0, 1, ..., N - 1], where N is the length
-	/// of A.
-	///
-	/// The number of (global) inversions is the number of i < j with 
-	/// 0 <= i < j < N and A[i] > A[j].
-	///
-	/// The number of local inversions is the number of i with 0 <= i < N and 
-	/// A[i] > A[i+1].
-	///
-	/// Return true if and only if the number of global inversions is equal to 
-	/// the number of local inversions.
-	///
-	/// Example 1:
-	/// Input: A = [1,0,2]
-	/// Output: true
-	/// Explanation: There is 1 global inversion, and 1 local inversion.
-	///
-	/// Example 2:
-	/// Input: A = [1,2,0]
-	/// Output: false
-	/// Explanation: There are 2 global inversions, and 1 local inversion.
-	/// Note:
-	/// 
-	/// A will be a permutation of [0, 1, ..., A.length - 1].
-	/// A will have length in range [1, 5000].
-	/// The time limit for this problem has been reduced.
-	/// </summary>
-	bool isIdealPermutation(vector<int>& A);
+    /// <summary>
+    /// Leetcode #775. Global and Local Inversions
+    ///
+    /// We have some permutation A of [0, 1, ..., N - 1], where N is the length
+    /// of A.
+    ///
+    /// The number of (global) inversions is the number of i < j with 
+    /// 0 <= i < j < N and A[i] > A[j].
+    ///
+    /// The number of local inversions is the number of i with 0 <= i < N and 
+    /// A[i] > A[i+1].
+    ///
+    /// Return true if and only if the number of global inversions is equal to 
+    /// the number of local inversions.
+    ///
+    /// Example 1:
+    /// Input: A = [1,0,2]
+    /// Output: true
+    /// Explanation: There is 1 global inversion, and 1 local inversion.
+    ///
+    /// Example 2:
+    /// Input: A = [1,2,0]
+    /// Output: false
+    /// Explanation: There are 2 global inversions, and 1 local inversion.
+    /// Note:
+    /// 
+    /// A will be a permutation of [0, 1, ..., A.length - 1].
+    /// A will have length in range [1, 5000].
+    /// The time limit for this problem has been reduced.
+    /// </summary>
+    bool isIdealPermutation(vector<int>& A);
 
-	/// <summary>
-	/// Leetcode #775. Global and Local Inversions
-	///
-	/// We have some permutation A of [0, 1, ..., N - 1], where N is the length
-	/// of A.
-	///
-	/// The number of (global) inversions is the number of i < j with 
-	/// 0 <= i < j < N and A[i] > A[j].
-	///
-	/// The number of local inversions is the number of i with 0 <= i < N and 
-	/// A[i] > A[i+1].
-	///
-	/// Return true if and only if the number of global inversions is equal to 
-	/// the number of local inversions.
-	///
-	/// Example 1:
-	/// Input: A = [1,0,2]
-	/// Output: true
-	/// Explanation: There is 1 global inversion, and 1 local inversion.
-	///
-	/// Example 2:
-	/// Input: A = [1,2,0]
-	/// Output: false
-	/// Explanation: There are 2 global inversions, and 1 local inversion.
-	/// Note:
-	/// 
-	/// A will be a permutation of [0, 1, ..., A.length - 1].
-	/// A will have length in range [1, 5000].
-	/// The time limit for this problem has been reduced.
-	/// </summary>
-	bool isIdealPermutationII(vector<int>& A);
+    /// <summary>
+    /// Leetcode #775. Global and Local Inversions
+    ///
+    /// We have some permutation A of [0, 1, ..., N - 1], where N is the length
+    /// of A.
+    ///
+    /// The number of (global) inversions is the number of i < j with 
+    /// 0 <= i < j < N and A[i] > A[j].
+    ///
+    /// The number of local inversions is the number of i with 0 <= i < N and 
+    /// A[i] > A[i+1].
+    ///
+    /// Return true if and only if the number of global inversions is equal to 
+    /// the number of local inversions.
+    ///
+    /// Example 1:
+    /// Input: A = [1,0,2]
+    /// Output: true
+    /// Explanation: There is 1 global inversion, and 1 local inversion.
+    ///
+    /// Example 2:
+    /// Input: A = [1,2,0]
+    /// Output: false
+    /// Explanation: There are 2 global inversions, and 1 local inversion.
+    /// Note:
+    /// 
+    /// A will be a permutation of [0, 1, ..., A.length - 1].
+    /// A will have length in range [1, 5000].
+    /// The time limit for this problem has been reduced.
+    /// </summary>
+    bool isIdealPermutationII(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #798. Smallest Rotation with Highest Score
-	///
-	/// Given an array A, we may rotate it by a non-negative integer K so that 
-	/// the array becomes A[K], A[K+1], A{K+2], ... A[A.length - 1], A[0], 
-	/// A[1], ..., A[K-1].  Afterward, any entries that are less than or equal 
-	/// to their index are worth 1 point. 
-	/// For example, if we have [2, 4, 1, 3, 0], and we rotate by K = 2, it 
-	/// becomes [1, 3, 0, 2, 4].  This is worth 3 points because 1 > 0 
-	/// [no points], 3 > 1 [no points], 0 <= 2 [one point], 2 <= 3 [one point], 
-	/// 4 <= 4 [one point].
-	/// Over all possible rotations, return the rotation index K that 
-	/// corresponds to the highest score we could receive.  If there are 
-	/// multiple answers, return the smallest such index K.
-	/// Example 1:
-	/// Input: [2, 3, 1, 4, 0]
-	/// Output: 3
-	/// Explanation:  
-	/// Scores for each K are listed below: 
-	/// K = 0,  A = [2,3,1,4,0],    score 2
-	/// K = 1,  A = [3,1,4,0,2],    score 3
-	/// K = 2,  A = [1,4,0,2,3],    score 3
-	/// K = 3,  A = [4,0,2,3,1],    score 4
-	/// K = 4,  A = [0,2,3,1,4],    score 3
-	/// So we should choose K = 3, which has the highest score.
-	///
-	/// Example 2:
-	/// Input: [1, 3, 0, 2, 4]
-	/// Output: 0
-	/// Explanation:  A will always have 3 points no matter how it shifts.
-	/// So we will choose the smallest K, which is 0.
-	/// Note:
-	/// 1. A will have length at most 20000.
-	/// 2. A[i] will be in the range [0, A.length].
-	/// </summary> 
-	int bestRotation(vector<int>& A);
+    /// <summary>
+    /// Leet code #798. Smallest Rotation with Highest Score
+    ///
+    /// Given an array A, we may rotate it by a non-negative integer K so that 
+    /// the array becomes A[K], A[K+1], A{K+2], ... A[A.length - 1], A[0], 
+    /// A[1], ..., A[K-1].  Afterward, any entries that are less than or equal 
+    /// to their index are worth 1 point. 
+    /// For example, if we have [2, 4, 1, 3, 0], and we rotate by K = 2, it 
+    /// becomes [1, 3, 0, 2, 4].  This is worth 3 points because 1 > 0 
+    /// [no points], 3 > 1 [no points], 0 <= 2 [one point], 2 <= 3 [one point], 
+    /// 4 <= 4 [one point].
+    /// Over all possible rotations, return the rotation index K that 
+    /// corresponds to the highest score we could receive.  If there are 
+    /// multiple answers, return the smallest such index K.
+    /// Example 1:
+    /// Input: [2, 3, 1, 4, 0]
+    /// Output: 3
+    /// Explanation:  
+    /// Scores for each K are listed below: 
+    /// K = 0,  A = [2,3,1,4,0],    score 2
+    /// K = 1,  A = [3,1,4,0,2],    score 3
+    /// K = 2,  A = [1,4,0,2,3],    score 3
+    /// K = 3,  A = [4,0,2,3,1],    score 4
+    /// K = 4,  A = [0,2,3,1,4],    score 3
+    /// So we should choose K = 3, which has the highest score.
+    ///
+    /// Example 2:
+    /// Input: [1, 3, 0, 2, 4]
+    /// Output: 0
+    /// Explanation:  A will always have 3 points no matter how it shifts.
+    /// So we will choose the smallest K, which is 0.
+    /// Note:
+    /// 1. A will have length at most 20000.
+    /// 2. A[i] will be in the range [0, A.length].
+    /// </summary> 
+    int bestRotation(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #853. Car Fleet
-	/// 
-	/// N cars are going to the same destination along a one lane road.  The 
-	/// destination is target miles away.
-	///
-	/// Each car i has a constant speed speed[i] (in miles per hour), and initial 
-	/// position position[i] miles towards the target along the road.
-	///
-	/// A car can never pass another car ahead of it, but it can catch up to it, 
-	/// and drive bumper to bumper at the same speed.
-	///
-	/// The distance between these two cars is ignored - they are assumed to have 
-	/// the same position.
-	///
-	/// A car fleet is some non-empty set of cars driving at the same position 
-	/// and same speed.  Note that a single car is also a car fleet.
-	///
-	/// If a car catches up to a car fleet right at the destination point, it 
-	/// will still be considered as one car fleet.
-	/// 
-	/// How many car fleets will arrive at the destination?
-	/// 
-	/// Example 1:
-	///
-	/// Input: target = 12, position = [10,8,0,5,3], speed = [2,4,1,1,3]
-	/// Output: 3
-	/// Explanation:
-	/// The cars starting at 10 and 8 become a fleet, meeting each other at 12.
-	/// The car starting at 0 doesn't catch up to any other car, so it is a fleet 
-	/// by itself.
-	/// The cars starting at 5 and 3 become a fleet, meeting each other at 6.
-	/// Note that no other cars meet these fleets before the destination, so the 
-	/// answer is 3.
-	///
-	/// Note:
-	///
-	/// 1. 0 <= N <= 10 ^ 4
-	/// 2. 0 < target <= 10 ^ 6
-	/// 3. 0 < speed[i] <= 10 ^ 6
-	/// 4. 0 <= position[i] < target
-	/// 5. All initial positions are different.
-	/// </summary>
-	int carFleet(int target, vector<int>& position, vector<int>& speed);
+    /// <summary>
+    /// Leet code #853. Car Fleet
+    /// 
+    /// N cars are going to the same destination along a one lane road.  The 
+    /// destination is target miles away.
+    ///
+    /// Each car i has a constant speed speed[i] (in miles per hour), and initial 
+    /// position position[i] miles towards the target along the road.
+    ///
+    /// A car can never pass another car ahead of it, but it can catch up to it, 
+    /// and drive bumper to bumper at the same speed.
+    ///
+    /// The distance between these two cars is ignored - they are assumed to have 
+    /// the same position.
+    ///
+    /// A car fleet is some non-empty set of cars driving at the same position 
+    /// and same speed.  Note that a single car is also a car fleet.
+    ///
+    /// If a car catches up to a car fleet right at the destination point, it 
+    /// will still be considered as one car fleet.
+    /// 
+    /// How many car fleets will arrive at the destination?
+    /// 
+    /// Example 1:
+    ///
+    /// Input: target = 12, position = [10,8,0,5,3], speed = [2,4,1,1,3]
+    /// Output: 3
+    /// Explanation:
+    /// The cars starting at 10 and 8 become a fleet, meeting each other at 12.
+    /// The car starting at 0 doesn't catch up to any other car, so it is a fleet 
+    /// by itself.
+    /// The cars starting at 5 and 3 become a fleet, meeting each other at 6.
+    /// Note that no other cars meet these fleets before the destination, so the 
+    /// answer is 3.
+    ///
+    /// Note:
+    ///
+    /// 1. 0 <= N <= 10 ^ 4
+    /// 2. 0 < target <= 10 ^ 6
+    /// 3. 0 < speed[i] <= 10 ^ 6
+    /// 4. 0 <= position[i] < target
+    /// 5. All initial positions are different.
+    /// </summary>
+    int carFleet(int target, vector<int>& position, vector<int>& speed);
 
-	/// <summary>
-	/// Leet code #870. Advantage Shuffle
-	/// 
-	/// Given two arrays A and B of equal size, the advantage of A with respect 
-	/// to B is the number of indices i for which A[i] > B[i].
-	///
-	/// Return any permutation of A that maximizes its advantage with respect 
-	/// to B.
-	/// 
-	/// Example 1:
-	/// Input: A = [2,7,11,15], B = [1,10,4,11]
-	/// Output: [2,11,7,15]
-	///
-	/// Example 2:
-	/// Input: A = [12,24,8,32], B = [13,25,32,11]
-	/// Output: [24,32,8,12]
-	/// 
-	/// Note:
-	/// 1. 1 <= A.length = B.length <= 10000
-	/// 2. 0 <= A[i] <= 10^9
-	/// 3. 0 <= B[i] <= 10^9
-	/// </summary>
-	vector<int> advantageCount(vector<int>& A, vector<int>& B);
+    /// <summary>
+    /// Leet code #870. Advantage Shuffle
+    /// 
+    /// Given two arrays A and B of equal size, the advantage of A with respect 
+    /// to B is the number of indices i for which A[i] > B[i].
+    ///
+    /// Return any permutation of A that maximizes its advantage with respect 
+    /// to B.
+    /// 
+    /// Example 1:
+    /// Input: A = [2,7,11,15], B = [1,10,4,11]
+    /// Output: [2,11,7,15]
+    ///
+    /// Example 2:
+    /// Input: A = [12,24,8,32], B = [13,25,32,11]
+    /// Output: [24,32,8,12]
+    /// 
+    /// Note:
+    /// 1. 1 <= A.length = B.length <= 10000
+    /// 2. 0 <= A[i] <= 10^9
+    /// 3. 0 <= B[i] <= 10^9
+    /// </summary>
+    vector<int> advantageCount(vector<int>& A, vector<int>& B);
 
-	/// <summary>
-	/// Leet code #881. Boats to Save People
-	/// 
-	/// The i-th person has weight people[i], and each boat can carry a maximum 
-	/// weight of limit.
-	///
-	/// Each boat carries at most 2 people at the same time, provided the sum of 
-	/// the weight of those people is at most limit.
-	///
-	/// Return the minimum number of boats to carry every given person.  (It is 
-	/// guaranteed each person can be carried by a boat.)
-	///
-	/// Example 1:
-	///
-	/// Input: people = [1,2], limit = 3
-	/// Output: 1
-	/// Explanation: 1 boat (1, 2)
-	///
-	/// Example 2:
-	///
-	/// Input: people = [3,2,2,1], limit = 3
-	/// Output: 3
-	/// Explanation: 3 boats (1, 2), (2) and (3)
-	///
-	/// Example 3:
-	/// 
-	/// Input: people = [3,5,3,4], limit = 5
-	/// Output: 4
-	/// Explanation: 4 boats (3), (3), (4), (5)
-	/// Note:
-	/// 
-	/// 1. 1 <= people.length <= 50000
-	/// 2. 1 <= people[i] <= limit <= 30000
-	/// </summary>
-	int numRescueBoats(vector<int>& people, int limit);
+    /// <summary>
+    /// Leet code #881. Boats to Save People
+    /// 
+    /// The i-th person has weight people[i], and each boat can carry a maximum 
+    /// weight of limit.
+    ///
+    /// Each boat carries at most 2 people at the same time, provided the sum of 
+    /// the weight of those people is at most limit.
+    ///
+    /// Return the minimum number of boats to carry every given person.  (It is 
+    /// guaranteed each person can be carried by a boat.)
+    ///
+    /// Example 1:
+    ///
+    /// Input: people = [1,2], limit = 3
+    /// Output: 1
+    /// Explanation: 1 boat (1, 2)
+    ///
+    /// Example 2:
+    ///
+    /// Input: people = [3,2,2,1], limit = 3
+    /// Output: 3
+    /// Explanation: 3 boats (1, 2), (2) and (3)
+    ///
+    /// Example 3:
+    /// 
+    /// Input: people = [3,5,3,4], limit = 5
+    /// Output: 4
+    /// Explanation: 4 boats (3), (3), (4), (5)
+    /// Note:
+    /// 
+    /// 1. 1 <= people.length <= 50000
+    /// 2. 1 <= people[i] <= limit <= 30000
+    /// </summary>
+    int numRescueBoats(vector<int>& people, int limit);
 
-	/// <summary>
-	/// Leet code #941. Valid Mountain Array
-	/// 
-	/// Given an array A of integers, return true if and only if it is a valid 
-	/// mountain array.
-	///
-	/// Recall that A is a mountain array if and only if:
-	///
-	/// A.length >= 3
-	/// There exists some i with 0 < i < A.length - 1 such that:
-	/// A[0] < A[1] < ... A[i-1] < A[i]
-	/// A[i] > A[i+1] > ... > A[B.length - 1]
-	/// 
-	///
-	/// Example 1:
-	/// Input: [2,1]
-	/// Output: false
-	///
-	/// Example 2:
-	/// Input: [3,5,5]
-	/// Output: false
-	///
-	/// Example 3:
-	/// Input: [0,3,2,1]
-	/// Output: true
-	///
-	/// Note:
-	/// 1. 0 <= A.length <= 10000
-	/// 2. 0 <= A[i] <= 10000 
-	/// </summary>
-	bool validMountainArray(vector<int>& A);
+    /// <summary>
+    /// Leet code #941. Valid Mountain Array
+    /// 
+    /// Given an array A of integers, return true if and only if it is a valid 
+    /// mountain array.
+    ///
+    /// Recall that A is a mountain array if and only if:
+    ///
+    /// A.length >= 3
+    /// There exists some i with 0 < i < A.length - 1 such that:
+    /// A[0] < A[1] < ... A[i-1] < A[i]
+    /// A[i] > A[i+1] > ... > A[B.length - 1]
+    /// 
+    ///
+    /// Example 1:
+    /// Input: [2,1]
+    /// Output: false
+    ///
+    /// Example 2:
+    /// Input: [3,5,5]
+    /// Output: false
+    ///
+    /// Example 3:
+    /// Input: [0,3,2,1]
+    /// Output: true
+    ///
+    /// Note:
+    /// 1. 0 <= A.length <= 10000
+    /// 2. 0 <= A[i] <= 10000 
+    /// </summary>
+    bool validMountainArray(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #942. DI String Match
-	/// 
-	/// Given a string S that only contains "I" (increase) or "D" (decrease), 
-	/// let N = S.length.
-	///
-	/// Return any permutation A of [0, 1, ..., N] such that for all 
-	/// i = 0, ..., N-1:
-	///
-	/// If S[i] == "I", then A[i] < A[i+1]
-	/// If S[i] == "D", then A[i] > A[i+1]
-	/// 
-	/// Example 1:
-	/// Input: "IDID"
-	/// Output: [0,4,1,3,2]
-	///
-	/// Example 2:
-	/// Input: "III"
-	/// Output: [0,1,2,3]
-	///
-	/// Example 3:
-	/// Input: "DDI"
-	/// Output: [3,2,0,1]
-	/// 
-	///
-	/// Note:
-	/// 
-	/// 1. 1 <= S.length <= 10000
-	/// 2. S only contains characters "I" or "D".
-	/// </summary>
-	vector<int> diStringMatch(string S);
+    /// <summary>
+    /// Leet code #942. DI String Match
+    /// 
+    /// Given a string S that only contains "I" (increase) or "D" (decrease), 
+    /// let N = S.length.
+    ///
+    /// Return any permutation A of [0, 1, ..., N] such that for all 
+    /// i = 0, ..., N-1:
+    ///
+    /// If S[i] == "I", then A[i] < A[i+1]
+    /// If S[i] == "D", then A[i] > A[i+1]
+    /// 
+    /// Example 1:
+    /// Input: "IDID"
+    /// Output: [0,4,1,3,2]
+    ///
+    /// Example 2:
+    /// Input: "III"
+    /// Output: [0,1,2,3]
+    ///
+    /// Example 3:
+    /// Input: "DDI"
+    /// Output: [3,2,0,1]
+    /// 
+    ///
+    /// Note:
+    /// 
+    /// 1. 1 <= S.length <= 10000
+    /// 2. S only contains characters "I" or "D".
+    /// </summary>
+    vector<int> diStringMatch(string S);
 
-	/// <summary>
-	/// Leet code #953. Verifying an Alien Dictionary
-	/// 
-	/// In an alien language, surprisingly they also use english lowercase 
-	/// letters, but possibly in a different order. The order of the alphabet 
-	/// is some permutation of lowercase letters.
-	///
-	/// Given a sequence of words written in the alien language, and the order 
-	/// of the alphabet, return true if and only if the given words are sorted 
-	/// lexicographicaly in this alien language.
-	///
-	/// Example 1:
-	/// Input: words = ["hello","leetcode"], 
-	/// order = "hlabcdefgijkmnopqrstuvwxyz"
-	/// Output: true
-	/// Explanation: As 'h' comes before 'l' in this language, then the 
-	/// sequence is sorted.
-	///
-	/// Example 2:
-	/// Input: words = ["word","world","row"], 
-	/// order = "worldabcefghijkmnpqstuvxyz"
-	/// Output: false
-	/// Explanation: As 'd' comes after 'l' in this language, then 
-	/// words[0] > words[1], hence the sequence is unsorted.
-	///
-	/// Example 3:
-	/// Input: words = ["apple","app"], order = "abcdefghijklmnopqrstuvwxyz"
-	/// Output: false
-	/// Explanation: The first three characters "app" match, and the second 
-	/// string is shorter (in size.) According to lexicographical rules 
-	/// "apple" > "app", because 'l' > '\0', where '\0' is defined as the 
-	/// blank character which is less than any other character (More info).
-	/// 
-	/// Note:
-	/// 1. 1 <= words.length <= 100
-	/// 2. 1 <= words[i].length <= 20
-	/// 3. order.length == 26
-	/// 4. All characters in words[i] and order are english lowercase letters.
-	/// </summary>
-	bool isAlienSorted(vector<string>& words, string order);
+    /// <summary>
+    /// Leet code #953. Verifying an Alien Dictionary
+    /// 
+    /// In an alien language, surprisingly they also use english lowercase 
+    /// letters, but possibly in a different order. The order of the alphabet 
+    /// is some permutation of lowercase letters.
+    ///
+    /// Given a sequence of words written in the alien language, and the order 
+    /// of the alphabet, return true if and only if the given words are sorted 
+    /// lexicographicaly in this alien language.
+    ///
+    /// Example 1:
+    /// Input: words = ["hello","leetcode"], 
+    /// order = "hlabcdefgijkmnopqrstuvwxyz"
+    /// Output: true
+    /// Explanation: As 'h' comes before 'l' in this language, then the 
+    /// sequence is sorted.
+    ///
+    /// Example 2:
+    /// Input: words = ["word","world","row"], 
+    /// order = "worldabcefghijkmnpqstuvxyz"
+    /// Output: false
+    /// Explanation: As 'd' comes after 'l' in this language, then 
+    /// words[0] > words[1], hence the sequence is unsorted.
+    ///
+    /// Example 3:
+    /// Input: words = ["apple","app"], order = "abcdefghijklmnopqrstuvwxyz"
+    /// Output: false
+    /// Explanation: The first three characters "app" match, and the second 
+    /// string is shorter (in size.) According to lexicographical rules 
+    /// "apple" > "app", because 'l' > '\0', where '\0' is defined as the 
+    /// blank character which is less than any other character (More info).
+    /// 
+    /// Note:
+    /// 1. 1 <= words.length <= 100
+    /// 2. 1 <= words[i].length <= 20
+    /// 3. order.length == 26
+    /// 4. All characters in words[i] and order are english lowercase letters.
+    /// </summary>
+    bool isAlienSorted(vector<string>& words, string order);
 
-	/// <summary>
-	/// Leet code #954. Array of Doubled Pairs
-	/// 
-	/// Given an array of integers A with even length, return true if and only 
-	/// if it is possible to reorder it such that A[2 * i + 1] = 2 * A[2 * i] 
-	/// for every 0 <= i < len(A) / 2.
-	///  
-	/// Example 1:
-	/// Input: [3,1,3,6]
-	/// Output: false
-	///
-	/// Example 2:
-	/// Input: [2,1,2,6]
-	/// Output: false
-	///
-	/// Example 3:
-	/// Input: [4,-2,2,-4]
-	/// Output: true
-	/// Explanation: We can take two groups, [-2,-4] and [2,4] to form 
-	/// [-2,-4,2,4] or [2,4,-2,-4].
-	///
-	/// Example 4:
-	/// Input: [1,2,4,16,8,4]
-	/// Output: false
-	///
-	/// Note:
-	/// 1. 0 <= A.length <= 30000
-	/// 2. A.length is even
-	/// 3. -100000 <= A[i] <= 100000
-	/// </summary>
-	bool canReorderDoubled(vector<int>& A);
+    /// <summary>
+    /// Leet code #954. Array of Doubled Pairs
+    /// 
+    /// Given an array of integers A with even length, return true if and only 
+    /// if it is possible to reorder it such that A[2 * i + 1] = 2 * A[2 * i] 
+    /// for every 0 <= i < len(A) / 2.
+    ///  
+    /// Example 1:
+    /// Input: [3,1,3,6]
+    /// Output: false
+    ///
+    /// Example 2:
+    /// Input: [2,1,2,6]
+    /// Output: false
+    ///
+    /// Example 3:
+    /// Input: [4,-2,2,-4]
+    /// Output: true
+    /// Explanation: We can take two groups, [-2,-4] and [2,4] to form 
+    /// [-2,-4,2,4] or [2,4,-2,-4].
+    ///
+    /// Example 4:
+    /// Input: [1,2,4,16,8,4]
+    /// Output: false
+    ///
+    /// Note:
+    /// 1. 0 <= A.length <= 30000
+    /// 2. A.length is even
+    /// 3. -100000 <= A[i] <= 100000
+    /// </summary>
+    bool canReorderDoubled(vector<int>& A);
 
-	/// <summary>
-	/// Leet code #955. Delete Columns to Make Sorted II
-	/// 
-	/// We are given an array A of N lowercase letter strings, all of the same 
-	/// length.
-	///
-	/// Now, we may choose any set of deletion indices, and for each string, 
-	/// we delete all the characters in those indices.
-	///
-	/// For example, if we have an array A = ["abcdef","uvwxyz"] and deletion 
-	/// indices {0, 2, 3}, then the final array after deletions is ["bef","vyz"].
-	///
-	/// Suppose we chose a set of deletion indices D such that after deletions, 
-	/// the final array has its elements in lexicographic order 
-	/// (A[0] <= A[1] <= A[2] ... <= A[A.length - 1]).
-	///
-	/// Return the minimum possible value of D.length.
-	///
-	/// Example 1:
-	/// Input: ["ca","bb","ac"]
-	/// Output: 1
-	/// Explanation: 
-	/// After deleting the first column, A = ["a", "b", "c"].
-	/// Now A is in lexicographic order (ie. A[0] <= A[1] <= A[2]).
-	/// We require at least 1 deletion since initially A was not in 
-	/// lexicographic order, so the answer is 1.
-	///
-	/// Example 2:
-	/// Input: ["xc","yb","za"]
-	/// Output: 0
-	/// Explanation: 
-	/// A is already in lexicographic order, so we don't need to delete 
-	/// anything.
-	/// Note that the rows of A are not necessarily in lexicographic order:
-	/// ie. it is NOT necessarily true that (A[0][0] <= A[0][1] <= ...)
-	///
-	/// Example 3:
-	/// Input: ["zyx","wvu","tsr"]
-	/// Output: 3
-	/// Explanation: 
-	/// We have to delete every column.
-	///  
-	/// Note:
-	/// 1. 1 <= A.length <= 100
-	/// 2. 1 <= A[i].length <= 100
-	/// </summary>
-	int minDeletionSizeII(vector<string>& A);
+    /// <summary>
+    /// Leet code #955. Delete Columns to Make Sorted II
+    /// 
+    /// We are given an array A of N lowercase letter strings, all of the same 
+    /// length.
+    ///
+    /// Now, we may choose any set of deletion indices, and for each string, 
+    /// we delete all the characters in those indices.
+    ///
+    /// For example, if we have an array A = ["abcdef","uvwxyz"] and deletion 
+    /// indices {0, 2, 3}, then the final array after deletions is ["bef","vyz"].
+    ///
+    /// Suppose we chose a set of deletion indices D such that after deletions, 
+    /// the final array has its elements in lexicographic order 
+    /// (A[0] <= A[1] <= A[2] ... <= A[A.length - 1]).
+    ///
+    /// Return the minimum possible value of D.length.
+    ///
+    /// Example 1:
+    /// Input: ["ca","bb","ac"]
+    /// Output: 1
+    /// Explanation: 
+    /// After deleting the first column, A = ["a", "b", "c"].
+    /// Now A is in lexicographic order (ie. A[0] <= A[1] <= A[2]).
+    /// We require at least 1 deletion since initially A was not in 
+    /// lexicographic order, so the answer is 1.
+    ///
+    /// Example 2:
+    /// Input: ["xc","yb","za"]
+    /// Output: 0
+    /// Explanation: 
+    /// A is already in lexicographic order, so we don't need to delete 
+    /// anything.
+    /// Note that the rows of A are not necessarily in lexicographic order:
+    /// ie. it is NOT necessarily true that (A[0][0] <= A[0][1] <= ...)
+    ///
+    /// Example 3:
+    /// Input: ["zyx","wvu","tsr"]
+    /// Output: 3
+    /// Explanation: 
+    /// We have to delete every column.
+    ///  
+    /// Note:
+    /// 1. 1 <= A.length <= 100
+    /// 2. 1 <= A[i].length <= 100
+    /// </summary>
+    int minDeletionSizeII(vector<string>& A);
 
     /// <summary>
     /// Leet code #962. Maximum Width Ramp
@@ -29203,24 +28593,24 @@ public:
         WriteMessage(message);
     }
 
-	static void WriteMessage(vector<vector<Interval>> &data)
-	{
-		std::string message;
-		message.append("[");
-		for (size_t i = 0; i < data.size(); i++)
-		{
-			message.append("[");
-			for (size_t j = 0; j < data[i].size(); j++)
-			{
-				message.append("[");
-				message.append(to_string(data[i][j].start) + "," + to_string(data[i][j].end));
-				message.append("]");
-			}
-			message.append("]");
-		}
-		message.append("]");
-		WriteMessage(message);
-	}
+    static void WriteMessage(vector<vector<Interval>> &data)
+    {
+        std::string message;
+        message.append("[");
+        for (size_t i = 0; i < data.size(); i++)
+        {
+            message.append("[");
+            for (size_t j = 0; j < data[i].size(); j++)
+            {
+                message.append("[");
+                message.append(to_string(data[i][j].start) + "," + to_string(data[i][j].end));
+                message.append("]");
+            }
+            message.append("]");
+        }
+        message.append("]");
+        WriteMessage(message);
+    }
 
     static void WriteMessage(vector<Point> &data)
     {

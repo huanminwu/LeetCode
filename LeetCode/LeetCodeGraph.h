@@ -429,12 +429,12 @@ public:
     int minDeliveryCost(vector<int> distance, vector<int> weight);
 
     /// <summary>
-    /// Leet code #317. Shortest Distance from All Buildings        
+    /// Leet code #317. Shortest Distance from All Buildings  
     /// </summary>
     bool addDistance(int row, int col, int building_index, int step, vector<vector<int>>& grid, vector<vector<unordered_map<int, int>>>& distance_map);
 
     /// <summary>
-    /// Leet code #317. Shortest Distance from All Buildings        
+    /// Leet code #317. Shortest Distance from All Buildings  
     /// 
     /// You want to build a house on an empty land which reaches all buildings in the shortest 
     /// amount of distance. You can only move up, down, left and right. You are given a 2D 
@@ -614,7 +614,7 @@ public:
     vector<int> killProcess(vector<int>& pid, vector<int>& ppid, int kill);
 
     /// <summary>
-    /// Leet code #568. Maximum Vacation Days          
+    /// Leet code #568. Maximum Vacation Days    
     /// 
     /// LeetCode wants to give one of its best employees the option to travel among
     /// N cities to collect algorithm problems. But all work and no play makes Jack 
@@ -2305,6 +2305,202 @@ public:
     int maxCandies(vector<int>& status, vector<int>& candies,
         vector<vector<int>>& keys, vector<vector<int>>& containedBoxes,
         vector<int>& initialBoxes);
+
+    /// <summary>
+    /// Leet code #505. The Maze II  
+    /// </summary>
+    void shortestDistance(vector<vector<int>>& maze, vector<vector<int>>& visited,
+        vector<int>& start, priority_queue<pair<int, vector<int>>>& process_queue);
+
+    /// <summary>
+    /// Leet code #505. The Maze II  
+    /// 
+    /// There is a ball in a maze with empty spaces and walls. The ball can 
+    /// go through empty spaces by rolling up, down, left or right, but it 
+    /// won't stop rolling until hitting a wall. When the ball stops, it could 
+    /// choose the next direction.
+    /// 
+    /// Given the ball's start position, the destination and the maze, find the 
+    /// shortest distance for the ball to stop at the destination. The distance 
+    /// is defined by the number of empty spaces traveled by the ball from the 
+    /// start position (excluded) to the destination (included). If the ball 
+    /// cannot stop at the destination, return -1.
+    ///     
+    /// The maze is represented by a binary 2D array. 1 means the wall and 0 
+    /// means the empty space. You may assume that the borders of the maze 
+    /// are all walls. 
+    /// The start and destination coordinates are represented by row and 
+    /// column indexes.
+    ///
+    /// Example 1 
+    /// Input 1: a maze represented by a 2D array
+    ///
+    /// 0 0 1 0 0
+    /// 0 0 0 0 0
+    /// 0 0 0 1 0
+    /// 1 1 0 1 1
+    /// 0 0 0 0 0
+    /// Input 2: start coordinate (rowStart, colStart) = (0, 4)
+    /// Input 3: destination coordinate (rowDest, colDest) = (4, 4)
+    ///
+    /// Output: 12
+    /// Explanation: One shortest way is : 
+    /// left -> down -> left -> down -> right -> down -> right.
+    /// The total distance is 1 + 1 + 3 + 1 + 2 + 2 + 2 = 12.
+    ///
+    /// Example 2 
+    /// Input 1: a maze represented by a 2D array
+    ///
+    /// 0 0 1 0 0
+    /// 0 0 0 0 0
+    /// 0 0 0 1 0
+    /// 1 1 0 1 1
+    /// 0 0 0 0 0
+    /// Input 2: start coordinate (rowStart, colStart) = (0, 4)
+    /// Input 3: destination coordinate (rowDest, colDest) = (3, 2)
+    /// Output: -1
+    /// Explanation: There is no way for the ball to stop at the destination.
+    /// 
+    /// Note:
+    /// 1.There is only one ball and one destination in the maze.
+    /// 2.Both the ball and the destination exist on an empty space, 
+    ///   and they will not be at the same position initially.
+    /// 3.The given maze does not contain border (like the red rectangle in 
+    ///   the example pictures), but you could assume the border of the maze 
+    ///   are all walls.
+    /// 4.The maze contains at least 2 empty spaces, and both the width and 
+    ///   height of the maze won't exceed 100.
+    /// </summary>
+    int shortestDistance(vector<vector<int>>& maze, vector<int>& start, vector<int>& destination);
+
+    /// <summary>
+    /// Leet code #499. The Maze III   
+    /// </summary>
+    void findShortestWay(vector<vector<int>>& maze, vector<vector<pair<int, string>>>& visited,
+        vector<int>& ball, vector<int>& hole, priority_queue<pair<int, vector<int>>>& process_queue);
+
+    /// <summary>
+    /// Leet code #499. The Maze III   
+    /// 
+    /// There is a ball in a maze with empty spaces and walls. The ball can 
+    /// go through empty spaces by rolling up (u), down (d), left (l) or right (r), 
+    /// but it won't stop rolling until hitting a wall. When the ball stops, 
+    /// it could choose the next direction. There is also a hole in this maze. 
+    /// The ball will drop into the hole if it rolls on to the hole.
+    /// 
+    /// Given the ball position, the hole position and the maze, find out how the 
+    /// ball could drop into the hole by moving the shortest distance. The distance 
+    /// is defined by the number of empty spaces traveled by the ball from the start 
+    /// position (excluded) to the hole (included). Output the moving directions by 
+    /// using 'u', 'd', 'l' and 'r'. Since there could be several different shortest 
+    /// ways, you should output the lexicographically smallest way. If the ball 
+    /// cannot reach the hole, output "impossible".
+    ///
+    /// The maze is represented by a binary 2D array. 1 means the wall and 0 means the 
+    /// empty space. You may assume that the borders of the maze are all walls. 
+    /// The ball and the hole coordinates are represented by row and column indexes.
+    ///
+    /// Example 1 
+    /// Input 1: a maze represented by a 2D array
+    ///
+    /// 0 0 0 0 0
+    /// 1 1 0 0 1
+    /// 0 0 0 0 0
+    /// 0 1 0 0 1
+    /// 0 1 0 0 0
+    ///
+    /// Input 2: ball coordinate (rowBall, colBall) = (4, 3)
+    /// Input 3: hole coordinate (rowHole, colHole) = (0, 1)
+    ///
+    /// Output: "lul"
+    /// Explanation: There are two shortest ways for the ball to drop into the hole.
+    /// The first way is left -> up -> left, represented by "lul".
+    /// The second way is up -> left, represented by 'ul'.
+    /// Both ways have shortest distance 6, but the first way is lexicographically 
+    /// smaller because 'l' < 'u'. So the output is "lul".
+    ///
+    /// Example 2 
+    /// Input 1: a maze represented by a 2D array
+    ///
+    /// 0 0 0 0 0
+    /// 1 1 0 0 1
+    /// 0 0 0 0 0
+    /// 0 1 0 0 1
+    /// 0 1 0 0 0
+    ///
+    /// Input 2: ball coordinate (rowBall, colBall) = (4, 3)
+    /// Input 3: hole coordinate (rowHole, colHole) = (3, 0)
+    /// Output: "impossible"
+    /// Explanation: The ball cannot reach the hole.
+    ///
+    /// Note:
+    /// 1.There is only one ball and one hole in the maze.
+    /// 2.Both the ball and hole exist on an empty space, and they will not be at 
+    ///   the same position initially.
+    /// 3.The given maze does not contain border (like the red rectangle in the 
+    ///   example pictures), but you could assume the border of the maze are all walls.
+    /// 4.The maze contains at least 2 empty spaces, and the width and the height of 
+    ///   the maze won't exceed 30.
+    /// </summary>
+    string findShortestWay(vector<vector<int>>& maze, vector<int>& ball, vector<int>& hole);
+
+    /// <summary>
+    /// Leet code #490. The Maze  
+    /// </summary>
+    bool hasPath(vector<vector<int>>& maze, vector<vector<int>>& visited, vector<int>& start, vector<int>& destination);
+
+    /// <summary>
+    /// Leet code #490. The Maze 
+    /// 
+    /// There is a ball in a maze with empty spaces and walls. The ball can 
+    /// go through empty spaces by rolling up, down, left or right, but it 
+    /// won't stop rolling until hitting a wall. When the ball stops, it could 
+    /// choose the next direction.
+    /// 
+    /// Given the ball's start position, the destination and the maze, determine 
+    /// whether the ball could stop at the destination.
+    /// The maze is represented by a binary 2D array. 1 means the wall and 0 means 
+    /// the empty space. You may assume that the borders of the maze are all walls. 
+    /// The start and destination coordinates are represented by row and column indexes.
+    ///
+    /// Example 1 
+    /// Input 1: a maze represented by a 2D array
+    ///
+    /// 0 0 1 0 0
+    /// 0 0 0 0 0
+    /// 0 0 0 1 0
+    /// 1 1 0 1 1
+    /// 0 0 0 0 0
+    /// Input 2: start coordinate (rowStart, colStart) = (0, 4)
+    /// Input 3: destination coordinate (rowDest, colDest) = (4, 4)
+    ///
+    /// Output: true
+    /// Explanation: One possible way is : 
+    /// left -> down -> left -> down -> right -> down -> right.
+    ///
+    /// Example 2 
+    /// Input 1: a maze represented by a 2D array
+    ///
+    /// 0 0 1 0 0
+    /// 0 0 0 0 0
+    /// 0 0 0 1 0
+    /// 1 1 0 1 1
+    /// 0 0 0 0 0
+    /// Input 2: start coordinate (rowStart, colStart) = (0, 4)
+    /// Input 3: destination coordinate (rowDest, colDest) = (3, 2)
+    /// Output: false
+    /// Explanation: There is no way for the ball to stop at the destination.
+    /// 
+    /// Note: 
+    /// 1.There is only one ball and one destination in the maze.
+    /// 2.Both the ball and the destination exist on an empty space, and they will not 
+    ///   be at the same position initially.
+    /// 3.The given maze does not contain border (like the red rectangle in the example 
+    ///   pictures), but you could assume the border of the maze are all walls.
+    /// 4.The maze contains at least 2 empty spaces, and both the width and height of the 
+    ///   maze won't exceed 100.
+    /// </summary>
+    bool hasPath(vector<vector<int>>& maze, vector<int>& start, vector<int>& destination);
 
 #pragma endregion  
 };

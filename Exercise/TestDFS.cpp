@@ -2,6 +2,195 @@
 #include "..\LeetCode\LeetCodeDFS.h"
 #include "TestDFS.h"
 
+void TestLeetCode17(void)
+{
+    Logger::WriteMessage("Test Leet Code 17");
+    LeetCodeDFS leetCode;
+    string digits = "23";
+    Logger::WriteMessage("Digits = " + digits);
+    vector<string> result = leetCode.letterCombinations(digits);
+    Logger::WriteMessage("Letter combinations are: ");
+    Logger::WriteMessage(result);
+
+    digits = "";
+    result = leetCode.letterCombinations(digits);
+    Logger::WriteMessage("Digits = " + digits);
+    Logger::WriteMessage("Letter combinations are: ");
+    Logger::WriteMessage(result);
+}
+
+
+void TestLeetCode37(void)
+{
+    Logger::WriteMessage("Test Leet Code 37");
+    LeetCodeDFS leetCode;
+
+    vector<vector<char>> board =
+    {
+        { '5','3','.','.','7','.','.','.','.' },{ '6','.','.','1','9','5','.','.','.' },
+        { '.','9','8','.','.','.','.','6','.' },{ '8','.','.','.','6','.','.','.','3' },
+        { '4','.','.','8','.','3','.','.','1' },{ '7','.','.','.','2','.','.','.','6' },
+        { '.','6','.','.','.','.','2','8','.' },{ '.','.','.','4','1','9','.','.','5' },
+        { '.','.','.','.','8','.','.','7','9' }
+    };
+    Logger::WriteMessage(board);
+
+    leetCode.solveSudoku(board);
+    Logger::WriteMessage(board);
+}
+
+void TestLeetCode39(void)
+{
+    Logger::WriteMessage("Test Leet Code 39");
+    LeetCodeDFS leetCode;
+    vector<int> candidates = { 2, 3, 6, 7 };
+    size_t target = 7;
+    Logger::WriteMessage(candidates);
+    Logger::WriteMessage("Target = " + to_string(target));
+    vector<vector<int>> result = leetCode.combinationSum(candidates, target);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode51(void)
+{
+    LeetCodeDFS leetCode;
+    Logger::WriteMessage("Test Leet Code 51");
+    int n = 4;
+    vector<vector<string>> result = leetCode.solveNQueens(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode40(void)
+{
+    Logger::WriteMessage("Test Leet Code 40");
+    LeetCodeDFS leetCode;
+    vector<int> candidates = { 10, 1, 2, 7, 6, 1, 5 };
+    size_t target = 8;
+    Logger::WriteMessage("Candidates = ");
+    Logger::WriteMessage(candidates);
+    Logger::WriteMessage("Target = ");
+    Logger::WriteMessage(to_string(target));
+    vector<vector<int>> result = leetCode.combinationSum2(candidates, target);
+    Logger::WriteMessage("Result = ");
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode52(void)
+{
+    LeetCodeDFS leetCode;
+    Logger::WriteMessage("Test Leet Code 52");
+    int n = 4;
+    int result = leetCode.totalNQueens(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode46(void)
+{
+    Logger::WriteMessage("Test Leet Code 46");
+    LeetCodeDFS leetCode;
+    Logger::WriteMessage("Numbers");
+    vector<int> nums = { 1, 2, 3 };
+    Logger::WriteMessage(nums);
+    vector<vector<int>> result = leetCode.permute(nums);
+    Logger::WriteMessage("Permute = ");
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode47(void)
+{
+    Logger::WriteMessage("Test Leet Code 47");
+    LeetCodeDFS leetCode;
+    Logger::WriteMessage("Numbers");
+    vector<int> nums = { 1, 1, 2 };
+    Logger::WriteMessage(nums);
+    vector<vector<int>> result = leetCode.permuteUnique(nums);
+    Logger::WriteMessage("Permute = ");
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode77(void)
+{
+    Logger::WriteMessage("Test Leet Code 77");
+    LeetCodeDFS leetCode;
+    int n = 4, k = 2;
+    Logger::WriteMessage("n = " + to_string(n) + ";" + "k = " + to_string(k));
+    vector<vector<int>> result = leetCode.combine(n, k);
+    Logger::WriteMessage("Result = ");
+    for (size_t i = 0; i < result.size(); i++)
+    {
+        Logger::WriteMessage(result[i]);
+    }
+}
+
+void TestLeetCode78(void)
+{
+    Logger::WriteMessage("Test Leet Code 78");
+    LeetCodeDFS leetCode;
+    vector<int> nums = { 1,2,3 };
+    vector<vector<int>> result = leetCode.subsets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+    nums = { 4, 4, 4, 1, 4 };
+    result = leetCode.subsets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode90(void)
+{
+    Logger::WriteMessage("Test Leet Code 90");
+    vector<int> nums;
+    vector<vector<int>> result;
+    LeetCodeDFS leetCode;
+    nums = { 1,2,2 };
+    Logger::WriteMessage(nums);
+    result = leetCode.subsetsWithDup(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode79(void)
+{
+    Logger::WriteMessage("Test Leet Code 79");
+    LeetCodeDFS leetCode;
+    vector<vector<char>> board =
+    {
+        {'A','B','C','E'},
+        {'S','F','C','S'},
+        {'A','D','E','E'}
+    };
+
+    string word = "ABCCED";
+    bool exist = leetCode.wordSearch(board, word);
+    Logger::WriteMessage(word + "->" + (exist ? "true" : "false"));
+
+    board =
+    {
+        { 'A','A'},
+    };
+
+    word = "AAA";
+    exist = leetCode.wordSearch(board, word);
+    Logger::WriteMessage(word + "->" + (exist ? "true" : "false"));
+}
+
+void TestLeetCode464(void)
+{
+    Logger::WriteMessage("Test Leet Code 464");
+    LeetCodeDFS leetCode;
+    int maxChoosableInteger = 10;
+    int desiredTotal = 11;
+    bool result = leetCode.canIWin(maxChoosableInteger, desiredTotal);
+    Logger::WriteMessage("MaxChoosableInteger = " + to_string(maxChoosableInteger) + "; DesiredTotal = " + to_string(desiredTotal));
+    Logger::WriteMessage("Can " + (string)(result == true ? "Win" : "Not Win"));
+
+    maxChoosableInteger = 4;
+    desiredTotal = 6;
+    result = leetCode.canIWin(maxChoosableInteger, desiredTotal);
+    Logger::WriteMessage("MaxChoosableInteger = " + to_string(maxChoosableInteger) + "; DesiredTotal = " + to_string(desiredTotal));
+    Logger::WriteMessage("Can " + (string)(result == true ? "Win" : "Not Win"));
+}
+
 void TestLeetCode1219(void)
 {
     Logger::WriteMessage("Test Leet Code 1219");
@@ -151,8 +340,35 @@ void TestLeetCode1066(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode526(void)
+{
+    Logger::WriteMessage("Test Leet Code 526");
+    LeetCodeDFS leetCode;
+    int N = 2;
+    int result = leetCode.countArrangement(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; count Arrangement = " + to_string(result));
+
+    N = 4;
+    result = leetCode.countArrangement(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; count Arrangement = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode17();
+    TestLeetCode37();
+    TestLeetCode39();
+    TestLeetCode40();
+    TestLeetCode51();
+    TestLeetCode52();
+    TestLeetCode46();
+    TestLeetCode47();
+    TestLeetCode77();
+    TestLeetCode78();
+    TestLeetCode79();
+    TestLeetCode90();
+    TestLeetCode464();
+    TestLeetCode526();
     TestLeetCode1307();
     TestLeetCode1066();
     TestLeetCode1286();

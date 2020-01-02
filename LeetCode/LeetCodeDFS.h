@@ -28,6 +28,415 @@ public:
 #pragma region DFS
 
     /// <summary>
+    /// Leet code #17. Letter Combinations of a Phone Number 
+    /// </summary>
+    void letterCombinations(string& digits, string& path, 
+        unordered_map<char, string> &phone_keyboard, vector<string>& result);
+
+    /// <summary>
+    /// Leet code #17. Letter Combinations of a Phone Number
+    ///
+    /// Medium
+    ///
+    /// Given a string containing digits from 2-9 inclusive, return all 
+    /// possible letter combinations that the number could represent.
+    ///
+    /// A mapping of digit to letters (just like on the telephone buttons)
+    /// is given below. Note that 1 does not map to any letters.
+    ///
+    /// Example:
+    ///
+    /// Input: "23"
+    /// Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+    /// Note:
+    /// Although the above answer is in lexicographical order, your answer 
+    /// could be in any order you want.
+    /// </summary>
+    vector<string> letterCombinations(string digits);
+
+    /// <summary>
+    /// Leet code #22. Generate Parentheses 
+    /// </summary>
+    void generateParenthesis(string& path, int n, int left, 
+        int right, vector<string>& result);
+
+    /// <summary>
+    /// Leet code #22. Generate Parentheses 
+    ///
+    /// Given n pairs of parentheses, write a function to generate all 
+    /// combinations of well-formed parentheses. 
+    /// For example, given n = 3, a solution set is: 
+    /// [
+    ///   "((()))",
+    ///   "(()())",
+    ///   "(())()",
+    ///   "()(())",
+    ///   "()()()"
+    /// ]
+    /// </summary>
+    vector<string> generateParenthesis(int n);
+
+    /// <summary>
+    /// Leet code #37. Sudoku Solver
+    /// </summary>
+    bool solveSudoku(
+        vector<vector<char>>& board, vector<vector<int>>& row_visited,
+        vector<vector<int>>& col_visited, vector<vector<int>>& square_visited,
+        int x, int y);
+
+    /// <summary>
+    /// Leet code #37. Sudoku Solver
+    /// Write a program to solve a Sudoku puzzle by filling the empty cells.
+    /// Empty cells are indicated by the character '.'.
+    /// You may assume that there will be only one unique solution.
+    /// For example, the input is
+    ///   53..7....
+    ///   6..195...
+    ///   .98....6.
+    ///   8...6...3
+    ///   4..8.3..1
+    ///   7...2...6
+    ///   .6....28.
+    ///   ...419..5
+    ///   ....8..79
+    /// The output is:
+    ///   534678912
+    ///   672195348
+    ///   198342567
+    ///   859761423
+    ///   426853791
+    ///   713924856
+    ///   961537284
+    ///   287419635
+    ///   345286179
+    /// </summary>
+    void solveSudoku(vector<vector<char>>& board);
+
+    /// <summary>
+    /// Leet code # 51. N-Queens 
+    /// </summary>
+    void solveNQueens(vector<string>& board, int row, vector<int>& columns,
+        vector<int>& diag, vector<vector<string>>& result);
+
+    /// <summary>
+    /// Leet code # 51. N-Queens 
+    /// 
+    /// The n-queens puzzle is the problem of placing n queens on an n¡Án chessboard such that no two queens attack each other. 
+    /// Given an integer n, return all distinct solutions to the n-queens puzzle.
+    ///	
+    /// Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' 
+    /// both indicate a queen and an empty space respectively. 
+    /// For example,
+    /// There exist two distinct solutions to the 4-queens puzzle:
+    /// [
+    ///   [".Q..",  // Solution 1
+    ///    "...Q",
+    ///    "Q...",
+    ///    "..Q."],
+    ///
+    ///   ["..Q.",  // Solution 2
+    ///    "Q...",
+    ///    "...Q",
+    ///    ".Q.."]
+    /// ]	
+    /// </summary>
+    vector<vector<string>> solveNQueens(int n);
+
+    /// <summary>
+    /// Leet code # 52. N-Queens II 
+    /// </summary>
+    void totalNQueens(int n, int row, vector<int>& columns, vector<int>& diag, int& count);
+
+    /// <summary>
+    /// Leet code # 52. N-Queens II 
+    /// 
+    /// Follow up for N-Queens problem. 
+    /// Now, instead outputting board configurations, return the total number of distinct solutions.
+    /// </summary>
+    int totalNQueens(int n);
+
+    /// <summary>
+    /// Leet code #39. Combination Sum
+    /// </summary>
+    void combinationSum(vector<int>& candidates, int target, int index,
+        vector<int>& path, vector<vector<int>>& result);
+
+    /// <summary>
+    /// Leet code #39. Combination Sum
+    ///
+    /// Given a set of candidate numbers (C) and a target number (T), 
+    /// find all unique combinations in C where the candidate numbers sums to T. 
+    /// The same repeated number may be chosen from C unlimited number of times. 
+    /// Note:
+    /// All numbers (including target) will be positive integers.
+    /// The solution set must not contain duplicate combinations.
+    /// For example, given candidate set [2, 3, 6, 7] and target 7, 
+    /// A solution set is: 
+    /// [
+    ///   [7],
+    ///   [2, 2, 3]
+    /// ]
+    /// </summary>
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target);
+
+    /// <summary>
+    /// Leet code #40. Combination Sum II
+    /// </summary>
+    void combinationSum2(vector<int>& candidates, int target, int index, 
+        vector<int>& path, vector<vector<int>>& result);
+
+    /// <summary>
+    /// Leet code #40. Combination Sum II
+    ///
+    /// Medium
+    ///
+    /// Given a collection of candidate numbers (candidates) and a target 
+    /// number (target), find all unique combinations in candidates where 
+    /// the candidate numbers sums to target.
+    ///
+    /// Each number in candidates may only be used once in the combination.
+    ///
+    /// Note:
+    ///
+    /// All numbers (including target) will be positive integers.
+    /// The solution set must not contain duplicate combinations.
+    ///
+    /// Example 1:
+    /// Input: candidates = [10,1,2,7,6,1,5], target = 8,
+    /// A solution set is:
+    /// [
+    ///   [1, 7],
+    ///   [1, 2, 5],
+    ///   [2, 6],
+    ///   [1, 1, 6]
+    /// ]
+    ///
+    /// Example 2:
+    ///
+    /// Input: candidates = [2,5,2,1,2], target = 5,
+    /// A solution set is:
+    /// [
+    ///   [1,2,2],
+    ///   [5]
+    /// ]
+    /// </summary>
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target);
+
+    /// <summary>
+    /// Leet code #46. Permutations 
+    /// </summary>
+    void permute(vector<int>& nums, vector<int>& path,
+        vector<int>& visited, vector<vector<int>>& result);
+
+    /// <summary>
+    /// Leet code #46. Permutations 
+    /// Given a collection of distinct numbers, return all possible permutations. 
+    /// For example,
+    /// [1,2,3] have the following permutations:
+    /// [
+    ///   [1,2,3],
+    ///   [1,3,2],
+    ///   [2,1,3],
+    ///   [2,3,1],
+    ///   [3,1,2],
+    ///   [3,2,1]
+    /// ]
+    /// </summary>
+    vector<vector<int>> permute(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #47. Permutations II 
+    /// </summary>
+    void permuteUnique(vector<int>& nums, vector<int>& path,
+        vector<int>& visited, vector<vector<int>>& result);
+
+    /// <summary>
+    /// Leet code #47. Permutations II 
+    /// Given a collection of numbers that might contain duplicates,
+    /// return all possible unique permutations. 
+    /// For example,
+    /// [1,1,2] have the following unique permutations:
+    /// [
+    ///   [1,1,2],
+    ///   [1,2,1],
+    ///   [2,1,1]
+    /// ]
+    /// </summary>
+    vector<vector<int>> permuteUnique(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #77. Combinations
+    /// </summary>
+    void combine(int n, int k, vector<int>& path, vector<vector<int>>& result);
+
+    /// <summary>
+    /// Leet code #77. Combinations 
+    ///
+    /// Given two integers n and k, return all possible combinations of k 
+    /// numbers out of 1 ... n. 
+    /// For example,
+    /// If n = 4 and k = 2, a solution is: 
+    /// [
+    ///  [2,4],
+    ///  [3,4],
+    ///  [2,3],
+    ///  [1,2],
+    ///  [1,3],
+    ///  [1,4],
+    /// ]
+    /// </summary>
+    vector<vector<int>> combine(int n, int k);
+
+    /// <summary>
+    /// Leet code #78. Subsets
+    /// </summary>
+    void subsets(vector<int>& nums, int index, vector<int>& path, vector<vector<int>>& result);
+
+    /// <summary>
+    /// Leet code #78. Subsets
+    /// Given a set of distinct integers, nums, return all possible subsets.  
+    /// Note: The solution set must not contain duplicate subsets. 
+    ///	For example,
+    /// If nums = [1,2,3], a solution is: 
+    /// [
+    ///  [3],
+    ///  [1],
+    ///  [2],
+    ///  [1,2,3],
+    ///  [1,3],
+    ///  [2,3],
+    ///  [1,2],
+    ///  []
+    /// ]
+    /// </summary>
+    vector<vector<int>> subsets(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #90. Subsets II
+    /// </summary>
+    void subsetsWithDup(vector<int>& nums, int index, vector<int>& path, vector<vector<int>>& result);
+
+    /// <summary>
+    /// Leet code #90. Subsets II
+    ///
+    /// Given a collection of integers that might contain duplicates, nums, 
+    /// return all possible subsets.  
+    /// Note: The solution set must not contain duplicate subsets. 
+    ///	For example,
+    /// If nums = [1,2,2], a solution is: 
+    /// [
+    ///  [2],
+    ///  [1],
+    ///  [1,2,2],
+    ///  [2,2],
+    ///  [1,2],
+    ///  []
+    /// ] 
+    /// </summary>
+    vector<vector<int>> subsetsWithDup(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #79. Word Search
+    /// </summary>
+    bool wordSearch(vector<vector<char>>& board, vector<vector<bool>>& flag,
+        string word, int x, int y, int pos);
+
+    /// <summary>
+    /// Leet code #79. Word Search  
+    ///
+    /// Given a 2D board and a word, find if the word exists in the grid. 
+    /// The word can be constructed from letters of sequentially adjacent 
+    /// cell, where "adjacent" cells are those 
+    /// horizontally or vertically neighboring. The same letter cell may not 
+    /// be used more than once. 
+    /// For example,
+    /// Given board = 
+    /// [
+    ///   ['A','B','C','E'],
+    ///   ['S','F','C','S'],
+    ///   ['A','D','E','E']
+    /// ]
+    /// word = "ABCCED", -> returns true,
+    /// word = "SEE", -> returns true,
+    /// word = "ABCB", -> returns false.	
+    /// </summary>
+    bool wordSearch(vector<vector<char>>& board, string word);
+
+    /// <summary>
+    /// Leet code #464. Can I Win
+    /// </summary>
+    bool canIWin(int maxChoosableInteger, int desiredTotal, int signature,
+        unordered_map<int, bool>& game_map);
+
+    /// <summary>
+    /// Leet code #464. Can I Win
+    ///
+    /// In the "100 game," two players take turns adding, to a running total, 
+    /// any integer from 1..10. 
+    /// The player who first causes the running total to reach or exceed 100 wins. 
+    /// What if we change the game so that players cannot re-use integers? 
+    /// For example, two players might take turns drawing from a common pool of 
+    /// numbers of 1..15 without replacement until they reach a total >= 100.
+    /// Given an integer maxChoosableInteger and another integer desiredTotal, 
+    /// determine if the first player to move can force a win, assuming both 
+    /// players play optimally. 
+    /// You can always assume that maxChoosableInteger will not be larger than 20 
+    /// and desiredTotal will not be larger than 300. 
+    ///
+    /// Example 
+    /// Input:
+    /// maxChoosableInteger = 10
+    /// desiredTotal = 11
+    /// Output:
+    /// false
+    /// Explanation:
+    /// No matter which integer the first player choose, the first player will lose.
+    /// The first player can choose an integer from 1 up to 10.
+    /// If the first player choose 1, the second player can only choose integers 
+    /// from 2 up to 10.
+    /// The second player will win by choosing 10 and get a total = 11, which 
+    /// is >= desiredTotal.
+    /// Same with other integers chosen by the first player, the second player will
+    /// always win.
+    /// </summary>
+    bool canIWin(int maxChoosableInteger, int desiredTotal);
+
+    /// <summary>
+    /// Leet code #526. Beautiful Arrangement
+    /// </summary>
+    int countArrangement(int N, int index, int visited, unordered_map<int, int>& cache);
+
+    /// <summary>
+    /// Leet code #526. Beautiful Arrangement
+    ///
+    /// Suppose you have N integers from 1 to N. We define a beautiful 
+    /// arrangement as an array that is constructed by these N numbers 
+    /// successfully if one of the following is true for the ith position 
+    /// (1 ¡Ü i ¡Ü N) in this array: 
+    /// 1.The number at the ith position is divisible by i.
+    /// 2.i is divisible by the number at the ith position.
+    ///
+    /// Now given N, how many beautiful arrangements can you construct? 
+    ///
+    /// Example 1:
+    /// 
+    /// Input: 2
+    /// Output: 2
+    ///
+    /// Explanation: 
+    /// The first beautiful arrangement is [1, 2]:
+    /// Number at the 1st position (i=1) is 1, and 1 is divisible by i (i=1).
+    /// Number at the 2nd position (i=2) is 2, and 2 is divisible by i (i=2).
+    ///
+    /// The second beautiful arrangement is [2, 1]:
+    /// Number at the 1st position (i=1) is 2, and 2 is divisible by i (i=1).
+    /// Number at the 2nd position (i=2) is 1, and i (i=2) is divisible by 1.
+    /// Note:
+    /// 1.N is a positive integer and will not exceed 15.
+    /// </summary>
+    int countArrangement(int N);
+
+    /// <summary>
     /// Leet code #1219. Path with Maximum Gold
     /// </summary>
     int getMaximumGold(vector<vector<int>>& grid, int r, int c);

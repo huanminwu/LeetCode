@@ -1554,8 +1554,141 @@ void TestLeetCode1298(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode505(void)
+{
+    Logger::WriteMessage("Test Leet Code 505");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> maze =
+    {
+        { 0, 0, 0, 0, 1, 0, 0 },
+        { 0, 0, 1, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 1 },
+        { 0, 1, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 1, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 1, 0, 0, 0, 1 },
+        { 0, 0, 0, 0, 1, 0, 0 }
+    };
+    vector<int> start = { 0, 0 };
+    vector<int> destination = { 8, 6 };
+    int result = leetCode.shortestDistance(maze, start, destination);
+    Logger::WriteMessage(maze);
+    Logger::WriteMessage("Shortest Path = " + to_string(result));
+
+    maze =
+    {
+        { 0, 0, 1, 0, 0 },
+        { 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 1, 0 },
+        { 1, 1, 0, 1, 1 },
+        { 0, 0, 0, 0, 0 }
+    };
+    start = { 0, 4 };
+    destination = { 4, 4 };
+    result = leetCode.shortestDistance(maze, start, destination);
+    Logger::WriteMessage(maze);
+    Logger::WriteMessage("Shortest Path = " + to_string(result));
+
+    maze =
+    {
+        { 0, 0, 1, 0, 0 },
+        { 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 1, 0 },
+        { 1, 1, 0, 1, 1 },
+        { 0, 0, 0, 0, 0 }
+    };
+    start = { 0, 4 };
+    destination = { 3, 2 };
+    result = leetCode.shortestDistance(maze, start, destination);
+    Logger::WriteMessage(maze);
+    Logger::WriteMessage("Shortest Path = " + to_string(result));
+}
+
+void TestLeetCode499(void)
+{
+    Logger::WriteMessage("Test Leet Code 499");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> maze =
+    {
+        { 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 1, 0, 0, 1, 0 },
+        { 0, 0, 0, 0, 1, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 1 }
+    };
+    vector<int> ball = { 0, 4 };
+    vector<int> hole = { 3, 5 };
+    string result = leetCode.findShortestWay(maze, ball, hole);
+    Logger::WriteMessage(maze);
+    Logger::WriteMessage("Shortest Path = " + result);
+
+    maze =
+    {
+        { 0, 0, 0, 0, 0 },
+        { 1, 1, 0, 0, 1 },
+        { 0, 0, 0, 0, 0 },
+        { 0, 1, 0, 0, 1 },
+        { 0, 1, 0, 0, 0 }
+    };
+    ball = { 4, 3 };
+    hole = { 0, 1 };
+    result = leetCode.findShortestWay(maze, ball, hole);
+    Logger::WriteMessage(maze);
+    Logger::WriteMessage("Shortest Path = " + result);
+
+    maze =
+    {
+        { 0, 0, 0, 0, 0 },
+        { 1, 1, 0, 0, 1 },
+        { 0, 0, 0, 0, 0 },
+        { 0, 1, 0, 0, 1 },
+        { 0, 1, 0, 0, 0 }
+    };
+    ball = { 4, 3 };
+    hole = { 3, 0 };
+    result = leetCode.findShortestWay(maze, ball, hole);
+    Logger::WriteMessage(maze);
+    Logger::WriteMessage("Shortest Path = " + result);
+}
+
+void TestLeetCode490(void)
+{
+    Logger::WriteMessage("Test Leet Code 490");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> maze =
+    {
+        {0, 0, 1, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 1, 0},
+        {1, 1, 0, 1, 1},
+        {0, 0, 0, 0, 0}
+    };
+    vector<int> start = { 0, 4 };
+    vector<int> destination = { 3, 2 };
+    bool result = leetCode.hasPath(maze, start, destination);
+    Logger::WriteMessage(maze);
+    Logger::WriteMessage("Has Path = " + (string)(result ? "true" : "false"));
+
+    maze =
+    {
+        { 0, 0, 1, 0, 0 },
+        { 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 1, 0 },
+        { 1, 1, 0, 1, 1 },
+        { 0, 0, 0, 0, 0 }
+    };
+    start = { 0, 4 };
+    destination = { 4, 4 };
+    result = leetCode.hasPath(maze, start, destination);
+    Logger::WriteMessage(maze);
+    Logger::WriteMessage("Has Path = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode490();
+    TestLeetCode499();
+    TestLeetCode505();
     TestLeetCode1298();
     TestLeetCode1293();
     TestLeetCode1273();
