@@ -174,6 +174,89 @@ void TestLeetCode79(void)
     Logger::WriteMessage(word + "->" + (exist ? "true" : "false"));
 }
 
+void TestLeetCode93(void)
+{
+    Logger::WriteMessage("Test Leet Code 93");
+    LeetCodeDFS leetCode;
+    string s;
+    vector<string> result;
+    s = "010010";
+    Logger::WriteMessage(s);
+    result = leetCode.restoreIpAddresses(s);
+    Logger::WriteMessage(result);
+
+    s = "0000";
+    Logger::WriteMessage(s);
+    result = leetCode.restoreIpAddresses(s);
+    Logger::WriteMessage(result);
+
+    s = "25525511135";
+    Logger::WriteMessage(s);
+    result = leetCode.restoreIpAddresses(s);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode216(void)
+{
+    Logger::WriteMessage("Test Leet Code 216");
+    LeetCodeDFS leetCode;
+
+    int k = 3;
+    int n = 7;
+    vector<vector<int>> result = leetCode.combinationSum3(k, n);
+    Logger::WriteMessage("k = " + to_string(k) + "," + "n = " + to_string(n) + " -> ");
+    Logger::WriteMessage(result);
+
+    k = 3;
+    n = 9;
+    result = leetCode.combinationSum3(k, n);
+    Logger::WriteMessage("k = " + to_string(k) + "," + "n = " + to_string(n) + " -> ");
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode241(void)
+{
+    Logger::WriteMessage("Test Leet Code 241");
+    LeetCodeDFS leetCode;
+    string input = "2-1-1";
+    vector<int> result = leetCode.diffWaysToCompute(input);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage(result);
+
+    input = "2*3-4*5";
+    result = leetCode.diffWaysToCompute(input);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode329(void)
+{
+    Logger::WriteMessage("Test Leet Code 329");
+    LeetCodeDFS leetCode;
+    vector<vector<int>> matrix = { {9,9,4}, {6,6,8}, {2,1,1} };
+    int max_path;
+    Logger::WriteMessage(matrix);
+    max_path = leetCode.longestIncreasingPath(matrix);
+    Logger::WriteMessage("The longest path is " + to_string(max_path));
+    matrix = { { 3, 4, 5 }, { 3, 2, 6 },{ 2, 2, 1 } };
+    Logger::WriteMessage(matrix);
+    max_path = leetCode.longestIncreasingPath(matrix);
+    Logger::WriteMessage("The longest path is " + to_string(max_path));
+}
+
+void TestLeetCode401(void)
+{
+    Logger::WriteMessage("Test Leet Code 401");
+    LeetCodeDFS leetCode;
+    int num;
+    vector<string> result;
+    num = 2;
+    Logger::WriteMessage("The number of LEDs on: " + to_string(num));
+    result = leetCode.readBinaryWatch(num);
+    Logger::WriteMessage("Possible time: ");
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCode464(void)
 {
     Logger::WriteMessage("Test Leet Code 464");
@@ -353,8 +436,45 @@ void TestLeetCode526(void)
     Logger::WriteMessage("N = " + to_string(N) + "; count Arrangement = " + to_string(result));
 }
 
+void TestLeetCode416(void)
+{
+    Logger::WriteMessage("Test Leet Code 416");
+    LeetCodeDFS leetCode;
+    vector<int> nums = { 1, 5, 11, 5 };
+    bool result = leetCode.canPartition(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage((string)(result ? "Can" : "Can not") + " partition into equal subset.");
+
+    nums = { 1, 2, 3, 5 };
+    result = leetCode.canPartition(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage((string)(result ? "Can" : "Can not") + " partition into equal subset.");
+}
+
+void TestLeetCode491(void)
+{
+    Logger::WriteMessage("Test Leet Code 491");
+    LeetCodeDFS leetCode;
+    vector<int> nums = { 4, 6, 7, 7 };
+    Logger::WriteMessage(nums);
+    vector<vector<int>> result = leetCode.findSubsequences(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 4, 3, 2, 1 };
+    Logger::WriteMessage(nums);
+    result = leetCode.findSubsequences(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1, 8, 9, 1, 1, 1, 1, 1 };
+    Logger::WriteMessage(nums);
+    result = leetCode.findSubsequences(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode416();
+    TestLeetCode329();
     TestLeetCode17();
     TestLeetCode37();
     TestLeetCode39();

@@ -9467,5 +9467,6 @@ vector<int> LeetCodeDP::pathsWithMaxScore(vector<string>& board)
     vector<int> result = { dp[0][0].first, dp[0][0].second };
     return result;
 }
+
 #pragma endregion
 

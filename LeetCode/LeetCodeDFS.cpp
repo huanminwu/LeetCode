@@ -594,9 +594,81 @@ vector<vector<int>> LeetCodeDFS::permuteUnique(vector<int>& nums)
 }
 
 /// <summary>
+/// Leet code #329. Longest Increasing Path in a Matrix
+/// </summary>
+int LeetCodeDFS::longestIncreasingPath(vector<vector<int>>& matrix,
+    vector<vector<int>>& path, vector<vector<int>>& directions,
+    int i, int j)
+{
+    if (path[i][j] > 0) return path[i][j];
+    path[i][j] = 1;
+    for (size_t d = 0; d < directions.size(); d++)
+    {
+        int r = i + directions[d][0];
+        int c = j + directions[d][1];
+        if (r < 0 || r >= (int)matrix.size() || c < 0 || c >= (int)matrix[0].size())
+        {
+            continue;
+        }
+        if (matrix[r][c] > matrix[i][j])
+        {
+            path[i][j] = max(path[i][j], 1 + longestIncreasingPath(matrix, path, directions, r, c));
+        }
+    }
+    return path[i][j];
+}
+
+/// <summary>
+/// Leet code #329. Longest Increasing Path in a Matrix
+///
+/// Hard
+///
+/// Given an integer matrix, find the length of the longest increasing 
+/// path.
+/// From each cell, you can either move to four directions: left, right, 
+/// up or down. You may NOT move diagonally or move outside of the 
+/// boundary (i.e. wrap-around is not allowed).
+/// Example 1:
+/// Input: nums = 
+/// [
+///  [9,9,4],
+///  [6,6,8],
+///  [2,1,1]
+/// ] 
+/// Output: 4 
+/// Explanation: The longest increasing path is [1, 2, 6, 9].
+///
+/// Example 2:
+/// Input: nums = 
+/// [
+///  [3,4,5],
+///  [3,2,6],
+///  [2,2,1]
+/// ] 
+/// Output: 4 
+/// Explanation: The longest increasing path is [3, 4, 5, 6]. 
+/// Moving diagonally is not allowed.
+/// </summary>
+int LeetCodeDFS::longestIncreasingPath(vector<vector<int>>& matrix)
+{
+    int result = 0;
+    if (matrix.empty()) return result;
+    vector<vector<int>> path(matrix.size(), vector<int>(matrix[0].size()));
+    vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    for (size_t i = 0; i < matrix.size(); i++)
+    {
+        for (size_t j = 0; j < matrix[i].size(); j++)
+        {
+            result = max(result, longestIncreasingPath(matrix, path, directions, i, j));
+        }
+    }
+    return result;
+}
+
+/// <summary>
 /// Leet code #401. Binary Watch  
 /// </summary> 
-void LeetCode::readBinaryWatch(int num, vector<int>&path, int sum, vector<string> &result)
+void LeetCodeDFS::readBinaryWatch(int num, vector<int>&path, int sum, vector<string> &result)
 {
     vector<int> time_metrics = { 1, 2, 4, 8, 16, 32, 100, 200, 400, 800 };
 
@@ -627,19 +699,27 @@ void LeetCode::readBinaryWatch(int num, vector<int>&path, int sum, vector<string
 
 /// <summary>
 /// Leet code #401. Binary Watch  
-/// A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59). 
-/// Each LED represents a zero or one, with the least significant bit on the right.
-/// Given a non-negative integer n which represents the number of LEDs that are currently on, 
-/// return all possible times the watch could represent
+///
+/// A binary watch has 4 LEDs on the top which represent the hours (0-11), 
+/// and the 6 LEDs on the bottom represent the minutes (0-59). 
+/// Each LED represents a zero or one, with the least significant bit on 
+/// the right.
+/// Given a non-negative integer n which represents the number of LEDs 
+/// that are currently on, return all possible times the watch could 
+/// represent
+///
 /// Example:
 /// Input: n = 1
-/// Return: ["1:00", "2:00", "4:00", "8:00", "0:01", "0:02", "0:04", "0:08", "0:16", "0:32"]
-/// Note:	
+/// Return: ["1:00", "2:00", "4:00", "8:00", "0:01", "0:02", "0:04", 
+///          "0:08", "0:16", "0:32"]
+/// Note:
 /// The order of output does not matter.
-/// The hour must not contain a leading zero, for example "01:00" is not valid, it should be "1:00".
-/// The minute must be consist of two digits and may contain a leading zero, for example "10:2" is not valid, it should be "10:02".
+/// The hour must not contain a leading zero, for example "01:00" is not 
+/// valid, it should be "1:00".
+/// The minute must be consist of two digits and may contain a leading 
+/// zero, for example "10:2" is not valid, it should be "10:02".
 /// </summary> 
-vector<string> LeetCode::readBinaryWatch(int num)
+vector<string> LeetCodeDFS::readBinaryWatch(int num)
 {
     vector<string> result;
     vector<int> path;
@@ -650,19 +730,27 @@ vector<string> LeetCode::readBinaryWatch(int num)
 
 /// <summary>
 /// Leet code #401. Binary Watch  
-/// A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59). 
-/// Each LED represents a zero or one, with the least significant bit on the right.
-/// Given a non-negative integer n which represents the number of LEDs that are currently on, 
-/// return all possible times the watch could represent
+///
+/// A binary watch has 4 LEDs on the top which represent the hours (0-11), 
+/// and the 6 LEDs on the bottom represent the minutes (0-59). 
+/// Each LED represents a zero or one, with the least significant bit on 
+/// the right.
+/// Given a non-negative integer n which represents the number of LEDs 
+/// that are currently on, return all possible times the watch could 
+/// represent
+///
 /// Example:
 /// Input: n = 1
-/// Return: ["1:00", "2:00", "4:00", "8:00", "0:01", "0:02", "0:04", "0:08", "0:16", "0:32"]
-/// Note:	
+/// Return: ["1:00", "2:00", "4:00", "8:00", "0:01", "0:02", "0:04", 
+///          "0:08", "0:16", "0:32"]
+/// Note:
 /// The order of output does not matter.
-/// The hour must not contain a leading zero, for example "01:00" is not valid, it should be "1:00".
-/// The minute must be consist of two digits and may contain a leading zero, for example "10:2" is not valid, it should be "10:02".
+/// The hour must not contain a leading zero, for example "01:00" is not 
+/// valid, it should be "1:00".
+/// The minute must be consist of two digits and may contain a leading 
+/// zero, for example "10:2" is not valid, it should be "10:02".
 /// </summary> 
-vector<string> LeetCode::readBinaryWatchII(int num)
+vector<string> LeetCodeDFS::readBinaryWatchII(int num)
 {
     vector<int> time_metrics = { 1, 2, 4, 8, 16, 32, 100, 200, 400, 800 };
     vector<int> search_stack;
@@ -920,9 +1008,11 @@ vector<string> LeetCode::wordSearchII(vector<vector<char>>& board, vector<string
 }
 
 /// <summary>
+/// LeetCode #93. Restore IP Addresses
+///
 /// Restore IP address by split into specified segment
 /// </summary>
-vector<string> LeetCode::restoreIpAddresses(string s, size_t segments)
+vector<string> LeetCodeDFS::restoreIpAddresses(string s, size_t segments)
 {
     vector<string> result;
     if ((s.size() < segments) || (s.size() > segments * 3))
@@ -957,120 +1047,16 @@ vector<string> LeetCode::restoreIpAddresses(string s, size_t segments)
 
 /// <summary>
 /// LeetCode #93. Restore IP Addresses  
-/// Given a string containing only digits, restore it by returning all possible valid IP address combinations. 
+///
+/// Given a string containing only digits, restore it by returning all 
+/// possible valid IP address combinations. 
 /// For example:
 /// Given "25525511135", 
 /// return ["255.255.11.135", "255.255.111.35"]. (Order does not matter) 
 /// </summary>
-vector<string> LeetCode::restoreIpAddresses(string s)
+vector<string> LeetCodeDFS::restoreIpAddresses(string s)
 {
     return restoreIpAddresses(s, 4);
-}
-
-/// <summary>
-/// Check neighbors
-/// </summary>
-vector<pair<int, int>> LeetCode::checkNeighbour(vector<vector<int>>& matrix, int row, int col)
-{
-    vector<pair<int, int>> neighbors;
-    if (row > 0)
-    {
-        if (matrix[row][col] < matrix[row - 1][col])
-        {
-            neighbors.push_back(make_pair(row - 1, col));
-        }
-    }
-    if (col > 0)
-    {
-        if (matrix[row][col] < matrix[row][col - 1])
-        {
-            neighbors.push_back(make_pair(row, col - 1));
-        }
-    }
-    if (row < (int)matrix.size() - 1)
-    {
-        if (matrix[row][col] < matrix[row + 1][col])
-        {
-            neighbors.push_back(make_pair(row + 1, col));
-        }
-    }
-    if (col < (int)matrix[0].size() - 1)
-    {
-        if (matrix[row][col] < matrix[row][col + 1])
-        {
-            neighbors.push_back(make_pair(row, col + 1));
-        }
-    }
-    return neighbors;
-}
-
-/// <summary>
-/// Search longest increasing path from a cell
-/// </summary>
-void LeetCode::longestIncreasingPath(vector<vector<int>>& matrix, int row, int col,
-    vector<vector<int>>& path_map)
-{
-    // invalid coordination, return
-    if ((row < 0) || (row == matrix.size()) || (col < 0) || (col == matrix[0].size()))
-    {
-        return;
-    }
-    if (path_map[row][col] != 0) return;
-    path_map[row][col] = 1;
-    vector<pair<int, int>> neighbors = checkNeighbour(matrix, row, col);
-    for (pair<int, int> pair : neighbors)
-    {
-        if (path_map[pair.first][pair.second] == 0)
-        {
-            longestIncreasingPath(matrix, pair.first, pair.second, path_map);
-        }
-        path_map[row][col] = max(path_map[row][col], 1 + path_map[pair.first][pair.second]);
-    }
-}
-
-/// <summary>
-/// Leet code #329. Longest Increasing Path in a Matrix               
-/// Given an integer matrix, find the length of the longest increasing path.
-/// From each cell, you can either move to four directions: left, right, up or down.
-/// You may NOT move diagonally or move outside of the boundary (i.e. wrap-around is not allowed).
-/// Example 1: 
-/// nums = [
-///  [9,9,4],
-///  [6,6,8],
-///  [2,1,1]
-/// ] 
-/// Return 4
-///  The longest increasing path is [1, 2, 6, 9].
-///
-/// Example 2: 
-/// nums = [
-///  [3,4,5],
-///  [3,2,6],
-///  [2,2,1]
-/// ]
-/// Return 4
-/// The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed.
-/// </summary>
-int LeetCode::longestIncreasingPath(vector<vector<int>>& matrix)
-{
-    if (matrix.empty() || matrix[0].empty()) return 0;
-    vector<vector<int>> path_map(matrix.size(), vector<int>(matrix[0].size()));
-    for (size_t i = 0; i < matrix.size(); i++)
-    {
-        for (size_t j = 0; j < matrix[0].size(); j++)
-        {
-            longestIncreasingPath(matrix, i, j, path_map);
-        }
-    }
-    int max_path = 0;
-    for (size_t i = 0; i < matrix.size(); i++)
-    {
-        for (size_t j = 0; j < matrix[0].size(); j++)
-        {
-            max_path = max(max_path, path_map[i][j]);
-        }
-    }
-    return max_path;
 }
 
 /// <summary>
@@ -1244,7 +1230,7 @@ bool LeetCodeDFS::canIWin(int maxChoosableInteger, int desiredTotal)
 /// <summary>
 /// Leet code #416. Partition Equal Subset Sum
 /// </summary>
-bool LeetCode::canPartition(vector<int>& nums, size_t start, int sum)
+bool LeetCodeDFS::canPartition(vector<int>& nums, size_t start, int sum)
 {
     for (size_t i = start; i < nums.size(); i++)
     {
@@ -1277,7 +1263,7 @@ bool LeetCode::canPartition(vector<int>& nums, size_t start, int sum)
 /// Output: false
 /// Explanation: The array cannot be partitioned into equal sum subsets.
 /// </summary>
-bool LeetCode::canPartition(vector<int>& nums)
+bool LeetCodeDFS::canPartition(vector<int>& nums)
 {
     int sum = 0;
     for (size_t i = 0; i < nums.size(); i++)
@@ -1291,68 +1277,11 @@ bool LeetCode::canPartition(vector<int>& nums)
 }
 
 /// <summary>
-/// Leet code #241. Different Ways to Add Parentheses  
-/// </summary>
-vector<int> LeetCode::diffWaysToCompute(vector<string> &token_list, int start, int end)
-{
-    vector<int> result;
-    if (start == end)
-    {
-        result.push_back(atoi(token_list[start].c_str()));
-    }
-    else if (start + 2 == end)
-    {
-        int num1 = atoi(token_list[start].c_str());
-        int num2 = atoi(token_list[end].c_str());
-        if (token_list[start + 1] == "+")
-        {
-            result.push_back(num1 + num2);
-        }
-        else if (token_list[start + 1] == "-")
-        {
-            result.push_back(num1 - num2);
-        }
-        else if (token_list[start + 1] == "*")
-        {
-            result.push_back(num1 * num2);
-        }
-    }
-    else
-    {
-        vector<int> left_result;
-        vector<int> right_result;
-        for (int middle = start; middle < end; middle += 2)
-        {
-            left_result = diffWaysToCompute(token_list, start, middle);
-            right_result = diffWaysToCompute(token_list, middle + 2, end);
-            for (int num1 : left_result)
-            {
-                for (int num2 : right_result)
-                {
-                    if (token_list[middle + 1] == "+")
-                    {
-                        result.push_back(num1 + num2);
-                    }
-                    else if (token_list[middle + 1] == "-")
-                    {
-                        result.push_back(num1 - num2);
-                    }
-                    else if (token_list[middle + 1] == "*")
-                    {
-                        result.push_back(num1 * num2);
-                    }
-                }
-            }
-        }
-    }
-    return result;
-}
-
-/// <summary>
 /// Leet code #241. Different Ways to Add Parentheses 
 ///
-/// Given a string of numbers and operators, return all possible results from computing all 
-/// the different possible ways to group numbers and operators. The valid operators are +, - and *.
+/// Given a string of numbers and operators, return all possible 
+/// results from computing all the different possible ways to group 
+/// numbers and operators. The valid operators are +, - and *.
 ///
 /// Example 1 
 /// Input: "2-1-1".
@@ -1369,32 +1298,31 @@ vector<int> LeetCode::diffWaysToCompute(vector<string> &token_list, int start, i
 /// (((2*3)-4)*5) = 10
 /// Output: [-34, -14, -10, -10, 10]
 /// </summary>
-vector<int> LeetCode::diffWaysToCompute(string input)
+vector<int> LeetCodeDFS::diffWaysToCompute(string input)
 {
-    vector<string> token_list;
-    string word;
+    vector<int> result;
     for (size_t i = 0; i <= input.size(); i++)
     {
-        if (i == input.size() && !word.empty())
+        if ((input[i] == '+') || (input[i] == '-') || (input[i] == '*'))
         {
-            token_list.push_back(word);
-            word.clear();
-        }
-        else if ((input[i] == '+') || (input[i] == '-') || (input[i] == '*'))
-        {
-            if (!word.empty()) token_list.push_back(word);
-            word.clear();
-            word.push_back(input[i]);
-            token_list.push_back(word);
-            word.clear();
-        }
-        else
-        {
-            word.push_back(input[i]);
+            vector<int> left = diffWaysToCompute(input.substr(0, i));
+            vector<int> right = diffWaysToCompute(input.substr(i + 1));
+            for (size_t j = 0; j < left.size(); j++)
+            {
+                for (size_t k = 0; k < right.size(); k++)
+                {
+                    if (input[i] == '+') result.push_back(left[j] + right[k]);
+                    else if (input[i] == '-') result.push_back(left[j] - right[k]);
+                    else if (input[i] == '*') result.push_back(left[j] * right[k]);
+                }
+            }
         }
     }
-
-    return diffWaysToCompute(token_list, 0, token_list.size() - 1);
+    if (result.empty())
+    {
+        result.push_back(atoi(input.c_str()));
+    }
+    return result;
 }
 
 /// <summary>
@@ -1451,7 +1379,7 @@ vector<string> LeetCode::addOperators(string num, int target)
 /// <summary>
 /// Leet code #216. Combination Sum III 
 /// </summary>
-vector<vector<int>> LeetCode::combinationSum3(int k, int n, int start)
+vector<vector<int>> LeetCodeDFS::combinationSum3(int k, int n, int start)
 {
     vector<vector<int>> result;
     if (k == 0)
@@ -1494,7 +1422,7 @@ vector<vector<int>> LeetCode::combinationSum3(int k, int n, int start)
 /// Output: 
 /// [[1,2,6], [1,3,5], [2,3,4]]
 /// </summary>
-vector<vector<int>> LeetCode::combinationSum3(int k, int n)
+vector<vector<int>> LeetCodeDFS::combinationSum3(int k, int n)
 {
     return combinationSum3(k, n, 1);
 }
@@ -2123,9 +2051,10 @@ bool LeetCode::wordPatternMatch(string pattern, string str)
 }
 
 /// <summary>
-/// Leet code #491. Increasing Subsequences        
+/// Leet code #491. Increasing Subsequences  
 /// </summary>
-void LeetCode::findSubsequences(vector<int>& nums, size_t start_index, vector<int> &sequence, vector<vector<int>> &result)
+void LeetCodeDFS::findSubsequences(vector<int>& nums, size_t start_index, 
+    vector<int> &sequence, vector<vector<int>> &result)
 {
     if (start_index == nums.size())
     {
@@ -2154,19 +2083,22 @@ void LeetCode::findSubsequences(vector<int>& nums, size_t start_index, vector<in
 }
 
 /// <summary>
-/// Leet code #491. Increasing Subsequences        
+/// Leet code #491. Increasing Subsequences 
 /// 
-/// Given an integer array, your task is to find all the different possible increasing subsequences of the given 
-/// array, and the length of an increasing subsequence should be at least 2 . 
+/// Given an integer array, your task is to find all the different 
+/// possible increasing subsequences of the given array, and the length 
+/// of an increasing subsequence should be at least 2 . 
+///
 /// Example:
 /// Input: [4, 6, 7, 7]
 /// Output: [[4, 6], [4, 7], [4, 6, 7], [4, 6, 7, 7], [6, 7], [6, 7, 7], [7,7], [4,7,7]]
 /// Note:
 /// 1.The length of the given array will not exceed 15.
 /// 2.The range of integer in the given array is [-100,100].
-/// 3.The given array may contain duplicates, and two equal integers should also be considered as a special case of increasing sequence.
+/// 3.The given array may contain duplicates, and two equal integers 
+///   should also be considered as a special case of increasing sequence.
 /// </summary>
-vector<vector<int>> LeetCode::findSubsequences(vector<int>& nums)
+vector<vector<int>> LeetCodeDFS::findSubsequences(vector<int>& nums)
 {
     vector<int> sequence;
     vector<vector<int>> result;

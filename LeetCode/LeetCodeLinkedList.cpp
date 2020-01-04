@@ -18,15 +18,109 @@
 #include "Leetcode.h"
 #include "LeetCodeLinkedList.h"
 #pragma region LinkedList
+
+/// <summary>
+/// Free a cyclic linked list nodes
+/// </summary>
+void LeetCodeLinkedList::freeCyclicListNodes(ListNode* head)
+{
+    ListNode* node = head;
+    while (true)
+    {
+        ListNode* next = node->next;
+        delete node;
+        node = next;
+        if (node == head) break;
+    }
+}
+
+/// <summary>
+/// Output a cyclic linked list nodes
+/// </summary>
+vector<int> LeetCodeLinkedList::outputCyclicListNodes(ListNode* head)
+{
+    vector<int> result;
+    ListNode* node = head;
+    if (head == nullptr) return result;
+    while (true)
+    {
+        result.push_back(node->val);
+        node = node->next;
+        if (node == head) break;
+    }
+    return result;
+}
+
+/// <summary>
+/// Helper function which generate a cyclic linked list of a integers
+/// </summary>
+ListNode* LeetCodeLinkedList::generateCyclicListNodes(vector<int> integers)
+{
+    ListNode* head = nullptr;
+    ListNode* prev = nullptr;
+    for (size_t i = 0; i < integers.size(); i++)
+    {
+        ListNode* node = new ListNode(integers[i]);
+        if (head == nullptr)
+        {
+            head = node;
+            prev = node;
+        }
+        else
+        {
+            prev->next = node;
+            prev = prev->next;
+        }
+        node->next = head;
+    }
+    return head;
+}
+
+/// <summary>
+/// Add a list of list node at the end
+/// </summary>
+ListNode* LeetCodeLinkedList::addListNodes(ListNode* head, ListNode* tail)
+{
+    if (head == nullptr)
+    {
+        head = tail;
+    }
+    else
+    {
+        ListNode* prev = head;
+        while (prev->next != nullptr)
+        {
+            prev = prev->next;
+        }
+        prev->next = tail;
+    }
+    return head;
+}
+
+/// <summary>
+/// Find a list node with value
+/// </summary>
+ListNode* LeetCodeLinkedList::findListNode(ListNode* head, int value)
+{
+    ListNode* node = head;
+    while (node != nullptr)
+    {
+        if (node->val == value) return node;
+        node = node->next;
+    }
+    return nullptr;
+}
+
 /// <summary>
 /// Leet code #2. Add Two Numbers
+///
 /// You are given two linked lists representing two non - negative numbers.
 /// The digits are stored in reverse order and each of their nodes contain a single digit.
 /// Add the two numbers and return it as a linked list.
 ///  Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
 ///  Output : 7 -> 0 -> 8
 /// </summary>
-ListNode* LeetCode::addTwoNumbers(ListNode* l1, ListNode* l2)
+ListNode* LeetCodeLinkedList::addTwoNumbers(ListNode* l1, ListNode* l2)
 {
     ListNode* first = l1;
     ListNode* second = l2;
@@ -138,7 +232,7 @@ ListNode* LeetCodeLinkedList::removeNthFromEnd(ListNode* head, int n)
 /// Your algorithm should use only constant space. You may not modify the values in the 
 /// list, only nodes itself can be changed. 
 /// </summary>
-ListNode* LeetCode::swapPairs(ListNode* head)
+ListNode* LeetCodeLinkedList::swapPairs(ListNode* head)
 {
     ListNode* previous = nullptr;
 
@@ -230,7 +324,7 @@ ListNode* LeetCodeLinkedList::mergeKLists(vector<ListNode*>& lists)
 /// Given 1->2->3->4->5->NULL and k = 2,
 /// return 4->5->1->2->3->NULL.
 /// </summary>
-ListNode* LeetCode::rotateRight(ListNode* head, int k)
+ListNode* LeetCodeLinkedList::rotateRight(ListNode* head, int k)
 {
     if (head == nullptr) return head;
     ListNode* leading = head;
@@ -274,7 +368,7 @@ ListNode* LeetCode::rotateRight(ListNode* head, int k)
 /// Given 1->1->2, return 1->2.
 /// Given 1->1->2->3->3, return 1->2->3. 
 /// </summary>
-ListNode* LeetCode::deleteDuplicates(ListNode* head)
+ListNode* LeetCodeLinkedList::deleteDuplicates(ListNode* head)
 {
     ListNode* previous = nullptr;
     ListNode* current = head;
@@ -302,7 +396,7 @@ ListNode* LeetCode::deleteDuplicates(ListNode* head)
 /// Given 1->2->3->3->4->4->5, return 1->2->5.
 /// Given 1->1->1->2->3, return 2->3. 
 /// </summary>
-ListNode* LeetCode::deleteDuplicatesII(ListNode* head)
+ListNode* LeetCodeLinkedList::deleteDuplicatesII(ListNode* head)
 {
     ListNode* previous = nullptr;
     ListNode* current = head;
@@ -348,7 +442,7 @@ ListNode* LeetCode::deleteDuplicatesII(ListNode* head)
 ///
 /// return 1->2->2->4->3->5. 
 /// </summary>
-ListNode* LeetCode::partitionList(ListNode* head, int x)
+ListNode* LeetCodeLinkedList::partitionList(ListNode* head, int x)
 {
     ListNode* pre_first = nullptr;
     ListNode* first = head;
@@ -396,7 +490,7 @@ ListNode* LeetCode::partitionList(ListNode* head, int x)
 /// Follow up:
 /// Can you solve it without using extra space? 
 /// </summary>
-bool LeetCode::hasCycle(ListNode *head)
+bool LeetCodeLinkedList::hasCycle(ListNode *head)
 {
     ListNode * slow = head;
     ListNode * fast = head;
@@ -427,7 +521,7 @@ bool LeetCode::hasCycle(ListNode *head)
 /// Leet code #206. Reverse Linked List     
 /// Reverse a singly linked list.
 /// </summary>
-ListNode* LeetCode::reverseList(ListNode* head)
+ListNode* LeetCodeLinkedList::reverseList(ListNode* head)
 {
     ListNode *first = head, *last = head;
     while (last != nullptr)
@@ -452,7 +546,7 @@ ListNode* LeetCode::reverseList(ListNode* head)
 /// Given m, n satisfy the following condition:
 /// 1 ¡Ü m ¡Ü n ¡Ü length of list.
 /// </summary>
-ListNode* LeetCode::reverseBetween(ListNode* head, int m, int n)
+ListNode* LeetCodeLinkedList::reverseBetween(ListNode* head, int m, int n)
 {
     ListNode * prev = nullptr;
     ListNode * cur = head;
@@ -493,7 +587,7 @@ ListNode* LeetCode::reverseBetween(ListNode* head, int m, int n)
 /// Given: 1 --> 2 --> 6 --> 3 --> 4 --> 5 --> 6, val = 6 
 /// Return: 1 --> 2 --> 3 --> 4 --> 5  
 /// </summary>
-ListNode* LeetCode::removeElements(ListNode* head, int val)
+ListNode* LeetCodeLinkedList::removeElements(ListNode* head, int val)
 {
     ListNode * prev = nullptr;
     ListNode * cur = head;
@@ -595,7 +689,7 @@ RandomListNode * LeetCodeLinkedList::copyRandomList(RandomListNode *head)
 /// Supposed the linked list is 1 -> 2 -> 3 -> 4 and you are given the third node with value 3, 
 /// the linked list should become 1 -> 2 -> 4 after calling your function. 
 /// </summary>
-void LeetCode::deleteNode(ListNode* node)
+void LeetCodeLinkedList::deleteNode(ListNode* node)
 {
     if ((node != nullptr) && (node->next != nullptr))
     {
@@ -622,7 +716,7 @@ void LeetCode::deleteNode(ListNode* node)
 /// You may assume there are no cycles anywhere in the entire linked structure.
 /// Your code should preferably run in O(n) time and use only O(1) memory.
 /// </summary>
-ListNode * LeetCode::getIntersectionNode(ListNode *headA, ListNode *headB)
+ListNode * LeetCodeLinkedList::getIntersectionNode(ListNode *headA, ListNode *headB)
 {
     if ((headA == nullptr) || (headB == nullptr))
     {
@@ -653,7 +747,7 @@ ListNode * LeetCode::getIntersectionNode(ListNode *headA, ListNode *headB)
 /// LeetCode #147. Insertion Sort List   
 /// Sort a linked list using insertion sort. 
 /// </summary>
-ListNode* LeetCode::insertionSortList(ListNode* head)
+ListNode* LeetCodeLinkedList::insertionSortList(ListNode* head)
 {
     ListNode* unordered_head = head;
     head = nullptr;
@@ -696,7 +790,7 @@ ListNode* LeetCode::insertionSortList(ListNode* head)
 /// Follow up:
 /// Could you do it in O(n) time and O(1) space?
 /// </summary>
-bool LeetCode::isPalindrome(ListNode* head)
+bool LeetCodeLinkedList::isPalindrome(ListNode* head)
 {
     if (head == nullptr) return true;
     ListNode *slow = head;
@@ -746,7 +840,7 @@ bool LeetCode::isPalindrome(ListNode* head)
 /// head.next.next = new ListNode(3);
 /// Solution solution = new Solution(head);
 /// </summary>
-int LeetCode::getRandom(ListNode *head)
+int LeetCodeLinkedList::getRandom(ListNode *head)
 {
     int count = 0;
     int value = 0;
@@ -781,7 +875,7 @@ int LeetCode::getRandom(ListNode *head)
 /// The relative order inside both the even and odd groups should remain as it was in the input. 
 /// The first node is considered odd, the second node even and so on ... 
 /// </summary>
-ListNode* LeetCode::oddEvenList(ListNode* head)
+ListNode* LeetCodeLinkedList::oddEvenList(ListNode* head)
 {
     ListNode* odd_head = nullptr, *odd_prev = nullptr;
     ListNode* even_head = nullptr, *even_prev = nullptr;
@@ -835,7 +929,7 @@ ListNode* LeetCode::oddEvenList(ListNode* head)
 /// Input: (7 -> 2 -> 4 -> 3) + (5 -> 6 -> 4)
 /// Output: 7 -> 8 -> 0 -> 7
 /// </summary>
-ListNode* LeetCode::addTwoNumbersII(ListNode* l1, ListNode* l2)
+ListNode* LeetCodeLinkedList::addTwoNumbersII(ListNode* l1, ListNode* l2)
 {
     ListNode * result = nullptr;
     int value = 0;
@@ -888,7 +982,7 @@ ListNode* LeetCode::addTwoNumbersII(ListNode* l1, ListNode* l2)
 ///
 /// Given 1->2->3->4->5, reorder it to 1->5->2->4->3.
 /// </summary>
-void LeetCode::reorderList(ListNode* head)
+void LeetCodeLinkedList::reorderList(ListNode* head)
 {
     if ((head == nullptr) || head->next == nullptr) return;
     ListNode* fake_head = new ListNode(0);
@@ -939,7 +1033,7 @@ void LeetCode::reorderList(ListNode* head)
 /// Output:
 /// 1->2->4
 /// </summary>
-ListNode* LeetCode::plusOne(ListNode* head)
+ListNode* LeetCodeLinkedList::plusOne(ListNode* head)
 {
     head = reverseList(head);
     ListNode * node = head;
@@ -1017,7 +1111,7 @@ ListNode* LeetCode::plusOne(ListNode* head)
 /// [0, 999].
 /// k will be an integer in the range [1, 50].
 /// </summary>
-vector<ListNode*> LeetCode::splitListToParts(ListNode* root, int k)
+vector<ListNode*> LeetCodeLinkedList::splitListToParts(ListNode* root, int k)
 {
     vector<ListNode *> result(k, nullptr);
     size_t size = 0;
@@ -1099,7 +1193,7 @@ vector<ListNode*> LeetCode::splitListToParts(ListNode* root, int k)
 /// 3. 1 <= G.length <= 10000.
 /// 4. G is a subset of all values in the linked list.
 /// </summary>
-int LeetCode::numComponents(ListNode* head, vector<int>& G)
+int LeetCodeLinkedList::numComponents(ListNode* head, vector<int>& G)
 {
     int result = 0;
     bool in_subset = false;
@@ -1149,7 +1243,7 @@ int LeetCode::numComponents(ListNode* head, vector<int>& G)
 /// Note:
 /// 1. The number of nodes in the given list will be between 1 and 100.
 /// </summary>
-ListNode* LeetCode::middleNode(ListNode* head)
+ListNode* LeetCodeLinkedList::middleNode(ListNode* head)
 {
     ListNode * fast = head;
     ListNode * result = head;
@@ -1189,7 +1283,7 @@ ListNode* LeetCode::middleNode(ListNode* head)
 /// The new node should insert between node 1 and node 3. After the insertion, 
 /// the list should look like this, and we should still return node 3.
 /// </summary>
-ListNode* LeetCode::insert(ListNode* head, int insertVal)
+ListNode* LeetCodeLinkedList::insert(ListNode* head, int insertVal)
 {
     ListNode * node = head;
     if (node == nullptr)
@@ -1239,7 +1333,7 @@ ListNode* LeetCode::insert(ListNode* head, int insertVal)
 /// Output:
 /// 1-2-3-7-8-11-12-9-10-4-5-6-NULL
 /// </summary>
-DoublyLinkedNode* LeetCode::flatten(DoublyLinkedNode * head)
+DoublyLinkedNode* LeetCodeLinkedList::flatten(DoublyLinkedNode * head)
 {
     stack<DoublyLinkedNode *> search;
     search.push(head);
@@ -1291,7 +1385,7 @@ DoublyLinkedNode* LeetCode::flatten(DoublyLinkedNode * head)
 /// 1. The given linked list will contain between 1 and 1000 nodes.
 /// 2. Each node in the linked list has -1000 <= node.val <= 1000.
 /// </summary>
-ListNode* LeetCode::removeZeroSumSublists(ListNode* head)
+ListNode* LeetCodeLinkedList::removeZeroSumSublists(ListNode* head)
 {
     unordered_map<int, ListNode*> node_sum;
     int sum = 0;
@@ -1367,7 +1461,7 @@ ListNode* LeetCode::removeZeroSumSublists(ListNode* head)
 /// 1. 1 <= node.val <= 10^9 for each node in the linked list.
 /// 2. The given list has length in the range [0, 10000].
 /// </summary>
-vector<int> LeetCode::nextLargerNodes(ListNode* head)
+vector<int> LeetCodeLinkedList::nextLargerNodes(ListNode* head)
 {
     vector<int>result;
     stack<pair<int, int>> search;

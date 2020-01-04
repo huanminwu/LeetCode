@@ -22,83 +22,6 @@
 
 #pragma region HelperFunction
 /// <summary>
-/// Helper function which generate a linked list of a integers
-/// </summary>
-ListNode* LeetCode::generateListNodes(vector<int> integers)
-{
-    ListNode* start = nullptr;
-    ListNode* prev = nullptr;
-    for (size_t i = 0; i < integers.size(); i++)
-    {
-        ListNode* result = new ListNode(integers[i]);
-        if (start == nullptr)
-        {
-            start = result;
-            prev = result;
-        }
-        else
-        {
-            prev->next = result;
-            prev = prev->next;
-        }
-    }
-    return start;
-}
-
-/// <summary>
-/// Helper function which generate a cyclic linked list of a integers
-/// </summary>
-ListNode* LeetCode::generateCyclicListNodes(vector<int> integers)
-{
-	ListNode* head = nullptr;
-	ListNode* prev = nullptr;
-	for (size_t i = 0; i < integers.size(); i++)
-	{
-		ListNode* node = new ListNode(integers[i]);
-		if (head == nullptr)
-		{
-			head = node;
-			prev = node;
-		}
-		else
-		{
-			prev->next = node;
-			prev = prev->next;
-		}
-		node->next = head;
-	}
-	return head;
-}
-
-/// <summary>
-/// Free list nodes
-/// </summary>
-void LeetCode::freeListNodes(ListNode * head)
-{
-    while (head != nullptr)
-    {
-        ListNode * node = head;
-        head = head->next;
-        delete node;
-    }
-}
-
-/// <summary>
-/// Free a cyclic linked list nodes
-/// </summary>
-void LeetCode::freeCyclicListNodes(ListNode * head)
-{
-	ListNode * node = head;
-	while (true)
-	{
-		ListNode * next = node->next;
-		delete node;
-		node = next;
-		if (node == head) break;
-	}
-}
-
-/// <summary>
 /// Free link tree nodes
 /// </summary>
 void LeetCode::freeLinkTreeNodes(TreeLinkNode * root)
@@ -150,19 +73,6 @@ void LeetCode::freeNodes(Node * root)
 	}
 }
 
-/// <summary>
-/// Find a list node with value
-/// </summary>
-ListNode* LeetCode::findListNode(ListNode *head, int value)
-{
-    ListNode * node = head;
-    while (node != nullptr)
-    {
-        if (node->val == value) return node;
-        node = node->next;
-    }
-    return nullptr;
-}
 
 /// <summary>
 /// Find a tree node with value
@@ -196,43 +106,7 @@ TreeNode* LeetCode::findTreeNode(TreeNode * root, int value)
     return nullptr;
 }
 
-/// <summary>
-/// Add a list of list node at the end
-/// </summary>
-ListNode* LeetCode::addListNodes(ListNode * head, ListNode *tail)
-{
-    if (head == nullptr)
-    {
-        head = tail;
-    }
-    else
-    {
-        ListNode * prev = head;
-        while (prev->next != nullptr)
-        {
-            prev = prev->next;
-        }
-        prev->next = tail;
-    }
-    return head;
-}
 
-/// <summary>
-/// Output a cyclic linked list nodes
-/// </summary>
-vector<int> LeetCode::outputCyclicListNodes(ListNode * head)
-{
-	vector<int> result;
-	ListNode * node = head;
-	if (head == nullptr) return result;
-	while (true)
-	{
-		result.push_back(node->val);
-		node = node->next;
-		if (node == head) break;
-	}
-	return result;
-}
 
 /// <summary>
 /// Free tree nodes

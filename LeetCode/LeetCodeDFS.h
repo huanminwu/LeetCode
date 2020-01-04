@@ -363,6 +363,190 @@ public:
     bool wordSearch(vector<vector<char>>& board, string word);
 
     /// <summary>
+    /// LeetCode #93. Restore IP Addresses
+    ///
+    /// Restore IP address by split into specified segment
+    /// </summary>
+    vector<string> restoreIpAddresses(string s, size_t segments);
+
+    /// <summary>
+    /// LeetCode #93. Restore IP Addresses  
+    ///
+    /// Given a string containing only digits, restore it by returning all 
+    /// possible valid IP address combinations. 
+    /// For example:
+    /// Given "25525511135", 
+    /// return ["255.255.11.135", "255.255.111.35"]. (Order does not matter) 
+    /// </summary>
+    vector<string> restoreIpAddresses(string s);
+
+    /// <summary>
+    /// Leet code #216. Combination Sum III 
+    /// </summary>
+    vector<vector<int>> combinationSum3(int k, int n, int start);
+
+    /// <summary>
+    /// Leet code #216. Combination Sum III 
+    ///
+    /// Find all possible combinations of k numbers that add up to a number n, 
+    /// given that only numbers from 1 to 9 can be used and each combination 
+    /// should be a unique set of numbers.
+    /// 
+    /// Example 1:
+    /// Input: k = 3, n = 7
+    /// Output: 
+    /// [[1,2,4]]
+    ///
+    /// Example 2:
+    /// Input: k = 3, n = 9
+    /// Output: 
+    /// [[1,2,6], [1,3,5], [2,3,4]]
+    /// </summary>
+    vector<vector<int>> combinationSum3(int k, int n);
+
+    /// <summary>
+    /// Leet code #241. Different Ways to Add Parentheses 
+    ///
+    /// Given a string of numbers and operators, return all possible 
+    /// results from computing all the different possible ways to group 
+    /// numbers and operators. The valid operators are +, - and *.
+    ///
+    /// Example 1 
+    /// Input: "2-1-1".
+    /// ((2-1)-1) = 0
+    /// (2-(1-1)) = 2
+    /// Output: [0, 2]
+    ///
+    /// Example 2 
+    /// Input: "2*3-4*5"
+    /// (2*(3-(4*5))) = -34
+    /// ((2*3)-(4*5)) = -14
+    /// ((2*(3-4))*5) = -10
+    /// (2*((3-4)*5)) = -10
+    /// (((2*3)-4)*5) = 10
+    /// Output: [-34, -14, -10, -10, 10]
+    /// </summary>
+    vector<int> diffWaysToCompute(string input);
+
+    /// <summary>
+    /// Leet code #329. Longest Increasing Path in a Matrix
+    /// </summary>
+    int longestIncreasingPath(vector<vector<int>>& matrix, 
+        vector<vector<int>>& path, vector<vector<int>>& directions, 
+        int i, int j);
+
+    /// <summary>
+    /// Leet code #329. Longest Increasing Path in a Matrix
+    ///
+    /// Hard
+    ///
+    /// Given an integer matrix, find the length of the longest increasing 
+    /// path.
+    /// From each cell, you can either move to four directions: left, right, 
+    /// up or down. You may NOT move diagonally or move outside of the 
+    /// boundary (i.e. wrap-around is not allowed).
+    /// Example 1:
+    /// Input: nums = 
+    /// [
+    ///  [9,9,4],
+    ///  [6,6,8],
+    ///  [2,1,1]
+    /// ] 
+    /// Output: 4 
+    /// Explanation: The longest increasing path is [1, 2, 6, 9].
+    ///
+    /// Example 2:
+    /// Input: nums = 
+    /// [
+    ///  [3,4,5],
+    ///  [3,2,6],
+    ///  [2,2,1]
+    /// ] 
+    /// Output: 4 
+    /// Explanation: The longest increasing path is [3, 4, 5, 6]. 
+    /// Moving diagonally is not allowed.
+    /// </summary>
+    int longestIncreasingPath(vector<vector<int>>& matrix);
+
+    /// <summary>
+    /// Leet code #401. Binary Watch  
+    /// </summary> 
+    void readBinaryWatch(int num, vector<int>& path, int sum, vector<string>& result);
+
+    /// <summary>
+    /// Leet code #401. Binary Watch  
+    ///
+    /// A binary watch has 4 LEDs on the top which represent the hours (0-11), 
+    /// and the 6 LEDs on the bottom represent the minutes (0-59). 
+    /// Each LED represents a zero or one, with the least significant bit on 
+    /// the right.
+    /// Given a non-negative integer n which represents the number of LEDs 
+    /// that are currently on, return all possible times the watch could 
+    /// represent
+    ///
+    /// Example:
+    /// Input: n = 1
+    /// Return: ["1:00", "2:00", "4:00", "8:00", "0:01", "0:02", "0:04", 
+    ///          "0:08", "0:16", "0:32"]
+    /// Note:
+    /// The order of output does not matter.
+    /// The hour must not contain a leading zero, for example "01:00" is not 
+    /// valid, it should be "1:00".
+    /// The minute must be consist of two digits and may contain a leading 
+    /// zero, for example "10:2" is not valid, it should be "10:02".
+    /// </summary> 
+    vector<string> readBinaryWatch(int num);
+
+    /// <summary>
+    /// Leet code #401. Binary Watch  
+    ///
+    /// A binary watch has 4 LEDs on the top which represent the hours (0-11), 
+    /// and the 6 LEDs on the bottom represent the minutes (0-59). 
+    /// Each LED represents a zero or one, with the least significant bit on 
+    /// the right.
+    /// Given a non-negative integer n which represents the number of LEDs 
+    /// that are currently on, return all possible times the watch could 
+    /// represent
+    ///
+    /// Example:
+    /// Input: n = 1
+    /// Return: ["1:00", "2:00", "4:00", "8:00", "0:01", "0:02", "0:04", 
+    ///          "0:08", "0:16", "0:32"]
+    /// Note:
+    /// The order of output does not matter.
+    /// The hour must not contain a leading zero, for example "01:00" is not 
+    /// valid, it should be "1:00".
+    /// The minute must be consist of two digits and may contain a leading 
+    /// zero, for example "10:2" is not valid, it should be "10:02".
+    /// </summary> 
+    vector<string> readBinaryWatchII(int num);
+
+    /// <summary>
+    /// Leet code #416. Partition Equal Subset Sum
+    /// </summary>
+    bool canPartition(vector<int>& nums, size_t start, int sum);
+
+    /// <summary>
+    /// Leet code #416. Partition Equal Subset Sum 
+    ///
+    /// Given a non-empty array containing only positive integers, find if 
+    /// the array can be partitioned into two subsets such that the sum of 
+    /// elements in both subsets is equal. 
+    /// Note:
+    /// Each of the array element will not exceed 100.
+    /// The array size will not exceed 200.
+    /// Example 1: 
+    /// Input: [1, 5, 11, 5]
+    /// Output: true
+    /// Explanation: The array can be partitioned as [1, 5, 5] and [11].
+    /// Example 2: 
+    /// Input: [1, 2, 3, 5]
+    /// Output: false
+    /// Explanation: The array cannot be partitioned into equal sum subsets.
+    /// </summary>
+    bool canPartition(vector<int>& nums);
+
+    /// <summary>
     /// Leet code #464. Can I Win
     /// </summary>
     bool canIWin(int maxChoosableInteger, int desiredTotal, int signature,
@@ -400,6 +584,30 @@ public:
     /// always win.
     /// </summary>
     bool canIWin(int maxChoosableInteger, int desiredTotal);
+
+    /// <summary>
+    /// Leet code #491. Increasing Subsequences 
+    /// </summary>
+    void findSubsequences(vector<int>& nums, size_t start_index,
+        vector<int>& sequence, vector<vector<int>>& result);
+
+    /// <summary>
+    /// Leet code #491. Increasing Subsequences 
+    /// 
+    /// Given an integer array, your task is to find all the different 
+    /// possible increasing subsequences of the given array, and the length 
+    /// of an increasing subsequence should be at least 2 . 
+    ///
+    /// Example:
+    /// Input: [4, 6, 7, 7]
+    /// Output: [[4, 6], [4, 7], [4, 6, 7], [4, 6, 7, 7], [6, 7], [6, 7, 7], [7,7], [4,7,7]]
+    /// Note:
+    /// 1.The length of the given array will not exceed 15.
+    /// 2.The range of integer in the given array is [-100,100].
+    /// 3.The given array may contain duplicates, and two equal integers 
+    ///   should also be considered as a special case of increasing sequence.
+    /// </summary>
+    vector<vector<int>> findSubsequences(vector<int>& nums);
 
     /// <summary>
     /// Leet code #526. Beautiful Arrangement
