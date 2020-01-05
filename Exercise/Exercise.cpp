@@ -1922,23 +1922,6 @@ void TestLeetCode212(void)
     Logger::WriteMessage(result);
 }
 
-void TestRandomizedSet(void)
-{
-    Logger::WriteMessage("Test Randomized Set");
-    RandomizedSet randomizedSet;
-    Logger::WriteMessage("randomizedSet.insert(0);");
-    randomizedSet.insert(0);
-    Logger::WriteMessage("randomizedSet.insert(1);");
-    randomizedSet.insert(1);
-    Logger::WriteMessage("randomizedSet.remove(0);");
-    randomizedSet.remove(0);
-    Logger::WriteMessage("randomizedSet.insert(2);");
-    randomizedSet.insert(2);
-    Logger::WriteMessage("randomizedSet.remove(1);");
-    randomizedSet.remove(1);
-    int random = randomizedSet.getRandom();
-    Logger::WriteMessage("randomizedSet.getRandom() = " + to_string(random));
-}
 
 void TestLeetCode405(void)
 {
@@ -2180,48 +2163,6 @@ void TestLeetCode80(void)
     int size = leetCode.removeDuplicatesII(nums);
     Logger::WriteMessage("New size = " + to_string(size));
     Logger::WriteMessage(nums);
-}
-
-void TestLeetCode381(void)
-{
-    Logger::WriteMessage("Test Leet Code 381");
-    RandomizedCollection randomizedCollection;
-    bool result;
-    int random;
-    result = randomizedCollection.insert(1);
-    Logger::WriteMessage("randomizedCollection.insert(1):" + string(result ? "true":"false"));
-    result = randomizedCollection.insert(1);
-    Logger::WriteMessage("randomizedCollection.insert(1):" + string(result ? "true" : "false"));
-    result = randomizedCollection.insert(2);
-    Logger::WriteMessage("randomizedCollection.insert(2):" + string(result ? "true" : "false"));
-    result = randomizedCollection.insert(1);
-    Logger::WriteMessage("randomizedCollection.insert(1):" + string(result ? "true" : "false"));
-    result = randomizedCollection.insert(2);
-    Logger::WriteMessage("randomizedCollection.insert(2):" + string(result ? "true" : "false"));
-    result = randomizedCollection.insert(2);
-    Logger::WriteMessage("randomizedCollection.insert(2):" + string(result ? "true" : "false"));
-    result = randomizedCollection.remove(1);
-    Logger::WriteMessage("randomizedCollection.remove(1):" + string(result ? "true" : "false"));
-    result = randomizedCollection.remove(2);
-    Logger::WriteMessage("randomizedCollection.remove(2):" + string(result ? "true" : "false"));
-    result = randomizedCollection.remove(2);
-    Logger::WriteMessage("randomizedCollection.remove(2):" + string(result ? "true" : "false"));
-    result = randomizedCollection.remove(2);
-    Logger::WriteMessage("randomizedCollection.remove(2):" + string(result ? "true" : "false"));
-    result = randomizedCollection.remove(1);
-    Logger::WriteMessage("randomizedCollection.remove(1):" + string(result ? "true" : "false"));
-    result = randomizedCollection.remove(1);
-    Logger::WriteMessage("randomizedCollection.remove(1):" + string(result ? "true" : "false"));
-    result = randomizedCollection.insert(0);
-    Logger::WriteMessage("randomizedCollection.insert(0):" + string(result ? "true" : "false"));
-    result = randomizedCollection.remove(0);
-    Logger::WriteMessage("randomizedCollection.remove(0):" + string(result ? "true" : "false"));
-    result = randomizedCollection.insert(-1);
-    Logger::WriteMessage("randomizedCollection.insert(-1):" + string(result ? "true" : "false"));
-    result = randomizedCollection.remove(0);
-    Logger::WriteMessage("randomizedCollection.remove(0):" + string(result ? "true" : "false"));
-    random = randomizedCollection.getRandom();
-    Logger::WriteMessage("randomizedCollection.getRandom():" + to_string(random));
 }
 
 
@@ -2791,25 +2732,6 @@ void TestLeetCode475(void)
     Logger::WriteMessage("Radius = " + to_string(radius));
 }
 
-void TestLeetCode432(void)
-{
-    Logger::WriteMessage("Test Leet Code 432");
-    AllOne allOne;
-    allOne.inc("apple");
-    allOne.inc("apple");
-    allOne.inc("apple");
-    allOne.inc("apple");
-    allOne.inc("orange");
-    allOne.inc("orange");
-    allOne.inc("orange");
-    allOne.dec("apple");
-    allOne.dec("apple");
-    allOne.dec("apple");
-    allOne.dec("orange");
-    Logger::WriteMessage("Minimum Key = " + allOne.getMinKey());
-    Logger::WriteMessage("Maximum Key = " + allOne.getMaxKey());
-}
-
 void TestLeetCode179(void)
 {
     Logger::WriteMessage("Test Leet Code 179");
@@ -3277,37 +3199,6 @@ void TestLeetCode368(void)
     Logger::WriteMessage(nums);
     Logger::WriteMessage(result);
 }
-
-void TestLeetCode364(void)
-{
-    Logger::WriteMessage("Test Leet Code 364");
-    LeetCode leetCode;
-    vector<NestedInteger> n1;
-    n1.push_back(1);
-    n1.push_back(1);
-    NestedInteger n2 = 2;
-    vector<NestedInteger> n3;
-    n3.push_back(1);
-    n3.push_back(1);
-    vector<NestedInteger> input;
-    input.push_back(n1);
-    input.push_back(n2);
-    input.push_back(n1);
-    int depthSum = leetCode.depthSumInverse(input);
-    Logger::WriteMessage("Depth Sum = " + to_string(depthSum));
-
-    n1.clear();
-    n1.push_back(6);
-    n3.clear();
-    n3.push_back(4);
-    n3.push_back(n1);
-    input.clear();
-    input.push_back(1);
-    input.push_back(n3);
-    depthSum = leetCode.depthSumInverse(input);
-    Logger::WriteMessage("Depth Sum = " + to_string(depthSum));
-}
-
 
 void TestLeetCode359(void)
 {
@@ -8315,57 +8206,6 @@ void TestLeetCode341(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode355(void)
-{
-    Logger::WriteMessage("Test Leet Code 355");
-    Twitter twitter;
-    vector<string> actions = 
-    { 
-        "Twitter", "postTweet", "getNewsFeed", "follow", "postTweet", "getNewsFeed", "unfollow", "getNewsFeed" 
-    };
-    vector<vector<int>> parameters = 
-    {
-        {{},{1, 5},{1},{1, 2},{2, 6},{1},{1, 2},{1}}
-    };
-    vector<string> result;
-    for (size_t i = 0; i < actions.size(); i++)
-    {
-        if (actions[i] == "Twitter")
-        {
-            twitter = Twitter();
-            result.push_back("null");
-        }
-        else if (actions[i] == "postTweet")
-        {
-            twitter.postTweet(parameters[i][0], parameters[i][1]);
-            result.push_back("null");
-        }
-        else if (actions[i] == "getNewsFeed")
-        {
-            vector<int> tweet_list = twitter.getNewsFeed(parameters[i][0]);
-            string buffer;
-            buffer.push_back('[');
-            for (size_t j = 0; j < tweet_list.size(); j++)
-            {
-                if (j > 0) buffer.push_back(',');
-                buffer.append(to_string(tweet_list[j]));
-            }
-            buffer.push_back(']');
-            result.push_back(buffer);
-        }
-        else if (actions[i] == "follow")
-        {
-            twitter.follow(parameters[i][0], parameters[i][1]);
-            result.push_back("null");
-        }
-        else if (actions[i] == "unfollow")
-        {
-            twitter.unfollow(parameters[i][0], parameters[i][1]);
-            result.push_back("null");
-        }
-    }
-    Logger::WriteMessage(result);
-}
 
 void TestLeetCode756(void)
 {
@@ -11309,25 +11149,6 @@ void TestLeetCode703(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode427(void)
-{
-    Logger::WriteMessage("Test Leet Code 427");
-    LeetCode leetCode;
-    vector<vector<int>> grid =
-    {
-        { 1, 1, 0, 0, 0, 0, 0, 0 },
-        { 1, 1, 0, 0, 0, 0, 0, 0 },
-        { 1, 1, 0, 0, 0, 0, 1, 1 },
-        { 1, 1, 0, 0, 0, 0, 1, 1 },
-        { 0, 0, 0, 0, 0, 0, 1, 1 },
-        { 0, 0, 0, 0, 0, 0, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 0, 0 },
-        { 1, 1, 1, 1, 1, 1, 0, 0 }
-    };
-    grid = { {0, 0, 1, 1},{0, 0, 1, 1},{1, 1, 0, 0},{1, 1, 0, 0} };
-    QuadNode* quadNode = leetCode.constructQuadTree(grid);
-}
-
 void TestLeetCode702(void)
 {
     Logger::WriteMessage("Test Leet Code 702");
@@ -11343,29 +11164,6 @@ void TestLeetCode702(void)
     result = leetCode.searchStream(reader, target);
     Logger::WriteMessage(reader);
     Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
-}
-
-void TestLeetCode558(void)
-{
-    Logger::WriteMessage("Test Leet Code 558");
-    LeetCode leetCode;
-    vector<vector<int>> grid1 =
-    {
-        { 0, 0, 0, 0 },
-        { 0, 0, 0, 0 },
-        { 1, 1, 1, 1 },
-        { 1, 1, 1, 1 },
-    };
-    vector<vector<int>> grid2 = 
-    { 
-        { 1, 1, 1, 1 },
-        { 1, 1, 1, 1 },
-        { 0, 0, 1, 1 },
-        { 0, 0, 1, 1 } 
-    };
-    QuadNode* quadNode1 = leetCode.constructQuadTree(grid1);
-    QuadNode* quadNode2 = leetCode.constructQuadTree(grid2);
-    QuadNode* result = leetCode.intersect(quadNode1, quadNode2);
 }
 
 void TestLeetCode431(void)
@@ -16912,7 +16710,6 @@ void main(int argc, char* argv[])
     TestLeetCode590();
     TestLeetCode589();
     TestLeetCode559();
-    TestLeetCode558();
     TestLeetCode528();
     TestLeetCode519();
     TestLeetCode497();
@@ -16923,7 +16720,6 @@ void main(int argc, char* argv[])
     TestLeetCode431();
     TestLeetCode429();
     TestLeetCode428();
-    TestLeetCode427();
     TestLeetCode426();
     TestLeetCode710();
     TestLeetCode707();
@@ -17044,7 +16840,6 @@ void main(int argc, char* argv[])
     TestLeetCode754();
     TestLeetCode757();
     TestLeetCode756();
-    TestLeetCode355();
     TestLeetCode341();
     TestLeetCode460();
     TestLeetCode751();
@@ -17368,7 +17163,6 @@ void main(int argc, char* argv[])
     TestLeetCode362();
     TestLeetCode359();
     TestLeetCode399();
-    TestLeetCode364();
     TestLeetCode368();
     TestLeetCode301();
     TestLeetCode332();
@@ -17440,7 +17234,6 @@ void main(int argc, char* argv[])
     TestLeetCode462();
     TestLeetCode147();
     TestLeetCode160();
-    TestLeetCode381();
     TestLeetCode80();
     TestLeetCode133();
     TestLeetCode73();
@@ -17536,7 +17329,6 @@ void main(int argc, char* argv[])
     TestLeetCode231();
     TestLeetCode42();
     TestLeetCode57();
-    TestRandomizedSet();
     TestLeetCode70();
     TestLeetCode45();
     TestLeetCode55();

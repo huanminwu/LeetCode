@@ -659,6 +659,48 @@ void TestLeetCode382(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode427(void)
+{
+    Logger::WriteMessage("Test Leet Code 427");
+    LeetCodeLinkedList leetCode;
+    vector<vector<int>> grid =
+    {
+        { 1, 1, 0, 0, 0, 0, 0, 0 },
+        { 1, 1, 0, 0, 0, 0, 0, 0 },
+        { 1, 1, 0, 0, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 0, 0, 1, 1 },
+        { 0, 0, 0, 0, 0, 0, 1, 1 },
+        { 0, 0, 0, 0, 0, 0, 1, 1 },
+        { 1, 1, 1, 1, 1, 1, 0, 0 },
+        { 1, 1, 1, 1, 1, 1, 0, 0 }
+    };
+    grid = { {0, 0, 1, 1},{0, 0, 1, 1},{1, 1, 0, 0},{1, 1, 0, 0} };
+    QuadNode* quadNode = leetCode.constructQuadTree(grid);
+}
+
+void TestLeetCode558(void)
+{
+    Logger::WriteMessage("Test Leet Code 558");
+    LeetCodeLinkedList leetCode;
+    vector<vector<int>> grid1 =
+    {
+        { 0, 0, 0, 0 },
+        { 0, 0, 0, 0 },
+        { 1, 1, 1, 1 },
+        { 1, 1, 1, 1 },
+    };
+    vector<vector<int>> grid2 =
+    {
+        { 1, 1, 1, 1 },
+        { 1, 1, 1, 1 },
+        { 0, 0, 1, 1 },
+        { 0, 0, 1, 1 }
+    };
+    QuadNode* quadNode1 = leetCode.constructQuadTree(grid1);
+    QuadNode* quadNode2 = leetCode.constructQuadTree(grid2);
+    QuadNode* result = leetCode.intersect(quadNode1, quadNode2);
+}
+
 void TestLeetCodeLinkedList(void)
 {
     TestLeetCode382();

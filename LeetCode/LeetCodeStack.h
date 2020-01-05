@@ -93,12 +93,12 @@ public:
     NestedInteger deserializeNestedInteger(string s);
 
     /// <summary>
-    /// Leet code #439. Ternary Expression Parser       
+    /// Leet code #439. Ternary Expression Parser 
     /// </summary>
     void calculateTernary(string& result, string& operators);
 
     /// <summary>
-    /// Leet code #439. Ternary Expression Parser       
+    /// Leet code #439. Ternary Expression Parser 
     /// 
     /// Given a string representing arbitrarily nested ternary expressions, 
     /// calculate the result of the expression. You can always assume that 

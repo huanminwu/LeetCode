@@ -37,6 +37,117 @@ void TestLeetCode146(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode355(void)
+{
+    Logger::WriteMessage("Test Leet Code 355");
+    Twitter twitter;
+    vector<string> actions =
+    {
+        "Twitter", "postTweet", "getNewsFeed", "follow", "postTweet", "getNewsFeed", "unfollow", "getNewsFeed"
+    };
+    vector<vector<int>> parameters =
+    {
+        {{},{1, 5},{1},{1, 2},{2, 6},{1},{1, 2},{1}}
+    };
+    vector<string> result;
+    for (size_t i = 0; i < actions.size(); i++)
+    {
+        if (actions[i] == "Twitter")
+        {
+            twitter = Twitter();
+            result.push_back("null");
+        }
+        else if (actions[i] == "postTweet")
+        {
+            twitter.postTweet(parameters[i][0], parameters[i][1]);
+            result.push_back("null");
+        }
+        else if (actions[i] == "getNewsFeed")
+        {
+            vector<int> tweet_list = twitter.getNewsFeed(parameters[i][0]);
+            string buffer;
+            buffer.push_back('[');
+            for (size_t j = 0; j < tweet_list.size(); j++)
+            {
+                if (j > 0) buffer.push_back(',');
+                buffer.append(to_string(tweet_list[j]));
+            }
+            buffer.push_back(']');
+            result.push_back(buffer);
+        }
+        else if (actions[i] == "follow")
+        {
+            twitter.follow(parameters[i][0], parameters[i][1]);
+            result.push_back("null");
+        }
+        else if (actions[i] == "unfollow")
+        {
+            twitter.unfollow(parameters[i][0], parameters[i][1]);
+            result.push_back("null");
+        }
+    }
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode380(void)
+{
+    Logger::WriteMessage("Test LeetCode 380");
+    RandomizedSet randomizedSet;
+    Logger::WriteMessage("randomizedSet.insert(0);");
+    randomizedSet.insert(0);
+    Logger::WriteMessage("randomizedSet.insert(1);");
+    randomizedSet.insert(1);
+    Logger::WriteMessage("randomizedSet.remove(0);");
+    randomizedSet.remove(0);
+    Logger::WriteMessage("randomizedSet.insert(2);");
+    randomizedSet.insert(2);
+    Logger::WriteMessage("randomizedSet.remove(1);");
+    randomizedSet.remove(1);
+    int random = randomizedSet.getRandom();
+    Logger::WriteMessage("randomizedSet.getRandom() = " + to_string(random));
+}
+void TestLeetCode381(void)
+{
+    Logger::WriteMessage("Test Leet Code 381");
+    RandomizedCollection randomizedCollection;
+    bool result;
+    int random;
+    result = randomizedCollection.insert(1);
+    Logger::WriteMessage("randomizedCollection.insert(1):" + string(result ? "true" : "false"));
+    result = randomizedCollection.insert(1);
+    Logger::WriteMessage("randomizedCollection.insert(1):" + string(result ? "true" : "false"));
+    result = randomizedCollection.insert(2);
+    Logger::WriteMessage("randomizedCollection.insert(2):" + string(result ? "true" : "false"));
+    result = randomizedCollection.insert(1);
+    Logger::WriteMessage("randomizedCollection.insert(1):" + string(result ? "true" : "false"));
+    result = randomizedCollection.insert(2);
+    Logger::WriteMessage("randomizedCollection.insert(2):" + string(result ? "true" : "false"));
+    result = randomizedCollection.insert(2);
+    Logger::WriteMessage("randomizedCollection.insert(2):" + string(result ? "true" : "false"));
+    result = randomizedCollection.remove(1);
+    Logger::WriteMessage("randomizedCollection.remove(1):" + string(result ? "true" : "false"));
+    result = randomizedCollection.remove(2);
+    Logger::WriteMessage("randomizedCollection.remove(2):" + string(result ? "true" : "false"));
+    result = randomizedCollection.remove(2);
+    Logger::WriteMessage("randomizedCollection.remove(2):" + string(result ? "true" : "false"));
+    result = randomizedCollection.remove(2);
+    Logger::WriteMessage("randomizedCollection.remove(2):" + string(result ? "true" : "false"));
+    result = randomizedCollection.remove(1);
+    Logger::WriteMessage("randomizedCollection.remove(1):" + string(result ? "true" : "false"));
+    result = randomizedCollection.remove(1);
+    Logger::WriteMessage("randomizedCollection.remove(1):" + string(result ? "true" : "false"));
+    result = randomizedCollection.insert(0);
+    Logger::WriteMessage("randomizedCollection.insert(0):" + string(result ? "true" : "false"));
+    result = randomizedCollection.remove(0);
+    Logger::WriteMessage("randomizedCollection.remove(0):" + string(result ? "true" : "false"));
+    result = randomizedCollection.insert(-1);
+    Logger::WriteMessage("randomizedCollection.insert(-1):" + string(result ? "true" : "false"));
+    result = randomizedCollection.remove(0);
+    Logger::WriteMessage("randomizedCollection.remove(0):" + string(result ? "true" : "false"));
+    random = randomizedCollection.getRandom();
+    Logger::WriteMessage("randomizedCollection.getRandom():" + to_string(random));
+}
+
 void TestLeetCode716(void)
 {
     Logger::WriteMessage("Test Leet Code 716");
@@ -363,14 +474,37 @@ void TestLeetCode981(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode432(void)
+{
+    Logger::WriteMessage("Test Leet Code 432");
+    AllOne allOne;
+    allOne.inc("apple");
+    allOne.inc("apple");
+    allOne.inc("apple");
+    allOne.inc("apple");
+    allOne.inc("orange");
+    allOne.inc("orange");
+    allOne.inc("orange");
+    allOne.dec("apple");
+    allOne.dec("apple");
+    allOne.dec("apple");
+    allOne.dec("orange");
+    Logger::WriteMessage("Minimum Key = " + allOne.getMinKey());
+    Logger::WriteMessage("Maximum Key = " + allOne.getMaxKey());
+}
+
 void TestLeetCodeDesign(void)
 {
-    TestLeetCode1244();
     TestLeetCode146();
+    TestLeetCode355();
+    TestLeetCode380();
+    TestLeetCode381();
+    TestLeetCode432();
     TestLeetCode460();
     TestLeetCode716();
     TestLeetCode895();
     TestLeetCode900();
     TestLeetCode981();
     TestLeetCode1146();
+    TestLeetCode1244();
 }

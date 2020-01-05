@@ -1,6 +1,35 @@
 #include "..\LeetCode\LeetCode.h"
 #include "..\LeetCode\LeetCodeArray.h"
 #include "TestArray.h"
+void TestLeetCode364(void)
+{
+    Logger::WriteMessage("Test Leet Code 364");
+    LeetCodeArray leetCode;
+    vector<NestedInteger> n1;
+    n1.push_back(1);
+    n1.push_back(1);
+    NestedInteger n2 = 2;
+    vector<NestedInteger> n3;
+    n3.push_back(1);
+    n3.push_back(1);
+    vector<NestedInteger> input;
+    input.push_back(n1);
+    input.push_back(n2);
+    input.push_back(n1);
+    int depthSum = leetCode.depthSumInverse(input);
+    Logger::WriteMessage("Depth Sum = " + to_string(depthSum));
+
+    n1.clear();
+    n1.push_back(6);
+    n3.clear();
+    n3.push_back(4);
+    n3.push_back(n1);
+    input.clear();
+    input.push_back(1);
+    input.push_back(n3);
+    depthSum = leetCode.depthSumInverse(input);
+    Logger::WriteMessage("Depth Sum = " + to_string(depthSum));
+}
 
 void TestLeetCode1198(void)
 {

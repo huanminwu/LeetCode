@@ -1907,4 +1907,242 @@ int LeetCodeLinkedList::getDecimalValue(ListNode* head)
     }
     return result;
 }
+
+
+/// <summary>
+/// Leet code #427. Construct Quad Tree
+/// </summary>
+bool LeetCodeLinkedList::isQuadTreeLeaf(vector<vector<int>>& grid, int up, int left, int down, int right)
+{
+    int value = grid[up][left];
+    for (int i = up; i <= down; i++)
+    {
+        for (int j = left; j <= right; j++)
+        {
+            if (grid[i][j] != value) return false;
+        }
+    }
+    return true;
+}
+
+
+/// <summary>
+/// Leet code #427. Construct Quad Tree
+/// </summary>
+QuadNode* LeetCodeLinkedList::constructQuadTree(vector<vector<int>>& grid, int up, int left, int down, int right)
+{
+    QuadNode* result = nullptr;
+    if (isQuadTreeLeaf(grid, up, left, down, right))
+    {
+        result = new QuadNode(grid[up][left] == 1, true, nullptr, nullptr, nullptr, nullptr);
+    }
+    else
+    {
+        result = new QuadNode(true, false, nullptr, nullptr, nullptr, nullptr);
+        result->topLeft = constructQuadTree(grid, up, left, (up + down) / 2, (left + right) / 2);
+        result->topRight = constructQuadTree(grid, up, (left + right) / 2 + 1, (up + down) / 2, right);
+        result->bottomLeft = constructQuadTree(grid, (up + down) / 2 + 1, left, down, (left + right) / 2);
+        result->bottomRight = constructQuadTree(grid, (up + down) / 2 + 1, (left + right) / 2 + 1, down, right);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #427. Construct Quad Tree
+/// 
+/// We want to use quad trees to store an N x N boolean grid. Each cell in the 
+/// grid can only be true or false. The root node represents the whole grid. 
+/// For each node, it will be subdivided into four children nodes until the 
+/// values in the region it represents are all the same.
+///
+/// Each node has another two boolean attributes : isLeaf and val. isLeaf is 
+/// true if and only if the node is a leaf node. The val attribute for a leaf 
+/// node contains the value of the region it represents.
+///
+/// Your task is to use a quad tree to represent a given grid. The following 
+/// example may help you understand the problem better:
+///
+/// Given the 8 x 8 grid below, we want to construct the corresponding quad 
+/// tree:
+///
+///
+/// It can be divided according to the definition above:
+/// The corresponding quad tree should be as following, where each node is 
+/// represented as a (isLeaf, val) pair.
+///
+/// For the non-leaf nodes, val can be arbitrary, so it is represented as *.
+///
+/// Note:
+///
+/// N is less than 1000 and guaranteened to be a power of 2.
+/// </summary>
+QuadNode* LeetCodeLinkedList::constructQuadTree(vector<vector<int>>& grid)
+{
+    QuadNode* result = nullptr;
+    if (grid.empty() || grid[0].empty()) return result;
+
+    return constructQuadTree(grid, 0, 0, grid.size() - 1, grid[0].size() - 1);
+}
+
+/// <summary>
+/// Leet code #558. Quad Tree Intersection
+/// </summary>
+QuadNode* LeetCodeLinkedList::collapse(QuadNode* quadTree)
+{
+    if (quadTree == nullptr) return quadTree;
+    if (quadTree->topLeft == nullptr || quadTree->topRight == nullptr ||
+        quadTree->bottomLeft == nullptr || quadTree->bottomRight == nullptr)
+    {
+        return quadTree;
+    }
+    else if ((!quadTree->topLeft->isLeaf) || (!quadTree->topRight->isLeaf) ||
+        (!quadTree->bottomLeft->isLeaf) || (!quadTree->bottomRight->isLeaf))
+    {
+        return quadTree;
+    }
+    else if ((quadTree->topLeft->val != quadTree->topRight->val) || (quadTree->topLeft->val != quadTree->bottomLeft->val) ||
+        (quadTree->topLeft->val != quadTree->bottomRight->val))
+    {
+        return quadTree;
+    }
+    else
+    {
+        quadTree->isLeaf = true;
+        quadTree->val = quadTree->topLeft->val;
+        delete quadTree->topLeft;
+        delete quadTree->topRight;
+        delete quadTree->bottomLeft;
+        delete quadTree->bottomRight;
+        quadTree->topLeft = nullptr;
+        quadTree->topRight = nullptr;
+        quadTree->bottomLeft = nullptr;
+        quadTree->bottomRight = nullptr;
+        return quadTree;
+    }
+}
+
+/// <summary>
+/// Leet code #558. Quad Tree Intersection
+/// </summary>
+QuadNode* LeetCodeLinkedList::clone(QuadNode* quadTree)
+{
+    QuadNode* result = nullptr;
+    if (quadTree == nullptr) return result;
+    result = new QuadNode(quadTree->val, quadTree->isLeaf, quadTree->topLeft, quadTree->topRight,
+        quadTree->bottomLeft, quadTree->bottomRight);
+    quadTree->topLeft = clone(quadTree->topLeft);
+    quadTree->topRight = clone(quadTree->topRight);
+    quadTree->bottomLeft = clone(quadTree->bottomLeft);
+    quadTree->bottomRight = clone(quadTree->bottomRight);
+    return result;
+}
+
+/// <summary>
+/// Leet code #558. Quad Tree Intersection
+/// 
+/// A quadtree is a tree data in which each internal node has exactly four 
+/// children: topLeft, topRight, bottomLeft and bottomRight. Quad trees are 
+/// often used to partition a two-dimensional space by recursively subdividing 
+/// it into four quadrants or regions.
+///
+/// We want to store True/False information in our quad tree. The quad tree is 
+/// used to represent a N * N boolean grid. For each node, it will be 
+/// subdivided into four children nodes until the values in the region it 
+/// represents are all the same. Each node has another two boolean 
+/// attributes : isLeaf and val. isLeaf is true if and only if the node is a 
+/// leaf node. The val attribute for a leaf node contains the value of the 
+/// region it represents.
+///
+/// For example, below are two quad trees A and B:
+///
+/// A:
+/// +-------+-------+   T: true
+/// |       |       |   F: false
+/// |   T   |   T   |
+/// |       |       |
+/// +-------+-------+
+/// |       |       |
+/// |   F   |   F   |
+/// |       |       |
+/// +-------+-------+
+/// topLeft: T
+/// topRight: T
+/// bottomLeft: F
+/// bottomRight: F
+///
+/// B:               
+/// +-------+---+---+
+/// |       | F | F |
+/// |   T   +---+---+
+/// |       | T | T |
+/// +-------+---+---+
+/// |       |       |
+/// |   T   |   F   |
+/// |       |       |
+/// +-------+-------+
+/// topLeft: T
+/// topRight:
+///     topLeft: F
+///     topRight: F
+///     bottomLeft: T
+///     bottomRight: T
+/// bottomLeft: T
+/// bottomRight: F
+/// 
+/// Your task is to implement a function that will take two quadtrees and 
+/// return a quadtree that represents the logical OR (or union) of the two 
+/// trees.
+///
+/// A:                 B:                 C (A or B):
+/// +-------+-------+  +-------+---+---+  +-------+-------+
+/// |       |       |  |       | F | F |  |       |       |
+/// |   T   |   T   |  |   T   +---+---+  |   T   |   T   |
+/// |       |       |  |       | T | T |  |       |       |
+/// +-------+-------+  +-------+---+---+  +-------+-------+
+/// |       |       |  |       |       |  |       |       |
+/// |   F   |   F   |  |   T   |   F   |  |   T   |   F   |
+/// |       |       |  |       |       |  |       |       |
+/// +-------+-------+  +-------+-------+  +-------+-------+
+/// Note:
+/// 
+/// Both A and B represent grids of size N * N.
+/// N is guaranteed to be a power of 2.
+/// If you want to know more about the quad tree, you can refer to its wiki.
+/// The logic OR operation is defined as this: "A or B" is true if A is true, 
+/// or if B is true, or if both A and B are true.
+/// </summary>
+QuadNode* LeetCodeLinkedList::intersect(QuadNode* quadTree1, QuadNode* quadTree2)
+{
+    QuadNode* result = nullptr;
+    if ((quadTree1 == nullptr) && (quadTree2 == nullptr)) return result;
+    if (quadTree1 == nullptr)
+    {
+        result = clone(quadTree2);
+    }
+    else if (quadTree2 == nullptr)
+    {
+        result = clone(quadTree1);
+    }
+    else if (quadTree1->isLeaf == true)
+    {
+        if (quadTree1->val == true) result = clone(quadTree1);
+        else result = clone(quadTree2);
+    }
+    else if (quadTree2->isLeaf == true)
+    {
+        if (quadTree2->val == true) result = clone(quadTree2);
+        else result = clone(quadTree1);
+    }
+    else
+    {
+        result = new QuadNode(true, false, nullptr, nullptr, nullptr, nullptr);
+        result->topLeft = intersect(quadTree1->topLeft, quadTree2->topLeft);
+        result->topRight = intersect(quadTree1->topRight, quadTree2->topRight);
+        result->bottomLeft = intersect(quadTree1->bottomLeft, quadTree2->bottomLeft);
+        result->bottomRight = intersect(quadTree1->bottomRight, quadTree2->bottomRight);
+        collapse(result);
+    }
+    return result;
+}
+
 #pragma endregion

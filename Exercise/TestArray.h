@@ -2,6 +2,7 @@
 #ifndef TestArray_H
 #define TestArray_H
 #include "..\LeetCode\LeetCodeArray.h"
+void TestLeetCode364(void);
 void TestLeetCode36(void);
 void TestLeetCode41(void);
 void TestLeetCode169(void);

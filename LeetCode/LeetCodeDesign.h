@@ -18,6 +18,355 @@
 #include <vector> 
 #include <stack> 
 using namespace std;
+
+/// <summary>
+/// Leet code #146. LRU Cache
+/// 
+/// Design and implement a data structure for Least Recently Used (LRU) cache. 
+/// It should support the following operations: get and put.
+/// get(key) - Get the value (will always be positive) of the key if the key 
+/// exists in the cache, otherwise return -1.
+/// put(key, value) - Set or insert the value if the key is not already 
+/// present. When the cache reached its capacity, it should invalidate the 
+/// least recently used item before inserting a new item.
+/// The cache is initialized with a positive capacity.
+/// Follow up:
+/// Could you do both operations in O(1) time complexity?
+/// Example:
+/// LRUCache cache = new LRUCache( 2 /* capacity */ );
+///
+/// cache.put(1, 1);
+/// cache.put(2, 2);
+/// cache.get(1);       // returns 1
+/// cache.put(3, 3);    // evicts key 2
+/// cache.get(2);       // returns -1 (not found)
+/// cache.put(4, 4);    // evicts key 1
+/// cache.get(1);       // returns -1 (not found)
+/// cache.get(3);       // returns 3
+/// cache.get(4);       // returns 4
+/// </summary>
+class LRUCache
+{
+private:
+    size_t m_Capacity;
+    list<pair<int, int>> m_List;
+    unordered_map<int, list<pair<int, int>>::iterator> m_map;
+
+public:
+    /// <summary>
+    /// Constructor an empty LRU cache
+    /// </summary>
+    /// <param name="capacity">capacity</param>
+    /// <returns></returns>
+    LRUCache(int capacity)
+    {
+        m_Capacity = capacity;
+    }
+
+    /// <summary>
+    /// Destructor of an LRUCache
+    /// </summary>
+    /// <returns></returns>
+    ~LRUCache()
+    {
+    }
+
+    /// <summary>
+    /// Set the key value pair in the LRU cache.
+    /// </summary>
+    /// <param name="key">The key</param>
+    /// <param name="value">The value</param>
+    /// <returns></returns>
+    void put(int key, int value)
+    {
+        if (m_map.count(key) == 0)
+        {
+            m_List.push_front(make_pair(key, value));
+            if (m_List.size() > m_Capacity)
+            {
+                pair<int, int> pair = m_List.back();
+                m_map.erase(pair.first);
+                m_List.pop_back();
+            }
+            m_map[key] = m_List.begin();
+        }
+        else
+        {
+            // take out old value, insert new one
+            m_List.erase(m_map[key]);
+            m_List.push_front(make_pair(key, value));
+            m_map[key] = m_List.begin();
+        }
+    }
+
+    /// <summary>
+    /// Get the value(will always be positive) of the key if the key exists 
+    /// in the cache, otherwise return -1.
+    /// </summary>
+    /// <returns>the value</returns>
+    int get(int key)
+    {
+        if (m_map.find(key) == m_map.end())
+        {
+            return -1;
+        }
+        list<pair<int, int>>::iterator iterator = m_map[key];
+        pair<int, int> pair = *iterator;
+        m_List.erase(iterator);
+        m_List.push_front(pair);
+        m_map[key] = m_List.begin();
+        return pair.second;
+    }
+};
+
+/// <summary>
+/// LeetCode #355. Design Twitter
+/// Design a simplified version of Twitter where users can post tweets, 
+/// follow/unfollow another user and 
+/// is able to see the 10 most recent tweets in the user's news feed. 
+/// Your design should support the following methods:
+/// 1.postTweet(userId, tweetId): Compose a new tweet.
+/// 2.getNewsFeed(userId): Retrieve the 10 most recent tweet ids in the user's 
+///   news feed. 
+/// Each item in the news feed must be posted by users who the user followed 
+/// or by the user herself. 
+/// Tweets must be ordered from most recent to least recent.
+/// 3.follow(followerId, followeeId): Follower follows a followee.
+/// 4.unfollow(followerId, followeeId): Follower unfollows a followee.
+/// Example: 
+/// Twitter twitter = new Twitter();
+/// User 1 posts a new tweet (id = 5).
+/// twitter.postTweet(1, 5);
+/// User 1's news feed should return a list with 1 tweet id -> [5].
+/// twitter.getNewsFeed(1);
+/// User 1 follows user 2.
+/// twitter.follow(1, 2);
+/// User 2 posts a new tweet (id = 6).
+/// twitter.postTweet(2, 6);
+/// User 1's news feed should return a list with 2 tweet ids -> [6, 5].
+/// Tweet id 6 should precede tweet id 5 because it is posted after tweet id 5.
+/// twitter.getNewsFeed(1);
+///
+/// User 1 unfollows user 2.
+/// twitter.unfollow(1, 2);
+/// User 1's news feed should return a list with 1 tweet id -> [5],
+/// since user 1 is no longer following user 2.
+/// twitter.getNewsFeed(1);
+/// </summary>
+class Twitter
+{
+private:
+    long m_TimeTicks;
+
+    unordered_map<int, vector<pair<long, int>>> m_TwitterList;
+    unordered_map<int, unordered_set<int>> m_FollowList;
+
+public:
+    /// <summary>
+    /// Constructor an empty Twitter cache
+    /// </summary>
+    /// <returns></returns>
+    Twitter()
+    {
+        m_TimeTicks = 0;
+    }
+
+    /// <summary>
+    /// Destructor of an Twitter
+    /// </summary>
+    /// <returns></returns>
+    ~Twitter()
+    {
+    }
+
+    /// <summary>
+    /// Compose a new tweet
+    /// </summary>
+    /// <returns></returns>
+    void postTweet(int userId, int tweetId)
+    {
+        m_TimeTicks++;
+        long now = m_TimeTicks;
+
+        m_TwitterList[userId].push_back(make_pair(m_TimeTicks, tweetId));
+    }
+
+    /// <summary>
+    /// Retrieve the 10 most recent tweet ids in the user's news feed. 
+    /// Each item in the news feed must be posted by users who the user 
+    /// followed or by the user herself. 
+    /// Tweets must be ordered from most recent to least recent.
+    /// </summary>
+    /// <returns></returns>
+    vector<int> getNewsFeed(int userId)
+    {
+        vector<int> result;
+        priority_queue <pair<long, pair<int, int>>> candidate_list;
+        if (!m_TwitterList[userId].empty())
+        {
+            int clock = m_TwitterList[userId].back().first;
+            int index = (int)m_TwitterList[userId].size() - 1;
+            candidate_list.push(make_pair(clock, make_pair(userId, index)));
+        }
+        for (int followee : m_FollowList[userId])
+        {
+            if (!m_TwitterList[followee].empty())
+            {
+                int clock = m_TwitterList[followee].back().first;
+                int index = (int)m_TwitterList[followee].size() - 1;
+                candidate_list.push(make_pair(clock, make_pair(followee, index)));
+            }
+        }
+
+        for (size_t i = 0; i < 10; i++)
+        {
+            if (candidate_list.empty())
+            {
+                break;
+            }
+            pair<long, pair<int, int>> tweet_itr = candidate_list.top();
+            candidate_list.pop();
+            int user_id = tweet_itr.second.first;
+            int index = tweet_itr.second.second;
+            int tweet_id = m_TwitterList[user_id][index].second;
+            result.push_back(tweet_id);
+            // push the next tweet of this user to priority queue
+            if (index > 0)
+            {
+                index--;
+                int clock = m_TwitterList[user_id][index].first;
+                candidate_list.push(make_pair(clock, make_pair(user_id, index)));
+            }
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Follower follows a followee. If the operation is invalid, it should 
+    /// be a no-op.
+    /// </summary>
+    /// <param name="followerId">The follower id</param>
+    /// <param name="followeeId">The followee id</param>
+    /// <returns></returns>
+    void follow(int followerId, int followeeId)
+    {
+        if (followerId != followeeId)
+        {
+            m_FollowList[followerId].insert(followeeId);
+        }
+    }
+
+    /// <summary>
+    /// Follower unfollows a followee. If the operation is invalid, it should 
+    /// be a no-op.
+    /// </summary>
+    /// <param name="followerId">The follower id</param>
+    /// <param name="followeeId">The followee id</param>
+    /// <returns></returns>
+    void unfollow(int followerId, int followeeId)
+    {
+        m_FollowList[followerId].erase(followeeId);
+    }
+};
+
+/// <summary>
+/// Leet code #341. Flatten Nested List Iterator       
+///
+/// Given a nested list of integers, implement an iterator to flatten it. 
+/// Each element is either an integer, or a list -- whose elements may also 
+/// be integers or other lists.
+///
+/// Example 1:
+/// Given the list [[1,1],2,[1,1]],
+/// By calling next repeatedly until hasNext returns false, the order of 
+/// elements returned by next should be: [1,1,2,1,1]. 
+///
+/// Example 2:
+/// Given the list [1,[4,[6]]],
+/// By calling next repeatedly until hasNext returns false, the order of 
+/// elements returned by next should be: [1,4,6]. 
+///
+/// This is the interface that allows for creating nested lists.
+/// You should not implement it, or speculate about its implementation
+/// Your NestedIterator object will be instantiated and called as such:
+/// NestedIterator i(nestedList);
+/// while (i.hasNext()) cout << i.next();
+/// </summary>
+class NestedIterator {
+private:
+    deque<NestedInteger> m_NestedQueue;
+    bool isEmpty(NestedInteger& ni)
+    {
+        if (ni.isInteger())
+        {
+            return false;
+        }
+        else
+        {
+            vector<NestedInteger> ni_list = ni.getList();
+            for (size_t i = 0; i < ni_list.size(); i++)
+            {
+                if (!isEmpty(ni_list[i])) return false;
+            }
+            return true;
+        }
+    }
+
+public:
+    NestedIterator(vector<NestedInteger>& nestedList)
+    {
+        for (size_t i = 0; i < nestedList.size(); i++)
+        {
+            m_NestedQueue.push_back(nestedList[i]);
+        }
+    }
+
+    int next()
+    {
+        int value = 0;
+        if (!m_NestedQueue.empty())
+        {
+            NestedInteger nested_integer = m_NestedQueue.front();
+            m_NestedQueue.pop_front();
+            if (nested_integer.isInteger())
+            {
+                value = nested_integer.getInteger();
+            }
+            else
+            {
+                vector<NestedInteger> nested_list = nested_integer.getList();
+                while (!nested_list.empty())
+                {
+                    m_NestedQueue.push_front(nested_list.back());
+                    nested_list.pop_back();
+                }
+                value = next();
+            }
+        }
+        return value;
+    }
+
+    bool hasNext()
+    {
+        bool has_next = false;
+
+        while (!m_NestedQueue.empty())
+        {
+            NestedInteger ni = m_NestedQueue.front();
+            if (isEmpty(ni))
+            {
+                m_NestedQueue.pop_front();
+            }
+            else
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
 /// <summary>
 /// Leet code #362. Design Hit Counter  
 /// 
@@ -3260,6 +3609,338 @@ public:
         {
             return itr->second;
         }
+    }
+};
+
+/// <summary>
+/// Leet code #380. Insert Delete GetRandom O(1)   
+///
+/// Design a data structure that supports all following operations in 
+/// average O(1) time.
+/// 1.insert(val): Inserts an item val to the set if not already present.
+/// 2.remove(val): Removes an item val from the set if present.
+/// 3.getRandom: Returns a random element from current set of elements. 
+///   Each element must have the same probability of being returned.
+/// Example:
+/// Init an empty set.	
+/// RandomizedSet randomSet = new RandomizedSet();
+/// Inserts 1 to the set. Returns true as 1 was inserted successfully.
+/// randomSet.insert(1);
+/// Returns false as 2 does not exist in the set.
+/// randomSet.remove(2);
+/// Inserts 2 to the set, returns true. Set now contains [1,2].	
+/// randomSet.insert(2);
+/// getRandom should return either 1 or 2 randomly.
+/// randomSet.getRandom();	
+/// Removes 1 from the set, returns true. Set now contains [2]. 
+/// randomSet.remove(1);
+/// 2 was already in the set, so return false.
+/// randomSet.insert(2);
+/// Since 2 is the only number in the set, getRandom always return 2.
+/// randomSet.getRandom();
+/// </summary>
+class RandomizedSet
+{
+private:
+    unordered_map<int, int> m_Map;
+    vector<int> m_Vector;
+
+public:
+    /// <summary>
+    /// Constructor of an empty randomized set
+    /// </summary    
+    RandomizedSet()
+    {
+        srand((unsigned int)time(0));
+    }
+
+    /// <summary>
+    /// Destructor of a RandomizedSet
+    /// </summary>
+    /// <returns></returns>
+    ~RandomizedSet()
+    {
+    }
+
+    /// <summary>
+    /// Inserts a value to the set. Returns true if the set did not already 
+    /// contain the specified element.
+    /// </summary>
+    /// <returns>true, if value not exists, false if value already exists</returns>
+    bool insert(int val)
+    {
+        if (m_Map.find(val) != m_Map.end())
+        {
+            return false;
+        }
+        else
+        {
+            m_Vector.push_back(val);
+            m_Map[val] = m_Vector.size() - 1;
+            return true;
+        }
+    }
+
+    /// <summary>
+    /// Removes a value from the set. Returns true if the set contained the specified element. 
+    /// </summary>
+    /// <returns>true, if value exists, false if value not exists</returns>
+    bool remove(int val)
+    {
+        if (m_Map.find(val) == m_Map.end())
+        {
+            return false;
+        }
+        else
+        {
+            // find the value position
+            int index = m_Map[val];
+            // move the last value to empty slot (where the value will be removed)
+            m_Vector[index] = m_Vector.back();
+            // set new postion for the last value
+            m_Map[m_Vector.back()] = index;
+            // pop out last value in vector
+            m_Vector.pop_back();
+            // remove old value position map
+            m_Map.erase(val);
+            return true;
+        }
+    }
+
+    /// <summary>
+    /// Get a random element from the set. 
+    /// </summary>
+    /// <returns>the random value in the set</returns>
+    int getRandom()
+    {
+        if (m_Vector.size() == 0)
+        {
+            return -1;
+        }
+        int index = rand() % m_Vector.size();
+        return m_Vector[index];
+    }
+};
+
+/// <summary>
+/// LeetCode #381. Insert Delete GetRandom O(1) - Duplicates allowed   
+/// Design a data structure that supports all following operations in 
+/// average O(1) time.
+/// Note: Duplicate elements are allowed. 
+/// 1.insert(val): Inserts an item val to the collection.
+/// 2.remove(val): Removes an item val from the collection if present.
+/// 3.getRandom: Returns a random element from current collection of elements. 
+///              The probability of each element being returned is linearly 
+///              related to the number of same value the collection contains.
+/// Example: 
+/// Init an empty collection.
+/// RandomizedCollection collection = new RandomizedCollection();
+///
+/// Inserts 1 to the collection. Returns true as the collection did not 
+/// contain 1.
+/// collection.insert(1);
+/// Inserts another 1 to the collection. Returns false as the collection 
+/// contained 1. 
+/// Collection now contains [1,1].
+/// collection.insert(1);
+/// Inserts 2 to the collection, returns true. Collection now contains [1,1,2].
+/// collection.insert(2);
+/// getRandom should return 1 with the probability 2/3, and returns 2 with the 
+/// probability 1/3.
+/// collection.getRandom();
+/// Removes 1 from the collection, returns true. Collection now contains [1,2].
+/// collection.remove(1);
+/// getRandom should return 1 and 2 both equally likely.
+/// collection.getRandom();
+/// </summary>
+class RandomizedCollection
+{
+private:
+    unordered_map<int, unordered_set<int>> m_Map;
+    vector<int> m_Vector;
+public:
+    /// <summary>
+    /// Constructor of an empty randomized collection
+    /// </summary    
+    RandomizedCollection()
+    {
+        srand((unsigned int)time(0));
+    }
+
+    /// <summary>
+    /// Destructor of a randomized  collection
+    /// </summary>
+    /// <returns></returns>
+    ~RandomizedCollection()
+    {
+    }
+
+    /// <summary>
+    /// Inserts a value to the set. Returns true if the set did not already 
+    /// contain the specified element.
+    /// </summary>
+    /// <returns>true, if value not exists, false if value already exists</returns>
+    bool insert(int val)
+    {
+        bool new_item = false;
+        if (m_Map.find(val) == m_Map.end())
+        {
+            new_item = true;
+        }
+        m_Vector.push_back(val);
+        m_Map[val].insert(m_Vector.size() - 1);
+        return new_item;
+    }
+
+    /// <summary>
+    /// Removes a value from the set. Returns true if the set contained the specified element. 
+    /// </summary>
+    /// <returns>true, if value exists, false if value not exists</returns>
+    bool remove(int val)
+    {
+        if (m_Map.find(val) == m_Map.end())
+        {
+            return false;
+        }
+        else
+        {
+            // find the value position
+            int index = *m_Map[val].begin();
+            // should remove old value first because we may add back due to move later
+            // remove old value position map
+            m_Map[val].erase(index);
+            if (m_Map[val].empty())
+            {
+                m_Map.erase(val);
+            }
+            if (index != m_Vector.size() - 1)
+            {
+                int last_val = m_Vector.back();
+                // move the last value to empty slot (where the value will be removed)
+                m_Vector[index] = last_val;
+                // set new postion for the last value
+                m_Map[last_val].erase(m_Vector.size() - 1);
+                m_Map[last_val].insert(index);
+            }
+            // pop out last value in vector
+            m_Vector.pop_back();
+            return true;
+        }
+    }
+
+    /// <summary>
+    /// Get a random element from the set. 
+    /// </summary>
+    /// <returns>the random value in the set</returns>
+    int getRandom()
+    {
+        if (m_Vector.size() == 0)
+        {
+            return -1;
+        }
+        int index = rand() % m_Vector.size();
+        return m_Vector[index];
+    }
+};
+
+/// <summary>
+/// Leet code #432. All O`one Data Structure Add to List 
+/// Implement a data structure supporting the following operations:
+/// Inc(Key) - Inserts a new key with value 1. Or increments an existing key 
+/// by 1. Key is guaranteed to be a non-empty string.
+/// Dec(Key) - If Key's value is 1, remove it from the data structure. 
+///            Otherwise decrements an existing key by 1. 
+///            If the key does not exist, this function does nothing. Key is 
+///            guaranteed to be a non-empty string.
+/// GetMaxKey() - Returns one of the keys with maximal value. If no element 
+///               exists, return an empty string "".
+/// GetMinKey() - Returns one of the keys with minimal value. If no element 
+///               exists, return an empty string "".
+/// Challenge: Perform all these in O(1) time complexity. 
+/// </summary>
+class AllOne {
+private:
+    unordered_map<string, int> m_KeyMap;
+    vector<unordered_set<string>> m_KeyList;
+
+public:
+    /** Initialize your data structure here. */
+    AllOne()
+    {
+    }
+
+    /** Inserts a new key <Key> with value 1. Or increments an existing key by 1. */
+    void inc(string key)
+    {
+        if (m_KeyMap.find(key) != m_KeyMap.end())
+        {
+            m_KeyList[m_KeyMap[key] - 1].erase(key);
+        }
+        m_KeyMap[key]++;
+        while (m_KeyMap[key] > (int)m_KeyList.size())
+        {
+            m_KeyList.push_back(unordered_set<string>());
+        }
+        m_KeyList[m_KeyMap[key] - 1].insert(key);
+    }
+
+    /** Decrements an existing key by 1. If Key's value is 1, remove it from the data structure. */
+    void dec(string key)
+    {
+        if (m_KeyMap.find(key) == m_KeyMap.end()) return;
+        m_KeyList[m_KeyMap[key] - 1].erase(key);
+        m_KeyMap[key]--;
+        if (m_KeyMap[key] == 0)
+        {
+            m_KeyMap.erase(key);
+        }
+        else
+        {
+            m_KeyList[m_KeyMap[key] - 1].insert(key);
+        }
+        while (!m_KeyList.empty() && m_KeyList.back().empty())
+        {
+            m_KeyList.pop_back();
+        }
+    }
+
+    /** Returns one of the keys with maximal value. */
+    string getMaxKey()
+    {
+        string str;
+        if (m_KeyList.empty())
+        {
+            str = "";
+        }
+        else
+        {
+            unordered_set<string> str_set = m_KeyList.back();
+            str = *str_set.begin();
+        }
+        return str;
+    }
+
+    /** Returns one of the keys with Minimal value. */
+    string getMinKey()
+    {
+        string str;
+        if (m_KeyList.empty())
+        {
+            str = "";
+        }
+        else
+        {
+            for (size_t i = 0; i < m_KeyList.size(); i++)
+            {
+                if (!m_KeyList[i].empty())
+                {
+                    unordered_set<string> str_set = m_KeyList[i];
+                    str = *str_set.begin();
+                    break;
+                }
+            }
+        }
+        return str;
     }
 };
 

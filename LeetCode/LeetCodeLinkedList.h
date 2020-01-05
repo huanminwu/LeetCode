@@ -20,7 +20,6 @@
 #include "leetcode.h"
 #include "LeetCodeLinkedList.h"
 using namespace std;
-
 /// <summary>
 /// The class is to implement stack based algorithm  
 /// </summary>
@@ -99,6 +98,133 @@ public:
     /// 1-2-3-7-8-11-12-9-10-4-5-6-NULL
     /// </summary>
     DoublyLinkedNode* flatten(DoublyLinkedNode* head);
+
+    /// <summary>
+        /// Leet code #427. Construct Quad Tree
+        /// </summary>
+    bool isQuadTreeLeaf(vector<vector<int>>& grid, int up, int left, int down, int right);
+
+    /// <summary>
+    /// Leet code #427. Construct Quad Tree
+    /// </summary>
+    QuadNode* constructQuadTree(vector<vector<int>>& grid, int up, int left, int down, int right);
+
+    /// <summary>
+    /// Leet code #427. Construct Quad Tree
+    /// 
+    /// We want to use quad trees to store an N x N boolean grid. Each cell in the 
+    /// grid can only be true or false. The root node represents the whole grid. 
+    /// For each node, it will be subdivided into four children nodes until the 
+    /// values in the region it represents are all the same.
+    ///
+    /// Each node has another two boolean attributes : isLeaf and val. isLeaf is 
+    /// true if and only if the node is a leaf node. The val attribute for a leaf 
+    /// node contains the value of the region it represents.
+    ///
+    /// Your task is to use a quad tree to represent a given grid. The following 
+    /// example may help you understand the problem better:
+    ///
+    /// Given the 8 x 8 grid below, we want to construct the corresponding quad 
+    /// tree:
+    ///
+    ///
+    /// It can be divided according to the definition above:
+    /// The corresponding quad tree should be as following, where each node is 
+    /// represented as a (isLeaf, val) pair.
+    ///
+    /// For the non-leaf nodes, val can be arbitrary, so it is represented as *.
+    ///
+    /// Note:
+    ///
+    /// N is less than 1000 and guaranteened to be a power of 2.
+    /// </summary>
+    QuadNode* constructQuadTree(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet code #558. Quad Tree Intersection
+    /// </summary>
+    QuadNode* collapse(QuadNode* quadTree);
+
+    /// <summary>
+    /// Leet code #558. Quad Tree Intersection
+    /// </summary>
+    QuadNode* clone(QuadNode* quadTree);
+
+    /// <summary>
+    /// Leet code #558. Quad Tree Intersection
+    /// 
+    /// A quadtree is a tree data in which each internal node has exactly four 
+    /// children: topLeft, topRight, bottomLeft and bottomRight. Quad trees are 
+    /// often used to partition a two-dimensional space by recursively subdividing 
+    /// it into four quadrants or regions.
+    ///
+    /// We want to store True/False information in our quad tree. The quad tree is 
+    /// used to represent a N * N boolean grid. For each node, it will be 
+    /// subdivided into four children nodes until the values in the region it 
+    /// represents are all the same. Each node has another two boolean 
+    /// attributes : isLeaf and val. isLeaf is true if and only if the node is a 
+    /// leaf node. The val attribute for a leaf node contains the value of the 
+    /// region it represents.
+    ///
+    /// For example, below are two quad trees A and B:
+    ///
+    /// A:
+    /// +-------+-------+   T: true
+    /// |       |       |   F: false
+    /// |   T   |   T   |
+    /// |       |       |
+    /// +-------+-------+
+    /// |       |       |
+    /// |   F   |   F   |
+    /// |       |       |
+    /// +-------+-------+
+    /// topLeft: T
+    /// topRight: T
+    /// bottomLeft: F
+    /// bottomRight: F
+    ///
+    /// B:               
+    /// +-------+---+---+
+    /// |       | F | F |
+    /// |   T   +---+---+
+    /// |       | T | T |
+    /// +-------+---+---+
+    /// |       |       |
+    /// |   T   |   F   |
+    /// |       |       |
+    /// +-------+-------+
+    /// topLeft: T
+    /// topRight:
+    ///     topLeft: F
+    ///     topRight: F
+    ///     bottomLeft: T
+    ///     bottomRight: T
+    /// bottomLeft: T
+    /// bottomRight: F
+    /// 
+    /// Your task is to implement a function that will take two quadtrees and 
+    /// return a quadtree that represents the logical OR (or union) of the two 
+    /// trees.
+    ///
+    /// A:                 B:                 C (A or B):
+    /// +-------+-------+  +-------+---+---+  +-------+-------+
+    /// |       |       |  |       | F | F |  |       |       |
+    /// |   T   |   T   |  |   T   +---+---+  |   T   |   T   |
+    /// |       |       |  |       | T | T |  |       |       |
+    /// +-------+-------+  +-------+---+---+  +-------+-------+
+    /// |       |       |  |       |       |  |       |       |
+    /// |   F   |   F   |  |   T   |   F   |  |   T   |   F   |
+    /// |       |       |  |       |       |  |       |       |
+    /// +-------+-------+  +-------+-------+  +-------+-------+
+    /// Note:
+    /// 
+    /// Both A and B represent grids of size N * N.
+    /// N is guaranteed to be a power of 2.
+    /// If you want to know more about the quad tree, you can refer to its wiki.
+    /// The logic OR operation is defined as this: "A or B" is true if A is true, 
+    /// or if B is true, or if both A and B are true.
+    /// </summary>
+    QuadNode* intersect(QuadNode* quadTree1, QuadNode* quadTree2);
 
     /// <summary>
     /// Leet code #19. Remove Nth Node From End of List 

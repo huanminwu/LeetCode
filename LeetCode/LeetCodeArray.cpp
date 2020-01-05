@@ -1062,7 +1062,7 @@ int LeetCode::findRadius(vector<int>& houses, vector<int>& heaters)
 /// <summary>
 /// Leet code #364. Nested List Weight Sum II   
 /// </summary>
-int LeetCode::countDepth(vector<NestedInteger>& nestedList)
+int LeetCodeArray::countDepth(vector<NestedInteger>& nestedList)
 {
     int depth = 1;
     for (NestedInteger ni : nestedList)
@@ -1077,7 +1077,7 @@ int LeetCode::countDepth(vector<NestedInteger>& nestedList)
 /// <summary>
 /// Leet code #364. Nested List Weight Sum II   
 /// </summary>
-int LeetCode::depthSumInverse(vector<NestedInteger>& nestedList, int depth)
+int LeetCodeArray::depthSumInverse(vector<NestedInteger>& nestedList, int depth)
 {
     int sum = 0;
     for (NestedInteger ni : nestedList)
@@ -1107,7 +1107,7 @@ int LeetCode::depthSumInverse(vector<NestedInteger>& nestedList, int depth)
 /// Example 2:
 /// Given the list [1,[4,[6]]], return 27. (one 1 at depth 1, one 4 at depth 2, and one 6 at depth 3; 1 + 4*2 + 6*3 = 27) 
 /// </summary>
-int LeetCode::depthSumInverse(vector<NestedInteger>& nestedList)
+int LeetCodeArray::depthSumInverse(vector<NestedInteger>& nestedList)
 {
     int depth = countDepth(nestedList);
     return depthSumInverse(nestedList, depth);
