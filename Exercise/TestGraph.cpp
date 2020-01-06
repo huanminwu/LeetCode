@@ -1684,8 +1684,34 @@ void TestLeetCode490(void)
     Logger::WriteMessage("Has Path = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1311(void)
+{
+    Logger::WriteMessage("Test Leet Code 1311");
+    LeetCodeGraph leetCode;
+    vector<vector<string>> watchedVideos = { {"A", "B"},{"C"},{"B", "C"},{"D"} };
+    vector<vector<int>> friends = { {1, 2},{0, 3},{0, 3},{1, 2} };
+    int id = 0;
+    int level = 1;
+    vector<string> result = leetCode.watchedVideosByFriends(watchedVideos, friends, id, level);
+    Logger::WriteMessage(watchedVideos);
+    Logger::WriteMessage(friends);
+    Logger::WriteMessage("id = " + (string)(to_string(id)));
+    Logger::WriteMessage(result);
+
+    watchedVideos = { {"A", "B"},{"C"},{"B", "C"},{"D"} };
+    friends = { {1, 2},{0, 3},{0, 3},{1, 2} };
+    id = 0;
+    level = 2;
+    result = leetCode.watchedVideosByFriends(watchedVideos, friends, id, level);
+    Logger::WriteMessage(watchedVideos);
+    Logger::WriteMessage(friends);
+    Logger::WriteMessage("id = " + (string)(to_string(id)));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1311();
     TestLeetCode490();
     TestLeetCode499();
     TestLeetCode505();

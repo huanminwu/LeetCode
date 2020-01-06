@@ -25,19 +25,19 @@
 /// <returns></returns>
 void LeetCode::ReverseRange(string& string, size_t begin, size_t end)
 {
-	if ((begin < 0) || (begin > string.size()) ||
-		(end < 0) || (end > string.size()))
-	{
-		return;
-	}
+    if ((begin < 0) || (begin > string.size()) ||
+        (end < 0) || (end > string.size()))
+    {
+        return;
+    }
 
-	// The first iteration reverse every single character
-	while (begin < end)
-	{
-		swap(string[begin], string[end]);
-		begin++;
-		end--;
-	}
+    // The first iteration reverse every single character
+    while (begin < end)
+    {
+        swap(string[begin], string[end]);
+        begin++;
+        end--;
+    }
 }
 
 /// <summary>
@@ -47,35 +47,35 @@ void LeetCode::ReverseRange(string& string, size_t begin, size_t end)
 /// <returns></returns>
 void LeetCode::RemoveExtraSpaces(string& s)
 {
-	if (s.size() == 0) return;
-	struct doubleSpaces
-	{
-		bool operator() (char lhs, char rhs)
-		{
-			if (isspace(lhs) && isspace(rhs))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-	};
-	string::iterator new_end = std::unique(s.begin(), s.end(), doubleSpaces());
-	s.erase(new_end, s.end());
+    if (s.size() == 0) return;
+    struct doubleSpaces
+    {
+        bool operator() (char lhs, char rhs)
+        {
+            if (isspace(lhs) && isspace(rhs))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    };
+    string::iterator new_end = std::unique(s.begin(), s.end(), doubleSpaces());
+    s.erase(new_end, s.end());
 
-	size_t begin = 0;
-	size_t end = s.size() - 1;
-	if (isspace(s[begin]))
-	{
-		begin = 1;
-	}
-	if (isspace(s[end]) && end > begin)
-	{
-		end = end - 1;
-	}
-	s = s.substr(begin, end - begin + 1);
+    size_t begin = 0;
+    size_t end = s.size() - 1;
+    if (isspace(s[begin]))
+    {
+        begin = 1;
+    }
+    if (isspace(s[end]) && end > begin)
+    {
+        end = end - 1;
+    }
+    s = s.substr(begin, end - begin + 1);
 }
 
 /// <summary>
@@ -91,31 +91,31 @@ void LeetCode::RemoveExtraSpaces(string& s)
 /// </summary>
 int LeetCode::lengthOfLongestSubstring(string s)
 {
-	unordered_map<char, int> map;
-	int start_index = 0;
-	int max_length = 0;
-	size_t pos = 0;
-	while (pos < s.size())
-	{
-		if (map.find(s[pos]) == map.end())
-		{
-			map[s[pos]] = pos;
-		}
-		else
-		{
-			size_t duplicate_pos = map[s[pos]];
-			max_length = std::max(max_length, (int)(pos - start_index));
-			for (size_t i = start_index; i < duplicate_pos; i++)
-			{
-				map.erase(s[i]);
-			}
-			map[s[pos]] = pos;
-			start_index = duplicate_pos + 1;
-		}
-		pos++;
-	}
-	max_length = std::max(max_length, (int)(pos - start_index));
-	return max_length;
+    unordered_map<char, int> map;
+    int start_index = 0;
+    int max_length = 0;
+    size_t pos = 0;
+    while (pos < s.size())
+    {
+        if (map.find(s[pos]) == map.end())
+        {
+            map[s[pos]] = pos;
+        }
+        else
+        {
+            size_t duplicate_pos = map[s[pos]];
+            max_length = std::max(max_length, (int)(pos - start_index));
+            for (size_t i = start_index; i < duplicate_pos; i++)
+            {
+                map.erase(s[i]);
+            }
+            map[s[pos]] = pos;
+            start_index = duplicate_pos + 1;
+        }
+        pos++;
+    }
+    max_length = std::max(max_length, (int)(pos - start_index));
+    return max_length;
 }
 
 /// <summary>
@@ -129,36 +129,36 @@ int LeetCode::lengthOfLongestSubstring(string s)
 /// </summary>
 void LeetCode::reverseWords(string &s)
 {
-	if (s.size() == 0) return;
+    if (s.size() == 0) return;
 
-	size_t begin = 0;
-	size_t end = s.size() - 1;
+    size_t begin = 0;
+    size_t end = s.size() - 1;
 
-	// The first iteration reverse every single character
-	ReverseRange(s, begin, end);
+    // The first iteration reverse every single character
+    ReverseRange(s, begin, end);
 
-	// start from begining of the sentence
-	begin = 0; end = 0;
-	while (begin < s.size())
-	{
-		// either end hit end or hit a space, we got a word
-		if ((!isspace(s[begin])) && ((end == s.size()) || (isspace(s[end]))))
-		{
-			ReverseRange(s, begin, end - 1);
-			begin = end;
-			end = begin + 1;
-		}
-		else if ((isspace(s[begin])) && (begin < s.size()))
-		{
-			begin++;
-			end = begin + 1;
-		}
-		else if ((!isspace(s[end])) && (end < s.size()))
-		{
-			end++;
-		}
-	}
-	RemoveExtraSpaces(s);
+    // start from begining of the sentence
+    begin = 0; end = 0;
+    while (begin < s.size())
+    {
+        // either end hit end or hit a space, we got a word
+        if ((!isspace(s[begin])) && ((end == s.size()) || (isspace(s[end]))))
+        {
+            ReverseRange(s, begin, end - 1);
+            begin = end;
+            end = begin + 1;
+        }
+        else if ((isspace(s[begin])) && (begin < s.size()))
+        {
+            begin++;
+            end = begin + 1;
+        }
+        else if ((!isspace(s[end])) && (end < s.size()))
+        {
+            end++;
+        }
+    }
+    RemoveExtraSpaces(s);
 }
 
 /// <summary>
@@ -175,29 +175,29 @@ void LeetCode::reverseWords(string &s)
 /// </summary>
 void LeetCode::reverseWordsII(string &s)
 {
-	std::reverse(s.begin(), s.end());
-	// start from begining of the sentence
-	size_t begin = 0;
-	size_t end = 0;
-	while (begin < s.size())
-	{
-		// either end hit end or hit a space, we got a word
-		if ((!isspace(s[begin])) && ((end == s.size()) || (isspace(s[end]))))
-		{
-			std::reverse(s.begin() + begin, s.begin() + end);
-			begin = end;
-			end = begin + 1;
-		}
-		else if ((isspace(s[begin])) && (begin < s.size()))
-		{
-			begin++;
-			end = begin + 1;
-		}
-		else if ((!isspace(s[end])) && (end < s.size()))
-		{
-			end++;
-		}
-	}
+    std::reverse(s.begin(), s.end());
+    // start from begining of the sentence
+    size_t begin = 0;
+    size_t end = 0;
+    while (begin < s.size())
+    {
+        // either end hit end or hit a space, we got a word
+        if ((!isspace(s[begin])) && ((end == s.size()) || (isspace(s[end]))))
+        {
+            std::reverse(s.begin() + begin, s.begin() + end);
+            begin = end;
+            end = begin + 1;
+        }
+        else if ((isspace(s[begin])) && (begin < s.size()))
+        {
+            begin++;
+            end = begin + 1;
+        }
+        else if ((!isspace(s[end])) && (end < s.size()))
+        {
+            end++;
+        }
+    }
 }
 
 /// <summary>
@@ -206,28 +206,28 @@ void LeetCode::reverseWordsII(string &s)
 /// </summary>
 string LeetCode::longestCommonPrefix(vector<string>& strs)
 {
-	string commonPrefix;
-	for (size_t i = 0; i < strs.size(); i++)
-	{
-		string word = strs[i];
-		if (i == 0)
-		{
-			commonPrefix = word;
-		}
-		else
-		{
-			size_t i;
-			for (i = 0; i < commonPrefix.size(); i++)
-			{
-				if ((i == word.size()) || (commonPrefix[i] != word[i]))
-				{
-					break;
-				}
-			}
-			commonPrefix = commonPrefix.substr(0, i);
-		}
-	}
-	return commonPrefix;
+    string commonPrefix;
+    for (size_t i = 0; i < strs.size(); i++)
+    {
+        string word = strs[i];
+        if (i == 0)
+        {
+            commonPrefix = word;
+        }
+        else
+        {
+            size_t i;
+            for (i = 0; i < commonPrefix.size(); i++)
+            {
+                if ((i == word.size()) || (commonPrefix[i] != word[i]))
+                {
+                    break;
+                }
+            }
+            commonPrefix = commonPrefix.substr(0, i);
+        }
+    }
+    return commonPrefix;
 }
 
 /// <summary>
@@ -238,63 +238,63 @@ string LeetCode::longestCommonPrefix(vector<string>& strs)
 /// </summary>
 int LeetCode::strStrKmp(string haystack, string needle)
 {
-	if (haystack.size() < needle.size()) return -1;
-	// Step 1: build kmp table
-	vector<int> kmp_table;
-	kmp_table.push_back(-1);
-	kmp_table.push_back(0);
-	size_t pos = 2;
-	size_t count = 0;
-	while (pos < needle.length())
-	{
-		if (needle[pos - 1] == needle[count])
-		{
-			count++;
-			kmp_table.push_back(count);
-			pos++;
-		}
-		else if (count > 0)
-		{
-			count = kmp_table[count];
-		}
-		else
-		{
-			kmp_table.push_back(0);
-			pos++;
-		}
-	}
+    if (haystack.size() < needle.size()) return -1;
+    // Step 1: build kmp table
+    vector<int> kmp_table;
+    kmp_table.push_back(-1);
+    kmp_table.push_back(0);
+    size_t pos = 2;
+    size_t count = 0;
+    while (pos < needle.length())
+    {
+        if (needle[pos - 1] == needle[count])
+        {
+            count++;
+            kmp_table.push_back(count);
+            pos++;
+        }
+        else if (count > 0)
+        {
+            count = kmp_table[count];
+        }
+        else
+        {
+            kmp_table.push_back(0);
+            pos++;
+        }
+    }
 
-	// Step 2: search substring
-	pos = 0;
-	size_t index = 0;
-	while (pos < haystack.length())
-	{
-		if (index == needle.length())
-		{
-			break;
-		}
-		if (haystack[pos + index] == needle[index])
-		{
-			index++;
-		}
-		else if (index == 0)
-		{
-			pos++;
-		}
-		else
-		{
-			pos = pos + index - kmp_table[index];
-			index = kmp_table[index];
-		}
-	}
-	if ((pos < haystack.length()) || (needle.length() == 0))
-	{
-		return pos;
-	}
-	else
-	{
-		return -1;
-	}
+    // Step 2: search substring
+    pos = 0;
+    size_t index = 0;
+    while (pos < haystack.length())
+    {
+        if (index == needle.length())
+        {
+            break;
+        }
+        if (haystack[pos + index] == needle[index])
+        {
+            index++;
+        }
+        else if (index == 0)
+        {
+            pos++;
+        }
+        else
+        {
+            pos = pos + index - kmp_table[index];
+            index = kmp_table[index];
+        }
+    }
+    if ((pos < haystack.length()) || (needle.length() == 0))
+    {
+        return pos;
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 /// <summary>
@@ -304,54 +304,54 @@ int LeetCode::strStrKmp(string haystack, string needle)
 /// </summary>
 int LeetCode::strStrChecksum(string haystack, string needle)
 {
-	if (haystack.size() < needle.size()) return -1;
-	int target_checksum = 0;
-	size_t target_length = needle.size();
-	for (size_t i = 0; i < target_length; i++)
-	{
-		target_checksum += needle[i];
-	}
-	int checksum = 0;
-	size_t length = 0;
-	size_t pos = 0;
-	size_t index = 0;
-	while ((pos < haystack.size()) && (index < target_length))
-	{
-		checksum += haystack[pos];
-		if (length < target_length)
-		{
-			length++;
-		}
-		else
-		{
-			checksum -= haystack[pos - target_length];
-		}
-		pos++;
-		if ((checksum == target_checksum) && (length == target_length))
-		{
-			index = 0;
-			while (index < target_length)
-			{
-				// also no need to check if array index overflow or underflow because length == target_length guarantee it
-				if (haystack[pos + index - target_length] != needle[index])
-				{
-					break;
-				}
+    if (haystack.size() < needle.size()) return -1;
+    int target_checksum = 0;
+    size_t target_length = needle.size();
+    for (size_t i = 0; i < target_length; i++)
+    {
+        target_checksum += needle[i];
+    }
+    int checksum = 0;
+    size_t length = 0;
+    size_t pos = 0;
+    size_t index = 0;
+    while ((pos < haystack.size()) && (index < target_length))
+    {
+        checksum += haystack[pos];
+        if (length < target_length)
+        {
+            length++;
+        }
+        else
+        {
+            checksum -= haystack[pos - target_length];
+        }
+        pos++;
+        if ((checksum == target_checksum) && (length == target_length))
+        {
+            index = 0;
+            while (index < target_length)
+            {
+                // also no need to check if array index overflow or underflow because length == target_length guarantee it
+                if (haystack[pos + index - target_length] != needle[index])
+                {
+                    break;
+                }
 
-				index++;
-			}
-		}
-	}
+                index++;
+            }
+        }
+    }
 
-	// if we search to the end of target it means we match
-	if (index == target_length)
-	{
-		return pos - target_length;
-	}
-	else
-	{
-		return -1;
-	}
+    // if we search to the end of target it means we match
+    if (index == target_length)
+    {
+        return pos - target_length;
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 /// <summary>
@@ -362,14 +362,14 @@ int LeetCode::strStrChecksum(string haystack, string needle)
 /// </summary>
 string LeetCode::reverseString(string s)
 {
-	int first = 0, last = s.size() - 1;
-	while (first < last)
-	{
-		swap(s[first], s[last]);
-		first++;
-		last--;
-	}
-	return s;
+    int first = 0, last = s.size() - 1;
+    while (first < last)
+    {
+        swap(s[first], s[last]);
+        first++;
+        last--;
+    }
+    return s;
 }
 
 /// <summary>
@@ -394,64 +394,64 @@ string LeetCode::reverseString(string s)
 /// </summary>
 vector<string> LeetCode::fullJustify(vector<string>& words, int maxWidth)
 {
-	// total word length, not counting space
-	int total_word_length = 0;
-	// number of word
-	int word_count = 0;
-	// a string buffer for a line
-	string word_line;
-	vector<string> result;
-	// remember the current line starting from which word
-	size_t first = 0;
-	while (first + word_count < words.size())
-	{
-		// still able to add more words
-		if ((word_count == 0) || (total_word_length + word_count + (int)words[first + word_count].size() <= maxWidth))
-		{
-			total_word_length += words[first + word_count].size();
-			word_count++;
-			continue;
-		}
+    // total word length, not counting space
+    int total_word_length = 0;
+    // number of word
+    int word_count = 0;
+    // a string buffer for a line
+    string word_line;
+    vector<string> result;
+    // remember the current line starting from which word
+    size_t first = 0;
+    while (first + word_count < words.size())
+    {
+        // still able to add more words
+        if ((word_count == 0) || (total_word_length + word_count + (int)words[first + word_count].size() <= maxWidth))
+        {
+            total_word_length += words[first + word_count].size();
+            word_count++;
+            continue;
+        }
 
-		int total_spaces = maxWidth < total_word_length ? 0 : maxWidth - total_word_length;
+        int total_spaces = maxWidth < total_word_length ? 0 : maxWidth - total_word_length;
 
-		size_t distribute_spaces = (word_count == 1) ? total_spaces : total_spaces / (word_count - 1);
-		int remaining_spaces = (word_count == 1) ? 0 : (total_spaces - distribute_spaces * (word_count - 1));
+        size_t distribute_spaces = (word_count == 1) ? total_spaces : total_spaces / (word_count - 1);
+        int remaining_spaces = (word_count == 1) ? 0 : (total_spaces - distribute_spaces * (word_count - 1));
 
-		word_line.clear();
-		for (size_t index = first; index < first + word_count; index++)
-		{
-			word_line.append(words[index]);
-			if ((index < first + word_count - 1) || (word_count == 1))
-			{
-				word_line.append(distribute_spaces, ' ');
-				if (remaining_spaces > 0)
-				{
-					word_line.push_back(' ');
-					remaining_spaces--;
-				}
-			}
-		}
-		result.push_back(word_line);
+        word_line.clear();
+        for (size_t index = first; index < first + word_count; index++)
+        {
+            word_line.append(words[index]);
+            if ((index < first + word_count - 1) || (word_count == 1))
+            {
+                word_line.append(distribute_spaces, ' ');
+                if (remaining_spaces > 0)
+                {
+                    word_line.push_back(' ');
+                    remaining_spaces--;
+                }
+            }
+        }
+        result.push_back(word_line);
 
-		// start next line
-		first += word_count;
-		total_word_length = 0;
-		word_count = 0;
-	}
+        // start next line
+        first += word_count;
+        total_word_length = 0;
+        word_count = 0;
+    }
 
-	word_line.clear();
+    word_line.clear();
 
-	for (size_t index = first; index < first + word_count; index++)
-	{
-		if (index > first) word_line.push_back(' ');
-		word_line.append(words[index]);
+    for (size_t index = first; index < first + word_count; index++)
+    {
+        if (index > first) word_line.push_back(' ');
+        word_line.append(words[index]);
 
-	}
-	word_line.append(maxWidth - word_line.size(), ' ');
-	result.push_back(word_line);
+    }
+    word_line.append(maxWidth - word_line.size(), ' ');
+    result.push_back(word_line);
 
-	return result;
+    return result;
 }
 
 /// <summary>
@@ -468,52 +468,52 @@ vector<string> LeetCode::fullJustify(vector<string>& words, int maxWidth)
 /// This solution keep the first X position count for each character in the substring, and the calculate the distance. 
 string LeetCode::minWindow(string s, string t)
 {
-	unordered_map<char, int> char_count;
-	unordered_map<char, queue<int>> char_map;
-	set<int> position_set;
-	pair<int, int> min_window = make_pair(-1, -1);
-	for (size_t i = 0; i < t.size(); i++)
-	{
-		char_count[t[i]]++;
-	}
-	for (size_t i = 0; i < s.size(); i++)
-	{
-		if (char_count.find(s[i]) == char_count.end())
-		{
-			continue;
-		}
-		unordered_map<char, queue<int>>::iterator iterator = char_map.find(s[i]);
-		if (iterator == char_map.end())
-		{
-			char_map[s[i]] = queue<int>();
-		}
-		if (char_map[s[i]].size() == char_count[s[i]])
-		{
-			position_set.erase(char_map[s[i]].front());
-			char_map[s[i]].pop();
-		}
-		char_map[s[i]].push(i);
-		position_set.insert(i);
-		// We have all the characters now.
-		if (position_set.size() == t.size())
-		{
-			int distance = *position_set.rbegin() - *position_set.begin();
-			if (distance < (min_window.second - min_window.first) ||
-				((min_window.first == -1) && (min_window.second == -1)))
-			{
-				min_window.second = *position_set.rbegin();
-				min_window.first = *position_set.begin();
-			}
-		}
-	}
-	if ((min_window.first == -1) && (min_window.second == -1))
-	{
-		return "";
-	}
-	else
-	{
-		return s.substr(min_window.first, min_window.second - min_window.first + 1);
-	}
+    unordered_map<char, int> char_count;
+    unordered_map<char, queue<int>> char_map;
+    set<int> position_set;
+    pair<int, int> min_window = make_pair(-1, -1);
+    for (size_t i = 0; i < t.size(); i++)
+    {
+        char_count[t[i]]++;
+    }
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (char_count.find(s[i]) == char_count.end())
+        {
+            continue;
+        }
+        unordered_map<char, queue<int>>::iterator iterator = char_map.find(s[i]);
+        if (iterator == char_map.end())
+        {
+            char_map[s[i]] = queue<int>();
+        }
+        if (char_map[s[i]].size() == char_count[s[i]])
+        {
+            position_set.erase(char_map[s[i]].front());
+            char_map[s[i]].pop();
+        }
+        char_map[s[i]].push(i);
+        position_set.insert(i);
+        // We have all the characters now.
+        if (position_set.size() == t.size())
+        {
+            int distance = *position_set.rbegin() - *position_set.begin();
+            if (distance < (min_window.second - min_window.first) ||
+                ((min_window.first == -1) && (min_window.second == -1)))
+            {
+                min_window.second = *position_set.rbegin();
+                min_window.first = *position_set.begin();
+            }
+        }
+    }
+    if ((min_window.first == -1) && (min_window.second == -1))
+    {
+        return "";
+    }
+    else
+    {
+        return s.substr(min_window.first, min_window.second - min_window.first + 1);
+    }
 }
 
 /// <summary>
@@ -531,51 +531,51 @@ string LeetCode::minWindow(string s, string t)
 ///
 string LeetCode::minWindowII(string s, string t)
 {
-	vector<int> char_map(128, 0);
-	for (size_t i = 0; i < t.size(); i++)
-	{
-		char_map[t[i]]++;
-	}
+    vector<int> char_map(128, 0);
+    for (size_t i = 0; i < t.size(); i++)
+    {
+        char_map[t[i]]++;
+    }
 
-	pair<int, int> min_window = make_pair(-1, -1);
-	int begin = 0, count = t.size();
+    pair<int, int> min_window = make_pair(-1, -1);
+    int begin = 0, count = t.size();
 
-	for (size_t end = 0; end < s.size(); end++)
-	{
-		if (char_map[s[end]] > 0)
-		{
-			count--;
-		}
-		char_map[s[end]]--;
-		// Do we have all the characters matched        
-		if (count > 0) continue;
+    for (size_t end = 0; end < s.size(); end++)
+    {
+        if (char_map[s[end]] > 0)
+        {
+            count--;
+        }
+        char_map[s[end]]--;
+        // Do we have all the characters matched        
+        if (count > 0) continue;
 
-		// recover the character count, until break the condition
-		while (count == 0)
-		{
-			char_map[s[begin]]++;
-			if (char_map[s[begin]] > 0)
-			{
-				count++;
-				if (((min_window.first == -1) && (min_window.second == -1)) ||
-					(min_window.second - min_window.first > (int)end - begin))
-				{
-					min_window.first = begin;
-					min_window.second = end;
-				}
-			}
-			begin++;
-		}
-	}
+        // recover the character count, until break the condition
+        while (count == 0)
+        {
+            char_map[s[begin]]++;
+            if (char_map[s[begin]] > 0)
+            {
+                count++;
+                if (((min_window.first == -1) && (min_window.second == -1)) ||
+                    (min_window.second - min_window.first > (int)end - begin))
+                {
+                    min_window.first = begin;
+                    min_window.second = end;
+                }
+            }
+            begin++;
+        }
+    }
 
-	if ((min_window.first == -1) && (min_window.second == -1))
-	{
-		return "";
-	}
-	else
-	{
-		return s.substr(min_window.first, min_window.second - min_window.first + 1);
-	}
+    if ((min_window.first == -1) && (min_window.second == -1))
+    {
+        return "";
+    }
+    else
+    {
+        return s.substr(min_window.first, min_window.second - min_window.first + 1);
+    }
 }
 
 /// <summary>
@@ -613,46 +613,46 @@ string LeetCode::minWindowII(string s, string t)
 /// </summary>
 bool LeetCode::isScramble(string s1, string s2)
 {
-	if (s1.size() != s2.size())
-	{
-		return false;
-	}
-	if (s1 == s2) return true;
-	size_t len = s1.size();
+    if (s1.size() != s2.size())
+    {
+        return false;
+    }
+    if (s1 == s2) return true;
+    size_t len = s1.size();
 
-	vector<int> alpha_table(26, 0);
+    vector<int> alpha_table(26, 0);
 
-	for (size_t i = 0; i < len; i++)
-	{
-		alpha_table[s1[i] - 'a']++;
-	}
-	for (size_t i = 0; i < len; i++)
-	{
-		alpha_table[s2[i] - 'a']--;
-	}
-	for (size_t i = 0; i < 26; i++)
-	{
-		if (alpha_table[i] != 0) return false;
-	}
+    for (size_t i = 0; i < len; i++)
+    {
+        alpha_table[s1[i] - 'a']++;
+    }
+    for (size_t i = 0; i < len; i++)
+    {
+        alpha_table[s2[i] - 'a']--;
+    }
+    for (size_t i = 0; i < 26; i++)
+    {
+        if (alpha_table[i] != 0) return false;
+    }
 
-	for (size_t i = 1; i < len; i++)
-	{
-		string sub1 = s1.substr(0, i);
-		string sub2 = s1.substr(i, len - i);
+    for (size_t i = 1; i < len; i++)
+    {
+        string sub1 = s1.substr(0, i);
+        string sub2 = s1.substr(i, len - i);
 
-		if (isScramble(s1.substr(0, i), s2.substr(0, i)) &&
-			isScramble(s1.substr(i, len - i), s2.substr(i, len - i)))
-		{
-			return true;
-		}
+        if (isScramble(s1.substr(0, i), s2.substr(0, i)) &&
+            isScramble(s1.substr(i, len - i), s2.substr(i, len - i)))
+        {
+            return true;
+        }
 
-		if (isScramble(s1.substr(0, i), s2.substr(len - i, i)) &&
-			isScramble(s1.substr(i, len - i), s2.substr(0, len - i)))
-		{
-			return true;
-		}
-	}
-	return false;
+        if (isScramble(s1.substr(0, i), s2.substr(len - i, i)) &&
+            isScramble(s1.substr(i, len - i), s2.substr(0, len - i)))
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 /// <summary>
@@ -668,19 +668,19 @@ bool LeetCode::isScramble(string s1, string s2)
 /// </summary>
 bool LeetCode::isAnagram(string s, string t)
 {
-	if (s.size() != t.size()) return false;
-	unordered_map<char, int> map;
-	for (size_t i = 0; i < s.size(); i++)
-	{
-		map[s[i]]++;
-	}
-	for (size_t i = 0; i < t.size(); i++)
-	{
-		map[t[i]]--;
-		if (map[t[i]] == 0) map.erase(t[i]);
-	}
-	if (map.size() == 0) return true;
-	else return false;
+    if (s.size() != t.size()) return false;
+    unordered_map<char, int> map;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        map[s[i]]++;
+    }
+    for (size_t i = 0; i < t.size(); i++)
+    {
+        map[t[i]]--;
+        if (map[t[i]] == 0) map.erase(t[i]);
+    }
+    if (map.size() == 0) return true;
+    else return false;
 }
 
 /// <summary>
@@ -695,12 +695,12 @@ bool LeetCode::isAnagram(string s, string t)
 /// </summary>
 int LeetCode::lengthOfLastWord(string s)
 {
-	int last = s.size();
-	while ((last > 0) && isspace(s[last - 1])) last--;
-	if (last == 0) return 0;
-	int first = last - 1;
-	while ((first > 0) && !isspace(s[first - 1])) first--;
-	return last - first;
+    int last = s.size();
+    while ((last > 0) && isspace(s[last - 1])) last--;
+    if (last == 0) return 0;
+    int first = last - 1;
+    while ((first > 0) && !isspace(s[first - 1])) first--;
+    return last - first;
 }
 
 /// <summary>
@@ -716,24 +716,24 @@ int LeetCode::lengthOfLastWord(string s)
 /// </summary>
 vector<vector<string>> LeetCode::groupAnagrams(vector<string>& strs)
 {
-	vector<vector<string>> result;
-	unordered_map<string, int> anagram_map;
-	for (size_t i = 0; i < strs.size(); i++)
-	{
-		string str = strs[i];
-		sort(str.begin(), str.end());
-		if (anagram_map.count(str) > 0)
-		{
-			result[anagram_map[str]].push_back(strs[i]);
-		}
-		else
-		{
-			anagram_map[str] = result.size();
-			result.push_back({ strs[i] });
-		}
-	}
+    vector<vector<string>> result;
+    unordered_map<string, int> anagram_map;
+    for (size_t i = 0; i < strs.size(); i++)
+    {
+        string str = strs[i];
+        sort(str.begin(), str.end());
+        if (anagram_map.count(str) > 0)
+        {
+            result[anagram_map[str]].push_back(strs[i]);
+        }
+        else
+        {
+            anagram_map[str] = result.size();
+            result.push_back({ strs[i] });
+        }
+    }
 
-	return result;
+    return result;
 }
 
 /// <summary>
@@ -751,21 +751,21 @@ vector<vector<string>> LeetCode::groupAnagrams(vector<string>& strs)
 /// </summary>
 bool LeetCode::canConstruct(string ransomNote, string magazine)
 {
-	unordered_map<char, int> char_map;
-	for (size_t i = 0; i < magazine.size(); i++)
-	{
-		char_map[magazine[i]]++;
-	}
-	for (size_t i = 0; i < ransomNote.size(); i++)
-	{
-		if (char_map.find(ransomNote[i]) == char_map.end())
-		{
-			return false;
-		}
-		char_map[ransomNote[i]]--;
-		if (char_map[ransomNote[i]] == 0) char_map.erase(ransomNote[i]);
-	}
-	return true;
+    unordered_map<char, int> char_map;
+    for (size_t i = 0; i < magazine.size(); i++)
+    {
+        char_map[magazine[i]]++;
+    }
+    for (size_t i = 0; i < ransomNote.size(); i++)
+    {
+        if (char_map.find(ransomNote[i]) == char_map.end())
+        {
+            return false;
+        }
+        char_map[ransomNote[i]]--;
+        if (char_map[ransomNote[i]] == 0) char_map.erase(ransomNote[i]);
+    }
+    return true;
 }
 
 /// <summary>
@@ -780,19 +780,19 @@ bool LeetCode::canConstruct(string ransomNote, string magazine)
 /// </summary>
 int LeetCode::firstUniqChar(string s)
 {
-	vector<int> char_set(26, 0);
-	for (char x : s)
-	{
-		char_set[x - 'a']++;
-	}
-	for (size_t i = 0; i < s.size(); i++)
-	{
-		if (char_set[s[i] - 'a'] == 1)
-		{
-			return i;
-		}
-	}
-	return -1;
+    vector<int> char_set(26, 0);
+    for (char x : s)
+    {
+        char_set[x - 'a']++;
+    }
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (char_set[s[i] - 'a'] == 1)
+        {
+            return i;
+        }
+    }
+    return -1;
 }
 
 /// <summary>
@@ -807,55 +807,55 @@ int LeetCode::firstUniqChar(string s)
 /// </summary>
 int LeetCode::compareVersion(string version1, string version2)
 {
-	vector<int> version_list1;
-	vector<int> version_list2;
-	string number = "";
-	for (size_t i = 0; i <= version1.size(); i++)
-	{
-		if ((version1[i] == '.') || (i == version1.size()))
-		{
-			if (number.empty()) version_list1.push_back(0);
-			else version_list1.push_back(atoi(number.c_str()));
-			number.clear();
-		}
-		else
-		{
-			number.push_back(version1[i]);
-		}
-	}
+    vector<int> version_list1;
+    vector<int> version_list2;
+    string number = "";
+    for (size_t i = 0; i <= version1.size(); i++)
+    {
+        if ((version1[i] == '.') || (i == version1.size()))
+        {
+            if (number.empty()) version_list1.push_back(0);
+            else version_list1.push_back(atoi(number.c_str()));
+            number.clear();
+        }
+        else
+        {
+            number.push_back(version1[i]);
+        }
+    }
 
-	for (size_t i = 0; i <= version2.size(); i++)
-	{
-		if ((version2[i] == '.') || (i == version2.size()))
-		{
-			if (number.empty()) version_list2.push_back(0);
-			else version_list2.push_back(atoi(number.c_str()));
-			number.clear();
-		}
-		else
-		{
-			number.push_back(version2[i]);
-		}
-	}
-	size_t index = 0;
-	while ((index < version_list1.size()) || (index < version_list2.size()))
-	{
-		if (index == version_list1.size()) version_list1.push_back(0);
-		if (index == version_list2.size()) version_list2.push_back(0);
-		if (version_list1[index] < version_list2[index])
-		{
-			return -1;
-		}
-		else if (version_list1[index] > version_list2[index])
-		{
-			return 1;
-		}
-		else
-		{
-			index++;
-		}
-	}
-	return 0;
+    for (size_t i = 0; i <= version2.size(); i++)
+    {
+        if ((version2[i] == '.') || (i == version2.size()))
+        {
+            if (number.empty()) version_list2.push_back(0);
+            else version_list2.push_back(atoi(number.c_str()));
+            number.clear();
+        }
+        else
+        {
+            number.push_back(version2[i]);
+        }
+    }
+    size_t index = 0;
+    while ((index < version_list1.size()) || (index < version_list2.size()))
+    {
+        if (index == version_list1.size()) version_list1.push_back(0);
+        if (index == version_list2.size()) version_list2.push_back(0);
+        if (version_list1[index] < version_list2[index])
+        {
+            return -1;
+        }
+        else if (version_list1[index] > version_list2[index])
+        {
+            return 1;
+        }
+        else
+        {
+            index++;
+        }
+    }
+    return 0;
 }
 
 /// <summary>
@@ -876,29 +876,29 @@ int LeetCode::compareVersion(string version1, string version2)
 /// </summary>
 int LeetCode::longestPalindromeII(string s)
 {
-	int sum = 0;
-	unordered_map<char, int> char_map;
-	for (size_t i = 0; i < s.size(); i++)
-	{
-		char_map[s[i]]++;
-	}
-	unordered_map<char, int>::iterator itr;
-	for (itr = char_map.begin(); itr != char_map.end(); ++itr)
-	{
-		if (itr->second >= 2)
-		{
-			sum += (itr->second / 2) * 2;
-		}
-	}
-	for (itr = char_map.begin(); itr != char_map.end(); ++itr)
-	{
-		if (itr->second % 2 == 1)
-		{
-			sum += 1;
-			break;
-		}
-	}
-	return sum;
+    int sum = 0;
+    unordered_map<char, int> char_map;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        char_map[s[i]]++;
+    }
+    unordered_map<char, int>::iterator itr;
+    for (itr = char_map.begin(); itr != char_map.end(); ++itr)
+    {
+        if (itr->second >= 2)
+        {
+            sum += (itr->second / 2) * 2;
+        }
+    }
+    for (itr = char_map.begin(); itr != char_map.end(); ++itr)
+    {
+        if (itr->second % 2 == 1)
+        {
+            sum += 1;
+            break;
+        }
+    }
+    return sum;
 }
 
 /// <summary>
@@ -916,41 +916,41 @@ int LeetCode::longestPalindromeII(string s)
 /// </summary>
 string LeetCode::simplifyPath(string path)
 {
-	string result;
-	vector<string> path_list;
-	string folder_name;
-	for (size_t i = 0; i <= path.size(); i++)
-	{
-		if ((i == path.size()) || (path[i] == '/'))
-		{
-			if ((folder_name.empty()) || (folder_name == "."))
-			{
-			}
-			else if (folder_name == "..")
-			{
-				if (!path_list.empty()) path_list.pop_back();
-			}
-			else
-			{
-				path_list.push_back(folder_name);
-			}
-			folder_name.clear();
-		}
-		else
-		{
-			folder_name.push_back(path[i]);
-		}
-	}
-	for (size_t i = 0; i < path_list.size(); i++)
-	{
-		result.push_back('/');
-		result.append(path_list[i]);
-	}
-	if ((result.empty()) && (!path.empty()) && (path[0] == '/'))
-	{
-		result = "/";
-	}
-	return result;
+    string result;
+    vector<string> path_list;
+    string folder_name;
+    for (size_t i = 0; i <= path.size(); i++)
+    {
+        if ((i == path.size()) || (path[i] == '/'))
+        {
+            if ((folder_name.empty()) || (folder_name == "."))
+            {
+            }
+            else if (folder_name == "..")
+            {
+                if (!path_list.empty()) path_list.pop_back();
+            }
+            else
+            {
+                path_list.push_back(folder_name);
+            }
+            folder_name.clear();
+        }
+        else
+        {
+            folder_name.push_back(path[i]);
+        }
+    }
+    for (size_t i = 0; i < path_list.size(); i++)
+    {
+        result.push_back('/');
+        result.append(path_list[i]);
+    }
+    if ((result.empty()) && (!path.empty()) && (path[0] == '/'))
+    {
+        result = "/";
+    }
+    return result;
 }
 
 /// <summary>
@@ -966,35 +966,35 @@ string LeetCode::simplifyPath(string path)
 /// </summary>
 vector<string> LeetCode::findRepeatedDnaSequences(string s)
 {
-	vector<string> result;
-	if (s.size() < 10) return result;
-	unordered_map<char, int> char_map = { { 'A', 0 },{ 'C', 1 },{ 'G', 2 },{ 'T', 3 } };
-	unordered_map<int, int> pos_map;
-	unordered_set<int> visited;
-	uint32_t string_code = 0;
-	for (size_t i = 0; i < 10; i++)
-	{
-		string_code = ((string_code << 2) & 0xfffff) + char_map[s[i]];
-	}
-	pos_map[string_code] = 0;
-	for (size_t i = 10; i < s.size(); i++)
-	{
-		string_code = ((string_code << 2) & 0xfffff) + char_map[s[i]];
+    vector<string> result;
+    if (s.size() < 10) return result;
+    unordered_map<char, int> char_map = { { 'A', 0 },{ 'C', 1 },{ 'G', 2 },{ 'T', 3 } };
+    unordered_map<int, int> pos_map;
+    unordered_set<int> visited;
+    uint32_t string_code = 0;
+    for (size_t i = 0; i < 10; i++)
+    {
+        string_code = ((string_code << 2) & 0xfffff) + char_map[s[i]];
+    }
+    pos_map[string_code] = 0;
+    for (size_t i = 10; i < s.size(); i++)
+    {
+        string_code = ((string_code << 2) & 0xfffff) + char_map[s[i]];
 
-		if (pos_map.find(string_code) != pos_map.end())
-		{
-			if (visited.find(string_code) == visited.end())
-			{
-				result.push_back(s.substr(pos_map[string_code], 10));
-				visited.insert(string_code);
-			}
-		}
-		else
-		{
-			pos_map[string_code] = i - 9;
-		}
-	}
-	return result;
+        if (pos_map.find(string_code) != pos_map.end())
+        {
+            if (visited.find(string_code) == visited.end())
+            {
+                result.push_back(s.substr(pos_map[string_code], 10));
+                visited.insert(string_code);
+            }
+        }
+        else
+        {
+            pos_map[string_code] = i - 9;
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -1021,37 +1021,37 @@ vector<string> LeetCode::findRepeatedDnaSequences(string s)
 /// </summary>
 bool LeetCode::repeatedSubstringPattern(string str)
 {
-	vector<int> kmp_table(str.size() + 1, 0);
+    vector<int> kmp_table(str.size() + 1, 0);
 
-	size_t index = 0, pos = 2, size = str.size();
-	while (pos <= size)
-	{
-		if (str[pos - 1] == str[index])
-		{
-			index++;
-			kmp_table[pos] = index;
-			pos++;
-		}
-		else if (index > 0)
-		{
-			index = kmp_table[index];
-			continue;
-		}
-		else
-		{
-			kmp_table[pos] = 0;
-			pos++;
-		}
-	}
-	int last = kmp_table.back();
-	if ((last != 0) && (size % (size - last) == 0))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    size_t index = 0, pos = 2, size = str.size();
+    while (pos <= size)
+    {
+        if (str[pos - 1] == str[index])
+        {
+            index++;
+            kmp_table[pos] = index;
+            pos++;
+        }
+        else if (index > 0)
+        {
+            index = kmp_table[index];
+            continue;
+        }
+        else
+        {
+            kmp_table[pos] = 0;
+            pos++;
+        }
+    }
+    int last = kmp_table.back();
+    if ((last != 0) && (size % (size - last) == 0))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 /// <summary>
@@ -1072,32 +1072,32 @@ bool LeetCode::repeatedSubstringPattern(string str)
 /// </summary>
 string LeetCode::originalDigits(string s)
 {
-	string result;
-	vector<string> digit_map =
-	{
-		"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
-	};
-	vector<int> digits(10);
-	vector<int> alphabet_count(26);
-	for (size_t i = 0; i < s.size(); i++)
-	{
-		alphabet_count[s[i] - 'a'] ++;
-	}
-	digits[0] = alphabet_count['z' - 'a'];
-	digits[2] = alphabet_count['w' - 'a'];
-	digits[4] = alphabet_count['u' - 'a'];
-	digits[6] = alphabet_count['x' - 'a'];
-	digits[8] = alphabet_count['g' - 'a'];
-	digits[7] = alphabet_count['s' - 'a'] - digits[6];
-	digits[3] = alphabet_count['h' - 'a'] - digits[8];
-	digits[5] = alphabet_count['f' - 'a'] - digits[4];
-	digits[1] = alphabet_count['o' - 'a'] - digits[0] - digits[2] - digits[4];
-	digits[9] = alphabet_count['i' - 'a'] - digits[5] - digits[6] - digits[8];
-	for (size_t i = 0; i < 10; i++)
-	{
-		result.append(string(digits[i], (char)('0' + i)));
-	}
-	return result;
+    string result;
+    vector<string> digit_map =
+    {
+        "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
+    };
+    vector<int> digits(10);
+    vector<int> alphabet_count(26);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        alphabet_count[s[i] - 'a'] ++;
+    }
+    digits[0] = alphabet_count['z' - 'a'];
+    digits[2] = alphabet_count['w' - 'a'];
+    digits[4] = alphabet_count['u' - 'a'];
+    digits[6] = alphabet_count['x' - 'a'];
+    digits[8] = alphabet_count['g' - 'a'];
+    digits[7] = alphabet_count['s' - 'a'] - digits[6];
+    digits[3] = alphabet_count['h' - 'a'] - digits[8];
+    digits[5] = alphabet_count['f' - 'a'] - digits[4];
+    digits[1] = alphabet_count['o' - 'a'] - digits[0] - digits[2] - digits[4];
+    digits[9] = alphabet_count['i' - 'a'] - digits[5] - digits[6] - digits[8];
+    for (size_t i = 0; i < 10; i++)
+    {
+        result.append(string(digits[i], (char)('0' + i)));
+    }
+    return result;
 }
 
 /// <summary>
@@ -1111,23 +1111,23 @@ string LeetCode::originalDigits(string s)
 /// </summary>
 int LeetCode::countSegments(string s)
 {
-	int segments = 0;
-	size_t index = 0;
-	while (index < s.size())
-	{
-		int alpha = 0;
-		while ((index < s.size()) && (!isspace(s[index])))
-		{
-			index++;
-			alpha++;
-		}
-		if (alpha > 0) segments++;
-		while ((index < s.size()) && (isspace(s[index])))
-		{
-			index++;
-		}
-	}
-	return segments;
+    int segments = 0;
+    size_t index = 0;
+    while (index < s.size())
+    {
+        int alpha = 0;
+        while ((index < s.size()) && (!isspace(s[index])))
+        {
+            index++;
+            alpha++;
+        }
+        if (alpha > 0) segments++;
+        while ((index < s.size()) && (isspace(s[index])))
+        {
+            index++;
+        }
+    }
+    return segments;
 }
 
 /// <summary>
@@ -1147,28 +1147,28 @@ int LeetCode::countSegments(string s)
 /// </summary>
 bool LeetCode::isIsomorphic(string s, string t)
 {
-	unordered_map<char, char> char_map;
-	unordered_set<char> used_chars;
-	for (size_t i = 0; i < s.size(); i++)
-	{
-		if (char_map.find(s[i]) == char_map.end())
-		{
-			if (used_chars.find(t[i]) == used_chars.end())
-			{
-				char_map[s[i]] = t[i];
-				used_chars.insert(t[i]);
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else if (char_map[s[i]] != t[i])
-		{
-			return false;
-		}
-	}
-	return true;
+    unordered_map<char, char> char_map;
+    unordered_set<char> used_chars;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (char_map.find(s[i]) == char_map.end())
+        {
+            if (used_chars.find(t[i]) == used_chars.end())
+            {
+                char_map[s[i]] = t[i];
+                used_chars.insert(t[i]);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if (char_map[s[i]] != t[i])
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 /// <summary>
@@ -1198,26 +1198,26 @@ bool LeetCode::isIsomorphic(string s, string t)
 /// </summary>
 vector<int> LeetCode::findAnagrams(string s, string p)
 {
-	vector<int> result;
-	int char_count = 0;
-	vector<int> char_map(26);
-	for (char ch : p) char_map[ch - 'a']++;
+    vector<int> result;
+    int char_count = 0;
+    vector<int> char_map(26);
+    for (char ch : p) char_map[ch - 'a']++;
 
-	for (size_t i = 0; i < s.size(); i++)
-	{
-		if (i >= p.size())
-		{
-			char_map[s[i - p.size()] - 'a']++;
-			if (char_map[s[i - p.size()] - 'a'] > 0) char_count--;
-		}
-		char_map[s[i] - 'a']--;
-		if (char_map[s[i] - 'a'] >= 0) char_count++;
-		if (char_count == p.size())
-		{
-			result.push_back(i - char_count + 1);
-		}
-	}
-	return result;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (i >= p.size())
+        {
+            char_map[s[i - p.size()] - 'a']++;
+            if (char_map[s[i - p.size()] - 'a'] > 0) char_count--;
+        }
+        char_map[s[i] - 'a']--;
+        if (char_map[s[i] - 'a'] >= 0) char_count++;
+        if (char_count == p.size())
+        {
+            result.push_back(i - char_count + 1);
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -1234,45 +1234,45 @@ vector<int> LeetCode::findAnagrams(string s, string p)
 /// </summary>
 bool LeetCode::wordPattern(string pattern, string str)
 {
-	vector<string> word_list;
-	size_t index = 0;
-	while (index < str.size())
-	{
-		string word;
-		while ((index < str.size()) && (isalpha(str[index])))
-		{
-			word.push_back(str[index]);
-			index++;
-		}
-		word_list.push_back(word);
-		while ((index < str.size()) && (isspace(str[index])))
-		{
-			index++;
-		}
-	}
-	unordered_map<char, string> word_map;
-	unordered_set<string> word_set;
-	if (pattern.size() != word_list.size()) return false;
-	for (size_t i = 0; i < pattern.size(); i++)
-	{
-		if (word_map.find(pattern[i]) == word_map.end())
-		{
-			if (word_set.find(word_list[i]) == word_set.end())
-			{
-				word_map[pattern[i]] = word_list[i];
-				word_set.insert(word_list[i]);
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else if (word_map[pattern[i]] != word_list[i])
-		{
-			return false;
-		}
-	}
-	return true;
+    vector<string> word_list;
+    size_t index = 0;
+    while (index < str.size())
+    {
+        string word;
+        while ((index < str.size()) && (isalpha(str[index])))
+        {
+            word.push_back(str[index]);
+            index++;
+        }
+        word_list.push_back(word);
+        while ((index < str.size()) && (isspace(str[index])))
+        {
+            index++;
+        }
+    }
+    unordered_map<char, string> word_map;
+    unordered_set<string> word_set;
+    if (pattern.size() != word_list.size()) return false;
+    for (size_t i = 0; i < pattern.size(); i++)
+    {
+        if (word_map.find(pattern[i]) == word_map.end())
+        {
+            if (word_set.find(word_list[i]) == word_set.end())
+            {
+                word_map[pattern[i]] = word_list[i];
+                word_set.insert(word_list[i]);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if (word_map[pattern[i]] != word_list[i])
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 /// <summary>
@@ -1289,47 +1289,47 @@ bool LeetCode::wordPattern(string pattern, string str)
 /// </summary>
 bool LeetCode::isValidNumber(string s)
 {
-	bool digit = false;
-	bool end = false;
-	bool exp = false;
-	bool point = false;
-	bool sign = false;
+    bool digit = false;
+    bool end = false;
+    bool exp = false;
+    bool point = false;
+    bool sign = false;
 
-	for (size_t i = 0; i < s.size(); i++)
-	{
-		if (isdigit(s[i]))
-		{
-			if (end) return false;
-			digit = true;
-		}
-		else if (s[i] == 'e')
-		{
-			if ((!digit) || end || exp) return false;
-			digit = false;
-			point = false;
-			sign = false;
-			exp = true;
-		}
-		else if (isspace(s[i]))
-		{
-			if (point || digit || exp || sign) end = true;
-		}
-		else if ((s[i] == '+') || (s[i] == '-'))
-		{
-			if (digit || point || sign) return false;
-			sign = true;
-		}
-		else if (s[i] == '.')
-		{
-			if (exp || point || end) return false;
-			point = true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	return digit;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (isdigit(s[i]))
+        {
+            if (end) return false;
+            digit = true;
+        }
+        else if (s[i] == 'e')
+        {
+            if ((!digit) || end || exp) return false;
+            digit = false;
+            point = false;
+            sign = false;
+            exp = true;
+        }
+        else if (isspace(s[i]))
+        {
+            if (point || digit || exp || sign) end = true;
+        }
+        else if ((s[i] == '+') || (s[i] == '-'))
+        {
+            if (digit || point || sign) return false;
+            sign = true;
+        }
+        else if (s[i] == '.')
+        {
+            if (exp || point || end) return false;
+            point = true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    return digit;
 }
 
 /// <summary>
@@ -1346,76 +1346,76 @@ bool LeetCode::isValidNumber(string s)
 /// </summary>
 bool LeetCode::isValidNumberII(string s)
 {
-	enum class NumberState { start, sign, integer, decimal_start, decimal, exp_start, exp_sign, exp_int, end };
+    enum class NumberState { start, sign, integer, decimal_start, decimal, exp_start, exp_sign, exp_int, end };
     NumberState state = NumberState::start;
-	for (size_t i = 0; i < s.size(); i++)
-	{
-		if (state == NumberState::start)
-		{
-			if (isspace(s[i])) state = NumberState::start;
-			else if ((s[i] == '+') || (s[i] == '-')) state = NumberState::sign;
-			else if (isdigit(s[i])) state = NumberState::integer;
-			else if (s[i] == '.') state = NumberState::decimal_start;
-			else return false;
-		}
-		else if (state == NumberState::sign)
-		{
-			if (isdigit(s[i])) state = NumberState::integer;
-			else if (s[i] == '.') state = NumberState::decimal_start;
-			else return false;
-		}
-		else if (state == NumberState::integer)
-		{
-			if (isdigit(s[i])) state = NumberState::integer;
-			else if (s[i] == '.') state = NumberState::decimal;
-			else if (s[i] == 'e') state = NumberState::exp_start;
-			else if (isspace(s[i])) state = NumberState::end;
-			else return false;
-		}
-		else if (state == NumberState::decimal_start)
-		{
-			if (isdigit(s[i])) state = NumberState::decimal;
-			else return false;
-		}
-		else if (state == NumberState::decimal)
-		{
-			if (isdigit(s[i])) state = NumberState::decimal;
-			else if (s[i] == 'e') state = NumberState::exp_start;
-			else if (isspace(s[i])) state = NumberState::end;
-			else return false;
-		}
-		else if (state == NumberState::exp_start)
-		{
-			if ((s[i] == '+') || (s[i] == '-')) state = NumberState::exp_sign;
-			else if (isdigit(s[i])) state = NumberState::exp_int;
-			else return false;
-		}
-		else if (state == NumberState::exp_sign)
-		{
-			if (isdigit(s[i])) state = NumberState::exp_int;
-			else return false;
-		}
-		else if (state == NumberState::exp_int)
-		{
-			if (isdigit(s[i])) state = NumberState::exp_int;
-			else if (isspace(s[i])) state = NumberState::end;
-			else return false;
-		}
-		else if (state == NumberState::end)
-		{
-			if (isspace(s[i])) state = NumberState::end;
-			else return false;
-		}
-	}
-	if ((state == NumberState::start) || (state == NumberState::decimal_start) || (state == NumberState::sign) ||
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (state == NumberState::start)
+        {
+            if (isspace(s[i])) state = NumberState::start;
+            else if ((s[i] == '+') || (s[i] == '-')) state = NumberState::sign;
+            else if (isdigit(s[i])) state = NumberState::integer;
+            else if (s[i] == '.') state = NumberState::decimal_start;
+            else return false;
+        }
+        else if (state == NumberState::sign)
+        {
+            if (isdigit(s[i])) state = NumberState::integer;
+            else if (s[i] == '.') state = NumberState::decimal_start;
+            else return false;
+        }
+        else if (state == NumberState::integer)
+        {
+            if (isdigit(s[i])) state = NumberState::integer;
+            else if (s[i] == '.') state = NumberState::decimal;
+            else if (s[i] == 'e') state = NumberState::exp_start;
+            else if (isspace(s[i])) state = NumberState::end;
+            else return false;
+        }
+        else if (state == NumberState::decimal_start)
+        {
+            if (isdigit(s[i])) state = NumberState::decimal;
+            else return false;
+        }
+        else if (state == NumberState::decimal)
+        {
+            if (isdigit(s[i])) state = NumberState::decimal;
+            else if (s[i] == 'e') state = NumberState::exp_start;
+            else if (isspace(s[i])) state = NumberState::end;
+            else return false;
+        }
+        else if (state == NumberState::exp_start)
+        {
+            if ((s[i] == '+') || (s[i] == '-')) state = NumberState::exp_sign;
+            else if (isdigit(s[i])) state = NumberState::exp_int;
+            else return false;
+        }
+        else if (state == NumberState::exp_sign)
+        {
+            if (isdigit(s[i])) state = NumberState::exp_int;
+            else return false;
+        }
+        else if (state == NumberState::exp_int)
+        {
+            if (isdigit(s[i])) state = NumberState::exp_int;
+            else if (isspace(s[i])) state = NumberState::end;
+            else return false;
+        }
+        else if (state == NumberState::end)
+        {
+            if (isspace(s[i])) state = NumberState::end;
+            else return false;
+        }
+    }
+    if ((state == NumberState::start) || (state == NumberState::decimal_start) || (state == NumberState::sign) ||
         (state == NumberState::exp_start) || (state == NumberState::exp_sign))
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 /// <summary>
@@ -1438,97 +1438,97 @@ bool LeetCode::isValidNumberII(string s)
 /// </solution>
 int LeetCode::strongPasswordChecker(string s)
 {
-	int less = 0;
-	int more = 0;
-	int lower = 0;
-	int upper = 0;
-	int digit = 0;
-	int repeat = 0;
-	vector<vector<int>> repeat_group(3);
-	vector<int> repeat_list;
-	int to_delete = 0;
-	int to_change = 0;
+    int less = 0;
+    int more = 0;
+    int lower = 0;
+    int upper = 0;
+    int digit = 0;
+    int repeat = 0;
+    vector<vector<int>> repeat_group(3);
+    vector<int> repeat_list;
+    int to_delete = 0;
+    int to_change = 0;
 
-	if (s.size() < 6) less = 6 - s.size();
-	if (s.size() > 20) more = s.size() - 20;
-	char ch = '\0';
-	int repeat_sum = 0;
-	for (size_t i = 0; i < s.size(); i++)
-	{
-		if (isdigit(s[i])) digit = 1;
-		if (isupper(s[i])) upper = 1;
-		if (islower(s[i])) lower = 1;
+    if (s.size() < 6) less = 6 - s.size();
+    if (s.size() > 20) more = s.size() - 20;
+    char ch = '\0';
+    int repeat_sum = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (isdigit(s[i])) digit = 1;
+        if (isupper(s[i])) upper = 1;
+        if (islower(s[i])) lower = 1;
 
-		if (s[i] != ch)
-		{
-			ch = s[i];
-			if (repeat_sum >= 3)
-			{
-				repeat_group[repeat_sum % 3].push_back(repeat_sum);
-			}
-			repeat_sum = 0;
-		}
-		repeat_sum++;
-	}
-	if (repeat_sum >= 3)
-	{
-		repeat_group[repeat_sum % 3].push_back(repeat_sum);
-	}
+        if (s[i] != ch)
+        {
+            ch = s[i];
+            if (repeat_sum >= 3)
+            {
+                repeat_group[repeat_sum % 3].push_back(repeat_sum);
+            }
+            repeat_sum = 0;
+        }
+        repeat_sum++;
+    }
+    if (repeat_sum >= 3)
+    {
+        repeat_group[repeat_sum % 3].push_back(repeat_sum);
+    }
 
-	// make repeat count 3k to 3(k-1)+2; 
-	for (size_t i = 0; i < repeat_group[0].size(); i++)
-	{
-		if (more == 0) break;
-		else
-		{
-			repeat_group[0][i]--;
-			more--;
-			to_delete++;
-		}
-	}
-	// make repeat count 3k+1 to 3(k-1)+2; 
-	for (size_t i = 0; i < repeat_group[1].size(); i++)
-	{
-		if (more < 2)  break;
-		else
-		{
-			repeat_group[1][i] -= 2;
-			more -= 2;
-			to_delete += 2;
-		}
-	}
+    // make repeat count 3k to 3(k-1)+2; 
+    for (size_t i = 0; i < repeat_group[0].size(); i++)
+    {
+        if (more == 0) break;
+        else
+        {
+            repeat_group[0][i]--;
+            more--;
+            to_delete++;
+        }
+    }
+    // make repeat count 3k+1 to 3(k-1)+2; 
+    for (size_t i = 0; i < repeat_group[1].size(); i++)
+    {
+        if (more < 2)  break;
+        else
+        {
+            repeat_group[1][i] -= 2;
+            more -= 2;
+            to_delete += 2;
+        }
+    }
 
-	for (size_t i = 0; i < 3; i++)
-	{
-		for (size_t j = 0; j < repeat_group[i].size(); j++)
-		{
-			repeat_list.push_back(repeat_group[i][j]);
-		}
-	}
+    for (size_t i = 0; i < 3; i++)
+    {
+        for (size_t j = 0; j < repeat_group[i].size(); j++)
+        {
+            repeat_list.push_back(repeat_group[i][j]);
+        }
+    }
 
-	// cancel excessive characters and repeated characters
-	while ((more > 0) && (!repeat_list.empty()))
-	{
-		int repeat_count = repeat_list.back();
-		repeat_list.pop_back();
-		int delete_count = min(repeat_count - 2, more);
-		repeat_count -= delete_count;
-		more -= delete_count;
-		if (repeat_count > 2) repeat_list.push_back(repeat_count);
-		to_delete += delete_count;
-	}
-	// in case we have more excessive characters
-	to_delete += more;
+    // cancel excessive characters and repeated characters
+    while ((more > 0) && (!repeat_list.empty()))
+    {
+        int repeat_count = repeat_list.back();
+        repeat_list.pop_back();
+        int delete_count = min(repeat_count - 2, more);
+        repeat_count -= delete_count;
+        more -= delete_count;
+        if (repeat_count > 2) repeat_list.push_back(repeat_count);
+        to_delete += delete_count;
+    }
+    // in case we have more excessive characters
+    to_delete += more;
 
-	// for remaining repeated characters, we consider them to be changed
-	while (!repeat_list.empty())
-	{
-		to_change += repeat_list.back() / 3;
-		repeat_list.pop_back();
-	}
-	to_change = max(to_change, (1 - lower) + (1 - upper) + (1 - digit));
-	to_change = max(to_change, less);
-	return to_change + to_delete;
+    // for remaining repeated characters, we consider them to be changed
+    while (!repeat_list.empty())
+    {
+        to_change += repeat_list.back() / 3;
+        repeat_list.pop_back();
+    }
+    to_change = max(to_change, (1 - lower) + (1 - upper) + (1 - digit));
+    to_change = max(to_change, less);
+    return to_change + to_delete;
 }
 
 /// <summary>
@@ -1552,57 +1552,57 @@ int LeetCode::strongPasswordChecker(string s)
 /// </summary>
 void LeetCode::gameOfLife(vector<vector<int>>& board)
 {
-	for (int i = 0; i < (int)board.size(); i++)
-	{
-		for (int j = 0; j < (int)board[i].size(); j++)
-		{
-			int count = 0;
-			int next = 0;
-			if (i > 0)
-			{
-				count += (board[i - 1][j]) % 10;
-				if (j > 0) count += board[i - 1][j - 1] % 10;
-				if (j < (int)board[i].size() - 1) count += board[i - 1][j + 1] % 10;
-			}
-			if (i < (int)board.size() - 1)
-			{
-				count += (board[i + 1][j]) % 10;
-				if (j > 0) count += board[i + 1][j - 1] % 10;
-				if (j < (int)board[i].size() - 1) count += board[i + 1][j + 1] % 10;
-			}
-			if (j > 0) count += board[i][j - 1] % 10;
-			if (j < (int)board[i].size() - 1) count += board[i][j + 1] % 10;
-			// 1. Any live cell with fewer than two live neighbors dies, as if caused by under-population.
-			if ((count < 2) && (board[i][j] % 10 == 1))
-			{
-				next = 0;
-			}
-			// 2. Any live cell with two or three live neighbors lives on to the next generation.
-			else if (((count == 2) || (count == 3)) && (board[i][j] % 10 == 1))
-			{
-				next = 1;
-			}
-			// 3. Any live cell with more than three live neighbors dies, as if by over-population.
-			else if ((count > 3) && (board[i][j] % 10 == 1))
-			{
-				next = 0;
-			}
-			// 4. Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
-			else if ((count == 3) && (board[i][j] % 10 == 0))
-			{
-				next = 1;
-			}
-			board[i][j] = next * 10 + board[i][j];
-		}
-	}
+    for (int i = 0; i < (int)board.size(); i++)
+    {
+        for (int j = 0; j < (int)board[i].size(); j++)
+        {
+            int count = 0;
+            int next = 0;
+            if (i > 0)
+            {
+                count += (board[i - 1][j]) % 10;
+                if (j > 0) count += board[i - 1][j - 1] % 10;
+                if (j < (int)board[i].size() - 1) count += board[i - 1][j + 1] % 10;
+            }
+            if (i < (int)board.size() - 1)
+            {
+                count += (board[i + 1][j]) % 10;
+                if (j > 0) count += board[i + 1][j - 1] % 10;
+                if (j < (int)board[i].size() - 1) count += board[i + 1][j + 1] % 10;
+            }
+            if (j > 0) count += board[i][j - 1] % 10;
+            if (j < (int)board[i].size() - 1) count += board[i][j + 1] % 10;
+            // 1. Any live cell with fewer than two live neighbors dies, as if caused by under-population.
+            if ((count < 2) && (board[i][j] % 10 == 1))
+            {
+                next = 0;
+            }
+            // 2. Any live cell with two or three live neighbors lives on to the next generation.
+            else if (((count == 2) || (count == 3)) && (board[i][j] % 10 == 1))
+            {
+                next = 1;
+            }
+            // 3. Any live cell with more than three live neighbors dies, as if by over-population.
+            else if ((count > 3) && (board[i][j] % 10 == 1))
+            {
+                next = 0;
+            }
+            // 4. Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
+            else if ((count == 3) && (board[i][j] % 10 == 0))
+            {
+                next = 1;
+            }
+            board[i][j] = next * 10 + board[i][j];
+        }
+    }
 
-	for (size_t i = 0; i < board.size(); i++)
-	{
-		for (size_t j = 0; j < board[i].size(); j++)
-		{
-			board[i][j] /= 10;
-		}
-	}
+    for (size_t i = 0; i < board.size(); i++)
+    {
+        for (size_t j = 0; j < board[i].size(); j++)
+        {
+            board[i][j] /= 10;
+        }
+    }
 }
 
 /// <summary>
@@ -1636,34 +1636,34 @@ void LeetCode::gameOfLife(vector<vector<int>>& board)
 /// </summary>
 bool LeetCode::validUtf8(vector<int>& data)
 {
-	uint32_t high_bit = 1 << 7;
-	int pending_byte = 0;
-	for (size_t i = 0; i < data.size(); i++)
-	{
-		uint32_t n = data[i];
-		int count = 0;
-		while ((n & high_bit) != 0)
-		{
-			n <<= 1;
-			count++;
-		}
-		if (count == 0)
-		{
-			if (pending_byte != 0) return false;
-		}
-		else if (count == 1)
-		{
-			if (pending_byte == 0) return false;
-			else pending_byte--;
-		}
-		else
-		{
-			if (pending_byte != 0) return false;
-			else pending_byte = count - 1;
-		}
-	}
-	if (pending_byte == 0) return true;
-	else return false;
+    uint32_t high_bit = 1 << 7;
+    int pending_byte = 0;
+    for (size_t i = 0; i < data.size(); i++)
+    {
+        uint32_t n = data[i];
+        int count = 0;
+        while ((n & high_bit) != 0)
+        {
+            n <<= 1;
+            count++;
+        }
+        if (count == 0)
+        {
+            if (pending_byte != 0) return false;
+        }
+        else if (count == 1)
+        {
+            if (pending_byte == 0) return false;
+            else pending_byte--;
+        }
+        else
+        {
+            if (pending_byte != 0) return false;
+            else pending_byte = count - 1;
+        }
+    }
+    if (pending_byte == 0) return true;
+    else return false;
 }
 
 /// <summary>
@@ -1671,25 +1671,25 @@ bool LeetCode::validUtf8(vector<int>& data)
 /// </summary>
 bool LeetCode::checkIPv4Address(vector<string> addressList)
 {
-	if (addressList.size() != 4)
-	{
-		return false;
-	}
-	for (size_t i = 0; i < addressList.size(); i++)
-	{
-		string address = addressList[i];
-		if ((address.size() == 0) || (address.size() > 3)) return false;
-		if ((address[0] == '0') && (address.size() > 1)) return false;
-		for (char ch : address)
-		{
-			if (!isdigit(ch)) return false;
-		}
-		if (atoi(address.c_str()) > 255)
-		{
-			return false;
-		}
-	}
-	return true;
+    if (addressList.size() != 4)
+    {
+        return false;
+    }
+    for (size_t i = 0; i < addressList.size(); i++)
+    {
+        string address = addressList[i];
+        if ((address.size() == 0) || (address.size() > 3)) return false;
+        if ((address[0] == '0') && (address.size() > 1)) return false;
+        for (char ch : address)
+        {
+            if (!isdigit(ch)) return false;
+        }
+        if (atoi(address.c_str()) > 255)
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 /// <summary>
@@ -1697,20 +1697,20 @@ bool LeetCode::checkIPv4Address(vector<string> addressList)
 /// </summary>
 bool LeetCode::checkIPv6Address(vector<string> addressList)
 {
-	if (addressList.size() != 8)
-	{
-		return false;
-	}
-	for (size_t i = 0; i < addressList.size(); i++)
-	{
-		string address = addressList[i];
-		if ((address.size() == 0) || (address.size() > 4)) return false;
-		for (char ch : address)
-		{
-			if (!isxdigit(ch)) return false;
-		}
-	}
-	return true;
+    if (addressList.size() != 8)
+    {
+        return false;
+    }
+    for (size_t i = 0; i < addressList.size(); i++)
+    {
+        string address = addressList[i];
+        if ((address.size() == 0) || (address.size() > 4)) return false;
+        for (char ch : address)
+        {
+            if (!isxdigit(ch)) return false;
+        }
+    }
+    return true;
 }
 
 /// <summary>
@@ -1754,60 +1754,60 @@ bool LeetCode::checkIPv6Address(vector<string> addressList)
 /// </summary>
 string LeetCode::validIPAddress(string IP)
 {
-	vector<string> addressList;
-	string word, type;
-	for (size_t i = 0; i <= IP.size(); i++)
-	{
-		if (i == IP.size())
-		{
-			addressList.push_back(word);
-			word.clear();
-		}
-		else if (IP[i] == '.')
-		{
-			if (type == "")
-			{
-				type = "IPv4";
-			}
-			else if (type != "IPv4")
-			{
-				type = "Neither";
-				break;
-			}
-			addressList.push_back(word);
-			word.clear();
-		}
-		else if (IP[i] == ':')
-		{
-			if (type == "")
-			{
-				type = "IPv6";
-			}
-			else if (type != "IPv6")
-			{
-				type = "Neither";
-				break;
-			}
-			addressList.push_back(word);
-			word.clear();
-		}
-		else
-		{
-			word.push_back(IP[i]);
-		}
-	}
-	if ((type == "IPv4") && (checkIPv4Address(addressList)))
-	{
-		return type;
-	}
-	else if ((type == "IPv6") && (checkIPv6Address(addressList)))
-	{
-		return type;
-	}
-	else
-	{
-		return "Neither";
-	}
+    vector<string> addressList;
+    string word, type;
+    for (size_t i = 0; i <= IP.size(); i++)
+    {
+        if (i == IP.size())
+        {
+            addressList.push_back(word);
+            word.clear();
+        }
+        else if (IP[i] == '.')
+        {
+            if (type == "")
+            {
+                type = "IPv4";
+            }
+            else if (type != "IPv4")
+            {
+                type = "Neither";
+                break;
+            }
+            addressList.push_back(word);
+            word.clear();
+        }
+        else if (IP[i] == ':')
+        {
+            if (type == "")
+            {
+                type = "IPv6";
+            }
+            else if (type != "IPv6")
+            {
+                type = "Neither";
+                break;
+            }
+            addressList.push_back(word);
+            word.clear();
+        }
+        else
+        {
+            word.push_back(IP[i]);
+        }
+    }
+    if ((type == "IPv4") && (checkIPv4Address(addressList)))
+    {
+        return type;
+    }
+    else if ((type == "IPv6") && (checkIPv6Address(addressList)))
+    {
+        return type;
+    }
+    else
+    {
+        return "Neither";
+    }
 }
 
 /// <summary>
@@ -1815,25 +1815,25 @@ string LeetCode::validIPAddress(string IP)
 /// </summary>
 bool LeetCode::isAdditiveNumber(string num1, string num2, string num)
 {
-	if ((num1[0] == '0' && num1.size() > 1) || (num2[0] == '0' && num2.size() > 1))
-	{
-		return false;
-	}
+    if ((num1[0] == '0' && num1.size() > 1) || (num2[0] == '0' && num2.size() > 1))
+    {
+        return false;
+    }
 
     LeetCodeString leetCode;
-	string num3 = leetCode.addStrings(num1, num2);
-	if ((num.size() >= num3.size()) && (num.substr(0, num3.size()) == num3))
-	{
-		num1 = num2;
-		num2 = num3;
-		num = num.substr(num3.size());
-		if (num.empty()) return true;
-		return isAdditiveNumber(num1, num2, num);
-	}
-	else
-	{
-		return false;
-	}
+    string num3 = leetCode.addStrings(num1, num2);
+    if ((num.size() >= num3.size()) && (num.substr(0, num3.size()) == num3))
+    {
+        num1 = num2;
+        num2 = num3;
+        num = num.substr(num3.size());
+        if (num.empty()) return true;
+        return isAdditiveNumber(num1, num2, num);
+    }
+    else
+    {
+        return false;
+    }
 }
 
 /// <summary>
@@ -1854,20 +1854,20 @@ bool LeetCode::isAdditiveNumber(string num1, string num2, string num)
 /// </summary>
 bool LeetCode::isAdditiveNumber(string num)
 {
-	for (int i = 0; i < (int)num.size() - 1; i++)
-	{
-		for (int j = i + 1; j < (int)num.size() - 1; j++)
-		{
-			string num1 = num.substr(0, i + 1);
-			string num2 = num.substr(i + 1, j - i);
-			string num3 = num.substr(j + 1);
-			if (isAdditiveNumber(num1, num2, num3))
-			{
-				return true;
-			}
-		}
-	}
-	return false;
+    for (int i = 0; i < (int)num.size() - 1; i++)
+    {
+        for (int j = i + 1; j < (int)num.size() - 1; j++)
+        {
+            string num1 = num.substr(0, i + 1);
+            string num2 = num.substr(i + 1, j - i);
+            string num3 = num.substr(j + 1);
+            if (isAdditiveNumber(num1, num2, num3))
+            {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 /// <summary>
@@ -1884,47 +1884,47 @@ bool LeetCode::isAdditiveNumber(string num)
 /// </summary>
 string LeetCode::shortestPalindrome(string s)
 {
-	string result;
-	vector<int> kmp_table(s.size());
-	int count = 0;
-	size_t pos = 2;
-	while (pos < s.size())
-	{
-		if (s[pos - 1] == s[count])
-		{
-			count++;
-			kmp_table[pos] = count;
-			pos++;
-		}
-		else
-		{
-			if (count > 0) count = kmp_table[count];
-			else pos++;
-		}
-	}
-	int first = 0, last = s.size() - 1;
-	while (first < last)
-	{
-		if (s[first] == s[last])
-		{
-			first++;
-			last--;
-		}
-		else
-		{
-			if (first > 0)
-			{
-				first = kmp_table[first];
-			}
-			else last--;
-		}
-	}
-	for (int i = s.size() - 1; i > first + last; i--)
-	{
-		result.push_back(s[i]);
-	}
-	result.append(s);
-	return result;
+    string result;
+    vector<int> kmp_table(s.size());
+    int count = 0;
+    size_t pos = 2;
+    while (pos < s.size())
+    {
+        if (s[pos - 1] == s[count])
+        {
+            count++;
+            kmp_table[pos] = count;
+            pos++;
+        }
+        else
+        {
+            if (count > 0) count = kmp_table[count];
+            else pos++;
+        }
+    }
+    int first = 0, last = s.size() - 1;
+    while (first < last)
+    {
+        if (s[first] == s[last])
+        {
+            first++;
+            last--;
+        }
+        else
+        {
+            if (first > 0)
+            {
+                first = kmp_table[first];
+            }
+            else last--;
+        }
+    }
+    for (int i = s.size() - 1; i > first + last; i--)
+    {
+        result.push_back(s[i]);
+    }
+    result.append(s);
+    return result;
 }
 
 /// <summary>
@@ -1943,50 +1943,50 @@ string LeetCode::shortestPalindrome(string s)
 /// </summary>
 vector<vector<int>> LeetCode::palindromePairs(vector<string>& words)
 {
-	vector<vector<int>> result;
-	unordered_map<string, int> reverse_map;
-	TrieNode trie_root;
-	for (size_t i = 0; i < words.size(); i++)
-	{
-		string str = words[i];
-		int first = 0;
-		int last = str.size() - 1;
-		while (first < last)
-		{
-			swap(str[first], str[last]);
-			first++; last--;
-		}
-		reverse_map[str] = i;
-		trie_root.insert(str, 0);
-	}
+    vector<vector<int>> result;
+    unordered_map<string, int> reverse_map;
+    TrieNode trie_root;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        string str = words[i];
+        int first = 0;
+        int last = str.size() - 1;
+        while (first < last)
+        {
+            swap(str[first], str[last]);
+            first++; last--;
+        }
+        reverse_map[str] = i;
+        trie_root.insert(str, 0);
+    }
 
-	for (size_t i = 0; i < words.size(); i++)
-	{
-		string str = words[i];
-		vector<string> match_words;
-		trie_root.getMatchWords(str, 0, match_words);
-		for (string word : match_words)
-		{
-			int j = reverse_map[word];
-			if (i == j) continue;
-			string combination = words[i] + words[j];
-			if (isPalindrome(combination))
-			{
-				vector<int> pair;
-				pair.push_back(i);
-				pair.push_back(j);
-				result.push_back(pair);
-				if (str == "")
-				{
-					pair.clear();
-					pair.push_back(j);
-					pair.push_back(i);
-					result.push_back(pair);
-				}
-			}
-		}
-	}
-	return result;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        string str = words[i];
+        vector<string> match_words;
+        trie_root.getMatchWords(str, 0, match_words);
+        for (string word : match_words)
+        {
+            int j = reverse_map[word];
+            if (i == j) continue;
+            string combination = words[i] + words[j];
+            if (isPalindrome(combination))
+            {
+                vector<int> pair;
+                pair.push_back(i);
+                pair.push_back(j);
+                result.push_back(pair);
+                if (str == "")
+                {
+                    pair.clear();
+                    pair.push_back(j);
+                    pair.push_back(i);
+                    result.push_back(pair);
+                }
+            }
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -2023,40 +2023,40 @@ vector<vector<int>> LeetCode::palindromePairs(vector<string>& words)
 /// </summary>
 int LeetCode::lengthLongestPath(string input)
 {
-	int max_length = 0;
-	vector<string> path_list;
-	vector<int> path_length;
-	size_t index = 0;
-	string word;
-	for (size_t i = 0; i <= input.size(); i++)
-	{
-		if (i == input.size() || input[i] == '\n')
-		{
-			if (!word.empty())
-			{
-				path_list.resize(index + 1);
-				path_list[index] = word;
-				path_length.resize(index + 1);
-				if (index == 0) path_length[index] = word.size();
-				else path_length[index] = path_length[index - 1] + word.size() + 1;
-				if (strchr(word.c_str(), '.') != nullptr)
-				{
-					max_length = max(max_length, path_length[index]);
-				}
-				word.clear();
-			}
-			index = 0;
-		}
-		else if (input[i] == '\t')
-		{
-			index++;
-		}
-		else
-		{
-			word.push_back(input[i]);
-		}
-	}
-	return max_length;
+    int max_length = 0;
+    vector<string> path_list;
+    vector<int> path_length;
+    size_t index = 0;
+    string word;
+    for (size_t i = 0; i <= input.size(); i++)
+    {
+        if (i == input.size() || input[i] == '\n')
+        {
+            if (!word.empty())
+            {
+                path_list.resize(index + 1);
+                path_list[index] = word;
+                path_length.resize(index + 1);
+                if (index == 0) path_length[index] = word.size();
+                else path_length[index] = path_length[index - 1] + word.size() + 1;
+                if (strchr(word.c_str(), '.') != nullptr)
+                {
+                    max_length = max(max_length, path_length[index]);
+                }
+                word.clear();
+            }
+            index = 0;
+        }
+        else if (input[i] == '\t')
+        {
+            index++;
+        }
+        else
+        {
+            word.push_back(input[i]);
+        }
+    }
+    return max_length;
 }
 
 /// <summary>
@@ -2089,45 +2089,45 @@ int LeetCode::lengthLongestPath(string input)
 /// </summary>
 int LeetCode::characterReplacement(string s, int k)
 {
-	vector<int> count_list(26);
-	map<int, set<char>> count_map;
-	int max_length = 0;
-	int first = 0, last = 0;
-	while (last < (int)s.size())
-	{
-		if (count_map.empty())
-		{
-			int index = s[last] - 'A';
-			count_list[index]++;
-			count_map[count_list[index]].insert(s[last]);
-			max_length = max(last - first + 1, max_length);
-		}
-		else if (last - first + 1 - count_map.rbegin()->first <= k)
-		{
-			max_length = max(last - first + 1, max_length);
-			last++;
-			if (last == (int)s.size()) break;
-			int index = s[last] - 'A';
-			count_list[index]++;
-			count_map[count_list[index]].insert(s[last]);
-			if (count_list[index] > 1)
-			{
-				count_map[count_list[index] - 1].erase(s[last]);
-			}
-		}
-		else
-		{
-			int index = s[first] - 'A';
-			count_list[index]--;
-			if (count_list[index] > 0)
-			{
-				count_map[count_list[index]].insert(s[first]);
-			}
-			count_map[count_list[index] + 1].erase(s[first]);
-			first++;
-		}
-	}
-	return max_length;
+    vector<int> count_list(26);
+    map<int, set<char>> count_map;
+    int max_length = 0;
+    int first = 0, last = 0;
+    while (last < (int)s.size())
+    {
+        if (count_map.empty())
+        {
+            int index = s[last] - 'A';
+            count_list[index]++;
+            count_map[count_list[index]].insert(s[last]);
+            max_length = max(last - first + 1, max_length);
+        }
+        else if (last - first + 1 - count_map.rbegin()->first <= k)
+        {
+            max_length = max(last - first + 1, max_length);
+            last++;
+            if (last == (int)s.size()) break;
+            int index = s[last] - 'A';
+            count_list[index]++;
+            count_map[count_list[index]].insert(s[last]);
+            if (count_list[index] > 1)
+            {
+                count_map[count_list[index] - 1].erase(s[last]);
+            }
+        }
+        else
+        {
+            int index = s[first] - 'A';
+            count_list[index]--;
+            if (count_list[index] > 0)
+            {
+                count_map[count_list[index]].insert(s[first]);
+            }
+            count_map[count_list[index] + 1].erase(s[first]);
+            first++;
+        }
+    }
+    return max_length;
 }
 
 /// <summary>
@@ -2152,22 +2152,22 @@ int LeetCode::characterReplacement(string s, int k)
 /// </summary>
 int LeetCode::longestSubstring(string s, int k)
 {
-	if (s.size() == 0 || k > (int)s.size())   return 0;
-	if (k == 0)  return s.size();
-	vector<int> char_count(26);
-	for (char ch : s)
-	{
-		char_count[ch - 'a']++;
-	}
-	size_t index = 0;
-	while ((index < s.size()) && (char_count[s[index] - 'a'] >= k))
-	{
-		index++;
-	}
-	if (index == s.size()) return s.size();
-	int left = longestSubstring(s.substr(0, index), k);
-	int right = longestSubstring(s.substr(index + 1), k);
-	return max(left, right);
+    if (s.size() == 0 || k > (int)s.size())   return 0;
+    if (k == 0)  return s.size();
+    vector<int> char_count(26);
+    for (char ch : s)
+    {
+        char_count[ch - 'a']++;
+    }
+    size_t index = 0;
+    while ((index < s.size()) && (char_count[s[index] - 'a'] >= k))
+    {
+        index++;
+    }
+    if (index == s.size()) return s.size();
+    int left = longestSubstring(s.substr(0, index), k);
+    int right = longestSubstring(s.substr(index + 1), k);
+    return max(left, right);
 }
 
 /// <summary>
@@ -2184,18 +2184,18 @@ int LeetCode::longestSubstring(string s, int k)
 /// </summary>
 bool LeetCode::canPermutePalindrome(string s)
 {
-	unordered_map<char, int> char_count;
-	for (char ch : s)
-	{
-		char_count[ch]++;
-	}
-	int odd_count = 0;
-	for (auto x : char_count)
-	{
-		odd_count += (x.second % 2 == 1) ? 1 : 0;
-		if (odd_count > 1) return false;
-	}
-	return true;
+    unordered_map<char, int> char_count;
+    for (char ch : s)
+    {
+        char_count[ch]++;
+    }
+    int odd_count = 0;
+    for (auto x : char_count)
+    {
+        odd_count += (x.second % 2 == 1) ? 1 : 0;
+        if (odd_count > 1) return false;
+    }
+    return true;
 }
 
 /// <summary>
@@ -2216,15 +2216,15 @@ bool LeetCode::canPermutePalindrome(string s)
 /// </summary>
 vector<string> LeetCode::generatePossibleNextMoves(string s)
 {
-	vector<string> result;
-	for (int i = 0; i < (int)s.size() - 1; i++)
-	{
-		if ((s[i] == '+') && (s[i + 1] == '+'))
-		{
-			result.push_back(s.substr(0, i) + "--" + s.substr(i + 2));
-		}
-	}
-	return result;
+    vector<string> result;
+    for (int i = 0; i < (int)s.size() - 1; i++)
+    {
+        if ((s[i] == '+') && (s[i + 1] == '+'))
+        {
+            result.push_back(s.substr(0, i) + "--" + s.substr(i + 2));
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -2236,22 +2236,22 @@ vector<string> LeetCode::generatePossibleNextMoves(string s)
 /// </summary>
 bool LeetCode::isStrobogrammatic(string num)
 {
-	unordered_map<char, char> char_map = { { '6', '9' },{ '9', '6' },{ '1', '1' },{ '0', '0' },{ '8', '8' } };
-	int first = 0;
-	int last = num.size() - 1;
-	while (first <= last)
-	{
-		if (char_map[num[first]] == num[last])
-		{
-			first++;
-			last--;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	return true;
+    unordered_map<char, char> char_map = { { '6', '9' },{ '9', '6' },{ '1', '1' },{ '0', '0' },{ '8', '8' } };
+    int first = 0;
+    int last = num.size() - 1;
+    while (first <= last)
+    {
+        if (char_map[num[first]] == num[last])
+        {
+            first++;
+            last--;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 /// <summary>
@@ -2273,38 +2273,38 @@ bool LeetCode::isStrobogrammatic(string num)
 /// </summary>
 vector<vector<string>> LeetCode::groupStrings(vector<string>& strings)
 {
-	vector<vector<string>> result;
-	for (string str : strings)
-	{
-		size_t i = 0;
-		for (i = 0; i < result.size(); i++)
-		{
-			string target = result[i][0];
-			if (str.size() != target.size()) continue;
-			int distance = 0;
-			bool match = true;
-			for (size_t j = 0; j < str.size(); j++)
-			{
-				if (j == 0) distance = (str[j] - target[j] + 26) % 26;
-				else if (distance != (str[j] - target[j] + 26) % 26)
-				{
-					match = false;
-					break;
-				}
-			}
-			if (match)
-			{
-				result[i].push_back(str);
-				break;
-			}
-		}
-		if (i == result.size())
-		{
-			result.push_back(vector<string>());
-			result[i].push_back(str);
-		}
-	}
-	return result;
+    vector<vector<string>> result;
+    for (string str : strings)
+    {
+        size_t i = 0;
+        for (i = 0; i < result.size(); i++)
+        {
+            string target = result[i][0];
+            if (str.size() != target.size()) continue;
+            int distance = 0;
+            bool match = true;
+            for (size_t j = 0; j < str.size(); j++)
+            {
+                if (j == 0) distance = (str[j] - target[j] + 26) % 26;
+                else if (distance != (str[j] - target[j] + 26) % 26)
+                {
+                    match = false;
+                    break;
+                }
+            }
+            if (match)
+            {
+                result[i].push_back(str);
+                break;
+            }
+        }
+        if (i == result.size())
+        {
+            result.push_back(vector<string>());
+            result[i].push_back(str);
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -2327,49 +2327,49 @@ vector<vector<string>> LeetCode::groupStrings(vector<string>& strings)
 /// </summary>
 bool LeetCode::validWordAbbreviation(string word, string abbr)
 {
-	size_t word_index = 0;
-	size_t abbr_index = 0;
-	string number = "";
-	while (word_index < word.size() && abbr_index <abbr.size())
-	{
-		if (isdigit(abbr[abbr_index]))
-		{
-			number.push_back(abbr[abbr_index]);
-			abbr_index++;
-		}
-		else if (number.empty())
-		{
-			if (word[word_index] == abbr[abbr_index])
-			{
-				word_index++;
-				abbr_index++;
-			}
-			else
-			{
-				break;
-			}
-		}
-		else
-		{
-			if (number[0] == '0') return false;
-			word_index += stoi(number);
-			number = "";
-		}
-	}
-	if (!number.empty())
-	{
-		if (number[0] == '0') return false;
-		word_index += stoi(number);
-		number = "";
-	}
-	if (word_index == word.size() && abbr_index == abbr.size())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    size_t word_index = 0;
+    size_t abbr_index = 0;
+    string number = "";
+    while (word_index < word.size() && abbr_index <abbr.size())
+    {
+        if (isdigit(abbr[abbr_index]))
+        {
+            number.push_back(abbr[abbr_index]);
+            abbr_index++;
+        }
+        else if (number.empty())
+        {
+            if (word[word_index] == abbr[abbr_index])
+            {
+                word_index++;
+                abbr_index++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        else
+        {
+            if (number[0] == '0') return false;
+            word_index += stoi(number);
+            number = "";
+        }
+    }
+    if (!number.empty())
+    {
+        if (number[0] == '0') return false;
+        word_index += stoi(number);
+        number = "";
+    }
+    if (word_index == word.size() && abbr_index == abbr.size())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 /// <summary>
@@ -2402,29 +2402,29 @@ bool LeetCode::validWordAbbreviation(string word, string abbr)
 /// </summary>
 string LeetCode::licenseKeyFormatting(string S, int K)
 {
-	string str;
-	int index = S.size() - 1;
-	int count = 0;
-	while (index >= 0)
-	{
-		if (S[index] != '-')
-		{
-			str.push_back(toupper(S[index]));
-			count++;
-			if (count == K)
-			{
-				str.push_back('-');
-				count = 0;
-			}
-		}
-		index--;
-	}
-	if ((!str.empty()) && (str.back() == '-'))
-	{
-		str.pop_back();
-	}
-	std::reverse(str.begin(), str.end());
-	return str;
+    string str;
+    int index = S.size() - 1;
+    int count = 0;
+    while (index >= 0)
+    {
+        if (S[index] != '-')
+        {
+            str.push_back(toupper(S[index]));
+            count++;
+            if (count == K)
+            {
+                str.push_back('-');
+                count = 0;
+            }
+        }
+        index--;
+    }
+    if ((!str.empty()) && (str.back() == '-'))
+    {
+        str.pop_back();
+    }
+    std::reverse(str.begin(), str.end());
+    return str;
 }
 
 /// <summary>
@@ -2453,44 +2453,44 @@ string LeetCode::licenseKeyFormatting(string S, int K)
 /// </summary>
 int LeetCode::magicalString(int n)
 {
-	string str;
-	int index = 0;
-	int count = 0;
-	for (int i = 0; i < n; i++)
-	{
-		if (i == 0)
-		{
-			str.push_back('1');
-		}
-		else if (i == 1)
-		{
-			str.push_back('2');
-			index = 1;
-			count = 1;
-		}
-		else
-		{
-			if (count == 0)
-			{
-				index++;
-				count = str[index] - '0';
-				if (str.back() == '1') str.push_back('2');
-				else str.push_back('1');
-				count--;
-			}
-			else
-			{
-				str.push_back(str.back());
-				count--;
-			}
-		}
-	}
-	count = 0;
-	for (int i = 0; i < n; i++)
-	{
-		if (str[i] == '1') count++;
-	}
-	return count;
+    string str;
+    int index = 0;
+    int count = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (i == 0)
+        {
+            str.push_back('1');
+        }
+        else if (i == 1)
+        {
+            str.push_back('2');
+            index = 1;
+            count = 1;
+        }
+        else
+        {
+            if (count == 0)
+            {
+                index++;
+                count = str[index] - '0';
+                if (str.back() == '1') str.push_back('2');
+                else str.push_back('1');
+                count--;
+            }
+            else
+            {
+                str.push_back(str.back());
+                count--;
+            }
+        }
+    }
+    count = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (str[i] == '1') count++;
+    }
+    return count;
 }
 
 /// <summary>
@@ -2498,13 +2498,13 @@ int LeetCode::magicalString(int n)
 /// </summary>
 int LeetCode::read4(char *buff, string& s, int& index)
 {
-	int i;
-	for (i = index; (i < index + 4) && (i < (int)s.size()); i++)
-	{
-		buff[i - index] = s[i];
-	}
-	buff[i - index] = 0;
-	return i - index;
+    int i;
+    for (i = index; (i < index + 4) && (i < (int)s.size()); i++)
+    {
+        buff[i - index] = s[i];
+    }
+    buff[i - index] = 0;
+    return i - index;
 }
 
 /// <summary>
@@ -2521,22 +2521,22 @@ int LeetCode::read4(char *buff, string& s, int& index)
 /// </summary>
 int LeetCode::readNChars(char *buf, int n, string &s)
 {
-	int index = 0;
-	while (index < n)
-	{
-		char buff[5];
-		int n_char = read4(buff, s, index);
-		if (n_char > n - index) n_char = n - index;
-		for (int i = 0; i < n_char; i++)
-		{
-			buf[index + i] = buff[i];
-		}
-		index += n_char;
-		buf[index] = 0;
-		if (n_char < 4) break;
-	}
-	buf[index] = 0;
-	return index;
+    int index = 0;
+    while (index < n)
+    {
+        char buff[5];
+        int n_char = read4(buff, s, index);
+        if (n_char > n - index) n_char = n - index;
+        for (int i = 0; i < n_char; i++)
+        {
+            buf[index + i] = buff[i];
+        }
+        index += n_char;
+        buf[index] = 0;
+        if (n_char < 4) break;
+    }
+    buf[index] = 0;
+    return index;
 }
 
 /// <summary>
@@ -2554,35 +2554,35 @@ int LeetCode::readNChars(char *buf, int n, string &s)
 /// </summary>
 int LeetCode::readNCharsII(char *buf, int n, string& s, int& index, string&m_buffer)
 {
-	int i = 0;
-	while (i < (int)m_buffer.size() && i < n)
-	{
-		buf[i] = m_buffer[i];
-		i++;
-	}
-	m_buffer = m_buffer.substr(i);
-	buf[i] = 0;
+    int i = 0;
+    while (i < (int)m_buffer.size() && i < n)
+    {
+        buf[i] = m_buffer[i];
+        i++;
+    }
+    m_buffer = m_buffer.substr(i);
+    buf[i] = 0;
 
-	while (i < n)
-	{
-		char buff[5];
-		int size = read4(buff, s, index);
-		int j = 0;
-		for (j = 0; (j < size) && (i + j < n); j++)
-		{
-			buf[i + j] = buff[j];
-		}
-		i += j;
-		buf[i] = 0;
-		while (j < size)
-		{
-			m_buffer.push_back(buff[j]);
-			j++;
-		}
-		index += size;
-		if (size < 4) break;
-	}
-	return i;
+    while (i < n)
+    {
+        char buff[5];
+        int size = read4(buff, s, index);
+        int j = 0;
+        for (j = 0; (j < size) && (i + j < n); j++)
+        {
+            buf[i + j] = buff[j];
+        }
+        i += j;
+        buf[i] = 0;
+        while (j < size)
+        {
+            m_buffer.push_back(buff[j]);
+            j++;
+        }
+        index += size;
+        if (size < 4) break;
+    }
+    return i;
 }
 
 /// <summary>
@@ -2595,31 +2595,31 @@ int LeetCode::readNCharsII(char *buf, int n, string& s, int& index, string&m_buf
 /// </summary>
 int LeetCode::lengthOfLongestSubstringTwoDistinct(string s)
 {
-	unordered_map<char, int> char_map;
-	size_t max_length = 0;
-	size_t first = 0, last = 0;
-	while (last < s.size())
-	{
-		if (char_map.size() == 3)
-		{
-			char_map[s[first]]--;
-			if (char_map[s[first]] == 0)
-			{
-				char_map.erase(s[first]);
-			}
-			first++;
-		}
-		else
-		{
-			char_map[s[last]]++;
-			last++;
-			if (char_map.size() < 3)
-			{
-				max_length = max(max_length, last - first);
-			}
-		}
-	}
-	return max_length;
+    unordered_map<char, int> char_map;
+    size_t max_length = 0;
+    size_t first = 0, last = 0;
+    while (last < s.size())
+    {
+        if (char_map.size() == 3)
+        {
+            char_map[s[first]]--;
+            if (char_map[s[first]] == 0)
+            {
+                char_map.erase(s[first]);
+            }
+            first++;
+        }
+        else
+        {
+            char_map[s[last]]++;
+            last++;
+            if (char_map.size() < 3)
+            {
+                max_length = max(max_length, last - first);
+            }
+        }
+    }
+    return max_length;
 }
 
 /// <summary>
@@ -2631,31 +2631,31 @@ int LeetCode::lengthOfLongestSubstringTwoDistinct(string s)
 /// </summary>
 int LeetCode::lengthOfLongestSubstringKDistinct(string s, int k)
 {
-	unordered_map<char, int> char_map;
-	int max_length = 0;
-	int first = 0, last = 0;
-	while (last < (int)s.size())
-	{
-		if (char_map.size() == k + 1)
-		{
-			char_map[s[first]]--;
-			if (char_map[s[first]] == 0)
-			{
-				char_map.erase(s[first]);
-			}
-			first++;
-		}
-		else
-		{
-			char_map[s[last]]++;
-			last++;
-			if ((int)char_map.size() < k + 1)
-			{
-				max_length = max(max_length, last - first);
-			}
-		}
-	}
-	return max_length;
+    unordered_map<char, int> char_map;
+    int max_length = 0;
+    int first = 0, last = 0;
+    while (last < (int)s.size())
+    {
+        if (char_map.size() == k + 1)
+        {
+            char_map[s[first]]--;
+            if (char_map[s[first]] == 0)
+            {
+                char_map.erase(s[first]);
+            }
+            first++;
+        }
+        else
+        {
+            char_map[s[last]]++;
+            last++;
+            if ((int)char_map.size() < k + 1)
+            {
+                max_length = max(max_length, last - first);
+            }
+        }
+    }
+    return max_length;
 }
 
 /// <summary>
@@ -2691,28 +2691,28 @@ int LeetCode::lengthOfLongestSubstringKDistinct(string s, int k)
 /// </summary>
 int LeetCode::findSubstringInWraproundString(string p)
 {
-	unordered_map<char, int> str_map;
-	int first = 0, last = first + 1;
-	while (first < (int)p.size())
-	{
-		char ch = p[last - 1];
-		str_map[ch] = max(str_map[ch], last - first);
-		if ((last < (int)p.size()) && ((p[last - 1] - 'a' + 1) % 26 == (p[last] - 'a')))
-		{
-			last++;
-		}
-		else
-		{
-			first = last;
-			last = first + 1;
-		}
-	}
-	int count = 0;
-	for (auto itr : str_map)
-	{
-		count += itr.second;
-	}
-	return count;
+    unordered_map<char, int> str_map;
+    int first = 0, last = first + 1;
+    while (first < (int)p.size())
+    {
+        char ch = p[last - 1];
+        str_map[ch] = max(str_map[ch], last - first);
+        if ((last < (int)p.size()) && ((p[last - 1] - 'a' + 1) % 26 == (p[last] - 'a')))
+        {
+            last++;
+        }
+        else
+        {
+            first = last;
+            last = first + 1;
+        }
+    }
+    int count = 0;
+    for (auto itr : str_map)
+    {
+        count += itr.second;
+    }
+    return count;
 }
 
 /// <summary>
@@ -2737,24 +2737,24 @@ int LeetCode::findSubstringInWraproundString(string p)
 /// </summary>
 bool LeetCode::detectCapitalUse(string word)
 {
-	int upper_count = 0;
-	int lower_count = 0;
+    int upper_count = 0;
+    int lower_count = 0;
 
-	for (size_t i = 0; i < word.size(); i++)
-	{
-		if (islower(word[i]))
-		{
-			lower_count++;
-			if (upper_count > 1) return false;
-		}
-		else if (isupper(word[i]))
-		{
-			upper_count++;
-			if (lower_count > 0) return false;
+    for (size_t i = 0; i < word.size(); i++)
+    {
+        if (islower(word[i]))
+        {
+            lower_count++;
+            if (upper_count > 1) return false;
+        }
+        else if (isupper(word[i]))
+        {
+            upper_count++;
+            if (lower_count > 0) return false;
 
-		}
-	}
-	return true;
+        }
+    }
+    return true;
 }
 
 /// <summary>
@@ -2785,16 +2785,16 @@ bool LeetCode::detectCapitalUse(string word)
 /// </summary>
 string LeetCode::findLongestWord(string s, vector<string>& d)
 {
-	map<int, set<string>> dict_map;
-	for (string str : d) dict_map[str.size()].insert(str);
-	for (map<int, set<string>>::reverse_iterator itr = dict_map.rbegin(); itr != dict_map.rend(); itr++)
-	{
-		for (string str : itr->second)
-		{
-			if (isSubsequence(str, s)) return str;
-		}
-	}
-	return "";
+    map<int, set<string>> dict_map;
+    for (string str : d) dict_map[str.size()].insert(str);
+    for (map<int, set<string>>::reverse_iterator itr = dict_map.rbegin(); itr != dict_map.rend(); itr++)
+    {
+        for (string str : itr->second)
+        {
+            if (isSubsequence(str, s)) return str;
+        }
+    }
+    return "";
 }
 
 /// <summary>
@@ -2816,14 +2816,14 @@ string LeetCode::findLongestWord(string s, vector<string>& d)
 /// </summary>
 string LeetCode::reverseStr(string s, int k)
 {
-	size_t start = 0;
-	while (start < s.size())
-	{
-		size_t end = min(start + k, s.size());
-		std::reverse(s.begin() + start, s.begin() + end);
-		start += 2 * k;
-	}
-	return s;
+    size_t start = 0;
+    while (start < s.size())
+    {
+        size_t end = min(start + k, s.size());
+        std::reverse(s.begin() + start, s.begin() + end);
+        start += 2 * k;
+    }
+    return s;
 }
 
 /// <summary>
@@ -2831,14 +2831,14 @@ string LeetCode::reverseStr(string s, int k)
 /// </summary>
 string LeetCode::makeAbbreviation(string& word, int k)
 {
-	if (word.size() - k - 1 > 1)
-	{
-		return word.substr(0, k) + to_string(word.size() - k - 1) + word.substr(word.size() - 1);
-	}
-	else
-	{
-		return word;
-	}
+    if (word.size() - k - 1 > 1)
+    {
+        return word.substr(0, k) + to_string(word.size() - k - 1) + word.substr(word.size() - 1);
+    }
+    else
+    {
+        return word;
+    }
 }
 
 /// <summary>
@@ -2870,32 +2870,32 @@ string LeetCode::makeAbbreviation(string& word, int k)
 /// </summary>
 vector<string> LeetCode::wordsAbbreviation(vector<string>& dict)
 {
-	vector<string> result;
-	vector<int> prefix;
-	unordered_map<string, vector<int>> dup_set;
-	for (string s : dict)
-	{
-		string abbr = makeAbbreviation(s, 1);
-		dup_set[abbr].push_back(result.size());
-		result.push_back(abbr);
-		prefix.push_back(1);
-	}
-	for (size_t i = 0; i < result.size(); i++)
-	{
-		while (dup_set[result[i]].size() > 1)
-		{
-			string abbr = result[i];
-			for (int k : dup_set[abbr])
-			{
-				prefix[k]++;
-				result[k] = makeAbbreviation(dict[k], prefix[k]);
-				dup_set[result[k]].push_back(k);
-			}
-			dup_set.erase(abbr);
-		}
-	}
+    vector<string> result;
+    vector<int> prefix;
+    unordered_map<string, vector<int>> dup_set;
+    for (string s : dict)
+    {
+        string abbr = makeAbbreviation(s, 1);
+        dup_set[abbr].push_back(result.size());
+        result.push_back(abbr);
+        prefix.push_back(1);
+    }
+    for (size_t i = 0; i < result.size(); i++)
+    {
+        while (dup_set[result[i]].size() > 1)
+        {
+            string abbr = result[i];
+            for (int k : dup_set[abbr])
+            {
+                prefix[k]++;
+                result[k] = makeAbbreviation(dict[k], prefix[k]);
+                dup_set[result[k]].push_back(k);
+            }
+            dup_set.erase(abbr);
+        }
+    }
 
-	return result;
+    return result;
 }
 
 /// <summary>
@@ -2926,20 +2926,20 @@ vector<string> LeetCode::wordsAbbreviation(vector<string>& dict)
 /// </summary>
 bool LeetCode::isSubsequence(string s, string t)
 {
-	size_t i = 0, j = 0;
-	while (i < s.size() && j < t.size())
-	{
-		if (s[i] == t[j])
-		{
-			i++; j++;
-		}
-		else
-		{
-			j++;
-		}
-	}
-	if (i == s.size()) return true;
-	else return false;
+    size_t i = 0, j = 0;
+    while (i < s.size() && j < t.size())
+    {
+        if (s[i] == t[j])
+        {
+            i++; j++;
+        }
+        else
+        {
+            j++;
+        }
+    }
+    if (i == s.size()) return true;
+    else return false;
 }
 
 /// <summary>
@@ -2970,15 +2970,15 @@ bool LeetCode::isSubsequence(string s, string t)
 /// </summary>
 int LeetCode::findLUSlength(string a, string b)
 {
-	if (a.size() == b.size())
-	{
-		if (isSubsequence(a, b)) return -1;
-		else return a.size();
-	}
-	else
-	{
-		return max(a.size(), b.size());
-	}
+    if (a.size() == b.size())
+    {
+        if (isSubsequence(a, b)) return -1;
+        else return a.size();
+    }
+    else
+    {
+        return max(a.size(), b.size());
+    }
 }
 
 /// <summary>
@@ -3005,37 +3005,37 @@ int LeetCode::findLUSlength(string a, string b)
 /// </summary>
 int LeetCode::findLUSlength(vector<string>& strs)
 {
-	map<int, map<string, int>> str_map;
-	for (string str : strs)
-	{
-		str_map[0 - str.size()][str]++;
-	}
-	unordered_set<string> str_set;
-	map<int, map<string, int>>::iterator itr;
-	for (itr = str_map.begin(); itr != str_map.end(); itr++)
-	{
-		for (auto str_cnt : itr->second)
-		{
-			// unique string in same length
-			if (str_cnt.second == 1)
-			{
-				// compare it with all the longer ones, see if it is subsequence
-				bool match = false;
-				for (string longer_str : str_set)
-				{
-					if (isSubsequence(str_cnt.first, longer_str))
-					{
-						match = true;
-						break;
-					}
-				}
-				if (match == false) return str_cnt.first.size();
-			}
-			str_set.insert(str_cnt.first);
-		}
-	}
-	// Can not find a unique string
-	return -1;
+    map<int, map<string, int>> str_map;
+    for (string str : strs)
+    {
+        str_map[0 - str.size()][str]++;
+    }
+    unordered_set<string> str_set;
+    map<int, map<string, int>>::iterator itr;
+    for (itr = str_map.begin(); itr != str_map.end(); itr++)
+    {
+        for (auto str_cnt : itr->second)
+        {
+            // unique string in same length
+            if (str_cnt.second == 1)
+            {
+                // compare it with all the longer ones, see if it is subsequence
+                bool match = false;
+                for (string longer_str : str_set)
+                {
+                    if (isSubsequence(str_cnt.first, longer_str))
+                    {
+                        match = true;
+                        break;
+                    }
+                }
+                if (match == false) return str_cnt.first.size();
+            }
+            str_set.insert(str_cnt.first);
+        }
+    }
+    // Can not find a unique string
+    return -1;
 }
 
 /// <summary>
@@ -3052,26 +3052,26 @@ int LeetCode::findLUSlength(vector<string>& strs)
 /// </summary>
 string LeetCode::reverseWordsIII(string s)
 {
-	int first = 0;
-	int last = 0;
-	while (last <= (int)s.size())
-	{
-		if (last < (int)s.size() && !isspace(s[last]))
-		{
-			last++;
-		}
-		else if (first < last)
-		{
-			std::reverse(s.begin() + first, s.begin() + last);
-			first = last + 1;
-			last = first;
-		}
-		else
-		{
-			last++;
-		}
-	}
-	return s;
+    int first = 0;
+    int last = 0;
+    while (last <= (int)s.size())
+    {
+        if (last < (int)s.size() && !isspace(s[last]))
+        {
+            last++;
+        }
+        else if (first < last)
+        {
+            std::reverse(s.begin() + first, s.begin() + last);
+            first = last + 1;
+            last = first;
+        }
+        else
+        {
+            last++;
+        }
+    }
+    return s;
 }
 
 /// <summary>
@@ -3097,19 +3097,19 @@ string LeetCode::reverseWordsIII(string s)
 /// </summary>
 bool LeetCode::checkRecord(string s)
 {
-	int absent = 0;
-	int late = 0;
-	for (char ch : s)
-	{
-		if (ch != 'L') late = 0;
-		if (ch == 'L') late++;
-		if (ch == 'A') absent++;
-		if ((absent > 1) || (late > 2))
-		{
-			return false;
-		}
-	}
-	return true;
+    int absent = 0;
+    int late = 0;
+    for (char ch : s)
+    {
+        if (ch != 'L') late = 0;
+        if (ch == 'L') late++;
+        if (ch == 'A') absent++;
+        if ((absent > 1) || (late > 2))
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 /// <summary>
@@ -3133,24 +3133,24 @@ bool LeetCode::checkRecord(string s)
 /// </summary>
 bool LeetCode::checkInclusion(string s1, string s2)
 {
-	vector<int> char_map(26);
-	for (size_t i = 0; i < s1.size(); i++)
-	{
-		char_map[s1[i] - 'a']++;
-	}
-	int first = 0, last = 0;
-	while (last < (int)s2.size())
-	{
-		if (last - first == s1.size()) break;
-		char_map[s2[last] - 'a']--;
-		while (char_map[s2[last] - 'a'] < 0)
-		{
-			char_map[s2[first] - 'a']++;
-			first++;
-		}
-		last++;
-	}
-	return (last - first == s1.size());
+    vector<int> char_map(26);
+    for (size_t i = 0; i < s1.size(); i++)
+    {
+        char_map[s1[i] - 'a']++;
+    }
+    int first = 0, last = 0;
+    while (last < (int)s2.size())
+    {
+        if (last - first == s1.size()) break;
+        char_map[s2[last] - 'a']--;
+        while (char_map[s2[last] - 'a'] < 0)
+        {
+            char_map[s2[first] - 'a']++;
+            first++;
+        }
+        last++;
+    }
+    return (last - first == s1.size());
 }
 
 /// <summary>
@@ -3208,43 +3208,43 @@ bool LeetCode::checkInclusion(string s1, string s2)
 /// </summary>
 vector<vector<string>> LeetCode::findDuplicate(vector<string>& paths)
 {
-	unordered_map<string, vector<string>> file_map;
-	vector<vector<string>> result;
-	for (string str : paths)
-	{
-		size_t first = 0;
-		size_t last = 0;
-		while ((last < str.size()) && (!isspace(str[last]))) last++;
-		string path = str.substr(first, last - first);
-		string file_name;
-		string file_content;
-		first = last;
-		while (last < str.size())
-		{
-			if (str[last] == '(')
-			{
-				file_name = str.substr(first, last - first);
-				first = last + 1;
-			}
-			else if (str[last] == ')')
-			{
-				file_content = str.substr(first, last - first);
-				first = last + 1;
-				file_map[file_content].push_back(path + "/" + file_name);
-			}
-			else if (isspace(str[last]))
-			{
-				first = last + 1;
-			}
+    unordered_map<string, vector<string>> file_map;
+    vector<vector<string>> result;
+    for (string str : paths)
+    {
+        size_t first = 0;
+        size_t last = 0;
+        while ((last < str.size()) && (!isspace(str[last]))) last++;
+        string path = str.substr(first, last - first);
+        string file_name;
+        string file_content;
+        first = last;
+        while (last < str.size())
+        {
+            if (str[last] == '(')
+            {
+                file_name = str.substr(first, last - first);
+                first = last + 1;
+            }
+            else if (str[last] == ')')
+            {
+                file_content = str.substr(first, last - first);
+                first = last + 1;
+                file_map[file_content].push_back(path + "/" + file_name);
+            }
+            else if (isspace(str[last]))
+            {
+                first = last + 1;
+            }
 
-			last++;
-		}
-	}
-	for (auto itr : file_map)
-	{
-		if (itr.second.size() > 1) result.push_back(itr.second);
-	}
-	return result;
+            last++;
+        }
+    }
+    for (auto itr : file_map)
+    {
+        if (itr.second.size() > 1) result.push_back(itr.second);
+    }
+    return result;
 }
 
 /// <summary>
@@ -3275,57 +3275,57 @@ vector<vector<string>> LeetCode::findDuplicate(vector<string>& paths)
 /// </summary>
 string LeetCode::addBoldTag(string s, vector<string>& dict)
 {
-	vector<pair<size_t, size_t>> bold_range;
-	priority_queue<pair<size_t, size_t>, vector<pair<size_t, size_t>>, std::greater<pair<size_t, size_t>>> word_range;
-	string result;
+    vector<pair<size_t, size_t>> bold_range;
+    priority_queue<pair<size_t, size_t>, vector<pair<size_t, size_t>>, std::greater<pair<size_t, size_t>>> word_range;
+    string result;
 
-	// search word and insert ranges
-	for (size_t i = 0; i < dict.size(); i++)
-	{
-		string word = dict[i];
-		size_t pos = 0;
-		while (true)
-		{
-			pos = s.find(word, pos);
-			if (pos == string::npos) break;
-			word_range.push(make_pair(pos, pos + word.size()));
-			pos += 1;
-		}
-	}
+    // search word and insert ranges
+    for (size_t i = 0; i < dict.size(); i++)
+    {
+        string word = dict[i];
+        size_t pos = 0;
+        while (true)
+        {
+            pos = s.find(word, pos);
+            if (pos == string::npos) break;
+            word_range.push(make_pair(pos, pos + word.size()));
+            pos += 1;
+        }
+    }
 
-	// merge ranges
-	while (!word_range.empty())
-	{
-		pair<size_t, size_t> range = word_range.top();
-		word_range.pop();
-		if (bold_range.empty() || range.first > bold_range.back().second)
-		{
-			bold_range.push_back(range);
-		}
-		else
-		{
-			size_t index = bold_range.size() - 1;
-			bold_range[index].first = min(range.first, bold_range[index].first);
-			bold_range[index].second = max(range.second, bold_range[index].second);
-		}
-	}
+    // merge ranges
+    while (!word_range.empty())
+    {
+        pair<size_t, size_t> range = word_range.top();
+        word_range.pop();
+        if (bold_range.empty() || range.first > bold_range.back().second)
+        {
+            bold_range.push_back(range);
+        }
+        else
+        {
+            size_t index = bold_range.size() - 1;
+            bold_range[index].first = min(range.first, bold_range[index].first);
+            bold_range[index].second = max(range.second, bold_range[index].second);
+        }
+    }
 
-	// output string
-	size_t pos = 0;
-	for (size_t i = 0; i <= s.size(); i++)
-	{
-		if (pos < bold_range.size() && i == bold_range[pos].first)
-		{
-			result.append("<b>");
-		}
-		else if (pos < bold_range.size() && i == bold_range[pos].second)
-		{
-			result.append("</b>");
-			pos++;
-		}
-		if (i < s.size()) result.push_back(s[i]);
-	}
-	return result;
+    // output string
+    size_t pos = 0;
+    for (size_t i = 0; i <= s.size(); i++)
+    {
+        if (pos < bold_range.size() && i == bold_range[pos].first)
+        {
+            result.append("<b>");
+        }
+        else if (pos < bold_range.size() && i == bold_range[pos].second)
+        {
+            result.append("</b>");
+            pos++;
+        }
+        if (i < s.size()) result.push_back(s[i]);
+    }
+    return result;
 }
 
 /// <summary>
@@ -3333,29 +3333,29 @@ string LeetCode::addBoldTag(string s, vector<string>& dict)
 /// </summary>
 string LeetCode::getTag(string code, size_t &pos)
 {
-	string tag;
-	while (pos < code.size() && (code[pos] != '>'))
-	{
-		char ch = code[pos];
-		if (isupper(ch))
-		{
-			tag.push_back(ch);
-		}
-		else
-		{
-			return "";
-		}
-		if (tag.size() > 9) return "";
-		pos++;
-	}
-	if (pos < code.size() && (code[pos] == '>'))
-	{
-		return tag;
-	}
-	else
-	{
-		return "";
-	}
+    string tag;
+    while (pos < code.size() && (code[pos] != '>'))
+    {
+        char ch = code[pos];
+        if (isupper(ch))
+        {
+            tag.push_back(ch);
+        }
+        else
+        {
+            return "";
+        }
+        if (tag.size() > 9) return "";
+        pos++;
+    }
+    if (pos < code.size() && (code[pos] == '>'))
+    {
+        return tag;
+    }
+    else
+    {
+        return "";
+    }
 }
 
 /// <summary>
@@ -3439,67 +3439,67 @@ string LeetCode::getTag(string code, size_t &pos)
 /// </summary>
 bool LeetCode::isValid(string code)
 {
-	enum class HtmlState { Start, TagContent, DataContent, End };
+    enum class HtmlState { Start, TagContent, DataContent, End };
 
-	HtmlState state = HtmlState::Start;
-	stack<string> tag_stack;
-	for (size_t i = 0; i < code.size(); i++)
-	{
-		if (isspace(code[i])) continue;
+    HtmlState state = HtmlState::Start;
+    stack<string> tag_stack;
+    for (size_t i = 0; i < code.size(); i++)
+    {
+        if (isspace(code[i])) continue;
 
-		if (code[i] == '<')
-		{
-			if (state == HtmlState::DataContent) continue;
-			if (state == HtmlState::End) return false;
-			if (code.substr(i, 9) == "<![CDATA[")
-			{
-				if (state != HtmlState::TagContent) return false;
-				i += (9 - 1);
-				state = HtmlState::DataContent;
-			}
-			else if (code.substr(i, 2) == "</")
-			{
-				// in CData content we do not care
-				if (state == HtmlState::TagContent)
-				{
-					i += 2;
-					string tag = getTag(code, i);
+        if (code[i] == '<')
+        {
+            if (state == HtmlState::DataContent) continue;
+            if (state == HtmlState::End) return false;
+            if (code.substr(i, 9) == "<![CDATA[")
+            {
+                if (state != HtmlState::TagContent) return false;
+                i += (9 - 1);
+                state = HtmlState::DataContent;
+            }
+            else if (code.substr(i, 2) == "</")
+            {
+                // in CData content we do not care
+                if (state == HtmlState::TagContent)
+                {
+                    i += 2;
+                    string tag = getTag(code, i);
 
-					// unmatch tag?
-					if (tag != tag_stack.top()) return false;
+                    // unmatch tag?
+                    if (tag != tag_stack.top()) return false;
 
-					tag_stack.pop();
-					// out of tag?
-					if (tag_stack.empty()) state = HtmlState::End;
+                    tag_stack.pop();
+                    // out of tag?
+                    if (tag_stack.empty()) state = HtmlState::End;
 
-				}
-				// unmatched end tag
-				else
-				{
-					return false;
-				}
-			}
-			else
-			{
-				i++;
-				string tag = getTag(code, i);
-				if (tag.empty()) return false;
-				else tag_stack.push(tag);
-				state = HtmlState::TagContent;
-			}
-		}
-		else if ((state == HtmlState::DataContent) && (code.substr(i, 3) == "]]>"))
-		{
-			i += (3 - 1);
-			state = HtmlState::TagContent;
-		}
-		else if (state == HtmlState::Start || state == HtmlState::End)
-		{
-			return false;
-		}
-	}
-	if (state == HtmlState::End) return true;
-	else return false;
+                }
+                // unmatched end tag
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                i++;
+                string tag = getTag(code, i);
+                if (tag.empty()) return false;
+                else tag_stack.push(tag);
+                state = HtmlState::TagContent;
+            }
+        }
+        else if ((state == HtmlState::DataContent) && (code.substr(i, 3) == "]]>"))
+        {
+            i += (3 - 1);
+            state = HtmlState::TagContent;
+        }
+        else if (state == HtmlState::Start || state == HtmlState::End)
+        {
+            return false;
+        }
+    }
+    if (state == HtmlState::End) return true;
+    else return false;
 }
 
 /// <summary>
@@ -3536,63 +3536,63 @@ bool LeetCode::isValid(string code)
 /// </summary>
 string LeetCode::solveEquation(string equation)
 {
-	int coefficient = 0;
-	int constant = 0;
-	string sign = "+";
-	string equal = "";
-	string token = "";
-	string result;
+    int coefficient = 0;
+    int constant = 0;
+    string sign = "+";
+    string equal = "";
+    string token = "";
+    string result;
 
-	for (size_t i = 0; i <= equation.size(); i++)
-	{
-		if (i == equation.size())
-		{
-			if (!token.empty()) constant += (equal == "=" ? 1 : -1) * (sign == "+" ? 1 : -1) * atoi(token.c_str());
-			token.clear();
-		}
-		else if ((equation[i] == '+') || (equation[i] == '-'))
-		{
-			if (!token.empty()) constant += (equal == "=" ? 1 : -1) * (sign == "+" ? 1 : -1) * atoi(token.c_str());
-			token.clear();
-			sign.clear();
-			sign.push_back(equation[i]);
-		}
-		else if (equation[i] == '=')
-		{
-			if (!token.empty()) constant += (equal == "=" ? 1 : -1) * (sign == "+" ? 1 : -1) * atoi(token.c_str());
-			token.clear();
-			equal = "=";
-			sign = "+";
-		}
-		else if (equation[i] == 'x')
-		{
-			if (token.empty())
-			{
-				coefficient += (equal == "=" ? -1 : 1) * (sign == "+" ? 1 : -1) * 1;
-			}
-			else
-			{
-				coefficient += (equal == "=" ? -1 : 1) * (sign == "+" ? 1 : -1) * atoi(token.c_str());
-			}
-			token.clear();
-		}
-		else if (isdigit(equation[i]))
-		{
-			token.push_back(equation[i]);
-		}
-	}
+    for (size_t i = 0; i <= equation.size(); i++)
+    {
+        if (i == equation.size())
+        {
+            if (!token.empty()) constant += (equal == "=" ? 1 : -1) * (sign == "+" ? 1 : -1) * atoi(token.c_str());
+            token.clear();
+        }
+        else if ((equation[i] == '+') || (equation[i] == '-'))
+        {
+            if (!token.empty()) constant += (equal == "=" ? 1 : -1) * (sign == "+" ? 1 : -1) * atoi(token.c_str());
+            token.clear();
+            sign.clear();
+            sign.push_back(equation[i]);
+        }
+        else if (equation[i] == '=')
+        {
+            if (!token.empty()) constant += (equal == "=" ? 1 : -1) * (sign == "+" ? 1 : -1) * atoi(token.c_str());
+            token.clear();
+            equal = "=";
+            sign = "+";
+        }
+        else if (equation[i] == 'x')
+        {
+            if (token.empty())
+            {
+                coefficient += (equal == "=" ? -1 : 1) * (sign == "+" ? 1 : -1) * 1;
+            }
+            else
+            {
+                coefficient += (equal == "=" ? -1 : 1) * (sign == "+" ? 1 : -1) * atoi(token.c_str());
+            }
+            token.clear();
+        }
+        else if (isdigit(equation[i]))
+        {
+            token.push_back(equation[i]);
+        }
+    }
 
-	if (coefficient == 0)
-	{
-		if (constant != 0) result = "No solution";
-		else result = "Infinite solutions";
+    if (coefficient == 0)
+    {
+        if (constant != 0) result = "No solution";
+        else result = "Infinite solutions";
 
-	}
-	else
-	{
-		result = "x=" + to_string(constant / coefficient);
-	}
-	return result;
+    }
+    else
+    {
+        result = "x=" + to_string(constant / coefficient);
+    }
+    return result;
 }
 
 /// <summary>
@@ -3600,17 +3600,17 @@ string LeetCode::solveEquation(string equation)
 /// </summary>
 string LeetCode::replaceWord(unordered_map<int, unordered_set<string>>&dict_map, const string&word)
 {
-	string result = word;
-	for (size_t i = 0; i < word.size(); i++)
-	{
-		string sub_word = word.substr(0, i + 1);
-		if (dict_map[sub_word.size()].count(sub_word) > 0)
-		{
-			result = sub_word;
-			break;
-		}
-	}
-	return result;
+    string result = word;
+    for (size_t i = 0; i < word.size(); i++)
+    {
+        string sub_word = word.substr(0, i + 1);
+        if (dict_map[sub_word.size()].count(sub_word) > 0)
+        {
+            result = sub_word;
+            break;
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -3639,28 +3639,28 @@ string LeetCode::replaceWord(unordered_map<int, unordered_set<string>>&dict_map,
 /// </summary>
 string LeetCode::replaceWords(vector<string>& dict, string sentence)
 {
-	string result;
-	unordered_map<int, unordered_set<string>> dict_map;
-	for (size_t i = 0; i < dict.size(); i++)
-	{
-		dict_map[dict[i].size()].insert(dict[i]);
-	}
-	int first = 0, last = 0;
-	while (last <= (int)sentence.size())
-	{
-		if (last == sentence.size() || isspace(sentence[last]))
-		{
-			if (first < last)
-			{
-				if (!result.empty()) result.push_back(' ');
-				string word = replaceWord(dict_map, sentence.substr(first, last - first));
-				result.append(word);
-			}
-			first = last + 1;
-		}
-		last++;
-	}
-	return result;
+    string result;
+    unordered_map<int, unordered_set<string>> dict_map;
+    for (size_t i = 0; i < dict.size(); i++)
+    {
+        dict_map[dict[i].size()].insert(dict[i]);
+    }
+    int first = 0, last = 0;
+    while (last <= (int)sentence.size())
+    {
+        if (last == sentence.size() || isspace(sentence[last]))
+        {
+            if (first < last)
+            {
+                if (!result.empty()) result.push_back(' ');
+                string word = replaceWord(dict_map, sentence.substr(first, last - first));
+                result.append(word);
+            }
+            first = last + 1;
+        }
+        last++;
+    }
+    return result;
 }
 
 /// <summary>
@@ -3679,43 +3679,43 @@ string LeetCode::replaceWords(vector<string>& dict, string sentence)
 /// </summary>
 int LeetCode::repeatedStringMatch(string A, string B)
 {
-	int repeat = 0;
-	int index_a = 0, index_b = 0;
-	if (B.empty()) return 1;
-	if (A.empty()) return -1;
+    int repeat = 0;
+    int index_a = 0, index_b = 0;
+    if (B.empty()) return 1;
+    if (A.empty()) return -1;
 
-	while (index_b < (int)B.size())
-	{
-		if (index_a == A.size())
-		{
-			if (index_b == 0) return -1;
-			else
-			{
-				repeat++;
-				index_a = 0;
-			}
-		}
-		if (A[index_a] == B[index_b])
-		{
-			index_a++;
-			index_b++;
-		}
-		else
-		{
-			if (repeat > 0)
-			{
-				if (index_b > (int)A.size()) return -1;
-				// deduct remaining first
-				index_b -= index_a;
-				// find start of index_a
-				index_a = A.size() - index_b;
-				repeat--;
-			}
-			index_b = 0;
-			index_a++;
-		}
-	}
-	return repeat + 1;
+    while (index_b < (int)B.size())
+    {
+        if (index_a == A.size())
+        {
+            if (index_b == 0) return -1;
+            else
+            {
+                repeat++;
+                index_a = 0;
+            }
+        }
+        if (A[index_a] == B[index_b])
+        {
+            index_a++;
+            index_b++;
+        }
+        else
+        {
+            if (repeat > 0)
+            {
+                if (index_b > (int)A.size()) return -1;
+                // deduct remaining first
+                index_b -= index_a;
+                // find start of index_a
+                index_a = A.size() - index_b;
+                repeat--;
+            }
+            index_b = 0;
+            index_a++;
+        }
+    }
+    return repeat + 1;
 }
 
 /// <summary>
@@ -3752,33 +3752,33 @@ int LeetCode::repeatedStringMatch(string A, string B)
 /// </summary>
 string LeetCode::longestWord(vector<string>& words)
 {
-	unordered_map<int, set<string>> word_map;
-	for (string word : words)
-	{
-		word_map[word.size() - 1].insert(word);
-	}
-	int length = 1;
-	while (true)
-	{
-		set<string> candidates;
-		for (string word : word_map[length])
-		{
-			// the string with (0, length -1) exist?
-			if (word_map[length - 1].count(word.substr(0, length)) > 0)
-			{
-				candidates.insert(word);
-			}
-		}
-		word_map[length] = candidates;
+    unordered_map<int, set<string>> word_map;
+    for (string word : words)
+    {
+        word_map[word.size() - 1].insert(word);
+    }
+    int length = 1;
+    while (true)
+    {
+        set<string> candidates;
+        for (string word : word_map[length])
+        {
+            // the string with (0, length -1) exist?
+            if (word_map[length - 1].count(word.substr(0, length)) > 0)
+            {
+                candidates.insert(word);
+            }
+        }
+        word_map[length] = candidates;
 
-		// when candidates is empty, no more expansion
-		if (candidates.empty()) break;
-		length++;
-	}
-	// if no result in length - 1, which means no word with length as 1, 
-	// return empty string
-	if (word_map[length - 1].empty()) return "";
-	else return  *word_map[length - 1].begin();
+        // when candidates is empty, no more expansion
+        if (candidates.empty()) break;
+        length++;
+    }
+    // if no result in length - 1, which means no word with length as 1, 
+    // return empty string
+    if (word_map[length - 1].empty()) return "";
+    else return  *word_map[length - 1].begin();
 }
 
 /// <summary>
@@ -3877,63 +3877,63 @@ string LeetCode::longestWord(vector<string>& words)
 /// </summary>
 vector<string> LeetCode::removeComments(vector<string>& source)
 {
-	vector<string> result;
-	string line;
-	enum class CodeState
-	{
-		NONE, SINGLE_LINE_COMMENT, MULTI_LINE_COMMENT
-	};
-	CodeState state = CodeState::NONE;
-	for (size_t i = 0; i < source.size(); i++)
-	{
-		char prev_ch = 0;
-		for (size_t j = 0; j < source[i].size(); j++)
-		{
-			if (state == CodeState::NONE)
-			{
-				// check multi line comments start
-				if ((source[i][j] == '*') && (prev_ch == '/'))
-				{
-					line.pop_back();
-					state = CodeState::MULTI_LINE_COMMENT;
-					prev_ch = 0;
-				}
-				// single line comment
-				else if ((source[i][j] == '/') && (prev_ch == '/'))
-				{
-					line.pop_back();
-					state = CodeState::SINGLE_LINE_COMMENT;
-					prev_ch = 0;
-				}
-				else
-				{
-					line.push_back(source[i][j]);
-					prev_ch = source[i][j];
-				}
-			}
-			else if (state == CodeState::MULTI_LINE_COMMENT)
-			{
-				// check multi line comments end
-				if ((source[i][j] == '/') && (prev_ch == '*'))
-				{
-					state = CodeState::NONE;
-					prev_ch = 0;
-				}
-				else prev_ch = source[i][j];
-			}
-		}
-		// cancel single line comment state
-		if (state == CodeState::SINGLE_LINE_COMMENT)
-		{
-			state = CodeState::NONE;
-		}
-		if ((state != CodeState::MULTI_LINE_COMMENT) && (!line.empty()))
-		{
-			result.push_back(line);
-			line.clear();
-		}
-	}
-	return result;
+    vector<string> result;
+    string line;
+    enum class CodeState
+    {
+        NONE, SINGLE_LINE_COMMENT, MULTI_LINE_COMMENT
+    };
+    CodeState state = CodeState::NONE;
+    for (size_t i = 0; i < source.size(); i++)
+    {
+        char prev_ch = 0;
+        for (size_t j = 0; j < source[i].size(); j++)
+        {
+            if (state == CodeState::NONE)
+            {
+                // check multi line comments start
+                if ((source[i][j] == '*') && (prev_ch == '/'))
+                {
+                    line.pop_back();
+                    state = CodeState::MULTI_LINE_COMMENT;
+                    prev_ch = 0;
+                }
+                // single line comment
+                else if ((source[i][j] == '/') && (prev_ch == '/'))
+                {
+                    line.pop_back();
+                    state = CodeState::SINGLE_LINE_COMMENT;
+                    prev_ch = 0;
+                }
+                else
+                {
+                    line.push_back(source[i][j]);
+                    prev_ch = source[i][j];
+                }
+            }
+            else if (state == CodeState::MULTI_LINE_COMMENT)
+            {
+                // check multi line comments end
+                if ((source[i][j] == '/') && (prev_ch == '*'))
+                {
+                    state = CodeState::NONE;
+                    prev_ch = 0;
+                }
+                else prev_ch = source[i][j];
+            }
+        }
+        // cancel single line comment state
+        if (state == CodeState::SINGLE_LINE_COMMENT)
+        {
+            state = CodeState::NONE;
+        }
+        if ((state != CodeState::MULTI_LINE_COMMENT) && (!line.empty()))
+        {
+            result.push_back(line);
+            line.clear();
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -3941,25 +3941,25 @@ vector<string> LeetCode::removeComments(vector<string>& source)
 /// </summary>
 string LeetCode::parseAtom(string &formula, int& index)
 {
-	string token;
-	while (index < (int)formula.size())
-	{
-		if (isupper(formula[index]))
-		{
-			if (token.empty()) token.push_back(formula[index]);
-			else break;
-		}
-		else if (islower(formula[index]))
-		{
-			token.push_back(formula[index]);
-		}
-		else
-		{
-			break;
-		}
-		index++;
-	}
-	return token;
+    string token;
+    while (index < (int)formula.size())
+    {
+        if (isupper(formula[index]))
+        {
+            if (token.empty()) token.push_back(formula[index]);
+            else break;
+        }
+        else if (islower(formula[index]))
+        {
+            token.push_back(formula[index]);
+        }
+        else
+        {
+            break;
+        }
+        index++;
+    }
+    return token;
 }
 
 /// <summary>
@@ -3967,14 +3967,14 @@ string LeetCode::parseAtom(string &formula, int& index)
 /// </summary>
 int LeetCode::parseAtomCount(string &formula, int& index)
 {
-	string token;
-	while (isdigit(formula[index]))
-	{
-		token.push_back(formula[index]);
-		index++;
-	}
-	int count = atoi(token.c_str());
-	return count;
+    string token;
+    while (isdigit(formula[index]))
+    {
+        token.push_back(formula[index]);
+        index++;
+    }
+    int count = atoi(token.c_str());
+    return count;
 }
 
 
@@ -3983,10 +3983,10 @@ int LeetCode::parseAtomCount(string &formula, int& index)
 /// </summary>
 void LeetCode::multiplyFormula(map<string, int> &atom_count, int& count)
 {
-	for (auto itr : atom_count)
-	{
-		atom_count[itr.first] = itr.second * count;
-	}
+    for (auto itr : atom_count)
+    {
+        atom_count[itr.first] = itr.second * count;
+    }
 }
 
 /// <summary>
@@ -3994,12 +3994,12 @@ void LeetCode::multiplyFormula(map<string, int> &atom_count, int& count)
 /// </summary>
 void LeetCode::mergeFormula(map<string, int> &atom_count, vector<map<string, int>>& formula_array)
 {
-	int index = formula_array.size() - 1;
-	for (auto itr : atom_count)
-	{
-		formula_array[index][itr.first] += atom_count[itr.first];
-	}
-	atom_count.clear();
+    int index = formula_array.size() - 1;
+    for (auto itr : atom_count)
+    {
+        formula_array[index][itr.first] += atom_count[itr.first];
+    }
+    atom_count.clear();
 }
 
 /// <summary>
@@ -4053,56 +4053,56 @@ void LeetCode::mergeFormula(map<string, int> &atom_count, vector<map<string, int
 /// </summary>
 string LeetCode::countOfAtoms(string formula)
 {
-	string result;
-	int index = 0;
-	map<string, int> atom_count;
-	vector<map<string, int>> formula_array;
-	formula_array.push_back(atom_count);
+    string result;
+    int index = 0;
+    map<string, int> atom_count;
+    vector<map<string, int>> formula_array;
+    formula_array.push_back(atom_count);
 
-	while (index <= (int)formula.size())
-	{
-		if (index == formula.size())
-		{
-			mergeFormula(atom_count, formula_array);
-			index++;
-		}
-		else if (isupper(formula[index]))
-		{
-			mergeFormula(atom_count, formula_array);
-			string atom = parseAtom(formula, index);
-			atom_count[atom] = 1;
-		}
-		else if (isdigit(formula[index]))
-		{
-			int count = parseAtomCount(formula, index);
-			multiplyFormula(atom_count, count);
-			mergeFormula(atom_count, formula_array);
-		}
-		else if (formula[index] == '(')
-		{
-			mergeFormula(atom_count, formula_array);
-			// push an empty 
-			formula_array.push_back(atom_count);
-			index++;
-		}
-		else if (formula[index] == ')')
-		{
-			mergeFormula(atom_count, formula_array);
-			atom_count = formula_array.back();
-			formula_array.pop_back();
-			index++;
-		}
-		else
-		{
-			index++;
-		}
-	}
-	for (auto itr : formula_array.back())
-	{
-		result += itr.first;
-		if (itr.second > 1) result += to_string(itr.second);
-	}
-	return result;
+    while (index <= (int)formula.size())
+    {
+        if (index == formula.size())
+        {
+            mergeFormula(atom_count, formula_array);
+            index++;
+        }
+        else if (isupper(formula[index]))
+        {
+            mergeFormula(atom_count, formula_array);
+            string atom = parseAtom(formula, index);
+            atom_count[atom] = 1;
+        }
+        else if (isdigit(formula[index]))
+        {
+            int count = parseAtomCount(formula, index);
+            multiplyFormula(atom_count, count);
+            mergeFormula(atom_count, formula_array);
+        }
+        else if (formula[index] == '(')
+        {
+            mergeFormula(atom_count, formula_array);
+            // push an empty 
+            formula_array.push_back(atom_count);
+            index++;
+        }
+        else if (formula[index] == ')')
+        {
+            mergeFormula(atom_count, formula_array);
+            atom_count = formula_array.back();
+            formula_array.pop_back();
+            index++;
+        }
+        else
+        {
+            index++;
+        }
+    }
+    for (auto itr : formula_array.back())
+    {
+        result += itr.first;
+        if (itr.second > 1) result += to_string(itr.second);
+    }
+    return result;
 }
 
 /// <summary>
@@ -4110,31 +4110,31 @@ string LeetCode::countOfAtoms(string formula)
 /// </summary>
 string LeetCode::parseLispToken(string& expression, int& index)
 {
-	string result;
-	while (index < (int)expression.size())
-	{
-		if (isspace(expression[index]))
-		{
-			index++;
-			if (!result.empty()) break;
-		}
-		else if ((expression[index] == '(') || (expression[index] == ')'))
-		{
-			if (!result.empty()) break;
-			else
-			{
-				result.push_back(expression[index]);
-				index++;
-				break;
-			}
-		}
-		else
-		{
-			result.push_back(expression[index]);
-			index++;
-		}
-	}
-	return result;
+    string result;
+    while (index < (int)expression.size())
+    {
+        if (isspace(expression[index]))
+        {
+            index++;
+            if (!result.empty()) break;
+        }
+        else if ((expression[index] == '(') || (expression[index] == ')'))
+        {
+            if (!result.empty()) break;
+            else
+            {
+                result.push_back(expression[index]);
+                index++;
+                break;
+            }
+        }
+        else
+        {
+            result.push_back(expression[index]);
+            index++;
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -4142,27 +4142,27 @@ string LeetCode::parseLispToken(string& expression, int& index)
 /// </summary>
 int LeetCode::calculateLispCommand(string& command, vector<string>& parameters, unordered_map<string, int>&variables)
 {
-	int result = 0;
-	for (size_t i = 0; i < parameters.size(); i++)
-	{
-		if (islower(parameters[i][0]))
-		{
-			parameters[i] = to_string(variables[parameters[i]]);
-		}
-	}
-	if (command == "add")
-	{
-		result = atoi(parameters[0].c_str()) + atoi(parameters[1].c_str());
-	}
-	else if (command == "mult")
-	{
-		result = atoi(parameters[0].c_str()) * atoi(parameters[1].c_str());
-	}
-	else if (command == "let")
-	{
-		result = atoi(parameters[0].c_str());
-	}
-	return result;
+    int result = 0;
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        if (islower(parameters[i][0]))
+        {
+            parameters[i] = to_string(variables[parameters[i]]);
+        }
+    }
+    if (command == "add")
+    {
+        result = atoi(parameters[0].c_str()) + atoi(parameters[1].c_str());
+    }
+    else if (command == "mult")
+    {
+        result = atoi(parameters[0].c_str()) * atoi(parameters[1].c_str());
+    }
+    else if (command == "let")
+    {
+        result = atoi(parameters[0].c_str());
+    }
+    return result;
 }
 
 /// <summary>
@@ -4170,46 +4170,46 @@ int LeetCode::calculateLispCommand(string& command, vector<string>& parameters, 
 /// </summary>
 int LeetCode::processLispCommand(string& expression, int& index, unordered_map<string, int> variables)
 {
-	string command;
-	vector<string> parameters;
+    string command;
+    vector<string> parameters;
 
-	while (index < (int)expression.size())
-	{
-		string token = parseLispToken(expression, index);
-		if (token == ")")
-		{
-			if (!command.empty()) break;
-		}
-		else if (token == "(")
-		{
-			if (!command.empty())
-			{
-				int parameter = processLispCommand(expression, index, variables);
-				parameters.push_back(to_string(parameter));
-			}
-		}
-		else if (command.empty())
-		{
-			command = token;
-		}
-		else
-		{
-			parameters.push_back(token);
-		}
-		if ((command == "let") && (parameters.size() == 2))
-		{
-			if (islower(parameters[1][0]))
-			{
-				variables[parameters[0]] = variables[parameters[1]];
-			}
-			else
-			{
-				variables[parameters[0]] = atoi(parameters[1].c_str());
-			}
-			parameters.clear();
-		}
-	}
-	return calculateLispCommand(command, parameters, variables);
+    while (index < (int)expression.size())
+    {
+        string token = parseLispToken(expression, index);
+        if (token == ")")
+        {
+            if (!command.empty()) break;
+        }
+        else if (token == "(")
+        {
+            if (!command.empty())
+            {
+                int parameter = processLispCommand(expression, index, variables);
+                parameters.push_back(to_string(parameter));
+            }
+        }
+        else if (command.empty())
+        {
+            command = token;
+        }
+        else
+        {
+            parameters.push_back(token);
+        }
+        if ((command == "let") && (parameters.size() == 2))
+        {
+            if (islower(parameters[1][0]))
+            {
+                variables[parameters[0]] = variables[parameters[1]];
+            }
+            else
+            {
+                variables[parameters[0]] = atoi(parameters[1].c_str());
+            }
+            parameters.clear();
+        }
+    }
+    return calculateLispCommand(command, parameters, variables);
 }
 
 /// <summary>
@@ -4301,9 +4301,9 @@ int LeetCode::processLispCommand(string& expression, int& index, unordered_map<s
 /// </summary>
 int LeetCode::evaluate(string expression)
 {
-	int index = 0;
-	unordered_map<string, int> variables;
-	return processLispCommand(expression, index, variables);
+    int index = 0;
+    unordered_map<string, int> variables;
+    return processLispCommand(expression, index, variables);
 }
 
 /// <summary>
@@ -4311,21 +4311,21 @@ int LeetCode::evaluate(string expression)
 /// </summary>
 int LeetCode::processLispExpression(vector<string>& tokens, int& index, unordered_map<string, int> variables)
 {
-	int result;
-	if (islower(tokens[index][0]))
-	{
-		result = variables[tokens[index]];
-	}
-	else if (tokens[index] == "(")
-	{
-		result = processLispCommand(tokens, index, variables);
-	}
-	else
-	{
-		result = atoi(tokens[index].c_str());
-	}
-	index++;
-	return result;
+    int result;
+    if (islower(tokens[index][0]))
+    {
+        result = variables[tokens[index]];
+    }
+    else if (tokens[index] == "(")
+    {
+        result = processLispCommand(tokens, index, variables);
+    }
+    else
+    {
+        result = atoi(tokens[index].c_str());
+    }
+    index++;
+    return result;
 }
 
 /// <summary>
@@ -4333,50 +4333,50 @@ int LeetCode::processLispExpression(vector<string>& tokens, int& index, unordere
 /// </summary>
 int LeetCode::processLispCommand(vector<string>& tokens, int& index, unordered_map<string, int> variables)
 {
-	if (tokens[index] == "(") index++;
-	string command = tokens[index];
-	index++;
-	int result = 0;
-	while (tokens[index] != ")")
-	{
-		if (command == "add")
-		{
-			result = processLispExpression(tokens, index, variables) +
-				processLispExpression(tokens, index, variables);
-		}
-		else if (command == "mult")
-		{
-			result = processLispExpression(tokens, index, variables) *
-				processLispExpression(tokens, index, variables);
-		}
-		else if (command == "let")
-		{
-			int count = 0;
-			string variable;
-			int value = 0;
-			while (tokens[index] != ")")
-			{
-				if (islower(tokens[index][0]) && (count == 0))
-				{
-					variable = tokens[index];
-					value = variables[variable];
-					index++;
-				}
-				else
-				{
-					value = processLispExpression(tokens, index, variables);
-				}
-				count++;
-				if (count == 2)
-				{
-					variables[variable] = value;
-					count = 0;
-				}
-			}
-			result = value;
-		}
-	}
-	return result;
+    if (tokens[index] == "(") index++;
+    string command = tokens[index];
+    index++;
+    int result = 0;
+    while (tokens[index] != ")")
+    {
+        if (command == "add")
+        {
+            result = processLispExpression(tokens, index, variables) +
+                processLispExpression(tokens, index, variables);
+        }
+        else if (command == "mult")
+        {
+            result = processLispExpression(tokens, index, variables) *
+                processLispExpression(tokens, index, variables);
+        }
+        else if (command == "let")
+        {
+            int count = 0;
+            string variable;
+            int value = 0;
+            while (tokens[index] != ")")
+            {
+                if (islower(tokens[index][0]) && (count == 0))
+                {
+                    variable = tokens[index];
+                    value = variables[variable];
+                    index++;
+                }
+                else
+                {
+                    value = processLispExpression(tokens, index, variables);
+                }
+                count++;
+                if (count == 2)
+                {
+                    variables[variable] = value;
+                    count = 0;
+                }
+            }
+            result = value;
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -4384,16 +4384,16 @@ int LeetCode::processLispCommand(vector<string>& tokens, int& index, unordered_m
 /// </summary>
 int LeetCode::evaluate_V2(string expression)
 {
-	int index = 0;
-	vector<string> tokens;
-	while (index < (int)expression.size())
-	{
-		string token = parseLispToken(expression, index);
-		tokens.push_back(token);
-	}
-	unordered_map<string, int> variables;
-	index = 0;
-	return processLispCommand(tokens, index, variables);
+    int index = 0;
+    vector<string> tokens;
+    while (index < (int)expression.size())
+    {
+        string token = parseLispToken(expression, index);
+        tokens.push_back(token);
+    }
+    unordered_map<string, int> variables;
+    index = 0;
+    return processLispCommand(tokens, index, variables);
 }
 
 /// <summary>
@@ -4401,21 +4401,21 @@ int LeetCode::evaluate_V2(string expression)
 /// </summary>
 unsigned int LeetCode::convertIpV4ToInt(string ipV4)
 {
-	unsigned int ipaddress = 0;
-	string token;
-	for (size_t i = 0; i <= ipV4.size(); i++)
-	{
-		if ((i == ipV4.size() || ipV4[i] == '.') && (!token.empty()))
-		{
-			ipaddress = ipaddress * 256 + atoi(token.c_str());
-			token.clear();
-		}
-		else if (isdigit(ipV4[i]))
-		{
-			token.push_back(ipV4[i]);
-		}
-	}
-	return ipaddress;
+    unsigned int ipaddress = 0;
+    string token;
+    for (size_t i = 0; i <= ipV4.size(); i++)
+    {
+        if ((i == ipV4.size() || ipV4[i] == '.') && (!token.empty()))
+        {
+            ipaddress = ipaddress * 256 + atoi(token.c_str());
+            token.clear();
+        }
+        else if (isdigit(ipV4[i]))
+        {
+            token.push_back(ipV4[i]);
+        }
+    }
+    return ipaddress;
 }
 
 /// <summary>
@@ -4423,20 +4423,20 @@ unsigned int LeetCode::convertIpV4ToInt(string ipV4)
 /// </summary>
 string LeetCode::convertIntToIpV4(unsigned int ipV4)
 {
-	string ipaddress;
-	for (size_t i = 0; i < 4; i++)
-	{
-		if (ipaddress.empty())
-		{
-			ipaddress = to_string(ipV4 % 256);
-		}
-		else
-		{
-			ipaddress = to_string(ipV4 % 256) + "." + ipaddress;
-		}
-		ipV4 /= 256;
-	}
-	return ipaddress;
+    string ipaddress;
+    for (size_t i = 0; i < 4; i++)
+    {
+        if (ipaddress.empty())
+        {
+            ipaddress = to_string(ipV4 % 256);
+        }
+        else
+        {
+            ipaddress = to_string(ipV4 % 256) + "." + ipaddress;
+        }
+        ipV4 /= 256;
+    }
+    return ipaddress;
 }
 
 /// <summary>
@@ -4499,26 +4499,26 @@ string LeetCode::convertIntToIpV4(unsigned int ipV4)
 /// </summary>
 vector<string> LeetCode::ipToCIDR(string ip, int range)
 {
-	vector<string> result;
-	unsigned int ipV4Int = convertIpV4ToInt(ip);
-	while (range > 0)
-	{
-		// get the lowest significant bit from IP address
-		unsigned int low_bit = ipV4Int & (-(int)ipV4Int);
-		// calculate prefix
-		unsigned int prefix = 32 - (unsigned int)log2(low_bit);
-		// if lowerest bit cover too many IP address, reduce it
-		while (low_bit > (unsigned int)range)
-		{
-			low_bit >>= 1;
-			prefix++;
-		}
-		string ipaddress = convertIntToIpV4(ipV4Int);
-		result.push_back(ipaddress + "/" + to_string(prefix));
-		ipV4Int += low_bit;
-		range -= low_bit;
-	}
-	return result;
+    vector<string> result;
+    unsigned int ipV4Int = convertIpV4ToInt(ip);
+    while (range > 0)
+    {
+        // get the lowest significant bit from IP address
+        unsigned int low_bit = ipV4Int & (-(int)ipV4Int);
+        // calculate prefix
+        unsigned int prefix = 32 - (unsigned int)log2(low_bit);
+        // if lowerest bit cover too many IP address, reduce it
+        while (low_bit > (unsigned int)range)
+        {
+            low_bit >>= 1;
+            prefix++;
+        }
+        string ipaddress = convertIntToIpV4(ipV4Int);
+        result.push_back(ipaddress + "/" + to_string(prefix));
+        ipV4Int += low_bit;
+        range -= low_bit;
+    }
+    return result;
 }
 
 /// <summary>
@@ -4551,38 +4551,38 @@ vector<string> LeetCode::ipToCIDR(string ip, int range)
 /// </summary>
 string LeetCode::makeLargestSpecial(string S)
 {
-	string result = "";
-	vector<string> special_strings;
-	int first = 0;
-	int count = 0;
-	for (size_t i = 0; i < S.size(); i++)
-	{
-		if (S[i] == '1') count++;
-		else
-		{
-			count--;
-			if (count == 0)
-			{
-				special_strings.push_back(S.substr(first, i - first + 1));
-				first = i + 1;
-			}
-		}
-	}
-	for (size_t i = 0; i < special_strings.size(); i++)
-	{
-		if (special_strings[i].size() > 2)
-		{
-			string inner_string = special_strings[i].substr(1, special_strings[i].size() - 2);
-			special_strings[i] = "1" + makeLargestSpecial(inner_string) + "0";
-		}
-	}
-	sort(special_strings.begin(), special_strings.end(), greater<string>());
-	for (size_t i = 0; i < special_strings.size(); i++)
-	{
-		result.append(special_strings[i]);
-	}
+    string result = "";
+    vector<string> special_strings;
+    int first = 0;
+    int count = 0;
+    for (size_t i = 0; i < S.size(); i++)
+    {
+        if (S[i] == '1') count++;
+        else
+        {
+            count--;
+            if (count == 0)
+            {
+                special_strings.push_back(S.substr(first, i - first + 1));
+                first = i + 1;
+            }
+        }
+    }
+    for (size_t i = 0; i < special_strings.size(); i++)
+    {
+        if (special_strings[i].size() > 2)
+        {
+            string inner_string = special_strings[i].substr(1, special_strings[i].size() - 2);
+            special_strings[i] = "1" + makeLargestSpecial(inner_string) + "0";
+        }
+    }
+    sort(special_strings.begin(), special_strings.end(), greater<string>());
+    for (size_t i = 0; i < special_strings.size(); i++)
+    {
+        result.append(special_strings[i]);
+    }
 
-	return result;
+    return result;
 }
 
 /// <summary>
@@ -4607,45 +4607,45 @@ string LeetCode::makeLargestSpecial(string S)
 /// </summary>
 string LeetCode::boldWords(vector<string>& words, string S)
 {
-	vector<int> bold(S.size());
-	string result;
-	if (S.empty()) return result;
-	unordered_set<string> word_set;
-	for (string str : words) word_set.insert(str);
-	int len = 0;
-	for (size_t i = 0; i < S.size(); i++)
-	{
-		for (len = 1; (len <= 10) && (i + len) <= S.size(); len++)
-		{
-			if (word_set.count(S.substr(i, len)) > 0)
-			{
-				for (size_t j = i; j < i + len; j++) bold[j] = 1;
-			}
-		}
-	}
+    vector<int> bold(S.size());
+    string result;
+    if (S.empty()) return result;
+    unordered_set<string> word_set;
+    for (string str : words) word_set.insert(str);
+    int len = 0;
+    for (size_t i = 0; i < S.size(); i++)
+    {
+        for (len = 1; (len <= 10) && (i + len) <= S.size(); len++)
+        {
+            if (word_set.count(S.substr(i, len)) > 0)
+            {
+                for (size_t j = i; j < i + len; j++) bold[j] = 1;
+            }
+        }
+    }
 
-	for (size_t i = 0; i <= bold.size(); i++)
-	{
-		if (i == bold.size())
-		{
-			if (bold[i - 1] == 1) result += "</b>";
-		}
-		else if ((i > 0) && (bold[i] == 0) && (bold[i - 1] == 1))
-		{
-			result += "</b>";
-			result.push_back(S[i]);
-		}
-		else if ((bold[i] == 1) && ((i == 0) || (bold[i - 1] == 0)))
-		{
-			result += "<b>";
-			result.push_back(S[i]);
-		}
-		else
-		{
-			result.push_back(S[i]);
-		}
-	}
-	return result;
+    for (size_t i = 0; i <= bold.size(); i++)
+    {
+        if (i == bold.size())
+        {
+            if (bold[i - 1] == 1) result += "</b>";
+        }
+        else if ((i > 0) && (bold[i] == 0) && (bold[i - 1] == 1))
+        {
+            result += "</b>";
+            result.push_back(S[i]);
+        }
+        else if ((bold[i] == 1) && ((i == 0) || (bold[i - 1] == 0)))
+        {
+            result += "<b>";
+            result.push_back(S[i]);
+        }
+        else
+        {
+            result.push_back(S[i]);
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -4653,30 +4653,30 @@ string LeetCode::boldWords(vector<string>& words, string S)
 /// </summary>
 string LeetCode::parseExpressionToken(string s, int& index)
 {
-	string result;
-	while (index < (int)s.size())
-	{
-		if (isalnum(s[index]))
-		{
-			result.push_back(s[index]);
-			index++;
-		}
-		else if (isspace(s[index]))
-		{
-			index++;
-		}
-		else
-		{
-			if (!result.empty()) break;
-			else
-			{
-				result = s[index];
-				index++;
-				break;
-			}
-		}
-	}
-	return result;
+    string result;
+    while (index < (int)s.size())
+    {
+        if (isalnum(s[index]))
+        {
+            result.push_back(s[index]);
+            index++;
+        }
+        else if (isspace(s[index]))
+        {
+            index++;
+        }
+        else
+        {
+            if (!result.empty()) break;
+            else
+            {
+                result = s[index];
+                index++;
+                break;
+            }
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -4684,19 +4684,19 @@ string LeetCode::parseExpressionToken(string s, int& index)
 /// </summary>
 int LeetCode::parseTerm(vector<string>& tokens, int& index)
 {
-	int result = 0;
-	if (isdigit(tokens[index][0]))
-	{
-		result = atoi(tokens[index].c_str());
-	}
-	else if (tokens[index] == "(")
-	{
-		index++;
-		result = parseExpression(tokens, index);
-		// when return with ")" left there
-	}
-	index++;
-	return result;
+    int result = 0;
+    if (isdigit(tokens[index][0]))
+    {
+        result = atoi(tokens[index].c_str());
+    }
+    else if (tokens[index] == "(")
+    {
+        index++;
+        result = parseExpression(tokens, index);
+        // when return with ")" left there
+    }
+    index++;
+    return result;
 }
 
 /// <summary>
@@ -4704,25 +4704,25 @@ int LeetCode::parseTerm(vector<string>& tokens, int& index)
 /// </summary>
 int LeetCode::parseFactor(vector<string>& tokens, int& index)
 {
-	int result = parseTerm(tokens, index);
-	while (index < (int)tokens.size())
-	{
-		if (tokens[index] == "*")
-		{
-			index++;
-			result *= parseTerm(tokens, index);
-		}
-		else if (tokens[index] == "/")
-		{
-			index++;
-			result /= parseTerm(tokens, index);
-		}
-		else
-		{
-			break;
-		}
-	}
-	return result;
+    int result = parseTerm(tokens, index);
+    while (index < (int)tokens.size())
+    {
+        if (tokens[index] == "*")
+        {
+            index++;
+            result *= parseTerm(tokens, index);
+        }
+        else if (tokens[index] == "/")
+        {
+            index++;
+            result /= parseTerm(tokens, index);
+        }
+        else
+        {
+            break;
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -4730,25 +4730,25 @@ int LeetCode::parseFactor(vector<string>& tokens, int& index)
 /// </summary>
 int LeetCode::parseExpression(vector<string>& tokens, int& index)
 {
-	int result = parseFactor(tokens, index);
-	while (index < (int)tokens.size())
-	{
-		if (tokens[index] == "+")
-		{
-			index++;
-			result += parseFactor(tokens, index);
-		}
-		else if (tokens[index] == "-")
-		{
-			index++;
-			result -= parseFactor(tokens, index);
-		}
-		else
-		{
-			break;
-		}
-	}
-	return result;
+    int result = parseFactor(tokens, index);
+    while (index < (int)tokens.size())
+    {
+        if (tokens[index] == "+")
+        {
+            index++;
+            result += parseFactor(tokens, index);
+        }
+        else if (tokens[index] == "-")
+        {
+            index++;
+            result -= parseFactor(tokens, index);
+        }
+        else
+        {
+            break;
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -4774,15 +4774,15 @@ int LeetCode::parseExpression(vector<string>& tokens, int& index)
 /// </summary>
 int LeetCode::calculateIII(string s)
 {
-	vector<string> tokens;
-	int index = 0;
-	while (index < (int)s.size())
-	{
-		tokens.push_back(parseExpressionToken(s, index));
-	}
-	index = 0;
-	int result = parseExpression(tokens, index);
-	return result;
+    vector<string> tokens;
+    int index = 0;
+    while (index < (int)s.size())
+    {
+        tokens.push_back(parseExpressionToken(s, index));
+    }
+    index = 0;
+    int result = parseExpression(tokens, index);
+    return result;
 }
 
 
@@ -4791,155 +4791,155 @@ int LeetCode::calculateIII(string s)
 /// </summary>
 vector<string> LeetCode::polyToString(map<vector<string>, int> &ploy_map)
 {
-	vector<pair<vector<string>, int>> poly_vector;
-	typedef struct
-	{
-		bool operator() (pair<vector<string>, int>&a, pair<vector<string>, int> &b)
-		{
-			if (a.first.size() != b.first.size())
-			{
-				return (a.first.size() > b.first.size());
-			}
-			else
-			{
-				return (a.first < b.first);
-			}
-		}
-	} greater_poly;
+    vector<pair<vector<string>, int>> poly_vector;
+    typedef struct
+    {
+        bool operator() (pair<vector<string>, int>&a, pair<vector<string>, int> &b)
+        {
+            if (a.first.size() != b.first.size())
+            {
+                return (a.first.size() > b.first.size());
+            }
+            else
+            {
+                return (a.first < b.first);
+            }
+        }
+    } greater_poly;
 
-	for (auto itr : ploy_map)
-	{
-		poly_vector.push_back(make_pair(itr.first, itr.second));
-	}
+    for (auto itr : ploy_map)
+    {
+        poly_vector.push_back(make_pair(itr.first, itr.second));
+    }
 
-	vector<string> result;
-	sort(poly_vector.begin(), poly_vector.end(), greater_poly());
-	for (size_t i = 0; i < poly_vector.size(); i++)
-	{
-		if (poly_vector[i].second == 0) continue;
-		string term;
-		term += to_string(poly_vector[i].second);
-		for (size_t j = 0; j < poly_vector[i].first.size(); j++)
-		{
-			term += "*" + poly_vector[i].first[j];
-		}
-		result.push_back(term);
-	}
-	return result;
+    vector<string> result;
+    sort(poly_vector.begin(), poly_vector.end(), greater_poly());
+    for (size_t i = 0; i < poly_vector.size(); i++)
+    {
+        if (poly_vector[i].second == 0) continue;
+        string term;
+        term += to_string(poly_vector[i].second);
+        for (size_t j = 0; j < poly_vector[i].first.size(); j++)
+        {
+            term += "*" + poly_vector[i].first[j];
+        }
+        result.push_back(term);
+    }
+    return result;
 }
 
 /// <summary>
 /// Leet code #770. Basic Calculator IV   
 /// </summary>
 void LeetCode::calculatePolyExpression(
-	stack<map<vector<string>, int>>& operands,
-	stack<string>& operators)
+    stack<map<vector<string>, int>>& operands,
+    stack<string>& operators)
 {
-	string op = operators.top();
-	operators.pop();
-	map<vector<string>, int> poly2 = operands.top();
-	operands.pop();
-	map<vector<string>, int> poly1 = operands.top();
-	operands.pop();
+    string op = operators.top();
+    operators.pop();
+    map<vector<string>, int> poly2 = operands.top();
+    operands.pop();
+    map<vector<string>, int> poly1 = operands.top();
+    operands.pop();
 
-	map<vector<string>, int> result;
+    map<vector<string>, int> result;
 
-	if (op == "+")
-	{
-		result = poly1;
-		for (auto itr : poly2)
-		{
-			result[itr.first] += itr.second;
-		}
-	}
-	else if (op == "-")
-	{
-		result = poly1;
-		for (auto itr : poly2)
-		{
-			result[itr.first] -= itr.second;
-		}
-	}
-	else if (op == "*")
-	{
-		for (auto itr1 : poly1)
-		{
-			for (auto itr2 : poly2)
-			{
-				vector<string> term = itr1.first;
-				term.insert(term.end(), itr2.first.begin(), itr2.first.end());
-				sort(term.begin(), term.end());
-				result[term] += itr1.second * itr2.second;
-			}
-		}
-	}
-	operands.push(result);
+    if (op == "+")
+    {
+        result = poly1;
+        for (auto itr : poly2)
+        {
+            result[itr.first] += itr.second;
+        }
+    }
+    else if (op == "-")
+    {
+        result = poly1;
+        for (auto itr : poly2)
+        {
+            result[itr.first] -= itr.second;
+        }
+    }
+    else if (op == "*")
+    {
+        for (auto itr1 : poly1)
+        {
+            for (auto itr2 : poly2)
+            {
+                vector<string> term = itr1.first;
+                term.insert(term.end(), itr2.first.begin(), itr2.first.end());
+                sort(term.begin(), term.end());
+                result[term] += itr1.second * itr2.second;
+            }
+        }
+    }
+    operands.push(result);
 }
 
 /// <summary>
 /// Leet code #770. Basic Calculator IV   
 /// </summary>
 map<vector<string>, int> LeetCode::parsePolyExpression(string& s, int& index,
-	unordered_map<string, int>& eval_map)
+    unordered_map<string, int>& eval_map)
 {
-	stack<map<vector<string>, int>> operands;
-	stack<string> operators;
-	string token;
-	while (true)
-	{
-		token = parseExpressionToken(s, index);
-		if ((token == ")") || (token.empty()))
-		{
-			break;
-		}
-		else if (token == "(")
-		{
-			map<vector<string>, int> operand = parsePolyExpression(s, index, eval_map);
-			operands.push(operand);
-		}
-		else if (isalnum(token[0]))
-		{
-			map<vector<string>, int> operand;
-			vector<string> var;
-			if (eval_map.count(token) > 0)
-			{
-				operand[var] = eval_map[token];
-			}
-			else if (isdigit(token[0]))
-			{
-				operand[var] = atoi(token.c_str());
-			}
-			else
-			{
-				var.push_back(token);
-				operand[var] = 1;
-			}
-			operands.push(operand);
-		}
-		else
-		{
-			if ((token == "+") || (token == "-"))
-			{
-				while (!operators.empty())
-				{
-					calculatePolyExpression(operands, operators);
-				}
-			}
-			else if ((token == "*") || (token == "/"))
-			{
-				while ((!operators.empty()) && (operators.top() == "*" || operators.top() == "/"))
-				{
-					calculatePolyExpression(operands, operators);
-				}
-			}
-			operators.push(token);
-		}
-	}
-	while (!operators.empty())
-	{
-		calculatePolyExpression(operands, operators);
-	}
-	return operands.top();
+    stack<map<vector<string>, int>> operands;
+    stack<string> operators;
+    string token;
+    while (true)
+    {
+        token = parseExpressionToken(s, index);
+        if ((token == ")") || (token.empty()))
+        {
+            break;
+        }
+        else if (token == "(")
+        {
+            map<vector<string>, int> operand = parsePolyExpression(s, index, eval_map);
+            operands.push(operand);
+        }
+        else if (isalnum(token[0]))
+        {
+            map<vector<string>, int> operand;
+            vector<string> var;
+            if (eval_map.count(token) > 0)
+            {
+                operand[var] = eval_map[token];
+            }
+            else if (isdigit(token[0]))
+            {
+                operand[var] = atoi(token.c_str());
+            }
+            else
+            {
+                var.push_back(token);
+                operand[var] = 1;
+            }
+            operands.push(operand);
+        }
+        else
+        {
+            if ((token == "+") || (token == "-"))
+            {
+                while (!operators.empty())
+                {
+                    calculatePolyExpression(operands, operators);
+                }
+            }
+            else if ((token == "*") || (token == "/"))
+            {
+                while ((!operators.empty()) && (operators.top() == "*" || operators.top() == "/"))
+                {
+                    calculatePolyExpression(operands, operators);
+                }
+            }
+            operators.push(token);
+        }
+    }
+    while (!operators.empty())
+    {
+        calculatePolyExpression(operands, operators);
+    }
+    return operands.top();
 }
 
 /// <summary>
@@ -5012,19 +5012,19 @@ map<vector<string>, int> LeetCode::parsePolyExpression(string& s, int& index,
 /// 2. evalvars, evalints will have equal lengths in range [0, 100].
 /// </summary>
 vector<string> LeetCode::basicCalculatorIV(string expression, vector<string>& evalvars,
-	vector<int>& evalints)
+    vector<int>& evalints)
 {
-	map<vector<string>, int> poly;
-	vector<string> result;
-	unordered_map<string, int> eval_map;
-	for (size_t i = 0; i < evalvars.size(); i++)
-	{
-		eval_map[evalvars[i]] = evalints[i];
-	}
-	int index = 0;
-	poly = parsePolyExpression(expression, index, eval_map);
-	result = polyToString(poly);
-	return result;
+    map<vector<string>, int> poly;
+    vector<string> result;
+    unordered_map<string, int> eval_map;
+    for (size_t i = 0; i < evalvars.size(); i++)
+    {
+        eval_map[evalvars[i]] = evalints[i];
+    }
+    int index = 0;
+    poly = parsePolyExpression(expression, index, eval_map);
+    result = polyToString(poly);
+    return result;
 }
 
 /// <summary>
@@ -5054,18 +5054,18 @@ vector<string> LeetCode::basicCalculatorIV(string expression, vector<string>& ev
 /// </summary>
 int LeetCode::numJewelsInStones(string J, string S)
 {
-	int result = 0;
-	unordered_set<char> jewels;
-	for (char ch : J) jewels.insert(ch);
+    int result = 0;
+    unordered_set<char> jewels;
+    for (char ch : J) jewels.insert(ch);
 
-	for (char ch : S)
-	{
-		if (jewels.count(ch) > 0)
-		{
-			result++;
-		}
-	}
-	return result;
+    for (char ch : S)
+    {
+        if (jewels.count(ch) > 0)
+        {
+            result++;
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -5091,32 +5091,32 @@ int LeetCode::numJewelsInStones(string J, string S)
 /// </summary>
 vector<int> LeetCode::partitionLabels(string S)
 {
-	vector<int> result;
-	unordered_map<char, int> char_pos;
-	vector<int> positions;
-	for (size_t i = 0; i < S.size(); i++)
-	{
-		if (char_pos.count(S[i]) == 0)
-		{
-			char_pos[S[i]] = i;
-			positions.push_back(i);
-		}
-		else
-		{
-			while ((!positions.empty()) && (positions.back() > char_pos[S[i]]))
-			{
-				char_pos[S[positions.back()]] = char_pos[S[i]];
-				positions.pop_back();
-			}
-		}
-	}
+    vector<int> result;
+    unordered_map<char, int> char_pos;
+    vector<int> positions;
+    for (size_t i = 0; i < S.size(); i++)
+    {
+        if (char_pos.count(S[i]) == 0)
+        {
+            char_pos[S[i]] = i;
+            positions.push_back(i);
+        }
+        else
+        {
+            while ((!positions.empty()) && (positions.back() > char_pos[S[i]]))
+            {
+                char_pos[S[positions.back()]] = char_pos[S[i]];
+                positions.pop_back();
+            }
+        }
+    }
 
-	for (size_t i = 1; i < positions.size(); i++)
-	{
-		result.push_back(positions[i] - positions[i - 1]);
-	}
-	if (!positions.empty()) result.push_back(S.size() - positions.back());
-	return result;
+    for (size_t i = 1; i < positions.size(); i++)
+    {
+        result.push_back(positions[i] - positions[i - 1]);
+    }
+    if (!positions.empty()) result.push_back(S.size() - positions.back());
+    return result;
 }
 
 /// <summary>
@@ -5141,38 +5141,38 @@ vector<int> LeetCode::partitionLabels(string S)
 /// </summary>
 string LeetCode::reorganizeString(string S)
 {
-	string result;
-	vector<vector<int>> char_map(26, vector<int>(2));
-	for (size_t i = 0; i < S.size(); i++)
-	{
-		char_map[S[i] - 'a'][0]++;
-	}
+    string result;
+    vector<vector<int>> char_map(26, vector<int>(2));
+    for (size_t i = 0; i < S.size(); i++)
+    {
+        char_map[S[i] - 'a'][0]++;
+    }
 
-	for (size_t i = 0; i < S.size(); i++)
-	{
-		int index = 0;
-		int count = 0;
-		for (size_t j = 0; j < 26; j++)
-		{
-			if ((char_map[j][1] <= (int)result.size()) && (char_map[j][0] > count))
-			{
-				index = j;
-				count = char_map[j][0];
-			}
-		}
-		if (count == 0)
-		{
-			result = "";
-			break;
-		}
-		else
-		{
-			char_map[index][0]--;
-			char_map[index][1] = result.size() + 2;
-			result.push_back('a' + index);
-		}
-	}
-	return result;
+    for (size_t i = 0; i < S.size(); i++)
+    {
+        int index = 0;
+        int count = 0;
+        for (size_t j = 0; j < 26; j++)
+        {
+            if ((char_map[j][1] <= (int)result.size()) && (char_map[j][0] > count))
+            {
+                index = j;
+                count = char_map[j][0];
+            }
+        }
+        if (count == 0)
+        {
+            result = "";
+            break;
+        }
+        else
+        {
+            char_map[index][0]--;
+            char_map[index][1] = result.size() + 2;
+            result.push_back('a' + index);
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -5201,40 +5201,40 @@ string LeetCode::reorganizeString(string S)
 /// </summary>
 bool LeetCode::canTransform(string start, string end)
 {
-	vector<pair<char, int>> start_map;
-	vector<pair<char, int>> end_map;
-	if (start.size() != end.size()) return false;
-	for (size_t i = 0; i < start.size(); i++)
-	{
-		if ((start[i] == 'L') || (start[i] == 'R'))
-		{
-			start_map.push_back(make_pair(start[i], i));
-		}
-	}
-	for (size_t i = 0; i < end.size(); i++)
-	{
-		if ((end[i] == 'L') || (end[i] == 'R'))
-		{
-			end_map.push_back(make_pair(end[i], i));
-		}
-	}
-	if (start_map.size() != end_map.size()) return false;
-	for (size_t i = 0; i < start_map.size(); i++)
-	{
-		if (start_map[i].first != end_map[i].first)
-		{
-			return false;
-		}
-		else if ((start_map[i].first == 'L') && (start_map[i].second < end_map[i].second))
-		{
-			return false;
-		}
-		else if ((start_map[i].first == 'R') && (start_map[i].second > end_map[i].second))
-		{
-			return false;
-		}
-	}
-	return true;
+    vector<pair<char, int>> start_map;
+    vector<pair<char, int>> end_map;
+    if (start.size() != end.size()) return false;
+    for (size_t i = 0; i < start.size(); i++)
+    {
+        if ((start[i] == 'L') || (start[i] == 'R'))
+        {
+            start_map.push_back(make_pair(start[i], i));
+        }
+    }
+    for (size_t i = 0; i < end.size(); i++)
+    {
+        if ((end[i] == 'L') || (end[i] == 'R'))
+        {
+            end_map.push_back(make_pair(end[i], i));
+        }
+    }
+    if (start_map.size() != end_map.size()) return false;
+    for (size_t i = 0; i < start_map.size(); i++)
+    {
+        if (start_map[i].first != end_map[i].first)
+        {
+            return false;
+        }
+        else if ((start_map[i].first == 'L') && (start_map[i].second < end_map[i].second))
+        {
+            return false;
+        }
+        else if ((start_map[i].first == 'R') && (start_map[i].second > end_map[i].second))
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 /// <summary>
@@ -5268,32 +5268,32 @@ bool LeetCode::canTransform(string start, string end)
 /// </summary>
 string LeetCode::customSortString(string S, string T)
 {
-	string result;
-	unordered_map<char, int> order_map;
-	map<int, string> char_map;
+    string result;
+    unordered_map<char, int> order_map;
+    map<int, string> char_map;
 
-	for (size_t i = 0; i < S.size(); i++)
-	{
-		order_map[S[i]] = i;
-	}
+    for (size_t i = 0; i < S.size(); i++)
+    {
+        order_map[S[i]] = i;
+    }
 
-	for (char ch : T)
-	{
-		if (order_map.count(ch) == 0)
-		{
-			char_map[26].push_back(ch);
-		}
-		else
-		{
-			char_map[order_map[ch]].push_back(ch);
-		}
-	}
+    for (char ch : T)
+    {
+        if (order_map.count(ch) == 0)
+        {
+            char_map[26].push_back(ch);
+        }
+        else
+        {
+            char_map[order_map[ch]].push_back(ch);
+        }
+    }
 
-	for (auto itr : char_map)
-	{
-		result.append(itr.second);
-	}
-	return result;
+    for (auto itr : char_map)
+    {
+        result.append(itr.second);
+    }
+    return result;
 }
 
 /// <summary>
@@ -5317,58 +5317,58 @@ string LeetCode::customSortString(string S, string T)
 /// </summary>
 bool LeetCode::rotateString(string A, string B)
 {
-	if (A.size() != B.size()) return false;
-	// Step 1: build kmp table
-	vector<int> kmp_table;
-	kmp_table.push_back(0);
-	kmp_table.push_back(0);
-	size_t pos = 2;
-	size_t start = 0;
-	while (pos < A.size())
-	{
-		if (A[pos - 1] == A[start])
-		{
-			start++;
-			kmp_table.push_back(start);
-			pos++;
-		}
-		else if (start > 0)
-		{
-			start = kmp_table[start];
-		}
-		else
-		{
-			kmp_table.push_back(0);
-			pos++;
-		}
-	}
+    if (A.size() != B.size()) return false;
+    // Step 1: build kmp table
+    vector<int> kmp_table;
+    kmp_table.push_back(0);
+    kmp_table.push_back(0);
+    size_t pos = 2;
+    size_t start = 0;
+    while (pos < A.size())
+    {
+        if (A[pos - 1] == A[start])
+        {
+            start++;
+            kmp_table.push_back(start);
+            pos++;
+        }
+        else if (start > 0)
+        {
+            start = kmp_table[start];
+        }
+        else
+        {
+            kmp_table.push_back(0);
+            pos++;
+        }
+    }
 
-	// Step 2: search substring
-	size_t pos_a = 0, pos_b = 0;
-	while (pos_a < A.size() && pos_b < B.size() + pos_a)
-	{
-		if (A[pos_a] == B[pos_b % B.size()])
-		{
-			pos_a++;
-			pos_b++;
-		}
-		else if (pos_a == 0)
-		{
-			pos_b++;
-		}
-		else
-		{
-			pos_a = kmp_table[pos_a];
-		}
-	}
-	if (pos_a < A.size())
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
+    // Step 2: search substring
+    size_t pos_a = 0, pos_b = 0;
+    while (pos_a < A.size() && pos_b < B.size() + pos_a)
+    {
+        if (A[pos_a] == B[pos_b % B.size()])
+        {
+            pos_a++;
+            pos_b++;
+        }
+        else if (pos_a == 0)
+        {
+            pos_b++;
+        }
+        else
+        {
+            pos_a = kmp_table[pos_a];
+        }
+    }
+    if (pos_a < A.size())
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 /// <summary>
@@ -5411,24 +5411,24 @@ bool LeetCode::rotateString(string A, string B)
 /// </summary>
 int LeetCode::uniqueMorseRepresentations(vector<string>& words)
 {
-	unordered_set<string> result;
-	vector<string> code_map =
-	{
-		".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",
-		".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",
-		".--","-..-","-.--","--.."
-	};
+    unordered_set<string> result;
+    vector<string> code_map =
+    {
+        ".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",
+        ".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",
+        ".--","-..-","-.--","--.."
+    };
 
-	for (size_t i = 0; i < words.size(); i++)
-	{
-		string str;
-		for (size_t j = 0; j < words[i].size(); j++)
-		{
-			str += code_map[words[i][j] - 'a'];
-		}
-		result.insert(str);
-	}
-	return result.size();
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        string str;
+        for (size_t j = 0; j < words[i].size(); j++)
+        {
+            str += code_map[words[i][j] - 'a'];
+        }
+        result.insert(str);
+    }
+    return result.size();
 }
 
 /// <summary>
@@ -5475,22 +5475,22 @@ int LeetCode::uniqueMorseRepresentations(vector<string>& words)
 /// </summary>
 vector<int> LeetCode::numberOfLines(vector<int>& widths, string S)
 {
-	vector<int> result(2);
-	result[0] = 1;
-	result[1] = 0;
-	for (size_t i = 0; i < S.size(); i++)
-	{
-		if (result[1] + widths[S[i] - 'a'] > 100)
-		{
-			result[0]++;
-			result[1] = widths[S[i] - 'a'];
-		}
-		else
-		{
-			result[1] += widths[S[i] - 'a'];
-		}
-	}
-	return result;
+    vector<int> result(2);
+    result[0] = 1;
+    result[1] = 0;
+    for (size_t i = 0; i < S.size(); i++)
+    {
+        if (result[1] + widths[S[i] - 'a'] > 100)
+        {
+            result[0]++;
+            result[1] = widths[S[i] - 'a'];
+        }
+        else
+        {
+            result[1] += widths[S[i] - 'a'];
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -5498,29 +5498,29 @@ vector<int> LeetCode::numberOfLines(vector<int>& widths, string S)
 /// </summary>
 void LeetCode::expressiveWords(string str, vector<pair<char, int>>& str_code)
 {
-	pair<char, int> char_count;
-	for (size_t i = 0; i <= str.size(); i++)
-	{
-		if (i == str.size())
-		{
-			str_code.push_back(char_count);
-		}
-		else if (i == 0)
-		{
-			char_count.first = str[i];
-			char_count.second = 1;
-		}
-		else if (str[i] == str[i - 1])
-		{
-			char_count.second++;
-		}
-		else
-		{
-			str_code.push_back(char_count);
-			char_count.first = str[i];
-			char_count.second = 1;
-		}
-	}
+    pair<char, int> char_count;
+    for (size_t i = 0; i <= str.size(); i++)
+    {
+        if (i == str.size())
+        {
+            str_code.push_back(char_count);
+        }
+        else if (i == 0)
+        {
+            char_count.first = str[i];
+            char_count.second = 1;
+        }
+        else if (str[i] == str[i - 1])
+        {
+            char_count.second++;
+        }
+        else
+        {
+            str_code.push_back(char_count);
+            char_count.first = str[i];
+            char_count.second = 1;
+        }
+    }
 }
 
 /// <summary>
@@ -5565,35 +5565,35 @@ void LeetCode::expressiveWords(string str, vector<pair<char, int>>& str_code)
 /// </summary>
 int LeetCode::expressiveWords(string S, vector<string>& words)
 {
-	int result = 0;
-	vector<pair<char, int>> source_code;
-	expressiveWords(S, source_code);
-	for (string word : words)
-	{
-		vector<pair<char, int>> target_code;
-		expressiveWords(word, target_code);
-		if (source_code.size() != target_code.size()) continue;
-		bool match = false;
-		for (size_t i = 0; i < source_code.size(); i++)
-		{
-			if (source_code[i].first != target_code[i].first)
-			{
-				match = false;
-				break;
-			}
-			else if (source_code[i].second > target_code[i].second && source_code[i].second >= 3)
-			{
-				match = true;
-			}
-			else if (source_code[i].second != target_code[i].second)
-			{
-				match = false;
-				break;
-			}
-		}
-		if (match) result++;
-	}
-	return result;
+    int result = 0;
+    vector<pair<char, int>> source_code;
+    expressiveWords(S, source_code);
+    for (string word : words)
+    {
+        vector<pair<char, int>> target_code;
+        expressiveWords(word, target_code);
+        if (source_code.size() != target_code.size()) continue;
+        bool match = false;
+        for (size_t i = 0; i < source_code.size(); i++)
+        {
+            if (source_code[i].first != target_code[i].first)
+            {
+                match = false;
+                break;
+            }
+            else if (source_code[i].second > target_code[i].second && source_code[i].second >= 3)
+            {
+                match = true;
+            }
+            else if (source_code[i].second != target_code[i].second)
+            {
+                match = false;
+                break;
+            }
+        }
+        if (match) result++;
+    }
+    return result;
 }
 
 /// <summary>
@@ -5640,37 +5640,37 @@ int LeetCode::expressiveWords(string S, vector<string>& words)
 /// </summary>
 string LeetCode::mostCommonWord(string paragraph, vector<string>& banned)
 {
-	unordered_map<string, int> word_map;
-	unordered_set<string> banned_words;
-	for (string word : banned) banned_words.insert(word);
+    unordered_map<string, int> word_map;
+    unordered_set<string> banned_words;
+    for (string word : banned) banned_words.insert(word);
 
-	string word;
-	for (size_t i = 0; i <= paragraph.size(); i++)
-	{
-		if ((i == paragraph.size()) || (!isalpha(paragraph[i])))
-		{
-			if (!word.empty())
-			{
-				if (banned_words.count(word) == 0) word_map[word]++;
-				word.clear();
-			}
-		}
-		else if (isalpha(paragraph[i]))
-		{
-			word.push_back(tolower(paragraph[i]));
-		}
-	}
-	int max_count = 0;
-	string result;
-	for (auto itr : word_map)
-	{
-		if (itr.second > max_count)
-		{
-			max_count = itr.second;
-			result = itr.first;
-		}
-	}
-	return result;
+    string word;
+    for (size_t i = 0; i <= paragraph.size(); i++)
+    {
+        if ((i == paragraph.size()) || (!isalpha(paragraph[i])))
+        {
+            if (!word.empty())
+            {
+                if (banned_words.count(word) == 0) word_map[word]++;
+                word.clear();
+            }
+        }
+        else if (isalpha(paragraph[i]))
+        {
+            word.push_back(tolower(paragraph[i]));
+        }
+    }
+    int max_count = 0;
+    string result;
+    for (auto itr : word_map)
+    {
+        if (itr.second > max_count)
+        {
+            max_count = itr.second;
+            result = itr.first;
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -5701,34 +5701,34 @@ string LeetCode::mostCommonWord(string paragraph, vector<string>& banned)
 /// </summary>
 int LeetCode::minimumLengthEncoding(vector<string>& words)
 {
-	int result = 0;
-	for (size_t i = 0; i < words.size(); i++)
-	{
-		std::reverse(words[i].begin(), words[i].end());
-	}
-	std::sort(words.begin(), words.end());
-	for (size_t i = 1; i <= words.size(); i++)
-	{
-		if (i == words.size())
-		{
-			result += words[i - 1].size() + 1;
-		}
-		else
-		{
-			if (words[i - 1].size() > words[i].size())
-			{
-				result += words[i - 1].size() + 1;
-			}
-			else
-			{
-				if (words[i].substr(0, words[i - 1].size()) != words[i - 1])
-				{
-					result += words[i - 1].size() + 1;
-				}
-			}
-		}
-	}
-	return result;
+    int result = 0;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        std::reverse(words[i].begin(), words[i].end());
+    }
+    std::sort(words.begin(), words.end());
+    for (size_t i = 1; i <= words.size(); i++)
+    {
+        if (i == words.size())
+        {
+            result += words[i - 1].size() + 1;
+        }
+        else
+        {
+            if (words[i - 1].size() > words[i].size())
+            {
+                result += words[i - 1].size() + 1;
+            }
+            else
+            {
+                if (words[i].substr(0, words[i - 1].size()) != words[i - 1])
+                {
+                    result += words[i - 1].size() + 1;
+                }
+            }
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -5772,36 +5772,36 @@ int LeetCode::minimumLengthEncoding(vector<string>& words)
 /// </summary>
 string LeetCode::toGoatLatin(string S)
 {
-	unordered_set<char> vowel = { 'a', 'e', 'i', 'o', 'u' };
+    unordered_set<char> vowel = { 'a', 'e', 'i', 'o', 'u' };
 
-	string word;
-	string result;
-	int index = 0;
-	for (size_t i = 0; i <= S.size(); i++)
-	{
-		if (i < S.size() && isalpha(S[i]))
-		{
-			word.push_back(S[i]);
-		}
-		else
-		{
-			if (!word.empty())
-			{
-				// not vowel
-				if (vowel.count(tolower(word[0])) == 0)
-				{
-					word = word.substr(1) + word.substr(0, 1);
-				}
-				word.append("ma");
-				index++;
-				word.append(index, 'a');
-				result.append(word);
-				word.clear();
-			}
-			if (i < S.size()) result.push_back(S[i]);
-		}
-	}
-	return result;
+    string word;
+    string result;
+    int index = 0;
+    for (size_t i = 0; i <= S.size(); i++)
+    {
+        if (i < S.size() && isalpha(S[i]))
+        {
+            word.push_back(S[i]);
+        }
+        else
+        {
+            if (!word.empty())
+            {
+                // not vowel
+                if (vowel.count(tolower(word[0])) == 0)
+                {
+                    word = word.substr(1) + word.substr(0, 1);
+                }
+                word.append("ma");
+                index++;
+                word.append(index, 'a');
+                result.append(word);
+                word.clear();
+            }
+            if (i < S.size()) result.push_back(S[i]);
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -5888,50 +5888,50 @@ string LeetCode::toGoatLatin(string S)
 /// </summary>
 string LeetCode::maskPII(string S)
 {
-	string result;
-	string name;
-	if (S.find('@') != string::npos)
-	{
-		for (size_t i = 0; i <= S.size(); i++)
-		{
-			if (i == S.size())
-			{
-				result.append(name);
-			}
-			else if (S[i] == '@')
-			{
-				result.push_back(name[0]);
-				result.append("*****");
-				result.push_back(name[name.size() - 1]);
-				result.push_back('@');
-				name.clear();
-			}
-			else
-			{
-				if (isalpha(S[i]) || S[i] == '.')
-				{
-					name.push_back(tolower(S[i]));
-				}
-			}
-		}
-	}
-	else
-	{
-		string buff;
-		for (size_t i = 0; i < S.size(); i++)
-		{
-			if (isdigit(S[i])) buff.push_back(S[i]);
-		}
-		if (buff.size() > 10)
-		{
-			result += "+";
-			result.append(string(buff.size() - 10, '*'));
-			result.push_back('-');
-		}
-		result.append("***-***-");
-		result.append(buff.substr(buff.size() - 4, 4));
-	}
-	return result;
+    string result;
+    string name;
+    if (S.find('@') != string::npos)
+    {
+        for (size_t i = 0; i <= S.size(); i++)
+        {
+            if (i == S.size())
+            {
+                result.append(name);
+            }
+            else if (S[i] == '@')
+            {
+                result.push_back(name[0]);
+                result.append("*****");
+                result.push_back(name[name.size() - 1]);
+                result.push_back('@');
+                name.clear();
+            }
+            else
+            {
+                if (isalpha(S[i]) || S[i] == '.')
+                {
+                    name.push_back(tolower(S[i]));
+                }
+            }
+        }
+    }
+    else
+    {
+        string buff;
+        for (size_t i = 0; i < S.size(); i++)
+        {
+            if (isdigit(S[i])) buff.push_back(S[i]);
+        }
+        if (buff.size() > 10)
+        {
+            result += "+";
+            result.append(string(buff.size() - 10, '*'));
+            result.push_back('-');
+        }
+        result.append("***-***-");
+        result.append(buff.substr(buff.size() - 4, 4));
+    }
+    return result;
 }
 
 /// <summary>
@@ -5982,39 +5982,39 @@ string LeetCode::maskPII(string S)
 /// 3. All characters in given inputs are lowercase letters.
 /// </summary>
 string LeetCode::findReplaceString(string S, vector<int>& indexes,
-	vector<string>& sources, vector<string>& targets)
+    vector<string>& sources, vector<string>& targets)
 {
-	string result;
-	size_t index = 0;
-	map<int, pair<string, string>> str_map;
-	for (size_t i = 0; i < indexes.size(); i++)
-	{
-		str_map[indexes[i]] = make_pair(sources[i], targets[i]);
-	}
-	for (int i = 0; i < (int)S.size(); i++)
-	{
-		if (!str_map.empty() && (i == str_map.begin()->first))
-		{
-			string source = str_map.begin()->second.first;
-			string target = str_map.begin()->second.second;
+    string result;
+    size_t index = 0;
+    map<int, pair<string, string>> str_map;
+    for (size_t i = 0; i < indexes.size(); i++)
+    {
+        str_map[indexes[i]] = make_pair(sources[i], targets[i]);
+    }
+    for (int i = 0; i < (int)S.size(); i++)
+    {
+        if (!str_map.empty() && (i == str_map.begin()->first))
+        {
+            string source = str_map.begin()->second.first;
+            string target = str_map.begin()->second.second;
 
-			if (S.substr(i, source.size()) == source)
-			{
-				result.append(target);
-				i += source.size() - 1;
-			}
-			else
-			{
-				result.push_back(S[i]);
-			}
-			str_map.erase(str_map.begin());
-		}
-		else
-		{
-			result.push_back(S[i]);
-		}
-	}
-	return result;
+            if (S.substr(i, source.size()) == source)
+            {
+                result.append(target);
+                i += source.size() - 1;
+            }
+            else
+            {
+                result.push_back(S[i]);
+            }
+            str_map.erase(str_map.begin());
+        }
+        else
+        {
+            result.push_back(S[i]);
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -6022,15 +6022,15 @@ string LeetCode::findReplaceString(string S, vector<int>& indexes,
 /// </summary>
 int LeetCode::match(string strA, string strB)
 {
-	int result = 0;
-	for (size_t i = 0; i < strA.size(); i++)
-	{
-		if (strA[i] == strB[i])
-		{
-			result++;
-		}
-	}
-	return result;
+    int result = 0;
+    for (size_t i = 0; i < strA.size(); i++)
+    {
+        if (strA[i] == strB[i])
+        {
+            result++;
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -6079,33 +6079,33 @@ int LeetCode::match(string strA, string strB)
 /// </summary>
 string LeetCode::findSecretWord(vector<string>& wordlist, Master& master)
 {
-	vector<int> zero_match(wordlist.size());
-	for (size_t i = 0; i < wordlist.size(); i++)
-	{
-		for (size_t j = 0; j < wordlist.size(); j++)
-		{
-			if (match(wordlist[i], wordlist[j]) == 0)
-			{
-				zero_match[i]++;
-			}
-		}
-	}
-	int min_match = 0;
-	for (size_t i = 0; i < wordlist.size(); i++)
-	{
-		if (zero_match[i] < zero_match[min_match]) min_match = i;
-	}
-	int result = master.guess(wordlist[min_match]);
-	if (result == 6) return wordlist[min_match];
-	vector<string> new_word_list;
-	for (size_t i = 0; i < wordlist.size(); i++)
-	{
-		if (match(wordlist[i], wordlist[min_match]) == result)
-		{
-			new_word_list.push_back(wordlist[i]);
-		}
-	}
-	return findSecretWord(new_word_list, master);
+    vector<int> zero_match(wordlist.size());
+    for (size_t i = 0; i < wordlist.size(); i++)
+    {
+        for (size_t j = 0; j < wordlist.size(); j++)
+        {
+            if (match(wordlist[i], wordlist[j]) == 0)
+            {
+                zero_match[i]++;
+            }
+        }
+    }
+    int min_match = 0;
+    for (size_t i = 0; i < wordlist.size(); i++)
+    {
+        if (zero_match[i] < zero_match[min_match]) min_match = i;
+    }
+    int result = master.guess(wordlist[min_match]);
+    if (result == 6) return wordlist[min_match];
+    vector<string> new_word_list;
+    for (size_t i = 0; i < wordlist.size(); i++)
+    {
+        if (match(wordlist[i], wordlist[min_match]) == result)
+        {
+            new_word_list.push_back(wordlist[i]);
+        }
+    }
+    return findSecretWord(new_word_list, master);
 }
 
 /// <summary>
@@ -6158,40 +6158,40 @@ string LeetCode::findSecretWord(vector<string>& wordlist, Master& master)
 /// </summary>
 vector<int> LeetCode::splitIntoFibonacci(string S)
 {
-	vector<int> result;
-	for (size_t i = 1; i < S.size() - 1; i++)
-	{
-		if (i > 1 && S[0] == '0') break;
-		for (size_t j = i + 1; j < S.size(); j++)
-		{
-			if (j - i > 1 && S[i] == '0') break;
-			result.clear();
-			long v = atol(S.substr(0, i).c_str());
-			if (v > INT_MAX) continue;
-			result.push_back((int)v);
-			v = atol(S.substr(i, j - i).c_str());
-			if (v > INT_MAX) continue;
-			result.push_back((int)v);
-			string temp = S.substr(j);
-			bool isFibonacci = true;
-			while (isFibonacci)
-			{
-				long sum = result[result.size() - 2] + result[result.size() - 1];
-				if (sum > INT_MAX) break;
-				string sum_str = to_string(sum);
-				if ((sum_str.size() > temp.size()) || (sum_str != temp.substr(0, sum_str.size())))
-				{
-					isFibonacci = false;
-					break;
-				}
-				result.push_back((int)sum);
-				temp = temp.substr(sum_str.size());
-				if (temp.empty()) return result;
-			}
-		}
-	}
-	result.clear();
-	return result;
+    vector<int> result;
+    for (size_t i = 1; i < S.size() - 1; i++)
+    {
+        if (i > 1 && S[0] == '0') break;
+        for (size_t j = i + 1; j < S.size(); j++)
+        {
+            if (j - i > 1 && S[i] == '0') break;
+            result.clear();
+            long v = atol(S.substr(0, i).c_str());
+            if (v > INT_MAX) continue;
+            result.push_back((int)v);
+            v = atol(S.substr(i, j - i).c_str());
+            if (v > INT_MAX) continue;
+            result.push_back((int)v);
+            string temp = S.substr(j);
+            bool isFibonacci = true;
+            while (isFibonacci)
+            {
+                long sum = result[result.size() - 2] + result[result.size() - 1];
+                if (sum > INT_MAX) break;
+                string sum_str = to_string(sum);
+                if ((sum_str.size() > temp.size()) || (sum_str != temp.substr(0, sum_str.size())))
+                {
+                    isFibonacci = false;
+                    break;
+                }
+                result.push_back((int)sum);
+                temp = temp.substr(sum_str.size());
+                if (temp.empty()) return result;
+            }
+        }
+    }
+    result.clear();
+    return result;
 }
 
 /// <summary>
@@ -6229,32 +6229,32 @@ vector<int> LeetCode::splitIntoFibonacci(string S)
 /// </summary>
 bool LeetCode::backspaceCompare(string S, string T)
 {
-	string src;
-	for (size_t i = 0; i < S.size(); i++)
-	{
-		if (S[i] == '#')
-		{
-			if (!src.empty()) src.pop_back();
-		}
-		else
-		{
-			src.push_back(S[i]);
-		}
-	}
+    string src;
+    for (size_t i = 0; i < S.size(); i++)
+    {
+        if (S[i] == '#')
+        {
+            if (!src.empty()) src.pop_back();
+        }
+        else
+        {
+            src.push_back(S[i]);
+        }
+    }
 
-	string dst;
-	for (size_t i = 0; i < T.size(); i++)
-	{
-		if (T[i] == '#')
-		{
-			if (!dst.empty()) dst.pop_back();
-		}
-		else
-		{
-			dst.push_back(T[i]);
-		}
-	}
-	return (src == dst);
+    string dst;
+    for (size_t i = 0; i < T.size(); i++)
+    {
+        if (T[i] == '#')
+        {
+            if (!dst.empty()) dst.pop_back();
+        }
+        else
+        {
+            dst.push_back(T[i]);
+        }
+    }
+    return (src == dst);
 }
 
 /// <summary>
@@ -6287,18 +6287,18 @@ bool LeetCode::backspaceCompare(string S, string T)
 /// </summary>
 string LeetCode::shiftingLetters(string S, vector<int>& shifts)
 {
-	string result = S;
-	vector<int> sh = shifts;
-	for (int i = shifts.size() - 2; i >= 0; i--)
-	{
-		sh[i] = (int) (((long)sh[i] + (long)sh[i + 1]) % 26);
-	}
-	for (size_t i = 0; i < S.size(); i++)
-	{
-		result[i] = 'a' + ((long)(result[i] - 'a') + sh[i]) % 26;
-	}
+    string result = S;
+    vector<int> sh = shifts;
+    for (int i = shifts.size() - 2; i >= 0; i--)
+    {
+        sh[i] = (int) (((long)sh[i] + (long)sh[i + 1]) % 26);
+    }
+    for (size_t i = 0; i < S.size(); i++)
+    {
+        result[i] = 'a' + ((long)(result[i] - 'a') + sh[i]) % 26;
+    }
 
-	return result;
+    return result;
 }
 
 
@@ -6335,32 +6335,32 @@ string LeetCode::shiftingLetters(string S, vector<int>& shifts)
 /// </summary>
 bool LeetCode::buddyStrings(string A, string B)
 {
-	vector<int> diff;
-	vector<int> char_set(26);
-	bool duplicate = false;
-	if (A.size() != B.size()) return false;
-	for (size_t i = 0; i < A.size(); i++)
-	{
-		if (A[i] != B[i]) diff.push_back(i);
-		char_set[A[i] - 'a']++;
-		if (char_set[A[i] - 'a'] > 1) duplicate = true;
-	}
-	if (diff.empty()) return duplicate;
-	else if (diff.size() == 2)
-	{
-		if (A[diff[0]] == B[diff[1]] && A[diff[1]] == B[diff[0]])
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	else
-	{
-		return false;
-	}
+    vector<int> diff;
+    vector<int> char_set(26);
+    bool duplicate = false;
+    if (A.size() != B.size()) return false;
+    for (size_t i = 0; i < A.size(); i++)
+    {
+        if (A[i] != B[i]) diff.push_back(i);
+        char_set[A[i] - 'a']++;
+        if (char_set[A[i] - 'a'] > 1) duplicate = true;
+    }
+    if (diff.empty()) return duplicate;
+    else if (diff.size() == 2)
+    {
+        if (A[diff[0]] == B[diff[1]] && A[diff[1]] == B[diff[0]])
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
 }
 
 /// <summary>
@@ -6409,20 +6409,20 @@ bool LeetCode::buddyStrings(string A, string B)
 /// </summary>
 int LeetCode::numSpecialEquivGroups(vector<string>& A)
 {
-	set<string> str_set;
-	for (size_t i = 0; i < A.size(); i++)
-	{
-		string even, odd;
-		for (size_t j = 0; j < A[i].size(); j++)
-		{
-			if (j % 2 == 0) even.push_back(A[i][j]);
-			else odd.push_back(A[i][j]);
-		}
-		sort(even.begin(), even.end());
-		sort(odd.begin(), odd.end());
-		str_set.insert(even + odd);
-	}
-	return str_set.size();
+    set<string> str_set;
+    for (size_t i = 0; i < A.size(); i++)
+    {
+        string even, odd;
+        for (size_t j = 0; j < A[i].size(); j++)
+        {
+            if (j % 2 == 0) even.push_back(A[i][j]);
+            else odd.push_back(A[i][j]);
+        }
+        sort(even.begin(), even.end());
+        sort(odd.begin(), odd.end());
+        str_set.insert(even + odd);
+    }
+    return str_set.size();
 }
 
 
@@ -6510,23 +6510,23 @@ int LeetCode::countkDist(string str, int k)
 /// </summary>
 string LeetCode::orderlyQueue(string S, int K)
 {
-	string result ;
-	if (K == 1)
-	{
-		result = S;
-		for (size_t i = 0; i < S.size(); i++)
-		{
-			string temp = S.substr(i);
-			temp.append(S.substr(0, i));
-			if (temp < result) result = temp;
-		}
-	}
-	else
-	{
-		result = S;
-		sort(result.begin(), result.end());
-	}
-	return result;
+    string result ;
+    if (K == 1)
+    {
+        result = S;
+        for (size_t i = 0; i < S.size(); i++)
+        {
+            string temp = S.substr(i);
+            temp.append(S.substr(0, i));
+            if (temp < result) result = temp;
+        }
+    }
+    else
+    {
+        result = S;
+        sort(result.begin(), result.end());
+    }
+    return result;
 }
 
 /// <summary>
@@ -6568,43 +6568,43 @@ string LeetCode::orderlyQueue(string S, int K)
 /// </summary>
 bool LeetCode::isLongPressedName(string name, string typed)
 {
-	vector<pair<char, int>> name_chars;
-	vector<pair<char, int>> typed_chars;
+    vector<pair<char, int>> name_chars;
+    vector<pair<char, int>> typed_chars;
 
-	for (size_t i = 0; i < name.size(); i++)
-	{
-		if (i == 0) name_chars.push_back({ name[i], 1 });
-		else if (name[i] == name_chars.back().first)
-		{
-			name_chars.back().second++;
-		}
-		else
-		{
-			name_chars.push_back({ name[i], 1 });
-		}
-	}
-	for (size_t i = 0; i < typed.size(); i++)
-	{
-		if (i == 0) typed_chars.push_back({ typed[i], 1 });
-		else if (typed[i] == typed_chars.back().first)
-		{
-			typed_chars.back().second++;
-		}
-		else
-		{
-			typed_chars.push_back({ typed[i], 1 });
-		}
-	}
+    for (size_t i = 0; i < name.size(); i++)
+    {
+        if (i == 0) name_chars.push_back({ name[i], 1 });
+        else if (name[i] == name_chars.back().first)
+        {
+            name_chars.back().second++;
+        }
+        else
+        {
+            name_chars.push_back({ name[i], 1 });
+        }
+    }
+    for (size_t i = 0; i < typed.size(); i++)
+    {
+        if (i == 0) typed_chars.push_back({ typed[i], 1 });
+        else if (typed[i] == typed_chars.back().first)
+        {
+            typed_chars.back().second++;
+        }
+        else
+        {
+            typed_chars.push_back({ typed[i], 1 });
+        }
+    }
 
-	if (name_chars.size() != typed_chars.size()) return false;
-	for (size_t i = 0; i < name_chars.size(); i++)
-	{
-		if ((name_chars[i].first != typed_chars[i].first) || (name_chars[i].second > typed_chars[i].second))
-		{
-			return false;
-		}
-	}
-	return true;
+    if (name_chars.size() != typed_chars.size()) return false;
+    for (size_t i = 0; i < name_chars.size(); i++)
+    {
+        if ((name_chars[i].first != typed_chars[i].first) || (name_chars[i].second > typed_chars[i].second))
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 /// <summary>
@@ -6648,22 +6648,22 @@ bool LeetCode::isLongPressedName(string name, string typed)
 /// </summary>
 int LeetCode::numUniqueEmails(vector<string>& emails)
 {
-	unordered_set<string> emails_set;
-	for (size_t i = 0; i < emails.size(); i++)
-	{
-		string local_name = emails[i].substr(0, emails[i].find("@"));
-		string domain_name = emails[i].substr(emails[i].find("@"));
-		string email;
-		for (size_t j = 0; j < local_name.size(); j++)
-		{
-			if (local_name[j] == '+') break;
-			else if (local_name[j] == '.') continue;
-			email.push_back(local_name[j]);
-		}
-		email.append(domain_name);
-		emails_set.insert(email);
-	}
-	return emails_set.size();
+    unordered_set<string> emails_set;
+    for (size_t i = 0; i < emails.size(); i++)
+    {
+        string local_name = emails[i].substr(0, emails[i].find("@"));
+        string domain_name = emails[i].substr(emails[i].find("@"));
+        string email;
+        for (size_t j = 0; j < local_name.size(); j++)
+        {
+            if (local_name[j] == '+') break;
+            else if (local_name[j] == '.') continue;
+            email.push_back(local_name[j]);
+        }
+        email.append(domain_name);
+        emails_set.insert(email);
+    }
+    return emails_set.size();
 }
 
 /// <summary>
@@ -6671,48 +6671,48 @@ int LeetCode::numUniqueEmails(vector<string>& emails)
 /// </summary>
 string LeetCode::parsePhrase(string& line, int &pos)
 {
-	string result;
-	bool in_quote = false;
+    string result;
+    bool in_quote = false;
 
-	while (pos < (int)line.size())
-	{
-		// ignore leading space
-		if (isspace(line[pos]))
-		{
-			// but do not ignore the space bwteen words or in quote
-			if (!result.empty() || in_quote) result.push_back(line[pos]);
-		}
-		else if (line[pos] == '"')
-		{
-			// double quote, it is a quote in phrase
-			if ((pos < (int)line.size() - 1) && (line[pos + 1] == '"'))
-			{
-				result.push_back('"');
-				pos++;
-			}
-			else
-			{
-				// quote to enclose the phrase
-				in_quote = !in_quote;
-			}
-		}
-		else if (line[pos] == ',')
-		{
-			if (in_quote) result.push_back(',');
-			else break;
-		}
-		else
-		{
-			result.push_back(line[pos]);
-		}
-		pos++;
-	}
+    while (pos < (int)line.size())
+    {
+        // ignore leading space
+        if (isspace(line[pos]))
+        {
+            // but do not ignore the space bwteen words or in quote
+            if (!result.empty() || in_quote) result.push_back(line[pos]);
+        }
+        else if (line[pos] == '"')
+        {
+            // double quote, it is a quote in phrase
+            if ((pos < (int)line.size() - 1) && (line[pos + 1] == '"'))
+            {
+                result.push_back('"');
+                pos++;
+            }
+            else
+            {
+                // quote to enclose the phrase
+                in_quote = !in_quote;
+            }
+        }
+        else if (line[pos] == ',')
+        {
+            if (in_quote) result.push_back(',');
+            else break;
+        }
+        else
+        {
+            result.push_back(line[pos]);
+        }
+        pos++;
+    }
 
-	// trim right
-	int index = result.size() - 1;
-	while (index >= 0 && isspace(result[index])) index--;
-	result = result.substr(0, index + 1);
-	return result;
+    // trim right
+    int index = result.size() - 1;
+    while (index >= 0 && isspace(result[index])) index--;
+    result = result.substr(0, index + 1);
+    return result;
 }
 
 /// <summary>
@@ -6720,17 +6720,17 @@ string LeetCode::parsePhrase(string& line, int &pos)
 /// </summary>
 vector<string> LeetCode::parseLine(string& line)
 {
-	int pos = 0;
-	vector<string> result;
-	while (pos < (int)line.size())
-	{
-		if (line[pos] == ',')
-		{
-			pos++;
-		}
-		result.push_back(parsePhrase(line, pos));
-	}
-	return result;
+    int pos = 0;
+    vector<string> result;
+    while (pos < (int)line.size())
+    {
+        if (line[pos] == ',')
+        {
+            pos++;
+        }
+        result.push_back(parsePhrase(line, pos));
+    }
+    return result;
 }
 
 /// <summary>
@@ -6755,12 +6755,12 @@ vector<string> LeetCode::parseLine(string& line)
 /// </summary>
 vector<vector<string>> LeetCode::parseCSV(vector<string>& lines)
 {
-	vector<vector<string>> result;
-	for (size_t i = 0; i < lines.size(); i++)
-	{
-		result.push_back(parseLine(lines[i]));
-	}
-	return result;
+    vector<vector<string>> result;
+    for (size_t i = 0; i < lines.size(); i++)
+    {
+        result.push_back(parseLine(lines[i]));
+    }
+    return result;
 }
 
 /// <summary>
@@ -6799,30 +6799,30 @@ vector<vector<string>> LeetCode::parseCSV(vector<string>& lines)
 /// </summary>
 vector<string> LeetCode::reorderLogFiles(vector<string>& logs)
 {
-	vector<string> result;
-	vector<pair<string, string>> letter_logs, digit_logs;
+    vector<string> result;
+    vector<pair<string, string>> letter_logs, digit_logs;
 
-	for (size_t i = 0; i < logs.size(); i++)
-	{
-		size_t pos = logs[i].find(" ");
-		string id = logs[i].substr(0, pos);
-		string log = logs[i].substr(pos + 1);
-		if (isdigit(log[0])) digit_logs.push_back(make_pair(log, id));
-		else letter_logs.push_back(make_pair(log, id));
-	}
+    for (size_t i = 0; i < logs.size(); i++)
+    {
+        size_t pos = logs[i].find(" ");
+        string id = logs[i].substr(0, pos);
+        string log = logs[i].substr(pos + 1);
+        if (isdigit(log[0])) digit_logs.push_back(make_pair(log, id));
+        else letter_logs.push_back(make_pair(log, id));
+    }
 
-	sort(letter_logs.begin(), letter_logs.end());
+    sort(letter_logs.begin(), letter_logs.end());
 
-	for (auto itr : letter_logs)
-	{
-		result.push_back(itr.second + " " + itr.first);
-	}
-	for (auto itr : digit_logs)
-	{
-		result.push_back(itr.second + " " + itr.first);
-	}
+    for (auto itr : letter_logs)
+    {
+        result.push_back(itr.second + " " + itr.first);
+    }
+    for (auto itr : digit_logs)
+    {
+        result.push_back(itr.second + " " + itr.first);
+    }
 
-	return result;
+    return result;
 }
 
 /// <summary>
@@ -9121,6 +9121,70 @@ int LeetCodeString::maxFreq(string s, int maxLetters, int minSize, int maxSize)
     for (auto itr : words)
     {
         result = max(result, itr.second);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1309. Decrypt String from Alphabet to Integer Mapping
+/// 
+/// Easy
+///
+/// Given a string s formed by digits ('0' - '9') and '#' . We want to 
+/// map s to English lowercase characters as follows:
+/// Characters ('a' to 'i') are represented by ('1' to '9') respectively.
+/// Characters ('j' to 'z') are represented by ('10#' to '26#') 
+/// respectively. 
+/// Return the string formed after mapping.
+/// It's guaranteed that a unique mapping will always exist.
+///
+/// Example 1:
+/// Input: s = "10#11#12"
+/// Output: "jkab"
+/// Explanation: "j" -> "10#" , "k" -> "11#" , "a" -> "1" , "b" -> "2".
+///
+/// Example 2:
+/// Input: s = "1326#"
+/// Output: "acz"
+///
+/// Example 3:
+/// Input: s = "25#"
+/// Output: "y"
+///
+/// Example 4:
+/// Input: s = "12345678910#11#12#13#14#15#16#17#18#19#20#21#22#23#24#25#26#"
+/// Output: "abcdefghijklmnopqrstuvwxyz"
+///  
+/// Constraints:
+/// 1. 1 <= s.length <= 1000
+/// 2. s[i] only contains digits letters ('0'-'9') and '#' letter.
+/// 3. s will be valid string such that mapping is always possible.
+/// </summary>
+string LeetCodeString::freqAlphabets(string s)
+{
+    string result;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '#')
+        {
+            string digit;
+            digit.push_back(result[result.size() - 2]);
+            digit.push_back(result[result.size() - 1]);
+            result.pop_back();
+            result.pop_back();
+            result.push_back('j' + atoi(digit.c_str()) - 10);
+        }
+        else
+        {
+            result.push_back(s[i]);
+        }
+    }
+    for (size_t i = 0; i < result.size(); i++)
+    {
+        if (result[i] >= '1' && result[i] <= '9')
+        {
+            result[i] = 'a' + result[i] - '1';
+        }
     }
     return result;
 }

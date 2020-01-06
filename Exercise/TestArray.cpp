@@ -759,8 +759,28 @@ void TestLeetCode36(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1310(void)
+{
+    Logger::WriteMessage("Test Leet Code 1310");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 1, 3, 4, 8 };
+    vector<vector<int>>queries = { {0, 1},{1, 2},{0, 3},{3, 3} };
+    vector<int> result = leetCode.xorQueries(arr, queries);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    arr = { 4,8,2,10 };
+    queries = { {2, 3},{1, 3},{0, 0},{0, 3} };
+    result = leetCode.xorQueries(arr, queries);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1310();
     TestLeetCode36();
     TestLeetCode448();
     TestLeetCode1306();

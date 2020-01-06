@@ -786,8 +786,34 @@ void TestLeetCode1301(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1312(void)
+{
+    Logger::WriteMessage("Test Leet Code 1312");
+    LeetCodeDP leetCode;
+    string s = "zzazz";
+    int result = leetCode.minInsertions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "mbadm";
+    result = leetCode.minInsertions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "leetcode";
+    result = leetCode.minInsertions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "g";
+    result = leetCode.minInsertions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "no";
+    result = leetCode.minInsertions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1312();
     TestLeetCode1301();
     TestLeetCode1289();
     TestLeetCode1278();

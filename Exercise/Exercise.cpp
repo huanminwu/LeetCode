@@ -16407,13 +16407,13 @@ void TestLeetCode1238(void)
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeDFS();
+    TestLeetCodeDP();
     TestLeetCodeGraph();
     TestLeetCodeArray();
-    TestLeetCodeDP();
+    TestLeetCodeString();
+    TestLeetCodeDFS();
     TestLeetCodeBinarySearch();
     TestLeetCodeTree();
-    TestLeetCodeString();
     TestLeetCodeMath();
     TestLeetCodeGreedy();
     TestLeetCodeLinkedList();

@@ -159,8 +159,30 @@ void TestLeetCode1297(void)
         "result = " + to_string(result));
 }
 
+void TestLeetCode1309(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 1309");
+    string s = "10#11#12";
+    string result = leetCode.freqAlphabets(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "1326#";
+    result = leetCode.freqAlphabets(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "25#";
+    result = leetCode.freqAlphabets(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "12345678910#11#12#13#14#15#16#17#18#19#20#21#22#23#24#25#26#";
+    result = leetCode.freqAlphabets(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1309();
     TestLeetCode1297();
     TestLeetCode1268();
     TestLeetCode415();

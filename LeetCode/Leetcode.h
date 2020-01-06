@@ -1302,7 +1302,7 @@ public:
 };
 
 /// <summary>
-/// Leet code #379. Design Phone Directory       
+/// Leet code #379. Design Phone Directory 
 /// 
 /// Design a Phone Directory which supports the following operations:
 /// 1.get: Provide a number which is not assigned to anyone.
