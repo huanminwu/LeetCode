@@ -66,6 +66,9 @@
     <ClCompile Include="TestBinarySearch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestUnionFind.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestMath.h">
@@ -111,6 +114,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="TestBinarySearch.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUnionFind.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

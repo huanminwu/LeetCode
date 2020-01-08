@@ -146,6 +146,7 @@
     <ClInclude Include="LeetCodeStack.h" />
     <ClInclude Include="LeetCodeString.h" />
     <ClInclude Include="LeetCodeTree.h" />
+    <ClInclude Include="LeetCodeUnionFind.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Leetcode.cpp" />

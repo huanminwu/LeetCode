@@ -273,7 +273,7 @@ public:
     int findCelebrity(int n, vector<vector<bool>>& relation_map);
 
     /// <summary>
-    /// Leet code #286. Walls and Gates       
+    /// Leet code #286. Walls and Gates 
     /// 
     /// You are given a m x n 2D grid initialized with these three possible values.  
     /// 1.-1 - A wall or an obstacle.
@@ -295,12 +295,12 @@ public:
     void wallsAndGates(vector<vector<int>>& rooms);
 
     /// <summary>
-    /// Leet code #296. Best Meeting Point       
+    /// Leet code #296. Best Meeting Point 
     /// </summary>
     int minTotalDistance(vector<int>& nums);
 
     /// <summary>
-    /// Leet code #296. Best Meeting Point       
+    /// Leet code #296. Best Meeting Point 
     /// 
     /// A group of two or more people wants to meet and minimize the total travel 
     /// distance. You are given a 2D grid of values 0 or 1, where each 1 marks 

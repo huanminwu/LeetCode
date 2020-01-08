@@ -96,6 +96,7 @@
     <ClCompile Include="TestStack.cpp" />
     <ClCompile Include="TestString.cpp" />
     <ClCompile Include="TestTree.cpp" />
+    <ClCompile Include="TestUnionFind.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LeetCode\LeetCode.vcxproj">
@@ -118,6 +119,7 @@
     <ClInclude Include="TestStack.h" />
     <ClInclude Include="TestString.h" />
     <ClInclude Include="TestTree.h" />
+    <ClInclude Include="TestUnionFind.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

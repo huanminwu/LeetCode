@@ -16,13 +16,14 @@
 #include <iostream>
 #include <fstream>
 #include "Leetcode.h"
+#include "LeetCodeUnionFind.h"
 
 #pragma region UnionFind
 
 /// <summary>
-/// Leet code #305. Number of Islands II         
+/// Leet code #305. Number of Islands II   
 /// </summary>
-int LeetCode::checkIslands(int island_id, int row, int col, vector<vector<int>>&grid_map, vector<int>& island_map)
+int LeetCodeUnionFind::checkIslands(int island_id, int row, int col, vector<vector<int>>&grid_map, vector<int>& island_map)
 {
     if ((row < 0) || (row >= (int)grid_map.size()) ||
         (col < 0) || (col >= (int)grid_map[0].size()))
@@ -40,7 +41,7 @@ int LeetCode::checkIslands(int island_id, int row, int col, vector<vector<int>>&
 /// <summary>
 /// Leet code #305. Number of Islands II         
 /// </summary>
-int LeetCode::mergeIslands(int island1, int island2, vector<vector<int>>&grid_map, vector<int>& island_map)
+int LeetCodeUnionFind::mergeIslands(int island1, int island2, vector<vector<int>>&grid_map, vector<int>& island_map)
 {
     int count = 0;
     while (island_map[island1] != 0) island1 = island_map[island1];
@@ -94,7 +95,7 @@ int LeetCode::mergeIslands(int island1, int island2, vector<vector<int>>&grid_ma
 /// Challenge:
 /// Can you do it in time complexity O(k log mn), where k is the length of the positions?
 /// </summary>
-vector<int> LeetCode::numIslands2(int m, int n, vector<pair<int, int>>& positions)
+vector<int> LeetCodeUnionFind::numIslands2(int m, int n, vector<pair<int, int>>& positions)
 {
     vector<int> result;
     vector<int> island_map(m*n);
@@ -160,7 +161,7 @@ vector<int> LeetCode::numIslands2(int m, int n, vector<pair<int, int>>& position
 /// M[i][i] = 1 for all students.
 /// If M[i][j] = 1, then M[j][i] = 1.
 /// </summary>
-int LeetCode::findCircleNum(vector<vector<int>>& M)
+int LeetCodeUnionFind::findCircleNum(vector<vector<int>>& M)
 {
     vector<int> circle_map(M.size());
     for (size_t i = 0; i < M.size(); i++)
@@ -197,7 +198,7 @@ int LeetCode::findCircleNum(vector<vector<int>>& M)
 /// <summary>
 /// Leet code #695. Max Area of Island
 /// </summary>
-int LeetCode::mergeIsland(vector<vector<pair<int, int>>>& grid_map, vector<vector<int>>& grid_count,
+int LeetCodeUnionFind::mergeIsland(vector<vector<pair<int, int>>>& grid_map, vector<vector<int>>& grid_count,
     pair<int, int>&source, pair<int, int>&target)
 {
     while (source != grid_map[source.first][source.second])
@@ -248,7 +249,7 @@ int LeetCode::mergeIsland(vector<vector<pair<int, int>>>& grid_map, vector<vecto
 /// Given the above grid, return 0.
 /// Note: The length of each dimension in the given grid does not exceed 50.
 /// </summary>
-int LeetCode::maxAreaOfIsland(vector<vector<int>>& grid)
+int LeetCodeUnionFind::maxAreaOfIsland(vector<vector<int>>& grid)
 {
     int max_area = 0;
     if (grid.empty() || grid[0].empty()) return max_area;
@@ -282,7 +283,7 @@ int LeetCode::maxAreaOfIsland(vector<vector<int>>& grid)
 /// <summary>
 /// Leet code #803. Bricks Falling When Hit
 /// </summary>
-int LeetCode::unionBricks(int source, int target, int size, unordered_map<int, pair<int, int>> &union_map)
+int LeetCodeUnionFind::unionBricks(int source, int target, int size, unordered_map<int, pair<int, int>> &union_map)
 {
     while (union_map[source].first != source) source = union_map[source].first;
     while (union_map[target].first != target) target = union_map[target].first;
@@ -299,7 +300,7 @@ int LeetCode::unionBricks(int source, int target, int size, unordered_map<int, p
 /// <summary>
 /// Leet code #803. Bricks Falling When Hit
 /// </summary>
-int LeetCode::unionNeighbors(int row, int col, vector<vector<int>>& grid, unordered_map<int, pair<int, int>> &union_map)
+int LeetCodeUnionFind::unionNeighbors(int row, int col, vector<vector<int>>& grid, unordered_map<int, pair<int, int>> &union_map)
 {
     int result = 0;
     if (grid[row][col] != 1) return 0;
@@ -376,7 +377,7 @@ int LeetCode::unionNeighbors(int row, int col, vector<vector<int>>& grid, unorde
 /// 4. An erasure may refer to a location with no brick - if it does, 
 ///    no bricks drop.
 /// </summary>
-vector<int> LeetCode::hitBricks(vector<vector<int>>& grid, vector<vector<int>>& hits)
+vector<int> LeetCodeUnionFind::hitBricks(vector<vector<int>>& grid, vector<vector<int>>& hits)
 {
     vector<int> result(hits.size());
     unordered_map<int, pair<int, int>> union_map;
@@ -410,7 +411,7 @@ vector<int> LeetCode::hitBricks(vector<vector<int>>& grid, vector<vector<int>>& 
 /// <summary>
 /// Leet code #827. Making A Large Island
 /// </summary>
-int LeetCode::mergeIsland(int source, int target, unordered_map<int, pair<int, int>>& union_map)
+int LeetCodeUnionFind::mergeIsland(int source, int target, unordered_map<int, pair<int, int>>& union_map)
 {
     // search to root
     while (union_map[source].first != source) source = union_map[source].first;
@@ -458,7 +459,7 @@ int LeetCode::mergeIsland(int source, int target, unordered_map<int, pair<int, i
 /// 1. 1 <= grid.length = grid[0].length <= 50.
 /// 2. 0 <= grid[i][j] <= 1.
 /// </summary>
-int LeetCode::largestIsland(vector<vector<int>>& grid)
+int LeetCodeUnionFind::largestIsland(vector<vector<int>>& grid)
 {
     int result = 0;
     unordered_map<int, pair<int, int>> union_map;
@@ -521,7 +522,7 @@ int LeetCode::largestIsland(vector<vector<int>>& grid)
 /// <summary>
 /// Leet code #9903. Check Radar 
 /// </summary>
-bool LeetCode::checkOverlap(vector<double>radar1, vector<double>radar2)
+bool LeetCodeUnionFind::checkOverlap(vector<double>radar1, vector<double>radar2)
 {
     double distance =
         sqrt(((radar1[0] - radar2[0]) * (radar1[0] - radar2[0]) +
@@ -533,7 +534,7 @@ bool LeetCode::checkOverlap(vector<double>radar1, vector<double>radar2)
 /// <summary>
 /// Leet code #9903. Check Radar 
 /// </summary>
-bool LeetCode::checkBlock(int width, double y_min, double y_max)
+bool LeetCodeUnionFind::checkBlock(int width, double y_min, double y_max)
 {
     if ((y_min <= 0) && (y_max >= width))
     {
@@ -553,9 +554,9 @@ bool LeetCode::checkBlock(int width, double y_min, double y_max)
 /// and your car can move on any curve as you wish, can you avoid any radar in this road?
 /// The road is assumed with position from 0 to width in Y axis.
 /// </summary>
-bool LeetCode::canAvoidRadar(int width, vector<vector<double>>& radars)
+bool LeetCodeUnionFind::canAvoidRadar(int width, vector<vector<double>>& radars)
 {
-    double y_min, y_max;
+    double y_min = 0, y_max = 0;
     set<vector<double>> radarSet(radars.begin(), radars.end());
     set<vector<double>>::iterator itr;
     set<vector<double>> checkSet;
@@ -636,7 +637,7 @@ bool LeetCode::canAvoidRadar(int width, vector<vector<double>>& radars)
 /// 2.The length of accounts[i] will be in the range [1, 10].
 /// 3.The length of accounts[i][j] will be in the range [1, 30].
 /// </summary>
-vector<vector<string>> LeetCode::accountsMergeII(vector<vector<string>>& accounts)
+vector<vector<string>> LeetCodeUnionFind::accountsMergeII(vector<vector<string>>& accounts)
 {
     unordered_map<string, int> email_map;
     unordered_map<int, int> parent_map;
@@ -723,7 +724,7 @@ vector<vector<string>> LeetCode::accountsMergeII(vector<vector<string>>& account
 /// The length of each pairs[i] will be 2.
 /// The length of each words[i] and pairs[i][j] will be in the range [1, 20].
 /// </summary>
-bool LeetCode::areSentencesSimilarTwo(vector<string>& words1, vector<string>& words2,
+bool LeetCodeUnionFind::areSentencesSimilarTwo(vector<string>& words1, vector<string>& words2,
     vector<pair<string, string>> pairs)
 {
     if (words1.size() != words2.size()) return false;
@@ -784,7 +785,7 @@ bool LeetCode::areSentencesSimilarTwo(vector<string>& words1, vector<string>& wo
 /// 1. 1 <= stones.length <= 1000
 /// 2. 0 <= stones[i][j] < 10000
 /// </summary>
-int LeetCode::removeStones(vector<vector<int>>& stones)
+int LeetCodeUnionFind::removeStones(vector<vector<int>>& stones)
 {
     unordered_map<int, int> row_map;
     unordered_map<int, int> col_map;
@@ -839,7 +840,7 @@ int LeetCode::removeStones(vector<vector<int>>& stones)
 /// 1. 1 <= A.length <= 20000
 /// 2. 1 <= A[i] <= 100000
 /// </summary>
-int LeetCode::largestComponentSize(vector<int>& A)
+int LeetCodeUnionFind::largestComponentSize(vector<int>& A)
 {
     vector<vector<int>> factors(A.size());
     unordered_map<int, int> prime_map;
@@ -937,7 +938,7 @@ int LeetCode::largestComponentSize(vector<int>& A)
 /// 4. equations[i][1] is either '=' or '!'
 /// 5. equations[i][2] is '='
 /// </summary>
-bool LeetCode::equationsPossible(vector<string>& equations)
+bool LeetCodeUnionFind::equationsPossible(vector<string>& equations)
 {
     unordered_map<char, char> same;
     vector<pair<char, char>> diff;
@@ -1027,7 +1028,7 @@ bool LeetCode::equationsPossible(vector<string>& equations)
 /// 2. The lengths of string A, B and S are between 1 and 1000.
 /// 3. String A and B are of the same length.
 /// </summary>
-string LeetCode::smallestEquivalentString(string A, string B, string S)
+string LeetCodeUnionFind::smallestEquivalentString(string A, string B, string S)
 {
     vector<int> letters(26);
     for (size_t i = 0; i < 26; i++) letters[i] = i;
@@ -1102,7 +1103,7 @@ string LeetCode::smallestEquivalentString(string A, string B, string S)
 /// 6. Logs are not necessarily ordered by some criteria.
 /// 7. logs[i][1] != logs[i][2]
 /// </summary>
-int LeetCode::earliestAcq(vector<vector<int>>& logs, int N)
+int LeetCodeUnionFind::earliestAcq(vector<vector<int>>& logs, int N)
 {
     vector<int> count(N, 1);
     vector<int> parent(N, -1);
@@ -1166,7 +1167,7 @@ int LeetCode::earliestAcq(vector<vector<int>>& logs, int N)
 /// 5.All words in A have the same length and are anagrams of each other.
 /// 6.The judging time limit has been increased for this question.
 /// </summary>
-int LeetCode::numSimilarGroups(vector<string>& A)
+int LeetCodeUnionFind::numSimilarGroups(vector<string>& A)
 {
     vector<int> visited(A.size());
     int result = 0;
@@ -1240,7 +1241,7 @@ int LeetCode::numSimilarGroups(vector<string>& A)
 /// 3. 0 <= pairs[i][0], pairs[i][1] < s.length
 /// 4. s only contains lower case English letters.
 /// </summary>
-string LeetCode::smallestStringWithSwaps(string s, vector<vector<int>>& pairs)
+string LeetCodeUnionFind::smallestStringWithSwaps(string s, vector<vector<int>>& pairs)
 {
     vector<int> dp(s.size());
     unordered_map<int, priority_queue<char>> char_set;
