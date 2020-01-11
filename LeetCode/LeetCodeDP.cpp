@@ -266,7 +266,7 @@ int LeetCode::maxProfit(vector<int>& prices)
 /// Children with a higher rating get more candies than their neighbors.
 /// What is the minimum candies you must give?
 /// </summary>
-int LeetCode::candy(vector<int>& ratings)
+int LeetCodeDP::candy(vector<int>& ratings)
 {
     vector<int> candy(ratings.size());
     // passing from left to right
@@ -331,7 +331,7 @@ int LeetCode::candy(vector<int>& ratings)
 /// isMatch("ab", ".*")     -> true
 /// isMatch("aab", "c*a*b") -> true
 /// </summary>
-bool LeetCode::isMatchRegularExpression(string s, string p)
+bool LeetCodeDP::isMatchRegularExpression(string s, string p)
 {
     vector<vector<bool>> matrix;
     matrix.push_back(vector<bool>(p.size() + 1));
@@ -413,7 +413,7 @@ bool LeetCode::isMatchRegularExpression(string s, string p)
 /// isWildcardMatch("ab", "?*") -> true
 /// isWildcardMatch("aab", "c*a*b") -> false
 /// </summary>
-bool LeetCode::isWildcardMatch(string s, string p)
+bool LeetCodeDP::isWildcardMatch(string s, string p)
 {
     s = "x" + s;
     p = "x" + p;
@@ -488,8 +488,9 @@ bool LeetCode::isInterleave(string s1, string s2, string s3)
 
 /// <summary>
 /// Leet code #55. Jump Game 
-/// Given an array of non-negative integers, you are initially positioned at 
-/// the first index of the array. 
+///
+/// Given an array of non-negative integers, you are initially positioned 
+/// at the first index of the array. 
 /// Each element in the array represents your maximum jump length at that 
 /// position. 
 /// Determine if you are able to reach the last index. 
@@ -497,7 +498,7 @@ bool LeetCode::isInterleave(string s1, string s2, string s3)
 /// A = [2,3,1,1,4], return true. 
 /// A = [3,2,1,0,4], return false. 
 /// </summary>
-bool LeetCode::canJump(vector<int>& nums)
+bool LeetCodeDP::canJump(vector<int>& nums)
 {
     if (nums.size() <= 1) return true;
     vector<int> collection;
@@ -638,7 +639,7 @@ bool LeetCodeDP::canCross(vector<int>& stones)
 /// You are climbing a stair case. It takes n steps to reach to the top.
 /// Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top? 
 /// </summary>
-int LeetCode::climbStairs(int n)
+int LeetCodeDP::climbStairs(int n)
 {
     vector<int> steps;
     steps.push_back(1);
@@ -661,7 +662,7 @@ int LeetCode::climbStairs(int n)
 /// b) Delete a character
 /// c) Replace a character
 /// </summary> 
-int LeetCode::minDistance(string word1, string word2)
+int LeetCodeDP::minDistance(string word1, string word2)
 {
     int distance = 0;
     vector<vector<int>> distance_map;
@@ -721,7 +722,7 @@ int LeetCode::minDistance(string word1, string word2)
 ///   Here is an example:
 ///   S = "rabbbit", T = "rabbit" 
 /// </summary>
-int LeetCode::numDistinct(string s, string t)
+int LeetCodeDP::numDistinct(string s, string t)
 {
     if (s.empty() || t.empty()) return 0;
     vector<vector<unsigned int>> dp(t.size(), vector<unsigned int>(s.size()));
@@ -751,6 +752,7 @@ int LeetCode::numDistinct(string s, string t)
 
 /// <summary>
 /// Leet code #62. Unique Paths 
+///
 /// A robot is located at the top-left corner of a m x n grid (marked 
 /// 'Start' in the diagram below). 
 /// The robot can only move either down or right at any point in time. 
@@ -760,7 +762,7 @@ int LeetCode::numDistinct(string s, string t)
 /// Above is a 3 x 7 grid. How many possible unique paths are there?  
 /// Note: m and n will be at most 100.
 /// </summary>
-int LeetCode::uniquePaths(int m, int n)
+int LeetCodeDP::uniquePaths(int m, int n)
 {
     vector<vector<int>> matrix(m, vector<int>(n));
     for (int i = 0; i < m; i++)
@@ -790,6 +792,7 @@ int LeetCode::uniquePaths(int m, int n)
 
 /// <summary>
 /// Leet code #63. Unique Paths II  
+///
 /// Follow up for "Unique Paths": 
 /// Now consider if some obstacles are added to the grids. How many unique 
 /// paths would there be? 
@@ -804,7 +807,7 @@ int LeetCode::uniquePaths(int m, int n)
 /// The total number of unique paths is 2.
 /// Note: m and n will be at most 100.
 /// </summary>
-int LeetCode::uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)
+int LeetCodeDP::uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)
 {
     int m = obstacleGrid.size();
     int n = obstacleGrid[0].size();
@@ -840,11 +843,13 @@ int LeetCode::uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)
 
 /// <summary>
 /// Leet code #64. Minimum Path Sum
-/// Given a m x n grid filled with non-negative numbers, find a path from top 
-/// left to bottom right which minimizes the sum of all numbers along its path.
+///
+/// Given a m x n grid filled with non-negative numbers, find a path from 
+/// top left to bottom right 
+/// which minimizes the sum of all numbers along its path.
 ///	Note: You can only move either down or right at any point in time. 
 /// </summary>
-int LeetCode::minPathSum(vector<vector<int>>& grid)
+int LeetCodeDP::minPathSum(vector<vector<int>>& grid)
 {
     vector<vector<int>> matrix(grid.size(), vector<int>(grid[0].size()));
     for (size_t i = 0; i < grid.size(); i++)
@@ -1788,7 +1793,7 @@ int LeetCode::minCostII(vector<vector<int>>& costs)
 }
 
 /// <summary>
-/// Leet code #161. One Edit Distance       
+/// Leet code #161. One Edit Distance 
 /// 
 /// Given two strings S and T, determine if they are both one edit distance apart. 
 /// </summary>
@@ -1822,7 +1827,7 @@ bool LeetCode::isOneEditDistance(string s, string t, size_t i, size_t j, size_t 
 }
 
 /// <summary>
-/// Leet code #161. One Edit Distance       
+/// Leet code #161. One Edit Distance 
 /// 
 /// Given two strings S and T, determine if they are both one edit distance apart. 
 /// </summary>
@@ -7599,7 +7604,7 @@ int LeetCode::mctFromLeafValues(vector<int>& arr)
 /// 2. 1 <= grid[0].length <= 100
 /// 3. grid[i][j] is 0 or 1
 /// </summary>
-int LeetCode::largest1BorderedSquare(vector<vector<int>>& grid)
+int LeetCodeDP::largest1BorderedSquare(vector<vector<int>>& grid)
 {
     vector<vector<vector<int>>> dp(grid.size(), vector<vector<int>>(grid[0].size(), vector<int>(2)));
     for (size_t i = 0; i < grid.size(); i++)
@@ -9540,6 +9545,8 @@ int LeetCodeDP::minInsertions(string s)
     }
     return dp[0][s.size() - 1];
 }
+
+
 
 #pragma endregion
 

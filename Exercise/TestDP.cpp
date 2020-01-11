@@ -811,8 +811,250 @@ void TestLeetCode1312(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode10(void)
+{
+    LeetCodeDP leetCode;
+
+    string str = "bbbba";
+    string pat = ".*a*a";
+    bool result = leetCode.isMatchRegularExpression(str, pat);
+    Logger::WriteMessage("str =" + str + "; pat =" + pat + 
+        "; result = " + (string)(result ? "true" : "false"));
+
+    str = "aab";
+    pat = "c*a*b";
+    result = leetCode.isMatchRegularExpression(str, pat);
+    Logger::WriteMessage("str =" + str + "; pat =" + pat +
+        "; result = " + (string)(result ? "true" : "false"));
+
+    str = "aaa";
+    pat = "a*a";
+    result = leetCode.isMatchRegularExpression(str, pat);
+    Logger::WriteMessage("str =" + str + "; pat =" + pat +
+        "; result = " + (string)(result ? "true" : "false"));
+
+    str = "aaa";
+    pat = "ab*a*c*a";
+    result = leetCode.isMatchRegularExpression(str, pat);
+    Logger::WriteMessage("str =" + str + "; pat =" + pat +
+        "; result = " + (string)(result ? "true" : "false"));
+    str = "ab";
+    pat = ".*";
+    result = leetCode.isMatchRegularExpression(str, pat);
+    Logger::WriteMessage("str =" + str + "; pat =" + pat +
+        "; result = " + (string)(result ? "true" : "false"));
+
+    str = "ab";
+    pat = ".*c";
+    result = leetCode.isMatchRegularExpression(str, pat);
+    Logger::WriteMessage("str =" + str + "; pat =" + pat +
+        "; result = " + (string)(result ? "true" : "false"));
+
+    str = "ab";
+    pat = "c*..";
+    result = leetCode.isMatchRegularExpression(str, pat);
+    Logger::WriteMessage("str =" + str + "; pat =" + pat +
+        "; result = " + (string)(result ? "true" : "false"));
+
+    str = "ab";
+    pat = "";
+    result = leetCode.isMatchRegularExpression(str, pat);
+    Logger::WriteMessage("str =" + str + "; pat =" + pat +
+        "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode135(void)
+{
+    Logger::WriteMessage("Test Leet Code 135");
+    LeetCodeDP leetCode;
+    vector<int> ratings = { 1,2,3,4,4,5,6,4,3,2,1 };
+    int result = leetCode.candy(ratings);
+    Logger::WriteMessage(ratings);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode44(void)
+{
+    Logger::WriteMessage("Test Leet Code 59");
+    LeetCodeDP leetCode;
+    string s, p;
+    bool result;
+    s = "aa"; p = "a";
+    result = leetCode.isWildcardMatch(s, p);
+    Logger::WriteMessage("(" + s + "," + p + ")" + "-> " + (result ? "true" : "false"));
+
+    s = "aa"; p = "aa";
+    result = leetCode.isWildcardMatch(s, p);
+    Logger::WriteMessage("(" + s + "," + p + ")" + "-> " + (result ? "true" : "false"));
+
+    s = "aaa"; p = "aa";
+    result = leetCode.isWildcardMatch(s, p);
+    Logger::WriteMessage("(" + s + "," + p + ")" + "-> " + (result ? "true" : "false"));
+
+    s = "aa"; p = "*";
+    result = leetCode.isWildcardMatch(s, p);
+    Logger::WriteMessage("(" + s + "," + p + ")" + "-> " + (result ? "true" : "false"));
+
+    s = "aa"; p = "a*";
+    result = leetCode.isWildcardMatch(s, p);
+    Logger::WriteMessage("(" + s + "," + p + ")" + "-> " + (result ? "true" : "false"));
+
+    s = "aa"; p = "?*";
+    result = leetCode.isWildcardMatch(s, p);
+    Logger::WriteMessage("(" + s + "," + p + ")" + "-> " + (result ? "true" : "false"));
+
+    s = "aab"; p = "c*a*b";
+    result = leetCode.isWildcardMatch(s, p);
+    Logger::WriteMessage("(" + s + "," + p + ")" + "-> " + (result ? "true" : "false"));
+}
+
+void TestLeetCode72(void)
+{
+    Logger::WriteMessage("Test Leet Code 72");
+    LeetCodeDP leetCode;
+    string word1 = "abcde";
+    string word2 = "abce";
+
+    int distance = leetCode.minDistance(word1, word2);
+    Logger::WriteMessage("The distance between " + word1 + " and " + word2 + " is " + to_string(distance));
+
+    word1 = "bat";
+    word2 = "bot";
+
+    distance = leetCode.minDistance(word1, word2);
+    Logger::WriteMessage("The distance between " + word1 + " and " + word2 + " is " + to_string(distance));
+}
+
+void TestLeetCode70(void)
+{
+    Logger::WriteMessage("Test Leet Code 70");
+    int n = 5;
+    LeetCodeDP leetCode;
+    int distinct_steps = leetCode.climbStairs(n);
+    Logger::WriteMessage("The distinct steps in " + to_string(5) + " steps stairs is " + to_string(distinct_steps));
+}
+
+void TestLeetCode115(void)
+{
+    Logger::WriteMessage("Test Leet Code 115");
+    LeetCodeDP leetCode;
+    int num_distinct;
+    string s = "rabbbit", t = "rabbit";
+    num_distinct = leetCode.numDistinct(s, t);
+    Logger::WriteMessage("s = " + s + " t = " + t);
+    Logger::WriteMessage("number of distinct sequence = " + to_string(num_distinct));
+}
+
+void TestLeetCode55(void)
+{
+    Logger::WriteMessage("Test Leet Code 55");
+    vector<int> nums = { 1, 1, 1, 0 };
+    LeetCodeDP leetCode;
+    Logger::WriteMessage(nums);
+    bool result = leetCode.canJump(nums);
+    if (result)
+    {
+        Logger::WriteMessage("Can jump to the end");
+    }
+    else
+    {
+        Logger::WriteMessage("Cannot jump to the end");
+    }
+
+    nums = { 2, 3, 1, 1, 4 };
+    Logger::WriteMessage(nums);
+    result = leetCode.canJump(nums);
+    if (result)
+    {
+        Logger::WriteMessage("Can jump to the end");
+    }
+    else
+    {
+        Logger::WriteMessage("Cannot jump to the end");
+    }
+
+    nums = { 3, 2, 1, 0, 4 };
+    Logger::WriteMessage(nums);
+    result = leetCode.canJump(nums);
+    if (result)
+    {
+        Logger::WriteMessage("Can jump to the end");
+    }
+    else
+    {
+        Logger::WriteMessage("Cannot jump to the end");
+    }
+
+    nums = { 0 };
+    Logger::WriteMessage(nums);
+    result = leetCode.canJump(nums);
+    if (result)
+    {
+        Logger::WriteMessage("Can jump to the end");
+    }
+    else
+    {
+        Logger::WriteMessage("Cannot jump to the end");
+    }
+}
+
+void TestLeetCode62(void)
+{
+    Logger::WriteMessage("Test Leet Code 62");
+    int m, n;
+    m = 3; n = 7;
+    LeetCodeDP leetCode;
+    int uniquePaths = leetCode.uniquePaths(m, n);
+    Logger::WriteMessage("Unique Paths(" + to_string(m) + "," + to_string(n) + ") = " + to_string(uniquePaths));
+}
+
+void TestLeetCode63(void)
+{
+    Logger::WriteMessage("Test Leet Code 63");
+    LeetCodeDP leetCode;
+    vector<vector<int>> obstacleGrid =
+    {
+        { 0,0,0 }, { 0,1,0 }, { 0,0,0 }
+    };
+    int uniquePaths = leetCode.uniquePathsWithObstacles(obstacleGrid);
+    for (size_t i = 0; i < obstacleGrid.size(); i++)
+    {
+        Logger::WriteMessage(obstacleGrid[i]);
+    }
+    Logger::WriteMessage("Unique Paths =" + to_string(uniquePaths));
+}
+
+void TestLeetCode64(void)
+{
+    Logger::WriteMessage("Test Leet Code 64");
+    LeetCodeDP leetCode;
+    vector<vector<int>> grid = { {1,2,3}, {4,5,6} };
+    for (size_t i = 0; i < grid.size(); i++)
+    {
+        Logger::WriteMessage(grid[i]);
+    }
+    int minSum = leetCode.minPathSum(grid);
+    Logger::WriteMessage("The minimum path sum is " + to_string(minSum));
+}
+
+void TestLeetCode1139(void)
+{
+    Logger::WriteMessage("Test Leet Code 1139");
+    LeetCodeDP leetCode;
+    vector<vector<int>> grid = { {1, 1, 1},{1, 0, 1},{1, 1, 1} };
+    int result = leetCode.largest1BorderedSquare(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1, 1, 0, 0} };
+    result = leetCode.largest1BorderedSquare(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1139();
     TestLeetCode1312();
     TestLeetCode1301();
     TestLeetCode1289();
@@ -853,4 +1095,14 @@ void TestLeetCodeDP(void)
     TestLeetCode1143();
     TestLeetCode1147();
     TestLeetCode1155();
+    TestLeetCode10();
+    TestLeetCode44();
+    TestLeetCode70();
+    TestLeetCode72();
+    TestLeetCode135();
+    TestLeetCode115();
+    TestLeetCode55();
+    TestLeetCode62();
+    TestLeetCode63();
+    TestLeetCode64();
 }

@@ -231,122 +231,84 @@ string LeetCode::longestCommonPrefix(vector<string>& strs)
 }
 
 /// <summary>
-/// Leet code #28. Implement strStr() 
-/// Implement strStr(). 
-/// Returns the index of the first occurrence of needle in haystack, or -1 
-/// if needle is not part of haystack. 
+/// Leet code #28. Implement strStr()
+///
+/// Easy
+///
+/// Implement strStr().
+///
+/// Return the index of the first occurrence of needle in haystack, or -1 
+/// if needle is not part of haystack.
+///
+/// Example 1:
+///
+/// Input: haystack = "hello", needle = "ll"
+/// Output: 2
+///
+/// Example 2:
+///
+/// Input: haystack = "aaaaa", needle = "bba"
+/// Output: -1
+/// Clarification:
+///
+/// What should we return when needle is an empty string? This is a great 
+/// question to ask during an interview.
+///
+/// For the purpose of this problem, we will return 0 when needle is an empty 
+/// string. This is consistent to C's strstr() and Java's indexOf().
 /// </summary>
-int LeetCode::strStrKmp(string haystack, string needle)
+int LeetCodeString::strStr(string haystack, string needle)
 {
     if (haystack.size() < needle.size()) return -1;
     // Step 1: build kmp table
-    vector<int> kmp_table;
-    kmp_table.push_back(-1);
-    kmp_table.push_back(0);
-    size_t pos = 2;
-    size_t count = 0;
-    while (pos < needle.length())
+    vector<int> kmp_table(needle.size());
+    int i = 1;
+    int j = 0;
+    while (i < (int)needle.size())
     {
-        if (needle[pos - 1] == needle[count])
+        if (needle[i] == needle[j])
         {
-            count++;
-            kmp_table.push_back(count);
-            pos++;
+            j++;
+            kmp_table[i] = j;
+            i++;
         }
-        else if (count > 0)
+        else if (j == 0)
         {
-            count = kmp_table[count];
+            kmp_table[i] = 0;
+            i++;
         }
         else
         {
-            kmp_table.push_back(0);
-            pos++;
+            j = kmp_table[j - 1];
         }
     }
 
     // Step 2: search substring
-    pos = 0;
-    size_t index = 0;
-    while (pos < haystack.length())
+    i = 0;
+    j = 0;
+    while (i < (int)haystack.size())
     {
-        if (index == needle.length())
+        if (j == needle.size())
         {
             break;
         }
-        if (haystack[pos + index] == needle[index])
+        else if (haystack[i] == needle[j])
         {
-            index++;
+            i++;
+            j++;
         }
-        else if (index == 0)
+        else if (j == 0)
         {
-            pos++;
-        }
-        else
-        {
-            pos = pos + index - kmp_table[index];
-            index = kmp_table[index];
-        }
-    }
-    if ((pos < haystack.length()) || (needle.length() == 0))
-    {
-        return pos;
-    }
-    else
-    {
-        return -1;
-    }
-}
-
-/// <summary>
-/// Leet code #28. Implement strStr() 
-/// Implement strStr() by CheckSum. 
-/// Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack. 
-/// </summary>
-int LeetCode::strStrChecksum(string haystack, string needle)
-{
-    if (haystack.size() < needle.size()) return -1;
-    int target_checksum = 0;
-    size_t target_length = needle.size();
-    for (size_t i = 0; i < target_length; i++)
-    {
-        target_checksum += needle[i];
-    }
-    int checksum = 0;
-    size_t length = 0;
-    size_t pos = 0;
-    size_t index = 0;
-    while ((pos < haystack.size()) && (index < target_length))
-    {
-        checksum += haystack[pos];
-        if (length < target_length)
-        {
-            length++;
+            i++;
         }
         else
         {
-            checksum -= haystack[pos - target_length];
-        }
-        pos++;
-        if ((checksum == target_checksum) && (length == target_length))
-        {
-            index = 0;
-            while (index < target_length)
-            {
-                // also no need to check if array index overflow or underflow because length == target_length guarantee it
-                if (haystack[pos + index - target_length] != needle[index])
-                {
-                    break;
-                }
-
-                index++;
-            }
+            j = kmp_table[j - 1];
         }
     }
-
-    // if we search to the end of target it means we match
-    if (index == target_length)
+    if (j == needle.size())
     {
-        return pos - target_length;
+        return i - needle.size();
     }
     else
     {

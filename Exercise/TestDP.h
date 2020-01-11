@@ -2,6 +2,15 @@
 #ifndef TestDP_H
 #define TestDP_H
 #include "..\LeetCode\LeetCodeDP.h"
+void TestLeetCode10(void);
+void TestLeetCode44(void);
+void TestLeetCode55(void);
+void TestLeetCode62(void); 
+void TestLeetCode63(void);
+void TestLeetCode64(void);
+void TestLeetCode70(void);
+void TestLeetCode72(void);
+void TestLeetCode115(void);
 void TestLeetCode923(void);
 void TestLeetCode920(void);
 void TestLeetCode123(void);
@@ -28,6 +37,7 @@ void TestLeetCode1155(void);
 void TestLeetCode9905(void);
 void TestLeetCode474(void);
 void TestLeetCode377(void);
+void TestLeetCode1139(void);
 void TestLeetCode1216(void);
 void TestLeetCode1220(void);
 void TestLeetCode1223(void);

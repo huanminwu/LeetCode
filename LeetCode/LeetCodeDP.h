@@ -1420,5 +1420,176 @@ public:
     /// 2. All characters of s are lower case English letters.
     /// </summary>
     int minInsertions(string s);
+
+    /// <summary>
+    /// Leet code # 10. Regular Expression Matching
+    /// 
+    /// Implement regular expression matching with support for '.' and '*'.
+    /// 
+    /// '.' Matches any single character.
+    /// '*' Matches zero or more of the preceding element.
+    ///
+    /// The matching should cover the entire input string (not partial).
+    /// The function prototype should be:
+    ///
+    /// bool isMatchRegularExpression(const char *s, const char *p)
+    ///
+    /// Some examples:
+    /// isMatch("aa","a")       -> false
+    /// isMatch("aa","aa")      -> true
+    /// isMatch("aaa","aa")     -> false
+    /// isMatch("aa", "a*")     -> true
+    /// isMatch("aa", ".*")     -> true
+    /// isMatch("ab", ".*")     -> true
+    /// isMatch("aab", "c*a*b") -> true
+    /// </summary>
+    bool isMatchRegularExpression(string s, string p);
+
+    /// <summary>
+    /// Leet code #44. Wildcard Matching   
+    ///
+    /// Implement wildcard pattern matching with support for '?' and '*'.  
+    /// '?' Matches any single character.
+    /// '*' Matches any sequence of characters (including the empty sequence).
+    /// The matching should cover the entire input string (not partial).
+    /// The function prototype should be:
+    /// bool isWildcardMatch(const char *s, const char *p);
+    /// Some examples:
+    /// isWildcardMatch("aa","a") -> false
+    /// isWildcardMatch("aa","aa") -> true
+    /// isWildcardMatch("aaa","aa") -> false
+    /// isWildcardMatch("aa", "*") -> true
+    /// isWildcardMatch("aa", "a*") -> true
+    /// isWildcardMatch("ab", "?*") -> true
+    /// isWildcardMatch("aab", "c*a*b") -> false
+    /// </summary>
+    bool isWildcardMatch(string s, string p);
+
+    /// <summary>
+    /// Leet code #70. Climbing Stairs
+    ///
+    /// You are climbing a stair case. It takes n steps to reach to the top.
+    /// Each time you can either climb 1 or 2 steps. In how many distinct ways 
+    /// can you climb to the top? 
+    /// </summary>
+    int climbStairs(int n);
+
+    /// <summary>
+    /// Leet code #72. Edit Distance 
+    ///
+    /// Given two words word1 and word2, find the minimum number of steps 
+    /// required to convert word1 to 
+    /// word2. (each operation is counted as 1 step.) 
+    /// You have the following 3 operations permitted on a word: 
+    /// a) Insert a character
+    /// b) Delete a character
+    /// c) Replace a character
+    /// </summary> 
+    int minDistance(string word1, string word2);
+
+    /// <summary>
+    /// Leet code # 135. Candy
+    /// 
+    /// There are N children standing in a line. Each child is assigned a rating value.
+    /// You are giving candies to these children subjected to the following requirements: 
+    /// Each child must have at least one candy.
+    /// Children with a higher rating get more candies than their neighbors.
+    /// What is the minimum candies you must give?
+    /// </summary>
+    int candy(vector<int>& ratings);
+
+    /// <summary>
+    /// Leet code #115. Distinct Subsequences  
+    ///
+    /// Given a string S and a string T, count the number of distinct 
+    /// subsequences of T in S.
+    /// A subsequence of a string is a new string which is formed from the 
+    /// original string by deleting some (can be none) 
+    /// of the characters without disturbing the relative positions of the 
+    /// remaining characters. (ie, "ACE" is a subsequence 
+    /// of "ABCDE" while "AEC" is not). For example,
+    ///   Here is an example:
+    ///   S = "rabbbit", T = "rabbit" 
+    /// </summary>
+    int numDistinct(string s, string t);
+
+    /// <summary>
+    /// Leet code #55. Jump Game 
+    ///
+    /// Given an array of non-negative integers, you are initially positioned 
+    /// at the first index of the array. 
+    /// Each element in the array represents your maximum jump length at that 
+    /// position. 
+    /// Determine if you are able to reach the last index. 
+    /// For example:
+    /// A = [2,3,1,1,4], return true. 
+    /// A = [3,2,1,0,4], return false. 
+    /// </summary>
+    bool canJump(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #62. Unique Paths 
+    ///
+    /// A robot is located at the top-left corner of a m x n grid (marked 
+    /// 'Start' in the diagram below). 
+    /// The robot can only move either down or right at any point in time. 
+    /// The robot is trying to reach the bottom-right corner of the grid 
+    /// (marked 'Finish' in the diagram below). 
+    ///	How many possible unique paths are there?
+    /// Above is a 3 x 7 grid. How many possible unique paths are there?  
+    /// Note: m and n will be at most 100.
+    /// </summary>
+    int uniquePaths(int m, int n);
+
+    /// <summary>
+    /// Leet code #63. Unique Paths II  
+    ///
+    /// Follow up for "Unique Paths": 
+    /// Now consider if some obstacles are added to the grids. How many unique 
+    /// paths would there be? 
+    /// An obstacle and empty space is marked as 1 and 0 respectively in the grid. 
+    ///	For example,
+    /// [
+    ///   [0,0,0],
+    ///   [0,1,0],
+    ///   [0,0,0]
+    /// ]
+    /// There is one obstacle in the middle of a 3x3 grid as illustrated below.  
+    /// The total number of unique paths is 2.
+    /// Note: m and n will be at most 100.
+    /// </summary>
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid);
+
+    /// <summary>
+    /// Leet code #64. Minimum Path Sum
+    ///
+    /// Given a m x n grid filled with non-negative numbers, find a path from 
+    /// top left to bottom right 
+    /// which minimizes the sum of all numbers along its path.
+    ///	Note: You can only move either down or right at any point in time. 
+    /// </summary>
+    int minPathSum(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet code #1139. Largest 1-Bordered Square
+    /// 
+    /// Given a 2D grid of 0s and 1s, return the number of elements in the 
+    /// largest square subgrid that has all 1s on its border, or 0 if such 
+    /// a subgrid doesn't exist in the grid.
+    /// 
+    /// Example 1:
+    /// Input: grid = [[1,1,1],[1,0,1],[1,1,1]]
+    /// Output: 9
+    ///
+    /// Example 2:
+    /// Input: grid = [[1,1,0,0]]
+    /// Output: 1
+    ///
+    /// Constraints:
+    /// 1. 1 <= grid.length <= 100
+    /// 2. 1 <= grid[0].length <= 100
+    /// 3. grid[i][j] is 0 or 1
+    /// </summary>
+    int largest1BorderedSquare(vector<vector<int>>& grid);
 };
 #endif  // LeetCodeDP

@@ -1,6 +1,28 @@
 #include "..\LeetCode\LeetCode.h"
 #include "..\LeetCode\LeetCodeString.h"
 #include "TestString.h"
+void TestLeetCode28(void)
+{
+    Logger::WriteMessage("Test Leet Code 28");
+    LeetCodeString leetCode;
+
+    Logger::WriteMessage("KMP substring search");
+    string haystack = "ABCABCDABABCDABCDABDE";
+    string needle = "ABCDABD";
+    int result = leetCode.strStr(haystack, needle);
+    Logger::WriteMessage("kaystack = " + haystack + "; needle = " + needle + "; result = " + to_string(result));
+
+    haystack = "a";
+    needle = "";
+    result = leetCode.strStr(haystack, needle);
+    Logger::WriteMessage("kaystack = " + haystack + "; needle = " + needle + "; result = " + to_string(result));
+
+    haystack = "AAABCTTHHAAABCDD";
+    needle = "AABC";
+    result = leetCode.strStr(haystack, needle);
+    Logger::WriteMessage("kaystack = " + haystack + "; needle = " + needle + "; result = " + to_string(result));
+}
+
 void TestLeetCode1233(void)
 {
     Logger::WriteMessage("Test Leet Code 1233");
@@ -182,6 +204,7 @@ void TestLeetCode1309(void)
 
 void TestLeetCodeString(void)
 {
+    TestLeetCode28();
     TestLeetCode1309();
     TestLeetCode1297();
     TestLeetCode1268();
