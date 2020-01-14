@@ -9268,4 +9268,102 @@ vector<int> LeetCodeArray::xorQueries(vector<int>& arr, vector<vector<int>>& que
     return result;
 }
 
+/// <summary>
+/// Leet code #1313. Decompress Run-Length Encoded List
+///
+/// Easy
+///
+/// We are given a list nums of integers representing a list compressed with 
+/// run-length encoding.
+///
+/// Consider each adjacent pair of elements [a, b] = [nums[2*i], nums[2*i+1]] 
+/// (with i >= 0).  For each such pair, there are a elements with value b in 
+/// the decompressed list.
+///
+/// Return the decompressed list.
+///
+/// Example 1:
+///
+/// Input: nums = [1,2,3,4]
+/// Output: [2,4,4,4]
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length <= 100
+/// 2. nums.length % 2 == 0
+/// 3. 1 <= nums[i] <= 100
+/// </summary>
+vector<int> LeetCodeArray::decompressRLElist(vector<int>& nums)
+{
+    vector<int> result;
+
+    for (size_t i = 0; i < nums.size(); i += 2)
+    {
+        for (int j = 0; j < nums[i]; j++)
+        {
+            result.push_back(nums[i + 1]);
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet code #1314. Matrix Block Sum
+///
+/// Medium
+///
+/// Given a m * n matrix mat and an integer K, return a matrix answer where 
+/// each answer[i][j] is the sum of all elements mat[r][c] for 
+/// i - K <= r <= i + K, j - K <= c <= j + K, and (r, c) is a valid position 
+/// in the matrix. 
+/// 
+/// Example 1:
+/// Input: mat = [[1,2,3],[4,5,6],[7,8,9]], K = 1
+/// Output: [[12,21,16],[27,45,33],[24,39,28]]
+///
+/// Example 2:
+/// Input: mat = [[1,2,3],[4,5,6],[7,8,9]], K = 2
+/// Output: [[45,45,45],[45,45,45],[45,45,45]]
+/// 
+/// Constraints:
+/// 1. m == mat.length
+/// 2. n == mat[i].length
+/// 3. 1 <= m, n, K <= 100
+/// 4. 1 <= mat[i][j] <= 100
+/// </summary>
+vector<vector<int>> LeetCodeArray::matrixBlockSum(vector<vector<int>>& mat, int K)
+{
+    int m = mat.size();
+    int n = mat[0].size();
+    vector<vector<pair<int, int>>> sum(m, vector<pair<int, int>>(n));
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            sum[i][j].first = mat[i][j];
+            if (j > 0) sum[i][j].first += sum[i][j - 1].first;
+            sum[i][j].second = sum[i][j].first;
+            if (i > 0) sum[i][j].second += sum[i - 1][j].second;
+        }
+    }
+
+    vector<vector<int>> result(m, vector<int>(n));
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            int y0 = max(0, i - K);
+            int x0 = max(0, j - K);
+            int y1 = min(i + K, m - 1);
+            int x1 = min(j + K, n - 1);
+
+            result[i][j] = sum[y1][x1].second;
+            if (y0 > 0) result[i][j] -= sum[y0 - 1][x1].second;
+            if (x0 > 0) result[i][j] -= sum[y1][x0-1].second;
+            if (y0 > 0 && x0 > 0)result[i][j] += sum[y0-1][x0 - 1].second;
+        }
+    }
+    return result;
+}
 #pragma endregion

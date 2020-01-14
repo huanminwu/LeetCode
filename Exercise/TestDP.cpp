@@ -1052,8 +1052,30 @@ void TestLeetCode1139(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1320(void)
+{
+    Logger::WriteMessage("Test Leet Code 1320");
+    LeetCodeDP leetCode;
+    string word = "CAKE";
+    int result = leetCode.minimumDistance(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "HAPPY";
+    result = leetCode.minimumDistance(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "NEW";
+    result = leetCode.minimumDistance(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "YEAR";
+    result = leetCode.minimumDistance(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1320();
     TestLeetCode1139();
     TestLeetCode1312();
     TestLeetCode1301();

@@ -359,8 +359,38 @@ void TestLeetCode1202(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode1319(void)
+{
+    Logger::WriteMessage("Test Leet Code 1319");
+    LeetCodeUnionFind leetCode;
+    int n = 4;
+    vector<vector<int>> connections = { {0, 1},{0, 2},{1, 2} };
+    int result = leetCode.makeConnected(n, connections);
+    Logger::WriteMessage(connections);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 6;
+    connections = { {0, 1},{0, 2},{0, 3},{1, 2},{1, 3} };
+    result = leetCode.makeConnected(n, connections);
+    Logger::WriteMessage(connections);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 6;
+    connections = { {0, 1},{0, 2},{0, 3},{1, 2} };
+    result = leetCode.makeConnected(n, connections);
+    Logger::WriteMessage(connections);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 5;
+    connections = { {0, 1},{0, 2},{3, 4},{2, 3} };
+    result = leetCode.makeConnected(n, connections);
+    Logger::WriteMessage(connections);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeUnionFind(void)
 {
+    TestLeetCode1319();
     TestLeetCode305();
     TestLeetCode547();
     TestLeetCode695();

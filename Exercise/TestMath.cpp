@@ -1700,8 +1700,66 @@ void TestLeetCode1304(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1317(void)
+{
+    Logger::WriteMessage("Test Leet Code 1317");
+    LeetCodeMath leetCode;
+    int n = 2;
+    vector<int> result = leetCode.getNoZeroIntegers(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 11;
+    result = leetCode.getNoZeroIntegers(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 10000;
+    result = leetCode.getNoZeroIntegers(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 69;
+    result = leetCode.getNoZeroIntegers(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 1010;
+    result = leetCode.getNoZeroIntegers(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1318(void)
+{
+    Logger::WriteMessage("Test Leet Code 1318");
+    LeetCodeMath leetCode;
+    int a = 2;
+    int b = 6;
+    int c = 5;
+    int result = leetCode.minFlips(a, b, c);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) + 
+        "; c = " + to_string(c) + "result = " + to_string(result));
+
+    a = 4;
+    b = 2;
+    c = 7;
+    result = leetCode.minFlips(a, b, c);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) +
+        "; c = " + to_string(c) + "result = " + to_string(result));
+
+    a = 1;
+    b = 2;
+    c = 3;
+    result = leetCode.minFlips(a, b, c);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) +
+        "; c = " + to_string(c) + "result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1318();
+    TestLeetCode1317();
     TestLeetCode1304();
     TestLeetCode800();
     TestLeetCode810();

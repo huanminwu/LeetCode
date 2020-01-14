@@ -1250,6 +1250,58 @@ public:
     /// 5. 0 <= queries[i][0] <= queries[i][1] < arr.length
     /// </summary>
     vector<int> xorQueries(vector<int>& arr, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet code #1313. Decompress Run-Length Encoded List
+    ///
+    /// Easy
+    ///
+    /// We are given a list nums of integers representing a list compressed with 
+    /// run-length encoding.
+    ///
+    /// Consider each adjacent pair of elements [a, b] = [nums[2*i], nums[2*i+1]] 
+    /// (with i >= 0).  For each such pair, there are a elements with value b in 
+    /// the decompressed list.
+    ///
+    /// Return the decompressed list.
+    ///
+    /// Example 1:
+    ///
+    /// Input: nums = [1,2,3,4]
+    /// Output: [2,4,4,4]
+    /// 
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 100
+    /// 2. nums.length % 2 == 0
+    /// 3. 1 <= nums[i] <= 100
+    /// </summary>
+    vector<int> decompressRLElist(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #1314. Matrix Block Sum
+    ///
+    /// Medium
+    ///
+    /// Given a m * n matrix mat and an integer K, return a matrix answer where 
+    /// each answer[i][j] is the sum of all elements mat[r][c] for 
+    /// i - K <= r <= i + K, j - K <= c <= j + K, and (r, c) is a valid position 
+    /// in the matrix. 
+    /// 
+    /// Example 1:
+    /// Input: mat = [[1,2,3],[4,5,6],[7,8,9]], K = 1
+    /// Output: [[12,21,16],[27,45,33],[24,39,28]]
+    ///
+    /// Example 2:
+    /// Input: mat = [[1,2,3],[4,5,6],[7,8,9]], K = 2
+    /// Output: [[45,45,45],[45,45,45],[45,45,45]]
+    /// 
+    /// Constraints:
+    /// 1. m == mat.length
+    /// 2. n == mat[i].length
+    /// 3. 1 <= m, n, K <= 100
+    /// 4. 1 <= mat[i][j] <= 100
+    /// </summary>
+    vector<vector<int>> matrixBlockSum(vector<vector<int>>& mat, int K);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

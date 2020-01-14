@@ -9150,4 +9150,64 @@ string LeetCodeString::freqAlphabets(string s)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1316. Distinct Echo Substrings
+///
+/// Hard
+///
+/// Return the number of distinct non-empty substrings of text that can be 
+/// written as the concatenation of some string with itself.
+/// 
+/// Example 1:
+/// Input: text = "abcabcabc"
+/// Output: 3
+/// Explanation: The 3 substrings are "abcabc", "bcabca" and "cabcab".
+/// Example 2:
+/// Input: text = "leetcodeleetcode"
+/// Output: 2
+/// Explanation: The 2 substrings are "ee" and "leetcodeleetcode".
+/// 
+/// Constraints:
+/// 1. 1 <= text.length <= 2000
+/// 2. text has only lowercase English letters.
+/// </summary>
+int LeetCodeString::distinctEchoSubstrings(string text)
+{
+    int n = text.size();
+    unordered_set<string> result_set;
+    for (int s = 0; s < (int)text.size(); s++)
+    {
+        vector<int> kmp(n);
+        int i = 1;
+        int j = 0;
+        while (s + i < n)
+        {
+            if (text[s + i] == text[s + j])
+            {
+                j++;
+                kmp[i] = j;
+                i++;
+                // must be even length
+                if (i % 2 == 1) continue;
+                // if duplicate as half half, the remaining prefix length 
+                // must be divisible to total length
+                if ((i / 2) % (i - j) == 0)
+                {
+                    result_set.insert(text.substr(s, i));
+                }
+            }
+            else if (j == 0)
+            {
+                i++;
+            }
+            else
+            {
+                j = kmp[j - 1];
+            }
+        }
+    }
+    return result_set.size();
+}
+
 #pragma endregion

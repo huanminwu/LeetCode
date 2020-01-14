@@ -6688,3 +6688,103 @@ vector<int> LeetCodeMath::sumZero(int n)
     result[n - 1] = 0 - sum;
     return result;
 }
+
+/// <summary>
+/// Leet code #1317. Convert Integer to the Sum of Two No-Zero Integers
+///
+/// Easy
+///
+/// Given an integer n. No-Zero integer is a positive integer which doesn't 
+/// contain any 0 in its decimal representation.
+///
+/// Return a list of two integers [A, B] where:
+///
+/// A and B are No-Zero integers.
+/// A + B = n
+/// It's guarateed that there is at least one valid solution. If there are 
+/// many valid solutions you can return any of them.
+/// 
+/// Example 1:
+/// Input: n = 2
+/// Output: [1,1]
+/// Explanation: A = 1, B = 1. A + B = n and both A and B don't contain 
+/// any 0 in their decimal representation.
+///
+/// Example 2:
+/// Input: n = 11
+/// Output: [2,9]
+///
+/// Example 3:
+/// Input: n = 10000
+/// Output: [1,9999]
+///
+/// Example 4:
+/// Input: n = 69
+/// Output: [1,68]
+//
+/// Example 5:
+/// Input: n = 1010
+/// Output: [11,999]
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 10^4
+/// </summary>
+vector<int> LeetCodeMath::getNoZeroIntegers(int n)
+{
+    vector<int> result(2);
+    for (int i = 1; i <= n / 2; i++)
+    {
+        if (to_string(i).find('0') == string::npos &&
+            to_string(n - i).find('0') == string::npos)
+        {
+            result = { i, n - i };
+            break;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1318. Minimum Flips to Make a OR b Equal to c
+///
+/// Medium
+///
+/// Given 3 positives numbers a, b and c. Return the minimum flips required 
+/// in some bits of a and b to make ( a OR b == c ). (bitwise OR operation).
+/// Flip operation consists of change any single bit 1 to 0 or change the 
+/// bit 0 to 1 in their binary representation.
+/// 
+/// Example 1:
+/// Input: a = 2, b = 6, c = 5
+/// Output: 3
+/// Explanation: After flips a = 1 , b = 4 , c = 5 such that (a OR b == c)
+///
+/// Example 2:
+/// Input: a = 4, b = 2, c = 7
+/// Output: 1
+///
+/// Example 3:
+/// Input: a = 1, b = 2, c = 3
+/// Output: 0
+///
+/// Constraints:
+/// 1. 1 <= a <= 10^9
+/// 2. 1 <= b <= 10^9
+/// 3. 1 <= c <= 10^9
+/// </summary>
+int LeetCodeMath::minFlips(int a, int b, int c)
+{
+    int result = 0;
+    while (a + b + c > 0)
+    {
+        int a_bit = a % 2;
+        int b_bit = b % 2;
+        int c_bit = c % 2;
+        if (c_bit == 0) result += a_bit + b_bit;
+        else result += 1 - (a_bit | b_bit);
+        a = a / 2;
+        b = b / 2;
+        c = c / 2;
+    }
+    return result;
+}

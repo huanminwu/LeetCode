@@ -778,8 +778,40 @@ void TestLeetCode1310(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1313(void)
+{
+    Logger::WriteMessage("Test Leet Code 1313");
+    LeetCodeArray leetCode;
+
+    vector<int> nums = { 1, 2, 3, 4 };
+    vector<int> result = leetCode.decompressRLElist(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1314(void)
+{
+    Logger::WriteMessage("Test Leet Code 1314");
+    LeetCodeArray leetCode;
+
+    vector<vector<int>> mat = { {1, 2, 3},{4, 5, 6},{7, 8, 9} };
+    int K = 1;
+    vector<vector<int>> result = leetCode.matrixBlockSum(mat, K);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("K = " + to_string(K));
+    Logger::WriteMessage(result);
+
+    K = 2;
+    result = leetCode.matrixBlockSum(mat, K);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("K = " + to_string(K));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1314();
+    TestLeetCode1313();
     TestLeetCode1310();
     TestLeetCode36();
     TestLeetCode448();

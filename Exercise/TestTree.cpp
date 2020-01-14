@@ -194,8 +194,21 @@ void TestLeetCode1302(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode1315(void)
+{
+    Logger::WriteMessage("Test Leet Code 1315");
+    LeetCodeTree leetCode;
+    string input = "[6,7,8,2,7,1,3,9,null,1,4,null,null,null,5]";
+    TreeNode* root = leetCode.deserialize(input);
+    Logger::WriteMessage(input);
+    int result = leetCode.sumEvenGrandparent(root);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1315();
     TestLeetCode1302();
     TestLeetCode1305();
     TestLeetCode1261();

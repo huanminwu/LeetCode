@@ -16,6 +16,7 @@ void TestLeetCode990(void);
 void TestLeetCode1061(void);
 void TestLeetCode1101(void);
 void TestLeetCode1202(void);
+void TestLeetCode1319(void);
 void TestLeetCode9903(void);
 void TestLeetCodeUnionFind(void);
 #endif  // TestGraph

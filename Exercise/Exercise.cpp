@@ -15720,15 +15720,15 @@ void TestLeetCode1238(void)
 
 void main(int argc, char* argv[])
 {
-    TestLeetCode28();
+    TestLeetCodeUnionFind();
     TestLeetCodeDP();
-    TestLeetCodeGraph();
-    TestLeetCodeArray();
     TestLeetCodeString();
+    TestLeetCodeMath();
+    TestLeetCodeArray();
+    TestLeetCodeTree();
+    TestLeetCodeGraph();
     TestLeetCodeDFS();
     TestLeetCodeBinarySearch();
-    TestLeetCodeTree();
-    TestLeetCodeMath();
     TestLeetCodeGreedy();
     TestLeetCodeLinkedList();
     TestLeetCodeBFS();
@@ -16636,7 +16636,6 @@ void main(int argc, char* argv[])
     TestLeetCode83();
     TestLeetCode61();
     TestLeetCode21();
-    TestLeetCode28();
     TestLeetCode16();
     TestLeetCode191();
     TestLeetCode371();

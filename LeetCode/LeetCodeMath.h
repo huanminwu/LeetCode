@@ -437,53 +437,53 @@ public:
     /// </summary>
     bool hasGroupsSizeX(vector<int>& deck);
 
-	/// <summary>
-	/// Leet code #1118. Number of Days in a Month
-	/// 
-	/// Given a year Y and a month M, return how many days there are in that month.
-	/// 
-	/// Example 1:
-	/// Input: Y = 1992, M = 7
-	/// Output: 31
-	///
-	/// Example 2:
-	/// Input: Y = 2000, M = 2
-	/// Output: 29
-	/// Example 3:
-	///
-	/// Input: Y = 1900, M = 2
-	/// Output: 28
-	/// 
-	/// Note:
-	/// 1. 1583 <= Y <= 2100
-	/// 2. 1 <= M <= 12
-	/// </summary>
-	int numberOfDays(int Y, int M);
+    /// <summary>
+    /// Leet code #1118. Number of Days in a Month
+    /// 
+    /// Given a year Y and a month M, return how many days there are in that month.
+    /// 
+    /// Example 1:
+    /// Input: Y = 1992, M = 7
+    /// Output: 31
+    ///
+    /// Example 2:
+    /// Input: Y = 2000, M = 2
+    /// Output: 29
+    /// Example 3:
+    ///
+    /// Input: Y = 1900, M = 2
+    /// Output: 28
+    /// 
+    /// Note:
+    /// 1. 1583 <= Y <= 2100
+    /// 2. 1 <= M <= 12
+    /// </summary>
+    int numberOfDays(int Y, int M);
 
-	/// <summary>
-	/// Leet code #1131. Maximum of Absolute Value Expression
-	/// 
-	/// Given two arrays of integers with equal lengths, return the maximum 
-	/// value of:
-	///
-	/// |arr1[i] - arr1[j]| + |arr2[i] - arr2[j]| + |i - j|
-	///
-	/// where the maximum is taken over all 0 <= i, j < arr1.length.
-	/// 
-	///  
-	/// Example 1:
-	/// Input: arr1 = [1,2,3,4], arr2 = [-1,4,5,6]
-	/// Output: 13
-	///
-	/// Example 2:
-	/// Input: arr1 = [1,-2,-5,0,10], arr2 = [0,-2,-1,-7,-4]
-	/// Output: 20
-	/// 
-	/// Constraints:
-	/// 1. 2 <= arr1.length == arr2.length <= 40000
-	/// 2. -10^6 <= arr1[i], arr2[i] <= 10^6
-	/// </summary>
-	int maxAbsValExpr(vector<int>& arr1, vector<int>& arr2);
+    /// <summary>
+    /// Leet code #1131. Maximum of Absolute Value Expression
+    /// 
+    /// Given two arrays of integers with equal lengths, return the maximum 
+    /// value of:
+    ///
+    /// |arr1[i] - arr1[j]| + |arr2[i] - arr2[j]| + |i - j|
+    ///
+    /// where the maximum is taken over all 0 <= i, j < arr1.length.
+    /// 
+    ///  
+    /// Example 1:
+    /// Input: arr1 = [1,2,3,4], arr2 = [-1,4,5,6]
+    /// Output: 13
+    ///
+    /// Example 2:
+    /// Input: arr1 = [1,-2,-5,0,10], arr2 = [0,-2,-1,-7,-4]
+    /// Output: 20
+    /// 
+    /// Constraints:
+    /// 1. 2 <= arr1.length == arr2.length <= 40000
+    /// 2. -10^6 <= arr1[i], arr2[i] <= 10^6
+    /// </summary>
+    int maxAbsValExpr(vector<int>& arr1, vector<int>& arr2);
 
     /// <summary>
     /// Leet code #1137. N-th Tribonacci Number
@@ -2899,5 +2899,77 @@ public:
     /// 1. 1 <= n <= 1000
     /// </summary>
     vector<int> sumZero(int n);
+
+    /// <summary>
+    /// Leet code #1317. Convert Integer to the Sum of Two No-Zero Integers
+    ///
+    /// Easy
+    ///
+    /// Given an integer n. No-Zero integer is a positive integer which doesn't 
+    /// contain any 0 in its decimal representation.
+    ///
+    /// Return a list of two integers [A, B] where:
+    ///
+    /// A and B are No-Zero integers.
+    /// A + B = n
+    /// It's guarateed that there is at least one valid solution. If there are 
+    /// many valid solutions you can return any of them.
+    /// 
+    /// Example 1:
+    /// Input: n = 2
+    /// Output: [1,1]
+    /// Explanation: A = 1, B = 1. A + B = n and both A and B don't contain 
+    /// any 0 in their decimal representation.
+    ///
+    /// Example 2:
+    /// Input: n = 11
+    /// Output: [2,9]
+    ///
+    /// Example 3:
+    /// Input: n = 10000
+    /// Output: [1,9999]
+    ///
+    /// Example 4:
+    /// Input: n = 69
+    /// Output: [1,68]
+    //
+    /// Example 5:
+    /// Input: n = 1010
+    /// Output: [11,999]
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 10^4
+    /// </summary>
+    vector<int> getNoZeroIntegers(int n);
+
+    /// <summary>
+    /// Leet code #1318. Minimum Flips to Make a OR b Equal to c
+    ///
+    /// Medium
+    ///
+    /// Given 3 positives numbers a, b and c. Return the minimum flips required 
+    /// in some bits of a and b to make ( a OR b == c ). (bitwise OR operation).
+    /// Flip operation consists of change any single bit 1 to 0 or change the 
+    /// bit 0 to 1 in their binary representation.
+    /// 
+    /// Example 1:
+    /// Input: a = 2, b = 6, c = 5
+    /// Output: 3
+    /// Explanation: After flips a = 1 , b = 4 , c = 5 such that (a OR b == c)
+    ///
+    /// Example 2:
+    /// Input: a = 4, b = 2, c = 7
+    /// Output: 1
+    ///
+    /// Example 3:
+    /// Input: a = 1, b = 2, c = 3
+    /// Output: 0
+    ///
+    /// Constraints:
+    /// 1. 1 <= a <= 10^9
+    /// 2. 1 <= b <= 10^9
+    /// 3. 1 <= c <= 10^9
+    /// </summary>
+    int minFlips(int a, int b, int c);
 };
 #endif

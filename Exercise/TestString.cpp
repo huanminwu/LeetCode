@@ -202,8 +202,26 @@ void TestLeetCode1309(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode1316(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 1316");
+    string text = "abcabcabc";
+    int result = leetCode.distinctEchoSubstrings(text);
+    Logger::WriteMessage("text = " + text + "; result = " + to_string(result));
+
+    text = "leetcodeleetcode";
+    result = leetCode.distinctEchoSubstrings(text);
+    Logger::WriteMessage("text = " + text + "; result = " + to_string(result));
+
+    text = "aaaaaaaaaa";
+    result = leetCode.distinctEchoSubstrings(text);
+    Logger::WriteMessage("text = " + text + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1316();
     TestLeetCode28();
     TestLeetCode1309();
     TestLeetCode1297();
