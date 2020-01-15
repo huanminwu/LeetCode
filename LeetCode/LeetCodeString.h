@@ -420,6 +420,356 @@ public:
     /// 1. A and B will have length at most 100.
     /// </summary>
     bool rotateString(string A, string B);
+
+    /// <summary>
+    /// Leet code #1181. Before and After Puzzle
+    /// 
+    /// Given a list of phrases, generate a list of Before and After puzzles.
+    /// A phrase is a string that consists of lowercase English letters and 
+    /// spaces only. No space appears in the start or the end of a phrase. 
+    /// There are no consecutive spaces in a phrase.
+    /// Before and After puzzles are phrases that are formed by merging two 
+    /// phrases where the last word of the first phrase is the same as the 
+    /// first word of the second phrase.
+    /// Return the Before and After puzzles that can be formed by every two 
+    /// phrases phrases[i] and phrases[j] where i != j. Note that the order 
+    /// of matching two phrases matters, we want to consider both orders.
+    /// You should return a list of distinct strings sorted lexicographically.
+    /// 
+    /// Example 1:
+    /// Input: phrases = ["writing code","code rocks"]
+    /// Output: ["writing code rocks"]
+    ///
+    /// Example 2:
+    /// Input: phrases = ["mission statement",
+    ///                   "a quick bite to eat",
+    ///                   "a chip off the old block",
+    ///                   "chocolate bar",
+    ///                   "mission impossible",
+    ///                   "a man on a mission",
+    ///                   "block party",
+    ///                   "eat my words",
+    ///                   "bar of soap"]
+    /// Output: ["a chip off the old block party",
+    ///          "a man on a mission impossible",
+    ///          "a man on a mission statement",
+    ///          "a quick bite to eat my words",
+    ///          "chocolate bar of soap"]
+    ///
+    /// Example 3:
+    /// Input: phrases = ["a","b","a"]
+    /// Output: ["a"]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= phrases.length <= 100
+    /// 2. 1 <= phrases[i].length <= 100
+    /// </summary>
+    vector<string> beforeAndAfterPuzzles(vector<string>& phrases);
+
+    /// <summary>
+    /// Leet code #1189. Maximum Number of Balloons
+    /// 
+    /// Given a string text, you want to use the characters of text to form as 
+    /// many instances of the word "balloon" as possible.
+    /// You can use each character in text at most once. Return the maximum number 
+    /// of instances that can be formed.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: text = "nlaebolko"
+    /// Output: 1
+    /// Example 2:
+    ///
+    /// Input: text = "loonbalxballpoon"
+    /// Output: 2
+    /// Example 3:
+    /// Input: text = "leetcode"
+    /// Output: 0
+    /// 
+    /// Constraints:
+    /// 1. 1 <= text.length <= 10^4
+    /// 2. text consists of lower case English letters only.
+    /// </summary>
+    int maxNumberOfBalloons(string text);
+
+    /// <summary>
+    /// Leet code #1170. Compare Strings by Frequency of the Smallest Character
+    /// </summary>
+    int numSmallerByFrequency(string word);
+
+    /// <summary>
+    /// Leet code #1170. Compare Strings by Frequency of the Smallest Character
+    ///
+    /// Let's define a function f(s) over a non-empty string s, which calculates 
+    /// the frequency of the smallest character in s. For example, if s = "dcce" 
+    /// then f(s) = 2 because the smallest character is "c" and its frequency 
+    /// is 2.
+    ///
+    /// Now, given string arrays queries and words, return an integer array 
+    /// answer, where each answer[i] is the number of words such that 
+    /// f(queries[i]) < f(W), where W is a word in words.
+    ///
+    /// Example 1:
+    /// Input: queries = ["cbd"], words = ["zaaaz"]
+    /// Output: [1]
+    /// Explanation: On the first query we have f("cbd") = 1, 
+    /// f("zaaaz") = 3 so f("cbd") < f("zaaaz").
+    ///
+    /// Example 2:
+    /// Input: queries = ["bbb","cc"], words = ["a","aa","aaa","aaaa"]
+    /// Output: [1,2]
+    /// Explanation: On the first query only f("bbb") < f("aaaa"). On the second 
+    /// query both f("aaa") and f("aaaa") are both > f("cc").
+    /// 
+    /// Constraints:
+    /// 1. 1 <= queries.length <= 2000
+    /// 2. 1 <= words.length <= 2000
+    /// 3. 1 <= queries[i].length, words[i].length <= 10
+    /// 4. queries[i][j], words[i][j] are English lowercase letters.
+    /// </summary>
+    vector<int> numSmallerByFrequency(vector<string>& queries, vector<string>& words);
+
+    /// <summary>
+    /// Leet code #1165. Single-Row Keyboard
+    ///
+    /// There is a special keyboard with all keys in a single row.
+    /// Given a string keyboard of length 26 indicating the layout of the 
+    /// keyboard (indexed from 0 to 25), initially your finger is at index 0. 
+    /// To type a character, you have to move your finger to the index of the 
+    /// desired character. The time taken to move your finger from index i to 
+    /// index j is |i - j|.
+    ///
+    /// You want to type a string word. Write a function to calculate how 
+    /// much time it takes to type it with one finger.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: keyboard = "abcdefghijklmnopqrstuvwxyz", word = "cba"
+    /// Output: 4
+    /// Explanation: The index moves from 0 to 2 to write 'c' then to 1 to 
+    /// write 'b' then to 0 again to write 'a'.
+    /// Total time = 2 + 1 + 1 = 4. 
+    ///
+    /// Example 2:
+    /// 
+    /// Input: keyboard = "pqrstuvwxyzabcdefghijklmno", word = "leetcode"
+    /// Output: 73
+    ///  
+    /// Constraints:
+    /// 1. keyboard.length == 26
+    /// 2. keyboard contains each English lowercase letter exactly once in 
+    ///    some order.
+    /// 3. 1 <= word.length <= 10^4
+    /// 4. word[i] is an English lowercase letter.
+    /// </summary>
+    int calculateTime(string keyboard, string word);
+
+    /// <summary>
+    /// Leet code #830. Positions of Large Groups
+    /// 
+    /// In a string S of lowercase letters, these letters form consecutive 
+    /// groups of the same character.
+    ///
+    /// For example, a string like S = "abbxxxxzyy" has the groups "a", "bb", 
+    /// "xxxx", "z" and "yy".
+    ///
+    /// Call a group large if it has 3 or more characters.  We would like the 
+    /// starting and ending positions of every large group.
+    /// 
+    /// The final answer should be in lexicographic order.
+    ///
+    /// Example 1:
+    ///
+    /// Input: "abbxxxxzzy"
+    /// Output: [[3,6]]
+    /// Explanation: "xxxx" is the single large group with starting  3 and 
+    /// ending positions 6.
+    ///
+    /// Example 2:
+    ///
+    /// Input: "abc"
+    /// Output: []
+    /// Explanation: We have "a","b" and "c" but no large group.
+    ///
+    /// Example 3:
+    ///
+    /// Input: "abcdddeeeeaabbbcd"
+    /// Output: [[3,5],[6,9],[12,14]]
+    ///
+    /// Note:  1. 1 <= S.length <= 1000
+    /// </summary>
+    vector<vector<int>> largeGroupPositions(string S);
+
+    /// <summary>
+    /// Leet code #58. Length of Last Word
+    ///
+    /// Given a string s consists of upper/lower-case alphabets and empty 
+    /// space characters ' ', 
+    /// return the length of last word in the string.
+    /// If the last word does not exist, return 0.
+    /// Note: A word is defined as a character sequence consists of non-space 
+    /// characters only. 
+    /// For example,
+    /// Given s = "Hello World",
+    /// return 5.
+    /// </summary>
+    int lengthOfLastWord(string s);
+
+    /// <summary>
+    /// Leet code #165. Compare Version Numbers
+    ///
+    /// Compare two version numbers version1 and version2.
+    /// If version1 > version2 return 1, if version1 < version2 return -1, 
+    /// otherwise return 0. 
+    /// You may assume that the version strings are non-empty and contain 
+    /// only digits and the . character.
+    /// The . character does not represent a decimal point and is used to 
+    /// separate number sequences.
+    /// For instance, 2.5 is not "two and a half" or "half way to version 
+    /// three", it is the fifth second-level revision of the second 
+    /// first-level revision.
+    /// Here is an example of version numbers ordering:
+    /// 0.1 < 1.1 < 1.2 < 13.37 
+    /// </summary>
+    int compareVersion(string version1, string version2);
+
+    /// <summary>
+    /// Leet code #71. Simplify Path
+    ///
+    /// Medium
+    ///
+    /// Given an absolute path for a file (Unix-style), simplify it. Or in other 
+    /// words, convert it to the canonical path.
+    ///
+    /// In a UNIX-style file system, a period . refers to the current directory. 
+    /// Furthermore, a double period .. moves the directory up a level. For more 
+    /// information, see: Absolute path vs relative path in Linux/Unix
+    ///
+    /// Note that the returned canonical path must always begin with a slash /, 
+    /// and there must be only a single slash / between two directory names. The 
+    /// last directory name (if it exists) must not end with a trailing /. Also, 
+    /// the canonical path must be the shortest string representing the absolute 
+    /// path.
+    ///
+    /// Example 1:
+    /// Input: "/home/"
+    /// Output: "/home"
+    /// Explanation: Note that there is no trailing slash after the last directory 
+    /// name.
+    ///
+    /// Example 2:
+    /// Input: "/../"
+    /// Output: "/"
+    /// Explanation: Going one level up from the root directory is a no-op, as the 
+    /// root level is the highest level you can go.
+    ///
+    /// Example 3:
+    /// Input: "/home//foo/"
+    /// Output: "/home/foo"
+    /// Explanation: In the canonical path, multiple consecutive slashes are 
+    /// replaced by a single one.
+    ///
+    /// Example 4:
+    /// Input: "/a/./b/../../c/"
+    /// Output: "/c"
+    ///
+    /// Example 5:
+    /// Input: "/a/../../b/../c//.//"
+    /// Output: "/c"
+    ///
+    /// Example 6:
+    ///
+    /// Input: "/a//b////c/d//././/.."
+    /// Output: "/a/b/c"
+    /// </summary>
+    string simplifyPath(string path);
+
+    /// <summary>
+    /// Leet code #151. Reverse Words in a String
+    /// Given an input string, reverse the string word by word. 
+    /// For example,
+    ///   Given s = "the sky is blue",
+    ///   return "blue is sky the". 
+    /// Update (2015-02-12):
+    /// For C programmers: Try to solve it in-place in O(1) space. 
+    /// </summary>
+    string reverseWords(string s);
+
+    /// <summary>
+    /// Leet code #186. Reverse Words in a String II  
+    /// 
+    /// Given an input string, reverse the string word by word. A word 
+    /// is defined as a sequence of non-space characters. 
+    /// The input string does not contain leading or trailing spaces and 
+    /// the words are always separated by a single space.  
+    /// For example,
+    /// Given s = "the sky is blue",
+    /// return "blue is sky the".
+    /// Could you do it in-place without allocating extra space? 
+    /// </summary>
+    void reverseWordsII(string &s);
+
 #pragma endregion
 };
+
+/// <summary>
+/// Leet code #288. Unique Word Abbreviation    
+/// 
+/// An abbreviation of a word follows the form <first letter><number><last letter>. 
+/// Below are some examples of word abbreviations: 
+/// a) it                      --> it    (no abbreviation)
+///      1
+/// b) d|o|g                   --> d1g
+///              1    1  1
+///      1---5----0----5--8
+/// c) i|nternationalizatio|n  --> i18n
+///              1
+///      1---5----0
+/// d) l|ocalizatio|n          --> l10n
+///
+/// Assume you have a dictionary and given a word, find whether its 
+/// abbreviation is unique in the dictionary. A word's abbreviation is unique 
+/// if no other word from the dictionary has the same abbreviation.
+/// Example: 
+/// Given dictionary = [ "deer", "door", "cake", "card" ]
+/// isUnique("dear") -> false
+/// isUnique("cart") -> true
+/// isUnique("cane") -> false
+/// isUnique("make") -> true
+/// </summary>
+class ValidWordAbbr
+{
+private:
+    unordered_map<string, unordered_set<string>> m_AbbrMap;
+public:
+    ValidWordAbbr(vector<string> &dictionary)
+    {
+        for (string word : dictionary)
+        {
+            string abbr;
+            if (word.size() > 0) abbr.push_back(word[0]);
+            if (word.size() > 1) abbr.push_back(word[word.size() - 1]);
+            if (word.size() > 2) abbr.insert(1, to_string(word.size() - 2));
+            m_AbbrMap[abbr].insert(word);
+        }
+    }
+    bool isUnique(string word)
+    {
+        string abbr;
+        if (word.size() > 0) abbr.push_back(word[0]);
+        if (word.size() > 1) abbr.push_back(word[word.size() - 1]);
+        if (word.size() > 2) abbr.insert(1, to_string(word.size() - 2));
+
+        if ((m_AbbrMap.find(abbr) == m_AbbrMap.end()) ||
+            ((m_AbbrMap[abbr].size()) == 1 && (m_AbbrMap[abbr].count(word) == 1)))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+};
+
 #endif  // LeetCodeString_H

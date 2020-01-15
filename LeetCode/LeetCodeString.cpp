@@ -127,24 +127,27 @@ int LeetCode::lengthOfLongestSubstring(string s)
 /// Update (2015-02-12):
 /// For C programmers: Try to solve it in-place in O(1) space. 
 /// </summary>
-void LeetCode::reverseWords(string &s)
+string LeetCodeString::reverseWords(string s)
 {
-    if (s.size() == 0) return;
-
-    size_t begin = 0;
-    size_t end = s.size() - 1;
-
     // The first iteration reverse every single character
-    ReverseRange(s, begin, end);
+    std::reverse(s.begin(), s.end());
 
     // start from begining of the sentence
-    begin = 0; end = 0;
+    size_t begin = 0; 
+    size_t end = 0;
+    int pos = -1;
     while (begin < s.size())
     {
         // either end hit end or hit a space, we got a word
         if ((!isspace(s[begin])) && ((end == s.size()) || (isspace(s[end]))))
         {
-            ReverseRange(s, begin, end - 1);
+            std::reverse(s.begin() + begin, s.begin() + end);
+            pos++;
+            for (size_t i = begin; i < end; i++, pos++)
+            {
+                s[pos] = s[i];
+            }
+            if (pos < s.size()) s[pos] = ' ';
             begin = end;
             end = begin + 1;
         }
@@ -158,7 +161,9 @@ void LeetCode::reverseWords(string &s)
             end++;
         }
     }
-    RemoveExtraSpaces(s);
+    if (pos != -1) s.resize(pos);
+    else s.clear();
+    return s;
 }
 
 /// <summary>
@@ -173,7 +178,7 @@ void LeetCode::reverseWords(string &s)
 /// return "blue is sky the".
 /// Could you do it in-place without allocating extra space? 
 /// </summary>
-void LeetCode::reverseWordsII(string &s)
+void LeetCodeString::reverseWordsII(string &s)
 {
     std::reverse(s.begin(), s.end());
     // start from begining of the sentence
@@ -646,16 +651,19 @@ bool LeetCode::isAnagram(string s, string t)
 }
 
 /// <summary>
-/// Leet code #58. Length of Last Word  
-/// Given a string s consists of upper/lower-case alphabets and empty space characters ' ', 
+/// Leet code #58. Length of Last Word
+///
+/// Given a string s consists of upper/lower-case alphabets and empty 
+/// space characters ' ', 
 /// return the length of last word in the string.
 /// If the last word does not exist, return 0.
-/// Note: A word is defined as a character sequence consists of non-space characters only. 
-///	For example,
+/// Note: A word is defined as a character sequence consists of non-space 
+/// characters only. 
+/// For example,
 /// Given s = "Hello World",
 /// return 5.
 /// </summary>
-int LeetCode::lengthOfLastWord(string s)
+int LeetCodeString::lengthOfLastWord(string s)
 {
     int last = s.size();
     while ((last > 0) && isspace(s[last - 1])) last--;
@@ -767,7 +775,7 @@ int LeetCode::firstUniqChar(string s)
 /// Here is an example of version numbers ordering:
 /// 0.1 < 1.1 < 1.2 < 13.37 
 /// </summary>
-int LeetCode::compareVersion(string version1, string version2)
+int LeetCodeString::compareVersion(string version1, string version2)
 {
     vector<int> version_list1;
     vector<int> version_list2;
@@ -865,18 +873,54 @@ int LeetCode::longestPalindromeII(string s)
 
 /// <summary>
 /// Leet code #71. Simplify Path
-/// Given an absolute path for a file (Unix-style), simplify it.
-/// For example, 
-/// path = "/home/", => "/home"
-/// path = "/a/./b/../../c/", => "/c"
-/// click to show corner cases.
-/// Corner Cases:  
-/// Did you consider the case where path = "/../"?
-/// In this case, you should return "/".
-/// Another corner case is the path might contain multiple slashes '/' together, such as "/home//foo/".
-/// In this case, you should ignore redundant slashes and return "/home/foo".
+///
+/// Medium
+///
+/// Given an absolute path for a file (Unix-style), simplify it. Or in other 
+/// words, convert it to the canonical path.
+///
+/// In a UNIX-style file system, a period . refers to the current directory. 
+/// Furthermore, a double period .. moves the directory up a level. For more 
+/// information, see: Absolute path vs relative path in Linux/Unix
+///
+/// Note that the returned canonical path must always begin with a slash /, 
+/// and there must be only a single slash / between two directory names. The 
+/// last directory name (if it exists) must not end with a trailing /. Also, 
+/// the canonical path must be the shortest string representing the absolute 
+/// path.
+///
+/// Example 1:
+/// Input: "/home/"
+/// Output: "/home"
+/// Explanation: Note that there is no trailing slash after the last directory 
+/// name.
+///
+/// Example 2:
+/// Input: "/../"
+/// Output: "/"
+/// Explanation: Going one level up from the root directory is a no-op, as the 
+/// root level is the highest level you can go.
+///
+/// Example 3:
+/// Input: "/home//foo/"
+/// Output: "/home/foo"
+/// Explanation: In the canonical path, multiple consecutive slashes are 
+/// replaced by a single one.
+///
+/// Example 4:
+/// Input: "/a/./b/../../c/"
+/// Output: "/c"
+///
+/// Example 5:
+/// Input: "/a/../../b/../c//.//"
+/// Output: "/c"
+///
+/// Example 6:
+///
+/// Input: "/a//b////c/d//././/.."
+/// Output: "/a/b/c"
 /// </summary>
-string LeetCode::simplifyPath(string path)
+string LeetCodeString::simplifyPath(string path)
 {
     string result;
     vector<string> path_list;
@@ -8293,7 +8337,7 @@ string LeetCode::lastSubstring(string s)
 /// <summary>
 /// Leet code #1170. Compare Strings by Frequency of the Smallest Character
 /// </summary>
-int LeetCode::numSmallerByFrequency(string word)
+int LeetCodeString::numSmallerByFrequency(string word)
 {
     char ch;
     int result = 0;
@@ -8347,7 +8391,7 @@ int LeetCode::numSmallerByFrequency(string word)
 /// 3. 1 <= queries[i].length, words[i].length <= 10
 /// 4. queries[i][j], words[i][j] are English lowercase letters.
 /// </summary>
-vector<int> LeetCode::numSmallerByFrequency(vector<string>& queries, vector<string>& words)
+vector<int> LeetCodeString::numSmallerByFrequency(vector<string>& queries, vector<string>& words)
 {
     vector<int> word_frequency(words.size());
     vector<int> result(queries.size());
@@ -8400,7 +8444,7 @@ vector<int> LeetCode::numSmallerByFrequency(vector<string>& queries, vector<stri
 /// 3. 1 <= word.length <= 10^4
 /// 4. word[i] is an English lowercase letter.
 /// </summary>
-int LeetCode::calculateTime(string keyboard, string word)
+int LeetCodeString::calculateTime(string keyboard, string word)
 {
     vector<int> key_pos(26);
     for (size_t i = 0; i < keyboard.size(); i++)
@@ -8539,7 +8583,7 @@ vector<int> LeetCode::findNumOfValidWords(vector<string>& words, vector<string>&
 /// 1. 1 <= phrases.length <= 100
 /// 2. 1 <= phrases[i].length <= 100
 /// </summary>
-vector<string> LeetCode::beforeAndAfterPuzzles(vector<string>& phrases)
+vector<string> LeetCodeString::beforeAndAfterPuzzles(vector<string>& phrases)
 {
     unordered_map<string, unordered_map<string, int>> phrase_map;
     for (size_t i = 0; i < phrases.size(); i++)
@@ -8609,7 +8653,7 @@ vector<string> LeetCode::beforeAndAfterPuzzles(vector<string>& phrases)
 /// 1. 1 <= text.length <= 10^4
 /// 2. text consists of lower case English letters only.
 /// </summary>
-int LeetCode::maxNumberOfBalloons(string text)
+int LeetCodeString::maxNumberOfBalloons(string text)
 {
     vector<int> char_count(26);
     for (size_t i = 0; i < text.size(); i++)
@@ -9176,6 +9220,60 @@ int LeetCodeString::distinctEchoSubstrings(string text)
         }
     }
     return result_set.size();
+}
+
+/// <summary>
+/// Leet code #830. Positions of Large Groups
+/// 
+/// In a string S of lowercase letters, these letters form consecutive 
+/// groups of the same character.
+///
+/// For example, a string like S = "abbxxxxzyy" has the groups "a", "bb", 
+/// "xxxx", "z" and "yy".
+///
+/// Call a group large if it has 3 or more characters.  We would like the 
+/// starting and ending positions of every large group.
+/// 
+/// The final answer should be in lexicographic order.
+///
+/// Example 1:
+///
+/// Input: "abbxxxxzzy"
+/// Output: [[3,6]]
+/// Explanation: "xxxx" is the single large group with starting  3 and 
+/// ending positions 6.
+///
+/// Example 2:
+///
+/// Input: "abc"
+/// Output: []
+/// Explanation: We have "a","b" and "c" but no large group.
+///
+/// Example 3:
+///
+/// Input: "abcdddeeeeaabbbcd"
+/// Output: [[3,5],[6,9],[12,14]]
+///
+/// Note:  1. 1 <= S.length <= 1000
+/// </summary>
+vector<vector<int>> LeetCodeString::largeGroupPositions(string S)
+{
+    vector<vector<int>> result;
+    int first = 0, last = 0;
+    while (last <= (int)S.size())
+    {
+        if ((last == S.size()) || (S[first] != S[last]))
+        {
+            if (last - first >= 3)
+            {
+                result.push_back(vector<int>{ first, last - 1});
+            }
+            first = last;
+
+        }
+        last++;
+    }
+    return result;
 }
 
 #pragma endregion

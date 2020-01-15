@@ -808,8 +808,19 @@ void TestLeetCode1314(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode284(void)
+{
+    Logger::WriteMessage("Test Leet Code 284");
+    vector<int> nums = { 1,2,3,4 };
+    PeekingIterator peekingIterator(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("Peek() -> " + to_string(peekingIterator.peek()));
+    Logger::WriteMessage("Next() -> " + to_string(peekingIterator.next()));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode284();
     TestLeetCode1314();
     TestLeetCode1313();
     TestLeetCode1310();

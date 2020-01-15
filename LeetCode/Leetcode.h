@@ -487,106 +487,6 @@ public:
 };
 
 /// <summary>
-/// Leet code #284. Peeking Iterator             
-/// Given an Iterator class interface with methods: next() and hasNext(), design and implement 
-/// a PeekingIterator that support the peek() operation -- it essentially peek() at the element that 
-/// will be returned by the next call to next().
-///
-/// Here is an example. Assume that the iterator is initialized to the beginning of the list: [1, 2, 3].
-/// Call next() gets you 1, the first element in the list.
-/// Now you call peek() and it returns 2, the next element. Calling next() after that still return 2.
-///
-/// You call next() the final time and it returns 3, the last element. 
-/// Calling hasNext() after that should return false. 
-/// Hint:
-/// 1.Think of "looking ahead". You want to cache the next element.
-/// 2.Is one variable sufficient? Why or why not?
-/// 3.Test your design with call order of peek() before next() vs next() before peek().
-/// 4.For a clean implementation, check out Google's guava library source code.
-/// Follow up: How would you extend your design to be generic and work with all types, not just integer?	
-/// </summary>
-// Below is the interface for Iterator, which is already defined for you.
-// **DO NOT** modify the interface for Iterator.
-// 2016-12-10, HM: I modify this interface so I can run it in my code 
-class Iterator {
-private:    
-    vector<int> m_nums;
-    int m_index;
-public:
-    Iterator(const vector<int>& nums)
-    {
-        m_nums = nums;
-        m_index = 0;
-    };
-    Iterator(const Iterator& iter)
-    {
-        m_nums = iter.m_nums;
-    }
-    virtual ~Iterator()
-    {
-    };
-    // Returns the next element in the iteration.
-    int next()
-    {
-        return m_nums[m_index];
-        m_index++;
-    };
-    // Returns true if the iteration has more elements.
-    bool hasNext() const
-    {
-        return (m_index < (int)m_nums.size());
-    };
-};
-
-
-class PeekingIterator : public Iterator 
-{
-private:
-    queue<int> m_queue;
-public:
-    PeekingIterator(const vector<int>& nums) : Iterator(nums) {
-    }
-
-    // Returns the next element in the iteration without advancing the iterator.
-    int peek() 
-    {
-        if ((m_queue.empty()) && (Iterator::hasNext()))
-        {
-            m_queue.push(Iterator::next());
-        }
-        return m_queue.front();
-    }
-
-    // hasNext() and next() should behave the same as in the Iterator interface.
-    // Override them if needed.
-    int next() 
-    {
-        int value;
-        if (!m_queue.empty())
-        {
-            value = m_queue.front();
-            m_queue.pop();
-        }
-        else
-        {
-            value = Iterator::next();
-        }
-        return value;
-    }
-
-    bool hasNext() const {
-        if (!m_queue.empty())
-        {
-            return true;
-        }
-        else
-        {
-            return Iterator::hasNext();
-        }
-    }
-};
-
-/// <summary>
 /// Leet code #352. Data Stream as Disjoint Intervals 
 /// 
 /// Given a data stream input of non-negative integers a1, a2, ..., an, ..., summarize the numbers seen so far as a list of disjoint intervals.
@@ -643,66 +543,6 @@ public:
             result.push_back(Interval(itr->first, itr->second));
         }
         return result;
-    }
-};
-
-/// <summary>
-/// Leet code #288. Unique Word Abbreviation    
-/// 
-/// An abbreviation of a word follows the form <first letter><number><last letter>. 
-/// Below are some examples of word abbreviations: 
-/// a) it                      --> it    (no abbreviation)
-///      1
-/// b) d|o|g                   --> d1g
-///              1    1  1
-///      1---5----0----5--8
-/// c) i|nternationalizatio|n  --> i18n
-///              1
-///      1---5----0
-/// d) l|ocalizatio|n          --> l10n
-///
-/// Assume you have a dictionary and given a word, find whether its 
-/// abbreviation is unique in the dictionary. A word's abbreviation is unique 
-/// if no other word from the dictionary has the same abbreviation.
-/// Example: 
-/// Given dictionary = [ "deer", "door", "cake", "card" ]
-/// isUnique("dear") -> false
-/// isUnique("cart") -> true
-/// isUnique("cane") -> false
-/// isUnique("make") -> true
-/// </summary>
-class ValidWordAbbr
-{
-private:
-    unordered_map<string, unordered_set<string>> m_AbbrMap;
-public:
-    ValidWordAbbr(vector<string> &dictionary)
-    {
-        for (string word : dictionary)
-        {
-            string abbr;
-            if (word.size() > 0) abbr.push_back(word[0]);
-            if (word.size() > 1) abbr.push_back(word[word.size() -1]);
-            if (word.size() > 2) abbr.insert(1, to_string(word.size() - 2));
-            m_AbbrMap[abbr].insert(word);
-        }
-    }
-    bool isUnique(string word)
-    {
-        string abbr;
-        if (word.size() > 0) abbr.push_back(word[0]);
-        if (word.size() > 1) abbr.push_back(word[word.size() - 1]);
-        if (word.size() > 2) abbr.insert(1, to_string(word.size() - 2));
-
-        if ((m_AbbrMap.find(abbr) == m_AbbrMap.end()) || 
-            ((m_AbbrMap[abbr].size()) == 1 && (m_AbbrMap[abbr].count(word) == 1)))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 };
 
@@ -1196,8 +1036,6 @@ public:
         return result;
     }
 };
-
-
 
 /// <summary>
 /// Leet code #348. Design Tic-Tac-Toe 
@@ -4024,42 +3862,6 @@ public:
     /// 2. K will be in range [0, heights.length - 1].
     /// </summary>
     vector<int> pourWater(vector<int>& heights, int V, int K);
-
-    /// <summary>
-    /// Leet code #830. Positions of Large Groups
-    /// 
-    /// In a string S of lowercase letters, these letters form consecutive 
-    /// groups of the same character.
-    ///
-    /// For example, a string like S = "abbxxxxzyy" has the groups "a", "bb", 
-    /// "xxxx", "z" and "yy".
-    ///
-    /// Call a group large if it has 3 or more characters.  We would like the 
-    /// starting and ending positions of every large group.
-    /// 
-    /// The final answer should be in lexicographic order.
-    ///
-    /// Example 1:
-    ///
-    /// Input: "abbxxxxzzy"
-    /// Output: [[3,6]]
-    /// Explanation: "xxxx" is the single large group with starting  3 and 
-    /// ending positions 6.
-    ///
-    /// Example 2:
-    ///
-    /// Input: "abc"
-    /// Output: []
-    /// Explanation: We have "a","b" and "c" but no large group.
-    ///
-    /// Example 3:
-    ///
-    /// Input: "abcdddeeeeaabbbcd"
-    /// Output: [[3,5],[6,9],[12,14]]
-    ///
-    /// Note:  1. 1 <= S.length <= 1000
-    /// </summary>
-    vector<vector<int>> largeGroupPositions(string S);
 
     /// <summary>
     /// Leet code #904. Fruit Into Baskets
@@ -13064,31 +12866,6 @@ public:
     int LeetCode::lengthOfLongestSubstring(string s);
 
     /// <summary>
-    /// Leet code #151. Reverse Words in a String
-    /// Given an input string, reverse the string word by word. 
-    /// For example,
-    ///   Given s = "the sky is blue",
-    ///   return "blue is sky the". 
-    /// Update (2015-02-12):
-    /// For C programmers: Try to solve it in-place in O(1) space. 
-    /// </summary>
-    void reverseWords(string &s);
-
-    /// <summary>
-    /// Leet code #186. Reverse Words in a String II  
-    /// 
-    /// Given an input string, reverse the string word by word. A word 
-    /// is defined as a sequence of non-space characters. 
-    /// The input string does not contain leading or trailing spaces and 
-    /// the words are always separated by a single space.  
-    /// For example,
-    /// Given s = "the sky is blue",
-    /// return "blue is sky the".
-    /// Could you do it in-place without allocating extra space? 
-    /// </summary>
-    void reverseWordsII(string &s);
-      
-    /// <summary>
     /// Leet code #14. Longest Common Prefix 
     /// Write a function to find the longest common prefix string amongst an array of strings. 
     /// </summary>
@@ -13199,18 +12976,6 @@ public:
     bool isAnagram(string s, string t);
 
     /// <summary>
-    /// Leet code #58. Length of Last Word  
-    /// Given a string s consists of upper/lower-case alphabets and empty space characters ' ', 
-    /// return the length of last word in the string.
-    /// If the last word does not exist, return 0.
-    /// Note: A word is defined as a character sequence consists of non-space characters only. 
-    ///	For example,
-    /// Given s = "Hello World",
-    /// return 5.
-    /// </summary>
-    int lengthOfLastWord(string s);
-
-    /// <summary>
     /// Leet code #49. Group Anagrams   
     /// Given an array of strings, group anagrams together.
     /// For example, given: ["eat", "tea", "tan", "ate", "nat", "bat"],  
@@ -13250,17 +13015,6 @@ public:
     /// </summary>
     int firstUniqChar(string s);
 
-    /// <summary>
-    /// Leet code #165. Compare Version Numbers  
-    /// Compare two version numbers version1 and version2.
-    /// If version1 > version2 return 1, if version1 < version2 return -1, otherwise return 0. 
-    /// You may assume that the version strings are non-empty and contain only digits and the . character.
-    /// The . character does not represent a decimal point and is used to separate number sequences.
-    /// For instance, 2.5 is not "two and a half" or "half way to version three", it is the fifth second-level revision of the second first-level revision.
-    /// Here is an example of version numbers ordering:
-    /// 0.1 < 1.1 < 1.2 < 13.37 
-    /// </summary>
-    int compareVersion(string version1, string version2);
 
     /// <summary>
     /// Leet code #409. Longest Palindrome 
@@ -13279,21 +13033,6 @@ public:
     /// One longest palindrome that can be built is "dccaccd", whose length is 7.
     /// </summary>
     int longestPalindromeII(string s);
-
-    /// <summary>
-    /// Leet code #71. Simplify Path
-    /// Given an absolute path for a file (Unix-style), simplify it.
-    /// For example, 
-    /// path = "/home/", => "/home"
-    /// path = "/a/./b/../../c/", => "/c"
-    /// click to show corner cases.
-    /// Corner Cases:  
-    /// Did you consider the case where path = "/../"?
-    /// In this case, you should return "/".
-    /// Another corner case is the path might contain multiple slashes '/' together, such as "/home//foo/".
-    /// In this case, you should ignore redundant slashes and return "/home/foo".
-    /// </summary>
-    string simplifyPath(string path);
 
     /// <summary>
     /// Leet code #187. Repeated DNA Sequences 
@@ -16679,78 +16418,6 @@ public:
     string lastSubstring(string s);
 
     /// <summary>
-    /// Leet code #1170. Compare Strings by Frequency of the Smallest Character
-    /// </summary>
-    int numSmallerByFrequency(string word);
-
-    /// <summary>
-    /// Leet code #1170. Compare Strings by Frequency of the Smallest Character
-    ///
-    /// Let's define a function f(s) over a non-empty string s, which calculates 
-    /// the frequency of the smallest character in s. For example, if s = "dcce" 
-    /// then f(s) = 2 because the smallest character is "c" and its frequency 
-    /// is 2.
-    ///
-    /// Now, given string arrays queries and words, return an integer array 
-    /// answer, where each answer[i] is the number of words such that 
-    /// f(queries[i]) < f(W), where W is a word in words.
-    ///
-    /// Example 1:
-    /// Input: queries = ["cbd"], words = ["zaaaz"]
-    /// Output: [1]
-    /// Explanation: On the first query we have f("cbd") = 1, 
-    /// f("zaaaz") = 3 so f("cbd") < f("zaaaz").
-    ///
-    /// Example 2:
-    /// Input: queries = ["bbb","cc"], words = ["a","aa","aaa","aaaa"]
-    /// Output: [1,2]
-    /// Explanation: On the first query only f("bbb") < f("aaaa"). On the second 
-    /// query both f("aaa") and f("aaaa") are both > f("cc").
-    /// 
-    /// Constraints:
-    /// 1. 1 <= queries.length <= 2000
-    /// 2. 1 <= words.length <= 2000
-    /// 3. 1 <= queries[i].length, words[i].length <= 10
-    /// 4. queries[i][j], words[i][j] are English lowercase letters.
-    /// </summary>
-    vector<int> numSmallerByFrequency(vector<string>& queries, vector<string>& words);
-
-    /// <summary>
-    /// Leet code #1165. Single-Row Keyboard
-    ///
-    /// There is a special keyboard with all keys in a single row.
-    /// Given a string keyboard of length 26 indicating the layout of the 
-    /// keyboard (indexed from 0 to 25), initially your finger is at index 0. 
-    /// To type a character, you have to move your finger to the index of the 
-    /// desired character. The time taken to move your finger from index i to 
-    /// index j is |i - j|.
-    ///
-    /// You want to type a string word. Write a function to calculate how 
-    /// much time it takes to type it with one finger.
-    /// 
-    /// Example 1:
-    ///
-    /// Input: keyboard = "abcdefghijklmnopqrstuvwxyz", word = "cba"
-    /// Output: 4
-    /// Explanation: The index moves from 0 to 2 to write 'c' then to 1 to 
-    /// write 'b' then to 0 again to write 'a'.
-    /// Total time = 2 + 1 + 1 = 4. 
-    ///
-    /// Example 2:
-    /// 
-    /// Input: keyboard = "pqrstuvwxyzabcdefghijklmno", word = "leetcode"
-    /// Output: 73
-    ///  
-    /// Constraints:
-    /// 1. keyboard.length == 26
-    /// 2. keyboard contains each English lowercase letter exactly once in 
-    ///    some order.
-    /// 3. 1 <= word.length <= 10^4
-    /// 4. word[i] is an English lowercase letter.
-    /// </summary>
-    int calculateTime(string keyboard, string word);
-
-    /// <summary>
     /// Leet code #1178. Number of Valid Words for Each Puzzle
     /// 
     /// With respect to a given puzzle string, a word is valid if both the 
@@ -16786,78 +16453,6 @@ public:
     /// 6. Each puzzles[i] doesn't contain repeated characters.
     /// </summary>
     vector<int> findNumOfValidWords(vector<string>& words, vector<string>& puzzles);
-
-    /// <summary>
-    /// Leet code #1181. Before and After Puzzle
-    /// 
-    /// Given a list of phrases, generate a list of Before and After puzzles.
-    /// A phrase is a string that consists of lowercase English letters and 
-    /// spaces only. No space appears in the start or the end of a phrase. 
-    /// There are no consecutive spaces in a phrase.
-    /// Before and After puzzles are phrases that are formed by merging two 
-    /// phrases where the last word of the first phrase is the same as the 
-    /// first word of the second phrase.
-    /// Return the Before and After puzzles that can be formed by every two 
-    /// phrases phrases[i] and phrases[j] where i != j. Note that the order 
-    /// of matching two phrases matters, we want to consider both orders.
-    /// You should return a list of distinct strings sorted lexicographically.
-    /// 
-    /// Example 1:
-    /// Input: phrases = ["writing code","code rocks"]
-    /// Output: ["writing code rocks"]
-    ///
-    /// Example 2:
-    /// Input: phrases = ["mission statement",
-    ///                   "a quick bite to eat",
-    ///                   "a chip off the old block",
-    ///                   "chocolate bar",
-    ///                   "mission impossible",
-    ///                   "a man on a mission",
-    ///                   "block party",
-    ///                   "eat my words",
-    ///                   "bar of soap"]
-    /// Output: ["a chip off the old block party",
-    ///          "a man on a mission impossible",
-    ///          "a man on a mission statement",
-    ///          "a quick bite to eat my words",
-    ///          "chocolate bar of soap"]
-    ///
-    /// Example 3:
-    /// Input: phrases = ["a","b","a"]
-    /// Output: ["a"]
-    /// 
-    /// Constraints:
-    /// 1. 1 <= phrases.length <= 100
-    /// 2. 1 <= phrases[i].length <= 100
-    /// </summary>
-    vector<string> beforeAndAfterPuzzles(vector<string>& phrases);
-
-    /// <summary>
-    /// Leet code #1189. Maximum Number of Balloons
-    /// 
-    /// Given a string text, you want to use the characters of text to form as 
-    /// many instances of the word "balloon" as possible.
-    /// You can use each character in text at most once. Return the maximum number 
-    /// of instances that can be formed.
-    /// 
-    /// Example 1:
-    ///
-    /// Input: text = "nlaebolko"
-    /// Output: 1
-    /// Example 2:
-    ///
-    /// Input: text = "loonbalxballpoon"
-    /// Output: 2
-    /// Example 3:
-    /// Input: text = "leetcode"
-    /// Output: 0
-    /// 
-    /// Constraints:
-    /// 1. 1 <= text.length <= 10^4
-    /// 2. text consists of lower case English letters only.
-    /// </summary>
-    int maxNumberOfBalloons(string text);
-
 #pragma endregion
 
 #pragma region HashTable
