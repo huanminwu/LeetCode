@@ -9306,7 +9306,6 @@ vector<int> LeetCodeArray::decompressRLElist(vector<int>& nums)
     return result;
 }
 
-
 /// <summary>
 /// Leet code #1314. Matrix Block Sum
 ///

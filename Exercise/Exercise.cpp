@@ -1759,40 +1759,6 @@ void TestLeetCode260(void)
     Logger::WriteMessage(result);
 }
 
-
-
-
-
-
-
-void TestLeetCode459(void)
-{
-    Logger::WriteMessage("Test Leet Code 459");
-    LeetCode leetCode;
-    string s;
-    bool is_repeat;
-
-    s = "abaababaab";
-    Logger::WriteMessage("s = " + s);
-    is_repeat = leetCode.repeatedSubstringPattern(s);
-    Logger::WriteMessage("repeated substring is " + string((is_repeat ? "true" : "false")));
-
-    s =  "aabaaba";
-    Logger::WriteMessage("s = " + s);
-    is_repeat = leetCode.repeatedSubstringPattern(s);
-    Logger::WriteMessage("repeated substring is " + string((is_repeat ? "true": "false")));
-
-    s = "abcabcabcabc";
-    Logger::WriteMessage("s = " + s);
-    is_repeat = leetCode.repeatedSubstringPattern(s);
-    Logger::WriteMessage("repeated substring is " + string((is_repeat ? "true" : "false")));
-
-    s = "ababababa";
-    Logger::WriteMessage("s = " + s);
-    is_repeat = leetCode.repeatedSubstringPattern(s);
-    Logger::WriteMessage("repeated substring is " + string((is_repeat ? "true" : "false")));
-}
-
 void TestLeetCode173(void)
 {
     Logger::WriteMessage("Test Leet Code 173");
@@ -6501,20 +6467,6 @@ void TestLeetCode660(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
-void TestLeetCode686(void)
-{
-    LeetCode leetCode;
-    string A = "abcd";
-    string B = "cdabcdab";
-    int repeat = leetCode.repeatedStringMatch(A, B);
-    Logger::WriteMessage("A = " + A + "; B = " + B + "; Repeat = " + to_string(repeat));
-
-    A = "abcdabab";
-    B = "ababc";
-    repeat = leetCode.repeatedStringMatch(A, B);
-    Logger::WriteMessage("A = " + A + "; B = " + B + "; Repeat = " + to_string(repeat));
-}
-
 void TestLeetCode690(void)
 {
     LeetCode leetCode;
@@ -8350,21 +8302,6 @@ void TestLeetCode793(void)
     K = 5;
     result = leetCode.preimageSizeFZF(K);
     Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
-}
-
-void TestLeetCode796(void)
-{
-    Logger::WriteMessage("Test Leet Code 796");
-    LeetCode leetCode;
-    string A = "abcde";
-    string B = "cdeab";
-    bool result = leetCode.rotateString(A, B);
-    Logger::WriteMessage("A = " + A + "; B = " + B + "; result = " + (result? "true" : "false"));
-
-    A = "abcde";
-    B = "abced";
-    result = leetCode.rotateString(A, B);
-    Logger::WriteMessage("A = " + A + "; B = " + B + "; result = " + (result ? "true" : "false"));
 }
 
 void TestLeetCode797(void)
@@ -15720,9 +15657,9 @@ void TestLeetCode1238(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeString();
     TestLeetCodeUnionFind();
     TestLeetCodeDP();
-    TestLeetCodeString();
     TestLeetCodeMath();
     TestLeetCodeArray();
     TestLeetCodeTree();
@@ -16212,7 +16149,6 @@ void main(int argc, char* argv[])
     TestLeetCode664();
     TestLeetCode687();
     TestLeetCode690();
-    TestLeetCode686();
     TestLeetCode660();
     TestLeetCode678();
     TestLeetCode681();
@@ -16541,7 +16477,6 @@ void main(int argc, char* argv[])
     TestLeetCode48();
     TestLeetCode93();
     TestLeetCode173();
-    TestLeetCode459();
     TestLeetCode453();
     TestLeetCode260();
     TestLeetCode268();

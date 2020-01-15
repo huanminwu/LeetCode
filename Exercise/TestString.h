@@ -4,6 +4,9 @@
 #include "..\LeetCode\LeetCodeString.h"
 void TestLeetCode28(void);
 void TestLeetCode415(void);
+void TestLeetCode459(void);
+void TestLeetCode686(void);
+void TestLeetCode796(void);
 void TestLeetCode1233(void);
 void TestLeetCode1234(void);
 void TestLeetCode1247(void);

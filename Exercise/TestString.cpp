@@ -219,8 +219,73 @@ void TestLeetCode1316(void)
     Logger::WriteMessage("text = " + text + "; result = " + to_string(result));
 }
 
+void TestLeetCode459(void)
+{
+    Logger::WriteMessage("Test Leet Code 459");
+    LeetCodeString leetCode;
+    string s;
+    bool is_repeat;
+
+    s = "abaababaab";
+    Logger::WriteMessage("s = " + s);
+    is_repeat = leetCode.repeatedSubstringPattern(s);
+    Logger::WriteMessage("repeated substring is " + string((is_repeat ? "true" : "false")));
+
+    s = "aabaaba";
+    Logger::WriteMessage("s = " + s);
+    is_repeat = leetCode.repeatedSubstringPattern(s);
+    Logger::WriteMessage("repeated substring is " + string((is_repeat ? "true" : "false")));
+
+    s = "abcabcabcabc";
+    Logger::WriteMessage("s = " + s);
+    is_repeat = leetCode.repeatedSubstringPattern(s);
+    Logger::WriteMessage("repeated substring is " + string((is_repeat ? "true" : "false")));
+
+    s = "ababababa";
+    Logger::WriteMessage("s = " + s);
+    is_repeat = leetCode.repeatedSubstringPattern(s);
+    Logger::WriteMessage("repeated substring is " + string((is_repeat ? "true" : "false")));
+}
+
+void TestLeetCode686(void)
+{
+    LeetCodeString leetCode;
+    string A = "abcd";
+    string B = "cdabcdab";
+    int repeat = leetCode.repeatedStringMatch(A, B);
+    Logger::WriteMessage("A = " + A + "; B = " + B + "; Repeat = " + to_string(repeat));
+
+    A = "abcdabab";
+    B = "ababc";
+    repeat = leetCode.repeatedStringMatch(A, B);
+    Logger::WriteMessage("A = " + A + "; B = " + B + "; Repeat = " + to_string(repeat));
+
+    A = "abcd";
+    B = "cdabcdacdabcda";
+    repeat = leetCode.repeatedStringMatch(A, B);
+    Logger::WriteMessage("A = " + A + "; B = " + B + "; Repeat = " + to_string(repeat));
+}
+
+void TestLeetCode796(void)
+{
+    Logger::WriteMessage("Test Leet Code 796");
+    LeetCodeString leetCode;
+    string A = "abcde";
+    string B = "cdeab";
+    bool result = leetCode.rotateString(A, B);
+    Logger::WriteMessage("A = " + A + "; B = " + B + "; result = " + (result ? "true" : "false"));
+
+    A = "abcde";
+    B = "abced";
+    result = leetCode.rotateString(A, B);
+    Logger::WriteMessage("A = " + A + "; B = " + B + "; result = " + (result ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode796();
+    TestLeetCode686();
+    TestLeetCode459();
     TestLeetCode1316();
     TestLeetCode28();
     TestLeetCode1309();

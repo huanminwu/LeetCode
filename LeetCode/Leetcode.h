@@ -13308,28 +13308,7 @@ public:
     /// </summary>
     vector<string> findRepeatedDnaSequences(string s);
 
-    /// <summary>
-    /// Leet code #459. Repeated Substring Pattern  
-    /// Given a non-empty string check if it can be constructed by taking a substring of it 
-    /// and appending multiple copies of the substring together. You may assume the given string 
-    /// consists of lowercase English letters only and its length will not exceed 10000. 
-    ///
-    /// Example 1:
-    /// Input: "abab"
-    /// Output: True
-    ///
-    /// Explanation: It's the substring "ab" twice.
-    /// Example 2:
-    /// Input: "aba"
-    /// Output: False
-    /// 
-    /// Example 3:
-    /// Input: "abcabcabcabc" 
-    /// Output: True
-    /// Explanation: It's the substring "abc" four times. (And the substring "abcabc" twice.)
-    ///
-    /// </summary>
-    bool repeatedSubstringPattern(string str);
+
 
     /// <summary>
     /// Leet code #423. Reconstruct Original Digits from English   
@@ -14375,22 +14354,6 @@ public:
     string replaceWords(vector<string>& dict, string sentence);
 
     /// <summary>
-    /// Leet code #686. Repeated String Match
-    /// Given two strings A and B, find the minimum number of times A has to 
-    /// be repeated such that B is a substring of it. If no such solution, 
-    /// return -1.
-    ///
-    /// For example, with A = "abcd" and B = "cdabcdab".
-    /// Return 3, because by repeating A three times ("abcdabcdabcd"), 
-    /// B is a substring of it; and B is not a substring of A repeated 
-    /// two times ("abcdabcd").
-    ///
-    /// Note:
-    /// The length of A and B will be between 1 and 10000.
-    /// </summary>
-    int repeatedStringMatch(string A, string B);
-
-    /// <summary>
     /// Leet code #720. Longest Word in Dictionary
     ///
     /// Given a list of strings words representing an English Dictionary, find 
@@ -15176,27 +15139,6 @@ public:
     /// 3. S and T consist of lowercase letters only.
     /// </summary>
     string customSortString(string S, string T);
-
-    /// <summary>
-    /// Leet code #796. Rotate String
-    /// 
-    /// We are given two strings, A and B. 
-    /// A shift on A consists of taking string A and moving the leftmost 
-    /// character to the rightmost position. For example, if A = 'abcde', 
-    /// then it will be 'bcdea' after one shift on A. Return True if and 
-    /// only if A can become B after some number of shifts on A.
-    ///
-    /// Example 1:
-    /// Input: A = 'abcde', B = 'cdeab' 
-    /// Output: true
-    ///
-    /// Example 2:
-    /// Input: A = 'abcde', B = 'abced' 
-    /// Output: false
-    /// Note:
-    /// 1. A and B will have length at most 100.
-    /// </summary>
-    bool rotateString(string A, string B);
 
     /// <summary>
     /// Leet code #804. Unique Morse Code Words

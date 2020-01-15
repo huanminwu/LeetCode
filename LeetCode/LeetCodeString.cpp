@@ -981,31 +981,30 @@ vector<string> LeetCode::findRepeatedDnaSequences(string s)
 /// Explanation: It's the substring "abc" four times. (And the substring 
 /// "abcabc" twice.)
 /// </summary>
-bool LeetCode::repeatedSubstringPattern(string str)
+bool LeetCodeString::repeatedSubstringPattern(string s)
 {
-    vector<int> kmp_table(str.size() + 1, 0);
-
-    size_t index = 0, pos = 2, size = str.size();
-    while (pos <= size)
+    vector<int> kmp(s.size());
+    int i = 1;
+    int j = 0;
+    while (i < (int)s.size())
     {
-        if (str[pos - 1] == str[index])
+        if (s[i] == s[j])
         {
-            index++;
-            kmp_table[pos] = index;
-            pos++;
+            j++;
+            kmp[i] = j;
+            i++;
         }
-        else if (index > 0)
+        else if (j == 0)
         {
-            index = kmp_table[index];
-            continue;
+            i++;
         }
         else
         {
-            kmp_table[pos] = 0;
-            pos++;
+            j = kmp[j - 1];
         }
     }
-    int last = kmp_table.back();
+    int last = kmp.back();
+    int size = s.size();
     if ((last != 0) && (size % (size - last) == 0))
     {
         return true;
@@ -3627,6 +3626,7 @@ string LeetCode::replaceWords(vector<string>& dict, string sentence)
 
 /// <summary>
 /// Leet code #686. Repeated String Match
+///
 /// Given two strings A and B, find the minimum number of times A has to 
 /// be repeated such that B is a substring of it. If no such solution, 
 /// return -1.
@@ -3639,45 +3639,60 @@ string LeetCode::replaceWords(vector<string>& dict, string sentence)
 /// Note:
 /// The length of A and B will be between 1 and 10000.
 /// </summary>
-int LeetCode::repeatedStringMatch(string A, string B)
+int LeetCodeString::repeatedStringMatch(string A, string B)
 {
-    int repeat = 0;
-    int index_a = 0, index_b = 0;
-    if (B.empty()) return 1;
-    if (A.empty()) return -1;
-
-    while (index_b < (int)B.size())
+    vector<int> kmp(B.size());
+    int i = 1;
+    int j = 0;
+    while (i < (int)B.size())
     {
-        if (index_a == A.size())
+        if (B[i] == B[j])
         {
-            if (index_b == 0) return -1;
-            else
-            {
-                repeat++;
-                index_a = 0;
-            }
+            j++;
+            kmp[i] = j;
+            i++;
         }
-        if (A[index_a] == B[index_b])
+        else if (j == 0)
         {
-            index_a++;
-            index_b++;
+            i++;
         }
         else
         {
-            if (repeat > 0)
-            {
-                if (index_b > (int)A.size()) return -1;
-                // deduct remaining first
-                index_b -= index_a;
-                // find start of index_a
-                index_a = A.size() - index_b;
-                repeat--;
-            }
-            index_b = 0;
-            index_a++;
+            j = kmp[j - 1];
         }
     }
-    return repeat + 1;
+    int result = 0;
+    i = 0;
+    j = 0;
+    while (j < (int)B.size())
+    {
+        if (i == A.size())
+        {
+            result++;
+            i = 0;
+        }
+        else if (A[i] == B[j])
+        {
+            i++;
+            j++;
+        }
+        else
+        {
+            if ((result - 1) * (int)A.size() + i > j)
+            {
+                return -1;
+            }
+            if (j == 0)
+            {
+                i++;
+            }
+            else
+            {
+                j = kmp[j - 1];
+            }
+        }
+    }
+    return result + 1;
 }
 
 /// <summary>
@@ -5277,60 +5292,13 @@ string LeetCode::customSortString(string S, string T)
 /// Note:
 /// 1. A and B will have length at most 100.
 /// </summary>
-bool LeetCode::rotateString(string A, string B)
+bool LeetCodeString::rotateString(string A, string B)
 {
     if (A.size() != B.size()) return false;
-    // Step 1: build kmp table
-    vector<int> kmp_table;
-    kmp_table.push_back(0);
-    kmp_table.push_back(0);
-    size_t pos = 2;
-    size_t start = 0;
-    while (pos < A.size())
-    {
-        if (A[pos - 1] == A[start])
-        {
-            start++;
-            kmp_table.push_back(start);
-            pos++;
-        }
-        else if (start > 0)
-        {
-            start = kmp_table[start];
-        }
-        else
-        {
-            kmp_table.push_back(0);
-            pos++;
-        }
-    }
-
-    // Step 2: search substring
-    size_t pos_a = 0, pos_b = 0;
-    while (pos_a < A.size() && pos_b < B.size() + pos_a)
-    {
-        if (A[pos_a] == B[pos_b % B.size()])
-        {
-            pos_a++;
-            pos_b++;
-        }
-        else if (pos_a == 0)
-        {
-            pos_b++;
-        }
-        else
-        {
-            pos_a = kmp_table[pos_a];
-        }
-    }
-    if (pos_a < A.size())
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
+    string str = A;
+    str.append(A);
+    if (str.find(B) == string::npos) return false;
+    return true;
 }
 
 /// <summary>
