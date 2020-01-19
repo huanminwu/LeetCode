@@ -19,66 +19,6 @@
 #include "LeetCodeString.h"
 #pragma region String
 /// <summary>
-/// Reverse a sub string.
-/// </summary>
-/// <param name="string">The string.</param>
-/// <returns></returns>
-void LeetCode::ReverseRange(string& string, size_t begin, size_t end)
-{
-    if ((begin < 0) || (begin > string.size()) ||
-        (end < 0) || (end > string.size()))
-    {
-        return;
-    }
-
-    // The first iteration reverse every single character
-    while (begin < end)
-    {
-        swap(string[begin], string[end]);
-        begin++;
-        end--;
-    }
-}
-
-/// <summary>
-/// Remove the extra spaces in a string
-/// </summary>
-/// <param name="string">The string.</param>
-/// <returns></returns>
-void LeetCode::RemoveExtraSpaces(string& s)
-{
-    if (s.size() == 0) return;
-    struct doubleSpaces
-    {
-        bool operator() (char lhs, char rhs)
-        {
-            if (isspace(lhs) && isspace(rhs))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-    };
-    string::iterator new_end = std::unique(s.begin(), s.end(), doubleSpaces());
-    s.erase(new_end, s.end());
-
-    size_t begin = 0;
-    size_t end = s.size() - 1;
-    if (isspace(s[begin]))
-    {
-        begin = 1;
-    }
-    if (isspace(s[end]) && end > begin)
-    {
-        end = end - 1;
-    }
-    s = s.substr(begin, end - begin + 1);
-}
-
-/// <summary>
 /// Leet code #3. Longest Substring Without Repeating Characters
 /// Given a string, find the length of the longest substring without 
 /// repeating characters.
@@ -89,33 +29,22 @@ void LeetCode::RemoveExtraSpaces(string& s)
 /// Note that the answer must be a substring, "pwke" is a subsequence 
 /// and not a substring.
 /// </summary>
-int LeetCode::lengthOfLongestSubstring(string s)
+int LeetCodeString::lengthOfLongestSubstring(string s)
 {
-    unordered_map<char, int> map;
-    int start_index = 0;
-    int max_length = 0;
-    size_t pos = 0;
-    while (pos < s.size())
+    unordered_map<char, int> char_count;
+    int begin = 0;
+    int result = 0;
+    for (int end = 0; end < (int)s.size(); end++)
     {
-        if (map.find(s[pos]) == map.end())
+        char_count[s[end]]++;
+        while (char_count[s[end]] > 1)
         {
-            map[s[pos]] = pos;
+            char_count[s[begin]]--;
+            begin++;
         }
-        else
-        {
-            size_t duplicate_pos = map[s[pos]];
-            max_length = std::max(max_length, (int)(pos - start_index));
-            for (size_t i = start_index; i < duplicate_pos; i++)
-            {
-                map.erase(s[i]);
-            }
-            map[s[pos]] = pos;
-            start_index = duplicate_pos + 1;
-        }
-        pos++;
+        result = max(result, end - begin + 1);
     }
-    max_length = std::max(max_length, (int)(pos - start_index));
-    return max_length;
+    return result;
 }
 
 /// <summary>
@@ -147,7 +76,7 @@ string LeetCodeString::reverseWords(string s)
             {
                 s[pos] = s[i];
             }
-            if (pos < s.size()) s[pos] = ' ';
+            if (pos < (int)s.size()) s[pos] = ' ';
             begin = end;
             end = begin + 1;
         }
@@ -207,9 +136,11 @@ void LeetCodeString::reverseWordsII(string &s)
 
 /// <summary>
 /// Leet code #14. Longest Common Prefix 
-/// Write a function to find the longest common prefix string amongst an array of strings. 
+///
+/// Write a function to find the longest common prefix string amongst 
+/// an array of strings. 
 /// </summary>
-string LeetCode::longestCommonPrefix(vector<string>& strs)
+string LeetCodeString::longestCommonPrefix(vector<string>& strs)
 {
     string commonPrefix;
     for (size_t i = 0; i < strs.size(); i++)
@@ -323,11 +254,13 @@ int LeetCodeString::strStr(string haystack, string needle)
 
 /// <summary>
 /// Leet code #344. Reverse String 
-/// Write a function that takes a string as input and returns the string reversed.
+///
+/// Write a function that takes a string as input and returns the string 
+/// reversed.
 /// Example:
 ///  Given s = "hello", return "olleh".	
 /// </summary>
-string LeetCode::reverseString(string s)
+string LeetCodeString::reverseString(string s)
 {
     int first = 0, last = s.size() - 1;
     while (first < last)
@@ -341,14 +274,21 @@ string LeetCode::reverseString(string s)
 
 /// <summary>
 /// Leet code #68. Text Justification 
-/// Given an array of words and a length L, format the text such that each line has exactly L characters 
-/// and is fully (left and right) justified. 
-/// You should pack your words in a greedy approach; that is, pack as many words as you can in each line. 
-/// Pad extra spaces ' ' when necessary so that each line has exactly L characters. 
-/// Extra spaces between words should be distributed as evenly as possible. 
-/// If the number of spaces on a line do not divide evenly between words, the empty slots on the left will be
-/// assigned more spaces than the slots on the right. 
-/// For the last line of text, it should be left justified and no extra space is inserted between words. 
+///
+/// Given an array of words and a length L, format the text such that 
+/// each line has exactly L characters and is fully (left and right) 
+/// justified. 
+/// You should pack your words in a greedy approach; that is, pack as 
+/// many words as you can in each line. 
+/// Pad extra spaces ' ' when necessary so that each line has exactly L 
+/// characters. 
+/// Extra spaces between words should be distributed as evenly as 
+/// possible. 
+/// If the number of spaces on a line do not divide evenly between words, 
+/// the empty slots on the left will be assigned more spaces than the 
+/// slots on the right. 
+/// For the last line of text, it should be left justified and no extra 
+/// space is inserted between words. 
 /// For example,
 /// words: ["This", "is", "an", "example", "of", "text", "justification."]
 /// L: 16. 
@@ -359,7 +299,7 @@ string LeetCode::reverseString(string s)
 ///   "justification.  "
 /// ]
 /// </summary>
-vector<string> LeetCode::fullJustify(vector<string>& words, int maxWidth)
+vector<string> LeetCodeString::fullJustify(vector<string>& words, int maxWidth)
 {
     // total word length, not counting space
     int total_word_length = 0;
@@ -423,126 +363,56 @@ vector<string> LeetCode::fullJustify(vector<string>& words, int maxWidth)
 
 /// <summary>
 /// Leet code #76. Minimum Window Substring 
-/// Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
-/// For example, 
-/// S = "ADOBECODEBANC"
-/// T = "ABC"
-/// Minimum window is "BANC".  
-/// Note:
-/// If there is no such window in S that covers all characters in T, return the empty string "". 
-/// If there are multiple such windows, you are guaranteed that there will always be only one unique minimum window in S. 
-/// </summary>
-/// This solution keep the first X position count for each character in the substring, and the calculate the distance. 
-string LeetCode::minWindow(string s, string t)
-{
-    unordered_map<char, int> char_count;
-    unordered_map<char, queue<int>> char_map;
-    set<int> position_set;
-    pair<int, int> min_window = make_pair(-1, -1);
-    for (size_t i = 0; i < t.size(); i++)
-    {
-        char_count[t[i]]++;
-    }
-    for (size_t i = 0; i < s.size(); i++)
-    {
-        if (char_count.find(s[i]) == char_count.end())
-        {
-            continue;
-        }
-        unordered_map<char, queue<int>>::iterator iterator = char_map.find(s[i]);
-        if (iterator == char_map.end())
-        {
-            char_map[s[i]] = queue<int>();
-        }
-        if (char_map[s[i]].size() == char_count[s[i]])
-        {
-            position_set.erase(char_map[s[i]].front());
-            char_map[s[i]].pop();
-        }
-        char_map[s[i]].push(i);
-        position_set.insert(i);
-        // We have all the characters now.
-        if (position_set.size() == t.size())
-        {
-            int distance = *position_set.rbegin() - *position_set.begin();
-            if (distance < (min_window.second - min_window.first) ||
-                ((min_window.first == -1) && (min_window.second == -1)))
-            {
-                min_window.second = *position_set.rbegin();
-                min_window.first = *position_set.begin();
-            }
-        }
-    }
-    if ((min_window.first == -1) && (min_window.second == -1))
-    {
-        return "";
-    }
-    else
-    {
-        return s.substr(min_window.first, min_window.second - min_window.first + 1);
-    }
-}
-
-/// <summary>
-/// Leet code #76. Minimum Window Substring 
-/// Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
-/// For example, 
-/// S = "ADOBECODEBANC"
-/// T = "ABC"
-/// Minimum window is "BANC".  
-/// Note:
-/// If there is no such window in S that covers all characters in T, return the empty string "". 
-/// If there are multiple such windows, you are guaranteed that there will always be only one unique minimum window in S. 
-/// </summary>
-/// This solution keep the first X position count for each character in the substring, and the calculate the distance. 
 ///
-string LeetCode::minWindowII(string s, string t)
+/// Given a string S and a string T, find the minimum window in S which 
+/// will contain all the characters in T in complexity O(n).
+/// For example, 
+/// S = "ADOBECODEBANC"
+/// T = "ABC"
+/// Minimum window is "BANC".  
+/// Note:
+/// If there is no such window in S that covers all characters in T, 
+/// return the empty string "". 
+/// If there are multiple such windows, you are guaranteed that there 
+/// will always be only one unique minimum window in S. 
+/// </summary> 
+string LeetCodeString::minWindow(string s, string t)
 {
-    vector<int> char_map(128, 0);
+    vector<int> char_map(128);
     for (size_t i = 0; i < t.size(); i++)
     {
         char_map[t[i]]++;
     }
+    int count = t.size();
+    int begin = 0;
 
-    pair<int, int> min_window = make_pair(-1, -1);
-    int begin = 0, count = t.size();
-
-    for (size_t end = 0; end < s.size(); end++)
+    string result;
+    for (int end = 0; end < (int)s.size(); end++)
     {
         if (char_map[s[end]] > 0)
         {
             count--;
         }
         char_map[s[end]]--;
-        // Do we have all the characters matched        
+        // Do we have all the characters matched
         if (count > 0) continue;
 
-        // recover the character count, until break the condition
+        // reduce slide window, until break the condition
         while (count == 0)
         {
+            if (result.empty() || (end - begin + 1) < (int)result.size())
+            {
+                result = s.substr(begin, end - begin + 1);
+            }
             char_map[s[begin]]++;
             if (char_map[s[begin]] > 0)
             {
                 count++;
-                if (((min_window.first == -1) && (min_window.second == -1)) ||
-                    (min_window.second - min_window.first > (int)end - begin))
-                {
-                    min_window.first = begin;
-                    min_window.second = end;
-                }
             }
             begin++;
         }
     }
-
-    if ((min_window.first == -1) && (min_window.second == -1))
-    {
-        return "";
-    }
-    else
-    {
-        return s.substr(min_window.first, min_window.second - min_window.first + 1);
-    }
+    return result;
 }
 
 /// <summary>
@@ -624,16 +494,19 @@ bool LeetCode::isScramble(string s1, string s2)
 
 /// <summary>
 /// Leet code #242. Valid Anagram 
-/// Given two strings s and t, write a function to determine if t is an anagram of s.
+///
+/// Given two strings s and t, write a function to determine if t is an 
+/// anagram of s.
 /// For example,  
 /// s = "anagram", t = "nagaram", return true.
 /// s = "rat", t = "car", return false.
 /// Note:
 ///   You may assume the string contains only lowercase alphabets.
 /// Follow up:
-///   What if the inputs contain unicode characters? How would you adapt your solution to such case? 
+///   What if the inputs contain unicode characters? How would you adapt 
+///   your solution to such case? 
 /// </summary>
-bool LeetCode::isAnagram(string s, string t)
+bool LeetCodeString::isAnagram(string s, string t)
 {
     if (s.size() != t.size()) return false;
     unordered_map<char, int> map;
@@ -684,7 +557,7 @@ int LeetCodeString::lengthOfLastWord(string s)
 ///   ["bat"]
 /// ]
 /// </summary>
-vector<vector<string>> LeetCode::groupAnagrams(vector<string>& strs)
+vector<vector<string>> LeetCodeString::groupAnagrams(vector<string>& strs)
 {
     vector<vector<string>> result;
     unordered_map<string, int> anagram_map;
@@ -707,10 +580,12 @@ vector<vector<string>> LeetCode::groupAnagrams(vector<string>& strs)
 }
 
 /// <summary>
-/// Leet code #383. Ransom Note  
-/// Given an arbitrary ransom note string and another string containing letters from all 
-/// the magazines, write a function that will return true if the ransom note can be 
-/// constructed from the magazines ; otherwise, it will return false. 
+/// Leet code #383. Ransom Note
+///
+/// Given an arbitrary ransom note string and another string containing 
+/// letters from all the magazines, write a function that will return true 
+/// if the ransom note can be constructed from the magazines ; otherwise, 
+/// it will return false. 
 ///
 /// Each letter in the magazine string can only be used once in your ransom note. 
 /// Note:
@@ -719,7 +594,7 @@ vector<vector<string>> LeetCode::groupAnagrams(vector<string>& strs)
 /// canConstruct("aa", "ab") -> false
 /// canConstruct("aa", "aab") -> true
 /// </summary>
-bool LeetCode::canConstruct(string ransomNote, string magazine)
+bool LeetCodeString::canConstruct(string ransomNote, string magazine)
 {
     unordered_map<char, int> char_map;
     for (size_t i = 0; i < magazine.size(); i++)
@@ -728,19 +603,17 @@ bool LeetCode::canConstruct(string ransomNote, string magazine)
     }
     for (size_t i = 0; i < ransomNote.size(); i++)
     {
-        if (char_map.find(ransomNote[i]) == char_map.end())
-        {
-            return false;
-        }
         char_map[ransomNote[i]]--;
-        if (char_map[ransomNote[i]] == 0) char_map.erase(ransomNote[i]);
+        if (char_map[ransomNote[i]] < 0) return false;
     }
     return true;
 }
 
 /// <summary>
 /// Leet code #387. First Unique Character in a String  
-/// Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1. 
+///
+/// Given a string, find the first non-repeating character in it and 
+/// return it's index. If it doesn't exist, return -1. 
 /// Examples: 
 /// s = "leetcode"
 /// return 0.
@@ -748,7 +621,7 @@ bool LeetCode::canConstruct(string ransomNote, string magazine)
 /// return 2.
 /// Note: You may assume the string contain only lowercase letters. 
 /// </summary>
-int LeetCode::firstUniqChar(string s)
+int LeetCodeString::firstUniqChar(string s)
 {
     vector<int> char_set(26, 0);
     for (char x : s)
@@ -1061,12 +934,14 @@ bool LeetCodeString::repeatedSubstringPattern(string s)
 
 /// <summary>
 /// Leet code #423. Reconstruct Original Digits from English   
-/// Given a non-empty string containing an out-of-order English representation of digits 0-9, 
-/// output the digits in ascending order.
+///
+/// Given a non-empty string containing an out-of-order English representation
+/// of digits 0-9, output the digits in ascending order.
 /// Note:
 /// 1.Input contains only lowercase English letters.
-/// 2.Input is guaranteed to be valid and can be transformed to its original digits. 
-///   That means invalid inputs such as "abc" or "zerone" are not permitted.
+/// 2.Input is guaranteed to be valid and can be transformed to its original 
+///   digits.That means invalid inputs such as "abc" or "zerone" are not 
+///   permitted.
 /// 3.Input length is less than 50,000.
 /// Example 1:  
 /// Input: "owoztneoer" 
@@ -1075,7 +950,7 @@ bool LeetCodeString::repeatedSubstringPattern(string s)
 /// Example 2:
 /// Output: "45"
 /// </summary>
-string LeetCode::originalDigits(string s)
+string LeetCodeString::originalDigits(string s)
 {
     string result;
     vector<string> digit_map =
@@ -1114,7 +989,7 @@ string LeetCode::originalDigits(string s)
 /// Input: "Hello, my name is John"
 /// Output: 5
 /// </summary>
-int LeetCode::countSegments(string s)
+int LeetCodeString::countSegments(string s)
 {
     int segments = 0;
     size_t index = 0;
@@ -1177,9 +1052,12 @@ bool LeetCode::isIsomorphic(string s, string t)
 }
 
 /// <summary>
-/// Leet code #438. Find All Anagrams in a String      
-/// Given a string s and a non-empty string p, find all the start indices of p's anagrams in s. 
-/// Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.
+/// Leet code #438. Find All Anagrams in a String
+///
+/// Given a string s and a non-empty string p, find all the start 
+/// indices of p's anagrams in s. 
+/// Strings consists of lowercase English letters only and the length 
+/// of both strings s and p will not be larger than 20,100.
 /// The order of output does not matter.
 ///
 /// Example 1: 
@@ -1201,7 +1079,7 @@ bool LeetCode::isIsomorphic(string s, string t)
 /// The substring with start index = 1 is "ba", which is an anagram of "ab".
 /// The substring with start index = 2 is "ab", which is an anagram of "ab".
 /// </summary>
-vector<int> LeetCode::findAnagrams(string s, string p)
+vector<int> LeetCodeString::findAnagrams(string s, string p)
 {
     vector<int> result;
     int char_count = 0;
@@ -1293,63 +1171,6 @@ bool LeetCode::wordPattern(string pattern, string str)
 /// You should gather all requirements up front before implementing one. 
 /// </summary>
 bool LeetCode::isValidNumber(string s)
-{
-    bool digit = false;
-    bool end = false;
-    bool exp = false;
-    bool point = false;
-    bool sign = false;
-
-    for (size_t i = 0; i < s.size(); i++)
-    {
-        if (isdigit(s[i]))
-        {
-            if (end) return false;
-            digit = true;
-        }
-        else if (s[i] == 'e')
-        {
-            if ((!digit) || end || exp) return false;
-            digit = false;
-            point = false;
-            sign = false;
-            exp = true;
-        }
-        else if (isspace(s[i]))
-        {
-            if (point || digit || exp || sign) end = true;
-        }
-        else if ((s[i] == '+') || (s[i] == '-'))
-        {
-            if (digit || point || sign) return false;
-            sign = true;
-        }
-        else if (s[i] == '.')
-        {
-            if (exp || point || end) return false;
-            point = true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    return digit;
-}
-
-/// <summary>
-/// Leet code #65. Valid Number     
-/// Validate if a given string is numeric.
-/// Some examples:
-/// "0" => true
-/// " 0.1 " => true
-/// "abc" => false
-/// "1 a" => false
-/// "2e10" => true
-/// Note: It is intended for the problem statement to be ambiguous. 
-/// You should gather all requirements up front before implementing one. 
-/// </summary>
-bool LeetCode::isValidNumberII(string s)
 {
     enum class NumberState { start, sign, integer, decimal_start, decimal, exp_start, exp_sign, exp_int, end };
     NumberState state = NumberState::start;
@@ -1674,7 +1495,7 @@ bool LeetCode::validUtf8(vector<int>& data)
 /// <summary>
 /// Check if this is a valid IPv4 address
 /// </summary>
-bool LeetCode::checkIPv4Address(vector<string> addressList)
+bool LeetCodeString::checkIPv4Address(vector<string> addressList)
 {
     if (addressList.size() != 4)
     {
@@ -1700,7 +1521,7 @@ bool LeetCode::checkIPv4Address(vector<string> addressList)
 /// <summary>
 /// Check if this is a valid IPv6 address
 /// </summary>
-bool LeetCode::checkIPv6Address(vector<string> addressList)
+bool LeetCodeString::checkIPv6Address(vector<string> addressList)
 {
     if (addressList.size() != 8)
     {
@@ -1720,30 +1541,31 @@ bool LeetCode::checkIPv6Address(vector<string> addressList)
 
 /// <summary>
 /// Leet code #468. Validate IP Address        
+///
 /// In this problem, your job to write a function to check whether a input 
-/// string is a valid IPv4 address or IPv6 address or neither. 
-/// IPv4 addresses are canonically represented in dot-decimal notation, which 
-/// consists of four decimal numbers, 
-/// each ranging from 0 to 255, separated by dots ("."), e.g.,172.16.254.1; 
-/// Besides, you need to keep in mind that leading zeros in the IPv4 is illegal. 
-/// For example, the address 172.16.254.01 is illegal. 
-/// IPv6 addresses are represented as eight groups of four hexadecimal digits, 
-/// each group representing 16 bits. 
-/// The groups are separated by colons (":"). For example, the address 
-/// 2001:0db8:85a3:0000:0000:8a2e:0370:7334 is a legal one. 
-/// Also, we could omit some leading zeros among four hexadecimal digits and some 
-/// low-case characters in the address to upper-case ones, 
+/// string is a valid IPv4 address or IPv6 address or neither. IPv4 
+/// addresses are canonically represented in dot-decimal notation, which 
+/// consists of four decimal numbers, each ranging from 0 to 255, separated 
+/// by dots ("."), e.g.,172.16.254.1; 
+/// Besides, you need to keep in mind that leading zeros in the IPv4 is 
+/// illegal. For example, the address 172.16.254.01 is illegal. 
+/// IPv6 addresses are represented as eight groups of four hexadecimal 
+/// digits, each group representing 16 bits. 
+/// The groups are separated by colons (":"). For example, the 
+/// address 2001:0db8:85a3:0000:0000:8a2e:0370:7334 is a legal one. 
+/// Also, we could omit some leading zeros among four hexadecimal digits 
+/// and some low-case characters in the address to upper-case ones, 
 /// so 2001:db8:85a3:0:0:8A2E:0370:7334 is also a valid IPv6 address(Omit 
 /// leading zeros and using upper cases). 
-/// However, we don't replace a consecutive group of zero value with a single 
-/// empty group using two consecutive colons (::) 
-/// to pursue simplicity. For example, 2001:0db8:85a3::8A2E:0370:7334 is an 
-/// invalid IPv6 address. 
-/// Besides, you need to keep in mind that extra leading zeros in the IPv6 
-/// is also illegal. For example, the address 
+/// However, we don't replace a consecutive group of zero value with a 
+/// single empty group using two consecutive colons (::) to pursue 
+/// simplicity. For example, 2001:0db8:85a3::8A2E:0370:7334 is an invalid 
+/// IPv6 address. 
+/// Besides, you need to keep in mind that extra leading zeros in the 
+//// IPv6 is also illegal. For example, the address 
 /// 02001:0db8:85a3:0000:0000:8a2e:0370:7334 is also illegal. 
-/// Note: You could assume there is no extra space in the test cases and there may 
-/// some special characters in the input string. 
+/// Note: You could assume there is no extra space in the test cases and 
+/// there may some special characters in the input string. 
 /// Example 1:
 /// Input: "172.16.254.1"
 /// Output: "IPv4"
@@ -1757,7 +1579,7 @@ bool LeetCode::checkIPv6Address(vector<string> addressList)
 /// Output: "Neither"
 /// Explanation: This is neither a IPv4 address nor a IPv6 address.
 /// </summary>
-string LeetCode::validIPAddress(string IP)
+string LeetCodeString::validIPAddress(string IP)
 {
     vector<string> addressList;
     string word, type;
@@ -2026,7 +1848,7 @@ vector<vector<int>> LeetCode::palindromePairs(vector<string>& words)
 ///  ime complexity required: O(n) where n is the size of the input string.
 /// Notice that a/aa/aaa/file1.txt is not the longest file path, if there is another path aaaaaaaaaaaaaaaaaaaaa/sth.png.
 /// </summary>
-int LeetCode::lengthLongestPath(string input)
+int LeetCodeString::lengthLongestPath(string input)
 {
     int max_length = 0;
     vector<string> path_list;
@@ -2092,47 +1914,31 @@ int LeetCode::lengthLongestPath(string input)
 /// Replace the one 'A' in the middle with 'B' and form "AABBBBA".
 /// The substring "BBBB" has the longest repeating letters, which is 4.
 /// </summary>
-int LeetCode::characterReplacement(string s, int k)
+int LeetCodeString::characterReplacement(string s, int k)
 {
-    vector<int> count_list(26);
-    map<int, set<char>> count_map;
-    int max_length = 0;
+    vector<int> char_count(26);
+    int result = 0;
+    int max_count = 0;
     int first = 0, last = 0;
     while (last < (int)s.size())
     {
-        if (count_map.empty())
+        char_count[s[last]-'A']++;
+        // we only need to track the max count of characters
+        max_count = max(max_count, char_count[s[last] - 'A']);
+        last++;
+        // if valid we track the length
+        if (max_count + k >= last - first)
         {
-            int index = s[last] - 'A';
-            count_list[index]++;
-            count_map[count_list[index]].insert(s[last]);
-            max_length = max(last - first + 1, max_length);
-        }
-        else if (last - first + 1 - count_map.rbegin()->first <= k)
-        {
-            max_length = max(last - first + 1, max_length);
-            last++;
-            if (last == (int)s.size()) break;
-            int index = s[last] - 'A';
-            count_list[index]++;
-            count_map[count_list[index]].insert(s[last]);
-            if (count_list[index] > 1)
-            {
-                count_map[count_list[index] - 1].erase(s[last]);
-            }
+            result = max(result, last - first);
         }
         else
         {
-            int index = s[first] - 'A';
-            count_list[index]--;
-            if (count_list[index] > 0)
-            {
-                count_map[count_list[index]].insert(s[first]);
-            }
-            count_map[count_list[index] + 1].erase(s[first]);
+            // when invalid, we shrink window by one
+            char_count[s[first] - 'A']--;
             first++;
         }
     }
-    return max_length;
+    return result;
 }
 
 /// <summary>
@@ -2155,7 +1961,7 @@ int LeetCode::characterReplacement(string s, int k)
 /// 5
 /// The longest substring is "ababb", as 'a' is repeated 2 times and 'b' is repeated 3 times.
 /// </summary>
-int LeetCode::longestSubstring(string s, int k)
+int LeetCodeString::longestSubstring(string s, int k)
 {
     if (s.size() == 0 || k > (int)s.size())   return 0;
     if (k == 0)  return s.size();
@@ -2740,7 +2546,7 @@ int LeetCode::findSubstringInWraproundString(string p)
 /// Output: False
 /// Note: The input will be a non-empty word consisting of uppercase and lowercase latin letters. 
 /// </summary>
-bool LeetCode::detectCapitalUse(string word)
+bool LeetCodeString::detectCapitalUse(string word)
 {
     int upper_count = 0;
     int lower_count = 0;
@@ -4672,7 +4478,7 @@ string LeetCode::boldWords(vector<string>& words, string S)
 /// <summary>
 /// Leet code #772. Basic Calculator III
 /// </summary>
-string LeetCode::parseExpressionToken(string s, int& index)
+string LeetCodeString::parseExpressionToken(string s, int& index)
 {
     string result;
     while (index < (int)s.size())
@@ -4703,7 +4509,7 @@ string LeetCode::parseExpressionToken(string s, int& index)
 /// <summary>
 /// Leet code #772. Basic Calculator III   
 /// </summary>
-int LeetCode::parseTerm(vector<string>& tokens, int& index)
+int LeetCodeString::parseTerm(vector<string>& tokens, int& index)
 {
     int result = 0;
     if (isdigit(tokens[index][0]))
@@ -4723,7 +4529,7 @@ int LeetCode::parseTerm(vector<string>& tokens, int& index)
 /// <summary>
 /// Leet code #772. Basic Calculator III   
 /// </summary>
-int LeetCode::parseFactor(vector<string>& tokens, int& index)
+int LeetCodeString::parseFactor(vector<string>& tokens, int& index)
 {
     int result = parseTerm(tokens, index);
     while (index < (int)tokens.size())
@@ -4749,7 +4555,7 @@ int LeetCode::parseFactor(vector<string>& tokens, int& index)
 /// <summary>
 /// Leet code #772. Basic Calculator III   
 /// </summary>
-int LeetCode::parseExpression(vector<string>& tokens, int& index)
+int LeetCodeString::parseExpression(vector<string>& tokens, int& index)
 {
     int result = parseFactor(tokens, index);
     while (index < (int)tokens.size())
@@ -4793,7 +4599,7 @@ int LeetCode::parseExpression(vector<string>& tokens, int& index)
 /// "2*(5+5*2)/3+(6/2+8)" = 21
 /// "(2+6* 3+5- (3*14/7+2)*5)+3"=-12
 /// </summary>
-int LeetCode::calculateIII(string s)
+int LeetCodeString::calculateIII(string s)
 {
     vector<string> tokens;
     int index = 0;
@@ -4810,7 +4616,7 @@ int LeetCode::calculateIII(string s)
 /// <summary>
 /// Leet code #770. Basic Calculator IV   
 /// </summary>
-vector<string> LeetCode::polyToString(map<vector<string>, int> &ploy_map)
+vector<string> LeetCodeString::polyToString(map<vector<string>, int> &ploy_map)
 {
     vector<pair<vector<string>, int>> poly_vector;
     typedef struct
@@ -4852,7 +4658,7 @@ vector<string> LeetCode::polyToString(map<vector<string>, int> &ploy_map)
 /// <summary>
 /// Leet code #770. Basic Calculator IV   
 /// </summary>
-void LeetCode::calculatePolyExpression(
+void LeetCodeString::calculatePolyExpression(
     stack<map<vector<string>, int>>& operands,
     stack<string>& operators)
 {
@@ -4900,7 +4706,7 @@ void LeetCode::calculatePolyExpression(
 /// <summary>
 /// Leet code #770. Basic Calculator IV   
 /// </summary>
-map<vector<string>, int> LeetCode::parsePolyExpression(string& s, int& index,
+map<vector<string>, int> LeetCodeString::parsePolyExpression(string& s, int& index,
     unordered_map<string, int>& eval_map)
 {
     stack<map<vector<string>, int>> operands;
@@ -5032,7 +4838,7 @@ map<vector<string>, int> LeetCode::parsePolyExpression(string& s, int& index,
 /// 1. expression will have length in range [1, 250].
 /// 2. evalvars, evalints will have equal lengths in range [0, 100].
 /// </summary>
-vector<string> LeetCode::basicCalculatorIV(string expression, vector<string>& evalvars,
+vector<string> LeetCodeString::basicCalculatorIV(string expression, vector<string>& evalvars,
     vector<int>& evalints)
 {
     map<vector<string>, int> poly;
@@ -6849,7 +6655,7 @@ vector<string> LeetCode::reorderLogFiles(vector<string>& logs)
 /// 4. 1 <= queries[i].length <= 7
 /// 5. All strings in wordlist and queries consist only of english letters.
 /// </summary>
-vector<string> LeetCode::spellchecker(vector<string>& wordlist, vector<string>& queries)
+vector<string> LeetCodeString::spellchecker(vector<string>& wordlist, vector<string>& queries)
 {
     unordered_set<string> exact_words;
     unordered_map<string, int> upper_words;
@@ -6920,7 +6726,7 @@ vector<string> LeetCode::spellchecker(vector<string>& wordlist, vector<string>& 
 /// <summary>
 /// Leet code #972. Equal Rational Numbers
 /// </summary>
-string LeetCode::parseRationalInteger(string S, size_t &index)
+string LeetCodeString::parseRationalInteger(string S, size_t &index)
 {
     string result;
     while (index < S.size())
@@ -6936,7 +6742,7 @@ string LeetCode::parseRationalInteger(string S, size_t &index)
 /// <summary>
 /// Leet code #972. Equal Rational Numbers
 /// </summary>
-string LeetCode::parseRationalDecimal(string S, size_t &index)
+string LeetCodeString::parseRationalDecimal(string S, size_t &index)
 {
     string non_repeating_part;
     string repeating_part;
@@ -7061,7 +6867,7 @@ string LeetCode::parseRationalDecimal(string S, size_t &index)
 /// 4. 0 <= <NonRepeatingPart>.length <= 4
 /// 5. 1 <= <RepeatingPart>.length <= 4
 /// </summary>
-bool LeetCode::isRationalEqual(string S, string T)
+bool LeetCodeString::isRationalEqual(string S, string T)
 {
     size_t index = 0;
     string integer1 = parseRationalInteger(S, index);
@@ -7316,7 +7122,7 @@ vector<bool> LeetCode::camelMatch(vector<string>& queries, string pattern)
 /// 1. 2 <= S.length <= 10^5
 /// 2. S consists of lowercase English letters.
 /// </summary>
-string LeetCode::longestDupSubstring(string S)
+string LeetCodeString::longestDupSubstring(string S)
 {
     unsigned long long M = 1000000007;
     int first = 1; 
@@ -7377,10 +7183,11 @@ string LeetCode::longestDupSubstring(string S)
     }
     return result;
 }
+
 /// <summary>
 /// Leet code #1071. Greatest Common Divisor of Strings
 /// </summary>
-string LeetCode::getRepeatedOfStrings(string str)
+string LeetCodeString::getRepeatedOfStrings(string str)
 {
     size_t size = str.size();
     vector<int> lps(size);
@@ -7443,7 +7250,7 @@ string LeetCode::getRepeatedOfStrings(string str)
 /// 2. 1 <= str2.length <= 1000
 /// 3. str1[i] and str2[i] are English uppercase letters.
 /// </summary>
-string LeetCode::gcdOfStrings(string str1, string str2)
+string LeetCodeString::gcdOfStrings(string str1, string str2)
 {
     string re1 = getRepeatedOfStrings(str1);
     string re2 = getRepeatedOfStrings(str2);
@@ -7499,7 +7306,7 @@ string LeetCode::gcdOfStrings(string str1, string str2)
 /// letters from "a"-"z".
 /// 2. The lengths of source and target string are between 1 and 1000.
 /// </summary>
-int LeetCode::shortestWay(string source, string target)
+int LeetCodeString::shortestWay(string source, string target)
 {
     int result = 0;
     vector<vector<int>> char_index(26, vector<int>());
@@ -7559,7 +7366,7 @@ int LeetCode::shortestWay(string source, string target)
 /// 6. Return the pairs [i,j] in sorted order (i.e. sort them by their first 
 /// coordinate in case of ties sort them by their second coordinate).
 /// </summary>
-vector<vector<int>> LeetCode::indexPairs(string text, vector<string>& words)
+vector<vector<int>> LeetCodeString::indexPairs(string text, vector<string>& words)
 {
     vector<vector<int>> result;
     unordered_map<string, int> trie;
@@ -7626,7 +7433,7 @@ vector<vector<int>> LeetCode::indexPairs(string text, vector<string>& words)
 /// 3. 1 <= first.length, second.length <= 10
 /// 4. first and second consist of lowercase English letters.
 /// </summary>
-vector<string> LeetCode::findOcurrences(string text, string first, string second)
+vector<string> LeetCodeString::findOcurrences(string text, string first, string second)
 {
     string str;
     vector<string> result;
@@ -7667,7 +7474,7 @@ vector<string> LeetCode::findOcurrences(string text, string first, string second
 /// <summary>
 /// Leet code #1096. Brace Expansion II
 /// </summary>
-void LeetCode::braceExpansionIIProduct(string &expression, size_t& pos, unordered_set<string> &result)
+void LeetCodeString::braceExpansionIIProduct(string &expression, size_t& pos, unordered_set<string> &result)
 {
     pos++;
     braceExpansionIIUnion(expression, pos, result);
@@ -7677,7 +7484,7 @@ void LeetCode::braceExpansionIIProduct(string &expression, size_t& pos, unordere
 /// <summary>
 /// Leet code #1096. Brace Expansion II
 /// </summary>
-void LeetCode::braceExpansionIIUnion(string &expression, size_t& pos, unordered_set<string> &result)
+void LeetCodeString::braceExpansionIIUnion(string &expression, size_t& pos, unordered_set<string> &result)
 {
     while (pos <= expression.size())
     {
@@ -7784,7 +7591,7 @@ void LeetCode::braceExpansionIIUnion(string &expression, size_t& pos, unordered_
 /// 3. The given expression represents a set of words based on the grammar 
 ///    given in the description.
 /// </summary>
-vector<string> LeetCode::braceExpansionII(string expression)
+vector<string> LeetCodeString::braceExpansionII(string expression)
 {
     vector<string> result;
     unordered_set<string> left;
@@ -7799,7 +7606,7 @@ vector<string> LeetCode::braceExpansionII(string expression)
 /// <summary>
 /// Leet code #1106. Parsing A Boolean Expression
 /// </summary>
-bool LeetCode::parseBoolExpr(string expression, int &pos)
+bool LeetCodeString::parseBoolExpr(string expression, int &pos)
 {
     if (expression[pos] == 't')
     {
@@ -7828,7 +7635,7 @@ bool LeetCode::parseBoolExpr(string expression, int &pos)
 /// <summary>
 /// Leet code #1106. Parsing A Boolean Expression
 /// </summary>
-bool LeetCode::parseBoolExprNot(string expression, int &pos)
+bool LeetCodeString::parseBoolExprNot(string expression, int &pos)
 {
     pos++; // skip !
     pos++; // skip (
@@ -7840,7 +7647,7 @@ bool LeetCode::parseBoolExprNot(string expression, int &pos)
 /// <summary>
 /// Leet code #1106. Parsing A Boolean Expression
 /// </summary>
-bool LeetCode::parseBoolExprOr(string expression, int &pos)
+bool LeetCodeString::parseBoolExprOr(string expression, int &pos)
 {
     pos++; // skip |
     pos++; // skip (
@@ -7861,7 +7668,7 @@ bool LeetCode::parseBoolExprOr(string expression, int &pos)
 /// <summary>
 /// Leet code #1106. Parsing A Boolean Expression
 /// </summary>
-bool LeetCode::parseBoolExprAnd(string expression, int &pos)
+bool LeetCodeString::parseBoolExprAnd(string expression, int &pos)
 {
     pos++; // skip |
     pos++; // skip (
@@ -7919,7 +7726,7 @@ bool LeetCode::parseBoolExprAnd(string expression, int &pos)
 /// 3. expression is a valid expression representing a boolean, as given in 
 ///    the description.
 /// </summary>
-bool LeetCode::parseBoolExpr(string expression)
+bool LeetCodeString::parseBoolExpr(string expression)
 {
     int pos = 0;
     return parseBoolExpr(expression, pos);
@@ -7946,7 +7753,7 @@ bool LeetCode::parseBoolExpr(string expression)
 /// Constraints:
 /// The given address is a valid IPv4 address.
 /// </summary>
-string LeetCode::defangIPaddr(string address)
+string LeetCodeString::defangIPaddr(string address)
 {
     string result;
     for (size_t i = 0; i < address.size(); i++)
@@ -8007,7 +7814,7 @@ string LeetCode::defangIPaddr(string address)
 /// 
 /// 1. 1 <= seq.size <= 10000
 /// </summary>
-vector<int> LeetCode::maxDepthAfterSplit(string seq)
+vector<int> LeetCodeString::maxDepthAfterSplit(string seq)
 {
     vector<int> result(seq.size());
     int flag = 1;
@@ -8047,7 +7854,7 @@ vector<int> LeetCode::maxDepthAfterSplit(string seq)
 /// 1. S consists of lowercase English letters only.
 /// 2. 1 <= S.length <= 1000
 /// </summary>
-string LeetCode::removeVowels(string S)
+string LeetCodeString::removeVowels(string S)
 {
     string result;
     for (size_t i = 0; i < S.size(); i++)
@@ -8073,7 +7880,7 @@ string LeetCode::removeVowels(string S)
 /// " 2-1 + 2 " = 3
 /// "(1+(4+5+2)-3)+(6+8)" = 23	
 /// </summary>
-int LeetCode::calculate(string s)
+int LeetCodeString::calculate(string s)
 {
     stack <int> nums, signs;
     int result = 0;
@@ -8116,7 +7923,7 @@ int LeetCode::calculate(string s)
 /// <summary>
 /// Leet code #227. Basic Calculator II 
 /// </summary>   
-inline int LeetCode::calculateII(int a, int b, char op)
+inline int LeetCodeString::calculateII(int a, int b, char op)
 {
     if (op == '+')
     {
@@ -8149,7 +7956,7 @@ inline int LeetCode::calculateII(int a, int b, char op)
 /// " 3+5 / 2 " = 5
 /// Note: Do not use the eval built-in library function. 
 /// </summary>   
-int LeetCode::calculateII(string s)
+int LeetCodeString::calculateII(string s)
 {
     int num = 0;
     int product = 1;
@@ -8192,7 +7999,6 @@ int LeetCode::calculateII(string s)
     return num;
 }
 
-
 /// <summary>
 /// Leet code #1160. Find Words That Can Be Formed by Characters
 /// 
@@ -8220,7 +8026,7 @@ int LeetCode::calculateII(string s)
 /// 2. 1 <= words[i].length, chars.length <= 100
 /// 3. All strings contain lowercase English letters only.
 /// </summary>
-int LeetCode::countCharacters(vector<string>& words, string chars)
+int LeetCodeString::countCharacters(vector<string>& words, string chars)
 {
     vector<int> char_count(26);
     for (size_t i = 0; i < chars.size(); i++)
@@ -8496,7 +8302,7 @@ int LeetCodeString::calculateTime(string keyboard, string word)
 /// 5. words[i][j], puzzles[i][j] are English lowercase letters.
 /// 6. Each puzzles[i] doesn't contain repeated characters.
 /// </summary>
-vector<int> LeetCode::findNumOfValidWords(vector<string>& words, vector<string>& puzzles)
+vector<int> LeetCodeString::findNumOfValidWords(vector<string>& words, vector<string>& puzzles)
 {
     unordered_map<int, int> word_count;
     for (size_t i = 0; i < words.size(); i++)
@@ -9275,5 +9081,4 @@ vector<vector<int>> LeetCodeString::largeGroupPositions(string S)
     }
     return result;
 }
-
 #pragma endregion

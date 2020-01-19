@@ -369,7 +369,7 @@ vector<int> LeetCode::postorderTraversal(TreeNode* root)
 ///   [15,7]
 /// ]
 /// </summary>
-vector<vector<int>> LeetCode::levelOrder(TreeNode* root)
+vector<vector<int>> LeetCodeTree::levelOrder(TreeNode* root)
 {
     vector<int> level;
     vector<vector<int>> result;

@@ -206,8 +206,45 @@ void TestLeetCode1315(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode102(void)
+{
+    Logger::WriteMessage("Test Leet Code 102");
+    LeetCodeTree leetCode;
+    string input = "[3,9,20,null,null,15,7]";
+    TreeNode* root = leetCode.deserialize(input);
+    vector<vector<int>> result = leetCode.levelOrder(root);
+    Logger::WriteMessage("LevelorderTraversal");
+    Logger::WriteMessage(result);
+    leetCode.freeTreeNodes(root);
+
+    
+    input = "[1,2,3,4,null,null,5]";
+    root = leetCode.deserialize(input);
+    result = leetCode.levelOrder(root);
+    Logger::WriteMessage("LevelorderTraversal");
+    Logger::WriteMessage(result);
+    leetCode.freeTreeNodes(root);
+
+    
+    input = "[2,null,3,null,4,null,5,null,6]";
+    root = leetCode.deserialize(input);
+    result = leetCode.levelOrder(root);
+    Logger::WriteMessage("LevelorderTraversal");
+    Logger::WriteMessage(result);
+    leetCode.freeTreeNodes(root);
+
+    input = "[0,2,4,1,null,3,-1,5,1,null,6,null,8]";
+    root = leetCode.deserialize(input);
+    result = leetCode.levelOrder(root);
+    Logger::WriteMessage("LevelorderTraversal");
+    Logger::WriteMessage(result);
+    leetCode.freeTreeNodes(root);
+}
+
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode102();
     TestLeetCode1315();
     TestLeetCode1302();
     TestLeetCode1305();
