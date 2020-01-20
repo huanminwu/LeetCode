@@ -9081,4 +9081,82 @@ vector<vector<int>> LeetCodeString::largeGroupPositions(string S)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1324. Print Words Vertically
+///
+/// Medium
+///
+/// Given a string s. Return all the words vertically in the same 
+/// order in which they appear in s.
+/// Words are returned as a list of strings, complete with spaces when 
+/// is necessary. (Trailing spaces are not allowed).
+/// Each word would be put on only one column and that in one column 
+/// there will be only one word.
+/// 
+/// Example 1:
+/// Input: s = "HOW ARE YOU"
+/// Output: ["HAY","ORO","WEU"]
+/// Explanation: Each word is printed vertically. 
+///  "HAY"
+///  "ORO"
+///  "WEU"
+///
+/// Example 2:
+/// Input: s = "TO BE OR NOT TO BE"
+/// Output: ["TBONTB","OEROOE","   T"]
+/// Explanation: Trailing spaces is not allowed. 
+/// "TBONTB"
+/// "OEROOE"
+/// "   T"
+///
+/// Example 3:
+/// Input: s = "CONTEST IS COMING"
+/// Output: ["CIC","OSO","N M","T I","E N","S G","T"]
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 200
+/// 2. s contains only upper case English letters.
+/// 3. It's guaranteed that there is only one space between 2 words.
+/// </summary>
+vector<string> LeetCodeString::printVertically(string s)
+{
+    vector<string> result;
+    vector<int> dp;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (i == 0) dp.push_back(i);
+        else if (isspace(s[i - 1]) && !isspace(s[i]))
+        {
+            dp.push_back(i);
+        }
+    }
+    size_t index = 0;
+    while (!dp.empty())
+    {
+        for (size_t i = 0; i < dp.size(); i++)
+        {
+            if (result.size() <= index)
+            {
+                result.push_back("");
+            }
+            if (dp[i] == s.size() || isspace(s[dp[i]]))
+            {
+                result[index].push_back(' ');
+            }
+            else
+            {
+                result[index].push_back(s[dp[i]]);
+                dp[i]++;
+            }
+        }
+        while ((!dp.empty()) && (dp.back() == s.size() || isspace(s[dp.back()])))
+        {
+            dp.pop_back();
+        }
+        index++;
+    }
+    return result;
+}
+
 #pragma endregion

@@ -1756,8 +1756,26 @@ void TestLeetCode1318(void)
         "; c = " + to_string(c) + "result = " + to_string(result));
 }
 
+void TestLeetCode1323(void)
+{
+    Logger::WriteMessage("Test Leet Code 1323");
+    LeetCodeMath leetCode;
+    int num = 9669;
+    int result = leetCode.maximum69Number(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+
+    num = 9996;
+    result = leetCode.maximum69Number(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+
+    num = 9999;
+    result = leetCode.maximum69Number(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1323();
     TestLeetCode1318();
     TestLeetCode1317();
     TestLeetCode1304();

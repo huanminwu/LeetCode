@@ -242,8 +242,64 @@ void TestLeetCode102(void)
 }
 
 
+void TestLeetCode1325(void)
+{
+    Logger::WriteMessage("Test Leet Code 1325");
+    LeetCodeTree leetCode;
+    string input = "[1,2,3,2,null,2,4]";
+    int target = 2;
+    TreeNode* root = leetCode.deserialize(input);
+    root = leetCode.removeLeafNodes(root, target);
+    string output = leetCode.serialize(root);
+    Logger::WriteMessage(input);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(output);
+    leetCode.freeTreeNodes(root);
+
+    input = "[1,3,3,3,2]";
+    target = 3;
+    root = leetCode.deserialize(input);
+    root = leetCode.removeLeafNodes(root, target);
+    output = leetCode.serialize(root);
+    Logger::WriteMessage(input);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(output);
+    leetCode.freeTreeNodes(root);
+
+    input = "[1,2,null,2,null,2]";
+    target = 2;
+    root = leetCode.deserialize(input);
+    root = leetCode.removeLeafNodes(root, target);
+    output = leetCode.serialize(root);
+    Logger::WriteMessage(input);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(output);
+    leetCode.freeTreeNodes(root);
+
+    input = "[1,1,1]";
+    target = 1;
+    root = leetCode.deserialize(input);
+    root = leetCode.removeLeafNodes(root, target);
+    output = leetCode.serialize(root);
+    Logger::WriteMessage(input);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(output);
+    leetCode.freeTreeNodes(root);
+
+    input = "[1,2,3]";
+    target = 1;
+    root = leetCode.deserialize(input);
+    root = leetCode.removeLeafNodes(root, target);
+    output = leetCode.serialize(root);
+    Logger::WriteMessage(input);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(output);
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1325();
     TestLeetCode102();
     TestLeetCode1315();
     TestLeetCode1302();

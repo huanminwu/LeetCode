@@ -1165,8 +1165,29 @@ void TestLeetCode1044(void)
     Logger::WriteMessage("S = " + S + "; result = " + result);
 }
 
+void TestLeetCode1324(void)
+{
+    Logger::WriteMessage("Test Leet Code 1324");
+    LeetCodeString leetCode;
+    string s = "HOW ARE YOU";
+    vector<string> result = leetCode.printVertically(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+
+    s = "TO BE OR NOT TO BE";
+    result = leetCode.printVertically(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+
+    s = "CONTEST IS COMING";
+    result = leetCode.printVertically(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1324();
     TestLeetCode1044();
     TestLeetCode1055();
     TestLeetCode1078();

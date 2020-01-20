@@ -14798,16 +14798,16 @@ void TestLeetCode1238(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeGreedy();
     TestLeetCodeString();
     TestLeetCodeTree();
+    TestLeetCodeMath();
     TestLeetCodeUnionFind();
     TestLeetCodeDP();
-    TestLeetCodeMath();
     TestLeetCodeArray();
     TestLeetCodeGraph();
     TestLeetCodeDFS();
     TestLeetCodeBinarySearch();
-    TestLeetCodeGreedy();
     TestLeetCodeLinkedList();
     TestLeetCodeBFS();
     TestLeetCode915();

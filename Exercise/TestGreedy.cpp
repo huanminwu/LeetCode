@@ -64,8 +64,57 @@ void TestLeetCode1288(void)
     result = leetCode.removeCoveredIntervals(intervals);
     Logger::WriteMessage("result = " + to_string(result));
 }
+
+void TestLeetCode1326(void)
+{
+    Logger::WriteMessage("Test Leet Code 1326");
+    LeetCodeGreedy leetCode;
+    int n = 5;
+    vector<int> ranges = { 3, 4, 1, 1, 0, 0 };
+    int result = leetCode.minTaps(n, ranges);
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    ranges = { 0,0,0,0 };
+    result = leetCode.minTaps(n, ranges);
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 7;
+    ranges = { 1,2,1,0,2,1,0,1 };
+    result = leetCode.minTaps(n, ranges);
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 8;
+    ranges = { 4,0,0,0,0,0,0,0,4 };
+    result = leetCode.minTaps(n, ranges);
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 8;
+    ranges = { 4,0,0,0,4,0,0,0,4 };
+    result = leetCode.minTaps(n, ranges);
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 9;
+    ranges = { 0, 5, 0, 3, 3, 3, 1, 4, 0, 4 };
+    result = leetCode.minTaps(n, ranges);
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 17;
+    ranges = { 0, 3, 3, 2, 2, 4, 2, 1, 5, 1, 0, 1, 2, 3, 0, 3, 1, 1 };
+    result = leetCode.minTaps(n, ranges);
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode1326();
     TestLeetCode1288();
     TestLeetCode1272();
     TestLeetCode1229();
