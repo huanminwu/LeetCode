@@ -1111,49 +1111,6 @@ vector<vector<string>> LeetCode::partitionPalindrome(string s)
 }
 
 /// <summary>
-/// Get minimum cut for palindrome with string s       
-/// </summary>
-int LeetCode::minCutPalindrome(string s, unordered_map<string, int>& palindromeMap)
-{
-    if (palindromeMap.find(s) != palindromeMap.end())
-    {
-        return palindromeMap[s];
-    }
-    palindromeMap[s] = INT_MAX;
-    for (size_t i = 0; i < s.size(); i++)
-    {
-        string sub_string = s.substr(0, s.size() - i);
-        if (isPalindrome(sub_string))
-        {
-            palindromeMap[sub_string] = 0;
-            if (i == 0)  break;
-            else
-            {
-                if (palindromeMap[s] == 1)
-                {
-                    break;
-                }
-                palindromeMap[s] = min(palindromeMap[s], 1 + minCutPalindrome(s.substr(s.size() - i, i)));
-            }
-        }
-    }
-    return palindromeMap[s];
-}
-
-/// <summary>
-/// Leet code #132. Palindrome Partitioning II       
-/// Given a string s, partition s such that every substring of the partition is a palindrome.  
-/// Return the minimum cuts needed for a palindrome partitioning of s.  
-/// For example, given s = "aab",
-/// Return 1 since the palindrome partitioning ["aa","b"] could be produced using 1 cut. 
-/// </summary>
-int LeetCode::minCutPalindrome(string s)
-{
-    unordered_map<string, int> palindromeMap;
-    return minCutPalindrome(s, palindromeMap);
-}
-
-/// <summary>
 /// Leet code #464. Can I Win
 /// </summary>
 bool LeetCodeDFS::canIWin(int maxChoosableInteger, int desiredTotal, 

@@ -1038,331 +1038,6 @@ public:
 };
 
 /// <summary>
-/// Leet code #348. Design Tic-Tac-Toe 
-/// 
-/// Design a Tic-tac-toe game that is played between two players on a n x n grid. 
-/// You may assume the following rules:  
-/// 1.A move is guaranteed to be valid and is placed on an empty block.
-/// 2.Once a winning condition is reached, no more moves is allowed. 
-/// 3.A player who succeeds in placing n of their marks in a horizontal, vertical, or diagonal row wins the game.
-///
-/// Example:
-/// Given n = 3, assume that player 1 is "X" and player 2 is "O" in the board.
-/// TicTacToe toe = new TicTacToe(3); 
-/// toe.move(0, 0, 1); -> Returns 0 (no one wins)
-/// |X| | |
-/// | | | |    // Player 1 makes a move at (0, 0).
-/// | | | |
-/// 
-/// toe.move(0, 2, 2); -> Returns 0 (no one wins)
-/// |X| |O|
-/// | | | |    // Player 2 makes a move at (0, 2).
-/// | | | |
-/// 
-/// toe.move(2, 2, 1); -> Returns 0 (no one wins)
-/// |X| |O|
-/// | | | |    // Player 1 makes a move at (2, 2).
-/// | | |X|
-///
-/// toe.move(1, 1, 2); -> Returns 0 (no one wins)
-/// |X| |O|
-/// | |O| |    // Player 2 makes a move at (1, 1).
-/// | | |X|
-///
-/// toe.move(2, 0, 1); -> Returns 0 (no one wins)
-/// |X| |O|
-/// | |O| |    // Player 1 makes a move at (2, 0).
-/// |X| |X|
-///
-/// toe.move(1, 0, 2); -> Returns 0 (no one wins)
-/// |X| |O|
-/// |O|O| |    // Player 2 makes a move at (1, 0).
-/// |X| |X|
-///
-/// toe.move(2, 1, 1); -> Returns 1 (player 1 wins)
-/// |X| |O|
-/// |O|O| |    // Player 1 makes a move at (2, 1).
-/// |X|X|X|
-/// Follow up:
-/// Could you do better than O(n2) per move() operation? 
-/// Hint:
-/// 1.Could you trade extra space such that move() operation can be done in O(1)?
-/// 2.You need two arrays: int rows[n], int cols[n], plus two variables: diagonal, anti_diagonal.
-/// </summary>
-class TicTacToe
-{
-    vector<vector<int>> row_map;
-    vector<vector<int>> col_map;
-    vector<int> diag_map;
-    vector<int> anti_map;
-public:
-    /** Initialize your data structure here. */
-    TicTacToe(int n)
-    {
-        row_map = vector<vector<int>>(n, vector<int>(2));
-        col_map = vector<vector<int>>(n, vector<int>(2));
-        diag_map = vector<int>(2);
-        anti_map = vector<int>(2);
-    }
-
-    /** Player {player} makes a move at ({row}, {col}).
-    @param row The row of the board.
-    @param col The column of the board.
-    @param player The player, can be either 1 or 2.
-    @return The current winning condition, can be either:
-    0: No one wins.
-    1: Player 1 wins.
-    2: Player 2 wins. */
-    int move(int row, int col, int player)
-    {
-        row_map[row][player - 1]++;
-        col_map[col][player - 1]++;
-        if (row == col)
-        {
-            diag_map[player - 1]++;
-        }
-        if (row + col == row_map.size() - 1)
-        {
-            anti_map[player - 1]++;
-        }
-        if ((row_map[row][player - 1] == row_map.size()) ||
-            (col_map[col][player - 1] == row_map.size()) ||
-            (diag_map[player - 1] == row_map.size()) ||
-            (anti_map[player - 1] == row_map.size()))
-        {
-            return player;
-        }
-        else
-        {
-            return 0;
-        }
-    }
-};
-
-/// <summary>
-/// Leet code #379. Design Phone Directory 
-/// 
-/// Design a Phone Directory which supports the following operations:
-/// 1.get: Provide a number which is not assigned to anyone.
-///	2.check: Check if a number is available or not.
-/// 3.release: Recycle or release a number.
-/// Example: 
-/// // Init a phone directory containing a total of 3 numbers: 0, 1, and 2.
-/// PhoneDirectory directory = new PhoneDirectory(3);
-/// // It can return any available phone number. Here we assume it returns 0.
-/// directory.get();
-/// 
-/// // Assume it returns 1.
-/// directory.get();
-///
-/// // The number 2 is available, so return true.
-/// directory.check(2);
-///
-/// // It returns 2, the only number that is left.
-/// directory.get();
-///
-/// // The number 2 is no longer available, so return false.
-/// directory.check(2);
-///
-/// // Release number 2 back to the pool.
-/// directory.release(2);
-///
-/// // Number 2 is available again, return true.
-/// directory.check(2);
-/// </summary>
-class PhoneDirectory
-{
-    vector<int> m_FreeList;
-    vector<bool> m_Allocation;
-    int m_Index;
-    int m_Size;
-public:
-    // Initialize your data structure here
-    // @param maxNumbers - The maximum numbers that can be stored in the phone directory.
-    PhoneDirectory(int maxNumbers)
-    {
-        m_Index = 0;
-        m_Size = maxNumbers;
-        m_FreeList = vector<int>(m_Size);
-        m_Allocation = vector<bool>(m_Size, false);
-        for (int i = 0; i < maxNumbers; i++)
-        {
-            m_FreeList[i] = i;
-        }
-    }
-
-    // Provide a number which is not assigned to anyone.
-    // @return - Return an available number. Return -1 if none is available.
-    int get()
-    {
-        if (m_Index == m_Size)
-        {
-            return -1;
-        }
-        else
-        {
-            int value = m_FreeList[m_Index];
-            m_Index++;
-            m_Allocation[value] = true;
-            return value;
-        }
-    }
-
-    // Check if a number is available or not.
-    bool check(int number)
-    {
-       if ((number < 0) || (number >= m_Size))
-       {
-           return false;
-       }
-       return (!m_Allocation[number]);
-    }
-
-    // Recycle or release a number.
-    void release(int number)
-    {
-        if ((number < 0) || (number >= m_Size) || (m_Allocation[number] == false))
-        {
-            return;
-        }
-        m_Index--;
-        m_FreeList[m_Index] = number;
-        m_Allocation[number] = false;
-    }
-};
-
-/// <summary>
-/// Leet code #353. Design Snake Game  
-/// 
-/// Design a Snake game that is played on a device with screen size = width x height. 
-/// Play the game online if you are not familiar with the game.
-/// The snake is initially positioned at the top left corner (0,0) with length = 1 unit.
-/// You are given a list of food's positions in row-column order. When a snake eats the food, 
-/// its length and the game's score both increase by 1.
-/// Each food appears one by one on the screen. For example, the second food will not appear 
-/// until the first food was eaten by the snake. 
-/// When a food does appear on the screen, it is guaranteed that it will not appear on a 
-/// block occupied by the snake.
-/// Example:
-/// Given width = 3, height = 2, and food = [[1,2],[0,1]].
-/// Snake snake = new Snake(width, height, food);
-/// Initially the snake appears at position (0,0) and the food at (1,2).
-/// |S| | |
-/// | | |F|
-/// 
-/// snake.move("R"); -> Returns 0
-/// | |S| |
-/// | | |F|
-///
-/// snake.move("D"); -> Returns 0
-///
-/// | | | |
-/// | |S|F|
-///   
-/// snake.move("R"); -> Returns 1 (Snake eats the first food and right after that, the second food appears at (0,1) )
-///
-/// | |F| |
-/// | |S|S|
-///
-/// snake.move("U"); -> Returns 1
-///
-/// | |F|S|
-/// | | |S|
-///
-/// snake.move("L"); -> Returns 2 (Snake eats the second food)
-///
-/// | |S|S|
-/// | | |S|
-///
-/// snake.move("U"); -> Returns -1 (Game over because snake collides with border)
-/// </summary>
-class SnakeGame
-{
-private:
-    list<pair<int, int>> m_snake;
-    int m_width;
-    int m_height;
-    vector<pair<int, int>> m_food;
-    int m_foodindex;
-    unordered_map<int, unordered_set<int>> m_snakemap;
-public:
-    /** Initialize your data structure here.
-    @param width - screen width
-    @param height - screen height
-    @param food - A list of food positions
-    E.g food = [[1, 1], [1, 0]] means the first food is positioned at[1, 1], the second is at[1, 0]. */
-    SnakeGame(int width, int height, vector<pair<int, int>> food)
-    {
-        m_width = width;
-        m_height = height;
-        m_food = food;
-        m_snake.push_front(make_pair(0, 0));
-        m_snakemap[0].insert(0);
-        m_foodindex = 0;
-    }
-
-    /** Moves the snake.
-    @param direction - 'U' = Up, 'L' = Left, 'R' = Right, 'D' = Down
-    @return The game's score after the move. Return -1 if game over.
-    Game over when snake crosses the screen boundary or bites its body. */
-    int move(string direction)
-    {
-        pair<int, int> head = m_snake.front();
-        if (direction == "U")
-        {            
-            head.first--;
-            if (head.first < 0)
-            {
-                return -1;
-            }
-        }
-        else if (direction == "D")
-        {
-            head.first++;
-            if (head.first == m_height)
-            {
-                return -1;
-            }
-        }
-        else if (direction == "L")
-        {
-            head.second--;
-            if (head.second < 0)
-            {
-                return -1;
-            }
-        }
-        else if (direction == "R")
-        {
-            head.second++;
-            if (head.second == m_width)
-            {
-                return -1;
-            }
-        }
-
-        m_snake.push_front(head);
-        if ((m_foodindex < (int)m_food.size()) && (head == m_food[m_foodindex]) && 
-            (m_snakemap[head.first].count(head.second) == 0))
-        {
-            m_foodindex++;
-        }
-        else
-        {
-            pair<int, int> tail = m_snake.back();
-            m_snakemap[tail.first].erase(tail.second);
-            m_snake.pop_back();
-        }
-        if (m_snakemap[head.first].count(head.second) > 0)
-        {
-            return -1;
-        }
-        m_snakemap[head.first].insert(head.second);
-        return m_foodindex;
-    }
-};
-
-/// <summary>
 /// Leet code #535. Encode and Decode TinyURL   
 /// 
 /// Note: This is a companion problem to the System Design problem: 
@@ -16299,12 +15974,15 @@ public:
 
     /// <summary>
     /// Leet code #198. House Robber
-    /// You are a professional robber planning to rob houses along a street. Each house has a 
-    /// certain amount of money stashed, the only constraint stopping you from robbing each 
-    /// of them is that adjacent houses have security system connected and it will 
-    /// automatically contact the police if two adjacent houses were broken into on the same night.
-    /// Given a list of non-negative integers representing the amount of money of each house, 
-    /// determine the maximum amount of money you can rob tonight without alerting the police.
+    ///
+    /// You are a professional robber planning to rob houses along a street. 
+    /// Each house has a certain amount of money stashed, the only constraint 
+    /// stopping you from robbing each of them is that adjacent houses have 
+    /// security system connected and it will automatically contact the police 
+    /// if two adjacent houses were broken into on the same night.
+    /// Given a list of non-negative integers representing the amount of money 
+    /// of each house, determine the maximum amount of money you can rob 
+    /// tonight without alerting the police.
     /// </summary>
     int rob(vector<int>& nums);
 
@@ -16320,8 +15998,6 @@ public:
     ///   2     1         2                 3
     /// </summary>
     int numTrees(int n);
-
-
 
     /// <summary>
     /// Leet code #85. Maximal Rectangle  
@@ -16380,26 +16056,6 @@ public:
     int minimumTotal(vector<vector<int>>& triangle);
 
     /// <summary>
-    /// Leet code #413. Arithmetic Slices
-    /// A sequence of number is called arithmetic if it consists of at least three elements and if the difference between 
-    /// any two consecutive elements is the same
-    /// For example, these are arithmetic sequence:
-    /// 1, 3, 5, 7, 9
-    /// 7, 7, 7, 7
-    /// 3, -1, -5, -9
-    /// The following sequence is not arithmetic.
-    /// 1, 1, 2, 5, 7
-    /// A zero-indexed array A consisting of N numbers is given. A slice of that array is any pair of integers (P, Q) such that 0 <= P < Q < N.
-    /// A slice (P, Q) of array A is called arithmetic if the sequence:
-    /// A[P], A[p + 1], ..., A[Q - 1], A[Q] is arithmetic. In particular, this means that P + 1 < Q.
-    /// The function should return the number of arithmetic slices in the array A. 
-    /// Example: 
-    /// A = [1, 2, 3, 4]
-    /// return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] itself.
-    /// </summary>
-    int numberOfArithmeticSlices(vector<int>& A);
-
-    /// <summary>
     /// Leet code #279. Perfect Squares 
     /// Given a positive integer n, find the least number of perfect square numbers 
     /// (for example, 1, 4, 9, 16, ...) which sum to n.
@@ -16407,25 +16063,6 @@ public:
     /// given n = 13, return 2 because 13 = 4 + 9. 
     /// </summary>
     int numSquares(int n);
-
-    /// <summary>
-    /// Leet code #368. Largest Divisible Subset 
-    /// 
-    /// Given a set of distinct positive integers, find the largest 
-    /// subset such that every pair (Si, Sj) of elements in this subset 
-    /// satisfies: Si % Sj = 0 or Sj % Si = 0. 
-    ///
-    /// If there are multiple solutions, return any subset is fine. 
-    ///
-    /// Example 1: 
-    /// nums: [1,2,3]
-    /// Result: [1,2] (of course, [1,3] will also be ok)
-    ///
-    /// Example 2: 
-    /// nums: [1,2,4,8]
-    /// Result: [1,2,4,8]
-    /// </summary>
-    vector<int> largestDivisibleSubset(vector<int>& nums);
 
     /// <summary>
     /// Leet code #276. Paint Fence     
@@ -16451,21 +16088,6 @@ public:
     /// Return 4. 
     /// </summary>
     int maximalSquare(vector<vector<char>>& matrix);
-
-    /// <summary>
-    /// Leet code #485. Max Consecutive Ones  
-    /// 
-    /// Given a binary array, find the maximum number of consecutive 1s in this array. 
-    /// Example 1:
-    /// Input: [1,1,0,1,1,1]
-    /// Output: 3
-    /// Explanation: The first two digits or the last three digits are consecutive 1s.
-    /// The maximum number of consecutive 1s is 3.
-    /// Note: 
-    /// The input array will only contain 0 and 1.
-    /// The length of input array is a positive integer and will not exceed 10,000 
-    /// </summary>
-    int findMaxConsecutiveOnes(vector<int>& nums);
 
     /// <summary>
     /// Leet code #256. Paint House 
@@ -16521,26 +16143,6 @@ public:
     bool isOneEditDistance(string s, string t);
 
     /// <summary>
-    /// Leet code #361. Bomb Enemy     
-    /// 
-    /// Given a 2D grid, each cell is either a wall 'W', an enemy 'E' or empty '0' 
-    /// (the number zero), return the maximum enemies you can kill using one bomb.
-    /// The bomb kills all the enemies in the same row and column from the planted 
-    /// point until it hits the wall since the wall is too strong to be destroyed.
-    /// Note that you can only put the bomb at an empty cell. 
-    /// 
-    /// Example:
-    ///
-    /// For the given grid
-    /// 0 E 0 0
-    /// E 0 W E
-    /// 0 E 0 0
-    ///
-    /// return 3. (Placing a bomb at (1,1) kills 3 enemies)
-    /// </summary>
-    int maxKilledEnemies(vector<vector<char>>& grid);
-
-    /// <summary>
     /// Leet code #484. Find Permutation   
     /// 
     /// By now, you are given a secret signature consisting of character 'D' and 'I'. 
@@ -16578,8 +16180,10 @@ public:
     /// 
     /// We are playing the Guess Game. The game is as follows:
     /// I pick a number from 1 to n. You have to guess which number I picked. 
-    /// Every time you guess wrong, I'll tell you whether the number I picked is higher or lower. 
-    /// However, when you guess a particular number x, and you guess wrong, you pay $x. 
+    /// Every time you guess wrong, I'll tell you whether the number I 
+    /// picked is higher or lower. 
+    /// However, when you guess a particular number x, and you guess wrong, 
+    /// you pay $x. 
     /// You win the game when you guess the number I picked.
     /// Example: 
     /// n = 10, I pick 8.
@@ -16588,137 +16192,24 @@ public:
     /// Third round:  You guess 9, I tell you that it's lower. You pay $9.
     /// Game over. 8 is the number I picked.
     /// You end up paying $5 + $7 + $9 = $21.
-    /// Given a particular n ≥ 1, find out how much money you need to have to guarantee a win.
+    /// Given a particular n ≥ 1, find out how much money you need to have to 
+    /// guarantee a win.
     /// Hint:
-    /// 1.The best strategy to play the game is to minimize the maximum loss you could possibly face. 
-    ///   Another strategy is to minimize the expected loss. Here, we are interested in the first scenario.
-    /// 2. Take a small example (n = 3). What do you end up paying in the worst case?
+    /// 1.The best strategy to play the game is to minimize the maximum loss you 
+    ///   could possibly face. 
+    ///   Another strategy is to minimize the expected loss. Here, we are 
+    ///   interested in the first scenario.
+    /// 2. Take a small example (n = 3). What do you end up paying in the 
+    ///    worst case?
     /// 3. Check out this article if you're still stuck.
-    /// 4.The purely recursive implementation of minimax would be worthless for even a small n. 
+    /// 4.The purely recursive implementation of minimax would be worthless for 
+    ///   even a small n. 
     ///   You MUST use dynamic programming. 
-    /// 5.As a follow-up, how would you modify your code to solve the problem of minimizing the expected loss, 
+    /// 5.As a follow-up, how would you modify your code to solve the problem 
+    ///   of minimizing the expected loss, 
     ///   instead of the worst-case loss? 
     /// </summary>
     int getMoneyAmount(int n);
-
-    /// <summary>
-    /// Leet code #516. Longest Palindromic Subsequence   
-    /// 
-    /// Given a string s, find the longest palindromic subsequence's length in s. You may 
-    /// assume that the maximum length of s is 1000. 
-    ///
-    /// Example 1:
-    /// Input: 
-    /// "bbbab"
-    /// Output: 4
-    /// One possible longest palindromic subsequence is "bbbb". 
-    ///
-    /// Example 2:
-    /// Input: 
-    /// "cbbd"
-    /// Output: 2
-    /// One possible longest palindromic subsequence is "bb". 
-    /// </summary>
-    int longestPalindromeSubseq(string s);
-
-    /// <summary>
-    /// Leet code #312. Burst Balloons 
-    /// Given n balloons, indexed from 0 to n-1. Each balloon is painted with a number on it represented by array nums. 
-    /// You are asked to burst all the balloons. If the you burst balloon i you will get nums[left] * nums[i] * nums[right] coins. 
-    /// Here left and right are adjacent indices of i. After the burst, the left and right then becomes adjacent.
-    /// Find the maximum coins you can collect by bursting the balloons wisely. 
-    /// Note: 
-    /// (1) You may imagine nums[-1] = nums[n] = 1. They are not real therefore you can not burst them.
-    /// (2) 0 ≤ n ≤ 500, 0 ≤ nums[i] ≤ 100 
-    /// Example: 
-    /// Given [3, 1, 5, 8] 
-    /// Return 167 
-    /// nums = [3,1,5,8] --> [3,5,8] -->   [3,8]   -->  [8]  --> []
-    /// coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167	
-    /// </summary>   
-    int maxBurstBalloonCoins(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #446. Arithmetic Slices II - Subsequence    
-    /// 
-    /// A sequence of numbers is called arithmetic if it consists of at 
-    /// least three elements and if the difference between any two 
-    /// consecutive elements is the same.
-    ///
-    /// For example, these are arithmetic sequences:
-    /// 1, 3, 5, 7, 9
-    /// 7, 7, 7, 7
-    /// 3, -1, -5, -9
-    ///
-    /// The following sequence is not arithmetic.
-    /// 1, 1, 2, 5, 7
-    /// A zero-indexed array A consisting of N numbers is given. A 
-    /// subsequence slice of that array is any sequence of integers 
-    /// (P0, P1, ..., Pk) such that 0 ≤ P0 < P1 < ... < Pk < N.
-    ///
-    /// A subsequence slice (P0, P1, ..., Pk) of array A is called 
-    /// arithmetic if the sequence A[P0], A[P1], ..., A[Pk-1], A[Pk] 
-    /// is arithmetic. In particular, this means that k ≥ 2.
-    /// 
-    /// The function should return the number of arithmetic subsequence 
-    /// slices in the array A. 
-    ///
-    /// The input contains N integers. Every integer is in the range of -2^31 
-    /// and 2^31-1 and 0 ≤ N ≤ 1000. The output is guaranteed to be less than 2^31-1.
-    ///
-    /// Example: 
-    /// Input: [2, 4, 6, 8, 10]
-    /// Output: 7
-    ///
-    /// Explanation:
-    /// All arithmetic subsequence slices are:
-    /// [2,4,6]
-    /// [4,6,8]
-    /// [6,8,10]
-    /// [2,4,6,8]
-    /// [4,6,8,10]
-    /// [2,4,6,8,10]
-    /// [2,6,10]
-    /// </summary>
-    int numberOfArithmeticSlicesII(vector<int>& A);
-
-    /// <summary>
-    /// Leet code #486. Predict the Winner
-    ///
-    /// Given an array of scores that are non-negative integers. Player 1 picks 
-    /// one of the numbers from either end of the array followed by the player 2 
-    /// and then player 1 and so on. Each time a player picks a number, that 
-    /// number will not be available for the next player. This continues until 
-    /// all the scores have been chosen. The player with the maximum score wins. 
-    ///
-    /// Given an array of scores, predict whether player 1 is the winner. You 
-    /// can assume each player plays to maximize his score. 
-    ///
-    /// Example 1:
-    /// Input: [1, 5, 2]
-    /// Output: False
-    /// Explanation: Initially, player 1 can choose between 1 and 2. 
-    /// If he chooses 2 (or 1), then player 2 can choose from 1 (or 2) and 5. 
-    /// If player 2 chooses 5, then player 1 will be left with 1 (or 2). 
-    /// So, final score of player 1 is 1 + 2 = 3, and player 2 is 5. 
-    /// Hence, player 1 will never be the winner and you need to return False.
-    ///
-    /// Example 2:
-    /// Input: [1, 5, 233, 7]
-    /// Output: True
-    /// Explanation: Player 1 first chooses 1. Then player 2 have to choose 
-    /// between 5 and 7. No matter which number player 2 choose, player 1 can 
-    /// choose 233.
-    /// Finally, player 1 has more score (234) than player 2 (12), so you need 
-    /// to return True representing player1 can win.
-    ///
-    /// Note:
-    /// 1.1 <= length of the array <= 20. 
-    /// 2.Any scores in the given array are non-negative integers and will not 
-    ///   exceed 10,000,000.
-    /// 3.If the scores of both players are equal, then player 1 is still the winner.
-    /// </summary>
-    bool predictTheWinner(vector<int>& nums);
 
     /// <summary>
     /// Leet code #471. Encode String with Shortest Length
@@ -18829,36 +18320,6 @@ public:
     int maxSumTwoNoOverlap(vector<int>& A, int L, int M);
 
     /// <summary>
-    /// Leet code #1035. Uncrossed Lines
-    /// 
-    /// We write the integers of A and B (in the order they are given) on two 
-    /// separate horizontal lines.
-    ///
-    /// Now, we may draw a straight line connecting two numbers A[i] and B[j] 
-    /// as long as A[i] == B[j], and the line we draw does not intersect any 
-    /// other connecting (non-horizontal) line.
-    ///
-    /// Return the maximum number of connecting lines we can draw in this way.
-    ///
-    /// 
-    /// Example 1:
-    /// Input: A = [1,4,2], B = [1,2,4]
-    /// Output: 2
-    /// Explanation: We can draw 2 uncrossed lines as in the diagram.
-    /// We cannot draw 3 uncrossed lines, because the line from A[1]=4 to B[2]=4 
-    /// will intersect the line from A[2]=2 to B[1]=2.
-    ///
-    /// Example 2:
-    /// Input: A = [2,5,1,2,5], B = [10,5,2,1,5,2]
-    /// Output: 3
-    ///
-    /// Example 3:
-    /// Input: A = [1,3,7,1,7,5], B = [1,9,2,5,1]
-    /// Output: 2
-    /// </summary>
-    int maxUncrossedLines(vector<int>& A, vector<int>& B);
-
-    /// <summary>
     /// Leet code #1039. Minimum Score Triangulation of Polygon
     /// </summary>
     int minScoreTriangulation(vector<int>& A, int start, int end, unordered_map<string, int>& cache);
@@ -19144,51 +18605,6 @@ public:
     /// </summary>
     vector<int> smallestSufficientTeam(vector<string>& req_skills, vector<vector<string>>& people);
 
-    /// <summary>
-    /// Leet code #1130. Minimum Cost Tree From Leaf Values
-    /// 
-    /// Given an array arr of positive integers, consider all binary trees such 
-    /// that:
-    ///
-    /// Each node has either 0 or 2 children;
-    /// The values of arr correspond to the values of each leaf in an in-order 
-    /// traversal of the tree.  (Recall that a node is a leaf if and only if it 
-    /// has 0 children.)
-    /// The value of each non-leaf node is equal to the product of the largest 
-    /// leaf value in its left and right subtree respectively.
-    /// Among all possible binary trees considered, return the smallest possible 
-    /// sum of the values of each non-leaf node.  It is guaranteed this sum fits 
-    /// into a 32-bit integer.
-    ///
-    /// 
-    /// Example 1:
-    /// Input: arr = [6,2,4]
-    /// Output: 32
-    /// Explanation:
-    /// There are two possible trees.  The first has non-leaf node sum 36, and 
-    /// the second has non-leaf node sum 32.
-    ///
-    ///     24            24
-    ///    /  \          /  \
-    ///   12   4        6    8
-    ///  /  \               / \
-    /// 6    2             2   4
-    ///  
-    /// Constraints:
-    /// 1. 2 <= arr.length <= 40
-    /// 2. 1 <= arr[i] <= 15
-    /// 3. It is guaranteed that the answer fits into a 32-bit signed integer 
-    ///   (ie. it is less than 2^31).
-    /// </summary>
-    int mctFromLeafValues(vector<int>& arr);
-
-    /// <summary>
-    /// Leet code #1130. Minimum Cost Tree From Leaf Values
-    /// </summary>
-    int mctFromLeafValuesII(vector<int>& arr);
-
-
-
 #pragma endregion
 
 #pragma region BackTracking
@@ -19240,21 +18656,6 @@ public:
     /// ]
     /// </summary>
     vector<vector<string>> partitionPalindrome(string s);
-
-    /// <summary>
-    /// Get minimum cut for palindrome with string s       
-    /// </summary>
-    int minCutPalindrome(string s, unordered_map<string, int>& palindromeMap);
-
-    /// <summary>
-    /// Leet code #132. Palindrome Partitioning II       
-    /// Given a string s, partition s such that every substring of the partition is a palindrome.  
-    /// Return the minimum cuts needed for a palindrome partitioning of s.  
-    /// For example, given s = "aab",
-    /// Return 1 since the palindrome partitioning ["aa","b"] could be produced using 1 cut. 
-    /// </summary>
-    int minCutPalindrome(string s);
-
 
     /// <summary>
     /// Leet code #282. Expression Add Operators

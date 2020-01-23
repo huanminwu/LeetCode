@@ -1,6 +1,101 @@
 #include "..\LeetCode\LeetCode.h"
 #include "..\LeetCode\LeetCodeArray.h"
 #include "TestArray.h"
+
+void TestLeetCode348(void)
+{
+    Logger::WriteMessage("Test Leet Code 348");
+    TicTacToe toe(2);
+    int result = toe.move(0, 1, 2);
+    Logger::WriteMessage("toe.move(0, 1, 2) = " + to_string(result));
+    result = toe.move(1, 0, 1);
+    Logger::WriteMessage("toe.move(1, 0, 1) = " + to_string(result));
+    result = toe.move(1, 1, 2);
+    Logger::WriteMessage("toe.move(1, 1, 2) = " + to_string(result));
+}
+
+void TestLeetCode353(void)
+{
+    Logger::WriteMessage("Test Leet Code 353");
+    vector<pair<int, int>> food = { {1,2}, {0,1} };
+    SnakeGame snakeGame = SnakeGame(3, 2, food);
+    int result = snakeGame.move("R");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("D");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("R");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("U");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("L");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("U");
+    Logger::WriteMessage("result = " + to_string(result));
+
+    food = { { 1, 1 },{ 0, 1 } };
+    snakeGame = SnakeGame(2, 2, food);
+    result = snakeGame.move("D");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("R");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("U");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("L");
+    Logger::WriteMessage("result = " + to_string(result));
+    food = { { 2, 0 },{ 0, 0 },{ 0, 2 },{ 0, 1 }, { 2, 2 }, { 0, 1 } };
+    snakeGame = SnakeGame(3, 3, food);
+    result = snakeGame.move("D");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("D");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("R");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("U");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("U");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("L");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("D");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("R");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("R");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("U");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("L");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("L");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("D");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("R");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("U");
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode379(void)
+{
+    Logger::WriteMessage("Test Leet Code 379");
+    PhoneDirectory directory(3);
+    int phone_number = directory.get();
+    Logger::WriteMessage("phone number = " + to_string(phone_number));
+    phone_number = directory.get();
+    Logger::WriteMessage("phone number = " + to_string(phone_number));
+    bool isAvailable = directory.check(2);
+    Logger::WriteMessage("check(2) = " + (string)(isAvailable ? "available" : "not available"));
+    phone_number = directory.get();
+    Logger::WriteMessage("phone number = " + to_string(phone_number));
+    isAvailable = directory.check(2);
+    Logger::WriteMessage("check(2) = " + (string)(isAvailable ? "available" : "not available"));
+    directory.release(2);
+    Logger::WriteMessage("release(2)");
+    isAvailable = directory.check(2);
+    Logger::WriteMessage("check(2) = " + (string)(isAvailable ? "available" : "not available"));
+}
+
 void TestLeetCode364(void)
 {
     Logger::WriteMessage("Test Leet Code 364");
@@ -818,8 +913,52 @@ void TestLeetCode284(void)
     Logger::WriteMessage("Next() -> " + to_string(peekingIterator.next()));
 }
 
+void TestLeetCode413(void)
+{
+    Logger::WriteMessage("Test Leet Code 413");
+    LeetCodeArray leetCode;
+    vector<int> nums = { -1, -2, -3 };
+    Logger::WriteMessage(nums);
+    int count = leetCode.numberOfArithmeticSlices(nums);
+    Logger::WriteMessage("Number Of Arithmetic Slices = " + to_string(count));
+}
+
+void TestLeetCode485(void)
+{
+    Logger::WriteMessage("Test Leet Code 485");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,1,0,1,1,1 };
+    int result = leetCode.findMaxConsecutiveOnes(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("Maximum Consecutive Ones = " + to_string(result));
+}
+
+void TestLeetCode446(void)
+{
+    Logger::WriteMessage("Test Leet Code 446");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 4, 6, 8, 10 };
+    int count = leetCode.numberOfArithmeticSlicesII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("The arithmetic slice count = " + to_string(count));
+}
+
+void TestLeetCode368(void)
+{
+    Logger::WriteMessage("Test Leet Code 368");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,2,3,4,5,6,7,8,9,10 };
+    vector<int> result = leetCode.largestDivisibleSubset(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode368();
+    TestLeetCode446();
+    TestLeetCode485();
+    TestLeetCode413();
     TestLeetCode284();
     TestLeetCode1314();
     TestLeetCode1313();

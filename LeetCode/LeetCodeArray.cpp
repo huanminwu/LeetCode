@@ -9365,4 +9365,194 @@ vector<vector<int>> LeetCodeArray::matrixBlockSum(vector<vector<int>>& mat, int 
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #413. Arithmetic Slices
+///
+/// A sequence of number is called arithmetic if it consists of at least 
+/// three elements and if the difference between 
+/// any two consecutive elements is the same
+/// For example, these are arithmetic sequence:
+/// 1, 3, 5, 7, 9
+/// 7, 7, 7, 7
+/// 3, -1, -5, -9
+/// The following sequence is not arithmetic.
+/// 1, 1, 2, 5, 7
+/// A zero-indexed array A consisting of N numbers is given. A 
+/// slice of that array is any pair of integers (P, Q) such that 
+/// 0 <= P < Q < N.
+/// A slice (P, Q) of array A is called arithmetic if the sequence:
+/// A[P], A[p + 1], ..., A[Q - 1], A[Q] is arithmetic. In particular, 
+/// this means that P + 1 < Q.
+/// The function should return the number of arithmetic slices in the 
+/// array A. 
+/// Example: 
+/// A = [1, 2, 3, 4]
+/// return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] 
+/// and [1, 2, 3, 4] itself.
+/// </summary>
+int LeetCodeArray::numberOfArithmeticSlices(vector<int>& A)
+{
+    vector<int> sum_count(A.size());
+    int count = 0;
+    int diff;
+    for (size_t i = 0; i < A.size(); i++)
+    {
+        if (i == 0) continue;
+        else if (i == 1)
+        {
+            diff = A[i] - A[i - 1];
+        }
+        else if (A[i] - A[i - 1] == diff)
+        {
+            count++;
+        }
+        else
+        {
+            count = 0;
+            diff = A[i] - A[i - 1];
+        }
+        sum_count[i] = count;
+    }
+    int sum = 0;
+    for (size_t i = 0; i < sum_count.size(); i++)
+    {
+        sum += sum_count[i];
+    }
+    return sum;
+}
+
+
+/// <summary>
+/// Leet code #485. Max Consecutive Ones  
+/// 
+/// Given a binary array, find the maximum number of consecutive 1s in this array. 
+/// Example 1:
+/// Input: [1,1,0,1,1,1]
+/// Output: 3
+/// Explanation: The first two digits or the last three digits are consecutive 1s.
+/// The maximum number of consecutive 1s is 3.
+/// Note: 
+/// The input array will only contain 0 and 1.
+/// The length of input array is a positive integer and will not exceed 10,000 
+/// </summary>
+int LeetCodeArray::findMaxConsecutiveOnes(vector<int>& nums)
+{
+    int max_ones = 0;
+    int count_ones = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] == 0) count_ones = 0;
+        else
+        {
+            count_ones++;
+            max_ones = max(max_ones, count_ones);
+        }
+    }
+    return max_ones;
+}
+
+/// <summary>
+/// Leet code #446. Arithmetic Slices II - Subsequence    
+/// 
+/// A sequence of numbers is called arithmetic if it consists of at 
+/// least three elements and if the difference between any two 
+/// consecutive elements is the same.
+///
+/// For example, these are arithmetic sequences:
+/// 1, 3, 5, 7, 9
+/// 7, 7, 7, 7
+/// 3, -1, -5, -9
+///
+/// The following sequence is not arithmetic.
+/// 1, 1, 2, 5, 7
+/// A zero-indexed array A consisting of N numbers is given. A 
+/// subsequence slice of that array is any sequence of integers 
+/// (P0, P1, ..., Pk) such that 0 ≤ P0 < P1 < ... < Pk < N.
+///
+/// A subsequence slice (P0, P1, ..., Pk) of array A is called 
+/// arithmetic if the sequence A[P0], A[P1], ..., A[Pk-1], A[Pk] 
+/// is arithmetic. In particular, this means that k ≥ 2.
+/// 
+/// The function should return the number of arithmetic subsequence 
+/// slices in the array A. 
+///
+/// The input contains N integers. Every integer is in the range of -2^31 
+/// and 2^31-1 and 0 ≤ N ≤ 1000. The output is guaranteed to be less than 
+/// 2^31-1.
+///
+/// Example: 
+/// Input: [2, 4, 6, 8, 10]
+/// Output: 7
+///
+/// Explanation:
+/// All arithmetic subsequence slices are:
+/// [2,4,6]
+/// [4,6,8]
+/// [6,8,10]
+/// [2,4,6,8]
+/// [4,6,8,10]
+/// [2,4,6,8,10]
+/// [2,6,10]
+/// </summary>
+int LeetCodeArray::numberOfArithmeticSlicesII(vector<int>& A)
+{
+    int result = 0;
+    vector<unordered_map<long long, int>> dp(A.size());
+    for (int i = 0; i < (int)A.size(); i++)
+    {
+        for (int j = 0; j < i; j++)
+        {
+            long long diff = (long long)A[i] - (long long)A[j];
+            if (dp[j].count(diff) > 0)
+            {
+                dp[i][diff] += dp[j][diff];
+                result += dp[j][diff];
+            }
+            dp[i][diff]++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #368. Largest Divisible Subset 
+/// 
+/// Given a set of distinct positive integers, find the largest 
+/// subset such that every pair (Si, Sj) of elements in this subset 
+/// satisfies: Si % Sj = 0 or Sj % Si = 0. 
+///
+/// If there are multiple solutions, return any subset is fine. 
+///
+/// Example 1: 
+/// nums: [1,2,3]
+/// Result: [1,2] (of course, [1,3] will also be ok)
+///
+/// Example 2: 
+/// nums: [1,2,4,8]
+/// Result: [1,2,4,8]
+/// </summary>
+vector<int> LeetCodeArray::largestDivisibleSubset(vector<int>& nums)
+{
+    vector<int> result;
+    vector<vector<int>> set_map(nums.size());
+    sort(nums.begin(), nums.end());
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (size_t j = 0; j < i; j++)
+        {
+            if ((nums[i] % nums[j]) == 0)
+            {
+                if (set_map[i].size() < set_map[j].size())
+                {
+                    set_map[i] = set_map[j];
+                }
+            }
+        }
+        set_map[i].push_back(nums[i]);
+        if (set_map[i].size() > result.size()) result = set_map[i];
+    }
+    return result;
+}
+
 #pragma endregion

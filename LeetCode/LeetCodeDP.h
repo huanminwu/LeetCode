@@ -1647,5 +1647,194 @@ public:
     /// 2. Each word[i] is an English uppercase letter.
     /// </summary>
     int minimumDistance(string word);
+
+    /// <summary>
+    /// Leet code #132. Palindrome Partitioning II
+    ///
+    /// Hard
+    ///
+    /// Given a string s, partition s such that every substring of the 
+    /// partition is a palindrome.
+    ///
+    /// Return the minimum cuts needed for a palindrome partitioning of s.
+    ///
+    /// Example:
+    /// Input: "aab"
+    /// Output: 1
+    /// Explanation: The palindrome partitioning ["aa","b"] could be produced 
+    /// using 1 cut.
+    /// </summary>
+    int minCut(string s);
+    /// <summary>
+    /// Leet code #1130. Minimum Cost Tree From Leaf Values
+    /// 
+    /// Given an array arr of positive integers, consider all binary trees such 
+    /// that:
+    ///
+    /// Each node has either 0 or 2 children;
+    /// The values of arr correspond to the values of each leaf in an in-order 
+    /// traversal of the tree.  (Recall that a node is a leaf if and only if it 
+    /// has 0 children.)
+    /// The value of each non-leaf node is equal to the product of the largest 
+    /// leaf value in its left and right subtree respectively.
+    /// Among all possible binary trees considered, return the smallest possible 
+    /// sum of the values of each non-leaf node.  It is guaranteed this sum fits 
+    /// into a 32-bit integer.
+    ///
+    /// 
+    /// Example 1:
+    /// Input: arr = [6,2,4]
+    /// Output: 32
+    /// Explanation:
+    /// There are two possible trees.  The first has non-leaf node sum 36, and 
+    /// the second has non-leaf node sum 32.
+    ///
+    ///     24            24
+    ///    /  \          /  \
+    ///   12   4        6    8
+    ///  /  \               / \
+    /// 6    2             2   4
+    ///  
+    /// Constraints:
+    /// 1. 2 <= arr.length <= 40
+    /// 2. 1 <= arr[i] <= 15
+    /// 3. It is guaranteed that the answer fits into a 32-bit signed integer 
+    ///   (ie. it is less than 2^31).
+    /// </summary>
+    int mctFromLeafValues(vector<int>& arr);
+
+    /// <summary>
+    /// Leet code #1130. Minimum Cost Tree From Leaf Values
+    /// </summary>
+    int mctFromLeafValuesII(vector<int>& arr);
+
+    /// <summary>
+    /// Leet code #1035. Uncrossed Lines
+    /// 
+    /// We write the integers of A and B (in the order they are given) on two 
+    /// separate horizontal lines.
+    ///
+    /// Now, we may draw a straight line connecting two numbers A[i] and B[j] 
+    /// as long as A[i] == B[j], and the line we draw does not intersect any 
+    /// other connecting (non-horizontal) line.
+    ///
+    /// Return the maximum number of connecting lines we can draw in this way.
+    ///
+    /// 
+    /// Example 1:
+    /// Input: A = [1,4,2], B = [1,2,4]
+    /// Output: 2
+    /// Explanation: We can draw 2 uncrossed lines as in the diagram.
+    /// We cannot draw 3 uncrossed lines, because the line from A[1]=4 to B[2]=4 
+    /// will intersect the line from A[2]=2 to B[1]=2.
+    ///
+    /// Example 2:
+    /// Input: A = [2,5,1,2,5], B = [10,5,2,1,5,2]
+    /// Output: 3
+    ///
+    /// Example 3:
+    /// Input: A = [1,3,7,1,7,5], B = [1,9,2,5,1]
+    /// Output: 2
+    /// </summary>
+    int maxUncrossedLines(vector<int>& A, vector<int>& B);
+
+    /// <summary>
+    /// Leet code #361. Bomb Enemy
+    /// 
+    /// Given a 2D grid, each cell is either a wall 'W', an enemy 'E' or empty '0' 
+    /// (the number zero), return the maximum enemies you can kill using one bomb.
+    /// The bomb kills all the enemies in the same row and column from the planted 
+    /// point until it hits the wall since the wall is too strong to be destroyed.
+    /// Note that you can only put the bomb at an empty cell. 
+    /// 
+    /// Example:
+    ///
+    /// For the given grid
+    /// 0 E 0 0
+    /// E 0 W E
+    /// 0 E 0 0
+    ///
+    /// return 3. (Placing a bomb at (1,1) kills 3 enemies)
+    /// </summary>
+    int maxKilledEnemies(vector<vector<char>>& grid);
+
+    /// <summary>
+    /// Leet code #516. Longest Palindromic Subsequence   
+    /// 
+    /// Given a string s, find the longest palindromic subsequence's length 
+    /// in s. You may assume that the maximum length of s is 1000. 
+    ///
+    /// Example 1:
+    /// Input: 
+    /// "bbbab"
+    /// Output: 4
+    /// One possible longest palindromic subsequence is "bbbb". 
+    ///
+    /// Example 2:
+    /// Input: 
+    /// "cbbd"
+    /// Output: 2
+    /// One possible longest palindromic subsequence is "bb". 
+    /// </summary>
+    int longestPalindromeSubseq(string s);
+
+    /// <summary>
+    /// Leet code #312. Burst Balloons 
+    ///
+    /// Given n balloons, indexed from 0 to n-1. Each balloon is painted 
+    /// with a number on it represented by array nums. 
+    /// You are asked to burst all the balloons. If the you burst balloon i 
+    /// you will get nums[left] * nums[i] * nums[right] coins. 
+    /// Here left and right are adjacent indices of i. After the burst, the 
+    /// left and right then becomes adjacent.
+    /// Find the maximum coins you can collect by bursting the balloons wisely. 
+    /// Note: 
+    /// (1) You may imagine nums[-1] = nums[n] = 1. They are not real therefore you can not burst them.
+    /// (2) 0 ¡Ü n ¡Ü 500, 0 ¡Ü nums[i] ¡Ü 100 
+    /// Example: 
+    /// Given [3, 1, 5, 8] 
+    /// Return 167 
+    /// nums = [3,1,5,8] --> [3,5,8] -->   [3,8]   -->  [8]  --> []
+    /// coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167	
+    /// </summary>   
+    int maxBurstBalloonCoins(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #486. Predict the Winner
+    ///
+    /// Given an array of scores that are non-negative integers. Player 1 picks 
+    /// one of the numbers from either end of the array followed by the player 2 
+    /// and then player 1 and so on. Each time a player picks a number, that 
+    /// number will not be available for the next player. This continues until 
+    /// all the scores have been chosen. The player with the maximum score wins. 
+    ///
+    /// Given an array of scores, predict whether player 1 is the winner. You 
+    /// can assume each player plays to maximize his score. 
+    ///
+    /// Example 1:
+    /// Input: [1, 5, 2]
+    /// Output: False
+    /// Explanation: Initially, player 1 can choose between 1 and 2. 
+    /// If he chooses 2 (or 1), then player 2 can choose from 1 (or 2) and 5. 
+    /// If player 2 chooses 5, then player 1 will be left with 1 (or 2). 
+    /// So, final score of player 1 is 1 + 2 = 3, and player 2 is 5. 
+    /// Hence, player 1 will never be the winner and you need to return False.
+    ///
+    /// Example 2:
+    /// Input: [1, 5, 233, 7]
+    /// Output: True
+    /// Explanation: Player 1 first chooses 1. Then player 2 have to choose 
+    /// between 5 and 7. No matter which number player 2 choose, player 1 can 
+    /// choose 233.
+    /// Finally, player 1 has more score (234) than player 2 (12), so you need 
+    /// to return True representing player1 can win.
+    ///
+    /// Note:
+    /// 1.1 <= length of the array <= 20. 
+    /// 2.Any scores in the given array are non-negative integers and will not 
+    ///   exceed 10,000,000.
+    /// 3.If the scores of both players are equal, then player 1 is still the winner.
+    /// </summary>
+    bool predictTheWinner(vector<int>& nums);
 };
 #endif  // LeetCodeDP

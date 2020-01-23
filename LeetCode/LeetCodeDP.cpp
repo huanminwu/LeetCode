@@ -1311,55 +1311,6 @@ int LeetCode::minimumTotal(vector<vector<int>>& triangle)
 }
 
 /// <summary>
-/// Leet code #413. Arithmetic Slices
-/// A sequence of number is called arithmetic if it consists of at least three elements and if the difference between 
-/// any two consecutive elements is the same
-/// For example, these are arithmetic sequence:
-/// 1, 3, 5, 7, 9
-/// 7, 7, 7, 7
-/// 3, -1, -5, -9
-/// The following sequence is not arithmetic.
-/// 1, 1, 2, 5, 7
-/// A zero-indexed array A consisting of N numbers is given. A slice of that array is any pair of integers (P, Q) such that 0 <= P < Q < N.
-/// A slice (P, Q) of array A is called arithmetic if the sequence:
-/// A[P], A[p + 1], ..., A[Q - 1], A[Q] is arithmetic. In particular, this means that P + 1 < Q.
-/// The function should return the number of arithmetic slices in the array A. 
-/// Example: 
-/// A = [1, 2, 3, 4]
-/// return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] itself.
-/// </summary>
-int LeetCode::numberOfArithmeticSlices(vector<int>& A)
-{
-    vector<int> sum_count(A.size());
-    int count = 0;
-    int diff;
-    for (size_t i = 0; i < A.size(); i++)
-    {
-        if (i == 0) continue;
-        else if (i == 1)
-        {
-            diff = A[i] - A[i - 1];
-        }
-        else if (A[i] - A[i - 1] == diff)
-        {
-            count++;
-        }
-        else
-        {
-            count = 0;
-            diff = A[i] - A[i - 1];
-        }
-        sum_count[i] = count;
-    }
-    int sum = 0;
-    for (size_t i = 0; i < sum_count.size(); i++)
-    {
-        sum += sum_count[i];
-    }
-    return sum;
-}
-
-/// <summary>
 /// Leet code #279. Perfect Squares 
 /// Given a positive integer n, find the least number of perfect square numbers 
 /// (for example, 1, 4, 9, 16, ...) which sum to n.
@@ -1517,47 +1468,6 @@ int LeetCodeDP::findMaxOneZeroForm(vector<string>& strs, int m, int n)
     return result;
 }
 
-
-/// <summary>
-/// Leet code #368. Largest Divisible Subset 
-/// 
-/// Given a set of distinct positive integers, find the largest 
-/// subset such that every pair (Si, Sj) of elements in this subset 
-/// satisfies: Si % Sj = 0 or Sj % Si = 0. 
-///
-/// If there are multiple solutions, return any subset is fine. 
-///
-/// Example 1: 
-/// nums: [1,2,3]
-/// Result: [1,2] (of course, [1,3] will also be ok)
-///
-/// Example 2: 
-/// nums: [1,2,4,8]
-/// Result: [1,2,4,8]
-/// </summary>
-vector<int> LeetCode::largestDivisibleSubset(vector<int>& nums)
-{
-    vector<int> result;
-    vector<vector<int>> set_map(nums.size());
-    sort(nums.begin(), nums.end());
-    for (size_t i = 0; i < nums.size(); i++)
-    {
-        for (size_t j = 0; j < i; j++)
-        {
-            if ((nums[i] % nums[j]) == 0)
-            {
-                if (set_map[i].size() < set_map[j].size())
-                {
-                    set_map[i] = set_map[j];
-                }
-            }
-        }
-        set_map[i].push_back(nums[i]);
-        if (set_map[i].size() > result.size()) result = set_map[i];
-    }
-    return result;
-}
-
 /// <summary>
 /// Leet code #276. Paint Fence     
 /// 
@@ -1632,35 +1542,6 @@ int LeetCode::maximalSquare(vector<vector<char>>& matrix)
         }
     }
     return max_area;
-}
-
-/// <summary>
-/// Leet code #485. Max Consecutive Ones  
-/// 
-/// Given a binary array, find the maximum number of consecutive 1s in this array. 
-/// Example 1:
-/// Input: [1,1,0,1,1,1]
-/// Output: 3
-/// Explanation: The first two digits or the last three digits are consecutive 1s.
-/// The maximum number of consecutive 1s is 3.
-/// Note: 
-/// The input array will only contain 0 and 1.
-/// The length of input array is a positive integer and will not exceed 10,000 
-/// </summary>
-int LeetCode::findMaxConsecutiveOnes(vector<int>& nums)
-{
-    int max_ones = 0;
-    int count_ones = 0;
-    for (size_t i = 0; i < nums.size(); i++)
-    {
-        if (nums[i] == 0) count_ones = 0;
-        else
-        {
-            count_ones++;
-            max_ones = max(max_ones, count_ones);
-        }
-    }
-    return max_ones;
 }
 
 /// <summary>
@@ -1854,7 +1735,7 @@ bool LeetCode::isOneEditDistance(string s, string t)
 ///
 /// return 3. (Placing a bomb at (1,1) kills 3 enemies)
 /// </summary>
-int LeetCode::maxKilledEnemies(vector<vector<char>>& grid)
+int LeetCodeDP::maxKilledEnemies(vector<vector<char>>& grid)
 {
     if (grid.size() == 0 || grid[0].size() == 0) return 0;
     int max_enemies = 0;
@@ -2064,7 +1945,7 @@ int LeetCode::getMoneyAmount(int n)
 /// Output: 2
 /// One possible longest palindromic subsequence is "bb". 
 /// </summary>
-int LeetCode::longestPalindromeSubseq(string s)
+int LeetCodeDP::longestPalindromeSubseq(string s)
 {
     int n = s.size();
     vector<vector<int>> matrix(n, vector<int>(n));
@@ -2102,6 +1983,7 @@ int LeetCode::longestPalindromeSubseq(string s)
 
 /// <summary>
 /// Leet code #312. Burst Balloons 
+///
 /// Given n balloons, indexed from 0 to n-1. Each balloon is painted with a 
 /// number on it represented by array nums. 
 /// You are asked to burst all the balloons. If the you burst balloon i you 
@@ -2119,7 +2001,7 @@ int LeetCode::longestPalindromeSubseq(string s)
 /// nums = [3,1,5,8] --> [3,5,8] -->   [3,8]   -->  [8]  --> []
 /// coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167	
 /// </summary>   
-int LeetCode::maxBurstBalloonCoins(vector<int>& nums)
+int LeetCodeDP::maxBurstBalloonCoins(vector<int>& nums)
 {
     vector<int> balloons;
     balloons.push_back(1);
@@ -2158,69 +2040,6 @@ int LeetCode::maxBurstBalloonCoins(vector<int>& nums)
 }
 
 /// <summary>
-/// Leet code #446. Arithmetic Slices II - Subsequence    
-/// 
-/// A sequence of numbers is called arithmetic if it consists of at 
-/// least three elements and if the difference between any two 
-/// consecutive elements is the same.
-///
-/// For example, these are arithmetic sequences:
-/// 1, 3, 5, 7, 9
-/// 7, 7, 7, 7
-/// 3, -1, -5, -9
-///
-/// The following sequence is not arithmetic.
-/// 1, 1, 2, 5, 7
-/// A zero-indexed array A consisting of N numbers is given. A 
-/// subsequence slice of that array is any sequence of integers 
-/// (P0, P1, ..., Pk) such that 0 ≤ P0 < P1 < ... < Pk < N.
-///
-/// A subsequence slice (P0, P1, ..., Pk) of array A is called 
-/// arithmetic if the sequence A[P0], A[P1], ..., A[Pk-1], A[Pk] 
-/// is arithmetic. In particular, this means that k ≥ 2.
-/// 
-/// The function should return the number of arithmetic subsequence 
-/// slices in the array A. 
-///
-/// The input contains N integers. Every integer is in the range of -2^31 
-/// and 2^31-1 and 0 ≤ N ≤ 1000. The output is guaranteed to be less than 
-/// 2^31-1.
-///
-/// Example: 
-/// Input: [2, 4, 6, 8, 10]
-/// Output: 7
-///
-/// Explanation:
-/// All arithmetic subsequence slices are:
-/// [2,4,6]
-/// [4,6,8]
-/// [6,8,10]
-/// [2,4,6,8]
-/// [4,6,8,10]
-/// [2,4,6,8,10]
-/// [2,6,10]
-/// </summary>
-int LeetCode::numberOfArithmeticSlicesII(vector<int>& A)
-{
-    int count = 0;
-    vector<unordered_map<int, int>> arithmeticCount(A.size());
-    for (int i = 0; i < (int)A.size(); i++)
-    {
-        for (int j = i - 1; j >= 0; j--)
-        {
-            int diff = A[i] - A[j];
-            arithmeticCount[i][diff] += 1;
-            if (arithmeticCount[j].count(diff) > 0)
-            {
-                arithmeticCount[i][diff] += arithmeticCount[j][diff];
-                count += arithmeticCount[j][diff];
-            }
-        }
-    }
-    return count;
-}
-
-/// <summary>
 /// Leet code #486. Predict the Winner
 ///
 /// Given an array of scores that are non-negative integers. Player 1 picks 
@@ -2256,7 +2075,7 @@ int LeetCode::numberOfArithmeticSlicesII(vector<int>& A)
 ///   exceed 10,000,000.
 /// 3.If the scores of both players are equal, then player 1 is still the winner.
 /// </summary>
-bool LeetCode::predictTheWinner(vector<int>& nums)
+bool LeetCodeDP::predictTheWinner(vector<int>& nums)
 {
     if (nums.empty()) return true;
     vector<vector<pair<int, int>>> sum(nums.size(), vector<pair<int, int>>(nums.size()));
@@ -6892,7 +6711,7 @@ int LeetCode::maxSumTwoNoOverlap(vector<int>& A, int L, int M)
 /// Input: A = [1,3,7,1,7,5], B = [1,9,2,5,1]
 /// Output: 2
 /// </summary>
-int LeetCode::maxUncrossedLines(vector<int>& A, vector<int>& B)
+int LeetCodeDP::maxUncrossedLines(vector<int>& A, vector<int>& B)
 {
     vector<vector<int>> dp(A.size() + 1, vector<int>(B.size() + 1));
     dp[0][0] = 0;
@@ -7485,7 +7304,7 @@ vector<int> LeetCode::smallestSufficientTeam(vector<string>& req_skills, vector<
 /// <summary>
 /// Leet code #1130. Minimum Cost Tree From Leaf Values
 /// </summary>
-int LeetCode::mctFromLeafValuesII(vector<int>& arr)
+int LeetCodeDP::mctFromLeafValuesII(vector<int>& arr)
 {
     size_t n = arr.size();
     vector<int> dp;
@@ -7506,7 +7325,6 @@ int LeetCode::mctFromLeafValuesII(vector<int>& arr)
     }
     return result;
 }
-
 
 /// <summary>
 /// Leet code #1130. Minimum Cost Tree From Leaf Values
@@ -7544,7 +7362,7 @@ int LeetCode::mctFromLeafValuesII(vector<int>& arr)
 /// 3. It is guaranteed that the answer fits into a 32-bit signed integer 
 ///   (ie. it is less than 2^31).
 /// </summary>
-int LeetCode::mctFromLeafValues(vector<int>& arr)
+int LeetCodeDP::mctFromLeafValues(vector<int>& arr)
 {
     size_t n = arr.size();
     vector<vector<pair<int, int>>> dp(n, vector<pair<int, int>>(n));
@@ -9650,5 +9468,45 @@ int LeetCodeDP::minimumDistance(string word)
     return result;
 }
 
+/// <summary>
+/// Leet code #132. Palindrome Partitioning II
+///
+/// Hard
+///
+/// Given a string s, partition s such that every substring of the 
+/// partition is a palindrome.
+///
+/// Return the minimum cuts needed for a palindrome partitioning of s.
+///
+/// Example:
+/// Input: "aab"
+/// Output: 1
+/// Explanation: The palindrome partitioning ["aa","b"] could be produced 
+/// using 1 cut.
+/// </summary>
+int LeetCodeDP::minCut(string s)
+{
+    if (s.empty()) return 0;
+    vector<vector<int>> pal(s.size(), vector<int>(s.size()));
+    vector<int> dp(s.size(), s.size());
+    dp[0] = 0;
+
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        for (size_t j = 0; j <= i; j++)
+        {
+            if (s[j] != s[i]) continue;
+            if (i - j > 2 && pal[j+1][i-1] != 1) continue;
+            pal[j][i] = 1;
+            // s.substring[j][i] is palindrome
+            if (j == 0) dp[i] = 0;
+            else
+            {
+                dp[i] = min(dp[i], dp[j - 1] + 1);
+            }
+        }
+    }
+    return dp[s.size() - 1];
+}
 #pragma endregion
 

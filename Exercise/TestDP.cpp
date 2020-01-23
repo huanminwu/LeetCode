@@ -1073,8 +1073,146 @@ void TestLeetCode1320(void)
     Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
 }
 
+void TestLeetCode132(void)
+{
+    Logger::WriteMessage("Test Leet Code 132");
+    LeetCodeDP leetCode;
+    string s = "aab";
+    Logger::WriteMessage(s);
+    int minCut = leetCode.minCut(s);
+    Logger::WriteMessage("Min Cut = " + to_string(minCut));
+}
+
+void TestLeetCode1130(void)
+{
+    Logger::WriteMessage("Test Leet Code 1130");
+    LeetCodeDP leetCode;
+    vector<int> arr = { 6,2,4 };
+    Logger::WriteMessage(arr);
+    int result = leetCode.mctFromLeafValues(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+    result = leetCode.mctFromLeafValuesII(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 8,6,4,2,10 };
+    Logger::WriteMessage(arr);
+    result = leetCode.mctFromLeafValues(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+    result = leetCode.mctFromLeafValuesII(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 2,3,4,5,1 };
+    Logger::WriteMessage(arr);
+    result = leetCode.mctFromLeafValues(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+    result = leetCode.mctFromLeafValuesII(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1,2,3,4,5 };
+    Logger::WriteMessage(arr);
+    result = leetCode.mctFromLeafValues(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+    result = leetCode.mctFromLeafValuesII(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 5,4,3,2,1 };
+    Logger::WriteMessage(arr);
+    result = leetCode.mctFromLeafValues(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+    result = leetCode.mctFromLeafValuesII(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1035(void)
+{
+    Logger::WriteMessage("Test Leet Code 1035");
+    LeetCodeDP leetCode;
+    vector<int> A = { 1, 4, 2 };
+    vector<int> B = { 1, 2, 4 };
+    int result = leetCode.maxUncrossedLines(A, B);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(B);
+    Logger::WriteMessage("result " + to_string(result));
+
+    A = { 2,5,1,2,5 };
+    B = { 10,5,2,1,5,2 };
+    result = leetCode.maxUncrossedLines(A, B);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(B);
+    Logger::WriteMessage("result " + to_string(result));
+
+    A = { 1,3,7,1,7,5 };
+    B = { 1,9,2,5,1 };
+    result = leetCode.maxUncrossedLines(A, B);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(B);
+    Logger::WriteMessage("result " + to_string(result));
+}
+
+
+void TestLeetCode361(void)
+{
+    Logger::WriteMessage("Test Leet Code 361");
+    LeetCodeDP leetCode;
+    vector<vector<char>> grid = { {'0', 'E', '0', '0'}, {'E', '0', 'W', 'E' }, {'0', 'E', '0', '0' } };
+    Logger::WriteMessage(grid);
+    int max_enemies = leetCode.maxKilledEnemies(grid);
+    Logger::WriteMessage("Kill max enemies = " + to_string(max_enemies));
+
+    grid = { { '0' }, {'0'}, {'0'} };
+    Logger::WriteMessage(grid);
+    max_enemies = leetCode.maxKilledEnemies(grid);
+    Logger::WriteMessage("Kill max enemies = " + to_string(max_enemies));
+}
+
+void TestLeetCode516(void)
+{
+    Logger::WriteMessage("Test Leet Code 516");
+    LeetCodeDP leetCode;
+    string s = "bbbab";
+    int result = leetCode.longestPalindromeSubseq(s);
+    Logger::WriteMessage("s = " + s + "; longest palindrome sub sequence = " + to_string(result));
+    s = "cbbd";
+    result = leetCode.longestPalindromeSubseq(s);
+    Logger::WriteMessage("s = " + s + "; longest palindrome sub sequence = " + to_string(result));
+}
+
+void TestLeetCode312(void)
+{
+    Logger::WriteMessage("Test Leet Code 312");
+    LeetCodeDP leetCode;
+    vector<int> nums;
+    int max_coins;
+    nums = { 3, 1, 5, 8 };
+    max_coins = leetCode.maxBurstBalloonCoins(nums);
+    Logger::WriteMessage("Balloons:");
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("Maximum Coins = " + to_string(max_coins));
+}
+
+void TestLeetCode486(void)
+{
+    Logger::WriteMessage("Test Leet Code 486");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 5, 2 };
+    bool result = leetCode.predictTheWinner(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("Play 1 " + (string)(result ? "can win" : "cannot win"));
+
+    nums = { 1, 5, 233, 7 };
+    result = leetCode.predictTheWinner(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("Play 1 " + (string)(result ? "can win" : "cannot win"));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode486();
+    TestLeetCode312();
+    TestLeetCode516();
+    TestLeetCode361();
+    TestLeetCode1035();
+    TestLeetCode132();
     TestLeetCode1320();
     TestLeetCode1139();
     TestLeetCode1312();
