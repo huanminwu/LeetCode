@@ -112,6 +112,20 @@ void TestLeetCode1326(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode352(void)
+{
+    Logger::WriteMessage("Test Leet Code 352");
+    vector<int> nums = { 1, 3, 7, 2, 6 };
+    SummaryRanges summaryRange;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        summaryRange.addNum(nums[i]);
+    }
+    Logger::WriteMessage(nums);
+    vector<Interval> intervals = summaryRange.getIntervals();
+    Logger::WriteMessage(intervals);
+}
+
 void TestLeetCodeGreedy(void)
 {
     TestLeetCode1326();

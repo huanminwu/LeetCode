@@ -953,8 +953,73 @@ void TestLeetCode368(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode251(void)
+{
+    Logger::WriteMessage("Test Leet Code 251");
+    vector<vector<int>> vec2d = { {1,2}, {3}, {4,5,6} };
+    vector<int> result;
+    Vector2D vector2d(vec2d);
+    Logger::WriteMessage(vec2d);
+    while (vector2d.hasNext())
+    {
+        result.push_back(vector2d.next());
+    }
+    Logger::WriteMessage(result);
+
+    vec2d = { { },{ 3 } };
+    result = {};
+    vector2d = Vector2D(vec2d);
+    Logger::WriteMessage(vec2d);
+    while (vector2d.hasNext())
+    {
+        result.push_back(vector2d.next());
+    }
+    Logger::WriteMessage(result);
+
+    vec2d = { {1},{} };
+    result = {};
+    vector2d = Vector2D(vec2d);
+    Logger::WriteMessage(vec2d);
+    while (vector2d.hasNext())
+    {
+        result.push_back(vector2d.next());
+    }
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode281(void)
+{
+    Logger::WriteMessage("Test Leet Code 281");
+    vector<int> v1 = { 1, 2, 3 };
+    vector<int> v2 = { 4, 5, 6, 7 };
+    vector<int> result;
+    ZigzagIterator zigzagIterator(v1, v2);
+    Logger::WriteMessage(v1);
+    Logger::WriteMessage(v2);
+    while (zigzagIterator.hasNext())
+    {
+        result.push_back(zigzagIterator.next());
+    }
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode631(void)
+{
+    int result;
+    Excel excel(3, 'C');
+    excel.set(1, 'A', 2);
+    result = excel.sum(3, 'C', { "A1", "A1:B2" });
+    Logger::WriteMessage("excel.sum(3, 'C', { 'A1', 'A1:B2' }) = " + to_string(result));
+    excel.set(2, 'B', 2);
+    result = excel.get(3, 'C');
+    Logger::WriteMessage("excel.get(3, 'C') = " + to_string(excel.get(3, 'C')));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode631();
+    TestLeetCode251();
+    TestLeetCode281();
     TestLeetCode368();
     TestLeetCode446();
     TestLeetCode485();

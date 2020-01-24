@@ -2316,20 +2316,6 @@ void TestLeetCode436(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode352(void)
-{
-    Logger::WriteMessage("Test Leet Code 352");
-    vector<int> nums = { 1, 3, 7, 2, 6 };
-    SummaryRanges summaryRange;
-    for (size_t i = 0; i < nums.size(); i++)
-    {
-        summaryRange.addNum(nums[i]);
-    }
-    Logger::WriteMessage(nums);
-    vector<Interval> intervals = summaryRange.getIntervals();
-    Logger::WriteMessage(intervals);
-}
-
 void TestLeetCode390(void)
 {
     LeetCode leetCode;
@@ -2732,39 +2718,6 @@ void TestLeetCode408(void)
 
 }
 
-void TestLeetCode170(void)
-{
-    Logger::WriteMessage("Test Leet Code 170");
-    TwoSum twoSum;
-    twoSum.add(3);
-    twoSum.add(2);
-    twoSum.add(1);
-    Logger::WriteMessage("add(3);add(2);add(1);");
-    int sum = 2;
-    bool result = twoSum.find(sum);
-    Logger::WriteMessage("sum = " + to_string(sum) + ";" + (string)(result ? "true" : "false"));
-    sum = 3;
-    result = twoSum.find(sum);
-    Logger::WriteMessage("sum = " + to_string(sum) + ";" + (string)(result ? "true" : "false"));
-    sum = 4;
-    result = twoSum.find(sum);
-    Logger::WriteMessage("sum = " + to_string(sum) + ";" + (string)(result ? "true" : "false"));
-    sum = 5;
-    result = twoSum.find(sum);
-    Logger::WriteMessage("sum = " + to_string(sum) + ";" + (string)(result ? "true" : "false"));
-    sum = 6;
-    result = twoSum.find(sum);
-    Logger::WriteMessage("sum = " + to_string(sum) + ";" + (string)(result ? "true" : "false"));
-
-    TwoSum twoSum1;
-    twoSum1.add(0);
-    twoSum1.add(0);
-    Logger::WriteMessage("add(0);add(0);");
-    sum = 0;
-    result = twoSum1.find(sum);
-    Logger::WriteMessage("sum = " + to_string(sum) + ";" + (string)(result ? "true" : "false"));
-}
-
 void TestLeetCode476(void)
 {
     Logger::WriteMessage("Test Leet Code 476");
@@ -2887,67 +2840,6 @@ void TestLeetCode320(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode281(void)
-{
-    Logger::WriteMessage("Test Leet Code 281");
-    vector<int> v1 = { 1, 2, 3 };
-    vector<int> v2 = { 4, 5, 6, 7 };
-    vector<int> result;
-    ZigzagIterator zigzagIterator(v1, v2);
-    Logger::WriteMessage(v1);
-    Logger::WriteMessage(v2);
-    while (zigzagIterator.hasNext())
-    {
-        result.push_back(zigzagIterator.next());
-    }
-    Logger::WriteMessage(result);
-}
-
-void TestLeetCode251(void)
-{
-    Logger::WriteMessage("Test Leet Code 251");
-    vector<vector<int>> vec2d = { {1,2}, {3}, {4,5,6} };
-    vector<int> result;
-    Vector2D vector2d(vec2d);
-    Logger::WriteMessage(vec2d);
-    while (vector2d.hasNext())
-    {
-        result.push_back(vector2d.next());
-    }
-    Logger::WriteMessage(result);
-
-    vec2d = { { },{ 3 } };
-    result = {};
-    vector2d = Vector2D(vec2d);
-    Logger::WriteMessage(vec2d);
-    while (vector2d.hasNext())
-    {
-        result.push_back(vector2d.next());
-    }
-    Logger::WriteMessage(result);
-
-    vec2d = { {1},{} };
-    result = {};
-    vector2d = Vector2D(vec2d);
-    Logger::WriteMessage(vec2d);
-    while (vector2d.hasNext())
-    {
-        result.push_back(vector2d.next());
-    }
-    Logger::WriteMessage(result);
-}
-
-void TestLeetCode271(void)
-{
-    Logger::WriteMessage("Test Leet Code 271");
-    vector<string> str_list = { "Hello", "", "World" };
-    Logger::WriteMessage(str_list);
-    Codec codec;
-    string str = codec.encode(str_list);
-    Logger::WriteMessage(str);
-    vector<string> result = codec.decode(str);
-    Logger::WriteMessage(result);
-}
 
 void TestLeetCode221(void)
 {
@@ -2964,8 +2856,6 @@ void TestLeetCode221(void)
     Logger::WriteMessage(matrix);
     Logger::WriteMessage("max_area = " + to_string(max_area));
 }
-
-
 
 void TestLeetCode302(void)
 {
@@ -3982,16 +3872,6 @@ void TestLeetCode533(void)
     Logger::WriteMessage("N = " + to_string(N) + "; lonely pixel = " + to_string(result));
 }
 
-void TestLeetCode535(void)
-{
-    Logger::WriteMessage("Test Leet Code 535");
-    TinyURL tinyUrl;
-    string longUrl = "https://leetcode.com/problems/design-tinyurl";
-    string shortUrl = tinyUrl.encode(longUrl);
-    Logger::WriteMessage("long url -> short url: " + longUrl + " -> " + shortUrl);
-    Logger::WriteMessage("short url -> long url: " + shortUrl + " -> " + longUrl);
-}
-
 void TestLeetCode532(void)
 {
     Logger::WriteMessage("Test Leet Code 532");
@@ -4463,51 +4343,6 @@ void TestLeetCode567(void)
     Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "; result = " + (string)(result ? "true" : "false"));
 }
 
-void TestLeetCode588(void)
-{
-    vector<string> commands = { "FileSystem", "ls", "mkdir", "addContentToFile", "ls", "readContentFromFile", "addContentToFile", "readContentFromFile" };
-    vector<vector<string>> parameters = { {},{ "/" },{ "/a/b/c" }, { "/a/b/c/d", "hello world" },{ "/" },{ "/a/b/c/d" },{"/a/b/c/d", " hello hello world"}, {"/a/b/c/d"} };
-    FileSystem fileSystem;
-    Logger::WriteMessage(commands);
-    Logger::WriteMessage(parameters);
-
-    vector<string> output;
-    for (size_t i = 0; i < commands.size(); i++)
-    {
-        if (commands[i] == "ls")
-        {
-            vector<string> result = fileSystem.ls(parameters[i][0]);
-            string output_string;
-            for (string str : result)
-            {
-                if (!output_string.empty()) output_string.push_back(',');
-                output_string.append(str);
-            }
-            output.push_back("[" + output_string + "]");
-        }
-        else if (commands[i] == "mkdir")
-        {
-            fileSystem.mkdir(parameters[i][0]);
-            output.push_back("null");
-        }
-        else if (commands[i] == "FileSystem")
-        {
-            output.push_back("null");
-        }
-        else if (commands[i] == "addContentToFile")
-        {
-            fileSystem.addContentToFile(parameters[i][0], parameters[i][1]);
-            output.push_back("null");
-        }
-        else if (commands[i] == "readContentFromFile")
-        {
-            string output_string;
-            output_string = fileSystem.readContentFromFile(parameters[i][0]);
-            output.push_back(output_string);
-        }
-    }
-    Logger::WriteMessage(output);
-}
 
 void TestLeetCode599(void)
 {
@@ -4583,19 +4418,6 @@ void TestLeetCode606(void)
     result = leetCode.tree2str(root);
     Logger::WriteMessage("input = " + input + "; result = " + result);
     leetCode.freeTreeNodes(root);
-}
-
-void TestLeetCode604(void)
-{
-    string str = "L1e2t1C1o1d1e1";
-    StringIterator *iterator = new StringIterator("L1e2t1C1o1d1e1");
-    string result;
-    while (iterator->hasNext())
-    {
-        result.push_back(iterator->next());
-    }
-    delete iterator;
-    Logger::WriteMessage("str = " + str + "; result = " + result);
 }
 
 void TestLeetCode617(void)
@@ -4754,18 +4576,6 @@ void TestLeetCode630(void)
     result = leetCode.scheduleCourse(courses);
     Logger::WriteMessage("result = " + to_string(result));
 
-}
-
-void TestLeetCode631(void)
-{
-    int result;
-    Excel excel(3, 'C');
-    excel.set(1, 'A', 2);
-    result = excel.sum(3, 'C', { "A1", "A1:B2" });
-    Logger::WriteMessage("excel.sum(3, 'C', { 'A1', 'A1:B2' }) = " + to_string(result));
-    excel.set(2, 'B', 2);
-    result = excel.get(3, 'C');
-    Logger::WriteMessage("excel.get(3, 'C') = " + to_string(excel.get(3, 'C')));
 }
 
 void TestLeetCode634(void)
@@ -5799,22 +5609,6 @@ void TestLeetCode674(void)
     result = leetCode.findLengthOfLCIS(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
-}
-
-void TestLeetCode676(void)
-{
-    vector<string> dict = { "hello", "leetcode" };
-    Logger::WriteMessage(dict);
-    MagicDictionary * magic_dict = new MagicDictionary();
-    magic_dict->buildDict(dict);
-    vector<string> words = { "hello", "hhllo", "hell",  "leetcoded" };
-    Logger::WriteMessage(words);
-    for (string word : words)
-    {
-        bool result = magic_dict->search(word);
-        Logger::WriteMessage((string)(result ? "true" : "false"));
-    }
-    delete magic_dict;
 }
 
 void TestLeetCode677(void)
@@ -14997,7 +14791,6 @@ void main(int argc, char* argv[])
     TestLeetCode682();
     TestLeetCode680();
     TestLeetCode677();
-    TestLeetCode676();
     TestLeetCode417();
     TestLeetCode674();
     TestLeetCode670();
@@ -15063,7 +14856,6 @@ void main(int argc, char* argv[])
     TestLeetCode632();
     TestLeetCode635();
     TestLeetCode634();
-    TestLeetCode631();
     TestLeetCode630();
     TestLeetCode629();
     TestLeetCode628();
@@ -15078,7 +14870,6 @@ void main(int argc, char* argv[])
     TestLeetCode606();
     TestLeetCode605();
     TestLeetCode609();
-    TestLeetCode588();
     TestLeetCode567();
     TestLeetCode583();
     TestLeetCode568();
@@ -15124,7 +14915,6 @@ void main(int argc, char* argv[])
     TestLeetCode524();
     TestLeetCode530();
     TestLeetCode532();
-    TestLeetCode535();
     TestLeetCode533();
     TestLeetCode531();
     TestLeetCode514();
@@ -15207,21 +14997,17 @@ void main(int argc, char* argv[])
     TestLeetCode186();
     TestLeetCode221();
     TestLeetCode271();
-    TestLeetCode251();
-    TestLeetCode281();
     TestLeetCode320();
     TestLeetCode482();
     TestLeetCode245();
     TestLeetCode244();    
     TestLeetCode311();
-
     TestLeetCode370();
     TestLeetCode280();
     TestLeetCode366();
     TestLeetCode276();
     TestLeetCode254();
     TestLeetCode476();
-    TestLeetCode170();
     TestLeetCode408();
     TestLeetCode422();
     TestLeetCode270();
@@ -15249,7 +15035,6 @@ void main(int argc, char* argv[])
     TestLeetCode130();
     TestLeetCode390();
     TestLeetCode81();
-    TestLeetCode352();
     TestLeetCode436();
     TestLeetCode220();
     TestLeetCode279();

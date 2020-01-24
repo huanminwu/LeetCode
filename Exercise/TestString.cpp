@@ -1185,8 +1185,105 @@ void TestLeetCode1324(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode588(void)
+{
+    vector<string> commands =
+    {
+        "FileSystem", "ls", "mkdir", "addContentToFile", "ls", "readContentFromFile", "addContentToFile", "readContentFromFile"
+    };
+    vector<vector<string>> parameters =
+    {
+        {},{ "/" },{ "/a/b/c" }, { "/a/b/c/d", "hello world" },{ "/" },{ "/a/b/c/d" },{"/a/b/c/d", " hello hello world"}, {"/a/b/c/d"}
+    };
+    FileSystem fileSystem;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+
+    vector<string> output;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "ls")
+        {
+            vector<string> result = fileSystem.ls(parameters[i][0]);
+            string output_string;
+            for (string str : result)
+            {
+                if (!output_string.empty()) output_string.push_back(',');
+                output_string.append(str);
+            }
+            output.push_back("[" + output_string + "]");
+        }
+        else if (commands[i] == "mkdir")
+        {
+            fileSystem.mkdir(parameters[i][0]);
+            output.push_back("null");
+        }
+        else if (commands[i] == "FileSystem")
+        {
+            output.push_back("null");
+        }
+        else if (commands[i] == "addContentToFile")
+        {
+            fileSystem.addContentToFile(parameters[i][0], parameters[i][1]);
+            output.push_back("null");
+        }
+        else if (commands[i] == "readContentFromFile")
+        {
+            string output_string;
+            output_string = fileSystem.readContentFromFile(parameters[i][0]);
+            output.push_back(output_string);
+        }
+    }
+    Logger::WriteMessage(output);
+}
+
+void TestLeetCode271(void)
+{
+    Logger::WriteMessage("Test Leet Code 271");
+    vector<string> str_list = { "Hello", "", "World" };
+    Logger::WriteMessage(str_list);
+    Codec codec;
+    string str = codec.encode(str_list);
+    Logger::WriteMessage(str);
+    vector<string> result = codec.decode(str);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode604(void)
+{
+    string str = "L1e2t1C1o1d1e1";
+    StringIterator *iterator = new StringIterator("L1e2t1C1o1d1e1");
+    string result;
+    while (iterator->hasNext())
+    {
+        result.push_back(iterator->next());
+    }
+    delete iterator;
+    Logger::WriteMessage("str = " + str + "; result = " + result);
+}
+
+void TestLeetCode676(void)
+{
+    vector<string> dict = { "hello", "leetcode" };
+    Logger::WriteMessage(dict);
+    MagicDictionary * magic_dict = new MagicDictionary();
+    magic_dict->buildDict(dict);
+    vector<string> words = { "hello", "hhllo", "hell",  "leetcoded" };
+    Logger::WriteMessage(words);
+    for (string word : words)
+    {
+        bool result = magic_dict->search(word);
+        Logger::WriteMessage((string)(result ? "true" : "false"));
+    }
+    delete magic_dict;
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode676();
+    TestLeetCode588();
+    TestLeetCode271();
+    TestLeetCode604();
     TestLeetCode1324();
     TestLeetCode1044();
     TestLeetCode1055();

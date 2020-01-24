@@ -20,6 +20,496 @@
 #include "leetcode.h"
 
 using namespace std;
+
+/// <summary>
+/// Leet code #271. Encode and Decode Strings  
+/// 
+/// Design an algorithm to encode a list of strings to a string. The encoded 
+/// string is then sent 
+/// over the network and is decoded back to the original list of strings.
+/// Machine 1 (sender) has the function: 
+/// string encode(vector<string> strs) 
+/// {
+///  // ... your code
+///  return encoded_string;
+/// }
+/// Machine 2 (receiver) has the function: vector<string> decode(string s) {
+///   //... your code 
+///  return strs;
+/// }
+/// So Machine 1 does: 
+/// string encoded_string = encode(strs);
+/// and Machine 2 does: 
+/// vector<string> strs2 = decode(encoded_string);
+/// strs2 in Machine 2 should be the same as strs in Machine 1. 
+/// Implement the encode and decode methods. 
+/// Note:
+/// The string may contain any possible characters out of 256 valid ascii 
+/// characters. Your algorithm should be 
+/// generalized enough to work on any possible characters.
+/// Do not use class member/global/static variables to store states. 
+/// Your encode and decode algorithms should be stateless. 
+/// Do not rely on any library method such as eval or serialize methods. 
+/// You should implement your own encode/decode algorithm.
+/// </summary>
+class Codec
+{
+public:
+
+    // Encodes a list of strings to a single string.
+    string encode(vector<string>& strs)
+    {
+        string result;
+        for (size_t i = 0; i < strs.size(); i++)
+        {
+            result.push_back('(');
+            result.append(to_string(strs[i].size()));
+            result.push_back(')');
+            result.append(strs[i]);
+        }
+        return result;
+    }
+
+    // Decodes a single string to a list of strings.
+    vector<string> decode(string s)
+    {
+        vector<string> result;
+        int count = 0;
+        string word;
+        for (size_t i = 0; i < s.size(); i++)
+        {
+            if (count > 0)
+            {
+                word.push_back(s[i]);
+                count--;
+                if (count == 0) result.push_back(word);
+            }
+            else if (s[i] == '(')
+            {
+                word.clear();
+            }
+            else if (s[i] == ')')
+            {
+                count = stoi(word);
+                word.clear();
+                if (count == 0) result.push_back(word);
+            }
+            else
+            {
+                word.push_back(s[i]);
+            }
+        }
+        return result;
+    }
+};
+
+/// <summary>
+/// Leet code #588. Design In-Memory File System
+/// 
+/// Design an in-memory file system to simulate the following functions:
+/// ls: Given a path in string format. If it is a file path, return a list 
+/// that only contains this file's name. If it is a directory path, return 
+/// the list of file and directory names in this directory. Your output 
+/// (file and directory names together) should in lexicographic order.
+/// mkdir: Given a directory path that does not exist, you should make a 
+/// new directory according to the path. If the middle directories in the 
+/// path don't exist either, you should create them as well. This function 
+/// has void return type. 
+/// addContentToFile: Given a file path and file content in string format. 
+/// If the file doesn't exist, you need to create that file containing given 
+/// content. If the file already exists, you need to append given content to 
+/// original content. This function has void return type.
+/// readContentFromFile: Given a file path, return its content in string 
+/// format.
+/// Example:
+/// Input: 
+/// ["FileSystem","ls","mkdir","addContentToFile","ls","readContentFromFile"]
+/// [[],["/"],["/a/b/c"],["/a/b/c/d","hello"],["/"],["/a/b/c/d"]]
+/// Output:
+/// [null,[],null,null,["a"],"hello"]
+/// Explanation:
+/// 
+/// Note:
+/// 1. You can assume all file or directory paths are absolute paths which 
+///    begin with / and do not end with / except that the path is just "/".
+/// 2. You can assume that all operations will be passed valid parameters and
+///    users will not attempt to retrieve file content or list a directory or 
+///    file that does not exist.
+/// 3. You can assume that all directory names and file names only contain 
+///    lower-case letters, and same names won't exist in the same directory.
+/// </summary>
+class FileSystem
+{
+private:
+    struct FileInfo
+    {
+        string path;
+        map<string, FileInfo*> directory;
+        string content;
+        bool is_file;
+        FileInfo(string p, bool f = false) : path(p), is_file(f) {}
+    };
+    FileInfo *root = nullptr;
+
+    vector<string> split_path(string path)
+    {
+        vector<string> result;
+        size_t first = 0;
+        size_t last = 0;
+        while (last <= path.size())
+        {
+            if (last == path.size() || path[last] == '/')
+            {
+                result.push_back(path.substr(first, last - first));
+                first = last + 1;
+            }
+            last++;
+        }
+        return result;
+    }
+
+    FileInfo * get_directory(string &path)
+    {
+        vector<string> paths = split_path(path);
+        FileInfo * ptr = root;
+        for (size_t i = 0; i < paths.size(); i++)
+        {
+            if (!paths[i].empty())
+            {
+                if (ptr->directory.count(paths[i]) == 0)
+                {
+                    ptr->directory[paths[i]] = new FileInfo(paths[i]);
+                }
+                ptr = ptr->directory[paths[i]];
+            }
+        }
+        return ptr;
+    }
+
+public:
+    FileSystem()
+    {
+        root = new FileInfo("", false);
+    }
+    ~FileSystem()
+    {
+        queue<FileInfo *> process_queue;
+        process_queue.push(root);
+        while (process_queue.empty())
+        {
+            FileInfo * ptr = process_queue.front();
+            process_queue.pop();
+            for (auto itr : ptr->directory)
+            {
+                process_queue.push(itr.second);
+            }
+            delete ptr;
+        }
+        root = nullptr;
+    }
+
+    vector<string> ls(string path)
+    {
+        vector<string> result;
+        FileInfo * ptr;
+        ptr = get_directory(path);
+        if (ptr->is_file)
+        {
+            result.push_back(ptr->path);
+        }
+        else
+        {
+            for (auto itr : ptr->directory)
+            {
+                result.push_back(itr.first);
+            }
+        }
+        return result;
+    }
+
+    void mkdir(string path)
+    {
+        get_directory(path);
+    }
+
+    void addContentToFile(string filePath, string content)
+    {
+        FileInfo *ptr = get_directory(filePath);
+        ptr->is_file = true;
+        ptr->content += content;
+    }
+
+    string readContentFromFile(string filePath)
+    {
+        FileInfo * ptr = get_directory(filePath);
+        return (string)(ptr->content);
+    }
+};
+
+/// <summary>
+/// Leet code #604. Design Compressed String Iterator
+/// 
+/// Design and implement a data structure for a compressed string iterator. 
+/// It should support the following operations: next and hasNext. 
+/// The given compressed string will be in the form of each letter followed 
+/// by a positive integer representing the number of this letter existing in 
+/// the original uncompressed string. 
+/// next() - if the original string still has uncompressed characters, return 
+/// the next letter; Otherwise return a white space.
+/// hasNext() - Judge whether there is any letter needs to be uncompressed. 
+/// Note:
+/// Please remember to RESET your class variables declared in StringIterator, 
+/// as static/class variables are persisted across multiple test cases. 
+/// Please see here for more details. 
+/// Example: 
+/// StringIterator iterator = new StringIterator("L1e2t1C1o1d1e1");
+/// iterator.next(); // return 'L'
+/// iterator.next(); // return 'e'
+/// iterator.next(); // return 'e'
+/// iterator.next(); // return 't'
+/// iterator.next(); // return 'C'
+/// iterator.next(); // return 'o'
+/// iterator.next(); // return 'd'
+/// iterator.hasNext(); // return true
+/// iterator.next(); // return 'e'
+/// iterator.hasNext(); // return false
+/// iterator.next(); // return ' '
+/// </summary>
+class StringIterator
+{
+private:
+    size_t group_index = 0;
+    size_t char_index = 0;
+    vector<pair<char, int>> char_list;
+public:
+    StringIterator(string compressedString)
+    {
+        char ch;
+        int ch_count = 0;
+        string token;
+        for (size_t i = 0; i < compressedString.size(); i++)
+        {
+            // if we hit a letter, we need to 
+            if (isalpha(compressedString[i]))
+            {
+                if (!token.empty())
+                {
+                    ch_count = stoi(token);
+                    char_list.push_back(make_pair(ch, ch_count));
+                    token.clear();
+                }
+                ch = compressedString[i];
+            }
+            else if (isdigit(compressedString[i]))
+            {
+                token.push_back(compressedString[i]);
+            }
+        }
+        ch_count = stoi(token);
+        char_list.push_back(make_pair(ch, ch_count));
+    }
+
+    char next()
+    {
+        char ch;
+        if (group_index < char_list.size())
+        {
+            ch = char_list[group_index].first;
+            char_index++;
+            if (char_index == (size_t)char_list[group_index].second)
+            {
+                group_index++;
+                char_index = 0;
+            }
+        }
+        else
+        {
+            ch = ' ';
+        }
+        return ch;
+    }
+
+    bool hasNext()
+    {
+        if (group_index < char_list.size())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+};
+
+/// <summary>
+/// Leet code #635. Design Log Storage System 
+/// 
+/// You are given several logs that each log contains a unique id and 
+/// timestamp. Timestamp is a string that has the following format: 
+/// Year:Month:Day:Hour:Minute:Second, for example, 2017:01:01:23:59:59. 
+/// All domains are zero-padded decimal numbers. 
+/// Design a log storage system to implement the following functions:
+/// void Put(int id, string timestamp): Given a log's unique id and 
+/// timestamp, store the log in your storage system.
+///
+/// int[] Retrieve(String start, String end, String granularity): 
+/// Return the id of logs whose timestamps are within the range from start 
+/// to end. Start and end all have the same format as timestamp. However, 
+/// granularity means the time level for consideration. For example, 
+/// start = "2017:01:01:23:59:59", end = "2017:01:02:23:59:59", 
+/// granularity = "Day", it means that we need to find the logs within the 
+/// range from Jan. 1st 2017 to Jan. 2nd 2017.
+/// Example 1:
+/// put(1, "2017:01:01:23:59:59");
+/// put(2, "2017:01:01:22:59:59");
+/// put(3, "2016:01:01:00:00:00");
+/// retrieve("2016:01:01:01:01:01","2017:01:01:23:00:00","Year"); 
+/// return [1,2,3], because you need to return all logs within 2016 and 
+/// 2017.
+/// retrieve("2016:01:01:01:01:01","2017:01:01:23:00:00","Hour"); 
+/// return [1,2], because you need to return all logs start from 
+/// 2016:01:01:01 to 2017:01:01:23, where log 3 is left outside the range.
+/// 
+/// Note:
+/// There will be at most 300 operations of Put or Retrieve.
+/// Year ranges from [2000,2017]. Hour ranges from [00,23].
+/// Output for Retrieve has no order required.
+/// </summary>
+class LogSystem
+{
+private:
+    map<string, unordered_set<int>> log_map;
+
+    string get_timestamp(string time, string granularity, bool end = false)
+    {
+        string result;
+        int count = 0;
+        string token = "";
+        for (size_t i = 0; i <= time.size(); i++)
+        {
+            if (i == time.size() || (time[i] == ':'))
+            {
+                if (((count > 0) && (granularity == "Year")) ||
+                    ((count > 1) && (granularity == "Month")) ||
+                    ((count > 2) && (granularity == "Day")) ||
+                    ((count > 3) && (granularity == "Hour")) ||
+                    ((count > 4) && (granularity == "Minute")))
+                {
+                    if (end == false)
+                    {
+                        result.append(":00");
+                    }
+                    else
+                    {
+                        result.append(":99");
+                    }
+                }
+                else
+                {
+                    if (count > 0) result.push_back(':');
+                    result.append(token);
+                }
+                count++;
+                token.clear();
+            }
+            else
+            {
+                token.push_back(time[i]);
+            }
+        }
+        return result;
+    }
+
+public:
+    LogSystem()
+    {
+    }
+
+    void put(int id, string timestamp)
+    {
+        log_map[timestamp].insert(id);
+    }
+
+    vector<int> retrieve(string s, string e, string gra)
+    {
+        vector<int> result;
+        string start_time = get_timestamp(s, gra);
+        string end_time = get_timestamp(e, gra, true);
+        map<string, unordered_set<int>>::iterator begin = log_map.lower_bound(start_time);
+        map<string, unordered_set<int>>::iterator end = log_map.upper_bound(end_time);
+        for (map<string, unordered_set<int>>::iterator itr = begin; itr != end; ++itr)
+        {
+            for (auto id : itr->second)
+                result.push_back(id);
+        }
+        return result;
+    }
+};
+
+/// <summary>
+/// Leet code #676. Implement Magic Dictionary
+/// 
+/// Implement a magic directory with buildDict, and search methods.
+/// For the method buildDict, you'll be given a list of non-repetitive 
+/// words to build a dictionary.
+/// 
+/// For the method search, you'll be given a word, and judge whether if 
+/// you modify exactly one character into another character in this word,
+/// the modified word is in the dictionary you just built.
+///
+/// Example 1:
+/// Input: buildDict(["hello", "leetcode"]), Output: Null
+/// Input: search("hello"), Output: False
+/// Input: search("hhllo"), Output: True
+/// Input: search("hell"), Output: False
+/// Input: search("leetcoded"), Output: False
+/// Note:
+/// You may assume that all the inputs are consist of lowercase letters 
+/// a-z.
+/// For contest purpose, the test data is rather small by now. You could 
+/// think about highly efficient algorithm after the contest.
+/// Please remember to RESET your class variables declared in class 
+/// MagicDictionary, as static/class variables are persisted across 
+/// multiple test cases. Please see here for more details.
+/// </summary>
+class MagicDictionary
+{
+private:
+    unordered_map<int, vector<string>> m_dictionary;
+
+public:
+    // Initialize your data structure here.
+    MagicDictionary()
+    {
+    }
+
+    // Build a dictionary through a list of words
+    void buildDict(vector<string> dict)
+    {
+        for (string str : dict)
+        {
+            m_dictionary[str.size()].push_back(str);
+        }
+    }
+
+    // Returns if there is any word in the trie that equals to the given
+    // word after modifying exactly one character
+    bool search(string word)
+    {
+        for (string str : m_dictionary[word.size()])
+        {
+            int count = 0;
+            for (size_t i = 0; i < word.size(); i++)
+            {
+                if (word[i] != str[i]) count++;
+            }
+            if (count == 1) return true;
+        }
+        return false;
+    }
+};
+
 /// <summary>
 /// The class is to implement array related algorithm  
 /// </summary>

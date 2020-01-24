@@ -140,6 +140,43 @@ void TestLeetCode18(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode170(void)
+{
+    Logger::WriteMessage("Test Leet Code 170");
+    vector<string> commands =
+    {
+        "TwoSum", "add", "add", "add", "add", "add", "find", "find", "find", "find", "find" , "find"
+    };
+    vector<vector<int>> parameters =
+    {
+        {},{ 3 }, { 2 }, { 1 }, { 0 }, { 0 }, { 2 },{ 3 }, { 4 }, { 5 }, { 6 }, { 0 }
+    };
+
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        TwoSum * twoSum = nullptr;
+        if (commands[i] == "TwoSum")
+        {
+            TwoSum * twoSum = new TwoSum();
+            result.push_back("null");
+        }
+        else if (commands[i] == "add")
+        {
+            twoSum->add(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "find")
+        {
+            bool ret = twoSum->find(parameters[i][0]);
+            Logger::WriteMessage("result = " + (string)(ret ? "true" : "false"));
+        }
+    }
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCode1207(void)
 {
     Logger::WriteMessage("Test Leet Code 1207");
@@ -239,8 +276,19 @@ void TestLeetCode1257(void)
     Logger::WriteMessage("region1 = " + region1 + "; region2 = " + region2 + "; result = " + result);
 }
 
+void TestLeetCode535(void)
+{
+    Logger::WriteMessage("Test Leet Code 535");
+    TinyURL tinyUrl;
+    string longUrl = "https://leetcode.com/problems/design-tinyurl";
+    string shortUrl = tinyUrl.encode(longUrl);
+    Logger::WriteMessage("long url -> short url: " + longUrl + " -> " + shortUrl);
+    Logger::WriteMessage("short url -> long url: " + shortUrl + " -> " + longUrl);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode170();
     TestLeetCode1257();
     TestLeetCode1224();
     TestLeetCode1218();

@@ -446,6 +446,326 @@ public:
 };
 
 /// <summary>
+/// Leet code #281. Zigzag Iterator  
+/// 
+/// Given two 1d vectors, implement an iterator to return their elements 
+/// alternately.
+/// For example, given two 1d vectors: 
+/// v1 = [1, 2]
+/// v2 = [3, 4, 5, 6]
+/// By calling next repeatedly until hasNext returns false, the order of 
+/// elements returned by next should be: [1, 3, 2, 4, 5, 6].
+/// Follow up: What if you are given k 1d vectors? How well can your code be 
+/// extended to such cases?
+/// Clarification for the follow up question - Update (2015-09-18):
+/// The "Zigzag" order is not clearly defined and is ambiguous for k > 2 cases. 
+/// If "Zigzag" does not look right to you, replace "Zigzag" with "Cyclic". 
+/// For example, given the following input: 
+/// [1,2,3]
+/// [4,5,6,7]
+/// [8,9]
+/// It should return [1,4,8,2,5,9,3,6,7]. 	
+/// </summary>
+class ZigzagIterator
+{
+private:
+    size_t m_Row;
+    size_t m_Col;
+    int m_Size;
+    int m_Index;
+    vector<vector<int>> m_Vector;
+public:
+    ZigzagIterator(vector<int>& v1, vector<int>& v2)
+    {
+        m_Vector.push_back(v1);
+        m_Vector.push_back(v2);
+        m_Index = 0;
+        m_Size = v1.size() + v2.size();
+        m_Row = 0;
+        m_Col = 0;
+    }
+    int next()
+    {
+        int result;
+        while (m_Row >= m_Vector.size() || m_Col >= m_Vector[m_Row].size())
+        {
+            if (m_Row < m_Vector.size())
+            {
+                m_Row++;
+            }
+            else
+            {
+                m_Row = 0;
+                m_Col++;
+            }
+        }
+        result = m_Vector[m_Row][m_Col];
+        m_Row++;
+        m_Index++;
+        return result;
+    }
+
+    bool hasNext()
+    {
+        if (m_Index < m_Size) return true;
+        else return false;
+    }
+};
+
+/// <summary>
+/// Leet code #251. Flatten 2D Vector  
+/// 
+/// Implement an iterator to flatten a 2d vector.
+/// For example,
+/// Given 2d vector = 
+/// [
+///  [1,2],
+///  [3],
+///  [4,5,6]
+/// ]
+/// By calling next repeatedly until hasNext returns false, the order of 
+/// elements returned by next should be: [1,2,3,4,5,6]. 
+/// Hint:
+/// 1.How many variables do you need to keep track?
+/// 2.Two variables is all you need. Try with x and y.
+/// 3.Beware of empty rows. It could be the first few rows.
+/// 4.To write correct code, think about the invariant to maintain. What is it?
+/// 5.The invariant is x and y must always point to a valid point in the 2d 
+///   vector. Should you maintain your invariant ahead of time or right when 
+///   you need it?
+/// 6.Not sure? Think about how you would implement hasNext(). Which is more 
+///   complex?
+/// 7.Common logic in two different places should be refactored into a common 
+///   method.
+///
+/// Follow up:
+/// As an added challenge, try to code it using only iterators in C++ or 
+/// iterators in Java. 
+/// </summary>
+class Vector2D
+{
+private:
+    size_t m_Row;
+    size_t m_Col;
+    vector<vector<int>> m_Vector;
+public:
+    Vector2D(vector<vector<int>>& vec2d)
+    {
+        m_Vector = vec2d;
+        m_Row = 0;
+        m_Col = 0;
+    }
+
+    int next()
+    {
+        int result = m_Vector[m_Row][m_Col];
+        m_Col++;
+        return result;
+    }
+
+    bool hasNext()
+    {
+        while ((m_Row < m_Vector.size()) && (m_Col >= m_Vector[m_Row].size()))
+        {
+            m_Row++;
+            m_Col = 0;
+        }
+        if (m_Row == m_Vector.size()) return false;
+        else return true;
+    }
+};
+
+/// <summary>
+/// Leet code #631. Design Excel Sum Formula
+/// 
+/// Your task is to design the basic function of Excel and implement the 
+/// function of sum formula. Specifically, you need to implement the 
+/// following functions:
+/// Excel(int H, char W): This is the constructor. The inputs represents 
+/// the height and width of the Excel form. H is a positive integer, range 
+/// from 1 to 26. It represents the height. W is a character range from 
+/// 'A' to 'Z'. It represents that the width is the number of characters 
+/// from 'A' to W. The Excel form content is represented by a height * 
+/// width 2D integer array C, it should be initialized to zero. You should 
+/// assume that the first row of C starts from 1, and the first column of 
+/// C starts from 'A'.
+/// 
+/// void Set(int row, char column, int val): Change the value at 
+/// C(row, column) to be val.
+///
+/// int Get(int row, char column): Return the value at C(row, column).
+///
+/// int Sum(int row, char column, List of Strings : numbers): This function 
+/// calculate and set the value at C(row, column), where the value should 
+/// be the sum of cells represented by numbers. This function return the 
+/// sum result at C(row, column). This sum formula should exist until this 
+/// cell is overlapped by another value or another sum formula.
+/// numbers is a list of strings that each string represent a cell or a 
+/// range of cells. If the string represent a single cell, then it has the 
+/// following format : ColRow. For example, "F7" represents the cell at 
+/// (7, F). 
+/// If the string represent a range of cells, then it has the following 
+/// format : ColRow1:ColRow2. The range will always be a rectangle, and 
+/// ColRow1 represent the position of the top-left cell, and ColRow2 
+/// represents the position of the bottom-right cell. 
+///
+/// Example 1:
+/// Excel(3,"C"); 
+/// construct a 3*3 2D array with all zero.
+///   A B C
+/// 1 0 0 0
+/// 2 0 0 0
+/// 3 0 0 0
+///
+/// Set(1, "A", 2);
+/// set C(1,"A") to be 2.
+///   A B C
+/// 1 2 0 0
+/// 2 0 0 0
+/// 3 0 0 0
+///
+/// Sum(3, "C", ["A1", "A1:B2"]);
+/// set C(3,"C") to be the sum of value at C(1,"A") and the values sum of 
+/// the rectangle range whose top-left cell is C(1,"A") and bottom-right 
+/// cell is C(2,"B"). Return 4. 
+///   A B C
+/// 1 2 0 0
+/// 2 0 0 0
+/// 3 0 0 4
+///
+/// Set(2, "B", 2);
+/// set C(2,"B") to be 2. Note C(3, "C") should also be changed.
+///   A B C
+/// 1 2 0 0
+/// 2 0 2 0
+/// 3 0 0 6
+///
+/// Note:
+/// You could assume that there won't be any circular sum reference. For 
+/// example, A1 = sum(B1) and B1 = sum(A1).
+/// The test cases are using double-quotes to represent a character.
+/// Please remember to RESET your class variables declared in class Excel, 
+/// as static/class variables are persisted across multiple test cases. 
+/// Please see here for more details.
+/// </summary>
+class Excel
+{
+private:
+    unordered_map<int, unordered_map<int, vector<pair<int, int>>>> sum_formula;
+    vector<vector<int>> cells;
+
+    int calculate(int row, int col)
+    {
+        if (sum_formula[row].count(col) == 0)
+        {
+            return cells[row][col];
+        }
+
+        int sum = 0;
+        vector<pair<int, int>>& range_list = sum_formula[row][col];
+        for (size_t i = 0; i < range_list.size(); i += 2)
+        {
+            int start_row = range_list[i].first;
+            int start_col = range_list[i].second;
+            int end_row = range_list[i + 1].first;
+            int end_col = range_list[i + 1].second;
+            for (int r = start_row; r < end_row; r++)
+            {
+                for (int c = start_col; c < end_col; c++)
+                {
+                    sum += calculate(r, c);
+                }
+            }
+        }
+        return sum;
+    }
+
+    vector<pair<int, int>> parse_range(vector<string> str_list)
+    {
+        vector<pair<int, int>> result;
+        for (size_t i = 0; i < str_list.size(); i++)
+        {
+            string token;
+            string str = str_list[i];
+            int row = 0, col = 0;
+            for (size_t j = 0; j <= str.size(); j++)
+            {
+                if (j == str.size())
+                {
+                    row = stoi(token) - 1;
+                    token.clear();
+
+                    // for a single cell
+                    if (result.size() % 2 == 0)
+                    {
+                        result.push_back(make_pair(row, col));
+                    }
+                    // for end range we make it out of boundary
+                    result.push_back(make_pair(row + 1, col + 1));
+                }
+                else if (str[j] == ':')
+                {
+                    row = stoi(token) - 1;
+                    token.clear();
+                    result.push_back(make_pair(row, col));
+                }
+                else if (isalpha(str[j]))
+                {
+                    col = str[j] - 'A';
+                }
+                else if (isdigit(str[j]))
+                {
+                    token += str[j];
+                }
+            }
+            // if this is a single cell, duplicate it as range
+            if (result.size() % 2 == 1)
+            {
+                result.push_back(make_pair(row, col));
+            }
+        }
+        return result;
+    }
+
+public:
+    Excel(int H, char W)
+    {
+        int rows = H;
+        int cols = W - 'A' + 1;
+        cells = vector<vector<int>>(rows, vector<int>(cols));
+    }
+
+    void set(int r, char c, int v)
+    {
+        int row = r - 1;
+        int col = c - 'A';
+        // clean up formula
+        if (sum_formula[row].count(col) > 0)
+        {
+            sum_formula[row].erase(col);
+        }
+
+        cells[row][col] = v;
+    }
+
+    int get(int r, char c)
+    {
+        int row = r - 1;
+        int col = c - 'A';
+        return calculate(row, col);
+    }
+
+    int sum(int r, char c, vector<string> strs)
+    {
+        int row = r - 1;
+        int col = c - 'A';
+        sum_formula[row][col] = parse_range(strs);
+        cells[row][col] = 0;
+        return calculate(row, col);
+    }
+};
+
+/// <summary>
 /// The class is to implement array related algorithm  
 /// </summary>
 class LeetCodeArray

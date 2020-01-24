@@ -19,6 +19,90 @@
 #include <stack> 
 using namespace std;
 /// <summary>
+/// Leet code #170. Two Sum III - Data structure design    
+/// 
+/// Design and implement a TwoSum class. It should support the following 
+/// operations: add and find.
+/// add - Add the number to an internal data structure.
+/// find - Find if there exists any pair of numbers which sum is equal to the 
+/// value. 
+/// For example,
+/// add(1); add(3); add(5);
+/// find(4) -> true
+/// find(7) -> false
+/// </summary>
+class TwoSum
+{
+private:
+    unordered_map<int, int> m_DataMap;
+public:
+    // Add the number to an internal data structure.
+    void add(int number)
+    {
+        m_DataMap[number]++;
+    }
+
+    // Find if there exists any pair of numbers which sum is equal to the value.
+    bool find(int value)
+    {
+        for (auto itr : m_DataMap)
+        {
+            int other = value - itr.first;
+            if (other == itr.first)
+            {
+                if (itr.second > 1) return true;
+            }
+            else if (m_DataMap.count(other) > 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
+/// <summary>
+/// Leet code #535. Encode and Decode TinyURL   
+/// 
+/// Note: This is a companion problem to the System Design problem: 
+/// Design TinyURL.
+/// TinyURL is a URL shortening service where you enter a URL such as 
+/// https://leetcode.com/problems/design-tinyurl and it returns a 
+/// short URL such as http://tinyurl.com/4e9iAk.
+///
+/// Design the encode and decode methods for the TinyURL service. 
+/// There is no restriction on how your encode/decode algorithm 
+/// should work. You just need to ensure that a URL can be encoded 
+/// to a tiny URL and the tiny URL can be decoded to the original URL.
+/// </summary>
+class TinyURL
+{
+private:
+    unordered_map<string, string> m_Long2Short;
+    unordered_map<string, string> m_Short2Long;
+
+public:
+
+    // Encodes a URL to a shortened URL.
+    string encode(string longUrl)
+    {
+        if (m_Long2Short.count(longUrl) == 0)
+        {
+            string shortUrl = "http://tinyurl.com/" + to_string(m_Long2Short.size());
+            m_Long2Short[longUrl] = shortUrl;
+            m_Short2Long[shortUrl] = longUrl;
+        }
+        return m_Long2Short[longUrl];
+    }
+
+    // Decodes a shortened URL to its original URL.
+    string decode(string shortUrl)
+    {
+        return m_Short2Long[shortUrl];
+    }
+};
+
+/// <summary>
 /// The class is to implement dynamic programming  
 /// </summary>
 class LeetCodeHashtable
