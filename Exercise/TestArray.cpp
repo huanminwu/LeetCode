@@ -1015,8 +1015,126 @@ void TestLeetCode631(void)
     Logger::WriteMessage("excel.get(3, 'C') = " + to_string(excel.get(3, 'C')));
 }
 
+void TestLeetCode26(void)
+{
+    LeetCodeArray leetCode;
+    Logger::WriteMessage("Test Leet Code 26");
+    vector<int> nums = { 1, 2, 2, 3, 4, 4, 5 };
+    Logger::WriteMessage(nums);
+    string message;
+    int length = leetCode.removeDuplicateSortedArray(nums);
+    message.assign("The array lengh without duplicate is: " + length);
+    Logger::WriteMessage(message.c_str());
+}
+
+void TestLeetCode80(void)
+{
+    Logger::WriteMessage("Test Leet Code 80");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 1, 1, 2, 2, 3 };
+    Logger::WriteMessage(nums);
+    int size = leetCode.removeDuplicatesII(nums);
+    Logger::WriteMessage("New size = " + to_string(size));
+    Logger::WriteMessage(nums);
+}
+
+void TestLeetCode73(void)
+{
+    Logger::WriteMessage("Test Leet Code 73");
+    LeetCodeArray leetCode;
+    vector<vector<int>> matrix = { { 1, 2, 3, 4 },{ 5, 0, 7, 8 },{ 9, 10, 0, 12 },{ 13,14,15,16 } };
+    for (size_t i = 0; i < matrix.size(); i++)
+    {
+        Logger::WriteMessage(matrix[i]);
+    }
+    leetCode.setZeroes(matrix);
+    for (size_t i = 0; i < matrix.size(); i++)
+    {
+        Logger::WriteMessage(matrix[i]);
+    }
+}
+
+void TestLeetCode189(void)
+{
+    Logger::WriteMessage("Test Leet Code 189");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,2,3,4,5,6,7,8,9 };
+    int k = 3;
+    Logger::WriteMessage(nums);
+    leetCode.rotateArray(nums, k);
+    Logger::WriteMessage(nums);
+}
+
+void TestLeetCode419(void)
+{
+    Logger::WriteMessage("Test Leet Code 419");
+    LeetCodeArray leetCode;
+    vector<vector<char>> board =
+    {
+        { 'X', '.', '.', 'X' },
+        { '.', '.', '.', 'X' },
+        { '.', '.', '.', 'X' }
+    };
+    Logger::WriteMessage("Total battle ship = " + to_string(leetCode.countBattleships(board)));
+}
+
+void TestLeetCode442(void)
+{
+    Logger::WriteMessage("Test Leet Code 442");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 4, 3, 2, 7, 8, 2, 3, 1 };
+    Logger::WriteMessage(nums);
+    vector<int> result = leetCode.findDuplicates(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode243(void)
+{
+    Logger::WriteMessage("Test Leet Code 243");
+    LeetCodeArray leetCode;
+    vector<string> words = { "practice", "makes", "perfect", "coding", "makes" };
+    string word1 = "coding";
+    string word2 = "practice";
+    int distance = leetCode.shortestDistance(words, word1, word2);
+    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
+
+    word1 = "makes";
+    word2 = "coding";
+    distance = leetCode.shortestDistance(words, word1, word2);
+    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
+}
+
+void TestLeetCode245(void)
+{
+    Logger::WriteMessage("Test Leet Code 245");
+    LeetCodeArray leetCode;
+    vector<string> words = { "practice", "makes", "perfect", "coding", "makes" };
+    string word1 = "coding";
+    string word2 = "practice";
+    int distance = leetCode.shortestWordDistance(words, word1, word2);
+    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
+
+    word1 = "makes";
+    word2 = "coding";
+    distance = leetCode.shortestWordDistance(words, word1, word2);
+    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
+
+    word1 = "makes";
+    word2 = "makes";
+    distance = leetCode.shortestWordDistance(words, word1, word2);
+    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode243();
+    TestLeetCode245();
+    TestLeetCode442();
+    TestLeetCode419();
+    TestLeetCode189();
+    TestLeetCode26();
+    TestLeetCode73();
+    TestLeetCode80();
     TestLeetCode631();
     TestLeetCode251();
     TestLeetCode281();

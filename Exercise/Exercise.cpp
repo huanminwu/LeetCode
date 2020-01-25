@@ -297,19 +297,6 @@ void TestLeetCode11(void)
     Logger::WriteMessage(message.c_str());
 }
 
-void TestLeetCode26(void)
-{
-    LeetCode leetCode;
-    Logger::WriteMessage("Test Leet Code 26");
-    vector<int> nums = { 1, 2, 2, 3, 4, 4, 5 };
-    Logger::WriteMessage(nums);
-    string message;
-    int length = leetCode.removeDuplicateSortedArray(nums);
-    message.assign("The array lengh without duplicate is: " + length);
-    Logger::WriteMessage(message.c_str());
-}
-
-
 void TestLeetCode155(void)
 {
     MinStack minStack;
@@ -1007,15 +994,6 @@ void TestLeetCode75(void)
     Logger::WriteMessage(nums);
 }
 
-void TestLeetCode204(void)
-{
-    Logger::WriteMessage("Test Leet Code 204");
-    LeetCode leetCode;
-    int n = 100;
-    int numPrimes = leetCode.countPrimes(n);
-    Logger::WriteMessage("The number of primes within " + to_string(n) + " is " + to_string(numPrimes));
-}
-
 void TestLeetCode345(void)
 {
     Logger::WriteMessage("Test Leet Code 345");
@@ -1614,36 +1592,6 @@ void TestLeetCode173(void)
 }
 
 
-void TestLeetCode73(void)
-{
-    Logger::WriteMessage("Test Leet Code 73");
-    LeetCode leetCode;
-    vector<vector<int>> matrix = { { 1, 2, 3, 4 },{ 5, 0, 7, 8 },{ 9, 10, 0, 12 },{ 13,14,15,16 } };
-    for (size_t i = 0; i < matrix.size(); i++)
-    {
-        Logger::WriteMessage(matrix[i]);
-    }
-    leetCode.setZeroes(matrix);
-    for (size_t i = 0; i < matrix.size(); i++)
-    {
-        Logger::WriteMessage(matrix[i]);
-    }
-}
-
-
-
-
-void TestLeetCode80(void)
-{
-    Logger::WriteMessage("Test Leet Code 80");
-    LeetCode leetCode;
-    vector<int> nums = { 1, 1, 1, 2, 2, 3 };
-    Logger::WriteMessage(nums);
-    int size = leetCode.removeDuplicatesII(nums);
-    Logger::WriteMessage("New size = " + to_string(size));
-    Logger::WriteMessage(nums);
-}
-
 
 void TestLeetCode120(void)
 {
@@ -1706,8 +1654,6 @@ void TestLeetCode437(void)
     leetCode.freeTreeNodes(root);
 }
 
-
-
 void TestLeetCode290(void)
 {
     Logger::WriteMessage("Test Leet Code 290");
@@ -1734,41 +1680,6 @@ void TestLeetCode290(void)
     match = leetCode.wordPattern(pattern, str);
     Logger::WriteMessage("pattern = " + pattern + "; str = " + str + "; " + (match ? "match" : "not match"));
 }
-
-void TestLeetCode189(void)
-{
-    Logger::WriteMessage("Test Leet Code 189");
-    LeetCode leetCode;
-    vector<int> nums = { 1,2,3,4,5,6,7,8,9 };
-    int k = 3;
-    Logger::WriteMessage(nums);
-    leetCode.rotateArray(nums, k);
-    Logger::WriteMessage(nums); 
-}
-
-void TestLeetCode414(void)
-{
-    Logger::WriteMessage("Test Leet Code 414");
-    LeetCode leetCode;
-    vector<int> nums;
-    int third_max;
-    nums = { 3, 2, 1 };
-    Logger::WriteMessage(nums);
-    third_max = leetCode.thirdMax(nums);
-    Logger::WriteMessage("Third max number in the list is " + to_string(third_max));
-
-    nums = { 1, 2 };
-    Logger::WriteMessage(nums);
-    third_max = leetCode.thirdMax(nums);
-    Logger::WriteMessage("Third max number in the list is " + to_string(third_max));
-
-    nums = { 2, 2, 3, 1 };
-    Logger::WriteMessage(nums);
-    third_max = leetCode.thirdMax(nums);
-    Logger::WriteMessage("Third max number in the list is " + to_string(third_max));
-}
-
-
 
 void TestLeetCode303(void)
 {
@@ -1826,18 +1737,6 @@ void TestLeetCode275(void)
     Logger::WriteMessage("H index =" + to_string(leetCode.hIndexII(nums)));
 }
 
-void TestLeetCode419(void)
-{
-    Logger::WriteMessage("Test Leet Code 419");
-    LeetCode leetCode;
-    vector<vector<char>> board =
-    {
-        { 'X', '.', '.', 'X' },
-        { '.', '.', '.', 'X' },
-        { '.', '.', '.', 'X' }
-    };
-    Logger::WriteMessage("Total battle ship = " + to_string(leetCode.countBattleships(board)));
-}
 
 void TestLeetCode116(void)
 {
@@ -2075,16 +1974,6 @@ void TestLeetCode461(void)
     int x = 1, y = 4;
     int count = leetCode.hammingDistance(x, y);
     Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; Haming Distance = " + to_string(count));
-}
-
-void TestLeetCode442(void)
-{
-    Logger::WriteMessage("Test Leet Code 442");
-    LeetCode leetCode;
-    vector<int> nums = { 4, 3, 2, 7, 8, 2, 3, 1 };
-    Logger::WriteMessage(nums);
-    vector<int> result = leetCode.findDuplicates(nums);
-    Logger::WriteMessage(result);
 }
 
 void TestLeetCode450(void)
@@ -2572,22 +2461,6 @@ void TestLeetCode293(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode243(void)
-{
-    Logger::WriteMessage("Test Leet Code 243");
-    LeetCode leetCode;
-    vector<string> words = {"practice", "makes", "perfect", "coding", "makes"};
-    string word1 = "coding";
-    string word2 = "practice";
-    int distance = leetCode.shortestDistance(words, word1, word2);
-    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " +to_string(distance));
-
-    word1 = "makes";
-    word2 = "coding";
-    distance = leetCode.shortestDistance(words, word1, word2);
-    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
-}
-
 void TestLeetCode244(void)
 {
     Logger::WriteMessage("Test Leet Code 244");
@@ -2601,27 +2474,6 @@ void TestLeetCode244(void)
     word1 = "makes";
     word2 = "coding";
     distance = wordDistance.shortest(word1, word2);
-    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
-}
-
-void TestLeetCode245(void)
-{
-    Logger::WriteMessage("Test Leet Code 245");
-    LeetCode leetCode;
-    vector<string> words = { "practice", "makes", "perfect", "coding", "makes" };
-    string word1 = "coding";
-    string word2 = "practice";
-    int distance = leetCode.shortestWordDistance(words, word1, word2);
-    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
-
-    word1 = "makes";
-    word2 = "coding";
-    distance = leetCode.shortestWordDistance(words, word1, word2);
-    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
-
-    word1 = "makes";
-    word2 = "makes";
-    distance = leetCode.shortestWordDistance(words, word1, word2);
     Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
 }
 
@@ -15051,7 +14903,6 @@ void main(int argc, char* argv[])
     TestLeetCode179();
     TestLeetCode432();
     TestLeetCode475();
-    TestLeetCode442();
     TestLeetCode461();
     TestLeetCode347();
     TestLeetCode230();
@@ -15074,8 +14925,6 @@ void main(int argc, char* argv[])
     TestLeetCode116();
     TestLeetCode303();
     TestLeetCode234();
-    TestLeetCode414();
-    TestLeetCode189();
     TestLeetCode290();
     TestLeetCode438();
     TestLeetCode437();
@@ -15083,9 +14932,7 @@ void main(int argc, char* argv[])
     TestLeetCode462();
     TestLeetCode147();
     TestLeetCode160();
-    TestLeetCode80();
     TestLeetCode133();
-    TestLeetCode73();
     TestLeetCode48();
     TestLeetCode93();
     TestLeetCode173();
@@ -15178,7 +15025,6 @@ void main(int argc, char* argv[])
     TestLeetCode191();
     TestLeetCode371();
     TestLeetCode155();
-    TestLeetCode26();
     TestLeetCode11();
     TestLeetCode151();
     TestLeetCode12();

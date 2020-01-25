@@ -1773,6 +1773,15 @@ void TestLeetCode1323(void)
     Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
 }
 
+void TestLeetCode204(void)
+{
+    Logger::WriteMessage("Test Leet Code 204");
+    LeetCodeMath leetCode;
+    int n = 100;
+    int numPrimes = leetCode.countPrimes(n);
+    Logger::WriteMessage("The number of primes within " + to_string(n) + " is " + to_string(numPrimes));
+}
+
 void TestLeetCodeMath(void)
 {
     TestLeetCode1323();

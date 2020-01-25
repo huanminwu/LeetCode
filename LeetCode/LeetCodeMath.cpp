@@ -6839,3 +6839,35 @@ int LeetCodeMath::maximum69Number(int num)
     int result = atoi(str.c_str());
     return result;
 }
+
+/// <summary>
+/// Leet code #204. Count Primes
+/// 
+/// Count the number of prime numbers less than a non - negative number, n.
+/// </summary>
+int LeetCodeMath::countPrimes(int n)
+{
+    int result = 0;
+    vector<int> matrix(n, 0);
+    for (int i = 0; i < n; i++)
+    {
+        if ((i == 0) || (i == 1)) continue;
+        if (matrix[i] == 1) continue;
+        int factor = 2;
+        while (i * factor < n)
+        {
+            matrix[i * factor] = 1;
+            factor++;
+        }
+    }
+
+    for (int i = 2; i < n; i++)
+    {
+        if (matrix[i] == 0)
+        {
+            result++;
+        }
+    }
+    return result;
+}
+

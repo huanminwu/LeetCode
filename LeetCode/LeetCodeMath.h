@@ -3009,5 +3009,12 @@ public:
     /// 2. num's digits are 6 or 9.
     /// </summary>
     int maximum69Number(int num);
+
+    /// <summary>
+    /// Leet code #204. Count Primes
+    /// 
+    /// Count the number of prime numbers less than a non - negative number, n.
+    /// </summary>
+    int countPrimes(int n);
 };
 #endif

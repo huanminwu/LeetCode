@@ -7805,111 +7805,6 @@ public:
 
 #pragma region Array
     /// <summary>
-    /// Leet code #204. Count Primes
-    /// 
-    /// Count the number of prime numbers less than a non - negative number, n.
-    /// </summary>
-    int countPrimes(int n);
-
-    /// <summary>
-    /// Leet code #26. Remove Duplicates from Sorted Array
-    /// Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.
-    /// Do not allocate extra space for another array, you must do this in place with constant memory. 
-    /// For example,
-    /// Given input array nums = [1,1,2], 
-    /// Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. 
-    /// It doesn't matter what you leave beyond the new length. 
-    /// </summary>
-    int removeDuplicateSortedArray(vector<int>& nums);
-
-    /// <summary>
-    /// LeetCode #80. Remove Duplicates from Sorted Array II  
-    /// Follow up for "Remove Duplicates": 
-    /// What if duplicates are allowed at most twice? 
-    /// For example, 
-    /// Given sorted array nums = [1,1,1,2,2,3], 
-    /// Your function should return length = 5, with the first five elements of nums being 1, 1, 2, 2 and 3. 
-    /// It doesn't matter what you leave beyond the new length.  
-    /// </summary>
-    int removeDuplicatesII(vector<int>& nums);
-
-    /// <summary>
-    /// LeetCode #73. Set Matrix Zeroes  
-    /// Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in place. 
-    /// Did you use extra space?
-    /// A straight forward solution using O(mn) space is probably a bad idea.
-    /// A simple improvement uses O(m + n) space, but still not the best solution.
-    /// Could you devise a constant space solution? 
-    /// </summary>
-    void setZeroes(vector<vector<int>>& matrix);
-
-    /// <summary>
-    /// Leet code #189. Rotate Array       
-    /// Rotate an array of n elements to the right by k steps.
-    /// For example, with n = 7 and k = 3, the array [1,2,3,4,5,6,7] is rotated to [5,6,7,1,2,3,4]. 
-    /// Note:
-    /// Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem. 
-    /// Hint:
-    /// Could you do it in-place with O(1) extra space? 
-    /// Related problem: Reverse Words in a String II
-    /// </summary>
-    void rotateArray(vector<int>& nums, int k);
-
-    /// <summary>
-    /// Leet code #414. Third Maximum Number       
-    /// Given a non-empty array of integers, return the third maximum number in this array. If it does not exist, 
-    /// return the maximum number. The time complexity must be in O(n).
-    /// Example 1:
-    /// Input: [3, 2, 1]
-    /// Output: 1
-    /// Explanation: The third maximum is 1.
-    /// 
-    /// Example 2:
-    /// Input: [1, 2]
-    /// Output: 2
-    /// Explanation: The third maximum does not exist, so the maximum (2) is returned instead.
-    ///
-    /// Example 3:
-    /// Input: [2, 2, 3, 1]
-    /// Output: 1
-    /// Explanation: Note that the third maximum here means the third maximum distinct number.
-    /// Both numbers with value 2 are both considered as second maximum.
-    /// </summary>
-    int thirdMax(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #215. Kth Largest Element in an Array        
-    /// Find the kth largest element in an unsorted array. Note that it is the kth largest element 
-    /// in the sorted order, not the kth distinct element.  
-    /// For example,
-    /// Given [3,2,1,5,6,4] and k = 2, return 5. 
-    /// </summary>
-    int findKthLargest(vector<int>& nums, int k);
-
-    /// <summary>
-    /// Leet code #419. Battleships in a Board  
-    /// Given an 2D board, count how many different battleships are in it. The battleships are represented 
-    /// with 'X's, empty slots are represented with '.'s. You may assume the following rules: 
-    /// You receive a valid board, made of only battleships or empty slots.
-    /// Battleships can only be placed horizontally or vertically. In other words, they can only be made 
-    /// of the shape 1xN (1 row, N columns) or Nx1 (N rows, 1 column), where N can be of any size.
-    /// At least one horizontal or vertical cell separates between two battleships - there are no adjacent battleships.
-    /// Example:
-    /// X..X
-    /// ...X
-    /// ...X
-    /// In the above board there are 2 battleships. 
-    /// Invalid Example:
-    /// ...X
-    /// XXXX
-    /// ...X
-    /// This is an invalid board that you will not receive - as battleships will always have a cell separating between them. 
-    /// Follow up:
-    /// Could you do it in one-pass, using only O(1) extra memory and without modifying the value of the board?    
-    /// </summary>
-    int countBattleships(vector<vector<char>>& board);
-
-    /// <summary>
     /// Leet code #398. Random Pick Index     
     /// Given an array of integers with possible duplicates, randomly output the index of a given target number. 
     /// You can assume that the given target number must exist in the array.  
@@ -7946,19 +7841,6 @@ public:
     vector<int> shuffle(vector<int> nums);
 
     /// <summary>
-    /// Leet code #442. Find All Duplicates in an Array
-    /// Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
-    /// Find all the elements that appear twice in this array.
-    /// Could you do it without extra space and in O(n) runtime?
-    /// Example:
-    /// Input:
-    /// [4,3,2,7,8,2,3,1]
-    /// Output:
-    /// [2,3]
-    /// </summary>
-    vector<int> findDuplicates(vector<int>& nums);
-    
-    /// <summary>
     /// Leet code #475. Heaters 
     /// Winter is coming! Your first job during the contest is to design a standard heater with 
     /// fixed warm radius to warm all the houses.
@@ -7981,36 +7863,6 @@ public:
     /// Explanation: The two heater was placed in the position 1 and 4. We need to use radius 1 standard, then all the houses can be warmed.
     /// </summary>
     int findRadius(vector<int>& houses, vector<int>& heaters); 
-
-
-
-
-    /// <summary>
-    /// Leet code #243. Shortest Word Distance  
-    /// 
-    /// Given a list of words and two words word1 and word2, return the shortest 
-    /// distance between these two words in the list. 
-    /// For example,
-    /// Assume that words = ["practice", "makes", "perfect", "coding", "makes"]. 
-    /// Given word1 = "coding", word2 = "practice", return 3. 
-    /// Given word1 = "makes", word2 = "coding", return 1.
-    /// </summary>
-    int shortestDistance(vector<string>& words, string word1, string word2);
-
-    /// <summary>
-    /// Leet code #245. Shortest Word Distance III  
-    /// 
-    /// This is a follow up of Shortest Word Distance. The only difference is now word1 could be the same as word2.
-    /// Given a list of words and two words word1 and word2, return the shortest distance between these two words in the list.
-    /// word1 and word2 may be the same and they represent two individual words in the list.
-    /// For example,
-    /// Assume that words = ["practice", "makes", "perfect", "coding", "makes"]. 
-    /// Given word1 = “makes”, word2 = “coding”, return 1.
-    /// Given word1 = "makes", word2 = "makes", return 3. 
-    /// Note:
-    /// You may assume word1 and word2 are both in the list. 
-    /// </summary>
-    int shortestWordDistance(vector<string>& words, string word1, string word2);
 
     /// <summary>
     /// Leet code #422. Valid Word Square    

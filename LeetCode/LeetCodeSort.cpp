@@ -3813,5 +3813,88 @@ vector<vector<int>> LeetCodeSort::kClosest(vector<vector<int>>& points, int K)
     return result;
 }
 
+/// <summary>
+/// Leet code #414. Third Maximum Number 
+///
+/// Given a non-empty array of integers, return the third maximum number 
+/// in this array. If it does not exist, 
+/// return the maximum number. The time complexity must be in O(n).
+/// Example 1:
+/// Input: [3, 2, 1]
+/// Output: 1
+/// Explanation: The third maximum is 1.
+/// 
+/// Example 2:
+/// Input: [1, 2]
+/// Output: 2
+/// Explanation: The third maximum does not exist, so the maximum (2) is 
+/// returned instead.
+///
+/// Example 3:
+/// Input: [2, 2, 3, 1]
+/// Output: 1
+/// Explanation: Note that the third maximum here means the third 
+/// maximum distinct number.
+/// Both numbers with value 2 are both considered as second maximum.
+/// </summary>
+int LeetCodeSort::thirdMax(vector<int>& nums)
+{
+    vector<int> max_list;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        size_t index = 0;
+        while (index < max_list.size())
+        {
+            if (nums[i] == max_list[index])
+            {
+                break;
+            }
+            else if (nums[i] > max_list[index])
+            {
+                swap(nums[i], max_list[index]);
+            }
+            index++;
+        }
+        if ((index == max_list.size()) && (index < 3))
+        {
+            max_list.push_back(nums[i]);
+        }
+    }
+    if (max_list.size() == 3)
+    {
+        return max_list[2];
+    }
+    else if (max_list.size() == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return max_list[0];
+    }
+}
+
+/// <summary>
+/// Leet code #215. Kth Largest Element in an Array
+///
+/// Find the kth largest element in an unsorted array. Note that it 
+/// is the kth largest element 
+/// in the sorted order, not the kth distinct element.  
+/// For example,
+/// Given [3,2,1,5,6,4] and k = 2, return 5. 
+/// </summary>
+int LeetCodeSort::findKthLargest(vector<int>& nums, int k)
+{
+    sort(nums.begin(), nums.end());
+    if (nums.size() == 0) return 0;
+    if (k <= (int)nums.size())
+    {
+        return nums[nums.size() - k];
+    }
+    else
+    {
+        return 0;
+    }
+}
 
 #pragma endregion

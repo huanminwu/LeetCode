@@ -1,6 +1,28 @@
 #include "..\LeetCode\LeetCode.h"
 #include "..\LeetCode\LeetCodeSort.h"
 #include "TestSort.h"
+void TestLeetCode414(void)
+{
+    Logger::WriteMessage("Test Leet Code 414");
+    LeetCodeSort leetCode;
+    vector<int> nums;
+    int third_max;
+    nums = { 3, 2, 1 };
+    Logger::WriteMessage(nums);
+    third_max = leetCode.thirdMax(nums);
+    Logger::WriteMessage("Third max number in the list is " + to_string(third_max));
+
+    nums = { 1, 2 };
+    Logger::WriteMessage(nums);
+    third_max = leetCode.thirdMax(nums);
+    Logger::WriteMessage("Third max number in the list is " + to_string(third_max));
+
+    nums = { 2, 2, 3, 1 };
+    Logger::WriteMessage(nums);
+    third_max = leetCode.thirdMax(nums);
+    Logger::WriteMessage("Third max number in the list is " + to_string(third_max));
+}
+
 void TestLeetCode1213(void)
 {
     Logger::WriteMessage("Test Leet Code 1213");
