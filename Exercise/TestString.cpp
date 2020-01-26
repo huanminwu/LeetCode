@@ -1278,8 +1278,30 @@ void TestLeetCode676(void)
     delete magic_dict;
 }
 
+void TestLeetCode1328(void)
+{
+    Logger::WriteMessage("Test Leet Code 1328");
+    LeetCodeString leetCode;
+    string palindrome = "abccba";
+    string result = leetCode.breakPalindrome(palindrome);
+    Logger::WriteMessage("palindrome = " + palindrome + "; result = " + result);
+
+    palindrome = "a";
+    result = leetCode.breakPalindrome(palindrome);
+    Logger::WriteMessage("palindrome = " + palindrome + "; result = " + result);
+
+    palindrome = "aba";
+    result = leetCode.breakPalindrome(palindrome);
+    Logger::WriteMessage("palindrome = " + palindrome + "; result = " + result);
+
+    palindrome = "aaaa";
+    result = leetCode.breakPalindrome(palindrome);
+    Logger::WriteMessage("palindrome = " + palindrome + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1328();
     TestLeetCode676();
     TestLeetCode588();
     TestLeetCode271();

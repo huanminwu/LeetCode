@@ -9159,4 +9159,47 @@ vector<string> LeetCodeString::printVertically(string s)
     return result;
 }
 
+/// <summary>
+/// Leet code #1328. Break a Palindrome
+/// 
+/// Medium
+///
+/// Given a palindromic string palindrome, replace exactly one character 
+/// by any lowercase English letter so that the string becomes the 
+/// lexicographically smallest possible string that isn't a palindrome.
+///
+/// After doing so, return the final string.  If there is no way to do 
+/// so, return the empty string.
+///
+/// Example 1:
+/// Input: palindrome = "abccba"
+/// Output: "aaccba"
+///
+/// Example 2:
+/// Input: palindrome = "a"
+/// Output: ""
+/// 
+/// Constraints:
+/// 1. 1 <= palindrome.length <= 1000
+/// 2. palindrome consists of only lowercase English letters.
+/// </summary>
+string LeetCodeString::breakPalindrome(string palindrome)
+{
+    string result = "";
+    if (palindrome.size() == 1) return result;
+    result = palindrome;
+    for (size_t i = 0; i < result.size() / 2; i++)
+    {
+        // change any non leading 'a' to 'a';
+        if (result[i] != 'a')
+        {
+            result[i] = 'a';
+            return result;
+        }
+    }
+    result.pop_back();
+    result.push_back('b');
+    return result;
+}
+
 #pragma endregion

@@ -1125,8 +1125,38 @@ void TestLeetCode245(void)
     Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
 }
 
+void TestLeetCode1330(void)
+{
+    Logger::WriteMessage("Test Leet Code 1330");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 3, 1, 5, 4 };
+    int result = leetCode.maxValueAfterReverse(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,4,9,24,2,1,10 };
+    result = leetCode.maxValueAfterReverse(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1329(void)
+{
+    Logger::WriteMessage("Test Leet Code 1329");
+    LeetCodeArray leetCode;
+    vector<vector<int>> mat = 
+    {
+        {3, 3, 1, 1},{2, 2, 1, 2}, {1, 1, 1, 2} 
+    };
+    vector<vector<int>> result = leetCode.diagonalSort(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1329();
+    TestLeetCode1330();
     TestLeetCode243();
     TestLeetCode245();
     TestLeetCode442();

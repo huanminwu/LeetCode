@@ -357,8 +357,29 @@ void TestLeetCode973(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1331(void)
+{
+    Logger::WriteMessage("Test Leet Code 1331");
+    LeetCodeSort leetCode;
+    vector<int> arr = { 40, 10, 20, 30 };
+    vector<int> result = leetCode.arrayRankTransform(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(result);
+
+    arr = { 100,100,100 };
+    result = leetCode.arrayRankTransform(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(result);
+
+    arr = { 37,12,28,9,100,56,80,5,12 };
+    result = leetCode.arrayRankTransform(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1331();
     TestLeetCode973();
     TestLeetCode493();
     TestLeetCode632();

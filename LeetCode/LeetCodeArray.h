@@ -2282,6 +2282,57 @@ public:
     /// You may assume word1 and word2 are both in the list. 
     /// </summary>
     int shortestWordDistance(vector<string>& words, string word1, string word2);
+
+    /// <summary>
+    /// Leet code #1330. Reverse Subarray To Maximize Array Value 
+    /// 
+    /// Hard
+    ///
+    /// You are given an integer array nums. The value of this array is 
+    /// defined as the sum of |nums[i]-nums[i+1]| for 
+    /// all 0 <= i < nums.length-1.
+    ///
+    /// You are allowed to select any subarray of the given array and 
+    /// reverse it. You can perform this operation only once.
+    ///
+    /// Find maximum possible value of the final array.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,3,1,5,4]
+    /// Output: 10
+    /// Explanation: By reversing the subarray [3,1,5] the array 
+    /// becomes [2,5,1,3,4] whose value is 10.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,4,9,24,2,1,10]
+    /// Output: 68
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 3*10^4
+    /// 2. -10^5 <= nums[i] <= 10^5
+    /// </summary>
+    int maxValueAfterReverse(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #1329. Sort the Matrix Diagonally 
+    /// 
+    /// Medium
+    ///
+    /// Given a m * n matrix mat of integers, sort it diagonally in ascending 
+    /// order from the top-left to the bottom-right then return the sorted 
+    /// array.
+    /// 
+    /// Example 1:
+    /// Input: mat = [[3,3,1,1],[2,2,1,2],[1,1,1,2]]
+    /// Output: [[1,1,1,1],[1,2,2,2],[1,2,3,3]]
+    /// 
+    /// Constraints:
+    /// 1. m == mat.length
+    /// 2. n == mat[i].length
+    /// 3. 1 <= m, n <= 100
+    /// 4. 1 <= mat[i][j] <= 100
+    /// </summary>
+    vector<vector<int>> diagonalSort(vector<vector<int>>& mat);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

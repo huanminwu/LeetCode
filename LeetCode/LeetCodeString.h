@@ -22,6 +22,66 @@
 using namespace std;
 
 /// <summary>
+/// Leet code #288. Unique Word Abbreviation    
+/// 
+/// An abbreviation of a word follows the form <first letter><number><last letter>. 
+/// Below are some examples of word abbreviations: 
+/// a) it                      --> it    (no abbreviation)
+///      1
+/// b) d|o|g                   --> d1g
+///              1    1  1
+///      1---5----0----5--8
+/// c) i|nternationalizatio|n  --> i18n
+///              1
+///      1---5----0
+/// d) l|ocalizatio|n          --> l10n
+///
+/// Assume you have a dictionary and given a word, find whether its 
+/// abbreviation is unique in the dictionary. A word's abbreviation is unique 
+/// if no other word from the dictionary has the same abbreviation.
+/// Example: 
+/// Given dictionary = [ "deer", "door", "cake", "card" ]
+/// isUnique("dear") -> false
+/// isUnique("cart") -> true
+/// isUnique("cane") -> false
+/// isUnique("make") -> true
+/// </summary>
+class ValidWordAbbr
+{
+private:
+    unordered_map<string, unordered_set<string>> m_AbbrMap;
+public:
+    ValidWordAbbr(vector<string> &dictionary)
+    {
+        for (string word : dictionary)
+        {
+            string abbr;
+            if (word.size() > 0) abbr.push_back(word[0]);
+            if (word.size() > 1) abbr.push_back(word[word.size() - 1]);
+            if (word.size() > 2) abbr.insert(1, to_string(word.size() - 2));
+            m_AbbrMap[abbr].insert(word);
+        }
+    }
+    bool isUnique(string word)
+    {
+        string abbr;
+        if (word.size() > 0) abbr.push_back(word[0]);
+        if (word.size() > 1) abbr.push_back(word[word.size() - 1]);
+        if (word.size() > 2) abbr.insert(1, to_string(word.size() - 2));
+
+        if ((m_AbbrMap.find(abbr) == m_AbbrMap.end()) ||
+            ((m_AbbrMap[abbr].size()) == 1 && (m_AbbrMap[abbr].count(word) == 1)))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+};
+
+/// <summary>
 /// Leet code #271. Encode and Decode Strings  
 /// 
 /// Design an algorithm to encode a list of strings to a string. The encoded 
@@ -2324,67 +2384,33 @@ public:
     /// 3. It's guaranteed that there is only one space between 2 words.
     /// </summary>
     vector<string> printVertically(string s);
+
+    /// <summary>
+    /// Leet code #1328. Break a Palindrome
+    /// 
+    /// Medium
+    ///
+    /// Given a palindromic string palindrome, replace exactly one character 
+    /// by any lowercase English letter so that the string becomes the 
+    /// lexicographically smallest possible string that isn't a palindrome.
+    ///
+    /// After doing so, return the final string.  If there is no way to do 
+    /// so, return the empty string.
+    ///
+    /// Example 1:
+    /// Input: palindrome = "abccba"
+    /// Output: "aaccba"
+    ///
+    /// Example 2:
+    /// Input: palindrome = "a"
+    /// Output: ""
+    /// 
+    /// Constraints:
+    /// 1. 1 <= palindrome.length <= 1000
+    /// 2. palindrome consists of only lowercase English letters.
+    /// </summary>
+    string breakPalindrome(string palindrome); 
 #pragma endregion
-};
-
-/// <summary>
-/// Leet code #288. Unique Word Abbreviation    
-/// 
-/// An abbreviation of a word follows the form <first letter><number><last letter>. 
-/// Below are some examples of word abbreviations: 
-/// a) it                      --> it    (no abbreviation)
-///      1
-/// b) d|o|g                   --> d1g
-///              1    1  1
-///      1---5----0----5--8
-/// c) i|nternationalizatio|n  --> i18n
-///              1
-///      1---5----0
-/// d) l|ocalizatio|n          --> l10n
-///
-/// Assume you have a dictionary and given a word, find whether its 
-/// abbreviation is unique in the dictionary. A word's abbreviation is unique 
-/// if no other word from the dictionary has the same abbreviation.
-/// Example: 
-/// Given dictionary = [ "deer", "door", "cake", "card" ]
-/// isUnique("dear") -> false
-/// isUnique("cart") -> true
-/// isUnique("cane") -> false
-/// isUnique("make") -> true
-/// </summary>
-class ValidWordAbbr
-{
-private:
-    unordered_map<string, unordered_set<string>> m_AbbrMap;
-public:
-    ValidWordAbbr(vector<string> &dictionary)
-    {
-        for (string word : dictionary)
-        {
-            string abbr;
-            if (word.size() > 0) abbr.push_back(word[0]);
-            if (word.size() > 1) abbr.push_back(word[word.size() - 1]);
-            if (word.size() > 2) abbr.insert(1, to_string(word.size() - 2));
-            m_AbbrMap[abbr].insert(word);
-        }
-    }
-    bool isUnique(string word)
-    {
-        string abbr;
-        if (word.size() > 0) abbr.push_back(word[0]);
-        if (word.size() > 1) abbr.push_back(word[word.size() - 1]);
-        if (word.size() > 2) abbr.insert(1, to_string(word.size() - 2));
-
-        if ((m_AbbrMap.find(abbr) == m_AbbrMap.end()) ||
-            ((m_AbbrMap[abbr].size()) == 1 && (m_AbbrMap[abbr].count(word) == 1)))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
 };
 
 #endif  // LeetCodeString_H

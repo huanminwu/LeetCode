@@ -9458,4 +9458,136 @@ vector<int> LeetCodeArray::largestDivisibleSubset(vector<int>& nums)
     return result;
 }
 
+
+/// <summary>
+/// Leet code #1330. Reverse Subarray To Maximize Array Value 
+/// 
+/// Hard
+///
+/// You are given an integer array nums. The value of this array is 
+/// defined as the sum of |nums[i]-nums[i+1]| for 
+/// all 0 <= i < nums.length-1.
+///
+/// You are allowed to select any subarray of the given array and 
+/// reverse it. You can perform this operation only once.
+///
+/// Find maximum possible value of the final array.
+/// 
+/// Example 1:
+/// Input: nums = [2,3,1,5,4]
+/// Output: 10
+/// Explanation: By reversing the subarray [3,1,5] the array 
+/// becomes [2,5,1,3,4] whose value is 10.
+///
+/// Example 2:
+/// Input: nums = [2,4,9,24,2,1,10]
+/// Output: 68
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 3*10^4
+/// 2. -10^5 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeArray::maxValueAfterReverse(vector<int>& nums)
+{
+    int sum = 0;
+    int min_max = INT_MAX;
+    int max_min = INT_MIN;
+    int gap_begin = 0;
+    int gap_end = 0;
+
+    for (size_t i = 1; i < nums.size(); i++)
+    {
+        sum += abs(nums[i - 1] - nums[i]);
+        min_max = min(min_max, max(nums[i - 1], nums[i]));
+        max_min = max(max_min, min(nums[i - 1], nums[i]));
+        
+        gap_begin = max(gap_begin, std::abs(nums[0] - nums[i]) - std::abs(nums[i - 1] - nums[i]));
+        gap_end = max(gap_end, std::abs(nums[i-1] - nums[nums.size() - 1]) - std::abs(nums[i - 1] - nums[i]));
+    }
+    int result = sum + 2 * (max_min - min_max);
+    result = max(result, sum + gap_begin);
+    result = max(result, sum + gap_end);
+
+    return result;
+}
+
+/// <summary>
+/// Leet code #1329. Sort the Matrix Diagonally 
+/// 
+/// Medium
+///
+/// Given a m * n matrix mat of integers, sort it diagonally in ascending 
+/// order from the top-left to the bottom-right then return the sorted 
+/// array.
+/// 
+/// Example 1:
+/// Input: mat = [[3,3,1,1],[2,2,1,2],[1,1,1,2]]
+/// Output: [[1,1,1,1],[1,2,2,2],[1,2,3,3]]
+/// 
+/// Constraints:
+/// 1. m == mat.length
+/// 2. n == mat[i].length
+/// 3. 1 <= m, n <= 100
+/// 4. 1 <= mat[i][j] <= 100
+/// </summary>
+vector<vector<int>> LeetCodeArray::diagonalSort(vector<vector<int>>& mat)
+{
+    vector<vector<int>> result(mat.size(), vector<int>(mat[0].size()));
+    int m = mat.size();
+    int n = mat[0].size();
+
+    for (int i = 0; i < m; i++)
+    {
+        if (i == 0)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                int r = i;
+                int c = j;
+                vector<int> temp;
+                while (r < m && c < n)
+                {
+                    temp.push_back(mat[r][c]);
+                    r++;
+                    c++;
+                }
+                sort(temp.begin(), temp.end());
+                r = i;
+                c = j;
+                int index = 0;
+                while (r < m && c < n)
+                {
+                    result[r][c] = temp[index];
+                    r++;
+                    c++;
+                    index++;
+                }
+            }
+        }
+        else
+        {
+            int r = i;
+            int c = 0;
+            vector<int> temp;
+            while (r < m && c < n)
+            {
+                temp.push_back(mat[r][c]);
+                r++;
+                c++;
+            }
+            sort(temp.begin(), temp.end());
+            r = i;
+            c = 0;
+            int index = 0;
+            while (r < m && c < n)
+            {
+                result[r][c] = temp[index];
+                r++;
+                c++;
+                index++;
+            }
+        }
+    }
+    return result;
+}
 #pragma endregion
