@@ -1299,8 +1299,30 @@ void TestLeetCode1328(void)
     Logger::WriteMessage("palindrome = " + palindrome + "; result = " + result);
 }
 
+void TestLeetCode1332(void)
+{
+    Logger::WriteMessage("Test Leet Code 1332");
+    LeetCodeString leetCode;
+    string s = "ababa";
+    int result = leetCode.removePalindromeSub(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "abb";
+    result = leetCode.removePalindromeSub(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "baabb";
+    result = leetCode.removePalindromeSub(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "";
+    result = leetCode.removePalindromeSub(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1332();
     TestLeetCode1328();
     TestLeetCode676();
     TestLeetCode588();

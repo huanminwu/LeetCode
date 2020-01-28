@@ -128,6 +128,7 @@ void TestLeetCode352(void)
 
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode352();
     TestLeetCode1326();
     TestLeetCode1288();
     TestLeetCode1272();

@@ -1205,8 +1205,50 @@ void TestLeetCode486(void)
     Logger::WriteMessage("Play 1 " + (string)(result ? "can win" : "cannot win"));
 }
 
+void TestLeetCode1335(void)
+{
+    Logger::WriteMessage("Test Leet Code 1335");
+    LeetCodeDP leetCode;
+    vector<int> jobDifficulty = { 6, 5, 4, 3, 2, 1 };
+    int d = 2;
+    int result = leetCode.minDifficulty(jobDifficulty, d);
+    Logger::WriteMessage(jobDifficulty);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+
+    jobDifficulty = { 9,9,9 };
+    d = 4;
+    result = leetCode.minDifficulty(jobDifficulty, d);
+    Logger::WriteMessage(jobDifficulty);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+
+    jobDifficulty = { 1,1,1 };
+    d = 3;
+    result = leetCode.minDifficulty(jobDifficulty, d);
+    Logger::WriteMessage(jobDifficulty);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+
+    jobDifficulty = { 7,1,7,1,7,1 };
+    d = 3;
+    result = leetCode.minDifficulty(jobDifficulty, d);
+    Logger::WriteMessage(jobDifficulty);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+
+    jobDifficulty = { 11,111,22,222,33,333,44,444 };
+    d = 6;
+    result = leetCode.minDifficulty(jobDifficulty, d);
+    Logger::WriteMessage(jobDifficulty);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+
+    jobDifficulty = { 186, 398, 479, 206, 885, 423, 805, 112, 925, 656, 16, 932, 740, 292, 671, 360 };
+    d = 4;
+    result = leetCode.minDifficulty(jobDifficulty, d);
+    Logger::WriteMessage(jobDifficulty);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1335();
     TestLeetCode486();
     TestLeetCode312();
     TestLeetCode516();

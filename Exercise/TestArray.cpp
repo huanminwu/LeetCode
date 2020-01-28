@@ -1153,8 +1153,50 @@ void TestLeetCode1329(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1333(void)
+{
+    Logger::WriteMessage("Test Leet Code 1333");
+    LeetCodeArray leetCode;
+    vector<vector<int>> restaurants =
+    {
+        {1,4,1,40,10},{2,8,0,50,5}, {3,8,1,30,4},
+        {4,10,0,10,3},{5,1,1,15,1}
+    };
+    int veganFriendly = 1;
+    int maxPrice = 50;
+    int maxDistance = 10;
+    vector<int> result = leetCode.filterRestaurants(restaurants, veganFriendly, maxPrice, maxDistance);
+    Logger::WriteMessage(restaurants);
+    Logger::WriteMessage(result);
+
+    restaurants =
+    {
+        {1,4,1,40,10},{2,8,0,50,5}, {3,8,1,30,4},
+        {4,10,0,10,3},{5,1,1,15,1}
+    };
+    veganFriendly = 0;
+    maxPrice = 50;
+    maxDistance = 10;
+    result = leetCode.filterRestaurants(restaurants, veganFriendly, maxPrice, maxDistance);
+    Logger::WriteMessage(restaurants);
+    Logger::WriteMessage(result);
+
+    restaurants =
+    {
+        {1,4,1,40,10},{2,8,0,50,5}, {3,8,1,30,4},
+        {4,10,0,10,3},{5,1,1,15,1}
+    };
+    veganFriendly = 0;
+    maxPrice = 30;
+    maxDistance = 3;
+    result = leetCode.filterRestaurants(restaurants, veganFriendly, maxPrice, maxDistance);
+    Logger::WriteMessage(restaurants);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1333();
     TestLeetCode1329();
     TestLeetCode1330();
     TestLeetCode243();

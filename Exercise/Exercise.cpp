@@ -14171,11 +14171,12 @@ void TestLeetCode1238(void)
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeString();
-    TestLeetCodeArray();
-    TestLeetCodeSort();
     TestLeetCodeDP();
     TestLeetCodeGreedy();
+    TestLeetCodeBFS();
+    TestLeetCodeArray();
+    TestLeetCodeString();
+    TestLeetCodeSort();
     TestLeetCodeTree();
     TestLeetCodeMath();
     TestLeetCodeUnionFind();
@@ -14184,7 +14185,6 @@ void main(int argc, char* argv[])
     TestLeetCodeDFS();
     TestLeetCodeBinarySearch();
     TestLeetCodeLinkedList();
-    TestLeetCodeBFS();
     TestLeetCode915();
     TestLeetCodeDP();
     TestLeetCodeArray();

@@ -236,7 +236,6 @@ public:
     /// 3. 0 <= ranges[i] <= 100
     /// </summary>
     int minTaps(int n, vector<int>& ranges);
-
 #pragma endregion
 };
 #endif  // LeetCodeGreedy_H
