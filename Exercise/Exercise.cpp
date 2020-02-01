@@ -59,85 +59,6 @@ void TestLeetCode208(void)
 }
 
 
-void TestLeetCode200(void)
-{
-    Logger::WriteMessage("Test Leet Code 200");
-    LeetCode leetCode;
-    vector<string> map = { "1111111","0000001","1111101","1000101","1010101","1011101","1111111" };
-
-    vector<vector<char>> grid;
-    Logger::WriteMessage("The grid is:");
-    for (size_t i = 0; i < map.size(); i++)
-    {
-        Logger::WriteMessage(map[i].c_str());
-        grid.push_back(vector<char>());
-        for (size_t j = 0; j < map[i].size(); j++)
-        {
-            grid[i].push_back(map[i][j]);
-        }
-    }
-    int numIslands = leetCode.numIslands(grid);
-    std::string message;
-    message.assign("The number of island is ");
-    message.append(std::to_string(numIslands));
-    Logger::WriteMessage(message.c_str());
-
-    string test2[4] = { "11000", "11000", "00100", "00011" };
-    grid.clear();
-    Logger::WriteMessage("The grid is:");
-    for (size_t i = 0; i < sizeof(test2) / sizeof(test2[0]); i++)
-    {
-        Logger::WriteMessage(test2[i].c_str());
-        grid.push_back(vector<char>());
-        for (size_t j = 0; j < test2[i].size(); j++)
-        {
-            grid[i].push_back(test2[i][j]);
-        }
-    }
-    numIslands = leetCode.numIslands(grid);
-    message.assign("The number of island is ");
-    message.append(std::to_string(numIslands));
-    Logger::WriteMessage(message.c_str());
-
-    string test3[20] = { 
-        "11111110111111111111",
-        "11111101110101011111",
-        "11111111111000111100",
-        "10101111010101101111",
-        "10111111011001110111",
-        "01111101101001110111",
-        "11111111011101011111",
-        "11111011111010101011",
-        "01111111010110111001",
-        "01000111111011101010",
-        "01111111110000111111",
-        "10110111111111110101",
-        "11111101011010111111",
-        "11111111111011111110",
-        "11010111011111111111",
-        "11111101110111011001",
-        "10111111111100111111",
-        "10011100110111001111",
-        "11101100010011110011",
-        "11111111011111110101"
-    };
-    grid.clear();
-    Logger::WriteMessage("The grid is:");
-    for (size_t i = 0; i < sizeof(test3) / sizeof(test3[0]); i++)
-    {
-        Logger::WriteMessage(test3[i].c_str());
-        grid.push_back(vector<char>());
-        for (size_t j = 0; j < test3[i].size(); j++)
-        {
-            grid[i].push_back(test3[i][j]);
-        }
-    }
-    numIslands = leetCode.numIslands(grid);
-    message.assign("The number of island is ");
-    message.append(std::to_string(numIslands));
-    Logger::WriteMessage(message.c_str());
-}
-
 void TestLeetCode121(void)
 {
     Logger::WriteMessage("Test Leet Code 121");
@@ -180,34 +101,6 @@ void TestLeetCode122(void)
     message.assign("The max profit is ");
     message.append(std::to_string(maxProfit));
     Logger::WriteMessage(message);
-}
-
-void TestLeetCode417(void)
-{
-    Logger::WriteMessage("Test Leet Code 417");
-    LeetCode leetCode;
-    vector<vector<int>> matrix = 
-    {
-        { 1, 2, 2, 3, 5 },
-        { 3, 2, 3, 4, 4 },
-        { 2, 4, 5, 3, 1 },
-        { 6, 7, 1, 4, 5 },
-        { 5, 1, 1, 2, 4 }
-    };
-    vector<pair<int, int>> result = leetCode.pacificAtlantic(matrix);
-    Logger::WriteMessage(matrix);
-    Logger::WriteMessage(result);
-
-    matrix =
-    {
-        { 1, 2, 3 },
-        { 8, 9, 4 },
-        { 7, 6, 5 }
-    };
-
-    result = leetCode.pacificAtlantic(matrix);
-    Logger::WriteMessage(matrix);
-    Logger::WriteMessage(result);
 }
 
 void TestLeetCode56(void)
@@ -1041,42 +934,6 @@ void TestLeetCode202(void)
     Logger::WriteMessage("The number " + to_string(n) + " is " + (isHappyNumber ? "" : "not") + " a happy number.");
 }
 
-void TestLeetCode127(void)
-{
-    Logger::WriteMessage("Test Leet Code 127");
-    unordered_set<string> wordList = { "hot","dot","dog","lot","log" };
-    vector<string> words;
-    for (string x : wordList) words.push_back(x);
-    Logger::WriteMessage(words);
-    LeetCode leetCode;
-    string beginWord;
-    string endWord;
-    int step;
-    beginWord = "hit";
-    endWord = "cog";
-    step = leetCode.wordLadderLength(beginWord, endWord, wordList);
-    Logger::WriteMessage("The step from " + beginWord + " to " + endWord + " is " + to_string(step));
-}
-
-void TestLeetCode126(void)
-{
-    Logger::WriteMessage("Test Leet Code 126");
-    unordered_set<string> wordList = { "hot","dot","dog","lot","log" };
-    vector<string> words;
-    for (string x : wordList) words.push_back(x);
-    Logger::WriteMessage(words);
-    LeetCode leetCode;
-    string beginWord;
-    string endWord;
-    vector<vector<string>> result;
-    beginWord = "hit";
-    endWord = "cog";
-    result = leetCode.findLadders(beginWord, endWord, wordList);
-    for (size_t i = 0; i < result.size(); i++)
-    {
-        Logger::WriteMessage(result[i]);
-    }
-}
 
 void TestLeetCode374(void)
 {
@@ -2237,21 +2094,6 @@ void TestLeetCode330(void)
     Logger::WriteMessage("To reach " + to_string(n) + ", we should patch " + to_string(result) + " numbers");
 }
 
-void TestLeetCode130(void)
-{
-    Logger::WriteMessage("Test Leet Code 130");
-    LeetCode leetCode;
-    vector<vector<char>> board = 
-    {
-        {'X', 'X', 'X', 'X' },
-        {'X', 'O', 'O', 'X' },
-        {'X', 'X', 'O', 'X' },
-        {'X', 'O', 'X', 'X' }
-    };
-    leetCode.solveSurrounding(board);
-    Logger::WriteMessage(board);
-}
-
 void TestLeetCode282(void)
 {
     Logger::WriteMessage("Test Leet Code 282");
@@ -2707,21 +2549,6 @@ void TestLeetCode221(void)
     int max_area = leetCode.maximalSquare(matrix);
     Logger::WriteMessage(matrix);
     Logger::WriteMessage("max_area = " + to_string(max_area));
-}
-
-void TestLeetCode302(void)
-{
-    Logger::WriteMessage("Test Leet Code 302");
-    LeetCode leetCode;
-    vector<vector<char>> image =
-    {
-        { '0', '0', '1', '0' },
-        { '0', '1', '1', '0' },
-        { '0' ,'1', '0', '0' },
-    };
-    Logger::WriteMessage(image);
-    int min_area = leetCode.minArea(image, 0, 2);
-    Logger::WriteMessage("min_area = " + to_string(min_area));
 }
 
 void TestLeetCode334(void)
@@ -3392,23 +3219,6 @@ void TestLeetCode272(void)
     leetCode.freeTreeNodes(root);
 }
 
-void TestLeetCode407(void)
-{
-    Logger::WriteMessage("Test Leet Code 407");
-    LeetCode leetCode;
-    vector<vector<int>> heightMap = 
-    {
-        { 1,4,3,1,3,2 },
-        { 3,2,1,3,2,4 },
-        { 2,3,3,2,3,1 }
-    };
-    int result = leetCode.trapRainWater(heightMap);
-    Logger::WriteMessage(heightMap );
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
-
-
 void TestLeetCode496(void)
 {
     Logger::WriteMessage("Test Leet Code 496");
@@ -3936,20 +3746,6 @@ void TestLeetCode538(void)
     Logger::WriteMessage("new tree: " + output);
     leetCode.freeTreeNodes(root);
     leetCode.freeTreeNodes(new_root);
-}
-
-void TestLeetCode542(void)
-{
-    LeetCode leetCode;
-    vector<vector<int>> matrix = { {0, 0, 0}, {0, 1, 0}, {0, 0, 0} };
-    Logger::WriteMessage(matrix);
-    vector<vector<int>> result = leetCode.updateMatrix(matrix);
-    Logger::WriteMessage(result);
-
-    matrix = { { 0, 0, 0 },{ 0, 1, 0 },{ 1, 1, 1 } };
-    Logger::WriteMessage(matrix);
-    result = leetCode.updateMatrix(matrix);
-    Logger::WriteMessage(result);
 }
 
 void TestLeetCode521(void)
@@ -5567,20 +5363,6 @@ void TestLeetCode660(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
-void TestLeetCode690(void)
-{
-    LeetCode leetCode;
-    vector<Employee> employees_raw = { {1, 5,{2, 3} }, {2, 3,{}}, {3, 3, {}} };
-    vector<Employee *> employees;
-    for (size_t i = 0; i < employees_raw.size(); i++)
-    {
-        employees.push_back(&employees_raw[i]);
-    }
-
-    int result = leetCode.getImportance(employees, 1);
-    Logger::WriteMessage("Result = " + to_string(result));
-}
-
 void TestLeetCode687(void)
 {
     LeetCode leetCode;
@@ -5819,69 +5601,6 @@ void TestLeetCode717(void)
     result = leetCode.isOneBitCharacter(bits);
     Logger::WriteMessage(bits);
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
-}
-
-void TestLeetCode675(void)
-{
-    Logger::WriteMessage("Test Leet Code");
-    LeetCode leetCode;
-    vector<vector<int>> forest = 
-    { 
-        {1,2,3},
-        {0,0,4},
-        {5,6,7}
-    };
-    int result = leetCode.cutOffTree(forest);
-    Logger::WriteMessage(forest);
-    Logger::WriteMessage("result = " + (string)to_string(result));
-
-    forest =
-    {
-        { 1,2,3 },
-        { 0,0,0 },
-        { 7,6,5 }
-    };
-    result = leetCode.cutOffTree(forest);
-    Logger::WriteMessage(forest);
-    Logger::WriteMessage("result = " + (string)to_string(result));
-
-    forest =
-    {
-        { 2,3,4 },
-        { 0,0,5 },
-        { 8,7,6 }
-    };
-    result = leetCode.cutOffTree(forest);
-    Logger::WriteMessage(forest);
-    Logger::WriteMessage("result = " + (string)to_string(result));
-
-    forest = 
-    { 
-        {0, 0, 0, 3528, 2256, 9394, 3153},
-        { 8740, 1758, 6319, 3400, 4502, 7475, 6812 },
-        { 0, 0, 3079, 6312, 0, 0, 0 },
-        { 6828, 0, 0, 0, 0, 0, 8145 },
-        { 6964, 4631, 0, 0, 0, 4811, 0 },
-        { 0, 0, 0, 0, 9734, 4696, 4246 },
-        { 3413, 8887, 0, 4766, 0, 0, 0 },
-        { 7739, 0, 0, 2920, 0, 5321, 2250 },
-        { 3032, 0, 3015, 0, 3269, 8582, 0 }
-    };
-    result = leetCode.cutOffTree(forest);
-    Logger::WriteMessage(forest);
-    Logger::WriteMessage("result = " + (string)to_string(result));
-
-    forest = 
-    { 
-        { 54581641, 64080174, 24346381, 69107959}, 
-        { 86374198, 61363882, 68783324, 79706116}, 
-        { 668150,   92178815, 89819108, 94701471 }, 
-        { 83920491, 22724204, 46281641, 47531096 }, 
-        { 89078499, 18904913, 25462145, 60813308 }
-    };
-    result = leetCode.cutOffTree(forest);
-    Logger::WriteMessage(forest);
-    Logger::WriteMessage("result = " + (string)to_string(result));
 }
 
 void TestLeetCode712(void)
@@ -6244,28 +5963,6 @@ void TestLeetCode730(void)
     Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
 };
 
-void TestLeetCode733(void)
-{
-    LeetCode leetCode;
-    vector<vector<int>> image = { {1, 1, 1},{1, 1, 0},{1, 0, 1} };
-    int sr = 1, sc = 1, newColor = 2;
-    vector<vector<int>> result = leetCode.floodFill(image, sr, sc, newColor);
-    Logger::WriteMessage(image);
-    Logger::WriteMessage(result);
-
-    image = { { 0, 0, 0 },{ 0, 1, 1 } };
-    sr = 1, sc = 1, newColor = 1;
-    result = leetCode.floodFill(image, sr, sc, newColor);
-    Logger::WriteMessage(image);
-    Logger::WriteMessage(result);
-
-    image = { { 0, 0, 1 },{ 0, 1, 1 } };
-    sr = 1, sc = 1, newColor = 1;
-    result = leetCode.floodFill(image, sr, sc, newColor);
-    Logger::WriteMessage(image);
-    Logger::WriteMessage(result);
-};
-
 void TestLeetCode734(void)
 {
     LeetCode leetCode;
@@ -6538,24 +6235,6 @@ void TestLeetCode540(void)
     Logger::WriteMessage("result:" + to_string(result));
 }
 
-void TestLeetCode743(void)
-{
-    LeetCode leetCode;
-    int N = 3;
-    int K = 1;
-    vector<vector<int>> times = { { 1, 2, 1 },{ 2, 3, 2 },{ 1, 3, 4 } };
-    int result = leetCode.networkDelayTime(times, N, K);
-    Logger::WriteMessage(times);
-    Logger::WriteMessage("N = " + to_string(N) + "; K = " + to_string(K) + " result = " + to_string(result));
-
-    N = 5;
-    K = 1;
-    times = { {1, 2, 1}, { 2, 3, 1 }, { 3, 4, 1 }, { 4, 5, 1 } };
-    result = leetCode.networkDelayTime(times, N, K);
-    Logger::WriteMessage(times);
-    Logger::WriteMessage("N = " + to_string(N) + "; K = " + to_string(K) + " result = " + to_string(result));
-}
-
 void TestLeetCode742(void)
 {
     Logger::WriteMessage("Test Leet Code 742");
@@ -6693,35 +6372,6 @@ void TestLeetCode753(void)
     Logger::WriteMessage("result = " + result);
 }
 
-void TestLeetCode752(void)
-{
-    Logger::WriteMessage("Test Leet Code 752");
-    LeetCode leetCode;
-    vector<string> deadends = { "0201", "0101", "0102", "1212", "2002" };
-    string target = "0202";
-    int result = leetCode.openLock(deadends, target);
-    Logger::WriteMessage(deadends);
-    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
-
-    deadends = { "8888" };
-    target = "0009";
-    result = leetCode.openLock(deadends, target);
-    Logger::WriteMessage(deadends);
-    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
-
-    deadends = { "8887","8889","8878","8898","8788","8988","7888", "9888" };
-    target = "8888";
-    result = leetCode.openLock(deadends, target);
-    Logger::WriteMessage(deadends);
-    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
-
-    deadends = { "0000" };
-    target = "8888";
-    result = leetCode.openLock(deadends, target);
-    Logger::WriteMessage(deadends);
-    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
-}
-
 void TestLeetCode751(void)
 {
     Logger::WriteMessage("Test Leet Code 752");
@@ -6732,7 +6382,6 @@ void TestLeetCode751(void)
     Logger::WriteMessage("ip = " + ip + "; n = " + to_string(n));
     Logger::WriteMessage(result);
 }
-
 
 void TestLeetCode341(void)
 {
@@ -7024,32 +6673,6 @@ void TestLeetCode767(void)
     Logger::WriteMessage("S = " + S + "; result = " + result);
 }
 
-void TestLeetCode773(void)
-{
-    Logger::WriteMessage("Test Leet Code 773");
-    LeetCode leetCode;
-    vector<vector<int>> board = { {1, 2, 3},{4, 0, 5} };
-    int result = leetCode.slidingPuzzle(board);
-    Logger::WriteMessage(board);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    board = { {1, 2, 3},{5, 4, 0} };
-    result = leetCode.slidingPuzzle(board);
-    Logger::WriteMessage(board);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    board = { {4, 1, 2},{5, 0, 3} };
-    result = leetCode.slidingPuzzle(board);
-    Logger::WriteMessage(board);
-    Logger::WriteMessage("result = " + to_string(result));
-        
-    board = { {3, 2, 4},{1, 5, 0} };
-    result = leetCode.slidingPuzzle(board);
-    Logger::WriteMessage(board);
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
-
 void TestLeetCode775(void)
 {
     Logger::WriteMessage("Test Leet Code 775");
@@ -7157,49 +6780,6 @@ void TestLeetCode783(void)
     int min_diff = leetCode.minDiffInBST(root);
     Logger::WriteMessage("min_diff = " + to_string(min_diff));
 }
-
-
-void TestLeetCode785(void)
-{
-    Logger::WriteMessage("Test Leet Code 785");
-    LeetCode leetCode;
-    vector<vector<int>> graph = { {1,3},{0,2},{1,3},{0,2} };
-    bool result = leetCode.isBipartite(graph);
-    Logger::WriteMessage(graph);
-    Logger::WriteMessage("result = " + (string) (result ? "true" : "false"));
-
-    graph = { {1, 2, 3},{0, 2},{0, 1, 3},{0, 2} };
-    result = leetCode.isBipartite(graph);
-    Logger::WriteMessage(graph);
-    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
-}
-
-void TestLeetCode787(void)
-{
-    Logger::WriteMessage("Test Leet Code 787");
-    LeetCode leetCode;
-    vector<vector<int>> flights = { {0,1,100},{1,2,100},{0,2,500} };
-    int n = 3;
-    int src = 0;
-    int dst = 2;
-    int k = 1;
-    int result = leetCode.findCheapestPrice(n, flights, src, dst, k);
-    Logger::WriteMessage(flights);
-    Logger::WriteMessage("n = " + to_string(n) + "; src = " + to_string(src) + 
-                         "; dst = " + to_string(dst) + "; k = " + to_string(k) + 
-                         "; result = " + to_string(result));
-
-    n = 3;
-    src = 0;
-    dst = 2;
-    k = 0;
-    result = leetCode.findCheapestPrice(n, flights, src, dst, k);
-    Logger::WriteMessage(flights);
-    Logger::WriteMessage("n = " + to_string(n) + "; src = " + to_string(src) +
-        "; dst = " + to_string(dst) + "; k = " + to_string(k) +
-        "; result = " + to_string(result));
-}
-
 
 void TestLeetCode782(void)
 {
@@ -7540,29 +7120,6 @@ void TestLeetCode819(void)
     Logger::WriteMessage(paragraph);
     Logger::WriteMessage(banned);
     Logger::WriteMessage("result = " + result);
-}
-
-void TestLeetCode818(void)
-{
-    Logger::WriteMessage("Test Leet Code 818");
-    LeetCode leetCode;
-    string paragraph = "Bob hit a ball, the hit BALL flew far after it was hit.";
-    vector<string> banned = { "hit" };
-    int target = 20;
-    int result = leetCode.racecar(target);
-    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
-
-    target = 11;
-    result = leetCode.racecar(target);
-    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
-
-    target = 4;
-    result = leetCode.racecar(target);
-    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
-
-    target = 6;
-    result = leetCode.racecar(target);
-    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
 }
 
 void TestLeetCode821(void)
@@ -8138,33 +7695,6 @@ void TestLeetCode848(void)
     Logger::WriteMessage("S = " + S + "; result = " + result);
 }
 
-
-
-void TestLeetCode854(void)
-{
-    Logger::WriteMessage("Test Leet Code 854");
-    LeetCode leetCode;
-    string A = "ab";
-    string B = "ba";
-    int result = leetCode.kSimilarity(A, B);
-    Logger::WriteMessage("A = " + A + "; B = " + B + "; result = " + to_string(result));
-
-    A = "abc";
-    B = "bca";
-    result = leetCode.kSimilarity(A, B);
-    Logger::WriteMessage("A = " + A + "; B = " + B + "; result = " + to_string(result));
-
-    A = "abac";
-    B = "baca";
-    result = leetCode.kSimilarity(A, B);
-    Logger::WriteMessage("A = " + A + "; B = " + B + "; result = " + to_string(result));
-
-    A = "aabc";
-    B = "abca";
-    result = leetCode.kSimilarity(A, B);
-    Logger::WriteMessage("A = " + A + "; B = " + B + "; result = " + to_string(result));
-}
-
 void TestLeetCode853(void)
 {
     Logger::WriteMessage("Test Leet Code 853");
@@ -8610,31 +8140,6 @@ void TestLeetCode865(void)
     string output = leetCode.serialize(result);
     Logger::WriteMessage("input = " + input + "; output = " + output);
     leetCode.freeTreeNodes(root);
-}
-
-void TestLeetCode864(void)
-{
-    Logger::WriteMessage("Test Leet Code 864");
-    LeetCode leetCode;
-    vector<string> grid = { "@.a.#","###.#","b.A.B" };
-    int result = leetCode.shortestPathAllKeys(grid);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    grid = { "@..aA","..B#.","....b" };
-    result = leetCode.shortestPathAllKeys(grid);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    grid = { ".@aA" };
-    result = leetCode.shortestPathAllKeys(grid);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("result = " + to_string(result));
-    
-    grid = { "@...a", ".###A", "b.BCc" };
-    result = leetCode.shortestPathAllKeys(grid);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCode868(void)
@@ -9408,32 +8913,6 @@ void TestLeetCode881(void)
     Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
 }
 
-void TestLeetCode433(void)
-{
-    Logger::WriteMessage("Test Leet Code 433");
-    LeetCode leetCode;
-    string start = "AACCGGTT";
-    string end = "AACCGGTA";
-    vector<string> bank = { "AACCGGTA" };
-    int result = leetCode.minMutation(start, end, bank);
-    Logger::WriteMessage(bank);
-    Logger::WriteMessage("start = " + start + "; end = " + end + "; result = " + to_string(result));
-
-    start = "AACCGGTT";
-    end = "AAACGGTA";
-    bank = { "AACCGGTA", "AACCGCTA", "AAACGGTA" };
-    result = leetCode.minMutation(start, end, bank);
-    Logger::WriteMessage(bank);
-    Logger::WriteMessage("start = " + start + "; end = " + end + "; result = " + to_string(result));
-
-    start = "AAAAACCC";
-    end = "AACCCCCC";
-    bank = { "AAAACCCC", "AAACCCCC", "AACCCCCC" };
-    result = leetCode.minMutation(start, end, bank);
-    Logger::WriteMessage(bank);
-    Logger::WriteMessage("start = " + start + "; end = " + end + "; result = " + to_string(result));
-}
-
 void TestLeetCode457(void)
 {
     Logger::WriteMessage("Test Leet Code 457");
@@ -9663,27 +9142,6 @@ void TestLeetCode885(void)
     result = leetCode.spiralMatrixIII(R, C, r0, c0);
     Logger::WriteMessage("R = " + to_string(R) + "; C = " + to_string(C) + "; r0 = " + to_string(r0) + "; c0 = " + to_string(c0));
     Logger::WriteMessage(result);
-}
-
-
-
-void TestLeetCode882(void)
-{
-    Logger::WriteMessage("Test Leet Code 882");
-    LeetCode leetCode;
-    int M = 6;
-    int N = 3;
-    vector<vector<int>> edges = { { 0,1,10 },{ 0,2,1 },{ 1,2,2 } };
-    int result = leetCode.reachableNodes(edges, M, N);
-    Logger::WriteMessage(edges);
-    Logger::WriteMessage("M = " + to_string(M) + "; N = " + to_string(N) + "; result = " + to_string(result));
-
-    M = 10;
-    N = 4;
-    edges = { { 0,1,4 },{ 1,2,6 },{ 0,2,8 }, { 1,3,1 } };
-    result = leetCode.reachableNodes(edges, M, N);
-    Logger::WriteMessage(edges);
-    Logger::WriteMessage("M = " + to_string(M) + "; N = " + to_string(N) + "; result = " + to_string(result));
 }
 
 void TestLeetCode888(void)
@@ -10123,24 +9581,6 @@ void TestLeetCode910(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode909(void)
-{
-    Logger::WriteMessage("Test Leet Code 909");
-    LeetCode leetCode;
-    vector<vector<int>> board = 
-    {
-        {-1,-1,-1,-1,-1,-1},
-        {-1,-1,-1,-1,-1,-1},
-        {-1,-1,-1,-1,-1,-1},
-        {-1,35,-1,-1,13,-1},
-        {-1,-1,-1,-1,-1,-1},
-        {-1,15,-1,-1,-1,-1}
-    };
-    int result = leetCode.snakesAndLadders(board);
-    Logger::WriteMessage(board);
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
 void TestLeetCode917(void)
 {
     Logger::WriteMessage("Test Leet Code 917");
@@ -10404,92 +9844,6 @@ void TestLeetCode926(void)
     Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
 }
 
-void TestLeetCode924(void)
-{
-    Logger::WriteMessage("Test Leet Code 924");
-    LeetCode leetCode;
-
-    vector<vector<int>> graph = { { 1, 0, 0, 0 },{ 0, 1, 0, 0 },{ 0, 0, 1, 1 }, { 0, 0, 1, 1 } };
-    vector<int> initial = { 3, 1 };
-    int result = leetCode.minMalwareSpread(graph, initial);
-    Logger::WriteMessage(graph);
-    Logger::WriteMessage(initial);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    graph = { { 1, 1, 0 },{ 1, 1, 0 },{ 0, 0, 1 } };
-    initial = { 0, 1 };
-    result = leetCode.minMalwareSpread(graph, initial);
-    Logger::WriteMessage(graph);
-    Logger::WriteMessage(initial);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    graph = { { 1, 0, 0 },{ 0, 1, 0 },{ 0, 0, 1 } };
-    initial = { 0, 2 };
-    result = leetCode.minMalwareSpread(graph, initial);
-    Logger::WriteMessage(graph);
-    Logger::WriteMessage(initial);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    graph = { { 1, 1, 1 },{ 1, 1, 1 },{ 1, 1, 1 } };
-    initial = { 1, 2 };
-    result = leetCode.minMalwareSpread(graph, initial);
-    Logger::WriteMessage(graph);
-    Logger::WriteMessage(initial);
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
-void TestLeetCode928(void)
-{
-    Logger::WriteMessage("Test Leet Code 928");
-    LeetCode leetCode;
-    vector<vector<int>> graph = 
-    { 
-        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 1, 0, 0, 1, 0 },
-        { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
-        { 0, 0, 0, 0, 0, 1, 0, 0, 1, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 } 
-    }
-    ;
-    vector<int> initial = { 3, 8 };
-    int result = leetCode.minMalwareSpreadII(graph, initial);
-    Logger::WriteMessage(graph);
-    Logger::WriteMessage(initial);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    graph = { { 1, 1, 0 },{ 1, 1, 0 },{ 0, 0, 1 } };
-    initial = { 0, 1 };
-    result = leetCode.minMalwareSpreadII(graph, initial);
-    Logger::WriteMessage(graph);
-    Logger::WriteMessage(initial);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    graph = { { 1, 1, 0 },{ 1, 1, 1 },{ 0, 1, 1 } };
-    initial = { 0, 1 };
-    result = leetCode.minMalwareSpreadII(graph, initial);
-    Logger::WriteMessage(graph);
-    Logger::WriteMessage(initial);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    graph = { { 1,1,0,0 },{ 1,1,1,0 },{ 0,1,1,1 }, { 0,0,1,1 } };
-    initial = { 0, 1 };
-    result = leetCode.minMalwareSpreadII(graph, initial);
-    Logger::WriteMessage(graph);
-    Logger::WriteMessage(initial);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    graph = { { 1, 1, 1 },{ 1, 1, 1 },{ 1, 1, 1 } };
-    initial = { 1, 2 };
-    result = leetCode.minMalwareSpreadII(graph, initial);
-    Logger::WriteMessage(graph);
-    Logger::WriteMessage(initial);
-    Logger::WriteMessage("result = " + to_string(result));
-}
 
 void TestLeetCode927(void)
 {
@@ -10603,25 +9957,6 @@ void TestLeetCode933(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode934(void)
-{
-    Logger::WriteMessage("Test Leet Code 934");
-    LeetCode leetCode;
-    vector<vector<int>> A = { {0, 1},{1, 0} };
-    Logger::WriteMessage(A);
-    int result = leetCode.shortestBridge(A);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    A = { {0,1,0},{0,0,0},{0,0,1} };
-    Logger::WriteMessage(A);
-    result = leetCode.shortestBridge(A);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    A = { {1,1,1,1,1},{1,0,0,0,1},{1,0,1,0,1},{1,0,0,0,1},{1,1,1,1,1} };
-    Logger::WriteMessage(A);
-    result = leetCode.shortestBridge(A);
-    Logger::WriteMessage("result = " + to_string(result));
-}
 
 void TestLeetCode936(void)
 {
@@ -11135,23 +10470,6 @@ void TestLeetCode965(void)
     Logger::WriteMessage("input = " + input + "; result = " + (string)(result ? "true" : "false"));
 }
 
-void TestLeetCode967(void)
-{
-    Logger::WriteMessage("Test Leet Code 967");
-    LeetCode leetCode;
-    int N = 3;
-    int K = 7;
-    vector<int> result = leetCode.numsSameConsecDiff(N, K);
-    Logger::WriteMessage("N = " + to_string(N) + "; K = " + to_string(K));
-    Logger::WriteMessage(result);
-
-    N = 2;
-    K = 1;
-    result = leetCode.numsSameConsecDiff(N, K);
-    Logger::WriteMessage("N = " + to_string(N) + "; K = " + to_string(K));
-    Logger::WriteMessage(result);
-}
-
 void TestLeetCode970(void)
 {
     Logger::WriteMessage("Test Leet Code 970");
@@ -11649,30 +10967,6 @@ void TestLeetCode995(void)
     Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
 }
 
-void TestLeetCode994(void)
-{
-    Logger::WriteMessage("Test Leet Code 994");
-    LeetCode leetCode;
-    vector<vector<int>> grid = { {2, 1, 1},{1, 1, 0},{0, 1, 1} };
-    int result = leetCode.orangesRotting(grid);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    grid = { {2,1,1},{0,1,1},{1,0,1} };
-    result = leetCode.orangesRotting(grid);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    grid = { {0,2} };
-    result = leetCode.orangesRotting(grid);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    grid = { {0} };
-    result = leetCode.orangesRotting(grid);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("result = " + to_string(result));
-}
 
 void TestLeetCode999(void)
 {
@@ -12108,21 +11402,6 @@ void TestLeetCode1018(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode1020(void)
-{
-    Logger::WriteMessage("Test Leet Code 1020");
-    LeetCode leetCode;
-    vector<vector<int>> A = { {0, 0, 0, 0},{1, 0, 1, 0},{0, 1, 1, 0},{0, 0, 0, 0} };
-    Logger::WriteMessage(A);
-    int result = leetCode.numEnclaves(A);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    A = { {0,1,1,0},{0,0,1,0},{0,0,1,0},{0,0,0,0} };
-    Logger::WriteMessage(A);
-    result = leetCode.numEnclaves(A);
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
 void TestLeetCode1021(void)
 {
     Logger::WriteMessage("Test Leet Code 1021");
@@ -12314,29 +11593,6 @@ void TestLeetCode1029(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode1030(void)
-{
-    Logger::WriteMessage("Test Leet Code 1030");
-    LeetCode leetCode;
-    int R = 1, C = 2, r0 = 0, c0 = 0;
-    vector<vector<int>> result = leetCode.allCellsDistOrder(R, C, r0, c0);
-    Logger::WriteMessage("R = " + to_string(R) + "; C = " + to_string(C) + 
-                         "; r0 = " + to_string(r0) + "; c0 = " + to_string(c0));
-    Logger::WriteMessage(result);
-
-    R = 2, C = 2, r0 = 0, c0 = 1;
-    result = leetCode.allCellsDistOrder(R, C, r0, c0);
-    Logger::WriteMessage("R = " + to_string(R) + "; C = " + to_string(C) +
-        "; r0 = " + to_string(r0) + "; c0 = " + to_string(c0));
-    Logger::WriteMessage(result);
-
-    R = 2, C = 3, r0 = 1, c0 = 2;
-    result = leetCode.allCellsDistOrder(R, C, r0, c0);
-    Logger::WriteMessage("R = " + to_string(R) + "; C = " + to_string(C) +
-        "; r0 = " + to_string(r0) + "; c0 = " + to_string(c0));
-    Logger::WriteMessage(result);
-}
-
 void TestLeetCode1031(void)
 {
     Logger::WriteMessage("Test Leet Code 1031");
@@ -12432,40 +11688,6 @@ void TestLeetCode1032(void)
 }
 
 
-void TestLeetCode1034(void)
-{
-    Logger::WriteMessage("Test Leet Code 1034");
-    LeetCode leetCode;
-    vector<vector<int>> grid = { {1, 1},{1, 2} };
-    int r0 = 0;
-    int c0 = 0;
-    int color = 3;
-    vector<vector<int>> result = leetCode.colorBorder(grid, r0, c0, color);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("r0 = " + to_string(r0) + "; c0 = " + to_string(c0) +
-        "; color = " + to_string(color));
-    Logger::WriteMessage(result);
-
-    grid = { {1,2,2},{2,3,2} };
-    r0 = 0;
-    c0 = 1;
-    color = 3;
-    result = leetCode.colorBorder(grid, r0, c0, color);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("r0 = " + to_string(r0) + "; c0 = " + to_string(c0) +
-        "; color = " + to_string(color));
-    Logger::WriteMessage(result);
-    
-    grid = { {1, 1, 1},{1, 1, 1},{1, 1, 1} };
-    r0 = 1;
-    c0 = 1; 
-    color = 2;
-    result = leetCode.colorBorder(grid, r0, c0, color);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("r0 = " + to_string(r0) + "; c0 = " + to_string(c0) +
-        "; color = " + to_string(color));
-    Logger::WriteMessage(result);
-}
 
 void TestLeetCode1038(void)
 {
@@ -12520,39 +11742,6 @@ void TestLeetCode1041(void)
     instructions = "GL";
     result = leetCode.isRobotBounded(instructions);
     Logger::WriteMessage("instruction = " + instructions + "; result = " + (string)(result ? "true" : "false"));
-}
-
-void TestLeetCode1042(void)
-{
-    Logger::WriteMessage("Test Leet Code 1042");
-    LeetCode leetCode;
-    int N = 3;
-    vector<vector<int>> paths = { {1, 2},{2, 3},{3, 1} };
-    vector<int> result = leetCode.gardenNoAdj(N, paths);
-    Logger::WriteMessage("N = " + to_string(N));
-    Logger::WriteMessage(paths);
-    Logger::WriteMessage(result);
-
-    N = 4;
-    paths = { {1, 2},{3, 4} };
-    result = leetCode.gardenNoAdj(N, paths);
-    Logger::WriteMessage("N = " + to_string(N));
-    Logger::WriteMessage(paths);
-    Logger::WriteMessage(result);
-
-    N = 4;
-    paths = { {1, 2},{2, 3},{3, 4},{4, 1},{1, 3},{2, 4} };
-    result = leetCode.gardenNoAdj(N, paths);
-    Logger::WriteMessage("N = " + to_string(N));
-    Logger::WriteMessage(paths);
-    Logger::WriteMessage(result);
-
-    N = 4;
-    paths = { {3, 4},{4, 2},{3, 2},{1, 3}};
-    result = leetCode.gardenNoAdj(N, paths);
-    Logger::WriteMessage("N = " + to_string(N));
-    Logger::WriteMessage(paths);
-    Logger::WriteMessage(result);
 }
 
 void TestLeetCode1036(void)
@@ -12978,21 +12167,6 @@ void TestLeetCode1090(void)
     Logger::WriteMessage(labels);
     Logger::WriteMessage("num_wanted = " + to_string(num_wanted) +
         "; use_limit = " + to_string(use_limit) + "; result = " + to_string(result));
-}
-
-void TestLeetCode1091(void)
-{
-    Logger::WriteMessage("Test Leet Code 1091");
-    LeetCode leetCode;
-    vector<vector<int>> grid = { {0, 1},{1, 0} };
-    Logger::WriteMessage(grid);
-    int result = leetCode.shortestPathBinaryMatrix(grid);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    grid = { {0, 0, 0},{1, 1, 0},{1, 1, 0} };
-    Logger::WriteMessage(grid);
-    result = leetCode.shortestPathBinaryMatrix(grid);
-    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCode1092(void)
@@ -13565,31 +12739,6 @@ void TestLeetCode1161(void)
     int result = leetCode.maxLevelSum(root);
     Logger::WriteMessage("input = " + input + "result = " + to_string(result));
     leetCode.freeTreeNodes(root);
-}
-
-void TestLeetCode1162(void)
-{
-    Logger::WriteMessage("Test Leet Code 1162");
-    LeetCode leetCode;
-    vector<vector<int>> grid = { {1, 0, 1},{0, 0, 0},{1, 0, 1} };
-    int result = leetCode.maxLandDistance(grid);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    grid = { {1, 0, 0},{0, 0, 0},{0, 0, 0}};
-    result = leetCode.maxLandDistance(grid);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    grid = { {0, 0, 0},{0, 0, 0},{0, 0, 0} };
-    result = leetCode.maxLandDistance(grid);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    grid = { {1, 1, 1},{1, 1, 1},{1, 1, 1} };
-    result = leetCode.maxLandDistance(grid);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCode1163(void)
@@ -14214,7 +13363,6 @@ void main(int argc, char* argv[])
     TestLeetCode1185();
     TestLeetCode1187();
     TestLeetCode1183();
-    TestLeetCode407();
     TestLeetCode778();
     TestLeetCode773();
     TestLeetCode815();
@@ -14232,7 +13380,6 @@ void main(int argc, char* argv[])
     TestLeetCode1169();
     TestLeetCode1063();
     TestLeetCode1163();
-    TestLeetCode1162();
     TestLeetCode1161();
     TestLeetCode1152();
     TestLeetCode1156();
@@ -14273,7 +13420,6 @@ void main(int argc, char* argv[])
     TestLeetCode1087();
     TestLeetCode1086();
     TestLeetCode1092();
-    TestLeetCode1091();
     TestLeetCode1090();
     TestLeetCode1089();
     TestLeetCode1062();
@@ -14300,15 +13446,12 @@ void main(int argc, char* argv[])
     TestLeetCode1046();
     TestLeetCode1043();
     TestLeetCode1036();
-    TestLeetCode1042();
     TestLeetCode1041();
     TestLeetCode1040();
     TestLeetCode1038();
     TestLeetCode1037();
-    TestLeetCode1034();
     TestLeetCode1032();
     TestLeetCode1031();
-    TestLeetCode1030();
     TestLeetCode1029();
     TestLeetCode912();
     TestLeetCode1027();
@@ -14319,7 +13462,6 @@ void main(int argc, char* argv[])
     TestLeetCode1023();
     TestLeetCode1021();
     TestLeetCode1022();
-    TestLeetCode1020();
     TestLeetCode1018();
     TestLeetCode1017();
     TestLeetCode1014();
@@ -14341,7 +13483,6 @@ void main(int argc, char* argv[])
     TestLeetCode998();
     TestLeetCode997();
     TestLeetCode999();
-    TestLeetCode994();
     TestLeetCode995();
     TestLeetCode993();
     TestLeetCode996();
@@ -14364,7 +13505,6 @@ void main(int argc, char* argv[])
     TestLeetCode971();
     TestLeetCode969();
     TestLeetCode970();
-    TestLeetCode967();
     TestLeetCode965();
     TestLeetCode968();
     TestLeetCode200();
@@ -14375,7 +13515,6 @@ void main(int argc, char* argv[])
     TestLeetCode959();
     TestLeetCode958();
     TestLeetCode957();
-    TestLeetCode882();
     TestLeetCode956();
     TestLeetCode955();
     TestLeetCode954();
@@ -14393,7 +13532,6 @@ void main(int argc, char* argv[])
     TestLeetCode937();
     TestLeetCode935();
     TestLeetCode936();
-    TestLeetCode934();
     TestLeetCode933();
     TestLeetCode9904();
     TestLeetCode931();
@@ -14401,8 +13539,6 @@ void main(int argc, char* argv[])
     TestLeetCode929();
     TestLeetCode918();
     TestLeetCode927();
-    TestLeetCode928();
-    TestLeetCode924();
     TestLeetCode926();
     TestLeetCode925();
     TestLeetCode911();
@@ -14412,7 +13548,6 @@ void main(int argc, char* argv[])
     TestLeetCode916();
     TestLeetCode915();
     TestLeetCode917();
-    TestLeetCode909();
     TestLeetCode920();
     TestLeetCode913();
     TestLeetCode910();
@@ -14478,7 +13613,6 @@ void main(int argc, char* argv[])
     TestLeetCode865();
     TestLeetCode867();
     TestLeetCode868();
-    TestLeetCode864();
     TestLeetCode862();
     TestLeetCode863();
     TestLeetCode861();
@@ -14488,7 +13622,6 @@ void main(int argc, char* argv[])
     TestLeetCode859();
     TestLeetCode855();
     TestLeetCode853();
-    TestLeetCode854();
     TestLeetCode851();
     TestLeetCode848();
     TestLeetCode852();
@@ -14520,7 +13653,6 @@ void main(int argc, char* argv[])
     TestLeetCode820();
     TestLeetCode816();
     TestLeetCode821();
-    TestLeetCode818();
     TestLeetCode819();
     TestLeetCode813();
     TestLeetCode814();
@@ -14546,7 +13678,6 @@ void main(int argc, char* argv[])
     TestLeetCode788();
     TestLeetCode786();
     TestLeetCode782();
-    TestLeetCode787();
     TestLeetCode785();
     TestLeetCode780();
     TestLeetCode783();
@@ -14619,7 +13750,6 @@ void main(int argc, char* argv[])
     TestLeetCode443();
     TestLeetCode711();
     TestLeetCode712();
-    TestLeetCode675();
     TestLeetCode717();
     TestLeetCode713();
     TestLeetCode684();
@@ -14637,7 +13767,6 @@ void main(int argc, char* argv[])
     TestLeetCode693();
     TestLeetCode664();
     TestLeetCode687();
-    TestLeetCode690();
     TestLeetCode660();
     TestLeetCode678();
     TestLeetCode681();
@@ -14846,7 +13975,6 @@ void main(int argc, char* argv[])
     TestLeetCode259();
     TestLeetCode473();
     TestLeetCode334();
-    TestLeetCode302();
     TestLeetCode186();
     TestLeetCode221();
     TestLeetCode271();

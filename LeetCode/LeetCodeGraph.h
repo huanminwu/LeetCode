@@ -2503,6 +2503,168 @@ public:
     bool hasPath(vector<vector<int>>& maze, vector<int>& start, vector<int>& destination);
 
     /// <summary>
+    /// Leet code #675. Cut Off Trees for Golf Event
+    /// </summary>
+    int calculateShortestDistance(vector<vector<int>>& forest, pair<int, int> &source, pair<int, int> &target);
+
+    /// <summary>
+    /// Leet code #675. Cut Off Trees for Golf Event
+    /// You are asked to cut off trees in a forest for a golf event. The 
+    /// forest is represented as a non-negative 2D map, in this map:
+    /// 
+    /// 0 represents the obstacle can't be reached.
+    /// 1 represents the ground can be walked through.
+    /// The place with number bigger than 1 represents a tree can be walked 
+    /// through, and this positive number represents the tree's height.
+    /// You are asked to cut off all the trees in this forest in the order of 
+    /// tree's height - always cut off the tree with lowest height first. And 
+    /// after cutting, the original place has the tree will become a grass 
+    /// (value 1).
+    ///
+    /// You will start from the point (0, 0) and you should output the minimum
+    /// steps you need to walk to cut off all the trees. If you can't cut off 
+    /// all the trees, output -1 in that situation.
+    ///
+    /// You are guaranteed that no two trees have the same height and there is
+    /// at least one tree needs to be cut off.
+    ///
+    /// Example 1:
+    /// Input: 
+    /// [
+    ///   [1,2,3],
+    ///   [0,0,4],
+    ///   [7,6,5]
+    /// ]
+    /// Output: 6
+    /// Example 2:
+    /// Input: 
+    /// [
+    ///   [1,2,3],
+    ///   [0,0,0],
+    ///   [7,6,5]
+    /// ]
+    /// Output: -1
+    /// Example 3:
+    /// Input: 
+    /// [
+    ///    [2,3,4],
+    ///    [0,0,5],
+    ///    [8,7,6]
+    /// ]
+    /// Output: 6
+    /// Explanation: You started from the point (0,0) and you can cut off the 
+    /// tree in (0,0) directly without walking.
+    /// Hint: size of the given matrix will not exceed 50x50.
+    /// </summary>
+    int cutOffTree(vector<vector<int>>& forest);
+
+    /// <summary>
+    /// Leet code #785. Is Graph Bipartite?    
+    ///
+    /// Given a graph, return true if and only if it is bipartite.
+    ///
+    /// Recall that a graph is bipartite if we can split it's set of nodes 
+    /// into two independent subsets A and B such that every edge in the 
+    /// graph has one node in A and another node in B.
+    /// 
+    /// The graph is given in the following form: graph[i] is a list of 
+    /// indexes j for which the edge between nodes i and j exists.  Each node 
+    /// is an integer between 0 and graph.length - 1.  There are no self edges 
+    /// or parallel edges: graph[i] does not contain i, and it doesn't contain 
+    /// any element twice.
+    ///
+    /// Example 1:
+    /// Input: [[1,3], [0,2], [1,3], [0,2]]
+    /// Output: true
+    /// Explanation: 
+    /// The graph looks like this:
+    /// 0----1
+    /// |    |
+    /// |    |
+    /// 3----2
+    /// We can divide the vertices into two groups: {0, 2} and {1, 3}.
+    ///
+    /// Example 2:
+    /// Input: [[1,2,3], [0,2], [0,1,3], [0,2]]
+    /// Output: false
+    /// Explanation: 
+    /// The graph looks like this:
+    /// 0----1
+    /// | \  |
+    /// |  \ |
+    /// 3----2
+    /// We cannot find a way to divide the set of nodes into two independent 
+    /// ubsets.
+    /// 
+    /// Note:
+    /// graph will have length in range [1, 100].
+    /// graph[i] will contain integers in range [0, graph.length - 1].
+    /// graph[i] will not contain i or duplicate values.
+    /// </summary>
+    bool isBipartite(vector<vector<int>>& graph);
+
+    /// <summary>
+    /// Leet code #787. Cheapest Flights Within K Stops    
+    ///
+    /// There are n cities connected by m flights. Each fight starts from 
+    /// city u and arrives at v with a price w.
+    ///
+    /// Now given all the cities and fights, together with starting city src 
+    /// and the destination dst, your task is to find the cheapest price from 
+    /// src to dst with up to k stops. If there is no such route, output -1.
+    ///
+    /// Example 1:
+    /// Input: 
+    /// n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
+    /// src = 0, dst = 2, k = 1
+    /// Output: 200
+    /// Explanation: 
+    /// The graph looks like this:
+    ///
+    /// The cheapest price from city 0 to city 2 with at most 1 stop costs 200, 
+    /// as marked red in the picture.
+    /// Example 2:
+    /// Input: 
+    /// n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
+    /// src = 0, dst = 2, k = 0
+    /// Output: 500
+    /// Explanation: 
+    /// The graph looks like this:
+    ///
+    /// The cheapest price from city 0 to city 2 with at most 0 stop costs 500, 
+    /// as marked blue in the picture.
+    /// Note:
+    ///
+    /// 1. The number of nodes n will be in range [1, 100], with nodes labeled 
+    ///    from 0 to n - 1.
+    /// 2. The size of flights will be in range [0, n * (n - 1) / 2].
+    /// 3. The format of each flight will be (src, dst, price).
+    /// 4. The price of each flight will be in the range [1, 10000].
+    /// 5. k is in the range of [0, n - 1].
+    /// 6. There will not be any duplicated flights or self cycles.
+    /// </summary>
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K);
+
+    /// <summary>
+    /// Leet code #407. Trapping Rain Water II  
+    /// 
+    /// Given an m x n matrix of positive integers representing the height of each unit cell 
+    /// in a 2D elevation map, compute the volume of water it is able to trap after raining. 
+    ///
+    /// Note:
+    /// Both m and n are less than 110. The height of each unit cell is greater than 0 and is less than 20,000. 
+    /// Example: 
+    /// Given the following 3x6 height map:
+    /// [
+    ///   [1,4,3,1,3,2],
+    ///   [3,2,1,3,2,4],
+    ///   [2,3,3,2,3,1]
+    /// ]
+    /// Return 4.
+    /// </summary>
+    int trapRainWater(vector<vector<int>>& heightMap);
+
+    /// <summary>
     /// Leet code #1311. Get Watched Videos by Your Friends
     /// 
     /// Medium

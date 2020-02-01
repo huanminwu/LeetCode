@@ -381,6 +381,39 @@ public:
     vector<string> restoreIpAddresses(string s);
 
     /// <summary>
+    /// Get word ladder path  
+    /// </summary>
+    vector<vector<string>> findWordLadderPath(string beginWord, string endWord,
+        unordered_map<string, unordered_set<string>>& word_map);
+
+    /// <summary>
+    /// Leet code #126. Word Ladder II  
+    ///
+    /// Given two words (beginWord and endWord), and a dictionary's word list, 
+    /// find the length of shortest transformation sequence from beginWord 
+    /// to endWord, such that: 
+    /// 1.Only one letter can be changed at a time.
+    /// 2.Each intermediate word must exist in the word list.
+    /// For example,
+    /// Given:
+    /// beginWord = "hit"
+    /// endWord = "cog"
+    /// wordList = ["hot","dot","dog","lot","log"]
+    /// As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog", 
+    /// Return
+    /// [
+    ///   ["hit", "hot", "dot", "dog", "cog"],
+    ///   ["hit", "hot", "lot", "log", "cog"]
+    /// ]
+    /// Note:
+    /// All words have the same length.
+    /// All words contain only lowercase alphabetic characters.
+    /// </summary>
+    vector<vector<string>> findLadders(string beginWord, string endWord,
+        unordered_set<string> &wordList);
+
+
+    /// <summary>
     /// Leet code #216. Combination Sum III 
     /// </summary>
     vector<vector<int>> combinationSum3(int k, int n, int start);

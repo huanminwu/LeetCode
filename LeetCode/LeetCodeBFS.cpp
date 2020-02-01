@@ -38,7 +38,7 @@
 /// 00011
 /// Answer : 3
 /// </summary>
-int LeetCode::numIslands(vector<vector<char>>& grid)
+int LeetCodeBFS::numIslands(vector<vector<char>>& grid)
 {
     size_t result = 0;
     // search from top to down, then from left to right
@@ -84,10 +84,15 @@ int LeetCode::numIslands(vector<vector<char>>& grid)
 
 /// <summary>
 /// LeetCode #417. Pacific Atlantic Water Flow
-/// Given an m x n matrix of non-negative integers representing the height of each unit cell in a continent, the "Pacific ocean" touches the left and top 
-/// edges of the matrix and the "Atlantic ocean" touches the right and bottom edges.
-/// Water can only flow in four directions (up, down, left, or right) from a cell to another one with height equal or lower.
-/// Find the list of grid coordinates where water can flow to both the Pacific and Atlantic ocean.
+//
+/// Given an m x n matrix of non-negative integers representing the 
+/// height of each unit cell in a continent, the "Pacific ocean" touches 
+/// the left and top edges of the matrix and the "Atlantic ocean" touches 
+/// the right and bottom edges.
+/// Water can only flow in four directions (up, down, left, or right) from 
+/// a cell to another one with height equal or lower.
+/// Find the list of grid coordinates where water can flow to both the 
+/// Pacific and Atlantic ocean.
 /// Note:
 /// 1.The order of returned grid coordinates does not matter.
 /// 2.Both m and n are less than 150.
@@ -101,9 +106,10 @@ int LeetCode::numIslands(vector<vector<char>>& grid)
 ///         ~ (5)  1   1   2   4  *
 ///         *  *   *   *   *   *  * Atlantic
 /// Return:
-/// [[0, 4], [1, 3], [1, 4], [2, 2], [3, 0], [3, 1], [4, 0]] (positions with parentheses in above matrix).
+/// [[0, 4], [1, 3], [1, 4], [2, 2], [3, 0], [3, 1], [4, 0]] (positions 
+/// with parentheses in above matrix).
 /// </summary>
-vector<pair<int, int>> LeetCode::pacificAtlantic(vector<vector<int>>& matrix)
+vector<pair<int, int>> LeetCodeBFS::pacificAtlantic(vector<vector<int>>& matrix)
 {
     vector<pair<int, int>> result;
     if ((matrix.size() == 0) || (matrix[0].size() == 0))  return result;
@@ -170,7 +176,7 @@ vector<pair<int, int>> LeetCode::pacificAtlantic(vector<vector<int>>& matrix)
 /// All words have the same length.
 /// All words contain only lowercase alphabetic characters.
 /// </summary>
-int LeetCode::wordLadderLength(string beginWord, string endWord, unordered_set<string>& wordList)
+int LeetCodeBFS::wordLadderLength(string beginWord, string endWord, unordered_set<string>& wordList)
 {
     wordList.insert(endWord);
     int step = 1;
@@ -205,117 +211,6 @@ int LeetCode::wordLadderLength(string beginWord, string endWord, unordered_set<s
 }
 
 /// <summary>
-/// Get word ladder path  
-/// </summary>
-vector<vector<string>> LeetCode::findWordLadderPath(string beginWord, string endWord, unordered_map<string, unordered_set<string>>& word_map)
-{
-    vector<vector<string>> result;
-    vector<pair<string, unordered_set<string>::iterator>> word_stack;
-    word_stack.push_back(make_pair(endWord, word_map[endWord].begin()));
-    while (!word_stack.empty())
-    {
-        pair<string, unordered_set<string>::iterator> pair = word_stack.back();
-        if (pair.first != beginWord)
-        {
-            if (pair.second != word_map[pair.first].end())
-            {
-                string word = *pair.second;
-                word_stack.push_back(make_pair(word, word_map[word].begin()));
-                continue;
-            }
-        }
-        else
-        {
-            vector<string> one_result;
-            for (size_t i = 0; i < word_stack.size(); i++)
-            {
-                one_result.push_back(word_stack[word_stack.size() - 1 - i].first);
-            }
-            result.push_back(one_result);
-        }
-        word_stack.pop_back();
-        if (!word_stack.empty())
-        {
-            pair = word_stack.back();
-            word_stack.pop_back();
-            pair.second++;
-            word_stack.push_back(pair);
-        }
-    }
-    return result;
-}
-
-/// <summary>
-/// Leet code #126. Word Ladder II  
-/// Given two words (beginWord and endWord), and a dictionary's word list, find the length of shortest 
-/// transformation sequence from beginWord to endWord, such that: 
-/// 1.Only one letter can be changed at a time.
-/// 2.Each intermediate word must exist in the word list.
-/// For example,
-/// Given:
-/// beginWord = "hit"
-/// endWord = "cog"
-/// wordList = ["hot","dot","dog","lot","log"]
-/// As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog", 
-/// Return
-/// [
-///   ["hit", "hot", "dot", "dog", "cog"],
-///   ["hit", "hot", "lot", "log", "cog"]
-/// ]
-/// Note:
-/// All words have the same length.
-/// All words contain only lowercase alphabetic characters.
-/// </summary>
-vector<vector<string>> LeetCode::findLadders(string beginWord, string endWord, unordered_set<string> &wordList)
-{
-    unordered_map<string, unordered_set<string>> word_map;
-    unordered_set<string> visited_word;
-    wordList.insert(endWord);
-    int step = 1;
-    bool end = false;
-    queue<string> word_search;
-    word_search.push(beginWord);
-    wordList.erase(beginWord);
-    while (!word_search.empty())
-    {
-        size_t size = word_search.size();
-        for (size_t i = 0; i < size; i++)
-        {
-            string word = word_search.front();
-            word_search.pop();
-            if (word == endWord)
-            {
-                end = true;
-                continue;
-            }
-            for (size_t j = 0; j < word.size(); j++)
-            {
-                string original_word = word;
-                for (char ch = 'a'; ch <= 'z'; ch++)
-                {
-                    word[j] = ch;
-                    if (wordList.find(word) != wordList.end())
-                    {
-                        word_map[word].insert(original_word);
-                        word_search.push(word);
-                        visited_word.insert(word);
-                    }
-                }
-                word = original_word;
-            }
-        }
-        if (end == true) break;
-        for (string word : visited_word)
-        {
-            wordList.erase(word);
-        }
-        visited_word.clear();
-        step++;
-    }
-    return findWordLadderPath(beginWord, endWord, word_map);
-}
-
-/// <summary>
 /// Leet code #130. Surrounded Regions   
 /// 
 /// Given a 2D board containing 'X' and 'O' (the letter O), capture all regions surrounded by 'X'.
@@ -332,7 +227,7 @@ vector<vector<string>> LeetCode::findLadders(string beginWord, string endWord, u
 /// X X X X
 /// X O X X
 /// </summary>
-void LeetCode::solveSurrounding(vector<vector<char>>& board)
+void LeetCodeBFS::solveSurrounding(vector<vector<char>>& board)
 {
     queue<pair<int, int>> search_queue;
     if ((board.size() == 0) || board[0].size() == 0) return;
@@ -414,7 +309,7 @@ void LeetCode::solveSurrounding(vector<vector<char>>& board)
 /// and x = 0, y = 2, 
 /// Return 6. 
 /// </summary>
-int LeetCode::minArea(vector<vector<char>>& image, int x, int y)
+int LeetCodeBFS::minArea(vector<vector<char>>& image, int x, int y)
 {
     int top = x, bottom = x, left = y, right = y;
     queue<pair<int, int>> process_queue;
@@ -454,93 +349,6 @@ int LeetCode::minArea(vector<vector<char>>& image, int x, int y)
 }
 
 /// <summary>
-/// Leet code #407. Trapping Rain Water II  
-/// 
-/// Given an m x n matrix of positive integers representing the height of each unit cell 
-/// in a 2D elevation map, compute the volume of water it is able to trap after raining. 
-///
-/// Note:
-/// Both m and n are less than 110. The height of each unit cell is greater than 0 and is less than 20,000. 
-/// Example: 
-/// Given the following 3x6 height map:
-/// [
-///   [1,4,3,1,3,2],
-///   [3,2,1,3,2,4],
-///   [2,3,3,2,3,1]
-/// ]
-/// Return 4.
-/// </summary>
-int LeetCode::trapRainWater(vector<vector<int>>& heightMap)
-{
-    int result = 0;
-    if (heightMap.empty() || heightMap[0].empty()) return 0;
-
-    priority_queue<vector<int>> search;
-    vector<vector<int>> visited(heightMap.size(), vector<int>(heightMap[0].size()));
-
-    for (size_t i = 0; i < heightMap.size(); i++)
-    {
-        vector<int> pos = { -heightMap[i][0], (int)i, 0 };
-        search.push(pos);
-        visited[i][0] = 1;
-        int max_col = heightMap[i].size() - 1;
-        if (max_col > 0)
-        {
-            pos = { -heightMap[i][max_col], (int)i, max_col };
-            search.push(pos);
-            visited[i][max_col] = 1;
-        }
-    }
-
-    for (size_t i = 0; i < heightMap[0].size(); i++)
-    {
-        vector<int> pos = { -heightMap[0][i], 0, (int)i };
-        search.push(pos);
-        visited[0][i] = 1;
-        int max_row = heightMap.size() - 1;
-        if (max_row > 0)
-        {
-            pos = { -heightMap[max_row][i], max_row, (int)i };
-            search.push(pos);
-            visited[max_row][i] = 1;
-        }
-    }
-    while (!search.empty())
-    {
-        vector<int> pos = search.top();
-        search.pop();
-        int floor_level = -pos[0];
-        vector<vector<int>> directions = { {-1, 0 }, {1, 0}, {0, -1}, {0, 1} };
-        for (size_t i = 0; i < directions.size(); i++)
-        {
-            int row = pos[1] + directions[i][0];
-            int col = pos[2] + directions[i][1];
-            if ((row < 0) || (row >= (int)heightMap.size()) || 
-                (col < 0) ||  (col >= (int)heightMap[0].size()))
-            {
-                continue;
-            }
-            if (visited[row][col] == 1)
-            {
-                continue;
-            }
-            if (heightMap[row][col] < floor_level)
-            {
-                result += floor_level - heightMap[row][col];
-                search.push({ -floor_level, row, col });
-            }
-            else
-            {
-                search.push({ -heightMap[row][col], row, col });
-            }
-            visited[row][col] = 1;
-        }
-    }
-    return result;
-}
-
-
-/// <summary>
 /// Leet code #542. 01 Matrix       
 /// 
 /// Given a matrix consists of 0 and 1, find the distance of the nearest 0 
@@ -570,7 +378,7 @@ int LeetCode::trapRainWater(vector<vector<int>>& heightMap)
 /// There are at least one 0 in the given matrix.
 /// The cells are adjacent in only four directions: up, down, left and right.
 /// </summary>
-vector<vector<int>> LeetCode::updateMatrix(vector<vector<int>>& matrix)
+vector<vector<int>> LeetCodeBFS::updateMatrix(vector<vector<int>>& matrix)
 {
     vector<vector<int>> result;
     if (matrix.empty() || matrix[0].empty()) return result;
@@ -654,7 +462,7 @@ vector<vector<int>> LeetCode::updateMatrix(vector<vector<int>>& matrix)
 /// subordinates.
 /// The maximum number of employees won't exceed 2000.
 /// </summary>
-int LeetCode::getImportance(vector<Employee*> employees, int id)
+int LeetCodeBFS::getImportance(vector<Employee*> employees, int id)
 {
     int result = 0;
     queue<int> employee_queue;
@@ -675,135 +483,6 @@ int LeetCode::getImportance(vector<Employee*> employees, int id)
         {
             employee_queue.push(subordinate);
         }
-    }
-    return result;
-}
-
-/// <summary>
-/// Leet code #675. Cut Off Trees for Golf Event
-/// </summary>
-int LeetCode::calculateShortestDistance(vector<vector<int>>& forest, pair<int, int> &source, pair<int, int> &target)
-{
-    int result = 0;
-    if (source == target) return result;
-    queue<pair<int, int>> search_queue;
-    search_queue.push(source);
-    vector<vector<int>> visited = vector<vector<int>>(forest.size(), vector<int>(forest[0].size()));
-    visited[source.first][source.second] = 1;
-    vector<pair<int, int>> steps = { { -1, 0 },{ 1, 0 },{ 0, -1 },{ 0, 1 } };
-    while (!search_queue.empty())
-    {
-        result++;
-        size_t size = search_queue.size();
-        for (size_t i = 0; i < size; i++)
-        {
-            pair<int, int> pos = search_queue.front();
-            search_queue.pop();
-            for (size_t j = 0; j < steps.size(); j++)
-            {
-                // calculate next position
-                pair<int, int> next = make_pair(pos.first + steps[j].first, pos.second + steps[j].second);
-                // if out of boundary
-                if ((next.first < 0) || (next.first >= (int)forest.size()) || 
-                    (next.second < 0)  || (next.second >= (int)forest[0].size()))
-                {
-                    continue;
-                }
-                // if obstacle
-                if (forest[next.first][next.second] == 0) continue;
-
-                // if reach target, result always reflect steps to next position 
-                if (next == target) return result;
-                // if visited already
-                if (visited[next.first][next.second] == 1) continue;
-                // set flag
-                visited[next.first][next.second] = 1;
-                // add to queue
-                search_queue.push(next);
-            }
-        }
-    }
-    return -1;
-}
-
-/// <summary>
-/// Leet code #675. Cut Off Trees for Golf Event
-/// You are asked to cut off trees in a forest for a golf event. The 
-/// forest is represented as a non-negative 2D map, in this map:
-/// 
-/// 0 represents the obstacle can't be reached.
-/// 1 represents the ground can be walked through.
-/// The place with number bigger than 1 represents a tree can be walked 
-/// through, and this positive number represents the tree's height.
-/// You are asked to cut off all the trees in this forest in the order of 
-/// tree's height - always cut off the tree with lowest height first. And 
-/// after cutting, the original place has the tree will become a grass 
-/// (value 1).
-///
-/// You will start from the point (0, 0) and you should output the minimum
-/// steps you need to walk to cut off all the trees. If you can't cut off 
-/// all the trees, output -1 in that situation.
-///
-/// You are guaranteed that no two trees have the same height and there is
-/// at least one tree needs to be cut off.
-///
-/// Example 1:
-/// Input: 
-/// [
-///   [1,2,3],
-///   [0,0,4],
-///   [7,6,5]
-/// ]
-/// Output: 6
-/// Example 2:
-/// Input: 
-/// [
-///   [1,2,3],
-///   [0,0,0],
-///   [7,6,5]
-/// ]
-/// Output: -1
-/// Example 3:
-/// Input: 
-/// [
-///    [2,3,4],
-///    [0,0,5],
-///    [8,7,6]
-/// ]
-/// Output: 6
-/// Explanation: You started from the point (0,0) and you can cut off the 
-/// tree in (0,0) directly without walking.
-/// Hint: size of the given matrix will not exceed 50x50.
-/// </summary>
-int LeetCode::cutOffTree(vector<vector<int>>& forest)
-{
-    int result = 0;
-    if (forest.empty() || forest[0].empty()) return result;
-
-    // store the tree in order
-    priority_queue<pair<int, pair<int, int>>> tree_order;
-
-    for (size_t i = 0; i < forest.size(); i++)
-    {
-        for (size_t j = 0; j < forest[i].size(); j++)
-        {
-            // only remember trees
-            if (forest[i][j] > 1)
-            {
-                tree_order.push(make_pair(-forest[i][j], make_pair(i, j)));
-            }
-        }
-    }
-    // calcualte any to any shortest distance using Floyd-Warshal algorithm
-    pair<int, int> start = make_pair(0, 0);
-    while (!tree_order.empty())
-    {
-        pair<int, int> next = tree_order.top().second;
-        tree_order.pop();
-        int steps = calculateShortestDistance(forest, start, next);
-        if (steps == -1) return -1;
-        else result += steps;
-        start = next;
     }
     return result;
 }
@@ -846,7 +525,7 @@ int LeetCode::cutOffTree(vector<vector<int>>& forest)
 /// The value of each color in image[i][j] and newColor will be an 
 /// integer in [0, 65535].
 /// </summary>
-vector<vector<int>> LeetCode::floodFill(vector<vector<int>>& image, 
+vector<vector<int>> LeetCodeBFS::floodFill(vector<vector<int>>& image, 
     int sr, int sc, int newColor)
 {
     queue<pair<int, int>> search_queue;
@@ -908,7 +587,7 @@ vector<vector<int>> LeetCode::floodFill(vector<vector<int>>& image,
 /// 4.All edges times[i] = (u, v, w) will have 1 <= u, v <= N and 
 ///   1 <= w <= 100.
 /// </summary>
-int LeetCode::networkDelayTime(vector<vector<int>>& times, int N, int K)
+int LeetCodeBFS::networkDelayTime(vector<vector<int>>& times, int N, int K)
 {
     unordered_map<int, unordered_map<int, int>> travel_time;
     priority_queue<pair<int, int>> travel;
@@ -989,7 +668,7 @@ int LeetCode::networkDelayTime(vector<vector<int>>& times, int N, int K)
 /// Every string in deadends and the string target will be a string of 4 
 /// digits from the 10,000 possibilities '0000' to '9999'. 
 /// </summary>
-int LeetCode::openLock(vector<string>& deadends, string target)
+int LeetCodeBFS::openLock(vector<string>& deadends, string target)
 {
     queue<string> bfs;
     unordered_set<string> visited;
@@ -1075,7 +754,7 @@ int LeetCode::openLock(vector<string>& deadends, string target)
 /// board will be a 2 x 3 array as described above.
 /// board[i][j] will be a permutation of [0, 1, 2, 3, 4, 5].
 /// </summary>
-int LeetCode::slidingPuzzle(vector<vector<int>>& board)
+int LeetCodeBFS::slidingPuzzle(vector<vector<int>>& board)
 {
     set<string> visited;
     queue<string> search_queue;
@@ -1128,153 +807,6 @@ int LeetCode::slidingPuzzle(vector<vector<int>>& board)
 }
 
 /// <summary>
-/// Leet code #785. Is Graph Bipartite?    
-///
-/// Given a graph, return true if and only if it is bipartite.
-///
-/// Recall that a graph is bipartite if we can split it's set of nodes 
-/// into two independent subsets A and B such that every edge in the 
-/// graph has one node in A and another node in B.
-/// 
-/// The graph is given in the following form: graph[i] is a list of 
-/// indexes j for which the edge between nodes i and j exists.  Each node 
-/// is an integer between 0 and graph.length - 1.  There are no self edges 
-/// or parallel edges: graph[i] does not contain i, and it doesn't contain 
-/// any element twice.
-///
-/// Example 1:
-/// Input: [[1,3], [0,2], [1,3], [0,2]]
-/// Output: true
-/// Explanation: 
-/// The graph looks like this:
-/// 0----1
-/// |    |
-/// |    |
-/// 3----2
-/// We can divide the vertices into two groups: {0, 2} and {1, 3}.
-///
-/// Example 2:
-/// Input: [[1,2,3], [0,2], [0,1,3], [0,2]]
-/// Output: false
-/// Explanation: 
-/// The graph looks like this:
-/// 0----1
-/// | \  |
-/// |  \ |
-/// 3----2
-/// We cannot find a way to divide the set of nodes into two independent 
-/// ubsets.
-/// 
-/// Note:
-/// graph will have length in range [1, 100].
-/// graph[i] will contain integers in range [0, graph.length - 1].
-/// graph[i] will not contain i or duplicate values.
-/// </summary>
-bool LeetCode::isBipartite(vector<vector<int>>& graph)
-{
-    unordered_map<int, int> node_set;
-
-    for (size_t i = 0; i < graph.size(); i++)
-    {
-        if (node_set.count(i) != 0) continue;
-        queue<int> search_queue;
-        node_set[i] = 0;
-        search_queue.push(i);
-        while (!search_queue.empty())
-        {
-            int node = search_queue.front();
-            search_queue.pop();
-            for (int next : graph[node])
-            {
-                if (node_set.count(next) > 0)
-                {
-                    if (node_set[next] == node_set[node]) return false;
-                }
-                else
-                {
-                    node_set[next] = 1 - node_set[node];
-                    search_queue.push(next);
-                }
-            }
-        }
-    }
-    return true;
-}
-
-/// <summary>
-/// Leet code #787. Cheapest Flights Within K Stops    
-///
-/// There are n cities connected by m flights. Each fight starts from 
-/// city u and arrives at v with a price w.
-///
-/// Now given all the cities and fights, together with starting city src 
-/// and the destination dst, your task is to find the cheapest price from 
-/// src to dst with up to k stops. If there is no such route, output -1.
-///
-/// Example 1:
-/// Input: 
-/// n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
-/// src = 0, dst = 2, k = 1
-/// Output: 200
-/// Explanation: 
-/// The graph looks like this:
-///
-/// The cheapest price from city 0 to city 2 with at most 1 stop costs 200, 
-/// as marked red in the picture.
-/// Example 2:
-/// Input: 
-/// n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
-/// src = 0, dst = 2, k = 0
-/// Output: 500
-/// Explanation: 
-/// The graph looks like this:
-///
-/// The cheapest price from city 0 to city 2 with at most 0 stop costs 500, 
-/// as marked blue in the picture.
-/// Note:
-///
-/// 1. The number of nodes n will be in range [1, 100], with nodes labeled 
-///    from 0 to n - 1.
-/// 2. The size of flights will be in range [0, n * (n - 1) / 2].
-/// 3. The format of each flight will be (src, dst, price).
-/// 4. The price of each flight will be in the range [1, 10000].
-/// 5. k is in the range of [0, n - 1].
-/// 6. There will not be any duplicated flights or self cycles.
-/// </summary>
-int LeetCode::findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K)
-{
-    unordered_map<int, int> costs;
-    costs[src] = 0;
-    unordered_map<int, unordered_map<int, int>> tickets;
-    for (size_t i = 0; i < flights.size(); i++)
-    {
-        tickets[flights[i][0]][flights[i][1]] = flights[i][2];
-    }
-    queue<int> search_queue;
-    search_queue.push(src);
-    for (int i = 0; i <= K; i++)
-    {
-        size_t size = search_queue.size();
-        for (size_t j = 0; j < size; j++)
-        {
-            int stop = search_queue.front();
-            search_queue.pop();
-            for (auto itr : tickets[stop])
-            {
-                if ((costs.count(itr.first) == 0) || (costs[stop] + itr.second < costs[itr.first]))
-                {
-                    costs[itr.first] = costs[stop] + itr.second;
-                    search_queue.push(itr.first);
-                }
-            }
-
-        }
-    }
-    if (costs.count(dst) == 0) return -1;
-    else return costs[dst];
-}
-
-/// <summary>
 /// Leet code #818. Race Car
 /// 
 /// Your car starts at position 0 and speed +1 on an infinite number line.  
@@ -1314,7 +846,7 @@ int LeetCode::findCheapestPrice(int n, vector<vector<int>>& flights, int src, in
 /// Note:
 /// 1. 1 <= target <= 10000.
 /// </summary>
-int LeetCode::racecar(int target)
+int LeetCodeBFS::racecar(int target)
 {
     int N = 1;
     while (N <= target) N <<= 1;
@@ -1386,7 +918,7 @@ int LeetCode::racecar(int target)
 /// A and B contain only lowercase letters from the set {'a', 'b', 'c', 'd', 
 /// 'e', 'f'}
 /// </summary>
-int LeetCode::kSimilarity(string A, string B)
+int LeetCodeBFS::kSimilarity(string A, string B)
 {
     int result = 0;
     queue<string> search;
@@ -1453,7 +985,7 @@ int LeetCode::kSimilarity(string A, string B)
 /// 4. The number of keys is in [1, 6].  Each key has a different letter 
 /// and opens exactly one lock.
 /// </summary>
-int LeetCode::shortestPathAllKeys(vector<string>& grid)
+int LeetCodeBFS::shortestPathAllKeys(vector<string>& grid)
 {
     int key_full = 0;
     vector<vector<unordered_set<int>>>dp(grid.size(), vector<unordered_set<int>>(grid[0].size()));
@@ -1581,7 +1113,7 @@ int LeetCode::shortestPathAllKeys(vector<string>& grid)
 /// bank: ["AAAACCCC", "AAACCCCC", "AACCCCCC"]
 /// return: 3
 /// </summary>
-int LeetCode::minMutation(string start, string end, vector<string>& bank)
+int LeetCodeBFS::minMutation(string start, string end, vector<string>& bank)
 {
     vector<int> visited(bank.size());
     int result = 0;
@@ -1664,7 +1196,7 @@ int LeetCode::minMutation(string start, string end, vector<string>& bank)
 /// 8. reachable node is a node that can be travelled to using at most M moves 
 ///    starting from node 0.
 /// </summary>
-int LeetCode::reachableNodes(vector<vector<int>>& edges, int M, int N)
+int LeetCodeBFS::reachableNodes(vector<vector<int>>& edges, int M, int N)
 {
     int result = 0;
     unordered_map<int, unordered_map<int, int>> edge_nodes;
@@ -1768,7 +1300,7 @@ int LeetCode::reachableNodes(vector<vector<int>>& edges, int M, int N)
 /// The board square with number 1 has no snake or ladder.
 /// The board square with number N*N has no snake or ladder.
 /// </summary>
-int LeetCode::snakesAndLadders(vector<vector<int>>& board)
+int LeetCodeBFS::snakesAndLadders(vector<vector<int>>& board)
 {
     int N = board.size();
     int row = N - 1;
@@ -1857,7 +1389,7 @@ int LeetCode::snakesAndLadders(vector<vector<int>>& board)
 /// 4. 1 <= initial.length < graph.length
 /// 5. 0 <= initial[i] < graph.length
 /// </summary>
-int LeetCode::minMalwareSpread(vector<vector<int>>& graph, vector<int>& initial)
+int LeetCodeBFS::minMalwareSpread(vector<vector<int>>& graph, vector<int>& initial)
 {
     vector<int> flag(graph.size(), -1);
     vector<int> count(graph.size());
@@ -1945,7 +1477,7 @@ int LeetCode::minMalwareSpread(vector<vector<int>>& graph, vector<int>& initial)
 /// 4. 1 <= initial.length < graph.length
 /// 5. 0 <= initial[i] < graph.length
 /// </summary>
-int LeetCode::minMalwareSpreadII(vector<vector<int>>& graph, vector<int>& initial)
+int LeetCodeBFS::minMalwareSpreadII(vector<vector<int>>& graph, vector<int>& initial)
 {
     unordered_set<int> virus;
     for (auto v : initial) virus.insert(v);
@@ -2013,7 +1545,7 @@ int LeetCode::minMalwareSpreadII(vector<vector<int>>& graph, vector<int>& initia
 /// <summary>
 /// Leet code #934. Shortest Bridge
 /// </summary>
-int LeetCode::shortestBridgePath(vector<vector<int>>& A)
+int LeetCodeBFS::shortestBridgePath(vector<vector<int>>& A)
 {
     queue<pair<int, int>> search;
     for (size_t i = 0; i < A.size(); i++)
@@ -2062,7 +1594,7 @@ int LeetCode::shortestBridgePath(vector<vector<int>>& A)
 /// <summary>
 /// Leet code #934. Shortest Bridge
 /// </summary>
-void LeetCode::shortestBridgeFill(vector<vector<int>>& A, int row, int col)
+void LeetCodeBFS::shortestBridgeFill(vector<vector<int>>& A, int row, int col)
 {
     queue<pair<int, int>> search;
     search.push({ row, col });
@@ -2123,7 +1655,7 @@ void LeetCode::shortestBridgeFill(vector<vector<int>>& A, int row, int col)
 /// 1 <= A.length = A[0].length <= 100
 /// A[i][j] == 0 or A[i][j] == 1
 /// </summary>
-int LeetCode::shortestBridge(vector<vector<int>>& A)
+int LeetCodeBFS::shortestBridge(vector<vector<int>>& A)
 {
     queue<vector<int>> first_land;
     bool hit = false;
@@ -2171,7 +1703,7 @@ int LeetCode::shortestBridge(vector<vector<int>>& A)
 /// 1. 1 <= N <= 9
 /// 2. 0 <= K <= 9
 /// </summary>
-vector<int> LeetCode::numsSameConsecDiff(int N, int K)
+vector<int> LeetCodeBFS::numsSameConsecDiff(int N, int K)
 {
     queue<int> search;
     for (size_t i = 0; i < (size_t) N; i++)
@@ -2248,7 +1780,7 @@ vector<int> LeetCode::numsSameConsecDiff(int N, int K)
 /// 2. 1 <= grid[0].length <= 10
 /// 3. grid[i][j] is only 0, 1, or 2.
 /// </summary>
-int LeetCode::orangesRotting(vector<vector<int>>& grid)
+int LeetCodeBFS::orangesRotting(vector<vector<int>>& grid)
 {
     queue<pair<int, int>> search;
     int count = 0;
@@ -2338,7 +1870,7 @@ int LeetCode::orangesRotting(vector<vector<int>>& grid)
 /// 3. 0 <= A[i][j] <= 1
 /// 4. All rows have the same size.
 /// </summary>
-int LeetCode::numEnclaves(vector<vector<int>>& A)
+int LeetCodeBFS::numEnclaves(vector<vector<int>>& A)
 {
     int result = 0;
     vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
@@ -2424,7 +1956,7 @@ int LeetCode::numEnclaves(vector<vector<int>>& A)
 /// 3. 0 <= r0 < R
 /// 4. 0 <= c0 < C
 /// </summary>
-vector<vector<int>> LeetCode::allCellsDistOrder(int R, int C, int r0, int c0)
+vector<vector<int>> LeetCodeBFS::allCellsDistOrder(int R, int C, int r0, int c0)
 {
     vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
     vector<vector<int>> matrix(R, vector<int>(C));
@@ -2457,7 +1989,6 @@ vector<vector<int>> LeetCode::allCellsDistOrder(int R, int C, int r0, int c0)
     }
     return result;
 }
-
 
 /// <summary>
 /// Leet code #1034. Coloring A Border
@@ -2499,7 +2030,7 @@ vector<vector<int>> LeetCode::allCellsDistOrder(int R, int C, int r0, int c0)
 /// 5. 0 <= c0 < grid[0].length
 /// 6. 1 <= color <= 1000
 /// </summary>
-vector<vector<int>> LeetCode::colorBorder(vector<vector<int>>& grid, int r0, int c0, int color)
+vector<vector<int>> LeetCodeBFS::colorBorder(vector<vector<int>>& grid, int r0, int c0, int color)
 {
     vector<vector<int>> result = grid;
     vector<vector<int>> visit(grid.size(), vector<int>(grid[0].size()));
@@ -2584,7 +2115,7 @@ vector<vector<int>> LeetCode::colorBorder(vector<vector<int>>& grid, int r0, int
 /// 3. No garden has 4 or more paths coming into or leaving it.
 /// 4. It is guaranteed an answer exists.
 /// </summary>
-vector<int> LeetCode::gardenNoAdj(int N, vector<vector<int>>& paths)
+vector<int> LeetCodeBFS::gardenNoAdj(int N, vector<vector<int>>& paths)
 {
     vector<vector<int>> neighbor(N, vector<int>());
     vector<vector<int>> bit_map(N, vector<int>(4));
@@ -2659,7 +2190,7 @@ vector<int> LeetCode::gardenNoAdj(int N, vector<vector<int>>& paths)
 /// 1. 1 <= grid.length == grid[0].length <= 100
 /// 2. grid[r][c] is 0 or 1
 /// </summary>
-int LeetCode::shortestPathBinaryMatrix(vector<vector<int>>& grid)
+int LeetCodeBFS::shortestPathBinaryMatrix(vector<vector<int>>& grid)
 {
     vector<int> pos = { 0, 0 };
     queue<vector<int>> search;
@@ -2728,7 +2259,7 @@ int LeetCode::shortestPathBinaryMatrix(vector<vector<int>>& grid)
 /// 1. 1 <= grid.length == grid[0].length <= 100
 /// 2. grid[i][j] is 0 or 1
 /// </summary>
-int LeetCode::maxLandDistance(vector<vector<int>>& grid)
+int LeetCodeBFS::maxLandDistance(vector<vector<int>>& grid)
 {
     int distance = 0;
     int result = -1;

@@ -359,6 +359,21 @@ void TestLeetCode444(void)
     Logger::WriteMessage((string)(result ? "Can " : "Can not ") + "reconstruct sequences");
 }
 
+void TestLeetCode407(void)
+{
+    Logger::WriteMessage("Test Leet Code 407");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> heightMap =
+    {
+        { 1,4,3,1,3,2 },
+        { 3,2,1,3,2,4 },
+        { 2,3,3,2,3,1 }
+    };
+    int result = leetCode.trapRainWater(heightMap);
+    Logger::WriteMessage(heightMap);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCode568(void)
 {
     LeetCodeGraph leetCode;
@@ -412,6 +427,69 @@ void TestLeetCode582(void)
     Logger::WriteMessage(ppid);
     Logger::WriteMessage("kill = " + to_string(kill));
     Logger::WriteMessage(result);
+}
+
+void TestLeetCode675(void)
+{
+    Logger::WriteMessage("Test Leet Code");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> forest =
+    {
+        {1,2,3},
+        {0,0,4},
+        {5,6,7}
+    };
+    int result = leetCode.cutOffTree(forest);
+    Logger::WriteMessage(forest);
+    Logger::WriteMessage("result = " + (string)to_string(result));
+
+    forest =
+    {
+        { 1,2,3 },
+        { 0,0,0 },
+        { 7,6,5 }
+    };
+    result = leetCode.cutOffTree(forest);
+    Logger::WriteMessage(forest);
+    Logger::WriteMessage("result = " + (string)to_string(result));
+
+    forest =
+    {
+        { 2,3,4 },
+        { 0,0,5 },
+        { 8,7,6 }
+    };
+    result = leetCode.cutOffTree(forest);
+    Logger::WriteMessage(forest);
+    Logger::WriteMessage("result = " + (string)to_string(result));
+
+    forest =
+    {
+        {0, 0, 0, 3528, 2256, 9394, 3153},
+        { 8740, 1758, 6319, 3400, 4502, 7475, 6812 },
+        { 0, 0, 3079, 6312, 0, 0, 0 },
+        { 6828, 0, 0, 0, 0, 0, 8145 },
+        { 6964, 4631, 0, 0, 0, 4811, 0 },
+        { 0, 0, 0, 0, 9734, 4696, 4246 },
+        { 3413, 8887, 0, 4766, 0, 0, 0 },
+        { 7739, 0, 0, 2920, 0, 5321, 2250 },
+        { 3032, 0, 3015, 0, 3269, 8582, 0 }
+    };
+    result = leetCode.cutOffTree(forest);
+    Logger::WriteMessage(forest);
+    Logger::WriteMessage("result = " + (string)to_string(result));
+
+    forest =
+    {
+        { 54581641, 64080174, 24346381, 69107959},
+        { 86374198, 61363882, 68783324, 79706116},
+        { 668150,   92178815, 89819108, 94701471 },
+        { 83920491, 22724204, 46281641, 47531096 },
+        { 89078499, 18904913, 25462145, 60813308 }
+    };
+    result = leetCode.cutOffTree(forest);
+    Logger::WriteMessage(forest);
+    Logger::WriteMessage("result = " + (string)to_string(result));
 }
 
 void TestLeetCode684(void)
@@ -616,6 +694,21 @@ void TestLeetCode778(void)
     result = leetCode.swimInWater(grid);
     Logger::WriteMessage(grid);
     Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode785(void)
+{
+    Logger::WriteMessage("Test Leet Code 785");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> graph = { {1,3},{0,2},{1,3},{0,2} };
+    bool result = leetCode.isBipartite(graph);
+    Logger::WriteMessage(graph);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    graph = { {1, 2, 3},{0, 2},{0, 1, 3},{0, 2} };
+    result = leetCode.isBipartite(graph);
+    Logger::WriteMessage(graph);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
 void TestLeetCode802(void)
@@ -1684,6 +1777,32 @@ void TestLeetCode490(void)
     Logger::WriteMessage("Has Path = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode787(void)
+{
+    Logger::WriteMessage("Test Leet Code 787");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> flights = { {0,1,100},{1,2,100},{0,2,500} };
+    int n = 3;
+    int src = 0;
+    int dst = 2;
+    int k = 1;
+    int result = leetCode.findCheapestPrice(n, flights, src, dst, k);
+    Logger::WriteMessage(flights);
+    Logger::WriteMessage("n = " + to_string(n) + "; src = " + to_string(src) +
+        "; dst = " + to_string(dst) + "; k = " + to_string(k) +
+        "; result = " + to_string(result));
+
+    n = 3;
+    src = 0;
+    dst = 2;
+    k = 0;
+    result = leetCode.findCheapestPrice(n, flights, src, dst, k);
+    Logger::WriteMessage(flights);
+    Logger::WriteMessage("n = " + to_string(n) + "; src = " + to_string(src) +
+        "; dst = " + to_string(dst) + "; k = " + to_string(k) +
+        "; result = " + to_string(result));
+}
+
 void TestLeetCode1311(void)
 {
     Logger::WriteMessage("Test Leet Code 1311");
@@ -1711,6 +1830,8 @@ void TestLeetCode1311(void)
 
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode407();
+    TestLeetCode675();
     TestLeetCode1311();
     TestLeetCode490();
     TestLeetCode499();

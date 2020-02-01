@@ -5431,6 +5431,368 @@ bool LeetCodeGraph::hasPath(vector<vector<int>>& maze, vector<int>& start, vecto
 }
 
 /// <summary>
+/// Leet code #675. Cut Off Trees for Golf Event
+/// </summary>
+int LeetCodeGraph::calculateShortestDistance(vector<vector<int>>& forest, pair<int, int> &source, pair<int, int> &target)
+{
+    int result = 0;
+    if (source == target) return result;
+    queue<pair<int, int>> search_queue;
+    search_queue.push(source);
+    vector<vector<int>> visited = vector<vector<int>>(forest.size(), vector<int>(forest[0].size()));
+    visited[source.first][source.second] = 1;
+    vector<pair<int, int>> steps = { { -1, 0 },{ 1, 0 },{ 0, -1 },{ 0, 1 } };
+    while (!search_queue.empty())
+    {
+        result++;
+        size_t size = search_queue.size();
+        for (size_t i = 0; i < size; i++)
+        {
+            pair<int, int> pos = search_queue.front();
+            search_queue.pop();
+            for (size_t j = 0; j < steps.size(); j++)
+            {
+                // calculate next position
+                pair<int, int> next = make_pair(pos.first + steps[j].first, pos.second + steps[j].second);
+                // if out of boundary
+                if ((next.first < 0) || (next.first >= (int)forest.size()) ||
+                    (next.second < 0) || (next.second >= (int)forest[0].size()))
+                {
+                    continue;
+                }
+                // if obstacle
+                if (forest[next.first][next.second] == 0) continue;
+
+                // if reach target, result always reflect steps to next position 
+                if (next == target) return result;
+                // if visited already
+                if (visited[next.first][next.second] == 1) continue;
+                // set flag
+                visited[next.first][next.second] = 1;
+                // add to queue
+                search_queue.push(next);
+            }
+        }
+    }
+    return -1;
+}
+
+/// <summary>
+/// Leet code #407. Trapping Rain Water II  
+/// 
+/// Given an m x n matrix of positive integers representing the height of each unit cell 
+/// in a 2D elevation map, compute the volume of water it is able to trap after raining. 
+///
+/// Note:
+/// Both m and n are less than 110. The height of each unit cell is greater than 0 and is less than 20,000. 
+/// Example: 
+/// Given the following 3x6 height map:
+/// [
+///   [1,4,3,1,3,2],
+///   [3,2,1,3,2,4],
+///   [2,3,3,2,3,1]
+/// ]
+/// Return 4.
+/// </summary>
+int LeetCodeGraph::trapRainWater(vector<vector<int>>& heightMap)
+{
+    int result = 0;
+    if (heightMap.empty() || heightMap[0].empty()) return 0;
+
+    priority_queue<vector<int>> search;
+    vector<vector<int>> visited(heightMap.size(), vector<int>(heightMap[0].size()));
+
+    for (size_t i = 0; i < heightMap.size(); i++)
+    {
+        vector<int> pos = { -heightMap[i][0], (int)i, 0 };
+        search.push(pos);
+        visited[i][0] = 1;
+        int max_col = heightMap[i].size() - 1;
+        if (max_col > 0)
+        {
+            pos = { -heightMap[i][max_col], (int)i, max_col };
+            search.push(pos);
+            visited[i][max_col] = 1;
+        }
+    }
+
+    for (size_t i = 0; i < heightMap[0].size(); i++)
+    {
+        vector<int> pos = { -heightMap[0][i], 0, (int)i };
+        search.push(pos);
+        visited[0][i] = 1;
+        int max_row = heightMap.size() - 1;
+        if (max_row > 0)
+        {
+            pos = { -heightMap[max_row][i], max_row, (int)i };
+            search.push(pos);
+            visited[max_row][i] = 1;
+        }
+    }
+    while (!search.empty())
+    {
+        vector<int> pos = search.top();
+        search.pop();
+        int floor_level = -pos[0];
+        vector<vector<int>> directions = { {-1, 0 }, {1, 0}, {0, -1}, {0, 1} };
+        for (size_t i = 0; i < directions.size(); i++)
+        {
+            int row = pos[1] + directions[i][0];
+            int col = pos[2] + directions[i][1];
+            if ((row < 0) || (row >= (int)heightMap.size()) ||
+                (col < 0) || (col >= (int)heightMap[0].size()))
+            {
+                continue;
+            }
+            if (visited[row][col] == 1)
+            {
+                continue;
+            }
+            if (heightMap[row][col] < floor_level)
+            {
+                result += floor_level - heightMap[row][col];
+                search.push({ -floor_level, row, col });
+            }
+            else
+            {
+                search.push({ -heightMap[row][col], row, col });
+            }
+            visited[row][col] = 1;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #675. Cut Off Trees for Golf Event
+/// You are asked to cut off trees in a forest for a golf event. The 
+/// forest is represented as a non-negative 2D map, in this map:
+/// 
+/// 0 represents the obstacle can't be reached.
+/// 1 represents the ground can be walked through.
+/// The place with number bigger than 1 represents a tree can be walked 
+/// through, and this positive number represents the tree's height.
+/// You are asked to cut off all the trees in this forest in the order of 
+/// tree's height - always cut off the tree with lowest height first. And 
+/// after cutting, the original place has the tree will become a grass 
+/// (value 1).
+///
+/// You will start from the point (0, 0) and you should output the minimum
+/// steps you need to walk to cut off all the trees. If you can't cut off 
+/// all the trees, output -1 in that situation.
+///
+/// You are guaranteed that no two trees have the same height and there is
+/// at least one tree needs to be cut off.
+///
+/// Example 1:
+/// Input: 
+/// [
+///   [1,2,3],
+///   [0,0,4],
+///   [7,6,5]
+/// ]
+/// Output: 6
+/// Example 2:
+/// Input: 
+/// [
+///   [1,2,3],
+///   [0,0,0],
+///   [7,6,5]
+/// ]
+/// Output: -1
+/// Example 3:
+/// Input: 
+/// [
+///    [2,3,4],
+///    [0,0,5],
+///    [8,7,6]
+/// ]
+/// Output: 6
+/// Explanation: You started from the point (0,0) and you can cut off the 
+/// tree in (0,0) directly without walking.
+/// Hint: size of the given matrix will not exceed 50x50.
+/// </summary>
+int LeetCodeGraph::cutOffTree(vector<vector<int>>& forest)
+{
+    int result = 0;
+    if (forest.empty() || forest[0].empty()) return result;
+
+    // store the tree in order
+    priority_queue<pair<int, pair<int, int>>> tree_order;
+
+    for (size_t i = 0; i < forest.size(); i++)
+    {
+        for (size_t j = 0; j < forest[i].size(); j++)
+        {
+            // only remember trees
+            if (forest[i][j] > 1)
+            {
+                tree_order.push(make_pair(-forest[i][j], make_pair(i, j)));
+            }
+        }
+    }
+    // calcualte any to any shortest distance using Floyd-Warshal algorithm
+    pair<int, int> start = make_pair(0, 0);
+    while (!tree_order.empty())
+    {
+        pair<int, int> next = tree_order.top().second;
+        tree_order.pop();
+        int steps = calculateShortestDistance(forest, start, next);
+        if (steps == -1) return -1;
+        else result += steps;
+        start = next;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #785. Is Graph Bipartite?    
+///
+/// Given a graph, return true if and only if it is bipartite.
+///
+/// Recall that a graph is bipartite if we can split it's set of nodes 
+/// into two independent subsets A and B such that every edge in the 
+/// graph has one node in A and another node in B.
+/// 
+/// The graph is given in the following form: graph[i] is a list of 
+/// indexes j for which the edge between nodes i and j exists.  Each node 
+/// is an integer between 0 and graph.length - 1.  There are no self edges 
+/// or parallel edges: graph[i] does not contain i, and it doesn't contain 
+/// any element twice.
+///
+/// Example 1:
+/// Input: [[1,3], [0,2], [1,3], [0,2]]
+/// Output: true
+/// Explanation: 
+/// The graph looks like this:
+/// 0----1
+/// |    |
+/// |    |
+/// 3----2
+/// We can divide the vertices into two groups: {0, 2} and {1, 3}.
+///
+/// Example 2:
+/// Input: [[1,2,3], [0,2], [0,1,3], [0,2]]
+/// Output: false
+/// Explanation: 
+/// The graph looks like this:
+/// 0----1
+/// | \  |
+/// |  \ |
+/// 3----2
+/// We cannot find a way to divide the set of nodes into two independent 
+/// ubsets.
+/// 
+/// Note:
+/// graph will have length in range [1, 100].
+/// graph[i] will contain integers in range [0, graph.length - 1].
+/// graph[i] will not contain i or duplicate values.
+/// </summary>
+bool LeetCodeGraph::isBipartite(vector<vector<int>>& graph)
+{
+    unordered_map<int, int> node_set;
+
+    for (size_t i = 0; i < graph.size(); i++)
+    {
+        if (node_set.count(i) != 0) continue;
+        queue<int> search_queue;
+        node_set[i] = 0;
+        search_queue.push(i);
+        while (!search_queue.empty())
+        {
+            int node = search_queue.front();
+            search_queue.pop();
+            for (int next : graph[node])
+            {
+                if (node_set.count(next) > 0)
+                {
+                    if (node_set[next] == node_set[node]) return false;
+                }
+                else
+                {
+                    node_set[next] = 1 - node_set[node];
+                    search_queue.push(next);
+                }
+            }
+        }
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet code #787. Cheapest Flights Within K Stops    
+///
+/// There are n cities connected by m flights. Each fight starts from 
+/// city u and arrives at v with a price w.
+///
+/// Now given all the cities and fights, together with starting city src 
+/// and the destination dst, your task is to find the cheapest price from 
+/// src to dst with up to k stops. If there is no such route, output -1.
+///
+/// Example 1:
+/// Input: 
+/// n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
+/// src = 0, dst = 2, k = 1
+/// Output: 200
+/// Explanation: 
+/// The graph looks like this:
+///
+/// The cheapest price from city 0 to city 2 with at most 1 stop costs 200, 
+/// as marked red in the picture.
+/// Example 2:
+/// Input: 
+/// n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
+/// src = 0, dst = 2, k = 0
+/// Output: 500
+/// Explanation: 
+/// The graph looks like this:
+///
+/// The cheapest price from city 0 to city 2 with at most 0 stop costs 500, 
+/// as marked blue in the picture.
+/// Note:
+///
+/// 1. The number of nodes n will be in range [1, 100], with nodes labeled 
+///    from 0 to n - 1.
+/// 2. The size of flights will be in range [0, n * (n - 1) / 2].
+/// 3. The format of each flight will be (src, dst, price).
+/// 4. The price of each flight will be in the range [1, 10000].
+/// 5. k is in the range of [0, n - 1].
+/// 6. There will not be any duplicated flights or self cycles.
+/// </summary>
+int LeetCodeGraph::findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K)
+{
+    unordered_map<int, int> costs;
+    costs[src] = 0;
+    unordered_map<int, unordered_map<int, int>> tickets;
+    for (size_t i = 0; i < flights.size(); i++)
+    {
+        tickets[flights[i][0]][flights[i][1]] = flights[i][2];
+    }
+    queue<int> search_queue;
+    search_queue.push(src);
+    for (int i = 0; i <= K; i++)
+    {
+        size_t size = search_queue.size();
+        for (size_t j = 0; j < size; j++)
+        {
+            int stop = search_queue.front();
+            search_queue.pop();
+            for (auto itr : tickets[stop])
+            {
+                if ((costs.count(itr.first) == 0) || (costs[stop] + itr.second < costs[itr.first]))
+                {
+                    costs[itr.first] = costs[stop] + itr.second;
+                    search_queue.push(itr.first);
+                }
+            }
+
+        }
+    }
+    if (costs.count(dst) == 0) return -1;
+    else return costs[dst];
+}
+
+/// <summary>
 /// Leet code #1311. Get Watched Videos by Your Friends
 /// 
 /// Medium

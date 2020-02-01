@@ -666,6 +666,119 @@ int LeetCodeDFS::longestIncreasingPath(vector<vector<int>>& matrix)
 }
 
 /// <summary>
+/// Get word ladder path  
+/// </summary>
+vector<vector<string>> LeetCodeDFS::findWordLadderPath(string beginWord, string endWord,
+    unordered_map<string, unordered_set<string>>& word_map)
+{
+    vector<vector<string>> result;
+    vector<pair<string, unordered_set<string>::iterator>> word_stack;
+    word_stack.push_back(make_pair(endWord, word_map[endWord].begin()));
+    while (!word_stack.empty())
+    {
+        pair<string, unordered_set<string>::iterator> pair = word_stack.back();
+        if (pair.first != beginWord)
+        {
+            if (pair.second != word_map[pair.first].end())
+            {
+                string word = *pair.second;
+                word_stack.push_back(make_pair(word, word_map[word].begin()));
+                continue;
+            }
+        }
+        else
+        {
+            vector<string> one_result;
+            for (size_t i = 0; i < word_stack.size(); i++)
+            {
+                one_result.push_back(word_stack[word_stack.size() - 1 - i].first);
+            }
+            result.push_back(one_result);
+        }
+        word_stack.pop_back();
+        if (!word_stack.empty())
+        {
+            pair = word_stack.back();
+            word_stack.pop_back();
+            pair.second++;
+            word_stack.push_back(pair);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #126. Word Ladder II  
+/// Given two words (beginWord and endWord), and a dictionary's word list, find the length of shortest 
+/// transformation sequence from beginWord to endWord, such that: 
+/// 1.Only one letter can be changed at a time.
+/// 2.Each intermediate word must exist in the word list.
+/// For example,
+/// Given:
+/// beginWord = "hit"
+/// endWord = "cog"
+/// wordList = ["hot","dot","dog","lot","log"]
+/// As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog", 
+/// Return
+/// [
+///   ["hit", "hot", "dot", "dog", "cog"],
+///   ["hit", "hot", "lot", "log", "cog"]
+/// ]
+/// Note:
+/// All words have the same length.
+/// All words contain only lowercase alphabetic characters.
+/// </summary>
+vector<vector<string>> LeetCodeDFS::findLadders(string beginWord, string endWord,
+    unordered_set<string> &wordList)
+{
+    unordered_map<string, unordered_set<string>> word_map;
+    unordered_set<string> visited_word;
+    wordList.insert(endWord);
+    int step = 1;
+    bool end = false;
+    queue<string> word_search;
+    word_search.push(beginWord);
+    wordList.erase(beginWord);
+    while (!word_search.empty())
+    {
+        size_t size = word_search.size();
+        for (size_t i = 0; i < size; i++)
+        {
+            string word = word_search.front();
+            word_search.pop();
+            if (word == endWord)
+            {
+                end = true;
+                continue;
+            }
+            for (size_t j = 0; j < word.size(); j++)
+            {
+                string original_word = word;
+                for (char ch = 'a'; ch <= 'z'; ch++)
+                {
+                    word[j] = ch;
+                    if (wordList.find(word) != wordList.end())
+                    {
+                        word_map[word].insert(original_word);
+                        word_search.push(word);
+                        visited_word.insert(word);
+                    }
+                }
+                word = original_word;
+            }
+        }
+        if (end == true) break;
+        for (string word : visited_word)
+        {
+            wordList.erase(word);
+        }
+        visited_word.clear();
+        step++;
+    }
+    return findWordLadderPath(beginWord, endWord, word_map);
+}
+
+/// <summary>
 /// Leet code #401. Binary Watch  
 /// </summary> 
 void LeetCodeDFS::readBinaryWatch(int num, vector<int>&path, int sum, vector<string> &result)

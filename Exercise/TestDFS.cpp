@@ -244,6 +244,26 @@ void TestLeetCode329(void)
     Logger::WriteMessage("The longest path is " + to_string(max_path));
 }
 
+void TestLeetCode126(void)
+{
+    Logger::WriteMessage("Test Leet Code 126");
+    LeetCodeDFS leetCode;
+    unordered_set<string> wordList = { "hot","dot","dog","lot","log" };
+    vector<string> words;
+    for (string x : wordList) words.push_back(x);
+    Logger::WriteMessage(words);
+    string beginWord;
+    string endWord;
+    vector<vector<string>> result;
+    beginWord = "hit";
+    endWord = "cog";
+    result = leetCode.findLadders(beginWord, endWord, wordList);
+    for (size_t i = 0; i < result.size(); i++)
+    {
+        Logger::WriteMessage(result[i]);
+    }
+}
+
 void TestLeetCode401(void)
 {
     Logger::WriteMessage("Test Leet Code 401");
@@ -473,6 +493,7 @@ void TestLeetCode491(void)
 
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode126();
     TestLeetCode416();
     TestLeetCode329();
     TestLeetCode17();
