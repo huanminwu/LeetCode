@@ -1828,8 +1828,44 @@ void TestLeetCode1311(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1344(void)
+{
+    Logger::WriteMessage("Test Leet Code 1344");
+    LeetCodeGraph leetCode;
+    vector<int> arr = { 6, 4, 14, 6, 8, 13, 9, 7, 10, 6, 12 };
+    int d = 2;
+    int result = leetCode.maxJumps(arr, d);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("d = " + (string)(to_string(d)) + "; result = " + to_string(result));
+
+    arr = { 3,3,3,3,3 };
+    d = 3;
+    result = leetCode.maxJumps(arr, d);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("d = " + (string)(to_string(d)) + "; result = " + to_string(result));
+
+    arr = { 7,6,5,4,3,2,1 };
+    d = 1;
+    result = leetCode.maxJumps(arr, d);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("d = " + (string)(to_string(d)) + "; result = " + to_string(result));
+
+    arr = { 7,1,7,1,7,1 };
+    d = 2;
+    result = leetCode.maxJumps(arr, d);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("d = " + (string)(to_string(d)) + "; result = " + to_string(result));
+
+    arr = { 66 };
+    d = 1;
+    result = leetCode.maxJumps(arr, d);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("d = " + (string)(to_string(d)) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1344();
     TestLeetCode407();
     TestLeetCode675();
     TestLeetCode1311();

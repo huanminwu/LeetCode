@@ -17568,13 +17568,16 @@ public:
     /// <summary>
     /// Leet code #282. Expression Add Operators
     /// </summary>
-    void calculate(vector<string> & result, string path, string num, long long target, long long eval, long long product);
+    void calculate(vector<string> & result, string path, string num, 
+        long long target, long long eval, long long product);
 
     /// <summary>
     /// Leet code #282. Expression Add Operators
     ///
-    /// Given a string that contains only digits 0-9 and a target value, return all possibilities to 
-    /// add binary operators (not unary) +, -, or * between the digits so they evaluate to the target value. 
+    /// Given a string that contains only digits 0-9 and a target value, 
+    /// return all possibilities to add binary operators 
+    /// (not unary) +, -, or * between the digits so they evaluate to 
+    /// the target value. 
     /// 
     /// Examples:  
     /// "123", 6 -> ["1+2+3", "1*2*3"] 

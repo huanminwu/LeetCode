@@ -1194,8 +1194,67 @@ void TestLeetCode1333(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1341(void)
+{
+    Logger::WriteMessage("Test Leet Code 1341");
+    LeetCodeArray leetCode;
+    vector<vector<int>> mat =
+    {
+        {1,1,0,0,0},{1,1,1,1,0}, {1,0,0,0,0},
+        {1,1,0,0,0},{1,1,1,1,1}
+    };
+    int k = 3;
+    vector<int> result = leetCode.kWeakestRows(mat, k);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    mat =
+    {
+        {1,0,0,0},{1,1,1,1}, {1,0,0,0},
+        {1,0,0,0}
+    };
+    k = 2;
+    result = leetCode.kWeakestRows(mat, k);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1342(void)
+{
+    Logger::WriteMessage("Test Leet Code 1342");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 3,3,3,3,5,5,5,2,2,7 };
+    int result = leetCode.minSetSize(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 7,7,7,7,7,7 };
+    result = leetCode.minSetSize(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1,9 };
+    result = leetCode.minSetSize(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1000,1000,3,7 };
+    result = leetCode.minSetSize(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1,2,3,4,5,6,7,8,9,10 };
+    result = leetCode.minSetSize(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1342();
+    TestLeetCode1341();
     TestLeetCode1333();
     TestLeetCode1329();
     TestLeetCode1330();
