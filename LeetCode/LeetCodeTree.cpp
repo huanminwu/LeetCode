@@ -7609,7 +7609,7 @@ long long LeetCodeTree::maxProduct(TreeNode* root, long long sum, long long &res
 }
 
 /// <summary>
-/// Leet code #1343. Maximum Product of Splitted Binary Tree 
+/// Leet code #1339. Maximum Product of Splitted Binary Tree 
 /// 
 /// Medium
 ///

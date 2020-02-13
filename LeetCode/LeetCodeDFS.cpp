@@ -4857,6 +4857,126 @@ bool LeetCodeDFS::isSolvable(vector<string>& words, string result)
     max_len = max(max_len, reverse_result.size());
     return isSolvable(chars, 0, 0, digits, reverse_words, reverse_result, sum, max_len);
 }
+
+/// <summary>
+/// Leet code #1349. Maximum Students Taking Exam
+/// </summary>
+int LeetCodeDFS::maxStudents(vector<vector<char>>& seats, int level, vector<vector<int>> &cache)
+{
+    if (level == seats.size()) return 0;
+    int bits = 0;
+    vector<int> slots;
+    for (size_t i = 0; i < seats[level].size(); i++)
+    {
+        if (seats[level][i] == '.')
+        {
+            slots.push_back(i);
+            bits = (bits << 1) | 1;
+        }
+    }
+
+    int result = 0;
+    while (bits >= 0)
+    {
+        int students = 0;
+        int bit_set = 1 << slots.size();
+        for (size_t i = 0; i < slots.size(); i++)
+        {
+            bit_set = bit_set >> 1;
+            if ((bit_set & bits) == 0) seats[level][slots[i]] = '0';
+            else
+            {
+                    // left has student
+                if ((slots[i] > 0 && seats[level][slots[i] - 1] == '1') ||
+                    // left front
+                    (level > 0 && slots[i] > 0 && seats[level - 1][slots[i] - 1] == '1') ||
+                    // right front
+                    (level > 0 && slots[i] < (int)seats[0].size() - 1 && seats[level - 1][slots[i] + 1] == '1'))
+                {
+                    bits = bits ^ bit_set;
+                    seats[level][slots[i]] = '0';
+                }
+                else
+                {
+                    seats[level][slots[i]] = '1';
+                    students++;
+                }
+            }
+        }
+        if (cache[level][bits] == -1)
+        {
+            cache[level][bits] = maxStudents(seats, level + 1, cache);
+        }
+        result = max(result, students + cache[level][bits]);
+        // clean up current positions
+        for (size_t i = 0; i < slots.size(); i++) seats[level][slots[i]] = '.';
+        bits--;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1349. Maximum Students Taking Exam
+///
+/// Hard
+///
+/// Given a m * n matrix seats  that represent seats distributions in a 
+/// classroom. If a seat is broken, it is denoted by '#' character 
+/// otherwise it is denoted by a '.' character.
+///
+/// Students can see the answers of those sitting next to the left, right, 
+/// upper left and upper right, but he cannot see the answers of the 
+/// student sitting directly in front or behind him. Return the maximum 
+/// number of students that can take the exam together without any 
+/// cheating being possible..
+///
+/// Students must be placed in seats in good condition.
+///
+///
+///
+/// Example 1:
+/// Input: seats = [["#",".","#","#",".","#"],
+///                 [".","#","#","#","#","."],
+///                 ["#",".","#","#",".","#"]]
+/// Output: 4
+/// Explanation: Teacher can place 4 students in available seats so they 
+/// don't cheat on the exam.
+///	
+/// Example 2:
+/// Input: seats = 
+/// [[".","#"],
+///  ["#","#"],
+///  ["#","."],
+///  ["#","#"],
+///  [".","#"]]
+/// Output: 3
+/// Explanation: Place all students in available seats. 
+///
+/// Example 3:
+/// Input: seats = [["#",".",".",".","#"],
+///                 [".","#",".","#","."],
+///                 [".",".","#",".","."],
+///                 [".","#",".","#","."],
+///                 ["#",".",".",".","#"]]
+/// Output: 10
+/// Explanation: Place students in available seats in column 1, 3 and 5.
+///
+///
+/// Constraints:
+///
+/// 1. seats contains only characters '.' and'#'.
+/// 2. m == seats.length
+/// 3. n == seats[i].length
+/// 4. 1 <= m <= 8
+/// 5. 1 <= n <= 8
+/// </summary>
+int LeetCodeDFS::maxStudents(vector<vector<char>>& seats)
+{
+    vector<vector<int>> cache(seats.size(), vector<int>(256, -1));
+    int level = 0;
+    int result = maxStudents(seats, level, cache);
+    return result;
+}
 #pragma endregion
 
 

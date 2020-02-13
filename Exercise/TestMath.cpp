@@ -1782,8 +1782,57 @@ void TestLeetCode204(void)
     Logger::WriteMessage("The number of primes within " + to_string(n) + " is " + to_string(numPrimes));
 }
 
+void TestLeetCode1342(void)
+{
+    Logger::WriteMessage("Test Leet Code 1342");
+    LeetCodeMath leetCode;
+    int num = 14;
+    int result = leetCode.numberOfSteps(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+
+    num = 8;
+    result = leetCode.numberOfSteps(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+
+    num = 123;
+    result = leetCode.numberOfSteps(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1344(void)
+{
+    Logger::WriteMessage("Test Leet Code 1344");
+    LeetCodeMath leetCode;
+    int hour = 12;
+    int minutes = 30;
+    double result = leetCode.angleClock(hour, minutes);
+    Logger::WriteMessage("hour = " + to_string(hour) + "; minutes = " + to_string(minutes) + "; result = " + to_string(result));
+
+    hour = 3;
+    minutes = 30;
+    result = leetCode.angleClock(hour, minutes);
+    Logger::WriteMessage("hour = " + to_string(hour) + "; minutes = " + to_string(minutes) + "; result = " + to_string(result));
+
+    hour = 3;
+    minutes = 15;
+    result = leetCode.angleClock(hour, minutes);
+    Logger::WriteMessage("hour = " + to_string(hour) + "; minutes = " + to_string(minutes) + "; result = " + to_string(result));
+
+    hour = 4;
+    minutes = 50;
+    result = leetCode.angleClock(hour, minutes);
+    Logger::WriteMessage("hour = " + to_string(hour) + "; minutes = " + to_string(minutes) + "; result = " + to_string(result));
+
+    hour = 12;
+    minutes = 0;
+    result = leetCode.angleClock(hour, minutes);
+    Logger::WriteMessage("hour = " + to_string(hour) + "; minutes = " + to_string(minutes) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1344();
+    TestLeetCode1342();
     TestLeetCode1323();
     TestLeetCode1318();
     TestLeetCode1317();

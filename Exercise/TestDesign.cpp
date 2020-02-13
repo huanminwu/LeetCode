@@ -493,8 +493,56 @@ void TestLeetCode432(void)
     Logger::WriteMessage("Maximum Key = " + allOne.getMaxKey());
 }
 
+void TestLeetCode1348(void)
+{
+    Logger::WriteMessage("Test Leet Code 1348");
+    vector<string> commands = 
+    { 
+        "TweetCounts","recordTweet","recordTweet","recordTweet", "getTweetCountsPerFrequency",
+        "getTweetCountsPerFrequency", "recordTweet","getTweetCountsPerFrequency"
+    };
+
+    vector<vector<string>> data =
+    {
+        {},{"tweet3","0"},{"tweet3","60"},{"tweet3","10"},{"minute","tweet3","0","59"},
+        {"minute","tweet3","0","60"}, {"tweet3","120"}, {"hour","tweet3","0","210"}
+    };
+    vector<vector<string>> result;
+    TweetCounts* tweetCounts = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "TweetCounts")
+        {
+            tweetCounts = new TweetCounts();
+            result.push_back({ "null" });
+        }
+        else if (data[i].size() == 2)
+        {
+            tweetCounts->recordTweet(data[i][0], atoi(data[i][1].c_str()));
+            result.push_back({ "null" });
+        }
+        else if (data[i].size() == 4)
+        {
+            vector<int> value = 
+                tweetCounts->getTweetCountsPerFrequency(
+                    data[i][0], data[i][1], atoi(data[i][2].c_str()), atoi(data[i][3].c_str()));
+            vector<string> val_str;
+            for (size_t i = 0; i < value.size(); i++)
+            {
+                val_str.push_back(to_string(value[i]));
+            };
+            result.push_back(val_str);
+        }
+    }
+    delete tweetCounts;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1348();
     TestLeetCode146();
     TestLeetCode355();
     TestLeetCode380();

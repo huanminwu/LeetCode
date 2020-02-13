@@ -1828,9 +1828,9 @@ void TestLeetCode1311(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode1344(void)
+void TestLeetCode1340(void)
 {
-    Logger::WriteMessage("Test Leet Code 1344");
+    Logger::WriteMessage("Test Leet Code 1340");
     LeetCodeGraph leetCode;
     vector<int> arr = { 6, 4, 14, 6, 8, 13, 9, 7, 10, 6, 12 };
     int d = 2;
@@ -1863,9 +1863,40 @@ void TestLeetCode1344(void)
     Logger::WriteMessage("d = " + (string)(to_string(d)) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1345(void)
+{
+    Logger::WriteMessage("Test Leet Code 1345");
+    LeetCodeGraph leetCode;
+    vector<int> arr = { 100,-23,-23,404,100,23,23,23,3,404 };
+    int result = leetCode.minJumps(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 7 };
+    result = leetCode.minJumps(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 7,6,9,6,9,6,9,7 };
+    result = leetCode.minJumps(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 6,1,9 };
+    result = leetCode.minJumps(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 11,22,7,7,7,7,7,7,7,22,13 };
+    result = leetCode.minJumps(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
-    TestLeetCode1344();
+    TestLeetCode1345();
+    TestLeetCode1340();
     TestLeetCode407();
     TestLeetCode675();
     TestLeetCode1311();

@@ -62,7 +62,9 @@ void TestLeetCode1314(void);
 void TestLeetCode1329(void);
 void TestLeetCode1330(void);
 void TestLeetCode1333(void);
-void TestLeetCode1341(void);
-void TestLeetCode1342(void);
+void TestLeetCode1337(void);
+void TestLeetCode1338(void);
+void TestLeetCode1343(void);
+void TestLeetCode1346(void);
 void TestLeetCodeArray(void);
 #endif  // TestArray

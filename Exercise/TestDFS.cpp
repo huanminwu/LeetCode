@@ -491,8 +491,61 @@ void TestLeetCode491(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1349(void)
+{
+    Logger::WriteMessage("Test Leet Code 1349");
+    LeetCodeDFS leetCode;
+    vector<vector<char>> seats =
+    {
+        {'.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.'},
+    };
+    int result = leetCode.maxStudents(seats);
+    Logger::WriteMessage(seats);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    seats =
+    {
+        {'#', '.', '#', '#', '.', '#'},
+        {'.', '#', '#', '#', '#', '.'},
+        {'#', '.', '#', '#', '.', '#'}
+    };
+    result = leetCode.maxStudents(seats);
+    Logger::WriteMessage(seats);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    seats =
+    {
+        {'.', '#'},
+        {'#', '#'},
+        {'#', '.'},
+        {'#', '#'},
+        {'.', '#'},
+    };
+    result = leetCode.maxStudents(seats);
+    Logger::WriteMessage(seats);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    seats =
+    {
+        {'#', '.', '.', '.', '#'},
+        {'.', '#', '.', '#', '.'},
+        {'.', '.', '#', '.', '.'},
+        {'.', '#', '.', '#', '.'},
+        {'#', '.', '.', '.', '#'}
+    };
+    result = leetCode.maxStudents(seats);
+    Logger::WriteMessage(seats);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode1349();
     TestLeetCode126();
     TestLeetCode416();
     TestLeetCode329();

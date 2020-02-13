@@ -1194,9 +1194,9 @@ void TestLeetCode1333(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode1341(void)
+void TestLeetCode1337(void)
 {
-    Logger::WriteMessage("Test Leet Code 1341");
+    Logger::WriteMessage("Test Leet Code 1337");
     LeetCodeArray leetCode;
     vector<vector<int>> mat =
     {
@@ -1221,9 +1221,9 @@ void TestLeetCode1341(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode1342(void)
+void TestLeetCode1338(void)
 {
-    Logger::WriteMessage("Test Leet Code 1342");
+    Logger::WriteMessage("Test Leet Code 1338");
     LeetCodeArray leetCode;
     vector<int> arr = { 3,3,3,3,5,5,5,2,2,7 };
     int result = leetCode.minSetSize(arr);
@@ -1251,10 +1251,73 @@ void TestLeetCode1342(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1343(void)
+{
+    Logger::WriteMessage("Test Leet Code 1343");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 2,2,2,2,5,5,5,8 };
+    int k = 3;
+    int threshold = 4;
+    int result = leetCode.numOfSubarrays(arr, k, threshold);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; threshold = " + to_string(threshold) + "; result = " + to_string(result));
+
+    arr = { 1,1,1,1,1 };
+    k = 1;
+    threshold = 0;
+    result = leetCode.numOfSubarrays(arr, k, threshold);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; threshold = " + to_string(threshold) + "; result = " + to_string(result));
+
+    arr = { 11,13,17,23,29,31,7,5,2,3 };
+    k = 3;
+    threshold = 5;
+    result = leetCode.numOfSubarrays(arr, k, threshold);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; threshold = " + to_string(threshold) + "; result = " + to_string(result));
+
+    arr = { 7,7,7,7,7,7,7 };
+    k = 7;
+    threshold = 7;
+    result = leetCode.numOfSubarrays(arr, k, threshold);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; threshold = " + to_string(threshold) + "; result = " + to_string(result));
+
+    arr = { 4,4,4,4 };
+    k = 4;
+    threshold = 1;
+    result = leetCode.numOfSubarrays(arr, k, threshold);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; threshold = " + to_string(threshold) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1346(void)
+{
+    Logger::WriteMessage("Test Leet Code 1346");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 10,2,5,3 };
+    bool result = leetCode.checkIfExist(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+
+    arr = { 7,1,14,11 };
+    result = leetCode.checkIfExist(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    arr = { 3,1,7,11 };
+    result = leetCode.checkIfExist(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeArray(void)
 {
-    TestLeetCode1342();
-    TestLeetCode1341();
+    TestLeetCode1346();
+    TestLeetCode1343();
+    TestLeetCode1338();
+    TestLeetCode1337();
     TestLeetCode1333();
     TestLeetCode1329();
     TestLeetCode1330();

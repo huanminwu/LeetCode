@@ -9672,7 +9672,7 @@ vector<int> LeetCodeArray::filterRestaurants(vector<vector<int>>& restaurants,
 }
 
 /// <summary>
-/// Leet code #1341. The K Weakest Rows in a Matrix 
+/// Leet code #1337. The K Weakest Rows in a Matrix 
 /// 
 /// Easy
 ///
@@ -9754,7 +9754,7 @@ vector<int> LeetCodeArray::kWeakestRows(vector<vector<int>>& mat, int k)
 }
 
 /// <summary>
-/// Leet code #1342. Reduce Array Size to The Half 
+/// Leet code #1338. Reduce Array Size to The Half 
 /// 
 /// Medium
 ///
@@ -9830,4 +9830,114 @@ int LeetCodeArray::minSetSize(vector<int>& arr)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1343. Number of Sub-arrays of Size K and Average Greater 
+/// than or Equal to Threshold
+///
+/// Medium
+///
+/// Given an array of integers arr and two integers k and threshold.
+///
+/// Return the number of sub-arrays of size k and average greater than 
+/// or equal to threshold.
+///
+/// Example 1:
+/// Input: arr = [2,2,2,2,5,5,5,8], k = 3, threshold = 4
+/// Output: 3
+/// Explanation: Sub-arrays [2,5,5],[5,5,5] and [5,5,8] have 
+/// averages 4, 5 and 6 respectively. All other sub-arrays of size 3 
+/// have averages less than 4 (the threshold).
+///
+/// Example 2:
+/// Input: arr = [1,1,1,1,1], k = 1, threshold = 0
+/// Output: 5
+///
+/// Example 3:
+/// Input: arr = [11,13,17,23,29,31,7,5,2,3], k = 3, threshold = 5
+/// Output: 6
+/// Explanation: The first 6 sub-arrays of size 3 have averages greater 
+/// than 5. Note that averages are not integers.
+///
+/// Example 4:
+/// Input: arr = [7,7,7,7,7,7,7], k = 7, threshold = 7
+/// Output: 1
+///
+/// Example 5:
+/// Input: arr = [4,4,4,4], k = 4, threshold = 1
+/// Output: 1
+///
+/// Constraints:
+/// 1. 1 <= arr.length <= 10^5
+/// 2. 1 <= arr[i] <= 10^4
+/// 3. 1 <= k <= arr.length
+/// 4. 0 <= threshold <= 10^4
+/// </summary>
+int LeetCodeArray::numOfSubarrays(vector<int>& arr, int k, int threshold)
+{
+    deque<int> sum;
+    sum.push_back(0);
+    int result = 0;
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        sum.push_back(sum.back() + arr[i]);
+        if (sum.size() == k + 1)
+        {
+            if ((sum.back() - sum.front()) >= k * threshold)
+            {
+                result++;
+            }
+            sum.pop_front();
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1346. Check If N and Its Double Exist
+///
+/// Easy
+///
+/// Given an array arr of integers, check if there exists two integers 
+/// N and M such that N is the double of M ( i.e. N = 2 * M).
+///
+/// More formally check if there exists two indices i and j such that :
+///  
+/// i != j
+/// 0 <= i, j < arr.length
+/// arr[i] == 2 * arr[j]
+/// 
+/// Example 1:
+/// Input: arr = [10,2,5,3]
+/// Output: true
+/// Explanation: N = 10 is the double of M = 5,that is, 10 = 2 * 5.
+///
+/// Example 2:
+/// Input: arr = [7,1,14,11]
+/// Output: true
+/// Explanation: N = 14 is the double of M = 7,that is, 14 = 2 * 7.
+///
+/// Example 3:
+/// Input: arr = [3,1,7,11]
+/// Output: false
+/// Explanation: In this case does not exist N and M, such that N = 2 * M.
+///
+/// Constraints:
+/// 1. 2 <= arr.length <= 500
+/// 2. -10^3 <= arr[i] <= 10^3
+/// </summary>
+bool LeetCodeArray::checkIfExist(vector<int>& arr)
+{
+    unordered_set<int> num_set;
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        if (((num_set.count(arr[i] / 2) > 0) && (arr[i] % 2 == 0)) || (num_set.count(arr[i] * 2) > 0))
+        {
+            return true;
+        }
+        num_set.insert(arr[i]);
+    }
+    return false;
+}
+
 #pragma endregion

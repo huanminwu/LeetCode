@@ -297,9 +297,9 @@ void TestLeetCode1325(void)
     leetCode.freeTreeNodes(root);
 }
 
-void TestLeetCode1343(void)
+void TestLeetCode1339(void)
 {
-    Logger::WriteMessage("Test Leet Code 1343");
+    Logger::WriteMessage("Test Leet Code 1339");
     LeetCodeTree leetCode;
     string input = "[1,2,3,4,5,6]";
     TreeNode* root = leetCode.deserialize(input);
@@ -332,7 +332,7 @@ void TestLeetCode1343(void)
 
 void TestLeetCodeTree(void)
 {
-    TestLeetCode1343();
+    TestLeetCode1339();
     TestLeetCode1325();
     TestLeetCode102();
     TestLeetCode1315();

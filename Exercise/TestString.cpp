@@ -1320,8 +1320,39 @@ void TestLeetCode1332(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode1347(void)
+{
+    Logger::WriteMessage("Test Leet Code 1347");
+    LeetCodeString leetCode;
+    string s = "bab";
+    string t = "aba";
+    int result = leetCode.minSteps(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t +"; result = " + to_string(result));
+
+    s = "leetcode";
+    t = "practice";
+    result = leetCode.minSteps(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+
+    s = "anagram";
+    t = "mangaar";
+    result = leetCode.minSteps(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+
+    s = "xxyyzz";
+    t = "xxyyzz";
+    result = leetCode.minSteps(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+
+    s = "friend";
+    t = "family";
+    result = leetCode.minSteps(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1347();
     TestLeetCode1332();
     TestLeetCode1328();
     TestLeetCode676();
