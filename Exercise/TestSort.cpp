@@ -377,8 +377,24 @@ void TestLeetCode1331(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1196(void)
+{
+    Logger::WriteMessage("Test Leet Code 1196");
+    LeetCodeSort leetCode;
+    vector<int> arr = { 100,200,150,1000 };
+    int result = leetCode.maxNumberOfApples(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 900,950,800,1000,700,800 };
+    result = leetCode.maxNumberOfApples(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1196();
     TestLeetCode1331();
     TestLeetCode973();
     TestLeetCode493();

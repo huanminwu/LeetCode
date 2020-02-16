@@ -2585,6 +2585,337 @@ public:
     /// </summary>
     bool checkIfExist(vector<int>& arr);
 
+    /// <summary>
+    /// Leet code #1200. Minimum Absolute Difference
+    /// 
+    /// Given an array of distinct integers arr, find all pairs of elements 
+    /// with the minimum absolute difference of any two elements. 
+    ///
+    /// Return a list of pairs in ascending order(with respect to pairs), 
+    /// each pair [a, b] follows
+    ///
+    /// a, b are from arr
+    /// a < b
+    /// b - a equals to the minimum absolute difference of any two elements in arr
+    /// 
+    ///
+    /// Example 1:
+    ///
+    /// Input: arr = [4,2,1,3]
+    /// Output: [[1,2],[2,3],[3,4]]
+    /// Explanation: The minimum absolute difference is 1. List all pairs with 
+    /// difference equal to 1 in ascending order.
+    ///
+    /// Example 2:
+    ///
+    /// Input: arr = [1,3,6,10,15]
+    /// Output: [[1,3]]
+    ///
+    /// Example 3:
+    ///
+    /// Input: arr = [3,8,-10,23,19,-4,-14,27]
+    /// Output: [[-14,-10],[19,23],[23,27]]
+    /// 
+    /// Constraints:
+    /// 1. 2 <= arr.length <= 10^5
+    /// 2. -10^6 <= arr[i] <= 10^6
+    /// </summary>
+    vector<vector<int>> minimumAbsDifference(vector<int>& arr);
+
+    /// <summary>
+    /// Leet code #1186. Maximum Subarray Sum with One Deletion
+    /// 
+    /// Given an array of integers, return the maximum sum for a non-empty 
+    /// subarray (contiguous elements) with at most one element deletion. 
+    /// In other words, you want to choose a subarray and optionally delete 
+    /// one element from it so that there is still at least one element left 
+    /// and the sum of the remaining elements is maximum possible.
+    /// Note that the subarray needs to be non-empty after deleting one element.
+    /// 
+    /// Example 1:
+    /// Input: arr = [1,-2,0,3]
+    /// Output: 4
+    /// Explanation: Because we can choose [1, -2, 0, 3] and drop -2, thus the 
+    /// subarray [1, 0, 3] becomes the maximum value.
+    ///
+    /// Example 2:
+    /// Input: arr = [1,-2,-2,3]
+    /// Output: 3
+    /// Explanation: We just choose [3] and it's the maximum sum.
+    ///
+    /// Example 3:
+    /// Input: arr = [-1,-1,-1,-1]
+    /// Output: -1
+    /// Explanation: The final subarray needs to be non-empty. You can't 
+    /// choose [-1] and delete -1 from it, then get an empty subarray to make 
+    /// the sum equals to 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= arr.length <= 10^5
+    /// 2. -10^4 <= arr[i] <= 10^4
+    /// </summary>
+    int maximumSum(vector<int>& arr);
+
+    /// <summary>
+    /// Leet code #1191. K-Concatenation Maximum Sum
+    /// 
+    /// Given an integer array arr and an integer k, modify the array by repeating 
+    /// it k times.
+    /// For example, if arr = [1, 2] and k = 3 then the modified array will 
+    /// be [1, 2, 1, 2, 1, 2].
+    /// Return the maximum sub-array sum in the modified array. Note that the 
+    /// length of the sub-array can be 0 and its sum in that case is 0.
+    ///
+    /// As the answer can be very large, return the answer modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: arr = [1,2], k = 3
+    /// Output: 9
+    ///
+    /// Example 2:
+    /// Input: arr = [1,-2,1], k = 5
+    /// Output: 2
+    /// Example 3:
+    /// Input: arr = [-1,-2], k = 7
+    /// Output: 0
+    /// 
+    /// Constraints:
+    /// 1. 1 <= arr.length <= 10^5
+    /// 2. 1 <= k <= 10^5
+    /// 3. -10^4 <= arr[i] <= 10^4
+    /// </summary>
+    int kConcatenationMaxSum(vector<int>& arr, int k);
+
+    /// <summary>
+    /// Leet code #1184. Distance Between Bus Stops
+    /// 
+    /// A bus has n stops numbered from 0 to n - 1 that form a circle. We know 
+    /// the distance between all pairs of neighboring stops where distance[i] 
+    /// is the distance between the stops number i and (i + 1) % n.
+    /// The bus goes along both directions i.e. clockwise and counterclockwise.
+    /// Return the shortest distance between the given start and destination 
+    /// stops.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: distance = [1,2,3,4], start = 0, destination = 1
+    /// Output: 1
+    /// Explanation: Distance between 0 and 1 is 1 or 9, minimum is 1.
+    /// 
+    /// Example 2:
+    ///
+    /// Input: distance = [1,2,3,4], start = 0, destination = 2
+    /// Output: 3
+    /// Explanation: Distance between 0 and 2 is 3 or 7, minimum is 3.
+    ///  
+    /// Example 3:
+    ///
+    /// Input: distance = [1,2,3,4], start = 0, destination = 3
+    /// Output: 4
+    /// Explanation: Distance between 0 and 3 is 6 or 4, minimum is 4.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 10^4
+    /// 2. distance.length == n
+    /// 3. 0 <= start, destination < n
+    /// 4. 0 <= distance[i] <= 10^4
+    /// </summary>
+    int distanceBetweenBusStops(vector<int>& distance, int start, int destination);
+
+    /// <summary>
+    /// Leet code #1183. Maximum Number of Ones
+    /// 
+    /// Consider a matrix M with dimensions width * height, such that every cell
+    /// has value 0 or 1, and any square sub-matrix of M of size 
+    /// sideLength * sideLength has at most maxOnes ones.
+    /// Return the maximum possible number of ones that the matrix M can have.
+    /// 
+    /// Example 1:
+    /// Input: width = 3, height = 3, sideLength = 2, maxOnes = 1
+    /// Output: 4
+    /// Explanation:
+    /// In a 3*3 matrix, no 2*2 sub-matrix can have more than 1 one.
+    /// The best solution that has 4 ones is:
+    /// [1,0,1]
+    /// [0,0,0]
+    /// [1,0,1]
+    ///
+    /// Example 2:
+    /// Input: width = 3, height = 3, sideLength = 2, maxOnes = 2
+    /// Output: 6
+    /// Explanation:
+    /// [1,0,1]
+    /// [1,0,1]
+    /// [1,0,1]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= width, height <= 100
+    /// 2. 1 <= sideLength <= width, height
+    /// 3. 0 <= maxOnes <= sideLength * sideLength
+    /// </summary>
+    int maximumNumberOfOnes(int width, int height, int sideLength, int maxOnes);
+
+    /// <summary>
+    /// Leet code #1176. Diet Plan Performance
+    /// 
+    /// A dieter consumes calories[i] calories on the i-th day.  For every 
+    /// consecutive sequence of k days, they look at T, the total calories 
+    /// consumed during that sequence of k days:
+    /// If T < lower, they performed poorly on their diet and lose 1 point; 
+    /// If T > upper, they performed well on their diet and gain 1 point;
+    /// Otherwise, they performed normally and there is no change in points.
+    /// Return the total number of points the dieter has after all 
+    /// calories.length days.
+    ///
+    /// Note that: The total points could be negative.
+    /// 
+    /// Example 1:
+    /// Input: calories = [1,2,3,4,5], k = 1, lower = 3, upper = 3
+    /// Output: 0
+    /// Explaination: calories[0], calories[1] < lower and 
+    /// calories[3], calories[4] > upper, total points = 0.
+    ///
+    /// Example 2:
+    /// Input: calories = [3,2], k = 2, lower = 0, upper = 1
+    /// Output: 1
+    /// Explaination: calories[0] + calories[1] > upper, total points = 1.
+    ///
+    /// Example 3:
+    /// Input: calories = [6,5,0,0], k = 2, lower = 1, upper = 5
+    /// Output: 0
+    /// Explaination: calories[0] + calories[1] > upper, 
+    /// calories[2] + calories[3] < lower, total points = 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= k <= calories.length <= 10^5
+    /// 2. 0 <= calories[i] <= 20000
+    /// 3. 0 <= lower <= upper
+    /// </summary>
+    int dietPlanPerformance(vector<int>& calories, int k, int lower, int upper);
+
+    /// <summary>
+    /// Leet code #1138. Alphabet Board Path
+    /// 
+    /// On an alphabet board, we start at position (0, 0), corresponding to 
+    /// character board[0][0].
+    ///
+    /// Here, board = ["abcde", "fghij", "klmno", "pqrst", "uvwxy", "z"], 
+    /// as shown in the diagram below.
+    ///
+    /// We may make the following moves:
+    ///
+    /// 'U' moves our position up one row, if the position exists on the 
+    /// board;
+    /// 'D' moves our position down one row, if the position exists on the 
+    /// board;
+    /// 'L' moves our position left one column, if the position exists on the 
+    /// board;
+    /// 'R' moves our position right one column, if the position exists on the 
+    /// board;
+    /// '!' adds the character board[r][c] at our current position (r, c) to the 
+    /// answer.
+    /// (Here, the only positions that exist on the board are positions with 
+    ///  letters on them.)
+    ///
+    /// Return a sequence of moves that makes our answer equal to target in the 
+    /// minimum number of moves.  You may return any path that does so.
+    ///
+    /// Example 1:
+    /// Input: target = "leet"
+    /// Output: "DDR!UURRR!!DDD!"
+    ///
+    /// Example 2:
+    /// Input: target = "code"
+    /// Output: "RR!DDRR!UUL!R!"
+    ///  
+    /// Constraints:
+    /// 1. 1 <= target.length <= 100
+    /// 2. target consists only of English lowercase letters.
+    /// </summary>
+    string alphabetBoardPath(string target);
+
+    /// <summary>
+    /// Leet code #1151. Minimum Swaps to Group All 1's Together
+    /// 
+    /// Given a binary array data, return the minimum number of swaps required 
+    /// to group all 1¡¯s present in the array together in any place in the array.
+    /// 
+    /// Example 1:
+    /// Input: [1,0,1,0,1]
+    /// Output: 1
+    /// Explanation: 
+    /// There are 3 ways to group all 1's together:
+    /// [1,1,1,0,0] using 1 swap.
+    /// [0,1,1,1,0] using 2 swaps.
+    /// [0,0,1,1,1] using 1 swap.
+    /// The minimum is 1.
+    ///
+    /// Example 2:
+    /// Input: [0,0,0,1,0]
+    /// Output: 0
+    /// Explanation: 
+    /// Since there is only one 1 in the array, no swaps needed.
+    ///
+    /// Example 3:
+    /// Input: [1,0,1,0,1,0,0,1,1,0,1]
+    /// Output: 3
+    /// Explanation: 
+    /// One possible solution that uses 3 swaps is [0,0,0,0,0,1,1,1,1,1,1].
+    /// 
+    /// Note:
+    /// 1. 1 <= data.length <= 10^5
+    /// 2. 0 <= data[i] <= 1
+    /// </summary>
+    int minSwaps(vector<int>& data);
+
+    /// <summary>
+    /// Leet code #1124. Longest Well-Performing Interval
+    /// 
+    /// We are given hours, a list of the number of hours worked per day for a 
+    /// given employee.
+    /// A day is considered to be a tiring day if and only if the number of hours 
+    /// worked is (strictly) greater than 8.
+    /// A well-performing interval is an interval of days for which the number of 
+    /// tiring days is strictly larger than the number of non-tiring days.
+    /// Return the length of the longest well-performing interval.
+    /// 
+    /// Example 1:
+    /// Input: hours = [9,9,6,0,6,6,9]
+    /// Output: 3
+    /// Explanation: The longest well-performing interval is [9,9,6].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= hours.length <= 10000
+    /// 2. 0 <= hours[i] <= 16
+    /// </summary>
+    int longestWPI(vector<int>& hours);
+
+    /// <summary>
+    /// Leet code #1121. Divide Array Into Increasing Sequences
+    /// 
+    /// Given a non-decreasing array of positive integers nums and an integer K, 
+    /// find out if this array can be divided into one or more disjoint 
+    /// increasing subsequences of length at least K.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,2,2,3,3,4,4], K = 3
+    /// Output: true
+    /// Explanation: 
+    /// The array can be divided into the two subsequences [1,2,3,4] and [2,3,4] 
+    /// with lengths at least 3 each.
+    ///
+    /// Example 2:
+    /// Input: nums = [5,6,6,7,8], K = 3
+    /// Output: false
+    /// Explanation: 
+    /// There is no way to divide the array using the conditions required.
+    /// 
+    /// Note:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= K <= nums.length
+    /// 3. 1 <= nums[i] <= 10^5
+    /// </summary>
+    bool canDivideIntoSubsequences(vector<int>& nums, int K);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

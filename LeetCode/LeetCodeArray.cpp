@@ -6847,7 +6847,7 @@ void LeetCode::duplicateZeros(vector<int>& arr)
 /// 1. 1 <= hours.length <= 10000
 /// 2. 0 <= hours[i] <= 16
 /// </summary>
-int LeetCode::longestWPI(vector<int>& hours)
+int LeetCodeArray::longestWPI(vector<int>& hours)
 {
     int n = hours.size();
     vector<int> dp(n, -1);
@@ -6904,7 +6904,7 @@ int LeetCode::longestWPI(vector<int>& hours)
 /// 2. 1 <= K <= nums.length
 /// 3. 1 <= nums[i] <= 10^5
 /// </summary>
-bool LeetCode::canDivideIntoSubsequences(vector<int>& nums, int K)
+bool LeetCodeArray::canDivideIntoSubsequences(vector<int>& nums, int K)
 {
     int max_dup = 0;
     int first = 0;
@@ -6920,6 +6920,8 @@ bool LeetCode::canDivideIntoSubsequences(vector<int>& nums, int K)
             first = i;
         }
     }
+    // the minimum length of the increasing sequence is determined by 
+    // maxium duplication
     if ((int)nums.size() / max_dup >= K)
     {
         return true;
@@ -6969,7 +6971,7 @@ bool LeetCode::canDivideIntoSubsequences(vector<int>& nums, int K)
 /// 1. 1 <= target.length <= 100
 /// 2. target consists only of English lowercase letters.
 /// </summary>
-string LeetCode::alphabetBoardPath(string target)
+string LeetCodeArray::alphabetBoardPath(string target)
 {
     string result;
     char curr = 'a';
@@ -7018,58 +7020,6 @@ string LeetCode::alphabetBoardPath(string target)
 }
 
 /// <summary>
-/// Leet code #1151. Minimum Swaps to Group All 1's Together
-/// 
-/// Given a binary array data, return the minimum number of swaps required 
-/// to group all 1’s present in the array together in any place in the array.
-/// 
-/// Example 1:
-/// Input: [1,0,1,0,1]
-/// Output: 1
-/// Explanation: 
-/// There are 3 ways to group all 1's together:
-/// [1,1,1,0,0] using 1 swap.
-/// [0,1,1,1,0] using 2 swaps.
-/// [0,0,1,1,1] using 1 swap.
-/// The minimum is 1.
-///
-/// Example 2:
-/// Input: [0,0,0,1,0]
-/// Output: 0
-/// Explanation: 
-/// Since there is only one 1 in the array, no swaps needed.
-///
-/// Example 3:
-/// Input: [1,0,1,0,1,0,0,1,1,0,1]
-/// Output: 3
-/// Explanation: 
-/// One possible solution that uses 3 swaps is [0,0,0,0,0,1,1,1,1,1,1].
-/// 
-/// Note:
-/// 1. 1 <= data.length <= 10^5
-/// 2. 0 <= data[i] <= 1
-/// </summary>
-int LeetCode::minSwaps(vector<int>& data)
-{
-    vector<int> sum(data.size());
-    for (size_t i = 0; i < data.size(); i++)
-    {
-        if (i == 0) sum[0] = data[0];
-        else (sum[i] = sum[i - 1] + data[i]);
-    }
-    int length = sum[sum.size() - 1];
-    int result = 0;
-    for (size_t i = length - 1; i < sum.size(); i++)
-    {
-        int count = 0;
-        if (i == length - 1) count = sum[i];
-        else count = sum[i] - sum[i - length];
-        result = max(result, count);
-    }
-    return length - result;
-}
-
-/// <summary>
 /// Leet code #1176. Diet Plan Performance
 /// 
 /// A dieter consumes calories[i] calories on the i-th day.  For every 
@@ -7105,7 +7055,7 @@ int LeetCode::minSwaps(vector<int>& data)
 /// 2. 0 <= calories[i] <= 20000
 /// 3. 0 <= lower <= upper
 /// </summary>
-int LeetCode::dietPlanPerformance(vector<int>& calories, int k, int lower, int upper)
+int LeetCodeArray::dietPlanPerformance(vector<int>& calories, int k, int lower, int upper)
 {
     vector<int> sum(calories.size());
     for (size_t i = 0; i < calories.size(); i++)
@@ -7123,72 +7073,6 @@ int LeetCode::dietPlanPerformance(vector<int>& calories, int k, int lower, int u
         }
         if (s > upper) result++;
         else if (s < lower) result--;
-    }
-    return result;
-}
-
-/// <summary>
-/// Leet code #1177. Can Make Palindrome from Substring
-/// 
-/// Given a string s, we make queries on substrings of s.
-/// For each query queries[i] = [left, right, k], we may rearrange the 
-/// substring s[left], ..., s[right], and then choose up to k of them to 
-/// replace with any lowercase English letter. 
-/// If the substring is possible to be a palindrome string after the 
-/// operations above, the result of the query is true. Otherwise, the result 
-/// is false.
-/// Return an array answer[], where answer[i] is the result of the i-th query 
-/// queries[i].
-/// Note that: Each letter is counted individually for replacement so if for 
-/// example s[left..right] = "aaa", and k = 2, we can only replace two of the 
-/// letters.  (Also, note that the initial string s is never modified by 
-/// any query.)
-/// 
-/// Example :
-/// Input: s = "abcda", queries = [[3,3,0],[1,2,0],[0,3,1],[0,3,2],[0,4,1]]
-/// Output: [true,false,false,true,true]
-/// Explanation:
-/// queries[0] : substring = "d", is palidrome.
-/// queries[1] : substring = "bc", is not palidrome.
-/// queries[2] : substring = "abcd", is not palidrome after replacing only 1 
-///              character.
-/// queries[3] : substring = "abcd", could be changed to "abba" which is 
-///              palidrome. Also this can be changed to "baab" first rearrange 
-///              it "bacd" then replace "cd" with "ab".
-/// queries[4] : substring = "abcda", could be changed to "abcba" which is palidrome.
-/// 
-/// Constraints:
-/// 1. 1 <= s.length, queries.length <= 10^5
-/// 2. 0 <= queries[i][0] <= queries[i][1] < s.length
-/// 3. 0 <= queries[i][2] <= s.length
-/// 4. s only contains lowercase English letters.
-/// </summary>
-vector<bool> LeetCode::canMakePaliQueries(string s, vector<vector<int>>& queries)
-{
-    vector<int> dp(s.size());
-
-    for (size_t i = 0; i < s.size(); i++)
-    {
-        dp[i] = 1 << (s[i] - 'a');
-        if (i > 0) dp[i] = dp[i] ^ dp[i - 1];
-    }
-    vector<bool> result;
-
-    for (size_t i = 0; i < queries.size(); i++)
-    {
-        int bit_mask = dp[queries[i][1]];
-        if (queries[i][0] > 0)
-        {
-            bit_mask ^= dp[queries[i][0] - 1];
-        }
-        int count = 0;
-        for (size_t j = 0; j < 32; j++)
-        {
-            int bit = 1 << j;
-            if ((bit_mask & bit) != 0) count++;
-        }
-        if ((count / 2) <= queries[i][2]) result.push_back(true);
-        else result.push_back(false);
     }
     return result;
 }
@@ -7224,7 +7108,7 @@ vector<bool> LeetCode::canMakePaliQueries(string s, vector<vector<int>>& queries
 /// 2. 1 <= sideLength <= width, height
 /// 3. 0 <= maxOnes <= sideLength * sideLength
 /// </summary>
-int LeetCode::maximumNumberOfOnes(int width, int height, int sideLength, int maxOnes)
+int LeetCodeArray::maximumNumberOfOnes(int width, int height, int sideLength, int maxOnes)
 {
     priority_queue<int> heap;
     for (int i = 0; i < sideLength; i++)
@@ -7280,7 +7164,7 @@ int LeetCode::maximumNumberOfOnes(int width, int height, int sideLength, int max
 /// 3. 0 <= start, destination < n
 /// 4. 0 <= distance[i] <= 10^4
 /// </summary>
-int LeetCode::distanceBetweenBusStops(vector<int>& distance, int start, int destination)
+int LeetCodeArray::distanceBetweenBusStops(vector<int>& distance, int start, int destination)
 {
     int distance1 = 0;
     for (int i = start; ; i++)
@@ -7332,39 +7216,26 @@ int LeetCode::distanceBetweenBusStops(vector<int>& distance, int start, int dest
 /// 1. 1 <= arr.length <= 10^5
 /// 2. -10^4 <= arr[i] <= 10^4
 /// </summary>
-int LeetCode::maximumSum(vector<int>& arr)
+int LeetCodeArray::maximumSum(vector<int>& arr)
 {
-    int last_sum_del = 0;
-    int last_sum = 0;
-    int last_item_del = 0;
-    int next_item_del = 0;
-    int sum = 0;
+    vector<int> dp1(arr.size()), dp2(arr.size());
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        dp1[i] = arr[i];
+        if (i > 0) dp1[i] = max(dp1[i-1] + arr[i], dp1[i]);
+    }
+    for (int i = arr.size() - 1; i >=0; i--)
+    {
+        dp2[i] = arr[i];
+        if (i < (int)arr.size() - 1) dp2[i] = max(dp2[i + 1] + arr[i], dp2[i]);
+    }
     int result = INT_MIN;
     for (size_t i = 0; i < arr.size(); i++)
     {
-        sum += arr[i];
-        result = max(result, sum - last_sum - next_item_del);
-        result = max(result, sum - last_sum_del);
-        // we have a single item dip, the dip since last sum can be 
-        // counted in last_sum.
-        if (arr[i] < last_item_del)
+        result = max(result, dp1[i]);
+        if (i > 0 && i < arr.size() - 1)
         {
-            last_sum_del += -last_item_del + arr[i];
-            last_item_del = arr[i];
-        }
-
-        if (arr[i] < next_item_del) next_item_del = arr[i];
-        // If we have a lower sum, even account for new dip, 
-        // we use the new last_sum
-        if (sum <= last_sum)
-        {
-            last_sum = sum;
-            next_item_del = 0;
-        }
-        if (sum <= last_sum_del)
-        {
-            last_sum_del = sum;
-            last_item_del = 0;
+            result = max(result, dp1[i - 1] + dp2[i + 1]);
         }
     }
     return result;
@@ -7398,82 +7269,26 @@ int LeetCode::maximumSum(vector<int>& arr)
 /// 2. 1 <= k <= 10^5
 /// 3. -10^4 <= arr[i] <= 10^4
 /// </summary>
-int LeetCode::kConcatenationMaxSum(vector<int>& arr, int k)
+int LeetCodeArray::kConcatenationMaxSum(vector<int>& arr, int k)
 {
     int M = 1000000007;
+    // use 64 bits so we do not worry about overflow
     long long sum = 0;
     long long min_sum = 0;
-    long long max_sum = 0;
-    long long max_sub = 0;
-
-    for (size_t i = 0; i < arr.size(); i++)
-    {
-        sum += arr[i];
-        max_sub = max(max_sub, sum - min_sum);
-        min_sum = min(min_sum, sum);
-        max_sum = max(max_sum, sum);
-    }
-
     long long result = 0;
-    if (sum > 0 && k > 1)
+    int n = arr.size();
+    for (size_t i = 0; i < min(k, 2) * arr.size(); i++)
     {
-        result = sum * k - min_sum;
-        if (sum < max_sum)
-        {
-            result -= sum - max_sum;
-        }
+        sum += arr[i % n];
+        result = max(result, sum - min_sum);
+        min_sum = min(min_sum, sum);
     }
-    else
+    if (sum > 0 && k > 2)
     {
-        result = max_sum;
-        if (k > 1) result += sum - min_sum;
-        result = max(result, max_sub);
+        result += (sum / 2) * (k - 2);
     }
     result = result % M;
     return (int)result;
-}
-
-/// <summary>
-/// Leet code #1196. How Many Apples Can You Put into the Basket
-/// 
-/// You have some apples, where arr[i] is the weight of the i-th apple.  
-/// You also have a basket that can carry up to 5000 units of weight.
-///
-/// Return the maximum number of apples you can put in the basket.
-/// 
-/// Example 1:
-///
-/// Input: arr = [100,200,150,1000]
-/// Output: 4
-/// Explanation: All 4 apples can be carried by the basket since their 
-/// sum of weights is 1450.
-///
-/// Example 2:
-///
-/// Input: arr = [900,950,800,1000,700,800]
-/// Output: 5
-/// Explanation: The sum of weights of the 6 apples exceeds 5000 so we 
-/// choose any 5 of them.
-/// 
-/// Constraints:
-/// 1. 1 <= arr.length <= 10^3
-/// 2. 1 <= arr[i] <= 10^3
-/// </summary>
-int LeetCode::maxNumberOfApples(vector<int>& arr)
-{
-    priority_queue<int> basket;
-    int sum = 0;
-    for (size_t i = 0; i < arr.size(); i++)
-    {
-        basket.push(arr[i]);
-        sum += arr[i];
-        if (sum > 5000)
-        {
-            sum -= basket.top();
-            basket.pop();
-        }
-    }
-    return basket.size();
 }
 
 /// <summary>
@@ -7511,7 +7326,7 @@ int LeetCode::maxNumberOfApples(vector<int>& arr)
 /// 1. 2 <= arr.length <= 10^5
 /// 2. -10^6 <= arr[i] <= 10^6
 /// </summary>
-vector<vector<int>> LeetCode::minimumAbsDifference(vector<int>& arr)
+vector<vector<int>> LeetCodeArray::minimumAbsDifference(vector<int>& arr)
 {
     int diff = INT_MAX;
     vector<int> nums = arr;
@@ -9938,6 +9753,58 @@ bool LeetCodeArray::checkIfExist(vector<int>& arr)
         num_set.insert(arr[i]);
     }
     return false;
+}
+
+/// <summary>
+/// Leet code #1151. Minimum Swaps to Group All 1's Together
+/// 
+/// Given a binary array data, return the minimum number of swaps required 
+/// to group all 1’s present in the array together in any place in the array.
+/// 
+/// Example 1:
+/// Input: [1,0,1,0,1]
+/// Output: 1
+/// Explanation: 
+/// There are 3 ways to group all 1's together:
+/// [1,1,1,0,0] using 1 swap.
+/// [0,1,1,1,0] using 2 swaps.
+/// [0,0,1,1,1] using 1 swap.
+/// The minimum is 1.
+///
+/// Example 2:
+/// Input: [0,0,0,1,0]
+/// Output: 0
+/// Explanation: 
+/// Since there is only one 1 in the array, no swaps needed.
+///
+/// Example 3:
+/// Input: [1,0,1,0,1,0,0,1,1,0,1]
+/// Output: 3
+/// Explanation: 
+/// One possible solution that uses 3 swaps is [0,0,0,0,0,1,1,1,1,1,1].
+/// 
+/// Note:
+/// 1. 1 <= data.length <= 10^5
+/// 2. 0 <= data[i] <= 1
+/// </summary>
+int LeetCodeArray::minSwaps(vector<int>& data)
+{
+    vector<int> sum(data.size());
+    for (size_t i = 0; i < data.size(); i++)
+    {
+        if (i == 0) sum[0] = data[0];
+        else (sum[i] = sum[i - 1] + data[i]);
+    }
+    int length = sum[sum.size() - 1];
+    int result = 0;
+    for (size_t i = length - 1; i < sum.size(); i++)
+    {
+        int count = 0;
+        if (i == length - 1) count = sum[i];
+        else count = sum[i] - sum[i - length];
+        result = max(result, count);
+    }
+    return length - result;
 }
 
 #pragma endregion

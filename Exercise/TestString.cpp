@@ -1350,8 +1350,20 @@ void TestLeetCode1347(void)
     Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
 }
 
+void TestLeetCode1177(void)
+{
+    Logger::WriteMessage("Test Leet Code 1177");
+    LeetCodeString leetCode;
+    string s = "abcda";
+    vector<vector<int>> queries = { {3, 3, 0},{1, 2, 0},{0, 3, 1},{0, 3, 2},{0, 4, 1} };
+    vector<bool> result = leetCode.canMakePaliQueries(s, queries);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1177();
     TestLeetCode1347();
     TestLeetCode1332();
     TestLeetCode1328();
