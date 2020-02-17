@@ -27,42 +27,42 @@
 /// </summary>
 vector<Interval> LeetCode::mergeIntervals(vector<Interval>& intervals)
 {
-	vector<Interval> result;
-	typedef struct
-	{
-		bool operator() (Interval a, Interval b)
-		{
-			return (a.start > b.start);
-		}
-	} greater_start;
-	priority_queue<Interval, vector<Interval>, greater_start> queue;
-	for (size_t i = 0; i < intervals.size(); i++)
-	{
-		queue.push(intervals[i]);
-	}
-	while (!queue.empty())
-	{
-		Interval first = queue.top();
-		queue.pop();
-		if (queue.empty())
-		{
-			result.push_back(first);
-			continue;
-		}
-		Interval second = queue.top();
-		queue.pop();
-		if (first.end >= second.start)
-		{
-			first.end = max(first.end, second.end);
-			queue.push(first);
-		}
-		else
-		{
-			queue.push(second);
-			result.push_back(first);
-		}
-	}
-	return result;
+    vector<Interval> result;
+    typedef struct
+    {
+        bool operator() (Interval a, Interval b)
+        {
+            return (a.start > b.start);
+        }
+    } greater_start;
+    priority_queue<Interval, vector<Interval>, greater_start> queue;
+    for (size_t i = 0; i < intervals.size(); i++)
+    {
+        queue.push(intervals[i]);
+    }
+    while (!queue.empty())
+    {
+        Interval first = queue.top();
+        queue.pop();
+        if (queue.empty())
+        {
+            result.push_back(first);
+            continue;
+        }
+        Interval second = queue.top();
+        queue.pop();
+        if (first.end >= second.start)
+        {
+            first.end = max(first.end, second.end);
+            queue.push(first);
+        }
+        else
+        {
+            queue.push(second);
+            result.push_back(first);
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -79,27 +79,27 @@ vector<Interval> LeetCode::mergeIntervals(vector<Interval>& intervals)
 /// </summary>
 vector<Interval> LeetCode::insertInterval(vector<Interval>& intervals, Interval newInterval)
 {
-	vector<Interval> result;
-	for (size_t i = 0; i < intervals.size(); i++)
-	{
-		Interval interval = intervals[i];
-		if (interval.end < newInterval.start)
-		{
-			result.push_back(interval);
-		}
-		else if (newInterval.end < interval.start)
-		{
-			result.push_back(newInterval);
-			newInterval = interval;
-		}
-		else
-		{
-			newInterval.start = min(interval.start, newInterval.start);
-			newInterval.end = max(interval.end, newInterval.end);
-		}
-	}
-	result.push_back(newInterval);
-	return result;
+    vector<Interval> result;
+    for (size_t i = 0; i < intervals.size(); i++)
+    {
+        Interval interval = intervals[i];
+        if (interval.end < newInterval.start)
+        {
+            result.push_back(interval);
+        }
+        else if (newInterval.end < interval.start)
+        {
+            result.push_back(newInterval);
+            newInterval = interval;
+        }
+        else
+        {
+            newInterval.start = min(interval.start, newInterval.start);
+            newInterval.end = max(interval.end, newInterval.end);
+        }
+    }
+    result.push_back(newInterval);
+    return result;
 }
 
 /// <summary>
@@ -129,23 +129,23 @@ vector<Interval> LeetCode::insertInterval(vector<Interval>& intervals, Interval 
 /// </summary>
 int LeetCode::minPatches(vector<int>& nums, int n)
 {
-	int result = 0;
-	unsigned long long sum = 0;
-	size_t index = 0;
-	while (sum < (unsigned long long)n)
-	{
-		if (index < nums.size() && (unsigned long long) nums[index] <= sum + 1)
-		{
-			sum += nums[index];
-			index++;
-		}
-		else
-		{
-			result++;
-			sum += sum + 1;
-		}
-	}
-	return result;
+    int result = 0;
+    unsigned long long sum = 0;
+    size_t index = 0;
+    while (sum < (unsigned long long)n)
+    {
+        if (index < nums.size() && (unsigned long long) nums[index] <= sum + 1)
+        {
+            sum += nums[index];
+            index++;
+        }
+        else
+        {
+            result++;
+            sum += sum + 1;
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -185,29 +185,29 @@ int LeetCode::minPatches(vector<int>& nums, int n)
 /// </summary>
 int LeetCode::findMaximizedCapital(int k, int W, vector<int>& Profits, vector<int>& Capital)
 {
-	priority_queue<pair<int, int>> capital_map;
-	priority_queue<int> profit_map;
+    priority_queue<pair<int, int>> capital_map;
+    priority_queue<int> profit_map;
 
-	for (size_t i = 0; i < Capital.size(); i++)
-	{
-		capital_map.push(make_pair(-Capital[i], Profits[i]));
-	}
+    for (size_t i = 0; i < Capital.size(); i++)
+    {
+        capital_map.push(make_pair(-Capital[i], Profits[i]));
+    }
 
-	for (int i = 0; i < k; i++)
-	{
-		while (!capital_map.empty() && -capital_map.top().first <= W)
-		{
-			profit_map.push(capital_map.top().second);
-			capital_map.pop();
-		}
-		if (profit_map.empty())
-		{
-			break;
-		}
-		W += profit_map.top();
-		profit_map.pop();
-	}
-	return W;
+    for (int i = 0; i < k; i++)
+    {
+        while (!capital_map.empty() && -capital_map.top().first <= W)
+        {
+            profit_map.push(capital_map.top().second);
+            capital_map.pop();
+        }
+        if (profit_map.empty())
+        {
+            break;
+        }
+        W += profit_map.top();
+        profit_map.pop();
+    }
+    return W;
 }
 
 /// <summary>
@@ -222,31 +222,31 @@ int LeetCode::findMaximizedCapital(int k, int W, vector<int>& Profits, vector<in
 /// </summary>
 int LeetCode::minMeetingRooms(vector<Interval>& intervals)
 {
-	struct IntervalCompare
-	{
-		bool operator() (Interval &a, Interval &b)
-		{
-			if (a.start < b.start) return true;
-			else if ((a.start == b.start) && (a.end < b.end)) return true;
-			else return false;
-		}
-	};
-	sort(intervals.begin(), intervals.end(), IntervalCompare());
-	vector<int> ends;
-	int max_rooms = 0;
-	for (size_t i = 0; i < intervals.size(); i++)
-	{
-		int count = 1;
-		for (size_t j = 0; j < i; j++)
-		{
-			if (intervals[i].start < intervals[j].end)
-			{
-				count++;
-			}
-		}
-		max_rooms = max(max_rooms, count);
-	}
-	return max_rooms;
+    struct IntervalCompare
+    {
+        bool operator() (Interval &a, Interval &b)
+        {
+            if (a.start < b.start) return true;
+            else if ((a.start == b.start) && (a.end < b.end)) return true;
+            else return false;
+        }
+    };
+    sort(intervals.begin(), intervals.end(), IntervalCompare());
+    vector<int> ends;
+    int max_rooms = 0;
+    for (size_t i = 0; i < intervals.size(); i++)
+    {
+        int count = 1;
+        for (size_t j = 0; j < i; j++)
+        {
+            if (intervals[i].start < intervals[j].end)
+            {
+                count++;
+            }
+        }
+        max_rooms = max(max_rooms, count);
+    }
+    return max_rooms;
 }
 
 /// <summary>
@@ -261,19 +261,19 @@ int LeetCode::minMeetingRooms(vector<Interval>& intervals)
 /// </summary>
 int LeetCode::minMeetingRoomsII(vector<Interval>& intervals)
 {
-	map<int, int> time_line;
-	for (size_t i = 0; i < intervals.size(); i++)
-	{
-		time_line[intervals[i].start]++;
-		time_line[intervals[i].end]--;
-	}
-	int max_rooms = 0, rooms = 0;
-	for (auto time : time_line)
-	{
-		rooms += time.second;
-		max_rooms = max(max_rooms, rooms);
-	}
-	return max_rooms;
+    map<int, int> time_line;
+    for (size_t i = 0; i < intervals.size(); i++)
+    {
+        time_line[intervals[i].start]++;
+        time_line[intervals[i].end]--;
+    }
+    int max_rooms = 0, rooms = 0;
+    for (auto time : time_line)
+    {
+        rooms += time.second;
+        max_rooms = max(max_rooms, rooms);
+    }
+    return max_rooms;
 }
 
 /// <summary>
@@ -300,44 +300,44 @@ int LeetCode::minMeetingRoomsII(vector<Interval>& intervals)
 /// </summary>
 int LeetCode::eraseOverlapIntervals(vector<Interval>& intervals)
 {
-	int count = 0;
-	struct IntervalCompare
-	{
-		bool operator() (const Interval& a, const Interval& b)
-		{
-			if (a.end < b.end)
-			{
-				return true;
-			}
-			else if ((a.end == b.end) && (a.start > b.start))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-	};
+    int count = 0;
+    struct IntervalCompare
+    {
+        bool operator() (const Interval& a, const Interval& b)
+        {
+            if (a.end < b.end)
+            {
+                return true;
+            }
+            else if ((a.end == b.end) && (a.start > b.start))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    };
 
-	sort(intervals.begin(), intervals.end(), IntervalCompare());
-	Interval last;
-	for (size_t i = 0; i < intervals.size(); i++)
-	{
-		if (i == 0)
-		{
-			last = intervals[i];
-		}
-		else
-		{
-			if (intervals[i].start < last.end) count++;
-			else
-			{
-				last = intervals[i];
-			}
-		}
-	}
-	return count;
+    sort(intervals.begin(), intervals.end(), IntervalCompare());
+    Interval last;
+    for (size_t i = 0; i < intervals.size(); i++)
+    {
+        if (i == 0)
+        {
+            last = intervals[i];
+        }
+        else
+        {
+            if (intervals[i].start < last.end) count++;
+            else
+            {
+                last = intervals[i];
+            }
+        }
+    }
+    return count;
 }
 
 /// <summary>
@@ -376,28 +376,28 @@ int LeetCode::eraseOverlapIntervals(vector<Interval>& intervals)
 /// </summary>
 vector<int> LeetCode::findRightInterval(vector<Interval>& intervals)
 {
-	vector<int> result;
-	map<int, int> range_order;
-	for (size_t i = 0; i < intervals.size(); i++)
-	{
-		if (range_order.find(intervals[i].start) == range_order.end())
-		{
-			range_order[intervals[i].start] = i;
-		}
-	}
-	for (size_t i = 0; i < intervals.size(); i++)
-	{
-		map<int, int>::iterator itr = range_order.lower_bound(intervals[i].end);
-		if (itr == range_order.end())
-		{
-			result.push_back(-1);
-		}
-		else
-		{
-			result.push_back(itr->second);
-		}
-	}
-	return result;
+    vector<int> result;
+    map<int, int> range_order;
+    for (size_t i = 0; i < intervals.size(); i++)
+    {
+        if (range_order.find(intervals[i].start) == range_order.end())
+        {
+            range_order[intervals[i].start] = i;
+        }
+    }
+    for (size_t i = 0; i < intervals.size(); i++)
+    {
+        map<int, int>::iterator itr = range_order.lower_bound(intervals[i].end);
+        if (itr == range_order.end())
+        {
+            result.push_back(-1);
+        }
+        else
+        {
+            result.push_back(itr->second);
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -426,40 +426,40 @@ vector<int> LeetCode::findRightInterval(vector<Interval>& intervals)
 /// </summary>
 int LeetCode::findMinArrowShots(vector<pair<int, int>>& points)
 {
-	int count = 0;
-	set<pair<int, int>> range_set;
-	for (pair<int, int> point : points)
-	{
-		range_set.insert(point);
-	}
-	while (!range_set.empty())
-	{
-		set<pair<int, int>>::iterator itr = range_set.begin();
-		pair<int, int> curr = *itr;
-		itr++;
-		if (itr == range_set.end())
-		{
-			count++;
-			range_set.erase(curr);
-		}
-		else
-		{
-			pair<int, int> next = *itr;
-			if (next.first <= curr.second)
-			{
-				pair<int, int> intersection = make_pair(max(curr.first, next.first), min(curr.second, next.second));
-				range_set.erase(curr);
-				range_set.erase(next);
-				range_set.insert(intersection);
-			}
-			else
-			{
-				count++;
-				range_set.erase(curr);
-			}
-		}
-	}
-	return count;
+    int count = 0;
+    set<pair<int, int>> range_set;
+    for (pair<int, int> point : points)
+    {
+        range_set.insert(point);
+    }
+    while (!range_set.empty())
+    {
+        set<pair<int, int>>::iterator itr = range_set.begin();
+        pair<int, int> curr = *itr;
+        itr++;
+        if (itr == range_set.end())
+        {
+            count++;
+            range_set.erase(curr);
+        }
+        else
+        {
+            pair<int, int> next = *itr;
+            if (next.first <= curr.second)
+            {
+                pair<int, int> intersection = make_pair(max(curr.first, next.first), min(curr.second, next.second));
+                range_set.erase(curr);
+                range_set.erase(next);
+                range_set.insert(intersection);
+            }
+            else
+            {
+                count++;
+                range_set.erase(curr);
+            }
+        }
+    }
+    return count;
 }
 
 /// <summary>
@@ -506,44 +506,44 @@ int LeetCode::findMinArrowShots(vector<pair<int, int>>& points)
 /// </summary>
 vector<vector<int>> LeetCode::getSkyline(vector<vector<int>>& buildings)
 {
-	vector<vector<int>> result;
-	map<int, vector<int>> edge_map;
-	for (size_t i = 0; i < buildings.size(); i++)
-	{
-		// left side
-		edge_map[buildings[i][0]].push_back(buildings[i][2]);
-		// right side
-		edge_map[buildings[i][1]].push_back(-buildings[i][2]);
-	}
-	// we may have multiple building with same height
-	map<int, int> skylines;
-	for (auto edge : edge_map)
-	{
-		for (auto height : edge.second)
-		{
-			if (height > 0)
-			{
-				skylines[height]++;
-			}
-			else
-			{
-				skylines[-height]--;
-				if (skylines[-height] == 0) skylines.erase(-height);
-			}
-		}
-		int skyline = 0;
-		// skyline is heightest building
-		if (!skylines.empty())
-		{
-			skyline = skylines.rbegin()->first;
-		}
-		// push to result if not same height
-		if (result.empty() || result.back()[1] != skyline)
-		{
-			result.push_back({ edge.first, skyline });
-		}
-	}
-	return result;
+    vector<vector<int>> result;
+    map<int, vector<int>> edge_map;
+    for (size_t i = 0; i < buildings.size(); i++)
+    {
+        // left side
+        edge_map[buildings[i][0]].push_back(buildings[i][2]);
+        // right side
+        edge_map[buildings[i][1]].push_back(-buildings[i][2]);
+    }
+    // we may have multiple building with same height
+    map<int, int> skylines;
+    for (auto edge : edge_map)
+    {
+        for (auto height : edge.second)
+        {
+            if (height > 0)
+            {
+                skylines[height]++;
+            }
+            else
+            {
+                skylines[-height]--;
+                if (skylines[-height] == 0) skylines.erase(-height);
+            }
+        }
+        int skyline = 0;
+        // skyline is heightest building
+        if (!skylines.empty())
+        {
+            skyline = skylines.rbegin()->first;
+        }
+        // push to result if not same height
+        if (result.empty() || result.back()[1] != skyline)
+        {
+            result.push_back({ edge.first, skyline });
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -558,24 +558,24 @@ vector<vector<int>> LeetCode::getSkyline(vector<vector<int>>& buildings)
 /// </summary>
 bool LeetCode::canAttendMeetings(vector<Interval>& intervals)
 {
-	struct IntervalCompare
-	{
-		bool operator() (Interval &a, Interval &b)
-		{
-			if (a.start < b.start) return true;
-			else if ((a.start == b.start) && (a.end < b.end)) return true;
-			else return false;
-		}
-	};
-	sort(intervals.begin(), intervals.end(), IntervalCompare());
-	for (size_t i = 1; i < intervals.size(); i++)
-	{
-		if (intervals[i].start < intervals[i - 1].end)
-		{
-			return false;
-		}
-	}
-	return true;
+    struct IntervalCompare
+    {
+        bool operator() (Interval &a, Interval &b)
+        {
+            if (a.start < b.start) return true;
+            else if ((a.start == b.start) && (a.end < b.end)) return true;
+            else return false;
+        }
+    };
+    sort(intervals.begin(), intervals.end(), IntervalCompare());
+    for (size_t i = 1; i < intervals.size(); i++)
+    {
+        if (intervals[i].start < intervals[i - 1].end)
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 /// <summary>
@@ -587,38 +587,38 @@ bool LeetCode::canAttendMeetings(vector<Interval>& intervals)
 /// </summary>
 vector<string> LeetCode::findMissingRanges(vector<int>& nums, int lower, int upper)
 {
-	vector<string> result;
-	long long expect = (long long)lower;
-	long long end;
-	for (size_t i = 0; i < nums.size(); i++)
-	{
-		if ((long long)nums[i] > expect)
-		{
-			end = (long long)nums[i] - 1;
-			if (expect == end)
-			{
-				result.push_back(to_string(expect));
-			}
-			else if (expect < end)
-			{
-				result.push_back(to_string(expect) + "->" + to_string(end));
-			}
-		}
-		expect = (long long)nums[i] + 1;
-	}
-	if (expect <= (long long)upper)
-	{
-		end = (long long)upper;
-		if (expect == end)
-		{
-			result.push_back(to_string(expect));
-		}
-		else if (expect < end)
-		{
-			result.push_back(to_string(expect) + "->" + to_string(end));
-		}
-	}
-	return result;
+    vector<string> result;
+    long long expect = (long long)lower;
+    long long end;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if ((long long)nums[i] > expect)
+        {
+            end = (long long)nums[i] - 1;
+            if (expect == end)
+            {
+                result.push_back(to_string(expect));
+            }
+            else if (expect < end)
+            {
+                result.push_back(to_string(expect) + "->" + to_string(end));
+            }
+        }
+        expect = (long long)nums[i] + 1;
+    }
+    if (expect <= (long long)upper)
+    {
+        end = (long long)upper;
+        if (expect == end)
+        {
+            result.push_back(to_string(expect));
+        }
+        else if (expect < end)
+        {
+            result.push_back(to_string(expect) + "->" + to_string(end));
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -658,15 +658,15 @@ vector<string> LeetCode::findMissingRanges(vector<int>& nums, int lower, int upp
 /// </summary>
 int LeetCode::findPoisonedDuration(vector<int>& timeSeries, int duration)
 {
-	int result = 0;
-	int last_end = -1;
-	for (size_t i = 0; i < timeSeries.size(); i++)
-	{
-		int next_end = timeSeries[i] + duration;
-		result += min(duration, next_end - last_end);
-		last_end = next_end;
-	}
-	return result;
+    int result = 0;
+    int last_end = -1;
+    for (size_t i = 0; i < timeSeries.size(); i++)
+    {
+        int next_end = timeSeries[i] + duration;
+        result += min(duration, next_end - last_end);
+        last_end = next_end;
+    }
+    return result;
 }
 
 /// <summary>
@@ -703,23 +703,23 @@ int LeetCode::findPoisonedDuration(vector<int>& timeSeries, int duration)
 /// </summary>
 int LeetCode::leastBricks(vector<vector<int>>& wall)
 {
-	unordered_map<int, int> align_map;
-	for (size_t i = 0; i < wall.size(); i++)
-	{
-		int distance = 0;
-		for (size_t j = 0; j < wall[i].size() - 1; j++)
-		{
-			distance += wall[i][j];
-			align_map[distance]++;
-		}
-	}
+    unordered_map<int, int> align_map;
+    for (size_t i = 0; i < wall.size(); i++)
+    {
+        int distance = 0;
+        for (size_t j = 0; j < wall[i].size() - 1; j++)
+        {
+            distance += wall[i][j];
+            align_map[distance]++;
+        }
+    }
 
-	int min_bricks = wall.size();
-	for (auto itr : align_map)
-	{
-		min_bricks = min(min_bricks, (int)wall.size() - itr.second);
-	}
-	return min_bricks;
+    int min_bricks = wall.size();
+    for (auto itr : align_map)
+    {
+        min_bricks = min(min_bricks, (int)wall.size() - itr.second);
+    }
+    return min_bricks;
 }
 
 /// <summary>
@@ -765,13 +765,13 @@ int LeetCode::leastBricks(vector<vector<int>>& wall)
 /// </summary>
 int LeetCode::maxCount(int m, int n, vector<vector<int>>& ops)
 {
-	pair<int, int> result = make_pair(m, n);
-	for (auto range : ops)
-	{
-		result.first = min(range[0], result.first);
-		result.second = min(range[1], result.second);
-	}
-	return result.first * result.second;
+    pair<int, int> result = make_pair(m, n);
+    for (auto range : ops)
+    {
+        result.first = min(range[0], result.first);
+        result.second = min(range[1], result.second);
+    }
+    return result.first * result.second;
 }
 
 /// <summary>
@@ -799,34 +799,34 @@ int LeetCode::maxCount(int m, int n, vector<vector<int>>& ops)
 /// </summary>
 int LeetCode::leastInterval(vector<char>& tasks, int n)
 {
-	int result = 0;
-	unordered_map<char, int> task_count;
-	priority_queue<pair<int, int>> task_queue;
-	for (char task : tasks)  task_count[task]++;
+    int result = 0;
+    unordered_map<char, int> task_count;
+    priority_queue<pair<int, int>> task_queue;
+    for (char task : tasks)  task_count[task]++;
 
-	for (auto itr : task_count)
-	{
-		task_queue.push(make_pair(0, itr.second));
-	}
+    for (auto itr : task_count)
+    {
+        task_queue.push(make_pair(0, itr.second));
+    }
 
-	while (!task_queue.empty())
-	{
-		result++;
-		// get top task;
-		pair<int, int> task = task_queue.top();
+    while (!task_queue.empty())
+    {
+        result++;
+        // get top task;
+        pair<int, int> task = task_queue.top();
 
-		// if closed task still not ready to schedule, we push a idle;
-		if (-task.first < result)
-		{
-			task_queue.pop();
-			task.second--;
-			if (task.second != 0)
-			{
-				task_queue.push(make_pair(task.first - n - 1, task.second));
-			}
-		}
-	}
-	return result;
+        // if closed task still not ready to schedule, we push a idle;
+        if (-task.first < result)
+        {
+            task_queue.pop();
+            task.second--;
+            if (task.second != 0)
+            {
+                task_queue.push(make_pair(task.first - n - 1, task.second));
+            }
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -858,42 +858,42 @@ int LeetCode::leastInterval(vector<char>& tasks, int n)
 /// </summary>
 int LeetCode::scheduleCourse(vector<vector<int>>& courses)
 {
-	struct dead_line_compare
-	{
-		bool operator() (vector<int>& a, vector<int>&b)
-		{
-			if (a[1] == b[1]) return (a[0] < b[0]);
-			else return(a[1] < b[1]);
-		}
-	};
+    struct dead_line_compare
+    {
+        bool operator() (vector<int>& a, vector<int>&b)
+        {
+            if (a[1] == b[1]) return (a[0] < b[0]);
+            else return(a[1] < b[1]);
+        }
+    };
 
-	sort(courses.begin(), courses.end(), dead_line_compare());
+    sort(courses.begin(), courses.end(), dead_line_compare());
 
-	int time = 0;
-	priority_queue<int> course_duration;
-	for (size_t i = 0; i < courses.size(); i++)
-	{
-		pair<int, int> schedule = make_pair(courses[i][0], courses[i][1]);
+    int time = 0;
+    priority_queue<int> course_duration;
+    for (size_t i = 0; i < courses.size(); i++)
+    {
+        pair<int, int> schedule = make_pair(courses[i][0], courses[i][1]);
 
-		// if start time later than now, we are greedy
-		if (schedule.second >= time + schedule.first)
-		{
-			course_duration.push(schedule.first);
-			time += schedule.first;
-		}
-		// if we can not make it, we replace the longest course
-		else
-		{
-			if ((!course_duration.empty()) && (course_duration.top() > schedule.first))
-			{
-				time -= (course_duration.top() - schedule.first);
-				course_duration.pop();
-				course_duration.push(schedule.first);
-			}
-		}
-	}
+        // if start time later than now, we are greedy
+        if (schedule.second >= time + schedule.first)
+        {
+            course_duration.push(schedule.first);
+            time += schedule.first;
+        }
+        // if we can not make it, we replace the longest course
+        else
+        {
+            if ((!course_duration.empty()) && (course_duration.top() > schedule.first))
+            {
+                time -= (course_duration.top() - schedule.first);
+                course_duration.pop();
+                course_duration.push(schedule.first);
+            }
+        }
+    }
 
-	return course_duration.size();
+    return course_duration.size();
 }
 
 /// <summary>
@@ -917,25 +917,25 @@ int LeetCode::scheduleCourse(vector<vector<int>>& courses)
 /// </summary>
 int LeetCode::findLongestChain(vector<vector<int>>& pairs)
 {
-	map<int, vector<int>> schedule_map;
-	for (size_t i = 0; i < pairs.size(); i++)
-	{
-		if ((schedule_map.count(pairs[i][1]) == 0) ||
-			(schedule_map[pairs[i][1]][0] < pairs[i][0]))
-		{
-			schedule_map[pairs[i][1]] = pairs[i];
-		}
-	}
-	int count = 0, last = 0;
-	for (map<int, vector<int>>::iterator itr = schedule_map.begin(); itr != schedule_map.end(); itr++)
-	{
-		if (count == 0 || itr->second[0] > last)
-		{
-			count++;
-			last = itr->second[1];
-		}
-	}
-	return count;
+    map<int, vector<int>> schedule_map;
+    for (size_t i = 0; i < pairs.size(); i++)
+    {
+        if ((schedule_map.count(pairs[i][1]) == 0) ||
+            (schedule_map[pairs[i][1]][0] < pairs[i][0]))
+        {
+            schedule_map[pairs[i][1]] = pairs[i];
+        }
+    }
+    int count = 0, last = 0;
+    for (map<int, vector<int>>::iterator itr = schedule_map.begin(); itr != schedule_map.end(); itr++)
+    {
+        if (count == 0 || itr->second[0] > last)
+        {
+            count++;
+            last = itr->second[1];
+        }
+    }
+    return count;
 }
 
 /// <summary>
@@ -943,9 +943,9 @@ int LeetCode::findLongestChain(vector<vector<int>>& pairs)
 /// </summary>
 map<int, int>::iterator LeetCode::findLocation(map<int, int>& pos_map, int pos)
 {
-	auto itr = pos_map.lower_bound(pos);
-	if (itr == pos_map.end() || itr->first > pos) itr--;
-	return itr;
+    auto itr = pos_map.lower_bound(pos);
+    if (itr == pos_map.end() || itr->first > pos) itr--;
+    return itr;
 }
 
 /// <summary>
@@ -1022,37 +1022,37 @@ map<int, int>::iterator LeetCode::findLocation(map<int, int>& pos_map, int pos)
 /// </summary>
 vector<int> LeetCode::fallingSquares(vector<pair<int, int>>& positions)
 {
-	vector<int> result;
-	// remember the start position and height
-	map<int, int> pos_map;
-	pos_map[0] = 0;
-	int max_height = 0;
-	for (size_t i = 0; i < positions.size(); i++)
-	{
-		auto start = findLocation(pos_map, positions[i].first);
-		auto end = findLocation(pos_map, positions[i].first + positions[i].second);
-		int end_height = end->second;
-		int height = 0;
-		while (start != pos_map.end() && start->first < positions[i].first + positions[i].second)
-		{
-			auto temp = start++;
-			height = max(height, temp->second);
-			if (temp->first >= positions[i].first)
-			{
-				pos_map.erase(temp);
-			}
-		}
-		// add height on this box
-		height += positions[i].second;
-		// set start as new height
-		pos_map[positions[i].first] = height;
-		// set next to end as its original height
-		pos_map[positions[i].first + positions[i].second] = end_height;
-		// calculate max height 
-		max_height = max(max_height, height);
-		result.push_back(max_height);
-	}
-	return result;
+    vector<int> result;
+    // remember the start position and height
+    map<int, int> pos_map;
+    pos_map[0] = 0;
+    int max_height = 0;
+    for (size_t i = 0; i < positions.size(); i++)
+    {
+        auto start = findLocation(pos_map, positions[i].first);
+        auto end = findLocation(pos_map, positions[i].first + positions[i].second);
+        int end_height = end->second;
+        int height = 0;
+        while (start != pos_map.end() && start->first < positions[i].first + positions[i].second)
+        {
+            auto temp = start++;
+            height = max(height, temp->second);
+            if (temp->first >= positions[i].first)
+            {
+                pos_map.erase(temp);
+            }
+        }
+        // add height on this box
+        height += positions[i].second;
+        // set start as new height
+        pos_map[positions[i].first] = height;
+        // set next to end as its original height
+        pos_map[positions[i].first + positions[i].second] = end_height;
+        // calculate max height 
+        max_height = max(max_height, height);
+        result.push_back(max_height);
+    }
+    return result;
 }
 
 /// <summary>
@@ -1085,65 +1085,65 @@ vector<int> LeetCode::fallingSquares(vector<pair<int, int>>& positions)
 /// </summary>
 int LeetCode::intersectionSizeTwo(vector<vector<int>>& intervals)
 {
-	int result = 0;
-	sort(intervals.begin(), intervals.end());
-	vector<vector<int>> no_contain_intervals;
-	// remove containers
-	for (size_t i = 0; i < intervals.size(); i++)
-	{
-		if (no_contain_intervals.empty())
-		{
-			no_contain_intervals.push_back(intervals[i]);
-		}
-		else
-		{
-			vector<int> last_interval = no_contain_intervals.back();
-			if ((last_interval[0] <= intervals[i][0]) && (last_interval[1] >= intervals[i][1]))
-			{
-				no_contain_intervals.pop_back();
-				i--;
-			}
-			else if ((last_interval[0] >= intervals[i][0]) && (last_interval[1] <= intervals[i][1]))
-			{
-				continue;
-			}
-			else
-			{
-				no_contain_intervals.push_back(intervals[i]);
-			}
-		}
-	}
+    int result = 0;
+    sort(intervals.begin(), intervals.end());
+    vector<vector<int>> no_contain_intervals;
+    // remove containers
+    for (size_t i = 0; i < intervals.size(); i++)
+    {
+        if (no_contain_intervals.empty())
+        {
+            no_contain_intervals.push_back(intervals[i]);
+        }
+        else
+        {
+            vector<int> last_interval = no_contain_intervals.back();
+            if ((last_interval[0] <= intervals[i][0]) && (last_interval[1] >= intervals[i][1]))
+            {
+                no_contain_intervals.pop_back();
+                i--;
+            }
+            else if ((last_interval[0] >= intervals[i][0]) && (last_interval[1] <= intervals[i][1]))
+            {
+                continue;
+            }
+            else
+            {
+                no_contain_intervals.push_back(intervals[i]);
+            }
+        }
+    }
 
-	// harvest numbers
-	vector<int> last_interval(2);
-	for (size_t i = 0; i < no_contain_intervals.size(); i++)
-	{
-		if (i == 0)
-		{
-			result += 2;
-			last_interval[0] = no_contain_intervals[i][1] - 1;
-			last_interval[1] = no_contain_intervals[i][1];
-		}
-		else
-		{
-			// no overlap
-			if (last_interval[1] < no_contain_intervals[i][0])
-			{
-				result += 2;
-				last_interval[0] = no_contain_intervals[i][1] - 1;
-				last_interval[1] = no_contain_intervals[i][1];
-			}
-			// next overlap current
-			else if (last_interval[0] < no_contain_intervals[i][0])
-			{
-				result += 1;
-				last_interval[0] = last_interval[1];
-				last_interval[1] = no_contain_intervals[i][1];
-			}
-		}
-	}
+    // harvest numbers
+    vector<int> last_interval(2);
+    for (size_t i = 0; i < no_contain_intervals.size(); i++)
+    {
+        if (i == 0)
+        {
+            result += 2;
+            last_interval[0] = no_contain_intervals[i][1] - 1;
+            last_interval[1] = no_contain_intervals[i][1];
+        }
+        else
+        {
+            // no overlap
+            if (last_interval[1] < no_contain_intervals[i][0])
+            {
+                result += 2;
+                last_interval[0] = no_contain_intervals[i][1] - 1;
+                last_interval[1] = no_contain_intervals[i][1];
+            }
+            // next overlap current
+            else if (last_interval[0] < no_contain_intervals[i][0])
+            {
+                result += 1;
+                last_interval[0] = last_interval[1];
+                last_interval[1] = no_contain_intervals[i][1];
+            }
+        }
+    }
 
-	return result;
+    return result;
 }
 
 
@@ -1183,30 +1183,30 @@ int LeetCode::intersectionSizeTwo(vector<vector<int>>& intervals)
 /// </summary>
 vector<Interval> LeetCode::employeeFreeTime(vector<vector<Interval>>& schedule)
 {
-	vector<Interval> result;
-	map<int, int> time_map;
-	for (size_t i = 0; i < schedule.size(); i++)
-	{
-		for (size_t j = 0; j < schedule[i].size(); j++)
-		{
-			time_map[schedule[i][j].start]++;
-			time_map[schedule[i][j].end]--;
-		}
-	}
-	Interval interval = { -1, -1 };
-	int count = 0;
-	for (auto itr : time_map)
-	{
-		count += itr.second;
-		if (count == 0) interval.start = itr.first;
-		else if (interval.start != -1)
-		{
-			interval.end = itr.first;
-			result.push_back(interval);
-			interval.start = -1;
-		}
-	}
-	return result;
+    vector<Interval> result;
+    map<int, int> time_map;
+    for (size_t i = 0; i < schedule.size(); i++)
+    {
+        for (size_t j = 0; j < schedule[i].size(); j++)
+        {
+            time_map[schedule[i][j].start]++;
+            time_map[schedule[i][j].end]--;
+        }
+    }
+    Interval interval = { -1, -1 };
+    int count = 0;
+    for (auto itr : time_map)
+    {
+        count += itr.second;
+        if (count == 0) interval.start = itr.first;
+        else if (interval.start != -1)
+        {
+            interval.end = itr.first;
+            result.push_back(interval);
+            interval.start = -1;
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -1242,36 +1242,36 @@ vector<Interval> LeetCode::employeeFreeTime(vector<vector<Interval>>& schedule)
 /// </summary>
 int LeetCode::rectangleArea(vector<vector<int>>& rectangles)
 {
-	int mod = 1000000007;
-	unsigned long long result = 0;
-	set<int> sx, sy;
-	for (size_t i = 0; i < rectangles.size(); i++)
-	{
-		sx.insert(rectangles[i][0]);
-		sy.insert(rectangles[i][1]);
-		sx.insert(rectangles[i][2]);
-		sy.insert(rectangles[i][3]);
-	}
-	vector<int> vx(sx.begin(), sx.end()), vy(sy.begin(), sy.end());
-	vector<vector<int>> visited(vx.size(), vector<int>(vy.size()));
-	for (auto r : rectangles)
-	{
-		for (auto x = lower_bound(vx.begin(), vx.end(), r[0]) - vx.begin(); vx[x] != r[2]; x++)
-		{
-			for (auto y = lower_bound(vy.begin(), vy.end(), r[1]) - vy.begin(); vy[y] != r[3]; y++)
-			{
-				if ((x == vx.size() - 1) || (y == vy.size() - 1)) break;
-				if (visited[x][y]  == 0)
-				{
-					visited[x][y] = 1;
-					result += ((long long)vx[x + 1] - (long long)vx[x]) * 
+    int mod = 1000000007;
+    unsigned long long result = 0;
+    set<int> sx, sy;
+    for (size_t i = 0; i < rectangles.size(); i++)
+    {
+        sx.insert(rectangles[i][0]);
+        sy.insert(rectangles[i][1]);
+        sx.insert(rectangles[i][2]);
+        sy.insert(rectangles[i][3]);
+    }
+    vector<int> vx(sx.begin(), sx.end()), vy(sy.begin(), sy.end());
+    vector<vector<int>> visited(vx.size(), vector<int>(vy.size()));
+    for (auto r : rectangles)
+    {
+        for (auto x = lower_bound(vx.begin(), vx.end(), r[0]) - vx.begin(); vx[x] != r[2]; x++)
+        {
+            for (auto y = lower_bound(vy.begin(), vy.end(), r[1]) - vy.begin(); vy[y] != r[3]; y++)
+            {
+                if ((x == vx.size() - 1) || (y == vy.size() - 1)) break;
+                if (visited[x][y]  == 0)
+                {
+                    visited[x][y] = 1;
+                    result += ((long long)vx[x + 1] - (long long)vx[x]) * 
                               ((long long)vy[y + 1] - (long long)vy[y]) % mod;
-					result %= mod;
-				}
-			}
-		}
-	}
-	return (int)(result % mod);
+                    result %= mod;
+                }
+            }
+        }
+    }
+    return (int)(result % mod);
 }
 
 /// <summary>
@@ -1312,33 +1312,33 @@ int LeetCode::rectangleArea(vector<vector<int>>& rectangles)
 /// </summary>
 int LeetCode::bagOfTokensScore(vector<int>& tokens, int P)
 {
-	int result = 0;
-	int points = 0;
-	int power = P;
-	sort(tokens.begin(), tokens.end());
-	int first = 0;
-	int last = tokens.size() - 1;
-	while (first <= last)
-	{
-		if (power >= tokens[first])
-		{
-			power -= tokens[first];
-			points++;
-			result = max(result, points);
-			first++;
-		}
-		else if (points > 0)
-		{
-			power += tokens[last];
-			points--;
-			last--;
-		}
-		else
-		{
-			break;
-		}
-	}
-	return result;
+    int result = 0;
+    int points = 0;
+    int power = P;
+    sort(tokens.begin(), tokens.end());
+    int first = 0;
+    int last = tokens.size() - 1;
+    while (first <= last)
+    {
+        if (power >= tokens[first])
+        {
+            power -= tokens[first];
+            points++;
+            result = max(result, points);
+            first++;
+        }
+        else if (points > 0)
+        {
+            power += tokens[last];
+            points--;
+            last--;
+        }
+        else
+        {
+            break;
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -2175,4 +2175,74 @@ int LeetCodeGreedy::minTaps(int n, vector<int>& ranges)
     }
 }
 
+/// <summary>
+/// Leet code #1353. Maximum Number of Events That Can Be Attended
+///
+/// Medium
+///
+/// Given an array of events where events[i] = [startDayi, endDayi]. 
+/// Every event i starts at startDayi and ends at endDayi.
+///
+/// You can attend an event i at any day d where 
+/// startTimei <= d <= endTimei. Notice that you can only attend one 
+/// event at any time d.
+///
+/// Return the maximum number of events you can attend.
+/// 
+/// Example 1:
+/// Input: events = [[1,2],[2,3],[3,4]]
+/// Output: 3
+/// Explanation: You can attend all the three events.
+/// One way to attend them all is as shown.
+/// Attend the first event on day 1.
+/// Attend the second event on day 2.
+/// Attend the third event on day 3.
+///
+/// Example 2:
+/// Input: events= [[1,2],[2,3],[3,4],[1,2]]
+/// Output: 4
+///
+/// Example 3:
+/// Input: events = [[1,4],[4,4],[2,2],[3,4],[1,1]]
+/// Output: 4
+///
+/// Example 4:  
+/// Input: events = [[1,100000]]
+/// Output: 1
+/// 
+/// Example 5:
+/// Input: events = [[1,1],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7]]
+/// Output: 7
+///
+/// Constraints:
+/// 1. 1 <= events.length <= 10^5
+/// 2. events[i].length == 2
+/// 3. 1 <= events[i][0] <= events[i][1] <= 10^5
+/// </summary>
+int LeetCodeGreedy::maxEvents(vector<vector<int>>& events)
+{
+    priority_queue<pair<int, int>> pq;
+    for (size_t i = 0; i < events.size(); i++)
+    {
+        pq.push({ -events[i][0], -events[i][1] });
+    }
+    int start_day = 0;
+    int result = 0;
+    while (!pq.empty())
+    {
+        pair<int, int> e = pq.top();
+        pq.pop();
+        if (-e.first == start_day)
+        {
+            e.first--;
+            if (e.first >= e.second) pq.push(e);
+        }
+        else
+        {
+            result++;
+            start_day = -e.first;
+        }
+    }
+    return result;
+}
 #pragma endregion

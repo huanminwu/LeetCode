@@ -13046,16 +13046,16 @@ void TestLeetCode1238(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeMath();
+    TestLeetCodeGreedy();
+    TestLeetCodeArray();
     TestLeetCodeTwoPointers();
     TestLeetCodeDFS();
     TestLeetCodeDesign();
     TestLeetCodeGraph();
     TestLeetCodeString();
-    TestLeetCodeArray();
-    TestLeetCodeMath();
     TestLeetCodeTree();
     TestLeetCodeDP();
-    TestLeetCodeGreedy();
     TestLeetCodeBFS();
     TestLeetCodeSort();
     TestLeetCodeUnionFind();

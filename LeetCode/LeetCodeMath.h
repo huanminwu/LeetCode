@@ -19,6 +19,102 @@
 #include <stack> 
 using namespace std;
 /// <summary>
+/// Leet code #1352. Product of the Last K Numbers
+///
+/// Medium
+///
+/// Implement the class ProductOfNumbers that supports two methods:
+///
+/// 1. add(int num)
+///
+/// Adds the number num to the back of the current list of numbers.
+///
+/// 2. getProduct(int k)
+///
+/// Returns the product of the last k numbers in the current list.
+/// You can assume that always the current list has at least k numbers.
+/// At any time, the product of any contiguous sequence of numbers will 
+/// fit into a single 32-bit integer without overflowing.
+/// 
+/// Example:
+///
+/// Input
+/// ["ProductOfNumbers","add","add","add","add","add","getProduct",
+///  "getProduct","getProduct","add","getProduct"]
+///  [[],[3],[0],[2],[5],[4],[2],[3],[4],[8],[2]]
+///
+/// Output
+/// [null,null,null,null,null,null,20,40,0,null,32]
+///
+/// Explanation
+/// ProductOfNumbers productOfNumbers = new ProductOfNumbers();
+/// productOfNumbers.add(3);        // [3]
+/// productOfNumbers.add(0);        // [3,0]
+/// productOfNumbers.add(2);        // [3,0,2]
+/// productOfNumbers.add(5);        // [3,0,2,5]
+/// productOfNumbers.add(4);        // [3,0,2,5,4]
+/// productOfNumbers.getProduct(2); // return 20. The product of the 
+///                                 // last 2 numbers is 5 * 4 = 20
+/// productOfNumbers.getProduct(3); // return 40. The product of the 
+///                                 // last 3 numbers is 2 * 5 * 4 = 40
+/// productOfNumbers.getProduct(4); // return 0. The product of the last 4 
+///                                 // numbers is 0 * 2 * 5 * 4 = 0
+/// productOfNumbers.add(8);        // [3,0,2,5,4,8]
+/// productOfNumbers.getProduct(2); // return 32. The product of the 
+///                                 // last 2 numbers is 4 * 8 = 32 
+///
+/// Constraints:
+/// 1. There will be at most 40000 operations considering both add and 
+///    getProduct.
+/// 2. 0 <= num <= 100
+/// 3.  1 <= k <= 40000
+/// </summary>
+class ProductOfNumbers
+{
+private:
+    vector<int> m_product;
+public:
+    ProductOfNumbers()
+    {
+    }
+
+    void add(int num) 
+    {
+        if (num == 0)
+        {
+            m_product.clear();
+        }
+        else
+        {
+            if (m_product.empty())
+            {
+                m_product.push_back(num);
+            }
+            else
+            {
+                m_product.push_back(m_product.back() * num);
+            }
+        }
+    }
+
+    int getProduct(int k) 
+    {
+        if ((int)m_product.size() < k)
+        {
+            return 0;
+        }
+        else if (m_product.size() == k)
+        {
+            return m_product.back();
+        }
+        else
+        {
+            return m_product.back() / m_product[m_product.size() - k - 1];
+        }
+    }
+};
+
+/// <summary>
 /// The class is to implement some math solution 
 /// </summary>
 class LeetCodeMath
@@ -3090,5 +3186,45 @@ public:
     /// correct.
     /// </summary>
     double angleClock(int hour, int minutes);
+
+    /// <summary>
+    /// Leet code #1354. Construct Target Array With Multiple Sums
+    ///
+    /// Hard
+    ///
+    /// Given an array of integers target. From a starting array, A 
+    /// consisting of all 1's, you may perform the following procedure
+    ///
+    /// let x be the sum of all elements currently in your array.
+    /// choose index i, such that 0 <= i < target.size and set the value of 
+    /// A at index i to x.
+    /// You may repeat this procedure as many times as needed.
+    /// Return True if it is possible to construct the target array from A 
+    /// otherwise return False.
+    ///
+    /// Example 1:
+    /// Input: target = [9,3,5]
+    /// Output: true
+    /// Explanation: Start with [1, 1, 1] 
+    /// [1, 1, 1], sum = 3 choose index 1
+    /// [1, 3, 1], sum = 5 choose index 2
+    /// [1, 3, 5], sum = 9 choose index 0
+    /// [9, 3, 5] Done
+    ///
+    /// Example 2:
+    /// Input: target = [1,1,1,2]
+    /// Output: false
+    /// Explanation: Impossible to create target array from [1,1,1,1].
+    ///
+    /// Example 3:
+    /// Input: target = [8,5]
+    /// Output: true
+    /// 
+    /// Constraints:
+    /// 1. N == target.length
+    /// 2. 1 <= target.length <= 5 * 10^4
+    /// 3. 1 <= target[i] <= 10^9
+    /// </summary>
+    bool isPossible(vector<int>& target);
 };
 #endif

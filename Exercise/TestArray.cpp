@@ -1560,8 +1560,46 @@ void TestLeetCode1121(void)
     Logger::WriteMessage("K = " + to_string(K) + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1351(void)
+{
+    Logger::WriteMessage("Test Leet Code 1351");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = 
+    {
+        {4,3,2,-1},{3,2,1,-1},{1,1,-1,-2},{-1,-1,-2,-3}
+    };
+    int result = leetCode.countNegatives(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {3,2},{1,0}
+    };
+    result = leetCode.countNegatives(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {1,-1},{-1,-1}
+    };
+    result = leetCode.countNegatives(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {-1}
+    };
+    result = leetCode.countNegatives(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1351();
     TestLeetCode1151();
     TestLeetCode1138();
     TestLeetCode1176();

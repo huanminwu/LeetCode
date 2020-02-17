@@ -126,8 +126,34 @@ void TestLeetCode352(void)
     Logger::WriteMessage(intervals);
 }
 
+void TestLeetCode1353(void)
+{
+    Logger::WriteMessage("Test Leet Code 1353");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> events = { {1, 2},{2, 3},{3, 4} };
+    int result = leetCode.maxEvents(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    events = { {1,2},{2,3},{3,4},{1,2} };
+    result = leetCode.maxEvents(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    events = { {1, 100000} };
+    result = leetCode.maxEvents(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    events = { {1, 1},{1, 2},{1, 3},{1, 4},{1, 5},{1, 6},{1, 7} };
+    result = leetCode.maxEvents(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode1353();
     TestLeetCode352();
     TestLeetCode1326();
     TestLeetCode1288();

@@ -1829,8 +1829,68 @@ void TestLeetCode1344(void)
     Logger::WriteMessage("hour = " + to_string(hour) + "; minutes = " + to_string(minutes) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1352(void)
+{
+    Logger::WriteMessage("Test Leet Code 1352");
+
+    vector<string> commands =
+    {
+        "ProductOfNumbers","add","add","add","add","add","getProduct",
+        "getProduct","getProduct","add","getProduct"
+    };
+    vector<vector<int>> data =
+    {
+        {},{3},{0},{2},{5},{4},{2},{3},{4},{8},{2}
+    };
+    ProductOfNumbers* productOfNumbers = nullptr;
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "ProductOfNumbers")
+        {
+            productOfNumbers = new ProductOfNumbers();
+            result.push_back("null");
+        }
+        else if (commands[i] == "add")
+        {
+            productOfNumbers->add(data[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "getProduct")
+        {
+            int ret = productOfNumbers->getProduct(data[i][0]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete productOfNumbers;
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1354(void)
+{
+    Logger::WriteMessage("Test Leet Code 1354");
+    LeetCodeMath leetCode;
+
+    vector<int> target = { 9, 3, 5 };
+    bool result = leetCode.isPossible(target);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    target = { 1,1,1,2 };
+    result = leetCode.isPossible(target);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    target = { 8,5 };
+    result = leetCode.isPossible(target);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1354();
+    TestLeetCode1352();
     TestLeetCode1344();
     TestLeetCode1342();
     TestLeetCode1323();
