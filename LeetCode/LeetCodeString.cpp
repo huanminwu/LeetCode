@@ -703,9 +703,12 @@ int LeetCodeString::compareVersion(string version1, string version2)
 
 /// <summary>
 /// Leet code #409. Longest Palindrome 
-/// Given a string which consists of lowercase or uppercase letters, find the length of the longest 
-/// palindromes that can be built with those letters. 
-/// This is case sensitive, for example "Aa" is not considered a palindrome here.
+///
+/// Given a string which consists of lowercase or uppercase letters, find 
+/// the length of the longest palindromes that can be built with those 
+/// letters. 
+/// This is case sensitive, for example "Aa" is not considered a 
+/// palindrome here.
 /// Note:
 /// Assume the length of given string will not exceed 1,010. 
 /// Example: 
@@ -717,7 +720,7 @@ int LeetCodeString::compareVersion(string version1, string version2)
 /// Explanation:
 /// One longest palindrome that can be built is "dccaccd", whose length is 7.
 /// </summary>
-int LeetCode::longestPalindromeII(string s)
+int LeetCodeString::longestPalindromeII(string s)
 {
     int sum = 0;
     unordered_map<char, int> char_map;
@@ -834,16 +837,20 @@ string LeetCodeString::simplifyPath(string path)
 
 /// <summary>
 /// Leet code #187. Repeated DNA Sequences 
-/// All DNA is composed of a series of nucleotides abbreviated as A, C, G, and T, for example: "ACGAATTCCG". 
-/// When studying DNA, it is sometimes useful to identify repeated sequences within the DNA.
-/// Write a function to find all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule.
+///
+/// All DNA is composed of a series of nucleotides abbreviated 
+/// as A, C, G, and T, for example: "ACGAATTCCG". 
+/// When studying DNA, it is sometimes useful to identify repeated 
+/// sequences within the DNA.
+/// Write a function to find all the 10-letter-long sequences 
+/// (substrings) that occur more than once in a DNA molecule.
 ///
 /// For example,
 /// Given s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT",
 /// Return:
 /// ["AAAAACCCCC", "CCCCCAAAAA"].
 /// </summary>
-vector<string> LeetCode::findRepeatedDnaSequences(string s)
+vector<string> LeetCodeString::findRepeatedDnaSequences(string s)
 {
     vector<string> result;
     if (s.size() < 10) return result;
@@ -1011,12 +1018,14 @@ int LeetCodeString::countSegments(string s)
 }
 
 /// <summary>
-/// Leet code #205. Isomorphic Strings     
+/// Leet code #205. Isomorphic Strings
+///
 /// Given two strings s and t, determine if they are isomorphic. 
-/// Two strings are isomorphic if the characters in s can be replaced to get t.
-/// All occurrences of a character must be replaced with another character while 
-/// preserving the order of characters. No two characters may map to the same 
-/// character but a character may map to itself.
+/// Two strings are isomorphic if the characters in s can be replaced to 
+/// get t.
+/// All occurrences of a character must be replaced with another character 
+/// while preserving the order of characters. No two characters may map to 
+/// the same character but a character may map to itself.
 /// For example,
 /// Given "egg", "add", return true.
 ///
@@ -1025,7 +1034,7 @@ int LeetCodeString::countSegments(string s)
 /// Note:
 /// You may assume both s and t have the same length.
 /// </summary>
-bool LeetCode::isIsomorphic(string s, string t)
+bool LeetCodeString::isIsomorphic(string s, string t)
 {
     unordered_map<char, char> char_map;
     unordered_set<char> used_chars;
@@ -1105,17 +1114,20 @@ vector<int> LeetCodeString::findAnagrams(string s, string p)
 
 /// <summary>
 /// Leet code #290. Word Pattern      
+///
 /// Given a pattern and a string str, find if str follows the same pattern.
-/// Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str.
+/// Here follow means a full match, such that there is a bijection between 
+/// a letter in pattern and a non-empty word in str.
 /// Examples:
 /// 1.pattern = "abba", str = "dog cat cat dog" should return true.
 /// 2.pattern = "abba", str = "dog cat cat fish" should return false.
 /// 3.pattern = "aaaa", str = "dog cat cat dog" should return false.
 /// 4.pattern = "abba", str = "dog dog dog dog" should return false.
 /// Notes:
-/// You may assume pattern contains only lowercase letters, and str contains lowercase letters separated by a single space. 
+/// You may assume pattern contains only lowercase letters, and str 
+/// contains lowercase letters separated by a single space. 
 /// </summary>
-bool LeetCode::wordPattern(string pattern, string str)
+bool LeetCodeString::wordPattern(string pattern, string str)
 {
     vector<string> word_list;
     size_t index = 0;
@@ -1159,7 +1171,8 @@ bool LeetCode::wordPattern(string pattern, string str)
 }
 
 /// <summary>
-/// Leet code #65. Valid Number     
+/// Leet code #65. Valid Number
+///
 /// Validate if a given string is numeric.
 /// Some examples:
 /// "0" => true
@@ -1170,7 +1183,7 @@ bool LeetCode::wordPattern(string pattern, string str)
 /// Note: It is intended for the problem statement to be ambiguous. 
 /// You should gather all requirements up front before implementing one. 
 /// </summary>
-bool LeetCode::isValidNumber(string s)
+bool LeetCodeString::isValidNumber(string s)
 {
     enum class NumberState { start, sign, integer, decimal_start, decimal, exp_start, exp_sign, exp_int, end };
     NumberState state = NumberState::start;
@@ -1358,85 +1371,14 @@ int LeetCode::strongPasswordChecker(string s)
 }
 
 /// <summary>
-/// Leet code #289. Game of Life 
-/// According to the Wikipedia's article: "The Game of Life, also known simply as Life, 
-/// is a cellular automaton devised by the British mathematician John Horton Conway in 1970." 
-/// Given a board with m by n cells, each cell has an initial state live (1) or dead (0). 
-/// Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the 
-/// following four rules (taken from the above Wikipedia article): 	
-/// 1.Any live cell with fewer than two live neighbors dies, as if caused by under-population.
-/// 2.Any live cell with two or three live neighbors lives on to the next generation.
-/// 3.Any live cell with more than three live neighbors dies, as if by over-population..
-/// 4.Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
-/// Write a function to compute the next state (after one update) of the board given its current state.
-/// Follow up: 
-/// 1.Could you solve it in-place? Remember that the board needs to be updated at the same time: You 
-/// cannot update some cells first and then use their updated values to update other cells.
-/// 2.In this question, we represent the board using a 2D array. In principle, the board is infinite, 
-/// which would cause problems when the active area encroaches the border of the array. How would you address 
-/// these problems?
-/// </summary>
-void LeetCode::gameOfLife(vector<vector<int>>& board)
-{
-    for (int i = 0; i < (int)board.size(); i++)
-    {
-        for (int j = 0; j < (int)board[i].size(); j++)
-        {
-            int count = 0;
-            int next = 0;
-            if (i > 0)
-            {
-                count += (board[i - 1][j]) % 10;
-                if (j > 0) count += board[i - 1][j - 1] % 10;
-                if (j < (int)board[i].size() - 1) count += board[i - 1][j + 1] % 10;
-            }
-            if (i < (int)board.size() - 1)
-            {
-                count += (board[i + 1][j]) % 10;
-                if (j > 0) count += board[i + 1][j - 1] % 10;
-                if (j < (int)board[i].size() - 1) count += board[i + 1][j + 1] % 10;
-            }
-            if (j > 0) count += board[i][j - 1] % 10;
-            if (j < (int)board[i].size() - 1) count += board[i][j + 1] % 10;
-            // 1. Any live cell with fewer than two live neighbors dies, as if caused by under-population.
-            if ((count < 2) && (board[i][j] % 10 == 1))
-            {
-                next = 0;
-            }
-            // 2. Any live cell with two or three live neighbors lives on to the next generation.
-            else if (((count == 2) || (count == 3)) && (board[i][j] % 10 == 1))
-            {
-                next = 1;
-            }
-            // 3. Any live cell with more than three live neighbors dies, as if by over-population.
-            else if ((count > 3) && (board[i][j] % 10 == 1))
-            {
-                next = 0;
-            }
-            // 4. Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
-            else if ((count == 3) && (board[i][j] % 10 == 0))
-            {
-                next = 1;
-            }
-            board[i][j] = next * 10 + board[i][j];
-        }
-    }
-
-    for (size_t i = 0; i < board.size(); i++)
-    {
-        for (size_t j = 0; j < board[i].size(); j++)
-        {
-            board[i][j] /= 10;
-        }
-    }
-}
-
-/// <summary>
 /// Leet code #393. UTF-8 Validation
-/// A character in UTF8 can be from 1 to 4 bytes long, subjected to the following rules:
-/// 1.For 1-byte character, the first bit is a 0, followed by its unicode code.
-/// 2.For n-bytes character, the first n-bits are all one's, the n+1 bit is 0, followed 
-///   by n-1 bytes with most significant 2 bits being 10.
+///
+/// A character in UTF8 can be from 1 to 4 bytes long, subjected to the 
+/// following rules:
+/// 1.For 1-byte character, the first bit is a 0, followed by its unicode 
+///   code.
+/// 2.For n-bytes character, the first n-bits are all one's, the n+1 bit 
+///   is 0, followed by n-1 bytes with most significant 2 bits being 10.
 /// This is how the UTF-8 encoding would work:
 ///   Char. number range  |        UTF-8 octet sequence
 ///      (hexadecimal)    |              (binary)
@@ -1445,22 +1387,30 @@ void LeetCode::gameOfLife(vector<vector<int>>& board)
 ///   0000 0080-0000 07FF | 110xxxxx 10xxxxxx
 ///   0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx
 ///   0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
-/// Given an array of integers representing the data, return whether it is a valid utf-8 encoding. 
+/// Given an array of integers representing the data, return whether it is 
+/// a valid utf-8 encoding. 
 /// Note:
-/// The input is an array of integers. Only the least significant 8 bits of each integer is used 
-/// to store the data. This means each integer represents only 1 byte of data. 
+/// The input is an array of integers. Only the least significant 8 bits 
+/// of each integer is used to store the data. This means each integer 
+/// represents only 1 byte of data. 
 /// Example 1: 
-/// data = [197, 130, 1], which represents the octet sequence: 11000101 10000010 00000001.
+/// data = [197, 130, 1], which represents the octet 
+/// sequence: 11000101 10000010 00000001.
 /// Return true.
-/// It is a valid utf-8 encoding for a 2-bytes character followed by a 1-byte character.
+/// It is a valid utf-8 encoding for a 2-bytes character followed by 
+//// a 1-byte character.
 /// Example 2: 
-/// data = [235, 140, 4], which represented the octet sequence: 11101011 10001100 00000100.
+/// data = [235, 140, 4], which represented the octet 
+/// sequence: 11101011 10001100 00000100.
 /// Return false.
-/// The first 3 bits are all one's and the 4th bit is 0 means it is a 3-bytes character.
-/// The next byte is a continuation byte which starts with 10 and that's correct.
-/// But the second continuation byte does not start with 10, so it is invalid.
+/// The first 3 bits are all one's and the 4th bit is 0 means it is 
+/// a 3-bytes character.
+/// The next byte is a continuation byte which starts with 10 and 
+/// that's correct.
+/// But the second continuation byte does not start with 10, so it is 
+/// invalid.
 /// </summary>
-bool LeetCode::validUtf8(vector<int>& data)
+bool LeetCodeString::validUtf8(vector<int>& data)
 {
     uint32_t high_bit = 1 << 7;
     int pending_byte = 0;
@@ -1698,7 +1648,7 @@ bool LeetCode::isAdditiveNumber(string num)
 }
 
 /// <summary>
-/// Leet code #214. Shortest Palindrome    
+/// Leet code #214. Shortest Palindrome
 /// 
 /// Given a string S, you are allowed to convert it to a palindrome by 
 /// adding characters in front of it. Find and return the shortest palindrome 
@@ -1709,56 +1659,105 @@ bool LeetCode::isAdditiveNumber(string num)
 /// Given "abcd", return "dcbabcd".
 /// Given an array of n positive integers and a positive integer s, 
 /// </summary>
-string LeetCode::shortestPalindrome(string s)
+string LeetCodeString::shortestPalindrome(string s)
 {
     string result;
-    vector<int> kmp_table(s.size());
-    int count = 0;
-    size_t pos = 2;
-    while (pos < s.size())
+    int n = s.size();
+    vector<int> kmp(n);
+    int i = 1; 
+    int j = 0;
+    while (i < n)
     {
-        if (s[pos - 1] == s[count])
+        if (s[i] == s[j])
         {
-            count++;
-            kmp_table[pos] = count;
-            pos++;
+            j++;
+            kmp[i] = j;
+            i++;
+        }
+        else if (j == 0)
+        {
+            i++;
         }
         else
         {
-            if (count > 0) count = kmp_table[count];
-            else pos++;
+            j = kmp[j - 1];
         }
     }
-    int first = 0, last = s.size() - 1;
-    while (first < last)
+
+    int s_i = 0, r_i = 0;
+    while (s_i + r_i <  n)
     {
-        if (s[first] == s[last])
+        if (s[s_i] == s[n-1-r_i])
         {
-            first++;
-            last--;
+            s_i++;
+            r_i++;
         }
         else
         {
-            if (first > 0)
+            if (s_i > 0)
             {
-                first = kmp_table[first];
+                s_i = kmp[s_i-1];
             }
-            else last--;
+            else r_i++;
         }
     }
-    for (int i = s.size() - 1; i > first + last; i--)
+    r_i -= s_i;
+    for (int i = 0; i < r_i; i++)
     {
-        result.push_back(s[i]);
+        result.push_back(s[n-1-i]);
     }
     result.append(s);
     return result;
 }
 
 /// <summary>
-/// Leet code #336. Palindrome Pairs    
+/// Leet code #125. Valid Palindrome
+///
+/// Given a string, determine if it is a palindrome, considering only 
+/// alphanumeric characters and ignoring cases.
+/// For example,
+/// "A man, a plan, a canal: Panama" is a palindrome.
+/// "race a car" is not a palindrome.
+/// Notes:
+/// Have you consider that the string might be empty? This is a good 
+/// question to ask during an interview.
+/// For the purpose of this problem, we define empty string as valid 
+/// palindrome.
+/// </summary>
+bool LeetCodeString::isPalindrome(string s)
+{
+    int first = 0;
+    int last = s.size() - 1;
+    while (first < last)
+    {
+        if (!isalnum(s[first]))
+        {
+            first++;
+        }
+        else if (!isalnum(s[last]))
+        {
+            last--;
+        }
+        else if (tolower(s[first]) == tolower(s[last]))
+        {
+            first++;
+            last--;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet code #336. Palindrome Pairs
 /// 
-/// Given a list of unique words, find all pairs of distinct indices (i, j) in the given list, 
-/// so that the concatenation of the two words, i.e. words[i] + words[j] is a palindrome. 
+/// Given a list of unique words, find all pairs of distinct 
+/// indices (i, j) in the given list, 
+/// so that the concatenation of the two words, i.e. words[i] + words[j] 
+/// is a palindrome. 
 /// Example 1:
 /// Given words = ["bat", "tab", "cat"]
 /// Return [[0, 1], [1, 0]]
@@ -1768,48 +1767,39 @@ string LeetCode::shortestPalindrome(string s)
 /// Return [[0, 1], [1, 0], [3, 2], [2, 4]]
 /// The palindromes are ["dcbaabcd", "abcddcba", "slls", "llssssll"]
 /// </summary>
-vector<vector<int>> LeetCode::palindromePairs(vector<string>& words)
+vector<vector<int>> LeetCodeString::palindromePairs(vector<string>& words)
 {
     vector<vector<int>> result;
     unordered_map<string, int> reverse_map;
-    TrieNode trie_root;
     for (size_t i = 0; i < words.size(); i++)
     {
         string str = words[i];
-        int first = 0;
-        int last = str.size() - 1;
-        while (first < last)
-        {
-            swap(str[first], str[last]);
-            first++; last--;
-        }
+        std::reverse(str.begin(), str.end());
         reverse_map[str] = i;
-        trie_root.insert(str, 0);
     }
 
-    for (size_t i = 0; i < words.size(); i++)
+    for (int i = 0; i < (int)words.size(); i++)
     {
         string str = words[i];
-        vector<string> match_words;
-        trie_root.getMatchWords(str, 0, match_words);
-        for (string word : match_words)
+        for (size_t k = 0; k < words[i].size(); k++)
         {
-            int j = reverse_map[word];
-            if (i == j) continue;
-            string combination = words[i] + words[j];
-            if (isPalindrome(combination))
+            string left = words[i].substr(0, k + 1);
+            string right = words[i].substr(k + 1);
+            if (left == string(left.rbegin(), left.rend()) && 
+                (reverse_map.count(right) > 0))
             {
-                vector<int> pair;
-                pair.push_back(i);
-                pair.push_back(j);
-                result.push_back(pair);
-                if (str == "")
+                int j = reverse_map[right];
+                if (i != j)
                 {
-                    pair.clear();
-                    pair.push_back(j);
-                    pair.push_back(i);
-                    result.push_back(pair);
+                    result.push_back({ j, i });
+                    if (right.empty()) result.push_back({ i, j });
                 }
+            }
+            if (right == string(right.rbegin(), right.rend()) && 
+                (reverse_map.count(left) > 0))
+            {
+                int j = reverse_map[left];
+                if (i != j) result.push_back({ i, j });
             }
         }
     }
@@ -2012,12 +2002,15 @@ bool LeetCode::canPermutePalindrome(string s)
 /// <summary>
 /// Leet code #293. Flip Game  
 /// 
-/// You are playing the following Flip Game with your friend: Given a string that 
-/// contains only these two characters: + and -, you and your friend take turns to 
-/// flip two consecutive "++" into "--". The game ends when a person can no longer 
-/// make a move and therefore the other person will be the winner. 
-/// Write a function to compute all possible states of the string after one valid move. 
-/// For example, given s = "++++", after one move, it may become one of the following states: 
+/// You are playing the following Flip Game with your friend: Given a 
+/// string that contains only these two characters: + and -, you and your 
+/// friend take turns to flip two consecutive "++" into "--". The game 
+/// ends when a person can no longer make a move and therefore the other 
+/// person will be the winner. 
+/// Write a function to compute all possible states of the string after 
+/// one valid move. 
+/// For example, given s = "++++", after one move, it may become one of 
+/// the following states: 
 /// [
 ///    "--++",
 ///    "+--+",
@@ -2025,7 +2018,7 @@ bool LeetCode::canPermutePalindrome(string s)
 /// ]
 /// If there is no valid move, return an empty list [].
 /// </summary>
-vector<string> LeetCode::generatePossibleNextMoves(string s)
+vector<string> LeetCodeString::generatePossibleNextMoves(string s)
 {
     vector<string> result;
     for (int i = 0; i < (int)s.size() - 1; i++)
@@ -2186,32 +2179,42 @@ bool LeetCode::validWordAbbreviation(string word, string abbr)
 /// <summary>
 /// Leet code #482. License Key Formatting  
 /// 
-/// Now you are given a string S, which represents a software license key which we would 
-/// like to format. The string S is composed of alphanumerical characters and dashes. 
-/// The dashes split the alphanumerical characters within the string into groups. 
-/// (i.e. if there are M dashes, the string is split into M+1 groups). 
+/// Now you are given a string S, which represents a software license key 
+/// which we would like to format. The string S is composed of 
+/// alphanumerical characters and dashes. 
+/// The dashes split the alphanumerical characters within the string into 
+/// groups. (i.e. if there are M dashes, the string is split into M+1 
+/// groups). 
 /// The dashes in the given string are possibly misplaced.
 ///
-/// We want each group of characters to be of length K (except for possibly the first group, 
-/// which could be shorter, but still must contain at least one character). To satisfy this 
-/// requirement, we will reinsert dashes. Additionally, all the lower case letters in the 
+/// We want each group of characters to be of length K (except for 
+/// possibly the first group, which could be shorter, but still must 
+/// contain at least one character). To satisfy this requirement, we will 
+/// reinsert dashes. Additionally, all the lower case letters in the 
 /// string must be converted to upper case.
-/// So, you are given a non-empty string S, representing a license key to format, and an integer K. 
-/// And you need to return the license key formatted according to the description above.
+/// So, you are given a non-empty string S, representing a license key to 
+/// format, and an integer K. 
+/// And you need to return the license key formatted according to the 
+/// description above.
 /// Example 1:
 /// Input: S = "2-4A0r7-4k", K = 4
 /// Output: "24A0-R74K"
-/// Explanation: The string S has been split into two parts, each part has 4 characters.
+/// Explanation: The string S has been split into two parts, each part 
+/// has 4 characters.
 /// Example 2:
 /// Input: S = "2-4A0r7-4k", K = 3
 /// Output: "24-A0R-74K"
-/// Explanation: The string S has been split into three parts, each part has 3 characters except the first part as it could be shorter as said above.
+/// Explanation: The string S has been split into three parts, each part 
+/// has 3 characters except the first part as it could be shorter as said 
+/// above.
 /// Note:
-/// 1.The length of string S will not exceed 12,000, and K is a positive integer.
-/// 2.String S consists only of alphanumerical characters (a-z and/or A-Z and/or 0-9) and dashes(-).
+/// 1.The length of string S will not exceed 12,000, and K is a positive 
+///   integer.
+/// 2.String S consists only of alphanumerical characters (a-z and/or A-Z 
+///   and/or 0-9) and dashes(-).
 /// 3.String S is non-empty.
 /// </summary>
-string LeetCode::licenseKeyFormatting(string S, int K)
+string LeetCodeString::licenseKeyFormatting(string S, int K)
 {
     string str;
     int index = S.size() - 1;

@@ -920,6 +920,110 @@ public:
     /// 5. 1 <= n <= 8
     /// </summary>
     int maxStudents(vector<vector<char>>& seats);
+
+    /// <summary>
+    /// Leet code #212. Word Search II
+    /// </summary>
+    void wordSearchII(vector<vector<char>>& board, string& word, TrieNode * trie_node,
+        int x, int y, unordered_set<string> &result);
+
+    /// <summary>
+    /// Leet code #212. Word Search II
+    ///
+    /// Given a 2D board and a list of words from the dictionary, find all 
+    /// words in the board. 
+    /// Each word must be constructed from letters of sequentially adjacent 
+    /// cell, where "adjacent" cells are those horizontally or vertically 
+    /// neighboring.
+    /// The same letter cell may not be used more than once in a word.  
+    ///
+    /// For example,
+    /// Given words = ["oath","pea","eat","rain"] and board = 
+    /// [
+    ///  ['o','a','a','n'],
+    ///  ['e','t','a','e'],
+    ///  ['i','h','k','r'],
+    ///  ['i','f','l','v']
+    /// ]
+    /// Return ["eat","oath"]. 
+    /// Note:
+    /// You may assume that all inputs are consist of lowercase letters a-z. 
+    /// </summary>
+    vector<string> wordSearchII(vector<vector<char>>& board, vector<string>& words);
+
+    /// <summary>
+    /// Leet code #425. Word Squares
+    /// </summary>
+    void wordSquares(TrieNode *trie, vector<string>& wordSquare, vector<vector<string>>& result);
+
+    /// <summary>
+    /// Leet code #425. Word Squares
+    ///
+    /// Given a set of words (without duplicates), find all word squares you 
+    /// can build from them.
+    /// A sequence of words forms a valid word square if the kth row and column
+    /// read the exact same string, where 0 ¡Ü k < max(numRows, numColumns).
+    ///
+    /// For example, the word sequence ["ball","area","lead","lady"] forms 
+    /// a word square because each word reads the same both horizontally and 
+    /// vertically.
+    /// b a l l
+    /// a r e a
+    /// l e a d
+    /// l a d y
+    /// 
+    /// Note:
+    /// 1.There are at least 1 and at most 1000 words.
+    /// 2.All words will have the exact same length.
+    /// 3.Word length is at least 1 and at most 5.
+    /// 4.Each word contains only lowercase English alphabet a-z.
+    ///
+    /// Example 1: 
+    /// Input:
+    /// ["area","lead","wall","lady","ball"]
+    /// 
+    /// Output:
+    /// [
+    ///   [ "wall",
+    ///     "area",
+    ///     "lead",
+    ///     "lady"
+    ///   ],
+    ///   [ "ball",
+    ///     "area",
+    ///     "lead",
+    ///     "lady"
+    ///   ]
+    /// ]
+    ///
+    /// Explanation:
+    /// The output consists of two word squares. The order of output does not matter 
+    /// (just the order of words in each word square matters).
+    /// 
+    /// Example 2: 
+    /// Input:
+    /// ["abat","baba","atan","atal"]
+    ///
+    /// Output:
+    /// [
+    ///   [ "baba",
+    ///     "abat",
+    ///     "baba",
+    ///     "atan"
+    ///   ],
+    ///   [ "baba",
+    ///     "abat",
+    ///     "baba",
+    ///     "atal"
+    ///   ]
+    /// ]
+    ///
+    /// Explanation:
+    /// The output consists of two word squares. The order of output does not matter 
+    /// (just the order of words in each word square matters).
+    /// </summary>
+    vector<vector<string>> wordSquares(vector<string>& words);
+
 #pragma endregion
 };
 

@@ -210,219 +210,61 @@ public:
 };
 
 
-/// <summary>
-/// Leet code #208. Implement Trie(Prefix Tree)  
-/// Implement a trie with insert, search, and startsWith methods.
-/// You may assume that all inputs are consist of lowercase letters a - z.
-/// </summary>
 struct TrieNode
 {
-    string word;
-    int count = 0;
-    map<const char, TrieNode *> char_map;
+    bool is_end;
+    vector<TrieNode *> children;
 
-    /// <summary>
-    /// Constructor of an empty TrieNode
-    /// </summary>
-    /// <returns></returns>
-    TrieNode() {};
+    TrieNode() 
+    {
+        is_end = false;
+        children = vector<TrieNode *>(26, nullptr);
+    };
 
-    /// <summary>
-    /// Destructor of an TrieNode
-    /// </summary>
-    /// <returns></returns>
     ~TrieNode()
     {
-        map<char, TrieNode*>::iterator iterator;
-        for (iterator = char_map.begin(); iterator != char_map.end(); ++iterator)
+        for (size_t i = 0; i < children.size(); i++)
         {
-            if (iterator->second != nullptr)
-            {
-                delete iterator->second;
-            }
-            char_map[iterator->first] = nullptr;
+            if (children[i] != nullptr) delete children[i];
         }
-        char_map.clear();
     }
 
-    /// <summary>
-    /// insert word into the TrieTree.
-    /// </summary>
-    /// <param name="word>The word</param>
-    /// <returns></returns>
     void insert(string word, int i)
     {
-        count++;
         if (i == word.size())
         {
-            this->word = word;
-            return;
-        }
-        TrieNode * node;
-        if (char_map.find(word[i]) == char_map.end())
-        {
-            node = new TrieNode();
-            char_map[word[i]] = node;
+            is_end = true;
         }
         else
         {
-            node = char_map[word[i]];
+            int k = word[i] - 'a';
+            if (children[k] == nullptr)
+            {
+                children[k] = new TrieNode();
+            }
+            children[k]->insert(word, i + 1);
         }
-        node->insert(word, i + 1);
     }
 
-    /// <summary>
-    /// get all the next level nodes
-    /// </summary>
-    /// <param name="word>The word</param>
-    /// <returns></returns>
-    vector<TrieNode *> getNodes()
+    TrieNode * next(char ch)
     {
-        vector<TrieNode *> result;
-        map<char, TrieNode*>::iterator iterator;
-        for (iterator = char_map.begin(); iterator != char_map.end(); ++iterator)
+        int k = ch - 'a';
+        return children[k];
+    }
+
+    void get_words(string &word, vector<string>& result)
+    {
+        if (is_end) result.push_back(word);
+
+        for (size_t i = 0; i < children.size(); i++)
         {
-            if (iterator->second != nullptr)
+            if (children[i] != nullptr)
             {
-                result.push_back(iterator->second);
+                word.push_back((char)('a' + i));
+                children[i]->get_words(word, result);
+                word.pop_back();
             }
         }
-        return result;
-    }
-
-    /// <summary>
-    /// search a word in the TrieTree.
-    /// </summary>
-    /// <param name="word">The word</param>
-    /// <returns>true, if found</returns>
-    bool search(string word, int i)
-    {
-        if (i == word.size())
-        {
-            if (this->word == word) return true;
-            else return false;
-        }
-        if (char_map.find(word[i]) == char_map.end())
-        {
-            return false;
-        }
-        else
-        {
-            TrieNode* node = char_map[word[i]];
-            return node->search(word, i + 1);
-        }
-    }
-
-    /// <summary>
-    /// Returns if there is any word in the trie.
-    /// that starts with the given prefix.
-    /// </summary>
-    /// <param name="prefix">The prefix</param>
-    bool startsWith(string prefix, int i)
-    {
-        if (i == prefix.size()) return true;
-        if (char_map.find(prefix[i]) == char_map.end())
-        {
-            return false;
-        }
-        else
-        {
-            TrieNode* node = char_map[prefix[i]];
-            return node->startsWith(prefix, i + 1);
-        }
-    }
-
-    /// <summary>
-    /// get match words from the specific prefix
-    /// </summary>
-    void getMatchWords(string prefix, int i, vector<string>& matchWords)
-    {
-        if (!this->word.empty())
-        {
-            matchWords.push_back(word);
-        }
-        if (i == prefix.size())
-        {
-            for (auto itr : char_map)
-            {
-                itr.second->getMatchWords(prefix, i, matchWords);
-            }
-        }
-        else
-        {
-            if (char_map.find(prefix[i]) == char_map.end())
-            {
-                return;
-            }
-            else
-            {
-                TrieNode* node = char_map[prefix[i]];
-                node->getMatchWords(prefix, i + 1, matchWords);
-            }
-        }
-    }
-};
-
-class Trie
-{
-private:
-    TrieNode * root;
-
-public:
-    /// <summary>
-    /// Constructor an empty TrieTree
-    /// </summary>
-    /// <returns></returns>
-    Trie()
-    {
-        root = new TrieNode();
-    };
-
-    /// <summary>
-    /// Destructor of an TrieTree
-    /// </summary>
-    /// <returns></returns>
-    ~Trie()
-    {
-        delete root;
-    }
-
-    /// <summary>
-    /// insert word into the TrieTree.
-    /// </summary>
-    /// <param name="word>The word</param>
-    /// <returns></returns>
-    void insert(string word)
-    {
-        root->insert(word, 0);
-    };
-
-    /// <summary>
-    /// search a word in the TrieTree.
-    /// </summary>
-    /// <param name="word">The word</param>
-    /// <returns>true, if found</returns>
-    bool search(string word)
-    {
-        return root->search(word, 0);
-    }
-
-    /// <summary>
-    /// Returns if there is any word in the trie.
-    /// that starts with the given prefix.
-    /// </summary>
-    /// <param name="prefix">The prefix</param>
-    bool startsWith(string prefix)
-    {
-        return root->startsWith(prefix, 0);
-    };
-
-    /// <summary>
-    /// Get TrieNode root.
-    /// </summary>
-    TrieNode * getRoot(void)
-    {
-        return root;
     }
 };
 
@@ -732,220 +574,6 @@ public:
 };
 
 /// <summary>
-/// Leet code #642. Design Search Autocomplete System
-/// 
-/// Design a search autocomplete system for a search engine. Users may 
-/// input a sentence (at least one word and end with a special character 
-/// '#'). For each character they type except '#', you need to return the 
-/// top 3 historical hot sentences that have prefix the same as the part 
-/// of sentence already typed. Here are the specific rules:
-/// The hot degree for a sentence is defined as the number of times a user 
-/// typed the exactly same sentence before. 
-/// The returned top 3 hot sentences should be sorted by hot degree (The 
-/// first is the hottest one). If several sentences have the same degree 
-/// of hot, you need to use ASCII-code order (smaller one appears first). 
-/// If less than 3 hot sentences exist, then just return as many as you 
-/// can.
-/// When the input is a special character, it means the sentence ends, and 
-/// in this case, you need to return an empty list.
-///
-/// Your job is to implement the following functions:
-/// The constructor function:
-/// AutocompleteSystem(String[] sentences, int[] times): This is the 
-/// constructor. The input is historical data. Sentences is a string array 
-/// consists of previously typed sentences. Times is the corresponding 
-/// times a sentence has been typed. Your system should record these 
-/// historical data.
-/// Now, the user wants to input a new sentence. The following function 
-/// will provide the next character the user types: 
-/// List<String> input(char c): The input c is the next character typed by 
-/// the user. The character will only be lower-case letters ('a' to 'z'), 
-/// blank space (' ') or a special character ('#'). Also, the previously 
-/// typed sentence should be recorded in your system. The output will be 
-/// the top 3 historical hot sentences that have prefix the same as the 
-/// part of sentence already typed.
-///
-/// Example:
-/// Operation: AutocompleteSystem(["i love you", "island","ironman", 
-/// "i love leetcode"], [5,3,2,2]) 
-/// The system have already tracked down the following sentences and 
-/// their corresponding times: 
-/// "i love you" : 5 times 
-/// "island" : 3 times 
-/// "ironman" : 2 times 
-/// "i love leetcode" : 2 times 
-/// Now, the user begins another search: 
-///
-/// Operation: input('i') 
-/// Output: ["i love you", "island","i love leetcode"] 
-/// Explanation: 
-/// There are four sentences that have prefix "i". Among them, "ironman" 
-/// and "i love leetcode" have same hot degree. Since ' ' has ASCII code 32
-/// and 'r' has ASCII code 114, "i love leetcode" should be in front of 
-/// "ironman". Also we only need to output top 3 hot sentences, so 
-/// "ironman" will be ignored. 
-///
-/// Operation: input(' ') 
-/// Output: ["i love you","i love leetcode"] 
-/// Explanation: 
-/// There are only two sentences that have prefix "i ". 
-/// 
-/// Operation: input('a') 
-/// Output: [] 
-/// Explanation: 
-/// There are no sentences that have prefix "i a". 
-/// 
-/// Operation: input('#') 
-/// Output: [] 
-/// Explanation: 
-/// The user finished the input, the sentence "i a" should be saved as a 
-/// historical sentence in system. And the following input will be counted 
-/// as a new search. 
-///
-/// Note:
-/// 1. The input sentence will always start with a letter and end with '#',
-///    and only one blank space will exist between two words. 
-/// 2. The number of complete sentences that to be searched won't exceed 
-///    100. 
-/// 3. The length of each sentence including those in the historical data 
-///    won't exceed 100. 
-/// 4. Please use double-quote instead of single-quote when you write test 
-///    cases even for a character input.
-/// 5. Please remember to RESET your class variables declared in class 
-///    AutocompleteSystem, as static/class variables are persisted across 
-///    multiple test cases. Please see here for more details.
-/// </summary>
-class AutocompleteSystem
-{
-private:
-    struct TrieNode
-    {
-        string word;
-        map<const char, TrieNode *> char_map;
-
-        /// <summary>
-        /// Constructor of an empty TrieNode
-        /// </summary>
-        /// <returns></returns>
-        TrieNode() {};
-
-        /// <summary>
-        /// Destructor of an TrieNode
-        /// </summary>
-        /// <returns></returns>
-        ~TrieNode()
-        {
-            map<char, TrieNode*>::iterator iterator;
-            for (iterator = char_map.begin(); iterator != char_map.end(); ++iterator)
-            {
-                if (iterator->second != nullptr)
-                {
-                    delete iterator->second;
-                }
-                char_map[iterator->first] = nullptr;
-            }
-            char_map.clear();
-        }
-
-        void insert(string word, int i)
-        {
-            if (i == word.size())
-            {
-                this->word = word;
-                return;
-            }
-            TrieNode * node;
-            if (char_map.find(word[i]) == char_map.end())
-            {
-                node = new TrieNode();
-                char_map[word[i]] = node;
-            }
-            else
-            {
-                node = char_map[word[i]];
-            }
-            node->insert(word, i + 1);
-        }
-
-        /// <summary>
-        /// get match words from the specific prefix
-        /// </summary>
-        void getMatchWords(string prefix, int i, vector<string>& matchWords)
-        {
-            if (!this->word.empty() && (i == prefix.size()))
-            {
-                matchWords.push_back(word);
-            }
-            if (i == prefix.size())
-            {
-                for (auto itr : char_map)
-                {
-                    itr.second->getMatchWords(prefix, i, matchWords);
-                }
-            }
-            else
-            {
-                if (char_map.find(prefix[i]) == char_map.end())
-                {
-                    return;
-                }
-                else
-                {
-                    TrieNode* node = char_map[prefix[i]];
-                    node->getMatchWords(prefix, i + 1, matchWords);
-                }
-            }
-        }
-    };
-
-    TrieNode root;
-    unordered_map<string, int> sentence_map;
-    string sentence;
-public:
-    AutocompleteSystem(vector<string> sentences, vector<int> times)
-    {
-        for (size_t i = 0; i < sentences.size(); i++)
-        {
-            sentence_map[sentences[i]] = times[i];
-            root.insert(sentences[i], 0);
-        }
-
-    }
-
-    vector<string> input(char c)
-    {
-        vector<string> result;
-        if (c == '#')
-        {
-            sentence_map[sentence]++;
-            root.insert(sentence, 0);
-            sentence.clear();
-        }
-        else
-        {
-            sentence.push_back(c);
-            vector<string> sentences;
-            map<int, set<string>, greater<int>> hot_sentences;
-            root.getMatchWords(sentence, 0, sentences);
-            for (string str : sentences)
-            {
-                hot_sentences[sentence_map[str]].insert(str);
-            }
-
-            while (result.size() < 3 && !hot_sentences.empty())
-            {
-                set<string>& s_list = hot_sentences.begin()->second;
-
-                result.push_back(*s_list.begin());
-                s_list.erase(s_list.begin());
-                if (s_list.empty()) hot_sentences.erase(hot_sentences.begin());
-            }
-        }
-        return result;
-    }
-};
-
-/// <summary>
 /// Leet code #677. Map Sum Pairs
 /// 
 /// Implement a MapSum class with insert, and sum methods.
@@ -1080,104 +708,6 @@ public:
     }
 };
 
-/// <summary>
-/// Leet code #745. Prefix and Suffix Search      
-/// 
-/// Given many words, words[i] has weight i.
-/// Design a class WordFilter that supports one function, 
-/// WordFilter.f(String prefix, String suffix). It will return the word with 
-/// given prefix and suffix with maximum weight. If no word exists, return -1.
-///
-/// Examples:
-/// Input:
-/// WordFilter(["apple"])
-/// WordFilter.f("a", "e") // returns 0
-/// WordFilter.f("b", "") // returns -1
-/// Note:
-/// words has length in range [1, 15000].
-/// For each test case, up to words.length queries WordFilter.f may be made.
-/// words[i] has length in range [1, 10].
-/// prefix, suffix have lengths in range [0, 10].
-/// words[i] and prefix, suffix queries consist of lowercase letters only.
-/// </summary>
-class WordFilter {
-    unordered_map<string, int> m_WordMap;
-public:
-    WordFilter(vector<string> words) 
-    {
-        for (size_t k = 0; k < words.size(); k++)
-        {
-            for (size_t i = 0; i <= 10 && i <= words[k].size(); i++)
-            {
-                string prefix = words[k].substr(0, i);
-                for (size_t j = 0; j <= 10 && j <= words[k].size(); j++)
-                {
-                    string suffix = words[k].substr(words[k].size() - j, j);
-                    m_WordMap[prefix + "#" + suffix] = k;
-                }
-            }
-        }
-    }
-
-    int f(string prefix, string suffix) 
-    {
-        if (m_WordMap.count(prefix + "#" + suffix) > 0)
-        {
-            return m_WordMap[prefix + "#" + suffix];
-        }
-        else
-        {
-            return -1;
-        }
-    }
-};
-
-
-class WordFilterII {
-    map<string, int> m_Prefix;
-    map<string, int> m_Suffix;
-
-public:
-    WordFilterII(vector<string> words)
-    {
-        for (size_t k = 0; k < words.size(); k++)
-        {
-            m_Prefix[words[k]] = k;
-            string rev_word = words[k];
-            reverse(rev_word.begin(), rev_word.end());
-            m_Suffix[rev_word] = k;
-        }
-    }
-
-    int f(string prefix, string suffix)
-    {
-        unordered_set<int> prefix_set;
-        int result = -1;
-        for (auto itr = m_Prefix.lower_bound(prefix); itr != m_Prefix.end(); itr++)
-        {
-            if ((itr->first.size() >= prefix.size()) && (itr->first.substr(0, prefix.size()) == prefix)) 
-            {
-                prefix_set.insert(itr->second);
-            }
-            else
-            {
-                break;
-            }
-        }
-        reverse(suffix.begin(), suffix.end());
-        for (auto itr = m_Suffix.lower_bound(suffix); itr != m_Suffix.end(); itr++)
-        {
-            if ((itr->first.size() >= suffix.size()) && (itr->first.substr(0, suffix.size()) == suffix))
-            {
-                if (prefix_set.count(itr->second) > 0)
-                {
-                    result = max(result, itr->second);
-                }
-            }
-        }
-        return result;
-    }
-};
 
 class Master
 {
@@ -1968,162 +1498,7 @@ public:
 };
 
 
-/// <summary>
-/// Leet code #1032. Stream of Characters
-/// 
-/// Implement the StreamChecker class as follows:
-///
-/// StreamChecker(words): Constructor, init the data structure with the given 
-/// words.
-/// query(letter): returns true if and only if for some k >= 1, the last k 
-/// characters queried (in order from oldest to newest, including this letter 
-/// just queried) spell one of the words in the given list.
-/// 
-/// Example:
-///
-/// // init the dictionary.
-/// StreamChecker streamChecker = new StreamChecker(["cd","f","kl"]); 
-/// 
-/// streamChecker.query('a'); // return false
-/// streamChecker.query('b'); // return false
-/// streamChecker.query('c'); // return false
-/// streamChecker.query('d'); // return true, because 'cd' is in the wordlist
-/// streamChecker.query('e'); // return false
-/// streamChecker.query('f'); // return true, because 'f' is in the wordlist
-/// streamChecker.query('g'); // return false
-/// streamChecker.query('h'); // return false
-/// streamChecker.query('i'); // return false
-/// streamChecker.query('j'); // return false
-/// streamChecker.query('k'); // return false
-/// streamChecker.query('l'); // return true, because 'kl' is in the wordlist
-///
-/// Note:
-///
-/// 1. 1 <= words.length <= 2000
-/// 2. 1 <= words[i].length <= 2000
-/// 3. Words will only consist of lowercase English letters.
-/// 4. Queries will only consist of lowercase English letters.
-/// 5. The number of queries is at most 40000.
-/// </summary>
-class StreamChecker2 {
-private:
-    unordered_map<string, int> word_map;
-    size_t max_len = 0;
-    string buffer;
-
-public:
-    StreamChecker2(vector<string>& words) 
-    {
-        for (size_t i = 0; i < words.size(); i++)
-        {
-            string str;
-            for (int j = words[i].size() - 1; j >= 0; j--)
-            {
-                str.push_back(words[i][j]);
-                if (j != 0)
-                {
-                    if (word_map.count(str) == 0) word_map[str] = 0;
-                }
-                else
-                {
-                    word_map[str] = 1;
-                }
-            }
-            max_len = max(max_len, words[i].size());
-        }
-    }
-    bool query(char letter) 
-    {
-        buffer.insert(buffer.begin(), letter);
-        for (size_t i = 0; i < buffer.size(); i++)
-        {
-            string str = buffer.substr(0, i + 1);
-            if (word_map.count(str) == 0) return false;
-            else if (word_map[str] == 1) return true;
-        }
-        return false;
-    }
-};
-
-class StreamChecker {
-private:
-    struct Trie
-    {
-    public:
-        bool is_end;
-        Trie* next[26];
-
-        Trie()
-        {
-            is_end = false;
-            memset(next, 0, sizeof(next));
-        }
-    };
-
-    Trie root;
-    size_t max_len = 0;
-    string buffer;
-
-public:
-    StreamChecker(vector<string>& words)
-    {
-        for (size_t i = 0; i < words.size(); i++)
-        {
-            Trie * node = &root;
-            for (int j = words[i].size() - 1; j >= 0; j--)
-            {
-                int index = words[i][j] - 'a';
-                if (node->next[index] == nullptr) node->next[index] = new Trie();
-                node = node->next[index];
-                if (j == 0)
-                {
-                    node->is_end = true;
-                }
-            }
-            max_len = max(max_len, words[i].size());
-        }
-    }
-    ~StreamChecker()
-    {
-        queue<Trie *> search;
-        for (size_t i = 0; i < 26; i++)
-        {
-            if (root.next[i] != nullptr) search.push(root.next[i]);
-        }
-        while (!search.empty())
-        {
-            Trie * node = search.front();
-            search.pop();
-            for (size_t i = 0; i < 26; i++)
-            {
-                if (node->next[i] != nullptr) search.push(node->next[i]);
-            }
-            delete node;
-        }
-    }
-    bool query(char letter)
-    {
-        buffer.insert(buffer.begin(), letter);
-        Trie * node = &root;
-        for (size_t i = 0; i < buffer.size(); i++)
-        {
-            int index = buffer[i] - 'a';
-            if (node->next[index] == nullptr)
-            {
-                return false;
-            }
-            else
-            {
-                node = node->next[index];
-                if (node->is_end == true) return true;
-            }
-        }
-        return false;
-    }
-};
-
 #pragma endregion 
-
 /// <summary>
 /// The class is to implement some string algorithm 
 /// </summary>
@@ -2216,18 +1591,6 @@ public:
     void moveZeroes(vector<int>& nums);
 
     /// <summary>
-    /// Leet code #125. Valid Palindrome  
-    /// Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
-    /// For example,
-    /// "A man, a plan, a canal: Panama" is a palindrome.
-    /// "race a car" is not a palindrome.
-    /// Notes:
-    /// Have you consider that the string might be empty? This is a good question to ask during an interview.
-    /// For the purpose of this problem, we define empty string as valid palindrome. 
-    /// </summary>
-    bool isPalindrome(string s);
-
-    /// <summary>
     /// Leet code #345. Reverse Vowels of a String 
     /// Write a function that takes a string as input and reverse only the vowels of a string.
     /// Example 1:
@@ -2240,7 +1603,7 @@ public:
     string reverseVowels(string s);
 
     /// <summary>
-    /// Leet code #167. Two Sum II - Input array is sorted            
+    /// Leet code #167. Two Sum II - Input array is sorted
     /// Given an array of integers that is already sorted in ascending order, 
     /// find two numbers such that they add up to a specific target number.
     /// The function twoSum should return indices of the two numbers such that they add up to the target, 
@@ -11038,83 +10401,6 @@ public:
     bool isScramble(string s1, string s2);
 
     /// <summary>
-    /// Leet code #409. Longest Palindrome 
-    /// Given a string which consists of lowercase or uppercase letters, find the length of the longest 
-    /// palindromes that can be built with those letters. 
-    /// This is case sensitive, for example "Aa" is not considered a palindrome here.
-    /// Note:
-    /// Assume the length of given string will not exceed 1,010. 
-    /// Example: 
-    /// Input:
-    /// "abccccdd"
-    /// Output:
-    /// 7
-    ///
-    /// Explanation:
-    /// One longest palindrome that can be built is "dccaccd", whose length is 7.
-    /// </summary>
-    int longestPalindromeII(string s);
-
-    /// <summary>
-    /// Leet code #187. Repeated DNA Sequences 
-    /// All DNA is composed of a series of nucleotides abbreviated as A, C, G, and T, for example: "ACGAATTCCG". 
-    /// When studying DNA, it is sometimes useful to identify repeated sequences within the DNA.
-    /// Write a function to find all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule.
-    ///
-    /// For example,
-    /// Given s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT",
-    /// Return:
-    /// ["AAAAACCCCC", "CCCCCAAAAA"].
-    /// </summary>
-    vector<string> findRepeatedDnaSequences(string s);
-
-    /// <summary>
-    /// Leet code #205. Isomorphic Strings
-    /// Given two strings s and t, determine if they are isomorphic. 
-    /// Two strings are isomorphic if the characters in s can be replaced to get t.
-    /// All occurrences of a character must be replaced with another character while 
-    /// preserving the order of characters. No two characters may map to the same 
-    /// character but a character may map to itself.
-    /// For example,
-    /// Given "egg", "add", return true.
-    ///
-    /// Given "foo", "bar", return false.
-    /// Given "paper", "title", return true.
-    /// Note:
-    /// You may assume both s and t have the same length.
-    /// </summary>
-    bool isIsomorphic(string s, string t);
-
-    /// <summary>
-    /// Leet code #290. Word Pattern      
-    /// Given a pattern and a string str, find if str follows the same pattern.
-    /// Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str.
-    /// Examples:
-    /// 1.pattern = "abba", str = "dog cat cat dog" should return true.
-    /// 2.pattern = "abba", str = "dog cat cat fish" should return false.
-    /// 3.pattern = "aaaa", str = "dog cat cat dog" should return false.
-    /// 4.pattern = "abba", str = "dog dog dog dog" should return false.
-    /// Notes:
-    /// You may assume pattern contains only lowercase letters, and str contains lowercase letters separated by a single space. 
-    /// </summary>
-    bool wordPattern(string pattern, string str);
-
-    /// <summary>
-    /// Leet code #65. Valid Number
-    ///
-    /// Validate if a given string is numeric.
-    /// Some examples:
-    /// "0" => true
-    /// " 0.1 " => true
-    /// "abc" => false
-    /// "1 a" => false
-    /// "2e10" => true
-    /// Note: It is intended for the problem statement to be ambiguous. 
-    /// You should gather all requirements up front before implementing one. 
-    /// </summary>
-    bool isValidNumber(string s);
-
-    /// <summary>
     /// Leet code #420. Strong Password Checker     
     /// A password is considered strong if below conditions are all met:
     /// 1. It has at least 6 characters and at most 20 characters. 
@@ -11126,64 +10412,13 @@ public:
     int strongPasswordChecker(string s);
 
     /// <summary>
-    /// Leet code #289. Game of Life 
-    ///
-    /// According to the Wikipedia's article: "The Game of Life, also known simply as Life, 
-    /// is a cellular automaton devised by the British mathematician John Horton Conway in 1970." 
-    /// Given a board with m by n cells, each cell has an initial state live (1) or dead (0). 
-    /// Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the 
-    /// following four rules (taken from the above Wikipedia article): 	
-    /// 1.Any live cell with fewer than two live neighbors dies, as if caused by under-population.
-    /// 2.Any live cell with two or three live neighbors lives on to the next generation.
-    /// 3.Any live cell with more than three live neighbors dies, as if by over-population..
-    /// 4.Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
-    /// Write a function to compute the next state (after one update) of the board given its current state.
-    /// Follow up: 
-    /// 1.Could you solve it in-place? Remember that the board needs to be updated at the same time: You 
-    /// cannot update some cells first and then use their updated values to update other cells.
-    /// 2.In this question, we represent the board using a 2D array. In principle, the board is infinite, 
-    /// which would cause problems when the active area encroaches the border of the array. How would you address 
-    /// these problems?
-    /// </summary>
-    void gameOfLife(vector<vector<int>>& board);
-
-    /// <summary>
-    /// Leet code #393. UTF-8 Validation
-    /// A character in UTF8 can be from 1 to 4 bytes long, subjected to the following rules:
-    /// 1.For 1-byte character, the first bit is a 0, followed by its unicode code.
-    /// 2.For n-bytes character, the first n-bits are all one's, the n+1 bit is 0, followed 
-    ///   by n-1 bytes with most significant 2 bits being 10.
-    /// This is how the UTF-8 encoding would work:
-    ///   Char. number range  |        UTF-8 octet sequence
-    ///      (hexadecimal)    |              (binary)
-    ///   --------------------+---------------------------------------------
-    ///   0000 0000-0000 007F | 0xxxxxxx
-    ///   0000 0080-0000 07FF | 110xxxxx 10xxxxxx
-    ///   0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx
-    ///   0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
-    /// Given an array of integers representing the data, return whether it is a valid utf-8 encoding. 
-    /// Note:
-    /// The input is an array of integers. Only the least significant 8 bits of each integer is used to store the data. This means each integer represents only 1 byte of data. 
-    /// Example 1: 
-    /// data = [197, 130, 1], which represents the octet sequence: 11000101 10000010 00000001.
-    /// Return true.
-    /// It is a valid utf-8 encoding for a 2-bytes character followed by a 1-byte character.
-    /// Example 2: 
-    /// data = [235, 140, 4], which represented the octet sequence: 11101011 10001100 00000100.
-    /// Return false.
-    /// The first 3 bits are all one's and the 4th bit is 0 means it is a 3-bytes character.
-    /// The next byte is a continuation byte which starts with 10 and that's correct.
-    /// But the second continuation byte does not start with 10, so it is invalid.
-    /// </summary>
-    bool validUtf8(vector<int>& data);
-
-    /// <summary>
     /// Is Additive Number recursive call
     /// </summary>
     bool isAdditiveNumber(string num1, string num2, string num);
 
     /// <summary>
     /// Leet code #306. Additive Number
+    ///
     /// Additive number is a string whose digits can form additive sequence.
     /// A valid additive sequence should contain at least three numbers. Except for the first two numbers, 
     /// each subsequent number in the sequence must be the sum of the preceding two.
@@ -11201,38 +10436,6 @@ public:
     bool isAdditiveNumber(string num);
 
     /// <summary>
-    /// Leet code #214. Shortest Palindrome    
-    /// 
-    /// Given a string S, you are allowed to convert it to a palindrome by 
-    /// adding characters in front of it. Find and return the shortest palindrome 
-    /// you can find by performing this transformation. 
-    ///
-    /// For example: 
-    /// Given "aacecaaa", return "aaacecaaa".
-    /// Given "abcd", return "dcbabcd".
-    /// Given an array of n positive integers and a positive integer s, 
-    /// </summary>
-    string shortestPalindrome(string s);
-
-    /// <summary>
-    /// Leet code #336. Palindrome Pairs    
-    /// 
-    /// Given a list of unique words, find all pairs of distinct indices (i, j) in the given list, 
-    /// so that the concatenation of the two words, i.e. words[i] + words[j] is a palindrome. 
-    /// Example 1:
-    /// Given words = ["bat", "tab", "cat"]
-    /// Return [[0, 1], [1, 0]]
-    ///
-    /// Example 2:
-    /// Given words = ["abcd", "dcba", "lls", "s", "sssll"]
-    /// Return [[0, 1], [1, 0], [3, 2], [2, 4]]
-    /// The palindromes are ["dcbaabcd", "abcddcba", "slls", "llssssll"]
-    /// </summary>
-    vector<vector<int>> palindromePairs(vector<string>& words);
-
-
-
-    /// <summary>
     /// Leet code #266. Palindrome Permutation  
     /// 
     /// Given a string, determine if a permutation of the string could form a palindrome.
@@ -11247,28 +10450,12 @@ public:
     bool canPermutePalindrome(string s);
 
     /// <summary>
-    /// Leet code #293. Flip Game  
-    /// 
-    /// You are playing the following Flip Game with your friend: Given a string that 
-    /// contains only these two characters: + and -, you and your friend take turns to 
-    /// flip two consecutive "++" into "--". The game ends when a person can no longer 
-    /// make a move and therefore the other person will be the winner. 
-    /// Write a function to compute all possible states of the string after one valid move. 
-    /// For example, given s = "++++", after one move, it may become one of the following states: 
-    /// [
-    ///    "--++",
-    ///    "+--+",
-    ///    "++--"
-    /// ]
-    /// If there is no valid move, return an empty list [].
-    /// </summary>
-    vector<string> generatePossibleNextMoves(string s);
-
-    /// <summary>
     /// Leet code #246. Strobogrammatic Number  
     /// 
-    /// A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
-    /// Write a function to determine if a number is strobogrammatic. The number is represented as a string.
+    /// A strobogrammatic number is a number that looks the same when 
+    /// rotated 180 degrees (looked at upside down).
+    /// Write a function to determine if a number is strobogrammatic. The 
+    /// number is represented as a string.
     /// For example, the numbers "69", "88", and "818" are all strobogrammatic.
     /// </summary>
     bool isStrobogrammatic(string num);
@@ -11298,11 +10485,14 @@ public:
     /// Given a non-empty string s and an abbreviation abbr, return 
     /// whether the string matches with the given abbreviation. 
     /// A string such as "word" contains only the following valid abbreviations:
-    /// ["word", "1ord", "w1rd", "wo1d", "wor1", "2rd", "w2d", "wo2", "1o1d", "1or1", "w1r1", "1o2", "2r1", "3d", "w3", "4"]
-    /// Notice that only the above abbreviations are valid abbreviations of the string "word". 
+    /// ["word", "1ord", "w1rd", "wo1d", "wor1", "2rd", "w2d", "wo2", "1o1d", 
+    /// "1or1", "w1r1", "1o2", "2r1", "3d", "w3", "4"]
+    /// Notice that only the above abbreviations are valid abbreviations of 
+    /// the string "word". 
     /// Any other string is not a valid abbreviation of "word".
     /// Note:
-    /// Assume s contains only lowercase letters and abbr contains only lowercase letters and digits. 
+    /// Assume s contains only lowercase letters and abbr contains only 
+    /// lowercase letters and digits. 
     /// Example 1:
     /// Given s = "internationalization", abbr = "i12iz4n":
     /// Return true.
@@ -11311,36 +10501,6 @@ public:
     /// Return false.
     /// </summary>
     bool validWordAbbreviation(string word, string abbr);
-
-    /// <summary>
-    /// Leet code #482. License Key Formatting  
-    /// 
-    /// Now you are given a string S, which represents a software license key which we would 
-    /// like to format. The string S is composed of alphanumerical characters and dashes. 
-    /// The dashes split the alphanumerical characters within the string into groups. 
-    /// (i.e. if there are M dashes, the string is split into M+1 groups). 
-    /// The dashes in the given string are possibly misplaced.
-    ///
-    /// We want each group of characters to be of length K (except for possibly the first group, 
-    /// which could be shorter, but still must contain at least one character). To satisfy this 
-    /// requirement, we will reinsert dashes. Additionally, all the lower case letters in the 
-    /// string must be converted to upper case.
-    /// So, you are given a non-empty string S, representing a license key to format, and an integer K. 
-    /// And you need to return the license key formatted according to the description above.
-    /// Example 1:
-    /// Input: S = "2-4A0r7-4k", K = 4
-    /// Output: "24A0-R74K"
-    /// Explanation: The string S has been split into two parts, each part has 4 characters.
-    /// Example 2:
-    /// Input: S = "2-4A0r7-4k", K = 3
-    /// Output: "24-A0R-74K"
-    /// Explanation: The string S has been split into three parts, each part has 3 characters except the first part as it could be shorter as said above.
-    /// Note:
-    /// 1.The length of string S will not exceed 12,000, and K is a positive integer.
-    /// 2.String S consists only of alphanumerical characters (a-z and/or A-Z and/or 0-9) and dashes(-).
-    /// 3.String S is non-empty.
-    /// </summary>
-    string licenseKeyFormatting(string S, int K);
 
     /// <summary>
     /// Leet code #481. Magical String
@@ -17119,35 +16279,6 @@ public:
 
 #pragma region BackTracking
 
-    /// <summary>
-    /// Leet code #212. Word Search II
-    /// </summary>
-    void wordSearch(vector<vector<char>>& board, TrieNode * trie_node, 
-        int x, int y, vector<string> &word_list);
-
-    /// <summary>
-    /// Leet code #212. Word Search II
-    ///
-    /// Given a 2D board and a list of words from the dictionary, find all 
-    /// words in the board. 
-    /// Each word must be constructed from letters of sequentially adjacent 
-    /// cell, where "adjacent" cells are those horizontally or vertically 
-    /// neighboring.
-    /// The same letter cell may not be used more than once in a word.  
-    ///
-    /// For example,
-    /// Given words = ["oath","pea","eat","rain"] and board = 
-    /// [
-    ///  ['o','a','a','n'],
-    ///  ['e','t','a','e'],
-    ///  ['i','h','k','r'],
-    ///  ['i','f','l','v']
-    /// ]
-    /// Return ["eat","oath"]. 
-    /// Note:
-    /// You may assume that all inputs are consist of lowercase letters a-z. 
-    /// </summary>
-    vector<string> wordSearchII(vector<vector<char>>& board, vector<string>& words);
 
     /// <summary>
     /// Palindrome Partitioning with cache
@@ -17518,79 +16649,6 @@ public:
     /// 4.The returned elements order does not matter. 
     /// </summary>
     vector<string> findAllConcatenatedWordsInADict(vector<string>& words);
-
-    /// <summary>
-    /// Leet code #425. Word Squares
-    /// </summary>
-    void wordSquares(TrieNode & trie, vector<string>& wordSquare, vector<vector<string>>& result);
-
-    /// <summary>
-    /// Leet code #425. Word Squares
-    ///
-    /// Given a set of words (without duplicates), find all word squares you 
-    /// can build from them.
-    /// A sequence of words forms a valid word square if the kth row and column
-    /// read the exact same string, where 0 ≤ k < max(numRows, numColumns).
-    ///
-    /// For example, the word sequence ["ball","area","lead","lady"] forms 
-    /// a word square because each word reads the same both horizontally and 
-    /// vertically.
-    /// b a l l
-    /// a r e a
-    /// l e a d
-    /// l a d y
-    /// 
-    /// Note:
-    /// 1.There are at least 1 and at most 1000 words.
-    /// 2.All words will have the exact same length.
-    /// 3.Word length is at least 1 and at most 5.
-    /// 4.Each word contains only lowercase English alphabet a-z.
-    ///
-    /// Example 1: 
-    /// Input:
-    /// ["area","lead","wall","lady","ball"]
-    /// 
-    /// Output:
-    /// [
-    ///   [ "wall",
-    ///     "area",
-    ///     "lead",
-    ///     "lady"
-    ///   ],
-    ///   [ "ball",
-    ///     "area",
-    ///     "lead",
-    ///     "lady"
-    ///   ]
-    /// ]
-    ///
-    /// Explanation:
-    /// The output consists of two word squares. The order of output does not matter 
-    /// (just the order of words in each word square matters).
-    /// 
-    /// Example 2: 
-    /// Input:
-    /// ["abat","baba","atan","atal"]
-    ///
-    /// Output:
-    /// [
-    ///   [ "baba",
-    ///     "abat",
-    ///     "baba",
-    ///     "atan"
-    ///   ],
-    ///   [ "baba",
-    ///     "abat",
-    ///     "baba",
-    ///     "atal"
-    ///   ]
-    /// ]
-    ///
-    /// Explanation:
-    /// The output consists of two word squares. The order of output does not matter 
-    /// (just the order of words in each word square matters).
-    /// </summary>
-    vector<vector<string>> wordSquares(vector<string>& words);
 
     /// <summary>
     /// Leet code #351. Android Unlock Patterns

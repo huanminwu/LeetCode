@@ -206,43 +206,6 @@ void LeetCode::moveZeroes(vector<int>& nums)
 }
 
 /// <summary>
-/// Leet code #125. Valid Palindrome  
-/// Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
-/// For example,
-/// "A man, a plan, a canal: Panama" is a palindrome.
-/// "race a car" is not a palindrome.
-/// Notes:
-/// Have you consider that the string might be empty? This is a good question to ask during an interview.
-/// For the purpose of this problem, we define empty string as valid palindrome. 
-/// </summary>
-bool LeetCode::isPalindrome(string s)
-{
-	int first = 0;
-	int last = s.size() - 1;
-	while (first < last)
-	{
-		if (!isalnum(s[first]))
-		{
-			first++;
-		}
-		else if (!isalnum(s[last]))
-		{
-			last--;
-		}
-		else if (tolower(s[first]) == tolower(s[last]))
-		{
-			first++;
-			last--;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	return true;
-}
-
-/// <summary>
 /// Leet code #345. Reverse Vowels of a String 
 /// Write a function that takes a string as input and reverse only the vowels of a string.
 /// Example 1:

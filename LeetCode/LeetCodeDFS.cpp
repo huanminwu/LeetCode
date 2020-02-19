@@ -1060,33 +1060,40 @@ bool LeetCodeDFS::wordSearch(vector<vector<char>>& board, string word)
 /// <summary>
 /// Leet code #212. Word Search II
 /// </summary>
-void LeetCode::wordSearch(vector<vector<char>>& board, TrieNode * trie_node, int x, int y, vector<string> &word_list)
+void LeetCodeDFS::wordSearchII(vector<vector<char>>& board, string& word,
+    TrieNode * trie_node, int x, int y, unordered_set<string> &result)
 {
+    if (x < 0 || x >= (int)board.size() || y < 0 || y >= (int)board[0].size())
+    {
+        return;
+    }
+    if (board[x][y] == '#') return;
     char c = board[x][y];
-    if (c == '#') return;
-    trie_node = (TrieNode *)trie_node->char_map[board[x][y]];
+    trie_node = (TrieNode *)trie_node->next(board[x][y]);
     if (trie_node == nullptr)
     {
         return;
     }
-    if (trie_node->word != "")
-    {
-        word_list.push_back(trie_node->word);
-        trie_node->word.clear();
-    }
     board[x][y] = '#';
-    if (x > 0) wordSearch(board, trie_node, x - 1, y, word_list);
-    if (x < (int)(board.size() - 1)) wordSearch(board, trie_node, x + 1, y, word_list);
-    if (y > 0) wordSearch(board, trie_node, x, y - 1, word_list);
-    if (y < (int)(board[0].size() - 1)) wordSearch(board, trie_node, x, y + 1, word_list);
+    word.push_back(c);
+    if (trie_node->is_end) result.insert(word);
+    wordSearchII(board, word, trie_node, x - 1, y, result);
+    wordSearchII(board, word, trie_node, x + 1, y, result);
+    wordSearchII(board, word, trie_node, x, y - 1, result);
+    wordSearchII(board, word, trie_node, x, y + 1, result);
     board[x][y] = c;
+    word.pop_back();
 }
 
 /// <summary>
 /// Leet code #212. Word Search II  
-/// Given a 2D board and a list of words from the dictionary, find all words in the board. 
-/// Each word must be constructed from letters of sequentially adjacent cell, where "adjacent" cells are 
-/// those horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.  
+///
+/// Given a 2D board and a list of words from the dictionary, find all words 
+/// in the board.
+/// Each word must be constructed from letters of sequentially adjacent cell, 
+/// where "adjacent" cells are 
+/// those horizontally or vertically neighboring. The same letter cell may not 
+/// be used more than once in a word.
 /// For example,
 /// Given words = ["oath","pea","eat","rain"] and board = 
 /// [
@@ -1099,9 +1106,9 @@ void LeetCode::wordSearch(vector<vector<char>>& board, TrieNode * trie_node, int
 /// Note:
 /// You may assume that all inputs are consist of lowercase letters a-z. 
 /// </summary>
-vector<string> LeetCode::wordSearchII(vector<vector<char>>& board, vector<string>& words)
+vector<string> LeetCodeDFS::wordSearchII(vector<vector<char>>& board, vector<string>& words)
 {
-    vector<string> result;
+    unordered_set<string> result;
     TrieNode * root = new TrieNode();
 
     for (string word : words)
@@ -1113,11 +1120,12 @@ vector<string> LeetCode::wordSearchII(vector<vector<char>>& board, vector<string
     {
         for (size_t y = 0; y < board[0].size(); y++)
         {
-            wordSearch(board, root, x, y, result);
+            string word;
+            wordSearchII(board, word, root, x, y, result);
         }
     }
     delete root;
-    return result;
+    return vector<string>(result.begin(), result.end());
 }
 
 /// <summary>
@@ -1182,10 +1190,11 @@ vector<vector<string>> LeetCode::partitionPalindrome(string s, unordered_map<str
         return partition[s];
     }
     vector<vector<string>> result;
+
     for (size_t i = 0; i < s.size(); i++)
     {
         string substring = s.substr(0, i + 1);
-        if (isPalindrome(substring))
+        if (substring == string(substring.rbegin(), substring.rend()))
         {
             if (i + 1 == s.size())
             {
@@ -2451,7 +2460,7 @@ vector<string> LeetCode::findAllConcatenatedWordsInADict(vector<string>& words)
 /// <summary>
 /// Leet code #425. Word Squares
 /// </summary>
-void LeetCode::wordSquares(TrieNode & trie, vector<string>& wordSquare, vector<vector<string>>& result)
+void LeetCodeDFS::wordSquares(TrieNode *root, vector<string>& wordSquare, vector<vector<string>>& result)
 {
     if ((!wordSquare.empty()) && (wordSquare.size() == wordSquare[0].size()))
     {
@@ -2465,12 +2474,21 @@ void LeetCode::wordSquares(TrieNode & trie, vector<string>& wordSquare, vector<v
         prefix.push_back(wordSquare[i][wordSquare.size()]);
     }
     vector<string> words;
-    trie.getMatchWords(prefix, 0, words);
-    for (size_t i = 0; i < words.size(); i++)
+    TrieNode * trie = root;
+    for (size_t i = 0; i < prefix.size(); i++)
     {
-        wordSquare.push_back(words[i]);
-        wordSquares(trie, wordSquare, result);
-        wordSquare.pop_back();
+        trie = trie->next(prefix[i]);
+        if (trie == nullptr) break;
+    }
+    if (trie != nullptr)
+    { 
+        trie->get_words(prefix, words);
+        for (size_t i = 0; i < words.size(); i++)
+        {
+            wordSquare.push_back(words[i]);
+            wordSquares(root, wordSquare, result);
+            wordSquare.pop_back();
+        }
     }
 }
 
@@ -2515,7 +2533,8 @@ void LeetCode::wordSquares(TrieNode & trie, vector<string>& wordSquare, vector<v
 /// ]
 ///
 /// Explanation:
-/// The output consists of two word squares. The order of output does not matter 
+/// The output consists of two word squares. The order of output does not 
+/// matter 
 /// (just the order of words in each word square matters).
 /// 
 /// Example 2: 
@@ -2540,16 +2559,17 @@ void LeetCode::wordSquares(TrieNode & trie, vector<string>& wordSquare, vector<v
 /// The output consists of two word squares. The order of output does not matter 
 /// (just the order of words in each word square matters).
 /// </summary>
-vector<vector<string>> LeetCode::wordSquares(vector<string>& words)
+vector<vector<string>> LeetCodeDFS::wordSquares(vector<string>& words)
 {
     vector<string> wordSquare;
     vector<vector<string>> result;
-    TrieNode trie;
+    TrieNode *trie = new TrieNode();
     for (size_t i = 0; i < words.size(); i++)
     {
-        trie.insert(words[i], 0);
+        trie->insert(words[i], 0);
     }
     wordSquares(trie, wordSquare, result);
+    delete trie;
     return result;
 }
 

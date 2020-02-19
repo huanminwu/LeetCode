@@ -16,6 +16,7 @@ void TestLeetCode245(void);
 void TestLeetCode281(void);
 void TestLeetCode284(void);
 void TestLeetCode287(void);
+void TestLeetCode289(void);
 void TestLeetCode348(void);
 void TestLeetCode353(void);
 void TestLeetCode364(void);

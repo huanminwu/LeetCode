@@ -22,6 +22,463 @@
 using namespace std;
 
 /// <summary>
+/// Leet code #208. Implement Trie (Prefix Tree)
+///
+/// Medium
+///
+/// Implement a trie with insert, search, and startsWith methods.
+///
+/// Example:
+///
+/// Trie trie = new Trie();
+///
+/// trie.insert("apple");
+/// trie.search("apple");   // returns true
+/// trie.search("app");     // returns false
+/// trie.startsWith("app"); // returns true
+/// trie.insert("app");   
+/// trie.search("app");     // returns true
+/// Note:
+///
+/// 1. You may assume that all inputs are consist of lowercase letters a-z.
+/// 2. All inputs are guaranteed to be non-empty strings.
+/// </summary>
+class Trie
+{
+private:
+    bool is_end;
+    vector<Trie *> children;
+public:
+    Trie()
+    {
+        children = vector<Trie *>(26, nullptr);
+        is_end = false;
+    };
+
+    ~Trie()
+    {
+        for (size_t i = 0; i < children.size(); i++)
+        {
+            if (children[i] != nullptr) delete children[i];
+        }
+    }
+
+    void insert(string word)
+    {
+        if (word.empty())
+        {
+            is_end = true;
+        }
+        else
+        {
+            int i = word[0] - 'a';
+            if (children[i] == nullptr)
+            {
+                children[i] = new Trie();
+            }
+            children[i]->insert(word.substr(1));
+        }
+    };
+
+    bool search(string word)
+    {
+        if (word.empty())
+        {
+            return is_end;
+        }
+        else
+        {
+            int i = word[0] - 'a';
+            if (children[i] == nullptr)
+            {
+                return false;
+            }
+            return children[i]->search(word.substr(1));
+        }
+    }
+
+    bool startsWith(string prefix)
+    {
+        if (prefix.empty())
+        {
+            return true;
+        }
+        else
+        {
+            int i = prefix[0] - 'a';
+            if (children[i] == nullptr)
+            {
+                return false;
+            }
+            return children[i]->startsWith(prefix.substr(1));
+        }
+    };
+};
+
+/// <summary>
+/// Leet code #745. Prefix and Suffix Search
+/// 
+/// Given many words, words[i] has weight i.
+/// Design a class WordFilter that supports one function, 
+/// WordFilter.f(String prefix, String suffix). It will return the word with 
+/// given prefix and suffix with maximum weight. If no word exists, return -1.
+///
+/// Examples:
+/// Input:
+/// WordFilter(["apple"])
+/// WordFilter.f("a", "e") // returns 0
+/// WordFilter.f("b", "") // returns -1
+/// Note:
+/// words has length in range [1, 15000].
+/// For each test case, up to words.length queries WordFilter.f may be made.
+/// words[i] has length in range [1, 10].
+/// prefix, suffix have lengths in range [0, 10].
+/// words[i] and prefix, suffix queries consist of lowercase letters only.
+/// </summary>
+class WordFilter {
+    unordered_map<string, int> m_WordMap;
+public:
+    WordFilter(vector<string> words)
+    {
+        for (size_t k = 0; k < words.size(); k++)
+        {
+            for (size_t i = 0; i <= 10 && i <= words[k].size(); i++)
+            {
+                string prefix = words[k].substr(0, i);
+                for (size_t j = 0; j <= 10 && j <= words[k].size(); j++)
+                {
+                    string suffix = words[k].substr(words[k].size() - j, j);
+                    m_WordMap[prefix + "#" + suffix] = k;
+                }
+            }
+        }
+    }
+
+    int f(string prefix, string suffix)
+    {
+        if (m_WordMap.count(prefix + "#" + suffix) > 0)
+        {
+            return m_WordMap[prefix + "#" + suffix];
+        }
+        else
+        {
+            return -1;
+        }
+    }
+};
+
+/// <summary>
+/// Leet code #642. Design Search Autocomplete System
+/// 
+/// Design a search autocomplete system for a search engine. Users may 
+/// input a sentence (at least one word and end with a special character 
+/// '#'). For each character they type except '#', you need to return the 
+/// top 3 historical hot sentences that have prefix the same as the part 
+/// of sentence already typed. Here are the specific rules:
+/// The hot degree for a sentence is defined as the number of times a user 
+/// typed the exactly same sentence before. 
+/// The returned top 3 hot sentences should be sorted by hot degree (The 
+/// first is the hottest one). If several sentences have the same degree 
+/// of hot, you need to use ASCII-code order (smaller one appears first). 
+/// If less than 3 hot sentences exist, then just return as many as you 
+/// can.
+/// When the input is a special character, it means the sentence ends, and 
+/// in this case, you need to return an empty list.
+///
+/// Your job is to implement the following functions:
+/// The constructor function:
+/// AutocompleteSystem(String[] sentences, int[] times): This is the 
+/// constructor. The input is historical data. Sentences is a string array 
+/// consists of previously typed sentences. Times is the corresponding 
+/// times a sentence has been typed. Your system should record these 
+/// historical data.
+/// Now, the user wants to input a new sentence. The following function 
+/// will provide the next character the user types: 
+/// List<String> input(char c): The input c is the next character typed by 
+/// the user. The character will only be lower-case letters ('a' to 'z'), 
+/// blank space (' ') or a special character ('#'). Also, the previously 
+/// typed sentence should be recorded in your system. The output will be 
+/// the top 3 historical hot sentences that have prefix the same as the 
+/// part of sentence already typed.
+///
+/// Example:
+/// Operation: AutocompleteSystem(["i love you", "island","ironman", 
+/// "i love leetcode"], [5,3,2,2]) 
+/// The system have already tracked down the following sentences and 
+/// their corresponding times: 
+/// "i love you" : 5 times 
+/// "island" : 3 times 
+/// "ironman" : 2 times 
+/// "i love leetcode" : 2 times 
+/// Now, the user begins another search: 
+///
+/// Operation: input('i') 
+/// Output: ["i love you", "island","i love leetcode"] 
+/// Explanation: 
+/// There are four sentences that have prefix "i". Among them, "ironman" 
+/// and "i love leetcode" have same hot degree. Since ' ' has ASCII code 32
+/// and 'r' has ASCII code 114, "i love leetcode" should be in front of 
+/// "ironman". Also we only need to output top 3 hot sentences, so 
+/// "ironman" will be ignored. 
+///
+/// Operation: input(' ') 
+/// Output: ["i love you","i love leetcode"] 
+/// Explanation: 
+/// There are only two sentences that have prefix "i ". 
+/// 
+/// Operation: input('a') 
+/// Output: [] 
+/// Explanation: 
+/// There are no sentences that have prefix "i a". 
+/// 
+/// Operation: input('#') 
+/// Output: [] 
+/// Explanation: 
+/// The user finished the input, the sentence "i a" should be saved as a 
+/// historical sentence in system. And the following input will be counted 
+/// as a new search. 
+///
+/// Note:
+/// 1. The input sentence will always start with a letter and end with '#',
+///    and only one blank space will exist between two words. 
+/// 2. The number of complete sentences that to be searched won't exceed 
+///    100. 
+/// 3. The length of each sentence including those in the historical data 
+///    won't exceed 100. 
+/// 4. Please use double-quote instead of single-quote when you write test 
+///    cases even for a character input.
+/// 5. Please remember to RESET your class variables declared in class 
+///    AutocompleteSystem, as static/class variables are persisted across 
+///    multiple test cases. Please see here for more details.
+/// </summary>
+class AutocompleteSystem
+{
+private:
+    struct Trie
+    {
+        set<pair<int, string>> m_hot;
+        vector<Trie *> children;
+
+        Trie() 
+        {
+            children = vector<Trie *>(27, nullptr);
+        };
+
+        ~Trie()
+        {
+            for (size_t i = 0; i < children.size(); i++)
+            {
+                if (children[i] != nullptr) delete children[i];
+            }
+        }
+
+        void add_sentence(string sentence, int times)
+        {
+            pair<int, string> prev_str = make_pair(-times + 1, sentence);
+            if (m_hot.count(prev_str) > 0)
+            {
+                m_hot.erase(prev_str);
+            }
+            m_hot.insert(make_pair(-times, sentence));
+            if (m_hot.size() > 3) m_hot.erase(prev(m_hot.end()));
+        }
+
+        vector<string> get_hot_sentences()
+        {
+            vector<string> result;
+            for (auto itr : m_hot)
+            {
+                result.push_back(itr.second);
+            }
+            return result;
+        }
+
+        Trie * next(char ch)
+        {
+            if (ch == '#') return nullptr;
+            int i = ch - 'a';
+            if (ch == ' ') i = 26;
+            if (children[i] == nullptr)
+            {
+                children[i] = new Trie();
+            }
+            return children[i];
+        }
+    };
+
+    Trie m_root;
+    unordered_map<string, int> m_sentence_freq;
+    vector<Trie*> m_arr;
+    string m_sentence;
+public:
+    AutocompleteSystem(vector<string> sentences, vector<int> times)
+    {
+        for (size_t i = 0; i < sentences.size(); i++)
+        {
+            m_sentence_freq[sentences[i]] = times[i];
+            for (size_t j = 0; j < sentences[i].size(); j++)
+            {
+                if (j == 0) m_arr.push_back(m_root.next(sentences[i][j]));
+                else
+                {
+                    m_arr.push_back(m_arr.back()->next(sentences[i][j]));
+                }
+            }
+            for (size_t j = 0; j < m_arr.size(); j++)
+            {
+                m_arr[j]->add_sentence(sentences[i], times[i]);
+            }
+            m_arr.clear();
+        }
+    }
+
+    vector<string> input(char c)
+    {
+        vector<string> result;
+        if (c == '#')
+        {
+            m_sentence_freq[m_sentence]++;
+            for (size_t i = 0; i < m_arr.size(); i++)
+            {
+                m_arr[i]->add_sentence(m_sentence, m_sentence_freq[m_sentence]);
+            }
+            m_arr.clear();
+            m_sentence.clear();
+        }
+        else
+        {
+            if (m_arr.empty())
+            {
+                m_arr.push_back(m_root.next(c));
+            }
+            else
+            {
+                m_arr.push_back(m_arr.back()->next(c));
+            }
+            m_sentence.push_back(c);
+            result = m_arr.back()->get_hot_sentences();
+        }
+        return result;
+    }
+};
+
+/// <summary>
+/// Leet code #1032. Stream of Characters
+/// 
+/// Implement the StreamChecker class as follows:
+///
+/// StreamChecker(words): Constructor, init the data structure with the given 
+/// words.
+/// query(letter): returns true if and only if for some k >= 1, the last k 
+/// characters queried (in order from oldest to newest, including this letter 
+/// just queried) spell one of the words in the given list.
+/// 
+/// Example:
+///
+/// // init the dictionary.
+/// StreamChecker streamChecker = new StreamChecker(["cd","f","kl"]); 
+/// 
+/// streamChecker.query('a'); // return false
+/// streamChecker.query('b'); // return false
+/// streamChecker.query('c'); // return false
+/// streamChecker.query('d'); // return true, because 'cd' is in the wordlist
+/// streamChecker.query('e'); // return false
+/// streamChecker.query('f'); // return true, because 'f' is in the wordlist
+/// streamChecker.query('g'); // return false
+/// streamChecker.query('h'); // return false
+/// streamChecker.query('i'); // return false
+/// streamChecker.query('j'); // return false
+/// streamChecker.query('k'); // return false
+/// streamChecker.query('l'); // return true, because 'kl' is in the wordlist
+///
+/// Note:
+///
+/// 1. 1 <= words.length <= 2000
+/// 2. 1 <= words[i].length <= 2000
+/// 3. Words will only consist of lowercase English letters.
+/// 4. Queries will only consist of lowercase English letters.
+/// 5. The number of queries is at most 40000.
+/// </summary>
+class StreamChecker {
+private:
+    struct Trie
+    {
+        bool is_end;
+        vector<Trie *> children;
+
+        Trie()
+        {
+            is_end = false;
+            children = vector<Trie *>(26, nullptr);
+        };
+
+        ~Trie()
+        {
+            for (size_t i = 0; i < children.size(); i++)
+            {
+                if (children[i] != nullptr) delete children[i];
+            }
+        }
+
+        void insert(string word)
+        {
+            if (word.empty())
+            {
+                is_end = true;
+            }
+            else
+            {
+                int i = word[0] - 'a';
+                if (children[i] == nullptr)
+                {
+                    children[i] = new Trie();
+                }
+                children[i]->insert(word.substr(1));
+            }
+        };
+
+        Trie * next(char ch)
+        {
+            return children[ch - 'a'];
+        }
+    };
+
+    Trie m_root;
+    size_t m_max_len = 0;
+    deque<char> m_buffer;
+
+public:
+    StreamChecker(vector<string>& words)
+    {
+        for (size_t i = 0; i < words.size(); i++)
+        {
+            string word = words[i];
+            std::reverse(word.begin(), word.end());
+            m_root.insert(word);
+            m_max_len = max(m_max_len, word.size());
+        }
+    }
+
+    bool query(char letter)
+    {
+        m_buffer.push_front(letter);
+        if (m_buffer.size() > m_max_len) m_buffer.pop_back();
+        Trie * trie = nullptr;
+        for (size_t i = 0; i < m_buffer.size(); i++)
+        {
+            if (i == 0) trie = m_root.next(m_buffer[i]);
+            else
+            {
+                trie = trie->next(m_buffer[i]);
+            }
+            if (trie == nullptr) return false;
+            if (trie->is_end) return true;
+        }
+        return false;
+    }
+};
+
+/// <summary>
 /// Leet code #288. Unique Word Abbreviation    
 /// 
 /// An abbreviation of a word follows the form <first letter><number><last letter>. 
@@ -605,6 +1062,246 @@ public:
     /// string. This is consistent to C's strstr() and Java's indexOf().
     /// </summary>
     int strStr(string haystack, string needle);
+
+    /// <summary>
+    /// Leet code #65. Valid Number
+    ///
+    /// Validate if a given string is numeric.
+    /// Some examples:
+    /// "0" => true
+    /// " 0.1 " => true
+    /// "abc" => false
+    /// "1 a" => false
+    /// "2e10" => true
+    /// Note: It is intended for the problem statement to be ambiguous. 
+    /// You should gather all requirements up front before implementing one. 
+    /// </summary>
+    bool isValidNumber(string s);
+
+    /// <summary>
+    /// Leet code #205. Isomorphic Strings
+    ///
+    /// Given two strings s and t, determine if they are isomorphic. 
+    /// Two strings are isomorphic if the characters in s can be replaced to 
+    /// get t.
+    /// All occurrences of a character must be replaced with another character 
+    /// while preserving the order of characters. No two characters may map to 
+    /// the same character but a character may map to itself.
+    /// For example,
+    /// Given "egg", "add", return true.
+    ///
+    /// Given "foo", "bar", return false.
+    /// Given "paper", "title", return true.
+    /// Note:
+    /// You may assume both s and t have the same length.
+    /// </summary>
+    bool isIsomorphic(string s, string t);
+
+    /// <summary>
+    /// Leet code #125. Valid Palindrome
+    ///
+    /// Given a string, determine if it is a palindrome, considering only 
+    /// alphanumeric characters and ignoring cases.
+    /// For example,
+    /// "A man, a plan, a canal: Panama" is a palindrome.
+    /// "race a car" is not a palindrome.
+    /// Notes:
+    /// Have you consider that the string might be empty? This is a good 
+    /// question to ask during an interview.
+    /// For the purpose of this problem, we define empty string as valid 
+    /// palindrome.
+    /// </summary>
+    bool isPalindrome(string s);
+
+    /// <summary>
+    /// Leet code #187. Repeated DNA Sequences 
+    ///
+    /// All DNA is composed of a series of nucleotides abbreviated 
+    /// as A, C, G, and T, for example: "ACGAATTCCG". 
+    /// When studying DNA, it is sometimes useful to identify repeated 
+    /// sequences within the DNA.
+    /// Write a function to find all the 10-letter-long sequences 
+    /// (substrings) that occur more than once in a DNA molecule.
+    ///
+    /// For example,
+    /// Given s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT",
+    /// Return:
+    /// ["AAAAACCCCC", "CCCCCAAAAA"].
+    /// </summary>
+    vector<string> findRepeatedDnaSequences(string s);
+
+    /// <summary>
+    /// Leet code #214. Shortest Palindrome    
+    /// 
+    /// Given a string S, you are allowed to convert it to a palindrome by 
+    /// adding characters in front of it. Find and return the shortest palindrome 
+    /// you can find by performing this transformation. 
+    ///
+    /// For example: 
+    /// Given "aacecaaa", return "aaacecaaa".
+    /// Given "abcd", return "dcbabcd".
+    /// Given an array of n positive integers and a positive integer s, 
+    /// </summary>
+    string shortestPalindrome(string s);
+
+    /// <summary>
+    /// Leet code #290. Word Pattern      
+    ///
+    /// Given a pattern and a string str, find if str follows the same pattern.
+    /// Here follow means a full match, such that there is a bijection between 
+    /// a letter in pattern and a non-empty word in str.
+    /// Examples:
+    /// 1.pattern = "abba", str = "dog cat cat dog" should return true.
+    /// 2.pattern = "abba", str = "dog cat cat fish" should return false.
+    /// 3.pattern = "aaaa", str = "dog cat cat dog" should return false.
+    /// 4.pattern = "abba", str = "dog dog dog dog" should return false.
+    /// Notes:
+    /// You may assume pattern contains only lowercase letters, and str 
+    /// contains lowercase letters separated by a single space. 
+    /// </summary>
+    bool wordPattern(string pattern, string str);
+
+    /// <summary>
+    /// Leet code #336. Palindrome Pairs
+    /// 
+    /// Given a list of unique words, find all pairs of distinct 
+    /// indices (i, j) in the given list, 
+    /// so that the concatenation of the two words, i.e. words[i] + words[j] 
+    /// is a palindrome. 
+    /// Example 1:
+    /// Given words = ["bat", "tab", "cat"]
+    /// Return [[0, 1], [1, 0]]
+    ///
+    /// Example 2:
+    /// Given words = ["abcd", "dcba", "lls", "s", "sssll"]
+    /// Return [[0, 1], [1, 0], [3, 2], [2, 4]]
+    /// The palindromes are ["dcbaabcd", "abcddcba", "slls", "llssssll"]
+    /// </summary>
+    vector<vector<int>> palindromePairs(vector<string>& words);
+
+    /// <summary>
+    /// Leet code #293. Flip Game  
+    /// 
+    /// You are playing the following Flip Game with your friend: Given a 
+    /// string that contains only these two characters: + and -, you and your 
+    /// friend take turns to flip two consecutive "++" into "--". The game 
+    /// ends when a person can no longer make a move and therefore the other 
+    /// person will be the winner. 
+    /// Write a function to compute all possible states of the string after 
+    /// one valid move. 
+    /// For example, given s = "++++", after one move, it may become one of 
+    /// the following states: 
+    /// [
+    ///    "--++",
+    ///    "+--+",
+    ///    "++--"
+    /// ]
+    /// If there is no valid move, return an empty list [].
+    /// </summary>
+    vector<string> generatePossibleNextMoves(string s);
+
+    /// <summary>
+    /// Leet code #393. UTF-8 Validation
+    ///
+    /// A character in UTF8 can be from 1 to 4 bytes long, subjected to the 
+    /// following rules:
+    /// 1.For 1-byte character, the first bit is a 0, followed by its unicode 
+    ///   code.
+    /// 2.For n-bytes character, the first n-bits are all one's, the n+1 bit 
+    ///   is 0, followed by n-1 bytes with most significant 2 bits being 10.
+    /// This is how the UTF-8 encoding would work:
+    ///   Char. number range  |        UTF-8 octet sequence
+    ///      (hexadecimal)    |              (binary)
+    ///   --------------------+---------------------------------------------
+    ///   0000 0000-0000 007F | 0xxxxxxx
+    ///   0000 0080-0000 07FF | 110xxxxx 10xxxxxx
+    ///   0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx
+    ///   0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+    /// Given an array of integers representing the data, return whether it is 
+    /// a valid utf-8 encoding. 
+    /// Note:
+    /// The input is an array of integers. Only the least significant 8 bits 
+    /// of each integer is used to store the data. This means each integer 
+    /// represents only 1 byte of data. 
+    /// Example 1: 
+    /// data = [197, 130, 1], which represents the octet 
+    /// sequence: 11000101 10000010 00000001.
+    /// Return true.
+    /// It is a valid utf-8 encoding for a 2-bytes character followed by 
+    //// a 1-byte character.
+    /// Example 2: 
+    /// data = [235, 140, 4], which represented the octet 
+    /// sequence: 11101011 10001100 00000100.
+    /// Return false.
+    /// The first 3 bits are all one's and the 4th bit is 0 means it is 
+    /// a 3-bytes character.
+    /// The next byte is a continuation byte which starts with 10 and 
+    /// that's correct.
+    /// But the second continuation byte does not start with 10, so it is 
+    /// invalid.
+    /// </summary>
+    bool validUtf8(vector<int>& data);
+
+    /// <summary>
+    /// Leet code #409. Longest Palindrome 
+    ///
+    /// Given a string which consists of lowercase or uppercase letters, find 
+    /// the length of the longest palindromes that can be built with those 
+    /// letters. 
+    /// This is case sensitive, for example "Aa" is not considered a 
+    /// palindrome here.
+    /// Note:
+    /// Assume the length of given string will not exceed 1,010. 
+    /// Example: 
+    /// Input:
+    /// "abccccdd"
+    /// Output:
+    /// 7
+    ///
+    /// Explanation:
+    /// One longest palindrome that can be built is "dccaccd", whose length is 7.
+    /// </summary>
+    int longestPalindromeII(string s);
+
+    /// <summary>
+    /// Leet code #482. License Key Formatting  
+    /// 
+    /// Now you are given a string S, which represents a software license key 
+    /// which we would like to format. The string S is composed of 
+    /// alphanumerical characters and dashes. 
+    /// The dashes split the alphanumerical characters within the string into 
+    /// groups. (i.e. if there are M dashes, the string is split into M+1 
+    /// groups). 
+    /// The dashes in the given string are possibly misplaced.
+    ///
+    /// We want each group of characters to be of length K (except for 
+    /// possibly the first group, which could be shorter, but still must 
+    /// contain at least one character). To satisfy this requirement, we will 
+    /// reinsert dashes. Additionally, all the lower case letters in the 
+    /// string must be converted to upper case.
+    /// So, you are given a non-empty string S, representing a license key to 
+    /// format, and an integer K. 
+    /// And you need to return the license key formatted according to the 
+    /// description above.
+    /// Example 1:
+    /// Input: S = "2-4A0r7-4k", K = 4
+    /// Output: "24A0-R74K"
+    /// Explanation: The string S has been split into two parts, each part 
+    /// has 4 characters.
+    /// Example 2:
+    /// Input: S = "2-4A0r7-4k", K = 3
+    /// Output: "24-A0R-74K"
+    /// Explanation: The string S has been split into three parts, each part 
+    /// has 3 characters except the first part as it could be shorter as said 
+    /// above.
+    /// Note:
+    /// 1.The length of string S will not exceed 12,000, and K is a positive 
+    ///   integer.
+    /// 2.String S consists only of alphanumerical characters (a-z and/or A-Z 
+    ///   and/or 0-9) and dashes(-).
+    /// 3.String S is non-empty.
+    /// </summary>
+    string licenseKeyFormatting(string S, int K);
 
     /// <summary>
     /// Leet code #1233. Remove Sub-Folders from the Filesystem

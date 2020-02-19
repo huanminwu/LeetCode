@@ -1597,8 +1597,39 @@ void TestLeetCode1351(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode289(void)
+{
+    Logger::WriteMessage("Test Leet Code 289");
+    LeetCodeArray leetCode;
+    vector<vector<int>> board;
+    board = { {0,0,0, 0}, {0, 1, 1, 0}, {0,1,1,0}, {0,0,0,0} };
+    for (size_t i = 0; i < board.size(); i++)
+    {
+        Logger::WriteMessage(board[i]);
+    }
+    Logger::WriteMessage("------------------------------");
+    leetCode.gameOfLife(board);
+    for (size_t i = 0; i < board.size(); i++)
+    {
+        Logger::WriteMessage(board[i]);
+    }
+    Logger::WriteMessage("------------------------------");
+    board = { { 0, 0 } };
+    for (size_t i = 0; i < board.size(); i++)
+    {
+        Logger::WriteMessage(board[i]);
+    }
+    Logger::WriteMessage("------------------------------");
+    leetCode.gameOfLife(board);
+    for (size_t i = 0; i < board.size(); i++)
+    {
+        Logger::WriteMessage(board[i]);
+    }
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode289();
     TestLeetCode1351();
     TestLeetCode1151();
     TestLeetCode1138();

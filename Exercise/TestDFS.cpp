@@ -543,8 +543,62 @@ void TestLeetCode1349(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode212(void)
+{
+    Logger::WriteMessage("Test Leet Code 212");
+    LeetCodeDFS leetCode;
+    vector<vector<char>> board =
+    {
+        { 'a', 'b'}, {'c', 'd' }
+    };
+
+    vector<string> words = { "ab", "cb", "ad", "bd", "ac", "ca", "da", "bc", "db", "adcb", "dabc", "abb", "acb" };
+    vector<string> result = leetCode.wordSearchII(board, words);
+    Logger::WriteMessage(board);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+
+    board =
+    {
+        { 'o', 'a', 'a', 'n' }, { 'e', 't', 'a', 'e' },
+        { 'i', 'h', 'k', 'r' }, { 'i', 'f', 'l', 'v' }
+    };
+    words = { "oath", "pea", "eat", "rain" };
+    result = leetCode.wordSearchII(board, words);
+    Logger::WriteMessage(board);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+
+    board =
+    {
+        { 'a' }
+    };
+    words = { "a" };
+    result = leetCode.wordSearchII(board, words);
+    Logger::WriteMessage(board);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode425(void)
+{
+    Logger::WriteMessage("Test Leet Code 425");
+    LeetCodeDFS leetCode;
+    vector<string> words = { "area","lead","wall","lady","ball" };
+    vector<vector<string>> result = leetCode.wordSquares(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+
+    words = { "abat", "baba", "atan", "atal" };
+    result = leetCode.wordSquares(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode425();
+    TestLeetCode212();
     TestLeetCode1349();
     TestLeetCode126();
     TestLeetCode416();

@@ -3789,7 +3789,6 @@ int LeetCodeMath::superpalindromesInRange(string L, string R)
     int result = 0;
     unsigned long long left = atol(L.c_str());
     unsigned long long right = atol(R.c_str());
-    LeetCode leetCode;
 
     for (size_t i = 0; i < 10000; i++)
     {
@@ -3804,7 +3803,7 @@ int LeetCodeMath::superpalindromesInRange(string L, string R)
         if (product > right) break;
         if (product < left) continue;
         string digits = to_string(product);
-        if (leetCode.isPalindrome(digits)) result++;
+        if (digits == string(digits.rbegin(), digits.rend())) result++;
     }
 
     for (size_t i = 0; i < 100000; i++)
@@ -3820,7 +3819,7 @@ int LeetCodeMath::superpalindromesInRange(string L, string R)
         if (product > right) break;
         if (product < left) continue;
         string digits = to_string(product);
-        if (leetCode.isPalindrome(digits)) result++;
+        if (digits == string(digits.rbegin(), digits.rend())) result++;
     }
     return result;
 }
