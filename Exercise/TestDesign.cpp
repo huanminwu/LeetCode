@@ -540,8 +540,1007 @@ void TestLeetCode1348(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1352(void)
+{
+    Logger::WriteMessage("Test Leet Code 1352");
+
+    vector<string> commands =
+    {
+        "ProductOfNumbers","add","add","add","add","add","getProduct",
+        "getProduct","getProduct","add","getProduct"
+    };
+    vector<vector<int>> data =
+    {
+        {},{3},{0},{2},{5},{4},{2},{3},{4},{8},{2}
+    };
+    ProductOfNumbers* productOfNumbers = nullptr;
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "ProductOfNumbers")
+        {
+            productOfNumbers = new ProductOfNumbers();
+            result.push_back("null");
+        }
+        else if (commands[i] == "add")
+        {
+            productOfNumbers->add(data[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "getProduct")
+        {
+            int ret = productOfNumbers->getProduct(data[i][0]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete productOfNumbers;
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode705(void)
+{
+    Logger::WriteMessage("Test Leet Code 705");
+    vector<string> commands =
+    {
+        "MyHashSet", "add", "add", "contains", "contains", "add", "contains", "remove", "contains"
+    };
+    vector<int> data =
+    {
+        0, 1, 2, 1, 3, 2, 2, 2, 2
+    };
+    vector<string> result;
+    MyHashSet * hashSet = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "MyHashSet")
+        {
+            hashSet = new MyHashSet();
+            result.push_back("null");
+        }
+        else if (commands[i] == "add")
+        {
+            hashSet->add(data[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "remove")
+        {
+            hashSet->remove(data[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "contains")
+        {
+            if (hashSet->contains(data[i]))
+            {
+                result.push_back("true");
+            }
+            else
+            {
+                result.push_back("false");
+            }
+        }
+    }
+    delete hashSet;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode706(void)
+{
+    Logger::WriteMessage("Test Leet Code 706");
+    vector<string> commands =
+    {
+        "MyHashMap", "put", "put", "get", "get", "get", "put", "get", "remove", "get"
+    };
+    vector<vector<int>> data =
+    {
+        {}, {1, 1}, {2, 2}, {1}, {2}, {3}, {2, 1}, {2}, {2}, {2}
+    };
+    vector<string> result;
+    MyHashMap * hashMap = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "MyHashMap")
+        {
+            hashMap = new MyHashMap();
+            result.push_back("null");
+        }
+        else if (commands[i] == "put")
+        {
+            hashMap->put(data[i][0], data[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "remove")
+        {
+            hashMap->remove(data[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "get")
+        {
+            result.push_back(to_string(hashMap->get(data[i][0])));
+        }
+    }
+    delete hashMap;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode251(void)
+{
+    Logger::WriteMessage("Test Leet Code 251");
+    vector<vector<int>> vec2d = { {1,2}, {3}, {4,5,6} };
+    vector<int> result;
+    Vector2D vector2d(vec2d);
+    Logger::WriteMessage(vec2d);
+    while (vector2d.hasNext())
+    {
+        result.push_back(vector2d.next());
+    }
+    Logger::WriteMessage(result);
+
+    vec2d = { { },{ 3 } };
+    result = {};
+    vector2d = Vector2D(vec2d);
+    Logger::WriteMessage(vec2d);
+    while (vector2d.hasNext())
+    {
+        result.push_back(vector2d.next());
+    }
+    Logger::WriteMessage(result);
+
+    vec2d = { {1},{} };
+    result = {};
+    vector2d = Vector2D(vec2d);
+    Logger::WriteMessage(vec2d);
+    while (vector2d.hasNext())
+    {
+        result.push_back(vector2d.next());
+    }
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode707(void)
+{
+    Logger::WriteMessage("Test Leet Code 707");
+    vector<string> commands =
+    {
+        "MyLinkedList","addAtHead","addAtTail","addAtIndex", "addAtIndex", 
+        "addAtIndex", "get","deleteAtIndex","get", "get", "get"
+    };
+    vector<vector<int>> data =
+    {
+        {},{1},{3},{1, 2},{ 3, 4 },{ 5, 5 }, {1},{1},{1},{ 2 },{ 3 }
+    };
+    vector<string> result;
+    MyLinkedList* linkedList = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "MyLinkedList")
+        {
+            linkedList = new MyLinkedList();
+            result.push_back("null");
+        }
+        else if (commands[i] == "addAtHead")
+        {
+            linkedList->addAtHead(data[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "addAtTail")
+        {
+            linkedList->addAtTail(data[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "addAtIndex")
+        {
+            linkedList->addAtIndex(data[i][0], data[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "get")
+        {
+            int value = linkedList->get(data[i][0]);
+            result.push_back(to_string(value));
+        }
+        else if (commands[i] == "deleteAtIndex")
+        {
+            linkedList->deleteAtIndex(data[i][0]);
+            result.push_back("null");
+        }
+    }
+    delete linkedList;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode281(void)
+{
+    Logger::WriteMessage("Test Leet Code 281");
+    vector<int> v1 = { 1, 2, 3 };
+    vector<int> v2 = { 4, 5, 6, 7 };
+    vector<int> result;
+    ZigzagIterator zigzagIterator(v1, v2);
+    Logger::WriteMessage(v1);
+    Logger::WriteMessage(v2);
+    while (zigzagIterator.hasNext())
+    {
+        result.push_back(zigzagIterator.next());
+    }
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode379(void)
+{
+    Logger::WriteMessage("Test Leet Code 379");
+    PhoneDirectory directory(3);
+    int phone_number = directory.get();
+    Logger::WriteMessage("phone number = " + to_string(phone_number));
+    phone_number = directory.get();
+    Logger::WriteMessage("phone number = " + to_string(phone_number));
+    bool isAvailable = directory.check(2);
+    Logger::WriteMessage("check(2) = " + (string)(isAvailable ? "available" : "not available"));
+    phone_number = directory.get();
+    Logger::WriteMessage("phone number = " + to_string(phone_number));
+    isAvailable = directory.check(2);
+    Logger::WriteMessage("check(2) = " + (string)(isAvailable ? "available" : "not available"));
+    directory.release(2);
+    Logger::WriteMessage("release(2)");
+    isAvailable = directory.check(2);
+    Logger::WriteMessage("check(2) = " + (string)(isAvailable ? "available" : "not available"));
+}
+
+void TestLeetCode284(void)
+{
+    Logger::WriteMessage("Test Leet Code 284");
+    vector<int> nums = { 1,2,3,4 };
+    PeekingIterator peekingIterator(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("Peek() -> " + to_string(peekingIterator.peek()));
+    Logger::WriteMessage("Next() -> " + to_string(peekingIterator.next()));
+}
+
+void TestLeetCode348(void)
+{
+    Logger::WriteMessage("Test Leet Code 348");
+    TicTacToe toe(2);
+    int result = toe.move(0, 1, 2);
+    Logger::WriteMessage("toe.move(0, 1, 2) = " + to_string(result));
+    result = toe.move(1, 0, 1);
+    Logger::WriteMessage("toe.move(1, 0, 1) = " + to_string(result));
+    result = toe.move(1, 1, 2);
+    Logger::WriteMessage("toe.move(1, 1, 2) = " + to_string(result));
+}
+
+void TestLeetCode353(void)
+{
+    Logger::WriteMessage("Test Leet Code 353");
+    vector<pair<int, int>> food = { {1,2}, {0,1} };
+    SnakeGame snakeGame = SnakeGame(3, 2, food);
+    int result = snakeGame.move("R");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("D");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("R");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("U");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("L");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("U");
+    Logger::WriteMessage("result = " + to_string(result));
+
+    food = { { 1, 1 },{ 0, 1 } };
+    snakeGame = SnakeGame(2, 2, food);
+    result = snakeGame.move("D");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("R");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("U");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("L");
+    Logger::WriteMessage("result = " + to_string(result));
+    food = { { 2, 0 },{ 0, 0 },{ 0, 2 },{ 0, 1 }, { 2, 2 }, { 0, 1 } };
+    snakeGame = SnakeGame(3, 3, food);
+    result = snakeGame.move("D");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("D");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("R");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("U");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("U");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("L");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("D");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("R");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("R");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("U");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("L");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("L");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("D");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("R");
+    Logger::WriteMessage("result = " + to_string(result));
+    result = snakeGame.move("U");
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode631(void)
+{
+    int result;
+    Excel excel(3, 'C');
+    excel.set(1, 'A', 2);
+    result = excel.sum(3, 'C', { "A1", "A1:B2" });
+    Logger::WriteMessage("excel.sum(3, 'C', { 'A1', 'A1:B2' }) = " + to_string(result));
+    excel.set(2, 'B', 2);
+    result = excel.get(3, 'C');
+    Logger::WriteMessage("excel.get(3, 'C') = " + to_string(excel.get(3, 'C')));
+}
+
+void TestLeetCode933(void)
+{
+    Logger::WriteMessage("Test Leet Code 933");
+    vector<string> commands = { "RecentCounter","ping","ping","ping","ping", "ping", "ping" };
+    vector<vector<int>> data = { { } ,{ 1 },{ 100 },{ 3001 },{ 3002 },{ 3100 },{ 3101 } };
+    vector<string> result;
+    RecentCounter * recentCounter = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "RecentCounter")
+        {
+            recentCounter = new RecentCounter();
+            result.push_back("null");
+        }
+        else if (commands[i] == "ping")
+        {
+            int value = recentCounter->ping(data[i][0]);
+            result.push_back(to_string(value));
+        }
+    }
+    delete recentCounter;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode677(void)
+{
+    vector<pair<string, pair<string, int>>> commands =
+    {
+        { "insert",{ "a", 3 } }, {"insert", {"apple", 3}}, {"sum", {"ap", 0}},
+        { "insert",{ "app", 2 } },{ "sum",{ "ap", 0 } }
+    };
+    MapSum * map_sum = new MapSum();
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        Logger::WriteMessage(commands[i].first + "-> (" + commands[i].second.first + "," + to_string(commands[i].second.second) + ")");
+        if (commands[i].first == "insert")
+        {
+            map_sum->insert(commands[i].second.first, commands[i].second.second);
+            Logger::WriteMessage("result = null");
+        }
+        else if (commands[i].first == "sum")
+        {
+            int sum = map_sum->sum(commands[i].second.first);
+            Logger::WriteMessage("result = " + to_string(sum));
+        }
+    }
+    delete map_sum;
+}
+
+void TestLeetCode1274(void)
+{
+    Logger::WriteMessage("Test LeetCode 1274");
+    vector<vector<int>> ship = { {1, 1},{2, 2},{3, 3},{5, 5} };
+    vector<int> topRight = { 4, 4 };
+    vector<int> bottomLeft = { 0, 0 };
+    Sea sea(ship);
+    int result = sea.countShips(topRight, bottomLeft);
+    Logger::WriteMessage(ship);
+    Logger::WriteMessage(topRight);
+    Logger::WriteMessage(bottomLeft);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode208(void)
+{
+    Logger::WriteMessage("Test Leet Code 208");
+
+    vector<string> commands =
+    {
+        "Trie", "insert", "search", "search", "startsWith", "insert", "search"
+    };
+    vector<string> parameters =
+    {
+        {},{ "apple" },{ "apple" }, { "app" },{ "app" },{ "app" },{ "app" }
+    };
+    Trie *trie = nullptr;
+    vector<string> output;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Trie")
+        {
+            trie = new Trie();
+            output.clear();
+            output.push_back("null");
+        }
+        else if (commands[i] == "insert")
+        {
+            trie->insert(parameters[i]);
+            output.push_back("null");
+        }
+        else if (commands[i] == "search")
+        {
+            bool result = trie->search(parameters[i]);
+            output.push_back((string)(result ? "true" : "false"));
+        }
+        else if (commands[i] == "startsWith")
+        {
+            bool result = trie->startsWith(parameters[i]);
+            output.push_back((string)(result ? "true" : "false"));
+        }
+    }
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(output);
+    delete trie;
+
+    commands =
+    {
+        "Trie", "insert", "insert", "insert", "insert", "insert",
+        "search", "search", "search", "search", "search"
+    };
+    parameters =
+    {
+        {},{ "their" },{ "there" }, { "answer" },{ "any" },{ "bye" },
+        { "their" },{ "there" }, { "answer" },{ "any" },{ "bye" }
+    };
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Trie")
+        {
+            trie = new Trie();
+            output.clear();
+            output.push_back("null");
+        }
+        else if (commands[i] == "insert")
+        {
+            trie->insert(parameters[i]);
+            output.push_back("null");
+        }
+        else if (commands[i] == "search")
+        {
+            bool result = trie->search(parameters[i]);
+            output.push_back((string)(result ? "true" : "false"));
+        }
+        else if (commands[i] == "startsWith")
+        {
+            bool result = trie->startsWith(parameters[i]);
+            output.push_back((string)(result ? "true" : "false"));
+        }
+    }
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(output);
+    delete trie;
+}
+
+void TestLeetCode745(void)
+{
+    Logger::WriteMessage("Test Leet Code 745");
+    vector<string> words = { "apple" };
+    vector<pair<string, string>> prefix = { {"a", "e" } };
+    WordFilter wordFilter(words);
+    vector<int> result;
+    for (size_t i = 0; i < prefix.size(); i++)
+    {
+        result.push_back(wordFilter.f(prefix[i].first, prefix[i].second));
+    }
+    Logger::WriteMessage(result);
+    words = { "cabaabaaaa", "ccbcababac", "bacaabccba", "bcbbcbacaa", "abcaccbcaa", "accabaccaa", "cabcbbbcca", "ababccabcb", "caccbbcbab", "bccbacbcba" };
+    prefix =
+    {
+        {"bccbacbcba", "a"}, { "ab","abcaccbcaa" }, { "a","aa" }, { "cabaaba","abaaaa" }, { "cacc","accbbcbab" },
+        { "ccbcab","bac" }, { "bac","cba" }, { "ac","accabaccaa" }, { "bcbb","aa" }, { "ccbca","cbcababac" }
+    };
+    wordFilter = WordFilter(words);
+    result.clear();
+    for (size_t i = 0; i < prefix.size(); i++)
+    {
+        result.push_back(wordFilter.f(prefix[i].first, prefix[i].second));
+    }
+    Logger::WriteMessage(result);
+
+    words = { "pop" };
+    prefix =
+    {
+        { "","pop" }
+    };
+    wordFilter = WordFilter(words);
+    result.clear();
+    for (size_t i = 0; i < prefix.size(); i++)
+    {
+        result.push_back(wordFilter.f(prefix[i].first, prefix[i].second));
+    }
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode642(void)
+{
+    Logger::WriteMessage("Test Leet Code 642");
+    vector<string> commands =
+    {
+        "AutocompleteSystem", "input", "input", "input", "input"
+    };
+    vector<vector<string>> parameters =
+    {
+        {"i love you", "island", "ironman", "i love leetcode"},{ "i" },{ " " }, { "a" },{ "#" }
+    };
+    vector<int> times =
+    {
+        5, 3, 2, 2
+    };
+    AutocompleteSystem * autoCompleteSystem = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "AutocompleteSystem")
+        {
+            autoCompleteSystem = new AutocompleteSystem(parameters[i], times);
+            vector<string> result = { "null" };
+            Logger::WriteMessage(commands[i]);
+            Logger::WriteMessage(parameters[i]);
+            Logger::WriteMessage(times);
+            Logger::WriteMessage(result);
+        }
+        else if (commands[i] == "input")
+        {
+            vector<string> result = autoCompleteSystem->input(parameters[i][0][0]);
+            Logger::WriteMessage(commands[i]);
+            Logger::WriteMessage(parameters[i]);
+            Logger::WriteMessage(result);
+        }
+    }
+    delete autoCompleteSystem;
+
+    commands =
+    {
+        "AutocompleteSystem", "input", "input", "input", "input", "input", "input",
+        "input", "input","input", "input", "input", "input","input", "input"
+    };
+    parameters =
+    {
+        {"abc", "abbc", "a"}, { "b" }, { "c" }, { "#" }, { "b" }, { "c" }, { "#" },
+        { "a" }, { "b" }, { "c" }, {"#"},{ "a" }, { "b" }, { "c" }, {"#"}
+    };
+    times =
+    {
+        3, 3, 3
+    };
+    autoCompleteSystem = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "AutocompleteSystem")
+        {
+            autoCompleteSystem = new AutocompleteSystem(parameters[i], times);
+            vector<string> result = { "null" };
+            Logger::WriteMessage(commands[i]);
+            Logger::WriteMessage(parameters[i]);
+            Logger::WriteMessage(times);
+            Logger::WriteMessage(result);
+        }
+        else if (commands[i] == "input")
+        {
+            vector<string> result = autoCompleteSystem->input(parameters[i][0][0]);
+            Logger::WriteMessage(commands[i]);
+            Logger::WriteMessage(parameters[i]);
+            Logger::WriteMessage(result);
+        }
+    }
+    delete autoCompleteSystem;
+}
+
+void TestLeetCode1032(void)
+{
+    Logger::WriteMessage("Test Leet Code 1032");
+    vector<string> commands = { "StreamChecker","query","query","query","query","query","query",
+                                "query","query","query","query","query","query" };
+    vector<vector<string>> data =
+    {
+        {"cd","f","kl"},{"a"},{"b"},{"c",},{"d"},{"e"},{"f"},{"g"},{"h"},{"i"},{"j"},{"k"},{"l"}
+    };
+    vector<string> result;
+    StreamChecker * streamChecker = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "StreamChecker")
+        {
+            streamChecker = new StreamChecker(data[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "query")
+        {
+            bool ret = streamChecker->query(data[i][0][0]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+    }
+    delete streamChecker;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+        "StreamChecker", "query", "query", "query", "query", "query", "query",
+        "query", "query", "query", "query", "query", "query", "query", "query",
+        "query", "query", "query", "query", "query", "query", "query", "query",
+        "query", "query", "query", "query", "query", "query", "query", "query"
+    };
+    data =
+    {
+        {"ab", "ba", "aaab", "abab", "baa"}, { "a" }, { "a" }, { "a" }, { "a" }, { "a" }, { "b" },
+        { "a" }, { "b" }, { "a" }, { "b" }, { "b" }, { "b" }, { "a" }, { "b" }, { "a" }, { "b" },
+        { "b" }, { "b" }, { "b" }, { "a" }, { "b" }, { "a" }, { "b" }, { "a" }, { "a" }, { "a" },
+        { "b" }, { "a" }, { "a" }, { "a" }
+    };
+
+    result.clear();
+    streamChecker = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "StreamChecker")
+        {
+            streamChecker = new StreamChecker(data[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "query")
+        {
+            bool ret = streamChecker->query(data[i][0][0]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+    }
+    delete streamChecker;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode352(void)
+{
+    Logger::WriteMessage("Test Leet Code 352");
+    vector<int> nums = { 1, 3, 7, 2, 6 };
+    SummaryRanges summaryRange;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        summaryRange.addNum(nums[i]);
+    }
+    Logger::WriteMessage(nums);
+    vector<Interval> intervals = summaryRange.getIntervals();
+    Logger::WriteMessage(intervals);
+}
+
+void TestLeetCode288(void)
+{
+    Logger::WriteMessage("Test Leet Code 288");
+    vector<string> words = { "deer", "door", "cake", "card" };
+    Logger::WriteMessage(words);
+    ValidWordAbbr wordAbbr(words);
+    vector<string> test = { "dear", "cart", "cane", "make" };
+    Logger::WriteMessage(test);
+    for (string str : test)
+    {
+        Logger::WriteMessage(str + "->" + (string)(wordAbbr.isUnique(str) ? "true" : "false"));
+    }
+
+    words = { "hello" };
+    Logger::WriteMessage(words);
+    ValidWordAbbr wordAbbr1(words);
+    test = { "hello" };
+    Logger::WriteMessage(test);
+    for (string str : test)
+    {
+        Logger::WriteMessage(str + "->" + (string)(wordAbbr1.isUnique(str) ? "true" : "false"));
+    }
+}
+
+void TestLeetCode604(void)
+{
+    string str = "L1e2t1C1o1d1e1";
+    StringIterator *iterator = new StringIterator("L1e2t1C1o1d1e1");
+    string result;
+    while (iterator->hasNext())
+    {
+        result.push_back(iterator->next());
+    }
+    delete iterator;
+    Logger::WriteMessage("str = " + str + "; result = " + result);
+}
+
+void TestLeetCode676(void)
+{
+    vector<string> dict = { "hello", "leetcode" };
+    Logger::WriteMessage(dict);
+    MagicDictionary * magic_dict = new MagicDictionary();
+    magic_dict->buildDict(dict);
+    vector<string> words = { "hello", "hhllo", "hell",  "leetcoded" };
+    Logger::WriteMessage(words);
+    for (string word : words)
+    {
+        bool result = magic_dict->search(word);
+        Logger::WriteMessage((string)(result ? "true" : "false"));
+    }
+    delete magic_dict;
+}
+
+void TestLeetCode271(void)
+{
+    Logger::WriteMessage("Test Leet Code 271");
+    vector<string> str_list = { "Hello", "", "World" };
+    Logger::WriteMessage(str_list);
+    Codec codec;
+    string str = codec.encode(str_list);
+    Logger::WriteMessage(str);
+    vector<string> result = codec.decode(str);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode588(void)
+{
+    vector<string> commands =
+    {
+        "FileSystem", "ls", "mkdir", "addContentToFile", "ls", "readContentFromFile", "addContentToFile", "readContentFromFile"
+    };
+    vector<vector<string>> parameters =
+    {
+        {},{ "/" },{ "/a/b/c" }, { "/a/b/c/d", "hello world" },{ "/" },{ "/a/b/c/d" },{"/a/b/c/d", " hello hello world"}, {"/a/b/c/d"}
+    };
+    FileSystem fileSystem;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+
+    vector<string> output;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "ls")
+        {
+            vector<string> result = fileSystem.ls(parameters[i][0]);
+            string output_string;
+            for (string str : result)
+            {
+                if (!output_string.empty()) output_string.push_back(',');
+                output_string.append(str);
+            }
+            output.push_back("[" + output_string + "]");
+        }
+        else if (commands[i] == "mkdir")
+        {
+            fileSystem.mkdir(parameters[i][0]);
+            output.push_back("null");
+        }
+        else if (commands[i] == "FileSystem")
+        {
+            output.push_back("null");
+        }
+        else if (commands[i] == "addContentToFile")
+        {
+            fileSystem.addContentToFile(parameters[i][0], parameters[i][1]);
+            output.push_back("null");
+        }
+        else if (commands[i] == "readContentFromFile")
+        {
+            string output_string;
+            output_string = fileSystem.readContentFromFile(parameters[i][0]);
+            output.push_back(output_string);
+        }
+    }
+    Logger::WriteMessage(output);
+}
+
+void TestLeetCode1261(void)
+{
+    Logger::WriteMessage("Test Leet Code 1261");
+    vector<string> commands =
+    {
+        "FindElements","find","find"
+    };
+    vector<string> data =
+    {
+        {"[-1,null,-1]"},{"1"},{"2"}
+    };
+
+    FindElements* findElements = nullptr;
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FindElements")
+        {
+            LeetCode leetCode;
+            TreeNode* root = leetCode.deserialize(data[i]);
+            findElements = new FindElements(root);
+            result.push_back("null");
+        }
+        else if (commands[i] == "find")
+        {
+            bool ret = findElements->find(atoi(data[i].c_str()));
+            result.push_back(ret ? "true" : "false");
+        }
+    }
+    delete findElements;
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+        "FindElements","find","find","find"
+    };
+    data =
+    {
+        {"[-1,-1,-1,-1,-1]"},{"1"},{"3"},{"5"}
+    };
+
+    findElements = nullptr;
+    result.clear();
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FindElements")
+        {
+            LeetCode leetCode;
+            TreeNode* root = leetCode.deserialize(data[i]);
+            findElements = new FindElements(root);
+            result.push_back("null");
+        }
+        else if (commands[i] == "find")
+        {
+            bool ret = findElements->find(atoi(data[i].c_str()));
+            result.push_back(ret ? "true" : "false");
+        }
+    }
+    delete findElements;
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+        "FindElements","find","find","find","find"
+    };
+    data =
+    {
+        {"[-1,null,-1,-1,null,-1]"},{"2"},{"3"},{"4"},{"5"}
+    };
+
+    findElements = nullptr;
+    result.clear();
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FindElements")
+        {
+            LeetCode leetCode;
+            TreeNode* root = leetCode.deserialize(data[i]);
+            findElements = new FindElements(root);
+            result.push_back("null");
+        }
+        else if (commands[i] == "find")
+        {
+            bool ret = findElements->find(atoi(data[i].c_str()));
+            result.push_back(ret ? "true" : "false");
+        }
+    }
+    delete findElements;
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode170(void)
+{
+    Logger::WriteMessage("Test Leet Code 170");
+    vector<string> commands =
+    {
+        "TwoSum", "add", "add", "add", "add", "add", "find", "find", "find", "find", "find" , "find"
+    };
+    vector<vector<int>> parameters =
+    {
+        {},{ 3 }, { 2 }, { 1 }, { 0 }, { 0 }, { 2 },{ 3 }, { 4 }, { 5 }, { 6 }, { 0 }
+    };
+
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        TwoSum * twoSum = nullptr;
+        if (commands[i] == "TwoSum")
+        {
+            TwoSum * twoSum = new TwoSum();
+            result.push_back("null");
+        }
+        else if (commands[i] == "add")
+        {
+            twoSum->add(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "find")
+        {
+            bool ret = twoSum->find(parameters[i][0]);
+            Logger::WriteMessage("result = " + (string)(ret ? "true" : "false"));
+        }
+    }
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode535(void)
+{
+    Logger::WriteMessage("Test Leet Code 535");
+    TinyURL tinyUrl;
+    string longUrl = "https://leetcode.com/problems/design-tinyurl";
+    string shortUrl = tinyUrl.encode(longUrl);
+    Logger::WriteMessage("long url -> short url: " + longUrl + " -> " + shortUrl);
+    Logger::WriteMessage("short url -> long url: " + shortUrl + " -> " + longUrl);
+}
+
+void TestLeetCode1286(void)
+{
+    Logger::WriteMessage("Test Leet Code 1286");
+
+    vector<string> commands =
+    {
+        "CombinationIterator", "next", "hasNext", "next", "hasNext", "next", "hasNext"
+    };
+    vector<vector<string>> data =
+    {
+        {"abc", "2"},{},{},{},{},{},{}
+    };
+    CombinationIterator* combinationIterator = nullptr;
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "CombinationIterator")
+        {
+            combinationIterator = new CombinationIterator(data[i][0], atoi(data[i][1].c_str()));
+            result.push_back("null");
+        }
+        else if (commands[i] == "next")
+        {
+            string str = combinationIterator->next();
+            result.push_back(str);
+        }
+        else if (commands[i] == "hasNext")
+        {
+            bool ret = combinationIterator->hasNext();
+            result.push_back(to_string(ret));
+        }
+    }
+    delete combinationIterator;
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1286();
+    TestLeetCode535();
+    TestLeetCode170();
+    TestLeetCode1261();
+    TestLeetCode588();
+    TestLeetCode271();
+    TestLeetCode604();
+    TestLeetCode676();
+    TestLeetCode352();
+    TestLeetCode1032();
+    TestLeetCode642();
+    TestLeetCode745();
+    TestLeetCode208();
+    TestLeetCode677();
+    TestLeetCode284();
+    TestLeetCode348();
+    TestLeetCode251();
+    TestLeetCode281();
+    TestLeetCode379();
+    TestLeetCode706();
+    TestLeetCode705();
+    TestLeetCode1352();
     TestLeetCode1348();
     TestLeetCode146();
     TestLeetCode355();
@@ -555,4 +1554,5 @@ void TestLeetCodeDesign(void)
     TestLeetCode981();
     TestLeetCode1146();
     TestLeetCode1244();
+    TestLeetCode1274();
 }

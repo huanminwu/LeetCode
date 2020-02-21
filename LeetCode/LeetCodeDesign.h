@@ -120,6 +120,236 @@ public:
 };
 
 /// <summary>
+/// Leet code #251. Flatten 2D Vector  
+/// 
+/// Implement an iterator to flatten a 2d vector.
+/// For example,
+/// Given 2d vector = 
+/// [
+///  [1,2],
+///  [3],
+///  [4,5,6]
+/// ]
+/// By calling next repeatedly until hasNext returns false, the order of 
+/// elements returned by next should be: [1,2,3,4,5,6]. 
+/// Hint:
+/// 1.How many variables do you need to keep track?
+/// 2.Two variables is all you need. Try with x and y.
+/// 3.Beware of empty rows. It could be the first few rows.
+/// 4.To write correct code, think about the invariant to maintain. What is it?
+/// 5.The invariant is x and y must always point to a valid point in the 2d 
+///   vector. Should you maintain your invariant ahead of time or right when 
+///   you need it?
+/// 6.Not sure? Think about how you would implement hasNext(). Which is more 
+///   complex?
+/// 7.Common logic in two different places should be refactored into a common 
+///   method.
+///
+/// Follow up:
+/// As an added challenge, try to code it using only iterators in C++ or 
+/// iterators in Java. 
+/// </summary>
+class Vector2D
+{
+private:
+    size_t m_Row;
+    size_t m_Col;
+    vector<vector<int>> m_Vector;
+public:
+    Vector2D(vector<vector<int>>& vec2d)
+    {
+        m_Vector = vec2d;
+        m_Row = 0;
+        m_Col = 0;
+    }
+
+    int next()
+    {
+        int result = m_Vector[m_Row][m_Col];
+        m_Col++;
+        return result;
+    }
+
+    bool hasNext()
+    {
+        while ((m_Row < m_Vector.size()) && (m_Col >= m_Vector[m_Row].size()))
+        {
+            m_Row++;
+            m_Col = 0;
+        }
+        if (m_Row == m_Vector.size()) return false;
+        else return true;
+    }
+};
+
+/// <summary>
+/// Leet code #281. Zigzag Iterator  
+/// 
+/// Given two 1d vectors, implement an iterator to return their elements 
+/// alternately.
+/// For example, given two 1d vectors: 
+/// v1 = [1, 2]
+/// v2 = [3, 4, 5, 6]
+/// By calling next repeatedly until hasNext returns false, the order of 
+/// elements returned by next should be: [1, 3, 2, 4, 5, 6].
+/// Follow up: What if you are given k 1d vectors? How well can your code be 
+/// extended to such cases?
+/// Clarification for the follow up question - Update (2015-09-18):
+/// The "Zigzag" order is not clearly defined and is ambiguous for k > 2 cases. 
+/// If "Zigzag" does not look right to you, replace "Zigzag" with "Cyclic". 
+/// For example, given the following input: 
+/// [1,2,3]
+/// [4,5,6,7]
+/// [8,9]
+/// It should return [1,4,8,2,5,9,3,6,7]. 	
+/// </summary>
+class ZigzagIterator
+{
+private:
+    size_t m_Row;
+    size_t m_Col;
+    int m_Size;
+    int m_Index;
+    vector<vector<int>> m_Vector;
+public:
+    ZigzagIterator(vector<int>& v1, vector<int>& v2)
+    {
+        m_Vector.push_back(v1);
+        m_Vector.push_back(v2);
+        m_Index = 0;
+        m_Size = v1.size() + v2.size();
+        m_Row = 0;
+        m_Col = 0;
+    }
+    int next()
+    {
+        int result;
+        while (m_Row >= m_Vector.size() || m_Col >= m_Vector[m_Row].size())
+        {
+            if (m_Row < m_Vector.size())
+            {
+                m_Row++;
+            }
+            else
+            {
+                m_Row = 0;
+                m_Col++;
+            }
+        }
+        result = m_Vector[m_Row][m_Col];
+        m_Row++;
+        m_Index++;
+        return result;
+    }
+
+    bool hasNext()
+    {
+        if (m_Index < m_Size) return true;
+        else return false;
+    }
+};
+
+/// <summary>
+/// Leet code #284. Peeking Iterator
+/// Given an Iterator class interface with methods: next() and hasNext(), design and implement 
+/// a PeekingIterator that support the peek() operation -- it essentially peek() at the element that 
+/// will be returned by the next call to next().
+///
+/// Here is an example. Assume that the iterator is initialized to the beginning of the list: [1, 2, 3].
+/// Call next() gets you 1, the first element in the list.
+/// Now you call peek() and it returns 2, the next element. Calling next() after that still return 2.
+///
+/// You call next() the final time and it returns 3, the last element. 
+/// Calling hasNext() after that should return false. 
+/// Hint:
+/// 1.Think of "looking ahead". You want to cache the next element.
+/// 2.Is one variable sufficient? Why or why not?
+/// 3.Test your design with call order of peek() before next() vs next() before peek().
+/// 4.For a clean implementation, check out Google's guava library source code.
+/// Follow up: How would you extend your design to be generic and work with all types, not just integer?	
+/// </summary>
+// Below is the interface for Iterator, which is already defined for you.
+// **DO NOT** modify the interface for Iterator.
+// 2016-12-10, HM: I modify this interface so I can run it in my code 
+class Iterator {
+private:
+    vector<int> m_nums;
+    int m_index;
+public:
+    Iterator(const vector<int>& nums)
+    {
+        m_nums = nums;
+        m_index = 0;
+    };
+    Iterator(const Iterator& iter)
+    {
+        m_nums = iter.m_nums;
+    }
+    virtual ~Iterator()
+    {
+    };
+    // Returns the next element in the iteration.
+    int next()
+    {
+        return m_nums[m_index];
+        m_index++;
+    };
+    // Returns true if the iteration has more elements.
+    bool hasNext() const
+    {
+        return (m_index < (int)m_nums.size());
+    };
+};
+
+
+class PeekingIterator : public Iterator
+{
+private:
+    queue<int> m_queue;
+public:
+    PeekingIterator(const vector<int>& nums) : Iterator(nums) {
+    }
+
+    // Returns the next element in the iteration without advancing the iterator.
+    int peek()
+    {
+        if ((m_queue.empty()) && (Iterator::hasNext()))
+        {
+            m_queue.push(Iterator::next());
+        }
+        return m_queue.front();
+    }
+
+    // hasNext() and next() should behave the same as in the Iterator interface.
+    // Override them if needed.
+    int next()
+    {
+        int value;
+        if (!m_queue.empty())
+        {
+            value = m_queue.front();
+            m_queue.pop();
+        }
+        else
+        {
+            value = Iterator::next();
+        }
+        return value;
+    }
+
+    bool hasNext() const {
+        if (!m_queue.empty())
+        {
+            return true;
+        }
+        else
+        {
+            return Iterator::hasNext();
+        }
+    }
+};
+
+/// <summary>
 /// LeetCode #355. Design Twitter
 /// Design a simplified version of Twitter where users can post tweets, 
 /// follow/unfollow another user and 
@@ -271,6 +501,161 @@ public:
 };
 
 /// <summary>
+/// Leet code #352. Data Stream as Disjoint Intervals 
+/// 
+/// Given a data stream input of non-negative integers a1, a2, ..., an, ..., 
+/// summarize the numbers seen so far as a list of disjoint intervals.
+/// For example, suppose the integers from the data stream are 1, 3, 7, 2, 6, ..., 
+/// then the summary will be:
+/// [1, 1]
+/// [1, 1], [3, 3]
+/// [1, 1], [3, 3], [7, 7] 
+/// [1, 3], [7, 7]
+/// [1, 3], [6, 7]
+/// Follow up:
+/// What if there are lots of merges and the number of disjoint intervals 
+/// are small compared to the data stream's size? 
+/// </summary>
+class SummaryRanges
+{
+private:
+    map<int, int> m_Intervals;
+public:
+    /// Initialize your data structure here. ///
+    SummaryRanges()
+    {
+    }
+
+    void addNum(int val)
+    {
+        map<int, int>::iterator itr = m_Intervals.lower_bound(val);
+        int start = val;
+        int end = val;
+        if (itr != m_Intervals.begin())
+        {
+            itr--;
+            if (val <= itr->second) return;
+            else if (itr->second == val - 1)
+            {
+                start = itr->first;
+            }
+            itr++;
+        }
+        if (itr != m_Intervals.end())
+        {
+            if ((val == itr->first) || (itr->first == val + 1))
+            {
+                end = itr->second;
+                m_Intervals.erase(itr->first);
+            }
+        }
+        m_Intervals[start] = end;
+    }
+
+    vector<Interval> getIntervals()
+    {
+        vector<Interval> result;
+        for (map<int, int>::iterator itr = m_Intervals.begin(); itr != m_Intervals.end(); itr++)
+        {
+            result.push_back(Interval(itr->first, itr->second));
+        }
+        return result;
+    }
+};
+
+/// <summary>
+/// Leet code #379. Design Phone Directory 
+/// 
+/// Design a Phone Directory which supports the following operations:
+/// 1.get: Provide a number which is not assigned to anyone.
+///	2.check: Check if a number is available or not.
+/// 3.release: Recycle or release a number.
+/// Example: 
+/// // Init a phone directory containing a total of 3 numbers: 0, 1, and 2.
+/// PhoneDirectory directory = new PhoneDirectory(3);
+/// // It can return any available phone number. Here we assume it returns 0.
+/// directory.get();
+/// 
+/// // Assume it returns 1.
+/// directory.get();
+///
+/// // The number 2 is available, so return true.
+/// directory.check(2);
+///
+/// // It returns 2, the only number that is left.
+/// directory.get();
+///
+/// // The number 2 is no longer available, so return false.
+/// directory.check(2);
+///
+/// // Release number 2 back to the pool.
+/// directory.release(2);
+///
+/// // Number 2 is available again, return true.
+/// directory.check(2);
+/// </summary>
+class PhoneDirectory
+{
+    vector<int> m_FreeList;
+    vector<bool> m_Allocation;
+    int m_Index;
+    int m_Size;
+public:
+    // Initialize your data structure here
+    // @param maxNumbers - The maximum numbers that can be stored in the phone directory.
+    PhoneDirectory(int maxNumbers)
+    {
+        m_Index = 0;
+        m_Size = maxNumbers;
+        m_FreeList = vector<int>(m_Size);
+        m_Allocation = vector<bool>(m_Size, false);
+        for (int i = 0; i < maxNumbers; i++)
+        {
+            m_FreeList[i] = i;
+        }
+    }
+
+    // Provide a number which is not assigned to anyone.
+    // @return - Return an available number. Return -1 if none is available.
+    int get()
+    {
+        if (m_Index == m_Size)
+        {
+            return -1;
+        }
+        else
+        {
+            int value = m_FreeList[m_Index];
+            m_Index++;
+            m_Allocation[value] = true;
+            return value;
+        }
+    }
+
+    // Check if a number is available or not.
+    bool check(int number)
+    {
+        if ((number < 0) || (number >= m_Size))
+        {
+            return false;
+        }
+        return (!m_Allocation[number]);
+    }
+
+    // Recycle or release a number.
+    void release(int number)
+    {
+        if ((number < 0) || (number >= m_Size) || (m_Allocation[number] == false))
+        {
+            return;
+        }
+        m_Index--;
+        m_FreeList[m_Index] = number;
+        m_Allocation[number] = false;
+    }
+};
+
+/// <summary>
 /// Leet code #341. Flatten Nested List Iterator       
 ///
 /// Given a nested list of integers, implement an iterator to flatten it. 
@@ -364,6 +749,429 @@ public:
             }
         }
         return false;
+    }
+};
+
+/// <summary>
+/// Leet code #348. Design Tic-Tac-Toe 
+/// 
+/// Design a Tic-tac-toe game that is played between two players on a n x n grid. 
+/// You may assume the following rules:  
+/// 1.A move is guaranteed to be valid and is placed on an empty block.
+/// 2.Once a winning condition is reached, no more moves is allowed. 
+/// 3.A player who succeeds in placing n of their marks in a horizontal, vertical, or diagonal row wins the game.
+///
+/// Example:
+/// Given n = 3, assume that player 1 is "X" and player 2 is "O" in the board.
+/// TicTacToe toe = new TicTacToe(3); 
+/// toe.move(0, 0, 1); -> Returns 0 (no one wins)
+/// |X| | |
+/// | | | |    // Player 1 makes a move at (0, 0).
+/// | | | |
+/// 
+/// toe.move(0, 2, 2); -> Returns 0 (no one wins)
+/// |X| |O|
+/// | | | |    // Player 2 makes a move at (0, 2).
+/// | | | |
+/// 
+/// toe.move(2, 2, 1); -> Returns 0 (no one wins)
+/// |X| |O|
+/// | | | |    // Player 1 makes a move at (2, 2).
+/// | | |X|
+///
+/// toe.move(1, 1, 2); -> Returns 0 (no one wins)
+/// |X| |O|
+/// | |O| |    // Player 2 makes a move at (1, 1).
+/// | | |X|
+///
+/// toe.move(2, 0, 1); -> Returns 0 (no one wins)
+/// |X| |O|
+/// | |O| |    // Player 1 makes a move at (2, 0).
+/// |X| |X|
+///
+/// toe.move(1, 0, 2); -> Returns 0 (no one wins)
+/// |X| |O|
+/// |O|O| |    // Player 2 makes a move at (1, 0).
+/// |X| |X|
+///
+/// toe.move(2, 1, 1); -> Returns 1 (player 1 wins)
+/// |X| |O|
+/// |O|O| |    // Player 1 makes a move at (2, 1).
+/// |X|X|X|
+/// Follow up:
+/// Could you do better than O(n2) per move() operation? 
+/// Hint:
+/// 1.Could you trade extra space such that move() operation can be done in O(1)?
+/// 2.You need two arrays: int rows[n], int cols[n], plus two variables: diagonal, anti_diagonal.
+/// </summary>
+class TicTacToe
+{
+    vector<vector<int>> row_map;
+    vector<vector<int>> col_map;
+    vector<int> diag_map;
+    vector<int> anti_map;
+public:
+    /** Initialize your data structure here. */
+    TicTacToe(int n)
+    {
+        row_map = vector<vector<int>>(n, vector<int>(2));
+        col_map = vector<vector<int>>(n, vector<int>(2));
+        diag_map = vector<int>(2);
+        anti_map = vector<int>(2);
+    }
+
+    /** Player {player} makes a move at ({row}, {col}).
+    @param row The row of the board.
+    @param col The column of the board.
+    @param player The player, can be either 1 or 2.
+    @return The current winning condition, can be either:
+    0: No one wins.
+    1: Player 1 wins.
+    2: Player 2 wins. */
+    int move(int row, int col, int player)
+    {
+        row_map[row][player - 1]++;
+        col_map[col][player - 1]++;
+        if (row == col)
+        {
+            diag_map[player - 1]++;
+        }
+        if (row + col == row_map.size() - 1)
+        {
+            anti_map[player - 1]++;
+        }
+        if ((row_map[row][player - 1] == row_map.size()) ||
+            (col_map[col][player - 1] == row_map.size()) ||
+            (diag_map[player - 1] == row_map.size()) ||
+            (anti_map[player - 1] == row_map.size()))
+        {
+            return player;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+};
+
+/// <summary>
+/// Leet code #353. Design Snake Game  
+/// 
+/// Design a Snake game that is played on a device with screen size = width x height. 
+/// Play the game online if you are not familiar with the game.
+/// The snake is initially positioned at the top left corner (0,0) with length = 1 unit.
+/// You are given a list of food's positions in row-column order. When a snake eats the food, 
+/// its length and the game's score both increase by 1.
+/// Each food appears one by one on the screen. For example, the second food will not appear 
+/// until the first food was eaten by the snake. 
+/// When a food does appear on the screen, it is guaranteed that it will not appear on a 
+/// block occupied by the snake.
+/// Example:
+/// Given width = 3, height = 2, and food = [[1,2],[0,1]].
+/// Snake snake = new Snake(width, height, food);
+/// Initially the snake appears at position (0,0) and the food at (1,2).
+/// |S| | |
+/// | | |F|
+/// 
+/// snake.move("R"); -> Returns 0
+/// | |S| |
+/// | | |F|
+///
+/// snake.move("D"); -> Returns 0
+///
+/// | | | |
+/// | |S|F|
+///   
+/// snake.move("R"); -> Returns 1 (Snake eats the first food and right after that, the second food appears at (0,1) )
+///
+/// | |F| |
+/// | |S|S|
+///
+/// snake.move("U"); -> Returns 1
+///
+/// | |F|S|
+/// | | |S|
+///
+/// snake.move("L"); -> Returns 2 (Snake eats the second food)
+///
+/// | |S|S|
+/// | | |S|
+///
+/// snake.move("U"); -> Returns -1 (Game over because snake collides with border)
+/// </summary>
+class SnakeGame
+{
+private:
+    list<pair<int, int>> m_snake;
+    int m_width;
+    int m_height;
+    vector<pair<int, int>> m_food;
+    int m_foodindex;
+    unordered_map<int, unordered_set<int>> m_snakemap;
+public:
+    /** Initialize your data structure here.
+    @param width - screen width
+    @param height - screen height
+    @param food - A list of food positions
+    E.g food = [[1, 1], [1, 0]] means the first food is positioned at[1, 1], the second is at[1, 0]. */
+    SnakeGame(int width, int height, vector<pair<int, int>> food)
+    {
+        m_width = width;
+        m_height = height;
+        m_food = food;
+        m_snake.push_front(make_pair(0, 0));
+        m_snakemap[0].insert(0);
+        m_foodindex = 0;
+    }
+
+    /** Moves the snake.
+    @param direction - 'U' = Up, 'L' = Left, 'R' = Right, 'D' = Down
+    @return The game's score after the move. Return -1 if game over.
+    Game over when snake crosses the screen boundary or bites its body. */
+    int move(string direction)
+    {
+        pair<int, int> head = m_snake.front();
+        if (direction == "U")
+        {
+            head.first--;
+            if (head.first < 0)
+            {
+                return -1;
+            }
+        }
+        else if (direction == "D")
+        {
+            head.first++;
+            if (head.first == m_height)
+            {
+                return -1;
+            }
+        }
+        else if (direction == "L")
+        {
+            head.second--;
+            if (head.second < 0)
+            {
+                return -1;
+            }
+        }
+        else if (direction == "R")
+        {
+            head.second++;
+            if (head.second == m_width)
+            {
+                return -1;
+            }
+        }
+
+        m_snake.push_front(head);
+        if ((m_foodindex < (int)m_food.size()) && (head == m_food[m_foodindex]) &&
+            (m_snakemap[head.first].count(head.second) == 0))
+        {
+            m_foodindex++;
+        }
+        else
+        {
+            pair<int, int> tail = m_snake.back();
+            m_snakemap[tail.first].erase(tail.second);
+            m_snake.pop_back();
+        }
+        if (m_snakemap[head.first].count(head.second) > 0)
+        {
+            return -1;
+        }
+        m_snakemap[head.first].insert(head.second);
+        return m_foodindex;
+    }
+};
+
+/// <summary>
+/// Leet code #631. Design Excel Sum Formula
+/// 
+/// Your task is to design the basic function of Excel and implement the 
+/// function of sum formula. Specifically, you need to implement the 
+/// following functions:
+/// Excel(int H, char W): This is the constructor. The inputs represents 
+/// the height and width of the Excel form. H is a positive integer, range 
+/// from 1 to 26. It represents the height. W is a character range from 
+/// 'A' to 'Z'. It represents that the width is the number of characters 
+/// from 'A' to W. The Excel form content is represented by a height * 
+/// width 2D integer array C, it should be initialized to zero. You should 
+/// assume that the first row of C starts from 1, and the first column of 
+/// C starts from 'A'.
+/// 
+/// void Set(int row, char column, int val): Change the value at 
+/// C(row, column) to be val.
+///
+/// int Get(int row, char column): Return the value at C(row, column).
+///
+/// int Sum(int row, char column, List of Strings : numbers): This function 
+/// calculate and set the value at C(row, column), where the value should 
+/// be the sum of cells represented by numbers. This function return the 
+/// sum result at C(row, column). This sum formula should exist until this 
+/// cell is overlapped by another value or another sum formula.
+/// numbers is a list of strings that each string represent a cell or a 
+/// range of cells. If the string represent a single cell, then it has the 
+/// following format : ColRow. For example, "F7" represents the cell at 
+/// (7, F). 
+/// If the string represent a range of cells, then it has the following 
+/// format : ColRow1:ColRow2. The range will always be a rectangle, and 
+/// ColRow1 represent the position of the top-left cell, and ColRow2 
+/// represents the position of the bottom-right cell. 
+///
+/// Example 1:
+/// Excel(3,"C"); 
+/// construct a 3*3 2D array with all zero.
+///   A B C
+/// 1 0 0 0
+/// 2 0 0 0
+/// 3 0 0 0
+///
+/// Set(1, "A", 2);
+/// set C(1,"A") to be 2.
+///   A B C
+/// 1 2 0 0
+/// 2 0 0 0
+/// 3 0 0 0
+///
+/// Sum(3, "C", ["A1", "A1:B2"]);
+/// set C(3,"C") to be the sum of value at C(1,"A") and the values sum of 
+/// the rectangle range whose top-left cell is C(1,"A") and bottom-right 
+/// cell is C(2,"B"). Return 4. 
+///   A B C
+/// 1 2 0 0
+/// 2 0 0 0
+/// 3 0 0 4
+///
+/// Set(2, "B", 2);
+/// set C(2,"B") to be 2. Note C(3, "C") should also be changed.
+///   A B C
+/// 1 2 0 0
+/// 2 0 2 0
+/// 3 0 0 6
+///
+/// Note:
+/// You could assume that there won't be any circular sum reference. For 
+/// example, A1 = sum(B1) and B1 = sum(A1).
+/// The test cases are using double-quotes to represent a character.
+/// Please remember to RESET your class variables declared in class Excel, 
+/// as static/class variables are persisted across multiple test cases. 
+/// Please see here for more details.
+/// </summary>
+class Excel
+{
+private:
+    unordered_map<int, unordered_map<int, vector<pair<int, int>>>> sum_formula;
+    vector<vector<int>> cells;
+
+    int calculate(int row, int col)
+    {
+        if (sum_formula[row].count(col) == 0)
+        {
+            return cells[row][col];
+        }
+
+        int sum = 0;
+        vector<pair<int, int>>& range_list = sum_formula[row][col];
+        for (size_t i = 0; i < range_list.size(); i += 2)
+        {
+            int start_row = range_list[i].first;
+            int start_col = range_list[i].second;
+            int end_row = range_list[i + 1].first;
+            int end_col = range_list[i + 1].second;
+            for (int r = start_row; r < end_row; r++)
+            {
+                for (int c = start_col; c < end_col; c++)
+                {
+                    sum += calculate(r, c);
+                }
+            }
+        }
+        return sum;
+    }
+
+    vector<pair<int, int>> parse_range(vector<string> str_list)
+    {
+        vector<pair<int, int>> result;
+        for (size_t i = 0; i < str_list.size(); i++)
+        {
+            string token;
+            string str = str_list[i];
+            int row = 0, col = 0;
+            for (size_t j = 0; j <= str.size(); j++)
+            {
+                if (j == str.size())
+                {
+                    row = stoi(token) - 1;
+                    token.clear();
+
+                    // for a single cell
+                    if (result.size() % 2 == 0)
+                    {
+                        result.push_back(make_pair(row, col));
+                    }
+                    // for end range we make it out of boundary
+                    result.push_back(make_pair(row + 1, col + 1));
+                }
+                else if (str[j] == ':')
+                {
+                    row = stoi(token) - 1;
+                    token.clear();
+                    result.push_back(make_pair(row, col));
+                }
+                else if (isalpha(str[j]))
+                {
+                    col = str[j] - 'A';
+                }
+                else if (isdigit(str[j]))
+                {
+                    token += str[j];
+                }
+            }
+            // if this is a single cell, duplicate it as range
+            if (result.size() % 2 == 1)
+            {
+                result.push_back(make_pair(row, col));
+            }
+        }
+        return result;
+    }
+
+public:
+    Excel(int H, char W)
+    {
+        int rows = H;
+        int cols = W - 'A' + 1;
+        cells = vector<vector<int>>(rows, vector<int>(cols));
+    }
+
+    void set(int r, char c, int v)
+    {
+        int row = r - 1;
+        int col = c - 'A';
+        // clean up formula
+        if (sum_formula[row].count(col) > 0)
+        {
+            sum_formula[row].erase(col);
+        }
+
+        cells[row][col] = v;
+    }
+
+    int get(int r, char c)
+    {
+        int row = r - 1;
+        int col = c - 'A';
+        return calculate(row, col);
+    }
+
+    int sum(int r, char c, vector<string> strs)
+    {
+        int row = r - 1;
+        int col = c - 'A';
+        sum_formula[row][col] = parse_range(strs);
+        cells[row][col] = 0;
+        return calculate(row, col);
     }
 };
 
@@ -3945,6 +4753,577 @@ public:
 };
 
 /// <summary>
+/// Leet code #705. Design HashSet
+/// 
+/// Design a HashSet without using any built-in hash table libraries.
+/// To be specific, your design should include these functions:
+///
+/// add(value): Insert a value into the HashSet.
+///
+/// contains(value) : Return whether the value exists in the HashSet 
+/// or not.
+/// 
+/// remove(value): Remove a value in the HashSet. If the value does not 
+/// exist in the HashSet, do nothing.
+///  
+/// Example:
+///
+/// MyHashSet hashSet = new MyHashSet();
+/// hashSet.add(1);         
+/// hashSet.add(2);         
+/// hashSet.contains(1);    // returns true
+/// hashSet.contains(3);    // returns false (not found)
+/// hashSet.add(2);          
+/// hashSet.contains(2);    // returns true
+/// hashSet.remove(2);          
+/// hashSet.contains(2);    // returns false (already removed)
+///
+/// Note:
+///
+/// 1. All values will be in the range of [0, 1000000].
+/// 2. The number of operations will be in the range of [1, 10000].
+/// 3. Please do not use the built-in HashSet library.
+/// </summary>
+class MyHashSet {
+private:
+    int m_Size = 10000;
+    vector<list<int>> m_Data;
+public:
+
+    // Initialize your data structure here.
+    MyHashSet()
+    {
+        m_Data = vector<list<int>>(m_Size);
+    }
+
+    void add(int key)
+    {
+        int index = key % m_Size;
+        auto itr = m_Data[index].begin();
+        while (itr != m_Data[index].end())
+        {
+            if (*itr == key) return;
+            itr++;
+        }
+        m_Data[index].push_back(key);
+    }
+
+
+    void remove(int key)
+    {
+        int index = key % m_Size;
+        auto itr = m_Data[index].begin();
+        while (itr != m_Data[index].end())
+        {
+            if (*itr == key)
+            {
+                m_Data[index].erase(itr);
+                return;
+            }
+            itr++;
+        }
+    }
+    /** Returns true if this set contains the specified element */
+    bool contains(int key)
+    {
+        int index = key % m_Size;
+        auto itr = m_Data[index].begin();
+        while (itr != m_Data[index].end())
+        {
+            if (*itr == key) return true;
+            itr++;
+        }
+        return false;
+    }
+};
+
+/// <summary>
+/// Leet code #706. Design HashMap
+/// 
+/// Design a HashMap without using any built-in hash table libraries.
+///
+/// To be specific, your design should include these functions:
+///
+/// put(key, value) : Insert a (key, value) pair into the HashMap. If 
+/// the value already exists in the HashMap, update the value.
+/// get(key): Returns the value to which the specified key is mapped, 
+/// or -1 if this map contains no mapping for the key.
+/// remove(key) : Remove the mapping for the value key if this map 
+/// contains the mapping for the key.
+///
+/// Example:
+///
+/// MyHashMap hashMap = new MyHashMap();
+/// hashMap.put(1, 1);          
+/// hashMap.put(2, 2);         
+/// hashMap.get(1);            // returns 1
+/// hashMap.get(3);            // returns -1 (not found)
+/// hashMap.put(2, 1);          // update the existing value
+/// hashMap.get(2);            // returns 1 
+/// hashMap.remove(2);          // remove the mapping for 2
+/// hashMap.get(2);            // returns -1 (not found) 
+///
+/// Note:
+/// 1. All keys and values will be in the range of [0, 1000000].
+/// 2. The number of operations will be in the range of [1, 10000].
+/// 3. Please do not use the built-in HashMap library.
+/// </summary>
+class MyHashMap {
+    int m_Size = 10000;
+    vector<list<pair<int, int>>> m_Data;
+public:
+    /** Initialize your data structure here. */
+    MyHashMap() {
+        m_Data = vector<list<pair<int, int>>>(m_Size);
+    }
+
+    /** value will always be non-negative. */
+    void put(int key, int value)
+    {
+        int index = key % m_Size;
+        auto itr = m_Data[index].begin();
+        while (itr != m_Data[index].end())
+        {
+            if (itr->first == key)
+            {
+                itr->second = value;
+                return;
+            }
+            itr++;
+        }
+        m_Data[index].push_back(make_pair(key, value));
+    }
+
+    /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
+    int get(int key)
+    {
+        int index = key % m_Size;
+        auto itr = m_Data[index].begin();
+        while (itr != m_Data[index].end())
+        {
+            if (itr->first == key)
+            {
+                return itr->second;
+            }
+            itr++;
+        }
+        return -1;
+    }
+
+    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
+    void remove(int key)
+    {
+        int index = key % m_Size;
+        auto itr = m_Data[index].begin();
+        while (itr != m_Data[index].end())
+        {
+            if (itr->first == key)
+            {
+                m_Data[index].erase(itr);
+                return;
+            }
+            itr++;
+        }
+    }
+};
+
+/// <summary>
+/// Leet code #707. Design Linked List
+/// 
+/// Design your implementation of the linked list. You can choose to 
+/// use the singly linked list or the doubly linked list. A node in 
+/// a singly linked list should have two attributes: val and next.val 
+/// is the value of the current node, and next is a pointer/reference 
+/// to the next node. If you want to use the doubly linked list, you 
+/// will need one more attribute prev to indicate the previous node in 
+/// the linked list. Assume all nodes in the linked list are 0-indexed.
+///
+/// Implement these functions in your linked list class:
+///
+/// get(index) : Get the value of the index-th node in the linked list. 
+/// If the index is invalid, return -1.
+/// addAtHead(val) : Add a node of value val before the first element of 
+/// the linked list. After the insertion, the new node will be the first 
+/// node of the linked list.
+/// addAtTail(val) : Append a node of value val to the last element of 
+/// the linked list.
+/// addAtIndex(index, val) : Add a node of value val before the index-th 
+/// node in the linked list. If index equals to the length of linked list,
+/// the node will be appended to the end of linked list. If index is 
+/// greater than the length, the node will not be inserted.
+/// deleteAtIndex(index) : Delete the index-th node in the linked list, 
+/// if the index is valid.
+/// Example:
+///
+/// MyLinkedList linkedList = new MyLinkedList();
+/// linkedList.addAtHead(1);
+/// linkedList.addAtTail(3);
+/// linkedList.addAtIndex(1, 2);  // linked list becomes 1->2->3
+/// linkedList.get(1);            // returns 2
+/// linkedList.deleteAtIndex(1);  // now the linked list is 1->3
+/// linkedList.get(1);            // returns 3
+/// Note:
+///
+/// All values will be in the range of [1, 1000].
+/// The number of operations will be in the range of [1, 1000].
+/// Please do not use the built-in LinkedList library.
+/// </summary>
+class MyLinkedList {
+private:
+    struct LinkedNode
+    {
+        LinkedNode * prev;
+        LinkedNode * next;
+        int value;
+        LinkedNode(int val)
+        {
+            prev = nullptr;
+            next = nullptr;
+            value = val;
+        }
+    };
+    LinkedNode * m_Head;
+    LinkedNode * m_Tail;
+public:
+    /** Initialize your data structure here. */
+    MyLinkedList()
+    {
+        m_Head = nullptr;
+        m_Tail = nullptr;
+    }
+
+    /** Initialize your data structure here. */
+    ~MyLinkedList()
+    {
+        LinkedNode * node = m_Head;
+        if (node != nullptr)
+        {
+            LinkedNode * next = node->next;
+            delete node;
+            node = next;
+        }
+        m_Head = nullptr;
+        m_Tail = nullptr;
+    }
+
+    /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
+    int get(int index)
+    {
+        LinkedNode * node = m_Head;
+        for (int i = 0; i < index; i++)
+        {
+            if (node == nullptr) return -1;
+            node = node->next;
+        }
+        if (node != nullptr) return node->value;
+        else return -1;
+    }
+
+    /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
+    void addAtHead(int val)
+    {
+        LinkedNode * node = new LinkedNode(val);
+        node->next = m_Head;
+        if (m_Head != nullptr)
+        {
+            m_Head->prev = node;
+        }
+        m_Head = node;
+        if (m_Tail == nullptr) m_Tail = node;
+    }
+
+    /** Append a node of value val to the last element of the linked list. */
+    void addAtTail(int val)
+    {
+        LinkedNode * node = new LinkedNode(val);
+        node->prev = m_Tail;
+        if (m_Tail != nullptr)
+        {
+            m_Tail->next = node;
+        }
+        m_Tail = node;
+        if (m_Head == nullptr) m_Head = node;
+    }
+
+    /** Add a node of value val before the index-th node in the linked list.
+    /// If index equals to the length of linked list, the node will be appended to the end of linked list.
+    /// If index is greater than the length, the node will not be inserted. */
+    void addAtIndex(int index, int val)
+    {
+        LinkedNode * node = m_Head;
+        for (int i = 0; i < index; i++)
+        {
+            if (node == nullptr) return;
+            node = node->next;
+        }
+        if (node != nullptr)
+        {
+            LinkedNode * new_node = new LinkedNode(val);
+            LinkedNode * prev_node = node->prev;
+            new_node->prev = prev_node;
+            new_node->next = node;
+            if (prev_node != nullptr) prev_node->next = new_node;
+            node->prev = new_node;
+            if (node == m_Head) m_Head = new_node;
+        }
+        else
+        {
+            addAtTail(val);
+        }
+    }
+
+    /** Delete the index-th node in the linked list, if the index is valid. */
+    void deleteAtIndex(int index)
+    {
+        LinkedNode * node = m_Head;
+        for (int i = 0; i < index; i++)
+        {
+            if (node == nullptr) return;
+            node = node->next;
+        }
+        if (node != nullptr)
+        {
+            LinkedNode * prev_node = node->prev;
+            LinkedNode * next_node = node->next;
+            if (prev_node != nullptr) prev_node->next = next_node;
+            if (next_node != nullptr) next_node->prev = prev_node;
+            if (node == m_Head) m_Head = next_node;
+            if (node == m_Tail) m_Tail = prev_node;
+            delete node;
+        }
+    }
+};
+
+/// <summary>
+/// Leet code #622. Design Circular Queue
+/// 
+/// Design your implementation of the circular queue. The circular queue 
+/// is a linear data structure in which the operations are performed based 
+/// on FIFO (First In First Out) principle and the last position is 
+/// connected back to the first position to make a circle. It is also 
+/// called "Ring Buffer".
+///
+/// One of the benefits of the circular queue is that we can make use of 
+/// the spaces in front of the queue. In a normal queue, once the queue 
+/// becomes full, we cannot insert the next element even if there is a 
+/// space in front of the queue. But using the circular queue, we can 
+/// use the space to store new values.
+///
+/// Your implementation should support following operations:
+///
+/// MyCircularQueue(k): Constructor, set the size of the queue to be k.
+/// Front: Get the front item from the queue. If the queue is empty, 
+/// return -1.
+/// Rear: Get the last item from the queue. If the queue is empty, 
+/// return -1.
+/// enQueue(value): Insert an element into the circular queue. Return 
+/// true if the operation is successful.
+/// deQueue(): Delete an element from the circular queue. Return true 
+/// if the operation is successful.
+/// isEmpty(): Checks whether the circular queue is empty or not.
+/// isFull(): Checks whether the circular queue is full or not.
+///
+/// Example:
+///
+/// MyCircularQueue circularQueue = new MycircularQueue(3); 
+/// circularQueue.enQueue(1);  // return true
+/// circularQueue.enQueue(2);  // return true
+/// circularQueue.enQueue(3);  // return true
+/// circularQueue.enQueue(4);  // return false, the queue is full
+/// circularQueue.Rear();  // return 3
+/// circularQueue.isFull();  // return true
+/// circularQueue.deQueue();  // return true
+/// circularQueue.enQueue(4);  // return true
+/// circularQueue.Rear();  // return 4
+/// Note:
+/// 
+/// All values will be in the range of [0, 1000].
+/// The number of operations will be in the range of [1, 1000].
+/// Please do not use the built-in Queue library.
+/// </summary>
+class MyCircularQueue
+{
+private:
+    vector<int>m_Queue;
+    int m_First = 0;
+    int m_Last = 0;
+    int m_Count = 0;
+public:
+    /** Initialize your data structure here. Set the size of the queue to be k. */
+    MyCircularQueue(int k)
+    {
+        m_Queue = vector<int>(k);
+    }
+
+    /** Insert an element into the circular queue. Return true if the operation is successful. */
+    bool enQueue(int value)
+    {
+        if (m_Count == m_Queue.size()) return false;
+        m_Queue[m_Last] = value;
+        m_Last = (m_Last + 1) % m_Queue.size();
+        m_Count++;
+        return true;
+    }
+
+
+    /** Delete an element from the circular queue. Return true if the operation is successful. */
+    bool deQueue()
+    {
+        if (m_Count == 0) return false;
+        m_First = (m_First + 1) % m_Queue.size();
+        m_Count--;
+        return true;
+    }
+    /** Get the front item from the queue. */
+    int Front()
+    {
+        if (m_Count == 0) return -1;
+        return m_Queue[m_First];
+    }
+
+    /** Get the last item from the queue. */
+    int Rear()
+    {
+        if (m_Count == 0) return -1;
+        return m_Queue[(m_Last - 1 + m_Queue.size()) % m_Queue.size()];
+    }
+
+    /** Checks whether the circular queue is empty or not. */
+    bool isEmpty()
+    {
+        return (m_Count == 0);
+    }
+
+    /** Checks whether the circular queue is full or not. */
+    bool isFull()
+    {
+        return (m_Count == m_Queue.size());
+    }
+};
+
+/// <summary>
+/// Leet code #641. Design Circular Deque
+/// 
+/// Design your implementation of the circular double-ended queue (deque).
+///
+/// Your implementation should support following operations:
+///
+/// MyCircularDeque(k): Constructor, set the size of the deque to be k.
+/// insertFront(): Adds an item at the front of Deque. Return true if the 
+/// operation is successful.
+/// insertLast(): Adds an item at the rear of Deque. Return true if the 
+/// operation is successful.
+/// deleteFront(): Deletes an item from the front of Deque. Return true 
+/// if the operation is successful.
+/// deleteLast(): Deletes an item from the rear of Deque. Return true if 
+/// the operation is successful.
+/// getFront(): Gets the front item from the Deque. If the deque is empty, 
+/// return -1.
+/// getRear(): Gets the last item from Deque. If the deque is empty, 
+/// return -1.
+/// isEmpty(): Checks whether Deque is empty or not. 
+/// isFull(): Checks whether Deque is full or not.
+///
+///
+/// Example:
+///
+/// MyCircularDeque circularDeque = new MycircularDeque(3); 
+/// circularDeque.insertLast(1);			// return true
+/// circularDeque.insertLast(2);			// return true
+/// circularDeque.insertFront(3);			// return true
+/// circularDeque.insertFront(4);			// return false, if full
+/// circularDeque.getRear();  			    // return 2
+/// circularDeque.isFull();				    // return true
+/// circularDeque.deleteLast();			    // return true
+/// circularDeque.insertFront(4);			// return true
+/// circularDeque.getFront();			    // return 4
+///
+/// Note:
+///
+/// All values will be in the range of [0, 1000].
+/// The number of operations will be in the range of [1, 1000].
+/// Please do not use the built-in Deque library.
+/// </summary>
+class MyCircularDeque
+{
+private:
+    vector<int>m_Queue;
+    int m_First = 0;
+    int m_Last = 0;
+    int m_Count = 0;
+public:
+    /** Initialize your data structure here. Set the size of the deque to be k. */
+    MyCircularDeque(int k)
+    {
+        m_Queue = vector<int>(k);
+    }
+
+    /** Adds an item at the front of Deque. Return true if the operation is successful. */
+    bool insertFront(int value)
+    {
+        if (m_Count == m_Queue.size()) return false;
+        m_First = (m_First - 1 + m_Queue.size()) % m_Queue.size();
+        m_Queue[m_First] = value;
+        m_Count++;
+        return true;
+    }
+
+    /** Adds an item at the rear of Deque. Return true if the operation is successful. */
+    bool insertLast(int value)
+    {
+        if (m_Count == m_Queue.size()) return false;
+        m_Queue[m_Last] = value;
+        m_Last = (m_Last + 1) % m_Queue.size();
+        m_Count++;
+        return true;
+    }
+
+    /** Deletes an item from the front of Deque. Return true if the operation is successful. */
+    bool deleteFront()
+    {
+        if (m_Count == 0) return false;
+        m_First = (m_First + 1) % m_Queue.size();
+        m_Count--;
+        return true;
+    }
+
+    /** Deletes an item from the rear of Deque. Return true if the operation is successful. */
+    bool deleteLast()
+    {
+        if (m_Count == 0) return false;
+        m_Last = (m_Last - 1 + m_Queue.size()) % m_Queue.size();
+        m_Count--;
+        return true;
+    }
+
+    /** Get the front item from the deque. */
+    int getFront()
+    {
+        if (m_Count == 0) return -1;
+        return m_Queue[m_First];
+    }
+
+    /** Get the last item from the deque. */
+    int getRear()
+    {
+        if (m_Count == 0) return -1;
+        return m_Queue[(m_Last - 1 + m_Queue.size()) % m_Queue.size()];
+    }
+
+    /** Checks whether the circular deque is empty or not. */
+    bool isEmpty()
+    {
+        return (m_Count == 0);
+    }
+
+    /** Checks whether the circular deque is full or not. */
+    bool isFull()
+    {
+        return (m_Count == m_Queue.size());
+    }
+};
+
+/// <summary>
 /// Leet code #1348. Tweet Counts Per Frequency
 ///
 /// Medium
@@ -4040,6 +5419,1630 @@ public:
             result.push_back(count);
         }
         return result;
+    }
+};
+
+/// <summary>
+/// Leet code #1352. Product of the Last K Numbers
+///
+/// Medium
+///
+/// Implement the class ProductOfNumbers that supports two methods:
+///
+/// 1. add(int num)
+///
+/// Adds the number num to the back of the current list of numbers.
+///
+/// 2. getProduct(int k)
+///
+/// Returns the product of the last k numbers in the current list.
+/// You can assume that always the current list has at least k numbers.
+/// At any time, the product of any contiguous sequence of numbers will 
+/// fit into a single 32-bit integer without overflowing.
+/// 
+/// Example:
+///
+/// Input
+/// ["ProductOfNumbers","add","add","add","add","add","getProduct",
+///  "getProduct","getProduct","add","getProduct"]
+///  [[],[3],[0],[2],[5],[4],[2],[3],[4],[8],[2]]
+///
+/// Output
+/// [null,null,null,null,null,null,20,40,0,null,32]
+///
+/// Explanation
+/// ProductOfNumbers productOfNumbers = new ProductOfNumbers();
+/// productOfNumbers.add(3);        // [3]
+/// productOfNumbers.add(0);        // [3,0]
+/// productOfNumbers.add(2);        // [3,0,2]
+/// productOfNumbers.add(5);        // [3,0,2,5]
+/// productOfNumbers.add(4);        // [3,0,2,5,4]
+/// productOfNumbers.getProduct(2); // return 20. The product of the 
+///                                 // last 2 numbers is 5 * 4 = 20
+/// productOfNumbers.getProduct(3); // return 40. The product of the 
+///                                 // last 3 numbers is 2 * 5 * 4 = 40
+/// productOfNumbers.getProduct(4); // return 0. The product of the last 4 
+///                                 // numbers is 0 * 2 * 5 * 4 = 0
+/// productOfNumbers.add(8);        // [3,0,2,5,4,8]
+/// productOfNumbers.getProduct(2); // return 32. The product of the 
+///                                 // last 2 numbers is 4 * 8 = 32 
+///
+/// Constraints:
+/// 1. There will be at most 40000 operations considering both add and 
+///    getProduct.
+/// 2. 0 <= num <= 100
+/// 3.  1 <= k <= 40000
+/// </summary>
+class ProductOfNumbers
+{
+private:
+    vector<int> m_product;
+public:
+    ProductOfNumbers()
+    {
+    }
+
+    void add(int num)
+    {
+        if (num == 0)
+        {
+            m_product.clear();
+        }
+        else
+        {
+            if (m_product.empty())
+            {
+                m_product.push_back(num);
+            }
+            else
+            {
+                m_product.push_back(m_product.back() * num);
+            }
+        }
+    }
+
+    int getProduct(int k)
+    {
+        if ((int)m_product.size() < k)
+        {
+            return 0;
+        }
+        else if (m_product.size() == k)
+        {
+            return m_product.back();
+        }
+        else
+        {
+            return m_product.back() / m_product[m_product.size() - k - 1];
+        }
+    }
+};
+
+/// <summary>
+/// Leet code #933. Number of Recent Calls
+/// 
+/// Write a class RecentCounter to count recent requests.
+///
+/// It has only one method: ping(int t), where t represents some time in 
+/// milliseconds.
+///
+/// Return the number of pings that have been made from 3000 milliseconds 
+/// ago until now.
+///
+/// Any ping with time in [t - 3000, t] will count, including the current ping.
+///
+/// It is guaranteed that every call to ping uses a strictly larger value of 
+/// t than before.
+///
+/// Example 1:
+///
+/// Input: inputs = ["RecentCounter","ping","ping","ping","ping"], 
+/// inputs = [[],[1],[100],[3001],[3002]]
+/// Output: [null,1,2,3,3]
+///  
+/// 
+/// Note:
+///
+/// Each test case will have at most 10000 calls to ping.
+/// Each test case will call ping with strictly increasing values of t.
+/// Each call to ping will have 1 <= t <= 10^9.
+/// </summary>
+class RecentCounter {
+private:
+    map<int, int> m_PingCount;
+    int m_Total;
+
+public:
+    RecentCounter()
+    {
+        m_Total = 0;
+    }
+
+    int ping(int t)
+    {
+        m_Total++;
+        m_PingCount[t] = m_Total;
+        auto itr = m_PingCount.lower_bound(t - 3000);
+        int prev = 0;
+        if (itr == m_PingCount.begin()) prev = 0;
+        else
+        {
+            itr--;
+            prev = itr->second;
+        }
+        return m_Total - prev;
+    }
+};
+
+/// <summary>
+/// Leet code #677. Map Sum Pairs
+/// 
+/// Implement a MapSum class with insert, and sum methods.
+///
+/// For the method insert, you'll be given a pair of (string, integer). 
+/// The string represents the key and the integer represents the value. 
+/// If the key already existed, then the original key-value pair will be 
+/// overridden to the new one.
+///
+/// For the method sum, you'll be given a string representing the prefix, 
+/// and you need to return the sum of all the pairs' value whose key 
+/// starts with the prefix.
+///
+/// Example 1:
+/// Input: insert("apple", 3), Output: Null
+/// Input: sum("ap"), Output: 3
+/// Input: insert("app", 2), Output: Null
+/// Input: sum("ap"), Output: 5
+/// </summary>
+class MapSum
+{
+private:
+    map<string, int> m_MapValue;
+public:
+    // Initialize your data structure here.
+    MapSum()
+    {
+    }
+
+    // insert a value
+    void insert(string key, int val)
+    {
+        m_MapValue[key] = val;
+    }
+
+    // get the sum 
+    int sum(string prefix)
+    {
+        int sum = 0;
+        map<string, int>::iterator itr = m_MapValue.lower_bound(prefix);
+        while (itr != m_MapValue.end())
+        {
+            if (itr->first.substr(0, prefix.size()) == prefix)
+            {
+                sum += itr->second;
+            }
+            else
+            {
+                break;
+            }
+            ++itr;
+        }
+        return sum;
+    }
+};
+
+/// <summary>
+/// Leet code #1274. Number of Ships in a Rectangle
+/// 
+/// On the sea represented by a cartesian plane, each ship is located at 
+/// an integer point, and each integer point may contain at most 1 ship.
+///
+/// You have a function Sea.hasShips(topRight, bottomLeft) which takes 
+/// two points as arguments and returns true if and only if there is at 
+/// least one ship in the rectangle represented by the two points, 
+/// including on the boundary.
+///
+/// Given two points, which are the top right and bottom left corners of 
+/// a rectangle, return the number of ships present in that rectangle.  
+/// It is guaranteed that there are at most 10 ships in that rectangle.
+///
+/// Submissions making more than 400 calls to hasShips will be judged 
+/// Wrong Answer.  Also, any solutions that attempt to circumvent the 
+/// judge will result in disqualification.
+/// 
+/// 
+/// Example :
+/// 
+/// Input: 
+/// ships = [[1,1],[2,2],[3,3],[5,5]], topRight = [4,4], bottomLeft = [0,0]
+/// Output: 3
+/// Explanation: From [0,0] to [4,4] we can count 3 ships within the range.
+///
+/// Constraints:
+/// 1. On the input ships is only given to initialize the map internally. 
+/// 2. You must solve this problem "blindfolded". In other words, you must 
+///    find the answer using the given hasShips API, without knowing the 
+///	   ships position.
+/// 3. 0 <= bottomLeft[0] <= topRight[0] <= 1000
+/// 4. 0 <= bottomLeft[1] <= topRight[1] <= 1000
+/// </summary>
+class Sea
+{
+private:
+    vector<vector<int>> m_ship;
+
+    // Return true if there is ship within rectangle.
+    bool hasShips(vector<int>& topRight, vector<int>& bottomLeft)
+    {
+        for (size_t i = 0; i < m_ship.size(); i++)
+        {
+            if (m_ship[i][0] >= bottomLeft[0] && m_ship[i][0] <= topRight[0] &&
+                m_ship[i][1] >= bottomLeft[1] && m_ship[i][1] <= topRight[1])
+            {
+                return true;
+            }
+        }
+        return false;
+    };
+public:
+    // Constructure on ships.
+    Sea(vector<vector<int>>& ship)
+    {
+        m_ship = ship;
+    };
+
+    // Return true if there is ship within rectangle.
+    int countShips(vector<int>& topRight, vector<int>& bottomLeft)
+    {
+        int result = 0;
+        queue<pair<vector<int>, vector<int>>> search;
+        search.push(make_pair(topRight, bottomLeft));
+
+        while (!search.empty())
+        {
+            vector<int> top_right = search.front().first;
+            vector<int> bottom_left = search.front().second;
+            search.pop();
+
+            if (!hasShips(top_right, bottom_left)) continue;
+
+            if (top_right == bottom_left)
+            {
+                result++;
+            }
+            else
+            {
+                if (top_right[0] != bottom_left[0])
+                {
+                    vector<int> middle = { (bottom_left[0] + top_right[0]) / 2, top_right[1] };
+                    search.push(make_pair(middle, bottom_left));
+                    middle = { (bottom_left[0] + top_right[0]) / 2 + 1, bottom_left[1] };
+                    search.push(make_pair(top_right, middle));
+                }
+                else
+                {
+                    vector<int> middle = { top_right[0], (bottom_left[1] + top_right[1]) / 2 };
+                    search.push(make_pair(middle, bottom_left));
+                    middle = { bottom_left[0], (bottom_left[1] + top_right[1]) / 2 + 1 };
+                    search.push(make_pair(top_right, middle));
+                }
+            }
+        }
+        return result;
+    };
+};
+
+/// <summary>
+/// Leet code #208 Implement Trie (Prefix Tree)
+///
+/// Medium
+///
+/// Implement a trie with insert, search, and startsWith methods.
+///
+/// Example:
+///
+/// Trie trie = new Trie();
+///
+/// trie.insert("apple");
+/// trie.search("apple");   // returns true
+/// trie.search("app");     // returns false
+/// trie.startsWith("app"); // returns true
+/// trie.insert("app");   
+/// trie.search("app");     // returns true
+/// Note:
+///
+/// 1. You may assume that all inputs are consist of lowercase letters a-z.
+/// 2. All inputs are guaranteed to be non-empty strings.
+/// </summary>
+class Trie
+{
+private:
+    bool is_end;
+    vector<Trie *> children;
+public:
+    Trie()
+    {
+        children = vector<Trie *>(26, nullptr);
+        is_end = false;
+    };
+
+    ~Trie()
+    {
+        for (size_t i = 0; i < children.size(); i++)
+        {
+            if (children[i] != nullptr) delete children[i];
+        }
+    }
+
+    void insert(string word)
+    {
+        if (word.empty())
+        {
+            is_end = true;
+        }
+        else
+        {
+            int i = word[0] - 'a';
+            if (children[i] == nullptr)
+            {
+                children[i] = new Trie();
+            }
+            children[i]->insert(word.substr(1));
+        }
+    };
+
+    bool search(string word)
+    {
+        if (word.empty())
+        {
+            return is_end;
+        }
+        else
+        {
+            int i = word[0] - 'a';
+            if (children[i] == nullptr)
+            {
+                return false;
+            }
+            return children[i]->search(word.substr(1));
+        }
+    }
+
+    bool startsWith(string prefix)
+    {
+        if (prefix.empty())
+        {
+            return true;
+        }
+        else
+        {
+            int i = prefix[0] - 'a';
+            if (children[i] == nullptr)
+            {
+                return false;
+            }
+            return children[i]->startsWith(prefix.substr(1));
+        }
+    };
+};
+
+/// <summary>
+/// Leet code #745. Prefix and Suffix Search
+/// 
+/// Given many words, words[i] has weight i.
+/// Design a class WordFilter that supports one function, 
+/// WordFilter.f(String prefix, String suffix). It will return the word with 
+/// given prefix and suffix with maximum weight. If no word exists, return -1.
+///
+/// Examples:
+/// Input:
+/// WordFilter(["apple"])
+/// WordFilter.f("a", "e") // returns 0
+/// WordFilter.f("b", "") // returns -1
+/// Note:
+/// words has length in range [1, 15000].
+/// For each test case, up to words.length queries WordFilter.f may be made.
+/// words[i] has length in range [1, 10].
+/// prefix, suffix have lengths in range [0, 10].
+/// words[i] and prefix, suffix queries consist of lowercase letters only.
+/// </summary>
+class WordFilter {
+    unordered_map<string, int> m_WordMap;
+public:
+    WordFilter(vector<string> words)
+    {
+        for (size_t k = 0; k < words.size(); k++)
+        {
+            for (size_t i = 0; i <= 10 && i <= words[k].size(); i++)
+            {
+                string prefix = words[k].substr(0, i);
+                for (size_t j = 0; j <= 10 && j <= words[k].size(); j++)
+                {
+                    string suffix = words[k].substr(words[k].size() - j, j);
+                    m_WordMap[prefix + "#" + suffix] = k;
+                }
+            }
+        }
+    }
+
+    int f(string prefix, string suffix)
+    {
+        if (m_WordMap.count(prefix + "#" + suffix) > 0)
+        {
+            return m_WordMap[prefix + "#" + suffix];
+        }
+        else
+        {
+            return -1;
+        }
+    }
+};
+
+/// <summary>
+/// Leet code #642. Design Search Autocomplete System
+/// 
+/// Design a search autocomplete system for a search engine. Users may 
+/// input a sentence (at least one word and end with a special character 
+/// '#'). For each character they type except '#', you need to return the 
+/// top 3 historical hot sentences that have prefix the same as the part 
+/// of sentence already typed. Here are the specific rules:
+/// The hot degree for a sentence is defined as the number of times a user 
+/// typed the exactly same sentence before. 
+/// The returned top 3 hot sentences should be sorted by hot degree (The 
+/// first is the hottest one). If several sentences have the same degree 
+/// of hot, you need to use ASCII-code order (smaller one appears first). 
+/// If less than 3 hot sentences exist, then just return as many as you 
+/// can.
+/// When the input is a special character, it means the sentence ends, and 
+/// in this case, you need to return an empty list.
+///
+/// Your job is to implement the following functions:
+/// The constructor function:
+/// AutocompleteSystem(String[] sentences, int[] times): This is the 
+/// constructor. The input is historical data. Sentences is a string array 
+/// consists of previously typed sentences. Times is the corresponding 
+/// times a sentence has been typed. Your system should record these 
+/// historical data.
+/// Now, the user wants to input a new sentence. The following function 
+/// will provide the next character the user types: 
+/// List<String> input(char c): The input c is the next character typed by 
+/// the user. The character will only be lower-case letters ('a' to 'z'), 
+/// blank space (' ') or a special character ('#'). Also, the previously 
+/// typed sentence should be recorded in your system. The output will be 
+/// the top 3 historical hot sentences that have prefix the same as the 
+/// part of sentence already typed.
+///
+/// Example:
+/// Operation: AutocompleteSystem(["i love you", "island","ironman", 
+/// "i love leetcode"], [5,3,2,2]) 
+/// The system have already tracked down the following sentences and 
+/// their corresponding times: 
+/// "i love you" : 5 times 
+/// "island" : 3 times 
+/// "ironman" : 2 times 
+/// "i love leetcode" : 2 times 
+/// Now, the user begins another search: 
+///
+/// Operation: input('i') 
+/// Output: ["i love you", "island","i love leetcode"] 
+/// Explanation: 
+/// There are four sentences that have prefix "i". Among them, "ironman" 
+/// and "i love leetcode" have same hot degree. Since ' ' has ASCII code 32
+/// and 'r' has ASCII code 114, "i love leetcode" should be in front of 
+/// "ironman". Also we only need to output top 3 hot sentences, so 
+/// "ironman" will be ignored. 
+///
+/// Operation: input(' ') 
+/// Output: ["i love you","i love leetcode"] 
+/// Explanation: 
+/// There are only two sentences that have prefix "i ". 
+/// 
+/// Operation: input('a') 
+/// Output: [] 
+/// Explanation: 
+/// There are no sentences that have prefix "i a". 
+/// 
+/// Operation: input('#') 
+/// Output: [] 
+/// Explanation: 
+/// The user finished the input, the sentence "i a" should be saved as a 
+/// historical sentence in system. And the following input will be counted 
+/// as a new search. 
+///
+/// Note:
+/// 1. The input sentence will always start with a letter and end with '#',
+///    and only one blank space will exist between two words. 
+/// 2. The number of complete sentences that to be searched won't exceed 
+///    100. 
+/// 3. The length of each sentence including those in the historical data 
+///    won't exceed 100. 
+/// 4. Please use double-quote instead of single-quote when you write test 
+///    cases even for a character input.
+/// 5. Please remember to RESET your class variables declared in class 
+///    AutocompleteSystem, as static/class variables are persisted across 
+///    multiple test cases. Please see here for more details.
+/// </summary>
+class AutocompleteSystem
+{
+private:
+    struct Trie
+    {
+        set<pair<int, string>> m_hot;
+        vector<Trie *> children;
+
+        Trie()
+        {
+            children = vector<Trie *>(27, nullptr);
+        };
+
+        ~Trie()
+        {
+            for (size_t i = 0; i < children.size(); i++)
+            {
+                if (children[i] != nullptr) delete children[i];
+            }
+        }
+
+        void add_sentence(string sentence, int times)
+        {
+            pair<int, string> prev_str = make_pair(-times + 1, sentence);
+            if (m_hot.count(prev_str) > 0)
+            {
+                m_hot.erase(prev_str);
+            }
+            m_hot.insert(make_pair(-times, sentence));
+            if (m_hot.size() > 3) m_hot.erase(prev(m_hot.end()));
+        }
+
+        vector<string> get_hot_sentences()
+        {
+            vector<string> result;
+            for (auto itr : m_hot)
+            {
+                result.push_back(itr.second);
+            }
+            return result;
+        }
+
+        Trie * next(char ch)
+        {
+            if (ch == '#') return nullptr;
+            int i = ch - 'a';
+            if (ch == ' ') i = 26;
+            if (children[i] == nullptr)
+            {
+                children[i] = new Trie();
+            }
+            return children[i];
+        }
+    };
+
+    Trie m_root;
+    unordered_map<string, int> m_sentence_freq;
+    vector<Trie*> m_arr;
+    string m_sentence;
+public:
+    AutocompleteSystem(vector<string> sentences, vector<int> times)
+    {
+        for (size_t i = 0; i < sentences.size(); i++)
+        {
+            m_sentence_freq[sentences[i]] = times[i];
+            for (size_t j = 0; j < sentences[i].size(); j++)
+            {
+                if (j == 0) m_arr.push_back(m_root.next(sentences[i][j]));
+                else
+                {
+                    m_arr.push_back(m_arr.back()->next(sentences[i][j]));
+                }
+            }
+            for (size_t j = 0; j < m_arr.size(); j++)
+            {
+                m_arr[j]->add_sentence(sentences[i], times[i]);
+            }
+            m_arr.clear();
+        }
+    }
+
+    vector<string> input(char c)
+    {
+        vector<string> result;
+        if (c == '#')
+        {
+            m_sentence_freq[m_sentence]++;
+            for (size_t i = 0; i < m_arr.size(); i++)
+            {
+                m_arr[i]->add_sentence(m_sentence, m_sentence_freq[m_sentence]);
+            }
+            m_arr.clear();
+            m_sentence.clear();
+        }
+        else
+        {
+            if (m_arr.empty())
+            {
+                m_arr.push_back(m_root.next(c));
+            }
+            else
+            {
+                m_arr.push_back(m_arr.back()->next(c));
+            }
+            m_sentence.push_back(c);
+            result = m_arr.back()->get_hot_sentences();
+        }
+        return result;
+    }
+};
+
+/// <summary>
+/// Leet code #1032. Stream of Characters
+/// 
+/// Implement the StreamChecker class as follows:
+///
+/// StreamChecker(words): Constructor, init the data structure with the given 
+/// words.
+/// query(letter): returns true if and only if for some k >= 1, the last k 
+/// characters queried (in order from oldest to newest, including this letter 
+/// just queried) spell one of the words in the given list.
+/// 
+/// Example:
+///
+/// // init the dictionary.
+/// StreamChecker streamChecker = new StreamChecker(["cd","f","kl"]); 
+/// 
+/// streamChecker.query('a'); // return false
+/// streamChecker.query('b'); // return false
+/// streamChecker.query('c'); // return false
+/// streamChecker.query('d'); // return true, because 'cd' is in the wordlist
+/// streamChecker.query('e'); // return false
+/// streamChecker.query('f'); // return true, because 'f' is in the wordlist
+/// streamChecker.query('g'); // return false
+/// streamChecker.query('h'); // return false
+/// streamChecker.query('i'); // return false
+/// streamChecker.query('j'); // return false
+/// streamChecker.query('k'); // return false
+/// streamChecker.query('l'); // return true, because 'kl' is in the wordlist
+///
+/// Note:
+///
+/// 1. 1 <= words.length <= 2000
+/// 2. 1 <= words[i].length <= 2000
+/// 3. Words will only consist of lowercase English letters.
+/// 4. Queries will only consist of lowercase English letters.
+/// 5. The number of queries is at most 40000.
+/// </summary>
+class StreamChecker {
+private:
+    struct Trie
+    {
+        bool is_end;
+        vector<Trie *> children;
+
+        Trie()
+        {
+            is_end = false;
+            children = vector<Trie *>(26, nullptr);
+        };
+
+        ~Trie()
+        {
+            for (size_t i = 0; i < children.size(); i++)
+            {
+                if (children[i] != nullptr) delete children[i];
+            }
+        }
+
+        void insert(string word)
+        {
+            if (word.empty())
+            {
+                is_end = true;
+            }
+            else
+            {
+                int i = word[0] - 'a';
+                if (children[i] == nullptr)
+                {
+                    children[i] = new Trie();
+                }
+                children[i]->insert(word.substr(1));
+            }
+        };
+
+        Trie * next(char ch)
+        {
+            return children[ch - 'a'];
+        }
+    };
+
+    Trie m_root;
+    size_t m_max_len = 0;
+    deque<char> m_buffer;
+
+public:
+    StreamChecker(vector<string>& words)
+    {
+        for (size_t i = 0; i < words.size(); i++)
+        {
+            string word = words[i];
+            std::reverse(word.begin(), word.end());
+            m_root.insert(word);
+            m_max_len = max(m_max_len, word.size());
+        }
+    }
+
+    bool query(char letter)
+    {
+        m_buffer.push_front(letter);
+        if (m_buffer.size() > m_max_len) m_buffer.pop_back();
+        Trie * trie = nullptr;
+        for (size_t i = 0; i < m_buffer.size(); i++)
+        {
+            if (i == 0) trie = m_root.next(m_buffer[i]);
+            else
+            {
+                trie = trie->next(m_buffer[i]);
+            }
+            if (trie == nullptr) return false;
+            if (trie->is_end) return true;
+        }
+        return false;
+    }
+};
+
+/// <summary>
+/// Leet code #288. Unique Word Abbreviation    
+/// 
+/// An abbreviation of a word follows the form <first letter><number><last letter>. 
+/// Below are some examples of word abbreviations: 
+/// a) it                      --> it    (no abbreviation)
+///      1
+/// b) d|o|g                   --> d1g
+///              1    1  1
+///      1---5----0----5--8
+/// c) i|nternationalizatio|n  --> i18n
+///              1
+///      1---5----0
+/// d) l|ocalizatio|n          --> l10n
+///
+/// Assume you have a dictionary and given a word, find whether its 
+/// abbreviation is unique in the dictionary. A word's abbreviation is unique 
+/// if no other word from the dictionary has the same abbreviation.
+/// Example: 
+/// Given dictionary = [ "deer", "door", "cake", "card" ]
+/// isUnique("dear") -> false
+/// isUnique("cart") -> true
+/// isUnique("cane") -> false
+/// isUnique("make") -> true
+/// </summary>
+class ValidWordAbbr
+{
+private:
+    unordered_map<string, unordered_set<string>> m_AbbrMap;
+public:
+    ValidWordAbbr(vector<string> &dictionary)
+    {
+        for (string word : dictionary)
+        {
+            string abbr;
+            if (word.size() > 0) abbr.push_back(word[0]);
+            if (word.size() > 1) abbr.push_back(word[word.size() - 1]);
+            if (word.size() > 2) abbr.insert(1, to_string(word.size() - 2));
+            m_AbbrMap[abbr].insert(word);
+        }
+    }
+    bool isUnique(string word)
+    {
+        string abbr;
+        if (word.size() > 0) abbr.push_back(word[0]);
+        if (word.size() > 1) abbr.push_back(word[word.size() - 1]);
+        if (word.size() > 2) abbr.insert(1, to_string(word.size() - 2));
+
+        if ((m_AbbrMap.find(abbr) == m_AbbrMap.end()) ||
+            ((m_AbbrMap[abbr].size()) == 1 && (m_AbbrMap[abbr].count(word) == 1)))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+};
+
+/// <summary>
+/// Leet code #271. Encode and Decode Strings  
+/// 
+/// Design an algorithm to encode a list of strings to a string. The encoded 
+/// string is then sent 
+/// over the network and is decoded back to the original list of strings.
+/// Machine 1 (sender) has the function: 
+/// string encode(vector<string> strs) 
+/// {
+///  // ... your code
+///  return encoded_string;
+/// }
+/// Machine 2 (receiver) has the function: vector<string> decode(string s) {
+///   //... your code 
+///  return strs;
+/// }
+/// So Machine 1 does: 
+/// string encoded_string = encode(strs);
+/// and Machine 2 does: 
+/// vector<string> strs2 = decode(encoded_string);
+/// strs2 in Machine 2 should be the same as strs in Machine 1. 
+/// Implement the encode and decode methods. 
+/// Note:
+/// The string may contain any possible characters out of 256 valid ascii 
+/// characters. Your algorithm should be 
+/// generalized enough to work on any possible characters.
+/// Do not use class member/global/static variables to store states. 
+/// Your encode and decode algorithms should be stateless. 
+/// Do not rely on any library method such as eval or serialize methods. 
+/// You should implement your own encode/decode algorithm.
+/// </summary>
+class Codec
+{
+public:
+
+    // Encodes a list of strings to a single string.
+    string encode(vector<string>& strs)
+    {
+        string result;
+        for (size_t i = 0; i < strs.size(); i++)
+        {
+            result.push_back('(');
+            result.append(to_string(strs[i].size()));
+            result.push_back(')');
+            result.append(strs[i]);
+        }
+        return result;
+    }
+
+    // Decodes a single string to a list of strings.
+    vector<string> decode(string s)
+    {
+        vector<string> result;
+        int count = 0;
+        string word;
+        for (size_t i = 0; i < s.size(); i++)
+        {
+            if (count > 0)
+            {
+                word.push_back(s[i]);
+                count--;
+                if (count == 0) result.push_back(word);
+            }
+            else if (s[i] == '(')
+            {
+                word.clear();
+            }
+            else if (s[i] == ')')
+            {
+                count = stoi(word);
+                word.clear();
+                if (count == 0) result.push_back(word);
+            }
+            else
+            {
+                word.push_back(s[i]);
+            }
+        }
+        return result;
+    }
+};
+
+/// <summary>
+/// Leet code #588. Design In-Memory File System
+/// 
+/// Design an in-memory file system to simulate the following functions:
+/// ls: Given a path in string format. If it is a file path, return a list 
+/// that only contains this file's name. If it is a directory path, return 
+/// the list of file and directory names in this directory. Your output 
+/// (file and directory names together) should in lexicographic order.
+/// mkdir: Given a directory path that does not exist, you should make a 
+/// new directory according to the path. If the middle directories in the 
+/// path don't exist either, you should create them as well. This function 
+/// has void return type. 
+/// addContentToFile: Given a file path and file content in string format. 
+/// If the file doesn't exist, you need to create that file containing given 
+/// content. If the file already exists, you need to append given content to 
+/// original content. This function has void return type.
+/// readContentFromFile: Given a file path, return its content in string 
+/// format.
+/// Example:
+/// Input: 
+/// ["FileSystem","ls","mkdir","addContentToFile","ls","readContentFromFile"]
+/// [[],["/"],["/a/b/c"],["/a/b/c/d","hello"],["/"],["/a/b/c/d"]]
+/// Output:
+/// [null,[],null,null,["a"],"hello"]
+/// Explanation:
+/// 
+/// Note:
+/// 1. You can assume all file or directory paths are absolute paths which 
+///    begin with / and do not end with / except that the path is just "/".
+/// 2. You can assume that all operations will be passed valid parameters and
+///    users will not attempt to retrieve file content or list a directory or 
+///    file that does not exist.
+/// 3. You can assume that all directory names and file names only contain 
+///    lower-case letters, and same names won't exist in the same directory.
+/// </summary>
+class FileSystem
+{
+private:
+    struct FileInfo
+    {
+        string path;
+        map<string, FileInfo*> directory;
+        string content;
+        bool is_file;
+        FileInfo(string p, bool f = false) : path(p), is_file(f) {}
+    };
+    FileInfo *root = nullptr;
+
+    vector<string> split_path(string path)
+    {
+        vector<string> result;
+        size_t first = 0;
+        size_t last = 0;
+        while (last <= path.size())
+        {
+            if (last == path.size() || path[last] == '/')
+            {
+                result.push_back(path.substr(first, last - first));
+                first = last + 1;
+            }
+            last++;
+        }
+        return result;
+    }
+
+    FileInfo * get_directory(string &path)
+    {
+        vector<string> paths = split_path(path);
+        FileInfo * ptr = root;
+        for (size_t i = 0; i < paths.size(); i++)
+        {
+            if (!paths[i].empty())
+            {
+                if (ptr->directory.count(paths[i]) == 0)
+                {
+                    ptr->directory[paths[i]] = new FileInfo(paths[i]);
+                }
+                ptr = ptr->directory[paths[i]];
+            }
+        }
+        return ptr;
+    }
+
+public:
+    FileSystem()
+    {
+        root = new FileInfo("", false);
+    }
+    ~FileSystem()
+    {
+        queue<FileInfo *> process_queue;
+        process_queue.push(root);
+        while (process_queue.empty())
+        {
+            FileInfo * ptr = process_queue.front();
+            process_queue.pop();
+            for (auto itr : ptr->directory)
+            {
+                process_queue.push(itr.second);
+            }
+            delete ptr;
+        }
+        root = nullptr;
+    }
+
+    vector<string> ls(string path)
+    {
+        vector<string> result;
+        FileInfo * ptr;
+        ptr = get_directory(path);
+        if (ptr->is_file)
+        {
+            result.push_back(ptr->path);
+        }
+        else
+        {
+            for (auto itr : ptr->directory)
+            {
+                result.push_back(itr.first);
+            }
+        }
+        return result;
+    }
+
+    void mkdir(string path)
+    {
+        get_directory(path);
+    }
+
+    void addContentToFile(string filePath, string content)
+    {
+        FileInfo *ptr = get_directory(filePath);
+        ptr->is_file = true;
+        ptr->content += content;
+    }
+
+    string readContentFromFile(string filePath)
+    {
+        FileInfo * ptr = get_directory(filePath);
+        return (string)(ptr->content);
+    }
+};
+
+/// <summary>
+/// Leet code #604. Design Compressed String Iterator
+/// 
+/// Design and implement a data structure for a compressed string iterator. 
+/// It should support the following operations: next and hasNext. 
+/// The given compressed string will be in the form of each letter followed 
+/// by a positive integer representing the number of this letter existing in 
+/// the original uncompressed string. 
+/// next() - if the original string still has uncompressed characters, return 
+/// the next letter; Otherwise return a white space.
+/// hasNext() - Judge whether there is any letter needs to be uncompressed. 
+/// Note:
+/// Please remember to RESET your class variables declared in StringIterator, 
+/// as static/class variables are persisted across multiple test cases. 
+/// Please see here for more details. 
+/// Example: 
+/// StringIterator iterator = new StringIterator("L1e2t1C1o1d1e1");
+/// iterator.next(); // return 'L'
+/// iterator.next(); // return 'e'
+/// iterator.next(); // return 'e'
+/// iterator.next(); // return 't'
+/// iterator.next(); // return 'C'
+/// iterator.next(); // return 'o'
+/// iterator.next(); // return 'd'
+/// iterator.hasNext(); // return true
+/// iterator.next(); // return 'e'
+/// iterator.hasNext(); // return false
+/// iterator.next(); // return ' '
+/// </summary>
+class StringIterator
+{
+private:
+    size_t group_index = 0;
+    size_t char_index = 0;
+    vector<pair<char, int>> char_list;
+public:
+    StringIterator(string compressedString)
+    {
+        char ch;
+        int ch_count = 0;
+        string token;
+        for (size_t i = 0; i < compressedString.size(); i++)
+        {
+            // if we hit a letter, we need to 
+            if (isalpha(compressedString[i]))
+            {
+                if (!token.empty())
+                {
+                    ch_count = stoi(token);
+                    char_list.push_back(make_pair(ch, ch_count));
+                    token.clear();
+                }
+                ch = compressedString[i];
+            }
+            else if (isdigit(compressedString[i]))
+            {
+                token.push_back(compressedString[i]);
+            }
+        }
+        ch_count = stoi(token);
+        char_list.push_back(make_pair(ch, ch_count));
+    }
+
+    char next()
+    {
+        char ch;
+        if (group_index < char_list.size())
+        {
+            ch = char_list[group_index].first;
+            char_index++;
+            if (char_index == (size_t)char_list[group_index].second)
+            {
+                group_index++;
+                char_index = 0;
+            }
+        }
+        else
+        {
+            ch = ' ';
+        }
+        return ch;
+    }
+
+    bool hasNext()
+    {
+        if (group_index < char_list.size())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+};
+
+/// <summary>
+/// Leet code #635. Design Log Storage System 
+/// 
+/// You are given several logs that each log contains a unique id and 
+/// timestamp. Timestamp is a string that has the following format: 
+/// Year:Month:Day:Hour:Minute:Second, for example, 2017:01:01:23:59:59. 
+/// All domains are zero-padded decimal numbers. 
+/// Design a log storage system to implement the following functions:
+/// void Put(int id, string timestamp): Given a log's unique id and 
+/// timestamp, store the log in your storage system.
+///
+/// int[] Retrieve(String start, String end, String granularity): 
+/// Return the id of logs whose timestamps are within the range from start 
+/// to end. Start and end all have the same format as timestamp. However, 
+/// granularity means the time level for consideration. For example, 
+/// start = "2017:01:01:23:59:59", end = "2017:01:02:23:59:59", 
+/// granularity = "Day", it means that we need to find the logs within the 
+/// range from Jan. 1st 2017 to Jan. 2nd 2017.
+/// Example 1:
+/// put(1, "2017:01:01:23:59:59");
+/// put(2, "2017:01:01:22:59:59");
+/// put(3, "2016:01:01:00:00:00");
+/// retrieve("2016:01:01:01:01:01","2017:01:01:23:00:00","Year"); 
+/// return [1,2,3], because you need to return all logs within 2016 and 
+/// 2017.
+/// retrieve("2016:01:01:01:01:01","2017:01:01:23:00:00","Hour"); 
+/// return [1,2], because you need to return all logs start from 
+/// 2016:01:01:01 to 2017:01:01:23, where log 3 is left outside the range.
+/// 
+/// Note:
+/// There will be at most 300 operations of Put or Retrieve.
+/// Year ranges from [2000,2017]. Hour ranges from [00,23].
+/// Output for Retrieve has no order required.
+/// </summary>
+class LogSystem
+{
+private:
+    map<string, unordered_set<int>> log_map;
+
+    string get_timestamp(string time, string granularity, bool end = false)
+    {
+        string result;
+        int count = 0;
+        string token = "";
+        for (size_t i = 0; i <= time.size(); i++)
+        {
+            if (i == time.size() || (time[i] == ':'))
+            {
+                if (((count > 0) && (granularity == "Year")) ||
+                    ((count > 1) && (granularity == "Month")) ||
+                    ((count > 2) && (granularity == "Day")) ||
+                    ((count > 3) && (granularity == "Hour")) ||
+                    ((count > 4) && (granularity == "Minute")))
+                {
+                    if (end == false)
+                    {
+                        result.append(":00");
+                    }
+                    else
+                    {
+                        result.append(":99");
+                    }
+                }
+                else
+                {
+                    if (count > 0) result.push_back(':');
+                    result.append(token);
+                }
+                count++;
+                token.clear();
+            }
+            else
+            {
+                token.push_back(time[i]);
+            }
+        }
+        return result;
+    }
+
+public:
+    LogSystem()
+    {
+    }
+
+    void put(int id, string timestamp)
+    {
+        log_map[timestamp].insert(id);
+    }
+
+    vector<int> retrieve(string s, string e, string gra)
+    {
+        vector<int> result;
+        string start_time = get_timestamp(s, gra);
+        string end_time = get_timestamp(e, gra, true);
+        map<string, unordered_set<int>>::iterator begin = log_map.lower_bound(start_time);
+        map<string, unordered_set<int>>::iterator end = log_map.upper_bound(end_time);
+        for (map<string, unordered_set<int>>::iterator itr = begin; itr != end; ++itr)
+        {
+            for (auto id : itr->second)
+                result.push_back(id);
+        }
+        return result;
+    }
+};
+
+/// <summary>
+/// Leet code #676. Implement Magic Dictionary
+/// 
+/// Implement a magic directory with buildDict, and search methods.
+/// For the method buildDict, you'll be given a list of non-repetitive 
+/// words to build a dictionary.
+/// 
+/// For the method search, you'll be given a word, and judge whether if 
+/// you modify exactly one character into another character in this word,
+/// the modified word is in the dictionary you just built.
+///
+/// Example 1:
+/// Input: buildDict(["hello", "leetcode"]), Output: Null
+/// Input: search("hello"), Output: False
+/// Input: search("hhllo"), Output: True
+/// Input: search("hell"), Output: False
+/// Input: search("leetcoded"), Output: False
+/// Note:
+/// You may assume that all the inputs are consist of lowercase letters 
+/// a-z.
+/// For contest purpose, the test data is rather small by now. You could 
+/// think about highly efficient algorithm after the contest.
+/// Please remember to RESET your class variables declared in class 
+/// MagicDictionary, as static/class variables are persisted across 
+/// multiple test cases. Please see here for more details.
+/// </summary>
+class MagicDictionary
+{
+private:
+    unordered_map<int, vector<string>> m_dictionary;
+
+public:
+    // Initialize your data structure here.
+    MagicDictionary()
+    {
+    }
+
+    // Build a dictionary through a list of words
+    void buildDict(vector<string> dict)
+    {
+        for (string str : dict)
+        {
+            m_dictionary[str.size()].push_back(str);
+        }
+    }
+
+    // Returns if there is any word in the trie that equals to the given
+    // word after modifying exactly one character
+    bool search(string word)
+    {
+        for (string str : m_dictionary[word.size()])
+        {
+            int count = 0;
+            for (size_t i = 0; i < word.size(); i++)
+            {
+                if (word[i] != str[i]) count++;
+            }
+            if (count == 1) return true;
+        }
+        return false;
+    }
+};
+
+/// <summary>
+/// Leet code #1261. Find Elements in a Contaminated Binary Tree
+/// 
+/// Given a binary tree with the following rules:
+///
+/// root.val == 0
+/// If treeNode.val == x and treeNode.left != null, then 
+/// treeNode.left.val == 2 * x + 1
+/// If treeNode.val == x and treeNode.right != null, then 
+/// treeNode.right.val == 2 * x + 2
+/// Now the binary tree is contaminated, which means all treeNode.val 
+/// have been changed to -1.
+///
+/// You need to first recover the binary tree and then implement the 
+/// FindElements class:
+///
+/// FindElements(TreeNode* root) Initializes the object with a 
+/// contamined binary tree, you need to recover it first.
+/// bool find(int target) Return if the target value exists in 
+/// the recovered binary tree.
+/// 
+/// Example 1:
+/// 
+/// Input 
+/// ["FindElements","find","find"]
+/// [[[-1,null,-1]],[1],[2]]
+/// Output
+/// [null,false,true]
+/// Explanation
+/// FindElements findElements = new FindElements([-1,null,-1]); 
+/// findElements.find(1); // return False 
+/// findElements.find(2); // return True 
+///
+/// Example 2:
+/// Input
+/// ["FindElements","find","find","find"]
+/// [[[-1,-1,-1,-1,-1]],[1],[3],[5]]
+/// Output
+/// [null,true,true,false]
+/// Explanation
+/// FindElements findElements = new FindElements([-1,-1,-1,-1,-1]);
+/// findElements.find(1); // return True
+/// findElements.find(3); // return True
+/// findElements.find(5); // return False
+///
+/// Example 3:
+/// 
+/// Input
+/// ["FindElements","find","find","find","find"]
+/// [[[-1,null,-1,-1,null,-1]],[2],[3],[4],[5]]
+/// Output
+/// [null,true,false,false,true]
+/// Explanation
+/// FindElements findElements = new FindElements([-1,null,-1,-1,null,-1]);
+/// findElements.find(2); // return True
+/// findElements.find(3); // return False
+/// findElements.find(4); // return False
+/// findElements.find(5); // return True
+///
+/// Constraints:
+/// 1. TreeNode.val == -1
+/// 2. The height of the binary tree is less than or equal to 20
+/// 3. The total number of nodes is between [1, 10^4]
+/// 4. Total calls of find() is between [1, 10^4]
+/// 5. 0 <= target <= 10^6
+/// </summary>
+class FindElements
+{
+private:
+    TreeNode* m_root;
+public:
+    FindElements(TreeNode* root)
+    {
+        m_root = root;
+        queue<TreeNode *> search;
+        if (root == nullptr) return;
+        root->val = 0;
+        search.push(root);
+        while (!search.empty())
+        {
+            TreeNode* node = search.front();
+            search.pop();
+            if (node->left != nullptr)
+            {
+                node->left->val = node->val * 2 + 1;
+                search.push(node->left);
+            }
+            if (node->right != nullptr)
+            {
+                node->right->val = node->val * 2 + 2;
+                search.push(node->right);
+            }
+        }
+
+    }
+
+    bool find(int target)
+    {
+        int start = 0;
+        int end = 0;
+        while (target > end)
+        {
+            int length = (end - start + 1) * 2;
+            start = end + 1;
+            end = start + length - 1;
+        }
+
+        TreeNode* node = m_root;
+        if (node == nullptr) return false;
+        while (start < end)
+        {
+            int middle = start + (end - start) / 2;
+            if (target <= middle)
+            {
+                if (node->left == nullptr) return false;
+                node = node->left;
+                end = middle;
+            }
+            else
+            {
+                if (node->right == nullptr) return false;
+                node = node->right;
+                start = middle + 1;
+            }
+        }
+        if (node->val == target) return true;
+        else return false;
+    }
+};
+
+/// <summary>
+/// Leet code #170. Two Sum III - Data structure design    
+/// 
+/// Design and implement a TwoSum class. It should support the following 
+/// operations: add and find.
+/// add - Add the number to an internal data structure.
+/// find - Find if there exists any pair of numbers which sum is equal to the 
+/// value. 
+/// For example,
+/// add(1); add(3); add(5);
+/// find(4) -> true
+/// find(7) -> false
+/// </summary>
+class TwoSum
+{
+private:
+    unordered_map<int, int> m_DataMap;
+public:
+    // Add the number to an internal data structure.
+    void add(int number)
+    {
+        m_DataMap[number]++;
+    }
+
+    // Find if there exists any pair of numbers which sum is equal to the value.
+    bool find(int value)
+    {
+        for (auto itr : m_DataMap)
+        {
+            int other = value - itr.first;
+            if (other == itr.first)
+            {
+                if (itr.second > 1) return true;
+            }
+            else if (m_DataMap.count(other) > 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
+/// <summary>
+/// Leet code #535. Encode and Decode TinyURL   
+/// 
+/// Note: This is a companion problem to the System Design problem: 
+/// Design TinyURL.
+/// TinyURL is a URL shortening service where you enter a URL such as 
+/// https://leetcode.com/problems/design-tinyurl and it returns a 
+/// short URL such as http://tinyurl.com/4e9iAk.
+///
+/// Design the encode and decode methods for the TinyURL service. 
+/// There is no restriction on how your encode/decode algorithm 
+/// should work. You just need to ensure that a URL can be encoded 
+/// to a tiny URL and the tiny URL can be decoded to the original URL.
+/// </summary>
+class TinyURL
+{
+private:
+    unordered_map<string, string> m_Long2Short;
+    unordered_map<string, string> m_Short2Long;
+
+public:
+
+    // Encodes a URL to a shortened URL.
+    string encode(string longUrl)
+    {
+        if (m_Long2Short.count(longUrl) == 0)
+        {
+            string shortUrl = "http://tinyurl.com/" + to_string(m_Long2Short.size());
+            m_Long2Short[longUrl] = shortUrl;
+            m_Short2Long[shortUrl] = longUrl;
+        }
+        return m_Long2Short[longUrl];
+    }
+
+    // Decodes a shortened URL to its original URL.
+    string decode(string shortUrl)
+    {
+        return m_Short2Long[shortUrl];
+    }
+};
+
+/// <summary>
+/// Leet code #1286. Iterator for Combination
+///
+/// Medium
+///
+/// Design an Iterator class, which has:
+///
+/// A constructor that takes a string characters of sorted distinct 
+/// lowercase English letters and a number combinationLength as arguments.
+/// A function next() that returns the next combination of length 
+/// combinationLength in lexicographical order.
+/// A function hasNext() that returns True if and only if there exists a 
+/// next combination.
+///
+/// Example:
+/// CombinationIterator iterator = 
+///   new CombinationIterator("abc", 2);  // creates the iterator.
+///
+/// iterator.next(); // returns "ab"
+/// iterator.hasNext(); // returns true
+/// iterator.next(); // returns "ac"
+/// iterator.hasNext(); // returns true
+/// iterator.next(); // returns "bc"
+/// iterator.hasNext(); // returns false
+/// 
+/// Constraints:
+/// 1. 1 <= combinationLength <= characters.length <= 15
+/// 2. There will be at most 10^4 function calls per test.
+/// 3. It's guaranteed that all calls of the function next are valid.
+/// </summary>
+class CombinationIterator
+{
+private:
+    vector<int> m_index;
+    string m_string;
+    void move_next(void)
+    {
+        if (hasNext())
+        {
+            int pos = m_index.size() - 1;
+            while (true)
+            {
+                m_index[pos]++;
+                if (m_index[pos] < (int)m_string.size())
+                {
+                    pos++;
+                    if (pos == (int)m_index.size()) break;
+                    else
+                    {
+                        m_index[pos] = m_index[pos - 1];
+                    }
+                }
+                else
+                {
+                    pos--;
+                    if (pos < 0) break;
+                }
+            }
+        }
+    }
+public:
+    CombinationIterator(string characters, int combinationLength)
+    {
+        m_string = characters;
+        for (int i = 0; i < combinationLength; i++)
+        {
+            m_index.push_back(i);
+        }
+    }
+
+    string next()
+    {
+        string result;
+        for (size_t i = 0; i < m_index.size(); i++)
+        {
+            result.push_back(m_string[m_index[i]]);
+        }
+        move_next();
+        return result;
+    }
+
+    bool hasNext()
+    {
+        if (m_index[0] == m_string.size())
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 };
 

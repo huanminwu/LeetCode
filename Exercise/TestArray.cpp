@@ -2,100 +2,6 @@
 #include "..\LeetCode\LeetCodeArray.h"
 #include "TestArray.h"
 
-void TestLeetCode348(void)
-{
-    Logger::WriteMessage("Test Leet Code 348");
-    TicTacToe toe(2);
-    int result = toe.move(0, 1, 2);
-    Logger::WriteMessage("toe.move(0, 1, 2) = " + to_string(result));
-    result = toe.move(1, 0, 1);
-    Logger::WriteMessage("toe.move(1, 0, 1) = " + to_string(result));
-    result = toe.move(1, 1, 2);
-    Logger::WriteMessage("toe.move(1, 1, 2) = " + to_string(result));
-}
-
-void TestLeetCode353(void)
-{
-    Logger::WriteMessage("Test Leet Code 353");
-    vector<pair<int, int>> food = { {1,2}, {0,1} };
-    SnakeGame snakeGame = SnakeGame(3, 2, food);
-    int result = snakeGame.move("R");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("D");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("R");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("U");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("L");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("U");
-    Logger::WriteMessage("result = " + to_string(result));
-
-    food = { { 1, 1 },{ 0, 1 } };
-    snakeGame = SnakeGame(2, 2, food);
-    result = snakeGame.move("D");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("R");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("U");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("L");
-    Logger::WriteMessage("result = " + to_string(result));
-    food = { { 2, 0 },{ 0, 0 },{ 0, 2 },{ 0, 1 }, { 2, 2 }, { 0, 1 } };
-    snakeGame = SnakeGame(3, 3, food);
-    result = snakeGame.move("D");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("D");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("R");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("U");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("U");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("L");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("D");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("R");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("R");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("U");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("L");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("L");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("D");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("R");
-    Logger::WriteMessage("result = " + to_string(result));
-    result = snakeGame.move("U");
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
-void TestLeetCode379(void)
-{
-    Logger::WriteMessage("Test Leet Code 379");
-    PhoneDirectory directory(3);
-    int phone_number = directory.get();
-    Logger::WriteMessage("phone number = " + to_string(phone_number));
-    phone_number = directory.get();
-    Logger::WriteMessage("phone number = " + to_string(phone_number));
-    bool isAvailable = directory.check(2);
-    Logger::WriteMessage("check(2) = " + (string)(isAvailable ? "available" : "not available"));
-    phone_number = directory.get();
-    Logger::WriteMessage("phone number = " + to_string(phone_number));
-    isAvailable = directory.check(2);
-    Logger::WriteMessage("check(2) = " + (string)(isAvailable ? "available" : "not available"));
-    directory.release(2);
-    Logger::WriteMessage("release(2)");
-    isAvailable = directory.check(2);
-    Logger::WriteMessage("check(2) = " + (string)(isAvailable ? "available" : "not available"));
-}
-
 void TestLeetCode364(void)
 {
     Logger::WriteMessage("Test Leet Code 364");
@@ -903,16 +809,6 @@ void TestLeetCode1314(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode284(void)
-{
-    Logger::WriteMessage("Test Leet Code 284");
-    vector<int> nums = { 1,2,3,4 };
-    PeekingIterator peekingIterator(nums);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage("Peek() -> " + to_string(peekingIterator.peek()));
-    Logger::WriteMessage("Next() -> " + to_string(peekingIterator.next()));
-}
-
 void TestLeetCode413(void)
 {
     Logger::WriteMessage("Test Leet Code 413");
@@ -951,68 +847,6 @@ void TestLeetCode368(void)
     vector<int> result = leetCode.largestDivisibleSubset(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage(result);
-}
-
-void TestLeetCode251(void)
-{
-    Logger::WriteMessage("Test Leet Code 251");
-    vector<vector<int>> vec2d = { {1,2}, {3}, {4,5,6} };
-    vector<int> result;
-    Vector2D vector2d(vec2d);
-    Logger::WriteMessage(vec2d);
-    while (vector2d.hasNext())
-    {
-        result.push_back(vector2d.next());
-    }
-    Logger::WriteMessage(result);
-
-    vec2d = { { },{ 3 } };
-    result = {};
-    vector2d = Vector2D(vec2d);
-    Logger::WriteMessage(vec2d);
-    while (vector2d.hasNext())
-    {
-        result.push_back(vector2d.next());
-    }
-    Logger::WriteMessage(result);
-
-    vec2d = { {1},{} };
-    result = {};
-    vector2d = Vector2D(vec2d);
-    Logger::WriteMessage(vec2d);
-    while (vector2d.hasNext())
-    {
-        result.push_back(vector2d.next());
-    }
-    Logger::WriteMessage(result);
-}
-
-void TestLeetCode281(void)
-{
-    Logger::WriteMessage("Test Leet Code 281");
-    vector<int> v1 = { 1, 2, 3 };
-    vector<int> v2 = { 4, 5, 6, 7 };
-    vector<int> result;
-    ZigzagIterator zigzagIterator(v1, v2);
-    Logger::WriteMessage(v1);
-    Logger::WriteMessage(v2);
-    while (zigzagIterator.hasNext())
-    {
-        result.push_back(zigzagIterator.next());
-    }
-    Logger::WriteMessage(result);
-}
-
-void TestLeetCode631(void)
-{
-    int result;
-    Excel excel(3, 'C');
-    excel.set(1, 'A', 2);
-    result = excel.sum(3, 'C', { "A1", "A1:B2" });
-    Logger::WriteMessage("excel.sum(3, 'C', { 'A1', 'A1:B2' }) = " + to_string(result));
-    excel.set(2, 'B', 2);
-    result = excel.get(3, 'C');
-    Logger::WriteMessage("excel.get(3, 'C') = " + to_string(excel.get(3, 'C')));
 }
 
 void TestLeetCode26(void)
@@ -1654,14 +1488,10 @@ void TestLeetCodeArray(void)
     TestLeetCode26();
     TestLeetCode73();
     TestLeetCode80();
-    TestLeetCode631();
-    TestLeetCode251();
-    TestLeetCode281();
     TestLeetCode368();
     TestLeetCode446();
     TestLeetCode485();
     TestLeetCode413();
-    TestLeetCode284();
     TestLeetCode1314();
     TestLeetCode1313();
     TestLeetCode1310();

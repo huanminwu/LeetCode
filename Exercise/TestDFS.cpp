@@ -352,42 +352,6 @@ void TestLeetCode1240(void)
     Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; result = " + to_string(result));
 }
 
-void TestLeetCode1286(void)
-{
-    Logger::WriteMessage("Test Leet Code 1286");
-
-    vector<string> commands =
-    {
-        "CombinationIterator", "next", "hasNext", "next", "hasNext", "next", "hasNext"
-    };
-    vector<vector<string>> data =
-    {
-        {"abc", "2"},{},{},{},{},{},{}
-    };
-    CombinationIterator* combinationIterator = nullptr;
-    vector<string> result;
-    for (size_t i = 0; i < commands.size(); i++)
-    {
-        if (commands[i] == "CombinationIterator")
-        {
-            combinationIterator = new CombinationIterator(data[i][0], atoi(data[i][1].c_str()));
-            result.push_back("null");
-        }
-        else if (commands[i] == "next")
-        {
-            string str = combinationIterator->next();
-            result.push_back(str);
-        }
-        else if (commands[i] == "hasNext")
-        {
-            bool ret = combinationIterator->hasNext();
-            result.push_back(to_string(ret));
-        }
-    }
-    delete combinationIterator;
-    Logger::WriteMessage(result);
-}
-
 void TestLeetCode1307(void)
 {
     Logger::WriteMessage("Test Leet Code 1307");
@@ -619,7 +583,6 @@ void TestLeetCodeDFS(void)
     TestLeetCode526();
     TestLeetCode1307();
     TestLeetCode1066();
-    TestLeetCode1286();
     TestLeetCode1240();
     TestLeetCode1219();
 }

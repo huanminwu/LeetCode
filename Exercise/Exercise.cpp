@@ -4923,27 +4923,6 @@ void TestLeetCode674(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode677(void)
-{
-    vector<pair<string, pair<string, int>>> commands = { { "insert",{ "a", 3 } }, {"insert", {"apple", 3}}, {"sum", {"ap", 0}},{ "insert",{ "app", 2 } },{ "sum",{ "ap", 0 } } };
-    MapSum * map_sum = new MapSum();
-    for (size_t i = 0; i < commands.size(); i++)
-    {
-        Logger::WriteMessage(commands[i].first + "-> (" + commands[i].second.first + "," + to_string(commands[i].second.second) + ")");
-        if (commands[i].first == "insert")
-        {
-            map_sum->insert(commands[i].second.first, commands[i].second.second);
-            Logger::WriteMessage("result = null");
-        }
-        else if (commands[i].first == "sum")
-        {
-            int sum = map_sum->sum(commands[i].second.first);
-            Logger::WriteMessage("result = " + to_string(sum));
-        }
-    }
-    delete map_sum;
-}
-
 void TestLeetCode680(void)
 {
     LeetCode leetCode;
@@ -7960,94 +7939,6 @@ void TestLeetCode704(void)
     Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
 }
 
-void TestLeetCode705(void)
-{
-    Logger::WriteMessage("Test Leet Code 705");
-    vector<string> commands = 
-    { 
-        "MyHashSet", "add", "add", "contains", "contains", "add", "contains", "remove", "contains"  
-    };
-    vector<int> data =
-    {
-        0, 1, 2, 1, 3, 2, 2, 2, 2
-    };
-    vector<string> result;
-    MyHashSet * hashSet = nullptr;
-    for (size_t i = 0; i < commands.size(); i++)
-    {
-        if (commands[i] == "MyHashSet")
-        {
-            hashSet = new MyHashSet();
-            result.push_back("null");
-        }
-        else if (commands[i] == "add")
-        {
-            hashSet->add(data[i]);
-            result.push_back("null");
-        }
-        else if (commands[i] == "remove")
-        {
-            hashSet->remove(data[i]);
-            result.push_back("null");
-        }
-        else if (commands[i] == "contains")
-        {
-            if (hashSet->contains(data[i]))
-            {
-                result.push_back("true");
-            }
-            else
-            {
-                result.push_back("false");
-            }
-        }
-    }
-    delete hashSet;
-    Logger::WriteMessage(commands);
-    Logger::WriteMessage(data);
-    Logger::WriteMessage(result);
-}
-
-void TestLeetCode706(void)
-{
-    Logger::WriteMessage("Test Leet Code 706");
-    vector<string> commands =
-    {
-        "MyHashMap", "put", "put", "get", "get", "get", "put", "get", "remove", "get"
-    };
-    vector<vector<int>> data =
-    {
-        {}, {1, 1}, {2, 2}, {1}, {2}, {3}, {2, 1}, {2}, {2}, {2}
-    };
-    vector<string> result;
-    MyHashMap * hashMap = nullptr;
-    for (size_t i = 0; i < commands.size(); i++)
-    {
-        if (commands[i] == "MyHashMap")
-        {
-            hashMap = new MyHashMap();
-            result.push_back("null");
-        }
-        else if (commands[i] == "put")
-        {
-            hashMap->put(data[i][0], data[i][1]);
-            result.push_back("null");
-        }
-        else if (commands[i] == "remove")
-        {
-            hashMap->remove(data[i][0]);
-            result.push_back("null");
-        }
-        else if (commands[i] == "get")
-        {
-            result.push_back(to_string(hashMap->get(data[i][0])));
-        }
-    }
-    delete hashMap;
-    Logger::WriteMessage(commands);
-    Logger::WriteMessage(data);
-    Logger::WriteMessage(result);
-}
 
 void TestLeetCode877(void)
 {
@@ -8284,58 +8175,6 @@ void TestLeetCode497(void)
     delete solution;
     Logger::WriteMessage(commands);
     Logger::WriteMessage(data[0]);
-    Logger::WriteMessage(result);
-}
-
-void TestLeetCode707(void)
-{
-    Logger::WriteMessage("Test Leet Code 707");
-    vector<string> commands =
-    {
-        "MyLinkedList","addAtHead","addAtTail","addAtIndex", "addAtIndex", "addAtIndex", "get","deleteAtIndex","get", "get", "get"
-    };
-    vector<vector<int>> data =
-    {
-        {},{1},{3},{1, 2},{ 3, 4 },{ 5, 5 }, {1},{1},{1},{ 2 },{ 3 }
-    };
-    vector<string> result;
-    MyLinkedList* linkedList = nullptr;
-    for (size_t i = 0; i < commands.size(); i++)
-    {
-        if (commands[i] == "MyLinkedList")
-        {
-            linkedList = new MyLinkedList();
-            result.push_back("null");
-        }
-        else if (commands[i] == "addAtHead")
-        {
-            linkedList->addAtHead(data[i][0]);
-            result.push_back("null");
-        }
-        else if (commands[i] == "addAtTail")
-        {
-            linkedList->addAtTail(data[i][0]);
-            result.push_back("null");
-        }
-        else if (commands[i] == "addAtIndex")
-        {
-            linkedList->addAtIndex(data[i][0], data[i][1]);
-            result.push_back("null");
-        }
-        else if (commands[i] == "get")
-        {
-            int value = linkedList->get(data[i][0]);
-            result.push_back(to_string(value));
-        }
-        else if (commands[i] == "deleteAtIndex")
-        {
-            linkedList->deleteAtIndex(data[i][0]);
-            result.push_back("null");
-        }
-    }
-    delete linkedList;
-    Logger::WriteMessage(commands);
-    Logger::WriteMessage(data);
     Logger::WriteMessage(result);
 }
 
@@ -9541,32 +9380,6 @@ void TestLeetCode9904(void)
     };
     vector<vector<string>> result = leetCode.parseCSV(lines);
     for (string line : lines)Logger::WriteMessage(line);
-    Logger::WriteMessage(result);
-}
-
-void TestLeetCode933(void)
-{
-    Logger::WriteMessage("Test Leet Code 933");
-    vector<string> commands = { "RecentCounter","ping","ping","ping","ping", "ping", "ping" };
-    vector<vector<int>> data = { { } ,{ 1 },{ 100 },{ 3001 },{ 3002 },{ 3100 },{ 3101 } };
-    vector<string> result;
-    RecentCounter * recentCounter = nullptr;
-    for (size_t i = 0; i < commands.size(); i++)
-    {
-        if (commands[i] == "RecentCounter")
-        {
-            recentCounter = new RecentCounter();
-            result.push_back("null");
-        }
-        else if (commands[i] == "ping")
-        {
-            int value = recentCounter->ping(data[i][0]);
-            result.push_back(to_string(value));
-        }
-    }
-    delete recentCounter;
-    Logger::WriteMessage(commands);
-    Logger::WriteMessage(data);
     Logger::WriteMessage(result);
 }
 
@@ -12857,8 +12670,6 @@ void main(int argc, char* argv[])
     TestLeetCode426();
     TestLeetCode710();
     TestLeetCode707();
-    TestLeetCode706();
-    TestLeetCode705();
     TestLeetCode704();
     TestLeetCode703();
     TestLeetCode702();
@@ -13031,7 +12842,6 @@ void main(int argc, char* argv[])
     TestLeetCode681();
     TestLeetCode682();
     TestLeetCode680();
-    TestLeetCode677();
     TestLeetCode417();
     TestLeetCode674();
     TestLeetCode670();

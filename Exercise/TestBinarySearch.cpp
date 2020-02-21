@@ -274,20 +274,6 @@ void TestLeetCode378(void)
     Logger::WriteMessage("The " + to_string(k) + "th element is " + to_string(result));
 }
 
-void TestLeetCode1274(void)
-{
-    Logger::WriteMessage("Test LeetCode 1274");
-    vector<vector<int>> ship = { {1, 1},{2, 2},{3, 3},{5, 5} };
-    vector<int> topRight = { 4, 4 };
-    vector<int> bottomLeft = { 0, 0 };
-    Sea sea(ship);
-    int result = sea.countShips(topRight, bottomLeft);
-    Logger::WriteMessage(ship);
-    Logger::WriteMessage(topRight);
-    Logger::WriteMessage(bottomLeft);
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
 void TestLeetCode410(void)
 {
     Logger::WriteMessage("Test Leet Code 410");
@@ -364,7 +350,6 @@ void TestLeetCodeBinarySearch(void)
 {
     TestLeetCode1300();
     TestLeetCode1283();
-    TestLeetCode1274();
     TestLeetCode378();
     TestLeetCode786();
     TestLeetCode410();
