@@ -1850,8 +1850,138 @@ void TestLeetCode1354(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1356(void)
+{
+    Logger::WriteMessage("Test Leet Code 1356");
+    LeetCodeMath leetCode;
+
+    vector<int> arr = { 0,1,2,3,4,5,6,7,8 };
+    vector<int> result = leetCode.sortByBits(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(result);
+
+    arr = { 1024,512,256,128,64,32,16,8,4,2,1 };
+    result = leetCode.sortByBits(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(result);
+
+    arr = { 10000,10000 };
+    result = leetCode.sortByBits(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(result);
+
+    arr = { 2,3,5,7,11,13,17,19 };
+    result = leetCode.sortByBits(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(result);
+
+    arr = { 10,100,1000,10000 };
+    result = leetCode.sortByBits(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1359(void)
+{
+    Logger::WriteMessage("Test Leet Code 1359");
+    LeetCodeMath leetCode;
+
+    int n = 1;
+    int result = leetCode.countOrders(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 2;
+    result = leetCode.countOrders(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    result = leetCode.countOrders(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1360(void)
+{
+    Logger::WriteMessage("Test Leet Code 1360");
+    LeetCodeMath leetCode;
+
+    string date1 = "2019-06-29";
+    string date2 = "2019-06-30";
+    int result = leetCode.daysBetweenDates(date1, date2);
+    Logger::WriteMessage("date1 = " + date1 + "; date2 = " + date2 + "; result = " + to_string(result));
+
+    date1 = "2020-01-15";
+    date2 = "2019-12-31";
+    result = leetCode.daysBetweenDates(date1, date2);
+    Logger::WriteMessage("date1 = " + date1 + "; date2 = " + date2 + "; result = " + to_string(result));
+
+    date1 = "1980-03-15";
+    date2 = "2021-07-01";
+    result = leetCode.daysBetweenDates(date1, date2);
+    Logger::WriteMessage("date1 = " + date1 + "; date2 = " + date2 + "; result = " + to_string(result));
+}
+
+void TestLeetCode1363(void)
+{
+    Logger::WriteMessage("Test Leet Code 1363");
+    LeetCodeMath leetCode;
+    vector<int> digits = { 8, 1, 9 };
+    Logger::WriteMessage(digits);    
+    string result = leetCode.largestMultipleOfThree(digits);
+    Logger::WriteMessage("result = " + result);
+
+    digits = { 8,6,7,1,0 };
+    Logger::WriteMessage(digits);
+    result = leetCode.largestMultipleOfThree(digits);
+    Logger::WriteMessage("result = " + result);
+
+    digits = { 1 };
+    Logger::WriteMessage(digits);
+    result = leetCode.largestMultipleOfThree(digits);
+    Logger::WriteMessage("result = " + result);
+
+    digits = { 0,0,0,0,0,0 };
+    Logger::WriteMessage(digits);
+    result = leetCode.largestMultipleOfThree(digits);
+    Logger::WriteMessage("result = " + result);
+
+    digits = { 1,3,9,1,0,0 };
+    Logger::WriteMessage(digits);
+    result = leetCode.largestMultipleOfThree(digits);
+    Logger::WriteMessage("result = " + result);
+
+    digits = { 5,8 };
+    Logger::WriteMessage(digits);
+    result = leetCode.largestMultipleOfThree(digits);
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode1362(void)
+{
+    Logger::WriteMessage("Test Leet Code 1362");
+    LeetCodeMath leetCode;
+    int num = 8;
+    vector<int> result = leetCode.closestDivisors(num);
+    Logger::WriteMessage("num = " + to_string(num));
+    Logger::WriteMessage(result);
+
+    num = 123;
+    result = leetCode.closestDivisors(num);
+    Logger::WriteMessage("num = " + to_string(num));
+    Logger::WriteMessage(result);
+
+    num = 999;
+    result = leetCode.closestDivisors(num);
+    Logger::WriteMessage("num = " + to_string(num));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1362();
+    TestLeetCode1363();
+    TestLeetCode1360();
+    TestLeetCode1359();
+    TestLeetCode1356();
     TestLeetCode1354();
      TestLeetCode1344();
     TestLeetCode1342();

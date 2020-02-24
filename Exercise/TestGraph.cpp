@@ -1893,8 +1893,54 @@ void TestLeetCode1345(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1361(void)
+{
+    Logger::WriteMessage("Test Leet Code 1361");
+    LeetCodeGraph leetCode;
+    int n = 4;
+    vector<int> leftChild = { 1, -1, 3, -1 };
+    vector<int> rightChild = { 2, -1, -1, -1 };
+    bool result = leetCode.validateBinaryTreeNodes(n, leftChild, rightChild);
+    Logger::WriteMessage(leftChild);
+    Logger::WriteMessage(rightChild);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    n = 4;
+    leftChild = { 1, -1, 3, -1 };
+    rightChild = { 2,3,-1,-1 };
+    result = leetCode.validateBinaryTreeNodes(n, leftChild, rightChild);
+    Logger::WriteMessage(leftChild);
+    Logger::WriteMessage(rightChild);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    n = 2;
+    leftChild = { 1, 0 };
+    rightChild = { -1,-1 };
+    result = leetCode.validateBinaryTreeNodes(n, leftChild, rightChild);
+    Logger::WriteMessage(leftChild);
+    Logger::WriteMessage(rightChild);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    n = 6;
+    leftChild = { 1,-1,-1,4,-1,-1 };
+    rightChild = { 2,-1,-1,5,-1,-1 };
+    result = leetCode.validateBinaryTreeNodes(n, leftChild, rightChild);
+    Logger::WriteMessage(leftChild);
+    Logger::WriteMessage(rightChild);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    n = 2;
+    leftChild = { 1, -1 };
+    rightChild = { -1,-1 };
+    result = leetCode.validateBinaryTreeNodes(n, leftChild, rightChild);
+    Logger::WriteMessage(leftChild);
+    Logger::WriteMessage(rightChild);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1361();
     TestLeetCode1345();
     TestLeetCode1340();
     TestLeetCode407();

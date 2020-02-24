@@ -3130,5 +3130,180 @@ public:
     /// 3. 1 <= target[i] <= 10^9
     /// </summary>
     bool isPossible(vector<int>& target);
+
+    /// <summary>
+    /// Leet code #1356. Sort Integers by The Number of 1 Bits
+    ///
+    /// Easy
+    ///
+    /// Given an integer array arr. You have to sort the integers in the 
+    /// array in ascending order by the number of 1's in their binary 
+    /// representation and in case of two or more integers have the same 
+    /// number of 1's you have to sort them in ascending order.
+    ///
+    /// Return the sorted array.
+    ///
+    /// Example 1:
+    /// Input: arr = [0,1,2,3,4,5,6,7,8]
+    /// Output: [0,1,2,4,8,3,5,6,7]
+    /// Explantion: [0] is the only integer with 0 bits.
+    /// [1,2,4,8] all have 1 bit.
+    /// [3,5,6] have 2 bits.
+    /// [7] has 3 bits.
+    /// The sorted array by bits is [0,1,2,4,8,3,5,6,7]
+    ///
+    /// Example 2:
+    /// Input: arr = [1024,512,256,128,64,32,16,8,4,2,1]
+    /// Output: [1,2,4,8,16,32,64,128,256,512,1024]
+    /// Explantion: All integers have 1 bit in the binary representation, 
+    /// you should just sort them in ascending order.
+    ///
+    /// Example 3:
+    /// Input: arr = [10000,10000]
+    /// Output: [10000,10000]
+    ///
+    /// Example 4:
+    /// Input: arr = [2,3,5,7,11,13,17,19]
+    /// Output: [2,3,5,17,7,11,13,19]
+    ///
+    /// Example 5:
+    /// Input: arr = [10,100,1000,10000]
+    /// Output: [10,100,10000,1000]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= arr.length <= 500
+    /// 2. 0 <= arr[i] <= 10^4
+    /// </summary>
+    vector<int> sortByBits(vector<int>& arr);
+
+    /// <summary>
+    /// Leet code #1359. Count All Valid Pickup and Delivery Options
+    ///
+    /// Hard
+    ///
+    /// Given n orders, each order consist in pickup and delivery services. 
+    ///
+    /// Count all valid pickup/delivery possible sequences such that 
+    /// delivery(i) is always after of pickup(i). 
+    ///
+    /// Since the answer may be too large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: n = 1
+    /// Output: 1
+    /// Explanation: Unique order (P1, D1), Delivery 1 always is after of 
+    /// Pickup 1.
+    ///
+    /// Example 2:
+    /// Input: n = 2
+    /// Output: 6
+    /// Explanation: All possible orders: 
+    /// (P1,P2,D1,D2), (P1,P2,D2,D1), (P1,D1,P2,D2), (P2,P1,D1,D2), 
+    /// (P2,P1,D2,D1) and (P2,D2,P1,D1).
+    /// This is an invalid order (P1,D2,P2,D1) because Pickup 2 is after 
+    /// of Delivery 2.
+    ///
+    /// Example 3:
+    /// Input: n = 3
+    /// Output: 90
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 500
+    /// </summary>
+    int countOrders(int n);
+
+     /// <summary>
+     /// Leet code #1360. Number of Days Between Two Dates
+     /// </summary>
+     bool isLeapYear(int year);
+
+    /// <summary>
+    /// Leet code #1360. Number of Days Between Two Dates
+    ///
+    /// Easy
+    ///
+    /// Write a program to count the number of days between two dates.
+    ///
+    /// The two dates are given as strings, their format is YYYY-MM-DD as 
+    /// shown in the examples.
+    ///
+    /// Example 1:
+    /// Input: date1 = "2019-06-29", date2 = "2019-06-30"
+    /// Output: 1
+    ///
+    /// Example 2:
+    /// Input: date1 = "2020-01-15", date2 = "2019-12-31"
+    /// Output: 15
+    /// 
+    /// Constraints:
+    /// 1. The given dates are valid dates between the years 1971 and 2100.
+    /// </summary>
+    int daysBetweenDates(string date1, string date2);
+
+    /// <summary>
+    /// Leet code #1363. Largest Multiple of Three
+    ///
+    /// Hard
+    ///
+    /// Given an integer array of digits, return the largest multiple of 
+    /// three that can be formed by concatenating some of the given 
+    /// digits in any order.
+    ///
+    /// Since the answer may not fit in an integer data type, return the 
+    /// answer as a string.
+    ///
+    /// If there is no answer return an empty string.
+    /// 
+    /// Example 1:
+    /// Input: digits = [8,1,9]
+    /// Output: "981"
+    ///
+    /// Example 2:
+    /// Input: digits = [8,6,7,1,0]
+    /// Output: "8760"
+    ///
+    /// Example 3:
+    /// Input: digits = [1]
+    /// Output: ""
+    ///
+    /// Example 4:
+    /// Input: digits = [0,0,0,0,0,0]
+    /// Output: "0"
+    /// 
+    /// Constraints:
+    /// 1. 1 <= digits.length <= 10^4
+    /// 2. 0 <= digits[i] <= 9
+    /// 3. The returning answer must not contain unnecessary leading zeros.
+    /// </summary>
+    string largestMultipleOfThree(vector<int>& digits);
+
+    /// <summary>
+    /// Leet code #1362. Closest Divisors
+    ///
+    /// Medium
+    ///
+    /// Given an integer num, find the closest two integers in absolute 
+    /// difference whose product equals num + 1 or num + 2.
+    /// 
+    /// Return the two integers in any order.
+    ///
+    /// Example 1:
+    /// Input: num = 8
+    /// Output: [3,3]
+    /// Explanation: For num + 1 = 9, the closest divisors are 3 & 3, for 
+    /// num + 2 = 10, the closest divisors are 2 & 5, hence 3 & 3 is chosen.
+    ///
+    /// Example 2:
+    /// Input: num = 123
+    /// Output: [5,25]
+    ///
+    /// Example 3:
+    /// Input: num = 999
+    /// Output: [40,25]
+    ///
+    /// Constraints:
+    /// 1. 1 <= num <= 10^9
+    /// </summary>
+    vector<int> closestDivisors(int num);
 };
 #endif

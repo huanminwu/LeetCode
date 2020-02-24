@@ -1517,8 +1517,52 @@ void TestLeetCode1286(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1357(void)
+{
+    Logger::WriteMessage("Test Leet Code 1357");
+
+    vector<string> commands =
+    {
+        "Cashier", "getBill", "getBill", "getBill", "getBill", "getBill", "getBill", "getBill"
+    };
+    
+    
+    vector<vector<vector<int>>> parameters =
+    {
+        {{3}, {50}, {1, 2, 3, 4, 5, 6, 7}, {100, 200, 300, 400, 300, 200, 100}},
+        {{1, 2},{1, 2}}, {{3, 7},{10, 10}},
+        {{1, 2, 3, 4, 5, 6, 7},{1, 1, 1, 1, 1, 1, 1}},
+        {{4},{10}},{{7, 3},{10, 10}},
+        {{7, 5, 3, 1, 6, 4, 2},{10, 10, 10, 9, 9, 9, 7}},
+        {{2, 3, 5},{5, 3, 2}}
+    };
+    vector<string> result;
+    Cashier * cashier = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Cashier")
+        {
+            cashier = new Cashier(parameters[i][0][0], parameters[i][1][0], parameters[i][2], parameters[i][3]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "getBill")
+        {
+            double ret = cashier->getBill(parameters[i][0], parameters[i][1]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete cashier;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        Logger::WriteMessage(commands[i]);
+        Logger::WriteMessage(parameters[i]);
+        Logger::WriteMessage(result[i]);
+    }
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1357();
     TestLeetCode1286();
     TestLeetCode535();
     TestLeetCode170();

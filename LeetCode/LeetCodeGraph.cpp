@@ -6091,4 +6091,89 @@ int LeetCodeGraph::minJumps(vector<int>& arr)
     if (pos == arr.size() - 1) return result;
     else return 0;
 }
+
+/// <summary>
+/// Leet code #1361. Validate Binary Tree Nodes
+///
+/// Medium
+///
+/// You have n binary tree nodes numbered from 0 to n - 1 where node i has 
+/// two children leftChild[i] and rightChild[i], return true if and only 
+/// if all the given nodes form exactly one valid binary tree.
+///
+/// If node i has no left child then leftChild[i] will equal -1, similarly 
+/// for the right child.
+/// Note that the nodes have no values and that we only use the node
+/// numbers in this problem.
+/// 
+/// Example 1:
+/// Input: n = 4, leftChild = [1,-1,3,-1], rightChild = [2,-1,-1,-1]
+/// Output: true
+///
+/// Example 2:
+/// Input: n = 4, leftChild = [1,-1,3,-1], rightChild = [2,3,-1,-1]
+/// Output: false
+///
+/// Example 3:
+/// Input: n = 2, leftChild = [1,0], rightChild = [-1,-1]
+/// Output: false
+///
+/// Example 4:
+/// Input: n = 6, leftChild = [1,-1,-1,4,-1,-1], 
+/// rightChild = [2,-1,-1,5,-1,-1]
+/// Output: false
+////
+/// Constraints:
+/// 1. 1 <= n <= 10^4
+/// 2. leftChild.length == rightChild.length == n
+/// 3. -1 <= leftChild[i], rightChild[i] <= n - 1
+/// </summary>
+bool LeetCodeGraph::validateBinaryTreeNodes(int n, vector<int>& leftChild, vector<int>& rightChild)
+{
+    vector<int> visited(n);
+    queue<int> search;
+    for (int i = 0; i < n; i++)
+    {
+        if ((visited[i] & 0x01) == 0)
+        {
+            search.push(i);
+            while (!search.empty())
+            {
+                int node = search.front();
+                search.pop();
+                visited[node] |= 0x01;
+                if (leftChild[node] != -1)
+                {
+                    int child = leftChild[node];
+                    // some one claim this node as child
+                    if ((visited[child] & 0x10) != 0) return false;
+                    visited[child] |= 0x10;
+                    // the children has been visited
+                    if ((visited[child] & 0x01) == 0)
+                    {
+                        search.push(child);
+                    }
+                }
+                if (rightChild[node] != -1)
+                {
+                    int child = rightChild[node];
+                    // some one claim this node as child
+                    if ((visited[child] & 0x10) != 0) return false;
+                    visited[child] |= 0x10;
+                    // the children of this node has been visited
+                    if ((visited[child] & 0x01) == 0)
+                    {
+                        search.push(child);
+                    }
+                }
+            }
+        }
+    }
+    int count = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if ((visited[i] & 0x10) == 0) count++;
+    }
+    return (count == 1);
+}
 #pragma endregion

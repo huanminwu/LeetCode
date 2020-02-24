@@ -1461,8 +1461,27 @@ void TestLeetCode214(void)
     Logger::WriteMessage("s=" + s + "; result=" + result);
 }
 
+
+void TestLeetCode1358(void)
+{
+    Logger::WriteMessage("Test Leet Code 1358");
+    LeetCodeString leetCode;
+    string s = "abcabc";
+    int result = leetCode.numberOfSubstrings(s);
+    Logger::WriteMessage("s=" + s + "; result=" + to_string(result));
+
+    s = "aaacb";
+    result = leetCode.numberOfSubstrings(s);
+    Logger::WriteMessage("s=" + s + "; result=" + to_string(result));
+
+    s = "abc";
+    result = leetCode.numberOfSubstrings(s);
+    Logger::WriteMessage("s=" + s + "; result=" + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1358();
     TestLeetCode214();
     TestLeetCode65();
     TestLeetCode482();

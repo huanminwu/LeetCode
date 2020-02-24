@@ -7028,3 +7028,348 @@ bool LeetCodeMath::isPossible(vector<int>& target)
     }
     return true;
 }
+
+/// <summary>
+/// Leet code #1356. Sort Integers by The Number of 1 Bits
+///
+/// Easy
+///
+/// Given an integer array arr. You have to sort the integers in the 
+/// array in ascending order by the number of 1's in their binary 
+/// representation and in case of two or more integers have the same 
+/// number of 1's you have to sort them in ascending order.
+///
+/// Return the sorted array.
+///
+/// Example 1:
+/// Input: arr = [0,1,2,3,4,5,6,7,8]
+/// Output: [0,1,2,4,8,3,5,6,7]
+/// Explantion: [0] is the only integer with 0 bits.
+/// [1,2,4,8] all have 1 bit.
+/// [3,5,6] have 2 bits.
+/// [7] has 3 bits.
+/// The sorted array by bits is [0,1,2,4,8,3,5,6,7]
+///
+/// Example 2:
+/// Input: arr = [1024,512,256,128,64,32,16,8,4,2,1]
+/// Output: [1,2,4,8,16,32,64,128,256,512,1024]
+/// Explantion: All integers have 1 bit in the binary representation, 
+/// you should just sort them in ascending order.
+///
+/// Example 3:
+/// Input: arr = [10000,10000]
+/// Output: [10000,10000]
+///
+/// Example 4:
+/// Input: arr = [2,3,5,7,11,13,17,19]
+/// Output: [2,3,5,17,7,11,13,19]
+///
+/// Example 5:
+/// Input: arr = [10,100,1000,10000]
+/// Output: [10,100,10000,1000]
+/// 
+/// Constraints:
+/// 1. 1 <= arr.length <= 500
+/// 2. 0 <= arr[i] <= 10^4
+/// </summary>
+vector<int> LeetCodeMath::sortByBits(vector<int>& arr)
+{
+    map<int, priority_queue<int>> nums;
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        int num = arr[i];
+        int count = 0;
+        while (num > 0)
+        {
+            if (num % 2 == 1) count++;
+            num /= 2;
+        }
+        nums[count].push(-arr[i]);
+    }
+    vector<int> result;
+    for (auto itr : nums)
+    {
+        while (!itr.second.empty())
+        {
+            result.push_back(-itr.second.top());
+            itr.second.pop();
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1359. Count All Valid Pickup and Delivery Options
+///
+/// Hard
+///
+/// Given n orders, each order consist in pickup and delivery services. 
+///
+/// Count all valid pickup/delivery possible sequences such that 
+/// delivery(i) is always after of pickup(i). 
+///
+/// Since the answer may be too large, return it modulo 10^9 + 7.
+/// 
+/// Example 1:
+/// Input: n = 1
+/// Output: 1
+/// Explanation: Unique order (P1, D1), Delivery 1 always is after of 
+/// Pickup 1.
+///
+/// Example 2:
+/// Input: n = 2
+/// Output: 6
+/// Explanation: All possible orders: 
+/// (P1,P2,D1,D2), (P1,P2,D2,D1), (P1,D1,P2,D2), (P2,P1,D1,D2), 
+/// (P2,P1,D2,D1) and (P2,D2,P1,D1).
+/// This is an invalid order (P1,D2,P2,D1) because Pickup 2 is after 
+/// of Delivery 2.
+///
+/// Example 3:
+/// Input: n = 3
+/// Output: 90
+///
+/// Constraints:
+/// 1. 1 <= n <= 500
+/// </summary>
+int LeetCodeMath::countOrders(int n)
+{
+    long long result = 1;
+    long long M = 1000000007;
+    for (int i = 0; i < n; i++)
+    {
+        if (i > 0)
+        {
+            result = result * (2 * i + 1)*(i + 1) % M;
+        }
+    }
+    return (int)result;
+}
+
+/// <summary>
+/// Leet code #1360. Number of Days Between Two Dates
+/// </summary>
+bool LeetCodeMath::isLeapYear(int year)
+{
+    if (year % 4 != 0) return false;
+    else if (year % 100 != 0) return true;
+    else if (year % 400 != 0) return false;
+    else return true;
+}
+
+
+/// <summary>
+/// Leet code #1360. Number of Days Between Two Dates
+///
+/// Easy
+///
+/// Write a program to count the number of days between two dates.
+///
+/// The two dates are given as strings, their format is YYYY-MM-DD as 
+/// shown in the examples.
+///
+/// Example 1:
+/// Input: date1 = "2019-06-29", date2 = "2019-06-30"
+/// Output: 1
+///
+/// Example 2:
+/// Input: date1 = "2020-01-15", date2 = "2019-12-31"
+/// Output: 15
+/// 
+/// Constraints:
+/// 1. The given dates are valid dates between the years 1971 and 2100.
+/// </summary>
+int LeetCodeMath::daysBetweenDates(string date1, string date2)
+{
+    if (date1 > date2) swap(date1, date2);
+    vector<int> month_days = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    int year1 = atoi(date1.substr(0, 4).c_str());
+    int month1 = atoi(date1.substr(5, 2).c_str());
+    int day1 = atoi(date1.substr(8, 2).c_str());
+    int year2 = atoi(date2.substr(0, 4).c_str());
+    int month2 = atoi(date2.substr(5, 2).c_str());
+    int day2 = atoi(date2.substr(8, 2).c_str());
+
+    int days1 = 0;
+    for (int i = 0; i < month1 - 1; i++)
+    {
+        days1 += month_days[i];
+        if ((i == 1) && isLeapYear(year1))
+        {
+            days1++;
+        }
+    }
+    days1 += day1 - 1;
+
+    int days2 = 0;
+    for (int i = 0; i < month2 - 1; i++)
+    {
+        days2 += month_days[i];
+        if ((i == 1) && isLeapYear(year2))
+        {
+            days2++;
+        }
+    }
+    days2 += day2 - 1;
+
+    int result = days2 - days1;
+    for (int y = year1; y < year2; y++)
+    {
+        result += 365;
+        if (isLeapYear(y)) result += 1;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1363. Largest Multiple of Three
+///
+/// Hard
+///
+/// Given an integer array of digits, return the largest multiple of 
+/// three that can be formed by concatenating some of the given 
+/// digits in any order.
+///
+/// Since the answer may not fit in an integer data type, return the 
+/// answer as a string.
+///
+/// If there is no answer return an empty string.
+/// 
+/// Example 1:
+/// Input: digits = [8,1,9]
+/// Output: "981"
+///
+/// Example 2:
+/// Input: digits = [8,6,7,1,0]
+/// Output: "8760"
+///
+/// Example 3:
+/// Input: digits = [1]
+/// Output: ""
+///
+/// Example 4:
+/// Input: digits = [0,0,0,0,0,0]
+/// Output: "0"
+/// 
+/// Constraints:
+/// 1. 1 <= digits.length <= 10^4
+/// 2. 0 <= digits[i] <= 9
+/// 3. The returning answer must not contain unnecessary leading zeros.
+/// </summary>
+string LeetCodeMath::largestMultipleOfThree(vector<int>& digits)
+{
+    sort(digits.begin(), digits.end());
+    vector<vector<int>> nums(2);
+    int remainder = 0;
+    vector<int> remove;
+    for (size_t i = 0; i < digits.size(); i++)
+    {
+        remainder = (remainder + digits[i]) % 3;
+        if ((digits[i] % 3 == 1) && (nums[0].size() < 2))
+        {
+            nums[0].push_back(digits[i]);
+        }
+        else  if ((digits[i] % 3 == 2) && (nums[1].size() < 2))
+        {
+            nums[1].push_back(digits[i]);
+        }
+    }
+    if (remainder == 1)
+    {
+        if (!nums[0].empty()) remove.push_back(nums[0][0]);
+        else if (nums[1].size() >= 2)
+        {
+            remove.push_back(nums[1][1]);
+            remove.push_back(nums[1][0]);
+        }
+    }
+    else  if (remainder == 2)
+    {
+        if (!nums[1].empty()) remove.push_back(nums[1][0]);
+        else if (nums[0].size() >= 2)
+        {
+            remove.push_back(nums[0][1]);
+            remove.push_back(nums[0][0]);
+        }
+    }
+    string result;
+    if (remainder != 0 && remove.empty())
+    {
+        return result;
+    }
+    int r = 0;
+    for (int i = (int)digits.size() - 1; i >= 0; i--)
+    {
+        if (r < (int)remove.size() && remove[r] == digits[i])
+        {
+            r++;
+            continue;
+        }
+        else if (!result.empty() && result[0] == '0')
+        {
+            continue;
+        }
+        else
+        {
+            result.push_back(digits[i] + '0');
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1362. Closest Divisors
+///
+/// Medium
+///
+/// Given an integer num, find the closest two integers in absolute 
+/// difference whose product equals num + 1 or num + 2.
+/// 
+/// Return the two integers in any order.
+///
+/// Example 1:
+/// Input: num = 8
+/// Output: [3,3]
+/// Explanation: For num + 1 = 9, the closest divisors are 3 & 3, for 
+/// num + 2 = 10, the closest divisors are 2 & 5, hence 3 & 3 is chosen.
+///
+/// Example 2:
+/// Input: num = 123
+/// Output: [5,25]
+///
+/// Example 3:
+/// Input: num = 999
+/// Output: [40,25]
+///
+/// Constraints:
+/// 1. 1 <= num <= 10^9
+/// </summary>
+vector<int> LeetCodeMath::closestDivisors(int num)
+{
+    int diff = INT_MAX;
+    vector<int> result;
+    int start = (int)std::sqrt((double)(num + 2));
+    for (int i = start; i > 0; i--)
+    {
+        if ((num + 1) % i == 0)
+        {
+            int j = (num + 1) / i;
+            if (abs(i - j) < diff)
+            {
+                diff = abs(i - j);
+                result = { i, j };
+            }
+        }
+        if ((num + 2) % i == 0)
+        {
+            int j = (num + 2) / i;
+            if (abs(i - j) < diff)
+            {
+                diff = abs(i - j);
+                result = { i, j };
+            }
+        }
+        if (!result.empty()) break;
+    }
+    return result;
+}

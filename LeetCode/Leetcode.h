@@ -872,30 +872,41 @@ public:
     int threeSumClosest(vector<int>& nums, int target);
 
     /// <summary>
-    /// Leet code #42. Trapping Rain Water    
-    /// Given n non-negative integers representing an elevation map where the width of each bar is 1, 
-    /// compute how much water it is able to trap after raining.
+    /// Leet code #42. Trapping Rain Water
+    /// 
+    /// Given n non-negative integers representing an elevation map where the 
+    /// width of each bar is 1, compute how much water it is able to trap 
+    /// after raining.
     /// For example, 
     /// Given [0,1,0,2,1,0,1,3,2,1,2,1], return 6. 
-    /// The above elevation map is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of 
-    /// rain water (blue section) are being trapped. Thanks Marcos for contributing this image!
+    /// The above elevation map is represented by 
+    /// array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water 
+    /// (blue section) are being trapped. 
+    /// Thanks Marcos for contributing this image!
     /// </summary>
     int trapWater(vector<int>& height);
 
     /// <summary>
     /// Leet code #27. Remove Element
-    /// Given an array and a value, remove all instances of that value in place and return the new length. 
-    /// Do not allocate extra space for another array, you must do this in place with constant memory.
-    /// The order of elements can be changed. It doesn't matter what you leave beyond the new length.
+    ///
+    /// Given an array and a value, remove all instances of that value 
+    /// in place and return the new length. 
+    /// Do not allocate extra space for another array, you must do this 
+    /// in place with constant memory.
+    /// The order of elements can be changed. It doesn't matter what you 
+    /// leave beyond the new length.
     /// Example:
     /// Given input array nums = [3,2,2,3], val = 3 
-    /// Your function should return length = 2, with the first two elements of nums being 2.	
+    /// Your function should return length = 2, with the first two elements 
+    /// of nums being 2.	
     /// </summary> 
     int removeArrayElement(vector<int>& nums, int val);
 
     /// <summary>
     /// Leet code #283. Move Zeroes
-    /// Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+    ///
+    /// Given an array nums, write a function to move all 0's to the end 
+    /// of it while maintaining the relative order of the non-zero elements.
     /// For example, given nums = [0, 1, 0, 3, 12], after calling your function, nums should be [1, 3, 12, 0, 0].  
     /// Note:
     /// 1.You must do this in-place without making a copy of the array.
@@ -905,6 +916,7 @@ public:
 
     /// <summary>
     /// Leet code #345. Reverse Vowels of a String 
+    ///
     /// Write a function that takes a string as input and reverse only the vowels of a string.
     /// Example 1:
     /// Given s = "hello", return "holle". 
@@ -917,10 +929,13 @@ public:
 
     /// <summary>
     /// Leet code #167. Two Sum II - Input array is sorted
+    ///
     /// Given an array of integers that is already sorted in ascending order, 
     /// find two numbers such that they add up to a specific target number.
-    /// The function twoSum should return indices of the two numbers such that they add up to the target, 
-    /// where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.
+    /// The function twoSum should return indices of the two numbers such that 
+    /// they add up to the target, 
+    /// where index1 must be less than index2. Please note that your returned 
+    /// answers (both index1 and index2) are not zero-based.
     ///
     /// You may assume that each input would have exactly one solution. 
     /// Input: numbers={2, 7, 11, 15}, target=9
@@ -931,7 +946,9 @@ public:
 
     /// <summary>
     /// Leet code #228. Summary Ranges
-    /// Given a sorted integer array without duplicates, return the summary of its ranges.
+    ///
+    /// Given a sorted integer array without duplicates, return the summary 
+    ///  of its ranges.
     /// For example, given [0,1,2,4,5,7], return ["0->2","4->5","7"]. 
     /// </summary>
     vector<string> summaryRanges(vector<int>& nums);
