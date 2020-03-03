@@ -1,5 +1,6 @@
 #include "..\LeetCode\LeetCode.h"
 #include "..\LeetCode\LeetCodeTree.h"
+#include "..\LeetCode\LeetCodeLinkedList.h"
 #include "TestTree.h"
 
 void TestLeetCode1214(void)
@@ -239,8 +240,48 @@ void TestLeetCode1339(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode1367(void)
+{
+    Logger::WriteMessage("Test Leet Code 1367");
+    LeetCodeTree leetCode;
+    LeetCodeLinkedList leetCodeLinkedList;
+    vector<int> head_arr = { 4, 2, 8 };
+    ListNode* head = leetCodeLinkedList.generateListNodes(head_arr);
+    string tree_str = "[1,4,4,null,2,2,null,1,null,6,8,null,null,null,null,1,3]";
+    TreeNode *root = leetCode.deserialize(tree_str);
+    bool result = leetCode.isSubPath(head, root);
+    Logger::WriteMessage(head_arr);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("result = " + (string) (result ? "true" : "false"));
+    leetCode.freeTreeNodes(root);
+    leetCodeLinkedList.freeListNodes(head);
+
+    head_arr = { 1,4,2,6 };
+    head = leetCodeLinkedList.generateListNodes(head_arr);
+    tree_str = "[1,4,4,null,2,2,null,1,null,6,8,null,null,null,null,1,3]"; 
+    root = leetCode.deserialize(tree_str);
+    result = leetCode.isSubPath(head, root);
+    Logger::WriteMessage(head_arr);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+    leetCode.freeTreeNodes(root);
+    leetCodeLinkedList.freeListNodes(head);
+
+    head_arr = { 1,4,2,6,8 };
+    head = leetCodeLinkedList.generateListNodes(head_arr);
+    tree_str = "[1,4,4,null,2,2,null,1,null,6,8,null,null,null,null,1,3]";
+    root = leetCode.deserialize(tree_str);
+    result = leetCode.isSubPath(head, root);
+    Logger::WriteMessage(head_arr);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+    leetCode.freeTreeNodes(root);
+    leetCodeLinkedList.freeListNodes(head);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1367();
     TestLeetCode1339();
     TestLeetCode1325();
     TestLeetCode102();

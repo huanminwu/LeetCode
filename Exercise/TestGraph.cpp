@@ -1938,8 +1938,39 @@ void TestLeetCode1361(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1368(void)
+{
+    Logger::WriteMessage("Test Leet Code 1368");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid = { {1, 1, 1, 1},{2, 2, 2, 2},{1, 1, 1, 1},{2, 2, 2, 2} };
+    int result = leetCode.minCost(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1, 1, 3},{3, 2, 2},{1, 1, 4} };
+    result = leetCode.minCost(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1, 2},{34, 3} };
+    result = leetCode.minCost(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {2, 2, 2},{2, 2, 2} };
+    result = leetCode.minCost(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {4} };
+    result = leetCode.minCost(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1368();
     TestLeetCode1361();
     TestLeetCode1345();
     TestLeetCode1340();

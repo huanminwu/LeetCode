@@ -392,8 +392,60 @@ void TestLeetCode1196(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1365(void)
+{
+    Logger::WriteMessage("Test Leet Code 1365");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 8,1,2,2,3 };
+    vector<int> result = leetCode.smallerNumbersThanCurrent(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 6,5,4,8 };
+    result = leetCode.smallerNumbersThanCurrent(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 7,7,7,7 };
+    result = leetCode.smallerNumbersThanCurrent(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1366(void)
+{
+    Logger::WriteMessage("Test Leet Code 1366");
+    LeetCodeSort leetCode;
+    vector<string> votes = { "ABC", "ACB", "ABC", "ACB", "ACB" };
+    string result = leetCode.rankTeams(votes);
+    Logger::WriteMessage(votes);
+    Logger::WriteMessage(result);
+
+    votes = { "WXYZ","XYZW" };
+    result = leetCode.rankTeams(votes);
+    Logger::WriteMessage(votes);
+    Logger::WriteMessage(result);
+
+    votes = { "ZMNAGUEDSJYLBOPHRQICWFXTVK" };
+    result = leetCode.rankTeams(votes);
+    Logger::WriteMessage(votes);
+    Logger::WriteMessage(result);
+
+    votes = { "BCA","CAB","CBA","ABC","ACB","BAC" };
+    result = leetCode.rankTeams(votes);
+    Logger::WriteMessage(votes);
+    Logger::WriteMessage(result);
+  
+    votes = { "M", "M", "M", "M" };
+    result = leetCode.rankTeams(votes);
+    Logger::WriteMessage(votes);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1366();
+    TestLeetCode1365();
     TestLeetCode1196();
     TestLeetCode1331();
     TestLeetCode973();
