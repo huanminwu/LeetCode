@@ -6470,7 +6470,7 @@ double LeetCodeGraph::frogPosition(int n, vector<vector<int>>& edges, int t, int
             int from = node.first;
             if (from == target)
             {
-                if (edge_map[from].empty() || i == t - 1)
+                if (edge_map[from].empty() || i == t)
                 {
                     return node.second;
                 }
