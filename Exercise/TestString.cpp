@@ -1479,8 +1479,70 @@ void TestLeetCode1358(void)
     Logger::WriteMessage("s=" + s + "; result=" + to_string(result));
 }
 
+void TestLeetCode1370(void)
+{
+    Logger::WriteMessage("Test Leet Code 1370");
+    LeetCodeString leetCode;
+    string s = "aaaabbbbcccc";
+    string result = leetCode.sortString(s);
+    Logger::WriteMessage("s=" + s + "; result=" + result);
+
+    s = "rat";
+    result = leetCode.sortString(s);
+    Logger::WriteMessage("s=" + s + "; result=" + result);
+
+    s = "leetcode";
+    result = leetCode.sortString(s);
+    Logger::WriteMessage("s=" + s + "; result=" + result);
+
+    s = "ggggggg";
+    result = leetCode.sortString(s);
+    Logger::WriteMessage("s=" + s + "; result=" + result);
+
+    s = "spo";
+    result = leetCode.sortString(s);
+    Logger::WriteMessage("s=" + s + "; result=" + result);
+}
+
+void TestLeetCode1371(void)
+{
+    Logger::WriteMessage("Test Leet Code 1371");
+    LeetCodeString leetCode;
+    string s = "eleetminicoworoep";
+    int result = leetCode.findTheLongestSubstring(s);
+    Logger::WriteMessage("s=" + s + "; result=" + to_string(result));
+
+    s = "leetcodeisgreat";
+    result = leetCode.findTheLongestSubstring(s);
+    Logger::WriteMessage("s=" + s + "; result=" + to_string(result));
+
+    s = "bcbcbc";
+    result = leetCode.findTheLongestSubstring(s);
+    Logger::WriteMessage("s=" + s + "; result=" + to_string(result));
+}
+
+void TestLeetCode1374(void)
+{
+    Logger::WriteMessage("Test Leet Code 1374");
+    LeetCodeString leetCode;
+    int n = 4;
+    string result  = leetCode.generateTheString(n);
+    Logger::WriteMessage("n=" + to_string(n) + "; result=" + result);
+
+    n = 2;
+    result = leetCode.generateTheString(n);
+    Logger::WriteMessage("n=" + to_string(n) + "; result=" + result);
+
+    n = 7;
+    result = leetCode.generateTheString(n);
+    Logger::WriteMessage("n=" + to_string(n) + "; result=" + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1374();
+    TestLeetCode1371();
+    TestLeetCode1370();
     TestLeetCode1358();
     TestLeetCode214();
     TestLeetCode65();

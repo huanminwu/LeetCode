@@ -6288,4 +6288,208 @@ int LeetCodeGraph::minCost(vector<vector<int>>& grid)
     return result;
 }
 
+
+/// <summary>
+/// Leet code #1376. Time Needed to Inform All Employees
+///  
+/// Medium
+///
+/// A company has n employees with a unique ID for each employee from 0 
+/// to n - 1. The head of the company has is the one with headID.
+///
+/// Each employee has one direct manager given in the manager array where 
+/// manager[i] is the direct manager of the i-th employee, 
+/// manager[headID] = -1. Also it's guaranteed that the subordination 
+/// relationships have a tree structure.
+///
+/// The head of the company wants to inform all the employees of the 
+/// company of an urgent piece of news. He will inform his direct 
+/// subordinates and they will inform their subordinates and so on until 
+/// all employees know about the urgent news.
+///
+/// The i-th employee needs informTime[i] minutes to inform all of his 
+/// direct subordinates (i.e After informTime[i] minutes, all his direct 
+/// subordinates can start spreading the news).
+///
+/// Return the number of minutes needed to inform all the employees about 
+/// the urgent news.
+///
+/// Example 1:
+/// Input: n = 1, headID = 0, manager = [-1], informTime = [0]
+/// Output: 0
+/// Explanation: The head of the company is the only employee in the 
+/// company.
+///
+/// Example 2:
+/// Input: n = 6, headID = 2, manager = [2,2,-1,2,2,2], 
+/// informTime = [0,0,1,0,0,0]
+/// Output: 1
+/// Explanation: The head of the company with id = 2 is the direct 
+/// manager of all the employees in the company and needs 1 minute to 
+/// inform them all.
+/// The tree structure of the employees in the company is shown.
+///
+/// Example 3:
+/// Input: n = 7, headID = 6, manager = [1,2,3,4,5,6,-1], 
+/// informTime = [0,6,5,4,3,2,1]
+/// Output: 21
+/// Explanation: The head has id = 6. He will inform employee with 
+/// id = 5 in 1 minute.
+/// The employee with id = 5 will inform the employee with id = 4 
+/// in 2 minutes.
+/// The employee with id = 4 will inform the employee with id = 3 
+/// in 3 minutes.
+/// The employee with id = 3 will inform the employee with id = 2 
+/// in 4 minutes.
+/// The employee with id = 2 will inform the employee with id = 1 
+/// in 5 minutes.
+/// The employee with id = 1 will inform the employee with id = 0 
+/// in 6 minutes.
+/// Needed time = 1 + 2 + 3 + 4 + 5 + 6 = 21.
+///
+/// Example 4:
+/// Input: n = 15, headID = 0, manager = [-1,0,0,1,1,2,2,3,3,4,4,5,5,6,6], 
+/// informTime = [1,1,1,1,1,1,1,0,0,0,0,0,0,0,0]
+/// Output: 3
+/// Explanation: The first minute the head will inform employees 1 and 2.
+/// The second minute they will inform employees 3, 4, 5 and 6.
+/// The third minute they will inform the rest of employees.
+///
+/// Example 5:
+/// Input: n = 4, headID = 2, manager = [3,3,-1,2], 
+/// informTime = [0,0,162,914]
+/// Output: 1076
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// 2. 0 <= headID < n
+/// 3. manager.length == n
+/// 4. 0 <= manager[i] < n
+/// 5. manager[headID] == -1
+/// 6. informTime.length == n
+/// 7. 0 <= informTime[i] <= 1000
+/// 8. informTime[i] == 0 if employee i has no subordinates.
+/// 9. It is guaranteed that all the employees can be informed.
+/// </summary>
+int LeetCodeGraph::numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime)
+{
+    unordered_map<int, vector<int>> org;
+
+    for (size_t i = 0; i < manager.size(); i++)
+    {
+        org[manager[i]].push_back(i);
+    }
+
+    queue<pair<int, int>> queue;
+    int result = 0;
+    queue.push(make_pair(headID, 0));
+
+    while (!queue.empty())
+    {
+        pair<int, int> person = queue.front();
+        queue.pop();
+        result = max(result, person.second);
+        for (size_t i = 0; i < org[person.first].size(); i++)
+        {
+            queue.push(make_pair(org[person.first][i], person.second + informTime[person.first]));
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1377. Frog Position After T Seconds
+///  
+/// Hard
+///
+/// Given an undirected tree consisting of n vertices numbered from 1 
+/// to n. A frog starts jumping from the vertex 1. In one second, the 
+/// frog jumps from its current vertex to another unvisited vertex if 
+/// they are directly connected. The frog can not jump back to a visited 
+/// vertex. In case the frog can jump to several vertices it jumps 
+/// randomly to one of them with the same probability, otherwise, when 
+/// the frog can not jump to any unvisited vertex it jumps forever on 
+/// the same vertex. 
+/// The edges of the undirected tree are given in the array edges, 
+/// where edges[i] = [from[i], to[i]] means that exists an edge connecting 
+/// directly the vertices from[i] and to[i].
+///
+/// Return the probability that after t seconds the frog is on the vertex 
+/// target.
+///
+/// Example 1:
+/// Input: n = 7, edges = [[1,2],[1,3],[1,7],[2,4],[2,6],[3,5]], t = 2, 
+///  target = 4
+/// Output: 0.16666666666666666 
+/// Explanation: The figure above shows the given graph. The frog starts
+/// at vertex 1, jumping with 1/3 probability to the vertex 2 after 
+/// second 1 and then jumping with 1/2 probability to vertex 4 after 
+/// second 2. Thus the probability for the frog is on the vertex 4 after 2 
+/// seconds is 1/3 * 1/2 = 1/6 = 0.16666666666666666. 
+///
+/// Example 2:
+/// Input: n = 7, edges = [[1,2],[1,3],[1,7],[2,4],[2,6],[3,5]], t = 1, 
+/// target = 7
+/// Output: 0.3333333333333333
+/// Explanation: The figure above shows the given graph. The frog starts at 
+/// vertex 1, jumping with 1/3 = 0.3333333333333333 probability to the 
+/// vertex 7 after second 1. 
+///
+/// Example 3:
+/// Input: n = 7, edges = [[1,2],[1,3],[1,7],[2,4],[2,6],[3,5]], t = 20, 
+/// target = 6
+/// Output: 0.16666666666666666
+///
+/// Constraints:
+/// 1. 1 <= n <= 100
+/// 2. edges.length == n-1
+/// 3. edges[i].length == 2
+/// 4. 1 <= edges[i][0], edges[i][1] <= n
+/// 5. 1 <= t <= 50
+/// 6. 1 <= target <= n
+/// 7. Answers within 10^-5 of the actual value will be accepted as 
+///    correct.
+/// </summary>
+double LeetCodeGraph::frogPosition(int n, vector<vector<int>>& edges, int t, int target)
+{
+    unordered_map<int, set<int>> edge_map;
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        edge_map[edges[i][0]].insert(edges[i][1]);
+        edge_map[edges[i][1]].insert(edges[i][0]);
+    }
+    queue<pair<int, double>> queue;
+    queue.push(make_pair(1, 1));
+    for (int i = 0; i <= t; i++)
+    {
+        size_t size = queue.size();
+        for (size_t j = 0; j < size; j++)
+        {
+            pair<int, double> node = queue.front();
+            queue.pop();
+            int from = node.first;
+            if (from == target)
+            {
+                if (edge_map[from].empty() || i == t - 1)
+                {
+                    return node.second;
+                }
+                else
+                {
+                    return 0.0;
+                }
+            }
+            if (!edge_map[from].empty())
+            {
+                double probability = node.second / edge_map[node.first].size();
+                for (int to : edge_map[from])
+                {
+                    edge_map[to].erase(from);
+                    queue.push(make_pair(to, probability));
+                }
+            }
+        }
+    }
+    return 0.0;
+}
 #pragma endregion

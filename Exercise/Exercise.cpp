@@ -12407,9 +12407,9 @@ void main(int argc, char* argv[])
 {
     TestLeetCodeGraph();
     TestLeetCodeTree();
-    TestLeetCodeSort();
-    TestLeetCodeString();
     TestLeetCodeMath();
+    TestLeetCodeString();
+    TestLeetCodeSort();
     TestLeetCodeDesign();
     TestLeetCodeDFS();
     TestLeetCodeGreedy();

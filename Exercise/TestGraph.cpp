@@ -1968,8 +1968,89 @@ void TestLeetCode1368(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1376(void)
+{
+    Logger::WriteMessage("Test Leet Code 1376");
+    LeetCodeGraph leetCode;
+    int n = 1;
+    int headID = 0;
+    vector<int> manager = { -1 };
+    vector<int> informTime = { 0 };
+    int result = leetCode.numOfMinutes(n, headID, manager, informTime);
+    Logger::WriteMessage(manager);
+    Logger::WriteMessage(informTime);
+    Logger::WriteMessage("n = " + to_string(n) + "; headID = " + to_string(headID) + "; result = " + to_string(result));
+
+    n = 6;
+    headID = 2;
+    manager = { 2, 2, -1, 2, 2, 2 };
+    informTime = { 0, 0, 1, 0, 0, 0 };
+    result = leetCode.numOfMinutes(n, headID, manager, informTime);
+    Logger::WriteMessage(manager);
+    Logger::WriteMessage(informTime);
+    Logger::WriteMessage("n = " + to_string(n) + "; headID = " + to_string(headID) + "; result = " + to_string(result));
+
+    n = 7;
+    headID = 6;
+    manager = { 1,2,3,4,5,6,-1 };
+    informTime = { 0,6,5,4,3,2,1 };
+    result = leetCode.numOfMinutes(n, headID, manager, informTime);
+    Logger::WriteMessage(manager);
+    Logger::WriteMessage(informTime);
+    Logger::WriteMessage("n = " + to_string(n) + "; headID = " + to_string(headID) + "; result = " + to_string(result));
+
+    n = 15;
+    headID = 0;
+    manager = { -1,0,0,1,1,2,2,3,3,4,4,5,5,6,6 };
+    informTime = { 1,1,1,1,1,1,1,0,0,0,0,0,0,0,0 };
+    result = leetCode.numOfMinutes(n, headID, manager, informTime);
+    Logger::WriteMessage(manager);
+    Logger::WriteMessage(informTime);
+    Logger::WriteMessage("n = " + to_string(n) + "; headID = " + to_string(headID) + "; result = " + to_string(result));
+
+    n = 4;
+    headID = 2;
+    manager = { 3,3,-1,2 };
+    informTime = { 0,0,162,914 };
+    result = leetCode.numOfMinutes(n, headID, manager, informTime);
+    Logger::WriteMessage(manager);
+    Logger::WriteMessage(informTime);
+    Logger::WriteMessage("n = " + to_string(n) + "; headID = " + to_string(headID) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1377(void)
+{
+    Logger::WriteMessage("Test Leet Code 1377");
+    LeetCodeGraph leetCode;
+    int n = 7;
+    vector<vector<int>> edges = { {1, 2},{1, 3},{1, 7},{2, 4},{2, 6},{3, 5} };
+    int t = 2;
+    int target = 3;
+    double result = leetCode.frogPosition(n, edges, t, target);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; t = " + to_string(t) + "; target = " + to_string(target) + "; result = " + to_string(result));
+
+    n = 7;
+    edges = { {1, 2}, { 1, 3 }, { 1, 7 }, { 2, 4 }, { 2, 6 }, { 3, 5 } };
+    t = 1;
+    target = 7;    
+    result = leetCode.frogPosition(n, edges, t, target);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; t = " + to_string(t) + "; target = " + to_string(target) + "; result = " + to_string(result));
+
+    n = 7;
+    edges = { {1, 2},{1, 3},{1, 7},{2, 4},{2, 6},{3, 5} };
+    t = 20;
+    target = 6;
+    result = leetCode.frogPosition(n, edges, t, target);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; t = " + to_string(t) + "; target = " + to_string(target) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1377();
+    TestLeetCode1376();
     TestLeetCode1368();
     TestLeetCode1361();
     TestLeetCode1345();

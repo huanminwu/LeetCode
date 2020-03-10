@@ -1975,8 +1975,39 @@ void TestLeetCode1362(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1375(void)
+{
+    Logger::WriteMessage("Test Leet Code 1375");
+    LeetCodeMath leetCode;
+    vector<int> light = { 2, 1, 3, 5, 4 };
+    int result = leetCode.numTimesAllBlue(light);
+    Logger::WriteMessage(light);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    light = { 3,2,4,1,5 };
+    result = leetCode.numTimesAllBlue(light);
+    Logger::WriteMessage(light);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    light = { 4,1,2,3 };
+    result = leetCode.numTimesAllBlue(light);
+    Logger::WriteMessage(light);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    light = { 2,1,4,3,6,5 };
+    result = leetCode.numTimesAllBlue(light);
+    Logger::WriteMessage(light);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    light = { 1,2,3,4,5,6 };
+    result = leetCode.numTimesAllBlue(light);
+    Logger::WriteMessage(light);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1375();
     TestLeetCode1362();
     TestLeetCode1363();
     TestLeetCode1360();

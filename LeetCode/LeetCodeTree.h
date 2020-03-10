@@ -326,6 +326,99 @@ public:
     /// </summary>
     bool isSubPath(ListNode* head, TreeNode* root);
 
+    /// <summary>
+    /// Leet code #1372. Longest ZigZag Path in a Binary Tree
+    ///  
+    /// Medium
+    ///
+    /// Given a binary tree root, a ZigZag path for a binary tree is defined 
+    /// as follow:
+    ///
+    /// Choose any node in the binary tree and a direction (right or left).
+    /// If the current direction is right then move to the right child of the 
+    /// current node otherwise move to the left child.
+    /// Change the direction from right to left or right to left.
+    /// Repeat the second and third step until you can't move in the tree.
+    /// Zigzag length is defined as the number of nodes visited - 1. 
+    /// (A single node has a length of 0).
+    ///
+    /// Return the longest ZigZag path contained in that tree.
+    ///
+    /// Example 1:
+    /// Input: root = [1,null,1,1,1,null,null,1,1,null,1,null,null,null,
+    /// 1,null,1]
+    /// Output: 3
+    /// Explanation: Longest ZigZag path in blue nodes 
+    /// (right -> left -> right).
+    /// 
+    /// Example 2:
+    /// Input: root = [1,1,1,null,1,null,null,1,1,null,1]
+    /// Output: 4
+    /// Explanation: Longest ZigZag path in blue nodes (left -> right -> 
+    /// left -> right).
+    ///
+    /// Example 3:
+    /// Input: root = [1]
+    /// Output: 0
+    /// 
+    /// Constraints:
+    /// 1. Each tree has at most 50000 nodes..
+    /// 2. Each node's value is between [1, 100].
+    /// </summary>
+    int longestZigZag(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #1373. Maximum Sum BST in Binary Tree
+    /// </summary>
+    int maxSumBST(TreeNode* root, int &min_val, int&max_val, bool &is_bst, int &max_sum);
+
+    /// <summary>
+    /// Leet code #1373. Maximum Sum BST in Binary Tree
+    ///  
+    /// Hard
+    ///
+    /// Given a binary tree root, the task is to return the maximum sum 
+    /// of all keys of any sub-tree which is also a Binary Search Tree (BST).
+    ///
+    /// Assume a BST is defined as follows:
+    /// 
+    /// The left subtree of a node contains only nodes with keys less than 
+    /// the node's key.
+    /// The right subtree of a node contains only nodes with keys greater 
+    /// than the node's key.
+    /// Both the left and right subtrees must also be binary search trees.
+    ///
+    /// Example 1:
+    /// Input: root = [1,4,3,2,4,2,5,null,null,null,null,null,null,4,6]
+    /// Output: 20
+    /// Explanation: Maximum sum in a valid Binary search tree is obtained 
+    /// in root node with key equal to 3.
+    ///
+    /// Example 2:
+    /// Input: root = [4,3,null,1,2]
+    /// Output: 2
+    /// Explanation: Maximum sum in a valid Binary search tree is obtained 
+    /// in a single root node with key equal to 2.
+    ///
+    /// Example 3:
+    /// Input: root = [-4,-2,-5]
+    /// Output: 0
+    /// Explanation: All values are negatives. Return an empty BST.
+    ///
+    /// Example 4:
+    /// Input: root = [2,1,3]
+    /// Output: 6
+    ///
+    /// Example 5:
+    ///
+    /// Input: root = [5,4,8,3,null,6,3]
+    /// Output: 7
+    /// Constraints:
+    /// 1. Each tree has at most 40000 nodes..
+    /// 2. Each node's value is between [-4 * 10^4 , 4 * 10^4].
+    /// </summary>
+    int maxSumBST(TreeNode* root);
+
 #pragma endregion
 };
 #endif  // LeetCodeTree_H

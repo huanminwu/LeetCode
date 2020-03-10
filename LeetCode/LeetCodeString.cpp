@@ -9444,4 +9444,188 @@ int LeetCodeString::numberOfSubstrings(string s)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1370. Increasing Decreasing String
+///
+/// Easy
+///
+/// 1. Pick the smallest character from s and append it to the result.
+/// 2. Pick the smallest character from s which is greater than the last 
+///    appended character to the result and append it.
+/// 3. Repeat step 2 until you cannot pick more characters.
+/// 4. Pick the largest character from s and append it to the result.
+/// 5. Pick the largest character from s which is smaller than the last 
+///    appended character to the result and append it.  
+/// 6. Repeat step 5 until you cannot pick more characters.
+/// 7. Repeat the steps from 1 to 6 until you pick all characters from s.
+/// In each step, If the smallest or the largest character appears 
+/// more than once you can choose any occurrence and append it to 
+/// the result.
+///
+/// Return the result string after sorting s with this algorithm.
+///
+/// Example 1:
+/// Input: s = "aaaabbbbcccc"
+/// Output: "abccbaabccba"
+/// Explanation: After steps 1, 2 and 3 of the first iteration, 
+/// result = "abc"
+/// After steps 4, 5 and 6 of the first iteration, result = "abccba"
+/// First iteration is done. Now s = "aabbcc" and we go back to step 1
+/// After steps 1, 2 and 3 of the second iteration, result = "abccbaabc"
+/// After steps 4, 5 and 6 of the second iteration, result = "abccbaabccba"
+///
+/// Example 2:
+/// Input: s = "rat"
+/// Output: "art"
+/// Explanation: The word "rat" becomes "art" after re-ordering it with 
+/// the mentioned algorithm.
+///
+/// Example 3:
+/// Input: s = "leetcode"
+/// Output: "cdelotee"
+///
+/// Example 4:
+/// Input: s = "ggggggg"
+/// Output: "ggggggg"
+///
+/// Example 5: 
+/// Input: s = "spo"
+/// Output: "ops"
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 500
+/// 2. s contains only lower-case English letters.
+/// </summary>
+string LeetCodeString::sortString(string s)
+{
+    string result;
+    vector<int> char_count(26);
+    int n = s.size();
+    for (int i = 0; i < n; i++)
+    {
+        char_count[s[i] - 'a']++;
+    }
+    while (n > 0)
+    {
+        for (int i = 0; i < 26; i++)
+        {
+            if (char_count[i] > 0)
+            {
+                result.push_back('a' + i);
+                char_count[i]--;
+                n--;
+            }
+        }
+        for (int i = 25; i >= 0; i--)
+        {
+            if (char_count[i] > 0)
+            {
+                result.push_back('a' + i);
+                char_count[i]--;
+                n--;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1371. Find the Longest Substring Containing Vowels 
+///                  in Even Counts
+///
+/// Medium
+///
+/// Given the string s, return the size of the longest substring 
+/// containing each vowel an even number of times. That is, 'a', 
+/// 'e', 'i', 'o', and 'u' must appear an even number of times.
+///
+/// Example 1:
+/// Input: s = "eleetminicoworoep"
+/// Output: 13
+/// Explanation: The longest substring is "leetminicowor" which 
+/// contains two each of the vowels: e, i and o and zero of the 
+/// vowels: a and u.  
+/// Example 2:
+/// Input: s = "leetcodeisgreat"
+/// Output: 5
+/// Explanation: The longest substring is "leetc" which contains two e's.
+///
+/// Example 3:
+/// Input: s = "bcbcbc"
+/// Output: 6
+/// Explanation: In this case, the given string "bcbcbc" is the longest 
+/// because all vowels: a, e, i, o and u appear zero times.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 5 x 10^5
+/// 2. s contains only lowercase English letters.
+/// </summary>
+int LeetCodeString::findTheLongestSubstring(string s)
+{
+    unordered_map<int, int> bit_map;
+    bit_map[0] = -1;
+    int result = 0;
+    int n = s.size();
+    int bit = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i] == 'a') bit ^= 1;
+        else if (s[i] == 'e') bit ^= 2;
+        else if (s[i] == 'i') bit ^= 4;
+        else if (s[i] == 'o') bit ^= 8;
+        else if (s[i] == 'u') bit ^= 16;
+
+        if (bit_map.count(bit) == 0) bit_map[bit] = i;
+        else result = max(result, i - bit_map[bit]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1374. Generate a String With Characters That Have Odd 
+///           Counts 
+/// Easy
+///
+/// Given an integer n, return a string with n characters such that 
+/// each character in such string occurs an odd number of times.
+///
+/// The returned string must contain only lowercase English letters. 
+/// If there are multiples valid strings, return any of them.  
+///
+/// Example 1:
+/// Input: n = 4
+/// Output: "pppz"
+/// Explanation: "pppz" is a valid string since the character 'p' 
+/// occurs three times and the character 'z' occurs once. Note that 
+/// there are many other valid strings such as "ohhh" and "love".
+/// 
+/// Example 2:
+/// Input: n = 2
+/// Output: "xy"
+/// Explanation: "xy" is a valid string since the characters 'x' and 'y' 
+/// occur once. Note that there are many other valid strings such as 
+/// "ag" and "ur".
+///
+/// Example 3:
+/// Input: n = 7
+/// Output: "holasss"
+///
+/// Constraints:
+/// 1. 1 <= n <= 500
+/// </summary>
+string LeetCodeString::generateTheString(int n)
+{
+    string result;
+    if (n % 2 == 0)
+    {
+        result.insert(result.end(), n - 1, 'a');
+        result.push_back('b');
+    }
+    else if (n % 2 == 1)
+    {
+        result.insert(result.end(), n, 'a');
+    }
+    return result;
+}
 #pragma endregion

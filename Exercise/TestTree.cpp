@@ -279,8 +279,76 @@ void TestLeetCode1367(void)
     leetCodeLinkedList.freeListNodes(head);
 }
 
+void TestLeetCode1372(void)
+{
+    Logger::WriteMessage("Test Leet Code 1372");
+    LeetCodeTree leetCode;
+    string tree_str = "[1,null,2,3,4,null,null,5,6,null,7,null,null,null,8,null,9]";
+    TreeNode *root = leetCode.deserialize(tree_str);
+    int result = leetCode.longestZigZag(root);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    tree_str = "[1,1,1,null,1,null,null,1,1,null,1]";
+    root = leetCode.deserialize(tree_str);
+    result = leetCode.longestZigZag(root);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    tree_str = "[1]";
+    root = leetCode.deserialize(tree_str);
+    result = leetCode.longestZigZag(root);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+}
+
+void TestLeetCode1373(void)
+{
+    Logger::WriteMessage("Test Leet Code 1373");
+    LeetCodeTree leetCode;
+    string tree_str = "[1,4,3,2,4,2,5,null,null,null,null,null,null,4,6]";
+    TreeNode *root = leetCode.deserialize(tree_str);
+    int result = leetCode.maxSumBST(root);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    tree_str = "[4,3,null,1,2]";
+    root = leetCode.deserialize(tree_str);
+    result = leetCode.maxSumBST(root);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    tree_str = "[-4,-2,-5]";
+    root = leetCode.deserialize(tree_str);
+    result = leetCode.maxSumBST(root);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    tree_str = "[2,1,3]";
+    root = leetCode.deserialize(tree_str);
+    result = leetCode.maxSumBST(root);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    tree_str = "[5,4,8,3,null,6,3]";
+    root = leetCode.deserialize(tree_str);
+    result = leetCode.maxSumBST(root);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1373();
+    TestLeetCode1372();
     TestLeetCode1367();
     TestLeetCode1339();
     TestLeetCode1325();
