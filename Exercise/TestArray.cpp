@@ -1461,8 +1461,38 @@ void TestLeetCode289(void)
     }
 }
 
+void TestLeetCode1380(void)
+{
+    Logger::WriteMessage("Test Leet Code 1380");
+    LeetCodeArray leetCode;
+    vector<vector<int>> matrix =
+    {
+        {3, 7, 8},{9, 11, 13},{15, 16, 17}
+    };
+    vector<int> result = leetCode.luckyNumbers(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage(result);
+
+    matrix =
+    {
+        {1, 10, 4, 2},{9, 3, 8, 7},{15, 16, 17, 12}
+    };
+    result = leetCode.luckyNumbers(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage(result);
+
+    matrix =
+    {
+        {7, 8},{1, 2}
+    };
+    result = leetCode.luckyNumbers(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1380();
     TestLeetCode289();
     TestLeetCode1351();
     TestLeetCode1151();

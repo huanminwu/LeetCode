@@ -7916,4 +7916,134 @@ int LeetCodeTree::maxSumBST(TreeNode* root)
     maxSumBST(root, min_val, max_val, is_bst, max_sum);
     return max_sum;
 }
+
+/// <summary>
+/// Leet code #1379. Find a Corresponding Node of a Binary Tree in a 
+///                  Clone of That Tree
+///
+/// Medium
+///
+/// Given two binary trees original and cloned and given a reference to a 
+/// node target in the original tree.
+///
+/// The cloned tree is a copy of the original tree.
+///
+/// Return a reference to the same node in the cloned tree.
+/// 
+/// Note that you are not allowed to change any of the two trees or the 
+/// target node and the answer must be a reference to a node in the cloned 
+/// tree.
+///
+/// Follow up: Solve the problem if repeated values on the tree are 
+/// allowed.
+/// 
+/// Example 1:
+/// Input: tree = [7,4,3,null,null,6,19], target = 3
+/// Output: 3
+/// Explanation: In all examples the original and cloned trees are shown. 
+/// The target node is a green node from the original tree. The answer is 
+/// the yellow node from the cloned tree.
+///
+/// Example 2:
+/// Input: tree = [7], target =  7
+/// Output: 7
+///
+/// Example 3:
+/// Input: tree = [8,null,6,null,5,null,4,null,3,null,2,null,1], target = 4
+/// Output: 4
+///
+/// Example 4:
+/// Input: tree = [1,2,3,4,5,6,7,8,9,10], target = 5
+/// Output: 5
+///
+/// Example 5:
+/// Input: tree = [1,2,null,3], target = 2
+/// Output: 2
+///
+/// Constraints:
+/// 1. The number of nodes in the tree is in the range [1, 10^4].
+/// 2. The values of the nodes of the tree are unique.
+/// 3. target node is a node from the original tree and is not null.
+/// </summary>
+TreeNode* LeetCodeTree::getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target)
+{
+    queue<TreeNode*> queue;
+    queue.push(original);
+    queue.push(cloned);
+    while (!queue.empty())
+    {
+        TreeNode * node = queue.front();
+        queue.pop();
+        TreeNode * result = queue.front();
+        queue.pop();
+        if (node == target) return result;
+        if (node->left != nullptr)
+        {
+            queue.push(node->left);
+            queue.push(result->left);
+        }
+        if (node->right != nullptr)
+        {
+            queue.push(node->right);
+            queue.push(result->right);
+        }
+    }
+    return nullptr;
+}
+
+/// <summary>
+/// Leet code #1382. Balance a Binary Search Tree
+/// </summary>
+void LeetCodeTree::balanceBST(TreeNode* root, vector<TreeNode *> &node_list)
+{
+    if (root == nullptr) return;
+    balanceBST(root->left, node_list);
+    node_list.push_back(root);
+    balanceBST(root->right, node_list);
+}
+
+/// <summary>
+/// Leet code #1382. Balance a Binary Search Tree
+/// </summary>
+TreeNode * LeetCodeTree::balanceBST(vector<TreeNode *> &node_list, int start, int end)
+{
+    if (start > end) return nullptr;
+    int middle = start + (end - start) / 2;
+    TreeNode * root = node_list[middle];
+    root->left = balanceBST(node_list, start, middle - 1);
+    root->right = balanceBST(node_list, middle + 1, end);
+    return root;
+}
+
+/// <summary>
+/// Leet code #1382. Balance a Binary Search Tree
+///
+/// Medium
+///
+/// Given a binary search tree, return a balanced binary search tree with 
+/// the same node values.
+///
+/// A binary search tree is balanced if and only if the depth of the two 
+/// subtrees of every node never differ by more than 1.
+///
+/// If there is more than one answer, return any of them.
+/// 
+/// Example 1:
+/// Input: root = [1,null,2,null,3,null,4,null,null]
+/// Output: [2,1,3,null,null,null,4]
+/// Explanation: This is not the only correct answer, 
+/// [3,1,4,null,2,null,null] is also correct.
+///
+/// 
+/// Constraints:
+/// 1. The number of nodes in the tree is between 1 and 10^4.
+/// 2. The tree nodes will have distinct values between 1 and 10^5.
+/// </summary>
+TreeNode* LeetCodeTree::balanceBST(TreeNode* root)
+{
+    vector<TreeNode *> node_list;
+    balanceBST(root, node_list);
+    return balanceBST(node_list, 0, node_list.size() - 1);
+}
+
 #pragma endregion

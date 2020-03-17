@@ -1560,8 +1560,56 @@ void TestLeetCode1357(void)
     }
 }
 
+void TestLeetCode1381(void)
+{
+    Logger::WriteMessage("Test Leet Code 1381");
+
+    vector<string> commands =
+    {
+        "CustomStack", "push", "push", "pop", 
+        "push", "push", "push", "increment",
+        "increment","pop", "pop", "pop", "pop"
+    };
+
+    vector<vector<int>> parameters =
+    {
+        {3}, {1}, {2}, {}, {2}, {3}, {4}, {5, 100},
+        {2, 100}, {}, {}, {}, {}
+    };
+    vector<string> result;
+    CustomStack * customStack = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "CustomStack")
+        {
+            customStack = new CustomStack(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "push")
+        {
+            customStack->push(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "pop")
+        {
+            int ret = customStack->pop();
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "increment")
+        {
+            customStack->increment(parameters[i][0], parameters[i][1]);
+            result.push_back("null");
+        }
+    }
+    delete customStack;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1381();
     TestLeetCode1357();
     TestLeetCode1286();
     TestLeetCode535();

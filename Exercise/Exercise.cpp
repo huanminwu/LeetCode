@@ -12405,17 +12405,18 @@ void TestLeetCode1238(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeDP();
+    TestLeetCodeTree();
+    TestLeetCodeDesign();
+    TestLeetCodeArray();
     TestLeetCodeGraph();
     TestLeetCodeTree();
     TestLeetCodeMath();
     TestLeetCodeString();
     TestLeetCodeSort();
-    TestLeetCodeDesign();
     TestLeetCodeDFS();
     TestLeetCodeGreedy();
-    TestLeetCodeArray();
     TestLeetCodeTwoPointers();
-    TestLeetCodeDP();
     TestLeetCodeBFS();
     TestLeetCodeUnionFind();
     TestLeetCodeArray();

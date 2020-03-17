@@ -345,8 +345,84 @@ void TestLeetCode1373(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode1379(void)
+{
+    Logger::WriteMessage("Test Leet Code 1379");
+    LeetCodeTree leetCode;
+    LeetCode leetTree;
+    string tree_str = "[7,4,3,null,null,6,19]";
+    TreeNode *original = leetCode.deserialize(tree_str);
+    TreeNode *cloned = leetCode.deserialize(tree_str);
+    int target_value = 3;
+    TreeNode *target = leetTree.findTreeNode(original, target_value);
+    TreeNode *result = leetCode.getTargetCopy(original, cloned, target);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("target = " + to_string(target->val) + "; result = " + to_string(result->val));
+    leetCode.freeTreeNodes(original);
+    leetCode.freeTreeNodes(cloned);
+
+    tree_str = "[7]";
+    original = leetCode.deserialize(tree_str);
+    cloned = leetCode.deserialize(tree_str);
+    target_value = 7;
+    target = leetTree.findTreeNode(original, target_value);
+    result = leetCode.getTargetCopy(original, cloned, target);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("target = " + to_string(target->val) + "; result = " + to_string(result->val));
+    leetCode.freeTreeNodes(original);
+    leetCode.freeTreeNodes(cloned);
+
+    tree_str = "[8,null,6,null,5,null,4,null,3,null,2,null,1]";
+    original = leetCode.deserialize(tree_str);
+    cloned = leetCode.deserialize(tree_str);
+    target_value = 4;
+    target = leetTree.findTreeNode(original, target_value);
+    result = leetCode.getTargetCopy(original, cloned, target);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("target = " + to_string(target->val) + "; result = " + to_string(result->val));
+    leetCode.freeTreeNodes(original);
+    leetCode.freeTreeNodes(cloned);
+
+    tree_str = "[1,2,3,4,5,6,7,8,9,10]";
+    original = leetCode.deserialize(tree_str);
+    cloned = leetCode.deserialize(tree_str);
+    target_value = 5;
+    target = leetTree.findTreeNode(original, target_value);
+    result = leetCode.getTargetCopy(original, cloned, target);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("target = " + to_string(target->val) + "; result = " + to_string(result->val));
+    leetCode.freeTreeNodes(original);
+    leetCode.freeTreeNodes(cloned);
+
+    tree_str = "[1,2,null,3]";
+    original = leetCode.deserialize(tree_str);
+    cloned = leetCode.deserialize(tree_str);
+    target_value = 2;
+    target = leetTree.findTreeNode(original, target_value);
+    result = leetCode.getTargetCopy(original, cloned, target);
+    Logger::WriteMessage(tree_str);
+    Logger::WriteMessage("target = " + to_string(target->val) + "; result = " + to_string(result->val));
+    leetCode.freeTreeNodes(original);
+    leetCode.freeTreeNodes(cloned);
+}
+
+void TestLeetCode1382(void)
+{
+    Logger::WriteMessage("Test Leet Code 1382");
+    LeetCodeTree leetCode;
+    string tree_str = "[1,null,2,null,3,null,4,null,null]";
+    TreeNode *root = leetCode.deserialize(tree_str);
+    root = leetCode.balanceBST(root);
+    Logger::WriteMessage(tree_str);
+    string result = leetCode.serialize(root);
+    Logger::WriteMessage("input = " + tree_str + "; result = " + result);
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1382();
+    TestLeetCode1379();
     TestLeetCode1373();
     TestLeetCode1372();
     TestLeetCode1367();

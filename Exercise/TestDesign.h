@@ -44,5 +44,6 @@ void TestLeetCode1286(void);
 void TestLeetCode1348(void);
 void TestLeetCode1352(void);
 void TestLeetCode1357(void);
+void TestLeetCode1381(void);
 void TestLeetCodeDesign(void);
 #endif  // TestArray

@@ -3452,35 +3452,21 @@ vector<int> LeetCodeGraph::shortestAlternatingPaths(int n, vector<vector<int>>& 
 /// </summary>
 bool LeetCodeGraph::canConvert(string str1, string str2)
 {
-    vector<int> match(26, -1);
+    if (str1 == str2) return true;
+    vector<int> match1(26, -1), match2(26, -1);
     for (size_t i = 0; i < str1.size(); i++)
     {
         int d1 = str1[i] - 'a';
         int d2 = str2[i] - 'a';
-        if (match[d1] == -1) match[d1] = d2;
-        else if (match[d1] != d2) return false;
+        if (match1[d1] == -1) match1[d1] = d2;
+        else if (match1[d1] != d2) return false;
+        match2[d2] = d1;
     }
-    set<int> other;
-    set<int> self;
     for (size_t i = 0; i < 26; i++)
     {
-        if (match[i] == -1) 
-        {
-            continue;
-        }
-        else if (match[i] == i)
-        {
-            self.insert(i);
-        }
-        else
-        {
-            other.insert(match[i]);
-        }
+        if (match2[i] == -1) return true;
     }
-    if (self.size() == 26) return true;
-    other.insert(self.begin(), self.end());
-    if (other.size() == 26) return false;
-    else return true;
+    return false;
 }
 
 /// <summary>

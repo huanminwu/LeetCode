@@ -442,8 +442,68 @@ void TestLeetCode1366(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1383(void)
+{
+    Logger::WriteMessage("Test Leet Code 1383");
+    LeetCodeSort leetCode;
+    int n = 6;
+    vector<int> speed = { 2, 10, 3, 1, 5, 8 };
+    vector<int> efficiency = { 5, 4, 3, 9, 7, 2 };
+    int k = 2;
+    int result = leetCode.maxPerformance(n, speed, efficiency, k);
+    Logger::WriteMessage(speed);
+    Logger::WriteMessage(efficiency);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 6;
+    speed = { 2, 10, 3, 1, 5, 8 };
+    efficiency = { 5, 4, 3, 9, 7, 2 };
+    k = 3;
+    result = leetCode.maxPerformance(n, speed, efficiency, k);
+    Logger::WriteMessage(speed);
+    Logger::WriteMessage(efficiency);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 6;
+    speed = { 2, 10, 3, 1, 5, 8 };
+    efficiency = { 5, 4, 3, 9, 7, 2 };
+    k = 4;
+    result = leetCode.maxPerformance(n, speed, efficiency, k);
+    Logger::WriteMessage(speed);
+    Logger::WriteMessage(efficiency);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 6;
+    speed = { 10, 5, 1, 7, 4, 2 };
+    efficiency = { 2, 1, 1, 1, 7, 3 };
+    k = 6;
+    result = leetCode.maxPerformance(n, speed, efficiency, k);
+    Logger::WriteMessage(speed);
+    Logger::WriteMessage(efficiency);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 8;
+    speed = { 9, 9, 4, 6, 9, 7, 9, 8 };
+    efficiency = { 1, 9, 1, 9, 8, 1, 10, 1 };
+    k = 4;
+    result = leetCode.maxPerformance(n, speed, efficiency, k);
+    Logger::WriteMessage(speed);
+    Logger::WriteMessage(efficiency);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 5;
+    speed = { 10, 10, 7, 9, 8 };
+    efficiency = { 9, 8, 3, 6, 9 };
+    k = 1;
+    result = leetCode.maxPerformance(n, speed, efficiency, k);
+    Logger::WriteMessage(speed);
+    Logger::WriteMessage(efficiency);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1383();
     TestLeetCode1366();
     TestLeetCode1365();
     TestLeetCode1196();
