@@ -1246,8 +1246,34 @@ void TestLeetCode1335(void)
     Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1388(void)
+{
+    Logger::WriteMessage("Test Leet Code 1388");
+    LeetCodeDP leetCode;
+    vector<int> slices = { 1, 2, 3, 4, 5, 6 };
+    int result = leetCode.maxSizeSlices(slices);
+    Logger::WriteMessage(slices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    slices = { 8,9,8,6,1,1 };
+    result = leetCode.maxSizeSlices(slices);
+    Logger::WriteMessage(slices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    slices = { 4,1,2,5,8,3,1,9,7 };
+    result = leetCode.maxSizeSlices(slices);
+    Logger::WriteMessage(slices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    slices = { 3,1,2 };
+    result = leetCode.maxSizeSlices(slices);
+    Logger::WriteMessage(slices);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1388();
     TestLeetCode1335();
     TestLeetCode486();
     TestLeetCode312();

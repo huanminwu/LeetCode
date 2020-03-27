@@ -719,52 +719,115 @@ public:
     string rankTeams(vector<string>& votes);
 
     /// <summary>
-    /// Leet code #1383. Maximum Performance of a Team
+    /// Leet code #1387. Sort Integers by The Power Value
+    /// 
+    /// Medium
     ///
-    /// Hard
+    /// The power of an integer x is defined as the number of steps needed 
+    /// to transform x into 1 using the following steps:
     ///
-    /// There are n engineers numbered from 1 to n and two arrays: speed 
-    /// and efficiency, where speed[i] and efficiency[i] represent the 
-    /// speed and efficiency for the i-th engineer respectively. Return 
-    /// the maximum performance of a team composed of at most k engineers, 
-    /// since the answer can be a huge number, return this modulo 10^9 + 7.
-    /// The performance of a team is the sum of their engineers' speeds 
-    /// multiplied by the minimum efficiency among their engineers.
+    /// if x is even then x = x / 2
+    /// if x is odd then x = 3 * x + 1
+    /// For example, the power of x = 3 is 7 because 3 needs 7 steps to 
+    /// become 1 (3 --> 10 --> 5 --> 16 --> 8 --> 4 --> 2 --> 1).
+    ///
+    /// Given three integers lo, hi and k. The task is to sort all integers 
+    /// in the interval [lo, hi] by the power value in ascending order, if 
+    /// two or more integers have the same power value sort them by ascending 
+    /// order.
+    ///
+    /// Return the k-th integer in the range [lo, hi] sorted by the power 
+    /// value.
+    ///
+    /// Notice that for any integer x (lo <= x <= hi) it is guaranteed that x 
+    /// will transform into 1 using these steps and that the power of x is 
+    /// will fit in 32 bit signed integer.
     ///
     /// Example 1:
-    /// Input: n = 6, speed = [2,10,3,1,5,8], efficiency = [5,4,3,9,7,2], 
-    /// k = 2
-    /// Output: 60
-    /// Explanation: 
-    /// We have the maximum performance of the team by selecting 
-    /// engineer 2 (with speed=10 and efficiency=4) and engineer 5 
-    /// (with speed=5 and efficiency=7). That is, performance = 
-    /// (10 + 5) * min(4, 7) = 60.
+    /// Input: lo = 12, hi = 15, k = 2
+    /// Output: 13
+    /// Explanation: The power of 12 is 9 (12 --> 6 --> 3 --> 10 --> 5 --> 
+    /// 16 --> 8 --> 4 --> 2 --> 1)
+    /// The power of 13 is 9 
+    /// The power of 14 is 17
+    /// The power of 15 is 17
+    /// The interval sorted by the power value [12,13,14,15]. For k = 2 answer 
+    /// is the second element which is 13.
+    /// Notice that 12 and 13 have the same power value and we sorted them in 
+    /// ascending order. Same for 14 and 15.
     ///
     /// Example 2:
-    /// Input: n = 6, speed = [2,10,3,1,5,8], efficiency = [5,4,3,9,7,2], 
-    /// k = 3
-    /// Output: 68
-    /// Explanation:
-    /// This is the same example as the first but k = 3. We can select 
-    /// engineer 1, engineer 2 and engineer 5 to get the maximum 
-    /// performance of the team. That is, performance = 
-    /// (2 + 10 + 5) * min(5, 4, 7) = 68.
+    /// Input: lo = 1, hi = 1, k = 1
+    /// Output: 1
     ///
     /// Example 3:
-    /// Input: n = 6, speed = [2,10,3,1,5,8], efficiency = [5,4,3,9,7,2],
-    /// k = 4
-    /// Output: 72
+    /// Input: lo = 7, hi = 11, k = 4
+    /// Output: 7
+    /// Explanation: The power array corresponding to the 
+    /// interval [7, 8, 9, 10, 11] is [16, 3, 19, 6, 14].
+    /// The interval sorted by power is [8, 10, 11, 7, 9].
+    /// The fourth number in the sorted array is 7.
+    ///
+    /// Example 4:
+    ///
+    /// Input: lo = 10, hi = 20, k = 5
+    /// Output: 13
+    ///
+    /// Example 5:
+    /// Input: lo = 1, hi = 1000, k = 777
+    /// Output: 570
     ///
     /// Constraints:
-    /// 1. 1 <= n <= 10^5
-    /// 2. speed.length == n
-    /// 3. efficiency.length == n
-    /// 4. 1 <= speed[i] <= 10^5
-    /// 5. 1 <= efficiency[i] <= 10^8
-    /// 6. 1 <= k <= n
+    /// 1. 1 <= lo <= hi <= 1000
+    /// 2. 1 <= k <= hi - lo + 1
     /// </summary>
-    int maxPerformance(int n, vector<int>& speed, vector<int>& efficiency, int k);
+    int getKth(int lo, int hi, int k);
+
+    /// <summary>
+    /// Leet code #1385. Find the Distance Value Between Two Arrays
+    /// 
+    /// Easy
+    ///
+    /// Given two integer arrays arr1 and arr2, and the integer d, return 
+    /// the distance value between the two arrays.
+    ///
+    /// The distance value is defined as the number of elements arr1[i] such 
+    /// that there is not any element arr2[j] where |arr1[i]-arr2[j]| <= d.
+    ///
+    /// Example 1:
+    /// Input: arr1 = [4,5,8], arr2 = [10,9,1,8], d = 2
+    /// Output: 2
+    /// Explanation: 
+    /// For arr1[0]=4 we have: 
+    /// |4-10|=6 > d=2 
+    /// |4-9|=5 > d=2 
+    /// |4-1|=3 > d=2 
+    /// |4-8|=4 > d=2 
+    /// For arr1[1]=5 we have: 
+    /// |5-10|=5 > d=2 
+    /// |5-9|=4 > d=2 
+    /// |5-1|=4 > d=2 
+    /// |5-8|=3 > d=2
+    /// For arr1[2]=8 we have:
+    /// |8-10|=2 <= d=2
+    /// |8-9|=1 <= d=2
+    /// |8-1|=7 > d=2
+    /// |8-8|=0 <= d=2
+    ///
+    /// Example 2:
+    /// Input: arr1 = [1,4,2,3], arr2 = [-4,-3,6,10,20,30], d = 3
+    /// Output: 2
+    ///
+    /// Example 3:
+    /// Input: arr1 = [2,1,100,3], arr2 = [-5,-2,10,-3,7], d = 6
+    /// Output: 1
+    /// 
+    /// Constraints:
+    /// 1. 1 <= arr1.length, arr2.length <= 500
+    /// 2. -10^3 <= arr1[i], arr2[j] <= 10^3
+    /// 3. 0 <= d <= 100
+    /// </summary>
+    int findTheDistanceValue(vector<int>& arr1, vector<int>& arr2, int d);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

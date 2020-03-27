@@ -442,68 +442,79 @@ void TestLeetCode1366(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode1383(void)
+void TestLeetCode1387(void)
 {
-    Logger::WriteMessage("Test Leet Code 1383");
+    Logger::WriteMessage("Test Leet Code 1387");
     LeetCodeSort leetCode;
-    int n = 6;
-    vector<int> speed = { 2, 10, 3, 1, 5, 8 };
-    vector<int> efficiency = { 5, 4, 3, 9, 7, 2 };
+    int lo = 12;
+    int hi = 15;
     int k = 2;
-    int result = leetCode.maxPerformance(n, speed, efficiency, k);
-    Logger::WriteMessage(speed);
-    Logger::WriteMessage(efficiency);
-    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+    int result = leetCode.getKth(lo, hi, k);
+    Logger::WriteMessage("lo = " + to_string(lo) + "; hi = " + to_string(hi));
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 
-    n = 6;
-    speed = { 2, 10, 3, 1, 5, 8 };
-    efficiency = { 5, 4, 3, 9, 7, 2 };
-    k = 3;
-    result = leetCode.maxPerformance(n, speed, efficiency, k);
-    Logger::WriteMessage(speed);
-    Logger::WriteMessage(efficiency);
-    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
-
-    n = 6;
-    speed = { 2, 10, 3, 1, 5, 8 };
-    efficiency = { 5, 4, 3, 9, 7, 2 };
-    k = 4;
-    result = leetCode.maxPerformance(n, speed, efficiency, k);
-    Logger::WriteMessage(speed);
-    Logger::WriteMessage(efficiency);
-    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
-
-    n = 6;
-    speed = { 10, 5, 1, 7, 4, 2 };
-    efficiency = { 2, 1, 1, 1, 7, 3 };
-    k = 6;
-    result = leetCode.maxPerformance(n, speed, efficiency, k);
-    Logger::WriteMessage(speed);
-    Logger::WriteMessage(efficiency);
-    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
-
-    n = 8;
-    speed = { 9, 9, 4, 6, 9, 7, 9, 8 };
-    efficiency = { 1, 9, 1, 9, 8, 1, 10, 1 };
-    k = 4;
-    result = leetCode.maxPerformance(n, speed, efficiency, k);
-    Logger::WriteMessage(speed);
-    Logger::WriteMessage(efficiency);
-    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
-
-    n = 5;
-    speed = { 10, 10, 7, 9, 8 };
-    efficiency = { 9, 8, 3, 6, 9 };
+    lo = 1;
+    hi = 1;
     k = 1;
-    result = leetCode.maxPerformance(n, speed, efficiency, k);
-    Logger::WriteMessage(speed);
-    Logger::WriteMessage(efficiency);
-    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+    result = leetCode.getKth(lo, hi, k);
+    Logger::WriteMessage("lo = " + to_string(lo) + "; hi = " + to_string(hi));
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    lo = 7;
+    hi = 11;
+    k = 4;
+    result = leetCode.getKth(lo, hi, k);
+    Logger::WriteMessage("lo = " + to_string(lo) + "; hi = " + to_string(hi));
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    lo = 10;
+    hi = 20;
+    k = 5;
+    result = leetCode.getKth(lo, hi, k);
+    Logger::WriteMessage("lo = " + to_string(lo) + "; hi = " + to_string(hi));
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    lo = 1;
+    hi = 1000;
+    k = 777;
+    result = leetCode.getKth(lo, hi, k);
+    Logger::WriteMessage("lo = " + to_string(lo) + "; hi = " + to_string(hi));
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1385(void)
+{
+    Logger::WriteMessage("Test Leet Code 1385");
+    LeetCodeSort leetCode;
+    vector<int> arr1 = { 4, 5, 8 };
+    vector<int> arr2 = { 10, 9, 1, 8 };
+    int d = 2;
+    int result = leetCode.findTheDistanceValue(arr1, arr2, d);
+    Logger::WriteMessage(arr1);
+    Logger::WriteMessage(arr2);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+
+    arr1 = { 1,4,2,3 };
+    arr2 = { -4,-3,6,10,20,30 };
+    d = 3;
+    result = leetCode.findTheDistanceValue(arr1, arr2, d);
+    Logger::WriteMessage(arr1);
+    Logger::WriteMessage(arr2);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+
+    arr1 = { 2,1,100,3 };
+    arr2 = { -5,-2,10,-3,7 };
+    d = 6;
+    result = leetCode.findTheDistanceValue(arr1, arr2, d);
+    Logger::WriteMessage(arr1);
+    Logger::WriteMessage(arr2);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
 }
 
 void TestLeetCodeSort(void)
 {
-    TestLeetCode1383();
+    TestLeetCode1385();
+    TestLeetCode1387();
     TestLeetCode1366();
     TestLeetCode1365();
     TestLeetCode1196();

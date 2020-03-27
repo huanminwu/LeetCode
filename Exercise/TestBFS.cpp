@@ -791,8 +791,54 @@ void TestLeetCode417(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1391(void)
+{
+    Logger::WriteMessage("Test Leet Code 1391");
+    LeetCodeBFS leetCode;
+    vector<vector<int>> grid =
+    {
+        {2,4,3},{6,5,2}
+    };
+    bool result = leetCode.hasValidPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string) (result ? "true" : "false"));
+
+    grid =
+    {
+        {1,2,1},{1,2,1}
+    };
+    result = leetCode.hasValidPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    grid =
+    {
+        {1,1,2}
+    };
+    result = leetCode.hasValidPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    grid =
+    {
+        {1,1,1,1,1,1,3}
+    };
+    result = leetCode.hasValidPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    grid =
+    {
+        {2},{2},{2},{2},{2},{2},{6}
+    };
+    result = leetCode.hasValidPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeBFS(void)
 {
+    TestLeetCode1391();
     TestLeetCode127();
     TestLeetCode130();
     TestLeetCode200();

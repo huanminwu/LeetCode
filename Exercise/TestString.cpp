@@ -1538,8 +1538,30 @@ void TestLeetCode1374(void)
     Logger::WriteMessage("n=" + to_string(n) + "; result=" + result);
 }
 
+void TestLeetCode1392(void)
+{
+    Logger::WriteMessage("Test Leet Code 1392");
+    LeetCodeString leetCode;
+    string s = "level";
+    string result = leetCode.longestPrefix(s);
+    Logger::WriteMessage("s =" + s + "; result=" + result);
+
+    s = "ababab";
+    result = leetCode.longestPrefix(s);
+    Logger::WriteMessage("s =" + s + "; result=" + result);
+
+    s = "leetcodeleet";
+    result = leetCode.longestPrefix(s);
+    Logger::WriteMessage("s =" + s + "; result=" + result);
+
+    s = "a";
+    result = leetCode.longestPrefix(s);
+    Logger::WriteMessage("s =" + s + "; result=" + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1392();
     TestLeetCode1374();
     TestLeetCode1371();
     TestLeetCode1370();

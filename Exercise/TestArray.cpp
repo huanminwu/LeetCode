@@ -1490,8 +1490,42 @@ void TestLeetCode1380(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1389(void)
+{
+    Logger::WriteMessage("Test Leet Code 1389");
+    LeetCodeArray leetCode;
+    vector<int> nums = {0,1,2,3,4};
+    vector<int> index = { 0,1,2,2,1 };
+    vector<int> result = leetCode.createTargetArray(nums, index);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(index);
+    Logger::WriteMessage(result);
+
+    nums = { 1,2,3,4,0 };
+    index = { 0,1,2,3,0 };
+    result = leetCode.createTargetArray(nums, index);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(index);
+    Logger::WriteMessage(result);
+
+    nums = { 1 };
+    index = { 0 };
+    result = leetCode.createTargetArray(nums, index);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(index);
+    Logger::WriteMessage(result);
+
+    nums = { 4, 2, 4, 3, 2 };
+    index = { 0, 0, 1, 3, 1 };
+    result = leetCode.createTargetArray(nums, index);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(index);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1389();
     TestLeetCode1380();
     TestLeetCode289();
     TestLeetCode1351();

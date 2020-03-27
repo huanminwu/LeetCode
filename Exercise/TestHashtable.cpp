@@ -239,8 +239,50 @@ void TestLeetCode1257(void)
     Logger::WriteMessage("region1 = " + region1 + "; region2 = " + region2 + "; result = " + result);
 }
 
+void TestLeetCode1386(void)
+{
+    Logger::WriteMessage("Test Leet Code 1386");
+    LeetCodeHashtable leetCode;
+    int n = 3;
+    vector<vector<int>> reservedSeats =
+    {
+        {1, 2},{1, 3},{1, 8},{2, 6},{3, 1},{3, 10}
+    };
+    int result = leetCode.maxNumberOfFamilies(n, reservedSeats);
+    Logger::WriteMessage(reservedSeats);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 2;
+    reservedSeats =
+    {
+        {2,1},{1,8},{2,6}
+    };
+    result = leetCode.maxNumberOfFamilies(n, reservedSeats);
+    Logger::WriteMessage(reservedSeats);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    reservedSeats =
+    {
+        {4,3},{1,4},{4,6},{1,7}
+    };
+    result = leetCode.maxNumberOfFamilies(n, reservedSeats);
+    Logger::WriteMessage(reservedSeats);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    reservedSeats =
+    {
+        {1, 2},{1, 3},{1, 8},{2, 6},{3, 2}
+    };
+    result = leetCode.maxNumberOfFamilies(n, reservedSeats);
+    Logger::WriteMessage(reservedSeats);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1386();
     TestLeetCode170();
     TestLeetCode1257();
     TestLeetCode1224();

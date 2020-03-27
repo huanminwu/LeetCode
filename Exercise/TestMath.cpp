@@ -2005,8 +2005,19 @@ void TestLeetCode1375(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1390(void)
+{
+    Logger::WriteMessage("Test Leet Code 1390");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 21, 4, 7 };
+    int result = leetCode.sumFourDivisors(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1390();
     TestLeetCode1375();
     TestLeetCode1362();
     TestLeetCode1363();
