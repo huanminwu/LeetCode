@@ -1607,8 +1607,70 @@ void TestLeetCode1381(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1396(void)
+{
+    Logger::WriteMessage("Test Leet Code 1396");
+
+    vector<string> commands =
+    {
+        "UndergroundSystem", "checkIn", "checkIn", "checkIn",
+        "checkOut", "checkOut", "checkOut", "getAverageTime",
+        "getAverageTime","checkIn", "getAverageTime", "checkOut", 
+        "getAverageTime"
+    };
+
+    vector<vector<string>> parameters =
+    {
+        {"0", "", "0"}, {"45","Leyton", "3"},
+        {"32", "Paradise", "8"}, {"27", "Leyton", "10"},
+        {"45", "Waterloo", "15"},{"27", "Waterloo", "20"}, 
+        {"32", "Cambridge", "22"}, {"Paradise", "Cambridge"},
+        {"Leyton", "Waterloo"}, {"10", "Leyton", "24"},
+        {"Leyton", "Waterloo"},{"10", "Waterloo", "38"},
+        {"Leyton", "Waterloo"}
+    };
+    vector<string> result;
+    UndergroundSystem * undergroundSystem = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "UndergroundSystem")
+        {
+            undergroundSystem = new UndergroundSystem();
+            result.push_back("null");
+        }
+        else if (commands[i] == "checkIn")
+        {
+            undergroundSystem->checkIn(
+                atoi(parameters[i][0].c_str()), 
+                parameters[i][1], 
+                atoi(parameters[i][2].c_str()));
+            result.push_back("null");
+        }
+        else if (commands[i] == "checkOut")
+        {
+            undergroundSystem->checkOut(
+                atoi(parameters[i][0].c_str()),
+                parameters[i][1],
+                atoi(parameters[i][2].c_str()));
+            result.push_back("null");
+        }
+        else if (commands[i] == "getAverageTime")
+        {
+            double ret = undergroundSystem->getAverageTime(
+                parameters[i][0],
+                parameters[i][1]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete undergroundSystem;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1396();
     TestLeetCode1381();
     TestLeetCode1357();
     TestLeetCode1286();

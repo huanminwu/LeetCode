@@ -280,8 +280,39 @@ void TestLeetCode1386(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1394(void)
+{
+    Logger::WriteMessage("Test Leet Code 1394");
+    LeetCodeHashtable leetCode;
+    vector<int> arr = { 2, 2, 3, 4 };
+    int result = leetCode.findLucky(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1,2,2,3,3,3 };
+    result = leetCode.findLucky(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 2,2,2,3,3 };
+    result = leetCode.findLucky(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 5 };
+    result = leetCode.findLucky(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 7,7,7,7,7,7,7 };
+    result = leetCode.findLucky(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1394();
     TestLeetCode1386();
     TestLeetCode170();
     TestLeetCode1257();

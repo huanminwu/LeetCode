@@ -559,8 +559,35 @@ void TestLeetCode425(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1397(void)
+{
+    Logger::WriteMessage("Test Leet Code 1397");
+    int n = 2;
+    string s1 = "aa";
+    string s2 = "da";
+    string evil = "b";
+    LeetCodeString leetCode;
+    int result = leetCode.findGoodStrings(n, s1, s2, evil);
+    Logger::WriteMessage("s1 =" + s1 + +"; s2 = " + s2 + "; evil = " + evil + "; result=" + to_string(result));
+
+    n = 8;
+    s1 = "leetcode";
+    s2 = "leetgoes";
+    evil = "leet";
+    result = leetCode.findGoodStrings(n, s1, s2, evil);
+    Logger::WriteMessage("s1 =" + s1 + +"; s2 = " + s2 + "; evil = " + evil + "; result=" + to_string(result));
+
+    n = 2;
+    s1 = "gx";
+    s2 = "gz";
+    evil = "x";
+    result = leetCode.findGoodStrings(n, s1, s2, evil);
+    Logger::WriteMessage("s1 =" + s1 + +"; s2 = " + s2 + "; evil = " + evil + "; result=" + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode1397();
     TestLeetCode425();
     TestLeetCode212();
     TestLeetCode1349();

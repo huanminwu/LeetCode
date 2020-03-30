@@ -4997,6 +4997,110 @@ int LeetCodeDFS::maxStudents(vector<vector<char>>& seats)
     int result = maxStudents(seats, level, cache);
     return result;
 }
+
+/// <summary>
+/// Leet code #1397. Find All Good Strings
+/// </summary>
+int LeetCodeDFS::findGoodStrings(int index, string& s1, string& s2, string& evil,
+    int pre_s1, int pre_s2, int pre_evil, vector<int> &kmp,
+    vector<vector<vector<vector<int>>>> &cache)
+{
+    int M = 1000000007;
+    if (pre_evil == evil.size()) return 0;
+    if (index == s1.size()) return 1;
+    if (cache[index][pre_evil][pre_s1][pre_s2] != -1)
+    {
+        return cache[index][pre_evil][pre_s1][pre_s2];
+    }
+    char first = (pre_s1 == 1) ? s1[index] : 'a';
+    char last = (pre_s2 == 1) ? s2[index] : 'z';
+    int result = 0;
+    for (char c = first; c <= last; c++)
+    {
+        int next_evil = pre_evil;
+        while (next_evil > 0 && c != evil[next_evil])
+        {
+            next_evil = kmp[next_evil - 1];
+        }
+        if (c == evil[next_evil]) next_evil++;
+        int next_s1 = (pre_s1 == 1 && c == first) ? 1 : 0;
+        int next_s2 = (pre_s2 == 1 && c == last) ? 1 : 0;
+        result += findGoodStrings(index + 1, s1, s2, evil, next_s1,
+            next_s2, next_evil, kmp, cache);
+        result %= M;
+    }
+    cache[index][pre_evil][pre_s1][pre_s2] = result;
+    return cache[index][pre_evil][pre_s1][pre_s2];
+}
+
+/// <summary>
+/// Leet code #1397. Find All Good Strings
+/// 
+/// Hard
+///
+/// Given the strings s1 and s2 of size n, and the string evil. Return 
+/// the number of good strings.
+///
+/// A good string has size n, it is alphabetically greater than or equal 
+/// to s1, it is alphabetically smaller than or equal to s2, and it does 
+/// not contain the string evil as a substring. Since the answer can be 
+/// a huge number, return this modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: n = 2, s1 = "aa", s2 = "da", evil = "b"
+/// Output: 51 
+/// Explanation: There are 25 good strings starting with 'a': "aa","ac",
+/// "ad",...,"az". Then there are 25 good strings starting with 'c': 
+/// "ca","cc","cd",...,"cz" and finally there is one good string starting 
+/// with 'd': "da". 
+///
+/// Example 2:
+/// Input: n = 8, s1 = "leetcode", s2 = "leetgoes", evil = "leet"
+/// Output: 0 
+/// Explanation: All strings greater than or equal to s1 and smaller than 
+/// or equal to s2 start with the prefix "leet", therefore, there is not 
+/// any good string.
+///
+/// Example 3:
+/// Input: n = 2, s1 = "gx", s2 = "gz", evil = "x"
+/// Output: 2
+/// 
+/// Constraints:
+/// 1. s1.length == n
+/// 2. s2.length == n
+/// 3. 1 <= n <= 500
+/// 4. 1 <= evil.length <= 50
+/// 5. All strings consist of lowercase English letters.
+/// </summary>
+int LeetCodeDFS::findGoodStrings(int n, string s1, string s2, string evil)
+{
+    vector<int> kmp(evil.size());
+    int i = 1;
+    int j = 0;
+    while (i < (int)evil.size())
+    {
+        if (evil[i] == evil[j])
+        {
+            j++;
+            kmp[i] = j;
+            i++;
+        }
+        else if (j == 0)
+        {
+            kmp[i] = 0;
+            i++;
+        }
+        else
+        {
+            j = kmp[j - 1];
+        }
+    }
+    vector<vector<vector<vector<int>>>>
+        cache(n, vector<vector<vector<int>>>(evil.size(),
+            vector<vector<int>>(2, vector<int>(2, -1))));
+    return findGoodStrings(0, s1, s2, evil, 1, 1, 0, kmp, cache);
+}
+
 #pragma endregion
 
 

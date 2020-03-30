@@ -1523,8 +1523,26 @@ void TestLeetCode1389(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1395(void)
+{
+    Logger::WriteMessage("Test Leet Code 1395");
+    LeetCodeArray leetCode;
+    vector<int> rating = { 2, 5, 3, 4, 1 };
+    int result = leetCode.numTeams(rating);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    rating = { 2,1,3 };
+    result = leetCode.numTeams(rating);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    rating = { 1,2,3,4 };
+    result = leetCode.numTeams(rating);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1395();
     TestLeetCode1389();
     TestLeetCode1380();
     TestLeetCode289();
