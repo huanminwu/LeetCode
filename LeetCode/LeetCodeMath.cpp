@@ -7478,3 +7478,192 @@ int LeetCodeMath::sumFourDivisors(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1399. Count Largest Group
+/// 
+/// Easy
+///
+/// Given an integer n. Each number from 1 to n is grouped according to 
+/// the sum of its digits. 
+///
+/// Return how many groups have the largest size.
+/// 
+/// Example 1:
+/// Input: n = 13
+/// Output: 4
+/// Explanation: There are 9 groups in total, they are grouped according 
+/// sum of its digits of numbers from 1 to 13:
+/// [1,10], [2,11], [3,12], [4,13], [5], [6], [7], [8], [9]. 
+/// There are 4 groups with largest size.
+///
+/// Example 2:
+/// Input: n = 2
+/// Output: 2 
+/// Explanation: There are 2 groups [1], [2] of size 1.
+///
+/// Example 3:
+/// Input: n = 15
+/// Output: 6
+///
+/// Example 4:
+/// Input: n = 24
+/// Output: 5
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^4
+/// </summary>
+int LeetCodeMath::countLargestGroup(int n)
+{
+    unordered_map<int, int> digits_count;
+
+    for (int i = 1; i <= n; i++)
+    {
+        int num = i;
+        int sum = 0;
+        while (num > 0)
+        {
+            sum += num % 10;
+            num /= 10;
+        }
+        digits_count[sum]++;
+    }
+    int max_sum = 0;
+    int result = 0;
+    for (auto itr : digits_count)
+    {
+        if (itr.second > max_sum)
+        {
+            max_sum = itr.second;
+            result = 1;
+        }
+        else if (itr.second == max_sum)
+        {
+            result++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1401. Circle and Rectangle Overlapping
+/// 
+/// Medium
+///
+/// Given a circle represented as (radius, x_center, y_center) and an 
+/// axis-aligned rectangle represented as (x1, y1, x2, y2), 
+/// where (x1, y1) are the coordinates of the bottom-left corner, 
+/// and (x2, y2) are the coordinates of the top-right corner of the 
+/// rectangle.
+///
+/// Return True if the circle and rectangle are overlapped otherwise 
+/// return False.
+/// In other words, check if there are any point (xi, yi) such that 
+/// belongs to the circle and the rectangle at the same time.
+/// 
+/// Example 1:
+/// Input: radius = 1, x_center = 0, y_center = 0, x1 = 1, y1 = -1, 
+/// x2 = 3, y2 = 1
+/// Output: true
+/// Explanation: Circle and rectangle share the point (1,0) 
+///
+/// Example 2:
+/// Input: radius = 1, x_center = 0, y_center = 0, x1 = -1, y1 = 0, 
+/// x2 = 0, y2 = 1
+/// Output: true
+///
+/// Example 3:
+/// Input: radius = 1, x_center = 1, y_center = 1, 
+/// x1 = -3, y1 = -3, x2 = 3, y2 = 3
+/// Output: true
+///
+/// Example 4: 
+/// Input: radius = 1, x_center = 1, y_center = 1, x1 = 1, y1 = -3, x2 = 2, y2 = -1
+/// Output: false
+///
+/// Constraints:
+/// 1. 1 <= radius <= 2000
+/// 2. -10^4 <= x_center, y_center, x1, y1, x2, y2 <= 10^4
+/// 3. x1 < x2
+/// 4. y1 < y2
+/// </summary>
+bool LeetCodeMath::checkOverlap(int radius, int x_center, int y_center, int x1, int y1, int x2, int y2)
+{
+    double area = (double)(radius * radius);
+    double f = 0.0;
+    double y_r_1 = 0.0;
+    double y_r_2 = 0.0;
+    double x_r_1 = 0.0;
+    double x_r_2 = 0.0;
+
+    f = area - (x1 - x_center) * (x1 - x_center);
+    if (f >= 0)
+    {
+        y_r_1 = (double)y_center - sqrt(f);
+        y_r_2 = (double)y_center + sqrt(f);
+        if ((double)y_r_1 >= (double)y1 - 0.00000001 && (double)y_r_1 <= (double)y2 + 0.00000001)
+        {
+            return true;
+        }
+        if ((double)y_r_2 >= (double)y1 - 0.00000001 && (double)y_r_2 <= (double)y2 + 0.00000001)
+        {
+            return true;
+        }
+    }
+
+    f = area - (x2 - x_center) * (x2 - x_center);
+    if (f >= 0)
+    {
+        y_r_1 = (double)y_center - sqrt(f);
+        y_r_2 = (double)y_center + sqrt(f);
+        if ((double)y_r_1 >= (double)y1 - 0.00000001 && (double)y_r_1 <= (double)y2 + 0.00000001)
+        {
+            return true;
+        }
+        if ((double)y_r_2 >= (double)y1 - 0.00000001 && (double)y_r_2 <= (double)y2 + 0.00000001)
+        {
+            return true;
+        }
+    }
+
+    f = area - (y1 - y_center) * (y1 - y_center);
+    if (f >= 0)
+    {
+        x_r_1 = (double)x_center - sqrt(f);
+        x_r_2 = (double)x_center + sqrt(f);
+        if ((double)x_r_1 >= (double)x1 - 0.00000001 && (double)x_r_1 <= (double)x2 + 0.00000001)
+        {
+            return true;
+        }
+        if ((double)x_r_2 >= (double)x1 - 0.00000001 && (double)x_r_2 <= (double)x2 + 0.00000001)
+        {
+            return true;
+        }
+    }
+    f = area - (y2 - y_center) * (y2 - y_center);
+    if (f >= 0)
+    {
+        x_r_1 = (double)x_center - sqrt(f);
+        x_r_2 = (double)x_center + sqrt(f);
+        if ((double)x_r_1 >= (double)x1 - 0.00000001 && (double)x_r_1 <= (double)x2 + 0.00000001)
+        {
+            return true;
+        }
+        if ((double)x_r_2 >= (double)x1 - 0.00000001 && (double)x_r_2 <= (double)x2 + 0.00000001)
+        {
+            return true;
+        }
+    }
+    if (x_center >= x1 && x_center <= x2 && y_center >= y1 && y_center <= y2)
+    {
+        return true;
+    }
+
+    if (((x1 + x2) / 2 - x_center) * ((x1 + x2) / 2 - x_center) + 
+        ((y1 + y2) / 2 - y_center) * ((y1 + y2) / 2 - y_center) <= 
+        radius * radius)
+    {
+        return true;
+    }
+    return false;
+}

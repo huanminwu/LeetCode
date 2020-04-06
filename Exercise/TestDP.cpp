@@ -1271,8 +1271,39 @@ void TestLeetCode1388(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1406(void)
+{
+    Logger::WriteMessage("Test Leet Code 1406");
+    LeetCodeDP leetCode;
+    vector<int> stoneValues = { 1,2,3,7 };
+    string result = leetCode.stoneGameIII(stoneValues);
+    Logger::WriteMessage(stoneValues);
+    Logger::WriteMessage("result = " + result);
+
+    stoneValues = { 1,2,3,-9 };
+    result = leetCode.stoneGameIII(stoneValues);
+    Logger::WriteMessage(stoneValues);
+    Logger::WriteMessage("result = " + result);
+
+    stoneValues = { 1,2,3,6 };
+    result = leetCode.stoneGameIII(stoneValues);
+    Logger::WriteMessage(stoneValues);
+    Logger::WriteMessage("result = " + result);
+
+    stoneValues = { 1,2,3,-1,-2,-3,7 };
+    result = leetCode.stoneGameIII(stoneValues);
+    Logger::WriteMessage(stoneValues);
+    Logger::WriteMessage("result = " + result);
+
+    stoneValues = { -1,-2,-3 };
+    result = leetCode.stoneGameIII(stoneValues);
+    Logger::WriteMessage(stoneValues);
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1406();
     TestLeetCode1388();
     TestLeetCode1335();
     TestLeetCode486();

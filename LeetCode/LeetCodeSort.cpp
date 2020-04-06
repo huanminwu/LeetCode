@@ -4302,4 +4302,137 @@ int LeetCodeSort::findTheDistanceValue(vector<int>& arr1, vector<int>& arr2, int
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1402. Reducing Dishes
+/// 
+/// Hard
+///
+/// A chef has collected data on the satisfaction level of his n dishes. 
+/// Chef can cook any dish in 1 unit of time.
+///
+/// Like-time coefficient of a dish is defined as the time taken to cook 
+/// that dish including previous dishes multiplied by its satisfaction 
+/// level  i.e.  time[i]*satisfaction[i]
+///
+/// Return the maximum sum of Like-time coefficient that the chef can 
+/// obtain after dishes preparation.
+///
+/// Dishes can be prepared in any order and the chef can discard some 
+/// dishes to get this maximum value.
+/// 
+/// Example 1:
+/// Input: satisfaction = [-1,-8,0,5,-9]
+/// Output: 14
+/// Explanation: After Removing the second and last dish, the maximum 
+/// total Like-time coefficient will be equal to (-1*1 + 0*2 + 5*3 = 14). 
+/// Each dish is prepared in one unit of time.
+///
+/// Example 2:
+/// Input: satisfaction = [4,3,2]
+/// Output: 20
+/// Explanation: Dishes can be prepared in any order, 
+/// (2*1 + 3*2 + 4*3 = 20)
+///
+/// Example 3:
+/// Input: satisfaction = [-1,-4,-5]
+/// Output: 0
+/// Explanation: People don't like the dishes. No dish is prepared.
+///
+/// Example 4:
+/// Input: satisfaction = [-2,5,-1,0,3,-3]
+/// Output: 35
+///
+/// Constraints:
+/// 1. n == satisfaction.length
+/// 2. 1 <= n <= 500
+/// 3. -10^3 <= satisfaction[i] <= 10^3
+/// </summary>
+int LeetCodeSort::maxSatisfaction(vector<int>& satisfaction)
+{
+    priority_queue<int> pq;
+    
+    for (size_t i = 0; i < satisfaction.size(); i++)
+    {
+        pq.push(satisfaction[i]);
+    }
+    int result = 0;
+    int sum = 0;
+    while (!pq.empty())
+    {
+        int s = pq.top();
+        pq.pop();
+        if (sum + s < 0) break;
+        sum += s;
+        result += sum;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1403. Minimum Subsequence in Non-Increasing Order
+/// 
+/// Easy
+///
+/// Given the array nums, obtain a subsequence of the array whose sum 
+/// of elements is strictly greater than the sum of the non included 
+/// elements in such subsequence. 
+/// 
+/// If there are multiple solutions, return the subsequence with minimum 
+/// size and if there still exist multiple solutions, return the 
+/// subsequence with the maximum total sum of all its elements. A 
+/// subsequence of an array can be obtained by erasing some 
+/// (possibly zero) elements from the array. 
+///
+/// Note that the solution with the given constraints is guaranteed to 
+/// be unique. Also return the answer sorted in non-increasing order.
+/// 
+/// Example 1:
+/// Input: nums = [4,3,10,9,8]
+/// Output: [10,9] 
+/// Explanation: The subsequences [10,9] and [10,8] are minimal such 
+/// that the sum of their elements is strictly greater than the sum of 
+/// elements not included, however, the subsequence [10,9] has the 
+/// maximum total sum of its elements. 
+///
+/// Example 2:
+/// Input: nums = [4,4,7,6,7]
+/// Output: [7,7,6] 
+/// Explanation: The subsequence [7,7] has the sum of its elements 
+/// equal to 14 which is not strictly greater than the sum of 
+/// elements not included (14 = 4 + 4 + 6). Therefore, the 
+/// subsequence [7,6,7] is the minimal satisfying the conditions. 
+/// Note the subsequence has to returned in non-decreasing order.  
+///
+/// Example 3:
+/// Input: nums = [6]
+/// Output: [6]
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 500
+/// 2. 1 <= nums[i] <= 100
+/// </summary>
+vector<int> LeetCodeSort::minSubsequence(vector<int>& nums)
+{
+    vector<int> result;
+    priority_queue<int> pq;
+    int sum = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        pq.push(nums[i]);
+        sum += nums[i];
+    }
+
+    int sum_r = 0;
+    while (!pq.empty())
+    {
+        int p = pq.top();
+        pq.pop();
+
+        sum_r += p;
+        result.push_back(p);
+        if (sum_r > sum - sum_r) break;
+    }
+    return result;
+}
 #pragma endregion

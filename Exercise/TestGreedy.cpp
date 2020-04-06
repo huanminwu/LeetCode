@@ -196,8 +196,35 @@ void TestLeetCode1383(void)
     Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1405(void)
+{
+    Logger::WriteMessage("Test Leet Code 1405");
+    LeetCodeGreedy leetCode;
+    int a = 1;
+    int b = 1;
+    int c = 7;
+    string result = leetCode.longestDiverseString(a, b, c);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) + 
+        "; c = " + to_string(c) + "; result = " + result);
+
+    a = 2;
+    b = 2;
+    c = 1;
+    result = leetCode.longestDiverseString(a, b, c);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) +
+        "; c = " + to_string(c) + "; result = " + result);
+
+    a = 7;
+    b = 1;
+    c = 0;
+    result = leetCode.longestDiverseString(a, b, c);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) +
+        "; c = " + to_string(c) + "; result = " + result);
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode1405();
     TestLeetCode1383();
     TestLeetCode1353();
     TestLeetCode352();

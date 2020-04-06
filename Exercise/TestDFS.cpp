@@ -566,7 +566,7 @@ void TestLeetCode1397(void)
     string s1 = "aa";
     string s2 = "da";
     string evil = "b";
-    LeetCodeString leetCode;
+    LeetCodeDFS leetCode;
     int result = leetCode.findGoodStrings(n, s1, s2, evil);
     Logger::WriteMessage("s1 =" + s1 + +"; s2 = " + s2 + "; evil = " + evil + "; result=" + to_string(result));
 

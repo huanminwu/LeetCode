@@ -2015,8 +2015,132 @@ void TestLeetCode1390(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1399(void)
+{
+    Logger::WriteMessage("Test Leet Code 1399");
+    LeetCodeMath leetCode;
+    int n = 13;
+    int result = leetCode.countLargestGroup(n);
+    Logger::WriteMessage("n = "+ to_string(n) + "; result = " + to_string(result));
+
+    n = 2;
+    result = leetCode.countLargestGroup(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 15;
+    result = leetCode.countLargestGroup(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 24;
+    result = leetCode.countLargestGroup(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1401(void)
+{
+    Logger::WriteMessage("Test Leet Code 1401");
+    LeetCodeMath leetCode;
+    int radius = 1;
+    int x_center = 0;
+    int y_center = 0;
+    int x1 = 1;
+    int y1 = -1;
+    int x2 = 3;
+    int y2 = 1;
+    bool result = leetCode.checkOverlap(radius, x_center, y_center, x1, y1, x2, y2);
+    Logger::WriteMessage("radius = " + to_string(radius) + 
+        "; x_center = " + to_string(x_center) +
+        "; y_center = " + to_string(y_center) +
+        "; x1 = " + to_string(x1) +
+        "; y1 = " + to_string(y1) +
+        "; x2 = " + to_string(x2) +
+        "; y2 = " + to_string(y2) +
+        "; x2 = " + to_string(x2) +
+        "; result = " + (result ? "true" : "false")
+    );
+
+    radius = 1;
+    x_center = 0;
+    y_center = 0;
+    x1 = -1;
+    y1 = 0;
+    x2 = 0;
+    y2 = 1;
+    result = leetCode.checkOverlap(radius, x_center, y_center, x1, y1, x2, y2);
+    Logger::WriteMessage("radius = " + to_string(radius) +
+        "; x_center = " + to_string(x_center) +
+        "; y_center = " + to_string(y_center) +
+        "; x1 = " + to_string(x1) +
+        "; y1 = " + to_string(y1) +
+        "; x2 = " + to_string(x2) +
+        "; y2 = " + to_string(y2) +
+        "; x2 = " + to_string(x2) +
+        "; result = " + (result ? "true" : "false")
+    );
+
+    radius = 1; 
+    x_center = 1;
+    y_center = 1;
+    x1 = -3; 
+    y1 = -3; 
+    x2 = 3; 
+    y2 = 3;
+    result = leetCode.checkOverlap(radius, x_center, y_center, x1, y1, x2, y2);
+    Logger::WriteMessage("radius = " + to_string(radius) +
+        "; x_center = " + to_string(x_center) +
+        "; y_center = " + to_string(y_center) +
+        "; x1 = " + to_string(x1) +
+        "; y1 = " + to_string(y1) +
+        "; x2 = " + to_string(x2) +
+        "; y2 = " + to_string(y2) +
+        "; x2 = " + to_string(x2) +
+        "; result = " + (result ? "true" : "false")
+    );
+
+    radius = 1;
+    x_center = 1;
+    y_center = 1;
+    x1 = 1; 
+    y1 = -3; 
+    x2 = 2;
+    y2 = -1;
+    result = leetCode.checkOverlap(radius, x_center, y_center, x1, y1, x2, y2);
+    Logger::WriteMessage("radius = " + to_string(radius) +
+        "; x_center = " + to_string(x_center) +
+        "; y_center = " + to_string(y_center) +
+        "; x1 = " + to_string(x1) +
+        "; y1 = " + to_string(y1) +
+        "; x2 = " + to_string(x2) +
+        "; y2 = " + to_string(y2) +
+        "; x2 = " + to_string(x2) +
+        "; result = " + (result ? "true" : "false")
+    );
+
+    
+    radius = 18;
+    x_center = 11;
+    y_center = 19;
+    x1 = 7;
+    y1 = 12;
+    x2 = 10;
+    y2 = 20;
+    result = leetCode.checkOverlap(radius, x_center, y_center, x1, y1, x2, y2);
+    Logger::WriteMessage("radius = " + to_string(radius) +
+        "; x_center = " + to_string(x_center) +
+        "; y_center = " + to_string(y_center) +
+        "; x1 = " + to_string(x1) +
+        "; y1 = " + to_string(y1) +
+        "; x2 = " + to_string(x2) +
+        "; y2 = " + to_string(y2) +
+        "; x2 = " + to_string(x2) +
+        "; result = " + (result ? "true" : "false")
+    );
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1401();
+    TestLeetCode1399();
     TestLeetCode1390();
     TestLeetCode1375();
     TestLeetCode1362();

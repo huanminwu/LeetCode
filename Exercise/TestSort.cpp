@@ -511,8 +511,55 @@ void TestLeetCode1385(void)
     Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1402(void)
+{
+    Logger::WriteMessage("Test Leet Code 1402");
+    LeetCodeSort leetCode;
+    vector<int> satisfaction = { -1, -8, 0, 5, -9 };
+    int result = leetCode.maxSatisfaction(satisfaction);
+    Logger::WriteMessage(satisfaction);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    satisfaction = { 4,3,2 };
+    result = leetCode.maxSatisfaction(satisfaction);
+    Logger::WriteMessage(satisfaction);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    satisfaction = { -1,-4,-5 };
+    result = leetCode.maxSatisfaction(satisfaction);
+    Logger::WriteMessage(satisfaction);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    satisfaction = { -2,5,-1,0,3,-3 };
+    result = leetCode.maxSatisfaction(satisfaction);
+    Logger::WriteMessage(satisfaction);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1403(void)
+{
+    Logger::WriteMessage("Test Leet Code 1403");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 4, 3, 10, 9, 8 };
+    vector<int> result = leetCode.minSubsequence(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 4,4,7,6,7 };
+    result = leetCode.minSubsequence(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 6 };
+    result = leetCode.minSubsequence(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1403();
+    TestLeetCode1402();
     TestLeetCode1385();
     TestLeetCode1387();
     TestLeetCode1366();

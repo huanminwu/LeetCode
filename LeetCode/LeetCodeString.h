@@ -2421,6 +2421,100 @@ public:
     /// </summary>
     string longestPrefix(string s);
 
+    /// <summary>
+    /// Leet code #1400. Construct K Palindrome Strings
+    /// 
+    /// Medium
+    ///
+    /// Given a string s and an integer k. You should construct k non-empty 
+    /// palindrome strings using all the characters in s.
+    ///
+    /// Return True if you can use all the characters in s to construct k 
+    /// palindrome strings or False otherwise.
+    /// 
+    /// Example 1:
+    /// Input: s = "annabelle", k = 2
+    /// Output: true
+    /// Explanation: You can construct two palindromes using all characters 
+    /// in s.
+    /// Some possible constructions "anna" + "elble", "anbna" + "elle", 
+    /// "anellena" + "b"
+    ///
+    /// Example 2:
+    /// Input: s = "leetcode", k = 3
+    /// Output: false
+    /// Explanation: It is impossible to construct 3 palindromes using all 
+    /// the characters of s.
+    ///
+    /// Example 3:
+    /// Input: s = "true", k = 4
+    /// Output: true
+    /// Explanation: The only possible solution is to put each character 
+    /// in a separate string.
+    ///
+    /// Example 4:
+    /// Input: s = "yzyzyzyzyzyzyzy", k = 2
+    /// Output: true
+    /// Explanation: Simply you can put all z's in one string and all y's 
+    /// in the other string. Both strings will be palindrome.
+    ///
+    /// Example 5:
+    /// Input: s = "cr", k = 7
+    /// Output: false
+    /// Explanation: We don't have enough characters in s to construct 7 
+    /// palindromes.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. All characters in s are lower-case English letters.
+    /// 3. 1 <= k <= 10^5
+    /// </summary>
+    bool canConstruct(string s, int k);
+
+    /// <summary>
+    /// Leet code #1404. Number of Steps to Reduce a Number in Binary 
+    /// Representation to One
+    /// 
+    /// Medium
+    ///
+    /// Given a number s in their binary representation. Return the number 
+    /// of steps to reduce it to 1 under the following rules:
+    ///
+    /// If the current number is even, you have to divide it by 2.
+    ///
+    /// If the current number is odd, you have to add 1 to it.
+    ///
+    /// It's guaranteed that you can always reach to one for all testcases.
+    ///
+    /// Example 1:
+    /// Input: s = "1101"
+    /// Output: 6
+    /// Explanation: "1101" corressponds to number 13 in their decimal 
+    /// representation.
+    /// Step 1) 13 is odd, add 1 and obtain 14. 
+    /// Step 2) 14 is even, divide by 2 and obtain 7.
+    /// Step 3) 7 is odd, add 1 and obtain 8.
+    /// Step 4) 8 is even, divide by 2 and obtain 4.  
+    /// Step 5) 4 is even, divide by 2 and obtain 2. 
+    /// Step 6) 2 is even, divide by 2 and obtain 1.  
+    ///
+    /// Example 2:
+    /// Input: s = "10"
+    /// Output: 1
+    /// Explanation: "10" corressponds to number 2 in their decimal 
+    /// representation.
+    /// Step 1) 2 is even, divide by 2 and obtain 1.  
+    /// Example 3:
+    ///
+    /// Input: s = "1"
+    /// Output: 0
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 500
+    /// 2. s consists of characters '0' or '1'
+    /// 3. s[0] == '1'
+    /// </summary>
+    int numSteps(string s);
 #pragma endregion
 };
 

@@ -1559,8 +1559,57 @@ void TestLeetCode1392(void)
     Logger::WriteMessage("s =" + s + "; result=" + result);
 }
 
+void TestLeetCode1400(void)
+{
+    Logger::WriteMessage("Test Leet Code 1400");
+    LeetCodeString leetCode;
+    string s = "annabelle";
+    int k = 2;
+    bool result = leetCode.canConstruct(s, k);
+    Logger::WriteMessage("s =" + s + "; k = " + to_string(k) + "; result=" + (result ? "true" : "false"));
+
+    s = "leetcode";
+    k = 3;
+    result = leetCode.canConstruct(s, k);
+    Logger::WriteMessage("s =" + s + "; k = " + to_string(k) + "; result=" + (result ? "true" : "false"));
+
+    s = "true";
+    k = 4;
+    result = leetCode.canConstruct(s, k);
+    Logger::WriteMessage("s =" + s + "; k = " + to_string(k) + "; result=" + (result ? "true" : "false"));
+
+    s = "yzyzyzyzyzyzyzy";
+    k = 2;
+    result = leetCode.canConstruct(s, k);
+    Logger::WriteMessage("s =" + s + "; k = " + to_string(k) + "; result=" + (result ? "true" : "false"));
+
+    s = "cr";
+    k = 7;
+    result = leetCode.canConstruct(s, k);
+    Logger::WriteMessage("s =" + s + "; k = " + to_string(k) + "; result=" + (result ? "true" : "false"));
+}
+
+void TestLeetCode1404(void)
+{
+    Logger::WriteMessage("Test Leet Code 1404");
+    LeetCodeString leetCode;
+    string s = "1101";
+    int result = leetCode.numSteps(s);
+    Logger::WriteMessage("s =" + s + "; result=" + to_string(result));
+
+    s = "10";
+    result = leetCode.numSteps(s);
+    Logger::WriteMessage("s =" + s + "; result=" + to_string(result));
+
+    s = "1";
+    result = leetCode.numSteps(s);
+    Logger::WriteMessage("s =" + s + "; result=" + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1404();
+    TestLeetCode1400();
     TestLeetCode1392();
     TestLeetCode1374();
     TestLeetCode1371();
