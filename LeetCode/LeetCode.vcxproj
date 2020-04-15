@@ -226,6 +226,8 @@
     <None Include="LeetCode1369.sql" />
     <None Include="LeetCode1378.sql" />
     <None Include="LeetCode1393.sql" />
+    <None Include="LeetCode1398.sql" />
+    <None Include="LeetCode1407.sql" />
     <None Include="LeetCode175.sql" />
     <None Include="LeetCode176.sql" />
     <None Include="LeetCode177.sql" />

@@ -439,5 +439,11 @@
     <None Include="LeetCode1393.sql">
       <Filter>SQL</Filter>
     </None>
+    <None Include="LeetCode1398.sql">
+      <Filter>SQL</Filter>
+    </None>
+    <None Include="LeetCode1407.sql">
+      <Filter>SQL</Filter>
+    </None>
   </ItemGroup>
 </Project>

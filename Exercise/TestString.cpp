@@ -1606,8 +1606,55 @@ void TestLeetCode1404(void)
     Logger::WriteMessage("s =" + s + "; result=" + to_string(result));
 }
 
+void TestLeetCode1408(void)
+{
+    Logger::WriteMessage("Test Leet Code 1408");
+    LeetCodeString leetCode;
+    vector<string> words = { "mass", "as", "hero", "superhero" };
+    vector<string> result = leetCode.stringMatching(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+
+    words = { "leetcode","et","code" };
+    result = leetCode.stringMatching(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+
+    words = { "blue","green","bu" };
+    result = leetCode.stringMatching(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1410(void)
+{
+    Logger::WriteMessage("Test Leet Code 1410");
+    LeetCodeString leetCode;
+    string text = "&amp; is an HTML entity but &ambassador; is not.";
+    string result = leetCode.entityParser(text);
+    Logger::WriteMessage("text = " + text + "; result = " + result);
+ 
+    text = "and I quote: &quot;...&quot;";
+    result = leetCode.entityParser(text);
+    Logger::WriteMessage("text = " + text + "; result = " + result);
+
+    text = "Stay home! Practice on Leetcode :)";
+    result = leetCode.entityParser(text);
+    Logger::WriteMessage("text = " + text + "; result = " + result);
+
+    text = "x &gt; y &amp;&amp; x &lt; y is always false";
+    result = leetCode.entityParser(text);
+    Logger::WriteMessage("text = " + text + "; result = " + result);
+
+    text = "leetcode.com&frasl;problemset&frasl;all";
+    result = leetCode.entityParser(text);
+    Logger::WriteMessage("text = " + text + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1410();
+    TestLeetCode1408();
     TestLeetCode1404();
     TestLeetCode1400();
     TestLeetCode1392();

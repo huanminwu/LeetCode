@@ -4512,7 +4512,7 @@ string LeetCodeString::parseExpressionToken(string s, int& index)
 /// <summary>
 /// Leet code #772. Basic Calculator III   
 /// </summary>
-int LeetCodeString::parseTerm(vector<string>& tokens, int& index)
+int LeetCodeString::parseFactor(vector<string>& tokens, int& index)
 {
     int result = 0;
     if (isdigit(tokens[index][0]))
@@ -4532,20 +4532,20 @@ int LeetCodeString::parseTerm(vector<string>& tokens, int& index)
 /// <summary>
 /// Leet code #772. Basic Calculator III   
 /// </summary>
-int LeetCodeString::parseFactor(vector<string>& tokens, int& index)
+int LeetCodeString::parseTerm(vector<string>& tokens, int& index)
 {
-    int result = parseTerm(tokens, index);
+    int result = parseFactor(tokens, index);
     while (index < (int)tokens.size())
     {
         if (tokens[index] == "*")
         {
             index++;
-            result *= parseTerm(tokens, index);
+            result *= parseFactor(tokens, index);
         }
         else if (tokens[index] == "/")
         {
             index++;
-            result /= parseTerm(tokens, index);
+            result /= parseFactor(tokens, index);
         }
         else
         {
@@ -4560,18 +4560,18 @@ int LeetCodeString::parseFactor(vector<string>& tokens, int& index)
 /// </summary>
 int LeetCodeString::parseExpression(vector<string>& tokens, int& index)
 {
-    int result = parseFactor(tokens, index);
+    int result = parseTerm(tokens, index);
     while (index < (int)tokens.size())
     {
         if (tokens[index] == "+")
         {
             index++;
-            result += parseFactor(tokens, index);
+            result += parseTerm(tokens, index);
         }
         else if (tokens[index] == "-")
         {
             index++;
-            result -= parseFactor(tokens, index);
+            result -= parseTerm(tokens, index);
         }
         else
         {
@@ -9854,4 +9854,135 @@ int LeetCodeString::numSteps(string s)
     return result;
 }
 
+/// <summary>
+/// Leet code #1408. String Matching in an Array 
+/// 
+/// Easy
+///
+/// Given an array of string words. Return all strings in words which 
+/// is substring of another word in any order. 
+///
+/// String words[i] is substring of words[j], if can be obtained removing 
+/// some characters to left and/or right side of words[j].
+///
+/// Example 1:
+/// Input: words = ["mass","as","hero","superhero"]
+/// Output: ["as","hero"]
+/// Explanation: "as" is substring of "mass" and "hero" is substring 
+/// of "superhero".
+/// ["hero","as"] is also a valid answer.
+///
+/// Example 2:
+/// Input: words = ["leetcode","et","code"]
+/// Output: ["et","code"]
+/// Explanation: "et", "code" are substring of "leetcode".
+///
+/// Example 3:
+/// Input: words = ["blue","green","bu"]
+/// Output: []
+///
+/// Constraints:
+/// 1. 1 <= words.length <= 100
+/// 2. 1 <= words[i].length <= 30
+/// 3. words[i] contains only lowercase English letters.
+/// 4. It's guaranteed that words[i] will be unique.
+/// </summary>
+vector<string> LeetCodeString::stringMatching(vector<string>& words)
+{
+    vector<string> result;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        for (size_t j = 0; j < words.size(); j++)
+        {
+            if (i == j) continue;
+            // look outer loop for result, avoid duplication
+            if (words[j].find(words[i]) != string::npos)
+            {
+                result.push_back(words[i]);
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1410. HTML Entity Parser 
+/// 
+/// Medium
+///
+/// HTML entity parser is the parser that takes HTML code as input and 
+/// replace all the entities of the special characters by the characters 
+/// itself.
+///
+/// The special characters and their entities for HTML are:
+///
+/// Quotation Mark: the entity is &quot; and symbol character is ".
+/// Single Quote Mark: the entity is &apos; and symbol character is '.
+/// Ampersand: the entity is &amp; and symbol character is &.
+/// Greater Than Sign: the entity is &gt; and symbol character is >.
+/// Less Than Sign: the entity is &lt; and symbol character is <.
+/// Slash: the entity is &frasl; and symbol character is /.
+/// Given the input text string to the HTML parser, you have to implement 
+/// the entity parser.
+///
+/// Return the text after replacing the entities by the special characters.
+/// 
+/// Example 1:
+/// Input: text = "&amp; is an HTML entity but &ambassador; is not."
+/// Output: "& is an HTML entity but &ambassador; is not."
+/// Explanation: The parser will replace the &amp; entity by &
+///
+/// Example 2:
+/// Input: text = "and I quote: &quot;...&quot;"
+/// Output: "and I quote: \"...\""
+///
+/// Example 3:
+/// Input: text = "Stay home! Practice on Leetcode :)"
+/// Output: "Stay home! Practice on Leetcode :)"
+///
+/// Example 4:
+/// Input: text = "x &gt; y &amp;&amp; x &lt; y is always false"
+/// Output: "x > y && x < y is always false"
+///
+/// Example 5:
+/// Input: text = "leetcode.com&frasl;problemset&frasl;all"
+///  Output: "leetcode.com/problemset/all"
+/// 
+/// Constraints:
+/// 1. 1 <= text.length <= 10^5
+/// 2. The string may contain any possible characters out of all the 256 
+///    ASCII characters.
+/// </summary>
+string LeetCodeString::entityParser(string text)
+{
+    string result;
+    size_t index = 0;
+    while (index < text.size())
+    {
+        if (text[index] == '&')
+        {
+            string token;
+            while (index < text.size())
+            {
+                token.push_back(text[index]);
+                index++;
+                if (text[index-1] == ';') break;
+            }
+            if (token == "&quot;") result.append("\"");
+            else if (token == "&apos;") result.append("\'");
+            else if (token == "&amp;") result.append("&");
+            else if (token == "&gt;") result.append(">");
+            else if (token == "&lt;") result.append("<");
+            else if (token == "&frasl;") result.append("/");
+            else result.append(token);
+        }
+        else
+        {
+            result.push_back(text[index]);
+            index++;
+        }
+    }
+    return result;
+}
 #pragma endregion

@@ -1301,8 +1301,34 @@ void TestLeetCode1406(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode1411(void)
+{
+    Logger::WriteMessage("Test Leet Code 1411");
+    LeetCodeDP leetCode;
+    int n = 1;
+    int result = leetCode.numOfWays(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 2;
+    result = leetCode.numOfWays(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    result = leetCode.numOfWays(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 7;
+    result = leetCode.numOfWays(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 5000;
+    result = leetCode.numOfWays(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1411();
     TestLeetCode1406();
     TestLeetCode1388();
     TestLeetCode1335();

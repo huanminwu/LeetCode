@@ -1540,8 +1540,35 @@ void TestLeetCode1395(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1409(void)
+{
+    Logger::WriteMessage("Test Leet Code 1409");
+    LeetCodeArray leetCode;
+    vector<int> queries = { 3, 1, 2, 1 };
+    int m = 5;
+    vector<int> result = leetCode.processQueries(queries, m);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("m = " + to_string(m));
+    Logger::WriteMessage(result);
+
+    queries = { 4,1,2,2 };
+    m = 4;
+    result = leetCode.processQueries(queries, m);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("m = " + to_string(m));
+    Logger::WriteMessage(result);
+
+    queries = { 7,5,5,8,3 };
+    m = 8;
+    result = leetCode.processQueries(queries, m);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("m = " + to_string(m));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1409();
     TestLeetCode1395();
     TestLeetCode1389();
     TestLeetCode1380();
