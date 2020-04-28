@@ -385,8 +385,31 @@ void TestLeetCode739(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1425(void)
+{
+    LeetCodeStack leetCode;
+    vector<int>  nums = { 10, 2, -10, 5, 20 };
+    int k = 2;
+    int result = leetCode.constrainedSubsetSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result  = " + to_string(result));
+
+    nums = { -1,-2,-3 };
+    k = 1;
+    result = leetCode.constrainedSubsetSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result  = " + to_string(result));
+
+    nums = { 10,-2,-10,-5,20 };
+    k = 2;
+    result = leetCode.constrainedSubsetSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result  = " + to_string(result));
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode1425();
     TestLeetCode739();
     TestLeetCode1249();
     TestLeetCode636();

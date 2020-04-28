@@ -1566,8 +1566,71 @@ void TestLeetCode1409(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1423(void)
+{
+    Logger::WriteMessage("Test Leet Code 1423");
+    LeetCodeArray leetCode;
+    vector<int> cardPoints = { 1,2,3,4,5,6,1 };
+    int k = 3;
+    int result = leetCode.maxScore(cardPoints, k);
+    Logger::WriteMessage(cardPoints);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    cardPoints = { 2,2,2 };
+    k = 2;
+    result = leetCode.maxScore(cardPoints, k);
+    Logger::WriteMessage(cardPoints);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    cardPoints = { 9,7,7,9,7,7,9 };
+    k = 7;
+    result = leetCode.maxScore(cardPoints, k);
+    Logger::WriteMessage(cardPoints);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    cardPoints = { 1,1000,1 };
+    k = 1;
+    result = leetCode.maxScore(cardPoints, k);
+    Logger::WriteMessage(cardPoints);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    cardPoints = { 1,79,80,1,1,1,200,1 };
+    k = 3;
+    result = leetCode.maxScore(cardPoints, k);
+    Logger::WriteMessage(cardPoints);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1424(void)
+{
+    Logger::WriteMessage("Test Leet Code 1424");
+    LeetCodeArray leetCode;
+    vector<vector<int>> nums = { {1, 2, 3},{4, 5, 6},{7, 8, 9} };
+    vector<int> result = leetCode.findDiagonalOrder(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { {1, 2, 3, 4, 5},{6, 7},{8},{9, 10, 11},{12, 13, 14, 15, 16} };
+    result = leetCode.findDiagonalOrder(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { {1, 2, 3},{4},{5, 6, 7},{8},{9, 10, 11} };
+    result = leetCode.findDiagonalOrder(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { {1, 2, 3, 4, 5, 6} };
+    result = leetCode.findDiagonalOrder(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1424();
+    TestLeetCode1423();
     TestLeetCode1409();
     TestLeetCode1395();
     TestLeetCode1389();

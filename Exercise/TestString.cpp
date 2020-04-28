@@ -1651,8 +1651,26 @@ void TestLeetCode1410(void)
     Logger::WriteMessage("text = " + text + "; result = " + result);
 }
 
+void TestLeetCode1422(void)
+{
+    Logger::WriteMessage("Test Leet Code 1422");
+    LeetCodeString leetCode;
+    string s = "011101";
+    int result = leetCode.maxScore(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "00111";
+    result = leetCode.maxScore(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "1111";
+    result = leetCode.maxScore(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1422();
     TestLeetCode1410();
     TestLeetCode1408();
     TestLeetCode1404();

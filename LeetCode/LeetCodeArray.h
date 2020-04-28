@@ -2411,6 +2411,93 @@ public:
     /// 3. 1 <= queries[i] <= m
     /// </summary>
     vector<int> processQueries(vector<int>& queries, int m);
+
+    /// <summary>
+    /// Leet code #1423. Maximum Points You Can Obtain from Cards
+    /// 
+    /// Medium
+    ///
+    /// There are several cards arranged in a row, and each card has an 
+    /// associated number of points The points are given in the integer 
+    /// array cardPoints.
+    ///
+    /// In one step, you can take one card from the beginning or from the 
+    /// end of the row. You have to take exactly k cards.
+    ///
+    /// Your score is the sum of the points of the cards you have taken.
+    ///
+    /// Given the integer array cardPoints and the integer k, return 
+    /// the maximum score you can obtain.
+    ///
+    /// Example 1:
+    /// Input: cardPoints = [1,2,3,4,5,6,1], k = 3
+    /// Output: 12
+    /// Explanation: After the first step, your score will 
+    /// always be 1. However, choosing the rightmost card first 
+    /// will maximize your total score. The optimal strategy is 
+    /// to take the three cards on the right, giving a final 
+    /// score of 1 + 6 + 5 = 12.
+    ///
+    /// Example 2:
+    /// Input: cardPoints = [2,2,2], k = 2
+    /// Output: 4
+    /// Explanation: Regardless of which two cards you take, your score will 
+    /// always be 4.
+    ///
+    /// Example 3:
+    /// Input: cardPoints = [9,7,7,9,7,7,9], k = 7
+    /// Output: 55
+    /// Explanation: You have to take all the cards. Your score is the sum of 
+    /// points of all cards.
+    ///
+    /// Example 4:
+    /// Input: cardPoints = [1,1000,1], k = 1
+    /// Output: 1
+    /// Explanation: You cannot take the card in the middle. Your best score 
+    /// is 1. 
+    ///
+    /// Example 5:
+    /// Input: cardPoints = [1,79,80,1,1,1,200,1], k = 3
+    /// Output: 202
+    ///
+    /// Constraints:
+    /// 1. 1 <= cardPoints.length <= 10^5
+    /// 2. 1 <= cardPoints[i] <= 10^4
+    /// 3. 1 <= k <= cardPoints.length
+    /// </summary>
+    int maxScore(vector<int>& cardPoints, int k);
+
+    /// <summary>
+    /// Leet code #1424. Diagonal Traverse II
+    /// 
+    /// Medium
+    ///
+    /// Given a list of lists of integers, nums, return all elements of nums 
+    /// in diagonal order as shown in the below images.
+    /// 
+    /// Example 1:
+    /// Input: nums = [[1,2,3],[4,5,6],[7,8,9]]
+    /// Output: [1,4,2,7,5,3,8,6,9]
+    ///
+    /// Example 2:
+    /// Input: nums = [[1,2,3,4,5],[6,7],[8],[9,10,11],[12,13,14,15,16]]
+    /// Output: [1,6,2,8,7,3,9,4,12,10,5,13,11,14,15,16]
+    ///
+    /// Example 3:
+    /// Input: nums = [[1,2,3],[4],[5,6,7],[8],[9,10,11]]
+    /// Output: [1,4,2,5,3,8,6,9,7,10,11]
+    ///
+    /// Example 4:
+    /// Input: nums = [[1,2,3,4,5,6]]
+    /// Output: [1,2,3,4,5,6]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i].length <= 10^5
+    /// 3. 1 <= nums[i][j] <= 10^9
+    /// 4. There at most 10^5 elements in nums.
+    /// </summary>
+    vector<int> findDiagonalOrder(vector<vector<int>>& nums);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

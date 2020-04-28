@@ -1412,4 +1412,66 @@ vector<int> LeetCodeStack::dailyTemperatures(vector<int>& temperatures)
     return result;
 }
 
+/// <summary>
+/// Leet code #1425. Constrained Subset Sum
+/// 
+/// Hard
+///
+/// Given an integer array nums and an integer k, return the maximum sum 
+/// of a non-empty subset of that array such that for every two 
+/// consecutive integers in the subset, nums[i] and nums[j], where i < j, 
+/// the condition j - i <= k is satisfied.
+///
+/// A subset of an array is obtained by deleting some number of elements 
+/// (can be zero) from the array, leaving the remaining elements in their 
+/// original order.
+/// Example 1:
+///
+/// Input: nums = [10,2,-10,5,20], k = 2
+/// Output: 37
+/// Explanation: The subset is [10, 2, 5, 20].
+/// Example 2:
+///
+/// Input: nums = [-1,-2,-3], k = 1
+/// Output: -1
+/// Explanation: The subset must be non-empty, so we choose the largest 
+/// number.
+///
+/// Example 3:
+///
+/// Input: nums = [10,-2,-10,-5,20], k = 2
+/// Output: 23
+/// Explanation: The subset is [10, -2, -5, 20].
+/// 
+/// Constraints:
+/// 1. 1 <= k <= nums.length <= 10^5
+/// 2. -10^4 <= nums[i] <= 10^4
+/// </summary>
+int LeetCodeStack::constrainedSubsetSum(vector<int>& nums, int k)
+{
+    deque<pair<int, int>> sum_chain;
+    int result = INT_MIN;
+
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int sum;
+        if (sum_chain.empty())
+        {
+            sum = nums[i];
+        }
+        else
+        {
+            if ((int)i - sum_chain.front().first > k) sum_chain.pop_front();
+            sum = max(nums[i], nums[i] + sum_chain.front().second);
+            while (!sum_chain.empty() && sum >= sum_chain.back().second)
+            {
+                sum_chain.pop_back();
+            }
+        }
+        sum_chain.push_back(make_pair(i, sum));
+        result = max(sum, result);
+    }
+    return result;
+}
+
 #pragma endregion

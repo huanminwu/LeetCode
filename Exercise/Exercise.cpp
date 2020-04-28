@@ -12405,9 +12405,10 @@ void TestLeetCode1238(void)
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeDP();
-    TestLeetCodeString();
+    TestLeetCodeStack();
     TestLeetCodeArray();
+    TestLeetCodeString();
+    TestLeetCodeDP();
     TestLeetCodeGreedy();
     TestLeetCodeSort();
     TestLeetCodeMath();
@@ -12423,7 +12424,6 @@ void main(int argc, char* argv[])
     TestLeetCodeBinarySearch();
     TestLeetCodeLinkedList();
     TestLeetCode915();
-    TestLeetCodeStack();
     TestLeetCode1238();
     TestLeetCode89();
     TestLeetCode902();

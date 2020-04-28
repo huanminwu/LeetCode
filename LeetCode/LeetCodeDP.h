@@ -2006,7 +2006,7 @@ public:
     string stoneGameIII(vector<int>& stoneValue);
 
     /// <summary>
-    /// Leet code #1411. Number of Ways to Paint N ¡Á 3 Grid
+    /// Leet code #1411. Number of Ways to Paint N x 3 Grid
     /// 
     /// Hard
     ///
