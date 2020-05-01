@@ -1566,6 +1566,26 @@ void TestLeetCode1409(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1413(void)
+{
+    Logger::WriteMessage("Test Leet Code 1413");
+    LeetCodeArray leetCode;
+    vector<int> nums = { -3, 2, -3, 4, 2 };
+    int result = leetCode.minStartValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 2 };
+    result = leetCode.minStartValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,-2,-3 };
+    result = leetCode.minStartValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCode1423(void)
 {
     Logger::WriteMessage("Test Leet Code 1423");
@@ -1624,11 +1644,11 @@ void TestLeetCode1424(void)
     result = leetCode.findDiagonalOrder(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage(result);
-
 }
 
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1413();
     TestLeetCode1424();
     TestLeetCode1423();
     TestLeetCode1409();

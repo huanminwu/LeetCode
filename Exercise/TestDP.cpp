@@ -1326,8 +1326,80 @@ void TestLeetCode1411(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1416(void)
+{
+    Logger::WriteMessage("Test Leet Code 1416");
+    LeetCodeDP leetCode;
+    string s = "1000";
+    int k = 10000;
+    int result = leetCode.numberOfArrays(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "1000";
+    k = 10;
+    result = leetCode.numberOfArrays(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "1317";
+    k = 2000;
+    result = leetCode.numberOfArrays(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "2020";
+    k = 30;
+    result = leetCode.numberOfArrays(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "1234567890";
+    k = 90;
+    result = leetCode.numberOfArrays(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1420(void)
+{
+    Logger::WriteMessage("Test Leet Code 1420");
+    LeetCodeDP leetCode;
+    int n = 2;
+    int m = 3;
+    int k = 1;
+    int result = leetCode.numOfArrays(n, m, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + 
+        "; k = " + to_string(k)  + "; result = " + to_string(result));
+
+    n = 5; 
+    m = 2; 
+    k = 3;
+    result = leetCode.numOfArrays(n, m, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) +
+        "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 9; 
+    m = 1; 
+    k = 1;
+    result = leetCode.numOfArrays(n, m, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) +
+        "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 50;
+    m = 100;
+    k = 25;
+    result = leetCode.numOfArrays(n, m, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) +
+        "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 37;
+    m = 17;
+    k = 7;
+    result = leetCode.numOfArrays(n, m, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) +
+        "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1420();
+    TestLeetCode1416();
     TestLeetCode1411();
     TestLeetCode1406();
     TestLeetCode1388();

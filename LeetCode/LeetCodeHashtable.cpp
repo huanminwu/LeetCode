@@ -34,54 +34,54 @@
 /// </summary> 
 vector<int> LeetCode::findSubstring(string s, vector<string>& words)
 {
-	vector<int> result;
-	unsigned int checksum_words = 0;
-	unsigned int checksum = 0;
-	unordered_map<string, int> word_map;
-	size_t word_len = 0;
-	size_t total_len = 0;
+    vector<int> result;
+    unsigned int checksum_words = 0;
+    unsigned int checksum = 0;
+    unordered_map<string, int> word_map;
+    size_t word_len = 0;
+    size_t total_len = 0;
 
-	if (words.size() == 0)
-	{
-		return result;
-	}
+    if (words.size() == 0)
+    {
+        return result;
+    }
 
-	for (size_t i = 0; i < words.size(); i++)
-	{
-		word_len = words[i].size();
-		word_map[words[i]]++;
-		for (size_t j = 0; j < word_len; j++)
-		{
-			checksum_words += (unsigned int)words[i][j];
-		}
-		total_len += word_len;
-	}
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        word_len = words[i].size();
+        word_map[words[i]]++;
+        for (size_t j = 0; j < word_len; j++)
+        {
+            checksum_words += (unsigned int)words[i][j];
+        }
+        total_len += word_len;
+    }
 
-	for (size_t i = 0; i < s.size(); i++)
-	{
-		checksum += (unsigned int)s[i];
-		if (i >= total_len) checksum -= (unsigned int)s[i - total_len];
-		// check sum not match, no way to match
-		if ((i < total_len - 1) || (checksum != checksum_words)) continue;
-		size_t index = i - total_len + 1;
-		unordered_map<string, int> word_seen;
-		while (index <= i)
-		{
-			string word = s.substr(index, word_len);
-			if (word_map.find(word) == word_map.end())
-			{
-				break;
-			}
-			word_seen[word]++;
-			if (word_seen[word] > word_map[word]) break;
-			index += word_len;
-		}
-		if (index > i)
-		{
-			result.push_back(i - total_len + 1);
-		}
-	}
-	return result;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        checksum += (unsigned int)s[i];
+        if (i >= total_len) checksum -= (unsigned int)s[i - total_len];
+        // check sum not match, no way to match
+        if ((i < total_len - 1) || (checksum != checksum_words)) continue;
+        size_t index = i - total_len + 1;
+        unordered_map<string, int> word_seen;
+        while (index <= i)
+        {
+            string word = s.substr(index, word_len);
+            if (word_map.find(word) == word_map.end())
+            {
+                break;
+            }
+            word_seen[word]++;
+            if (word_seen[word] > word_map[word]) break;
+            index += word_len;
+        }
+        if (index > i)
+        {
+            result.push_back(i - total_len + 1);
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -96,35 +96,35 @@ vector<int> LeetCode::findSubstring(string s, vector<string>& words)
 /// </summary>
 int LeetCode::longestConsecutive(vector<int>& nums)
 {
-	unordered_set<int> set;
-	int max_length = 0;
-	for (size_t i = 0; i < nums.size(); i++)
-	{
-		set.insert(nums[i]);
-	}
+    unordered_set<int> set;
+    int max_length = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        set.insert(nums[i]);
+    }
 
-	while (!set.empty())
-	{
-		int length = 1;
-		int number = *set.begin();
-		set.erase(number);
-		int index = -1;
-		while (set.find(number + index) != set.end())
-		{
-			set.erase(number + index);
-			length++;
-			index--;
-		}
-		index = 1;
-		while (set.find(number + index) != set.end())
-		{
-			set.erase(number + index);
-			length++;
-			index++;
-		}
-		max_length = max(max_length, length);
-	}
-	return max_length;
+    while (!set.empty())
+    {
+        int length = 1;
+        int number = *set.begin();
+        set.erase(number);
+        int index = -1;
+        while (set.find(number + index) != set.end())
+        {
+            set.erase(number + index);
+            length++;
+            index--;
+        }
+        index = 1;
+        while (set.find(number + index) != set.end())
+        {
+            set.erase(number + index);
+            length++;
+            index++;
+        }
+        max_length = max(max_length, length);
+    }
+    return max_length;
 }
 
 /// <summary>
@@ -147,50 +147,50 @@ int LeetCode::longestConsecutive(vector<int>& nums)
 /// </summary>
 string LeetCode::fractionToDecimal(int numerator, int denominator)
 {
-	string result;
-	vector<long long> decimals;
-	unordered_map<long long, int> map;
-	if (denominator == 0) return "overflow";
-	if (numerator == 0) return "0";
-	int sign = ((numerator > 0) ^ (denominator > 0)) ? -1 : 1;
-	if (sign < 0) result = "-";
-	long long long_numerator = abs((long long)numerator);
-	long long long_denominator = abs((long long)denominator);
+    string result;
+    vector<long long> decimals;
+    unordered_map<long long, int> map;
+    if (denominator == 0) return "overflow";
+    if (numerator == 0) return "0";
+    int sign = ((numerator > 0) ^ (denominator > 0)) ? -1 : 1;
+    if (sign < 0) result = "-";
+    long long long_numerator = abs((long long)numerator);
+    long long long_denominator = abs((long long)denominator);
 
-	long long dividend = long_numerator / long_denominator;
-	long long reminder = long_numerator % long_denominator;
-	result.append(to_string(dividend));
-	if (reminder != 0) result.append(".");
-	int pos = 0;
-	int repeat_pos = -1;
-	while (reminder != 0)
-	{
-		if (map.find(reminder) != map.end())
-		{
-			repeat_pos = map[reminder];
-			break;
-		}
-		else
-		{
-			map[reminder] = pos;
-		}
-		reminder = reminder * 10;
-		dividend = reminder / long_denominator;
-		decimals.push_back(dividend);
-		reminder = reminder %  long_denominator;
-		pos++;
-	}
-	for (size_t i = 0; i < decimals.size(); i++)
-	{
-		if (i == repeat_pos)
-		{
-			result.append("(");
-		}
-		result.append(to_string(decimals[i]));
-	}
-	if (repeat_pos != -1) result.append(")");
+    long long dividend = long_numerator / long_denominator;
+    long long reminder = long_numerator % long_denominator;
+    result.append(to_string(dividend));
+    if (reminder != 0) result.append(".");
+    int pos = 0;
+    int repeat_pos = -1;
+    while (reminder != 0)
+    {
+        if (map.find(reminder) != map.end())
+        {
+            repeat_pos = map[reminder];
+            break;
+        }
+        else
+        {
+            map[reminder] = pos;
+        }
+        reminder = reminder * 10;
+        dividend = reminder / long_denominator;
+        decimals.push_back(dividend);
+        reminder = reminder %  long_denominator;
+        pos++;
+    }
+    for (size_t i = 0; i < decimals.size(); i++)
+    {
+        if (i == repeat_pos)
+        {
+            result.append("(");
+        }
+        result.append(to_string(decimals[i]));
+    }
+    if (repeat_pos != -1) result.append(")");
 
-	return result;
+    return result;
 }
 
 /// <summary>
@@ -208,24 +208,24 @@ string LeetCode::fractionToDecimal(int numerator, int denominator)
 /// </summary>
 bool LeetCode::isHappy(int n)
 {
-	unordered_set<int> data_set;
-	while (true)
-	{
-		data_set.insert(n);
-		int sum = 0;
-		while (n != 0)
-		{
-			sum += (n % 10) * (n % 10);
-			n = n / 10;
-		}
-		n = sum;
-		if ((n == 1) || (data_set.find(n) != data_set.end()))
-		{
-			break;
-		}
-	}
-	if (n == 1) return true;
-	else return false;
+    unordered_set<int> data_set;
+    while (true)
+    {
+        data_set.insert(n);
+        int sum = 0;
+        while (n != 0)
+        {
+            sum += (n % 10) * (n % 10);
+            n = n / 10;
+        }
+        n = sum;
+        if ((n == 1) || (data_set.find(n) != data_set.end()))
+        {
+            break;
+        }
+    }
+    if (n == 1) return true;
+    else return false;
 }
 
 /// <summary>
@@ -235,19 +235,19 @@ bool LeetCode::isHappy(int n)
 /// </summary>
 bool LeetCode::containsDuplicate(vector<int>& nums)
 {
-	unordered_set<int> data_set;
-	for (int x : nums)
-	{
-		if (data_set.find(x) == data_set.end())
-		{
-			data_set.insert(x);
-		}
-		else
-		{
-			return true;
-		}
-	}
-	return false;
+    unordered_set<int> data_set;
+    for (int x : nums)
+    {
+        if (data_set.find(x) == data_set.end())
+        {
+            data_set.insert(x);
+        }
+        else
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 /// <summary>
@@ -271,35 +271,35 @@ bool LeetCode::containsDuplicate(vector<int>& nums)
 /// </summary>
 string LeetCode::getHint(string secret, string guess)
 {
-	string result;
-	unordered_map<char, int> secret_map;
-	int bull = 0;
-	int cow = 0;
-	for (size_t i = 0; i < secret.size(); i++)
-	{
-		if (secret[i] == guess[i])
-		{
-			bull++;
-		}
-		else
-		{
-			secret_map[secret[i]]++;
-		}
-	}
-	for (size_t i = 0; i < guess.size(); i++)
-	{
-		if (secret[i] != guess[i])
-		{
-			if (secret_map.find(guess[i]) != secret_map.end())
-			{
-				secret_map[guess[i]]--;
-				cow++;
-				if (secret_map[guess[i]] == 0) secret_map.erase(guess[i]);
-			}
-		}
-	}
-	result.append(to_string(bull) + "A" + to_string(cow) + "B");
-	return result;
+    string result;
+    unordered_map<char, int> secret_map;
+    int bull = 0;
+    int cow = 0;
+    for (size_t i = 0; i < secret.size(); i++)
+    {
+        if (secret[i] == guess[i])
+        {
+            bull++;
+        }
+        else
+        {
+            secret_map[secret[i]]++;
+        }
+    }
+    for (size_t i = 0; i < guess.size(); i++)
+    {
+        if (secret[i] != guess[i])
+        {
+            if (secret_map.find(guess[i]) != secret_map.end())
+            {
+                secret_map[guess[i]]--;
+                cow++;
+                if (secret_map[guess[i]] == 0) secret_map.erase(guess[i]);
+            }
+        }
+    }
+    result.append(to_string(bull) + "A" + to_string(cow) + "B");
+    return result;
 }
 
 /// <summary>
@@ -312,25 +312,25 @@ string LeetCode::getHint(string secret, string guess)
 /// </summary>
 vector<int> LeetCode::intersectionArray(vector<int>& nums1, vector<int>& nums2)
 {
-	unordered_set<int> data_set;
-	unordered_set<int> intersection;
-	vector<int> result;
-	for (size_t i = 0; i < nums1.size(); i++)
-	{
-		data_set.insert(nums1[i]);
-	}
-	for (size_t i = 0; i < nums2.size(); i++)
-	{
-		if (data_set.find(nums2[i]) != data_set.end())
-		{
-			intersection.insert(nums2[i]);
-		}
-	}
-	for (int i : intersection)
-	{
-		result.push_back(i);
-	}
-	return result;
+    unordered_set<int> data_set;
+    unordered_set<int> intersection;
+    vector<int> result;
+    for (size_t i = 0; i < nums1.size(); i++)
+    {
+        data_set.insert(nums1[i]);
+    }
+    for (size_t i = 0; i < nums2.size(); i++)
+    {
+        if (data_set.find(nums2[i]) != data_set.end())
+        {
+            intersection.insert(nums2[i]);
+        }
+    }
+    for (int i : intersection)
+    {
+        result.push_back(i);
+    }
+    return result;
 }
 
 /// <summary>
@@ -349,27 +349,27 @@ vector<int> LeetCode::intersectionArray(vector<int>& nums1, vector<int>& nums2)
 /// </summary>
 vector<int> LeetCode::intersectionArrayII(vector<int>& nums1, vector<int>& nums2)
 {
-	vector<int> result;
-	size_t index1 = 0, index2 = 0;
-	sort(nums1.begin(), nums1.end());
-	sort(nums2.begin(), nums2.end());
-	while ((index1 < nums1.size()) && (index2 < nums2.size()))
-	{
-		if (nums1[index1] < nums2[index2])
-		{
-			index1++;
-		}
-		else if (nums1[index1] > nums2[index2])
-		{
-			index2++;
-		}
-		else
-		{
-			result.push_back(nums1[index1]);
-			index1++; index2++;
-		}
-	}
-	return result;
+    vector<int> result;
+    size_t index1 = 0, index2 = 0;
+    sort(nums1.begin(), nums1.end());
+    sort(nums2.begin(), nums2.end());
+    while ((index1 < nums1.size()) && (index2 < nums2.size()))
+    {
+        if (nums1[index1] < nums2[index2])
+        {
+            index1++;
+        }
+        else if (nums1[index1] > nums2[index2])
+        {
+            index2++;
+        }
+        else
+        {
+            result.push_back(nums1[index1]);
+            index1++; index2++;
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -379,16 +379,16 @@ vector<int> LeetCode::intersectionArrayII(vector<int>& nums1, vector<int>& nums2
 /// </summary>
 bool LeetCode::containsNearbyDuplicate(vector<int>& nums, int k)
 {
-	unordered_map<int, int> pos_map;
-	for (size_t i = 0; i < nums.size(); i++)
-	{
-		if (pos_map.find(nums[i]) != pos_map.end())
-		{
-			if ((int)(i - pos_map[nums[i]]) <= k) return true;
-		}
-		pos_map[nums[i]] = i;
-	}
-	return false;
+    unordered_map<int, int> pos_map;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (pos_map.find(nums[i]) != pos_map.end())
+        {
+            if ((int)(i - pos_map[nums[i]]) <= k) return true;
+        }
+        pos_map[nums[i]] = i;
+    }
+    return false;
 }
 
 /// <summary>
@@ -402,27 +402,27 @@ bool LeetCode::containsNearbyDuplicate(vector<int>& nums, int k)
 /// </summary>
 vector<int> LeetCode::topKFrequent(vector<int>& nums, int k)
 {
-	vector<int> result;
-	unordered_map<int, int> number_map;
-	for (int num : nums)  number_map[num]++;
-	vector<pair<int, int>> number_list;
-	for (auto itr : number_map)
-	{
-		pair<int, int> pair = make_pair(itr.first, itr.second);
-		for (size_t i = 0; i < number_list.size(); i++)
-		{
-			if (pair.second > number_list[i].second)
-			{
-				swap(pair, number_list[i]);
-			}
-		}
-		if (number_list.size() < (size_t)k) number_list.push_back(pair);
-	}
-	for (size_t i = 0; i < number_list.size(); i++)
-	{
-		result.push_back(number_list[i].first);
-	}
-	return result;
+    vector<int> result;
+    unordered_map<int, int> number_map;
+    for (int num : nums)  number_map[num]++;
+    vector<pair<int, int>> number_list;
+    for (auto itr : number_map)
+    {
+        pair<int, int> pair = make_pair(itr.first, itr.second);
+        for (size_t i = 0; i < number_list.size(); i++)
+        {
+            if (pair.second > number_list[i].second)
+            {
+                swap(pair, number_list[i]);
+            }
+        }
+        if (number_list.size() < (size_t)k) number_list.push_back(pair);
+    }
+    for (size_t i = 0; i < number_list.size(); i++)
+    {
+        result.push_back(number_list[i].first);
+    }
+    return result;
 }
 
 /// <summary>
@@ -462,25 +462,25 @@ vector<int> LeetCode::topKFrequent(vector<int>& nums, int k)
 /// </summary>
 string LeetCode::frequencySort(string s)
 {
-	string result;
-	unordered_map<char, size_t> char_map;
-	map<size_t, vector<char>> count_map;
-	for (size_t i = 0; i < s.size(); i++)
-	{
-		char_map[s[i]]++;
-	}
-	for (unordered_map<char, size_t>::iterator itr = char_map.begin(); itr != char_map.end(); itr++)
-	{
-		count_map[itr->second].push_back(itr->first);
-	}
-	for (map<size_t, vector<char>>::reverse_iterator itr = count_map.rbegin(); itr != count_map.rend(); itr++)
-	{
-		for (char ch : itr->second)
-		{
-			result.append(string(itr->first, ch));
-		}
-	}
-	return result;
+    string result;
+    unordered_map<char, size_t> char_map;
+    map<size_t, vector<char>> count_map;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        char_map[s[i]]++;
+    }
+    for (unordered_map<char, size_t>::iterator itr = char_map.begin(); itr != char_map.end(); itr++)
+    {
+        count_map[itr->second].push_back(itr->first);
+    }
+    for (map<size_t, vector<char>>::reverse_iterator itr = count_map.rbegin(); itr != count_map.rend(); itr++)
+    {
+        for (char ch : itr->second)
+        {
+            result.append(string(itr->first, ch));
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -501,30 +501,30 @@ string LeetCode::frequencySort(string s)
 /// </summary>
 vector<string> LeetCode::findWordsInOneRow(vector<string>& words)
 {
-	vector<string> result;
-	vector<string> keyboard = { "QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM" };
-	unordered_map<char, int> key_map;
-	for (size_t i = 0; i < keyboard.size(); i++)
-	{
-		for (size_t j = 0; j < keyboard[i].size(); j++)
-		{
-			key_map[keyboard[i][j]] = i + 1;
-		}
-	}
-	for (size_t i = 0; i < words.size(); i++)
-	{
-		unordered_set<int> key_rows;
-		for (size_t j = 0; j < words[i].size(); j++)
-		{
-			key_rows.insert(key_map[toupper(words[i][j])]);
-			if (key_rows.size() > 1) break;
-		}
-		if (key_rows.size() == 1)
-		{
-			result.push_back(words[i]);
-		}
-	}
-	return result;
+    vector<string> result;
+    vector<string> keyboard = { "QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM" };
+    unordered_map<char, int> key_map;
+    for (size_t i = 0; i < keyboard.size(); i++)
+    {
+        for (size_t j = 0; j < keyboard[i].size(); j++)
+        {
+            key_map[keyboard[i][j]] = i + 1;
+        }
+    }
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        unordered_set<int> key_rows;
+        for (size_t j = 0; j < words[i].size(); j++)
+        {
+            key_rows.insert(key_map[toupper(words[i][j])]);
+            if (key_rows.size() > 1) break;
+        }
+        if (key_rows.size() == 1)
+        {
+            result.push_back(words[i]);
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -547,41 +547,41 @@ vector<string> LeetCode::findWordsInOneRow(vector<string>& words)
 /// </summary>
 vector<string> LeetCode::findRelativeRanks(vector<int>& nums)
 {
-	map<int, int> score_map;
-	vector<string> result(nums.size());
-	for (size_t i = 0; i < nums.size(); i++)
-	{
-		score_map[nums[i]] = i;
-	}
-	int rank = 0;
-	int count = 0;
-	int last_value;
-	for (map<int, int>::reverse_iterator itr = score_map.rbegin(); itr != score_map.rend(); ++itr)
-	{
-		count++;
-		if ((rank == 0) || (last_value != itr->first))
-		{
-			rank = count;
-		}
-		if (rank == 1)
-		{
-			result[itr->second] = "Gold Medal";
-		}
-		else if (rank == 2)
-		{
-			result[itr->second] = "Silver Medal";
-		}
-		else if (rank == 3)
-		{
-			result[itr->second] = "Bronze Medal";
-		}
-		else
-		{
-			result[itr->second] = to_string(rank);
-		}
-		last_value = itr->first;
-	}
-	return result;
+    map<int, int> score_map;
+    vector<string> result(nums.size());
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        score_map[nums[i]] = i;
+    }
+    int rank = 0;
+    int count = 0;
+    int last_value;
+    for (map<int, int>::reverse_iterator itr = score_map.rbegin(); itr != score_map.rend(); ++itr)
+    {
+        count++;
+        if ((rank == 0) || (last_value != itr->first))
+        {
+            rank = count;
+        }
+        if (rank == 1)
+        {
+            result[itr->second] = "Gold Medal";
+        }
+        else if (rank == 2)
+        {
+            result[itr->second] = "Silver Medal";
+        }
+        else if (rank == 3)
+        {
+            result[itr->second] = "Bronze Medal";
+        }
+        else
+        {
+            result[itr->second] = to_string(rank);
+        }
+        last_value = itr->first;
+    }
+    return result;
 }
 
 /// <summary>
@@ -614,26 +614,26 @@ vector<string> LeetCode::findRelativeRanks(vector<int>& nums)
 /// </summary>
 int LeetCode::findPairs(vector<int>& nums, int k)
 {
-	if (k < 0) return 0;
-	int count = 0;
-	unordered_map<int, int> num_map;
-	for (size_t i = 0; i < nums.size(); i++)
-	{
-		num_map[nums[i]]++;
-	}
+    if (k < 0) return 0;
+    int count = 0;
+    unordered_map<int, int> num_map;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        num_map[nums[i]]++;
+    }
 
-	for (auto itr : num_map)
-	{
-		if (k == 0)
-		{
-			if (itr.second > 1) count++;
-		}
-		else
-		{
-			if (num_map.count(itr.first + k) > 0) count++;
-		}
-	}
-	return count;
+    for (auto itr : num_map)
+    {
+        if (k == 0)
+        {
+            if (itr.second > 1) count++;
+        }
+        else
+        {
+            if (num_map.count(itr.first + k) > 0) count++;
+        }
+    }
+    return count;
 }
 
 /// <summary>
@@ -651,17 +651,17 @@ int LeetCode::findPairs(vector<int>& nums, int k)
 /// </summary>
 int LeetCode::findLHS(vector<int>& nums)
 {
-	unordered_map<int, int> num_count;
-	for (int num : nums) num_count[num]++;
-	int max_length = 0;
-	for (auto itr : num_count)
-	{
-		if (num_count.count(itr.first + 1) > 0)
-		{
-			max_length = max(max_length, num_count[itr.first] + num_count[itr.first + 1]);
-		}
-	}
-	return max_length;
+    unordered_map<int, int> num_count;
+    for (int num : nums) num_count[num]++;
+    int max_length = 0;
+    for (auto itr : num_count)
+    {
+        if (num_count.count(itr.first + 1) > 0)
+        {
+            max_length = max(max_length, num_count[itr.first] + num_count[itr.first + 1]);
+        }
+    }
+    return max_length;
 }
 
 /// <summary>
@@ -696,23 +696,23 @@ int LeetCode::findLHS(vector<int>& nums)
 /// </summary>
 vector<string> LeetCode::findRestaurant(vector<string>& list1, vector<string>& list2)
 {
-	map<string, pair<int, int>> index_map;
-	map<int, vector<string>>  index_sum;
-	for (size_t i = 0; i < list1.size(); i++)
-	{
-		index_map[list1[i]] = make_pair(i, -1);
-	}
+    map<string, pair<int, int>> index_map;
+    map<int, vector<string>>  index_sum;
+    for (size_t i = 0; i < list1.size(); i++)
+    {
+        index_map[list1[i]] = make_pair(i, -1);
+    }
 
-	for (size_t i = 0; i < list2.size(); i++)
-	{
-		if (index_map.count(list2[i]) != 0)
-		{
-			string str = list2[i];
-			index_map[str].second = i;
-			index_sum[index_map[str].first + index_map[str].second].push_back(str);
-		}
-	}
-	return index_sum.begin()->second;
+    for (size_t i = 0; i < list2.size(); i++)
+    {
+        if (index_map.count(list2[i]) != 0)
+        {
+            string str = list2[i];
+            index_map[str].second = i;
+            index_sum[index_map[str].first + index_map[str].second].push_back(str);
+        }
+    }
+    return index_sum.begin()->second;
 }
 
 /// <summary>
@@ -720,52 +720,52 @@ vector<string> LeetCode::findRestaurant(vector<string>& list1, vector<string>& l
 /// </summary>
 bool LeetCode::checkCommonEmail(set<string>& emails, vector<string>& account)
 {
-	for (size_t i = 1; i < account.size(); i++)
-	{
-		if (emails.count(account[i]) > 0)
-		{
-			return true;
-		}
-	}
-	return false;
+    for (size_t i = 1; i < account.size(); i++)
+    {
+        if (emails.count(account[i]) > 0)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 /// <summary>
 /// Leet code #721. Accounts Merge
 /// </summary>
 void LeetCode::addNewAccount(unordered_map<string, set<int>> &account_map, vector<set<string>> &account_emails,
-	vector<string>& account)
+    vector<string>& account)
 {
-	set<string> emails;
-	for (size_t i = 1; i < account.size(); i++)
-	{
-		emails.insert(account[i]);
-	}
-	account_emails.push_back(emails);
-	account_map[account[0]].insert(account_emails.size() - 1);
+    set<string> emails;
+    for (size_t i = 1; i < account.size(); i++)
+    {
+        emails.insert(account[i]);
+    }
+    account_emails.push_back(emails);
+    account_map[account[0]].insert(account_emails.size() - 1);
 }
 
 /// <summary>
 /// Leet code #721. Accounts Merge
 /// </summary>
 void LeetCode::mergeAccount(unordered_map<string, set<int>> &account_map, vector<set<string>> &account_emails, vector<int>& merge_list,
-	vector<string>& account)
+    vector<string>& account)
 {
-	if (merge_list.empty()) return;
-	string name = account[0];
-	int index = merge_list[0];
-	for (size_t next = 1; next < merge_list.size(); next++)
-	{
-		account_map[name].erase(merge_list[next]);
-		for (auto email : account_emails[merge_list[next]])
-		{
-			account_emails[index].insert(email);
-		}
-	}
-	for (size_t i = 1; i < account.size(); i++)
-	{
-		account_emails[index].insert(account[i]);
-	}
+    if (merge_list.empty()) return;
+    string name = account[0];
+    int index = merge_list[0];
+    for (size_t next = 1; next < merge_list.size(); next++)
+    {
+        account_map[name].erase(merge_list[next]);
+        for (auto email : account_emails[merge_list[next]])
+        {
+            account_emails[index].insert(email);
+        }
+    }
+    for (size_t i = 1; i < account.size(); i++)
+    {
+        account_emails[index].insert(account[i]);
+    }
 }
 
 /// <summary>
@@ -812,53 +812,53 @@ void LeetCode::mergeAccount(unordered_map<string, set<int>> &account_map, vector
 /// </summary>
 vector<vector<string>> LeetCode::accountsMerge(vector<vector<string>>& accounts)
 {
-	vector<vector<string>> result;
-	unordered_map<string, set<int>> account_map;
-	vector<set<string>> account_emails;
-	for (size_t i = 0; i < accounts.size(); i++)
-	{
-		string name = accounts[i][0];
-		if (account_map.count(name) == 0)
-		{
-			addNewAccount(account_map, account_emails, accounts[i]);
-		}
-		else
-		{
-			vector<int> merge_list;
-			for (int index : account_map[name])
-			{
-				if (checkCommonEmail(account_emails[index], accounts[i]))
-				{
-					merge_list.push_back(index);
-				}
-			}
-			if (merge_list.empty())
-			{
-				addNewAccount(account_map, account_emails, accounts[i]);
-			}
-			else
-			{
-				mergeAccount(account_map, account_emails, merge_list, accounts[i]);
-			}
-		}
-	}
+    vector<vector<string>> result;
+    unordered_map<string, set<int>> account_map;
+    vector<set<string>> account_emails;
+    for (size_t i = 0; i < accounts.size(); i++)
+    {
+        string name = accounts[i][0];
+        if (account_map.count(name) == 0)
+        {
+            addNewAccount(account_map, account_emails, accounts[i]);
+        }
+        else
+        {
+            vector<int> merge_list;
+            for (int index : account_map[name])
+            {
+                if (checkCommonEmail(account_emails[index], accounts[i]))
+                {
+                    merge_list.push_back(index);
+                }
+            }
+            if (merge_list.empty())
+            {
+                addNewAccount(account_map, account_emails, accounts[i]);
+            }
+            else
+            {
+                mergeAccount(account_map, account_emails, merge_list, accounts[i]);
+            }
+        }
+    }
 
-	// fetch all the result
-	for (auto itr : account_map)
-	{
-		for (auto email_id : itr.second)
-		{
-			vector<string> account;
-			account.push_back(itr.first);
-			for (auto email : account_emails[email_id])
-			{
-				account.push_back(email);
-			}
-			result.push_back(account);
-		}
+    // fetch all the result
+    for (auto itr : account_map)
+    {
+        for (auto email_id : itr.second)
+        {
+            vector<string> account;
+            account.push_back(itr.first);
+            for (auto email : account_emails[email_id])
+            {
+                account.push_back(email);
+            }
+            result.push_back(account);
+        }
 
-	}
-	return result;
+    }
+    return result;
 }
 
 /// <summary>
@@ -894,24 +894,24 @@ vector<vector<string>> LeetCode::accountsMerge(vector<vector<string>>& accounts)
 /// [1, 20].
 /// </summary>
 bool LeetCode::areSentencesSimilar(vector<string>& words1, vector<string>& words2,
-	vector<pair<string, string>> pairs)
+    vector<pair<string, string>> pairs)
 {
-	if (words1.size() != words2.size()) return false;
-	unordered_map<string, unordered_set<string>> similar_words;
-	for (auto itr : pairs)
-	{
-		similar_words[itr.first].insert(itr.second);
-		similar_words[itr.second].insert(itr.first);
-	}
+    if (words1.size() != words2.size()) return false;
+    unordered_map<string, unordered_set<string>> similar_words;
+    for (auto itr : pairs)
+    {
+        similar_words[itr.first].insert(itr.second);
+        similar_words[itr.second].insert(itr.first);
+    }
 
-	for (size_t i = 0; i < words1.size(); i++)
-	{
-		if ((words1[i] != words2[i]) && (similar_words[words1[i]].count(words2[i]) == 0))
-		{
-			return false;
-		}
-	}
-	return true;
+    for (size_t i = 0; i < words1.size(); i++)
+    {
+        if ((words1[i] != words2[i]) && (similar_words[words1[i]].count(words2[i]) == 0))
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 /// <summary>
@@ -958,35 +958,35 @@ bool LeetCode::areSentencesSimilar(vector<string>& words1, vector<string>& words
 /// </summary>
 string LeetCode::shortestCompletingWord(string licensePlate, vector<string>& words)
 {
-	string result;
-	unordered_map<char, int> license_map;
-	for (char ch : licensePlate)
-	{
-		ch = tolower(ch);
-		if (ch >= 'a' && ch <= 'z') license_map[ch]++;
-	}
-	for (string word : words)
-	{
-		unordered_map<char, int> word_map;
-		for (char ch : word)
-		{
-			word_map[ch]++;
-		}
-		bool satisfy = true;
-		for (auto itr : license_map)
-		{
-			if (word_map[itr.first] < itr.second)
-			{
-				satisfy = false;
-				break;
-			}
-		}
-		if ((satisfy) && (result.empty() || result.size() > word.size()))
-		{
-			result = word;
-		}
-	}
-	return result;
+    string result;
+    unordered_map<char, int> license_map;
+    for (char ch : licensePlate)
+    {
+        ch = tolower(ch);
+        if (ch >= 'a' && ch <= 'z') license_map[ch]++;
+    }
+    for (string word : words)
+    {
+        unordered_map<char, int> word_map;
+        for (char ch : word)
+        {
+            word_map[ch]++;
+        }
+        bool satisfy = true;
+        for (auto itr : license_map)
+        {
+            if (word_map[itr.first] < itr.second)
+            {
+                satisfy = false;
+                break;
+            }
+        }
+        if ((satisfy) && (result.empty() || result.size() > word.size()))
+        {
+            result = word;
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -1016,19 +1016,19 @@ string LeetCode::shortestCompletingWord(string licensePlate, vector<string>& wor
 /// </summary>
 vector<int> LeetCode::anagramMappings(vector<int>& A, vector<int>& B)
 {
-	vector<int> result;
-	unordered_map<int, queue<int>> anagram_mappings;
-	for (size_t i = 0; i < B.size(); i++)
-	{
-		anagram_mappings[B[i]].push(i);
-	}
+    vector<int> result;
+    unordered_map<int, queue<int>> anagram_mappings;
+    for (size_t i = 0; i < B.size(); i++)
+    {
+        anagram_mappings[B[i]].push(i);
+    }
 
-	for (size_t i = 0; i < A.size(); i++)
-	{
-		result.push_back(anagram_mappings[A[i]].front());
-		anagram_mappings[A[i]].pop();
-	}
-	return result;
+    for (size_t i = 0; i < A.size(); i++)
+    {
+        result.push_back(anagram_mappings[A[i]].front());
+        anagram_mappings[A[i]].pop();
+    }
+    return result;
 }
 
 /// <summary>
@@ -1053,31 +1053,31 @@ vector<int> LeetCode::anagramMappings(vector<int>& A, vector<int>& B)
 /// </summary>
 int LeetCode::numMatchingSubseq(string S, vector<string>& words)
 {
-	unordered_map<char, set<int>> char_map;
-	for (size_t i = 0; i < S.size(); i++)
-	{
-		char_map[S[i]].insert(i);
-	}
+    unordered_map<char, set<int>> char_map;
+    for (size_t i = 0; i < S.size(); i++)
+    {
+        char_map[S[i]].insert(i);
+    }
 
-	int result = 0;
-	for (size_t i = 0; i < words.size(); i++)
-	{
-		int index = 0;
-		bool broken = false;
-		for (size_t j = 0; j < words[i].size(); j++)
-		{
-			char ch = words[i][j];
-			auto itr = char_map[ch].lower_bound(index);
-			if (itr == char_map[ch].end())
-			{
-				broken = true;
-				break;
-			}
-			index = (*itr) + 1;
-		}
-		if (!broken) result++;
-	}
-	return result;
+    int result = 0;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        int index = 0;
+        bool broken = false;
+        for (size_t j = 0; j < words[i].size(); j++)
+        {
+            char ch = words[i][j];
+            auto itr = char_map[ch].lower_bound(index);
+            if (itr == char_map[ch].end())
+            {
+                broken = true;
+                break;
+            }
+            index = (*itr) + 1;
+        }
+        if (!broken) result++;
+    }
+    return result;
 }
 
 /// <summary>
@@ -1132,35 +1132,35 @@ int LeetCode::numMatchingSubseq(string S, vector<string>& words)
 /// </summary>
 vector<string> LeetCode::subdomainVisits(vector<string>& cpdomains)
 {
-	map<string, int> domain_map;
-	for (string str : cpdomains)
-	{
-		int count = 0;
-		for (size_t i = 0; i < str.size(); i++)
-		{
-			string domain;
-			if (isspace(str[i]))
-			{
-				count = atoi(str.substr(0, i).c_str());
-				domain = str.substr(i + 1);
-				domain_map[domain] += count;
-			}
-			if ((str[i] == '.') && (i < str.size() - 1))
-			{
-				domain = str.substr(i + 1);
-				domain_map[str.substr(i + 1)] += count;
-			}
-		}
-	}
+    map<string, int> domain_map;
+    for (string str : cpdomains)
+    {
+        int count = 0;
+        for (size_t i = 0; i < str.size(); i++)
+        {
+            string domain;
+            if (isspace(str[i]))
+            {
+                count = atoi(str.substr(0, i).c_str());
+                domain = str.substr(i + 1);
+                domain_map[domain] += count;
+            }
+            if ((str[i] == '.') && (i < str.size() - 1))
+            {
+                domain = str.substr(i + 1);
+                domain_map[str.substr(i + 1)] += count;
+            }
+        }
+    }
 
-	vector<string> result;
-	for (auto itr : domain_map)
-	{
-		string str = to_string(itr.second) + " " + itr.first;
-		result.push_back(str);
-	}
+    vector<string> result;
+    for (auto itr : domain_map)
+    {
+        string str = to_string(itr.second) + " " + itr.first;
+        result.push_back(str);
+    }
 
-	return result;
+    return result;
 }
 
 /// <summary>
@@ -1192,41 +1192,41 @@ vector<string> LeetCode::subdomainVisits(vector<string>& cpdomains)
 /// </summary>
 vector<string> LeetCode::uncommonFromSentences(string A, string B)
 {
-	vector<string> result;
-	unordered_map<string, int> word_map;
-	string token;
-	for (size_t i = 0; i <= A.size(); i++)
-	{
-		if (i == A.size() || isspace(A[i]))
-		{
-			if (!token.empty()) word_map[token]++;
-			token.clear();
-		}
-		else
-		{
-			token.push_back(A[i]);
-		}
-	}
+    vector<string> result;
+    unordered_map<string, int> word_map;
+    string token;
+    for (size_t i = 0; i <= A.size(); i++)
+    {
+        if (i == A.size() || isspace(A[i]))
+        {
+            if (!token.empty()) word_map[token]++;
+            token.clear();
+        }
+        else
+        {
+            token.push_back(A[i]);
+        }
+    }
 
-	for (size_t i = 0; i <= B.size(); i++)
-	{
-		if (i == B.size() || isspace(B[i]))
-		{
-			if (!token.empty()) word_map[token]++;
-			token.clear();
-		}
-		else
-		{
-			token.push_back(B[i]);
-		}
-	}
+    for (size_t i = 0; i <= B.size(); i++)
+    {
+        if (i == B.size() || isspace(B[i]))
+        {
+            if (!token.empty()) word_map[token]++;
+            token.clear();
+        }
+        else
+        {
+            token.push_back(B[i]);
+        }
+    }
 
-	for (auto itr : word_map)
-	{
-		if (itr.second == 1) result.push_back(itr.first);
-	}
+    for (auto itr : word_map)
+    {
+        if (itr.second == 1) result.push_back(itr.first);
+    }
 
-	return result;
+    return result;
 }
 
 /// <summary>
@@ -1262,38 +1262,38 @@ vector<string> LeetCode::uncommonFromSentences(string A, string B)
 /// </summary>
 vector<string> LeetCode::findAndReplacePattern(vector<string>& words, string pattern)
 {
-	vector<string> result;
+    vector<string> result;
 
-	for (size_t i = 0; i < words.size(); i++)
-	{
-		unordered_map<char, char> char_map;
-		unordered_set<char> char_set;
-		if (words[i].size() != pattern.size()) continue;
-		bool b_match = true;
-		for (size_t j = 0; j < pattern.size(); j++)
-		{
-			if (char_map.count(pattern[j]) == 0)
-			{
-				if (char_set.count(words[i][j]) == 0)
-				{
-					char_map[pattern[j]] = words[i][j];
-					char_set.insert(words[i][j]);
-				}
-				else // the target character alreay used.
-				{
-					b_match = false;
-					break;
-				}
-			}
-			else if (char_map[pattern[j]] != words[i][j])
-			{
-				b_match = false;
-				break;
-			}
-		}
-		if (b_match == true) result.push_back(words[i]);
-	}
-	return result;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        unordered_map<char, char> char_map;
+        unordered_set<char> char_set;
+        if (words[i].size() != pattern.size()) continue;
+        bool b_match = true;
+        for (size_t j = 0; j < pattern.size(); j++)
+        {
+            if (char_map.count(pattern[j]) == 0)
+            {
+                if (char_set.count(words[i][j]) == 0)
+                {
+                    char_map[pattern[j]] = words[i][j];
+                    char_set.insert(words[i][j]);
+                }
+                else // the target character alreay used.
+                {
+                    b_match = false;
+                    break;
+                }
+            }
+            else if (char_map[pattern[j]] != words[i][j])
+            {
+                b_match = false;
+                break;
+            }
+        }
+        if (b_match == true) result.push_back(words[i]);
+    }
+    return result;
 }
 
 /// <summary>
@@ -1347,42 +1347,42 @@ vector<string> LeetCode::findAndReplacePattern(vector<string>& words, string pat
 /// </summary>
 vector<string> LeetCode::wordSubsets(vector<string>& A, vector<string>& B)
 {
-	vector<string> result;
-	vector<int> b_count(26);	
-	for (size_t i = 0; i < B.size(); i++)
-	{
-		vector<int> temp(26);
-		for (char ch : B[i])
-		{
-			temp[ch - 'a']++;
-		}
+    vector<string> result;
+    vector<int> b_count(26);	
+    for (size_t i = 0; i < B.size(); i++)
+    {
+        vector<int> temp(26);
+        for (char ch : B[i])
+        {
+            temp[ch - 'a']++;
+        }
 
-		for (size_t j = 0; j < 26; j++)
-		{
-			b_count[j] = max(b_count[j], temp[j]);
-		}
-	}
+        for (size_t j = 0; j < 26; j++)
+        {
+            b_count[j] = max(b_count[j], temp[j]);
+        }
+    }
 
-	for (size_t i = 0;  i < A.size(); i++)
-	{
-		vector<int> a_count(26);
-		for (char ch : A[i])
-		{
-			a_count[ch - 'a']++;
-		}
+    for (size_t i = 0;  i < A.size(); i++)
+    {
+        vector<int> a_count(26);
+        for (char ch : A[i])
+        {
+            a_count[ch - 'a']++;
+        }
 
-		bool bMatch = true;
-		for (size_t j = 0; j < 26; j++)
-		{
-			if (a_count[j] < b_count[j])
-			{
-				bMatch = false;
-				break;
-			}
-		}
-		if (bMatch) result.push_back(A[i]);
-	}
-	return result;
+        bool bMatch = true;
+        for (size_t j = 0; j < 26; j++)
+        {
+            if (a_count[j] < b_count[j])
+            {
+                bMatch = false;
+                break;
+            }
+        }
+        if (bMatch) result.push_back(A[i]);
+    }
+    return result;
 }
 
 /// <summary>
@@ -1603,29 +1603,29 @@ bool LeetCode::isRobotBounded(string instructions)
 /// </summary>
 int LeetCode::numEquivDominoPairs(vector<vector<int>>& dominoes)
 {
-	vector<vector<int>> matrix(9, vector<int>(9));
+    vector<vector<int>> matrix(9, vector<int>(9));
 
-	for (size_t i = 0; i < dominoes.size(); i++)
-	{
-		if (dominoes[i][0] < dominoes[i][1])
-		{
-			matrix[dominoes[i][0] - 1][dominoes[i][1] - 1]++;
-		}
-		else
-		{
-			matrix[dominoes[i][1] - 1][dominoes[i][0] - 1]++;
-		}
-	}
-	int result = 0;
-	for (size_t i = 0; i < 9; i++)
-	{
-		for (size_t j = i; j < 9; j++)
-		{
-			int n = matrix[i][j];
-			result += n * (n - 1) / 2;
-		}
-	}
-	return result;
+    for (size_t i = 0; i < dominoes.size(); i++)
+    {
+        if (dominoes[i][0] < dominoes[i][1])
+        {
+            matrix[dominoes[i][0] - 1][dominoes[i][1] - 1]++;
+        }
+        else
+        {
+            matrix[dominoes[i][1] - 1][dominoes[i][0] - 1]++;
+        }
+    }
+    int result = 0;
+    for (size_t i = 0; i < 9; i++)
+    {
+        for (size_t j = i; j < 9; j++)
+        {
+            int n = matrix[i][j];
+            result += n * (n - 1) / 2;
+        }
+    }
+    return result;
 }
 
 /// <summary>
@@ -2395,6 +2395,113 @@ int LeetCodeHashtable::findLucky(vector<int>& arr)
         {
             result = itr.first;
         }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1418. Display Table of Food Orders in a Restaurant
+/// 
+/// Medium
+///
+/// Given the array orders, which represents the orders that customers 
+/// have done in a restaurant. More specifically orders[i]=
+/// [customerNamei,tableNumberi,foodItemi] where customerNamei is the 
+/// name of the customer, tableNumberi is the table customer sit at, and 
+/// foodItemi is the item customer orders.
+///
+/// Return the restaurant's “display table”. The “display table” is a 
+/// table whose row entries denote how many of each food item each table 
+/// ordered. The first column is the table number and the remaining 
+/// columns correspond to each food item in alphabetical order. The first 
+/// row should be a header whose first column is “Table”, followed by the 
+/// names of the food items. Note that the customer names are not part of 
+/// the table. Additionally, the rows should be sorted in numerically 
+/// increasing order.
+/// 
+/// Example 1:
+/// Input: orders = [["David","3","Ceviche"],["Corina","10",
+/// "Beef Burrito"],["David","3","Fried Chicken"],["Carla","5","Water"],
+/// ["Carla","5","Ceviche"],["Rous","3","Ceviche"]]
+/// Output: [["Table","Beef Burrito","Ceviche","Fried Chicken","Water"],
+/// ["3","0","2","1","0"],["5","0","1","0","1"],["10","1","0","0","0"]] 
+/// Explanation:
+/// The displaying table looks like:
+/// Table,Beef Burrito,Ceviche,Fried Chicken,Water
+/// 3    ,0           ,2      ,1            ,0
+/// 5    ,0           ,1      ,0            ,1
+/// 10   ,1           ,0      ,0            ,0
+/// For the table 3: David orders "Ceviche" and "Fried Chicken", and Rous 
+/// orders "Ceviche".
+/// For the table 5: Carla orders "Water" and "Ceviche".
+/// For the table 10: Corina orders "Beef Burrito". 
+///
+/// Example 2:
+/// Input: orders = [["James","12","Fried Chicken"],["Ratesh","12",
+/// "Fried Chicken"],["Amadeus","12","Fried Chicken"],["Adam","1",
+/// "Canadian Waffles"],["Brianna","1","Canadian Waffles"]]
+/// Output: [["Table","Canadian Waffles","Fried Chicken"],["1","2","0"],
+/// ["12","0","3"]] 
+/// Explanation: 
+/// For the table 1: Adam and Brianna order "Canadian Waffles".
+/// For the table 12: James, Ratesh and Amadeus order "Fried Chicken".
+///
+/// Example 3:
+/// Input: orders = [["Laura","2","Bean Burrito"],["Jhon","2",
+/// "Beef Burrito"],["Melissa","2","Soda"]]
+/// Output: [["Table","Bean Burrito","Beef Burrito","Soda"],
+/// ["2","1","1","1"]]
+///  
+/// Constraints:
+/// 1. 1 <= orders.length <= 5 * 10^4
+/// 2. orders[i].length == 3
+/// 3. 1 <= customerNamei.length, foodItemi.length <= 20
+/// 4. customerName[i] and foodItem[i] consist of lowercase and uppercase 
+///    English letters and the space character.
+/// 5. tableNumber[i] is a valid integer between 1 and 500.
+/// </summary>
+vector<vector<string>> LeetCodeHashtable::displayTable(vector<vector<string>>& orders)
+{
+    set<int> tbl_set;
+    map<string, vector<int>> tbl_orders;
+
+    for (size_t i = 0; i < orders.size(); i++)
+    {
+        string item = orders[i][2];
+        int table_id = atoi(orders[i][1].c_str());
+        if (tbl_orders.count(item) == 0)
+        {
+            tbl_orders[item] = vector<int>(501);
+        }
+        tbl_orders[orders[i][2]][table_id]++;
+        tbl_set.insert(table_id);
+    }
+    vector<int> tables = vector<int>(tbl_set.begin(), tbl_set.end());
+
+    vector<vector<string>> result;
+
+    for (int i = -1; i < (int)tables.size(); i++)
+    {
+        vector<string> line;
+        int table_id;
+        if (i == -1)
+        {
+            line.push_back("Table");
+        }
+        else
+        {
+            table_id = tables[i];
+            line.push_back(to_string(table_id));
+        }
+        for (auto itr : tbl_orders)
+        {
+            if (i == -1) line.push_back(itr.first);
+            else
+            {
+                line.push_back(to_string(itr.second[table_id]));
+            }
+        }
+        result.push_back(line);
     }
     return result;
 }

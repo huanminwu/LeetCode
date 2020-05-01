@@ -1651,6 +1651,31 @@ void TestLeetCode1410(void)
     Logger::WriteMessage("text = " + text + "; result = " + result);
 }
 
+void TestLeetCode1417(void)
+{
+    Logger::WriteMessage("Test Leet Code 1417");
+    LeetCodeString leetCode;
+    string s = "a0b1c2";
+    string result = leetCode.reformat(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "leetcode";
+    result = leetCode.reformat(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "1229857369";
+    result = leetCode.reformat(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "covid2019";
+    result = leetCode.reformat(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "ab123";
+    result = leetCode.reformat(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCode1422(void)
 {
     Logger::WriteMessage("Test Leet Code 1422");
@@ -1670,6 +1695,7 @@ void TestLeetCode1422(void)
 
 void TestLeetCodeString(void)
 {
+    TestLeetCode1417();
     TestLeetCode1422();
     TestLeetCode1410();
     TestLeetCode1408();

@@ -2137,8 +2137,57 @@ void TestLeetCode1401(void)
     );
 }
 
+void TestLeetCode1414(void)
+{
+    Logger::WriteMessage("Test Leet Code 1414");
+    LeetCodeMath leetCode;
+    int k = 7;
+    int result = leetCode.findMinFibonacciNumbers(k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    k = 10;
+    result = leetCode.findMinFibonacciNumbers(k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    k = 19;
+    result = leetCode.findMinFibonacciNumbers(k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1415(void)
+{
+    Logger::WriteMessage("Test Leet Code 1415");
+    LeetCodeMath leetCode;
+    int n = 1;
+    int k = 3;
+    string result = leetCode.getHappyString(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + result);
+
+    n = 1;
+    k = 4;
+    result = leetCode.getHappyString(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + result);
+
+    n = 3;
+    k = 9;
+    result = leetCode.getHappyString(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + result);
+
+    n = 2;
+    k = 7;
+    result = leetCode.getHappyString(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + result);
+
+    n = 10;
+    k = 100;
+    result = leetCode.getHappyString(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + result);
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1415();
+    TestLeetCode1414();
     TestLeetCode1401();
     TestLeetCode1399();
     TestLeetCode1390();

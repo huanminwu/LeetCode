@@ -310,8 +310,49 @@ void TestLeetCode1394(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1418(void)
+{
+    Logger::WriteMessage("Test Leet Code 1418");
+    LeetCodeHashtable leetCode;
+    vector<vector<string>> orders =
+    {
+        {"David", "3", "Ceviche"},
+        {"Corina", "10", "Beef Burrito"},
+        {"David", "3", "Fried Chicken"},
+        {"Carla", "5", "Water"},
+        {"Carla", "5", "Ceviche"},
+        {"Rous", "3", "Ceviche"}
+    };
+    vector<vector<string>> result = leetCode.displayTable(orders);
+    Logger::WriteMessage(orders);
+    Logger::WriteMessage(result);
+
+    orders =
+    {
+        {"James", "12", "Fried Chicken"},
+        {"Ratesh", "12", "Fried Chicken"},
+        {"Amadeus", "12", "Fried Chicken"},
+        {"Adam", "1", "Canadian Waffles"},
+        {"Brianna", "1", "Canadian Waffles"}
+    };
+    result = leetCode.displayTable(orders);
+    Logger::WriteMessage(orders);
+    Logger::WriteMessage(result);
+
+    orders =
+    {
+        {"Laura","2","Bean Burrito"},
+        {"Jhon","2","Beef Burrito"},
+        {"Melissa","2","Soda"}
+    };
+    result = leetCode.displayTable(orders);
+    Logger::WriteMessage(orders);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1418();
     TestLeetCode1394();
     TestLeetCode1386();
     TestLeetCode170();

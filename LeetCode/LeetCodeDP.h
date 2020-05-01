@@ -2050,5 +2050,111 @@ public:
     /// 3. 1 <= n <= 5000
     /// </summary>
     int numOfWays(int n);
+
+    /// <summary>
+    /// Leet code #1416. Restore The Array
+    /// 
+    /// Hard
+    ///
+    /// A program was supposed to print an array of integers. The program 
+    /// forgot to print whitespaces and the array is printed as a string of 
+    /// digits and all we know is that all integers in the array were in the 
+    /// range [1, k] and there are no leading zeros in the array.
+    ///
+    /// Given the string s and the integer k. There can be multiple ways to 
+    /// restore the array.
+    ///
+    /// Return the number of possible array that can be printed as a string 
+    /// s using the mentioned program.
+    ///
+    /// The number of ways could be very large so return it modulo 10^9 + 7
+    /// 
+    /// Example 1:
+    ///
+    /// Input: s = "1000", k = 10000
+    /// Output: 1
+    /// Explanation: The only possible array is [1000]
+    ///
+    /// Example 2:
+    /// 
+    /// Input: s = "1000", k = 10
+    /// Output: 0
+    /// Explanation: There cannot be an array that was printed this way and 
+    /// has all integer >= 1 and <= 10.
+    ///
+    /// Example 3:
+    /// Input: s = "1317", k = 2000
+    /// Output: 8
+    /// Explanation: Possible arrays are [1317],[131,7],[13,17],[1,317],
+    /// [13,1,7],[1,31,7],[1,3,17],[1,3,1,7]
+    ///
+    /// Example 4:
+    /// Input: s = "2020", k = 30
+    /// Output: 1
+    /// Explanation: The only possible array is [20,20]. [2020] is invalid 
+    /// because 2020 > 30. [2,020] is ivalid because 020 contains leading 
+    /// zeros.
+    ///
+    /// Example 5:
+    /// Input: s = "1234567890", k = 90
+    /// Output: 34
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5.
+    /// 2. s consists of only digits and doesn't contain leading zeros.
+    /// 3. 1 <= k <= 10^9.
+    /// </summary>
+    int numberOfArrays(string s, int k);
+
+    /// <summary>
+    /// Leet code #1420. Build Array Where You Can Find The Maximum Exactly 
+    ///                  K Comparisons
+    /// 
+    /// Hard
+    ///
+    /// Given three integers n, m and k. Consider the following algorithm to 
+    /// find the maximum element of an array of positive integers:
+    ///
+    /// You should build the array arr which has the following properties:
+    /// 
+    /// arr has exactly n integers.
+    /// 1 <= arr[i] <= m where (0 <= i < n).
+    /// After applying the mentioned algorithm to arr, the value search_cost 
+    /// is equal to k.
+    /// Return the number of ways to build the array arr under the mentioned 
+    /// conditions. As the answer may grow large, the answer must be computed 
+    /// modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: n = 2, m = 3, k = 1
+    /// Output: 6
+    /// Explanation: The possible arrays are [1, 1], [2, 1], [2, 2], [3, 1], 
+    /// [3, 2] [3, 3]
+    ///
+    /// Example 2:
+    /// Input: n = 5, m = 2, k = 3
+    /// Output: 0
+    /// Explanation: There are no possible arrays that satisify the mentioned 
+    /// conditions.
+    ///
+    /// Example 3:
+    /// Input: n = 9, m = 1, k = 1
+    /// Output: 1
+    /// Explanation: The only possible array is [1, 1, 1, 1, 1, 1, 1, 1, 1]
+    ///
+    /// Example 4:
+    /// Input: n = 50, m = 100, k = 25
+    /// Output: 34549172
+    /// Explanation: Don't forget to compute the answer modulo 1000000007
+    ///
+    /// Example 5:
+    /// Input: n = 37, m = 17, k = 7
+    /// Output: 418930126
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 50
+    /// 2. 1 <= m <= 100
+    /// 3. 0 <= k <= n
+    /// </summary>
+    int numOfArrays(int n, int m, int k);
 };
 #endif  // LeetCodeDP

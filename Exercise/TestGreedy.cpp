@@ -222,8 +222,30 @@ void TestLeetCode1405(void)
         "; c = " + to_string(c) + "; result = " + result);
 }
 
+void TestLeetCode1419(void)
+{
+    Logger::WriteMessage("Test Leet Code 1419");
+    LeetCodeGreedy leetCode;
+    string croakOfFrogs = "croakcroak";
+    int result = leetCode.minNumberOfFrogs(croakOfFrogs);
+    Logger::WriteMessage("croakOfFrogs = " + croakOfFrogs + "; result = " + to_string(result));
+
+    croakOfFrogs = "crcoakroak";
+    result = leetCode.minNumberOfFrogs(croakOfFrogs);
+    Logger::WriteMessage("croakOfFrogs = " + croakOfFrogs + "; result = " + to_string(result));
+
+    croakOfFrogs = "croakcrook";
+    result = leetCode.minNumberOfFrogs(croakOfFrogs);
+    Logger::WriteMessage("croakOfFrogs = " + croakOfFrogs + "; result = " + to_string(result));
+
+    croakOfFrogs = "croakcroa";
+    result = leetCode.minNumberOfFrogs(croakOfFrogs);
+    Logger::WriteMessage("croakOfFrogs = " + croakOfFrogs + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode1419();
     TestLeetCode1405();
     TestLeetCode1383();
     TestLeetCode1353();
