@@ -7337,5 +7337,214 @@ public:
     }
 };
 
+/// <summary>
+/// Leet code #1428. Leftmost Column with at Least a One
+/// 
+/// Medium
+///
+/// (This problem is an interactive problem.)
+/// A binary matrix means that all elements are 0 or 1. For each 
+/// individual row of the matrix, this row is sorted in non-decreasing 
+/// order.
+///
+/// Given a row-sorted binary matrix binaryMatrix, return leftmost 
+/// column index(0-indexed) with at least a 1 in it. If such index 
+/// doesn't exist, return -1.
+///
+/// You can't access the Binary Matrix directly.  You may only access 
+/// the matrix using a BinaryMatrix interface:
+/// BinaryMatrix.get(row, col) returns the element of the matrix at 
+/// index (row, col) (0-indexed).
+/// BinaryMatrix.dimensions() returns a list of 2 elements [rows, cols], 
+/// which means the matrix is rows * cols.
+/// Submissions making more than 1000 calls to BinaryMatrix.get will be 
+/// judged Wrong Answer.  Also, any solutions that attempt to circumvent 
+/// the judge will result in disqualification.
+/// 
+/// For custom testing purposes you're given the binary matrix mat 
+/// as input in the following four examples. You will not have access 
+/// the binary matrix directly.
+///
+/// Example 1:
+/// Input: mat = [[0,0],[1,1]]
+/// Output: 0
+///
+/// Example 2:
+/// Input: mat = [[0,0],[0,1]]
+/// Output: 1
+///
+/// Example 3:
+/// Input: mat = [[0,0],[0,0]]
+/// Output: -1
+///
+/// Example 4:
+/// Input: mat = [[0,0,0,1],[0,0,1,1],[0,1,1,1]]
+/// Output: 1
+///
+/// Constraints:
+/// 1. rows == mat.length
+/// 2. cols == mat[i].length
+/// 3. 1 <= rows, cols <= 100
+/// 4. mat[i][j] is either 0 or 1.
+/// 5. mat[i] is sorted in a non-decreasing way. 
+/// </summary>
+class BinaryMatrix
+{
+private:
+    vector<vector<int>> m_matrix;
+public:
+    BinaryMatrix(vector<vector<int>> mat)
+    {
+        m_matrix = mat;
+    }
 
+    vector<int> dimensions(void)
+    {
+        vector<int> result(2);
+        result[0] = m_matrix.size();
+        if (!m_matrix.empty()) result[1] = m_matrix[0].size();
+
+        return result;
+    }
+
+
+    int get(int row, int col)
+    {
+        if (row >= 0 && col >= 0 && row < (int)m_matrix.size() && col < (int)m_matrix[0].size())
+        {
+            return m_matrix[row][col];
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
+    int leftMostColumnWithOne(BinaryMatrix& binaryMatrix)
+    {
+        vector<int> dims = dimensions();
+        int row = 0;
+        int col = dims[1] - 1;
+        int result = -1;
+        while (row < dims[0] && col >= 0)
+        {
+            if (get(row, col) == 1)
+            {
+                result = col;
+                col--;
+            }
+            else row++;
+        }
+        return result;
+    }
+};
+
+/// <summary>
+/// Leet code #1429. First Unique Number
+/// 
+/// Medium
+///
+/// You have a queue of integers, you need to retrieve the first unique 
+/// integer in the queue.
+/// 
+/// Implement the FirstUnique class:
+///
+/// FirstUnique(int[] nums) Initializes the object with the numbers in the 
+/// queue.
+/// int showFirstUnique() returns the value of the first unique integer of 
+/// the queue, and returns -1 if there is no such integer.
+/// void add(int value) insert value to the queue.
+///
+/// Example 1:
+/// Input: 
+/// ["FirstUnique","showFirstUnique","add","showFirstUnique","add",
+/// "showFirstUnique","add","showFirstUnique"]
+/// [[[2,3,5]],[],[5],[],[2],[],[3],[]]
+/// Output: 
+/// [null,2,null,2,null,3,null,-1]
+/// Explanation: 
+/// FirstUnique firstUnique = new FirstUnique([2,3,5]);
+/// firstUnique.showFirstUnique(); // return 2
+/// firstUnique.add(5);            // the queue is now [2,3,5,5]
+/// firstUnique.showFirstUnique(); // return 2
+/// firstUnique.add(2);            // the queue is now [2,3,5,5,2]
+/// firstUnique.showFirstUnique(); // return 3
+/// firstUnique.add(3);            // the queue is now [2,3,5,5,2,3]
+/// firstUnique.showFirstUnique(); // return -1
+///
+/// Example 2:
+/// Input: 
+/// ["FirstUnique","showFirstUnique","add","add","add","add","add",
+/// "showFirstUnique"]
+/// [[[7,7,7,7,7,7]],[],[7],[3],[3],[7],[17],[]]
+/// Output: 
+/// [null,-1,null,null,null,null,null,17]
+/// Explanation: 
+/// FirstUnique firstUnique = new FirstUnique([7,7,7,7,7,7]);
+/// firstUnique.showFirstUnique(); // return -1
+/// firstUnique.add(7);            // the queue is now [7,7,7,7,7,7,7]
+/// firstUnique.add(3);            // the queue is now [7,7,7,7,7,7,7,3]
+/// firstUnique.add(3);            // the queue is now [7,7,7,7,7,7,7,3,3]
+/// firstUnique.add(7);            // the queue is now [7,7,7,7,7,7,7,3,3,7]
+/// firstUnique.add(17);           // the queue is [7,7,7,7,7,7,7,3,3,7,17]
+/// firstUnique.showFirstUnique(); // return 17
+///
+/// Example 3:
+/// Input: 
+/// ["FirstUnique","showFirstUnique","add","showFirstUnique"]
+/// [[[809]],[],[809],[]]
+/// Output: 
+/// [null,809,null,-1]
+/// Explanation: 
+/// FirstUnique firstUnique = new FirstUnique([809]);
+/// firstUnique.showFirstUnique(); // return 809
+/// firstUnique.add(809);          // the queue is now [809,809]
+/// firstUnique.showFirstUnique(); // return -1
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^8
+/// 3. 1 <= value <= 10^8
+/// 4. At most 50000 calls will be made to showFirstUnique and add.
+/// </summary>
+class FirstUnique
+{
+private:
+    unordered_map<int, list<int>::iterator> m_values;
+    unordered_set<int> m_duplicates;
+    list<int> m_list;
+
+public:
+    FirstUnique(vector<int>& nums) 
+    {
+        for (size_t i = 0; i < nums.size(); i++)
+        {
+            add(nums[i]);
+        }
+    }
+
+    int showFirstUnique() 
+    {
+        if (m_list.empty()) return -1;
+        else return m_list.front();
+    }
+
+    void add(int value) 
+    {
+        if (m_values.count(value) > 0)
+        {
+            m_list.erase(m_values[value]);
+            m_values.erase(value);
+            m_duplicates.insert(value);
+        }
+        else
+        {
+            if (m_duplicates.count(value) == 0)
+            {
+                m_list.push_back(value);
+                m_values[value] = prev(m_list.end());
+            }
+        }
+    }
+};
 #endif // LeetcodeDesign_H

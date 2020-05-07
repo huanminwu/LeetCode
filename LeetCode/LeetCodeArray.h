@@ -2539,6 +2539,132 @@ public:
     /// 4. There at most 10^5 elements in nums.
     /// </summary>
     vector<int> findDiagonalOrder(vector<vector<int>>& nums);
+
+    /// <summary>
+    /// Leet code #1431. Kids With the Greatest Number of Candies
+    /// 
+    /// Easy
+    ///
+    /// Given the array candies and the integer extraCandies, where candies[i] 
+    /// represents the number of candies that the ith kid has.
+    ///
+    /// For each kid check if there is a way to distribute extraCandies among 
+    /// the kids such that he or she can have the greatest number of candies 
+    /// among them. Notice that multiple kids can have the greatest number of 
+    /// candies.
+    ///
+    /// Example 1:
+    /// Input: candies = [2,3,5,1,3], extraCandies = 3
+    /// Output: [true,true,true,false,true] 
+    /// Explanation: 
+    /// Kid 1 has 2 candies and if he or she receives all extra candies (3) 
+    /// will have 5 candies --- the greatest number of candies among the kids. 
+    /// Kid 2 has 3 candies and if he or she receives at least 2 extra candies 
+    /// will have the greatest number of candies among the kids. 
+    /// Kid 3 has 5 candies and this is already the greatest number of candies 
+    /// among the kids. 
+    /// Kid 4 has 1 candy and even if he or she receives all extra candies will
+    /// only have 4 candies. 
+    /// Kid 5 has 3 candies and if he or she receives at least 2 extra candies 
+    /// will have the greatest number of candies among the kids. 
+    ///
+    /// Example 2:
+    /// Input: candies = [4,2,1,1,2], extraCandies = 1
+    /// Output: [true,false,false,false,false] 
+    /// Explanation: There is only 1 extra candy, therefore only kid 1 will 
+    /// have the greatest number of candies among the kids regardless of who 
+    /// takes the extra candy.
+    ///
+    /// Example 3:
+    /// Input: candies = [12,1,12], extraCandies = 10
+    /// Output: [true,false,true]
+    /// Constraints:
+    /// 1. 2 <= candies.length <= 100
+    /// 2. 1 <= candies[i] <= 100
+    /// 3. 1 <= extraCandies <= 50
+    /// </summary>
+    vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies);
+
+    /// <summary>
+    /// Leet code #1437. Check If All 1's Are at Least Length K Places Away
+    /// 
+    /// Medium
+    ///
+    /// Given an array nums of 0s and 1s and an integer k, return True if 
+    /// all 1's are at least k places away from each other, otherwise return 
+    /// False.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,0,0,0,1,0,0,1], k = 2
+    /// Output: true
+    /// Explanation: Each of the 1s are at least 2 places away from each 
+    /// other.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,0,0,1,0,1], k = 2
+    /// Output: false
+    /// Explanation: The second 1 and third 1 are only one apart from each 
+    /// other.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,1,1,1,1], k = 0
+    /// Output: true
+    ///
+    /// Example 4:
+    /// Input: nums = [0,1,0,1], k = 1
+    /// Output: true
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= k <= nums.length
+    /// 3. nums[i] is 0 or 1
+    /// </summary>
+    bool kLengthApart(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code #1438. Longest Continuous Subarray With Absolute Diff 
+    ///                  Less Than or Equal to Limit
+    /// 
+    /// Medium
+    ///
+    /// Given an array of integers nums and an integer limit, return the 
+    /// size of the longest continuous subarray such that the absolute 
+    /// difference between any two elements is less than or equal to limit.
+    ///
+    /// In case there is no subarray satisfying the given condition return 0.
+    ///
+    /// Example 1:
+    /// Input: nums = [8,2,4,7], limit = 4
+    /// Output: 2 
+    /// Explanation: All subarrays are: 
+    /// [8] with maximum absolute diff |8-8| = 0 <= 4.
+    /// [8,2] with maximum absolute diff |8-2| = 6 > 4. 
+    /// [8,2,4] with maximum absolute diff |8-2| = 6 > 4.
+    /// [8,2,4,7] with maximum absolute diff |8-2| = 6 > 4.
+    /// [2] with maximum absolute diff |2-2| = 0 <= 4.
+    /// [2,4] with maximum absolute diff |2-4| = 2 <= 4.
+    /// [2,4,7] with maximum absolute diff |2-7| = 5 > 4.
+    /// [4] with maximum absolute diff |4-4| = 0 <= 4.
+    /// [4,7] with maximum absolute diff |4-7| = 3 <= 4.
+    /// [7] with maximum absolute diff |7-7| = 0 <= 4. 
+    /// Therefore, the size of the longest subarray is 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [10,1,2,4,7,2], limit = 5
+    /// Output: 4 
+    /// Explanation: The subarray [2,4,7,2] is the longest since the maximum 
+    /// absolute diff is |2-7| = 5 <= 5.
+    ///
+    /// Example 3:
+    /// Input: nums = [4,2,2,2,4,4,2,2], limit = 0
+    /// Output: 3
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. 0 <= limit <= 10^9
+    /// </summary>
+    int longestSubarray(vector<int>& nums, int limit);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

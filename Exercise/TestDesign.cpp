@@ -1668,8 +1668,176 @@ void TestLeetCode1396(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1428(void)
+{
+    Logger::WriteMessage("Test Leet Code 1428");
+    vector<vector<int>> mat = { {0, 0},{1, 1} };
+    class BinaryMatrix* binaryMatrix = new BinaryMatrix(mat);
+    int result = binaryMatrix->leftMostColumnWithOne(*binaryMatrix);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+    delete binaryMatrix;
+
+    mat = { {0, 0},{0, 1} };
+    binaryMatrix = new BinaryMatrix(mat);
+    result = binaryMatrix->leftMostColumnWithOne(*binaryMatrix);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+    delete binaryMatrix;
+
+    mat = { {0, 0},{0, 0} };
+    binaryMatrix = new BinaryMatrix(mat);
+    result = binaryMatrix->leftMostColumnWithOne(*binaryMatrix);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+    delete binaryMatrix;
+
+    mat = { {0, 0, 0, 1},{0, 0, 1, 1},{0, 1, 1, 1} };
+    binaryMatrix = new BinaryMatrix(mat);
+    result = binaryMatrix->leftMostColumnWithOne(*binaryMatrix);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+    delete binaryMatrix;
+}
+
+void TestLeetCode1429(void)
+{
+    Logger::WriteMessage("Test Leet Code 1429");
+    vector<string> commands =
+    {
+        "FirstUnique", "showFirstUnique", "add","showFirstUnique","add",
+        "showFirstUnique","add","showFirstUnique"
+    };
+    vector<vector<int>> parameters =
+    {
+        {2, 3, 5}, {}, {5}, {},{2},{},{3}, {}
+    };
+    vector<string> result;
+    FirstUnique* firstUnique = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FirstUnique")
+        {
+            firstUnique = new FirstUnique(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "showFirstUnique")
+        {
+             result.push_back(to_string(firstUnique->showFirstUnique()));
+        }
+        else if (commands[i] == "add")
+        {
+            firstUnique->add(parameters[i][0]);
+            result.push_back("null");
+        }
+    }
+    delete firstUnique;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+       "FirstUnique", "showFirstUnique","add","add","add","add","add",
+        "showFirstUnique"
+    };
+    parameters =
+    {
+        {7,7,7,7,7,7},{},{7},{3},{3},{7},{17},{}
+    };
+    result.clear();
+    firstUnique = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FirstUnique")
+        {
+            firstUnique = new FirstUnique(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "showFirstUnique")
+        {
+            result.push_back(to_string(firstUnique->showFirstUnique()));
+        }
+        else if (commands[i] == "add")
+        {
+            firstUnique->add(parameters[i][0]);
+            result.push_back("null");
+        }
+    }
+    delete firstUnique;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+       "FirstUnique", "showFirstUnique", "add", "showFirstUnique"
+    };
+    parameters =
+    {
+        {809},{},{809},{}
+    };
+    result.clear();
+    firstUnique = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FirstUnique")
+        {
+            firstUnique = new FirstUnique(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "showFirstUnique")
+        {
+            result.push_back(to_string(firstUnique->showFirstUnique()));
+        }
+        else if (commands[i] == "add")
+        {
+            firstUnique->add(parameters[i][0]);
+            result.push_back("null");
+        }
+    }
+    delete firstUnique;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+       "FirstUnique", "add", "add", "showFirstUnique"
+    };
+    parameters =
+    {
+        {1},{1},{1},{}
+    };
+    result.clear();
+    firstUnique = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FirstUnique")
+        {
+            firstUnique = new FirstUnique(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "showFirstUnique")
+        {
+            result.push_back(to_string(firstUnique->showFirstUnique()));
+        }
+        else if (commands[i] == "add")
+        {
+            firstUnique->add(parameters[i][0]);
+            result.push_back("null");
+        }
+    }
+    delete firstUnique;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1429();
+    TestLeetCode1428();
     TestLeetCode1396();
     TestLeetCode1381();
     TestLeetCode1357();

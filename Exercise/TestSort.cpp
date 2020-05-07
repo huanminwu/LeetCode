@@ -556,8 +556,55 @@ void TestLeetCode1403(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1439(void)
+{
+    Logger::WriteMessage("Test Leet Code 1439");
+    LeetCodeSort leetCode;
+    vector<vector<int>> mat =
+    {
+        {1, 3, 11},
+        {2, 4, 6}
+    };
+    int k = 5;
+    int result = leetCode.kthSmallest(mat, k);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    mat =
+    {
+        {1, 3, 11},
+        {2, 4, 6}
+    };
+    k = 9;
+    result = leetCode.kthSmallest(mat, k);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    mat =
+    {
+        {1, 10, 10},
+        {1, 4, 5},
+        {2, 3, 6}
+    };
+    k = 7;
+    result = leetCode.kthSmallest(mat, k);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    mat =
+    {
+        {1, 1, 10},
+        {2, 2, 9}
+    };
+    k = 7;
+    result = leetCode.kthSmallest(mat, k);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1439();
     TestLeetCode1403();
     TestLeetCode1402();
     TestLeetCode1385();

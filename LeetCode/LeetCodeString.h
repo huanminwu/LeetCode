@@ -2688,6 +2688,85 @@ public:
     /// </summary>
     int maxScore(string s);
 
+    /// <summary>
+    /// Leet code #1433. Check If a String Can Break Another String
+    /// 
+    /// Medium
+    ///
+    /// Given two strings: s1 and s2 with the same size, check if some 
+    /// permutation of string s1 can break some permutation of string s2 
+    /// or vice-versa (in other words s2 can break s1).
+    /// 
+    /// A string x can break string y (both of size n) if x[i] >= y[i] 
+    /// (in alphabetical order) for all i between 0 and n-1.
+    ///
+    /// Example 1:
+    /// Input: s1 = "abc", s2 = "xya"
+    /// Output: true
+    /// Explanation: "ayx" is a permutation of s2="xya" which can break 
+    /// to string "abc" which is a permutation of s1="abc".
+    ///
+    /// Example 2:
+    /// Input: s1 = "abe", s2 = "acd"
+    /// Output: false 
+    /// Explanation: All permutations for s1="abe" are: "abe", "aeb", "bae", 
+    /// "bea", "eab" and "eba" and all permutation for s2="acd" are: "acd", 
+    /// "adc", "cad", "cda", "dac" and "dca". However, there is not any 
+    /// permutation from s1 which can break some permutation from s2 and 
+    /// vice-versa.
+    ///
+    /// Example 3:
+    /// Input: s1 = "leetcodee", s2 = "interview"
+    /// Output: true
+    /// Constraints:
+    /// 1. s1.length == n
+    /// 2. s2.length == n
+    /// 3. 1 <= n <= 10^5
+    /// 4. All strings consist of lowercase English letters.
+    /// </summary>
+    bool checkIfCanBreak(string s1, string s2);
+
+    /// <summary>
+    /// Leet code #1427. Perform String Shifts
+    /// 
+    /// Easy
+    ///
+    /// You are given a string s containing lowercase English letters, 
+    /// and a matrix shift, where shift[i] = [direction, amount]:
+    ///
+    /// direction can be 0 (for left shift) or 1 (for right shift). 
+    /// amount is the amount by which string s is to be shifted.
+    /// A left shift by 1 means remove the first character of s and append 
+    /// it to the end.
+    /// Similarly, a right shift by 1 means remove the last character of s 
+    /// and add it to the beginning.
+    /// Return the final string after all operations.
+    ///
+    /// Example 1:
+    /// Input: s = "abc", shift = [[0,1],[1,2]]
+    /// Output: "cab"
+    /// Explanation: 
+    /// [0,1] means shift to left by 1. "abc" -> "bca"
+    /// [1,2] means shift to right by 2. "bca" -> "cab"
+    ///
+    /// Example 2:
+    /// Input: s = "abcdefg", shift = [[1,1],[1,1],[0,2],[1,3]]
+    /// Output: "efgabcd"
+    /// Explanation:  
+    /// [1,1] means shift to right by 1. "abcdefg" -> "gabcdef"
+    /// [1,1] means shift to right by 1. "gabcdef" -> "fgabcde"
+    /// [0,2] means shift to left by 2. "fgabcde" -> "abcdefg"
+    /// [1,3] means shift to right by 3. "abcdefg" -> "efgabcd"
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s only contains lower case English letters.
+    /// 3. 1 <= shift.length <= 100
+    /// 4. shift[i].length == 2
+    /// 5. 0 <= shift[i][0] <= 1
+    /// 6. 0 <= shift[i][1] <= 100
+    /// </summary>
+    string stringShift(string s, vector<vector<int>>& shift);
 #pragma endregion
 };
 

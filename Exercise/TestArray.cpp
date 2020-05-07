@@ -1646,8 +1646,92 @@ void TestLeetCode1424(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1431(void)
+{
+    Logger::WriteMessage("Test Leet Code 1431");
+    LeetCodeArray leetCode;
+    vector<int> candies = { 2, 3, 5, 1, 3 }; 
+    int extraCandies = 3; 
+    vector<bool> result = leetCode.kidsWithCandies(candies, extraCandies);
+    Logger::WriteMessage(candies);
+    Logger::WriteMessage(result);
+
+    candies = { 4,2,1,1,2 };
+    extraCandies = 1;
+    result = leetCode.kidsWithCandies(candies, extraCandies);
+    Logger::WriteMessage(candies);
+    Logger::WriteMessage(result);
+
+    candies = { 12,1,12 };
+    extraCandies = 10;
+    result = leetCode.kidsWithCandies(candies, extraCandies);
+    Logger::WriteMessage(candies);
+    Logger::WriteMessage(result);
+
+    candies = { 12,1,12 };
+    extraCandies = 10;
+    result = leetCode.kidsWithCandies(candies, extraCandies);
+    Logger::WriteMessage(candies);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1437(void)
+{
+    Logger::WriteMessage("Test Leet Code 1437");
+    LeetCodeArray leetCode;    
+    vector<int> nums = { 1, 0, 0, 0, 1, 0, 0, 1 };
+    int k = 2;
+    bool result = leetCode.kLengthApart(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,0,0,1,0,1 };
+    k = 2;
+    result = leetCode.kLengthApart(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,1,1,1,1 };
+    k = 0;
+    result = leetCode.kLengthApart(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    nums = { 0,1,0,1 };
+    k = 1;
+    result = leetCode.kLengthApart(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1438(void)
+{
+    Logger::WriteMessage("Test Leet Code 1438");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 8, 2, 4, 7 };
+    int limit = 4;
+    int result = leetCode.longestSubarray(nums, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
+
+    nums = { 10,1,2,4,7,2 };
+    limit = 5;
+    result = leetCode.longestSubarray(nums, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
+
+    nums = { 4,2,2,2,4,4,2,2 };
+    limit = 0;
+    result = leetCode.longestSubarray(nums, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1438();
+    TestLeetCode1437();
+    TestLeetCode1431();
     TestLeetCode1413();
     TestLeetCode1424();
     TestLeetCode1423();

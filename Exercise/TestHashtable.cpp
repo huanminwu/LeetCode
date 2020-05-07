@@ -350,8 +350,39 @@ void TestLeetCode1418(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1426(void)
+{
+    Logger::WriteMessage("Test Leet Code 1426");
+    LeetCodeHashtable leetCode;
+    vector<int> arr = { 1,2,3 };
+    int result = leetCode.countElements(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1,1,3,3,5,5,7,7 };
+    result = leetCode.countElements(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1,3,2,3,5,0 };
+    result = leetCode.countElements(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1,1,2,2 };
+    result = leetCode.countElements(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1,1,2 };
+    result = leetCode.countElements(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1426();
     TestLeetCode1418();
     TestLeetCode1394();
     TestLeetCode1386();

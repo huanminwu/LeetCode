@@ -2047,8 +2047,38 @@ void TestLeetCode1377(void)
     Logger::WriteMessage("n = " + to_string(n) + "; t = " + to_string(t) + "; target = " + to_string(target) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1436(void)
+{
+    Logger::WriteMessage("Test Leet Code 1436");
+    LeetCodeGraph leetCode;
+    vector<vector<string>> paths =
+    {
+        {"London", "New York"},{"New York", "Lima"},{"Lima", "Sao Paulo"}
+    };
+    string result = leetCode.destCity(paths);
+    Logger::WriteMessage(paths);
+    Logger::WriteMessage("result = " + result);
+
+    paths =
+    {
+        {"B","C"},{"D","B"},{"C","A"}
+    };
+    result = leetCode.destCity(paths);
+    Logger::WriteMessage(paths);
+    Logger::WriteMessage("result = " + result);
+
+    paths =
+    {
+        {"A","Z"}
+    };
+    result = leetCode.destCity(paths);
+    Logger::WriteMessage(paths);
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1436();
     TestLeetCode1377();
     TestLeetCode1376();
     TestLeetCode1368();

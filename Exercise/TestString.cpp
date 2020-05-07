@@ -1693,8 +1693,50 @@ void TestLeetCode1422(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode1433(void)
+{
+    Logger::WriteMessage("Test Leet Code 1433");
+    LeetCodeString leetCode;
+    string s1 = "abc";
+    string s2 = "xya";
+    bool result = leetCode.checkIfCanBreak(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "; result = " + (string)(result? "true" : "false"));
+
+    s1 = "abe";
+    s2 = "acd";
+    result = leetCode.checkIfCanBreak(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "; result = " + (string)(result ? "true" : "false"));
+
+    s1 = "leetcodee";
+    s2 = "interview";
+    result = leetCode.checkIfCanBreak(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "; result = " + (string)(result ? "true" : "false"));
+
+    s1 = "abc";
+    s2 = "acb";
+    result = leetCode.checkIfCanBreak(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1427(void)
+{
+    Logger::WriteMessage("Test Leet Code 1427");
+    LeetCodeString leetCode;
+    string s = "abc";
+    vector<vector<int>> shift = { {0, 1},{1, 2} };
+    string result = leetCode.stringShift(s, shift);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "abcdefg";
+    shift = { {1, 1},{1, 1},{0, 2},{1, 3} };
+    result = leetCode.stringShift(s, shift);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1427();
+    TestLeetCode1433();
     TestLeetCode1417();
     TestLeetCode1422();
     TestLeetCode1410();

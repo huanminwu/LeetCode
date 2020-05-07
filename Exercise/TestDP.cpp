@@ -1396,8 +1396,39 @@ void TestLeetCode1420(void)
         "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1434(void)
+{
+    Logger::WriteMessage("Test Leet Code 1434");
+    LeetCodeDP leetCode;
+    vector<vector<int>>hats = { {3, 4},{4, 5},{5} };
+    int result = leetCode.numberWays(hats);
+    Logger::WriteMessage(hats);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    hats = { {3,5,1} ,{3,5} };
+    result = leetCode.numberWays(hats);
+    Logger::WriteMessage(hats);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    hats = { {1,2,3,4} ,{1,2,3,4},{1,2,3,4},{1,2,3,4} };
+    result = leetCode.numberWays(hats);
+    Logger::WriteMessage(hats);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    hats = { {1,2,3} ,{2,3,5,6}, {1,3,7,9}, {1,8,9}, {2,5,7} };
+    result = leetCode.numberWays(hats);
+    Logger::WriteMessage(hats);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    hats = { {4, 15, 16, 26, 28}, {1, 2, 3, 4, 6, 7, 8, 10, 13, 14, 15, 16, 17, 18, 19, 21, 22, 24, 25, 27, 28, 29, 30}, {1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30}, {2, 3, 6, 7, 14, 16, 17, 18, 19, 20, 21, 24, 25, 27, 28, 29}, {1, 10}, {1, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 19, 20, 21, 22, 24, 25, 27, 28}, {2, 5, 10, 14, 16, 19, 21, 22, 23, 27, 30} };
+    result = leetCode.numberWays(hats);
+    Logger::WriteMessage(hats);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1434();
     TestLeetCode1420();
     TestLeetCode1416();
     TestLeetCode1411();

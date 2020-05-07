@@ -419,8 +419,38 @@ void TestLeetCode1382(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode1430(void)
+{
+    Logger::WriteMessage("Test Leet Code 1430");
+    LeetCodeTree leetCode;
+    string tree_str = "[0,1,0,0,1,0,null,null,1,0,0]";
+    vector<int> arr = { 0, 1, 0, 1 };
+    TreeNode* root = leetCode.deserialize(tree_str);
+    bool result = leetCode.isValidSequence(root, arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("tree = " + tree_str + "; result = " + (string) (result ? "true" : "false"));
+    leetCode.freeTreeNodes(root);
+
+    tree_str = "[0,1,0,0,1,0,null,null,1,0,0]";
+    arr = { 0,0,1 };
+    root = leetCode.deserialize(tree_str);
+    result = leetCode.isValidSequence(root, arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("tree = " + tree_str + "; result = " + (string)(result ? "true" : "false"));
+    leetCode.freeTreeNodes(root);
+
+    tree_str = "[0,1,0,0,1,0,null,null,1,0,0]";
+    arr = { 0,1,1 };
+    root = leetCode.deserialize(tree_str);
+    result = leetCode.isValidSequence(root, arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("tree = " + tree_str + "; result = " + (string)(result ? "true" : "false"));
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1430();
     TestLeetCode1382();
     TestLeetCode1379();
     TestLeetCode1373();

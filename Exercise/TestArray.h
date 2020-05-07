@@ -80,5 +80,8 @@ void TestLeetCode1409(void);
 void TestLeetCode1417(void);
 void TestLeetCode1423(void);
 void TestLeetCode1424(void);
+void TestLeetCode1431(void);
+void TestLeetCode1437(void);
+void TestLeetCode1438(void);
 void TestLeetCodeArray(void);
 #endif  // TestArray
