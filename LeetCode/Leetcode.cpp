@@ -22,38 +22,6 @@
 
 #pragma region HelperFunction
 /// <summary>
-/// Free link tree nodes
-/// </summary>
-void LeetCode::freeLinkTreeNodes(TreeLinkNode * root)
-{
-    vector<TreeLinkNode *> stack;
-    // push the root first
-    if (root != nullptr)
-    {
-        stack.push_back(root);
-    }
-    while (!stack.empty())
-    {
-        TreeLinkNode * node = stack.back();
-        stack.pop_back();
-
-        if (node != NULL)
-        {
-            if (node->left != NULL)
-            {
-                stack.push_back(node->left);
-            }
-            if (node->right != NULL)
-            {
-                stack.push_back(node->right);
-            }
-
-            delete node;
-        }
-    }
-}
-
-/// <summary>
 /// Free nodes
 /// </summary>
 void LeetCode::freeNodes(Node * root)

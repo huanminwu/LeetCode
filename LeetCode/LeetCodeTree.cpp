@@ -20,6 +20,38 @@
 
 #pragma region BinaryTree
 /// <summary>
+/// Free link tree nodes
+/// </summary>
+void LeetCodeTree::freeLinkTreeNodes(TreeLinkNode* root)
+{
+    vector<TreeLinkNode*> stack;
+    // push the root first
+    if (root != nullptr)
+    {
+        stack.push_back(root);
+    }
+    while (!stack.empty())
+    {
+        TreeLinkNode* node = stack.back();
+        stack.pop_back();
+
+        if (node != NULL)
+        {
+            if (node->left != NULL)
+            {
+                stack.push_back(node->left);
+            }
+            if (node->right != NULL)
+            {
+                stack.push_back(node->right);
+            }
+
+            delete node;
+        }
+    }
+}
+
+/// <summary>
 /// Leet code 297. Serialize and Deserialize Binary Tree
 /// Serialization is the process of converting a data structure or object 
 /// into a sequence of bits so that it can be stored in a file or memory 
@@ -96,7 +128,7 @@ string LeetCodeTree::serialize(TreeNode* root)
 /// </summary>
 /// <param name="root">the root</param>
 /// <returns>The string</returns>
-string LeetCode::serializeLinkTree(TreeLinkNode* root)
+string LeetCodeTree::serializeLinkTree(TreeLinkNode* root)
 {
     string result;
     queue<TreeLinkNode *> queue;
@@ -140,7 +172,7 @@ string LeetCode::serializeLinkTree(TreeLinkNode* root)
 /// </summary>
 /// <param name="data">the string data</param>
 /// <returns>The root</returns> 
-TreeLinkNode* LeetCode::deserializeLinkTree(string data)
+TreeLinkNode* LeetCodeTree::deserializeLinkTree(string data)
 {
     queue<TreeLinkNode *> input_queue;
     queue<TreeLinkNode *> output_queue;
@@ -202,12 +234,10 @@ TreeLinkNode* LeetCode::deserializeLinkTree(string data)
     return root;
 }
 
-
-
 /// <summary>
-/// Binary Tree Preorder Traversal with recursive 
+/// Leet code #144. Binary Tree Preorder Traversal 
 /// <summary>
-void LeetCode::preorderTraversal(TreeNode* root, vector<int>& output)
+void LeetCodeTree::preorderTraversal(TreeNode* root, vector<int>& output)
 {
     if (root == nullptr) return;
     output.push_back(root->val);
@@ -229,7 +259,7 @@ void LeetCode::preorderTraversal(TreeNode* root, vector<int>& output)
 ///  return [1,2,3]. 
 ///  Note: Recursive solution is trivial, could you do it iteratively?
 /// <summary>
-vector<int> LeetCode::preorderTraversal(TreeNode* root)
+vector<int> LeetCodeTree::preorderTraversal(TreeNode* root)
 {
     stack<TreeNode *> stack;
     vector<int> result;
@@ -262,7 +292,7 @@ vector<int> LeetCode::preorderTraversal(TreeNode* root)
 /// return [1,3,2].
 /// Note: Recursive solution is trivial, could you do it iteratively?
 /// </summary>
-std::vector<int> LeetCode::inorderTraversal(TreeNode* root)
+std::vector<int> LeetCodeTree::inorderTraversal(TreeNode* root)
 {
     std::vector<int> outputList;
     std::stack<TreeNode *> stack;
@@ -303,53 +333,30 @@ std::vector<int> LeetCode::inorderTraversal(TreeNode* root)
 /// 3
 /// return [3,2,1]. 
 /// Note: Recursive solution is trivial, could you do it iteratively?
-vector<int> LeetCode::postorderTraversal(TreeNode* root)
+vector<int> LeetCodeTree::postorderTraversal(TreeNode* root)
 {
-    std::vector<int> outputList;
-    std::stack<pair<int, TreeNode *>> nodeStack;
-    TreeNode * iterator = root;
-    int count = 0;
+    std::vector<int> result;
+    std::stack<pair<int, TreeNode *>> node_stack;
+    node_stack.push(make_pair(0, root));
     // When we start the stack is empty
-    while (true)
+    while (!node_stack.empty())
     {
-        if ((iterator != nullptr) && (count < 2))
+        pair<int, TreeNode*> p = node_stack.top();
+        node_stack.pop();
+        if (p.second == nullptr) continue;
+        if (p.first == 0)
         {
-            // if the current node is first time in the stack,
-            // push the current node again with count + 1, and look for the right child
-            nodeStack.push(make_pair(count, iterator));
-            if (count == 0)
-            {
-                iterator = iterator->left;
-                count = 0;
-            }
-            else
-            {
-                iterator = iterator->right;
-                count = 0;
-            }
+            node_stack.push(make_pair(1, p.second));
+            node_stack.push(make_pair(0, p.second->right));
+            node_stack.push(make_pair(0, p.second->left));
         }
         else
         {
-            if (iterator != nullptr)
-            {
-                outputList.push_back(iterator->val);
-            }
-            if (nodeStack.empty())
-            {
-                break;
-            }
-            else
-            {
-                pair<int, TreeNode *> pair = nodeStack.top();
-                nodeStack.pop();
-                count = pair.first;
-                iterator = pair.second;
-                count++;
-            }
+            result.push_back(p.second->val);
         }
     }
 
-    return outputList;
+    return result;
 }
 
 /// <summary>
@@ -485,7 +492,7 @@ vector<vector<int>> LeetCode::zigzagLevelOrder(TreeNode* root)
 ///   [3]
 /// ]
 /// </summary>
-vector<vector<int>> LeetCode::levelOrderBottom(TreeNode* root)
+vector<vector<int>> LeetCodeTree::levelOrderBottom(TreeNode* root)
 {
     vector<int> level;
     stack<vector<int>> tree_stack;
@@ -996,7 +1003,7 @@ TreeNode* LeetCode::lowestCommonAncestorBST(TreeNode* root, TreeNode* p, TreeNod
 ///             \
 ///              6
 /// </summary>
-void LeetCode::flatten(TreeNode* root)
+void LeetCodeTree::flatten(TreeNode* root)
 {
     TreeNode * tree_first = nullptr;
     TreeNode * tree_last = nullptr;
@@ -1239,9 +1246,9 @@ int LeetCode::sumNumbers(TreeNode* root)
 }
 
 /// <summary>
-/// Build binary tree from preorder and inorder travesal
+/// Leet code #105. Build binary tree from preoder and inorder travesal
 /// </summary>
-TreeNode* LeetCode::buildTreeFromPreorderandInorder(
+TreeNode* LeetCodeTree::buildTreeFromPreorderandInorder(
     vector<int>& preorder, vector<int>& inorder,
     size_t start_preorder, size_t start_inorder,
     size_t length)
@@ -1271,38 +1278,41 @@ TreeNode* LeetCode::buildTreeFromPreorderandInorder(
 
 /// <summary>
 /// Leet code #105. Construct Binary Tree from Preorder and Inorder Traversal
-/// Given preorder and inorder traversal of a tree, construct the binary tree.  
+///
+/// Medium
+///
+/// Given preorder and inorder traversal of a tree, construct the binary tree.
+///
 /// Note:
-/// You may assume that duplicates do not exist in the tree.              
+/// You may assume that duplicates do not exist in the tree.
+///
+/// For example, given
+///
+/// preorder = [3,9,20,15,7]
+/// inorder = [9,3,15,20,7]
+/// Return the following binary tree:
+///
+///    3
+///   / \
+///  9  20
+///    /  \
+///   15   7    
 /// </summary>
-TreeNode* LeetCode::buildTreeFromPreorderandInorder(vector<int>& preorder, vector<int>& inorder)
+TreeNode* LeetCodeTree::buildTreeFromPreorderandInorder(vector<int>& preorder, vector<int>& inorder)
 {
     if ((preorder.size() == 0) || (inorder.size() == 0))
     {
         return nullptr;
     }
-    TreeNode *root;
-    root = new TreeNode(preorder[0]);
-    size_t index;
-    for (index = 0; index < inorder.size(); index++)
-    {
-        if (inorder[index] == preorder[0])
-        {
-            break;
-        }
-    }
-    TreeNode *left = buildTreeFromPreorderandInorder(preorder, inorder, 1, 0, index);
-    TreeNode *right = buildTreeFromPreorderandInorder(preorder, inorder,
-        index + 1, index + 1, preorder.size() - index - 1);
-    root->left = left;
-    root->right = right;
+    TreeNode *root = 
+        buildTreeFromPreorderandInorder(preorder, inorder, 0, 0, preorder.size());
     return root;
 }
 
 /// <summary>
-/// Build binary tree from inorder and postorder travesal
+/// Leet code #106. Construct Binary Tree from Inorder and Postorder Traversal
 /// </summary>
-TreeNode* LeetCode::buildTreeFromInorderAndPostorder(
+TreeNode* LeetCodeTree::buildTreeFromInorderAndPostorder(
     vector<int>& inorder, vector<int>& postorder,
     size_t start_inorder, size_t start_postorder,
     size_t length)
@@ -1332,42 +1342,77 @@ TreeNode* LeetCode::buildTreeFromInorderAndPostorder(
 
 /// <summary>
 /// Leet code #106. Construct Binary Tree from Inorder and Postorder Traversal
-/// Given inorder and postorder traversal of a tree, construct the binary tree.  
+///
+/// Medium
+///
+/// Given inorder and postorder traversal of a tree, construct the binary tree.
+///
 /// Note:
-/// You may assume that duplicates do not exist in the tree.              
+/// You may assume that duplicates do not exist in the tree.
+///
+/// For example, given
+///
+/// preorder = [3,9,20,15,7]
+/// postorder = [9,15,7,20,3]
+/// Return the following binary tree:
+///
+///    3
+///   / \
+///  9  20
+///    /  \
+///   15   7    
 /// </summary>
-TreeNode* LeetCode::buildTreeFromInorderAndPostorder(vector<int>& inorder, vector<int>& postorder)
+TreeNode* LeetCodeTree::buildTreeFromInorderAndPostorder(vector<int>& inorder, vector<int>& postorder)
 {
     if ((inorder.size() == 0) || (postorder.size() == 0))
     {
         return nullptr;
     }
-    TreeNode *root;
-    root = new TreeNode(postorder[postorder.size() - 1]);
-    size_t index;
-    for (index = 0; index < inorder.size(); index++)
-    {
-        if (inorder[index] == postorder[postorder.size() - 1])
-        {
-            break;
-        }
-    }
-    TreeNode *left = buildTreeFromInorderAndPostorder(inorder, postorder,
-        0, 0, index);
-    TreeNode *right = buildTreeFromInorderAndPostorder(inorder, postorder,
-        index + 1, index, inorder.size() - index - 1);
-    root->left = left;
-    root->right = right;
+    TreeNode *root = 
+        buildTreeFromInorderAndPostorder(inorder, postorder, 0, 0, inorder.size());
     return root;
 }
 
 /// <summary>
 /// Leet code #100. Same Tree
-/// Given two binary trees, write a function to check if they are equal or not. 
-///	Two binary trees are considered equal if they are structurally identical and 
-/// the nodes have the same value. 
-/// </summary>
-bool LeetCode::isSameTree(TreeNode* p, TreeNode* q)
+///
+/// Easy
+///
+/// Given two binary trees, write a function to check if they are the same 
+/// or not.
+///
+/// Two binary trees are considered the same if they are structurally 
+/// identical and the nodes have the same value.
+///
+/// Example 1:
+///
+/// Input:     1         1
+///           / \       / \
+    ///          2   3     2   3
+    ///
+    ///        [1,2,3],   [1,2,3]
+    ///
+    /// Output: true
+    /// Example 2:
+    ///
+    /// Input:     1         1
+    ///           /           \
+    ///          2             2
+    ///
+    ///        [1,2],     [1,null,2]
+    ///
+    /// Output: false
+    /// Example 3:
+    ///
+    /// Input:     1         1
+    ///           / \       / \
+    ///          2   1     1   2
+    ///
+    ///        [1,2,1],   [1,1,2]
+    ///
+    /// Output: false
+    /// </summary>
+bool LeetCodeTree::isSameTree(TreeNode* p, TreeNode* q)
 {
     if ((p == nullptr) && (q == nullptr))
     {
@@ -1559,7 +1604,7 @@ bool LeetCode::isSymmetric(TreeNode* root)
 /// <summary>
 /// Build Binary Search Tree from sorted array 
 /// </summary>
-TreeNode* LeetCode::buildBSTFromSortedArray(vector<int>& nums, int first, int last)
+TreeNode* LeetCodeTree::buildBSTFromSortedArray(vector<int>& nums, int first, int last)
 {
     int middle = first + (last - first) / 2;
     TreeNode * root = new TreeNode(nums[middle]);
@@ -1579,7 +1624,7 @@ TreeNode* LeetCode::buildBSTFromSortedArray(vector<int>& nums, int first, int la
 /// Given an array where elements are sorted in ascending order, convert it to a height 
 /// balanced BST.
 /// </summary>
-TreeNode* LeetCode::sortedArrayToBST(vector<int>& nums)
+TreeNode* LeetCodeTree::sortedArrayToBST(vector<int>& nums)
 {
     if (nums.empty()) return nullptr;
     return buildBSTFromSortedArray(nums, 0, nums.size() - 1);
@@ -1590,7 +1635,7 @@ TreeNode* LeetCode::sortedArrayToBST(vector<int>& nums)
 /// Given a singly linked list where elements are sorted in ascending order, 
 /// convert it to a height balanced BST.
 /// </summary>
-TreeNode* LeetCode::sortedListToBST(ListNode* head)
+TreeNode* LeetCodeTree::sortedListToBST(ListNode* head)
 {
     if (head == nullptr) return nullptr;
     ListNode *head_new = nullptr, *prev = nullptr;
@@ -1779,7 +1824,7 @@ int LeetCode::robIII(TreeNode* root)
 /// <summary>
 /// Append the tree linked node to end
 /// </summary>
-void LeetCode::connectRight(TreeLinkNode *&head, TreeLinkNode *&ptr, TreeLinkNode * node)
+void LeetCodeTree::connectRight(TreeLinkNode *&head, TreeLinkNode *&ptr, TreeLinkNode * node)
 {
     if (node == nullptr) return;
     node->next = nullptr;
@@ -1824,7 +1869,7 @@ void LeetCode::connectRight(TreeLinkNode *&head, TreeLinkNode *&ptr, TreeLinkNod
 ///     / \   / \
 ///    4-> 5->6 ->7 -> NULL
 /// </summary>
-void LeetCode::connectRight(TreeLinkNode *root)
+void LeetCodeTree::connectRight(TreeLinkNode *root)
 {
     TreeLinkNode* prev_head = nullptr, *prev_ptr = nullptr;
     TreeLinkNode* curr_head, *curr_ptr;
@@ -1844,6 +1889,7 @@ void LeetCode::connectRight(TreeLinkNode *root)
     }
     return;
 }
+
 /// <summary>
 /// Leet code #117. Populating Next Right Pointers in Each Node II           
 /// Given a binary tree 
@@ -1876,7 +1922,7 @@ void LeetCode::connectRight(TreeLinkNode *root)
 ///     / \    \
 ///    4-> 5 -> 7 -> NULL
 /// </summary>
-void LeetCode::connectRightII(TreeLinkNode *root)
+void LeetCodeTree::connectRightII(TreeLinkNode *root)
 {
     TreeLinkNode* prev_head = nullptr, *prev_ptr = nullptr;
     TreeLinkNode* curr_head, *curr_ptr;
@@ -1905,7 +1951,7 @@ void LeetCode::connectRightII(TreeLinkNode *root)
 /// and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes 
 /// inclusive at the last level h. 
 /// </summary>
-int LeetCode::countCompleteTreeNodes(TreeNode* root)
+int LeetCodeTree::countCompleteTreeNodes(TreeNode* root)
 {
     int left_height = 0, right_height = 0;
     TreeNode * node = root;

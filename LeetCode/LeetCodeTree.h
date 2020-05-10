@@ -26,6 +26,296 @@ class LeetCodeTree
 {
 public:
 #pragma region Tree
+    /// <summary>
+    /// Free link tree nodes
+    /// </summary>
+    void freeLinkTreeNodes(TreeLinkNode* root);
+
+    /// <summary>
+    /// Encodes a linktree to a single string.
+    /// </summary>
+    /// <param name="root">the root</param>
+    /// <returns>The string</returns>
+    string serializeLinkTree(TreeLinkNode* root);
+
+    /// <summary>
+    /// Decodes your encoded data to tree.
+    /// </summary>
+    /// <param name="data">the string data</param>
+    /// <returns>The root</returns> 
+    TreeLinkNode* deserializeLinkTree(string data);
+
+    /// <summary>
+    /// Leet code #94. Binary Tree Inorder Traversal
+    /// 
+    /// Given a binary tree, return the inorder traversal of its nodes' values. 
+    /// For example: 
+    /// Given binary tree [1,null,2,3], 
+    /// 1
+    ///  \
+    ///   2
+    ///  /
+    /// 3
+    /// return [1,3,2].
+    /// Note: Recursive solution is trivial, could you do it iteratively?
+    /// </summary>
+    vector<int> inorderTraversal(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #100. Same Tree
+    ///
+    /// Easy
+    ///
+    /// Given two binary trees, write a function to check if they are the same 
+    /// or not.
+    ///
+    /// Two binary trees are considered the same if they are structurally 
+    /// identical and the nodes have the same value.
+    ///
+    /// Example 1:
+    ///
+    /// Input:     1         1
+    ///           / \       / \
+    ///          2   3     2   3
+    ///
+    ///        [1,2,3],   [1,2,3]
+    ///
+    /// Output: true
+    /// Example 2:
+    ///
+    /// Input:     1         1
+    ///           /           \
+    ///          2             2
+    ///
+    ///        [1,2],     [1,null,2]
+    ///
+    /// Output: false
+    /// Example 3:
+    ///
+    /// Input:     1         1
+    ///           / \       / \
+    ///          2   1     1   2
+    ///
+    ///        [1,2,1],   [1,1,2]
+    ///
+    /// Output: false
+    /// </summary>
+    bool isSameTree(TreeNode* p, TreeNode* q);
+
+    /// <summary>
+    /// Leet code #144. Binary Tree Preorder Traversal
+    /// <summary>
+    void preorderTraversal(TreeNode* root, vector<int>& output);
+
+    /// <summary>
+    /// Leet code #144. Binary Tree Preorder Traversal 
+    /// Given a binary tree, return the preorder traversal of its nodes' values.
+    ///
+    /// For example:
+    /// Given binary tree {1,#,2,3},
+    ///   1
+    ///    \
+    ///    2
+    ///   /
+    ///  3
+    ///  return [1,2,3]. 
+    ///  Note: Recursive solution is trivial, could you do it iteratively?
+    /// <summary>
+    vector<int> preorderTraversal(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #145. Binary Tree Postorder Traversal
+    /// 
+    /// Given a binary tree, return the postorder traversal of its nodes' values. 
+    /// For example: 
+    /// Given binary tree {1,#,2,3},
+    /// 1
+    ///  \
+    ///   2
+    ///  /
+    /// 3
+    /// return [3,2,1]. 
+    /// Note: Recursive solution is trivial, could you do it iteratively?
+    /// </summary>
+    vector<int> postorderTraversal(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #105. Build binary tree from preoder and inorder travesal
+    /// </summary>
+    TreeNode* buildTreeFromPreorderandInorder(vector<int>& preorder, vector<int>& inorder,
+        size_t start_preorder, size_t start_inorder,
+        size_t length);
+
+    /// <summary>
+    /// Leet code #105. Construct Binary Tree from Preorder and Inorder Traversal
+    /// Given preorder and inorder traversal of a tree, construct the binary tree.  
+    /// Note:
+    /// You may assume that duplicates do not exist in the tree.              
+    /// </summary>
+    TreeNode* buildTreeFromPreorderandInorder(vector<int>& preorder, vector<int>& inorder);
+
+    /// <summary>
+    /// Leet code #106. Build binary tree from inorder and postorder travesal
+    /// </summary>
+    TreeNode* buildTreeFromInorderAndPostorder(
+        vector<int>& inorder, vector<int>& postorder,
+        size_t start_inorder, size_t start_postorder,
+        size_t length);
+
+    /// <summary>
+    /// Leet code #106. Construct Binary Tree from Inorder and Postorder Traversal
+    /// Given inorder and postorder traversal of a tree, construct the binary tree.  
+    /// Note:
+    /// You may assume that duplicates do not exist in the tree.              
+    /// </summary>
+    TreeNode* buildTreeFromInorderAndPostorder(vector<int>& inorder, vector<int>& postorder);
+
+    /// <summary>
+    /// Leet code #114. Flatten Binary Tree to Linked List
+    /// Given a binary tree, flatten it to a linked list in-place. 
+    /// For example,
+    /// Given 
+    ///     1
+    ///    / \
+    ///   2   5
+    ///  / \   \
+    /// 3   4   6
+    /// The flattened tree should look like:
+    ///    1
+    ///     \
+    ///      2
+    ///       \
+    ///        3
+    ///         \
+    ///          4
+    ///           \
+    ///            5
+    ///             \
+    ///              6
+    /// </summary>
+    void flatten(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #107. Binary Tree Level Order Traversal II 
+    /// Given a binary tree, return the bottom-up level order traversal 
+    /// of its nodes' values. (ie, from left to right, level by level 
+    /// from leaf to root).
+    /// For example:
+    /// Given binary tree [3,9,20,null,null,15,7],
+    ///    3
+    ///   / \
+    ///  9  20
+    ///    /  \
+    ///   15   7
+    /// return its bottom-up level order traversal as:
+    ///	[
+    ///   [15,7],
+    ///   [9,20],
+    ///   [3]
+    /// ]
+    /// </summary>
+    vector<vector<int>> levelOrderBottom(TreeNode* root);
+
+    /// <summary>
+    /// Build Binary Search Tree from sorted array 
+    /// </summary>
+    TreeNode* buildBSTFromSortedArray(vector<int>& nums, int first, int last);
+
+    /// <summary>
+    /// Leet code #108. Convert Sorted Array to Binary Search Tree 
+    /// Given an array where elements are sorted in ascending order, convert it to a height 
+    /// balanced BST.
+    /// </summary>
+    TreeNode* sortedArrayToBST(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #109. Convert Sorted List to Binary Search Tree
+    /// Given a singly linked list where elements are sorted in ascending order, 
+    /// convert it to a height balanced BST.
+    /// </summary>
+    TreeNode* sortedListToBST(ListNode* head);
+
+    /// <summary>
+    /// Append the tree linked node to end
+    /// </summary>
+    void connectRight(TreeLinkNode*& head, TreeLinkNode*& ptr, TreeLinkNode* node);
+
+    /// <summary>
+    /// Leet code #116. Populating Next Right Pointers in Each Node           
+    /// Given a binary tree 
+    /// struct TreeLinkNode {
+    ///    int val;
+    ///    TreeLinkNode *left, *right, *next;
+    ///    TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
+    /// };  
+    /// Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
+    ///
+    /// Initially, all next pointers are set to NULL.
+    ///
+    /// Note: 
+    /// You may only use constant extra space.
+    /// You may assume that it is a perfect binary tree (ie, all leaves are at the same level, and every parent has two children).
+    ///
+    /// For example,
+    /// Given the following perfect binary tree,
+    ///         1
+    ///       /   \
+    ///      2     3
+    ///     / \   / \
+    ///    4   5 6   7
+    /// After calling your function, the tree should look like:
+    /// 
+    ///         1 -> NULL
+    ///       /   \
+    ///      2 ->  3 -> NULL
+    ///     / \   / \
+    ///    4-> 5->6 ->7 -> NULL
+    /// </summary>
+    void connectRight(TreeLinkNode* root);
+
+    /// <summary>
+    /// Leet code #117. Populating Next Right Pointers in Each Node II
+    /// Given a binary tree 
+    /// struct TreeLinkNode {
+    ///    int val;
+    ///    TreeLinkNode *left, *right, *next;
+    ///    TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
+    /// };  
+    ///
+    /// Follow up for problem "Populating Next Right Pointers in Each Node".
+    ///
+    /// What if the given tree could be any binary tree? Would your previous solution still work?
+    ///
+    /// Note: 
+    /// You may only use constant extra space.
+    ///
+    /// For example,
+    /// Given the following binary tree,
+    ///
+    ///         1
+    ///       /  \
+    ///      2    3
+    ///     / \    \
+    ///    4   5    7
+    /// After calling your function, the tree should look like:
+    ///
+    ///         1 -> NULL
+    ///       /  \
+    ///      2 -> 3 -> NULL
+    ///     / \    \
+    ///    4-> 5 -> 7 -> NULL
+    /// </summary>
+    void connectRightII(TreeLinkNode* root);
+
+    /// <summary>
+    /// Leet code #222. Count Complete Tree Nodes               
+    /// Given a complete binary tree, count the number of nodes.
+    /// Definition of a complete binary tree from Wikipedia:
+    /// In a complete binary tree every level, except possibly the last, is completely filled, 
+    /// and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes 
+    /// inclusive at the last level h. 
+    /// </summary>
+    int countCompleteTreeNodes(TreeNode* root);
 
     /// <summary>
     /// Leet code #1214. Two Sum BSTs      

@@ -7143,7 +7143,7 @@ public:
         double result = 0.0;
         for (size_t i = 0; i < product.size(); i++)
         {
-            result += m_prices[product[i] - 1] * amount[i];
+            result += (double)m_prices[product[i] - 1] * (double)amount[i];
         }
         m_count++;
         if (m_count == m_batchSize)
@@ -7326,7 +7326,7 @@ public:
         int t1 = m_person[id].second;
         string to = stationName;
         int t2 = t;
-        m_travel_time[from][to].first += t2 - t1;
+        m_travel_time[from][to].first += (double)t2 - (double)t1;
         m_travel_time[from][to].second++;
     }
 

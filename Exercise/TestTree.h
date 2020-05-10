@@ -2,6 +2,8 @@
 #ifndef TestTree_H
 #define TestTree_H
 #include "..\LeetCode\LeetCodeTree.h"
+void TestLeetCode94(void);
+void TestLeetCode114(void);
 void TestLeetCode1214(void);
 void TestLeetCode1261(void);
 void TestLeetCode1302(void);
