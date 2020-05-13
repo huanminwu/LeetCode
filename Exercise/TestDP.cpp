@@ -1426,8 +1426,38 @@ void TestLeetCode1434(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1444(void)
+{
+    Logger::WriteMessage("Test Leet Code 1444");
+    LeetCodeDP leetCode;
+    vector<string> pizza = { ".A..A", "A.A.." };
+    int k = 5;
+    int result = leetCode.ways(pizza, k);
+    Logger::WriteMessage(pizza);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    pizza = { "A..","AA.","..." };
+    k = 3;
+    result = leetCode.ways(pizza, k);
+    Logger::WriteMessage(pizza);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    pizza = { "A..","A..","..." };
+    k = 1;
+    result = leetCode.ways(pizza, k);
+    Logger::WriteMessage(pizza);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    pizza = { "A..", "AAA", "..." };
+    k = 3;
+    result = leetCode.ways(pizza, k);
+    Logger::WriteMessage(pizza);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1444();
     TestLeetCode1434();
     TestLeetCode1420();
     TestLeetCode1416();

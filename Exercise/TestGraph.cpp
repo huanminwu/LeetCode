@@ -2076,8 +2076,38 @@ void TestLeetCode1436(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode1443(void)
+{
+    Logger::WriteMessage("Test Leet Code 1443");
+    LeetCodeGraph leetCode;
+    int n = 7;
+    vector<vector<int>> edges = { {0,1} ,{0,2},{1,4},{1,5},{2,3},{2,6} };
+    vector<bool> hasApple = { false,false,true,false,true,true,false };
+    int result = leetCode.minTime(n, edges, hasApple);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(hasApple);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 7;
+    edges = { {0,1} ,{0,2},{1,4},{1,5},{2,3},{2,6} };
+    hasApple = { false,false,true,false,false,true,false };
+    result = leetCode.minTime(n, edges, hasApple);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(hasApple);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 7;
+    edges = { {0,1} ,{0,2},{1,4},{1,5},{2,3},{2,6} };
+    hasApple = { false,false,false,false,false,false,false };
+    result = leetCode.minTime(n, edges, hasApple);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(hasApple);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1443();
     TestLeetCode1436();
     TestLeetCode1377();
     TestLeetCode1376();

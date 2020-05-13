@@ -1727,8 +1727,73 @@ void TestLeetCode1438(void)
     Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1441(void)
+{
+    Logger::WriteMessage("Test Leet Code 1441");
+    LeetCodeArray leetCode;
+    vector<int> target = { 1, 3 };
+    int n = 3;
+    vector<string> result = leetCode.buildArray(target, n);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    target = { 1, 2, 3 }; 
+    n = 3;
+    result = leetCode.buildArray(target, n);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    target = { 1,2 };
+    n = 4;
+    result = leetCode.buildArray(target, n);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    target = { 2,3,4 };
+    n = 4;
+    result = leetCode.buildArray(target, n);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1442(void)
+{
+    Logger::WriteMessage("Test Leet Code 1442");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 2, 3, 1, 6, 7 };
+    int result = leetCode.countTriplets(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1,1,1,1,1 };
+    result = leetCode.countTriplets(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 2,3 };
+    result = leetCode.countTriplets(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1,3,5,7,9 };
+    result = leetCode.countTriplets(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 7, 11, 12, 9, 5, 2, 7, 17, 22 };
+    result = leetCode.countTriplets(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1442();
+    TestLeetCode1441();
     TestLeetCode1438();
     TestLeetCode1437();
     TestLeetCode1431();

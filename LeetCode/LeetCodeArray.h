@@ -2665,6 +2665,101 @@ public:
     /// 3. 0 <= limit <= 10^9
     /// </summary>
     int longestSubarray(vector<int>& nums, int limit);
+
+    /// <summary>
+    /// Leet code #1441. Build an Array With Stack Operations
+    ///
+    /// Easy
+    ///
+    /// Given an array target and an integer n. In each iteration, you will read 
+    /// a number from  list = {1,2,3..., n}.
+    ///
+    /// Build the target array using the following operations:
+    ///
+    /// Push: Read a new element from the beginning list, and push it in the array.
+    /// Pop: delete the last element of the array.
+    /// If the target array is already built, stop reading more elements.
+    /// You are guaranteed that the target array is strictly increasing, only 
+    /// containing numbers between 1 to n inclusive.
+    ///
+    /// Return the operations to build the target array.
+    ///
+    /// You are guaranteed that the answer is unique.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: target = [1,3], n = 3
+    /// Output: ["Push","Push","Pop","Push"]
+    /// Explanation: 
+    /// Read number 1 and automatically push in the array -> [1]
+    /// Read number 2 and automatically push in the array then Pop it -> [1]
+    /// Read number 3 and automatically push in the array -> [1,3]
+    ///
+    /// Example 2:
+    /// Input: target = [1,2,3], n = 3
+    /// Output: ["Push","Push","Push"]
+    ///
+    /// Example 3:
+    /// Input: target = [1,2], n = 4
+    /// Output: ["Push","Push"]
+    /// Explanation: You only need to read the first 2 numbers and stop.
+    ///
+    /// Example 4:
+    /// Input: target = [2,3,4], n = 4
+    /// Output: ["Push","Pop","Push","Push","Push"]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= target.length <= 100
+    /// 2. 1 <= target[i] <= 100
+    /// 3. 1 <= n <= 100
+    /// 4. target is strictly increasing.
+    /// </summary>
+    vector<string> buildArray(vector<int>& target, int n);
+
+    /// <summary>
+    /// Leet code #1442. Count Triplets That Can Form Two Arrays of Equal XOR
+    ///
+    /// Medium
+    ///
+    /// Given an array of integers arr.
+    ///
+    /// We want to select three indices i, j and k where 
+    /// (0 <= i < j <= k < arr.length).
+    ///
+    /// Let's define a and b as follows:
+    ///
+    /// a = arr[i] ^ arr[i + 1] ^ ... ^ arr[j - 1]
+    /// b = arr[j] ^ arr[j + 1] ^ ... ^ arr[k]
+    /// Note that ^ denotes the bitwise-xor operation.
+    ///
+    /// Return the number of triplets (i, j and k) Where a == b.
+    /// 
+    /// Example 1:
+    /// Input: arr = [2,3,1,6,7]
+    /// Output: 4
+    /// Explanation: The triplets are (0,1,2), (0,2,2), (2,3,4) and (2,4,4)
+    ///
+    /// Example 2:
+    /// Input: arr = [1,1,1,1,1]
+    /// Output: 10
+    ///
+    /// Example 3:
+    /// Input: arr = [2,3]
+    /// Output: 0
+    ///
+    /// Example 4:
+    /// Input: arr = [1,3,5,7,9]
+    /// Output: 3
+    ///
+    /// Example 5:
+    /// Input: arr = [7,11,12,9,5,2,7,17,22]
+    /// Output: 8
+    ///
+    /// Constraints:
+    /// 1. 1 <= arr.length <= 300
+    /// 2. 1 <= arr[i] <= 10^8
+    /// </summary>
+    int countTriplets(vector<int>& arr);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H
