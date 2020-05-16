@@ -96,7 +96,6 @@
     <ClCompile Include="TestStack.cpp" />
     <ClCompile Include="TestString.cpp" />
     <ClCompile Include="TestTree.cpp" />
-    <ClCompile Include="TestTwoPointers.cpp" />
     <ClCompile Include="TestUnionFind.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -120,7 +119,6 @@
     <ClInclude Include="TestStack.h" />
     <ClInclude Include="TestString.h" />
     <ClInclude Include="TestTree.h" />
-    <ClInclude Include="TestTwoPointers.h" />
     <ClInclude Include="TestUnionFind.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

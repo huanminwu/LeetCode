@@ -72,9 +72,6 @@
     <ClInclude Include="LeetCodeUnionFind.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LeetCodeTwoPointers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Leetcode.cpp">
@@ -117,9 +114,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LeetCodeStack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LeetCodeTwoPointers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LeetCodeQueue.cpp">

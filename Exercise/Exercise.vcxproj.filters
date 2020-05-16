@@ -69,9 +69,6 @@
     <ClCompile Include="TestUnionFind.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestTwoPointers.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestMath.h">
@@ -120,9 +117,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="TestUnionFind.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TestTwoPointers.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
