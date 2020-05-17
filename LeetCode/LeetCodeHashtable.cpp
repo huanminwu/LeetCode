@@ -2556,4 +2556,85 @@ int LeetCodeHashtable::countElements(vector<int>& arr)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1452. People Whose List of Favorite Companies Is Not a 
+///                  Subset of Another List
+/// 
+/// Medium
+///
+/// Given the array favoriteCompanies where favoriteCompanies[i] is the 
+/// list of favorites companies for the ith person (indexed from 0).
+/// Return the indices of people whose list of favorite companies is not 
+/// a subset of any other list of favorites companies. You must return 
+/// the indices in increasing order.
+///
+/// Example 1:
+/// Input: favoriteCompanies = [["leetcode","google","facebook"],
+/// ["google","microsoft"],["google","facebook"],["google"],["amazon"]]
+/// Output: [0,1,4] 
+/// Explanation: 
+/// Person with index=2 has favoriteCompanies[2]=["google","facebook"] 
+/// which is a subset of favoriteCompanies[0]=["leetcode","google",
+/// "facebook"] corresponding to the person with index 0. 
+/// Person with index=3 has favoriteCompanies[3]=["google"] which is a 
+/// subset of favoriteCompanies[0]=["leetcode","google","facebook"] and 
+/// favoriteCompanies[1]=["google","microsoft"]. 
+/// Other lists of favorite companies are not a subset of another list, 
+/// therefore, the answer is [0,1,4].
+///
+/// Example 2:
+/// Input: favoriteCompanies = [["leetcode","google","facebook"],
+/// ["leetcode","amazon"],["facebook","google"]]
+/// Output: [0,1] 
+/// Explanation: In this case favoriteCompanies[2]=["facebook","google"] 
+/// is a subset of favoriteCompanies[0]=["leetcode","google","facebook"], 
+/// therefore, the answer is [0,1].
+///
+/// Example 3:
+/// Input: favoriteCompanies = [["leetcode"],["google"],["facebook"],
+/// ["amazon"]]
+/// Output: [0,1,2,3]
+/// 
+/// Constraints:
+/// 1. 1 <= favoriteCompanies.length <= 100
+/// 2. 1 <= favoriteCompanies[i].length <= 500
+/// 3. 1 <= favoriteCompanies[i][j].length <= 20
+/// 4. All strings in favoriteCompanies[i] are distinct.
+/// 5. All lists of favorite companies are distinct, that is, If we sort 
+///    alphabetically each list then 
+///    favoriteCompanies[i] != favoriteCompanies[j].
+/// 6. All strings consist of lowercase English letters only.
+/// </summary>
+vector<int> LeetCodeHashtable::peopleIndexes(vector<vector<string>>& favoriteCompanies)
+{
+    unordered_map<string, bitset<100>> company_masks;
+    vector<int> result;
+    for (size_t i = 0; i < favoriteCompanies.size(); i++)
+    {
+        for (size_t j = 0; j < favoriteCompanies[i].size(); j++)
+        {
+            string company = favoriteCompanies[i][j];
+            company_masks[company].set(i);
+        }
+    }
+
+    for (size_t i = 0; i < favoriteCompanies.size(); i++)
+    {
+        bitset<100> bit_mask;
+        bit_mask.set();
+        for (size_t j = 0; j < favoriteCompanies[i].size(); j++)
+        {
+            string company = favoriteCompanies[i][j];
+            bitset<100> company_mask = company_masks[company];
+            // discard self bit
+            company_mask.reset(i);
+            bit_mask &= company_mask;
+            if (bit_mask.none()) break;
+        }
+        if (bit_mask.none()) result.push_back(i);
+    }
+    return result;
+}
+
 #pragma endregion

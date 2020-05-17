@@ -380,8 +380,47 @@ void TestLeetCode1426(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1452(void)
+{
+    Logger::WriteMessage("Test Leet Code 1452");
+    LeetCodeHashtable leetCode;
+    vector<vector<string>> favoriteCompanies =
+    {
+        {"leetcode", "google", "facebook"},
+        {"google","microsoft"},
+        {"google","facebook"},
+        {"google"},
+        {"amazon"}
+    };
+    vector<int> result = leetCode.peopleIndexes(favoriteCompanies);
+    Logger::WriteMessage(favoriteCompanies);
+    Logger::WriteMessage(result);
+
+    favoriteCompanies =
+    {
+        {"leetcode","google","facebook"},
+        {"leetcode","amazon"},
+        {"facebook","google"}
+    };
+    result = leetCode.peopleIndexes(favoriteCompanies);
+    Logger::WriteMessage(favoriteCompanies);
+    Logger::WriteMessage(result);
+
+    favoriteCompanies =
+    {
+        {"leetcode"},
+        {"google"},
+        {"facebook"},
+        {"amazon"},
+    };
+    result = leetCode.peopleIndexes(favoriteCompanies);
+    Logger::WriteMessage(favoriteCompanies);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1452();
     TestLeetCode1426();
     TestLeetCode1418();
     TestLeetCode1394();

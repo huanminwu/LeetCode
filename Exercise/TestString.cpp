@@ -1758,8 +1758,26 @@ void TestLeetCode1446(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode1451(void)
+{
+    Logger::WriteMessage("Test Leet Code 1451");
+    LeetCodeString leetCode;
+    string text = "Leetcode is cool";
+    string result = leetCode.arrangeWords(text);
+    Logger::WriteMessage("text = " + text + "; result = " + result);
+
+    text = "Keep calm and code on";
+    result = leetCode.arrangeWords(text);
+    Logger::WriteMessage("text = " + text + "; result = " + result);
+
+    text = "To be or not to be";
+    result = leetCode.arrangeWords(text);
+    Logger::WriteMessage("text = " + text + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1451();
     TestLeetCode1446();
     TestLeetCode1427();
     TestLeetCode1433();

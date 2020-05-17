@@ -2195,8 +2195,54 @@ void TestLeetCode487(void)
     Logger::WriteMessage("maximum consecutiveones II = " + to_string(max_length));
 }
 
+void TestLeetCode1450(void)
+{
+    Logger::WriteMessage("Test Leet Code 1450");
+    LeetCodeArray leetCode;
+    vector<int> startTime = { 1, 2, 3 };
+    vector<int> endTime = { 3, 2, 7 };
+    int queryTime = 4;
+    int result = leetCode.busyStudent(startTime, endTime, queryTime);
+    Logger::WriteMessage(startTime);
+    Logger::WriteMessage(endTime);
+    Logger::WriteMessage("queryTime = " + to_string(queryTime) + "; result = " + to_string(result));
+
+    startTime = { 4 };
+    endTime = { 4 };
+    queryTime = 4;
+    result = leetCode.busyStudent(startTime, endTime, queryTime);
+    Logger::WriteMessage(startTime);
+    Logger::WriteMessage(endTime);
+    Logger::WriteMessage("queryTime = " + to_string(queryTime) + "; result = " + to_string(result));
+
+    startTime = { 4 };
+    endTime = { 4 };
+    queryTime = 5;
+    result = leetCode.busyStudent(startTime, endTime, queryTime);
+    Logger::WriteMessage(startTime);
+    Logger::WriteMessage(endTime);
+    Logger::WriteMessage("queryTime = " + to_string(queryTime) + "; result = " + to_string(result));
+
+    startTime = { 1,1,1,1 };
+    endTime = { 1,3,2,4 };
+    queryTime = 7;
+    result = leetCode.busyStudent(startTime, endTime, queryTime);
+    Logger::WriteMessage(startTime);
+    Logger::WriteMessage(endTime);
+    Logger::WriteMessage("queryTime = " + to_string(queryTime) + "; result = " + to_string(result));
+
+    startTime = { 9,8,7,6,5,4,3,2,1 };
+    endTime = { 10,10,10,10,10,10,10,10,10 };
+    queryTime = 5;
+    result = leetCode.busyStudent(startTime, endTime, queryTime);
+    Logger::WriteMessage(startTime);
+    Logger::WriteMessage(endTime);
+    Logger::WriteMessage("queryTime = " + to_string(queryTime) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1450();
     TestLeetCode209();
     TestLeetCode487();
     TestLeetCode680();

@@ -2234,8 +2234,39 @@ void TestLeetCode1447(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1453(void)
+{
+    Logger::WriteMessage("Test Leet Code 1453");
+    LeetCodeMath leetCode;
+    vector<vector<int>> points = { {-2, 0},{2, 0},{0, 2},{0, -2} };
+    int r = 2;
+    int result = leetCode.numPoints(points, r);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("r = " + to_string(r) + "; result = " + to_string(result));
+
+    points = { {-3, 0}, { 3, 0 }, { 2, 6 }, { 5, 4 }, { 0, 9 }, { 7, 8 }};
+    r = 5;
+    result = leetCode.numPoints(points, r);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("r = " + to_string(r) + "; result = " + to_string(result));
+
+    points = { {-2, 0}, { 2, 0 }, { 0, 2 }, { 0, -2 } };
+    r = 1;
+    result = leetCode.numPoints(points, r);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("r = " + to_string(r) + "; result = " + to_string(result));
+
+    points = { {1, 2}, { 3, 5 }, { 1, -1 }, { 2, 3 }, { 4, 1 }, { 1, 3 } };
+    r = 2;
+    result = leetCode.numPoints(points, r);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("r = " + to_string(r) + "; result = " + to_string(result));
+   
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1453();
     TestLeetCode1447();
     TestLeetCode1432();
     TestLeetCode1415();
