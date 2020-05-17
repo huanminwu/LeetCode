@@ -1455,8 +1455,60 @@ void TestLeetCode1444(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1449(void)
+{
+    Logger::WriteMessage("Test Leet Code 1449");
+    LeetCodeDP leetCode;
+
+
+    vector<int> cost = {21, 25, 18, 23, 25, 23, 20, 18, 38};
+    int target = 84;
+    string result = leetCode.largestNumber(cost, target);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + result);
+
+    cost = { 5, 6, 7, 3, 4, 6, 7, 4, 8 };
+    target = 29;
+    result = leetCode.largestNumber(cost, target);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + result);
+
+    cost = { 4, 3, 2, 5, 6, 7, 2, 5, 5 };
+    target = 9;
+    result = leetCode.largestNumber(cost, target);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + result);
+
+    cost = { 7,6,5,5,5,6,8,7,8 };
+    target = 12;
+    result = leetCode.largestNumber(cost, target);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + result);
+
+    cost = { 2,4,6,2,4,6,4,4,4 };
+    target = 5;
+    result = leetCode.largestNumber(cost, target);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + result);
+
+    cost = { 6,10,15,40,40,40,40,40,40 };
+    target = 47;
+    result = leetCode.largestNumber(cost, target);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + result);
+
+    cost = { 1,2,3,4,5,6,7,8,9 };
+    target = 5000;
+    result = leetCode.largestNumber(cost, target);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + result);
+
+
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1449();
     TestLeetCode1444();
     TestLeetCode1434();
     TestLeetCode1420();

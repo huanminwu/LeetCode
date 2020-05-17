@@ -1733,8 +1733,34 @@ void TestLeetCode1427(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode1446(void)
+{
+    Logger::WriteMessage("Test Leet Code 1446");
+    LeetCodeString leetCode;
+    string s = "leetcode";
+    int result = leetCode.maxPower(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "abbcccddddeeeeedcba";
+    result = leetCode.maxPower(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "triplepillooooow";
+    result = leetCode.maxPower(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "hooraaaaaaaaaaay";
+    result = leetCode.maxPower(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "tourist";
+    result = leetCode.maxPower(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1446();
     TestLeetCode1427();
     TestLeetCode1433();
     TestLeetCode1417();

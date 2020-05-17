@@ -2209,8 +2209,34 @@ void TestLeetCode1432(void)
     Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1447(void)
+{
+    Logger::WriteMessage("Test Leet Code 1447");
+    LeetCodeMath leetCode;
+    int n = 2;
+    vector<string> result = leetCode.simplifiedFractions(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 3;
+    result = leetCode.simplifiedFractions(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 4;
+    result = leetCode.simplifiedFractions(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 1;
+    result = leetCode.simplifiedFractions(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1447();
     TestLeetCode1432();
     TestLeetCode1415();
     TestLeetCode1414();

@@ -10226,4 +10226,63 @@ string LeetCodeString::stringShift(string s, vector<vector<int>>& shift)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1446. Consecutive Characters
+///
+/// Easy
+///
+/// Given a string s, the power of the string is the maximum length of 
+/// a non-empty substring that contains only one unique character.
+///
+/// Return the power of the string.
+///
+/// Example 1:
+/// Input: s = "leetcode"
+/// Output: 2
+/// Explanation: The substring "ee" is of length 2 with the character 'e' 
+/// only.
+///
+/// Example 2:
+/// Input: s = "abbcccddddeeeeedcba"
+/// Output: 5
+/// Explanation: The substring "eeeee" is of length 5 with the character 
+/// 'e' only.
+///
+/// Example 3:
+/// Input: s = "triplepillooooow"
+/// Output: 5
+///
+/// Example 4:
+/// Input: s = "hooraaaaaaaaaaay"
+/// Output: 11
+///
+/// Example 5:
+/// Input: s = "tourist"
+/// Output: 1
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 500
+/// 2. s contains only lowercase English letters.
+/// </summary>
+int LeetCodeString::maxPower(string s)
+{
+    int last_char = s[0];
+    int count = 0;
+    int result = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == last_char)
+        {
+            count++;
+        }
+        else
+        {
+            last_char = s[i];
+            count = 1;
+        }
+        result = max(result, count);
+    }
+    return result;
+}
 #pragma endregion

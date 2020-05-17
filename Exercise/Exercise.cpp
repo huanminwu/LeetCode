@@ -11698,15 +11698,15 @@ void TestLeetCode1238(void)
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeArray();
     TestLeetCodeDP();
-    TestLeetCodeGraph();
     TestLeetCodeTree();
+    TestLeetCodeMath();
+    TestLeetCodeString();
+    TestLeetCodeArray();
+    TestLeetCodeGraph();
     TestLeetCodeSort();
     TestLeetCodeDesign();
-    TestLeetCodeString();
     TestLeetCodeHashtable();
-    TestLeetCodeMath();
     TestLeetCodeGreedy();
     TestLeetCodeStack();
     TestLeetCodeDFS();

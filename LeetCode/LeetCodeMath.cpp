@@ -7140,7 +7140,7 @@ int LeetCodeMath::countOrders(int n)
     {
         if (i > 0)
         {
-            result = result * (2 * i + 1)*(i + 1) % M;
+            result = result * (2 * (long long)i + 1)*((long long)i + 1) % M;
         }
     }
     return (int)result;
@@ -7348,7 +7348,7 @@ vector<int> LeetCodeMath::closestDivisors(int num)
 {
     int diff = INT_MAX;
     vector<int> result;
-    int start = (int)std::sqrt((double)(num + 2));
+    int start = (int)std::sqrt((double)num + 2);
     for (int i = start; i > 0; i--)
     {
         if ((num + 1) % i == 0)
@@ -7589,14 +7589,14 @@ int LeetCodeMath::countLargestGroup(int n)
 /// </summary>
 bool LeetCodeMath::checkOverlap(int radius, int x_center, int y_center, int x1, int y1, int x2, int y2)
 {
-    double area = (double)(radius * radius);
+    double area = (double)radius * (double)radius;
     double f = 0.0;
     double y_r_1 = 0.0;
     double y_r_2 = 0.0;
     double x_r_1 = 0.0;
     double x_r_2 = 0.0;
 
-    f = area - (x1 - x_center) * (x1 - x_center);
+    f = area - ((double)x1 - (double)x_center) * ((double)x1 - (double)x_center);
     if (f >= 0)
     {
         y_r_1 = (double)y_center - sqrt(f);
@@ -7611,7 +7611,7 @@ bool LeetCodeMath::checkOverlap(int radius, int x_center, int y_center, int x1, 
         }
     }
 
-    f = area - (x2 - x_center) * (x2 - x_center);
+    f = area - ((double)x2 - (double)x_center) * ((double)x2 - (double)x_center);
     if (f >= 0)
     {
         y_r_1 = (double)y_center - sqrt(f);
@@ -7626,7 +7626,7 @@ bool LeetCodeMath::checkOverlap(int radius, int x_center, int y_center, int x1, 
         }
     }
 
-    f = area - (y1 - y_center) * (y1 - y_center);
+    f = area - ((double)y1 - (double)y_center) * ((double)y1 - (double)y_center);
     if (f >= 0)
     {
         x_r_1 = (double)x_center - sqrt(f);
@@ -7640,7 +7640,7 @@ bool LeetCodeMath::checkOverlap(int radius, int x_center, int y_center, int x1, 
             return true;
         }
     }
-    f = area - (y2 - y_center) * (y2 - y_center);
+    f = area - ((double)y2 - (double)y_center) * ((double)y2 - (double)y_center);
     if (f >= 0)
     {
         x_r_1 = (double)x_center - sqrt(f);
@@ -7876,5 +7876,53 @@ int LeetCodeMath::maxDiff(int num)
         }
     }
     int result = atoi(max_num.c_str()) - atoi(min_num.c_str());
+    return result;
+}
+
+/// <summary>
+/// Leet code #1447. Simplified Fractions
+///
+/// Medium
+///
+/// Given an integer n, return a list of all simplified fractions 
+/// between 0 and 1 (exclusive) such that the denominator is 
+/// less-than-or-equal-to n. The fractions can be in any order.
+///
+/// Example 1:
+/// Input: n = 2
+/// Output: ["1/2"]
+/// Explanation: "1/2" is the only unique fraction with a denominator 
+/// less-than-or-equal-to 2.
+///
+/// Example 2:
+/// Input: n = 3
+/// Output: ["1/2","1/3","2/3"]
+///
+/// Example 3:
+/// Input: n = 4
+/// Output: ["1/2","1/3","1/4","2/3","3/4"]
+/// Explanation: "2/4" is not a simplified fraction because it can be 
+/// simplified to "1/2".
+///
+/// Example 4:
+/// Input: n = 1
+/// Output: []
+///
+/// Constraints:
+/// 1. 1 <= n <= 100
+/// </summary>
+vector<string> LeetCodeMath::simplifiedFractions(int n)
+{
+    vector<string> result;
+    for (int i = 2; i <= n; i++)
+    {
+        for (int j = 1; j < i; j++)
+        {
+            if (gcd(i, j) == 1)
+            {
+                result.push_back(to_string(j) + "/" + to_string(i));
+            }
+        }
+    }
     return result;
 }
