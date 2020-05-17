@@ -32,6 +32,11 @@ public:
     void freeLinkTreeNodes(TreeLinkNode* root);
 
     /// <summary>
+    /// Find a tree node with value
+    /// </summary>
+    TreeNode* findTreeNode(TreeNode* root, int value);
+
+    /// <summary>
     /// Encodes a linktree to a single string.
     /// </summary>
     /// <param name="root">the root</param>
@@ -880,6 +885,783 @@ public:
     /// 2. Each node's value is between [-10^4, 10^4].
     /// </summary>
     int goodNodes(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #111. Minimum Depth of Binary Tree 
+    /// Given a binary tree, find its minimum depth.
+    /// The minimum depth is the number of nodes along the shortest path from the 
+    /// root node down to the nearest leaf node.
+    /// </summary>
+    int minDepth(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #104. Maximum Depth of Binary Tree 
+    /// Given a binary tree, find its maximum depth.
+    /// The maximum depth is the number of nodes along the longest path from the 
+    /// root node down to the farthest leaf node.
+    /// </summary>
+    int maxDepth(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #257. Binary Tree Paths  
+    /// </summary>
+    void binaryTreePaths(TreeNode* root, vector<int>& path, vector<string>& result);
+
+    /// <summary>
+    /// Leet code #257. Binary Tree Paths  
+    /// Given a binary tree, return all root-to-leaf paths.
+    /// For example, given the following binary tree: 
+    ///     1
+    ///   /   \
+    ///  2     3
+    ///   \
+    ///    5
+    /// All root-to-leaf paths are: 
+    /// ["1->2->5", "1->3"]
+    /// </summary>
+    vector<string> binaryTreePaths(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #226. Invert Binary Tree   
+    /// Invert a binary tree. 
+    ///      4
+    ///    /   \
+    ///   2     7
+    ///  / \   / \
+    /// 1   3 6   9
+    /// to 
+    ///      4
+    ///    /   \
+    ///   7     2
+    ///  / \   / \
+    /// 9   6 3   1
+    /// Trivia:
+    /// This problem was inspired by this original tweet by Max Howell: 
+    /// Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so fuck off.	
+    /// </summary>
+    TreeNode* invertTree(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #199. Binary Tree Right Side View 
+    /// Given a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom. 
+    /// For example:
+    /// Given the following binary tree,
+    ///     1            <---
+    ///   /   \
+    ///  2     3         <---
+    ///   \     \
+    ///    5     4       <---
+    /// You should return [1, 3, 4]. 
+    /// </summary> 
+    vector<int> rightSideView(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #98. Validate Binary Search Tree
+    /// Given a binary tree, determine if it is a valid binary search tree (BST).
+    /// Assume a BST is defined as follows: 
+    /// The left subtree of a node contains only nodes with keys less than the node's key.
+    /// The right subtree of a node contains only nodes with keys greater than the node's key.
+    /// Both the left and right subtrees must also be binary search trees.
+    /// Example 1:
+    ///    2
+    ///   / \
+    ///  1   3
+    /// Binary tree [2,1,3], return true. 
+    /// Example 2:
+    ///    1
+    ///   / \
+    ///  2   3
+    /// Binary tree [1,2,3], return false. 
+    /// </summary> 
+    bool isValidBST(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #103. Binary Tree Zigzag Level Order Traversal   
+    /// Given a binary tree, return the zigzag level order traversal of its nodes' values. 
+    /// (ie, from left to right, then right to left for the next level and alternate between).
+    ///
+    /// For example:
+    /// Given binary tree [3,9,20,null,null,15,7],
+    ///    3
+    ///   / \
+    ///  9  20
+    ///    /  \
+    ///   15   7
+    ///
+    /// return its zigzag level order traversal as:
+    /// [
+    ///   [3],
+    ///   [20,9],
+    ///   [15,7]
+    /// ]
+    /// </summary>
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #331. Verify Preorder Serialization of a Binary Tree
+    /// One way to serialize a binary tree is to use pre-order traversal. When we encounter a non-null node, 
+    /// we record the node's value. If it is a null node, we record using a sentinel value such as #.
+    ///       _9_
+    ///      /   \
+    ///     3     2
+    ///    / \   / \
+    ///   4   1  #  6
+    ///  / \ / \   / \
+    ///  # # # #   # #	
+    /// For example, the above binary tree can be serialized to the string "9,3,4,#,#,1,#,#,2,#,6,#,#", where # represents a null node. 
+    /// Given a string of comma separated values, verify whether it is a correct preorder traversal serialization of a binary tree. 
+    /// Find an algorithm without reconstructing the tree.
+    /// Each comma separated value in the string must be either an integer or a character '#' representing null pointer.
+    /// You may assume that the input format is always valid, for example it could never contain two consecutive commas such as "1,,3".
+    /// Example 1:
+    /// "9,3,4,#,#,1,#,#,2,#,6,#,#"
+    /// Return true
+    /// Example 2:
+    /// "1,#"
+    /// Return false
+    /// Example 3:
+    /// "9,#,#,1"
+    /// Return false
+    /// </summary>
+    bool isValidPreorderSerialization(string preorder);
+
+    /// <summary>
+    /// Leet code #110. Balanced Binary Tree
+    /// </summary>
+    bool isBalanced(TreeNode* root, int& depth);
+
+    /// <summary>
+    /// Leet code #110. Balanced Binary Tree
+    /// Given a binary tree, determine if it is height-balanced.
+    /// For this problem, a height-balanced binary tree is defined as a binary 
+    /// tree in which the depth of the 
+    /// two subtrees of every node never differ by more than 1. 
+    /// </summary>
+    bool isBalanced(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #236. Lowest Common Ancestor of a Binary Tree
+    /// </summary>
+    int lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q, TreeNode*& result);
+
+    /// <summary>
+    /// Leet code #236. Lowest Common Ancestor of a Binary Tree
+    /// Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree. 
+    /// According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two 
+    /// nodes v and w as the lowest node in T that has both v and w as descendants (where we allow a node to be a descendant of itself).” 
+    /// 	    _______3______
+    ///        /              \
+    ///     ___5__          ___1__
+    ///    /      \        /      \
+    ///    6       2       0       8
+    ///           / \
+    ///          7   4
+    /// For example, the lowest common ancestor (LCA) of nodes 5 and 1 is 3. Another example is LCA of nodes 5 and 4 is 5, 
+    ///  since a node can be a descendant of itself according to the LCA definition.
+    /// </summary>
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q);
+
+    /// <summary>
+    /// Leet code #235. Lowest Common Ancestor of a Binary Search Tree
+    /// Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST. 
+    /// According to the definition of LCA on Wikipedia: "The lowest common ancestor is defined between two nodes 
+    /// v and w as the lowest node in T that has both v and w as descendants (where we allow a node to be a descendant of itself)." 
+    ///        _______6______
+    ///       /              \
+    ///    ___2__          ___8__
+    ///   /      \        /      \
+    ///   0       4      7        9
+    ///          / \
+    ///         3   5
+    /// For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another example is LCA of nodes 2 and 4 is 2, 
+    /// since a node can be a descendant of itself according to the LCA definition.
+    /// </summary>
+    TreeNode* lowestCommonAncestorBST(TreeNode* root, TreeNode* p, TreeNode* q);
+
+    /// <summary>
+    /// Leet code #112. Path Sum
+    /// Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum. 
+    /// For example:
+    /// Given the below binary tree and sum = 22,               
+    ///          5
+    ///         / \
+    ///        4   8
+    ///       /   / \
+    ///      11  13  4
+    ///     /  \      \
+    ///    7    2      1
+    /// return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
+    /// </summary>
+    bool hasPathSum(TreeNode* root, int sum);
+
+    /// <summary>
+    /// Leet code #113. Path Sum II
+    /// </summary>
+    void pathSum(TreeNode* root, int sum, vector<int>& path, vector<vector<int>>& result);
+
+    /// <summary>
+    /// Leet code #113. Path Sum II
+    /// Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.  
+    /// For example:
+    /// Given the below binary tree and sum = 22,              
+    ///          5
+    ///         / \
+    ///        4   8
+    ///       /   / \
+    ///      11  13  4
+    ///     /  \    / \
+    ///    7    2  5   1
+    /// return
+    /// [
+    ///   [5,4,11,2],
+    ///   [5,8,4,5]
+    /// ]
+    /// </summary>
+    vector<vector<int>> pathSum(TreeNode* root, int sum);
+
+    /// <summary>
+    /// Leet code #129. Sum Root to Leaf Numbers    
+    /// Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number.  
+    /// An example is the root-to-leaf path 1->2->3 which represents the number 123.
+    /// Find the total sum of all root-to-leaf numbers.
+    /// For example, 
+    ///   1
+    ///  / \
+    /// 2   3
+    /// The root-to-leaf path 1->2 represents the number 12.
+    /// The root-to-leaf path 1->3 represents the number 13.
+    /// Return the sum = 12 + 13 = 25.
+    /// </summary>
+    int sumNumbers(TreeNode* root);
+
+    /// <summary>
+    /// Find the two disordered nodes in the binary search tree 
+    /// </summary>
+    void recoverTree(TreeNode* root, TreeNode*& min_node, TreeNode*& max_node,
+        TreeNode*& first, TreeNode*& second);
+
+    /// <summary>
+    /// Leet code #99. Recover Binary Search Tree 
+    /// Two elements of a binary search tree (BST) are swapped by mistake.
+    /// Recover the tree without changing its structure.
+    /// Note:
+    /// A solution using O(n) space is pretty straight forward. Could you devise a constant space solution?
+    /// </summary>
+    void recoverTree(TreeNode* root);
+
+    /// <summary>
+    /// Find the two disordered nodes in the binary search tree 
+    /// </summary>
+    void recoverTreeII(TreeNode* root, TreeNode*& prev,
+        TreeNode*& first, TreeNode*& second);
+
+    /// <summary>
+    /// Leet code #99. Recover Binary Search Tree 
+    /// Two elements of a binary search tree (BST) are swapped by mistake.
+    /// Recover the tree without changing its structure.
+    /// Note:
+    /// A solution using O(n) space is pretty straight forward. Could you devise a constant space solution?
+    /// </summary>
+    void recoverTreeII(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #101. Symmetric Tree 
+    /// Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center). 
+    /// For example, this binary tree [1,2,2,3,4,4,3] is symmetric: 
+    ///     1
+    ///    / \
+    ///   2   2
+    ///  / \ / \
+    /// 3  4 4  3
+    /// But the following [1,2,2,null,3,null,3] is not:
+    ///    1
+    ///   / \
+    ///  2   2
+    ///   \   \
+    ///   3    3
+    /// Note:
+    /// Bonus points if you could solve it both recursively and iteratively.
+    /// </summary>
+    bool isSymmetric(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #655. Print Binary Tree
+    /// </summary>
+    void printTree(TreeNode* root, vector<vector<string>>& matrix, int row, int col, int window);
+
+    /// <summary>
+    /// Leet code #655. Print Binary Tree
+    /// 
+    /// Print a binary tree in an m*n 2D string array following these rules: 
+    /// The row number m should be equal to the height of the given binary 
+    /// tree.
+    /// The column number n should always be an odd number.
+    /// The root node's value (in string format) should be put in the exactly 
+    /// middle of the first row it can be put. The column and the row where 
+    /// the root node belongs will separate the rest space into two parts 
+    /// (left-bottom part and right-bottom part). You should print the left 
+    /// subtree in the left-bottom part and print the right subtree in the 
+    /// right-bottom part. The left-bottom part and the right-bottom part 
+    /// should have the same size. Even if one subtree is none while the other 
+    /// is not, you don't need to print anything for the none subtree but 
+    /// still need to leave the space as large as that for the other subtree. 
+    /// However, if two subtrees are none, then you don't need to leave space 
+    /// for both of them.
+    /// Each unused space should contain an empty string "". 
+    /// Print the subtrees following the same rules.
+    /// Example 1:
+    /// Input:
+    ///     1
+    ///    /
+    ///   2
+    /// Output:
+    /// [["", "1", ""],
+    /// ["2", "", ""]]
+    ///
+    /// Example 2:
+    /// Input:
+    ///     1
+    ///    / \
+    ///   2   3
+    ///    \
+    ///     4
+    /// Output:
+    /// [["", "", "", "1", "", "", ""],
+    /// ["", "2", "", "", "", "3", ""],
+    /// ["", "", "4", "", "", "", ""]]
+    ///
+    /// Example 3:
+    /// Input:
+    ///       1
+    ///      / \
+    ///     2   5
+    ///    / 
+    ///   3 
+    ///  / 
+    /// 4 
+    /// Output:
+    ///
+    /// [["",  "",  "", "",  "", "", "", "1", "",  "",  "",  "",  "", "", ""]
+    /// ["",  "",  "", "2", "", "", "", "",  "",  "",  "",  "5", "", "", ""]
+    /// ["",  "3", "", "",  "", "", "", "",  "",  "",  "",  "",  "", "", ""]
+    /// ["4", "",  "", "",  "", "", "", "",  "",  "",  "",  "",  "", "", ""]]
+    /// 1. Note: The height of binary tree is in the range of [1, 10].
+    /// </summary>
+    vector<vector<string>> printTree(TreeNode* root);
+    /// <summary>
+     /// Leet code #1008. Construct Binary Search Tree from Preorder Traversal
+     /// </summary>
+    TreeNode* bstFromPreorder(TreeNode* root, stack<TreeNode*>& left_path, vector<int>& preorder, size_t& index);
+
+    /// <summary>
+    /// Leet code #1008. Construct Binary Search Tree from Preorder Traversal
+    /// 
+    /// Return the root node of a binary search tree that matches the given 
+    /// preorder traversal.
+    ///
+    /// (Recall that a binary search tree is a binary tree where for every 
+    /// node, any descendant of node.left has a value < node.val, and any 
+    /// descendant of node.right has a value > node.val.  Also recall that a 
+    /// preorder traversal displays the value of the node first, then 
+    /// traverses node.left, then traverses node.right.)
+    ///
+    /// Example 1:
+    ///
+    /// Input: [8,5,1,7,10,12]
+    /// Output: [8,5,10,1,7,null,12]
+    ///
+    /// Note: 
+    ///
+    /// 1. 1 <= preorder.length <= 100
+    /// 2. The values of preorder are distinct.
+    /// </summary>
+    TreeNode* bstFromPreorder(vector<int>& preorder);
+
+    /// <summary>
+    /// Leet code #1022. Sum of Root To Leaf Binary Numbers
+    /// </summary>
+    int sumRootToLeaf(TreeNode* root, int value, int& result);
+
+    /// <summary>
+    /// Leet code #1022. Sum of Root To Leaf Binary Numbers
+    /// 
+    /// Given a binary tree, each node has value 0 or 1.  Each root-to-leaf path 
+    /// represents a binary number starting with the most significant bit.  For 
+    /// example, if the path is 0 -> 1 -> 1 -> 0 -> 1, then this could represent 
+    /// 01101 in binary, which is 13.
+    ///
+    /// For all leaves in the tree, consider the numbers represented by the path 
+    /// from the root to that leaf.
+    ///
+    /// Return the sum of these numbers.
+    ///
+    /// 
+    /// Example 1:
+    ///
+    /// Input: [1,0,1,0,1,0,1]
+    /// Output: 22
+    /// Explanation: (100) + (101) + (110) + (111) = 4 + 5 + 6 + 7 = 22
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. The number of nodes in the tree is between 1 and 1000.
+    /// 2. node.val is 0 or 1.
+    /// 3. The answer will not exceed 2^31 - 1.
+    /// </summary>
+    int sumRootToLeaf(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #1026. Maximum Difference Between Node and Ancestor
+    /// </summary>
+    int maxAncestorDiff(TreeNode* root, int min_val, int max_val, int& result);
+
+    /// <summary>
+    /// Leet code #1026. Maximum Difference Between Node and Ancestor
+    /// 
+    /// Given the root of a binary tree, find the maximum value V for which there 
+    /// exists different nodes A and B where V = |A.val - B.val| and A is an 
+    /// ancestor of B.
+    ///
+    /// (A node A is an ancestor of B if either: any child of A is equal to B, or 
+    /// any child of A is an ancestor of B.)
+    ///
+    /// Example 1:
+    /// 
+    /// Input: [8,3,10,1,6,null,14,null,null,4,7,13]
+    /// Output: 7
+    /// Explanation: 
+    /// We have various ancestor-node differences, some of which are given below :
+    /// |8 - 3| = 5
+    /// |3 - 7| = 4
+    /// |8 - 1| = 7
+    /// |10 - 13| = 3
+    /// Among all possible differences, the maximum value of 7 is obtained by 
+    /// |8 - 1| = 7.
+    /// 
+    /// Note:
+    ///
+    /// 1. The number of nodes in the tree is between 2 and 5000.
+    /// 2. Each node will have value between 0 and 100000.
+    /// </summary>
+    int maxAncestorDiff(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #1028. Recover a Tree From Preorder Traversal
+    /// </summary>
+    TreeNode* recoverFromPreorder(TreeNode* root, int curr_depth, int& child_depth,
+        int& child_val, string S, size_t& index);
+
+    /// <summary>
+    /// Leet code #1028. Recover a Tree From Preorder Traversal
+    /// 
+    /// We run a preorder depth first search on the root of a binary tree.
+    ///
+    /// At each node in this traversal, we output D dashes (where D is the depth 
+    /// of this node), then we output the value of this node.  (If the depth of 
+    /// a node is D, the depth of its immediate child is D+1.  The depth of the 
+    /// root node is 0.)
+    ///
+    /// If a node has only one child, that child is guaranteed to be the left 
+    /// child.
+    ///
+    /// Given the output S of this traversal, recover the tree and return its root.
+    ///
+    /// Example 1:
+    /// 
+    /// Input: "1-2--3--4-5--6--7"
+    /// Output: [1,2,5,3,4,6,7]
+    ///
+    /// Example 2:
+    /// 
+    /// Input: "1-2--3---4-5--6---7"
+    /// Output: [1,2,5,3,null,6,null,4,null,7]
+    /// 
+    /// Example 3:
+    /// 
+    /// Input: "1-401--349---90--88"
+    /// Output: [1,401,null,349,88,90]
+    /// 
+    /// Note:
+    /// 
+    /// 1. The number of nodes in the original tree is between 1 and 1000. 
+    /// 2. Each node will have a value between 1 and 10^9.
+    /// </summary>
+    TreeNode* recoverFromPreorder(string S);
+
+    /// <summary>
+    /// Leet code #1038. Binary Search Tree to Greater Sum Tree
+    /// </summary>
+    void bstToGst(TreeNode* root, int& sum);
+
+    /// <summary>
+    /// Leet code #1038. Binary Search Tree to Greater Sum Tree
+    /// 
+    /// Given the root of a binary search tree with distinct values, modify it so 
+    /// that every node has a new value equal to the sum of the values of the 
+    /// original tree that are greater than or equal to node.val.
+    ///
+    /// As a reminder, a binary search tree is a tree that satisfies these 
+    /// constraints:
+    ///
+    /// The left subtree of a node contains only nodes with keys less than the 
+    /// node's key.
+    /// The right subtree of a node contains only nodes with keys greater than 
+    /// the node's key.
+    /// Both the left and right subtrees must also be binary search trees.
+    /// 
+    ///
+    /// Example 1:
+    /// 
+    ///
+    /// Input: [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]
+    /// Output: [30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. The number of nodes in the tree is between 1 and 100.
+    /// 2. Each node will have value between 0 and 100.
+    /// 3. The given tree is a binary search tree.
+    /// </summary>
+    TreeNode* bstToGst(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #1080. Insufficient Nodes in Root to Leaf Paths
+    /// </summary>
+    TreeNode* sufficientSubset(TreeNode* root, int limit, int sum);
+
+    /// <summary>
+    /// Leet code #1080. Insufficient Nodes in Root to Leaf Paths
+    /// 
+    /// Given the root of a binary tree, consider all root to leaf paths: paths 
+    /// from the root to any leaf.  (A leaf is a node with no children.)
+    ///
+    /// A node is insufficient if every such root to leaf path intersecting this 
+    /// node has sum strictly less than limit.
+    ///
+    /// Delete all insufficient nodes simultaneously, and return the root of the 
+    /// resulting binary tree.
+    ///
+    /// 
+    /// Example 1:
+    ///
+    /// Input: root = [1,2,3,4,-99,-99,7,8,9,-99,-99,12,13,-99,14], limit = 1
+    ///
+    /// Output: [1,2,3,4,null,null,7,8,9,null,14]
+    ///
+    /// Example 2:
+    ///
+    /// Input: root = [5,4,8,11,null,17,4,7,1,null,null,5,3], limit = 22
+    ///
+    /// Output: [5,4,8,11,null,17,4,7,null,null,null,5]
+    ///
+    /// Note:
+    ///
+    /// 1. The given tree will have between 1 and 5000 nodes.
+    /// 2. -10^5 <= node.val <= 10^5
+    /// 3. -10^9 <= limit <= 10^9
+    /// </summary>
+    TreeNode* sufficientSubset(TreeNode* root, int limit);
+
+    /// <summary>
+    /// Leet code #1104. Path In Zigzag Labelled Binary Tree
+    /// 
+    /// In an infinite binary tree where every node has two children, the nodes 
+    /// are labelled in row order.
+    ///
+    /// In the odd numbered rows (ie., the first, third, fifth,...), the labelling 
+    /// is left to right, while in the even numbered rows (second, fourth, 
+    /// sixth,...), the labelling is right to left.
+    /// 
+    /// Given the label of a node in this tree, return the labels in the path from 
+    /// the root of the tree to the node with that label.
+    ///
+    /// Example 1:
+    /// Input: label = 14
+    /// Output: [1,3,4,14]
+    ///
+    /// Example 2:
+    /// Input: label = 26
+    /// Output: [1,2,6,10,26]
+    ///
+    /// Constraints:
+    ///
+    /// 1. 1 <= label <= 10^6
+    /// </summary>
+    vector<int> pathInZigZagTree(int label);
+
+    /// <summary>
+    /// Leet code #1110. Delete Nodes And Return Forest
+    /// </summary>
+    TreeNode* delNodes(TreeNode* root, vector<int>& del_bit, vector<TreeNode*>& result);
+
+    /// <summary>
+    /// Leet code #1110. Delete Nodes And Return Forest
+    /// 
+    /// Given the root of a binary tree, each node in the tree has a distinct 
+    /// value.
+    ///
+    /// After deleting all nodes with a value in to_delete, we are left with a 
+    /// forest (a disjoint union of trees).
+    ///
+    /// Return the roots of the trees in the remaining forest.  You may return 
+    /// the result in any order.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: root = [1,2,3,4,5,6,7], to_delete = [3,5]
+    /// Output: [[1,2,null,4],[6],[7]]
+    /// 
+    /// Constraints:
+    /// 1. The number of nodes in the given tree is at most 1000.
+    /// 2. Each node has a distinct value between 1 and 1000.
+    /// 3. to_delete.length <= 1000
+    /// 4. to_delete contains distinct values between 1 and 1000.
+    /// </summary>
+    vector<TreeNode*> delNodes(TreeNode* root, vector<int>& to_delete);
+
+    /// <summary>
+    /// Leet code #1120. Maximum Average Subtree
+    /// </summary>
+    double maximumAverageSubtree(TreeNode* root, double& sum, int& count);
+
+    /// <summary>
+    /// Leet code #1120. Maximum Average Subtree
+    /// 
+    /// Given the root of a binary tree, find the maximum average value of any 
+    /// subtree of that tree.
+    /// (A subtree of a tree is any node of that tree plus all its descendants. 
+    /// The average value of a tree is the sum of its values, divided by the 
+    /// number of nodes.)
+    /// 
+    /// Example 1:
+    /// Input: [5,6,1]
+    /// Output: 6.00000
+    /// Explanation: 
+    /// For the node with value = 5 we have and average of (5 + 6 + 1) / 3 = 4.
+    /// For the node with value = 6 we have and average of 6 / 1 = 6.
+    /// For the node with value = 1 we have and average of 1 / 1 = 1.
+    /// So the answer is 6 which is the maximum.
+    /// 
+    /// Note:
+    /// 1. The number of nodes in the tree is between 1 and 5000.
+    /// 2. Each node will have a value between 0 and 100000.
+    /// 3. Answers will be accepted as correct if they are within 10^-5 of the 
+    ///    correct answer.
+    /// </summary>
+    double maximumAverageSubtree(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #1123. Lowest Common Ancestor of Deepest Leaves
+    /// </summary>
+    TreeNode* lcaDeepestLeaves(TreeNode* root, int& depth);
+
+    /// <summary>
+    /// Leet code #1123. Lowest Common Ancestor of Deepest Leaves
+    /// 
+    /// Given a rooted binary tree, return the lowest common ancestor of its 
+    /// deepest leaves.
+    /// Recall that:
+    /// The node of a binary tree is a leaf if and only if it has no children
+    /// The depth of the root of the tree is 0, and if the depth of a node is 
+    /// d, the depth of each of its children is d+1.
+    /// The lowest common ancestor of a set S of nodes is the node A with the 
+    /// largest depth such that every node in S is in the subtree with root A.
+    /// 
+    /// Example 1:
+    /// Input: root = [1,2,3]
+    /// Output: [1,2,3]
+    /// Explanation: 
+    /// The deepest leaves are the nodes with values 2 and 3.
+    /// The lowest common ancestor of these leaves is the node with value 1.
+    /// The answer returned is a TreeNode object (not an array) with 
+    /// serialization "[1,2,3]".
+    ///
+    /// Example 2:
+    /// Input: root = [1,2,3,4]
+    /// Output: [4]
+    ///
+    /// Example 3:
+    /// Input: root = [1,2,3,4,5]
+    /// Output: [2,4,5]
+    /// 
+    /// Constraints:
+    /// 1. The given tree will have between 1 and 1000 nodes.
+    /// 2. Each node of the tree will have a distinct value between 1 and 1000.
+    /// </summary>
+    TreeNode* lcaDeepestLeaves(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #1145. Binary Tree Coloring Game
+    /// </summary>
+    int btreeGameWinningMove(TreeNode* root, int& curr, int& left, int& right, int x);
+
+    /// <summary>
+    /// Leet code #1145. Binary Tree Coloring Game
+    /// 
+    /// Two players play a turn based game on a binary tree.  We are given the 
+    /// root of this binary tree, and the number of nodes n in the tree.  n is 
+    /// odd, and each node has a distinct value from 1 to n.
+    ///
+    /// Initially, the first player names a value x with 1 <= x <= n, and the 
+    /// second player names a value y with 1 <= y <= n and y != x.  The first 
+    /// player colors the node with value x red, and the second player colors 
+    /// the node with value y blue.
+    ///
+    /// Then, the players take turns starting with the first player.  In each 
+    /// turn, that player chooses a node of their color (red if player 1, blue 
+    /// if player 2) and colors an uncolored neighbor of the chosen node 
+    /// (either the left child, right child, or parent of the chosen node.)
+    ///
+    /// If (and only if) a player cannot choose such a node in this way, they 
+    /// must pass their turn.  If both players pass their turn, the game ends, 
+    /// and the winner is the player that colored more nodes.
+    ///
+    /// You are the second player.  If it is possible to choose such a y to 
+    /// ensure you win the game, return true.  If it is not possible, return 
+    /// false.
+    ///
+    /// Example 1:
+    /// 
+    /// Input: root = [1,2,3,4,5,6,7,8,9,10,11], n = 11, x = 3
+    /// Output: true
+    /// Explanation: The second player can choose the node with value 2.
+    /// 
+    ///
+    /// Constraints:
+    /// 
+    /// 1. root is the root of a binary tree with n nodes and distinct node 
+    ///    values from 1 to n.
+    /// 2. n is odd.
+    /// 3. 1 <= x <= n <= 100
+    /// </summary>
+    bool btreeGameWinningMove(TreeNode* root, int n, int x);
+
+    /// <summary>
+    /// Leet code #1161. Maximum Level Sum of a Binary Tree
+    /// 
+    /// Given the root of a binary tree, the level of its root is 1, the level 
+    /// of its children is 2, and so on.
+    /// Return the smallest level X such that the sum of all the values of nodes 
+    /// at level X is maximal.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: [1,7,0,7,-8,null,null]
+    /// Output: 2
+    /// Explanation: 
+    /// Level 1 sum = 1.
+    /// Level 2 sum = 7 + 0 = 7.
+    /// Level 3 sum = 7 + -8 = -1.
+    /// So we return the level with the maximum sum which is level 2.
+    /// 
+    /// Note:
+    /// 1. The number of nodes in the given tree is between 1 and 10^4.
+    /// 2. -10^5 <= node.val <= 10^5
+    /// </summary>
+    int maxLevelSum(TreeNode* root);
+
 #pragma endregion
 };
 #endif  // LeetCodeTree_H

@@ -7547,4 +7547,147 @@ public:
         }
     }
 };
+
+/// <summary>
+/// LeetCode #173. Binary Search Tree Iterator  
+///
+/// Implement an iterator over a binary search tree (BST). Your iterator 
+/// will be initialized with the root node of a BST.
+/// Calling next() will return the next smallest number in the BST.
+/// Note: next() and hasNext() should run in average O(1) time and uses 
+/// O(h) memory, where h is the height of the tree.  
+///
+/// Your BSTIterator will be called like this:
+/// BSTIterator i = BSTIterator(root);
+/// while (i.hasNext()) cout << i.next();
+/// </summary>
+class BSTIterator
+{
+private:
+    stack<TreeNode*> m_TreeStack;
+public:
+    /// <summary>
+    /// Constructor, which will lead to the smallest child.
+    /// </summary>
+    BSTIterator(TreeNode* root)
+    {
+        TreeNode* node = root;
+        while (node != nullptr)
+        {
+            m_TreeStack.push(node);
+            node = node->left;
+        }
+    }
+
+    /// <summary>
+    /// return whether we have a next smallest number
+    /// </summary>
+    bool hasNext()
+    {
+        return (!m_TreeStack.empty());
+    }
+
+    /// <summary>
+    /// return the next smallest number
+    /// </summary>
+    int next()
+    {
+        TreeNode* node = m_TreeStack.top();
+        int value = node->val;
+        m_TreeStack.pop();
+        if (node->right != nullptr)
+        {
+            node = node->right;
+            while (node != nullptr)
+            {
+                m_TreeStack.push(node);
+                node = node->left;
+            }
+        }
+        return value;
+    }
+};
+
+/// <summary>
+/// Leet code #431. Encode N-ary Tree to Binary Tree
+/// 
+/// Design an algorithm to encode an N-ary tree into a binary tree and decode
+/// the binary tree to get the original N-ary tree. An N-ary tree is a rooted
+/// tree in which each node has no more than N children. Similarly, a binary 
+/// tree is a rooted tree in which each node has no more than 2 children. There
+/// is no restriction on how your encode/decode algorithm should work. You just 
+/// need to ensure that an N-ary tree can be encoded to a binary tree and this 
+/// binary tree can be decoded to the original N-nary tree structure.
+///
+/// For example, you may encode the following 3-ary tree to a binary tree in 
+/// this way:
+/// 
+/// Note that the above is just an example which might or might not work. You 
+/// do not necessarily need to follow this format, so please be creative and 
+/// come up with different approaches yourself.
+///
+/// Note:
+///
+/// N is in the range of [1, 1000]
+/// Do not use class member/global/static variables to store states. Your 
+/// encode and decode algorithms should be stateless.
+/// or if B is true, or if both A and B are true.
+/// </summary>
+class NaryTreeBinaryCodec
+{
+private:
+    // Encodes an n-ary tree to a binary tree.
+    TreeNode* encode(queue<Node*> sibling_queue)
+    {
+        TreeNode* result = nullptr;
+        if (sibling_queue.empty()) return result;
+        Node* node = sibling_queue.front();
+        sibling_queue.pop();
+        result = new TreeNode(node->val);
+        queue<Node*> children_queue;
+        for (size_t i = 0; i < node->children.size(); i++)
+        {
+            children_queue.push(node->children[i]);
+        }
+        result->left = encode(children_queue);
+        result->right = encode(sibling_queue);
+        return result;
+    }
+
+    // Decodes your binary tree to an n-ary tree.
+    void decode(TreeNode* tree_node, vector<Node*>& children_queue)
+    {
+        if (tree_node == nullptr) return;
+        Node* node = new Node();
+        node->val = tree_node->val;
+        decode(tree_node->left, node->children);
+        children_queue.push_back(node);
+        decode(tree_node->right, children_queue);
+    }
+
+public:
+
+    // Encodes an n-ary tree to a binary tree.
+    TreeNode* encode(Node* root)
+    {
+        TreeNode* result = nullptr;
+        if (root == nullptr) return result;
+        queue<Node*> sibling_queue;
+        sibling_queue.push(root);
+        result = encode(sibling_queue);
+        return result;
+    }
+
+    // Decodes your binary tree to an n-ary tree.
+    Node* decode(TreeNode* root)
+    {
+        Node* result = nullptr;
+        if (root == nullptr) return result;
+        vector<Node*>children_queue;
+        decode(root, children_queue);
+        result = children_queue[0];
+        return result;
+    }
+};
+
 #endif // LeetcodeDesign_H

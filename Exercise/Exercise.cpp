@@ -1128,21 +1128,6 @@ void TestLeetCode260(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode173(void)
-{
-    Logger::WriteMessage("Test Leet Code 173");
-    LeetCode leetCode;
-    string input = "[4,2,6,1,3,5,7]";
-    TreeNode * root = leetCode.deserialize(input);
-    BSTIterator iterator(root);
-    vector<int> node_list;
-    while (iterator.hasNext())
-    {
-        node_list.push_back(iterator.next());
-    }
-    Logger::WriteMessage(node_list);
-    leetCode.freeTreeNodes(root);
-}
 
 
 
@@ -3074,17 +3059,6 @@ void TestLeetCode524(void)
     Logger::WriteMessage("result = " + result);
 }
 
-void TestLeetCode257(void)
-{
-    LeetCode leetCode;
-    string input = "[1,2,3,null,5]";
-    Logger::WriteMessage("Original Path:" + input);
-    TreeNode * root = leetCode.deserialize(input);
-    vector<string> tree_paths = leetCode.binaryTreePaths(root);
-    Logger::WriteMessage("Tree Path:");
-    Logger::WriteMessage(tree_paths);
-    leetCode.freeTreeNodes(root);
-}
 
 void TestLeetCode541(void)
 {
@@ -3729,45 +3703,8 @@ void TestLeetCode635(void)
 }
 
 
-void TestLeetCode110(void)
-{
-    LeetCode leetCode;
-    string input = "[1,2,2,3,null,null,3,4,null,null,4]";
-    Logger::WriteMessage("Original Path:" + input);
 
-    TreeNode * root = leetCode.deserialize(input);
-    bool isBalanced = leetCode.isBalanced(root);
-    Logger::WriteMessage("It " + (string)(isBalanced ? "is" : "is not") + " balanced binary tree.");
-    leetCode.freeTreeNodes(root);
-}
 
-void TestLeetCode236(void)
-{
-    // Test Leet Code #236
-    LeetCode leetCode;
-    TreeNode* p;
-    TreeNode* q;
-    TreeNode* ancestor;
-    string input = "[6,2,8,0,4,7,9,null,null,3,5]";
-    Logger::WriteMessage("Original Path:" + input);
-    TreeNode * root = leetCode.deserialize(input);
-    p = leetCode.findTreeNode(root, 2);
-    q = leetCode.findTreeNode(root, 8);
-    ancestor = leetCode.lowestCommonAncestor(root, p, q);
-    Logger::WriteMessage("The lowest common ancester for " +
-        ((p == nullptr) ? "null" : to_string(p->val)) + " and " +
-        ((q == nullptr) ? "null" : to_string(q->val)) + " is " +
-        ((ancestor == nullptr) ? "null" : to_string(ancestor->val)));
-
-    p = leetCode.findTreeNode(root, 2);
-    q = leetCode.findTreeNode(root, 4);
-    ancestor = leetCode.lowestCommonAncestor(root, p, q);
-    Logger::WriteMessage("The lowest common ancester for " +
-        ((p == nullptr) ? "null" : to_string(p->val)) + " and " +
-        ((q == nullptr) ? "null" : to_string(q->val)) + " is " +
-        ((ancestor == nullptr) ? "null" : to_string(ancestor->val)));
-    leetCode.freeTreeNodes(root);
-}
 
 void TestLeetCode637(void)
 {
@@ -3874,41 +3811,6 @@ void TestLeetCode297(void)
     leetCode.freeTreeNodes(root);
 }
 
-void TestLeetCode103(void)
-{
-    Logger::WriteMessage("Test Leet Code 103");
-    LeetCode leetCode;
-    string input = "[3,9,20,null,null,15,7]";
-    TreeNode* root = leetCode.deserialize(input);
-    vector<vector<int>> result = leetCode.zigzagLevelOrder(root);
-    Logger::WriteMessage("ZigzagLevelOrderTraversal");
-    Logger::WriteMessage(result);
-    leetCode.freeTreeNodes(root);
-}
-
-
-void TestLeetCode111(void)
-{
-    Logger::WriteMessage("Test Leet Code 111");
-    LeetCode leetCode;
-    string input = "[3,9,20,null,null,15,7]";
-    TreeNode* root = leetCode.deserialize(input);
-    int min_level = leetCode.minDepth(root);
-    Logger::WriteMessage("Minimum depth = " + to_string(min_level));
-    leetCode.freeTreeNodes(root);
-}
-
-void TestLeetCode104(void)
-{
-    Logger::WriteMessage("Test Leet Code 104");
-    LeetCode leetCode;
-    string input = "[3,9,20,null,null,15,7]";
-    TreeNode* root = leetCode.deserialize(input);
-    int max_level = leetCode.maxDepth(root);
-    Logger::WriteMessage("Maximum depth = " + to_string(max_level));
-    leetCode.freeTreeNodes(root);
-}
-
 void TestLeetCode643(void)
 {
     Logger::WriteMessage("Test Leet Code 643");
@@ -3943,101 +3845,6 @@ void TestLeetCode644(void)
     Logger::WriteMessage("k = " + to_string(k) + "; Maximum Average = " + to_string(max_avg));
 }
 
-void TestLeetCode226(void)
-{
-    Logger::WriteMessage("Test Leet Code 226");
-    LeetCode leetCode;
-    string input = "[4,2,7,1,3,6,9]";
-    Logger::WriteMessage("Original Path:" + input);
-    TreeNode * root = leetCode.deserialize(input);
-    root = leetCode.invertTree(root);
-    string output = leetCode.serialize(root);
-    Logger::WriteMessage("Invert Tree:" + output);
-    leetCode.freeTreeNodes(root);
-}
-
-void TestLeetCode199(void)
-{
-    Logger::WriteMessage("Test Leet Code 199");
-    LeetCode leetCode;
-    string input = "[1,2,3,null,5,null,4]";
-    Logger::WriteMessage("Original Path:" + input);
-    TreeNode * root = leetCode.deserialize(input);
-    vector<int> result = leetCode.rightSideView(root);
-    Logger::WriteMessage("Right Side View:");
-    Logger::WriteMessage(result);
-    leetCode.freeTreeNodes(root);
-}
-
-void TestLeetCode98(void)
-{
-    Logger::WriteMessage("Test Leet Code 98");
-    LeetCode leetCode;
-    string input = "[]";
-    Logger::WriteMessage("Original Path:" + input);
-    TreeNode * root = leetCode.deserialize(input);
-    Logger::WriteMessage("It " + (string)(leetCode.isValidBST(root) ? "is" : "is not") + " valid BST.");
-    leetCode.freeTreeNodes(root);
-}
-
-void TestLeetCode331(void)
-{
-    Logger::WriteMessage("Test Leet Code 331");
-    LeetCode leetCode;
-    string input = "9,3,4,#,#,1,#,#,2,#,6,#,#";
-    Logger::WriteMessage("Original Path:" + input);
-    Logger::WriteMessage("It " + (string)(leetCode.isValidPreorderSerialization(input) ? "is" : "is not") + " valid preorder serialization.");
-
-    input = "1,#";
-    Logger::WriteMessage("Original Path:" + input);
-    Logger::WriteMessage("It " + (string)(leetCode.isValidPreorderSerialization(input) ? "is" : "is not") + " valid preorder serialization.");
-
-    input = "9,#,#,1";
-    Logger::WriteMessage("Original Path:" + input);
-    Logger::WriteMessage("It " + (string)(leetCode.isValidPreorderSerialization(input) ? "is" : "is not") + " valid preorder serialization.");
-}
-
-void TestLeetCode112(void)
-{
-    Logger::WriteMessage("Test Leet Code 112");
-    LeetCode leetCode;
-    string input = "[5,4,8,11,null,13,4,7,2,null, null, null, 1]";
-
-    Logger::WriteMessage("Original Path:" + input);
-    TreeNode* root = leetCode.deserialize(input);
-    int sum = 22;
-    Logger::WriteMessage("The tree " + (string)(leetCode.hasPathSum(root, sum) ? "has" : "does not have") + " the sum of " + to_string(sum));
-    leetCode.freeTreeNodes(root);
-}
-
-void TestLeetCode113(void)
-{
-    Logger::WriteMessage("Test Leet Code 113");
-    LeetCode leetCode;
-    string input = "[5,4,8,11,null,13,4,7,2,null, null, 5, 1]";
-
-    Logger::WriteMessage("Original Path:" + input);
-    TreeNode* root = leetCode.deserialize(input);
-    int sum = 22;
-    vector<vector<int>> paths = leetCode.pathSum(root, sum);
-    Logger::WriteMessage("Paths with sum = " + to_string(sum));
-    Logger::WriteMessage(paths);
-    leetCode.freeTreeNodes(root);
-}
-
-void TestLeetCode129(void)
-{
-    Logger::WriteMessage("Test Leet Code 129");
-    LeetCode leetCode;
-    string input = "[1,2,3]";
-
-    Logger::WriteMessage("Original Path:" + input);
-    TreeNode* root = leetCode.deserialize(input);
-    int sum = leetCode.sumNumbers(root);
-    Logger::WriteMessage("Sum number = " + to_string(sum));
-    leetCode.freeTreeNodes(root);
-}
-
 void TestLeetCode404(void)
 {
     // Test Leet Code #404 
@@ -4058,65 +3865,8 @@ void TestLeetCode404(void)
     leetCode.freeTreeNodes(root);
 }
 
-void TestLeetCode101(void)
-{
-    LeetCode leetCode;
 
-    // Test Leet Code #101 
-    Logger::WriteMessage("Test Leet Code 101");
-    string input = "[1, 2, 3, 3, null, 2, null]";
-    Logger::WriteMessage("Original Path:" + input);
-    TreeNode * root = leetCode.deserialize(input);
-    bool isSymmetric = leetCode.isSymmetric(root);
-    Logger::WriteMessage("The tree " + string(isSymmetric ? "is " : "is not ") + "symmetric.");
-    leetCode.freeTreeNodes(root);
 
-    input = "[1, 2, 2, 3, 4, 4, 3]";
-    Logger::WriteMessage("Original Path:" + input);
-    root = leetCode.deserialize(input);
-    isSymmetric = leetCode.isSymmetric(root);
-    Logger::WriteMessage("The tree " + string(isSymmetric ? "is " : "is not ") + "symmetric.");
-    leetCode.freeTreeNodes(root);
-
-    input = "[1, 2, 2, null, 3, null, 3]";
-    Logger::WriteMessage("Original Path:" + input);
-    root = leetCode.deserialize(input);
-    isSymmetric = leetCode.isSymmetric(root);
-    Logger::WriteMessage("The tree " + string(isSymmetric ? "is " : "is not ") + "symmetric.");
-    leetCode.freeTreeNodes(root);
-    Logger::WriteMessage("===========================================================");
-}
-
-void TestLeetCode99(void)
-{
-    LeetCode leetCode;
-
-    Logger::WriteMessage("Test Leet Code 99");
-    // Test Leet Code #99
-    string input = "[2, null, 1]";
-    Logger::WriteMessage("Original Path:" + input);
-    TreeNode* root = leetCode.deserialize(input);
-    leetCode.recoverTree(root);
-    string output = leetCode.serialize(root);
-    Logger::WriteMessage("After recovered:" + output);
-    leetCode.freeTreeNodes(root);
-
-    input = "[0,1]";
-    Logger::WriteMessage("Original Path:" + input);
-    root = leetCode.deserialize(input);
-    leetCode.recoverTree(root);
-    output = leetCode.serialize(root);
-    Logger::WriteMessage("After recovered:" + output);
-    leetCode.freeTreeNodes(root);
-
-    input = "[4,2,3,1,6,5,7]";
-    Logger::WriteMessage("Original Path:" + input);
-    root = leetCode.deserialize(input);
-    leetCode.recoverTree(root);
-    output = leetCode.serialize(root);
-    Logger::WriteMessage("After recovered:" + output);
-    leetCode.freeTreeNodes(root);
-}
 
 void TestLeetCode646(void)
 {
@@ -4258,30 +4008,7 @@ void TestLeetCode654(void)
     leetCode.freeTreeNodes(root);
 }
 
-void TestLeetCode655(void)
-{
-    LeetCode leetCode;
-    string input = "[1,2,null]";
-    Logger::WriteMessage("input = " + input);
-    TreeNode * root = leetCode.deserialize(input);
-    vector<vector<string>> result = leetCode.printTree(root);
-    Logger::WriteMessage(result);
-    leetCode.freeTreeNodes(root);
 
-    input = "[1,2,3,null,4]";
-    Logger::WriteMessage("input = " + input);
-    root = leetCode.deserialize(input);
-    result = leetCode.printTree(root);
-    Logger::WriteMessage(result);
-    leetCode.freeTreeNodes(root);
-
-    input = "[1,2,5,3,null,null,null,4]";
-    Logger::WriteMessage("input = " + input);
-    root = leetCode.deserialize(input);
-    result = leetCode.printTree(root);
-    Logger::WriteMessage(result);
-    leetCode.freeTreeNodes(root);
-}
 
 
 
@@ -7898,24 +7625,6 @@ void TestLeetCode702(void)
     Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
 }
 
-void TestLeetCode431(void)
-{
-    Logger::WriteMessage("Test Leet Code 431");
-    LeetCode leetCode;
-    NaryTreeCodec  treeCodec;
-    NaryTreeBinaryCodec b_treeCodec;
-    string input = "[1 [3[5 6] 2 4]]";
-    Logger::WriteMessage(input);
-    Node * root = treeCodec.deserialize(input);
-    TreeNode * b_tree = b_treeCodec.encode(root);
-    Node * nary_tree = b_treeCodec.decode(b_tree);
-    string output = treeCodec.serialize(nary_tree);
-    Logger::WriteMessage(output);
-    leetCode.freeNodes(root);
-    leetCode.freeTreeNodes(b_tree);
-    leetCode.freeNodes(nary_tree);
-}
-
 void TestLeetCode489(void)
 {
     Logger::WriteMessage("Test Leet Code 489");
@@ -9998,18 +9707,6 @@ void TestLeetCode1007(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode1008(void)
-{
-    Logger::WriteMessage("Test Leet Code 1008");
-    LeetCode leetCode;
-    vector<int> preorder = {8,5,1,7,10,12};
-    TreeNode * root = leetCode.bstFromPreorder(preorder);
-    string result = leetCode.serialize(root);
-    Logger::WriteMessage(preorder);
-    Logger::WriteMessage("result = " + result);
-    leetCode.freeTreeNodes(root);
-}
-
 void TestLeetCode1006(void)
 {
     Logger::WriteMessage("Test Leet Code 1006");
@@ -10206,17 +9903,6 @@ void TestLeetCode1021(void)
     Logger::WriteMessage("S = " + S + "; result = " + result);
 }
 
-void TestLeetCode1022(void)
-{
-    Logger::WriteMessage("Test Leet Code 1022");
-    LeetCode leetCode;
-    string input = "[1,0,1,0,1,0,1]";
-    Logger::WriteMessage(input);
-    TreeNode * root = leetCode.deserialize(input);
-    int result = leetCode.sumRootToLeaf(root);
-    Logger::WriteMessage("result = " + to_string(result));
-    leetCode.freeTreeNodes(root);
-}
 
 void TestLeetCode1023(void)
 {
@@ -10296,39 +9982,7 @@ void TestLeetCode1025(void)
     Logger::WriteMessage("N = " + to_string(N) + "; result = " + (string)(result ? "true" : "false"));
 }
 
-void TestLeetCode1026(void)
-{
-    Logger::WriteMessage("Test Leet Code 1026");
-    LeetCode leetCode;
-    string input = "[8,3,10,1,6,null,14,null,null,4,7,13]";
-    TreeNode * root = leetCode.deserialize(input);
-    int result = leetCode.maxAncestorDiff(root);
-    Logger::WriteMessage("input = " + input + "; result = " + to_string(result));
-    leetCode.freeTreeNodes(root);
-}
 
-void TestLeetCode1028(void)
-{
-    Logger::WriteMessage("Test Leet Code 1028");
-    LeetCode leetCode;
-    string S = "1-2--3--4-5--6--7";
-    TreeNode * root = leetCode.recoverFromPreorder(S);
-    string output = leetCode.serialize(root);
-    Logger::WriteMessage("S = " + S + "; result = " + output);
-    leetCode.freeTreeNodes(root);
-
-    S = "1-2--3---4-5--6---7";
-    root = leetCode.recoverFromPreorder(S);
-    output = leetCode.serialize(root);
-    Logger::WriteMessage("S = " + S + "; result = " + output);
-    leetCode.freeTreeNodes(root);
-
-    S = "1-401--349---90--88";
-    root = leetCode.recoverFromPreorder(S);
-    output = leetCode.serialize(root);
-    Logger::WriteMessage("S = " + S + "; result = " + output);
-    leetCode.freeTreeNodes(root);
-}
 
 void TestLeetCode1027(void)
 {
@@ -10410,17 +10064,7 @@ void TestLeetCode1031(void)
 }
 
 
-void TestLeetCode1038(void)
-{
-    Logger::WriteMessage("Test Leet Code 1038");
-    LeetCode leetCode;
-    string input = "[4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]";
-    TreeNode * root = leetCode.deserialize(input);
-    root = leetCode.bstToGst(root);
-    string output = leetCode.serialize(root);
-    Logger::WriteMessage("input = " + input + "; output = " + output);
-    leetCode.freeTreeNodes(root);
-}
+
 
 void TestLeetCode1039(void)
 {
@@ -10722,35 +10366,6 @@ void TestLeetCode1079(void)
     Logger::WriteMessage("tiles = " + tiles + "; result = " + to_string(result));
 }
 
-void TestLeetCode1080(void)
-{
-    Logger::WriteMessage("Test Leet Code 1080");
-    LeetCode leetCode;
-    string input = "[1, 2, 3, 4, -99, -99, 7, 8, 9, -99, -99, 12, 13, -99, 14]";
-    int limit = 1;
-    TreeNode * root = leetCode.deserialize(input);
-    root = leetCode.sufficientSubset(root, limit);
-    string output = leetCode.serialize(root);
-    leetCode.freeTreeNodes(root);
-    Logger::WriteMessage("text = " + input + "; result = " + output);
-
-    input = "[5,4,8,11,null,17,4,7,1,null,null,5,3]";
-    limit = 22;
-    root = leetCode.deserialize(input);
-    root = leetCode.sufficientSubset(root, limit);
-    output = leetCode.serialize(root);
-    leetCode.freeTreeNodes(root);
-    Logger::WriteMessage("text = " + input + "; result = " + output);
-
-    input = "[10,5,10]";
-    limit = 21;
-    root = leetCode.deserialize(input);
-    root = leetCode.sufficientSubset(root, limit);
-    output = leetCode.serialize(root);
-    leetCode.freeTreeNodes(root);
-    Logger::WriteMessage("text = " + input + "; result = " + output);
-}
-
 void TestLeetCode1060(void)
 {
     Logger::WriteMessage("Test Leet Code 1060");
@@ -11035,20 +10650,7 @@ void TestLeetCode1095(void)
     Logger::WriteMessage("result = " + (string)(to_string(result)));
 }
 
-void TestLeetCode1104(void)
-{
-    Logger::WriteMessage("Test Leet Code 1104");
-    LeetCode leetCode;
-    int label = 14;
-    vector<int> result = leetCode.pathInZigZagTree(label);
-    Logger::WriteMessage("label = " + to_string(label));
-    Logger::WriteMessage(result);
 
-    label = 26;
-    result = leetCode.pathInZigZagTree(label);
-    Logger::WriteMessage("label = " + to_string(label));
-    Logger::WriteMessage(result);
-}
 
 void TestLeetCode1099(void)
 {
@@ -11093,36 +10695,6 @@ void TestLeetCode1109(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode1110(void)
-{
-    Logger::WriteMessage("Test Leet Code 1110");
-    LeetCode leetCode;
-    string input = "[1, 2, 3, 4, 5, 6, 7]";
-    TreeNode * root = leetCode.deserialize(input);
-    vector<int> to_delete = { 3, 5 };
-    vector<TreeNode*> result = leetCode.delNodes(root, to_delete);
-    vector<string> output;
-    for (size_t i = 0; i < result.size(); i++)
-    {
-        output.push_back(leetCode.serialize(result[i]));
-    }
-    Logger::WriteMessage("input = " + input);
-    Logger::WriteMessage(to_delete);
-    Logger::WriteMessage(output);
-
-    input = "[1, 2, 3, null, null, null, 4]";
-    root = leetCode.deserialize(input);
-    to_delete = { 2, 1 };
-    result = leetCode.delNodes(root, to_delete);
-    output.clear();
-    for (size_t i = 0; i < result.size(); i++)
-    {
-        output.push_back(leetCode.serialize(result[i]));
-    }
-    Logger::WriteMessage("input = " + input);
-    Logger::WriteMessage(to_delete);
-    Logger::WriteMessage(output);
-}
 
 void TestLeetCode1122(void)
 {
@@ -11136,51 +10708,8 @@ void TestLeetCode1122(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode1120(void)
-{
-    Logger::WriteMessage("Test Leet Code 1120");
-    LeetCode leetCode;
-    string input = "[0, 6, 5, 3, 2, null, null, null, 4, null, null, null, 1]";
-    TreeNode* root = leetCode.deserialize(input);
-    double result = leetCode.maximumAverageSubtree(root);
-    leetCode.freeTreeNodes(root);
-    Logger::WriteMessage("tree = " + input + "; result = " + to_string(result));
-    
-}
-
-void TestLeetCode1123(void)
-{
-    Logger::WriteMessage("Test Leet Code 1123");
-    LeetCode leetCode;
-    string input = "[0, 6, 5, 3, 2, null, null, null, 4, null, null, null, 1]";
-    TreeNode* root = leetCode.deserialize(input);
-    TreeNode* result = leetCode.lcaDeepestLeaves(root);
-    string output = leetCode.serialize(result);
-    leetCode.freeTreeNodes(root);
-    Logger::WriteMessage("tree = " + input + "; result = " + output);
 
 
-    input = "[1, 2, 3]";
-    root = leetCode.deserialize(input);
-    result = leetCode.lcaDeepestLeaves(root);
-    output = leetCode.serialize(result);
-    leetCode.freeTreeNodes(root);
-    Logger::WriteMessage("tree = " + input + "; result = " + output);
-
-    input = "[1,2,3,4]";
-    root = leetCode.deserialize(input);
-    result = leetCode.lcaDeepestLeaves(root);
-    output = leetCode.serialize(result);
-    leetCode.freeTreeNodes(root);
-    Logger::WriteMessage("tree = " + input + "; result = " + output);
-
-    input = "[1,2,3,4,5]";
-    root = leetCode.deserialize(input);
-    result = leetCode.lcaDeepestLeaves(root);
-    output = leetCode.serialize(result);
-    leetCode.freeTreeNodes(root);
-    Logger::WriteMessage("tree = " + input + "; result = " + output);
-}
 
 void TestLeetCode1125(void)
 {
@@ -11254,19 +10783,6 @@ void TestLeetCode1140(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode1145(void)
-{
-    Logger::WriteMessage("Test Leet Code 1145");
-    LeetCode leetCode;
-    string input = "[1,2,3,4,5,6,7,8,9,10,11]";
-    TreeNode* root = leetCode.deserialize(input);
-    int n = 11;
-    int x = 3;
-    bool result = leetCode.btreeGameWinningMove(root, n, x);
-    Logger::WriteMessage("input =" + input + "; n = " + to_string(n) + "; x = " + to_string(x) + "; result = " + (string) (result ? "true": "false"));
-    leetCode.freeTreeNodes(root);
-}
-
 
 
 void TestLeetCode1157(void)
@@ -11330,16 +10846,7 @@ void TestLeetCode1152(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode1161(void)
-{
-    Logger::WriteMessage("Test Leet Code 1161");
-    LeetCode leetCode;
-    string input = "[1,7,0,7,-8,null,null]";
-    TreeNode* root = leetCode.deserialize(input);
-    int result = leetCode.maxLevelSum(root);
-    Logger::WriteMessage("input = " + input + "result = " + to_string(result));
-    leetCode.freeTreeNodes(root);
-}
+
 
 void TestLeetCode1163(void)
 {
@@ -11738,12 +11245,10 @@ void main(int argc, char* argv[])
     TestLeetCode1169();
     TestLeetCode1063();
     TestLeetCode1163();
-    TestLeetCode1161();
     TestLeetCode1152();
     TestLeetCode1153();
     TestLeetCode1157();
     TestLeetCode1146();
-    TestLeetCode1145();
     TestLeetCode1139();
     TestLeetCode1136();
     TestLeetCode1135();
@@ -11755,15 +11260,11 @@ void main(int argc, char* argv[])
     TestLeetCode1125();
     TestLeetCode1121();
     TestLeetCode1124();
-    TestLeetCode1123();
-    TestLeetCode1120();
     TestLeetCode1122();
-    TestLeetCode1110();
     TestLeetCode1109();
     TestLeetCode1105();
     TestLeetCode1102();
     TestLeetCode1099();
-    TestLeetCode1104();
     TestLeetCode1103();
     TestLeetCode1095();
     TestLeetCode1094();
@@ -11780,7 +11281,6 @@ void main(int argc, char* argv[])
     TestLeetCode1059();
     TestLeetCode1058();
     TestLeetCode1057();
-    TestLeetCode1080();
     TestLeetCode1079();
     TestLeetCode1078();
     TestLeetCode1065();
@@ -11801,19 +11301,15 @@ void main(int argc, char* argv[])
     TestLeetCode1036();
     TestLeetCode1041();
     TestLeetCode1040();
-    TestLeetCode1038();
     TestLeetCode1037();
     TestLeetCode1031();
     TestLeetCode1029();
     TestLeetCode912();
     TestLeetCode1027();
-    TestLeetCode1028();
-    TestLeetCode1026();
     TestLeetCode1025();
     TestLeetCode1024();
     TestLeetCode1023();
     TestLeetCode1021();
-    TestLeetCode1022();
     TestLeetCode1018();
     TestLeetCode1017();
     TestLeetCode1014();
@@ -11826,7 +11322,6 @@ void main(int argc, char* argv[])
     TestLeetCode1011();
     TestLeetCode1001();
     TestLeetCode1006();
-    TestLeetCode1008();
     TestLeetCode1007();
     TestLeetCode1005();
     TestLeetCode1004();
@@ -11940,7 +11435,6 @@ void main(int argc, char* argv[])
     TestLeetCode478();
     TestLeetCode457();
     TestLeetCode433();
-    TestLeetCode431();
     TestLeetCode429();
     TestLeetCode428();
     TestLeetCode426();
@@ -12070,7 +11564,7 @@ void main(int argc, char* argv[])
     TestLeetCode741();
     TestLeetCode740();
     TestLeetCode736();
-    TestLeetCode732();	
+    TestLeetCode732();
     TestLeetCode734();
     TestLeetCode733();
     TestLeetCode730();
@@ -12083,7 +11577,6 @@ void main(int argc, char* argv[])
     TestLeetCode729();
     TestLeetCode731();
     TestLeetCode728();
-
     TestLeetCode718();
     TestLeetCode724();
     TestLeetCode722();
@@ -12127,7 +11620,6 @@ void main(int argc, char* argv[])
     TestLeetCode658();
     TestLeetCode665();
     TestLeetCode661();
-    TestLeetCode655();
     TestLeetCode654();
     TestLeetCode653();
     TestLeetCode649();
@@ -12139,29 +11631,15 @@ void main(int argc, char* argv[])
     TestLeetCode565();
     TestLeetCode645();
     TestLeetCode646();
-    TestLeetCode99();
-    TestLeetCode101();
     TestLeetCode404();
-    TestLeetCode129();
-    TestLeetCode113();
-    TestLeetCode112();
-    TestLeetCode331();
-    TestLeetCode98();
-    TestLeetCode199();
-    TestLeetCode226();
     TestLeetCode644();
     TestLeetCode643();
-    TestLeetCode104();
-    TestLeetCode111();
-    TestLeetCode103();
     TestLeetCode297();
     TestLeetCode639();
     TestLeetCode640();
     TestLeetCode638();
     TestLeetCode637();
     TestLeetCode479();
-    TestLeetCode236();
-    TestLeetCode110();
     TestLeetCode480();
     TestLeetCode120();
     TestLeetCode632();
@@ -12219,7 +11697,6 @@ void main(int argc, char* argv[])
     TestLeetCode337();
     TestLeetCode274();
     TestLeetCode75();
-    TestLeetCode257();
     TestLeetCode529();
     TestLeetCode524();
     TestLeetCode530();
@@ -12379,7 +11856,6 @@ void main(int argc, char* argv[])
     TestLeetCode133();
     TestLeetCode48();
     TestLeetCode93();
-    TestLeetCode173();
     TestLeetCode453();
     TestLeetCode260();
     TestLeetCode268();

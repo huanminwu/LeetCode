@@ -19,6 +19,71 @@
 #include "LeetCodeTree.h"
 
 #pragma region BinaryTree
+
+/// <summary>
+/// Find a tree node with value
+/// </summary>
+TreeNode* LeetCodeTree::findTreeNode(TreeNode* root, int value)
+{
+    vector<TreeNode*> stack;
+    // push the root first
+    if (root != nullptr)
+    {
+        stack.push_back(root);
+    }
+    while (!stack.empty())
+    {
+        TreeNode* node = stack.back();
+        if (node->val == value) return node;
+        stack.pop_back();
+
+        if (node != NULL)
+        {
+            if (node->left != NULL)
+            {
+                stack.push_back(node->left);
+            }
+            if (node->right != NULL)
+            {
+                stack.push_back(node->right);
+            }
+        }
+    }
+    return nullptr;
+}
+
+/// <summary>
+/// Free tree nodes
+/// </summary>
+void LeetCodeTree::freeTreeNodes(TreeNode* root)
+{
+    vector<TreeNode*> stack;
+    // push the root first
+    if (root != nullptr)
+    {
+        stack.push_back(root);
+    }
+    while (!stack.empty())
+    {
+        TreeNode* node = stack.back();
+        stack.pop_back();
+
+        if (node != NULL)
+        {
+            if (node->left != NULL)
+            {
+                stack.push_back(node->left);
+            }
+            if (node->right != NULL)
+            {
+                stack.push_back(node->right);
+            }
+
+            delete node;
+        }
+    }
+}
+
 /// <summary>
 /// Free link tree nodes
 /// </summary>
@@ -428,7 +493,7 @@ vector<vector<int>> LeetCodeTree::levelOrder(TreeNode* root)
 ///   [15,7]
 /// ]
 /// </summary>
-vector<vector<int>> LeetCode::zigzagLevelOrder(TreeNode* root)
+vector<vector<int>> LeetCodeTree::zigzagLevelOrder(TreeNode* root)
 {
     deque<int> level;
     vector<vector<int>> result;
@@ -536,7 +601,7 @@ vector<vector<int>> LeetCodeTree::levelOrderBottom(TreeNode* root)
 /// The minimum depth is the number of nodes along the shortest path from the 
 /// root node down to the nearest leaf node.
 /// </summary>
-int LeetCode::minDepth(TreeNode* root)
+int LeetCodeTree::minDepth(TreeNode* root)
 {
     int level = 0;
     queue<TreeNode *> node_queue;
@@ -575,7 +640,7 @@ int LeetCode::minDepth(TreeNode* root)
 /// The maximum depth is the number of nodes along the longest path from the 
 /// root node down to the farthest leaf node.
 /// </summary>
-int LeetCode::maxDepth(TreeNode* root)
+int LeetCodeTree::maxDepth(TreeNode* root)
 {
     int level = 0;
     queue<TreeNode *> node_queue;
@@ -607,7 +672,7 @@ int LeetCode::maxDepth(TreeNode* root)
 /// <summary>
 /// Leet code #257. Binary Tree Paths  
 /// </summary>
-void LeetCode::binaryTreePaths(TreeNode* root, vector<int>&path, vector<string>&result)
+void LeetCodeTree::binaryTreePaths(TreeNode* root, vector<int>&path, vector<string>&result)
 {
     if (root == nullptr)
     {
@@ -641,7 +706,7 @@ void LeetCode::binaryTreePaths(TreeNode* root, vector<int>&path, vector<string>&
 /// All root-to-leaf paths are: 
 /// ["1->2->5", "1->3"]
 /// </summary>
-vector<string> LeetCode::binaryTreePaths(TreeNode* root)
+vector<string> LeetCodeTree::binaryTreePaths(TreeNode* root)
 {
     vector<string> result;
     vector<int> path;
@@ -668,7 +733,7 @@ vector<string> LeetCode::binaryTreePaths(TreeNode* root)
 /// Google: 90% of our engineers use the software you wrote (Homebrew), 
 /// but you can’t invert a binary tree on a whiteboard so fuck off.	
 /// </summary>
-TreeNode* LeetCode::invertTree(TreeNode* root)
+TreeNode* LeetCodeTree::invertTree(TreeNode* root)
 {
     queue<TreeNode *> node_queue;
     if (root != nullptr)
@@ -708,7 +773,7 @@ TreeNode* LeetCode::invertTree(TreeNode* root)
 ///    5     4       <---
 /// You should return [1, 3, 4]. 
 /// </summary> 
-vector<int> LeetCode::rightSideView(TreeNode* root)
+vector<int> LeetCodeTree::rightSideView(TreeNode* root)
 {
     vector<int> result;
     queue<TreeNode*> tree_queue;
@@ -754,7 +819,7 @@ vector<int> LeetCode::rightSideView(TreeNode* root)
 ///  2   3
 /// Binary tree [1,2,3], return false. 
 /// </summary> 
-bool LeetCode::isValidBST(TreeNode* root)
+bool LeetCodeTree::isValidBST(TreeNode* root)
 {
     vector<int> value_list;
     stack<TreeNode *> search_stack;
@@ -814,7 +879,7 @@ bool LeetCode::isValidBST(TreeNode* root)
 /// "9,#,#,1"
 /// Return false
 /// </summary>
-bool LeetCode::isValidPreorderSerialization(string preorder)
+bool LeetCodeTree::isValidPreorderSerialization(string preorder)
 {
     vector<string> tree_stack;
     string node;
@@ -847,7 +912,7 @@ bool LeetCode::isValidPreorderSerialization(string preorder)
 /// <summary>
 /// Leet code #110. Balanced Binary Tree
 /// </summary>
-bool LeetCode::isBalanced(TreeNode* root, int& depth)
+bool LeetCodeTree::isBalanced(TreeNode* root, int& depth)
 {
     if (root == nullptr)
     {
@@ -887,7 +952,7 @@ bool LeetCode::isBalanced(TreeNode* root, int& depth)
 /// tree in which the depth of the 
 /// two subtrees of every node never differ by more than 1. 
 /// </summary>
-bool LeetCode::isBalanced(TreeNode* root)
+bool LeetCodeTree::isBalanced(TreeNode* root)
 {
     int depth;
     return isBalanced(root, depth);
@@ -896,7 +961,7 @@ bool LeetCode::isBalanced(TreeNode* root)
 /// <summary>
 /// Leet code #236. Lowest Common Ancestor of a Binary Tree
 /// </summary>
-int LeetCode::lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q, 
+int LeetCodeTree::lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q, 
     TreeNode* &result)
 {
     int count = 0;
@@ -934,7 +999,7 @@ int LeetCode::lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q,
 /// Another example is LCA of nodes 5 and 4 is 5, 
 ///  since a node can be a descendant of itself according to the LCA definition.
 /// </summary>
-TreeNode* LeetCode::lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)
+TreeNode* LeetCodeTree::lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)
 {
     TreeNode * result = nullptr;
     int count = lowestCommonAncestor(root, p, q, result);
@@ -957,7 +1022,7 @@ TreeNode* LeetCode::lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* 
 /// For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another example is LCA of nodes 2 and 4 is 2, 
 /// since a node can be a descendant of itself according to the LCA definition.
 /// </summary>
-TreeNode* LeetCode::lowestCommonAncestorBST(TreeNode* root, TreeNode* p, TreeNode* q)
+TreeNode* LeetCodeTree::lowestCommonAncestorBST(TreeNode* root, TreeNode* p, TreeNode* q)
 {
     while (true)
     {
@@ -1054,7 +1119,7 @@ void LeetCodeTree::flatten(TreeNode* root)
 ///    7    2      1
 /// return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
 /// </summary>
-bool LeetCode::hasPathSum(TreeNode* root, int sum)
+bool LeetCodeTree::hasPathSum(TreeNode* root, int sum)
 {
     if (root == nullptr) return false;
     if (root != nullptr)
@@ -1078,7 +1143,7 @@ bool LeetCode::hasPathSum(TreeNode* root, int sum)
 /// <summary>
 /// Leet code #113. Path Sum II
 /// </summary>
-void LeetCode::pathSum(TreeNode* root, int sum, vector<int>&path, vector<vector<int>> &result)
+void LeetCodeTree::pathSum(TreeNode* root, int sum, vector<int>&path, vector<vector<int>> &result)
 {
     if (root == nullptr)
     {
@@ -1116,7 +1181,7 @@ void LeetCode::pathSum(TreeNode* root, int sum, vector<int>&path, vector<vector<
 ///   [5,8,4,5]
 /// ]
 /// </summary>
-vector<vector<int>> LeetCode::pathSum(TreeNode* root, int sum)
+vector<vector<int>> LeetCodeTree::pathSum(TreeNode* root, int sum)
 {
     vector<int>path;
     vector<vector<int>> result;
@@ -1189,7 +1254,7 @@ int LeetCode::pathSumIII(TreeNode* root, int sum)
 /// The root-to-leaf path 1->3 represents the number 13.
 /// Return the sum = 12 + 13 = 25.
 /// </summary>
-int LeetCode::sumNumbers(TreeNode* root)
+int LeetCodeTree::sumNumbers(TreeNode* root)
 {
     int result = 0;
     vector<pair<TreeNode *, int>> tree_list;
@@ -1436,7 +1501,7 @@ bool LeetCodeTree::isSameTree(TreeNode* p, TreeNode* q)
 /// <summary>
 /// Find the two disordered nodes in the binary search tree 
 /// </summary>
-void LeetCode::recoverTree(TreeNode* root, TreeNode* &min_node, TreeNode* &max_node,
+void LeetCodeTree::recoverTree(TreeNode* root, TreeNode* &min_node, TreeNode* &max_node,
     TreeNode* &first, TreeNode* &second)
 {
     if (root == nullptr) return;
@@ -1487,7 +1552,7 @@ void LeetCode::recoverTree(TreeNode* root, TreeNode* &min_node, TreeNode* &max_n
 /// A solution using O(n) space is pretty straight forward. Could you devise 
 /// a constant space solution?
 /// </summary>
-void LeetCode::recoverTree(TreeNode* root)
+void LeetCodeTree::recoverTree(TreeNode* root)
 {
     TreeNode *min_node = nullptr, *max_node = nullptr;
     TreeNode *first = nullptr, *second = nullptr;
@@ -1501,7 +1566,7 @@ void LeetCode::recoverTree(TreeNode* root)
 /// <summary>
 /// Find the two disordered nodes in the binary search tree 
 /// </summary>
-void LeetCode::recoverTreeII(TreeNode* root, TreeNode* &prev,
+void LeetCodeTree::recoverTreeII(TreeNode* root, TreeNode* &prev,
     TreeNode* &first, TreeNode* &second)
 {
     if (root == nullptr) return;
@@ -1532,7 +1597,7 @@ void LeetCode::recoverTreeII(TreeNode* root, TreeNode* &prev,
 /// A solution using O(n) space is pretty straight forward. 
 /// Could you devise a constant space solution?
 /// </summary>
-void LeetCode::recoverTreeII(TreeNode* root)
+void LeetCodeTree::recoverTreeII(TreeNode* root)
 {
     TreeNode *prev = nullptr, *first = nullptr, *second = nullptr;
     recoverTreeII(root, prev, first, second);
@@ -1560,7 +1625,7 @@ void LeetCode::recoverTreeII(TreeNode* root)
 /// Note:
 /// Bonus points if you could solve it both recursively and iteratively.
 /// </summary>
-bool LeetCode::isSymmetric(TreeNode* root)
+bool LeetCodeTree::isSymmetric(TreeNode* root)
 {
     vector<TreeNode*> tree_list;
     queue<TreeNode*> tree_queue;
@@ -3991,7 +4056,8 @@ TreeNode* LeetCode::constructMaximumBinaryTree(vector<int>& nums)
 /// <summary>
 /// Leet code #655. Print Binary Tree
 /// </summary>
-void LeetCode::printTree(TreeNode* root, vector<vector<string>> &matrix, int row, int col, int window)
+void LeetCodeTree::printTree(TreeNode* root, vector<vector<string>> &matrix, 
+    int row, int col, int window)
 {
     if (root == nullptr) return;
     matrix[row][col] = to_string(root->val);
@@ -4061,7 +4127,7 @@ void LeetCode::printTree(TreeNode* root, vector<vector<string>> &matrix, int row
 /// ["4", "",  "", "",  "", "", "", "",  "",  "",  "",  "",  "", "", ""]]
 /// 1. Note: The height of binary tree is in the range of [1, 10].
 /// </summary>
-vector<vector<string>> LeetCode::printTree(TreeNode* root)
+vector<vector<string>> LeetCodeTree::printTree(TreeNode* root)
 {
     int rows = maxDepth(root);
     int columns = (int)pow(2, rows) - 1;
@@ -6371,7 +6437,7 @@ TreeNode* LeetCode::insertIntoMaxTree(TreeNode* root, int val)
 /// <summary>
 /// Leet code #1008. Construct Binary Search Tree from Preorder Traversal
 /// </summary>
-TreeNode* LeetCode::bstFromPreorder(TreeNode *root, stack<TreeNode*> &left_path, 
+TreeNode* LeetCodeTree::bstFromPreorder(TreeNode *root, stack<TreeNode*> &left_path, 
     vector<int>& preorder, size_t& index)
 {
     if (index >= preorder.size()) return root;
@@ -6430,7 +6496,7 @@ TreeNode* LeetCode::bstFromPreorder(TreeNode *root, stack<TreeNode*> &left_path,
 /// 1. 1 <= preorder.length <= 100
 /// 2. The values of preorder are distinct.
 /// </summary>
-TreeNode* LeetCode::bstFromPreorder(vector<int>& preorder)
+TreeNode* LeetCodeTree::bstFromPreorder(vector<int>& preorder)
 {
     stack<TreeNode *> left_path;
     TreeNode * root = nullptr;
@@ -6442,7 +6508,7 @@ TreeNode* LeetCode::bstFromPreorder(vector<int>& preorder)
 /// <summary>
 /// Leet code #1022. Sum of Root To Leaf Binary Numbers
 /// </summary>
-int LeetCode::sumRootToLeaf(TreeNode* root, int value, int &result)
+int LeetCodeTree::sumRootToLeaf(TreeNode* root, int value, int &result)
 {
     if (root == nullptr) return result;
     if (root->left == nullptr && root->right == nullptr)
@@ -6491,7 +6557,7 @@ int LeetCode::sumRootToLeaf(TreeNode* root, int value, int &result)
 /// 2. node.val is 0 or 1.
 /// 3. The answer will not exceed 2^31 - 1.
 /// </summary>
-int LeetCode::sumRootToLeaf(TreeNode* root)
+int LeetCodeTree::sumRootToLeaf(TreeNode* root)
 {
     int value = 0;
     int result = 0;
@@ -6502,7 +6568,7 @@ int LeetCode::sumRootToLeaf(TreeNode* root)
 /// <summary>
 /// Leet code #1026. Maximum Difference Between Node and Ancestor
 /// </summary>
-int LeetCode::maxAncestorDiff(TreeNode* root, int min_val, int max_val, int& result)
+int LeetCodeTree::maxAncestorDiff(TreeNode* root, int min_val, int max_val, int& result)
 {
     if (root == nullptr) return result;
     result = max(result, abs(root->val - min_val));
@@ -6541,7 +6607,7 @@ int LeetCode::maxAncestorDiff(TreeNode* root, int min_val, int max_val, int& res
 /// 1. The number of nodes in the tree is between 2 and 5000.
 /// 2. Each node will have value between 0 and 100000.
 /// </summary>
-int LeetCode::maxAncestorDiff(TreeNode* root)
+int LeetCodeTree::maxAncestorDiff(TreeNode* root)
 {
     int result = 0;
     maxAncestorDiff(root, root->val, root->val, result);
@@ -6552,7 +6618,7 @@ int LeetCode::maxAncestorDiff(TreeNode* root)
 /// <summary>
 /// Leet code #1028. Recover a Tree From Preorder Traversal
 /// </summary>
-TreeNode* LeetCode::recoverFromPreorder(TreeNode * root, int curr_depth, int& child_depth,
+TreeNode* LeetCodeTree::recoverFromPreorder(TreeNode * root, int curr_depth, int& child_depth,
     int& child_val, string S, size_t &index)
 {
     while (true)
@@ -6640,7 +6706,7 @@ TreeNode* LeetCode::recoverFromPreorder(TreeNode * root, int curr_depth, int& ch
 /// 1. The number of nodes in the original tree is between 1 and 1000. 
 /// 2. Each node will have a value between 1 and 10^9.
 /// </summary>
-TreeNode* LeetCode::recoverFromPreorder(string S)
+TreeNode* LeetCodeTree::recoverFromPreorder(string S)
 {
     TreeNode * root = nullptr;
     int child_depth = -1;
@@ -6653,7 +6719,7 @@ TreeNode* LeetCode::recoverFromPreorder(string S)
 /// <summary>
 /// Leet code #1038. Binary Search Tree to Greater Sum Tree
 /// </summary>
-void LeetCode::bstToGst(TreeNode* root, int &sum)
+void LeetCodeTree::bstToGst(TreeNode* root, int &sum)
 {
     if (root == nullptr) return;
     bstToGst(root->right, sum);
@@ -6678,32 +6744,29 @@ void LeetCode::bstToGst(TreeNode* root, int &sum)
 /// the node's key.
 /// Both the left and right subtrees must also be binary search trees.
 /// 
-///
 /// Example 1:
 /// 
 ///
 /// Input: [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]
 /// Output: [30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]
 /// 
-///
 /// Note:
 ///
 /// 1. The number of nodes in the tree is between 1 and 100.
 /// 2. Each node will have value between 0 and 100.
 /// 3. The given tree is a binary search tree.
 /// </summary>
-TreeNode* LeetCode::bstToGst(TreeNode* root)
+TreeNode* LeetCodeTree::bstToGst(TreeNode* root)
 {
     int sum = 0;
     bstToGst(root, sum);
     return root;
 }
 
-
 /// <summary>
 /// Leet code #1080. Insufficient Nodes in Root to Leaf Paths
 /// </summary>
-TreeNode* LeetCode::sufficientSubset(TreeNode* root, int limit, int sum)
+TreeNode* LeetCodeTree::sufficientSubset(TreeNode* root, int limit, int sum)
 {
     if (root == nullptr) return root;
     sum += root->val;
@@ -6760,7 +6823,7 @@ TreeNode* LeetCode::sufficientSubset(TreeNode* root, int limit, int sum)
 /// 2. -10^5 <= node.val <= 10^5
 /// 3. -10^9 <= limit <= 10^9
 /// </summary>
-TreeNode* LeetCode::sufficientSubset(TreeNode* root, int limit)
+TreeNode* LeetCodeTree::sufficientSubset(TreeNode* root, int limit)
 {
     int sum = 0;
     root = sufficientSubset(root, limit, sum);
@@ -6792,7 +6855,7 @@ TreeNode* LeetCode::sufficientSubset(TreeNode* root, int limit)
 ///
 /// 1. 1 <= label <= 10^6
 /// </summary>
-vector<int> LeetCode::pathInZigZagTree(int label)
+vector<int> LeetCodeTree::pathInZigZagTree(int label)
 {
     int sum = 1;
     int level = 1;
@@ -6826,7 +6889,7 @@ vector<int> LeetCode::pathInZigZagTree(int label)
 /// <summary>
 /// Leet code #1110. Delete Nodes And Return Forest
 /// </summary>
-TreeNode* LeetCode::delNodes(TreeNode* root, vector<int>& del_bit, vector<TreeNode*> &result)
+TreeNode* LeetCodeTree::delNodes(TreeNode* root, vector<int>& del_bit, vector<TreeNode*> &result)
 {
     if (root == nullptr) return root;
     root->left = delNodes(root->left, del_bit, result);
@@ -6867,7 +6930,7 @@ TreeNode* LeetCode::delNodes(TreeNode* root, vector<int>& del_bit, vector<TreeNo
 /// 3. to_delete.length <= 1000
 /// 4. to_delete contains distinct values between 1 and 1000.
 /// </summary>
-vector<TreeNode*> LeetCode::delNodes(TreeNode* root, vector<int>& to_delete)
+vector<TreeNode*> LeetCodeTree::delNodes(TreeNode* root, vector<int>& to_delete)
 {
     vector<int> del_bit(1001);
     for (size_t i = 0; i < to_delete.size(); i++)
@@ -6884,7 +6947,7 @@ vector<TreeNode*> LeetCode::delNodes(TreeNode* root, vector<int>& to_delete)
 /// <summary>
 /// Leet code #1120. Maximum Average Subtree
 /// </summary>
-double LeetCode::maximumAverageSubtree(TreeNode* root, double& sum, int& count)
+double LeetCodeTree::maximumAverageSubtree(TreeNode* root, double& sum, int& count)
 {
     if (root == nullptr)
     {
@@ -6929,7 +6992,7 @@ double LeetCode::maximumAverageSubtree(TreeNode* root, double& sum, int& count)
 /// 3. Answers will be accepted as correct if they are within 10^-5 of the 
 ///    correct answer.
 /// </summary>
-double LeetCode::maximumAverageSubtree(TreeNode* root)
+double LeetCodeTree::maximumAverageSubtree(TreeNode* root)
 {
     double sum = 0.0;
     int count = 0;
@@ -6940,7 +7003,7 @@ double LeetCode::maximumAverageSubtree(TreeNode* root)
 /// <summary>
 /// Leet code #1123. Lowest Common Ancestor of Deepest Leaves
 /// </summary>
-TreeNode* LeetCode::lcaDeepestLeaves(TreeNode* root, int& depth)
+TreeNode* LeetCodeTree::lcaDeepestLeaves(TreeNode* root, int& depth)
 {
     if (root == nullptr) return root;
     depth++;
@@ -6999,7 +7062,7 @@ TreeNode* LeetCode::lcaDeepestLeaves(TreeNode* root, int& depth)
 /// 1. The given tree will have between 1 and 1000 nodes.
 /// 2. Each node of the tree will have a distinct value between 1 and 1000.
 /// </summary>
-TreeNode* LeetCode::lcaDeepestLeaves(TreeNode* root)
+TreeNode* LeetCodeTree::lcaDeepestLeaves(TreeNode* root)
 {
     int depth = 0;
     return lcaDeepestLeaves(root, depth);
@@ -7008,7 +7071,7 @@ TreeNode* LeetCode::lcaDeepestLeaves(TreeNode* root)
 /// <summary>
 /// Leet code #1145. Binary Tree Coloring Game
 /// </summary>
-int LeetCode::btreeGameWinningMove(TreeNode* root, int &curr, int &left, int &right, int x)
+int LeetCodeTree::btreeGameWinningMove(TreeNode* root, int &curr, int &left, int &right, int x)
 {
     if (root == nullptr) return 0;
 
@@ -7064,7 +7127,7 @@ int LeetCode::btreeGameWinningMove(TreeNode* root, int &curr, int &left, int &ri
 /// 2. n is odd.
 /// 3. 1 <= x <= n <= 100
 /// </summary>
-bool LeetCode::btreeGameWinningMove(TreeNode* root, int n, int x)
+bool LeetCodeTree::btreeGameWinningMove(TreeNode* root, int n, int x)
 {
     int curr = 0;
     int left = 0;
@@ -7102,7 +7165,7 @@ bool LeetCode::btreeGameWinningMove(TreeNode* root, int n, int x)
 /// 1. The number of nodes in the given tree is between 1 and 10^4.
 /// 2. -10^5 <= node.val <= 10^5
 /// </summary>
-int LeetCode::maxLevelSum(TreeNode* root)
+int LeetCodeTree::maxLevelSum(TreeNode* root)
 {
     int max_sum = INT_MIN;
     queue<TreeNode*> search;
@@ -7396,38 +7459,6 @@ string LeetCode::serialize(TreeNode* root)
         }
     }
     return "[" + result + "]";
-}
-
-/// <summary>
-/// Free tree nodes
-/// </summary>
-void LeetCodeTree::freeTreeNodes(TreeNode* root)
-{
-    vector<TreeNode*> stack;
-    // push the root first
-    if (root != nullptr)
-    {
-        stack.push_back(root);
-    }
-    while (!stack.empty())
-    {
-        TreeNode* node = stack.back();
-        stack.pop_back();
-
-        if (node != NULL)
-        {
-            if (node->left != NULL)
-            {
-                stack.push_back(node->left);
-            }
-            if (node->right != NULL)
-            {
-                stack.push_back(node->right);
-            }
-
-            delete node;
-        }
-    }
 }
 
 /// <summary>
