@@ -1192,7 +1192,7 @@ vector<vector<int>> LeetCodeTree::pathSum(TreeNode* root, int sum)
 /// <summary>
 /// Preorder traverse with the path passed on the way to check the sum.
 /// </summary>
-int LeetCode::pathSumIII(TreeNode* root, vector<int>& path, int sum)
+int LeetCodeTree::pathSumIII(TreeNode* root, vector<int>& path, int sum)
 {
     int count = 0;
     if (root == nullptr) return 0;
@@ -1235,7 +1235,7 @@ int LeetCode::pathSumIII(TreeNode* root, vector<int>& path, int sum)
 /// 2.  5 -> 2 -> 1
 /// 3. -3 -> 11
 /// </summary>
-int LeetCode::pathSumIII(TreeNode* root, int sum)
+int LeetCodeTree::pathSumIII(TreeNode* root, int sum)
 {
     vector<int> path;
     return pathSumIII(root, path, sum);
@@ -1759,7 +1759,7 @@ TreeNode* LeetCodeTree::sortedListToBST(ListNode* head)
 ///    15   7 
 /// There are two left leaves in the binary tree, with values 9 and 15 respectively. Return 24.
 /// </summary>
-int LeetCode::sumOfLeftLeaves(TreeNode* root)
+int LeetCodeTree::sumOfLeftLeaves(TreeNode* root)
 {
     queue<TreeNode*> tree_queue;
     tree_queue.push(root);
@@ -1786,7 +1786,7 @@ int LeetCode::sumOfLeftLeaves(TreeNode* root)
 /// <summary>
 /// Leet code #124. Binary Tree Maximum Path Sum
 /// </summary>
-void LeetCode::maxPathSum(TreeNode* root, int &max_path_sum, int&max_path_loop)
+void LeetCodeTree::maxPathSum(TreeNode* root, int &max_path_sum, int&max_path_loop)
 {
     if (root == nullptr)
     {
@@ -1809,7 +1809,8 @@ void LeetCode::maxPathSum(TreeNode* root, int &max_path_sum, int&max_path_loop)
 }
 
 /// <summary>
-/// Leet code #124. Binary Tree Maximum Path Sum  
+/// Leet code #124. Binary Tree Maximum Path Sum 
+///
 /// Given a binary tree, find the maximum path sum. 
 /// For this problem, a path is defined as any sequence of nodes from some 
 /// starting node to any node in the tree along the parent-child connections. 
@@ -1822,10 +1823,10 @@ void LeetCode::maxPathSum(TreeNode* root, int &max_path_sum, int&max_path_loop)
 ///   2   3
 /// Return 6.
 /// Explanation:
-/// The max_path must come from the left direct path + self, the right direct path + self
-/// and the maximum left loop path and maximum right loop path. 
+/// The max_path must come from the left direct path + self, the right direct 
+/// path + self and the maximum left loop path and maximum right loop path. 
 /// </summary>
-int LeetCode::maxPathSum(TreeNode* root)
+int LeetCodeTree::maxPathSum(TreeNode* root)
 {
     int max_path_loop = 0;
     int max_path_sum = 0;
@@ -1836,7 +1837,7 @@ int LeetCode::maxPathSum(TreeNode* root)
 /// <summary>
 /// Leet code #337. House Robber III 
 /// </summary>
-void LeetCode::robIII(TreeNode* root, int& rob_with_root, int& rob_without_root)
+void LeetCodeTree::robIII(TreeNode* root, int& rob_with_root, int& rob_without_root)
 {
     rob_with_root = 0;
     rob_without_root = 0;
@@ -1878,7 +1879,7 @@ void LeetCode::robIII(TreeNode* root, int& rob_with_root, int& rob_without_root)
 ///  1   3   1
 /// Maximum amount of money the thief can rob = 4 + 5 = 9. 
 /// </summary>
-int LeetCode::robIII(TreeNode* root)
+int LeetCodeTree::robIII(TreeNode* root)
 {
     int rob_with_root = 0;
     int rob_without_root = 0;
@@ -2050,7 +2051,7 @@ int LeetCodeTree::countCompleteTreeNodes(TreeNode* root)
 /// <summary>
 /// Return kth smallest node in BST
 /// </summary>
-int LeetCode::findKthSmallest(TreeNode* root, int &k)
+int LeetCodeTree::findKthSmallest(TreeNode* root, int &k)
 {
     if (root == nullptr) return 0;
     int value = findKthSmallest(root->left, k);
@@ -2063,7 +2064,8 @@ int LeetCode::findKthSmallest(TreeNode* root, int &k)
 
 /// <summary>
 /// Leet code #230. Kth Smallest Element in a BST
-/// Given a binary search tree, write a function kthSmallest to find the kth smallest element in it.
+/// Given a binary search tree, write a function kthSmallest to find the kth 
+/// smallest element in it.
 /// Note: 
 /// You may assume k is always valid, 1 ≤ k ≤ BST's total elements.
 /// Follow up:
@@ -2074,7 +2076,7 @@ int LeetCode::findKthSmallest(TreeNode* root, int &k)
 /// What if you could modify the BST node's structure?
 /// The optimal runtime complexity is O(height of BST).
 /// </summary>
-int LeetCode::kthSmallest(TreeNode* root, int k)
+int LeetCodeTree::kthSmallest(TreeNode* root, int k)
 {
     return findKthSmallest(root, k);
 }
@@ -2111,7 +2113,7 @@ int LeetCode::kthSmallest(TreeNode* root, int k)
 ///    \   \
 ///     4   7
 /// </summary>
-TreeNode* LeetCode::deleteNode(TreeNode* root, int key)
+TreeNode* LeetCodeTree::deleteNode(TreeNode* root, int key)
 {
     if (root == nullptr) return nullptr;
     if (root->val < key)
@@ -2153,7 +2155,7 @@ TreeNode* LeetCode::deleteNode(TreeNode* root, int key)
 /// <summary>
 /// Leet code #366. Find Leaves of Binary Tree      
 /// </summary>
-int LeetCode::findLeaves(TreeNode* root, vector<vector<int>> &result)
+int LeetCodeTree::findLeaves(TreeNode* root, vector<vector<int>> &result)
 {
     if (root == nullptr) return 0;
     int left_depth = 0;
@@ -2202,7 +2204,7 @@ int LeetCode::findLeaves(TreeNode* root, vector<vector<int>> &result)
 ///
 /// Returns [4, 5, 3], [2], [1]. 
 /// </summary>
-vector<vector<int>> LeetCode::findLeaves(TreeNode* root)
+vector<vector<int>> LeetCodeTree::findLeaves(TreeNode* root)
 {
     vector<vector<int>> result;
     findLeaves(root, result);
@@ -2211,9 +2213,8 @@ vector<vector<int>> LeetCode::findLeaves(TreeNode* root)
 
 /// <summary>
 /// Leet code #156. Binary Tree Upside Down  
-/// 
 /// </summary>
-void LeetCode::upsideDownBinaryTree(TreeNode* &root, TreeNode* &right)
+void LeetCodeTree::upsideDownBinaryTree(TreeNode* &root, TreeNode* &right)
 {
     if (root == nullptr) return;
     if (root->left == nullptr)
@@ -2255,7 +2256,7 @@ void LeetCode::upsideDownBinaryTree(TreeNode* &root, TreeNode* &right)
 ///      / \
 ///     3   1  
 /// </summary>
-TreeNode* LeetCode::upsideDownBinaryTree(TreeNode* root)
+TreeNode* LeetCodeTree::upsideDownBinaryTree(TreeNode* root)
 {
     TreeNode * right;
     upsideDownBinaryTree(root, right);
@@ -2265,7 +2266,7 @@ TreeNode* LeetCode::upsideDownBinaryTree(TreeNode* root)
 /// <summary>
 /// Leet code #250. Count Univalue Subtrees  
 /// </summary>
-bool LeetCode::countUnivalSubtrees(TreeNode* root, int& value, int& count)
+bool LeetCodeTree::countUnivalSubtrees(TreeNode* root, int& value, int& count)
 {
     if (root == nullptr) return true;
     int left_value = 0, left_count = 0;
@@ -2318,7 +2319,7 @@ bool LeetCode::countUnivalSubtrees(TreeNode* root, int& value, int& count)
 ///
 /// return 4. 
 /// </summary>
-int LeetCode::countUnivalSubtrees(TreeNode* root)
+int LeetCodeTree::countUnivalSubtrees(TreeNode* root)
 {
     int value = 0;
     int count = 0;
@@ -2329,7 +2330,7 @@ int LeetCode::countUnivalSubtrees(TreeNode* root)
 /// <summary>
 /// Leet code #298. Binary Tree Longest Consecutive Sequence  
 /// </summary>
-int LeetCode::longestConsecutive(TreeNode* root, int& max_length)
+int LeetCodeTree::longestConsecutive(TreeNode* root, int& max_length)
 {
     if (root == nullptr)
     {
@@ -2398,7 +2399,7 @@ int LeetCode::longestConsecutive(TreeNode* root, int& max_length)
 ///
 /// Longest consecutive sequence path is 2-3,not3-2-1, so return 2. 
 /// </summary>
-int LeetCode::longestConsecutive(TreeNode* root)
+int LeetCodeTree::longestConsecutive(TreeNode* root)
 {
     int max_length = 0;
     longestConsecutive(root, max_length);
@@ -2414,7 +2415,7 @@ int LeetCode::longestConsecutive(TreeNode* root)
 /// Follow up:
 /// Could you do it using only constant space complexity?
 /// </summary>
-bool LeetCode::verifyPreorder(vector<int>& preorder, int start, int end)
+bool LeetCodeTree::verifyPreorder(vector<int>& preorder, int start, int end)
 {
     if (start >= end) return true;
     int root_value = preorder[start];
@@ -2454,7 +2455,7 @@ bool LeetCode::verifyPreorder(vector<int>& preorder, int start, int end)
 /// Follow up:
 /// Could you do it using only constant space complexity?
 /// </summary>
-bool LeetCode::verifyPreorder(vector<int>& preorder)
+bool LeetCodeTree::verifyPreorder(vector<int>& preorder)
 {
     return verifyPreorder(preorder, 0, preorder.size());
 }
@@ -2513,7 +2514,7 @@ bool LeetCode::verifyPreorder(vector<int>& preorder)
 ///  [7]
 /// ]
 /// </summary>
-vector<vector<int>> LeetCode::verticalOrder(TreeNode* root)
+vector<vector<int>> LeetCodeTree::verticalOrder(TreeNode* root)
 {
     vector<vector<int>> result;
     // since index can be negative, use map to remember it
@@ -2543,7 +2544,7 @@ vector<vector<int>> LeetCode::verticalOrder(TreeNode* root)
 /// <summary>
 /// Leet code #333. Largest BST Subtree  
 /// </summary>
-bool LeetCode::checkBSTSubtree(TreeNode* root, int& min_val, int& max_val, int& size)
+bool LeetCodeTree::checkBSTSubtree(TreeNode* root, int& min_val, int& max_val, int& size)
 {
     if (root == nullptr)
     {
@@ -2600,7 +2601,7 @@ bool LeetCode::checkBSTSubtree(TreeNode* root, int& min_val, int& max_val, int& 
 /// Follow up:
 /// Can you figure out ways to solve it with O(n) time complexity? 
 /// </summary>
-int LeetCode::largestBSTSubtree(TreeNode* root)
+int LeetCodeTree::largestBSTSubtree(TreeNode* root)
 {
     int min_val, max_val, size;
     checkBSTSubtree(root, min_val, max_val, size);
@@ -2613,7 +2614,7 @@ int LeetCode::largestBSTSubtree(TreeNode* root)
 /// Given a binary search tree and a node in it, find the in-order successor of that node in the BST. 
 /// Note: If the given node has no in-order successor in the tree, return null. 
 /// </summary>
-TreeNode* LeetCode::inorderSuccessor(TreeNode* root, TreeNode* p)
+TreeNode* LeetCodeTree::inorderSuccessor(TreeNode* root, TreeNode* p)
 {
     stack<TreeNode*> process_stack;
     TreeNode *node = root;
@@ -2643,7 +2644,7 @@ TreeNode* LeetCode::inorderSuccessor(TreeNode* root, TreeNode* p)
 /// <summary>
 /// Leet code #501. Find Mode in Binary Search Tree         
 /// </summary>
-void LeetCode::findMode(TreeNode* root, unordered_map<int, int>& node_map, map<int, unordered_set<int>> &frequency)
+void LeetCodeTree::findMode(TreeNode* root, unordered_map<int, int>& node_map, map<int, unordered_set<int>> &frequency)
 {
     if (root == nullptr) return;
     if (node_map.count(root->val) > 0)
@@ -2679,7 +2680,7 @@ void LeetCode::findMode(TreeNode* root, unordered_map<int, int>& node_map, map<i
 /// Follow up: Could you do that without using any extra space? (Assume that the implicit stack space 
 /// incurred due to recursion does not count). 
 /// </summary>
-vector<int> LeetCode::findMode(TreeNode* root)
+vector<int> LeetCodeTree::findMode(TreeNode* root)
 {
     vector<int> result;
     if (root == nullptr) return result;
@@ -2699,7 +2700,7 @@ vector<int> LeetCode::findMode(TreeNode* root)
 /// <summary>
 /// Leet code #508. Most Frequent Subtree Sum          
 /// </summary>
-int LeetCode::findFrequentTreeSum(TreeNode* root, unordered_map<int, int>& sum_map, map<int, unordered_set<int>> &frequency)
+int LeetCodeTree::findFrequentTreeSum(TreeNode* root, unordered_map<int, int>& sum_map, map<int, unordered_set<int>> &frequency)
 {
     int sum = root->val;
     if (root->left != nullptr)
@@ -2743,7 +2744,7 @@ int LeetCode::findFrequentTreeSum(TreeNode* root, unordered_map<int, int>& sum_m
 /// return [2], since 2 happens twice, however -5 only occur once. 
 /// Note: You may assume the sum of values in any subtree is in the range of 32-bit signed integer. 
 /// </summary>
-vector<int> LeetCode::findFrequentTreeSum(TreeNode* root)
+vector<int> LeetCodeTree::findFrequentTreeSum(TreeNode* root)
 {
     vector<int> result;
     if (root == nullptr) return result;
@@ -2775,7 +2776,7 @@ vector<int> LeetCode::findFrequentTreeSum(TreeNode* root)
 ///
 /// Output: [1, 3, 9]
 /// </summary>
-vector<int> LeetCode::largestValues(TreeNode* root)
+vector<int> LeetCodeTree::largestValues(TreeNode* root)
 {
     vector<int> result;
     queue<TreeNode *> node_queue;
@@ -2835,7 +2836,7 @@ vector<int> LeetCode::largestValues(TreeNode* root)
 /// 7
 /// Note: You may assume the tree (i.e., the given root node) is not NULL. 
 /// </summary>
-int LeetCode::findBottomLeftValue(TreeNode* root)
+int LeetCodeTree::findBottomLeftValue(TreeNode* root)
 {
     int result = 0;
     queue<TreeNode *> node_queue;
@@ -3041,7 +3042,7 @@ vector<int> LeetCode::closestKValues(TreeNode* root, double target, int k)
 /// <summary>
 /// Leet code #530. Minimum Absolute Difference in BST 
 /// </summary>
-int LeetCode::getMinimumDifference(TreeNode* root, vector<int>& inorderList)
+int LeetCodeTree::getMinimumDifference(TreeNode* root, vector<int>& inorderList)
 {
     int min_absolute = INT_MAX;
     if (root == nullptr) return min_absolute;
@@ -3084,7 +3085,7 @@ int LeetCode::getMinimumDifference(TreeNode* root, vector<int>& inorderList)
 /// The minimum absolute difference is 1, which is the difference between 2 and 1 (or between 2 and 3).
 /// Note: There are at least two nodes in this BST.
 /// </summary>
-int LeetCode::getMinimumDifference(TreeNode* root)
+int LeetCodeTree::getMinimumDifference(TreeNode* root)
 {
     vector<int> inorderList;
     return getMinimumDifference(root, inorderList);
@@ -3093,7 +3094,7 @@ int LeetCode::getMinimumDifference(TreeNode* root)
 /// <summary>
 /// Leet code #536. Construct Binary Tree from String
 /// </summary>
-TreeNode* LeetCode::str2tree(string s, size_t& index)
+TreeNode* LeetCodeTree::str2tree(string s, size_t& index)
 {
     TreeNode * root = nullptr;
     string str;
@@ -3152,7 +3153,7 @@ TreeNode* LeetCode::str2tree(string s, size_t& index)
 /// There will only be '(', ')', '-' and '0' ~ '9' in the input string.
 /// An empty tree is represented by "" instead of "()".
 /// </summary>
-TreeNode* LeetCode::str2tree(string s)
+TreeNode* LeetCodeTree::str2tree(string s)
 {
     size_t index = 0;
     return str2tree(s, index);
