@@ -1,5 +1,6 @@
 #include "..\LeetCode\LeetCode.h"
 #include "..\LeetCode\LeetCodeDesign.h"
+#include "..\LeetCode\LeetCodeTree.h"
 #include "TestDesign.h"
 void TestLeetCode146(void)
 {
@@ -1347,6 +1348,8 @@ void TestLeetCode588(void)
 void TestLeetCode1261(void)
 {
     Logger::WriteMessage("Test Leet Code 1261");
+    LeetCodeTree leetCode;
+
     vector<string> commands =
     {
         "FindElements","find","find"
@@ -1362,7 +1365,6 @@ void TestLeetCode1261(void)
     {
         if (commands[i] == "FindElements")
         {
-            LeetCode leetCode;
             TreeNode* root = leetCode.deserialize(data[i]);
             findElements = new FindElements(root);
             result.push_back("null");
@@ -1391,7 +1393,6 @@ void TestLeetCode1261(void)
     {
         if (commands[i] == "FindElements")
         {
-            LeetCode leetCode;
             TreeNode* root = leetCode.deserialize(data[i]);
             findElements = new FindElements(root);
             result.push_back("null");
@@ -1420,7 +1421,6 @@ void TestLeetCode1261(void)
     {
         if (commands[i] == "FindElements")
         {
-            LeetCode leetCode;
             TreeNode* root = leetCode.deserialize(data[i]);
             findElements = new FindElements(root);
             result.push_back("null");
@@ -1838,7 +1838,7 @@ void TestLeetCode1429(void)
 void TestLeetCode173(void)
 {
     Logger::WriteMessage("Test Leet Code 173");
-    LeetCode leetCode;
+    LeetCodeTree leetCode;
     string input = "[4,2,6,1,3,5,7]";
     TreeNode* root = leetCode.deserialize(input);
     BSTIterator iterator(root);
@@ -1851,27 +1851,9 @@ void TestLeetCode173(void)
     leetCode.freeTreeNodes(root);
 }
 
-void TestLeetCode431(void)
-{
-    Logger::WriteMessage("Test Leet Code 431");
-    LeetCode leetCode;
-    NaryTreeCodec  treeCodec;
-    NaryTreeBinaryCodec b_treeCodec;
-    string input = "[1 [3[5 6] 2 4]]";
-    Logger::WriteMessage(input);
-    Node* root = treeCodec.deserialize(input);
-    TreeNode* b_tree = b_treeCodec.encode(root);
-    Node* nary_tree = b_treeCodec.decode(b_tree);
-    string output = treeCodec.serialize(nary_tree);
-    Logger::WriteMessage(output);
-    leetCode.freeNodes(root);
-    leetCode.freeTreeNodes(b_tree);
-    leetCode.freeNodes(nary_tree);
-}
 
 void TestLeetCodeDesign(void)
 {
-    TestLeetCode431();
     TestLeetCode173();
     TestLeetCode1429();
     TestLeetCode1428();

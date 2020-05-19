@@ -21,6 +21,26 @@
 #pragma region BinaryTree
 
 /// <summary>
+/// Free nodes
+/// </summary>
+void LeetCodeTree::freeNodes(Node* root)
+{
+    queue<Node*> search;
+    search.push(root);
+    while (!search.empty())
+    {
+        Node* node = search.front();
+        search.pop();
+        if (node == nullptr) break;
+        for (auto child : node->children)
+        {
+            if (child == nullptr) search.push(child);
+        }
+        delete node;
+    }
+}
+
+/// <summary>
 /// Find a tree node with value
 /// </summary>
 TreeNode* LeetCodeTree::findTreeNode(TreeNode* root, int value)
@@ -383,6 +403,76 @@ std::vector<int> LeetCodeTree::inorderTraversal(TreeNode* root)
         }
     }
     return outputList;
+}
+
+/// <summary>
+/// Generate tree based on id list.
+/// </summary>
+vector<TreeNode*> LeetCodeTree::generateTrees(vector<int>& id_list)
+{
+    vector<TreeNode*> result;
+    if (id_list.size() == 0)
+    {
+        result.push_back(nullptr);
+        return result;
+    }
+    if (id_list.size() == 1)
+    {
+        result.push_back(new TreeNode(id_list[0]));
+        return result;
+    }
+    for (size_t i = 0; i < id_list.size(); i++)
+    {
+        vector<int> left;
+        vector<int> right;
+        for (size_t j = 0; j < i; j++)
+        {
+            left.push_back(id_list[j]);
+        }
+        for (size_t j = i + 1; j < id_list.size(); j++)
+        {
+            right.push_back(id_list[j]);
+        }
+        vector<TreeNode*> left_list = generateTrees(left);
+        vector<TreeNode*> right_list = generateTrees(right);
+        for (size_t l = 0; l < left_list.size(); l++)
+        {
+            for (size_t r = 0; r < right_list.size(); r++)
+            {
+                TreeNode* root = new TreeNode(id_list[i]);
+                root->left = left_list[l];
+                root->right = right_list[r];
+                result.push_back(root);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #95. Unique Binary Search Trees II     
+/// Given an integer n, generate all structurally unique BST's (binary search trees) that store values 1...n.  
+/// For example,
+/// Given n = 3, there are a total of 5 unique BST's.
+///   1         3     3      2      1
+///    \       /     /      / \      \
+///     3     2     1      1   3      2
+///    /     /       \                 \
+///   2     1         2                 3
+/// </summary>
+vector<TreeNode*> LeetCodeTree::generateTrees(int n)
+{
+    vector<TreeNode*> result;
+    if (n > 0)
+    {
+        vector<int> id_list;
+        for (int i = 0; i < n; i++)
+        {
+            id_list.push_back(i + 1);
+        }
+        result = generateTrees(id_list);
+    }
+    return result;
 }
 
 /// <summary>
@@ -2879,7 +2969,7 @@ int LeetCodeTree::findBottomLeftValue(TreeNode* root)
 /// Given target value is a floating point.
 /// You are guaranteed to have only one unique value in the BST that is closest to the target.
 /// </summary>
-int LeetCode::closestValue(TreeNode* root, double target)
+int LeetCodeTree::closestValue(TreeNode* root, double target)
 {
     TreeNode * left = nullptr, *right = nullptr;
     TreeNode * node = root;
@@ -2929,7 +3019,7 @@ int LeetCode::closestValue(TreeNode* root, double target)
 /// <summary>
 /// Leet code #272. Closest Binary Search Tree Value II   
 /// </summary>
-vector<int> LeetCode::getPredecessor(stack<TreeNode*> left_stack, int k)
+vector<int> LeetCodeTree::getPredecessor(stack<TreeNode*> left_stack, int k)
 {
     vector<int> result;
     while (!left_stack.empty())
@@ -2952,7 +3042,7 @@ vector<int> LeetCode::getPredecessor(stack<TreeNode*> left_stack, int k)
 /// <summary>
 /// Leet code #272. Closest Binary Search Tree Value II   
 /// </summary>
-vector<int> LeetCode::getSuccessor(stack<TreeNode*> right_stack, int k)
+vector<int> LeetCodeTree::getSuccessor(stack<TreeNode*> right_stack, int k)
 {
     vector<int> result;
     while (!right_stack.empty())
@@ -2990,7 +3080,7 @@ vector<int> LeetCode::getSuccessor(stack<TreeNode*> right_stack, int k)
 /// 3.Without parent pointer we just need to keep track of the path from the root to the current node using a stack.
 /// 4.You would need two stacks to track the path in finding predecessor and successor node separately.
 /// </summary>
-vector<int> LeetCode::closestKValues(TreeNode* root, double target, int k)
+vector<int> LeetCodeTree::closestKValues(TreeNode* root, double target, int k)
 {
     vector<int> result;
     stack<TreeNode*> left_stack;
@@ -3162,7 +3252,7 @@ TreeNode* LeetCodeTree::str2tree(string s)
 /// <summary>
 /// Leet code #545. Boundary of Binary Tree       
 /// </summary>
-void LeetCode::findLeftBoundary(TreeNode* root, vector<int> &leftBoundary)
+void LeetCodeTree::findLeftBoundary(TreeNode* root, vector<int> &leftBoundary)
 {
     if (root == nullptr) return;
     leftBoundary.push_back(root->val);
@@ -3180,7 +3270,7 @@ void LeetCode::findLeftBoundary(TreeNode* root, vector<int> &leftBoundary)
 /// <summary>
 /// Leet code #545. Boundary of Binary Tree       
 /// </summary>
-void LeetCode::findRightBoundary(TreeNode* root, vector<int> &rightBoundary)
+void LeetCodeTree::findRightBoundary(TreeNode* root, vector<int> &rightBoundary)
 {
     if (root == nullptr) return;
     rightBoundary.push_back(root->val);
@@ -3198,7 +3288,7 @@ void LeetCode::findRightBoundary(TreeNode* root, vector<int> &rightBoundary)
 /// <summary>
 /// Leet code #545. Boundary of Binary Tree       
 /// </summary>
-void LeetCode::findLeaves(TreeNode* root, vector<int> &leaves)
+void LeetCodeTree::findLeaves(TreeNode* root, vector<int> &leaves)
 {
     if (root == nullptr) return;
     if (root->left == nullptr && root->right == nullptr)
@@ -3268,7 +3358,7 @@ void LeetCode::findLeaves(TreeNode* root, vector<int> &leaves)
 /// The right boundary are node 1,3,6,10. (10 is the right-most node).
 /// So order them in anti-clockwise without duplicate nodes we have [1,2,4,7,8,9,10,6,3].
 /// </summary>
-vector<int> LeetCode::boundaryOfBinaryTree(TreeNode* root)
+vector<int> LeetCodeTree::boundaryOfBinaryTree(TreeNode* root)
 {
     vector<int> leftBoundary;
     vector<int> rightBoundary;
@@ -3304,7 +3394,7 @@ vector<int> LeetCode::boundaryOfBinaryTree(TreeNode* root)
 /// <summary>
 /// Leet code #543. Diameter of Binary Tree       
 /// </summary>
-void LeetCode::diameterOfBinaryTree(TreeNode* root, int &max_depth, int &diameter)
+void LeetCodeTree::diameterOfBinaryTree(TreeNode* root, int &max_depth, int &diameter)
 {
     max_depth = 0;
     diameter = 0;
@@ -3347,7 +3437,7 @@ void LeetCode::diameterOfBinaryTree(TreeNode* root, int &max_depth, int &diamete
 /// Note: The length of path between two nodes is represented by the 
 /// number of edges between them.
 /// </summary>
-int LeetCode::diameterOfBinaryTree(TreeNode* root)
+int LeetCodeTree::diameterOfBinaryTree(TreeNode* root)
 {
     int max_depth, diameter;
     diameterOfBinaryTree(root, max_depth, diameter);
@@ -3357,7 +3447,7 @@ int LeetCode::diameterOfBinaryTree(TreeNode* root)
 /// <summary>
 /// Leet code #538. Convert BST to Greater Tree       
 /// </summary>
-TreeNode* LeetCode::convertBST(TreeNode* root, int &sum)
+TreeNode* LeetCodeTree::convertBST(TreeNode* root, int &sum)
 {
     if (root == nullptr) return root;
     TreeNode * new_root = new TreeNode(0);
@@ -3397,7 +3487,7 @@ TreeNode* LeetCode::convertBST(TreeNode* root, int &sum)
 ///        /  \
 ///      20    13
 /// </summary>
-TreeNode* LeetCode::convertBST(TreeNode* root)
+TreeNode* LeetCodeTree::convertBST(TreeNode* root)
 {
     int sum = 0;
     return convertBST(root, sum);
@@ -3406,7 +3496,7 @@ TreeNode* LeetCode::convertBST(TreeNode* root)
 /// <summary>
 /// Leet code #549. Binary Tree Longest Consecutive Sequence II  
 /// </summary>
-int LeetCode::longestConsecutiveII(TreeNode* root, int& asc_size, int& desc_size)
+int LeetCodeTree::longestConsecutiveII(TreeNode* root, int& asc_size, int& desc_size)
 {
     if (root == nullptr)
     {
@@ -3497,7 +3587,7 @@ int LeetCode::longestConsecutiveII(TreeNode* root, int& asc_size, int& desc_size
 /// Output: 3
 /// Explanation: The longest consecutive path is [1, 2, 3] or [3, 2, 1].
 /// </summary>
-int LeetCode::longestConsecutiveII(TreeNode* root)
+int LeetCodeTree::longestConsecutiveII(TreeNode* root)
 {
     int asc_size, desc_size;
     return longestConsecutiveII(root, asc_size, desc_size);
@@ -3506,7 +3596,7 @@ int LeetCode::longestConsecutiveII(TreeNode* root)
 /// <summary>
 /// Leet code #563. Binary Tree Tilt      
 /// </summary>
-int LeetCode::findTilt(TreeNode* root, int& sum)
+int LeetCodeTree::findTilt(TreeNode* root, int& sum)
 {
     int tilt = 0;
     if (root == nullptr)
@@ -3552,7 +3642,7 @@ int LeetCode::findTilt(TreeNode* root, int& sum)
 /// 32-bit integer.
 /// All the tilt values won't exceed the range of 32-bit integer.
 /// </summary>
-int LeetCode::findTilt(TreeNode* root)
+int LeetCodeTree::findTilt(TreeNode* root)
 {
     int sum;
     return findTilt(root, sum);
@@ -3561,7 +3651,7 @@ int LeetCode::findTilt(TreeNode* root)
 /// <summary>
 /// Leet code #572. Subtree of Another Tree       
 /// </summary>
-void LeetCode::preOrderTraversal(TreeNode* root, string &result)
+void LeetCodeTree::preOrderTraversal(TreeNode* root, string &result)
 {
     result.push_back(',');
     if (root == nullptr)
@@ -3611,7 +3701,7 @@ void LeetCode::preOrderTraversal(TreeNode* root, string &result)
 /// 1   2
 /// Return false.
 /// </summary>
-bool LeetCode::isSubtree(TreeNode* s, TreeNode* t)
+bool LeetCodeTree::isSubtree(TreeNode* s, TreeNode* t)
 {
     string str_s, str_t;
     preOrderTraversal(s, str_s);
@@ -3655,7 +3745,7 @@ bool LeetCode::isSubtree(TreeNode* s, TreeNode* t)
 /// omit the first parenthesis pair to break the one-to-one mapping 
 /// relationship between the input and the output.
 /// </summary>
-string LeetCode::tree2str(TreeNode* t)
+string LeetCodeTree::tree2str(TreeNode* t)
 {
     string result;
     if (t == nullptr)
@@ -3707,7 +3797,7 @@ string LeetCode::tree2str(TreeNode* t)
 ///
 /// Note: The merging process must start from the root nodes of both trees.
 /// </summary>
-TreeNode* LeetCode::mergeTrees(TreeNode* t1, TreeNode* t2)
+TreeNode* LeetCodeTree::mergeTrees(TreeNode* t1, TreeNode* t2)
 {
     if ((t1 == nullptr) && (t2 == nullptr))
     {
@@ -3741,7 +3831,7 @@ TreeNode* LeetCode::mergeTrees(TreeNode* t1, TreeNode* t2)
 /// <summary>
 /// Leet code #623. Add One Row to Tree 
 /// </summary>
-TreeNode* LeetCode::addOneRow(TreeNode* node, int v, int depth, int target_depth)
+TreeNode* LeetCodeTree::addOneRow(TreeNode* node, int v, int depth, int target_depth)
 {
     if (target_depth == depth)
     {
@@ -3837,7 +3927,7 @@ TreeNode* LeetCode::addOneRow(TreeNode* node, int v, int depth, int target_depth
 /// 1.The given d is in range [1, maximum depth of the given tree + 1].
 /// 2.The given binary tree has at least one tree node.
 /// </summary>
-TreeNode* LeetCode::addOneRow(TreeNode* root, int v, int d)
+TreeNode* LeetCodeTree::addOneRow(TreeNode* root, int v, int d)
 {
     return addOneRow(root, v, 1, d);
 }
@@ -3862,7 +3952,7 @@ TreeNode* LeetCode::addOneRow(TreeNode* root, int v, int d)
 /// Note:
 /// The range of node's value is in the range of 32-bit signed integer.
 /// </summary>
-vector<double> LeetCode::averageOfLevels(TreeNode* root)
+vector<double> LeetCodeTree::averageOfLevels(TreeNode* root)
 {
     vector<double> result;
     queue<TreeNode *> process_queue;
@@ -3889,7 +3979,7 @@ vector<double> LeetCode::averageOfLevels(TreeNode* root)
 /// <summary>
 /// Leet code #652. Find Duplicate Subtrees
 /// </summary>
-string LeetCode::findDuplicateSubtrees(TreeNode* root, unordered_map<string, vector<TreeNode*>> &cache)
+string LeetCodeTree::findDuplicateSubtrees(TreeNode* root, unordered_map<string, vector<TreeNode*>> &cache)
 {
     // The starting , is to avoid partial match, for example [8, null, null] mapping to [18, null, null]
     string traverse = ",";
@@ -3933,7 +4023,7 @@ string LeetCode::findDuplicateSubtrees(TreeNode* root, unordered_map<string, vec
 ///    4
 /// Therefore, you need to return above trees' root in the form of a list.
 /// </summary>
-vector<TreeNode*> LeetCode::findDuplicateSubtrees(TreeNode* root)
+vector<TreeNode*> LeetCodeTree::findDuplicateSubtrees(TreeNode* root)
 {
     vector<TreeNode*> result;
     unordered_map<string, vector<TreeNode*>> cache;
@@ -3951,7 +4041,7 @@ vector<TreeNode*> LeetCode::findDuplicateSubtrees(TreeNode* root)
 /// <summary>
 /// Leet code #653. Two Sum IV - Input is a BST
 /// </summary>
-bool LeetCode::findTarget(TreeNode* root, unordered_set<int> &hash_table, int k)
+bool LeetCodeTree::findTarget(TreeNode* root, unordered_set<int> &hash_table, int k)
 {
     if (root == nullptr) return false;
     if (hash_table.count(k - root->val) > 0) return true;
@@ -3992,7 +4082,7 @@ bool LeetCode::findTarget(TreeNode* root, unordered_set<int> &hash_table, int k)
 ///
 /// Output: False
 /// </summary>
-bool LeetCode::findTarget(TreeNode* root, int k)
+bool LeetCodeTree::findTarget(TreeNode* root, int k)
 {
     unordered_set<int> hash_table;
     return findTarget(root, hash_table, k);
@@ -4001,7 +4091,7 @@ bool LeetCode::findTarget(TreeNode* root, int k)
 /// <summary>
 /// Leet code #654. Maximum Binary Tree
 /// </summary>
-void LeetCode::constructMaximumBinaryTree(TreeNode* &root, int val)
+void LeetCodeTree::constructMaximumBinaryTree(TreeNode* &root, int val)
 {
     if (root == nullptr || root->val < val)
     {
@@ -4044,7 +4134,7 @@ void LeetCode::constructMaximumBinaryTree(TreeNode* &root, int val)
 /// Note:
 /// 1. The size of the given array will be in the range [1,1000].
 /// </summary>
-TreeNode* LeetCode::constructMaximumBinaryTree(vector<int>& nums)
+TreeNode* LeetCodeTree::constructMaximumBinaryTree(vector<int>& nums)
 {
     TreeNode * root = nullptr;
     for (int val : nums)
@@ -4141,7 +4231,7 @@ vector<vector<string>> LeetCodeTree::printTree(TreeNode* root)
 /// <summary>
 /// Leet code #663. Equal Tree Partition 
 /// </summary>
-int LeetCode::checkEqualTree(TreeNode* root, unordered_map<int, int> &sub_sum)
+int LeetCodeTree::checkEqualTree(TreeNode* root, unordered_map<int, int> &sub_sum)
 {
     if (root == nullptr) return 0;
     int sum = 0;
@@ -4196,7 +4286,7 @@ int LeetCode::checkEqualTree(TreeNode* root, unordered_map<int, int> &sub_sum)
 /// 1. The range of tree node value is in the range of [-100000, 100000].
 /// 2. 1 <= n <= 10000
 /// </summary>
-bool LeetCode::checkEqualTree(TreeNode* root)
+bool LeetCodeTree::checkEqualTree(TreeNode* root)
 {
     unordered_map<int, int> sub_sum;
     int sum = checkEqualTree(root, sub_sum);
@@ -4269,7 +4359,7 @@ bool LeetCode::checkEqualTree(TreeNode* root)
 ///
 /// Note: Answer will in the range of 32-bit signed integer. 
 /// </summary>
-int LeetCode::widthOfBinaryTree(TreeNode* root)
+int LeetCodeTree::widthOfBinaryTree(TreeNode* root)
 {
     if (root == nullptr) return 0;
     queue<pair<TreeNode *, int>> process_queue;
@@ -4303,7 +4393,7 @@ int LeetCode::widthOfBinaryTree(TreeNode* root)
 /// <summary>
 /// Leet code #666. Path Sum IV 
 /// </summary>
-bool LeetCode::pathSumIV(int level, int position, unordered_map<int, unordered_map<int, int>>& node_map, int &subtotal, int &sum)
+bool LeetCodeTree::pathSumIV(int level, int position, unordered_map<int, unordered_map<int, int>>& node_map, int &subtotal, int &sum)
 {
     if (node_map.count(level) == 0 || node_map[level].count(position) == 0) return false;
     // add the current node;
@@ -4358,7 +4448,7 @@ bool LeetCode::pathSumIV(int level, int position, unordered_map<int, unordered_m
 ///
 /// The path sum is (3 + 1) = 4.
 /// </summary>
-int LeetCode::pathSumIV(vector<int>& nums)
+int LeetCodeTree::pathSumIV(vector<int>& nums)
 {
     unordered_map<int, unordered_map<int, int>> node_map;
     for (size_t i = 0; i < nums.size(); i++)
@@ -4412,7 +4502,7 @@ int LeetCode::pathSumIV(vector<int>& nums)
 ///  /
 /// 1
 /// </summary>
-TreeNode* LeetCode::trimBST(TreeNode* root, int L, int R)
+TreeNode* LeetCodeTree::trimBST(TreeNode* root, int L, int R)
 {
     TreeNode *result = nullptr;
     if (root == nullptr) return result;
@@ -4437,7 +4527,7 @@ TreeNode* LeetCode::trimBST(TreeNode* root, int L, int R)
 /// <summary>
 /// Leet code #671. Second Minimum Node In a Binary Tree 
 /// </summary>
-void LeetCode::findSecondMinimumValue(TreeNode* root, set<int, greater<int>>&heap)
+void LeetCodeTree::findSecondMinimumValue(TreeNode* root, set<int, greater<int>>&heap)
 {
     if (root == nullptr) return;
     heap.insert(root->val);
@@ -4483,7 +4573,7 @@ void LeetCode::findSecondMinimumValue(TreeNode* root, set<int, greater<int>>&hea
 /// Explanation: The smallest value is 2, but there isn't any second 
 /// smallest value.
 /// </summary>
-int LeetCode::findSecondMinimumValue(TreeNode* root)
+int LeetCodeTree::findSecondMinimumValue(TreeNode* root)
 {
     set<int, greater<int>> heap;
     findSecondMinimumValue(root, heap);
@@ -4495,7 +4585,7 @@ int LeetCode::findSecondMinimumValue(TreeNode* root)
 /// <summary>
 /// Leet code #687. Longest Univalue Path
 /// </summary>
-int LeetCode::longestUnivaluePath(TreeNode* root, int &path_length)
+int LeetCodeTree::longestUnivaluePath(TreeNode* root, int &path_length)
 {
     int result = 0;
     if (root == nullptr)
@@ -4565,7 +4655,7 @@ int LeetCode::longestUnivaluePath(TreeNode* root, int &path_length)
 /// Note: The given binary tree has not more than 10000 nodes. The height 
 /// of the tree is not more than 1000.
 /// </summary>
-int LeetCode::longestUnivaluePath(TreeNode* root)
+int LeetCodeTree::longestUnivaluePath(TreeNode* root)
 {
     int path_length;
     return longestUnivaluePath(root, path_length);
@@ -4574,7 +4664,7 @@ int LeetCode::longestUnivaluePath(TreeNode* root)
 /// <summary>
 /// Leet code #742. Closest Leaf in a Binary Tree
 /// </summary>
-void LeetCode::findClosestLeaf(TreeNode* root, int target, int &target_distance, int &leaf_distance, int &value)
+void LeetCodeTree::findClosestLeaf(TreeNode* root, int target, int &target_distance, int &leaf_distance, int &value)
 {
     if (root == nullptr) return;
     if (root->val == target) target_distance = 0;
@@ -4694,7 +4784,7 @@ void LeetCode::findClosestLeaf(TreeNode* root, int target, int &target_distance,
 /// There exists some node in the given binary tree for which 
 /// node.val == k. 
 /// </summary>
-int LeetCode::findClosestLeaf(TreeNode* root, int k)
+int LeetCodeTree::findClosestLeaf(TreeNode* root, int k)
 {
     int target_distance = -1, leaf_distance = -1, value = -1;
     findClosestLeaf(root, k, target_distance, leaf_distance, value);
@@ -4746,7 +4836,7 @@ int LeetCode::findClosestLeaf(TreeNode* root, int k)
 /// 1. The size of the BST will not exceed 50.
 /// 2. The BST is always valid and each node's value is different.
 /// </summary>
-vector<TreeNode*> LeetCode::splitBST(TreeNode* root, int V)
+vector<TreeNode*> LeetCodeTree::splitBST(TreeNode* root, int V)
 {
     vector<TreeNode *> result;
     if (root == nullptr)
@@ -4774,7 +4864,7 @@ vector<TreeNode*> LeetCode::splitBST(TreeNode* root, int V)
 /// <summary>
 /// Leetcode #783. Minimum Distance Between BST Nodes
 /// </summary>
-void LeetCode::minDiffInBST(TreeNode* node, TreeNode* &prev_node, int &min_diff)
+void LeetCodeTree::minDiffInBST(TreeNode* node, TreeNode* &prev_node, int &min_diff)
 {
     if (node == nullptr) return;
     minDiffInBST(node->left, prev_node, min_diff);
@@ -4816,7 +4906,7 @@ void LeetCode::minDiffInBST(TreeNode* node, TreeNode* &prev_node, int &min_diff)
 /// 2. The BST is always valid, each node's value is an integer, and each 
 ///    node's value is different.
 /// </summary>
-int LeetCode::minDiffInBST(TreeNode* root)
+int LeetCodeTree::minDiffInBST(TreeNode* root)
 {
     TreeNode * prev_node = nullptr;
     int min_diff = -1;
@@ -4874,7 +4964,7 @@ int LeetCode::minDiffInBST(TreeNode* root)
 /// 1. The binary tree will have at most 100 nodes.
 /// 2. The value of each node will only be 0 or 1.
 /// </summary>
-TreeNode* LeetCode::pruneTree(TreeNode* root)
+TreeNode* LeetCodeTree::pruneTree(TreeNode* root)
 {
     if (root == nullptr) return root;
     root->left = pruneTree(root->left);
@@ -4892,7 +4982,7 @@ TreeNode* LeetCode::pruneTree(TreeNode* root)
 /// <summary>
 /// Leet code #863. All Nodes Distance K in Binary Tree
 /// </summary>
-int LeetCode::distanceK(TreeNode* root, TreeNode* target, int K, int distance, vector<int>& result)
+int LeetCodeTree::distanceK(TreeNode* root, TreeNode* target, int K, int distance, vector<int>& result)
 {
     if (root == nullptr) return distance;
     if (root->val == target->val) distance = 0;
@@ -4952,7 +5042,7 @@ int LeetCode::distanceK(TreeNode* root, TreeNode* target, int K, int distance, v
 /// 3. The target node is a node in the tree.
 /// 4. 0 <= K <= 1000.
 /// </summary>
-vector<int> LeetCode::distanceK(TreeNode* root, TreeNode* target, int K)
+vector<int> LeetCodeTree::distanceK(TreeNode* root, TreeNode* target, int K)
 {
     vector<int> result;
     distanceK(root, target, K, -1, result);
@@ -4963,7 +5053,7 @@ vector<int> LeetCode::distanceK(TreeNode* root, TreeNode* target, int K)
 /// <summary>
 /// Leet code #865. Smallest Subtree with all the Deepest Nodes
 /// </summary>
-pair<TreeNode*, int> LeetCode::subtreeWithAllDeepest(TreeNode* root, int depth)
+pair<TreeNode*, int> LeetCodeTree::subtreeWithAllDeepest(TreeNode* root, int depth)
 {
     pair<TreeNode *, int> result;
     if (root == nullptr)
@@ -5033,7 +5123,7 @@ pair<TreeNode*, int> LeetCode::subtreeWithAllDeepest(TreeNode* root, int depth)
 /// 1. The number of nodes in the tree will be between 1 and 500.
 /// 2. The values of each node are unique.
 /// </summary>
-TreeNode* LeetCode::subtreeWithAllDeepest(TreeNode* root)
+TreeNode* LeetCodeTree::subtreeWithAllDeepest(TreeNode* root)
 {
     pair<TreeNode *, int> result = subtreeWithAllDeepest(root, 1);
     return result.first;
@@ -5042,7 +5132,7 @@ TreeNode* LeetCode::subtreeWithAllDeepest(TreeNode* root)
 /// <summary>
 /// Leet code #872. Leaf-Similar Trees
 /// </summary>
-void LeetCode::getLeaves(TreeNode* root, vector<int> &leaves)
+void LeetCodeTree::getLeaves(TreeNode* root, vector<int> &leaves)
 {
     if (root == nullptr) return;
     if (root->left == nullptr && root->right == nullptr)
@@ -5074,7 +5164,7 @@ void LeetCode::getLeaves(TreeNode* root, vector<int> &leaves)
 /// Note:
 /// 1. Both of the given trees will have between 1 and 100 nodes.
 /// </summary>
-bool LeetCode::leafSimilar(TreeNode* root1, TreeNode* root2)
+bool LeetCodeTree::leafSimilar(TreeNode* root1, TreeNode* root2)
 {
     vector<int> leaves1, leaves2;
     getLeaves(root1, leaves1);
@@ -5111,7 +5201,7 @@ bool LeetCode::leafSimilar(TreeNode* root1, TreeNode* root2)
 /// Note that an empty tree is represented by NULL, therefore you would 
 /// see the expected output (serialized tree format) as [], not null.
 /// </summary>
-TreeNode* LeetCode::searchBST(TreeNode* root, int val)
+TreeNode* LeetCodeTree::searchBST(TreeNode* root, int val)
 {
     if (root == nullptr)
     {
@@ -5169,7 +5259,7 @@ TreeNode* LeetCode::searchBST(TreeNode* root, int val)
 ///         \
 ///          4
 /// </summary>
-TreeNode* LeetCode::insertIntoBST(TreeNode* root, int val)
+TreeNode* LeetCodeTree::insertIntoBST(TreeNode* root, int val)
 {
     if (root == nullptr)
     {
@@ -5203,7 +5293,7 @@ TreeNode* LeetCode::insertIntoBST(TreeNode* root, int val)
 /// The depth of the tree is at most 1000.
 /// The total number of nodes is at most 5000.
 /// </summary>
-int LeetCode::maxDepth(Node* root)
+int LeetCodeTree::maxDepth(Node* root)
 {
     int result = 0;
     queue<Node *> search;
@@ -5238,7 +5328,7 @@ int LeetCode::maxDepth(Node* root)
 ///
 /// Note: Recursive solution is trivial, could you do it iteratively?
 /// </summary>
-vector<int> LeetCode::preorder(Node* root)
+vector<int> LeetCodeTree::preorder(Node* root)
 {
     vector<int> result;
 
@@ -5275,7 +5365,7 @@ vector<int> LeetCode::preorder(Node* root)
 /// The depth of the tree is at most 1000.
 /// The total number of nodes is at most 5000.
 /// </summary>
-vector<vector<int>> LeetCode::levelOrder(Node* root)
+vector<vector<int>> LeetCodeTree::levelOrder(Node* root)
 {
     vector<vector<int>> result;
     queue<Node *> search;
@@ -5312,7 +5402,7 @@ vector<vector<int>> LeetCode::levelOrder(Node* root)
 ///
 /// Note: Recursive solution is trivial, could you do it iteratively?
 /// </summary>
-vector<int> LeetCode::postorder(Node* root)
+vector<int> LeetCodeTree::postorder(Node* root)
 {
     vector<int> result;
 
@@ -5344,7 +5434,7 @@ vector<int> LeetCode::postorder(Node* root)
 /// <summary>
 /// Leet code #426. Convert Binary Search Tree to Sorted Doubly Linked List
 /// </summary>
-void LeetCode::treeToDoublyList(TreeNode* root, TreeNode*& head, TreeNode *&tail)
+void LeetCodeTree::treeToDoublyList(TreeNode* root, TreeNode*& head, TreeNode *&tail)
 {
     if (root == nullptr) return;
 
@@ -5396,7 +5486,7 @@ void LeetCode::treeToDoublyList(TreeNode* root, TreeNode*& head, TreeNode *&tail
 /// successor relationship, while the dashed line means the predecessor 
 /// relationship.
 /// </summary>
-TreeNode* LeetCode::treeToDoublyList(TreeNode* root)
+TreeNode* LeetCodeTree::treeToDoublyList(TreeNode* root)
 {
     TreeNode * head = nullptr;
     TreeNode * tail = nullptr;
@@ -5407,7 +5497,7 @@ TreeNode* LeetCode::treeToDoublyList(TreeNode* root)
 /// <summary>
 /// Leet code #889. Construct Binary Tree from Preorder and Postorder Traversal
 /// </summary>
-TreeNode* LeetCode::constructFromPrePost(
+TreeNode* LeetCodeTree::constructFromPrePost(
     vector<int>::iterator pre_begin, 
     vector<int>::iterator pre_end,
     vector<int>::iterator post_begin, 
@@ -5449,7 +5539,7 @@ TreeNode* LeetCode::constructFromPrePost(
 /// It is guaranteed an answer exists. If there exists multiple answers, 
 /// you can return any of them.
 /// </summary>
-TreeNode* LeetCode::constructFromPrePost(vector<int>& pre, vector<int>& post)
+TreeNode* LeetCodeTree::constructFromPrePost(vector<int>& pre, vector<int>& post)
 {
     return constructFromPrePost(pre.begin(), pre.end(), post.begin(), post.end());
 }
@@ -5457,7 +5547,7 @@ TreeNode* LeetCode::constructFromPrePost(vector<int>& pre, vector<int>& post)
 /// <summary>
 /// Leet code #894. All Possible Full Binary Trees
 /// </summary>
-TreeNode* LeetCode::clone(TreeNode * root)
+TreeNode* LeetCodeTree::clone(TreeNode * root)
 {
     TreeNode * result = nullptr;
     if (root == nullptr) return result;
@@ -5495,7 +5585,7 @@ TreeNode* LeetCode::clone(TreeNode * root)
 /// Note:
 /// 1 <= N <= 20
 /// </summary>
-vector<TreeNode*> LeetCode::allPossibleFBT(int N)
+vector<TreeNode*> LeetCodeTree::allPossibleFBT(int N)
 {
     vector<TreeNode *> result;
     if (N == 0) return result;	
@@ -5531,7 +5621,7 @@ vector<TreeNode*> LeetCode::allPossibleFBT(int N)
 /// <summary>
 /// Leet code #897. Increasing Order Search Tree 
 /// </summary>
-void LeetCode::increasingBST(TreeNode *& new_root, TreeNode *&new_child, TreeNode* root)
+void LeetCodeTree::increasingBST(TreeNode *& new_root, TreeNode *&new_child, TreeNode* root)
 {
     if (root == nullptr) return;
     increasingBST(new_root, new_child, root->left);
@@ -5591,7 +5681,7 @@ void LeetCode::increasingBST(TreeNode *& new_root, TreeNode *&new_child, TreeNod
 /// 1. The number of nodes in the given tree will be between 1 and 100.
 /// 2. Each node will have a unique integer value from 0 to 1000.
 /// </summary>
-TreeNode* LeetCode::increasingBST(TreeNode* root)
+TreeNode* LeetCodeTree::increasingBST(TreeNode* root)
 {
     TreeNode * new_root = nullptr;
     TreeNode * new_child = nullptr;
@@ -5623,7 +5713,7 @@ TreeNode* LeetCode::increasingBST(TreeNode* root)
 /// The final answer is guaranteed to be less than 2^31.
 ///
 /// </summary>
-int LeetCode::rangeSumBST(TreeNode* root, int L, int R)
+int LeetCodeTree::rangeSumBST(TreeNode* root, int L, int R)
 {
     int result = 0;
     if (root == nullptr) return result;
@@ -5671,7 +5761,7 @@ int LeetCode::rangeSumBST(TreeNode* root, int L, int R)
 /// 2. Each value in each tree will be a unique integer in the range 
 /// [0, 99].
 /// </summary>
-bool LeetCode::flipEquiv(TreeNode* root1, TreeNode* root2)
+bool LeetCodeTree::flipEquiv(TreeNode* root1, TreeNode* root2)
 {
     if (root1 == root2) return true;
     if ((root1 == nullptr) || (root2 == nullptr)) return false;
@@ -5721,7 +5811,7 @@ bool LeetCode::flipEquiv(TreeNode* root1, TreeNode* root2)
 ///
 /// 1. The tree will have between 1 and 100 nodes.
 /// </summary>
-bool LeetCode::isCompleteTree(TreeNode* root)
+bool LeetCodeTree::isCompleteTree(TreeNode* root)
 {
     bool meetNull = false;
     queue<TreeNode*> search;
@@ -5748,7 +5838,7 @@ bool LeetCode::isCompleteTree(TreeNode* root)
 /// <summary>
 /// Leet code #968. Binary Tree Cameras
 /// </summary>
-int LeetCode::minCameraCover(TreeNode* root, int &result)
+int LeetCodeTree::minCameraCover(TreeNode* root, int &result)
 {
     // the child is null or covered
     if (root == nullptr) return 1;
@@ -5798,7 +5888,7 @@ int LeetCode::minCameraCover(TreeNode* root, int &result)
 /// 1. The number of nodes in the given tree will be in the range [1, 1000].
 /// 2. Every node has value 0.
 /// </summary>
-int LeetCode::minCameraCover(TreeNode* root)
+int LeetCodeTree::minCameraCover(TreeNode* root)
 {
     int result = 0;
     if (minCameraCover(root, result) == 0)
@@ -5828,7 +5918,7 @@ int LeetCode::minCameraCover(TreeNode* root)
 /// 1. The number of nodes in the given tree will be in the range [1, 100].
 /// 2. Each node's value will be an integer in the range [0, 99].
 /// </summary>
-bool LeetCode::isUnivalTree(TreeNode* root)
+bool LeetCodeTree::isUnivalTree(TreeNode* root)
 {
     int prev_val = -1;
     queue<TreeNode *> search;
@@ -5861,7 +5951,7 @@ bool LeetCode::isUnivalTree(TreeNode* root)
 /// <summary>
 /// Leet code #971. Flip Binary Tree To Match Preorder Traversal
 /// </summary>
-void LeetCode::flipMatchVoyage(TreeNode* root, vector<int>& voyage, int& index, vector<int>& result)
+void LeetCodeTree::flipMatchVoyage(TreeNode* root, vector<int>& voyage, int& index, vector<int>& result)
 {
     // fail to match
     if (root->val != voyage[index])
@@ -5939,7 +6029,7 @@ void LeetCode::flipMatchVoyage(TreeNode* root, vector<int>& voyage, int& index, 
 /// 
 /// 1. 1 <= N <= 100
 /// </summary>
-vector<int> LeetCode::flipMatchVoyage(TreeNode* root, vector<int>& voyage)
+vector<int> LeetCodeTree::flipMatchVoyage(TreeNode* root, vector<int>& voyage)
 {
     vector<int> result;
     int index = 0;
@@ -5950,7 +6040,7 @@ vector<int> LeetCode::flipMatchVoyage(TreeNode* root, vector<int>& voyage)
 /// <summary>
 /// Leet code #979. Distribute Coins in Binary Tree
 /// </summary>
-int LeetCode::distributeCoins(TreeNode* root, vector<int>& missingPaths, int &result)
+int LeetCodeTree::distributeCoins(TreeNode* root, vector<int>& missingPaths, int &result)
 {
     if (root == nullptr)
     {
@@ -6027,7 +6117,7 @@ int LeetCode::distributeCoins(TreeNode* root, vector<int>& missingPaths, int &re
 /// 1. 1<= N <= 100
 /// 2. 0 <= node.val <= N
 /// </summary>
-int LeetCode::distributeCoins(TreeNode* root)
+int LeetCodeTree::distributeCoins(TreeNode* root)
 {
     int result = 0;
     vector<int> missingPaths;
@@ -6081,7 +6171,7 @@ int LeetCode::distributeCoins(TreeNode* root)
 /// 1. The tree will have between 1 and 1000 nodes.
 /// 2. Each node's value will be between 0 and 1000.
 /// </summary>
-vector<vector<int>> LeetCode::verticalTraversal(TreeNode* root)
+vector<vector<int>> LeetCodeTree::verticalTraversal(TreeNode* root)
 {
     vector<vector<int>> result;
     map<int, map<int, set<int>>> node_map;
@@ -6123,7 +6213,7 @@ vector<vector<int>> LeetCode::verticalTraversal(TreeNode* root)
 /// <summary>
 /// Leet code #988. Smallest String Starting From Leaf
 /// </summary>
-void LeetCode::smallestFromLeaf(TreeNode* root, string& str, string &result)
+void LeetCodeTree::smallestFromLeaf(TreeNode* root, string& str, string &result)
 {
     str.push_back(root->val + 'a');
     if (root->left == nullptr && root->right == nullptr)
@@ -6177,7 +6267,7 @@ void LeetCode::smallestFromLeaf(TreeNode* root, string& str, string &result)
 /// 1. The number of nodes in the given tree will be between 1 and 1000.
 /// 2. Each node in the tree will have a value between 0 and 25.
 /// </summary>
-string LeetCode::smallestFromLeaf(TreeNode* root)
+string LeetCodeTree::smallestFromLeaf(TreeNode* root)
 {
     string str, result;
     smallestFromLeaf(root, str, result);
@@ -6259,7 +6349,7 @@ string LeetCode::smallestFromLeaf(TreeNode* root)
 /// Remember that we are using the Node type instead of TreeNode type so 
 /// their string representation are different.
 /// </summary>
-TreeNode* LeetCode::inorderSuccessor(TreeNode* node)
+TreeNode* LeetCodeTree::inorderSuccessor(TreeNode* node)
 {
     TreeNode * result = nullptr;
 
@@ -6290,7 +6380,7 @@ TreeNode* LeetCode::inorderSuccessor(TreeNode* node)
 /// <summary>
 /// Leet code #993. Cousins in Binary Tree
 /// </summary>
-bool LeetCode::isCousins(TreeNode* root, TreeNode*& parent, int& depth, int val)
+bool LeetCodeTree::isCousins(TreeNode* root, TreeNode*& parent, int& depth, int val)
 {
     if (root == nullptr) return false;
     if (root->val == val) return true;
@@ -6350,7 +6440,7 @@ bool LeetCode::isCousins(TreeNode* root, TreeNode*& parent, int& depth, int val)
 /// 1. The number of nodes in the tree will be between 2 and 100.
 /// 2. Each node has a unique integer value from 1 to 100.
 /// </summary>
-bool LeetCode::isCousins(TreeNode* root, int x, int y)
+bool LeetCodeTree::isCousins(TreeNode* root, int x, int y)
 {
     TreeNode * x_parent = root;
     int x_depth = 0;
@@ -6413,7 +6503,7 @@ bool LeetCode::isCousins(TreeNode* root, int x, int y)
 /// Note:
 /// 1. 1 <= B.length <= 100
 /// </summary>
-TreeNode* LeetCode::insertIntoMaxTree(TreeNode* root, int val)
+TreeNode* LeetCodeTree::insertIntoMaxTree(TreeNode* root, int val)
 {
     if (root == nullptr || val > root->val)
     {
@@ -7319,147 +7409,6 @@ TreeNode* LeetCodeTree::deserialize(string data)
         }
     }
     return root;
-}
-
-/// <summary>
-/// Decodes your encoded data to tree.
-/// </summary>
-/// <param name="data">the string data</param>
-/// <returns>The root</returns>
-TreeNode* LeetCode::deserialize(string data)
-{
-    queue<TreeNode*> input_queue;
-    queue<TreeNode*> output_queue;
-    string number;
-    for (size_t i = 0; i < data.size(); i++)
-    {
-        if ((data[i] == '[') || (data[i] == ',') || data[i] == ']' ||
-            isspace(data[i]))
-        {
-            if (number.size() != 0)
-            {
-                if (number == "null")
-                {
-                    input_queue.push(nullptr);
-                }
-                else
-                {
-                    input_queue.push(new TreeNode(std::stoi(number)));
-                }
-                number.clear();
-            }
-        }
-        else
-        {
-            number.push_back(data[i]);
-        }
-    }
-    TreeNode* root = nullptr;
-    TreeNode* node = nullptr;
-    while (!input_queue.empty())
-    {
-        if (output_queue.empty())
-        {
-            root = input_queue.front();
-            input_queue.pop();
-            node = root;
-            output_queue.push(node);
-        }
-        else
-        {
-            node = output_queue.front();
-            output_queue.pop();
-            if (node != nullptr)
-            {
-                if (!input_queue.empty())
-                {
-                    node->left = input_queue.front();
-                    if (node->left != nullptr) node->left->parent = node;
-                    input_queue.pop();
-                }
-                if (!input_queue.empty())
-                {
-                    node->right = input_queue.front();
-                    if (node->right != nullptr) node->right->parent = node;
-                    input_queue.pop();
-                }
-                output_queue.push(node->left);
-                output_queue.push(node->right);
-            }
-        }
-    }
-    return root;
-}
-
-/// <summary>
-/// Leet code 297. Serialize and Deserialize Binary Tree
-/// Serialization is the process of converting a data structure or object 
-/// into a sequence of bits so that it can be stored in a file or memory 
-/// buffer, or transmitted across a network connection link to be 
-/// reconstructed later in the same or another computer environment. 
-///
-/// Design an algorithm to serialize and deserialize a binary tree. There 
-/// is no restriction on how your serialization/deserialization algorithm 
-/// should work. You just need to ensure that a binary tree can be 
-/// serialized to a string and this string can be deserialized to the 
-/// original tree structure.
-///
-/// For example, you may serialize the following tree 
-///    1
-///   / \
-///  2   3
-///     / \
-///    4   5
-///
-/// as "[1,2,3,null,null,4,5]", just the same as how LeetCode OJ serializes
-/// a binary tree. 
-/// You do not necessarily need to follow this format, so please be 
-/// creative and come up with different approaches yourself. 
-/// Note: Do not use class member/global/static variables to store states. 
-/// Your serialize and deserialize algorithms should be stateless. 
-/// </summary>
-/// <summary>
-/// Encodes a tree to a single string.
-/// </summary>
-/// <param name="root">the root</param>
-/// <returns>The string</returns>
-string LeetCode::serialize(TreeNode* root)
-{
-    string result = "";
-    queue<TreeNode*> queue;
-    if (root != nullptr) queue.push(root);
-    while (!queue.empty())
-    {
-        TreeNode* node = queue.front();
-        queue.pop();
-        if (!result.empty()) { result.push_back(','); }
-        if (node == nullptr)
-        {
-            result.append("null");
-        }
-        else
-        {
-            result.append(std::to_string(node->val));
-            queue.push(node->left);
-            queue.push(node->right);
-        }
-    }
-    while (true)
-    {
-        if ((result.size() > 4) && (result.substr(result.size() - 4) == "null"))
-        {
-            result.erase(result.size() - 4);
-        }
-        else if ((result.size() > 1) && (result.substr(result.size() - 1) == ","))
-        {
-            result.erase(result.size() - 1);
-        }
-        else
-        {
-            break;
-        }
-    }
-    return "[" + result + "]";
 }
 
 /// <summary>

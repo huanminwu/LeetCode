@@ -149,7 +149,6 @@
     <ClInclude Include="LeetCodeUnionFind.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Leetcode.cpp" />
     <ClCompile Include="LeetCodeArray.cpp" />
     <ClCompile Include="LeetCodeBFS.cpp" />
     <ClCompile Include="LeetCodeDFS.cpp" />

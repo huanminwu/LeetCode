@@ -2720,75 +2720,7 @@ int LeetCodeDFS::countArrangement(int N)
     return countArrangement(N, 0, visited, cache);
 }
 
-/// <summary>
-/// Generate tree based on id list.
-/// </summary>
-vector<TreeNode*> LeetCode::generateTrees(vector<int>& id_list)
-{
-    vector<TreeNode*> result;
-    if (id_list.size() == 0)
-    {
-        result.push_back(nullptr);
-        return result;
-    }
-    if (id_list.size() == 1)
-    {
-        result.push_back(new TreeNode(id_list[0]));
-        return result;
-    }
-    for (size_t i = 0; i < id_list.size(); i++)
-    {
-        vector<int> left;
-        vector<int> right;
-        for (size_t j = 0; j < i; j++)
-        {
-            left.push_back(id_list[j]);
-        }
-        for (size_t j = i + 1; j < id_list.size(); j++)
-        {
-            right.push_back(id_list[j]);
-        }
-        vector<TreeNode*> left_list = generateTrees(left);
-        vector<TreeNode*> right_list = generateTrees(right);
-        for (size_t l = 0; l < left_list.size(); l++)
-        {
-            for (size_t r = 0; r < right_list.size(); r++)
-            {
-                TreeNode * root = new TreeNode(id_list[i]);
-                root->left = left_list[l];
-                root->right = right_list[r];
-                result.push_back(root);
-            }
-        }
-    }
-    return result;
-}
 
-/// <summary>
-/// Leet code #95. Unique Binary Search Trees II     
-/// Given an integer n, generate all structurally unique BST's (binary search trees) that store values 1...n.  
-/// For example,
-/// Given n = 3, there are a total of 5 unique BST's.
-///   1         3     3      2      1
-///    \       /     /      / \      \
-///     3     2     1      1   3      2
-///    /     /       \                 \
-///   2     1         2                 3
-/// </summary>
-vector<TreeNode*> LeetCode::generateTrees(int n)
-{
-    vector<TreeNode*> result;
-    if (n > 0)
-    {
-        vector<int> id_list;
-        for (int i = 0; i < n; i++)
-        {
-            id_list.push_back(i + 1);
-        }
-        result = generateTrees(id_list);
-    }
-    return result;
-}
 
 /// <summary>
 /// Leet code #140. Word Break II
