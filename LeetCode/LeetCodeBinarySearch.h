@@ -26,6 +26,346 @@ class LeetCodeBinarySearch
 {
 public:
 #pragma region BinarySearch
+
+    /// <summary>
+    /// Leet code #35. Search Insert Position   
+    /// Given a sorted array and a target value, return the index if the target is found. If not, 
+    /// return the index where it would be if it were inserted in order. 
+    /// You may assume no duplicates in the array. 
+    /// Here are few examples.
+    /// [1,3,5,6], 5 -> 2
+    /// [1,3,5,6], 2 -> 1
+    /// [1,3,5,6], 7 -> 4
+    /// [1,3,5,6], 0 -> 0 
+    /// </summary>
+    int searchInsert(vector<int>& nums, int target);
+
+    /// <summary>
+    /// Leet code #74. Search a 2D Matrix   
+    /// Write an efficient algorithm that searches for a value in an m x n matrix. 
+    /// This matrix has the following properties:
+    /// Integers in each row are sorted from left to right. 
+    /// The first integer of each row is greater than the last integer of the 
+    /// previous row.	
+    /// For example, 
+    /// Consider the following matrix:
+    /// [
+    ///   [1,   3,  5,  7],
+    ///   [10, 11, 16, 20],
+    ///   [23, 30, 34, 50]
+    /// ]
+    /// Given target = 3, return true.
+    /// </summary>
+    bool searchMatrix(vector<vector<int>>& matrix, int target);
+
+    /// <summary>
+    /// Leet code #374. Guess Number Higher or Lower 
+    /// We are playing the Guess Game. The game is as follows:
+    /// I pick a number from 1 to n. You have to guess which number I picked.
+    /// Every time you guess wrong, I'll tell you whether the number is higher or lower.
+    /// You call a pre-defined API guess(int num) which returns 3 possible results (-1, 1, or 0):
+    /// -1 : My number is lower
+    /// 1 : My number is higher
+    /// 0 : Congrats! You got it!
+    /// Example:
+    /// n = 10, I pick 6.
+    /// Return 6.
+    /// </summary>
+    int guessNumber(int n, int guess);
+
+    /// <summary>
+    /// Leet code #69. Sqrt(x) 
+    /// Implement int sqrt(int x). 
+    /// Compute and return the square root of x. 
+    /// </summary>
+    int mySqrt(int x);
+
+    /// <summary>
+    /// Leet code #367. Valid Perfect Square 
+    /// Given a positive integer num, write a function which returns True if num is a perfect square else False.
+    /// Note: Do not use any built-in library function such as sqrt. 
+    /// Example 1: 
+    /// Input: 16
+    /// Returns: True
+    ///
+    /// Example 2: 
+    /// Input: 14
+    /// Returns: False
+    /// </summary>
+    bool isPerfectSquare(int num);
+
+    /// <summary>
+    /// Leet code #278. First Bad Version  
+    /// You are a product manager and currently leading a team to develop a new product. 
+    /// Unfortunately, the latest version of your product fails the quality check. Since each version 
+    /// is developed based on the previous version, all the versions after a bad version are also bad. 
+    /// Suppose you have n versions [1, 2, ..., n] and you want to find out the first bad one, which causes all the following ones to be bad. 
+    /// You are given an API bool isBadVersion(version) which will return whether version is bad. 
+    /// Implement a function to find the first bad version. You should minimize the number of calls to the API. 
+    /// </summary>
+    int firstBadVersion(int n, int bad_version);
+
+    /// <summary>
+    /// Leet code #275. H-Index II 
+    /// Follow up for H-Index: What if the citations array is sorted in ascending order? Could you optimize your algorithm? 
+    /// Hint:
+    /// 1.Expected runtime complexity is in O(log n) and the input is sorted.
+    /// </summary>
+    int hIndexII(vector<int>& citations);
+
+    /// <summary>
+    /// Leet code #540. Single Element in a Sorted Array
+    /// 
+    /// Given a sorted array consisting of only integers where every element 
+    /// appears twice except for one element which appears once. Find this 
+    /// single element that appears only once. 
+    /// Example 1:
+    /// Input: [1,1,2,3,3,4,4,8,8]
+    /// Output: 2
+    ///
+    /// Example 2:
+    /// Input: [3,3,7,7,10,11,11]
+    /// Output: 10
+    /// Note: Your solution should run in O(log n) time and O(1) space. 
+    /// </summary>
+    int singleNonDuplicate(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #658. Find K Closest Elements
+    /// 
+    /// Given a sorted array, two integers k and x, find the k closest 
+    /// elements to x in the array. The result should also be sorted in 
+    /// ascending order. If there is a tie, the smaller elements are always 
+    /// preferred. 
+    /// 
+    /// Example 1:
+    /// Input: [1,2,3,4,5], k=4, x=3
+    /// Output: [1,2,3,4]
+    ///
+    /// Example 2:
+    /// Input: [1,2,3,4,5], k=4, x=-1
+    /// Output: [1,2,3,4]
+    /// 
+    /// Note:
+    /// 1. The value k is positive and will always be smaller than the length 
+    ///    of the sorted array.
+    /// 2. Length of the given array is positive and will not exceed 10^4
+    /// 3. Absolute value of elements in the array and x will not exceed 10^4
+    /// </summary>
+    vector<int> findClosestElements(vector<int>& arr, int k, int x);
+
+    /// <summary>
+    /// Leet code #658. Find K Closest Elements
+    /// 
+    /// Given a sorted array, two integers k and x, find the k closest 
+    /// elements to x in the array. The result should also be sorted in 
+    /// ascending order. If there is a tie, the smaller elements are always 
+    /// preferred. 
+    /// 
+    /// Example 1:
+    /// Input: [1,2,3,4,5], k=4, x=3
+    /// Output: [1,2,3,4]
+    ///
+    /// Example 2:
+    /// Input: [1,2,3,4,5], k=4, x=-1
+    /// Output: [1,2,3,4]
+    /// 
+    /// Note:
+    /// 1. The value k is positive and will always be smaller than the length 
+    ///    of the sorted array.
+    /// 2. Length of the given array is positive and will not exceed 10^4
+    /// 3. Absolute value of elements in the array and x will not exceed 10^4
+    /// </summary>
+    vector<int> findClosestElementsII(vector<int>& arr, int k, int x);
+
+    /// <summary>
+    /// Leet code #668. Kth Smallest Number in Multiplication Table
+    /// Nearly every one have used the Multiplication Table. But could you 
+    /// find out the k-th smallest number quickly from the multiplication 
+    /// table?
+    ///
+    /// Given the height m and the length n of a m * n Multiplication Table, 
+    /// and a positive integer k, you need to return the k-th smallest number 
+    /// in this table.
+    ///
+    /// Example 1:
+    /// Input: m = 3, n = 3, k = 5
+    /// Output: 3 
+    /// Explanation: 
+    /// The Multiplication Table:
+    /// 1    2    3
+    /// 2    4    6
+    /// 3    6    9
+    ///
+    /// The 5-th smallest number is 3 (1, 2, 2, 3, 3).
+    /// Example 2:
+    /// Input: m = 2, n = 3, k = 6
+    /// Output: 
+    /// Explanation: 
+    /// The Multiplication Table:
+    /// 1    2    3
+    /// 2    4    6
+    ///
+    /// The 6-th smallest number is 6 (1, 2, 2, 3, 4, 6).
+    /// Note:
+    /// The m and n will be in the range [1, 30000].
+    /// The k will be in the range [1, m * n]
+    /// </summary>
+    int findKthNumber(int m, int n, int k);
+
+
+    /// <summary>
+    /// Leet code #852. Peak Index in a Mountain Array
+    /// 
+    /// Let's call an array A a mountain if the following properties hold:
+    ///
+    /// A.length >= 3
+    /// There exists some 0 < i < A.length - 1 such that A[0] < A[1] < ... A[i-1] 
+    /// < A[i] > A[i+1] > ... > A[A.length - 1]
+    /// Given an array that is definitely a mountain, return any i such that 
+    /// A[0] < A[1] < ... A[i-1] < A[i] > A[i+1] > ... > A[A.length - 1].
+    ///
+    /// Example 1:
+    ///
+    /// Input: [0,1,0]
+    /// Output: 1
+    ///
+    /// Example 2:
+    ///
+    /// Input: [0,2,1,0]
+    /// Output: 1
+    /// Note:
+    /// 
+    /// 1. 3 <= A.length <= 10000
+    /// 2. 0 <= A[i] <= 10^6
+    /// 3. A is a mountain, as defined above.
+    /// </summary>
+    int peakIndexInMountainArray(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #704. Binary Search
+    /// 
+    /// Given a sorted (in ascending order) integer array nums of n elements 
+    /// and a target value, write a function to search target in nums. If 
+    /// target exists, then return its index, otherwise return -1.
+    ///
+    /// Example 1:
+    ///
+    /// Input: nums = [-1,0,3,5,9,12], target = 9
+    /// Output: 4
+    /// Explanation: 9 exists in nums and its index is 4
+    ///
+    /// Example 2:
+    ///
+    /// Input: nums = [-1,0,3,5,9,12], target = 2
+    /// Output: -1
+    /// Explanation: 2 does not exist in nums so return -1
+    /// 
+    /// Note:
+    /// 1. You may assume that all elements in nums are unique.
+    /// 2. n will be in the range [1, 10000].
+    /// 3. The value of each element in nums will be in the range 
+    /// [-9999, 9999].
+    /// </summary>
+    int binarySearchI(vector<int>& nums, int target);
+
+    /// <summary>
+    /// Leet code #702. Search in a Sorted Array of Unknown Size
+    /// 
+    /// Given an integer array sorted in ascending order, write a function to 
+    /// search target in nums.  If target exists, then return its index, otherwise 
+    /// return -1. However, the array size is unknown to you. You may only access 
+    /// the array using an ArrayReader interface, where ArrayReader.get(k) 
+    /// returns the element of the array at index k (0-indexed).
+    ///
+    /// You may assume all integers in the array are less than 10000, and if you 
+    /// access the array out of bounds, ArrayReader.get will return 2147483647.
+    ///
+    /// Example 1:
+    /// Input: array = [-1,0,3,5,9,12], target = 9
+    /// Output: 4
+    /// Explanation: 9 exists in nums and its index is 4
+    ///
+    /// Example 2:
+    /// Input: array = [-1,0,3,5,9,12], target = 2
+    /// Output: -1
+    /// Explanation: 2 does not exist in nums so return -1
+    /// 
+    /// Note:
+    ///
+    /// 1. You may assume that all elements in the array are unique.
+    /// 2. The value of each element in the array will be in the range 
+    ///    [-9999, 9999].
+    /// </summary>
+    int searchStream(const vector<int>& reader, int target);
+
+
+    /// <summary>
+    /// Leet code #1064. Fixed Point
+    /// 
+    /// Given an array A of distinct integers sorted in ascending order, return 
+    /// the smallest index i that satisfies A[i] == i.  Return -1 if no such i 
+    /// exists.
+    ///
+    /// Example 1:
+    ///
+    /// Input: [-10,-5,0,3,7]
+    /// Output: 3
+    /// Explanation: 
+    /// For the given array, A[0] = -10, A[1] = -5, A[2] = 0, A[3] = 3, thus the 
+    /// output is 3.
+    ///
+    /// Example 2:
+    ///
+    /// Input: [0,2,5,8,17]
+    /// Output: 0
+    /// Explanation: 
+    /// A[0] = 0, thus the output is 0.
+    ///
+    /// Example 3:
+    ///
+    /// Input: [-10,-5,3,4,7,9]
+    /// Output: -1
+    /// Explanation: 
+    /// There is no such i that A[i] = i, thus the output is -1.
+    /// 
+    /// Note:
+    /// 1. 1 <= A.length < 10^4
+    /// 2. -10^9 <= A[i] <= 10^9
+    /// </summary>
+    int fixedPoint(vector<int>& A);
+
+    /// <summary>
+    /// Leet code 1060. Missing Element in Sorted Array
+    /// 
+    /// Given a sorted array A of unique numbers, find the K-th missing number 
+    /// starting from the leftmost number of the array.
+    ///
+    /// Example 1:
+    /// Input: A = [4,7,9,10], K = 1
+    /// Output: 5
+    /// Explanation: 
+    /// The first missing number is 5.
+    ///
+    /// Example 2:
+    /// Input: A = [4,7,9,10], K = 3
+    /// Output: 8
+    /// Explanation: 
+    /// The missing numbers are [5,6,8,...], hence the third missing number is 8.
+    ///
+    /// Example 3:
+    /// Input: A = [1,2,4], K = 3
+    /// Output: 6
+    /// Explanation: 
+    /// The missing numbers are [3,5,6,7,...], hence the third missing number is 6.
+    /// 
+    /// Note:
+    /// 1. 1 <= A.length <= 50000
+    /// 2. 1 <= A[i] <= 1e7
+    /// 3. 1 <= K <= 1e8
+    /// </summary>
+    int missingElement(vector<int>& nums, int k);
+
     /// <summary>
     /// Leet code #33. Search in Rotated Sorted Array
     ///  

@@ -1851,9 +1851,129 @@ void TestLeetCode173(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode919(void)
+{
+    Logger::WriteMessage("Test Leet Code 919");
+    LeetCodeTree leetCode;
+    vector<string> commands = { "CBTInserter", "insert", "get_root" };
+    vector<string> data = { "[1]", "2", "" };
+    vector<string> result;
+    CBTInserter* cbtInserter = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "CBTInserter")
+        {
+            TreeNode* root = leetCode.deserialize(data[i]);
+            cbtInserter = new CBTInserter(root);
+            result.push_back("null");
+        }
+        else if (commands[i] == "insert")
+        {
+            int value = cbtInserter->insert(atoi(data[i].c_str()));
+            result.push_back(to_string(value));
+        }
+        else if (commands[i] == "get_root")
+        {
+            TreeNode* root = cbtInserter->get_root();
+            string value = leetCode.serialize(root);
+            result.push_back(value);
+        }
+    }
+    TreeNode* root = cbtInserter->get_root();
+    leetCode.freeTreeNodes(root);
+    delete cbtInserter;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+
+    commands = { "CBTInserter", "insert", "insert", "get_root" };
+    data = { "[1,2,3,4,5,6]", "7", "8", "" };
+    result.clear();
+    cbtInserter = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "CBTInserter")
+        {
+            TreeNode* root = leetCode.deserialize(data[i]);
+            cbtInserter = new CBTInserter(root);
+            result.push_back("null");
+        }
+        else if (commands[i] == "insert")
+        {
+            int value = cbtInserter->insert(atoi(data[i].c_str()));
+            result.push_back(to_string(value));
+        }
+        else if (commands[i] == "get_root")
+        {
+            TreeNode* root = cbtInserter->get_root();
+            string value = leetCode.serialize(root);
+            result.push_back(value);
+        }
+    }
+    root = cbtInserter->get_root();
+    leetCode.freeTreeNodes(root);
+    delete cbtInserter;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode703(void)
+{
+    Logger::WriteMessage("Test Leet Code 703");
+    vector<string> commands =
+    {
+        "KthLargest","add","add","add", "add", "add"
+    };
+    vector<vector<vector<int>>> data =
+    {
+        { {3}, {4, 5, 8, 2 }},{ {3} },{ {5} },{ {10} },{ {9} },{{4}}
+    };
+    vector<string> result;
+    KthLargest* kthLargest = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "KthLargest")
+        {
+            kthLargest = new KthLargest(data[i][0][0], data[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "add")
+        {
+            int value = kthLargest->add(data[i][0][0]);
+            result.push_back(to_string(value));
+        }
+    }
+    delete kthLargest;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < data.size(); i++)
+    {
+        Logger::WriteMessage(data[i]);
+    }
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode244(void)
+{
+    Logger::WriteMessage("Test Leet Code 244");
+    vector<string> words = { "practice", "makes", "perfect", "coding", "makes" };
+    WordDistance wordDistance(words);
+    string word1 = "coding";
+    string word2 = "practice";
+    int distance = wordDistance.shortest(word1, word2);
+    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
+
+    word1 = "makes";
+    word2 = "coding";
+    distance = wordDistance.shortest(word1, word2);
+    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
+}
 
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode244();
+    TestLeetCode703();
+    TestLeetCode919();
     TestLeetCode173();
     TestLeetCode1429();
     TestLeetCode1428();

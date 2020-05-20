@@ -7608,4 +7608,187 @@ public:
     }
 };
 
+/// <summary>
+/// Leet code #919. Complete Binary Tree Inserter
+/// 
+/// A complete binary tree is a binary tree in which every level, except 
+/// possibly the last, is completely filled, and all nodes are as far left 
+/// as possible.
+///
+/// Write a data structure CBTInserter that is initialized with a complete 
+/// binary tree and supports the following operations:
+///
+/// CBTInserter(TreeNode root) initializes the data structure on a given tree 
+/// with head node root;
+/// CBTInserter.insert(int v) will insert a TreeNode into the tree with value 
+/// node.val = v so that the tree remains complete, and returns the value of 
+/// the parent of the inserted TreeNode;
+/// CBTInserter.get_root() will return the head node of the tree.
+/// 
+///
+/// Example 1:
+///
+/// Input: inputs = ["CBTInserter","insert","get_root"], inputs = 
+/// [[[1]],[2],[]]
+/// Output: [null,1,[1,2]]
+///
+/// Example 2:
+///
+/// Input: inputs = ["CBTInserter","insert","insert","get_root"], inputs = 
+/// [[[1,2,3,4,5,6]],[7],[8],[]]
+/// Output: [null,3,4,[1,2,3,4,5,6,7,8]]
+/// 
+///
+/// Note:
+///
+/// The initial given tree is complete and contains between 1 and 1000 nodes.
+/// CBTInserter.insert is called at most 10000 times per test case.
+/// Every value of a given or inserted node is between 0 and 5000.
+/// </summary>
+class CBTInserter {
+private:
+    deque<TreeNode*> m_Parent;
+    TreeNode* m_Root;
+public:
+    CBTInserter(TreeNode* root)
+    {
+        m_Root = root;
+
+        queue<TreeNode*> search;
+        search.push(root);
+        while (!search.empty())
+        {
+            TreeNode* node = search.front();
+            search.pop();
+
+            if (node->left != nullptr) search.push(node->left);
+            if (node->right != nullptr) search.push(node->right);
+            if (node->left == nullptr || node->right == nullptr)
+            {
+                m_Parent.push_back(node);
+            }
+        }
+    }
+
+    int insert(int v)
+    {
+        TreeNode* node = new TreeNode(v);
+        TreeNode* parent = m_Parent.front();
+        if (parent->left == nullptr)
+        {
+            parent->left = node;
+        }
+        else
+        {
+            parent->right = node;
+            m_Parent.pop_front();
+        }
+        m_Parent.push_back(node);
+        return parent->val;
+    }
+
+    TreeNode* get_root()
+    {
+        return m_Root;
+    }
+};
+
+/// <summary>
+/// Leet code #703. Kth Largest Element in a Stream
+/// 
+/// Design a class to find the kth largest element in a stream. Note that it 
+/// is the kth largest element in the sorted order, not the kth distinct 
+/// element.
+///
+/// Your KthLargest class will have a constructor which accepts an integer k 
+/// and an integer array nums, which contains initial elements from the 
+/// stream. For each call to the method KthLargest.add, return the element 
+/// representing the kth largest element in the stream.
+///
+/// Example:
+///
+/// int k = 3;
+/// int[] arr = [4,5,8,2];
+/// KthLargest kthLargest = new KthLargest(3, arr);
+/// kthLargest.add(3);   // returns 4
+/// kthLargest.add(5);   // returns 5
+/// kthLargest.add(10);  // returns 5
+/// kthLargest.add(9);   // returns 8
+/// kthLargest.add(4);   // returns 8
+/// Note: 
+/// You may assume that nums' length ≥ k-1 and k ≥ 1.
+/// </summary>
+class KthLargest
+{
+private:
+    priority_queue<int> heap;
+    size_t size;
+public:
+    KthLargest(int k, vector<int> nums)
+    {
+        size = k;
+        for (size_t i = 0; i < nums.size(); i++)
+        {
+            heap.push(0 - nums[i]);
+            if (heap.size() > size) heap.pop();
+        }
+    }
+
+    int add(int val)
+    {
+        heap.push(0 - val);
+        if (heap.size() > size) heap.pop();
+        return (0 - heap.top());
+    }
+};
+
+/// <summary>
+/// Leet code #244. Shortest Word Distance II  
+/// 
+/// This is a follow up of Shortest Word Distance. The only difference is now you are given 
+/// the list of words and your method will be called repeatedly many times with different 
+/// parameters. How would you optimize it?
+/// Design a class which receives a list of words in the constructor, and implements a method 
+/// that takes two words word1 and word2 and return the shortest distance between these two words in the list.
+/// For example,
+/// Assume that words = ["practice", "makes", "perfect", "coding", "makes"]. 
+/// Given word1 = “coding”, word2 = “practice”, return 3.
+/// Given word1 = "makes", word2 = "coding", return 1. 
+/// </summary>
+class WordDistance
+{
+    unordered_map<string, vector<int>> m_StrPos;
+    unordered_map<string, unordered_map<string, int>> m_StrDist;
+
+public:
+    WordDistance(vector<string>& words)
+    {
+        for (size_t i = 0; i < words.size(); i++)
+        {
+            m_StrPos[words[i]].push_back(i);
+        }
+    }
+    int shortest(string word1, string word2)
+    {
+        int distance = INT_MAX;
+        if ((m_StrDist.count(word1) == 0) || (m_StrDist[word1].count(word2) == 0))
+        {
+            for (size_t i = 0; i < m_StrPos[word1].size(); i++)
+            {
+                for (size_t j = 0; j < m_StrPos[word2].size(); j++)
+                {
+                    distance = min(distance, abs(m_StrPos[word1][i] - m_StrPos[word2][j]));
+                }
+            }
+            m_StrDist[word1][word2] = distance;
+            m_StrDist[word2][word1] = distance;
+        }
+        else
+        {
+            distance = m_StrDist[word1][word2];
+        }
+        return distance;
+    }
+};
+
 #endif // LeetcodeDesign_H

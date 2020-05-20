@@ -346,8 +346,281 @@ void TestLeetCode1300(void)
     Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
 }
 
+void TestLeetCode540(void)
+{
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 1, 1, 2, 3, 3, 4, 4, 8, 8 };
+    Logger::WriteMessage(nums);
+    int result = leetCode.singleNonDuplicate(nums);
+    Logger::WriteMessage("result:" + to_string(result));
+
+    nums = { 3, 3, 7, 7, 10, 11, 11 };
+    Logger::WriteMessage(nums);
+    result = leetCode.singleNonDuplicate(nums);
+    Logger::WriteMessage("result:" + to_string(result));
+}
+
+void TestLeetCode668(void)
+{
+    LeetCodeBinarySearch leetCode;
+    int m = 3, n = 3, k = 5;
+    int result = leetCode.findKthNumber(m, n, k);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    m = 2, n = 3, k = 6;
+    result = leetCode.findKthNumber(m, n, k);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    m = 1, n = 9, k = 7;
+    result = leetCode.findKthNumber(m, n, k);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    m = 9, n = 1, k = 7;
+    result = leetCode.findKthNumber(m, n, k);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode702(void)
+{
+    Logger::WriteMessage("Test Leet Code 702");
+    LeetCodeBinarySearch leetCode;
+    vector<int> reader = { -1, 0, 3, 5, 9, 12 };
+    int target = 9;
+    int result = leetCode.searchStream(reader, target);
+    Logger::WriteMessage(reader);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    reader = { -1, 0, 3, 5, 9, 12 };
+    target = 2;
+    result = leetCode.searchStream(reader, target);
+    Logger::WriteMessage(reader);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
+void TestLeetCode74(void)
+{
+    Logger::WriteMessage("Test Leet Code 74");
+    LeetCodeBinarySearch leetCode;
+    vector<vector<int>> matrix;
+    int target;
+    bool found;
+    target = 3;
+    matrix = { {1}, {3} };
+    found = leetCode.searchMatrix(matrix, target);
+    Logger::WriteMessage("The number " + to_string(target) + " is " + (found ? "found" : "not found"));
+    matrix = { { 1,   3,  5,  7 },{ 10, 11, 16, 20 },{ 23, 30, 34, 50 } };
+    found = leetCode.searchMatrix(matrix, target);
+    Logger::WriteMessage("The number " + to_string(target) + " is " + (found ? "found" : "not found"));
+    target = 100;
+    found = leetCode.searchMatrix(matrix, target);
+    Logger::WriteMessage("The number " + to_string(target) + " is " + (found ? "found" : "not found"));
+    target = 9;
+    found = leetCode.searchMatrix(matrix, target);
+    Logger::WriteMessage("The number " + to_string(target) + " is " + (found ? "found" : "not found"));
+    target = 11;
+    found = leetCode.searchMatrix(matrix, target);
+    Logger::WriteMessage("The number " + to_string(target) + " is " + (found ? "found" : "not found"));
+}
+
+void TestLeetCode35(void)
+{
+    Logger::WriteMessage("Test Leet Code 35");
+    LeetCodeBinarySearch leetCode;
+    int result;
+    int target;
+    vector<int> nums = { 1,3,5,6 };
+    target = 5;
+    Logger::WriteMessage(nums);
+    result = leetCode.searchInsert(nums, target);
+    Logger::WriteMessage("Search " + to_string(target) + " -> " + to_string(result));
+    target = 2;
+    Logger::WriteMessage(nums);
+    result = leetCode.searchInsert(nums, target);
+    Logger::WriteMessage("Search " + to_string(target) + " -> " + to_string(result));
+    target = 7;
+    Logger::WriteMessage(nums);
+    result = leetCode.searchInsert(nums, target);
+    Logger::WriteMessage("Search " + to_string(target) + " -> " + to_string(result));
+    target = 0;
+    Logger::WriteMessage(nums);
+    result = leetCode.searchInsert(nums, target);
+    Logger::WriteMessage("Search " + to_string(target) + " -> " + to_string(result));
+}
+
+void TestLeetCode658(void)
+{
+    LeetCodeBinarySearch leetCode;
+    vector<int> arr = { 1, 2, 3, 4, 5 };
+    int k = 4, x = 3;
+    Logger::WriteMessage(arr);
+    vector<int> result = leetCode.findClosestElements(arr, k, x);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+
+    arr = { 1, 3, 5, 7, 9 };
+    k = 2;  x = 4;
+    Logger::WriteMessage(arr);
+    result = leetCode.findClosestElements(arr, k, x);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode852(void)
+{
+    Logger::WriteMessage("Test Leet Code 856");
+    LeetCodeBinarySearch leetCode;
+    vector<int> A = { 0,1,0 };
+    int result = leetCode.peakIndexInMountainArray(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { 0,2,1,0 };
+    result = leetCode.peakIndexInMountainArray(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode69(void)
+{
+    Logger::WriteMessage("Test Leet Code 69");
+    LeetCodeBinarySearch leetCode;
+    int num = 2147395599;
+    string message;
+    message.append("The sqrt(" + to_string(num) + ") = " + to_string(leetCode.mySqrt(num)));
+    Logger::WriteMessage(message.c_str());
+}
+
+void TestLeetCode1060(void)
+{
+    Logger::WriteMessage("Test Leet Code 1060");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 4, 7, 9, 10 };
+    int k = 1;
+    int result = leetCode.missingElement(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 4, 7, 9, 10 };
+    k = 3;
+    result = leetCode.missingElement(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2,4 };
+    k = 3;
+    result = leetCode.missingElement(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode704(void)
+{
+    Logger::WriteMessage("Test Leet Code 704");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { -1,0,3,5,9,12 };
+    int target = 9;
+    Logger::WriteMessage(nums);
+    int result = leetCode.binarySearchI(nums, target);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { -1,0,3,5,9,12 };
+    target = 2;
+    Logger::WriteMessage(nums);
+    result = leetCode.binarySearchI(nums, target);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
+void TestLeetCode278(void)
+{
+    Logger::WriteMessage("Test Leet Code 278");
+    LeetCodeBinarySearch leetCode;
+    int n_version = 3, bad_version = 1;
+    int result = leetCode.firstBadVersion(n_version, bad_version);
+    Logger::WriteMessage("First Bad Verion = " + to_string(result));
+}
+
+void TestLeetCode367(void)
+{
+    Logger::WriteMessage("Test Leet Code 367");
+    LeetCodeBinarySearch leetCode;
+    int num;
+    bool isPerfectSquare;
+    num = 36;
+    isPerfectSquare = leetCode.isPerfectSquare(num);
+    Logger::WriteMessage(to_string(num) + string(isPerfectSquare ? " is " : " is not ") + "a perfect square");
+
+    num = 32;
+    isPerfectSquare = leetCode.isPerfectSquare(num);
+    Logger::WriteMessage(to_string(num) + string(isPerfectSquare ? " is " : " is not ") + "a perfect square");
+}
+
+void TestLeetCode275(void)
+{
+    Logger::WriteMessage("Test Leet Code 275");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 3, 0, 6, 1, 5 };
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("H index =" + to_string(leetCode.hIndexII(nums)));
+    nums = { 0, 0, 0, 0, 0 };
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("H index =" + to_string(leetCode.hIndexII(nums)));
+}
+
+void TestLeetCode374(void)
+{
+    Logger::WriteMessage("Test Leet Code 374");
+    int n = 1;
+    LeetCodeBinarySearch leetCode;
+    int guess = leetCode.guessNumber(n, n);
+    Logger::WriteMessage("Guess number in " + to_string(n) + " is " + to_string(guess));
+    n = 100;
+    guess = leetCode.guessNumber(n, n);
+    Logger::WriteMessage("Guess number in " + to_string(n) + " is " + to_string(guess));
+}
+
+void TestLeetCode1064(void)
+{
+    Logger::WriteMessage("Test Leet Code 1064");
+    LeetCodeBinarySearch leetCode;
+    vector<int> A = { -10, -5, 0, 3, 7 };
+    int result = leetCode.fixedPoint(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { 0,2,5,8,17 };
+    result = leetCode.fixedPoint(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { -10,-5,3,4,7,9 };
+    result = leetCode.fixedPoint(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { 0,1,2,3,4,5 };
+    result = leetCode.fixedPoint(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode1064();
+    TestLeetCode374();
+    TestLeetCode275();
+    TestLeetCode367();
+    TestLeetCode278();
+    TestLeetCode704();
+    TestLeetCode1060();
+    TestLeetCode69();
+    TestLeetCode852();
+    TestLeetCode658();
+    TestLeetCode35();
+    TestLeetCode74();
+    TestLeetCode702();
+    TestLeetCode668();
+    TestLeetCode540();
     TestLeetCode1300();
     TestLeetCode1283();
     TestLeetCode378();

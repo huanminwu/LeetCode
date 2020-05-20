@@ -30,7 +30,7 @@
 /// [1,3,5,6], 7 -> 4
 /// [1,3,5,6], 0 -> 0 
 /// </summary>
-int LeetCode::searchInsert(vector<int>& nums, int target)
+int LeetCodeBinarySearch::searchInsert(vector<int>& nums, int target)
 {
     // assign the first as 0, last can be the last item or out of boundary
     int first = 0, last = nums.size();
@@ -75,7 +75,7 @@ int LeetCode::searchInsert(vector<int>& nums, int target)
 /// ]
 /// Given target = 3, return true.
 /// </summary>
-bool LeetCode::searchMatrix(vector<vector<int>>& matrix, int target)
+bool LeetCodeBinarySearch::searchMatrix(vector<vector<int>>& matrix, int target)
 {
     if (matrix.size() == 0) return false;
     // Search row first
@@ -133,7 +133,7 @@ bool LeetCode::searchMatrix(vector<vector<int>>& matrix, int target)
 /// n = 10, I pick 6.
 /// Return 6.
 /// </summary>
-int LeetCode::guessNumber(int n, int guess)
+int LeetCodeBinarySearch::guessNumber(int n, int guess)
 {
     int first = 1;
     int last = n;
@@ -161,7 +161,7 @@ int LeetCode::guessNumber(int n, int guess)
 /// Implement int sqrt(int x). 
 /// Compute and return the square root of x. 
 /// </summary>
-int LeetCode::mySqrt(int x)
+int LeetCodeBinarySearch::mySqrt(int x)
 {
     int first = 0;
     int last = min(x, (int)sqrt(INT_MAX));
@@ -182,7 +182,8 @@ int LeetCode::mySqrt(int x)
 
 /// <summary>
 /// Leet code #367. Valid Perfect Square 
-/// Given a positive integer num, write a function which returns True if num is a perfect square else False.
+/// Given a positive integer num, write a function which returns True if num is a 
+/// perfect square else False.
 /// Note: Do not use any built-in library function such as sqrt. 
 /// Example 1: 
 /// Input: 16
@@ -192,7 +193,7 @@ int LeetCode::mySqrt(int x)
 /// Input: 14
 /// Returns: False
 /// </summary>
-bool LeetCode::isPerfectSquare(int num)
+bool LeetCodeBinarySearch::isPerfectSquare(int num)
 {
     unsigned long long first = 1;
     unsigned long long last = num;
@@ -274,7 +275,7 @@ vector<int> LeetCodeBinarySearch::searchRange(vector<int>& nums, int target)
 /// You are given an API bool isBadVersion(version) which will return whether version is bad. 
 /// Implement a function to find the first bad version. You should minimize the number of calls to the API. 
 /// </summary>
-int LeetCode::firstBadVersion(int n, int bad_version)
+int LeetCodeBinarySearch::firstBadVersion(int n, int bad_version)
 {
     int first = 1;
     int last = n;
@@ -301,7 +302,7 @@ int LeetCode::firstBadVersion(int n, int bad_version)
 /// Hint:
 /// 1.Expected runtime complexity is in O(log n) and the input is sorted.
 /// </summary>
-int LeetCode::hIndexII(vector<int>& citations)
+int LeetCodeBinarySearch::hIndexII(vector<int>& citations)
 {
     int first = 0;
     int last = citations.size();
@@ -868,7 +869,7 @@ int LeetCodeBinarySearch::splitArray(vector<int>& nums, int m)
 /// Output: 10
 /// Note: Your solution should run in O(log n) time and O(1) space. 
 /// </summary>
-int LeetCode::singleNonDuplicate(vector<int>& nums)
+int LeetCodeBinarySearch::singleNonDuplicate(vector<int>& nums)
 {
     int begin = 0, end = nums.size();
     while (begin < end - 1)
@@ -909,7 +910,7 @@ int LeetCode::singleNonDuplicate(vector<int>& nums)
 /// 2. Length of the given array is positive and will not exceed 10^4
 /// 3. Absolute value of elements in the array and x will not exceed 10^4
 /// </summary>
-vector<int> LeetCode::findClosestElements(vector<int>& arr, int k, int x)
+vector<int> LeetCodeBinarySearch::findClosestElements(vector<int>& arr, int k, int x)
 {
     vector<int> result;
 
@@ -968,7 +969,7 @@ vector<int> LeetCode::findClosestElements(vector<int>& arr, int k, int x)
 /// 2. Length of the given array is positive and will not exceed 10^4
 /// 3. Absolute value of elements in the array and x will not exceed 10^4
 /// </summary>
-vector<int> LeetCode::findClosestElementsII(vector<int>& arr, int k, int x)
+vector<int> LeetCodeBinarySearch::findClosestElementsII(vector<int>& arr, int k, int x)
 {
     vector<int> result;
 
@@ -1062,7 +1063,7 @@ vector<int> LeetCode::findClosestElementsII(vector<int>& arr, int k, int x)
 /// The m and n will be in the range [1, 30000].
 /// The k will be in the range [1, m * n]
 /// </summary>
-int LeetCode::findKthNumber(int m, int n, int k)
+int LeetCodeBinarySearch::findKthNumber(int m, int n, int k)
 {
     int first = 1, last = m * n;
     while (first < last)
@@ -1234,7 +1235,7 @@ vector<int> LeetCodeBinarySearch::kthSmallestPrimeFraction(vector<int>& A, int K
 /// 2. 0 <= A[i] <= 10^6
 /// 3. A is a mountain, as defined above.
 /// </summary>
-int LeetCode::peakIndexInMountainArray(vector<int>& A)
+int LeetCodeBinarySearch::peakIndexInMountainArray(vector<int>& A)
 {
     int first = 0;
     int last = A.size();
@@ -1354,7 +1355,7 @@ int LeetCodeBinarySearch::minEatingSpeed(vector<int>& piles, int H)
 /// 3. The value of each element in nums will be in the range 
 /// [-9999, 9999].
 /// </summary>
-int LeetCode::binarySearchI(vector<int>& nums, int target)
+int LeetCodeBinarySearch::binarySearchI(vector<int>& nums, int target)
 {
     int first = 0;
     int last = nums.size() - 1;
@@ -1403,7 +1404,7 @@ int LeetCode::binarySearchI(vector<int>& nums, int target)
 /// 2. The value of each element in the array will be in the range 
 ///    [-9999, 9999].
 /// </summary>
-int LeetCode::searchStream(const vector<int>&reader, int target)
+int LeetCodeBinarySearch::searchStream(const vector<int>&reader, int target)
 {
     int index = 0;
     int step = 1;
@@ -1553,7 +1554,7 @@ int LeetCodeBinarySearch::shipWithinDays(vector<int>& weights, int D)
 /// 1. 1 <= A.length < 10^4
 /// 2. -10^9 <= A[i] <= 10^9
 /// </summary>
-int LeetCode::fixedPoint(vector<int>& A)
+int LeetCodeBinarySearch::fixedPoint(vector<int>& A)
 {
     int first = 0; 
     int last = A.size();
@@ -1602,7 +1603,7 @@ int LeetCode::fixedPoint(vector<int>& A)
 /// 2. 1 <= A[i] <= 1e7
 /// 3. 1 <= K <= 1e8
 /// </summary>
-int LeetCode::missingElement(vector<int>& nums, int k)
+int LeetCodeBinarySearch::missingElement(vector<int>& nums, int k)
 {
     int first = 0; 
     int last = nums.size() - 1;
