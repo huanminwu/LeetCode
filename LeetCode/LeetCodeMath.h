@@ -438,6 +438,37 @@ public:
     bool hasGroupsSizeX(vector<int>& deck);
 
     /// <summary>
+    /// Leet code #932. Beautiful Array
+    /// </summary>
+    vector<int> beautifulArray(int N, unordered_map<int, vector<int>>& memo);
+
+    /// <summary>
+    /// Leet code #932. Beautiful Array
+    /// 
+    /// For some fixed N, an array A is beautiful if it is a permutation of the 
+    /// integers 1, 2, ..., N, such that:
+    ///
+    /// For every i < j, there is no k with i < k < j such that 
+    //// A[k] * 2 = A[i] + A[j].
+    ///
+    /// Given N, return any beautiful array A.  (It is guaranteed that one exists.)
+    ///
+    /// Example 1:
+    /// Input: 4
+    /// Output: [2,1,4,3]
+    /// Example 2:
+    /// 
+    /// Input: 5
+    /// Output: [3,1,2,5,4]
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. 1 <= N <= 1000
+    /// </summary>
+    vector<int> beautifulArray(int N);
+
+    /// <summary>
     /// Leet code #1118. Number of Days in a Month
     /// 
     /// Given a year Y and a month M, return how many days there are in that month.
@@ -2719,6 +2750,398 @@ public:
     /// Each board[i][j] is a character in the set {" ", "X", "O"}.
     /// </summary>
     bool validTicTacToe(vector<string>& board);
+
+    /// <summary>
+    /// Leet code #728. Self Dividing Numbers      
+    /// 
+    /// A self-dividing number is a number that is divisible by every digit it 
+    /// contains.
+    ///
+    /// For example, 128 is a self-dividing number because 128 % 1 == 0, 
+    /// 128 % 2 == 0, and 128 % 8 == 0.
+    ///
+    /// Also, a self-dividing number is not allowed to contain the digit zero.
+    ///
+    /// Given a lower and upper number bound, output a list of every possible 
+    /// self dividing number, including the bounds if possible.
+    ///
+    /// Example 1:
+    /// Input: 
+    /// left = 1, right = 22
+    /// Output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22]
+    /// Note:    
+    /// 1. The boundaries of each input argument are 1 <= left <= right <= 10000.
+    /// </summary>
+    vector<int> selfDividingNumbers(int left, int right);
+
+    /// <summary>
+    /// Leet code #782. Transform to Chessboard    
+    /// </summary>
+    void countBoardPattern(int row, int col, vector<vector<int>>& board, int& pattern, int& one);
+
+    /// <summary>
+    /// Leet code #782. Transform to Chessboard    
+    /// </summary>
+    bool checkBoardPattern(int one, int N);
+
+    /// <summary>
+    /// Leet code #782. Transform to Chessboard    
+    /// </summary>
+    bool checkBoardPatternMap(unordered_set<int>& pattern_map);
+
+    /// <summary>
+    /// Leet code #782. Transform to Chessboard    
+    /// </summary>
+    int calculateBoardPattern(int pattern, int N);
+
+    /// <summary>
+    /// Leet code #782. Transform to Chessboard    
+    ///
+    /// An N x N board contains only 0s and 1s. In each move, you can swap 
+    /// any 2 rows with each other, or any 2 columns with each other.
+    ///
+    /// What is the minimum number of moves to transform the board into a 
+    /// "chessboard" - a board where no 0s and no 1s are 4-directionally 
+    /// adjacent? If the task is impossible, return -1.
+    ///
+    /// Examples:
+    /// Input: board = [[0,1,1,0],[0,1,1,0],[1,0,0,1],[1,0,0,1]]
+    /// Output: 2
+    /// Explanation:
+    /// One potential sequence of moves is shown below, from left to right:
+    ///
+    /// 0110     1010     1010
+    /// 0110 --> 1010 --> 0101
+    /// 1001     0101     1010
+    /// 1001     0101     0101
+    ///
+    /// The first move swaps the first and second column.
+    /// The second move swaps the second and third row.
+    ///
+    /// Input: board = [[0, 1], [1, 0]]
+    /// Output: 0
+    /// Explanation:
+    /// Also note that the board with 0 in the top left corner,
+    /// 01
+    /// 10
+    ///
+    /// is also a valid chessboard.
+    /// 
+    /// Input: board = [[1, 0], [1, 0]]
+    /// Output: -1
+    /// Explanation:
+    /// No matter what sequence of moves you make, you cannot end with a valid 
+    /// chessboard.
+    /// 
+    /// Note:
+    /// 1. board will have the same number of rows and columns, a number in the 
+    ///    range [2, 30].
+    /// 2. board[i][j] will be only 0s or 1s.
+    /// </summary>
+    int movesToChessboard(vector<vector<int>>& board);
+
+    /// <summary>
+    /// Leet code #789. Escape The Ghosts
+    /// 
+    /// You are playing a simplified Pacman game. You start at the point 
+    /// (0, 0), and your destination is (target[0], target[1]). There are 
+    /// several ghosts on the map, the i-th ghost starts at (ghosts[i][0], 
+    /// ghosts[i][1]).
+    /// Each turn, you and all ghosts simultaneously *may* move in one of 
+    /// 4 cardinal directions: north, east, west, or south, going from the 
+    /// previous point to a new point 1 unit of distance away.
+    /// You escape if and only if you can reach the target before any ghost 
+    /// reaches you (for any given moves the ghosts may take.)  If you reach 
+    /// any square (including the target) at the same time as a ghost, it 
+    /// doesn't count as an escape.
+    /// Return True if and only if it is possible to escape.
+    /// Example 1:
+    /// Input: 
+    /// ghosts = [[1, 0], [0, 3]]
+    /// target = [0, 1]
+    /// Output: true
+    /// Explanation: 
+    /// You can directly reach the destination (0, 1) at time 1, while the 
+    /// ghosts located at (1, 0) or (0, 3) have no way to catch up with you.
+    /// Example 2:
+    /// Input: 
+    /// ghosts = [[1, 0]]
+    /// target = [2, 0]
+    /// Output: false
+    /// Explanation: 
+    /// You need to reach the destination (2, 0), but the ghost at (1, 0) 
+    /// lies between you and the destination.
+    /// Example 3:
+    /// Input: 
+    /// ghosts = [[2, 0]]
+    /// target = [1, 0]
+    /// Output: false
+    /// Explanation: 
+    /// The ghost can reach the target at the same time as you.
+    /// Note:
+    /// 1. All points have coordinates with absolute value <= 10000.
+    /// 2. The number of ghosts will not exceed 100.
+    /// </summary>
+    bool escapeGhosts(vector<vector<int>>& ghosts, vector<int>& target);
+
+    /// <summary>
+    /// Leet code #829. Consecutive Numbers Sum
+    /// 
+    /// Given a positive integer N, how many ways can we write it as a sum of 
+    /// consecutive positive integers?
+    ///
+    /// Example 1:
+    /// Input: 5
+    /// Output: 2
+    /// Explanation: 5 = 5 = 2 + 3
+    ///
+    /// Example 2:
+    /// Input: 9
+    /// Output: 3
+    /// Explanation: 9 = 9 = 4 + 5 = 2 + 3 + 4
+    /// 
+    /// Example 3:
+    /// Input: 15
+    /// Output: 4
+    /// Explanation: 15 = 15 = 8 + 7 = 4 + 5 + 6 = 1 + 2 + 3 + 4 + 5
+    ///
+    /// 1. Note: 1 <= N <= 10 ^ 9.
+    /// </summary>
+    int consecutiveNumbersSum(int N);
+
+    /// <summary>
+    /// Leet code #836. Rectangle Overlap
+    /// 
+    /// A rectangle is represented as a list [x1, y1, x2, y2], where (x1, y1) 
+    /// are the coordinates of its bottom-left corner, and (x2, y2) are the 
+    /// coordinates of its top-right corner.
+    ///
+    /// Two rectangles overlap if the area of their intersection is positive.  
+    /// To be clear, two rectangles that only touch at the corner or edges do 
+    /// not overlap.
+    ///
+    /// Given two rectangles, return whether they overlap.
+    ///
+    /// Example 1:
+    ///
+    /// Input: rec1 = [0,0,2,2], rec2 = [1,1,3,3]
+    /// Output: true
+    ///
+    /// Example 2:
+    ///
+    /// Input: rec1 = [0,0,1,1], rec2 = [1,0,2,1]
+    /// Output: false
+    /// Notes:
+    ///
+    /// Both rectangles rec1 and rec2 are lists of 4 integers.
+    /// All coordinates in rectangles will be between -10^9 and 10^9.
+    /// </summary>
+    bool isRectangleOverlap(vector<int>& rec1, vector<int>& rec2);
+
+    /// <summary>
+    /// Leet code #910. Smallest Range II
+    /// 
+    /// Given an array A of integers, for each integer A[i] we need to choose 
+    /// either x = -K or x = K, and add x to A[i] (only once).
+    ///
+    /// After this process, we have some array B.
+    ///
+    /// Return the smallest possible difference between the maximum value of B 
+    /// and the minimum value of B.
+    ///
+    /// Example 1:
+    /// Input: A = [1], K = 0
+    /// Output: 0
+    /// Explanation: B = [1]
+    ///
+    /// Example 2:
+    /// Input: A = [0,10], K = 2
+    /// Output: 6
+    /// Explanation: B = [2,8]
+    ///
+    /// Example 3:
+    /// 
+    /// Input: A = [1,3,6], K = 3
+    /// Output: 3
+    /// Explanation: B = [4,6,3]
+    /// 
+    /// Note:
+    /// 
+    /// 1. 1 <= A.length <= 10000
+    /// 2. 0 <= A[i] <= 10000
+    /// 3. 0 <= K <= 10000
+    /// </summary>
+    int smallestRangeII(vector<int>& A, int K);
+
+    /// <summary>
+    /// Leet code #970. Powerful Integers
+    /// 
+    /// Given two non-negative integers x and y, an integer is powerful if it is 
+    /// equal to x^i + y^j for some integers i >= 0 and j >= 0.
+    ///
+    /// Return a list of all powerful integers that have value less than or equal 
+    /// to bound.
+    ///
+    /// You may return the answer in any order.  In your answer, each value should 
+    /// occur at most once.
+    ///
+    /// Example 1:
+    /// Input: x = 2, y = 3, bound = 10
+    /// Output: [2,3,4,5,7,9,10]
+    /// Explanation: 
+    /// 2 = 2^0 + 3^0
+    /// 3 = 2^1 + 3^0
+    /// 4 = 2^0 + 3^1
+    /// 5 = 2^1 + 3^1
+    /// 7 = 2^2 + 3^1
+    /// 9 = 2^3 + 3^0
+    /// 10 = 2^0 + 3^2
+    ///
+    /// Example 2:
+    ///
+    /// Input: x = 3, y = 5, bound = 15
+    /// Output: [2,4,6,8,10,14]
+    ///
+    /// Note:
+    ///
+    /// 1. 1 <= x <= 100
+    /// 2. 1 <= y <= 100
+    /// 3. 0 <= bound <= 10^6
+    /// </summary>
+    vector<int> powerfulIntegers(int x, int y, int bound);
+
+    /// <summary>
+    /// Leet code #969. Pancake Sorting
+    /// 
+    /// Given an array A, we can perform a pancake flip: We choose some positive 
+    /// integer k <= A.length, then reverse the order of the first k elements of A. 
+    /// We want to perform zero or more pancake flips (doing them one after 
+    /// another in succession) to sort the array A.
+    ///
+    /// Return the k-values corresponding to a sequence of pancake flips that 
+    /// sort A.  Any valid answer that sorts the array within 10 * A.length flips 
+    /// will be judged as correct.
+    /// 
+    /// Example 1:
+    /// Input: [3,2,4,1]
+    /// Output: [4,2,4,3]
+    /// Explanation: 
+    /// We perform 4 pancake flips, with k values 4, 2, 4, and 3.
+    /// Starting state: A = [3, 2, 4, 1]
+    /// After 1st flip (k=4): A = [1, 4, 2, 3]
+    /// After 2nd flip (k=2): A = [4, 1, 2, 3]
+    /// After 3rd flip (k=4): A = [3, 2, 1, 4]
+    /// After 4th flip (k=3): A = [1, 2, 3, 4], which is sorted. 
+    ///
+    /// Example 2:
+    /// Input: [1,2,3]
+    /// Output: []
+    /// Explanation: The input is already sorted, so there is no need to flip 
+    /// anything.
+    /// Note that other answers, such as [3, 3], would also be accepted.
+    /// 
+    /// Note:
+    /// 1. 1 <= A.length <= 100
+    /// 2. A[i] is a permutation of [1, 2, ..., A.length]
+    /// </summary>
+    vector<int> pancakeSort(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #1006. Clumsy Factorial
+    /// </summary>
+    int clumsyFactor(int& N, int& op);
+
+    /// <summary>
+    /// Leet code #1006. Clumsy Factorial
+    /// 
+    /// Normally, the factorial of a positive integer n is the product of all 
+    /// positive integers less than or equal to n.  For example, factorial(10) 
+    /// = 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1.
+    ///
+    /// We instead make a clumsy factorial: using the integers in decreasing 
+    /// order, we swap out the multiply operations for a fixed rotation of 
+    /// operations: multiply (*), divide (/), add (+) and subtract (-) in this 
+    /// order.
+    ///
+    /// For example, clumsy(10) = 10 * 9 / 8 + 7 - 
+    /// 6 * 5 / 4 + 3 - 2 * 1.  However, these operations are still applied 
+    /// using the usual order of operations of arithmetic: we do all 
+    /// multiplication and division steps before any addition or subtraction 
+    /// steps, and multiplication and division steps are processed left to 
+    /// right.
+    ///
+    /// Additionally, the division that we use is floor division such that 
+    /// 10 * 9 / 8 equals 11.  This guarantees the result is an integer.
+    ///
+    /// Implement the clumsy function as defined above: given an integer N, 
+    /// it returns the clumsy factorial of N.
+    ///
+    /// Example 1:
+    /// 
+    /// Input: 4
+    /// Output: 7
+    /// Explanation: 7 = 4 * 3 / 2 + 1
+    ///
+    /// Example 2:
+    /// 
+    /// Input: 10
+    /// Output: 12
+    /// Explanation: 12 = 10 * 9 / 8 + 7 - 6 * 5 / 4 + 3 - 2 * 1
+    /// 
+    /// Note:
+    /// 1. 1 <= N <= 10000
+    /// 2. -2^31 <= answer <= 2^31 - 1  (The answer is guaranteed to fit 
+    ///    within a 32-bit integer.)
+    /// </summary>
+    int clumsy(int N);
+
+    /// <summary>
+    /// Leet code #1056. Confusing Number
+    /// 
+    /// Given a number N, return true if and only if it is a confusing number, 
+    /// which satisfies the following condition:
+    ///
+    /// We can rotate digits by 180 degrees to form new digits. When 0, 1, 6, 8, 9 
+    /// are rotated 180 degrees, they become 0, 1, 9, 8, 6 respectively. When 
+    /// 2, 3, 4, 5 and 7 are rotated 180 degrees, they become invalid. A confusing 
+    /// number is a number that when rotated 180 degrees becomes a different 
+    /// number with each digit valid.
+    ///
+    /// Example 1:
+    ///
+    /// Input: 6
+    /// Output: true
+    /// Explanation: 
+    /// We get 9 after rotating 6, 9 is a valid number and 9!=6.
+    ///
+    /// Example 2:
+    ///
+    /// Input: 89
+    /// Output: true
+    /// Explanation: 
+    /// We get 68 after rotating 89, 86 is a valid number and 86!=89.
+    ///
+    /// Example 3:
+    ///
+    /// Input: 11
+    /// Output: false
+    /// Explanation: 
+    /// We get 11 after rotating 11, 11 is a valid number but the value remains 
+    /// the same, thus 11 is not a confusing number.
+    ///
+    /// Example 4:
+    ///
+    /// Input: 25
+    /// Output: false
+    /// Explanation: 
+    /// We get an invalid number after rotating 25.
+    ///
+    /// Note:
+    /// 1. 0 <= N <= 10^9
+    /// 2. After the rotation we can ignore leading zeros, for example if after 
+    /// rotation we have 0008 then this number is considered as just 8.
+    /// </summary>
+    bool confusingNumber(int N);
 
     /// <summary>
     /// Leet code #1281. Subtract the Product and Sum of Digits of an Integer

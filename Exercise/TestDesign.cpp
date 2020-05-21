@@ -1969,8 +1969,110 @@ void TestLeetCode244(void)
     Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
 }
 
+void TestLeetCode1206(void)
+{
+    Logger::WriteMessage("Test Leet Code 1206");
+    vector<string> commands =
+    {
+        "Skiplist", "add", "add", "add", "add", "add", "add", "add","add",
+        "add", "add", "add", "add", "add", "add", "add","add",
+        "search", "add", "search", "erase","erase","search","erase", "erase"
+    };
+
+    vector<int> data =
+    {
+        -1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0, 4, 1, 0, 1, 1, 8, 12
+    };
+
+    Skiplist* skipList = nullptr;
+
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Skiplist")
+        {
+            skipList = new Skiplist();
+            result.push_back("null");
+            skipList->print();
+        }
+        else if (commands[i] == "add")
+        {
+            skipList->add(data[i]);
+            result.push_back("null");
+            skipList->print();
+        }
+        else if (commands[i] == "search")
+        {
+            bool ret = skipList->search(data[i]);
+            skipList->print();
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+        else if (commands[i] == "erase")
+        {
+            bool ret = skipList->erase(data[i]);
+            skipList->print();
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+    }
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+        "Skiplist", "add", "add", "add", "add", "add", "add",  "add", "add", "add", "erase",
+        "search", "add", "erase", "erase", "erase", "add", "search", "search", "search",
+        "erase", "search", "add", "add", "add", "erase", "search", "add", "search", "erase",
+        "search", "search", "erase", "erase", "add", "erase", "search", "erase", "erase",
+        "search", "add", "add", "erase", "erase", "erase", "add", "erase", "add",
+        "erase", "erase", "add", "add", "add", "search", "search", "add", "erase",
+        "search", "add", "add", "search", "add", "search", "erase", "erase", "search",
+        "search", "erase", "search", "add", "erase", "search", "erase", "search", "erase",
+        "erase", "search", "search", "add", "add", "add", "add", "search", "search", "search",
+        "search", "search", "search", "search", "search", "search"
+    };
+
+    data =
+    {
+        -1,16,5,14,13,0,3,12,9,12,3,6,7,0,1,10,5,12,7,16,7,0,9,
+        16,3,2,17,2,17,0,9,14,1,6,1,16,9,10,9,2,3,16,15,12,7,4,3,2,
+        1,14,13,12,3,6,17,2,3,14,11,0,13,2,1,10,17,0,5,8,9,8,11,
+        10,11,10,9,8,15,14,1,6,17,16,13,4,5,4,17,16,7,14,1
+    };
+
+    result.clear();
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        Logger::WriteMessage("command = " + commands[i] + ";data = " + to_string(data[i]));
+        if (commands[i] == "Skiplist")
+        {
+            skipList = new Skiplist();
+            result.push_back("null");
+            skipList->print();
+        }
+        else if (commands[i] == "add")
+        {
+            skipList->add(data[i]);
+            result.push_back("null");
+            skipList->print();
+        }
+        else if (commands[i] == "search")
+        {
+            bool ret = skipList->search(data[i]);
+            skipList->print();
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+        else if (commands[i] == "erase")
+        {
+            bool ret = skipList->erase(data[i]);
+            skipList->print();
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+    }
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1206();
     TestLeetCode244();
     TestLeetCode703();
     TestLeetCode919();

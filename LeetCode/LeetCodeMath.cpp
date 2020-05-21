@@ -2827,7 +2827,7 @@ int LeetCodeMath::flipLights(int n, int m)
 /// Note: 
 /// 1. The boundaries of each input argument are 1 <= left <= right <= 10000.
 /// </summary>
-vector<int> LeetCode::selfDividingNumbers(int left, int right)
+vector<int> LeetCodeMath::selfDividingNumbers(int left, int right)
 {
     vector<int> result;
     for (int i = left; i <= right; i++)
@@ -2990,7 +2990,8 @@ int LeetCodeMath::numRabbits(vector<int>& answers)
 /// <summary>
 /// Leet code #782. Transform to Chessboard    
 /// </summary>
-void LeetCode::countBoardPattern(int row, int col, vector<vector<int>>& board, int& pattern, int &one)
+void LeetCodeMath::countBoardPattern(int row, int col, 
+    vector<vector<int>>& board, int& pattern, int &one)
 {
     pattern = pattern * 2 + board[row][col];
     one += board[row][col];
@@ -2999,7 +3000,7 @@ void LeetCode::countBoardPattern(int row, int col, vector<vector<int>>& board, i
 /// <summary>
 /// Leet code #782. Transform to Chessboard    
 /// </summary>
-bool LeetCode::checkBoardPattern(int one, int N)
+bool LeetCodeMath::checkBoardPattern(int one, int N)
 {
     if (((N % 2 == 1) && (one == N / 2 + 1)) || (one == N / 2))
     {
@@ -3014,7 +3015,7 @@ bool LeetCode::checkBoardPattern(int one, int N)
 /// <summary>
 /// Leet code #782. Transform to Chessboard    
 /// </summary>
-int LeetCode::calculateBoardPattern(int pattern, int N)
+int LeetCodeMath::calculateBoardPattern(int pattern, int N)
 {
     int lowest = pattern % 2;
     int all_count = 0;
@@ -3045,7 +3046,7 @@ int LeetCode::calculateBoardPattern(int pattern, int N)
 /// <summary>
 /// Leet code #782. Transform to Chessboard    
 /// </summary>
-bool LeetCode::checkBoardPatternMap(unordered_set<int> &pattern_map)
+bool LeetCodeMath::checkBoardPatternMap(unordered_set<int> &pattern_map)
 {
     if (pattern_map.size() != 2) return false;
     int result = 0;
@@ -3108,7 +3109,7 @@ bool LeetCode::checkBoardPatternMap(unordered_set<int> &pattern_map)
 ///    range [2, 30].
 /// 2. board[i][j] will be only 0s or 1s.
 /// </summary>
-int LeetCode::movesToChessboard(vector<vector<int>>& board)
+int LeetCodeMath::movesToChessboard(vector<vector<int>>& board)
 {
     unordered_set<int> pattern_map;
 
@@ -3195,7 +3196,7 @@ int LeetCode::movesToChessboard(vector<vector<int>>& board)
 /// 1. All points have coordinates with absolute value <= 10000.
 /// 2. The number of ghosts will not exceed 100.
 /// </summary>
-bool LeetCode::escapeGhosts(vector<vector<int>>& ghosts, vector<int>& target)
+bool LeetCodeMath::escapeGhosts(vector<vector<int>>& ghosts, vector<int>& target)
 {
     int human_distance = abs(target[0]) + abs(target[1]);
 
@@ -3474,7 +3475,7 @@ double LeetCodeMath::largestTriangleArea(vector<vector<int>>& points)
 ///
 /// 1. Note: 1 <= N <= 10 ^ 9.
 /// </summary>
-int LeetCode::consecutiveNumbersSum(int N)
+int LeetCodeMath::consecutiveNumbersSum(int N)
 {
     int result = 0;
     int sum = 0;
@@ -3518,7 +3519,7 @@ int LeetCode::consecutiveNumbersSum(int N)
 /// Both rectangles rec1 and rec2 are lists of 4 integers.
 /// All coordinates in rectangles will be between -10^9 and 10^9.
 /// </summary>
-bool LeetCode::isRectangleOverlap(vector<int>& rec1, vector<int>& rec2)
+bool LeetCodeMath::isRectangleOverlap(vector<int>& rec1, vector<int>& rec2)
 {
     if ((rec1[0] >= rec2[2]) || (rec1[2] <= rec2[0]) || (rec1[1] >= rec2[3]) || (rec1[3] <= rec2[1]))
     {
@@ -3917,7 +3918,7 @@ int LeetCode::smallestRangeI(vector<int>& A, int K)
 /// 2. 0 <= A[i] <= 10000
 /// 3. 0 <= K <= 10000
 /// </summary>
-int LeetCode::smallestRangeII(vector<int>& A, int K)
+int LeetCodeMath::smallestRangeII(vector<int>& A, int K)
 {
     sort(A.begin(), A.end());
     int result = A[A.size() - 1] - A[0];
@@ -3933,7 +3934,7 @@ int LeetCode::smallestRangeII(vector<int>& A, int K)
 /// <summary>
 /// Leet code #932. Beautiful Array
 /// </summary>
-vector<int> LeetCode::beautifulArray(int N, unordered_map<int, vector<int>>& memo)
+vector<int> LeetCodeMath::beautifulArray(int N, unordered_map<int, vector<int>>& memo)
 {
     vector<int> result(N);
     if (N == 1)
@@ -3984,7 +3985,7 @@ vector<int> LeetCode::beautifulArray(int N, unordered_map<int, vector<int>>& mem
 ///
 /// 1. 1 <= N <= 1000
 /// </summary>
-vector<int> LeetCode::beautifulArray(int N)
+vector<int> LeetCodeMath::beautifulArray(int N)
 {
     unordered_map<int, vector<int>> memo;
     return beautifulArray(N, memo);
@@ -4168,7 +4169,7 @@ double LeetCodeMath::minAreaFreeRect(vector<vector<int>>& points)
 /// 2. 1 <= y <= 100
 /// 3. 0 <= bound <= 10^6
 /// </summary>
-vector<int> LeetCode::powerfulIntegers(int x, int y, int bound)
+vector<int> LeetCodeMath::powerfulIntegers(int x, int y, int bound)
 {
     vector<int> result;
     unordered_set<int> result_hash;
@@ -4231,7 +4232,7 @@ vector<int> LeetCode::powerfulIntegers(int x, int y, int bound)
 /// 1. 1 <= A.length <= 100
 /// 2. A[i] is a permutation of [1, 2, ..., A.length]
 /// </summary>
-vector<int> LeetCode::pancakeSort(vector<int>& A)
+vector<int> LeetCodeMath::pancakeSort(vector<int>& A)
 {
     vector<int> result;
     for (size_t i = 0; i < A.size(); i++)
@@ -4410,7 +4411,7 @@ int LeetCodeMath::brokenCalc(int X, int Y)
 /// <summary>
 /// Leet code #1006. Clumsy Factorial
 /// </summary>
-int LeetCode::clumsyFactor(int &N, int &op)
+int LeetCodeMath::clumsyFactor(int &N, int &op)
 {
     int result = N;
     while (N > 1 && op < 2)
@@ -4474,7 +4475,7 @@ int LeetCode::clumsyFactor(int &N, int &op)
 /// 2. -2^31 <= answer <= 2^31 - 1  (The answer is guaranteed to fit 
 ///    within a 32-bit integer.)
 /// </summary>
-int LeetCode::clumsy(int N)
+int LeetCodeMath::clumsy(int N)
 {
     int result = 0;
     int op = -1;
@@ -4769,7 +4770,7 @@ vector<int> LeetCodeMath::numMovesStonesII(vector<int>& stones)
 /// 2. After the rotation we can ignore leading zeros, for example if after 
 /// rotation we have 0008 then this number is considered as just 8.
 /// </summary>
-bool LeetCode::confusingNumber(int N)
+bool LeetCodeMath::confusingNumber(int N)
 {
     vector<int> digit_map = { 0, 1, -1, -1, -1, -1, 9, -1, 8, 6 };
     int result = 0;

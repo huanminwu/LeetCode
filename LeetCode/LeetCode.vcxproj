@@ -134,6 +134,7 @@
     <ClInclude Include="LeetCodeArray.h" />
     <ClInclude Include="LeetCodeBFS.h" />
     <ClInclude Include="LeetCodeBinarySearch.h" />
+    <ClInclude Include="LeetCodeBit.h" />
     <ClInclude Include="LeetCodeDesign.h" />
     <ClInclude Include="LeetCodeDFS.h" />
     <ClInclude Include="LeetCodeDP.h" />

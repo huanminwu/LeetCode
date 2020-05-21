@@ -84,6 +84,7 @@
     <ClCompile Include="TestArray.cpp" />
     <ClCompile Include="TestBFS.cpp" />
     <ClCompile Include="TestBinarySearch.cpp" />
+    <ClCompile Include="TestBit.cpp" />
     <ClCompile Include="TestDesign.cpp" />
     <ClCompile Include="TestDFS.cpp" />
     <ClCompile Include="TestDP.cpp" />
@@ -107,6 +108,7 @@
     <ClInclude Include="TestArray.h" />
     <ClInclude Include="TestBFS.h" />
     <ClInclude Include="TestBinarySearch.h" />
+    <ClInclude Include="TestBit.h" />
     <ClInclude Include="TestDesign.h" />
     <ClInclude Include="TestDFS.h" />
     <ClInclude Include="TestDP.h" />

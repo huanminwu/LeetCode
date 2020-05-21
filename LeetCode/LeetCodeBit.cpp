@@ -16,6 +16,7 @@
 #include <iostream>
 #include <fstream>
 #include "Leetcode.h"
+#include "LeetcodeBit.h"
 #pragma region BitOperation
 /// <summary>
 /// Leet code # 371. Sum of Two Integers 
@@ -25,7 +26,7 @@
 /// Example: 
 /// Given a = 1 and b = 2, return 3. 
 /// </summary>
-int LeetCode::getSum(int a, int b)
+int LeetCodeBit::getSum(int a, int b)
 {
     int sum = a;
     int carry = 0;
@@ -47,7 +48,7 @@ int LeetCode::getSum(int a, int b)
 /// For example, the 32-bit integer ¡¯11' has binary representation 
 /// 00000000000000000000000000001011, so the function should return 3. 
 /// </summary>
-int LeetCode::hammingWeight(uint32_t n)
+int LeetCodeBit::hammingWeight(uint32_t n)
 {
     int result = 0;
     while (n != 0)
@@ -73,7 +74,7 @@ int LeetCode::hammingWeight(uint32_t n)
 /// 2.Divide the numbers in ranges like [2-3], [4-7], [8-15] and so on. And try to generate new range from previous.
 /// 3.Or does the odd/even status of the number help you in calculating the number of 1s?
 /// </summary>
-vector<int> LeetCode::countBits(int num)
+vector<int> LeetCodeBit::countBits(int num)
 {
     vector<int> result;
     result.push_back(0);
@@ -98,7 +99,7 @@ vector<int> LeetCode::countBits(int num)
 /// Given num = 16, return true. Given num = 5, return false. 
 /// Follow up: Could you solve it without loops/recursion?
 /// </summary>
-bool LeetCode::isPowerOfFour(int num)
+bool LeetCodeBit::isPowerOfFour(int num)
 {
     if (num == 0) return false;
     // mask in the right bits and only one bit
@@ -118,7 +119,7 @@ bool LeetCode::isPowerOfFour(int num)
 /// Note:
 /// Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory? 
 /// </summary>
-int LeetCode::singleNumber(vector<int>& nums)
+int LeetCodeBit::singleNumber(vector<int>& nums)
 {
     int number = 0;
     for (size_t i = 0; i < nums.size(); i++)
@@ -142,7 +143,7 @@ int LeetCode::singleNumber(vector<int>& nums)
 /// Explanation:
 /// 'e' is the letter that was added.    
 /// </summary>
-char LeetCode::findTheDifference(string s, string t)
+char LeetCodeBit::findTheDifference(string s, string t)
 {
     int number = 0;
 
@@ -172,7 +173,7 @@ char LeetCode::findTheDifference(string s, string t)
 /// For example, [0,2,3,1] is also a valid gray code sequence according to the above definition.
 /// For now, the judge is able to judge based on one instance of gray code sequence. Sorry about that.
 /// </summary>
-vector<int> LeetCode::grayCode(int n)
+vector<int> LeetCodeBit::grayCode(int n)
 {
     vector<int> result;
     for (size_t i = 0; i < pow(2, n); i++)
@@ -203,7 +204,7 @@ vector<int> LeetCode::grayCode(int n)
 /// Output:
 /// "ffffffff"
 /// </summary>
-string LeetCode::toHex(int num)
+string LeetCodeBit::toHex(int num)
 {
     string result;
     unsigned int number = num;
@@ -234,7 +235,7 @@ string LeetCode::toHex(int num)
 /// Your algorithm should have a linear runtime complexity. Could you implement 
 /// it without using extra memory? 
 /// </summary>
-int LeetCode::singleNumberII(vector<int>& nums)
+int LeetCodeBit::singleNumberII(vector<int>& nums)
 {
     unsigned int result = 0;
     vector<int> bitCount(32);
@@ -267,7 +268,7 @@ int LeetCode::singleNumberII(vector<int>& nums)
 /// Follow up:
 /// If this function is called many times, how would you optimize it? 
 /// </summary>
-uint32_t LeetCode::reverseBits(uint32_t n)
+uint32_t LeetCodeBit::reverseBits(uint32_t n)
 {
     vector<int> bit_vector(32);
     size_t index = 0;
@@ -309,7 +310,7 @@ uint32_t LeetCode::reverseBits(uint32_t n)
 /// or
 /// 7 -> 6 -> 3 -> 2 -> 1
 /// </summary>
-int LeetCode::integerReplacement(int n)
+int LeetCodeBit::integerReplacement(int n)
 {
     if (n == INT_MAX) return 32;
     int result = 0;
@@ -334,7 +335,7 @@ int LeetCode::integerReplacement(int n)
 /// Given a range [m, n] where 0 <= m <= n <= 2147483647, return the bitwise AND of all numbers in this range, inclusive.
 /// For example, given the range [5, 7], you should return 4. 
 /// </summary>
-int LeetCode::rangeBitwiseAnd(int m, int n)
+int LeetCodeBit::rangeBitwiseAnd(int m, int n)
 {
     uint32_t mask = 0xffffffff;
     while (m != n)
@@ -368,7 +369,7 @@ int LeetCode::rangeBitwiseAnd(int m, int n)
 /// Return 0
 /// No such pair of words. 
 /// </summary>
-int LeetCode::maxProductWordLength(vector<string>& words)
+int LeetCodeBit::maxProductWordLength(vector<string>& words)
 {
     size_t result = 0;
     vector<int> word_code;
@@ -403,7 +404,7 @@ int LeetCode::maxProductWordLength(vector<string>& words)
 /// Note:
 /// Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity? 
 /// </summary>
-int LeetCode::missingNumber(vector<int>& nums)
+int LeetCodeBit::missingNumber(vector<int>& nums)
 {
     int sum = 0;
     for (size_t i = 0; i < nums.size(); i++)
@@ -428,7 +429,7 @@ int LeetCode::missingNumber(vector<int>& nums)
 /// 2.Your algorithm should run in linear runtime complexity. Could you implement 
 ///   it using only constant space complexity?
 /// </summary>
-vector<int> LeetCode::singleNumberIII(vector<int>& nums)
+vector<int> LeetCodeBit::singleNumberIII(vector<int>& nums)
 {
     vector<int> result(2, 0);
     int sum = 0;
@@ -465,7 +466,7 @@ vector<int> LeetCode::singleNumberIII(vector<int>& nums)
 /// Output: 28
 /// Explanation: The maximum result is 5 ^ 25 = 28.
 /// </summary>
-int LeetCode::findMaximumXOR(vector<int>& nums)
+int LeetCodeBit::findMaximumXOR(vector<int>& nums)
 {
     int result = 0;
     int mask = 0;
@@ -509,7 +510,7 @@ int LeetCode::findMaximumXOR(vector<int>& nums)
 /// 4   (0 1 0 0)
 /// The above arrows point to positions where the corresponding bits are different.    
 /// </summary>
-int LeetCode::hammingDistance(int x, int y)
+int LeetCodeBit::hammingDistance(int x, int y)
 {
     int count = 0;
     while ((x != 0) || (y != 0))
@@ -543,7 +544,7 @@ int LeetCode::hammingDistance(int x, int y)
 /// 1.Elements of the given array are in the range of 0  to 10^9 
 /// 2.Length of the array will not exceed 10^4. 
 /// </summary>
-int LeetCode::totalHammingDistance(vector<int>& nums)
+int LeetCodeBit::totalHammingDistance(vector<int>& nums)
 {
     int total = 0;
     for (size_t i = 0; i < 32; i++)
@@ -580,7 +581,7 @@ int LeetCode::totalHammingDistance(vector<int>& nums)
 /// Output:
 /// 6
 /// </summary>
-int LeetCode::lastRemaining(int n)
+int LeetCodeBit::lastRemaining(int n)
 {
     unsigned int number = 1;
     unsigned int bit = 1;
@@ -622,7 +623,7 @@ int LeetCode::lastRemaining(int n)
 /// Output: 0
 /// Explanation: The binary representation of 1 is 1 (no leading zero bits), and its complement is 0. So you need to output 0.
 /// </summary>
-int LeetCode::findComplement(int num)
+int LeetCodeBit::findComplement(int num)
 {
     int n = num;
     int bit = 0;
@@ -663,7 +664,7 @@ int LeetCode::findComplement(int num)
 /// Explanation:
 /// The binary representation of 10 is: 1010.
 /// </summary>
-bool LeetCode::hasAlternatingBits(int n)
+bool LeetCodeBit::hasAlternatingBits(int n)
 {
     int bit = -1;
     while (n > 0)
@@ -719,7 +720,7 @@ bool LeetCode::hasAlternatingBits(int n)
 /// 1.L, R will be integers L <= R in the range [1, 10^6].
 /// 2.R - L will be at most 10000.
 /// </summary>
-int LeetCode::countPrimeSetBits(int L, int R)
+int LeetCodeBit::countPrimeSetBits(int L, int R)
 {
     int result = 0;
     unordered_set<int> prime = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31 };
@@ -758,7 +759,7 @@ int LeetCode::countPrimeSetBits(int L, int R)
 /// 1. The length of A will be in the range [1, 30].
 /// 2. A[i] will be in the range of [0, 10000].
 /// </summary>
-bool LeetCode::splitArraySameAverage(vector<int>& A)
+bool LeetCodeBit::splitArraySameAverage(vector<int>& A)
 {
     int N = A.size();
     int sum = 0;
@@ -803,7 +804,7 @@ bool LeetCode::splitArraySameAverage(vector<int>& A)
 /// 1. The length of A will be in the range [1, 30].
 /// 2. A[i] will be in the range of [0, 10000].
 /// </summary>
-bool LeetCode::splitArraySameAverageII(vector<int>& A)
+bool LeetCodeBit::splitArraySameAverageII(vector<int>& A)
 {
     unordered_map<int, int> sum_map;
     int sum = 0;
@@ -872,7 +873,7 @@ bool LeetCode::splitArraySameAverageII(vector<int>& A)
 /// Note:
 /// 1 <= N <= 10^9
 /// </summary>
-int LeetCode::binaryGap(int N)
+int LeetCodeBit::binaryGap(int N)
 {
     int result = 0;
     int last = -1;
@@ -931,7 +932,7 @@ int LeetCode::binaryGap(int N)
 ///
 /// 1. 0 <= N < 10^9
 /// </summary>
-int LeetCode::bitwiseComplement(int N)
+int LeetCodeBit::bitwiseComplement(int N)
 {
     vector<int> bits;
     if (N == 0) bits.push_back(0);
@@ -972,7 +973,7 @@ int LeetCode::bitwiseComplement(int N)
 /// 1 <= S.length <= 1000
 /// 1 <= N <= 10^9
 /// </summary>
-bool LeetCode::queryString(string S, int N) 
+bool LeetCodeBit::queryString(string S, int N) 
 {
     for (int i = N; i > N / 2; i--)
     {
@@ -1015,7 +1016,7 @@ bool LeetCode::queryString(string S, int N)
 /// Note:
 /// 1. 0 <= N <= 10^9
 /// </summary>
-string LeetCode::baseNeg2(int N)
+string LeetCodeBit::baseNeg2(int N)
 {
     int sum = N;
     string result;
@@ -1080,7 +1081,7 @@ string LeetCode::baseNeg2(int N)
 /// 1. 1 <= A.length <= 30000
 /// 2. A[i] is 0 or 1
 /// </summary>
-vector<bool> LeetCode::prefixesDivBy5(vector<int>& A)
+vector<bool> LeetCodeBit::prefixesDivBy5(vector<int>& A)
 {
     vector<bool> result;
     int sum = 0;
@@ -1134,7 +1135,7 @@ vector<bool> LeetCode::prefixesDivBy5(vector<int>& A)
 /// 3. All matrix[i].length's are equal
 /// 4. matrix[i][j] is 0 or 1
 /// </summary>
-int LeetCode::maxEqualRowsAfterFlips(vector<vector<int>>& matrix)
+int LeetCodeBit::maxEqualRowsAfterFlips(vector<vector<int>>& matrix)
 {
     int result = 0;
     unordered_map<string, int> str_map;
@@ -1181,7 +1182,7 @@ int LeetCode::maxEqualRowsAfterFlips(vector<vector<int>>& matrix)
 /// 4. arr1[i] is 0 or 1
 /// 5. arr2[i] is 0 or 1
 /// </summary>
-vector<int> LeetCode::addNegabinary(vector<int>& arr1, vector<int>& arr2)
+vector<int> LeetCodeBit::addNegabinary(vector<int>& arr1, vector<int>& arr2)
 {
     vector<int> param1 = arr1;
     vector<int> param2 = arr2;
@@ -1246,7 +1247,7 @@ vector<int> LeetCode::addNegabinary(vector<int>& arr1, vector<int>& arr2)
 /// 1. 1 <= n <= 16
 /// 2. 0 <= start < 2 ^ n
 /// </summary>
-vector<int> LeetCode::circularPermutation(int n, int start)
+vector<int> LeetCodeBit::circularPermutation(int n, int start)
 {
     vector<int> result;
     vector<int> buffer;
