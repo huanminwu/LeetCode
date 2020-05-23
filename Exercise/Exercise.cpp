@@ -522,19 +522,7 @@ void TestLeetCode128(void)
 
 
 
-void TestLeetCode239(void)
-{
-    Logger::WriteMessage("Test Leet Code 239");
-    LeetCode leetCode;
-    vector<int> nums;
-    vector<int> result;
-    int k;
-    nums = { 1,  3, -1, -3,  5, 3,  6,  7 };
-    k = 3;
-    Logger::WriteMessage(nums);
-    result = leetCode.maxSlidingWindow(nums, k);
-    Logger::WriteMessage(result);
-}
+
 
 void TestLeetCode31(void)
 {
@@ -9320,7 +9308,6 @@ void main(int argc, char* argv[])
     TestLeetCode31();
     TestLeetCode122();
     TestLeetCode273();
-    TestLeetCode239();
     TestLeetCode128();
     TestLeetCode164();
     TestLeetCode264();

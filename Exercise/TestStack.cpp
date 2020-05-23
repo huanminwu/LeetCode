@@ -407,6 +407,20 @@ void TestLeetCode1425(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result  = " + to_string(result));
 }
 
+void TestLeetCode239(void)
+{
+    Logger::WriteMessage("Test Leet Code 239");
+    LeetCodeStack leetCode;
+    vector<int> nums;
+    vector<int> result;
+    int k;
+    nums = { 1,  3, -1, -3,  5, 3,  6,  7 };
+    k = 3;
+    Logger::WriteMessage(nums);
+    result = leetCode.maxSlidingWindow(nums, k);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeStack(void)
 {
     TestLeetCode1425();
