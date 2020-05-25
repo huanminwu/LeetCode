@@ -69,9 +69,6 @@
     <ClInclude Include="LeetCodeLinkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LeetCodeUnionFind.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LeetCodeBit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -116,13 +113,7 @@
     <ClCompile Include="LeetCodeStack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LeetCodeQueue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LeetCodeBit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LeetCodeUnionFind.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LeetCodeDFS.cpp">

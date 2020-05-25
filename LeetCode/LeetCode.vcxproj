@@ -147,7 +147,6 @@
     <ClInclude Include="LeetCodeStack.h" />
     <ClInclude Include="LeetCodeString.h" />
     <ClInclude Include="LeetCodeTree.h" />
-    <ClInclude Include="LeetCodeUnionFind.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LeetCodeArray.cpp" />
@@ -161,12 +160,10 @@
     <ClCompile Include="LeetCodeHashtable.cpp" />
     <ClCompile Include="LeetCodeLinkedList.cpp" />
     <ClCompile Include="LeetCodeMath.cpp" />
-    <ClCompile Include="LeetCodeQueue.cpp" />
     <ClCompile Include="LeetCodeSort.cpp" />
     <ClCompile Include="LeetCodeStack.cpp" />
     <ClCompile Include="LeetCodeString.cpp" />
     <ClCompile Include="LeetCodeTree.cpp" />
-    <ClCompile Include="LeetCodeUnionFind.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LeetCode1045.sql" />

@@ -19,7 +19,6 @@
 #include "..\LeetCode\LeetCodeGreedy.h"
 #include "..\LeetCode\LeetCodeString.h"
 #include "..\LeetCode\LeetCodeBinarySearch.h"
-#include "..\LeetCode\LeetCodeUnionFind.h"
 #include "..\LeetCode\LeetCodeBit.h"
 #include "TestMath.h"
 #include "TestDP.h"
@@ -36,7 +35,6 @@
 #include "TestGreedy.h"
 #include "TestString.h"
 #include "TestBinarySearch.h"
-#include "TestUnionFind.h"
 #include "TestBit.h"
 
 void TestLeetCode121(void)
@@ -8534,7 +8532,6 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeUnionFind();
     TestLeetCodeDP();
     TestLeetCodeTree();
     TestLeetCodeString();
