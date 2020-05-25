@@ -2483,8 +2483,221 @@ void TestLeetCode932(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode12(void)
+{
+    LeetCodeMath leetCode;
+    Logger::WriteMessage("Test Leet Code 12");
+    int num = 20;
+    string result = leetCode.intToRoman(num);
+    Logger::WriteMessage("Number is " + to_string(num) + "; Roman is " + result);
+
+    num = 999;
+    result = leetCode.intToRoman(num);
+    Logger::WriteMessage("Number is " + to_string(num) + "; Roman is " + result);
+}
+
+void TestLeetCode13(void)
+{
+    LeetCodeMath leetCode;
+    Logger::WriteMessage("Test Leet Code 13");
+    string roman = "XX";
+    int num = leetCode.romanToInt(roman);
+    Logger::WriteMessage("Roman is " + roman + "; Number is " + to_string(num));
+
+    roman = "CMXCIX";
+    num = leetCode.romanToInt(roman);
+    Logger::WriteMessage("Roman is " + roman + "; Number is " + to_string(num));
+}
+
+void TestLeetCode171(void)
+{
+    Logger::WriteMessage("Test Leet Code 171");
+    string column = "AB";
+    LeetCodeMath leetCode;
+    int number = leetCode.titleToNumber(column);
+    Logger::WriteMessage("Column tile = " + column + " number = " + to_string(number));
+}
+
+void TestLeetCode263(void)
+{
+    Logger::WriteMessage("Test Leet Code 263");
+    LeetCodeMath leetCode;
+    int data = 18;
+    bool is_ugly = leetCode.isUgly(data);
+    Logger::WriteMessage(to_string(data) + " is " + (is_ugly ? "" : " not ") + "ugly number");
+}
+
+void TestLeetCode231(void)
+{
+    Logger::WriteMessage("Test Leet Code 231");
+    LeetCodeMath leetCode;
+    int n = 128;
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(leetCode.isPowerOfTwo(n) ? "is power of two" : "is not power of two");
+    n = 0;
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(leetCode.isPowerOfTwo(n) ? "is power of two" : "is not power of two");
+    n = INT_MIN;
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(leetCode.isPowerOfTwo(n) ? "is power of two" : "is not power of two");
+}
+
+void TestLeetCode168(void)
+{
+    Logger::WriteMessage("Test Leet Code 168");
+    int number = 26 * 26;
+
+    LeetCodeMath leetCode;
+    string column = leetCode.convertToTitle(number);
+    Logger::WriteMessage("Column number = " + to_string(number) + " title = " + column);
+}
+
+void TestLeetCode386(void)
+{
+    Logger::WriteMessage("Test Leet Code 386");
+    LeetCodeMath leetCode;
+    int n = 220;
+    vector<int> result = leetCode.lexicalOrder(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode400(void)
+{
+    Logger::WriteMessage("Test Leet Code 400");
+    LeetCodeMath leetCode;
+    int n = 1000000000;
+    int digit = leetCode.findNthDigit(n);
+    Logger::WriteMessage("The " + to_string(n) + "th digit is " + to_string(digit));
+}
+
+void TestLeetCode233(void)
+{
+    Logger::WriteMessage("Test Leet Code 233");
+    LeetCodeMath leetCode;
+    int n = 824883294;
+    int count = leetCode.countDigitOne(n);
+    Logger::WriteMessage("Count digit one for " + to_string(n) + "; count = " + to_string(count));
+
+    n = 9;
+    count = leetCode.countDigitOne(n);
+    Logger::WriteMessage("Count digit one for " + to_string(n) + "; count = " + to_string(count));
+
+    n = 27;
+    count = leetCode.countDigitOne(n);
+    Logger::WriteMessage("Count digit one for " + to_string(n) + "; count = " + to_string(count));
+}
+
+void TestLeetCode1067(void)
+{
+    Logger::WriteMessage("Test Leet Code 1067");
+    LeetCodeMath leetCode;
+    int d = 0;
+    int low = 1;
+    int high = 100;
+    int result = leetCode.digitsCount(d, low, high);
+    Logger::WriteMessage("d = " + to_string(d) + "; low = " + to_string(low) +
+        "; high = " + to_string(high) + "; result = " + to_string(result));
+
+    d = 1;
+    low = 1;
+    high = 13;
+    result = leetCode.digitsCount(d, low, high);
+    Logger::WriteMessage("d = " + to_string(d) + "; low = " + to_string(low) +
+        "; high = " + to_string(high) + "; result = " + to_string(result));
+
+    d = 3;
+    low = 100;
+    high = 250;
+    result = leetCode.digitsCount(d, low, high);
+    Logger::WriteMessage("d = " + to_string(d) + "; low = " + to_string(low) +
+        "; high = " + to_string(high) + "; result = " + to_string(result));
+}
+
+void TestLeetCode908(void)
+{
+    Logger::WriteMessage("Test Leet Code 908");
+    LeetCodeMath leetCode;
+    vector<int> A = { 1 };
+    int K = 0;
+    int result = leetCode.smallestRangeI(A, K);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { 0,10 };
+    K = 2;
+    result = leetCode.smallestRangeI(A, K);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { 1,3,6 };
+    K = 3;
+    result = leetCode.smallestRangeI(A, K);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode31(void)
+{
+    Logger::WriteMessage("Test Leet Code 31");
+    vector<int> nums;
+    LeetCodeMath leetCode;
+    nums = { 1,2,3 };
+    Logger::WriteMessage(nums);
+    leetCode.nextPermutation(nums);
+    Logger::WriteMessage(nums);
+    nums = { 3,2,1 };
+    Logger::WriteMessage(nums);
+    leetCode.nextPermutation(nums);
+    Logger::WriteMessage(nums);
+    nums = { 1,5,1 };
+    Logger::WriteMessage(nums);
+    leetCode.nextPermutation(nums);
+    Logger::WriteMessage(nums);
+    nums = { 1,1,5 };
+    Logger::WriteMessage(nums);
+    leetCode.nextPermutation(nums);
+    Logger::WriteMessage(nums);
+    nums = {};
+    Logger::WriteMessage(nums);
+    leetCode.nextPermutation(nums);
+    Logger::WriteMessage(nums);
+}
+
+void TestLeetCode60(void)
+{
+    Logger::WriteMessage("Test Leet Code 60");
+    LeetCodeMath leetCode;
+    int n = 9, k = 10000;
+    string result = leetCode.getPermutation(n, k);
+    Logger::WriteMessage("The " + to_string(k) + "th permutation in " + to_string(n) + "! sequence is " + result);
+}
+
+void TestLeetCode357(void)
+{
+    Logger::WriteMessage("Test Leet Code 357");
+    LeetCodeMath leetCode;
+    int n = 2;
+    int count = leetCode.countNumbersWithUniqueDigits(n);
+    Logger::WriteMessage("Count numbers with unique digits with " + to_string(n) + "; count = " + to_string(count));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode357();
+    TestLeetCode31();
+    TestLeetCode60();
+    TestLeetCode908();
+    TestLeetCode1067();
+    TestLeetCode233();
+    TestLeetCode386();
+    TestLeetCode400();
+    TestLeetCode168();
+    TestLeetCode171();
+    TestLeetCode263();
+    TestLeetCode231();
+    TestLeetCode12();
+    TestLeetCode13();
     TestLeetCode932();
     TestLeetCode829();
     TestLeetCode789();

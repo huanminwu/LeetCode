@@ -4097,5 +4097,292 @@ public:
     /// 4. 1 <= r <= 5000
     /// </summary>
     int numPoints(vector<vector<int>>& points, int r);
+
+    /// <summary>
+    /// Leet code #12. Integer to Roman
+    ///  
+    /// Roman numerals are represented by seven different 
+    /// symbols: I, V, X, L, C, D and M.
+    ///
+    /// Symbol       Value
+    /// I             1
+    /// V             5
+    /// X             10
+    /// L             50
+    /// C             100
+    /// D             500
+    /// M             1000
+    /// For example, two is written as II in Roman numeral, just two one's 
+    /// added together. Twelve is written as, XII, which is simply X + II. 
+    /// The number twenty seven is written as XXVII, which is XX + V + II.
+    ///
+    /// Roman numerals are usually written largest to smallest from left to 
+    /// right. However, the numeral for four is not IIII. Instead, the number 
+    /// four is written as IV. Because the one is before the five we subtract 
+    /// it making four. The same principle applies to the number nine, which 
+    /// is written as IX. There are six instances where subtraction is used:
+    ///
+    /// I can be placed before V (5) and X (10) to make 4 and 9. 
+    /// X can be placed before L (50) and C (100) to make 40 and 90. 
+    /// C can be placed before D (500) and M (1000) to make 400 and 900.
+    /// Given an integer, convert it to a roman numeral. Input is guaranteed 
+    /// to be within the range from 1 to 3999.
+    ///
+    /// Example 1:
+    /// 
+    /// Input: 3
+    /// Output: "III"
+    ///
+    /// Example 2:
+    ///
+    /// Input: 4
+    /// Output: "IV"
+    ///
+    /// Example 3:
+    ///
+    /// Input: 9
+    /// Output: "IX"
+    ///
+    /// Example 4:
+    ///
+    /// Input: 58
+    /// Output: "LVIII"
+    /// Explanation: L = 50, V = 5, III = 3.
+    ///
+    /// Example 5:
+    ///
+    /// Input: 1994
+    /// Output: "MCMXCIV"
+    /// Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
+    /// </summary>
+    string intToRoman(int num);
+
+    /// <summary>
+    /// Leet code 13. Roman to Integer
+    /// Given a roman numeral, convert it to an integer.
+    /// Input is guaranteed to be within the range from 1 to 3999.
+    /// </summary>
+    int romanToInt(string s);
+
+    /// <summary>
+    /// Leet code #231. Power of Two    
+    /// Given an integer, write a function to determine if it is a power of two. 
+    /// </summary>
+    bool isPowerOfTwo(int n);
+
+    /// <summary>
+    /// Leet code #171. Excel Sheet Column Number 
+    /// Related to question Excel Sheet Column Title
+    /// Given a column title as appear in an Excel sheet, return its corresponding column number.
+    /// For example:
+    /// A -> 1
+    /// B -> 2
+    /// C -> 3
+    /// ...
+    /// Z -> 26
+    /// AA -> 27
+    /// AB -> 28 
+    /// </summary>
+    int titleToNumber(string s);
+
+    /// <summary>
+    /// Leet code #168. Excel Sheet Column Title 
+    /// Related to question Excel Sheet Column Title
+    /// Given a positive integer, return its corresponding column title as appear in an Excel sheet.
+    /// For example:
+    /// 1 -> A
+    /// 2 -> B
+    /// 3 -> C
+    /// ...
+    /// 26 -> Z
+    /// 27 -> AA
+    /// 28 -> AB 
+    ///</summary>
+    string convertToTitle(int n);
+
+    /// <summary>
+    /// Leet code #263. Ugly Number
+    /// Write a program to check whether a given number is an ugly number. 
+    /// Ugly numbers are positive numbers whose prime factors only include 
+    /// 2, 3, 5. For example, 6, 8 are ugly 
+    /// while 14 is not ugly since it includes another prime factor 7. 
+    /// Note that 1 is typically treated as an ugly number. 
+    /// </summary>
+    bool isUgly(int num);
+
+    /// <summary>
+    /// Leet code #400. Nth Digit 
+    /// Find the nth digit of the infinite integer sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... 
+    /// Note: 
+    /// n is positive and will fit within the range of a 32-bit signed integer (n < 2^31). 
+    /// Example 1: 
+    /// Input:
+    /// 3
+    /// Output:
+    /// 3
+    /// Example 2:
+    /// Input:
+    /// 11
+    ///	Output:
+    /// 0
+    /// Explanation:
+    /// The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
+    /// 11, ... is a 0, which is part of the number 10.
+    /// </summary>
+    int findNthDigit(int n);
+
+    /// <summary>
+    /// Leet code #386. Lexicographical Numbers
+    ///
+    /// Given an integer n, return 1 - n in lexicographical order. 
+    /// For example, given 13, return: [1,10,11,12,13,2,3,4,5,6,7,8,9]. 
+    /// Please optimize your algorithm to use less time and space. The input 
+    /// size may be as large as 5,000,000. 
+    /// </summary>
+    vector<int> lexicalOrder(int n);
+
+    /// <summary>
+    /// Leet code #233. Number of Digit One 
+    /// </summary>
+    int countDigitOne(string& str_n, int is_last, int index, vector<int> &cache);
+
+    /// <summary>
+    /// Leet code #233. Number of Digit One 
+    ///
+    /// Given an integer n, count the total number of digit 1 appearing 
+    /// in all non-negative integers less than or equal to n.
+    /// For example: 
+    /// Given n = 13,
+    /// Return 6, because digit 1 occurred in the following numbers: 
+    /// 1, 10, 11, 12, 13. 
+    /// Hint: 
+    /// 1.Beware of overflow.
+    /// </summary>
+    int countDigitOne(int n);
+
+    /// <summary>
+    /// Leet code #1067. Digit Count in Range
+    /// </summary>
+    int digitsCount(string& str_n, int d, int is_first, int is_last, int index, vector<int>& cache);
+
+    /// <summary>
+    /// Leet code #1067. Digit Count in Range
+    /// 
+    /// Given an integer d between 0 and 9, and two positive integers low and 
+    /// high as lower and upper bounds, respectively. Return the number of 
+    /// times that d occurs as a digit in all integers between low and high, 
+    /// including the bounds low and high.
+    /// 
+    /// Example 1:
+    /// Input: d = 1, low = 1, high = 13
+    /// Output: 6
+    /// Explanation: 
+    /// The digit d=1 occurs 6 times in 1,10,11,12,13. Note that the digit d=1 
+    /// occurs twice in the number 11.
+    ///
+    /// Example 2:
+    ///
+    /// Input: d = 3, low = 100, high = 250
+    /// Output: 35
+    /// Explanation: 
+    /// The digit d=3 occurs 35 times in 103,113,123,130,131,...,238,239,243.
+    ///
+    ///
+    /// Note:
+    ///
+    /// 0 <= d <= 9
+    /// 1 <= low <= high <= 2×10^8
+    /// </summary>
+    int digitsCount(int d, int low, int high);
+
+    /// <summary>
+    /// Leet code #60. Permutation Sequence
+    /// The set [1,2,3,?n] contains a total of n! unique permutations.
+    /// By listing and labeling all of the permutations in order,
+    /// We get the following sequence (ie, for n = 3): 
+    /// 1."123"
+    /// 2."132"
+    /// 3."213"
+    /// 4."231"
+    /// 5."312"
+    /// 6."321"
+    /// Given n and k, return the kth permutation sequence.
+    /// Note: Given n will be between 1 and 9 inclusive.
+    /// </summary>
+    string getPermutation(int n, int k);
+
+
+    /// <summary>
+    /// Leet code #31. Next Permutation
+    /// Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers. 
+    /// If such arrangement is not possible, it must rearrange it as the lowest possible order (ie, sorted in ascending order). 
+    /// The replacement must be in-place, do not allocate extra memory. 
+    /// Here are some examples. Inputs are in the left-hand column and its corresponding outputs are in the right-hand column.
+    /// 1,2,3 -> 1,3,2
+    /// 3,2,1 -> 1,2,3
+    /// 1,1,5 -> 1,5,1 
+    /// </summary>
+    void nextPermutation(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #357. Count Numbers with Unique Digits
+    ///
+    /// Given a non-negative integer n, count all numbers with unique digits, 
+    /// x, where 0 <= x < 10^n.
+    ///
+    /// Example: 
+    /// Given n = 2, return 91. (The answer should be the total numbers in 
+    /// the range of 0 <= x < 100, excluding [11,22,33,44,55,66,77,88,99]) 
+    /// Return 6, because digit 1 occurred in the following numbers: 1, 10, 11, 12, 13. 
+    /// Hint:
+    /// 1.A direct way is to use the backtracking approach.
+    /// 2.Backtracking should contains three states which are (the current number, number 
+    //// of steps to get that number and a bitmask which represent 
+    /// which number is marked as visited so far in the current number). Start with state 
+    /// (0,0,0) and count all valid number till we reach number of steps equals to 10n.
+    /// 3.This problem can also be solved using a dynamic programming approach and some
+    /// knowledge of combinatorics.
+    /// 4.Let f(k) = count of numbers with unique digits with length equals k.
+    /// 5.f(1) = 10, ..., f(k) = 9 * 9 * 8 * ... (9 - k + 2) [The first factor is 9 
+    /// because a number cannot start with 0].
+    /// </summary>
+    int countNumbersWithUniqueDigits(int n);
+
+    /// <summary>
+    /// Leet code #908. Smallest Range I
+    /// 
+    /// Given an array A of integers, for each integer A[i] we may choose any x 
+    /// with -K <= x <= K, and add x to A[i].
+    ///
+    /// After this process, we have some array B.
+    ///
+    /// Return the smallest possible difference between the maximum value of B 
+    /// and the minimum value of B.
+    ///
+    /// 
+    /// Example 1:
+    ///
+    /// Input: A = [1], K = 0
+    /// Output: 0
+    /// Explanation: B = [1]
+    /// Example 2:
+    ///
+    /// Input: A = [0,10], K = 2
+    /// Output: 6
+    /// Explanation: B = [2,8]
+    /// Example 3:
+    ///
+    /// Input: A = [1,3,6], K = 3
+    /// Output: 0
+    /// Explanation: B = [3,3,3] or B = [4,4,4]
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. 1 <= A.length <= 10000
+    /// 2. 0 <= A[i] <= 10000
+    /// 3. 0 <= K <= 10000
+    /// </summary>
+    int smallestRangeI(vector<int>& A, int K);
 };
 #endif

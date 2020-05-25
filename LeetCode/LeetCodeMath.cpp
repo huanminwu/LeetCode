@@ -295,7 +295,7 @@ bool LeetCodeMath::isPalindrome(int x)
 /// Output: "MCMXCIV"
 /// Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 /// </summary>
-string LeetCode::intToRoman(int num)
+string LeetCodeMath::intToRoman(int num)
 {
     string result;
     vector<pair<int, string>> mapping =
@@ -325,7 +325,7 @@ string LeetCode::intToRoman(int num)
 /// Given a roman numeral, convert it to an integer.
 /// Input is guaranteed to be within the range from 1 to 3999.
 /// </summary>
-int LeetCode::romanToInt(string s)
+int LeetCodeMath::romanToInt(string s)
 {
     int result = 0;
     vector<pair<int, string>> mapping =
@@ -445,7 +445,7 @@ bool LeetCodeMath::canWinNim(int n)
 /// Leet code #231. Power of Two    
 /// Given an integer, write a function to determine if it is a power of two. 
 /// </summary>
-bool LeetCode::isPowerOfTwo(int n)
+bool LeetCodeMath::isPowerOfTwo(int n)
 {
     int sum = 0;
     while (n != 0)
@@ -500,7 +500,7 @@ int LeetCodeMath::bulbSwitch(int n)
 /// AA -> 27
 /// AB -> 28 
 /// </summary>
-int LeetCode::titleToNumber(string s)
+int LeetCodeMath::titleToNumber(string s)
 {
     int number = 0;
     for (size_t i = 0; i < s.size(); i++)
@@ -524,7 +524,7 @@ int LeetCode::titleToNumber(string s)
 /// 27 -> AA
 /// 28 -> AB 
 ///</summary>
-string LeetCode::convertToTitle(int n)
+string LeetCodeMath::convertToTitle(int n)
 {
     string reverse_title = "";
     string title = "";
@@ -811,7 +811,7 @@ bool LeetCodeMath::isSelfCrossing(vector<int>& x)
 /// while 14 is not ugly since it includes another prime factor 7. 
 /// Note that 1 is typically treated as an ugly number. 
 /// </summary>
-bool LeetCode::isUgly(int num)
+bool LeetCodeMath::isUgly(int num)
 {
     if (num == 0) return false;
     while (num % 2 == 0) num /= 2;
@@ -919,7 +919,7 @@ double LeetCodeMath::myPow(double x, int n)
 /// Given n and k, return the kth permutation sequence.
 /// Note: Given n will be between 1 and 9 inclusive.
 /// </summary>
-string LeetCode::getPermutation(int n, int k)
+string LeetCodeMath::getPermutation(int n, int k)
 {
     int count = 0;
     string result;
@@ -1058,7 +1058,7 @@ string LeetCodeMath::numberToWords(int num)
 /// 3,2,1 -> 1,2,3
 /// 1,1,5 -> 1,5,1 
 /// </summary>
-void LeetCode::nextPermutation(vector<int>& nums)
+void LeetCodeMath::nextPermutation(vector<int>& nums)
 {
     if (nums.empty() || nums.size() == 1) return;
     int index;
@@ -1315,35 +1315,54 @@ int LeetCodeMath::integerBreak(int n)
 
 /// <summary>
 /// Leet code #233. Number of Digit One 
-/// Given an integer n, count the total number of digit 1 appearing in all non-negative integers less than or equal to n.
+/// </summary>
+int LeetCodeMath::countDigitOne(string& str_n, int is_last, int index, vector<int>& cache)
+{
+    int result = 0;
+    if (index == str_n.size()) return 0;
+    if (is_last == 0 && cache[index] != -1)
+    {
+        return cache[index];
+    }
+    for (int d = 0; d <= (is_last ? str_n[index] - '0' : 9); d++)
+    {
+         int next_last = (is_last == 1 && d == str_n[index] - '0') ? 1 : 0;
+        result += countDigitOne(str_n, next_last, index + 1, cache);
+        if (d == 1)
+        {
+            if (index == str_n.size() - 1) result += 1;
+            else
+            {
+                if (next_last == 1) result += atoi(str_n.substr(index + 1).c_str()) + 1;
+                else
+                {
+                    result += (int)pow(10, str_n.size() - index - 1);
+                }
+            }
+        }
+    }
+    if (is_last == 0) cache[index] = result;
+    return result;
+}
+
+/// <summary>
+/// Leet code #233. Number of Digit One 
+/// Given an integer n, count the total number of digit 1 appearing in all 
+/// non-negative integers less than or equal to n.
 /// For example: 
 /// Given n = 13,
-/// Return 6, because digit 1 occurred in the following numbers: 1, 10, 11, 12, 13. 
+/// Return 6, because digit 1 occurred in the following numbers: 1, 10, 
+/// 11, 12, 13. 
 /// Hint: 
 /// 1.Beware of overflow.
 /// </summary>
-int LeetCode::countDigitOne(int n)
+int LeetCodeMath::countDigitOne(int n)
 {
-    int sum = 0;
-    int left = n;
-    int right = 0;
-    int right_factor = 1;
-    while (left > 0)
-    {
-        sum += (left / 10)*right_factor;
-        if (left % 10 > 1)
-        {
-            sum += right_factor;
-        }
-        if (left % 10 == 1)
-        {
-            sum += (right + 1);
-        }
-        right = left % 10 * right_factor + right;
-        right_factor *= 10;
-        left = left / 10;
-    }
-    return sum;
+    if (n <= 0) return 0;
+    string str_n = to_string(n);
+    vector<int> cache(str_n.size(), -1);
+    int result = countDigitOne(str_n, 1, 0, cache);
+    return result;
 }
 
 /// <summary>
@@ -1360,7 +1379,7 @@ int LeetCode::countDigitOne(int n)
 /// 4.Let f(k) = count of numbers with unique digits with length equals k.
 /// 5.f(1) = 10, ..., f(k) = 9 * 9 * 8 * ... (9 - k + 2) [The first factor is 9 because a number cannot start with 0].
 /// </summary>
-int LeetCode::countNumbersWithUniqueDigits(int n)
+int LeetCodeMath::countNumbersWithUniqueDigits(int n)
 {
     vector<int> matrix(n + 1, 0);
     int sum = 0;
@@ -1402,7 +1421,7 @@ int LeetCode::countNumbersWithUniqueDigits(int n)
 /// Explanation:
 /// The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... is a 0, which is part of the number 10.
 /// </summary>
-int LeetCode::findNthDigit(int n)
+int LeetCodeMath::findNthDigit(int n)
 {
     int result = 0;
     int number_count = 9;
@@ -1436,7 +1455,7 @@ int LeetCode::findNthDigit(int n)
 /// For example, given 13, return: [1,10,11,12,13,2,3,4,5,6,7,8,9]. 
 /// Please optimize your algorithm to use less time and space. The input size may be as large as 5,000,000. 
 /// </summary>
-vector<int> LeetCode::lexicalOrder(int n)
+vector<int> LeetCodeMath::lexicalOrder(int n)
 {
     vector<int> result;
     int index = 1;
@@ -3860,7 +3879,7 @@ int LeetCodeMath::superpalindromesInRange(string L, string R)
 /// 2. 0 <= A[i] <= 10000
 /// 3. 0 <= K <= 10000
 /// </summary>
-int LeetCode::smallestRangeI(vector<int>& A, int K)
+int LeetCodeMath::smallestRangeI(vector<int>& A, int K)
 {
     int min_num = 0, max_num = 0;
     int result = 0;
@@ -4894,41 +4913,34 @@ int LeetCodeMath::sumOfDigits(vector<int>& A)
 /// <summary>
 /// Leet code #1067. Digit Count in Range
 /// </summary>
-int LeetCode::digitsCount(int d, int n)
+int LeetCodeMath::digitsCount(string& str_n, int d, int is_first, int is_last, int index, vector<int>& cache)
 {
     int result = 0;
-    string num = to_string(n);
-    int left = 0;
-    while (!num.empty())
+    if (index == str_n.size()) return 0;
+    if (is_first == 0 && is_last == 0 && cache[index] != -1)
     {
-        int digit = num[0] - '0';
-        num = num.substr(1);
-        int right = atoi(num.c_str());
-        int pow = (int)std::pow(10, num.size());
-        if (d != 0)
+        return cache[index];
+    }
+    for (int i = 0; i <= (is_last ? str_n[index] - '0' : 9); i++)
+    {
+        int next_first = (is_first == 1 && i == 0) ? 1 : 0;
+        int next_last = (is_last == 1 && i == str_n[index] - '0') ? 1 : 0;
+        result += digitsCount(str_n, d, next_first, next_last, index + 1, cache);
+        if (d == 0 && is_first == 1) continue;
+        if (i == d)
         {
-            if (left > 0) result += left * pow;
-            if (digit > d) result += pow;
-            else if (digit == d) result += right + 1;
-        }
-        else
-        {
-            // only add if we have leading non-zero digits
-            if (left > 0)
+            if (index == str_n.size() - 1) result += 1;
+            else
             {
-                result += (left - 1) * pow;
-                if (digit > d)
+                if (next_last == 1) result += atoi(str_n.substr(index + 1).c_str()) + 1;
+                else
                 {
-                    result += pow;
-                }
-                else if (digit == d)
-                {
-                    result += right + 1;
+                    result += (int)pow(10, str_n.size() - index - 1);
                 }
             }
         }
-        left = left * 10 + digit;
     }
+    if (is_first == 0 && is_last == 0) cache[index] = result;
     return result;
 }
 
@@ -4960,9 +4972,15 @@ int LeetCode::digitsCount(int d, int n)
 /// 0 <= d <= 9
 /// 1 <= low <= high <= 2×10^8
 /// </summary>
-int LeetCode::digitsCount(int d, int low, int high)
+int LeetCodeMath::digitsCount(int d, int low, int high)
 {
-    return digitsCount(d, high) - digitsCount(d, low - 1);
+    string str_low = to_string(low - 1);
+    vector<int> cache(str_low.size(), -1);
+    int low_count = digitsCount(str_low, d, 1, 1, 0, cache);
+    string str_high = to_string(high);
+    cache = vector<int>(str_high.size(), -1);
+    int high_count = digitsCount(str_high, d, 1, 1, 0, cache);
+    return  high_count - low_count;
 }
 
 /// <summary>

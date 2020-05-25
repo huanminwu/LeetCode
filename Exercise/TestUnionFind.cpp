@@ -21,13 +21,25 @@ void TestLeetCode305(void)
     LeetCodeUnionFind leetCode;
 
     int m = 3, n = 3;
-    vector<pair<int, int>> positions = { {0, 0},{0, 1},{1, 2},{2, 1} };
+    vector<vector<int>> positions = { {0, 0},{0, 1},{1, 2},{2, 1} };
     vector<int> result = leetCode.numIslands2(m, n, positions);
     Logger::WriteMessage(positions);
     Logger::WriteMessage(result);
 
     m = 3, n = 3;
     positions = { { 0, 1 },{ 1, 2 },{ 2, 1 }, {1, 0},{0, 2},{0, 0},{1, 1} };
+    result = leetCode.numIslands2(m, n, positions);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage(result);
+
+    m = 1, n = 1;
+    positions = { { 0, 0 } };
+    result = leetCode.numIslands2(m, n, positions);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage(result);
+
+    m = 3, n = 3;
+    positions = { {0, 0},{0, 1},{1, 2},{1, 2} };
     result = leetCode.numIslands2(m, n, positions);
     Logger::WriteMessage(positions);
     Logger::WriteMessage(result);
@@ -390,8 +402,8 @@ void TestLeetCode1319(void)
 
 void TestLeetCodeUnionFind(void)
 {
-    TestLeetCode1319();
     TestLeetCode305();
+    TestLeetCode1319();
     TestLeetCode547();
     TestLeetCode695();
     TestLeetCode721();

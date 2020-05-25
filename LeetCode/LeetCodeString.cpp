@@ -10369,4 +10369,146 @@ string LeetCodeString::arrangeWords(string text)
     return result;
 }
 
+/// <summary>
+/// Leet code #1455. Check If a Word Occurs As a Prefix of Any Word in a 
+///                  Sentence
+/// 
+/// Easy
+///
+/// Given a sentence that consists of some words separated by a single 
+/// space, and a searchWord.
+/// 
+/// You have to check if searchWord is a prefix of any word in sentence.
+///
+/// Return the index of the word in sentence where searchWord is a prefix 
+/// of this word (1-indexed).
+///
+/// If searchWord is a prefix of more than one word, return the index of 
+/// the first word (minimum index). If there is no such word return -1.
+///
+/// A prefix of a string S is any leading contiguous substring of S.
+///
+/// Example 1:
+/// Input: sentence = "i love eating burger", searchWord = "burg"
+/// Output: 4
+/// Explanation: "burg" is prefix of "burger" which is the 4th word in 
+/// the sentence.
+///
+/// Example 2:
+/// Input: sentence = "this problem is an easy problem", searchWord = "pro"
+/// Output: 2
+/// Explanation: "pro" is prefix of "problem" which is the 2nd and the 6th 
+/// word in the sentence, but we return 2 as it's the minimal index.
+///
+/// Example 3:
+/// Input: sentence = "i am tired", searchWord = "you"
+/// Output: -1
+/// Explanation: "you" is not a prefix of any word in the sentence.
+///
+/// Example 4:
+///
+/// Input: sentence = "i use triple pillow", searchWord = "pill"
+/// Output: 4
+///
+/// Example 5:
+/// Input: sentence = "hello from the other side", searchWord = "they"
+/// Output: -1
+///
+/// Constraints:
+/// 1. 1 <= sentence.length <= 100
+/// 2. 1 <= searchWord.length <= 10
+/// 3. sentence consists of lowercase English letters and spaces.
+/// 4. searchWord consists of lowercase English letters.
+/// </summary>
+int LeetCodeString::isPrefixOfWord(string sentence, string searchWord)
+{
+    int index = 0;
+    int result = 1;
+    for (size_t i = 0; i < sentence.size(); i++)
+    {
+        if (sentence[i] == ' ')
+        {
+            index = 0;
+            result++;
+        }
+        else
+        {
+            if (index == -1) continue;
+            if (sentence[i] == searchWord[index])
+            {
+                index++;
+                if (index == searchWord.size()) return result;
+            }
+            else
+            {
+                index = -1;
+            }
+        }
+    }
+
+    return -1;
+}
+
+/// <summary>
+/// Leet code #1456. Maximum Number of Vowels in a Substring of Given 
+///                  Length
+///                   
+/// Medium
+/// 
+/// Given a string s and an integer k.
+/// Return the maximum number of vowel letters in any substring of s 
+/// with length k.
+///
+/// Vowel letters in English are (a, e, i, o, u).
+/// 
+/// Example 1:
+/// Input: s = "abciiidef", k = 3
+/// Output: 3
+/// Explanation: The substring "iii" contains 3 vowel letters.
+///
+/// Example 2:
+/// Input: s = "aeiou", k = 2
+/// Output: 2
+/// Explanation: Any substring of length 2 contains 2 vowels.
+///
+/// Example 3:
+/// Input: s = "leetcode", k = 3
+/// Output: 2
+/// Explanation: "lee", "eet" and "ode" contain 2 vowels.
+///
+/// Example 4:
+/// Input: s = "rhythms", k = 4
+/// Output: 0
+/// Explanation: We can see that s doesn't have any vowel letters.
+///
+/// Example 5:
+/// Input: s = "tryhard", k = 4
+/// Output: 1
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists of lowercase English letters.
+/// 3. 1 <= k <= s.length
+/// </summary>
+int LeetCodeString::maxVowels(string s, int k)
+{
+    int result = 0;
+    int vowels = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u')
+        {
+            vowels++;
+        }
+        if (i >= k)
+        {
+            if (s[i-k] == 'a' || s[i-k] == 'e' || s[i-k] == 'i' || s[i-k] == 'o' || s[i-k] == 'u')
+            {
+                vowels--;
+            }
+        }
+        if (i >= k - 1) result = max(result, vowels);
+    }
+    return result;
+}
 #pragma endregion

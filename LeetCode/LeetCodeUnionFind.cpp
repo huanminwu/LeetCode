@@ -21,39 +21,6 @@
 #pragma region UnionFind
 
 /// <summary>
-/// Leet code #305. Number of Islands II   
-/// </summary>
-int LeetCodeUnionFind::checkIslands(int island_id, int row, int col, vector<vector<int>>&grid_map, vector<int>& island_map)
-{
-    if ((row < 0) || (row >= (int)grid_map.size()) ||
-        (col < 0) || (col >= (int)grid_map[0].size()))
-    {
-        return 0;
-    }
-
-    if ((grid_map[row][col] == 0) || (island_id == grid_map[row][col]))
-    {
-        return 0;
-    }
-    return mergeIslands(island_id, grid_map[row][col], grid_map, island_map);
-}
-
-/// <summary>
-/// Leet code #305. Number of Islands II         
-/// </summary>
-int LeetCodeUnionFind::mergeIslands(int island1, int island2, vector<vector<int>>&grid_map, vector<int>& island_map)
-{
-    int count = 0;
-    while (island_map[island1] != 0) island1 = island_map[island1];
-    while (island_map[island2] != 0) island2 = island_map[island2];
-    if (island1 == island2) return count;
-    count++;
-    island_map[island2] = island1;
-    return count;
-}
-
-
-/// <summary>
 /// Leet code #305. Number of Islands II         
 /// 
 /// A 2d grid map of m rows and n columns is initially filled with water. We may perform 
@@ -95,29 +62,47 @@ int LeetCodeUnionFind::mergeIslands(int island1, int island2, vector<vector<int>
 /// Challenge:
 /// Can you do it in time complexity O(k log mn), where k is the length of the positions?
 /// </summary>
-vector<int> LeetCodeUnionFind::numIslands2(int m, int n, vector<pair<int, int>>& positions)
+vector<int> LeetCodeUnionFind::numIslands2(int m, int n, vector<vector<int>>& positions)
 {
     vector<int> result;
-    vector<int> island_map(m*n);
-    vector<vector<int>> grid_map(m, vector<int>(n, 0));
+    vector<int> island_map(m*n+1);
+    vector<vector<int>> grid_map(m, vector<int>(n));
     int count = 0;
     for (size_t i = 0; i < positions.size(); i++)
     {
-        pair<int, int> pos = positions[i];
-        int island_id = i + 1;
-        grid_map[pos.first][pos.second] = island_id;
-        island_map[island_id] = 0;
-        count++;
-
-        vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
-        for (size_t d = 0; d < directions.size(); d++)
+        vector<int> pos = positions[i];
+        // already set before
+        if (grid_map[pos[0]][pos[1]] == 0)
         {
-            count -= checkIslands(
-                grid_map[pos.first][pos.second], 
-                pos.first + directions[i][0], 
-                pos.second + directions[i][1],
-                grid_map, 
-                island_map);
+            int island_id = i + 1;
+            grid_map[pos[0]][pos[1]] = island_id;
+            island_map[island_id] = 0;
+            count++;
+
+            vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+            for (size_t d = 0; d < directions.size(); d++)
+            {
+                vector<int> next = pos;
+                next[0] += directions[d][0];
+                next[1] += directions[d][1];
+                if ((next[0] < 0) || (next[0] >= (int)grid_map.size()) ||
+                    (next[1] < 0) || (next[1] >= (int)grid_map[0].size()))
+                {
+                    continue;
+                }
+                int neigbor = grid_map[next[0]][next[1]];
+                // water
+                if (neigbor == 0)
+                {
+                    continue;
+                }
+                while (island_map[neigbor] != 0) neigbor = island_map[neigbor];
+                if (neigbor != island_id)
+                {
+                    island_map[neigbor] = island_id;
+                    count--;
+                }
+            }
         }
         result.push_back(count);
     }

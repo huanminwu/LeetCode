@@ -28,16 +28,6 @@ public:
 #pragma region UnionFind
     /// <summary>
     /// Leet code #305. Number of Islands II  
-    /// </summary>
-    int checkIslands(int island_id, int row, int col, vector<vector<int>>& grid_map, vector<int>& island_map);
-
-    /// <summary>
-    /// Leet code #305. Number of Islands II  
-    /// </summary>
-    int mergeIslands(int island1, int island2, vector<vector<int>>& grid_map, vector<int>& island_map);
-
-    /// <summary>
-    /// Leet code #305. Number of Islands II  
     /// 
     /// A 2d grid map of m rows and n columns is initially filled with water. We may perform 
     /// an addLand operation which turns the water at position (row, col) into a land. Given 
@@ -78,7 +68,7 @@ public:
     /// Challenge:
     /// Can you do it in time complexity O(k log mn), where k is the length of the positions?
     /// </summary>
-    vector<int> numIslands2(int m, int n, vector<pair<int, int>>& positions);
+    vector<int> numIslands2(int m, int n, vector<vector<int>>& positions);
 
     /// <summary>
     /// Leet code #547. Friend Circles  

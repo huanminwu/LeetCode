@@ -1775,8 +1775,70 @@ void TestLeetCode1451(void)
     Logger::WriteMessage("text = " + text + "; result = " + result);
 }
 
+void TestLeetCode1455(void)
+{
+    Logger::WriteMessage("Test Leet Code 1455");
+    LeetCodeString leetCode;
+    string sentence = "i love eating burger";
+    string searchWord = "burg";
+    int result = leetCode.isPrefixOfWord(sentence, searchWord);
+    Logger::WriteMessage("sentence = " + sentence + "; searchWord = " + searchWord + "; result = " + to_string(result));
+
+    sentence = "this problem is an easy problem";
+    searchWord = "pro";
+    result = leetCode.isPrefixOfWord(sentence, searchWord);
+    Logger::WriteMessage("sentence = " + sentence + "; searchWord = " + searchWord + "; result = " + to_string(result));
+
+    sentence = "i am tired";
+    searchWord = "you";
+    result = leetCode.isPrefixOfWord(sentence, searchWord);
+    Logger::WriteMessage("sentence = " + sentence + "; searchWord = " + searchWord + "; result = " + to_string(result));
+
+    sentence = "i use triple pillow";
+    searchWord = "pill";
+    result = leetCode.isPrefixOfWord(sentence, searchWord);
+    Logger::WriteMessage("sentence = " + sentence + "; searchWord = " + searchWord + "; result = " + to_string(result));
+
+    sentence = "hello from the other side";
+    searchWord = "they";
+    result = leetCode.isPrefixOfWord(sentence, searchWord);
+    Logger::WriteMessage("sentence = " + sentence + "; searchWord = " + searchWord + "; result = " + to_string(result));
+}
+
+void TestLeetCode1456(void)
+{
+    Logger::WriteMessage("Test Leet Code 1456");
+    LeetCodeString leetCode;
+    string s = "abciiidef";
+    int k = 3;
+    int result = leetCode.maxVowels(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "aeiou";
+    k = 2;
+    result = leetCode.maxVowels(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "leetcode";
+    k = 3;
+    result = leetCode.maxVowels(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "rhythms";
+    k = 4;
+    result = leetCode.maxVowels(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "tryhard";
+    k = 4;
+    result = leetCode.maxVowels(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1456();
+    TestLeetCode1455();
     TestLeetCode1451();
     TestLeetCode1446();
     TestLeetCode1427();

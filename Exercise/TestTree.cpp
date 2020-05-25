@@ -2616,8 +2616,35 @@ void TestLeetCode742(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1457(void)
+{
+    Logger::WriteMessage("Test Leet Code 1457");
+    LeetCodeTree leetCode;
+    string input = "[2,3,1,3,1,null,1]";
+    TreeNode* root = leetCode.deserialize(input);
+    int result = leetCode.pseudoPalindromicPaths(root);
+    leetCode.freeTreeNodes(root);
+    Logger::WriteMessage(input);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    input = "[2,1,1,1,3,null,null,null,null,null,1]";
+    root = leetCode.deserialize(input);
+    result = leetCode.pseudoPalindromicPaths(root);
+    leetCode.freeTreeNodes(root);
+    Logger::WriteMessage(input);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    input = "[9]";
+    root = leetCode.deserialize(input);
+    result = leetCode.pseudoPalindromicPaths(root);
+    leetCode.freeTreeNodes(root);
+    Logger::WriteMessage(input);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1457();
     TestLeetCode742();
     TestLeetCode653();
     TestLeetCode863();

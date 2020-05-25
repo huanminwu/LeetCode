@@ -1460,7 +1460,6 @@ void TestLeetCode1449(void)
     Logger::WriteMessage("Test Leet Code 1449");
     LeetCodeDP leetCode;
 
-
     vector<int> cost = {21, 25, 18, 23, 25, 23, 20, 18, 38};
     int target = 84;
     string result = leetCode.largestNumber(cost, target);
@@ -1502,12 +1501,38 @@ void TestLeetCode1449(void)
     result = leetCode.largestNumber(cost, target);
     Logger::WriteMessage(cost);
     Logger::WriteMessage("target = " + to_string(target) + "; result = " + result);
+}
 
+void TestLeetCode1458(void)
+{
+    Logger::WriteMessage("Test Leet Code 1458");
+    LeetCodeDP leetCode;
 
+    vector<int> nums1 = { 2, 1, -2, 5 };
+    vector<int> nums2 = { 3, 0, -6 };
+    int result = leetCode.maxDotProduct(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 3,-2 };
+    nums2 = { 2,-6,7 };
+    result = leetCode.maxDotProduct(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { -1, -1 };
+    nums2 = { 1, 1 };
+    result = leetCode.maxDotProduct(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1458();
     TestLeetCode1449();
     TestLeetCode1444();
     TestLeetCode1434();

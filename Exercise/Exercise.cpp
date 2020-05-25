@@ -105,41 +105,6 @@ void TestLeetCode56(void)
 
 
 
-void TestLeetCode12(void)
-{
-    LeetCode leetCode;
-    Logger::WriteMessage("Test Leet Code 12");
-    int num = 20;
-    string message;
-    message.assign("Number is " + to_string(num));
-    string result = leetCode.intToRoman(num);
-    message.append("; Roman is " + result);
-    Logger::WriteMessage(message.c_str());
-
-    num = 999;
-    message.assign("Number is " + to_string(num));
-    result = leetCode.intToRoman(num);
-    message.append("; Roman is " + result);
-    Logger::WriteMessage(message.c_str());
-}
-
-void TestLeetCode13(void)
-{
-    LeetCode leetCode;
-    Logger::WriteMessage("Test Leet Code 13");
-    string roman = "XX";
-    string message;
-    message.assign("Roman is " + roman);
-    int num = leetCode.romanToInt(roman);
-    message.append("; Number is " + to_string(num));
-    Logger::WriteMessage(message.c_str());
-
-    roman = "CMXCIX";
-    message.assign("Roman is " + roman);
-    num = leetCode.romanToInt(roman);
-    message.append("; Number is " + to_string(num));
-    Logger::WriteMessage(message.c_str());
-}
 
 
 void TestLeetCode155(void)
@@ -176,14 +141,7 @@ void TestLeetCode22(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode60(void)
-{
-    Logger::WriteMessage("Test Leet Code 60");
-    LeetCode leetCode;
-    int n = 9, k = 10000;
-    string result = leetCode.getPermutation(n, k);
-    Logger::WriteMessage("The " + to_string(k) + "th permutation in " + to_string(n) + "! sequence is " + result);
-}
+
 
 void TestLeetCode97(void)
 {
@@ -278,56 +236,10 @@ void TestLeetCode57(void)
     Logger::WriteMessage("Merged Intervals " + message);
 }
 
-void TestLeetCode231(void)
-{
-    Logger::WriteMessage("Test Leet Code 231");
-    LeetCode leetCode;
-    int n = 128;
-    Logger::WriteMessage("n = " + to_string(n));
-    Logger::WriteMessage(leetCode.isPowerOfTwo(n) ? "is power of two" : "is not power of two");
-    n = 0;
-    Logger::WriteMessage("n = " + to_string(n));
-    Logger::WriteMessage(leetCode.isPowerOfTwo(n) ? "is power of two" : "is not power of two");
-    n = INT_MIN;
-    Logger::WriteMessage("n = " + to_string(n));
-    Logger::WriteMessage(leetCode.isPowerOfTwo(n) ? "is power of two" : "is not power of two");
-}
 
 
 
 
-
-
-
-void TestLeetCode171(void)
-{
-    Logger::WriteMessage("Test Leet Code 171");
-    string column = "AB";
-    LeetCode leetCode;
-    int number = leetCode.titleToNumber(column);
-    Logger::WriteMessage("Column tile = " + column + " number = " + to_string(number));
-}
-
-void TestLeetCode168(void)
-{
-    Logger::WriteMessage("Test Leet Code 168");
-    int number = 26 * 26;
-
-    LeetCode leetCode;
-    string column = leetCode.convertToTitle(number);
-    Logger::WriteMessage("Column number = " + to_string(number) + " title = " + column);
-}
-
-
-
-void TestLeetCode263(void)
-{
-    Logger::WriteMessage("Test Leet Code 263");
-    LeetCode leetCode;
-    int data = 18;
-    bool is_ugly = leetCode.isUgly(data);
-    Logger::WriteMessage(to_string(data) + " is " + (is_ugly ? "" : " not ") + "ugly number");
-}
 
 
 
@@ -524,32 +436,6 @@ void TestLeetCode128(void)
 
 
 
-void TestLeetCode31(void)
-{
-    Logger::WriteMessage("Test Leet Code 31");
-    vector<int> nums;
-    LeetCode leetCode;
-    nums = { 1,2,3 };
-    Logger::WriteMessage(nums);
-    leetCode.nextPermutation(nums);
-    Logger::WriteMessage(nums);
-    nums = { 3,2,1 };
-    Logger::WriteMessage(nums);
-    leetCode.nextPermutation(nums);
-    Logger::WriteMessage(nums);
-    nums = { 1,5,1 };
-    Logger::WriteMessage(nums);
-    leetCode.nextPermutation(nums);
-    Logger::WriteMessage(nums);
-    nums = { 1,1,5 };
-    Logger::WriteMessage(nums);
-    leetCode.nextPermutation(nums);
-    Logger::WriteMessage(nums);
-    nums = {};
-    Logger::WriteMessage(nums);
-    leetCode.nextPermutation(nums);
-    Logger::WriteMessage(nums);
-}
 
 void TestLeetCode166(void)
 {
@@ -752,32 +638,6 @@ void TestLeetCode232(void)
 }
 
 
-void TestLeetCode233(void)
-{
-    Logger::WriteMessage("Test Leet Code 233");
-    LeetCode leetCode;
-    int n = 123;
-    int count = leetCode.countDigitOne(n);
-    Logger::WriteMessage("Count digit one for " + to_string(n) + "; count = " + to_string(count));
-}
-
-void TestLeetCode357(void)
-{
-    Logger::WriteMessage("Test Leet Code 357");
-    LeetCode leetCode;
-    int n = 2;
-    int count = leetCode.countNumbersWithUniqueDigits(n);
-    Logger::WriteMessage("Count numbers with unique digits with " + to_string(n) + "; count = " + to_string(count));
-}
-
-void TestLeetCode400(void)
-{
-    Logger::WriteMessage("Test Leet Code 400");
-    LeetCode leetCode;
-    int n = 1000000000;
-    int digit = leetCode.findNthDigit(n);
-    Logger::WriteMessage("The " + to_string(n) + "th digit is " + to_string(digit));
-}
 
 void TestLeetCode85(void)
 {
@@ -1298,15 +1158,7 @@ void TestLeetCode282(void)
 }
 
 
-void TestLeetCode386(void)
-{
-    Logger::WriteMessage("Test Leet Code 386");
-    LeetCode leetCode;
-    int n = 220;
-    vector<int> result = leetCode.lexicalOrder(n);
-    Logger::WriteMessage("n = " + to_string(n));
-    Logger::WriteMessage(result);
-}
+
 
 void TestLeetCode435(void)
 {
@@ -6392,28 +6244,7 @@ void TestLeetCode902(void)
 }
 
 
-void TestLeetCode908(void)
-{
-    Logger::WriteMessage("Test Leet Code 908");
-    LeetCode leetCode;
-    vector<int> A = { 1 };
-    int K = 0;
-    int result = leetCode.smallestRangeI(A, K);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("result = " + to_string(result));
 
-    A = { 0,10 };
-    K = 2;
-    result = leetCode.smallestRangeI(A, K);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    A = { 1,3,6 };
-    K = 3;
-    result = leetCode.smallestRangeI(A, K);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("result = " + to_string(result));
-}
 
 
 
@@ -7625,9 +7456,6 @@ void TestLeetCode1014(void)
 }
 
 
-
-
-
 void TestLeetCode1021(void)
 {
     Logger::WriteMessage("Test Leet Code 1021");
@@ -8197,32 +8025,6 @@ void TestLeetCode1087(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode1067(void)
-{
-    Logger::WriteMessage("Test Leet Code 1067");
-    LeetCode leetCode;
-    int d = 0;
-    int low = 1;
-    int high = 100;
-    int result = leetCode.digitsCount(d, low, high);
-    Logger::WriteMessage("d = " + to_string(d) + "; low = " + to_string(low) + 
-        "; high = " + to_string(high) + "; result = " + to_string(result));
-
-    d = 1;
-    low = 1;
-    high = 13;
-    result = leetCode.digitsCount(d, low, high);
-    Logger::WriteMessage("d = " + to_string(d) + "; low = " + to_string(low) +
-        "; high = " + to_string(high) + "; result = " + to_string(result));
-
-    d = 3;
-    low = 100;
-    high = 250;
-    result = leetCode.digitsCount(d, low, high);
-    Logger::WriteMessage("d = " + to_string(d) + "; low = " + to_string(low) +
-        "; high = " + to_string(high) + "; result = " + to_string(result));
-}
-
 void TestLeetCode1094(void)
 {
     Logger::WriteMessage("Test Leet Code 1094");
@@ -8732,12 +8534,13 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeMath();
-    TestLeetCodeHashtable();
-    TestLeetCodeString();
-    TestLeetCodeArray();
+    TestLeetCodeUnionFind();
     TestLeetCodeDP();
     TestLeetCodeTree();
+    TestLeetCodeString();
+    TestLeetCodeMath();
+    TestLeetCodeHashtable();
+    TestLeetCodeArray();
     TestLeetCodeGraph();
     TestLeetCodeSort();
     TestLeetCodeDesign();
@@ -8745,7 +8548,7 @@ void main(int argc, char* argv[])
     TestLeetCodeStack();
     TestLeetCodeDFS();
     TestLeetCodeBFS();
-    TestLeetCodeUnionFind();
+
     TestLeetCodeBinarySearch();
     TestLeetCodeLinkedList();
     TestLeetCodeBit();
@@ -8794,7 +8597,6 @@ void main(int argc, char* argv[])
     TestLeetCode1095();
     TestLeetCode1094();
     TestLeetCode1093();
-    TestLeetCode1067();
     TestLeetCode1066();
     TestLeetCode1087();
     TestLeetCode1086();
@@ -8894,7 +8696,6 @@ void main(int argc, char* argv[])
     TestLeetCode916();
     TestLeetCode920();
     TestLeetCode913();
-    TestLeetCode908();
     TestLeetCode907();
     TestLeetCode905();
     TestLeetCode903();
@@ -9230,7 +9031,6 @@ void main(int argc, char* argv[])
     TestLeetCode388();
     TestLeetCode452();
     TestLeetCode435();
-    TestLeetCode386();
     TestLeetCode216();
     TestLeetCode282();
     TestLeetCode130();
@@ -9282,9 +9082,6 @@ void main(int argc, char* argv[])
     TestLeetCode455();
     TestLeetCode463();
     TestLeetCode38();
-    TestLeetCode400();
-    TestLeetCode357();
-    TestLeetCode233();
     TestLeetCode125();
     TestLeetCode232();
     TestLeetCode225();
@@ -9305,7 +9102,6 @@ void main(int argc, char* argv[])
     TestLeetCode123();
     TestLeetCode90();
     TestLeetCode78();
-    TestLeetCode31();
     TestLeetCode122();
     TestLeetCode273();
     TestLeetCode128();
@@ -9316,18 +9112,13 @@ void main(int argc, char* argv[])
     TestLeetCode30();
     TestLeetCode335();
     TestLeetCode420();
-    TestLeetCode263();
-    TestLeetCode168();
-    TestLeetCode171();
     TestLeetCode203();
     TestLeetCode92();
     TestLeetCode206();
-    TestLeetCode231();
     TestLeetCode57();
     TestLeetCode45();
     TestLeetCode55();
     TestLeetCode97();
-    TestLeetCode60();
     TestLeetCode86();
     TestLeetCode82();
     TestLeetCode83();
@@ -9336,10 +9127,6 @@ void main(int argc, char* argv[])
     TestLeetCode155();
     TestLeetCode11();
     TestLeetCode151();
-    TestLeetCode12();
-    TestLeetCode13();
-    TestLeetCode12();
-    TestLeetCode13();
     TestLeetCode410();
     TestLeetCode66();
     TestLeetCode354();
