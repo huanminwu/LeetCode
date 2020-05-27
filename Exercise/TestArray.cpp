@@ -2240,8 +2240,61 @@ void TestLeetCode1450(void)
     Logger::WriteMessage("queryTime = " + to_string(queryTime) + "; result = " + to_string(result));
 }
 
+
+void TestLeetCode311(void)
+{
+    Logger::WriteMessage("Test Leet Code 311");
+    LeetCodeArray leetCode;
+    vector<vector<int>> A = { {1, 0, 0 } , { -1, 0, 3 } };
+    vector<vector<int>> B = { { 7, 0, 0 } ,{ 0, 0, 0 }, { 0, 0, 1 } };
+    vector<vector<int>> C = leetCode.multiply(A, B);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(B);
+    Logger::WriteMessage(C);
+}
+
+void TestLeetCode667(void)
+{
+    LeetCodeArray leetCode;
+    int n = 3;
+    int k = 1;
+    vector<int> result = leetCode.constructArray(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    n = 3;
+    k = 2;
+    result = leetCode.constructArray(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    n = 4;
+    k = 2;
+    result = leetCode.constructArray(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode661(void)
+{
+    LeetCodeArray leetCode;
+    vector<vector<int>> M =
+    {
+        { 1, 4, 1 },
+        { 1, 0, 1 },
+        { 1, 2, 10 }
+    };
+
+    vector<vector<int>> result = leetCode.imageSmoother(M);
+    Logger::WriteMessage(M);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode661();
+    TestLeetCode667();
+    TestLeetCode311();
     TestLeetCode1450();
     TestLeetCode209();
     TestLeetCode487();

@@ -401,23 +401,6 @@ void TestLeetCode1250(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
-void TestLeetCode1088(void)
-{
-    Logger::WriteMessage("Test Leet Code 1088");
-    LeetCodeMath leetCode;
-    int N = 1011;
-    int result = leetCode.confusingNumberII(N);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
-
-    N = 20;
-    result = leetCode.confusingNumberII(N);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
-
-    N = 100;
-    result = leetCode.confusingNumberII(N);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
-}
-
 void TestLeetCode1093(void)
 {
     Logger::WriteMessage("Test Leet Code 1093");
@@ -2682,8 +2665,177 @@ void TestLeetCode357(void)
     Logger::WriteMessage("Count numbers with unique digits with " + to_string(n) + "; count = " + to_string(count));
 }
 
+void TestLeetCode398(void)
+{
+    Logger::WriteMessage("Test Leet Code 398");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1,2,3,3,3 };
+    int target = 2;
+    int index = leetCode.pickRandom(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("The random pick " + to_string(target) + " is " + to_string(index));
+    target = 1;
+    index = leetCode.pickRandom(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("The random pick " + to_string(target) + " is " + to_string(index));
+    target = 3;
+    index = leetCode.pickRandom(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("The random pick " + to_string(target) + " is " + to_string(index));
+}
+
+
+void TestLeetCode1012(void)
+{
+    Logger::WriteMessage("Test Leet Code 1012");
+    LeetCodeMath leetCode;
+    int N = 210;
+    int result = leetCode.numDupDigitsAtMostN(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 100;
+    result = leetCode.numDupDigitsAtMostN(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 1000;
+    result = leetCode.numDupDigitsAtMostN(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 1010;
+    result = leetCode.numDupDigitsAtMostN(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 123456789;
+    result = leetCode.numDupDigitsAtMostN(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1000(void)
+{
+    Logger::WriteMessage("Test Leet Code 1000");
+    LeetCodeMath leetCode;
+    vector<int> stones = { 3, 2, 4, 1 };
+    int K = 2;
+    int result = leetCode.mergeStones(stones, K);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
+
+    stones = { 3,2,4,1 };
+    K = 3;
+    result = leetCode.mergeStones(stones, K);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
+
+    stones = { 3, 5, 1, 2, 6 };
+    K = 3;
+    result = leetCode.mergeStones(stones, K);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
+
+}
+
+void TestLeetCode964(void)
+{
+    Logger::WriteMessage("Test Leet Code 964");
+    LeetCodeMath leetCode;
+    int x = 3;
+    int target = 19;
+    int result = leetCode.leastOpsExpressTarget(x, target);
+    Logger::WriteMessage("x = " + to_string(x) + "; target = " + to_string(target) + "; result = " + to_string(result));
+
+    x = 5;
+    target = 501;
+    result = leetCode.leastOpsExpressTarget(x, target);
+    Logger::WriteMessage("x = " + to_string(x) + "; target = " + to_string(target) + "; result = " + to_string(result));
+
+    x = 100;
+    target = 100000000;
+    result = leetCode.leastOpsExpressTarget(x, target);
+    Logger::WriteMessage("x = " + to_string(x) + "; target = " + to_string(target) + "; result = " + to_string(result));
+
+    x = 2;
+    target = 125046;
+    result = leetCode.leastOpsExpressTarget(x, target);
+    Logger::WriteMessage("x = " + to_string(x) + "; target = " + to_string(target) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1088(void)
+{
+    Logger::WriteMessage("Test Leet Code 1088");
+    LeetCodeMath leetCode;
+    int N = 20;
+    int result = leetCode.confusingNumberII(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 10;
+    result = leetCode.confusingNumberII(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 9;
+    result = leetCode.confusingNumberII(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 99;
+    result = leetCode.confusingNumberII(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 999;
+    result = leetCode.confusingNumberII(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 9999;
+    result = leetCode.confusingNumberII(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 1011;
+    result = leetCode.confusingNumberII(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+}
+
+void TestLeetCode517(void)
+{
+    Logger::WriteMessage("Test Leet Code 517");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1,0,5 };
+    Logger::WriteMessage(nums);
+    int result = leetCode.findMinMoves(nums);
+    Logger::WriteMessage("Minimum Move =" + to_string(result));
+
+    nums = { 9, 1, 8, 8, 9 };
+    Logger::WriteMessage(nums);
+    result = leetCode.findMinMoves(nums);
+    Logger::WriteMessage("Minimum Move =" + to_string(result));
+
+    nums = { 0,3,0 };
+    Logger::WriteMessage(nums);
+    result = leetCode.findMinMoves(nums);
+    Logger::WriteMessage("Minimum Move =" + to_string(result));
+
+    nums = { 0,2,0 };
+    Logger::WriteMessage(nums);
+    result = leetCode.findMinMoves(nums);
+    Logger::WriteMessage("Minimum Move =" + to_string(result));
+}
+
+void TestLeetCode384(void)
+{
+    Logger::WriteMessage("Test Leet Code 384");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1,2,3 };
+    vector<int> result = leetCode.shuffle(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode384();
+    TestLeetCode517();
+    TestLeetCode1088();
+    TestLeetCode964();
+    TestLeetCode1000();
+    TestLeetCode1012();
+    TestLeetCode398();
     TestLeetCode357();
     TestLeetCode31();
     TestLeetCode60();
@@ -2724,7 +2876,7 @@ void TestLeetCodeMath(void)
     TestLeetCode1359();
     TestLeetCode1356();
     TestLeetCode1354();
-     TestLeetCode1344();
+    TestLeetCode1344();
     TestLeetCode1342();
     TestLeetCode1323();
     TestLeetCode1318();
@@ -2792,7 +2944,6 @@ void TestLeetCodeMath(void)
     TestLeetCode1058();
     TestLeetCode1085();
     TestLeetCode1093();
-    TestLeetCode1088();
     TestLeetCode1185();
     TestLeetCode1250();
     TestLeetCode1232();

@@ -388,15 +388,18 @@ public:
 
     /// <summary>
     /// Leet code #238. Product of Array Except Self    
-    /// Given an array of n integers where n > 1, nums, return an array output such 
-    /// that output[i] is equal to the product of all the elements of nums except nums[i]. 
+    ///
+    /// Given an array of n integers where n > 1, nums, return an array 
+    /// output such that output[i] is equal to the product of all the elements 
+    /// of nums except nums[i]. 
     ///
     /// Solve it without division and in O(n). 
     /// For example, given [1,2,3,4], return [24,12,8,6]. 
     /// 
     /// Follow up:
     /// Could you solve it with constant space complexity? 
-    /// (Note: The output array does not count as extra space for the purpose of space complexity analysis.)
+    /// (Note: The output array does not count as extra space for the purpose of 
+    /// space complexity analysis.)
     /// </summary>
     vector<int> productExceptSelf(vector<int>& nums);
 
@@ -427,42 +430,6 @@ public:
     /// 1 <= A[i] <= 20000
     /// </summary>
     int sumSubseqWidths(vector<int>& A);
-
-    /// <summary>
-    /// Leet code #398. Random Pick Index     
-    /// Given an array of integers with possible duplicates, randomly output the index of a given target number. 
-    /// You can assume that the given target number must exist in the array.  
-    /// 
-    /// Note:
-    /// The array size can be very large. Solution that uses too much extra space will not pass the judge. 
-    ///
-    /// Example: 
-    /// int[] nums = new int[] {1,2,3,3,3};
-    /// Solution solution = new Solution(nums);
-    /// pick(3) should return either index 2, 3, or 4 randomly. Each index should have equal probability of returning.
-    /// solution.pick(3);
-    /// pick(1) should return 0. Since in the array only nums[0] is equal to 1.
-    /// solution.pick(1);
-    /// </summary>
-    int pickRandom(vector<int>&nums, int target); 
-
-    /// <summary>
-    /// Leet code #384. Shuffle an Array
-    /// Shuffle a set of numbers without duplicates. 
-    /// Example: 
-    /// Init an array with set 1, 2, and 3.
-    /// int[] nums = {1,2,3};
-    /// Solution solution = new Solution(nums);
-    ///
-    /// Shuffle the array [1,2,3] and return its result. Any permutation of [1,2,3] must equally likely to be returned
-    /// solution.shuffle();
-    ///
-    /// Resets the array back to its original configuration [1,2,3].
-    /// solution.reset(); 
-    /// Returns the random shuffling of array [1,2,3].
-    /// solution.shuffle();
-    /// </summary>
-    vector<int> shuffle(vector<int> nums);
 
     /// <summary>
     /// Leet code #475. Heaters 
@@ -585,29 +552,6 @@ public:
     /// </summary>
     vector<int> getModifiedArray(int length, vector<vector<int>>& updates);
 
-    /// <summary>
-    /// Leet code #311. Sparse Matrix Multiplication       
-    /// 
-    /// Given two sparse matrices A and B, return the result of AB.
-    /// You may assume that A's column number is equal to B's row number.
-    /// Example:
-    /// A = 
-    /// [
-    ///  [ 1, 0, 0],
-    ///  [-1, 0, 3]
-    /// ]
-    /// B = 
-    /// [
-    ///  [ 7, 0, 0 ],
-    ///  [ 0, 0, 0 ],
-    ///  [ 0, 0, 1 ]
-    /// ]
-    ///
-    ///      |  1 0 0 |   | 7 0 0 |   |  7 0 0 |
-    /// AB = | -1 0 3 | x | 0 0 0 | = | -7 0 3 |
-    ///                   | 0 0 1 |
-    /// </summary>
-    vector<vector<int>> multiply(vector<vector<int>>& A, vector<vector<int>>& B);
 
     /// <summary>
     /// Leet code #418. Sentence Screen Fitting     
@@ -1159,68 +1103,6 @@ public:
     /// The length of the given string will in the range [1, 10,000].
     /// </summary>
     string predictPartyVictory(string senate);
-
-    /// <summary>
-    /// Leet code #661. Image Smoother 
-    /// 
-    /// Given a 2D integer matrix M representing the gray scale of an image, 
-    /// you need to design a smoother to make the gray scale of each cell 
-    /// becomes the average gray scale (rounding down) of all the 8 
-    /// surrounding cells and itself. If a cell has less than 8 surrounding 
-    /// cells, then use as many as you can.
-    /// Example 1:
-    /// Input:
-    /// [
-    ///   [1,1,1],
-    ///   [1,0,1],
-    ///   [1,1,1]
-    /// ]
-    /// Output:
-    /// [
-    ///   [0, 0, 0],
-    ///   [0, 0, 0],
-    ///   [0, 0, 0]
-    /// ]
-    /// Explanation:
-    /// For the point (0,0), (0,2), (2,0), (2,2): floor(3/4) = floor(0.75) = 0
-    /// For the point (0,1), (1,0), (1,2), (2,1): floor(5/6) = 
-    /// floor(0.83333333) = 0
-    /// For the point (1,1): floor(8/9) = floor(0.88888889) = 0
-    ///
-    /// Note:
-    /// The value in the given matrix is in the range of [0, 255].
-    /// The length and width of the given matrix are in the range of [1, 150].
-    /// </summary>
-    vector<vector<int>> imageSmoother(vector<vector<int>>& M);
-
-    /// <summary>
-    /// Leet code #667. Beautiful Arrangement II 
-    /// 
-    /// Given two integers n and k, you need to construct a list which 
-    /// contains n different positive integers ranging from 1 to n and 
-    /// obeys the following requirement: 
-    /// Suppose this list is [a1, a2, a3, ... , an], then the list 
-    /// [|a1 - a2|, |a2 - a3|, |a3 - a4|, ... , |an-1 - an|] has exactly 
-    /// k distinct integers.
-    ///
-    /// If there are multiple answers, print any of them.
-    ///
-    /// Example 1:
-    /// Input: n = 3, k = 1
-    /// Output: [1, 2, 3]
-    /// Explanation: The [1, 2, 3] has three different positive integers 
-    /// ranging from 1 to 3, and the [1, 1] has exactly 1 distinct integer: 1.
-    /// 
-    /// Example 2:
-    /// Input: n = 3, k = 2
-    /// Output: [1, 3, 2]
-    /// Explanation: The [1, 3, 2] has three different positive integers 
-    /// ranging from 1 to 3, and the [2, 1] has exactly 2 distinct integers: 1 
-    /// and 2.
-    /// Note:
-    /// 1. The n and k are in the range 1 <= k < n <= 104.
-    /// </summary>
-    vector<int> constructArray(int n, int k);
 
     /// <summary>
     /// Leet code #670. Maximum Swap 
@@ -7143,99 +7025,6 @@ public:
     int getMoneyAmount(int n);
 
     /// <summary>
-    /// Leet code #471. Encode String with Shortest Length
-    /// </summary>
-    void findRepeatPattern(string s, size_t start, size_t length, vector<vector<string>>& result);
-
-    /// <summary>
-    /// Leet code #471. Encode String with Shortest Length
-    ///
-    /// Given a non-empty string, encode the string such that its encoded 
-    /// length is the shortest.
-    /// The encoding rule is: k[encoded_string], where the encoded_string 
-    /// inside the square brackets is being repeated exactly k times.
-    /// Note:
-    /// 1.k will be a positive integer and encoded string will not be empty or 
-    ///   have extra space.
-    /// 2.You may assume that the input string contains only lowercase English 
-    ///   letters. The string's length is at most 160.
-    /// 3.If an encoding process does not make the string shorter, then do not 
-    ///   encode it. If there are several solutions, return any of them is fine.
-    ///
-    /// Example 1: 
-    /// Input: "aaa"
-    /// Output: "aaa"
-    /// Explanation: There is no way to encode it such that it is shorter than 
-    /// the input string, so we do not encode it.
-    /// 
-    /// Example 2: 
-    /// Input: "aaaaa"
-    /// Output: "5[a]"
-    /// Explanation: "5[a]" is shorter than "aaaaa" by 1 character.
-    ///
-    /// Example 3: 
-    /// Input: "aaaaaaaaaa"
-    /// Output: "10[a]"
-    /// Explanation: "a9[a]" or "9[a]a" are also valid solutions, both of them 
-    /// have the same length = 5, which is the same as "10[a]".
-    ///
-    /// Example 4: 
-    /// Input: "aabcaabcd"
-    /// Output: "2[aabc]d"
-    /// Explanation: "aabc" occurs twice, so one answer can be "2[aabc]d".
-    /// 
-    /// Example 5: 
-    /// Input: "abbbabbbcabbbabbbc"
-    /// Output: "2[2[abbb]c]"
-    /// Explanation: "abbbabbbc" occurs twice, but "abbbabbbc" can also be encoded 
-    /// to "2[abbb]c", so one answer can be "2[2[abbb]c]".
-    /// </summary>
-    string encode(string s);
-
-    /// <summary>
-    /// Leet code # 517. Super Washing Machines 
-    ///
-    /// You have n super washing machines on a line. Initially, 
-    /// each washing machine has some dresses or is empty.
-    /// 
-    /// For each move, you could choose any m (1 ≤ m ≤ n) washing machines, 
-    /// and pass one dress of each washing machine to one of its adjacent 
-    /// washing machines at the same time .
-    ///
-    /// Given an integer array representing the number of dresses in each 
-    /// washing machine from left to right on the line, you should find the 
-    /// minimum number of moves to make all the washing machines have the 
-    /// same number of dresses. If it is not possible to do it, return -1.
-    /// 
-    /// Example1
-    /// Input: [1,0,5]
-    /// Output: 3
-    /// Explanation: 
-    /// 1st move:    1     0 <-- 5    =>    1     1     4
-    /// 2nd move:    1 <-- 1 <-- 4    =>    2     1     3    
-    /// 3rd move:    2     1 <-- 3    =>    2     2     2   
-    ///
-    /// Example2 
-    /// Input: [0,3,0]
-    /// Output: 2
-    /// Explanation: 
-    /// 1st move:    0 <-- 3     0    =>    1     2     0    
-    /// 2nd move:    1     2 --> 0    =>    1     1     1     
-    ///
-    /// Example3
-    /// Input: [0,2,0]
-    /// Output: -1
-    /// 
-    /// Explanation: 
-    /// It's impossible to make all the three washing machines have the 
-    /// same number of dresses. 
-    /// Note:
-    /// The range of n is [1, 10000].
-    /// The range of dresses number in a super washing machine is [0, 1e5].
-    /// </summary>
-    int findMinMoves(vector<int>& machines);
-   
-    /// <summary>
     /// Leet code #552. Student Attendance Record II
     /// 
     /// Given a positive integer n, return the number of all possible 
@@ -7542,39 +7331,6 @@ public:
     /// 3. The knight always initially starts on the board.
     /// </summary>
     double knightProbability(int N, int K, int r, int c);
-
-    /// <summary>
-    /// Leet code #679. 24 Game
-    /// </summary>
-    void getPoint24Rotation(vector<int>& nums, vector<int> &path, vector<bool> &visited, vector<vector<int>>& result);
-
-    /// <summary>
-    /// Leet code #679. 24 Game
-    /// </summary>
-    bool calculatePoint24(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #679. 24 Game
-    ///
-    /// You have 4 cards each containing a number from 1 to 9. You need to 
-    /// judge whether they could operated through *, /, +, -, (, ) to get 
-    /// the value of 24.
-    ///
-    /// Example 1:
-    /// Input: [4, 1, 8, 7]
-    /// Output: True
-    /// Explanation: (8-4) * (7-1) = 24
-    /// Example 2:
-    /// Input: [1, 2, 1, 2]
-    /// Output: False
-    /// Note:
-    /// The division operator / represents real division, not integer 
-    /// division. For example, 4 / (1 - 2/3) = 12.
-    /// Every operation done is between two numbers. In particular, we cannot 
-    /// use - as a unary operator. For example, with [1, 1, 1, 1] as input, 
-    /// the expression -1 - 1 - 1 - 1 is not allowed.
-    /// </summary>
-    bool judgePoint24(vector<int>& nums);
 
     /// <summary>
     /// Leet code #712. Minimum ASCII Delete Sum for Two Strings
@@ -8797,57 +8553,6 @@ public:
     int minDeletionSizeIII(vector<string>& A);
 
     /// <summary>
-    /// Leet code #964. Least Operators to Express Number
-    /// </summary>
-    int leastOpsExpressTarget(int exp, int x, int target, unordered_map<int, unordered_map<int, int>> &cache);
-
-    /// <summary>
-    /// Leet code #964. Least Operators to Express Number
-    /// 
-    /// Given a single positive integer x, we will write an expression of the 
-    /// form x (op1) x (op2) x (op3) x ... where each operator op1, op2, etc. 
-    /// is either addition, subtraction, multiplication, or division 
-    /// (+, -, *, or /).  For example, with x = 3, we might write 
-    /// 3 * 3 / 3 + 3 - 3 which is a value of 3.
-    ///
-    /// When writing such an expression, we adhere to the following conventions:
-    ///
-    /// The division operator (/) returns rational numbers.
-    /// There are no parentheses placed anywhere.
-    /// We use the usual order of operations: multiplication and division happens 
-    /// before addition and subtraction.
-    /// It's not allowed to use the unary negation operator (-).  For example, 
-    /// "x - x" is a valid expression as it only uses subtraction, but "-x + x" 
-    /// is not because it uses negation.
-    /// We would like to write an expression with the least number of operators 
-    /// such that the expression equals the given target.  Return the least number 
-    /// of operators used.
-    ///
-    /// Example 1:
-    /// Input: x = 3, target = 19
-    /// Output: 5
-    /// Explanation: 3 * 3 + 3 * 3 + 3 / 3.  The expression contains 5 operations.
-    ///
-    /// Example 2:
-    /// Input: x = 5, target = 501
-    /// Output: 8
-    /// Explanation: 5 * 5 * 5 * 5 - 5 * 5 * 5 + 5 / 5.  The expression contains 
-    /// 8 operations.
-    ///
-    /// Example 3:
-    /// Input: x = 100, target = 100000000
-    /// Output: 3
-    /// Explanation: 100 * 100 * 100 * 100.  The expression contains 3 operations.
-    ///  
-    ///
-    /// Note:
-    /// 
-    /// 1. 2 <= x <= 100
-    /// 2. 1 <= target <= 2 * 10^8
-    /// </summary>
-    int leastOpsExpressTarget(int x, int target);
-
-    /// <summary>
     /// Leet code #975. Odd Even Jump
     /// 
     /// You are given an integer array A.  From some starting index, you can make 
@@ -9054,88 +8759,6 @@ public:
     /// </summary>
     int mincostTickets(vector<int>& days, vector<int>& costs);
  
-    /// <summary>
-    /// Leet code #1000. Minimum Cost to Merge Stones
-    /// </summary>
-    int mergeStones(int i, int j, int m, int K, vector<vector<vector<int>>> &dp, vector<int> &sum);
-
-    /// <summary>
-    /// Leet code #1000. Minimum Cost to Merge Stones
-    /// 
-    /// There are N piles of stones arranged in a row.  The i-th pile has 
-    /// stones[i] stones.
-    ///
-    /// A move consists of merging exactly K consecutive piles into one pile, 
-    /// and the cost of this move is equal to the total number of stones in these 
-    /// K piles.
-    ///
-    /// Find the minimum cost to merge all piles of stones into one pile.  If it 
-    /// is impossible, return -1.
-    ///
-    /// 
-    ///
-    /// Example 1:
-    ///
-    /// Input: stones = [3,2,4,1], K = 2
-    /// Output: 20
-    /// Explanation: 
-    /// We start with [3, 2, 4, 1].
-    /// We merge [3, 2] for a cost of 5, and we are left with [5, 4, 1].
-    /// We merge [4, 1] for a cost of 5, and we are left with [5, 5].
-    /// We merge [5, 5] for a cost of 10, and we are left with [10].
-    /// The total cost was 20, and this is the minimum possible.
-    ///
-    /// Example 2:
-    ///
-    /// Input: stones = [3,2,4,1], K = 3
-    /// Output: -1
-    /// Explanation: After any merge operation, there are 2 piles left, and we can't merge anymore.  So the task is impossible.
-    ///
-    /// Example 3:
-    ///
-    /// Input: stones = [3,5,1,2,6], K = 3
-    /// Output: 25
-    /// Explanation: 
-    /// We start with [3, 5, 1, 2, 6].
-    /// We merge [5, 1, 2] for a cost of 8, and we are left with [3, 8, 6].
-    /// We merge [3, 8, 6] for a cost of 17, and we are left with [17].
-    /// The total cost was 25, and this is the minimum possible.
-    ///  
-    /// Note:
-    /// 1. 1 <= stones.length <= 30
-    /// 2. 2 <= K <= 30
-    /// 3. 1 <= stones[i] <= 100
-    /// </summary>
-    int mergeStones(vector<int>& stones, int K);
-
-    /// <summary>
-    /// Leet code #1012. Numbers With Repeated Digits
-    /// 
-    /// Given a positive integer N, return the number of positive integers less 
-    /// than or equal to N that have at least 1 repeated digit.
-    ///
-    /// Example 1:
-    /// Input: 20
-    /// Output: 1
-    /// Explanation: The only positive number (<= 20) with at least 1 repeated 
-    /// digit is 11.
-    ///
-    /// Example 2:
-    /// Input: 100
-    /// Output: 10
-    /// Explanation: The positive numbers (<= 100) with atleast 1 repeated digit 
-    /// are 11, 22, 33, 44, 55, 66, 77, 88, 99, and 100.
-    ///
-    /// Example 3:
-    /// Input: 1000
-    /// Output: 262
-    /// 
-    ///
-    /// Note:
-    ///
-    /// 1 <= N <= 10^9
-    /// </summary>
-    int numDupDigitsAtMostN(int N);
 
     /// Leet code #1025. Divisor Game
     /// 

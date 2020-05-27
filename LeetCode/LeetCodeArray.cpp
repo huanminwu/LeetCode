@@ -2024,65 +2024,6 @@ int LeetCodeArray::countBattleships(vector<vector<char>>& board)
     return count;
 }
 
-/// <summary>
-/// Leet code #398. Random Pick Index     
-/// Given an array of integers with possible duplicates, randomly output the 
-/// index of a given target number. 
-/// You can assume that the given target number must exist in the array.  
-/// 
-/// Note:
-/// The array size can be very large. Solution that uses too much extra 
-/// space will not pass the judge. 
-///
-/// Example: 
-/// int[] nums = new int[] {1,2,3,3,3};
-/// Solution solution = new Solution(nums);
-/// pick(3) should return either index 2, 3, or 4 randomly. Each index should have 
-/// equal probability of returning.
-/// solution.pick(3);
-/// pick(1) should return 0. Since in the array only nums[0] is equal to 1.
-/// solution.pick(1);
-/// </summary>
-int LeetCode::pickRandom(vector<int>&nums, int target)
-{
-    int count = 0;
-    int value = -1;
-    for (size_t i = 0; i < nums.size(); i++)
-    {
-        if (nums[i] != target) continue;
-        count++;
-        if (rand() % count == 0)
-        {
-            value = i;
-        }
-    }
-    return value;
-}
-
-/// <summary>
-/// Leet code #384. Shuffle an Array      
-/// Shuffle a set of numbers without duplicates. 
-/// Example: 
-/// Init an array with set 1, 2, and 3.
-/// int[] nums = {1,2,3};
-/// Solution solution = new Solution(nums);
-///
-/// Shuffle the array [1,2,3] and return its result. Any permutation of 
-/// [1,2,3] must equally likely to be returned solution.shuffle();
-///
-/// Resets the array back to its original configuration [1,2,3].
-/// solution.reset(); 
-/// Returns the random shuffling of array [1,2,3].
-/// solution.shuffle();
-/// </summary>
-vector<int> LeetCode::shuffle(vector<int> nums)
-{
-    for (size_t i = 0; i < nums.size(); i++) {
-        int pos = rand() % (nums.size());
-        swap(nums[pos], nums[i]);
-    }
-    return nums;
-}
 
 /// <summary>
 /// Leet code #448. Find All Numbers Disappeared in an Array
@@ -2563,7 +2504,7 @@ vector<int> LeetCode::getModifiedArray(int length, vector<vector<int>>& updates)
 /// AB = | -1 0 3 | x | 0 0 0 | = | -7 0 3 |
 ///                   | 0 0 1 |
 /// </summary>
-vector<vector<int>> LeetCode::multiply(vector<vector<int>>& A, vector<vector<int>>& B)
+vector<vector<int>> LeetCodeArray::multiply(vector<vector<int>>& A, vector<vector<int>>& B)
 {
     if (A.size() == 0 || A[0].size() == 0 || B.size() == 0 || B[0].size() == 0)
     {
@@ -3766,7 +3707,7 @@ string LeetCode::predictPartyVictory(string senate)
 /// The value in the given matrix is in the range of [0, 255].
 /// The length and width of the given matrix are in the range of [1, 150].
 /// </summary>
-vector<vector<int>> LeetCode::imageSmoother(vector<vector<int>>& M)
+vector<vector<int>> LeetCodeArray::imageSmoother(vector<vector<int>>& M)
 {
     vector<vector<int>> result;
     vector<pair<int, int>> step_map =
@@ -3818,7 +3759,7 @@ vector<vector<int>> LeetCode::imageSmoother(vector<vector<int>>& M)
 /// Note:
 /// 1. The n and k are in the range 1 <= k < n <= 104.
 /// </summary>
-vector<int> LeetCode::constructArray(int n, int k)
+vector<int> LeetCodeArray::constructArray(int n, int k)
 {
     vector<int> result;
     int first = 1, last = n;

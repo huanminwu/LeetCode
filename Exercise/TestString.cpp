@@ -1835,8 +1835,39 @@ void TestLeetCode1456(void)
     Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode471(void)
+{
+    Logger::WriteMessage("Test Leet Code 471");
+    LeetCodeString leetCode;
+
+    string s = "aaaaaaaaaabbbaaaaabbb";
+    string result = leetCode.encode(s);
+    Logger::WriteMessage("s = " + s + "; encode result = " + result);
+
+    s = "abbbabbbcabbbabbbc";
+    result = leetCode.encode(s);
+    Logger::WriteMessage("s = " + s + "; encode result = " + result);
+
+    s = "aabcaabcd";
+    result = leetCode.encode(s);
+    Logger::WriteMessage("s = " + s + "; encode result = " + result);
+
+    s = "aaaaaaaaaa";
+    result = leetCode.encode(s);
+    Logger::WriteMessage("s = " + s + "; encode result = " + result);
+
+    s = "aaa";
+    result = leetCode.encode(s);
+    Logger::WriteMessage("s = " + s + "; encode result = " + result);
+
+    s = "aaaaa";
+    result = leetCode.encode(s);
+    Logger::WriteMessage("s = " + s + "; encode result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode471();
     TestLeetCode1456();
     TestLeetCode1455();
     TestLeetCode1451();

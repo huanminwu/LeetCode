@@ -4910,92 +4910,46 @@ int LeetCodeMath::sumOfDigits(vector<int>& A)
     return 1 - result % 2;
 }
 
-/// <summary>
-/// Leet code #1067. Digit Count in Range
-/// </summary>
-int LeetCodeMath::digitsCount(string& str_n, int d, int is_first, int is_last, int index, vector<int>& cache)
-{
-    int result = 0;
-    if (index == str_n.size()) return 0;
-    if (is_first == 0 && is_last == 0 && cache[index] != -1)
-    {
-        return cache[index];
-    }
-    for (int i = 0; i <= (is_last ? str_n[index] - '0' : 9); i++)
-    {
-        int next_first = (is_first == 1 && i == 0) ? 1 : 0;
-        int next_last = (is_last == 1 && i == str_n[index] - '0') ? 1 : 0;
-        result += digitsCount(str_n, d, next_first, next_last, index + 1, cache);
-        if (d == 0 && is_first == 1) continue;
-        if (i == d)
-        {
-            if (index == str_n.size() - 1) result += 1;
-            else
-            {
-                if (next_last == 1) result += atoi(str_n.substr(index + 1).c_str()) + 1;
-                else
-                {
-                    result += (int)pow(10, str_n.size() - index - 1);
-                }
-            }
-        }
-    }
-    if (is_first == 0 && is_last == 0) cache[index] = result;
-    return result;
-}
-
-/// <summary>
-/// Leet code #1067. Digit Count in Range
-/// 
-/// Given an integer d between 0 and 9, and two positive integers low and 
-/// high as lower and upper bounds, respectively. Return the number of 
-/// times that d occurs as a digit in all integers between low and high, 
-/// including the bounds low and high.
-/// 
-/// Example 1:
-/// Input: d = 1, low = 1, high = 13
-/// Output: 6
-/// Explanation: 
-/// The digit d=1 occurs 6 times in 1,10,11,12,13. Note that the digit d=1 
-/// occurs twice in the number 11.
-///
-/// Example 2:
-///
-/// Input: d = 3, low = 100, high = 250
-/// Output: 35
-/// Explanation: 
-/// The digit d=3 occurs 35 times in 103,113,123,130,131,...,238,239,243.
-///
-///
-/// Note:
-///
-/// 0 <= d <= 9
-/// 1 <= low <= high <= 2×10^8
-/// </summary>
-int LeetCodeMath::digitsCount(int d, int low, int high)
-{
-    string str_low = to_string(low - 1);
-    vector<int> cache(str_low.size(), -1);
-    int low_count = digitsCount(str_low, d, 1, 1, 0, cache);
-    string str_high = to_string(high);
-    cache = vector<int>(str_high.size(), -1);
-    int high_count = digitsCount(str_high, d, 1, 1, 0, cache);
-    return  high_count - low_count;
-}
 
 /// <summary>
 /// Leet code #1088. Confusing Number II
 /// </summary>
-bool LeetCodeMath::confusingNumberII(string str)
+int LeetCodeMath::confusingNumberII(string& str_n, int index, int leading, int is_last, vector<vector<int>>& cache)
 {
-    if (str.empty()) return false;
-    unordered_map<char, char> confusing_number = { {'0', '0'}, {'1', '1'}, {'6', '9'}, {'8', '8'}, {'9', '6'} };
-    for (size_t i = 0; i < str.size(); i++)
+    if (index >= str_n.size()) return 1;
+    if (is_last == 0 && cache[index][leading] != -1) return cache[index][leading];
+    int result = 0;
+    for (size_t i = 0; i <= (is_last == 1 ? str_n[index] - '0' : 9); i++)
     {
-        if (confusing_number.count(str[i]) == 0) return false;
-        if (confusing_number[str[i]] != str[str.size() - 1 - i]) return true;
+        if (i != 0 && i != 1 && i != 6 && i != 8 && i != 9) continue;
+        int next_leading = (leading == 0 && i == 0) ? 0 : leading + 1;
+        int next_last = (is_last == 1 && i == str_n[index] - '0') ? 1 : 0;
+        int remaining = str_n.size() - 1 - index;
+        result += confusingNumberII(str_n, index + 1, next_leading, next_last, cache);
+        if ((remaining == next_leading) ||
+            ((remaining == next_leading - 1) && (i == 0 || i == 1 || i == 8)))
+        {
+                if (next_last == 0) result--;
+                else
+                {
+                    int half_size = str_n.size() / 2;
+                    string left_str = str_n.substr(0, half_size);
+                    string right_str = str_n.substr(str_n.size() - half_size);
+                    vector<int> mapping = { 0, 1, 0, 0, 0, 0, 9, 0, 8, 6 };
+                    for (size_t i = 0; i < left_str.size(); i++)
+                    {
+                        left_str[i] = '0' + mapping[left_str[i] - '0'];
+                    }
+                    std::reverse(left_str.begin(), left_str.end());
+                    if (atoi(left_str.c_str()) < atoi(right_str.c_str())) result--;
+                }
+        }
     }
-    return false;
+    if (is_last == 0)
+    {
+        cache[index][leading] = result;
+    }
+    return result;
 }
 
 /// <summary>
@@ -5041,99 +4995,9 @@ bool LeetCodeMath::confusingNumberII(string str)
 /// </summary>
 int LeetCodeMath::confusingNumberII(int N)
 {
-    int result = 0;
-    vector<pair<int, int>> confusing_number = { {0, 0}, {1, 1}, {6, 9}, {8, 8}, {9, 6} };
-    if (N < 10)
-    {
-        for (size_t i = 0; i < confusing_number.size(); i++)
-        {
-            if ((confusing_number[i].first <= N) && (confusing_number[i].first != confusing_number[i].second))
-            {
-                result++;
-            }
-        }
-        return result;
-    }
-    string left, right;
-    right = to_string(N);
-    vector<int> dp(right.size() + 1);
-    for (size_t i = 0; i < dp.size(); i++)
-    {
-        if (i == 0) dp[i] = 0;
-        else if (i == 1) dp[i] = 2;
-        else if (i == 2) dp[i] = 20;
-        else
-        {
-            dp[i] = 5 * dp[i - 2] + 20 * (int)pow(5, i - 2);
-        }
-    }
-    while (!right.empty())
-    {
-        int digit = right[0] - '0';
-        left.push_back(right[0]);
-        right = right.substr(1);
-        if (right.empty())
-        {
-            for (size_t i = 0; i < confusing_number.size(); i++)
-            {
-                if (confusing_number[i].first > digit) break;
-                if (confusing_number[i].second != left[0] - '0')
-                {
-                    result++;
-                }
-                else
-                {
-                    if (confusingNumberII(left.substr(1, left.size()-2))) result++;
-                }
-            }
-        }
-        else
-        {
-            if (digit == 0) continue;
-            int index = lower_bound(confusing_number.begin(), confusing_number.end(), make_pair(digit, 0))
-                - confusing_number.begin();
-            int match_size = min(left.size(), right.size());
-            int remain_size = right.size() - match_size;
-            if (left.size() == 1)
-            {
-                result += (index - 1) * ((int)pow(5, match_size) - 1) * (int)pow(5, remain_size);
-                result += confusingNumberII((int)pow(10, right.size()) - 1);
-            }
-            else
-            {
-                result += index * ((int)pow(5, match_size) - 1) * (int)pow(5, remain_size);
-            }
-            if (remain_size == 0)
-            {
-                string cut_left = left.substr(match_size);
-                bool is_confusing = false;
-                if (!cut_left.empty())
-                {
-                    for (size_t i = 0; i < confusing_number.size(); i++)
-                    {
-                        if (confusing_number[i].first >= digit) break;
-                        cut_left.pop_back();
-                        cut_left.push_back(confusing_number[i].first + '0');
-                        result += confusingNumberII(cut_left.c_str()) ? 1 : 0;
-                    }
-                }
-            }
-            else
-            {
-                if (left.size() == 1)
-                {
-                    result += (index - 1) * dp[remain_size];
-                }
-                else
-                {
-                    result += index * dp[remain_size];
-                }
-            }
-            // if there is any invalid digit, stop processing 
-            if (confusing_number[index].first > digit) break;
-        }
-    }
-    return result;
+    string str_n = to_string(N);
+    vector<vector<int>> cache(str_n.size(), vector<int>(str_n.size(), -1));
+    return confusingNumberII(str_n, 0, 0, 1, cache);
 }
 
 
@@ -8027,4 +7891,465 @@ int LeetCodeMath::numPoints(vector<vector<int>>& points, int r)
         }
     }
     return result;
+}
+
+/// <summary>
+/// Leet code #398. Random Pick Index     
+/// Given an array of integers with possible duplicates, randomly output the 
+/// index of a given target number. 
+/// You can assume that the given target number must exist in the array.  
+/// 
+/// Note:
+/// The array size can be very large. Solution that uses too much extra 
+/// space will not pass the judge. 
+///
+/// Example: 
+/// int[] nums = new int[] {1,2,3,3,3};
+/// Solution solution = new Solution(nums);
+/// pick(3) should return either index 2, 3, or 4 randomly. Each index should have 
+/// equal probability of returning.
+/// solution.pick(3);
+/// pick(1) should return 0. Since in the array only nums[0] is equal to 1.
+/// solution.pick(1);
+/// </summary>
+int LeetCodeMath::pickRandom(vector<int>& nums, int target)
+{
+    int count = 0;
+    int value = -1;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] != target) continue;
+        count++;
+        if (rand() % count == 0)
+        {
+            value = i;
+        }
+    }
+    return value;
+}
+
+/// <summary>
+/// Leet code #1067. Digit Count in Range
+/// </summary>
+int LeetCodeMath::digitsCount(string& str_n, int d, int is_first, int is_last, int index, vector<int>& cache)
+{
+    int result = 0;
+    if (index == str_n.size()) return 0;
+    if (is_first == 0 && is_last == 0 && cache[index] != -1)
+    {
+        return cache[index];
+    }
+    for (int i = 0; i <= (is_last ? str_n[index] - '0' : 9); i++)
+    {
+        int next_first = (is_first == 1 && i == 0) ? 1 : 0;
+        int next_last = (is_last == 1 && i == str_n[index] - '0') ? 1 : 0;
+        result += digitsCount(str_n, d, next_first, next_last, index + 1, cache);
+        if (d == 0 && is_first == 1) continue;
+        if (i == d)
+        {
+            if (index == str_n.size() - 1) result += 1;
+            else
+            {
+                if (next_last == 1) result += atoi(str_n.substr(index + 1).c_str()) + 1;
+                else
+                {
+                    result += (int)pow(10, str_n.size() - index - 1);
+                }
+            }
+        }
+    }
+    if (is_first == 0 && is_last == 0) cache[index] = result;
+    return result;
+}
+
+/// <summary>
+/// Leet code #1067. Digit Count in Range
+/// 
+/// Given an integer d between 0 and 9, and two positive integers low and 
+/// high as lower and upper bounds, respectively. Return the number of 
+/// times that d occurs as a digit in all integers between low and high, 
+/// including the bounds low and high.
+/// 
+/// Example 1:
+/// Input: d = 1, low = 1, high = 13
+/// Output: 6
+/// Explanation: 
+/// The digit d=1 occurs 6 times in 1,10,11,12,13. Note that the digit d=1 
+/// occurs twice in the number 11.
+///
+/// Example 2:
+///
+/// Input: d = 3, low = 100, high = 250
+/// Output: 35
+/// Explanation: 
+/// The digit d=3 occurs 35 times in 103,113,123,130,131,...,238,239,243.
+///
+///
+/// Note:
+///
+/// 0 <= d <= 9
+/// 1 <= low <= high <= 2×10^8
+/// </summary>
+int LeetCodeMath::digitsCount(int d, int low, int high)
+{
+    string str_low = to_string(low - 1);
+    vector<int> cache(str_low.size(), -1);
+    int low_count = digitsCount(str_low, d, 1, 1, 0, cache);
+    string str_high = to_string(high);
+    cache = vector<int>(str_high.size(), -1);
+    int high_count = digitsCount(str_high, d, 1, 1, 0, cache);
+    return  high_count - low_count;
+}
+
+/// <summary>
+/// Leet code #1012. Numbers With Repeated Digits
+/// </summary>
+int LeetCodeMath::numDupDigitsAtMostN(string& str_n, int index, int leading, int is_last, int bit_mask, vector<vector<int>>& cache)
+{
+    if (index >= str_n.size()) return 0;
+    if (is_last == 0 && cache[index][leading] != -1) return cache[index][leading];
+    int result = 0;
+    for (size_t i = 0; i <= (is_last == 1 ? str_n[index] - '0' : 9); i++)
+    {
+        int next_leading = (leading == 0 && i == 0) ? 0 : leading + 1;
+        int next_last = (is_last == 1 && i == str_n[index] - '0') ? 1 : 0;
+        if (next_leading == 0)
+        {
+            result += numDupDigitsAtMostN(str_n, index + 1, next_leading, next_last, bit_mask, cache);
+        }
+        else
+        {
+            int bit = 1 << i;
+            if ((bit & bit_mask) != 0)
+            {
+                if (next_last == 1)
+                {
+                    result += atoi(str_n.substr(index + 1).c_str()) + 1;
+                }
+                else
+                {
+                    result += pow(10, str_n.size() - 1 - index);
+                }
+            }
+            else
+            {
+                result += numDupDigitsAtMostN(str_n, index + 1, next_leading, next_last, (bit | bit_mask), cache);
+            }
+        }
+    }
+    if (is_last == 0)
+    {
+        cache[index][leading] = result;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1012. Numbers With Repeated Digits
+/// 
+/// Given a positive integer N, return the number of positive integers less 
+/// than or equal to N that have at least 1 repeated digit.
+///
+/// Example 1:
+/// Input: 20
+/// Output: 1
+/// Explanation: The only positive number (<= 20) with at least 1 repeated 
+/// digit is 11.
+///
+/// Example 2:
+/// Input: 100
+/// Output: 10
+/// Explanation: The positive numbers (<= 100) with atleast 1 repeated digit 
+/// are 11, 22, 33, 44, 55, 66, 77, 88, 99, and 100.
+///
+/// Example 3:
+/// Input: 1000
+/// Output: 262
+/// 
+///
+/// Note:
+///
+/// 1 <= N <= 10^9
+/// </summary>
+int LeetCodeMath::numDupDigitsAtMostN(int N)
+{
+    string str_n = to_string(N);
+    int index = 0;
+    vector<vector<int>> cache(str_n.size(),vector<int>(str_n.size(), -1));
+    return numDupDigitsAtMostN(str_n, 0, 0, 1, 0, cache);
+}
+
+/// <summary>
+/// Leet code #1000. Minimum Cost to Merge Stones
+/// Reduce the data between i to j inclusive to m piles
+/// </summary>
+int LeetCodeMath::mergeStones(int i, int j, int m, int K, vector<vector<vector<int>>>& dp, vector<int>& sum)
+{
+    // For every merge we reduce K-1 piles, so if the total reduction is not multiple
+    // K - 1, it is mission impossible.
+    if ((j - i + 1 - m) % (K - 1) != 0)
+    {
+        dp[i][j][m] = -1;
+    }
+    // We saw this one in cache, return it
+    else if (dp[i][j][m] != INT_MAX)
+    {
+        return dp[i][j][m];
+    }
+    // already m piles, no more reduction, cost is 0
+    else if (j - i + 1 == m)
+    {
+        dp[i][j][m] = 0;
+    }
+    // reduce from K piles to 1    
+    else if (m == 1)
+    {
+        int prev = mergeStones(i, j, K, K, dp, sum);
+        if (prev != -1)
+        {
+            dp[i][j][m] = prev + ((i == 0) ? sum[j] : sum[j] - sum[i - 1]);
+        }
+    }
+    else
+    {
+        // Cut the line into two piece, from i to mid, inclusive, merge into one pile 
+        // and from mid + 1 to j, inclusive, merge into m -1 piles
+        for (int mid = i; mid < j; mid++)
+        {
+            int left = mergeStones(i, mid, 1, K, dp, sum);
+            int right = mergeStones(mid + 1, j, m - 1, K, dp, sum);
+            // unless mission impossible, we get the minimum value.
+            if (left != -1 && right != -1)
+            {
+                dp[i][j][m] = min(dp[i][j][m], left + right);
+            }
+        }
+    }
+    return dp[i][j][m];
+}
+
+/// <summary>
+/// Leet code #1000. Minimum Cost to Merge Stones
+/// 
+/// There are N piles of stones arranged in a row.  The i-th pile has 
+/// stones[i] stones.
+///
+/// A move consists of merging exactly K consecutive piles into one pile, 
+/// and the cost of this move is equal to the total number of stones in these 
+/// K piles.
+///
+/// Find the minimum cost to merge all piles of stones into one pile.  If it 
+/// is impossible, return -1.
+///
+/// 
+///
+/// Example 1:
+///
+/// Input: stones = [3,2,4,1], K = 2
+/// Output: 20
+/// Explanation: 
+/// We start with [3, 2, 4, 1].
+/// We merge [3, 2] for a cost of 5, and we are left with [5, 4, 1].
+/// We merge [4, 1] for a cost of 5, and we are left with [5, 5].
+/// We merge [5, 5] for a cost of 10, and we are left with [10].
+/// The total cost was 20, and this is the minimum possible.
+///
+/// Example 2:
+///
+/// Input: stones = [3,2,4,1], K = 3
+/// Output: -1
+/// Explanation: After any merge operation, there are 2 piles left, and we can't merge anymore.  So the task is impossible.
+///
+/// Example 3:
+///
+/// Input: stones = [3,5,1,2,6], K = 3
+/// Output: 25
+/// Explanation: 
+/// We start with [3, 5, 1, 2, 6].
+/// We merge [5, 1, 2] for a cost of 8, and we are left with [3, 8, 6].
+/// We merge [3, 8, 6] for a cost of 17, and we are left with [17].
+/// The total cost was 25, and this is the minimum possible.
+///  
+/// Note:
+/// 1. 1 <= stones.length <= 30
+/// 2. 2 <= K <= 30
+/// 3. 1 <= stones[i] <= 100
+/// </summary>
+int LeetCodeMath::mergeStones(vector<int>& stones, int K)
+{
+    int n = stones.size();
+    vector<int> sum(n);
+    vector<vector<vector<int>>> dp(n, vector<vector<int>>(n, vector<int>(K + 1, INT_MAX)));
+    int total = 0;
+    for (int i = 0; i < n; i++)
+    {
+        total += stones[i];
+        sum[i] = total;
+    }
+    return mergeStones(0, n - 1, 1, K, dp, sum);
+}
+
+/// <summary>
+/// Leet code #964. Least Operators to Express Number
+/// </summary>
+int LeetCodeMath::leastOpsExpressTarget(int exp, int x, int target, unordered_map<int, unordered_map<int, int>>& cache)
+{
+    if ((cache.count(exp) > 0) && (cache[exp].count(target) > 0))
+    {
+        return cache[exp][target];
+    }
+    if (target == 0) return 0;
+
+    int quotient = target / x;
+    int remainder = target % x;
+    // if exp == 0, the cost is x/x
+    int cost = (exp == 0) ? 2 : exp;
+    int result = remainder * cost + leastOpsExpressTarget(exp + 1, x, quotient, cache);
+    // limit cost, otherwise forever recursive and stack overflow
+    if ((x - remainder) * cost < result)
+    {
+        result = min(result, (x - remainder) * cost + leastOpsExpressTarget(exp + 1, x, quotient + 1, cache));
+    }
+    cache[exp][target] = result;
+    return result;
+}
+
+/// <summary>
+/// Leet code #964. Least Operators to Express Number
+/// 
+/// Given a single positive integer x, we will write an expression of the 
+/// form x (op1) x (op2) x (op3) x ... where each operator op1, op2, etc. 
+/// is either addition, subtraction, multiplication, or division 
+/// (+, -, *, or /).  For example, with x = 3, we might write 
+/// 3 * 3 / 3 + 3 - 3 which is a value of 3.
+///
+/// When writing such an expression, we adhere to the following conventions:
+///
+/// The division operator (/) returns rational numbers.
+/// There are no parentheses placed anywhere.
+/// We use the usual order of operations: multiplication and division happens 
+/// before addition and subtraction.
+/// It's not allowed to use the unary negation operator (-).  For example, 
+/// "x - x" is a valid expression as it only uses subtraction, but "-x + x" 
+/// is not because it uses negation.
+/// We would like to write an expression with the least number of operators 
+/// such that the expression equals the given target.  Return the least number 
+/// of operators used.
+///
+/// Example 1:
+/// Input: x = 3, target = 19
+/// Output: 5
+/// Explanation: 3 * 3 + 3 * 3 + 3 / 3.  The expression contains 5 operations.
+///
+/// Example 2:
+/// Input: x = 5, target = 501
+/// Output: 8
+/// Explanation: 5 * 5 * 5 * 5 - 5 * 5 * 5 + 5 / 5.  The expression contains 
+/// 8 operations.
+///
+/// Example 3:
+/// Input: x = 100, target = 100000000
+/// Output: 3
+/// Explanation: 100 * 100 * 100 * 100.  The expression contains 3 operations.
+///  
+///
+/// Note:
+/// 
+/// 1. 2 <= x <= 100
+/// 2. 1 <= target <= 2 * 10^8
+/// </summary>
+int LeetCodeMath::leastOpsExpressTarget(int x, int target)
+{
+    unordered_map<int, unordered_map<int, int>> cache;
+    return leastOpsExpressTarget(0, x, target, cache) - 1;
+}
+
+/// <summary>
+/// Leet code # 517. Super Washing Machines 
+///
+/// You have n super washing machines on a line. Initially, 
+/// each washing machine has some dresses or is empty.
+/// 
+/// For each move, you could choose any m (1 ≤ m ≤ n) washing machines, 
+/// and pass one dress of each washing machine to one of its adjacent 
+/// washing machines at the same time .
+///
+/// Given an integer array representing the number of dresses in each 
+/// washing machine from left to right on the line, you should find the 
+/// minimum number of moves to make all the washing machines have the 
+/// same number of dresses. If it is not possible to do it, return -1.
+/// 
+/// Example1
+/// Input: [1,0,5]
+/// Output: 3
+/// Explanation: 
+/// 1st move:    1     0 <-- 5    =>    1     1     4
+/// 2nd move:    1 <-- 1 <-- 4    =>    2     1     3    
+/// 3rd move:    2     1 <-- 3    =>    2     2     2   
+///
+/// Example2 
+/// Input: [0,3,0]
+/// Output: 2
+/// Explanation: 
+/// 1st move:    0 <-- 3     0    =>    1     2     0    
+/// 2nd move:    1     2 --> 0    =>    1     1     1     
+///
+/// Example3
+/// Input: [0,2,0]
+/// Output: -1
+/// 
+/// Explanation: 
+/// It's impossible to make all the three washing machines have the 
+/// same number of dresses. 
+/// Note:
+/// The range of n is [1, 10000].
+/// The range of dresses number in a super washing machine is [0, 1e5].
+/// </summary>
+int LeetCodeMath::findMinMoves(vector<int>& machines)
+{
+    int count = 0;
+    vector<int> balances(machines.size());
+    for (size_t i = 0; i < machines.size(); i++)
+    {
+        count += machines[i];
+    }
+    if (count % machines.size() != 0) return -1;
+    int average = count / machines.size();
+
+    int result = 0;
+    for (size_t i = 0; i < machines.size(); i++)
+    {
+        balances[i] = machines[i] - average;
+        if (i > 0)
+        {
+            balances[i] += balances[i - 1];
+        }
+        result = max(max(result, machines[i] - average), abs(balances[i]));
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #384. Shuffle an Array      
+/// Shuffle a set of numbers without duplicates. 
+/// Example: 
+/// Init an array with set 1, 2, and 3.
+/// int[] nums = {1,2,3};
+/// Solution solution = new Solution(nums);
+///
+/// Shuffle the array [1,2,3] and return its result. Any permutation of 
+/// [1,2,3] must equally likely to be returned solution.shuffle();
+///
+/// Resets the array back to its original configuration [1,2,3].
+/// solution.reset(); 
+/// Returns the random shuffling of array [1,2,3].
+/// solution.shuffle();
+/// </summary>
+vector<int> LeetCodeMath::shuffle(vector<int> nums)
+{
+    for (size_t i = 0; i < nums.size(); i++) {
+        int pos = rand() % (nums.size());
+        swap(nums[pos], nums[i]);
+    }
+    return nums;
 }

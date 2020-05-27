@@ -1072,6 +1072,39 @@ public:
     /// </summary>
     int findGoodStrings(int n, string s1, string s2, string evil);
 
+    /// <summary>
+    /// Leet code #679. 24 Game
+    /// </summary>
+    void getPoint24Rotation(vector<int>& nums, vector<int>& path, vector<bool>& visited, vector<vector<int>>& result);
+
+    /// <summary>
+    /// Leet code #679. 24 Game
+    /// </summary>
+    bool calculatePoint24(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #679. 24 Game
+    ///
+    /// You have 4 cards each containing a number from 1 to 9. You need to 
+    /// judge whether they could operated through *, /, +, -, (, ) to get 
+    /// the value of 24.
+    ///
+    /// Example 1:
+    /// Input: [4, 1, 8, 7]
+    /// Output: True
+    /// Explanation: (8-4) * (7-1) = 24
+    /// Example 2:
+    /// Input: [1, 2, 1, 2]
+    /// Output: False
+    /// Note:
+    /// The division operator / represents real division, not integer 
+    /// division. For example, 4 / (1 - 2/3) = 12.
+    /// Every operation done is between two numbers. In particular, we cannot 
+    /// use - as a unary operator. For example, with [1, 1, 1, 1] as input, 
+    /// the expression -1 - 1 - 1 - 1 is not allowed.
+    /// </summary>
+    bool judgePoint24(vector<int>& nums);
+
 #pragma endregion
 };
 

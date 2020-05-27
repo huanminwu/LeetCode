@@ -585,8 +585,23 @@ void TestLeetCode1397(void)
     Logger::WriteMessage("s1 =" + s1 + +"; s2 = " + s2 + "; evil = " + evil + "; result=" + to_string(result));
 }
 
+void TestLeetCode679(void)
+{
+    LeetCodeDFS leetCode;
+    vector<int> nums = { 4, 1, 8, 7 };
+    bool result = leetCode.judgePoint24(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1, 2, 1, 2 };
+    result = leetCode.judgePoint24(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode679();
     TestLeetCode1397();
     TestLeetCode425();
     TestLeetCode212();

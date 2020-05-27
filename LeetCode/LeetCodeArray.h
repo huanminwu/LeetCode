@@ -3481,6 +3481,91 @@ public:
     /// </summary>
     int busyStudent(vector<int>& startTime, vector<int>& endTime, int queryTime);
 
+    /// <summary>
+    /// Leet code #311. Sparse Matrix Multiplication       
+    /// 
+    /// Given two sparse matrices A and B, return the result of AB.
+    /// You may assume that A's column number is equal to B's row number.
+    /// Example:
+    /// A = 
+    /// [
+    ///  [ 1, 0, 0],
+    ///  [-1, 0, 3]
+    /// ]
+    /// B = 
+    /// [
+    ///  [ 7, 0, 0 ],
+    ///  [ 0, 0, 0 ],
+    ///  [ 0, 0, 1 ]
+    /// ]
+    ///
+    ///      |  1 0 0 |   | 7 0 0 |   |  7 0 0 |
+    /// AB = | -1 0 3 | x | 0 0 0 | = | -7 0 3 |
+    ///                   | 0 0 1 |
+    /// </summary>
+    vector<vector<int>> multiply(vector<vector<int>>& A, vector<vector<int>>& B);
+
+    /// <summary>
+    /// Leet code #667. Beautiful Arrangement II 
+    /// 
+    /// Given two integers n and k, you need to construct a list which 
+    /// contains n different positive integers ranging from 1 to n and 
+    /// obeys the following requirement: 
+    /// Suppose this list is [a1, a2, a3, ... , an], then the list 
+    /// [|a1 - a2|, |a2 - a3|, |a3 - a4|, ... , |an-1 - an|] has exactly 
+    /// k distinct integers.
+    ///
+    /// If there are multiple answers, print any of them.
+    ///
+    /// Example 1:
+    /// Input: n = 3, k = 1
+    /// Output: [1, 2, 3]
+    /// Explanation: The [1, 2, 3] has three different positive integers 
+    /// ranging from 1 to 3, and the [1, 1] has exactly 1 distinct integer: 1.
+    /// 
+    /// Example 2:
+    /// Input: n = 3, k = 2
+    /// Output: [1, 3, 2]
+    /// Explanation: The [1, 3, 2] has three different positive integers 
+    /// ranging from 1 to 3, and the [2, 1] has exactly 2 distinct integers: 1 
+    /// and 2.
+    /// Note:
+    /// 1. The n and k are in the range 1 <= k < n <= 104.
+    /// </summary>
+    vector<int> constructArray(int n, int k);
+
+    /// <summary>
+    /// Leet code #661. Image Smoother 
+    /// 
+    /// Given a 2D integer matrix M representing the gray scale of an image, 
+    /// you need to design a smoother to make the gray scale of each cell 
+    /// becomes the average gray scale (rounding down) of all the 8 
+    /// surrounding cells and itself. If a cell has less than 8 surrounding 
+    /// cells, then use as many as you can.
+    /// Example 1:
+    /// Input:
+    /// [
+    ///   [1,1,1],
+    ///   [1,0,1],
+    ///   [1,1,1]
+    /// ]
+    /// Output:
+    /// [
+    ///   [0, 0, 0],
+    ///   [0, 0, 0],
+    ///   [0, 0, 0]
+    /// ]
+    /// Explanation:
+    /// For the point (0,0), (0,2), (2,0), (2,2): floor(3/4) = floor(0.75) = 0
+    /// For the point (0,1), (1,0), (1,2), (2,1): floor(5/6) = 
+    /// floor(0.83333333) = 0
+    /// For the point (1,1): floor(8/9) = floor(0.88888889) = 0
+    ///
+    /// Note:
+    /// The value in the given matrix is in the range of [0, 255].
+    /// The length and width of the given matrix are in the range of [1, 150].
+    /// </summary>
+    vector<vector<int>> imageSmoother(vector<vector<int>>& M);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

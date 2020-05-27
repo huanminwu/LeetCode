@@ -973,7 +973,7 @@ public:
     /// <summary>
     /// Leet code #1088. Confusing Number II
     /// </summary>
-    bool confusingNumberII(string str);
+    int confusingNumberII(string& str_n, int index, int leading, int is_last, vector<vector<int>>& cache);
 
     /// <summary>
     /// Leet code #1088. Confusing Number II
@@ -4384,5 +4384,225 @@ public:
     /// 3. 0 <= K <= 10000
     /// </summary>
     int smallestRangeI(vector<int>& A, int K);
+
+    /// <summary>
+    /// Leet code #398. Random Pick Index     
+    /// Given an array of integers with possible duplicates, randomly output the index of a given target number. 
+    /// You can assume that the given target number must exist in the array.  
+    /// 
+    /// Note:
+    /// The array size can be very large. Solution that uses too much extra space will not pass the judge. 
+    ///
+    /// Example: 
+    /// int[] nums = new int[] {1,2,3,3,3};
+    /// Solution solution = new Solution(nums);
+    /// pick(3) should return either index 2, 3, or 4 randomly. Each index should have equal probability of returning.
+    /// solution.pick(3);
+    /// pick(1) should return 0. Since in the array only nums[0] is equal to 1.
+    /// solution.pick(1);
+    /// </summary>
+    int pickRandom(vector<int>& nums, int target);
+
+    /// <summary>
+    /// Leet code #1012. Numbers With Repeated Digits
+    /// </summary>
+    int numDupDigitsAtMostN(string& str_n, int index, int leading, int is_last, int bit_mask, vector<vector<int>>& cache);
+
+    /// <summary>
+    /// Leet code #1012. Numbers With Repeated Digits
+    /// 
+    /// Given a positive integer N, return the number of positive integers less 
+    /// than or equal to N that have at least 1 repeated digit.
+    ///
+    /// Example 1:
+    /// Input: 20
+    /// Output: 1
+    /// Explanation: The only positive number (<= 20) with at least 1 repeated 
+    /// digit is 11.
+    ///
+    /// Example 2:
+    /// Input: 100
+    /// Output: 10
+    /// Explanation: The positive numbers (<= 100) with atleast 1 repeated digit 
+    /// are 11, 22, 33, 44, 55, 66, 77, 88, 99, and 100.
+    ///
+    /// Example 3:
+    /// Input: 1000
+    /// Output: 262
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1 <= N <= 10^9
+    /// </summary>
+    int numDupDigitsAtMostN(int N);
+
+
+    /// <summary>
+    /// Leet code #1000. Minimum Cost to Merge Stones
+    /// </summary>
+    int mergeStones(int i, int j, int m, int K, vector<vector<vector<int>>>& dp, vector<int>& sum);
+
+    /// <summary>
+    /// Leet code #1000. Minimum Cost to Merge Stones
+    /// 
+    /// There are N piles of stones arranged in a row.  The i-th pile has 
+    /// stones[i] stones.
+    ///
+    /// A move consists of merging exactly K consecutive piles into one pile, 
+    /// and the cost of this move is equal to the total number of stones in these 
+    /// K piles.
+    ///
+    /// Find the minimum cost to merge all piles of stones into one pile.  If it 
+    /// is impossible, return -1.
+    ///
+    /// 
+    ///
+    /// Example 1:
+    ///
+    /// Input: stones = [3,2,4,1], K = 2
+    /// Output: 20
+    /// Explanation: 
+    /// We start with [3, 2, 4, 1].
+    /// We merge [3, 2] for a cost of 5, and we are left with [5, 4, 1].
+    /// We merge [4, 1] for a cost of 5, and we are left with [5, 5].
+    /// We merge [5, 5] for a cost of 10, and we are left with [10].
+    /// The total cost was 20, and this is the minimum possible.
+    ///
+    /// Example 2:
+    ///
+    /// Input: stones = [3,2,4,1], K = 3
+    /// Output: -1
+    /// Explanation: After any merge operation, there are 2 piles left, and we can't merge anymore.  So the task is impossible.
+    ///
+    /// Example 3:
+    ///
+    /// Input: stones = [3,5,1,2,6], K = 3
+    /// Output: 25
+    /// Explanation: 
+    /// We start with [3, 5, 1, 2, 6].
+    /// We merge [5, 1, 2] for a cost of 8, and we are left with [3, 8, 6].
+    /// We merge [3, 8, 6] for a cost of 17, and we are left with [17].
+    /// The total cost was 25, and this is the minimum possible.
+    ///  
+    /// Note:
+    /// 1. 1 <= stones.length <= 30
+    /// 2. 2 <= K <= 30
+    /// 3. 1 <= stones[i] <= 100
+    /// </summary>
+    int mergeStones(vector<int>& stones, int K);
+
+    /// <summary>
+    /// Leet code #964. Least Operators to Express Number
+    /// </summary>
+    int leastOpsExpressTarget(int exp, int x, int target, unordered_map<int, unordered_map<int, int>>& cache);
+
+    /// <summary>
+    /// Leet code #964. Least Operators to Express Number
+    /// 
+    /// Given a single positive integer x, we will write an expression of the 
+    /// form x (op1) x (op2) x (op3) x ... where each operator op1, op2, etc. 
+    /// is either addition, subtraction, multiplication, or division 
+    /// (+, -, *, or /).  For example, with x = 3, we might write 
+    /// 3 * 3 / 3 + 3 - 3 which is a value of 3.
+    ///
+    /// When writing such an expression, we adhere to the following conventions:
+    ///
+    /// The division operator (/) returns rational numbers.
+    /// There are no parentheses placed anywhere.
+    /// We use the usual order of operations: multiplication and division happens 
+    /// before addition and subtraction.
+    /// It's not allowed to use the unary negation operator (-).  For example, 
+    /// "x - x" is a valid expression as it only uses subtraction, but "-x + x" 
+    /// is not because it uses negation.
+    /// We would like to write an expression with the least number of operators 
+    /// such that the expression equals the given target.  Return the least number 
+    /// of operators used.
+    ///
+    /// Example 1:
+    /// Input: x = 3, target = 19
+    /// Output: 5
+    /// Explanation: 3 * 3 + 3 * 3 + 3 / 3.  The expression contains 5 operations.
+    ///
+    /// Example 2:
+    /// Input: x = 5, target = 501
+    /// Output: 8
+    /// Explanation: 5 * 5 * 5 * 5 - 5 * 5 * 5 + 5 / 5.  The expression contains 
+    /// 8 operations.
+    ///
+    /// Example 3:
+    /// Input: x = 100, target = 100000000
+    /// Output: 3
+    /// Explanation: 100 * 100 * 100 * 100.  The expression contains 3 operations.
+    ///  
+    ///
+    /// Note:
+    /// 
+    /// 1. 2 <= x <= 100
+    /// 2. 1 <= target <= 2 * 10^8
+    /// </summary>
+    int leastOpsExpressTarget(int x, int target);
+
+    /// <summary>
+    /// Leet code # 517. Super Washing Machines 
+    ///
+    /// You have n super washing machines on a line. Initially, 
+    /// each washing machine has some dresses or is empty.
+    /// 
+    /// For each move, you could choose any m (1 <= m <= n) washing machines, 
+    /// and pass one dress of each washing machine to one of its adjacent 
+    /// washing machines at the same time .
+    ///
+    /// Given an integer array representing the number of dresses in each 
+    /// washing machine from left to right on the line, you should find the 
+    /// minimum number of moves to make all the washing machines have the 
+    /// same number of dresses. If it is not possible to do it, return -1.
+    /// 
+    /// Example1
+    /// Input: [1,0,5]
+    /// Output: 3
+    /// Explanation: 
+    /// 1st move:    1     0 <-- 5    =>    1     1     4
+    /// 2nd move:    1 <-- 1 <-- 4    =>    2     1     3    
+    /// 3rd move:    2     1 <-- 3    =>    2     2     2   
+    ///
+    /// Example2 
+    /// Input: [0,3,0]
+    /// Output: 2
+    /// Explanation: 
+    /// 1st move:    0 <-- 3     0    =>    1     2     0    
+    /// 2nd move:    1     2 --> 0    =>    1     1     1     
+    ///
+    /// Example3
+    /// Input: [0,2,0]
+    /// Output: -1
+    /// 
+    /// Explanation: 
+    /// It's impossible to make all the three washing machines have the 
+    /// same number of dresses. 
+    /// Note:
+    /// The range of n is [1, 10000].
+    /// The range of dresses number in a super washing machine is [0, 1e5].
+    /// </summary>
+    int findMinMoves(vector<int>& machines);
+
+    /// <summary>
+    /// Leet code #384. Shuffle an Array
+    /// Shuffle a set of numbers without duplicates. 
+    /// Example: 
+    /// Init an array with set 1, 2, and 3.
+    /// int[] nums = {1,2,3};
+    /// Solution solution = new Solution(nums);
+    ///
+    /// Shuffle the array [1,2,3] and return its result. Any permutation of [1,2,3] must equally likely to be returned
+    /// solution.shuffle();
+    ///
+    /// Resets the array back to its original configuration [1,2,3].
+    /// solution.reset(); 
+    /// Returns the random shuffling of array [1,2,3].
+    /// solution.shuffle();
+    /// </summary>
+    vector<int> shuffle(vector<int> nums);
+
 };
 #endif

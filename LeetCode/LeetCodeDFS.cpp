@@ -5033,6 +5033,104 @@ int LeetCodeDFS::findGoodStrings(int n, string s1, string s2, string evil)
     return findGoodStrings(0, s1, s2, evil, 1, 1, 0, kmp, cache);
 }
 
+/// <summary>
+/// Leet code #679. 24 Game
+/// </summary>
+void LeetCodeDFS::getPoint24Rotation(vector<int>& nums, vector<int>& path, 
+    vector<bool>& visited, vector<vector<int>>& result)
+{
+    if (path.size() == nums.size())
+    {
+        result.push_back(path);
+    }
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (visited[i]) continue;
+        path.push_back(nums[i]);
+        visited[i] = true;
+        getPoint24Rotation(nums, path, visited, result);
+        path.pop_back();
+        visited[i] = false;
+    }
+}
+
+/// <summary>
+/// Leet code #679. 24 Game
+/// </summary>
+bool LeetCodeDFS::calculatePoint24(vector<int>& nums)
+{
+    vector<vector<vector<double>>> dp =
+        vector<vector<vector<double>>>(nums.size(), vector <vector<double>>(nums.size(), vector<double>()));
+    for (int len = 0; len < 4; len++)
+    {
+        for (size_t i = 0; i < nums.size(); i++)
+        {
+            if (i + len >= nums.size()) continue;
+            if (len == 0)
+            {
+                dp[i][i + len].push_back(nums[i]);
+            }
+            else
+            {
+                for (size_t j = i; j < i + len; j++)
+                {
+                    for (double first : dp[i][j])
+                    {
+                        for (double second : dp[j + 1][i + len])
+                        {
+                            dp[i][i + len].push_back(first + second);
+                            dp[i][i + len].push_back(first - second);
+                            dp[i][i + len].push_back(first * second);
+                            if (abs(second) > 0.001) dp[i][i + len].push_back(first / second);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    for (double value : dp[0][nums.size() - 1])
+    {
+        if (abs(value - (double)24.0) < 0.001) return true;
+    }
+    return false;
+}
+
+
+/// <summary>
+/// Leet code #679. 24 Game
+///
+/// You have 4 cards each containing a number from 1 to 9. You need to 
+/// judge whether they could operated through *, /, +, -, (, ) to get 
+/// the value of 24.
+///
+/// Example 1:
+/// Input: [4, 1, 8, 7]
+/// Output: True
+/// Explanation: (8-4) * (7-1) = 24
+/// Example 2:
+/// Input: [1, 2, 1, 2]
+/// Output: False
+/// Note:
+/// The division operator / represents real division, not integer 
+/// division. For example, 4 / (1 - 2/3) = 12.
+/// Every operation done is between two numbers. In particular, we cannot 
+/// use - as a unary operator. For example, with [1, 1, 1, 1] as input, 
+/// the expression -1 - 1 - 1 - 1 is not allowed.
+/// </summary>
+bool LeetCodeDFS::judgePoint24(vector<int>& nums)
+{
+    vector<bool> visited(nums.size());
+
+    vector<int> path;
+    vector<vector<int>> result;
+    getPoint24Rotation(nums, path, visited, result);
+    for (size_t i = 0; i < result.size(); i++)
+    {
+        if (calculatePoint24(result[i])) return true;
+    }
+    return false;
+}
+
 #pragma endregion
 
 
