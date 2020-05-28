@@ -403,118 +403,8 @@ public:
     /// </summary>
     vector<int> productExceptSelf(vector<int>& nums);
 
-    /// <summary>
-    /// Leet code #891. Sum of Subsequence Widths
-    /// 
-    /// Given an array of integers A, consider all non-empty subsequences of A.
-    ///
-    /// For any sequence S, let the width of S be the difference between the 
-    /// maximum and minimum element of S.
-    ///
-    /// Return the sum of the widths of all subsequences of A. 
-    ///
-    /// As the answer may be very large, return the answer modulo 10^9 + 7.
-    ///
-    /// Example 1:
-    ///
-    /// Input: [2,1,3]
-    /// Output: 6
-    /// Explanation:
-    /// Subsequences are [1], [2], [3], [2,1], [2,3], [1,3], [2,1,3].
-    /// The corresponding widths are 0, 0, 0, 1, 1, 2, 2.
-    /// The sum of these widths is 6.
-    ///
-    /// Note:
-    ///
-    /// 1 <= A.length <= 20000
-    /// 1 <= A[i] <= 20000
-    /// </summary>
-    int sumSubseqWidths(vector<int>& A);
 
-    /// <summary>
-    /// Leet code #475. Heaters 
-    /// Winter is coming! Your first job during the contest is to design a standard heater with 
-    /// fixed warm radius to warm all the houses.
-    /// Now, you are given positions of houses and heaters on a horizontal line, find out minimum 
-    /// radius of heaters so that all houses could be covered by those heaters.
-    ///
-    /// So, your input will be the positions of houses and heaters seperately, and your expected output will be the minimum radius standard of heaters.
-    /// Note:
-    /// Numbers of houses and heaters you are given are non-negative and will not exceed 25000.
-    /// Positions of houses and heaters you are given are non-negative and will not exceed 10^9.
-    /// As long as a house is in the heaters' warm radius range, it can be warmed.
-    /// All the heaters follow your radius standard and the warm radius will the same.
-    /// Example 1:
-    /// Input: [1,2,3],[2]
-    /// Output: 1
-    /// Explanation: The only heater was placed in the position 2, and if we use the radius 1 standard, then all the houses can be warmed.
-    /// Example 2:
-    /// Input: [1,2,3,4],[1,4]
-    /// Output: 1
-    /// Explanation: The two heater was placed in the position 1 and 4. We need to use radius 1 standard, then all the houses can be warmed.
-    /// </summary>
-    int findRadius(vector<int>& houses, vector<int>& heaters); 
 
-    /// <summary>
-    /// Leet code #422. Valid Word Square    
-    /// 
-    /// Given a sequence of words, check whether it forms a valid word square. 
-    /// A sequence of words forms a valid word square if the kth row and column 
-    /// read the exact same string, where 0 ≤ k < max(numRows, numColumns).
-    /// Note:
-    /// 1.The number of words given is at least 1 and does not exceed 500.
-    /// 2.Word length will be at least 1 and does not exceed 500.
-    /// 3.Each word contains only lowercase English alphabet a-z.
-    /// Example 1: 
-    /// Input:
-    /// [
-    ///  "abcd",
-    ///  "bnrt",
-    ///  "crmy",
-    ///  "dtye"
-    /// ]
-    /// Output:
-    /// true
-    /// Explanation:
-    /// The first row and first column both read "abcd".
-    /// The second row and second column both read "bnrt".
-    /// The third row and third column both read "crmy".
-    /// The fourth row and fourth column both read "dtye".
-    /// Therefore, it is a valid word square.
-    ///
-    /// Example 2: 
-    /// Input:
-    /// [
-    ///  "abcd",
-    ///  "bnrt",
-    ///  "crm",
-    ///  "dt"
-    /// ]
-    /// Output:
-    /// true
-    ///
-    /// Explanation:
-    /// The first row and first column both read "abcd".
-    /// The second row and second column both read "bnrt".
-    /// The third row and third column both read "crm".
-    /// The fourth row and fourth column both read "dt".
-    /// Therefore, it is a valid word square.
-    /// Example 3: 
-    /// Input:
-    /// [
-    ///  "ball",
-    ///  "area",
-    ///  "read",
-    ///  "lady"
-    /// ]
-    ///
-    /// Output:
-    /// false
-    /// Explanation:
-    /// The third row reads "read" while the third column reads "lead".
-    /// Therefore, it is NOT a valid word square.
-    /// </summary>
-    bool validWordSquare(vector<string>& words);
 
     /// <summary>
     /// Leet code #370. Range Addition      
@@ -630,254 +520,6 @@ public:
     /// 1.The total number of elements of the given matrix will not exceed 10,000.
     /// </summary>
     vector<int> findDiagonalOrder(vector<vector<int>>& matrix);
-
-    /// <summary>
-    /// Leet code # 531. Lonely Pixel I
-    ///
-    /// Given a picture consisting of black and white pixels,
-    ///	find the number of black lonely pixels.
-    ///
-    /// The picture is represented by a 2D char array consisting
-    /// of 'B' and 'W', which means black and white pixels respectively.
-    ///
-    /// A black lonely pixel is character 'B' that located at a specific 
-    /// position where the same row and same column don't have any 
-    /// other black pixels.
-    ///
-    /// Example:
-    /// Input: 
-    /// [
-    ///   ['W', 'W', 'B'],
-    ///   ['W', 'B', 'W'],
-    ///   ['B', 'W', 'W']
-    /// ]
-    ///
-    /// Output: 3
-    /// Explanation: All the three 'B's are black lonely pixels.
-    /// Note:
-    /// The range of width and height of the input 2D array is [1,500].
-    /// </summary>
-    int findLonelyPixel(vector<vector<char>>& picture);
-
-    /// <summary>
-    /// Leet code # 533. Lonely Pixel II
-    ///
-    /// Given a picture consisting of black and white pixels, and a positive 
-    /// integer N, find the number of black pixels located at some specific 
-    /// row R and column C that align with all the following rules:
-    ///
-    /// Row R and column C both contain exactly N black pixels.
-    /// For all rows that have a black pixel at column C, they should be 
-    /// exactly the same as row R
-    ///
-    /// The picture is represented by a 2D char array consisting of 'B' and 'W', 
-    /// which means black and white pixels respectively.
-    ///
-    /// Example:
-    /// Input:                                            
-    /// [
-    ///   ['W', 'B', 'W', 'B', 'B', 'W'],    
-    ///   ['W', 'B', 'W', 'B', 'B', 'W'],    
-    ///   ['W', 'B', 'W', 'B', 'B', 'W'],    
-    ///   ['W', 'W', 'B', 'W', 'B', 'W']
-    /// ] 
-    ///
-    /// N = 3
-    /// Output: 6
-    /// Explanation: All the bold 'B' are the black pixels we need 
-    /// (all 'B's at column 1 and 3).
-    ///        0    1    2    3    4    5         column index                                            
-    /// 0    [['W', 'B', 'W', 'B', 'B', 'W'],    
-    /// 1     ['W', 'B', 'W', 'B', 'B', 'W'],    
-    /// 2     ['W', 'B', 'W', 'B', 'B', 'W'],    
-    /// 3     ['W', 'W', 'B', 'W', 'B', 'W']]    
-    /// row index
-    ///
-    /// Take 'B' at row R = 0 and column C = 1 as an example:
-    /// Rule 1, row R = 0 and column C = 1 both have exactly N = 3 black pixels. 
-    /// Rule 2, the rows have black pixel at column C = 1 are row 0, row 1 and 
-    /// row 2. They are exactly the same as row R = 0.
-    ///
-    /// Note:
-    /// The range of width and height of the input 2D array is [1,200].	
-    /// </summary>
-    int findLonelyPixel(vector<vector<char>>& picture, int N);
-
-    /// <summary>
-    /// Leet code #539. Minimum Time Difference
-    ///
-    /// Given a list of 24-hour clock time points in "Hour:Minutes" format, 
-    /// find the minimum minutes difference between any two time points in 
-    /// the list.
-    /// 
-    /// Example 1:
-    /// Input: ["23:59","00:00"]
-    /// Output: 1
-    /// Note:
-    /// The number of time points in the given list is at least 2 and won't exceed 20000.
-    /// The input time is legal and ranges from 00:00 to 23:59.
-    /// </summary>
-    int findMinDifference(vector<string>& timePoints);
-
-    /// <summary>
-    /// Leet code # 466. Count The Repetitions 
-    ///
-    /// Define S = [s,n] as the string S which consists of n 
-    /// connected strings s. For example, ["abc", 3] ="abcabcabc". 
-    /// On the other hand, we define that string s1 can be obtained from string s2 
-    /// if we can remove some characters from s2 such that it becomes s1. For example, 
-    /// “abc” can be obtained from “abdbec” based on our definition, but it 
-    /// can not be obtained from “acbbe”.
-    /// You are given two non-empty strings s1 and s2 (each at most 100 characters long) 
-    /// and two integers 0 ≤ n1 ≤ 106 and 1 ≤ n2 ≤ 106. Now consider the strings S1 and S2, 
-    /// where S1=[s1,n1] and S2=[s2,n2]. Find the maximum integer M such that 
-    /// [S2,M] can be obtained from S1.
-    ///
-    /// Example: 
-    /// Input:
-    /// s1="acb", n1=4
-    /// s2="ab", n2=2
-    /// Return:
-    /// 2
-    /// </summary>
-    int getMaxRepetitions(string s1, int n1, string s2, int n2);
-
-    /// <summary>
-    /// Leet code # 363. Max Sum of Rectangle No Larger Than K  
-    ///
-    /// Given a non-empty 2D matrix matrix and an integer k, find the max sum of a 
-    /// rectangle in the matrix such that its sum is no larger than k.
-    /// 
-    /// Example:
-    /// Given matrix = 
-    /// [
-    ///  [1,  0, 1],
-    ///  [0, -2, 3]
-    /// ]
-    /// k = 2
-    /// The answer is 2. Because the sum of rectangle [[0, 1], [-2, 3]] is 2 and 2 is the max number no larger than k (k = 2).
-    /// Note:
-    /// 1.The rectangle inside the matrix must have an area > 0.
-    /// 2.What if the number of rows is much larger than the number of columns?
-    /// </summary>
-    int maxSumSubmatrix(vector<vector<int>>& matrix, int k);
-
-    /// <summary>
-    /// Leet code # 363. Max Sum of Rectangle No Larger Than K  
-    ///
-    /// Given a non-empty 2D matrix matrix and an integer k, find the max sum of a 
-    /// rectangle in the matrix such that its sum is no larger than k.
-    /// 
-    /// Example:
-    /// Given matrix = 
-    /// [
-    ///  [1,  0, 1],
-    ///  [0, -2, 3]
-    /// ]
-    /// k = 2
-    /// The answer is 2. Because the sum of rectangle [[0, 1], [-2, 3]] is 2 and 2 is the max number no larger than k (k = 2).
-    /// Note:
-    /// 1.The rectangle inside the matrix must have an area > 0.
-    /// 2.What if the number of rows is much larger than the number of columns?
-    /// </summary>
-    int maxSumSubmatrixII(vector<vector<int>>& matrix, int k);
-
-    /// <summary>
-    /// Leet code #548. Split Array with Equal Sum       
-    /// 
-    /// Given an array with n integers, you need to find if there are 
-    /// triplets (i, j, k) which satisfies following conditions:
-    /// 0 < i, i + 1 < j, j + 1 < k < n - 1
-    /// Sum of subarrays (0, i - 1), (i + 1, j - 1), (j + 1, k - 1) 
-    /// and (k + 1, n - 1) should be equal.
-    /// where we define that subarray (L, R) represents a slice of the 
-    /// original array starting from the element indexed L to the element 
-    /// indexed R.
-    /// Example:
-    /// Input: [1,2,1,2,1,2,1]
-    /// Output: True
-    /// Explanation:
-    /// i = 1, j = 3, k = 5. 
-    /// sum(0, i - 1) = sum(0, 0) = 1
-    /// sum(i + 1, j - 1) = sum(2, 2) = 1
-    /// sum(j + 1, k - 1) = sum(4, 4) = 1
-    /// sum(k + 1, n - 1) = sum(6, 6) = 1
-    /// Note:
-    /// 1 <= n <= 2000.
-    /// Elements in the given array will be in range [-1,000,000, 1,000,000].
-    /// </summary>
-    bool splitArray(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #566. Reshape the Matrix       
-    /// 
-    /// In MATLAB, there is a very useful function called 'reshape', which 
-    /// can reshape a matrix into a new one with different size but keep its 
-    /// original data. 
-    /// You're given a matrix represented by a two-dimensional array, and two 
-    /// positive integers r and c representing the row number and column number 
-    /// of the wanted reshaped matrix, respectively.
-    /// The reshaped matrix need to be filled with all the elements of the 
-    /// original matrix in the same row-traversing order as they were. 
-    /// If the 'reshape' operation with given parameters is possible and legal, 
-    /// output the new reshaped matrix; Otherwise, output the original matrix. 
-    /// Example 1:
-    /// Input: 
-    /// nums = 
-    /// [[1,2],
-    /// [3,4]]
-    /// r = 1, c = 4
-    /// Output: 
-    /// [[1,2,3,4]]
-    /// Explanation:
-    /// The row-traversing of nums is [1,2,3,4]. The new reshaped matrix is a 
-    /// 1 * 4 matrix, fill it row by row by using the previous list.
-    ///
-    /// Example 2:
-    /// Input: 
-    /// nums = 
-    /// [[1,2],
-    /// [3,4]]
-    /// r = 2, c = 4
-    /// Output: 
-    /// [[1,2],
-    /// [3,4]]
-    /// Explanation:
-    /// There is no way to reshape a 2 * 2 matrix to a 2 * 4 matrix. So output 
-    /// the original matrix.
-    /// </summary>
-    vector<vector<int>> matrixReshape(vector<vector<int>>& nums, int r, int c);
-
-    /// <summary>
-    /// Leet code #575. Distribute Candies       
-    /// 
-    /// Given an integer array with even length, where different numbers in 
-    /// this array represent different kinds of candies. Each number means one
-    /// candy of the corresponding kind. You need to distribute these candies 
-    /// equally in number to brother and sister. Return the maximum number of 
-    /// kinds of candies the sister could gain. 
-    /// 
-    /// Example 1:
-    /// Input: candies = [1,1,2,2,3,3]
-    /// Output: 3
-    /// Explanation:
-    /// There are three different kinds of candies (1, 2 and 3), and two 
-    /// candies for each kind.
-    /// Optimal distribution: The sister has candies [1,2,3] and the brother 
-    /// has candies [1,2,3], too. 
-    /// The sister has three different kinds of candies. 
-    /// Example 2:
-    /// Input: candies = [1,1,2,3]
-    /// Output: 2
-    /// Explanation: For example, the sister has candies [2,3] and the brother 
-    /// has candies [1,1]. 
-    /// The sister has two different kinds of candies, the brother has only one
-    /// kind of candies. 
-    /// Note: 
-    /// The length of the given array is in range [2, 10,000], and will be even.
-    /// The number in given array is in range [-100,000, 100,000].
-    /// </summary>
-    int distributeCandies(vector<int>& candies);
 
     /// <summary>
     /// Leet code #565. Array Nesting   
@@ -3312,14 +2954,11 @@ public:
     ///
     /// Return the maximum score of a pair of sightseeing spots.
     ///
-    /// 
-    ///
     /// Example 1:
     ///
     /// Input: [8,1,5,2,6]
     /// Output: 11
     /// Explanation: i = 0, j = 2, A[i] + A[j] + i - j = 8 + 5 + 0 - 2 = 11
-    ///
     /// 
     /// Note:
     /// 
@@ -3401,113 +3040,70 @@ public:
     /// </summary>
     int maxSatisfied(vector<int>& customers, vector<int>& grumpy, int X);
 
-    /// <summary>
-    /// Leet code #1074. Number of Submatrices That Sum to Target
-    /// 
-    /// Given a matrix, and a target, return the number of non-empty submatrices 
-    /// that sum to target.
-    ///
-    /// A submatrix x1, y1, x2, y2 is the set of all cells matrix[x][y] with 
-    /// x1 <= x <= x2 and y1 <= y <= y2.
-    ///
-    /// Two submatrices (x1, y1, x2, y2) and (x1', y1', x2', y2') are different 
-    /// if they have some coordinate that is different: for example, if x1 != x1'.
-    ///
-    /// 
-    ///
-    /// Example 1:
-    ///
-    /// Input: matrix = [[0,1,0],[1,1,1],[0,1,0]], target = 0
-    /// Output: 4
-    /// Explanation: The four 1x1 submatrices that only contain 0.
-    ///
-    /// Example 2:
-    ///
-    /// Input: matrix = [[1,-1],[-1,1]], target = 0
-    /// Output: 5
-    /// Explanation: The two 1x2 submatrices, plus the two 2x1 submatrices, plus 
-    /// the 2x2 submatrix.
-    /// 
-    ///
-    /// Note:
-    ///
-    /// 1. 1 <= matrix.length <= 300
-    /// 2. 1 <= matrix[0].length <= 300
-    /// 3. -1000 <= matrix[i] <= 1000
-    /// 4. -10^8 <= target <= 10^8
-    /// </summary>
-    int numSubmatrixSumTarget(vector<vector<int>>& matrix, int target);
-
-    /// <summary>
-    /// Leet code #1063. Number of Valid Subarrays
-    /// 
-    /// Given an array A of integers, return the number of non-empty continuous 
-    /// subarrays that satisfy the following condition:
-    ///
-    /// The leftmost element of the subarray is not larger than other elements 
-    /// in the subarray.
-    ///
-    /// Example 1:
-    ///
-    /// Input: [1,4,2,5,3]
-    /// Output: 11
-    /// Explanation: There are 11 valid subarrays: [1],[4],[2],[5],[3],[1,4],
-    /// [2,5],[1,4,2],[2,5,3],[1,4,2,5],[1,4,2,5,3].
-    ///
-    /// Example 2:
-    ///
-    /// Input: [3,2,1]
-    /// Output: 3
-    /// Explanation: The 3 valid subarrays are: [3],[2],[1].
-    ///
-    /// Example 3:
-    ///
-    /// Input: [2,2,2]
-    /// Output: 6
-    /// Explanation: There are 6 valid subarrays: [2],[2],[2],[2,2],[2,2],[2,2,2].
-    /// 
-    ///
-    /// Note:
-    ///
-    /// 1. 1 <= A.length <= 50000
-    /// 2. 0 <= A[i] <= 100000
-    /// </summary>
-    int validSubarrays(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #1089. Duplicate Zeros
-    /// 
-    /// Given a fixed length array arr of integers, duplicate each occurrence 
-    /// of zero, shifting the remaining elements to the right.
-    ///
-    /// Note that elements beyond the length of the original array are not 
-    /// written.
-    ///
-    /// Do the above modifications to the input array in place, do not return 
-    /// anything from your function.
-    ///  
-    /// Example 1:
-    /// Input: [1,0,2,3,0,4,5,0]
-    /// Output: null
-    /// Explanation: After calling your function, the input array is modified 
-    /// to: [1,0,0,2,3,0,0,4]
-    ///
-    /// Example 2:
-    ///
-    /// Input: [1,2,3]
-    /// Output: null
-    /// Explanation: After calling your function, the input array is modified 
-    /// to: [1,2,3]
-    ///
-    /// Note:
-    /// 1. 1 <= arr.length <= 10000
-    /// 2. 0 <= arr[i] <= 9
-    /// </summary>
-    void duplicateZeros(vector<int>& arr);
-
 #pragma endregion
 
 #pragma region String
+    /// <summary>
+    /// Leet code #422. Valid Word Square    
+    /// 
+    /// Given a sequence of words, check whether it forms a valid word square. 
+    /// A sequence of words forms a valid word square if the kth row and column 
+    /// read the exact same string, where 0 ≤ k < max(numRows, numColumns).
+    /// Note:
+    /// 1.The number of words given is at least 1 and does not exceed 500.
+    /// 2.Word length will be at least 1 and does not exceed 500.
+    /// 3.Each word contains only lowercase English alphabet a-z.
+    /// Example 1: 
+    /// Input:
+    /// [
+    ///  "abcd",
+    ///  "bnrt",
+    ///  "crmy",
+    ///  "dtye"
+    /// ]
+    /// Output:
+    /// true
+    /// Explanation:
+    /// The first row and first column both read "abcd".
+    /// The second row and second column both read "bnrt".
+    /// The third row and third column both read "crmy".
+    /// The fourth row and fourth column both read "dtye".
+    /// Therefore, it is a valid word square.
+    ///
+    /// Example 2: 
+    /// Input:
+    /// [
+    ///  "abcd",
+    ///  "bnrt",
+    ///  "crm",
+    ///  "dt"
+    /// ]
+    /// Output:
+    /// true
+    ///
+    /// Explanation:
+    /// The first row and first column both read "abcd".
+    /// The second row and second column both read "bnrt".
+    /// The third row and third column both read "crm".
+    /// The fourth row and fourth column both read "dt".
+    /// Therefore, it is a valid word square.
+    /// Example 3: 
+    /// Input:
+    /// [
+    ///  "ball",
+    ///  "area",
+    ///  "read",
+    ///  "lady"
+    /// ]
+    ///
+    /// Output:
+    /// false
+    /// Explanation:
+    /// The third row reads "read" while the third column reads "lead".
+    /// Therefore, it is NOT a valid word square.
+    /// </summary>
+    bool validWordSquare(vector<string>& words);
+
     /// <summary>
     /// Leet code #87. Scramble String 
     /// Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively. 

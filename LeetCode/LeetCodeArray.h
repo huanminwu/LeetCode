@@ -26,8 +26,7 @@ using namespace std;
 class LeetCodeArray
 {
 public:
-#pragma region Array
-
+#pragma region TwoPointers
     /// <summary>
     /// Leet code #11. Container With Most Water 
     /// 
@@ -694,6 +693,95 @@ public:
     /// 2. S[i] consists of only lowercase English letters.
     /// </summary>
     int countLetters(string S);
+#pragma endregion
+#pragma region Array
+    /// <summary>
+    /// Leet code # 531. Lonely Pixel I
+    ///
+    /// Given a picture consisting of black and white pixels,
+    ///	find the number of black lonely pixels.
+    ///
+    /// The picture is represented by a 2D char array consisting
+    /// of 'B' and 'W', which means black and white pixels respectively.
+    ///
+    /// A black lonely pixel is character 'B' that located at a specific 
+    /// position where the same row and same column don't have any 
+    /// other black pixels.
+    ///
+    /// Example:
+    /// Input: 
+    /// [
+    ///   ['W', 'W', 'B'],
+    ///   ['W', 'B', 'W'],
+    ///   ['B', 'W', 'W']
+    /// ]
+    ///
+    /// Output: 3
+    /// Explanation: All the three 'B's are black lonely pixels.
+    /// Note:
+    /// The range of width and height of the input 2D array is [1,500].
+    /// </summary>
+    int findLonelyPixel(vector<vector<char>>& picture);
+
+    /// <summary>
+    /// Leet code # 533. Lonely Pixel II
+    ///
+    /// Given a picture consisting of black and white pixels, and a positive 
+    /// integer N, find the number of black pixels located at some specific 
+    /// row R and column C that align with all the following rules:
+    ///
+    /// Row R and column C both contain exactly N black pixels.
+    /// For all rows that have a black pixel at column C, they should be 
+    /// exactly the same as row R
+    ///
+    /// The picture is represented by a 2D char array consisting of 'B' and 'W', 
+    /// which means black and white pixels respectively.
+    ///
+    /// Example:
+    /// Input:                                            
+    /// [
+    ///   ['W', 'B', 'W', 'B', 'B', 'W'],    
+    ///   ['W', 'B', 'W', 'B', 'B', 'W'],    
+    ///   ['W', 'B', 'W', 'B', 'B', 'W'],    
+    ///   ['W', 'W', 'B', 'W', 'B', 'W']
+    /// ] 
+    ///
+    /// N = 3
+    /// Output: 6
+    /// Explanation: All the bold 'B' are the black pixels we need 
+    /// (all 'B's at column 1 and 3).
+    ///        0    1    2    3    4    5         column index                                            
+    /// 0    [['W', 'B', 'W', 'B', 'B', 'W'],    
+    /// 1     ['W', 'B', 'W', 'B', 'B', 'W'],    
+    /// 2     ['W', 'B', 'W', 'B', 'B', 'W'],    
+    /// 3     ['W', 'W', 'B', 'W', 'B', 'W']]    
+    /// row index
+    ///
+    /// Take 'B' at row R = 0 and column C = 1 as an example:
+    /// Rule 1, row R = 0 and column C = 1 both have exactly N = 3 black pixels. 
+    /// Rule 2, the rows have black pixel at column C = 1 are row 0, row 1 and 
+    /// row 2. They are exactly the same as row R = 0.
+    ///
+    /// Note:
+    /// The range of width and height of the input 2D array is [1,200].	
+    /// </summary>
+    int findLonelyPixel(vector<vector<char>>& picture, int N);
+
+    /// <summary>
+    /// Leet code #539. Minimum Time Difference
+    ///
+    /// Given a list of 24-hour clock time points in "Hour:Minutes" format, 
+    /// find the minimum minutes difference between any two time points in 
+    /// the list.
+    /// 
+    /// Example 1:
+    /// Input: ["23:59","00:00"]
+    /// Output: 1
+    /// Note:
+    /// The number of time points in the given list is at least 2 and won't exceed 20000.
+    /// The input time is legal and ranges from 00:00 to 23:59.
+    /// </summary>
+    int findMinDifference(vector<string>& timePoints);
 
     /// <summary>
     /// Leet code #364. Nested List Weight Sum II   
@@ -931,226 +1019,6 @@ public:
     /// 2. 0 <= arr[i] <= 10^5
     /// </summary>
     int missingNumber(vector<int>& arr);
-
-    /// <summary>
-    /// Leet code #53. Maximum Subarray
-    /// 
-    /// Given an integer array nums, find the contiguous subarray (containing 
-    /// at least one number) which has the largest sum and return its sum.
-    ///
-    /// Example:
-    ///
-    /// Input: [-2,1,-3,4,-1,2,1,-5,4],
-    /// Output: 6
-    /// Explanation: [4,-1,2,1] has the largest sum = 6.
-    ///
-    /// Follow up:
-    /// If you have figured out the O(n) solution, try coding another solution 
-    /// using the divide and conquer approach, which is more subtle.
-    /// </summary>
-    int maxSubArray(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #134. Gas Station
-    /// 
-    /// There are N gas stations along a circular route, where the amount of gas 
-    /// at station i is gas[i].
-    ///
-    /// You have a car with an unlimited gas tank and it costs cost[i] of gas to 
-    /// travel from station i to its next station (i+1). You begin the journey 
-    /// with an empty tank at one of the gas stations.
-    ///
-    /// Return the starting gas station's index if you can travel around the 
-    /// circuit once in the clockwise direction, otherwise return -1.
-    ///
-    /// Note:
-    ///
-    /// If there exists a solution, it is guaranteed to be unique.
-    /// Both input arrays are non-empty and have the same length.
-    /// Each element in the input arrays is a non-negative integer.
-    ///
-    /// Example 1:
-    /// Input: 
-    /// gas  = [1,2,3,4,5]
-    /// cost = [3,4,5,1,2]
-    /// Output: 3
-    ///
-    /// Explanation:
-    /// 1. Start at station 3 (index 3) and fill up with 4 unit of gas. 
-    ///    Your tank = 0 + 4 = 4
-    /// 2. Travel to station 4. Your tank = 4 - 1 + 5 = 8
-    /// 3. Travel to station 0. Your tank = 8 - 2 + 1 = 7
-    /// 4. Travel to station 1. Your tank = 7 - 3 + 2 = 6
-    /// 5. Travel to station 2. Your tank = 6 - 4 + 3 = 5
-    /// 6. Travel to station 3. The cost is 5. Your gas is just enough to travel 
-    ///    back to station 3.
-    /// 7. Therefore, return 3 as the starting index.
-    ///
-    /// Example 2:
-    /// Input: 
-    /// gas  = [2,3,4]
-    /// cost = [3,4,3]
-    /// Output: -1
-    /// 
-    /// Explanation:
-    /// 1. You can't start at station 0 or 1, as there is not enough gas to travel 
-    ///    to the next station.
-    /// 2. Let's start at station 2 and fill up with 4 unit of gas. Your 
-    ///    tank = 0 + 4 = 4
-    /// 3. Travel to station 0. Your tank = 4 - 3 + 2 = 3
-    /// 4. Travel to station 1. Your tank = 3 - 3 + 3 = 3
-    /// 5. You cannot travel back to station 2, as it requires 4 unit of gas but 
-    ///    you only have 3.
-    /// 6. Therefore, you can't travel around the circuit once no matter where 
-    ///    you start.
-    /// </summary>
-    int canCompleteCircuit(vector<int>& gas, vector<int>& cost);
-
-    /// <summary>
-    /// Leet code #152. Maximum Product Subarray
-    /// 
-    /// Given an integer array nums, find the contiguous subarray within an array 
-    /// (containing at least one number) which has the largest product.
-    ///
-    /// Example 1:
-    ///
-    /// Input: [2,3,-2,4]
-    /// Output: 6
-    /// Explanation: [2,3] has the largest product 6.
-    ///
-    /// Example 2:
-    ///
-    /// Input: [-2,0,-1]
-    /// Output: 0
-    /// Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
-    /// </summary>
-    int maxProduct(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #325. Maximum Size Subarray Sum Equals k
-    /// 
-    /// Given an array nums and a target value k, find the maximum length of a subarray that sums to k. 
-    /// If there isn't one, return 0 instead. 
-    /// Note:
-    /// The sum of the entire nums array is guaranteed to fit within the 32-bit signed integer range. 
-    ///
-    /// Example 1:
-    /// Given nums = [1, -1, 5, -2, 3], k = 3,
-    /// return 4. (because the subarray [1, -1, 5, -2] sums to 3 and is the longest) 
-    ///
-    /// Example 2:
-    /// Given nums = [-2, -1, 2, 1], k = 1,
-    /// return 2. (because the subarray [-1, 2] sums to 1 and is the longest) 
-    ///
-    /// Follow Up:
-    /// Can you do it in O(n) time? 
-    /// </summary>
-    int maxSubArrayLen(vector<int>& nums, int k);
-
-    /// <summary>
-    /// Leet code #523. Continuous Subarray Sum   
-    /// 
-    /// Given a list of non-negative numbers and a target integer k, write a 
-    /// function to check if the array has a continuous subarray of size at 
-    /// least 2 that sums up to the multiple of k, that is, sums up to n*k 
-    /// where n is also an integer.
-    ///
-    /// Example 1:
-    /// Input: [23, 2, 4, 6, 7],  k=6
-    /// Output: True
-    /// Explanation: Because [2, 4] is a continuous subarray of size 2 and 
-    /// sums up to 6.
-    /// Example 2:
-    /// Input: [23, 2, 6, 4, 7],  k=42
-    /// Output: True
-    /// Explanation: Because [23, 2, 6, 4, 7] is an continuous subarray of 
-    /// size 5 and sums up to 42.
-    /// Note:
-    /// The length of the array won't exceed 10,000.
-    /// You may assume the sum of all the numbers is in the range of a 
-    /// signed 32-bit integer.
-    /// </summary>
-    bool checkSubarraySum(vector<int>& nums, int k);
-
-    /// <summary>
-    /// Leet code #525. Contiguous Array    
-    /// 
-    /// Given a binary array, find the maximum length of a contiguous subarray 
-    /// with equal number of 0 and 1. 
-    /// Example 1:
-    /// Input: [0,1]
-    /// Output: 2
-    /// Explanation: [0, 1] is the longest contiguous subarray with equal 
-    /// number of 0 and 1.
-    ///
-    /// Example 2:
-    /// Input: [0,1,0]
-    /// Output: 2
-    /// Explanation: [0, 1] (or [1, 0]) is a longest contiguous subarray with 
-    /// equal number of 0 and 1.
-    /// Note: The length of the given binary array will not exceed 50,000. 
-    /// </summary>
-    int findMaxLength(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #560. Subarray Sum Equals K
-    /// Given an array of integers and an integer k, you need to find the 
-    /// total number of continuous subarrays whose sum equals to k.
-    /// Example 1:
-    /// Input:nums = [1,1,1], k = 2 
-    /// Output: 2
-    ///
-    /// Note:
-    /// The length of the array is in range [1, 20,000].
-    /// The range of numbers in the array is [-1000, 1000] and the range of 
-    /// the integer k is [-1e7, 1e7].
-    /// </summary>
-    int subarraySum(vector<int>& nums, int k);
-
-    /// <summary>
-    /// Leet code #930. Binary Subarrays With Sum
-    /// 
-    /// In an array A of 0s and 1s, how many non-empty subarrays have sum S?
-    /// 
-    /// Example 1:
-    /// Input: A = [1,0,1,0,1], S = 2
-    /// Output: 4
-    /// Explanation: 
-    /// The 4 subarrays are bolded below:
-    /// [1,0,1,0,1]
-    /// [1,0,1,0,1]
-    /// [1,0,1,0,1]
-    /// [1,0,1,0,1]
-    /// 
-    /// Note:
-    /// 
-    /// 1. A.length <= 30000
-    /// 2. 0 <= S <= A.length
-    /// 3. A[i] is either 0 or 1.
-    /// </summary>
-    int numSubarraysWithSum(vector<int>& A, int S);
-
-    /// <summary>
-    /// Leet code #974. Subarray Sums Divisible by K
-    /// 
-    /// Given an array A of integers, return the number of (contiguous, non-empty) 
-    /// subarrays that have a sum divisible by K.
-    ///
-    /// Example 1:
-    ///
-    /// Input: A = [4,5,0,-2,-3,1], K = 5
-    /// Output: 7
-    /// Explanation: There are 7 subarrays with a sum divisible by K = 5:
-    /// [4, 5, 0, -2, -3, 1], [5], [5, 0], [5, 0, -2, -3], [0], [0, -2, -3], 
-    /// [-2, -3]
-    /// 
-    /// Note:
-    ///
-    /// 1. 1 <= A.length <= 30000
-    /// 2. -10000 <= A[i] <= 10000
-    /// 3. 2 <= K <= 10000
-    /// </summary>
-    int subarraysDivByK(vector<int>& A, int K);
 
     /// <summary>
     /// Leet code #1243. Array Transformation
@@ -2577,70 +2445,6 @@ public:
     vector<vector<int>> minimumAbsDifference(vector<int>& arr);
 
     /// <summary>
-    /// Leet code #1186. Maximum Subarray Sum with One Deletion
-    /// 
-    /// Given an array of integers, return the maximum sum for a non-empty 
-    /// subarray (contiguous elements) with at most one element deletion. 
-    /// In other words, you want to choose a subarray and optionally delete 
-    /// one element from it so that there is still at least one element left 
-    /// and the sum of the remaining elements is maximum possible.
-    /// Note that the subarray needs to be non-empty after deleting one element.
-    /// 
-    /// Example 1:
-    /// Input: arr = [1,-2,0,3]
-    /// Output: 4
-    /// Explanation: Because we can choose [1, -2, 0, 3] and drop -2, thus the 
-    /// subarray [1, 0, 3] becomes the maximum value.
-    ///
-    /// Example 2:
-    /// Input: arr = [1,-2,-2,3]
-    /// Output: 3
-    /// Explanation: We just choose [3] and it's the maximum sum.
-    ///
-    /// Example 3:
-    /// Input: arr = [-1,-1,-1,-1]
-    /// Output: -1
-    /// Explanation: The final subarray needs to be non-empty. You can't 
-    /// choose [-1] and delete -1 from it, then get an empty subarray to make 
-    /// the sum equals to 0.
-    /// 
-    /// Constraints:
-    /// 1. 1 <= arr.length <= 10^5
-    /// 2. -10^4 <= arr[i] <= 10^4
-    /// </summary>
-    int maximumSum(vector<int>& arr);
-
-    /// <summary>
-    /// Leet code #1191. K-Concatenation Maximum Sum
-    /// 
-    /// Given an integer array arr and an integer k, modify the array by repeating 
-    /// it k times.
-    /// For example, if arr = [1, 2] and k = 3 then the modified array will 
-    /// be [1, 2, 1, 2, 1, 2].
-    /// Return the maximum sub-array sum in the modified array. Note that the 
-    /// length of the sub-array can be 0 and its sum in that case is 0.
-    ///
-    /// As the answer can be very large, return the answer modulo 10^9 + 7.
-    /// 
-    /// Example 1:
-    /// Input: arr = [1,2], k = 3
-    /// Output: 9
-    ///
-    /// Example 2:
-    /// Input: arr = [1,-2,1], k = 5
-    /// Output: 2
-    /// Example 3:
-    /// Input: arr = [-1,-2], k = 7
-    /// Output: 0
-    /// 
-    /// Constraints:
-    /// 1. 1 <= arr.length <= 10^5
-    /// 2. 1 <= k <= 10^5
-    /// 3. -10^4 <= arr[i] <= 10^4
-    /// </summary>
-    int kConcatenationMaxSum(vector<int>& arr, int k);
-
-    /// <summary>
     /// Leet code #1184. Distance Between Bus Stops
     /// 
     /// A bus has n stops numbered from 0 to n - 1 that form a circle. We know 
@@ -2788,61 +2592,6 @@ public:
     /// </summary>
     string alphabetBoardPath(string target);
 
-    /// <summary>
-    /// Leet code #1151. Minimum Swaps to Group All 1's Together
-    /// 
-    /// Given a binary array data, return the minimum number of swaps required 
-    /// to group all 1¡¯s present in the array together in any place in the array.
-    /// 
-    /// Example 1:
-    /// Input: [1,0,1,0,1]
-    /// Output: 1
-    /// Explanation: 
-    /// There are 3 ways to group all 1's together:
-    /// [1,1,1,0,0] using 1 swap.
-    /// [0,1,1,1,0] using 2 swaps.
-    /// [0,0,1,1,1] using 1 swap.
-    /// The minimum is 1.
-    ///
-    /// Example 2:
-    /// Input: [0,0,0,1,0]
-    /// Output: 0
-    /// Explanation: 
-    /// Since there is only one 1 in the array, no swaps needed.
-    ///
-    /// Example 3:
-    /// Input: [1,0,1,0,1,0,0,1,1,0,1]
-    /// Output: 3
-    /// Explanation: 
-    /// One possible solution that uses 3 swaps is [0,0,0,0,0,1,1,1,1,1,1].
-    /// 
-    /// Note:
-    /// 1. 1 <= data.length <= 10^5
-    /// 2. 0 <= data[i] <= 1
-    /// </summary>
-    int minSwaps(vector<int>& data);
-
-    /// <summary>
-    /// Leet code #1124. Longest Well-Performing Interval
-    /// 
-    /// We are given hours, a list of the number of hours worked per day for a 
-    /// given employee.
-    /// A day is considered to be a tiring day if and only if the number of hours 
-    /// worked is (strictly) greater than 8.
-    /// A well-performing interval is an interval of days for which the number of 
-    /// tiring days is strictly larger than the number of non-tiring days.
-    /// Return the length of the longest well-performing interval.
-    /// 
-    /// Example 1:
-    /// Input: hours = [9,9,6,0,6,6,9]
-    /// Output: 3
-    /// Explanation: The longest well-performing interval is [9,9,6].
-    /// 
-    /// Constraints:
-    /// 1. 1 <= hours.length <= 10000
-    /// 2. 0 <= hours[i] <= 16
-    /// </summary>
-    int longestWPI(vector<int>& hours);
 
     /// <summary>
     /// Leet code #1121. Divide Array Into Increasing Sequences
@@ -3566,6 +3315,625 @@ public:
     /// The length and width of the given matrix are in the range of [1, 150].
     /// </summary>
     vector<vector<int>> imageSmoother(vector<vector<int>>& M);
+
+    /// <summary>
+    /// Leet code #566. Reshape the Matrix       
+    /// 
+    /// In MATLAB, there is a very useful function called 'reshape', which 
+    /// can reshape a matrix into a new one with different size but keep its 
+    /// original data. 
+    /// You're given a matrix represented by a two-dimensional array, and two 
+    /// positive integers r and c representing the row number and column number 
+    /// of the wanted reshaped matrix, respectively.
+    /// The reshaped matrix need to be filled with all the elements of the 
+    /// original matrix in the same row-traversing order as they were. 
+    /// If the 'reshape' operation with given parameters is possible and legal, 
+    /// output the new reshaped matrix; Otherwise, output the original matrix. 
+    /// Example 1:
+    /// Input: 
+    /// nums = 
+    /// [[1,2],
+    /// [3,4]]
+    /// r = 1, c = 4
+    /// Output: 
+    /// [[1,2,3,4]]
+    /// Explanation:
+    /// The row-traversing of nums is [1,2,3,4]. The new reshaped matrix is a 
+    /// 1 * 4 matrix, fill it row by row by using the previous list.
+    ///
+    /// Example 2:
+    /// Input: 
+    /// nums = 
+    /// [[1,2],
+    /// [3,4]]
+    /// r = 2, c = 4
+    /// Output: 
+    /// [[1,2],
+    /// [3,4]]
+    /// Explanation:
+    /// There is no way to reshape a 2 * 2 matrix to a 2 * 4 matrix. So output 
+    /// the original matrix.
+    /// </summary>
+    vector<vector<int>> matrixReshape(vector<vector<int>>& nums, int r, int c);
+
+    /// <summary>
+    /// Leet code #575. Distribute Candies
+    /// 
+    /// Given an integer array with even length, where different numbers in 
+    /// this array represent different kinds of candies. Each number means one
+    /// candy of the corresponding kind. You need to distribute these candies 
+    /// equally in number to brother and sister. Return the maximum number of 
+    /// kinds of candies the sister could gain. 
+    /// 
+    /// Example 1:
+    /// Input: candies = [1,1,2,2,3,3]
+    /// Output: 3
+    /// Explanation:
+    /// There are three different kinds of candies (1, 2 and 3), and two 
+    /// candies for each kind.
+    /// Optimal distribution: The sister has candies [1,2,3] and the brother 
+    /// has candies [1,2,3], too. 
+    /// The sister has three different kinds of candies. 
+    /// Example 2:
+    /// Input: candies = [1,1,2,3]
+    /// Output: 2
+    /// Explanation: For example, the sister has candies [2,3] and the brother 
+    /// has candies [1,1]. 
+    /// The sister has two different kinds of candies, the brother has only one
+    /// kind of candies. 
+    /// Note: 
+    /// The length of the given array is in range [2, 10,000], and will be even.
+    /// The number in given array is in range [-100,000, 100,000].
+    /// </summary>
+    int distributeCandies(vector<int>& candies);
+
+    /// <summary>
+    /// Leet code #1089. Duplicate Zeros
+    /// 
+    /// Given a fixed length array arr of integers, duplicate each occurrence 
+    /// of zero, shifting the remaining elements to the right.
+    ///
+    /// Note that elements beyond the length of the original array are not 
+    /// written.
+    ///
+    /// Do the above modifications to the input array in place, do not return 
+    /// anything from your function.
+    ///  
+    /// Example 1:
+    /// Input: [1,0,2,3,0,4,5,0]
+    /// Output: null
+    /// Explanation: After calling your function, the input array is modified 
+    /// to: [1,0,0,2,3,0,0,4]
+    ///
+    /// Example 2:
+    ///
+    /// Input: [1,2,3]
+    /// Output: null
+    /// Explanation: After calling your function, the input array is modified 
+    /// to: [1,2,3]
+    ///
+    /// Note:
+    /// 1. 1 <= arr.length <= 10000
+    /// 2. 0 <= arr[i] <= 9
+    /// </summary>
+    void duplicateZeros(vector<int>& arr);
+
+    /// <summary>
+    /// Leet code #475. Heaters 
+    /// Winter is coming! Your first job during the contest is to design a standard heater with 
+    /// fixed warm radius to warm all the houses.
+    /// Now, you are given positions of houses and heaters on a horizontal line, find out minimum 
+    /// radius of heaters so that all houses could be covered by those heaters.
+    ///
+    /// So, your input will be the positions of houses and heaters seperately, and your expected output will be the minimum radius standard of heaters.
+    /// Note:
+    /// Numbers of houses and heaters you are given are non-negative and will not exceed 25000.
+    /// Positions of houses and heaters you are given are non-negative and will not exceed 10^9.
+    /// As long as a house is in the heaters' warm radius range, it can be warmed.
+    /// All the heaters follow your radius standard and the warm radius will the same.
+    /// Example 1:
+    /// Input: [1,2,3],[2]
+    /// Output: 1
+    /// Explanation: The only heater was placed in the position 2, and if we use the radius 1 standard, then all the houses can be warmed.
+    /// Example 2:
+    /// Input: [1,2,3,4],[1,4]
+    /// Output: 1
+    /// Explanation: The two heater was placed in the position 1 and 4. We need to use radius 1 standard, then all the houses can be warmed.
+    /// </summary>
+    int findRadius(vector<int>& houses, vector<int>& heaters);
+
+#pragma endregion
+
+#pragma region Sub Matrix Sum
+    /// <summary>
+    /// Leet code # 363. Max Sum of Rectangle No Larger Than K  
+    ///
+    /// Given a non-empty 2D matrix matrix and an integer k, find the max sum 
+    /// of a rectangle in the matrix such that its sum is no larger than k.
+    /// 
+    /// Example:
+    /// Given matrix = 
+    /// [
+    ///  [1,  0, 1],
+    ///  [0, -2, 3]
+    /// ]
+    /// k = 2
+    /// The answer is 2. Because the sum of rectangle [[0, 1], [-2, 3]] is 2 
+    /// and 2 is the max number no larger than k (k = 2).
+    /// Note:
+    /// 1.The rectangle inside the matrix must have an area > 0.
+    /// 2.What if the number of rows is much larger than the number of columns?
+    /// </summary>
+    int maxSumSubmatrix(vector<vector<int>>& matrix, int k);
+
+    /// <summary>
+    /// Leet code #1074. Number of Submatrices That Sum to Target
+    /// 
+    /// Given a matrix, and a target, return the number of non-empty submatrices 
+    /// that sum to target.
+    ///
+    /// A submatrix x1, y1, x2, y2 is the set of all cells matrix[x][y] with 
+    /// x1 <= x <= x2 and y1 <= y <= y2.
+    ///
+    /// Two submatrices (x1, y1, x2, y2) and (x1', y1', x2', y2') are different 
+    /// if they have some coordinate that is different: for example, if x1 != x1'.
+    ///
+    ///
+    /// Example 1:
+    ///
+    /// Input: matrix = [[0,1,0],[1,1,1],[0,1,0]], target = 0
+    /// Output: 4
+    /// Explanation: The four 1x1 submatrices that only contain 0.
+    ///
+    /// Example 2:
+    ///
+    /// Input: matrix = [[1,-1],[-1,1]], target = 0
+    /// Output: 5
+    /// Explanation: The two 1x2 submatrices, plus the two 2x1 submatrices, plus 
+    /// the 2x2 submatrix.
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. 1 <= matrix.length <= 300
+    /// 2. 1 <= matrix[0].length <= 300
+    /// 3. -1000 <= matrix[i] <= 1000
+    /// 4. -10^8 <= target <= 10^8
+    /// </summary>
+    int numSubmatrixSumTarget(vector<vector<int>>& matrix, int target);
+#pragma endregion
+
+#pragma region Count Subarray
+    /// <summary>
+    /// Leet code #891. Sum of Subsequence Widths
+    /// 
+    /// Given an array of integers A, consider all non-empty subsequences of A.
+    ///
+    /// For any sequence S, let the width of S be the difference between the 
+    /// maximum and minimum element of S.
+    ///
+    /// Return the sum of the widths of all subsequences of A. 
+    ///
+    /// As the answer may be very large, return the answer modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    ///
+    /// Input: [2,1,3]
+    /// Output: 6
+    /// Explanation:
+    /// Subsequences are [1], [2], [3], [2,1], [2,3], [1,3], [2,1,3].
+    /// The corresponding widths are 0, 0, 0, 1, 1, 2, 2.
+    /// The sum of these widths is 6.
+    ///
+    /// Note:
+    ///
+    /// 1 <= A.length <= 20000
+    /// 1 <= A[i] <= 20000
+    /// </summary>
+    int sumSubseqWidths(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #1063. Number of Valid Subarrays
+    /// 
+    /// Given an array A of integers, return the number of non-empty continuous 
+    /// subarrays that satisfy the following condition:
+    ///
+    /// The leftmost element of the subarray is not larger than other elements 
+    /// in the subarray.
+    ///
+    /// Example 1:
+    ///
+    /// Input: [1,4,2,5,3]
+    /// Output: 11
+    /// Explanation: There are 11 valid subarrays: [1],[4],[2],[5],[3],[1,4],
+    /// [2,5],[1,4,2],[2,5,3],[1,4,2,5],[1,4,2,5,3].
+    ///
+    /// Example 2:
+    ///
+    /// Input: [3,2,1]
+    /// Output: 3
+    /// Explanation: The 3 valid subarrays are: [3],[2],[1].
+    ///
+    /// Example 3:
+    ///
+    /// Input: [2,2,2]
+    /// Output: 6
+    /// Explanation: There are 6 valid subarrays: [2],[2],[2],[2,2],[2,2],[2,2,2].
+    /// 
+    /// Note:
+    ///
+    /// 1. 1 <= A.length <= 50000
+    /// 2. 0 <= A[i] <= 100000
+    /// </summary>
+    int validSubarrays(vector<int>& nums);
+#pragma endregion
+
+#pragma region Prefix Sum
+    /// <summary>
+    /// Leet code #53. Maximum Subarray
+    /// 
+    /// Given an integer array nums, find the contiguous subarray (containing 
+    /// at least one number) which has the largest sum and return its sum.
+    ///
+    /// Example:
+    ///
+    /// Input: [-2,1,-3,4,-1,2,1,-5,4],
+    /// Output: 6
+    /// Explanation: [4,-1,2,1] has the largest sum = 6.
+    ///
+    /// Follow up:
+    /// If you have figured out the O(n) solution, try coding another solution 
+    /// using the divide and conquer approach, which is more subtle.
+    /// </summary>
+    int maxSubArray(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #134. Gas Station
+    /// 
+    /// There are N gas stations along a circular route, where the amount of gas 
+    /// at station i is gas[i].
+    ///
+    /// You have a car with an unlimited gas tank and it costs cost[i] of gas to 
+    /// travel from station i to its next station (i+1). You begin the journey 
+    /// with an empty tank at one of the gas stations.
+    ///
+    /// Return the starting gas station's index if you can travel around the 
+    /// circuit once in the clockwise direction, otherwise return -1.
+    ///
+    /// Note:
+    ///
+    /// If there exists a solution, it is guaranteed to be unique.
+    /// Both input arrays are non-empty and have the same length.
+    /// Each element in the input arrays is a non-negative integer.
+    ///
+    /// Example 1:
+    /// Input: 
+    /// gas  = [1,2,3,4,5]
+    /// cost = [3,4,5,1,2]
+    /// Output: 3
+    ///
+    /// Explanation:
+    /// 1. Start at station 3 (index 3) and fill up with 4 unit of gas. 
+    ///    Your tank = 0 + 4 = 4
+    /// 2. Travel to station 4. Your tank = 4 - 1 + 5 = 8
+    /// 3. Travel to station 0. Your tank = 8 - 2 + 1 = 7
+    /// 4. Travel to station 1. Your tank = 7 - 3 + 2 = 6
+    /// 5. Travel to station 2. Your tank = 6 - 4 + 3 = 5
+    /// 6. Travel to station 3. The cost is 5. Your gas is just enough to travel 
+    ///    back to station 3.
+    /// 7. Therefore, return 3 as the starting index.
+    ///
+    /// Example 2:
+    /// Input: 
+    /// gas  = [2,3,4]
+    /// cost = [3,4,3]
+    /// Output: -1
+    /// 
+    /// Explanation:
+    /// 1. You can't start at station 0 or 1, as there is not enough gas to travel 
+    ///    to the next station.
+    /// 2. Let's start at station 2 and fill up with 4 unit of gas. Your 
+    ///    tank = 0 + 4 = 4
+    /// 3. Travel to station 0. Your tank = 4 - 3 + 2 = 3
+    /// 4. Travel to station 1. Your tank = 3 - 3 + 3 = 3
+    /// 5. You cannot travel back to station 2, as it requires 4 unit of gas but 
+    ///    you only have 3.
+    /// 6. Therefore, you can't travel around the circuit once no matter where 
+    ///    you start.
+    /// </summary>
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost);
+
+    /// <summary>
+    /// Leet code #152. Maximum Product Subarray
+    /// 
+    /// Given an integer array nums, find the contiguous subarray within an array 
+    /// (containing at least one number) which has the largest product.
+    ///
+    /// Example 1:
+    ///
+    /// Input: [2,3,-2,4]
+    /// Output: 6
+    /// Explanation: [2,3] has the largest product 6.
+    ///
+    /// Example 2:
+    ///
+    /// Input: [-2,0,-1]
+    /// Output: 0
+    /// Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
+    /// </summary>
+    int maxProduct(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #325. Maximum Size Subarray Sum Equals k
+    /// 
+    /// Given an array nums and a target value k, find the maximum length of a subarray that sums to k. 
+    /// If there isn't one, return 0 instead. 
+    /// Note:
+    /// The sum of the entire nums array is guaranteed to fit within the 32-bit signed integer range. 
+    ///
+    /// Example 1:
+    /// Given nums = [1, -1, 5, -2, 3], k = 3,
+    /// return 4. (because the subarray [1, -1, 5, -2] sums to 3 and is the longest) 
+    ///
+    /// Example 2:
+    /// Given nums = [-2, -1, 2, 1], k = 1,
+    /// return 2. (because the subarray [-1, 2] sums to 1 and is the longest) 
+    ///
+    /// Follow Up:
+    /// Can you do it in O(n) time? 
+    /// </summary>
+    int maxSubArrayLen(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code #523. Continuous Subarray Sum   
+    /// 
+    /// Given a list of non-negative numbers and a target integer k, write a 
+    /// function to check if the array has a continuous subarray of size at 
+    /// least 2 that sums up to the multiple of k, that is, sums up to n*k 
+    /// where n is also an integer.
+    ///
+    /// Example 1:
+    /// Input: [23, 2, 4, 6, 7],  k=6
+    /// Output: True
+    /// Explanation: Because [2, 4] is a continuous subarray of size 2 and 
+    /// sums up to 6.
+    /// Example 2:
+    /// Input: [23, 2, 6, 4, 7],  k=42
+    /// Output: True
+    /// Explanation: Because [23, 2, 6, 4, 7] is an continuous subarray of 
+    /// size 5 and sums up to 42.
+    /// Note:
+    /// The length of the array won't exceed 10,000.
+    /// You may assume the sum of all the numbers is in the range of a 
+    /// signed 32-bit integer.
+    /// </summary>
+    bool checkSubarraySum(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code #525. Contiguous Array    
+    /// 
+    /// Given a binary array, find the maximum length of a contiguous subarray 
+    /// with equal number of 0 and 1. 
+    /// Example 1:
+    /// Input: [0,1]
+    /// Output: 2
+    /// Explanation: [0, 1] is the longest contiguous subarray with equal 
+    /// number of 0 and 1.
+    ///
+    /// Example 2:
+    /// Input: [0,1,0]
+    /// Output: 2
+    /// Explanation: [0, 1] (or [1, 0]) is a longest contiguous subarray with 
+    /// equal number of 0 and 1.
+    /// Note: The length of the given binary array will not exceed 50,000. 
+    /// </summary>
+    int findMaxLength(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #548. Split Array with Equal Sum       
+    /// 
+    /// Given an array with n integers, you need to find if there are 
+    /// triplets (i, j, k) which satisfies following conditions:
+    /// 0 < i, i + 1 < j, j + 1 < k < n - 1
+    /// Sum of subarrays (0, i - 1), (i + 1, j - 1), (j + 1, k - 1) 
+    /// and (k + 1, n - 1) should be equal.
+    /// where we define that subarray (L, R) represents a slice of the 
+    /// original array starting from the element indexed L to the element 
+    /// indexed R.
+    /// Example:
+    /// Input: [1,2,1,2,1,2,1]
+    /// Output: True
+    /// Explanation:
+    /// i = 1, j = 3, k = 5. 
+    /// sum(0, i - 1) = sum(0, 0) = 1
+    /// sum(i + 1, j - 1) = sum(2, 2) = 1
+    /// sum(j + 1, k - 1) = sum(4, 4) = 1
+    /// sum(k + 1, n - 1) = sum(6, 6) = 1
+    /// Note:
+    /// 1 <= n <= 2000.
+    /// Elements in the given array will be in range [-1,000,000, 1,000,000].
+    /// </summary>
+    bool splitArray(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #560. Subarray Sum Equals K
+    /// Given an array of integers and an integer k, you need to find the 
+    /// total number of continuous subarrays whose sum equals to k.
+    /// Example 1:
+    /// Input:nums = [1,1,1], k = 2 
+    /// Output: 2
+    ///
+    /// Note:
+    /// The length of the array is in range [1, 20,000].
+    /// The range of numbers in the array is [-1000, 1000] and the range of 
+    /// the integer k is [-1e7, 1e7].
+    /// </summary>
+    int subarraySum(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code #930. Binary Subarrays With Sum
+    /// 
+    /// In an array A of 0s and 1s, how many non-empty subarrays have sum S?
+    /// 
+    /// Example 1:
+    /// Input: A = [1,0,1,0,1], S = 2
+    /// Output: 4
+    /// Explanation: 
+    /// The 4 subarrays are bolded below:
+    /// [1,0,1,0,1]
+    /// [1,0,1,0,1]
+    /// [1,0,1,0,1]
+    /// [1,0,1,0,1]
+    /// 
+    /// Note:
+    /// 
+    /// 1. A.length <= 30000
+    /// 2. 0 <= S <= A.length
+    /// 3. A[i] is either 0 or 1.
+    /// </summary>
+    int numSubarraysWithSum(vector<int>& A, int S);
+
+    /// <summary>
+    /// Leet code #974. Subarray Sums Divisible by K
+    /// 
+    /// Given an array A of integers, return the number of (contiguous, non-empty) 
+    /// subarrays that have a sum divisible by K.
+    ///
+    /// Example 1:
+    ///
+    /// Input: A = [4,5,0,-2,-3,1], K = 5
+    /// Output: 7
+    /// Explanation: There are 7 subarrays with a sum divisible by K = 5:
+    /// [4, 5, 0, -2, -3, 1], [5], [5, 0], [5, 0, -2, -3], [0], [0, -2, -3], 
+    /// [-2, -3]
+    /// 
+    /// Note:
+    ///
+    /// 1. 1 <= A.length <= 30000
+    /// 2. -10000 <= A[i] <= 10000
+    /// 3. 2 <= K <= 10000
+    /// </summary>
+    int subarraysDivByK(vector<int>& A, int K);
+
+    /// <summary>
+    /// Leet code #1124. Longest Well-Performing Interval
+    /// 
+    /// We are given hours, a list of the number of hours worked per day for a 
+    /// given employee.
+    /// A day is considered to be a tiring day if and only if the number of hours 
+    /// worked is (strictly) greater than 8.
+    /// A well-performing interval is an interval of days for which the number of 
+    /// tiring days is strictly larger than the number of non-tiring days.
+    /// Return the length of the longest well-performing interval.
+    /// 
+    /// Example 1:
+    /// Input: hours = [9,9,6,0,6,6,9]
+    /// Output: 3
+    /// Explanation: The longest well-performing interval is [9,9,6].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= hours.length <= 10000
+    /// 2. 0 <= hours[i] <= 16
+    /// </summary>
+    int longestWPI(vector<int>& hours);
+
+    /// <summary>
+    /// Leet code #1151. Minimum Swaps to Group All 1's Together
+    /// 
+    /// Given a binary array data, return the minimum number of swaps required 
+    /// to group all 1¡¯s present in the array together in any place in the array.
+    /// 
+    /// Example 1:
+    /// Input: [1,0,1,0,1]
+    /// Output: 1
+    /// Explanation: 
+    /// There are 3 ways to group all 1's together:
+    /// [1,1,1,0,0] using 1 swap.
+    /// [0,1,1,1,0] using 2 swaps.
+    /// [0,0,1,1,1] using 1 swap.
+    /// The minimum is 1.
+    ///
+    /// Example 2:
+    /// Input: [0,0,0,1,0]
+    /// Output: 0
+    /// Explanation: 
+    /// Since there is only one 1 in the array, no swaps needed.
+    ///
+    /// Example 3:
+    /// Input: [1,0,1,0,1,0,0,1,1,0,1]
+    /// Output: 3
+    /// Explanation: 
+    /// One possible solution that uses 3 swaps is [0,0,0,0,0,1,1,1,1,1,1].
+    /// 
+    /// Note:
+    /// 1. 1 <= data.length <= 10^5
+    /// 2. 0 <= data[i] <= 1
+    /// </summary>
+    int minSwaps(vector<int>& data);
+
+    /// <summary>
+    /// Leet code #1186. Maximum Subarray Sum with One Deletion
+    /// 
+    /// Given an array of integers, return the maximum sum for a non-empty 
+    /// subarray (contiguous elements) with at most one element deletion. 
+    /// In other words, you want to choose a subarray and optionally delete 
+    /// one element from it so that there is still at least one element left 
+    /// and the sum of the remaining elements is maximum possible.
+    /// Note that the subarray needs to be non-empty after deleting one element.
+    /// 
+    /// Example 1:
+    /// Input: arr = [1,-2,0,3]
+    /// Output: 4
+    /// Explanation: Because we can choose [1, -2, 0, 3] and drop -2, thus the 
+    /// subarray [1, 0, 3] becomes the maximum value.
+    ///
+    /// Example 2:
+    /// Input: arr = [1,-2,-2,3]
+    /// Output: 3
+    /// Explanation: We just choose [3] and it's the maximum sum.
+    ///
+    /// Example 3:
+    /// Input: arr = [-1,-1,-1,-1]
+    /// Output: -1
+    /// Explanation: The final subarray needs to be non-empty. You can't 
+    /// choose [-1] and delete -1 from it, then get an empty subarray to make 
+    /// the sum equals to 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= arr.length <= 10^5
+    /// 2. -10^4 <= arr[i] <= 10^4
+    /// </summary>
+    int maximumSum(vector<int>& arr);
+
+    /// <summary>
+    /// Leet code #1191. K-Concatenation Maximum Sum
+    /// 
+    /// Given an integer array arr and an integer k, modify the array by repeating 
+    /// it k times.
+    /// For example, if arr = [1, 2] and k = 3 then the modified array will 
+    /// be [1, 2, 1, 2, 1, 2].
+    /// Return the maximum sub-array sum in the modified array. Note that the 
+    /// length of the sub-array can be 0 and its sum in that case is 0.
+    ///
+    /// As the answer can be very large, return the answer modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: arr = [1,2], k = 3
+    /// Output: 9
+    ///
+    /// Example 2:
+    /// Input: arr = [1,-2,1], k = 5
+    /// Output: 2
+    /// Example 3:
+    /// Input: arr = [-1,-2], k = 7
+    /// Output: 0
+    /// 
+    /// Constraints:
+    /// 1. 1 <= arr.length <= 10^5
+    /// 2. 1 <= k <= 10^5
+    /// 3. -10^4 <= arr[i] <= 10^4
+    /// </summary>
+    int kConcatenationMaxSum(vector<int>& arr, int k);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

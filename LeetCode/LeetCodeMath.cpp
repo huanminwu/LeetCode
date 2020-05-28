@@ -3735,52 +3735,6 @@ int LeetCodeMath::poorPigs(int buckets, int minutesToDie, int minutesToTest)
     return pigs;
 }
 
-/// <summary>
-/// Leet code #891. Sum of Subsequence Widths
-/// 
-/// Given an array of integers A, consider all non-empty subsequences of A.
-///
-/// For any sequence S, let the width of S be the difference between the 
-/// maximum and minimum element of S.
-///
-/// Return the sum of the widths of all subsequences of A. 
-///
-/// As the answer may be very large, return the answer modulo 10^9 + 7.
-///
-/// Example 1:
-///
-/// Input: [2,1,3]
-/// Output: 6
-/// Explanation:
-/// Subsequences are [1], [2], [3], [2,1], [2,3], [1,3], [2,1,3].
-/// The corresponding widths are 0, 0, 0, 1, 1, 2, 2.
-/// The sum of these widths is 6.
-///
-/// Note:
-///
-/// 1 <= A.length <= 20000
-/// 1 <= A[i] <= 20000
-/// </summary>
-int LeetCode::sumSubseqWidths(vector<int>& A)
-{
-    int M = 1000000007;
-    vector<int> nums = A;
-    int result = 0;
-    vector<int> factor(A.size());
-    for (size_t i = 0; i < A.size(); i++)
-    {
-        if (i == 0) factor[i] = 1;
-        else  factor[i] = (factor[i - 1] << 1) % M;
-    }
-    sort(nums.begin(), nums.end());
-    for (size_t i = 0; i < nums.size(); i++)
-    {
-        result = (result + ((long long)factor[i] - (long long)1) * nums[i]) % M;
-        result = (result - ((long long)factor[A.size() - (long long)1 - (long long)i] - 1) * nums[i]) % M;
-        result = (result + M) % M;
-    }
-    return result;
-}
 
 /// <summary>
 /// Leet code #906. Super Palindromes
@@ -4919,7 +4873,7 @@ int LeetCodeMath::confusingNumberII(string& str_n, int index, int leading, int i
     if (index >= str_n.size()) return 1;
     if (is_last == 0 && cache[index][leading] != -1) return cache[index][leading];
     int result = 0;
-    for (size_t i = 0; i <= (is_last == 1 ? str_n[index] - '0' : 9); i++)
+    for (int i = 0; i <= (is_last == 1 ? str_n[index] - '0' : 9); i++)
     {
         if (i != 0 && i != 1 && i != 6 && i != 8 && i != 9) continue;
         int next_leading = (leading == 0 && i == 0) ? 0 : leading + 1;
@@ -8009,7 +7963,7 @@ int LeetCodeMath::numDupDigitsAtMostN(string& str_n, int index, int leading, int
     if (index >= str_n.size()) return 0;
     if (is_last == 0 && cache[index][leading] != -1) return cache[index][leading];
     int result = 0;
-    for (size_t i = 0; i <= (is_last == 1 ? str_n[index] - '0' : 9); i++)
+    for (int i = 0; i <= (is_last == 1 ? str_n[index] - '0' : 9); i++)
     {
         int next_leading = (leading == 0 && i == 0) ? 0 : leading + 1;
         int next_last = (is_last == 1 && i == str_n[index] - '0') ? 1 : 0;
@@ -8028,7 +7982,7 @@ int LeetCodeMath::numDupDigitsAtMostN(string& str_n, int index, int leading, int
                 }
                 else
                 {
-                    result += pow(10, str_n.size() - 1 - index);
+                    result += (int)pow(10, str_n.size() - 1 - index);
                 }
             }
             else

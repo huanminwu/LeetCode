@@ -1865,6 +1865,19 @@ void TestLeetCode471(void)
     Logger::WriteMessage("s = " + s + "; encode result = " + result);
 }
 
+void TestLeetCode466(void)
+{
+    Logger::WriteMessage("Test Leet Code 466");
+    LeetCodeString leetCode;
+    string s1 = "acb";
+    int n1 = 4;
+    string s2 = "ab";
+    int n2 = 2;
+    int result = leetCode.getMaxRepetitions(s1, n1, s2, n2);
+    Logger::WriteMessage("s1 = " + s1 + "; n1 = " + to_string(n1) + "; s2 = " + s2 +
+        "; n2 = " + to_string(n2) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
     TestLeetCode471();

@@ -2122,7 +2122,7 @@ vector<int> LeetCodeArray::findDuplicates(vector<int>& nums)
 /// Output: 1
 /// Explanation: The two heater was placed in the position 1 and 4. We need to use radius 1 standard, then all the houses can be warmed.
 /// </summary>
-int LeetCode::findRadius(vector<int>& houses, vector<int>& heaters)
+int LeetCodeArray::findRadius(vector<int>& houses, vector<int>& heaters)
 {
     int result = 0;
     sort(heaters.begin(), heaters.end());
@@ -2732,7 +2732,7 @@ vector<int> LeetCode::findDiagonalOrder(vector<vector<int>>& matrix)
 /// Note:
 /// The range of width and height of the input 2D array is [1,500].
 /// </summary>
-int LeetCode::findLonelyPixel(vector<vector<char>>& picture)
+int LeetCodeArray::findLonelyPixel(vector<vector<char>>& picture)
 {
     if (picture.empty() || picture[0].empty()) return 0;
     vector<vector<int>> row_map(picture.size());
@@ -2805,7 +2805,7 @@ int LeetCode::findLonelyPixel(vector<vector<char>>& picture)
 /// Note:
 /// The range of width and height of the input 2D array is [1,200].	
 /// </summary>
-int LeetCode::findLonelyPixel(vector<vector<char>>& picture, int N)
+int LeetCodeArray::findLonelyPixel(vector<vector<char>>& picture, int N)
 {
     if (picture.empty() || picture[0].empty()) return 0;
     vector<vector<int>> row_map(picture.size());
@@ -2863,7 +2863,7 @@ int LeetCode::findLonelyPixel(vector<vector<char>>& picture, int N)
 /// The number of time points in the given list is at least 2 and won't exceed 20000.
 /// The input time is legal and ranges from 00:00 to 23:59.
 /// </summary>
-int LeetCode::findMinDifference(vector<string>& timePoints)
+int LeetCodeArray::findMinDifference(vector<string>& timePoints)
 {
     priority_queue<int> time_line;
     for (size_t i = 0; i < timePoints.size(); i++)
@@ -2903,65 +2903,6 @@ int LeetCode::findMinDifference(vector<string>& timePoints)
 }
 
 /// <summary>
-/// Leet code # 466. Count The Repetitions 
-///
-/// Define S = [s,n] as the string S which consists of n 
-/// connected strings s. For example, ["abc", 3] ="abcabcabc". 
-/// On the other hand, we define that string s1 can be obtained from string s2 
-/// if we can remove some characters from s2 such that it becomes s1. For example, 
-/// “abc” can be obtained from “abdbec” based on our definition, but it 
-/// can not be obtained from “acbbe”.
-/// You are given two non-empty strings s1 and s2 (each at most 100 characters long) 
-/// and two integers 0 ≤ n1 ≤ 106 and 1 ≤ n2 ≤ 106. Now consider the strings S1 and S2, 
-/// where S1=[s1,n1] and S2=[s2,n2]. Find the maximum integer M such that 
-/// [S2,M] can be obtained from S1.
-///
-/// Example: 
-/// Input:
-/// s1="acb", n1=4
-/// s2="ab", n2=2
-/// Return:
-/// 2
-/// </summary>
-int LeetCode::getMaxRepetitions(string s1, int n1, string s2, int n2)
-{
-    int count1 = 0, count2 = 0;
-    unordered_map<int, pair<int, int>> pos_map;
-    int i = 0, j = 0;
-    while (count1 < n1)
-    {
-        i = 0;
-        for (i = 0; i < (int)s1.size(); i++)
-        {
-            if (s1[i] == s2[j])
-            {
-                j++;
-                if (j == s2.size())
-                {
-                    count2++;
-                    j = 0;
-                    if (pos_map.count(i) > 0)
-                    {
-                        int distance1 = count1 * s1.size() + i - pos_map[i].first;
-                        int distance2 = count2 * s2.size() - pos_map[i].second;
-                        int repeat_len = n1 * s1.size() - 1 - (count1 * s1.size() + i);
-                        int hop = repeat_len / distance1;
-                        count1 += hop * distance1 / s1.size();
-                        count2 += hop * distance2 / s2.size();
-                    }
-                    else
-                    {
-                        pos_map[i] = make_pair(count1 * s1.size() + i, count2 * s2.size());
-                    }
-                }
-            }
-        }
-        count1++;
-    }
-    return count2 / n2;
-}
-
-/// <summary>
 /// Leet code # 363. Max Sum of Rectangle No Larger Than K  
 ///
 /// Given a non-empty 2D matrix matrix and an integer k, find the max sum of a 
@@ -2979,77 +2920,7 @@ int LeetCode::getMaxRepetitions(string s1, int n1, string s2, int n2)
 /// 1.The rectangle inside the matrix must have an area > 0.
 /// 2.What if the number of rows is much larger than the number of columns?
 /// </summary>
-int LeetCode::maxSumSubmatrix(vector<vector<int>>& matrix, int k)
-{
-    int max_value = INT_MIN;
-    if (matrix.empty() || matrix[0].empty()) return 0;
-    vector<vector<int>>sum(matrix.size(), vector<int>(matrix[0].size()));
-    for (size_t i = 0; i < matrix.size(); i++)
-    {
-        for (size_t j = 0; j < matrix[i].size(); j++)
-        {
-            if (j == 0)
-            {
-                sum[i][j] = matrix[i][j];
-            }
-            else
-            {
-                sum[i][j] = matrix[i][j] + sum[i][j - 1];
-            }
-        }
-        if (i > 0)
-        {
-            for (size_t j = 0; j < matrix[i].size(); j++)
-            {
-                sum[i][j] = sum[i][j] + sum[i - 1][j];
-            }
-        }
-    }
-    for (size_t row1 = 0; row1 < sum.size(); row1++)
-    {
-        for (size_t col1 = 0; col1 < sum[0].size(); col1++)
-        {
-            for (size_t row2 = row1; row2 < sum.size(); row2++)
-            {
-                for (size_t col2 = col1; col2 < sum[0].size(); col2++)
-                {
-                    int sum_value = sum[row2][col2];
-                    if (row1 > 0) sum_value -= sum[row1 - 1][col2];
-                    if (col1 > 0) sum_value -= sum[row2][col1 - 1];
-                    if ((row1 > 0) && (col1 > 0))
-                    {
-                        sum_value += sum[row1 - 1][col1 - 1];
-                    }
-                    if (sum_value <= k)
-                    {
-                        max_value = max(max_value, sum_value);
-                    }
-                }
-            }
-        }
-    }
-    return max_value;
-}
-
-/// <summary>
-/// Leet code # 363. Max Sum of Rectangle No Larger Than K  
-///
-/// Given a non-empty 2D matrix matrix and an integer k, find the max sum of a 
-/// rectangle in the matrix such that its sum is no larger than k.
-/// 
-/// Example:
-/// Given matrix = 
-/// [
-///  [1,  0, 1],
-///  [0, -2, 3]
-/// ]
-/// k = 2
-/// The answer is 2. Because the sum of rectangle [[0, 1], [-2, 3]] is 2 and 2 is the max number no larger than k (k = 2).
-/// Note:
-/// 1.The rectangle inside the matrix must have an area > 0.
-/// 2.What if the number of rows is much larger than the number of columns?
-/// </summary>
-int LeetCode::maxSumSubmatrixII(vector<vector<int>>& matrix, int k)
+int LeetCodeArray::maxSumSubmatrix(vector<vector<int>>& matrix, int k)
 {
     int max_value = INT_MIN;
     if (matrix.empty() || matrix[0].empty()) return 0;
@@ -3103,7 +2974,7 @@ int LeetCode::maxSumSubmatrixII(vector<vector<int>>& matrix, int k)
 /// 1 <= n <= 2000.
 /// Elements in the given array will be in range [-1,000,000, 1,000,000].
 /// </summary>
-bool LeetCode::splitArray(vector<int>& nums)
+bool LeetCodeArray::splitArray(vector<int>& nums)
 {
     vector<int> sum(nums.size());
     for (int i = 0; i < (int)nums.size(); i++)
@@ -3174,7 +3045,7 @@ bool LeetCode::splitArray(vector<int>& nums)
 /// There is no way to reshape a 2 * 2 matrix to a 2 * 4 matrix. So output 
 /// the original matrix.
 /// </summary>
-vector<vector<int>> LeetCode::matrixReshape(vector<vector<int>>& nums, int r, int c)
+vector<vector<int>> LeetCodeArray::matrixReshape(vector<vector<int>>& nums, int r, int c)
 {
     if (nums.empty() || nums[0].empty())
     {
@@ -3227,7 +3098,7 @@ vector<vector<int>> LeetCode::matrixReshape(vector<vector<int>>& nums, int r, in
 /// The length of the given array is in range [2, 10,000], and will be even.
 /// The number in given array is in range [-100,000, 100,000].
 /// </summary>
-int LeetCode::distributeCandies(vector<int>& candies)
+int LeetCodeArray::distributeCandies(vector<int>& candies)
 {
     unordered_map<int, int> candy_map;
     for (int candy : candies) candy_map[candy]++;
@@ -7945,7 +7816,7 @@ int LeetCode::maxSatisfied(vector<int>& customers, vector<int>& grumpy, int X)
 /// 3. -1000 <= matrix[i] <= 1000
 /// 4. -10^8 <= target <= 10^8
 /// </summary>
-int LeetCode::numSubmatrixSumTarget(vector<vector<int>>& matrix, int target)
+int LeetCodeArray::numSubmatrixSumTarget(vector<vector<int>>& matrix, int target)
 {
     int result = 0;
     vector<vector<int>> sum(matrix.size(), vector<int>(matrix[0].size()));
@@ -7984,69 +7855,6 @@ int LeetCode::numSubmatrixSumTarget(vector<vector<int>>& matrix, int target)
 }
 
 
-/// <summary>
-/// Leet code #1063. Number of Valid Subarrays
-/// 
-/// Given an array A of integers, return the number of non-empty continuous 
-/// subarrays that satisfy the following condition:
-///
-/// The leftmost element of the subarray is not larger than other elements 
-/// in the subarray.
-///
-/// Example 1:
-///
-/// Input: [1,4,2,5,3]
-/// Output: 11
-/// Explanation: There are 11 valid subarrays: [1],[4],[2],[5],[3],[1,4],
-/// [2,5],[1,4,2],[2,5,3],[1,4,2,5],[1,4,2,5,3].
-///
-/// Example 2:
-///
-/// Input: [3,2,1]
-/// Output: 3
-/// Explanation: The 3 valid subarrays are: [3],[2],[1].
-///
-/// Example 3:
-///
-/// Input: [2,2,2]
-/// Output: 6
-/// Explanation: There are 6 valid subarrays: [2],[2],[2],[2,2],[2,2],[2,2,2].
-/// 
-///
-/// Note:
-///
-/// 1. 1 <= A.length <= 50000
-/// 2. 0 <= A[i] <= 100000
-/// </summary>
-int LeetCode::validSubarrays(vector<int>& nums)
-{
-    int result = 0;
-    stack<int> dp;
-    for (size_t i = 0; i < nums.size(); i++)
-    {
-        if (dp.empty())
-        {
-            dp.push(nums[i]);
-        }
-        else
-        {
-            while (!dp.empty())
-            {
-                if (dp.top() > nums[i])
-                {
-                    dp.pop();
-                }
-                else
-                {
-                    break;
-                }
-            }
-            dp.push(nums[i]);
-        }
-        result += dp.size();
-    }
-    return result;
-}
 
 /// <summary>
 /// Leet code #1089. Duplicate Zeros
@@ -8077,7 +7885,7 @@ int LeetCode::validSubarrays(vector<int>& nums)
 /// 1. 1 <= arr.length <= 10000
 /// 2. 0 <= arr[i] <= 9
 /// </summary>
-void LeetCode::duplicateZeros(vector<int>& arr)
+void LeetCodeArray::duplicateZeros(vector<int>& arr)
 {
     int count = 0;
     int index = 0;
@@ -9157,6 +8965,53 @@ int LeetCodeArray::findMaxLength(vector<int>& nums)
         }
     }
     return max_length;
+}
+
+/// <summary>
+/// Leet code #891. Sum of Subsequence Widths
+/// 
+/// Given an array of integers A, consider all non-empty subsequences of A.
+///
+/// For any sequence S, let the width of S be the difference between the 
+/// maximum and minimum element of S.
+///
+/// Return the sum of the widths of all subsequences of A. 
+///
+/// As the answer may be very large, return the answer modulo 10^9 + 7.
+///
+/// Example 1:
+///
+/// Input: [2,1,3]
+/// Output: 6
+/// Explanation:
+/// Subsequences are [1], [2], [3], [2,1], [2,3], [1,3], [2,1,3].
+/// The corresponding widths are 0, 0, 0, 1, 1, 2, 2.
+/// The sum of these widths is 6.
+///
+/// Note:
+///
+/// 1 <= A.length <= 20000
+/// 1 <= A[i] <= 20000
+/// </summary>
+int LeetCodeArray::sumSubseqWidths(vector<int>& A)
+{
+    int M = 1000000007;
+    vector<int> nums = A;
+    int result = 0;
+    vector<int> factor(A.size());
+    for (size_t i = 0; i < A.size(); i++)
+    {
+        if (i == 0) factor[i] = 1;
+        else  factor[i] = (factor[i - 1] << 1) % M;
+    }
+    sort(nums.begin(), nums.end());
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        result = (result + ((long long)factor[i] - (long long)1) * nums[i]) % M;
+        result = (result - ((long long)factor[A.size() - (long long)1 - (long long)i] - 1) * nums[i]) % M;
+        result = (result + M) % M;
+    }
+    return result;
 }
 
 /// <summary>
@@ -11941,4 +11796,69 @@ int LeetCodeArray::busyStudent(vector<int>& startTime, vector<int>& endTime, int
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1063. Number of Valid Subarrays
+/// 
+/// Given an array A of integers, return the number of non-empty continuous 
+/// subarrays that satisfy the following condition:
+///
+/// The leftmost element of the subarray is not larger than other elements 
+/// in the subarray.
+///
+/// Example 1:
+///
+/// Input: [1,4,2,5,3]
+/// Output: 11
+/// Explanation: There are 11 valid subarrays: [1],[4],[2],[5],[3],[1,4],
+/// [2,5],[1,4,2],[2,5,3],[1,4,2,5],[1,4,2,5,3].
+///
+/// Example 2:
+///
+/// Input: [3,2,1]
+/// Output: 3
+/// Explanation: The 3 valid subarrays are: [3],[2],[1].
+///
+/// Example 3:
+///
+/// Input: [2,2,2]
+/// Output: 6
+/// Explanation: There are 6 valid subarrays: [2],[2],[2],[2,2],[2,2],[2,2,2].
+/// 
+///
+/// Note:
+///
+/// 1. 1 <= A.length <= 50000
+/// 2. 0 <= A[i] <= 100000
+/// </summary>
+int LeetCodeArray::validSubarrays(vector<int>& nums)
+{
+    int result = 0;
+    stack<int> dp;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (dp.empty())
+        {
+            dp.push(nums[i]);
+        }
+        else
+        {
+            while (!dp.empty())
+            {
+                if (dp.top() > nums[i])
+                {
+                    dp.pop();
+                }
+                else
+                {
+                    break;
+                }
+            }
+            dp.push(nums[i]);
+        }
+        result += dp.size();
+    }
+    return result;
+}
+
 #pragma endregion

@@ -10629,4 +10629,64 @@ string LeetCodeString::encode(string s)
     return result[0][s.size() - 1];
 }
 
+/// <summary>
+/// Leet code # 466. Count The Repetitions 
+///
+/// Define S = [s,n] as the string S which consists of n 
+/// connected strings s. For example, ["abc", 3] ="abcabcabc". 
+/// On the other hand, we define that string s1 can be obtained from string s2 
+/// if we can remove some characters from s2 such that it becomes s1. For example, 
+/// “abc” can be obtained from “abdbec” based on our definition, but it 
+/// can not be obtained from “acbbe”.
+/// You are given two non-empty strings s1 and s2 (each at most 100 characters long) 
+/// and two integers 0 ≤ n1 ≤ 106 and 1 ≤ n2 ≤ 106. Now consider the strings S1 and S2, 
+/// where S1=[s1,n1] and S2=[s2,n2]. Find the maximum integer M such that 
+/// [S2,M] can be obtained from S1.
+///
+/// Example: 
+/// Input:
+/// s1="acb", n1=4
+/// s2="ab", n2=2
+/// Return:
+/// 2
+/// </summary>
+int LeetCodeString::getMaxRepetitions(string s1, int n1, string s2, int n2)
+{
+    int count1 = 0, count2 = 0;
+    unordered_map<int, pair<int, int>> pos_map;
+    int i = 0, j = 0;
+    while (count1 < n1)
+    {
+        i = 0;
+        for (i = 0; i < (int)s1.size(); i++)
+        {
+            if (s1[i] == s2[j])
+            {
+                j++;
+                if (j == s2.size())
+                {
+                    count2++;
+                    j = 0;
+                    if (pos_map.count(i) > 0)
+                    {
+                        int distance1 = count1 * s1.size() + i - pos_map[i].first;
+                        int distance2 = count2 * s2.size() - pos_map[i].second;
+                        int repeat_len = n1 * s1.size() - 1 - (count1 * s1.size() + i);
+                        int hop = repeat_len / distance1;
+                        count1 += hop * distance1 / s1.size();
+                        count2 += hop * distance2 / s2.size();
+                    }
+                    else
+                    {
+                        pos_map[i] = make_pair(count1 * s1.size() + i, count2 * s2.size());
+                    }
+                }
+            }
+        }
+        count1++;
+    }
+    return count2 / n2;
+}
+
+
 #pragma endregion
