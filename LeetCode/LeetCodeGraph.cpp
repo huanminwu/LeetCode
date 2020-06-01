@@ -7957,4 +7957,177 @@ int LeetCodeGraph::makeConnected(int n, vector<vector<int>>& connections)
     else return result;
 }
 
+/// <summary>
+/// Leet code #1462. Course Schedule IV
+/// 
+/// Medium
+///
+/// There are a total of n courses you have to take, labeled from 0 to n-1.
+///
+/// Some courses may have direct prerequisites, for example, to take 
+/// course 0 you have first to take course 1, which is expressed as a 
+/// pair: [1,0]
+///
+/// Given the total number of courses n, a list of direct prerequisite 
+/// pairs and a list of queries pairs.
+///
+/// You should answer for each queries[i] whether the course queries[i][0] 
+/// is a prerequisite of the course queries[i][1] or not.
+///
+/// Return a list of boolean, the answers to the given queries.
+///
+/// Please note that if course a is a prerequisite of course b and 
+/// course b is a prerequisite of course c, then, course a is a 
+/// prerequisite of course c.
+/// 
+/// Example 1:
+/// Input: n = 2, prerequisites = [[1,0]], queries = [[0,1],[1,0]]
+/// Output: [false,true]
+/// Explanation: course 0 is not a prerequisite of course 1 but 
+/// the opposite is true.
+///
+/// Example 2:
+/// Input: n = 2, prerequisites = [], queries = [[1,0],[0,1]]
+/// Output: [false,false]
+/// Explanation: There are no prerequisites and each course is independent.
+///
+/// Example 3:
+/// Input: n = 3, prerequisites = [[1,2],[1,0],[2,0]], 
+/// queries = [[1,0],[1,2]]
+/// Output: [true,true]
+/// Example 4:
+/// Input: n = 3, prerequisites = [[1,0],[2,0]], queries = [[0,1],[2,0]]
+/// Output: [false,true]
+///
+/// Example 5:
+/// Input: n = 5, prerequisites = [[0,1],[1,2],[2,3],[3,4]], 
+/// queries = [[0,4],[4,0],[1,3],[3,0]]
+/// Output: [true,false,true,false]
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 100
+/// 2. 0 <= prerequisite.length <= (n * (n - 1) / 2)
+/// 3. 0 <= prerequisite[i][0], prerequisite[i][1] < n
+/// 4. prerequisite[i][0] != prerequisite[i][1]
+/// 5. The prerequisites graph has no cycles.
+/// 6. The prerequisites graph has no repeated edges.
+/// 7. 1 <= queries.length <= 10^4
+/// 8. queries[i][0] != queries[i][1]
+/// </summary>
+vector<bool> LeetCodeGraph::checkIfPrerequisite(int n, vector<vector<int>>& prerequisites, vector<vector<int>>& queries)
+{
+    vector<unordered_set<int>> next(n);
+    vector<int> degree(n);
+    vector<unordered_set<int>> pre_course(n);
+    for (size_t i = 0; i < prerequisites.size(); i++)
+    {
+        degree[prerequisites[i][1]]++;
+        next[prerequisites[i][0]].insert(prerequisites[i][1]);
+    }
+    queue<int> search;
+    for (int i = 0; i < n; i++)
+    {
+        if (degree[i] == 0) search.push(i);
+    }
+    while (!search.empty())
+    {
+        int course = search.front();
+        search.pop();
+
+        for (auto c : next[course])
+        {
+            pre_course[c].insert(pre_course[course].begin(), pre_course[course].end());
+            pre_course[c].insert(course);
+            degree[c]--;
+            if (degree[c] == 0) search.push(c);
+        }
+    }
+
+    vector<bool> result;
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        if (pre_course[queries[i][1]].count(queries[i][0]) > 0)
+        {
+            result.push_back(true);
+        }
+        else
+        {
+            result.push_back(false);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1466. Reorder Routes to Make All Paths Lead to the City Zero
+/// 
+/// Medium
+///
+/// There are n cities numbered from 0 to n-1 and n-1 roads such that 
+/// there is only one way to travel between two different cities (this 
+/// network form a tree). Last year, The ministry of transport decided to 
+/// orient the roads in one direction because they are too narrow.
+///
+/// Roads are represented by connections where connections[i] = [a, b] 
+/// represents a road from city a to b.
+///
+/// This year, there will be a big event in the capital (city 0), and 
+/// many people want to travel to this city.
+///
+/// Your task consists of reorienting some roads such that each city 
+/// can visit the city 0. Return the minimum number of edges changed.
+///
+/// It's guaranteed that each city can reach the city 0 after reorder.
+///
+/// Example 1:
+/// Input: n = 6, connections = [[0,1],[1,3],[2,3],[4,0],[4,5]]
+/// Output: 3
+/// Explanation: Change the direction of edges show in red such that 
+/// each node can reach the node 0 (capital).
+///
+/// Example 2:
+/// Input: n = 5, connections = [[1,0],[1,2],[3,2],[3,4]]
+/// Output: 2
+/// Explanation: Change the direction of edges show in red such that 
+/// each node can reach the node 0 (capital).
+///
+/// Example 3:
+/// Input: n = 3, connections = [[1,0],[2,0]]
+/// Output: 0
+///
+/// Constraints:
+/// 1. 2 <= n <= 5 * 10^4
+/// 2. connections.length == n-1
+/// 3. connections[i].length == 2
+/// 4. 0 <= connections[i][0], connections[i][1] <= n-1
+/// 5. connections[i][0] != connections[i][1]
+/// </summary>
+int LeetCodeGraph::minReorder(int n, vector<vector<int>>& connections)
+{
+    vector<unordered_map<int, int>> road(n);
+    for (size_t i = 0; i < connections.size(); i++)
+    {
+        road[connections[i][0]][connections[i][1]] = 1;
+        road[connections[i][1]][connections[i][0]] = -1;
+    }
+
+    queue<int> search;
+    int result = 0;
+    search.push(0);
+    while (!search.empty())
+    {
+        int city = search.front();
+        search.pop();
+
+        for (auto itr : road[city])
+        {
+            if (itr.second == 0) continue;
+            if (itr.second == 1) result++;
+            road[city][itr.first] = 0;
+            road[itr.first][city] = 0;
+            search.push(itr.first);
+        }
+    }
+    return result;
+}
 #pragma endregion

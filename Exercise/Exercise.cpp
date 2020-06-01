@@ -8118,13 +8118,15 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeGraph();
     TestLeetCodeMath();
     TestLeetCodeDP();
+    TestLeetCodeBit();
+    TestLeetCodeArray();
+
     TestLeetCodeTree();
     TestLeetCodeString();
     TestLeetCodeHashtable();
-    TestLeetCodeArray();
-    TestLeetCodeGraph();
     TestLeetCodeSort();
     TestLeetCodeDesign();
     TestLeetCodeGreedy();
@@ -8133,7 +8135,6 @@ void main(int argc, char* argv[])
     TestLeetCodeBFS();
     TestLeetCodeBinarySearch();
     TestLeetCodeLinkedList();
-    TestLeetCodeBit();
     TestLeetCode902();
     TestLeetCode1199();
     TestLeetCode5();

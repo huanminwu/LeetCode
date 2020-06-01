@@ -2493,8 +2493,39 @@ void TestLeetCode475(void)
     Logger::WriteMessage("Radius = " + to_string(radius));
 }
 
+void TestLeetCode1460(void)
+{
+    Logger::WriteMessage("Test Leet Code 1460");
+    LeetCodeArray leetCode;
+    vector<int> target = { 1, 2, 3, 4 };
+    vector<int> arr = { 2, 4, 1, 3 };
+    bool result = leetCode.canBeEqual(target, arr);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    target = { 7 };
+    arr = { 7 };
+    result = leetCode.canBeEqual(target, arr);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    target = { 1, 12 };
+    arr = { 12, 1 };
+    result = leetCode.canBeEqual(target, arr);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    target = { 3, 7, 9 };
+    arr = { 3, 7, 11 };
+    result = leetCode.canBeEqual(target, arr);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    target = { 1,1,1,1,1 };
+    arr = { 1,1,1,1,1 };
+    result = leetCode.canBeEqual(target, arr);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1460();
     TestLeetCode475();
     TestLeetCode891();
     TestLeetCode363();

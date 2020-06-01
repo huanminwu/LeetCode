@@ -2504,8 +2504,78 @@ void TestLeetCode1319(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1462(void)
+{
+    Logger::WriteMessage("Test Leet Code 1462");
+    LeetCodeGraph leetCode;
+    int n = 2;
+    vector<vector<int>> prerequisites = { {1, 0} };
+    vector<vector<int>> queries = { {0, 1},{1, 0} };
+    vector<bool> result = leetCode.checkIfPrerequisite(n, prerequisites, queries);
+    Logger::WriteMessage(prerequisites);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 2;
+    prerequisites = { };
+    queries = { {1, 0}, { 0, 1 } };
+    result = leetCode.checkIfPrerequisite(n, prerequisites, queries);
+    Logger::WriteMessage(prerequisites);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 3;
+    prerequisites = { {1, 2},{1, 0},{2, 0} };
+    queries = { {1, 0},{1, 2} };
+    result = leetCode.checkIfPrerequisite(n, prerequisites, queries);
+    Logger::WriteMessage(prerequisites);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 3;
+    prerequisites = { {1, 0},{2, 0} };
+    queries = { {0, 1},{2, 0} };
+    result = leetCode.checkIfPrerequisite(n, prerequisites, queries);
+    Logger::WriteMessage(prerequisites);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 5;
+    prerequisites = { {0, 1},{1, 2},{2, 3},{3, 4} };
+    queries = { {0, 4},{4, 0},{1, 3},{3, 0} };
+    result = leetCode.checkIfPrerequisite(n, prerequisites, queries);
+    Logger::WriteMessage(prerequisites);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1466(void)
+{
+    Logger::WriteMessage("Test Leet Code 1466");
+    LeetCodeGraph leetCode;
+    int n = 6;
+    vector<vector<int>> connections = { {0, 1},{1, 3},{2, 3},{4, 0},{4, 5} };
+    int result = leetCode.minReorder(n, connections);
+    Logger::WriteMessage(connections);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 5;
+    connections = { {1, 0},{1, 2},{3, 2},{3, 4} };
+    result = leetCode.minReorder(n, connections);
+    Logger::WriteMessage(connections);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    connections = { {1, 0},{2, 0} };
+    result = leetCode.minReorder(n, connections);
+    Logger::WriteMessage(connections);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1466();
+    TestLeetCode1462();
     TestLeetCode305();
     TestLeetCode1319();
     TestLeetCode547();

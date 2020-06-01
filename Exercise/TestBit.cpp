@@ -447,8 +447,39 @@ void TestLeetCode461(void)
     Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; Haming Distance = " + to_string(count));
 }
 
+void TestLeetCode1461(void)
+{
+    Logger::WriteMessage("Test Leet Code 1461");
+    LeetCodeBit leetCode;
+    string s = "00110110";
+    int k = 2;
+    bool result = leetCode.hasAllCodes(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "00110";
+    k = 2;
+    result = leetCode.hasAllCodes(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "0110";
+    k = 1;
+    result = leetCode.hasAllCodes(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "0110";
+    k = 2;
+    result = leetCode.hasAllCodes(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "0000000001011100";
+    k = 4;
+    result = leetCode.hasAllCodes(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode1461();
     TestLeetCode89();
     TestLeetCode136();
     TestLeetCode137();

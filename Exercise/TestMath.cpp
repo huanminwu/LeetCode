@@ -2827,8 +2827,102 @@ void TestLeetCode384(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1467(void)
+{
+    Logger::WriteMessage("Test Leet Code 1467");
+    LeetCodeMath leetCode;
+    vector<int> balls = { 1, 1 };
+    double result = leetCode.getProbability(balls);
+    Logger::WriteMessage(balls);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    balls = { 2,1,1 };
+    result = leetCode.getProbability(balls);
+    Logger::WriteMessage(balls);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    balls = { 1,2,1,2 };
+    result = leetCode.getProbability(balls);
+    Logger::WriteMessage(balls);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    balls = { 3,2,1 };
+    result = leetCode.getProbability(balls);
+    Logger::WriteMessage(balls);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    balls = { 6,6,6,6,6,6 };
+    result = leetCode.getProbability(balls);
+    Logger::WriteMessage(balls);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1464(void)
+{
+    Logger::WriteMessage("Test Leet Code 1464");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 3, 4, 5, 2 };
+    int result = leetCode.maxProduct(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,5,4,5 };
+    result = leetCode.maxProduct(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,7 };
+    result = leetCode.maxProduct(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1465(void)
+{
+    Logger::WriteMessage("Test Leet Code 1465");
+    LeetCodeMath leetCode;
+    int h = 5;
+    int w = 4;
+    vector<int> horizontalCuts = { 1, 2, 4 };
+    vector<int> verticalCuts = { 1, 3 };
+    int result = leetCode.maxArea(h, w, horizontalCuts, verticalCuts);
+    Logger::WriteMessage(horizontalCuts);
+    Logger::WriteMessage(verticalCuts);
+    Logger::WriteMessage("h = " + to_string(h) + "; w = " + to_string(w) + "; result = " + to_string(result));
+
+    h = 5;
+    w = 4;
+    horizontalCuts = { 3, 1 };
+    verticalCuts = { 1 };
+    result = leetCode.maxArea(h, w, horizontalCuts, verticalCuts);
+    Logger::WriteMessage(horizontalCuts);
+    Logger::WriteMessage(verticalCuts);
+    Logger::WriteMessage("h = " + to_string(h) + "; w = " + to_string(w) + "; result = " + to_string(result));
+
+    h = 5;
+    w = 4;
+    horizontalCuts = { 3 };
+    verticalCuts = { 3 };
+    result = leetCode.maxArea(h, w, horizontalCuts, verticalCuts);
+    Logger::WriteMessage(horizontalCuts);
+    Logger::WriteMessage(verticalCuts);
+    Logger::WriteMessage("h = " + to_string(h) + "; w = " + to_string(w) + "; result = " + to_string(result));
+
+    h = 6;
+    w = 3;
+    horizontalCuts = { 5, 4, 1, 2, 3 };
+    verticalCuts = { 2, 1 };
+    result = leetCode.maxArea(h, w, horizontalCuts, verticalCuts);
+    Logger::WriteMessage(horizontalCuts);
+    Logger::WriteMessage(verticalCuts);
+    Logger::WriteMessage("h = " + to_string(h) + "; w = " + to_string(w) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1465();
+    TestLeetCode1464();
+    TestLeetCode1467();
     TestLeetCode384();
     TestLeetCode517();
     TestLeetCode1088();

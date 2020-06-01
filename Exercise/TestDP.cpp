@@ -1530,8 +1530,57 @@ void TestLeetCode1458(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1463(void)
+{
+    Logger::WriteMessage("Test Leet Code 1463");
+    LeetCodeDP leetCode;
+    vector<vector<int>> grid = 
+    { 
+        {3, 1, 1},
+        {2, 5, 1},
+        {1, 5, 5},
+        {2, 1, 1} 
+    };
+    int result = leetCode.cherryPickup(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = 
+    {
+        {1, 0, 0, 0, 0, 0, 1},
+        {2, 0, 0, 0, 0, 3, 0},
+        {2, 0, 9, 0, 0, 0, 0},
+        {0, 3, 0, 5, 4, 0, 0},
+        {1, 0, 2, 3, 0, 0, 6}
+    };
+    result = leetCode.cherryPickup(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {1,0,0,3},
+        {0,0,0,3},
+        {0,0,3,3},
+        {9,0,3,3}
+    };
+    result = leetCode.cherryPickup(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {1,1},
+        {1,1}
+    };
+    result = leetCode.cherryPickup(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1463();
     TestLeetCode1458();
     TestLeetCode1449();
     TestLeetCode1444();
