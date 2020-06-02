@@ -10494,7 +10494,7 @@ int LeetCodeString::maxVowels(string s, int k)
 {
     int result = 0;
     int vowels = 0;
-    for (size_t i = 0; i < s.size(); i++)
+    for (int i = 0; i < (int)s.size(); i++)
     {
         if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u')
         {
@@ -10635,13 +10635,13 @@ string LeetCodeString::encode(string s)
 /// Define S = [s,n] as the string S which consists of n 
 /// connected strings s. For example, ["abc", 3] ="abcabcabc". 
 /// On the other hand, we define that string s1 can be obtained from string s2 
-/// if we can remove some characters from s2 such that it becomes s1. For example, 
-/// “abc” can be obtained from “abdbec” based on our definition, but it 
-/// can not be obtained from “acbbe”.
-/// You are given two non-empty strings s1 and s2 (each at most 100 characters long) 
-/// and two integers 0 ≤ n1 ≤ 106 and 1 ≤ n2 ≤ 106. Now consider the strings S1 and S2, 
-/// where S1=[s1,n1] and S2=[s2,n2]. Find the maximum integer M such that 
-/// [S2,M] can be obtained from S1.
+/// if we can remove some characters from s2 such that it becomes s1. For 
+/// example, "abc" can be obtained from “abdbec” based on our definition, but 
+/// it can not be obtained from "acbbe".
+/// You are given two non-empty strings s1 and s2 (each at most 100 characters 
+/// long) and two integers 0 <= n1 <= 106 and 1 <= n2 <= 106. Now consider the 
+/// strings S1 and S2, where S1=[s1,n1] and S2=[s2,n2]. Find the maximum 
+/// integer M such that [S2,M] can be obtained from S1.
 ///
 /// Example: 
 /// Input:
@@ -10688,5 +10688,92 @@ int LeetCodeString::getMaxRepetitions(string s1, int n1, string s2, int n2)
     return count2 / n2;
 }
 
+/// <summary>
+/// Leet code #418. Sentence Screen Fitting     
+/// 
+/// Given a rows x cols screen and a sentence represented by a list of non-empty words, 
+/// find how many times the given sentence can be fitted on the screen. 
+/// 
+/// Note:
+/// 1.A word cannot be split into two lines. 
+/// 2.The order of words in the sentence must remain unchanged.
+/// 3.Two consecutive words in a line must be separated by a single space.
+/// 4.Total words in the sentence won't exceed 100.
+/// 5.Length of each word is greater than 0 and won't exceed 10.
+/// 6.1 ≤ rows, cols ≤ 20,000.
+/// 
+/// Example 1: 
+/// Input:
+/// rows = 2, cols = 8, sentence = ["hello", "world"]
+/// Output: 
+/// 1
+///
+/// Explanation:
+/// hello---
+/// world---
+///
+/// The character '-' signifies an empty space on the screen.
+///
+/// Example 2: 
+/// Input:
+/// rows = 3, cols = 6, sentence = ["a", "bcd", "e"]
+/// 
+/// Output: 
+/// 2
+///
+/// Explanation:
+/// a-bcd- 
+/// e-a---
+/// bcd-e-
+///
+/// The character '-' signifies an empty space on the screen.
+///
+/// Example 3: 
+/// Input:
+/// rows = 4, cols = 5, sentence = ["I", "had", "apple", "pie"]
+///
+/// Output: 
+/// 1
+///
+/// Explanation:
+/// I-had
+/// apple
+/// pie-I
+/// had--
+///
+/// The character '-' signifies an empty space on the screen.
+/// </summary>
+int LeetCodeString::wordsTyping(vector<string>& sentence, int rows, int cols)
+{
+    int count = 0;
+    int index = 0;
+    int length = 0;
+    if (sentence.size() == 0) return 0;
+    for (size_t i = 0; i < sentence.size(); i++)
+    {
+        length += sentence[i].size() + 1;
+    }
+    for (int i = 0; i < rows; i++)
+    {
+        int char_count = cols;
+        if (char_count >= length)
+        {
+            count += char_count / length;
+            char_count %= length;
+        }
+        while (char_count >= (int)sentence[index].size())
+        {
+            char_count -= sentence[index].size();
+            char_count--;
+            index++;
+            if (index == sentence.size())
+            {
+                count++;
+                index = 0;
+            }
+        }
+    }
+    return count;
+}
 
 #pragma endregion

@@ -1317,8 +1317,8 @@ bool LeetCodeBit::hasAllCodes(string s, int k)
     {
         sum = sum * 2 + (s[i] - '0');
 
-        if (i >= k) sum -= size * (s[i - k] - '0');
-        if (i >= k - 1)
+        if ((int)i >= k) sum -= size * (s[i - k] - '0');
+        if ((int)i >= k - 1)
         {
             if (check[sum] == 0)
             {

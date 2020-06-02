@@ -2,6 +2,26 @@
 #include "..\LeetCode\LeetCodeDesign.h"
 #include "..\LeetCode\LeetCodeTree.h"
 #include "TestDesign.h"
+
+void TestLeetCode155(void)
+{
+    MinStack minStack;
+    Logger::WriteMessage("minStack.push(-2)");
+    minStack.push(-2);
+    Logger::WriteMessage("minStack.push(0)");
+    minStack.push(0);
+    Logger::WriteMessage("minStack.push(-3)");
+    minStack.push(-3);
+    Logger::WriteMessage(("minStack.getMin()" + to_string(minStack.getMin())).c_str());
+    minStack.getMin();
+    Logger::WriteMessage("minStack.pop()");
+    minStack.pop();
+    Logger::WriteMessage(("minStack.top()" + to_string(minStack.getMin())).c_str());
+    minStack.top();
+    Logger::WriteMessage(("minStack.getMin()" + to_string(minStack.getMin())).c_str());
+    minStack.getMin();
+}
+
 void TestLeetCode146(void)
 {
     Logger::WriteMessage("Test Leet Code 146");
@@ -2070,8 +2090,705 @@ void TestLeetCode1206(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1172(void)
+{
+    Logger::WriteMessage("Test Leet Code 1172");
+    vector<string> commands =
+    {
+        "DinnerPlates", "push", "push", "push", "push", "push", "popAtStack",
+        "push","push","popAtStack","popAtStack","pop","pop","pop","pop","pop"
+    };
+
+    vector<vector<int>> data =
+    {
+        {2} ,{1},{2},{3},{4},{5},{0},{20},{21},{0},{2},{},{},{},{},{}
+    };
+
+    DinnerPlates* dinnerPlates = nullptr;
+
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "DinnerPlates")
+        {
+            dinnerPlates = new DinnerPlates(data[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "push")
+        {
+            dinnerPlates->push(data[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "pop")
+        {
+            int ret = dinnerPlates->pop();
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "popAtStack")
+        {
+            int ret = dinnerPlates->popAtStack(data[i][0]);
+            result.push_back(to_string(ret));
+        }
+    }
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode855(void)
+{
+    Logger::WriteMessage("Test Leet Code 855");
+    vector<string> commands = { "ExamRoom","seat","seat","seat","seat","leave","seat" };
+    vector<int> parameters = { 10, -1, -1, -1, -1, 4, -1 };
+    vector<int> result(commands.size());
+    ExamRoom* exam_room = nullptr;
+
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "ExamRoom")
+        {
+            exam_room = new ExamRoom(parameters[0]);
+            result[i] = -1;
+        }
+        else if (commands[i] == "seat")
+        {
+            result[i] = exam_room->seat();
+        }
+        else
+        {
+            exam_room->leave(parameters[i]);
+            result[i] = -1;
+        }
+    }
+    if (exam_room != nullptr) delete exam_room;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode710(void)
+{
+    Logger::WriteMessage("Test Leet Code 710");
+    Solution* solution;
+    vector<string> command = { "Solution","pick","pick","pick" };
+    int N = 1;
+    vector<int> blacklist = {};
+    vector<int> result = {};
+    solution = new Solution(N, blacklist);
+    result.push_back(-1);
+    for (size_t i = 0; i < command.size(); i++)
+    {
+        if (command[i] == "pick")
+        {
+            result.push_back(solution->pick());
+        }
+    }
+    delete solution;
+    Logger::WriteMessage(command);
+    Logger::WriteMessage("N = " + to_string(N));
+    Logger::WriteMessage(blacklist);
+    Logger::WriteMessage(result);
+
+    command = { "Solution","pick","pick","pick" };
+    N = 2;
+    blacklist = {};
+    result = {};
+    solution = new Solution(N, blacklist);
+    result.push_back(-1);
+    for (size_t i = 0; i < command.size(); i++)
+    {
+        if (command[i] == "pick")
+        {
+            result.push_back(solution->pick());
+        }
+    }
+    delete solution;
+    Logger::WriteMessage(command);
+    Logger::WriteMessage("N = " + to_string(N));
+    Logger::WriteMessage(blacklist);
+    Logger::WriteMessage(result);
+
+    command = { "Solution","pick","pick","pick" };
+    N = 3;
+    blacklist = { 1 };
+    result = {};
+    solution = new Solution(N, blacklist);
+    result.push_back(-1);
+    for (size_t i = 0; i < command.size(); i++)
+    {
+        if (command[i] == "pick")
+        {
+            result.push_back(solution->pick());
+        }
+    }
+    delete solution;
+    Logger::WriteMessage(command);
+    Logger::WriteMessage("N = " + to_string(N));
+    Logger::WriteMessage(blacklist);
+    Logger::WriteMessage(result);
+
+    command = { "Solution","pick","pick","pick","pick","pick","pick" };
+    N = 4;
+    blacklist = { 2 };
+    result = {};
+    solution = new Solution(N, blacklist);
+    result.push_back(-1);
+    for (size_t i = 0; i < command.size(); i++)
+    {
+        if (command[i] == "pick")
+        {
+            result.push_back(solution->pick());
+        }
+    }
+    delete solution;
+    Logger::WriteMessage(command);
+    Logger::WriteMessage("N = " + to_string(N));
+    Logger::WriteMessage(blacklist);
+    Logger::WriteMessage(result);
+
+    command = { "Solution", "pick", "pick", "pick", "pick", "pick", "pick", "pick", "pick" };
+    N = 4;
+    blacklist = { 2, 1 };
+    result = {};
+    solution = new Solution(N, blacklist);
+    result.push_back(-1);
+    for (size_t i = 0; i < command.size(); i++)
+    {
+        if (command[i] == "pick")
+        {
+            result.push_back(solution->pick());
+        }
+    }
+    delete solution;
+    Logger::WriteMessage(command);
+    Logger::WriteMessage("N = " + to_string(N));
+    Logger::WriteMessage(blacklist);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode528(void)
+{
+    Logger::WriteMessage("Test Leet Code 528");
+    vector<string> commands =
+    {
+        "Solution","pickIndex","pickIndex","pickIndex","pickIndex", "pickIndex","pickIndex","pickIndex","pickIndex","pickIndex", "pickIndex"
+    };
+    vector<vector<int>> data =
+    {
+        {3, 14, 1, 7},{},{},{},{},{}
+    };
+    vector<string> result;
+    RandomWithWeight* solution = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Solution")
+        {
+            vector<int> parameter;
+            for (size_t j = 0; j < data[i].size(); j++)
+            {
+                parameter.push_back(data[i][j]);
+            }
+            solution = new RandomWithWeight(parameter);
+            result.push_back("null");
+        }
+        else if (commands[i] == "pickIndex")
+        {
+            solution->pickIndex();
+            result.push_back(to_string(solution->pickIndex()));
+        }
+    }
+    delete solution;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode519(void)
+{
+    Logger::WriteMessage("Test Leet Code 519");
+    vector<string> commands =
+    {
+        "Solution","flip","flip","flip","flip"
+    };
+    vector<vector<int>> data =
+    {
+        { 2,3 },{},{},{},{}
+    };
+    vector<string> result;
+    RandomFlipMatrix* solution = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Solution")
+        {
+            solution = new RandomFlipMatrix(data[i][0], data[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "flip")
+        {
+            vector<int> position = solution->flip();
+            result.push_back("[" + to_string(position[0]) + "," + to_string(position[1]) + "]");
+        }
+        else if (commands[i] == "reset")
+        {
+            solution->reset();
+            result.push_back("null");
+        }
+    }
+    delete solution;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+        "Solution","flip","flip","reset","flip"
+    };
+    data =
+    {
+        { 1,2 },{},{},{},{}
+    };
+    result.clear();
+    solution = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Solution")
+        {
+            solution = new RandomFlipMatrix(data[i][0], data[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "flip")
+        {
+            vector<int> position = solution->flip();
+            result.push_back("[" + to_string(position[0]) + "," + to_string(position[1]) + "]");
+        }
+        else if (commands[i] == "reset")
+        {
+            solution->reset();
+            result.push_back("null");
+        }
+    }
+    delete solution;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode478(void)
+{
+    Logger::WriteMessage("Test Leet Code 478");
+    vector<string> commands =
+    {
+        "Solution","randPoint","randPoint","randPoint"
+    };
+    vector<vector<double>> data =
+    {
+        { 1, 0, 0 },{},{},{}
+    };
+    vector<string> result;
+    RandomCirclePoint* solution = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Solution")
+        {
+            solution = new RandomCirclePoint(data[i][0], data[i][1], data[i][2]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "randPoint")
+        {
+            vector<double> position = solution->randPoint();
+            result.push_back("[" + to_string(position[0]) + "," + to_string(position[1]) + "]");
+        }
+    }
+    delete solution;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+        "Solution","randPoint","randPoint","randPoint"
+    };
+    data =
+    {
+        { 10, 5, -7.5 },{},{},{}
+    };
+    result.clear();
+    solution = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Solution")
+        {
+            solution = new RandomCirclePoint(data[i][0], data[i][1], data[i][2]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "randPoint")
+        {
+            vector<double> position = solution->randPoint();
+            result.push_back("[" + to_string(position[0]) + "," + to_string(position[1]) + "]");
+        }
+    }
+    delete solution;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+}
+
+
+void TestLeetCode497(void)
+{
+    Logger::WriteMessage("Test Leet Code 497");
+    vector<string> commands =
+    {
+        "Solution","pick","pick","pick", "pick","pick","pick","pick","pick","pick", "pick","pick","pick"
+    };
+    vector<vector<vector<int>>> data =
+    {
+        {{ 1, 1, 5, 5 }}, {}, {}, {},{}, {}, {},{},{},{},{},{},{}
+    };
+    vector<string> result;
+    RandomRectanglePoint* solution = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Solution")
+        {
+            solution = new RandomRectanglePoint(data[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "pick")
+        {
+            vector<int> position = solution->pick();
+            result.push_back("[" + to_string(position[0]) + "," + to_string(position[1]) + "]");
+        }
+    }
+    delete solution;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data[0]);
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+        "Solution","pick","pick","pick","pick","pick"
+    };
+    data =
+    {
+        {{-2,-2,-1,-1},{1,0,3,0}}, {}, {}, {}, {}, {}
+    };
+    result.clear();
+    solution = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Solution")
+        {
+            solution = new RandomRectanglePoint(data[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "pick")
+        {
+            vector<int> position = solution->pick();
+            result.push_back("[" + to_string(position[0]) + "," + to_string(position[1]) + "]");
+        }
+    }
+    delete solution;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data[0]);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode622(void)
+{
+    Logger::WriteMessage("Test Leet Code 622");
+    vector<string> commands =
+    {
+        "MyCircularQueue","enQueue","enQueue","enQueue", "enQueue", "Rear", "isFull","deQueue","enQueue", "Rear","deQueue","deQueue","deQueue","deQueue","isEmpty"
+    };
+    vector<vector<int>> data =
+    {
+        {3},{ 1 },{ 2 },{ 3 },{ 4 },{ },{ },{ },{ 4 },{}, {}, {}, {}, {}, {}
+    };
+    vector<string> result;
+    MyCircularQueue* queue = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "MyCircularQueue")
+        {
+            queue = new MyCircularQueue(data[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "enQueue")
+        {
+            bool success = queue->enQueue(data[i][0]);
+            result.push_back(success ? "true" : "false");
+        }
+        else if (commands[i] == "Rear")
+        {
+            int value = queue->Rear();
+            result.push_back(to_string(value));
+        }
+        else if (commands[i] == "deQueue")
+        {
+            bool success = queue->deQueue();
+            result.push_back(success ? "true" : "false");
+        }
+        else if (commands[i] == "isFull")
+        {
+            bool success = queue->isFull();
+            result.push_back(success ? "true" : "false");
+        }
+        else if (commands[i] == "isEmpty")
+        {
+            bool success = queue->isEmpty();
+            result.push_back(success ? "true" : "false");
+        }
+    }
+    delete queue;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode641(void)
+{
+    Logger::WriteMessage("Test Leet Code 641");
+    vector<string> commands =
+    {
+        "MyCircularDeque","insertLast","insertLast","insertFront", "insertFront", "getRear", "isFull","deleteLast","insertFront", "getFront","deleteFront","deleteFront","deleteFront","deleteFront","isEmpty"
+    };
+    vector<vector<int>> data =
+    {
+        { 3 },{ 1 },{ 2 },{ 3 },{ 4 },{},{},{},{ 4 },{},{},{},{},{},{}
+    };
+    vector<string> result;
+    MyCircularDeque* deque = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "MyCircularDeque")
+        {
+            deque = new MyCircularDeque(data[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "insertFront")
+        {
+            bool success = deque->insertFront(data[i][0]);
+            result.push_back(success ? "true" : "false");
+        }
+        else if (commands[i] == "insertLast")
+        {
+            bool success = deque->insertLast(data[i][0]);
+            result.push_back(success ? "true" : "false");
+        }
+        else if (commands[i] == "getFront")
+        {
+            int value = deque->getFront();
+            result.push_back(to_string(value));
+        }
+        else if (commands[i] == "getRear")
+        {
+            int value = deque->getRear();
+            result.push_back(to_string(value));
+        }
+        else if (commands[i] == "deleteFront")
+        {
+            bool success = deque->deleteFront();
+            result.push_back(success ? "true" : "false");
+        }
+        else if (commands[i] == "deleteLast")
+        {
+            bool success = deque->deleteLast();
+            result.push_back(success ? "true" : "false");
+        }
+        else if (commands[i] == "isFull")
+        {
+            bool success = deque->isFull();
+            result.push_back(success ? "true" : "false");
+        }
+        else if (commands[i] == "isEmpty")
+        {
+            bool success = deque->isEmpty();
+            result.push_back(success ? "true" : "false");
+        }
+    }
+    delete deque;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode901(void)
+{
+    Logger::WriteMessage("Test Leet Code 901");
+    vector<string> commands =
+    {
+        "StockSpanner","next","next","next","next","next","next","next"
+    };
+    vector<vector<int>> data =
+    {
+        { },{ 100 },{ 80 },{ 60 },{ 70 },{ 60 },{ 75 },{ 85 }
+    };
+    vector<string> result;
+    StockSpanner* stockSpanner = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "StockSpanner")
+        {
+            stockSpanner = new StockSpanner();
+            result.push_back("null");
+        }
+        else if (commands[i] == "next")
+        {
+            int value = stockSpanner->next(data[i][0]);
+            result.push_back(to_string(value));
+        }
+    }
+    delete stockSpanner;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode911(void)
+{
+    Logger::WriteMessage("Test Leet Code 911");
+    vector<string> commands = { "TopVotedCandidate","q","q","q","q","q","q" };
+    vector<vector<int>> data = { {0,1,1,0,0,1,0, 0, 5,10,15,20,25,30} , { 3 }, { 12 }, { 25 }, { 15 }, { 24 }, { 8 } };
+    vector<string> result;
+    TopVotedCandidate* topVotedCandidate = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "TopVotedCandidate")
+        {
+            vector<int> persons;
+            vector<int> times;
+            for (size_t j = 0; j < data[i].size() / 2; j++)
+            {
+                persons.push_back(data[i][j]);
+                times.push_back(data[i][j + data[i].size() / 2]);
+            }
+
+            topVotedCandidate = new TopVotedCandidate(persons, times);
+            result.push_back("null");
+        }
+        else if (commands[i] == "q")
+        {
+            int value = topVotedCandidate->q(data[i][0]);
+            result.push_back(to_string(value));
+        }
+    }
+    delete topVotedCandidate;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(data);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1157(void)
+{
+    Logger::WriteMessage("Test Leet Code 1157");
+    vector<string> command = { "MajorityChecker","query","query","query" };
+    vector<vector<int>> params = { {1,1,2,2,1,1}, {0,5,4}, {0,3,3}, {2,3,2} };
+    vector<string> result;
+    class MajorityChecker* majorityChecker = nullptr;
+    for (size_t i = 0; i < command.size(); i++)
+    {
+        if (command[i] == "MajorityChecker")
+        {
+            majorityChecker = new MajorityChecker(params[i]);
+            result.push_back("null");
+        }
+        else if (command[i] == "query")
+        {
+            int value = majorityChecker->query(params[i][0], params[i][1], params[i][2]);
+            result.push_back(to_string(value));
+        }
+    }
+    Logger::WriteMessage(result);
+    if (majorityChecker != nullptr)
+    {
+        delete majorityChecker;
+        majorityChecker = nullptr;
+    }
+}
+
+void TestLeetCode1166(void)
+{
+    Logger::WriteMessage("Test Leet Code 1166");
+    vector<string> commands =
+    {
+        "FileSystem","create","get"
+    };
+    vector<vector<string>> data =
+    {
+        {}, {"/a", "1"}, {"/a"}
+    };
+
+    FileSystemII* fileSystemII = nullptr;
+
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FileSystem")
+        {
+            fileSystemII = new FileSystemII();
+            result.push_back("null");
+        }
+        else if (commands[i] == "create")
+        {
+            bool ret = fileSystemII->create(data[i][0], atoi(data[i][1].c_str()));
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+        else if (commands[i] == "get")
+        {
+            int ret = fileSystemII->get(data[i][0]);
+            result.push_back(to_string(ret));
+        }
+    }
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+       "FileSystem","create","create","get","create","get"
+    };
+    data =
+    {
+        {} ,{"/leet","1"},{"/leet/code","2"},{"/leet/code"},{"/c/d","1"},{"/c"}
+    };
+
+    fileSystemII = nullptr;
+
+    result.clear();
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FileSystem")
+        {
+            fileSystemII = new FileSystemII();
+            result.push_back("null");
+        }
+        else if (commands[i] == "create")
+        {
+            bool ret = fileSystemII->create(data[i][0], atoi(data[i][1].c_str()));
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+        else if (commands[i] == "get")
+        {
+            int ret = fileSystemII->get(data[i][0]);
+            result.push_back(to_string(ret));
+        }
+    }
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1166();
+    TestLeetCode1157();
+    TestLeetCode911();
+    TestLeetCode901();
+    TestLeetCode641();
+    TestLeetCode622();
+    TestLeetCode497();
+    TestLeetCode478();
+    TestLeetCode519();
+    TestLeetCode528();
+    TestLeetCode710();
+    TestLeetCode855();
+    TestLeetCode1172();
+    TestLeetCode155();
     TestLeetCode1206();
     TestLeetCode244();
     TestLeetCode703();

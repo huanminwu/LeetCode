@@ -2523,8 +2523,30 @@ void TestLeetCode1460(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode370(void)
+{
+    Logger::WriteMessage("Test Leet Code 370");
+    LeetCodeArray leetCode;
+    vector<vector<int>> updates = { {1, 3, 2}, {2, 4, 3}, {0, 2, -2} };
+    int length = 5;
+    vector<int> result = leetCode.getModifiedArray(length, updates);
+    Logger::WriteMessage(updates);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode565(void)
+{
+    LeetCodeArray leetCode;
+    vector<int> nums = { 5, 4, 0, 3, 1, 6, 2 };
+    int result = leetCode.arrayNesting(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode565();
+    TestLeetCode370();
     TestLeetCode1460();
     TestLeetCode475();
     TestLeetCode891();

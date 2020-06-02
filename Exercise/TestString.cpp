@@ -1878,8 +1878,35 @@ void TestLeetCode466(void)
         "; n2 = " + to_string(n2) + "; result = " + to_string(result));
 }
 
+void TestLeetCode418(void)
+{
+    Logger::WriteMessage("Test Leet Code 418");
+    LeetCodeString leetCode;
+    int rows = 2, cols = 8;
+    vector<string> sentence = { "hello", "world" };
+    int count = leetCode.wordsTyping(sentence, rows, cols);
+    Logger::WriteMessage(sentence);
+    Logger::WriteMessage("rows = " + to_string(rows) + "; cols = " + to_string(cols) + 
+        "; sentence count = " + to_string(count));
+
+    rows = 3, cols = 6;
+    sentence = { "a", "bcd", "e" };
+    count = leetCode.wordsTyping(sentence, rows, cols);
+    Logger::WriteMessage(sentence);
+    Logger::WriteMessage("rows = " + to_string(rows) + "; cols = " + to_string(cols) + 
+        "; sentence count = " + to_string(count));
+
+    rows = 4, cols = 5;
+    sentence = { "I", "had", "apple", "pie" };
+    count = leetCode.wordsTyping(sentence, rows, cols);
+    Logger::WriteMessage(sentence);
+    Logger::WriteMessage("rows = " + to_string(rows) + "; cols = " + to_string(cols) + 
+        "; sentence count = " + to_string(count));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode418();
     TestLeetCode471();
     TestLeetCode1456();
     TestLeetCode1455();

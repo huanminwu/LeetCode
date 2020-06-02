@@ -2464,7 +2464,7 @@ bool LeetCode::validWordSquare(vector<string>& words)
 /// 3.Update only the first and end element is sufficient.
 /// 4.The optimal time complexity is O(k + n) and uses O(1) extra space.
 /// </summary>
-vector<int> LeetCode::getModifiedArray(int length, vector<vector<int>>& updates)
+vector<int> LeetCodeArray::getModifiedArray(int length, vector<vector<int>>& updates)
 {
     vector<int> result(length);
     for (size_t i = 0; i < updates.size(); i++)
@@ -2546,93 +2546,7 @@ vector<vector<int>> LeetCodeArray::multiply(vector<vector<int>>& A, vector<vecto
 }
 
 
-/// <summary>
-/// Leet code #418. Sentence Screen Fitting     
-/// 
-/// Given a rows x cols screen and a sentence represented by a list of non-empty words, 
-/// find how many times the given sentence can be fitted on the screen. 
-/// 
-/// Note:
-/// 1.A word cannot be split into two lines. 
-/// 2.The order of words in the sentence must remain unchanged.
-/// 3.Two consecutive words in a line must be separated by a single space.
-/// 4.Total words in the sentence won't exceed 100.
-/// 5.Length of each word is greater than 0 and won't exceed 10.
-/// 6.1 ≤ rows, cols ≤ 20,000.
-/// 
-/// Example 1: 
-/// Input:
-/// rows = 2, cols = 8, sentence = ["hello", "world"]
-/// Output: 
-/// 1
-///
-/// Explanation:
-/// hello---
-/// world---
-///
-/// The character '-' signifies an empty space on the screen.
-///
-/// Example 2: 
-/// Input:
-/// rows = 3, cols = 6, sentence = ["a", "bcd", "e"]
-/// 
-/// Output: 
-/// 2
-///
-/// Explanation:
-/// a-bcd- 
-/// e-a---
-/// bcd-e-
-///
-/// The character '-' signifies an empty space on the screen.
-///
-/// Example 3: 
-/// Input:
-/// rows = 4, cols = 5, sentence = ["I", "had", "apple", "pie"]
-///
-/// Output: 
-/// 1
-///
-/// Explanation:
-/// I-had
-/// apple
-/// pie-I
-/// had--
-///
-/// The character '-' signifies an empty space on the screen.
-/// </summary>
-int LeetCode::wordsTyping(vector<string>& sentence, int rows, int cols)
-{
-    int count = 0;
-    int index = 0;
-    int length = 0;
-    if (sentence.size() == 0) return 0;
-    for (size_t i = 0; i < sentence.size(); i++)
-    {
-        length += sentence[i].size() + 1;
-    }
-    for (int i = 0; i < rows; i++)
-    {
-        int char_count = cols;
-        if (char_count >= length)
-        {
-            count += char_count / length;
-            char_count %= length;
-        }
-        while (char_count >= (int)sentence[index].size())
-        {
-            char_count -= sentence[index].size();
-            char_count--;
-            index++;
-            if (index == sentence.size())
-            {
-                count++;
-                index = 0;
-            }
-        }
-    }
-    return count;
-}
+
 
 /// <summary>
 /// Leet code #498. Diagonal Traverse          
@@ -3129,7 +3043,7 @@ int LeetCodeArray::distributeCandies(vector<int>& candies)
 /// The elements of A are all distinct.
 /// Each element of array A is an integer within the range [0, N-1].
 /// </summary>
-int LeetCode::arrayNesting(vector<int>& nums)
+int LeetCodeArray::arrayNesting(vector<int>& nums)
 {
     vector<int> lens(nums.size());
     int max_length = 0;
@@ -3153,76 +3067,6 @@ int LeetCode::arrayNesting(vector<int>& nums)
             lens[num] = nums_list.size() + base;
         }
         max_length = max(max_length, lens[nums_list[0]]);
-    }
-    return max_length;
-}
-
-/// <summary>
-/// Leet code #565-II. Array Nesting   
-/// 
-/// A zero-indexed array A consisting of N integers is given. 
-/// The array contains integers in the range [0, N - 1]. 
-/// Sets S[K] for 0 <= K < N are defined as follows:
-/// S[K] = { A[K], A[A[K]], A[A[A[K]]], ... }.
-/// Sets S[K] are finite for each K and should NOT contain duplicates.
-/// Write a function that given an array A consisting of N integers, 
-/// return the size of the largest set S[K] for this array.
-/// Example 1:
-/// Input: A = [5,4,0,3,1,6,2]
-/// Output: 4
-/// Explanation: 
-/// A[0] = 5, A[1] = 4, A[2] = 0, A[3] = 3, A[4] = 1, A[5] = 6, A[6] = 2.
-///
-/// One of the longest S[K]:
-/// S[0] = {A[0], A[5], A[6], A[2]} = {5, 6, 2, 0}
-/// 
-/// Note:
-/// N is an integer within the range [1, 20,000].
-/// The elements of A are all distinct.
-/// Each element of array A is an integer within the range [0, N-1].
-/// </summary>
-int LeetCode::arrayNestingII(vector<int>& nums)
-{
-    vector<int> lens(nums.size());
-    int max_length = 0;
-
-    for (size_t i = 0; i < nums.size(); i++)
-    {
-        if (lens[i] != 0) continue;
-
-        unordered_map<int, int> nums_map;
-        vector<int> nums_list;
-        int index = i;
-        while ((nums_map.count(index) == 0) && (lens[index] == 0))
-        {
-            nums_map[index] = nums_list.size();
-            nums_list.push_back(index);
-            index = nums[index];
-        }
-        int length = lens[index];
-        // if self loop back, we can also check if base_length is 0 or not.
-        if (nums_map.count(index) > 0)
-        {
-            // count the loop circle size
-            length = nums_list.size() - nums_map[index];
-            // we can also check if nums_list.back
-            while (nums_list.size() > (size_t)nums_map[index])
-            {
-                int id = nums_list.back();
-                lens[id] = length;
-                nums_list.pop_back();
-            }
-        }
-
-        // for unlooped part the length should keep on increasing
-        while (!nums_list.empty())
-        {
-            int id = nums_list.back();
-            length++;
-            lens[id] = length;
-            nums_list.pop_back();
-        }
-        max_length = max(max_length, length);
     }
     return max_length;
 }
