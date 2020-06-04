@@ -146,7 +146,9 @@
     <ClInclude Include="LeetCodeSort.h" />
     <ClInclude Include="LeetCodeStack.h" />
     <ClInclude Include="LeetCodeString.h" />
+    <ClInclude Include="LeetCodeThread.h" />
     <ClInclude Include="LeetCodeTree.h" />
+    <ClInclude Include="Usco.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LeetCodeArray.cpp" />

@@ -20,6 +20,8 @@
 #include "..\LeetCode\LeetCodeString.h"
 #include "..\LeetCode\LeetCodeBinarySearch.h"
 #include "..\LeetCode\LeetCodeBit.h"
+#include "..\LeetCode\LeetCodeThread.h"
+#include "..\LeetCode\Usco.h"
 #include "TestMath.h"
 #include "TestDP.h"
 #include "TestHashtable.h"
@@ -7377,6 +7379,7 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
+    Truth::process();
     TestLeetCodeGraph();
     TestLeetCodeMath();
     TestLeetCodeDP();
