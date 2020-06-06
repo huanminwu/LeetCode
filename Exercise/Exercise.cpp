@@ -7375,17 +7375,15 @@ void TestLeetCode1199(void)
     Logger::WriteMessage("split = " + to_string(split) + "; result = " + to_string(result));
 }
 
-
-
 void main(int argc, char* argv[])
 {
+    TestLeetCodeTree();
     Truth::process();
     TestLeetCodeGraph();
     TestLeetCodeMath();
     TestLeetCodeDP();
     TestLeetCodeBit();
     TestLeetCodeArray();
-
     TestLeetCodeTree();
     TestLeetCodeString();
     TestLeetCodeHashtable();

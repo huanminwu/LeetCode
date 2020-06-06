@@ -23,6 +23,202 @@ using namespace std;
 /// The class is to implement array related algorithm  
 /// </summary>
 
+/// <summary>
+/// Leet code #428. Serialize and Deserialize N-ary Tree
+/// 
+/// Serialization is the process of converting a data structure or 
+/// object into a sequence of bits so that it can be stored in a file 
+/// or memory buffer, or transmitted across a network connection link 
+/// to be reconstructed later in the same or another computer environment.
+/// 
+/// Design an algorithm to serialize and deserialize an N-ary tree. An 
+/// N-ary tree is a rooted tree in which each node has no more than N 
+/// children. There is no restriction on how your serialization /
+/// deserialization algorithm should work. You just need to ensure that 
+/// an N-ary tree can be serialized to a string and this string can be 
+/// deserialized to the original tree structure.
+///
+/// For example, you may serialize the following 3-ary tree
+/// as [1 [3[5 6] 2 4]]. You do not necessarily need to follow this format, 
+/// so please be creative and come up with different approaches yourself.
+///
+/// Note:
+/// 1. N is in the range of [1, 1000]
+/// 2. Do not use class member/global/static variables to store states. 
+///    Your serialize and deserialize algorithms should be stateless.
+/// </summary>
+class NaryTreeCodec
+{
+private:
+    // Encodes a tree to a single string.
+    string serializeNode(Node* root)
+    {
+        string result;
+        if (root == nullptr) return result;
+        result.append(to_string(root->val));
+        if (root->children.empty()) return result;
+        result.push_back('[');
+        for (size_t i = 0; i < root->children.size(); i++)
+        {
+            if (i > 0) result.append(" ");
+            result.append(serializeNode(root->children[i]));
+        }
+        result.push_back(']');
+        return result;
+    };
+
+    // Decodes your encoded data to tree.
+    void deserializeNode(vector<Node*>& children, string data, size_t& index)
+    {
+        string token;
+        Node* node = nullptr;
+        while (index <= data.size())
+        {
+            if ((index == data.size()) || (isspace(data[index])))
+            {
+                if (!token.empty() && (node != nullptr))
+                {
+                    node->val = atoi(token.c_str());
+                    token.clear();
+                }
+                index++;
+            }
+            else if (isdigit(data[index]))
+            {
+                if (token.empty())
+                {
+                    node = new Node();
+                    children.push_back(node);
+                }
+                token.push_back(data[index]);
+                index++;
+            }
+            else if (data[index] == '[')
+            {
+                if (!token.empty() && (node != nullptr))
+                {
+                    node->val = atoi(token.c_str());
+                    token.clear();
+                }
+                index++;
+                if (node != nullptr)
+                {
+                    deserializeNode(node->children, data, index);
+                }
+            }
+            else if (data[index] == ']')
+            {
+                if (!token.empty() && (node != nullptr))
+                {
+                    node->val = atoi(token.c_str());
+                    token.clear();
+                }
+                index++;
+                break;
+            }
+        }
+    }
+
+public:
+    // Encodes a tree to a single string.
+    string serialize(Node* root)
+    {
+        return "[" + serializeNode(root) + "]";
+    };
+
+    // Decodes your encoded data to tree.
+    Node* deserialize(string data)
+    {
+        vector<Node*> nodeList;
+        size_t index = 0;
+        deserializeNode(nodeList, data, index);
+        if (nodeList.empty()) return nullptr;
+        else return nodeList[0];
+    }
+};
+
+/// <summary>
+/// Leet code #431. Encode N-ary Tree to Binary Tree
+/// 
+/// Design an algorithm to encode an N-ary tree into a binary tree and decode
+/// the binary tree to get the original N-ary tree. An N-ary tree is a rooted
+/// tree in which each node has no more than N children. Similarly, a binary 
+/// tree is a rooted tree in which each node has no more than 2 children. There
+/// is no restriction on how your encode/decode algorithm should work. You just 
+/// need to ensure that an N-ary tree can be encoded to a binary tree and this 
+/// binary tree can be decoded to the original N-nary tree structure.
+///
+/// For example, you may encode the following 3-ary tree to a binary tree in 
+/// this way:
+/// 
+/// Note that the above is just an example which might or might not work. You 
+/// do not necessarily need to follow this format, so please be creative and 
+/// come up with different approaches yourself.
+///
+/// Note:
+///
+/// N is in the range of [1, 1000]
+/// Do not use class member/global/static variables to store states. Your 
+/// encode and decode algorithms should be stateless.
+/// or if B is true, or if both A and B are true.
+/// </summary>
+class NaryTreeBinaryCodec
+{
+private:
+    // Encodes an n-ary tree to a binary tree.
+    TreeNode* encode(queue<Node*> sibling_queue)
+    {
+        TreeNode* result = nullptr;
+        if (sibling_queue.empty()) return result;
+        Node* node = sibling_queue.front();
+        sibling_queue.pop();
+        result = new TreeNode(node->val);
+        queue<Node*> children_queue;
+        for (size_t i = 0; i < node->children.size(); i++)
+        {
+            children_queue.push(node->children[i]);
+        }
+        result->left = encode(children_queue);
+        result->right = encode(sibling_queue);
+        return result;
+    }
+
+    // Decodes your binary tree to an n-ary tree.
+    void decode(TreeNode* tree_node, vector<Node*>& children_queue)
+    {
+        if (tree_node == nullptr) return;
+        Node* node = new Node();
+        node->val = tree_node->val;
+        decode(tree_node->left, node->children);
+        children_queue.push_back(node);
+        decode(tree_node->right, children_queue);
+    }
+
+public:
+
+    // Encodes an n-ary tree to a binary tree.
+    TreeNode* encode(Node* root)
+    {
+        TreeNode* result = nullptr;
+        if (root == nullptr) return result;
+        queue<Node*> sibling_queue;
+        sibling_queue.push(root);
+        result = encode(sibling_queue);
+        return result;
+    }
+
+    // Decodes your binary tree to an n-ary tree.
+    Node* decode(TreeNode* root)
+    {
+        Node* result = nullptr;
+        if (root == nullptr) return result;
+        vector<Node*>children_queue;
+        decode(root, children_queue);
+        result = children_queue[0];
+        return result;
+    }
+};
+
 class LeetCodeTree
 {
 public:
@@ -4181,203 +4377,57 @@ public:
     /// 2. Node values are digits from 1 to 9.
     /// </summary>
     int pseudoPalindromicPaths(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #1469. Find All the Lonely Nodes
+    ///                
+    /// Easy
+    /// 
+    /// In a binary tree, a lonely node is a node that is the only child 
+    /// of its parent node. The root of the tree is not lonely because 
+    /// it does not have a parent node.
+    ///
+    /// Given the root of a binary tree, return an array containing the 
+    /// values of all lonely nodes in the tree. Return the list in any order.
+    ///
+    /// Example 1:
+    /// Input: root = [1,2,3,null,4]
+    /// Output: [4]
+    /// Explanation: Light blue node is the only lonely node.
+    /// Node 1 is the root and is not lonely.
+    /// Nodes 2 and 3 have the same parent and are not lonely.
+    ///
+    /// Example 2:
+    /// Input: root = [7,1,4,6,null,5,3,null,null,null,null,null,2]
+    /// Output: [6,2]
+    /// Explanation: Light blue nodes are lonely nodes.
+    /// Please remember that order doesn't matter, [2,6] is also an 
+    /// acceptable answer.
+    ///
+    /// Example 3:
+    /// Input: root = [11,99,88,77,null,null,66,55,null,null,44,33,null,
+    ///                null,22]
+    /// Output: [77,55,33,66,44,22]
+    /// Explanation: Nodes 99 and 88 share the same parent. Node 11 is the 
+    /// root.
+    /// All other nodes are lonely.
+    ///
+    /// Example 4:
+    /// Input: root = [197]
+    /// Output: []
+    ///
+    /// Example 5:
+    /// Input: root = [31,null,78,null,28]
+    /// Output: [78,28]
+    ///
+    /// Constraints:
+    /// 1. The number of nodes in the tree is in the range [1, 1000].
+    /// 2. Each node's value is between [1, 10^6].
+    /// </summary>
+    vector<int> getLonelyNodes(TreeNode* root);
+
 #pragma endregion
 };
 
-/// <summary>
-/// Leet code #428. Serialize and Deserialize N-ary Tree
-/// 
-/// Serialization is the process of converting a data structure or 
-/// object into a sequence of bits so that it can be stored in a file 
-/// or memory buffer, or transmitted across a network connection link 
-/// to be reconstructed later in the same or another computer environment.
-/// 
-/// Design an algorithm to serialize and deserialize an N-ary tree. An 
-/// N-ary tree is a rooted tree in which each node has no more than N 
-/// children. There is no restriction on how your serialization /
-/// deserialization algorithm should work. You just need to ensure that 
-/// an N-ary tree can be serialized to a string and this string can be 
-/// deserialized to the original tree structure.
-///
-/// For example, you may serialize the following 3-ary tree
-/// as [1 [3[5 6] 2 4]]. You do not necessarily need to follow this format, 
-/// so please be creative and come up with different approaches yourself.
-///
-/// Note:
-/// 1. N is in the range of [1, 1000]
-/// 2. Do not use class member/global/static variables to store states. 
-///    Your serialize and deserialize algorithms should be stateless.
-/// </summary>
-class NaryTreeCodec
-{
-private:
-    // Encodes a tree to a single string.
-    string serializeNode(Node* root)
-    {
-        string result;
-        if (root == nullptr) return result;
-        result.append(to_string(root->val));
-        if (root->children.empty()) return result;
-        result.push_back('[');
-        for (size_t i = 0; i < root->children.size(); i++)
-        {
-            if (i > 0) result.append(" ");
-            result.append(serializeNode(root->children[i]));
-        }
-        result.push_back(']');
-        return result;
-    };
-
-    // Decodes your encoded data to tree.
-    void deserializeNode(vector<Node*>& children, string data, size_t& index)
-    {
-        string token;
-        Node* node = nullptr;
-        while (index <= data.size())
-        {
-            if ((index == data.size()) || (isspace(data[index])))
-            {
-                if (!token.empty() && (node != nullptr))
-                {
-                    node->val = atoi(token.c_str());
-                    token.clear();
-                }
-                index++;
-            }
-            else if (isdigit(data[index]))
-            {
-                if (token.empty())
-                {
-                    node = new Node();
-                    children.push_back(node);
-                }
-                token.push_back(data[index]);
-                index++;
-            }
-            else if (data[index] == '[')
-            {
-                if (!token.empty() && (node != nullptr))
-                {
-                    node->val = atoi(token.c_str());
-                    token.clear();
-                }
-                index++;
-                if (node != nullptr)
-                {
-                    deserializeNode(node->children, data, index);
-                }
-            }
-            else if (data[index] == ']')
-            {
-                if (!token.empty() && (node != nullptr))
-                {
-                    node->val = atoi(token.c_str());
-                    token.clear();
-                }
-                index++;
-                break;
-            }
-        }
-    }
-
-public:
-    // Encodes a tree to a single string.
-    string serialize(Node* root)
-    {
-        return "[" + serializeNode(root) + "]";
-    };
-
-    // Decodes your encoded data to tree.
-    Node* deserialize(string data)
-    {
-        vector<Node*> nodeList;
-        size_t index = 0;
-        deserializeNode(nodeList, data, index);
-        if (nodeList.empty()) return nullptr;
-        else return nodeList[0];
-    }
-};
-
-/// <summary>
-/// Leet code #431. Encode N-ary Tree to Binary Tree
-/// 
-/// Design an algorithm to encode an N-ary tree into a binary tree and decode
-/// the binary tree to get the original N-ary tree. An N-ary tree is a rooted
-/// tree in which each node has no more than N children. Similarly, a binary 
-/// tree is a rooted tree in which each node has no more than 2 children. There
-/// is no restriction on how your encode/decode algorithm should work. You just 
-/// need to ensure that an N-ary tree can be encoded to a binary tree and this 
-/// binary tree can be decoded to the original N-nary tree structure.
-///
-/// For example, you may encode the following 3-ary tree to a binary tree in 
-/// this way:
-/// 
-/// Note that the above is just an example which might or might not work. You 
-/// do not necessarily need to follow this format, so please be creative and 
-/// come up with different approaches yourself.
-///
-/// Note:
-///
-/// N is in the range of [1, 1000]
-/// Do not use class member/global/static variables to store states. Your 
-/// encode and decode algorithms should be stateless.
-/// or if B is true, or if both A and B are true.
-/// </summary>
-class NaryTreeBinaryCodec
-{
-private:
-    // Encodes an n-ary tree to a binary tree.
-    TreeNode* encode(queue<Node*> sibling_queue)
-    {
-        TreeNode* result = nullptr;
-        if (sibling_queue.empty()) return result;
-        Node* node = sibling_queue.front();
-        sibling_queue.pop();
-        result = new TreeNode(node->val);
-        queue<Node*> children_queue;
-        for (size_t i = 0; i < node->children.size(); i++)
-        {
-            children_queue.push(node->children[i]);
-        }
-        result->left = encode(children_queue);
-        result->right = encode(sibling_queue);
-        return result;
-    }
-
-    // Decodes your binary tree to an n-ary tree.
-    void decode(TreeNode* tree_node, vector<Node*>& children_queue)
-    {
-        if (tree_node == nullptr) return;
-        Node* node = new Node();
-        node->val = tree_node->val;
-        decode(tree_node->left, node->children);
-        children_queue.push_back(node);
-        decode(tree_node->right, children_queue);
-    }
-
-public:
-
-    // Encodes an n-ary tree to a binary tree.
-    TreeNode* encode(Node* root)
-    {
-        TreeNode* result = nullptr;
-        if (root == nullptr) return result;
-        queue<Node*> sibling_queue;
-        sibling_queue.push(root);
-        result = encode(sibling_queue);
-        return result;
-    }
-
-    // Decodes your binary tree to an n-ary tree.
-    Node* decode(TreeNode* root)
-    {
-        Node* result = nullptr;
-        if (root == nullptr) return result;
-        vector<Node*>children_queue;
-        decode(root, children_queue);
-        result = children_queue[0];
-        return result;
-    }
-};
 
 #endif  // LeetCodeTree_H
