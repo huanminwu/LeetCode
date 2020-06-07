@@ -8545,3 +8545,53 @@ int LeetCodeMath::maxArea(int h, int w, vector<int>& horizontalCuts, vector<int>
     result = (int)((long long)max_width * (long long)max_height % M);
     return (int)result;
 }
+
+/// <summary>
+/// Leet code #670. Maximum Swap 
+/// 
+/// Given a non-negative integer, you could swap two digits at most once 
+/// to get the maximum valued number. Return the maximum valued number 
+/// you could get.
+///
+/// Example 1:
+/// Input: 2736
+/// Output: 7236
+/// Explanation: Swap the number 2 and the number 7.
+/// Example 2:
+/// Input: 9973
+/// Output: 9973
+/// Explanation: No swap.
+/// Note:
+/// The given number is in the range [0, 10^8]
+/// </summary>
+int LeetCodeMath::maximumSwap(int num)
+{
+    string str = to_string(num);
+    int result = num;
+    int first = -1, last = -1;
+    for (int i = 0; i < (int)str.size(); i++)
+    {
+        if ((i > 0 && str[i] > str[i - 1]) && (last == -1 || str[i] > str[last]))  last = i;
+    }
+    first = last;
+    for (int i = 0; i < last; i++)
+    {
+        if (str[i] < str[last])
+        {
+            first = i;
+            break;
+        }
+    }
+
+    if (first != last)
+    {
+        for (int i = last; i < (int)str.size(); i++)
+        {
+            if (str[i] == str[last]) last = i;
+            string temp = str;
+            swap(temp[first], temp[last]);
+            result = max(atoi(temp.c_str()), num);
+        }
+    }
+    return result;
+}

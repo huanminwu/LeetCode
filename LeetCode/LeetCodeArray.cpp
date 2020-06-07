@@ -3094,7 +3094,7 @@ int LeetCodeArray::arrayNesting(vector<int>& nums)
 /// 2. The input array size is in the range of [1, 20000].
 /// 3. n is a non-negative integer which won't exceed the input array size.
 /// </summary>
-bool LeetCode::canPlaceFlowers(vector<int>& flowerbed, int n)
+bool LeetCodeArray::canPlaceFlowers(vector<int>& flowerbed, int n)
 {
     int zero_count = 0;
     for (size_t i = 0; i < flowerbed.size(); i++)
@@ -3151,7 +3151,7 @@ bool LeetCode::canPlaceFlowers(vector<int>& flowerbed, int n)
 ///   range of [2, 10000].
 /// 3.The integers in the m arrays will be in the range of [-10000, 10000].
 /// </summary>
-int LeetCode::maxDistance(vector<vector<int>>& arrays)
+int LeetCodeArray::maxDistance(vector<vector<int>>& arrays)
 {
     priority_queue<pair<int, int>> min_queue, max_queue;
     int max_distance;
@@ -3198,7 +3198,7 @@ int LeetCode::maxDistance(vector<vector<int>>& arrays)
 /// 1 <= k <= n <= 30,000.
 /// Elements of the given array will be in the range [-10,000, 10,000].
 /// </summary>
-double LeetCode::findMaxAverage(vector<int>& nums, int k)
+double LeetCodeArray::findMaxAverage(vector<int>& nums, int k)
 {
     double sum = 0, max_sum = (double)INT_MIN;
     for (int i = 0; i < (int)nums.size(); i++)
@@ -3219,7 +3219,7 @@ double LeetCode::findMaxAverage(vector<int>& nums, int k)
 /// <summary>
 /// Leet code #644. Maximum Average Subarray II
 /// </summary>
-double LeetCode::density(vector<double>& sum, int l, int r)
+double LeetCodeArray::density(vector<double>& sum, int l, int r)
 {
     if (l == 0)
     {
@@ -3251,7 +3251,7 @@ double LeetCode::density(vector<double>& sum, int l, int r)
 /// Elements of the given array will be in range [-10,000, 10,000].
 /// The answer with the calculation error less than 10^-5 will be accepted.
 /// </summary>
-double LeetCode::findMaxAverageII(vector<int>& nums, int k)
+double LeetCodeArray::findMaxAverageII(vector<int>& nums, int k)
 {
     int n = nums.size();
     vector<double> sum(n, 0);
@@ -3298,7 +3298,7 @@ double LeetCode::findMaxAverageII(vector<int>& nums, int k)
 /// The given array size will in the range [2, 10000].
 /// The given array's numbers won't have any order.
 /// </summary>
-vector<int> LeetCode::findErrorNums(vector<int>& nums)
+vector<int> LeetCodeArray::findErrorNums(vector<int>& nums)
 {
     vector<int> result(2);
     unordered_map<int, int> num_map;
@@ -3490,56 +3490,6 @@ vector<int> LeetCodeArray::constructArray(int n, int k)
         first++;
         if (first <= last) result.push_back(last);
         last--;
-    }
-    return result;
-}
-
-/// <summary>
-/// Leet code #670. Maximum Swap 
-/// 
-/// Given a non-negative integer, you could swap two digits at most once 
-/// to get the maximum valued number. Return the maximum valued number 
-/// you could get.
-///
-/// Example 1:
-/// Input: 2736
-/// Output: 7236
-/// Explanation: Swap the number 2 and the number 7.
-/// Example 2:
-/// Input: 9973
-/// Output: 9973
-/// Explanation: No swap.
-/// Note:
-/// The given number is in the range [0, 10^8]
-/// </summary>
-int LeetCode::maximumSwap(int num)
-{
-    string str = to_string(num);
-    int result = num;
-    int first = -1, last = -1;
-    for (int i = 0; i < (int)str.size(); i++)
-    {
-        if ((i > 0 && str[i] > str[i - 1]) && (last == -1 || str[i] > str[last]))  last = i;
-    }
-    first = last;
-    for (int i = 0; i < last; i++)
-    {
-        if (str[i] < str[last])
-        {
-            first = i;
-            break;
-        }
-    }
-
-    if (first != last)
-    {
-        for (int i = last; i < (int)str.size(); i++)
-        {
-            if (str[i] == str[last]) last = i;
-            string temp = str;
-            swap(temp[first], temp[last]);
-            result = max(atoi(temp.c_str()), num);
-        }
     }
     return result;
 }
@@ -11243,24 +11193,22 @@ int LeetCodeArray::maxScore(vector<int>& cardPoints, int k)
 /// </summary>
 vector<int> LeetCodeArray::findDiagonalOrder(vector<vector<int>>& nums)
 {
-    map<int, int> index_map;
-    for (int i = 0; i < (int)nums.size(); i++) index_map[0 - i] = 0;
-
-    int index = 0;
-    vector<int> result;
-    while (!index_map.empty())
+    vector<vector<int>> arr;
+    for (size_t r = 0; r < nums.size(); r++)
     {
-        auto pos = index_map.lower_bound(index);
-        while (pos != index_map.end())
+        for (size_t c = 0; c < nums[r].size(); c++)
         {
-            int row = 0 - pos->first;
-            result.push_back(nums[row][pos->second]);
-            pos->second++;
-            auto temp = pos;
-            pos++;
-            if (temp->second >= (int)nums[row].size()) index_map.erase(temp);
+            if (r + c >= arr.size()) arr.push_back(vector<int>());
+            arr[r + c].push_back(nums[r][c]);
         }
-        index--;
+    }
+    vector<int> result;
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        for (int j = (int)arr[i].size() - 1; j >= 0; j--)
+        {
+            result.push_back(arr[i][j]);
+        }
     }
     return result;
 }

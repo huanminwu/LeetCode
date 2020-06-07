@@ -4767,5 +4767,25 @@ public:
     /// 7. It is guaranteed that all elements in verticalCuts are distinct.
     /// </summary>
     int maxArea(int h, int w, vector<int>& horizontalCuts, vector<int>& verticalCuts);
+
+    /// <summary>
+    /// Leet code #670. Maximum Swap 
+    /// 
+    /// Given a non-negative integer, you could swap two digits at most once 
+    /// to get the maximum valued number. Return the maximum valued number 
+    /// you could get.
+    ///
+    /// Example 1:
+    /// Input: 2736
+    /// Output: 7236
+    /// Explanation: Swap the number 2 and the number 7.
+    /// Example 2:
+    /// Input: 9973
+    /// Output: 9973
+    /// Explanation: No swap.
+    /// Note:
+    /// The given number is in the range [0, 10^8]
+    /// </summary>
+    int maximumSwap(int num);
 };
 #endif

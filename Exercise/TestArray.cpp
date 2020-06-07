@@ -2543,8 +2543,81 @@ void TestLeetCode565(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode624(void)
+{
+    LeetCodeArray leetCode;
+    vector<vector<int>> arrays = { { 1, 5 },{ 3, 4 } };
+    Logger::WriteMessage(arrays);
+    int maxDistance = leetCode.maxDistance(arrays);
+    Logger::WriteMessage("maxDistance = " + to_string(maxDistance));
+}
+
+void TestLeetCode644(void)
+{
+    Logger::WriteMessage("Test Leet Code 644");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 12, -5, -6, 50, 3 };
+    int k = 4;
+    double max_avg = leetCode.findMaxAverageII(nums, 4);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; Maximum Average = " + to_string(max_avg));
+
+    nums = { 1, 2, 3, 4, -1, -2, -3, -4 };
+    k = 4;
+    max_avg = leetCode.findMaxAverageII(nums, 4);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; Maximum Average = " + to_string(max_avg));
+}
+
+void TestLeetCode643(void)
+{
+    Logger::WriteMessage("Test Leet Code 643");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 12, -5, -6, 50, 3 };
+    int k = 4;
+    double max_avg = leetCode.findMaxAverage(nums, 4);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; Maximum Average = " + to_string(max_avg));
+
+    nums = { 1, 2, 3, 4, -1, -2, -3, -4 };
+    k = 4;
+    max_avg = leetCode.findMaxAverage(nums, 4);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; Maximum Average = " + to_string(max_avg));
+}
+
+void TestLeetCode605(void)
+{
+    LeetCodeArray leetCode;
+    vector<int> flowerbed = { 1, 0, 0, 0, 1 };
+    int n = 1;
+    Logger::WriteMessage(flowerbed);
+    bool result = leetCode.canPlaceFlowers(flowerbed, n);
+    Logger::WriteMessage("n = " + to_string(n) + ";" + (string)(result ? " can " : " can not ") + "place the flower");
+
+    n = 2;
+    Logger::WriteMessage(flowerbed);
+    result = leetCode.canPlaceFlowers(flowerbed, n);
+    Logger::WriteMessage("n = " + to_string(n) + ";" + (string)(result ? " can " : " can not ") + "place the flower");
+}
+
+void TestLeetCode645(void)
+{
+    Logger::WriteMessage("Test Leet Code 645");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 2, 4 };
+    vector<int> result = leetCode.findErrorNums(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode645();
+    TestLeetCode605();
+    TestLeetCode643();
+    TestLeetCode644();
+    TestLeetCode624();
     TestLeetCode565();
     TestLeetCode370();
     TestLeetCode1460();

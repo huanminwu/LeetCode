@@ -4049,6 +4049,123 @@ public:
     /// </summary>
     bool canBeEqual(vector<int>& target, vector<int>& arr);
 
+    /// <summary>
+    /// Leet code #624. Maximum Distance in Arrays
+    /// 
+    /// Given m arrays, and each array is sorted in ascending order. Now you 
+    /// can pick up two integers from two different arrays (each array picks 
+    /// one) and calculate the distance. We define the distance between two 
+    /// integers a and b to be their absolute difference |a-b|. Your task 
+    /// is to find the maximum distance. 
+    /// Example 1:
+    /// Input: 
+    /// [
+    ///   [1,2,3],
+    ///   [4,5],
+    ///   [1,2,3]
+    /// ]
+    /// Output: 4
+    /// Explanation: 
+    /// One way to reach the maximum distance 4 is to pick 1 in the first or 
+    /// third array and pick 5 in the second array.
+    /// Note:
+    /// 1.Each given array will have at least 1 number. There will be at least 
+    ///   two non-empty arrays.
+    /// 2.The total number of the integers in all the m arrays will be in the 
+    ///   range of [2, 10000].
+    /// 3.The integers in the m arrays will be in the range of [-10000, 10000].
+    /// </summary>
+    int maxDistance(vector<vector<int>>& arrays);
+
+    /// <summary>
+    /// Leet code #643. Maximum Average Subarray I
+    /// 
+    /// Given an array consisting of n integers, find the contiguous subarray 
+    /// of given length k that has the maximum average value. And you need to 
+    /// output the maximum average value. 
+    ///
+    /// Example 1:
+    /// Input: [1,12,-5,-6,50,3], k = 4
+    /// Output: 12.75
+    /// Explanation: Maximum average is (12-5-6+50)/4 = 51/4 = 12.75
+    /// Note:
+    /// 1 <= k <= n <= 30,000.
+    /// Elements of the given array will be in the range [-10,000, 10,000].
+    /// </summary>
+    double findMaxAverage(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code #644. Maximum Average Subarray II
+    /// </summary>
+    double density(vector<double>& sum, int l, int r);
+
+    /// <summary>
+    /// Leet code #644. Maximum Average Subarray II
+    /// 
+    /// Given an array consisting of n integers, find the contiguous subarray 
+    /// whose length is greater than or equal to k that has the maximum average 
+    /// value. And you need to output the maximum average value. 
+    ///
+    /// Example 1:
+    /// Input: [1,12,-5,-6,50,3], k = 4
+    /// Output: 12.75
+    /// Explanation:
+    /// when length is 5, maximum average value is 10.8,
+    /// when length is 6, maximum average value is 9.16667.
+    /// Thus return 12.75.
+    ///
+    /// Note:
+    /// 1 <= k <= n <= 10,000.
+    /// Elements of the given array will be in range [-10,000, 10,000].
+    /// The answer with the calculation error less than 10^-5 will be accepted.
+    /// </summary>
+    double findMaxAverageII(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code #605. Can Place Flowers    
+    /// 
+    /// Suppose you have a long flowerbed in which some of the plots are 
+    /// planted and some are not. However, flowers cannot be planted in 
+    /// adjacent plots - they would compete for water and both would die.
+    /// Given a flowerbed (represented as an array containing 0 and 1, 
+    /// where 0 means empty and 1 means not empty), and a number n, return
+    /// if n new flowers can be planted in it without violating the 
+    /// no-adjacent-flowers rule.
+    /// Example 1:
+    /// Input: flowerbed = [1,0,0,0,1], n = 1
+    /// Output: True
+    ///
+    /// Example 2:
+    /// Input: flowerbed = [1,0,0,0,1], n = 2
+    /// Output: False
+    /// 
+    /// Note:
+    /// 1. The input array won't violate no-adjacent-flowers rule.
+    /// 2. The input array size is in the range of [1, 20000].
+    /// 3. n is a non-negative integer which won't exceed the input array size.
+    /// </summary>
+    bool canPlaceFlowers(vector<int>& flowerbed, int n);
+
+    /// <summary>
+    /// Leet code #645. Set Mismatch
+    /// 
+    /// The set S originally contains numbers from 1 to n. But unfortunately, 
+    /// due to the data error, one of the numbers in the set got duplicated 
+    /// to another number in the set, which results in repetition of one number
+    /// and loss of another number. 
+    /// Given an array nums representing the data status of this set after the 
+    /// error. Your task is to firstly find the number occurs twice and then 
+    /// find the number that is missing. Return them in the form of an array. 
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2,2,4]
+    /// Output: [2,3]
+    /// Note:
+    /// The given array size will in the range [2, 10000].
+    /// The given array's numbers won't have any order.
+    /// </summary>
+    vector<int> findErrorNums(vector<int>& nums);
+
 #pragma endregion
 
 

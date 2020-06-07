@@ -2918,8 +2918,37 @@ void TestLeetCode1465(void)
     Logger::WriteMessage("h = " + to_string(h) + "; w = " + to_string(w) + "; result = " + to_string(result));
 }
 
+void TestLeetCode670(void)
+{
+    LeetCodeMath leetCode;
+    int num = 1993;
+    int result = leetCode.maximumSwap(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+
+    num = 2736;
+    result = leetCode.maximumSwap(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+
+    num = 9973;
+    result = leetCode.maximumSwap(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+
+    num = 3203;
+    result = leetCode.maximumSwap(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+
+    num = 912939;
+    result = leetCode.maximumSwap(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+
+    num = 12939;
+    result = leetCode.maximumSwap(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode670();
     TestLeetCode1465();
     TestLeetCode1464();
     TestLeetCode1467();
