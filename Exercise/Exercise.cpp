@@ -7280,18 +7280,18 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeDP();
+    TestLeetCodeDesign();
+    TestLeetCodeArray();
     TestLeetCodeTree();
     Truth::process();
     TestLeetCodeGraph();
     TestLeetCodeMath();
-    TestLeetCodeDP();
     TestLeetCodeBit();
-    TestLeetCodeArray();
     TestLeetCodeTree();
     TestLeetCodeString();
     TestLeetCodeHashtable();
     TestLeetCodeSort();
-    TestLeetCodeDesign();
     TestLeetCodeGreedy();
     TestLeetCodeStack();
     TestLeetCodeDFS();

@@ -9889,5 +9889,151 @@ int LeetCodeDP::cherryPickup(vector<vector<int>>& grid)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1473. Paint House III
+///                
+/// Hard
+/// 
+/// There is a row of m houses in a small city, each house must be painted 
+/// with one of the n colors (labeled from 1 to n), some houses that has 
+/// been painted last summer should not be painted again.
+///
+/// A neighborhood is a maximal group of continuous houses that are 
+/// painted with the same color. (For example: houses = [1,2,2,3,3,2,1,1] 
+/// contains 5 neighborhoods  [{1}, {2,2}, {3,3}, {2}, {1,1}]).
+///
+/// Given an array houses, an m * n matrix cost and an integer target 
+/// where:
+/// houses[i]: is the color of the house i, 0 if the house is not 
+/// painted yet.
+/// cost[i][j]: is the cost of paint the house i with the color j+1.
+/// Return the minimum cost of painting all the remaining houses in such 
+/// a way that there are exactly target neighborhoods, if not possible 
+/// return -1.
+///
+/// Example 1:
+/// Input: houses = [0,0,0,0,0], cost = [[1,10],[10,1],[10,1],[1,10],
+/// [5,1]], m = 5, n = 2, target = 3
+/// Output: 9
+/// Explanation: Paint houses of this way [1,2,2,1,1]
+/// This array contains target = 3 neighborhoods, [{1}, {2,2}, {1,1}].
+/// Cost of paint all houses (1 + 1 + 1 + 1 + 5) = 9.
+///
+/// Example 2:
+/// Input: houses = [0,2,1,2,0], cost = [[1,10],[10,1],[10,1],[1,10],
+/// [5,1]], m = 5, n = 2, target = 3
+/// Output: 11
+/// Explanation: Some houses are already painted, Paint the houses of 
+/// this way [2,2,1,2,2]
+/// This array contains target = 3 neighborhoods, [{2,2}, {1}, {2,2}]. 
+/// Cost of paint the first and last house (10 + 1) = 11.
+///
+/// Example 3:
+/// Input: houses = [0,0,0,0,0], cost = [[1,10],[10,1],[1,10],[10,1],
+/// [1,10]], m = 5, n = 2, target = 5
+/// Output: 5
+///
+/// Example 4:
+/// Input: houses = [3,1,2,3], cost = [[1,1,1],[1,1,1],[1,1,1],[1,1,1]], 
+/// m = 4, n = 3, target = 3
+/// Output: -1
+/// Explanation: Houses are already painted with a total of 4 
+/// neighborhoods [{3},{1},{2},{3}] different of target = 3.
+///
+/// Constraints:
+/// 1. m == houses.length == cost.length
+/// 2. n == cost[i].length
+/// 3. 1 <= m <= 100
+/// 4. 1 <= n <= 20
+/// 5. 1 <= target <= m
+/// 6. 0 <= houses[i] <= n
+/// 7. 1 <= cost[i][j] <= 10^4
+/// </summary>
+int LeetCodeDP::minCost(vector<int>& houses, vector<vector<int>>& cost,
+    int m, int n, int target)
+{
+    vector<vector<pair<int, int>>> prev;
+    for (size_t i = 0; i < houses.size(); i++)
+    {
+        vector<vector<pair<int, int>>> dp = vector<vector<pair<int, int>>>(target, vector<pair<int, int>>());
+        if (i == 0)
+        {
+            if (houses[i] != 0)
+            {
+                dp[0].push_back(make_pair(houses[i] - 1, 0));
+            }
+            else
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    dp[0].push_back(make_pair(j, cost[0][j]));
+                }
+            }
+        }
+        else
+        {
+            if (houses[i] == 0)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    for (int t = 0; t < target; t++)
+                    {
+                        int same = INT_MAX;
+                        int diff = INT_MAX;
+                        for (size_t k = 0; k < prev[t].size(); k++)
+                        {
+                            if (prev[t][k].first == j)
+                            {
+                                same = min(same, prev[t][k].second + cost[i][j]);
+                            }
+                            else
+                            {
+                                diff = min(diff, prev[t][k].second + cost[i][j]);
+                            }
+                        }
+                        if (same != INT_MAX) dp[t].push_back(make_pair(j, same));
+                        if (t + 1 < target && diff != INT_MAX)
+                        {
+                            dp[t + 1].push_back(make_pair(j, diff));
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (int t = 0; t < target; t++)
+                {
+                    int same = INT_MAX;
+                    int diff = INT_MAX;
+                    for (size_t k = 0; k < prev[t].size(); k++)
+                    {
+                        if (prev[t][k].first == houses[i] - 1)
+                        {
+                            same = min(same, prev[t][k].second);
+                        }
+                        else
+                        {
+                            diff = min(diff, prev[t][k].second);
+                        }
+                    }
+                    if (same != INT_MAX) dp[t].push_back(make_pair(houses[i] - 1, same));
+                    if (t + 1 < target && diff != INT_MAX)
+                    {
+                        dp[t + 1].push_back(make_pair(houses[i] - 1, diff));
+                    }
+                }
+            }
+        }
+        prev = dp;
+    }
+    int result = INT_MAX;
+    for (size_t i = 0; i < prev[target - 1].size(); i++)
+    {
+        result = min(result, prev[target - 1][i].second);
+    }
+    if (result == INT_MAX) result = -1;
+    return result;
+}
 #pragma endregion
 

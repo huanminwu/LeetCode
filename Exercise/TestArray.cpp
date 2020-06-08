@@ -2611,8 +2611,72 @@ void TestLeetCode645(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1470(void)
+{
+    Logger::WriteMessage("Test Leet Code 1470");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 5, 1, 3, 4, 7 };
+    int n = 3;
+    vector<int> result = leetCode.shuffle(nums, n);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,2,3,4,4,3,2,1 };
+    n = 4;
+    result = leetCode.shuffle(nums, n);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,1,2,2 };
+    n = 2;
+    result = leetCode.shuffle(nums, n);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1471(void)
+{
+    Logger::WriteMessage("Test Leet Code 1471");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 1, 2, 3, 4, 5 };
+    int k = 2;
+    vector<int> result = leetCode.getStrongest(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    arr = { 1,1,3,5,5 };
+    k = 2;
+    result = leetCode.getStrongest(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    arr = { 6,7,11,7,6,8 };
+    k = 5;
+    result = leetCode.getStrongest(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    arr = { 6, -3, 7, 2, 11 };
+    k = 3;
+    result = leetCode.getStrongest(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    arr = { -7,22,17,3 };
+    k = 2;
+    result = leetCode.getStrongest(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1471();
+    TestLeetCode1470();
     TestLeetCode645();
     TestLeetCode605();
     TestLeetCode643();

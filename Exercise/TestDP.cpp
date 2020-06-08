@@ -1578,8 +1578,58 @@ void TestLeetCode1463(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1473(void)
+{
+    Logger::WriteMessage("Test Leet Code 1473");
+    LeetCodeDP leetCode;
+    vector<int> houses = { 0, 0, 0, 0, 0 };
+    vector<vector<int>> cost = { {1, 10},{10, 1},{10, 1},{1, 10},{5, 1} };
+    int m = 5;
+    int n = 2;
+    int target = 3;
+    int result = leetCode.minCost(houses, cost, m, n, target);
+    Logger::WriteMessage(houses);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) +
+        "; target = " + to_string(target) + "; result = " + to_string(result));
+
+    houses = { 0,2,1,2,0 };
+    cost = { {1, 10},{10, 1},{10, 1},{1, 10},{5, 1} };
+    m = 5;
+    n = 2;
+    target = 3;
+    result = leetCode.minCost(houses, cost, m, n, target);
+    Logger::WriteMessage(houses);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) +
+        "target = " + to_string(target) + "; result = " + to_string(result));
+
+    houses = { 0,0,0,0,0 };
+    cost = { {1, 10},{10, 1},{1, 10},{10, 1},{1, 10} };
+    m = 5;
+    n = 2;
+    target = 5;
+    result = leetCode.minCost(houses, cost, m, n, target);
+    Logger::WriteMessage(houses);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) +
+        "target = " + to_string(target) + "; result = " + to_string(result));
+
+    houses = { 3,1,2,3 };
+    cost = { {1, 1, 1},{1, 1, 1},{1, 1, 1},{1, 1, 1} };
+    m = 4;
+    n = 3;
+    target = 3;
+    result = leetCode.minCost(houses, cost, m, n, target);
+    Logger::WriteMessage(houses);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) +
+        "target = " + to_string(target) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1473();
     TestLeetCode1463();
     TestLeetCode1458();
     TestLeetCode1449();

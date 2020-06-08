@@ -2773,8 +2773,53 @@ void TestLeetCode1166(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1472(void)
+{
+    Logger::WriteMessage("Test Leet Code 1472");
+    vector<string> commands =
+    {
+        "BrowserHistory", "visit", "visit", "visit", "back", "back", 
+        "forward", "visit", "forward", "back", "back"
+    };
+    vector<string> parameters =
+    {
+        {"leetcode.com"}, {"google.com"}, {"facebook.com"}, {"youtube.com"},
+        {"1"}, {"1"}, {"1"}, {"linkedin.com"}, {"2"}, {"2"}, {"7"}
+    };
+    vector<string> result;
+    BrowserHistory* browserHistory = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "BrowserHistory")
+        {
+            browserHistory = new BrowserHistory(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "visit")
+        {
+            browserHistory->visit(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "back")
+        {
+            string url = browserHistory->back(atoi(parameters[i].c_str()));
+            result.push_back(url);
+        }
+        else if (commands[i] == "forward")
+        {
+            string url = browserHistory->forward(atoi(parameters[i].c_str()));
+            result.push_back(url);
+        }
+    }
+    delete browserHistory;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1472();
     TestLeetCode1166();
     TestLeetCode1157();
     TestLeetCode911();
