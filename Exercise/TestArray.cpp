@@ -2673,8 +2673,138 @@ void TestLeetCode1471(void)
     Logger::WriteMessage("k = " + to_string(k));
     Logger::WriteMessage(result);
 }
+
+
+void TestLeetCode682(void)
+{
+    LeetCodeArray leetCode;
+    vector<string> ops = { "5", "2", "C", "D", "+" };
+    int sum = leetCode.calPoints(ops);
+    Logger::WriteMessage(ops);
+    Logger::WriteMessage("sum = " + to_string(sum));
+
+    ops = { "5","-2","4","C","D","9","+","+" };
+    sum = leetCode.calPoints(ops);
+    Logger::WriteMessage(ops);
+    Logger::WriteMessage("sum = " + to_string(sum));
+}
+
+void TestLeetCode659(void)
+{
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3, 3, 4, 5 };
+    Logger::WriteMessage(nums);
+    bool result = leetCode.isPossible(nums);
+    Logger::WriteMessage("Possible to split array = " + (string)(result ? "true" : "false"));
+
+    nums = { 1, 2, 3, 3, 4, 4, 5, 5 };
+    Logger::WriteMessage(nums);
+    result = leetCode.isPossible(nums);
+    Logger::WriteMessage("Possible to split array = " + (string)(result ? "true" : "false"));
+
+    nums = { 1, 2, 3, 4, 4, 5 };
+    Logger::WriteMessage(nums);
+    result = leetCode.isPossible(nums);
+    Logger::WriteMessage("Possible to split array = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode723(void)
+{
+    LeetCodeArray leetCode;
+
+    vector<vector<int>> board =
+    {
+        {110,5,112,113,114 }, { 210, 211, 5, 213, 214 }, { 310, 311, 3, 313, 314 },
+        {410,411,412,5,414}, {5,1,512,3,3}, {610,4,1,613,614}, {710,1,2,713,714},
+        {810,1,2,1,1},{1,1,2,2,2}, {4,1,4,4,1014}
+    };
+    Logger::WriteMessage(board);
+    vector<vector<int>> result = leetCode.candyCrush(board);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode747(void)
+{
+    Logger::WriteMessage("Test Leet Code 747");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 6, 1, 0 };
+    int result = leetCode.dominantIndex(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 2, 3, 4 };
+    result = leetCode.dominantIndex(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode717(void)
+{
+    Logger::WriteMessage("Test Leet Code 717");
+    LeetCodeArray leetCode;
+    vector<int> bits = { 1, 0, 0 };
+    bool result = leetCode.isOneBitCharacter(bits);
+    Logger::WriteMessage(bits);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    bits = { 1, 1, 1, 0 };
+    result = leetCode.isOneBitCharacter(bits);
+    Logger::WriteMessage(bits);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode860(void)
+{
+    Logger::WriteMessage("Test Leet Code 860");
+    LeetCodeArray leetCode;
+    vector<int> bills = { 5,5,5,10,20 };
+    bool result = leetCode.lemonadeChange(bills);
+    Logger::WriteMessage(bills);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    bills = { 5,5,10 };
+    result = leetCode.lemonadeChange(bills);
+    Logger::WriteMessage(bills);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    bills = { 10,10 };
+    result = leetCode.lemonadeChange(bills);
+    Logger::WriteMessage(bills);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    bills = { 5,5,10,10,20 };
+    result = leetCode.lemonadeChange(bills);
+    Logger::WriteMessage(bills);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode874(void)
+{
+    Logger::WriteMessage("Test Leet Code 874");
+    LeetCodeArray leetCode;
+    vector<int> commands = { 4, -1, 3 };
+    vector<vector<int>> obstacles = {};
+    unsigned int result = leetCode.robotSim(commands, obstacles);
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(obstacles);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    commands = { 4,-1,4,-2,4 };
+    obstacles = { { 2,4 } };
+    result = leetCode.robotSim(commands, obstacles);
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(obstacles);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode874();
+    TestLeetCode659();
+    TestLeetCode717();
+    TestLeetCode723();
+    TestLeetCode747();
+    TestLeetCode682();
     TestLeetCode1471();
     TestLeetCode1470();
     TestLeetCode645();

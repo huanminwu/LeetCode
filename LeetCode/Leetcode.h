@@ -373,9 +373,6 @@ public:
     }
 };
 
-
-
-
 #pragma endregion 
 /// <summary>
 /// The class is to implement some string algorithm 
@@ -483,30 +480,6 @@ public:
     string predictPartyVictory(string senate);
 
     /// <summary>
-    /// Leet code #674. Longest Continuous Increasing Subsequence 
-    /// 
-    /// Given an unsorted array of integers, find the length of longest 
-    /// continuous increasing subsequence.
-    ///
-    /// Example 1:
-    /// Input: [1,3,5,4,7]
-    /// Output: 3
-    /// Explanation: The longest continuous increasing subsequence is [1,3,5], 
-    /// its length is 3. 
-    /// Even though [1,3,5,7] is also an increasing subsequence, it's not a 
-    /// continuous one where 5 and 7 are separated by 4. 
-    ///
-    /// Example 2:
-    /// Input: [2,2,2,2,2]
-    /// Output: 1
-    /// Explanation: The longest continuous increasing subsequence is [2], 
-    /// its length is 1.
-    ///	
-    /// Note: Length of the array will not exceed 10,000.
-    /// </summary>
-    int findLengthOfLCIS(vector<int>& nums);
-
-    /// <summary>
     /// Leet code #678. Valid Parenthesis String
     /// 
     /// Given a string containing only three types of characters: '(', ')' 
@@ -535,88 +508,6 @@ public:
     /// </summary>
     bool checkValidString(string s);
 
-    /// <summary>
-    /// Leet code #659. Split Array into Consecutive Subsequences 
-    /// 
-    /// You are given an integer array sorted in ascending order (may contain 
-    /// duplicates), you need to split them into several subsequences, where 
-    /// each subsequences consist of at least 3 consecutive integers. 
-    /// Return whether you can make such a split.
-    ///
-    /// Example 1:
-    /// Input: [1,2,3,3,4,5]
-    /// Output: True
-    /// Explanation:
-    /// You can split them into two consecutive subsequences : 
-    /// 1, 2, 3
-    /// 3, 4, 5
-    ///
-    /// Example 2:
-    /// Input: [1,2,3,3,4,4,5,5]
-    /// Output: True
-    /// Explanation:
-    /// You can split them into two consecutive subsequences : 
-    /// 1, 2, 3, 4, 5
-    /// 3, 4, 5
-    /// 
-    /// Example 3:
-    /// Input: [1,2,3,4,4,5]
-    /// Output: False
-    ///
-    /// Note:
-    /// 1. The length of the input is in range of [1, 10000]
-    /// </summary>
-    bool isPossible(vector<int>& nums); 
-
-    /// <summary>
-    /// Leet code #682. Baseball Game
-    /// 
-    /// Given a list of strings, each string can be one of the 4 following 
-    /// types:
-    ///
-    /// Integer (one round's score): Directly represents the number of points 
-    /// you get in this round.
-    /// "+" (one round's score): Represents that the points you get in this 
-    ///  round are the sum of the last two valid round's points.
-    /// "D" (one round's score): Represents that the points you get in this 
-    /// round are the doubled data of the last valid round's points.
-    /// "C" (an operation, which isn't a round's score): Represents the last 
-    /// valid round's points you get were invalid and should be removed.
-    /// Each round's operation is permanent and could have an impact on the 
-    /// round before and the round after.
-    ///
-    /// You need to return the sum of the points you could get in all the 
-    /// rounds.
-    ///
-    /// Example 1:
-    /// Input: ["5","2","C","D","+"]
-    /// Output: 30
-    /// Explanation: 
-    /// Round 1: You could get 5 points. The sum is: 5.
-    /// Round 2: You could get 2 points. The sum is: 7.
-    /// Operation 1: The round 2's data was invalid. The sum is: 5.  
-    /// Round 3: You could get 10 points (the round 2's data has been 
-    /// removed). The sum is: 15.
-    /// Round 4: You could get 5 + 10 = 15 points. The sum is: 30.
-    /// Example 2:
-    /// Input: ["5","-2","4","C","D","9","+","+"]
-    /// Output: 27
-    /// Explanation: 
-    /// Round 1: You could get 5 points. The sum is: 5.
-    /// Round 2: You could get -2 points. The sum is: 3.
-    /// Round 3: You could get 4 points. The sum is: 7.
-    /// Operation 1: The round 3's data is invalid. The sum is: 3.  
-    /// Round 4: You could get -4 points (the round 3's data has been removed). 
-    /// The sum is: -1.
-    /// Round 5: You could get 9 points. The sum is: 8.
-    /// Round 6: You could get -4 + 9 = 5 points. The sum is 13.
-    /// Round 7: You could get 9 + 5 = 14 points. The sum is 27.
-    /// Note:
-    /// 1.The size of the input list will be between 1 and 1000.
-    /// 2.Every integer represented in the list will be between -30000 
-    ///   and 30000.
-    /// </summary>
-    int calPoints(vector<string>& ops);
 
     /// <summary>
     /// Leet code #696. Count Binary Substrings
@@ -681,104 +572,6 @@ public:
     /// </summary>
     int findShortestSubArray(vector<int>& nums);
     
-    /// <summary>
-    /// Leet code #717. 1-bit and 2-bit Characters
-    ///
-    /// We have two special characters. The first character can be 
-    /// represented by one bit 0. The second character can be represented 
-    /// by two bits (10 or 11).
-    ///
-    /// Now given a string represented by several bits. Return whether the 
-    /// last character must be a one-bit character or not. The given string 
-    /// will always end with a zero.
-    ///
-    /// Example 1:
-    /// Input: 
-    /// bits = [1, 0, 0]
-    /// Output: True
-    /// Explanation: 
-    /// The only way to decode it is two-bit character and one-bit character. 
-    /// So the last character is one-bit character.
-    ///
-    /// Example 2:
-    /// Input: 
-    /// bits = [1, 1, 1, 0]
-    /// Output: False
-    /// Explanation:  
-    /// The only way to decode it is two-bit character and two-bit character. 
-    /// So the last character is NOT one-bit character.
-    /// Note:
-    ///
-    /// 1 <= len(bits) <= 1000.
-    /// bits[i] is always 0 or 1.
-    /// </summary>
-    bool isOneBitCharacter(vector<int>& bits);
-
-    /// <summary>
-    /// Leet code #723. Candy Crush
-    /// Count candy
-    /// </summary>
-    void countCandy(vector<vector<int>>& board, vector<vector<pair<int, int>>>& match);
-
-    /// <summary>
-    /// Leet code #723. Candy Crush
-    /// Remove candy
-    /// </summary>
-    bool removeCandy(vector<vector<int>>& board, vector<vector<pair<int, int>>>& match);
-
-    /// <summary>
-    /// Leet code #723. Candy Crush
-    /// Drop candy
-    /// </summary>
-    void dropCandy(vector<vector<int>>& board);
-
-    /// <summary>
-    /// Leet code #723. Candy Crush
-    ///
-    /// This question is about implementing a basic elimination algorithm for 
-    /// Candy Crush. 
-    /// 
-    /// Given a 2D integer array board representing the grid of candy, 
-    /// different positive integers board[i][j] represent different types of 
-    /// candies. A value of board[i][j] = 0 represents that the cell at 
-    /// position (i, j) is empty. The given board represents the state of the 
-    /// game following the player's move. Now, you need to restore the board 
-    /// to a stable state by crushing candies according to the following rules:
-    ///
-    /// 1. If three or more candies of the same type are adjacent vertically or 
-    /// horizontally, "crush" them all at the same time - these positions 
-    /// become empty.
-    /// 2. After crushing all candies simultaneously, if an empty space on the 
-    /// board has candies on top of itself, then these candies will drop until 
-    /// they hit a candy or bottom at the same time. (No new candies will drop 
-    /// outside the top boundary.)
-    /// 3. After the above steps, there may exist more candies that can be 
-    /// crushed. If so, you need to repeat the above steps.
-    /// 4. If there does not exist more candies that can be crushed (ie. the board 
-    /// is stable), then return the current board.
-    /// 
-    /// You need to perform the above rules until the board becomes stable, 
-    /// then return the current board.
-    ///
-    /// Example 1:
-    /// Input:
-    /// board = 
-    /// [[110,5,112,113,114],[210,211,5,213,214],[310,311,3,313,314],
-    /// [410,411,412,5,414], [5,1,512,3,3],[610,4,1,613,614],[710,1,2,713,714], 
-    /// [810,1,2,1,1],[1,1,2,2,2],[4,1,4,4,1014]]
-    /// Output:
-    /// [[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[110,0,0,0,114],[210,0,0,0,214],
-    /// [310,0,0,113,314],[410,0,0,213,414],[610,211,112,313,614],
-    /// [710,311,412,613,714],[810,411,512,713,1014]]
-    /// Explanation: 
-    ///
-    /// Note:
-    /// 1. The length of board will be in the range [3, 50].
-    /// 2. The length of board[i] will be in the range [3, 50].
-    /// Each board[i][j] will initially start as an integer in the range 
-    /// [1, 2000].
-    /// </summary>
-    vector<vector<int>> candyCrush(vector<vector<int>>& board);
 
     /// <summary>
     /// Leet code #724. Find Pivot Index
@@ -856,36 +649,7 @@ public:
     int countCornerRectangles(vector<vector<int>>& grid);
 
     /// <summary>
-    /// Leet code #747. Largest Number Greater Than Twice of Others
-    ///
-    /// In a given integer array nums, there is always exactly one largest 
-    /// element.
-    ///
-    /// Find whether the largest element in the array is at least twice as 
-    /// much as every other number in the array.
-    ///
-    /// If it is, return the index of the largest element, otherwise return -1.
-    ///
-    /// Example 1:
-    /// Input: nums = [3, 6, 1, 0]
-    /// Output: 1
-    /// Explanation: 6 is the largest integer, and for every other number in 
-    /// the array x,
-    /// 6 is more than twice as big as x.  The index of value 6 is 1, so we 
-    /// return 1.
-    /// Example 2:
-    /// Input: nums = [1, 2, 3, 4]
-    /// Output: -1
-    /// Explanation: 4 isn't at least as big as twice the value of 3, so we 
-    /// return -1.
-    /// Note:
-    /// nums will have a length in the range [1, 50].
-    /// Every nums[i] will be an integer in the range [0, 99].
-    /// </summary>
-    int dominantIndex(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #766. Toeplitz Matrix    
+    /// Leet code #766. Toeplitz Matrix
     ///
     /// A matrix is Toeplitz if every diagonal from top-left to bottom-right 
     /// has the same element.
@@ -1020,53 +784,6 @@ public:
     /// </summary>
     vector<int> shortestToChar(string S, char C);
 
-    /// <summary>
-    /// Leet code #816. Ambiguous Coordinates
-    /// </summary>
-    vector<string> getAllDecimals(string S);
-
-    /// <summary>
-    /// Leet code #816. Ambiguous Coordinates
-    /// 
-    /// We had some 2-dimensional coordinates, like "(1, 3)" or "(2, 0.5)".  
-    /// Then, we removed all commas, decimal points, and spaces, and ended up 
-    /// with the string S.  Return a list of strings representing all 
-    /// possibilities for what our original coordinates could have been.
-    ///
-    /// Our original representation never had extraneous zeroes, so we never 
-    /// started with numbers like "00", "0.0", "0.00", "1.0", "001", "00.01", 
-    /// or any other number that can be represented with less digits.  Also, a 
-    /// decimal point within a number never occurs without at least one digit 
-    /// occuring before it, so we never started with numbers like ".1".
-    /// The final answer list can be returned in any order.  Also note that all 
-    /// coordinates in the final answer have exactly one space between them 
-    /// (occurring after the comma.)
-    /// 
-    /// Example 1:
-    /// Input: "(123)"
-    /// Output: ["(1, 23)", "(12, 3)", "(1.2, 3)", "(1, 2.3)"]
-    /// Example 2:
-    /// Input: "(00011)"
-    /// Output:  ["(0.001, 1)", "(0, 0.011)"]
-    /// Explanation: 
-    /// 0.0, 00, 0001 or 00.01 are not allowed.
-    /// Example 3:
-    /// Input: "(0123)"
-    /// Output: ["(0, 123)", "(0, 12.3)", "(0, 1.23)", "(0.1, 23)", 
-    /// "(0.1, 2.3)", "(0.12, 3)"]
-    /// Example 4:
-    /// Input: "(100)"
-    /// Output: [(10, 0)]
-    /// Explanation: 
-    /// 1.0 is not allowed.
-    /// 
-    /// Note:
-    ///
-    /// 4 <= S.length <= 12.
-    /// S[0] = "(", S[S.length - 1] = ")", and the other elements in S are 
-    /// digits.
-    /// </summary>
-    vector<string> ambiguousCoordinates(string S);
 
     /// <summary>
     /// Leet code #822. Card Flipping Game
@@ -1400,92 +1117,6 @@ public:
     int maxDistToClosest(vector<int>& seats);
 
     /// <summary>
-    /// Leet code #860. Lemonade Change
-    /// 
-    /// At a lemonade stand, each lemonade costs $5. 
-    ///
-    /// Customers are standing in a queue to buy from you, and order one at a time 
-    /// (in the order specified by bills).
-    ///
-    /// Each customer will only buy one lemonade and pay with either a $5, $10, or 
-    /// $20 bill.  You must provide the correct change to each customer, so that 
-    /// the net transaction is that the customer pays $5.
-    ///
-    /// Note that you don't have any change in hand at first.
-    ///
-    /// Return true if and only if you can provide every customer with correct 
-    /// change.
-    /// 
-    /// Example 1:
-    /// 
-    /// Input: [5,5,5,10,20]
-    /// Output: true
-    /// Explanation: 
-    /// From the first 3 customers, we collect three $5 bills in order.
-    /// From the fourth customer, we collect a $10 bill and give back a $5.
-    /// From the fifth customer, we give a $10 bill and a $5 bill.
-    /// Since all customers got correct change, we output true.
-    ///
-    /// Example 2: 
-    /// Input: [5,5,10]
-    /// Output: true
-    /// Example 3:
-    /// 
-    /// Input: [10,10]
-    /// Output: false
-    /// Example 4:
-    ///
-    /// Input: [5,5,10,10,20]
-    /// Output: false
-    /// Explanation: 
-    /// From the first two customers in order, we collect two $5 bills.
-    /// For the next two customers in order, we collect a $10 bill and give back a 
-    /// $5 bill.
-    /// For the last customer, we can't give change of $15 back because we only 
-    /// have two $10 bills.
-    /// Since not every customer received correct change, the answer is false.
-    /// 
-    /// Note:
-    ///
-    /// 1. 0 <= bills.length <= 10000
-    /// 2. bills[i] will be either 5, 10, or 20.
-    /// </summary>
-    bool lemonadeChange(vector<int>& bills);
-
-    /// <summary>
-    /// Leet code #861. Score After Flipping Matrix
-    /// 
-    /// We have a two dimensional matrix A where each value is 0 or 1.
-    ///
-    /// A move consists of choosing any row or column, and toggling each value 
-    /// in that row or column: changing all 0s to 1s, and all 1s to 0s.
-    ///
-    /// After making any number of moves, every row of this matrix is interpreted 
-    /// as a binary number, and the score of the matrix is the sum of these 
-    /// numbers.
-    ///
-    /// Return the highest possible score.
-    ///
-    /// 
-    ///
-    /// Example 1:
-    ///
-    /// Input: [[0,0,1,1],[1,0,1,0],[1,1,0,0]]
-    /// Output: 39
-    /// Explanation:
-    /// Toggled to [[1,1,1,1],[1,0,0,1],[1,1,1,1]].
-    /// 0b1111 + 0b1001 + 0b1111 = 15 + 9 + 15 = 39
-    /// 
-    /// 
-    /// Note:
-    ///
-    /// 1. 1 <= A.length <= 20
-    /// 2. 1 <= A[0].length <= 20
-    /// 3. A[i][j] is 0 or 1.
-    /// </summary>
-    int matrixScore(vector<vector<int>>& A);
-
-    /// <summary>
     /// Leet code #862. Shortest Subarray with Sum at Least K
     /// 
     /// Return the length of the shortest, non-empty, contiguous subarray of A 
@@ -1536,48 +1167,6 @@ public:
     /// 2. 1 <= A[0].length <= 1000
     /// </summary>
     vector<vector<int>> transpose(vector<vector<int>>& A);
-
-    /// <summary>
-    /// Leet code #874. Walking Robot Simulation
-    /// 
-    /// A robot on an infinite grid starts at point (0, 0) and faces north.  
-    /// The robot can receive one of three possible types of commands:
-    ///
-    /// -2: turn left 90 degrees
-    /// -1: turn right 90 degrees
-    /// 1 <= x <= 9: move forward x units
-    /// Some of the grid squares are obstacles. 
-    ///
-    /// The i-th obstacle is at grid point (obstacles[i][0], obstacles[i][1])
-    ///
-    /// If the robot would try to move onto them, the robot stays on the 
-    /// previous grid square instead (but still continues following the rest 
-    /// of the route.)
-    ///
-    /// Return the square of the maximum Euclidean distance that the robot 
-    /// will be from the origin.
-    ///  
-    /// Example 1:
-    ///
-    /// Input: commands = [4,-1,3], obstacles = []
-    /// Output: 25
-    /// Explanation: robot will go to (3, 4)
-    /// 
-    /// Example 2:
-    ///
-    /// Input: commands = [4,-1,4,-2,4], obstacles = [[2,4]]
-    /// Output: 65
-    /// Explanation: robot will be stuck at (1, 4) before turning left and 
-    /// going to (1, 8)
-    ///
-    /// Note:
-    /// 1. 0 <= commands.length <= 10000
-    /// 2. 0 <= obstacles.length <= 10000
-    /// 3. -30000 <= obstacle[i][0] <= 30000
-    /// 4. -30000 <= obstacle[i][1] <= 30000
-    /// 5. The answer is guaranteed to be less than 2 ^ 31.
-    /// </summary>
-    int robotSim(vector<int>& commands, vector<vector<int>>& obstacles);
 
     /// <summary>
     /// Leet code #883. Projection Area of 3D Shapes
@@ -2719,7 +2308,7 @@ public:
     /// 5. 0 <= source[i][j], target[i][j] < 10^6
     /// 6. source != target
     /// </summary>
-    bool LeetCode::isEscapePossible(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target);
+    bool isEscapePossible(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target);
 
     /// <summary>
     /// Leet code #1052. Grumpy Bookstore Owner

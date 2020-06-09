@@ -1904,8 +1904,34 @@ void TestLeetCode418(void)
         "; sentence count = " + to_string(count));
 }
 
+void TestLeetCode816(void)
+{
+    Logger::WriteMessage("Test Leet Code 816");
+    LeetCodeString leetCode;
+    string S = "(123)";
+    vector<string> result = leetCode.ambiguousCoordinates(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+
+    S = "(00011)";
+    result = leetCode.ambiguousCoordinates(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+
+    S = "(0123)";
+    result = leetCode.ambiguousCoordinates(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+
+    S = "(100)";
+    result = leetCode.ambiguousCoordinates(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode816();
     TestLeetCode418();
     TestLeetCode471();
     TestLeetCode1456();

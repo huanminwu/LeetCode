@@ -3494,46 +3494,6 @@ vector<int> LeetCodeArray::constructArray(int n, int k)
     return result;
 }
 
-/// <summary>
-/// Leet code #674. Longest Continuous Increasing Subsequence 
-/// 
-/// Given an unsorted array of integers, find the length of longest 
-/// continuous increasing subsequence.
-///
-/// Example 1:
-/// Input: [1,3,5,4,7]
-/// Output: 3
-/// Explanation: The longest continuous increasing subsequence is [1,3,5], 
-/// its length is 3. 
-/// Even though [1,3,5,7] is also an increasing subsequence, it's not a 
-/// continuous one where 5 and 7 are separated by 4. 
-///
-/// Example 2:
-/// Input: [2,2,2,2,2]
-/// Output: 1
-/// Explanation: The longest continuous increasing subsequence is [2], 
-/// its length is 1.
-///	
-/// Note: Length of the array will not exceed 10,000.
-/// </summary>
-int LeetCode::findLengthOfLCIS(vector<int>& nums)
-{
-    int count = 0, result = 0;
-    for (size_t i = 0; i < nums.size(); i++)
-    {
-        if ((i == 0) || (nums[i] > nums[i - 1]))
-        {
-            count++;
-        }
-        else
-        {
-            result = max(result, count);
-            count = 1;
-        }
-    }
-    result = max(result, count);
-    return result;
-}
 
 /// <summary>
 /// Leet code #678. Valid Parenthesis String
@@ -3664,7 +3624,7 @@ bool LeetCode::checkValidString(string s)
 /// 2.Every integer represented in the list will be between -30000 
 ///   and 30000.
 /// </summary>
-int LeetCode::calPoints(vector<string>& ops)
+int LeetCodeArray::calPoints(vector<string>& ops)
 {
     vector<int> nums;
     int sum = 0;
@@ -3739,7 +3699,7 @@ int LeetCode::calPoints(vector<string>& ops)
 /// Note:
 /// 1. The length of the input is in range of [1, 10000]
 /// </summary>
-bool LeetCode::isPossible(vector<int>& nums)
+bool LeetCodeArray::isPossible(vector<int>& nums)
 {
     unordered_map<int, priority_queue<int, std::vector<int>, std::greater<int>>> heap_map;
     for (size_t i = 0; i < nums.size(); i++)
@@ -3911,7 +3871,7 @@ int LeetCode::findShortestSubArray(vector<int>& nums)
 /// 1 <= len(bits) <= 1000.
 /// bits[i] is always 0 or 1.
 /// </summary>
-bool LeetCode::isOneBitCharacter(vector<int>& bits)
+bool LeetCodeArray::isOneBitCharacter(vector<int>& bits)
 {
     for (size_t i = 0; i < bits.size(); i++)
     {
@@ -3932,7 +3892,7 @@ bool LeetCode::isOneBitCharacter(vector<int>& bits)
 /// Leet code #723. Candy Crush
 /// Count candy
 /// </summary>
-void LeetCode::countCandy(vector<vector<int>>& board, vector<vector<pair<int, int>>>& match)
+void LeetCodeArray::countCandy(vector<vector<int>>& board, vector<vector<pair<int, int>>>& match)
 {
     for (size_t i = 0; i < board.size(); i++)
     {
@@ -3967,7 +3927,7 @@ void LeetCode::countCandy(vector<vector<int>>& board, vector<vector<pair<int, in
 /// Leet code #723. Candy Crush
 /// Remove candy
 /// </summary>
-bool LeetCode::removeCandy(vector<vector<int>>& board, vector<vector<pair<int, int>>>& match)
+bool LeetCodeArray::removeCandy(vector<vector<int>>& board, vector<vector<pair<int, int>>>& match)
 {
     bool result = false;
     for (int i = match.size() - 1; i >= 0; i--)
@@ -4003,7 +3963,7 @@ bool LeetCode::removeCandy(vector<vector<int>>& board, vector<vector<pair<int, i
 /// Leet code #723. Candy Crush
 /// Drop candy
 /// </summary>
-void LeetCode::dropCandy(vector<vector<int>>& board)
+void LeetCodeArray::dropCandy(vector<vector<int>>& board)
 {
     vector<int> bottom(board[0].size(), board.size() - 1);
     for (int i = board.size() - 1; i >= 0; i--)
@@ -4065,7 +4025,7 @@ void LeetCode::dropCandy(vector<vector<int>>& board)
 /// Each board[i][j] will initially start as an integer in the range 
 /// [1, 2000].
 /// </summary>
-vector<vector<int>> LeetCode::candyCrush(vector<vector<int>>& board)
+vector<vector<int>> LeetCodeArray::candyCrush(vector<vector<int>>& board)
 {
     vector<vector<pair<int, int>>> match(board.size(), vector<pair<int, int>>(board[0].size()));
     countCandy(board, match);
@@ -4217,7 +4177,7 @@ int LeetCode::countCornerRectangles(vector<vector<int>>& grid)
 /// nums will have a length in the range [1, 50].
 /// Every nums[i] will be an integer in the range [0, 99].
 /// </summary>
-int LeetCode::dominantIndex(vector<int>& nums)
+int LeetCodeArray::dominantIndex(vector<int>& nums)
 {
     multiset<int> double_num;
     int max_index = -1;
@@ -4451,106 +4411,7 @@ vector<int> LeetCode::shortestToChar(string S, char C)
     return result;
 }
 
-/// <summary>
-/// Leet code #816. Ambiguous Coordinates
-/// </summary>
-vector<string> LeetCode::getAllDecimals(string S)
-{
-    vector<string> result;
 
-    for (size_t i = 0; i < S.size(); i++)
-    {
-        // integter no leading zero and multiple digits
-        if (i == 0)
-        {
-            if ((S[0] == '0') && (S.size() > 1)) continue;
-        }
-        // decimal no ending zero
-        else if (i == 1)
-        {
-            if (S[S.size() - 1] == '0') continue;
-        }
-        // multiple digits integers decimal no leading zero, no ending zero
-        else
-        {
-            if ((S[0] == '0') || (S[S.size() - 1] == '0')) continue;
-        }
-        if (i == 0) result.push_back(S);
-        else
-        {
-            string str = S.substr(0, i);
-            str.push_back('.');
-            str.append(S.substr(i));
-            result.push_back(str);
-        }
-    }
-    return result;
-}
-
-/// <summary>
-/// Leet code #816. Ambiguous Coordinates
-/// 
-/// We had some 2-dimensional coordinates, like "(1, 3)" or "(2, 0.5)".  
-/// Then, we removed all commas, decimal points, and spaces, and ended up 
-/// with the string S.  Return a list of strings representing all 
-/// possibilities for what our original coordinates could have been.
-///
-/// Our original representation never had extraneous zeroes, so we never 
-/// started with numbers like "00", "0.0", "0.00", "1.0", "001", "00.01", 
-/// or any other number that can be represented with less digits.  Also, a 
-/// decimal point within a number never occurs without at least one digit 
-/// occuring before it, so we never started with numbers like ".1".
-/// The final answer list can be returned in any order.  Also note that all 
-/// coordinates in the final answer have exactly one space between them 
-/// (occurring after the comma.)
-/// 
-/// Example 1:
-/// Input: "(123)"
-/// Output: ["(1, 23)", "(12, 3)", "(1.2, 3)", "(1, 2.3)"]
-/// Example 2:
-/// Input: "(00011)"
-/// Output:  ["(0.001, 1)", "(0, 0.011)"]
-/// Explanation: 
-/// 0.0, 00, 0001 or 00.01 are not allowed.
-/// Example 3:
-/// Input: "(0123)"
-/// Output: ["(0, 123)", "(0, 12.3)", "(0, 1.23)", "(0.1, 23)", 
-/// "(0.1, 2.3)", "(0.12, 3)"]
-/// Example 4:
-/// Input: "(100)"
-/// Output: [(10, 0)]
-/// Explanation: 
-/// 1.0 is not allowed.
-/// 
-/// Note:
-///
-/// 4 <= S.length <= 12.
-/// S[0] = "(", S[S.length - 1] = ")", and the other elements in S are 
-/// digits.
-/// </summary>
-vector<string> LeetCode::ambiguousCoordinates(string S)
-{
-    vector<string> result;
-
-    S = S.substr(1, S.size() - 2);
-    for (size_t i = 1; i < S.size(); i++)
-    {
-        string first_str = S.substr(0, i);
-        string second_str = S.substr(i);
-        vector<string> first_part = getAllDecimals(first_str);
-        vector<string> second_part = getAllDecimals(second_str);
-
-        for (string first_str : first_part)
-        {
-            for (string second_str : second_part)
-            {
-                string str = "(" + first_str + ", " + second_str + ")";
-                result.push_back(str);
-            }
-        }
-    }
-    return result;
-}
 
 /// <summary>
 /// Leet code #822. Card Flipping Game
@@ -5178,7 +5039,7 @@ int LeetCode::maxDistToClosest(vector<int>& seats)
 /// 1. 0 <= bills.length <= 10000
 /// 2. bills[i] will be either 5, 10, or 20.
 /// </summary>
-bool LeetCode::lemonadeChange(vector<int>& bills)
+bool LeetCodeArray::lemonadeChange(vector<int>& bills)
 {
     vector<int> changes(2);
     for (size_t i = 0; i < bills.size(); i++)
@@ -5206,81 +5067,6 @@ bool LeetCode::lemonadeChange(vector<int>& bills)
         }
     }
     return true;
-}
-
-
-/// <summary>
-/// Leet code #861. Score After Flipping Matrix
-/// 
-/// We have a two dimensional matrix A where each value is 0 or 1.
-///
-/// A move consists of choosing any row or column, and toggling each value 
-/// in that row or column: changing all 0s to 1s, and all 1s to 0s.
-///
-/// After making any number of moves, every row of this matrix is interpreted 
-/// as a binary number, and the score of the matrix is the sum of these 
-/// numbers.
-///
-/// Return the highest possible score.
-///
-/// 
-///
-/// Example 1:
-///
-/// Input: [[0,0,1,1],[1,0,1,0],[1,1,0,0]]
-/// Output: 39
-/// Explanation:
-/// Toggled to [[1,1,1,1],[1,0,0,1],[1,1,1,1]].
-/// 0b1111 + 0b1001 + 0b1111 = 15 + 9 + 15 = 39
-/// 
-/// 
-/// Note:
-///
-/// 1. 1 <= A.length <= 20
-/// 2. 1 <= A[0].length <= 20
-/// 3. A[i][j] is 0 or 1.
-/// </summary>
-int LeetCode::matrixScore(vector<vector<int>>& A)
-{
-    vector<vector<int>> M = A;
-    for (size_t row = 0; row < M.size(); row++)
-    {
-        if (M[row][0] == 0)
-        {
-            for (size_t col = 0; col < M[row].size(); col++)
-            {
-                M[row][col] = 1 - M[row][col];
-            }
-        }
-    }
-
-    for (size_t col = 0; col < M[0].size(); col++)
-    {
-        int count = 0;
-        for (size_t row = 0; row < M.size(); row++)
-        {
-            if (M[row][col] == 1) count++;
-        }
-        if (count < ((int)M.size() - count))
-        {
-            for (size_t row = 0; row < M.size(); row++)
-            {
-                M[row][col] = 1 - M[row][col];
-            }
-        }
-    }
-
-    int result = 0;
-    for (size_t row = 0; row < M.size(); row++)
-    {
-        int sum = 0;
-        for (size_t col = 0; col < M[row].size(); col++)
-        {
-            sum = (sum << 1) + M[row][col];
-        }
-        result += sum;
-    }
-    return result;
 }
 
 /// <summary>
@@ -5428,7 +5214,7 @@ vector<vector<int>> LeetCode::transpose(vector<vector<int>>& A)
 /// 4. -30000 <= obstacle[i][1] <= 30000
 /// 5. The answer is guaranteed to be less than 2 ^ 31.
 /// </summary>
-int LeetCode::robotSim(vector<int>& commands, vector<vector<int>>& obstacles)
+int LeetCodeArray::robotSim(vector<int>& commands, vector<vector<int>>& obstacles)
 {
     int result = 0;
     vector<vector<int>> directions = { {0, 1}, {1, 0}, {0, -1}, {-1, 0} };

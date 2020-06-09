@@ -10776,4 +10776,105 @@ int LeetCodeString::wordsTyping(vector<string>& sentence, int rows, int cols)
     return count;
 }
 
+/// <summary>
+/// Leet code #816. Ambiguous Coordinates
+/// </summary>
+vector<string> LeetCodeString::getAllDecimals(string S)
+{
+    vector<string> result;
+
+    for (size_t i = 0; i < S.size(); i++)
+    {
+        // integter no leading zero and multiple digits
+        if (i == 0)
+        {
+            if ((S[0] == '0') && (S.size() > 1)) continue;
+        }
+        // decimal no ending zero
+        else if (i == 1)
+        {
+            if (S[S.size() - 1] == '0') continue;
+        }
+        // multiple digits integers decimal no leading zero, no ending zero
+        else
+        {
+            if ((S[0] == '0') || (S[S.size() - 1] == '0')) continue;
+        }
+        if (i == 0) result.push_back(S);
+        else
+        {
+            string str = S.substr(0, i);
+            str.push_back('.');
+            str.append(S.substr(i));
+            result.push_back(str);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #816. Ambiguous Coordinates
+/// 
+/// We had some 2-dimensional coordinates, like "(1, 3)" or "(2, 0.5)".  
+/// Then, we removed all commas, decimal points, and spaces, and ended up 
+/// with the string S.  Return a list of strings representing all 
+/// possibilities for what our original coordinates could have been.
+///
+/// Our original representation never had extraneous zeroes, so we never 
+/// started with numbers like "00", "0.0", "0.00", "1.0", "001", "00.01", 
+/// or any other number that can be represented with less digits.  Also, a 
+/// decimal point within a number never occurs without at least one digit 
+/// occuring before it, so we never started with numbers like ".1".
+/// The final answer list can be returned in any order.  Also note that all 
+/// coordinates in the final answer have exactly one space between them 
+/// (occurring after the comma.)
+/// 
+/// Example 1:
+/// Input: "(123)"
+/// Output: ["(1, 23)", "(12, 3)", "(1.2, 3)", "(1, 2.3)"]
+/// Example 2:
+/// Input: "(00011)"
+/// Output:  ["(0.001, 1)", "(0, 0.011)"]
+/// Explanation: 
+/// 0.0, 00, 0001 or 00.01 are not allowed.
+/// Example 3:
+/// Input: "(0123)"
+/// Output: ["(0, 123)", "(0, 12.3)", "(0, 1.23)", "(0.1, 23)", 
+/// "(0.1, 2.3)", "(0.12, 3)"]
+/// Example 4:
+/// Input: "(100)"
+/// Output: [(10, 0)]
+/// Explanation: 
+/// 1.0 is not allowed.
+/// 
+/// Note:
+///
+/// 4 <= S.length <= 12.
+/// S[0] = "(", S[S.length - 1] = ")", and the other elements in S are 
+/// digits.
+/// </summary>
+vector<string> LeetCodeString::ambiguousCoordinates(string S)
+{
+    vector<string> result;
+
+    S = S.substr(1, S.size() - 2);
+    for (size_t i = 1; i < S.size(); i++)
+    {
+        string first_str = S.substr(0, i);
+        string second_str = S.substr(i);
+        vector<string> first_part = getAllDecimals(first_str);
+        vector<string> second_part = getAllDecimals(second_str);
+
+        for (string first_str : first_part)
+        {
+            for (string second_str : second_part)
+            {
+                string str = "(" + first_str + ", " + second_str + ")";
+                result.push_back(str);
+            }
+        }
+    }
+    return result;
+}
+
 #pragma endregion

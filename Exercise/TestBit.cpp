@@ -447,6 +447,22 @@ void TestLeetCode461(void)
     Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; Haming Distance = " + to_string(count));
 }
 
+void TestLeetCode861(void)
+{
+    Logger::WriteMessage("Test Leet Code 861");
+    LeetCodeBit leetCode;
+    vector<vector<int>> A = { {0, 0, 1, 1},{1, 0, 1, 0},{1, 1, 0, 0} };
+    int result = leetCode.matrixScore(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { {0, 1},{0, 1},{0, 1},{0, 0} };
+    result = leetCode.matrixScore(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+}
+
 void TestLeetCode1461(void)
 {
     Logger::WriteMessage("Test Leet Code 1461");
@@ -479,6 +495,7 @@ void TestLeetCode1461(void)
 
 void TestLeetCodeBit(void)
 {
+    TestLeetCode861();
     TestLeetCode1461();
     TestLeetCode89();
     TestLeetCode136();

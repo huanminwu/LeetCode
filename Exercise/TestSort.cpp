@@ -602,6 +602,21 @@ void TestLeetCode1439(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+
+void TestLeetCode674(void)
+{
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 3, 5, 4, 7 };
+    int result = leetCode.findLengthOfLCIS(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2, 2, 2, 2 };
+    result = leetCode.findLengthOfLCIS(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
     TestLeetCode1439();
@@ -621,6 +636,7 @@ void TestLeetCodeSort(void)
     TestLeetCode300();
     TestLeetCode354();
     TestLeetCode673();
+    TestLeetCode674();
     TestLeetCode295();
     TestLeetCode373();
     TestLeetCode683(); 
