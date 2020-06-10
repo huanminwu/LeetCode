@@ -1,6 +1,31 @@
 #include "..\LeetCode\LeetCode.h"
 #include "..\LeetCode\LeetCodeGreedy.h"
 #include "TestGreedy.h"
+
+void TestLeetCode826(void)
+{
+    Logger::WriteMessage("Test Leet Code 826");
+    LeetCodeGreedy leetCode;
+    vector<int> difficulty = { 2, 4, 6, 8, 10 };
+    vector<int> profit = { 10, 20, 30, 40, 50 };
+    vector<int> worker = { 4, 5, 6, 7 };
+    int result = leetCode.maxProfitAssignment(difficulty, profit, worker);
+    Logger::WriteMessage(difficulty);
+    Logger::WriteMessage(profit);
+    Logger::WriteMessage(worker);
+    Logger::WriteMessage("result = " + to_string(result));
+
+
+    difficulty = { 66, 1, 28, 73, 53, 35, 45, 60, 100, 44, 59, 94, 27, 88, 7, 18, 83, 18, 72, 63 };
+    profit = { 66, 20, 84, 81, 56, 40, 37, 82, 53, 45, 43, 96, 67, 27, 12, 54, 98, 19, 47, 77 };
+    worker = { 23, 66, 70, 14, 51, 94, 18, 28, 78, 100, 16, 61, 33, 68, 38, 63, 45, 1, 10, 53 };
+    result = leetCode.maxProfitAssignment(difficulty, profit, worker);
+    Logger::WriteMessage(difficulty);
+    Logger::WriteMessage(profit);
+    Logger::WriteMessage(worker);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCode1229(void)
 {
     Logger::WriteMessage("Test Leet Code 1229");
@@ -245,6 +270,7 @@ void TestLeetCode1419(void)
 
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode826();
     TestLeetCode1419();
     TestLeetCode1405();
     TestLeetCode1383();

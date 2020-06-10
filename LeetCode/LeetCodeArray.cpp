@@ -2546,10 +2546,8 @@ vector<vector<int>> LeetCodeArray::multiply(vector<vector<int>>& A, vector<vecto
 }
 
 
-
-
 /// <summary>
-/// Leet code #498. Diagonal Traverse          
+/// Leet code #498. Diagonal Traverse
 /// 
 /// Given a matrix of M x N elements (M rows, N columns), return all elements of the matrix 
 /// in diagonal order as shown in the below image. 
@@ -2567,7 +2565,7 @@ vector<vector<int>> LeetCodeArray::multiply(vector<vector<int>>& A, vector<vecto
 /// Note:
 /// 1.The total number of elements of the given matrix will not exceed 10,000.
 /// </summary>
-vector<int> LeetCode::findDiagonalOrder(vector<vector<int>>& matrix)
+vector<int> LeetCodeArray::findDiagonalOrder(vector<vector<int>>& matrix)
 {
     int direction = 1;
     pair<int, int> pos = { 0,0 };
@@ -3365,7 +3363,7 @@ vector<int> LeetCodeArray::findErrorNums(vector<int>& nums)
 /// Note:
 /// The length of the given string will in the range [1, 10,000].
 /// </summary>
-string LeetCode::predictPartyVictory(string senate)
+string LeetCodeArray::predictPartyVictory(string senate)
 {
     vector<int> count_map(2);
     while (true)
@@ -3758,7 +3756,7 @@ bool LeetCodeArray::isPossible(vector<int>& nums)
 /// s.length will be between 1 and 50,000.
 /// s will only consist of "0" or "1" characters.
 /// </summary>
-int LeetCode::countBinarySubstrings(string s)
+int LeetCodeArray::countBinarySubstrings(string s)
 {
     vector<int> count_array;
     int result = 0;
@@ -3811,7 +3809,7 @@ int LeetCode::countBinarySubstrings(string s)
 /// nums.length will be between 1 and 50,000.
 /// nums[i] will be an integer between 0 and 49,999.
 /// </summary>
-int LeetCode::findShortestSubArray(vector<int>& nums)
+int LeetCodeArray::findShortestSubArray(vector<int>& nums)
 {
     int min_len = 0;
     int max_degree = 0;
@@ -4071,7 +4069,7 @@ vector<vector<int>> LeetCodeArray::candyCrush(vector<vector<int>>& board)
 /// 1. The length of nums will be in the range [0, 10000].
 /// 2. Each element nums[i] will be an integer in the range [-1000, 1000].
 /// </summary>
-int LeetCode::pivotIndex(vector<int>& nums)
+int LeetCodeArray::pivotIndex(vector<int>& nums)
 {
     if (nums.empty()) return -1;
     vector<int> sum(nums.size());
@@ -4129,7 +4127,7 @@ int LeetCode::pivotIndex(vector<int>& nums)
 /// 2. Each grid[i][j] will be either 0 or 1.
 /// 3. The number of 1s in the grid will be at most 6000.
 /// </summary>
-int LeetCode::countCornerRectangles(vector<vector<int>>& grid)
+int LeetCodeArray::countCornerRectangles(vector<vector<int>>& grid)
 {
     int result = 0;
     for (size_t i = 0; i < grid[0].size(); i++)
@@ -4197,7 +4195,7 @@ int LeetCodeArray::dominantIndex(vector<int>& nums)
 }
 
 /// <summary>
-/// Leet code #766. Toeplitz Matrix    
+/// Leet code #766. Toeplitz Matrix
 ///
 /// A matrix is Toeplitz if every diagonal from top-left to bottom-right 
 /// has the same element.
@@ -4230,7 +4228,7 @@ int LeetCodeArray::dominantIndex(vector<int>& nums)
 /// 2. matrix will have a number of rows and columns in range [1, 20].
 /// 3. matrix[i][j] will be integers in range [0, 99].
 /// </summary>
-bool LeetCode::isToeplitzMatrix(vector<vector<int>>& matrix)
+bool LeetCodeArray::isToeplitzMatrix(vector<vector<int>>& matrix)
 {
     if (matrix.empty() || matrix[0].empty()) return false;
     for (size_t i = 1; i < matrix.size(); i++)
@@ -4348,7 +4346,7 @@ int LeetCode::kthGrammar(int N, int K)
 /// 3. All buildings in grid[i][j] occupy the entire grid cell: that is, they 
 ///   are a 1 x 1 x grid[i][j] rectangular prism.
 /// </summary>
-int LeetCode::maxIncreaseKeepingSkyline(vector<vector<int>>& grid)
+int LeetCodeArray::maxIncreaseKeepingSkyline(vector<vector<int>>& grid)
 {
     int result = 0;
     vector<int> row(grid.size()), col(grid[0].size());
@@ -4384,7 +4382,7 @@ int LeetCode::maxIncreaseKeepingSkyline(vector<vector<int>>& grid)
 /// 2. Output: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0] 
 /// 3. All letters in S and C are lowercase.
 /// </summary>
-vector<int> LeetCode::shortestToChar(string S, char C)
+vector<int> LeetCodeArray::shortestToChar(string S, char C)
 {
     int last_pos = -1;
     vector<int> result(S.size());
@@ -4447,7 +4445,7 @@ vector<int> LeetCode::shortestToChar(string S, char C)
 /// 2.1 <= fronts[i] <= 2000.
 /// 3.1 <= backs[i] <= 2000.
 /// </summary>
-int LeetCode::flipgame(vector<int>& fronts, vector<int>& backs)
+int LeetCodeArray::flipgame(vector<int>& fronts, vector<int>& backs)
 {
     int result = 0;
     unordered_set<int> bad_numbers;
@@ -4477,122 +4475,6 @@ int LeetCode::flipgame(vector<int>& fronts, vector<int>& backs)
                 result = min(result, backs[i]);
             }
         }
-    }
-    return result;
-}
-
-/// <summary>
-/// Leet code #825. Friends Of Appropriate Ages
-/// 
-/// Some people will make friend requests. The list of their ages is given 
-/// and ages[i] is the age of the ith person. 
-///
-/// Person A will NOT friend request person B (B != A) if any of the 
-/// following conditions are true:
-///
-/// age[B] <= 0.5 * age[A] + 7
-/// age[B] > age[A]
-/// age[B] > 100 && age[A] < 100
-/// Otherwise, A will friend request B.
-///
-/// Note that if A requests B, B does not necessarily request A.  Also, 
-/// people will not friend request themselves.
-///
-/// How many total friend requests are made?
-///
-/// Example 1:
-///
-/// Input: [16,16]
-/// Output: 2
-/// Explanation: 2 people friend request each other.
-/// Example 2:
-///
-/// Input: [16,17,18]
-/// Output: 2
-/// Explanation: Friend requests are made 17 -> 16, 18 -> 17.
-///
-/// Example 3:
-/// Input: [20,30,100,110,120]
-/// Output: 
-/// Explanation: Friend requests are made 110 -> 100, 120 -> 110, 
-/// 120 -> 100.
-///
-///
-/// Notes:
-///
-/// 1. 1 <= ages.length <= 20000.
-/// 2. 1 <= ages[i] <= 120.
-/// </summary>
-int LeetCode::numFriendRequests(vector<int>& ages)
-{
-    int result = 0;
-    sort(ages.begin(), ages.end());
-
-    for (size_t i = 0; i < ages.size(); i++)
-    {
-        int young = (int)(ages[i] * 0.5 + 7);
-        if (young < ages[i])
-        {
-            vector<int>::iterator first = upper_bound(ages.begin(), ages.end(), young);
-            vector<int>::iterator second = upper_bound(ages.begin(), ages.end(), ages[i]);
-            result += second - first - 1;
-        }
-    }
-    return result;
-}
-
-/// <summary>
-/// Leet code #826. Most Profit Assigning Work
-/// 
-/// We have jobs: difficulty[i] is the difficulty of the ith job, and 
-/// profit[i] is the profit of the ith job. 
-///
-/// Now we have some workers. worker[i] is the ability of the ith worker, 
-/// which means that this worker can only complete a job with difficulty 
-/// at most worker[i]. 
-/// 
-/// Every worker can be assigned at most one job, but one job can be 
-/// completed multiple times.
-///
-/// For example, if 3 people attempt the same job that pays $1, then the 
-/// total profit will be $3.  If a worker cannot complete any job, his 
-/// profit is $0.
-///
-/// What is the most profit we can make?
-///
-/// Example 1:
-///
-/// Input: difficulty = [2,4,6,8,10], profit = [10,20,30,40,50], 
-/// worker = [4,5,6,7]
-/// Output: 100 
-/// Explanation: Workers are assigned jobs of difficulty [4,4,6,6] and 
-/// they get profit of [20,20,30,30] seperately.
-/// Notes:
-///
-/// 1. 1 <= difficulty.length = profit.length <= 10000
-/// 2. 1 <= worker.length <= 10000
-/// 3. difficulty[i], profit[i], worker[i]  are in range [1, 10^5]
-/// </summary>
-int LeetCode::maxProfitAssignment(vector<int>& difficulty, vector<int>& profit,
-    vector<int>& worker)
-{
-    map<int, int> tasks;
-    for (size_t i = 0; i < difficulty.size(); i++)
-    {
-        tasks[difficulty[i]] = max(tasks[difficulty[i]], profit[i]);
-    }
-    sort(worker.begin(), worker.end());
-    int result = 0;
-    auto itr = tasks.begin();
-    int max_profit = 0;
-    for (size_t i = 0; i < worker.size(); i++)
-    {
-        while ((itr != tasks.end()) && (itr->first <= worker[i]))
-        {
-            max_profit = std::max(max_profit, itr->second);
-            ++itr;
-        }
-        result += max_profit;
     }
     return result;
 }
@@ -4628,7 +4510,7 @@ int LeetCode::maxProfitAssignment(vector<int>& difficulty, vector<int>& profit,
 /// 1. 1 <= A.length = A[0].length <= 20
 /// 2. 0 <= A[i][j] <= 1
 /// </summary>
-vector<vector<int>> LeetCode::flipAndInvertImage(vector<vector<int>>& A)
+vector<vector<int>> LeetCodeArray::flipAndInvertImage(vector<vector<int>>& A)
 {
     vector<vector<int>> result = A;
     for (size_t i = 0; i < result.size(); i++)
@@ -4831,7 +4713,7 @@ string LeetCode::pushDominoes(string dominoes)
 /// 2. 1 <= grid[0].length <= 10
 /// 3. 0 <= grid[i][j] <= 15
 /// </summary>
-int LeetCode::numMagicSquaresInside(vector<vector<int>>& grid)
+int LeetCodeArray::numMagicSquaresInside(vector<vector<int>>& grid)
 {
     int result = 0;
 
@@ -4897,7 +4779,7 @@ int LeetCode::numMagicSquaresInside(vector<vector<int>>& grid)
 /// 1. 0 <= A.length <= 10000
 /// 2. 0 <= A[i] <= 10000
 /// </summary>
-int LeetCode::longestMountain(vector<int>& A)
+int LeetCodeArray::longestMountain(vector<int>& A)
 {
     int result = 0;
     deque<int> mountain;
@@ -5161,7 +5043,7 @@ int LeetCode::shortestSubarray(vector<int>& A, int K)
 /// 1. 1 <= A.length <= 1000
 /// 2. 1 <= A[0].length <= 1000
 /// </summary>
-vector<vector<int>> LeetCode::transpose(vector<vector<int>>& A)
+vector<vector<int>> LeetCodeArray::transpose(vector<vector<int>>& A)
 {
     vector<vector<int>> result(A[0].size(), vector<int>(A.size()));
     for (size_t i = 0; i < A[0].size(); i++)
@@ -5419,7 +5301,7 @@ bool LeetCode::circularArrayLoop(vector<int>& nums)
 /// 3. 0 <= r0 < R
 /// 4. 0 <= c0 < C
 /// </summary>
-vector<vector<int>> LeetCode::spiralMatrixIII(int R, int C, int r0, int c0)
+vector<vector<int>> LeetCodeArray::spiralMatrixIII(int R, int C, int r0, int c0)
 {
     vector<vector<int>> result;
     vector<vector<int>> directions = { {0, 1}, {1, 0}, {0, -1}, {-1, 0} };
@@ -5437,7 +5319,7 @@ vector<vector<int>> LeetCode::spiralMatrixIII(int R, int C, int r0, int c0)
             }
             row += directions[direction][0];
             col += directions[direction][1];
-        }		
+        }
         direction = (direction + 1) % 4;
         if (direction == 0 || direction == 2) step++;
     }
@@ -5488,7 +5370,7 @@ vector<vector<int>> LeetCode::spiralMatrixIII(int R, int C, int r0, int c0)
 ///    candy.
 /// 6. It is guaranteed there exists an answer.
 /// </summary>
-vector<int> LeetCode::fairCandySwap(vector<int>& A, vector<int>& B)
+vector<int> LeetCodeArray::fairCandySwap(vector<int>& A, vector<int>& B)
 {
     vector<int> result;
     unordered_set<int> A_set;
@@ -5617,7 +5499,7 @@ int LeetCode::surfaceArea(vector<vector<int>>& grid)
 /// 1. 1 <= A.length <= 50000
 /// 2. -100000 <= A[i] <= 100000
 /// </summary>
-bool LeetCode::isMonotonic(vector<int>& A)
+bool LeetCodeArray::isMonotonic(vector<int>& A)
 {
     int trend = 0;
     for (size_t i = 1; i < A.size(); i++)
@@ -5654,7 +5536,7 @@ bool LeetCode::isMonotonic(vector<int>& A)
 /// 1. 1 <= A.length <= 5000
 /// 2. 0 <= A[i] <= 5000
 /// </summary>
-vector<int> LeetCode::sortArrayByParity(vector<int>& A)
+vector<int> LeetCodeArray::sortArrayByParity(vector<int>& A)
 {
     vector<int> result(A.size());
     int first = 0;
@@ -5701,7 +5583,7 @@ vector<int> LeetCode::sortArrayByParity(vector<int>& A)
 /// 2. A.length % 2 == 0
 /// 3. 0 <= A[i] <= 1000
 /// </summary>
-vector<int> LeetCode::sortArrayByParityII(vector<int>& A)
+vector<int> LeetCodeArray::sortArrayByParityII(vector<int>& A)
 {
     size_t even = 0;
     size_t odd = 1;
@@ -10977,7 +10859,7 @@ int LeetCodeArray::maxScore(vector<int>& cardPoints, int k)
 /// 3. 1 <= nums[i][j] <= 10^9
 /// 4. There at most 10^5 elements in nums.
 /// </summary>
-vector<int> LeetCodeArray::findDiagonalOrder(vector<vector<int>>& nums)
+vector<int> LeetCodeArray::findDiagonalOrderII(vector<vector<int>>& nums)
 {
     vector<vector<int>> arr;
     for (size_t r = 0; r < nums.size(); r++)

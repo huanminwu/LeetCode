@@ -2946,8 +2946,39 @@ void TestLeetCode670(void)
     Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
 }
 
+void TestLeetCode825(void)
+{
+    Logger::WriteMessage("Test Leet Code 825");
+    LeetCodeMath leetCode;
+    vector<int> ages = { 16,16 };
+    int result = leetCode.numFriendRequests(ages);
+    Logger::WriteMessage(ages);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    ages = { 16,17,18 };
+    result = leetCode.numFriendRequests(ages);
+    Logger::WriteMessage(ages);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    ages = { 20,30,100,110,120 };
+    result = leetCode.numFriendRequests(ages);
+    Logger::WriteMessage(ages);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    ages = { 108, 115, 5, 24, 82 };
+    result = leetCode.numFriendRequests(ages);
+    Logger::WriteMessage(ages);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    ages = { 73, 106, 39, 6, 26, 15, 30, 100, 71, 35, 46, 112, 6, 60, 110 };
+    result = leetCode.numFriendRequests(ages);
+    Logger::WriteMessage(ages);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode825();
     TestLeetCode670();
     TestLeetCode1465();
     TestLeetCode1464();

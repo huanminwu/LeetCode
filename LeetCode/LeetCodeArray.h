@@ -718,6 +718,45 @@ public:
     int maxSumSubmatrix(vector<vector<int>>& matrix, int k);
 
     /// <summary>
+    /// Leet code #750. Number Of Corner Rectangles
+    ///
+    /// Given a grid where each entry is only 0 or 1, find the number of corner
+    /// rectangles.
+    /// A corner rectangle is 4 distinct 1s on the grid that form an 
+    /// axis-aligned rectangle. Note that only the corners need to have the 
+    /// value 1. Also, all four 1s used must be distinct.
+    ///
+    /// Example 1:
+    /// Input: grid = 
+    /// [[1, 0, 0, 1, 0],
+    ///  [0, 0, 1, 0, 1],
+    ///  [0, 0, 0, 1, 0],
+    ///  [1, 0, 1, 0, 1]]
+    /// Output: 1
+    /// Explanation: There is only one corner rectangle, with corners 
+    /// grid[1][2], grid[1][4], grid[3][2], grid[3][4].
+    /// Example 2:
+    /// Input: grid = 
+    /// [[1, 1, 1],
+    ///  [1, 1, 1],
+    /// [1, 1, 1]]
+    /// Output: 9
+    /// Explanation: There are four 2x2 rectangles, four 2x3 and 3x2 
+    /// rectangles, and one 3x3 rectangle.
+    /// Example 3:
+    /// Input: grid = 
+    /// [[1, 1, 1, 1]]
+    /// Output: 0
+    /// Explanation: Rectangles must have four distinct corners.
+    /// Note:
+    /// 1. The number of rows and columns of grid will each be in the range 
+    ///    [1, 200].
+    /// 2. Each grid[i][j] will be either 0 or 1.
+    /// 3. The number of 1s in the grid will be at most 6000.
+    /// </summary>
+    int countCornerRectangles(vector<vector<int>>& grid);
+
+    /// <summary>
     /// Leet code #1074. Number of Submatrices That Sum to Target
     /// 
     /// Given a matrix, and a target, return the number of non-empty submatrices 
@@ -1185,9 +1224,215 @@ public:
     /// 3. -10^4 <= arr[i] <= 10^4
     /// </summary>
     int kConcatenationMaxSum(vector<int>& arr, int k);
+
+    /// <summary>
+    /// Leet code #696. Count Binary Substrings
+    ///
+    /// Give a string s, count the number of non-empty (contiguous) substrings 
+    /// that have the same number of 0's and 1's, and all the 0's and all the 
+    /// 1's in these substrings are grouped consecutively.
+    ///
+    /// Substrings that occur multiple times are counted the number of times 
+    /// they occur.
+    ///
+    /// Example 1:
+    /// Input: "00110011"
+    /// Output: 6
+    /// Explanation: There are 6 substrings that have equal number of 
+    /// consecutive 1's and 0's: "0011", "01", "1100", "10", "0011", and "01".
+    ///
+    /// Notice that some of these substrings repeat and are counted the number 
+    /// of times they occur.
+    /// 
+    /// Also, "00110011" is not a valid substring because all the 0's 
+    /// (and 1's) are not grouped together.
+    /// Example 2:
+    /// Input: "10101"
+    /// Output: 4
+    /// Explanation: There are 4 substrings: "10", "01", "10", "01" that have 
+    /// equal number of consecutive 1's and 0's.
+    /// Note:
+    ///
+    /// s.length will be between 1 and 50,000.
+    /// s will only consist of "0" or "1" characters.
+    /// </summary>
+    int countBinarySubstrings(string s);
+
+    /// <summary>
+    /// Leet code #724. Find Pivot Index
+    ///
+    /// Given an array of integers nums, write a method that returns the 
+    /// "pivot" index of this array.
+    ///
+    /// We define the pivot index as the index where the sum of the numbers 
+    /// to the left of the index is equal to the sum of the numbers to the 
+    /// right of the index.
+    ///
+    /// If no such index exists, we should return -1. If there are multiple 
+    /// pivot indexes, you should return the left-most pivot index.
+    ///
+    /// Example 1:
+    /// Input: 
+    /// nums = [1, 7, 3, 6, 5, 6]
+    /// Output: 3
+    /// Explanation: 
+    /// The sum of the numbers to the left of index 3 (nums[3] = 6) is equal 
+    /// to the sum of numbers to the right of index 3.
+    /// Also, 3 is the first index where this occurs.
+    ///
+    /// Example 2:
+    /// Input: 
+    /// nums = [1, 2, 3]
+    /// Output: -1
+    /// Explanation: 
+    /// There is no index that satisfies the conditions in the problem 
+    /// statement.
+    /// Note:
+    ///
+    /// 1. The length of nums will be in the range [0, 10000].
+    /// 2. Each element nums[i] will be an integer in the range [-1000, 1000].
+    /// </summary>
+    int pivotIndex(vector<int>& nums);
 #pragma endregion
 
 #pragma region Array Traverse
+    /// <summary>
+    /// Leet code #48. Rotate Image
+    /// 
+    /// You are given an n x n 2D matrix representing an image.
+    ///
+    /// Rotate the image by 90 degrees (clockwise).
+    ///
+    /// Note:
+    ///
+    /// You have to rotate the image in-place, which means you have to 
+    /// modify the input 2D matrix directly. DO NOT allocate another 2D 
+    /// matrix and do the rotation.
+    ///
+    /// Example 1:
+    ///
+    /// Given input matrix = 
+    /// [
+    ///   [1,2,3],
+    ///  [4,5,6],
+    ///  [7,8,9]
+    /// ],
+    ///
+    /// rotate the input matrix in-place such that it becomes:
+    /// [
+    ///  [7,4,1],
+    ///  [8,5,2],
+    ///  [9,6,3]
+    /// ]
+    ///
+    /// Example 2:
+    ///
+    /// Given input matrix =
+    /// [
+    ///   [ 5, 1, 9,11],
+    ///   [ 2, 4, 8,10],
+    ///   [13, 3, 6, 7],
+    ///   [15,14,12,16]
+    /// ], 
+    ///
+    /// rotate the input matrix in-place such that it becomes:
+    /// [
+    ///   [15,13, 2, 5],
+    ///   [14, 3, 4, 1],
+    //    [12, 6, 8, 9],
+    ///   [16, 7,10,11]
+    /// ]
+    /// </summary>
+    void rotate(vector<vector<int>>& matrix);
+
+    /// <summary>
+    /// Leet code #54. Spiral Matrix
+    /// 
+    /// Given a matrix of m x n elements (m rows, n columns), return all elements 
+    /// of the matrix in spiral order.
+    ///
+    /// Example 1:
+    ///
+    /// Input:
+    /// [
+    ///  [ 1, 2, 3 ],
+    ///  [ 4, 5, 6 ],
+    ///  [ 7, 8, 9 ]
+    /// ]
+    /// Output: [1,2,3,6,9,8,7,4,5]
+    ///
+    /// Example 2:
+    ///
+    /// Input:
+    /// [
+    ///  [1, 2, 3, 4],
+    ///   [5, 6, 7, 8],
+    ///  [9,10,11,12]
+    /// ]
+    /// Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+    /// You are given an n x n 2D matrix representing an image.
+    /// </summary>
+    vector<int> spiralOrder(vector<vector<int>>& matrix);
+
+    /// <summary>
+    /// Leet code #59. Spiral Matrix II
+    /// 
+    /// Given a positive integer n, generate a square matrix filled with elements
+    /// from 1 to n2 in spiral order.
+    ///
+    /// Example:
+    ///
+    /// Input: 3
+    /// Output:
+    /// [
+    ///  [ 1, 2, 3 ],
+    ///  [ 8, 9, 4 ],
+    ///  [ 7, 6, 5 ]
+    /// ]
+    /// </summary>
+    vector<vector<int>> generateMatrix(int n);
+
+    /// <summary>
+    /// Leet code #885. Spiral Matrix III
+    /// 
+    /// On a 2 dimensional grid with R rows and C columns, we start at (r0, c0) 
+    /// facing east.
+    ///
+    /// Here, the north-west corner of the grid is at the first row and column, 
+    /// and the south-east corner of the grid is at the last row and column.
+    ///
+    /// Now, we walk in a clockwise spiral shape to visit every position in this 
+    /// grid. 
+    ///
+    /// Whenever we would move outside the boundary of the grid, we continue our 
+    /// walk outside the grid (but may return to the grid boundary later.) 
+    ///
+    /// Eventually, we reach all R * C spaces of the grid.
+    ///
+    /// Return a list of coordinates representing the positions of the grid in 
+    /// the order they were visited.
+    ///
+    /// Example 1:
+    ///
+    /// Input: R = 1, C = 4, r0 = 0, c0 = 0
+    /// Output: [[0,0],[0,1],[0,2],[0,3]]
+    ///
+    /// Example 2:
+    ///
+    /// Input: R = 5, C = 6, r0 = 1, c0 = 4
+    /// Output: 
+    /// [[1,4],[1,5],[2,5],[2,4],[2,3],[1,3],[0,3],[0,4],[0,5],[3,5],[3,4],[3,3],
+    ///  [3,2],[2,2],[1,2],[0,2],[4,5],[4,4],[4,3],[4,2],[4,1],[3,1],[2,1],[1,1],
+    ///  [0,1],[4,0],[3,0],[2,0],[1,0],[0,0]]
+    ///
+    /// Note:
+    /// 1. 1 <= R <= 100
+    /// 2. 1 <= C <= 100
+    /// 3. 0 <= r0 < R
+    /// 4. 0 <= c0 < C
+    /// </summary>
+    vector<vector<int>> spiralMatrixIII(int R, int C, int r0, int c0);
+
     /// <summary>
     /// Leet code #565. Array Nesting   
     /// 
@@ -1213,6 +1458,167 @@ public:
     /// Each element of array A is an integer within the range [0, N-1].
     /// </summary>
     int arrayNesting(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #766. Toeplitz Matrix
+    ///
+    /// A matrix is Toeplitz if every diagonal from top-left to bottom-right 
+    /// has the same element.
+    ///
+    /// Now given an M x N matrix, return True if and only if the matrix is 
+    /// Toeplitz.
+    ///
+    ///
+    /// Example 1:
+    ///
+    /// Input: matrix = [[1,2,3,4],[5,1,2,3],[9,5,1,2]]
+    /// Output: True
+    /// Explanation:
+    /// 1234
+    /// 5123
+    /// 9512
+    ///
+    /// In the above grid, the diagonals are "[9]", "[5, 5]", "[1, 1, 1]", 
+    /// "[2, 2, 2]", "[3, 3]", "[4]", and in each diagonal all elements are 
+    /// the same, so the answer is True.
+    ///
+    /// Example 2:
+    ///
+    /// Input: matrix = [[1,2],[2,2]]
+    /// Output: False
+    /// Explanation:
+    /// The diagonal "[1, 2]" has different elements.
+    /// Note:
+    ///
+    /// matrix will be a 2D array of integers.
+    /// matrix will have a number of rows and columns in range [1, 20].
+    /// matrix[i][j] will be integers in range [0, 99].
+    /// </summary>
+    bool isToeplitzMatrix(vector<vector<int>>& matrix);
+
+    /// <summary>
+    /// Leet code #867. Transpose Matrix
+    /// 
+    /// Given a matrix A, return the transpose of A.
+    ///
+    /// The transpose of a matrix is the matrix flipped over it's main 
+    /// diagonal, switching the row and column indices of the matrix.
+    ///
+    /// Example 1:
+    ///
+    /// Input: [[1,2,3],[4,5,6],[7,8,9]]
+    /// Output: [[1,4,7],[2,5,8],[3,6,9]]
+    ///
+    /// Example 2:
+    ///
+    /// Input: [[1,2,3],[4,5,6]]
+    /// Output: [[1,4],[2,5],[3,6]]
+    ///
+    /// Note:
+    ///
+    /// 1. 1 <= A.length <= 1000
+    /// 2. 1 <= A[0].length <= 1000
+    /// </summary>
+    vector<vector<int>> transpose(vector<vector<int>>& A);
+
+    /// <summary>
+    /// Leet code #888. Fair Candy Swap
+    /// 
+    /// Alice and Bob have candy bars of different sizes: A[i] is the size of the 
+    /// i-th bar of candy that Alice has, and B[j] is the size of the j-th bar of 
+    /// candy that Bob has.
+    ///
+    /// Since they are friends, they would like to exchange one candy bar each so 
+    /// that after the exchange, they both have the same total amount of candy.  
+    /// (The total amount of candy a person has is the sum of the sizes of candy 
+    /// bars they have.)
+    ///
+    /// Return an integer array ans where ans[0] is the size of the candy bar that 
+    /// Alice must exchange, and ans[1] is the size of the candy bar that Bob must 
+    /// exchange.
+    ///
+    /// If there are multiple answers, you may return any one of them.  It is 
+    /// guaranteed an answer exists.
+    ///
+    /// Example 1:
+    /// Input: A = [1,1], B = [2,2]
+    /// Output: [1,2]
+    ///
+    /// Example 2:
+    /// Input: A = [1,2], B = [2,3]
+    /// Output: [1,2]
+    ///
+    /// Example 3:
+    /// Input: A = [2], B = [1,3]
+    /// Output: [2,3]
+    ///
+    /// Example 4:
+    /// Input: A = [1,2,5], B = [2,4]
+    /// Output: [5,4]
+    /// 
+    /// Note:
+    /// 1. 1 <= A.length <= 10000
+    /// 2. 1 <= B.length <= 10000
+    /// 3. 1 <= A[i] <= 100000
+    /// 4. 1 <= B[i] <= 100000
+    /// 5. It is guaranteed that Alice and Bob have different total amounts of 
+    ///    candy.
+    /// 6. It is guaranteed there exists an answer.
+    /// </summary>
+    vector<int> fairCandySwap(vector<int>& A, vector<int>& B);
+
+    /// <summary>
+    /// Leet code #498. Diagonal Traverse  
+    /// 
+    /// Given a matrix of M x N elements (M rows, N columns), return all elements of the matrix 
+    /// in diagonal order as shown in the below image. 
+    ///
+    /// Example:
+    ///
+    /// Input:
+    /// [
+    ///   [ 1, 2, 3 ],
+    ///   [ 4, 5, 6 ],
+    ///   [ 7, 8, 9 ]
+    /// ]
+    /// Output:  [1,2,4,7,5,3,6,8,9]
+    /// Explanation:
+    /// Note:
+    /// 1.The total number of elements of the given matrix will not exceed 10,000.
+    /// </summary>
+    vector<int> findDiagonalOrder(vector<vector<int>>& matrix);
+
+    /// <summary>
+    /// Leet code #1424. Diagonal Traverse II
+    /// 
+    /// Medium
+    ///
+    /// Given a list of lists of integers, nums, return all elements of nums 
+    /// in diagonal order as shown in the below images.
+    /// 
+    /// Example 1:
+    /// Input: nums = [[1,2,3],[4,5,6],[7,8,9]]
+    /// Output: [1,4,2,7,5,3,8,6,9]
+    ///
+    /// Example 2:
+    /// Input: nums = [[1,2,3,4,5],[6,7],[8],[9,10,11],[12,13,14,15,16]]
+    /// Output: [1,6,2,8,7,3,9,4,12,10,5,13,11,14,15,16]
+    ///
+    /// Example 3:
+    /// Input: nums = [[1,2,3],[4],[5,6,7],[8],[9,10,11]]
+    /// Output: [1,4,2,5,3,8,6,9,7,10,11]
+    ///
+    /// Example 4:
+    /// Input: nums = [[1,2,3,4,5,6]]
+    /// Output: [1,2,3,4,5,6]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i].length <= 10^5
+    /// 3. 1 <= nums[i][j] <= 10^9
+    /// 4. There at most 10^5 elements in nums.
+    /// </summary>
+    vector<int> findDiagonalOrderII(vector<vector<int>>& nums);
 #pragma endregion
 
 #pragma region Array
@@ -1675,102 +2081,6 @@ public:
     /// Your algorithm should run in O(n) time and uses constant extra space.
     /// </summary>
     int firstMissingPositive(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #48. Rotate Image
-    /// 
-    /// You are given an n x n 2D matrix representing an image.
-    ///
-    /// Rotate the image by 90 degrees (clockwise).
-    ///
-    /// Note:
-    ///
-    /// You have to rotate the image in-place, which means you have to 
-    /// modify the input 2D matrix directly. DO NOT allocate another 2D 
-    /// matrix and do the rotation.
-    ///
-    /// Example 1:
-    ///
-    /// Given input matrix = 
-    /// [
-    ///   [1,2,3],
-    ///  [4,5,6],
-    ///  [7,8,9]
-    /// ],
-    ///
-    /// rotate the input matrix in-place such that it becomes:
-    /// [
-    ///  [7,4,1],
-    ///  [8,5,2],
-    ///  [9,6,3]
-    /// ]
-    ///
-    /// Example 2:
-    ///
-    /// Given input matrix =
-    /// [
-    ///   [ 5, 1, 9,11],
-    ///   [ 2, 4, 8,10],
-    ///   [13, 3, 6, 7],
-    ///   [15,14,12,16]
-    /// ], 
-    ///
-    /// rotate the input matrix in-place such that it becomes:
-    /// [
-    ///   [15,13, 2, 5],
-    ///   [14, 3, 4, 1],
-    //    [12, 6, 8, 9],
-    ///   [16, 7,10,11]
-    /// ]
-    /// </summary>
-    void rotate(vector<vector<int>>& matrix);
-
-    /// <summary>
-    /// Leet code #54. Spiral Matrix
-    /// 
-    /// Given a matrix of m x n elements (m rows, n columns), return all elements 
-    /// of the matrix in spiral order.
-    ///
-    /// Example 1:
-    ///
-    /// Input:
-    /// [
-    ///  [ 1, 2, 3 ],
-    ///  [ 4, 5, 6 ],
-    ///  [ 7, 8, 9 ]
-    /// ]
-    /// Output: [1,2,3,6,9,8,7,4,5]
-    ///
-    /// Example 2:
-    ///
-    /// Input:
-    /// [
-    ///  [1, 2, 3, 4],
-    ///   [5, 6, 7, 8],
-    ///  [9,10,11,12]
-    /// ]
-    /// Output: [1,2,3,4,8,12,11,10,9,5,6,7]
-    /// You are given an n x n 2D matrix representing an image.
-    /// </summary>
-    vector<int> spiralOrder(vector<vector<int>>& matrix);
-
-    /// <summary>
-    /// Leet code #59. Spiral Matrix II
-    /// 
-    /// Given a positive integer n, generate a square matrix filled with elements
-    /// from 1 to n2 in spiral order.
-    ///
-    /// Example:
-    ///
-    /// Input: 3
-    /// Output:
-    /// [
-    ///  [ 1, 2, 3 ],
-    ///  [ 8, 9, 4 ],
-    ///  [ 7, 6, 5 ]
-    /// ]
-    /// </summary>
-    vector<vector<int>> generateMatrix(int n);
 
     /// <summary>
     /// Leet code #287. Find the Duplicate Number
@@ -3149,7 +3459,6 @@ public:
     /// </summary>
     string alphabetBoardPath(string target);
 
-
     /// <summary>
     /// Leet code #1121. Divide Array Into Increasing Sequences
     /// 
@@ -3480,38 +3789,6 @@ public:
     /// 3. 1 <= k <= cardPoints.length
     /// </summary>
     int maxScore(vector<int>& cardPoints, int k);
-
-    /// <summary>
-    /// Leet code #1424. Diagonal Traverse II
-    /// 
-    /// Medium
-    ///
-    /// Given a list of lists of integers, nums, return all elements of nums 
-    /// in diagonal order as shown in the below images.
-    /// 
-    /// Example 1:
-    /// Input: nums = [[1,2,3],[4,5,6],[7,8,9]]
-    /// Output: [1,4,2,7,5,3,8,6,9]
-    ///
-    /// Example 2:
-    /// Input: nums = [[1,2,3,4,5],[6,7],[8],[9,10,11],[12,13,14,15,16]]
-    /// Output: [1,6,2,8,7,3,9,4,12,10,5,13,11,14,15,16]
-    ///
-    /// Example 3:
-    /// Input: nums = [[1,2,3],[4],[5,6,7],[8],[9,10,11]]
-    /// Output: [1,4,2,5,3,8,6,9,7,10,11]
-    ///
-    /// Example 4:
-    /// Input: nums = [[1,2,3,4,5,6]]
-    /// Output: [1,2,3,4,5,6]
-    /// 
-    /// Constraints:
-    /// 1. 1 <= nums.length <= 10^5
-    /// 2. 1 <= nums[i].length <= 10^5
-    /// 3. 1 <= nums[i][j] <= 10^9
-    /// 4. There at most 10^5 elements in nums.
-    /// </summary>
-    vector<int> findDiagonalOrder(vector<vector<int>>& nums);
 
     /// <summary>
     /// Leet code #1431. Kids With the Greatest Number of Candies
@@ -4217,6 +4494,62 @@ public:
     int calPoints(vector<string>& ops);
 
     /// <summary>
+    /// Leet code #649. Dota2 Senate
+    /// 
+    /// In the world of Dota2, there are two parties: the Radiant and the Dire. 
+    /// The Dota2 senate consists of senators coming from two parties. Now the 
+    /// senate wants to make a decision about a change in the Dota2 game. The 
+    /// voting for this change is a round-based procedure. In each round, each 
+    /// senator can exercise one of the two rights: 
+    /// 1. Ban one senator's right: 
+    ///    A senator can make another senator lose all his rights in this and 
+    ///    all the following rounds.
+    /// 2. Announce the victory: 
+    ///    If this senator found the senators who still have rights to vote are 
+    ///    all from the same party, he can announce the victory and make the 
+    ///    decision about the change in the game.
+    ///
+    /// Given a string representing each senator's party belonging. The 
+    /// character 'R' and 'D' represent the Radiant party and the Dire party 
+    /// respectively. Then if there are n senators, the size of the given 
+    /// string will be n. 
+    /// The round-based procedure starts from the first senator to the last 
+    /// senator in the given order. This procedure will last until the end of 
+    /// voting. All the senators who have lost their rights will be skipped 
+    /// during the procedure. 
+    /// Suppose every senator is smart enough and will play the best strategy 
+    /// for his own party, you need to predict which party will finally 
+    /// announce the victory and make the change in the Dota2 game. The output 
+    /// should be Radiant or Dire. 
+    /// Example 1:
+    /// Input: "RD"
+    /// Output: "Radiant"
+    /// Explanation: The first senator comes from Radiant and he can just ban 
+    /// the next senator's right in the round 1. 
+    /// And the second senator can't exercise any rights any more since his 
+    /// right has been banned. 
+    /// And in the round 2, the first senator can just announce the victory 
+    /// since he is the only guy in the senate who can vote.
+    ///
+    /// Example 2:
+    /// Input: "RDD"
+    /// Output: "Dire"
+    /// Explanation: 
+    /// The first senator comes from Radiant and he can just ban the next 
+    /// senator's right in the round 1. 
+    /// And the second senator can't exercise any rights anymore since his 
+    /// right has been banned. 
+    /// And the third senator comes from Dire and he can ban the first 
+    /// senator's right in the round 1. 
+    /// And in the round 2, the third senator can just announce the victory 
+    /// since he is the only guy in the senate who can vote.
+    ///
+    /// Note:
+    /// The length of the given string will in the range [1, 10,000].
+    /// </summary>
+    string predictPartyVictory(string senate);
+
+    /// <summary>
     /// Leet code #659. Split Array into Consecutive Subsequences 
     /// 
     /// You are given an integer array sorted in ascending order (may contain 
@@ -4248,6 +4581,36 @@ public:
     /// 1. The length of the input is in range of [1, 10000]
     /// </summary>
     bool isPossible(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #697. Degree of an Array
+    ///
+    /// Given a non-empty array of non-negative integers nums, the degree of 
+    /// this array is defined as the maximum frequency of any one of its 
+    /// elements.
+    /// 
+    /// Your task is to find the smallest possible length of a (contiguous) 
+    /// subarray of nums, that has the same degree as nums.
+    ///
+    /// Example 1:
+    /// Input: [1, 2, 2, 3, 1]
+    /// Output: 2
+    /// Explanation: 
+    /// The input array has a degree of 2 because both elements 1 and 2 appear 
+    /// twice.
+    /// Of the subarrays that have the same degree:
+    /// [1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]
+    /// The shortest length is 2. So return 2.
+    ///
+    /// Example 2:
+    /// Input: [1,2,2,3,1,4,2]
+    /// Output: 6
+    /// Note:
+    /// 
+    /// nums.length will be between 1 and 50,000.
+    /// nums[i] will be an integer between 0 and 49,999.
+    /// </summary>
+    int findShortestSubArray(vector<int>& nums);
 
     /// <summary>
     /// Leet code #723. Candy Crush
@@ -4378,6 +4741,210 @@ public:
     int dominantIndex(vector<int>& nums);
 
     /// <summary>
+    /// Leet code #807. Max Increase to Keep City Skyline
+    /// 
+    /// In a 2 dimensional array grid, each value grid[i][j] represents the 
+    /// height of a building located there. We are allowed to increase the 
+    /// height of any number of buildings, by any amount (the amounts can be 
+    /// different for different buildings). Height 0 is considered to be a 
+    /// building as well. 
+    ///
+    /// At the end, the "skyline" when viewed from all four directions of the 
+    /// grid, i.e. top, bottom, left, and right, must be the same as the 
+    /// skyline of the original grid. A city's skyline is the outer contour 
+    /// of the rectangles formed by all the buildings when viewed from a 
+    /// distance. See the following example.
+    ///
+    /// What is the maximum total sum that the height of the buildings can be 
+    /// increased?
+    /// 
+    /// Example:
+    /// Input: grid = [[3,0,8,4],[2,4,5,7],[9,2,6,3],[0,3,1,0]]
+    /// Output: 35
+    /// Explanation: 
+    /// The grid is:
+    /// [ 
+    ///   [3, 0, 8, 4], 
+    ///   [2, 4, 5, 7],
+    ///   [9, 2, 6, 3],
+    ///   [0, 3, 1, 0] 
+    /// ]
+    ///
+    /// The skyline viewed from top or bottom is: [9, 4, 8, 7]
+    /// The skyline viewed from left or right is: [8, 7, 9, 3]
+    ///
+    /// The grid after increasing the height of buildings without affecting 
+    /// skylines is:
+    /// gridNew = 
+    /// [ 
+    ///   [8, 4, 8, 7],
+    ///   [7, 4, 7, 7],
+    ///   [9, 4, 8, 7],
+    ///   [3, 3, 3, 3] 
+    /// ]
+    ///
+    /// Notes:
+    ///
+    /// 1. 1 < grid.length = grid[0].length <= 50.
+    /// 2. All heights grid[i][j] are in the range [0, 100].
+    /// 3. All buildings in grid[i][j] occupy the entire grid cell: that is, they 
+    ///   are a 1 x 1 x grid[i][j] rectangular prism.
+    /// </summary>
+    int maxIncreaseKeepingSkyline(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet code #821. Shortest Distance to a Character
+    /// 
+    /// Given a string S and a character C, return an array of integers   
+    /// representing the shortest distance from the character C in the string.
+    ///
+    /// Example 1: 
+    /// 1. Input: S = "loveleetcode", C = 'e'
+    /// 2. Output: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0] 
+    /// 3. All letters in S and C are lowercase.
+    /// </summary>
+    vector<int> shortestToChar(string S, char C);
+
+    /// <summary>
+    /// Leet code #822. Card Flipping Game
+    /// 
+    /// On a table are N cards, with a positive integer printed on the front 
+    /// and back of each card (possibly different).
+    ///
+    /// We flip any number of cards, and after we choose one card. 
+    ///
+    /// If the number X on the back of the chosen card is not on the front of 
+    /// any card, then this number X is good.
+    ///
+    /// What is the smallest number that is good?  If no number is good, 
+    /// output 0.
+    ///
+    /// Here, fronts[i] and backs[i] represent the number on the front and 
+    /// back of card i. 
+    ///
+    /// A flip swaps the front and back numbers, so the value on the front is 
+    /// now on the back and vice versa.
+    ///
+    /// Example:
+    ///
+    /// Input: fronts = [1,2,4,4,7], backs = [1,3,4,1,3]
+    /// Output: 2
+    /// Explanation: If we flip the second card, the fronts are [1,3,4,4,7] 
+    /// and the backs are [1,2,4,1,3].
+    /// We choose the second card, which has number 2 on the back, and it 
+    /// isn't on the front of any card, so 2 is good.
+    ///
+    /// Note:
+    /// 1.1 <= fronts.length == backs.length <= 1000.
+    /// 2.1 <= fronts[i] <= 2000.
+    /// 3.1 <= backs[i] <= 2000.
+    /// </summary>
+    int flipgame(vector<int>& fronts, vector<int>& backs);
+
+    /// <summary>
+    /// Leet code #832. Flipping an Image
+    /// 
+    /// Given a binary matrix A, we want to flip the image horizontally, then 
+    /// invert it, and return the resulting image.
+    ///
+    /// To flip an image horizontally means that each row of the image is 
+    /// reversed.  For example, flipping [1, 1, 0] horizontally results in 
+    /// [0, 1, 1].
+    ///
+    /// To invert an image means that each 0 is replaced by 1, and each 1 is 
+    /// replaced by 0. For example, inverting [0, 1, 1] results in [1, 0, 0].
+    ///
+    /// Example 1:
+    ///
+    /// Input: [[1,1,0],[1,0,1],[0,0,0]]
+    /// Output: [[1,0,0],[0,1,0],[1,1,1]]
+    /// Explanation: First reverse each row: [[0,1,1],[1,0,1],[0,0,0]].
+    /// Then, invert the image: [[1,0,0],[0,1,0],[1,1,1]]
+    ///
+    /// Example 2:
+    ///
+    /// Input: [[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]
+    /// Output: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
+    /// Explanation: First reverse each row: [[0,0,1,1],[1,0,0,1],[1,1,1,0],
+    /// [0,1,0,1]].
+    /// Then invert the image: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
+    /// Notes:
+    /// 1. 1 <= A.length = A[0].length <= 20
+    /// 2. 0 <= A[i][j] <= 1
+    /// </summary>
+    vector<vector<int>> flipAndInvertImage(vector<vector<int>>& A);
+
+    /// <summary>
+    /// Leet code #840. Magic Squares In Grid
+    /// 
+    /// A 3 x 3 magic square is a 3 x 3 grid filled with distinct numbers 
+    /// from 1 to 9 such that each row, column, and both diagonals all have 
+    /// the same sum.
+    ///
+    /// Given an grid of integers, how many 3 x 3 "magic square" subgrids are 
+    /// there?  (Each subgrid is contiguous).
+    ///
+    /// Example 1:
+    ///
+    /// Input: [
+    ///         [4,3,8,4],
+    ///         [9,5,1,9],
+    ///         [2,7,6,2]
+    ///        ]
+    /// Output: 1
+    /// Explanation: 
+    /// The following subgrid is a 3 x 3 magic square:
+    /// 438
+    /// 951
+    /// 276
+    ///
+    /// while this one is not:
+    /// 384
+    /// 519
+    /// 762
+    ///
+    /// In total, there is only one magic square inside the given grid.
+    /// Note:
+    ///
+    /// 1. 1 <= grid.length <= 10
+    /// 2. 1 <= grid[0].length <= 10
+    /// 3. 0 <= grid[i][j] <= 15
+    /// </summary>
+    int numMagicSquaresInside(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet code #845. Longest Mountain in Array
+    /// 
+    /// Let's call any (contiguous) subarray B (of A) a mountain if the 
+    /// following properties hold:
+    ///
+    /// B.length >= 3
+    /// There exists some 0 < i < B.length - 1 such that B[0] < B[1] < ... 
+    /// B[i-1] < B[i] > B[i+1] > ... > B[B.length - 1]
+    /// (Note that B could be any subarray of A, including the entire array A.)
+    ///
+    /// Given an array A of integers, return the length of the longest 
+    /// mountain.
+    ///  
+    /// Return 0 if there is no mountain.
+    /// 
+    /// Example 1:
+    /// Input: [2,1,4,7,3,2,5]
+    /// Output: 5
+    /// Explanation: The largest mountain is [1,4,7,3,2] which has length 5.
+    /// 
+    /// Example 2:
+    /// Input: [2,2,2]
+    /// Output: 0
+    /// Explanation: There is no mountain.
+    ///
+    /// Note:
+    /// 1. 0 <= A.length <= 10000
+    /// 2. 0 <= A[i] <= 10000
+    /// </summary>
+    int longestMountain(vector<int>& A);
+
+    /// <summary>
     /// Leet code #860. Lemonade Change
     /// 
     /// At a lemonade stand, each lemonade costs $5. 
@@ -4471,6 +5038,90 @@ public:
     /// 5. The answer is guaranteed to be less than 2 ^ 31.
     /// </summary>
     int robotSim(vector<int>& commands, vector<vector<int>>& obstacles);
+
+    /// <summary>
+    /// Leet code #896. Monotonic Array 
+    /// 
+    /// An array is monotonic if it is either monotone increasing or monotone 
+    /// decreasing.
+    ///
+    /// An array A is monotone increasing if for all i <= j, A[i] <= A[j].  
+    /// An array A is monotone decreasing if for all i <= j, A[i] >= A[j].
+    ///
+    /// Return true if and only if the given array A is monotonic.
+    ///
+    /// Example 1:
+    /// Input: [1,2,2,3]
+    /// Output: true
+    ///
+    /// Example 2:
+    /// Input: [6,5,4,4]
+    /// Output: true
+    ///
+    /// Example 3:
+    /// Input: [1,3,2]
+    /// Output: false
+    ///
+    /// Example 4:
+    /// Input: [1,2,4,5]
+    /// Output: true
+    ///
+    /// Example 5:
+    /// Input: [1,1,1]
+    /// Output: true
+    /// Note:
+    /// 1. 1 <= A.length <= 50000
+    /// 2. -100000 <= A[i] <= 100000
+    /// </summary>
+    bool isMonotonic(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #905. Sort Array By Parity
+    /// 
+    /// Given an array A of non-negative integers, return an array 
+    /// consisting of all the even elements of A, followed by all 
+    /// the odd elements of A.
+    ///
+    /// You may return any answer array that satisfies this condition.
+    ///
+    /// Example 1:
+    /// Input: [3,1,2,4]
+    /// Output: [2,4,3,1]
+    /// The outputs [4,2,3,1], [2,4,1,3], and [4,2,1,3] would also be accepted.
+    /// 
+    /// Note:
+    /// 1. 1 <= A.length <= 5000
+    /// 2. 0 <= A[i] <= 5000
+    /// </summary>
+    vector<int> sortArrayByParity(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #922. Sort Array By Parity II
+    /// 
+    /// Given an array A of non-negative integers, half of the integers in A are 
+    /// odd, and half of the integers are even.
+    ///
+    /// Sort the array so that whenever A[i] is odd, i is odd; and whenever A[i] 
+    /// is even, i is even.
+    ///
+    /// You may return any answer array that satisfies this condition.
+    ///
+    /// 
+    /// Example 1:
+    ///
+    /// Input: [4,2,5,7]
+    /// Output: [4,5,2,7]
+    /// Explanation: [4,7,2,5], [2,5,4,7], [2,7,4,5] would also have been 
+    /// accepted.
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. 2 <= A.length <= 20000
+    /// 2. A.length % 2 == 0
+    /// 3. 0 <= A[i] <= 1000
+    /// </summary>
+    vector<int> sortArrayByParityII(vector<int>& A);
 
     /// <summary>
     /// Leet code #1470. Shuffle the Array

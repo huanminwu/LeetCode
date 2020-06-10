@@ -2797,8 +2797,338 @@ void TestLeetCode874(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode697(void)
+{
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 2, 3, 1 };
+    int result = leetCode.findShortestSubArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,2,3,1,4,2 };
+    result = leetCode.findShortestSubArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode649(void)
+{
+    LeetCodeArray leetCode;
+    string senate = "RDRDDD";
+    string result = leetCode.predictPartyVictory(senate);
+    Logger::WriteMessage("senate = " + senate + "; result = " + result);
+
+    senate = "RD";
+    result = leetCode.predictPartyVictory(senate);
+    Logger::WriteMessage("senate = " + senate + "; result = " + result);
+
+    senate = "RDD";
+    result = leetCode.predictPartyVictory(senate);
+    Logger::WriteMessage("senate = " + senate + "; result = " + result);
+}
+
+void TestLeetCode750(void)
+{
+    Logger::WriteMessage("Test Leet Code 750");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grids =
+    {
+        { 1, 0, 0, 1, 0 },
+        { 0, 0, 1, 0, 1 },
+        { 0, 0, 0, 1, 0 },
+        { 1, 0, 1, 0, 1 }
+    };
+
+    int result = leetCode.countCornerRectangles(grids);
+    Logger::WriteMessage(grids);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grids =
+    {
+        { 1, 1, 1 },
+        { 1, 1, 1 },
+        { 1, 1, 1 }
+    };
+
+    result = leetCode.countCornerRectangles(grids);
+    Logger::WriteMessage(grids);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grids =
+    {
+        { 1, 1, 1, 1 }
+    };
+
+    result = leetCode.countCornerRectangles(grids);
+    Logger::WriteMessage(grids);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode696(void)
+{
+    LeetCodeArray leetCode;
+    string s = "00110011";
+    int result = leetCode.countBinarySubstrings(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "10101";
+    result = leetCode.countBinarySubstrings(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode724(void)
+{
+    LeetCodeArray leetCode;
+
+    vector<int> nums = { 1, 7, 3, 6, 5, 6 };
+    int result = leetCode.pivotIndex(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 2, 3 };
+    result = leetCode.pivotIndex(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode498(void)
+{
+    Logger::WriteMessage("Test Leet Code 498");
+    LeetCodeArray leetCode;
+    vector<vector<int>> matrix =
+    {
+        { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }
+    };
+    vector<int> result = leetCode.findDiagonalOrder(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage(result);
+}
+
+
+void TestLeetCode807(void)
+{
+    Logger::WriteMessage("Test Leet Code 807");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {3, 0, 8, 4},{2, 4, 5, 7},{9, 2, 6, 3},{0, 3, 1, 0} };
+    int result = leetCode.maxIncreaseKeepingSkyline(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode822(void)
+{
+    Logger::WriteMessage("Test Leet Code 822");
+    LeetCodeArray leetCode;
+    vector<int> fronts = { 1,2,4,4,7 };
+    vector<int> backs = { 1,3,4,1,3 };
+    int result = leetCode.flipgame(fronts, backs);
+    Logger::WriteMessage(fronts);
+    Logger::WriteMessage(backs);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode821(void)
+{
+    Logger::WriteMessage("Test Leet Code 821");
+    LeetCodeArray leetCode;
+    string S = "loveleetcode";
+    char C = 'e';
+    vector<int> result = leetCode.shortestToChar(S, C);
+    string c_str;
+    Logger::WriteMessage("S = " + S + "; C = " + string(1, C));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode832(void)
+{
+    Logger::WriteMessage("Test Leet Code 832");
+    LeetCodeArray leetCode;
+    vector<vector<int>> A = { {1, 1, 0 },{ 1, 0, 1 },{ 0, 0, 0 } };
+    vector<vector<int>> result = leetCode.flipAndInvertImage(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(result);
+
+    A = { {1,1,0,0},{1,0,0,1},{0,1,1,1},{1,0,1,0} };
+    result = leetCode.flipAndInvertImage(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode840(void)
+{
+    Logger::WriteMessage("Test Leet Code 840");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {4,3,8,4}, {9,5,1,9}, { 2,7,6,2 } };
+    int result = leetCode.numMagicSquaresInside(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode845(void)
+{
+    Logger::WriteMessage("Test Leet Code 845");
+    LeetCodeArray leetCode;
+    vector<int> A = { 2,1,4,7,3,2,5 };
+    int result = leetCode.longestMountain(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { 2,2,2 };
+    result = leetCode.longestMountain(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode896(void)
+{
+    Logger::WriteMessage("Test Leet Code 896");
+    LeetCodeArray leetCode;
+    vector<int> A = { 1, 2, 2, 3 };
+    bool result = leetCode.isMonotonic(A);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    A = { 6, 5, 4, 4 };
+    result = leetCode.isMonotonic(A);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    A = { 1, 3, 2 };
+    result = leetCode.isMonotonic(A);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    A = { 1, 2, 4, 5 };
+    result = leetCode.isMonotonic(A);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    A = { 1, 1, 1 };
+    result = leetCode.isMonotonic(A);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode766(void)
+{
+    Logger::WriteMessage("Test Leet Code 766");
+    LeetCodeArray leetCode;
+    vector<vector<int>> matrix = { {1, 2, 3, 4},{5, 1, 2, 3},{9, 5, 1, 2} };
+    Logger::WriteMessage(matrix);
+    bool result = leetCode.isToeplitzMatrix(matrix);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    matrix = { { 1,2 },{ 2,2 } };
+    Logger::WriteMessage(matrix);
+    result = leetCode.isToeplitzMatrix(matrix);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode867(void)
+{
+    Logger::WriteMessage("Test Leet Code 867");
+    LeetCodeArray leetCode;
+    vector<vector<int>> A = { {1,2,3},{4,5,6}, {7,8,9} };
+    vector<vector<int>> result = leetCode.transpose(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(result);
+
+    A = { { 1,2,3 },{ 4,5,6 } };
+    result = leetCode.transpose(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode888(void)
+{
+    Logger::WriteMessage("Test Leet Code 888");
+    LeetCodeArray leetCode;
+    vector<int> A = { 1, 1 };
+    vector<int> B = { 2, 2 };
+    vector<int> result = leetCode.fairCandySwap(A, B);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(B);
+    Logger::WriteMessage(result);
+
+    A = { 1, 2 };
+    B = { 2, 3 };
+    result = leetCode.fairCandySwap(A, B);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(B);
+    Logger::WriteMessage(result);
+
+    A = { 2 };
+    B = { 1, 3 };
+    result = leetCode.fairCandySwap(A, B);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(B);
+    Logger::WriteMessage(result);
+
+    A = { 1, 2, 5 };
+    B = { 2, 4 };
+    result = leetCode.fairCandySwap(A, B);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(B);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode885(void)
+{
+    Logger::WriteMessage("Test Leet Code 885");
+    LeetCodeArray leetCode;
+    int R = 1;
+    int C = 4;
+    int r0 = 0;
+    int c0 = 0;
+    vector<vector<int>> result = leetCode.spiralMatrixIII(R, C, r0, c0);
+    Logger::WriteMessage("R = " + to_string(R) + "; C = " + to_string(C) + "; r0 = " + to_string(r0) + "; c0 = " + to_string(c0));
+    Logger::WriteMessage(result);
+
+    R = 5;
+    C = 6;
+    r0 = 1;
+    c0 = 4;
+    result = leetCode.spiralMatrixIII(R, C, r0, c0);
+    Logger::WriteMessage("R = " + to_string(R) + "; C = " + to_string(C) + "; r0 = " + to_string(r0) + "; c0 = " + to_string(c0));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode905(void)
+{
+    Logger::WriteMessage("Test Leet Code 905");
+    LeetCodeArray leetCode;
+    vector<int> A = { 3, 1, 2, 4 };
+    vector<int> result = leetCode.sortArrayByParity(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode922(void)
+{
+    Logger::WriteMessage("Test Leet Code 922");
+    LeetCodeArray leetCode;
+    vector<int> A = { 4,2,5,7 };
+    vector<int> result = leetCode.sortArrayByParityII(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode922();
+    TestLeetCode905();
+    TestLeetCode885();
+    TestLeetCode888();
+    TestLeetCode867();
+    TestLeetCode766();
+    TestLeetCode896();
+    TestLeetCode845();
+    TestLeetCode840();
+    TestLeetCode832();
+    TestLeetCode807();
+    TestLeetCode821();
+    TestLeetCode822();
+    TestLeetCode498();
+    TestLeetCode724();
+    TestLeetCode696();
+    TestLeetCode750();
+    TestLeetCode649();
+    TestLeetCode697();
     TestLeetCode874();
     TestLeetCode659();
     TestLeetCode717();
