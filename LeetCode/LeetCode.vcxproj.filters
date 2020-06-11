@@ -75,7 +75,7 @@
     <ClInclude Include="LeetCodeThread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Usco.h">
+    <ClInclude Include="USACO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -123,6 +123,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LeetCodeDFS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="USACO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

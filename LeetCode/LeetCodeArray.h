@@ -573,6 +573,41 @@ public:
     int partitionDisjoint(vector<int>& A);
 
     /// <summary>
+    /// Leet code #926. Flip String to Monotone Increasing 
+    /// 
+    /// A string of '0's and '1's is monotone increasing if it consists of some 
+    /// number of '0's (possibly 0), followed by some number of '1's (also 
+    /// possibly 0.)
+    ///
+    /// We are given a string S of '0's and '1's, and we may flip any '0' to a '1' 
+    /// or a '1' to a '0'.
+    ///
+    /// Return the minimum number of flips to make S monotone increasing.
+    ///
+    /// 
+    /// Example 1:
+    /// Input: "00110"
+    /// Output: 1
+    /// Explanation: We flip the last digit to get 00111.
+    ///
+    /// Example 2:
+    /// Input: "010110"
+    /// Output: 2
+    /// Explanation: We flip to get 011111, or alternatively 000111.
+    ///
+    /// Example 3:
+    /// Input: "00011000"
+    /// Output: 2
+    /// Explanation: We flip to get 00000000.
+    /// 
+    /// Note:
+    ///
+    /// 1. 1 <= S.length <= 20000
+    /// 2. S only consists of '0' and '1' characters.
+    /// </summary>
+    int minFlipsMonoIncr(string S);
+
+    /// <summary>
     /// Leet code #1100. Find K-Length Substrings With No Repeated Characters
     /// 
     /// Given a string S, return the number of substrings of length K with no 
@@ -791,6 +826,40 @@ public:
     /// 4. -10^8 <= target <= 10^8
     /// </summary>
     int numSubmatrixSumTarget(vector<vector<int>>& matrix, int target);
+
+    /// <summary>
+    /// Leet code #927. Three Equal Parts
+    /// 
+    /// Given an array A of 0s and 1s, divide the array into 3 non-empty parts 
+    /// such that all of these parts represent the same binary value.
+    ///
+    /// If it is possible, return any [i, j] with i+1 < j, such that:
+    ///
+    /// A[0], A[1], ..., A[i] is the first part;
+    /// A[i+1], A[i+2], ..., A[j-1] is the second part, and
+    /// A[j], A[j+1], ..., A[A.length - 1] is the third part.
+    /// All three parts have equal binary value.
+    /// If it is not possible, return [-1, -1].
+    ///
+    /// Note that the entire part is used when considering what binary value it 
+    /// represents.  For example, [1,1,0] represents 6 in decimal, not 3.  Also, 
+    /// leading zeros are allowed, so [0,1,1] and [1,1] represent the same value.
+    ///
+    /// Example 1:
+    /// Input: [1,0,1,0,1]
+    /// Output: [0,3]
+    ///
+    /// Example 2:
+    /// Input: [1,1,0,1,1]
+    /// Output: [-1,-1]
+    ///
+    /// Note:
+    /// 
+    /// 1. 3 <= A.length <= 30000
+    /// 2. A[i] == 0 or A[i] == 1
+    /// </summary>
+    vector<int> threeEqualParts(vector<int>& A);
+
 #pragma endregion
 
 #pragma region Count Subarray
@@ -932,6 +1001,55 @@ public:
     ///    you start.
     /// </summary>
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost);
+
+    /// <summary>
+    /// Leet code #918. Maximum Sum Circular Subarray
+    /// 
+    /// Given a circular array C of integers represented by A, find the maximum 
+    /// possible sum of a non-empty subarray of C.
+    ///
+    /// Here, a circular array means the end of the array connects to the 
+    /// beginning of the array.  (Formally, C[i] = A[i] when 0 <= i < A.length, 
+    /// and C[i+A.length] = C[i] when i >= 0.)
+    ///
+    /// Also, a subarray may only include each element of the fixed buffer A at 
+    /// most once.  (Formally, for a subarray C[i], C[i+1], ..., C[j], there does 
+    /// not exist i <= k1, k2 <= j with k1 % A.length = k2 % A.length.)
+    ///
+    ///
+    /// Example 1:
+    /// Input: [1,-2,3,-2]
+    /// Output: 3
+    /// Explanation: Subarray [3] has maximum sum 3
+    ///
+    /// Example 2:
+    /// Input: [5,-3,5]
+    /// Output: 10
+    /// Explanation: Subarray [5,5] has maximum sum 5 + 5 = 10
+    ///
+    /// Example 3:
+    /// Input: [3,-1,2,-1]
+    /// Output: 4
+    /// Explanation: Subarray [2,-1,3] has maximum sum 2 + (-1) + 3 = 4
+    ///
+    /// Example 4:
+    /// Input: [3,-2,2,-3]
+    /// Output: 3
+    /// Explanation: Subarray [3] and [3,-2,2] both have maximum sum 3
+    ///
+    /// Example 5:
+    /// Input: [-2,-3,-1]
+    /// Output: -1
+    /// Explanation: Subarray [-1] has maximum sum -1
+    ///  
+    ///
+    /// Note:
+    ///
+    /// 1. -30000 <= A[i] <= 30000
+    /// 2. 1 <= A.length <= 30000
+    /// 
+    /// </summary>
+    int maxSubarraySumCircular(vector<int>& A);
 
     /// <summary>
     /// Leet code #152. Maximum Product Subarray
@@ -1293,6 +1411,8 @@ public:
     /// 2. Each element nums[i] will be an integer in the range [-1000, 1000].
     /// </summary>
     int pivotIndex(vector<int>& nums);
+
+
 #pragma endregion
 
 #pragma region Array Traverse
@@ -5122,6 +5242,69 @@ public:
     /// 3. 0 <= A[i] <= 1000
     /// </summary>
     vector<int> sortArrayByParityII(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #944. Delete Columns to Make Sorted
+    /// 
+    /// We are given an array A of N lowercase letter strings, all of the same 
+    /// length.
+    ///
+    /// Now, we may choose any set of deletion indices, and for each string, we 
+    /// delete all the characters in those indices.
+    ///
+    /// For example, if we have a string "abcdef" and deletion indices {0, 2, 3}, 
+    /// then the final string after deletion is "bef".
+    ///
+    /// Suppose we chose a set of deletion indices D such that after deletions, 
+    /// each remaining column in A is in non-decreasing sorted order.
+    ///
+    /// Formally, the c-th column is [A[0][c], A[1][c], ..., A[A.length-1][c]]
+    ///
+    /// Return the minimum possible value of D.length.
+    ///
+    /// 
+    /// Example 1:
+    /// Input: ["cba","daf","ghi"]
+    /// Output: 1
+    ///
+    /// Example 2:
+    /// Input: ["a","b"]
+    /// Output: 0
+    ///
+    /// Example 3:
+    /// Input: ["zyx","wvu","tsr"]
+    /// Output: 3
+    /// Note:
+    /// 1. 1 <= A.length <= 100
+    /// 2. 1 <= A[i].length <= 1000
+    /// </summary>
+    int minDeletionSize(vector<string>& A);
+
+    /// <summary>
+    /// Leet code #945. Minimum Increment to Make Array Unique
+    /// 
+    /// Given an array of integers A, a move consists of choosing any A[i], 
+    /// and incrementing it by 1.
+    ///
+    /// Return the least number of moves to make every value in A unique.
+    ///
+    /// Example 1:
+    /// Input: [1,2,2]
+    /// Output: 1
+    /// Explanation:  After 1 move, the array could be [1, 2, 3].
+    ///
+    /// Example 2:
+    /// Input: [3,2,1,2,1,7]
+    /// Output: 6
+    /// Explanation:  After 6 moves, the array could be [3, 4, 1, 2, 5, 7].
+    /// It can be shown with 5 or less moves that it is impossible for the 
+    /// array to have all unique values.
+    /// 
+    /// Note:
+    /// 1. 0 <= A.length <= 40000
+    /// 2. 0 <= A[i] < 40000
+    /// </summary>
+    int minIncrementForUnique(vector<int>& A);
 
     /// <summary>
     /// Leet code #1470. Shuffle the Array

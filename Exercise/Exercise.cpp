@@ -21,7 +21,7 @@
 #include "..\LeetCode\LeetCodeBinarySearch.h"
 #include "..\LeetCode\LeetCodeBit.h"
 #include "..\LeetCode\LeetCodeThread.h"
-#include "..\LeetCode\Usco.h"
+#include "..\LeetCode\USACO.h"
 #include "TestMath.h"
 #include "TestDP.h"
 #include "TestHashtable.h"
@@ -38,6 +38,7 @@
 #include "TestString.h"
 #include "TestBinarySearch.h"
 #include "TestBit.h"
+#include "TestUSACO.h"
 
 void TestLeetCode121(void)
 {
@@ -4076,15 +4077,6 @@ void TestLeetCode837(void)
     Logger::WriteMessage("N = " + to_string(N) + "; K = " + to_string(K) + "; W = " + to_string(W) + "; result = " + to_string(result));
 }
 
-void TestLeetCode843(void)
-{
-    Logger::WriteMessage("Test Leet Code 843");
-    LeetCode leetCode;
-    Master master("acckzz");
-    vector<string> wordlist = { "acckzz", "ccbazz", "eiowzz", "abcczz" };
-    string result = leetCode.findSecretWord(wordlist, master);
-    Logger::WriteMessage("result = " + result);
-}
 
 
 
@@ -4809,36 +4801,6 @@ void TestLeetCode916(void)
 
 
 
-void TestLeetCode918(void)
-{
-    Logger::WriteMessage("Test Leet Code 918");
-    LeetCode leetCode;
-
-    vector<int> A = { 1,-2,3,-2 };
-    int result = leetCode.maxSubarraySumCircular(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    A = { 5,-3,5 };
-    result = leetCode.maxSubarraySumCircular(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    A = { 3,-1,2,-1 };
-    result = leetCode.maxSubarraySumCircular(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    A = { 3,-2,2,-3 };
-    result = leetCode.maxSubarraySumCircular(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    A = { -2,-3,-1 };
-    result = leetCode.maxSubarraySumCircular(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("result = " + to_string(result));
-}
 
 void TestLeetCode925(void)
 {
@@ -4863,49 +4825,6 @@ void TestLeetCode925(void)
     typed = "laiden";
     result = leetCode.isLongPressedName(name, typed);
     Logger::WriteMessage("name = " + name + "; typed = " + typed + "; result = " + (string)(result ? "true" : "false"));
-}
-
-void TestLeetCode926(void)
-{
-    Logger::WriteMessage("Test Leet Code 926");
-    LeetCode leetCode;
-    string S = "00110";
-    int result = leetCode.minFlipsMonoIncr(S);
-    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
-
-    S = "010110";
-    result = leetCode.minFlipsMonoIncr(S);
-    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
-
-    S = "00011000";
-    result = leetCode.minFlipsMonoIncr(S);
-    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
-}
-
-
-void TestLeetCode927(void)
-{
-    Logger::WriteMessage("Test Leet Code 927");
-    LeetCode leetCode;
-    vector<int> A = { 0, 1, 0, 1, 1 };
-    vector<int> result = leetCode.threeEqualParts(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage(result);
-
-    A = { 1, 0, 1, 0, 1 };
-    result = leetCode.threeEqualParts(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage(result);
-
-    A = { 1,1,0,1,1 };
-    result = leetCode.threeEqualParts(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage(result);
-
-    A = { 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0 };
-    result = leetCode.threeEqualParts(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage(result);
 }
 
 void TestLeetCode929(void)
@@ -4955,25 +4874,6 @@ void TestLeetCode9904(void)
     Logger::WriteMessage(result);
 }
 
-
-void TestLeetCode936(void)
-{
-    Logger::WriteMessage("Test Leet Code 936");
-    LeetCode leetCode;
-    string stamp = "abc";
-    string target = "ababc";
-    
-    vector<int> result = leetCode.movesToStamp(stamp, target);
-    Logger::WriteMessage("stamp = " + stamp + "; target = " + target);
-    Logger::WriteMessage(result);
-
-    stamp = "abca";
-    target = "aabcaca";
-    result = leetCode.movesToStamp(stamp, target);
-    Logger::WriteMessage("stamp = " + stamp + "; target = " + target);
-    Logger::WriteMessage(result);
-}
-
 void TestLeetCode935(void)
 {
     Logger::WriteMessage("Test Leet Code 935");
@@ -5002,23 +4902,6 @@ void TestLeetCode937(void)
     vector<string> result = leetCode.reorderLogFiles(logs);
     Logger::WriteMessage(logs);
     Logger::WriteMessage(result);
-}
-
-
-
-void TestLeetCode939(void)
-{
-    Logger::WriteMessage("Test Leet Code 939");
-    LeetCode leetCode;
-    vector<vector<int>> points = { {1, 1},{1, 3},{3, 1},{3, 3},{2, 2} };
-    int result = leetCode.minAreaRect(points);
-    Logger::WriteMessage(points);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    points = { { 1, 1 },{ 1, 3 },{ 3, 1 },{ 3, 3 },{4,1},{4,3} };
-    result = leetCode.minAreaRect(points);
-    Logger::WriteMessage(points);
-    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCode940(void)
@@ -5062,26 +4945,6 @@ void TestLeetCode941(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
-void TestLeetCode944(void)
-{
-    Logger::WriteMessage("Test Leet Code 944");
-    LeetCode leetCode;
-    vector<string> A = { "cba","daf","ghi" };
-    int result = leetCode.minDeletionSize(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    A = { "a","b" };
-    result = leetCode.minDeletionSize(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    A = { "zyx","wvu","tsr" };
-    result = leetCode.minDeletionSize(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
 void TestLeetCode942(void)
 {
     Logger::WriteMessage("Test Leet Code 942");
@@ -5100,22 +4963,6 @@ void TestLeetCode942(void)
     result = leetCode.diStringMatch(S);
     Logger::WriteMessage("S = " + S);
     Logger::WriteMessage(result);
-}
-
-
-void TestLeetCode945(void)
-{
-    Logger::WriteMessage("Test Leet Code 945");
-    LeetCode leetCode;
-    vector<int> A = { 1,2,2 };
-    int result = leetCode.minIncrementForUnique(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    A = { 3,2,1,2,1,7 };
-    result = leetCode.minIncrementForUnique(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCode948(void)
@@ -6723,7 +6570,6 @@ void TestLeetCode1182(void)
     Logger::WriteMessage(result);
 }
 
-
 void TestLeetCode1199(void)
 {
     Logger::WriteMessage("Test Leet Code 1199");
@@ -6749,11 +6595,11 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeArray();
+    TestUSACO();
     TestLeetCodeDP();
     TestLeetCodeDesign();
-    TestLeetCodeArray();
     TestLeetCodeTree();
-    Truth::process();
     TestLeetCodeGraph();
     TestLeetCodeMath();
     TestLeetCodeBit();
@@ -6879,22 +6725,15 @@ void main(int argc, char* argv[])
     TestLeetCode953();
     TestLeetCode950();
     TestLeetCode948();
-    TestLeetCode945();
-    TestLeetCode944();
     TestLeetCode942();
     TestLeetCode941();
     TestLeetCode940();
-    TestLeetCode939();
     TestLeetCode937();
     TestLeetCode935();
-    TestLeetCode936();
     TestLeetCode933();
     TestLeetCode9904();
     TestLeetCode931();
     TestLeetCode929();
-    TestLeetCode918();
-    TestLeetCode927();
-    TestLeetCode926();
     TestLeetCode925();
     TestLeetCode923();
     TestLeetCode916();
@@ -6937,7 +6776,6 @@ void main(int argc, char* argv[])
     TestLeetCode844();
     TestLeetCode842();
     TestLeetCode841();
-    TestLeetCode843();
     TestLeetCode837();
     TestLeetCode838();
     TestLeetCode834();

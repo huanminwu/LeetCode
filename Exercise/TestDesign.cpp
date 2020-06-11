@@ -2817,8 +2817,19 @@ void TestLeetCode1472(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode843(void)
+{
+    Logger::WriteMessage("Test Leet Code 843");
+    LeetCode leetCode;
+    Master master("acckzz");
+    vector<string> wordlist = { "acckzz", "ccbazz", "eiowzz", "abcczz" };
+    string result = master.findSecretWord(wordlist, master);
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode843();
     TestLeetCode1472();
     TestLeetCode1166();
     TestLeetCode1157();

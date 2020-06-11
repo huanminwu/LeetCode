@@ -1929,8 +1929,28 @@ void TestLeetCode816(void)
     Logger::WriteMessage(result);
 }
 
+
+void TestLeetCode936(void)
+{
+    Logger::WriteMessage("Test Leet Code 936");
+    LeetCodeString leetCode;
+    string stamp = "abc";
+    string target = "ababc";
+
+    vector<int> result = leetCode.movesToStamp(stamp, target);
+    Logger::WriteMessage("stamp = " + stamp + "; target = " + target);
+    Logger::WriteMessage(result);
+
+    stamp = "abca";
+    target = "aabcaca";
+    result = leetCode.movesToStamp(stamp, target);
+    Logger::WriteMessage("stamp = " + stamp + "; target = " + target);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode936();
     TestLeetCode816();
     TestLeetCode418();
     TestLeetCode471();

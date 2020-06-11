@@ -3108,8 +3108,122 @@ void TestLeetCode922(void)
     Logger::WriteMessage(result);
 }
 
+
+void TestLeetCode927(void)
+{
+    Logger::WriteMessage("Test Leet Code 927");
+    LeetCodeArray leetCode;
+    vector<int> A = { 0, 1, 0, 1, 1 };
+    vector<int> result = leetCode.threeEqualParts(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(result);
+
+    A = { 1, 0, 1, 0, 1 };
+    result = leetCode.threeEqualParts(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(result);
+
+    A = { 1,1,0,1,1 };
+    result = leetCode.threeEqualParts(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(result);
+
+    A = { 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0 };
+    result = leetCode.threeEqualParts(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode918(void)
+{
+    Logger::WriteMessage("Test Leet Code 918");
+    LeetCodeArray leetCode;
+
+    vector<int> A = { 1,-2,3,-2 };
+    int result = leetCode.maxSubarraySumCircular(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { 5,-3,5 };
+    result = leetCode.maxSubarraySumCircular(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { 3,-1,2,-1 };
+    result = leetCode.maxSubarraySumCircular(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { 3,-2,2,-3 };
+    result = leetCode.maxSubarraySumCircular(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { -2,-3,-1 };
+    result = leetCode.maxSubarraySumCircular(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode926(void)
+{
+    Logger::WriteMessage("Test Leet Code 926");
+    LeetCodeArray leetCode;
+    string S = "00110";
+    int result = leetCode.minFlipsMonoIncr(S);
+    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
+
+    S = "010110";
+    result = leetCode.minFlipsMonoIncr(S);
+    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
+
+    S = "00011000";
+    result = leetCode.minFlipsMonoIncr(S);
+    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
+}
+
+void TestLeetCode944(void)
+{
+    Logger::WriteMessage("Test Leet Code 944");
+    LeetCodeArray leetCode;
+    vector<string> A = { "cba","daf","ghi" };
+    int result = leetCode.minDeletionSize(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { "a","b" };
+    result = leetCode.minDeletionSize(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { "zyx","wvu","tsr" };
+    result = leetCode.minDeletionSize(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode945(void)
+{
+    Logger::WriteMessage("Test Leet Code 945");
+    LeetCodeArray leetCode;
+    vector<int> A = { 1,2,2 };
+    int result = leetCode.minIncrementForUnique(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { 3,2,1,2,1,7 };
+    result = leetCode.minIncrementForUnique(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode945();
+    TestLeetCode944();
+    TestLeetCode926();
+    TestLeetCode918();
+    TestLeetCode927();
     TestLeetCode922();
     TestLeetCode905();
     TestLeetCode885();

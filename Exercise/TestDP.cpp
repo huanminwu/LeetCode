@@ -1602,7 +1602,7 @@ void TestLeetCode1473(void)
     Logger::WriteMessage(houses);
     Logger::WriteMessage(cost);
     Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) +
-        "target = " + to_string(target) + "; result = " + to_string(result));
+        "; target = " + to_string(target) + "; result = " + to_string(result));
 
     houses = { 0,0,0,0,0 };
     cost = { {1, 10},{10, 1},{1, 10},{10, 1},{1, 10} };
@@ -1613,7 +1613,7 @@ void TestLeetCode1473(void)
     Logger::WriteMessage(houses);
     Logger::WriteMessage(cost);
     Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) +
-        "target = " + to_string(target) + "; result = " + to_string(result));
+        "; target = " + to_string(target) + "; result = " + to_string(result));
 
     houses = { 3,1,2,3 };
     cost = { {1, 1, 1},{1, 1, 1},{1, 1, 1},{1, 1, 1} };
@@ -1624,7 +1624,7 @@ void TestLeetCode1473(void)
     Logger::WriteMessage(houses);
     Logger::WriteMessage(cost);
     Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) +
-        "target = " + to_string(target) + "; result = " + to_string(result));
+        "; target = " + to_string(target) + "; result = " + to_string(result));
 }
 
 void TestLeetCodeDP(void)

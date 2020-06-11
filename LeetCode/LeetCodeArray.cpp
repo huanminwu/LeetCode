@@ -5647,41 +5647,23 @@ vector<int> LeetCodeArray::sortArrayByParityII(vector<int>& A)
 /// 2. 1 <= A.length <= 30000
 /// 
 /// </summary>
-int LeetCode::maxSubarraySumCircular(vector<int>& A)
+int LeetCodeArray::maxSubarraySumCircular(vector<int>& A)
 {
-    vector<int> dp(A.size());
-    vector<int> right(A.size());
     int sum = 0;
-    // calculate sum from index i to end;
-    for (int i = A.size() - 1; i >= 0; i--)
-    {
-        right[i] = sum + A[i];
-        sum += A[i];
-    }
-    sum = 0;
+    int min_left = 0;
     int max_left = 0;
-    int result = 0;
+    int max_sum = INT_MIN;
+    int min_sum = INT_MAX;
     for (size_t i = 0; i < A.size(); i++)
     {
-        if (i == 0)
-        {
-            dp[i] = A[i];
-            sum += A[i];
-            max_left = A[i];
-            result = A[i];
-        }
-        else
-        {
-            // calculate max sum on subarry end with i;
-            dp[i] = max(A[i], dp[i - 1] + A[i]);
-            result = max(result, dp[i]);
-            // calculate max circular sum starting from i;
-            result = max(result, max_left + right[i]);
-            // calculate sum from index 0
-            sum += A[i];
-            max_left = max(max_left, sum);
-        }
+        sum += A[i];
+        max_sum = max(max_sum, sum - min_left);
+        min_sum = min(min_sum, sum - max_left);
+        min_left = min(min_left, sum);
+        max_left = max(max_left, sum);
     }
+    int result = max_sum;
+    if (sum != min_sum) result = max(result, sum-min_sum);
     return result;
 }
 
@@ -5718,59 +5700,44 @@ int LeetCode::maxSubarraySumCircular(vector<int>& A)
 /// 1. 1 <= S.length <= 20000
 /// 2. S only consists of '0' and '1' characters.
 /// </summary>
-int LeetCode::minFlipsMonoIncr(string S)
+int LeetCodeArray::minFlipsMonoIncr(string S)
 {
-    vector<pair<char, int>> chars;
     int zero = 0;
     int one = 0;
-    int result = 0;
     for (size_t i = 0; i < S.size(); i++)
     {
-        if (i == 0)
-        {
-            chars.push_back({ S[i], 1 });
-        }
-        else if (S[i] == chars.back().first)
-        {
-            chars.back().second++;
-        }
-        else
-        {
-            chars.push_back({ S[i], 1 });
-        }
         if (S[i] == '0') zero++;
         else one++;
     }
-
     int first = 0;
-    int last = chars.size() - 1;
+    int last = S.size() - 1;
+    int result = 0;
     while (first < last)
     {
-        if (chars[first].first == '0')
+        if (S[first] == '0')
         {
-            zero -= chars[first].second;
+            zero--;
             first++;
         }
-        else if (chars[last].first == '1')
+        else if (S[last] == '1')
         {
-            one -= chars[last].second;
+            one--;
             last--;
         }
         else
         {
+            result++;
             if (zero < one)
             {
-                result += chars[last].second;
-                zero -= chars[last].second;
+                zero--;
                 last--;
             }
             else
             {
-                result += chars[first].second;
-                one -= chars[first].second;
+                one--;
                 first++;
             }
-        }
+        };
     }
     return result;
 }
@@ -5806,7 +5773,7 @@ int LeetCode::minFlipsMonoIncr(string S)
 /// 1. 3 <= A.length <= 30000
 /// 2. A[i] == 0 or A[i] == 1
 /// </summary>
-vector<int> LeetCode::threeEqualParts(vector<int>& A)
+vector<int> LeetCodeArray::threeEqualParts(vector<int>& A)
 {
     vector<int> ones;
     for (size_t i = 0; i < A.size(); i++)
@@ -5877,162 +5844,6 @@ vector<int> LeetCode::threeEqualParts(vector<int>& A)
 }
 
 /// <summary>
-/// Leet code #936. Stamping The Sequence
-/// </summary>
-vector<int> LeetCode::searchStamp(string &stamp, string& target, int &reduce)
-{
-    vector<int> result;
-    size_t pos = 0;
-    while (pos + stamp.size() <= target.size())
-    {
-        bool bMatch = true;
-        int temp = reduce;
-        for (size_t i = pos; i < pos + stamp.size(); i++)
-        {
-            if (target[i] != '?') reduce++;
-            if (target[i] != stamp[i - pos] && target[i] != '?')
-            {
-                bMatch = false;
-                break;
-            }
-        }
-        if (temp != reduce && bMatch)
-        {
-            for (size_t i = pos; i < pos + stamp.size(); i++) target[i] = '?';
-            result.push_back(pos);
-            pos += stamp.size();
-        }
-        else
-        {
-            reduce = temp;
-            pos++;
-        }
-    }
-    return result;
-}
-
-/// <summary>
-/// Leet code #936. Stamping The Sequence
-/// 
-/// You want to form a target string of lowercase letters.
-///
-/// At the beginning, your sequence is target.length '?' marks.  You also 
-/// have a stamp of lowercase letters.
-///
-/// On each turn, you may place the stamp over the sequence, and replace 
-/// every letter in the sequence with the corresponding letter from the stamp.
-/// You can make up to 10 * target.length turns.
-///
-/// For example, if the initial sequence is "?????", and your stamp is "abc",  
-/// then you may make "abc??", "?abc?", "??abc" in the first turn.  (Note that 
-/// the stamp must be fully contained in the boundaries of the sequence in 
-/// order to stamp.)
-///
-/// If the sequence is possible to stamp, then return an array of the index of 
-/// the left-most letter being stamped at each turn.  If the sequence is not 
-/// possible to stamp, return an empty array.
-///
-/// For example, if the sequence is "ababc", and the stamp is "abc", then we 
-/// could return the answer [0, 2], corresponding to the moves "?????" -> 
-/// "abc??" -> "ababc".
-///
-/// Also, if the sequence is possible to stamp, it is guaranteed it is possible
-/// to stamp within 10 * target.length moves.  Any answers specifying more than
-/// this number of moves will not be accepted.
-///
-/// Example 1:
-/// Input: stamp = "abc", target = "ababc"
-/// Output: [0,2]
-/// ([1,0,2] would also be accepted as an answer, as well as some other 
-///  answers.)
-///
-/// Example 2:
-/// 
-/// Input: stamp = "abca", target = "aabcaca"
-/// Output: [3,0,1]
-/// 
-///
-/// Note:
-/// 1. 1 <= stamp.length <= target.length <= 1000
-/// 2. stamp and target only contain lowercase letters.
-/// </summary>
-vector<int> LeetCode::movesToStamp(string stamp, string target)
-{
-    vector<int> result;
-    int reduce = 0;
-    while (reduce < (int)target.size())
-    {
-        vector<int> temp = searchStamp(stamp, target, reduce);
-        if (temp.empty()) return temp;
-        for (int i = (int)temp.size() - 1; i >= 0; i--)
-        {
-            result.push_back(temp[i]);
-        }
-    }
-
-    std::reverse(result.begin(), result.end());
-    return result;
-}
-
-/// <summary>
-/// Leet code #939. Minimum Area Rectangle
-/// 
-/// Given a set of points in the xy-plane, determine the minimum area of a 
-/// rectangle formed from these points, with sides parallel to the x and y 
-/// axes.
-///
-/// If there isn't any rectangle, return 0.
-/// 
-/// Example 1:
-///
-/// Input: [[1,1],[1,3],[3,1],[3,3],[2,2]]
-/// Output: 4
-///
-/// Example 2:
-/// 
-/// Input: [[1,1],[1,3],[3,1],[3,3],[4,1],[4,3]]
-/// Output: 2
-///  
-/// Note:
-///
-/// 1. 1 <= points.length <= 500
-/// 2. 0 <= points[i][0] <= 40000
-/// 3. 0 <= points[i][1] <= 40000
-/// 4. All points are distinct.
-/// </summary>
-int LeetCode::minAreaRect(vector<vector<int>>& points)
-{
-    unordered_map<int, set<int>> coord_map;
-    int result = INT_MAX;
-
-    for (size_t i = 0; i < points.size(); i++)
-    {
-        coord_map[points[i][0]].insert(points[i][1]);
-    }
-
-    for (auto i = coord_map.begin(); i != coord_map.end(); i++)
-    {
-        auto j = i;
-        j++;
-        for (; j != coord_map.end(); j++)
-        {
-            int x_dist = abs(j->first - i->first);
-            size_t size = min(i->second.size(), j->second.size());
-            vector<int> y(size);
-            auto itr = set_intersection(i->second.begin(), i->second.end(), j->second.begin(), j->second.end(), y.begin());
-            y.resize(itr - y.begin());
-            for (size_t k = 1; k < y.size(); k++)
-            {
-                int area = (y[k] - y[k - 1]) * x_dist;
-                result = min(result, area);
-            }
-        }
-    }
-
-    return (result == INT_MAX) ? 0 : result;
-}
-
-/// <summary>
 /// Leet code #944. Delete Columns to Make Sorted
 /// 
 /// We are given an array A of N lowercase letter strings, all of the same 
@@ -6067,7 +5878,7 @@ int LeetCode::minAreaRect(vector<vector<int>>& points)
 /// 1. 1 <= A.length <= 100
 /// 2. 1 <= A[i].length <= 1000
 /// </summary>
-int LeetCode::minDeletionSize(vector<string>& A)
+int LeetCodeArray::minDeletionSize(vector<string>& A)
 {
     int result = 0;
     for (size_t i = 0; i < A[0].size(); i++)
@@ -6108,7 +5919,7 @@ int LeetCode::minDeletionSize(vector<string>& A)
 /// 1. 0 <= A.length <= 40000
 /// 2. 0 <= A[i] < 40000
 /// </summary>
-int LeetCode::minIncrementForUnique(vector<int>& A)
+int LeetCodeArray::minIncrementForUnique(vector<int>& A)
 {
     map<int, int> num_count;	
     for (auto x : A) num_count[x]++;

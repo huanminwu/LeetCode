@@ -2976,6 +2976,21 @@ void TestLeetCode825(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode939(void)
+{
+    Logger::WriteMessage("Test Leet Code 939");
+    LeetCodeMath leetCode;
+    vector<vector<int>> points = { {1, 1},{1, 3},{3, 1},{3, 3},{2, 2} };
+    int result = leetCode.minAreaRect(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { { 1, 1 },{ 1, 3 },{ 3, 1 },{ 3, 3 },{4,1},{4,3} };
+    result = leetCode.minAreaRect(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
     TestLeetCode825();
