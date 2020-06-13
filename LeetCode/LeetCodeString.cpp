@@ -10884,4 +10884,85 @@ vector<int> LeetCodeString::movesToStamp(string stamp, string target)
     return result;
 }
 
+/// <summary>
+/// Leet code #678. Valid Parenthesis String
+/// 
+/// Given a string containing only three types of characters: '(', ')' 
+/// and '*', write a function to check whether this string is valid. 
+/// We define the validity of a string by these rules:
+/// Any left parenthesis '(' must have a corresponding right 
+/// parenthesis ')'.
+/// Any right parenthesis ')' must have a corresponding left 
+/// parenthesis '('.
+/// Left parenthesis '(' must go before the corresponding right 
+/// parenthesis ')'.
+/// '*' could be treated as a single right parenthesis ')' or a single 
+/// left parenthesis '(' or an empty string.
+/// An empty string is also valid.
+/// Example 1:
+/// Input: "()"
+/// Output: True
+/// Example 2:
+/// Input: "(*)"
+/// Output: True
+/// Example 3:
+/// Input: "(*))"
+/// Output: True
+/// Note:
+/// The string size will be in the range [1, 100].
+/// </summary>
+bool LeetCodeString::checkValidString(string s)
+{
+    // scan left to right
+    int parenthesis_count = 0;
+    int star_count = 0;
+    for (int i = 0; i < (int)s.size(); i++)
+    {
+        if (s[i] == '*')
+        {
+            star_count++;
+        }
+        else if (s[i] == '(')
+        {
+            parenthesis_count++;
+        }
+        else
+        {
+            parenthesis_count--;
+            if (parenthesis_count < 0 && star_count > 0)
+            {
+                parenthesis_count++;
+                star_count--;
+            }
+        }
+        if (parenthesis_count < 0) return false;
+    }
+
+    // scan right to left
+    parenthesis_count = 0;
+    star_count = 0;
+    for (int i = (int)s.size() - 1; i >= 0; i--)
+    {
+        if (s[i] == '*')
+        {
+            star_count++;
+        }
+        else if (s[i] == ')')
+        {
+            parenthesis_count++;
+        }
+        else
+        {
+            parenthesis_count--;
+            if (parenthesis_count < 0 && star_count > 0)
+            {
+                parenthesis_count++;
+                star_count--;
+            }
+        }
+        if (parenthesis_count < 0) return false;
+    }
+    return true;
+}
+
 #pragma endregion

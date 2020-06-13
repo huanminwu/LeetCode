@@ -2572,8 +2572,44 @@ void TestLeetCode1466(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode997(void)
+{
+    Logger::WriteMessage("Test Leet Code 997");
+    LeetCodeGraph leetCode;
+    int N = 2;
+    vector<vector<int>> trust = { {1, 2} };
+    int result = leetCode.findJudge(N, trust);
+    Logger::WriteMessage(trust);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 3;
+    trust = { {1, 3},{2, 3} };
+    result = leetCode.findJudge(N, trust);
+    Logger::WriteMessage(trust);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 3;
+    trust = { {1, 3},{2, 3},{3, 1} };
+    result = leetCode.findJudge(N, trust);
+    Logger::WriteMessage(trust);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 3;
+    trust = { {1, 2},{2, 3} };
+    result = leetCode.findJudge(N, trust);
+    Logger::WriteMessage(trust);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 4;
+    trust = { {1, 3}, { 1, 4 }, { 2, 3 }, { 2, 4 }, { 4, 3 } };
+    result = leetCode.findJudge(N, trust);
+    Logger::WriteMessage(trust);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode997();
     TestLeetCode1466();
     TestLeetCode1462();
     TestLeetCode305();

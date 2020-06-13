@@ -3492,86 +3492,36 @@ vector<int> LeetCodeArray::constructArray(int n, int k)
     return result;
 }
 
-
 /// <summary>
-/// Leet code #678. Valid Parenthesis String
+/// Leet code #238. Product of Array Except Self    
+/// Given an array of n integers where n > 1, nums, return an array output such 
+/// that output[i] is equal to the product of all the elements of nums except 
+/// nums[i]. 
+///
+/// Solve it without division and in O(n). 
+/// For example, given [1,2,3,4], return [24,12,8,6]. 
 /// 
-/// Given a string containing only three types of characters: '(', ')' 
-/// and '*', write a function to check whether this string is valid. 
-/// We define the validity of a string by these rules:
-/// Any left parenthesis '(' must have a corresponding right 
-/// parenthesis ')'.
-/// Any right parenthesis ')' must have a corresponding left 
-/// parenthesis '('.
-/// Left parenthesis '(' must go before the corresponding right 
-/// parenthesis ')'.
-/// '*' could be treated as a single right parenthesis ')' or a single 
-/// left parenthesis '(' or an empty string.
-/// An empty string is also valid.
-/// Example 1:
-/// Input: "()"
-/// Output: True
-/// Example 2:
-/// Input: "(*)"
-/// Output: True
-/// Example 3:
-/// Input: "(*))"
-/// Output: True
-/// Note:
-/// The string size will be in the range [1, 100].
+/// Follow up:
+/// Could you solve it with constant space complexity? 
+/// (Note: The output array does not count as extra space for the purpose of 
+/// space complexity analysis.)
 /// </summary>
-bool LeetCode::checkValidString(string s)
+vector<int> LeetCodeArray::productExceptSelf(vector<int>& nums)
 {
-    // scan left to right
-    int parenthesis_count = 0;
-    int star_count = 0;
-    for (int i = 0; i < (int)s.size(); i++)
+    vector<int> result(nums.size());
+    int product = 1;
+    for (size_t i = 0; i < nums.size(); i++)
     {
-        if (s[i] == '*')
-        {
-            star_count++;
-        }
-        else if (s[i] == '(')
-        {
-            parenthesis_count++;
-        }
-        else
-        {
-            parenthesis_count--;
-            if (parenthesis_count < 0 && star_count > 0)
-            {
-                parenthesis_count++;
-                star_count--;
-            }
-        }
-        if (parenthesis_count < 0) return false;
+        result[i] = product;
+        product = product * nums[i];
     }
-
-    // scan right to left
-    parenthesis_count = 0;
-    star_count = 0;
-    for (int i = (int)s.size() - 1; i >= 0; i--)
+    product = 1;
+    for (int i = nums.size() - 1; i >= 0; i--)
     {
-        if (s[i] == '*')
-        {
-            star_count++;
-        }
-        else if (s[i] == ')')
-        {
-            parenthesis_count++;
-        }
-        else
-        {
-            parenthesis_count--;
-            if (parenthesis_count < 0 && star_count > 0)
-            {
-                parenthesis_count++;
-                star_count--;
-            }
-        }
-        if (parenthesis_count < 0) return false;
+        result[i] = result[i] * product;
+        product *= nums[i];
     }
-    return true;
+    return result;
 }
 
 /// <summary>
@@ -4277,7 +4227,7 @@ bool LeetCodeArray::isToeplitzMatrix(vector<vector<int>>& matrix)
 /// 1. N will be an integer in the range [1, 30].
 /// 2. K will be an integer in the range [1, 2^(N-1)].
 /// </summary>
-int LeetCode::kthGrammar(int N, int K)
+int LeetCodeArray::kthGrammar(int N, int K)
 {
     int length = (int)pow(2, N - 1);
     int index = K - 1;
@@ -4563,7 +4513,7 @@ vector<vector<int>> LeetCodeArray::flipAndInvertImage(vector<vector<int>>& A)
 /// 1. 1 <= A.length = A[0].length = B.length = B[0].length <= 30
 /// 2. 0 <= A[i][j], B[i][j] <= 1
 /// </summary>
-int LeetCode::largestOverlap(vector<vector<int>>& A, vector<vector<int>>& B)
+int LeetCodeArray::largestOverlap(vector<vector<int>>& A, vector<vector<int>>& B)
 {
     int size = A.size();
     int result = 0;
@@ -4630,7 +4580,7 @@ int LeetCode::largestOverlap(vector<vector<int>>& A, vector<vector<int>>& B)
 /// 1. 0 <= N <= 10^5
 /// 2. String dominoes contains only 'L', 'R' and '.'
 /// </summary>
-string LeetCode::pushDominoes(string dominoes)
+string LeetCodeArray::pushDominoes(string dominoes)
 {
     queue<int> process_queue;
     for (size_t i = 0; i < dominoes.size(); i++)
@@ -4845,7 +4795,7 @@ int LeetCodeArray::longestMountain(vector<int>& A)
 /// 1. 1 <= seats.length <= 20000
 /// 2. seats contains only 0s or 1s, at least one 0, and at least one 1.
 /// </summary>
-int LeetCode::maxDistToClosest(vector<int>& seats)
+int LeetCodeArray::maxDistToClosest(vector<int>& seats)
 {
     int result = 0;
     int last = 0;
@@ -4976,7 +4926,7 @@ bool LeetCodeArray::lemonadeChange(vector<int>& bills)
 /// 2. -10 ^ 5 <= A[i] <= 10 ^ 5
 /// 3. 1 <= K <= 10 ^ 9
 /// </summary>
-int LeetCode::shortestSubarray(vector<int>& A, int K)
+int LeetCodeArray::shortestSubarray(vector<int>& A, int K)
 {
     int result = 0;
     vector<int> sums(A.size() + 1);
@@ -5184,7 +5134,7 @@ int LeetCodeArray::robotSim(vector<int>& commands, vector<vector<int>>& obstacle
 /// 1. 1 <= grid.length = grid[0].length <= 50
 /// 2. 0 <= grid[i][j] <= 50
 /// </summary>
-int LeetCode::projectionArea(vector<vector<int>>& grid)
+int LeetCodeArray::projectionArea(vector<vector<int>>& grid)
 {
     vector<int> rows(grid.size());
     vector<int> cols(grid[0].size());
@@ -5231,7 +5181,7 @@ int LeetCode::projectionArea(vector<vector<int>>& grid)
 /// Note: The given array is guaranteed to contain no element "0".
 /// Can you do it in O(n) time complexity and O(1) space complexity?
 /// </summary>
-bool LeetCode::circularArrayLoop(vector<int>& nums)
+bool LeetCodeArray::circularArrayLoop(vector<int>& nums)
 {
     int slow = 0;
     int fast = 0;
@@ -5435,7 +5385,7 @@ vector<int> LeetCodeArray::fairCandySwap(vector<int>& A, vector<int>& B)
 /// 1. 1 <= N <= 50
 /// 2. 0 <= grid[i][j] <= 50
 /// </summary>
-int LeetCode::surfaceArea(vector<vector<int>>& grid)
+int LeetCodeArray::surfaceArea(vector<vector<int>>& grid)
 {
     int result = 0;
     for (size_t i = 0; i < grid.size(); i++)
@@ -5998,7 +5948,7 @@ int LeetCodeArray::minIncrementForUnique(vector<int>& A)
 /// 2. 1 <= A[i] <= 10^6
 /// 3. A[i] != A[j] for all i != j
 /// </summary>
-vector<int> LeetCode::deckRevealedIncreasing(vector<int>& deck)
+vector<int> LeetCodeArray::deckRevealedIncreasing(vector<int>& deck)
 {
     vector<int> index;
     sort(deck.begin(), deck.end());
@@ -6048,7 +5998,7 @@ vector<int> LeetCode::deckRevealedIncreasing(vector<int>& deck)
 /// 2. 0 <= A[i] < 10000
 /// 3. A.length is even
 /// </summary>
-int LeetCode::repeatedNTimes(vector<int>& A)
+int LeetCodeArray::repeatedNTimes(vector<int>& A)
 {
     deque<int> line;
     for (size_t i = 0; i < A.size(); i ++)
@@ -6106,7 +6056,7 @@ int LeetCode::repeatedNTimes(vector<int>& A)
 /// 4. -10000 <= queries[i][0] <= 10000
 /// 5. 0 <= queries[i][1] < A.length
 /// </summary>
-vector<int> LeetCode::sumEvenAfterQueries(vector<int>& A, vector<vector<int>>& queries)
+vector<int> LeetCodeArray::sumEvenAfterQueries(vector<int>& A, vector<vector<int>>& queries)
 {
     int sum = 0;
     vector<int> result;
@@ -6162,7 +6112,7 @@ vector<int> LeetCode::sumEvenAfterQueries(vector<int>& A, vector<vector<int>>& q
 /// 3. 0 <= K <= 10000
 /// 4. If A.length > 1, then A[0] != 0
 /// </summary>
-vector<int> LeetCode::addToArrayForm(vector<int>& A, int K)
+vector<int> LeetCodeArray::addToArrayForm(vector<int>& A, int K)
 {
     vector<int> result;
     std::reverse(A.begin(), A.end());
@@ -6217,7 +6167,7 @@ vector<int> LeetCode::addToArrayForm(vector<int>& A, int K)
 /// 2. 1 <= A[i] <= A.length
 /// 3. 1 <= K <= A.length
 /// </summary>
-int LeetCode::subarraysWithKDistinct(vector<int>& A, int K)
+int LeetCodeArray::subarraysWithKDistinct(vector<int>& A, int K)
 {
     unordered_map<size_t, size_t> num_map;
     size_t head = 0, tail = 0, next = 0;
@@ -6282,7 +6232,7 @@ int LeetCode::subarraysWithKDistinct(vector<int>& A, int K)
 /// 1. 1 <= A.length <= 30000
 /// 2. 1 <= K <= A.length
 /// </summary>
-int LeetCode::minKBitFlips(vector<int>& A, int K)
+int LeetCodeArray::minKBitFlips(vector<int>& A, int K)
 {
     vector<int> flip_count(A.size());
     int flip = 0;
@@ -6352,7 +6302,7 @@ int LeetCode::minKBitFlips(vector<int>& A, int K)
 /// 3. 0 <= queries.length <= 20000
 /// 4. lamps[i].length == queries[i].length == 2
 /// </summary>
-vector<int> LeetCode::gridIllumination(int N, vector<vector<int>>& lamps, vector<vector<int>>& queries)
+vector<int> LeetCodeArray::gridIllumination(int N, vector<vector<int>>& lamps, vector<vector<int>>& queries)
 {
     unordered_map<int, int> row_map, col_map, diag_map, a_diag_map;
     unordered_map<int, unordered_set<int>> lamp_map;
@@ -6465,7 +6415,7 @@ vector<int> LeetCode::gridIllumination(int N, vector<vector<int>>& lamps, vector
 /// board[i][j] is either 'R', '.', 'B', or 'p'
 /// There is exactly one cell with board[i][j] == 'R'
 /// </summary>
-int LeetCode::numRookCaptures(vector<vector<char>>& board)
+int LeetCodeArray::numRookCaptures(vector<vector<char>>& board)
 {
     int result = 0;
     for (size_t i = 0; i < board.size(); i++)
@@ -6500,73 +6450,6 @@ int LeetCode::numRookCaptures(vector<vector<char>>& board)
     return result;
 }
 
-/// <summary>
-/// Leet code #997. Find the Town Judge
-/// 
-/// In a town, there are N people labelled from 1 to N.  There is a rumor 
-/// that one of these people is secretly the town judge.
-///
-/// If the town judge exists, then:
-///
-/// The town judge trusts nobody.
-/// Everybody (except for the town judge) trusts the town judge.
-/// There is exactly one person that satisfies properties 1 and 2.
-/// You are given trust, an array of pairs trust[i] = [a, b] representing 
-/// that the person labelled a trusts the person labelled b.
-///
-/// If the town judge exists and can be identified, return the label of the 
-/// town judge.  Otherwise, return -1.
-/// 
-/// Example 1:
-///
-/// Input: N = 2, trust = [[1,2]]
-/// Output: 2
-///
-/// Example 2:
-/// 
-/// Input: N = 3, trust = [[1,3],[2,3]]
-/// Output: 3
-///
-/// Example 3:
-/// 
-/// Input: N = 3, trust = [[1,3],[2,3],[3,1]]
-/// Output: -1
-///
-/// Example 4:
-/// 
-/// Input: N = 3, trust = [[1,2],[2,3]]
-/// Output: -1
-///
-/// Example 5:
-///
-/// Input: N = 4, trust = [[1,3],[1,4],[2,3],[2,4],[4,3]]
-/// Output: 3
-///
-/// Note:
-/// 
-/// 1. 1 <= N <= 1000
-/// 2. trust.length <= 10000
-/// 3. trust[i] are all different
-/// 4. trust[i][0] != trust[i][1]
-/// 5. 1 <= trust[i][0], trust[i][1] <= N
-/// </summary>
-int LeetCode::findJudge(int N, vector<vector<int>>& trust)
-{
-    vector<int> result(N);
-    for (size_t i = 0; i < trust.size(); i++)
-    {
-        if (trust[i][0] != trust[i][1])
-        {
-            result[trust[i][0] - 1]--;
-            result[trust[i][1] - 1]++;
-        }
-    }
-    for (size_t i = 0; i < result.size(); i++)
-    {
-        if (result[i] == N - 1) return i + 1;
-    }
-    return -1;
-}
 
 /// <summary>
 /// Leet code #1004. Max Consecutive Ones III
@@ -6598,7 +6481,7 @@ int LeetCode::findJudge(int N, vector<vector<int>>& trust)
 /// 2. 0 <= K <= A.length
 /// 3. A[i] is 0 or 1 
 /// </summary>
-int LeetCode::longestOnes(vector<int>& A, int K)
+int LeetCodeArray::longestOnes(vector<int>& A, int K)
 {
     int result = 0;
     int first = -1;
@@ -6657,7 +6540,7 @@ int LeetCode::longestOnes(vector<int>& A, int K)
 /// 2. 1 <= K <= 10000
 /// 3. -100 <= A[i] <= 100
 /// </summary>
-int LeetCode::largestSumAfterKNegations(vector<int>& A, int K)
+int LeetCodeArray::largestSumAfterKNegations(vector<int>& A, int K)
 {
     multiset<int> negative;
     int sum = 0;
@@ -6725,7 +6608,7 @@ int LeetCode::largestSumAfterKNegations(vector<int>& A, int K)
 /// 2. 2 <= A.length == B.length <= 20000
 /// 
 /// </summary>
-int LeetCode::minDominoRotations(vector<int>& A, vector<int>& B)
+int LeetCodeArray::minDominoRotations(vector<int>& A, vector<int>& B)
 {
     vector<int> domino(7);
 
@@ -6788,7 +6671,7 @@ int LeetCode::minDominoRotations(vector<int>& A, vector<int>& B)
 /// 1. 3 <= A.length <= 50000
 /// 2. -10000 <= A[i] <= 10000
 /// </summary>
-bool LeetCode::canThreePartsEqualSum(vector<int>& A)
+bool LeetCodeArray::canThreePartsEqualSum(vector<int>& A)
 {
     int sum = 0;
     for (size_t i = 0; i < A.size(); i++)
@@ -6807,16 +6690,13 @@ bool LeetCode::canThreePartsEqualSum(vector<int>& A)
         {
             result++;
         }
-        else if ((sum == first * 2) && (result == 1))
+        else if ((sum == first * 2) && (result == 1) && (i != A.size() - 1))
         {
             result++;
-        }
-        else if ((sum == first * 3) && (result == 2))
-        {
-            result++;
+            break;
         }
     }
-    if (result == 3) return true;
+    if (result == 2) return true;
     else return false;
 }
 
@@ -6847,30 +6727,26 @@ bool LeetCode::canThreePartsEqualSum(vector<int>& A)
 /// 1. 2 <= A.length <= 50000
 /// 2. 1 <= A[i] <= 1000
 /// </summary>
-int LeetCode::maxScoreSightseeingPair(vector<int>& A)
+int LeetCodeArray::maxScoreSightseeingPair(vector<int>& A)
 {
-    int result = 0;
-    vector<pair<int, int>> spots;
-    for (size_t i = 0; i < A.size(); i++)
+    int i = 0; 
+    int j = 1;
+    int result = A[i] + A[j] + i - j;
+    for (int k = j + 1; k < (int)A.size(); k++)
     {
-        if (spots.empty())
+        int sum0 = A[i] + A[j] + i - j;
+        int sum1 = A[j] + A[k] + j - k;
+        int sum2 = A[i] + A[k] + i - k;
+        result = max(result, sum1);
+        result = max(result, sum2);
+        if (A[i] + i -j < A[j])
         {
-            spots.push_back(make_pair(A[i], i));
+            i = j;
+            j = k;
         }
-        else if (spots.size() == 1)
+        else if (A[j] + j - k < A[k])
         {
-            spots.push_back(make_pair(A[i], i));
-            int sight_score = spots[0].first + spots[1].first + spots[0].second - spots[1].second;
-            result = max(result, sight_score);
-            if (spots[1].second - spots[0].second < spots[0].first - spots[1].first)
-            {
-                spots.pop_back();
-            }
-            else
-            {
-                spots[0] = spots[1];
-                spots.pop_back();
-            }
+            j = k;
         }
     }
     return result;
@@ -6879,11 +6755,11 @@ int LeetCode::maxScoreSightseeingPair(vector<int>& A)
 /// <summary>
 /// Leet code #1036. Escape a Large Maze
 /// 
-/// In a 1 million by 1 million grid, the coordinates of each grid square are 
-/// (x, y) with 0 <= x, y < 10^6.
+/// In a 1 million by 1 million grid, the coordinates of each grid square
+/// are (x, y) with 0 <= x, y < 10^6.
 ///
 /// We start at the source square and want to reach the target square.  
-/// Each move, we can walk to a 4-directionally adjacent square in the grid 
+/// Each move, we can walk to a 4-directionally adjacent square in the grid
 /// that isn't in the given list of blocked squares.
 ///
 /// Return true if and only if it is possible to reach the target square 
@@ -6894,15 +6770,16 @@ int LeetCode::maxScoreSightseeingPair(vector<int>& A)
 /// Input: blocked = [[0,1],[1,0]], source = [0,0], target = [0,2]
 /// Output: false
 /// Explanation: 
-/// The target square is inaccessible starting from the source square, because
-/// we can't walk outside the grid.
+/// The target square is inaccessible starting from the source square, 
+/// because we can't walk outside the grid.
 ///
 /// Example 2:
 ///
 /// Input: blocked = [], source = [0,0], target = [999999,999999]
 /// Output: true
 /// Explanation: 
-/// Because there are no blocked cells, it's possible to reach the target square.
+/// Because there are no blocked cells, it's possible to reach the target 
+/// square.
 /// 
 /// Note:
 /// 1. 0 <= blocked.length <= 200
@@ -6912,7 +6789,7 @@ int LeetCode::maxScoreSightseeingPair(vector<int>& A)
 /// 5. 0 <= source[i][j], target[i][j] < 10^6
 /// 6. source != target
 /// </summary>
-bool LeetCode::isEscapePossible(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target)
+bool LeetCodeArray::isEscapePossible(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target)
 {
     unordered_map<int, int> row_map, col_map;
     vector<int> row, col;
@@ -7032,7 +6909,7 @@ bool LeetCode::isEscapePossible(vector<vector<int>>& blocked, vector<int>& sourc
 /// 2. 0 <= customers[i] <= 1000
 /// 3. 0 <= grumpy[i] <= 1
 /// </summary>
-int LeetCode::maxSatisfied(vector<int>& customers, vector<int>& grumpy, int X)
+int LeetCodeArray::maxSatisfied(vector<int>& customers, vector<int>& grumpy, int X)
 {
     int result = 0, grumpy_sum = 0, grumpy_max = 0;
 
