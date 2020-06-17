@@ -1627,8 +1627,38 @@ void TestLeetCode1473(void)
         "; target = " + to_string(target) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1478(void)
+{
+    Logger::WriteMessage("Test Leet Code 1478");
+    LeetCodeDP leetCode;
+    vector<int> houses = { 1, 4, 8, 10, 20 };
+    int k = 3;
+    int result = leetCode.minDistance(houses, k);
+    Logger::WriteMessage(houses);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    houses = { 2,3,5,12,18 };
+    k = 5;
+    result = leetCode.minDistance(houses, k);
+    Logger::WriteMessage(houses);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    houses = { 7,4,6,1 };
+    k = 1;
+    result = leetCode.minDistance(houses, k);
+    Logger::WriteMessage(houses);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    houses = { 3,6,14,10 };
+    k = 4;
+    result = leetCode.minDistance(houses, k);
+    Logger::WriteMessage(houses);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1478();
     TestLeetCode1473();
     TestLeetCode1463();
     TestLeetCode1458();

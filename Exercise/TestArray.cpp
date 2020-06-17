@@ -3759,8 +3759,65 @@ void TestLeetCode779(void)
     Logger::WriteMessage("N = " + to_string(N) + "; K = " + to_string(K) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1477(void)
+{
+    Logger::WriteMessage("Test Leet Code 1477");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 3, 2, 2, 4, 3 };
+    int target = 3;
+    int result = leetCode.minSumOfLengths(arr, target);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    arr = { 7,3,4,7 };
+    target = 7;
+    result = leetCode.minSumOfLengths(arr, target);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    arr = { 4,3,2,6,2,3,4 };
+    target = 6;
+    result = leetCode.minSumOfLengths(arr, target);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    arr = { 5,5,4,4,5 };
+    target = 3;
+    result = leetCode.minSumOfLengths(arr, target);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    arr = { 3,1,1,1,5,1,2,1 };
+    target = 3;
+    result = leetCode.minSumOfLengths(arr, target);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1480(void)
+{
+    Logger::WriteMessage("Test Leet Code 1480");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3, 4 };
+    vector<int> result = leetCode.runningSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,1,1,1,1 };
+    result = leetCode.runningSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 3,1,2,10,1 };
+    result = leetCode.runningSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1480();
+    TestLeetCode1477();
     TestLeetCode779();
     TestLeetCode238();
     TestLeetCode835();

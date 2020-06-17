@@ -604,8 +604,49 @@ void TestLeetCode1064(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1482(void)
+{
+    Logger::WriteMessage("Test Leet Code 1482");
+    LeetCodeBinarySearch leetCode;
+    vector<int> bloomDay = { 1, 10, 3, 10, 2 };
+    int m = 3;
+    int k = 1;
+    int result = leetCode.minDays(bloomDay, m, k);
+    Logger::WriteMessage(bloomDay);
+    Logger::WriteMessage("m = " + to_string(m) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    bloomDay = { 1, 10, 3, 10, 2 };
+    m = 3;
+    k = 2;
+    result = leetCode.minDays(bloomDay, m, k);
+    Logger::WriteMessage(bloomDay);
+    Logger::WriteMessage("m = " + to_string(m) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    bloomDay = { 7,7,7,7,12,7,7 };
+    m = 2;
+    k = 3;
+    result = leetCode.minDays(bloomDay, m, k);
+    Logger::WriteMessage(bloomDay);
+    Logger::WriteMessage("m = " + to_string(m) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    bloomDay = { 1000000000,1000000000 };
+    m = 1;
+    k = 1;
+    result = leetCode.minDays(bloomDay, m, k);
+    Logger::WriteMessage(bloomDay);
+    Logger::WriteMessage("m = " + to_string(m) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    bloomDay = { 1,10,2,9,3,8,4,7,5,6 };
+    m = 4;
+    k = 2;
+    result = leetCode.minDays(bloomDay, m, k);
+    Logger::WriteMessage(bloomDay);
+    Logger::WriteMessage("m = " + to_string(m) + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode1482();
     TestLeetCode1064();
     TestLeetCode374();
     TestLeetCode275();

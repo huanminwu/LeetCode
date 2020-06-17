@@ -418,8 +418,26 @@ void TestLeetCode1452(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1481(void)
+{
+    Logger::WriteMessage("Test Leet Code 1481");
+    LeetCodeHashtable leetCode;
+    vector<int> arr = { 5, 5, 4 };
+    int k = 1;
+    int result = leetCode.findLeastNumOfUniqueInts(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = 1 " + to_string(k) + "; result = " + to_string(result));
+
+    arr = { 4,3,1,1,3,3,2 };
+    k = 3;
+    result = leetCode.findLeastNumOfUniqueInts(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = 1 " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1481();
     TestLeetCode1452();
     TestLeetCode1426();
     TestLeetCode1418();

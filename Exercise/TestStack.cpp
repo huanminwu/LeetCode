@@ -421,8 +421,28 @@ void TestLeetCode239(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1475(void)
+{
+    LeetCodeStack leetCode;
+    vector<int> prices = { 8, 4, 6, 2, 3 };
+    vector<int> result = leetCode.finalPrices(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(result);
+
+    prices = { 1,2,3,4,5 };
+    result = leetCode.finalPrices(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(result);
+
+    prices = { 10,1,1,6 };
+    result = leetCode.finalPrices(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode1475();
     TestLeetCode1425();
     TestLeetCode739();
     TestLeetCode1249();

@@ -6886,6 +6886,9 @@ class TwoSum
 private:
     unordered_map<int, int> m_DataMap;
 public:
+    TwoSum()
+    {
+    }
     // Add the number to an internal data structure.
     void add(int number)
     {
@@ -8090,5 +8093,208 @@ public:
         return result;
     }
 };
+
+/// <summary>
+/// Leet code #1476. Subrectangle Queries
+///
+/// Medium
+///
+/// Implement the class SubrectangleQueries which receives a rows x cols 
+/// rectangle as a matrix of integers in the constructor and supports 
+/// two methods:
+///
+/// 1. updateSubrectangle(int row1, int col1, int row2, int col2, 
+///    int newValue)
+/// Updates all values with newValue in the subrectangle whose upper left 
+/// coordinate is (row1,col1) and bottom right coordinate is (row2,col2).
+///
+/// 2. getValue(int row, int col)
+/// Returns the current value of the coordinate (row,col) from the 
+/// rectangle.
+///
+/// Example 1:
+/// Input
+/// ["SubrectangleQueries","getValue","updateSubrectangle","getValue",
+/// "getValue","updateSubrectangle","getValue","getValue"]
+/// [[[[1,2,1],[4,3,4],[3,2,1],[1,1,1]]],[0,2],[0,0,3,2,5],[0,2],[3,1],
+/// [3,0,3,2,10],[3,1],[0,2]]
+/// Output
+/// [null,1,null,5,5,null,10,5]
+/// Explanation
+/// SubrectangleQueries subrectangleQueries = new SubrectangleQueries
+/// ([[1,2,1],[4,3,4],[3,2,1],[1,1,1]]);  
+/// // The initial rectangle (4x3) looks like:
+/// // 1 2 1
+/// // 4 3 4
+/// // 3 2 1
+/// // 1 1 1
+/// subrectangleQueries.getValue(0, 2); // return 1
+/// subrectangleQueries.updateSubrectangle(0, 0, 3, 2, 5);
+/// // After this update the rectangle looks like:
+/// // 5 5 5
+/// // 5 5 5
+/// // 5 5 5
+/// // 5 5 5 
+/// subrectangleQueries.getValue(0, 2); // return 5
+/// subrectangleQueries.getValue(3, 1); // return 5
+/// subrectangleQueries.updateSubrectangle(3, 0, 3, 2, 10);
+/// // After this update the rectangle looks like:
+/// // 5   5   5
+/// // 5   5   5
+/// // 5   5   5
+/// // 10  10  10 
+/// subrectangleQueries.getValue(3, 1); // return 10
+/// subrectangleQueries.getValue(0, 2); // return 5
+///
+/// Example 2:
+/// Input
+/// ["SubrectangleQueries","getValue","updateSubrectangle",
+/// "getValue","getValue","updateSubrectangle","getValue"]
+/// [[[[1,1,1],[2,2,2],[3,3,3]]],[0,0],[0,0,2,2,100],[0,0],[2,2],
+///  [1,1,2,2,20],[2,2]]
+/// Output
+/// [null,1,null,100,100,null,20]
+/// Explanation
+/// SubrectangleQueries subrectangleQueries = new SubrectangleQueries
+/// ([[1,1,1],[2,2,2],[3,3,3]]);
+/// subrectangleQueries.getValue(0, 0); // return 1
+/// subrectangleQueries.updateSubrectangle(0, 0, 2, 2, 100);
+/// subrectangleQueries.getValue(0, 0); // return 100
+/// subrectangleQueries.getValue(2, 2); // return 100
+/// subrectangleQueries.updateSubrectangle(1, 1, 2, 2, 20);
+/// subrectangleQueries.getValue(2, 2); // return 20
+/// 
+/// Constraints:
+/// 1. There will be at most 500 operations considering both methods: 
+///    updateSubrectangle and getValue.
+/// 2. 1 <= rows, cols <= 100
+/// 3. rows == rectangle.length
+/// 4. cols == rectangle[i].length
+/// 5. 0 <= row1 <= row2 < rows
+/// 6. 0 <= col1 <= col2 < cols
+/// 7. 1 <= newValue, rectangle[i][j] <= 10^9
+/// 8. 0 <= row < rows
+/// 9. 0 <= col < cols
+/// </summary> 
+class SubrectangleQueries 
+{
+private:
+    vector<vector<int>> m_rectangle;
+public:
+    SubrectangleQueries(vector<vector<int>>& rectangle) 
+    {
+        m_rectangle = rectangle;
+    }
+
+    void updateSubrectangle(int row1, int col1, int row2, int col2, int newValue) 
+    {
+        for (int i = row1; i <= row2; i++)
+        {
+            for (int j = col1; j <= col2; j++)
+            {
+                m_rectangle[i][j] = newValue;
+            }
+        }
+    }
+
+    int getValue(int row, int col) 
+    {
+        return m_rectangle[row][col];
+    }
+};
+
+/// <summary>
+/// Leet code #1483. Kth Ancestor of a Tree Node
+///
+/// Hard
+///
+/// You are given a tree with n nodes numbered from 0 to n-1 in the form 
+/// of a parent array where parent[i] is the parent of node i. The root 
+/// of the tree is node 0.
+///
+/// Implement the function getKthAncestor(int node, int k) to return 
+/// the k-th ancestor of the given node. If there is no such ancestor, 
+/// return -1.
+///
+/// The k-th ancestor of a tree node is the k-th node in the path from 
+/// that node to the root.
+///
+/// Example:
+/// Input:
+/// ["TreeAncestor","getKthAncestor","getKthAncestor","getKthAncestor"]
+/// [[7,[-1,0,0,1,1,2,2]],[3,1],[5,2],[6,3]]
+/// Output:
+/// [null,1,0,-1]
+///
+/// Explanation:
+/// TreeAncestor treeAncestor = new TreeAncestor(7, [-1,0,0,1,1,2,2]);
+/// treeAncestor.getKthAncestor(3, 1);  
+/// // returns 1 which is the parent of 3
+/// treeAncestor.getKthAncestor(5, 2);  
+/// // returns 0 which is the grandparent of 5
+/// treeAncestor.getKthAncestor(6, 3);  
+/// // returns -1 because there is no such ancestor
+///
+/// Constraints:
+/// 1. 1 <= k <= n <= 5*10^4
+/// 2. parent[0] == -1 indicating that 0 is the root node.
+/// 3. 0 <= parent[i] < n for all 0 < i < n
+/// 4. 0 <= node < n
+/// 5. There will be at most 5*10^4 queries.
+/// </summary> 
+class TreeAncestor 
+{
+private:
+    vector<vector<int>> m_ancestor;
+public:
+    TreeAncestor(int n, vector<int>& parent) 
+    {
+        m_ancestor = vector<vector<int>>(n);
+        for (int i = 0; i < n; i++)
+        {
+            m_ancestor[i].push_back(parent[i]);
+        }
+        bool bContinue = true;
+        int level = 0;
+        while (bContinue)
+        {
+            bContinue = false;
+            for (int i = 0; i < n; i++)
+            {
+                int p = m_ancestor[i].back();
+                if (p != -1)
+                {
+                    bContinue = true;
+                    int next_p = m_ancestor[p][level];
+                    m_ancestor[i].push_back(next_p);
+                }
+                else
+                {
+                    m_ancestor[i].push_back(-1);
+                }
+            }
+            level++;
+        }
+    }
+
+    int getKthAncestor(int node, int k) 
+    {
+        int bit = 0;
+        int parent = -1;
+        for (size_t i = 0; i < m_ancestor[node].size(); i++)
+        {
+            bit = (bit << 1) + 1;
+            parent = m_ancestor[node][i];
+            if (k <= bit)
+            {
+                k = k & (bit >> 1);
+                break;
+            }
+        }
+        if (k == 0 || parent == -1) return parent;
+        else return getKthAncestor(parent, k);
+    }
+};
+
 
 #endif // LeetcodeDesign_H

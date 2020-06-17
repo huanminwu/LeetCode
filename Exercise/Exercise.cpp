@@ -6011,23 +6011,23 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeArray();
-    TestUSACO();
     TestLeetCodeDP();
     TestLeetCodeDesign();
+    TestLeetCodeBinarySearch();
+    TestLeetCodeHashtable();
+    TestLeetCodeArray();
+    TestLeetCodeStack();
+    TestUSACO();
     TestLeetCodeTree();
     TestLeetCodeGraph();
     TestLeetCodeMath();
     TestLeetCodeBit();
     TestLeetCodeTree();
     TestLeetCodeString();
-    TestLeetCodeHashtable();
     TestLeetCodeSort();
     TestLeetCodeGreedy();
-    TestLeetCodeStack();
     TestLeetCodeDFS();
     TestLeetCodeBFS();
-    TestLeetCodeBinarySearch();
     TestLeetCodeLinkedList();
     TestLeetCode902();
     TestLeetCode1199();

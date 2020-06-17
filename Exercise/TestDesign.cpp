@@ -1468,12 +1468,12 @@ void TestLeetCode170(void)
     };
 
     vector<string> result;
+    TwoSum* twoSum = nullptr;
     for (size_t i = 0; i < commands.size(); i++)
     {
-        TwoSum * twoSum = nullptr;
         if (commands[i] == "TwoSum")
         {
-            TwoSum * twoSum = new TwoSum();
+            twoSum = new TwoSum();
             result.push_back("null");
         }
         else if (commands[i] == "add")
@@ -2826,8 +2826,143 @@ void TestLeetCode843(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode1476(void)
+{
+    Logger::WriteMessage("Test Leet Code 1476");
+    vector<string> commands =
+    {
+       "SubrectangleQueries", "getValue", "updateSubrectangle", "getValue",
+       "getValue", "updateSubrectangle", "getValue", "getValue"
+    };
+    vector<vector<vector<int>>> parameters =
+    {
+        {{1, 2, 1},{4, 3, 4},{3, 2, 1},{1, 1, 1}},
+        {{0, 2}},
+        {{0, 0, 3, 2, 5}},
+        {{0, 2}},
+        {{3, 1}},
+        {{3, 0, 3, 2, 10}},
+        {{3, 1}},
+        {{0, 2}}
+    };
+
+    vector<string> result;
+    SubrectangleQueries* subrectangleQueries = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "SubrectangleQueries")
+        {
+            subrectangleQueries = new SubrectangleQueries(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "getValue")
+        {
+            int ret = subrectangleQueries->getValue(parameters[i][0][0], parameters[i][0][1]);
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "updateSubrectangle")
+        {
+            subrectangleQueries->updateSubrectangle(parameters[i][0][0], parameters[i][0][1], parameters[i][0][2], parameters[i][0][3], parameters[i][0][4]);
+            result.push_back("null");
+        }
+    }
+    delete subrectangleQueries;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+       "SubrectangleQueries", "getValue", "updateSubrectangle", "getValue", 
+       "getValue", "updateSubrectangle", "getValue"
+    };
+
+    parameters =
+    {
+        {{1, 1, 1},{2, 2, 2},{3, 3, 3}},
+        {{0, 0}},
+        {{0, 0, 2, 2, 100}},
+        {{0, 0}},
+        {{2, 2}},
+        {{1, 1, 2, 2, 20}},
+        {{2, 2}},
+    };
+
+    result.clear();
+    subrectangleQueries = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "SubrectangleQueries")
+        {
+            subrectangleQueries = new SubrectangleQueries(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "getValue")
+        {
+            int ret = subrectangleQueries->getValue(parameters[i][0][0], parameters[i][0][1]);
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "updateSubrectangle")
+        {
+            subrectangleQueries->updateSubrectangle(parameters[i][0][0], parameters[i][0][1], parameters[i][0][2], parameters[i][0][3], parameters[i][0][4]);
+            result.push_back("null");
+        }
+    }
+    delete subrectangleQueries;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1483(void)
+{
+    Logger::WriteMessage("Test Leet Code 1483");
+    vector<string> commands =
+    {
+       "TreeAncestor","getKthAncestor","getKthAncestor","getKthAncestor"
+    };
+    vector<vector<vector<int>>> parameters =
+    {
+        {{7},{-1,0,0,1,1,2,2}},
+        {{3,1}},
+        {{5,2}},
+        {{6,3}}
+    };
+
+    vector<string> result;
+    TreeAncestor* treeAncestor = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "TreeAncestor")
+        {
+            treeAncestor = new TreeAncestor(parameters[i][0][0], parameters[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "getKthAncestor")
+        {
+            int ret = treeAncestor->getKthAncestor(parameters[i][0][0], parameters[i][0][1]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete treeAncestor;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1483();
+    TestLeetCode1476();
     TestLeetCode843();
     TestLeetCode1472();
     TestLeetCode1166();

@@ -11201,4 +11201,121 @@ vector<int> LeetCodeArray::getStrongest(vector<int>& arr, int k)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1477. Find Two Non-overlapping Sub-arrays Each With 
+///                  Target Sum
+///
+/// Medium
+///
+/// Given an array of integers arr and an integer target.
+///
+/// You have to find two non-overlapping sub-arrays of arr each with 
+/// sum equal target. There can be multiple answers so you have to 
+/// find an answer where the sum of the lengths of the two sub-arrays 
+/// is minimum.
+///
+/// Return the minimum sum of the lengths of the two required 
+/// sub-arrays, or return -1 if you cannot find such two sub-arrays.
+///
+/// Example 1:
+/// Input: arr = [3,2,2,4,3], target = 3
+/// Output: 2
+/// Explanation: Only two sub-arrays have sum = 3 ([3] and [3]). The 
+/// sum of their lengths is 2.
+///
+/// Example 2:
+/// Input: arr = [7,3,4,7], target = 7
+/// Output: 2
+/// Explanation: Although we have three non-overlapping sub-arrays 
+/// of sum = 7 ([7], [3,4] and [7]), but we will choose the first 
+/// and third sub-arrays as the sum of their lengths is 2.
+///
+/// Example 3:
+/// Input: arr = [4,3,2,6,2,3,4], target = 6
+/// Output: -1
+/// Explanation: We have only one sub-array of sum = 6.
+///
+/// Example 4:
+/// Input: arr = [5,5,4,4,5], target = 3
+/// Output: -1
+/// Explanation: We cannot find a sub-array of sum = 3.
+///
+/// Example 5:
+/// Input: arr = [3,1,1,1,5,1,2,1], target = 3
+/// Output: 3
+/// Explanation: Note that sub-arrays [1,2] and [2,1] cannot be an 
+/// answer because they overlap.
+///
+/// Constraints:
+/// 1. 1 <= arr.length <= 10^5
+/// 2. 1 <= arr[i] <= 1000
+/// 3. 1 <= target <= 10^8
+/// </summary> 
+int LeetCodeArray::minSumOfLengths(vector<int>& arr, int target)
+{
+    unordered_map<int, int> sum_map;
+    sum_map[0] = -1;
+    int sum = 0;
+    vector<int> dp(arr.size(), INT_MAX);
+    int result = INT_MAX;
+    for (int i = 0; i < (int)arr.size(); i++)
+    {
+        sum += arr[i];
+        if (sum_map.count(sum - target) > 0)
+        {
+            int gap = i - sum_map[sum - target];
+            int pos = i - gap;
+            if (pos >= 0 && dp[pos] !=  INT_MAX)
+            {
+                result = min(result, gap + dp[pos]);
+            }
+            dp[i] = gap;
+        }
+        if (i > 0) dp[i] = min(dp[i], dp[i - 1]);
+        sum_map[sum] = i;
+    }
+    return result == INT_MAX ? -1 : result;
+}
+
+/// <summary>
+/// Leet code #1480. Running Sum of 1d Array
+///
+/// Easy
+///
+/// Given an array nums. We define a running sum of an array as 
+/// runningSum[i] = sum(nums[0]…nums[i]).
+///
+/// Return the running sum of nums.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,3,4]
+/// Output: [1,3,6,10]
+/// Explanation: Running sum is obtained as follows: 
+/// [1, 1+2, 1+2+3, 1+2+3+4].
+///
+/// Example 2:
+/// Input: nums = [1,1,1,1,1]
+/// Output: [1,2,3,4,5]
+/// Explanation: Running sum is obtained as follows: [1, 1+1, 
+/// 1+1+1, 1+1+1+1, 1+1+1+1+1].
+///
+/// Example 3:
+/// Input: nums = [3,1,2,10,1]
+/// Output: [3,4,6,16,17]
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. -10^6 <= nums[i] <= 10^6
+/// </summary> 
+vector<int> LeetCodeArray::runningSum(vector<int>& nums)
+{
+    vector<int> result(nums.size());
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (i == 0) result[i] = nums[i];
+        else result[i] = result[i - 1] + nums[i];
+    }
+    return result;
+}
 #pragma endregion
