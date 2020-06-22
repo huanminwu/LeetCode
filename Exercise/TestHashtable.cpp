@@ -435,8 +435,39 @@ void TestLeetCode1481(void)
     Logger::WriteMessage("k = 1 " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1487(void)
+{
+    Logger::WriteMessage("Test Leet Code 1487");
+    LeetCodeHashtable leetCode;
+    vector<string> names = { "pes", "fifa", "gta", "pes(2019)" };
+    vector<string> result = leetCode.getFolderNames(names);
+    Logger::WriteMessage(names);
+    Logger::WriteMessage(result);
+
+    names = { "gta","gta(1)","gta","avalon" };
+    result = leetCode.getFolderNames(names);
+    Logger::WriteMessage(names);
+    Logger::WriteMessage(result);
+
+    names = { "onepiece","onepiece(1)","onepiece(2)","onepiece(3)","onepiece" };
+    result = leetCode.getFolderNames(names);
+    Logger::WriteMessage(names);
+    Logger::WriteMessage(result);
+
+    names = { "wano","wano","wano","wano" };
+    result = leetCode.getFolderNames(names);
+    Logger::WriteMessage(names);
+    Logger::WriteMessage(result);
+
+    names = { "kaido","kaido(1)","kaido","kaido(1)" };
+    result = leetCode.getFolderNames(names);
+    Logger::WriteMessage(names);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1487();
     TestLeetCode1481();
     TestLeetCode1452();
     TestLeetCode1426();

@@ -493,8 +493,34 @@ void TestLeetCode1461(void)
     Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1486(void)
+{
+    Logger::WriteMessage("Test Leet Code 1486");
+    LeetCodeBit leetCode;
+    int n = 5;
+    int start = 0;
+    int result = leetCode.xorOperation(n, start);
+    Logger::WriteMessage("n = " + to_string(n) + "; start = " + to_string(start) + "; result = " + to_string(result));
+
+    n = 4;
+    start = 3;
+    result = leetCode.xorOperation(n, start);
+    Logger::WriteMessage("n = " + to_string(n) + "; start = " + to_string(start) + "; result = " + to_string(result));
+
+    n = 1;
+    start = 7;
+    result = leetCode.xorOperation(n, start);
+    Logger::WriteMessage("n = " + to_string(n) + "; start = " + to_string(start) + "; result = " + to_string(result));
+
+    n = 10;
+    start = 5;
+    result = leetCode.xorOperation(n, start);
+    Logger::WriteMessage("n = " + to_string(n) + "; start = " + to_string(start) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode1486();
     TestLeetCode861();
     TestLeetCode1461();
     TestLeetCode89();

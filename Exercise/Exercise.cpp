@@ -5937,9 +5937,6 @@ void TestLeetCode1167(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-
-
-
 void TestLeetCode1187(void)
 {
     Logger::WriteMessage("Test Leet Code 1187");
@@ -5965,7 +5962,6 @@ void TestLeetCode1187(void)
     Logger::WriteMessage(arr2);
     Logger::WriteMessage("result = " + to_string(result));
 }
-
 
 void TestLeetCode1182(void)
 {
@@ -6011,24 +6007,25 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeGraph();
+    TestLeetCodeArray();
+    TestLeetCodeHashtable();
+    TestLeetCodeBit();
+    TestLeetCodeLinkedList();
     TestLeetCodeDP();
     TestLeetCodeDesign();
     TestLeetCodeBinarySearch();
-    TestLeetCodeHashtable();
-    TestLeetCodeArray();
     TestLeetCodeStack();
     TestUSACO();
     TestLeetCodeTree();
-    TestLeetCodeGraph();
     TestLeetCodeMath();
-    TestLeetCodeBit();
     TestLeetCodeTree();
     TestLeetCodeString();
     TestLeetCodeSort();
     TestLeetCodeGreedy();
     TestLeetCodeDFS();
     TestLeetCodeBFS();
-    TestLeetCodeLinkedList();
+
     TestLeetCode902();
     TestLeetCode1199();
     TestLeetCode5();

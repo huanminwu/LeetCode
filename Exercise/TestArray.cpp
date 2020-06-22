@@ -3814,8 +3814,39 @@ void TestLeetCode1480(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1488(void)
+{
+    Logger::WriteMessage("Test Leet Code 1488");
+    LeetCodeArray leetCode;
+    vector<int> rains = { 1, 2, 3, 4 };
+    vector<int> result = leetCode.avoidFlood(rains);
+    Logger::WriteMessage(rains);
+    Logger::WriteMessage(result);
+
+    rains = { 1,2,0,0,2,1 };
+    result = leetCode.avoidFlood(rains);
+    Logger::WriteMessage(rains);
+    Logger::WriteMessage(result);
+
+    rains = { 1,2,0,1,2 };
+    result = leetCode.avoidFlood(rains);
+    Logger::WriteMessage(rains);
+    Logger::WriteMessage(result);
+
+    rains = { 69,0,0,0,69 };
+    result = leetCode.avoidFlood(rains);
+    Logger::WriteMessage(rains);
+    Logger::WriteMessage(result);
+
+    rains = { 10,20,20 };
+    result = leetCode.avoidFlood(rains);
+    Logger::WriteMessage(rains);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1488();
     TestLeetCode1480();
     TestLeetCode1477();
     TestLeetCode779();

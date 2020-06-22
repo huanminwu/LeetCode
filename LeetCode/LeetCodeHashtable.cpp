@@ -397,7 +397,7 @@ bool LeetCode::containsNearbyDuplicate(vector<int>& nums, int k)
 /// For example,
 /// Given [1,1,1,2,2,3] and k = 2, return [1,2]. 
 /// Note: 
-/// You may assume k is always valid, 1 ≤ k ≤ number of unique elements.
+/// You may assume k is always valid, 1 <= k <= number of unique elements.
 /// Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
 /// </summary>
 vector<int> LeetCode::topKFrequent(vector<int>& nums, int k)
@@ -1850,7 +1850,7 @@ vector<vector<int>> LeetCodeHashtable::threeSumII(vector<int>& nums)
 /// there are such that A[i] + B[j] + C[k] + D[l] is zero.
 ///
 /// To make problem a bit easier, all A, B, C, D have same length of 
-/// N where 0 ≤ N ≤ 500. 
+/// N where 0 <= N <= 500. 
 /// All integers are in the range of -2^28 to 2^28 - 1 and the result 
 /// is guaranteed to be at most 2^31 - 1.	
 /// Example: 
@@ -2410,11 +2410,11 @@ int LeetCodeHashtable::findLucky(vector<int>& arr)
 /// name of the customer, tableNumberi is the table customer sit at, and 
 /// foodItemi is the item customer orders.
 ///
-/// Return the restaurant's “display table”. The “display table” is a 
+/// Return the restaurant's "display table". The "display table" is a 
 /// table whose row entries denote how many of each food item each table 
 /// ordered. The first column is the table number and the remaining 
 /// columns correspond to each food item in alphabetical order. The first 
-/// row should be a header whose first column is “Table”, followed by the 
+/// row should be a header whose first column is "Table", followed by the 
 /// names of the food items. Note that the customer names are not part of 
 /// the table. Additionally, the rows should be sorted in numerically 
 /// increasing order.
@@ -2680,5 +2680,92 @@ int LeetCodeHashtable::findLeastNumOfUniqueInts(vector<int>& arr, int k)
         if (k >= 0) pq.pop();
     }
     return pq.size();
+}
+
+/// <summary>
+/// Leet code #1487. Making File Names Unique
+/// 
+/// Medium
+///
+/// Given an array of strings names of size n. You will create n folders 
+/// in your file system such that, at the ith minute, you will create a 
+/// folder with the name names[i].
+///
+/// Since two files cannot have the same name, if you enter a folder name 
+/// which is previously used, the system will have a suffix addition to 
+/// its name in the form of (k), where, k is the smallest positive integer 
+/// such that the obtained name remains unique.
+///
+/// Return an array of strings of length n where ans[i] is the actual name 
+/// the system will assign to the ith folder when you create it.
+/// 
+/// Example 1:
+/// Input: names = ["pes","fifa","gta","pes(2019)"]
+/// Output: ["pes","fifa","gta","pes(2019)"]
+/// Explanation: Let's see how the file system creates folder names:
+/// "pes" --> not assigned before, remains "pes"
+/// "fifa" --> not assigned before, remains "fifa"
+/// "gta" --> not assigned before, remains "gta"
+/// "pes(2019)" --> not assigned before, remains "pes(2019)"
+///
+/// Example 2:
+/// Input: names = ["gta","gta(1)","gta","avalon"]
+/// Output: ["gta","gta(1)","gta(2)","avalon"]
+/// Explanation: Let's see how the file system creates folder names:
+/// "gta" --> not assigned before, remains "gta"
+/// "gta(1)" --> not assigned before, remains "gta(1)"
+/// "gta" --> the name is reserved, system adds (k), since "gta(1)" is 
+/// also reserved, systems put k = 2. it becomes "gta(2)"
+/// "avalon" --> not assigned before, remains "avalon"
+///
+/// Example 3:
+/// Input: names = ["onepiece","onepiece(1)","onepiece(2)","onepiece(3)",
+/// "onepiece"]
+/// Output: ["onepiece","onepiece(1)","onepiece(2)","onepiece(3)",
+/// "onepiece(4)"]
+/// Explanation: When the last folder is created, the smallest positive 
+/// valid k is 4, and it becomes "onepiece(4)".
+///
+/// Example 4:
+///
+/// Input: names = ["wano","wano","wano","wano"]
+/// Output: ["wano","wano(1)","wano(2)","wano(3)"]
+/// Explanation: Just increase the value of k each time you create folder 
+/// "wano".
+///
+/// Example 5:
+/// Input: names = ["kaido","kaido(1)","kaido","kaido(1)"]
+/// Output: ["kaido","kaido(1)","kaido(2)","kaido(1)(1)"]
+/// Explanation: Please note that system adds the suffix (k) to current 
+/// name even it contained the same suffix before.
+/// 
+/// Constraints:
+/// 1. 1 <= names.length <= 5 * 10^4
+/// 2. 1 <= names[i].length <= 20
+/// 3. names[i] consists of lower case English letters, digits and/or 
+///    round brackets.
+/// </summary>
+vector<string> LeetCodeHashtable::getFolderNames(vector<string>& names)
+{
+    unordered_map<string, int> cache;
+    vector<string> result;
+    for (size_t i = 0; i < names.size(); i++)
+    {
+        string str = names[i];
+        int index = 0;
+        if (cache.count(str) > 0)
+        {
+            index = cache[str];
+        }
+        while (cache.count(str) > 0)
+        {
+            index++;
+            str = names[i] + "(" + to_string(index) + ")";
+        }
+        result.push_back(str);
+        cache[names[i]] = index;
+        cache[str] = 0;
+    }
+    return result;
 }
 #pragma endregion

@@ -2607,8 +2607,36 @@ void TestLeetCode997(void)
     Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1489(void)
+{
+    Logger::WriteMessage("Test Leet Code 1489");
+    LeetCodeGraph leetCode;
+    int n = 5;
+    vector<vector<int>> edges =
+    {
+        {0, 1, 1},{1, 2, 1},{2, 3, 2},{0, 3, 2},{0, 4, 3},{3, 4, 3},{1, 4, 6}
+    };
+    vector<vector<int>> result = leetCode.findCriticalAndPseudoCriticalEdges(n, edges);
+    
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 4;
+    edges =
+    {
+        {0,1,1},{1,2,1},{2,3,1},{0,3,1}
+    };
+    result = leetCode.findCriticalAndPseudoCriticalEdges(n, edges);
+
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1489();
     TestLeetCode997();
     TestLeetCode1466();
     TestLeetCode1462();

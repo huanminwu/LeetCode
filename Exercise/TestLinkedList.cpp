@@ -701,8 +701,54 @@ void TestLeetCode558(void)
     QuadNode* result = leetCode.intersect(quadNode1, quadNode2);
 }
 
+void TestLeetCode1474(void)
+{
+    Logger::WriteMessage("Test Leet Code 1474");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 1,2,3,4,5,6,7,8,9,10,11,12,13 };
+    int m = 2;
+    int n = 3;
+    ListNode* head = leetCode.generateListNodes(data_list);
+    Logger::WriteMessage(head);
+    head = leetCode.deleteNodes(head, m, n);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage(head);
+    leetCode.freeListNodes(head);
+
+    data_list = { 1,2,3,4,5,6,7,8,9,10,11 };
+    m = 1;
+    n = 3;
+    head = leetCode.generateListNodes(data_list);
+    Logger::WriteMessage(head);
+    head = leetCode.deleteNodes(head, m, n);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage(head);
+    leetCode.freeListNodes(head);
+
+    data_list = { 1,2,3,4,5,6,7,8,9,10,11 };
+    m = 3;
+    n = 1;
+    head = leetCode.generateListNodes(data_list);
+    Logger::WriteMessage(head);
+    head = leetCode.deleteNodes(head, m, n);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage(head);
+    leetCode.freeListNodes(head);
+
+    data_list = { 9,3,7,7,9,10,8,2 };
+    m = 1;
+    n = 2;
+    head = leetCode.generateListNodes(data_list);
+    Logger::WriteMessage(head);
+    head = leetCode.deleteNodes(head, m, n);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage(head);
+    leetCode.freeListNodes(head);
+}
+
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode1474();
     TestLeetCode382();
     TestLeetCode203();
     TestLeetCode92();

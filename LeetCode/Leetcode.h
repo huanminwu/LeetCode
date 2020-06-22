@@ -55,7 +55,8 @@ struct TreeNode {
     TreeNode *parent;
     TreeNode *left;
     TreeNode *right;
-    TreeNode(int x) : val(x), count(0), left(nullptr), right(nullptr), parent(nullptr) {}
+    TreeNode* random;
+    TreeNode(int x) : val(x), count(0), left(nullptr), right(nullptr), parent(nullptr), random(nullptr) {}
 };
 
 struct QuadNode {
