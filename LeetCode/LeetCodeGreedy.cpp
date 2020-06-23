@@ -2395,8 +2395,8 @@ string LeetCodeGreedy::longestDiverseString(int a, int b, int c)
 /// the minimum number of different frogs to finish all the croak in 
 /// the given string.
 ///
-/// A valid "croak" means a frog is printing 5 letters ‘c’, ’r’, ’o’, 
-/// ’a’, ’k’ sequentially. The frogs have to print all five letters to 
+/// A valid "croak" means a frog is printing 5 letters 'c', 'r', 'o', 
+/// 'a', 'k' sequentially. The frogs have to print all five letters to 
 /// finish a croak. If the given string is not a combination of valid 
 /// "croak" return -1.
 ///

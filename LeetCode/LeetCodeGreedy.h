@@ -349,12 +349,12 @@ public:
     ///
     /// Given the string croakOfFrogs, which represents a combination of 
     /// the string "croak" from different frogs, that is, multiple frogs 
-    /// can croak at the same time, so multiple “croak?are mixed. Return 
+    /// can croak at the same time, so multiple ¡°croak¡± are mixed. Return 
     /// the minimum number of different frogs to finish all the croak in 
     /// the given string.
     ///
-    /// A valid "croak" means a frog is printing 5 letters ‘c? ’r? ’o? 
-    /// ’a? ’k?sequentially. The frogs have to print all five letters to 
+    /// A valid "croak" means a frog is printing 5 letters 'c', 'r', 'o', 
+    /// 'a', 'k' sequentially. The frogs have to print all five letters to 
     /// finish a croak. If the given string is not a combination of valid 
     /// "croak" return -1.
     ///

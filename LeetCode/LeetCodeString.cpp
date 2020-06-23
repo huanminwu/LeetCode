@@ -415,82 +415,6 @@ string LeetCodeString::minWindow(string s, string t)
     return result;
 }
 
-/// <summary>
-/// Leet code #87. Scramble String 
-/// Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively. 
-/// Below is one possible representation of s1 = "great": 
-///      great
-///     /    \
-///    gr    eat
-///   / \    /  \
-///  g   r  e   at
-///            / \
-///           a   t
-///
-/// To scramble the string, we may choose any non-leaf node and swap its two children. 
-/// For example, if we choose the node "gr" and swap its two children, it produces a scrambled string "rgeat". 
-///      rgeat
-///     /    \
-///    rg    eat
-///   / \    /  \
-///  r   g  e   at
-///            / \
-///           a   t
-/// We say that "rgeat" is a scrambled string of "great". 
-/// Similarly, if we continue to swap the children of nodes "eat" and "at", it produces a scrambled string "rgtae". 
-///      rgtae
-///     /    \
-///    rg    tae
-///   / \    /  \
-///  r   g  ta  e
-///        / \
-///       t   a
-/// We say that "rgtae" is a scrambled string of "great". 
-/// Given two strings s1 and s2 of the same length, determine if s2 is a scrambled string of s1. 
-/// </summary>
-bool LeetCode::isScramble(string s1, string s2)
-{
-    if (s1.size() != s2.size())
-    {
-        return false;
-    }
-    if (s1 == s2) return true;
-    size_t len = s1.size();
-
-    vector<int> alpha_table(26, 0);
-
-    for (size_t i = 0; i < len; i++)
-    {
-        alpha_table[s1[i] - 'a']++;
-    }
-    for (size_t i = 0; i < len; i++)
-    {
-        alpha_table[s2[i] - 'a']--;
-    }
-    for (size_t i = 0; i < 26; i++)
-    {
-        if (alpha_table[i] != 0) return false;
-    }
-
-    for (size_t i = 1; i < len; i++)
-    {
-        string sub1 = s1.substr(0, i);
-        string sub2 = s1.substr(i, len - i);
-
-        if (isScramble(s1.substr(0, i), s2.substr(0, i)) &&
-            isScramble(s1.substr(i, len - i), s2.substr(i, len - i)))
-        {
-            return true;
-        }
-
-        if (isScramble(s1.substr(0, i), s2.substr(len - i, i)) &&
-            isScramble(s1.substr(i, len - i), s2.substr(0, len - i)))
-        {
-            return true;
-        }
-    }
-    return false;
-}
 
 /// <summary>
 /// Leet code #242. Valid Anagram 
@@ -1275,7 +1199,7 @@ bool LeetCodeString::isValidNumber(string s)
 /// Now we handle the string which is equal or less than 20 characters, the repeated characters can be considered as to_change
 /// and they can cancel the missing digit, upper case, lower case or the password which are less than 6 characters.
 /// </solution>
-int LeetCode::strongPasswordChecker(string s)
+int LeetCodeString::strongPasswordChecker(string s)
 {
     int less = 0;
     int more = 0;
@@ -1590,15 +1514,14 @@ string LeetCodeString::validIPAddress(string IP)
 /// <summary>
 /// Is Additive Number recursive call
 /// </summary>
-bool LeetCode::isAdditiveNumber(string num1, string num2, string num)
+bool LeetCodeString::isAdditiveNumber(string num1, string num2, string num)
 {
     if ((num1[0] == '0' && num1.size() > 1) || (num2[0] == '0' && num2.size() > 1))
     {
         return false;
     }
 
-    LeetCodeString leetCode;
-    string num3 = leetCode.addStrings(num1, num2);
+    string num3 = addStrings(num1, num2);
     if ((num.size() >= num3.size()) && (num.substr(0, num3.size()) == num3))
     {
         num1 = num2;
@@ -1629,7 +1552,7 @@ bool LeetCode::isAdditiveNumber(string num1, string num2, string num)
 /// Follow up:
 /// How would you handle overflow for very large input integers? 
 /// </summary>
-bool LeetCode::isAdditiveNumber(string num)
+bool LeetCodeString::isAdditiveNumber(string num)
 {
     for (int i = 0; i < (int)num.size() - 1; i++)
     {
@@ -1983,7 +1906,7 @@ int LeetCodeString::longestSubstring(string s, int k)
 /// 3.If each character occurs even number of times, then it must be a palindrome. 
 /// How about character which occurs odd number of times?
 /// </summary>
-bool LeetCode::canPermutePalindrome(string s)
+bool LeetCodeString::canPermutePalindrome(string s)
 {
     unordered_map<char, int> char_count;
     for (char ch : s)
@@ -2038,7 +1961,7 @@ vector<string> LeetCodeString::generatePossibleNextMoves(string s)
 /// Write a function to determine if a number is strobogrammatic. The number is represented as a string.
 /// For example, the numbers "69", "88", and "818" are all strobogrammatic.
 /// </summary>
-bool LeetCode::isStrobogrammatic(string num)
+bool LeetCodeString::isStrobogrammatic(string num)
 {
     unordered_map<char, char> char_map = { { '6', '9' },{ '9', '6' },{ '1', '1' },{ '0', '0' },{ '8', '8' } };
     int first = 0;
@@ -2075,7 +1998,7 @@ bool LeetCode::isStrobogrammatic(string num)
 ///   ["a","z"]
 /// ]
 /// </summary>
-vector<vector<string>> LeetCode::groupStrings(vector<string>& strings)
+vector<vector<string>> LeetCodeString::groupStrings(vector<string>& strings)
 {
     vector<vector<string>> result;
     for (string str : strings)
@@ -2129,7 +2052,7 @@ vector<vector<string>> LeetCode::groupStrings(vector<string>& strings)
 /// Given s = "apple", abbr = "a2e":
 /// Return false.
 /// </summary>
-bool LeetCode::validWordAbbreviation(string word, string abbr)
+bool LeetCodeString::validWordAbbreviation(string word, string abbr)
 {
     size_t word_index = 0;
     size_t abbr_index = 0;
@@ -2265,7 +2188,7 @@ string LeetCodeString::licenseKeyFormatting(string S, int K)
 /// Output: 3
 /// Explanation: The first 6 elements of magical string S is "12211" and it contains three 1's, so return 3.
 /// </summary>
-int LeetCode::magicalString(int n)
+int LeetCodeString::magicalString(int n)
 {
     string str;
     int index = 0;
@@ -2310,7 +2233,7 @@ int LeetCode::magicalString(int n)
 /// <summary>
 /// Leet code #157. Read N Characters Given Read4  
 /// </summary>
-int LeetCode::read4(char *buff, string& s, int& index)
+int LeetCodeString::read4(char *buff, string& s, int& index)
 {
     int i;
     for (i = index; (i < index + 4) && (i < (int)s.size()); i++)
@@ -2333,7 +2256,7 @@ int LeetCode::read4(char *buff, string& s, int& index)
 /// Note:
 /// The read function will only be called once for each test case. 
 /// </summary>
-int LeetCode::readNChars(char *buf, int n, string &s)
+int LeetCodeString::readNChars(char *buf, int n, string &s)
 {
     int index = 0;
     while (index < n)
@@ -2366,7 +2289,7 @@ int LeetCode::readNChars(char *buf, int n, string &s)
 /// Note:
 /// The read function may be called multiple times. 
 /// </summary>
-int LeetCode::readNCharsII(char *buf, int n, string& s, int& index, string&m_buffer)
+int LeetCodeString::readNCharsII(char *buf, int n, string& s, int& index, string&m_buffer)
 {
     int i = 0;
     while (i < (int)m_buffer.size() && i < n)
@@ -2407,7 +2330,7 @@ int LeetCode::readNCharsII(char *buf, int n, string& s, int& index, string&m_buf
 /// For example, Given s = “eceba”, 
 /// T is "ece" which its length is 3.
 /// </summary>
-int LeetCode::lengthOfLongestSubstringTwoDistinct(string s)
+int LeetCodeString::lengthOfLongestSubstringTwoDistinct(string s)
 {
     unordered_map<char, int> char_map;
     size_t max_length = 0;
@@ -2437,13 +2360,14 @@ int LeetCode::lengthOfLongestSubstringTwoDistinct(string s)
 }
 
 /// <summary>
-/// Leet code #340. Longest Substring with At Most K Distinct Characters       
+/// Leet code #340. Longest Substring with At Most K Distinct Characters
 /// 
-/// Given a string, find the length of the longest substring T that contains at most k distinct characters. 
-/// For example, Given s = “eceba” and k = 2,  
+/// Given a string, find the length of the longest substring T that contains 
+/// at most k distinct characters. 
+/// For example, Given s = "eceba" and k = 2,  
 /// T is "ece" which its length is 3. 
 /// </summary>
-int LeetCode::lengthOfLongestSubstringKDistinct(string s, int k)
+int LeetCodeString::lengthOfLongestSubstringKDistinct(string s, int k)
 {
     unordered_map<char, int> char_map;
     int max_length = 0;
@@ -2503,7 +2427,7 @@ int LeetCode::lengthOfLongestSubstringKDistinct(string s, int k)
 /// Explanation: There are six substrings "z", "a", "b", "za", "ab", "zab" 
 /// of string "zab" in the string s.
 /// </summary>
-int LeetCode::findSubstringInWraproundString(string p)
+int LeetCodeString::findSubstringInWraproundString(string p)
 {
     unordered_map<char, int> str_map;
     int first = 0, last = first + 1;
@@ -2597,7 +2521,7 @@ bool LeetCodeString::detectCapitalUse(string word)
 /// The size of the dictionary won't exceed 1,000.
 /// The length of all the strings in the input won't exceed 1,000.
 /// </summary>
-string LeetCode::findLongestWord(string s, vector<string>& d)
+string LeetCodeString::findLongestWord(string s, vector<string>& d)
 {
     map<int, set<string>> dict_map;
     for (string str : d) dict_map[str.size()].insert(str);
@@ -2628,7 +2552,7 @@ string LeetCode::findLongestWord(string s, vector<string>& d)
 /// The string consists of lower English letters only. 
 /// Length of the given string and k will in the range [1, 10000]
 /// </summary>
-string LeetCode::reverseStr(string s, int k)
+string LeetCodeString::reverseStr(string s, int k)
 {
     size_t start = 0;
     while (start < s.size())
@@ -2643,7 +2567,7 @@ string LeetCode::reverseStr(string s, int k)
 /// <summary>
 /// Leet code #527. Word Abbreviation
 /// </summary>
-string LeetCode::makeAbbreviation(string& word, int k)
+string LeetCodeString::makeAbbreviation(string& word, int k)
 {
     if (word.size() - k - 1 > 1)
     {
@@ -2682,7 +2606,7 @@ string LeetCode::makeAbbreviation(string& word, int k)
 /// The return answers should be in the same order as the 
 /// original array.
 /// </summary>
-vector<string> LeetCode::wordsAbbreviation(vector<string>& dict)
+vector<string> LeetCodeString::wordsAbbreviation(vector<string>& dict)
 {
     vector<string> result;
     vector<int> prefix;
@@ -2738,7 +2662,7 @@ vector<string> LeetCode::wordsAbbreviation(vector<string>& dict)
 /// you want to check one by one to see if T has its subsequence. In this 
 /// scenario, how would you change your code?
 /// </summary>
-bool LeetCode::isSubsequence(string s, string t)
+bool LeetCodeString::isSubsequence(string s, string t)
 {
     size_t i = 0, j = 0;
     while (i < s.size() && j < t.size())
@@ -2782,7 +2706,7 @@ bool LeetCode::isSubsequence(string s, string t)
 /// Both strings' lengths will not exceed 100.
 /// Only letters from a ~ z will appear in input strings. 
 /// </summary>
-int LeetCode::findLUSlength(string a, string b)
+int LeetCodeString::findLUSlength(string a, string b)
 {
     if (a.size() == b.size())
     {
@@ -2817,7 +2741,7 @@ int LeetCode::findLUSlength(string a, string b)
 /// All the given strings' lengths will not exceed 10.
 /// The length of the given list will be in the range of [2, 50].
 /// </summary>
-int LeetCode::findLUSlength(vector<string>& strs)
+int LeetCodeString::findLUSlength(vector<string>& strs)
 {
     map<int, map<string, int>> str_map;
     for (string str : strs)
@@ -2864,7 +2788,7 @@ int LeetCode::findLUSlength(vector<string>& strs)
 /// Note: In the string, each word is separated by single space and there 
 /// will not be any extra space in the string. 
 /// </summary>
-string LeetCode::reverseWordsIII(string s)
+string LeetCodeString::reverseWordsIII(string s)
 {
     int first = 0;
     int last = 0;
@@ -2909,7 +2833,7 @@ string LeetCode::reverseWordsIII(string s)
 /// Input: "PPALLL"
 /// Output: False
 /// </summary>
-bool LeetCode::checkRecord(string s)
+bool LeetCodeString::checkRecord(string s)
 {
     int absent = 0;
     int late = 0;

@@ -3207,6 +3207,411 @@ public:
     /// The string size will be in the range [1, 100].
     /// </summary>
     bool checkValidString(string s);
+
+    /// <summary>
+    /// Leet code #420. Strong Password Checker     
+    /// A password is considered strong if below conditions are all met:
+    /// 1. It has at least 6 characters and at most 20 characters. 
+    /// 2. It must contain at least one lowercase letter, at least one uppercase letter, and at least one digit. 
+    /// 3. It must NOT contain three repeating characters in a row ("...aaa..." is weak, but "...aa...a..." is strong, assuming other conditions are met). 
+    /// Write a function strongPasswordChecker(s), that takes a string s as input, and return the MINIMUM change required to make s a strong password. If s is already strong, return 0.
+    /// Insertion, deletion or replace of any one character are all considered as one change.
+    /// </summary>
+    int strongPasswordChecker(string s);
+
+    /// <summary>
+    /// Is Additive Number recursive call
+    /// </summary>
+    bool isAdditiveNumber(string num1, string num2, string num);
+
+    /// <summary>
+    /// Leet code #306. Additive Number
+    ///
+    /// Additive number is a string whose digits can form additive sequence.
+    /// A valid additive sequence should contain at least three numbers. Except for the first two numbers, 
+    /// each subsequent number in the sequence must be the sum of the preceding two.
+    /// 
+    /// For example:
+    /// "112358" is an additive number because the digits can form an additive sequence: 1, 1, 2, 3, 5, 8. 
+    /// 1 + 1 = 2, 1 + 2 = 3, 2 + 3 = 5, 3 + 5 = 8
+    /// "199100199" is also an additive number, the additive sequence is: 1, 99, 100, 199. 1 + 99 = 100, 99 + 100 = 199
+    ///
+    ///	Note: Numbers in the additive sequence cannot have leading zeros, so sequence 1, 2, 03 or 1, 02, 3 is invalid. 
+    /// Given a string containing only digits '0'-'9', write a function to determine if it's an additive number.
+    /// Follow up:
+    /// How would you handle overflow for very large input integers? 
+    /// </summary>
+    bool isAdditiveNumber(string num);
+
+    /// <summary>
+    /// Leet code #266. Palindrome Permutation  
+    /// 
+    /// Given a string, determine if a permutation of the string could form a palindrome.
+    /// For example,
+    /// "code" -> False, "aab" -> True, "carerac" -> True.
+    /// Hint:
+    /// 1.Consider the palindromes of odd vs even length. What difference do you notice?
+    /// 2.Count the frequency of each character.
+    /// 3.If each character occurs even number of times, then it must be a palindrome. 
+    /// How about character which occurs odd number of times?
+    /// </summary>
+    bool canPermutePalindrome(string s);
+
+    /// <summary>
+    /// Leet code #246. Strobogrammatic Number  
+    /// 
+    /// A strobogrammatic number is a number that looks the same when 
+    /// rotated 180 degrees (looked at upside down).
+    /// Write a function to determine if a number is strobogrammatic. The 
+    /// number is represented as a string.
+    /// For example, the numbers "69", "88", and "818" are all strobogrammatic.
+    /// </summary>
+    bool isStrobogrammatic(string num);
+
+    /// <summary>
+    /// Leet code #249. Group Shifted Strings    
+    /// 
+    /// Given a string, we can "shift" each of its letter to its successive letter, 
+    /// for example: "abc" -> "bcd". We can keep "shifting" which forms the sequence:
+    /// "abc" -> "bcd" -> ... -> "xyz"
+    /// Given a list of strings which contains only lowercase alphabets, 
+    /// group all strings that belong to the same shifting sequence.
+    /// For example, given: ["abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"], 
+    /// A solution is: 
+    /// [
+    ///   ["abc","bcd","xyz"],
+    ///   ["az","ba"],
+    ///   ["acef"],
+    ///   ["a","z"]
+    /// ]
+    /// </summary>
+    vector<vector<string>> groupStrings(vector<string>& strings);
+
+    /// <summary>
+    /// Leet code #408. Valid Word Abbreviation    
+    /// 
+    /// Given a non-empty string s and an abbreviation abbr, return 
+    /// whether the string matches with the given abbreviation. 
+    /// A string such as "word" contains only the following valid abbreviations:
+    /// ["word", "1ord", "w1rd", "wo1d", "wor1", "2rd", "w2d", "wo2", "1o1d", 
+    /// "1or1", "w1r1", "1o2", "2r1", "3d", "w3", "4"]
+    /// Notice that only the above abbreviations are valid abbreviations of 
+    /// the string "word". 
+    /// Any other string is not a valid abbreviation of "word".
+    /// Note:
+    /// Assume s contains only lowercase letters and abbr contains only 
+    /// lowercase letters and digits. 
+    /// Example 1:
+    /// Given s = "internationalization", abbr = "i12iz4n":
+    /// Return true.
+    /// Example 2:
+    /// Given s = "apple", abbr = "a2e":
+    /// Return false.
+    /// </summary>
+    bool validWordAbbreviation(string word, string abbr);
+
+    /// <summary>
+    /// Leet code #481. Magical String
+    /// 
+    /// A magical string S consists of only '1' and '2' and obeys the following rules:  
+    /// The string S is magical because concatenating the number of contiguous occurrences of 
+    /// characters '1' and '2' generates the string S itself.  
+    /// The first few elements of string S is the following: S = "1221121221221121122бнбн" 
+    /// If we group the consecutive '1's and '2's in S, it will be:  
+    ///
+    /// 1 22 11 2 1 22 1 22 11 2 11 22 ...... 
+    ///
+    /// and the occurrences of '1's or '2's in each group are: 
+    /// 1 2 2 1 1 2 1 2 2 1 2 2 ...... 
+    /// You can see that the occurrence sequence above is the S itself. 
+    ///
+    /// Given an integer N as input, return the number of '1's in the first N number in the magical string S. 
+    ///
+    /// Note: N will not exceed 100,000. 
+    /// Example 1:
+    ///
+    /// Input: 6
+    /// Output: 3
+    /// Explanation: The first 6 elements of magical string S is "12211" and it contains three 1's, so return 3.
+    /// </summary>
+    int magicalString(int n);
+
+    /// <summary>
+    /// Leet code #157. Read N Characters Given Read4  
+    /// </summary>
+    int read4(char* buff, string& s, int& index);
+
+    /// <summary>
+    /// Leet code #157. Read N Characters Given Read4  
+    /// 
+    /// The API: int read4(char *buf) reads 4 characters at a time from a file. 
+    /// The return value is the actual number of characters read. For example, 
+    /// it returns 3 if there is only 3 characters left in the file. 
+    /// By using the read4 API, implement the function int read(char *buf, int n) 
+    /// that reads n characters from the file. 
+    ///
+    /// Note:
+    /// The read function will only be called once for each test case. 
+    /// </summary>
+    int readNChars(char* buf, int n, string& s);
+
+    /// <summary>
+    /// Leet code #158. Read N Characters Given Read4 II - Call multiple times  
+    /// 
+    /// The API: int read4(char *buf) reads 4 characters at a time from a file. 
+    /// The return value is the actual number of characters read. 
+    /// For example, it returns 3 if there is only 3 characters left in the file. 
+    /// The return value is the actual number of characters read. For example, 
+    /// it returns 3 if there is only 3 characters left in the file. 
+    /// By using the read4 API, implement the function int read(char *buf, int n) 
+    /// that reads n characters from the file. 
+    /// Note:
+    /// The read function may be called multiple times. 
+    /// </summary>
+    int readNCharsII(char* buf, int n, string& s, int& index, string& m_buffer);
+
+    /// <summary>
+    /// Leet code #159. Longest Substring with At Most Two Distinct Characters
+    /// 
+    /// Given a string, find the length of the longest substring T that contains at most 
+    /// 2 distinct characters. 
+    /// For example, Given s = "eceba", 
+    /// T is "ece" which its length is 3.
+    /// </summary>
+    int lengthOfLongestSubstringTwoDistinct(string s);
+
+    /// <summary>
+    /// Leet code #340. Longest Substring with At Most K Distinct Characters
+    /// 
+    /// Given a string, find the length of the longest substring T that 
+    /// contains at most k distinct characters. 
+    /// For example, Given s = "eceba" and k = 2,  
+    /// T is "ece" which its length is 3. 
+    /// </summary>
+    int lengthOfLongestSubstringKDistinct(string s, int k);
+
+    /// <summary>
+    /// Leet code #467. Unique Substrings in Wraparound String
+    /// 
+    /// Consider the string s to be the infinite wraparound string of "abcdefghijklmnopqrstuvwxyz",
+    /// so s will look like this: 
+    /// "...zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd....".
+    /// Now we have another string p. Your job is to find out how many unique 
+    /// non-empty substrings of p are present in s. In particular, your input is the string 
+    /// p and you need to output the number of different non-empty substrings of p in the string s.
+    /// Note: p consists of only lowercase English letters and the size of p might be over 10000.
+    ///
+    /// Example 1:
+    /// Input: "a"
+    /// Output: 1
+    /// Explanation: Only the substring "a" of string "a" is in the string.
+    ///
+    /// Example 2:
+    /// Input: "cac"
+    /// Output: 2
+    /// Explanation: There are two substrings "a", "c" of string "cac" in the string s.
+    ///
+    /// Example 3:
+    /// Input: "zab"
+    /// Output: 6
+    /// Explanation: There are six substrings "z", "a", "b", "za", "ab", "zab" of string "zab" in the string s.
+    /// </summary>
+    int findSubstringInWraproundString(string p);
+
+    /// <summary>
+    /// Leet code #524. Longest Word in Dictionary through Deleting
+    /// 
+    /// Given a string and a string dictionary, find the longest string in 
+    /// the dictionary that can be formed by deleting some characters of the 
+    /// given string. If there are more than one possible results, return 
+    /// the longest word with the smallest lexicographical order. If there 
+    /// is no possible result, return the empty string.
+    ///
+    /// Example 1:
+    /// Input:
+    /// s = "abpcplea", d = ["ale","apple","monkey","plea"]
+    ///
+    /// Output: 
+    /// "apple"
+    /// Example 2:
+    /// Input:
+    /// s = "abpcplea", d = ["a","b","c"]
+    ///
+    /// Output: 
+    /// "a"
+    /// Note:
+    /// All the strings in the input will only contain lower-case letters.
+    /// The size of the dictionary won't exceed 1,000.
+    /// The length of all the strings in the input won't exceed 1,000.
+    /// </summary>
+    string findLongestWord(string s, vector<string>& d);
+
+    /// <summary>
+    /// Leet code #541. Reverse String II
+    /// 
+    /// Given a string and an integer k, you need to reverse the first 
+    /// k characters for every 2k characters counting from the start of 
+    /// the string. If there are less than k characters left, reverse 
+    /// all of them. If there are less than 2k but greater than or equal 
+    /// to k characters, then reverse the first k characters and left 
+    /// the other as original.
+    ///
+    /// Example:
+    /// Input: s = "abcdefg", k = 2
+    /// Output: "bacdfeg"
+    /// Restrictions:
+    /// The string consists of lower English letters only. 
+    /// Length of the given string and k will in the range [1, 10000]
+    /// </summary>
+    string reverseStr(string s, int k);
+
+    /// <summary>
+    /// Leet code #527. Word Abbreviation
+    /// </summary>
+    string makeAbbreviation(string& word, int k);
+
+    /// <summary>
+    /// Leet code #527. Word Abbreviation
+    /// 
+    /// Given an array of n distinct non-empty strings, you need to 
+    /// generate minimal possible abbreviations for every word 
+    /// following rules below.
+    /// Begin with the first character and then the number of 
+    /// characters abbreviated, which followed by the last character.
+    /// If there are any conflict, that is more than one words share 
+    /// the same abbreviation, a longer prefix is used instead of 
+    /// only the first character until making the map from word to 
+    /// abbreviation become unique. In other words, a final 
+    /// abbreviation cannot map to more than one original words.
+    /// If the abbreviation doesn't make the word shorter, then 
+    /// keep it as original.
+    /// Example:
+    /// Input: ["like", "god", "internal", "me", "internet", 
+    ///         "interval", "intension", "face", "intrusion"]
+    /// Output: ["l2e","god","internal","me","i6t","interval",
+    ///          "inte4n","f2e","intr4n"]
+    /// Note:
+    /// Both n and the length of each word will not exceed 400.
+    /// The length of each word is greater than 1.
+    /// The words consist of lowercase English letters only.
+    /// The return answers should be in the same order as the 
+    /// original array.
+    /// </summary>
+    vector<string> wordsAbbreviation(vector<string>& dict);
+
+    /// <summary>
+    /// Leet code #392. Is Subsequence 
+    /// Given a string s and a string t, check if s is subsequence of t. 
+    /// You may assume that there is only lower case English letters in both s and t. 
+    /// t is potentially a very long (length ~= 500,000) string, and s is a short string (<=100). 
+    ///
+    /// A subsequence of a string is a new string which is formed from the original string by 
+    /// deleting some (can be none) of the characters without disturbing the relative positions 
+    /// of the remaining characters. (ie, "ace" is a subsequence of "abcde" while "aec" is not). 
+    ///
+    /// Example 1:
+    /// s = "abc", t = "ahbgdc" 
+    /// Return true.
+    ///
+    /// Example 2:
+    /// s = "axc", t = "ahbgdc" 
+    /// Return false. 
+    /// 
+    /// Follow up:
+    /// If there are lots of incoming S, say S1, S2, ... , Sk where k >= 1B, and you want to 
+    /// check one by one to see if T has its subsequence. In this scenario, how would you 
+    /// change your code?
+    /// </summary>
+    bool isSubsequence(string s, string t);
+
+    /// <summary>
+    /// Leet code #521. Longest Uncommon Subsequence I
+    /// 
+    /// Given a group of two strings, you need to find the longest uncommon 
+    /// subsequence of this group of two strings. The longest uncommon 
+    /// subsequence is defined as the longest subsequence of one of these 
+    /// strings and this subsequence should not be any subsequence of the other
+    /// strings. 
+    /// A subsequence is a sequence that can be derived from one sequence by 
+    /// deleting some characters without changing the order of the remaining 
+    /// elements. Trivially, any string is a subsequence of itself and an empty 
+    /// string is a subsequence of any string. 
+    /// The input will be two strings, and the output needs to be the length of 
+    /// the longest uncommon subsequence. If the longest uncommon subsequence 
+    /// doesn't exist, return -1. 
+    /// Example 1:
+    /// Input: "aba", "cdc"
+    /// Output: 3
+    /// Explanation: The longest uncommon subsequence is "aba" (or "cdc"), 
+    /// because "aba" is a subsequence of "aba", 
+    /// but not a subsequence of any other strings in the group of two strings. 
+    ///
+    /// Note: 
+    /// Both strings' lengths will not exceed 100.
+    /// Only letters from a ~ z will appear in input strings. 
+    /// </summary>
+    int findLUSlength(string a, string b);
+
+    /// <summary>
+    /// Leet code #522. Longest Uncommon Subsequence II 
+    /// 
+    /// Given a list of strings, you need to find the longest uncommon 
+    /// subsequence among them. The longest uncommon subsequence is 
+    /// defined as the longest subsequence of one of these strings and 
+    /// this subsequence should not be any subsequence of the other 
+    /// strings. 
+    /// A subsequence is a sequence that can be derived from one 
+    /// sequence by deleting some characters without changing the order 
+    /// of the remaining elements. Trivially, any string is a subsequence 
+    /// of itself and an empty string is a subsequence of any string. 
+    /// The input will be a list of strings, and the output needs to be 
+    /// the length of the longest uncommon subsequence. If the longest 
+    /// uncommon subsequence doesn't exist, return -1. 
+    /// Example 1:
+    /// Input: "aba", "cdc", "eae"
+    /// Output: 3
+    /// Note: 
+    /// All the given strings' lengths will not exceed 10.
+    /// The length of the given list will be in the range of [2, 50].
+    /// </summary>
+    int findLUSlength(vector<string>& strs);
+
+    /// <summary>
+    /// Leet code #557. Reverse Words in a String III 
+    /// 
+    /// Given a string, you need to reverse the order of characters in each 
+    /// word within a sentence while still preserving whitespace and initial 
+    /// word order.
+    /// Example 1:
+    /// Input: "Let's take LeetCode contest"
+    /// Output: "s'teL ekat edoCteeL tsetnoc"
+    /// Note: In the string, each word is separated by single space and there 
+    /// will not be any extra space in the string. 
+    /// </summary>
+    string reverseWordsIII(string s);
+
+    /// <summary>
+    /// Leet code #551. Student Attendance Record I
+    /// 
+    /// You are given a string representing an attendance record for a student. 
+    /// The record only contains the following three characters: 
+    /// 'A' : Absent. 
+    /// 'L' : Late.
+    /// 'P' : Present. 
+    ///
+    /// A student could be rewarded if his attendance record doesn't contain 
+    /// more than one 'A' (absent) or more than two continuous 'L' (late). 
+    /// You need to return whether the student could be rewarded according to 
+    /// his attendance record.
+    /// Example 1:
+    /// Input: "PPALLP"
+    /// Output: True
+    ///
+    /// Example 2:
+    /// Input: "PPALLL"
+    /// Output: False
+    /// </summary>
+    bool checkRecord(string s);
 #pragma endregion
 };
 

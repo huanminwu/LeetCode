@@ -5131,6 +5131,161 @@ bool LeetCodeDFS::judgePoint24(vector<int>& nums)
     return false;
 }
 
+/// <summary>
+/// Leet code #422. Valid Word Square    
+/// 
+/// Given a sequence of words, check whether it forms a valid word square. 
+/// A sequence of words forms a valid word square if the kth row and column 
+/// read the exact same string, where 0 ≤ k < max(numRows, numColumns).
+/// Note:
+/// 1.The number of words given is at least 1 and does not exceed 500.
+/// 2.Word length will be at least 1 and does not exceed 500.
+/// 3.Each word contains only lowercase English alphabet a-z.
+/// Example 1: 
+/// Input:
+/// [
+///  "abcd",
+///  "bnrt",
+///  "crmy",
+///  "dtye"
+/// ]
+/// Output:
+/// true
+/// Explanation:
+/// The first row and first column both read "abcd".
+/// The second row and second column both read "bnrt".
+/// The third row and third column both read "crmy".
+/// The fourth row and fourth column both read "dtye".
+/// Therefore, it is a valid word square.
+///
+/// Example 2: 
+/// Input:
+/// [
+///  "abcd",
+///  "bnrt",
+///  "crm",
+///  "dt"
+/// ]
+/// Output:
+/// true
+///
+/// Explanation:
+/// The first row and first column both read "abcd".
+/// The second row and second column both read "bnrt".
+/// The third row and third column both read "crm".
+/// The fourth row and fourth column both read "dt".
+/// Therefore, it is a valid word square.
+/// Example 3: 
+/// Input:
+/// [
+///  "ball",
+///  "area",
+///  "read",
+///  "lady"
+/// ]
+///
+/// Output:
+/// false
+/// Explanation:
+/// The third row reads "read" while the third column reads "lead".
+/// Therefore, it is NOT a valid word square.
+/// </summary>
+bool LeetCodeDFS::validWordSquare(vector<string>& words)
+{
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        for (size_t j = 0; j < words[i].size(); j++)
+        {
+            if (j >= words.size() || i >= words[j].size())
+            {
+                return false;
+            }
+            if (words[i][j] != words[j][i])
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet code #87. Scramble String 
+/// Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively. 
+/// Below is one possible representation of s1 = "great": 
+///      great
+///     /    \
+///    gr    eat
+///   / \    /  \
+///  g   r  e   at
+///            / \
+///           a   t
+///
+/// To scramble the string, we may choose any non-leaf node and swap its two children. 
+/// For example, if we choose the node "gr" and swap its two children, it produces a scrambled string "rgeat". 
+///      rgeat
+///     /    \
+///    rg    eat
+///   / \    /  \
+///  r   g  e   at
+///            / \
+///           a   t
+/// We say that "rgeat" is a scrambled string of "great". 
+/// Similarly, if we continue to swap the children of nodes "eat" and "at", it produces a scrambled string "rgtae". 
+///      rgtae
+///     /    \
+///    rg    tae
+///   / \    /  \
+///  r   g  ta  e
+///        / \
+///       t   a
+/// We say that "rgtae" is a scrambled string of "great". 
+/// Given two strings s1 and s2 of the same length, determine if s2 is a scrambled string of s1. 
+/// </summary>
+bool LeetCodeDFS::isScramble(string s1, string s2)
+{
+    if (s1.size() != s2.size())
+    {
+        return false;
+    }
+    if (s1 == s2) return true;
+    size_t len = s1.size();
+
+    vector<int> alpha_table(26, 0);
+
+    for (size_t i = 0; i < len; i++)
+    {
+        alpha_table[s1[i] - 'a']++;
+    }
+    for (size_t i = 0; i < len; i++)
+    {
+        alpha_table[s2[i] - 'a']--;
+    }
+    for (size_t i = 0; i < 26; i++)
+    {
+        if (alpha_table[i] != 0) return false;
+    }
+
+    for (size_t i = 1; i < len; i++)
+    {
+        string sub1 = s1.substr(0, i);
+        string sub2 = s1.substr(i, len - i);
+
+        if (isScramble(s1.substr(0, i), s2.substr(0, i)) &&
+            isScramble(s1.substr(i, len - i), s2.substr(i, len - i)))
+        {
+            return true;
+        }
+
+        if (isScramble(s1.substr(0, i), s2.substr(len - i, i)) &&
+            isScramble(s1.substr(i, len - i), s2.substr(0, len - i)))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 #pragma endregion
 
 

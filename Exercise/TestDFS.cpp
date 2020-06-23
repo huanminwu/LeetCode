@@ -599,8 +599,45 @@ void TestLeetCode679(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode422(void)
+{
+    Logger::WriteMessage("Test Leet Code 422");
+    LeetCodeDFS leetCode;
+    vector<string> words = { "abcd",  "bnrt", "crmy",  "dtye" };
+    bool isWordSquare = leetCode.validWordSquare(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("It is" + (string)(isWordSquare ? " " : " not ") + "a valid word square");
+
+    words = { "abcd",  "bnrt", "crm",  "dt" };
+    isWordSquare = leetCode.validWordSquare(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("It is" + (string)(isWordSquare ? " " : " not ") + "a valid word square");
+
+    words = { "ball",  "area", "read",  "lady" };
+    isWordSquare = leetCode.validWordSquare(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("It is" + (string)(isWordSquare ? " " : " not ") + "a valid word square");
+}
+
+void TestLeetCode87(void)
+{
+    Logger::WriteMessage("Test Leet Code 87");
+    LeetCodeDFS leetCode;
+    string s1, s2;
+    bool is_scramble;
+    s1.assign("great");
+    s2.assign("rgeat");
+    is_scramble = leetCode.isScramble(s1, s2);
+    Logger::WriteMessage(s1 + " and " + s2 + (is_scramble ? " are " : " are not ") + "scramble string");
+    s2.assign("rgtae");
+    is_scramble = leetCode.isScramble(s1, s2);
+    Logger::WriteMessage(s1 + " and " + s2 + (is_scramble ? " are " : " are not ") + "scramble string");
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode87();
+    TestLeetCode422();
     TestLeetCode679();
     TestLeetCode1397();
     TestLeetCode425();
