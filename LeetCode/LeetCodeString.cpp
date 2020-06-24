@@ -2869,7 +2869,7 @@ bool LeetCodeString::checkRecord(string s)
 /// 1. The input strings only contain lower case letters.
 /// 2. The length of both given strings is in range [1, 10,000].
 /// </summary>
-bool LeetCode::checkInclusion(string s1, string s2)
+bool LeetCodeString::checkInclusion(string s1, string s2)
 {
     vector<int> char_map(26);
     for (size_t i = 0; i < s1.size(); i++)
@@ -2944,7 +2944,7 @@ bool LeetCode::checkInclusion(string s1, string s2)
 /// 5. How to make sure the duplicated files you find are not false 
 /// positive?
 /// </summary>
-vector<vector<string>> LeetCode::findDuplicate(vector<string>& paths)
+vector<vector<string>> LeetCodeString::findDuplicate(vector<string>& paths)
 {
     unordered_map<string, vector<string>> file_map;
     vector<vector<string>> result;
@@ -3011,7 +3011,7 @@ vector<vector<string>> LeetCode::findDuplicate(vector<string>& paths)
 /// 100.
 /// All the strings in input have length in range [1, 1000]. 
 /// </summary>
-string LeetCode::addBoldTag(string s, vector<string>& dict)
+string LeetCodeString::addBoldTag(string s, vector<string>& dict)
 {
     vector<pair<size_t, size_t>> bold_range;
     priority_queue<pair<size_t, size_t>, vector<pair<size_t, size_t>>, std::greater<pair<size_t, size_t>>> word_range;
@@ -3069,7 +3069,7 @@ string LeetCode::addBoldTag(string s, vector<string>& dict)
 /// <summary>
 /// Leet code #591. Tag Validator
 /// </summary>
-string LeetCode::getTag(string code, size_t &pos)
+string LeetCodeString::getTag(string code, size_t &pos)
 {
     string tag;
     while (pos < code.size() && (code[pos] != '>'))
@@ -3175,7 +3175,7 @@ string LeetCode::getTag(string code, size_t &pos)
 ///   characters mentioned above) only contain letters, digits, '<','>',
 ///   '/','!','[',']' and ' '.
 /// </summary>
-bool LeetCode::isValid(string code)
+bool LeetCodeString::isValid(string code)
 {
     enum class HtmlState { Start, TagContent, DataContent, End };
 
@@ -3272,7 +3272,7 @@ bool LeetCode::isValid(string code)
 /// Input: "x=x+2"
 /// Output: "No solution"
 /// </summary>
-string LeetCode::solveEquation(string equation)
+string LeetCodeString::solveEquation(string equation)
 {
     int coefficient = 0;
     int constant = 0;
@@ -3336,7 +3336,7 @@ string LeetCode::solveEquation(string equation)
 /// <summary>
 /// Leet code #648. Replace Words
 /// </summary>
-string LeetCode::replaceWord(unordered_map<int, unordered_set<string>>&dict_map, const string&word)
+string LeetCodeString::replaceWord(unordered_map<int, unordered_set<string>>&dict_map, const string&word)
 {
     string result = word;
     for (size_t i = 0; i < word.size(); i++)
@@ -3375,7 +3375,7 @@ string LeetCode::replaceWord(unordered_map<int, unordered_set<string>>&dict_map,
 /// 4. 1 <= root length <= 100 
 /// 5. 1 <= sentence words length <= 1000 
 /// </summary>
-string LeetCode::replaceWords(vector<string>& dict, string sentence)
+string LeetCodeString::replaceWords(vector<string>& dict, string sentence)
 {
     string result;
     unordered_map<int, unordered_set<string>> dict_map;
@@ -3504,7 +3504,7 @@ int LeetCodeString::repeatedStringMatch(string A, string B)
 /// The length of words will be in the range [1, 1000].
 /// The length of words[i] will be in the range [1, 30].
 /// </summary>
-string LeetCode::longestWord(vector<string>& words)
+string LeetCodeString::longestWord(vector<string>& words)
 {
     unordered_map<int, set<string>> word_map;
     for (string word : words)
@@ -3629,7 +3629,7 @@ string LeetCode::longestWord(vector<string>& words)
 /// There are no single-quote, double-quote, or control characters in the 
 /// source code.
 /// </summary>
-vector<string> LeetCode::removeComments(vector<string>& source)
+vector<string> LeetCodeString::removeComments(vector<string>& source)
 {
     vector<string> result;
     string line;
@@ -3693,7 +3693,7 @@ vector<string> LeetCode::removeComments(vector<string>& source)
 /// <summary>
 /// Leet code #726. Number of Atoms
 /// </summary>
-string LeetCode::parseAtom(string &formula, int& index)
+string LeetCodeString::parseAtom(string &formula, int& index)
 {
     string token;
     while (index < (int)formula.size())
@@ -3719,7 +3719,7 @@ string LeetCode::parseAtom(string &formula, int& index)
 /// <summary>
 /// Leet code #726. Number of Atoms
 /// </summary>
-int LeetCode::parseAtomCount(string &formula, int& index)
+int LeetCodeString::parseAtomCount(string &formula, int& index)
 {
     string token;
     while (isdigit(formula[index]))
@@ -3735,7 +3735,7 @@ int LeetCode::parseAtomCount(string &formula, int& index)
 /// <summary>
 /// Leet code #726. Number of Atoms
 /// </summary>
-void LeetCode::multiplyFormula(map<string, int> &atom_count, int& count)
+void LeetCodeString::multiplyFormula(map<string, int> &atom_count, int& count)
 {
     for (auto itr : atom_count)
     {
@@ -3746,7 +3746,7 @@ void LeetCode::multiplyFormula(map<string, int> &atom_count, int& count)
 /// <summary>
 /// Leet code #726. Number of Atoms
 /// </summary>
-void LeetCode::mergeFormula(map<string, int> &atom_count, vector<map<string, int>>& formula_array)
+void LeetCodeString::mergeFormula(map<string, int> &atom_count, vector<map<string, int>>& formula_array)
 {
     int index = formula_array.size() - 1;
     for (auto itr : atom_count)
@@ -3805,7 +3805,7 @@ void LeetCode::mergeFormula(map<string, int> &atom_count, vector<map<string, int
 /// formula will only consist of letters, digits, and round parentheses, 
 /// and is a valid formula as defined in the problem.
 /// </summary>
-string LeetCode::countOfAtoms(string formula)
+string LeetCodeString::countOfAtoms(string formula)
 {
     string result;
     int index = 0;
@@ -3862,7 +3862,7 @@ string LeetCode::countOfAtoms(string formula)
 /// <summary>
 /// Leet code #736. Parse Lisp Expression
 /// </summary>
-string LeetCode::parseLispToken(string& expression, int& index)
+string LeetCodeString::parseLispToken(string& expression, int& index)
 {
     string result;
     while (index < (int)expression.size())
@@ -3894,7 +3894,7 @@ string LeetCode::parseLispToken(string& expression, int& index)
 /// <summary>
 /// Leet code #736. Parse Lisp Expression
 /// </summary>
-int LeetCode::calculateLispCommand(string& command, vector<string>& parameters, unordered_map<string, int>&variables)
+int LeetCodeString::calculateLispCommand(string& command, vector<string>& parameters, unordered_map<string, int>&variables)
 {
     int result = 0;
     for (size_t i = 0; i < parameters.size(); i++)
@@ -3922,7 +3922,7 @@ int LeetCode::calculateLispCommand(string& command, vector<string>& parameters, 
 /// <summary>
 /// Leet code #736. Parse Lisp Expression
 /// </summary>
-int LeetCode::processLispCommand(string& expression, int& index, unordered_map<string, int> variables)
+int LeetCodeString::processLispCommand(string& expression, int& index, unordered_map<string, int> variables)
 {
     string command;
     vector<string> parameters;
@@ -4053,7 +4053,7 @@ int LeetCode::processLispCommand(string& expression, int& index, unordered_map<s
 /// 4. The answer and all intermediate calculations of that answer are guaranteed 
 /// to fit in a 32-bit integer.
 /// </summary>
-int LeetCode::evaluate(string expression)
+int LeetCodeString::evaluate(string expression)
 {
     int index = 0;
     unordered_map<string, int> variables;
@@ -4063,7 +4063,7 @@ int LeetCode::evaluate(string expression)
 /// <summary>
 /// Leet code #736. Parse Lisp Expression
 /// </summary>
-int LeetCode::processLispExpression(vector<string>& tokens, int& index, unordered_map<string, int> variables)
+int LeetCodeString::processLispExpression(vector<string>& tokens, int& index, unordered_map<string, int> variables)
 {
     int result;
     if (islower(tokens[index][0]))
@@ -4085,7 +4085,7 @@ int LeetCode::processLispExpression(vector<string>& tokens, int& index, unordere
 /// <summary>
 /// Leet code #736. Parse Lisp Expression
 /// </summary>
-int LeetCode::processLispCommand(vector<string>& tokens, int& index, unordered_map<string, int> variables)
+int LeetCodeString::processLispCommand(vector<string>& tokens, int& index, unordered_map<string, int> variables)
 {
     if (tokens[index] == "(") index++;
     string command = tokens[index];
@@ -4136,7 +4136,7 @@ int LeetCode::processLispCommand(vector<string>& tokens, int& index, unordered_m
 /// <summary>
 /// Leet code #736. Parse Lisp Expression
 /// </summary>
-int LeetCode::evaluate_V2(string expression)
+int LeetCodeString::evaluate_V2(string expression)
 {
     int index = 0;
     vector<string> tokens;
@@ -4153,7 +4153,7 @@ int LeetCode::evaluate_V2(string expression)
 /// <summary>
 /// Leet code #751. IP to CIDR
 /// </summary>
-unsigned int LeetCode::convertIpV4ToInt(string ipV4)
+unsigned int LeetCodeString::convertIpV4ToInt(string ipV4)
 {
     unsigned int ipaddress = 0;
     string token;
@@ -4175,7 +4175,7 @@ unsigned int LeetCode::convertIpV4ToInt(string ipV4)
 /// <summary>
 /// Leet code #751. Integer to IPv4
 /// </summary>
-string LeetCode::convertIntToIpV4(unsigned int ipV4)
+string LeetCodeString::convertIntToIpV4(unsigned int ipV4)
 {
     string ipaddress;
     for (size_t i = 0; i < 4; i++)
@@ -4251,7 +4251,7 @@ string LeetCode::convertIntToIpV4(unsigned int ipV4)
 ///    address.
 /// 3. n will be an integer in the range [1, 1000].
 /// </summary>
-vector<string> LeetCode::ipToCIDR(string ip, int range)
+vector<string> LeetCodeString::ipToCIDR(string ip, int range)
 {
     vector<string> result;
     unsigned int ipV4Int = convertIpV4ToInt(ip);
@@ -4303,7 +4303,7 @@ vector<string> LeetCode::ipToCIDR(string ip, int range)
 /// 1. S has length at most 50.
 /// 2. S is guaranteed to be a special binary string as defined above.	
 /// </summary>
-string LeetCode::makeLargestSpecial(string S)
+string LeetCodeString::makeLargestSpecial(string S)
 {
     string result = "";
     vector<string> special_strings;
@@ -4359,7 +4359,7 @@ string LeetCode::makeLargestSpecial(string S)
 /// 3.S has length in range [0, 500].
 /// 4.All characters in words[i] and S are lowercase letters.
 /// </summary>
-string LeetCode::boldWords(vector<string>& words, string S)
+string LeetCodeString::boldWords(vector<string>& words, string S)
 {
     vector<int> bold(S.size());
     string result;
@@ -4806,7 +4806,7 @@ vector<string> LeetCodeString::basicCalculatorIV(string expression, vector<strin
 /// 1. S and J will consist of letters and have length at most 50.
 /// 2. The characters in J are distinct.
 /// </summary>
-int LeetCode::numJewelsInStones(string J, string S)
+int LeetCodeString::numJewelsInStones(string J, string S)
 {
     int result = 0;
     unordered_set<char> jewels;
@@ -4843,7 +4843,7 @@ int LeetCode::numJewelsInStones(string J, string S)
 /// 1. S will have length in range [1, 500].
 /// 2. S will consist of lowercase letters ('a' to 'z') only.
 /// </summary>
-vector<int> LeetCode::partitionLabels(string S)
+vector<int> LeetCodeString::partitionLabels(string S)
 {
     vector<int> result;
     unordered_map<char, int> char_pos;
@@ -4893,7 +4893,7 @@ vector<int> LeetCode::partitionLabels(string S)
 /// Note:
 /// S will consist of lowercase letters and have length in range [1, 500].
 /// </summary>
-string LeetCode::reorganizeString(string S)
+string LeetCodeString::reorganizeString(string S)
 {
     string result;
     vector<vector<int>> char_map(26, vector<int>(2));
@@ -4953,7 +4953,7 @@ string LeetCode::reorganizeString(string S)
 /// 2. Both start and end will only consist of characters in 
 /// {'L', 'R', 'X'}.
 /// </summary>
-bool LeetCode::canTransform(string start, string end)
+bool LeetCodeString::canTransform(string start, string end)
 {
     vector<pair<char, int>> start_map;
     vector<pair<char, int>> end_map;
@@ -5020,7 +5020,7 @@ bool LeetCode::canTransform(string start, string end)
 /// 2. T has length at most 200.
 /// 3. S and T consist of lowercase letters only.
 /// </summary>
-string LeetCode::customSortString(string S, string T)
+string LeetCodeString::customSortString(string S, string T)
 {
     string result;
     unordered_map<char, int> order_map;
@@ -5116,7 +5116,7 @@ bool LeetCodeString::rotateString(string A, string B)
 /// 2. Each words[i] will have length in range [1, 12].
 /// 3. words[i] will only consist of lowercase letters.
 /// </summary>
-int LeetCode::uniqueMorseRepresentations(vector<string>& words)
+int LeetCodeString::uniqueMorseRepresentations(vector<string>& words)
 {
     unordered_set<string> result;
     vector<string> code_map =
@@ -5180,7 +5180,7 @@ int LeetCode::uniqueMorseRepresentations(vector<string>& words)
 /// 3. widths is an array of length 26.
 /// 4. widths[i] will be in the range of [2, 10].
 /// </summary>
-vector<int> LeetCode::numberOfLines(vector<int>& widths, string S)
+vector<int> LeetCodeString::numberOfLines(vector<int>& widths, string S)
 {
     vector<int> result(2);
     result[0] = 1;
@@ -5203,7 +5203,7 @@ vector<int> LeetCode::numberOfLines(vector<int>& widths, string S)
 /// <summary>
 /// Leet code #809. Expressive Words
 /// </summary>
-void LeetCode::expressiveWords(string str, vector<pair<char, int>>& str_code)
+void LeetCodeString::expressiveWords(string str, vector<pair<char, int>>& str_code)
 {
     pair<char, int> char_count;
     for (size_t i = 0; i <= str.size(); i++)
@@ -5270,7 +5270,7 @@ void LeetCode::expressiveWords(string str, vector<pair<char, int>>& str_code)
 /// 3. 0 <= len(words[i]) <= 100.
 /// 4. S and all words in words consist only of lowercase letters
 /// </summary>
-int LeetCode::expressiveWords(string S, vector<string>& words)
+int LeetCodeString::expressiveWords(string S, vector<string>& words)
 {
     int result = 0;
     vector<pair<char, int>> source_code;
@@ -5345,7 +5345,7 @@ int LeetCode::expressiveWords(string S, vector<string>& words)
 /// 8. Words only consist of letters, never apostrophes or other 
 ///    punctuation symbols.
 /// </summary>
-string LeetCode::mostCommonWord(string paragraph, vector<string>& banned)
+string LeetCodeString::mostCommonWord(string paragraph, vector<string>& banned)
 {
     unordered_map<string, int> word_map;
     unordered_set<string> banned_words;
@@ -5406,7 +5406,7 @@ string LeetCode::mostCommonWord(string paragraph, vector<string>& banned)
 /// 2. 1 <= words[i].length <= 7.
 /// 3. Each word has only lowercase letters.
 /// </summary>
-int LeetCode::minimumLengthEncoding(vector<string>& words)
+int LeetCodeString::minimumLengthEncoding(vector<string>& words)
 {
     int result = 0;
     for (size_t i = 0; i < words.size(); i++)
@@ -5477,7 +5477,7 @@ int LeetCode::minimumLengthEncoding(vector<string>& words)
 /// between each word.
 /// 1 <= S.length <= 150.
 /// </summary>
-string LeetCode::toGoatLatin(string S)
+string LeetCodeString::toGoatLatin(string S)
 {
     unordered_set<char> vowel = { 'a', 'e', 'i', 'o', 'u' };
 
@@ -5593,7 +5593,7 @@ string LeetCode::toGoatLatin(string S)
 /// 2. Emails have length at least 8.
 /// 3. Phone numbers have length at least 10.
 /// </summary>
-string LeetCode::maskPII(string S)
+string LeetCodeString::maskPII(string S)
 {
     string result;
     string name;
@@ -5688,7 +5688,7 @@ string LeetCode::maskPII(string S)
 /// 2. 0 < indexes[i] < S.length <= 1000
 /// 3. All characters in given inputs are lowercase letters.
 /// </summary>
-string LeetCode::findReplaceString(string S, vector<int>& indexes,
+string LeetCodeString::findReplaceString(string S, vector<int>& indexes,
     vector<string>& sources, vector<string>& targets)
 {
     string result;
@@ -5772,7 +5772,7 @@ string LeetCode::findReplaceString(string S, vector<int>& indexes,
 /// 1. 1 <= S.length <= 200
 /// 2. S contains only digits.
 /// </summary>
-vector<int> LeetCode::splitIntoFibonacci(string S)
+vector<int> LeetCodeString::splitIntoFibonacci(string S)
 {
     vector<int> result;
     for (size_t i = 1; i < S.size() - 1; i++)
@@ -5843,7 +5843,7 @@ vector<int> LeetCode::splitIntoFibonacci(string S)
 /// 2. 1 <= T.length <= 200
 /// 3. S and T only contain lowercase letters and '#' characters.
 /// </summary>
-bool LeetCode::backspaceCompare(string S, string T)
+bool LeetCodeString::backspaceCompare(string S, string T)
 {
     string src;
     for (size_t i = 0; i < S.size(); i++)
@@ -5901,7 +5901,7 @@ bool LeetCode::backspaceCompare(string S, string T)
 /// 0 <= shifts[i] <= 10 ^ 9
 /// Seen this question in a real interview before?  
 /// </summary>
-string LeetCode::shiftingLetters(string S, vector<int>& shifts)
+string LeetCodeString::shiftingLetters(string S, vector<int>& shifts)
 {
     string result = S;
     vector<int> sh = shifts;
@@ -5949,7 +5949,7 @@ string LeetCode::shiftingLetters(string S, vector<int>& shifts)
 /// 2. 0 <= B.length <= 20000
 /// 3. A and B consist only of lowercase letters.
 /// </summary>
-bool LeetCode::buddyStrings(string A, string B)
+bool LeetCodeString::buddyStrings(string A, string B)
 {
     vector<int> diff;
     vector<int> char_set(26);
@@ -6023,7 +6023,7 @@ bool LeetCode::buddyStrings(string A, string B)
 /// 3. All A[i] have the same length.
 /// 4. All A[i] consist of only lowercase letters.
 /// </summary>
-int LeetCode::numSpecialEquivGroups(vector<string>& A)
+int LeetCodeString::numSpecialEquivGroups(vector<string>& A)
 {
     set<string> str_set;
     for (size_t i = 0; i < A.size(); i++)
@@ -6063,7 +6063,7 @@ int LeetCode::numSpecialEquivGroups(vector<string>& A)
 /// Output: 3
 /// Possible substrings are {"a", "a", "aa"}
 /// </summary>
-int LeetCode::countkDist(string str, int k)
+int LeetCodeString::countkDist(string str, int k)
 {
     unordered_map<char, size_t> num_map;
     size_t head = 0, tail = 0, next = 0;
@@ -6124,7 +6124,7 @@ int LeetCode::countkDist(string str, int k)
 /// 1. 1 <= K <= S.length <= 1000
 /// 2. S consists of lowercase letters only.
 /// </summary>
-string LeetCode::orderlyQueue(string S, int K)
+string LeetCodeString::orderlyQueue(string S, int K)
 {
     string result ;
     if (K == 1)
@@ -6182,7 +6182,7 @@ string LeetCode::orderlyQueue(string S, int K)
 /// 2. typed.length <= 1000
 /// 3. The characters of name and typed are lowercase letters.
 /// </summary>
-bool LeetCode::isLongPressedName(string name, string typed)
+bool LeetCodeString::isLongPressedName(string name, string typed)
 {
     vector<pair<char, int>> name_chars;
     vector<pair<char, int>> typed_chars;
@@ -6262,7 +6262,7 @@ bool LeetCode::isLongPressedName(string name, string typed)
 /// 2. 1 <= emails.length <= 100
 /// 3. Each emails[i] contains exactly one '@' character.
 /// </summary>
-int LeetCode::numUniqueEmails(vector<string>& emails)
+int LeetCodeString::numUniqueEmails(vector<string>& emails)
 {
     unordered_set<string> emails_set;
     for (size_t i = 0; i < emails.size(); i++)
@@ -6285,7 +6285,7 @@ int LeetCode::numUniqueEmails(vector<string>& emails)
 /// <summary>
 /// Leet code #9904. CSV Parser
 /// </summary>
-string LeetCode::parsePhrase(string& line, int &pos)
+string LeetCodeString::parsePhrase(string& line, int &pos)
 {
     string result;
     bool in_quote = false;
@@ -6334,7 +6334,7 @@ string LeetCode::parsePhrase(string& line, int &pos)
 /// <summary>
 /// Leet code #9904. CSV Parser
 /// </summary>
-vector<string> LeetCode::parseLine(string& line)
+vector<string> LeetCodeString::parseLine(string& line)
 {
     int pos = 0;
     vector<string> result;
@@ -6369,7 +6369,7 @@ vector<string> LeetCode::parseLine(string& line)
 ///	Alexandra "Alex" | Menendez | alex.menendez@gmail.com | Miami | 1
 ///	"Alexandra Alex"
 /// </summary>
-vector<vector<string>> LeetCode::parseCSV(vector<string>& lines)
+vector<vector<string>> LeetCodeString::parseCSV(vector<string>& lines)
 {
     vector<vector<string>> result;
     for (size_t i = 0; i < lines.size(); i++)
@@ -6413,7 +6413,7 @@ vector<vector<string>> LeetCode::parseCSV(vector<string>& lines)
 /// 3. logs[i] is guaranteed to have an identifier, and a word after the 
 /// identifier.
 /// </summary>
-vector<string> LeetCode::reorderLogFiles(vector<string>& logs)
+vector<string> LeetCodeString::reorderLogFiles(vector<string>& logs)
 {
     vector<string> result;
     vector<pair<string, string>> letter_logs, digit_logs;
@@ -6761,7 +6761,7 @@ bool LeetCodeString::isRationalEqual(string S, string T)
 /// 2. 1 <= A[i].length <= 100
 /// 3. A[i][j] is a lowercase letter
 /// </summary>
-vector<string> LeetCode::commonChars(vector<string>& A)
+vector<string> LeetCodeString::commonChars(vector<string>& A)
 {
     vector<int> result_count(26, INT_MAX);
 
@@ -6842,7 +6842,7 @@ vector<string> LeetCode::commonChars(vector<string>& A)
 /// 2. S[i] is "(" or ")"
 /// 3. S is a valid parentheses string
 /// </summary>
-string LeetCode::removeOuterParentheses(string S)
+string LeetCodeString::removeOuterParentheses(string S)
 {
     string result;
     string search;
@@ -6905,7 +6905,7 @@ string LeetCode::removeOuterParentheses(string S)
 /// 3. 1 <= pattern.length <= 100
 /// 4. All strings consists only of lower and upper case English letters.
 /// </summary>
-vector<bool> LeetCode::camelMatch(vector<string>& queries, string pattern)
+vector<bool> LeetCodeString::camelMatch(vector<string>& queries, string pattern)
 {
     vector<bool> result(queries.size());
     for (size_t i = 0; i < queries.size(); i++)
@@ -7908,7 +7908,7 @@ int LeetCodeString::countCharacters(vector<string>& words, string chars)
 /// 1. 1 <= s.length <= 4 * 10^5
 /// 2. s contains only lowercase English letters.
 /// </summary>
-string LeetCode::lastSubstring(string s)
+string LeetCodeString::lastSubstring(string s)
 {
     queue<pair<int, char>> search;
     vector<int> visited(s.size());

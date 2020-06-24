@@ -161,9 +161,9 @@ public:
 ///
 /// INPUT FORMAT (file gymnastics.in):
 /// The first line of the input file contains two positive integers K and N. 
-/// The next K lines will each contain the integers 1…N in some order, 
+/// The next K lines will each contain the integers 1...N in some order, 
 /// indicating the rankings of the cows (cows are identified by the numbers 
-/// 1…N). If A appears before B in one of these lines, that means cow A did 
+/// 1...N). If A appears before B in one of these lines, that means cow A did 
 /// better than cow B.
 /// OUTPUT FORMAT (file gymnastics.out):
 /// Output, on a single line, the number of consistent pairs.

@@ -2247,8 +2247,865 @@ void TestLeetCode557(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode616(void)
+{
+    LeetCodeString leetCode;
+    string s = "abcxyz123";
+    vector<string> dict = { "abc", "123" };
+    string result = leetCode.addBoldTag(s, dict);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(dict);
+    Logger::WriteMessage("result = " + result);
+
+    s = "aaabbcc";
+    dict = { "aaa", "aab", "bc" };
+    result = leetCode.addBoldTag(s, dict);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(dict);
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode567(void)
+{
+    LeetCodeString leetCode;
+    string s1 = "ab", s2 = "eidbaooo";
+    bool result = leetCode.checkInclusion(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "; result = " + (string)(result ? "true" : "false"));
+
+    s1 = "ab";
+    s2 = "eidboaoo";
+    result = leetCode.checkInclusion(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "; result = " + (string)(result ? "true" : "false"));
+
+    s1 = "adc";
+    s2 = "dcda";
+    result = leetCode.checkInclusion(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode726(void)
+{
+    LeetCodeString leetCode;
+
+    string formula = "H2O";
+    string result = leetCode.countOfAtoms(formula);
+    Logger::WriteMessage("formula = " + formula + "; result = " + result);
+
+    formula = "Mg(OH)2";
+    result = leetCode.countOfAtoms(formula);
+    Logger::WriteMessage("formula = " + formula + "; result = " + result);
+
+    formula = "K4(ON(SO3)2)2";
+    result = leetCode.countOfAtoms(formula);
+    Logger::WriteMessage("formula = " + formula + "; result = " + result);
+
+    formula = "(Be22)8((Ge4)46)13";
+    result = leetCode.countOfAtoms(formula);
+    Logger::WriteMessage("formula = " + formula + "; result = " + result);
+}
+
+void TestLeetCode609(void)
+{
+    LeetCodeString leetCode;
+    vector<string> paths = { "root/a 1.txt(abcd) 2.txt(efgh)", "root/c 3.txt(abcd)", "root/c/d 4.txt(efgh)", "root 4.txt(efgh)" };
+    Logger::WriteMessage(paths);
+    vector<vector<string>> result = leetCode.findDuplicate(paths);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode591(void)
+{
+    LeetCodeString leetCode;
+
+    Logger::WriteMessage("Valid Examples");
+    string code = "<DIV>This is the first line <![CDATA[<div>]]></DIV>";
+    bool result = leetCode.isValid(code);
+    Logger::WriteMessage(code);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    code = "<DIV>>>  ![cdata[]] <![CDATA[<div>]>]]>]]>>]</DIV>";
+    result = leetCode.isValid(code);
+    Logger::WriteMessage(code);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    Logger::WriteMessage("Invalid Examples");
+    code = "<A>  <B> </A>   </B>";
+    result = leetCode.isValid(code);
+    Logger::WriteMessage(code);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    code = "<DIV>  div tag is not closed  <DIV>";
+    result = leetCode.isValid(code);
+    Logger::WriteMessage(code);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    code = "<DIV>  unmatched <  </DIV>";
+    result = leetCode.isValid(code);
+    Logger::WriteMessage(code);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    code = "<DIV> closed tags with invalid tag name  <b>123</b> </DIV>";
+    result = leetCode.isValid(code);
+    Logger::WriteMessage(code);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    code = "<DIV> unmatched tags with invalid tag name  </1234567890> and <CDATA[[]]>  </DIV>";
+    result = leetCode.isValid(code);
+    Logger::WriteMessage(code);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    code = "<DIV>  unmatched start tag <B>  and unmatched end tag </C> </DIV>";
+    result = leetCode.isValid(code);
+    Logger::WriteMessage(code);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    code = "!!!<A>123</A>";
+    result = leetCode.isValid(code);
+    Logger::WriteMessage(code);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode720(void)
+{
+    LeetCodeString leetCode;
+    vector<string> words = { "w","wo","wor","worl", "world" };
+    string longestWord = leetCode.longestWord(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("Longest word = " + longestWord);
+
+    words = { "a", "banana", "app", "appl", "ap", "apply", "apple" };
+    longestWord = leetCode.longestWord(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("Longest word = " + longestWord);
+}
+
+void TestLeetCode722(void)
+{
+    LeetCodeString leetCode;
+
+    vector<string> source =
+    {
+        "/*Test program */", "int main()", "{ ", "  // variable declaration ", "int a, b, c;", "/* This is a test",
+        "   multiline  ", "   comment for ", "   testing */", "a = b + c;", "}"
+    };
+    vector<string> result = leetCode.removeComments(source);
+    Logger::WriteMessage(source);
+    Logger::WriteMessage(result);
+
+    source = { "a/*comment", "line", "more_comment*/b" };
+    result = leetCode.removeComments(source);
+    Logger::WriteMessage(source);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode648(void)
+{
+    LeetCodeString leetCode;
+    vector<string> dict = { "cat", "bat", "rat" };
+    string sentence = "the cattle was rattled by the battery";
+    string result = leetCode.replaceWords(dict, sentence);
+    Logger::WriteMessage(dict);
+    Logger::WriteMessage("sentence = " + sentence + "; result = " + result);
+}
+
+void TestLeetCode640(void)
+{
+    LeetCodeString leetCode;
+    string equation = "x+5-3+x=6+x-2";
+    string result = leetCode.solveEquation(equation);
+    Logger::WriteMessage(equation + " " + result);
+
+    equation = "x=x";
+    result = leetCode.solveEquation(equation);
+    Logger::WriteMessage(equation + " " + result);
+
+    equation = "2x=x";
+    result = leetCode.solveEquation(equation);
+    Logger::WriteMessage(equation + " " + result);
+
+    equation = "2x+3x-6x=x+2";
+    result = leetCode.solveEquation(equation);
+    Logger::WriteMessage(equation + " " + result);
+
+    equation = "x=x+2";
+    result = leetCode.solveEquation(equation);
+    Logger::WriteMessage(equation + " " + result);
+}
+
+void TestLeetCode736(void)
+{
+    LeetCodeString leetCode;
+    string expression = "(add 1 2)";
+    int expected = 3;
+    int result = leetCode.evaluate(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+    result = leetCode.evaluate_V2(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+
+    expression = "(mult 3 (add 2 3))";
+    expected = 15;
+    result = leetCode.evaluate(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+    result = leetCode.evaluate_V2(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+
+    expression = "(let x 2 (mult x 5))";
+    expected = 10;
+    result = leetCode.evaluate(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+    result = leetCode.evaluate_V2(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+
+    expression = "(let x 2 (mult x (let x 3 y 4 (add x y))))";
+    expected = 14;
+    result = leetCode.evaluate(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+    result = leetCode.evaluate_V2(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+
+    expression = "(let x 3 x 2 x)";
+    expected = 2;
+    result = leetCode.evaluate(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+    result = leetCode.evaluate_V2(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+
+    expression = "(let x 1 y 2 x (add x y) (add x y))";
+    expected = 5;
+    result = leetCode.evaluate(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+    result = leetCode.evaluate_V2(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+
+    expression = "(let x 2 (add (let x 3 (let x 4 x)) x))";
+    expected = 6;
+    result = leetCode.evaluate(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+    result = leetCode.evaluate_V2(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+
+    expression = "(let a1 3 b2 (add a1 1) b2)";
+    expected = 4;
+    result = leetCode.evaluate(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+    result = leetCode.evaluate_V2(expression);
+    Logger::WriteMessage("expression = " + expression + "; expected = " + to_string(expected) + "; result = " + to_string(result));
+}
+
+void TestLeetCode751(void)
+{
+    Logger::WriteMessage("Test Leet Code 752");
+    LeetCodeString leetCode;
+    string ip = "255.0.0.7";
+    int n = 10;
+    vector<string> result = leetCode.ipToCIDR(ip, n);
+    Logger::WriteMessage("ip = " + ip + "; n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode844(void)
+{
+    Logger::WriteMessage("Test Leet Code 844");
+    LeetCodeString leetCode;
+    string S = "ab#c";
+    string T = "ad#c";
+    bool result = leetCode.backspaceCompare(S, T);
+    Logger::WriteMessage("S = " + S + "; T = " + T);
+    Logger::WriteMessage(result ? "true" : "false");
+
+    S = "ab##";
+    T = "c#d#";
+    result = leetCode.backspaceCompare(S, T);
+    Logger::WriteMessage("S = " + S + "; T = " + T);
+    Logger::WriteMessage(result ? "true" : "false");
+
+    S = "a##c";
+    T = "#a#c";
+    result = leetCode.backspaceCompare(S, T);
+    Logger::WriteMessage("S = " + S + "; T = " + T);
+    Logger::WriteMessage(result ? "true" : "false");
+
+    S = "a#c";
+    T = "b";
+    result = leetCode.backspaceCompare(S, T);
+    Logger::WriteMessage("S = " + S + "; T = " + T);
+    Logger::WriteMessage(result ? "true" : "false");
+}
+
+void TestLeetCode758(void)
+{
+    Logger::WriteMessage("Test Leet Code 758");
+    LeetCodeString leetCode;
+    vector<string> words = { "ab", "bc" };
+    string S = "aabcd";
+    string result = leetCode.boldWords(words, S);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+}
+
+void TestLeetCode859(void)
+{
+    Logger::WriteMessage("Test Leet Code 859");
+    LeetCodeString leetCode;
+    string A = "ab";
+    string B = "ba";
+    bool result = leetCode.buddyStrings(A, B);
+    Logger::WriteMessage("A = " + A + "; B = " + B + "; result = " + (string)(result ? "true" : "false"));
+
+    A = "ab";
+    B = "ab";
+    result = leetCode.buddyStrings(A, B);
+    Logger::WriteMessage("A = " + A + "; B = " + B + "; result = " + (string)(result ? "true" : "false"));
+
+    A = "aa";
+    B = "aa";
+    result = leetCode.buddyStrings(A, B);
+    Logger::WriteMessage("A = " + A + "; B = " + B + "; result = " + (string)(result ? "true" : "false"));
+
+    A = "aaaaaaabc";
+    B = "aaaaaaacb";
+    result = leetCode.buddyStrings(A, B);
+    Logger::WriteMessage("A = " + A + "; B = " + B + "; result = " + (string)(result ? "true" : "false"));
+
+    A = "";
+    B = "aa";
+    result = leetCode.buddyStrings(A, B);
+    Logger::WriteMessage("A = " + A + "; B = " + B + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode777(void)
+{
+    Logger::WriteMessage("Test Leet Code 777");
+    LeetCodeString leetCode;
+    string start = "RXXLRXRXL";
+    string end = "XRLXXRRLX";
+    bool result = leetCode.canTransform(start, end);
+    Logger::WriteMessage("start = " + start + "; end = " + end + "; result = " + (string)(result ? "true" : "false"));
+
+    start = "RXXLRXRXL";
+    end = "XLRXXRRLX";
+    result = leetCode.canTransform(start, end);
+    Logger::WriteMessage("start = " + start + "; end = " + end + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1002(void)
+{
+    Logger::WriteMessage("Test Leet Code 1002");
+    LeetCodeString leetCode;
+    vector<string> A = { "bella", "label", "roller" };
+    vector<string> result = leetCode.commonChars(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(result);
+
+    A = { "cool", "lock", "cook" };
+    result = leetCode.commonChars(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode9900(void)
+{
+    Logger::WriteMessage("Test Leet Code 9900");
+    LeetCodeString leetCode;
+    string str = "abc";
+    int k = 2;
+    int result = leetCode.countkDist(str, k);
+    Logger::WriteMessage("str = " + str + "; " + to_string(k) + "; result = " + to_string(result));
+
+    str = "aba";
+    k = 2;
+    result = leetCode.countkDist(str, k);
+    Logger::WriteMessage("str = " + str + "; " + to_string(k) + "; result = " + to_string(result));
+
+    str = "aa";
+    k = 1;
+    result = leetCode.countkDist(str, k);
+    Logger::WriteMessage("str = " + str + "; " + to_string(k) + "; result = " + to_string(result));
+
+    str = "abcaaaab";
+    k = 3;
+    result = leetCode.countkDist(str, k);
+    Logger::WriteMessage("str = " + str + "; " + to_string(k) + "; result = " + to_string(result));
+
+    str = "abcbaa";
+    k = 3;
+    result = leetCode.countkDist(str, k);
+    Logger::WriteMessage("str = " + str + "; " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode791(void)
+{
+    Logger::WriteMessage("Test Leet Code 791");
+    LeetCodeString leetCode;
+    string S = "cba";
+    string T = "abcd";
+    string result = leetCode.customSortString(S, T);
+    Logger::WriteMessage("S = " + S + "; T = " + T + "; result = " + result);
+}
+
+void TestLeetCode809(void)
+{
+    Logger::WriteMessage("Test Leet Code 809");
+    LeetCodeString leetCode;
+    string S = "heeellooo";
+    vector<string> words = { "hello", "hi", "helo" };
+    int result = leetCode.expressiveWords(S, words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
+}
+
+void TestLeetCode833(void)
+{
+    Logger::WriteMessage("Test Leet Code 833");
+    LeetCodeString leetCode;
+
+    string S = "abcd";
+    vector<int> indexes = { 0, 2 };
+    vector<string> sources = { "a", "cd" };
+    vector<string> targets = { "eee","ffff" };
+    string result = leetCode.findReplaceString(S, indexes, sources, targets);
+    Logger::WriteMessage(indexes);
+    Logger::WriteMessage(sources);
+    Logger::WriteMessage(targets);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+
+    S = "abcd";
+    indexes = { 0, 2 };
+    sources = { "ab","ec" };
+    targets = { "eee","ffff" };
+    result = leetCode.findReplaceString(S, indexes, sources, targets);
+    Logger::WriteMessage(indexes);
+    Logger::WriteMessage(sources);
+    Logger::WriteMessage(targets);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+
+    S = "vmokgggqzp";
+    indexes = { 3, 5, 1 };
+    sources = { "kg", "ggq", "mo" };
+    targets = { "s", "so", "bfr" };
+    result = leetCode.findReplaceString(S, indexes, sources, targets);
+    Logger::WriteMessage(indexes);
+    Logger::WriteMessage(sources);
+    Logger::WriteMessage(targets);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+}
+
+void TestLeetCode925(void)
+{
+    Logger::WriteMessage("Test Leet Code 925");
+    LeetCodeString leetCode;
+    string name = "alex";
+    string typed = "aaleex";
+    bool result = leetCode.isLongPressedName(name, typed);
+    Logger::WriteMessage("name = " + name + "; typed = " + typed + "; result = " + (string)(result ? "true" : "false"));
+
+    name = "saeed";
+    typed = "ssaaedd";
+    result = leetCode.isLongPressedName(name, typed);
+    Logger::WriteMessage("name = " + name + "; typed = " + typed + "; result = " + (string)(result ? "true" : "false"));
+
+    name = "leelee";
+    typed = "lleeelee";
+    result = leetCode.isLongPressedName(name, typed);
+    Logger::WriteMessage("name = " + name + "; typed = " + typed + "; result = " + (string)(result ? "true" : "false"));
+
+    name = "laiden";
+    typed = "laiden";
+    result = leetCode.isLongPressedName(name, typed);
+    Logger::WriteMessage("name = " + name + "; typed = " + typed + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1163(void)
+{
+    Logger::WriteMessage("Test Leet Code 1163");
+    LeetCodeString leetCode;
+    string s = "abab";
+    string result = leetCode.lastSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "leetcode";
+    result = leetCode.lastSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
+void TestLeetCode761(void)
+{
+    Logger::WriteMessage("Test Leet Code 761");
+    LeetCodeString leetCode;
+    string S = "11011000";
+    string result = leetCode.makeLargestSpecial(S);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+}
+
+void TestLeetCode831(void)
+{
+    Logger::WriteMessage("Test Leet Code 831");
+    LeetCodeString leetCode;
+    string S = "LeetCode@LeetCode.com";
+    string result = leetCode.maskPII(S);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+
+    S = "AB@qq.com";
+    result = leetCode.maskPII(S);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+
+    S = "1(234)567-890";
+    result = leetCode.maskPII(S);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+
+    S = "86-(10)12345678";
+    result = leetCode.maskPII(S);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+}
+
+void TestLeetCode820(void)
+{
+    Logger::WriteMessage("Test Leet Code 820");
+    LeetCodeString leetCode;
+    vector<string> words = { "time", "me", "bell" };
+    int result = leetCode.minimumLengthEncoding(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode819(void)
+{
+    Logger::WriteMessage("Test Leet Code 819");
+    LeetCodeString leetCode;
+    string paragraph = "Bob hit a ball, the hit BALL flew far after it was hit.";
+    vector<string> banned = { "hit" };
+    string result = leetCode.mostCommonWord(paragraph, banned);
+    Logger::WriteMessage(paragraph);
+    Logger::WriteMessage(banned);
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode806(void)
+{
+    Logger::WriteMessage("Test Leet Code 806");
+    LeetCodeString leetCode;
+    vector<int> widths = { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
+    string S = "abcdefghijklmnopqrst";
+    vector<int> result = leetCode.numberOfLines(widths, S);
+    Logger::WriteMessage(widths);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+
+    widths = { 4,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,100 };
+    S = "bbbcccdddaaa";
+    result = leetCode.numberOfLines(widths, S);
+    Logger::WriteMessage(widths);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode771(void)
+{
+    Logger::WriteMessage("Test Leet Code 771");
+    LeetCodeString leetCode;
+    string J = "aA";
+    string S = "aAAbbbb";
+    int result = leetCode.numJewelsInStones(J, S);
+    Logger::WriteMessage("J = " + J + "; S = " + S + "; result = " + to_string(result));
+    J = "z";
+    S = "ZZ";
+    result = leetCode.numJewelsInStones(J, S);
+    Logger::WriteMessage("J = " + J + "; S = " + S + "; result = " + to_string(result));
+}
+
+void TestLeetCode893(void)
+{
+    Logger::WriteMessage("Test Leet Code 893");
+    LeetCodeString leetCode;
+    vector<string> A = { "a","b","c","a","c","c" };
+    int result = leetCode.numSpecialEquivGroups(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { "aa","bb","ab","ba" };
+    result = leetCode.numSpecialEquivGroups(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { "abc","acb","bac","bca","cab","cba" };
+    result = leetCode.numSpecialEquivGroups(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { "abcd","cdab","adcb","cbad" };
+    result = leetCode.numSpecialEquivGroups(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode929(void)
+{
+    Logger::WriteMessage("Test Leet Code 929");
+    LeetCodeString leetCode;
+    vector<string> emails =
+    {
+        "test.email+alex@leetcode.com",
+        "test.e.mail+bob.cathy@leetcode.com",
+        "testemail+david@lee.tcode.com"
+    };
+    int result = leetCode.numUniqueEmails(emails);
+    Logger::WriteMessage(emails);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode899(void)
+{
+    Logger::WriteMessage("Test Leet Code 899");
+    LeetCodeString leetCode;
+    string S = "cba";
+    int K = 1;
+    string result = leetCode.orderlyQueue(S, K);
+    Logger::WriteMessage("S = " + S + "; K = " + to_string(K) + "; result = " + result);
+
+    S = "baaca";
+    K = 3;
+    result = leetCode.orderlyQueue(S, K);
+    Logger::WriteMessage("S = " + S + "; K = " + to_string(K) + "; result = " + result);
+
+    S = "abcedaa";
+    K = 3;
+    result = leetCode.orderlyQueue(S, K);
+    Logger::WriteMessage("S = " + S + "; K = " + to_string(K) + "; result = " + result);
+
+    S = "v";
+    K = 1;
+    result = leetCode.orderlyQueue(S, K);
+    Logger::WriteMessage("S = " + S + "; K = " + to_string(K) + "; result = " + result);
+
+    S = "kuh";
+    K = 1;
+    result = leetCode.orderlyQueue(S, K);
+    Logger::WriteMessage("S = " + S + "; K = " + to_string(K) + "; result = " + result);
+
+    S = "pplpkohe";
+    K = 3;
+    result = leetCode.orderlyQueue(S, K);
+    Logger::WriteMessage("S = " + S + "; K = " + to_string(K) + "; result = " + result);
+}
+
+void TestLeetCode9904(void)
+{
+    Logger::WriteMessage("Test Leet Code 9904");
+    LeetCodeString leetCode;
+    vector<string> lines =
+    {
+        "John,Smith,john.smith@gmail.com,Los Angeles,1",
+        "Jane, Roberts, janer@msn.com, \"San Francisco, CA\", 0",
+        "Huanmin, Wu,,,",
+        "\"Alexandra \"\"Alex\"\"\", Menendez, alex.menendez@gmail.com, Miami, 1",
+        "\"\"\"Alexandra Alex\"\"\""
+    };
+    vector<vector<string>> result = leetCode.parseCSV(lines);
+    for (string line : lines)Logger::WriteMessage(line);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode763(void)
+{
+    Logger::WriteMessage("Test Leet Code 763");
+    LeetCodeString leetCode;
+    string S = "ababcbacadefegdehijhklij";
+    vector<int> result = leetCode.partitionLabels(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1021(void)
+{
+    Logger::WriteMessage("Test Leet Code 1021");
+    LeetCodeString leetCode;
+    string S = "(()())(())";
+    string result = leetCode.removeOuterParentheses(S);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+
+    S = "(()())(())(()(()))";
+    result = leetCode.removeOuterParentheses(S);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+
+    S = "()()";
+    result = leetCode.removeOuterParentheses(S);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+}
+
+void TestLeetCode937(void)
+{
+    Logger::WriteMessage("Test Leet Code 937");
+    LeetCodeString leetCode;
+    vector<string> logs =
+    {
+        "a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"
+    };
+    vector<string> result = leetCode.reorderLogFiles(logs);
+    Logger::WriteMessage(logs);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode767(void)
+{
+    Logger::WriteMessage("Test Leet Code 767");
+    LeetCodeString leetCode;
+    string S = "aab";
+    string result = leetCode.reorganizeString(S);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+
+    S = "aaab";
+    result = leetCode.reorganizeString(S);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+}
+
+void TestLeetCode848(void)
+{
+    Logger::WriteMessage("Test Leet Code 848");
+    LeetCodeString leetCode;
+    string S = "abc";
+    vector<int> shifts = { 3,5,9 };
+    string result = leetCode.shiftingLetters(S, shifts);
+    Logger::WriteMessage(shifts);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+
+    S = "mkgfzkkuxownxvfvxasy";
+    shifts =
+    {
+        505870226, 437526072, 266740649, 224336793, 532917782, 311122363, 567754492, 595798950,
+        81520022, 684110326, 137742843, 275267355, 856903962, 148291585, 919054234, 467541837,
+        622939912, 116899933, 983296461, 536563513
+    };
+    result = leetCode.shiftingLetters(S, shifts);
+    Logger::WriteMessage(shifts);
+    Logger::WriteMessage("S = " + S + "; result = " + result);
+}
+
+void TestLeetCode842(void)
+{
+    Logger::WriteMessage("Test Leet Code 842");
+    LeetCodeString leetCode;
+    string S = "123456579";
+    vector<int> result = leetCode.splitIntoFibonacci(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+
+    S = "11235813";
+    result = leetCode.splitIntoFibonacci(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+
+    S = "112358130";
+    result = leetCode.splitIntoFibonacci(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+
+    S = "0123";
+    result = leetCode.splitIntoFibonacci(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+
+    S = "1101111";
+    result = leetCode.splitIntoFibonacci(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+
+    S = "011";
+    result = leetCode.splitIntoFibonacci(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+
+    S = "214748364721474836422147483641";
+    result = leetCode.splitIntoFibonacci(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode824(void)
+{
+    Logger::WriteMessage("Test Leet Code 824");
+    LeetCodeString leetCode;
+    string S = "I speak Goat Latin";
+    string result = leetCode.toGoatLatin(S);
+    Logger::WriteMessage("S= " + S + "; result = " + result);
+
+    S = "The quick brown fox jumped over the lazy dog";
+    result = leetCode.toGoatLatin(S);
+    Logger::WriteMessage("S= " + S + "; result = " + result);
+}
+
+
+void TestLeetCode804(void)
+{
+    Logger::WriteMessage("Test Leet Code 804");
+    LeetCodeString leetCode;
+    vector<string> words = { "gin", "zen", "gig", "msg" };
+    int result = leetCode.uniqueMorseRepresentations(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode678(void)
+{
+    LeetCodeString leetCode;
+    string s = "()";
+    bool isValid = leetCode.checkValidString(s);
+    Logger::WriteMessage("s = " + s + "; is valid = " + (string)(isValid ? "true" : "false"));
+
+    s = "(*)";
+    isValid = leetCode.checkValidString(s);
+    Logger::WriteMessage("s = " + s + "; is valid = " + (string)(isValid ? "true" : "false"));
+
+    s = "(*))";
+    isValid = leetCode.checkValidString(s);
+    Logger::WriteMessage("s = " + s + "; is valid = " + (string)(isValid ? "true" : "false"));
+
+    s = "())*";
+    isValid = leetCode.checkValidString(s);
+    Logger::WriteMessage("s = " + s + "; is valid = " + (string)(isValid ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode804();
+    TestLeetCode824();
+    TestLeetCode842();
+    TestLeetCode848();
+    TestLeetCode767();
+    TestLeetCode937();
+    TestLeetCode1021();
+    TestLeetCode763();
+    TestLeetCode9904();
+    TestLeetCode899();
+    TestLeetCode929();
+    TestLeetCode893();
+    TestLeetCode771();
+    TestLeetCode806();
+    TestLeetCode820();
+    TestLeetCode819();
+    TestLeetCode831();
+    TestLeetCode761();
+    TestLeetCode1163();
+    TestLeetCode925();
+    TestLeetCode833();
+    TestLeetCode809();
+    TestLeetCode791();
+    TestLeetCode9900();
+    TestLeetCode1002();
+    TestLeetCode777();
+    TestLeetCode859();
+    TestLeetCode758();
+    TestLeetCode844();
+    TestLeetCode751();
+    TestLeetCode736();
+    TestLeetCode640();
+    TestLeetCode648();
+    TestLeetCode722();
+    TestLeetCode720();
+    TestLeetCode591();
+    TestLeetCode609();
+    TestLeetCode726();
+    TestLeetCode567();
+    TestLeetCode616();
     TestLeetCode557();
     TestLeetCode551();
     TestLeetCode527();
