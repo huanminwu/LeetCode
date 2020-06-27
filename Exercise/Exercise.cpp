@@ -218,45 +218,7 @@ void TestLeetCode57(void)
 
 
 
-void TestLeetCode30(void)
-{
-    Logger::WriteMessage("Test Leet Code 30");
-    LeetCode leetCode;
-    vector<string> words;
-    vector<int> result;
-    string s;
-    s.assign("wordgoodgoodgoodbestword");
-    words = { "word", "good", "best", "good" };
-    Logger::WriteMessage("s = " + s);
-    Logger::WriteMessage("word list ");
-    Logger::WriteMessage(words);
-    result = leetCode.findSubstring(s, words);
-    Logger::WriteMessage(result);
 
-    s.assign("barfoothefoobarman");
-    words = { "foo", "bar" };
-    Logger::WriteMessage("s = " + s);
-    Logger::WriteMessage("word list ");
-    Logger::WriteMessage(words);
-    result = leetCode.findSubstring(s, words);
-    Logger::WriteMessage(result);
-
-    s.assign("mississippi");
-    words = { "mississippis" };
-    Logger::WriteMessage("s = " + s);
-    Logger::WriteMessage("word list ");
-    Logger::WriteMessage(words);
-    result = leetCode.findSubstring(s, words);
-    Logger::WriteMessage(result);
-
-    s.assign("barfoofoobarthefoobarman");
-    words = { "bar", "foo", "the" };
-    Logger::WriteMessage("s = " + s);
-    Logger::WriteMessage("word list ");
-    Logger::WriteMessage(words);
-    result = leetCode.findSubstring(s, words);
-    Logger::WriteMessage(result);
-}
 
 void TestLeetCode84(void)
 {
@@ -5314,7 +5276,6 @@ void main(int argc, char* argv[])
     TestLeetCode164();
     TestLeetCode264();
     TestLeetCode84();
-    TestLeetCode30();
     TestLeetCode335();
     TestLeetCode203();
     TestLeetCode92();

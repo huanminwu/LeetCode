@@ -21,68 +21,7 @@
 #include "Leetcode.h"
 #include "LeetcodeHashtable.h"
 #pragma region HashTable
-/// <summary>
-/// Leet code #30. Substring with Concatenation of All Words 
-/// You are given a string, s, and a list of words, words, that are all of 
-/// the same length. Find all starting indices of 
-/// substring(s) in s that is a concatenation of each word in words exactly 
-///  once and without any intervening characters. 
-/// For example, given:
-/// s: "barfoothefoobarman"                                                               t
-/// words: ["foo", "bar"] 
-/// You should return the indices: [0,9].
-/// </summary> 
-vector<int> LeetCode::findSubstring(string s, vector<string>& words)
-{
-    vector<int> result;
-    unsigned int checksum_words = 0;
-    unsigned int checksum = 0;
-    unordered_map<string, int> word_map;
-    size_t word_len = 0;
-    size_t total_len = 0;
 
-    if (words.size() == 0)
-    {
-        return result;
-    }
-
-    for (size_t i = 0; i < words.size(); i++)
-    {
-        word_len = words[i].size();
-        word_map[words[i]]++;
-        for (size_t j = 0; j < word_len; j++)
-        {
-            checksum_words += (unsigned int)words[i][j];
-        }
-        total_len += word_len;
-    }
-
-    for (size_t i = 0; i < s.size(); i++)
-    {
-        checksum += (unsigned int)s[i];
-        if (i >= total_len) checksum -= (unsigned int)s[i - total_len];
-        // check sum not match, no way to match
-        if ((i < total_len - 1) || (checksum != checksum_words)) continue;
-        size_t index = i - total_len + 1;
-        unordered_map<string, int> word_seen;
-        while (index <= i)
-        {
-            string word = s.substr(index, word_len);
-            if (word_map.find(word) == word_map.end())
-            {
-                break;
-            }
-            word_seen[word]++;
-            if (word_seen[word] > word_map[word]) break;
-            index += word_len;
-        }
-        if (index > i)
-        {
-            result.push_back(i - total_len + 1);
-        }
-    }
-    return result;
-}
 
 /// <summary>
 /// Leet code #128. Longest Consecutive Sequence 

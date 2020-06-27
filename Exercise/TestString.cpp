@@ -23,6 +23,46 @@ void TestLeetCode28(void)
     Logger::WriteMessage("kaystack = " + haystack + "; needle = " + needle + "; result = " + to_string(result));
 }
 
+void TestLeetCode30(void)
+{
+    Logger::WriteMessage("Test Leet Code 30");
+    LeetCodeString leetCode;
+    vector<string> words;
+    vector<int> result;
+    string s;
+    s.assign("wordgoodgoodgoodbestword");
+    words = { "word", "good", "best", "good" };
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("word list ");
+    Logger::WriteMessage(words);
+    result = leetCode.findSubstring(s, words);
+    Logger::WriteMessage(result);
+
+    s.assign("barfoothefoobarman");
+    words = { "foo", "bar" };
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("word list ");
+    Logger::WriteMessage(words);
+    result = leetCode.findSubstring(s, words);
+    Logger::WriteMessage(result);
+
+    s.assign("mississippi");
+    words = { "mississippis" };
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("word list ");
+    Logger::WriteMessage(words);
+    result = leetCode.findSubstring(s, words);
+    Logger::WriteMessage(result);
+
+    s.assign("barfoofoobarthefoobarman");
+    words = { "bar", "foo", "the" };
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("word list ");
+    Logger::WriteMessage(words);
+    result = leetCode.findSubstring(s, words);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCode1233(void)
 {
     Logger::WriteMessage("Test Leet Code 1233");
