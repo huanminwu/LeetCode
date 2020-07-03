@@ -2991,8 +2991,44 @@ void TestLeetCode939(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1492(void)
+{
+    Logger::WriteMessage("Test Leet Code 1492");
+    LeetCodeMath leetCode;
+    int n = 12;
+    int k = 3;
+    int result = leetCode.kthFactor(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 7;
+    k = 2;
+    result = leetCode.kthFactor(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 4;
+    k = 4;
+    result = leetCode.kthFactor(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 1;
+    k = 1;
+    result = leetCode.kthFactor(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 1000;
+    k = 3;
+    result = leetCode.kthFactor(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 24;
+    k = 6;
+    result = leetCode.kthFactor(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1492();
     TestLeetCode825();
     TestLeetCode670();
     TestLeetCode1465();

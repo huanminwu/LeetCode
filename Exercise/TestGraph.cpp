@@ -2634,8 +2634,31 @@ void TestLeetCode1489(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1494(void)
+{
+    Logger::WriteMessage("Test Leet Code 1494");
+    LeetCodeGraph leetCode;
+    int n = 4;
+    vector<vector<int>> dependencies = { {2, 1},{3, 1},{1, 4} };
+    int k = 2;
+    int result = leetCode.minNumberOfSemesters(n, dependencies, k);
+
+    Logger::WriteMessage(dependencies);
+    Logger::WriteMessage("n = " + to_string(n) + "; k= " + to_string(k) + "; result = " + to_string(result));
+
+
+    n = 5;
+    dependencies = { {2, 1},{3, 1},{4, 1},{1, 5} };
+    k = 2;
+    result = leetCode.minNumberOfSemesters(n, dependencies, k);
+
+    Logger::WriteMessage(dependencies);
+    Logger::WriteMessage("n = " + to_string(n) + "; k= " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1494();
     TestLeetCode1489();
     TestLeetCode997();
     TestLeetCode1466();

@@ -2707,4 +2707,57 @@ vector<string> LeetCodeHashtable::getFolderNames(vector<string>& names)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1496. Path Crossing
+/// 
+/// Easy
+///
+/// Given a string path, where path[i] = 'N', 'S', 'E' or 'W', each 
+/// representing moving one unit north, south, east, or west, 
+/// respectively. You start at the origin (0, 0) on a 2D plane and 
+/// walk on the path specified by path.
+///
+/// Return True if the path crosses itself at any point, that is, 
+/// if at any time you are on a location you've previously visited. 
+/// Return False otherwise.
+///
+/// Example 1:
+/// Input: path = "NES"
+/// Output: false 
+/// Explanation: Notice that the path doesn't cross any point more 
+/// than once.
+///
+/// Example 2:
+/// Input: path = "NESWW"
+/// Output: true
+/// Explanation: Notice that the path visits the origin twice.
+/// Constraints:
+/// 1. 1 <= path.length <= 10^4
+/// 2. path will only consist of characters in {'N', 'S', 'E', 'W}
+/// </summary>
+bool LeetCodeHashtable::isPathCrossing(string path)
+{
+    vector<int> pos = { 0, 0 };
+    set<vector<int>> visited;
+    visited.insert(pos);
+    unordered_map<char, vector<int>> directions = 
+    {
+        {'N', {0, -1}},
+        {'S', {0, 1}},
+        {'W', {-1, 0}},
+        {'E', {1, 0}},
+    };
+    for (size_t i = 0; i < path.size(); i++)
+    {
+        pos[0] += directions[path[i]][0];
+        pos[1] += directions[path[i]][1];
+        if (visited.count(pos) > 0)
+        {
+            return true;
+        }
+        visited.insert(pos);
+    }
+    return false;
+}
 #pragma endregion

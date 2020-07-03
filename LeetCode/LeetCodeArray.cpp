@@ -11348,4 +11348,252 @@ vector<int> LeetCodeArray::avoidFlood(vector<int>& rains)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1491. Average Salary Excluding the Minimum and Maximum Salary
+/// 
+/// Easy
+///
+/// Given an array of unique integers salary where salary[i] is the salary 
+/// of the employee i.
+///
+/// Return the average salary of employees excluding the minimum and maximum 
+/// salary.
+///  
+/// Example 1:
+/// Input: salary = [4000,3000,1000,2000]
+/// Output: 2500.00000
+/// Explanation: Minimum salary and maximum salary are 1000 and 4000 
+/// respectively.
+/// Average salary excluding minimum and maximum salary is 
+/// (2000+3000)/2= 2500
+///
+/// Example 2:
+/// Input: salary = [1000,2000,3000]
+/// Output: 2000.00000
+/// Explanation: Minimum salary and maximum salary are 1000 and 3000 
+/// respectively.
+/// Average salary excluding minimum and maximum salary is (2000)/1= 2000
+///
+/// Example 3:
+/// Input: salary = [6000,5000,4000,3000,2000,1000]
+/// Output: 3500.00000
+/// Example 4:
+/// Input: salary = [8000,9000,2000,3000,6000,1000]
+/// Output: 4750.00000
+/// Constraints:
+/// 1. 3 <= salary.length <= 100
+/// 2. 10^3 <= salary[i] <= 10^6
+/// 3. salary[i] is unique.
+/// 4. Answers within 10^-5 of the actual value will be accepted as correct.
+/// </summary>
+double LeetCodeArray::average(vector<int>& salary)
+{
+    int min_val = INT_MAX;
+    int max_val = INT_MIN;
+    double sum = 0;
+    for (size_t i = 0; i < salary.size(); i++)
+    {
+        sum += (double)salary[i];
+        min_val = min(min_val, salary[i]);
+        max_val = max(max_val, salary[i]);
+    }
+
+    if (salary.size() > 2)
+    {
+        return (sum - (double)min_val - (double)max_val) / (double)(salary.size() - 2);
+    }
+    else
+    {
+        return (double)0.0;
+    }
+}
+
+/// <summary>
+/// Leet code #1493. Longest Subarray of 1's After Deleting One Element
+/// 
+/// Medium
+///
+/// Given a binary array nums, you should delete one element from it.
+///
+/// Return the size of the longest non-empty subarray containing only 1's 
+/// in the resulting array.
+/// Return 0 if there is no such subarray.
+/// Example 1:
+/// Input: nums = [1,1,0,1]
+/// Output: 3
+/// Explanation: After deleting the number in position 2, [1,1,1] 
+/// contains 3 numbers with value of 1's.
+///
+/// Example 2:
+/// Input: nums = [0,1,1,1,0,1,1,0,1]
+/// Output: 5
+/// Explanation: After deleting the number in position 4, [0,1,1,1,1,1,0,1] 
+/// longest subarray with value of 1's is [1,1,1,1,1].
+///
+/// Example 3:
+/// Input: nums = [1,1,1]
+/// Output: 2
+/// Explanation: You must delete one element.
+/// Example 4:
+/// Input: nums = [1,1,0,0,1,1,1,0,1]
+/// Output: 4
+///
+/// Example 5:
+/// Input: nums = [0,0,0]
+/// Output: 0
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. nums[i] is either 0 or 1.
+/// </summary>
+int LeetCodeArray::longestSubarray(vector<int>& nums)
+{
+    deque<int> zeros;
+    int result = 0;
+    for (int i = 0; i < (int)nums.size(); i++)
+    {
+        if (nums[i] == 0)
+        {
+            zeros.push_back(i);
+            if (zeros.size() > 2) zeros.pop_front();
+        }
+        if (zeros.size() < 2) result = max(result, i);
+        else result = max(result, i - zeros.front() - 1);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1497. Check If Array Pairs Are Divisible by k
+/// 
+/// Medium
+///
+/// Given an array of integers arr of even length n and an integer k.
+/// We want to divide the array into exactly n / 2 pairs such that the 
+/// sum of each pair is divisible by k.
+/// Return True If you can find a way to do that or False otherwise.
+/// 
+/// Example 1:
+/// Input: arr = [1,2,3,4,5,10,6,7,8,9], k = 5
+/// Output: true
+/// Explanation: Pairs are (1,9),(2,8),(3,7),(4,6) and (5,10).
+///
+/// Example 2:
+/// Input: arr = [1,2,3,4,5,6], k = 7
+/// Output: true
+/// Explanation: Pairs are (1,6),(2,5) and(3,4).
+///
+/// Example 3:
+/// Input: arr = [1,2,3,4,5,6], k = 10
+/// Output: false
+/// Explanation: You can try all possible pairs to see that there is no 
+/// way to divide arr into 3 pairs each with sum divisible by 10.
+///
+/// Example 4:
+/// Input: arr = [-10,10], k = 2
+/// Output: true
+///
+/// Example 5:
+/// Input: arr = [-1,1,-2,2,-3,3,-4,4], k = 3
+/// Output: true
+///
+/// Constraints:
+/// 1. arr.length == n
+/// 2. 1 <= n <= 10^5
+/// 3. n is even.
+/// 4. -10^9 <= arr[i] <= 10^9
+/// 5. 1 <= k <= 10^5
+/// </summary>
+bool LeetCodeArray::canArrange(vector<int>& arr, int k)
+{
+    vector<int> result(k);
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        int re = arr[i] % k;
+        if (re < 0) result[abs(re)]--;
+        else result[abs(re)]++;
+    }
+    if (result[0] % 2 != 0) return false;
+    for (int i = 1; i <= k / 2; i++)
+    {
+        if (result[i] != result[k - i]) return false;
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet code #1498. Number of Subsequences That Satisfy the Given Sum 
+///                  Condition
+/// 
+/// Medium
+///
+/// Given an array of integers nums and an integer target.
+/// Return the number of non-empty subsequences of nums such that the 
+/// sum of the minimum and maximum element on it is less or equal than 
+/// target.
+///
+/// Since the answer may be too large, return it modulo 10^9 + 7.
+/// 
+/// Example 1:
+/// Input: nums = [3,5,6,7], target = 9
+/// Output: 4
+/// Explanation: There are 4 subsequences that satisfy the condition.
+/// [3] -> Min value + max value <= target (3 + 3 <= 9)
+/// [3,5] -> (3 + 5 <= 9)
+/// [3,5,6] -> (3 + 6 <= 9)
+/// [3,6] -> (3 + 6 <= 9)
+///
+/// Example 2:
+/// Input: nums = [3,3,6,8], target = 10
+/// Output: 6
+/// Explanation: There are 6 subsequences that satisfy the condition. 
+/// (nums can have repeated numbers).
+/// [3] , [3] , [3,3], [3,6] , [3,6] , [3,3,6]
+///
+/// Example 3:
+/// Input: nums = [2,3,3,4,6,7], target = 12
+/// Output: 61
+/// Explanation: There are 63 non-empty subsequences, two of them don't 
+/// satisfy the condition ([6,7], [7]).
+/// Number of valid subsequences (63 - 2 = 61).
+///
+/// Example 4:
+/// Input: nums = [5,2,4,1,7,6,8], target = 16
+/// Output: 127
+/// Explanation: All non-empty subset satisfy the condition (2^7 - 1) = 127
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^6
+/// 3. 1 <= target <= 10^6
+/// </summary>
+int LeetCodeArray::numSubseq(vector<int>& nums, int target)
+{
+    int M = 1000000007;
+    sort(nums.begin(), nums.end());
+    vector<int> factors(nums.size());
+    int result = 0;
+    int first = 0;
+    int last = nums.size() - 1;
+    while (first <= last)
+    {
+        if (nums[first] + nums[last] > target) last--;
+        else
+        {
+            int gap = last - first;
+            if (factors[gap] == 0)
+            {
+                factors[0] = 1;
+                for (int j = 1; j <= gap; j++)
+                {
+                    factors[j] = (factors[j - 1] * 2) % M;
+                }
+            }
+            result = (result + factors[gap]) % M;
+            first++;
+        }
+    }
+    return result;
+}
 #pragma endregion

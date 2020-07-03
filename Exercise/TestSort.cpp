@@ -617,8 +617,25 @@ void TestLeetCode674(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1499(void)
+{
+    LeetCodeSort leetCode;
+    vector <vector<int>> points = { {1, 3},{2, 0},{5, 10},{6, -10} };
+    int k = 1;
+    int result = leetCode.findMaxValueOfEquation(points, k);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    points = { {0, 0},{3, 0},{9, 2} };
+    k = 3;
+    result = leetCode.findMaxValueOfEquation(points, k);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1499();
     TestLeetCode1439();
     TestLeetCode1403();
     TestLeetCode1402();

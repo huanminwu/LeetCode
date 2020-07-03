@@ -4875,8 +4875,12 @@ void TestLeetCode1199(void)
 void main(int argc, char* argv[])
 {
     TestLeetCodeGraph();
+    TestLeetCodeSort();
     TestLeetCodeArray();
+    TestLeetCodeMath();
     TestLeetCodeHashtable();
+    TestLeetCodeArray();
+
     TestLeetCodeBit();
     TestLeetCodeLinkedList();
     TestLeetCodeDP();
@@ -4885,10 +4889,10 @@ void main(int argc, char* argv[])
     TestLeetCodeStack();
     TestUSACO();
     TestLeetCodeTree();
-    TestLeetCodeMath();
+
     TestLeetCodeTree();
     TestLeetCodeString();
-    TestLeetCodeSort();
+
     TestLeetCodeGreedy();
     TestLeetCodeDFS();
     TestLeetCodeBFS();

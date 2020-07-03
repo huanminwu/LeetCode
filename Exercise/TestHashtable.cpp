@@ -465,8 +465,23 @@ void TestLeetCode1487(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1496(void)
+{
+    Logger::WriteMessage("Test Leet Code 1496");
+    LeetCodeHashtable leetCode;
+    string path = "NES";
+    bool result = leetCode.isPathCrossing(path);
+    Logger::WriteMessage("path = " + path + "; result = " + (result ? "true" : "false"));
+
+    path = "NESWW";
+    result = leetCode.isPathCrossing(path);
+    Logger::WriteMessage("path = " + path + "; result = " + (result ? "true" : "false"));
+
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1496();
     TestLeetCode1487();
     TestLeetCode1481();
     TestLeetCode1452();

@@ -3844,8 +3844,131 @@ void TestLeetCode1488(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1491(void)
+{
+    Logger::WriteMessage("Test Leet Code 1491");
+    LeetCodeArray leetCode;
+    vector<int> salary = { 4000, 3000, 1000, 2000 };
+    double result = leetCode.average(salary);
+    Logger::WriteMessage(salary);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    salary = { 1000,2000,3000 };
+    result = leetCode.average(salary);
+    Logger::WriteMessage(salary);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    salary = { 6000,5000,4000,3000,2000,1000 };
+    result = leetCode.average(salary);
+    Logger::WriteMessage(salary);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    salary = { 8000,9000,2000,3000,6000,1000 };
+    result = leetCode.average(salary);
+    Logger::WriteMessage(salary);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1493(void)
+{
+    Logger::WriteMessage("Test Leet Code 1493");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 1, 0, 1 };
+    int result = leetCode.longestSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,1,1,1,0,1,1,0,1 };
+    result = leetCode.longestSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1 };
+    result = leetCode.longestSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,0,0,1,1,1,0,1 };
+    result = leetCode.longestSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,0,0 };
+    result = leetCode.longestSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1497(void)
+{
+    Logger::WriteMessage("Test Leet Code 1497");
+    LeetCodeArray leetCode;
+    vector<int> arr = {1, 2, 3, 4, 5, 10, 6, 7, 8, 9};
+    int k = 5;
+    bool result = leetCode.canArrange(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (result ? "true" : "false"));
+
+    arr = { 1,2,3,4,5,6 };
+    k = 7;
+    result = leetCode.canArrange(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (result ? "true" : "false"));
+
+    arr = { 1,2,3,4,5,6 };
+    k = 10;
+    result = leetCode.canArrange(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (result ? "true" : "false"));
+
+    arr = { -10,10 };
+    k = 2;
+    result = leetCode.canArrange(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (result ? "true" : "false"));
+
+    arr = { -1,1,-2,2,-3,3,-4,4 };
+    k = 2;
+    result = leetCode.canArrange(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (result ? "true" : "false"));
+}
+
+void TestLeetCode1498(void)
+{
+    Logger::WriteMessage("Test Leet Code 1498");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3,5,6,7 };
+    int target = 9;
+    int result = leetCode.numSubseq(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { 3,3,6,8 };
+    target = 10;
+    result = leetCode.numSubseq(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { 2,3,3,4,6,7 };
+    target = 12;
+    result = leetCode.numSubseq(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { 5,2,4,1,7,6,8 };
+    target = 16;
+    result = leetCode.numSubseq(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1498();
+    TestLeetCode1497();
+    TestLeetCode1493();
+    TestLeetCode1491();
     TestLeetCode1488();
     TestLeetCode1480();
     TestLeetCode1477();
