@@ -3963,8 +3963,68 @@ void TestLeetCode1498(void)
     Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1502(void)
+{
+    Logger::WriteMessage("Test Leet Code 1502");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 3,5,1 };
+    bool result = leetCode.canMakeArithmeticProgression(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    arr = { 1,2,4 };
+    result = leetCode.canMakeArithmeticProgression(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1504(void)
+{
+    Logger::WriteMessage("Test Leet Code 1504");
+    LeetCodeArray leetCode;
+    vector<vector<int>> mat =
+    {
+        {1, 0, 1},
+        {1, 1, 0},
+        {1, 1, 0}
+    };
+    int result = leetCode.numSubmat(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    mat =
+    {
+        {0,1,1,0},
+        {0,1,1,1},
+        {1,1,1,0}
+    };
+    result = leetCode.numSubmat(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    mat =
+    {
+        {1,1,1,1,1,1}
+    };
+    result = leetCode.numSubmat(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    mat =
+    {
+        {1, 0, 1},
+        {0, 1, 0},
+        {1, 0, 1}
+    };
+    result = leetCode.numSubmat(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1504();
+    TestLeetCode1502();
     TestLeetCode1498();
     TestLeetCode1497();
     TestLeetCode1493();

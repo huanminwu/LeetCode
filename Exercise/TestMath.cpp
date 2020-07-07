@@ -3026,8 +3026,54 @@ void TestLeetCode1492(void)
     Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1503(void)
+{
+    Logger::WriteMessage("Test Leet Code 1503");
+    LeetCodeMath leetCode;
+    int n = 4;
+    vector<int> left = { 4, 3 };
+    vector<int> right = { 0, 1 };
+    int result = leetCode.getLastMoment(n, left, right);
+    Logger::WriteMessage(left);
+    Logger::WriteMessage(right);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 7;
+    left = { };
+    right = { 0,1,2,3,4,5,6,7 };
+    result = leetCode.getLastMoment(n, left, right);
+    Logger::WriteMessage(left);
+    Logger::WriteMessage(right);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 7;
+    left = { 0,1,2,3,4,5,6,7 };
+    right = { };
+    result = leetCode.getLastMoment(n, left, right);
+    Logger::WriteMessage(left);
+    Logger::WriteMessage(right);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 9;
+    left = { 5 };
+    right = { 4 };
+    result = leetCode.getLastMoment(n, left, right);
+    Logger::WriteMessage(left);
+    Logger::WriteMessage(right);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 6;
+    left = { 6 };
+    right = { 0 };
+    result = leetCode.getLastMoment(n, left, right);
+    Logger::WriteMessage(left);
+    Logger::WriteMessage(right);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1503();
     TestLeetCode1492();
     TestLeetCode825();
     TestLeetCode670();

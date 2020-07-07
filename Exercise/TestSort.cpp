@@ -633,8 +633,44 @@ void TestLeetCode1499(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1505(void)
+{
+    LeetCodeSort leetCode;
+    string num = "4321";
+    int k = 4;
+    string result = leetCode.minInteger(num, k);
+    Logger::WriteMessage("num = " + num + "; k = " + to_string(k) + "; result = " + result);
+    
+    num = "100";
+    k = 1;
+    result = leetCode.minInteger(num, k);
+    Logger::WriteMessage("num = " + num + "; k = " + to_string(k) + "; result = " + result);
+    num = "100";
+
+    num = "36789";
+    k = 1000;
+    result = leetCode.minInteger(num, k);
+    Logger::WriteMessage("num = " + num + "; k = " + to_string(k) + "; result = " + result);
+
+    num = "22";
+    k = 22;
+    result = leetCode.minInteger(num, k);
+    Logger::WriteMessage("num = " + num + "; k = " + to_string(k) + "; result = " + result);
+
+    num = "9438957234785635408";
+    k = 23;
+    result = leetCode.minInteger(num, k);
+    Logger::WriteMessage("num = " + num + "; k = " + to_string(k) + "; result = " + result);
+
+    num = "294984148179";
+    k = 11;
+    result = leetCode.minInteger(num, k);
+    Logger::WriteMessage("num = " + num + "; k = " + to_string(k) + "; result = " + result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1505();
     TestLeetCode1499();
     TestLeetCode1439();
     TestLeetCode1403();

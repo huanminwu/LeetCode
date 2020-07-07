@@ -11596,4 +11596,118 @@ int LeetCodeArray::numSubseq(vector<int>& nums, int target)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1502. Can Make Arithmetic Progression From Sequence
+/// 
+/// Easy
+///
+/// Given an array of numbers arr. A sequence of numbers is called an 
+/// arithmetic progression if the difference between any two consecutive 
+/// elements is the same.
+///
+/// Return true if the array can be rearranged to form an arithmetic 
+/// progression, otherwise, return false.
+/// 
+/// Example 1:
+/// Input: arr = [3,5,1]
+/// Output: true
+/// Explanation: We can reorder the elements as [1,3,5] or [5,3,1] with 
+/// differences 2 and -2 respectively, between each consecutive elements.
+///
+/// Example 2:
+/// Input: arr = [1,2,4]
+/// Output: false
+/// Explanation: There is no way to reorder the elements to obtain an 
+/// arithmetic progression.
+///
+/// Constraints:
+/// 1. 2 <= arr.length <= 1000
+/// 2. -10^6 <= arr[i] <= 10^6
+/// </summary>
+bool LeetCodeArray::canMakeArithmeticProgression(vector<int>& arr)
+{
+    sort(arr.begin(), arr.end());
+    for (int i = 0; i < (int)arr.size() - 2; i++)
+    {
+        if (arr[i + 1] - arr[i] != arr[i + 2] - arr[i + 1])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet code #1504. Count Submatrices With All Ones
+/// 
+/// Medium
+///
+/// Given a rows * columns matrix mat of ones and zeros, return how many 
+/// submatrices have all ones.
+/// 
+/// Example 1:
+/// Input: mat = [[1,0,1],
+///               [1,1,0],
+///               [1,1,0]]
+/// Output: 13
+/// Explanation:
+/// There are 6 rectangles of side 1x1.
+/// There are 2 rectangles of side 1x2.
+/// There are 3 rectangles of side 2x1.
+/// There is 1 rectangle of side 2x2. 
+/// There is 1 rectangle of side 3x1.
+/// Total number of rectangles = 6 + 2 + 3 + 1 + 1 = 13.
+///
+/// Example 2:
+///
+/// Input: mat = [[0,1,1,0],
+///               [0,1,1,1],
+///               [1,1,1,0]]
+/// Output: 24
+/// Explanation:
+/// There are 8 rectangles of side 1x1.
+/// There are 5 rectangles of side 1x2.
+/// There are 2 rectangles of side 1x3. 
+/// There are 4 rectangles of side 2x1.
+/// There are 2 rectangles of side 2x2. 
+/// There are 2 rectangles of side 3x1. 
+/// There is 1 rectangle of side 3x2. 
+/// Total number of rectangles = 8 + 5 + 2 + 4 + 2 + 2 + 1 = 24.
+///
+/// Example 3:
+/// Input: mat = [[1,1,1,1,1,1]]
+/// Output: 21
+///
+/// Example 4:
+/// Input: mat = [[1,0,1],[0,1,0],[1,0,1]]
+/// Output: 5
+/// 
+/// Constraints:
+/// 1. 1 <= rows <= 150
+/// 2. 1 <= columns <= 150
+/// 3. 0 <= mat[i][j] <= 1
+/// </summary>
+int LeetCodeArray::numSubmat(vector<vector<int>>& mat)
+{
+    int rows = mat.size();
+    int cols = mat[0].size();
+    int result = 0;
+    vector<vector<vector<int>>> dp(rows, vector<vector<int>>(cols, vector<int>(cols)));
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            for (int k = j; k >= 0; k--)
+            {
+                if (mat[i][k] == 0) break;
+                int g = j - k;
+                dp[i][j][g]++;
+                if (i > 0) dp[i][j][g] += dp[i - 1][j][g];
+                result += dp[i][j][g];
+            }
+        }
+    }
+    return result;
+}
 #pragma endregion
