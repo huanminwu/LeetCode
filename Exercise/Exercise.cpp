@@ -4874,17 +4874,16 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeDesign();
     TestLeetCodeSort();
     TestLeetCodeMath();
     TestLeetCodeArray();
     TestLeetCodeGraph();
     TestLeetCodeHashtable();
     TestLeetCodeArray();
-
     TestLeetCodeBit();
     TestLeetCodeLinkedList();
     TestLeetCodeDP();
-    TestLeetCodeDesign();
     TestLeetCodeBinarySearch();
     TestLeetCodeStack();
     TestUSACO();

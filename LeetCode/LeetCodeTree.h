@@ -20,7 +20,7 @@
 #include "leetcode.h"
 using namespace std;
 /// <summary>
-/// The class is to implement array related algorithm  
+/// The class is to implement binary tree related algorithm  
 /// </summary>
 
 /// <summary>
@@ -4495,6 +4495,42 @@ public:
     /// 2. Each node's value is between [1, 10^6].
     /// </summary> 
     TreeNode* copyRandomBinaryTree(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #1490. Clone N-ary Tree
+    /// 
+    /// Medium
+    ///
+    /// Given a root of an N-ary tree, return a deep copy (clone) of the tree.
+    ///
+    /// Each node in the n-ary tree contains a val (int) and a list (List[Node]) 
+    /// of its children.
+    ///
+    /// class Node {
+    ///     public int val;
+    ///     public List<Node> children;
+    /// }
+    /// Nary-Tree input serialization is represented in their level order 
+    /// traversal, each group of children is separated by the null value 
+    /// (See examples).
+    ///
+    /// Follow up: Can your solution work for the graph problem?
+    /// 
+    /// Example 1:
+    /// Input: root = [1,null,3,2,4,null,5,6]
+    /// Output: [1,null,3,2,4,null,5,6]
+    /// Example 2:
+    /// 
+    /// Input: root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,
+    ///  null,null,11,null,12,null,13,null,null,14]
+    /// Output: [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,
+    /// 11,null,12,null,13,null,null,14]
+    /// 
+    /// Constraints:
+    /// 1. The depth of the n-ary tree is less than or equal to 1000.
+    /// 2. The total number of nodes is between [0, 10^4].
+    /// </summary>
+    Node* cloneTree(Node* root);
 #pragma endregion
 };
 

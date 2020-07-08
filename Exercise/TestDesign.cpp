@@ -2959,8 +2959,64 @@ void TestLeetCode1483(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1500(void)
+{
+    Logger::WriteMessage("Test Leet Code 1500");
+    vector<string> commands =
+    {
+       "FileSharing","join","join","join","request","request","leave", 
+       "request","leave","join"
+    };
+    vector<vector<int>> parameters =
+    {
+        {4}, {1,2}, {2,3}, {4},{1,3},{2,2},{1},{2,1},{2}, {}
+    };
+
+    vector<string> result;
+    FileSharing* fileSharing = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FileSharing")
+        {
+            fileSharing = new FileSharing(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "join")
+        {
+            int id = fileSharing->join(parameters[i]);
+            result.push_back(to_string(id));
+        }
+        else if (commands[i] == "request")
+        {
+            vector<int> ids = fileSharing->request(parameters[i][0], parameters[i][1]);
+            string ret;
+            ret.push_back('[');
+            for (size_t i = 0; i < ids.size(); i++)
+            {
+                if (i > 0) ret.push_back(',');
+                ret.append(to_string(ids[i]));
+            }
+            ret.push_back(']');
+            result.push_back(ret);
+        }
+        else if (commands[i] == "leave")
+        {
+            fileSharing->leave(parameters[i][0]);
+            result.push_back("null");
+        }
+    }
+    delete fileSharing;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1500();
     TestLeetCode1483();
     TestLeetCode1476();
     TestLeetCode843();
