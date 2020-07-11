@@ -4609,7 +4609,7 @@ int LeetCodeString::calculateIII(string s)
 vector<string> LeetCodeString::polyToString(map<vector<string>, int> &ploy_map)
 {
     vector<pair<vector<string>, int>> poly_vector;
-    typedef struct
+    typedef struct _greater_poly
     {
         bool operator() (pair<vector<string>, int>&a, pair<vector<string>, int> &b)
         {

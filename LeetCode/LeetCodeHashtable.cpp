@@ -33,7 +33,7 @@
 ///   Return its length: 4. 
 /// Your algorithm should run in O(n) complexity. 
 /// </summary>
-int LeetCode::longestConsecutive(vector<int>& nums)
+int LeetCodeHashtable::longestConsecutive(vector<int>& nums)
 {
     unordered_set<int> set;
     int max_length = 0;
@@ -84,7 +84,7 @@ int LeetCode::longestConsecutive(vector<int>& nums)
 /// 3.Be wary of edge cases! List out as many test cases as you can think 
 ///   of and test your code thoroughly.
 /// </summary>
-string LeetCode::fractionToDecimal(int numerator, int denominator)
+string LeetCodeHashtable::fractionToDecimal(int numerator, int denominator)
 {
     string result;
     vector<long long> decimals;
@@ -145,7 +145,7 @@ string LeetCode::fractionToDecimal(int numerator, int denominator)
 /// 6^2 + 8^2 = 100
 /// 1^2 + 0^2 + 0^2 = 1
 /// </summary>
-bool LeetCode::isHappy(int n)
+bool LeetCodeHashtable::isHappy(int n)
 {
     unordered_set<int> data_set;
     while (true)
@@ -172,7 +172,7 @@ bool LeetCode::isHappy(int n)
 /// Given an array of integers, find if the array contains any duplicates. Your function should return true 
 /// if any value appears at least twice in the array, and it should return false if every element is distinct.	
 /// </summary>
-bool LeetCode::containsDuplicate(vector<int>& nums)
+bool LeetCodeHashtable::containsDuplicate(vector<int>& nums)
 {
     unordered_set<int> data_set;
     for (int x : nums)
@@ -208,7 +208,7 @@ bool LeetCode::containsDuplicate(vector<int>& nums)
 /// In this case, the 1st 1 in friend's guess is a bull, the 2nd or 3rd 1 is a cow, and your function should return "1A1B". 
 /// You may assume that the secret number and your friend's guess only contain digits, and their lengths are always equal.
 /// </summary>
-string LeetCode::getHint(string secret, string guess)
+string LeetCodeHashtable::getHint(string secret, string guess)
 {
     string result;
     unordered_map<char, int> secret_map;
@@ -249,7 +249,7 @@ string LeetCode::getHint(string secret, string guess)
 /// Each element in the result must be unique.
 /// The result can be in any order.	
 /// </summary>
-vector<int> LeetCode::intersectionArray(vector<int>& nums1, vector<int>& nums2)
+vector<int> LeetCodeHashtable::intersectionArray(vector<int>& nums1, vector<int>& nums2)
 {
     unordered_set<int> data_set;
     unordered_set<int> intersection;
@@ -286,7 +286,7 @@ vector<int> LeetCode::intersectionArray(vector<int>& nums1, vector<int>& nums2)
 /// What if elements of nums2 are stored on disk, and the memory is limited such that 
 /// you cannot load all elements into the memory at once?
 /// </summary>
-vector<int> LeetCode::intersectionArrayII(vector<int>& nums1, vector<int>& nums2)
+vector<int> LeetCodeHashtable::intersectionArrayII(vector<int>& nums1, vector<int>& nums2)
 {
     vector<int> result;
     size_t index1 = 0, index2 = 0;
@@ -316,7 +316,7 @@ vector<int> LeetCode::intersectionArrayII(vector<int>& nums1, vector<int>& nums2
 /// Given an array of integers and an integer k, find out whether there are two distinct 
 /// indices i and j in the array such that nums[i] = nums[j] and the difference between i and j is at most k.	
 /// </summary>
-bool LeetCode::containsNearbyDuplicate(vector<int>& nums, int k)
+bool LeetCodeHashtable::containsNearbyDuplicate(vector<int>& nums, int k)
 {
     unordered_map<int, int> pos_map;
     for (size_t i = 0; i < nums.size(); i++)
@@ -339,7 +339,7 @@ bool LeetCode::containsNearbyDuplicate(vector<int>& nums, int k)
 /// You may assume k is always valid, 1 <= k <= number of unique elements.
 /// Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
 /// </summary>
-vector<int> LeetCode::topKFrequent(vector<int>& nums, int k)
+vector<int> LeetCodeHashtable::topKFrequent(vector<int>& nums, int k)
 {
     vector<int> result;
     unordered_map<int, int> number_map;
@@ -399,7 +399,7 @@ vector<int> LeetCode::topKFrequent(vector<int>& nums, int k)
 /// "bbaA" is also a valid answer, but "Aabb" is incorrect.
 /// Note that 'A' and 'a' are treated as two different characters.
 /// </summary>
-string LeetCode::frequencySort(string s)
+string LeetCodeHashtable::frequencySort(string s)
 {
     string result;
     unordered_map<char, size_t> char_map;
@@ -438,7 +438,7 @@ string LeetCode::frequencySort(string s)
 /// 1.You may use one character in the keyboard more than once.
 /// 2.You may assume the input string will only contain letters of alphabet.
 /// </summary>
-vector<string> LeetCode::findWordsInOneRow(vector<string>& words)
+vector<string> LeetCodeHashtable::findWordsInOneRow(vector<string>& words)
 {
     vector<string> result;
     vector<string> keyboard = { "QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM" };
@@ -484,7 +484,7 @@ vector<string> LeetCode::findWordsInOneRow(vector<string>& words)
 /// 1.N is a positive integer and won't exceed 10,000.
 /// 2.All the scores of athletes are guaranteed to be unique.    
 /// </summary>
-vector<string> LeetCode::findRelativeRanks(vector<int>& nums)
+vector<string> LeetCodeHashtable::findRelativeRanks(vector<int>& nums)
 {
     map<int, int> score_map;
     vector<string> result(nums.size());
@@ -551,7 +551,7 @@ vector<string> LeetCode::findRelativeRanks(vector<int>& nums)
 /// The length of the array won't exceed 10,000.
 /// All the integers in the given input belong to the range: [-1e7, 1e7].
 /// </summary>
-int LeetCode::findPairs(vector<int>& nums, int k)
+int LeetCodeHashtable::findPairs(vector<int>& nums, int k)
 {
     if (k < 0) return 0;
     int count = 0;
@@ -588,7 +588,7 @@ int LeetCode::findPairs(vector<int>& nums, int k)
 /// Explanation: The longest harmonious subsequence is [3,2,2,2,3].
 /// Note: The length of the input array will not exceed 20,000.
 /// </summary>
-int LeetCode::findLHS(vector<int>& nums)
+int LeetCodeHashtable::findLHS(vector<int>& nums)
 {
     unordered_map<int, int> num_count;
     for (int num : nums) num_count[num]++;
@@ -633,7 +633,7 @@ int LeetCode::findLHS(vector<int>& nums)
 /// The index is starting from 0 to the list length minus 1.
 /// No duplicates in both lists.
 /// </summary>
-vector<string> LeetCode::findRestaurant(vector<string>& list1, vector<string>& list2)
+vector<string> LeetCodeHashtable::findRestaurant(vector<string>& list1, vector<string>& list2)
 {
     map<string, pair<int, int>> index_map;
     map<int, vector<string>>  index_sum;
@@ -657,7 +657,7 @@ vector<string> LeetCode::findRestaurant(vector<string>& list1, vector<string>& l
 /// <summary>
 /// Leet code #721. Accounts Merge
 /// </summary>
-bool LeetCode::checkCommonEmail(set<string>& emails, vector<string>& account)
+bool LeetCodeHashtable::checkCommonEmail(set<string>& emails, vector<string>& account)
 {
     for (size_t i = 1; i < account.size(); i++)
     {
@@ -672,7 +672,7 @@ bool LeetCode::checkCommonEmail(set<string>& emails, vector<string>& account)
 /// <summary>
 /// Leet code #721. Accounts Merge
 /// </summary>
-void LeetCode::addNewAccount(unordered_map<string, set<int>> &account_map, vector<set<string>> &account_emails,
+void LeetCodeHashtable::addNewAccount(unordered_map<string, set<int>> &account_map, vector<set<string>> &account_emails,
     vector<string>& account)
 {
     set<string> emails;
@@ -687,7 +687,7 @@ void LeetCode::addNewAccount(unordered_map<string, set<int>> &account_map, vecto
 /// <summary>
 /// Leet code #721. Accounts Merge
 /// </summary>
-void LeetCode::mergeAccount(unordered_map<string, set<int>> &account_map, vector<set<string>> &account_emails, vector<int>& merge_list,
+void LeetCodeHashtable::mergeAccount(unordered_map<string, set<int>> &account_map, vector<set<string>> &account_emails, vector<int>& merge_list,
     vector<string>& account)
 {
     if (merge_list.empty()) return;
@@ -749,7 +749,7 @@ void LeetCode::mergeAccount(unordered_map<string, set<int>> &account_map, vector
 /// The length of accounts[i] will be in the range [1, 10].
 /// The length of accounts[i][j] will be in the range [1, 30].
 /// </summary>
-vector<vector<string>> LeetCode::accountsMerge(vector<vector<string>>& accounts)
+vector<vector<string>> LeetCodeHashtable::accountsMerge(vector<vector<string>>& accounts)
 {
     vector<vector<string>> result;
     unordered_map<string, set<int>> account_map;
@@ -832,7 +832,7 @@ vector<vector<string>> LeetCode::accountsMerge(vector<vector<string>>& accounts)
 /// The length of each words[i] and pairs[i][j] will be in the range 
 /// [1, 20].
 /// </summary>
-bool LeetCode::areSentencesSimilar(vector<string>& words1, vector<string>& words2,
+bool LeetCodeHashtable::areSentencesSimilar(vector<string>& words1, vector<string>& words2,
     vector<pair<string, string>> pairs)
 {
     if (words1.size() != words2.size()) return false;
@@ -895,7 +895,7 @@ bool LeetCode::areSentencesSimilar(vector<string>& words1, vector<string>& words
 /// 4. Every words[i] will consist of lowercase letters, and have length 
 ///    in range [1, 15].
 /// </summary>
-string LeetCode::shortestCompletingWord(string licensePlate, vector<string>& words)
+string LeetCodeHashtable::shortestCompletingWord(string licensePlate, vector<string>& words)
 {
     string result;
     unordered_map<char, int> license_map;
@@ -953,7 +953,7 @@ string LeetCode::shortestCompletingWord(string licensePlate, vector<string>& wor
 /// 1. A, B have equal lengths in range [1, 100].
 /// 2. A[i], B[i] are integers in range [0, 10^5].
 /// </summary>
-vector<int> LeetCode::anagramMappings(vector<int>& A, vector<int>& B)
+vector<int> LeetCodeHashtable::anagramMappings(vector<int>& A, vector<int>& B)
 {
     vector<int> result;
     unordered_map<int, queue<int>> anagram_mappings;
@@ -990,7 +990,7 @@ vector<int> LeetCode::anagramMappings(vector<int>& A, vector<int>& B)
 /// 3. The length of words will be in the range of [1, 5000].
 /// 4. The length of words[i] will be in the range of [1, 50].
 /// </summary>
-int LeetCode::numMatchingSubseq(string S, vector<string>& words)
+int LeetCodeHashtable::numMatchingSubseq(string S, vector<string>& words)
 {
     unordered_map<char, set<int>> char_map;
     for (size_t i = 0; i < S.size(); i++)
@@ -1069,7 +1069,7 @@ int LeetCode::numMatchingSubseq(string S, vector<string>& words)
 /// 3. Each address will have either 1 or 2 "." characters.
 /// 4. The input count in any count-paired domain will not exceed 10000.
 /// </summary>
-vector<string> LeetCode::subdomainVisits(vector<string>& cpdomains)
+vector<string> LeetCodeHashtable::subdomainVisits(vector<string>& cpdomains)
 {
     map<string, int> domain_map;
     for (string str : cpdomains)
@@ -1129,7 +1129,7 @@ vector<string> LeetCode::subdomainVisits(vector<string>& cpdomains)
 /// 2. 0 <= B.length <= 200
 /// 3. A and B both contain only spaces and lowercase letters.
 /// </summary>
-vector<string> LeetCode::uncommonFromSentences(string A, string B)
+vector<string> LeetCodeHashtable::uncommonFromSentences(string A, string B)
 {
     vector<string> result;
     unordered_map<string, int> word_map;
@@ -1199,7 +1199,7 @@ vector<string> LeetCode::uncommonFromSentences(string A, string B)
 /// 1 <= words.length <= 50
 /// 1 <= pattern.length = words[i].length <= 20
 /// </summary>
-vector<string> LeetCode::findAndReplacePattern(vector<string>& words, string pattern)
+vector<string> LeetCodeHashtable::findAndReplacePattern(vector<string>& words, string pattern)
 {
     vector<string> result;
 
@@ -1284,7 +1284,7 @@ vector<string> LeetCode::findAndReplacePattern(vector<string>& words, string pat
 /// 3. A[i] and B[i] consist only of lowercase letters.
 /// 4. All words in A[i] are unique: there isn't i != j with A[i] == A[j].
 /// </summary>
-vector<string> LeetCode::wordSubsets(vector<string>& A, vector<string>& B)
+vector<string> LeetCodeHashtable::wordSubsets(vector<string>& A, vector<string>& B)
 {
     vector<string> result;
     vector<int> b_count(26);	
@@ -1370,7 +1370,7 @@ vector<string> LeetCode::wordSubsets(vector<string>& A, vector<string>& B)
 /// 2. cells[i] is in {0, 1}
 /// 3. 1 <= N <= 10^9
 /// </summary>
-vector<int> LeetCode::prisonAfterNDays(vector<int>& cells, int N)
+vector<int> LeetCodeHashtable::prisonAfterNDays(vector<int>& cells, int N)
 {
     map<vector<int>, int> cell_map;
     unordered_map<int, vector<int>> cell_index;
@@ -1428,7 +1428,7 @@ vector<int> LeetCode::prisonAfterNDays(vector<int>& cells, int N)
 /// 1. 1 <= time.length <= 60000
 /// 2. 1 <= time[i] <= 500
 /// </summary>
-int LeetCode::numPairsDivisibleBy60(vector<int>& time)
+int LeetCodeHashtable::numPairsDivisibleBy60(vector<int>& time)
 {
     vector<int> num_map(61);
     int result = 0;
@@ -1486,7 +1486,7 @@ int LeetCode::numPairsDivisibleBy60(vector<int>& time)
 /// 1. 1 <= instructions.length <= 100
 /// 2. instructions[i] is in {'G', 'L', 'R'}
 /// </summary>
-bool LeetCode::isRobotBounded(string instructions)
+bool LeetCodeHashtable::isRobotBounded(string instructions)
 {
     vector<vector<int>> directions = { {0, 1}, {1, 0}, {0, -1}, {-1, 0} };
     vector<int> pos = { 0, 0, 0 };
@@ -1540,7 +1540,7 @@ bool LeetCode::isRobotBounded(string instructions)
 /// 1. 1 <= dominoes.length <= 40000
 /// 2. 1 <= dominoes[i][j] <= 9
 /// </summary>
-int LeetCode::numEquivDominoPairs(vector<vector<int>>& dominoes)
+int LeetCodeHashtable::numEquivDominoPairs(vector<vector<int>>& dominoes)
 {
     vector<vector<int>> matrix(9, vector<int>(9));
 
@@ -1620,7 +1620,7 @@ int LeetCode::numEquivDominoPairs(vector<vector<int>>& dominoes)
 /// 4. 1 <= website[i].length <= 10
 /// 5. Both username[i] and website[i] contain only lowercase characters.
 /// </summary>
-vector<string> LeetCode::mostVisitedPattern(vector<string>& username,
+vector<string> LeetCodeHashtable::mostVisitedPattern(vector<string>& username,
     vector<int>& timestamp, vector<string>& website)
 {
     unordered_map<string, vector<pair<int, string>>> user_visit;

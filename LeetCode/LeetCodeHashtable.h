@@ -106,6 +106,834 @@ public:
     vector<vector<int>> fourSumII(vector<int>& nums, int target);
 
     /// <summary>
+    /// Leet code #128. Longest Consecutive Sequence 
+    /// Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
+    /// For example,
+    ///   Given [100, 4, 200, 1, 3, 2],
+    ///   The longest consecutive elements sequence is [1, 2, 3, 4]. Return its length: 4. 
+    /// Your algorithm should run in O(n) complexity. 
+    /// </summary>
+    int longestConsecutive(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #166. Fraction to Recurring Decimal
+    /// Given two integers representing the numerator and denominator of a fraction, return the fraction in string format.
+    /// If the fractional part is repeating, enclose the repeating part in parentheses.
+    /// For example,
+    /// Given numerator = 1, denominator = 2, return "0.5".	
+    /// Given numerator = 2, denominator = 1, return "2".
+    /// Given numerator = 2, denominator = 3, return "0.(6)"
+    /// Hint:
+    /// 1.No scary math, just apply elementary math knowledge. Still remember how to perform a long division?
+    /// 2.Try a long division on 4/9, the repeating part is obvious. Now try 4/333. Do you see a pattern?
+    /// 3.Be wary of edge cases! List out as many test cases as you can think of and test your code thoroughly.
+    /// </summary>
+    string fractionToDecimal(int numerator, int denominator);
+
+    /// <summary>
+    /// Leet code #202. Happy Number   
+    /// Write an algorithm to determine if a number is "happy".
+    /// A happy number is a number defined by the following process: Starting 
+    /// with any positive integer,
+    /// replace the number by the sum of the squares of its digits, and repeat 
+    /// the process until the number
+    /// equals 1 (where it will stay), or it loops endlessly in a cycle which 
+    /// does not include 1. 
+    /// Those numbers for which this process ends in 1 are happy numbers.
+    /// Example: 19 is a happy number
+    /// 1^2 + 9^2 = 82
+    /// 8^2 + 2^2 = 68
+    /// 6^2 + 8^2 = 100
+    /// 1^2 + 0^2 + 0^2 = 1
+    /// </summary>
+    bool isHappy(int n);
+
+    /// <summary>
+    /// Leet code #217. Contains Duplicate
+    /// Given an array of integers, find if the array contains any duplicates. Your function should return true 
+    /// if any value appears at least twice in the array, and it should return false if every element is distinct.	
+    /// </summary>
+    bool containsDuplicate(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #299. Bulls and Cows
+    ///
+    /// You are playing the following Bulls and Cows game with your friend: 
+    /// You write down a number and ask your friend to guess what the number 
+    ///is. Each time your friend makes a guess, you provide a hint that indicates 
+    /// how many digits in said guess match your secret number exactly in both 
+    /// digit and position (called "bulls") 
+    /// and how many digits match the secret number but locate in the wrong position (called "cows"). Your friend 
+    /// will use successive guesses and hints to eventually derive the secret number.	
+    /// For example: 
+    /// Secret number:  "1807"
+    /// Friend's guess: "7810"
+    /// Hint: 1 bull and 3 cows. (The bull is 8, the cows are 0, 1 and 7.) 
+    /// Write a function to return a hint according to the secret number and friend's guess, use A to indicate 
+    /// the bulls and B to indicate the cows. In the above example, your function should return "1A3B". 
+    /// Please note that both secret number and friend's guess may contain duplicate digits, for example: 
+    /// Secret number:  "1123"
+    /// Friend's guess: "0111"
+    /// In this case, the 1st 1 in friend's guess is a bull, the 2nd or 3rd 1 is a cow, and your function should return "1A1B". 
+    /// You may assume that the secret number and your friend's guess only contain digits, and their lengths are always equal.
+    /// </summary>
+    string getHint(string secret, string guess);
+
+    /// <summary>
+    /// Leet code #349. Intersection of Two Arrays      
+    /// Example:
+    /// Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2]. 
+    /// Note:
+    /// Each element in the result must be unique.
+    /// The result can be in any order.	
+    /// </summary>
+    vector<int> intersectionArray(vector<int>& nums1, vector<int>& nums2);
+
+    /// <summary>
+    /// Leet code #350. Intersection of Two Arrays II 
+    /// Given two arrays, write a function to compute their intersection. 	
+    /// Example:
+    /// Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2, 2]. 
+    /// Note:
+    /// Each element in the result should appear as many times as it shows in both arrays.
+    /// The result can be in any order.
+    ///	Follow up:
+    /// What if the given array is already sorted? How would you optimize your algorithm?
+    /// What if nums1's size is small compared to nums2's size? Which algorithm is better?
+    /// What if elements of nums2 are stored on disk, and the memory is limited such that 
+    /// you cannot load all elements into the memory at once?
+    /// </summary>
+    vector<int> intersectionArrayII(vector<int>& nums1, vector<int>& nums2);
+
+    /// <summary>
+    /// Leet code #219. Contains Duplicate II
+    /// Given an array of integers and an integer k, find out whether there are two distinct 
+    /// indices i and j in the array such that nums[i] = nums[j] and the difference between i and j is at most k.	
+    /// </summary>
+    bool containsNearbyDuplicate(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code #347. Top K Frequent Elements
+    /// Given a non-empty array of integers, return the k most frequent elements.
+    /// For example,
+    /// Given [1,1,1,2,2,3] and k = 2, return [1,2]. 
+    /// Note: 
+    /// You may assume k is always valid, 1 ¡Ü k ¡Ü number of unique elements.
+    /// Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
+    /// </summary>
+    vector<int> topKFrequent(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code #451. Sort Characters By Frequency 
+    /// Given a string, sort it in decreasing order based on the frequency of characters.
+    /// Example 1: 
+    /// Input:
+    /// "tree"
+    ///
+    /// Output:
+    /// "eert"
+    ///
+    /// Explanation:
+    /// 'e' appears twice while 'r' and 't' both appear once.
+    /// So 'e' must appear before both 'r' and 't'. Therefore "eetr" is also a valid answer.
+    ///
+    /// Example 2: 
+    /// Input:
+    /// "cccaaa"
+    ///
+    /// Output:
+    /// "cccaaa"
+    ///
+    /// Explanation:
+    /// Both 'c' and 'a' appear three times, so "aaaccc" is also a valid answer.
+    /// Note that "cacaca" is incorrect, as the same characters must be together.
+    ///
+    /// Example 3: 
+    /// Input:
+    /// "Aabb" 
+    /// Output:
+    /// "bbAa"
+    ///
+    /// Explanation:
+    /// "bbaA" is also a valid answer, but "Aabb" is incorrect.
+    /// Note that 'A' and 'a' are treated as two different characters.
+    /// </summary>
+    string frequencySort(string s);
+
+    /// <summary>
+    /// Leet code #500. Keyboard Row
+    /// 
+    /// Given a List of words, return the words that can be typed using letters of alphabet 
+    /// on only one row's of American keyboard like the image below. 
+    /// The keyboard layout is as below:
+    /// QWERTYUIOP
+    /// ASDFGHJKL
+    /// ZXCVBNM
+    /// Example 1:
+    /// Input: ["Hello", "Alaska", "Dad", "Peace"]
+    /// Output: ["Alaska", "Dad"]
+    /// Note:
+    /// 1.You may use one character in the keyboard more than once.
+    /// 2.You may assume the input string will only contain letters of alphabet.
+    /// </summary>
+    vector<string> findWordsInOneRow(vector<string>& words);
+
+    /// <summary>
+    /// Leet code #506. Relative Ranks
+    /// 
+    /// Given scores of N athletes, find their relative ranks and the people with the top three highest 
+    /// scores, who will be awarded medals: "Gold Medal", "Silver Medal" and "Bronze Medal".
+    ///
+    /// Example 1:
+    ///
+    /// Input: [5, 4, 3, 2, 1]
+    /// Output: ["Gold Medal", "Silver Medal", "Bronze Medal", "4", "5"]
+    /// Explanation: The first three athletes got the top three highest scores, so 
+    /// they got "Gold Medal", "Silver Medal" and "Bronze Medal". 
+    /// For the left two athletes, you just need to output their relative ranks 
+    /// according to their scores.
+    ///
+    /// Note:
+    /// 1.N is a positive integer and won't exceed 10,000.
+    /// 2.All the scores of athletes are guaranteed to be unique.
+    /// </summary>
+    vector<string> findRelativeRanks(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #532. K-diff Pairs in an Array
+    /// 
+    /// Given an array of integers and an integer k, you need to find the number of unique 
+    /// k-diff pairs in the array. Here a k-diff pair is defined as an integer pair (i, j), 
+    /// where i and j are both numbers in the array and their absolute difference is k.
+    ///
+    /// Example 1:
+    /// Input: [3, 1, 4, 1, 5], k = 2
+    /// Output: 2
+    /// Explanation: There are two 2-diff pairs in the array, (1, 3) and (3, 5).
+    /// Although we have two 1s in the input, we should only return the number of unique pairs.
+    /// Example 2:
+    /// Input:[1, 2, 3, 4, 5], k = 1
+    /// Output: 4
+    /// Explanation: There are four 1-diff pairs in the array, (1, 2), (2, 3), (3, 4) and (4, 5).
+    /// Example 3:
+    /// Input: [1, 3, 1, 5, 4], k = 0
+    /// Output: 1
+    /// Explanation: There is one 0-diff pair in the array, (1, 1).
+    /// Note:
+    /// The pairs (i, j) and (j, i) count as the same pair.
+    /// The length of the array won't exceed 10,000.
+    /// All the integers in the given input belong to the range: [-1e7, 1e7].
+    /// </summary>
+    int findPairs(vector<int>& nums, int k);
+
+    /// <summary>
+     /// Leet code #594. Longest Harmonious Subsequence
+     /// We define a harmonious array is an array where the difference between 
+     /// its maximum value and its minimum value is exactly 1.
+     /// Now, given an integer array, you need to find the length of its 
+     /// longest harmonious subsequence among all its possible subsequences.
+     ///
+     /// Example 1:
+     /// Input: [1,3,2,2,5,2,3,7]
+     /// Output: 5
+     /// Explanation: The longest harmonious subsequence is [3,2,2,2,3].
+     /// Note: The length of the input array will not exceed 20,000.
+     /// </summary>
+    int findLHS(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #599. Minimum Index Sum of Two Lists   
+    /// 
+    /// Suppose Andy and Doris want to choose a restaurant for dinner, and 
+    /// they both have a list of favorite restaurants represented by strings. 
+    /// You need to help them find out their common interest with the least 
+    /// list index sum. If there is a choice tie between answers, output all 
+    /// of them with no order requirement. You could assume there always 
+    /// exists an answer. 
+    /// Example 1:
+    /// Input:
+    /// ["Shogun", "Tapioca Express", "Burger King", "KFC"]
+    /// ["Piatti", "The Grill at Torrey Pines", "Hungry Steakhouse", "Shogun"]
+    /// Output: ["Shogun"]
+    /// Explanation: The only restaurant they both like is "Shogun".
+    ///
+    /// Example 2:
+    /// Input:
+    /// ["Shogun", "Tapioca Express", "Burger King", "KFC"]
+    /// ["KFC", "Shogun", "Burger King"]
+    /// Output: ["Shogun"]
+    /// Explanation: The restaurant they both like and have the least index 
+    /// sum is "Shogun" with index sum 1 (0+1).
+    ///
+    /// Note:
+    /// The length of both lists will be in the range of [1, 1000].
+    /// The length of strings in both lists will be in the range of [1, 30].
+    /// The index is starting from 0 to the list length minus 1.
+    /// No duplicates in both lists.
+    /// </summary>
+    vector<string> findRestaurant(vector<string>& list1, vector<string>& list2);
+
+    /// <summary>
+    /// Leet code #721. Accounts Merge
+    /// </summary>
+    bool checkCommonEmail(set<string>& emails, vector<string>& account);
+
+    /// <summary>
+    /// Leet code #721. Accounts Merge
+    /// </summary>
+    void addNewAccount(unordered_map<string, set<int>>& account_map, vector<set<string>>& account_emails,
+        vector<string>& account);
+
+    /// <summary>
+    /// Leet code #721. Accounts Merge
+    /// </summary>
+    void mergeAccount(unordered_map<string, set<int>>& account_map, vector<set<string>>& account_emails, vector<int>& merge_list,
+        vector<string>& account);
+
+    /// <summary>
+    /// Leet code #721. Accounts Merge
+    ///
+    /// Given a list accounts, each element accounts[i] is a list of strings,
+    /// where the first element accounts[i][0] is a name, and the rest of the 
+    /// elements are emails representing emails of the account.
+    ///
+    /// Now, we would like to merge these accounts. Two accounts definitely 
+    /// belong to the same person if there is some email that is common to 
+    /// both accounts. Note that even if two accounts have the same name, they 
+    /// may belong to different people as people could have the same name. A 
+    /// person can have any number of accounts initially, but all of their 
+    /// accounts definitely have the same name.
+    ///
+    /// After merging the accounts, return the accounts in the following 
+    /// format: the first element of each account is the name, and the rest of 
+    /// the elements are emails in sorted order. The accounts themselves can be
+    /// returned in any order.
+    ///
+    /// Example 1:
+    /// Input: 
+    /// accounts = [["John", "johnsmith@mail.com", "john00@mail.com"], ["John", 
+    /// "johnnybravo@mail.com"], ["John", "johnsmith@mail.com", 
+    /// "john_newyork@mail.com"], ["Mary", "mary@mail.com"]]
+    /// Output: [["John", 'john00@mail.com', 'john_newyork@mail.com', 
+    /// 'johnsmith@mail.com'],  ["John", "johnnybravo@mail.com"], ["Mary", 
+    /// "mary@mail.com"]]
+    /// Explanation: 
+    /// The first and third John's are the same person as they have the common 
+    /// email "johnsmith@mail.com".
+    /// The second John and Mary are different people as none of their email 
+    /// addresses are used by other accounts.
+    /// We could return these lists in any order, for example the answer 
+    /// [['Mary', 'mary@mail.com'], ['John', 'johnnybravo@mail.com'], 
+    /// ['John', 'john00@mail.com', 'john_newyork@mail.com', 
+    /// 'johnsmith@mail.com']] would still be accepted.
+    /// Note:
+    ///
+    /// 1.The length of accounts will be in the range [1, 1000].
+    /// 2.The length of accounts[i] will be in the range [1, 10].
+    /// 3.The length of accounts[i][j] will be in the range [1, 30].
+    /// </summary>
+    vector<vector<string>> accountsMerge(vector<vector<string>>& accounts);
+
+    /// <summary>
+    /// Leet code #734. Sentence Similarity
+    ///
+    /// Given two sentences words1, words2 (each represented as an array of 
+    /// strings), and a list of similar word pairs pairs, determine if two 
+    /// sentences are similar.
+    /// 
+    /// For example, "great acting skills" and "fine drama talent" are similar, 
+    /// if the similar word pairs are pairs = [["great", "fine"], 
+    /// ["acting","drama"], ["skills","talent"]].
+    /// Note that the similarity relation is not transitive. For example, if 
+    /// "great" and "fine" are similar, and "fine" and "good" are similar, 
+    /// "great" and "good" are not necessarily similar.
+    /// However, similarity is symmetric. For example, "great" and "fine" 
+    /// being similar is the same as "fine" and "great" being similar.
+    ///
+    /// Also, a word is always similar with itself. For example, the sentences 
+    /// words1 = ["great"], words2 = ["great"], pairs = [] are similar, even 
+    /// though there are no specified similar word pairs.
+    ///
+    /// Finally, sentences can only be similar if they have the same number 
+    /// of words. So a sentence like words1 = ["great"] can never be similar 
+    /// to words2 = ["doubleplus","good"].
+    ///
+    /// Note:
+    ///
+    /// The length of words1 and words2 will not exceed 1000.
+    /// The length of pairs will not exceed 2000.
+    /// The length of each pairs[i] will be 2.
+    /// The length of each words[i] and pairs[i][j] will be in the range 
+    /// [1, 20].
+    /// </summary>
+    bool areSentencesSimilar(vector<string>& words1, vector<string>& words2,
+        vector<pair<string, string>> pairs);
+
+    /// <summary>
+    /// Leet code #748. Shortest Completing Word
+    ///
+    /// Find the minimum length word from a given dictionary words, which has 
+    /// all the letters from the string licensePlate. Such a word is said to 
+    /// complete the given string licensePlate
+    ///
+    /// Here, for letters we ignore case. For example, "P" on the licensePlate 
+    /// still matches "p" on the word.
+    ///
+    /// It is guaranteed an answer exists. If there are multiple answers, 
+    /// return the one that occurs first in the array.
+    ///
+    /// The license plate might have the same letter occurring multiple times. 
+    /// For example, given a licensePlate of "PP", the word "pair" does not 
+    /// complete the licensePlate, but the word "supper" does.
+    ///
+    /// Example 1:
+    /// Input: licensePlate = "1s3 PSt", words = ["step", "steps", "stripe", 
+    /// "stepple"]
+    /// Output: "steps"
+    /// Explanation: The smallest length word that contains the letters "S", 
+    /// "P", "S", and "T".
+    /// Note that the answer is not "step", because the letter "s" must occur 
+    /// in the word twice.
+    /// Also note that we ignored case for the purposes of comparing whether 
+    /// a letter exists in the word.
+    /// Example 2:
+    /// Input: licensePlate = "1s3 456", words = ["looks", "pest", "stew", 
+    /// "show"]
+    /// Output: "pest"
+    /// Explanation: There are 3 smallest length words that contains the 
+    /// letters "s".
+    /// We return the one that occurred first.
+    /// Note:
+    /// 1.licensePlate will be a string with length in range [1, 7].
+    /// 2. licensePlate will contain digits, spaces, or letters (uppercase or 
+    ///    lowercase).
+    /// 3. words will have a length in the range [10, 1000].
+    /// 4. Every words[i] will consist of lowercase letters, and have length 
+    ///    in range [1, 15].
+    /// </summary>
+    string shortestCompletingWord(string licensePlate, vector<string>& words);
+
+    /// <summary>
+    /// Leet code #760. Find Anagram Mappings    
+    ///
+    /// Given two lists A and B, and B is an anagram of A. B is an anagram of A 
+    /// means B is made by randomizing the order of the elements in A.
+    ///
+    /// We want to find an index mapping P, from A to B. A mapping P[i] = j means 
+    /// the ith element in A appears in B at index j.
+    ///
+    /// These lists A and B may contain duplicates. If there are multiple answers, 
+    /// output any of them.
+    ///
+    /// For example, given
+    ///
+    /// A = [12, 28, 46, 32, 50]
+    /// B = [50, 12, 32, 46, 28]
+    /// We should return
+    /// [1, 4, 3, 2, 0]
+    /// as P[0] = 1 because the 0th element of A appears at B[1], and P[1] = 4 
+    /// because the 1st element of A appears at B[4], and so on.
+    /// Note:
+    ///
+    /// 1. A, B have equal lengths in range [1, 100].
+    /// 2. A[i], B[i] are integers in range [0, 10^5].
+    /// </summary>
+    vector<int> anagramMappings(vector<int>& A, vector<int>& B);
+
+    /// <summary>
+    /// Leet code #792. Number of Matching Subsequences
+    ///
+    /// Given string S and a dictionary of words words, find the number of 
+    /// words[i] that is a subsequence of S.
+    ///
+    /// Example :
+    /// Input: 
+    /// S = "abcde"
+    /// words = ["a", "bb", "acd", "ace"]
+    /// Output: 3
+    /// Explanation: There are three words in words that are a subsequence 
+    /// of S: "a", "acd", "ace".
+    /// Note:
+    ///
+    /// 1. All words in words and S will only consists of lowercase letters.
+    /// 2. The length of S will be in the range of [1, 50000].
+    /// 3. The length of words will be in the range of [1, 5000].
+    /// 4. The length of words[i] will be in the range of [1, 50].
+    /// </summary>
+    int numMatchingSubseq(string S, vector<string>& words);
+
+    /// <summary>
+    /// Leet code #811. Subdomain Visit Count
+    /// 
+    /// A website domain like "discuss.leetcode.com" consists of various 
+    /// subdomains. At the top level, we have "com", at the next level, 
+    /// we have "leetcode.com", and at the lowest level, 
+    /// "discuss.leetcode.com". When we visit a domain like 
+    /// "discuss.leetcode.com", we will also visit the parent domains 
+    /// "leetcode.com" and "com" implicitly.
+    /// 
+    /// Now, call a "count-paired domain" to be a count (representing 
+    /// the number of visits this domain received), followed by a space, 
+    /// followed by the address. An example of a count-paired domain might 
+    /// be "9001 discuss.leetcode.com".
+    ///
+    /// We are given a list cpdomains of count-paired domains. We would like 
+    /// a list of count-paired domains, (in the same format as the input, and 
+    /// in any order), that explicitly counts the number of visits to each 
+    /// subdomain.
+    ///
+    /// Example 1:
+    /// Input: 
+    /// ["9001 discuss.leetcode.com"]
+    /// Output: 
+    /// ["9001 discuss.leetcode.com", "9001 leetcode.com", "9001 com"]
+    /// Explanation: 
+    /// We only have one website domain: "discuss.leetcode.com". As discussed 
+    /// above, the subdomain "leetcode.com" and "com" will also be visited. So 
+    /// they will all be visited 9001 times.
+    ///
+    /// Example 2:
+    /// Input: 
+    /// ["900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", 
+    /// "5 wiki.org"]
+    /// Output: 
+    /// ["901 mail.com","50 yahoo.com","900 google.mail.com","5 wiki.org",
+    ///  "5 org","1 intel.mail.com","951 com"]
+    /// Explanation: 
+    /// We will visit "google.mail.com" 900 times, "yahoo.com" 50 times, 
+    /// "intel.mail.com" once and "wiki.org" 5 times. For the subdomains, we 
+    /// will visit "mail.com" 900 + 1 = 901 times, "com" 900 + 50 + 1 = 951 
+    /// times, and "org" 5 times.
+    /// 
+    /// Notes:
+    ///
+    /// 1. The length of cpdomains will not exceed 100. 
+    /// 2. The length of each domain name will not exceed 100.
+    /// 3. Each address will have either 1 or 2 "." characters.
+    /// 4. The input count in any count-paired domain will not exceed 10000.
+    /// </summary>
+    vector<string> subdomainVisits(vector<string>& cpdomains);
+
+    /// <summary>
+    /// Leet code #884. Uncommon Words from Two Sentences
+    /// 
+    /// We are given two sentences A and B.  (A sentence is a string of space 
+    /// separated words.  Each word consists only of lowercase letters.)
+    ///
+    /// A word is uncommon if it appears exactly once in one of the sentences, 
+    /// and does not appear in the other sentence.
+    ///
+    /// Return a list of all uncommon words. 
+    ///
+    /// You may return the list in any order.
+    ///
+    /// Example 1:
+    ///
+    /// Input: A = "this apple is sweet", B = "this apple is sour"
+    /// Output: ["sweet","sour"]
+    /// Example 2:
+    ///
+    /// Input: A = "apple apple", B = "banana"
+    /// Output: ["banana"]
+    /// 
+    /// Note:
+    /// 1. 0 <= A.length <= 200
+    /// 2. 0 <= B.length <= 200
+    /// 3. A and B both contain only spaces and lowercase letters.
+    /// </summary>
+    vector<string> uncommonFromSentences(string A, string B);
+
+    /// <summary>
+    /// Leet code #890. Find and Replace Pattern
+    /// 
+    /// You have a list of words and a pattern, and you want to know which words 
+    /// in words matches the pattern.
+    ///
+    /// A word matches the pattern if there exists a permutation of letters p so 
+    /// that after replacing every letter x in the pattern with p(x), we get the 
+    /// desired word.
+    ///
+    /// (Recall that a permutation of letters is a bijection from letters to 
+    /// letters: every letter maps to another letter, and no two letters map to 
+    /// the same letter.)
+    ///
+    /// Return a list of the words in words that match the given pattern. 
+    ///
+    /// You may return the answer in any order.
+    ///
+    /// 
+    /// Example 1:
+    ///
+    /// Input: words = ["abc","deq","mee","aqq","dkd","ccc"], pattern = "abb"
+    /// Output: ["mee","aqq"]
+    /// Explanation: "mee" matches the pattern because there is a permutation 
+    /// {a -> m, b -> e, ...}. 
+    /// "ccc" does not match the pattern because {a -> c, b -> c, ...} is not a 
+    /// permutation, since a and b map to the same letter.
+    /// 
+    /// Note:
+    /// 1 <= words.length <= 50
+    /// 1 <= pattern.length = words[i].length <= 20
+    /// </summary>
+    vector<string> findAndReplacePattern(vector<string>& words, string pattern);
+
+    /// <summary>
+    /// Leet code #916. Word Subsets
+    /// 
+    /// We are given two arrays A and B of words.  Each word is a string of 
+    /// lowercase letters.
+    ///
+    /// Now, say that word b is a subset of word a if every letter in b occurs in 
+    /// a, including multiplicity.  For example, "wrr" is a subset of "warrior", 
+    /// but is not a subset of "world".
+    ///
+    /// Now say a word a from A is universal if for every b in B, b is a subset of 
+    /// a. 
+    ///
+    /// Return a list of all universal words in A.  You can return the words in 
+    /// any order.
+    ///
+    /// Example 1:
+    ///
+    /// Input: A = ["amazon","apple","facebook","google","leetcode"], B = ["e","o"]
+    /// Output: ["facebook","google","leetcode"]
+    ///
+    /// Example 2:
+    ///
+    /// Input: A = ["amazon","apple","facebook","google","leetcode"], B = ["l","e"]
+    /// Output: ["apple","google","leetcode"]
+    ///
+    /// Example 3:
+    ///
+    /// Input: A = ["amazon","apple","facebook","google","leetcode"], B = ["e","oo"]
+    /// Output: ["facebook","google"]
+    ///
+    /// Example 4:
+    ///
+    /// Input: A = ["amazon","apple","facebook","google","leetcode"], B = ["lo","eo"]
+    /// Output: ["google","leetcode"]
+    ///
+    /// Example 5:
+    ///
+    /// Input: A = ["amazon","apple","facebook","google","leetcode"], B = ["ec","oc","ceo"]
+    /// Output: ["facebook","leetcode"]
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. 1 <= A.length, B.length <= 10000
+    /// 2. 1 <= A[i].length, B[i].length <= 10
+    /// 3. A[i] and B[i] consist only of lowercase letters.
+    /// 4. All words in A[i] are unique: there isn't i != j with A[i] == A[j].
+    /// </summary>
+    vector<string> wordSubsets(vector<string>& A, vector<string>& B);
+
+    /// <summary>
+    /// Leet code #957. Prison Cells After N Days
+    /// 
+    /// There are 8 prison cells in a row, and each cell is either occupied or 
+    /// vacant.
+    ///
+    /// Each day, whether the cell is occupied or vacant changes according to 
+    /// the following rules:
+    ///
+    /// If a cell has two adjacent neighbors that are both occupied or both vacant, 
+    /// then the cell becomes occupied. Otherwise, it becomes vacant.
+    /// (Note that because the prison is a row, the first and the last cells in 
+    /// the row can't have two adjacent neighbors.)
+    ///
+    /// We describe the current state of the prison in the following way: 
+    /// cells[i] == 1 if the i-th cell is occupied, else cells[i] == 0.
+    ///
+    /// Given the initial state of the prison, return the state of the prison after 
+    /// N days (and N such changes described above.)
+    ///
+    /// Example 1:
+    ///
+    /// Input: cells = [0,1,0,1,1,0,0,1], N = 7
+    /// Output: [0,0,1,1,0,0,0,0]
+    /// Explanation: 
+    /// The following table summarizes the state of the prison on each day:
+    /// Day 0: [0, 1, 0, 1, 1, 0, 0, 1]
+    /// Day 1: [0, 1, 1, 0, 0, 0, 0, 0]
+    /// Day 2: [0, 0, 0, 0, 1, 1, 1, 0]
+    /// Day 3: [0, 1, 1, 0, 0, 1, 0, 0]
+    /// Day 4: [0, 0, 0, 0, 0, 1, 0, 0]
+    /// Day 5: [0, 1, 1, 1, 0, 1, 0, 0]
+    /// Day 6: [0, 0, 1, 0, 1, 1, 0, 0]
+    /// Day 7: [0, 0, 1, 1, 0, 0, 0, 0]
+    /// 
+    /// Example 2:
+    ///
+    /// Input: cells = [1,0,0,1,0,0,1,0], N = 1000000000
+    /// Output: [0,0,1,1,1,1,1,0]
+    /// 
+    /// Note:
+    ///
+    /// 1. cells.length == 8
+    /// 2. cells[i] is in {0, 1}
+    /// 3. 1 <= N <= 10^9
+    /// </summary>
+    vector<int> prisonAfterNDays(vector<int>& cells, int N);
+
+    /// <summary>
+    /// Leet code #1010. Pairs of Songs With Total Durations Divisible by 60
+    /// 
+    /// In a list of songs, the i-th song has a duration of time[i] seconds. 
+    /// 
+    /// Return the number of pairs of songs for which their total duration in 
+    /// seconds is divisible by 60.  Formally, we want the number of indices 
+    /// i < j with (time[i] + time[j]) % 60 == 0.
+    ///
+    ///
+    /// Example 1: 
+    /// Input: [30,20,150,100,40]
+    /// Output: 3
+    /// Explanation: Three pairs have a total duration divisible by 60:
+    /// (time[0] = 30, time[2] = 150): total duration 180
+    /// (time[1] = 20, time[3] = 100): total duration 120
+    /// (time[1] = 20, time[4] = 40): total duration 60
+    ///
+    /// Example 2:
+    /// Input: [60,60,60]
+    /// Output: 3
+    /// Explanation: All three pairs have a total duration of 120, which is 
+    /// divisible by 60.
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. 1 <= time.length <= 60000
+    /// 2. 1 <= time[i] <= 500
+    /// </summary>
+    int numPairsDivisibleBy60(vector<int>& time);
+
+    /// <summary>
+    /// Leet code #1041. Robot Bounded In Circle
+    /// 
+    /// On an infinite plane, a robot initially stands at (0, 0) and faces north.  
+    /// The robot can receive one of three instructions:
+    ///
+    /// "G": go straight 1 unit;
+    /// "L": turn 90 degrees to the left;
+    /// "R": turn 90 degress to the right.
+    /// The robot performs the instructions given in order, and repeats them 
+    /// forever.
+    ///
+    /// Return true if and only if there exists a circle in the plane such that 
+    /// the robot never leaves the circle.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: "GGLLGG"
+    /// Output: true
+    /// Explanation: 
+    /// The robot moves from (0,0) to (0,2), turns 180 degrees, and then returns to
+    /// (0,0).
+    /// When repeating these instructions, the robot remains in the circle of 
+    /// radius 2 centered at the origin.
+    ///
+    /// Example 2:
+    ///
+    /// Input: "GG"
+    /// Output: false
+    /// Explanation: 
+    /// The robot moves north indefinitely.
+    ///
+    /// Example 3:
+    ///
+    /// Input: "GL"
+    /// Output: true
+    /// Explanation: 
+    /// The robot moves from (0, 0) -> (0, 1) -> (-1, 1) -> (-1, 0) -> (0, 0) -> 
+    /// ...
+    /// 
+    /// Note:
+    /// 1. 1 <= instructions.length <= 100
+    /// 2. instructions[i] is in {'G', 'L', 'R'}
+    /// </summary>
+    bool isRobotBounded(string instructions);
+
+    /// <summary>
+    /// Leet code #1128. Number of Equivalent Domino Pairs
+    /// 
+    /// Given a list of dominoes, dominoes[i] = [a, b] is equivalent to 
+    /// dominoes[j] = [c, d] if and only if either (a==c and b==d), or 
+    /// (a==d and b==c) - that is, one domino can be rotated to be equal 
+    /// to another domino.
+    ///
+    /// Return the number of pairs (i, j) for which 
+    /// 0 <= i < j < dominoes.length, and dominoes[i] is equivalent to 
+    /// dominoes[j].
+    ///
+    /// Example 1:
+    /// 
+    /// Input: dominoes = [[1,2],[2,1],[3,4],[5,6]]
+    /// Output: 1
+    ///
+    /// Constraints:
+    /// 1. 1 <= dominoes.length <= 40000
+    /// 2. 1 <= dominoes[i][j] <= 9
+    /// </summary>
+    int numEquivDominoPairs(vector<vector<int>>& dominoes);
+
+    /// <summary>
+    /// Leet code #1152. Analyze User Website Visit Pattern
+    /// 
+    /// You are given three arrays username, timestamp and website of the same 
+    /// length N where the ith tuple means that the user with name username[i] 
+    /// visited the website website[i] at time timestamp[i].
+    /// A 3-sequence is a list of not necessarily different websites of length 
+    /// 3 sorted in ascending order by the time of their visits.
+    /// Find the 3-sequence visited at least once by the largest number of 
+    /// users. If there is more than one solution, return the lexicographically 
+    /// minimum solution.
+    /// A 3-sequence X is lexicographically smaller than a 3-sequence Y if 
+    /// X[0] < Y[0] or X[0] == Y[0] and (X[1] < Y[1] or X[1] == Y[1] and 
+    /// X[2] < Y[2]). 
+    /// It is guaranteed that there is at least one user who visited at least 
+    /// 3 websites. No user visits two websites at the same time.
+    /// 
+    /// Example 1:
+    /// Input: username = ["joe","joe","joe","james","james","james",
+    /// "james","mary","mary","mary"], timestamp = [1,2,3,4,5,6,7,8,9,10], 
+    /// website = ["home","about","career","home","cart","maps","home","home",
+    /// "about","career"]
+    /// Output: ["home","about","career"]
+    /// Explanation: 
+    /// The tuples in this example are:
+    /// ["joe", 1, "home"]
+    /// ["joe", 2, "about"]
+    /// ["joe", 3, "career"]
+    /// ["james", 4, "home"]
+    /// ["james", 5, "cart"]
+    /// ["james", 6, "maps"]
+    /// ["james", 7, "home"]
+    /// ["mary", 8, "home"]
+    /// ["mary", 9, "about"]
+    /// ["mary", 10, "career"]
+    /// The 3-sequence ("home", "about", "career") was visited at least once 
+    /// by 2 users.
+    /// The 3-sequence ("home", "cart", "maps") was visited at least once by 
+    /// 1 user.
+    /// The 3-sequence ("home", "cart", "home") was visited at least once by 
+    /// 1 user.
+    /// The 3-sequence ("home", "maps", "home") was visited at least once by 
+    /// 1 user.
+    /// The 3-sequence ("cart", "maps", "home") was visited at least once by 
+    /// 1 user.
+    /// 
+    /// Note:
+    /// 1. 3 <= N = username.length = timestamp.length = website.length <= 50
+    /// 2. 1 <= username[i].length <= 10
+    /// 3. 0 <= timestamp[i] <= 10^9
+    /// 4. 1 <= website[i].length <= 10
+    /// 5. Both username[i] and website[i] contain only lowercase characters.
+    /// </summary>
+    vector<string> mostVisitedPattern(vector<string>& username,
+        vector<int>& timestamp, vector<string>& website);
+
+    /// <summary>
     /// Leet code #1207. Unique Number of Occurrences
     ///
     /// Given an array of integers arr, write a function that returns 
