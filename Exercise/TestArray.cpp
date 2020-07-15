@@ -4021,8 +4021,60 @@ void TestLeetCode1504(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1508(void)
+{
+    Logger::WriteMessage("Test Leet Code 1508");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3, 4 };
+    int n = 4;
+    int left = 1;
+    int right = 5;
+    int result = leetCode.rangeSum(nums, n, left, right);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("n = " + to_string(n) + "; left = " + to_string(left) + "; right = " + to_string(right) + "; result = " + to_string(result));
+
+    nums = { 1, 2, 3, 4 };
+    n = 4;
+    left = 3;
+    right = 4;
+    result = leetCode.rangeSum(nums, n, left, right);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("n = " + to_string(n) + "; left = " + to_string(left) + "; right = " + to_string(right) + "; result = " + to_string(result));
+
+    nums = { 1, 2, 3, 4 };
+    n = 4;
+    left = 1;
+    right = 10;
+    result = leetCode.rangeSum(nums, n, left, right);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("n = " + to_string(n) + "; left = " + to_string(left) + "; right = " + to_string(right) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1513(void)
+{
+    Logger::WriteMessage("Test Leet Code 1513");
+    LeetCodeArray leetCode;
+    string s = "0110111";
+    int result = leetCode.numSub(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "101";
+    result = leetCode.numSub(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "111111";
+    result = leetCode.numSub(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "000";
+    result = leetCode.numSub(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1513();
+    TestLeetCode1508();
     TestLeetCode1504();
     TestLeetCode1502();
     TestLeetCode1498();

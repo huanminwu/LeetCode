@@ -8426,4 +8426,87 @@ int LeetCodeGraph::minNumberOfSemesters(int n, vector<vector<int>>& dependencies
     }
     return result;
 }
+
+
+/// <summary>
+/// Leet code #1514. Path with Maximum Probability
+/// 
+/// Medium
+///
+/// You are given an undirected weighted graph of n nodes (0-indexed), 
+/// represented by an edge list where edges[i] = [a, b] is an undirected 
+/// edge connecting the nodes a and b with a probability of success of 
+/// traversing that edge succProb[i].
+///
+/// Given two nodes start and end, find the path with the maximum 
+/// probability of success to go from start to end and return its success 
+/// probability.
+///
+/// If there is no path from start to end, return 0. Your answer will 
+/// be accepted if it differs from the correct answer by at most 1e-5.
+///
+///
+/// Example 1:
+/// Input: n = 3, edges = [[0,1],[1,2],[0,2]], 
+/// succProb = [0.5,0.5,0.2], start = 0, end = 2
+/// Output: 0.25000
+/// Explanation: There are two paths from start to end, one having a 
+/// probability of success = 0.2 and the other has 0.5 * 0.5 = 0.25.
+///
+/// Example 2:
+/// Input: n = 3, edges = [[0,1],[1,2],[0,2]], succProb = [0.5,0.5,0.3], 
+/// start = 0, end = 2
+/// Output: 0.30000
+///
+/// Example 3:
+/// Input: n = 3, edges = [[0,1]], succProb = [0.5], start = 0, end = 2
+/// Output: 0.00000
+/// Explanation: There is no path between 0 and 2.
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 10^4
+/// 2. 0 <= start, end < n
+/// 3. start != end
+/// 4. 0 <= a, b < n
+/// 5. a != b
+/// 6. 0 <= succProb.length == edges.length <= 2*10^4
+/// 7. 0 <= succProb[i] <= 1
+/// 8. There is at most one edge between every two nodes.
+/// </summary>
+double LeetCodeGraph::maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start, int end)
+{
+    vector<vector<pair<int, double>>> next(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        next[edges[i][0]].push_back(make_pair(edges[i][1], succProb[i]));
+        next[edges[i][1]].push_back(make_pair(edges[i][0], succProb[i]));
+    }
+    vector<double> probability(n);
+    priority_queue<pair<double, int>> pq;
+    probability[start] = 1;
+    pq.push(make_pair(1, start));
+
+    while (!pq.empty())
+    {
+        pair<double, int> pr = pq.top();
+        pq.pop();
+        if (pr.second == end) break;
+        if (pr.first < probability[pr.second]) continue;
+        for (size_t i = 0; i < next[pr.second].size(); i++)
+        {
+            pair<int, double> node = next[pr.second][i];
+            if (pr.first * node.second <= probability[node.first]) continue;
+            probability[node.first] = pr.first * node.second;
+            pq.push(make_pair(pr.first * node.second, node.first));
+        }
+    }
+    return probability[end];
+}
+
+
+
+
+
+
+
 #pragma endregion

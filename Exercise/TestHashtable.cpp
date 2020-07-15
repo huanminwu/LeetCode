@@ -926,8 +926,31 @@ void TestLeetCode811(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1512(void)
+{
+    Logger::WriteMessage("Test Leet Code 1512");
+    LeetCodeHashtable leetCode;
+    
+    vector<int> nums = { 1, 2, 3, 1, 1, 3 };
+    int result = leetCode.numIdenticalPairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1,1 };
+    result = leetCode.numIdenticalPairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    result = leetCode.numIdenticalPairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1512();
     TestLeetCode811();
     TestLeetCode347();
     TestLeetCode748();

@@ -11710,4 +11710,121 @@ int LeetCodeArray::numSubmat(vector<vector<int>>& mat)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1508. Range Sum of Sorted Subarray Sums
+///
+/// Medium
+///	
+/// Given the array nums consisting of n positive integers. You computed 
+/// the sum of all non-empty continous subarrays from the array and then 
+/// sort them in non-decreasing order, creating a new array of 
+/// n * (n + 1) / 2 numbers.
+/// Return the sum of the numbers from index left to index right 
+/// (indexed from 1), inclusive, in the new array. Since the answer 
+/// can be a huge number return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,4], n = 4, left = 1, right = 5
+/// Output: 13 
+/// Explanation: All subarray sums are 1, 3, 6, 10, 2, 5, 9, 3, 7, 4. 
+/// After sorting them in non-decreasing order we have the new array 
+/// [1, 2, 3, 3, 4, 5, 6, 7, 9, 10]. The sum of the numbers from index 
+/// le = 1 to ri = 5 is 1 + 2 + 3 + 3 + 4 = 13. 
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4], n = 4, left = 3, right = 4
+/// Output: 6
+/// Explanation: The given array is the same as example 1. We have 
+/// the new array [1, 2, 3, 3, 4, 5, 6, 7, 9, 10]. The sum of the 
+/// numbers from index le = 3 to ri = 4 is 3 + 3 = 6.
+///
+/// Example 3:
+/// Input: nums = [1,2,3,4], n = 4, left = 1, right = 10
+/// Output: 50
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^3
+/// 2. nums.length == n
+/// 3. 1 <= nums[i] <= 100
+/// 4. 1 <= left <= right <= n * (n + 1) / 2
+/// </summary>
+int LeetCodeArray::rangeSum(vector<int>& nums, int n, int left, int right)
+{
+    int M = 1000000007;
+    vector<int> dp(n);
+    vector<int> sum;
+    for (int i = 0; i < n; i++)
+    {
+        if (i == 0) dp[i] = nums[i];
+        else dp[i] = dp[i - 1] + nums[i];
+
+        for (int j = -1; j < i; j++)
+        {
+            if (j == -1) sum.push_back(dp[i]);
+            else sum.push_back(dp[i] - dp[j]);
+        }
+    }
+    sort(sum.begin(), sum.end());
+    int result = 0;
+    for (int i = left - 1; i < right; i++)
+    {
+        result = result + sum[i];
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1513. Number of Substrings With Only 1s
+///
+/// Medium
+///	
+/// Given a binary string s (a string consisting only of '0' and '1's).
+///
+/// Return the number of substrings with all characters 1's.
+/// Since the answer may be too large, return it modulo 10^9 + 7.
+/// 
+/// Example 1:
+/// Input: s = "0110111"
+/// Output: 9
+/// Explanation: There are 9 substring in total with only 1's characters.
+/// "1" -> 5 times.
+/// "11" -> 3 times.
+/// "111" -> 1 time.
+///
+/// Example 2:
+/// Input: s = "101"
+/// Output: 2
+/// Explanation: Substring "1" is shown 2 times in s.
+///
+/// Example 3:
+/// Input: s = "111111"
+/// Output: 21
+/// Explanation: Each substring contains only 1's characters.
+///
+/// Example 4:
+/// Input: s = "000"
+/// Output: 0
+/// 
+/// Constraints:
+/// 1. s[i] == '0' or s[i] == '1'
+/// 2. 1 <= s.length <= 10^5
+/// </summary>
+int LeetCodeArray::numSub(string s)
+{
+    int result = 0;
+    int count = 0;
+    int M = 1000000007;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '0') count = 0;
+        else
+        {
+            count++;
+            result = (result + count) % M;
+        }
+    }
+    return result;
+}
+
 #pragma endregion

@@ -1656,8 +1656,34 @@ void TestLeetCode1478(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1510(void)
+{
+    Logger::WriteMessage("Test Leet Code 1510");
+    LeetCodeDP leetCode;
+    int n = 1;
+    bool result = leetCode.winnerSquareGame(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+
+    n = 2;
+    result = leetCode.winnerSquareGame(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+
+    n = 4;
+    result = leetCode.winnerSquareGame(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+
+    n = 7;
+    result = leetCode.winnerSquareGame(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+
+    n = 17;
+    result = leetCode.winnerSquareGame(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1510();
     TestLeetCode1478();
     TestLeetCode1473();
     TestLeetCode1463();

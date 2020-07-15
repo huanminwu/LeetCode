@@ -98,5 +98,7 @@ void TestLeetCode1497(void);
 void TestLeetCode1498(void);
 void TestLeetCode1502(void);
 void TestLeetCode1504(void);
+void TestLeetCode1508(void);
+void TestLeetCode1513(void);
 void TestLeetCodeArray(void);
 #endif  // TestArray

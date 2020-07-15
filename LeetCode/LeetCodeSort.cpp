@@ -4684,4 +4684,63 @@ string LeetCodeSort::minInteger(string num, int k)
 
     return result;
 }
+
+/// <summary>
+/// Leet code #1509. Minimum Difference Between Largest and Smallest Value 
+///                  in Three Moves
+///
+/// Medium
+///	
+/// Given an array nums, you are allowed to choose one element of nums and 
+/// change it by any value in one move.
+///
+/// Return the minimum difference between the largest and smallest value 
+/// of nums after perfoming at most 3 moves.
+///
+/// Example 1:
+/// Input: nums = [5,3,2,4]
+/// Output: 0
+/// Explanation: Change the array [5,3,2,4] to [2,2,2,2].
+/// The difference between the maximum and minimum is 2-2 = 0.
+///
+/// Example 2:
+/// Input: nums = [1,5,0,10,14]
+/// Output: 1
+/// Explanation: Change the array [1,5,0,10,14] to [1,1,0,1,1]. 
+/// The difference between the maximum and minimum is 1-0 = 1.
+///
+/// Example 3:
+/// Input: nums = [6,6,0,1,1,4,6]
+/// Output: 2
+///
+/// Example 4:
+/// Input: nums = [1,5,6,14,15]
+/// Output: 1
+/// 1. Constraints:
+/// 2. 1 <= nums.length <= 10^5
+/// 3. -10^9 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeSort::minDifference(vector<int>& nums)
+{
+    sort(nums.begin(), nums.end());
+
+    int k = 3;
+    int first = 0;
+    int last = nums.size() - 1;
+    if (last - k <= first) return 0;
+    while (k > 0)
+    {
+        if (nums[last - k] - nums[first] > nums[last] - nums[first + k])
+        {
+            first++;
+        }
+        else
+        {
+            last--;
+        }
+        k--;
+    }
+    return nums[last] - nums[first];
+}
+
 #pragma endregion

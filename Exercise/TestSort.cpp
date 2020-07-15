@@ -668,8 +668,33 @@ void TestLeetCode1505(void)
     Logger::WriteMessage("num = " + num + "; k = " + to_string(k) + "; result = " + result);
 }
 
+void TestLeetCode1509(void)
+{
+    LeetCodeSort leetCode;
+    vector<int> nums = { 5,3,2,4 };
+    int result = leetCode.minDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,5,0,10,14 };
+    result = leetCode.minDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,6,0,1,1,4,6 };
+    result = leetCode.minDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,5,6,14,15 };
+    result = leetCode.minDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1509();
     TestLeetCode1505();
     TestLeetCode1499();
     TestLeetCode1439();

@@ -10952,4 +10952,68 @@ bool LeetCodeString::checkValidString(string s)
     return true;
 }
 
+/// <summary>
+/// Leet code #1507. Reformat Date
+///
+/// Easy
+///	
+/// Given a date string in the form Day Month Year, where:
+/// Day is in the set {"1st", "2nd", "3rd", "4th", ..., "30th", "31st"}.
+/// Month is in the set {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", 
+/// "Aug", "Sep", "Oct", "Nov", "Dec"}.   
+/// Year is in the range [1900, 2100].
+/// Convert the date string to the format YYYY-MM-DD, where:
+/// YYYY denotes the 4 digit year.
+/// MM denotes the 2 digit month.
+/// DD denotes the 2 digit day.
+///
+/// Example 1:
+/// Input: date = "20th Oct 2052" 
+/// Output: "2052-10-20"
+///
+/// Example 2:
+/// Input: date = "6th Jun 1933"
+/// Output: "1933-06-06"
+///
+/// Example 3:
+/// Input: date = "26th May 1960"
+/// Output: "1960-05-26"
+/// 
+/// Constraints:
+/// 1. The given dates are guaranteed to be valid, so no error handling is 
+///    necessary.
+/// </summary>
+string LeetCodeString::reformatDate(string date)
+{
+    unordered_map<string, string> month_map =
+    {
+        {"Jan", "01"}, {"Feb", "02"}, {"Mar", "03"}, {"Apr", "04"}, {"May", "05"}, {"Jun", "06"},
+        {"Jul", "07"}, {"Aug", "08"}, {"Sep", "09"}, {"Oct", "10"}, {"Nov", "11"}, {"Dec", "12"}
+    };
+    size_t offset = 0;
+    size_t pos = date.find(' ', offset);
+    string day_str = date.substr(offset, pos-offset);
+    offset = pos + 1;
+    pos = date.find(' ', offset);
+    string month_str = date.substr(offset, pos-offset);
+    offset = pos + 1;
+    string year = date.substr(offset);
+
+    string day;
+    for (size_t i = 0; i < day_str.size(); i++)
+    {
+        if (isdigit(day_str[i])) day.push_back(day_str[i]);
+    }
+    if (day.size() == 1) day = "0" + day;
+    string month = month_map[month_str];
+    string result;
+    result.append(year);
+    result.push_back('-');
+    result.append(month);
+    result.push_back('-');
+    result.append(day);
+
+    return result;
+}
+
 #pragma endregion

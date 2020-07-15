@@ -3104,8 +3104,26 @@ void TestLeetCode678(void)
     Logger::WriteMessage("s = " + s + "; is valid = " + (string)(isValid ? "true" : "false"));
 }
 
+void TestLeetCode1507(void)
+{
+    LeetCodeString leetCode;
+    string date = "20th Oct 2052";
+    string result = leetCode.reformatDate(date);
+    Logger::WriteMessage("date = " + date + "; result = " + result);
+
+    date = "6th Jun 1933";
+    result = leetCode.reformatDate(date);
+    Logger::WriteMessage("date = " + date + "; result = " + result);
+
+    date = "26th May 1960";
+    result = leetCode.reformatDate(date);
+    Logger::WriteMessage("date = " + date + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1507();
+    TestLeetCode678();
     TestLeetCode804();
     TestLeetCode824();
     TestLeetCode842();

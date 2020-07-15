@@ -3071,8 +3071,39 @@ void TestLeetCode1503(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1515(void)
+{
+    Logger::WriteMessage("Test Leet Code 1515");
+    LeetCodeMath leetCode;
+    vector<vector<int>> positions = { {0, 1},{1, 0},{1, 2},{2, 1} };
+    double result = leetCode.getMinDistSum(positions);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    positions = { {1, 1},{3, 3} };
+    result = leetCode.getMinDistSum(positions);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    positions = { {1, 1} };
+    result = leetCode.getMinDistSum(positions);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    positions = { {1, 1},{0, 0},{2, 0} };
+    result = leetCode.getMinDistSum(positions);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    positions = { {0, 1},{3, 2},{4, 5},{7, 6},{8, 9},{11, 1},{2, 12} };
+    result = leetCode.getMinDistSum(positions);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1515();
     TestLeetCode1503();
     TestLeetCode1492();
     TestLeetCode825();
