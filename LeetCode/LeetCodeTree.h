@@ -4531,6 +4531,132 @@ public:
     /// 2. The total number of nodes is between [0, 10^4].
     /// </summary>
     Node* cloneTree(Node* root);
+
+    /// <summary>
+    /// Leet code #1506. Find Root of N-Ary Tree
+    /// 
+    /// Medium
+    ///
+    /// Given all the nodes of an N-ary tree as an array  Node[] tree where 
+    /// each node has a unique value.
+    ///
+    /// Find and return the root of the N-ary tree.
+    /// 
+    /// Follow up:
+    /// Could you solve this problem in constant space complexity with a 
+    /// linear time algorithm?
+    ///
+    /// Nary-Tree input serialization is represented in their level order 
+    /// traversal, each group of children is separated by the null value 
+    /// (See examples).
+    /// 
+    /// For example, the above tree is serialized as [1,null,2,3,4,5,null,
+    /// null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14].
+    ///
+    /// Custom testing:
+    /// 1. You should provide the serialization of the input tree.
+    /// 2. The Driver code then extracts the nodes from the tree and 
+    ///    shuffles them. You shouldn't care how the extracted nodes are 
+    ///    shuffled.
+    /// 3. The driver code will provide you with an array of the extracted 
+    ///    nodes in random order and you need to find the root of the tree 
+    ///    out of these nodes.
+    ///
+    /// Example 1:
+    /// Input: tree = [1,null,3,2,4,null,5,6]
+    /// Output: [1,null,3,2,4,null,5,6]
+    /// Explanation: The input tree is shown above. The driver code first 
+    /// extracts the nodes so we now have an array of all tree nodes 
+    /// [Node(1),Node(3),Node(2),Node(4),Node(5),Node(6)], then the array 
+    /// is randomly shuffled, thus the actual input is [Node(5),Node(4),
+    /// Node(3),Node(6),Node(2),Node(1)].
+    /// The root of the tree is Node(1) and the output is the 
+    /// serialization of the node you return.
+    ///
+    /// Example 2:
+    /// Input: tree = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,
+    ///   null,null,11,null,12,null,13,null,null,14]
+    /// Output: [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,
+    /// null,12,null,13,null,null,14]
+    ///
+    /// Constraints:
+    /// The total number of nodes is between [1, 5 * 10^4].
+    /// Each node has a unique value.
+    /// </summary>
+    Node* findRoot(vector<Node*> tree);
+
+    /// <summary>
+    /// Leet code #1519. Number of Nodes in the Sub-Tree With the Same Label
+    /// </summary>
+    void countSubTrees(int node, vector<vector<int>>& links, string& labels, 
+        vector<int> &tag, vector<int>& result);
+
+    /// <summary>
+    /// Leet code #1519. Number of Nodes in the Sub-Tree With the Same Label
+    /// 
+    /// Medium
+    ///
+    /// Given a tree (i.e. a connected, undirected graph that has no cycles) 
+    /// consisting of n nodes numbered from 0 to n - 1 and exactly n - 1 
+    /// edges. The root of the tree is the node 0, and each node of the tree 
+    /// has a label which is a lower-case character given in the string 
+    /// labels (i.e. The node with the number i has the label labels[i]).
+    ///
+    /// The edges array is given on the form edges[i] = [ai, bi], which means 
+    /// there is an edge between nodes ai and bi in the tree.
+    ///
+    /// Return an array of size n where ans[i] is the number of nodes in the 
+    /// subtree of the ith node which have the same label as node i.
+    ///
+    /// A subtree of a tree T is the tree consisting of a node in T and all 
+    /// of its descendant nodes.
+    /// 
+    /// Example 1:
+    /// Input: n = 7, edges = [[0,1],[0,2],[1,4],[1,5],[2,3],[2,6]], 
+    /// labels = "abaedcd"
+    /// Output: [2,1,1,1,1,1,1]
+    /// Explanation: Node 0 has label 'a' and its sub-tree has node 2 with 
+    /// label 'a' as well, thus the answer is 2. Notice that any node is 
+    /// part of its sub-tree.
+    /// Node 1 has a label 'b'. The sub-tree of node 1 contains nodes 1,4 
+    /// and 5, as nodes 4 and 5 have different labels than node 1, the 
+    /// answer is just 1 (the node itself).
+    ///
+    /// Example 2:
+    /// Input: n = 4, edges = [[0,1],[1,2],[0,3]], labels = "bbbb"
+    /// Output: [4,2,1,1]
+    /// Explanation: The sub-tree of node 2 contains only node 2, so the 
+    /// answer is 1.
+    /// The sub-tree of node 3 contains only node 3, so the answer is 1.
+    /// The sub-tree of node 1 contains nodes 1 and 2, both have label 'b', 
+    /// thus the answer is 2.
+    /// The sub-tree of node 0 contains nodes 0, 1, 2 and 3, all with label 
+    /// 'b', thus the answer is 4.
+    ///
+    /// Example 3:
+    /// Input: n = 5, edges = [[0,1],[0,2],[1,3],[0,4]], labels = "aabab"
+    /// Output: [3,2,1,1,1]
+    ///
+    /// Example 4:
+    /// Input: n = 6, edges = [[0,1],[0,2],[1,3],[3,4],[4,5]], 
+    /// labels = "cbabaa"
+    /// Output: [1,2,1,1,2,1]
+    ///
+    /// Example 5:
+    /// Input: n = 7, edges = [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6]],
+    /// labels = "aaabaaa"
+    /// Output: [6,5,4,1,3,2,1]
+    /// Constraints:
+    /// 1. 1 <= n <= 10^5
+    /// 2. edges.length == n - 1
+    /// 3. edges[i].length == 2
+    /// 4. 0 <= ai, bi < n
+    /// 5. ai != bi
+    /// 6. labels.length == n
+    /// 7. labels is consisting of only of lower-case English letters.
+    /// </summary>
+    vector<int> countSubTrees(int n, vector<vector<int>>& edges, string labels);
+
 #pragma endregion
 };
 

@@ -2,6 +2,7 @@
 #ifndef TestDP_H
 #define TestDP_H
 #include "..\LeetCode\LeetCodeDP.h"
+void TestLeetCode5(void);
 void TestLeetCode10(void);
 void TestLeetCode44(void);
 void TestLeetCode55(void);

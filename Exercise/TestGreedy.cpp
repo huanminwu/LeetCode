@@ -268,8 +268,24 @@ void TestLeetCode1419(void)
     Logger::WriteMessage("croakOfFrogs = " + croakOfFrogs + "; result = " + to_string(result));
 }
 
+void TestLeetCode1520(void)
+{
+    Logger::WriteMessage("Test Leet Code 1520");
+    LeetCodeGreedy leetCode;
+    string s = "adefaddaccc";
+    vector<string> result = leetCode.maxNumOfSubstrings(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+
+    s = "abbaccd";
+    result = leetCode.maxNumOfSubstrings(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode1520();
     TestLeetCode826();
     TestLeetCode1419();
     TestLeetCode1405();

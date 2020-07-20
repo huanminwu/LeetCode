@@ -992,30 +992,35 @@ vector<int> LeetCodeHashtable::anagramMappings(vector<int>& A, vector<int>& B)
 /// </summary>
 int LeetCodeHashtable::numMatchingSubseq(string S, vector<string>& words)
 {
-    unordered_map<char, set<int>> char_map;
-    for (size_t i = 0; i < S.size(); i++)
-    {
-        char_map[S[i]].insert(i);
-    }
-
-    int result = 0;
+    vector<queue<pair<int, int>>> word_pos(26);
     for (size_t i = 0; i < words.size(); i++)
     {
-        int index = 0;
-        bool broken = false;
-        for (size_t j = 0; j < words[i].size(); j++)
-        {
-            char ch = words[i][j];
-            auto itr = char_map[ch].lower_bound(index);
-            if (itr == char_map[ch].end())
-            {
-                broken = true;
-                break;
-            }
-            index = (*itr) + 1;
-        }
-        if (!broken) result++;
+        int index = words[i][0] - 'a';
+        word_pos[index].push(make_pair(i, 0));
     }
+    int result = 0;
+    for (size_t i = 0; i < S.size(); i++)
+    {
+        int index = S[i] - 'a';
+        // use static size avoid new character in same slot.
+        size_t size = word_pos[index].size();
+        for (size_t j = 0; j < size; j++)
+        {
+            pair<int, int> pos = word_pos[index].front();
+            word_pos[index].pop();
+            pos.second++; 
+            if (pos.second >= (int)words[pos.first].size())
+            {
+                result++;
+            }
+            else
+            {
+                int next = words[pos.first][pos.second] - 'a';
+                word_pos[next].push(pos);
+            }
+        }
+    }
+
     return result;
 }
 

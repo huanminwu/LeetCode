@@ -40,49 +40,7 @@
 #include "TestBit.h"
 #include "TestUSACO.h"
 
-void TestLeetCode121(void)
-{
-    Logger::WriteMessage("Test Leet Code 121");
-    LeetCode leetCode;
-    string message;
-    Logger::WriteMessage("The stock price is ");
-    vector<int> prices = { 7, 1, 5, 3, 6, 4 };
-    Logger::WriteMessage(prices);
-    int maxProfit = leetCode.maxProfitOneTxn(prices);    
-    message.assign("The max profit is ");
-    message.append(std::to_string(maxProfit));
-    Logger::WriteMessage(message.c_str());
-    
-    Logger::WriteMessage("The stock price is ");
-    prices = { 1, 2 };
-    maxProfit = leetCode.maxProfitOneTxn(prices);
-    message.assign("The max profit is ");
-    message.append(std::to_string(maxProfit));
-    Logger::WriteMessage(message.c_str());
-}
 
-void TestLeetCode122(void)
-{
-    Logger::WriteMessage("Test Leet Code 122");
-    LeetCode leetCode;
-    vector<int> prices;
-    int maxProfit;
-    string message;
-    Logger::WriteMessage("The stock price is ");
-    prices = { 7, 1, 5, 3, 6, 4 };
-    Logger::WriteMessage(prices);
-    maxProfit = leetCode.maxProfitManyTxns(prices);
-    message.assign("The max profit is ");
-    message.append(std::to_string(maxProfit));
-    Logger::WriteMessage(message);
-
-    Logger::WriteMessage("The stock price is ");
-    prices = { 1, 2 };
-    maxProfit = leetCode.maxProfitManyTxns(prices);
-    message.assign("The max profit is ");
-    message.append(std::to_string(maxProfit));
-    Logger::WriteMessage(message);
-}
 
 void TestLeetCode56(void)
 {
@@ -133,31 +91,6 @@ void TestLeetCode97(void)
     Logger::WriteMessage(isInterLeave ? "s3 is interleave of s1 and s2" : "s3 is not interleave of s1 and s2");
 }
 
-void TestLeetCode5(void)
-{
-    Logger::WriteMessage("Test Leet Code 5");
-    LeetCode leetCode;
-    
-    string s = "abaaba";
-    string result = leetCode.longestPalindrome(s);
-    Logger::WriteMessage("s = " + s + "; result = " + result);
-    
-    s = "abcc";
-    result = leetCode.longestPalindrome(s);
-    Logger::WriteMessage("s = " + s + "; result = " + result);
-
-    s = "";
-    result = leetCode.longestPalindrome(s);
-    Logger::WriteMessage("s = " + s + "; result = " + result);
-
-    s = "babad";
-    result = leetCode.longestPalindrome(s);
-    Logger::WriteMessage("s = " + s + "; result = " + result);
-
-    s = "cbbd";
-    result = leetCode.longestPalindrome(s);
-    Logger::WriteMessage("s = " + s + "; result = " + result);
-}
 
 void TestLeetCode57(void)
 {
@@ -318,15 +251,6 @@ void TestLeetCode164(void)
 
 
 
-void TestLeetCode198(void)
-{
-    Logger::WriteMessage("Test Leet Code 198");
-    LeetCode leetCode;
-    vector<int> nums = {  1, 2, 3, 4, 5, 6 };
-    Logger::WriteMessage(nums);
-    int amount = leetCode.rob(nums);
-    Logger::WriteMessage("The maximum amount the robber can get is " + to_string(amount));
-}
 
 
 void TestLeetCode75(void)
@@ -376,16 +300,6 @@ void TestLeetCode217(void)
 }
 
 
-void TestLeetCode96(void)
-{
-    Logger::WriteMessage("Test Leet Code 96");
-    LeetCode leetCode;
-    int n;
-    int result;
-    n = 3;
-    result = leetCode.numTrees(n);
-    Logger::WriteMessage("n = " + to_string(n) + " , " + "number of trees = " + to_string(result));
-}
 
 
 
@@ -1501,19 +1415,6 @@ void TestLeetCode351(void)
     int result = leetCode.numberOfPatterns(m, n);
     Logger::WriteMessage("m = " + to_string(m) + ";n = " + to_string(n) + ";result =" + to_string(result));
 }
-
-void TestLeetCode309(void)
-{
-    Logger::WriteMessage("Test Leet Code 351");
-    LeetCode leetCode;
-    vector<int> prices = { 1, 2, 3, 0, 2 };
-    int max_profit = leetCode.maxProfit(prices);
-    Logger::WriteMessage(prices);    
-    Logger::WriteMessage("max profit = " + to_string(max_profit));
-}
-
-
-
 
 void TestLeetCode440(void)
 {
@@ -4467,23 +4368,24 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeGreedy();
+    TestLeetCodeTree();
+    TestLeetCodeMath();
+    TestLeetCodeBit();
+    TestLeetCodeHashtable();
     TestLeetCodeDP();
     TestLeetCodeGraph();
-    TestLeetCodeMath();
     TestLeetCodeSort();
     TestLeetCodeArray();
-    TestLeetCodeHashtable();
     TestLeetCodeString();
     TestLeetCodeDesign();
-    TestLeetCodeArray();
-    TestLeetCodeBit();
     TestLeetCodeLinkedList();
     TestLeetCodeBinarySearch();
     TestLeetCodeStack();
     TestUSACO();
-    TestLeetCodeTree();
 
-    TestLeetCodeGreedy();
+
+
     TestLeetCodeDFS();
     TestLeetCodeBFS();
     TestLeetCode902();
@@ -4722,7 +4624,6 @@ void main(int argc, char* argv[])
     TestLeetCode17();
     TestLeetCode22();
     TestLeetCode267();
-    TestLeetCode309();
     TestLeetCode351();
     TestLeetCode472();
     TestLeetCode465();
@@ -4829,17 +4730,14 @@ void main(int argc, char* argv[])
     TestLeetCode232();
     TestLeetCode225();
     TestLeetCode223();
-    TestLeetCode96();
     TestLeetCode59();
     TestLeetCode217();
     TestLeetCode127();
     TestLeetCode34();
     TestLeetCode322();
-    TestLeetCode198();
     TestLeetCode123();
     TestLeetCode90();
     TestLeetCode78();
-    TestLeetCode122();
     TestLeetCode273();
     TestLeetCode164();
     TestLeetCode264();
@@ -4863,7 +4761,6 @@ void main(int argc, char* argv[])
     TestLeetCode66();
     TestLeetCode354();
     TestLeetCode56();
-    TestLeetCode121();
 
     printf("Please press a key to end");
     int key = _getch();

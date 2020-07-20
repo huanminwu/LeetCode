@@ -950,13 +950,13 @@ void TestLeetCode1512(void)
 
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode792();
     TestLeetCode1512();
     TestLeetCode811();
     TestLeetCode347();
     TestLeetCode748();
     TestLeetCode957();
     TestLeetCode1010();
-    TestLeetCode792();
     TestLeetCode1128();
     TestLeetCode1152();
     TestLeetCode128();

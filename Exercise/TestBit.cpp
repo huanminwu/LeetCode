@@ -518,8 +518,32 @@ void TestLeetCode1486(void)
     Logger::WriteMessage("n = " + to_string(n) + "; start = " + to_string(start) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1521(void)
+{
+    Logger::WriteMessage("Test Leet Code 1521");
+    LeetCodeBit leetCode;
+    vector<int> arr = { 9, 12, 3, 7, 15 };
+    int target = 5;
+    int result = leetCode.closestToTarget(arr, target);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    arr = { 1000000,1000000,1000000 };
+    target = 1;
+    result = leetCode.closestToTarget(arr, target);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    arr = { 1,2,4,8,16 };
+    target = 0;
+    result = leetCode.closestToTarget(arr, target);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode1521();
     TestLeetCode1486();
     TestLeetCode861();
     TestLeetCode1461();

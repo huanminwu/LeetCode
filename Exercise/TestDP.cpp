@@ -1,6 +1,32 @@
 #include "..\LeetCode\LeetCode.h"
 #include "..\LeetCode\LeetCodeDP.h"
 #include "TestDP.h"
+void TestLeetCode5(void)
+{
+    Logger::WriteMessage("Test Leet Code 5");
+    LeetCodeDP leetCode;
+
+    string s = "abaaba";
+    string result = leetCode.longestPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "abcc";
+    result = leetCode.longestPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "";
+    result = leetCode.longestPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "babad";
+    result = leetCode.longestPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "cbbd";
+    result = leetCode.longestPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCode494(void)
 {
     Logger::WriteMessage("Test Leet Code 494");
@@ -11,6 +37,27 @@ void TestLeetCode494(void)
     Logger::WriteMessage("S = " + to_string(S));
     int count = leetCode.findTargetSumWays(nums, S);
     Logger::WriteMessage("count = " + to_string(count));
+}
+
+void TestLeetCode121(void)
+{
+    Logger::WriteMessage("Test Leet Code 121");
+    LeetCodeDP leetCode;
+    string message;
+    Logger::WriteMessage("The stock price is ");
+    vector<int> prices = { 7, 1, 5, 3, 6, 4 };
+    Logger::WriteMessage(prices);
+    int maxProfit = leetCode.maxProfitOneTxn(prices);
+    message.assign("The max profit is ");
+    message.append(std::to_string(maxProfit));
+    Logger::WriteMessage(message.c_str());
+
+    Logger::WriteMessage("The stock price is ");
+    prices = { 1, 2 };
+    maxProfit = leetCode.maxProfitOneTxn(prices);
+    message.assign("The max profit is ");
+    message.append(std::to_string(maxProfit));
+    Logger::WriteMessage(message.c_str());
 }
 
 void TestLeetCode518(void)
@@ -1681,8 +1728,68 @@ void TestLeetCode1510(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode122(void)
+{
+    Logger::WriteMessage("Test Leet Code 122");
+    LeetCodeDP leetCode;
+    vector<int> prices;
+    int maxProfit;
+    string message;
+    Logger::WriteMessage("The stock price is ");
+    prices = { 7, 1, 5, 3, 6, 4 };
+    Logger::WriteMessage(prices);
+    maxProfit = leetCode.maxProfitManyTxns(prices);
+    message.assign("The max profit is ");
+    message.append(std::to_string(maxProfit));
+    Logger::WriteMessage(message);
+
+    Logger::WriteMessage("The stock price is ");
+    prices = { 1, 2 };
+    maxProfit = leetCode.maxProfitManyTxns(prices);
+    message.assign("The max profit is ");
+    message.append(std::to_string(maxProfit));
+    Logger::WriteMessage(message);
+}
+
+void TestLeetCode309(void)
+{
+    Logger::WriteMessage("Test Leet Code 351");
+    LeetCodeDP leetCode;
+    vector<int> prices = { 1, 2, 3, 0, 2 };
+    int max_profit = leetCode.maxProfit(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("max profit = " + to_string(max_profit));
+}
+
+void TestLeetCode96(void)
+{
+    Logger::WriteMessage("Test Leet Code 96");
+    LeetCodeDP leetCode;
+    int n;
+    int result;
+    n = 3;
+    result = leetCode.numTrees(n);
+    Logger::WriteMessage("n = " + to_string(n) + " , " + "number of trees = " + to_string(result));
+}
+
+void TestLeetCode198(void)
+{
+    Logger::WriteMessage("Test Leet Code 198");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5, 6 };
+    Logger::WriteMessage(nums);
+    int amount = leetCode.rob(nums);
+    Logger::WriteMessage("The maximum amount the robber can get is " + to_string(amount));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode198();
+    TestLeetCode96();
+    TestLeetCode309();
+    TestLeetCode122();
+    TestLeetCode5();
+    TestLeetCode121();
     TestLeetCode1510();
     TestLeetCode1478();
     TestLeetCode1473();

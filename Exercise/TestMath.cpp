@@ -3101,8 +3101,34 @@ void TestLeetCode1515(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1518(void)
+{
+    Logger::WriteMessage("Test Leet Code 1518");
+    LeetCodeMath leetCode;
+    int numBottles = 9;
+    int numExchange = 3;
+    int result = leetCode.numWaterBottles(numBottles, numExchange);
+    Logger::WriteMessage("numBottles = " + to_string(numBottles) + "; numExchange = " + to_string(numExchange) + "; result = " + to_string(result));
+
+    numBottles = 15;
+    numExchange = 4;
+    result = leetCode.numWaterBottles(numBottles, numExchange);
+    Logger::WriteMessage("numBottles = " + to_string(numBottles) + "; numExchange = " + to_string(numExchange) + "; result = " + to_string(result));
+
+    numBottles = 5;
+    numExchange = 5;
+    result = leetCode.numWaterBottles(numBottles, numExchange);
+    Logger::WriteMessage("numBottles = " + to_string(numBottles) + "; numExchange = " + to_string(numExchange) + "; result = " + to_string(result));
+
+    numBottles = 2;
+    numExchange = 3;
+    result = leetCode.numWaterBottles(numBottles, numExchange);
+    Logger::WriteMessage("numBottles = " + to_string(numBottles) + "; numExchange = " + to_string(numExchange) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1518();
     TestLeetCode1515();
     TestLeetCode1503();
     TestLeetCode1492();

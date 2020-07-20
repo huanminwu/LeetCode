@@ -310,68 +310,6 @@ public:
     int largestRectangleAreaByDivide(vector<int>& heights);
 
     /// <summary>
-    /// Leet code #5. Longest Palindromic Substring 
-    /// Given a string S, find the longest palindromic substring in S. 
-    /// You may assume that the maximum length of S is 1000, 
-    ///  and there exists one unique longest palindromic substring
-    /// </summary>
-    string longestPalindrome(string s);
-
-    /// <summary>
-    /// Leet code #121. Best Time to Buy and Sell Stock
-    /// Say you have an array for which the ith element is the price of a given stock on day i.
-    /// If you were only permitted to complete at most one transaction (ie, buy one and sell one 
-    /// share of the stock), design an algorithm to find the maximum profit.
-    ///
-    /// Example 1:
-    /// Input: [7, 1, 5, 3, 6, 4]
-    /// Output: 5
-    /// max. difference = 6-1 = 5 (not 7-1 = 6, as selling price needs to be larger than buying price)
-    /// 
-    /// Example 2:
-    /// Input: [7, 6, 4, 3, 1]
-    /// Output: 0
-    /// In this case, no transaction is done, i.e. max profit = 0.
-    /// </summary>
-    int maxProfitOneTxn(vector<int>& prices);
-
-    /// <summary>
-    /// Leet code #122. Best Time to Buy and Sell Stock II 
-    /// Say you have an array for which the ith element is the price of a given stock on day i.
-    /// Design an algorithm to find the maximum profit. You may complete as many transactions as you 
-    /// like (ie, buy one and sell one share of the stock multiple times). However, you may not 
-    /// engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
-    /// </summary>
-    int maxProfitManyTxns(vector<int>& prices);
-
-    /// <summary>
-    /// Leet code #188. Best Time to Buy and Sell Stock IV  
-    /// Say you have an array for which the ith element is the price of a given stock on day i.
-    /// Design an algorithm to find the maximum profit. You may complete at most k transactions.
-    /// Note:
-    /// You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
-    /// </summary>
-    int maxProfitKTxns(int k, vector<int>& prices);
-
-    /// <summary>
-    /// Leet code # 309. Best Time to Buy and Sell Stock with Cooldown 
-    ///
-    /// Say you have an array for which the ith element is the price of a given stock on day i.
-    ///
-    /// Design an algorithm to find the maximum profit. You may complete as many transactions as you like 
-    /// (ie, buy one and sell one share of the stock multiple times) with the following restrictions:
-    /// You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
-    /// After you sell your stock, you cannot buy stock on next day. (ie, cooldown 1 day)
-    /// 
-    /// Example:
-    /// prices = [1, 2, 3, 0, 2] 
-    /// maxProfit = 3
-    /// transactions = [buy, sell, cooldown, buy, sell]
-    /// </summary>
-    int maxProfit(vector<int>& prices);
-
-
-    /// <summary>
     /// Leet code #97. Interleaving String
     /// Given s1, s2, s3, find whether s3 is formed by the interleaving of s1 and s2.
     /// For example,
@@ -384,32 +322,7 @@ public:
     bool isInterleave(string s1, string s2, string s3);
 
 
-    /// <summary>
-    /// Leet code #198. House Robber
-    ///
-    /// You are a professional robber planning to rob houses along a street. 
-    /// Each house has a certain amount of money stashed, the only constraint 
-    /// stopping you from robbing each of them is that adjacent houses have 
-    /// security system connected and it will automatically contact the police 
-    /// if two adjacent houses were broken into on the same night.
-    /// Given a list of non-negative integers representing the amount of money 
-    /// of each house, determine the maximum amount of money you can rob 
-    /// tonight without alerting the police.
-    /// </summary>
-    int rob(vector<int>& nums);
 
-    /// <summary>
-    /// Leet code #96. Unique Binary Search Trees    
-    /// Given n, how many structurally unique BST's (binary search trees) that store values 1...n?  
-    /// For example,
-    /// Given n = 3, there are a total of 5 unique BST's.
-    ///   1         3     3      2      1
-    ///    \       /     /      / \      \
-    ///     3     2     1      1   3      2
-    ///    /     /       \                 \
-    ///   2     1         2                 3
-    /// </summary>
-    int numTrees(int n);
 
     /// <summary>
     /// Leet code #85. Maximal Rectangle  

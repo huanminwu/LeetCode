@@ -34,7 +34,7 @@
 /// Input : "cbbd"
 /// Output : "bb"
 /// </summary>
-string LeetCode::longestPalindrome(string s)
+string LeetCodeDP::longestPalindrome(string s)
 {
     string result;
     size_t n = s.size();
@@ -77,7 +77,7 @@ string LeetCode::longestPalindrome(string s)
 /// Output: 0
 /// In this case, no transaction is done, i.e. max profit = 0.
 /// </summary>
-int LeetCode::maxProfitOneTxn(vector<int>& prices)
+int LeetCodeDP::maxProfitOneTxn(vector<int>& prices)
 {
     if (prices.size() == 0)
     {
@@ -105,7 +105,7 @@ int LeetCode::maxProfitOneTxn(vector<int>& prices)
 /// like (ie, buy one and sell one share of the stock multiple times). However, you may not 
 /// engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
 /// </summary>
-int LeetCode::maxProfitManyTxns(vector<int>& prices)
+int LeetCodeDP::maxProfitManyTxns(vector<int>& prices)
 {
     int max_profit = 0;
     vector<int> buy(prices.size());
@@ -187,7 +187,7 @@ int LeetCodeDP::maxProfitTwoTxns(vector<int>& prices)
 /// Note:
 /// You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
 /// </summary>
-int LeetCode::maxProfitKTxns(int k, vector<int>& prices)
+int LeetCodeDP::maxProfitKTxns(int k, vector<int>& prices)
 {
     if (prices.size() == 0)
     {
@@ -227,7 +227,7 @@ int LeetCode::maxProfitKTxns(int k, vector<int>& prices)
 /// maxProfit = 3
 /// transactions = [buy, sell, cooldown, buy, sell]
 /// </summary>
-int LeetCode::maxProfit(vector<int>& prices)
+int LeetCodeDP::maxProfit(vector<int>& prices)
 {
     int max_profit = 0;
     vector<int> buy(prices.size());
@@ -888,7 +888,7 @@ int LeetCodeDP::minPathSum(vector<vector<int>>& grid)
 /// each house, determine the maximum amount of money you can rob tonight 
 /// without alerting the police.
 /// </summary>
-int LeetCode::rob(vector<int>& nums)
+int LeetCodeDP::rob(vector<int>& nums)
 {
     if (nums.size() == 0) return 0;
     vector<int> matrix(nums.size());
@@ -1070,7 +1070,7 @@ int LeetCodeDP::nthUglyNumber(int n)
 ///    /     /       \                 \
 ///   2     1         2                 3
 /// </summary>
-int LeetCode::numTrees(int n)
+int LeetCodeDP::numTrees(int n)
 {
     vector<int> nums(n + 1);
 

@@ -2522,4 +2522,115 @@ int LeetCodeGreedy::maxProfitAssignment(vector<int>& difficulty, vector<int>& pr
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1520. Maximum Number of Non-Overlapping Substrings
+/// 
+/// Medium
+///
+/// Given a string s of lowercase letters, you need to find the maximum 
+/// number of non-empty substrings of s that meet the following conditions:
+///
+/// The substrings do not overlap, that is for any two substrings s[i..j] 
+/// and s[k..l], either j < k or i > l is true.
+/// A substring that contains a certain character c must also contain all 
+/// occurrences of c.
+/// Find the maximum number of substrings that meet the above conditions. 
+/// If there are multiple solutions with the same number of substrings, 
+/// return the one with minimum total length. It can be shown that there 
+/// exists a unique solution of minimum total length.
+///
+/// Notice that you can return the substrings in any order.
+/// Example 1:
+///
+/// Input: s = "adefaddaccc"
+/// Output: ["e","f","ccc"]
+/// Explanation: The following are all the possible substrings that meet 
+/// the conditions:
+/// [
+///    "adefaddaccc"
+///    "adefadda",
+///  "ef",
+///  "e",
+///  "f",
+///  "ccc",
+/// ]
+/// If we choose the first string, we cannot choose anything else and we'd 
+/// get only 1. If we choose "adefadda", we are left with "ccc" which is 
+/// the only one that doesn't overlap, thus obtaining 2 substrings. Notice 
+/// also, that it's not optimal to choose "ef" since it can be split into 
+/// two. Therefore, the optimal way is to choose ["e","f","ccc"] which 
+/// gives us 3 substrings. No other solution of the same number of 
+/// substrings exist.
+///
+/// Example 2:
+/// Input: s = "abbaccd"
+/// Output: ["d","bb","cc"]
+/// Explanation: Notice that while the set of substrings ["d","abba","cc"] 
+/// also has length 3, it's considered incorrect since it has larger 
+/// total length.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s contains only lowercase English letters.
+/// </summary>
+vector<string> LeetCodeGreedy::maxNumOfSubstrings(string s)
+{
+    vector<vector<int>> positions(26, vector<int>(2, -1));
+    
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        int k = s[i] - 'a';
+        if (positions[k][0] == -1) positions[k][0] = i;
+        positions[k][1] = i;
+    }
+    set<vector<int>> pq_char;
+    for (size_t i = 0; i < positions.size(); i++)
+    {
+        if (positions[i][0] != -1) pq_char.insert(positions[i]);
+    }
+    set<vector<int>> pq_str;
+    while (!pq_char.empty())
+    {
+        vector<int> char_range = *pq_char.begin();
+        pq_char.erase(pq_char.begin());
+        int l = char_range[0];
+        int r = char_range[1];
+        for (int i = l; i <= r; i++)
+        {
+            int k = s[i] - 'a';
+            // already covered.
+            if (positions[k][0] < l)
+            {
+                l = -1;
+                r = -1;
+                break;
+            }
+            else
+            {
+                r = max(r, positions[k][1]);
+            }
+        }
+        if (l != -1)
+        {
+            pq_str.insert({ l, r });
+        }
+    }
+    vector<string> result;
+    vector<int> first = *pq_str.begin();
+    pq_str.erase(pq_str.begin());
+    while (!pq_str.empty())
+    {
+        vector<int> second = *pq_str.begin();
+        pq_str.erase(pq_str.begin());
+        if (first[1] < second[0])
+        {
+            result.push_back(s.substr(first[0], first[1] - first[0] + 1));
+        }
+        first = second;
+    }
+    result.push_back(s.substr(first[0], first[1] - first[0] + 1));
+    return result;
+}
+
 #pragma endregion

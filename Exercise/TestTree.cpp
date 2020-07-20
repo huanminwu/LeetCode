@@ -2682,8 +2682,54 @@ void TestLeetCode1469(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1519(void)
+{
+    Logger::WriteMessage("Test Leet Code 1519");
+    LeetCodeTree leetCode;
+    int n = 7;
+    vector<vector<int>> edges = { {0, 1},{0, 2},{1, 4},{1, 5},{2, 3},{2, 6} };
+    string labels = "abaedcd";
+    vector<int> result = leetCode.countSubTrees(n, edges, labels);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; labels = " + labels);
+    Logger::WriteMessage(result);
+
+    n = 4;
+    edges = { {0, 1},{1, 2},{0, 3} };
+    labels = "bbbb";
+    result = leetCode.countSubTrees(n, edges, labels);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; labels = " + labels);
+    Logger::WriteMessage(result);
+
+    n = 5;
+    edges = { {0, 1},{0, 2},{1, 3},{0, 4} };
+    labels = "aabab";
+    result = leetCode.countSubTrees(n, edges, labels);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; labels = " + labels);
+    Logger::WriteMessage(result);
+
+    n = 6;
+    edges = { {0, 1},{0, 2},{1, 3},{3, 4},{4, 5} };
+    labels = "cbabaa";
+    result = leetCode.countSubTrees(n, edges, labels);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; labels = " + labels);
+    Logger::WriteMessage(result);
+
+    n = 7;
+    edges = { {0, 1},{1, 2},{2, 3},{3, 4},{4, 5},{5, 6} };
+    labels = "aaabaaa";
+    result = leetCode.countSubTrees(n, edges, labels);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; labels = " + labels);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1519();
     TestLeetCode1469();
     TestLeetCode1457();
     TestLeetCode742();
