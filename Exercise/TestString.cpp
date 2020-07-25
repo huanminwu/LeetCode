@@ -63,6 +63,30 @@ void TestLeetCode30(void)
     Logger::WriteMessage(result);
 }
 
+
+void TestLeetCode139(void)
+{
+    Logger::WriteMessage("Test Leet Code 139");
+    LeetCodeString leetCode;
+    string s = "leetcode";
+    vector<string> wordDict = { "leet", "code" };
+    bool result = leetCode.wordBreak(s, wordDict);
+    Logger::WriteMessage(wordDict);
+    Logger::WriteMessage("string = " + s + "result = " + string(result ? "true" : "false"));
+
+    s = "applepenapple";
+    wordDict = { "apple", "pen" };
+    result = leetCode.wordBreak(s, wordDict);
+    Logger::WriteMessage(wordDict);
+    Logger::WriteMessage("string = " + s + "result = " + string(result ? "true" : "false"));
+
+    s = "catsandog";
+    wordDict = { "cats", "dog", "sand", "and", "cat" };
+    result = leetCode.wordBreak(s, wordDict);
+    Logger::WriteMessage(wordDict);
+    Logger::WriteMessage("string = " + s + "result = " + string(result ? "true" : "false"));
+}
+
 void TestLeetCode1233(void)
 {
     Logger::WriteMessage("Test Leet Code 1233");
@@ -3122,6 +3146,7 @@ void TestLeetCode1507(void)
 
 void TestLeetCodeString(void)
 {
+    TestLeetCode139();
     TestLeetCode1507();
     TestLeetCode678();
     TestLeetCode804();

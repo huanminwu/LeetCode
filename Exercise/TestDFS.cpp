@@ -634,8 +634,82 @@ void TestLeetCode87(void)
     Logger::WriteMessage(s1 + " and " + s2 + (is_scramble ? " are " : " are not ") + "scramble string");
 }
 
+
+void TestLeetCode131(void)
+{
+    Logger::WriteMessage("Test Leet Code 131");
+    LeetCodeDFS leetCode;
+    string s = "aab";
+    Logger::WriteMessage(s);
+    vector<vector<string>> partitions = leetCode.partitionPalindrome(s);
+    Logger::WriteMessage(partitions);
+}
+
+void TestLeetCode140(void)
+{
+    Logger::WriteMessage("Test Leet Code 140");
+    LeetCodeDFS leetCode;
+    string s;
+    vector<string> wordDict;
+    vector<string> result;
+
+    s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    wordDict = { "a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa", "aaaaaaa", "aaaaaaaa", "aaaaaaaaa", "aaaaaaaaaa" };
+    result = leetCode.wordBreakII(s, wordDict);
+    Logger::WriteMessage("string = " + s);
+    Logger::WriteMessage("Dictionary = ");
+    Logger::WriteMessage(wordDict);
+    Logger::WriteMessage(result);
+
+    s = "catsanddog";
+    wordDict = { "cat", "cats", "and", "sand", "dog" };
+    result = leetCode.wordBreakII(s, wordDict);
+    Logger::WriteMessage("string = " + s);
+    Logger::WriteMessage("Dictionary = ");
+    Logger::WriteMessage(wordDict);
+    Logger::WriteMessage(result);
+
+    s = "pineapplepenapple";
+    wordDict = { "apple", "pen", "applepen", "pine", "pineapple" };
+    result = leetCode.wordBreakII(s, wordDict);
+    Logger::WriteMessage("string = " + s);
+    Logger::WriteMessage("Dictionary = ");
+    Logger::WriteMessage(wordDict);
+    Logger::WriteMessage(result);
+
+    s = "catsandog";
+    wordDict = { "cats", "dog", "sand", "and", "cat" };
+    result = leetCode.wordBreakII(s, wordDict);
+    Logger::WriteMessage("string = " + s);
+    Logger::WriteMessage("Dictionary = ");
+    Logger::WriteMessage(wordDict);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode247(void)
+{
+    Logger::WriteMessage("Test Leet Code 247");
+    LeetCodeDFS leetCode;
+    int n = 3;
+    vector<string> result = leetCode.findStrobogrammatic(n);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode248(void)
+{
+    Logger::WriteMessage("Test Leet Code 248");
+    LeetCodeDFS leetCode;
+    string low = "50", high = "100";
+    int count = leetCode.strobogrammaticInRange(low, high);
+    Logger::WriteMessage("count = " + to_string(count));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode248();
+    TestLeetCode247();
+    TestLeetCode140();
+    TestLeetCode131();
     TestLeetCode87();
     TestLeetCode422();
     TestLeetCode679();

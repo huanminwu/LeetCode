@@ -1183,7 +1183,7 @@ vector<string> LeetCodeDFS::restoreIpAddresses(string s)
 /// <summary>
 /// Palindrome Partitioning with cache
 /// </summary>
-vector<vector<string>> LeetCode::partitionPalindrome(string s, unordered_map<string, vector<vector<string>>> &partition)
+vector<vector<string>> LeetCodeDFS::partitionPalindrome(string s, unordered_map<string, vector<vector<string>>> &partition)
 {
     if (partition.find(s) != partition.end())
     {
@@ -1226,7 +1226,7 @@ vector<vector<string>> LeetCode::partitionPalindrome(string s, unordered_map<str
 ///  ["a","a","b"]
 /// ]
 /// </summary>
-vector<vector<string>> LeetCode::partitionPalindrome(string s)
+vector<vector<string>> LeetCodeDFS::partitionPalindrome(string s)
 {
     unordered_map<string, vector<vector<string>>> partition;
     return partitionPalindrome(s, partition);
@@ -2720,13 +2720,11 @@ int LeetCodeDFS::countArrangement(int N)
     return countArrangement(N, 0, visited, cache);
 }
 
-
-
 /// <summary>
 /// Leet code #140. Word Break II
 /// Recursive break the word according to dictionary, return word list 
 /// </summary>
-vector<string> LeetCode::wordBreakII(string s, unordered_set<string>& wordDict,
+vector<string> LeetCodeDFS::wordBreakII(string s, unordered_set<string>& wordDict,
     unordered_map<string, vector<string>>&search_map)
 {
     vector<string> result;
@@ -2772,7 +2770,7 @@ vector<string> LeetCode::wordBreakII(string s, unordered_set<string>& wordDict,
 /// dict = ["cat", "cats", "and", "sand", "dog"]. 
 /// A solution is ["cats and dog", "cat sand dog"].
 /// </summary>
-vector<string> LeetCode::wordBreakII(string s, vector<string>& wordDict)
+vector<string> LeetCodeDFS::wordBreakII(string s, vector<string>& wordDict)
 {
     unordered_map<string, vector<string>> search_map;
     unordered_set<string> word_set;
@@ -2783,7 +2781,7 @@ vector<string> LeetCode::wordBreakII(string s, vector<string>& wordDict)
 /// <summary>
 /// Leet code #247. Strobogrammatic Number II 
 /// </summary>
-void LeetCode::findStrobogrammatic(int i, int n, string& str, vector<string>& result, map<char, char>& num_map)
+void LeetCodeDFS::findStrobogrammatic(int i, int n, string& str, vector<string>& result, map<char, char>& num_map)
 {
     if (i == (n + 1) / 2)
     {
@@ -2815,7 +2813,7 @@ void LeetCode::findStrobogrammatic(int i, int n, string& str, vector<string>& re
 /// Hint:
 /// 1.Try to use recursion and notice that it should recurse with n - 2 instead of n - 1.
 /// </summary>
-vector<string> LeetCode::findStrobogrammatic(int n)
+vector<string> LeetCodeDFS::findStrobogrammatic(int n)
 {
     string str = string(n, '0');
     vector<string> result;
@@ -2827,7 +2825,7 @@ vector<string> LeetCode::findStrobogrammatic(int n)
 /// <summary>
 /// Leet code #248. Strobogrammatic Number III 
 /// </summary>
-void LeetCode::strobogrammaticInRange(int i, int n, string low, string high, string& str, int &count, map<char, char>& num_map)
+void LeetCodeDFS::strobogrammaticInRange(int i, int n, string low, string high, string& str, int &count, map<char, char>& num_map)
 {
     if (i == (n + 1) / 2)
     {
@@ -2861,7 +2859,7 @@ void LeetCode::strobogrammaticInRange(int i, int n, string low, string high, str
 /// Note:
 /// Because the range might be a large number, the low and high numbers are represented as string.
 /// </summary>
-int LeetCode::strobogrammaticInRange(string low, string high)
+int LeetCodeDFS::strobogrammaticInRange(string low, string high)
 {
     map<char, char> num_map = { { '0', '0' },{ '1', '1' },{ '6', '9' },{ '9', '6' },{ '8', '8' } };
     int count = 0;

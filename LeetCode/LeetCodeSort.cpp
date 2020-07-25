@@ -286,39 +286,36 @@ string LeetCode::largestNumber(vector<int>& nums)
 /// Output: True
 /// Explanation: There are three 132 patterns in the sequence: [-1, 3, 2], [-1, 3, 0] and [-1, 2, 0].
 /// </summary>
-bool LeetCode::find132pattern(vector<int>& nums)
+bool LeetCodeSort::find132pattern(vector<int>& nums)
 {
-    map<int, int> intervals;
-    for (size_t i = 0; i < nums.size(); i++)
+    if (nums.empty()) return false;
+    vector<pair<int, int>> pairs(nums.size());
+    stack<int> back;
+    // from back to front scan 
+    for (int i = nums.size() - 1; i >= 0; i--)
     {
-        if (intervals.empty())
+        int back_num = nums[i];
+        while(!back.empty() && back.top() < nums[i])
         {
-            intervals[nums[i]] = nums[i];
-            continue;
+            back_num = back.top();
+            back.pop();
         }
-        map<int, int>::iterator next = intervals.lower_bound(nums[i]);
-        if (next == intervals.begin())
+        back.push(nums[i]);
+        pairs[i] = make_pair(nums[i], back_num);
+    }
+    // from front to back scan 
+    int front = nums[0];
+    for (size_t i = 1; i < pairs.size(); i++)
+    {
+        if (pairs[i].first <= front)
         {
-            if (nums[i] != next->first)
-            {
-                intervals[nums[i]] = nums[i];
-                continue;
-            }
+            front = pairs[i].first;
         }
         else
         {
-            next--;
-            if (nums[i] < next->second)
+            if (pairs[i].second < pairs[i].first && pairs[i].second > front)
             {
                 return true;
-            }
-            else if (nums[i] > next->second)
-            {
-                next++;
-                int first = intervals.begin()->first;
-                intervals.erase(intervals.begin(), next);
-                intervals[first] = nums[i];
-                continue;
             }
         }
     }

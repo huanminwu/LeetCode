@@ -692,8 +692,29 @@ void TestLeetCode1509(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode456(void)
+{
+    Logger::WriteMessage("Test Leet Code 456");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 2, 3, 4 };
+    Logger::WriteMessage(nums);
+    bool result = leetCode.find132pattern(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 3, 1, 4, 2 };
+    Logger::WriteMessage(nums);
+    result = leetCode.find132pattern(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { -1, 3, 2, 0 };
+    Logger::WriteMessage(nums);
+    result = leetCode.find132pattern(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode456();
     TestLeetCode1509();
     TestLeetCode1505();
     TestLeetCode1499();

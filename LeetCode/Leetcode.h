@@ -337,33 +337,6 @@ public:
     int LeetCode::maximalRectangle(vector<vector<char>>& matrix);
 
     /// <summary>
-    /// Recursive break the word according to dictionary 
-    /// </summary>
-    bool wordBreak(string s, unordered_set<string>& wordDict, unordered_map<string, bool>&search_map);
-
-    /// <summary>
-    /// Leet code #139. Word Break 
-    /// Given a string s and a dictionary of words dict, determine if s can be segmented into a space-separated sequence 
-    /// of one or more dictionary words.
-    /// For example, given
-    /// s = "leetcode", 
-    /// dict = ["leet", "code"]. 
-    /// Return true because "leetcode" can be segmented as "leet code". 
-    /// </summary>
-    bool wordBreak(string s, unordered_set<string>& wordDict);
-
-    /// <summary>
-    /// Leet code #139. Word Break 
-    /// Given a string s and a dictionary of words dict, determine if s can be segmented into a space-separated sequence 
-    /// of one or more dictionary words.
-    /// For example, given
-    /// s = "leetcode", 
-    /// dict = ["leet", "code"]. 
-    /// Return true because "leetcode" can be segmented as "leet code". 
-    /// </summary>
-    bool wordBreakDP(string s, unordered_set<string>& wordDict);
-
-    /// <summary>
     /// LeetCode #120. Triangle   
     /// Given a triangle, find the minimum path sum from top to bottom. 
     /// Each step you may move to adjacent numbers on the row below.
@@ -2675,25 +2648,6 @@ public:
 
 #pragma region BackTracking
 
-
-    /// <summary>
-    /// Palindrome Partitioning with cache
-    /// </summary>
-    vector<vector<string>> partitionPalindrome(string s, unordered_map<string, vector<vector<string>>> &partition);
-
-    /// <summary>
-    /// Leet code #131. Palindrome Partitioning       
-    /// Given a string s, partition s such that every substring of the partition is a palindrome. 
-    /// Return all possible palindrome partitioning of s. 
-    /// For example, given s = "aab",
-    /// Return 
-    /// [
-    ///  ["aa","b"],
-    ///  ["a","a","b"]
-    /// ]
-    /// </summary>
-    vector<vector<string>> partitionPalindrome(string s);
-
     /// <summary>
     /// Leet code #282. Expression Add Operators
     /// </summary>
@@ -3091,59 +3045,6 @@ public:
     /// Given m = 1, n = 1, return 9. 
     /// </summary>
     int numberOfPatterns(int m, int n);
-
-    /// <summary>
-    /// Leet code #140. Word Break II
-    /// Recursive break the word according to dictionary, return word list 
-    /// </summary>
-    vector<string> wordBreakII(string s, unordered_set<string>& wordDict,
-        unordered_map<string, vector<string>>&search_map);
-
-    /// <summary>
-    /// Leet code #140. Word Break II  
-    /// Given a string s and a dictionary of words dict, add spaces in s to 
-    /// construct a sentence where each word is a valid dictionary word. 
-    /// Return all such possible sentences.
-    /// For example, given
-    /// s = "catsanddog",
-    /// dict = ["cat", "cats", "and", "sand", "dog"]. 
-    /// A solution is ["cats and dog", "cat sand dog"].
-    /// </summary>
-    vector<string> wordBreakII(string s, vector<string>& wordDictt);
-
-    /// <summary>
-    /// Leet code #247. Strobogrammatic Number II 
-    /// </summary>
-    void findStrobogrammatic(int i, int n, string& str, vector<string>& result, map<char, char>& num_map);
-
-    /// <summary>
-    /// Leet code #247. Strobogrammatic Number II 
-    /// 
-    /// A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
-    /// Find all strobogrammatic numbers that are of length = n. 
-    /// For example,
-    /// Given n = 2, return ["11","69","88","96"].
-    /// Hint:
-    /// 1.Try to use recursion and notice that it should recurse with n - 2 instead of n - 1.
-    /// </summary>
-    vector<string> findStrobogrammatic(int n);
-
-    /// <summary>
-    /// Leet code #248. Strobogrammatic Number III 
-    /// </summary>
-    void strobogrammaticInRange(int i, int n, string low, string high, string& str, int &count, map<char, char>& num_map);
-
-    /// <summary>
-    /// Leet code #248. Strobogrammatic Number III 
-    /// 
-    /// A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
-    /// Write a function to count the total strobogrammatic numbers that exist in the range of low <= num <= high. 
-    /// For example,
-    /// Given low = "50", high = "100", return 3. Because 69, 88, and 96 are three strobogrammatic numbers. 
-    /// Note:
-    /// Because the range might be a large number, the low and high numbers are represented as string.
-    /// </summary>
-    int strobogrammaticInRange(string low, string high);
 
     /// <summary>
     /// Leet code #9901. Get Maximum Expression 
@@ -4952,28 +4853,6 @@ public:
     /// Note: The result may be very large, so you need to return a string instead of an integer.
     /// </summary>
     string largestNumber(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #456. 132 Pattern
-    /// Given a sequence of n integers a1, a2, ..., an, a 132 pattern is a subsequence 
-    /// ai, aj, ak such that i < j < k and ai < ak < aj. Design an algorithm that takes 
-    /// a list of n numbers as input and checks whether there is a 132 pattern in the list.
-    /// Note: n will be less than 15,000.    
-    /// Example 1:
-    /// Input: [1, 2, 3, 4]
-    /// Output: False
-    /// Explanation: There is no 132 pattern in the sequence.
-    ///
-    /// Example 2:
-    /// Input: [3, 1, 4, 2]
-    /// Output: True
-    /// Explanation: There is a 132 pattern in the sequence: [1, 4, 2].
-    /// Example 3:
-    /// Input: [-1, 3, 2, 0]
-    /// Output: True
-    /// Explanation: There are three 132 patterns in the sequence: [-1, 3, 2], [-1, 3, 0] and [-1, 2, 0].
-    /// </summary>
-    bool find132pattern(vector<int>& nums);
 
     /// <summary>
     /// Leet code #406. Queue Reconstruction by Height 

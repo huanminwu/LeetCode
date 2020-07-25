@@ -111,6 +111,70 @@ vector<int> LeetCodeString::findSubstring(string s, vector<string>& words)
 }
 
 /// <summary>
+/// Leet code #139. Word Break
+/// 
+/// Medium
+///
+/// Given a non-empty string s and a dictionary wordDict containing a 
+/// list of non-empty words, determine if s can be segmented into a 
+/// space-separated sequence of one or more dictionary words.
+///
+/// Note:
+///
+/// The same word in the dictionary may be reused multiple times in 
+/// the segmentation.
+/// You may assume the dictionary does not contain duplicate words.
+///
+/// Example 1:
+/// Input: s = "leetcode", wordDict = ["leet", "code"]
+/// Output: true
+/// Explanation: Return true because "leetcode" can be segmented 
+/// as "leet code".
+///
+/// Example 2:
+/// Input: s = "applepenapple", wordDict = ["apple", "pen"]
+/// Output: true
+/// Explanation: Return true because "applepenapple" can be segmented 
+/// as "apple pen apple".Note that you are allowed to reuse a dictionary
+/// word.
+///
+/// Example 3:
+/// Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
+/// Output: false
+/// </summary>
+bool LeetCodeString::wordBreak(string s, vector<string>& wordDict)
+{
+    if (s.empty()) return false;
+    size_t max_len = 0;
+    unordered_set<string> dict;
+    for (size_t i = 0; i < wordDict.size(); i++)
+    {
+        max_len = max(max_len, wordDict[i].size());
+        dict.insert(wordDict[i]);
+    }
+
+    vector<bool> dp(s.size(), false);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        for (size_t j = 1; j <= max_len; j++)
+        {
+            if (i < j - 1) break;
+            int pos = i - (j - 1);
+            string str = s.substr(pos, j);
+            if (dict.count(str) > 0)
+            {
+                if (pos == 0 || dp[pos - 1] == 1)
+                {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+    }
+    return dp[s.size() - 1];
+}
+
+/// <summary>
 /// Leet code #151. Reverse Words in a String
 /// Given an input string, reverse the string word by word. 
 /// For example,
