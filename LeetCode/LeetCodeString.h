@@ -5535,6 +5535,152 @@ public:
     /// </summary>
     string reformatDate(string date);
 
+    /// <summary>
+    /// Leet code #1531. String Compression II
+    /// </summary>
+    int getLengthOfOptimalCompression(string& s, int left, int k, vector<vector<int>>& dp);
+
+    /// <summary>
+    /// Leet code #1531. String Compression II
+    /// 
+    /// Hard
+    ///
+    /// Run-length encoding is a string compression method that works by 
+    /// replacing consecutive identical characters (repeated 2 or more times) 
+    /// with the concatenation of the character and the number marking the 
+    /// count of the characters (length of the run). For example, to compress 
+    /// the string "aabccc" we replace "aa" by "a2" and replace "ccc" by "c3". 
+    /// Thus the compressed string becomes "a2bc3".
+    /// 
+    /// Notice that in this problem, we are not adding '1' after single 
+    /// characters.
+    ///
+    /// Given a string s and an integer k. You need to delete at most k 
+    /// characters from s such that the run-length encoded version of s 
+    /// has minimum length.
+    ///
+    /// Find the minimum length of the run-length encoded version of s 
+    /// after deleting at most k characters.
+    ///
+    /// Example 1:
+    /// Input: s = "aaabcccd", k = 2
+    /// Output: 4
+    /// Explanation: Compressing s without deleting anything will give us 
+    /// "a3bc3d" of length 6. Deleting any of the characters 'a' or 'c' 
+    /// would at most decrease the length of the compressed string to 5, 
+    /// for instance delete 2 'a' then we will have s = "abcccd" which 
+    /// compressed is abc3d. Therefore, the optimal way is to delete 'b' 
+    /// and 'd', then the compressed version of s will be "a3c3" of length 4.
+    ///
+    /// Example 2:
+    /// Input: s = "aabbaa", k = 2
+    /// Output: 2
+    /// Explanation: If we delete both 'b' characters, the resulting 
+    /// compressed string would be "a4" of length 2.
+    ///
+    /// Example 3:
+    /// 
+    /// Input: s = "aaaaaaaaaaa", k = 0
+    /// Output: 3
+    /// Explanation: Since k is zero, we cannot delete anything. The 
+    /// compressed string is "a11" of length 3.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. 0 <= k <= s.length
+    /// 3. s contains only lowercase English letters.
+    /// </summary>
+    int getLengthOfOptimalCompression(string s, int k);
+
+    /// <summary>
+    /// Leet code #1528. Shuffle String
+    /// 
+    /// Easy
+    ///
+    /// Given a string s and an integer array indices of the same length.
+    /// The string s will be shuffled such that the character at the ith 
+    /// position moves to indices[i] in the shuffled string.
+    /// 
+    /// Return the shuffled string.
+    /// 
+    /// Example 1:
+    /// Input: s = "codeleet", indices = [4,5,6,7,0,2,1,3]
+    /// Output: "leetcode"
+    /// Explanation: As shown, "codeleet" becomes "leetcode" after shuffling.
+    ///
+    /// Example 2:
+    /// Input: s = "abc", indices = [0,1,2]
+    /// Output: "abc"
+    /// Explanation: After shuffling, each character remains in its position.
+    ///
+    /// Example 3:
+    /// Input: s = "aiohn", indices = [3,1,4,2,0]
+    /// Output: "nihao"
+    ///
+    /// Example 4:
+    /// Input: s = "aaiougrt", indices = [4,0,2,6,7,3,1,5]
+    /// Output: "arigatou"
+    ///
+    /// Example 5:
+    /// Input: s = "art", indices = [1,0,2]
+    /// Output: "rat"
+    ///
+    /// Constraints:
+    /// 1. s.length == indices.length == n
+    /// 2. 1 <= n <= 100
+    /// 3. s contains only lower-case English letters.
+    /// 4. 0 <= indices[i] < n
+    /// 5. All values of indices are unique (i.e. indices is a permutation 
+    ///    of the integers from 0 to n - 1).
+    /// </summary>
+    string restoreString(string s, vector<int>& indices);
+
+    /// <summary>
+    /// Leet code #1525. Number of Good Ways to Split a String
+    /// 
+    /// Medium
+    ///
+    /// You are given a string s, a split is called good if you can split 
+    /// s into 2 non-empty strings p and q where its concatenation is equal
+    /// to s and the number of distinct letters in p and q are the same.
+    ///
+    /// Return the number of good splits you can make in s.
+    /// Example 1:
+    /// Input: s = "aacaba"
+    /// Output: 2
+    /// Explanation: There are 5 ways to split "aacaba" and 2 of them are good.
+    /// ("a", "acaba") Left string and right string contains 1 and 3 different 
+    /// letters respectively.
+    /// ("aa", "caba") Left string and right string contains 1 and 3 different 
+    /// letters respectively.
+    /// ("aac", "aba") Left string and right string contains 2 and 2 different 
+    /// letters respectively (good split).
+    /// ("aaca", "ba") Left string and right string contains 2 and 2 different 
+    /// letters respectively (good split).
+    /// ("aacab", "a") Left string and right string contains 3 and 1 different 
+    /// letters respectively.
+    ///
+    /// Example 2:
+    /// Input: s = "abcd"
+    /// Output: 1
+    /// Explanation: Split the string as follows ("ab", "cd").
+    ///
+    /// Example 3:
+    /// Input: s = "aaaaa"
+    /// Output: 4
+    /// Explanation: All possible splits are good.
+    ///
+    /// Example 4:
+    /// 
+    /// Input: s = "acbadbaada"
+    /// Output: 2
+    ///
+    /// Constraints:
+    /// 1. s contains only lowercase English letters.
+    /// 2. 1 <= s.length <= 10^5
+    /// </summary>
+    int numSplits(string s);
+
 #pragma endregion
 };
 

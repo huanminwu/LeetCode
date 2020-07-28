@@ -4242,17 +4242,17 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeArray();
     TestLeetCodeString();
+    TestLeetCodeTree();
+    TestLeetCodeBit();
+    TestLeetCodeMath();
     TestLeetCodeSort();
     TestLeetCodeGreedy();
-    TestLeetCodeTree();
-    TestLeetCodeMath();
-    TestLeetCodeBit();
     TestLeetCodeHashtable();
     TestLeetCodeDP();
     TestLeetCodeGraph();
 
-    TestLeetCodeArray();
 
     TestLeetCodeDesign();
     TestLeetCodeLinkedList();

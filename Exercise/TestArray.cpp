@@ -4071,8 +4071,65 @@ void TestLeetCode1513(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode1524(void)
+{
+    Logger::WriteMessage("Test Leet Code 1524");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 1, 3, 5 };
+    int result = leetCode.numOfSubarrays(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 2,4,6 };
+    result = leetCode.numOfSubarrays(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1,2,3,4,5,6,7 };
+    result = leetCode.numOfSubarrays(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 100,100,99,99 };
+    result = leetCode.numOfSubarrays(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 7 };
+    result = leetCode.numOfSubarrays(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1526(void)
+{
+    Logger::WriteMessage("Test Leet Code 1526");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 1,2,3,2,1 };
+    int result = leetCode.minNumberOperations(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 3,1,1,2 };
+    result = leetCode.minNumberOperations(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 3,1,5,4,2 };
+    result = leetCode.minNumberOperations(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1,1,1,1 };
+    result = leetCode.minNumberOperations(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1526();
+    TestLeetCode1524();
     TestLeetCode1513();
     TestLeetCode1508();
     TestLeetCode1504();

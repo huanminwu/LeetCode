@@ -2727,8 +2727,49 @@ void TestLeetCode1519(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1530(void)
+{
+    Logger::WriteMessage("Test Leet Code 1530");
+    LeetCodeTree leetCode;
+    string input = "[1,2,3,null,4]";
+    int distance = 3;
+    TreeNode* root = leetCode.deserialize(input);
+    int result = leetCode.countPairs(root, distance);
+    Logger::WriteMessage("input = " + input + "; result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[1,2,3,4,5,6,7]";
+    distance = 3;
+    root = leetCode.deserialize(input);
+    result = leetCode.countPairs(root, distance);
+    Logger::WriteMessage("input = " + input + "; result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[7,1,4,6,null,5,3,null,null,null,null,null,2]";
+    distance = 3;
+    root = leetCode.deserialize(input);
+    result = leetCode.countPairs(root, distance);
+    Logger::WriteMessage("input = " + input + "; result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[100]";
+    distance = 1;
+    root = leetCode.deserialize(input);
+    result = leetCode.countPairs(root, distance);
+    Logger::WriteMessage("input = " + input + "; result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[1,1,1]";
+    distance = 2;
+    root = leetCode.deserialize(input);
+    result = leetCode.countPairs(root, distance);
+    Logger::WriteMessage("input = " + input + "; result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1530();
     TestLeetCode1519();
     TestLeetCode1469();
     TestLeetCode1457();

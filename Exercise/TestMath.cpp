@@ -3126,8 +3126,24 @@ void TestLeetCode1518(void)
     Logger::WriteMessage("numBottles = " + to_string(numBottles) + "; numExchange = " + to_string(numExchange) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1523(void)
+{
+    Logger::WriteMessage("Test Leet Code 1523");
+    LeetCodeMath leetCode;
+    int low = 3;
+    int high = 7;
+    int result = leetCode.countOdds(low, high);
+    Logger::WriteMessage("low = " + to_string(low) + "; high = " + to_string(high) + "; result = " + to_string(result));
+
+    low = 8;
+    high = 10;
+    result = leetCode.countOdds(low, high);
+    Logger::WriteMessage("low = " + to_string(low) + "; high = " + to_string(high) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1523();
     TestLeetCode1518();
     TestLeetCode1515();
     TestLeetCode1503();

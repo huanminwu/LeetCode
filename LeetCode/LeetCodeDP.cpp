@@ -10112,5 +10112,6 @@ bool LeetCodeDP::winnerSquareGame(int n)
     }
     return dp[n] == 1;
 }
+
 #pragma endregion
 

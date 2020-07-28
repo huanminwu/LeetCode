@@ -541,8 +541,30 @@ void TestLeetCode1521(void)
     Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1529(void)
+{
+    Logger::WriteMessage("Test Leet Code 1529");
+    LeetCodeBit leetCode;
+    string target = "10111";
+    int result = leetCode.minFlips(target);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+
+    target = "101";
+    result = leetCode.minFlips(target);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+
+    target = "00000";
+    result = leetCode.minFlips(target);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+
+    target = "001011101";
+    result = leetCode.minFlips(target);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode1529();
     TestLeetCode1521();
     TestLeetCode1486();
     TestLeetCode861();

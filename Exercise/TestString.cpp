@@ -3144,8 +3144,84 @@ void TestLeetCode1507(void)
     Logger::WriteMessage("date = " + date + "; result = " + result);
 }
 
+void TestLeetCode1531(void)
+{
+    LeetCodeString leetCode;
+    string s = "aaabcccd";
+    int k = 2;
+    int result = leetCode.getLengthOfOptimalCompression(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "aabbaa";
+    k = 2;
+    result = leetCode.getLengthOfOptimalCompression(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "aaaaaaaaaaa";
+    k = 0;
+    result = leetCode.getLengthOfOptimalCompression(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1528(void)
+{
+    LeetCodeString leetCode;
+    string s = "codeleet";
+    vector<int> indices = { 4, 5, 6, 7, 0, 2, 1, 3 };
+    string result = leetCode.restoreString(s, indices);
+    Logger::WriteMessage(indices);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "abc";
+    indices = { 0,1,2 };
+    result = leetCode.restoreString(s, indices);
+    Logger::WriteMessage(indices);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "aiohn";
+    indices = { 3,1,4,2,0 };
+    result = leetCode.restoreString(s, indices);
+    Logger::WriteMessage(indices);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "aaiougrt";
+    indices = { 4,0,2,6,7,3,1,5 };
+    result = leetCode.restoreString(s, indices);
+    Logger::WriteMessage(indices);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "art";
+    indices = { 1,0,2 };
+    result = leetCode.restoreString(s, indices);
+    Logger::WriteMessage(indices);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
+void TestLeetCode1525(void)
+{
+    LeetCodeString leetCode;
+    string s = "aacaba";
+    int result = leetCode.numSplits(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "abcd";
+    result = leetCode.numSplits(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aaaaa";
+    result = leetCode.numSplits(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "acbadbaada";
+    result = leetCode.numSplits(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1525();
+    TestLeetCode1528();
+    TestLeetCode1531();
     TestLeetCode139();
     TestLeetCode1507();
     TestLeetCode678();
