@@ -4126,8 +4126,83 @@ void TestLeetCode1526(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode221(void)
+{
+    Logger::WriteMessage("Test Leet Code 221");
+    LeetCodeArray leetCode;
+    vector<vector<char>> matrix =
+    {
+        { '1', '0', '1', '0', '0' },
+        { '1', '0', '1', '1', '1' },
+        { '1' ,'1', '1', '1', '1' },
+        { '1', '0', '0', '1', '0' }
+    };
+    int max_area = leetCode.maximalSquare(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("max_area = " + to_string(max_area));
+}
+
+void TestLeetCode1534(void)
+{
+    Logger::WriteMessage("Test Leet Code 1534");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 3, 0, 1, 1, 9, 7 };
+    int a = 7;
+    int b = 2;
+    int c = 3;
+    int result = leetCode.countGoodTriplets(arr, a, b, c);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) + 
+        "; c = " + to_string(c) + "; result = " + to_string(result));
+
+    arr = { 1,1,2,2,3 };
+    a = 0;
+    b = 0;
+    c = 1;
+    result = leetCode.countGoodTriplets(arr, a, b, c);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) +
+        "; c = " + to_string(c) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1537(void)
+{
+    Logger::WriteMessage("Test Leet Code 1537");
+    LeetCodeArray leetCode;
+    vector<int> nums1 = { 2, 4, 5, 8, 10 };
+    vector<int> nums2 = { 4, 6, 8, 9 };
+    int result = leetCode.maxSum(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,3,5,7,9 };
+    nums2 = { 3,5,100 };
+    result = leetCode.maxSum(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,2,3,4,5 };
+    nums2 = { 6,7,8,9,10 };
+    result = leetCode.maxSum(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,4,5,8,9,11,19 };
+    nums2 = { 2,3,4,11,12 };
+    result = leetCode.maxSum(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1537();
+    TestLeetCode1534();
+    TestLeetCode221();
     TestLeetCode1526();
     TestLeetCode1524();
     TestLeetCode1513();

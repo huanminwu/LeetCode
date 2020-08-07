@@ -76,6 +76,93 @@ public:
     int nthUglyNumber(int n);
 
     /// <summary>
+    /// LeetCode #120. Triangle   
+    /// Given a triangle, find the minimum path sum from top to bottom. 
+    /// Each step you may move to adjacent numbers on the row below.
+    /// For example, given the following triangle
+    /// [
+    ///     [2],
+    ///    [3,4],
+    ///   [6,5,7],
+    ///  [4,1,8,3]
+    /// ]
+    /// The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11). 
+    /// Note:
+    /// Bonus point if you are able to do this using only O(n) extra space, 
+    /// where n is the total number of rows in the triangle. 
+    /// </summary>
+    int minimumTotal(vector<vector<int>>& triangle);
+
+    /// <summary>
+    /// Leet code #279. Perfect Squares 
+    /// Given a positive integer n, find the least number of perfect square numbers 
+    /// (for example, 1, 4, 9, 16, ...) which sum to n.
+    /// For example, given n = 12, return 3 because 12 = 4 + 4 + 4; 
+    /// given n = 13, return 2 because 13 = 4 + 9. 
+    /// </summary>
+    int numSquares(int n);
+
+    /// <summary>
+    /// Leet code #276. Paint Fence     
+    /// 
+    /// There is a fence with n posts, each post can be painted with one of 
+    /// the k colors.
+    /// You have to paint all the posts such that no more than two adjacent 
+    /// fence posts have the same color. 
+    /// Return the total number of ways you can paint the fence.
+    /// Note:
+    /// n and k are non-negative integers. 
+    /// </summary>
+    int numWaysPaintFence(int n, int k);
+
+    /// <summary>
+    /// Leet code #256. Paint House 
+    /// 
+    /// There are a row of n houses, each house can be painted with one of 
+    /// the three colors: red, blue or green. The cost of painting each house 
+    /// with a certain color is different. You have to paint all the houses 
+    /// such that no two adjacent houses have the same color. 
+    /// The cost of painting each house with a certain color is represented 
+    /// by a n x 3 cost matrix. For example, costs[0][0] is the cost of 
+    /// painting house 0 with color red; costs[1][2] is the cost of painting 
+    /// house 1 with color green, and so on...
+    /// Find the minimum cost to paint all houses. 
+    /// Note:
+    /// All costs are positive integers.
+    /// </summary>
+    int minCost(vector<vector<int>>& costs);
+
+    /// <summary>
+    /// Leet code #265. Paint House II
+    /// 
+    /// Hard
+    ///
+    /// There are a row of n houses, each house can be painted with one of the k 
+    /// colors. The cost of painting each house with a certain color is different. 
+    /// You have to paint all the houses such that no two adjacent houses have 
+    /// the same color.
+    ///
+    /// The cost of painting each house with a certain color is represented by 
+    /// a n x k cost matrix. For example, costs[0][0] is the cost of painting 
+    /// house 0 with color 0; costs[1][2] is the cost of painting house 1 with 
+    /// color 2, and so on... Find the minimum cost to paint all houses.
+    ///
+    /// Note:
+    /// All costs are positive integers.
+    ///
+    /// Example:
+    ///
+    /// Input: [[1,5,3],[2,9,4]]
+    /// Output: 5
+    /// Explanation: Paint house 0 into color 0, paint house 1 into color 2. 
+    /// Minimum cost: 1 + 4 = 5; Or paint house 0 into color 2, paint house 1 
+    /// into color 0. Minimum cost: 3 + 2 = 5. 
+    /// Follow up:
+    /// Could you solve it in O(nk) runtime?
+    /// </summary>
+    int minCostII(vector<vector<int>>& costs);
+
+    /// <summary>
     /// Leet code #121. Best Time to Buy and Sell Stock
     /// Say you have an array for which the ith element is the price of a given stock on day i.
     /// If you were only permitted to complete at most one transaction (ie, buy one and sell one 

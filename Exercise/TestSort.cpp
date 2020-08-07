@@ -712,8 +712,59 @@ void TestLeetCode456(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1535(void)
+{
+    Logger::WriteMessage("Test Leet Code 1535");
+    LeetCodeSort leetCode;
+    vector<int> arr = { 2,1,3,5,4,6,7 };
+    int k = 2;
+    int result = leetCode.getWinner(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    arr = { 3,2,1 };
+    k = 10;
+    result = leetCode.getWinner(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    arr = { 1,9,8,2,3,7,6,4,5 };
+    k = 7;
+    result = leetCode.getWinner(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    arr = { 1,11,22,33,44,55,66,77,88,99 };
+    k = 1000000000;
+    result = leetCode.getWinner(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1536(void)
+{
+    Logger::WriteMessage("Test Leet Code 1536");
+    LeetCodeSort leetCode;
+    vector<vector<int>> grid = { {0, 0, 1},{1, 1, 0},{1, 0, 0} };
+    int result = leetCode.minSwaps(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {0, 1, 1, 0},{0, 1, 1, 0},{0, 1, 1, 0},{0, 1, 1, 0} };
+    result = leetCode.minSwaps(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1, 0, 0},{1, 1, 0},{1, 1, 1} };
+    result = leetCode.minSwaps(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1536();
+    TestLeetCode1535();
     TestLeetCode456();
     TestLeetCode1509();
     TestLeetCode1505();

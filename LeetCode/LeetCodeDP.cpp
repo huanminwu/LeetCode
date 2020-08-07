@@ -1188,9 +1188,10 @@ int LeetCode::maximalRectangle(vector<vector<char>>& matrix)
 /// ]
 /// The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11). 
 /// Note:
-/// Bonus point if you are able to do this using only O(n) extra space, where n is the total number of rows in the triangle. 
+/// Bonus point if you are able to do this using only O(n) extra space, 
+/// where n is the total number of rows in the triangle. 
 /// </summary>
-int LeetCode::minimumTotal(vector<vector<int>>& triangle)
+int LeetCodeDP::minimumTotal(vector<vector<int>>& triangle)
 {
     vector<int> sum(triangle.size());
     if ((triangle.empty()) || (triangle[0].empty())) return 0;
@@ -1234,7 +1235,7 @@ int LeetCode::minimumTotal(vector<vector<int>>& triangle)
 /// For example, given n = 12, return 3 because 12 = 4 + 4 + 4; 
 /// given n = 13, return 2 because 13 = 4 + 9. 
 /// </summary>
-int LeetCode::numSquares(int n)
+int LeetCodeDP::numSquares(int n)
 {
     vector<int> square_count(n + 1, 0);
     vector<int> square;
@@ -1394,7 +1395,7 @@ int LeetCodeDP::findMaxOneZeroForm(vector<string>& strs, int m, int n)
 /// Note:
 /// n and k are non-negative integers. 
 /// </summary>
-int LeetCode::numWays(int n, int k)
+int LeetCodeDP::numWaysPaintFence(int n, int k)
 {
     int diff = 0, same = 0;
     for (int i = 1; i <= n; i++)
@@ -1419,47 +1420,6 @@ int LeetCode::numWays(int n, int k)
     return same + diff;
 }
 
-/// <summary>
-/// Leet code #221. Maximal Square  
-/// 
-/// Given a 2D binary matrix filled with 0's and 1's, find the largest square 
-/// containing only 1's and return its area. 
-/// For example, given the following matrix: 
-/// 1 0 1 0 0
-/// 1 0 1 1 1
-/// 1 1 1 1 1
-/// 1 0 0 1 0
-/// Return 4. 
-/// </summary>
-int LeetCode::maximalSquare(vector<vector<char>>& matrix)
-{
-    int max_area = 0;
-    if (matrix.size() == 0 || matrix[0].size() == 0) return max_area;
-    vector<vector<int>> measure;
-    for (size_t i = 0; i < matrix.size(); i++)
-    {
-        measure.push_back(vector<int>(matrix[0].size()));
-        for (size_t j = 0; j < matrix[0].size(); j++)
-        {
-            if (matrix[i][j] == '0') measure[i][j] = 0;
-            else
-            {
-                if ((i == 0) || (j == 0))
-                {
-                    measure[i][j] = 1;
-                }
-                else
-                {
-                    measure[i][j] = min(measure[i - 1][j - 1], measure[i - 1][j]);
-                    measure[i][j] = min(measure[i][j], measure[i][j - 1]);
-                    measure[i][j]++;
-                }
-                max_area = max(max_area, measure[i][j] * measure[i][j]);
-            }
-        }
-    }
-    return max_area;
-}
 
 /// <summary>
 /// Leet code 256. Paint House 
@@ -1485,7 +1445,7 @@ int LeetCode::maximalSquare(vector<vector<char>>& matrix)
 /// house 2 into blue. 
 /// Minimum cost: 2 + 5 + 3 = 10.
 /// </summary>
-int LeetCode::minCost(vector<vector<int>>& costs)
+int LeetCodeDP::minCost(vector<vector<int>>& costs)
 {
     vector<vector<int>> sum;
     if (costs.size() == 0) return 0;
@@ -1510,84 +1470,68 @@ int LeetCode::minCost(vector<vector<int>>& costs)
 
 /// <summary>
 /// Leet code #265. Paint House II       
-/// </summary>
-void LeetCode::selectminCostII(vector<vector<pair<int, int>>>& min_costs, int index, pair<int, int>&color_cost)
-{
-    if (min_costs[index].size() < 2)
-    {
-        min_costs[index].push_back(color_cost);
-    }
-    else
-    {
-        for (size_t k = 0; k < min_costs[index].size(); k++)
-        {
-            if (color_cost.second < min_costs[index][k].second)
-            {
-                swap(color_cost, min_costs[index][k]);
-            }
-        }
-    }
-}
-
-/// <summary>
-/// Leet code #265. Paint House II       
 /// 
-/// There are a row of n houses, each house can be painted with one of the k colors. 
-/// The cost of painting each house with a certain color is different. You have to 
-/// paint all the houses such that no two adjacent houses have the same color. 
-/// The cost of painting each house with a certain color is represented by a n x k 
-/// cost matrix. For example, costs[0][0] is the cost of painting house 0 
-/// with color 0; costs[1][2] is the cost of painting house 1 with color 2, and 
-/// so on... Find the minimum cost to paint all houses. 
+/// Hard
+///
+/// There are a row of n houses, each house can be painted with one of the k 
+/// colors. The cost of painting each house with a certain color is different. 
+/// You have to paint all the houses such that no two adjacent houses have 
+/// the same color.
+///
+/// The cost of painting each house with a certain color is represented by 
+/// a n x k cost matrix. For example, costs[0][0] is the cost of painting 
+/// house 0 with color 0; costs[1][2] is the cost of painting house 1 with 
+/// color 2, and so on... Find the minimum cost to paint all houses.
 ///
 /// Note:
 /// All costs are positive integers.
 ///
+/// Example:
+///
+/// Input: [[1,5,3],[2,9,4]]
+/// Output: 5
+/// Explanation: Paint house 0 into color 0, paint house 1 into color 2. 
+/// Minimum cost: 1 + 4 = 5; Or paint house 0 into color 2, paint house 1 
+/// into color 0. Minimum cost: 3 + 2 = 5. 
 /// Follow up:
 /// Could you solve it in O(nk) runtime?
 /// </summary>
-int LeetCode::minCostII(vector<vector<int>>& costs)
+int LeetCodeDP::minCostII(vector<vector<int>>& costs)
 {
-    vector<vector<int>> sum;
-    vector<vector<pair<int, int>>> min_costs;
-    if (costs.size() == 0) return 0;
+    int result = 0;
+    if (costs.empty() || costs[0].empty()) return result;
+    int n = costs.size();
+    int k = costs[0].size();
+    vector<pair<int, int>> prev_cost = { { INT_MAX, -1 }, { INT_MAX, -1 } };
 
-    for (size_t i = 0; i < costs.size(); i++)
+    for (int i = 0; i < n; i++)
     {
-        sum.push_back(vector<int>(costs[i].size()));
-        min_costs.push_back(vector<pair<int, int>>());
-        for (size_t j = 0; j < costs[i].size(); j++)
+        vector<pair<int, int>> curr_cost = { { INT_MAX, -1 }, { INT_MAX, -1 } };
+        for (int j = 0; j < k; j++)
         {
-            if (i == 0)
+            pair<int, int> cost = make_pair(costs[i][j], j);
+            if (i > 0)
             {
-                sum[i][j] += costs[i][j];
-                pair<int, int> color_cost = make_pair(j, sum[i][j]);
-                selectminCostII(min_costs, i, color_cost);
-            }
-            else
-            {
-                sum[i][j] = INT_MAX;
-                for (size_t k = 0; k < min_costs[i - 1].size(); k++)
+                for (int k = 0; k < 2; k++)
                 {
-                    if ((min_costs[i - 1][k].first != j) && (min_costs[i - 1][k].second < sum[i][j]))
+                    if (cost.second != prev_cost[k].second)
                     {
-                        sum[i][j] = min_costs[i - 1][k].second;
+                        cost.first += prev_cost[k].first;
+                        break;
                     }
                 }
-                sum[i][j] += costs[i][j];
-                pair<int, int> color_cost = make_pair(j, sum[i][j]);
-                selectminCostII(min_costs, i, color_cost);
+            }
+            for (int k = 0; k < 2; k++)
+            {
+                if (cost.first < curr_cost[k].first)
+                {
+                    swap(cost, curr_cost[k]);
+                }
             }
         }
+        prev_cost = curr_cost;
     }
-    if (min_costs[costs.size() - 1].size() == 1)
-    {
-        return min_costs[costs.size() - 1][0].second;
-    }
-    else
-    {
-        return min(min_costs[costs.size() - 1][0].second, min_costs[costs.size() - 1][1].second);
-    }
+    return prev_cost[0].first;
 }
 
 /// <summary>

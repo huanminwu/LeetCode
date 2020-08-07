@@ -6862,6 +6862,109 @@ public:
     /// 2. 1 <= target[i] <= 10^5
     /// </summary>
     int minNumberOperations(vector<int>& target);
+
+    /// <summary>
+    /// Leet code #221. Maximal Square  
+    /// 
+    /// Given a 2D binary matrix filled with 0's and 1's, find the largest square 
+    /// containing only 1's and return its area. 
+    /// For example, given the following matrix: 
+    /// 1 0 1 0 0
+    /// 1 0 1 1 1
+    /// 1 1 1 1 1
+    /// 1 0 0 1 0
+    /// Return 4. 
+    /// </summary>
+    int maximalSquare(vector<vector<char>>& matrix);
+
+    /// <summary>
+    /// Leet code #1534. Count Good Triplets
+    /// 
+    /// Easy
+    ///
+    /// Given an array of integers arr, and three integers a, b and c. You need 
+    /// to find the number of good triplets.
+    ///
+    /// A triplet (arr[i], arr[j], arr[k]) is good if the following conditions 
+    /// are true:
+    ///
+    /// 0 <= i < j < k < arr.length
+    /// |arr[i] - arr[j]| <= a
+    /// |arr[j] - arr[k]| <= b
+    /// |arr[i] - arr[k]| <= c
+    /// Where |x| denotes the absolute value of x.
+    ///
+    /// Return the number of good triplets.
+    /// 
+    /// Example 1:
+    /// Input: arr = [3,0,1,1,9,7], a = 7, b = 2, c = 3
+    /// Output: 4
+    /// Explanation: There are 4 good triplets: 
+    /// [(3,0,1), (3,0,1), (3,1,1), (0,1,1)]
+    ///
+    /// Example 2:
+    /// Input: arr = [1,1,2,2,3], a = 0, b = 0, c = 1
+    /// Output: 0
+    /// Explanation: No triplet satisfies all conditions.
+    ///
+    /// Constraints:
+    /// 1. 3 <= arr.length <= 100
+    /// 2. 0 <= arr[i] <= 1000
+    /// 3. 0 <= a, b, c <= 1000
+    /// </summary>
+    int countGoodTriplets(vector<int>& arr, int a, int b, int c);
+
+    /// <summary>
+    /// Leet code #1537. Get the Maximum Score
+    /// 
+    /// Hard
+    ///
+    /// You are given two sorted arrays of distinct integers nums1 and nums2.
+    ///
+    /// A valid path is defined as follows:
+    ///
+    /// Choose array nums1 or nums2 to traverse (from index-0).
+    /// Traverse the current array from left to right.
+    /// If you are reading any value that is present in nums1 and nums2 you are 
+    /// allowed to change your path to the other array. (Only one repeated value 
+    /// is considered in the valid path).
+    /// Score is defined as the sum of uniques values in a valid path.
+    ///
+    /// Return the maximum score you can obtain of all possible valid paths.
+    ///
+    /// Since the answer may be too large, return it modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: nums1 = [2,4,5,8,10], nums2 = [4,6,8,9]
+    /// Output: 30
+    /// Explanation: Valid paths:
+    /// [2,4,5,8,10], [2,4,5,8,9], [2,4,6,8,9], [2,4,6,8,10],  
+    /// (starting from nums1)
+    /// [4,6,8,9], [4,5,8,10], [4,5,8,9], [4,6,8,10]    (starting from nums2)
+    /// The maximum is obtained with the path in green [2,4,6,8,10].
+    ///
+    /// Example 2:
+    /// Input: nums1 = [1,3,5,7,9], nums2 = [3,5,100]
+    /// Output: 109
+    /// Explanation: Maximum sum is obtained with the path [1,3,5,100].
+    ///
+    /// Example 3:
+    /// Input: nums1 = [1,2,3,4,5], nums2 = [6,7,8,9,10]
+    /// Output: 40
+    /// Explanation: There are no common elements between nums1 and nums2.
+    /// Maximum sum is obtained with the path [6,7,8,9,10].
+    ///
+    /// Example 4:
+    /// Input: nums1 = [1,4,5,8,9,11,19], nums2 = [2,3,4,11,12]
+    /// Output: 61
+    ///  
+    /// Constraints:
+    /// 1. 1 <= nums1.length <= 10^5
+    /// 2. 1 <= nums2.length <= 10^5
+    /// 3. 1 <= nums1[i], nums2[i] <= 10^7
+    /// 4. nums1 and nums2 are strictly increasing.
+    /// </summary>
+    int maxSum(vector<int>& nums1, vector<int>& nums2);
 #pragma endregion
 
 

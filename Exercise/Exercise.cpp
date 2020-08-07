@@ -372,28 +372,6 @@ void TestLeetCode85(void)
     Logger::WriteMessage("The maximum rectangle area is " + to_string(max_rectangle));
 }
 
-void TestLeetCode120(void)
-{
-    Logger::WriteMessage("Test Leet Code 120");
-    LeetCode leetCode;
-    vector<vector<int>> triangle;
-    int minimum_total;
-    triangle = { { -1 },{ 2, 3 },{ 1, -1, -3 } };
-    for (size_t i = 0; i < triangle.size(); i++)
-    {
-        Logger::WriteMessage(triangle[i]);
-    }
-    minimum_total = leetCode.minimumTotal(triangle);
-    Logger::WriteMessage("Minimum total is " + to_string(minimum_total));
-
-    triangle = { {2}, {3, 4}, {6, 5, 7}, {4, 1, 8, 3} };
-    for (size_t i = 0; i < triangle.size(); i++)
-    {
-        Logger::WriteMessage(triangle[i]);
-    }
-    minimum_total = leetCode.minimumTotal(triangle);
-    Logger::WriteMessage("Minimum total is " + to_string(minimum_total));
-}
 
 void TestLeetCode303(void)
 {
@@ -562,18 +540,7 @@ void TestLeetCode406(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode279(void)
-{
-    Logger::WriteMessage("Test Leet Code 279");
-    LeetCode leetCode;
-    int n = 12;
-    int result = leetCode.numSquares(n);
-    Logger::WriteMessage("n = " + to_string(n) + " ; number of sqaures = " + to_string(result));
 
-    n = 100;
-    result = leetCode.numSquares(n);
-    Logger::WriteMessage("n = " + to_string(n) + " ; number of sqaures = " + to_string(result));
-}
 
 void TestLeetCode220(void)
 {
@@ -826,15 +793,6 @@ void TestLeetCode254(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode276(void)
-{
-    Logger::WriteMessage("Test Leet Code 276");
-    LeetCode leetCode;
-    int n = 3;
-    int k = 3;
-    int numWays = leetCode.numWays(n, k);;
-    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; numWays = " + to_string(numWays));
-}
 
 
 
@@ -864,21 +822,6 @@ void TestLeetCode320(void)
 }
 
 
-void TestLeetCode221(void)
-{
-    Logger::WriteMessage("Test Leet Code 221");
-    LeetCode leetCode;
-    vector<vector<char>> matrix  =
-    {
-        { '1', '0', '1', '0', '0' },
-        { '1', '0', '1', '1', '1' },
-        { '1' ,'1', '1', '1', '1' },
-        { '1', '0', '0', '1', '0' }
-    };
-    int max_area = leetCode.maximalSquare(matrix);
-    Logger::WriteMessage(matrix);
-    Logger::WriteMessage("max_area = " + to_string(max_area));
-}
 
 void TestLeetCode334(void)
 {
@@ -916,15 +859,6 @@ void TestLeetCode473(void)
 
 }
 
-void TestLeetCode256(void)
-{
-    Logger::WriteMessage("Test Leet Code 256");
-    LeetCode leetCode;
-    vector<vector<int>> costs = { {1,2,3}, {4, 1, 2} , {7, 9, 2} };
-    Logger::WriteMessage(costs);
-    int min_cost = leetCode.minCost(costs);
-    Logger::WriteMessage("Minimum Cost = " + to_string(min_cost));
-}
 
 void TestLeetCode9901(void)
 {
@@ -986,20 +920,6 @@ void TestLeetCode253(void)
 
 
 
-void TestLeetCode265(void)
-{
-    Logger::WriteMessage("Test Leet Code 265");
-    LeetCode leetCode;
-    vector<vector<int>> costs = { { 8 }};
-    Logger::WriteMessage(costs);
-    int min_cost = leetCode.minCostII(costs);
-    Logger::WriteMessage("Minimum Cost = " + to_string(min_cost));
-
-    costs = { { 1,2,3 },{ 4, 1, 2 } ,{ 7, 9, 2 } };
-    Logger::WriteMessage(costs);
-    min_cost = leetCode.minCostII(costs);
-    Logger::WriteMessage("Minimum Cost = " + to_string(min_cost));
-}
 
 void TestLeetCode161(void)
 {
@@ -4243,11 +4163,15 @@ void TestLeetCode1199(void)
 void main(int argc, char* argv[])
 {
     TestLeetCodeArray();
+    TestLeetCode211();
+    TestLeetCodeSort();
+
+    TestLeetCodeDP();
     TestLeetCodeString();
     TestLeetCodeTree();
     TestLeetCodeBit();
     TestLeetCodeMath();
-    TestLeetCodeSort();
+
     TestLeetCodeGreedy();
     TestLeetCodeHashtable();
     TestLeetCodeDP();
@@ -4463,7 +4387,6 @@ void main(int argc, char* argv[])
     TestLeetCode638();
     TestLeetCode479();
     TestLeetCode480();
-    TestLeetCode120();
     TestLeetCode632();
     TestLeetCode635();
     TestLeetCode634();
@@ -4521,14 +4444,12 @@ void main(int argc, char* argv[])
     TestLeetCode353();
     TestLeetCode321();
     TestLeetCode161();
-    TestLeetCode265();
     TestLeetCode360();
     TestLeetCode253();
     TestLeetCode277();
     TestLeetCode294();
     TestLeetCode163();
     TestLeetCode9901();
-    TestLeetCode256();
     TestLeetCode348();
     TestLeetCode325();
     TestLeetCode323();
@@ -4536,12 +4457,10 @@ void main(int argc, char* argv[])
     TestLeetCode473();
     TestLeetCode334();
     TestLeetCode186();
-    TestLeetCode221();
     TestLeetCode271();
     TestLeetCode320();
     TestLeetCode245();
     TestLeetCode280();
-    TestLeetCode276();
     TestLeetCode254();
     TestLeetCode252();
     TestLeetCode243();
@@ -4561,7 +4480,6 @@ void main(int argc, char* argv[])
     TestLeetCode81();
     TestLeetCode436();
     TestLeetCode220();
-    TestLeetCode279();
     TestLeetCode240();
     TestLeetCode445();
     TestLeetCode406();

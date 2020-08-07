@@ -2491,13 +2491,16 @@ public:
 struct DictNode
 {
     string word;
-    map<const char, DictNode*> char_map;
+    vector<DictNode*> char_map;
 
     /// <summary>
     /// Constructor of an empty DictNode
     /// </summary>
     /// <returns></returns>
-    DictNode() {};
+    DictNode() 
+    { 
+        char_map = vector<DictNode*>(26);
+    };
 
     /// <summary>
     /// Destructor of an DictNode
@@ -2505,16 +2508,14 @@ struct DictNode
     /// <returns></returns>
     ~DictNode()
     {
-        map<char, DictNode*>::iterator iterator;
-        for (iterator = char_map.begin(); iterator != char_map.end(); ++iterator)
+        for (size_t i = 0; i < 26; i++)
         {
-            if (iterator->second != nullptr)
+            if (char_map[i] != nullptr)
             {
-                delete iterator->second;
+                delete char_map[i];
             }
-            char_map[iterator->first] = nullptr;
+            char_map[i] = nullptr;
         }
-        char_map.clear();
     }
 
     /// <summary>
@@ -2530,14 +2531,14 @@ struct DictNode
             return;
         }
         DictNode* node;
-        if (char_map.find(word[i]) == char_map.end())
+        if (char_map[word[i] - 'a'] == nullptr)
         {
             node = new DictNode();
-            char_map[word[i]] = node;
+            char_map[word[i] - 'a'] = node;
         }
         else
         {
-            node = char_map[word[i]];
+            node = char_map[word[i]-'a'];
         }
         node->addWord(word, i + 1);
     }
@@ -2550,12 +2551,11 @@ struct DictNode
     vector<DictNode*> getNodes()
     {
         vector<DictNode*> result;
-        map<char, DictNode*>::iterator iterator;
-        for (iterator = char_map.begin(); iterator != char_map.end(); ++iterator)
+        for (int i = 0; i < 26; i++)
         {
-            if (iterator->second != nullptr)
+            if (char_map[i] != nullptr)
             {
-                result.push_back(iterator->second);
+                result.push_back(char_map[i]);
             }
         }
         return result;
@@ -2575,13 +2575,13 @@ struct DictNode
         }
         if (word[i] != '.')
         {
-            if (char_map.find(word[i]) == char_map.end())
+            if (char_map[word[i] - 'a'] == nullptr)
             {
                 return false;
             }
             else
             {
-                DictNode* node = char_map[word[i]];
+                DictNode* node = char_map[word[i] - 'a'];
                 return node->search(word, i + 1);
             }
         }

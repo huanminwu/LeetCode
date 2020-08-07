@@ -27,6 +27,29 @@ void TestLeetCode5(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode120(void)
+{
+    Logger::WriteMessage("Test Leet Code 120");
+    LeetCodeDP leetCode;
+    vector<vector<int>> triangle;
+    int minimum_total;
+    triangle = { { -1 },{ 2, 3 },{ 1, -1, -3 } };
+    for (size_t i = 0; i < triangle.size(); i++)
+    {
+        Logger::WriteMessage(triangle[i]);
+    }
+    minimum_total = leetCode.minimumTotal(triangle);
+    Logger::WriteMessage("Minimum total is " + to_string(minimum_total));
+
+    triangle = { {2}, {3, 4}, {6, 5, 7}, {4, 1, 8, 3} };
+    for (size_t i = 0; i < triangle.size(); i++)
+    {
+        Logger::WriteMessage(triangle[i]);
+    }
+    minimum_total = leetCode.minimumTotal(triangle);
+    Logger::WriteMessage("Minimum total is " + to_string(minimum_total));
+}
+
 void TestLeetCode494(void)
 {
     Logger::WriteMessage("Test Leet Code 494");
@@ -1782,8 +1805,63 @@ void TestLeetCode198(void)
     Logger::WriteMessage("The maximum amount the robber can get is " + to_string(amount));
 }
 
+
+
+void TestLeetCode279(void)
+{
+    Logger::WriteMessage("Test Leet Code 279");
+    LeetCodeDP leetCode;
+    int n = 12;
+    int result = leetCode.numSquares(n);
+    Logger::WriteMessage("n = " + to_string(n) + " ; number of sqaures = " + to_string(result));
+
+    n = 100;
+    result = leetCode.numSquares(n);
+    Logger::WriteMessage("n = " + to_string(n) + " ; number of sqaures = " + to_string(result));
+}
+
+void TestLeetCode256(void)
+{
+    Logger::WriteMessage("Test Leet Code 256");
+    LeetCodeDP leetCode;
+    vector<vector<int>> costs = { {1,2,3}, {4, 1, 2} , {7, 9, 2} };
+    Logger::WriteMessage(costs);
+    int min_cost = leetCode.minCost(costs);
+    Logger::WriteMessage("Minimum Cost = " + to_string(min_cost));
+}
+
+void TestLeetCode276(void)
+{
+    Logger::WriteMessage("Test Leet Code 276");
+    LeetCodeDP leetCode;
+    int n = 3;
+    int k = 3;
+    int numWays = leetCode.numWaysPaintFence(n, k);;
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; numWays = " + to_string(numWays));
+}
+
+void TestLeetCode265(void)
+{
+    Logger::WriteMessage("Test Leet Code 265");
+    LeetCodeDP leetCode;
+    vector<vector<int>> costs = { { 8 } };
+    Logger::WriteMessage(costs);
+    int min_cost = leetCode.minCostII(costs);
+    Logger::WriteMessage("Minimum Cost = " + to_string(min_cost));
+
+    costs = { { 1,2,3 },{ 4, 1, 2 } ,{ 7, 9, 2 } };
+    Logger::WriteMessage(costs);
+    min_cost = leetCode.minCostII(costs);
+    Logger::WriteMessage("Minimum Cost = " + to_string(min_cost));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode265();
+    TestLeetCode276();
+    TestLeetCode256();
+    TestLeetCode279();
+    TestLeetCode120();
     TestLeetCode198();
     TestLeetCode96();
     TestLeetCode309();
