@@ -3217,8 +3217,94 @@ void TestLeetCode1525(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode1540(void)
+{
+    LeetCodeString leetCode;
+    string  s = "input";
+    string t = "ouput";
+    int k = 9;
+    bool result = leetCode.canConvertString(s, t, k);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "abc";
+    t = "bcd";
+    k = 10;
+    result = leetCode.canConvertString(s, t, k);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "aab";
+    t = "bbb";
+    k = 27;
+    result = leetCode.canConvertString(s, t, k);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1541(void)
+{
+    LeetCodeString leetCode;
+    string s = "(()))";
+    int result = leetCode.minInsertions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "())";
+    result = leetCode.minInsertions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "))())(";
+    result = leetCode.minInsertions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "((((((";
+    result = leetCode.minInsertions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = ")))))))";
+    result = leetCode.minInsertions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode1542(void)
+{
+    LeetCodeString leetCode;
+    string s = "3242415";
+    int result = leetCode.longestAwesome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "12345678";
+    result = leetCode.longestAwesome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "213123";
+    result = leetCode.longestAwesome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "00";
+    result = leetCode.longestAwesome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode1544(void)
+{
+    LeetCodeString leetCode;
+    string s = "leEeetcode";
+    string result = leetCode.makeGood(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "abBAcC";
+    result = leetCode.makeGood(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "s";
+    result = leetCode.makeGood(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1544();
+    TestLeetCode1542();
+    TestLeetCode1541();
+    TestLeetCode1540();
     TestLeetCode1525();
     TestLeetCode1528();
     TestLeetCode1531();

@@ -2736,5 +2736,93 @@ public:
     /// 1. 1 <= n <= 10^5
     /// </summary>
     bool winnerSquareGame(int n);
+
+    /// <summary>
+    /// Leet code #1546. Maximum Number of Non-Overlapping Subarrays With 
+    ///                  Sum Equals Target
+    /// 
+    /// Medium
+    ///
+    /// Given an array nums and an integer target.
+    ///
+    /// Return the maximum number of non-empty non-overlapping subarrays such 
+    /// that the sum of values in each subarray is equal to target.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,1,1,1,1], target = 2
+    /// Output: 2
+    /// Explanation: There are 2 non-overlapping subarrays [1,1,1,1,1] with sum equals to target(2).
+    ///
+    /// Example 2:
+    /// Input: nums = [-1,3,5,1,4,2,-9], target = 6
+    /// Output: 2
+    /// Explanation: There are 3 subarrays with sum equal to 6.
+    /// ([5,1], [4,2], [3,5,1,4,2,-9]) but only the first 2 are non-overlapping.
+    ///
+    /// Example 3:
+    /// Input: nums = [-2,6,6,3,5,4,1,2,8], target = 10
+    /// Output: 3
+    ///
+    /// Example 4:
+    /// Input: nums = [0,0,0], target = 0
+    /// Output: 3
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^4 <= nums[i] <= 10^4
+    /// 3. 0 <= target <= 10^6
+    /// </summary>
+    int maxNonOverlapping(vector<int>& nums, int target);
+
+    /// <summary>
+    /// Leet code #1547. Minimum Cost to Cut a Stick 
+    /// 
+    /// Hard
+    ///
+    /// Given a wooden stick of length n units. The stick is labelled from 0 
+    /// to n. For example, a stick of length 6 is labelled as follows:
+    ///
+    /// Given an integer array cuts where cuts[i] denotes a position you 
+    /// should perform a cut at.
+    ///
+    /// You should perform the cuts in order, you can change the order of 
+    /// the cuts as you wish.
+    ///
+    /// The cost of one cut is the length of the stick to be cut, the total 
+    /// cost is the sum of costs of all cuts. When you cut a stick, it will 
+    /// be split into two smaller sticks (i.e. the sum of their lengths is 
+    /// the length of the stick before the cut). Please refer to the first 
+    /// example for a better explanation.
+    ///
+    /// Return the minimum total cost of the cuts.
+    ///
+    /// Example 1:
+    /// Input: n = 7, cuts = [1,3,4,5]
+    /// Output: 16
+    /// Explanation: Using cuts order = [1, 3, 4, 5] as in the input leads 
+    /// to the following scenario:
+    ///
+    /// The first cut is done to a rod of length 7 so the cost is 7. The 
+    /// second cut is done to a rod of length 6 (i.e. the second part of the 
+    /// first cut), the third is done to a rod of length 4 and the last cut 
+    /// is to a rod of length 3. The total cost is 7 + 6 + 4 + 3 = 20.
+    /// Rearranging the cuts to be [3, 5, 1, 4] for example will lead to a 
+    /// scenario with total cost = 16 (as shown in the example photo 
+    /// 7 + 4 + 3 + 2 = 16).
+    ///
+    /// Example 2:
+    /// Input: n = 9, cuts = [5,6,1,4,2]
+    /// Output: 22
+    /// Explanation: If you try the given cuts ordering the cost will be 25.
+    /// There are much ordering with total cost <= 25, for example, the order 
+    /// [4, 6, 5, 2, 1] has total cost = 22 which is the minimum possible.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 10^6
+    /// 2. 1 <= cuts.length <= min(n - 1, 100)
+    /// 3. 1 <= cuts[i] <= n - 1
+    /// 4. All the integers in cuts array are distinct.
+    /// </summary>
+    int minCost(int n, vector<int>& cuts);
 };
 #endif  // LeetCodeDP

@@ -5681,6 +5681,192 @@ public:
     /// </summary>
     int numSplits(string s);
 
+    /// <summary>
+    /// Leet code #1540. Can Convert String in K Moves
+    /// 
+    /// Medium
+    ///
+    /// Given two strings s and t, your goal is to convert s into t in k moves
+    /// or less.
+    ///
+    /// During the ith (1 <= i <= k) move you can:
+    /// Choose any index j (1-indexed) from s, such that 1 <= j <= s.length 
+    /// and j has not been chosen in any previous move, and shift the character
+    /// at that index i times.
+    /// Do nothing.
+    /// Shifting a character means replacing it by the next letter in the 
+    /// alphabet (wrapping around so that 'z' becomes 'a'). Shifting a 
+    /// character by i means applying the shift operations i times.
+    ///
+    /// Remember that any index j can be picked at most once.
+    ///
+    /// Return true if it's possible to convert s into t in no more than k 
+    /// moves, otherwise return false.
+    ///
+    /// Example 1:
+    /// Input: s = "input", t = "ouput", k = 9
+    /// Output: true
+    /// Explanation: In the 6th move, we shift 'i' 6 times to get 'o'. And in 
+    /// the 7th move we shift 'n' to get 'u'.
+    ///
+    /// Example 2:
+    /// Input: s = "abc", t = "bcd", k = 10
+    /// Output: false
+    /// Explanation: We need to shift each character in s one time to convert 
+    /// it into t. We can shift 'a' to 'b' during the 1st move. However, there 
+    /// is no way to shift the other characters in the remaining moves to 
+    /// obtain t from s.
+    ///
+    /// Example 3:
+    /// Input: s = "aab", t = "bbb", k = 27
+    /// Output: true
+    /// Explanation: In the 1st move, we shift the first 'a' 1 time to get 'b'. 
+    /// In the 27th move, we shift the second 'a' 27 times to get 'b'.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length, t.length <= 10^5
+    /// 2. 0 <= k <= 10^9
+    /// 3. s, t contain only lowercase English letters.
+    /// </summary>
+    bool canConvertString(string s, string t, int k);
+
+    /// <summary>
+    /// Leet code #1541. Minimum Insertions to Balance a Parentheses String
+    /// 
+    /// Medium
+    ///
+    /// Given a parentheses string s containing only the characters '(' 
+    /// and ')'. A parentheses string is balanced if:
+    /// 
+    /// Any left parenthesis '(' must have a corresponding two consecutive 
+    /// right parenthesis '))'.
+    /// Left parenthesis '(' must go before the corresponding two consecutive 
+    /// right parenthesis '))'.
+    /// For example, "())", "())(())))" and "(())())))" are balanced, ")()", 
+    /// "()))" and "(()))" are not balanced.
+    ///
+    /// You can insert the characters '(' and ')' at any position of the 
+    /// string to balance it if needed.
+    ///
+    /// Return the minimum number of insertions needed to make s balanced.
+    /// 
+    /// Example 1:
+    /// Input: s = "(()))"
+    /// Output: 1
+    /// Explanation: The second '(' has two matching '))', but the first 
+    /// '(' has only ')' matching. We need to to add one more ')' at the 
+    /// end of the string to be "(())))" which is balanced.
+    ///
+    /// Example 2:
+    /// Input: s = "())"
+    /// Output: 0
+    /// Explanation: The string is already balanced.
+    ///
+    /// Example 3:
+    /// Input: s = "))())("
+    /// Output: 3
+    /// Explanation: Add '(' to match the first '))', Add '))' to match the 
+    /// last '('.
+    ///
+    /// Example 4:
+    /// Input: s = "(((((("
+    /// Output: 12
+    /// Explanation: Add 12 ')' to balance the string.
+    ///
+    /// Example 5:
+    /// Input: s = ")))))))"
+    /// Output: 5
+    /// Explanation: Add 4 '(' at the beginning of the string and one ')' at 
+    /// the end. The string becomes "(((())))))))".
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s consists of '(' and ')' only.
+    /// </summary>
+    int minInsertions(string s);
+
+    /// <summary>
+    /// Leet code #1542. Find Longest Awesome Substring
+    /// 
+    /// Hard
+    ///
+    /// Given a string s. An awesome substring is a non-empty substring of s 
+    /// such that we can make any number of swaps in order to make it 
+    /// palindrome.
+    ///
+    /// Return the length of the maximum length awesome substring of s.
+    /// 
+    /// Example 1:
+    /// Input: s = "3242415"
+    /// Output: 5
+    /// Explanation: "24241" is the longest awesome substring, we can form 
+    /// the palindrome "24142" with some swaps.
+    ///
+    /// Example 2:
+    /// Input: s = "12345678"
+    /// Output: 1
+    ///
+    /// Example 3:
+    /// Input: s = "213123"
+    /// Output: 6
+    /// Explanation: "213123" is the longest awesome substring, we can form 
+    /// the palindrome "231132" with some swaps.
+    ///
+    /// Example 4:
+    /// Input: s = "00"
+    /// Output: 2
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s consists only of digits.
+    /// </summary>
+    int longestAwesome(string s);
+
+    /// <summary>
+    /// Leet code #1544. Make The String Great
+    /// 
+    /// Easy
+    ///
+    /// Given a string s of lower and upper case English letters.
+    ///
+    /// A good string is a string which doesn't have two adjacent characters 
+    /// s[i] and s[i + 1] where:
+    ///
+    /// 0 <= i <= s.length - 2
+    /// s[i] is a lower-case letter and s[i + 1] is the same letter but in 
+    /// upper-case or vice-versa.
+    /// To make the string good, you can choose two adjacent characters that 
+    /// make the string bad and remove them. You can keep doing this until 
+    /// the string becomes good.
+    ///
+    /// Return the string after making it good. The answer is guaranteed to 
+    /// be unique under the given constraints.
+    ///
+    /// Notice that an empty string is also good.
+    ///
+    /// Example 1:
+    /// Input: s = "leEeetcode"
+    /// Output: "leetcode"
+    /// Explanation: In the first step, either you choose i = 1 or i = 2, 
+    /// both will result "leEeetcode" to be reduced to "leetcode".
+    ///
+    /// Example 2:
+    /// Input: s = "abBAcC"
+    /// Output: ""
+    /// Explanation: We have many possible scenarios, and all lead to the 
+    /// same answer. For example:
+    /// "abBAcC" --> "aAcC" --> "cC" --> ""
+    /// "abBAcC" --> "abBA" --> "aA" --> ""
+    ///
+    /// Example 3:
+    /// Input: s = "s"
+    /// Output: "s"
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s contains only lower and upper case English letters.
+    /// </summary>
+    string makeGood(string s);
 #pragma endregion
 };
 

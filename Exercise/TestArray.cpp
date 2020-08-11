@@ -4198,8 +4198,26 @@ void TestLeetCode1537(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1539(void)
+{
+    Logger::WriteMessage("Test Leet Code 1539");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 2,3,4,7,11 };
+    int k = 5;
+    int result = leetCode.findKthPositive(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    arr = { 1,2,3,4 };
+    k = 2;
+    result = leetCode.findKthPositive(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1539();
     TestLeetCode1537();
     TestLeetCode1534();
     TestLeetCode221();

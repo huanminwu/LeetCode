@@ -562,8 +562,34 @@ void TestLeetCode1529(void)
     Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
 }
 
+void TestLeetCode1545(void)
+{
+    Logger::WriteMessage("Test Leet Code 1545");
+    LeetCodeBit leetCode;
+    int n = 3; 
+    int k = 1;
+    char result = leetCode.findKthBit(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + string(1, result));
+
+    n = 4;
+    k = 12;
+    result = leetCode.findKthBit(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + string(1, result));
+
+    n = 1;
+    k = 1;
+    result = leetCode.findKthBit(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + string(1, result));
+
+    n = 2;
+    k = 3;
+    result = leetCode.findKthBit(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + string(1, result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode1545();
     TestLeetCode1529();
     TestLeetCode1521();
     TestLeetCode1486();

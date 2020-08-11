@@ -1855,8 +1855,56 @@ void TestLeetCode265(void)
     Logger::WriteMessage("Minimum Cost = " + to_string(min_cost));
 }
 
+void TestLeetCode1546(void)
+{
+    Logger::WriteMessage("Test Leet Code 1546");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 1, 1, 1, 1 };
+    int target = 2;
+    int result = leetCode.maxNonOverlapping(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { -1,3,5,1,4,2,-9 };
+    target = 6;
+    result = leetCode.maxNonOverlapping(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { -2,6,6,3,5,4,1,2,8 };
+    target = 10;
+    result = leetCode.maxNonOverlapping(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { 0,0,0 };
+    target = 0;
+    result = leetCode.maxNonOverlapping(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1547(void)
+{
+    Logger::WriteMessage("Test Leet Code 1547");
+    LeetCodeDP leetCode;
+    int n = 7;
+    vector<int> cuts = { 1, 3, 4, 5 };
+    int result = leetCode.minCost(n, cuts);
+    Logger::WriteMessage(cuts);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 9;
+    cuts = { 5,6,1,4,2 };
+    result = leetCode.minCost(n, cuts);
+    Logger::WriteMessage(cuts);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1547();
+    TestLeetCode1546();
     TestLeetCode265();
     TestLeetCode276();
     TestLeetCode256();

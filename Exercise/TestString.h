@@ -92,5 +92,9 @@ void TestLeetCode1507(void);
 void TestLeetCode1525(void);
 void TestLeetCode1528(void);
 void TestLeetCode1531(void);
+void TestLeetCode1540(void);
+void TestLeetCode1541(void);
+void TestLeetCode1542(void);
+void TestLeetCode1544(void);
 void TestLeetCodeString(void);
 #endif  // TestArray

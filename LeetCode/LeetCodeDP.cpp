@@ -10057,5 +10057,153 @@ bool LeetCodeDP::winnerSquareGame(int n)
     return dp[n] == 1;
 }
 
+/// <summary>
+/// Leet code #1546. Maximum Number of Non-Overlapping Subarrays With 
+///                  Sum Equals Target
+/// 
+/// Medium
+///
+/// Given an array nums and an integer target.
+///
+/// Return the maximum number of non-empty non-overlapping subarrays such 
+/// that the sum of values in each subarray is equal to target.
+/// 
+/// Example 1:
+/// Input: nums = [1,1,1,1,1], target = 2
+/// Output: 2
+/// Explanation: There are 2 non-overlapping subarrays [1,1,1,1,1] with sum equals to target(2).
+///
+/// Example 2:
+/// Input: nums = [-1,3,5,1,4,2,-9], target = 6
+/// Output: 2
+/// Explanation: There are 3 subarrays with sum equal to 6.
+/// ([5,1], [4,2], [3,5,1,4,2,-9]) but only the first 2 are non-overlapping.
+///
+/// Example 3:
+/// Input: nums = [-2,6,6,3,5,4,1,2,8], target = 10
+/// Output: 3
+///
+/// Example 4:
+/// Input: nums = [0,0,0], target = 0
+/// Output: 3
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. -10^4 <= nums[i] <= 10^4
+/// 3. 0 <= target <= 10^6
+/// </summary>
+int LeetCodeDP::maxNonOverlapping(vector<int>& nums, int target)
+{
+    unordered_map<int, vector<int>> sum_map;
+    vector<int> dp(nums.size());
+    int sum = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        sum += nums[i];
+        if (sum == target) dp[i] = 1;
+        if (sum_map.count(sum - target) > 0)
+        {
+            for (int itr : sum_map[sum - target])
+            {
+                dp[i] = max(dp[i], dp[itr] + 1);
+            }
+        }
+        sum_map[sum].push_back(i);
+        if (i > 0) dp[i] = max(dp[i], dp[i - 1]);
+    }
+    return dp[nums.size() - 1];
+}
+
+/// <summary>
+/// Leet code #1547. Minimum Cost to Cut a Stick 
+/// 
+/// Hard
+///
+/// Given a wooden stick of length n units. The stick is labelled from 0 
+/// to n. For example, a stick of length 6 is labelled as follows:
+///
+/// Given an integer array cuts where cuts[i] denotes a position you 
+/// should perform a cut at.
+///
+/// You should perform the cuts in order, you can change the order of 
+/// the cuts as you wish.
+///
+/// The cost of one cut is the length of the stick to be cut, the total 
+/// cost is the sum of costs of all cuts. When you cut a stick, it will 
+/// be split into two smaller sticks (i.e. the sum of their lengths is 
+/// the length of the stick before the cut). Please refer to the first 
+/// example for a better explanation.
+///
+/// Return the minimum total cost of the cuts.
+///
+/// Example 1:
+/// Input: n = 7, cuts = [1,3,4,5]
+/// Output: 16
+/// Explanation: Using cuts order = [1, 3, 4, 5] as in the input leads 
+/// to the following scenario:
+///
+/// The first cut is done to a rod of length 7 so the cost is 7. The 
+/// second cut is done to a rod of length 6 (i.e. the second part of the 
+/// first cut), the third is done to a rod of length 4 and the last cut 
+/// is to a rod of length 3. The total cost is 7 + 6 + 4 + 3 = 20.
+/// Rearranging the cuts to be [3, 5, 1, 4] for example will lead to a 
+/// scenario with total cost = 16 (as shown in the example photo 
+/// 7 + 4 + 3 + 2 = 16).
+///
+/// Example 2:
+/// Input: n = 9, cuts = [5,6,1,4,2]
+/// Output: 22
+/// Explanation: If you try the given cuts ordering the cost will be 25.
+/// There are much ordering with total cost <= 25, for example, the order 
+/// [4, 6, 5, 2, 1] has total cost = 22 which is the minimum possible.
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 10^6
+/// 2. 1 <= cuts.length <= min(n - 1, 100)
+/// 3. 1 <= cuts[i] <= n - 1
+/// 4. All the integers in cuts array are distinct.
+/// </summary>
+int LeetCodeDP::minCost(int n, vector<int>& cuts)
+{
+    sort(cuts.begin(), cuts.end());
+    vector<int> arr;
+    for (size_t i = 0; i <= cuts.size(); i++)
+    {
+        if (i == 0) arr.push_back(cuts[i]);
+        else if (i == cuts.size())
+        {
+            arr.push_back(n - cuts[cuts.size() - 1]);
+        }
+        else
+        {
+            arr.push_back(cuts[i] -cuts[i-1]);
+        }
+    }
+    size_t size = arr.size();
+    vector<vector<int>>dp(size, vector<int>(size, INT_MAX));
+    for (int k = 0; k < (int)arr.size(); k++)
+    {
+        for (int i = 0; i < (int)arr.size(); i++)
+        {
+            if (k == 0)
+            {
+                dp[i][i] = 0;
+            }
+            else
+            {
+                if (i + k >= (int)arr.size()) break;
+                int sum = 0;
+                for (int j = i; j < i + k; j++)
+                {
+                    dp[i][i + k] = min(dp[i][j] + dp[j + 1][i + k], dp[i][i + k]);
+                    sum += arr[j];
+                }
+                sum += arr[i + k];
+                dp[i][i + k] += sum;
+            }
+        }
+    }
+    return dp[0][size - 1];
+}
 #pragma endregion
 

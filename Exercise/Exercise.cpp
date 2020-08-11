@@ -4162,16 +4162,16 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeDP();
     TestLeetCodeArray();
+    TestLeetCodeBit();
+    TestLeetCodeString();
+
     TestLeetCode211();
     TestLeetCodeSort();
 
-    TestLeetCodeDP();
-    TestLeetCodeString();
     TestLeetCodeTree();
-    TestLeetCodeBit();
     TestLeetCodeMath();
-
     TestLeetCodeGreedy();
     TestLeetCodeHashtable();
     TestLeetCodeDP();
