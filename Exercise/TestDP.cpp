@@ -1901,8 +1901,30 @@ void TestLeetCode1547(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1553(void)
+{
+    Logger::WriteMessage("Test Leet Code 1553");
+    LeetCodeDP leetCode;
+    int n = 123;
+    int result = leetCode.minDays(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 6;
+    result = leetCode.minDays(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 1;
+    result = leetCode.minDays(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 56;
+    result = leetCode.minDays(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1553();
     TestLeetCode1547();
     TestLeetCode1546();
     TestLeetCode265();

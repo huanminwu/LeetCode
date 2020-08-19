@@ -644,8 +644,32 @@ void TestLeetCode1482(void)
     Logger::WriteMessage("m = " + to_string(m) + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1552(void)
+{
+    Logger::WriteMessage("Test Leet Code 1552");
+    LeetCodeBinarySearch leetCode;
+    vector<int> position = { 1, 2, 3, 4, 7 };
+    int m = 3;
+    int result = leetCode.maxDistance(position, m);
+    Logger::WriteMessage(position);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
+
+    position = { 5,4,3,2,1,1000000000 };
+    m = 2;
+    result = leetCode.maxDistance(position, m);
+    Logger::WriteMessage(position);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
+
+    position = { 79, 74, 57, 22 };
+    m = 4;
+    result = leetCode.maxDistance(position, m);
+    Logger::WriteMessage(position);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode1552();
     TestLeetCode1482();
     TestLeetCode1064();
     TestLeetCode374();

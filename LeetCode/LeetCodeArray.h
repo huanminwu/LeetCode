@@ -6979,7 +6979,7 @@ public:
     /// Example 1:
     /// Input: arr = [2,3,4,7,11], k = 5
     /// Output: 9
-    /// Explanation: The missing positive integers are [1,5,6,8,9,10,12,13,...]. 
+    /// Explanation: The missing positive integers are [1,5,6,8,9,10,12,13,...].
     /// The 5th missing positive integer is 9.
     ///
     /// Example 2:
@@ -6996,6 +6996,31 @@ public:
     ///    arrays of distinct integers nums1 and nums2.
     /// </summary>
     int findKthPositive(vector<int>& arr, int k);
+
+    /// <summary>
+    /// Leet code #1550. Three Consecutive Odds
+    /// 
+    /// Easy
+    ///
+    /// Given an integer array arr, return true if there are three consecutive 
+    /// odd numbers in the array. Otherwise, return false.
+    ///
+    /// Example 1:
+    /// Input: arr = [2,6,4,1]
+    /// Output: false
+    /// Explanation: There are no three consecutive odds.
+    ///
+    /// Example 2:
+    /// Input: arr = [1,2,34,3,4,5,7,23,12]
+    /// Output: true
+    /// Explanation: [5,7,23] are three consecutive odds.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= arr.length <= 1000
+    /// 2. 1 <= arr[i] <= 1000
+    /// </summary>
+    bool threeConsecutiveOdds(vector<int>& arr);
+
 
 #pragma endregion
 

@@ -4215,8 +4215,24 @@ void TestLeetCode1539(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1550(void)
+{
+    Logger::WriteMessage("Test Leet Code 1550");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 2,6,4,1 };
+    bool result = leetCode.threeConsecutiveOdds(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    arr = { 1,2,34,3,4,5,7,23,12 };
+    result = leetCode.threeConsecutiveOdds(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1550();
     TestLeetCode1539();
     TestLeetCode1537();
     TestLeetCode1534();

@@ -10094,7 +10094,7 @@ bool LeetCodeDP::winnerSquareGame(int n)
 /// </summary>
 int LeetCodeDP::maxNonOverlapping(vector<int>& nums, int target)
 {
-    unordered_map<int, vector<int>> sum_map;
+    unordered_map<int, int> sum_map;
     vector<int> dp(nums.size());
     int sum = 0;
     for (size_t i = 0; i < nums.size(); i++)
@@ -10103,12 +10103,9 @@ int LeetCodeDP::maxNonOverlapping(vector<int>& nums, int target)
         if (sum == target) dp[i] = 1;
         if (sum_map.count(sum - target) > 0)
         {
-            for (int itr : sum_map[sum - target])
-            {
-                dp[i] = max(dp[i], dp[itr] + 1);
-            }
+            dp[i] = max(dp[i], dp[sum_map[sum - target]] + 1);
         }
-        sum_map[sum].push_back(i);
+        sum_map[sum] = i;
         if (i > 0) dp[i] = max(dp[i], dp[i - 1]);
     }
     return dp[nums.size() - 1];
@@ -10204,6 +10201,103 @@ int LeetCodeDP::minCost(int n, vector<int>& cuts)
         }
     }
     return dp[0][size - 1];
+}
+
+/// <summary>
+/// Leet code #1553. Minimum Number of Days to Eat N Oranges
+/// 
+/// Hard
+///
+/// There are n oranges in the kitchen and you decided to eat some of 
+/// these oranges every day as follows:
+/// Eat one orange.
+/// If the number of remaining oranges (n) is divisible by 2 then you 
+/// can eat  n/2 oranges.
+/// If the number of remaining oranges (n) is divisible by 3 then you 
+/// can eat  2*(n/3) oranges.
+/// You can only choose one of the actions per day.
+///
+/// Return the minimum number of days to eat n oranges.
+///
+/// Example 1:
+/// Input: n = 10
+/// Output: 4
+/// Explanation: You have 10 oranges.
+/// Day 1: Eat 1 orange,  10 - 1 = 9.  
+/// Day 2: Eat 6 oranges, 9 - 2*(9/3) = 9 - 6 = 3. (Since 9 is divisible 
+/// by 3)
+/// Day 3: Eat 2 oranges, 3 - 2*(3/3) = 3 - 2 = 1. 
+/// Day 4: Eat the last orange  1 - 1  = 0.
+/// You need at least 4 days to eat the 10 oranges.
+///
+/// Example 2:
+///
+/// Input: n = 6
+/// Output: 3
+/// Explanation: You have 6 oranges.
+/// Day 1: Eat 3 oranges, 6 - 6/2 = 6 - 3 = 3. (Since 6 is divisible by 2).
+/// Day 2: Eat 2 oranges, 3 - 2*(3/3) = 3 - 2 = 1. (Since 3 is divisible by 3)
+/// Day 3: Eat the last orange  1 - 1  = 0.
+/// You need at least 3 days to eat the 6 oranges.
+///
+/// Example 3:
+/// Input: n = 1
+/// Output: 1
+///
+/// Example 4:
+/// Input: n = 56
+/// Output: 6
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 2*10^9
+/// </summary>
+int LeetCodeDP::minDays(int n)
+{
+    unordered_map<int, int> dp;
+    queue<pair<int, int>> queue;
+    dp[n] = 0;
+    queue.push(make_pair(n, 0));
+    while (!queue.empty())
+    {
+        pair<int, int> p = queue.front();
+        queue.pop();
+        if (dp[p.first] < p.second)
+        {
+            continue;
+        }
+        pair<int, int> pair;
+        if (p.first == 1)
+        {
+            pair.first = p.first -1;
+            pair.second = 1 + p.second;
+            if (dp.count(pair.first) == 0 || dp[pair.first] > pair.second)
+            {
+                dp[pair.first] = pair.second;
+                queue.push(pair);
+            }
+        }
+        if (p.first >= 3)
+        { 
+            pair.first = p.first / 3;
+            pair.second = 1 + p.first % 3 + p.second;
+            if (dp.count(pair.first) == 0 || dp[pair.first] > pair.second)
+            {
+                dp[pair.first] = pair.second;
+                queue.push(pair);
+            }
+        }
+        if (p.first >= 2)
+        {
+            pair.first = p.first / 2;
+            pair.second = 1 + p.first % 2 + p.second;
+            if (dp.count(pair.first) == 0 || dp[pair.first] > pair.second)
+            {
+                dp[pair.first] = pair.second;
+                queue.push(pair);
+            }
+        }
+    }
+    return dp[0];
 }
 #pragma endregion
 

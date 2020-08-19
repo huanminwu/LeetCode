@@ -3141,8 +3141,22 @@ void TestLeetCode1523(void)
     Logger::WriteMessage("low = " + to_string(low) + "; high = " + to_string(high) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1551(void)
+{
+    Logger::WriteMessage("Test Leet Code 1551");
+    LeetCodeMath leetCode;
+    int n = 3;
+    int result = leetCode.minOperations(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 6;
+    result = leetCode.minOperations(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1551();
     TestLeetCode1523();
     TestLeetCode1518();
     TestLeetCode1515();
