@@ -3299,8 +3299,28 @@ void TestLeetCode1544(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode1554(void)
+{
+    LeetCodeString leetCode;
+    vector<string> dict = { "abcd", "acbd", "aacd" };
+    bool result = leetCode.differByOne(dict);
+    Logger::WriteMessage(dict);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    dict = { "ab","cd","yz" };
+    result = leetCode.differByOne(dict);
+    Logger::WriteMessage(dict);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    dict = { "abcd","cccc","abyd","abab" };
+    result = leetCode.differByOne(dict);
+    Logger::WriteMessage(dict);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1554();
     TestLeetCode1544();
     TestLeetCode1542();
     TestLeetCode1541();

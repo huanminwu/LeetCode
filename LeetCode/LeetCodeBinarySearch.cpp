@@ -1973,7 +1973,7 @@ int LeetCodeBinarySearch::maxDistance(vector<int>& position, int m)
         int curr = 1;
         for (int j = 1; j < m; j++)
         {
-            while (curr < position.size() && position[curr] < prev + middle) curr++;
+            while (curr < (int)position.size() && position[curr] < prev + middle) curr++;
             if (curr == position.size()) break;
             prev = position[curr];
         }

@@ -4159,15 +4159,43 @@ void TestLeetCode1199(void)
     Logger::WriteMessage(blocks);
     Logger::WriteMessage("split = " + to_string(split) + "; result = " + to_string(result));
 }
+void test_string()
+{
+    string s = " phone.jpg, Warsaw  ,  2013-09-05 14:08:15  ";
+    vector<string> arr(3);
+    int i = 0;
+    int index = 0;
+    for (size_t i = 0; i <= s.size(); i++)
+    {
+        if (i == s.size())
+        {
+            while (!arr[index].empty() && isspace(arr[index].back())) arr[index].pop_back();
+        }
+        if (isspace(s[i]))
+        {
+            if (!arr[index].empty()) arr[index].push_back(s[i]);
+        }
+        else if (s[i] != ',')
+        {
+            arr[index].push_back(s[i]);
+        }
+        else
+        {
+            while (!arr[index].empty() && isspace(arr[index].back())) arr[index].pop_back();
+            index++;
+        }
+    }
+}
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeString();
     TestLeetCodeBinarySearch();
     TestLeetCodeDP();
     TestLeetCodeMath();
     TestLeetCodeArray();
     TestLeetCodeBit();
-    TestLeetCodeString();
+
     TestLeetCode211();
     TestLeetCodeSort();
     TestLeetCodeTree();
