@@ -3318,8 +3318,29 @@ void TestLeetCode1554(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1556(void)
+{
+    LeetCodeString leetCode;
+    int n = 987;
+    string result = leetCode.thousandSeparator(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + result);
+
+    n = 1234;
+    result = leetCode.thousandSeparator(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + result);
+
+    n = 123456789;
+    result = leetCode.thousandSeparator(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + result);
+
+    n = 0;
+    result = leetCode.thousandSeparator(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1556();
     TestLeetCode1554();
     TestLeetCode1544();
     TestLeetCode1542();

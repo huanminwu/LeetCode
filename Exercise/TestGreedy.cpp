@@ -283,8 +283,39 @@ void TestLeetCode1520(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1562(void)
+{
+    Logger::WriteMessage("Test Leet Code 1562");
+    LeetCodeGreedy leetCode;
+    vector<int> arr = { 3,5,1,2,4 };
+    int m = 1;
+    int result = leetCode.findLatestStep(arr, m);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
+
+    arr = { 3,1,5,4,2 };
+    m = 2;
+    result = leetCode.findLatestStep(arr, m);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
+
+    arr = { 1 };
+    m = 1;
+    result = leetCode.findLatestStep(arr, m);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
+
+    arr = { 2, 1 };
+    m = 2;
+    result = leetCode.findLatestStep(arr, m);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
+}
+
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode1562();
     TestLeetCode1520();
     TestLeetCode826();
     TestLeetCode1419();

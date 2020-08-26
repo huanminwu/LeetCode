@@ -4230,6 +4230,7 @@ void TestLeetCode1550(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+
 void TestLeetCodeArray(void)
 {
     TestLeetCode1550();

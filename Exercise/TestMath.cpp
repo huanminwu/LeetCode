@@ -3154,8 +3154,87 @@ void TestLeetCode1551(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1558(void)
+{
+    Logger::WriteMessage("Test Leet Code 1558");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 5 };
+    int result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2, 2 };
+    result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,2,5 };
+    result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,2,2,4 };
+    result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,4,8,16 };
+    result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1560(void)
+{
+    Logger::WriteMessage("Test Leet Code 1560");
+    LeetCodeMath leetCode;
+    int n = 4;
+    vector<int> rounds = { 1,3,1,2 };
+    vector<int> result = leetCode.mostVisited(n, rounds);
+    Logger::WriteMessage(rounds);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 2;
+    rounds = { 2,1,2,1,2,1,2,1,2 };
+    result = leetCode.mostVisited(n, rounds);
+    Logger::WriteMessage(rounds);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 7;
+    rounds = { 1,3,5,7 };
+    result = leetCode.mostVisited(n, rounds);
+    Logger::WriteMessage(rounds);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1561(void)
+{
+    Logger::WriteMessage("Test Leet Code 1561");
+    LeetCodeMath leetCode;
+    vector<int> piles = { 2, 4, 1, 2, 7, 8 };
+    int result = leetCode.maxCoins(piles);
+    Logger::WriteMessage(piles);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    piles = { 2,4,5 };
+    result = leetCode.maxCoins(piles);
+    Logger::WriteMessage(piles);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    piles = { 9,8,7,6,5,1,2,3,4 };
+    result = leetCode.maxCoins(piles);
+    Logger::WriteMessage(piles);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1561();
+    TestLeetCode1560();
+    TestLeetCode1558();
     TestLeetCode1551();
     TestLeetCode1523();
     TestLeetCode1518();

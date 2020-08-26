@@ -9052,3 +9052,191 @@ int LeetCodeMath::minOperations(int n)
     return result;
 }
 
+/// <summary>
+/// Leet code #1558. Minimum Numbers of Function Calls to Make Target Array
+/// 
+/// Medium
+///
+/// Your task is to form an integer array nums from an initial array of 
+/// zeros arr that is the same size as nums.
+///
+/// Return the minimum number of function calls to make nums from arr.
+///
+/// The answer is guaranteed to fit in a 32-bit signed integer.
+/// 
+/// Example 1:
+/// Input: nums = [1,5]
+/// Output: 5
+/// Explanation: Increment by 1 (second element): [0, 0] to 
+/// get [0, 1] (1 operation).
+/// Double all the elements: [0, 1] -> [0, 2] -> [0, 4] (2 operations).
+/// Increment by 1 (both elements)  [0, 4] -> [1, 4] -> [1, 5] 
+/// (2 operations).
+/// Total of operations: 1 + 2 + 2 = 5.
+///
+/// Example 2:
+/// Input: nums = [2,2]
+/// Output: 3
+/// Explanation: Increment by 1 (both elements) [0, 0] -> [0, 1] -> [1, 1] 
+/// (2 operations).
+/// Double all the elements: [1, 1] -> [2, 2] (1 operation).
+/// Total of operations: 2 + 1 = 3.
+///
+/// Example 3:
+/// Input: nums = [4,2,5]
+/// Output: 6
+/// Explanation: (initial)[0,0,0] -> [1,0,0] -> [1,0,1] -> [2,0,2] -> 
+/// [2,1,2] -> [4,2,4] -> [4,2,5](nums).
+///
+/// Example 4:
+/// Input: nums = [3,2,2,4]
+/// Output: 7
+///
+/// Example 5:
+/// Input: nums = [2,4,8,16]
+/// Output: 8
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeMath::minOperations(vector<int>& nums)
+{
+    int result = 0;
+    int max_double = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int num = nums[i];
+        int double_count = 0;
+        while (num > 0)
+        {
+            if (num % 2 == 1)
+            {
+                num--;
+                result++;
+            }
+            else
+            {
+                num = num / 2;
+                double_count++;
+            }
+        }
+        max_double = max(double_count, max_double);
+    }
+    result += max_double;
+    return result;
+}
+
+/// <summary>
+/// Leet code #1560. Most Visited Sector in a Circular Track
+/// 
+/// Easy
+///
+/// Given an integer n and an integer array rounds. We have a circular 
+/// track which consists of n sectors labeled from 1 to n. A marathon 
+/// will be held on this track, the marathon consists of m rounds. The 
+/// ith round starts at sector rounds[i - 1] and ends at sector rounds[i]. 
+/// For example, round 1 starts at sector rounds[0] and ends at sector 
+/// rounds[1]
+///
+/// Return an array of the most visited sectors sorted in ascending order.
+/// Notice that you circulate the track in ascending order of sector 
+/// numbers in the counter-clockwise direction (See the first example).
+/// 
+/// Example 1:
+/// Input: n = 4, rounds = [1,3,1,2]
+/// Output: [1,2]
+/// Explanation: The marathon starts at sector 1. The order of the visited 
+/// sectors is as follows:
+/// 1 --> 2 --> 3 (end of round 1) --> 4 --> 1 (end of round 2) --> 2 
+/// (end of round 3 and the marathon)
+/// We can see that both sectors 1 and 2 are visited twice and they are the 
+/// most visited sectors. Sectors 3 and 4 are visited only once.
+///
+/// Example 2:
+/// Input: n = 2, rounds = [2,1,2,1,2,1,2,1,2]
+/// Output: [2]
+///
+/// Example 3:
+/// Input: n = 7, rounds = [1,3,5,7]
+/// Output: [1,2,3,4,5,6,7]
+/// Constraints:
+/// 1. 2 <= n <= 100
+/// 2. 1 <= m <= 100
+/// 3. rounds.length == m + 1
+/// 4. 1 <= rounds[i] <= n
+/// 5. rounds[i] != rounds[i + 1] for 0 <= i < m
+/// </summary>
+vector<int> LeetCodeMath::mostVisited(int n, vector<int>& rounds)
+{
+    int start = rounds[0];
+    int end = rounds.back();
+    vector<int> result;
+    int index = start;
+    while (index != end)
+    {
+        result.push_back(index);
+        index++;
+        if (index == n + 1) index = 1;
+    }
+    if (start != end) result.push_back(end);
+    else result.push_back(start);
+    sort(result.begin(), result.end());
+    return result;
+}
+
+/// <summary>
+/// Leet code #1561. Maximum Number of Coins You Can Get
+/// 
+/// Medium
+///
+/// There are 3n piles of coins of varying size, you and your friends 
+/// will take piles of coins as follows:
+///
+/// In each step, you will choose any 3 piles of coins (not necessarily 
+/// consecutive).
+/// Of your choice, Alice will pick the pile with the maximum number of 
+/// coins.
+/// You will pick the next pile with maximum number of coins.
+/// Your friend Bob will pick the last pile.
+/// Repeat until there are no more piles of coins.
+/// Given an array of integers piles where piles[i] is the number of coins 
+/// in the ith pile.
+///
+/// Return the maximum number of coins which you can have.
+/// 
+/// Example 1:
+/// Input: piles = [2,4,1,2,7,8]
+/// Output: 9
+/// Explanation: Choose the triplet (2, 7, 8), Alice Pick the pile with 
+/// 8 coins, you the pile with 7 coins and Bob the last one.
+/// Choose the triplet (1, 2, 4), Alice Pick the pile with 4 coins, you 
+/// the pile with 2 coins and Bob the last one.
+/// The maximum number of coins which you can have are: 7 + 2 = 9.
+/// On the other hand if we choose this arrangement (1, 2, 8), (2, 4, 7) you 
+/// only get 2 + 4 = 6 coins which is not optimal.
+///
+/// Example 2:
+/// Input: piles = [2,4,5]
+/// Output: 4
+///
+/// Example 3:   
+/// Input: piles = [9,8,7,6,5,1,2,3,4]
+/// Output: 18
+///
+/// Constraints:
+/// 1. 3 <= piles.length <= 10^5
+/// 2. piles.length % 3 == 0
+/// 3. 1 <= piles[i] <= 10^4
+/// </summary>
+int LeetCodeMath::maxCoins(vector<int>& piles)
+{
+    sort(piles.begin(), piles.end());
+    int n = piles.size();
+    int result = 0;
+    for (int i = n - 2; i >= n / 3; i -= 2)
+    {
+        result += piles[i];
+    }
+    return result;
+}

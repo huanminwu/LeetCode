@@ -11618,13 +11618,13 @@ string LeetCodeString::makeGood(string s)
 /// </summary>
 bool LeetCodeString::differByOne(vector<string>& dict)
 {
-    unordered_set<string> str_map;
-    for (size_t i = 0; i < dict.size(); i++)
+    int m = dict[0].size();
+    for (int i = 0; i < m; i++)
     {
-        for (size_t j = 0; j < dict[i].size(); j++)
+        unordered_set<string> str_map;
+        for (string str : dict)
         {
-            string str = dict[i];
-            str[j] = '*';
+            str[i] = '*';
             if (str_map.count(str) > 0)
             {
                 return true;
@@ -11635,4 +11635,44 @@ bool LeetCodeString::differByOne(vector<string>& dict)
     return false;
 }
 
+/// <summary>
+/// Leet code #1556. Thousand Separator
+/// 
+/// Easy
+///
+/// Given an integer n, add a dot (".") as the thousands separator and 
+/// return it in string format.
+///
+/// Example 1:
+/// Input: n = 987
+/// Output: "987"
+///
+/// Example 2: 
+/// Input: n = 1234
+/// Output: "1.234"
+///
+/// Example 3:
+/// Input: n = 123456789
+/// Output: "123.456.789"
+///
+/// Example 4:
+/// Input: n = 0
+/// Output: "0"
+/// Constraints:
+/// 1. 0 <= n < 2^31
+/// </summary>
+string LeetCodeString::thousandSeparator(int n)
+{
+    string result;
+    string str = to_string(n);
+    for (size_t i = 0; i < str.size(); i++)
+    {
+        if (((str.size() - i) % 3 == 0) && !result.empty())
+        {
+            result.push_back('.');
+        }
+        result.push_back(str[i]);
+    }
+    return result;
+}
 #pragma endregion

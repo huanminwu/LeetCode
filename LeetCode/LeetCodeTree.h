@@ -133,7 +133,11 @@ public:
         size_t index = 0;
         deserializeNode(nodeList, data, index);
         if (nodeList.empty()) return nullptr;
-        else return nodeList[0];
+        else
+        {
+            Node* result = nodeList[0];
+            return result;
+        }
     }
 };
 

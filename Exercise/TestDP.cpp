@@ -1922,8 +1922,29 @@ void TestLeetCode1553(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1563(void)
+{
+    Logger::WriteMessage("Test Leet Code 1563");
+    LeetCodeDP leetCode;
+    vector<int> stoneValue = { 6, 2, 3, 4, 5, 5 };
+    int result = leetCode.stoneGameV(stoneValue);
+    Logger::WriteMessage(stoneValue);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    stoneValue = { 7,7,7,7,7,7,7 };
+    result = leetCode.stoneGameV(stoneValue);
+    Logger::WriteMessage(stoneValue);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    stoneValue = { 4 };
+    result = leetCode.stoneGameV(stoneValue);
+    Logger::WriteMessage(stoneValue);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1563();
     TestLeetCode1553();
     TestLeetCode1547();
     TestLeetCode1546();

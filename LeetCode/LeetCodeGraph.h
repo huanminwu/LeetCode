@@ -4123,6 +4123,158 @@ public:
     /// </summary>
     double maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start, int end);
 
+    /// <summary>
+    /// Leet code #1548. The Most Similar Path in a Graph
+    /// 
+    /// Hard
+    ///
+    /// We have n cities and m bi-directional roads where roads[i] = [ai, bi] 
+    /// connects city ai with city bi. Each city has a name consisting of 
+    /// exactly 3 upper-case English letters given in the string array names. 
+    /// Starting at any city x, you can reach any city y where y != x (i.e. 
+    /// the cities and the roads are forming an undirected connected graph).
+    ///
+    /// You will be given a string array targetPath. You should find a path 
+    /// in the graph of the same length and with the minimum edit distance 
+    /// to targetPath.
+    ///
+    /// You need to return the order of the nodes in the path with the 
+    /// minimum edit distance, The path should be of the same length of 
+    /// targetPath and should be valid (i.e. there should be a direct road 
+    /// between ans[i] and ans[i + 1]). If there are multiple answers return 
+    /// any one of them.
+    ///
+    /// Follow-up: If each node can be visited only once in the path, What 
+    /// should you change in your solution?
+    /// 
+    /// Example 1:
+    /// Input: n = 5, roads = [[0,2],[0,3],[1,2],[1,3],[1,4],[2,4]], names = 
+    /// ["ATL","PEK","LAX","DXB","HND"], targetPath = ["ATL","DXB","HND","LAX"]
+    /// Output: [0,2,4,2]
+    /// Explanation: [0,2,4,2], [0,3,0,2] and [0,3,1,2] are accepted answers.
+    /// [0,2,4,2] is equivalent to ["ATL","LAX","HND","LAX"] which has edit 
+    /// distance = 1 with targetPath.
+    /// [0,3,0,2] is equivalent to ["ATL","DXB","ATL","LAX"] which has edit 
+    /// distance = 1 with targetPath.
+    /// [0,3,1,2] is equivalent to ["ATL","DXB","PEK","LAX"] which has edit 
+    /// distance = 1 with targetPath.
+    ///
+    /// Example 2:
+    /// Input: n = 4, roads = [[1,0],[2,0],[3,0],[2,1],[3,1],[3,2]], names = 
+    /// ["ATL","PEK","LAX","DXB"], targetPath = ["ABC","DEF","GHI","JKL","MNO",
+    /// "PQR","STU","VWX"]
+    /// Output: [0,1,0,1,0,1,0,1]
+    /// Explanation: Any path in this graph has edit distance = 8 with 
+    /// targetPath.
+    ///
+    /// Example 3:
+    /// Input: n = 6, roads = [[0,1],[1,2],[2,3],[3,4],[4,5]], names = 
+    /// ["ATL","PEK","LAX","ATL","DXB","HND"], targetPath = ["ATL","DXB","HND",
+    /// "DXB","ATL","LAX","PEK"]
+    /// Output: [3,4,5,4,3,2,1]
+    /// Explanation: [3,4,5,4,3,2,1] is the only path with edit distance = 0 
+    /// with targetPath.
+    /// It's equivalent to ["ATL","DXB","HND","DXB","ATL","LAX","PEK"]
+    ///
+    /// Constraints:
+    /// 1. 2 <= n <= 100
+    /// 2. m == roads.length
+    /// 3. n - 1 <= m <= (n * (n - 1) / 2)
+    /// 4. 0 <= ai, bi <= n - 1
+    /// 5. ai != bi 
+    /// 6. The graph is guaranteed to be connected and each pair of nodes may 
+    ///    have at most one direct road.
+    /// 7. names.length == n
+    /// 8. names[i].length == 3
+    /// 9. names[i] consists of upper-case English letters.
+    /// 10. There can be two cities with the same name.
+    /// 11. 1 <= targetPath.length <= 100
+    /// 12. targetPath[i].length == 3
+    /// 13. targetPath[i] consists of upper-case English letters.
+    /// </summary>
+    vector<int> mostSimilar(int n, vector<vector<int>>& roads, vector<string>& names, vector<string>& targetPath);
+
+    /// <summary>
+    /// Leet code #1557. Minimum Number of Vertices to Reach All Nodes
+    /// 
+    /// Medium
+    ///
+    /// Given a directed acyclic graph, with n vertices numbered from 0 to 
+    /// n-1, and an array edges where edges[i] = [fromi, toi] represents 
+    /// a directed edge from node fromi to node toi.
+    /// Find the smallest set of vertices from which all nodes in the graph 
+    /// are reachable. It's guaranteed that a unique solution exists.
+    /// 
+    /// Notice that you can return the vertices in any order.
+    /// 
+    /// Example 1:
+    /// Input: n = 6, edges = [[0,1],[0,2],[2,5],[3,4],[4,2]]
+    /// Output: [0,3]
+    /// Explanation: It's not possible to reach all the nodes from a 
+    /// single vertex. From 0 we can reach [0,1,2,5]. From 3 we can 
+    /// reach [3,4,2,5]. So we output [0,3].
+    ///
+    /// Example 2:
+    /// Input: n = 5, edges = [[0,1],[2,1],[3,1],[1,4],[2,4]]
+    /// Output: [0,2,3]
+    /// Explanation: Notice that vertices 0, 3 and 2 are not reachable from 
+    /// any other node, so we must include them. Also any of these vertices 
+    /// can reach nodes 1 and 4.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 10^5
+    /// 2. 1 <= edges.length <= min(10^5, n * (n - 1) / 2)
+    /// 3. edges[i].length == 2
+    /// 3. 0 <= fromi, toi < n
+    /// 4. All pairs (fromi, toi) are distinct.
+    /// </summary>
+    vector<int> findSmallestSetOfVertices(int n, vector<vector<int>>& edges);
+
+    /// <summary>
+    /// Leet code #1559. Detect Cycles in 2D Grid
+    /// 
+    /// Hard
+    ///
+    /// Given a 2D array of characters grid of size m x n, you need to 
+    /// find if there exists any cycle consisting of the same value in 
+    /// grid.
+    /// A cycle is a path of length 4 or more in the grid that starts and 
+    /// ends at the same cell. From a given cell, you can move to one of 
+    /// the cells adjacent to it - in one of the four directions (up, down, 
+    /// left, or right), if it has the same value of the current cell.
+    ///
+    /// Also, you cannot move to the cell that you visited in your last 
+    /// move. For example, the cycle (1, 1) -> (1, 2) -> (1, 1) is invalid 
+    /// because from (1, 2) we visited (1, 1) which was the last visited cell.
+    ///
+    /// Return true if any cycle of the same value exists in grid, otherwise, 
+    /// return false.
+    /// 
+    /// Example 1:
+    /// Input: grid = [["a","a","a","a"],["a","b","b","a"],["a","b","b","a"],
+    /// ["a","a","a","a"]]
+    /// Output: true
+    /// Explanation: There are two valid cycles shown in different colors in 
+    /// the image below:
+    ///
+    /// Example 2:
+    /// Input: grid = [["c","c","c","a"],["c","d","c","c"],["c","c","e","c"],
+    /// ["f","c","c","c"]]
+    /// Output: true
+    /// Explanation: There is only one valid cycle highlighted in the image 
+    /// below:
+    ///
+    /// Example 3:
+    /// Input: grid = [["a","b","b"],["b","z","b"],["b","b","a"]]
+    /// Output: false
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 1 <= m <= 500
+    /// 4. 1 <= n <= 500
+    /// 5. grid consists only of lowercase English letters.
+    /// </summary>
+    bool containsCycle(vector<vector<char>>& grid);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H
