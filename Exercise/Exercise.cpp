@@ -4189,11 +4189,12 @@ void test_string()
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeGraph();
     TestLeetCodeDP();
     TestLeetCodeGreedy();
     TestLeetCodeArray();
     TestLeetCodeMath();
-    TestLeetCodeGraph();
+
     TestLeetCodeString();
     TestLeetCodeBinarySearch();
 

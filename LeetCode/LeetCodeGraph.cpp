@@ -5747,35 +5747,38 @@ bool LeetCodeGraph::isBipartite(vector<vector<int>>& graph)
 /// </summary>
 int LeetCodeGraph::findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K)
 {
-    unordered_map<int, int> costs;
-    costs[src] = 0;
-    unordered_map<int, unordered_map<int, int>> tickets;
+    vector<vector<pair<int, int>>> tickets (n);
     for (size_t i = 0; i < flights.size(); i++)
     {
-        tickets[flights[i][0]][flights[i][1]] = flights[i][2];
+        tickets[flights[i][0]].push_back(make_pair(flights[i][1], flights[i][2]));
     }
-    queue<int> search_queue;
-    search_queue.push(src);
+    queue<pair<int, int>> search;
+    search.push(make_pair(src, 0));
+    int result = INT_MAX;
     for (int i = 0; i <= K; i++)
     {
-        size_t size = search_queue.size();
+        size_t size = search.size();
+        vector<int> cost(n, INT_MAX);
         for (size_t j = 0; j < size; j++)
         {
-            int stop = search_queue.front();
-            search_queue.pop();
-            for (auto itr : tickets[stop])
+            pair<int, int> stop = search.front();
+            search.pop();
+            for (auto itr : tickets[stop.first])
             {
-                if ((costs.count(itr.first) == 0) || (costs[stop] + itr.second < costs[itr.first]))
-                {
-                    costs[itr.first] = costs[stop] + itr.second;
-                    search_queue.push(itr.first);
-                }
+                cost[itr.first] = min(cost[itr.first], stop.second + itr.second);
             }
-
+        }
+        for (int j = 0; j < n; j++)
+        {
+            if (cost[j] != INT_MAX)
+            {
+                search.push(make_pair(j, cost[j]));
+                if (j == dst) result = min(result, cost[j]);
+            }
         }
     }
-    if (costs.count(dst) == 0) return -1;
-    else return costs[dst];
+    if (result == INT_MAX) return -1;
+    else return result;
 }
 
 /// <summary>

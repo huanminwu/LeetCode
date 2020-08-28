@@ -1801,6 +1801,17 @@ void TestLeetCode787(void)
     Logger::WriteMessage("n = " + to_string(n) + "; src = " + to_string(src) +
         "; dst = " + to_string(dst) + "; k = " + to_string(k) +
         "; result = " + to_string(result));
+
+    n = 2;
+    flights = { {0,1,2} };
+    src = 1;
+    dst = 0;
+    k = 0;
+    result = leetCode.findCheapestPrice(n, flights, src, dst, k);
+    Logger::WriteMessage(flights);
+    Logger::WriteMessage("n = " + to_string(n) + "; src = " + to_string(src) +
+        "; dst = " + to_string(dst) + "; k = " + to_string(k) +
+        "; result = " + to_string(result));
 }
 
 void TestLeetCode1311(void)
@@ -2768,6 +2779,7 @@ void TestLeetCode1559(void)
 
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode787();
     TestLeetCode1559();
     TestLeetCode1548();
     TestLeetCode1514();
