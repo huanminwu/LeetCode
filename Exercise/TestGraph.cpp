@@ -2776,9 +2776,176 @@ void TestLeetCode1559(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1568(void)
+{
+    Logger::WriteMessage("Test Leet Code 1568");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid = { {0, 1, 1, 0},{0, 1, 1, 0},{0, 0, 0, 0} };
+    int result = leetCode.minDays(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1,1} };
+    result = leetCode.minDays(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1,0,1,0} };
+    result = leetCode.minDays(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = 
+    { 
+        {1,1,0,1,1},
+        {1,1,1,1,1},
+        {1,1,0,1,1},
+        {1,1,0,1,1}
+    };
+    result = leetCode.minDays(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {1, 1, 0, 1, 1},
+        {1, 1, 1, 1, 1},
+        {1, 1, 0, 1, 1},
+        {1, 1, 1, 1, 1}
+    };
+    result = leetCode.minDays(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1584(void)
+{
+    Logger::WriteMessage("Test Leet Code 1584");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> points = { {0, 0},{2, 2},{3, 10},{5, 2},{7, 0} };
+    int result = leetCode.minCostConnectPoints(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {3, 12}, { -2, 5 }, { -4, 1 } };
+    result = leetCode.minCostConnectPoints(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {0, 0},{1, 1},{1, 0},{-1, 1} };
+    result = leetCode.minCostConnectPoints(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {-1000000, -1000000},{1000000, 1000000} };
+    result = leetCode.minCostConnectPoints(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {0, 0} };
+    result = leetCode.minCostConnectPoints(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1579(void)
+{
+    Logger::WriteMessage("Test Leet Code 1579");
+    LeetCodeGraph leetCode;
+    int n = 4;
+    vector<vector<int>> edges =
+    {
+        {3, 1, 2},{3, 2, 3},{1, 1, 3},{1, 2, 4},{1, 1, 2},{2, 3, 4}
+    };
+    int result = leetCode.maxNumEdgesToRemove(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    edges =
+    {
+        {3,1,2},{3,2,3},{1,1,4},{2,1,4}
+    };
+    result = leetCode.maxNumEdgesToRemove(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    edges =
+    {
+        {3,2,3} ,{1,1,2},{2,3,4}
+    };
+    result = leetCode.maxNumEdgesToRemove(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1575(void)
+{
+    Logger::WriteMessage("Test Leet Code 1575");
+    LeetCodeGraph leetCode;
+    vector<int> locations = { 2, 3, 6, 8, 4 };
+    int start = 1;
+    int finish = 3;
+    int fuel = 5;
+    int result = leetCode.countRoutes(locations, start, finish, fuel);
+    Logger::WriteMessage(locations);
+    Logger::WriteMessage("start = " + to_string(start) + 
+                         "; finish = " + to_string(finish) + 
+                         "; fuel = " + to_string(fuel) +
+                         "; result = " + to_string(result));
+
+    locations = { 4, 3, 1 };
+    start = 1;
+    finish = 0;
+    fuel = 6;
+    result = leetCode.countRoutes(locations, start, finish, fuel);
+    Logger::WriteMessage(locations);
+    Logger::WriteMessage("start = " + to_string(start) +
+        "; finish = " + to_string(finish) +
+        "; fuel = " + to_string(fuel) +
+        "; result = " + to_string(result));
+
+    locations = { 5,2,1 };
+    start = 0;
+    finish = 2;
+    fuel = 3;
+    result = leetCode.countRoutes(locations, start, finish, fuel);
+    Logger::WriteMessage(locations);
+    Logger::WriteMessage("start = " + to_string(start) +
+        "; finish = " + to_string(finish) +
+        "; fuel = " + to_string(fuel) +
+        "; result = " + to_string(result));
+
+    locations = { 2,1,5 };
+    start = 0;
+    finish = 0;
+    fuel = 3;
+    result = leetCode.countRoutes(locations, start, finish, fuel);
+    Logger::WriteMessage(locations);
+    Logger::WriteMessage("start = " + to_string(start) +
+        "; finish = " + to_string(finish) +
+        "; fuel = " + to_string(fuel) +
+        "; result = " + to_string(result));
+
+    locations = { 1,2,3 };
+    start = 0;
+    finish = 2;
+    fuel = 40;
+    result = leetCode.countRoutes(locations, start, finish, fuel);
+    Logger::WriteMessage(locations);
+    Logger::WriteMessage("start = " + to_string(start) +
+        "; finish = " + to_string(finish) +
+        "; fuel = " + to_string(fuel) +
+        "; result = " + to_string(result));
+}
 
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1575();
+    TestLeetCode1579();
+    TestLeetCode1584();
+    TestLeetCode1568();
     TestLeetCode787();
     TestLeetCode1559();
     TestLeetCode1548();

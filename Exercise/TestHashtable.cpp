@@ -947,9 +947,43 @@ void TestLeetCode1512(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1577(void)
+{
+    Logger::WriteMessage("Test Leet Code 1577");
+    LeetCodeHashtable leetCode;
+
+    vector<int> nums1 = { 7, 4 };
+    vector<int> nums2 = { 5, 2, 8, 9 };
+    int result = leetCode.numTriplets(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,1 };
+    nums2 = { 1,1,1 };
+    result = leetCode.numTriplets(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 7,7,8,3 };
+    nums2 = { 1,2,9,7 };
+    result = leetCode.numTriplets(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 4,7,9,11,23 };
+    nums2 = { 3,5,1024,12,18 };
+    result = leetCode.numTriplets(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1577();
     TestLeetCode792();
     TestLeetCode1512();
     TestLeetCode811();

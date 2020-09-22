@@ -80,6 +80,10 @@ void TestLeetCode1494(void);
 void TestLeetCode1514(void);
 void TestLeetCode1548(void);
 void TestLeetCode1559(void);
+void TestLeetCode1568(void);
+void TestLeetCode1575(void);
+void TestLeetCode1579(void);
+void TestLeetCode1584(void);
 void TestLeetCode9902(void);
 void TestLeetCodeGraph(void);
 #endif  // TestGraph

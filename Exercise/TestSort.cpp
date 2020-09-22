@@ -761,8 +761,34 @@ void TestLeetCode1536(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1585(void)
+{
+    Logger::WriteMessage("Test Leet Code 1585");
+    LeetCodeSort leetCode;
+    string s = "84532";
+    string t = "34852";
+    bool result = leetCode.isTransformable(s, t);
+    Logger::WriteMessage("s = " + s + "; t = "+ t +"; result = " + (string)(result ? "true" : "false"));
+
+    s = "34521";
+    t = "23415";
+    result = leetCode.isTransformable(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "12345";
+    t = "12435";
+    result = leetCode.isTransformable(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "1";
+    t = "2";
+    result = leetCode.isTransformable(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1585();
     TestLeetCode1536();
     TestLeetCode1535();
     TestLeetCode456();

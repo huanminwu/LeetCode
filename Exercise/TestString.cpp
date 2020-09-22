@@ -3338,8 +3338,73 @@ void TestLeetCode1556(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + result);
 }
 
+void TestLeetCode1573(void)
+{
+    LeetCodeString leetCode;
+    string s = "10101";
+    int result = leetCode.numWays(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "1001";
+    result = leetCode.numWays(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "0000";
+    result = leetCode.numWays(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "100100010100110";
+    result = leetCode.numWays(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode1576(void)
+{
+    LeetCodeString leetCode;
+    string s = "?zs";
+    string result = leetCode.modifyString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "ubv?w";
+    result = leetCode.modifyString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "j?qg??b";
+    result = leetCode.modifyString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "??yw?ipkj?";
+    result = leetCode.modifyString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
+void TestLeetCode1578(void)
+{
+    LeetCodeString leetCode;
+    string s = "abaac";
+    vector<int> cost = { 1, 2, 3, 4, 5 };
+    int result = leetCode.minCost(s, cost);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "abc";
+    cost = { 1, 2, 3};
+    result = leetCode.minCost(s, cost);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aabaa";
+    cost = { 1,2,3,4,1 };
+    result = leetCode.minCost(s, cost);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1578();
+    TestLeetCode1576();
+    TestLeetCode1573();
     TestLeetCode1556();
     TestLeetCode1554();
     TestLeetCode1544();

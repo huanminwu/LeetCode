@@ -704,8 +704,30 @@ void TestLeetCode248(void)
     Logger::WriteMessage("count = " + to_string(count));
 }
 
+void TestLeetCode1595(void)
+{
+    Logger::WriteMessage("Test Leet Code 1595");
+    LeetCodeDFS leetCode;
+    vector<vector<int>> cost = { {2, 5, 1},{3, 4, 7},{8, 1, 2},{6, 2, 4},{3, 8, 8} }; 
+    int result = leetCode.connectTwoGroups(cost);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    cost = { {1, 3, 5},{4, 1, 1},{1, 5, 3} };
+    result = leetCode.connectTwoGroups(cost);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    cost = { {15, 96},{36, 2} };
+    result = leetCode.connectTwoGroups(cost);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode1595();
     TestLeetCode248();
     TestLeetCode247();
     TestLeetCode140();

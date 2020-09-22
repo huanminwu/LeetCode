@@ -8788,4 +8788,396 @@ bool LeetCodeGraph::containsCycle(vector<vector<char>>& grid)
     return false;
 }
 
+/// <summary>
+/// Leet code #1568. Minimum Number of Days to Disconnect Island
+/// </summary>
+int LeetCodeGraph::minDays_CountIsland(vector<vector<int>> grid)
+{
+    int result = 0;
+    int n = grid.size();
+    int m = grid[0].size();
+    vector<pair<int, int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (grid[i][j] == 0) continue;
+            result++;
+            queue<pair<int, int>> search;
+            search.push(make_pair(i, j));
+            while (!search.empty())
+            {
+                pair<int, int> pos = search.front();
+                search.pop();
+                for (size_t d = 0; d < directions.size(); d++)
+                {
+                    pair<int, int> next = pos;
+                    next.first += directions[d].first;
+                    next.second += directions[d].second;
+                    if (next.first < 0 || next.first >= n || next.second < 0 || next.second >= m)
+                    {
+                        continue;
+                    }
+                    if (grid[next.first][next.second] == 0) continue;
+                    grid[next.first][next.second] = 0;
+                    search.push(next);
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1568. Minimum Number of Days to Disconnect Island
+/// 
+/// Medium
+///
+/// Given a 2D grid consisting of 1s (land) and 0s (water).  An island is 
+/// a maximal 4-directionally (horizontal or vertical) connected group of 
+/// 1s.
+///
+/// The grid is said to be connected if we have exactly one island, 
+/// otherwise is said disconnected.
+///
+/// In one day, we are allowed to change any single land cell (1) into a 
+/// water cell (0).
+///
+/// Return the minimum number of days to disconnect the grid.
+/// 
+/// Example 1:
+/// Input: grid = [[0,1,1,0],[0,1,1,0],[0,0,0,0]]
+/// Output: 2
+/// Explanation: We need at least 2 days to get a disconnected grid.
+/// Change land grid[1][1] and grid[0][2] to water and get 2 disconnected 
+/// island.
+///
+/// Example 2:
+/// Input: grid = [[1,1]]
+/// Output: 2
+/// Explanation: Grid of full water is also disconnected ([[1,1]] -> 
+/// [[0,0]]), 0 islands.
+///
+/// Example 3:
+/// Input: grid = [[1,0,1,0]]
+/// Output: 0
+///
+/// Example 4:
+/// Input: grid = [[1,1,0,1,1],
+///           [1,1,1,1,1],
+///           [1,1,0,1,1],
+///           [1,1,0,1,1]]
+/// Output: 1
+///
+/// Example 5:
+/// Input: grid = [[1,1,0,1,1],
+///           [1,1,1,1,1],
+///           [1,1,0,1,1],
+///           [1,1,1,1,1]]
+/// Output: 2
+///
+/// Constraints:
+/// 1. 1 <= grid.length, grid[i].length <= 30
+/// 2. grid[i][j] is 0 or 1.
+/// </summary>
+int LeetCodeGraph::minDays(vector<vector<int>>& grid)
+{
+    if (minDays_CountIsland(grid) != 1) return 0;
+    for (size_t i = 0; i < grid.size(); i++)
+    {
+        for (size_t j = 0; j < grid[0].size(); j++)
+        {
+            if (grid[i][j] == 0) continue;
+            grid[i][j] = 0;
+            if (minDays_CountIsland(grid) != 1) return 1;
+            grid[i][j] = 1;
+        }
+    }
+    return 2;
+}
+
+/// <summary>
+/// Leet code #1584. Min Cost to Connect All Points
+/// 
+/// Medium
+///
+/// You are given an array points representing integer coordinates of 
+/// some points on a 2D-plane, where points[i] = [xi, yi].
+///
+/// The cost of connecting two points [xi, yi] and [xj, yj] is the 
+/// manhattan distance between them: |xi - xj| + |yi - yj|, where 
+/// |val| denotes the absolute value of val.
+///
+/// Return the minimum cost to make all points connected. All points 
+/// are connected if there is exactly one simple path between any two 
+/// points.
+/// 
+/// Example 1:
+/// Input: points = [[0,0],[2,2],[3,10],[5,2],[7,0]]
+/// Output: 20
+/// Explanation:
+/// We can connect the points as shown above to get the minimum cost of 20.
+/// Notice that there is a unique path between every pair of points.
+///
+/// Example 2:
+/// Input: points = [[3,12],[-2,5],[-4,1]]
+/// Output: 18
+///
+/// Example 3:
+/// Input: points = [[0,0],[1,1],[1,0],[-1,1]]
+/// Output: 4
+///
+/// Example 4:
+/// Input: points = [[-1000000,-1000000],[1000000,1000000]]
+/// Output: 4000000
+///
+/// Example 5:
+/// Input: points = [[0,0]]
+/// Output: 0
+/// Constraints:
+/// 1. 1 <= points.length <= 1000
+/// 2. -106 <= xi, yi <= 106
+/// 3. All pairs (xi, yi) are distinct.
+/// </summary>
+int LeetCodeGraph::minCostConnectPoints(vector<vector<int>>& points)
+{
+    int n = points.size();
+    priority_queue<pair<int, int>> pq;
+    vector<int> visited(n);
+    visited[0] = 1;
+    for (int i = 1; i < n; i++)
+    {
+        int distance =
+            std::abs(points[0][0] - points[i][0]) +
+            std::abs(points[0][1] - points[i][1]);
+        pair<int, int> edge = { -distance, i };
+        pq.push(edge);
+    }
+    int count = n - 1;
+    int result = 0;
+    while (!pq.empty() && count > 0)
+    {
+        pair<int, int> edge = pq.top();
+        pq.pop();
+        int a = edge.second;
+        if (visited[a] == 1) continue;
+        result -= edge.first;
+        visited[a] = 1;
+        count--;
+        for (int i = 0; i < n; i++)
+        {
+            if (visited[i] == 1) continue;
+            int distance =
+                std::abs(points[a][0] - points[i][0]) +
+                std::abs(points[a][1] - points[i][1]);
+            pair<int, int> edge = { -distance, i };
+            pq.push(edge);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1579. Remove Max Number of Edges to Keep Graph Fully 
+///                  Traversable
+/// </summary>
+int LeetCodeGraph::maxNumEdgesToRemove(vector<vector<int>>& edges, vector<int>& parent, int& count, int id)
+{
+    int result = 0;
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        if (edges[i][0] == id)
+        {
+            int a = edges[i][1] - 1;
+            int b = edges[i][2] - 1;
+            while (parent[a] != a)
+            {
+                parent[a] = parent[parent[a]];
+                a = parent[a];
+            }
+            while (parent[b] != b)
+            {
+                parent[b] = parent[parent[b]];
+                b = parent[b];
+            }
+            if (a == b) result++;
+            else
+            {
+                parent[a] = b;
+                count++;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1575. Count All Possible Routes
+/// 
+/// Hard
+///
+/// You are given an array of distinct positive integers locations where 
+/// locations[i] represents the position of city i. You are also given 
+/// integers start, finish and fuel representing the starting city, 
+/// ending city, and the initial amount of fuel you have, respectively.
+///
+/// At each step, if you are at city i, you can pick any city j such 
+/// that j != i and 0 <= j < locations.length and move to city j. Moving 
+/// from city i to city j reduces the amount of fuel you have by 
+/// |locations[i] - locations[j]|. Please notice that |x| denotes the 
+/// absolute value of x.
+///
+/// Notice that fuel cannot become negative at any point in time, and 
+/// that you are allowed to visit any city more than once (including 
+/// start and finish).
+///
+/// Return the count of all possible routes from start to finish.
+///
+/// Since the answer may be too large, return it modulo 10^9 + 7.
+/// 
+/// Example 1:
+/// Input: locations = [2,3,6,8,4], start = 1, finish = 3, fuel = 5
+/// Output: 4
+/// Explanation: The following are all possible routes, each uses 5 
+/// units of fuel:
+/// 1 -> 3
+/// 1 -> 2 -> 3
+/// 1 -> 4 -> 3
+/// 1 -> 4 -> 2 -> 3
+///
+/// Example 2:
+/// Input: locations = [4,3,1], start = 1, finish = 0, fuel = 6
+/// Output: 5
+/// Explanation: The following are all possible routes:
+/// 1 -> 0, used fuel = 1
+/// 1 -> 2 -> 0, used fuel = 5
+/// 1 -> 2 -> 1 -> 0, used fuel = 5
+/// 1 -> 0 -> 1 -> 0, used fuel = 3
+/// 1 -> 0 -> 1 -> 0 -> 1 -> 0, used fuel = 5
+///
+/// Example 3:
+/// Input: locations = [5,2,1], start = 0, finish = 2, fuel = 3
+/// Output: 0
+/// Explanation: It's impossible to get from 0 to 2 using only 3 units of 
+/// fuel since the shortest route needs 4 units of fuel.
+///
+/// Example 4:
+/// Input: locations = [2,1,5], start = 0, finish = 0, fuel = 3
+/// Output: 2
+/// Explanation: There are two possible routes, 0 and 0 -> 1 -> 0.
+///
+/// Example 5:
+/// Input: locations = [1,2,3], start = 0, finish = 2, fuel = 40
+/// Output: 615088286
+/// Explanation: The total number of possible routes is 2615088300. Taking 
+/// this number modulo 10^9 + 7 gives us 615088286.
+/// 
+/// Constraints:
+/// 1. 2 <= locations.length <= 100
+/// 2. 1 <= locations[i] <= 10^9
+/// 3. All integers in locations are distinct.
+/// 4. 0 <= start, finish < locations.length
+/// 5. 1 <= fuel <= 200
+/// </summary>
+int LeetCodeGraph::countRoutes(vector<int>& locations, int start, int finish, int fuel)
+{
+    int M = 1000000007;
+    int n = locations.size();
+    vector<pair<int, int>> positions(n);
+    for (size_t i = 0; i < locations.size(); i++)
+    {
+        positions[i] = make_pair(locations[i], i);
+    }
+    sort(positions.begin(), positions.end());
+    vector<vector<int>> stops(fuel + 1, vector<int>(n));
+    stops[fuel][start] = 1;
+    int result = 0;
+    for (int i = fuel; i >= 0; i--)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (stops[i][j] == 0) continue;
+            if (j == finish) result = (result + stops[i][j]) % M;
+            int first = lower_bound(positions.begin(), positions.end(), make_pair(locations[j] - i, 0)) - positions.begin();
+            int last = upper_bound(positions.begin(), positions.end(), make_pair(locations[j] + i, n)) - positions.begin();
+            for (int k = first; k < last; k++)
+            {
+                // can not stat at same place
+                if (positions[k].second == j) continue;
+                int new_fuel = (i - abs(positions[k].first - locations[j]));
+                // can not move too far
+                if (abs(positions[k].first - locations[finish]) > new_fuel) continue;
+                stops[new_fuel][positions[k].second] = (stops[new_fuel][positions[k].second] + stops[i][j]) % M;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1579. Remove Max Number of Edges to Keep Graph Fully 
+///                  Traversable
+/// 
+/// Hard
+///
+/// Alice and Bob have an undirected graph of n nodes and 3 types of edges:
+///
+/// Type 1: Can be traversed by Alice only.
+/// Type 2: Can be traversed by Bob only.
+/// Type 3: Can by traversed by both Alice and Bob.
+/// Given an array edges where edges[i] = [typei, ui, vi] represents a 
+/// bidirectional edge of type typei between nodes ui and vi, find the maximum 
+/// number of edges you can remove so that after removing the edges, the graph 
+/// can still be fully traversed by both Alice and Bob. The graph is fully 
+/// traversed by Alice and Bob if starting from any node, they can reach all 
+/// other nodes.
+///
+/// Return the maximum number of edges you can remove, or return -1 if it's 
+/// impossible for the graph to be fully traversed by Alice and Bob.
+///
+/// Example 1:
+/// Input: n = 4, edges = [[3,1,2],[3,2,3],[1,1,3],[1,2,4],[1,1,2],[2,3,4]]
+/// Output: 2
+/// Explanation: If we remove the 2 edges [1,1,2] and [1,1,3]. The graph will 
+/// still be fully traversable by Alice and Bob. Removing any additional edge 
+/// will not make it so. So the maximum number of edges we can remove is 2.
+///
+/// Example 2:
+/// Input: n = 4, edges = [[3,1,2],[3,2,3],[1,1,4],[2,1,4]]
+/// Output: 0
+/// Explanation: Notice that removing any edge will not make the graph fully 
+/// traversable by Alice and Bob.
+///
+/// Example 3:
+/// Input: n = 4, edges = [[3,2,3],[1,1,2],[2,3,4]]
+/// Output: -1
+/// Explanation: In the current graph, Alice cannot reach node 4 from the 
+/// other nodes. Likewise, Bob cannot reach 1. Therefore it's impossible to 
+/// make the graph fully traversable.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// 2. 1 <= edges.length <= min(10^5, 3 * n * (n-1) / 2)
+/// 3. edges[i].length == 3
+/// 4. 1 <= edges[i][0] <= 3
+/// 5. 1 <= edges[i][1] < edges[i][2] <= n
+/// 6. All tuples (typei, ui, vi) are distinct.
+/// </summary>
+int LeetCodeGraph::maxNumEdgesToRemove(int n, vector<vector<int>>& edges)
+{
+    vector<int> parent(n);
+    for (int i = 0; i < n; i++) parent[i] = i;
+    int result = 0;
+    int e3 = 0;
+    result = maxNumEdgesToRemove(edges, parent, e3, 3);
+    vector<int> parent1 = parent;
+    int e1 = 0;
+    result += maxNumEdgesToRemove(edges, parent1, e1, 1);
+    vector<int> parent2 = parent;
+    int e2 = 0;
+    result += maxNumEdgesToRemove(edges, parent2, e2, 2);
+    if (e1 + e3 == n - 1 && e2 + e3 == n - 1) return result;
+    else return -1;
+}
+
 #pragma endregion

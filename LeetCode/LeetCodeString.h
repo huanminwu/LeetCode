@@ -5927,6 +5927,137 @@ public:
     /// 1. 0 <= n < 2^31
     /// </summary>
     string thousandSeparator(int n);
+
+    /// <summary>
+    /// Leet code #1573. Number of Ways to Split a String
+    /// 
+    /// Medium
+    ///
+    /// Given a binary string s (a string consisting only of '0's and '1's), 
+    /// we can split s into 3 non-empty strings s1, s2, s3 (s1+ s2+ s3 = s).
+    /// Return the number of ways s can be split such that the number of 
+    /// characters '1' is the same in s1, s2, and s3.
+    ///
+    /// Since the answer may be too large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: s = "10101"
+    /// Output: 4
+    /// Explanation: There are four ways to split s in 3 parts where 
+    /// each part contain the same number of letters '1'.
+    /// "1|010|1"
+    /// "1|01|01"
+    /// "10|10|1"
+    /// "10|1|01"
+    ///
+    /// Example 2:
+    /// Input: s = "1001"
+    /// Output: 0
+    ///
+    /// Example 3:
+    /// Input: s = "0000"
+    /// Output: 3
+    /// Explanation: There are three ways to split s in 3 parts.
+    /// "0|0|00"
+    /// "0|00|0"
+    /// "00|0|0"
+    ///
+    /// Example 4:
+    /// Input: s = "100100010100110"
+    /// Output: 12
+    /// Constraints:
+    /// 1. 3 <= s.length <= 10^5
+    /// 2. s[i] is '0' or '1'.
+    /// </summary>
+    int numWays(string s);
+
+    /// <summary>
+    /// Leet code #1576. Replace All ?'s to Avoid Consecutive Repeating 
+    ///           Characters
+    /// 
+    /// Easy
+    ///
+    /// Given a string s containing only lower case English letters and 
+    /// the '?' character, convert all the '?' characters into lower case 
+    /// letters such that the final string does not contain any consecutive 
+    /// repeating characters. You cannot modify the non '?' characters.
+    ///
+    /// It is guaranteed that there are no consecutive repeating characters 
+    /// in the given string except for '?'.
+    ///
+    /// Return the final string after all the conversions (possibly zero) 
+    /// have been made. If there is more than one solution, return any of 
+    /// them. It can be shown that an answer is always possible with the 
+    /// given constraints.
+    ///
+    /// Example 1:
+    /// Input: s = "?zs"
+    /// Output: "azs"
+    /// Explanation: There are 25 solutions for this problem. From "azs" 
+    /// to "yzs", all are valid. Only "z" is an invalid modification as 
+    /// the string will consist of consecutive repeating characters in "zzs".
+    ///
+    /// Example 2:
+    /// Input: s = "ubv?w"
+    /// Output: "ubvaw"
+    /// Explanation: There are 24 solutions for this problem. Only "v" and 
+    /// "w" are invalid modifications as the strings will consist of 
+    /// consecutive repeating characters in "ubvvw" and "ubvww".
+    ///
+    /// Example 3:
+    /// Input: s = "j?qg??b"
+    /// Output: "jaqgacb"
+    ///
+    /// Example 4:
+    /// Input: s = "??yw?ipkj?"
+    /// Output: "acywaipkja"
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s contains only lower case English letters and '?'.
+    /// </summary>
+    string modifyString(string s);
+
+    /// <summary>
+    /// Leet code #1578. Minimum Deletion Cost to Avoid Repeating Letters 
+    /// 
+    /// Medium
+    ///
+    /// Given a string s and an array of integers cost where cost[i] is the 
+    /// cost of deleting the ith character in s.
+    ///
+    /// Return the minimum cost of deletions such that there are no two 
+    /// identical letters next to each other.
+    ///
+    /// Notice that you will delete the chosen characters at the same time, 
+    /// in other words, after deleting a character, the costs of deleting 
+    /// other characters will not change.
+    /// 
+    /// Example 1:
+    /// Input: s = "abaac", cost = [1,2,3,4,5]
+    /// Output: 3
+    /// Explanation: Delete the letter "a" with cost 3 to get "abac" (String 
+    /// without two identical letters next to each other).
+    ///
+    /// Example 2:
+    /// Input: s = "abc", cost = [1,2,3]
+    /// Output: 0
+    /// Explanation: You don't need to delete any character because there are 
+    /// no identical letters next to each other.
+    ///
+    /// Example 3:
+    /// Input: s = "aabaa", cost = [1,2,3,4,1]
+    /// Output: 2
+    /// Explanation: Delete the first and the last character, getting the 
+    /// string ("aba").
+    /// 
+    /// Constraints:
+    /// 1. s.length == cost.length
+    /// 2. 1 <= s.length, cost.length <= 10^5
+    /// 3. 1 <= cost[i] <= 10^4
+    /// 4. s contains only lowercase English letters.
+    /// </summary>
+    int minCost(string s, vector<int>& cost);
 #pragma endregion
 };
 

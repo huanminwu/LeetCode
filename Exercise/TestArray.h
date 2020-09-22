@@ -102,9 +102,17 @@ void TestLeetCode1508(void);
 void TestLeetCode1513(void);
 void TestLeetCode1524(void);
 void TestLeetCode1526(void);
+void TestLeetCode1533(void);
 void TestLeetCode1534(void);
 void TestLeetCode1537(void);
+void TestLeetCode1538(void);
 void TestLeetCode1539(void);
 void TestLeetCode1550(void);
+void TestLeetCode1566(void);
+void TestLeetCode1567(void);
+void TestLeetCode1572(void);
+void TestLeetCode1574(void);
+void TestLeetCode1582(void);
+void TestLeetCode1583(void);
 void TestLeetCodeArray(void);
 #endif  // TestArray

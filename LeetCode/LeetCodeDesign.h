@@ -7611,33 +7611,6 @@ public:
     }
 };
 
-class ArrayReader
-{
-private:
-    vector<int> m_array;
-public:
-    /// <summary>
-    /// Constructor, which will lead to the smallest child.
-    /// </summary>
-    ArrayReader(vector<int>& arr)
-    {
-        m_array = arr;
-    }
-
-    /// <summary>
-    /// Query four number.
-    /// </summary>
-    int Query(int a, int b, int c, int d)
-    {
-        vector<int> slot(2);
-        slot[a]++;
-        slot[b]++;
-        slot[c]++;
-        slot[d]++;
-        return abs(slot[0] - slot[1]);
-    }
-};
-
 /// <summary>
 /// Leet code #919. Complete Binary Tree Inserter
 /// 
@@ -8476,6 +8449,5 @@ public:
         return result;
     }
 };
-
 
 #endif // LeetcodeDesign_H

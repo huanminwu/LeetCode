@@ -1942,8 +1942,39 @@ void TestLeetCode1563(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1569(void)
+{
+    Logger::WriteMessage("Test Leet Code 1569");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 2, 1, 3 };
+    int result = leetCode.numOfWays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,4,5,1,2 };
+    result = leetCode.numOfWays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    result = leetCode.numOfWays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,1,2,5,4,6 };
+    result = leetCode.numOfWays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 9,4,2,1,3,6,5,7,8,14,11,10,12,13,16,15,17,18 };
+    result = leetCode.numOfWays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1569();
     TestLeetCode1563();
     TestLeetCode1553();
     TestLeetCode1547();

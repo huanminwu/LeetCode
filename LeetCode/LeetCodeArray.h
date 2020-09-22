@@ -20,6 +20,57 @@
 #include "leetcode.h"
 using namespace std;
 
+class ArrayReader
+{
+private:
+    vector<int> m_array;
+public:
+    /// <summary>
+    /// Constructor, which will lead to the smallest child.
+    /// </summary>
+    ArrayReader(vector<int>& arr)
+    {
+        m_array = arr;
+    }
+
+    /// <summary>
+    /// Query four number.
+    /// </summary>
+    int query(int a, int b, int c, int d)
+    {
+        vector<int> slot(2);
+        slot[m_array[a]]++;
+        slot[m_array[b]]++;
+        slot[m_array[c]]++;
+        slot[m_array[d]]++;
+        return abs(slot[0] - slot[1]);
+    }
+
+    /// <summary>
+    /// compare the sum of subarray.
+    /// </summary>
+    int compareSub(int l, int r, int x, int y)
+    {
+        int sum1 = 0;
+        for (int i = l; i <= r; i++) sum1 += m_array[i];
+
+        int sum2 = 0;
+        for (int i = x; i <= y; i++) sum2 += m_array[i];
+
+        if (sum1 < sum2) return -1;
+        else if (sum1 > sum2) return 1;
+        else return 0;
+    }
+
+    /// <summary>
+    /// Return the length of array.
+    /// </summary>
+    int length(void)
+    {
+        return m_array.size();
+    }
+};
+
 /// <summary>
 /// The class is to implement array related algorithm  
 /// </summary>
@@ -7022,62 +7073,405 @@ public:
     bool threeConsecutiveOdds(vector<int>& arr);
 
     /// <summary>
-    /// Leet code #1562. Find Latest Group of Size M
+    /// Leet code #1538. Guess the Majority in a Hidden Array
     /// 
     /// Medium
     ///
-    /// Given an array arr that represents a permutation of numbers from 1 
-    /// to n. You have a binary string of size n that initially has all 
-    /// its bits set to zero.
-    ///
-    /// At each step i (assuming both the binary string and arr are 1-indexed) 
-    /// from 1 to n, the bit at position arr[i] is set to 1. You are given an 
-    /// integer m and you need to find the latest step at which there exists 
-    /// a group of ones of length m. A group of ones is a contiguous substring 
-    /// of 1s such that it cannot be extended in either direction.
-    ///
-    /// Return the latest step at which there exists a group of ones of length 
-    /// exactly m. If no such group exists, return -1.
+    /// We have an integer array nums, where all the integers in nums are 0 
+    /// or 1. You will not be given direct access to the array, instead, you 
+    /// will have an API ArrayReader which have the following functions:
     /// 
+    /// int query(int a, int b, int c, int d): where 0 <= a < b < c < d < 
+    /// ArrayReader.length(). The function returns the distribution of the 
+    /// value of the 4 elements and returns:
+    /// 4 : if the values of the 4 elements are the same (0 or 1).
+    /// 2 : if three elements have a value equal to 0 and one element has 
+    /// value equal to 1 or vice versa.
+    /// 0 : if two element have a value equal to 0 and two elements have a 
+    /// value equal to 1.
+    /// int length(): Returns the size of the array.
+    /// You are allowed to call query() 2 * n times at most where n is equal 
+    /// to ArrayReader.length().
+    ///
+    /// Return any index of the most frequent value in nums, in case of tie, 
+    /// return -1.
+    /// 
+    /// Follow up: What is the minimum number of calls needed to find the 
+    /// majority element?
+    ///
     /// Example 1:
-    /// Input: arr = [3,5,1,2,4], m = 1
-    /// Output: 4
-    /// Explanation:
-    /// Step 1: "00100", groups: ["1"]
-    /// Step 2: "00101", groups: ["1", "1"]
-    /// Step 3: "10101", groups: ["1", "1", "1"]
-    /// Step 4: "11101", groups: ["111", "1"]
-    /// Step 5: "11111", groups: ["11111"]
-    /// The latest step at which there exists a group of size 1 is step 4.
+    /// Input: nums = [0,0,1,0,1,1,1,1]
+    /// Output: 5
+    /// Explanation: The following calls to the API
+    /// reader.length() // returns 8 because there are 8 elements in the hidden
+    ///                 // array.
+    /// reader.query(0,1,2,3) // returns 2 this is a query that compares the 
+    ///                       // elements nums[0], nums[1], nums[2], nums[3]
+    ///                       // Three elements have a value equal to 0 and one 
+    ///                       // element has value equal to 1 or viceversa.
+    /// reader.query(4,5,6,7) // returns 4 because nums[4], nums[5], nums[6], 
+    ///                       // nums[7] have the same value.
+    ///                       // we can infer that the most frequent value is 
+    ///                       // found in the last 4 elements.
+    ///                       // Index 2, 4, 6, 7 is also a correct answer.
     ///
     /// Example 2:
-    /// Input: arr = [3,1,5,4,2], m = 2
-    /// Output: -1
-    /// Explanation:
-    /// Step 1: "00100", groups: ["1"]
-    /// Step 2: "10100", groups: ["1", "1"]
-    /// Step 3: "10101", groups: ["1", "1", "1"]
-    /// Step 4: "10111", groups: ["1", "111"]
-    /// Step 5: "11111", groups: ["11111"]
-    /// No group of size 2 exists during any step.
+    /// Input: nums = [0,0,1,1,0]
+    /// Output: 0
     ///
     /// Example 3:
-    /// Input: arr = [1], m = 1
-    /// Output: 1
-    /// Example 4:
-    /// Input: arr = [2,1], m = 2
+    /// Input: nums = [1,0,1,0,1,0,1,0]
+    /// Output: -1
+    /// Constraints:
+    /// 1. 5 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 1
+    /// </summary>
+    int guessMajority(ArrayReader& reader);
+
+    /// <summary>
+    /// Leet code #1533. Find the Index of the Large Integer
+    /// 
+    /// Medium
+    ///
+    /// We have an integer array arr, where all the integers in arr are equal 
+    /// except for one integer which is larger than the rest of the integers. 
+    /// You will not be given direct access to the array, instead, you will 
+    /// have an API ArrayReader which have the following functions:
+    /// int compareSub(int l, int r, int x, int y): where 0 <= l, r, x, y < 
+    /// ArrayReader.length(), l <= r and x <= y. The function compares the 
+    /// sum of sub-array arr[l..r] with the sum of the sub-array arr[x..y] 
+    /// and returns:
+    /// 1 if arr[l]+arr[l+1]+...+arr[r] > arr[x]+arr[x+1]+...+arr[y].
+    /// 0 if arr[l]+arr[l+1]+...+arr[r] == arr[x]+arr[x+1]+...+arr[y].
+    /// -1 if arr[l]+arr[l+1]+...+arr[r] < arr[x]+arr[x+1]+...+arr[y].
+    /// int length(): Returns the size of the array.
+    /// You are allowed to call compareSub() 20 times at most. You can 
+    /// assume both functions work in O(1) time.
+    ///
+    /// Return the index of the array arr which has the largest integer.
+    /// Follow-up:
+    /// What if there are two numbers in arr that are bigger than all other 
+    /// numbers?
+    /// What if there is one number that is bigger than other numbers and 
+    /// one number that is smaller than other numbers?
+    /// 
+    /// Example 1: 
+    /// Input: arr = [7,7,7,7,10,7,7,7]
+    /// Output: 4
+    /// Explanation: The following calls to the API
+    /// reader.compareSub(0, 0, 1, 1) // returns 0 this is a query comparing 
+    /// the sub-array (0, 0) with the sub array (1, 1), (i.e. compares arr[0] 
+    /// with arr[1]).
+    /// Thus we know that arr[0] and arr[1] doesn't contain the largest 
+    /// element.
+    /// reader.compareSub(2, 2, 3, 3) // returns 0.
+    /// reader.compareSub(4, 4, 5, 5) // returns 1.
+    /// Notice that we made only 3 calls, so the answer is valid.
+    ///
+    /// Example 2:
+    /// Input: nums = [6,6,12]
     /// Output: 2
+    /// 
+    /// Constraints:
+    /// 1. 2 <= arr.length <= 5 * 10^5
+    /// 2. 1 <= arr[i] <= 100
+    /// 3. All elements of arr are equal except for one element which is 
+    /// larger than all other elements.
+    /// </summary>
+    int getIndex(ArrayReader& reader);
+
+    /// <summary>
+    /// Leet code #1566. Detect Pattern of Length M Repeated K or More Times
+    /// 
+    /// Easy
+    ///
+    /// Given an array of positive integers arr,  find a pattern of length m 
+    /// that is repeated k or more times.
+    ///
+    /// A pattern is a subarray (consecutive sub-sequence) that consists of 
+    /// one or more values, repeated multiple times consecutively without 
+    /// overlapping. A pattern is defined by its length and the number of 
+    /// repetitions.
+    ///
+    /// Return true if there exists a pattern of length m that is repeated 
+    /// k or more times, otherwise return false.
+    /// 
+    /// Example 1:
+    /// Input: arr = [1,2,4,4,4,4], m = 1, k = 3
+    /// Output: true
+    /// Explanation: The pattern (4) of length 1 is repeated 4 consecutive 
+    /// times. Notice that pattern can be repeated k or more times but not 
+    /// less.
+    ///
+    /// Example 2:
+    /// Input: arr = [1,2,1,2,1,1,1,3], m = 2, k = 2
+    /// Output: true
+    /// Explanation: The pattern (1,2) of length 2 is repeated 2 consecutive 
+    /// times. Another valid pattern (2,1) is also repeated 2 times.
+    ///
+    /// Example 3:
+    /// Input: arr = [1,2,1,2,1,3], m = 2, k = 3
+    /// Output: false
+    /// Explanation: The pattern (1,2) is of length 2 but is repeated only 2 
+    /// times. There is no pattern of length 2 that is repeated 3 or more 
+    /// times.
+    ///
+    /// Example 4:
+    /// Input: arr = [1,2,3,1,2], m = 2, k = 2
+    /// Output: false
+    /// Explanation: Notice that the pattern (1,2) exists twice but not 
+    /// consecutively, so it doesn't count.
+    ///
+    /// Example 5:
+    /// Input: arr = [2,2,2,2], m = 2, k = 3
+    /// Output: false
+    /// Explanation: The only pattern of length 2 is (2,2) however it's 
+    /// repeated only twice. Notice that we do not count overlapping 
+    /// repetitions.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= arr.length <= 100
+    /// 2. 1 <= arr[i] <= 100
+    /// 3. 1 <= m <= 100
+    /// 4. 2 <= k <= 100
+    /// </summary>
+    bool containsPattern(vector<int>& arr, int m, int k);
+
+    /// <summary>
+    /// Leet code #1567. Maximum Length of Subarray With Positive Product
+    /// 
+    /// Medium
+    ///
+    /// Given an array of integers nums, find the maximum length of a subarray 
+    /// where the product of all its elements is positive.
+    ///
+    /// A subarray of an array is a consecutive sequence of zero or more 
+    /// values taken out of that array.
+    ///
+    /// Return the maximum length of a subarray with positive product.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,-2,-3,4]
+    /// Output: 4
+    /// Explanation: The array nums already has a positive product of 24.
+    ///
+    /// Example 2:
+    /// Input: nums = [0,1,-2,-3,-4]
+    /// Output: 3
+    /// Explanation: The longest subarray with positive product is [1,-2,-3] 
+    /// which has a product of 6.
+    /// Notice that we cannot include 0 in the subarray since that'll make 
+    /// the product 0 which is not positive.
+    ///
+    /// Example 3:
+    /// Input: nums = [-1,-2,-3,0,1]
+    /// Output: 2
+    /// Explanation: The longest subarray with positive product is [-1,-2] 
+    /// or [-2,-3].
+    ///
+    /// Example 4:
+    /// Input: nums = [-1,2]
+    /// Output: 1
+    ///
+    /// Example 5:
+    /// Input: nums = [1,2,3,5,-6,4,0,10]
+    /// Output: 4
     ///
     /// Constraints:
-    /// 1. n == arr.length
-    /// 2. 1 <= n <= 10^5
-    /// 3. 1 <= arr[i] <= n
-    /// 4. All integers in arr are distinct.
-    /// 5. 1 <= m <= arr.length
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^9 <= nums[i] <= 10^9
     /// </summary>
-    int findLatestStep(vector<int>& arr, int m);
+    int getMaxLen(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #1572. Matrix Diagonal Sum
+    /// 
+    /// Easy
+    ///
+    /// Given a square matrix mat, return the sum of the matrix diagonals. 
+    /// Only include the sum of all the elements on the primary diagonal and 
+    /// all the elements on the secondary diagonal that are not part of the 
+    /// primary diagonal.
+    ///
+    /// Example 1:
+    /// Input: mat = [[1,2,3],
+    ///          [4,5,6],
+    ///          [7,8,9]]
+    /// Output: 25
+    /// Explanation: Diagonals sum: 1 + 5 + 9 + 3 + 7 = 25
+    /// Notice that element mat[1][1] = 5 is counted only once.
+    ///
+    /// Example 2:
+    /// Input: mat = [[1,1,1,1],
+    ///          [1,1,1,1],
+    ///          [1,1,1,1],
+    ///          [1,1,1,1]]
+    /// Output: 8
+    ///
+    /// Example 3:
+    /// Input: mat = [[5]]
+    /// Output: 5
+    ///
+    /// Constraints:
+    /// 1. n == mat.length == mat[i].length
+    /// 2. 1 <= n <= 100
+    /// 3. 1 <= mat[i][j] <= 100
+    /// </summary>
+    int diagonalSum(vector<vector<int>>& mat);
+
+    /// <summary>
+    /// Leet code #1574. Shortest Subarray to be Removed to Make Array Sorted 
+    /// 
+    /// Medium
+    ///
+    /// Given an integer array arr, remove a subarray (can be empty) from arr 
+    /// such that the remaining elements in arr are non-decreasing.
+    ///
+    /// A subarray is a contiguous subsequence of the array.
+    /// Return the length of the shortest subarray to remove.
+    ///
+    /// Example 1:
+    /// Input: arr = [1,2,3,10,4,2,3,5]
+    /// Output: 3
+    /// Explanation: The shortest subarray we can remove is [10,4,2] of 
+    /// length 3. The remaining elements after that will be [1,2,3,3,5] which 
+    /// are sorted.
+    /// Another correct solution is to remove the subarray [3,10,4].
+    ///
+    /// Example 2:
+    /// Input: arr = [5,4,3,2,1]
+    /// Output: 4
+    /// Explanation: Since the array is strictly decreasing, we can only keep 
+    /// a single element. Therefore we need to remove a subarray of length 4, 
+    /// either [5,4,3,2] or [4,3,2,1].
+    ///
+    /// Example 3:
+    /// Input: arr = [1,2,3]
+    /// Output: 0
+    /// Explanation: The array is already non-decreasing. We do not need to 
+    /// remove any elements.
+    ///
+    /// Example 4:
+    /// Input: arr = [1]
+    /// Output: 0
+    ///
+    /// Constraints:
+    /// 1. 1 <= arr.length <= 10^5
+    /// 2. 0 <= arr[i] <= 10^9
+    /// </summary>
+    int findLengthOfShortestSubarray(vector<int>& arr);
+
+    /// <summary>
+    /// Leet code #1582. Special Positions in a Binary Matrix 
+    /// 
+    /// Easy
+    ///
+    /// Given a rows x cols matrix mat, where mat[i][j] is either 0 or 1, 
+    /// return the number of special positions in mat.
+    ///
+    /// A position (i,j) is called special if mat[i][j] == 1 and all other 
+    /// elements in row i and column j are 0 (rows and columns are 0-indexed).
+    ///
+    /// Example 1:
+    /// Input: mat = [[1,0,0],
+    ///          [0,0,1],
+    ///          [1,0,0]]
+    /// Output: 1
+    /// Explanation: (1,2) is a special position because mat[1][2] == 1 and 
+    /// all other elements in row 1 and column 2 are 0.
+    ///
+    /// Example 2:
+    /// Input: mat = [[1,0,0],
+    ///          [0,1,0],
+    ///          [0,0,1]]
+    /// Output: 3
+    /// Explanation: (0,0), (1,1) and (2,2) are special positions. 
+    ///
+    /// Example 3:
+    /// Input: mat = [[0,0,0,1],
+    ///          [1,0,0,0],
+    ///          [0,1,1,0],
+    ///          [0,0,0,0]]
+    /// Output: 2
+    ///
+    /// Example 4:
+    /// Input: mat = [[0,0,0,0,0],
+    ///          [1,0,0,0,0],
+    ///          [0,1,0,0,0],
+    ///          [0,0,1,0,0],
+    ///          [0,0,0,1,1]]
+    /// Output: 3
+    /// Constraints:
+    /// 1. rows == mat.length
+    /// 2. cols == mat[i].length
+    /// 3. 1 <= rows, cols <= 100
+    /// 4. mat[i][j] is 0 or 1.
+    /// </summary>
+    int numSpecial(vector<vector<int>>& mat);
+
+    /// <summary>
+    /// Leet code #1583. Count Unhappy Friends
+    /// 
+    /// Medium
+    ///
+    /// You are given a list of preferences for n friends, where n is always 
+    /// even.
+    ///
+    /// For each person i, preferences[i] contains a list of friends sorted 
+    /// in the order of preference. In other words, a friend earlier in the 
+    /// list is more preferred than a friend later in the list. Friends in 
+    /// each list are denoted by integers from 0 to n-1.
+    ///
+    /// All the friends are divided into pairs. The pairings are given in a 
+    /// list pairs, where pairs[i] = [xi, yi] denotes xi is paired with yi 
+    /// and yi is paired with xi.
+    ///
+    /// However, this pairing may cause some of the friends to be unhappy. 
+    /// A friend x is unhappy if x is paired with y and there exists a 
+    /// friend u who is paired with v but:
+    ///
+    /// x prefers u over y, and
+    /// u prefers x over v.
+    /// Return the number of unhappy friends.
+    /// 
+    /// Example 1:
+    /// Input: n = 4, preferences = [[1, 2, 3], [3, 2, 0], [3, 1, 0], 
+    /// [1, 2, 0]], pairs = [[0, 1], [2, 3]]
+    /// Output: 2
+    /// Explanation:
+    /// Friend 1 is unhappy because:
+    /// - 1 is paired with 0 but prefers 3 over 0, and
+    /// - 3 prefers 1 over 2.
+    /// Friend 3 is unhappy because:
+    /// - 3 is paired with 2 but prefers 1 over 2, and
+    /// - 1 prefers 3 over 0.
+    /// Friends 0 and 2 are happy.
+    ///
+    /// Example 2:
+    /// Input: n = 2, preferences = [[1], [0]], pairs = [[1, 0]]
+    /// Output: 0
+    /// Explanation: Both friends 0 and 1 are happy.
+    ///
+    /// Example 3:
+    /// Input: n = 4, preferences = [[1, 3, 2], [2, 3, 0], [1, 3, 0], 
+    /// [0, 2, 1]], pairs = [[1, 3], [0, 2]]
+    /// Output: 4
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 500
+    /// 2. n is even.
+    /// 3. preferences.length == n
+    /// 4. preferences[i].length == n - 1
+    /// 5. 0 <= preferences[i][j] <= n - 1
+    /// 6. preferences[i] does not contain i.
+    /// 7. All values in preferences[i] are unique.
+    /// 8. pairs.length == n/2
+    /// 9. pairs[i].length == 2
+    /// 10. xi != yi
+    /// 11. 0 <= xi, yi <= n - 1
+    /// 12. Each person is contained in exactly one pair.
+    /// </summary>
+    int unhappyFriends(int n, vector<vector<int>>& preferences, vector<vector<int>>& pairs);
 #pragma endregion
-
-
 };
 #endif  // LeetCodeArray_H
