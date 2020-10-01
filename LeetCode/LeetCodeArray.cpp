@@ -12865,4 +12865,138 @@ int LeetCodeArray::unhappyFriends(int n, vector<vector<int>>& preferences, vecto
     return result;
 }
 
+/// <summary>
+/// Leet code #1588. Sum of All Odd Length Subarrays 
+/// 
+/// Easy
+///
+/// Given an array of positive integers arr, calculate the sum of all 
+/// possible odd-length subarrays.
+///
+/// A subarray is a contiguous subsequence of the array.
+/// Return the sum of all odd-length subarrays of arr.
+///
+/// Example 1:
+/// Input: arr = [1,4,2,5,3]
+/// Output: 58
+/// Explanation: The odd-length subarrays of arr and their sums are:
+/// [1] = 1
+/// [4] = 4
+/// [2] = 2
+/// [5] = 5
+/// [3] = 3
+/// [1,4,2] = 7
+/// [4,2,5] = 11
+/// [2,5,3] = 10
+/// [1,4,2,5,3] = 15
+/// If we add all these together we get 1 + 4 + 2 + 5 + 3 + 7 + 11 + 
+/// 10 + 15 = 58
+/// 
+/// Example 2:
+/// Input: arr = [1,2]
+/// Output: 3
+/// Explanation: There are only 2 subarrays of odd length, [1] 
+/// and [2]. Their sum is 3.
+///
+/// Example 3:
+/// Input: arr = [10,11,12]
+/// Output: 66
+/// Constraints:
+/// 1. 1 <= arr.length <= 100
+/// 2. 1 <= arr[i] <= 1000
+/// </summary>
+int LeetCodeArray::sumOddLengthSubarrays(vector<int>& arr)
+{
+    // counting for ending at current position.
+    pair<int, int> odd = { 0, 0 }, even = { 0, 0 };
+    int result = 0;
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        pair<int, int> next_odd, next_even;
+        next_odd.first = even.first + 1;
+        next_odd.second = even.second + (even.first + 1) * arr[i];
+        next_even.first = odd.first;
+        next_even.second = odd.second + odd.first * arr[i];
+        odd = next_odd;
+        even = next_even;
+
+        result = result + odd.second;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1590. Make Sum Divisible by P
+/// 
+/// Medium
+///
+/// Given an array of positive integers nums, remove the smallest subarray 
+/// (possibly empty) such that the sum of the remaining elements is 
+/// divisible by p. It is not allowed to remove the whole array.
+///
+/// Return the length of the smallest subarray that you need to remove, 
+/// or -1 if it's impossible.
+///
+/// A subarray is defined as a contiguous block of elements in the array.
+/// 
+/// Example 1:
+/// Input: nums = [3,1,4,2], p = 6
+/// Output: 1
+/// Explanation: The sum of the elements in nums is 10, which is not 
+/// divisible by 6. We can remove the subarray [4], and the sum of the 
+/// remaining elements is 6, which is divisible by 6.
+///
+/// Example 2:
+/// Input: nums = [6,3,5,2], p = 9
+/// Output: 2
+/// Explanation: We cannot remove a single element to get a sum divisible 
+/// by 9. The best way is to remove the subarray [5,2], leaving us with 
+/// [6,3] with sum 9.
+///
+/// Example 3:
+/// Input: nums = [1,2,3], p = 3
+/// Output: 0
+/// Explanation: Here the sum is 6. which is already divisible by 3. Thus 
+/// we do not need to remove anything.
+///
+/// Example 4:
+/// Input: nums = [1,2,3], p = 7
+/// Output: -1
+/// Explanation: There is no way to remove a subarray in order to get a 
+/// sum divisible by 7.
+///
+/// Example 5:
+/// Input: nums = [1000000000,1000000000,1000000000], p = 3
+/// Output: 0
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= p <= 10^9
+/// </summary>
+int LeetCodeArray::minSubarray(vector<int>& nums, int p)
+{
+    unordered_map<int, int> positions;
+    int sum = 0;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        sum = (sum + nums[i]) % p;
+    }
+    if (sum == 0) return result;
+    result = INT_MAX;
+    int curr = 0;
+    positions[0] = -1;
+    for (int i = 0; i < (int)nums.size(); i++)
+    {
+        curr = (curr + nums[i]) % p;
+        int target = (curr + p - sum) % p;
+        if (positions.count(target) > 0)
+        {
+            result = min(result, i - positions[target]);
+        }
+        positions[curr] = i;
+    }
+    return (result < (int) nums.size()) ? result : -1;
+}
 #pragma endregion

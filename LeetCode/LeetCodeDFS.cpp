@@ -5392,6 +5392,171 @@ int LeetCodeDFS::connectTwoGroups(vector<vector<int>>& cost)
     return connectTwoGroups(cost, 0, cache, 0, min_s1, min_s2);
 }
 
+/// <summary>
+/// Leet code #1593. Split a String Into the Max Number of Unique 
+///                  Substrings
+/// </summary>
+int LeetCodeDFS::maxUniqueSplit(string& s, vector<int>& dels, unordered_set<string>& set)
+{
+    int start = 0;
+    if (!dels.empty()) start = dels.back() + 1;
+    if (start == s.size()) return 0;
+    int result = -1;
+    for (size_t i = start; i < s.size(); i++)
+    {
+        string sub_str = s.substr(start, i - start + 1);
+        if (set.count(sub_str) == 0)
+        {
+            set.insert(sub_str);
+            dels.push_back(i);
+            int next = maxUniqueSplit(s, dels, set);
+            if (next >= 0)
+            {
+                result = max(result, 1 + next);
+            }
+            set.erase(sub_str);
+            dels.pop_back();
+        }
+        if ((int)s.size() - 1 - (int)i < result) break;
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet code #1593. Split a String Into the Max Number of Unique 
+///                  Substrings
+/// 
+/// Medium
+///
+/// Given a string s, return the maximum number of unique 
+/// substrings that the given string can be split into.
+///
+/// You can split string s into any list of non-empty substrings, 
+/// where the concatenation of the substrings forms the original string. 
+/// However, you must split the substrings such that all of them are 
+/// unique.
+///
+/// A substring is a contiguous sequence of characters within a string.
+/// 
+/// Example 1:
+/// Input: s = "ababccc"
+/// Output: 5
+/// Explanation: One way to split maximally is ['a', 'b', 'ab', 'c', 'cc']. 
+/// Splitting like ['a', 'b', 'a', 'b', 'c', 'cc'] is not valid as you 
+/// have 'a' and 'b' multiple times.
+///
+/// Example 2:
+/// Input: s = "aba"
+/// Output: 2
+/// Explanation: One way to split maximally is ['a', 'ba'].
+///
+/// Example 3:
+/// Input: s = "aa"
+/// Output: 1
+/// Explanation: It is impossible to split the string any further.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 16
+/// 2. s contains only lower case English letters.
+/// </summary>
+int LeetCodeDFS::maxUniqueSplit(string s)
+{
+    vector<int> dels;
+    unordered_set<string> set;
+    return maxUniqueSplit(s, dels, set);
+}
+
+/// <summary>
+/// Leet code #1601. Maximum Number of Achievable Transfer Requests
+/// 
+/// Hard
+///
+/// We have n buildings numbered from 0 to n - 1. Each building has a 
+/// number of employees. It's transfer season, and some employees want 
+/// to change the building they reside in.
+///
+/// You are given an array requests where requests[i] = [from[i], to[i]] 
+/// represents an employee's request to transfer from building from[i] 
+/// to building to[i].
+///
+/// All buildings are full, so a list of requests is achievable only if 
+/// for each building, the net change in employee transfers is zero. 
+/// This means the number of employees leaving is equal to the number 
+/// of employees moving in. For example if n = 3 and two employees are 
+/// leaving building 0, one is leaving building 1, and one is leaving 
+/// building 2, there should be two employees moving to building 0, one 
+/// employee moving to building 1, and one employee moving to building 2.
+///
+/// Return the maximum number of achievable requests.
+///
+/// Example 1:
+/// Input: n = 5, requests = [[0,1],[1,0],[0,1],[1,2],[2,0],[3,4]]
+/// Output: 5
+/// Explantion: Let's see the requests:
+/// From building 0 we have employees x and y and both want to move to 
+/// building 1.
+/// From building 1 we have employees a and b and they want to move to 
+/// buildings 2 and 0 respectively.
+/// From building 2 we have employee z and they want to move to building 0.
+/// From building 3 we have employee c and they want to move to building 4.
+/// From building 4 we don't have any requests.
+/// We can achieve the requests of users x and b by swapping their places.
+/// We can achieve the requests of users y, a and z by swapping the places 
+/// in the 3 buildings.
+///
+/// Example 2:
+/// Input: n = 3, requests = [[0,0],[1,2],[2,1]]
+/// Output: 3
+/// Explantion: Let's see the requests:
+/// From building 0 we have employee x and they want to stay in the same 
+/// building 0.
+/// From building 1 we have employee y and they want to move to building 2.
+/// From building 2 we have employee z and they want to move to building 1.
+/// We can achieve all the requests. 
+///
+/// Example 3:
+/// Input: n = 4, requests = [[0,3],[3,1],[1,2],[2,0]]
+/// Output: 4
+/// Constraints:
+/// 1. 1 <= n <= 20
+/// 2. 1 <= requests.length <= 16
+/// 3. requests[i].length == 2
+/// 4. 0 <= from[i], to[i] < n
+/// </summary>
+int LeetCodeDFS::maximumRequests(int n, vector<vector<int>>& requests)
+{
+    int num = 1 << requests.size();
+    int result = 0;
+    for (int i = 0; i < num; i++)
+    {
+        vector<int> dp(n);
+        int count = 0;
+        int bits = i;
+        for (size_t j = 0; j < requests.size(); j++)
+        {
+            if (bits == 0) break;
+            if (bits % 2 == 1)
+            {
+                dp[requests[j][0]]--;
+                dp[requests[j][1]]++;
+                count++;
+            }
+            bits /= 2;
+        }
+        bool b_match = true;
+        for (int j = 0; j < n; j++)
+        {
+            if (dp[j] != 0)
+            {
+                b_match = false;
+                break;
+            }
+        }
+        if (b_match) result = max(result, count);
+    }
+    return result;
+}
 #pragma endregion
 
 

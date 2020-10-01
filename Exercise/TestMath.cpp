@@ -3230,8 +3230,50 @@ void TestLeetCode1561(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1599(void)
+{
+    Logger::WriteMessage("Test Leet Code 1599");
+    LeetCodeMath leetCode;
+    vector<int> customers = { 8,3 };
+    int boardingCost = 5;
+    int runningCost = 6;
+    int result = leetCode.minOperationsMaxProfit(customers, boardingCost, runningCost);
+    Logger::WriteMessage(customers);
+    Logger::WriteMessage("boardingCost = " + to_string(boardingCost) + 
+        "; runningCost = " + to_string(runningCost) + 
+        "; result = " + to_string(result));
+
+    customers = { 10,9,6 };
+    boardingCost = 6;
+    runningCost = 4;
+    result = leetCode.minOperationsMaxProfit(customers, boardingCost, runningCost);
+    Logger::WriteMessage(customers);
+    Logger::WriteMessage("boardingCost = " + to_string(boardingCost) +
+        "; runningCost = " + to_string(runningCost) +
+        "; result = " + to_string(result));
+
+    customers = { 3,4,0,5,1 };
+    boardingCost = 1;
+    runningCost = 92;
+    result = leetCode.minOperationsMaxProfit(customers, boardingCost, runningCost);
+    Logger::WriteMessage(customers);
+    Logger::WriteMessage("boardingCost = " + to_string(boardingCost) +
+        "; runningCost = " + to_string(runningCost) +
+        "; result = " + to_string(result));
+
+    customers = { 10,10,6,4,7 };
+    boardingCost = 3;
+    runningCost = 8;
+    result = leetCode.minOperationsMaxProfit(customers, boardingCost, runningCost);
+    Logger::WriteMessage(customers);
+    Logger::WriteMessage("boardingCost = " + to_string(boardingCost) +
+        "; runningCost = " + to_string(runningCost) +
+        "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1599();
     TestLeetCode1561();
     TestLeetCode1560();
     TestLeetCode1558();

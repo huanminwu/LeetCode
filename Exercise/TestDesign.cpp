@@ -3014,8 +3014,68 @@ void TestLeetCode1500(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1600(void)
+{
+    Logger::WriteMessage("Test Leet Code 1600");
+    vector<string> commands =
+    {
+       "ThroneInheritance", "birth", "birth", "birth", "birth", "birth", "birth",
+       "getInheritanceOrder", "death", "getInheritanceOrder"
+    };
+    vector<vector<string>> parameters =
+    {
+        {"king"}, {"king", "andy"}, {"king", "bob"},
+        {"king", "catherine"}, {"andy", "matthew"},
+        {"bob", "alex"}, {"bob", "asha"}, {"null"},
+        {"bob"},{"null"}
+    };
+
+    vector<string> result;
+    ThroneInheritance* throneInheritance = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "ThroneInheritance")
+        {
+            throneInheritance = new ThroneInheritance(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "birth")
+        {
+            throneInheritance->birth(parameters[i][0], parameters[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "death")
+        {
+            throneInheritance->death(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "getInheritanceOrder")
+        {
+            vector<string> people = throneInheritance->getInheritanceOrder();
+            string ret;
+            ret.push_back('[');
+            for (size_t i = 0; i < people.size(); i++)
+            {
+                if (i > 0) ret.push_back(',');
+                ret.append(people[i]);
+            }
+            ret.push_back(']');
+            result.push_back(ret);
+        }
+    }
+    delete throneInheritance;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+}
+
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1600();
     TestLeetCode1500();
     TestLeetCode1483();
     TestLeetCode1476();

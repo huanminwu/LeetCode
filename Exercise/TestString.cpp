@@ -3111,6 +3111,7 @@ void TestLeetCode804(void)
 void TestLeetCode678(void)
 {
     LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 678");
     string s = "()";
     bool isValid = leetCode.checkValidString(s);
     Logger::WriteMessage("s = " + s + "; is valid = " + (string)(isValid ? "true" : "false"));
@@ -3131,6 +3132,7 @@ void TestLeetCode678(void)
 void TestLeetCode1507(void)
 {
     LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 1507");
     string date = "20th Oct 2052";
     string result = leetCode.reformatDate(date);
     Logger::WriteMessage("date = " + date + "; result = " + result);
@@ -3146,6 +3148,7 @@ void TestLeetCode1507(void)
 
 void TestLeetCode1531(void)
 {
+    Logger::WriteMessage("Test Leet Code 1531");
     LeetCodeString leetCode;
     string s = "aaabcccd";
     int k = 2;
@@ -3165,6 +3168,7 @@ void TestLeetCode1531(void)
 
 void TestLeetCode1528(void)
 {
+    Logger::WriteMessage("Test Leet Code 1528");
     LeetCodeString leetCode;
     string s = "codeleet";
     vector<int> indices = { 4, 5, 6, 7, 0, 2, 1, 3 };
@@ -3199,6 +3203,7 @@ void TestLeetCode1528(void)
 
 void TestLeetCode1525(void)
 {
+    Logger::WriteMessage("Test Leet Code 1525");
     LeetCodeString leetCode;
     string s = "aacaba";
     int result = leetCode.numSplits(s);
@@ -3219,6 +3224,7 @@ void TestLeetCode1525(void)
 
 void TestLeetCode1540(void)
 {
+    Logger::WriteMessage("Test Leet Code 1540");
     LeetCodeString leetCode;
     string  s = "input";
     string t = "ouput";
@@ -3241,6 +3247,7 @@ void TestLeetCode1540(void)
 
 void TestLeetCode1541(void)
 {
+    Logger::WriteMessage("Test Leet Code 1541");
     LeetCodeString leetCode;
     string s = "(()))";
     int result = leetCode.minInsertions(s);
@@ -3265,6 +3272,7 @@ void TestLeetCode1541(void)
 
 void TestLeetCode1542(void)
 {
+    Logger::WriteMessage("Test Leet Code 1542");
     LeetCodeString leetCode;
     string s = "3242415";
     int result = leetCode.longestAwesome(s);
@@ -3285,6 +3293,7 @@ void TestLeetCode1542(void)
 
 void TestLeetCode1544(void)
 {
+    Logger::WriteMessage("Test Leet Code 1544");
     LeetCodeString leetCode;
     string s = "leEeetcode";
     string result = leetCode.makeGood(s);
@@ -3301,6 +3310,7 @@ void TestLeetCode1544(void)
 
 void TestLeetCode1554(void)
 {
+    Logger::WriteMessage("Test Leet Code 1554");
     LeetCodeString leetCode;
     vector<string> dict = { "abcd", "acbd", "aacd" };
     bool result = leetCode.differByOne(dict);
@@ -3320,6 +3330,7 @@ void TestLeetCode1554(void)
 
 void TestLeetCode1556(void)
 {
+    Logger::WriteMessage("Test Leet Code 1556");
     LeetCodeString leetCode;
     int n = 987;
     string result = leetCode.thousandSeparator(n);
@@ -3340,6 +3351,7 @@ void TestLeetCode1556(void)
 
 void TestLeetCode1573(void)
 {
+    Logger::WriteMessage("Test Leet Code 1573");
     LeetCodeString leetCode;
     string s = "10101";
     int result = leetCode.numWays(s);
@@ -3360,6 +3372,7 @@ void TestLeetCode1573(void)
 
 void TestLeetCode1576(void)
 {
+    Logger::WriteMessage("Test Leet Code 1576");
     LeetCodeString leetCode;
     string s = "?zs";
     string result = leetCode.modifyString(s);
@@ -3380,6 +3393,7 @@ void TestLeetCode1576(void)
 
 void TestLeetCode1578(void)
 {
+    Logger::WriteMessage("Test Leet Code 1578");
     LeetCodeString leetCode;
     string s = "abaac";
     vector<int> cost = { 1, 2, 3, 4, 5 };
@@ -3400,8 +3414,55 @@ void TestLeetCode1578(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode1592(void)
+{
+    Logger::WriteMessage("Test Leet Code 1592");
+    LeetCodeString leetCode;
+    string text = "  this   is  a sentence ";
+    string result = leetCode.reorderSpaces(text);
+    Logger::WriteMessage("text = " + text + "; result = " + result);
+
+    text = " practice   makes   perfect";
+    result = leetCode.reorderSpaces(text);
+    Logger::WriteMessage("text = " + text + "; result = " + result);
+
+    text = "hello   world";
+    result = leetCode.reorderSpaces(text);
+    Logger::WriteMessage("text = " + text + "; result = " + result);
+
+    text = "  walks  udp package   into  bar a";
+    result = leetCode.reorderSpaces(text);
+    Logger::WriteMessage("text = " + text + "; result = " + result);
+
+    text = "a ";
+    result = leetCode.reorderSpaces(text);
+    Logger::WriteMessage("text = " + text + "; result = " + result);
+}
+
+void TestLeetCode1598(void)
+{
+    Logger::WriteMessage("Test Leet Code 1598");
+    LeetCodeString leetCode;
+    vector<string> logs = { "d1/","d2/","../","d21/","./" };
+    int result = leetCode.minOperations(logs);
+    Logger::WriteMessage(logs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    logs = { "d1/", "d2/", "./", "d3/", "../", "d31/" };
+    result = leetCode.minOperations(logs);
+    Logger::WriteMessage(logs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    logs = { "d1/","../","../","../" };
+    result = leetCode.minOperations(logs);
+    Logger::WriteMessage(logs);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1598();
+    TestLeetCode1592();
     TestLeetCode1578();
     TestLeetCode1576();
     TestLeetCode1573();

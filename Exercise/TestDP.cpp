@@ -1972,8 +1972,54 @@ void TestLeetCode1569(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1594(void)
+{
+    Logger::WriteMessage("Test Leet Code 1594");
+    LeetCodeDP leetCode;
+    vector<vector<int>> grid =
+    {
+        {-1,-2,-3},
+        {-2,-3,-3},
+        {-3,-3,-2}
+    };
+    int result = leetCode.maxProductPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {1,-2,1},
+        {1,-2,1},
+        {3,-4,1}
+    };
+    result = leetCode.maxProductPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {1, 3},
+        {0,-4}
+    };
+    result = leetCode.maxProductPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+
+    grid =
+    {
+        {1, 4, 4,0},
+        {-2, 0,0,1},
+        {1,-1,1,1}
+    };
+    result = leetCode.maxProductPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1594();
     TestLeetCode1569();
     TestLeetCode1563();
     TestLeetCode1553();

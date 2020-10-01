@@ -4489,8 +4489,71 @@ void TestLeetCode1583(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1588(void)
+{
+    Logger::WriteMessage("Test Leet Code 1588");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 1, 4, 2, 5, 3 };
+    int result = leetCode.sumOddLengthSubarrays(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1,2 };
+    result = leetCode.sumOddLengthSubarrays(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 10,11,12 };
+    result = leetCode.sumOddLengthSubarrays(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1590(void)
+{
+    Logger::WriteMessage("Test Leet Code 1590");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 1, 4, 2 };
+    int p = 6;
+    int result = leetCode.minSubarray(nums, p);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("p = " + to_string(p) + "; result = " + to_string(result));
+
+    nums = { 6,3,5,2 };
+    p = 9;
+    result = leetCode.minSubarray(nums, p);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("p = " + to_string(p) + "; result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    p = 3;
+    result = leetCode.minSubarray(nums, p);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("p = " + to_string(p) + "; result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    p = 7;
+    result = leetCode.minSubarray(nums, p);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("p = " + to_string(p) + "; result = " + to_string(result));
+
+    nums = { 1000000000,1000000000,1000000000 };
+    p = 3;
+    result = leetCode.minSubarray(nums, p);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("p = " + to_string(p) + "; result = " + to_string(result));
+
+    nums = { 8, 32, 31, 18, 34, 20, 21, 13, 1, 27, 23, 22, 11, 15, 30, 4, 2 };
+    p = 148;
+    result = leetCode.minSubarray(nums, p);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("p = " + to_string(p) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1590();
+    TestLeetCode1588();
     TestLeetCode1583();
     TestLeetCode1582();
     TestLeetCode1574();

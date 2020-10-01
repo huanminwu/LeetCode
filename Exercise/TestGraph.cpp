@@ -2940,8 +2940,46 @@ void TestLeetCode1575(void)
         "; result = " + to_string(result));
 }
 
+void TestLeetCode1591(void)
+{
+    Logger::WriteMessage("Test Leet Code 1591");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> targetGrid =
+    {
+        {1, 1, 1, 1},{1, 2, 2, 1},{1, 2, 2, 1},{1, 1, 1, 1}
+    };
+    bool result = leetCode.isPrintable(targetGrid);
+    Logger::WriteMessage(targetGrid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    targetGrid =
+    {
+        {1, 1, 1, 1},{1, 1, 3, 3},{1, 1, 3, 4},{5, 5, 1, 4}
+    };
+    result = leetCode.isPrintable(targetGrid);
+    Logger::WriteMessage(targetGrid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    targetGrid =
+    {
+        {1,2,1},{2,1,2},{1,2,1}
+    };
+    result = leetCode.isPrintable(targetGrid);
+    Logger::WriteMessage(targetGrid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    targetGrid =
+    {
+        {1,1,1},{3,1,3}
+    };
+    result = leetCode.isPrintable(targetGrid);
+    Logger::WriteMessage(targetGrid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1591();
     TestLeetCode1575();
     TestLeetCode1579();
     TestLeetCode1584();

@@ -725,8 +725,51 @@ void TestLeetCode1595(void)
 
 }
 
+
+void TestLeetCode1593(void)
+{
+    Logger::WriteMessage("Test Leet Code 1593");
+    LeetCodeDFS leetCode;
+    string s = "ababccc";
+    int result = leetCode.maxUniqueSplit(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aba";
+    result = leetCode.maxUniqueSplit(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aa";
+    result = leetCode.maxUniqueSplit(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode1601(void)
+{
+    Logger::WriteMessage("Test Leet Code 1601");
+    LeetCodeDFS leetCode;
+    int n = 5;
+    vector<vector<int>> requests = { {0, 1},{1, 0},{0, 1},{1, 2},{2, 0},{3, 4} };
+    int result = leetCode.maximumRequests(n, requests);
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    requests = { {0, 0},{1, 2},{2, 1} };
+    result = leetCode.maximumRequests(n, requests);
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    requests = { {0, 3},{3, 1},{1, 2},{2, 0} };
+    result = leetCode.maximumRequests(n, requests);
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode1601();
+    TestLeetCode1593();
     TestLeetCode1595();
     TestLeetCode248();
     TestLeetCode247();

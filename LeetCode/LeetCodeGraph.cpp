@@ -9114,6 +9114,100 @@ int LeetCodeGraph::countRoutes(vector<int>& locations, int start, int finish, in
     return result;
 }
 
+
+/// <summary>
+/// Leet code #1591. Strange Printer II
+/// 
+/// Hard
+///
+/// There is a strange printer with the following two special requirements:
+/// 
+/// On each turn, the printer will print a solid rectangular pattern of a 
+/// single color on the grid. This will cover up the existing colors in the 
+/// rectangle.
+/// Once the printer has used a color for the above operation, the same 
+/// color cannot be used again.
+/// You are given a m x n matrix targetGrid, where targetGrid[row][col] is 
+/// the color in the position (row, col) of the grid.
+///
+/// Return true if it is possible to print the matrix targetGrid, 
+/// otherwise, return false.
+/// 
+/// 
+/// Example 1:
+/// 
+/// Input: targetGrid = [[1,1,1,1],[1,2,2,1],[1,2,2,1],[1,1,1,1]]
+/// Output: true
+///
+/// Example 2:
+/// Input: targetGrid = [[1,1,1,1],[1,1,3,3],[1,1,3,4],[5,5,1,4]]
+/// Output: true
+///
+/// Example 3:
+/// Input: targetGrid = [[1,2,1],[2,1,2],[1,2,1]]
+/// Output: false
+/// Explanation: It is impossible to form targetGrid because it is not 
+/// allowed to print the same color in different turns.
+///
+/// Example 4:
+/// Input: targetGrid = [[1,1,1],[3,1,3]]
+/// Output: false
+///
+/// Constraints:
+/// 1. m == targetGrid.length
+/// 2. n == targetGrid[i].length
+/// 3. 1 <= m, n <= 60
+/// 4. 1 <= targetGrid[row][col] <= 60
+/// </summary>
+bool LeetCodeGraph::isPrintable(vector<vector<int>>& targetGrid)
+{
+    vector<vector<int>> areas(60, {INT_MAX, INT_MIN, INT_MAX, INT_MIN});
+    vector<unordered_set<int>> covers(60);
+    for (int i = 0; i < (int)targetGrid.size(); i++)
+    {
+        for (int j = 0; j < (int)targetGrid[i].size(); j++)
+        {
+            int color = targetGrid[i][j] - 1;
+            areas[color][0] = min(areas[color][0], i);
+            areas[color][1] = max(areas[color][1], i);
+            areas[color][2] = min(areas[color][2], j);
+            areas[color][3] = max(areas[color][3], j);
+        }
+    }
+    queue<int> search;
+    for (int i = 0; i < 60; i++)
+    {
+        if (areas[i][0] == INT_MAX) continue;
+        for (int j = areas[i][0]; j <= areas[i][1]; j++)
+        {
+            for (int k = areas[i][2]; k <= areas[i][3]; k++)
+            {
+                int color = targetGrid[j][k] - 1;
+                if (i != color) covers[i].insert(color);
+            }
+        }
+        if (covers[i].empty()) search.push(i);
+    }
+    while (!search.empty())
+    {
+        int color = search.front();
+        search.pop();
+        for (int i = 0; i < 60; i++)
+        {
+            if (covers[i].count(color) > 0)
+            {
+                covers[i].erase(color);
+                if (covers[i].empty()) search.push(i);
+            }
+        }
+    }
+
+    for (int i = 0; i < 60; i++)
+    {
+        if (!covers[i].empty()) return false;
+    }
+    return true;
+}
 /// <summary>
 /// Leet code #1579. Remove Max Number of Edges to Keep Graph Fully 
 ///                  Traversable

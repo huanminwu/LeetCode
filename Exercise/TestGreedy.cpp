@@ -312,10 +312,35 @@ void TestLeetCode1562(void)
     Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1589(void)
+{
+    Logger::WriteMessage("Test Leet Code 1589");
+    LeetCodeGreedy leetCode;
+    vector<int> nums = { 1,2,3,4,5 };
+    vector<vector<int>> requests = { {1, 3},{0, 1} };
+    int result = leetCode.maxSumRangeQuery(nums, requests);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4,5,6 };
+    requests = { {0, 1} };
+    result = leetCode.maxSumRangeQuery(nums, requests);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4,5,10 };
+    requests = { {0,2} ,{1,3},{1,1} };
+    result = leetCode.maxSumRangeQuery(nums, requests);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeGreedy(void)
 {
-    TestLeetCode1562();
+    TestLeetCode1589();
     TestLeetCode1520();
     TestLeetCode826();
     TestLeetCode1419();

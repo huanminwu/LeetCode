@@ -11890,4 +11890,170 @@ int LeetCodeString::minCost(string s, vector<int>& cost)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1592. Rearrange Spaces Between Words
+/// 
+/// Easy
+///
+/// You are given a string text of words that are placed among some number
+/// of spaces. Each word consists of one or more lowercase English letters
+/// and are separated by at least one space. It's guaranteed that text 
+/// contains at least one word.
+///
+/// Rearrange the spaces so that there is an equal number of spaces 
+/// between every pair of adjacent words and that number is maximized. 
+/// If you cannot redistribute all the spaces equally, place the extra 
+/// spaces at the end, meaning the returned string should be the same 
+/// length as text.
+///
+/// Return the string after rearranging the spaces.
+///
+/// Example 1:
+/// Input: text = "  this   is  a sentence "
+/// Output: "this   is   a   sentence"
+/// Explanation: There are a total of 9 spaces and 4 words. We can evenly 
+/// divide the 9 spaces between the words: 9 / (4-1) = 3 spaces.
+///
+/// Example 2:
+/// Input: text = " practice   makes   perfect"
+/// Output: "practice   makes   perfect "
+/// Explanation: There are a total of 7 spaces and 3 words. 7 / (3-1) = 3 
+/// spaces plus 1 extra space. We place this extra space at the end of the 
+/// string.
+///
+/// Example 3:
+/// Input: text = "hello   world"
+/// Output: "hello   world"
+///
+/// Example 4:
+/// Input: text = "  walks  udp package   into  bar a"
+/// Output: "walks  udp  package  into  bar  a "
+///
+/// Example 5:
+/// Input: text = "a"
+/// Output: "a"
+///
+/// Constraints:
+/// 1. 1 <= text.length <= 100
+/// 2. text consists of lowercase English letters and ' '.
+/// 3. text contains at least one word.
+/// </summary>
+string LeetCodeString::reorderSpaces(string text)
+{
+    vector<string> words;
+    int spaces = 0;
+    string token;
+    for (size_t i = 0; i <= text.size(); i++)
+    {
+        if (i == text.size())
+        {
+            if (!token.empty())
+            {
+                words.push_back(token);
+                token.clear();
+            }
+        }
+        if (isspace(text[i]))
+        {
+            spaces++;
+            if (!token.empty())
+            {
+                words.push_back(token);
+                token.clear();
+            }
+        }
+        else
+        {
+            token.push_back(text[i]);
+        }
+    }
+    string result;
+    int divisor = 0;
+    int remainder = 0;
+    int count = words.size();
+    if (count == 1)
+    {
+        divisor = 0;
+        remainder = spaces;
+    }
+    else
+    {
+        divisor = spaces / (count - 1);
+        remainder = spaces % (count - 1);
+    }
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        result.append(words[i]);
+        if (i == words.size() - 1)
+            result.append(remainder, ' ');
+        else
+            result.append(divisor, ' ');
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1598. Crawler Log Folder
+/// 
+/// Easy
+///
+/// The Leetcode file system keeps a log each time some user performs a 
+/// change folder operation.
+///
+/// The operations are described below:
+///
+/// "../" : Move to the parent folder of the current folder. (If you are 
+/// already in the main folder, remain in the same folder).
+/// "./" : Remain in the same folder.
+/// "x/" : Move to the child folder named x (This folder is guaranteed to 
+/// always exist).
+/// You are given a list of strings logs where logs[i] is the operation 
+/// performed by the user at the ith step.
+///
+/// The file system starts in the main folder, then the operations in 
+/// logs are performed.
+///
+/// Return the minimum number of operations needed to go back to the main 
+/// folder after the change folder operations.
+///
+/// Example 1:
+/// Input: logs = ["d1/","d2/","../","d21/","./"]
+/// Output: 2
+/// Explanation: Use this change folder operation "../" 2 times and go 
+/// back to the main folder.
+///
+/// Example 2:
+/// Input: logs = ["d1/","d2/","./","d3/","../","d31/"]
+/// Output: 3
+///
+/// Example 3:
+/// Input: logs = ["d1/","../","../","../"]
+/// Output: 0
+///
+/// Constraints:
+/// 1. 1 <= logs.length <= 103
+/// 2. 2 <= logs[i].length <= 10
+/// 3. logs[i] contains lowercase English letters, digits, '.', and '/'.
+/// 4. logs[i] follows the format described in the statement.
+/// 5. Folder names consist of lowercase English letters and digits.
+/// </summary>
+int LeetCodeString::minOperations(vector<string>& logs)
+{
+    int result = 0;
+    for (size_t i = 0; i < logs.size(); i++)
+    {
+        if (logs[i] == "./") continue;
+        else if (logs[i] == "../")
+        {
+            if (result > 0) result--;
+        }
+        else
+        {
+            result++;
+        }
+    }
+    return result;
+}
+
 #pragma endregion
