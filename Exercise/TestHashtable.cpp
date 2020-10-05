@@ -981,8 +981,69 @@ void TestLeetCode1577(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1604(void)
+{
+    Logger::WriteMessage("Test Leet Code 1604");
+    LeetCodeHashtable leetCode;
+    vector<string> keyName =
+    {
+        "daniel", "daniel", "daniel", "luis", "luis", "luis",
+        "luis"
+    };
+    vector<string> keyTime =
+    {
+        "10:00","10:40","11:00","09:00","11:00","13:00", "15:00"
+    };
+
+    vector<string> result = leetCode.alertNames(keyName, keyTime);
+    Logger::WriteMessage(keyName);
+    Logger::WriteMessage(keyTime);
+    Logger::WriteMessage(result);
+
+    keyName =
+    {
+        "alice","alice","alice","bob","bob","bob","bob"
+    };
+    keyTime =
+    {
+        "12:01","12:00","18:00","21:00","21:20","21:30","23:00"
+    };
+    result = leetCode.alertNames(keyName, keyTime);
+    Logger::WriteMessage(keyName);
+    Logger::WriteMessage(keyTime);
+    Logger::WriteMessage(result);
+
+
+    keyName =
+    {
+        "john","john","john"
+    };
+    keyTime =
+    {
+        "23:58","23:59","00:01"
+    };
+    result = leetCode.alertNames(keyName, keyTime);
+    Logger::WriteMessage(keyName);
+    Logger::WriteMessage(keyTime);
+    Logger::WriteMessage(result);
+
+    keyName =
+    {
+       "leslie","leslie","leslie","clare","clare","clare","clare"
+    };
+    keyTime =
+    {
+        "13:00","13:20","14:00","18:00","18:51","19:30","19:49"
+    };
+    result = leetCode.alertNames(keyName, keyTime);
+    Logger::WriteMessage(keyName);
+    Logger::WriteMessage(keyTime);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1604();
     TestLeetCode1577();
     TestLeetCode792();
     TestLeetCode1512();

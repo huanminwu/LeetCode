@@ -4186,21 +4186,21 @@ void test_string()
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeDFS();
-    TestLeetCodeDesign();
+    TestLeetCodeSort();
+    TestLeetCodeHashtable();
+    TestLeetCodeTree();
+    TestLeetCodeArray();
     TestLeetCodeMath();
+    TestLeetCodeDesign();
+    TestLeetCodeDFS();
     TestLeetCodeString();
     TestLeetCodeGraph();
-    TestLeetCodeArray();
     TestLeetCodeGreedy();
     TestLeetCodeDP();
     TestLeetCodeDFS();
-    TestLeetCodeSort();
-    TestLeetCodeHashtable();
     TestLeetCodeBinarySearch();
     TestLeetCodeBit();
     TestLeetCode211();
-    TestLeetCodeTree();
     TestLeetCodeDP();
     TestLeetCodeLinkedList();
     TestLeetCodeStack();

@@ -786,8 +786,85 @@ void TestLeetCode1585(void)
     Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1608(void)
+{
+    Logger::WriteMessage("Test Leet Code 1608");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 3, 5 };
+    int result = leetCode.specialArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,0 };
+    result = leetCode.specialArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,4,3,0,4 };
+    result = leetCode.specialArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,6,7,7,0 };
+    result = leetCode.specialArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1606(void)
+{
+    Logger::WriteMessage("Test Leet Code 1606");
+    LeetCodeSort leetCode;
+    int k = 3;
+    vector<int> arrival = { 1, 2, 3, 4, 5 };
+    vector<int> load = { 5, 2, 3, 3, 3 };
+    vector<int> result = leetCode.busiestServers(k, arrival, load);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(arrival);
+    Logger::WriteMessage(load);
+    Logger::WriteMessage(result);
+
+    k = 3;
+    arrival = { 1,2,3,4 };
+    load = { 1,2,1,2 };
+    result = leetCode.busiestServers(k, arrival, load);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(arrival);
+    Logger::WriteMessage(load);
+    Logger::WriteMessage(result);
+
+    k = 3;
+    arrival = { 1,2,3 };
+    load = { 10,12,11 };
+    result = leetCode.busiestServers(k, arrival, load);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(arrival);
+    Logger::WriteMessage(load);
+    Logger::WriteMessage(result);
+
+    k = 3;
+    arrival = { 1,2,3,4,8,9,10 };
+    load = { 5,2,10,3,1,2,2 };
+    result = leetCode.busiestServers(k, arrival, load);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(arrival);
+    Logger::WriteMessage(load);
+    Logger::WriteMessage(result);
+
+    k = 1;
+    arrival = { 1 };
+    load = { 1 };
+    result = leetCode.busiestServers(k, arrival, load);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(arrival);
+    Logger::WriteMessage(load);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1606();
+    TestLeetCode1608();
     TestLeetCode1585();
     TestLeetCode1536();
     TestLeetCode1535();

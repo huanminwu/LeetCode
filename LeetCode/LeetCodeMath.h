@@ -5271,116 +5271,104 @@ public:
     int maxCoins(vector<int>& piles);
 
     /// <summary>
-    /// Leet code #1599. Maximum Profit of Operating a Centennial Wheel
+    /// Leet code #1610. Maximum Number of Visible Points
     /// 
-    /// Medium
+    /// Hard
     ///
-    /// You are the operator of a Centennial Wheel that has four gondolas, 
-    /// and each gondola has room for up to four people. You have the ability 
-    /// to rotate the gondolas counterclockwise, which costs you runningCost 
-    /// dollars.
+    /// You are given an array points, an integer angle, and your location, 
+    /// where location = [pos[x], pos[y]] and points[i] = [x[i], y[i]] both 
+    /// denote integral coordinates on the X-Y plane.
     ///
-    /// You are given an array customers of length n where customers[i] is 
-    /// the number of new customers arriving just before the ith rotation 
-    /// (0-indexed). This means you must rotate the wheel i times before 
-    /// customers[i] arrive. Each customer pays boardingCost dollars when 
-    /// they board on the gondola closest to the ground and will exit once 
-    /// that gondola reaches the ground again.
-    ///
-    /// You can stop the wheel at any time, including before serving all 
-    /// customers. If you decide to stop serving customers, all subsequent 
-    /// rotations are free in order to get all the customers down safely. 
-    /// Note that if there are currently more than four customers waiting at 
-    /// the wheel, only four will board the gondola, and the rest will wait 
-    /// for the next rotation.
+    /// Initially, you are facing directly east from your position. You cannot 
+    /// move from your position, but you can rotate. In other words, pos[x] 
+    /// and pos[y] cannot be changed. Your field of view in degrees is 
+    /// represented by angle, determining how wide you can see from any given 
+    /// view direction. Let d be the amount in degrees that you rotate 
+    /// counterclockwise. Then, your field of view is the inclusive range of 
+    /// angles [d - angle/2, d + angle/2].
     /// 
-    /// Return the minimum number of rotations you need to perform to maximize 
-    /// your profit. If there is no scenario where the profit is positive, 
-    /// return -1.
+    /// You can see some set of points if, for each point, the angle formed by 
+    /// the point, your position, and the immediate east direction from your 
+    /// position is in your field of view.
     ///
+    /// There can be multiple points at one coordinate. There may be points at 
+    /// your location, and you can always see these points regardless of your 
+    /// rotation. Points do not obstruct your vision to other points.
+    ///
+    /// Return the maximum number of points you can see.
+    /// 
     /// Example 1:
-    /// 
-    /// Input: customers = [8,3], boardingCost = 5, runningCost = 6
+    /// Input: points = [[2,1],[2,2],[3,3]], angle = 90, location = [1,1]
     /// Output: 3
-    /// Explanation: The numbers written on the gondolas are the number of 
-    /// people currently there.
-    /// 1. 8 customers arrive, 4 board and 4 wait for the next gondola, the 
-    ///    wheel rotates. Current profit is 4 * $5 - 1 * $6 = $14.
-    /// 2. 3 customers arrive, the 4 waiting board the wheel and the other 3 
-    ///    wait, the wheel rotates. Current profit is 8 * $5 - 2 * $6 = $28.
-    /// 3. The final 3 customers board the gondola, the wheel rotates. Current 
-    ///    profit is 11 * $5 - 3 * $6 = $37.
-    /// 4. The highest profit was $37 after rotating the wheel 3 times.
+    /// Explanation: The shaded region represents your field of view. All 
+    /// points can be made visible in your field of view, including [3,3] 
+    /// even though [2,2] is in front and in the same line of sight.
     ///
     /// Example 2:
-    /// Input: customers = [10,9,6], boardingCost = 6, runningCost = 4
-    /// Output: 7
-    /// Explanation:
-    /// 1. 10 customers arrive, 4 board and 6 wait for the next gondola, the 
-    ///    wheel rotates. Current profit is 4 * $6 - 1 * $4 = $20.
-    /// 2. 9 customers arrive, 4 board and 11 wait (2 originally waiting, 9 
-    ///    newly waiting), the wheel rotates. Current profit is 
-    ///    8 * $6 - 2 * $4 = $40.
-    /// 3. The final 6 customers arrive, 4 board and 13 wait, the wheel 
-    ///    rotates. Current profit is 12 * $6 - 3 * $4 = $60.
-    /// 4. 4 board and 9 wait, the wheel rotates. Current profit is 
-    ///    16 * $6 - 4 * $4 = $80.
-    /// 5. 4 board and 5 wait, the wheel rotates. Current profit is 
-    ///    20 * $6 - 5 * $4 = $100.
-    /// 6. 4 board and 1 waits, the wheel rotates. Current profit is 
-    ///    24 * $6 - 6 * $4 = $120.
-    /// 7. 1 boards, the wheel rotates. Current profit is 
-    ///    25 * $6 - 7 * $4 = $122.
-    /// 8. The highest profit was $122 after rotating the wheel 7 times.
+    /// Input: points = [[2,1],[2,2],[3,4],[1,1]], angle = 90, location = [1,1]
+    /// Output: 4
+    /// Explanation: All points can be made visible in your field of view, 
+    /// including the one at your location.
     ///
     /// Example 3:
-    /// Input: customers = [3,4,0,5,1], boardingCost = 1, runningCost = 92
-    /// Output: -1
-    /// Explanation:
-    /// 1. 3 customers arrive, 3 board and 0 wait, the wheel rotates. Current 
-    ///    profit is 3 * $1 - 1 * $92 = -$89.
-    /// 2. 4 customers arrive, 4 board and 0 wait, the wheel rotates. Current 
-    ///    profit is 7 * $1 - 2 * $92 = -$177.
-    /// 3. 0 customers arrive, 0 board and 0 wait, the wheel rotates. Current 
-    ///    profit is 7 * $1 - 3 * $92 = -$269.
-    /// 4. 5 customers arrive, 4 board and 1 waits, the wheel rotates. Current 
-    ///    profit is 12 * $1 - 4 * $92 = -$356.
-    /// 5. 1 customer arrives, 2 board and 0 wait, the wheel rotates. Current 
-    ///    profit is 13 * $1 - 5 * $92 = -$447.
-    /// 6. The profit was never positive, so return -1.
-    ///
-    /// Example 4:
-    /// Input: customers = [10,10,6,4,7], boardingCost = 3, runningCost = 8
-    /// Output: 9
-    /// Explanation:
-    /// 1. 10 customers arrive, 4 board and 6 wait, the wheel rotates. Current 
-    ///    profit is 4 * $3 - 1 * $8 = $4.
-    /// 2. 10 customers arrive, 4 board and 12 wait, the wheel rotates. Current 
-    ///    profit is 8 * $3 - 2 * $8 = $8.
-    /// 3. 6 customers arrive, 4 board and 14 wait, the wheel rotates. Current 
-    ///    profit is 12 * $3 - 3 * $8 = $12.
-    /// 4. 4 customers arrive, 4 board and 14 wait, the wheel rotates. Current 
-    ///    profit is 16 * $3 - 4 * $8 = $16.
-    /// 5. 7 customers arrive, 4 board and 17 wait, the wheel rotates. Current 
-    ///    profit is 20 * $3 - 5 * $8 = $20.
-    /// 6. 4 board and 13 wait, the wheel rotates. Current profit 
-    ///    is 24 * $3 - 6 * $8 = $24.
-    /// 7. 4 board and 9 wait, the wheel rotates. Current profit is 
-    ///    28 * $3 - 7 * $8 = $28.
-    /// 8. 4 board and 5 wait, the wheel rotates. Current profit is 
-    ///    32 * $3 - 8 * $8 = $32.
-    /// 9. 4 board and 1 waits, the wheel rotates. Current profit is 
-    ///    36 * $3 - 9 * $8 = $36.
-    /// 10. 1 board and 0 wait, the wheel rotates. Current profit is 
-    ///    37 * $3 - 10 * $8 = $31.
-    /// 11. The highest profit was $36 after rotating the wheel 9 times.
+    /// Input: points = [[1,0],[2,1]], angle = 13, location = [1,1]
+    /// Output: 1
+    /// Explanation: You can only see one of the two points, as shown above.
     ///
     /// Constraints:
-    /// 1. n == customers.length
-    /// 2. 1 <= n <= 10^5
-    /// 3. 0 <= customers[i] <= 50
-    /// 4. 1 <= boardingCost, runningCost <= 100
+    /// 1. 1 <= points.length <= 10^5
+    /// 2. points[i].length == 2
+    /// 3. location.length == 2
+    /// 4. 0 <= angle < 360
+    /// 5. 0 <= pos[x], pos[y], x[i], y[i] <= 10^9
     /// </summary>
-    int minOperationsMaxProfit(vector<int>& customers, int boardingCost, int runningCost);
+    int visiblePoints(vector<vector<int>>& points, int angle, vector<int>& location);
+
+    /// <summary>
+    /// Leet code #1611. Minimum One Bit Operations to Make Integers Zero
+    /// 
+    /// Hard
+    ///
+    /// Given an integer n, you must transform it into 0 using the following 
+    /// operations any number of times:
+    ///
+    /// Change the rightmost (0th) bit in the binary representation of n.
+    /// Change the ith bit in the binary representation of n if the (i-1)th 
+    /// bit is set to 1 and the (i-2)th through 0th bits are set to 0.
+    /// Return the minimum number of operations to transform n into 0.
+    /// 
+    /// Example 1:
+    /// Input: n = 0
+    /// Output: 0
+    ///
+    /// Example 2:
+    /// Input: n = 3
+    /// Output: 2
+    /// Explanation: The binary representation of 3 is "11".
+    /// "11" -> "01" with the 2nd operation since the 0th bit is 1.
+    /// "01" -> "00" with the 1st operation.
+    /// Example 3:
+    ///
+    /// Input: n = 6
+    /// Output: 4
+    /// Explanation: The binary representation of 6 is "110".
+    /// "110" -> "010" with the 2nd operation since the 1st bit is 1 and 0th 
+    /// through 0th bits are 0.
+    /// "010" -> "011" with the 1st operation.
+    /// "011" -> "001" with the 2nd operation since the 0th bit is 1.
+    /// "001" -> "000" with the 1st operation.
+    ///
+    /// Example 4:
+    /// Input: n = 9
+    /// Output: 14
+    ///
+    /// Example 5:
+    /// Input: n = 333
+    /// Output: 393
+    /// 
+    /// Constraints:
+    /// 1. 0 <= n <= 10^9
+    /// </summary>
+    int minimumOneBitOperations(int n);
 };
 #endif

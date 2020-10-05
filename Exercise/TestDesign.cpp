@@ -3072,9 +3072,45 @@ void TestLeetCode1600(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1603(void)
+{
+    Logger::WriteMessage("Test Leet Code 1603");
+    vector<string> commands =
+    {
+       "ParkingSystem", "addCar", "addCar", "addCar", "addCar"
+    };
+    vector<vector<int>> parameters =
+    {
+        {1, 1, 0}, {1}, {2}, {3}, {1}
+    };
+
+    vector<string> result;
+    ParkingSystem* parkingSystem = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "ParkingSystem")
+        {
+            parkingSystem = new ParkingSystem(parameters[i][0], parameters[i][1], parameters[i][2]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "addCar")
+        {
+            bool ret = parkingSystem->addCar(parameters[i][0]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+    }
+    delete parkingSystem;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+}
 
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1603();
     TestLeetCode1600();
     TestLeetCode1500();
     TestLeetCode1483();

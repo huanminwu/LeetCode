@@ -3230,50 +3230,68 @@ void TestLeetCode1561(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode1599(void)
+void TestLeetCode1611(void)
 {
-    Logger::WriteMessage("Test Leet Code 1599");
+    Logger::WriteMessage("Test Leet Code 1611");
     LeetCodeMath leetCode;
-    vector<int> customers = { 8,3 };
-    int boardingCost = 5;
-    int runningCost = 6;
-    int result = leetCode.minOperationsMaxProfit(customers, boardingCost, runningCost);
-    Logger::WriteMessage(customers);
-    Logger::WriteMessage("boardingCost = " + to_string(boardingCost) + 
-        "; runningCost = " + to_string(runningCost) + 
-        "; result = " + to_string(result));
+    int n = 0;
+    int result = leetCode.minimumOneBitOperations(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 
-    customers = { 10,9,6 };
-    boardingCost = 6;
-    runningCost = 4;
-    result = leetCode.minOperationsMaxProfit(customers, boardingCost, runningCost);
-    Logger::WriteMessage(customers);
-    Logger::WriteMessage("boardingCost = " + to_string(boardingCost) +
-        "; runningCost = " + to_string(runningCost) +
-        "; result = " + to_string(result));
+    n = 3;
+    result = leetCode.minimumOneBitOperations(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 
-    customers = { 3,4,0,5,1 };
-    boardingCost = 1;
-    runningCost = 92;
-    result = leetCode.minOperationsMaxProfit(customers, boardingCost, runningCost);
-    Logger::WriteMessage(customers);
-    Logger::WriteMessage("boardingCost = " + to_string(boardingCost) +
-        "; runningCost = " + to_string(runningCost) +
-        "; result = " + to_string(result));
+    n = 6;
+    result = leetCode.minimumOneBitOperations(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 
-    customers = { 10,10,6,4,7 };
-    boardingCost = 3;
-    runningCost = 8;
-    result = leetCode.minOperationsMaxProfit(customers, boardingCost, runningCost);
-    Logger::WriteMessage(customers);
-    Logger::WriteMessage("boardingCost = " + to_string(boardingCost) +
-        "; runningCost = " + to_string(runningCost) +
-        "; result = " + to_string(result));
+    n = 9;
+    result = leetCode.minimumOneBitOperations(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 333;
+    result = leetCode.minimumOneBitOperations(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1610(void)
+{
+    Logger::WriteMessage("Test Leet Code 1610");
+    LeetCodeMath leetCode;
+    vector<vector<int>> points = { {2, 1},{2, 2},{3, 3}, {0, 0} };
+    vector<int> location = { 1, 1 };
+    int angle = 90;
+    int result = leetCode.visiblePoints(points, angle, location);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("angle = " + to_string(angle) + "; result = " + to_string(result));
+
+    points = { {2, 1},{2, 2},{3, 4},{1, 1} };
+    location = { 1, 1 };
+    angle = 90;
+    result = leetCode.visiblePoints(points, angle, location);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("angle = " + to_string(angle) + "; result = " + to_string(result));
+
+    points = { {1, 0},{2, 1} };
+    location = { 1, 1 };
+    angle = 90;
+    result = leetCode.visiblePoints(points, angle, location);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("angle = " + to_string(angle) + "; result = " + to_string(result));
+
+    points = { {1, 1}, { 2, 2 }, { 3, 3 }, { 4, 4 }, { 1, 2 }, { 2, 1 } };
+    location = { 1, 1 };
+    angle = 0;
+    result = leetCode.visiblePoints(points, angle, location);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("angle = " + to_string(angle) + "; result = " + to_string(result));
 }
 
 void TestLeetCodeMath(void)
 {
-    TestLeetCode1599();
+    TestLeetCode1610();
+    TestLeetCode1611();
     TestLeetCode1561();
     TestLeetCode1560();
     TestLeetCode1558();

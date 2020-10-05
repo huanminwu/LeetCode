@@ -21,5 +21,6 @@ void TestLeetCode1448(void);
 void TestLeetCode1469(void);
 void TestLeetCode1519(void);
 void TestLeetCode1530(void);
+void TestLeetCode1609(void);
 void TestLeetCodeTree(void);
 #endif  // TestTree

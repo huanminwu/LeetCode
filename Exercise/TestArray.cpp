@@ -4550,8 +4550,91 @@ void TestLeetCode1590(void)
     Logger::WriteMessage("p = " + to_string(p) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1599(void)
+{
+    Logger::WriteMessage("Test Leet Code 1599");
+    LeetCodeArray leetCode;
+    vector<int> customers = { 8,3 };
+    int boardingCost = 5;
+    int runningCost = 6;
+    int result = leetCode.minOperationsMaxProfit(customers, boardingCost, runningCost);
+    Logger::WriteMessage(customers);
+    Logger::WriteMessage("boardingCost = " + to_string(boardingCost) +
+        "; runningCost = " + to_string(runningCost) +
+        "; result = " + to_string(result));
+
+    customers = { 10,9,6 };
+    boardingCost = 6;
+    runningCost = 4;
+    result = leetCode.minOperationsMaxProfit(customers, boardingCost, runningCost);
+    Logger::WriteMessage(customers);
+    Logger::WriteMessage("boardingCost = " + to_string(boardingCost) +
+        "; runningCost = " + to_string(runningCost) +
+        "; result = " + to_string(result));
+
+    customers = { 3,4,0,5,1 };
+    boardingCost = 1;
+    runningCost = 92;
+    result = leetCode.minOperationsMaxProfit(customers, boardingCost, runningCost);
+    Logger::WriteMessage(customers);
+    Logger::WriteMessage("boardingCost = " + to_string(boardingCost) +
+        "; runningCost = " + to_string(runningCost) +
+        "; result = " + to_string(result));
+
+    customers = { 10,10,6,4,7 };
+    boardingCost = 3;
+    runningCost = 8;
+    result = leetCode.minOperationsMaxProfit(customers, boardingCost, runningCost);
+    Logger::WriteMessage(customers);
+    Logger::WriteMessage("boardingCost = " + to_string(boardingCost) +
+        "; runningCost = " + to_string(runningCost) +
+        "; result = " + to_string(result));
+}
+
+void TestLeetCode1605(void)
+{
+    Logger::WriteMessage("Test Leet Code 1605");
+    LeetCodeArray leetCode;
+    vector<int> rowSum = { 3, 8 };
+    vector<int> colSum = { 4, 7 };
+    vector<vector<int>> result = leetCode.restoreMatrix(rowSum, colSum);
+    Logger::WriteMessage(rowSum);
+    Logger::WriteMessage(colSum);
+    Logger::WriteMessage(result);
+
+    rowSum = { 5,7,10 };
+    colSum = { 8,6,8 };
+    result = leetCode.restoreMatrix(rowSum, colSum);
+    Logger::WriteMessage(rowSum);
+    Logger::WriteMessage(colSum);
+    Logger::WriteMessage(result);
+
+    rowSum = { 14,9 };
+    colSum = { 6,9,8 };
+    result = leetCode.restoreMatrix(rowSum, colSum);
+    Logger::WriteMessage(rowSum);
+    Logger::WriteMessage(colSum);
+    Logger::WriteMessage(result);
+
+    rowSum = { 1,0 };
+    colSum = { 1 };
+    result = leetCode.restoreMatrix(rowSum, colSum);
+    Logger::WriteMessage(rowSum);
+    Logger::WriteMessage(colSum);
+    Logger::WriteMessage(result);
+
+    rowSum = { 0 };
+    colSum = { 0 };
+    result = leetCode.restoreMatrix(rowSum, colSum);
+    Logger::WriteMessage(rowSum);
+    Logger::WriteMessage(colSum);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1605();
+    TestLeetCode1599();
     TestLeetCode1590();
     TestLeetCode1588();
     TestLeetCode1583();

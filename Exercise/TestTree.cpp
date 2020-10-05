@@ -2767,8 +2767,44 @@ void TestLeetCode1530(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode1609(void)
+{
+    Logger::WriteMessage("Test Leet Code 1609");
+    LeetCodeTree leetCode;
+    string input = "[1, 10, 4, 3, null, 7, 9, 12, 8, 6, null, null, 2]";
+    TreeNode* root = leetCode.deserialize(input);
+    bool result = leetCode.isEvenOddTree(root);
+    Logger::WriteMessage("input = " + input + "; result = " + (string)(result ? "true" : "false"));
+    leetCode.freeTreeNodes(root);
+
+    input = "[5,4,2,3,3,7]";
+    root = leetCode.deserialize(input);
+    result = leetCode.isEvenOddTree(root);
+    Logger::WriteMessage("input = " + input + "; result = " + (string)(result ? "true" : "false"));
+    leetCode.freeTreeNodes(root);
+
+    input = "[5,9,1,3,5,7]";
+    root = leetCode.deserialize(input);
+    result = leetCode.isEvenOddTree(root);
+    Logger::WriteMessage("input = " + input + "; result = " + (string)(result ? "true" : "false"));
+    leetCode.freeTreeNodes(root);
+
+    input = "[1]";
+    root = leetCode.deserialize(input);
+    result = leetCode.isEvenOddTree(root);
+    Logger::WriteMessage("input = " + input + "; result = " + (string)(result ? "true" : "false"));
+    leetCode.freeTreeNodes(root);
+
+    input = "[11,8,6,1,3,9,11,30,20,18,16,12,10,4,2,17]";
+    root = leetCode.deserialize(input);
+    result = leetCode.isEvenOddTree(root);
+    Logger::WriteMessage("input = " + input + "; result = " + (string)(result ? "true" : "false"));
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1609();
     TestLeetCode1530();
     TestLeetCode1519();
     TestLeetCode1469();
