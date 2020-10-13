@@ -4767,6 +4767,227 @@ public:
     /// 2. 1 <= Node.val <= 10^6
     /// </summary>
     bool isEvenOddTree(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #1612. Check If Two Expression Trees are Equivalent
+    /// </summary>
+    void checkEquivalence(TreeNode* root, vector<int>& arr);
+
+    /// <summary>
+    /// Leet code #1612. Check If Two Expression Trees are Equivalent
+    /// 
+    /// Medium
+    ///
+    /// A binary expression tree is a kind of binary tree used to represent 
+    /// arithmetic expressions. Each node of a binary expression tree has 
+    /// either zero or two children. Leaf nodes (nodes with 0 children) 
+    /// correspond to operands (variables), and internal nodes (nodes with two 
+    /// children) correspond to the operators. In this problem, we only 
+    /// consider the '+' operator (i.e. addition).
+    ///
+    /// You are given the roots of two binary expression trees, root1 and 
+    /// root2. Return true if the two binary expression trees are equivalent. 
+    /// Otherwise, return false.
+    ///
+    /// Two binary expression trees are equivalent if they evaluate to the 
+    /// same value regardless of what the variables are set to.
+    ///
+    /// Follow up: What will you change in your solution if the tree also 
+    /// supports the '-' operator (i.e. subtraction)?
+    /// 
+    /// Example 1:
+    /// Input: root1 = [x], root2 = [x]
+    /// Output: true
+    ///
+    /// Example 2:
+    /// Input: root1 = [+,a,+,null,null,b,c], root2 = [+,+,b,c,a]
+    /// Output: true
+    /// Explaination: a + (b + c) == (b + c) + a
+    ///
+    /// Example 3:
+    /// Input: root1 = [+,a,+,null,null,b,c], root2 = [+,+,b,d,a]
+    /// Output: false
+    /// Explaination: a + (b + c) != (b + d) + a
+    ///
+    /// Constraints:
+    /// 1. The number of nodes in both trees are equal, odd and, in the 
+    ///    range [1, 4999].
+    /// 2. Node.val is '+' or a lower-case English letter.
+    /// 3. It's guaranteed that the tree given is a valid binary expression 
+    ///    tree.
+    /// </summary>
+    bool checkEquivalence(TreeNode* root1, TreeNode* root2);
+
+    /// <summary>
+    /// Leet code #1602. Find Nearest Right Node in Binary Tree
+    /// 
+    /// Medium
+    ///
+    /// Given the root of a binary tree and a node u in the tree, return the 
+    /// nearest node on the same level that is to the right of u, or return 
+    /// null if u is the rightmost node in its level.
+    /// 
+    /// Example 1:
+    /// Input: root = [1,2,3,null,4,5,6], u = 4
+    /// Output: 5
+    /// Explanation: The nearest node on the same level to the right of 
+    /// node 4 is node 5.
+    ///
+    /// Example 2:
+    /// Input: root = [3,null,4,2], u = 2
+    /// Output: null
+    /// Explanation: There are no nodes to the right of 2.
+    ///
+    /// Example 3:
+    /// Input: root = [1], u = 1
+    /// Output: null
+    ///
+    /// Example 4:
+    /// Input: root = [3,4,2,null,null,null,1], u = 4
+    /// Output: 2
+    ///
+    /// Constraints:
+    /// 1. The number of nodes in the tree is in the range [1, 10^5].
+    /// 2. 1 <= Node.val <= 10^5
+    /// 3. All values in the tree are distinct.
+    /// 4. u is a node in the binary tree rooted at root.
+    /// </summary>
+    TreeNode* findNearestRightNode(TreeNode* root, TreeNode* u);
+
+    /// <summary>
+    /// Leet code #1522. Diameter of N-Ary Tree
+    /// </summary>
+    int diameter(Node* root, int depth, int& max_diameter);
+
+    /// <summary>
+    /// Leet code #1522. Diameter of N-Ary Tree
+    /// 
+    /// Medium
+    ///
+    /// Given a root of an N-ary tree, you need to compute the length of the 
+    /// diameter of the tree.
+    ///
+    /// The diameter of an N-ary tree is the length of the longest path 
+    /// between any two nodes in the tree. This path may or may not pass 
+    /// through the root.
+    ///
+    /// (Nary-Tree input serialization is represented in their level order 
+    /// traversal, each group of children is separated by the null value.)
+    ///
+    /// Example 1:
+    /// Input: root = [1,null,3,2,4,null,5,6]
+    /// Output: 3
+    /// Explanation: Diameter is shown in red color.
+    ///
+    /// Example 2:
+    /// Input: root = [1,null,2,null,3,4,null,5,null,6]
+    /// Output: 4
+    ///
+    /// Example 3:
+    /// Input: root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,
+    ///                null,11,null,12,null,13,null,null,14]
+    /// Output: 7
+    ///
+    /// Constraints:
+    /// 1. The depth of the n-ary tree is less than or equal to 1000.
+    /// 2. The total number of nodes is between [0, 10^4].
+    /// </summary>
+    int diameter(Node* root);
+
+    /// <summary>
+    /// Leet code #1516. Move Sub-Tree of N-Ary Tree
+    /// </summary>
+    int is_parent(Node* root, Node* p, Node* q, bool is_p_found);
+
+    /// <summary>
+    /// Leet code #1516. Move Sub-Tree of N-Ary Tree
+    /// </summary>
+    Node* find_parent(Node* node, Node * target, Node* parent);
+
+    /// <summary>
+    /// Leet code #1516. Move Sub-Tree of N-Ary Tree
+    /// </summary>
+    Node* find_node(Node* node, Node* target);
+
+    /// <summary>
+    /// Leet code #1516. Move Sub-Tree of N-Ary Tree
+    /// 
+    /// Hard
+    ///
+    /// Given the root of an N-ary tree of unique values, and two nodes of 
+    /// the tree p and q.
+    ///
+    /// You should move the subtree of the node p to become a direct child 
+    /// of node q. If p is already a direct child of q, don't change anything. 
+    /// Node p must be the last child in the children list of node q.
+    ///
+    /// Return the root of the tree after adjusting it.
+    /// 
+    /// There are 3 cases for nodes p and q:
+    /// Node q is in the sub-tree of node p.
+    /// Node p is in the sub-tree of node q.
+    /// Neither node p is in the sub-tree of node q nor node q is in the 
+    /// sub-tree of node p.
+    /// In cases 2 and 3, you just need to move p (with its sub-tree) to be a 
+    /// child of q, but in case 1 the tree may be disconnected, thus you need 
+    /// to reconnect the tree again. Please read the examples carefully before 
+    /// solving this problem.
+    /// 
+    /// Nary-Tree input serialization is represented in their level order 
+    /// traversal, each group of children is separated by the null value 
+    /// (See examples).
+    /// 
+    ///
+    /// For example, the above tree is serialized as [1,null,2,3,4,5,null,null,
+    /// 6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14].
+    ///
+    /// Example 1:
+    /// Input: root = [1,null,2,3,null,4,5,null,6,null,7,8], p = 4, q = 1
+    /// Output: [1,null,2,3,4,null,5,null,6,null,7,8]
+    /// Explanation: This example follows the second case as node p is in the 
+    /// sub-tree of node q. We move node p with its sub-tree to be a direct 
+    /// child of node q.
+    /// Notice that node 4 is the last child of node 1.
+    ///
+    /// Example 2:
+    /// Input: root = [1,null,2,3,null,4,5,null,6,null,7,8], p = 7, q = 4
+    /// Output: [1,null,2,3,null,4,5,null,6,null,7,8]
+    /// Explanation: Node 7 is already a direct child of node 4. We don't 
+    /// change anything.
+    ///
+    /// Example 3:
+    /// Input: root = [1,null,2,3,null,4,5,null,6,null,7,8], p = 3, q = 8
+    /// Output: [1,null,2,null,4,5,null,7,8,null,null,null,3,null,6]
+    /// Explanation: This example follows case 3 because node p is not in 
+    /// the sub-tree of node q and vice-versa. We can move node 3 with its 
+    /// sub-tree and make it as node 8's child.
+    ///
+    /// Example 4:
+    /// Input: root = [1,null,2,3,null,4,5,null,6,null,7,8], p = 2, q = 7
+    /// Output: [1,null,7,3,null,2,null,6,null,4,5,null,null,8]
+    /// Explanation: Node q is in the sub-tree of node p, so this is case 1.
+    /// The first step, we move node p (with all of its sub-tree except for 
+    /// node q) and add it as a child to node q.
+    /// Then we will see that the tree is disconnected, you need to reconnect 
+    /// node q to replace node p as shown.
+    ///
+    /// Example 5:
+    /// Input: root = [1,null,2,3,null,4,5,null,6,null,7,8], p = 1, q = 2
+    /// Output: [2,null,4,5,1,null,7,8,null,null,3,null,null,null,6]
+    /// Explanation: Node q is in the sub-tree of node p, so this is case 1.
+    /// The first step, we move node p (with all of its sub-tree except for 
+    /// node q) and add it as a child to node q.
+    /// As node p was the root of the tree, node q replaces it and becomes 
+    /// the root of the tree.
+    ///
+    /// Constraints:
+    /// 1. The total number of nodes is between [2, 1000].
+    /// 2. Each node has a unique value.
+    /// 3. p != null
+    /// 4. q != null
+    /// 5. p and q are two different nodes (i.e. p != q).
+    /// </summary>
+    Node* moveSubTree(Node* root, Node* p, Node* q);
 #pragma endregion
 };
 

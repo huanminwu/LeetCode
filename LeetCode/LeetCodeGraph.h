@@ -4552,6 +4552,105 @@ public:
     /// 4. 1 <= targetGrid[row][col] <= 60
     /// </summary>
     bool isPrintable(vector<vector<int>>& targetGrid);
+
+    /// <summary>
+    /// Leet code #1615. Maximal Network Rank
+    /// 
+    /// Medium
+    ///
+    /// There is an infrastructure of n cities with some number of roads 
+    /// connecting these cities. Each roads[i] = [ai, bi] indicates that 
+    /// there is a bidirectional road between cities ai and bi.
+    ///
+    /// The network rank of two different cities is defined as the total 
+    /// number of directly connected roads to either city. If a road is 
+    /// directly connected to both cities, it is only counted once.
+    ///
+    /// The maximal network rank of the infrastructure is the maximum network 
+    /// rank of all pairs of different cities.
+    ///
+    /// Given the integer n and the array roads, return the maximal network 
+    /// rank of the entire infrastructure.
+    ///
+    /// Example 1:
+    /// Input: n = 4, roads = [[0,1],[0,3],[1,2],[1,3]]
+    /// Output: 4
+    /// Explanation: The network rank of cities 0 and 1 is 4 as there are 4 
+    /// roads that are connected to either 0 or 1. The road between 0 and 1 
+    /// is only counted once.
+    ///
+    /// Example 2:
+    /// Input: n = 5, roads = [[0,1],[0,3],[1,2],[1,3],[2,3],[2,4]]
+    /// Output: 5
+    /// Explanation: There are 5 roads that are connected to cities 1 or 2.
+    ///
+    /// Example 3:
+    /// Input: n = 8, roads = [[0,1],[1,2],[2,3],[2,4],[5,6],[5,7]]
+    /// Output: 5
+    /// Explanation: The network rank of 2 and 5 is 5. Notice that all the 
+    /// cities do not have to be connected.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n <= 100
+    /// 2. 0 <= roads.length <= n * (n - 1) / 2
+    /// 3. roads[i].length == 2
+    /// 4. 0 <= ai, bi <= n-1
+    /// 5. a[i] != b[i]
+    /// 6. Each pair of cities has at most one road connecting them.
+    /// </summary>
+    int maximalNetworkRank(int n, vector<vector<int>>& roads);
+
+    /// <summary>
+    /// Leet code #1617. Count Subtrees With Max Distance Between Cities
+    /// 
+    /// Hard
+    ///
+    /// There are n cities numbered from 1 to n. You are given an array edges 
+    /// of size n-1, where edges[i] = [ui, vi] represents a bidirectional 
+    /// edge between cities ui and vi. There exists a unique path between 
+    /// each pair of cities. In other words, the cities form a tree.
+    /// A subtree is a subset of cities where every city is reachable from 
+    /// every other city in the subset, where the path between each pair 
+    /// passes through only the cities from the subset. Two subtrees 
+    /// are different if there is a city in one subtree that is not present 
+    /// in the other.
+    ///
+    /// For each d from 1 to n-1, find the number of subtrees in which the 
+    /// maximum distance between any two cities in the subtree is equal to d.
+    ///
+    /// Return an array of size n-1 where the dth element (1-indexed) is the 
+    /// number of subtrees in which the maximum distance between any two 
+    /// cities is equal to d.
+    ///
+    /// Notice that the distance between the two cities is the number of 
+    /// edges in the path between them.
+    /// 
+    /// Example 1:
+    /// Input: n = 4, edges = [[1,2],[2,3],[2,4]]
+    /// Output: [3,4,0]
+    /// Explanation:
+    /// The subtrees with subsets {1,2}, {2,3} and {2,4} have a max distance 
+    /// of 1.
+    /// The subtrees with subsets {1,2,3}, {1,2,4}, {2,3,4} and {1,2,3,4} 
+    /// have a max distance of 2.
+    /// No subtree has two nodes where the max distance between them is 3.
+    ///
+    /// Example 2:
+    /// Input: n = 2, edges = [[1,2]]
+    /// Output: [1]
+    ///
+    /// Example 3:
+    /// Input: n = 3, edges = [[1,2],[2,3]]
+    /// Output: [2,1]
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 15
+    /// 2. edges.length == n-1
+    /// 3. edges[i].length == 2
+    /// 4. 1 <= ui, vi <= n
+    /// 5. All pairs (ui, vi) are distinct.
+    /// </summary>
+    vector<int> countSubgraphsForEachDiameter(int n, vector<vector<int>>& edges);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

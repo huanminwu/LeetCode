@@ -12056,4 +12056,154 @@ int LeetCodeString::minOperations(vector<string>& logs)
     return result;
 }
 
+/// <summary>
+/// Leet code #1614. Maximum Nesting Depth of the Parentheses
+/// 
+/// Easy
+///
+/// A string is a valid parentheses string (denoted VPS) if it meets one 
+/// of the following:
+///
+/// It is an empty string "", or a single character not equal 
+/// to "(" or ")",
+/// It can be written as AB (A concatenated with B), where A and B are 
+/// VPS's, or
+/// It can be written as (A), where A is a VPS.
+/// We can similarly define the nesting depth depth(S) of any VPS S as 
+/// follows:
+///
+/// depth("") = 0
+/// depth(A + B) = max(depth(A), depth(B)), where A and B are VPS's
+/// depth("(" + A + ")") = 1 + depth(A), where A is a VPS.
+/// For example, "", "()()", and "()(()())" are VPS's (with nesting 
+/// depths 0, 1, and 2), and ")(" and "(()" are not VPS's.
+///
+/// Given a VPS represented as string s, return the nesting depth of s.
+/// 
+/// Example 1:
+/// Input: s = "(1+(2*3)+((8)/4))+1"
+/// Output: 3
+/// Explanation: Digit 8 is inside of 3 nested parentheses in the string.
+///
+/// Example 2:
+/// Input: s = "(1)+((2))+(((3)))"
+/// Output: 3
+///
+/// Example 3:
+/// Input: s = "1+(2*3)/(2-1)"
+/// Output: 1
+///
+/// Example 4:
+/// Input: s = "1"
+/// Output: 0
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 100
+/// 2. s consists of digits 0-9 and characters '+', '-', '*', '/', 
+///    '(', and ')'.
+/// 3. It is guaranteed that parentheses expression s is a VPS.
+/// </summary>
+int LeetCodeString::maxDepth(string s)
+{
+    int result = 0;
+    int depth = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '(') depth++;
+        if (s[i] == ')') depth--;
+        result = max(result, depth);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1616. Split Two Strings to Make Palindrome
+/// 
+/// Medium
+///
+/// You are given two strings a and b of the same length. Choose an index 
+/// and split both strings at the same index, splitting a into two 
+/// strings: aprefix and asuffix where a = aprefix + asuffix, and 
+/// splitting b into two strings: bprefix and bsuffix where 
+/// b = bprefix + bsuffix. Check if aprefix + bsuffix or bprefix + asuffix 
+/// forms a palindrome.
+///
+/// When you split a string s into sprefix and ssuffix, either ssuffix or 
+/// sprefix is allowed to be empty. For example, if s = "abc", then "" + 
+/// "abc", "a" + "bc", "ab" + "c" , and "abc" + "" are valid splits.
+///
+/// Return true if it is possible to form a palindrome string, otherwise 
+/// return false.
+/// 
+/// Notice that x + y denotes the concatenation of strings x and y.
+///
+/// Example 1:
+/// Input: a = "x", b = "y"
+/// Output: true
+/// Explaination: If either a or b are palindromes the answer is true 
+/// since you can split in the following way:
+/// aprefix = "", asuffix = "x"
+/// bprefix = "", bsuffix = "y"
+/// Then, aprefix + bsuffix = "" + "y" = "y", which is a palindrome.
+///
+/// Example 2:
+/// Input: a = "abdef", b = "fecab"
+/// Output: true
+///
+/// Example 3:
+/// Input: a = "ulacfd", b = "jizalu"
+/// Output: true
+/// Explaination: Split them at index 3:
+/// aprefix = "ula", asuffix = "cfd"
+/// bprefix = "jiz", bsuffix = "alu"
+/// Then, aprefix + bsuffix = "ula" + "alu" = "ulaalu", which is a palindrome.
+///
+/// Example 4:
+/// Input: a = "xbdef", b = "xecab"
+/// Output: false
+///
+/// Constraints:
+/// 1. 1 <= a.length, b.length <= 105
+/// 2. a.length == b.length
+/// 3. a and b consist of lowercase English letters
+/// </summary>
+bool LeetCodeString::checkPalindromeFormation(string a, string b)
+{
+    int index = 0;
+    int last = a.size() - 1;
+    while (index < (int)a.size())
+    {
+        if (a[index] != b[last - index])
+        {
+            break;
+        }
+        index++;
+    }
+    if (index * 2 >= last + 1) return true;
+    string str_a = a.substr(index, a.size() - 2 * index);
+    string str_b = b.substr(index, b.size() - 2 * index);
+    if (isPalindrome(str_a) || isPalindrome(str_b))
+    {
+        return true;
+    }
+
+    index = 0;
+    last = a.size() - 1;
+    while (index < (int)a.size())
+    {
+        if (b[index] != a[last - index])
+        {
+            break;
+        }
+        index++;
+    }
+    if (index * 2 >= last + 1) return true;
+    str_a = a.substr(index, a.size() - 2 * index);
+    str_b = b.substr(index, b.size() - 2 * index);
+    if (isPalindrome(str_a) || isPalindrome(str_b))
+    {
+        return true;
+    }
+    return false;
+}
 #pragma endregion

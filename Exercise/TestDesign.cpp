@@ -3108,8 +3108,97 @@ void TestLeetCode1603(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1586(void)
+{
+    Logger::WriteMessage("Test Leet Code 1586");
+    vector<string> commands =
+    {
+       "BSTIterator", "next", "next", "prev", "next", "hasNext", 
+       "next", "next", "next", "hasNext", "hasPrev", "prev", "prev"
+    };
+    vector<string> parameters =
+    {
+        "[7, 3, 15, null, null, 9, 20]", "null", "null",
+        "null", "null", "null", "null", "null", "null",
+        "null", "null", "null","null"
+    };
+
+    vector<string> result;
+    TreeNode* treeNode = nullptr;
+    BSTIteratorII* bstIteratorII = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "BSTIterator")
+        {
+            LeetCodeTree leetCodeTree;
+            treeNode = leetCodeTree.deserialize(parameters[i]);
+            bstIteratorII = new BSTIteratorII(treeNode);
+            result.push_back("null");
+        }
+        else if (commands[i] == "prev")
+        {
+            result.push_back(to_string(bstIteratorII->prev()));
+        }
+        else if (commands[i] == "next")
+        {
+             result.push_back(to_string(bstIteratorII->next()));
+        }
+        else if (commands[i] == "hasPrev")
+        {
+            bool ret = bstIteratorII->hasPrev();
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+        else if (commands[i] == "hasNext")
+        {
+            bool ret = bstIteratorII->hasNext();
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+    }
+    delete treeNode;
+    delete bstIteratorII;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1570(void)
+{
+    Logger::WriteMessage("Test Leet Code 1570");
+    vector<int> nums1 = { 1, 0, 0, 2, 3 };
+    vector<int> nums2 = { 0, 3, 0, 4, 0 };
+    SparseVector vec1(nums1);
+    SparseVector vec2(nums2);
+    int result = vec1.dotProduct(vec2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 0,1,0,0,0 };
+    nums2 = { 0,0,0,0,2 };
+    vec1 = SparseVector(nums1);
+    vec2 = SparseVector(nums2);
+    result = vec1.dotProduct(vec2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 0,1,0,0,2,0,0 };
+    nums2 = { 1,0,0,0,3,0,4 };
+    vec1 = SparseVector(nums1);
+    vec2 = SparseVector(nums2);
+    result = vec1.dotProduct(vec2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1570();
+    TestLeetCode1586();
     TestLeetCode1603();
     TestLeetCode1600();
     TestLeetCode1500();

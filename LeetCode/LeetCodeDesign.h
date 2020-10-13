@@ -8635,4 +8635,249 @@ public:
         }
     }
 };
+
+/// <summary>
+/// Leet code #1586. Binary Search Tree Iterator II
+/// 
+/// Medium
+///
+/// Implement the BSTIterator class that represents an iterator over the 
+/// in-order traversal of a binary search tree (BST):
+//
+/// BSTIterator(TreeNode root) Initializes an object of the BSTIterator 
+/// class. The root of the BST is given as part of the constructor. The 
+/// pointer should be initialized to a non-existent number smaller than 
+/// any element in the BST.
+/// boolean hasNext() Returns true if there exists a number in the 
+/// traversal to the right of the pointer, otherwise returns false.
+/// int next() Moves the pointer to the right, then returns the number 
+/// at the pointer.
+/// boolean hasPrev() Returns true if there exists a number in the 
+/// traversal to the left of the pointer, otherwise returns false.
+/// int prev() Moves the pointer to the left, then returns the number 
+/// at the pointer.
+/// Notice that by initializing the pointer to a non-existent smallest 
+/// number, the first call to next() will return the smallest element in 
+/// the BST.
+///
+/// You may assume that next() and prev() calls will always be valid. 
+/// That is, there will be at least a next/previous number in the in-order 
+/// traversal when next()/prev() is called. 
+///
+/// Follow up: Could you solve the problem without precalculating the 
+/// values of the tree?
+///
+/// Example 1:
+/// Input
+/// ["BSTIterator", "next", "next", "prev", "next", "hasNext", "next", 
+/// "next", "next", "hasNext", "hasPrev", "prev", "prev"]
+/// [[[7, 3, 15, null, null, 9, 20]], [null], [null], [null], [null], 
+/// [null], [null], [null], [null], [null], [null], [null], [null]]
+/// Output
+/// [null, 3, 7, 3, 7, true, 9, 15, 20, false, true, 15, 9]
+/// Explanation 
+/// The underlined element is where the pointer currently is.
+/// BSTIterator bSTIterator = new BSTIterator
+/// ([7, 3, 15, null, null, 9, 20]); 
+/// // state is   [3, 7, 9, 15, 20]
+/// bSTIterator.next(); // state becomes [3, 7, 9, 15, 20], return 3
+/// bSTIterator.next(); // state becomes [3, 7, 9, 15, 20], return 7
+/// bSTIterator.prev(); // state becomes [3, 7, 9, 15, 20], return 3
+/// bSTIterator.next(); // state becomes [3, 7, 9, 15, 20], return 7
+/// bSTIterator.hasNext(); // return true
+/// bSTIterator.next(); // state becomes [3, 7, 9, 15, 20], return 9
+/// bSTIterator.next(); // state becomes [3, 7, 9, 15, 20], return 15
+/// bSTIterator.next(); // state becomes [3, 7, 9, 15, 20], return 20
+/// bSTIterator.hasNext(); // return false
+/// bSTIterator.hasPrev(); // return true
+/// bSTIterator.prev(); // state becomes [3, 7, 9, 15, 20], return 15
+/// bSTIterator.prev(); // state becomes [3, 7, 9, 15, 20], return 9
+///
+/// Constraints:
+/// 1. The number of nodes in the tree is in the range [1, 10^5].
+/// 2. 0 <= Node.val <= 10^6
+/// 3. At most 10^5 calls will be made to hasNext, next, hasPrev, and prev.
+/// </summary>
+class BSTIteratorII 
+{
+private:
+    vector<TreeNode*> m_parents;
+    TreeNode* m_node = nullptr;
+public:
+    BSTIteratorII(TreeNode* root) 
+    {
+        while (root != nullptr)
+        {
+            m_parents.push_back(root);
+            root = root->left;
+        }
+    }
+
+    bool hasNext() 
+    {
+        if (m_node != nullptr && m_node->right != nullptr)
+        {
+            return true;
+        }
+        for (size_t i = 0; i < m_parents.size(); i++)
+        {
+            if (m_parents[i] != nullptr)
+            {
+                if (m_node == nullptr || m_parents[i]->val >= m_node->val)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    int next() 
+    {
+        if (m_node != nullptr && m_node->right != nullptr)
+        {
+            m_parents.push_back(m_node);
+            m_node = m_node->right;
+            while (m_node != nullptr)
+            {
+                m_parents.push_back(m_node);
+                m_node = m_node->left;
+            }
+        }
+        else
+        {
+            while (!m_parents.empty() && m_parents.back() != nullptr && 
+                    m_node != nullptr && m_parents.back()->val < m_node->val)
+            {
+                m_parents.pop_back();
+            }
+        }
+        m_node = m_parents.back();
+        m_parents.pop_back();
+        return m_node->val;
+    }
+
+    bool hasPrev() 
+    {
+        if (m_node != nullptr && m_node->left != nullptr)
+        {
+            return true;
+        }
+        for (size_t i = 0; i < m_parents.size(); i++)
+        {
+            if (m_parents[i] != nullptr && m_node != nullptr)
+            {
+                if (m_parents[i]->val < m_node->val)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    int prev() 
+    {
+        if (m_node != nullptr && m_node->left != nullptr)
+        {
+            m_parents.push_back(m_node);
+            m_node = m_node->left;
+            while (m_node != nullptr)
+            {
+                m_parents.push_back(m_node);
+                m_node = m_node->right;
+            }
+        }
+        else
+        {
+            while (!m_parents.empty() && m_parents.back() != nullptr && 
+                   m_node != nullptr && m_parents.back()->val >= m_node->val)
+            {
+                m_parents.pop_back();
+            }
+        }
+        m_node = m_parents.back();
+        m_parents.pop_back();
+        return m_node->val;
+    }
+};
+
+
+/// <summary>
+/// Leet code #1570. Dot Product of Two Sparse Vectors
+/// 
+/// Medium
+///
+/// Given two sparse vectors, compute their dot product.
+///
+/// Implement class SparseVector:
+/// SparseVector(nums) Initializes the object with the vector nums
+/// dotProduct(vec) Compute the dot product between the instance of 
+/// SparseVector and vec
+/// A sparse vector is a vector that has mostly zero values, you should
+/// store the sparse vector efficiently and compute the dot product 
+/// between two SparseVector.
+///
+/// Follow up: What if only one of the vectors is sparse?
+///
+/// Example 1:
+/// Input: nums1 = [1,0,0,2,3], nums2 = [0,3,0,4,0]
+/// Output: 8
+/// Explanation: v1 = SparseVector(nums1) , v2 = SparseVector(nums2)
+/// v1.dotProduct(v2) = 1*0 + 0*3 + 0*0 + 2*4 + 3*0 = 8
+///
+/// Example 2:
+/// Input: nums1 = [0,1,0,0,0], nums2 = [0,0,0,0,2]
+/// Output: 0
+/// Explanation: v1 = SparseVector(nums1) , v2 = SparseVector(nums2)
+/// v1.dotProduct(v2) = 0*0 + 1*0 + 0*0 + 0*0 + 0*2 = 0
+///
+/// Example 3:
+/// Input: nums1 = [0,1,0,0,2,0,0], nums2 = [1,0,0,0,3,0,4]
+/// Output: 6
+/// Constraints:
+/// 1. n == nums1.length == nums2.length
+/// 2. 1 <= n <= 10^5
+/// 3. 0 <= nums1[i], nums2[i] <= 100
+/// </summary>
+class SparseVector 
+{
+private:
+    vector<pair<int, int>> m_values;
+public:
+
+    SparseVector(vector<int>& nums) 
+    {
+        for (size_t i = 0; i < nums.size(); i++)
+        {
+            if (nums[i] != 0) m_values.push_back(make_pair(i, nums[i]));
+        }
+    }
+
+    // Return the dotProduct of two sparse vectors
+    int dotProduct(SparseVector& vec) 
+    {
+        int pos1 = 0;
+        int pos2 = 0;
+        int result = 0;
+        while (pos1 < (int)m_values.size() && pos2 < (int)vec.m_values.size())
+        {
+            if (m_values[pos1].first < vec.m_values[pos2].first)
+            {
+                pos1++;
+            }
+            else if (m_values[pos1].first > vec.m_values[pos2].first)
+            {
+                pos2++;
+            }
+            else
+            {
+                result += m_values[pos1].second * vec.m_values[pos2].second;
+                pos1++;
+                pos2++;
+            }
+        }
+        return result;
+    }
+};
 #endif // LeetcodeDesign_H

@@ -52,6 +52,8 @@ void TestLeetCode1472(void);
 void TestLeetCode1476(void);
 void TestLeetCode1483(void);
 void TestLeetCode1500(void);
+void TestLeetCode1570(void);
+void TestLeetCode1586(void);
 void TestLeetCode1600(void);
 void TestLeetCode1603(void);
 void TestLeetCodeDesign(void);

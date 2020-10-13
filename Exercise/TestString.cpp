@@ -3439,6 +3439,27 @@ void TestLeetCode1592(void)
     Logger::WriteMessage("text = " + text + "; result = " + result);
 }
 
+void TestLeetCode1614(void)
+{
+    Logger::WriteMessage("Test Leet Code 1614");
+    LeetCodeString leetCode;
+    string s = "(1+(2*3)+((8)/4))+1";
+    int result = leetCode.maxDepth(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "(1)+((2))+(((3)))";
+    result = leetCode.maxDepth(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "1+(2*3)/(2-1)";
+    result = leetCode.maxDepth(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "1";
+    result = leetCode.maxDepth(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCode1598(void)
 {
     Logger::WriteMessage("Test Leet Code 1598");
@@ -3459,8 +3480,40 @@ void TestLeetCode1598(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1616(void)
+{
+    Logger::WriteMessage("Test Leet Code 1616");
+    LeetCodeString leetCode;
+    string a = "x";
+    string b = "y";
+    bool result = leetCode.checkPalindromeFormation(a, b);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; result = " + (string)(result ? "true" : "false"));
+
+    a = "abdef";
+    b = "fecab";
+    result = leetCode.checkPalindromeFormation(a, b);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; result = " + (string)(result ? "true" : "false"));
+
+    a = "ulacfd";
+    b = "jizalu";
+    result = leetCode.checkPalindromeFormation(a, b);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; result = " + (string)(result ? "true" : "false"));
+
+    a = "xbdef";
+    b = "xecab";
+    result = leetCode.checkPalindromeFormation(a, b);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; result = " + (string)(result ? "true" : "false"));
+
+    a = "pvhmupgqeltozftlmfjjde";
+    b = "yjgpzbezspnnpszebzmhvp";
+    result = leetCode.checkPalindromeFormation(a, b);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1616();
+    TestLeetCode1614();
     TestLeetCode1598();
     TestLeetCode1592();
     TestLeetCode1578();

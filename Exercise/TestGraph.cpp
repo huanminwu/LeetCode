@@ -2977,8 +2977,66 @@ void TestLeetCode1591(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1615(void)
+{
+    Logger::WriteMessage("Test Leet Code 1615");
+    LeetCodeGraph leetCode;
+    int n = 4;
+    vector<vector<int>> roads = { {0, 1},{0, 3},{1, 2},{1, 3} };
+    int result = leetCode.maximalNetworkRank(n, roads);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 5;
+    roads = { {0, 1},{0, 3},{1, 2},{1, 3},{2, 3},{2, 4} };
+    result = leetCode.maximalNetworkRank(n, roads);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 8;
+    roads = { {0, 1},{1, 2},{2, 3},{2, 4},{5, 6},{5, 7} };
+    result = leetCode.maximalNetworkRank(n, roads);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1617(void)
+{
+    Logger::WriteMessage("Test Leet Code 1617");
+    LeetCodeGraph leetCode;
+    int n = 4;
+    vector<vector<int>> edges = { {1, 2},{2, 3},{2, 4} };
+    vector<int> result = leetCode.countSubgraphsForEachDiameter(n, edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+
+    n = 2;
+    edges = { {1, 2} };
+    result = leetCode.countSubgraphsForEachDiameter(n, edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+
+    n = 3;
+    edges = { {1, 2},{2, 3} };
+    result = leetCode.countSubgraphsForEachDiameter(n, edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+
+    n = 7;
+    edges = { {1, 4}, { 1, 3 }, { 2, 5 }, { 2, 6 }, { 3, 6 }, { 6, 7 } };
+    result = leetCode.countSubgraphsForEachDiameter(n, edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1617();
+    TestLeetCode1615();
     TestLeetCode1591();
     TestLeetCode1575();
     TestLeetCode1579();
