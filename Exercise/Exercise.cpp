@@ -4156,6 +4156,7 @@ void TestLeetCode1199(void)
     Logger::WriteMessage(blocks);
     Logger::WriteMessage("split = " + to_string(split) + "; result = " + to_string(result));
 }
+
 void test_string()
 {
     string s = " phone.jpg, Warsaw  ,  2013-09-05 14:08:15  ";
@@ -4186,17 +4187,17 @@ void test_string()
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeGraph();
-    TestLeetCodeString();
-    TestLeetCodeDesign();
-    TestLeetCodeTree();
     TestLeetCodeSort();
-    TestLeetCodeHashtable();
+    TestLeetCodeDP();
+    TestLeetCodeGraph();
     TestLeetCodeArray();
+    TestLeetCodeDesign();
+    TestLeetCodeString();
+    TestLeetCodeTree();
     TestLeetCodeMath();
+    TestLeetCodeHashtable();
     TestLeetCodeDFS();
     TestLeetCodeGreedy();
-    TestLeetCodeDP();
     TestLeetCodeDFS();
     TestLeetCodeBinarySearch();
     TestLeetCodeBit();

@@ -3510,8 +3510,86 @@ void TestLeetCode1616(void)
     Logger::WriteMessage("a = " + a + "; b = " + b + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1618(void)
+{
+    Logger::WriteMessage("Test Leet Code 1618");
+    LeetCodeString leetCode;
+    string text = "helloworld";
+    int w = 80;
+    int h = 20;
+    vector <int> fonts = { 6, 8, 10, 12, 14, 16, 18, 24, 36 };
+    int result = leetCode.maxFont(text, w, h, fonts);
+    Logger::WriteMessage("w = " + to_string(w) + "; h = " + to_string(h) + "; result = " + to_string(result));
+
+    text = "leetcode";
+    w = 1000;
+    h = 50;
+    fonts = { 1,2,4 };
+    result = leetCode.maxFont(text, w, h, fonts);
+    Logger::WriteMessage("w = " + to_string(w) + "; h = " + to_string(h) + "; result = " + to_string(result));
+
+    text = "easyquestion";
+    w = 100;
+    h = 100;
+    fonts = { 10,15,20,25 };
+    result = leetCode.maxFont(text, w, h, fonts);
+    Logger::WriteMessage("w = " + to_string(w) + "; h = " + to_string(h) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1624(void)
+{
+    Logger::WriteMessage("Test Leet Code 1624");
+    LeetCodeString leetCode;
+    string s = "aa";
+    int result = leetCode.maxLengthBetweenEqualCharacters(s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "abca";
+    result = leetCode.maxLengthBetweenEqualCharacters(s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "cbzxy";
+    result = leetCode.maxLengthBetweenEqualCharacters(s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "cabbac";
+    result = leetCode.maxLengthBetweenEqualCharacters(s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1625(void)
+{
+    Logger::WriteMessage("Test Leet Code 1625");
+    LeetCodeString leetCode;
+    string s = "5525";
+    int a = 9;
+    int b = 2;
+    string result = leetCode.findLexSmallestString(s, a, b);
+    Logger::WriteMessage("a = " + to_string(a) + "b = " + to_string(b) + "; result = " + result);
+
+    s = "74";
+    a = 5;
+    b = 1;
+    result = leetCode.findLexSmallestString(s, a, b);
+    Logger::WriteMessage("a = " + to_string(a) + "b = " + to_string(b) + "; result = " + result);
+
+    s = "0011";
+    a = 4;
+    b = 2;
+    result = leetCode.findLexSmallestString(s, a, b);
+    Logger::WriteMessage("a = " + to_string(a) + "b = " + to_string(b) + "; result = " + result);
+
+    s = "43987654";
+    a = 7;
+    b = 3;
+    result = leetCode.findLexSmallestString(s, a, b);
+    Logger::WriteMessage("a = " + to_string(a) + "b = " + to_string(b) + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1625();
+    TestLeetCode1624();
     TestLeetCode1616();
     TestLeetCode1614();
     TestLeetCode1598();

@@ -4631,8 +4631,52 @@ void TestLeetCode1605(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1629(void)
+{
+    Logger::WriteMessage("Test Leet Code 1629");
+    LeetCodeArray leetCode;
+    vector<int> releaseTimes = { 9, 29, 49, 50 };
+    string keysPressed = "cbcd";
+    char result = leetCode.slowestKey(releaseTimes, keysPressed);
+    Logger::WriteMessage(releaseTimes);
+    Logger::WriteMessage("keysPressed = " + keysPressed);
+    Logger::WriteMessage("result = " + string(1, result));
+
+    releaseTimes = { 12,23,36,46,62 };
+    keysPressed = "spuda";
+    result = leetCode.slowestKey(releaseTimes, keysPressed);
+    Logger::WriteMessage(releaseTimes);
+    Logger::WriteMessage("keysPressed = " + keysPressed);
+    Logger::WriteMessage("result = " + string(1, result));
+}
+
+void TestLeetCode1630(void)
+{
+    Logger::WriteMessage("Test Leet Code 1630");
+    LeetCodeArray leetCode;
+    vector<int>  nums = { 4, 6, 5, 9, 3, 7 };
+    vector<int> l = { 0, 0, 2 };
+    vector<int> r = { 2, 3, 5 };
+    vector<bool> result = leetCode.checkArithmeticSubarrays(nums, l, r);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(l);
+    Logger::WriteMessage(r);
+    Logger::WriteMessage(result);
+
+    nums = { -12,-9,-3,-12,-6,15,20,-25,-20,-15,-10 };
+    l = { 0,1,6,4,8,7 };
+    r = { 4,4,9,7,9,10 };
+    result = leetCode.checkArithmeticSubarrays(nums, l, r);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(l);
+    Logger::WriteMessage(r);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1630();
+    TestLeetCode1629();
     TestLeetCode1605();
     TestLeetCode1599();
     TestLeetCode1590();

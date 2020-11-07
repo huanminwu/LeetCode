@@ -8880,4 +8880,119 @@ public:
         return result;
     }
 };
+
+/// <summary>
+/// Leet code #1622. Fancy Sequence
+/// 
+/// Hard
+///
+/// Write an API that generates fancy sequences using the append, 
+/// addAll, and multAll operations.
+/// 
+/// Implement the Fancy class:
+///  Fancy() Initializes the object with an empty sequence.
+/// void append(val) Appends an integer val to the end of the sequence.
+/// void addAll(inc) Increments all existing values in the sequence by 
+/// an integer inc.
+/// void multAll(m) Multiplies all existing values in the sequence by 
+/// an integer m.
+/// int getIndex(idx) Gets the current value at index idx (0-indexed) 
+/// of the sequence modulo 109 + 7. If the index is greater or equal than 
+/// the length of the sequence, return -1.
+///
+/// Example 1:
+/// Input
+/// ["Fancy", "append", "addAll", "append", "multAll", "getIndex", 
+/// "addAll", "append", "multAll", "getIndex", "getIndex", "getIndex"]
+/// [[], [2], [3], [7], [2], [0], [3], [10], [2], [0], [1], [2]]
+/// Output
+/// [null, null, null, null, null, 10, null, null, null, 26, 34, 20]
+///
+/// Explanation
+/// Fancy fancy = new Fancy();
+/// fancy.append(2);   // fancy sequence: [2]
+/// fancy.addAll(3);   // fancy sequence: [2+3] -> [5]
+/// fancy.append(7);   // fancy sequence: [5, 7]
+/// fancy.multAll(2);  // fancy sequence: [5*2, 7*2] -> [10, 14]
+/// fancy.getIndex(0); // return 10
+/// fancy.addAll(3);   // fancy sequence: [10+3, 14+3] -> [13, 17]
+/// fancy.append(10);  // fancy sequence: [13, 17, 10]
+/// fancy.multAll(2);  // fancy sequence: [13*2, 17*2, 10*2] -> [26, 34, 20]
+/// fancy.getIndex(0); // return 26
+/// fancy.getIndex(1); // return 34
+/// fancy.getIndex(2); // return 20
+///
+/// Constraints:
+/// 1. 1 <= val, inc, m <= 100
+/// 2. 0 <= idx <= 10^5
+/// 3. At most 10^5 calls total will be made to append, addAll, multAll, 
+/// and getIndex.
+/// </summary>
+class Fancy 
+{
+private:
+    vector<long long> m_vals;
+    vector<long long> m_muls;
+    vector<long long> m_incs;
+    const long long M = 1000000007;
+    long long pow(long  long a, long long m, long long M)
+    {
+        long long result = 1;
+        while (m > 0)
+        {
+            if (m % 2 == 1) result = (result * a) % M;
+            m = m / 2;
+            a = (a * a) % M;
+        }
+        return result % M;
+    }
+public:
+    Fancy() 
+    {
+    }
+
+    void append(int val) 
+    {
+        m_vals.push_back((long long)val);
+        if (m_muls.empty())
+        {
+            m_muls.push_back(1);
+            m_incs.push_back(0);
+        }
+        else
+        {
+            m_muls.push_back(m_muls.back());
+            m_incs.push_back(m_incs.back());
+        }
+    }
+
+    void addAll(int inc) 
+    {
+        if (m_incs.empty()) return;
+        m_incs.back() = (m_incs.back() + inc) % M;
+    }
+
+    void multAll(int m) 
+    {
+        if (m_muls.empty()) return;
+        m_muls.back() = (int)((long long)m_muls.back() * (long long)m % M);
+        m_incs.back() = (int)((long long)m_incs.back() * (long long)m % M);
+    }
+
+    int getIndex(int idx) 
+    {
+        if (idx >= (int)m_vals.size()) return -1;
+        long long prev_mul = 1;
+        long long prev_inc = 0;
+        if (idx > 0)
+        {
+            prev_mul = m_muls[idx - 1];
+            prev_inc = m_incs[idx - 1];
+        }
+        long long mul = (m_muls.back() * pow(prev_mul, M - 2, M)) % M;
+        long long inc = (m_incs.back() - (mul * prev_inc) % M + M) %M;
+        int result = (int)(((m_vals[idx] * mul) % M + inc) % M);
+        return result;
+    }
+};
 #endif // LeetcodeDesign_H

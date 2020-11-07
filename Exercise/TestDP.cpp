@@ -2017,8 +2017,35 @@ void TestLeetCode1594(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+void TestLeetCode1621(void)
+{
+    Logger::WriteMessage("Test Leet Code 1621");
+    LeetCodeDP leetCode;
+    int n = 4;
+    int k = 2;
+    int result = leetCode.numberOfSets(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = 2" + to_string(k)+ "; result = " + to_string(result));
+
+    n = 3;
+    k = 1;
+    result = leetCode.numberOfSets(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = 2" + to_string(k) + "; result = " + to_string(result));
+
+    n = 30;
+    k = 7;
+    result = leetCode.numberOfSets(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = 2" + to_string(k) + "; result = " + to_string(result));
+
+    n = 5;
+    k = 3;
+    result = leetCode.numberOfSets(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = 2" + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1621();
     TestLeetCode1594();
     TestLeetCode1569();
     TestLeetCode1563();

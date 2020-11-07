@@ -9390,3 +9390,152 @@ int LeetCodeMath::minimumOneBitOperations(int n)
     return result;
 }
 
+/// <summary>
+/// Leet code #1619. Mean of Array After Removing Some Elements
+/// 
+/// Easy
+///
+/// Given an integer array arr, return the mean of the remaining integers 
+/// after removing the smallest 5% and the largest 5% of the elements.
+///
+/// Answers within 10-5 of the actual answer will be considered accepted.
+/// 
+/// Example 1:
+/// Input: arr = [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3]
+/// Output: 2.00000
+/// Explanation: After erasing the minimum and the maximum values of this 
+/// array, all elements are equal to 2, so the mean is 2.
+///
+/// Example 2:
+/// Input: arr = [6,2,7,5,1,2,0,3,10,2,5,0,5,5,0,8,7,6,8,0]
+/// Output: 4.00000
+///
+/// Example 3:
+///
+/// Input: arr = [6,0,7,0,7,5,7,8,3,4,0,7,8,1,6,8,1,1,2,4,8,1,9,5,4,3,
+/// 8,5,10,8,6,6,1,0,6,10,8,2,3,4]
+/// Output: 4.77778
+///
+/// Example 4:
+/// Input: arr = [9,7,8,7,7,8,4,4,6,8,8,7,6,8,8,9,2,6,0,0,1,10,8,6,3,3,5,
+/// 1,10,9,0,7,10,0,10,4,1,10,6,9,3,6,0,0,2,7,0,6,7,2,9,7,7,3,0,1,6,1,10,3]
+/// Output: 5.27778
+///
+/// Example 5:
+/// Input: arr = [4,8,4,10,0,7,1,3,7,8,8,3,4,1,6,2,1,1,8,0,9,8,0,3,9,10,
+/// 3,10,1,10,7,3,2,1,4,9,10,7,6,4,0,8,5,1,2,1,6,2,5,0,7,10,9,10,3,7,10,5,
+/// 8,5,7,6,7,6,10,9,5,10,5,5,7,2,10,7,7,8,2,0,1,1]
+/// Output: 5.29167
+///
+/// Constraints:
+/// 1. 20 <= arr.length <= 1000
+/// 2. arr.length is a multiple of 20.
+/// 3. 0 <= arr[i] <= 10^5
+/// </summary>
+double LeetCodeMath::trimMean(vector<int>& arr)
+{
+    sort(arr.begin(), arr.end());
+    int remove = (int) (std::round((double)arr.size() * 0.05));
+    int first = remove;
+    int last = arr.size() - 1 - remove;
+    double sum = 0;
+    for (int i = first; i <= last; i++)
+    {
+        sum += arr[i];
+    }
+    double result = sum / ((double)last - (double)first + 1.0);
+    return result;
+}
+
+/// <summary>
+/// Leet code #1620. Coordinate With Maximum Network Quality
+/// 
+/// Medium
+///
+/// You are given an array of network towers towers and an integer radius, 
+/// where towers[i] = [xi, yi, qi] denotes the ith network tower with 
+/// location (xi, yi) and quality factor qi. All the coordinates are 
+/// integral coordinates on the X-Y plane, and the distance between two 
+/// coordinates is the Euclidean distance.
+///
+/// The integer radius denotes the maximum distance in which the tower is 
+/// reachable. The tower is reachable if the distance is less than or equal 
+/// to radius. Outside that distance, the signal becomes garbled, and the 
+/// tower is not reachable.
+///
+/// The signal quality of the ith tower at a coordinate (x, y) is 
+/// calculated with the formula (qi / (1 + d)), where d is the distance 
+/// between the tower and the coordinate. The network quality at a 
+/// coordinate is the sum of the signal qualities from all the reachable 
+/// towers.
+/// 
+/// Return the integral coordinate where the network quality is maximum. If 
+/// there are multiple coordinates with the same network quality, return 
+/// the lexicographically minimum coordinate.
+///
+/// Note:
+/// 1. A coordinate (x1, y1) is lexicographically smaller than (x2, y2) if 
+///    either x1 < x2 or x1 == x2 and y1 < y2.
+/// 2. (val) is the greatest integer less than or equal to val (the floor 
+///    function).
+///
+/// Example 1:
+/// Input: towers = [[1,2,5],[2,1,7],[3,1,9]], radius = 2
+/// Output: [2,1]
+/// Explanation: 
+/// At coordinate (2, 1) the total quality is 13
+/// - Quality of 7 from (2, 1) results in (7 / (1 + sqrt(0)) = 7
+/// - Quality of 5 from (1, 2) results in (5 / (1 + sqrt(2)) = 2.07 = 2
+/// - Quality of 9 from (3, 1) results in (9 / (1 + sqrt(1)) = 4.5 = 4
+/// No other coordinate has higher quality.
+///
+/// Example 2:
+/// Input: towers = [[23,11,21]], radius = 9
+/// Output: [23,11]
+///
+/// Example 3:
+/// Input: towers = [[1,2,13],[2,1,7],[0,1,9]], radius = 2
+/// Output: [1,2]
+///
+/// Example 4:
+/// Input: towers = [[2,1,9],[0,1,9]], radius = 2
+/// Output: [0,1]
+/// Explanation: Both (0, 1) and (2, 1) are optimal in terms of quality 
+/// but (0, 1) is lexicograpically minimal.
+///
+/// Constraints:
+/// 1. 1 <= towers.length <= 50
+/// 2. towers[i].length == 3
+/// 3. 0 <= xi, yi, qi <= 50
+/// 4. 1 <= radius <= 50
+/// </summary>
+vector<int> LeetCodeMath::bestCoordinate(vector<vector<int>>& towers, int radius)
+{
+    vector<int> result(2);
+    int max_signal = INT_MIN;
+    int signal = 0;
+    for (int x = 0; x <= 50; x++)
+    {
+        for (int y = 0; y <= 50; y++)
+        {
+            signal = 0;
+            for (size_t i = 0; i < towers.size(); i++)
+            {
+                int dist_x = towers[i][0] - x;
+                int dist_y = towers[i][1] - y;
+                double distance = sqrt(dist_x * dist_x + dist_y * dist_y);
+                if (distance > radius) continue;
+                
+                signal += (int)(towers[i][2] / (1 + distance));
+            }
+            if (signal > max_signal)
+            {
+                result[0] = x;
+                result[1] = y;
+                max_signal = signal;
+            }
+        }
+    }
+    return result;
+}
+

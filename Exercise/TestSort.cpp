@@ -861,8 +861,154 @@ void TestLeetCode1606(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1564(void)
+{
+    Logger::WriteMessage("Test Leet Code 1564");
+    LeetCodeSort leetCode;
+    vector<int> boxes = { 4, 3, 4, 1 };
+    vector<int> warehouse = { 5, 3, 3, 4, 1 };
+    int result = leetCode.maxBoxesInWarehouse(boxes, warehouse);
+    Logger::WriteMessage(boxes);
+    Logger::WriteMessage(warehouse);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    boxes = { 1,2,2,3,4 };
+    warehouse = { 3,4,1,2 };
+    result = leetCode.maxBoxesInWarehouse(boxes, warehouse);
+    Logger::WriteMessage(boxes);
+    Logger::WriteMessage(warehouse);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    boxes = { 1,2,3 };
+    warehouse = { 1,2,3,4 };
+    result = leetCode.maxBoxesInWarehouse(boxes, warehouse);
+    Logger::WriteMessage(boxes);
+    Logger::WriteMessage(warehouse);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    boxes = { 4,5,6 };
+    warehouse = { 3,3,3,3,3 };
+    result = leetCode.maxBoxesInWarehouse(boxes, warehouse);
+    Logger::WriteMessage(boxes);
+    Logger::WriteMessage(warehouse);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1580(void)
+{
+    Logger::WriteMessage("Test Leet Code 1580");
+    LeetCodeSort leetCode;
+    vector<int> boxes = { 1,2,2,3,4 };
+    vector<int> warehouse = { 3,4,1,2 };
+    int result = leetCode.maxBoxesInWarehouseII(boxes, warehouse);
+    Logger::WriteMessage(boxes);
+    Logger::WriteMessage(warehouse);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    boxes = { 3,5,5,2 };
+    warehouse = { 2,1,3,4,5 };
+    result = leetCode.maxBoxesInWarehouseII(boxes, warehouse);
+    Logger::WriteMessage(boxes);
+    Logger::WriteMessage(warehouse);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    boxes = { 1,2,3 };
+    warehouse = { 1,2,3,4 };
+    result = leetCode.maxBoxesInWarehouseII(boxes, warehouse);
+    Logger::WriteMessage(boxes);
+    Logger::WriteMessage(warehouse);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    boxes = { 4,5,6 };
+    warehouse = { 3,3,3,3,3 };
+    result = leetCode.maxBoxesInWarehouseII(boxes, warehouse);
+    Logger::WriteMessage(boxes);
+    Logger::WriteMessage(warehouse);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1626(void)
+{
+    Logger::WriteMessage("Test Leet Code 1626");
+    LeetCodeSort leetCode;
+    vector<int> scores = { 1, 3, 5, 10, 15 };
+    vector<int> ages = { 1, 2, 3, 4, 5 };
+    int result = leetCode.bestTeamScore(scores, ages);
+    Logger::WriteMessage(scores);
+    Logger::WriteMessage(ages);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    scores = { 4,5,6,5 };
+    ages = { 2,1,2,1 };
+    result = leetCode.bestTeamScore(scores, ages);
+    Logger::WriteMessage(scores);
+    Logger::WriteMessage(ages);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    scores = { 1,2,3,5 };
+    ages = { 8,9,10,1 };
+    result = leetCode.bestTeamScore(scores, ages);
+    Logger::WriteMessage(scores);
+    Logger::WriteMessage(ages);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1632(void)
+{
+    Logger::WriteMessage("Test Leet Code 1632");
+    LeetCodeSort leetCode;
+    vector<vector<int>> matrix = { {1, 2},{3, 4} };
+    vector<vector<int>> result = leetCode.matrixRankTransform(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage(result);
+
+    matrix = { {7, 7},{7, 7} };
+    result = leetCode.matrixRankTransform(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage(result);
+
+    matrix =
+    {
+        {20, -21, 14},
+        {-19, 4, 19},
+        {22, -47, 24},
+        {-19, 4, 19}
+    };
+    result = leetCode.matrixRankTransform(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage(result);
+
+    matrix =
+    {
+        {7,3,6},{1,4,5}, {9, 8, 2} 
+    };
+    result = leetCode.matrixRankTransform(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage(result);
+
+    matrix =
+    {
+        {1,2,2},{-1,1,3}, {2, 2, 3}
+    };
+    result = leetCode.matrixRankTransform(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage(result);
+
+    matrix =
+    { 
+        {-44,31,-46,13,-48,-5},{-44,-5,14,-47,48,7},{24,39,-6,-27,20,-1}
+    };
+    result = leetCode.matrixRankTransform(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1632();
+    TestLeetCode1626();
+    TestLeetCode1580();
+    TestLeetCode1564();
     TestLeetCode1606();
     TestLeetCode1608();
     TestLeetCode1585();

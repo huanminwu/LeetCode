@@ -3033,8 +3033,74 @@ void TestLeetCode1617(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1627(void)
+{
+    Logger::WriteMessage("Test Leet Code 1627");
+    LeetCodeGraph leetCode;
+    int n = 6;
+    int threshold = 2;
+    vector<vector<int>> queries = { {1, 4},{2, 5},{3, 6} };
+    vector<bool> result = leetCode.areConnected(n, threshold, queries);
+    Logger::WriteMessage("n = " + to_string(n) + "; threshold = " + to_string(threshold));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 6;
+    threshold = 0;
+    queries = { {4, 5},{3, 4},{3, 2},{2, 6},{1, 3} };
+    result = leetCode.areConnected(n, threshold, queries);
+    Logger::WriteMessage("n = " + to_string(n) + "; threshold = " + to_string(threshold));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 6;
+    threshold = 1;
+    queries = { {4, 5}, {4, 5},{3, 2},{2, 3},{3, 4} };
+    result = leetCode.areConnected(n, threshold, queries);
+    Logger::WriteMessage("n = " + to_string(n) + "; threshold = " + to_string(threshold));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 633;
+    threshold = 70;
+    queries = { {375, 288} };
+    result = leetCode.areConnected(n, threshold, queries);
+    Logger::WriteMessage("n = " + to_string(n) + "; threshold = " + to_string(threshold));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1631(void)
+{
+    Logger::WriteMessage("Test Leet Code 1631");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> heights = { {1, 2, 2},{3, 8, 2},{5, 3, 5} };
+    int result = leetCode.minimumEffortPath(heights);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    heights = { {1, 2, 3},{3, 8, 4},{5, 3, 5} };
+    result = leetCode.minimumEffortPath(heights);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    heights = 
+    { 
+        {1, 2, 1, 1, 1},
+        {1, 2, 1, 2, 1},
+        {1, 2, 1, 2, 1},
+        {1, 2, 1, 2, 1},
+        {1, 1, 1, 2, 1} 
+    };
+    result = leetCode.minimumEffortPath(heights);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1631();
+    TestLeetCode1627();
     TestLeetCode1617();
     TestLeetCode1615();
     TestLeetCode1591();

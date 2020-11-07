@@ -1391,6 +1391,217 @@ public:
     /// </summary>
     vector<int> busiestServers(int k, vector<int>& arrival, vector<int>& load);
 
+    /// <summary>
+    /// Leet code #1564. Put Boxes Into the Warehouse I
+    /// 
+    /// Medium
+    ///
+    /// You are given two arrays of positive integers, boxes and warehouse, 
+    /// representing the heights of some boxes of unit width and the heights 
+    /// of n rooms in a warehouse respectively. The warehouse's rooms are 
+    /// labelled from 0 to n - 1 from left to right where warehouse[i] 
+    /// (0-indexed) is the height of the ith room.
+    ///
+    /// Boxes are put into the warehouse by the following rules:
+    /// Boxes cannot be stacked.
+    /// You can rearrange the insertion order of the boxes.
+    /// Boxes can only be pushed into the warehouse from left to right only.
+    /// If the height of some room in the warehouse is less than the height 
+    /// of a box, then that box and all other boxes behind it will be stopped 
+    /// before that room.
+    /// Return the maximum number of boxes you can put into the warehouse.
+    ///
+    /// Example 1:
+    /// Input: boxes = [4,3,4,1], warehouse = [5,3,3,4,1]
+    /// Output: 3
+    /// Explanation: 
+    /// We can first put the box of height 1 in room 4. Then we can put the 
+    /// box of height 3 in either of the 3 rooms 1, 2, or 3. Lastly, we can 
+    /// put one box of height 4 in room 0.
+    /// There is no way we can fit all 4 boxes in the warehouse.
+    ///
+    /// Example 2:
+    /// Input: boxes = [1,2,2,3,4], warehouse = [3,4,1,2]
+    /// Output: 3
+    /// Explanation: 
+    /// Notice that it's not possible to put the box of height 4 into the 
+    /// warehouse since it cannot pass the first room of height 3.
+    /// Also, for the last two rooms, 2 and 3, only boxes of height 1 can fit.
+    /// We can fit 3 boxes maximum as shown above. The yellow box can also be 
+    /// put in room 2 instead.
+    /// Swapping the orange and green boxes is also valid, or swapping one of 
+    /// them with the red box.
+    ///
+    /// Example 3:
+    /// Input: boxes = [1,2,3], warehouse = [1,2,3,4]
+    /// Output: 1
+    /// Explanation: Since the first room in the warehouse is of height 1, we 
+    /// can only put boxes of height 1.
+    ///
+    /// Example 4:
+    /// Input: boxes = [4,5,6], warehouse = [3,3,3,3,3]
+    /// Output: 0
+    /// 
+    /// Constraints:
+    /// 1. n == warehouse.length
+    /// 2. 1 <= boxes.length, warehouse.length <= 10^5
+    /// 3. 1 <= boxes[i], warehouse[i] <= 10^9
+    /// </summary>
+    int maxBoxesInWarehouse(vector<int>& boxes, vector<int>& warehouse);
+
+    /// <summary>
+    /// Leet code #1580. Put Boxes Into the Warehouse II
+    /// 
+    /// Medium
+    ///
+    /// You are given two arrays of positive integers, boxes and warehouse, 
+    /// representing the heights of some boxes of unit width and the heights 
+    /// of n rooms in a warehouse respectively. The warehouse's rooms are 
+    /// labeled from 0 to n - 1 from left to right where warehouse[i] 
+    /// (0-indexed) is the height of the ith room.
+    ///
+    /// Boxes are put into the warehouse by the following rules:
+    /// Boxes cannot be stacked.
+    /// You can rearrange the insertion order of the boxes.
+    /// Boxes can be pushed into the warehouse from either side (left or right)
+    /// If the height of some room in the warehouse is less than the height of 
+    /// a box, then that box and all other boxes behind it will be stopped 
+    /// before that room.
+    /// Return the maximum number of boxes you can put into the warehouse.
+    ///
+    /// Example 1:
+    /// Input: boxes = [1,2,2,3,4], warehouse = [3,4,1,2]
+    /// Output: 4
+    /// Explanation:
+    /// We can store the boxes in the following order:
+    /// 1- Put the yellow box in room 2 from either the left or right side.
+    /// 2- Put the orange box in room 3 from the right side.
+    /// 3- Put the green box in room 1 from the left side.
+    /// 4- Put the red box in room 0 from the left side.
+    /// Notice that there are other valid ways to put 4 boxes such as swapping 
+    /// the red and green boxes or the red and orange boxes.
+    ///
+    /// Example 2:
+    /// Input: boxes = [3,5,5,2], warehouse = [2,1,3,4,5]
+    /// Output: 3
+    /// Explanation:
+    /// It's not possible to put the two boxes of height 5 in the warehouse 
+    /// since there's only 1 room of height >= 5.
+    /// Other valid solutions are to put the green box in room 2 or to put the 
+    /// orange box first in room 2 before putting the green and red boxes.
+    ///
+    /// Example 3:
+    /// Input: boxes = [1,2,3], warehouse = [1,2,3,4]
+    /// Output: 3
+    ///
+    /// Example 4:
+    /// Input: boxes = [4,5,6], warehouse = [3,3,3,3,3]
+    /// Output: 0
+    /// 
+    /// Constraints:
+    /// 1. n == warehouse.length
+    /// 2. 1 <= boxes.length, warehouse.length <= 10^5
+    /// 3. 1 <= boxes[i], warehouse[i] <= 10^9
+    /// </summary>
+    int maxBoxesInWarehouseII(vector<int>& boxes, vector<int>& warehouse);
+
+    /// <summary>
+    /// Leet code #1626. Best Team With No Conflicts
+    /// 
+    /// Medium
+    ///
+    /// You are the manager of a basketball team. For the upcoming tournament, 
+    /// you want to choose the team with the highest overall score. The score 
+    /// of the team is the sum of scores of all the players in the team.
+    ///
+    /// However, the basketball team is not allowed to have conflicts. A 
+    /// conflict exists if a younger player has a strictly higher score than 
+    /// an older player. A conflict does not occur between players of the same 
+    /// age.
+    ///
+    /// Given two lists, scores and ages, where each scores[i] and ages[i] 
+    /// represents the score and age of the ith player, respectively, return 
+    /// the highest overall score of all possible basketball teams.
+    ///
+    /// Example 1:
+    /// Input: scores = [1,3,5,10,15], ages = [1,2,3,4,5]
+    /// Output: 34
+    /// Explanation: You can choose all the players.
+    ///
+    /// Example 2:
+    /// Input: scores = [4,5,6,5], ages = [2,1,2,1]
+    /// Output: 16
+    /// Explanation: It is best to choose the last 3 players. Notice that 
+    /// you are allowed to choose multiple people of the same age.
+    ///
+    /// Example 3:
+    /// Input: scores = [1,2,3,5], ages = [8,9,10,1]
+    /// Output: 6
+    /// Explanation: It is best to choose the first 3 players. 
+    ///
+    /// Constraints:
+    /// 1. 1 <= scores.length, ages.length <= 1000
+    /// 2. scores.length == ages.length
+    /// 3. 1 <= scores[i] <= 10^6
+    /// 4. 1 <= ages[i] <= 1000
+    /// </summary>
+    int bestTeamScore(vector<int>& scores, vector<int>& ages);
+
+    /// <summary>
+    /// Leet code #1632. Rank Transform of a Matrix
+    /// 
+    /// Hard
+    ///
+    /// Given an m x n matrix, return a new matrix answer where 
+    /// answer[row][col] is the rank of matrix[row][col].
+    ///
+    /// The rank is an integer that represents how large an element 
+    /// is compared to other elements. It is calculated using the 
+    /// following rules:
+    ///
+    /// The rank is an integer starting from 1.
+    /// If two elements p and q are in the same row or column, then:
+    /// If p < q then rank(p) < rank(q)
+    /// If p == q then rank(p) == rank(q)
+    /// If p > q then rank(p) > rank(q)
+    /// The rank should be as small as possible.
+    /// It is guaranteed that answer is unique under the given rules.
+    ///
+    /// Example 1:
+    /// 
+    ///
+    /// Input: matrix = [[1,2],[3,4]]
+    /// Output: [[1,2],[2,3]]
+    /// Explanation:
+    /// The rank of matrix[0][0] is 1 because it is the smallest 
+    /// integer in its row and column.
+    /// The rank of matrix[0][1] is 2 because matrix[0][1] > 
+    /// matrix[0][0] and matrix[0][0] is rank 1.
+    /// The rank of matrix[1][0] is 2 because matrix[1][0] > 
+    /// matrix[0][0] and matrix[0][0] is rank 1.
+    /// The rank of matrix[1][1] is 3 because matrix[1][1] > matrix[0][1], 
+    /// matrix[1][1] > matrix[1][0], and both matrix[0][1] and matrix[1][0] 
+    /// are rank 2.
+    ///
+    /// Example 2:
+    /// Input: matrix = [[7,7],[7,7]]
+    /// Output: [[1,1],[1,1]]
+    ///
+    /// Example 3:
+    /// Input: matrix = [[20,-21,14],[-19,4,19],[22,-47,24],[-19,4,19]]
+    /// Output: [[4,2,3],[1,3,4],[5,1,6],[1,3,4]]
+    ///
+    /// Example 4:
+    /// Input: matrix = [[7,3,6],[1,4,5],[9,8,2]]
+    /// Output: [[5,1,4],[1,2,3],[6,3,1]]
+    /// 
+    /// Constraints:
+    /// 1. m == matrix.length
+    /// 2. n == matrix[i].length 
+    /// 3. 1 <= m, n <= 500
+    /// 4. -10^9 <= matrix[row][col] <= 10^9
+    /// </summary>
+    vector<vector<int>> matrixRankTransform(vector<vector<int>>& matrix);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

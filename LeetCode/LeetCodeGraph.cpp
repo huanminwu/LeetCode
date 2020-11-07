@@ -9448,4 +9448,192 @@ vector<int> LeetCodeGraph::countSubgraphsForEachDiameter(int n, vector<vector<in
     return result;
 }
 
+
+/// <summary>
+/// Leet code #1627. Graph Connectivity With Threshold
+/// 
+/// Hard
+///
+/// We have n cities labeled from 1 to n. Two different cities with 
+/// labels x and y are directly connected by a bidirectional road if 
+/// and only if x and y share a common divisor strictly greater than 
+/// some threshold. More formally, cities with labels x and y have a 
+/// road between them if there exists an integer z such that all of the
+/// following are true:
+/// x % z == 0,
+/// y % z == 0, and
+/// z > threshold.
+/// Given the two integers, n and threshold, and an array of queries, 
+/// you must determine for each queries[i] = [ai, bi] if cities ai and 
+/// bi are connected (i.e. there is some path between them).
+/// 
+/// Return an array answer, where answer.length == queries.length and 
+/// answer[i] is true if for the ith query, there is a path between ai 
+/// and bi, or answer[i] is false if there is no path.
+///
+/// Example 1:
+/// Input: n = 6, threshold = 2, queries = [[1,4],[2,5],[3,6]]
+/// Output: [false,false,true]
+/// Explanation: The divisors for each number:
+/// 1:   1
+/// 2:   1, 2
+/// 3:   1, 3
+/// 4:   1, 2, 4
+/// 5:   1, 5
+/// 6:   1, 2, 3, 6
+/// Using the underlined divisors above the threshold, only cities 3 and 
+/// 6 share a common divisor, so they are the only ones directly 
+/// connected. The result of each query:
+/// [1,4]   1 is not connected to 4
+/// [2,5]   2 is not connected to 5
+/// [3,6]   3 is connected to 6 through path 3--6
+///
+/// Example 2:
+/// Input: n = 6, threshold = 0, queries = [[4,5],[3,4],[3,2],[2,6],[1,3]]
+/// Output: [true,true,true,true,true]
+/// Explanation: The divisors for each number are the same as the previous 
+/// example. However, since the threshold is 0,
+/// all divisors can be used. Since all numbers share 1 as a divisor, all 
+/// cities are connected.
+///
+/// Example 3:
+/// Input: n = 5, threshold = 1, queries = [[4,5],[4,5],[3,2],[2,3],[3,4]]
+/// Output: [false,false,false,false,false]
+/// Explanation: Only cities 2 and 4 share a common divisor 2 which is 
+/// strictly greater than the threshold 1, so they are the only ones 
+/// directly connected.
+/// Please notice that there can be multiple queries for the same pair of 
+/// nodes [x, y], and that the query [x, y] is equivalent to the 
+/// query [y, x].
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 10^4
+/// 2. 0 <= threshold <= n
+/// 3. 1 <= queries.length <= 10^5
+/// 4. queries[i].length == 2
+/// 5. 1 <= a[i], b[i] <= cities
+/// 6. a[i] != b[i]
+/// </summary>
+vector<bool> LeetCodeGraph::areConnected(int n, int threshold, vector<vector<int>>& queries)
+{
+    vector<int> parent(n + 1);
+    for (int i = 1; i <= n; i++) parent[i] = i;
+
+    for (int i = threshold + 1; i <= n ; i++)
+    {
+        if (parent[i] != i) continue;
+        for (int j = i; j <= n; j+=i)
+        {
+            while (parent[i] != parent[parent[i]])
+            {
+                parent[i] = parent[parent[i]];
+            }
+            while (parent[j] != parent[parent[j]])
+            {
+                parent[j] = parent[parent[j]];
+            }
+            if (parent[i] < parent[j])
+            {
+                parent[parent[j]] = parent[i];
+            }
+            else
+            {
+                parent[parent[i]] = parent[j];
+            }
+        }
+    }
+    vector<bool> result(queries.size());
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        int a = queries[i][0];
+        int b = queries[i][1];
+        while (parent[a] != parent[parent[a]]) parent[a] = parent[parent[a]];
+        while (parent[b] != parent[parent[b]]) parent[b] = parent[parent[b]];
+        if (parent[a] == parent[b]) result[i] = true;
+        else result[i] = false;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1631. Path With Minimum Effort
+/// 
+/// Medium
+///
+/// You are a hiker preparing for an upcoming hike. You are given heights, 
+/// a 2D array of size rows x columns, where heights[row][col] represents 
+/// the height of cell (row, col). You are situated in the top-left cell, 
+/// (0, 0), and you hope to travel to the bottom-right cell, 
+/// (rows-1, columns-1) (i.e., 0-indexed). You can move up, down, left, or 
+/// right, and you wish to find a route that requires the minimum effort.
+///
+/// A route's effort is the maximum absolute difference in heights between 
+/// two consecutive cells of the route.
+///
+/// Return the minimum effort required to travel from the top-left cell to 
+/// the bottom-right cell.
+/// 
+/// Example 1:
+/// Input: heights = [[1,2,2],[3,8,2],[5,3,5]]
+/// Output: 2
+/// Explanation: The route of [1,3,5,3,5] has a maximum absolute difference 
+/// of 2 in consecutive cells.
+/// This is better than the route of [1,2,2,2,5], where the maximum absolute 
+/// difference is 3.
+///
+/// Example 2:
+/// Input: heights = [[1,2,3],[3,8,4],[5,3,5]]
+/// Output: 1
+/// Explanation: The route of [1,2,3,4,5] has a maximum absolute difference 
+/// of 1 in consecutive cells, which is better than route [1,3,5,3,5].
+///
+/// Example 3:
+/// Input: heights = [[1,2,1,1,1],[1,2,1,2,1],[1,2,1,2,1],[1,2,1,2,1],
+/// [1,1,1,2,1]]
+/// Output: 0
+/// Explanation: This route does not require any effort.
+///
+/// Constraints:
+/// 1. rows == heights.length
+/// 2. columns == heights[i].length
+/// 3. 1 <= rows, columns <= 100
+/// 4. 1 <= heights[i][j] <= 10^6
+/// </summary>
+int LeetCodeGraph::minimumEffortPath(vector<vector<int>>& heights)
+{
+    int n = heights.size();
+    int m = heights[0].size();
+
+    vector<vector<int>> effort(n, vector<int>(m, INT_MAX));
+    priority_queue<vector<int>> pq;
+    effort[0][0] = 0;
+    pq.push({ 0, 0, 0 });
+    vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    while (!pq.empty())
+    {
+        vector<int> node = pq.top();
+        pq.pop();
+        int r = node[1];
+        int c = node[2];
+        if (r == n - 1 && c == m - 1) break;
+        if (0 - node[0] > effort[r][c]) continue;
+        for (size_t d = 0; d < directions.size(); d++)
+        {
+            int next_r = r + directions[d][0];
+            int next_c = c + directions[d][1];
+            if (next_r < 0 || next_r >= n || next_c < 0 || next_c >= m)
+            {
+                continue;
+            }
+            int gap = abs(heights[next_r][next_c] - heights[r][c]);
+            gap = max(gap, effort[r][c]);
+            if (gap < effort[next_r][next_c])
+            {
+                effort[next_r][next_c] = gap;
+                pq.push({ -gap, next_r, next_c});
+            }
+        } 
+    }
+    return effort[n - 1][m - 1];
+}
 #pragma endregion

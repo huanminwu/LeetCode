@@ -3195,8 +3195,58 @@ void TestLeetCode1570(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1622(void)
+{
+    Logger::WriteMessage("Test Leet Code 1622");
+    vector<string> commands =
+    {
+       "Fancy", "append", "addAll", "append", "multAll", "getIndex",
+       "addAll", "append", "multAll", "getIndex", "getIndex", "getIndex"
+    };
+    vector<int> parameters =
+    {
+        -1, 2, 3, 7, 2, 0, 3, 10, 2, 0, 1, 2
+    };
+
+    vector<string> result;
+    Fancy* fancy = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Fancy")
+        {
+            fancy = new Fancy();
+            result.push_back("null");
+        }
+        else if (commands[i] == "append")
+        {
+            fancy->append(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "addAll")
+        {
+            fancy->addAll(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "multAll")
+        {
+            fancy->multAll(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "getIndex")
+        {
+            int ret = fancy->getIndex(parameters[i]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete fancy;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1622();
     TestLeetCode1570();
     TestLeetCode1586();
     TestLeetCode1603();

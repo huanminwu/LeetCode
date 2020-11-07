@@ -2960,8 +2960,29 @@ void TestLeetCode1516(void)
     leetCode.freeNodes(q);
 }
 
+void TestLeetCode1597(void)
+{
+    Logger::WriteMessage("Test Leet Code 1597");
+    LeetCodeTree leetCode;
+    string s = "2-3/(5*2)+1";
+    TreeNode* root = leetCode.expTree(s);
+    Logger::WriteMessage("s = " + s + "; result = " + leetCode.serialize(root, true));
+    leetCode.freeTreeNodes(root);
+
+    s = "3*4-2*5";
+    root = leetCode.expTree(s);
+    Logger::WriteMessage("s = " + s + "; result = " + leetCode.serialize(root, true));
+    leetCode.freeTreeNodes(root);
+
+    s = "1+2+3+4+5";
+    root = leetCode.expTree(s);
+    Logger::WriteMessage("s = " + s + "; result = " + leetCode.serialize(root, true));
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1597();
     TestLeetCode1516();
     TestLeetCode1522();
     TestLeetCode1602();

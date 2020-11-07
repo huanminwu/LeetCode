@@ -168,7 +168,7 @@ void LeetCodeTree::freeLinkTreeNodes(TreeLinkNode* root)
 /// </summary>
 /// <param name="root">the root</param>
 /// <returns>The string</returns>
-string LeetCodeTree::serialize(TreeNode* root)
+string LeetCodeTree::serialize(TreeNode* root, bool as_char)
 {
     string result = "";
     queue<TreeNode *> queue;
@@ -184,7 +184,14 @@ string LeetCodeTree::serialize(TreeNode* root)
         }
         else
         {
-            result.append(std::to_string(node->val));
+            if (as_char)
+            {
+                result.push_back((char)node->val);
+            }
+            else
+            {
+                result.append(std::to_string(node->val));
+            }
             queue.push(node->left);
             queue.push(node->right);
         }
@@ -9232,6 +9239,144 @@ Node* LeetCodeTree::moveSubTree(Node* root, Node* p, Node* q)
         root = q;
     }
     return root;
+}
+
+
+/// <summary>
+/// Leet code #1597. Build Binary Expression Tree From Infix Expression
+/// 
+/// Hard
+///
+/// A binary expression tree is a kind of binary tree used to represent 
+/// arithmetic expressions. Each node of a binary expression tree has 
+/// either zero or two children. Leaf nodes (nodes with 0 children) 
+/// correspond to operands (numbers), and internal nodes 
+/// (nodes with 2 children) correspond to the operators '+' (addition), 
+/// '-' (subtraction), '*' (multiplication), and '/' (division).
+///
+/// For each internal node with operator o, the infix expression that it 
+/// represents is (A o B), where A is the expression the left subtree 
+/// represents and B is the expression the right subtree represents.
+///
+/// You are given a string s, an infix expression containing operands, 
+/// the operators described above, and parentheses '(' and ')'.
+///
+/// Return any valid binary expression tree, which its in-order traversal 
+/// reproduces s after omitting the parenthesis from it (see examples 
+/// below).
+/// Please note that order of operations applies in s. That is, 
+/// expressions in parentheses are evaluated first, and multiplication 
+/// and division happen before addition and subtraction.
+/// Operands must also appear in the same order in both s and the 
+/// in-order traversal of the tree.
+/// 
+/// Example 1:
+/// Input: s = "2-3/(5*2)+1"
+/// Output: [+,-,1,2,/,null,null,null,null,3,*,null,null,5,2]
+/// Explanation: The inorder traversal of the tree above is 2-3/5*2+1 
+/// which is the same as s without the parenthesis. The tree also produces 
+/// the correct result and its operands are in the same order as they 
+/// appear in s.
+/// The tree below is also a valid binary expression tree with the same 
+/// inorder traversal as s:
+///
+/// The third tree below however is not valid. Although it produces the 
+/// same result and is equivalent to the above trees, its inorder traversal 
+/// doesn't produce s and its operands are not in the same order as s.
+///
+/// Example 2:
+/// Input: s = "3*4-2*5"
+/// Output: [-,*,*,3,4,2,5]
+/// Explanation: The tree above is the only valid tree whose inorder 
+/// traversal produces s.
+///
+/// Example 3:
+/// Input: s = "1+2+3+4+5"
+/// Output: [+,+,5,+,4,null,null,+,3,null,null,1,2]
+/// Explanation: The tree [+,+,5,+,+,null,null,1,2,3,4] is also one of 
+/// many other valid trees.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists of digits and the characters '+', '-', '*', '/', '(', 
+///    and ')'.
+/// 3. Operands in s are exactly 1 digit.
+/// 4. It is guaranteed that s is a valid expression.
+/// </summary>
+TreeNode* LeetCodeTree::expTree(string s)
+{
+    vector<char> operators;
+    vector<TreeNode*> nodes;
+    TreeNode* result = nullptr;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (isdigit(s[i]))
+        {
+            nodes.push_back(new TreeNode(s[i]));
+        }
+        else if (s[i] == '+' || s[i] == '-')
+        {
+            if (!operators.empty() &&
+                operators.back() != '(')
+            {
+                TreeNode* node = new TreeNode(operators.back());
+                operators.pop_back();
+                node->right = nodes.back();
+                nodes.pop_back();
+                node->left = nodes.back();
+                nodes.pop_back();
+                nodes.push_back(node);
+            }
+            operators.push_back(s[i]);
+        }
+        else if (s[i] == '*' || s[i] == '/')
+        {
+            if (!operators.empty() &&
+                operators.back() != '(' &&
+                operators.back() != '+' &&
+                operators.back() != '-')
+            {
+                TreeNode* node = new TreeNode(operators.back());
+                operators.pop_back();
+                node->right = nodes.back();
+                nodes.pop_back();
+                node->left = nodes.back();
+                nodes.pop_back();
+                nodes.push_back(node);
+            }
+            operators.push_back(s[i]);
+        }
+        else if (s[i] == '(')
+        {
+            operators.push_back(s[i]);
+        }
+        else if (s[i] == ')')
+        {
+            while (operators.back() != '(')
+            {
+                TreeNode* node = new TreeNode(operators.back());
+                operators.pop_back();
+                node->right = nodes.back();
+                nodes.pop_back();
+                node->left = nodes.back();
+                nodes.pop_back();
+                nodes.push_back(node);
+            }
+            operators.pop_back();
+        }
+    }
+    while (!operators.empty())
+    {
+        TreeNode* node = new TreeNode(operators.back());
+        operators.pop_back();
+        node->right = nodes.back();
+        nodes.pop_back();
+        node->left = nodes.back();
+        nodes.pop_back();
+        nodes.push_back(node);
+    }
+    result = nodes[0];
+    return result;
 }
 
 #pragma endregion

@@ -12206,4 +12206,251 @@ bool LeetCodeString::checkPalindromeFormation(string a, string b)
     }
     return false;
 }
+
+/// <summary>
+/// Leet code #1618. Maximum Font to Fit a Sentence in a Screen
+/// 
+/// Medium
+///
+/// You are given a string text. We want to display text on a screen of 
+/// width w and height h. You can choose any font size from array fonts, 
+/// which contains the available font sizes in ascending order.
+///
+/// You can use the FontInfo interface to get the width and height of any 
+/// character at any available font size. 
+///
+/// The FontInfo interface is defined as such:
+///
+/// interface FontInfo {
+///   // Returns the width of character ch on the screen using font size 
+///   //fontSize.
+///   // O(1) per call
+/// public int getWidth(int fontSize, char ch);
+/// 
+///   // Returns the height of any character on the screen using font size 
+///   // fontSize.
+///   // O(1) per call
+///   public int getHeight(int fontSize);
+/// }
+/// The calculated width of text for some fontSize is the sum of every 
+/// getWidth(fontSize, text[i]) call for each 0 <= i < text.length 
+/// (0-indexed). The calculated height of text for some fontSize is 
+/// getHeight(fontSize). Note that text is displayed on a single line.
+///
+/// It is guaranteed that FontInfo will return the same value if you call 
+/// getHeight or getWidth with the same parameters.
+///
+/// It is also guaranteed that for any font size fontSize and any 
+/// character ch:
+///
+/// getHeight(fontSize) <= getHeight(fontSize+1)
+/// getWidth(fontSize, ch) <= getWidth(fontSize+1, ch)
+/// Return the maximum font size you can use to display text on the 
+/// screen. If text cannot fit on the display with any font size, 
+/// return -1.
+///
+///
+/// Example 1:
+/// Input: text = "helloworld", w = 80, h = 20, 
+///        fonts = [6,8,10,12,14,16,18,24,36]
+/// Output: 6
+///
+/// Example 2:
+/// Input: text = "leetcode", w = 1000, h = 50, fonts = [1,2,4]
+/// Output: 4
+///
+/// Example 3:
+/// Input: text = "easyquestion", w = 100, h = 100, 
+/// fonts = [10,15,20,25]
+/// Output: -1
+/// Constraints:
+/// 1. 1 <= text.length <= 50000
+/// 2. text contains only lowercase English letters.
+/// 3. 1 <= w <= 10^7
+/// 4. 1 <= h <= 10^4
+/// 5. 1 <= fonts.length <= 10^5
+/// 6. 1 <= fonts[i] <= 10^5
+/// 7. fonts is sorted in ascending order and does not contain duplicates.
+/// </summary>
+int LeetCodeString::maxFont(string text, int w, int h, vector<int>& fonts)
+{
+    int first = 0; 
+    int last = fonts.size() - 1;
+    int result = -1;
+    while (first <= last)
+    {
+        int middle = (first + last) / 2;
+        int width = 0;
+        int height = 0;
+        for (size_t i = 0; i < text.size(); i++)
+        {
+            width += fonts[middle];
+            height = max(height, fonts[middle]);
+            if (width > w || height > h) break;
+        }
+        if (width > w || height > h)
+        {
+            last = middle - 1;
+        }
+        else
+        {
+            result = middle;
+            first = middle + 1;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1624. Largest Substring Between Two Equal Characters
+/// 
+/// Easy
+///
+/// Given a string s, return the length of the longest substring between 
+/// two equal characters, excluding the two characters. If there is no 
+/// such substring return -1.
+///
+/// A substring is a contiguous sequence of characters within a string.
+/// 
+/// Example 1:
+/// Input: s = "aa"
+/// Output: 0
+/// Explanation: The optimal substring here is an empty substring 
+/// between the two 'a's.
+///
+/// Example 2:
+/// Input: s = "abca"
+/// Output: 2
+/// Explanation: The optimal substring here is "bc".
+///
+/// Example 3:
+/// Input: s = "cbzxy"
+/// Output: -1
+/// Explanation: There are no characters that appear twice in s.
+///
+/// Example 4:
+/// Input: s = "cabbac"
+/// Output: 4
+/// Explanation: The optimal substring here is "abba". Other non-optimal 
+/// substrings include "bb" and "".
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 300
+/// 2. s contains only lowercase English letters.
+/// </summary>
+int LeetCodeString::maxLengthBetweenEqualCharacters(string s)
+{
+    vector<int> pos(26, -1);
+    int result = -1;
+    for (int i = 0; i < (int)s.size(); i++)
+    {
+        if (pos[s[i] - 'a'] == -1) pos[s[i] - 'a'] = i;
+        else result = max(result, i - pos[s[i] - 'a'] - 1);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1625. Lexicographically Smallest String After Applying 
+///                  Operations
+/// 
+/// Medium
+///
+/// You are given a string s of even length consisting of digits from 
+/// 0 to 9, and two integers a and b.
+///
+/// You can apply either of the following two operations any number 
+/// of times and in any order on s:
+///
+/// Add a to all odd indices of s (0-indexed). Digits post 9 are cycled 
+/// back to 0. For example, if s = "3456" and a = 5, s becomes "3951".
+/// Rotate s to the right by b positions. For example, if s = "3456" 
+/// and b = 1, s becomes "6345".
+/// Return the lexicographically smallest string you can obtain by 
+/// applying the above operations any number of times on s.
+///
+/// A string a is lexicographically smaller than a string b (of the same 
+/// length) if in the first position where a and b differ, string a has a 
+/// letter that appears earlier in the alphabet than the corresponding 
+/// letter in b. For example, "0158" is lexicographically smaller than 
+/// "0190" because the first position they differ is at the third letter, 
+/// and '5' comes before '9'.
+/// 
+/// Example 1:
+/// Input: s = "5525", a = 9, b = 2
+/// Output: "2050"
+/// Explanation: We can apply the following operations:
+/// Start:  "5525"
+/// Rotate: "2555"
+/// Add:    "2454"
+/// Add:    "2353"
+/// Rotate: "5323"
+/// Add:    "5222"
+/// Add:    "5121"
+/// Rotate: "2151"
+/// Add:    "2050"
+/// There is no way to obtain a string that is lexicographically smaller
+/// then "2050".
+///
+/// Example 2:
+/// Input: s = "74", a = 5, b = 1
+/// Output: "24"
+/// Explanation: We can apply the following operations:
+/// Start:  "74"
+/// Rotate: "47"
+/// Add:    "42"
+/// Rotate: "24"
+/// There is no way to obtain a string that is lexicographically smaller
+/// then "24".
+///
+/// Example 3:
+/// Input: s = "0011", a = 4, b = 2
+/// Output: "0011"
+/// Explanation: There are no sequence of operations that will give us a 
+/// lexicographically smaller string than "0011".
+///
+/// Example 4:
+/// Input: s = "43987654", a = 7, b = 3
+/// Output: "00553311"
+/// 
+/// Constraints:
+/// 1. 2 <= s.length <= 100
+/// 2. s.length is even.
+/// 3. s consists of digits from 0 to 9 only.
+/// 4. 1 <= a <= 9
+/// 5. 1 <= b <= s.length - 1
+/// </summary>
+string LeetCodeString::findLexSmallestString(string s, int a, int b)
+{
+    string result = s;
+    set<string> visited;
+    queue<string> queue;
+    visited.insert(s);
+    queue.push(s);
+    while (!queue.empty())
+    {
+        string str = queue.front();
+        queue.pop();
+        string str_a = str;
+        for (size_t i = 1; i < str_a.size(); i += 2)
+        {
+            str_a[i] ='0' + (str_a[i] - '0' + a) % 10;
+        }
+        if (visited.count(str_a) == 0)
+        {
+            result = min(result, str_a);
+            visited.insert(str_a);
+            queue.push(str_a);
+        }
+        str_a = str.substr(s.size() - b) + str.substr(0, s.size() - b);
+        if (visited.count(str_a) == 0)
+        {
+            result = min(result, str_a);
+            visited.insert(str_a);
+            queue.push(str_a);
+        }
+    }
+    return result;
+}
+
 #pragma endregion
