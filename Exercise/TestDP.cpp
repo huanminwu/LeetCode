@@ -2043,8 +2043,38 @@ void TestLeetCode1621(void)
     Logger::WriteMessage("n = " + to_string(n) + "; k = 2" + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1639(void)
+{
+    Logger::WriteMessage("Test Leet Code 1639");
+    LeetCodeDP leetCode;
+    vector<string> words = { "acca", "bbbb", "caca" };
+    string target = "aba";
+    int result = leetCode.numWays(words, target);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+
+    words = { "abba", "baab" };
+    target = "aba";
+    result = leetCode.numWays(words, target);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+
+    words = { "abcd" };
+    target = "abcd";
+    result = leetCode.numWays(words, target);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+
+    words = { "abab","baba","abba","baab" };
+    target = "abba";
+    result = leetCode.numWays(words, target);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1639();
     TestLeetCode1621();
     TestLeetCode1594();
     TestLeetCode1569();

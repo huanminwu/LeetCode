@@ -3352,9 +3352,32 @@ void TestLeetCode1620(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1643(void)
+{
+    Logger::WriteMessage("Test Leet Code 1643");
+    LeetCodeMath leetCode;
+    vector<int> destination = { 2, 3 };
+    int k = 1;
+    string result = leetCode.kthSmallestPath(destination, k);
+    Logger::WriteMessage(destination);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
+
+    destination = { 2, 3 };
+    k = 2;
+    result = leetCode.kthSmallestPath(destination, k);
+    Logger::WriteMessage(destination);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
+
+    destination = { 2, 3 };
+    k = 3;
+    result = leetCode.kthSmallestPath(destination, k);
+    Logger::WriteMessage(destination);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
+}
+
 void TestLeetCodeMath(void)
 {
-    TestLeetCode1620();
+    TestLeetCode1643();
     TestLeetCode1619();
     TestLeetCode1610();
     TestLeetCode1611();

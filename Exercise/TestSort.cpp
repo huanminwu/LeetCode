@@ -1003,8 +1003,40 @@ void TestLeetCode1632(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1649(void)
+{
+    Logger::WriteMessage("Test Leet Code 1649");
+    LeetCodeSort leetCode;
+    vector<int> instructions = { 1,5,6,2 };
+    int result = leetCode.createSortedArray(instructions);
+    Logger::WriteMessage(instructions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    instructions = { 1,2,3,6,5,4 };
+    result = leetCode.createSortedArray(instructions);
+    Logger::WriteMessage(instructions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    instructions = { 1,3,3,3,2,4,2,1,2 };
+    result = leetCode.createSortedArray(instructions);
+    Logger::WriteMessage(instructions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+
+    instructions = { 4, 14, 10 };
+    result = leetCode.createSortedArrayI(instructions);
+    Logger::WriteMessage(instructions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    instructions = { 4, 14, 81615 };
+    result = leetCode.createSortedArrayI(instructions);
+    Logger::WriteMessage(instructions);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1649();
     TestLeetCode1632();
     TestLeetCode1626();
     TestLeetCode1580();
