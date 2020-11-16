@@ -5561,26 +5561,23 @@ int LeetCodeDFS::maximumRequests(int n, vector<vector<int>>& requests)
 /// <summary>
 /// Leet code #1655. Distribute Repeating Integers
 /// </summary>
-bool LeetCodeDFS::canDistribute(vector<int>& nums, vector<int>& quantity, 
-    int index, vector<set<vector<int>>> &cache)
+bool LeetCodeDFS::canDistribute(vector<int>& nums, vector<int>& quantity, int index)
 {
     // we just need first nums.
-    if (index >= quantity.size())
+    if (index >= (int)quantity.size())
     {
         return true;
     }
-    if (cache[index].count(nums) > 0) return false;
     for (size_t i = 0; i < nums.size(); i++)
     {
         // not enough
         if (nums[i] < quantity[index]) continue;
     
         nums[i] -= quantity[index];
-        bool ret = canDistribute(nums, quantity, index+1, cache);
+        bool ret = canDistribute(nums, quantity, index+1);
         if (ret) return true;
         nums[i] += quantity[index];
     }
-    cache[index].insert(nums);
     return false;
 }
 
@@ -5655,9 +5652,155 @@ bool LeetCodeDFS::canDistribute(vector<int>& nums, vector<int>& quantity)
     sort(num_count.begin(), num_count.end(), greater<int>());
     sort(quantity.begin(), quantity.end(), greater<int>());
     if (num_count.size() > quantity.size()) num_count.resize(quantity.size());
-    vector<set<vector<int>>> cache(quantity.size());
-    return canDistribute(num_count, quantity, 0, cache);
+    return canDistribute(num_count, quantity, 0);
 }
+
+/// <summary>
+/// Leet code #1659. Maximize Grid Happiness
+/// </summary>
+int LeetCodeDFS::getMaxGridHappiness(int i, int j, vector<string>& grid)
+{
+    int result = 0, delta = 0;
+    if (grid[i][j] == 'I')
+    {
+        result = 120;
+        delta = -30;
+    }
+    else if (grid[i][j] == 'E')
+    {
+        result = 40;
+        delta = 20;
+    }
+    if (i > 0 && grid[i - 1][j] == 'I') result += delta-30;
+    if (j > 0 && grid[i][j-1] == 'I') result += delta - 30;
+    if (i > 0 && grid[i - 1][j] == 'E') result += delta + 20;
+    if (j > 0 && grid[i][j - 1] == 'E') result += delta + 20;
+    return result;
+}
+
+
+/// <summary>
+/// Leet code #1659. Maximize Grid Happiness
+/// </summary>
+int LeetCodeDFS::getMaxGridHappiness(int m, int n, int pos, int introvertsCount,
+    int extrovertsCount, int mask, vector<string>& grid,
+    vector<vector<vector<vector<int>>>>& cache)
+{
+    if (pos >= n * m)
+    {
+        return 0;
+    }
+    if (cache[pos][mask][introvertsCount][extrovertsCount] != INT_MIN)
+    {
+        return cache[pos][mask][introvertsCount][extrovertsCount];
+    }
+    int r = pos / m;
+    int c = pos % m;
+    int full_mask = 1;
+    for (int i = 0; i < m; i++) full_mask = full_mask * 3;
+    int next_mask = mask * 3 % full_mask;
+    int result = getMaxGridHappiness(m, n, pos + 1, introvertsCount, extrovertsCount, next_mask, grid, cache);
+    if (introvertsCount > 0)
+    {
+        grid[r][c] = 'I';
+        int delta = getMaxGridHappiness(r, c, grid);
+        int next_mask = mask * 3 % full_mask + 1;
+        delta = delta + getMaxGridHappiness(m, n, pos + 1, introvertsCount - 1, extrovertsCount, next_mask, grid, cache);
+        result = max(result, delta);
+        grid[r][c] = ' ';
+    }
+    if (extrovertsCount > 0)
+    {
+        grid[r][c] = 'E';
+        int delta = getMaxGridHappiness(r, c, grid);
+        int next_mask = mask * 3 % full_mask + 2;
+        delta = delta + getMaxGridHappiness(m, n, pos + 1, introvertsCount, extrovertsCount - 1, next_mask, grid, cache);
+        result = max(result, delta);
+        grid[r][c] = ' ';
+    }
+    cache[pos][mask][introvertsCount][extrovertsCount] = result;
+    return result;
+}
+
+/// <summary>
+/// Leet code #1659. Maximize Grid Happiness
+/// 
+/// Hard
+///
+/// You are given four integers, m, n, introvertsCount, and 
+/// extrovertsCount. You have an m x n grid, and there are two types 
+/// of people: introverts and extroverts. There are introvertsCount 
+/// introverts and extrovertsCount extroverts.
+///
+/// You should decide how many people you want to live in the grid 
+/// and assign each of them one grid cell. Note that you do not have 
+/// to have all the people living in the grid.
+///
+/// The happiness of each person is calculated as follows:
+///
+/// Introverts start with 120 happiness and lose 30 happiness for each 
+/// neighbor (introvert or extrovert).
+/// Extroverts start with 40 happiness and gain 20 happiness for each 
+/// neighbor (introvert or extrovert).
+/// Neighbors live in the directly adjacent cells north, east, south, 
+/// and west of a person's cell.
+///
+/// The grid happiness is the sum of each person's happiness. Return the 
+/// maximum possible grid happiness.
+///
+/// Example 1:
+/// Input: m = 2, n = 3, introvertsCount = 1, extrovertsCount = 2
+/// Output: 240
+/// Explanation: Assume the grid is 1-indexed with coordinates 
+/// (row, column).
+/// We can put the introvert in cell (1,1) and put the extroverts in 
+/// cells (1,3) and (2,3).
+/// - Introvert at (1,1) happiness: 120 (starting happiness) - (0 * 30) 
+/// (0 neighbors) = 120
+/// - Extrovert at (1,3) happiness: 40 (starting happiness) + (1 * 20) 
+/// (1 neighbor) = 60
+/// - Extrovert at (2,3) happiness: 40 (starting happiness) + (1 * 20) 
+/// (1 neighbor) = 60
+/// The grid happiness is 120 + 60 + 60 = 240.
+/// The above figure shows the grid in this example with each person's 
+/// happiness. The introvert stays in the light green cell while the 
+/// extroverts live on the light purple cells.
+///
+/// Example 2:
+/// Input: m = 3, n = 1, introvertsCount = 2, extrovertsCount = 1
+/// Output: 260
+/// Explanation: Place the two introverts in (1,1) and (3,1) and the 
+/// extrovert at (2,1).
+/// - Introvert at (1,1) happiness: 120 (starting happiness) - (1 * 30) 
+/// (1 neighbor) = 90
+/// - Extrovert at (2,1) happiness: 40 (starting happiness) + (2 * 20) 
+/// (2 neighbors) = 80
+/// - Introvert at (3,1) happiness: 120 (starting happiness) - (1 * 30) 
+/// (1 neighbor) = 90
+/// The grid happiness is 90 + 80 + 90 = 260.
+///
+/// Example 3:
+/// Input: m = 2, n = 2, introvertsCount = 4, extrovertsCount = 0
+/// Output: 240
+/// 
+/// Constraints:
+/// 1. 1 <= m, n <= 5
+/// 2. 0 <= introvertsCount, extrovertsCount <= min(m * n, 6)
+/// </summary>
+int LeetCodeDFS::getMaxGridHappiness(int m, int n, int introvertsCount, int extrovertsCount)
+{
+    vector<string> grid(n, string(m, ' '));
+    int full_mask = 1;
+    for (int i = 0; i < m; i++) full_mask = full_mask * 3;
+    vector<vector<vector<vector<int>>>> cache(n*m,
+        vector<vector<vector<int>>>((full_mask),
+            vector<vector<int>>(introvertsCount + 1, 
+                vector<int>(extrovertsCount + 1, INT_MIN))));
+
+    return getMaxGridHappiness(m, n, 0, introvertsCount, 
+        extrovertsCount, 0, grid, cache);
+}
+
 #pragma endregion
 
 

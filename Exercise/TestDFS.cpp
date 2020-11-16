@@ -813,8 +813,54 @@ void TestLeetCode1655(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1659(void)
+{
+    Logger::WriteMessage("Test Leet Code 1659");
+    LeetCodeDFS leetCode;
+    int m = 2;
+    int n = 3;
+    int introvertsCount = 1;
+    int extrovertsCount = 2;
+    int result = leetCode.getMaxGridHappiness(m, n, introvertsCount, extrovertsCount);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) +
+        "; introvertsCount = " + to_string(introvertsCount) + 
+        "; extrovertsCount = " + to_string(extrovertsCount) +
+        "; result = " + to_string(result));
+
+    m = 3;
+    n = 1;
+    introvertsCount = 2;
+    extrovertsCount = 1;
+    result = leetCode.getMaxGridHappiness(m, n, introvertsCount, extrovertsCount);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) +
+        "; introvertsCount = " + to_string(introvertsCount) +
+        "; extrovertsCount = " + to_string(extrovertsCount) +
+        "; result = " + to_string(result));
+
+    m = 2;
+    n = 2;
+    introvertsCount = 4;
+    extrovertsCount = 0;
+    result = leetCode.getMaxGridHappiness(m, n, introvertsCount, extrovertsCount);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) +
+        "; introvertsCount = " + to_string(introvertsCount) +
+        "; extrovertsCount = " + to_string(extrovertsCount) +
+        "; result = " + to_string(result));
+
+    m = 3;
+    n = 2;
+    introvertsCount = 2;
+    extrovertsCount = 1;
+    result = leetCode.getMaxGridHappiness(m, n, introvertsCount, extrovertsCount);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) +
+        "; introvertsCount = " + to_string(introvertsCount) +
+        "; extrovertsCount = " + to_string(extrovertsCount) +
+        "; result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode1659();
     TestLeetCode1655();
     TestLeetCode1601();
     TestLeetCode1593();
