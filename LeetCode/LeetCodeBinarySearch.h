@@ -988,6 +988,7 @@ public:
     /// 5. 2 <= m <= position.length
     /// </summary>
     int maxDistance(vector<int>& position, int m);
+
 #pragma endregion
 };
 #endif  // LeetCodeBinarySearch_H

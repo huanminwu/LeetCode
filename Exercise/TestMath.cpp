@@ -3375,8 +3375,54 @@ void TestLeetCode1643(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
 }
 
+void TestLeetCode1648(void)
+{
+    Logger::WriteMessage("Test Leet Code 1648");
+    LeetCodeMath leetCode;
+    vector<int> inventory = { 2, 5 };
+    int orders = 4;
+    int result = leetCode.maxProfit(inventory, orders);
+    Logger::WriteMessage(inventory);
+    Logger::WriteMessage("orders = " + to_string(orders) + "; result = " + to_string(result));
+
+    inventory = { 3, 5 };
+    orders = 6;
+    result = leetCode.maxProfit(inventory, orders);
+    Logger::WriteMessage(inventory);
+    Logger::WriteMessage("orders = " + to_string(orders) + "; result = " + to_string(result));
+
+    inventory = { 2,8,4,10,6 };
+    orders = 20;
+    result = leetCode.maxProfit(inventory, orders);
+    Logger::WriteMessage(inventory);
+    Logger::WriteMessage("orders = " + to_string(orders) + "; result = " + to_string(result));
+
+    inventory = { 1000000000 };
+    orders = 1000000000;
+    result = leetCode.maxProfit(inventory, orders);
+    Logger::WriteMessage(inventory);
+    Logger::WriteMessage("orders = " + to_string(orders) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1663(void)
+{
+    Logger::WriteMessage("Test Leet Code 1663");
+    LeetCodeMath leetCode;
+    int n = 3;
+    int k = 27;
+    string result = leetCode.getSmallestString(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + result);
+
+    n = 5;
+    k = 73;
+    result = leetCode.getSmallestString(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + result);
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1663();
+    TestLeetCode1648();
     TestLeetCode1643();
     TestLeetCode1619();
     TestLeetCode1610();

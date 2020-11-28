@@ -746,8 +746,50 @@ void TestLeetCode1474(void)
     leetCode.freeListNodes(head);
 }
 
+void TestLeetCode1634(void)
+{
+    Logger::WriteMessage("Test Leet Code 1634");
+    vector<vector<int>> poly1_data = { {1, 1} };
+    PolyNode* poly1 = PolyNode::generatePolyNodes(poly1_data);
+    vector<vector<int>> poly2_data = { {1,0} };
+    PolyNode* poly2 = PolyNode::generatePolyNodes(poly2_data);
+    LeetCodeLinkedList leetCode;
+    PolyNode* result = leetCode.addPoly(poly1, poly2);
+    Logger::WriteMessage(PolyNode::ToString(poly1));
+    Logger::WriteMessage(PolyNode::ToString(poly2));
+    Logger::WriteMessage(PolyNode::ToString(result));
+    PolyNode::freeListNodes(poly1);
+    PolyNode::freeListNodes(poly2);
+    PolyNode::freeListNodes(result);
+
+    poly1_data = {{2, 2}, { 4, 1 }, { 3, 0 }};
+    poly1 = PolyNode::generatePolyNodes(poly1_data);
+    poly2_data = { {3, 2}, { -4, 1 }, { -1, 0 } };
+    poly2 = PolyNode::generatePolyNodes(poly2_data);
+    result = leetCode.addPoly(poly1, poly2);
+    Logger::WriteMessage(PolyNode::ToString(poly1));
+    Logger::WriteMessage(PolyNode::ToString(poly2));
+    Logger::WriteMessage(PolyNode::ToString(result));
+    PolyNode::freeListNodes(poly1);
+    PolyNode::freeListNodes(poly2);
+    PolyNode::freeListNodes(result);
+
+    poly1_data = { {1, 2} };
+    poly1 = PolyNode::generatePolyNodes(poly1_data);
+    poly2_data = { {-1, 2} };
+    poly2 = PolyNode::generatePolyNodes(poly2_data);
+    result = leetCode.addPoly(poly1, poly2);
+    Logger::WriteMessage(PolyNode::ToString(poly1));
+    Logger::WriteMessage(PolyNode::ToString(poly2));
+    Logger::WriteMessage(PolyNode::ToString(result));
+    PolyNode::freeListNodes(poly1);
+    PolyNode::freeListNodes(poly2);
+    PolyNode::freeListNodes(result);
+}
+
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode1634();
     TestLeetCode1474();
     TestLeetCode382();
     TestLeetCode203();

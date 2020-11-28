@@ -147,20 +147,13 @@
 ---  By the end of December --> six active drivers (10, 8, 5, 7, 4, 1) 
 ---  and one accepted ride (2).
 -----------------------------------------------------------------------
-WITH months (month, curr_month, next_month)
+WITH months (month)
 AS
 (
     SELECT 
-        month = DATEPART(MONTH, A.[date]),
-        curr_month = A.[date],
-        next_month = DATEADD(MONTH, 1, A.[date])
-    FROM
-    (
-        SELECT 
-            [date] = CONVERT(date, '2020-'+ CONVERT(NVARCHAR(2), m) + '-1')  
-        FROM 
-           (VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9), (10), (11), (12)) months(m)
-    ) AS A
+        month  
+    FROM 
+       (VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9), (10), (11), (12)) months(month)
 )
 
 SELECT
@@ -179,7 +172,8 @@ LEFT OUTER JOIN
     CROSS JOIN
         Drivers AS B
     WHERE
-        A.next_month > B.join_date
+        (A.month >= MONTH(B.join_date) AND YEAR(B.join_date) = 2020)  OR
+        YEAR(B.join_date) < 2020
     GROUP BY
         A.month
 ) AS B
@@ -205,7 +199,7 @@ LEFT OUTER JOIN
             A.ride_id = B.ride_id
     ) AS B
     WHERE
-        A.next_month > B.requested_at AND A.curr_month <= B.requested_at
+        A.month = MONTH(B.requested_at) AND YEAR(B.requested_at) = 2020
     GROUP BY
         A.month
 ) AS C

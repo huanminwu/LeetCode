@@ -4673,8 +4673,206 @@ void TestLeetCode1630(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1636(void)
+{
+    Logger::WriteMessage("Test Leet Code 1636");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,1,2,2,2,3 };
+    vector<int> result = leetCode.frequencySort(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 2,3,1,3,2 };
+    result = leetCode.frequencySort(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { -1,1,-6,4,5,-6,1,4,1 };
+    result = leetCode.frequencySort(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1640(void)
+{
+    Logger::WriteMessage("Test Leet Code 1640");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 85 };
+    vector<vector<int>> pieces = { {85} };
+    bool result = leetCode.canFormArray(arr, pieces);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(pieces);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    arr = { 15,88 };
+    pieces = { {88},{15} };
+    result = leetCode.canFormArray(arr, pieces);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(pieces);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    arr = { 49,18,16 };
+    pieces = { {16,18,49} };
+    result = leetCode.canFormArray(arr, pieces);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(pieces);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    arr = { 91,4,64,78 };
+    pieces = { {78},{4, 64},{91} };
+    result = leetCode.canFormArray(arr, pieces);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(pieces);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    arr = { 1,3,5,7 };
+    pieces = { {2,4,6,8} };
+    result = leetCode.canFormArray(arr, pieces);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(pieces);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1637(void)
+{
+    Logger::WriteMessage("Test Leet Code 1637");
+    LeetCodeArray leetCode;
+    vector<vector<int>> points = { {8, 7},{9, 9},{7, 4},{9, 7} };
+    int result = leetCode.maxWidthOfVerticalArea(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {3, 1},{9, 0},{1, 0},{1, 4},{5, 3},{8, 8} };
+    result = leetCode.maxWidthOfVerticalArea(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1646(void)
+{
+    Logger::WriteMessage("Test Leet Code 1646");
+    LeetCodeArray leetCode;
+    int n = 7;
+    int result = leetCode.getMaximumGenerated(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 2;
+    result = leetCode.getMaximumGenerated(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    result = leetCode.getMaximumGenerated(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1652(void)
+{
+    Logger::WriteMessage("Test Leet Code 1652");
+    LeetCodeArray leetCode;
+    vector<int> code = { 5, 7, 1, 4 };
+    int k = 3;
+    vector<int> result = leetCode.decrypt(code, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    code = { 1,2,3,4 };
+    k = 0;
+    result = leetCode.decrypt(code, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    code = { 2,4,9,3 };
+    k = -2;
+    result = leetCode.decrypt(code, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1662(void)
+{
+    Logger::WriteMessage("Test Leet Code 1662");
+    LeetCodeArray leetCode;
+    vector<string> word1 = { "ab", "c" };
+    vector<string> word2 = { "a", "bc" };
+    bool result = leetCode.arrayStringsAreEqual(word1, word2);
+    Logger::WriteMessage(word1);
+    Logger::WriteMessage(word2);
+    Logger::WriteMessage("result = " + (string) (result ? "true" : "false"));
+
+    word1 = { "a", "cb" };
+    word2 = { "a", "bc" };
+    result = leetCode.arrayStringsAreEqual(word1, word2);
+    Logger::WriteMessage(word1);
+    Logger::WriteMessage(word2);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    word1 = { "abc", "d", "defg" };
+    word2 = { "abcddefg" };
+    result = leetCode.arrayStringsAreEqual(word1, word2);
+    Logger::WriteMessage(word1);
+    Logger::WriteMessage(word2);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1658(void)
+{
+    Logger::WriteMessage("Test Leet Code 1658");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 1, 4, 2, 3 };
+    int x = 5;
+    int result = leetCode.minOperations(nums, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+
+    nums = { 5,6,7,8,9 };
+    x = 4;
+    result = leetCode.minOperations(nums, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+
+    nums = { 3,2,20,1,1,3 };
+    x = 10;
+    result = leetCode.minOperations(nums, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+
+    nums = { 1, 1, 3, 2, 5 };
+    x = 5;
+    result = leetCode.minOperations(nums, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1664(void)
+{
+    Logger::WriteMessage("Test Leet Code 1664");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 1, 6, 4 };
+    int result = leetCode.waysToMakeFair(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1 };
+    result = leetCode.waysToMakeFair(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    result = leetCode.waysToMakeFair(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1664();
+    TestLeetCode1658();
+    TestLeetCode1662();
+    TestLeetCode1652();
+    TestLeetCode1646();
+    TestLeetCode1637();
+    TestLeetCode1640();
+    TestLeetCode1636();
     TestLeetCode1630();
     TestLeetCode1629();
     TestLeetCode1605();

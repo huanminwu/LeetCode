@@ -1,5 +1,5 @@
 ﻿-----------------------------------------------------------------------
----  Leet code #1645. Hopper Company Queries II
+---  Leet code #1651. Hopper Company Queries III
 --- 
 ---  Hard
 ---
@@ -14,8 +14,9 @@
 ---  driver_id is the primary key for this table.
 ---  Each row of this table contains the driver's ID and the date they joined 
 ---  the Hopper company.
---- 
+---
 ---  Table: Rides
+--- 
 ---  +--------------+---------+
 ---  | Column Name  | Type    |
 ---  +--------------+---------+
@@ -29,7 +30,7 @@
 ---  There may be some ride requests in this table that were not accepted.
 ---
 ---  Table: AcceptedRides
----  
+---
 ---  +---------------+---------+
 ---  | Column Name   | Type    |
 ---  +---------------+---------+
@@ -42,18 +43,21 @@
 ---  Each row of this table contains some information about an accepted ride.
 ---  It is guaranteed that each accepted ride exists in the Rides table.
 --- 
----  Write an SQL query to report the percentage of working drivers 
----  (working_percentage) for each month of 2020 where:
----  
----  Note that if the number of available drivers during a month is zero, we 
----  consider the working_percentage to be 0.
+---  Write an SQL query to compute the average_ride_distance and 
+---  average_ride_duration of every 3-month window starting from 
+---  January - March 2020 to October - December 2020. Round 
+---  average_ride_distance and average_ride_duration to the nearest two 
+---  decimal places.
 ---
+---  The average_ride_distance is calculated by summing up the total 
+---  ride_distance values from the three months and dividing it by 3. 
+---  The average_ride_duration is calculated in a similar way.
+---  
 ---  Return the result table ordered by month in ascending order, where month 
----  is the month's number (January is 1, February is 2, etc.). Round 
----  working_percentage to the nearest 2 decimal places.
+---  is the starting month's number (January is 1, February is 2, etc.).
 ---
 ---  The query result format is in the following example.
----  
+---
 ---  Drivers table:
 ---  +-----------+------------+
 ---  | driver_id | join_date  |
@@ -106,48 +110,41 @@
 ---  +---------+-----------+---------------+---------------+
 ---
 ---  Result table:
----  +-------+--------------------+
----  | month | working_percentage |
----  +-------+--------------------+
----  | 1     | 0.00               |
----  | 2     | 0.00               |
----  | 3     | 25.00              |
----  | 4     | 0.00               |
----  | 5     | 0.00               |
----  | 6     | 20.00              |
----  | 7     | 20.00              |
----  | 8     | 20.00              |
----  | 9     | 0.00               |
----  | 10    | 0.00               |
----  | 11    | 33.33              |
----  | 12    | 16.67              |
----  +-------+--------------------+
----  
----  By the end of January --> two active drivers (10, 8) and no accepted 
----  rides. The percentage is 0%.
----  By the end of February --> three active drivers (10, 8, 5) and no 
----  accepted rides. The percentage is 0%.
----  By the end of March --> four active drivers (10, 8, 5, 7) and one 
----  accepted ride by driver (10). The percentage is (1 / 4) * 100 = 25%.
----  By the end of April --> four active drivers (10, 8, 5, 7) and no accepted 
----  rides. The percentage is 0%.
----  By the end of May --> five active drivers (10, 8, 5, 7, 4) and no 
----  accepted rides. The percentage is 0%.
----  By the end of June --> five active drivers (10, 8, 5, 7, 4) and one 
----  accepted ride by driver (10). The percentage is (1 / 5) * 100 = 20%.
----  By the end of July --> five active drivers (10, 8, 5, 7, 4) and one 
----  accepted ride by driver (8). The percentage is (1 / 5) * 100 = 20%.
----  By the end of August --> five active drivers (10, 8, 5, 7, 4) and one 
----  accepted ride by driver (7). The percentage is (1 / 5) * 100 = 20%.
----  By the end of Septemeber --> five active drivers (10, 8, 5, 7, 4) and no 
----  accepted rides. The percentage is 0%.
----  By the end of October --> six active drivers (10, 8, 5, 7, 4, 1) and no 
----  accepted rides. The percentage is 0%.
----  By the end of November --> six active drivers (10, 8, 5, 7, 4, 1) and two 
----  accepted rides by two different drivers (1, 7). The percentage is 
----  (2 / 6) * 100 = 33.33%.
----  By the end of December --> six active drivers (10, 8, 5, 7, 4, 1) and one 
----  accepted ride by driver (4). The percentage is (1 / 6) * 100 = 16.67%.
+---  +-------+-----------------------+-----------------------+
+---  | month | average_ride_distance | average_ride_duration |
+---  +-------+-----------------------+-----------------------+
+---  | 1     | 21.00                 | 12.67                 |
+---  | 2     | 21.00                 | 12.67                 |
+---  | 3     | 21.00                 | 12.67                 |
+---  | 4     | 24.33                 | 32.00                 |
+---  | 5     | 57.67                 | 41.33                 |
+---  | 6     | 97.33                 | 64.00                 |
+---  | 7     | 73.00                 | 32.00                 |
+---  | 8     | 39.67                 | 22.67                 |
+---  | 9     | 54.33                 | 64.33                 |
+---  | 10    | 56.33                 | 77.00                 |
+---  +-------+-----------------------+-----------------------+
+---
+---  By the end of January --> average_ride_distance = (0+0+63)/3=21, 
+---  average_ride_duration = (0+0+38)/3=12.67
+---  By the end of February --> average_ride_distance = (0+63+0)/3=21, 
+---  average_ride_duration = (0+38+0)/3=12.67
+---  By the end of March --> average_ride_distance = (63+0+0)/3=21, 
+---  average_ride_duration = (38+0+0)/3=12.67
+---  By the end of April --> average_ride_distance = (0+0+73)/3=24.33, 
+---  average_ride_duration = (0+0+96)/3=32.00
+---  By the end of May --> average_ride_distance = (0+73+100)/3=57.67, 
+---  average_ride_duration = (0+96+28)/3=41.33
+---  By the end of June --> average_ride_distance = (73+100+119)/3=97.33, 
+---  average_ride_duration = (96+28+68)/3=64.00
+---  By the end of July --> average_ride_distance = (100+119+0)/3=73.00, 
+---  average_ride_duration = (28+68+0)/3=32.00
+---  By the end of August --> average_ride_distance = (119+0+0)/3=39.67, 
+---  average_ride_duration = (68+0+0)/3=22.67
+---  By the end of Septemeber --> average_ride_distance = (0+0+163)/3=54.33, 
+---  average_ride_duration = (0+0+193)/3=64.33
+---  By the end of October --> average_ride_distance = (0+163+6)/3=56.33, 
+---  average_ride_duration = (0+193+38)/3=77.00
 -----------------------------------------------------------------------
 WITH months (month)
 AS
@@ -156,56 +153,44 @@ AS
         month  
     FROM 
        (VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9), (10), (11), (12)) months(month)
-)
-
-SELECT
-    A.month,
-    working_percentage = ROUND(CONVERT(FLOAT, ISNULL(C.accepted_drivers, 0)) / ISNULL(B.active_drivers, 1) * 100, 2)
-FROM 
-    months AS A
-LEFT OUTER JOIN
+),
+month_rides(month, ride_distance, ride_duration)
+AS
 (
     SELECT
         A.month,
-        active_drivers = COUNT(*)
+        ride_distance = CONVERT(FLOAT, SUM(ISNULL(B.ride_distance, 0))),
+		ride_duration = CONVERT(FLOAT, SUM(ISNULL(B.ride_duration, 0)))
     FROM
        months AS A
-    CROSS JOIN
-        Drivers AS B
-    WHERE
-        (A.month >= MONTH(B.join_date) AND YEAR(B.join_date) = 2020)  OR
-        YEAR(B.join_date) < 2020
-    GROUP BY
-        A.month
-) AS B
-ON 
-    A.month = B.month
-LEFT OUTER JOIN
-(
-    SELECT
-        A.month,
-        accepted_drivers = COUNT(DISTINCT driver_id)
-    FROM
-       months AS A
-    CROSS JOIN
+    LEFT OUTER JOIN
     (
         SELECT
-            B.driver_id,
-            A.requested_at
+            month = MONTH(A.requested_at),
+			B.ride_distance,
+			B.ride_duration
         FROM
            Rides AS A
         INNER JOIN 
             AcceptedRides AS B
         ON
             A.ride_id = B.ride_id
+		WHERE YEAR(A.requested_at) = 2020
     ) AS B
-    WHERE
-        A.month = MONTH(B.requested_at) AND YEAR(B.requested_at) = 2020
-    GROUP BY
-        A.month
-) AS C
-ON 
-    A.month = C.month
-ORDER BY
+	ON A.month = B.month
+	GROUP BY A.month
+)
+
+SELECT 
+    A.month,
+    average_ride_distance = ROUND(SUM(ISNULL(B.ride_distance, 0)) / 3, 2),
+    average_ride_duration = ROUND(SUM(ISNULL(B.ride_duration, 0)) / 3, 2)
+FROM
+    month_rides AS A
+CROSS JOIN 
+    month_rides AS B
+WHERE 
+    A.month <= 10 AND A.month <= B.month AND A.month + 2 >= B.month
+GROUP BY 
     A.month
 ;

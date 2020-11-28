@@ -13398,4 +13398,508 @@ vector<bool> LeetCodeArray::checkArithmeticSubarrays(vector<int>& nums, vector<i
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1636. Sort Array by Increasing Frequency
+/// 
+/// Easy
+///
+/// Given an array of integers nums, sort the array in increasing order 
+/// based on the frequency of the values. If multiple values have the 
+/// same frequency, sort them in decreasing order.
+///
+/// Return the sorted array.
+///
+/// Example 1:
+/// Input: nums = [1,1,2,2,2,3]
+/// Output: [3,1,1,2,2,2]
+/// Explanation: '3' has a frequency of 1, '1' has a frequency of 2, 
+/// and '2' has a frequency of 3.
+///
+/// Example 2:
+/// Input: nums = [2,3,1,3,2]
+/// Output: [1,3,3,2,2]
+/// Explanation: '2' and '3' both have a frequency of 2, so they are 
+/// sorted in decreasing order.
+///
+/// Example 3:
+/// Input: nums = [-1,1,-6,4,5,-6,1,4,1]
+/// Output: [5,-1,4,4,-6,-6,1,1,1]
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. -100 <= nums[i] <= 100
+/// </summary>
+vector<int> LeetCodeArray::frequencySort(vector<int>& nums)
+{
+    unordered_map<int, int> num_map;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        num_map[nums[i]]++;
+    }
+    priority_queue<pair<int, int>> pq;
+    for (auto itr : num_map)
+    {
+        pq.push(make_pair(-itr.second, itr.first));
+    }
+    vector<int> result;
+    while (!pq.empty())
+    {
+        pair<int, int> pair = pq.top();
+        pq.pop();
+        for (int i = 0; i < 0-pair.first; i++)
+        {
+            result.push_back(pair.second);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1640. Check Array Formation Through Concatenation
+/// 
+/// Easy
+///
+/// You are given an array of distinct integers arr and an array of 
+/// integer arrays pieces, where the integers in pieces are distinct. 
+/// Your goal is to form arr by concatenating the arrays in pieces in 
+/// any order. However, you are not allowed to reorder the integers 
+/// in each array pieces[i].
+/// 
+/// Return true if it is possible to form the array arr from pieces. 
+/// Otherwise, return false.
+///
+/// Example 1:
+/// Input: arr = [85], pieces = [[85]]
+/// Output: true
+///
+/// Example 2:
+/// Input: arr = [15,88], pieces = [[88],[15]]
+/// Output: true
+/// Explanation: Concatenate [15] then [88]
+///
+/// Example 3:
+/// Input: arr = [49,18,16], pieces = [[16,18,49]]
+/// Output: false
+/// Explanation: Even though the numbers match, we cannot reorder pieces[0].
+///
+/// Example 4:
+/// Input: arr = [91,4,64,78], pieces = [[78],[4,64],[91]]
+/// Output: true
+/// Explanation: Concatenate [91] then [4,64] then [78]
+///
+/// Example 5:
+/// Input: arr = [1,3,5,7], pieces = [[2,4,6,8]]
+/// Output: false
+///
+/// Constraints:
+/// 1. 1 <= pieces.length <= arr.length <= 100
+/// 2. sum(pieces[i].length) == arr.length
+/// 3. 1 <= pieces[i].length <= arr.length
+/// 4. 1 <= arr[i], pieces[i][j] <= 100
+/// 5. The integers in arr are distinct. 
+/// 6. The integers in pieces are distinct (i.e., If we flatten pieces in a 1D 
+///    array, all the integers in this array are distinct).
+/// </summary>
+bool LeetCodeArray::canFormArray(vector<int>& arr, vector<vector<int>>& pieces)
+{
+    unordered_map<int, int> num_map;
+    for (size_t i = 0; i < pieces.size(); i++)
+    {
+        num_map[pieces[i][0]] = i;
+    }
+    int j = -1;
+    int k = 0;
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        if (j == -1)
+        {
+            if (num_map.count(arr[i]) == 0)
+            {
+                return false;
+            }
+            j = num_map[arr[i]];
+            num_map.erase(arr[i]);
+            k = 0;
+        }
+        if (arr[i] != pieces[j][k]) return false;
+        k++;
+        if (k == pieces[j].size()) j = -1;
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet code #1637. Widest Vertical Area Between Two Points Containing 
+///                  No Points
+/// 
+/// Medium
+///
+/// Given n points on a 2D plane where points[i] = [x[i], y[i]], Return 
+/// the widest vertical area between two points such that no points are 
+/// inside the area.
+///
+/// A vertical area is an area of fixed-width extending infinitely along 
+/// the y-axis (i.e., infinite height). The widest vertical area is the 
+/// one with the maximum width.
+///
+/// Note that points on the edge of a vertical area are not considered 
+/// included in the area.
+///
+/// Example 1:
+/// Input: points = [[8,7],[9,9],[7,4],[9,7]]
+/// Output: 1
+/// Explanation: Both the red and the blue area are optimal.
+///
+/// Example 2:
+/// Input: points = [[3,1],[9,0],[1,0],[1,4],[5,3],[8,8]]
+/// Output: 3
+/// Constraints:
+/// 1. n == points.length
+/// 2. 2 <= n <= 10^5
+/// 3. points[i].length == 2
+/// 4. 0 <= x[i], y[i] <= 10^9
+/// </summary>
+int LeetCodeArray::maxWidthOfVerticalArea(vector<vector<int>>& points)
+{
+    int result = 0;
+    sort(points.begin(), points.end());
+    for (size_t i = 1; i < points.size(); i++)
+    {
+        result = max(result, points[i][0] - points[i - 1][0]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1646. Get Maximum in Generated Array
+/// 
+/// Easy
+///
+/// You are given an integer n. An array nums of length n + 1 is 
+/// generated in the following way:
+///
+/// nums[0] = 0
+/// nums[1] = 1
+/// nums[2 * i] = nums[i] when 2 <= 2 * i <= n
+/// nums[2 * i + 1] = nums[i] + nums[i + 1] when 2 <= 2 * i + 1 <= n
+/// Return the maximum integer in the array nums​​​.
+///
+/// Example 1:
+/// Input: n = 7
+/// Output: 3
+/// Explanation: According to the given rules:
+/// nums[0] = 0
+/// nums[1] = 1
+/// nums[(1 * 2) = 2] = nums[1] = 1
+/// nums[(1 * 2) + 1 = 3] = nums[1] + nums[2] = 1 + 1 = 2
+/// nums[(2 * 2) = 4] = nums[2] = 1
+/// nums[(2 * 2) + 1 = 5] = nums[2] + nums[3] = 1 + 2 = 3
+/// nums[(3 * 2) = 6] = nums[3] = 2
+/// nums[(3 * 2) + 1 = 7] = nums[3] + nums[4] = 2 + 1 = 3
+/// Hence, nums = [0,1,1,2,1,3,2,3], and the maximum is 3.
+///
+/// Example 2:
+/// Input: n = 2
+/// Output: 1
+/// Explanation: According to the given rules, the maximum between 
+/// nums[0], nums[1], and nums[2] is 1.
+///
+/// Example 3:
+/// Input: n = 3
+/// Output: 2
+/// Explanation: According to the given rules, the maximum between 
+/// nums[0], nums[1], nums[2], and nums[3] is 2.
+///
+/// Constraints:
+/// 1. 0 <= n <= 100
+/// </summary>
+int LeetCodeArray::getMaximumGenerated(int n)
+{
+    vector<int> nums(n + 1);
+    int result = 0;
+    for (int i = 0; i <= n; i++)
+    {
+        if (i == 0) nums[i] = 0;
+        else if (i == 1) nums[i] = 1;
+        else if (i % 2 == 0) nums[i] = nums[i / 2];
+        else nums[i] = nums[i / 2] + nums[i / 2 + 1];
+        result = max(result, nums[i]);
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet code #1652. Defuse the Bomb
+/// 
+/// Easy
+///
+/// You have a bomb to defuse, and your time is running out! Your informer 
+/// will provide you with a circular array code of length of n and a key k.
+///
+/// To decrypt the code, you must replace every number. All the numbers are 
+/// replaced simultaneously.
+/// 
+/// If k > 0, replace the ith number with the sum of the next k numbers.
+/// If k < 0, replace the ith number with the sum of the previous k numbers.
+/// If k == 0, replace the ith number with 0.
+/// As code is circular, the next element of code[n-1] is code[0], and the 
+/// previous element of code[0] is code[n-1].
+///
+/// Given the circular array code and an integer key k, return the 
+/// decrypted code to defuse the bomb!
+/// 
+/// Example 1:
+/// Input: code = [5,7,1,4], k = 3
+/// Output: [12,10,16,13]
+/// Explanation: Each number is replaced by the sum of the next 3 numbers. 
+/// The decrypted code is [7+1+4, 1+4+5, 4+5+7, 5+7+1]. Notice that the 
+/// numbers wrap around.
+///
+/// Example 2:
+/// Input: code = [1,2,3,4], k = 0
+/// Output: [0,0,0,0]
+/// Explanation: When k is zero, the numbers are replaced by 0. 
+///
+/// Example 3:
+/// 1. Input: code = [2,4,9,3], k = -2
+/// 2. Output: [12,5,6,13]
+/// Explanation: The decrypted code is [3+9, 2+3, 4+2, 9+4]. Notice that 
+/// the numbers wrap around again. If k is negative, the sum is of the 
+/// previous numbers.
+/// Constraints:
+/// 1. n == code.length
+/// 2. 1 <= n <= 100
+/// 3. 1 <= code[i] <= 100
+/// 4. -(n - 1) <= k <= n - 1
+/// </summary>
+vector<int> LeetCodeArray::decrypt(vector<int>& code, int k)
+{
+    int n = code.size();
+    vector<int> sum(2 * n);
+    for (int i = 0; i < 2 * n; i++)
+    {
+        if (i == 0) sum[i] = code[i];
+        else sum[i] = sum[i - 1] + code[i % n];
+    }
+    vector<int> result(n);
+    for (int i = 0; i < n; i++)
+    {
+        if (k == 0) result[i] = 0;
+        if (k > 0) result[i] = sum[i + k] - sum[i];
+        else result[i] = sum[i + n - 1] - sum[i + n + k - 1];
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1656. Design an Ordered Stream
+/// 
+/// Easy
+///
+/// Given two string arrays word1 and word2, return true if the two arrays 
+/// represent the same string, and false otherwise.
+///
+/// A string is represented by an array if the array elements concatenated 
+/// in order forms the string.
+///
+/// Example 1:
+/// Input: word1 = ["ab", "c"], word2 = ["a", "bc"]
+/// Output: true
+/// Explanation:
+/// word1 represents string "ab" + "c" -> "abc"
+/// word2 represents string "a" + "bc" -> "abc"
+/// The strings are the same, so return true.
+///
+/// Example 2:
+/// Input: word1 = ["a", "cb"], word2 = ["ab", "c"]
+/// Output: false
+///
+/// Example 3:
+/// Input: word1  = ["abc", "d", "defg"], word2 = ["abcddefg"]
+/// Output: true
+///
+/// Constraints:
+/// 1. 1 <= word1.length, word2.length <= 10^3
+/// 2. 1 <= word1[i].length, word2[i].length <= 10^3
+/// 3. 1 <= sum(word1[i].length), sum(word2[i].length) <= 10^3
+/// 4. word1[i] and word2[i] consist of lowercase letters.
+/// </summary>
+bool LeetCodeArray::arrayStringsAreEqual(vector<string>& word1, vector<string>& word2)
+{
+    size_t r_i = 0, c_i = 0;
+    size_t r_j = 0, c_j = 0;
+
+    while (r_i < word1.size() && r_j < word2.size())
+    {
+        if (word1[r_i][c_i] != word2[r_j][c_j])
+        {
+            return false;
+        }
+        c_i++;
+        c_j++;
+        if (c_i == word1[r_i].size())
+        {
+            r_i++;
+            c_i = 0;
+        }
+        if (c_j == word2[r_j].size())
+        {
+            r_j++;
+            c_j = 0;
+        }
+    }
+    if (r_i < word1.size() || r_j < word2.size())
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+/// <summary>
+/// Leet code #1658. Minimum Operations to Reduce X to Zero
+/// 
+/// Medium
+///
+/// You are given an integer array nums and an integer x. In one operation, 
+/// you can either remove the leftmost or the rightmost element from the 
+/// array nums and subtract its value from x. Note that this modifies the 
+/// array for future operations.
+///
+/// Return the minimum number of operations to reduce x to exactly 0 if 
+/// it's possible, otherwise, return -1.
+///
+/// Example 1:
+/// Input: nums = [1,1,4,2,3], x = 5
+/// Output: 2
+/// Explanation: The optimal solution is to remove the last two elements to 
+/// reduce x to zero.
+///
+/// Example 2:
+/// Input: nums = [5,6,7,8,9], x = 4
+/// Output: -1
+///
+/// Example 3:
+/// Input: nums = [3,2,20,1,1,3], x = 10
+/// Output: 5
+/// Explanation: The optimal solution is to remove the last three elements 
+/// and the first two elements (5 operations in total) to reduce x to zero.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^4
+/// 3. 1 <= x <= 10^9
+/// </summary>
+int LeetCodeArray::minOperations(vector<int>& nums, int x)
+{
+    int result = INT_MAX;
+    int sum = 0;
+    int left = 0;
+    for (left = 0; left < (int)nums.size(); left++)
+    {
+        sum += nums[left];
+        if (sum == x) result = min(result, left + 1);
+        if (sum >= x) break;
+    }
+    if (sum < x) return -1;
+
+    int right = nums.size();
+    while (left >= 0 || sum <= x)
+    {
+        if (left >= 0 && sum > x)
+        {
+            sum -= nums[left];
+            left--;
+        }
+        else if (right > 0 && sum < x)
+        {
+            right--;
+            sum += nums[right];
+        }
+        else
+        {
+            result = min(result, left + 1 + (int)nums.size() - right);
+            if (left < 0) break;
+            sum -= nums[left];
+            left--;
+        }
+    }
+    if (result == INT_MAX) result = -1;
+    return result;
+}
+
+/// <summary>
+/// Leet code #1664. Ways to Make a Fair Array
+/// 
+/// Medium
+///
+/// You are given an integer array nums. You can choose exactly one index 
+/// (0-indexed) and remove the element. Notice that the index of the 
+/// elements may change after the removal.
+///
+/// For example, if nums = [6,1,7,4,1]:
+///
+/// Choosing to remove index 1 results in nums = [6,7,4,1].
+/// Choosing to remove index 2 results in nums = [6,1,4,1].
+/// Choosing to remove index 4 results in nums = [6,1,7,4].
+/// An array is fair if the sum of the odd-indexed values equals the sum 
+/// of the even-indexed values.
+///
+/// Return the number of indices that you could choose such that after 
+/// the removal, nums is fair.
+///
+/// Example 1:
+/// Input: nums = [2,1,6,4]
+/// Output: 1
+/// Explanation:
+/// Remove index 0: [1,6,4] -> Even sum: 1 + 4 = 5. Odd sum: 6. Not fair.
+/// Remove index 1: [2,6,4] -> Even sum: 2 + 4 = 6. Odd sum: 6. Fair.
+/// Remove index 2: [2,1,4] -> Even sum: 2 + 4 = 6. Odd sum: 1. Not fair.
+/// Remove index 3: [2,1,6] -> Even sum: 2 + 6 = 8. Odd sum: 1. Not fair.
+/// There is 1 index that you can remove to make nums fair.
+///
+/// Example 2:
+/// Input: nums = [1,1,1]
+/// Output: 3
+/// Explanation: You can remove any index and the remaining array is fair.
+///
+/// Example 3:
+/// Input: nums = [1,2,3]
+/// Output: 0
+/// Explanation: You cannot make a fair array after removing any index.
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^4
+/// </summary>
+int LeetCodeArray::waysToMakeFair(vector<int>& nums)
+{
+    int even = 0;
+    int odd = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (i % 2 == 0) even += nums[i];
+        else odd += nums[i];
+    }
+    int result = 0;
+    int e = 0;
+    int o = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (i % 2 == 0)
+        {
+            if (odd - o + e == even - e + o - nums[i]) result++;
+            e += nums[i];
+        }
+        else
+        {
+            if (odd - o + e - nums[i] == even - e + o) result++;
+            o += nums[i];
+        }
+    }
+    return result;
+}
 #pragma endregion

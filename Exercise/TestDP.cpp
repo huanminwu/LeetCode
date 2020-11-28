@@ -2072,8 +2072,44 @@ void TestLeetCode1639(void)
     Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
 }
 
+void TestLeetCode1641(void)
+{
+    Logger::WriteMessage("Test Leet Code 1641");
+    LeetCodeDP leetCode;
+    int n = 1;
+    int result = leetCode.countVowelStrings(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 2;
+    result = leetCode.countVowelStrings(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 33;
+    result = leetCode.countVowelStrings(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1653(void)
+{
+    Logger::WriteMessage("Test Leet Code 1653");
+    LeetCodeDP leetCode;
+    string s = "aababbab";
+    int result = leetCode.minimumDeletions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "bbaaaaabb";
+    result = leetCode.minimumDeletions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "bbabb";
+    result = leetCode.minimumDeletions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1653();
+    TestLeetCode1641();
     TestLeetCode1639();
     TestLeetCode1621();
     TestLeetCode1594();

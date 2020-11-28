@@ -3586,8 +3586,83 @@ void TestLeetCode1625(void)
     Logger::WriteMessage("a = " + to_string(a) + "b = " + to_string(b) + "; result = " + result);
 }
 
+void TestLeetCode1638(void)
+{
+    Logger::WriteMessage("Test Leet Code 1638");
+    LeetCodeString leetCode;
+    string s = "aba";
+    string t = "baba";
+    int result = leetCode.countSubstrings(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+
+    s = "ab";
+    t = "bb";
+    result = leetCode.countSubstrings(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+
+    s = "a";
+    t = "a";
+    result = leetCode.countSubstrings(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+
+    s = "abe";
+    t = "bbc";
+    result = leetCode.countSubstrings(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+
+    s = "abbab";
+    t = "bbbbb";
+    result = leetCode.countSubstrings(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+}
+
+void TestLeetCode1647(void)
+{
+    Logger::WriteMessage("Test Leet Code 1647");
+    LeetCodeString leetCode;
+    string s = "aab";
+    int result = leetCode.minDeletions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+    
+    s = "aaabbbcc";
+    result = leetCode.minDeletions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "ceabaacb";
+    result = leetCode.minDeletions(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode1657(void)
+{
+    Logger::WriteMessage("Test Leet Code 1657");
+    LeetCodeString leetCode;
+    string word1 = "abc";
+    string word2 = "bca";
+    bool result = leetCode.closeStrings(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 + "; result = " + (string)(result ? "true" : " false"));
+
+    word1 = "a";
+    word2 = "aa";
+    result = leetCode.closeStrings(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 + "; result = " + (string)(result ? "true" : " false"));
+
+    word1 = "cabbba";
+    word2 = "abbccc";
+    result = leetCode.closeStrings(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 + "; result = " + (string)(result ? "true" : " false"));
+
+    word1 = "cabbba";
+    word2 = "aabbss";
+    result = leetCode.closeStrings(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 + "; result = " + (string)(result ? "true" : " false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1657();
+    TestLeetCode1647();
+    TestLeetCode1638();
     TestLeetCode1625();
     TestLeetCode1624();
     TestLeetCode1616();

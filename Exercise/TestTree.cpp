@@ -2980,8 +2980,28 @@ void TestLeetCode1597(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode1666(void)
+{
+    Logger::WriteMessage("Test Leet Code 1666");
+    LeetCodeTree leetCode;
+    string input = "[3, 5, 1, 6, 2, 0, 8, null, null, 7, 4]";
+    TreeNode* root = leetCode.deserialize(input);
+    TreeNode* leaf = leetCode.findTreeNode(root, 7);
+    root = leetCode.flipBinaryTree(root, leaf);
+    Logger::WriteMessage("input = " + input + "leaf = " + to_string(leaf->val) +"; result = " + leetCode.serialize(root));
+    leetCode.freeTreeNodes(root);
+
+    input = "[3, 5, 1, 6, 2, 0, 8, null, null, 7, 4]";
+    root = leetCode.deserialize(input);
+    leaf = leetCode.findTreeNode(root, 0);
+    root = leetCode.flipBinaryTree(root, leaf);
+    Logger::WriteMessage("input = " + input + "leaf = " + to_string(leaf->val) + "; result = " + leetCode.serialize(root));
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1666();
     TestLeetCode1597();
     TestLeetCode1516();
     TestLeetCode1522();

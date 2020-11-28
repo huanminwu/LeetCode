@@ -10751,5 +10751,104 @@ int LeetCodeDP::numWays(vector<string>& words, string target)
     return (int)result[words[0].size() - 1];
 }
 
+/// <summary>
+/// Leet code #1641. Count Sorted Vowel Strings
+/// 
+/// Medium
+///
+/// Given an integer n, return the number of strings of length n that consist 
+/// only of vowels (a, e, i, o, u) and are lexicographically sorted.
+///
+/// A string s is lexicographically sorted if for all valid i, s[i] is the same
+/// as or comes before s[i+1] in the alphabet.
+///
+/// Example 1:
+/// Input: n = 1
+/// Output: 5
+/// Explanation: The 5 sorted strings that consist of vowels only are 
+/// ["a","e","i","o","u"].
+///
+/// Example 2:
+/// Input: n = 2
+/// Output: 15
+/// Explanation: The 15 sorted strings that consist of vowels only are
+/// ["aa","ae","ai","ao","au","ee","ei","eo","eu","ii","io","iu","oo",
+///  "ou","uu"].
+/// Note that "ea" is not a valid string since 'e' comes after 'a' in the 
+/// alphabet.
+///
+/// Example 3:
+/// Input: n = 33
+/// Output: 66045
+///
+/// Constraints:
+/// 1. 1 <= n <= 50 
+/// </summary>
+int LeetCodeDP::countVowelStrings(int n)
+{
+    vector<vector<int>> count(2, vector<int>(5));
+    vector<int>& prev = count[0];
+    vector<int>& curr = count[1];
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            if (i == 0) curr[j] = 1;
+            else curr[j] = prev[j];
+            if (j > 0) curr[j] += curr[j - 1];
+        }
+        swap(prev, curr);
+    }
+    return prev[4];
+}
+
+/// <summary>
+/// Leet code #1653. Minimum Deletions to Make String Balanced
+/// 
+/// Medium
+///
+/// You are given a string s consisting only of characters 'a' and 'b'
+///
+/// You can delete any number of characters in s to make s balanced. s is 
+/// balanced if there is no pair of indices (i,j) such that i < j and 
+/// s[i] = 'b' and s[j]= 'a'.
+///
+/// Return the minimum number of deletions needed to make s balanced.
+/// 
+/// Example 1:
+/// Input: s = "aababbab"
+/// Output: 2
+/// Explanation: You can either:
+/// Delete the characters at 0-indexed positions 2 and 6 
+/// ("aababbab" -> "aaabbb"), or
+/// Delete the characters at 0-indexed positions 3 and 6 
+/// ("aababbab" -> "aabbbb").
+///
+/// Example 2:
+/// Input: s = "bbaaaaabb"
+/// Output: 2
+/// Explanation: The only solution is to delete the first two characters.
+/// Constraints:
+/// 1. 1 <= s.length <= 105
+/// 2. s[i] is 'a' or 'b'.
+/// </summary>
+int LeetCodeDP::minimumDeletions(string s)
+{
+    vector<pair<int, int>> dp(s.size());
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (i == 0)
+        {
+            dp[i].first = (s[i] == 'a' ? 0 : 1);
+            dp[i].second = (s[i] == 'b' ? 0 : 1);
+        }
+        else
+        {
+            dp[i].first = dp[i - 1].first + (s[i] == 'a' ? 0 : 1);
+            dp[i].second = min(dp[i - 1].first, dp[i - 1].second) + (s[i] == 'b' ? 0 : 1);
+        }
+    }
+    return min(dp.back().first, dp.back().second);
+}
 #pragma endregion
 

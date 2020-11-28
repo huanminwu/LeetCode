@@ -3244,8 +3244,73 @@ void TestLeetCode1622(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1628(void)
+{
+    Logger::WriteMessage("Test Leet Code 1628");
+    vector<string> s = { "3", "4", "+", "2", "*", "7", "/" };
+    TreeBuilder treeBuilder;
+    BinExpNode* node = treeBuilder.buildTree(s);
+    Logger::WriteMessage(s);
+    Logger::WriteMessage("result = " + to_string(node->evaluate()));
+    delete node;
+
+    s = { "4","5","7","2","+","-","*" };
+    node = treeBuilder.buildTree(s);
+    Logger::WriteMessage(s);
+    Logger::WriteMessage("result = " + to_string(node->evaluate()));
+    delete node;
+
+    s = { "4","2","+","3","5","1","-","*","+" };
+    node = treeBuilder.buildTree(s);
+    Logger::WriteMessage(s);
+    Logger::WriteMessage("result = " + to_string(node->evaluate()));
+    delete node;
+
+    s = { "100","200","+","2","/","5","*","7","+" };
+    node = treeBuilder.buildTree(s);
+    Logger::WriteMessage(s);
+    Logger::WriteMessage("result = " + to_string(node->evaluate()));
+    delete node;
+}
+
+void TestLeetCode1656(void)
+{
+    Logger::WriteMessage("Test Leet Code 1656");
+    vector<string> commands =
+    {
+      "OrderedStream", "insert", "insert", "insert", "insert", "insert"
+    };
+    vector<vector<string>> parameters =
+    {
+        {"5", ""}, {"3", "ccccc"}, {"1", "aaaaa"}, {"2", "bbbbb"}, 
+        {"5", "eeeee"}, {"4", "ddddd"}
+    };
+    vector<vector<string>> result;
+
+    OrderedStream* orderedStream = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "OrderedStream")
+        {
+            orderedStream = new OrderedStream(atoi(parameters[i][0].c_str()));
+            result.push_back({ "null" });
+        }
+        else if (commands[i] == "insert")
+        {
+            vector<string> ret = orderedStream->insert(atoi(parameters[i][0].c_str()), parameters[i][1]);
+            result.push_back(ret);
+        }
+    }
+    delete orderedStream;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1656();
+    TestLeetCode1628();
     TestLeetCode1622();
     TestLeetCode1570();
     TestLeetCode1586();

@@ -6436,6 +6436,154 @@ public:
     /// </summary>
     string findLexSmallestString(string s, int a, int b);
 
+    /// <summary>
+    /// Leet code #1638. Count Substrings That Differ by One Character
+    /// 
+    /// Medium
+    ///
+    /// Given two strings s and t, find the number of ways you can choose a 
+    /// non-empty substring of s and replace a single character by a different 
+    /// character such that the resulting substring is a substring of t. In 
+    /// other words, find the number of substrings in s that differ from some 
+    /// substring in t by exactly one character.
+    ///
+    /// For example, the underlined substrings in "computer" and "computation" 
+    /// only differ by the 'e'/'a', so this is a valid way.
+    ///
+    /// Return the number of substrings that satisfy the condition above.
+    ///
+    /// A substring is a contiguous sequence of characters within a string.
+    /// 
+    /// Example 1:
+    /// Input: s = "aba", t = "baba"
+    /// Output: 6
+    /// Explanation: The following are the pairs of substrings from s and t that 
+    /// differ by exactly 1 character:
+    /// ("aba", "baba")
+    /// ("aba", "baba")
+    /// ("aba", "baba")
+    /// ("aba", "baba")
+    /// ("aba", "baba")
+    /// ("aba", "baba")
+    /// The underlined portions are the substrings that are chosen from s and t.
+    ///
+    /// Example 2:
+    /// Input: s = "ab", t = "bb"
+    /// Output: 3
+    /// Explanation: The following are the pairs of substrings from s and t that 
+    /// differ by 1 character:
+    /// ("ab", "bb")
+    /// ("ab", "bb")
+    /// ("ab", "bb")
+    /// The underlined portions are the substrings that are chosen from s and t.
+    ///
+    /// Example 3:
+    /// Input: s = "a", t = "a"
+    /// Output: 0
+    ///
+    /// Example 4:
+    /// Input: s = "abe", t = "bbc"
+    /// Output: 10
+    /// Constraints:
+    /// 1. 1 <= s.length, t.length <= 100
+    /// 2. s and t consist of lowercase English letters only.
+    /// </summary>
+    int countSubstrings(string s, string t);
+
+    /// <summary>
+    /// Leet code #1647. Minimum Deletions to Make Character Frequencies Unique
+    /// 
+    /// Medium
+    ///
+    /// A string s is called good if there are no two different characters in s 
+    /// that have the same frequency.
+    ///
+    /// Given a string s, return the minimum number of characters you need to 
+    /// delete to make s good.
+    ///
+    /// The frequency of a character in a string is the number of times it 
+    /// appears in the string. For example, in the string "aab", the frequency 
+    /// of 'a' is 2, while the frequency of 'b' is 1.
+    ///
+    /// Example 1:
+    /// Input: s = "aab"
+    /// Output: 0
+    /// Explanation: s is already good.
+    ///
+    /// Example 2:
+    /// Input: s = "aaabbbcc"
+    /// Output: 2
+    /// Explanation: You can delete two 'b's resulting in the good string 
+    /// "aaabcc".
+    /// Another way it to delete one 'b' and one 'c' resulting in the good 
+    /// string "aaabbc".
+    ///
+    /// Example 3:
+    /// Input: s = "ceabaacb"
+    /// Output: 2
+    /// Explanation: You can delete both 'c's resulting in the good 
+    /// string "eabaab".
+    /// Note that we only care about characters that are still in the string 
+    /// at the end (i.e. frequency of 0 is ignored).
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s contains only lowercase English letters.
+    /// </summary>
+    int minDeletions(string s);
+
+    /// <summary>
+    /// Leet code #1657. Determine if Two Strings Are Close
+    /// 
+    /// Medium
+    ///
+    /// Two strings are considered close if you can attain one from the other 
+    /// using the following operations:
+    ///
+    /// Operation 1: Swap any two existing characters.
+    /// For example, abcde -> aecdb
+    /// Operation 2: Transform every occurrence of one existing character into 
+    /// another existing character, and do the same with the other character.
+    /// For example, aacabb -> bbcbaa (all a's turn into b's, and all b's turn 
+    /// into a's)
+    /// You can use the operations on either string as many times as necessary.
+    ///
+    /// Given two strings, word1 and word2, return true if word1 and word2 are 
+    /// close, and false otherwise.
+    ///
+    /// Example 1:
+    /// Input: word1 = "abc", word2 = "bca"
+    /// Output: true
+    /// Explanation: You can attain word2 from word1 in 2 operations.
+    /// Apply Operation 1: "abc" -> "acb"
+    /// Apply Operation 1: "acb" -> "bca"
+    ///
+    /// Example 2:
+    /// Input: word1 = "a", word2 = "aa"
+    /// Output: false
+    /// Explanation: It is impossible to attain word2 from word1, or vice 
+    /// versa, in any number of operations.
+    ///
+    /// Example 3:
+    /// Input: word1 = "cabbba", word2 = "abbccc"
+    /// Output: true
+    /// Explanation: You can attain word2 from word1 in 3 operations.
+    /// Apply Operation 1: "cabbba" -> "caabbb"
+    /// Apply Operation 2: "caabbb" -> "baaccc"
+    /// Apply Operation 2: "baaccc" -> "abbccc"
+    ///
+    /// Example 4:
+    /// Input: word1 = "cabbba", word2 = "aabbss"
+    /// Output: false
+    /// Explanation: It is impossible to attain word2 from word1, or vice versa, 
+    /// in any amount of operations.
+    ///
+    /// Constraints:
+    /// 1. 1 <= word1.length, word2.length <= 10^5
+    /// 2. word1 and word2 contain only lowercase English letters.
+    /// </summary>
+    bool closeStrings(string word1, string word2);
+
 #pragma endregion
 };
 

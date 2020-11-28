@@ -338,8 +338,56 @@ void TestLeetCode1589(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1665(void)
+{
+    Logger::WriteMessage("Test Leet Code 1665");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> tasks = { {1, 2},{2, 4},{4, 8} };
+    int result = leetCode.minimumEffort(tasks);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    tasks = { {1, 3},{2, 4},{10, 11},{10, 12},{8, 9} };
+    result = leetCode.minimumEffort(tasks);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    tasks = { {1, 7},{2, 8},{3, 9},{4, 10},{5, 11},{6, 12} };
+    result = leetCode.minimumEffort(tasks);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1642(void)
+{
+    Logger::WriteMessage("Test Leet Code 1642");
+    LeetCodeGreedy leetCode;
+    vector<int> heights = { 4, 2, 7, 6, 9, 14, 12 };
+    int bricks = 5;
+    int ladders = 1;
+    int result = leetCode.furthestBuilding(heights, bricks, ladders);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage("ladders = " + to_string(ladders) + "; result = " + to_string(result));
+
+    heights = { 4,12,2,7,3,18,20,3,19 };
+    bricks = 10;
+    ladders = 2;
+    result = leetCode.furthestBuilding(heights, bricks, ladders);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage("ladders = " + to_string(ladders) + "; result = " + to_string(result));
+
+    heights = { 14,3,19,3 };
+    bricks = 17;
+    ladders = 0;
+    result = leetCode.furthestBuilding(heights, bricks, ladders);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage("ladders = " + to_string(ladders) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode1642();
+    TestLeetCode1665();
     TestLeetCode1589();
     TestLeetCode1520();
     TestLeetCode826();

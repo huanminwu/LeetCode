@@ -1271,8 +1271,8 @@ public:
     /// <summary>
     /// Leet code #236. Lowest Common Ancestor of a Binary Tree
     /// Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree. 
-    /// According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two 
-    /// nodes v and w as the lowest node in T that has both v and w as descendants (where we allow a node to be a descendant of itself).” 
+    /// According to the definition of LCA on Wikipedia: "The lowest common ancestor is defined between two 
+    /// nodes v and w as the lowest node in T that has both v and w as descendants (where we allow a node to be a descendant of itself)." 
     /// 	    _______3______
     ///        /              \
     ///     ___5__          ___1__
@@ -5051,6 +5051,88 @@ public:
     /// 4. It is guaranteed that s is a valid expression.
     /// </summary>
     TreeNode* expTree(string s);
+
+    /// <summary>
+    /// Leet code #1660. Correct a Binary Tree
+    /// 
+    /// Medium
+    ///
+    /// You have a binary tree with a small defect. There is exactly one 
+    /// invalid node where its right child incorrectly points to another 
+    /// node at the same depth but to the invalid node's right.
+    ///
+    /// Given the root of the binary tree with this defect, root, return 
+    /// the root of the binary tree after removing this invalid node and 
+    /// every node underneath it (minus the node it incorrectly points to).
+    ///
+    /// Custom testing:
+    /// The test input is read as 3 lines:
+    ///
+    /// TreeNode root
+    /// int fromNode (not available to correctBinaryTree)
+    /// int toNode (not available to correctBinaryTree)
+    /// After the binary tree rooted at root is parsed, the TreeNode with 
+    /// value of fromNode will have its right child pointer pointing to the 
+    /// TreeNode with a value of toNode. Then, root is passed to 
+    /// correctBinaryTree.
+    /// 
+    /// Example 1:
+    /// Input: root = [1,2,3], fromNode = 2, toNode = 3
+    /// Output: [1,null,3]
+    /// Explanation: The node with value 2 is invalid, so remove it.
+    ///
+    /// Example 2:
+    /// Input: root = [8,3,1,7,null,9,4,2,null,null,null,5,6], 
+    /// fromNode = 7, toNode = 4
+    /// Output: [8,3,1,null,null,9,4,null,null,5,6]
+    /// Explanation: The node with value 7 is invalid, so remove it and the 
+    /// node underneath it, node 2.
+    /// 
+    /// Constraints:
+    /// 1. The number of nodes in the tree is in the range [3, 104].
+    /// 2. -10^9 <= Node.val <= 10^9
+    /// 3. All Node.val are unique.
+    /// 4. fromNode != toNode
+    /// 5. fromNode and toNode will exist in the tree and will be on the same 
+    ///    depth.
+    /// 6. toNode is to the right of fromNode.
+    /// 7. fromNode.right is null in the initial tree from the test data.
+    /// </summary>
+    TreeNode* correctBinaryTree(TreeNode* root);
+
+    /// <summary>
+    /// Leet code #1666. Change the Root of a Binary Tree
+    /// 
+    /// Given the root of a binary tree and a leaf node, reroot the tree 
+    /// so that the leaf is the new root.
+    ///
+    /// You can reroot the tree with the following steps for each node cur 
+    /// on the path starting from the leaf up to the root excluding the root:
+    ///
+    /// If cur has a left child, then that child becomes cur's right child. 
+    /// Note that it is guaranteed that cur will have at most one child.
+    /// cur's original parent becomes cur's left child.
+    /// Return the new root of the rerooted tree.
+    ///
+    /// Note: Ensure that your solution sets the Node.parent pointers correctly 
+    /// after rerooting or you will receive "Wrong Answer".
+    ///
+    /// Example 1:
+    /// Input: root = [3,5,1,6,2,0,8,null,null,7,4], leaf = 7
+    /// Output: [7,2,null,5,4,3,6,null,null,null,1,null,null,0,8]
+    ///
+    /// Example 2:
+    /// Input: root = [3,5,1,6,2,0,8,null,null,7,4], leaf = 0
+    /// Output: [0,1,null,3,8,5,null,null,null,6,2,null,null,7,4]
+    ///
+    /// Constraints:
+    /// 1.  The number of nodes in the tree is in the range [2, 100].
+    /// 2. -10^9 <= Node.val <= 10^9
+    /// 3. All Node.val are unique.
+    /// 4. leaf exist in the tree.
+    /// </summary>
+    TreeNode* flipBinaryTree(TreeNode* root, TreeNode* leaf);
+
 #pragma endregion
 };
 

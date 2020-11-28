@@ -3097,8 +3097,38 @@ void TestLeetCode1631(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1654(void)
+{
+    Logger::WriteMessage("Test Leet Code 1654");
+    LeetCodeGraph leetCode;
+    vector<int> forbidden = { 14, 4, 18, 1, 15 };
+    int a = 3;
+    int b = 15;
+    int x = 9;
+    int result = leetCode.minimumJumps(forbidden, a, b, x);
+    Logger::WriteMessage(forbidden);
+    Logger::WriteMessage("a = " + to_string(result) + "; b = " + to_string(b) + "; x = " + to_string(x) + "; result = " + to_string(result));
+
+    forbidden = { 8,3,16,6,12,20 };
+    a = 15;
+    b = 13;
+    x = 11;
+    result = leetCode.minimumJumps(forbidden, a, b, x);
+    Logger::WriteMessage(forbidden);
+    Logger::WriteMessage("a = " + to_string(result) + "; b = " + to_string(b) + "; x = " + to_string(x) + "; result = " + to_string(result));
+
+    forbidden = { 1,6,2,14,5,17,4 };
+    a = 16;
+    b = 9;
+    x = 7;
+    result = leetCode.minimumJumps(forbidden, a, b, x);
+    Logger::WriteMessage(forbidden);
+    Logger::WriteMessage("a = " + to_string(result) + "; b = " + to_string(b) + "; x = " + to_string(x) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1654();
     TestLeetCode1631();
     TestLeetCode1627();
     TestLeetCode1617();

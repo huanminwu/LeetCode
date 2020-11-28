@@ -546,6 +546,113 @@ public:
     /// </summary>
     int maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& requests);
 
+    /// <summary>
+    /// Leet code #1665. Minimum Initial Energy to Finish Tasks
+    /// 
+    /// Hard
+    ///
+    /// You are given an array tasks where tasks[i] = [actual[i], minimum[i]]:
+    ///
+    /// actual[i] is the actual amount of energy you spend to finish the ith 
+    /// task.
+    /// minimum[i] is the minimum amount of energy you require to begin the 
+    /// ith task.
+    /// For example, if the task is [10, 12] and your current energy is 11, 
+    /// you cannot start this task. However, if your current energy is 13, 
+    /// you can complete this task, and your energy will be 3 after finishing 
+    /// it.
+    ///
+    /// You can finish the tasks in any order you like.
+    ///
+    /// Return the minimum initial amount of energy you will need to finish 
+    /// all the tasks.
+    ///
+    /// Example 1:
+    /// Input: tasks = [[1,2],[2,4],[4,8]]
+    /// Output: 8
+    /// Explanation:
+    /// Starting with 8 energy, we finish the tasks in the following order:
+    /// - 3rd task. Now energy = 8 - 4 = 4.
+    /// - 2nd task. Now energy = 4 - 2 = 2.
+    /// - 1st task. Now energy = 2 - 1 = 1.
+    /// Notice that even though we have leftover energy, starting with 7 
+    /// energy does not work because we cannot do the 3rd task.
+    ///
+    /// Example 2:
+    /// Input: tasks = [[1,3],[2,4],[10,11],[10,12],[8,9]]
+    /// Output: 32
+    /// Explanation:
+    /// Starting with 32 energy, we finish the tasks in the following order:
+    /// - 1st task. Now energy = 32 - 1 = 31.
+    /// - 2nd task. Now energy = 31 - 2 = 29.
+    /// - 3rd task. Now energy = 29 - 10 = 19.
+    /// - 4th task. Now energy = 19 - 10 = 9.
+    /// - 5th task. Now energy = 9 - 8 = 1.
+    ///
+    /// Example 3:
+    /// Input: tasks = [[1,7],[2,8],[3,9],[4,10],[5,11],[6,12]]
+    /// Output: 27
+    /// Explanation:
+    /// Starting with 27 energy, we finish the tasks in the following order:
+    /// - 5th task. Now energy = 27 - 5 = 22.
+    /// - 2nd task. Now energy = 22 - 2 = 20.
+    /// - 3rd task. Now energy = 20 - 3 = 17.
+    /// - 1st task. Now energy = 17 - 1 = 16.
+    /// - 4th task. Now energy = 16 - 4 = 12.
+    /// - 6th task. Now energy = 12 - 6 = 6.
+    ///
+    /// Constraints:
+    /// 1. 1 <= tasks.length <= 10^5
+    /// 2. 1 <= actual[i] <= minimum[i] <= 10^4
+    /// </summary>
+    int minimumEffort(vector<vector<int>>& tasks);
+
+    /// <summary>
+    /// Leet code #1642. Furthest Building You Can Reach
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array heights representing the heights of 
+    /// buildings, some bricks, and some ladders.
+    ///
+    /// You start your journey from building 0 and move to the next building 
+    /// by possibly using bricks or ladders.
+    ///
+    /// While moving from building i to building i+1 (0-indexed),
+    ///
+    /// If the current building's height is greater than or equal to the next 
+    /// building's height, you do not need a ladder or bricks.
+    /// If the current building's height is less than the next building's height, 
+    /// you can either use one ladder or (h[i+1] - h[i]) bricks.
+    /// Return the furthest building index (0-indexed) you can reach if you use 
+    /// the given ladders and bricks optimally.
+    /// 
+    /// Example 1:
+    /// Input: heights = [4,2,7,6,9,14,12], bricks = 5, ladders = 1
+    /// Output: 4
+    /// Explanation: Starting at building 0, you can follow these steps:
+    /// - Go to building 1 without using ladders nor bricks since 4 >= 2.
+    /// - Go to building 2 using 5 bricks. You must use either bricks or ladders because 2 < 7.
+    /// - Go to building 3 without using ladders nor bricks since 7 >= 6.
+    /// - Go to building 4 using your only ladder. You must use either bricks or ladders because 6 < 9.
+    /// It is impossible to go beyond building 4 because you do not have any more bricks or ladders.
+    ///
+    /// Example 2: 
+    /// Input: heights = [4,12,2,7,3,18,20,3,19], bricks = 10, ladders = 2
+    /// Output: 7
+    ///
+    /// Example 3:
+    /// Input: heights = [14,3,19,3], bricks = 17, ladders = 0
+    /// Output: 3
+    /// 
+    /// Constraints:
+    /// 1. 1 <= heights.length <= 10^5
+    /// 2. 1 <= heights[i] <= 10^6
+    /// 3. 0 <= bricks <= 10^9
+    /// 4. 0 <= ladders <= heights.length
+    /// </summary>
+    int furthestBuilding(vector<int>& heights, int bricks, int ladders);
+
 #pragma endregion
 };
 #endif  // LeetCodeGreedy_H
