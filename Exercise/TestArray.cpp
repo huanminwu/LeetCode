@@ -4863,8 +4863,82 @@ void TestLeetCode1664(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1672(void)
+{
+    Logger::WriteMessage("Test Leet Code 1672");
+    LeetCodeArray leetCode;
+    vector<vector<int>> accounts = { {1, 2, 3},{3, 2, 1} };
+    int result = leetCode.maximumWealth(accounts);
+    Logger::WriteMessage(accounts);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    accounts = { {1, 5},{7, 3},{3, 5} };
+    result = leetCode.maximumWealth(accounts);
+    Logger::WriteMessage(accounts);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    accounts = { {2, 8, 7},{7, 1, 3},{1, 9, 5} };
+    result = leetCode.maximumWealth(accounts);
+    Logger::WriteMessage(accounts);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1673(void)
+{
+    Logger::WriteMessage("Test Leet Code 1673");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 5, 2, 6 };
+    int k = 2;
+    vector<int> result = leetCode.mostCompetitive(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 2,4,3,3,5,4,9,6 };
+    k = 4;
+    result = leetCode.mostCompetitive(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 2,4,3,3,5,4,1,6 };
+    k = 4;
+    result = leetCode.mostCompetitive(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1671(void)
+{
+    Logger::WriteMessage("Test Leet Code 1671");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 3, 1 };
+    int result = leetCode.minimumMountainRemovals(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,1,1,5,6,2,3,1 };
+    result = leetCode.minimumMountainRemovals(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4, 3, 2, 1, 1, 2, 3, 1 };
+    result = leetCode.minimumMountainRemovals(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+    
+    nums = { 1,2,3,4,4,3,2,1 };
+    result = leetCode.minimumMountainRemovals(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1671();
+    TestLeetCode1673();
+    TestLeetCode1672();
     TestLeetCode1664();
     TestLeetCode1658();
     TestLeetCode1662();

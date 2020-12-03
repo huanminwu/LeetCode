@@ -1034,8 +1034,34 @@ void TestLeetCode1649(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1675(void)
+{
+    Logger::WriteMessage("Test Leet Code 1675");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1,2,3,4 };
+    int result = leetCode.minimumDeviation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,1,5,20,3 };
+    result = leetCode.minimumDeviation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2, 10, 8 };
+    result = leetCode.minimumDeviation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 399, 908, 648, 357, 693, 502, 331, 649, 596, 698 };
+    result = leetCode.minimumDeviation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1675();
     TestLeetCode1649();
     TestLeetCode1632();
     TestLeetCode1626();

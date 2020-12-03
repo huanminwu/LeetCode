@@ -3658,8 +3658,39 @@ void TestLeetCode1657(void)
     Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 + "; result = " + (string)(result ? "true" : " false"));
 }
 
+void TestLeetCode1668(void)
+{
+    Logger::WriteMessage("Test Leet Code 1668");
+    LeetCodeString leetCode;
+    string sequence = "ababc";
+    string word = "ab";
+    int result = leetCode.maxRepeating(sequence, word);
+    Logger::WriteMessage("sequence = " + sequence + "; word = " + word + "; result = " + to_string(result));
+
+    sequence = "ababac";
+    word = "ba";
+    result = leetCode.maxRepeating(sequence, word);
+    Logger::WriteMessage("sequence = " + sequence + "; word = " + word + "; result = " + to_string(result));
+
+    sequence = "abadbac";
+    word = "ba";
+    result = leetCode.maxRepeating(sequence, word);
+    Logger::WriteMessage("sequence = " + sequence + "; word = " + word + "; result = " + to_string(result));
+
+    sequence = "ababc";
+    word = "ac";
+    result = leetCode.maxRepeating(sequence, word);
+    Logger::WriteMessage("sequence = " + sequence + "; word = " + word + "; result = " + to_string(result));
+
+    sequence = "aaa";
+    word = "a";
+    result = leetCode.maxRepeating(sequence, word);
+    Logger::WriteMessage("sequence = " + sequence + "; word = " + word + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1668();
     TestLeetCode1657();
     TestLeetCode1647();
     TestLeetCode1638();

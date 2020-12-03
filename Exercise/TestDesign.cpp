@@ -3307,8 +3307,69 @@ void TestLeetCode1656(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1670(void)
+{
+    Logger::WriteMessage("Test Leet Code 1670");
+    vector<string> commands =
+    {
+        "FrontMiddleBackQueue", "pushFront", "pushBack", "pushMiddle", 
+        "pushMiddle", "popFront", "popMiddle", "popMiddle", "popBack", 
+        "popFront"
+    };
+    vector<vector<int>> parameters =
+    {
+        {},{1},{2},{3},{4},{},{},{},{},{}
+    };
+    vector<string> result;
+
+    FrontMiddleBackQueue* frontMiddleBackQueue = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FrontMiddleBackQueue")
+        {
+            frontMiddleBackQueue = new FrontMiddleBackQueue();
+            result.push_back("null");
+        }
+        else if (commands[i] == "pushFront")
+        {
+            frontMiddleBackQueue->pushFront(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "pushBack")
+        {
+            frontMiddleBackQueue->pushBack(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "pushMiddle")
+        {
+            frontMiddleBackQueue->pushMiddle(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "popFront")
+        {
+            int ret = frontMiddleBackQueue->popFront();
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "popBack")
+        {
+            int ret = frontMiddleBackQueue->popBack();
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "popMiddle")
+        {
+            int ret = frontMiddleBackQueue->popMiddle();
+            result.push_back(to_string(ret));
+        }
+    }
+    delete frontMiddleBackQueue;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1670();
     TestLeetCode1656();
     TestLeetCode1628();
     TestLeetCode1622();

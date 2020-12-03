@@ -787,8 +787,34 @@ void TestLeetCode1634(void)
     PolyNode::freeListNodes(result);
 }
 
+void TestLeetCode1669(void)
+{
+    Logger::WriteMessage("Test Leet Code 1669");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list1 = { 0,1,2,3,4,5 };
+    vector<int> data_list2 = { 1000000,1000001,1000002 };
+    int a = 3;
+    int b = 4;
+    ListNode* list1 = leetCode.generateListNodes(data_list1);
+    ListNode* list2 = leetCode.generateListNodes(data_list2);
+    ListNode* result = leetCode.mergeInBetween(list1, a, b, list2);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list1 = { 0,1,2,3,4,5,6 };
+    data_list2 = { 1000000,1000001,1000002,1000003,1000004 };
+    a = 2;
+    b = 5;
+    list1 = leetCode.generateListNodes(data_list1);
+    list2 = leetCode.generateListNodes(data_list2);
+    result = leetCode.mergeInBetween(list1, a, b, list2);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+}
+
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode1669();
     TestLeetCode1634();
     TestLeetCode1474();
     TestLeetCode382();

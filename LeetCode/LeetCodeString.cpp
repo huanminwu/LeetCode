@@ -12696,4 +12696,57 @@ bool LeetCodeString::closeStrings(string word1, string word2)
     return true;
 }
 
+
+/// <summary>
+/// Leet code #1668. Maximum Repeating Substring
+/// 
+/// Easy
+/// 
+/// For a string sequence, a string word is k-repeating if word concatenated k 
+/// times is a substring of sequence. The word's maximum k-repeating value is 
+/// the highest value k where word is k-repeating in sequence. If word is not 
+/// a substring of sequence, word's maximum k-repeating value is 0.
+///
+/// Given strings sequence and word, return the maximum k-repeating value of 
+/// word in sequence.
+///
+/// Example 1:
+/// Input: sequence = "ababc", word = "ab"
+///
+/// Output: 2
+/// Explanation: "abab" is a substring in "ababc".
+///
+/// Example 2:
+/// Input: sequence = "ababc", word = "ba"
+/// Output: 1
+/// Explanation: "ba" is a substring in "ababc". "baba" is not a 
+/// substring in "ababc".
+///
+/// Example 3:
+/// Input: sequence = "ababc", word = "ac"
+/// Output: 0
+/// Explanation: "ac" is not a substring in "ababc". 
+///
+/// Constraints:
+/// 1. 1 <= sequence.length <= 100
+/// 2. 1 <= word.length <= 100
+/// 3. sequence and word contains only lowercase English letters.
+/// </summary>
+int LeetCodeString::maxRepeating(string sequence, string word)
+{
+    int result = 0;
+    int count = 0;
+    size_t index = 0;
+    while (index < sequence.size())
+    {
+        size_t pos = sequence.find(word, index);
+        if (pos == string::npos) break;
+        if (pos == index) count++;
+        else count = 1;
+        index = pos + word.size();
+        result = max(result, count);
+    }
+    return result;
+}
+
 #pragma endregion

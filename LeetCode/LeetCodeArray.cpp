@@ -13902,4 +13902,180 @@ int LeetCodeArray::waysToMakeFair(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1672. Richest Customer Wealth
+/// 
+/// Easy
+/// 
+/// You are given an m x n integer grid accounts where accounts[i][j] 
+/// is the amount of money the ith customer has in the jth bank. Return 
+/// the wealth that the richest customer has.
+///
+/// A customer's wealth is the amount of money they have in all their 
+/// bank accounts. The richest customer is the customer that has the 
+/// maximum wealth.
+/// 
+/// Example 1:
+///
+/// Input: accounts = [[1,2,3],[3,2,1]]
+/// Output: 6
+/// Explanation:
+/// 1st customer has wealth = 1 + 2 + 3 = 6
+/// 2nd customer has wealth = 3 + 2 + 1 = 6
+/// Both customers are considered the richest with a wealth of 6 each, 
+/// so return 6.
+///
+/// Example 2:
+/// Input: accounts = [[1,5],[7,3],[3,5]]
+/// Output: 10
+/// Explanation: 
+/// 1st customer has wealth = 6
+/// 2nd customer has wealth = 10 
+/// 3rd customer has wealth = 8
+/// The 2nd customer is the richest with a wealth of 10.
+///
+/// Example 3:
+/// Input: accounts = [[2,8,7],[7,1,3],[1,9,5]]
+/// Output: 17
+/// Constraints:
+/// 1. m == accounts.length
+/// 2. n == accounts[i].length
+/// 3. 1 <= m, n <= 50
+/// 4. 1 <= accounts[i][j] <= 100
+/// </summary>
+int LeetCodeArray::maximumWealth(vector<vector<int>>& accounts)
+{
+    int result = 0;
+    for (size_t i = 0; i < accounts.size(); i++)
+    {
+        int sum = 0;
+        for (size_t j = 0; j < accounts[i].size(); j++)
+        {
+            sum += accounts[i][j];
+        }
+        result = max(result, sum);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1673. Find the Most Competitive Subsequence
+/// 
+/// Medium
+/// 
+/// Given an integer array nums and a positive integer k, return the most 
+/// competitive subsequence of nums of size k.
+///
+/// An array's subsequence is a resulting sequence obtained by erasing some 
+/// (possibly zero) elements from the array.
+///
+/// We define that a subsequence a is more competitive than a subsequence b 
+/// (of the same length) if in the first position where a and b differ, 
+/// subsequence a has a number less than the corresponding number in b. For 
+/// example, [1,3,4] is more competitive than [1,3,5] because the first 
+/// position they differ is at the final number, and 4 is less than 5.
+///
+/// Example 1:
+/// Input: nums = [3,5,2,6], k = 2
+/// Output: [2,6]
+/// Explanation: Among the set of every possible subsequence: {[3,5], 
+/// [3,2], [3,6], [5,2], [5,6], [2,6]}, [2,6] is the most competitive.
+///
+/// Example 2:
+/// Input: nums = [2,4,3,3,5,4,9,6], k = 4
+/// Output: [2,3,3,4]
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^9
+/// 3. 1 <= k <= nums.length
+/// </summary>
+vector<int> LeetCodeArray::mostCompetitive(vector<int>& nums, int k)
+{
+    vector<int> result;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        while (!result.empty() && nums[i] < result.back() &&
+              (int)(nums.size() - i +result.size()) > k)
+        {
+            result.pop_back();
+        }
+        if ((int)result.size() < k)
+        {
+            result.push_back(nums[i]);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1671. Minimum Number of Removals to Make Mountain Array
+/// 
+/// Hard
+/// 
+/// You may recall that an array arr is a mountain array if and only if:
+///
+/// arr.length >= 3
+/// There exists some index i (0-indexed) with 0 < i < arr.length - 1 such 
+/// that:
+/// arr[0] < arr[1] < ... < arr[i - 1] < arr[i]
+/// arr[i] > arr[i + 1] > ... > arr[arr.length - 1]
+/// Given an integer array nums, return the minimum number of elements to 
+/// remove to make nums a mountain array.
+/// 
+/// Example 1: 
+/// Input: nums = [1,3,1]
+/// Output: 0
+/// Explanation: The array itself is a mountain array so we do not need to 
+/// remove any elements.
+///
+/// Example 2:
+/// Input: nums = [2,1,1,5,6,2,3,1]
+/// Output: 3
+/// Explanation: One solution is to remove the elements at indices 0, 1, 
+/// and 5, making the array nums = [1,5,6,3,1].
+/// Example 3:
+/// Input: nums = [4,3,2,1,1,2,3,1]
+/// Output: 4
+///
+/// Example 4:
+/// Input: nums = [1,2,3,4,4,3,2,1]
+/// Output: 1
+/// Constraints:
+/// 1. 3 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. It is guaranteed that you can make a mountain array out of nums.
+/// </summary>
+int LeetCodeArray::minimumMountainRemovals(vector<int>& nums)
+{
+    vector<int> left(nums.size());
+    vector<int> right(nums.size());
+    int prev_max = 0;
+    vector<int> dp;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int index = lower_bound(dp.begin(), dp.end(), nums[i]) - dp.begin();
+        if (index == dp.size()) dp.push_back(nums[i]);
+        else dp[index] = nums[i];
+        left[i] = index;
+    }
+    dp.clear();
+    for (int i = nums.size() - 1; i >= 0; i--)
+    {
+        int index = lower_bound(dp.begin(), dp.end(), nums[i]) - dp.begin();
+        if (index == dp.size()) dp.push_back(nums[i]);
+        else dp[index] = nums[i];
+        right[i] = index;
+    }
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (left[i] > 0 && right[i] > 0)
+        {
+            result = max(result, left[i] + right[i] + 1);
+        }
+    }
+    return nums.size() - result;
+}
 #pragma endregion

@@ -160,25 +160,25 @@ AS
     SELECT
         A.month,
         ride_distance = CONVERT(FLOAT, SUM(ISNULL(B.ride_distance, 0))),
-		ride_duration = CONVERT(FLOAT, SUM(ISNULL(B.ride_duration, 0)))
+        ride_duration = CONVERT(FLOAT, SUM(ISNULL(B.ride_duration, 0)))
     FROM
        months AS A
     LEFT OUTER JOIN
     (
         SELECT
             month = MONTH(A.requested_at),
-			B.ride_distance,
-			B.ride_duration
+            B.ride_distance,
+            B.ride_duration
         FROM
            Rides AS A
         INNER JOIN 
             AcceptedRides AS B
         ON
             A.ride_id = B.ride_id
-		WHERE YEAR(A.requested_at) = 2020
+        WHERE YEAR(A.requested_at) = 2020
     ) AS B
-	ON A.month = B.month
-	GROUP BY A.month
+    ON A.month = B.month
+    GROUP BY A.month
 )
 
 SELECT 
