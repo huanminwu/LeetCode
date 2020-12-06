@@ -19,86 +19,111 @@
 #include "LeetCodeGreedy.h"
 #pragma region Greedy
 /// <summary>
-/// LeetCode #56. Merge Intervals
-/// Given a collection of intervals, merge all overlapping intervals.
-/// For example,
-/// Given [1,3],[2,6],[8,10],[15,18]
-/// return [1,6],[8,10],[15,18]. 
+/// Leet code #56. Merge Intervals
+/// 
+/// Medium
+/// 
+/// Given an array of intervals where intervals[i] = [start[i], end[i]], merge all 
+/// overlapping intervals, and return an array of the non-overlapping intervals
+/// that cover all the intervals in the input.
+///
+/// Example 1:
+/// Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+/// Output: [[1,6],[8,10],[15,18]]
+/// Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
+/// Example 2:
+/// Input: intervals = [[1,4],[4,5]]
+/// Output: [[1,5]]
+/// Explanation: Intervals [1,4] and [4,5] are considered overlapping.
+/// Constraints:
+/// 1. 1 <= intervals.length <= 10^4
+/// 2. intervals[i].length == 2
+/// 3. 0 <= start[i] <= end[i] <= 10^4
 /// </summary>
-vector<Interval> LeetCode::mergeIntervals(vector<Interval>& intervals)
+vector<vector<int>> LeetCodeGreedy::merge(vector<vector<int>>& intervals)
 {
-    vector<Interval> result;
-    struct greater_start
-    {
-        bool operator() (Interval a, Interval b)
-        {
-            return (a.start > b.start);
-        }
-    };
-    priority_queue<Interval, vector<Interval>, greater_start> queue;
+    vector<vector<int>> result;
+    sort(intervals.begin(), intervals.end());
     for (size_t i = 0; i < intervals.size(); i++)
     {
-        queue.push(intervals[i]);
-    }
-    while (!queue.empty())
-    {
-        Interval first = queue.top();
-        queue.pop();
-        if (queue.empty())
-        {
-            result.push_back(first);
-            continue;
-        }
-        Interval second = queue.top();
-        queue.pop();
-        if (first.end >= second.start)
-        {
-            first.end = max(first.end, second.end);
-            queue.push(first);
-        }
+        if (result.empty()) result.push_back(intervals[i]);
         else
         {
-            queue.push(second);
-            result.push_back(first);
+            if (result.back()[1] < intervals[i][0])
+            {
+                result.push_back(intervals[i]);
+            }
+            else
+            {
+                result.back()[1] = max(result.back()[1], intervals[i][1]);
+            }
         }
     }
     return result;
 }
 
 /// <summary>
-/// Leet code #57. Insert Interval   
-/// Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
-/// You may assume that the intervals were initially sorted according to their start times.
+/// Leet code #57. Insert Interval
+/// 
+/// Medium
+/// 
+/// Given a set of non-overlapping intervals, insert a new interval into the 
+/// intervals (merge if necessary).
 ///
+/// You may assume that the intervals were initially sorted according to 
+/// their start times.
+/// 
 /// Example 1:
-/// Given intervals [1,3],[6,9], insert and merge [2,5] in as [1,5],[6,9]. 
+/// Input: intervals = [[1,3],[6,9]], newInterval = [2,5]
+/// Output: [[1,5],[6,9]]
 ///
 /// Example 2:
-/// Given [1,2],[3,5],[6,7],[8,10],[12,16], insert and merge [4,9] in as [1,2],[3,10],[12,16]. 
-/// This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10]. 
+/// Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
+/// Output: [[1,2],[3,10],[12,16]]
+/// Explanation: Because the new interval [4,8] overlaps with 
+/// [3,5],[6,7],[8,10].
+///
+/// Example 3:
+/// Input: intervals = [], newInterval = [5,7]
+/// Output: [[5,7]]
+///
+/// Example 4:
+/// Input: intervals = [[1,5]], newInterval = [2,3]
+/// Output: [[1,5]]
+///
+/// Example 5:
+/// Input: intervals = [[1,5]], newInterval = [2,7]
+/// Output: [[1,7]]
+/// Constraints:
+/// 1. 0 <= intervals.length <= 10^4
+/// 2. intervals[i].length == 2
+/// 3. 0 <= intervals[i][0] <= intervals[i][1] <= 10^5
+/// 4. intervals is sorted by intervals[i][0] in ascending order.
+/// 5. newInterval.length == 2
+/// 6. 0 <= newInterval[0] <= newInterval[1] <= 10^5
 /// </summary>
-vector<Interval> LeetCode::insertInterval(vector<Interval>& intervals, Interval newInterval)
+vector<vector<int>> LeetCodeGreedy::insert(vector<vector<int>>& intervals, vector<int>& newInterval)
 {
-    vector<Interval> result;
+    vector<int> temp = newInterval;
+    vector<vector<int>> result;
     for (size_t i = 0; i < intervals.size(); i++)
     {
-        Interval interval = intervals[i];
-        if (interval.end < newInterval.start)
+        if (temp[1] < intervals[i][0])
         {
-            result.push_back(interval);
+            result.push_back(temp);
+            temp = intervals[i];
         }
-        else if (newInterval.end < interval.start)
+        else if (intervals[i][1] < temp[0])
         {
-            result.push_back(newInterval);
-            newInterval = interval;
+            result.push_back(intervals[i]);
         }
         else
         {
-            newInterval.start = min(interval.start, newInterval.start);
-            newInterval.end = max(interval.end, newInterval.end);
+            temp[0] = min(temp[0], intervals[i][0]);
+            temp[1] = max(temp[1], intervals[i][1]);
         }
     }
-    result.push_back(newInterval);
+    result.push_back(temp);
     return result;
 }
 
@@ -127,7 +152,7 @@ vector<Interval> LeetCode::insertInterval(vector<Interval>& intervals, Interval 
 /// nums = [1, 2, 2], n = 5
 /// Return 0.
 /// </summary>
-int LeetCode::minPatches(vector<int>& nums, int n)
+int LeetCodeGreedy::minPatches(vector<int>& nums, int n)
 {
     int result = 0;
     unsigned long long sum = 0;
@@ -220,55 +245,16 @@ int LeetCode::findMaximizedCapital(int k, int W, vector<int>& Profits, vector<in
 /// Given [[0, 30],[5, 10],[15, 20]],
 /// return 2. 
 /// </summary>
-int LeetCode::minMeetingRooms(vector<Interval>& intervals)
-{
-    struct IntervalCompare
-    {
-        bool operator() (Interval &a, Interval &b)
-        {
-            if (a.start < b.start) return true;
-            else if ((a.start == b.start) && (a.end < b.end)) return true;
-            else return false;
-        }
-    };
-    sort(intervals.begin(), intervals.end(), IntervalCompare());
-    vector<int> ends;
-    int max_rooms = 0;
-    for (size_t i = 0; i < intervals.size(); i++)
-    {
-        int count = 1;
-        for (size_t j = 0; j < i; j++)
-        {
-            if (intervals[i].start < intervals[j].end)
-            {
-                count++;
-            }
-        }
-        max_rooms = max(max_rooms, count);
-    }
-    return max_rooms;
-}
-
-/// <summary>
-/// Leet code #253. Meeting Rooms II  
-/// 
-/// Given an array of meeting time intervals consisting of start 
-/// and end times [[s1,e1],[s2,e2],...] (si < ei), 
-/// find the minimum number of conference rooms required.
-/// For example,
-/// Given [[0, 30],[5, 10],[15, 20]],
-/// return 2. 
-/// </summary>
-int LeetCode::minMeetingRoomsII(vector<Interval>& intervals)
+int LeetCodeGreedy::minMeetingRooms(vector<vector<int>>& intervals)
 {
     map<int, int> time_line;
     for (size_t i = 0; i < intervals.size(); i++)
     {
-        time_line[intervals[i].start]++;
-        time_line[intervals[i].end]--;
+        time_line[intervals[i][0]]++;
+        time_line[intervals[i][1]]--;
     }
     int max_rooms = 0, rooms = 0;
-    for (auto time : time_line)
+    for (auto &time : time_line)
     {
         rooms += time.second;
         max_rooms = max(max_rooms, rooms);
@@ -278,38 +264,48 @@ int LeetCode::minMeetingRoomsII(vector<Interval>& intervals)
 
 /// <summary>
 /// Leet code #435. Non-overlapping Intervals
-///
+/// 
+/// Medium
+/// 
 /// Given a collection of intervals, find the minimum number of intervals 
-/// you need to remove to make the rest of the intervals non-overlapping. 
-/// Note:
-/// You may assume the interval's end point is always bigger than its start point.
-/// Intervals like [1,2] and [2,3] have borders "touching" but they don't overlap each other.
-///
+/// you need to remove to make the rest of the intervals non-overlapping.
+/// 
 /// Example 1:
-/// Input: [ [1,2], [2,3], [3,4], [1,3] ]
+/// Input: [[1,2],[2,3],[3,4],[1,3]]
 /// Output: 1
-/// Explanation: [1,3] can be removed and the rest of intervals are non-overlapping.
+/// Explanation: [1,3] can be removed and the rest of intervals are 
+/// non-overlapping.
+///
 /// Example 2:
-/// Input: [ [1,2], [1,2], [1,2] ]
+/// Input: [[1,2],[1,2],[1,2]]
 /// Output: 2
-/// Explanation: You need to remove two [1,2] to make the rest of intervals non-overlapping.
+/// Explanation: You need to remove two [1,2] to make the rest of 
+/// intervals non-overlapping.
+///
 /// Example 3:
-/// Input: [ [1,2], [2,3] ]
+/// Input: [[1,2],[2,3]]
 /// Output: 0
-/// Explanation: You don't need to remove any of the intervals since they're already non-overlapping.
+/// Explanation: You don't need to remove any of the intervals since 
+/// they're already non-overlapping.
+/// 
+/// Note:
+/// You may assume the interval's end point is always bigger than its start 
+/// point.
+/// Intervals like [1,2] and [2,3] have borders "touching" but they don't 
+/// overlap each other.
 /// </summary>
-int LeetCode::eraseOverlapIntervals(vector<Interval>& intervals)
+int LeetCodeGreedy::eraseOverlapIntervals(vector<vector<int>>& intervals)
 {
-    int count = 0;
+    int result = 0;
     struct IntervalCompare
     {
-        bool operator() (const Interval& a, const Interval& b)
+        bool operator() (const vector<int>& a, const vector<int>& b)
         {
-            if (a.end < b.end)
+            if (a[1] < b[1])
             {
                 return true;
             }
-            else if ((a.end == b.end) && (a.start > b.start))
+            else if ((a[1] == b[1]) && (a[0] > b[0]))
             {
                 return true;
             }
@@ -321,7 +317,7 @@ int LeetCode::eraseOverlapIntervals(vector<Interval>& intervals)
     };
 
     sort(intervals.begin(), intervals.end(), IntervalCompare());
-    Interval last;
+    vector<int> last;
     for (size_t i = 0; i < intervals.size(); i++)
     {
         if (i == 0)
@@ -330,14 +326,14 @@ int LeetCode::eraseOverlapIntervals(vector<Interval>& intervals)
         }
         else
         {
-            if (intervals[i].start < last.end) count++;
+            if (intervals[i][0] < last[1]) result++;
             else
             {
                 last = intervals[i];
             }
         }
     }
-    return count;
+    return result;
 }
 
 /// <summary>
@@ -374,20 +370,17 @@ int LeetCode::eraseOverlapIntervals(vector<Interval>& intervals)
 /// Explanation: There is no satisfied "right" interval for [1,4] and [3,4].
 /// For [2,3], the interval [3,4] has minimum-"right" start point.
 /// </summary>
-vector<int> LeetCode::findRightInterval(vector<Interval>& intervals)
+vector<int> LeetCodeGreedy::findRightInterval(vector<vector<int>>& intervals)
 {
     vector<int> result;
     map<int, int> range_order;
     for (size_t i = 0; i < intervals.size(); i++)
     {
-        if (range_order.find(intervals[i].start) == range_order.end())
-        {
-            range_order[intervals[i].start] = i;
-        }
+        range_order[intervals[i][0]] = i;
     }
     for (size_t i = 0; i < intervals.size(); i++)
     {
-        map<int, int>::iterator itr = range_order.lower_bound(intervals[i].end);
+        map<int, int>::iterator itr = range_order.lower_bound(intervals[i][1]);
         if (itr == range_order.end())
         {
             result.push_back(-1);
@@ -401,65 +394,72 @@ vector<int> LeetCode::findRightInterval(vector<Interval>& intervals)
 }
 
 /// <summary>
-/// Leet code #452. Minimum Number of Arrows to Burst Balloons    
+/// Leet code #452. Minimum Number of Arrows to Burst Balloons
 /// 
-/// There are a number of spherical balloons spread in two-dimensional space. 
-/// For each balloon, provided input is the start and end coordinates of the 
-/// horizontal diameter. Since it's horizontal, y-coordinates don't matter 
+/// Medium
+/// 
+/// There are some spherical balloons spread in two-dimensional space. For 
+/// each balloon, provided input is the start and end coordinates of the 
+/// horizontal diameter. Since it's horizontal, y-coordinates don't matter, 
 /// and hence the x-coordinates of start and end of the diameter suffice. 
-/// Start is always smaller than end. There will be at most 104 balloons.
+/// The start is always smaller than the end.
 ///
 /// An arrow can be shot up exactly vertically from different points along 
-/// the x-axis. A balloon with xstart and xend bursts by an arrow shot at x 
-/// if xstart ≤ x ≤ xend. There is no limit to the number of arrows that 
-/// can be shot. An arrow once shot keeps travelling up infinitely. 
-/// The problem is to find the minimum number of arrows that must be 
-/// shot to burst all balloons. 
-/// Example: 
-/// Input:
-/// [[10,16], [2,8], [1,6], [7,12]]
-/// Output:
-/// 2
-/// Explanation:
-/// One way is to shoot one arrow for example at x = 6 (bursting the balloons 
-/// [2,8] and [1,6]) and another arrow at x = 11 (bursting the other two balloons).
+// the x-axis. A balloon with x.start and x.end bursts by an arrow shot at x 
+/// if x.start ≤ x ≤ x.end. There is no limit to the number of arrows that 
+/// can be shot. An arrow once shot keeps traveling up infinitely.
+///
+/// Given an array points where points[i] = [x.start, x.end], return the 
+/// minimum number of arrows that must be shot to burst all balloons.
+/// 
+/// Example 1: 
+/// Input: points = [[10,16],[2,8],[1,6],[7,12]]
+/// Output: 2
+/// Explanation: One way is to shoot one arrow for example at x = 6 (bursting 
+/// the balloons [2,8] and [1,6]) and another arrow at x = 11 (bursting the 
+/// other two balloons).
+///
+/// Example 2:
+/// Input: points = [[1,2],[3,4],[5,6],[7,8]]
+/// Output: 4
+///
+/// Example 3:
+/// Input: points = [[1,2],[2,3],[3,4],[4,5]]
+/// Output: 2
+///
+/// Example 4:
+/// Input: points = [[1,2]]
+/// Output: 1
+///
+/// Example 5:
+/// Input: points = [[2,3],[2,3]]
+/// Output: 1
+///
+/// Constraints:
+/// 1. 0 <= points.length <= 10^4
+/// 2. points[i].length == 2
+/// 3. -2^31 <= x.start < x.end <= 2^31 - 1
 /// </summary>
-int LeetCode::findMinArrowShots(vector<pair<int, int>>& points)
+int LeetCodeGreedy::findMinArrowShots(vector<vector<int>>& points)
 {
-    int count = 0;
-    set<pair<int, int>> range_set;
-    for (pair<int, int> point : points)
+    int result = 0;
+    vector<vector<int>> temp = points;
+    for (size_t i = 0; i < temp.size(); i++)
     {
-        range_set.insert(point);
+        swap(temp[i][0], temp[i][1]);
     }
-    while (!range_set.empty())
+    sort(temp.begin(), temp.end());
+    int prev = -1;
+    for (size_t i = 0; i < temp.size(); i++)
     {
-        set<pair<int, int>>::iterator itr = range_set.begin();
-        pair<int, int> curr = *itr;
-        itr++;
-        if (itr == range_set.end())
-        {
-            count++;
-            range_set.erase(curr);
-        }
+        if (i == 0) prev = 0;
         else
         {
-            pair<int, int> next = *itr;
-            if (next.first <= curr.second)
-            {
-                pair<int, int> intersection = make_pair(max(curr.first, next.first), min(curr.second, next.second));
-                range_set.erase(curr);
-                range_set.erase(next);
-                range_set.insert(intersection);
-            }
-            else
-            {
-                count++;
-                range_set.erase(curr);
-            }
+            if (temp[i][1] <= temp[prev][0]) result++;
+            else prev = i;
         }
     }
-    return count;
+    return points.size() - result;
 }
 
 /// <summary>
@@ -504,7 +504,7 @@ int LeetCode::findMinArrowShots(vector<pair<int, int>>& points)
 /// 6. the three lines of height 5 should be merged into one in the final 
 ///    output as such: [...[2 3], [4 5], [12 7], ...]
 /// </summary>
-vector<vector<int>> LeetCode::getSkyline(vector<vector<int>>& buildings)
+vector<vector<int>> LeetCodeGreedy::getSkyline(vector<vector<int>>& buildings)
 {
     vector<vector<int>> result;
     map<int, vector<int>> edge_map;
@@ -517,7 +517,7 @@ vector<vector<int>> LeetCode::getSkyline(vector<vector<int>>& buildings)
     }
     // we may have multiple building with same height
     map<int, int> skylines;
-    for (auto edge : edge_map)
+    for (auto &edge : edge_map)
     {
         for (auto height : edge.second)
         {
@@ -547,30 +547,112 @@ vector<vector<int>> LeetCode::getSkyline(vector<vector<int>>& buildings)
 }
 
 /// <summary>
-/// Leet code #252. Meeting Rooms   
+/// Leet code #228. Summary Ranges
 /// 
-/// Given an array of meeting time intervals consisting of start and end times 
-/// [[s1,e1],[s2,e2],...] (si < ei), determine if a person could attend all meetings. 
-/// distance between these two words in the list. 
-/// For example,
-/// Given [[0, 30],[5, 10],[15, 20]]. 
-/// return false. 
+/// Easy
+/// 
+/// You are given a sorted unique integer array nums.
+///
+/// Return the smallest sorted list of ranges that cover all the numbers 
+/// in the array exactly. That is, each element of nums is covered by 
+/// exactly one of the ranges, and there is no integer x such that x is 
+/// in one of the ranges but not in nums.
+///
+/// Each range [a,b] in the list should be output as:
+/// 
+/// "a->b" if a != b
+/// "a" if a == b
+///  
+/// Example 1:
+/// Input: nums = [0,1,2,4,5,7]
+/// Output: ["0->2","4->5","7"]
+/// Explanation: The ranges are:
+/// [0,2] --> "0->2"
+/// [4,5] --> "4->5"
+/// [7,7] --> "7"
+///
+/// Example 2:
+/// Input: nums = [0,2,3,4,6,8,9]
+/// Output: ["0","2->4","6","8->9"]
+/// Explanation: The ranges are:
+/// [0,0] --> "0"
+/// [2,4] --> "2->4"
+/// [6,6] --> "6"
+/// [8,9] --> "8->9"
+///
+/// Example 3:
+/// Input: nums = []
+/// Output: []
+///
+/// Example 4:
+/// Input: nums = [-1]
+/// Output: ["-1"]
+///
+/// Example 5:
+/// Input: nums = [0]
+/// Output: ["0"]
+/// Constraints:
+/// 1. 0 <= nums.length <= 20
+/// 2. -2^31 <= nums[i] <= 2^31 - 1
+/// 3. All the values of nums are unique.
+/// 4. nums is sorted in ascending order.
 /// </summary>
-bool LeetCode::canAttendMeetings(vector<Interval>& intervals)
+vector<string> LeetCodeGreedy::summaryRanges(vector<int>& nums)
 {
-    struct IntervalCompare
+    vector<string> result;
+    size_t first = 0, last = 0, next = 1;
+    while (last < nums.size())
     {
-        bool operator() (Interval &a, Interval &b)
+        if (next == nums.size() || nums[last] + 1 < nums[next])
         {
-            if (a.start < b.start) return true;
-            else if ((a.start == b.start) && (a.end < b.end)) return true;
-            else return false;
+            if (first == last)
+            {
+                result.push_back(to_string(nums[first]));
+            }
+            else
+            {
+                result.push_back(to_string(nums[first]) + "->" + to_string(nums[last]));
+            }
+            first = next;
+            last = next;
         }
-    };
-    sort(intervals.begin(), intervals.end(), IntervalCompare());
+        else
+        {
+            last++;
+        }
+        next++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #252. Meeting Rooms
+/// 
+/// Easy
+/// 
+/// Given an array of meeting time intervals where intervals[i] = 
+/// [start[i], end[i]], determine if a person could attend all meetings.
+/// 
+/// Example 1:
+/// Input: intervals = [[0,30],[5,10],[15,20]]
+/// Output: false
+///
+/// Example 2:
+/// Input: intervals = [[7,10],[2,4]]
+/// Output: true
+/// 
+/// Constraints:
+/// 1. 0 <= intervals.length <= 10^4
+/// 2. intervals[i].length == 2
+/// 3. 0 <= starti < endi <= 10^6
+/// </summary>
+bool LeetCodeGreedy::canAttendMeetings(vector<vector<int>>& intervals)
+{
+
+    sort(intervals.begin(), intervals.end());
     for (size_t i = 1; i < intervals.size(); i++)
     {
-        if (intervals[i].start < intervals[i - 1].end)
+        if (intervals[i][0] < intervals[i - 1][1])
         {
             return false;
         }
@@ -585,16 +667,16 @@ bool LeetCode::canAttendMeetings(vector<Interval>& intervals)
 /// return its missing ranges.
 /// For example, given [0, 1, 3, 50, 75], lower = 0 and upper = 99, return ["2", "4->49", "51->74", "76->99"]. 
 /// </summary>
-vector<string> LeetCode::findMissingRanges(vector<int>& nums, int lower, int upper)
+vector<string> LeetCodeGreedy::findMissingRanges(vector<int>& nums, int lower, int upper)
 {
     vector<string> result;
-    long long expect = (long long)lower;
-    long long end;
+    int expect = lower;
+    int end;
     for (size_t i = 0; i < nums.size(); i++)
     {
-        if ((long long)nums[i] > expect)
+        if (nums[i] > expect)
         {
-            end = (long long)nums[i] - 1;
+            end = nums[i] - 1;
             if (expect == end)
             {
                 result.push_back(to_string(expect));
@@ -604,11 +686,11 @@ vector<string> LeetCode::findMissingRanges(vector<int>& nums, int lower, int upp
                 result.push_back(to_string(expect) + "->" + to_string(end));
             }
         }
-        expect = (long long)nums[i] + 1;
+        expect = nums[i] + 1;
     }
-    if (expect <= (long long)upper)
+    if (expect <= upper)
     {
-        end = (long long)upper;
+        end = upper;
         if (expect == end)
         {
             result.push_back(to_string(expect));
@@ -715,7 +797,7 @@ int LeetCode::leastBricks(vector<vector<int>>& wall)
     }
 
     int min_bricks = wall.size();
-    for (auto itr : align_map)
+    for (auto &itr : align_map)
     {
         min_bricks = min(min_bricks, (int)wall.size() - itr.second);
     }
@@ -766,7 +848,7 @@ int LeetCode::leastBricks(vector<vector<int>>& wall)
 int LeetCode::maxCount(int m, int n, vector<vector<int>>& ops)
 {
     pair<int, int> result = make_pair(m, n);
-    for (auto range : ops)
+    for (auto &range : ops)
     {
         result.first = min(range[0], result.first);
         result.second = min(range[1], result.second);
@@ -804,7 +886,7 @@ int LeetCode::leastInterval(vector<char>& tasks, int n)
     priority_queue<pair<int, int>> task_queue;
     for (char task : tasks)  task_count[task]++;
 
-    for (auto itr : task_count)
+    for (auto &itr : task_count)
     {
         task_queue.push(make_pair(0, itr.second));
     }
@@ -1195,7 +1277,7 @@ vector<Interval> LeetCode::employeeFreeTime(vector<vector<Interval>>& schedule)
     }
     Interval interval = { -1, -1 };
     int count = 0;
-    for (auto itr : time_map)
+    for (auto &itr : time_map)
     {
         count += itr.second;
         if (count == 0) interval.start = itr.first;
@@ -1254,7 +1336,7 @@ int LeetCode::rectangleArea(vector<vector<int>>& rectangles)
     }
     vector<int> vx(sx.begin(), sx.end()), vy(sy.begin(), sy.end());
     vector<vector<int>> visited(vx.size(), vector<int>(vy.size()));
-    for (auto r : rectangles)
+    for (auto &r : rectangles)
     {
         for (auto x = lower_bound(vx.begin(), vx.end(), r[0]) - vx.begin(); vx[x] != r[2]; x++)
         {
@@ -1593,7 +1675,7 @@ vector<int> LeetCode::rearrangeBarcodes(vector<int>& barcodes)
     {
         code_count[barcodes[i]]++;
     }
-    for (auto itr : code_count)
+    for (auto &itr : code_count)
     {
         code_heap.push(make_pair(itr.second, itr.first));
     }
@@ -1671,7 +1753,7 @@ bool LeetCode::carPooling(vector<vector<int>>& trips, int capacity)
         stops[trips[i][2]] -= trips[i][0];
     }
     int result = 0;
-    for (auto itr : stops)
+    for (auto &itr : stops)
     {
         result += itr.second;
         if (result > capacity) return false;
@@ -1742,7 +1824,7 @@ vector<int> LeetCode::corpFlightBookings(vector<vector<int>>& bookings, int n)
 /// Another possible answer is: "abcabcda"
 /// The same letters are at least distance 2 from each other.
 /// </summary>
-string LeetCode::rearrangeString(string s, int k)
+string LeetCodeGreedy::rearrangeString(string s, int k)
 {
     vector<pair<int, int>> char_map(26, { 0, -1 });
     string result(s.size(), 0);
@@ -1938,7 +2020,7 @@ vector<int> LeetCodeGreedy::minAvailableDuration(vector<vector<int>>& slots1,
         time_line[slots2[i][1]]--;
     }
     int count = 0;
-    for (auto itr : time_line)
+    for (auto &itr : time_line)
     {
         count += itr.second;
         if (count == 2)

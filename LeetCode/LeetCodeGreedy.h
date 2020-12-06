@@ -27,6 +27,440 @@ class LeetCodeGreedy
 {
 public:
 #pragma region Greedy
+    /// <summary>
+    /// Leet code #56. Merge Intervals
+    /// 
+    /// Medium
+    /// 
+    /// Given an array of intervals where intervals[i] = [start[i], end[i]], merge all 
+    /// overlapping intervals, and return an array of the non-overlapping intervals
+    /// that cover all the intervals in the input.
+    ///
+    /// Example 1:
+    /// Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+    /// Output: [[1,6],[8,10],[15,18]]
+    /// Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
+    /// Example 2:
+    /// Input: intervals = [[1,4],[4,5]]
+    /// Output: [[1,5]]
+    /// Explanation: Intervals [1,4] and [4,5] are considered overlapping.
+    /// Constraints:
+    /// 1. 1 <= intervals.length <= 10^4
+    /// 2. intervals[i].length == 2
+    /// 3. 0 <= starti <= endi <= 10^4
+    /// </summary>
+    vector<vector<int>> merge(vector<vector<int>>& intervals);
+
+    /// <summary>
+    /// Leet code #57. Insert Interval
+    /// 
+    /// Medium
+    /// 
+    /// Given a set of non-overlapping intervals, insert a new interval into the 
+    /// intervals (merge if necessary).
+    ///
+    /// You may assume that the intervals were initially sorted according to 
+    /// their start times.
+    /// 
+    /// Example 1:
+    /// Input: intervals = [[1,3],[6,9]], newInterval = [2,5]
+    /// Output: [[1,5],[6,9]]
+    ///
+    /// Example 2:
+    /// Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
+    /// Output: [[1,2],[3,10],[12,16]]
+    /// Explanation: Because the new interval [4,8] overlaps with 
+    /// [3,5],[6,7],[8,10].
+    ///
+    /// Example 3:
+    /// Input: intervals = [], newInterval = [5,7]
+    /// Output: [[5,7]]
+    ///
+    /// Example 4:
+    /// Input: intervals = [[1,5]], newInterval = [2,3]
+    /// Output: [[1,5]]
+    ///
+    /// Example 5:
+    /// Input: intervals = [[1,5]], newInterval = [2,7]
+    /// Output: [[1,7]]
+    /// Constraints:
+    /// 1. 0 <= intervals.length <= 10^4
+    /// 2. intervals[i].length == 2
+    /// 3. 0 <= intervals[i][0] <= intervals[i][1] <= 10^5
+    /// 4. intervals is sorted by intervals[i][0] in ascending order.
+    /// 5. newInterval.length == 2
+    /// 6. 0 <= newInterval[0] <= newInterval[1] <= 10^5
+    /// </summary>
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval);
+
+    /// <summary>
+    /// Leet code #163. Missing Ranges
+    /// 
+    /// Easy
+    /// 
+    /// You are given an inclusive range [lower, upper] and a sorted unique 
+    /// integer array nums, where all elements are in the inclusive range.
+    ///
+    /// A number x is considered missing if x is in the range [lower, upper] 
+    /// and x is not in nums.
+    ///
+    /// Return the smallest sorted list of ranges that cover every missing 
+    /// number exactly. That is, no element of nums is in any of the ranges, 
+    /// and each missing number is in one of the ranges.
+    ///
+    /// Each range [a,b] in the list should be output as:
+    ///
+    /// "a->b" if a != b
+    /// "a" if a == b
+    /// 
+    /// Example 1:
+    /// Input: nums = [0,1,3,50,75], lower = 0, upper = 99
+    /// Output: ["2","4->49","51->74","76->99"]
+    /// Explanation: The ranges are:
+    /// [2,2] --> "2"
+    /// [4,49] --> "4->49"
+    /// [51,74] --> "51->74"
+    /// [76,99] --> "76->99"
+    ///
+    /// Example 2:
+    /// Input: nums = [], lower = 1, upper = 1
+    /// Output: ["1"]
+    /// Explanation: The only missing range is [1,1], which becomes "1".
+    ///
+    /// Example 3:
+    /// Input: nums = [], lower = -3, upper = -1
+    /// Output: ["-3->-1"]
+    /// Explanation: The only missing range is [-3,-1], which becomes "-3->-1".
+    ///
+    /// Example 4:
+    /// Input: nums = [-1], lower = -1, upper = -1
+    /// Output: []
+    /// Explanation: There are no missing ranges since there are no missing 
+    /// numbers.
+    ///
+    /// Example 5:
+    /// Input: nums = [-1], lower = -2, upper = -1
+    /// Output: ["-2"]
+    ///
+    /// Constraints:
+    /// 1. -10^9 <= lower <= upper <= 10^9
+    /// 2. 0 <= nums.length <= 100
+    /// 3. lower <= nums[i] <= upper
+    /// 4. All the values of nums are unique.
+    /// </summary>
+    vector<string> findMissingRanges(vector<int>& nums, int lower, int upper);
+
+    /// <summary>
+    /// Leet code #218. The Skyline Problem
+    /// 
+    /// Hard
+    /// 
+    /// A city's skyline is the outer contour of the silhouette formed by all the 
+    /// buildings in that city when viewed from a distance. Given the locations 
+    /// and heights of all the buildings, return the skyline formed by these 
+    /// buildings collectively.
+    ///
+    /// The geometric information of each building is given in the array buildings 
+    /// where buildings[i] = [left[i], right[i], height[i]]:
+    ///
+    /// left[i] is the x coordinate of the left edge of the ith building.
+    /// right[i] is the x coordinate of the right edge of the ith building.
+    /// height[i] is the height of the ith building.
+    /// You may assume all buildings are perfect rectangles grounded on an 
+    /// absolutely flat surface at height 0.
+    ///
+    /// The skyline should be represented as a list of "key points" sorted by 
+    /// their x-coordinate in the form [[x1,y1],[x2,y2],...]. Each key point is 
+    /// the left endpoint of some horizontal segment in the skyline except the 
+    /// last point in the list, which always has a y-coordinate  0 and is used to 
+    /// mark the skyline's termination where the rightmost building ends. Any 
+    /// ground between the leftmost and rightmost buildings should be part of the 
+    /// skyline's contour.
+    ///
+    /// Note: There must be no consecutive horizontal lines of equal height in the 
+    /// output skyline. For instance, [...,[2 3],[4 5],[7 5],[11 5],[12 7],...] is 
+    /// not acceptable; the three lines of height 5 should be merged into one in 
+    /// the final output as such: [...,[2 3],[4 5],[12 7],...]
+    /// 
+    /// Example 1:
+    /// Input: buildings = [[2,9,10],[3,7,15],[5,12,12],[15,20,10],[19,24,8]]
+    /// Output: [[2,10],[3,15],[7,12],[12,0],[15,10],[20,8],[24,0]]
+    /// Explanation:
+    /// Figure A shows the buildings of the input.
+    /// Figure B shows the skyline formed by those buildings. The red points in 
+    /// figure B represent the key points in the output list.
+    ///
+    /// Example 2:
+    /// Input: buildings = [[0,2,3],[2,5,3]]
+    /// Output: [[0,3],[5,0]]
+    ///
+    /// Constraints:
+    /// 1. 1 <= buildings.length <= 10^4
+    /// 2. 0 <= left[i] < right[i] <= 2^31 - 1
+    /// 3. 1 <= height[i] <= 2^31 - 1
+    /// 4. buildings is sorted by lefti in non-decreasing order.
+    /// </summary>
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings);
+
+    /// <summary>
+    /// Leet code #228. Summary Ranges
+    /// 
+    /// Easy
+    /// 
+    /// You are given a sorted unique integer array nums.
+    ///
+    /// Return the smallest sorted list of ranges that cover all the numbers 
+    /// in the array exactly. That is, each element of nums is covered by 
+    /// exactly one of the ranges, and there is no integer x such that x is 
+    /// in one of the ranges but not in nums.
+    ///
+    /// Each range [a,b] in the list should be output as:
+    /// 
+    /// "a->b" if a != b
+    /// "a" if a == b
+    ///  
+    /// Example 1:
+    /// Input: nums = [0,1,2,4,5,7]
+    /// Output: ["0->2","4->5","7"]
+    /// Explanation: The ranges are:
+    /// [0,2] --> "0->2"
+    /// [4,5] --> "4->5"
+    /// [7,7] --> "7"
+    ///
+    /// Example 2:
+    /// Input: nums = [0,2,3,4,6,8,9]
+    /// Output: ["0","2->4","6","8->9"]
+    /// Explanation: The ranges are:
+    /// [0,0] --> "0"
+    /// [2,4] --> "2->4"
+    /// [6,6] --> "6"
+    /// [8,9] --> "8->9"
+    ///
+    /// Example 3:
+    /// Input: nums = []
+    /// Output: []
+    ///
+    /// Example 4:
+    /// Input: nums = [-1]
+    /// Output: ["-1"]
+    ///
+    /// Example 5:
+    /// Input: nums = [0]
+    /// Output: ["0"]
+    /// Constraints:
+    /// 1. 0 <= nums.length <= 20
+    /// 2. -2^31 <= nums[i] <= 2^31 - 1
+    /// 3. All the values of nums are unique.
+    /// 4. nums is sorted in ascending order.
+    /// </summary>
+    vector<string> summaryRanges(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #252. Meeting Rooms
+    /// 
+    /// Easy
+    /// 
+    /// Given an array of meeting time intervals where intervals[i] = 
+    /// [start[i], end[i]], determine if a person could attend all meetings.
+    /// 
+    /// Example 1:
+    /// Input: intervals = [[0,30],[5,10],[15,20]]
+    /// Output: false
+    ///
+    /// Example 2:
+    /// Input: intervals = [[7,10],[2,4]]
+    /// Output: true
+    /// 
+    /// Constraints:
+    /// 1. 0 <= intervals.length <= 10^4
+    /// 2. intervals[i].length == 2
+    /// 3. 0 <= starti < endi <= 10^6
+    /// </summary>
+    bool canAttendMeetings(vector<vector<int>>& intervals);
+
+    /// <summary>
+    /// Leet code #253. Meeting Rooms II  
+    /// 
+    /// Given an array of meeting time intervals consisting of start 
+    /// and end times [[s1,e1],[s2,e2],...] (si < ei), 
+    /// find the minimum number of conference rooms required.
+    /// For example,
+    /// Given [[0, 30],[5, 10],[15, 20]],
+    /// return 2. 
+    /// </summary>
+    int minMeetingRooms(vector<vector<int>>& intervals);
+
+    /// <summary>
+    /// Leet code #330. Patching Array 
+    ///
+    /// Given a sorted positive integer array nums and an integer n, add/patch 
+    /// elements to the array such that any number in range [1, n] inclusive 
+    /// can be formed by the sum of some elements in the array. 
+    /// Return the minimum number of patches required. 
+    ///
+    /// Example 1:
+    /// nums = [1, 3], n = 6
+    /// Return 1.
+    /// Combinations of nums are [1], [3], [1,3], which form possible sums of: 1, 3, 4.
+    /// Now if we add/patch 2 to nums, the combinations are: [1], [2], [3], [1,3], [2,3], [1,2,3].
+    /// Possible sums are 1, 2, 3, 4, 5, 6, which now covers the range [1, 6].
+    /// So we only need 1 patch.
+    ///
+    /// Example 2:
+    /// nums = [1, 5, 10], n = 20
+    /// Return 2.
+    /// The two patches can be [2, 4].
+    ///
+    /// Example 3:
+    /// nums = [1, 2, 2], n = 5
+    /// Return 0.
+    /// </summary>
+    int minPatches(vector<int>& nums, int n);
+
+    /// <summary>
+    /// Leet code #358. Rearrange String k Distance Apart   
+    /// 
+    /// Given a non-empty string s and an integer k, rearrange the string such 
+    /// that the same characters are at least distance k from each other. 
+    /// All input strings are given in lowercase letters. If it is not possible 
+    /// to rearrange the string, return an empty string "". 
+    ///
+    /// Example 1:
+    /// s = "aabbcc", k = 3
+    /// Result: "abcabc"
+    /// The same letters are at least distance 3 from each other.
+    ///
+    /// Example 2:
+    /// s = "aaabc", k = 3 
+    /// Answer: ""
+    /// It is not possible to rearrange the string.
+    ///
+    /// Example 3:
+    /// s = "aaadbbcc", k = 2
+    /// Answer: "abacabcd"
+    /// Another possible answer is: "abcabcda"
+    /// The same letters are at least distance 2 from each other.
+    /// </summary>
+    string rearrangeString(string s, int k);
+
+    /// <summary>
+    /// Leet code #435. Non-overlapping Intervals
+    /// 
+    /// Medium
+    /// 
+    /// Given a collection of intervals, find the minimum number of intervals 
+    /// you need to remove to make the rest of the intervals non-overlapping.
+    /// 
+    /// Example 1:
+    /// Input: [[1,2],[2,3],[3,4],[1,3]]
+    /// Output: 1
+    /// Explanation: [1,3] can be removed and the rest of intervals are 
+    /// non-overlapping.
+    ///
+    /// Example 2:
+    /// Input: [[1,2],[1,2],[1,2]]
+    /// Output: 2
+    /// Explanation: You need to remove two [1,2] to make the rest of 
+    /// intervals non-overlapping.
+    ///
+    /// Example 3:
+    /// Input: [[1,2],[2,3]]
+    /// Output: 0
+    /// Explanation: You don't need to remove any of the intervals since 
+    /// they're already non-overlapping.
+    /// 
+    /// Note:
+    /// You may assume the interval's end point is always bigger than its start 
+    /// point.
+    /// Intervals like [1,2] and [2,3] have borders "touching" but they don't 
+    /// overlap each other.
+    /// </summary>
+    int eraseOverlapIntervals(vector<vector<int>>& intervals);
+
+    /// <summary>
+    /// Leet code #436. Find Right Interval
+    /// 
+    /// Given a set of intervals, for each of the interval i, check if there exists an interval j 
+    /// whose start point is bigger than or equal to the end point of the interval i, which can 
+    /// be called that j is on the "right" of i. 
+    ///
+    /// For any interval i, you need to store the minimum interval j's index, which 
+    /// means that the interval j has the minimum start point to build the "right" 
+    /// relationship for interval i. If the interval j doesn't exist, store -1 for the interval i. 
+    /// Finally, you need output the stored value of each interval as an array. 
+    ///
+    /// Note:
+    /// 1.You may assume the interval's end point is always bigger than its start point.
+    /// 2.You may assume none of these intervals have the same start point.
+    ///
+    /// Example 1:
+    /// Input: [ [1,2] ]
+    /// Output: [-1]
+    /// Explanation: There is only one interval in the collection, so it outputs -1.
+    ///
+    /// Example 2:
+    /// Input: [ [3,4], [2,3], [1,2] ]
+    /// Output: [-1, 0, 1]
+    /// Explanation: There is no satisfied "right" interval for [3,4].
+    /// For [2,3], the interval [3,4] has minimum-"right" start point;
+    /// For [1,2], the interval [2,3] has minimum-"right" start point.
+    ///
+    /// Example 3:
+    /// Input: [ [1,4], [2,3], [3,4] ]
+    /// Output: [-1, 2, -1]
+    /// Explanation: There is no satisfied "right" interval for [1,4] and [3,4].
+    /// For [2,3], the interval [3,4] has minimum-"right" start point.
+    /// </summary>
+    vector<int> findRightInterval(vector<vector<int>>& intervals);
+
+    /// <summary>
+    /// Leet code #452. Minimum Number of Arrows to Burst Balloons
+    /// 
+    /// Medium
+    /// 
+    /// There are some spherical balloons spread in two-dimensional space. For 
+    /// each balloon, provided input is the start and end coordinates of the 
+    /// horizontal diameter. Since it's horizontal, y-coordinates don't matter, 
+    /// and hence the x-coordinates of start and end of the diameter suffice. 
+    /// The start is always smaller than the end.
+    ///
+    /// An arrow can be shot up exactly vertically from different points along 
+    // the x-axis. A balloon with x.start and x.end bursts by an arrow shot at x 
+    /// if x.start ¡Ü x ¡Ü x.end. There is no limit to the number of arrows that 
+    /// can be shot. An arrow once shot keeps traveling up infinitely.
+    ///
+    /// Given an array points where points[i] = [x.start, x.end], return the 
+    /// minimum number of arrows that must be shot to burst all balloons.
+    /// 
+    /// Example 1: 
+    /// Input: points = [[10,16],[2,8],[1,6],[7,12]]
+    /// Output: 2
+    /// Explanation: One way is to shoot one arrow for example at x = 6 (bursting 
+    /// the balloons [2,8] and [1,6]) and another arrow at x = 11 (bursting the 
+    /// other two balloons).
+    ///
+    /// Example 2:
+    /// Input: points = [[1,2],[3,4],[5,6],[7,8]]
+    /// Output: 4
+    ///
+    /// Example 3:
+    /// Input: points = [[1,2],[2,3],[3,4],[4,5]]
+    /// Output: 2
+    ///
+    /// Example 4:
+    /// Input: points = [[1,2]]
+    /// Output: 1
+    ///
+    /// Example 5:
+    /// Input: points = [[2,3],[2,3]]
+    /// Output: 1
+    ///
+    /// Constraints:
+    /// 1. 0 <= points.length <= 10^4
+    /// 2. points[i].length == 2
+    /// 3. -2^31 <= x.start < x.end <= 2^31 - 1
+    /// </summary>
+    int findMinArrowShots(vector<vector<int>>& points);
 
     /// <summary>
     /// Leet code #826. Most Profit Assigning Work

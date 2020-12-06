@@ -1917,16 +1917,6 @@ void TestLeetCode167(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode228(void)
-{
-    Logger::WriteMessage("Test Leet Code 228");
-    LeetCodeArray leetCode;
-    vector<int> nums = { 0, 1, 2, 4, 5, 7 };
-    Logger::WriteMessage(nums);
-    vector<string> result = leetCode.summaryRanges(nums);
-    Logger::WriteMessage(result);
-}
-
 void TestLeetCode259(void)
 {
     Logger::WriteMessage("Test Leet Code 259");
@@ -5073,7 +5063,6 @@ void TestLeetCodeArray(void)
     TestLeetCode1150();
     TestLeetCode1180();
     TestLeetCode259();
-    TestLeetCode228();
     TestLeetCode167();
     TestLeetCode283();
     TestLeetCode345();

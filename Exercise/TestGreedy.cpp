@@ -2,6 +2,91 @@
 #include "..\LeetCode\LeetCodeGreedy.h"
 #include "TestGreedy.h"
 
+void TestLeetCode56(void)
+{
+    Logger::WriteMessage("Test Leet Code 56");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> intervals = {{ 1, 3 },{ 2, 6 },{ 8, 10 },{ 15, 18 }};
+    vector<vector<int>> result = leetCode.merge(intervals);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage(result);
+
+    intervals = { {1, 4},{4, 5} };
+    result = leetCode.merge(intervals);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode57(void)
+{
+    Logger::WriteMessage("Test Leet Code 57");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> intervals = { {1, 3},{6, 9} };
+    vector<int> newInterval = { 2, 5 };
+    vector<vector<int>> result = leetCode.insert(intervals, newInterval);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage(newInterval);
+    Logger::WriteMessage(result);
+
+    intervals = { {1, 2},{3, 5},{6, 7},{8, 10},{12, 16} };
+    newInterval = { 4,8 };
+    result = leetCode.insert(intervals, newInterval);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage(newInterval);
+    Logger::WriteMessage(result);
+
+    intervals = { };
+    newInterval = { 5,7 };
+    result = leetCode.insert(intervals, newInterval);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage(newInterval);
+    Logger::WriteMessage(result);
+
+    intervals = { {1,5} };
+    newInterval = { 2,3 };
+    result = leetCode.insert(intervals, newInterval);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage(newInterval);
+    Logger::WriteMessage(result);
+
+    intervals = { {1,5} };
+    newInterval = { 2,7 };
+    result = leetCode.insert(intervals, newInterval);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage(newInterval);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode452(void)
+{
+    Logger::WriteMessage("Test Leet Code 452");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> points = { {10, 16},{2, 8},{1, 6},{7, 12} };
+    Logger::WriteMessage(points);
+    int result = leetCode.findMinArrowShots(points);
+    Logger::WriteMessage("Min Arrow Shots = " + to_string(result));
+
+    points = { {1, 2},{3, 4},{5, 6},{7, 8} };
+    Logger::WriteMessage(points);
+    result = leetCode.findMinArrowShots(points);
+    Logger::WriteMessage("Min Arrow Shots = " + to_string(result));
+
+    points = { {1, 2},{2, 3},{3, 4},{4, 5} };
+    Logger::WriteMessage(points);
+    result = leetCode.findMinArrowShots(points);
+    Logger::WriteMessage("Min Arrow Shots = " + to_string(result));
+
+    points = { {1, 2} };
+    Logger::WriteMessage(points);
+    result = leetCode.findMinArrowShots(points);
+    Logger::WriteMessage("Min Arrow Shots = " + to_string(result));
+
+    points = { {2, 3},{2, 3} };
+    Logger::WriteMessage(points);
+    result = leetCode.findMinArrowShots(points);
+    Logger::WriteMessage("Min Arrow Shots = " + to_string(result));
+}
+
 void TestLeetCode826(void)
 {
     Logger::WriteMessage("Test Leet Code 826");
@@ -384,8 +469,191 @@ void TestLeetCode1642(void)
     Logger::WriteMessage("ladders = " + to_string(ladders) + "; result = " + to_string(result));
 }
 
+void TestLeetCode330(void)
+{
+    Logger::WriteMessage("Test Leet Code 330");
+    LeetCodeGreedy leetCode;
+    vector<int> nums = { 1, 3 };
+    int n = 6;
+    int result = leetCode.minPatches(nums, n);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("To reach " + to_string(n) + ", we should patch " + to_string(result) + " numbers");
+
+    nums = { 1, 5, 10 };
+    n = 20;
+    result = leetCode.minPatches(nums, n);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("To reach " + to_string(n) + ", we should patch " + to_string(result) + " numbers");
+
+    nums = { 1, 2, 2 };
+    n = 5;
+    result = leetCode.minPatches(nums, n);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("To reach " + to_string(n) + ", we should patch " + to_string(result) + " numbers");
+}
+
+void TestLeetCode163(void)
+{
+    Logger::WriteMessage("Test Leet Code 163");
+    LeetCodeGreedy leetCode;
+    vector<int> nums = { 0, 1, 3, 50, 75 };
+    int lower = 0, upper = 99;
+    Logger::WriteMessage(nums);
+    vector<string> result = leetCode.findMissingRanges(nums, lower, upper);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode218(void)
+{
+    Logger::WriteMessage("Test Leet Code 218");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> buildings = { {0, 3, 3},{1, 5, 3},{2, 4, 3},{3, 7, 3} };
+    Logger::WriteMessage(buildings);
+    vector<vector<int>> skyline = leetCode.getSkyline(buildings);
+    Logger::WriteMessage(skyline);
+
+    buildings = { { 2, 9, 10 },{ 3, 7, 15 },{ 5, 12, 12 },{ 15, 20, 10 },{ 19, 24, 8 } };
+    Logger::WriteMessage(buildings);
+    skyline = leetCode.getSkyline(buildings);
+    Logger::WriteMessage(skyline);
+
+    buildings = { { 1, 2, 1 },{ 1, 2, 2 },{ 1, 2, 3 } };
+    Logger::WriteMessage(buildings);
+    skyline = leetCode.getSkyline(buildings);
+    Logger::WriteMessage(skyline);
+}
+
+void TestLeetCode228(void)
+{
+    Logger::WriteMessage("Test Leet Code 228");
+    LeetCodeGreedy leetCode;
+    vector<int> nums = { 0, 1, 2, 4, 5, 7 };
+    Logger::WriteMessage(nums);
+    vector<string> result = leetCode.summaryRanges(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 0, 2, 3, 4, 6, 8, 9 };
+    Logger::WriteMessage(nums);
+    result = leetCode.summaryRanges(nums);
+    Logger::WriteMessage(result);
+
+    nums = { };
+    Logger::WriteMessage(nums);
+    result = leetCode.summaryRanges(nums);
+    Logger::WriteMessage(result);
+
+    nums = { -1 };
+    Logger::WriteMessage(nums);
+    result = leetCode.summaryRanges(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 0 };
+    Logger::WriteMessage(nums);
+    result = leetCode.summaryRanges(nums);
+    Logger::WriteMessage(result);
+}
+
+
+void TestLeetCode252(void)
+{
+    Logger::WriteMessage("Test Leet Code 252");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> intervals = { { 0, 30 },{ 5, 10 },{ 15, 20 } };
+    Logger::WriteMessage(intervals);
+    bool result = leetCode.canAttendMeetings(intervals);
+    Logger::WriteMessage((string)(result ? "Can" : "Can not") + " attend all the meetings");
+
+    intervals = { { 7, 10 },{ 2, 4 } };
+    Logger::WriteMessage(intervals);
+    result = leetCode.canAttendMeetings(intervals);
+    Logger::WriteMessage((string)(result ? "Can" : "Can not") + " attend all the meetings");
+}
+
+void TestLeetCode253(void)
+{
+    Logger::WriteMessage("Test Leet Code 253");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> meetings = { { 14, 20 },{ 6, 14 },{ 4, 9 } };
+    int min_rooms = leetCode.minMeetingRooms(meetings);
+    Logger::WriteMessage(meetings);
+    Logger::WriteMessage("minimum meeting rooms:" + to_string(min_rooms));
+
+    meetings = { { 0, 30 },{5, 10}, {15, 20} };
+    min_rooms = leetCode.minMeetingRooms(meetings);
+    Logger::WriteMessage(meetings);
+    Logger::WriteMessage("minimum meeting rooms:" + to_string(min_rooms));
+}
+
+void TestLeetCode358(void)
+{
+    Logger::WriteMessage("Test Leet Code 358");
+    LeetCodeGreedy leetCode;
+    string s = "aabbcc";
+    int k = 3;
+    string result = leetCode.rearrangeString(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
+
+    s = "aaabc";
+    k = 3;
+    result = leetCode.rearrangeString(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
+
+    s = "aaadbbcc";
+    k = 2;
+    result = leetCode.rearrangeString(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
+}
+
+void TestLeetCode435(void)
+{
+    Logger::WriteMessage("Test Leet Code 435");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> intervals = { { 1, 2 },{ 2, 3 },{ 3, 4 },{ 1, 3 } };
+    int count = leetCode.eraseOverlapIntervals(intervals);
+    Logger::WriteMessage("Remove " + to_string(count) + " intervals");
+
+    intervals = { { 1, 2 },{ 1, 2 },{ 1, 2 } };
+    count = leetCode.eraseOverlapIntervals(intervals);
+    Logger::WriteMessage("Remove " + to_string(count) + " intervals");
+
+    intervals = { { 1, 2 },{ 2, 3 } };
+    count = leetCode.eraseOverlapIntervals(intervals);
+    Logger::WriteMessage("Remove " + to_string(count) + " intervals");
+}
+
+void TestLeetCode436(void)
+{
+    Logger::WriteMessage("Test Leet Code 436");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> intervals = { { 1,2 } };
+    Logger::WriteMessage(intervals);
+    vector<int> result = leetCode.findRightInterval(intervals);
+    Logger::WriteMessage(result);
+
+    intervals = { { 3, 4 }, { 2, 3 }, { 1, 2 } };
+    Logger::WriteMessage(intervals);
+    result = leetCode.findRightInterval(intervals);
+    Logger::WriteMessage(result);
+
+    intervals = { { 1, 4 },{ 2, 3 },{ 3, 4 } };
+    Logger::WriteMessage(intervals);
+    result = leetCode.findRightInterval(intervals);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode452();
+    TestLeetCode435();
+    TestLeetCode358();
+    TestLeetCode253();
+    TestLeetCode252();
+    TestLeetCode228();
+    TestLeetCode218();
+    TestLeetCode163();
+    TestLeetCode330();
+    TestLeetCode57();
+    TestLeetCode56();
     TestLeetCode1642();
     TestLeetCode1665();
     TestLeetCode1589();
@@ -395,7 +663,6 @@ void TestLeetCodeGreedy(void)
     TestLeetCode1405();
     TestLeetCode1383();
     TestLeetCode1353();
-    TestLeetCode352();
     TestLeetCode1326();
     TestLeetCode1288();
     TestLeetCode1272();

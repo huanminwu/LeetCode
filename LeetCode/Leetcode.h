@@ -3689,55 +3689,6 @@ public:
 
 #pragma endregion
 #pragma region Greedy
-    /// <summary>
-    /// LeetCode #56. Merge Intervals
-    /// Given a collection of intervals, merge all overlapping intervals.
-    /// For example,
-    /// Given [1,3],[2,6],[8,10],[15,18],
-    /// return [1,6],[8,10],[15,18]. 
-    /// </summary>
-    vector<Interval> mergeIntervals(vector<Interval>& intervals);
-
-    /// <summary>
-    /// Leet code #57. Insert Interval   
-    /// Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
-    /// You may assume that the intervals were initially sorted according to their start times.
-    ///
-    /// Example 1:
-    /// Given intervals [1,3],[6,9], insert and merge [2,5] in as [1,5],[6,9]. 
-    ///
-    /// Example 2:
-    /// Given [1,2],[3,5],[6,7],[8,10],[12,16], insert and merge [4,9] in as [1,2],[3,10],[12,16]. 
-    /// This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10]. 
-    /// </summary>
-    vector<Interval> insertInterval(vector<Interval>& intervals, Interval newInterval);
-
-    /// <summary>
-    /// Leet code #330. Patching Array 
-    ///
-    /// Given a sorted positive integer array nums and an integer n, add/patch 
-    /// elements to the array such that any number in range [1, n] inclusive 
-    /// can be formed by the sum of some elements in the array. 
-    /// Return the minimum number of patches required. 
-    ///
-    /// Example 1:
-    /// nums = [1, 3], n = 6
-    /// Return 1.
-    /// Combinations of nums are [1], [3], [1,3], which form possible sums of: 1, 3, 4.
-    /// Now if we add/patch 2 to nums, the combinations are: [1], [2], [3], [1,3], [2,3], [1,2,3].
-    /// Possible sums are 1, 2, 3, 4, 5, 6, which now covers the range [1, 6].
-    /// So we only need 1 patch.
-    ///
-    /// Example 2:
-    /// nums = [1, 5, 10], n = 20
-    /// Return 2.
-    /// The two patches can be [2, 4].
-    ///
-    /// Example 3:
-    /// nums = [1, 2, 2], n = 5
-    /// Return 0.
-    /// </summary>
-    int minPatches(vector<int>& nums, int n);
 
     /// <summary>
     /// Leet code # 502. IPO  
@@ -3776,165 +3727,8 @@ public:
     /// </summary>
     int findMaximizedCapital(int k, int W, vector<int>& Profits, vector<int>& Capital);
 
-    /// <summary>
-    /// Leet code #253. Meeting Rooms II  
-    /// 
-    /// Given an array of meeting time intervals consisting of start 
-    /// and end times [[s1,e1],[s2,e2],...] (si < ei), 
-    /// find the minimum number of conference rooms required.
-    /// For example,
-    /// Given [[0, 30],[5, 10],[15, 20]],
-    /// return 2. 
-    /// </summary>
-    int minMeetingRooms(vector<Interval>& intervals);
 
-    /// <summary>
-    /// Leet code #253. Meeting Rooms II  
-    /// 
-    /// Given an array of meeting time intervals consisting of start 
-    /// and end times [[s1,e1],[s2,e2],...] (si < ei), 
-    /// find the minimum number of conference rooms required.
-    /// For example,
-    /// Given [[0, 30],[5, 10],[15, 20]],
-    /// return 2. 
-    /// </summary>
-    int minMeetingRoomsII(vector<Interval>& intervals);
 
-    /// <summary>
-    /// Leet code #435. Non-overlapping Intervals
-    ///
-    /// Given a collection of intervals, find the minimum number of intervals 
-    /// you need to remove to make the rest of the intervals non-overlapping. 
-    /// Note:
-    /// You may assume the interval's end point is always bigger than its start point.
-    /// Intervals like [1,2] and [2,3] have borders "touching" but they don't overlap each other.
-    ///
-    /// Example 1:
-    /// Input: [ [1,2], [2,3], [3,4], [1,3] ]
-    /// Output: 1
-    /// Explanation: [1,3] can be removed and the rest of intervals are non-overlapping.
-    /// Example 2:
-    /// Input: [ [1,2], [1,2], [1,2] ]
-    /// Output: 2
-    /// Explanation: You need to remove two [1,2] to make the rest of intervals non-overlapping.
-    /// Example 3:
-    /// Input: [ [1,2], [2,3] ]
-    /// Output: 0
-    /// Explanation: You don't need to remove any of the intervals since they're already non-overlapping.
-    /// </summary>
-    int eraseOverlapIntervals(vector<Interval>& intervals);
-
-    /// <summary>
-    /// Leet code #436. Find Right Interval
-    /// 
-    /// Given a set of intervals, for each of the interval i, check if there exists an interval j 
-    /// whose start point is bigger than or equal to the end point of the interval i, which can 
-    /// be called that j is on the "right" of i. 
-    ///
-    /// For any interval i, you need to store the minimum interval j's index, which 
-    /// means that the interval j has the minimum start point to build the "right" 
-    /// relationship for interval i. If the interval j doesn't exist, store -1 for the interval i. 
-    /// Finally, you need output the stored value of each interval as an array. 
-    ///
-    /// Note:
-    /// 1.You may assume the interval's end point is always bigger than its start point.
-    /// 2.You may assume none of these intervals have the same start point.
-    ///
-    /// Example 1:
-    /// Input: [ [1,2] ]
-    /// Output: [-1]
-    /// Explanation: There is only one interval in the collection, so it outputs -1.
-    ///
-    /// Example 2:
-    /// Input: [ [3,4], [2,3], [1,2] ]
-    /// Output: [-1, 0, 1]
-    /// Explanation: There is no satisfied "right" interval for [3,4].
-    /// For [2,3], the interval [3,4] has minimum-"right" start point;
-    /// For [1,2], the interval [2,3] has minimum-"right" start point.
-    ///
-    /// Example 3:
-    /// Input: [ [1,4], [2,3], [3,4] ]
-    /// Output: [-1, 2, -1]
-    /// Explanation: There is no satisfied "right" interval for [1,4] and [3,4].
-    /// For [2,3], the interval [3,4] has minimum-"right" start point.
-    /// </summary>
-    vector<int> findRightInterval(vector<Interval>& intervals);
-
-    /// <summary>
-    /// Leet code #452. Minimum Number of Arrows to Burst Balloons    
-    /// 
-    /// There are a number of spherical balloons spread in two-dimensional space. 
-    /// For each balloon, provided input is the start and end coordinates of the 
-    /// horizontal diameter. Since it's horizontal, y-coordinates don't matter 
-    /// and hence the x-coordinates of start and end of the diameter suffice. 
-    /// Start is always smaller than end. There will be at most 104 balloons.
-    ///
-    /// An arrow can be shot up exactly vertically from different points along 
-    /// the x-axis. A balloon with xstart and xend bursts by an arrow shot at x 
-    /// if xstart ≤ x ≤ xend. There is no limit to the number of arrows that 
-    /// can be shot. An arrow once shot keeps travelling up infinitely. 
-    /// The problem is to find the minimum number of arrows that must be 
-    /// shot to burst all balloons. 
-    /// Example: 
-    /// Input:
-    /// [[10,16], [2,8], [1,6], [7,12]]
-    /// Output:
-    /// 2
-    /// Explanation:
-    /// One way is to shoot one arrow for example at x = 6 (bursting the balloons 
-    /// [2,8] and [1,6]) and another arrow at x = 11 (bursting the other two balloons).
-    /// </summary>
-    int findMinArrowShots(vector<pair<int, int>>& points);
-
-    /// <summary>
-    /// Leet code #218. The Skyline Problem    
-    /// 
-    /// A city's skyline is the outer contour of the silhouette formed 
-    /// by all the buildings in that city when viewed from a distance. 
-    /// Now suppose you are given the locations and height of all the buildings 
-    /// as shown on a cityscape photo (Figure A), write a program to output 
-    /// the skyline formed by these buildings collectively (Figure B).
-    ///
-    /// Buildings   Skyline Contour    
-    /// The geometric information of each building is represented by a triplet of 
-    /// integers [Li, Ri, Hi], where Li and Ri are the x coordinates of the left 
-    /// and right edge of the ith building, respectively, and Hi is its height. 
-    /// It is guaranteed that 0 ≤ Li, Ri ≤ INT_MAX, 0 < Hi ≤ INT_MAX, and Ri - Li > 0. 
-    /// You may assume all buildings are perfect rectangles grounded on an absolutely 
-    /// flat surface at height 0.
-    ///
-    /// For instance, the dimensions of all buildings in Figure A are recorded as: 
-    /// [ [2 9 10], [3 7 15], [5 12 12], [15 20 10], [19 24 8] ] .
-    /// The output is a list of "key points" (red dots in Figure B) in the format of 
-    /// [ [x1,y1], [x2, y2], [x3, y3], ... ] that uniquely defines a skyline. A key point 
-    /// is the left endpoint of a horizontal line segment. Note that the last key point, 
-    /// where the rightmost building ends, is merely used to mark the termination of the 
-    /// skyline, and always has zero height. Also, the ground in between any two adjacent 
-    /// buildings should be considered part of the skyline contour. 
-    /// For instance, the skyline in Figure B should be represented as:
-    /// [ [2 10], [3 15], [7 12], [12 0], [15 10], [20 8], [24, 0] ].
-    /// Notes: 
-    /// The number of buildings in any input list is guaranteed to be in the range [0, 10000].
-    /// The input list is already sorted in ascending order by the left x position Li. 
-    /// The output list must be sorted by the x position. 
-    /// There must be no consecutive horizontal lines of equal height in the output skyline. 
-    /// For instance, [...[2 3], [4 5], [7 5], [11 5], [12 7]...] is not acceptable; 
-    /// the three lines of height 5 should be merged into one in the final output 
-    /// as such: [...[2 3], [4 5], [12 7], ...]
-    /// </summary>
-    vector<vector<int>> getSkyline(vector<vector<int>>& buildings);
-
-    /// <summary>
-    /// Leet code #252. Meeting Rooms   
-    /// 
-    /// Given an array of meeting time intervals consisting of start and end times 
-    /// [[s1,e1],[s2,e2],...] (si < ei), determine if a person could attend all meetings. 
-    /// distance between these two words in the list. 
-    /// For example,
-    /// Given [[0, 30],[5, 10],[15, 20]]. 
-    /// return false. 
-    /// </summary>
-    bool canAttendMeetings(vector<Interval>& intervals);
 
     /// <summary>
     /// Leet code #334. Increasing Triplet Subsequence  
@@ -3951,15 +3745,6 @@ public:
     /// return false. 
     /// </summary>
     bool increasingTriplet(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code 163. Missing Ranges 
-    /// 
-    /// Given a sorted integer array where the range of elements are in the inclusive range [lower, upper], 
-    /// return its missing ranges.
-    /// For example, given [0, 1, 3, 50, 75], lower = 0 and upper = 99, return ["2", "4->49", "51->74", "76->99"]. 
-    /// </summary>
-    vector<string> findMissingRanges(vector<int>& nums, int lower, int upper);
 
     /// <summary>
     /// Leet code #495. Teemo Attacking   
@@ -4637,33 +4422,7 @@ public:
     vector<int> corpFlightBookings(vector<vector<int>>& bookings, int n);
 
     /// <summary>
-    /// Leet code #358. Rearrange String k Distance Apart   
-    /// 
-    /// Given a non-empty string s and an integer k, rearrange the string such 
-    /// that the same characters are at least distance k from each other. 
-    /// All input strings are given in lowercase letters. If it is not possible 
-    /// to rearrange the string, return an empty string "". 
-    ///
-    /// Example 1:
-    /// s = "aabbcc", k = 3
-    /// Result: "abcabc"
-    /// The same letters are at least distance 3 from each other.
-    ///
-    /// Example 2:
-    /// s = "aaabc", k = 3 
-    /// Answer: ""
-    /// It is not possible to rearrange the string.
-    ///
-    /// Example 3:
-    /// s = "aaadbbcc", k = 2
-    /// Answer: "abacabcd"
-    /// Another possible answer is: "abcabcda"
-    /// The same letters are at least distance 2 from each other.
-    /// </summary>
-    string rearrangeString(string s, int k);
-
-    /// <summary>
-    /// Leet code #9906. Arrange operations      
+    /// Leet code #9906. Arrange operations
     ///
     /// Assume we have N operations should be arrange in a certain time range. 
     /// Each operation will use some resources, each resource is exclusive, 

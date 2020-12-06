@@ -325,39 +325,6 @@ int LeetCodeArray::minSubArrayLen(int s, vector<int>& nums)
     return result;
 }
 
-/// <summary>
-/// Leet code #228. Summary Ranges
-/// Given a sorted integer array without duplicates, return the summary of 
-/// its ranges.
-/// For example, given [0,1,2,4,5,7], return ["0->2","4->5","7"]. 
-/// </summary>
-vector<string> LeetCodeArray::summaryRanges(vector<int>& nums)
-{
-    vector<string> result;
-    size_t first = 0, last = 0, next = 1;
-    while (last < nums.size())
-    {
-        if (next == nums.size() || nums[last] + 1 < nums[next])
-        {
-            if (first == last)
-            {
-                result.push_back(to_string(nums[first]));
-            }
-            else
-            {
-                result.push_back(to_string(nums[first]) + "->" + to_string(nums[last]));
-            }
-            first = next;
-            last = next;
-        }
-        else
-        {
-            last++;
-        }
-        next++;
-    }
-    return result;
-}
 
 /// <summary>
 /// Leet code #259. 3Sum Smaller  
@@ -2452,7 +2419,7 @@ vector<vector<int>> LeetCodeArray::multiply(vector<vector<int>>& A, vector<vecto
     for (size_t i = 0; i < matrixA.size(); i++)
     {
         int rowA = i;
-        for (auto itrA : matrixA[i])
+        for (auto& itrA : matrixA[i])
         {
             int colA = itrA.first;
             int valA = itrA.second;

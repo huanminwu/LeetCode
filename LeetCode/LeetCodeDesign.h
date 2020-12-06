@@ -552,12 +552,12 @@ public:
         m_Intervals[start] = end;
     }
 
-    vector<Interval> getIntervals()
+    vector<vector<int>> getIntervals()
     {
-        vector<Interval> result;
+        vector<vector<int>> result;
         for (map<int, int>::iterator itr = m_Intervals.begin(); itr != m_Intervals.end(); itr++)
         {
-            result.push_back(Interval(itr->first, itr->second));
+            result.push_back({ itr->first, itr->second });
         }
         return result;
     }
@@ -2988,107 +2988,54 @@ public:
 class RangeModule
 {
 private:
-    set<pair<int, int>> m_Range;
+    map<int, int> m_range;
 public:
     RangeModule()
     {
+        m_range[INT_MAX] = 0;
     }
 
     void addRange(int left, int right)
     {
-        pair<int, int> range = make_pair(left, right);
-        if (m_Range.empty())
+        auto itr = m_range.lower_bound(left);
+        int prev = itr->second;
+        while (itr->first < right)
         {
-            m_Range.insert(range);
-            return;
-        }
-        auto itr = m_Range.lower_bound(range);
-        // the previous range may need to be adjusted.
-        if (itr != m_Range.begin()) itr--;
-        // loop from small to large range
-        while (itr != m_Range.end() && itr->first <= range.second)
-        {
-            auto temp = itr;
+            int val = itr->first;
             itr++;
-            if (temp->second >= range.first)
-            {
-                range.first = min(temp->first, range.first);
-                range.second = max(temp->second, range.second);
-                m_Range.erase(temp);
-            }
+            m_range.erase(val);
         }
-        m_Range.insert(range);
-    }
-
-    bool queryRange(int left, int right)
-    {
-        pair<int, int> range = make_pair(left, right);
-        if (m_Range.empty())
-        {
-            return false;
-        }
-        auto itr = m_Range.lower_bound(range);
-        // the previous range may need to be adjusted.
-        if (itr != m_Range.begin()) itr--;
-        // loop from small to large range
-        while (itr != m_Range.end() && itr->first < range.second)
-        {
-            if (itr->second <= range.first)
-            {
-                itr++;
-            }
-            else if ((itr->first <= range.first) && (itr->second >= range.second))
-            {
-                return true;
-            }
-            // if (itr->first > range.first) || (itr->second < range.second)
-            else
-            {
-                return false;
-            }
-        }
-        return false;
+        m_range[left] = prev;
+        m_range[right] = 1;
     }
 
     void removeRange(int left, int right)
     {
-        pair<int, int> range = make_pair(left, right);
-        if (m_Range.empty())
+        auto itr = m_range.lower_bound(left);
+        int prev = itr->second;
+        while (itr->first < right)
         {
-            return;
-        }
-        auto itr = m_Range.lower_bound(range);
-        // the previous range may need to be adjusted.
-        if (itr != m_Range.begin()) itr--;
-        // loop from small to large range
-        while (itr != m_Range.end() && itr->first < range.second)
-        {
-            auto temp = itr;
+            int val = itr->first;
             itr++;
-            if (temp->second <= range.first)
-            {
-                continue;
-            }
-            else if (temp->first < range.first)
-            {
-                pair<int, int> prev = make_pair(temp->first, range.first);
-                pair<int, int> next = make_pair(range.second, temp->second);
-                m_Range.erase(temp);
-                m_Range.insert(prev);
-                if (next.second > next.first) m_Range.insert(next);
-            }
-            else if (temp->second <= range.second)
-            {
-                m_Range.erase(temp);
-            }
-            // if (temp->first < range.second) && (temp->second > range.second)
-            else
-            {
-                pair<int, int> next = make_pair(range.second, temp->second);
-                m_Range.erase(temp);
-                m_Range.insert(next);
-            }
+            m_range.erase(val);
         }
+        m_range[left] = prev;
+        m_range[right] = 0;
+    }
+
+    bool queryRange(int left, int right)
+    {
+        auto itr = m_range.lower_bound(left);
+        while (itr->first < right)
+        {
+            if (itr->first != left)
+            {
+                if (itr->second == 0) return false;
+            }
+            itr++;
+        }
+        if (itr->second == 0) return false;
+        else return true;
     }
 };
 

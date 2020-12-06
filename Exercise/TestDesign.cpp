@@ -1244,7 +1244,7 @@ void TestLeetCode352(void)
         summaryRange.addNum(nums[i]);
     }
     Logger::WriteMessage(nums);
-    vector<Interval> intervals = summaryRange.getIntervals();
+    vector<vector<int>> intervals = summaryRange.getIntervals();
     Logger::WriteMessage(intervals);
 }
 
@@ -3367,8 +3367,77 @@ void TestLeetCode1670(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode715(void)
+{
+    RangeModule *rangeModule = nullptr;
+    vector<string> commands = { "RangeModule", "addRange", "removeRange", "removeRange", "addRange", "removeRange", "addRange", "queryRange", "queryRange", "queryRange" };
+    vector<vector<int>> range = { {}, { 6, 8 }, { 7, 8 },  { 8, 9 }, { 8, 9 }, { 1, 3 }, { 1, 8 }, { 2, 4 }, { 2, 9 }, { 4, 6 } };
+    vector<string> result;
+
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "RangeModule")
+        {
+            rangeModule = new RangeModule();
+            result.push_back("null");
+        }
+        else if (commands[i] == "addRange")
+        {
+            rangeModule->addRange(range[i][0], range[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "removeRange")
+        {
+            rangeModule->removeRange(range[i][0], range[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "queryRange")
+        {
+            bool ret = rangeModule->queryRange(range[i][0], range[i][1]);
+            result.push_back(ret ? "true" : "false");
+        }
+    }
+    delete rangeModule;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(range);
+    Logger::WriteMessage(result);
+
+    commands = { "RangeModule", "addRange", "removeRange", "queryRange", "queryRange", "queryRange" };
+    range = { {}, { 10, 20 }, { 14, 16 },  { 10, 14 }, { 13, 15 }, { 16, 17 } };
+    result.clear();
+
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "RangeModule")
+        {
+            rangeModule = new RangeModule();
+            result.push_back("null");
+        }
+        else if (commands[i] == "addRange")
+        {
+            rangeModule->addRange(range[i][0], range[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "removeRange")
+        {
+            rangeModule->removeRange(range[i][0], range[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "queryRange")
+        {
+            bool ret = rangeModule->queryRange(range[i][0], range[i][1]);
+            result.push_back(ret ? "true" : "false");
+        }
+    }
+    delete rangeModule;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(range);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode715();
     TestLeetCode1670();
     TestLeetCode1656();
     TestLeetCode1628();

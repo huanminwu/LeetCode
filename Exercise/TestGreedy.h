@@ -2,7 +2,10 @@
 #ifndef TestGreedy_H
 #define TestGreedy_H
 #include "..\LeetCode\LeetCodeGreedy.h"
-void TestLeetCode352(void);
+void TestLeetCode56(void);
+void TestLeetCode57(void);
+void TestLeetCode163(void);
+void TestLeetCode218(void);
 void TestLeetCode1229(void);
 void TestLeetCode1272(void);
 void TestLeetCode1288(void);
