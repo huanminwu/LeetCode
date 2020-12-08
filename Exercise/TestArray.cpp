@@ -1708,22 +1708,22 @@ void TestLeetCode1424(void)
     Logger::WriteMessage("Test Leet Code 1424");
     LeetCodeArray leetCode;
     vector<vector<int>> nums = { {1, 2, 3},{4, 5, 6},{7, 8, 9} };
-    vector<int> result = leetCode.findDiagonalOrder(nums);
+    vector<int> result = leetCode.findDiagonalOrderII(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage(result);
 
     nums = { {1, 2, 3, 4, 5},{6, 7},{8},{9, 10, 11},{12, 13, 14, 15, 16} };
-    result = leetCode.findDiagonalOrder(nums);
+    result = leetCode.findDiagonalOrderII(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage(result);
 
     nums = { {1, 2, 3},{4},{5, 6, 7},{8},{9, 10, 11} };
-    result = leetCode.findDiagonalOrder(nums);
+    result = leetCode.findDiagonalOrderII(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage(result);
 
     nums = { {1, 2, 3, 4, 5, 6} };
-    result = leetCode.findDiagonalOrder(nums);
+    result = leetCode.findDiagonalOrderII(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage(result);
 }
@@ -4926,6 +4926,7 @@ void TestLeetCode1671(void)
 
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1424();
     TestLeetCode1671();
     TestLeetCode1673();
     TestLeetCode1672();

@@ -5801,6 +5801,118 @@ int LeetCodeDFS::getMaxGridHappiness(int m, int n, int introvertsCount, int extr
         extrovertsCount, 0, grid, cache);
 }
 
+/// <summary>
+/// Leet code #1681. Minimum Incompatibility
+/// </summary>
+int LeetCodeDFS::minimumIncompatibility(vector<int>& nums, int n, vector<int>& path, int bitmask, 
+    vector<int>& cache)
+{
+    int diff = 0;
+    if (!path.empty() && path.size() % n == 0)
+    {
+        int min_val = INT_MAX;
+        int max_val = INT_MIN;
+        for (size_t i = path.size() - n; i < path.size(); i++)
+        {
+            min_val = min(min_val, nums[path[i]]);
+            max_val = max(max_val, nums[path[i]]);
+        }
+        diff = max_val - min_val;
+    }
+    if (path.size() == nums.size())
+    {
+        cache[bitmask] = 0;
+        return diff;
+    }
+    if (path.size() % n == 0 && cache[bitmask] != INT_MAX)
+    {
+        if (cache[bitmask] == -1) return cache[bitmask];
+        else return diff + cache[bitmask];
+    }
+    int start = 0;
+    if (path.size() % n != 0)
+    {
+        start = path.back() + 1;
+    }
+    else if (!path.empty())
+    {
+        start = path[path.size() - n] + 1;
+    }
+    int tail = INT_MAX;
+    for (size_t i = start; i < nums.size(); i++)
+    {
+        int bit = 1 << i;
+        if ((bit & bitmask) != 0) continue;
+        if (path.size() % n != 0 && nums[path.back()] == nums[i]) continue;
+        path.push_back(i);
+        int ret = minimumIncompatibility(nums, n, path, bitmask | bit, cache);
+        path.pop_back();
+        if (ret != -1) tail = min(tail, ret);
+    }
+    if (path.size() % n == 0)
+    {
+        cache[bitmask] = min(cache[bitmask], tail);
+        if (cache[bitmask] == INT_MAX)
+        {
+            cache[bitmask] = -1;
+        }
+    }
+    if (tail == INT_MAX) return -1;
+    else return diff + tail;
+}
+
+
+/// <summary>
+/// Leet code #1681. Minimum Incompatibility
+/// 
+/// Hard
+/// 
+/// You are given an integer array nums​​​ and an integer k. You are asked 
+/// to distribute this array into k subsets of equal size such that there 
+/// are no two equal elements in the same subset.
+/// 
+/// A subset's incompatibility is the difference between the maximum and 
+/// minimum elements in that array.
+/// Return the minimum possible sum of incompatibilities of the k subsets 
+/// after distributing the array optimally, or return -1 if it is not 
+/// possible.
+/// A subset is a group integers that appear in the array with no 
+/// particular order.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,1,4], k = 2
+/// Output: 4
+/// Explanation: The optimal distribution of subsets is [1,2] and 
+/// [1,4].
+/// The incompatibility is (2-1) + (4-1) = 4.
+/// Note that [1,1] and [2,4] would result in a smaller sum, but the 
+/// first subset contains 2 equal elements.
+///
+/// Example 2:
+/// Input: nums = [6,3,8,1,3,1,2,2], k = 4
+/// Output: 6
+/// Explanation: The optimal distribution of subsets is [1,2], [2,3], 
+/// [6,8], and [1,3].
+/// The incompatibility is (2-1) + (3-2) + (8-6) + (3-1) = 6.
+///
+/// Example 3:
+/// Input: nums = [5,3,3,6,3,3], k = 3
+/// Output: -1
+/// Explanation: It is impossible to distribute nums into 3 subsets 
+/// where no two elements are equal in the same subset.
+/// Constraints:
+/// 1. 1 <= k <= nums.length <= 16
+/// 2. nums.length is divisible by k
+/// 3. 1 <= nums[i] <= nums.length
+/// </summary>
+int LeetCodeDFS::minimumIncompatibility(vector<int>& nums, int k)
+{
+    sort(nums.begin(), nums.end());
+    vector<int> cache(1 << nums.size(), INT_MAX);
+    vector<int> path;
+    int result = minimumIncompatibility(nums, nums.size() / k, path, 0, cache);
+    return result;
+}
 #pragma endregion
 
 

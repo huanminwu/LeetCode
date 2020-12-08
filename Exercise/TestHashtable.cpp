@@ -1041,8 +1041,26 @@ void TestLeetCode1604(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1679(void)
+{
+    Logger::WriteMessage("Test Leet Code 1679");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1, 2, 3, 4 };
+    int k = 5;
+    int result = leetCode.maxOperations(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3,1,3,4,3 };
+    k = 6;
+    result = leetCode.maxOperations(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1679();
     TestLeetCode1604();
     TestLeetCode1577();
     TestLeetCode792();

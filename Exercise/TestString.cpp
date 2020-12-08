@@ -3688,8 +3688,26 @@ void TestLeetCode1668(void)
     Logger::WriteMessage("sequence = " + sequence + "; word = " + word + "; result = " + to_string(result));
 }
 
+void TestLeetCode1678(void)
+{
+    Logger::WriteMessage("Test Leet Code 1678");
+    LeetCodeString leetCode;
+    string command = "G()(al)";
+    string result = leetCode.interpret(command);
+    Logger::WriteMessage("command = " + command + "; result = " + result);
+
+    command = "G()()()()(al)";
+    result = leetCode.interpret(command);
+    Logger::WriteMessage("command = " + command + "; result = " + result);
+
+    command = "(al)G(al)()()G";
+    result = leetCode.interpret(command);
+    Logger::WriteMessage("command = " + command + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1678();
     TestLeetCode1668();
     TestLeetCode1657();
     TestLeetCode1647();

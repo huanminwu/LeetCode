@@ -858,8 +858,32 @@ void TestLeetCode1659(void)
         "; result = " + to_string(result));
 }
 
+void TestLeetCode1681(void)
+{
+    Logger::WriteMessage("Test Leet Code 1681");
+    LeetCodeDFS leetCode;
+    vector<int> nums = { 1, 2, 1, 4 };
+    int k = 2;
+    int result = leetCode.minimumIncompatibility(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) +"; result = " + to_string(result));
+
+    nums = { 6, 3, 8, 1, 3, 1, 2, 2 };
+    k = 4;
+    result = leetCode.minimumIncompatibility(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 5,3,3,6,3,3 };
+    k = 3;
+    result = leetCode.minimumIncompatibility(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode1681();
     TestLeetCode1659();
     TestLeetCode1655();
     TestLeetCode1601();

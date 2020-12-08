@@ -3439,8 +3439,26 @@ void TestLeetCode1674(void)
     Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1680(void)
+{
+    Logger::WriteMessage("Test Leet Code 1680");
+    LeetCodeMath leetCode;
+    int n = 1;
+    int result = leetCode.concatenatedBinary(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    result = leetCode.concatenatedBinary(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 12;
+    result = leetCode.concatenatedBinary(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1680();
     TestLeetCode1674();
     TestLeetCode1663();
     TestLeetCode1648();

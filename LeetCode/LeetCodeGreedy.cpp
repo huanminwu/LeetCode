@@ -405,7 +405,7 @@ vector<int> LeetCodeGreedy::findRightInterval(vector<vector<int>>& intervals)
 /// The start is always smaller than the end.
 ///
 /// An arrow can be shot up exactly vertically from different points along 
-// the x-axis. A balloon with x.start and x.end bursts by an arrow shot at x 
+/// the x-axis. A balloon with x.start and x.end bursts by an arrow shot at x 
 /// if x.start ≤ x ≤ x.end. There is no limit to the number of arrows that 
 /// can be shot. An arrow once shot keeps traveling up infinitely.
 ///
