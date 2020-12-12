@@ -268,9 +268,8 @@ struct TrieNode
         }
     }
 };
-
-
 #pragma endregion 
+
 /// <summary>
 /// The class is to implement some string algorithm 
 /// </summary>
@@ -320,9 +319,6 @@ public:
     /// When s3 = "aadbbbaccc", return false. 
     /// </summary>
     bool isInterleave(string s1, string s2, string s3);
-
-
-
 
     /// <summary>
     /// Leet code #85. Maximal Rectangle  
@@ -3689,51 +3685,11 @@ public:
 
 #pragma endregion
 #pragma region Greedy
-
-    /// <summary>
-    /// Leet code # 502. IPO  
-    ///
-    /// Suppose LeetCode will start its IPO soon. In order to sell a good price 
-    /// of its shares to Venture Capital, LeetCode would like to work on some 
-    /// projects to increase its capital before the IPO. Since it has limited 
-    /// resources, it can only finish at most k distinct projects before the IPO. 
-    /// Help LeetCode design the best way to maximize its total capital after 
-    /// finishing at most k distinct projects. 
-    ///
-    /// You are given several projects. For each project i, it has a pure profit 
-    /// Pi and a minimum capital of Ci is needed to start the corresponding project. 
-    /// Initially, you have W capital. When you finish a project, you will obtain 
-    /// its pure profit and the profit will be added to your total capital. 
-    /// 
-    /// To sum up, pick a list of at most k distinct projects from given projects 
-    /// to maximize your final capital, and output your final maximized capital. 
-    ///
-    /// Example 1:
-    ///
-    /// Input: k=2, W=0, Profits=[1,2,3], Capital=[0,1,1].
-    ///
-    /// Output: 4
-    /// Explanation: Since your initial capital is 0, you can only start the project 
-    /// indexed 0.
-    /// After finishing it you will obtain profit 1 and your capital becomes 1.
-    /// With capital 1, you can either start the project indexed 1 or the project indexed 2.
-    /// Since you can choose at most 2 projects, you need to finish the project indexed 2 
-    /// to get the maximum capital.
-    /// Therefore, output the final maximized capital, which is 0 + 1 + 3 = 4.
-    /// Note:
-    /// 1.You may assume all numbers in the input are non-negative integers.
-    /// 2.The length of Profits array and Capital array will not exceed 50,000.
-    /// 3.The answer is guaranteed to fit in a 32-bit signed integer.
-    /// </summary>
-    int findMaximizedCapital(int k, int W, vector<int>& Profits, vector<int>& Capital);
-
-
-
-
     /// <summary>
     /// Leet code #334. Increasing Triplet Subsequence  
     /// 
-    /// Given an unsorted array return whether an increasing subsequence of length 3 exists or not in the array. 
+    /// Given an unsorted array return whether an increasing subsequence of 
+    /// length 3 exists or not in the array. 
     /// Formally the function should:
     /// Return true if there exists i, j, k  
     /// such that arr[i] < arr[j] < arr[k] given 0 ≤ i < j < k ≤ n-1 else return false. 
@@ -3745,43 +3701,6 @@ public:
     /// return false. 
     /// </summary>
     bool increasingTriplet(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #495. Teemo Attacking   
-    /// 
-    /// In LLP world, there is a hero called Teemo and his attacking can make his enemy 
-    /// Ashe be in poisoned condition. Now, given the Teemo's attacking ascending time 
-    /// series towards Ashe and the poisoning time duration per Teemo's attacking, you 
-    /// need to output the total time that Ashe is in poisoned condition. 
-    ///
-    /// You may assume that Teemo attacks at the very beginning of a specific time point, 
-    /// and makes Ashe be in poisoned condition immediately.
-    /// 
-    /// Example 1: 
-    /// Input: [1,4], 2
-    /// Output: 4
-    /// Explanation: At time point 1, Teemo starts attacking Ashe and makes Ashe be poisoned immediately. 
-    /// This poisoned status will last 2 seconds until the end of time point 2. 
-    /// And at time point 4, Teemo attacks Ashe again, and causes Ashe to be in poisoned status for another 2 seconds. 
-    /// So you finally need to output 4.
-    ///
-    /// Example 2:
-    /// Input: [1,2], 2
-    /// Output: 3
-    /// Explanation: At time point 1, Teemo starts attacking Ashe and makes Ashe be poisoned. 
-    /// This poisoned status will last 2 seconds until the end of time point 2. 
-    /// However, at the beginning of time point 2, Teemo attacks Ashe again who is already in poisoned status. 
-    /// Since the poisoned status won't add up together, though the second poisoning attack will still work at 
-    /// time point 2, it will stop at the end of time point 3. 
-    /// So you finally need to output 3.
-    ///
-    /// Note:
-    /// 1.You may assume the length of given time series array won't exceed 10000.
-    /// 2.You may assume the numbers in the Teemo's attacking time series and his 
-    ///   poisoning time duration per attacking are non-negative integers, which 
-    ///   won't exceed 10,000,000.
-    /// </summary>
-    int findPoisonedDuration(vector<int>& timeSeries, int duration);
 
     /// <summary>
     /// Leet code #554. Brick Wall  
@@ -3886,35 +3805,6 @@ public:
     int leastInterval(vector<char>& tasks, int n);
 
     /// <summary>
-    /// Leet code #630. Course Schedule III
-    /// 
-    /// There are n different online courses numbered from 1 to n. Each course 
-    /// has some duration(course length) t and closed on dth day. A course 
-    /// should be taken continuously for t days and must be finished before or 
-    /// on the dth day. You will start at the 1st day. 
-    ///
-    /// Given n online courses represented by pairs (t,d), your task is to 
-    /// find the maximal number of courses that can be taken. 
-    /// Example:
-    /// Input: [[100, 200], [200, 1300], [1000, 1250], [2000, 3200]]
-    /// Output: 3
-    /// Explanation: 
-    /// There're totally 4 courses, but you can take 3 courses at most:
-    /// First, take the 1st course, it costs 100 days so you will finish it on 
-    /// the 100th day, and ready to take the next course on the 101st day.
-    /// Second, take the 3rd course, it costs 1000 days so you will finish it 
-    /// on the 1100th day, and ready to take the next course on the 1101st day. 
-    /// Third, take the 2nd course, it costs 200 days so you will finish it on 
-    /// the 1300th day. 
-    /// The 4th course cannot be taken now, since you will finish it on the 
-    /// 3300th day, which exceeds the closed date.
-    /// Note:
-    /// The integer 1 <= d, t, n <= 10,000. 
-    /// You can't take two courses simultaneously.
-    /// </summary>
-    int scheduleCourse(vector<vector<int>>& courses);
-
-    /// <summary>
     /// Leet code #646. Maximum Length of Pair Chain
     /// 
     /// You are given n pairs of numbers. In every pair, the first number is 
@@ -3934,156 +3824,6 @@ public:
     /// The number of given pairs will be in the range [1, 1000].
     /// </summary>
     int findLongestChain(vector<vector<int>>& pairs);
-
-    /// 
-    /// On an infinite number line (x-axis), we drop given squares in the order 
-    /// they are given.
-    ///
-    /// The i-th square dropped (positions[i] = (left, side_length)) is a 
-    /// square with the left-most point being positions[i][0] and sidelength 
-    /// positions[i][1].
-    ///
-    /// The square is dropped with the bottom edge parallel to the number line, 
-    /// and from a higher height than all currently landed squares. We wait for 
-    /// each square to stick before dropping the next.
-    ///
-    /// The squares are infinitely sticky on their bottom edge, and will remain 
-    /// fixed to any positive length surface they touch (either the number line 
-    /// or another square). Squares dropped adjacent to each other will not 
-    /// stick together prematurely.
-    ///
-    /// Return a list ans of heights. Each height ans[i] represents the current 
-    /// highest height of any square we have dropped, after dropping squares 
-    /// represented by positions[0], positions[1], ..., positions[i].
-    ///
-    /// Example 1:
-    /// Input: [[1, 2], [2, 3], [6, 1]]
-    /// Output: [2, 5, 5]
-    /// Explanation:
-    ///
-    /// After the first drop of 
-    /// positions[0] = [1, 2]:
-    /// _aa
-    /// _aa
-    /// -------
-    /// The maximum height of any square is 2.
-    ///
-    /// After the second drop of 
-    /// positions[1] = [2, 3]:
-    /// __aaa
-    /// __aaa
-    /// __aaa
-    /// _aa__
-    /// _aa__
-    /// --------------
-    /// The maximum height of any square is 5.  
-    /// The larger square stays on top of the smaller square despite where its 
-    /// center of gravity is, because squares are infinitely sticky on their 
-    /// bottom edge.
-    ///
-    /// After the third drop of 
-    /// positions[1] = [6, 1]:
-    /// __aaa
-    /// __aaa
-    /// __aaa
-    /// _aa
-    /// _aa___a
-    /// --------------
-    /// The maximum height of any square is still 5.
-    ///
-    /// Thus, we return an answer of 
-    /// [2, 5, 5]
-    ///
-    /// Example 2:
-    /// Input: [[100, 100], [200, 100]]
-    /// Output: [100, 100]
-    /// Explanation: Adjacent squares don't get stuck prematurely - only their 
-    /// bottom edge can stick to surfaces.
-    /// 
-    /// Note:
-    /// 1 <= positions.length <= 1000.
-    /// 1 <= positions[i][0] <= 10^8.
-    /// 1 <= positions[i][1] <= 10^6.
-    /// </summary>
-
-    /// <summary>
-    /// Leet code #699. Falling Squares      
-    /// </summary>
-    map<int, int>::iterator findLocation(map<int, int>& pos_map, int pos);
-
-    /// <summary>
-    /// Leet code #699. Falling Squares      
-    /// 
-    /// On an infinite number line (x-axis), we drop given squares in the order 
-    /// they are given.
-    ///
-    /// The i-th square dropped (positions[i] = (left, side_length)) is a 
-    /// square with the left-most point being positions[i][0] and sidelength 
-    /// positions[i][1].
-    ///
-    /// The square is dropped with the bottom edge parallel to the number line, 
-    /// and from a higher height than all currently landed squares. We wait for 
-    /// each square to stick before dropping the next.
-    ///
-    /// The squares are infinitely sticky on their bottom edge, and will remain 
-    /// fixed to any positive length surface they touch (either the number line 
-    /// or another square). Squares dropped adjacent to each other will not 
-    /// stick together prematurely.
-    ///
-    /// Return a list ans of heights. Each height ans[i] represents the current 
-    /// highest height of any square we have dropped, after dropping squares 
-    /// represented by positions[0], positions[1], ..., positions[i].
-    ///
-    /// Example 1:
-    /// Input: [[1, 2], [2, 3], [6, 1]]
-    /// Output: [2, 5, 5]
-    /// Explanation:
-    ///
-    /// After the first drop of 
-    /// positions[0] = [1, 2]:
-    /// _aa
-    /// _aa
-    /// -------
-    /// The maximum height of any square is 2.
-    ///
-    /// After the second drop of 
-    /// positions[1] = [2, 3]:
-    /// __aaa
-    /// __aaa
-    /// __aaa
-    /// _aa__
-    /// _aa__
-    /// --------------
-    /// The maximum height of any square is 5.  
-    /// The larger square stays on top of the smaller square despite where its 
-    /// center of gravity is, because squares are infinitely sticky on their 
-    /// bottom edge.
-    ///
-    /// After the third drop of 
-    /// positions[1] = [6, 1]:
-    /// __aaa
-    /// __aaa
-    /// __aaa
-    /// _aa
-    /// _aa___a
-    /// --------------
-    /// The maximum height of any square is still 5.
-    ///
-    /// Thus, we return an answer of 
-    /// [2, 5, 5]
-    ///
-    /// Example 2:
-    /// Input: [[100, 100], [200, 100]]
-    /// Output: [100, 100]
-    /// Explanation: Adjacent squares don't get stuck prematurely - only their 
-    /// bottom edge can stick to surfaces.
-    /// 
-    /// Note:
-    /// 1 <= positions.length <= 1000.
-    /// 1 <= positions[i][0] <= 10^8.
-    /// 1 <= positions[i][1] <= 10^6.
-    /// </summary>
-    vector<int> fallingSquares(vector<pair<int, int>>& positions);
 
     /// <summary>
     /// Leet code #757. Set Intersection Size At Least Two

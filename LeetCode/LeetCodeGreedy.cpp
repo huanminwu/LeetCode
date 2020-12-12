@@ -208,7 +208,7 @@ int LeetCodeGreedy::minPatches(vector<int>& nums, int n)
 /// 2.The length of Profits array and Capital array will not exceed 50,000.
 /// 3.The answer is guaranteed to fit in a 32-bit signed integer.
 /// </summary>
-int LeetCode::findMaximizedCapital(int k, int W, vector<int>& Profits, vector<int>& Capital)
+int LeetCodeGreedy::findMaximizedCapital(int k, int W, vector<int>& Profits, vector<int>& Capital)
 {
     priority_queue<pair<int, int>> capital_map;
     priority_queue<int> profit_map;
@@ -704,41 +704,50 @@ vector<string> LeetCodeGreedy::findMissingRanges(vector<int>& nums, int lower, i
 }
 
 /// <summary>
-/// Leet code #495. Teemo Attacking         
+/// Leet code #495. Teemo Attacking
 /// 
-/// In LLP world, there is a hero called Teemo and his attacking can make his enemy 
-/// Ashe be in poisoned condition. Now, given the Teemo's attacking ascending time 
-/// series towards Ashe and the poisoning time duration per Teemo's attacking, you 
-/// need to output the total time that Ashe is in poisoned condition. 
+/// Medium
+/// 
+/// In LOL world, there is a hero called Teemo and his attacking can make 
+/// his enemy Ashe be in poisoned condition. Now, given the Teemo's 
+/// attacking ascending time series towards Ashe and the poisoning time 
+/// duration per Teemo's attacking, you need to output the total time 
+/// that Ashe is in poisoned condition.
 ///
-/// You may assume that Teemo attacks at the very beginning of a specific time point, 
-/// and makes Ashe be in poisoned condition immediately.
-/// 
-/// Example 1: 
+/// You may assume that Teemo attacks at the very beginning of a specific 
+/// time point, and makes Ashe be in poisoned condition immediately.
+///
+/// Example 1:
 /// Input: [1,4], 2
 /// Output: 4
-/// Explanation: At time point 1, Teemo starts attacking Ashe and makes Ashe be poisoned immediately. 
+/// Explanation: At time point 1, Teemo starts attacking Ashe and makes 
+/// Ashe be poisoned immediately. 
 /// This poisoned status will last 2 seconds until the end of time point 2. 
-/// And at time point 4, Teemo attacks Ashe again, and causes Ashe to be in poisoned status for another 2 seconds. 
+/// And at time point 4, Teemo attacks Ashe again, and causes Ashe to be 
+/// in poisoned status for another 2 seconds. 
 /// So you finally need to output 4.
 ///
 /// Example 2:
 /// Input: [1,2], 2
 /// Output: 3
-/// Explanation: At time point 1, Teemo starts attacking Ashe and makes Ashe be poisoned. 
+/// Explanation: At time point 1, Teemo starts attacking Ashe and makes 
+/// Ashe be poisoned. 
 /// This poisoned status will last 2 seconds until the end of time point 2. 
-/// However, at the beginning of time point 2, Teemo attacks Ashe again who is already in poisoned status. 
-/// Since the poisoned status won't add up together, though the second poisoning attack will still work at 
-/// time point 2, it will stop at the end of time point 3. 
+/// However, at the beginning of time point 2, Teemo attacks Ashe again 
+/// who is already in poisoned status. 
+/// Since the poisoned status won't add up together, though the second 
+/// poisoning attack will still work at time point 2, it will stop at the 
+/// end of time point 3. 
 /// So you finally need to output 3.
-///
+/// 
 /// Note:
-/// 1.You may assume the length of given time series array won't exceed 10000.
-/// 2.You may assume the numbers in the Teemo's attacking time series and his 
-///   poisoning time duration per attacking are non-negative integers, which 
-///   won't exceed 10,000,000.
+/// 1. You may assume the length of given time series array won't 
+///    exceed 10000.
+/// You may assume the numbers in the Teemo's attacking time series and 
+/// his poisoning time duration per attacking are non-negative integers, 
+/// which won't exceed 10,000,000.
 /// </summary>
-int LeetCode::findPoisonedDuration(vector<int>& timeSeries, int duration)
+int LeetCodeGreedy::findPoisonedDuration(vector<int>& timeSeries, int duration)
 {
     int result = 0;
     int last_end = -1;
@@ -938,7 +947,7 @@ int LeetCode::leastInterval(vector<char>& tasks, int n)
 /// The integer 1 <= d, t, n <= 10,000. 
 /// You can't take two courses simultaneously.
 /// </summary>
-int LeetCode::scheduleCourse(vector<vector<int>>& courses)
+int LeetCodeGreedy::scheduleCourse(vector<vector<int>>& courses)
 {
     struct dead_line_compare
     {
@@ -1022,16 +1031,6 @@ int LeetCode::findLongestChain(vector<vector<int>>& pairs)
 
 /// <summary>
 /// Leet code #699. Falling Squares      
-/// </summary>
-map<int, int>::iterator LeetCode::findLocation(map<int, int>& pos_map, int pos)
-{
-    auto itr = pos_map.lower_bound(pos);
-    if (itr == pos_map.end() || itr->first > pos) itr--;
-    return itr;
-}
-
-/// <summary>
-/// Leet code #699. Falling Squares      
 /// 
 /// On an infinite number line (x-axis), we drop given squares in the order 
 /// they are given.
@@ -1102,34 +1101,34 @@ map<int, int>::iterator LeetCode::findLocation(map<int, int>& pos_map, int pos)
 /// 1 <= positions[i][0] <= 10^8.
 /// 1 <= positions[i][1] <= 10^6.
 /// </summary>
-vector<int> LeetCode::fallingSquares(vector<pair<int, int>>& positions)
+vector<int> LeetCodeGreedy::fallingSquares(vector<vector<int>>& positions)
 {
     vector<int> result;
     // remember the start position and height
     map<int, int> pos_map;
-    pos_map[0] = 0;
+    pos_map[INT_MAX] = 0;
     int max_height = 0;
     for (size_t i = 0; i < positions.size(); i++)
     {
-        auto start = findLocation(pos_map, positions[i].first);
-        auto end = findLocation(pos_map, positions[i].first + positions[i].second);
-        int end_height = end->second;
+        auto itr = pos_map.lower_bound(positions[i][0]);
+        int prev = itr->second;
         int height = 0;
-        while (start != pos_map.end() && start->first < positions[i].first + positions[i].second)
+        while (itr->first < positions[i][0] + positions[i][1])
         {
-            auto temp = start++;
-            height = max(height, temp->second);
-            if (temp->first >= positions[i].first)
+            auto temp = itr;
+            if (itr->first > positions[i][0])
             {
-                pos_map.erase(temp);
+                height = max(height, itr->second);
             }
+            itr++;
+            pos_map.erase(temp);
         }
-        // add height on this box
-        height += positions[i].second;
-        // set start as new height
-        pos_map[positions[i].first] = height;
-        // set next to end as its original height
-        pos_map[positions[i].first + positions[i].second] = end_height;
+        height = max(height, itr->second);
+        height += positions[i][1];
+        // set start as prev height
+        pos_map[positions[i][0]] = prev;
+        // set end as maximum height in range
+        pos_map[positions[i][0] + positions[i][1]] = height;
         // calculate max height 
         max_height = max(max_height, height);
         result.push_back(max_height);
@@ -2993,10 +2992,13 @@ int LeetCodeGreedy::minimumEffort(vector<vector<int>>& tasks)
 /// Output: 4
 /// Explanation: Starting at building 0, you can follow these steps:
 /// - Go to building 1 without using ladders nor bricks since 4 >= 2.
-/// - Go to building 2 using 5 bricks. You must use either bricks or ladders because 2 < 7.
+/// - Go to building 2 using 5 bricks. You must use either bricks or 
+///   ladders because 2 < 7.
 /// - Go to building 3 without using ladders nor bricks since 7 >= 6.
-/// - Go to building 4 using your only ladder. You must use either bricks or ladders because 6 < 9.
-/// It is impossible to go beyond building 4 because you do not have any more bricks or ladders.
+/// - Go to building 4 using your only ladder. You must use either bricks or 
+///   ladders because 6 < 9.
+/// It is impossible to go beyond building 4 because you do not have any 
+/// more bricks or ladders.
 ///
 /// Example 2: 
 /// Input: heights = [4,12,2,7,3,18,20,3,19], bricks = 10, ladders = 2

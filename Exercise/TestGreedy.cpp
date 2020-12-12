@@ -87,6 +87,23 @@ void TestLeetCode452(void)
     Logger::WriteMessage("Min Arrow Shots = " + to_string(result));
 }
 
+void TestLeetCode495(void)
+{
+    Logger::WriteMessage("Test Leet Code 495");
+    LeetCodeGreedy leetCode;
+    vector<int> timeSeries = { 1, 4 };
+    int duration = 2;
+    int total_time = leetCode.findPoisonedDuration(timeSeries, 2);
+    Logger::WriteMessage(timeSeries);
+    Logger::WriteMessage("Duration = " + to_string(duration) + "; Total Time =" + to_string(total_time));
+
+    timeSeries = { 1, 2 };
+    duration = 2;
+    total_time = leetCode.findPoisonedDuration(timeSeries, 2);
+    Logger::WriteMessage(timeSeries);
+    Logger::WriteMessage("Duration = " + to_string(duration) + "; Total Time =" + to_string(total_time));
+}
+
 void TestLeetCode826(void)
 {
     Logger::WriteMessage("Test Leet Code 826");
@@ -641,8 +658,70 @@ void TestLeetCode436(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode699(void)
+{
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> positions = { {1, 2},{2, 3},{6, 1} };
+    vector<int> result = leetCode.fallingSquares(positions);
+
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage(result);
+
+    positions = { {100, 100},{200, 100} };
+    result = leetCode.fallingSquares(positions);
+
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage(result);
+
+    positions = { {1, 5},{2, 2}, {7, 5} };
+    result = leetCode.fallingSquares(positions);
+
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage(result);
+}
+
+
+void TestLeetCode502(void)
+{
+    Logger::WriteMessage("Test Leet Code 502");
+    LeetCodeGreedy leetCode;
+    int k = 2;
+    int W = 0;
+    vector<int> Profits = { 1, 3, 2 };
+    vector<int> Capital = { 0, 1, 1 };
+    int result = leetCode.findMaximizedCapital(k, W, Profits, Capital);
+    Logger::WriteMessage("k = " + to_string(k) + "; W = " + to_string(W));
+    Logger::WriteMessage(Profits);
+    Logger::WriteMessage(Capital);
+    Logger::WriteMessage("Result = " + to_string(result));
+}
+
+void TestLeetCode630(void)
+{
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> courses = { { 100, 200 },{ 200, 1300 },{ 1000, 1250 },{ 2000, 3200 } };
+    int result = leetCode.scheduleCourse(courses);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    courses = { { 5, 5 },{ 4, 6 },{ 2, 6 } };
+    result = leetCode.scheduleCourse(courses);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    courses = { { 9, 14 },{ 7, 12 },{ 1, 11 },{ 4, 7 } };
+    result = leetCode.scheduleCourse(courses);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    courses = { { 9, 20 },{ 4, 14 },{ 4, 10 },{ 6, 7 },{ 2, 14 },{ 8, 10 },{ 6, 6 },{ 5, 7 } };
+    result = leetCode.scheduleCourse(courses);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode630();
+    TestLeetCode502();
+    TestLeetCode699();
+    TestLeetCode495();
     TestLeetCode452();
     TestLeetCode435();
     TestLeetCode358();

@@ -850,23 +850,6 @@ void TestLeetCode375(void)
 
 
 
-void TestLeetCode495(void)
-{
-    Logger::WriteMessage("Test Leet Code 495");
-    LeetCode leetCode;
-    vector<int> timeSeries = { 1, 4 };
-    int duration = 2;
-    int total_time = leetCode.findPoisonedDuration(timeSeries, 2);
-    Logger::WriteMessage(timeSeries);
-    Logger::WriteMessage("Duration = " + to_string(duration) + "; Total Time =" + to_string(total_time));
-
-    timeSeries = { 1, 2 };
-    duration = 2;
-    total_time = leetCode.findPoisonedDuration(timeSeries, 2);
-    Logger::WriteMessage(timeSeries);
-    Logger::WriteMessage("Duration = " + to_string(duration) + "; Total Time =" + to_string(total_time));
-}
-
 void TestLeetCode308(void)
 {
     Logger::WriteMessage("Test Leet Code 308");
@@ -1040,22 +1023,6 @@ void TestLeetCode440(void)
 }
 
 
-void TestLeetCode502(void)
-{
-    Logger::WriteMessage("Test Leet Code 502");
-    LeetCode leetCode;
-    int k = 2;
-    int W = 0;
-    vector<int> Profits = { 1, 3, 2 };
-    vector<int> Capital = { 0, 1, 1 };
-    int result = leetCode.findMaximizedCapital(k, W, Profits, Capital);
-    Logger::WriteMessage("k = " + to_string(k) + "; W = " + to_string(W));
-    Logger::WriteMessage(Profits);
-    Logger::WriteMessage(Capital);
-    Logger::WriteMessage("Result = " + to_string(result));
-
-}
-
 
 
 
@@ -1226,27 +1193,6 @@ void TestLeetCode628(void)
     Logger::WriteMessage(nums);
     result = leetCode.maximumProduct(nums);
     Logger::WriteMessage("result = " + to_string(result));
-}
-
-void TestLeetCode630(void)
-{
-    LeetCode leetCode;
-    vector<vector<int>> courses = { { 100, 200 },{ 200, 1300 },{ 1000, 1250 },{ 2000, 3200 } };
-    int result = leetCode.scheduleCourse(courses);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    courses = { { 5, 5 },{ 4, 6 },{ 2, 6 } };
-    result = leetCode.scheduleCourse(courses);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    courses = { { 9, 14 },{ 7, 12 },{ 1, 11 },{ 4, 7 } };
-    result = leetCode.scheduleCourse(courses);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    courses = { { 9, 20 },{ 4, 14 },{ 4, 10 },{ 6, 7 },{ 2, 14 },{ 8, 10 },{ 6, 6 },{ 5, 7 } };
-    result = leetCode.scheduleCourse(courses);
-    Logger::WriteMessage("result = " + to_string(result));
-
 }
 
 void TestLeetCode634(void)
@@ -1649,21 +1595,6 @@ void TestLeetCode689(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode699(void)
-{
-    LeetCode leetCode;
-    vector<pair<int, int>> positions = { {1, 2},{2, 3},{6, 1} };
-    vector<int> result = leetCode.fallingSquares(positions);
-
-    Logger::WriteMessage(positions);
-    Logger::WriteMessage(result);
-
-    positions = { {100, 100},{200, 100} };
-    result = leetCode.fallingSquares(positions);
-
-    Logger::WriteMessage(positions);
-    Logger::WriteMessage(result);
-}
 
 void TestLeetCode714(void)
 {
@@ -1714,18 +1645,6 @@ void TestLeetCode730(void)
 
 
 
-void TestLeetCode732(void)
-{
-    MyCalendarThree myCalendarThree = MyCalendarThree();
-    vector<pair<int, int>> booking = { { 10, 20 },{ 50, 60 },{ 10, 40 },{ 5, 15 },{ 5, 10 },{ 25, 55 } };
-    vector<int> result;
-
-    for (size_t i = 0; i < booking.size(); i++)
-    {
-        result.push_back((myCalendarThree.book(booking[i].first, booking[i].second)));
-    }
-    Logger::WriteMessage(result);
-}
 
 void TestLeetCode738(void)
 {
@@ -3894,13 +3813,15 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeDesign();
+    TestLeetCodeGreedy();
     TestLeetCodeArray();
     TestLeetCodeHashtable();
     TestLeetCodeMath();
     TestLeetCodeString();
     TestLeetCodeDFS();
-    TestLeetCodeGreedy();
-    TestLeetCodeDesign();
+
+
     TestLeetCodeSort();
     TestLeetCodeLinkedList();
     TestLeetCodeTree();
@@ -4077,12 +3998,10 @@ void main(int argc, char* argv[])
     TestLeetCode738();
     TestLeetCode741();
     TestLeetCode740();
-    TestLeetCode732();
     TestLeetCode733();
     TestLeetCode730();
     TestLeetCode727();
     TestLeetCode714();
-    TestLeetCode699();
     TestLeetCode689();
     TestLeetCode729();
     TestLeetCode731();
@@ -4114,7 +4033,6 @@ void main(int argc, char* argv[])
     TestLeetCode632();
     TestLeetCode635();
     TestLeetCode634();
-    TestLeetCode630();
     TestLeetCode629();
     TestLeetCode628();
     TestLeetCode621();
@@ -4140,7 +4058,6 @@ void main(int argc, char* argv[])
     TestLeetCode529();
     TestLeetCode514();
     TestLeetCode401();
-    TestLeetCode502();
     TestLeetCode440();
     TestLeetCode17();
     TestLeetCode22();
@@ -4155,7 +4072,6 @@ void main(int argc, char* argv[])
     TestLeetCode504();
     TestLeetCode411();
     TestLeetCode308();
-    TestLeetCode495();
     TestLeetCode375();
     TestLeetCode484();
     TestLeetCode317();

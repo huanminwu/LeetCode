@@ -2894,56 +2894,33 @@ public:
 class MyCalendarThree
 {
 private:
-    int m_Book;
-    map<int, int> m_TimeMap;
-    map<int, int>::iterator getLocation(int time_stamp)
-    {
-        auto itr = m_TimeMap.lower_bound(time_stamp);
-        if (itr == m_TimeMap.end() || time_stamp < itr->first)
-        {
-            itr--;
-        }
-        return itr;
-    };
-
-public:
+    int m_book;
+    map<int, int> m_timemap;
+ public:
     MyCalendarThree()
     {
-        m_TimeMap[0] = 0;
-        m_Book = 0;
+        m_timemap[INT_MAX] = 0;
+        m_book = 0;
     }
 
     int book(int start, int end)
     {
-        auto itr = getLocation(end);
-        m_TimeMap[end] = itr->second;
-
-        itr = getLocation(start);
-        m_TimeMap[start] = itr->second + 1;
-        m_Book = max(m_Book, m_TimeMap[start]);
-
-        itr = m_TimeMap.find(start);
-
-        // int prev_value = itr->second;
-        itr++;
-        while (itr != m_TimeMap.end() && itr->first < end)
+        auto itr = m_timemap.lower_bound(start);
+        int prev = itr->second;
+        while (itr->first < end)
         {
-            auto temp = itr;
-            itr->second++;
-            m_Book = max(m_Book, itr->second);
+            // We track the layers before the point, 
+            /// so we can not increase start point
+            if (itr->first > start) itr->second++;
+            m_book = max(m_book, itr->second);
             itr++;
-            /*  clean up duplication is optional
-            if (temp->second == prev_value)
-            {
-            m_TimeMap.erase(temp);
-            }
-            else
-            {
-            prev_value = temp->second;
-            }
-            */
         }
-        return m_Book;
+        m_timemap[start] = prev;
+        // end point layer is determined by the layer before next point
+        m_timemap[end] = itr->second + 1;
+        // we can not use itr->second again, since it may already be increased 
+        m_book = max(m_book, m_timemap[end]);
+        return m_book;
     }
 };
 
@@ -3005,6 +2982,8 @@ public:
             itr++;
             m_range.erase(val);
         }
+        // we do not change start point because 
+        // it means the status ahead of the point
         m_range[left] = prev;
         m_range[right] = 1;
     }
@@ -3025,13 +3004,10 @@ public:
 
     bool queryRange(int left, int right)
     {
-        auto itr = m_range.lower_bound(left);
+        auto itr = m_range.upper_bound(left);
         while (itr->first < right)
         {
-            if (itr->first != left)
-            {
-                if (itr->second == 0) return false;
-            }
+            if (itr->second == 0) return false;
             itr++;
         }
         if (itr->second == 0) return false;

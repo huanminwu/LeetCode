@@ -3402,6 +3402,7 @@ void TestLeetCode715(void)
     Logger::WriteMessage(range);
     Logger::WriteMessage(result);
 
+    rangeModule = nullptr;
     commands = { "RangeModule", "addRange", "removeRange", "queryRange", "queryRange", "queryRange" };
     range = { {}, { 10, 20 }, { 14, 16 },  { 10, 14 }, { 13, 15 }, { 16, 17 } };
     result.clear();
@@ -3435,8 +3436,54 @@ void TestLeetCode715(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode732(void)
+{
+    MyCalendarThree* myCalendarThree = nullptr; 
+    vector<string> commands = { "MyCalendarThree", "book", "book", "book", "book", "book", "book", "book", "book", "book", "book" };
+    vector<vector<int>> parameters = { {}, {26, 35}, {26, 32}, {25, 32}, {18, 26}, {40, 45}, {19, 26}, {48, 50}, {1, 6}, {46, 50}, {11, 18} };
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "MyCalendarThree")
+        {
+            myCalendarThree = new MyCalendarThree();
+        }
+        else if (commands[i] == "book")
+        {
+            int ret = myCalendarThree->book(parameters[i][0], parameters[i][1]);
+            result.push_back(to_string(ret));
+        }
+    }
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+
+    commands = { "MyCalendarThree", "book", "book", "book", "book", "book", "book" };
+    parameters = { {}, { 10, 20 },{ 50, 60 },{ 10, 40 },{ 5, 15 },{ 5, 10 },{ 25, 55 } };
+    result.clear();
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "MyCalendarThree")
+        {
+            myCalendarThree = new MyCalendarThree();
+        }
+        else if (commands[i] == "book")
+        {
+            int ret = myCalendarThree->book(parameters[i][0], parameters[i][1]);
+            result.push_back(to_string(ret));
+        }
+    }
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
+ 
+
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode732();
     TestLeetCode715();
     TestLeetCode1670();
     TestLeetCode1656();
