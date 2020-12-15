@@ -1549,41 +1549,6 @@ void TestLeetCode729(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode731(void)
-{
-    MyCalendarTwo myCalendarTwo = MyCalendarTwo();
-    vector<pair<int, int>> booking = { {24, 40},{43, 50},{27, 43},{5, 21},{30, 40},{14, 29},{3, 19},{3, 14},{25, 39},{6, 19} };
-    vector<int> result;
-    for (size_t i = 0; i < booking.size(); i++)
-    {
-        if (myCalendarTwo.book(booking[i].first, booking[i].second))
-        {
-            result.push_back(1);
-        }
-        else
-        {
-            result.push_back(0);
-        }
-    }
-    Logger::WriteMessage(result);
-
-    myCalendarTwo = MyCalendarTwo();
-    booking = { { 10, 20 },{ 50, 60 },{ 10, 40 },{ 5, 15 },{ 5, 10 },{ 25, 55 } };
-    result.clear();
-    for (size_t i = 0; i < booking.size(); i++)
-    {
-        if (myCalendarTwo.book(booking[i].first, booking[i].second))
-        {
-            result.push_back(1);
-        }
-        else
-        {
-            result.push_back(0);
-        }
-    }
-    Logger::WriteMessage(result);
-}
-
 void TestLeetCode689(void)
 {
     LeetCode leetCode;
@@ -3813,20 +3778,19 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeDesign();
-    TestLeetCodeGreedy();
+    TestLeetCodeDP();
     TestLeetCodeArray();
-    TestLeetCodeHashtable();
-    TestLeetCodeMath();
-    TestLeetCodeString();
-    TestLeetCodeDFS();
-
-
     TestLeetCodeSort();
+    TestLeetCodeMath();
+    TestLeetCodeDesign();
+    TestLeetCodeString();
+    TestLeetCodeGreedy();
+    TestLeetCodeHashtable();
+    TestLeetCodeDFS();
     TestLeetCodeLinkedList();
     TestLeetCodeTree();
     TestLeetCodeGraph();
-    TestLeetCodeDP();
+
     TestLeetCodeDFS();
     TestLeetCodeBinarySearch();
     TestLeetCodeBit();
@@ -4004,7 +3968,6 @@ void main(int argc, char* argv[])
     TestLeetCode714();
     TestLeetCode689();
     TestLeetCode729();
-    TestLeetCode731();
     TestLeetCode718();
     TestLeetCode691();
     TestLeetCode685();

@@ -9894,3 +9894,95 @@ int LeetCodeMath::concatenatedBinary(int n)
     }
     return (int)result;
 }
+
+/// <summary>
+/// Leet code #1688. Count of Matches in Tournament
+/// 
+/// Easy
+/// 
+/// You are given an integer n, the number of teams in a tournament that has 
+/// strange rules:
+///
+/// If the current number of teams is even, each team gets paired with another 
+/// team. A total of n / 2 matches are played, and n / 2 teams advance to the 
+/// next round.
+/// If the current number of teams is odd, one team randomly advances in the 
+/// tournament, and the rest gets paired. A total of (n - 1) / 2 matches are 
+/// played, and (n - 1) / 2 + 1 teams advance to the next round.
+/// Return the number of matches played in the tournament until a winner is 
+/// decided.
+///
+/// Example 1:
+/// Input: n = 7
+/// Output: 6
+/// Explanation: Details of the tournament: 
+/// - 1st Round: Teams = 7, Matches = 3, and 4 teams advance.
+/// - 2nd Round: Teams = 4, Matches = 2, and 2 teams advance.
+/// - 3rd Round: Teams = 2, Matches = 1, and 1 team is declared the winner.
+/// Total number of matches = 3 + 2 + 1 = 6.
+///
+/// Example 2:
+/// Input: n = 14
+/// Output: 13
+/// Explanation: Details of the tournament:
+/// - 1st Round: Teams = 14, Matches = 7, and 7 teams advance.
+/// - 2nd Round: Teams = 7, Matches = 3, and 4 teams advance.
+/// - 3rd Round: Teams = 4, Matches = 2, and 2 teams advance.
+/// - 4th Round: Teams = 2, Matches = 1, and 1 team is declared the winner.
+/// Total number of matches = 7 + 3 + 2 + 1 = 13.
+///
+/// Constraints:
+/// 1. 1 <= n <= 200
+/// </summary>
+int LeetCodeMath::numberOfMatches(int n)
+{
+    int result = 0;
+    while (n > 1)
+    {
+        result += n / 2;
+        n = n / 2 + n % 2;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1689. Partitioning Into Minimum Number Of Deci-Binary Numbers
+/// 
+/// Medium
+/// 
+/// A decimal number is called deci-binary if each of its digits is either 0 
+/// or 1 without any leading zeros. For example, 101 and 1100 are deci-binary,
+/// while 112 and 3001 are not.
+///
+/// Given a string n that represents a positive decimal integer, return the 
+/// minimum number of positive deci-binary numbers needed so that they sum 
+/// up to n.
+///
+/// Example 1:
+/// Input: n = "32"
+/// Output: 3
+/// Explanation: 10 + 11 + 11 = 32
+///
+/// Example 2:
+/// Input: n = "82734"
+/// Output: 8
+///
+/// Example 3:
+/// Input: n = "27346209830709182346"
+/// Output: 9
+/// 
+/// Constraints:
+/// 1. 1 <= n.length <= 105
+/// 2. n consists of only digits.
+/// 3. n does not contain any leading zeros and represents a positive 
+///    integer.
+/// </summary>
+int LeetCodeMath::minPartitions(string n)
+{
+    int result = 0;
+    for (size_t i = 0; i < n.size(); i++)
+    {
+        result = max(result, n[i] - '0');
+    }
+    return result;
+}

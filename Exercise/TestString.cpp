@@ -3705,8 +3705,32 @@ void TestLeetCode1678(void)
     Logger::WriteMessage("command = " + command + "; result = " + result);
 }
 
+void TestLeetCode1684(void)
+{
+    Logger::WriteMessage("Test Leet Code 1684");
+    LeetCodeString leetCode;
+    string allowed = "ab";
+    vector<string> words = { "ad", "bd", "aaab", "baa", "badab" };
+    int result = leetCode.countConsistentStrings(allowed, words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("allowed = " + allowed + "; result = " + to_string(result));
+
+    allowed = "abc";
+    words = { "a","b","c","ab","ac","bc","abc" };
+    result = leetCode.countConsistentStrings(allowed, words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("allowed = " + allowed + "; result = " + to_string(result));
+
+    allowed = "cad";
+    words = { "cc","acd","b","ba","bac","bad","ac","d" };
+    result = leetCode.countConsistentStrings(allowed, words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("allowed = " + allowed + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1684();
     TestLeetCode1678();
     TestLeetCode1668();
     TestLeetCode1657();

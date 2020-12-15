@@ -6607,7 +6607,7 @@ vector<int> LeetCode::smallestSufficientTeam(vector<string>& req_skills, vector<
             {
                 continue;
             }
-            int skill = j | people_skill;
+            int skill = ((int)j | people_skill);
             if (team[skill].size() == 0 || team[skill].size() > team[j].size() + 1)
             {
                 team[skill] = team[j];
@@ -9141,7 +9141,7 @@ int LeetCodeDP::numOfWays(int n)
             dp[i][1] = (dp[i - 1][0] * 2 + dp[i - 1][1] * 2) % M;
         }
     }
-    return (int)(dp[n - 1][0] + dp[n - 1][1]) % M;
+    return (int)((dp[n - 1][0] + dp[n - 1][1]) % M);
 }
 
 /// <summary>
@@ -10849,6 +10849,200 @@ int LeetCodeDP::minimumDeletions(string s)
         }
     }
     return min(dp.back().first, dp.back().second);
+}
+
+/// <summary>
+/// Leet code #1690. Stone Game VII
+/// 
+/// Medium
+/// 
+/// Alice and Bob take turns playing a game, with Alice starting first.
+/// There are n stones arranged in a row. On each player's turn, they can 
+/// remove either the leftmost stone or the rightmost stone from the row and 
+/// receive points equal to the sum of the remaining stones' values in the 
+/// row. The winner is the one with the higher score when there are no stones 
+/// left to remove.
+///
+/// Bob found that he will always lose this game (poor Bob, he always loses), 
+/// so he decided to minimize the score's difference. Alice's goal is to 
+/// maximize the difference in the score.
+/// Given an array of integers stones where stones[i] represents the value 
+/// of the ith stone from the left, return the difference in Alice and Bob's 
+/// score if they both play optimally.
+/// 
+/// Example 1:
+/// Input: stones = [5,3,1,4,2]
+/// Output: 6
+/// Explanation: 
+/// - Alice removes 2 and gets 5 + 3 + 1 + 4 = 13 points. Alice = 13, Bob = 0, 
+///   stones = [5,3,1,4].
+/// - Bob removes 5 and gets 3 + 1 + 4 = 8 points. Alice = 13, Bob = 8, 
+///   stones = [3,1,4].
+/// - Alice removes 3 and gets 1 + 4 = 5 points. Alice = 18, Bob = 8, 
+///   stones = [1,4].
+/// - Bob removes 1 and gets 4 points. Alice = 18, Bob = 12, stones = [4].
+/// - Alice removes 4 and gets 0 points. Alice = 18, Bob = 12, stones = [].
+/// The score difference is 18 - 12 = 6.
+///
+/// Example 2:
+/// Input: stones = [7,90,5,1,100,10,10,2]
+/// Output: 122
+///
+/// Constraints:
+/// 1. n == stones.length
+/// 2. 2 <= n <= 1000
+/// 3. 1 <= stones[i] <= 1000
+/// </summary>
+int LeetCodeDP::stoneGameVII(vector<int>& stones)
+{
+    int n = stones.size();
+    vector<int> sum(n+1);
+    sum[0] = 0;
+    vector<vector<int>> dp(n, vector<int>(n));
+    for (int i = 0; i < n; i++) sum[i+1] = sum[i] + stones[i];
+    for (int i = 1; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (i + j >= n) break;
+            if (i == 1) dp[j][j + 1] = max(stones[j], stones[j+1]);
+            else
+            {
+                dp[j][j + i] = max(sum[j + i] - sum[j] - dp[j][j + i - 1], 
+                                   sum[j + i + 1] - sum[j + 1] - dp[j + 1][j + i]);
+            }
+        }
+    }
+    return dp[0][n - 1];
+}
+
+/// <summary>
+/// Leet code #1687. Delivering Boxes from Storage to Ports
+/// 
+/// Hard
+/// 
+/// You have the task of delivering some boxes from storage to their ports 
+/// using only one ship. However, this ship has a limit on the number of 
+/// boxes and the total weight that it can carry.
+/// You are given an array boxes, where boxes[i] = [ports[i] weight[i]], 
+/// and three integers portsCount, maxBoxes, and maxWeight.
+///
+/// ports[i] is the port where you need to deliver the ith box and weights[i]
+/// is the weight of the ith box.
+/// portsCount is the number of ports.
+/// maxBoxes and maxWeight are the respective box and weight limits of the 
+/// ship.
+/// The boxes need to be delivered in the order they are given. The ship will 
+/// follow these steps:
+///
+/// The ship will take some number of boxes from the boxes queue, not 
+/// violating the maxBoxes and maxWeight constraints.
+/// For each loaded box in order, the ship will make a trip to the port the 
+/// box needs to be delivered to and deliver it. If the ship is already at 
+/// the correct port, no trip is needed, and the box can immediately be 
+/// delivered.
+/// The ship then makes a return trip to storage to take more boxes from
+/// the queue.
+/// The ship must end at storage after all the boxes have been delivered.
+///
+/// Return the minimum number of trips the ship needs to make to deliver all 
+/// boxes to their respective ports.
+/// 
+/// Example 1:
+///
+/// Input: boxes = [[1,1],[2,1],[1,1]], portsCount = 2, maxBoxes = 3, 
+/// maxWeight = 3
+/// Output: 4
+/// Explanation: The optimal strategy is as follows: 
+/// - The ship takes all the boxes in the queue, goes to port 1, then port 2, 
+/// then port 1 again, then returns to storage. 4 trips.
+/// So the total number of trips is 4.
+/// Note that the first and third boxes cannot be delivered together because the 
+/// boxes need to be delivered in order (i.e. the second box needs to be 
+/// delivered at port 2 before the third box).
+///
+/// Example 2:
+/// Input: boxes = [[1,2],[3,3],[3,1],[3,1],[2,4]], portsCount = 3, 
+/// maxBoxes = 3, maxWeight = 6
+/// Output: 6
+/// Explanation: The optimal strategy is as follows: 
+/// - The ship takes the first box, goes to port 1, then returns to storage. 2 
+/// trips.
+/// - The ship takes the second, third and fourth boxes, goes to port 3, then 
+/// returns to storage. 2 trips.
+/// - The ship takes the fifth box, goes to port 3, then returns to storage. 2 
+/// trips.
+/// So the total number of trips is 2 + 2 + 2 = 6.
+///
+/// Example 3:
+/// Input: boxes = [[1,4],[1,2],[2,1],[2,1],[3,2],[3,4]], portsCount = 3, 
+/// maxBoxes = 6, maxWeight = 7
+/// Output: 6
+/// Explanation: The optimal strategy is as follows:
+/// - The ship takes the first and second boxes, goes to port 1, then returns 
+///   to storage. 2 trips.
+/// - The ship takes the third and fourth boxes, goes to port 2, then returns 
+///   to storage. 2 trips.
+/// - The ship takes the fifth and sixth boxes, goes to port 3, then returns 
+///   to storage. 2 trips.
+/// So the total number of trips is 2 + 2 + 2 = 6.
+///
+/// Example 4:
+/// Input: boxes = [[2,4],[2,5],[3,1],[3,2],[3,7],[3,1],[4,4],[1,3],[5,2]], 
+/// portsCount = 5, maxBoxes = 5, maxWeight = 7
+/// Output: 14
+/// Explanation: The optimal strategy is as follows:
+/// - The ship takes the first box, goes to port 2, then storage. 2 trips.
+/// - The ship takes the second box, goes to port 2, then storage. 2 trips.
+/// - The ship takes the third and fourth boxes, goes to port 3, then storage. 
+/// 2 trips.
+/// - The ship takes the fifth box, goes to port 3, then storage. 2 
+/// trips.
+/// - The ship takes the sixth and seventh boxes, goes to port 3, then port 4, 
+/// then storage. 3 trips. 
+/// - The ship takes the eighth and ninth boxes, goes to port 1, then port 5, 
+/// then storage. 3 trips.
+/// So the total number of trips is 2 + 2 + 2 + 2 + 3 + 3 = 14.
+///
+/// Constraints:
+/// 1. 1 <= boxes.length <= 10^5
+/// 2. 1 <= portsCount, maxBoxes, maxWeight <= 10^5
+/// 3. 1 <= ports[i] <= portsCount
+/// 4. 1 <= weights[i] <= maxWeight
+/// </summary>
+int LeetCodeDP::boxDelivering(vector<vector<int>>& boxes, int portsCount, int maxBoxes, int maxWeight)
+{
+    int weight_count = 0;
+    int n = boxes.size();
+    // ports switch, trips
+    vector<pair<int, int>> dp(n);
+    int first = 0;
+    int index = 0;
+    for (int index = 0; index < n; index++)
+    {
+        weight_count += boxes[index][1];
+        if (index == 0) dp[index].first = 0;
+        else if (boxes[index][0] == boxes[index - 1][0])
+        {
+            dp[index].first = dp[index - 1].first;
+        }
+        else
+        {
+            dp[index].first = dp[index - 1].first + 1;
+        }
+        while ((index - first + 1 > maxBoxes) || (weight_count > maxWeight) ||
+               (first < index && first > 0 && dp[first].second == dp[first - 1].second))
+        {
+            weight_count -= boxes[first][1];
+            first++;
+        }
+        dp[index].second = dp[index].first - dp[first].first + 2;
+        if (first > 0)
+        {
+            dp[index].second += dp[first -1].second;
+        }
+    }
+    return dp[boxes.size() - 1].second;
 }
 #pragma endregion
 

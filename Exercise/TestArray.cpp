@@ -4924,8 +4924,49 @@ void TestLeetCode1671(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1691(void)
+{
+    Logger::WriteMessage("Test Leet Code 1691");
+    LeetCodeArray leetCode;
+    vector<vector<int>> cuboids = { {50, 45, 20},{95, 37, 53},{45, 23, 12} };
+    int result = leetCode.maxHeight(cuboids);
+    Logger::WriteMessage(cuboids);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    cuboids = { {38, 25, 45},{76, 35, 3} };
+    result = leetCode.maxHeight(cuboids);
+    Logger::WriteMessage(cuboids);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    cuboids = 
+    { 
+        {7, 11, 17},{7, 17, 11},{11, 7, 17},
+        {11, 17, 7},{17, 7, 11},{17, 11, 7} 
+    };
+    result = leetCode.maxHeight(cuboids);
+    Logger::WriteMessage(cuboids);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1685(void)
+{
+    Logger::WriteMessage("Test Leet Code 1685");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 3, 5 };
+    vector<int> result = leetCode.getSumAbsoluteDifferences(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,4,6,8,10 };
+    result = leetCode.getSumAbsoluteDifferences(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1685();
+    TestLeetCode1691();
     TestLeetCode1424();
     TestLeetCode1671();
     TestLeetCode1673();

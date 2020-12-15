@@ -1059,8 +1059,42 @@ void TestLeetCode1675(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1686(void)
+{
+    Logger::WriteMessage("Test Leet Code 1686");
+    LeetCodeSort leetCode;
+    vector<int> aliceValues = { 1, 3 };
+    vector<int> bobValues = { 2, 1 };
+    int result = leetCode.stoneGameVI(aliceValues, bobValues);
+    Logger::WriteMessage(aliceValues);
+    Logger::WriteMessage(bobValues);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    aliceValues = { 1,2 };
+    bobValues = { 3, 1 };
+    result = leetCode.stoneGameVI(aliceValues, bobValues);
+    Logger::WriteMessage(aliceValues);
+    Logger::WriteMessage(bobValues);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    aliceValues = { 2,4,3 };
+    bobValues = { 1,6,7 };
+    result = leetCode.stoneGameVI(aliceValues, bobValues);
+    Logger::WriteMessage(aliceValues);
+    Logger::WriteMessage(bobValues);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    aliceValues = { 60, 7, 38, 66, 73, 61, 62, 10, 49, 12 };
+    bobValues = { 87, 62, 8, 43, 79, 93, 7, 15, 98, 39 };
+    result = leetCode.stoneGameVI(aliceValues, bobValues);
+    Logger::WriteMessage(aliceValues);
+    Logger::WriteMessage(bobValues);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1686();
     TestLeetCode1675();
     TestLeetCode1649();
     TestLeetCode1632();

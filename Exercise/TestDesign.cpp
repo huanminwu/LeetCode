@@ -3436,6 +3436,55 @@ void TestLeetCode715(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode731(void)
+{
+    MyCalendarTwo* myCalendarTwo = nullptr;
+    vector<string> commands = { "MyCalendarTwo", "book","book","book","book","book","book","book","book","book","book" };
+    vector<vector<int>> parameters = { {},{26,35},{26,32},{25,32},{18,26},{40,45},{19,26},{48,50},{1,6},{46,50},{11,18} };
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "MyCalendarTwo")
+        {
+            myCalendarTwo = new MyCalendarTwo();
+        }
+        else if (commands[i] == "book")
+        {
+            bool ret = myCalendarTwo->book(parameters[i][0], parameters[i][1]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+    }
+    delete myCalendarTwo;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+
+    commands = { "MyCalendarTwo", "book","book","book","book","book","book","book","book","book","book" };
+    parameters = { {},{24, 40},{43, 50},{27, 43},{5, 21},{30, 40},{14, 29},{3, 19},{3, 14},{25, 39},{6, 19} };
+    result.clear();
+    myCalendarTwo = nullptr;
+    commands = { "MyCalendarTwo", "book","book","book","book","book","book","book","book","book","book" };
+    parameters = { {},{26,35},{26,32},{25,32},{18,26},{40,45},{19,26},{48,50},{1,6},{46,50},{11,18} };
+    result.clear();
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "MyCalendarTwo")
+        {
+            myCalendarTwo = new MyCalendarTwo();
+        }
+        else if (commands[i] == "book")
+        {
+            bool ret = myCalendarTwo->book(parameters[i][0], parameters[i][1]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+    }
+    delete myCalendarTwo;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
+
 void TestLeetCode732(void)
 {
     MyCalendarThree* myCalendarThree = nullptr; 
@@ -3454,10 +3503,12 @@ void TestLeetCode732(void)
             result.push_back(to_string(ret));
         }
     }
+    delete myCalendarThree;
     Logger::WriteMessage(commands);
     Logger::WriteMessage(parameters);
     Logger::WriteMessage(result);
 
+    myCalendarThree = nullptr;
     commands = { "MyCalendarThree", "book", "book", "book", "book", "book", "book" };
     parameters = { {}, { 10, 20 },{ 50, 60 },{ 10, 40 },{ 5, 15 },{ 5, 10 },{ 25, 55 } };
     result.clear();
@@ -3473,6 +3524,7 @@ void TestLeetCode732(void)
             result.push_back(to_string(ret));
         }
     }
+    delete myCalendarThree;
     Logger::WriteMessage(commands);
     Logger::WriteMessage(parameters);
     Logger::WriteMessage(result);
@@ -3483,6 +3535,7 @@ void TestLeetCode732(void)
 
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode731();
     TestLeetCode732();
     TestLeetCode715();
     TestLeetCode1670();

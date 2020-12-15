@@ -2817,7 +2817,6 @@ public:
     {
         m_TimeMap[0] = 0;
     }
-
     bool book(int start, int end)
     {
 
@@ -2833,7 +2832,6 @@ public:
 
         itr = getLocation(start);
         m_TimeMap[start] = itr->second + 1;
-
 
         itr = m_TimeMap.find(start);
         itr++;

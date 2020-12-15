@@ -2106,8 +2106,74 @@ void TestLeetCode1653(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode1690(void)
+{
+    Logger::WriteMessage("Test Leet Code 1690");
+    LeetCodeDP leetCode;
+    vector<int> stones = { 5, 3, 1, 4, 2 };
+    int result = leetCode.stoneGameVII(stones);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    stones = { 7,90,5,1,100,10,10,2 };
+    result = leetCode.stoneGameVII(stones);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1687(void)
+{
+    Logger::WriteMessage("Test Leet Code 1687");
+    LeetCodeDP leetCode;
+    vector<vector<int>> boxes = { {1, 1},{1, 1},{1, 1}, {1, 1},{1, 1},{1, 1} };
+    int portsCount = 2;
+    int maxBoxes = 10;
+    int maxWeight = 10;
+    int result = leetCode.boxDelivering(boxes, portsCount, maxBoxes, maxWeight);
+    Logger::WriteMessage(boxes);
+    Logger::WriteMessage("portsCount = " + to_string(portsCount) + 
+        "; maxBoxes = " + to_string(maxBoxes) + 
+        "; maxWeight = " + to_string(maxWeight) + 
+        "result = " + to_string(result));
+
+    boxes = { {1, 2},{3, 3},{3, 1},{3, 1},{2, 4} };
+    portsCount = 3;
+    maxBoxes = 3;
+    maxWeight = 6;
+    result = leetCode.boxDelivering(boxes, portsCount, maxBoxes, maxWeight);
+    Logger::WriteMessage(boxes);
+    Logger::WriteMessage("portsCount = " + to_string(portsCount) +
+        "; maxBoxes = " + to_string(maxBoxes) +
+        "; maxWeight = " + to_string(maxWeight) +
+        "result = " + to_string(result));
+
+    boxes = { {1, 4},{1, 2},{2, 1},{2, 1},{3, 2},{3, 4} };
+    portsCount = 3;
+    maxBoxes = 6;
+    maxWeight = 7;
+    result = leetCode.boxDelivering(boxes, portsCount, maxBoxes, maxWeight);
+    Logger::WriteMessage(boxes);
+    Logger::WriteMessage("portsCount = " + to_string(portsCount) +
+        "; maxBoxes = " + to_string(maxBoxes) +
+        "; maxWeight = " + to_string(maxWeight) +
+        "result = " + to_string(result));
+
+    boxes = { {2, 4},{2, 5},{3, 1},{3, 2},{3, 7},{3, 1},{4, 4},{1, 3},{5, 2} };
+    portsCount = 5;
+    maxBoxes = 5;
+    maxWeight = 7;
+    result = leetCode.boxDelivering(boxes, portsCount, maxBoxes, maxWeight);
+    Logger::WriteMessage(boxes);
+    Logger::WriteMessage("portsCount = " + to_string(portsCount) +
+        "; maxBoxes = " + to_string(maxBoxes) +
+        "; maxWeight = " + to_string(maxWeight) +
+        "result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1687();
+    TestLeetCode1690();
     TestLeetCode1653();
     TestLeetCode1641();
     TestLeetCode1639();

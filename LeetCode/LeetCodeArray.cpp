@@ -14045,4 +14045,133 @@ int LeetCodeArray::minimumMountainRemovals(vector<int>& nums)
     }
     return nums.size() - result;
 }
+
+/// <summary>
+/// Leet code #1691. Maximum Height by Stacking Cuboids
+/// 
+/// Hard
+/// 
+/// Given n cuboids where the dimensions of the ith cuboid is cuboids[i] = 
+/// [widthi, lengthi, heighti] (0-indexed). Choose a subset of cuboids and 
+/// place them on each other.
+///
+/// You can place cuboid i on cuboid j if widthi <= widthj and lengthi <= 
+/// lengthj and heighti <= heightj. You can rearrange any cuboid's dimensions 
+/// by rotating it to put it on another cuboid.
+///
+/// Return the maximum height of the stacked cuboids.
+/// 
+/// Example 1:
+/// Input: cuboids = [[50,45,20],[95,37,53],[45,23,12]]
+/// Output: 190
+/// Explanation:
+/// Cuboid 1 is placed on the bottom with the 53x37 side facing down with 
+/// height 95.
+/// Cuboid 0 is placed next with the 45x20 side facing down with height 50.
+/// Cuboid 2 is placed next with the 23x12 side facing down with height 45.
+/// The total height is 95 + 50 + 45 = 190.
+///
+/// Example 2:
+/// Input: cuboids = [[38,25,45],[76,35,3]]
+/// Output: 76
+/// Explanation:
+/// You can't place any of the cuboids on the other.
+/// We choose cuboid 1 and rotate it so that the 35x3 side is facing down 
+/// and its height is 76.
+///
+/// Example 3:
+/// Input: cuboids = [[7,11,17],[7,17,11],[11,7,17],[11,17,7],
+/// [17,7,11],[17,11,7]]
+/// Output: 102
+/// Explanation:
+/// After rearranging the cuboids, you can see that all cuboids have the 
+/// same dimension.
+/// You can place the 11x7 side down on all cuboids so their heights are 17.
+/// The maximum height of stacked cuboids is 6 * 17 = 102.
+///
+/// Constraints:
+/// 1. n == cuboids.length
+/// 2. 1 <= n <= 100
+/// 3. 1 <= widthi, lengthi, heighti <= 100
+/// </summary>
+int LeetCodeArray::maxHeight(vector<vector<int>>& cuboids)
+{
+    for (size_t i = 0; i < cuboids.size(); i++)
+    {
+        sort(cuboids[i].begin(), cuboids[i].end());
+    }
+    sort(cuboids.begin(), cuboids.end());
+    vector<int> dp(cuboids.size());
+    int result = 0;
+    for (size_t i = 0; i < cuboids.size(); i++)
+    {
+        for (size_t j = 0; j < i; j++)
+        {
+            if (cuboids[i][0] >= cuboids[j][0] &&
+                cuboids[i][1] >= cuboids[j][1] &&
+                cuboids[i][2] >= cuboids[j][2])
+            {
+                dp[i] = max(dp[i], dp[j]);
+            }
+        }
+        dp[i] += cuboids[i][2];
+        result = max(result, dp[i]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1685. Sum of Absolute Differences in a Sorted Array
+/// 
+/// Medium
+/// 
+/// You are given an integer array nums sorted in non-decreasing order.
+///
+/// Build and return an integer array result with the same length as nums 
+/// such that result[i] is equal to the summation of absolute differences 
+/// between nums[i] and all the other elements in the array.
+///
+/// In other words, result[i] is equal to sum(|nums[i]-nums[j]|) where 
+/// 0 <= j < nums.length and j != i (0-indexed).
+/// 
+/// Example 1:
+///
+/// Input: nums = [2,3,5]
+/// Output: [4,3,5]
+/// Explanation: Assuming the arrays are 0-indexed, then
+/// result[0] = |2-2| + |2-3| + |2-5| = 0 + 1 + 3 = 4,
+/// result[1] = |3-2| + |3-3| + |3-5| = 1 + 0 + 2 = 3,
+/// result[2] = |5-2| + |5-3| + |5-5| = 3 + 2 + 0 = 5.
+///
+/// Example 2:
+/// Input: nums = [1,4,6,8,10]
+/// Output: [24,15,13,15,21]
+/// Constraints:
+/// 1. 2 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= nums[i + 1] <= 10^4
+/// </summary>
+vector<int> LeetCodeArray::getSumAbsoluteDifferences(vector<int>& nums)
+{
+    vector<int> result(nums.size());
+    int left_count = 0;
+    int right_count = 0;
+    int left_sum = 0;
+    int right_sum = 0;
+    for (size_t i = 1; i < nums.size(); i++)
+    {
+        left_count++;
+        left_sum += left_count * (nums[i] - nums[i - 1]);
+    }
+    result[nums.size() - 1] = left_sum + right_sum;
+
+    for (int i = (int)nums.size() - 2; i >= 0; i--)
+    {
+        left_sum -= left_count * (nums[i + 1] - nums[i]);
+        left_count--;
+        right_count++;
+        right_sum += right_count * (nums[i + 1] - nums[i]);
+        result[i] = left_sum + right_sum;
+    }
+    return result;
+}
 #pragma endregion

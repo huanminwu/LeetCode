@@ -3456,8 +3456,40 @@ void TestLeetCode1680(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1688(void)
+{
+    Logger::WriteMessage("Test Leet Code 1688");
+    LeetCodeMath leetCode;
+    int n = 7;
+    int result = leetCode.numberOfMatches(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 14;
+    result = leetCode.numberOfMatches(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1689(void)
+{
+    Logger::WriteMessage("Test Leet Code 1689");
+    LeetCodeMath leetCode;
+    string n = "32";
+    int result = leetCode.minPartitions(n);
+    Logger::WriteMessage("n = " + n + "; result = " + to_string(result));
+
+    n = "82734";
+    result = leetCode.minPartitions(n);
+    Logger::WriteMessage("n = " + n + "; result = " + to_string(result));
+
+    n = "27346209830709182346";
+    result = leetCode.minPartitions(n);
+    Logger::WriteMessage("n = " + n + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1689();
+    TestLeetCode1688();
     TestLeetCode1680();
     TestLeetCode1674();
     TestLeetCode1663();
