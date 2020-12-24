@@ -14174,4 +14174,113 @@ vector<int> LeetCodeArray::getSumAbsoluteDifferences(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1695. Maximum Erasure Value
+/// 
+/// Medium
+/// 
+/// You are given an array of positive integers nums and want to erase a 
+/// subarray containing unique elements. The score you get by erasing 
+/// the subarray is equal to the sum of its elements.
+///
+/// Return the maximum score you can get by erasing exactly one subarray.
+///
+/// An array b is called to be a subarray of a if it forms a contiguous 
+/// subsequence of a, that is, if it is equal to a[l],a[l+1],...,a[r] 
+/// for some (l,r).
+/// 
+/// Example 1:
+/// Input: nums = [4,2,4,5,6]
+/// Output: 17
+/// Explanation: The optimal subarray here is [2,4,5,6].
+///
+/// Example 2:
+/// Input: nums = [5,2,1,2,5,2,1,2,5]
+/// Output: 8
+/// Explanation: The optimal subarray here is [5,2,1] or [1,2,5].
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^4
+/// </summary>
+int LeetCodeArray::maximumUniqueSubarray(vector<int>& nums)
+{
+    vector<int> num_map(10001);
+    int prev = -1;
+    int sum = 0;
+    int result = INT_MIN;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        num_map[nums[i]]++;
+        sum += nums[i];
+        while (num_map[nums[i]] == 2)           
+        {
+            prev++;
+            sum -= nums[prev];
+            num_map[nums[prev]]--;
+        }
+        result = max(result, sum);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1696. Jump Game VI
+/// 
+/// Medium
+/// 
+/// You are given a 0-indexed integer array nums and an integer k.
+///
+/// You are initially standing at index 0. In one move, you can jump at 
+/// most k steps forward without going outside the boundaries of the 
+/// array. That is, you can jump from index i to any index in the 
+/// range [i + 1, min(n - 1, i + k)] inclusive.
+///
+/// You want to reach the last index of the array (index n - 1). Your 
+/// score is the sum of all nums[j] for each index j you visited in the 
+/// array.
+///
+/// Return the maximum score you can get.
+/// 
+/// Example 1:
+/// Input: nums = [1,-1,-2,4,-7,3], k = 2
+/// Output: 7
+/// Explanation: You can choose your jumps forming the subsequence 
+/// [1,-1,4,3] (underlined above). The sum is 7.
+///
+/// Example 2:
+/// Input: nums = [10,-5,-2,4,0,3], k = 3
+/// Output: 17
+/// Explanation: You can choose your jumps forming the subsequence 
+/// [10,4,3] (underlined above). The sum is 17.
+///
+/// Example 3:
+/// Input: nums = [1,-5,-20,4,-1,3,-6,-3], k = 2
+/// Output: 0
+///
+/// Constraints:
+/// 1. 1 <= nums.length, k <= 10^5
+/// 2. -10^4 <= nums[i] <= 10^4
+/// </summary>
+int LeetCodeArray::maxResult(vector<int>& nums, int k)
+{
+    deque<pair<int, int>> dp;
+    int n = nums.size();
+    for (int i = 0; i < n; i++)
+    {
+        if (dp.empty()) dp.push_back(make_pair(nums[i], i));
+        else
+        {
+            if (i - dp.front().second > k) dp.pop_front();
+            int sum = dp.front().first + nums[i];
+            while (!dp.empty() && sum > dp.back().first)
+            {
+                dp.pop_back();
+            }
+            dp.push_back(make_pair(sum, i));
+        }
+    }
+    return dp.back().first;
+}
 #pragma endregion

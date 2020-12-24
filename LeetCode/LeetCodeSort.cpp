@@ -284,7 +284,8 @@ string LeetCode::largestNumber(vector<int>& nums)
 /// Example 3:
 /// Input: [-1, 3, 2, 0]
 /// Output: True
-/// Explanation: There are three 132 patterns in the sequence: [-1, 3, 2], [-1, 3, 0] and [-1, 2, 0].
+/// Explanation: There are three 132 patterns in the 
+/// sequence: [-1, 3, 2], [-1, 3, 0] and [-1, 2, 0].
 /// </summary>
 bool LeetCodeSort::find132pattern(vector<int>& nums)
 {
@@ -718,25 +719,43 @@ void LeetCode::wiggleSort(vector<int>& nums)
 }
 
 /// <summary>
-/// Leet code #334. Increasing Triplet Subsequence  
+/// Leet code #334. Increasing Triplet Subsequence
 /// 
-/// Given an unsorted array return whether an increasing subsequence of length 3 exists or not in the array. 
-/// Formally the function should:
-/// Return true if there exists i, j, k  
-/// such that arr[i] < arr[j] < arr[k] given 0 ≤ i < j < k ≤ n-1 else return false. 
-/// Your algorithm should run in O(n) time complexity and O(1) space complexity. 
-/// Examples:
-/// Given [1, 2, 3, 4, 5],
-///  return true.
-/// Given [5, 4, 3, 2, 1],
-/// return false. 
+/// Medium
+/// 
+/// Given an integer array nums, return true if there exists a triple of 
+/// indices (i, j, k) such that i < j < k and nums[i] < nums[j] < nums[k]. 
+/// If no such indices exists, return false.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,3,4,5]
+/// Output: true
+/// Explanation: Any triplet where i < j < k is valid.
+///
+/// Example 2:
+/// Input: nums = [5,4,3,2,1]
+/// Output: false
+/// Explanation: No triplet exists.
+///
+/// Example 3:
+/// Input: nums = [2,1,5,0,4,6]
+/// Output: true
+/// Explanation: The triplet (3, 4, 5) is valid 
+/// because nums[3] == 0 < nums[4] == 4 < nums[5] == 6.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. -2^31 <= nums[i] <= 2^31 - 1
+///
+/// Follow up: Could you implement a solution that runs in O(n) 
+/// time complexity and O(1) space complexity?
 /// </summary>
-bool LeetCode::increasingTriplet(vector<int>& nums)
+bool LeetCodeSort::increasingTriplet(vector<int>& nums)
 {
     vector<int> result;
     for (size_t i = 0; i < nums.size(); i++)
     {
-        vector<int>::iterator itr = lower_bound(result.begin(), result.end(), nums[i]);
+        auto itr = lower_bound(result.begin(), result.end(), nums[i]);
         if (itr == result.end()) result.push_back(nums[i]);
         else *itr = nums[i];
         if (result.size() == 3) return true;

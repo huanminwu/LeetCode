@@ -3126,8 +3126,42 @@ void TestLeetCode1654(void)
     Logger::WriteMessage("a = " + to_string(result) + "; b = " + to_string(b) + "; x = " + to_string(x) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1697(void)
+{
+    Logger::WriteMessage("Test Leet Code 1697");
+    LeetCodeGraph leetCode;
+    int n = 3;
+    vector<vector<int>> edgeList = 
+    {
+        {0, 1, 2},{1, 2, 4},{2, 0, 8},{1, 0, 16} 
+    };
+    vector<vector<int>> queries =
+    {
+        {0, 1, 2},{0, 2, 5}
+    };
+    vector<bool> result = leetCode.distanceLimitedPathsExist(n, edgeList, queries);
+    Logger::WriteMessage(edgeList);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 5;
+    edgeList =
+    {
+        {0, 1, 10}, { 1, 2, 5 }, { 2, 3, 9 }, { 3, 4, 13 }
+    };
+    queries =
+    {
+        {0, 4, 14},{1, 4, 13}
+    };
+    result = leetCode.distanceLimitedPathsExist(n, edgeList, queries);
+    Logger::WriteMessage(edgeList);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1697();
     TestLeetCode1654();
     TestLeetCode1631();
     TestLeetCode1627();

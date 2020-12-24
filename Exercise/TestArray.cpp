@@ -4963,8 +4963,48 @@ void TestLeetCode1685(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1695(void)
+{
+    Logger::WriteMessage("Test Leet Code 1695");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 4,2,4,5,6 };
+    int result = leetCode.maximumUniqueSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,2,1,2,5,2,1,2,5 };
+    result = leetCode.maximumUniqueSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1696(void)
+{
+    Logger::WriteMessage("Test Leet Code 1696");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, -1, -2, 4, -7, 3 };
+    int k = 2;
+    int result = leetCode.maxResult(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 10,-5,-2,4,0,3 };
+    k = 3;
+    result = leetCode.maxResult(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,-5,-20,4,-1,3,-6,-3 };
+    k = 2;
+    result = leetCode.maxResult(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1696();
+    TestLeetCode1695();
     TestLeetCode1685();
     TestLeetCode1691();
     TestLeetCode1424();

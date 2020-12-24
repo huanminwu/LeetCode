@@ -792,7 +792,7 @@ int LeetCodeGreedy::findPoisonedDuration(vector<int>& timeSeries, int duration)
 /// wall is in range [1,10,000]. Total number of bricks of the wall won't 
 /// exceed 20,000. 
 /// </summary>
-int LeetCode::leastBricks(vector<vector<int>>& wall)
+int LeetCodeGreedy::leastBricks(vector<vector<int>>& wall)
 {
     unordered_map<int, int> align_map;
     for (size_t i = 0; i < wall.size(); i++)
@@ -854,7 +854,7 @@ int LeetCode::leastBricks(vector<vector<int>>& wall)
 /// The range of a is [1,m], and the range of b is [1,n].
 /// The range of operations size won't exceed 10,000.
 /// </summary>
-int LeetCode::maxCount(int m, int n, vector<vector<int>>& ops)
+int LeetCodeGreedy::maxCount(int m, int n, vector<vector<int>>& ops)
 {
     pair<int, int> result = make_pair(m, n);
     for (auto &range : ops)
@@ -888,7 +888,7 @@ int LeetCode::maxCount(int m, int n, vector<vector<int>>& ops)
 /// 1.The number of tasks is in the range [1, 10000].
 /// 2.The integer n is in the range [0, 100].
 /// </summary>
-int LeetCode::leastInterval(vector<char>& tasks, int n)
+int LeetCodeGreedy::leastInterval(vector<char>& tasks, int n)
 {
     int result = 0;
     unordered_map<char, int> task_count;
@@ -1006,7 +1006,7 @@ int LeetCodeGreedy::scheduleCourse(vector<vector<int>>& courses)
 /// Note:
 /// The number of given pairs will be in the range [1, 1000].
 /// </summary>
-int LeetCode::findLongestChain(vector<vector<int>>& pairs)
+int LeetCodeGreedy::findLongestChain(vector<vector<int>>& pairs)
 {
     map<int, vector<int>> schedule_map;
     for (size_t i = 0; i < pairs.size(); i++)
@@ -1164,67 +1164,45 @@ vector<int> LeetCodeGreedy::fallingSquares(vector<vector<int>>& positions)
 /// 2. intervals[i] will have length 2, representing some integer interval.
 /// 3. intervals[i][j] will be an integer in [0, 10^8].
 /// </summary>
-int LeetCode::intersectionSizeTwo(vector<vector<int>>& intervals)
+int LeetCodeGreedy::intersectionSizeTwo(vector<vector<int>>& intervals)
 {
-    int result = 0;
-    sort(intervals.begin(), intervals.end());
-    vector<vector<int>> no_contain_intervals;
-    // remove containers
     for (size_t i = 0; i < intervals.size(); i++)
     {
-        if (no_contain_intervals.empty())
+        swap(intervals[i][0], intervals[i][1]);
+        intervals[i][1] = 0 - intervals[i][1];
+    }
+    sort(intervals.begin(), intervals.end());
+    for (size_t i = 0; i < intervals.size(); i++)
+    {
+        intervals[i][1] = 0 - intervals[i][1];
+        swap(intervals[i][0], intervals[i][1]);
+    }
+    vector<int> points;
+    for (size_t i = 0; i < intervals.size(); i++)
+    {
+        if (points.empty())
         {
-            no_contain_intervals.push_back(intervals[i]);
+            points.push_back(intervals[i][1] - 1);
+            points.push_back(intervals[i][1]);
         }
         else
         {
-            vector<int> last_interval = no_contain_intervals.back();
-            if ((last_interval[0] <= intervals[i][0]) && (last_interval[1] >= intervals[i][1]))
-            {
-                no_contain_intervals.pop_back();
-                i--;
-            }
-            else if ((last_interval[0] >= intervals[i][0]) && (last_interval[1] <= intervals[i][1]))
+            if (intervals[i][0] <= points[points.size() - 2])
             {
                 continue;
             }
+            else if (intervals[i][0] <= points[points.size() - 1])
+            {
+                points.push_back(intervals[i][1]);
+            }
             else
             {
-                no_contain_intervals.push_back(intervals[i]);
+                points.push_back(intervals[i][1] - 1);
+                points.push_back(intervals[i][1]);
             }
         }
     }
-
-    // harvest numbers
-    vector<int> last_interval(2);
-    for (size_t i = 0; i < no_contain_intervals.size(); i++)
-    {
-        if (i == 0)
-        {
-            result += 2;
-            last_interval[0] = no_contain_intervals[i][1] - 1;
-            last_interval[1] = no_contain_intervals[i][1];
-        }
-        else
-        {
-            // no overlap
-            if (last_interval[1] < no_contain_intervals[i][0])
-            {
-                result += 2;
-                last_interval[0] = no_contain_intervals[i][1] - 1;
-                last_interval[1] = no_contain_intervals[i][1];
-            }
-            // next overlap current
-            else if (last_interval[0] < no_contain_intervals[i][0])
-            {
-                result += 1;
-                last_interval[0] = last_interval[1];
-                last_interval[1] = no_contain_intervals[i][1];
-            }
-        }
-    }
-
-    return result;
+    return points.size();
 }
 
 
@@ -1262,7 +1240,7 @@ int LeetCode::intersectionSizeTwo(vector<vector<int>>& intervals)
 /// 1. schedule and schedule[i] are lists with lengths in range [1, 50].
 /// 2. 0 <= schedule[i].start < schedule[i].end <= 10^8.
 /// </summary>
-vector<Interval> LeetCode::employeeFreeTime(vector<vector<Interval>>& schedule)
+vector<Interval> LeetCodeGreedy::employeeFreeTime(vector<vector<Interval>>& schedule)
 {
     vector<Interval> result;
     map<int, int> time_map;
@@ -1321,7 +1299,7 @@ vector<Interval> LeetCode::employeeFreeTime(vector<vector<Interval>>& schedule)
 /// The total area covered by all rectangles will never exceed 2^63 - 1 and 
 /// thus will fit in a 64-bit signed integer.
 /// </summary>
-int LeetCode::rectangleArea(vector<vector<int>>& rectangles)
+int LeetCodeGreedy::rectangleArea(vector<vector<int>>& rectangles)
 {
     int mod = 1000000007;
     unsigned long long result = 0;
@@ -1391,7 +1369,7 @@ int LeetCode::rectangleArea(vector<vector<int>>& rectangles)
 /// 2. 0 <= tokens[i] < 10000
 /// 3. 0 <= P < 10000
 /// </summary>
-int LeetCode::bagOfTokensScore(vector<int>& tokens, int P)
+int LeetCodeGreedy::bagOfTokensScore(vector<int>& tokens, int P)
 {
     int result = 0;
     int points = 0;
@@ -1445,7 +1423,7 @@ int LeetCode::bagOfTokensScore(vector<int>& tokens, int P)
 /// 2. 0 <= B <= 100
 /// 3. It is guaranteed such an S exists for the given A and B.
 /// </summary>
-string LeetCode::strWithout3a3b(int A, int B)
+string LeetCodeGreedy::strWithout3a3b(int A, int B)
 {
     int state = A > B ? 0 : 1;
     string result;
@@ -1508,7 +1486,7 @@ string LeetCode::strWithout3a3b(int A, int B)
 /// 2. 0 <= B.length < 1000
 /// 3. 0 <= A[i].start, A[i].end, B[i].start, B[i].end < 10^9
 /// </summary>
-vector<Interval> LeetCode::intervalIntersection(vector<Interval>& A, vector<Interval>& B)
+vector<Interval> LeetCodeGreedy::intervalIntersection(vector<Interval>& A, vector<Interval>& B)
 {
     int i = 0, j = 0;
     vector<Interval> result;
@@ -1598,7 +1576,7 @@ vector<Interval> LeetCode::intervalIntersection(vector<Interval>& A, vector<Inte
 /// 2. 0 <= clips[i][0], clips[i][1] <= 100
 /// 3. 0 <= T <= 100
 /// </summary>
-int LeetCode::videoStitching(vector<vector<int>>& clips, int T)
+int LeetCodeGreedy::videoStitching(vector<vector<int>>& clips, int T)
 {
     int result = 0;
     pair<int, int> all_clip = { 0, 0 };
@@ -1666,7 +1644,7 @@ int LeetCode::videoStitching(vector<vector<int>>& clips, int T)
 /// 1. 1 <= barcodes.length <= 10000
 /// 2. 1 <= barcodes[i] <= 10000
 /// </summary>
-vector<int> LeetCode::rearrangeBarcodes(vector<int>& barcodes)
+vector<int> LeetCodeGreedy::rearrangeBarcodes(vector<int>& barcodes)
 {
     priority_queue<pair<int, int>> code_heap;
     unordered_map<int, int> code_count;
@@ -1743,7 +1721,7 @@ vector<int> LeetCode::rearrangeBarcodes(vector<int>& barcodes)
 /// 4. 0 <= trips[i][1] < trips[i][2] <= 1000
 /// 5. 1 <= capacity <= 100000
 /// </summary>
-bool LeetCode::carPooling(vector<vector<int>>& trips, int capacity)
+bool LeetCodeGreedy::carPooling(vector<vector<int>>& trips, int capacity)
 {
     map<int, int> stops;
     for (size_t i = 0; i < trips.size(); i++)
@@ -1781,7 +1759,7 @@ bool LeetCode::carPooling(vector<vector<int>>& trips, int capacity)
 /// 2. 1 <= bookings[i][0] <= bookings[i][1] <= n <= 20000
 /// 3. 1 <= bookings[i][2] <= 10000
 /// </summary>
-vector<int> LeetCode::corpFlightBookings(vector<vector<int>>& bookings, int n)
+vector<int> LeetCodeGreedy::corpFlightBookings(vector<vector<int>>& bookings, int n)
 {
     vector<int> result(n);
     for (size_t i = 0; i < bookings.size(); i++)
@@ -1892,7 +1870,7 @@ string LeetCodeGreedy::rearrangeString(string s, int k)
 /// If the requirement is to generate a job list, just output the last job
 /// index by sequence.        
 /// </followup>
-int LeetCode::arrangeOperations(vector<vector<int>> operations)
+int LeetCodeGreedy::arrangeOperations(vector<vector<int>> operations)
 {
     int result = 0;
     vector<pair<int, int>> resources(operations[0].size() - 1, {0, 0});
@@ -3037,6 +3015,74 @@ int LeetCodeGreedy::furthestBuilding(vector<int>& heights, int bricks, int ladde
             }
             result++;
         }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1674. Minimum Moves to Make Array Complementary
+/// 
+/// Medium
+/// 
+/// You are given an integer array nums of even length n and an integer 
+/// limit. In one move, you can replace any integer from nums with another 
+/// integer between 1 and limit, inclusive.
+///
+/// The array nums is complementary if for all indices i (0-indexed), 
+/// nums[i] + nums[n - 1 - i] equals the same number. For example, the 
+/// array [1,2,3,4] is complementary because for all indices i, nums[i] + 
+/// nums[n - 1 - i] = 5.
+///
+/// Return the minimum number of moves required to make nums complementary.
+///
+/// Example 1:
+/// Input: nums = [1,2,4,3], limit = 4
+/// Output: 1
+/// Explanation: In 1 move, you can change nums to [1,2,2,3] (underlined 
+/// elements are changed).
+/// nums[0] + nums[3] = 1 + 3 = 4.
+/// nums[1] + nums[2] = 2 + 2 = 4.
+/// nums[2] + nums[1] = 2 + 2 = 4.
+/// nums[3] + nums[0] = 3 + 1 = 4.
+/// Therefore, nums[i] + nums[n-1-i] = 4 for every i, so nums is complementary.
+///
+/// Example 2:
+/// Input: nums = [1,2,2,1], limit = 2
+/// Output: 2
+/// Explanation: In 2 moves, you can change nums to [2,2,2,2]. You cannot 
+/// change any number to 3 since 3 > limit.
+///
+/// Example 3:
+/// Input: nums = [1,2,1,2], limit = 2
+/// Output: 0
+/// Explanation: nums is already complementary.
+/// Constraints:
+/// 1. n == nums.length
+/// 2. 2 <= n <= 10^5
+/// 3. 1 <= nums[i] <= limit <= 10^5
+/// 4. n is even.
+/// </summary>
+int LeetCodeGreedy::minMoves(vector<int>& nums, int limit)
+{
+    int n = nums.size();
+    map<int, int> sweep;
+
+    for (int i = 0; i < n / 2; i++)
+    {
+        sweep[2] += 2;
+        int min_val = min(nums[i], nums[n - i - 1]);
+        int max_val = max(nums[i], nums[n - i - 1]);
+        sweep[min_val + 1]--;
+        sweep[min_val + max_val]--;
+        sweep[min_val + max_val + 1]++;
+        sweep[max_val + limit + 1]++;
+    }
+    int result = INT_MAX;
+    int sum = 0;
+    for (auto itr : sweep)
+    {
+        sum += itr.second;
+        result = min(result, sum);
     }
     return result;
 }

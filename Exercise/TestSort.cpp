@@ -1092,8 +1092,24 @@ void TestLeetCode1686(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode334(void)
+{
+    Logger::WriteMessage("Test Leet Code 334");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5 };
+    bool result = leetCode.increasingTriplet(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("It" + (string)(result ? " is " : "  is not ") + "increasing triple");
+
+    nums = { 5, 4, 3, 2, 1 };
+    result = leetCode.increasingTriplet(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("It" + (string)(result ? " is " : "  is not ") + "increasing triple");
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode334();
     TestLeetCode1686();
     TestLeetCode1675();
     TestLeetCode1649();

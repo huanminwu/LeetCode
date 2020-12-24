@@ -104,6 +104,16 @@ void TestLeetCode495(void)
     Logger::WriteMessage("Duration = " + to_string(duration) + "; Total Time =" + to_string(total_time));
 }
 
+void TestLeetCode598(void)
+{
+    LeetCodeGreedy leetCode;
+    int m = 3, n = 3;
+    vector<vector<int>> ops = { { 2, 2 },{ 3, 3 } };
+    int result = leetCode.maxCount(m, n, ops);
+
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCode826(void)
 {
     Logger::WriteMessage("Test Leet Code 826");
@@ -716,8 +726,281 @@ void TestLeetCode630(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode554(void)
+{
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> wall = { { 1, 2, 2, 1 },{ 3, 1, 2 },{ 1, 3, 2 },{ 2, 4 },{ 3, 1, 2 },{ 1, 3, 1, 1 } };
+    int min_bricks = leetCode.leastBricks(wall);
+    Logger::WriteMessage(wall);
+    Logger::WriteMessage("Least Bricks = " + to_string(min_bricks));
+}
+
+void TestLeetCode621(void)
+{
+    LeetCodeGreedy leetCode;
+    vector<char> tasks = { 'A', 'A', 'A', 'B', 'B', 'B' };
+    int n = 2;
+    int result = leetCode.leastInterval(tasks, n);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1109(void)
+{
+    Logger::WriteMessage("Test Leet Code 1109");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> bookings = { {1, 2, 10},{2, 3, 20},{2, 5, 25} };
+    int n = 5;
+    vector<int> result = leetCode.corpFlightBookings(bookings, n);
+    Logger::WriteMessage(bookings);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1094(void)
+{
+    Logger::WriteMessage("Test Leet Code 1094");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> trips = { {2, 1, 5},{3, 3, 7} };
+    int capacity = 4;
+    bool result = leetCode.carPooling(trips, capacity);
+    Logger::WriteMessage(trips);
+    Logger::WriteMessage("capacity = " + to_string(capacity) + "; result = " + (string)(result ? "true" : "false"));
+
+    trips = { {2, 1, 5},{3, 3, 7} };
+    capacity = 5;
+    result = leetCode.carPooling(trips, capacity);
+    Logger::WriteMessage(trips);
+    Logger::WriteMessage("capacity = " + to_string(capacity) + "; result = " + (string)(result ? "true" : "false"));
+
+    trips = { {2, 1, 5},{3, 5, 7} };
+    capacity = 3;
+    result = leetCode.carPooling(trips, capacity);
+    Logger::WriteMessage(trips);
+    Logger::WriteMessage("capacity = " + to_string(capacity) + "; result = " + (string)(result ? "true" : "false"));
+
+    trips = { {3, 2, 7},{3, 7, 9},{8, 3, 9} };
+    capacity = 11;
+    result = leetCode.carPooling(trips, capacity);
+    Logger::WriteMessage(trips);
+    Logger::WriteMessage("capacity = " + to_string(capacity) + "; result = " + (string)(result ? "true" : "false"));
+}
+
+
+void TestLeetCode1054(void)
+{
+    Logger::WriteMessage("Test Leet Code 1054");
+    LeetCodeGreedy leetCode;
+    vector<int> barcodes = { 1,1,1,1,2,2,3,3 };
+    vector<int> result = leetCode.rearrangeBarcodes(barcodes);
+    Logger::WriteMessage(barcodes);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode948(void)
+{
+    Logger::WriteMessage("Test Leet Code 948");
+    LeetCodeGreedy leetCode;
+    vector<int> tokens = { 100 };
+    int P = 50;
+    int result = leetCode.bagOfTokensScore(tokens, P);
+    Logger::WriteMessage(tokens);
+    Logger::WriteMessage("P = " + to_string(P) + "; result = " + to_string(result));
+
+    tokens = { 100,200 };
+    P = 150;
+    result = leetCode.bagOfTokensScore(tokens, P);
+    Logger::WriteMessage(tokens);
+    Logger::WriteMessage("P = " + to_string(P) + "; result = " + to_string(result));
+
+    tokens = { 100,200,300,400 };
+    P = 200;
+    result = leetCode.bagOfTokensScore(tokens, P);
+    Logger::WriteMessage(tokens);
+    Logger::WriteMessage("P = " + to_string(P) + "; result = " + to_string(result));
+}
+
+void TestLeetCode759(void)
+{
+    Logger::WriteMessage("Test Leet Code 759");
+    LeetCodeGreedy leetCode;
+    vector<vector<Interval>> schedule = { {{1, 2}, {5, 6}},{{1, 3}},{{4, 10}} };
+    vector<Interval> result = leetCode.employeeFreeTime(schedule);
+    Logger::WriteMessage(schedule);
+    Logger::WriteMessage(result);
+
+    schedule = { {{1, 3},{6, 7}},{{2, 4}},{{2, 5},{9, 12}} };
+    result = leetCode.employeeFreeTime(schedule);
+    Logger::WriteMessage(schedule);
+    Logger::WriteMessage(result);
+}
+
+
+void TestLeetCode646(void)
+{
+    LeetCodeGreedy leetCode;
+
+    // Test Leet Code #646 
+    Logger::WriteMessage("Test Leet Code 646");
+    vector<vector<int>> nums = { {1, 2},{2, 3},{3, 4} };
+    int result = leetCode.findLongestChain(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode986(void)
+{
+    Logger::WriteMessage("Test Leet Code 986");
+    LeetCodeGreedy leetCode;
+    vector<Interval> A = { {0, 2},{5, 10},{13, 23},{24, 25} };
+    vector<Interval> B = { {1, 5},{8, 12},{15, 24},{25, 26} };
+    vector<Interval> result = leetCode.intervalIntersection(A, B);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(B);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode850(void)
+{
+    Logger::WriteMessage("Test Leet Code 850");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> rectangles = { {0, 0, 2, 2},{1, 0, 2, 3},{1, 0, 3, 1} };
+    int result = leetCode.rectangleArea(rectangles);
+    Logger::WriteMessage(rectangles);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    rectangles = { {0, 0, 1000000000, 1000000000} };
+    result = leetCode.rectangleArea(rectangles);
+    Logger::WriteMessage(rectangles);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode984(void)
+{
+    Logger::WriteMessage("Test Leet Code 984");
+    LeetCodeGreedy leetCode;
+    int A = 1;
+    int B = 2;
+    string result = leetCode.strWithout3a3b(A, B);
+    Logger::WriteMessage("A = " + to_string(A) + "; B = " + to_string(B) + "; result = " + result);
+
+    A = 4;
+    B = 1;
+    result = leetCode.strWithout3a3b(A, B);
+    Logger::WriteMessage("A = " + to_string(A) + "; B = " + to_string(B) + "; result = " + result);
+}
+
+void TestLeetCode1024(void)
+{
+    Logger::WriteMessage("Test Leet Code 1024");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> clips = { {0, 2}, {4, 6}, {8, 10}, {1, 9}, {1, 5}, {5, 9} };
+    int T = 10;
+    int result = leetCode.videoStitching(clips, T);
+    Logger::WriteMessage(clips);
+    Logger::WriteMessage("T = " + to_string(T) + "; result = " + to_string(result));
+
+    clips = { {0, 1},{1, 2} };
+    T = 5;
+    result = leetCode.videoStitching(clips, T);
+    Logger::WriteMessage(clips);
+    Logger::WriteMessage("T = " + to_string(T) + "; result = " + to_string(result));
+
+    clips =
+    {
+        {0, 1}, {6, 8}, {0, 2}, {5, 6}, {0, 4}, {0, 3}, {6, 7}, {1, 3},
+        {4, 7}, {1, 4}, {2, 5}, {2, 6}, {3, 4}, {4, 5}, {5, 7}, {6, 9}
+    };
+    T = 9;
+    result = leetCode.videoStitching(clips, T);
+    Logger::WriteMessage(clips);
+    Logger::WriteMessage("T = " + to_string(T) + "; result = " + to_string(result));
+
+    clips = { {0, 4}, {2, 8} };
+    T = 5;
+    result = leetCode.videoStitching(clips, T);
+    Logger::WriteMessage(clips);
+    Logger::WriteMessage("T = " + to_string(T) + "; result = " + to_string(result));
+
+    clips = { {5, 7}, {1, 8}, {0, 0}, {2, 3}, {4, 5}, {0, 6}, {5, 10}, {7, 10} };
+    T = 5;
+    result = leetCode.videoStitching(clips, T);
+    Logger::WriteMessage(clips);
+    Logger::WriteMessage("T = " + to_string(T) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1674(void)
+{
+    Logger::WriteMessage("Test Leet Code 1674");
+    LeetCodeGreedy leetCode;
+    vector<int> nums = { 1, 2, 4, 3 };
+    int limit = 4;
+    int result = leetCode.minMoves(nums, limit);
+    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
+
+    nums = { 1,2,2,1 };
+    limit = 2;
+    result = leetCode.minMoves(nums, limit);
+    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
+
+    nums = { 1,2,1,2 };
+    limit = 2;
+    result = leetCode.minMoves(nums, 4);
+    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
+}
+
+void TestLeetCode757(void)
+{
+    Logger::WriteMessage("Test Leet Code 757");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> intervals = { {1, 3},{1, 4},{2, 5},{3, 5} };
+    int result = leetCode.intersectionSizeTwo(intervals);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    intervals = { {1, 2},{2, 3},{2, 4},{4, 5} };
+    result = leetCode.intersectionSizeTwo(intervals);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    intervals = { { 7, 16 },{ 3, 12 },{ 7, 16 },{ 2, 15 }, { 14, 19 } };
+    result = leetCode.intersectionSizeTwo(intervals);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage("result = " + to_string(result));
+
+
+    intervals = { { 33, 44 },{ 42,43 },{ 13,37 },{ 24,33 },{ 24,33 },{ 25,48 },{ 10,47 },{ 18,24 },{ 29,37 },{ 7,34 } };
+    result = leetCode.intersectionSizeTwo(intervals);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    intervals =
+    {
+        { 3, 14 },{ 4,14 },{ 3,9 },{ 5,13 },{ 10,17 },{ 8,20 },{ 7,12 },{ 15,19 },{ 11,17 },{ 6,18 },
+        { 16,20 }, { 2,18 },{ 3,5 }, { 15,18 },{ 9,12 },{ 3,14 },{ 10,15 },{ 1,13 },{ 8,10 },{ 0,20 }
+    };
+    result = leetCode.intersectionSizeTwo(intervals);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode757();
+    TestLeetCode1674();
+    TestLeetCode1024();
+    TestLeetCode850();
+    TestLeetCode986();
+    TestLeetCode646();
+    TestLeetCode759();
+    TestLeetCode948();
+    TestLeetCode621();
+    TestLeetCode1054();
+    TestLeetCode1094();
+    TestLeetCode1109();
+    TestLeetCode598();
+    TestLeetCode554();
     TestLeetCode630();
     TestLeetCode502();
     TestLeetCode699();

@@ -2170,8 +2170,41 @@ void TestLeetCode1687(void)
         "result = " + to_string(result));
 }
 
+void TestLeetCode1105(void)
+{
+    Logger::WriteMessage("Test Leet Code 1105");
+    LeetCodeDP leetCode;
+    vector<vector<int>> books =
+    {
+        {1,1},{2,3},{2,3},{1,1},{1,1},{1,1},{1,2}
+    };
+    int shelf_width = 4;
+    int result = leetCode.minHeightShelves(books, shelf_width);
+    Logger::WriteMessage(books);
+    Logger::WriteMessage("shelf_width = " + to_string(shelf_width) + "; result = " + to_string(result));
+
+    books =
+    {
+        {9,9},{5,4},{3,1},{1,5},{7,3}
+    };
+    shelf_width = 10;
+    result = leetCode.minHeightShelves(books, shelf_width);
+    Logger::WriteMessage(books);
+    Logger::WriteMessage("shelf_width = " + to_string(shelf_width) + "; result = " + to_string(result));
+
+    books =
+    {
+        {2, 7} ,{9, 1},{6, 1},{4, 2},{3, 3},{8, 6},{10, 3},{1, 10}
+    };
+    shelf_width = 10;
+    result = leetCode.minHeightShelves(books, shelf_width);
+    Logger::WriteMessage(books);
+    Logger::WriteMessage("shelf_width = " + to_string(shelf_width) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1105();
     TestLeetCode1687();
     TestLeetCode1690();
     TestLeetCode1653();

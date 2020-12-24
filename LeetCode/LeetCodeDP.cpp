@@ -6511,7 +6511,7 @@ string LeetCode::shortestCommonSupersequence(string str1, string str2)
 /// 3. 1 <= books[i][1] <= 1000
 ///
 /// </summary>
-int LeetCode::minHeightShelves(vector<vector<int>>& books, int shelf_width)
+int LeetCodeDP::minHeightShelves(vector<vector<int>>& books, int shelf_width)
 {
     vector<int> dp;
     int result = 0;

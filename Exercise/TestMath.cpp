@@ -3419,26 +3419,6 @@ void TestLeetCode1663(void)
     Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + result);
 }
 
-void TestLeetCode1674(void)
-{
-    Logger::WriteMessage("Test Leet Code 1674");
-    LeetCodeMath leetCode;
-    vector<int> nums = { 1, 2, 4, 3 };
-    int limit = 4;
-    int result = leetCode.minMoves(nums, limit);
-    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
-
-    nums = { 1,2,2,1 };
-    limit = 2;
-    result = leetCode.minMoves(nums, limit);
-    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
-
-    nums = { 1,2,1,2 };
-    limit = 2;
-    result = leetCode.minMoves(nums, 4);
-    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
-}
-
 void TestLeetCode1680(void)
 {
     Logger::WriteMessage("Test Leet Code 1680");
@@ -3491,7 +3471,6 @@ void TestLeetCodeMath(void)
     TestLeetCode1689();
     TestLeetCode1688();
     TestLeetCode1680();
-    TestLeetCode1674();
     TestLeetCode1663();
     TestLeetCode1648();
     TestLeetCode1643();

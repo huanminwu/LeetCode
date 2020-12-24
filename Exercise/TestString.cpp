@@ -3728,8 +3728,34 @@ void TestLeetCode1684(void)
     Logger::WriteMessage("allowed = " + allowed + "; result = " + to_string(result));
 }
 
+void TestLeetCode1694(void)
+{
+    Logger::WriteMessage("Test Leet Code 1694");
+    LeetCodeString leetCode;
+    string number = "1-23-45 6";
+    string result = leetCode.reformatNumber(number);
+    Logger::WriteMessage("number = " + number + "; result = " + result);
+
+    number = "123 4-567";
+    result = leetCode.reformatNumber(number);
+    Logger::WriteMessage("number = " + number + "; result = " + result);
+
+    number = "123 4-5678";
+    result = leetCode.reformatNumber(number);
+    Logger::WriteMessage("number = " + number + "; result = " + result);
+
+    number = "12";
+    result = leetCode.reformatNumber(number);
+    Logger::WriteMessage("number = " + number + "; result = " + result);
+
+    number = "--17-5 229 35-39475 ";
+    result = leetCode.reformatNumber(number);
+    Logger::WriteMessage("number = " + number + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1694();
     TestLeetCode1684();
     TestLeetCode1678();
     TestLeetCode1668();

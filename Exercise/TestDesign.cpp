@@ -3530,11 +3530,32 @@ void TestLeetCode732(void)
     Logger::WriteMessage(result);
 }
 
- 
-
+void TestLeetCode225(void)
+{
+    Logger::WriteMessage("Test Leet Code 225");
+    StackByQueue stackByQueue;
+    string output;
+    stackByQueue.push(1);
+    stackByQueue.push(2);
+    stackByQueue.push(3);
+    output = "push(1), push(2), push(3)";
+    Logger::WriteMessage(output);
+    output = "pop(" + to_string(stackByQueue.top()) + ")";
+    stackByQueue.pop();
+    Logger::WriteMessage(output);
+    output = "pop(" + to_string(stackByQueue.top()) + ")";
+    stackByQueue.pop();
+    Logger::WriteMessage(output);
+    output = "pop(" + to_string(stackByQueue.top()) + ")";
+    stackByQueue.pop();
+    Logger::WriteMessage(output);
+    stackByQueue.empty();
+    Logger::WriteMessage("The stack " + string(stackByQueue.empty() ? "is" : "is not") + " empty");
+}
 
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode225();
     TestLeetCode731();
     TestLeetCode732();
     TestLeetCode715();
