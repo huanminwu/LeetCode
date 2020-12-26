@@ -440,8 +440,40 @@ void TestLeetCode1475(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode496(void)
+{
+    Logger::WriteMessage("Test Leet Code 496");
+    LeetCodeStack leetCode;
+    vector<int> nums1 = { 4, 1, 2 };
+    vector<int> nums2 = { 1, 3, 4, 2 };
+    vector<int> result = leetCode.nextGreaterElement(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(result);
+
+    nums1 = { 2, 4 };
+    nums2 = { 1, 2, 3, 4 };
+    result = leetCode.nextGreaterElement(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(result);
+}
+
+
+void TestLeetCode503(void)
+{
+    Logger::WriteMessage("Test Leet Code 503");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 1, 2, 1 };
+    vector<int> result = leetCode.nextGreaterElements(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode503();
+    TestLeetCode496();
     TestLeetCode1475();
     TestLeetCode1425();
     TestLeetCode739();

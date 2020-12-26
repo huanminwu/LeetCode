@@ -11044,5 +11044,146 @@ int LeetCodeDP::boxDelivering(vector<vector<int>>& boxes, int portsCount, int ma
     }
     return dp[boxes.size() - 1].second;
 }
+
+/// <summary>
+/// Leet code #1692. Count Ways to Distribute Candies
+/// 
+/// Hard
+/// 
+/// There are n unique candies (labeled 1 through n) and k bags. You are 
+/// asked to distribute all the candies into the bags such that every bag 
+/// has at least one candy.
+///
+/// There can be multiple ways to distribute the candies. Two ways are 
+/// considered different if the candies in one bag in the first way are 
+/// not all in the same bag in the second way. The order of the bags and 
+/// the order of the candies within each bag do not matter.
+///
+/// For example, (1), (2,3) and (2), (1,3) are considered different 
+/// because candies 2 and 3 in the bag (2,3) in the first way are not in 
+/// the same bag in the second way (they are split between the bags (2) and 
+/// (1,3)). However, (1), (2,3) and (3,2), (1) are considered the same 
+/// because the candies in each bag are all in the same bags in both ways.
+///
+/// Given two integers, n and k, return the number of different ways to 
+/// distribute the candies. As the answer may be too large, return it 
+/// modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: n = 3, k = 2
+/// Output: 3
+/// Explanation: You can distribute 3 candies into 2 bags in 3 ways:
+/// (1), (2,3)
+/// (1,2), (3)
+/// (1,3), (2)
+///
+/// Example 2:
+/// Input: n = 4, k = 2
+/// Output: 7
+/// Explanation: You can distribute 4 candies into 2 bags in 7 ways:
+/// (1), (2,3,4)
+/// (1,2), (3,4)
+/// (1,3), (2,4)
+/// (1,4), (2,3)
+/// (1,2,3), (4)
+/// (1,2,4), (3)
+/// (1,3,4), (2)
+///
+/// Example 3:
+/// Input: n = 20, k = 5
+/// Output: 206085257
+/// Explanation: You can distribute 20 candies into 5 bags in 
+/// 1881780996 ways. 1881780996 modulo 10^9 + 7 = 206085257.
+/// 
+/// Constraints:
+/// 1. 1 <= k <= n <= 1000
+/// </summary>
+int LeetCodeDP::waysToDistribute(int n, int k)
+{
+    long long M = 1000000007;
+    vector<vector<long long>> dp(n+1, vector<long long>(k+1));
+    for (int j = 1; j <= k; j++)
+    {
+        for (int i = 1; i <= n; i++)
+        {
+            // more bags than candies
+            if (j > i) continue;
+            // only one bag
+            if (j == 1) dp[i][j] = 1;
+            else
+            {
+                // a new candy can be placed in any bag allocated by i - 1 candies
+                dp[i][j] = (dp[i][j] + (dp[i - 1][j] * j) % M) % M;
+                // a new candy can only be placed in a new empty bag
+                dp[i][j] = (dp[i][j] + dp[i - 1][j-1]) % M ;
+            }
+        }
+    }
+    return (int)dp[n][k];
+}
+
+/// <summary>
+/// Leet code #1682. Longest Palindromic Subsequence II
+/// 
+/// Medium
+/// 
+/// A subsequence of a string s is considered a good palindromic 
+/// subsequence if:
+///
+/// It is a subsequence of s.
+/// It is a palindrome (has the same value if reversed).
+/// It has an even length.
+/// No two consecutive characters are equal, except the two middle ones.
+/// For example, if s = "abcabcabb", then "abba" is considered a good 
+/// palindromic subsequence, while "bcb" (not even length) and "bbbb" 
+/// (has equal consecutive characters) are not.
+///
+/// Given a string s, return the length of the longest good palindromic 
+/// subsequence in s.
+///
+/// Example 1:
+/// Input: s = "bbabab"
+/// Output: 4
+/// Explanation: The longest good palindromic subsequence of s is "baab".
+///
+/// Example 2:
+/// Input: s = "dcbccacdb"
+/// Output: 4
+/// Explanation: The longest good palindromic subsequence of s is "dccd".
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 250
+/// 2. s consists of lowercase English letters.
+/// </summary>
+int LeetCodeDP::longestPalindromeSubseqII(string s)
+{
+    int n = s.size();
+    vector<vector<vector<int>>> dp(n, vector<vector<int>>(n, vector<int>(26)));
+    for (int k = 1; k < n; k++)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            if (i + k >= n) break;
+            for (int j = 0; j < 26; j++)
+            {
+                dp[i][i + k][j] = max(dp[i][i + k][j], dp[i][i + k - 1][j]);
+                dp[i][i + k][j] = max(dp[i][i + k][j], dp[i + 1][i + k][j]);
+                int inner = 0;
+                if (k > 1)
+                {
+                    inner = dp[i + 1][i + k - 1][j];
+                }
+                dp[i][i + k][j] = max(dp[i][i + k][j], inner);
+                if (s[i] == s[i+k] && s[i] - 'a' != j)
+                {
+                    dp[i][i + k][s[i] - 'a'] = max(dp[i][i + k][s[i] - 'a'], 2 + inner);
+                }
+            }
+        }
+    }
+    int result = 0;
+    for (size_t i = 0; i < 26; i++) result = max(result, dp[0][n - 1][i]);
+    return result;
+}
 #pragma endregion
 

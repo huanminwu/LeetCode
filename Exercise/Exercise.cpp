@@ -163,17 +163,6 @@ void TestLeetCode164(void)
     Logger::WriteMessage("The maximum gap is " + to_string(max_gap));
 }
 
-
-
-
-
-
-
-
-
-
-
-
 void TestLeetCode75(void)
 {
     Logger::WriteMessage("Test Leet Code 75");
@@ -860,36 +849,6 @@ void TestLeetCode411(void)
     Logger::WriteMessage("target = " + target);
     Logger::WriteMessage(dictionary);
     Logger::WriteMessage("abbreviation = " + abbr);
-}
-
-
-void TestLeetCode496(void)
-{
-    Logger::WriteMessage("Test Leet Code 496");
-    LeetCode leetCode;
-    vector<int> nums1 = { 4, 1, 2 };
-    vector<int> nums2 = { 1, 3, 4, 2 };
-    vector<int> result = leetCode.nextGreaterElement(nums1, nums2);
-    Logger::WriteMessage(nums1);
-    Logger::WriteMessage(nums2);
-    Logger::WriteMessage(result);
-
-    nums1 = { 2, 4 };
-    nums2 = { 1, 2, 3, 4 };
-    result = leetCode.nextGreaterElement(nums1, nums2);
-    Logger::WriteMessage(nums1);
-    Logger::WriteMessage(nums2);
-    Logger::WriteMessage(result);
-}
-
-void TestLeetCode503(void)
-{
-    Logger::WriteMessage("Test Leet Code 503");
-    LeetCode leetCode;
-    vector<int> nums = { 1, 2, 1 };
-    vector<int> result = leetCode.nextGreaterElements(nums);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage(result);
 }
 
 void TestLeetCode488(void)
@@ -3456,9 +3415,11 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeStack();
+    TestLeetCodeDP();
+    TestLeetCodeString();
     TestLeetCodeGraph();
     TestLeetCodeArray();
-    TestLeetCodeString();
     TestLeetCodeGreedy();
     TestLeetCodeDP();
     TestLeetCodeSort();
@@ -3468,14 +3429,11 @@ void main(int argc, char* argv[])
     TestLeetCodeDFS();
     TestLeetCodeLinkedList();
     TestLeetCodeTree();
-
-
     TestLeetCodeDFS();
     TestLeetCodeBinarySearch();
     TestLeetCodeBit();
     TestLeetCode211();
     TestLeetCodeDP();
-    TestLeetCodeStack();
     TestUSACO();
     TestLeetCodeBFS();
     TestLeetCode902();
@@ -3695,8 +3653,6 @@ void main(int argc, char* argv[])
     TestLeetCode465();
     TestLeetCode493();
     TestLeetCode488();
-    TestLeetCode503();
-    TestLeetCode496();
     TestLeetCode504();
     TestLeetCode411();
     TestLeetCode308();

@@ -3753,8 +3753,22 @@ void TestLeetCode1694(void)
     Logger::WriteMessage("number = " + number + "; result = " + result);
 }
 
+void TestLeetCode1698(void)
+{
+    Logger::WriteMessage("Test Leet Code 1698");
+    LeetCodeString leetCode;
+    string s = "aabbaba";
+    int result = leetCode.countDistinct(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "abcdefg";
+    result = leetCode.countDistinct(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1698();
     TestLeetCode1694();
     TestLeetCode1684();
     TestLeetCode1678();

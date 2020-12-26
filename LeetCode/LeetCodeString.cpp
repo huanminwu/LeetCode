@@ -12962,4 +12962,52 @@ string LeetCodeString::reformatNumber(string number)
     return result;
 }
 
+/// <summary>
+/// Leet code #1698. Number of Distinct Substrings in a String
+/// 
+/// Hard
+/// 
+/// Given a string s, return the number of distinct substrings of s.
+///
+/// A substring of a string is obtained by deleting any number of 
+/// characters (possibly zero) from the front of the string and any 
+/// number (possibly zero) from the back of the string.
+/// 
+/// Example 1:
+/// Input: s = "aabbaba"
+/// Output: 21
+/// Explanation: The set of distinct strings is
+/// ["a","b","aa","bb","ab","ba","aab","abb","bba","aba","aabb","abba",
+/// "bbab","baba","aabba","abbab","bbaba","aabbab","abbaba","aabbaba"]
+///
+/// Example 2:
+/// Input: s = "abcdefg"
+/// Output: 28
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 500
+/// 2. s consists of lowercase English letters.
+/// </summary>
+int LeetCodeString::countDistinct(string s)
+{
+    int n = s.size();
+    vector<int> dp(n);
+    for (int k = 1; k < n; k++)
+    {
+        int len = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (i + k >= n) break;
+            if (s[i] == s[i + k]) len++;
+            else len = 0;
+            dp[i + k] = max(dp[i + k], len);
+        }
+    }
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        result += i + 1 - dp[i];
+    }
+    return result;
+}
 #pragma endregion

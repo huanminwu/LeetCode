@@ -2202,8 +2202,43 @@ void TestLeetCode1105(void)
     Logger::WriteMessage("shelf_width = " + to_string(shelf_width) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1692(void)
+{
+    Logger::WriteMessage("Test Leet Code 1692");
+    LeetCodeDP leetCode;
+    int n = 3;
+    int k = 2;
+    int result = leetCode.waysToDistribute(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 4;
+    k = 2;
+    result = leetCode.waysToDistribute(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 20;
+    k = 5;
+    result = leetCode.waysToDistribute(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1682(void)
+{
+    Logger::WriteMessage("Test Leet Code 1682");
+    LeetCodeDP leetCode;
+    string  s = "bbabab";
+    int result = leetCode.longestPalindromeSubseqII(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "dcbccacdb";
+    result = leetCode.longestPalindromeSubseqII(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1682();
+    TestLeetCode1692();
     TestLeetCode1105();
     TestLeetCode1687();
     TestLeetCode1690();
