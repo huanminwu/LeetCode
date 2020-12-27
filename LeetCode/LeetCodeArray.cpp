@@ -14283,4 +14283,235 @@ int LeetCodeArray::maxResult(vector<int>& nums, int k)
     }
     return dp.back().first;
 }
+
+/// <summary>
+/// Leet code #1700. Number of Students Unable to Eat Lunch
+/// 
+/// Easy
+/// 
+/// The school cafeteria offers circular and square sandwiches at lunch 
+/// break, referred to by numbers 0 and 1 respectively. All students 
+/// stand in a queue. Each student either prefers square or circular 
+/// sandwiches.
+///
+/// The number of sandwiches in the cafeteria is equal to the number of 
+/// students. The sandwiches are placed in a stack. At each step:
+///
+/// If the student at the front of the queue prefers the sandwich on the 
+/// top of the stack, they will take it and leave the queue. 
+/// Otherwise, they will leave it and go to the queue's end.
+/// This continues until none of the queue students want to take the top 
+/// sandwich and are thus unable to eat. 
+///
+/// You are given two integer arrays students and sandwiches where 
+/// sandwiches[i] is the type of the ith sandwich in the stack (i = 0 is 
+/// the top of the stack) and students[j] is the preference of the jth 
+/// student in the initial queue (j = 0 is the front of the queue). 
+/// Return the number of students that are unable to eat.
+///
+/// Example 1:
+/// Input: students = [1,1,0,0], sandwiches = [0,1,0,1]
+/// Output: 0 
+/// Explanation:
+/// - Front student leaves the top sandwich and returns to the end of the 
+///   line making students = [1,0,0,1].
+/// - Front student leaves the top sandwich and returns to the end of the 
+///   line making students = [0,0,1,1].
+/// - Front student takes the top sandwich and leaves the line making 
+///   students = [0,1,1] and sandwiches = [1,0,1].
+/// - Front student leaves the top sandwich and returns to the end of 
+///   the line making students = [1,1,0].
+/// - Front student takes the top sandwich and leaves the line making 
+///   students = [1,0] and sandwiches = [0,1].
+/// - Front student leaves the top sandwich and returns to the end of the 
+///   line making students = [0,1].
+/// - Front student takes the top sandwich and leaves the line making 
+///   students = [1] and sandwiches = [1].
+/// - Front student takes the top sandwich and leaves the line making 
+///   students = [] and sandwiches = [].
+/// Hence all students are able to eat.
+///
+/// Example 2:
+/// Input: students = [1,1,1,0,0,1], sandwiches = [1,0,0,0,1,1]
+/// Output: 3
+///
+/// Constraints:
+/// 1. 1 <= students.length, sandwiches.length <= 100
+/// 2. students.length == sandwiches.length
+/// 3. sandwiches[i] is 0 or 1.
+/// 4. students[i] is 0 or 1.
+/// </summary>
+int LeetCodeArray::countStudents(vector<int>& students, vector<int>& sandwiches)
+{
+    int one = 0;
+    int zero = 0;
+    for (size_t i = 0; i < students.size(); i++)
+    {
+        if (students[i] == 1) one++;
+        else zero++;
+    }
+    int result = students.size();
+    for (size_t i = 0; i < sandwiches.size(); i++)
+    {
+        if (sandwiches[i] == 1) one--;
+        else zero--;
+        if (one < 0 || zero < 0)
+        {
+            break;
+        }
+        result--;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1701. Average Waiting Time
+/// 
+/// Medium
+/// 
+/// There is a restaurant with a single chef. You are given an array 
+/// customers, where customers[i] = [arrivali, timei]:
+///
+/// arrivali is the arrival time of the ith customer. The arrival times 
+/// are sorted in non-decreasing order.
+/// timei is the time needed to prepare the order of the ith customer.
+/// When a customer arrives, he gives the chef his order, and the chef 
+/// starts preparing it once he is idle. The customer waits till the chef 
+/// finishes preparing his order. The chef does not prepare food for more 
+/// than one customer at a time. The chef prepares food for customers in 
+/// the order they were given in the input.
+///
+/// Return the average waiting time of all customers. Solutions within 
+/// 10-5 from the actual answer are considered accepted.
+///
+/// Example 1:
+/// Input: customers = [[1,2],[2,5],[4,3]]
+/// Output: 5.00000
+/// Explanation:
+/// 1) The first customer arrives at time 1, the chef takes his order and 
+///   starts preparing it immediately at time 1, and finishes at time 3, 
+///   so the waiting time of the first customer is 3 - 1 = 2.
+/// 2) The second customer arrives at time 2, the chef takes his order and 
+///    starts preparing it at time 3, and finishes at time 8, so the 
+///    waiting time of the second customer is 8 - 2 = 6.
+/// 3) The third customer arrives at time 4, the chef takes his order and 
+///    starts preparing it at time 8, and finishes at time 11, so the 
+///    waiting time of the third customer is 11 - 4 = 7.
+/// So the average waiting time = (2 + 6 + 7) / 3 = 5.
+///
+/// Example 2:
+/// Input: customers = [[5,2],[5,4],[10,3],[20,1]]
+/// Output: 3.25000
+/// Explanation:
+/// 1) The first customer arrives at time 5, the chef takes his order and 
+///    starts preparing it immediately at time 5, and finishes at time 7, 
+///    so the waiting time of the first customer is 7 - 5 = 2.
+/// 2) The second customer arrives at time 5, the chef takes his order and 
+///    starts preparing it at time 7, and finishes at time 11, so the 
+///    waiting time of the second customer is 11 - 5 = 6.
+/// 3) The third customer arrives at time 10, the chef takes his order and 
+///    starts preparing it at time 11, and finishes at time 14, so the 
+///    waiting time of the third customer is 14 - 10 = 4.
+/// 4) The fourth customer arrives at time 20, the chef takes his order 
+///    and starts preparing it immediately at time 20, and finishes at 
+///    time 21, so the waiting time of the fourth customer is 21 - 20 = 1.
+/// So the average waiting time = (2 + 6 + 4 + 1) / 4 = 3.25.
+/// 
+/// Constraints:
+/// 1. 1 <= customers.length <= 105
+/// 2. 1 <= arrivali, timei <= 104
+/// 3. arrivali <= arrivali+1
+/// </summary>
+double LeetCodeArray::averageWaitingTime(vector<vector<int>>& customers)
+{
+    double accumulate = 0;
+    int wait_time = 0;
+    for (size_t i = 0; i < customers.size(); i++)
+    {
+        if (i > 0)
+        {
+            wait_time -= customers[i][0] - customers[i - 1][0];
+            if (wait_time < 0) wait_time = 0;
+        }
+        wait_time += customers[i][1];
+        accumulate += wait_time;
+    }
+    return accumulate / (double)customers.size();
+}
+
+/// <summary>
+/// Leet code #1703. Minimum Adjacent Swaps for K Consecutive Ones
+/// 
+/// Hard
+/// 
+/// You are given an integer array, nums, and an integer k. nums comprises 
+/// of only 0's and 1's. In one move, you can choose two adjacent indices 
+/// and swap their values.
+///
+/// Return the minimum number of moves required so that nums has k 
+/// consecutive 1's.
+///
+/// Example 1:
+/// Input: nums = [1,0,0,1,0,1], k = 2
+/// Output: 1
+/// Explanation: In 1 move, nums could be [1,0,0,0,1,1] and have 
+/// 2 consecutive 1's.
+///
+/// Example 2:
+/// Input: nums = [1,0,0,0,0,0,1,1], k = 3
+/// Output: 5
+/// Explanation: In 5 moves, the leftmost 1 can be shifted right until 
+/// nums = [0,0,0,0,0,1,1,1].
+///
+/// Example 3:
+/// Input: nums = [1,1,0,1], k = 2
+/// Output: 0
+/// Explanation: nums already has 2 consecutive 1's.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. nums[i] is 0 or 1.
+/// 3. 1 <= k <= sum(nums)
+/// </summary>
+int LeetCodeArray::minMoves(vector<int>& nums, int k)
+{
+    long long sum = 0;
+    long long last_sum = 0;
+    int result = INT_MAX;
+    deque<long long> dp;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        // skip all 0
+        if (nums[i] == 0) continue;
+        // accumulate position sum
+        last_sum += i;
+        dp.push_back(last_sum);
+        if (dp.size() > k)
+        {
+            sum = dp.front();
+            dp.pop_front();
+        }
+        if (dp.size() == k)
+        {
+            int median = k / 2;
+            int move = 0;
+            if (median > 0)
+            {
+                long long curr = dp[median] - dp[median - 1];
+                long long post_move = dp.back() - dp[median] - ((long long)k - 1 - (long long)median) * curr;
+                long long prev_move = median * curr - (dp[median - 1] - sum);
+                move = post_move + prev_move;
+                int adjust = (1 + median) * median;
+                if (k % 2 == 0)
+                {
+                    adjust -= median;
+                }
+                move -= adjust;
+            }
+            result = min(result, (int)move);
+        }
+    }
+    return result;
+}
+
 #pragma endregion

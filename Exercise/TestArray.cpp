@@ -5001,8 +5001,69 @@ void TestLeetCode1696(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1700(void)
+{
+    Logger::WriteMessage("Test Leet Code 1700");
+    LeetCodeArray leetCode;
+    vector<int> students = { 1,1,0,0 };
+    vector<int> sandwiches = { 0,1,0,1 };
+    int result = leetCode.countStudents(students, sandwiches);
+    Logger::WriteMessage(students);
+    Logger::WriteMessage(sandwiches);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    students = { 1,1,1,0,0,1 };
+    sandwiches = { 1,0,0,0,1,1 };
+    result = leetCode.countStudents(students, sandwiches);
+    Logger::WriteMessage(students);
+    Logger::WriteMessage(sandwiches);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode1701(void)
+{
+    Logger::WriteMessage("Test Leet Code 1701");
+    LeetCodeArray leetCode;
+    vector<vector<int>> customers = { {1, 2},{2, 5},{4, 3} };
+    double result = leetCode.averageWaitingTime(customers);
+    Logger::WriteMessage(customers);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    customers = { {5, 2},{5, 4},{10, 3},{20, 1} };
+    result = leetCode.averageWaitingTime(customers);
+    Logger::WriteMessage(customers);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1703(void)
+{
+    Logger::WriteMessage("Test Leet Code 1703");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 0, 0, 1, 0, 1 };
+    int k = 2;
+    int result = leetCode.minMoves(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,0,0,0,0,0,1,1 };
+    k = 3;
+    result = leetCode.minMoves(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,0,1 };
+    k = 2;
+    result = leetCode.minMoves(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1703();
+    TestLeetCode1701();
+    TestLeetCode1700();
     TestLeetCode1696();
     TestLeetCode1695();
     TestLeetCode1685();

@@ -763,9 +763,6 @@ bool LeetCodeSort::increasingTriplet(vector<int>& nums)
     return false;
 }
 
-
-
-
 /// <summary>
 /// Leet code # 440. K-th Smallest in Lexicographical Order  
 ///

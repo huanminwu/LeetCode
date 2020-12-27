@@ -3766,8 +3766,22 @@ void TestLeetCode1698(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode1702(void)
+{
+    Logger::WriteMessage("Test Leet Code 1702");
+    LeetCodeString leetCode;
+    string binary = "000110";
+    string result = leetCode.maximumBinaryString(binary);
+    Logger::WriteMessage("binary = " + binary + "; result = " + result);
+
+    binary = "01";
+    result = leetCode.maximumBinaryString(binary);
+    Logger::WriteMessage("binary = " + binary + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1702();
     TestLeetCode1698();
     TestLeetCode1694();
     TestLeetCode1684();

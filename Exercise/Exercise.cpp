@@ -3415,11 +3415,11 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeArray();
+    TestLeetCodeString();
     TestLeetCodeStack();
     TestLeetCodeDP();
-    TestLeetCodeString();
     TestLeetCodeGraph();
-    TestLeetCodeArray();
     TestLeetCodeGreedy();
     TestLeetCodeDP();
     TestLeetCodeSort();
