@@ -1486,29 +1486,29 @@ string LeetCodeGreedy::strWithout3a3b(int A, int B)
 /// 2. 0 <= B.length < 1000
 /// 3. 0 <= A[i].start, A[i].end, B[i].start, B[i].end < 10^9
 /// </summary>
-vector<Interval> LeetCodeGreedy::intervalIntersection(vector<Interval>& A, vector<Interval>& B)
+vector<vector<int>> LeetCodeGreedy::intervalIntersection(vector<vector<int>>& A, vector<vector<int>>& B)
 {
     int i = 0, j = 0;
-    vector<Interval> result;
+    vector<vector<int>> result;
 
     while (i < (int)A.size() && j < (int)B.size())
     {
-        if (A[i].end < B[j].start)
+        if (A[i][1] < B[j][0])
         {
             i++;
         }
-        else if (B[j].end < A[i].start)
+        else if (B[j][1] < A[i][0])
         {
             j++;
         }
         else
         {
-            Interval intersection = 
+            vector<int> intersection = 
             { 
-                max(A[i].start, B[j].start), min(A[i].end, B[j].end) 
+                max(A[i][0], B[j][0]), min(A[i][1], B[j][1]) 
             };
             result.push_back(intersection);
-            if (A[i].end < B[j].end)
+            if (A[i][1] < B[j][1])
             {
                 i++;
             }

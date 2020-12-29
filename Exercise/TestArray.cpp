@@ -5059,8 +5059,34 @@ void TestLeetCode1703(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1706(void)
+{
+    Logger::WriteMessage("Test Leet Code 1706");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = 
+    {
+        {1, 1, 1, -1, -1},
+        {1, 1, 1, -1, -1},
+        {-1, -1, -1, 1, 1},
+        {1, 1, 1, 1, -1},
+        {-1, -1, -1, -1, -1}
+    };
+    vector<int> result = leetCode.findBall(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid =
+    {
+        {-1}
+    };
+    result = leetCode.findBall(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1706();
     TestLeetCode1703();
     TestLeetCode1701();
     TestLeetCode1700();

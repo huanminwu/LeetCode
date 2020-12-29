@@ -3779,8 +3779,30 @@ void TestLeetCode1702(void)
     Logger::WriteMessage("binary = " + binary + "; result = " + result);
 }
 
+void TestLeetCode1704(void)
+{
+    Logger::WriteMessage("Test Leet Code 1704");
+    LeetCodeString leetCode;
+    string s = "book";
+    bool result = leetCode.halvesAreAlike(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "textbook";
+    result = leetCode.halvesAreAlike(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "MerryChristmas";
+    result = leetCode.halvesAreAlike(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "AbCdEfGh";
+    result = leetCode.halvesAreAlike(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1704();
     TestLeetCode1702();
     TestLeetCode1698();
     TestLeetCode1694();

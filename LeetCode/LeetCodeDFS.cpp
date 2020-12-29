@@ -1819,122 +1819,76 @@ string LeetCode::minAbbreviation(string target, vector<string>& dictionary)
 /// <summary>
 /// Leet code #473. Matchsticks to Square  
 /// </summary>
-bool LeetCode::nextside(vector<int>& nums, vector<int>& side, string &signature,
-    int length, unordered_set<string>& dead_sig)
+bool LeetCodeDFS::makesquare(vector<int>& nums, vector<int>& path, int bit_mask, int sum,
+    int side_length, unordered_set<int>& cache)
 {
-    int sum = length;
-    while (!side.empty())
+    if (path.size() == nums.size()) return true;
+    if (cache.count(bit_mask) > 0) return false;
+    int start = 0;
+    sum %= side_length;
+    if (sum > 0)
     {
-        sum -= nums[side.back()];
-        signature[side.back()] = '0';
-        int start = side.back() + 1;
-        side.pop_back();
-        if (makeside(nums, side, sum, signature, start, length, dead_sig))
-        {
-            return true;
-        }
+        start = path.back() + 1;
     }
-    return false;
+    int n = nums.size();
+    bool result = false;
+    for (int i = start; i < n; i++)
+    {
+        if (sum + nums[i] > side_length) break;
+        int bit = 1 << i;
+        if ((bit_mask & bit) != 0) continue;
+        path.push_back(i);
+        result = makesquare(nums, path, bit_mask | bit, sum + nums[i], side_length, cache);
+        path.pop_back();
+        if (result == true) break;
+    }
+    if (result == false) cache.insert(bit_mask);
+    return result;
 }
 
 /// <summary>
-/// Leet code #473. Matchsticks to Square  
-/// </summary>
-bool LeetCode::makeside(vector<int>& nums, vector<int>& side, int& sum, string &signature,
-    int start, int length, unordered_set<string>& dead_sig)
-{
-    if (dead_sig.count(signature) > 0) return false;
-    if (sum == length) return true;
-    while (start < (int)nums.size())
-    {
-        if ((signature[start] == '0') && (nums[start] <= length - sum))
-        {
-            signature[start] = '1';
-            sum += nums[start];
-            side.push_back(start);
-            if (makeside(nums, side, sum, signature, start, length, dead_sig))
-            {
-                return true;
-            }
-            else
-            {
-                dead_sig.insert(signature);
-                signature[start] = '0';
-                sum -= nums[start];
-                side.pop_back();
-            }
-        }
-        start++;
-    }
-    return false;
-}
-
-/// <summary>
-/// Leet code #473. Matchsticks to Square  
+/// Leet code #473. Matchsticks to Square
 /// 
-/// Remember the story of Little Match Girl? By now, you know exactly what matchsticks the 
-/// little match girl has, please find out a way you can make one square by using up all 
-/// those matchsticks. You should not break any stick, but you can link them up, and 
-/// each matchstick must be used exactly one time.
+/// Medium
+/// 
+/// Remember the story of Little Match Girl? By now, you know exactly what 
+/// matchsticks the little match girl has, please find out a way you can 
+/// make one square by using up all those matchsticks. You should not 
+/// break any stick, but you can link them up, and each matchstick must be 
+/// used exactly one time.
 ///
-/// Your input will be several matchsticks the girl has, represented with their stick length. 
-/// Your output will either be true or false, to represent whether you could make one square 
-/// using all the matchsticks the little match girl has.
+/// Your input will be several matchsticks the girl has, represented with 
+/// their stick length. Your output will either be true or false, to 
+/// represent whether you could make one square using all the matchsticks 
+/// the little match girl has.
+/// 
 /// Example 1:
 /// Input: [1,1,2,2,2]
 /// Output: true
-/// Explanation: You can form a square with length 2, one side of the square came two sticks with length 1.
+///
+/// Explanation: You can form a square with length 2, one side of the 
+/// square came two sticks with length 1.
 ///
 /// Example 2:
 /// Input: [3,3,3,3,4]
 /// Output: false
-/// Explanation: You cannot find a way to form a square with all the matchsticks.
+/// Explanation: You cannot find a way to form a square with all the 
+/// matchsticks.
+///
 /// Note:
-/// 1.The length sum of the given matchsticks is in the range of 0 to 10^9. 
-/// 2.The length of the given matchstick array will not exceed 15.
+/// The length sum of the given matchsticks is in the range of 0 to 10^9.
+/// The length of the given matchstick array will not exceed 15.
 /// </summary>
-bool LeetCode::makesquare(vector<int>& nums)
+bool LeetCodeDFS::makesquare(vector<int>& nums)
 {
-    unordered_set<string> dead_sig;
-    sort(nums.begin(), nums.end(), greater<int>());
+    unordered_set<int> cache;
+    sort(nums.begin(), nums.end());
+    vector<int> path;
     int sum = 0;
     for (size_t i = 0; i < nums.size(); i++) sum += nums[i];
     if ((sum == 0) || (sum % 4 != 0)) return false;
     int side_length = sum / 4;
-    string signature = string(nums.size(), '0');
-    vector<vector<int>> sides(4, vector<int>());
-    int index = 0;
-    while (index < 4)
-    {
-        if (sides[index].empty())
-        {
-            int sum = 0;
-            if (makeside(nums, sides[index], sum, signature, 0, side_length, dead_sig))
-            {
-                index++;
-                continue;
-            }
-            else
-            {
-                if (index == 0) break;
-                index--;
-            }
-        }
-        else
-        {
-            if (nextside(nums, sides[index], signature, side_length, dead_sig))
-            {
-                index++;
-            }
-            else
-            {
-                if (index == 0) break;
-                index--;
-            }
-        }
-    }
-    if (index == 0) return false;
-    else return true;
+    return makesquare(nums, path, 0, 0, side_length, cache);
 }
 
 /// <summary>
@@ -4018,7 +3972,7 @@ void LeetCode::cleanRoom(vector<vector<int>>& room, int row, int col)
 /// <summary>
 /// Leet code #980. Unique Paths III
 /// </summary>
-void LeetCode::uniquePathsIII(vector<vector<int>>& grid, stack<pair<int, int>> &path, 
+void LeetCodeDFS::uniquePathsIII(vector<vector<int>>& grid, stack<pair<int, int>> &path, 
     vector<vector<int>>& visited, int &remaining, int &result)
 {
     vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
@@ -4111,7 +4065,7 @@ void LeetCode::uniquePathsIII(vector<vector<int>>& grid, stack<pair<int, int>> &
 /// 1. 1 <= grid.length * grid[0].length <= 20
 /// 2. Given a robot cleaner in a room modeled as a grid.
 /// </summary>
-int LeetCode::uniquePathsIII(vector<vector<int>>& grid)
+int LeetCodeDFS::uniquePathsIII(vector<vector<int>>& grid)
 {
     stack<pair<int, int>> path;
     vector<vector<int>> visited(grid.size(), vector<int>(grid[0].size()));
@@ -4139,7 +4093,7 @@ int LeetCode::uniquePathsIII(vector<vector<int>>& grid)
 /// <summary>
 /// Leet code #996. Number of Squareful Arrays
 /// </summary>
-int LeetCode::numSquarefulPerms(vector<int>& A, vector<int> &path, vector<int> &visited, int &result)
+int LeetCodeDFS::numSquarefulPerms(vector<int>& A, vector<int> &path, vector<int> &visited, int &result)
 {
     if (path.size() == A.size())
     {
@@ -4198,7 +4152,7 @@ int LeetCode::numSquarefulPerms(vector<int>& A, vector<int> &path, vector<int> &
 /// 2. 0 <= A[i] <= 1e9
 /// 3. On a 2-dimensional grid, there are 4 types of squares:
 /// </summary>
-int LeetCode::numSquarefulPerms(vector<int>& A)
+int LeetCodeDFS::numSquarefulPerms(vector<int>& A)
 {
     vector<int> path;
     int result = 0;
@@ -4210,7 +4164,7 @@ int LeetCode::numSquarefulPerms(vector<int>& A)
 /// <summary>
 /// Leet code #1079. Letter Tile Possibilities
 /// </summary>
-int LeetCode::numTilePossibilities(string& word, string& tiles, vector<int> &visited)
+int LeetCodeDFS::numTilePossibilities(string& word, string& tiles, vector<int> &visited)
 {
     int result = 0;
     int last = -1;
@@ -4252,7 +4206,7 @@ int LeetCode::numTilePossibilities(string& word, string& tiles, vector<int> &vis
 /// 1. 1 <= tiles.length <= 7
 /// 2. tiles consists of uppercase English letters.
 /// </summary>
-int LeetCode::numTilePossibilities(string tiles)
+int LeetCodeDFS::numTilePossibilities(string tiles)
 {
     vector<int> visited(tiles.size());
     string word;
@@ -4263,7 +4217,7 @@ int LeetCode::numTilePossibilities(string tiles)
 /// <summary>
 /// Leet code #1087. Brace Expansion
 /// </summary>
-void LeetCode::expand(string path, string S, vector<string>& result)
+void LeetCodeDFS::expand(string path, string S, vector<string>& result)
 {
     if (S.empty())
     {
@@ -4323,7 +4277,7 @@ void LeetCode::expand(string path, string S, vector<string>& result)
 /// 1. 1 <= S.length <= 50
 /// 2. There are no nested curly brackets.
 /// </summary>
-vector<string> LeetCode::expand(string S)
+vector<string> LeetCodeDFS::expand(string S)
 {
     vector<string> result;
     string path;
@@ -4426,7 +4380,7 @@ int LeetCodeDFS::assignBikesII(vector<vector<int>>& workers, vector<vector<int>>
 /// <summary>
 /// Leet code #1140. Stone Game II
 /// </summary>
-int LeetCode::stoneGameII(vector<int>& sum, int start, int M, vector<vector<int>>& memo)
+int LeetCodeDFS::stoneGameII(vector<int>& sum, int start, int M, vector<vector<int>>& memo)
 {
     int result = 0;
     if (start + 2 * M >= (int)sum.size() - 1)
@@ -4480,7 +4434,7 @@ int LeetCode::stoneGameII(vector<int>& sum, int start, int M, vector<vector<int>
 /// 1. 1 <= piles.length <= 100
 /// 2. 1 <= piles[i] <= 10 ^ 4
 /// </summary>
-int LeetCode::stoneGameII(vector<int>& piles)
+int LeetCodeDFS::stoneGameII(vector<int>& piles)
 {
     vector<int> sum;
     sum.push_back(0);

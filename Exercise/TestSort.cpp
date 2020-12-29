@@ -1107,8 +1107,28 @@ void TestLeetCode334(void)
     Logger::WriteMessage("It" + (string)(result ? " is " : "  is not ") + "increasing triple");
 }
 
+void TestLeetCode1705(void)
+{
+    Logger::WriteMessage("Test Leet Code 1705");
+    LeetCodeSort leetCode;
+    vector<int> apples = { 1, 2, 3, 5, 2 };
+    vector<int> days = { 3, 2, 1, 4, 2 };
+    int result = leetCode.eatenApples(apples, days);
+    Logger::WriteMessage(apples);
+    Logger::WriteMessage(days);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    apples = { 3,0,0,0,0,2 };
+    days = { 3,0,0,0,0,2 };
+    result = leetCode.eatenApples(apples, days);
+    Logger::WriteMessage(apples);
+    Logger::WriteMessage(days);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1705();
     TestLeetCode334();
     TestLeetCode1686();
     TestLeetCode1675();

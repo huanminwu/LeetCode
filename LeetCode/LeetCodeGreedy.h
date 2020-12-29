@@ -959,7 +959,7 @@ public:
     /// 2. 0 <= B.length < 1000
     /// 3. 0 <= A[i].start, A[i].end, B[i].start, B[i].end < 10^9
     /// </summary>
-    vector<Interval> intervalIntersection(vector<Interval>& A, vector<Interval>& B);
+    vector<vector<int>> intervalIntersection(vector<vector<int>>& A, vector<vector<int>>& B);
 
     /// <summary>
     /// Leet code #1024. Video Stitching

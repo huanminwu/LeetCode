@@ -853,9 +853,9 @@ void TestLeetCode986(void)
 {
     Logger::WriteMessage("Test Leet Code 986");
     LeetCodeGreedy leetCode;
-    vector<Interval> A = { {0, 2},{5, 10},{13, 23},{24, 25} };
-    vector<Interval> B = { {1, 5},{8, 12},{15, 24},{25, 26} };
-    vector<Interval> result = leetCode.intervalIntersection(A, B);
+    vector<vector<int>> A = { {0, 2},{5, 10},{13, 23},{24, 25} };
+    vector<vector<int>> B = { {1, 5},{8, 12},{15, 24},{25, 26} };
+    vector<vector<int>> result = leetCode.intervalIntersection(A, B);
     Logger::WriteMessage(A);
     Logger::WriteMessage(B);
     Logger::WriteMessage(result);

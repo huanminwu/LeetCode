@@ -587,8 +587,41 @@ void TestLeetCode1545(void)
     Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + string(1, result));
 }
 
+void TestLeetCode1707(void)
+{
+    Logger::WriteMessage("Test Leet Code 1707");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 0, 1, 2, 3, 4 };
+    vector<vector<int>> queries = { {3, 1},{1, 3},{5, 6} };
+    vector<int> result = leetCode.maximizeXor(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 5,2,4,6,6,3 };
+    queries = { {12, 4},{8, 1},{6, 3} };
+    result = leetCode.maximizeXor(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 818702963, 153655392, 4096, 917434814, 4096 };
+    queries = 
+    { 
+        {11886620, 881210474}, { 811373, 1000000000 }, 
+        { 20352316, 1000000000 }, { 443746890, 860009574 }, 
+        { 872954994, 1000000000 } 
+    }
+    ;
+    result = leetCode.maximizeXor(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode1707();
     TestLeetCode1545();
     TestLeetCode1529();
     TestLeetCode1521();

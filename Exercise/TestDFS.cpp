@@ -881,8 +881,112 @@ void TestLeetCode1681(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode473(void)
+{
+    Logger::WriteMessage("Test Leet Code 473");
+    LeetCodeDFS leetCode;
+    vector<int> nums = { 2, 2, 2, 2, 2, 6 };
+    bool result = leetCode.makesquare(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,1,2,2,2 };
+    result = leetCode.makesquare(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 3,3,3,3,4 };
+    result = leetCode.makesquare(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1140(void)
+{
+    Logger::WriteMessage("Test Leet Code 1140");
+    LeetCodeDFS leetCode;
+    vector<int> piles = { 2, 7, 9, 4, 4 };
+    int result = leetCode.stoneGameII(piles);
+    Logger::WriteMessage(piles);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1087(void)
+{
+    Logger::WriteMessage("Test Leet Code 1087");
+    LeetCodeDFS leetCode;
+    string S = "{a,b}c{d,e}f";
+    vector<string> result = leetCode.expand(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+
+    S = "abcd";
+    result = leetCode.expand(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1079(void)
+{
+    Logger::WriteMessage("Test Leet Code 1079");
+    LeetCodeDFS leetCode;
+    string tiles = "AAB";
+    int result = leetCode.numTilePossibilities(tiles);
+    Logger::WriteMessage("tiles = " + tiles + "; result = " + to_string(result));
+
+    tiles = "AAABBC";
+    result = leetCode.numTilePossibilities(tiles);
+    Logger::WriteMessage("tiles = " + tiles + "; result = " + to_string(result));
+}
+
+void TestLeetCode996(void)
+{
+    Logger::WriteMessage("Test Leet Code 996");
+    LeetCodeDFS leetCode;
+    vector<int> A = { 1,17,8 };
+    int result = leetCode.numSquarefulPerms(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { 2,2,2 };
+    result = leetCode.numSquarefulPerms(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    A = { 2,2,2,2,7,7,7 };
+    result = leetCode.numSquarefulPerms(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode980(void)
+{
+    Logger::WriteMessage("Test Leet Code 980");
+    LeetCodeDFS leetCode;
+    vector<vector<int>> grid = { {1,0,0,0},{0,0,0,0},{0,0,2,-1} };
+    int result = leetCode.uniquePathsIII(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1, 0, 0, 0},{0, 0, 0, 0},{0, 0, 0, 2} };
+    result = leetCode.uniquePathsIII(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {0, 1},{2, 0} };
+    result = leetCode.uniquePathsIII(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode980();
+    TestLeetCode996();
+    TestLeetCode1079();
+    TestLeetCode1087();
+    TestLeetCode1140();
+    TestLeetCode473();
     TestLeetCode1681();
     TestLeetCode1659();
     TestLeetCode1655();
