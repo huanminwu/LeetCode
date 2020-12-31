@@ -979,8 +979,28 @@ void TestLeetCode980(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode489(void)
+{
+    Logger::WriteMessage("Test Leet Code 489");
+    LeetCodeDFS leetCode;
+    vector<vector<int>> room =
+    {
+        {1,1,1,1,1,0,1,1},
+        {1,1,1,1,1,0,1,1},
+        {1,0,1,1,1,1,1,1},
+        {0,0,0,1,0,0,0,0},
+        {1,1,1,1,1,1,1,1}
+    };
+    int row = 1;
+    int col = 3;
+    Logger::WriteMessage(room);
+    leetCode.cleanRoom(room, row, col);
+    Logger::WriteMessage(room);
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode489();
     TestLeetCode980();
     TestLeetCode996();
     TestLeetCode1079();

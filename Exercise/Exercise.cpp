@@ -2213,29 +2213,6 @@ void TestLeetCode457(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
-
-
-void TestLeetCode489(void)
-{
-    Logger::WriteMessage("Test Leet Code 489");
-    LeetCode leetCode;
-    vector<vector<int>> room = 
-    {
-        {1,1,1,1,1,0,1,1},
-        {1,1,1,1,1,0,1,1},
-        {1,0,1,1,1,1,1,1},
-        {0,0,0,1,0,0,0,0},
-        {1,1,1,1,1,1,1,1}
-    };
-    int row = 1;
-    int col = 3;
-    Logger::WriteMessage(room);
-    leetCode.cleanRoom(room, row, col);
-    Logger::WriteMessage(room);
-}
-
-
-
 void TestLeetCode887(void)
 {
     Logger::WriteMessage("Test Leet Code 887");
@@ -3416,7 +3393,6 @@ void main(int argc, char* argv[])
     TestLeetCode4();
     TestLeetCode877();
     TestLeetCode589();
-    TestLeetCode489();
     TestLeetCode457();
     TestLeetCode433();
     TestLeetCode707();

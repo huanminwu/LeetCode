@@ -3822,7 +3822,7 @@ int LeetCode::scoreOfParentheses(string S)
 /// <summary>
 /// Leet code #489. Robot Room Cleaner
 /// </summary>
-void LeetCode::robotClean(vector<vector<int>>& room, int row, int col)
+void LeetCodeDFS::robotClean(vector<vector<int>>& room, int row, int col)
 {
     room[row][col] = 2;
 }
@@ -3830,7 +3830,7 @@ void LeetCode::robotClean(vector<vector<int>>& room, int row, int col)
 /// <summary>
 /// Leet code #489. Robot Room Cleaner
 /// </summary>
-bool LeetCode::robotMove(vector<vector<int>>& room, int &row, int& col, int direction)
+bool LeetCodeDFS::robotMove(vector<vector<int>>& room, int &row, int& col, int direction)
 {
     vector<vector<int>> directions = { {-1, 0}, {0, 1}, {1, 0}, {0, -1} };
     int next_row = row + directions[direction][0];
@@ -3851,7 +3851,7 @@ bool LeetCode::robotMove(vector<vector<int>>& room, int &row, int& col, int dire
 /// <summary>
 /// Leet code #489. Robot Room Cleaner
 /// </summary>
-int LeetCode::robotTurnRight(int direction)
+int LeetCodeDFS::robotTurnRight(int direction)
 {
     direction = (direction + 1) % 4;
     return direction;
@@ -3860,7 +3860,7 @@ int LeetCode::robotTurnRight(int direction)
 /// <summary>
 /// Leet code #489. Robot Room Cleaner
 /// </summary>
-int LeetCode::robotTurnLeft(int direction)
+int LeetCodeDFS::robotTurnLeft(int direction)
 {
     direction = (direction + 4 - 1) % 4;
     return direction;
@@ -3869,7 +3869,7 @@ int LeetCode::robotTurnLeft(int direction)
 /// <summary>
 /// Leet code #489. Robot Room Cleaner
 /// </summary>
-void LeetCode::robotMoveNext(vector<vector<int>>& room, unordered_map<int, unordered_set<int>>& visited,
+void LeetCodeDFS::robotMoveNext(vector<vector<int>>& room, unordered_map<int, unordered_set<int>>& visited,
     int& row, int& col, int& direction)
 {
     for (size_t i = 0; i < 4; i++)
@@ -3890,7 +3890,7 @@ void LeetCode::robotMoveNext(vector<vector<int>>& room, unordered_map<int, unord
 /// <summary>
 /// Leet code #489. Robot Room Cleaner
 /// </summary>
-void LeetCode::robotMoveBack(vector<vector<int>>& room, unordered_map<int, unordered_set<int>>& visited,
+void LeetCodeDFS::robotMoveBack(vector<vector<int>>& room, unordered_map<int, unordered_set<int>>& visited,
     int& row, int& col, int& direction)
 {
     direction = robotTurnRight(direction);
@@ -3960,7 +3960,7 @@ void LeetCode::robotMoveBack(vector<vector<int>>& room, unordered_map<int, unord
 /// as 1 will be accessible by the robot.
 /// Assume all four edges of the grid are all surrounded by wall.
 /// </summary>
-void LeetCode::cleanRoom(vector<vector<int>>& room, int row, int col)
+void LeetCodeDFS::cleanRoom(vector<vector<int>>& room, int row, int col)
 {
     unordered_map<int, unordered_set<int>> visited;
     int direction = 0;
