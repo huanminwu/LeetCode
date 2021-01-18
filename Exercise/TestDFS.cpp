@@ -998,8 +998,85 @@ void TestLeetCode489(void)
     Logger::WriteMessage(room);
 }
 
+void TestLeetCode856(void)
+{
+    Logger::WriteMessage("Test Leet Code 856");
+    LeetCodeDFS leetCode;
+    string S = "()";
+    int result = leetCode.scoreOfParentheses(S);
+    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
+
+    S = "(())";
+    result = leetCode.scoreOfParentheses(S);
+    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
+
+    S = "()()";
+    result = leetCode.scoreOfParentheses(S);
+    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
+
+    S = "(()(()))";
+    result = leetCode.scoreOfParentheses(S);
+    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
+}
+
+void TestLeetCode797(void)
+{
+    Logger::WriteMessage("Test Leet Code 797");
+    LeetCodeDFS leetCode;
+    vector<vector<int>> graph = { {1, 2},{3},{3},{} };
+    vector<vector<int>> result = leetCode.allPathsSourceTarget(graph);
+    Logger::WriteMessage(graph);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1718(void)
+{
+    Logger::WriteMessage("Test Leet Code 1718");
+    LeetCodeDFS leetCode;
+    int n = 3;
+    vector<int> result = leetCode.constructDistancedSequence(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 5;
+    result = leetCode.constructDistancedSequence(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 6;
+    result = leetCode.constructDistancedSequence(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 4;
+    result = leetCode.constructDistancedSequence(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1723(void)
+{
+    Logger::WriteMessage("Test Leet Code 1723");
+    LeetCodeDFS leetCode;
+    vector<int> jobs = { 3, 2, 3 };
+    int k = 3;
+    int result = leetCode.minimumTimeRequired(jobs, k);
+    Logger::WriteMessage(jobs);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    jobs = { 1,2,4,7,8 };
+    k = 2;
+    result = leetCode.minimumTimeRequired(jobs, k);
+    Logger::WriteMessage(jobs);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+};
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode1723();
+    TestLeetCode1718();
+    TestLeetCode797();
+    TestLeetCode856();
     TestLeetCode489();
     TestLeetCode980();
     TestLeetCode996();

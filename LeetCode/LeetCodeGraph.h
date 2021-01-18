@@ -4862,6 +4862,108 @@ public:
     /// </summary>
     vector<bool> distanceLimitedPathsExist(int n, vector<vector<int>>& edgeList, vector<vector<int>>& queries);
 
+    /// <summary>
+    /// Leet code 1722. Minimize Hamming Distance After Swap Operations
+    /// 
+    /// Medium
+    /// 
+    /// You are given two integer arrays, source and target, both of length n. 
+    /// You are also given an array allowedSwaps where each allowedSwaps[i] = 
+    /// [ai, bi] indicates that you are allowed to swap the elements at index 
+    /// ai and index bi (0-indexed) of array source. Note that you can swap 
+    /// elements at a specific pair of indices multiple times and in any order.
+    ///
+    /// The Hamming distance of two arrays of the same length, source and 
+    /// target, is the number of positions where the elements are different. 
+    /// Formally, it is the number of indices i for 0 <= i <= n-1 where 
+    /// source[i] != target[i] (0-indexed).
+    ///
+    /// Return the minimum Hamming distance of source and target after 
+    /// performing any amount of swap operations on array source.
+    /// 
+    /// Example 1:
+    /// Input: source = [1,2,3,4], target = [2,1,4,5], 
+    /// allowedSwaps = [[0,1],[2,3]]
+    /// Output: 1
+    /// Explanation: source can be transformed the following way:
+    /// - Swap indices 0 and 1: source = [2,1,3,4]
+    /// - Swap indices 2 and 3: source = [2,1,4,3]
+    /// The Hamming distance of source and target is 1 as they differ in 1 
+    /// position: index 3.
+    ///
+    /// Example 2:
+    /// Input: source = [1,2,3,4], target = [1,3,2,4], allowedSwaps = []
+    /// Output: 2
+    /// Explanation: There are no allowed swaps.
+    /// The Hamming distance of source and target is 2 as they differ in 2 
+    /// positions: index 1 and index 2.
+    ///
+    /// Example 3:
+    /// Input: source = [5,1,2,4,3], target = [1,5,4,2,3], 
+    /// allowedSwaps = [[0,4],[4,2],[1,3],[1,4]]
+    /// Output: 0
+    /// Constraints:
+    /// 1. n == source.length == target.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 1 <= source[i], target[i] <= 10^5
+    /// 4. 0 <= allowedSwaps.length <= 10^5
+    /// 5. allowedSwaps[i].length == 2
+    /// 6. 0 <= ai, bi <= n - 1
+    /// 7. ai != bi
+    /// </summary>
+    int minimumHammingDistance(vector<int>& source, vector<int>& target, vector<vector<int>>& allowedSwaps);
+
+    /// <summary>
+    /// Leet code 1719. Number Of Ways To Reconstruct A Tree
+    /// 
+    /// Hard
+    /// 
+    /// You are given an array pairs, where pairs[i] = [xi, yi], and:
+    /// There are no duplicates.
+    /// xi < yi
+    /// Let ways be the number of rooted trees that satisfy the following 
+    /// conditions:
+    /// 
+    /// The tree consists of nodes whose values appeared in pairs.
+    /// A pair [xi, yi] exists in pairs if and only if xi is an ancestor 
+    /// of yi or yi is an ancestor of xi.
+    /// Note: the tree does not have to be a binary tree.
+    /// Two ways are considered to be different if there is at least one 
+    /// node that has different parents in both ways.
+    /// 
+    /// Return:
+    /// 0 if ways == 0
+    /// 1 if ways == 1
+    /// 2 if ways > 1
+    /// A rooted tree is a tree that has a single root node, and all 
+    /// edges are oriented to be outgoing from the root.
+    ///
+    /// An ancestor of a node is any node on the path from the root to that 
+    /// node (excluding the node itself). The root has no ancestors.
+    /// 
+    /// Example 1:
+    /// Input: pairs = [[1,2],[2,3]]
+    /// Output: 1
+    /// Explanation: There is exactly one valid rooted tree, which is shown 
+    /// in the above figure.
+    ///
+    /// Example 2:
+    /// Input: pairs = [[1,2],[2,3],[1,3]]
+    /// Output: 2
+    /// Explanation: There are multiple valid rooted trees. Three of them 
+    /// are shown in the above figures.
+    ///
+    /// Example 3:
+    /// Input: pairs = [[1,2],[2,3],[2,4],[1,5]]
+    /// Output: 0
+    /// Explanation: There are no valid rooted trees.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= pairs.length <= 105
+    /// 2. 1 <= xi < yi <= 500
+    /// 3. The elements in pairs are unique.
+    /// </summary>
+    int checkWays(vector<vector<int>>& pairs);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

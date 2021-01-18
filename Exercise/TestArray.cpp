@@ -5084,8 +5084,154 @@ void TestLeetCode1706(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1712(void)
+{
+    Logger::WriteMessage("Test Leet Code 1712");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 1, 1 };
+    int result = leetCode.waysToSplit(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,2,2,5,0 };
+    result = leetCode.waysToSplit(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,2,1 };
+    result = leetCode.waysToSplit(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,0,0 };
+    result = leetCode.waysToSplit(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1720(void)
+{
+    Logger::WriteMessage("Test Leet Code 1720");
+    LeetCodeArray leetCode;
+    vector<int> encoded = { 1, 2, 3 };
+    int  first = 1;
+    vector<int> result = leetCode.decode(encoded, first);
+    Logger::WriteMessage(encoded);
+    Logger::WriteMessage(result);
+
+    encoded = { 6,2,7,3 };
+    first = 4;
+    result = leetCode.decode(encoded, first);
+    Logger::WriteMessage(encoded);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1713(void)
+{
+    Logger::WriteMessage("Test Leet Code 1713");
+    LeetCodeArray leetCode;
+    vector<int> target = { 5, 1, 3 };
+    vector<int> arr = { 9, 4, 2, 3, 4 };
+    int result = leetCode.minOperations(target, arr);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    target = { 6,4,8,1,3,2 };
+    arr = { 4,7,6,2,3,8,6,1 };
+    result = leetCode.minOperations(target, arr);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    target = { 1, 2, 3, 4, 5 };
+    arr = { 1, 2, 4, 3, 4, 5, 6, 7 };
+    result = leetCode.minOperations(target, arr);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    target = { 1, 2, 3 };
+    arr = { 4, 5 };
+    result = leetCode.minOperations(target, arr);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1725(void)
+{
+    Logger::WriteMessage("Test Leet Code 1725");
+    LeetCodeArray leetCode;
+    vector<vector<int>> rectangles = { {5, 8},{3, 9},{5, 12},{16, 5} };
+    int result = leetCode.countGoodRectangles(rectangles);
+    Logger::WriteMessage(rectangles);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    rectangles = { {2, 3},{3, 7},{4, 3},{3, 7} };
+    result = leetCode.countGoodRectangles(rectangles);
+    Logger::WriteMessage(rectangles);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1726(void)
+{
+    Logger::WriteMessage("Test Leet Code 1726");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 3, 4, 6 };
+    int result = leetCode.tupleSameProduct(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,4,5,10 };
+    result = leetCode.tupleSameProduct(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3,4,6,8,12 };
+    result = leetCode.tupleSameProduct(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3,5,7 };
+    result = leetCode.tupleSameProduct(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1727(void)
+{
+    Logger::WriteMessage("Test Leet Code 1727");
+    LeetCodeArray leetCode;
+    vector<vector<int>> matrix = { {0, 0, 1},{1, 1, 1},{1, 0, 1} };
+    int result = leetCode.largestSubmatrix(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    matrix = { {1, 0, 1, 0, 1} };
+    result = leetCode.largestSubmatrix(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    matrix = { {1, 1, 0},{1, 0, 1} };
+    result = leetCode.largestSubmatrix(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    matrix = { {0, 0},{0, 0} };
+    result = leetCode.largestSubmatrix(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1727();
+    TestLeetCode1726();
+    TestLeetCode1725();
+    TestLeetCode1713();
+    TestLeetCode1720();
+    TestLeetCode1712();
     TestLeetCode1706();
     TestLeetCode1703();
     TestLeetCode1701();

@@ -1058,8 +1058,25 @@ void TestLeetCode1679(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+
+void TestLeetCode1711(void)
+{
+    Logger::WriteMessage("Test Leet Code 1711");
+    LeetCodeHashtable leetCode;
+    vector<int> deliciousness = { 1, 3, 5, 7, 9 };
+    int result = leetCode.countPairs(deliciousness);
+    Logger::WriteMessage(deliciousness);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    deliciousness = { 1,1,1,3,3,3,7 };
+    result = leetCode.countPairs(deliciousness);
+    Logger::WriteMessage(deliciousness);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1711();
     TestLeetCode1679();
     TestLeetCode1604();
     TestLeetCode1577();

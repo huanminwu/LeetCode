@@ -1957,6 +1957,184 @@ public:
     /// Assume all four edges of the grid are all surrounded by wall.
     /// </summary>
     void cleanRoom(vector<vector<int>>& room, int row, int col);
+
+    /// <summary>
+    /// Leet code #856. Score of Parentheses
+    /// </summary>
+    int scoreOfParentheses(string S, int& index);
+
+    /// <summary>
+    /// Leet code #856. Score of Parentheses
+    /// 
+    /// Given a balanced parentheses string S, compute the score of the 
+    /// string based on the following rule:
+    ///
+    /// () has score 1
+    /// AB has score A + B, where A and B are balanced parentheses strings.
+    /// (A) has score 2 * A, where A is a balanced parentheses string.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: "()"
+    /// Output: 1
+    ///
+    /// Example 2:
+    /// Input: "(())"
+    /// Output: 2
+    ///
+    /// Example 3:
+    /// Input: "()()"
+    /// Output: 2
+    ///
+    /// Example 4:
+    /// Input: "(()(()))"
+    /// Output: 6
+    ///
+    /// Note:
+    /// 1. S is a balanced parentheses string, containing only ( and ).
+    /// 2. 2 <= S.length <= 50
+    /// </summary>
+    int scoreOfParentheses(string S);
+
+    /// <summary>
+    /// Leet code #797. All Paths From Source to Target
+    /// </summary>
+    void allPathsSourceTarget(vector<vector<int>>& graph, vector<int>& path, unordered_set<int>& visited, vector<vector<int>>& result);
+
+    /// <summary>
+    /// Leet code #797. All Paths From Source to Target
+    /// 
+    /// Given a directed, acyclic graph of N nodes.  Find all possible paths 
+    /// from node 0 to node N-1, and return them in any order.
+    ///
+    /// The graph is given as follows:  the nodes are 0, 1, ..., 
+    /// graph.length - 1.  graph[i] is a list of all nodes j for which the 
+    /// edge (i, j) exists.
+    ///
+    /// Example:
+    /// Input: [[1,2], [3], [3], []] 
+    /// Output: [[0,1,3],[0,2,3]] 
+    /// Explanation: The graph looks like this:
+    /// 0--->1
+    /// |    |
+    /// v    v
+    /// 2--->3
+    /// There are two paths: 0 -> 1 -> 3 and 0 -> 2 -> 3.
+    /// Note:
+    ///
+    /// 1. The number of nodes in the graph will be in the range [2, 15].
+    /// 2. You can print different paths in any order, but you should keep the 
+    ///    order of nodes inside one path.
+    /// </summary>
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph);
+
+    /// <summary>
+    /// Leetcode #784. Letter Case Permutation
+    ///
+    /// Given a string S, we can transform every letter individually to be 
+    /// lowercase or uppercase to create another string.  Return a list of 
+    /// all possible strings we could create.
+    ///
+    /// Examples:
+    /// Input: S = "a1b2"
+    /// Output: ["a1b2", "a1B2", "A1b2", "A1B2"]
+    ///
+    /// Input: S = "3z4"
+    /// Output: ["3z4", "3Z4"]
+    ///
+    /// Input: S = "12345"
+    /// Output: ["12345"]
+    /// Note:
+    ///
+    /// 1. S will be a string with length at most 12.
+    /// 2. S will consist only of letters or digits.
+    /// </summary>
+    vector<string> letterCasePermutation(string S);
+
+    /// <summary>
+    /// Leet code 1718. Construct the Lexicographically Largest Valid Sequence
+    /// </summary>
+    bool constructDistancedSequence(vector<int>& arr, int index, int bit_mask, int n);
+
+    /// <summary>
+    /// Leet code 1718. Construct the Lexicographically Largest Valid Sequence
+    /// 
+    /// Medium
+    /// 
+    /// Given an integer n, find a sequence that satisfies all of the 
+    /// following:
+    ///
+    /// The integer 1 occurs once in the sequence.
+    /// Each integer between 2 and n occurs twice in the sequence.
+    /// For every integer i between 2 and n, the distance between the two 
+    /// occurrences of i is exactly i.
+    /// The distance between two numbers on the sequence, a[i] and a[j], is the 
+    /// absolute difference of their indices, |j - i|.
+    ///
+    /// Return the lexicographically largest sequence. It is guaranteed that 
+    /// under the given constraints, there is always a solution.
+    ///
+    /// A sequence a is lexicographically larger than a sequence b (of the 
+    /// same length) if in the first position where a and b differ, sequence a 
+    /// has a number greater than the corresponding number in b. For example, 
+    /// [0,1,9,0] is lexicographically larger than [0,1,5,6] because the first 
+    /// position they differ is at the third number, and 9 is greater than 5.
+    ///
+    /// Example 1:
+    /// Input: n = 3
+    /// Output: [3,1,2,3,2]
+    /// Explanation: [2,3,2,1,3] is also a valid sequence, but [3,1,2,3,2] is 
+    /// the lexicographically largest valid sequence.
+    ///
+    /// Example 2:
+    /// Input: n = 5
+    /// Output: [5,3,1,4,3,5,2,4,2]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 20
+    /// </summary>
+    vector<int> constructDistancedSequence(int n);
+
+    /// <summary>
+    /// Leet code 1723. Find Minimum Time to Finish All Jobs
+    /// </summary>
+    void minimumTimeRequired(vector<int>& jobs, int index, vector<int>& workers, int max_time, int& result);
+
+    /// <summary>
+    /// Leet code 1723. Find Minimum Time to Finish All Jobs
+    /// 
+    /// Hard
+    /// 
+    /// You are given an integer array jobs, where jobs[i] is the amount of 
+    /// time it takes to complete the ith job.
+    ///
+    /// There are k workers that you can assign jobs to. Each job should be 
+    /// assigned to exactly one worker. The working time of a worker is the 
+    /// sum of the time it takes to complete all jobs assigned to them. Your 
+    /// goal is to devise an optimal assignment such that the maximum working 
+    /// time of any worker is minimized.
+    ///
+    /// Return the minimum possible maximum working time of any assignment.
+    /// 
+    /// Example 1:
+    /// Input: jobs = [3,2,3], k = 3
+    /// Output: 3
+    /// Explanation: By assigning each person one job, the maximum time is 3.
+    ///
+    /// Example 2:
+    /// Input: jobs = [1,2,4,7,8], k = 2
+    /// Output: 11
+    /// Explanation: Assign the jobs the following way:
+    /// Worker 1: 1, 2, 8 (working time = 1 + 2 + 8 = 11)
+    /// Worker 2: 4, 7 (working time = 4 + 7 = 11)
+    /// The maximum working time is 11.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= k <= jobs.length <= 12
+    /// 2. 1 <= jobs[i] <= 10^7
+    /// </summary>
+    int minimumTimeRequired(vector<int>& jobs, int k);
+
 #pragma endregion
 };
 

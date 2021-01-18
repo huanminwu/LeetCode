@@ -812,8 +812,55 @@ void TestLeetCode1669(void)
     leetCode.freeListNodes(result);
 }
 
+void TestLeetCode1721(void)
+{
+    Logger::WriteMessage("Test Leet Code 1721");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 1,2,3,4,5 };
+    int  k = 2;
+    ListNode* list = leetCode.generateListNodes(data_list);
+    ListNode* result = leetCode.swapNodes(list, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 7,9,6,6,7,8,3,0,9,5 };
+    k = 5;
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.swapNodes(list, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 1 };
+    k = 1;
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.swapNodes(list, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 1, 2 };
+    k = 1;
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.swapNodes(list, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 1, 2, 3 };
+    k = 2;
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.swapNodes(list, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+}
+
+
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode1721();
     TestLeetCode1669();
     TestLeetCode1634();
     TestLeetCode1474();

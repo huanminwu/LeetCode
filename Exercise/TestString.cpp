@@ -3800,8 +3800,28 @@ void TestLeetCode1704(void)
     Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1717(void)
+{
+    Logger::WriteMessage("Test Leet Code 1717");
+    LeetCodeString leetCode;
+    string s = "cdbcbbaaabab";
+    int x = 4;
+    int y = 5;
+    int result = leetCode.maximumGain(s, x, y);
+    Logger::WriteMessage("s = " + s + "; x = " + to_string(x) + 
+        "; y = " + to_string(y) + "; result = " + to_string(result));
+
+    s = "aabbaaxybbaabb";
+    x = 5;
+    y = 4;
+    result = leetCode.maximumGain(s, x, y);
+    Logger::WriteMessage("s = " + s + "; x = " + to_string(x) +
+        "; y = " + to_string(y) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1717();
     TestLeetCode1704();
     TestLeetCode1702();
     TestLeetCode1698();

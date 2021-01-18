@@ -3159,8 +3159,62 @@ void TestLeetCode1697(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1722(void)
+{
+    Logger::WriteMessage("Test Leet Code 1722");
+    LeetCodeGraph leetCode;
+    vector<int> source = { 1, 2, 3, 4 };
+    vector<int> target = { 2, 1, 4, 5 };
+    vector<vector<int>> allowedSwaps = { {0, 1},{2, 3} };
+
+    int result = leetCode.minimumHammingDistance(source, target, allowedSwaps);
+    Logger::WriteMessage(source);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    source = { 1, 2, 3, 4 };
+    target = { 1,3,2,4 };
+    allowedSwaps = {};
+
+    result = leetCode.minimumHammingDistance(source, target, allowedSwaps);
+    Logger::WriteMessage(source);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    source = { 5,1,2,4,3 };
+    target = { 1,5,4,2,3 };
+    allowedSwaps = { {0, 4},{4, 2},{1, 3},{1, 4} };
+
+    result = leetCode.minimumHammingDistance(source, target, allowedSwaps);
+    Logger::WriteMessage(source);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1719(void)
+{
+    Logger::WriteMessage("Test Leet Code 1719");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> pairs = { {1, 2},{2, 3} };
+    int result = leetCode.checkWays(pairs);
+    Logger::WriteMessage(pairs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    pairs = { {1, 2},{2, 3},{1, 3} };
+    result = leetCode.checkWays(pairs);
+    Logger::WriteMessage(pairs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    pairs = { {1, 2},{2, 3},{2, 4},{1, 5} };
+    result = leetCode.checkWays(pairs);
+    Logger::WriteMessage(pairs);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1719();
+    TestLeetCode1722();
     TestLeetCode1697();
     TestLeetCode1654();
     TestLeetCode1631();

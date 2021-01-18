@@ -1807,7 +1807,7 @@ void TestLeetCode775(void)
 void TestLeetCode784(void)
 {
     Logger::WriteMessage("Test Leet Code 784");
-    LeetCode leetCode;
+    LeetCodeDFS leetCode;
     string S = "a1b2";
     vector<string> result = leetCode.letterCasePermutation(S);
     Logger::WriteMessage("S = " + S);
@@ -1823,8 +1823,6 @@ void TestLeetCode784(void)
     Logger::WriteMessage("S = " + S);
     Logger::WriteMessage(result);
 }
-
-
 
 
 void TestLeetCode788(void)
@@ -1880,16 +1878,6 @@ void TestLeetCode793(void)
     K = 5;
     result = leetCode.preimageSizeFZF(K);
     Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
-}
-
-void TestLeetCode797(void)
-{
-    Logger::WriteMessage("Test Leet Code 797");
-    LeetCode leetCode;
-    vector<vector<int>> graph = { {1, 2},{3},{3},{} };
-    vector<vector<int>> result = leetCode.allPathsSourceTarget(graph);
-    Logger::WriteMessage(graph);
-    Logger::WriteMessage(result);
 }
 
 void TestLeetCode798(void)
@@ -2065,32 +2053,6 @@ void TestLeetCode853(void)
     Logger::WriteMessage(speed);
     Logger::WriteMessage("result = " + to_string(result));
 }
-
-
-
-
-
-void TestLeetCode856(void)
-{
-    Logger::WriteMessage("Test Leet Code 856");
-    LeetCode leetCode;
-    string S = "()";
-    int result = leetCode.scoreOfParentheses(S);
-    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
-
-    S = "(())";
-    result = leetCode.scoreOfParentheses(S);
-    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
-
-    S = "()()";
-    result = leetCode.scoreOfParentheses(S);
-    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
-
-    S = "(()(()))";
-    result = leetCode.scoreOfParentheses(S);
-    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
-}
-
 
 void TestLeetCode870(void)
 {
@@ -3278,21 +3240,22 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeBit();
     TestLeetCodeArray();
-    TestLeetCodeSort();
+    TestLeetCodeGraph();
+    TestLeetCodeDFS();
+    TestLeetCodeLinkedList();
     TestLeetCodeString();
+    TestLeetCodeMath();
+    TestLeetCodeHashtable();
+    TestLeetCodeSort();
+    TestLeetCodeBit();
     TestLeetCodeArray();
     TestLeetCodeStack();
     TestLeetCodeDP();
-    TestLeetCodeGraph();
     TestLeetCodeGreedy();
     TestLeetCodeDP();
-    TestLeetCodeMath();
     TestLeetCodeDesign();
-    TestLeetCodeHashtable();
     TestLeetCodeDFS();
-    TestLeetCodeLinkedList();
     TestLeetCodeTree();
     TestLeetCodeDFS();
     TestLeetCodeBinarySearch();
@@ -3399,7 +3362,6 @@ void main(int argc, char* argv[])
     TestLeetCode873();
     TestLeetCode871();
     TestLeetCode870();
-    TestLeetCode856();
     TestLeetCode853();
     TestLeetCode851();
     TestLeetCode847();
@@ -3413,7 +3375,6 @@ void main(int argc, char* argv[])
     TestLeetCode802();
     TestLeetCode801();
     TestLeetCode799();
-    TestLeetCode797();
     TestLeetCode796();
     TestLeetCode793();
     TestLeetCode795();

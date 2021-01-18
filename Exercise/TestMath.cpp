@@ -3466,8 +3466,26 @@ void TestLeetCode1689(void)
     Logger::WriteMessage("n = " + n + "; result = " + to_string(result));
 }
 
+void TestLeetCode1716(void)
+{
+    Logger::WriteMessage("Test Leet Code 1716");
+    LeetCodeMath leetCode;
+    int n = 4;
+    int result = leetCode.totalMoney(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 10;
+    result = leetCode.totalMoney(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 20;
+    result = leetCode.totalMoney(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1716();
     TestLeetCode1689();
     TestLeetCode1688();
     TestLeetCode1680();

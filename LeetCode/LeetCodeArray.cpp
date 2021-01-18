@@ -14588,4 +14588,360 @@ vector<int> LeetCodeArray::findBall(vector<vector<int>>& grid)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #1712. Ways to Split Array Into Three Subarrays
+/// 
+/// Medium
+/// 
+/// A split of an integer array is good if:
+/// The array is split into three non-empty contiguous subarrays - named 
+/// left, mid, right respectively from left to right.
+/// The sum of the elements in left is less than or equal to the sum of 
+/// the elements in mid, and the sum of the elements in mid is less than 
+/// or equal to the sum of the elements in right.
+/// Given nums, an array of non-negative integers, return the number of 
+/// good ways to split nums. As the number may be too large, return it 
+/// modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: nums = [1,1,1]
+/// Output: 1
+/// Explanation: The only good way to split nums is [1] [1] [1].
+///
+/// Example 2:
+/// Input: nums = [1,2,2,2,5,0]
+/// Output: 3
+/// Explanation: There are three good ways of splitting nums:
+/// [1] [2] [2,2,5,0]
+/// [1] [2,2] [2,5,0]
+/// [1,2] [2,2] [5,0]
+///
+/// Example 3:
+/// Input: nums = [3,2,1]
+/// Output: 0
+/// Explanation: There is no good way to split nums.
+/// Constraints:
+/// 1. 3 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^4
+/// </summary>
+int LeetCodeArray::waysToSplit(vector<int>& nums)
+{
+    int M = 1000000007;
+    int result = 0;
+    int n = nums.size();
+    vector<int> sums(n);
+    int s = 0;
+    for (int i = 0; i < n; i++)
+    {
+        s += nums[i];
+        sums[i] = s;
+    }
+    int first = 0;
+    int last = 0;
+    for (int i = 0; i < n - 2; i++)
+    {
+        while ((first < n - 1) && (first <= i || sums[first] - sums[i] < sums[i]))
+        {
+            first++;
+        }
+        while ((last < n-1) && (last < first || sums[n - 1] - sums[last] >= sums[last] - sums[i]))
+        {
+            last++;
+        }
+        if (last > first) result = (result + last - first) % M;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1720. Decode XORed Array
+/// 
+/// Easy
+/// 
+/// There is a hidden integer array arr that consists of n non-negative 
+/// integers.
+///
+/// It was encoded into another integer array encoded of length n - 1, 
+/// such that encoded[i] = arr[i] XOR arr[i + 1]. For example, if 
+/// arr = [1,0,2,1], then encoded = [1,2,3].
+///
+/// You are given the encoded array. You are also given an integer first, 
+/// that is the first element of arr, i.e. arr[0].
+/// 
+/// Return the original array arr. It can be proved that the answer exists 
+/// and is unique.
+///
+/// Example 1:
+/// Input: encoded = [1,2,3], first = 1
+/// Output: [1,0,2,1]
+/// Explanation: If arr = [1,0,2,1], then first = 1 and encoded = 
+/// [1 XOR 0, 0 XOR 2, 2 XOR 1] = [1,2,3]
+///
+/// Example 2:
+/// Input: encoded = [6,2,7,3], first = 4
+/// Output: [4,2,0,7,4]
+///
+/// Constraints:
+/// 1. 2 <= n <= 10^4
+/// 2. encoded.length == n - 1
+/// 3. 0 <= encoded[i] <= 10^5
+/// 4. 0 <= first <= 10^5
+/// </summary>
+vector<int> LeetCodeArray::decode(vector<int>& encoded, int first)
+{
+    vector<int> result(encoded.size() + 1);
+    result[0] = first;
+
+    for (size_t i = 0; i < encoded.size(); i++)
+    {
+        result[i + 1] = result[i] ^ encoded[i];
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1713. Minimum Operations to Make a Subsequence
+/// 
+/// Hard
+/// 
+/// You are given an array target that consists of distinct integers and 
+/// another integer array arr that can have duplicates.
+///
+/// In one operation, you can insert any integer at any position in arr. 
+/// For example, if arr = [1,4,1,2], you can add 3 in the middle and make 
+/// it [1,4,3,1,2]. Note that you can insert the integer at the very 
+/// beginning or end of the array.
+///
+/// Return the minimum number of operations needed to make target a 
+/// subsequence of arr.
+/// 
+/// A subsequence of an array is a new array generated from the original 
+/// array by deleting some elements (possibly none) without changing the 
+/// remaining elements' relative order. For example, [2,7,4] is a 
+//// subsequence of [4,2,3,7,2,1,4] (the underlined elements), while 
+/// [2,4,2] is not.
+///
+/// Example 1:
+/// Input: target = [5,1,3], arr = [9,4,2,3,4]
+/// Output: 2
+/// Explanation: You can add 5 and 1 in such a way that makes 
+/// arr = [5,9,4,1,2,3,4], then target will be a subsequence of arr.
+///
+/// Example 2:
+/// Input: target = [6,4,8,1,3,2], arr = [4,7,6,2,3,8,6,1]
+/// Output: 3
+/// 
+/// Constraints:
+/// 1. 1 <= target.length, arr.length <= 10^5
+/// 2. 1 <= target[i], arr[i] <= 10^9
+/// 3. target contains no duplicates.
+/// </summary>
+int LeetCodeArray::minOperations(vector<int>& target, vector<int>& arr)
+{
+    unordered_map<int, vector<int>> pos_map;
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        pos_map[arr[i]].push_back(i);
+    }
+    set<int> seq;
+    for (size_t i = 0; i < target.size(); i++)
+    {
+        map<int, int> new_map;
+        for (size_t j = 0; j < pos_map[target[i]].size(); j++)
+        {
+            auto itr = seq.lower_bound(pos_map[target[i]][j]);
+            int key = 0;
+            if (itr == seq.end()) key = INT_MAX;
+            else key = *itr;
+            if (new_map.count(key) == 0) new_map[key] = pos_map[target[i]][j];
+        }
+        for (auto itr : new_map)
+        {
+            if (itr.first == INT_MAX) seq.insert(itr.second);
+            else
+            {
+                seq.erase(itr.first);
+                seq.insert(itr.second);
+            }
+        }
+    }
+    return target.size() - seq.size();
+}
+
+/// <summary>
+/// Leet code 1725. Number Of Rectangles That Can Form The Largest Square
+/// 
+/// Easy
+/// 
+/// You are given an array rectangles where rectangles[i] = [li, wi] 
+/// represents the ith rectangle of length li and width wi.
+///
+/// You can cut the ith rectangle to form a square with a side length 
+/// of k if both k <= li and k <= wi. For example, if you have a 
+/// rectangle [4,6], you can cut it to get a square with a side length 
+/// of at most 4.
+///
+/// Let maxLen be the side length of the largest square you can obtain 
+/// from any of the given rectangles.
+///
+/// Return the number of rectangles that can make a square with a side 
+/// length of maxLen.
+///
+/// Example 1:
+/// Input: rectangles = [[5,8],[3,9],[5,12],[16,5]]
+/// Output: 3
+/// Explanation: The largest squares you can get from each rectangle 
+/// are of lengths [5,3,5,5].
+/// The largest possible square is of length 5, and you can get it 
+/// out of 3 rectangles.
+///
+/// Example 2:
+/// Input: rectangles = [[2,3],[3,7],[4,3],[3,7]]
+/// Output: 3
+///
+/// Constraints:
+/// 1. 1 <= rectangles.length <= 1000
+/// 2. rectangles[i].length == 2
+/// 3. 1 <= li, wi <= 109
+/// 4. li != wi
+/// </summary>
+int LeetCodeArray::countGoodRectangles(vector<vector<int>>& rectangles)
+{
+    int result = 0;
+    int max_length = 0;
+    for (size_t i = 0; i < rectangles.size(); i++)
+    {
+        int length = min(rectangles[i][0], rectangles[i][1]);
+        if (length > max_length)
+        {
+            max_length = length;
+            result = 1;
+        }
+        else if (length == max_length)
+        {
+            result++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1726. Tuple with Same Product
+/// 
+/// Medium
+/// 
+/// Given an array nums of distinct positive integers, return the number 
+/// of tuples (a, b, c, d) such that a * b = c * d where a, b, c, and d 
+/// are elements of nums, and a != b != c != d.
+/// Example 1:
+/// Input: nums = [2,3,4,6]
+/// Output: 8
+/// Explanation: There are 8 valid tuples:
+/// (2,6,3,4) , (2,6,4,3) , (6,2,3,4) , (6,2,4,3)
+/// (3,4,2,6) , (4,3,2,6) , (3,4,6,2) , (4,3,6,2)
+///
+/// Example 2:
+/// Input: nums = [1,2,4,5,10]
+/// Output: 16
+/// Explanation: There are 16 valids tuples:
+/// (1,10,2,5) , (1,10,5,2) , (10,1,2,5) , (10,1,5,2)
+/// (2,5,1,10) , (2,5,10,1) , (5,2,1,10) , (5,2,10,1)
+/// (2,10,4,5) , (2,10,5,4) , (10,2,4,5) , (10,2,4,5)
+/// (4,5,2,10) , (4,5,10,2) , (5,4,2,10) , (5,4,10,2)
+///
+/// Example 3:
+/// Input: nums = [2,3,4,6,8,12]
+/// Output: 40
+///
+/// Example 4:
+/// Input: nums = [2,3,5,7]
+/// Output: 0
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 10^4
+/// 3. All elements in nums are distinct.
+/// </summary>
+int LeetCodeArray::tupleSameProduct(vector<int>& nums)
+{
+    unordered_map<int, int> products;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (size_t j = i + 1; j < nums.size(); j++)
+        {
+            int product = nums[i] * nums[j];
+
+            if (products.count(product) > 0)
+            {
+                result += products[product];
+            }
+            products[product]++;
+        }
+    }
+    return result * 8;
+}
+
+/// <summary>
+/// Leet code 1727. Largest Submatrix With Rearrangements
+/// 
+/// Medium
+/// 
+/// You are given a binary matrix matrix of size m x n, and you are 
+/// allowed to rearrange the columns of the matrix in any order.
+///
+/// Return the area of the largest submatrix within matrix where every 
+/// element of the submatrix is 1 after reordering the columns optimally.
+///
+/// Example 1:
+/// Input: matrix = [[0,0,1],[1,1,1],[1,0,1]]
+/// Output: 4
+/// Explanation: You can rearrange the columns as shown above.
+/// The largest submatrix of 1s, in bold, has an area of 4.
+///
+/// Example 2:
+/// Input: matrix = [[1,0,1,0,1]]
+/// Output: 3
+/// Explanation: You can rearrange the columns as shown above.
+/// The largest submatrix of 1s, in bold, has an area of 3.
+///
+/// Example 3:
+/// Input: matrix = [[1,1,0],[1,0,1]]
+/// Output: 2
+/// Explanation: Notice that you must rearrange entire columns, and there 
+/// is no way to make a submatrix of 1s larger than an area of 2.
+///
+/// Example 4:
+/// Input: matrix = [[0,0],[0,0]]
+/// Output: 0
+/// Explanation: As there are no 1s, no submatrix of 1s can be formed 
+/// and the area is 0.
+/// 
+/// Constraints:
+/// 1. m == matrix.length
+/// 2. n == matrix[i].length
+/// 3. 1 <= m * n <= 10^5
+/// 4. matrix[i][j] is 0 or 1.
+/// </summary>
+int LeetCodeArray::largestSubmatrix(vector<vector<int>>& matrix)
+{
+    vector<int> row(matrix[0].size());
+    int result = 0;
+    for (size_t i = 0; i < matrix.size(); i++)
+    {
+        for (size_t j = 0; j < matrix[i].size(); j++)
+        {
+            if (matrix[i][j] == 1) row[j]++;
+            else row[j] = 0;
+        }
+        vector<int> sorted_row = row;
+        sort(sorted_row.begin(), sorted_row.end(), greater<int>());
+        for (size_t j = 0; j < sorted_row.size(); j++)
+        {
+            result = max(result, sorted_row[j] * ((int)j + 1));
+        }
+    }
+    return result;
+}
 #pragma endregion

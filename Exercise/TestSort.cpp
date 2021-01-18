@@ -1126,8 +1126,26 @@ void TestLeetCode1705(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1710(void)
+{
+    Logger::WriteMessage("Test Leet Code 1710");
+    LeetCodeSort leetCode;
+    vector<vector<int>> boxTypes = { {1, 3},{2, 2},{3, 1} };
+    int truckSize = 4;
+    int result = leetCode.maximumUnits(boxTypes, truckSize);
+    Logger::WriteMessage(boxTypes);
+    Logger::WriteMessage("truckSize = " + to_string(truckSize) + "; result = " + to_string(result));
+
+    boxTypes = { {5, 10},{2, 5},{4, 7}, {3, 9} };
+    truckSize = 10;
+    result = leetCode.maximumUnits(boxTypes, truckSize);
+    Logger::WriteMessage(boxTypes);
+    Logger::WriteMessage("truckSize = " + to_string(truckSize) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1710();
     TestLeetCode1705();
     TestLeetCode334();
     TestLeetCode1686();
