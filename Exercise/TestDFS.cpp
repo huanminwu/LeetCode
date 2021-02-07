@@ -1071,8 +1071,90 @@ void TestLeetCode1723(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 };
 
+void TestLeetCode1728(void)
+{
+    Logger::WriteMessage("Test Leet Code 1728");
+    LeetCodeDFS leetCode;
+
+    vector<string> grid = { ".....", "...C.", "...#.", "...#M", "F..#." };
+    int catJump = 1;
+    int mouseJump = 3;
+    bool result = leetCode.canMouseWin(grid, catJump, mouseJump);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("catJump = " + to_string(catJump) +
+        "; mouseJump = " + to_string(mouseJump) +
+        "; result = " + (string)(result ? "true" : "false")
+    );
+
+    grid =
+    {
+        "CM......", "#######.", "........",
+        ".#######", "........", "#######.",
+        "........", "F#######"
+    };
+    catJump = 1;
+    mouseJump = 1;
+    result = leetCode.canMouseWin(grid, catJump, mouseJump);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("catJump = " + to_string(catJump) +
+        "; mouseJump = " + to_string(mouseJump) +
+        "; result = " + (string)(result ? "true" : "false")
+    );
+
+    grid = { "####F","#C...","M...." };
+    catJump = 1;
+    mouseJump = 2;
+    result = leetCode.canMouseWin(grid, catJump, mouseJump);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("catJump = " + to_string(catJump) + 
+        "; mouseJump = " + to_string(mouseJump) +
+        "; result = " + (string)(result ? "true" : "false")
+    );
+
+    grid = { "M.C...F" };
+    catJump = 1;
+    mouseJump = 4;
+    result = leetCode.canMouseWin(grid, catJump, mouseJump);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("catJump = " + to_string(catJump) +
+        "; mouseJump = " + to_string(mouseJump) +
+        "; result = " + (string)(result ? "true" : "false")
+    );
+  
+    grid = { "M.C...F" };
+    catJump = 1;
+    mouseJump = 3;
+    result = leetCode.canMouseWin(grid, catJump, mouseJump);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("catJump = " + to_string(catJump) +
+        "; mouseJump = " + to_string(mouseJump) +
+        "; result = " + (string)(result ? "true" : "false")
+    );
+
+    grid = { "C...#","...#F","....#","M...." };
+    catJump = 2;
+    mouseJump = 5;
+    result = leetCode.canMouseWin(grid, catJump, mouseJump);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("catJump = " + to_string(catJump) +
+        "; mouseJump = " + to_string(mouseJump) +
+        "; result = " + (string)(result ? "true" : "false")
+    );
+
+    grid = { ".M...", "..#..", "#..#.", "C#.#.", "...#F" };
+    catJump = 3;
+    mouseJump = 1;
+    result = leetCode.canMouseWin(grid, catJump, mouseJump);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("catJump = " + to_string(catJump) +
+        "; mouseJump = " + to_string(mouseJump) +
+        "; result = " + (string)(result ? "true" : "false")
+    );
+};
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode1728();
     TestLeetCode1723();
     TestLeetCode1718();
     TestLeetCode797();

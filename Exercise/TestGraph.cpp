@@ -3211,8 +3211,66 @@ void TestLeetCode1719(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1730(void)
+{
+    Logger::WriteMessage("Test Leet Code 1730");
+    LeetCodeGraph leetCode;
+    vector<vector<char>> grid =
+    {
+        {'X', 'X', 'X', 'X', 'X', 'X'},
+        {'X', '*', 'O', 'O', 'O', 'X'},
+        {'X', 'O', 'O', '#', 'O', 'X'},
+        {'X', 'X', 'X', 'X', 'X', 'X'}
+    };
+    int result = leetCode.getFood(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {'X', 'X', 'X', 'X', 'X'},
+        {'X', '*', 'X', 'O', 'X'},
+        {'X', 'O', 'X', '#', 'X'},
+        {'X', 'X', 'X', 'X', 'X'}
+    };
+    result = leetCode.getFood(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}, 
+        {'X', '*', 'O', 'X', 'O', '#', 'O', 'X'}, 
+        {'X', 'O', 'O', 'X', 'O', 'O', 'X', 'X'}, 
+        {'X', 'O', 'O', 'O', 'O', '#', 'O', 'X'}, 
+        {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
+    };
+    result = leetCode.getFood(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {'O', '*'},
+        {'#', 'O'}
+    };
+    result = leetCode.getFood(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {'X','*'},
+        {'#','X'}
+    };
+    result = leetCode.getFood(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1730();
     TestLeetCode1719();
     TestLeetCode1722();
     TestLeetCode1697();

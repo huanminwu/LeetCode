@@ -5224,8 +5224,32 @@ void TestLeetCode1727(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1708(void)
+{
+    Logger::WriteMessage("Test Leet Code 1708");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 4, 5, 2, 3 };
+    int k = 3;
+    vector<int> result = leetCode.largestSubarray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,4,5,2,3 };
+    k = 4;
+    result = leetCode.largestSubarray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,4,5,2,3 };
+    k = 1;
+    result = leetCode.largestSubarray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1708();
     TestLeetCode1727();
     TestLeetCode1726();
     TestLeetCode1725();

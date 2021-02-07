@@ -3236,17 +3236,18 @@ void TestLeetCode1199(void)
     result = leetCode.minBuildTime(blocks, split);
     Logger::WriteMessage(blocks);
     Logger::WriteMessage("split = " + to_string(split) + "; result = " + to_string(result));
+
 }
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeArray();
+    TestLeetCodeHashtable();
     TestLeetCodeGraph();
+    TestLeetCodeArray();
     TestLeetCodeDFS();
     TestLeetCodeLinkedList();
     TestLeetCodeString();
     TestLeetCodeMath();
-    TestLeetCodeHashtable();
     TestLeetCodeSort();
     TestLeetCodeBit();
     TestLeetCodeArray();

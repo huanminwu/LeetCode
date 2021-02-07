@@ -10027,4 +10027,111 @@ int LeetCodeGraph::checkWays(vector<vector<int>>& pairs)
     return result;
 }
 
+/// <summary>
+/// Leet code 1730. Shortest Path to Get Food
+/// 
+/// Medium
+/// 
+/// You are starving and you want to eat food as quickly as possible. 
+/// You want to find the shortest path to arrive at any food cell.
+///
+/// You are given an m x n character matrix, grid, of these different 
+/// types of cells:
+///
+/// '*' is your location. There is exactly one '*' cell.
+/// '#' is a food cell. There may be multiple food cells.
+/// 'O' is free space, and you can travel through these cells.
+/// 'X' is an obstacle, and you cannot travel through these cells.
+/// You can travel to any adjacent cell north, east, south, or west of 
+/// your current location if there is not an obstacle.
+///
+/// Return the length of the shortest path for you to reach any food cell. 
+/// If there is no path for you to reach food, return -1.
+/// Example 1:
+/// Input: grid = [["X","X","X","X","X","X"],["X","*","O","O","O","X"]
+/// ,["X","O","O","#","O","X"],["X","X","X","X","X","X"]]
+/// Output: 3
+/// Explanation: It takes 3 steps to reach the food.
+///
+/// Example 2:
+/// Input: grid = [["X","X","X","X","X"],["X","*","X","O","X"],
+/// ["X","O","X","#","X"],["X","X","X","X","X"]]
+/// Output: -1
+/// Explanation: It is not possible to reach the food.
+///
+/// Example 3:
+/// Input: grid =
+/// [["X","X","X","X","X","X","X","X"],["X","*","O","X","O","#","O","X"],
+/// ["X","O","O","X","O","O","X","X"],["X","O","O","O","O","#","O","X"],
+/// ["X","X","X","X","X","X","X","X"]]
+/// Output: 6
+/// Explanation: There can be multiple food cells. It only takes 6 
+/// steps to reach the bottom food.
+///
+/// Example 4:
+/// Input: grid = [["O","*"],["#","O"]]
+/// Output: 2
+///
+/// Example 5:
+/// Input: grid = [["X","*"],["#","X"]]
+/// Output: -1
+/// 
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 1 <= m, n <= 200
+/// 4. grid[row][col] is '*', 'X', 'O', or '#'.
+/// 5. The grid contains exactly one '*'.
+/// </summary>
+int LeetCodeGraph::getFood(vector<vector<char>>& grid)
+{
+    vector<int> pos = { -1, -1 };
+    int m = grid.size();
+    int n = grid[0].size();
+    vector<vector<int>> visited(m, vector<int>(n));
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (grid[i][j] == '*')
+            {
+                pos = { i, j };
+                break;
+            }
+        }
+        if (pos[0] != -1) break;
+    }
+    vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    queue<vector<int>> queue;
+    visited[pos[0]][pos[1]] = 1;
+    queue.push(pos);
+    int result = 0;
+    while (!queue.empty())
+    {
+        result++;
+        int size = queue.size();
+        for (int i = 0; i < size; i++)
+        {
+            pos = queue.front();
+            queue.pop();
+            for (size_t d = 0; d < directions.size(); d++)
+            {
+                vector<int> next = pos;
+                next[0] += directions[d][0];
+                next[1] += directions[d][1];
+                if (next[0] < 0 || next[0] >= m ||
+                    next[1] < 0 || next[1] >= n) continue;
+                if (grid[next[0]][next[1]] == 'X') continue;
+                if (visited[next[0]][next[1]] == 1) continue;
+                if (grid[next[0]][next[1]] == '#')
+                {
+                    return result;
+                }
+                visited[next[0]][next[1]] = 1;
+                queue.push(next);
+            }
+        }
+    }
+    return -1;
+}
 #pragma endregion

@@ -1074,8 +1074,26 @@ void TestLeetCode1711(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1714(void)
+{
+    Logger::WriteMessage("Test Leet Code 1714");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 0,1,2,3,4,5,6,7 };
+    vector<vector<int>> queries = { {0, 3},{5, 1},{4, 2} };
+    vector<int> result = leetCode.solve(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 100,200,101,201,102,202,103,203 };
+    queries = { {0, 7} };
+    result = leetCode.solve(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1714();
     TestLeetCode1711();
     TestLeetCode1679();
     TestLeetCode1604();
