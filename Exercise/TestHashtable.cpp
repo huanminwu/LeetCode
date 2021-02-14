@@ -1091,8 +1091,29 @@ void TestLeetCode1714(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1748(void)
+{
+    Logger::WriteMessage("Test Leet Code 1748");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1,2,3,2 };
+    int result = leetCode.sumOfUnique(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1,1,1 };
+    result = leetCode.sumOfUnique(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4,5 };
+    result = leetCode.sumOfUnique(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1748();
     TestLeetCode1714();
     TestLeetCode1711();
     TestLeetCode1679();

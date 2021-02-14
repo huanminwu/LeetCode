@@ -2999,8 +2999,41 @@ void TestLeetCode1666(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode1740(void)
+{
+    Logger::WriteMessage("Test Leet Code 1666");
+    LeetCodeTree leetCode;
+    string input = "[3, 5, 1, 6, 2, 0, 8, null, null, 7, 4]";
+    TreeNode* root = leetCode.deserialize(input);
+    int p = 5;
+    int q = 0;
+    int result = leetCode.findDistance(root, p, q);
+    Logger::WriteMessage("input = " + input + "; p = " + to_string(p) + 
+        "; q = " + to_string(q) + "; result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[3,5,1,6,2,0,8,null,null,7,4]";
+    root = leetCode.deserialize(input);
+    p = 5;
+    q = 7;
+    result = leetCode.findDistance(root, p, q);
+    Logger::WriteMessage("input = " + input + "; p = " + to_string(p) +
+        "; q = " + to_string(q) + "; result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[3,5,1,6,2,0,8,null,null,7,4]";
+    root = leetCode.deserialize(input);
+    p = 5;
+    q = 5;
+    result = leetCode.findDistance(root, p, q);
+    Logger::WriteMessage("input = " + input + "; p = " + to_string(p) +
+        "; q = " + to_string(q) + "; result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1740();
     TestLeetCode1666();
     TestLeetCode1597();
     TestLeetCode1516();

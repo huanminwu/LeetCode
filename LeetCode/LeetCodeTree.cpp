@@ -9518,5 +9518,78 @@ TreeNode* LeetCodeTree::flipBinaryTree(TreeNode* root, TreeNode* leaf)
     return leaf;
 }
 
+/// <summary>
+/// Leet code 1740. Find Distance in a Binary Tree
+/// </summary>
+void LeetCodeTree::findDistance(TreeNode* root, int p, int q, 
+    int& p_depth, int& q_depth, int &result)
+{
+    if (root == nullptr) return;
+    if (result >= 0) return;
+    int next_p_depth = -1;
+    int next_q_depth = -1;
+
+    findDistance(root->left, p, q, next_p_depth, next_q_depth, result);
+    if (next_p_depth != -1) p_depth = next_p_depth;
+    if (next_q_depth != -1) q_depth = next_q_depth;
+    next_p_depth = -1;
+    next_q_depth = -1;
+    findDistance(root->right, p, q, next_p_depth, next_q_depth, result);
+    if (next_p_depth != -1) p_depth = next_p_depth;
+    if (next_q_depth != -1) q_depth = next_q_depth;
+
+    if (root->val == p) p_depth = 0;
+    if (root->val == q) q_depth = 0;
+
+    if (p_depth >= 0 && q_depth >= 0)
+    {
+        result = p_depth + q_depth;
+        return;
+    }
+
+    if (p_depth >= 0) p_depth++;
+    if (q_depth >= 0) q_depth++;
+}
+
+/// <summary>
+/// Leet code 1740. Find Distance in a Binary Tree
+/// 
+/// Medium
+/// 
+/// Given the root of a binary tree and two integers p and q, return the 
+/// distance between the nodes of value p and value q in the tree.
+///
+/// The distance between two nodes is the number of edges on the path from 
+/// one to the other.
+/// 
+/// Example 1:
+/// Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 0
+/// Output: 3
+/// Explanation: There are 3 edges between 5 and 0: 5-3-1-0.
+///
+/// Example 2:
+/// Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 7
+/// Output: 2
+/// Explanation: There are 2 edges between 5 and 7: 5-2-7.
+///
+/// Example 3:
+/// Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 5
+/// Output: 0
+/// Explanation: The distance between a node and itself is 0.
+///
+/// Constraints:
+/// 1. The number of nodes in the tree is in the range [1, 10^4].
+/// 2. 0 <= Node.val <= 10^9
+/// 3. All Node.val are unique.
+/// 4. p and q are values in the tree.
+/// </summary>
+int LeetCodeTree::findDistance(TreeNode* root, int p, int q)
+{
+    int p_depth = -1;
+    int q_depth = -1;
+    int result = -1;
+    findDistance(root, p, q, p_depth, q_depth, result);
+    return result;
+}
 
 #pragma endregion

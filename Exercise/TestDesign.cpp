@@ -3553,8 +3553,74 @@ void TestLeetCode225(void)
     Logger::WriteMessage("The stack " + string(stackByQueue.empty() ? "is" : "is not") + " empty");
 }
 
+void TestLeetCode1756(void)
+{
+    Logger::WriteMessage("Test Leet Code 1756");
+    MRUQueue * mruQueue = nullptr;
+    vector<string> commands = { "MRUQueue", "fetch", "fetch", "fetch", "fetch" };
+    vector<int> parameters = {8, 3, 5, 2, 8 };
+    vector<string> result;
+    result.clear();
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "MRUQueue")
+        {
+            mruQueue = new MRUQueue(parameters[i]);
+        }
+        else if (commands[i] == "fetch")
+        {
+            int ret = mruQueue->fetch(parameters[i]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete mruQueue;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1724(void)
+{
+    Logger::WriteMessage("Test Leet Code 1724");
+    DistanceLimitedPathsExist* distanceLimitedPathsExist = nullptr;
+    vector<string> commands = { "DistanceLimitedPathsExist", "query", "query", "query", "query" };
+    vector<vector<vector<int>>> parameters = 
+    { 
+        {{6}}, {{0, 2, 4},{0, 3, 2},{1, 2, 3},{2, 3, 1},{4, 5, 5}},
+        {{2, 3, 2},{1, 3, 3},{2, 0, 3},{0, 5, 6}}
+    };
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "DistanceLimitedPathsExist")
+        {
+            distanceLimitedPathsExist = new DistanceLimitedPathsExist
+            (
+                parameters[0][0][0],
+                parameters[1]
+            );
+            result.push_back("null");
+        }
+        else if (commands[i] == "query")
+        {
+            bool ret = distanceLimitedPathsExist->query
+            (parameters[2][i-1][0], parameters[2][i-1][1], parameters[2][i-1][2]);
+            result.push_back(ret ? "true" : "false");
+        }
+    }
+    delete distanceLimitedPathsExist;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1724();
+    TestLeetCode1756();
     TestLeetCode225();
     TestLeetCode731();
     TestLeetCode732();

@@ -5247,8 +5247,24 @@ void TestLeetCode1708(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1732(void)
+{
+    Logger::WriteMessage("Test Leet Code 1732");
+    LeetCodeArray leetCode;
+    vector<int> gain = { -5, 1, 5, 0, -7 };
+    int result = leetCode.largestAltitude(gain);
+    Logger::WriteMessage(gain);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    gain = { -4,-3,-2,-1,4,3,2 };
+    result = leetCode.largestAltitude(gain);
+    Logger::WriteMessage(gain);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1732();
     TestLeetCode1708();
     TestLeetCode1727();
     TestLeetCode1726();

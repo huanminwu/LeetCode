@@ -1143,8 +1143,39 @@ void TestLeetCode1710(void)
     Logger::WriteMessage("truckSize = " + to_string(truckSize) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1752(void)
+{
+    Logger::WriteMessage("Test Leet Code 1752");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 3, 4, 5, 1, 2 };
+    bool result = leetCode.check(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 2,1,3,4 };
+    result = leetCode.check(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,2,3 };
+    result = leetCode.check(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,1,1 };
+    result = leetCode.check(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 2,1 };
+    result = leetCode.check(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1752();
     TestLeetCode1710();
     TestLeetCode1705();
     TestLeetCode334();

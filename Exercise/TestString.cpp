@@ -3819,8 +3819,26 @@ void TestLeetCode1717(void)
         "; y = " + to_string(y) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1736(void)
+{
+    Logger::WriteMessage("Test Leet Code 1736");
+    LeetCodeString leetCode;
+    string time = "2?:?0";
+    string result = leetCode.maximumTime(time);
+    Logger::WriteMessage("time = " + time + "; result = " + result);
+
+    time = "0?:3?";
+    result = leetCode.maximumTime(time);
+    Logger::WriteMessage("time = " + time + "; result = " + result);
+
+    time = "1?:22";
+    result = leetCode.maximumTime(time);
+    Logger::WriteMessage("time = " + time + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1736();
     TestLeetCode1717();
     TestLeetCode1704();
     TestLeetCode1702();

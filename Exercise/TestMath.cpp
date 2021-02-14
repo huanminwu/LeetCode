@@ -3483,8 +3483,35 @@ void TestLeetCode1716(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1742(void)
+{
+    Logger::WriteMessage("Test Leet Code 1742");
+    LeetCodeMath leetCode;
+    int lowLimit = 1; 
+    int highLimit = 10;
+    int result = leetCode.countBalls(lowLimit, highLimit);
+    Logger::WriteMessage("lowLimit = " + to_string(lowLimit) + 
+        "; highLimit = " + to_string(highLimit) +
+        "; result = " + to_string(result));
+
+    lowLimit = 5;
+    highLimit = 15;
+    result = leetCode.countBalls(lowLimit, highLimit);
+    Logger::WriteMessage("lowLimit = " + to_string(lowLimit) +
+        "; highLimit = " + to_string(highLimit) +
+        "; result = " + to_string(result));
+
+    lowLimit = 19;
+    highLimit = 28;
+    result = leetCode.countBalls(lowLimit, highLimit);
+    Logger::WriteMessage("lowLimit = " + to_string(lowLimit) +
+        "; highLimit = " + to_string(highLimit) +
+        "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1742();
     TestLeetCode1716();
     TestLeetCode1689();
     TestLeetCode1688();

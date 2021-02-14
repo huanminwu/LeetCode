@@ -3240,22 +3240,24 @@ void TestLeetCode1199(void)
 }
 
 void main(int argc, char* argv[])
-{
+{ 
+    TestLeetCodeSort();
+    TestLeetCodeHashtable();
+    TestLeetCodeMath();
+    TestLeetCodeString();
+    TestLeetCodeArray();
+    TestLeetCodeDesign();
+    TestLeetCodeTree();
+    TestLeetCodeDP();
     TestLeetCodeHashtable();
     TestLeetCodeGraph();
-    TestLeetCodeArray();
     TestLeetCodeDFS();
     TestLeetCodeLinkedList();
-    TestLeetCodeString();
-    TestLeetCodeMath();
-    TestLeetCodeSort();
     TestLeetCodeBit();
     TestLeetCodeArray();
     TestLeetCodeStack();
-    TestLeetCodeDP();
     TestLeetCodeGreedy();
     TestLeetCodeDP();
-    TestLeetCodeDesign();
     TestLeetCodeDFS();
     TestLeetCodeTree();
     TestLeetCodeDFS();

@@ -2235,8 +2235,25 @@ void TestLeetCode1682(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+
+void TestLeetCode1746(void)
+{
+    Logger::WriteMessage("Test Leet Code 1746");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 2, -1, -4, -3 };
+    int result = leetCode.maxSumAfterOperation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,-1,1,1,-1,-1,1 };
+    result = leetCode.maxSumAfterOperation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1746();
     TestLeetCode1682();
     TestLeetCode1692();
     TestLeetCode1105();

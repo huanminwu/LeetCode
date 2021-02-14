@@ -9258,4 +9258,168 @@ public:
     }
 };
 
+/// <summary>
+/// Leet code 1756. Design Most Recently Used Queue
+/// 
+/// Medium
+/// 
+/// Design a queue-like data structure that moves the most recently used 
+/// element to the end of the queue.
+///
+/// Implement the MRUQueue class:
+///
+/// MRUQueue(int n) constructs the MRUQueue with n elements: [1,2,3,...,n].
+/// fetch(int k) moves the kth element (1-indexed) to the end of the queue 
+/// and returns it.
+///
+/// Example 1:
+/// Input:
+/// ["MRUQueue", "fetch", "fetch", "fetch", "fetch"]
+/// [[8], [3], [5], [2], [8]]
+/// Output:
+/// [null, 3, 6, 2, 2]
+///
+/// Explanation:
+/// MRUQueue mRUQueue = new MRUQueue(8); 
+/// Initializes the queue to [1,2,3,4,5,6,7,8].
+/// mRUQueue.fetch(3); 
+/// Moves the 3rd element (3) to the end of the queue to 
+/// become [1,2,4,5,6,7,8,3] and returns it.
+/// mRUQueue.fetch(5); 
+/// Moves the 5th element (6) to the end of the queue to 
+/// become [1,2,4,5,7,8,3,6] and returns it.
+/// mRUQueue.fetch(2); 
+/// Moves the 2nd element (2) to the 
+/// end of the queue to become [1,4,5,7,8,3,6,2] and returns it.
+/// mRUQueue.fetch(8); 
+/// The 8th element (2) is already at the end of the queue so 
+/// just return it.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 2000
+/// 2. 1 <= k <= n
+/// 3. At most 2000 calls will be made to fetch.
+/// </summary>
+class MRUQueue 
+{
+private:
+    vector<int> m_arr;
+public:
+    MRUQueue(int n) 
+    {
+        m_arr = vector<int>(n);
+        for (int i = 0; i < n; i++)
+        {
+            m_arr[i] = i + 1;
+        }
+    }
+
+    int fetch(int k) 
+    {
+        int num = m_arr[k - 1];
+        for (size_t j = k-1; j < m_arr.size() - 1; j++)
+        {
+            m_arr[j] = m_arr[j + 1];
+        }
+        m_arr.back() = num;
+        return num;
+    }
+};
+
+/// <summary>
+/// Leet code 1724. Checking Existence of Edge Length Limited Paths II
+/// 
+/// Hard
+/// 
+/// An undirected graph of n nodes is defined by edgeList, where 
+/// edgeList[i] = [ui, vi, disi] denotes an edge between nodes ui and 
+/// vi with distance disi. Note that there may be multiple edges 
+/// between two nodes, and the graph may not be connected.
+///
+/// Implement the DistanceLimitedPathsExist class:
+///
+/// DistanceLimitedPathsExist(int n, int[][] edgeList) Initializes 
+/// the class with an undirected graph.
+/// boolean query(int p, int q, int limit) Returns true if there exists 
+/// a path from p to q such that each edge on the path has a distance 
+/// strictly less than limit, and otherwise false.
+///
+/// Example 1:
+/// Input
+/// ["DistanceLimitedPathsExist", "query", "query", "query", "query"]
+/// [[6, [[0, 2, 4], [0, 3, 2], [1, 2, 3], [2, 3, 1], [4, 5, 5]]], 
+/// [2, 3, 2], [1, 3, 3], [2, 0, 3], [0, 5, 6]]
+/// Output
+/// [null, true, false, true, false]
+///
+/// Explanation
+/// DistanceLimitedPathsExist distanceLimitedPathsExist = 
+/// new DistanceLimitedPathsExist(6, [[0, 2, 4], [0, 3, 2], [1, 2, 3], 
+/// [2, 3, 1], [4, 5, 5]]);
+/// distanceLimitedPathsExist.query(2, 3, 2); 
+/// return true. There is an edge from 2 to 3 of distance 1, which 
+/// is less than 2.
+/// distanceLimitedPathsExist.query(1, 3, 3); 
+/// return false. There is no way to go from 1 to 3 with 
+/// distances strictly less than 3.
+/// distanceLimitedPathsExist.query(2, 0, 3); 
+/// return true. There is a way to go from 2 to 0 with distance < 3: 
+/// travel from 2 to 3 to 0.
+/// distanceLimitedPathsExist.query(0, 5, 6); 
+/// return false. There are no paths from 0 to 5.
+///
+/// Constraints:
+/// 1. 2 <= n <= 10^4
+/// 2. 0 <= edgeList.length <= 10^4
+/// 3. edgeList[i].length == 3
+/// 4. 0 <= ui, vi, p, q <= n-1
+/// 5. ui != vi
+/// 6. p != q
+/// 7. 1 <= disi, limit <= 10^9
+/// 8. At most 10^4 calls will be made to query.
+/// </summary>
+class DistanceLimitedPathsExist 
+{
+private:
+    vector<int> m_parent;
+    vector<int> m_weight;
+public:
+    DistanceLimitedPathsExist(int n, vector<vector<int>>& edgeList) 
+    {
+        m_parent = vector<int>(n);
+        m_weight = vector<int>(n);
+        for (int i = 0; i < n; i++)
+        {
+            m_parent[i] = i;
+        }
+        sort
+        (
+            edgeList.begin(), edgeList.end(),
+            [](const vector<int>& a, const vector<int>& b) -> bool
+            {
+                return a[2] < b[2];
+            }
+        );
+
+        for (size_t i = 0; i < edgeList.size(); i++)
+        {
+            int a = edgeList[i][0];
+            int b = edgeList[i][1];
+            while (m_parent[a] != a) a = m_parent[a];
+            while (m_parent[b] != b) b = m_parent[b];
+            if (a != b)
+            {
+                m_parent[a] = b;
+                m_weight[a] = edgeList[i][2];
+            }
+        }
+    }
+
+    bool query(int p, int q, int limit) 
+    {
+        while (m_parent[p] != p && m_weight[p] < limit) p = m_parent[p];
+        while (m_parent[q] != q && m_weight[q] < limit) q = m_parent[q];
+        return p == q;
+    }
+};
 #endif // LeetcodeDesign_H

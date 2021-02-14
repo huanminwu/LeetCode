@@ -11185,5 +11185,56 @@ int LeetCodeDP::longestPalindromeSubseqII(string s)
     for (size_t i = 0; i < 26; i++) result = max(result, dp[0][n - 1][i]);
     return result;
 }
+
+/// <summary>
+/// Leet code 1746. Maximum Subarray Sum After One Operation
+/// 
+/// Medium
+/// 
+/// You are given an integer array nums. You must perform exactly one 
+/// operation where you can replace one element nums[i] with 
+/// nums[i] * nums[i]. 
+/// Return the maximum possible subarray sum after exactly one operation. 
+/// The subarray must be non-empty.
+///
+/// Example 1: 
+/// Input: nums = [2,-1,-4,-3]
+/// Output: 17
+/// Explanation: You can perform the operation on index 2 
+/// (0-indexed) to make nums = [2,-1,16,-3]. Now, the maximum 
+/// subarray sum is 2 + -1 + 16 = 17.
+///
+/// Example 2:
+/// Input: nums = [1,-1,1,1,-1,-1,1]
+/// Output: 4
+/// Explanation: You can perform the operation on index 1 (0-indexed) 
+/// to make nums = [1,1,1,1,-1,-1,1]. Now, the maximum subarray 
+/// sum is 1 + 1 + 1 + 1 = 4.
+///
+/// Constraints:
+///  1. 1 <= nums.length <= 10^5
+/// -10^4 <= nums[i] <= 10^4
+/// </summary>
+int LeetCodeDP::maxSumAfterOperation(vector<int>& nums)
+{
+    int sum = 0, sum_op = 0;
+    int result = INT_MIN;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (i == 0)
+        {
+            sum = nums[i];
+            sum_op = nums[i] * nums[i];
+        }
+        else
+        {
+            sum_op = max(sum + nums[i] * nums[i], sum_op + nums[i]);
+            sum = max(0, sum + nums[i]);
+        }
+        result = max(result, sum_op);
+    }
+    return result;
+}
+
 #pragma endregion
 
