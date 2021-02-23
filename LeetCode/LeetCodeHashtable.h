@@ -1718,5 +1718,93 @@ public:
     /// 2. 1 <= nums[i] <= 100
     /// </summary>
     int sumOfUnique(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code 1755. Closest Subsequence Sum
+    /// 
+    /// Hard
+    /// 
+    /// You are given an integer array nums and an integer goal.
+    /// You want to choose a subsequence of nums such that the sum of its 
+    /// elements is the closest possible to goal. That is, if the sum of the 
+    /// subsequence's elements is sum, then you want to minimize the absolute 
+    /// difference abs(sum - goal).
+    ///
+    /// Return the minimum possible value of abs(sum - goal).
+    /// Note that a subsequence of an array is an array formed by removing 
+    /// some elements (possibly all or none) of the original array.
+    ///
+    /// Example 1:
+    /// Input: nums = [5,-7,3,5], goal = 6
+    /// Output: 0
+    /// Explanation: Choose the whole array as a subsequence, with a sum of 6.
+    /// This is equal to the goal, so the absolute difference is 0.
+    ///
+    /// Example 2:
+    /// Input: nums = [7,-9,15,-2], goal = -5
+    /// Output: 1
+    /// Explanation: Choose the subsequence [7,-9,-2], with a sum of -4.
+    /// The absolute difference is abs(-4 - (-5)) = abs(1) = 1, which is the 
+    /// minimum.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,3], goal = -7
+    /// Output: 7
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 40
+    /// 2. -10^7 <= nums[i] <= 10^7
+    /// 3. -10^9 <= goal <= 10^9
+    /// </summary>
+    int minAbsDifference(vector<int>& nums, int goal);
+
+    /// <summary>
+    /// Leet code 1733. Minimum Number of People to Teach
+    /// 
+    /// Medium
+    /// 
+    /// On a social network consisting of m users and some friendships between 
+    /// users, two users can communicate with each other if they know a common 
+    /// language.
+    ///
+    /// You are given an integer n, an array languages, and an array 
+    /// friendships where:
+    /// There are n languages numbered 1 through n,
+    /// languages[i] is the set of languages the ith user knows, and
+    /// friendships[i] = [ui, vi] denotes a friendship between the users 
+    /// ui and vi.
+    /// You can choose one language and teach it to some users so that all 
+    /// friends can communicate with each other. Return the minimum number of 
+    /// users you need to teach.
+    /// 
+    /// Note that friendships are not transitive, meaning if x is a friend of y 
+    /// and y is a friend of z, this doesn't guarantee that x is a friend of z.
+    ///
+    /// Example 1:
+    /// Input: n = 2, languages = [[1],[2],[1,2]], 
+    /// friendships = [[1,2],[1,3],[2,3]]
+    /// Output: 1
+    /// Explanation: You can either teach user 1 the second language or user 2 
+    /// the first language.
+    ///
+    /// Example 2:
+    /// Input: n = 3, languages = [[2],[1,3],[1,2],[3]], 
+    /// friendships = [[1,4],[1,2],[3,4],[2,3]]
+    /// Output: 2
+    /// Explanation: Teach the third language to users 1 and 3, yielding two 
+    /// users to teach.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n <= 500
+    /// 2. languages.length == m
+    /// 3. 1 <= m <= 500
+    /// 4. 1 <= languages[i].length <= n
+    /// 5. 1 <= languages[i][j] <= n
+    /// 6. 1 <= ui < vi <= languages.length
+    /// 7. 1 <= friendships.length <= 500
+    /// 8. All tuples (ui, vi) are unique
+    /// 9. languages[i] contains only unique values
+    /// </summary>
+    int minimumTeachings(int n, vector<vector<int>>& languages, vector<vector<int>>& friendships);
 };
 #endif  // LeetCodeHashtable

@@ -3836,8 +3836,100 @@ void TestLeetCode1736(void)
     Logger::WriteMessage("time = " + time + "; result = " + result);
 }
 
+void TestLeetCode1737(void)
+{
+    Logger::WriteMessage("Test Leet Code 1737");
+    LeetCodeString leetCode;
+    string a = "aba";
+    string b = "caa";
+    int result = leetCode.minCharacters(a, b);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; result = " + to_string(result));
+
+    a = "dabadd";
+    b = "cda";
+    result = leetCode.minCharacters(a, b);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; result = " + to_string(result));
+
+    a = "a";
+    b = "aabzz";
+    result = leetCode.minCharacters(a, b);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; result = " + to_string(result));
+
+    a = "azz";
+    b = "zz";
+    result = leetCode.minCharacters(a, b);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; result = " + to_string(result));
+}
+
+void TestLeetCode1754(void)
+{
+    Logger::WriteMessage("Test Leet Code 1754");
+    LeetCodeString leetCode;
+    string word1 = "cabaa";
+    string word2 = "bcaaa";
+    string result = leetCode.largestMerge(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 + 
+        "; result = " + result);
+
+    word1 = "abcabc";
+    word2 = "abdcaba";
+    result = leetCode.largestMerge(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 +
+        "; result = " + result);
+
+    word1 = "guguuuuuuuuuuuuuuguguuuuguug";
+    word2 = "gguggggggguuggguugggggg";
+    result = leetCode.largestMerge(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 +
+        "; result = " + result);  
+}
+
+void TestLeetCode1768(void)
+{
+    Logger::WriteMessage("Test Leet Code 1768");
+    LeetCodeString leetCode;
+    string word1 = "abc";
+    string word2 = "pqr";
+    string result = leetCode.mergeAlternately(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 +
+        "; result = " + result);
+
+    word1 = "ab";
+    word2 = "pqrs";
+    result = leetCode.mergeAlternately(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 +
+        "; result = " + result);
+
+    word1 = "abcd";
+    word2 = "pq";
+    result = leetCode.mergeAlternately(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 +
+        "; result = " + result);
+}
+
+void TestLeetCode1763(void)
+{
+    Logger::WriteMessage("Test Leet Code 1763");
+    LeetCodeString leetCode;
+    string s = "YazaAay";
+    string result = leetCode.longestNiceSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "Bb";
+    result = leetCode.longestNiceSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "c";
+    result = leetCode.longestNiceSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1763();
+    TestLeetCode1768();
+    TestLeetCode1754();
+    TestLeetCode1737();
     TestLeetCode1736();
     TestLeetCode1717();
     TestLeetCode1704();

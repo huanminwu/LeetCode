@@ -8037,7 +8037,7 @@ int LeetCodeString::countCharacters(vector<string>& words, string chars)
 /// </summary>
 string LeetCodeString::lastSubstring(string s)
 {
-    queue<pair<int, char>> search;
+    std::queue<pair<int, char>> search;
     vector<int> visited(s.size());
 
     for (size_t i = 0; i < s.size(); i++)
@@ -12424,7 +12424,7 @@ string LeetCodeString::findLexSmallestString(string s, int a, int b)
 {
     string result = s;
     set<string> visited;
-    queue<string> queue;
+    std::queue<string> queue;
     visited.insert(s);
     queue.push(s);
     while (!queue.empty())
@@ -13271,6 +13271,312 @@ string LeetCodeString::maximumTime(string time)
         else if (i == 2) result[i] = ':';
         else if (i == 3) result[i] = '5';
         else result[i] = '9';
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1737. Change Minimum Characters to Satisfy One of 
+///                 Three Conditions
+/// 
+/// Medium
+/// 
+/// You are given two strings a and b that consist of lowercase letters. 
+/// In one operation, you can change any character in a or b to any 
+/// lowercase letter.
+///
+/// Your goal is to satisfy one of the following three conditions:
+///
+/// Every letter in a is strictly less than every letter in b in the 
+/// alphabet.
+/// Every letter in b is strictly less than every letter in a in the 
+/// alphabet.
+/// Both a and b consist of only one distinct letter.
+/// Return the minimum number of operations needed to achieve your goal.
+///
+/// Example 1:
+/// Input: a = "aba", b = "caa"
+/// Output: 2
+/// Explanation: Consider the best way to make each condition true:
+/// 1) Change b to "ccc" in 2 operations, then every letter in a is less 
+///    than every letter in b.
+/// 2) Change a to "bbb" and b to "aaa" in 3 operations, then every 
+///    letter in b is less than every letter in a.
+/// 3) Change a to "aaa" and b to "aaa" in 2 operations, then a and b 
+///    consist of one distinct letter.
+/// The best way was done in 2 operations (either condition 1 or 
+/// condition 3).
+///
+/// Example 2:
+/// Input: a = "dabadd", b = "cda"
+/// Output: 3
+/// Explanation: The best way is to make condition 1 true by changing b 
+/// to "eee".
+/// Constraints:
+/// 1. 1 <= a.length, b.length <= 10^5
+/// 2. a and b consist only of lowercase letters.You are given a 2D 
+///    integer array, queries. For each queries[i], 
+/// </summary>
+int LeetCodeString::minCharacters(string a, string b)
+{
+    vector<int> char1(26), char2(26);
+
+    for (char ch : a) char1[ch - 'a']++;
+    for (char ch : b) char2[ch - 'a']++;
+
+    int result = INT_MAX;
+    int pre_sum1 = 0;
+    int pre_sum2 = 0;
+    // try to move either str1 or str2 left or right to 'a' - 'y'
+    for (int i = 0; i < 25; i++)
+    {
+        pre_sum1 += char1[i];
+        pre_sum2 += char2[i];
+        int count1 = (int)a.size() - char1[i] + (int)b.size() - char2[i];
+        int count2 = a.size() - pre_sum1 + pre_sum2;
+        int count3 = b.size() - pre_sum2 + pre_sum1;
+        result = min(result, min(min(count1, count2), count3));
+    }
+    result = min(result, (int)a.size() - char1[25] + (int)b.size() - char2[25]);
+    return result;
+}
+
+/// <summary>
+/// Leet code 1754. Largest Merge Of Two Strings
+/// 
+/// Medium
+/// 
+/// You are given two strings word1 and word2. You want to construct a 
+/// string merge in the following way: while either word1 or word2 are 
+/// non-empty, choose one of the following options:
+///
+/// If word1 is non-empty, append the first character in word1 to merge 
+/// and delete it from word1.
+/// For example, if word1 = "abc" and merge = "dv", then after choosing 
+/// this operation, word1 = "bc" and merge = "dva".
+/// If word2 is non-empty, append the first character in word2 to merge 
+/// and delete it from word2.
+/// For example, if word2 = "abc" and merge = "", then after choosing 
+/// this operation, word2 = "bc" and merge = "a".
+/// Return the lexicographically largest merge you can construct.
+///
+/// A string a is lexicographically larger than a string b (of the same 
+/// length) if in the first position where a and b differ, a has a 
+/// character strictly larger than the corresponding character in b. For 
+/// example, "abcd" is lexicographically larger than "abcc" because the 
+/// first position they differ is at the fourth character, and d is 
+/// greater than c.
+/// 
+/// Example 1:
+/// Input: word1 = "cabaa", word2 = "bcaaa"
+/// Output: "cbcabaaaaa"
+/// Explanation: One way to get the lexicographically largest merge is:
+/// - Take from word1: merge = "c", word1 = "abaa", word2 = "bcaaa"
+/// - Take from word2: merge = "cb", word1 = "abaa", word2 = "caaa"
+/// - Take from word2: merge = "cbc", word1 = "abaa", word2 = "aaa"
+/// - Take from word1: merge = "cbca", word1 = "baa", word2 = "aaa"
+/// - Take from word1: merge = "cbcab", word1 = "aa", word2 = "aaa"
+/// - Append the remaining 5 a's from word1 and word2 at the end of merge.
+///
+/// Example 2:
+/// Input: word1 = "abcabc", word2 = "abdcaba"
+/// Output: "abdcabcabcaba"
+/// 
+/// Constraints:
+/// 1. 1 <= word1.length, word2.length <= 3000
+/// 2. word1 and word2 consist only of lowercase English letters.
+/// </summary>
+string LeetCodeString::largestMerge(string word1, string word2)
+{
+    string result;
+    size_t i = 0;
+    size_t j = 0;
+    while (i < word1.size() || j < word2.size())
+    {
+        if (i == word1.size())
+        {
+            result.push_back(word2[j]);
+            j++;
+        }
+        else if (j == word2.size())
+        {
+            result.push_back(word1[i]);
+            i++;
+        }
+        else if (word1[i] > word2[j])
+        {
+            result.push_back(word1[i]);
+            i++;
+        }
+        else if (word1[i] < word2[j])
+        {
+            result.push_back(word2[j]);
+            j++;
+        }
+        else
+        {
+            size_t ii = i;
+            size_t jj = j;
+            while (ii < word1.size() && jj < word2.size() && word1[ii] == word2[jj])
+            {
+                ii++; jj++;
+            }
+            if (ii == word1.size() || (jj < word2.size() && word1[ii] < word2[jj]))
+            {
+                result.push_back(word2[j]);
+                j++;
+            }
+            else
+            {
+                result.push_back(word1[i]);
+                i++;
+            }
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet code 1768. Merge Strings Alternately
+/// 
+/// Easy
+/// 
+/// You are given two strings word1 and word2. Merge the strings by 
+/// adding letters in alternating order, starting with word1. If a 
+/// string is longer than the other, append the additional letters 
+/// onto the end of the merged string.
+///
+/// Return the merged string.
+/// 
+/// Example 1:
+/// Input: word1 = "abc", word2 = "pqr"
+/// Output: "apbqcr"
+/// Explanation: The merged string will be merged as so:
+/// word1:  a   b   c
+/// word2:    p   q   r
+/// merged: a p b q c r
+///
+/// Example 2:
+/// Input: word1 = "ab", word2 = "pqrs"
+/// Output: "apbqrs"
+/// Explanation: Notice that as word2 is longer, "rs" is appended to 
+/// the end.
+/// word1:  a   b 
+/// word2:    p   q   r   s
+/// merged: a p b q   r   s
+///
+/// Example 3:
+/// Input: word1 = "abcd", word2 = "pq"
+/// Output: "apbqcd"
+/// Explanation: Notice that as word1 is longer, "cd" is appended to the 
+/// end.
+/// word1:  a   b   c   d
+/// word2:    p   q 
+/// merged: a p b q c   d
+///
+/// Constraints:
+/// 1. 1 <= word1.length, word2.length <= 100
+/// 2. word1 and word2 consist of lowercase English letters.
+/// </summary>
+string LeetCodeString::mergeAlternately(string word1, string word2)
+{
+    size_t i = 0;
+    size_t j = 0;
+    string result;
+    while (i < word1.size() || j < word2.size())
+    {
+        if (i < word1.size())
+        {
+            result.push_back(word1[i]);
+            i++;
+        }
+        if (j < word2.size())
+        {
+            result.push_back(word2[j]);
+            j++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1763. Longest Nice Substring
+/// 
+/// Easy
+/// 
+/// A string s is nice if, for every letter of the alphabet that s 
+/// contains, it appears both in uppercase and lowercase. For example, 
+/// "abABB" is nice because 'A' and 'a' appear, and 'B' and 'b' appear. 
+/// However, "abA" is not because 'b' appears, but 'B' does not.
+///
+/// Given a string s, return the longest substring of s that is nice. 
+/// If there are multiple, return the substring of the earliest 
+/// occurrence. If there are none, return an empty string.
+/// 
+/// Example 1:
+/// Input: s = "YazaAay"
+/// Output: "aAa"
+/// Explanation: "aAa" is a nice string because 'A/a' is the only letter 
+/// of the alphabet in s, and both 'A' and 'a' appear.
+/// "aAa" is the longest nice substring.
+///
+/// Example 2:
+/// Input: s = "Bb"
+/// Output: "Bb"
+/// Explanation: "Bb" is a nice string because both 'B' and 'b' appear. 
+/// The whole string is a substring.
+///
+/// Example 3:
+/// Input: s = "c"
+/// Output: ""
+/// Explanation: There are no nice substrings.
+///
+/// Example 4:
+/// Input: s = "dDzeE"
+/// Output: "dD"
+/// Explanation: Both "dD" and "eE" are the longest nice substrings.
+/// As there are multiple longest nice substrings, return "dD" since it occurs 
+/// earlier.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 100
+/// 2. s consists of uppercase and lowercase English letters.
+/// </summary>
+string LeetCodeString::longestNiceSubstring(string s)
+{
+    if (s.empty()) return s;
+    vector<int> lower(26, 0);
+    vector<int> upper(26, 0);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (islower(s[i])) lower[s[i] - 'a'] = i + 1;
+        if (isupper(s[i])) upper[s[i] - 'A'] = i + 1;
+    }
+    string result = s;
+    for (int i = 0; i < 26; i++)
+    {
+        if (lower[i] == 0 && upper[i] == 0)
+        {
+            continue;
+        }
+        else if (lower[i] != 0 && upper[i] != 0)
+        {
+            continue;
+        }
+        else
+        {
+            int pos = lower[i] + upper[i];
+            
+            string str1 = longestNiceSubstring(s.substr(0, pos-1));
+            string str2 = longestNiceSubstring(s.substr(pos));
+            result = str1;
+            if (str1.size() < str2.size())
+            {
+                result = str2;
+            }
+            break;
+        }
     }
     return result;
 }

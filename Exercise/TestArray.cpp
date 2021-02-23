@@ -5262,8 +5262,58 @@ void TestLeetCode1732(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1738(void)
+{
+    Logger::WriteMessage("Test Leet Code 1738");
+    LeetCodeArray leetCode;
+    vector<vector<int>> matrix = { {5, 2},{1, 6} };
+    int k = 1;
+    int result = leetCode.kthLargestValue(matrix, k);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("k = 1" + to_string(k) + "; result = " + to_string(result));
+
+    matrix = { {5, 2},{1, 6} };
+    k = 2;
+    result = leetCode.kthLargestValue(matrix, k);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("k = 1" + to_string(k) + "; result = " + to_string(result));
+
+    matrix = { {5, 2},{1, 6} };
+    k = 3;
+    result = leetCode.kthLargestValue(matrix, k);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("k = 1" + to_string(k) + "; result = " + to_string(result));
+
+    matrix = { {5, 2},{1, 6} };
+    k = 4;
+    result = leetCode.kthLargestValue(matrix, k);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("k = 1" + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1744(void)
+{
+    Logger::WriteMessage("Test Leet Code 1744");
+    LeetCodeArray leetCode;
+    vector<int> candiesCount = { 7, 4, 5, 3, 8 };
+    vector<vector<int>> queries = { {0, 2, 2},{4, 2, 4},{2, 13, 1000000000} };
+    vector<bool> result = leetCode.canEat(candiesCount, queries);
+    Logger::WriteMessage(candiesCount);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    candiesCount = { 5, 2, 6, 4, 1 };
+    queries = { {3, 1, 2},{4, 10, 3},{3, 10, 100},{4, 100, 30},{1, 3, 1} };
+    result = leetCode.canEat(candiesCount, queries);
+    Logger::WriteMessage(candiesCount);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1744();
+    TestLeetCode1738();
     TestLeetCode1732();
     TestLeetCode1708();
     TestLeetCode1727();

@@ -1111,8 +1111,54 @@ void TestLeetCode1748(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1755(void)
+{
+    Logger::WriteMessage("Test Leet Code 1755");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 5, -7, 3, 5 };
+    int goal = 6;
+    int result = leetCode.minAbsDifference(nums, goal);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("goal = " + to_string(goal) + "; result = " + to_string(result));
+
+    nums = { 7,-9,15,-2 };
+    goal = -5;
+    result = leetCode.minAbsDifference(nums, goal);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("goal = " + to_string(goal) + "; result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    goal = -7;
+    result = leetCode.minAbsDifference(nums, goal);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("goal = " + to_string(goal) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1733(void)
+{
+    Logger::WriteMessage("Test Leet Code 1733");
+    LeetCodeHashtable leetCode;
+    int n = 2;
+    vector<vector<int>> languages = { {1},{2},{1, 2} };
+    vector<vector<int>> friendships = { {1, 2},{1, 3},{2, 3} };
+    int result = leetCode.minimumTeachings(n, languages, friendships);
+    Logger::WriteMessage(languages);
+    Logger::WriteMessage(friendships);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    languages = { {2},{1, 3},{1, 2},{3} };
+    friendships = { {1, 4},{1, 2},{3, 4},{2, 3} };
+    result = leetCode.minimumTeachings(n, languages, friendships);
+    Logger::WriteMessage(languages);
+    Logger::WriteMessage(friendships);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));   
+ }
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1733();
+    TestLeetCode1755();
     TestLeetCode1748();
     TestLeetCode1714();
     TestLeetCode1711();

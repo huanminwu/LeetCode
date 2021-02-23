@@ -3509,8 +3509,91 @@ void TestLeetCode1742(void)
         "; result = " + to_string(result));
 }
 
+void TestLeetCode1758(void)
+{
+    Logger::WriteMessage("Test Leet Code 1758");
+    LeetCodeMath leetCode;
+    string s = "0100";
+    int result = leetCode.minOperations(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "10";
+    result = leetCode.minOperations(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "1111";
+    result = leetCode.minOperations(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode1735(void)
+{
+    Logger::WriteMessage("Test Leet Code 1735");
+    LeetCodeMath leetCode;
+    vector<vector<int>> queries = { {10000, 8888}, {2, 6},{5, 1},{73, 660} };
+    vector<int> result = leetCode.waysToFillArray(queries);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    queries = { {1, 1},{2, 2},{3, 3},{4, 4},{5, 5} };
+    result = leetCode.waysToFillArray(queries);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1739(void)
+{
+    Logger::WriteMessage("Test Leet Code 1739");
+    LeetCodeMath leetCode;
+    int n = 3;
+    int result = leetCode.minimumBoxes(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    result = leetCode.minimumBoxes(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 8;
+    result = leetCode.minimumBoxes(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 10;
+    result = leetCode.minimumBoxes(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1753(void)
+{
+    Logger::WriteMessage("Test Leet Code 1753");
+    LeetCodeMath leetCode;
+    int a = 2;
+    int b = 4;
+    int c = 6;
+    int result = leetCode.maximumScore(a, b, c);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) + 
+        "c = " + to_string(c) + "; result = " + to_string(result));
+
+    a = 4;
+    b = 4;
+    c = 6;
+    result = leetCode.maximumScore(a, b, c);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) +
+        "c = " + to_string(c) + "; result = " + to_string(result));
+
+    a = 1;
+    b = 8;
+    c = 8;
+    result = leetCode.maximumScore(a, b, c);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) +
+        "c = " + to_string(c) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1753();
+    TestLeetCode1739();
+    TestLeetCode1735();
+    TestLeetCode1758();
     TestLeetCode1742();
     TestLeetCode1716();
     TestLeetCode1689();

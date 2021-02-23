@@ -619,8 +619,24 @@ void TestLeetCode1707(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1734(void)
+{
+    Logger::WriteMessage("Test Leet Code 1734");
+    LeetCodeBit leetCode;
+    vector<int> encoded = { 3, 1 };
+    vector<int> result = leetCode.decode(encoded);
+    Logger::WriteMessage(encoded);
+    Logger::WriteMessage(result);
+
+    encoded = { 6,5,4,6 };
+    result = leetCode.decode(encoded);
+    Logger::WriteMessage(encoded);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode1734();
     TestLeetCode1707();
     TestLeetCode1545();
     TestLeetCode1529();

@@ -3268,8 +3268,29 @@ void TestLeetCode1730(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1743(void)
+{
+    Logger::WriteMessage("Test Leet Code 1743");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> adjacentPairs = { {2, 1},{3, 4},{3, 2} };
+    vector<int> result = leetCode.restoreArray(adjacentPairs);
+    Logger::WriteMessage(adjacentPairs);
+    Logger::WriteMessage(result);
+
+    adjacentPairs = { {4, -2}, { 1, 4 }, { -3, 1 } };    
+    result = leetCode.restoreArray(adjacentPairs);
+    Logger::WriteMessage(adjacentPairs);
+    Logger::WriteMessage(result);
+
+    adjacentPairs = { {100000, -100000} };
+    result = leetCode.restoreArray(adjacentPairs);
+    Logger::WriteMessage(adjacentPairs);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1743();
     TestLeetCode1730();
     TestLeetCode1719();
     TestLeetCode1722();

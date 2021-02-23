@@ -2409,7 +2409,7 @@ ListNode* LeetCodeLinkedList::mergeInBetween(ListNode* list1, int a, int b, List
 ListNode* LeetCodeLinkedList::swapNodes(ListNode* head, int k)
 {
     ListNode* first = head;
-    for (size_t i = 0; i < k - 1; i++)
+    for (int i = 0; i < k - 1; i++)
     {
         first = first->next;
     }

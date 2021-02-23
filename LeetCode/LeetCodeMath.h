@@ -5810,5 +5810,175 @@ public:
     /// 1. 1 <= lowLimit <= highLimit <= 10^5
     /// </summary>
     int countBalls(int lowLimit, int highLimit);
+
+    /// <summary>
+    /// Leet code 1758. Minimum Changes To Make Alternating Binary String
+    /// 
+    /// Easy
+    /// 
+    /// You are given a string s consisting only of the characters '0' 
+    /// and '1'. In one operation, you can change any '0' to '1' or vice 
+    /// versa.
+    ///
+    /// The string is called alternating if no two adjacent characters are 
+    /// equal. For example, the string "010" is alternating, while the 
+    /// string "0100" is not.
+    ///
+    /// Return the minimum number of operations needed to make s alternating.
+    /// 
+    /// Example 1:
+    /// Input: s = "0100"
+    /// Output: 1
+    /// Explanation: If you change the last character to '1', s will 
+    /// be "0101", which is alternating.
+    ///
+    /// Example 2:
+    /// Input: s = "10"
+    /// Output: 0
+    /// Explanation: s is already alternating.
+    ///
+    /// Example 3:
+    /// Input: s = "1111"
+    /// Output: 2
+    /// Explanation: You need two operations to reach "0101" or "1010".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^4
+    /// 2. s[i] is either '0' or '1'.
+    /// </summary>
+    int minOperations(string s);
+
+    /// <summary>
+    /// Leet code 1735. Count Ways to Make Array With Product
+    /// 
+    /// Hard
+    /// 
+    /// You are given a 2D integer array, queries. For each queries[i], 
+    /// where queries[i] = [ni, ki], find the number of different ways 
+    /// you can place positive integers into an array of size ni such 
+    /// that the product of the integers is ki. As the number of ways 
+    /// may be too large, the answer to the ith query is the number of 
+    /// ways modulo 109 + 7.
+    ///
+    /// Return an integer array answer where answer.length == 
+    /// queries.length, and answer[i] is the answer to the ith query.
+    ///
+    /// Example 1:
+    /// Input: queries = [[2,6],[5,1],[73,660]]
+    /// Output: [4,1,50734910]
+    /// Explanation: Each query is independent.
+    /// [2,6]: There are 4 ways to fill an array of size 2 that 
+    /// multiply to 6: [1,6], [2,3], [3,2], [6,1].
+    /// [5,1]: There is 1 way to fill an array of size 5 that multiply 
+    /// to 1: [1,1,1,1,1].
+    /// [73,660]: There are 1050734917 ways to fill an array of size 73 
+    /// that multiply to 660. 1050734917 modulo 109 + 7 = 50734910.
+    /// Example 2:
+    ///
+    /// Input: queries = [[1,1],[2,2],[3,3],[4,4],[5,5]]
+    /// Output: [1,2,3,10,5]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= queries.length <= 10^4
+    /// 2. 1 <= ni, ki <= 10^4
+    /// </summary>
+    vector<int> waysToFillArray(vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet code 1739. Building Boxes
+    /// 
+    /// Hard
+    /// 
+    /// You have a cubic storeroom where the width, length, and height of the 
+    /// room are all equal to n units. You are asked to place n boxes in this 
+    /// room where each box is a cube of unit side length. There are however 
+    /// some rules to placing the boxes:
+    ///
+    /// You can place the boxes anywhere on the floor.
+    /// If box x is placed on top of the box y, then each side of the four 
+    /// vertical sides of the box y must either be adjacent to another box or 
+    /// to a wall.
+    /// Given an integer n, return the minimum possible number of boxes 
+    /// touching the floor.
+    /// 
+    /// Example 1:
+    /// Input: n = 3
+    /// Output: 3
+    /// Explanation: The figure above is for the placement of the three boxes.
+    /// These boxes are placed in the corner of the room, where the corner is 
+    /// on the left side.
+    ///
+    /// Example 2:
+    /// Input: n = 4
+    /// Output: 3
+    /// Explanation: The figure above is for the placement of the four boxes.
+    /// These boxes are placed in the corner of the room, where the corner is 
+    /// on the left side.
+    ///
+    /// Example 3:
+    /// Input: n = 10
+    /// Output: 6
+    /// Explanation: The figure above is for the placement of the ten boxes.
+    /// These boxes are placed in the corner of the room, where the corner is 
+    /// on the back side.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^9
+    /// </summary>
+    int minimumBoxes(int n);
+
+    /// <summary>
+    /// Leet code 1753. Maximum Score From Removing Stones
+    /// 
+    /// Medium
+    /// 
+    /// You are playing a solitaire game with three piles of stones of sizes 
+    /// a, b and c respectively. Each turn you choose two different non-empty
+    /// piles, take one stone from each, and add 1 point to your score. The 
+    /// game stops when there are fewer than two non-empty piles (meaning 
+    /// there are no more available moves).
+    ///
+    /// Given three integers a, b and c, return the maximum score you can get.
+    ///
+    /// Example 1:
+    /// Input: a = 2, b = 4, c = 6
+    /// Output: 6
+    /// Explanation: The starting state is (2, 4, 6). One optimal set of 
+    /// moves is:
+    /// - Take from 1st and 3rd piles, state is now (1, 4, 5)
+    /// - Take from 1st and 3rd piles, state is now (0, 4, 4)
+    /// - Take from 2nd and 3rd piles, state is now (0, 3, 3)
+    /// - Take from 2nd and 3rd piles, state is now (0, 2, 2)
+    /// - Take from 2nd and 3rd piles, state is now (0, 1, 1)
+    /// - Take from 2nd and 3rd piles, state is now (0, 0, 0)
+    /// There are fewer than two non-empty piles, so the game ends. 
+    /// Total: 6 points.
+    ///
+    /// Example 2:
+    /// Input: a = 4, b = 4, c = 6
+    /// Output: 7
+    /// Explanation: The starting state is (4, 4, 6). One optimal set of 
+    /// moves is:
+    /// - Take from 1st and 2nd piles, state is now (3, 3, 6)
+    /// - Take from 1st and 3rd piles, state is now (2, 3, 5)
+    /// - Take from 1st and 3rd piles, state is now (1, 3, 4)
+    /// - Take from 1st and 3rd piles, state is now (0, 3, 3)
+    /// - Take from 2nd and 3rd piles, state is now (0, 2, 2)
+    /// - Take from 2nd and 3rd piles, state is now (0, 1, 1)
+    /// - Take from 2nd and 3rd piles, state is now (0, 0, 0)
+    /// There are fewer than two non-empty piles, so the game ends. 
+    /// Total: 7 points.
+    ///
+    /// Example 3:
+    /// Input: a = 1, b = 8, c = 8
+    /// Output: 8
+    /// Explanation: One optimal set of moves is to take from the 2nd and 
+    /// 3rd piles for 8 turns until they are empty.
+    /// After that, there are fewer than two non-empty piles, so the game ends.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= a, b, c <= 10^5
+    /// </summary>
+    int maximumScore(int a, int b, int c);
 };
 #endif
