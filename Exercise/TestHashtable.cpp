@@ -1155,8 +1155,38 @@ void TestLeetCode1733(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));   
  }
 
+void TestLeetCode1773(void)
+{
+    Logger::WriteMessage("Test Leet Code 1773");
+    LeetCodeHashtable leetCode;
+    vector<vector<string>> items =
+    {
+        {"phone", "blue", "pixel"},
+        {"computer", "silver", "lenovo"},
+        {"phone", "gold", "iphone"}
+    };
+    string ruleKey = "color"; 
+    string ruleValue = "silver";
+    int result = leetCode.countMatches(items, ruleKey, ruleValue);
+    Logger::WriteMessage(items);
+    Logger::WriteMessage("ruleKey = " + ruleKey + "; ruleValue = " + ruleValue + "; result = " + to_string(result));
+
+    items =
+    {
+        {"phone", "blue", "pixel"},
+        {"computer", "silver", "lenovo"},
+        {"phone", "gold", "iphone"}
+    };
+    ruleKey = "type";
+    ruleValue = "phone";
+    result = leetCode.countMatches(items, ruleKey, ruleValue);
+    Logger::WriteMessage(items);
+    Logger::WriteMessage("ruleKey = " + ruleKey + "; ruleValue = " + ruleValue + "; result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1773();
     TestLeetCode1733();
     TestLeetCode1755();
     TestLeetCode1748();

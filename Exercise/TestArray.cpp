@@ -5310,8 +5310,113 @@ void TestLeetCode1744(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1749(void)
+{
+    Logger::WriteMessage("Test Leet Code 1749");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, -3, 2, 3, -4 };
+    int result = leetCode.maxAbsoluteSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,-5,1,-4,3,-2 };
+    result = leetCode.maxAbsoluteSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode1769(void)
+{
+    Logger::WriteMessage("Test Leet Code 1769");
+    LeetCodeArray leetCode;
+    string boxes = "110";
+    vector<int> result = leetCode.minOperations(boxes);
+    Logger::WriteMessage("boxes = " + boxes);
+    Logger::WriteMessage(result);
+
+    boxes = "001011";
+    result = leetCode.minOperations(boxes);
+    Logger::WriteMessage("boxes = " + boxes);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1759(void)
+{
+    Logger::WriteMessage("Test Leet Code 1759");
+    LeetCodeArray leetCode;
+    string s = "abbcccaa";
+    int result = leetCode.countHomogenous(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+ 
+    s = "xy";
+    result = leetCode.countHomogenous(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "zzzzz";
+    result = leetCode.countHomogenous(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode1764(void)
+{
+    Logger::WriteMessage("Test Leet Code 1764");
+    LeetCodeArray leetCode;
+    vector<vector<int>> groups = { {1, -1, -1},{3, -2, 0} };
+    vector<int> nums = { 1, -1, 0, 1, -1, -1, 3, -2, 0 };
+    bool result = leetCode.canChoose(groups, nums);
+    Logger::WriteMessage(groups);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    groups = { {10, -2},{1, 2, 3, 4} };
+    nums = { 1, -1, 0, 1, -1, -1, 3, -2, 0 };
+    result = leetCode.canChoose(groups, nums);
+    Logger::WriteMessage(groups);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    groups = { {1, 2, 3},{3, 4} };
+    nums = { 7, 7, 1, 2, 3, 4, 7, 7 };
+    result = leetCode.canChoose(groups, nums);
+    Logger::WriteMessage(groups);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1779(void)
+{
+    Logger::WriteMessage("Test Leet Code 1779");
+    LeetCodeArray leetCode;
+    int x = 3;
+    int y = 4;
+    vector<vector<int>> points = { {1, 2},{3, 1},{2, 4},{2, 3},{4, 4} };
+    int result = leetCode.nearestValidPoint(x, y, points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("x = " + to_string(x) + "; y= " + to_string(y) + "; result = " + to_string(result));
+
+    x = 3;
+    y = 4;
+    points = { {3, 4} };
+    result = leetCode.nearestValidPoint(x, y, points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("x = " + to_string(x) + "; y= " + to_string(y) + "; result = " + to_string(result));
+
+    x = 3;
+    y = 4;
+    points = { {2, 3} };
+    result = leetCode.nearestValidPoint(x, y, points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("x = " + to_string(x) + "; y= " + to_string(y) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1779();
+    TestLeetCode1764();
+    TestLeetCode1759();
+    TestLeetCode1769();
+    TestLeetCode1749();
     TestLeetCode1744();
     TestLeetCode1738();
     TestLeetCode1732();

@@ -9057,6 +9057,241 @@ public:
     /// 7. 1 <= dailyCapi <= 10^9
     /// </summary>
     vector<bool> canEat(vector<int>& candiesCount, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet code 1749. Maximum Absolute Sum of Any Subarray
+    /// 
+    /// Medium
+    /// 
+    /// You are given an integer array nums. The absolute sum of a subarray 
+    /// [numsl, numsl+1, ..., numsr-1, numsr] is abs(numsl + numsl+1 + ... + 
+    /// numsr-1 + numsr).
+    ///
+    /// Return the maximum absolute sum of any (possibly empty) subarray of 
+    /// nums.
+    ///
+    /// Note that abs(x) is defined as follows:
+    ///
+    /// If x is a negative integer, then abs(x) = -x.
+    /// If x is a non-negative integer, then abs(x) = x.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,-3,2,3,-4]
+    /// Output: 5
+    /// Explanation: The subarray [2,3] has absolute sum = abs(2+3) = 
+    /// abs(5) = 5.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,-5,1,-4,3,-2]
+    /// Output: 8
+    /// Explanation: The subarray [-5,1,-4] has absolute sum = 
+    /// abs(-5+1-4) = abs(-8) = 8.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^4 <= nums[i] <= 10^4
+    /// </summary>
+    int maxAbsoluteSum(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code 1769. Minimum Number of Operations to Move All Balls to 
+    ///                 Each Box
+    /// 
+    /// Medium
+    /// 
+    /// You have n boxes. You are given a binary string boxes of length n, 
+    /// where boxes[i] is '0' if the ith box is empty, and '1' if it contains 
+    /// one ball.
+    ///
+    /// In one operation, you can move one ball from a box to an adjacent box. 
+    /// Box i is adjacent to box j if abs(i - j) == 1. Note that after doing 
+    /// so, there may be more than one ball in some boxes.
+    ///
+    /// Return an array answer of size n, where answer[i] is the minimum number 
+    /// of operations needed to move all the balls to the ith box.
+    ///
+    /// Each answer[i] is calculated considering the initial state of the boxes.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: boxes = "110"
+    /// Output: [1,1,3]
+    /// Explanation: The answer for each box is as follows:
+    /// 1) First box: you will have to move one ball from the second box to 
+    ///    the first box in one operation.
+    /// 2) Second box: you will have to move one ball from the first box to 
+    ///    the second box in one operation.
+    /// 3) Third box: you will have to move one ball from the first box to the 
+    ///    third box in two operations, and move one ball from the second box 
+    ///    to the third box in one operation.
+    ///
+    /// Example 2:
+    /// Input: boxes = "001011"
+    /// Output: [11,8,5,4,3,4]
+    /// Constraints:
+    /// 1. n == boxes.length
+    /// 2. 1 <= n <= 2000
+    /// 3. boxes[i] is either '0' or '1'.
+    /// </summary>
+    vector<int> minOperations(string boxes);
+
+    /// <summary>
+    /// Leet code 1759. Count Number of Homogenous Substrings
+    /// 
+    /// Medium
+    /// 
+    /// Given a string s, return the number of homogenous substrings of s. 
+    /// Since the answer may be too large, return it modulo 10^9 + 7.
+    ///
+    /// A string is homogenous if all the characters of the string are the 
+    /// same.
+    ///
+    /// A substring is a contiguous sequence of characters within a string.
+    /// 
+    /// Example 1:
+    /// Input: s = "abbcccaa"
+    /// Output: 13
+    /// Explanation: The homogenous substrings are listed as below:
+    /// "a"   appears 3 times.
+    /// "aa"  appears 1 time.
+    /// "b"   appears 2 times.
+    /// "bb"  appears 1 time.
+    /// "c"   appears 3 times.
+    /// "cc"  appears 2 times.
+    /// "ccc" appears 1 time.
+    /// 3 + 1 + 2 + 1 + 3 + 2 + 1 = 13.
+    ///
+    /// Example 2:
+    /// Input: s = "xy"
+    /// Output: 2
+    /// Explanation: The homogenous substrings are "x" and "y".
+    /// Example 3:
+    /// Input: s = "zzzzz"
+    /// Output: 15
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s consists of lowercase letters.
+    /// </summary>
+    int countHomogenous(string s);
+
+    /// <summary>
+    /// Leet code 1764. Form Array by Concatenating Subarrays of Another Array
+    /// 
+    /// Medium
+    /// 
+    /// You are given a 2D integer array groups of length n. You are also 
+    /// given an integer array nums.
+    ///
+    /// You are asked if you can choose n disjoint subarrays from the array 
+    /// nums such that the ith subarray is equal to groups[i] (0-indexed), 
+    /// and if i > 0, the (i-1)th subarray appears before the ith subarray 
+    /// in nums (i.e. the subarrays must be in the same order as groups).
+    ///
+    /// Return true if you can do this task, and false otherwise.
+    /// Note that the subarrays are disjoint if and only if there is no 
+    /// index k such that nums[k] belongs to more than one subarray. A 
+    /// subarray is a contiguous sequence of elements within an array.
+    ///
+    /// Example 1:
+    /// Input: groups = [[1,-1,-1],[3,-2,0]], nums = [1,-1,0,1,-1,-1,3,-2,0]
+    /// Output: true
+    /// Explanation: You can choose the 0th subarray 
+    /// as [1,-1,0,1,-1,-1,3,-2,0] and the 1st one as [1,-1,0,1,-1,-1,3,-2,0].
+    /// These subarrays are disjoint as they share no common nums[k] element.
+    ///
+    /// Example 2:
+    /// Input: groups = [[10,-2],[1,2,3,4]], nums = [1,2,3,4,10,-2]
+    /// Output: false
+    /// Explanation: Note that choosing the subarrays [1,2,3,4,10,-2] 
+    /// and [1,2,3,4,10,-2] is incorrect because they are not in the same 
+    /// order as in groups.
+    /// [10,-2] must come before [1,2,3,4].
+    ///
+    /// Example 3:
+    /// Input: groups = [[1,2,3],[3,4]], nums = [7,7,1,2,3,4,7,7]
+    /// Output: false
+    /// Explanation: Note that choosing the subarrays [7,7,1,2,3,4,7,7] 
+    /// and [7,7,1,2,3,4,7,7] is invalid because they are not disjoint.
+    /// They share a common elements nums[4] (0-indexed).
+    ///
+    /// Constraints:
+    /// 1. groups.length == n
+    /// 2. 1 <= n <= 10^3
+    /// 3. 1 <= groups[i].length, sum(groups[i].length) <= 10^3
+    /// 4. 1 <= nums.length <= 10^3
+    /// 5. -10^7 <= groups[i][j], nums[k] <= 10^7
+    /// </summary>
+    bool canChoose(vector<vector<int>>& groups, vector<int>& nums);
+
+    /// <summary>
+    /// Leet code 1779. Find Nearest Point That Has the Same X or Y Coordinate
+    /// 
+    /// Easy
+    /// 
+    /// You are given two integers, x and y, which represent your current 
+    /// location on a Cartesian grid: (x, y). You are also given an array 
+    /// points where each points[i] = [ai, bi] represents that a point exists 
+    /// at (ai, bi). A point is valid if it shares the same x-coordinate or 
+    /// the same y-coordinate as your location.
+    ///
+    /// Return the index (0-indexed) of the valid point with the smallest 
+    /// Manhattan distance from your current location. If there are multiple, 
+    /// return the valid point with the smallest index. If there are no valid 
+    /// points, return -1.
+    ///
+    /// The Manhattan distance between two points (x1, y1) and (x2, y2) is 
+    /// abs(x1 - x2) + abs(y1 - y2).
+    ///
+    /// Example 1:
+    /// Input: x = 3, y = 4, points = [[1,2],[3,1],[2,4],[2,3],[4,4]]
+    /// Output: 2
+    /// Explanation: Of all the points, only [3,1], [2,4] and [4,4] are valid. 
+    /// Of the valid points, [2,4] and [4,4] have the smallest Manhattan 
+    /// distance from your current location, with a distance of 1. [2,4] has 
+    /// the smallest index, so return 2.
+    ///
+    /// Example 2:
+    /// Input: x = 3, y = 4, points = [[3,4]]
+    /// Output: 0
+    /// Explanation: The answer is allowed to be on the same location as your current location.
+    ///
+    /// Example 3:
+    /// Input: x = 3, y = 4, points = [[2,3]]
+    /// Output: -1
+    /// Explanation: There are no valid points.
+    ///
+    /// Constraints:
+    /// 1. 1 <= points.length <= 10^4
+    /// 2. points[i].length == 2
+    /// 3. 1 <= x, y, ai, bi <= 10^4
+    /// </summary>
+    int nearestValidPoint(int x, int y, vector<vector<int>>& points);
+
+    /// <summary>
+    /// Leet code 1784. Check if Binary String Has at Most One Segment of Ones
+    /// 
+    /// Easy
+    /// 
+    /// Given a binary string s without leading zeros, return true if s 
+    /// contains at most one contiguous segment of ones. Otherwise, return 
+    /// false.
+    ///
+    /// Example 1:
+    /// Input: s = "1001"
+    /// Output: false
+    /// Explanation: The ones do not form a contiguous segment.
+    ///
+    /// Example 2:
+    /// Input: s = "110"
+    /// Output: true
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s[i] is either '0' or '1'.
+    /// 3. s[0] is '1'.
+    /// </summary>
+    bool checkOnesSegment(string s);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

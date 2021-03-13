@@ -3288,8 +3288,50 @@ void TestLeetCode1743(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1765(void)
+{
+    Logger::WriteMessage("Test Leet Code 1765");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> isWater = { {0, 1},{0, 0} };
+    vector<vector<int>> result = leetCode.highestPeak(isWater);
+    Logger::WriteMessage(isWater);
+    Logger::WriteMessage(result);
+
+    isWater = { {0, 0, 1},{1, 0, 0},{0, 0, 0} };
+    result = leetCode.highestPeak(isWater);
+    Logger::WriteMessage(isWater);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1786(void)
+{
+    Logger::WriteMessage("Test Leet Code 1786");
+    LeetCodeGraph leetCode;
+    int n = 5;
+    vector<vector<int>> edges = 
+    { 
+        {1, 2, 3},{1, 3, 3},{2, 3, 1},{1, 4, 2},
+        {5, 2, 2},{3, 5, 1},{5, 4, 10} 
+    };
+    int result = leetCode.countRestrictedPaths(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 7;
+    edges =
+    {
+        {1, 3, 1},{4, 1, 2},{7, 3, 4},{2, 5, 3},
+        {5, 6, 1},{6, 7, 2},{7, 5, 3},{2, 6, 4} 
+    };
+    result = leetCode.countRestrictedPaths(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1786();
+    TestLeetCode1765();
     TestLeetCode1743();
     TestLeetCode1730();
     TestLeetCode1719();

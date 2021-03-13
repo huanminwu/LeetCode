@@ -3588,8 +3588,46 @@ void TestLeetCode1753(void)
         "c = " + to_string(c) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1780(void)
+{
+    Logger::WriteMessage("Test Leet Code 1780");
+    LeetCodeMath leetCode;
+    int n = 12;
+    bool result = leetCode.checkPowersOfThree(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+
+    n = 91;
+    result = leetCode.checkPowersOfThree(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+
+    n = 21;
+    result = leetCode.checkPowersOfThree(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1785(void)
+{
+    Logger::WriteMessage("Test Leet Code 1785");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, -1, 1 };
+    int limit = 3;
+    int goal = -4;
+    int result = leetCode.minElements(nums, limit, goal);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("limit = " + to_string(limit) + "; goal = " + to_string(goal) + "; result = " + to_string(result));
+
+    nums = { 1, -10, 9, 1 };
+    limit = 100;
+    goal = 0;
+    result = leetCode.minElements(nums, limit, goal);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("limit = " + to_string(limit) + "; goal = " + to_string(goal) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1785();
+    TestLeetCode1780();
     TestLeetCode1753();
     TestLeetCode1739();
     TestLeetCode1735();

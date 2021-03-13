@@ -2251,8 +2251,46 @@ void TestLeetCode1746(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1774(void)
+{
+    Logger::WriteMessage("Test Leet Code 1774");
+    LeetCodeDP leetCode;
+    vector<int> baseCosts = { 1, 7 };
+    vector<int> toppingCosts = { 3, 4 };
+    int target = 10;
+    int result = leetCode.closestCost(baseCosts, toppingCosts, target);
+    Logger::WriteMessage(baseCosts);
+    Logger::WriteMessage(toppingCosts);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    baseCosts = { 2, 3 };
+    toppingCosts = { 4, 5, 100 };
+    target = 18;
+    result = leetCode.closestCost(baseCosts, toppingCosts, target);
+    Logger::WriteMessage(baseCosts);
+    Logger::WriteMessage(toppingCosts);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    baseCosts = { 3, 10 };
+    toppingCosts = { 2, 5 };
+    target = 9;
+    result = leetCode.closestCost(baseCosts, toppingCosts, target);
+    Logger::WriteMessage(baseCosts);
+    Logger::WriteMessage(toppingCosts);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    baseCosts = { 10 };
+    toppingCosts = { 1 };
+    target = 1;
+    result = leetCode.closestCost(baseCosts, toppingCosts, target);
+    Logger::WriteMessage(baseCosts);
+    Logger::WriteMessage(toppingCosts);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1774();
     TestLeetCode1746();
     TestLeetCode1682();
     TestLeetCode1692();

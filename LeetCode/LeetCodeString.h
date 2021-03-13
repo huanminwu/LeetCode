@@ -7126,6 +7126,104 @@ public:
     /// </summary>
     string longestNiceSubstring(string s);
 
+    /// <summary>
+    /// Leet code 1750. Minimum Length of String After Deleting Similar Ends
+    /// 
+    /// Medium
+    /// 
+    /// Given a string s consisting only of characters 'a', 'b', and 'c'. You 
+    /// are asked to apply the following algorithm on the string any number of 
+    /// times:
+    ///
+    /// Pick a non-empty prefix from the string s where all the characters in 
+    /// the prefix are equal.
+    /// Pick a non-empty suffix from the string s where all the characters in 
+    /// this suffix are equal.
+    /// The prefix and the suffix should not intersect at any index.
+    /// The characters from the prefix and suffix must be the same.
+    /// Delete both the prefix and the suffix.
+    /// Return the minimum length of s after performing the above operation 
+    /// any number of times (possibly zero times).
+    ///
+    /// Example 1:
+    /// Input: s = "ca"
+    /// Output: 2
+    /// Explanation: You can't remove any characters, so the string stays 
+    /// as is.
+    ///
+    /// Example 2:
+    /// Input: s = "cabaabac"
+    /// Output: 0
+    /// Explanation: An optimal sequence of operations is:
+    /// - Take prefix = "c" and suffix = "c" and remove them, s = "abaaba".
+    /// - Take prefix = "a" and suffix = "a" and remove them, s = "baab".
+    /// - Take prefix = "b" and suffix = "b" and remove them, s = "aa".
+    /// - Take prefix = "a" and suffix = "a" and remove them, s = "".
+    ///
+    /// Example 3:
+    /// Input: s = "aabccabba"
+    /// Output: 3
+    /// Explanation: An optimal sequence of operations is:
+    /// - Take prefix = "aa" and suffix = "a" and remove them, s = "bccabb".
+    /// - Take prefix = "b" and suffix = "bb" and remove them, s = "cca".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s only consists of characters 'a', 'b', and 'c'.
+    /// </summary>
+    int minimumLength(string s);
+
+    /// <summary>
+    /// Leet code 1781. Sum of Beauty of All Substrings
+    /// 
+    /// Medium
+    /// 
+    /// The beauty of a string is the difference in frequencies between 
+    /// the most frequent and least frequent characters.
+    ///
+    /// For example, the beauty of "abaacc" is 3 - 1 = 2.
+    /// Given a string s, return the sum of beauty of all of its substrings.
+    /// 
+    /// Example 1:
+    /// Input: s = "aabcb"
+    /// Output: 5
+    /// Explanation: The substrings with non-zero beauty are ["aab","aabc",
+    /// "aabcb","abcb","bcb"], each with beauty equal to 1.
+    ///
+    /// Example 2:
+    /// Input: s = "aabcbaa"
+    /// Output: 17
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 500
+    /// 2. s consists of only lowercase English letters.
+    /// </summary>
+    int beautySum(string s);
+
+    /// <summary>
+    /// Leet code 1784. Check if Binary String Has at Most One Segment of Ones
+    /// 
+    /// Easy
+    /// 
+    /// Given a binary string s without leading zeros, return true if s 
+    /// contains at most one contiguous segment of ones. Otherwise, return 
+    /// false.
+    ///
+    /// Example 1:
+    /// Input: s = "1001"
+    /// Output: false
+    /// Explanation: The ones do not form a contiguous segment.
+    ///
+    /// Example 2:
+    /// Input: s = "110"
+    /// Output: true
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s[i] is either '0' or '1'.
+    /// 3. s[0] is '1'.
+    /// </summary>
+    bool checkOnesSegment(string s);
 #pragma endregion
 };
 

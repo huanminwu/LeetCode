@@ -667,8 +667,32 @@ void TestLeetCode1552(void)
     Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1760(void)
+{
+    Logger::WriteMessage("Test Leet Code 1760");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 9 };
+    int maxOperations = 2;
+    int result = leetCode.minimumSize(nums, maxOperations);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxOperations = " + to_string(maxOperations) + "; result = " + to_string(result));
+
+    nums = { 2,4,8,2 };
+    maxOperations = 4;
+    result = leetCode.minimumSize(nums, maxOperations);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxOperations = " + to_string(maxOperations) + "; result = " + to_string(result));
+
+    nums = { 7,17 };
+    maxOperations = 2;
+    result = leetCode.minimumSize(nums, maxOperations);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxOperations = " + to_string(maxOperations) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode1760();
     TestLeetCode1552();
     TestLeetCode1482();
     TestLeetCode1064();

@@ -6189,6 +6189,79 @@ bool LeetCodeDFS::canMouseWin(vector<string>& grid, int catJump, int mouseJump)
     return canMouseWin(grid, catJump, mouseJump, cat, mouse, dirs, visited, 0);
 }
 
+/// <summary>
+/// Leet code 1770. Maximum Score from Performing Multiplication Operations
+/// </summary>
+int LeetCodeDFS::maximumScore(vector<int>& nums, vector<int>& multipliers, int left, int right, vector<vector<int>>& dp)
+{
+    if (left + right == multipliers.size())
+    {
+        dp[left][right] = 0;
+        return 0;
+    }
+    if (dp[left][right] != INT_MAX) return dp[left][right];
+    int left_score = nums[left] * multipliers[left + right];
+    int right_score = nums[nums.size() - 1 - right] * multipliers[left + right];
+    int left_max = maximumScore(nums, multipliers, left + 1, right, dp);
+    int right_max = maximumScore(nums, multipliers, left, right + 1, dp);
+    dp[left][right] = max(left_score + left_max, right_score + right_max);
+    return dp[left][right];
+}
+
+/// <summary>
+ /// Leet code 1770. Maximum Score from Performing Multiplication Operations
+ /// 
+ /// Medium
+ /// 
+ /// You are given two integer arrays nums and multipliers of size n and m 
+ /// respectively, where n >= m. The arrays are 1-indexed.
+ ///
+ /// You begin with a score of 0. You want to perform exactly m operations. 
+ /// On the ith operation (1-indexed), you will:
+ ///
+ /// Choose one integer x from either the start or the end of the array nums.
+ /// Add multipliers[i] * x to your score.
+ /// Remove x from the array nums.
+ /// Return the maximum score after performing m operations.
+ ///
+ /// Example 1:
+ /// Input: nums = [1,2,3], multipliers = [3,2,1]
+ /// Output: 14
+ /// Explanation: An optimal solution is as follows:
+ /// - Choose from the end, [1,2,3], adding 3 * 3 = 9 to the score.
+ /// - Choose from the end, [1,2], adding 2 * 2 = 4 to the score.
+ /// - Choose from the end, [1], adding 1 * 1 = 1 to the score.
+ /// The total score is 9 + 4 + 1 = 14.
+ ///
+ /// Example 2:
+ /// Input: nums = [-5,-3,-3,-2,7,1], multipliers = [-10,-5,3,4,6]
+ /// Output: 102
+ /// Explanation: An optimal solution is as follows:
+ /// - Choose from the start, [-5,-3,-3,-2,7,1], adding -5 * -10 = 50 to 
+ /// the score.
+ /// - Choose from the start, [-3,-3,-2,7,1], adding -3 * -5 = 15 to 
+ /// the score.
+ /// - Choose from the start, [-3,-2,7,1], adding -3 * 3 = -9 to the score.
+ /// - Choose from the end, [-2,7,1], adding 1 * 4 = 4 to the score.
+ /// - Choose from the end, [-2,7], adding 7 * 6 = 42 to the score. 
+ /// The total score is 50 + 15 - 9 + 4 + 42 = 102.
+ /// Constraints:
+ /// 1. n == nums.length
+ /// 2. m == multipliers.length
+ /// 3. 1 <= m <= 10^3
+ /// 4. m <= n <= 10^5
+ /// 5. -1000 <= nums[i], multipliers[i] <= 1000
+ /// </summary>
+int LeetCodeDFS::maximumScore(vector<int>& nums, vector<int>& multipliers)
+{
+    int left = 0;
+    int right = 0;
+    int m = multipliers.size();
+    vector<vector<int>> dp(m + 1, vector<int>(m + 1, INT_MAX));
+    return maximumScore(nums, multipliers, 0, 0, dp);
+}
+
+
 #pragma endregion
 
 

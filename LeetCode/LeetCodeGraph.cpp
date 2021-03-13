@@ -10209,4 +10209,193 @@ vector<int> LeetCodeGraph::restoreArray(vector<vector<int>>& adjacentPairs)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code 1765. Map of Highest Peak
+/// 
+/// Medium
+/// 
+/// You are given an integer matrix isWater of size m x n that represents 
+/// a map of land and water cells.
+///
+/// If isWater[i][j] == 0, cell (i, j) is a land cell.
+/// If isWater[i][j] == 1, cell (i, j) is a water cell.
+/// You must assign each cell a height in a way that follows these rules:
+///
+/// The height of each cell must be non-negative.
+/// If the cell is a water cell, its height must be 0.
+/// Any two adjacent cells must have an absolute height difference of at 
+/// most 1. A cell is adjacent to another cell if the former is directly 
+/// north, east, south, or west of the latter (i.e., their sides are 
+/// touching).
+/// Find an assignment of heights such that the maximum height in the 
+/// matrix is maximized.
+///
+/// Return an integer matrix height of size m x n where height[i][j] is 
+/// cell (i, j)'s height. If there are multiple solutions, return any of 
+/// them.
+/// 
+/// Example 1:
+/// Input: isWater = [[0,1],[0,0]]
+/// Output: [[1,0],[2,1]]
+/// Explanation: The image shows the assigned heights of each cell.
+/// The blue cell is the water cell, and the green cells are the land 
+/// cells.
+///
+/// Example 2:
+/// Input: isWater = [[0,0,1],[1,0,0],[0,0,0]]
+/// Output: [[1,1,0],[0,1,1],[1,2,2]]
+/// Explanation: A height of 2 is the maximum possible height of any 
+/// assignment.
+/// Any height assignment that has a maximum height of 2 while still meeting 
+/// the rules will also be accepted.
+///
+/// Constraints:
+/// 1. m == isWater.length
+/// 2. n == isWater[i].length
+/// 3. 1 <= m, n <= 1000
+/// 4. isWater[i][j] is 0 or 1.
+/// 5. There is at least one water cell.
+/// </summary>
+vector<vector<int>> LeetCodeGraph::highestPeak(vector<vector<int>>& isWater)
+{
+    int n = isWater.size();
+    int m = isWater[0].size();
+    vector<vector<int>> result(n, vector<int>(m, INT_MAX));
+
+    queue<pair<int, int>> queue;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (isWater[i][j] == 1)
+            {
+                result[i][j] = 0;
+                queue.push(make_pair(i, j));
+            }
+        }
+    }
+    vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    while (!queue.empty())
+    {
+        pair<int, int> pos = queue.front();
+        queue.pop();
+        for (size_t i = 0; i < directions.size(); i++)
+        {
+            pair<int, int> next = pos;
+            next.first += directions[i][0];
+            next.second += directions[i][1];
+            if (next.first < 0 || next.first >= n || next.second < 0 || next.second >= m)
+            {
+                continue;
+            }
+            if (result[next.first][next.second] != INT_MAX) continue;
+            result[next.first][next.second] = result[pos.first][pos.second] + 1;
+            queue.push(next);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1786. Number of Restricted Paths From First to Last Node
+/// 
+/// Medium
+/// 
+/// There is an undirected weighted connected graph. You are given a 
+/// positive integer n which denotes that the graph has n nodes 
+/// labeled from 1 to n, and an array edges where each edges[i] = 
+/// [ui, vi, weighti] denotes that there is an edge between nodes ui 
+/// and vi with weight equal to weighti.
+///
+/// A path from node start to node end is a sequence of nodes 
+/// [z0, z1, z2, ..., zk] such that z0 = start and zk = end and there is 
+/// an edge between zi and zi+1 where 0 <= i <= k-1.
+///
+/// The distance of a path is the sum of the weights on the edges of the 
+/// path. Let distanceToLastNode(x) denote the shortest distance of a path 
+/// between node n and node x. A restricted path is a path that also 
+/// satisfies that distanceToLastNode(zi) > distanceToLastNode(zi+1) 
+/// where 0 <= i <= k-1.
+///
+/// Return the number of restricted paths from node 1 to node n. Since 
+/// that number may be too large, return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// 1. Input: n = 5, edges = [[1,2,3],[1,3,3],[2,3,1],[1,4,2],[5,2,2],
+///    [3,5,1],[5,4,10]]
+/// Output: 3
+/// Explanation: Each circle contains the node number in black and 
+/// its distanceToLastNode value in blue. The three restricted paths are:
+/// 1) 1 --> 2 --> 5
+/// 2) 1 --> 2 --> 3 --> 5
+/// 3) 1 --> 3 --> 5
+///
+/// Example 2:
+/// Input: n = 7, edges = [[1,3,1],[4,1,2],[7,3,4],[2,5,3],
+/// [5,6,1],[6,7,2],[7,5,3],[2,6,4]]
+/// Output: 1
+/// Explanation: Each circle contains the node number in black and its 
+/// distanceToLastNode value in blue. The only restricted path 
+/// is 1 --> 3 --> 7.
+///     
+/// Constraints:
+/// 1. 1 <= n <= 2 * 10^4
+/// 2. n - 1 <= edges.length <= 4 * 10^4
+/// 3. edges[i].length == 3
+/// 4. 1 <= ui, vi <= n
+/// 5. ui != vi
+/// 6. 1 <= weighti <= 10^5
+/// 7. There is at most one edge between any two nodes.
+/// 8. There is at least one path between any two nodes.
+/// </summary>
+int LeetCodeGraph::countRestrictedPaths(int n, vector<vector<int>>& edges)
+{
+    unordered_map<int, unordered_map<int, int>> neighbours;
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbours[edges[i][0]][edges[i][1]] = edges[i][2];
+        neighbours[edges[i][1]][edges[i][0]] = edges[i][2];
+    }
+    unordered_map<int, int> shortest_path;
+    for (int i = 1; i <= n; i++) shortest_path[i] = INT_MAX;
+    priority_queue<pair<int, int>> pq;
+    shortest_path[n] = 0;
+    pq.push(make_pair(0, n));
+    while (!pq.empty())
+    {
+        pair<int, int> pos = pq.top();
+        pq.pop();
+        int distance = 0 - pos.first;
+        if (distance > shortest_path[pos.second]) continue;
+        for (auto next : neighbours[pos.second])
+        {
+            if (next.second + distance < shortest_path[next.first])
+            {
+                pq.push(make_pair(0 - (next.second + distance), next.first));
+                shortest_path[next.first] = next.second + distance;
+            }
+        }
+    }
+    int M = 1000000007;
+    vector<int> paths(n + 1);
+    paths[n] = 1;
+    for (auto itr : shortest_path)
+    {
+        pq.push(make_pair(0 - itr.second, itr.first));
+
+    }
+    while (!pq.empty())
+    {
+        pair<int, int> pos = pq.top();
+        pq.pop();
+        int distance = 0 - pos.first;
+        for (auto next : neighbours[pos.second])
+        {
+            if (distance >= shortest_path[next.first]) continue;
+            paths[next.first] = (paths[next.first] + paths[pos.second]) % M;
+        }
+    }
+    return paths[1];
+}
 #pragma endregion

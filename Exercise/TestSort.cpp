@@ -1173,8 +1173,38 @@ void TestLeetCode1752(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+
+void TestLeetCode1775(void)
+{
+    Logger::WriteMessage("Test Leet Code 1775");
+    LeetCodeSort leetCode;
+    vector<int> nums1 = { 1, 2, 3, 4, 5, 6 };
+    vector<int> nums2 = { 1, 1, 2, 2, 2, 2 };
+    int result = leetCode.minOperations(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,1,1,1,1,1,1 };
+    nums2 = { 6 };
+    result = leetCode.minOperations(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 6,6 };
+    nums2 = { 1 };
+    result = leetCode.minOperations(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1775();
     TestLeetCode1752();
     TestLeetCode1710();
     TestLeetCode1705();

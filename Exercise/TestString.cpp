@@ -3924,8 +3924,58 @@ void TestLeetCode1763(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode1750(void)
+{
+    Logger::WriteMessage("Test Leet Code 1760");
+    LeetCodeString leetCode;
+    string s = "ca";
+    int result = leetCode.minimumLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "cabaabac";
+    result = leetCode.minimumLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aabccabba";
+    result = leetCode.minimumLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode1781(void)
+{
+    Logger::WriteMessage("Test Leet Code 1781");
+    LeetCodeString leetCode;
+    string s = "aabcb";
+    int result = leetCode.beautySum(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aabcbaa";
+    result = leetCode.beautySum(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aabccabba";
+    result = leetCode.beautySum(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode1784(void)
+{
+    Logger::WriteMessage("Test Leet Code 1784");
+    LeetCodeString leetCode;
+    string s = "1001";
+    bool result = leetCode.checkOnesSegment(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "110";
+    result = leetCode.checkOnesSegment(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1784();
+    TestLeetCode1781();
+    TestLeetCode1750();
     TestLeetCode1763();
     TestLeetCode1768();
     TestLeetCode1754();
