@@ -2073,4 +2073,60 @@ int LeetCodeBinarySearch::minimumSize(vector<int>& nums, int maxOperations)
     return result;
 }
 
+/// <summary>
+/// Leet code 1802. Maximum Value at a Given Index in a Bounded Array
+/// 
+/// Medium
+/// 
+/// You are given three positive integers n, index and maxSum. You want 
+/// to construct an array nums (0-indexed) that satisfies the following 
+/// conditions:
+///
+/// nums.length == n
+/// nums[i] is a positive integer where 0 <= i < n.
+/// abs(nums[i] - nums[i+1]) <= 1 where 0 <= i < n-1.
+/// The sum of all the elements of nums does not exceed maxSum.
+/// nums[index] is maximized.
+/// Return nums[index] of the constructed array.
+/// Note that abs(x) equals x if x >= 0, and -x otherwise.
+///  
+/// Example 1:
+/// Input: n = 4, index = 2,  maxSum = 6
+/// Output: 2
+/// Explanation: The arrays [1,1,2,1] and [1,2,2,1] satisfy all the conditions. There 
+/// are no other valid arrays with a larger value at the given index.
+///
+/// Example 2:
+/// Input: n = 6, index = 1,  maxSum = 10
+/// Output: 3
+///
+/// Constraints:
+/// 1. 1 <= n <= maxSum <= 10^9
+/// 2. 0 <= index < n
+/// </summary>
+int LeetCodeBinarySearch::maxValue(int n, int index, int maxSum)
+{
+    int first = 1;
+    int last = maxSum;
+    int result = 0;
+    while (first <= last)
+    {
+        int mid = first + (last - first) / 2;
+        int left = max((mid - index), 1);
+        int right = max(mid - ((n - 1) - index), 1);
+        int left_extra = max((index+1-mid), 0);
+        int right_extra = max((n - index - mid), 0);
+        long long sum = ((long long)left + (long long)mid) * ((long long)mid - (long long)left + 1) / 2;
+        sum += ((long long)right + (long long)mid) * ((long long)mid - (long long)right + 1) / 2;
+        sum -= mid;
+        sum += (long long)left_extra + (long long)right_extra;
+        if (sum > maxSum) last = mid - 1;
+        else
+        {
+            result = max(result, mid);
+            first = mid + 1;
+        }
+    }
+    return result;
+}
 #pragma endregion  

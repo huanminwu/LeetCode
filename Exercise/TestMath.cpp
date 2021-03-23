@@ -3624,8 +3624,30 @@ void TestLeetCode1785(void)
     Logger::WriteMessage("limit = " + to_string(limit) + "; goal = " + to_string(goal) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1798(void)
+{
+    Logger::WriteMessage("Test Leet Code 1798");
+    LeetCodeMath leetCode;
+    vector<int> coins = { 1, 3 };
+    int result = leetCode.getMaximumConsecutive(coins);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    coins = { 1,1,1,4 };
+    result = leetCode.getMaximumConsecutive(coins);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    coins = { 1,4,10,3,1 };
+    result = leetCode.getMaximumConsecutive(coins);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+
+    TestLeetCode1798();
     TestLeetCode1785();
     TestLeetCode1780();
     TestLeetCode1753();

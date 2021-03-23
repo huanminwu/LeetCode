@@ -5410,8 +5410,52 @@ void TestLeetCode1779(void)
     Logger::WriteMessage("x = " + to_string(x) + "; y= " + to_string(y) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1793(void)
+{
+    Logger::WriteMessage("Test Leet Code 1793");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 4, 3, 7, 4, 5 };
+    int k = 3;
+    int result = leetCode.maximumScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 5,5,4,5,4,1,1,1 };
+    k = 0;
+    result = leetCode.maximumScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1800(void)
+{
+    Logger::WriteMessage("Test Leet Code 1800");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 10,20,30,5,10,50 };
+    int result = leetCode.maxAscendingSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,20,30,40,50 };
+    result = leetCode.maxAscendingSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 12,17,15,13,10,11,12 };
+    result = leetCode.maxAscendingSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 100,10,1 };
+    result = leetCode.maxAscendingSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1800();
+    TestLeetCode1793();
     TestLeetCode1779();
     TestLeetCode1764();
     TestLeetCode1759();

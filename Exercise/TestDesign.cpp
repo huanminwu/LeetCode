@@ -3617,8 +3617,55 @@ void TestLeetCode1724(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1797(void)
+{
+    Logger::WriteMessage("Test Leet Code 1797");
+    AuthenticationManager* authenticationManager = nullptr;
+    vector<string> commands = 
+    { 
+        "AuthenticationManager", "renew", "generate", "countUnexpiredTokens", "generate", 
+        "renew", "renew", "countUnexpiredTokens" 
+    };
+    vector<pair<string, int>> parameters =
+    {
+        { "", 5}, {"aaa", 1}, {"aaa", 2}, {"", 6}, {"bbb", 7}, {"aaa", 8}, {"bbb", 10}, {"", 15}
+    };
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "AuthenticationManager")
+        {
+            authenticationManager = new AuthenticationManager(parameters[i].second);
+            result.push_back("null");
+        }
+        else if (commands[i] == "renew")
+        {
+            authenticationManager->renew(parameters[i].first, parameters[i].second);
+            result.push_back("null");
+        }
+        else if (commands[i] == "generate")
+        {
+            authenticationManager->generate(parameters[i].first, parameters[i].second);
+            result.push_back("null");
+        }
+        else if (commands[i] == "countUnexpiredTokens")
+        {
+            int tokens = authenticationManager->countUnexpiredTokens(parameters[i].second);
+            result.push_back(to_string(tokens));
+        }
+    }
+    delete authenticationManager;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage("tokenid = " + parameters[i].first + "; currentTime = " + to_string(parameters[i].second));
+    }
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1797();
     TestLeetCode1724();
     TestLeetCode1756();
     TestLeetCode225();

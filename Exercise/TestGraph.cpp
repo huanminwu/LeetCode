@@ -3328,8 +3328,93 @@ void TestLeetCode1786(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1782(void)
+{
+    Logger::WriteMessage("Test Leet Code 1782");
+    LeetCodeGraph leetCode;
+    int n = 4;
+    vector<vector<int>> edges = 
+    {
+        {1, 2},{2, 4},{1, 3},{2, 3},{2, 1} 
+    };
+    vector<int> queries = { 2, 3 };
+    vector<int> result = leetCode.countPairs(n, edges, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 5;
+    edges =
+    {
+        {1, 5},{1, 5},{3, 4},{2, 5},{1, 3},{5, 1},{2, 3},{2, 5}
+    };
+    queries = { 1,2,3,4,5 };
+    result = leetCode.countPairs(n, edges, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1761(void)
+{
+    Logger::WriteMessage("Test Leet Code 1761");
+    LeetCodeGraph leetCode;
+    int n = 6;
+    vector<vector<int>> edges =
+    {
+        {1, 2},{1, 3},{3, 2},{4, 1},{5, 2},{3, 6}
+    };
+    int result = leetCode.minTrioDegree(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 7; 
+    edges =
+    {
+        {1, 3},{4, 1},{4, 3},{2, 5},{5, 6},{6, 7},{7, 5},{2, 6}
+    };
+    result = leetCode.minTrioDegree(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 5;
+    edges =
+    {
+        {5, 2},{4, 1},{4, 2},{1, 5}
+    };
+    result = leetCode.minTrioDegree(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));        
+}
+
+void TestLeetCode1791(void)
+{
+    Logger::WriteMessage("Test Leet Code 1791");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> edges =
+    {
+        {1,2},{2,3},{4,2}
+    };
+    int result = leetCode.findCenter(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges =
+    {
+        {1,2},{5,1},{1,3},{1,4}
+    };
+    result = leetCode.findCenter(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1791();
+    TestLeetCode1761();
+    TestLeetCode1782();
     TestLeetCode1786();
     TestLeetCode1765();
     TestLeetCode1743();

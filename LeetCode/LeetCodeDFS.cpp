@@ -17,6 +17,8 @@
 #include <fstream>
 #include "Leetcode.h"
 #include "LeetCodeDFS.h"
+#include "LeetCodeMath.h"
+
 
 #pragma region BackTracking
 
@@ -6261,6 +6263,83 @@ int LeetCodeDFS::maximumScore(vector<int>& nums, vector<int>& multipliers)
     return maximumScore(nums, multipliers, 0, 0, dp);
 }
 
+/// <summary>
+/// Leet code 1799. Maximize Score After N Operations
+/// </summary>
+int LeetCodeDFS::maxScore(vector<int>& nums, int bitmask, vector<int>& cache)
+{
+    LeetCodeMath lm;
+    int bit = 1;
+    int count = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if ((bitmask & (1 << i)) != 0) count++;
+    }
+    if (count == nums.size()) return 0;
+    if (cache[bitmask] != 0) return cache[bitmask];
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if ((bitmask & (1 << i)) != 0) continue;
+        bitmask |= (1 << i);
+        for (size_t j = i + 1; j < nums.size(); j++)
+        {
+            if ((bitmask & (1 << j)) != 0) continue;
+            bitmask |= (1 << j);
+            cache[bitmask] = maxScore(nums, bitmask, cache);
+            result = max(result, cache[bitmask] + (count / 2 + 1) * (int)lm.gcd(nums[i], nums[j]));
+            bitmask ^= (1 << j);
+        }
+        bitmask ^= (1 << i);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1799. Maximize Score After N Operations
+/// 
+/// Hard
+/// 
+/// You are given nums, an array of positive integers of size 2 * n. You 
+/// must perform n operations on this array.
+///
+/// In the ith operation (1-indexed), you will:
+///
+/// Choose two elements, x and y.
+/// Receive a score of i * gcd(x, y).
+/// Remove x and y from nums.
+/// Return the maximum score you can receive after performing n operations.
+///
+/// The function gcd(x, y) is the greatest common divisor of x and y.
+///
+/// Example 1:
+/// Input: nums = [1,2]
+/// Output: 1
+/// Explanation: The optimal choice of operations is:
+/// (1 * gcd(1, 2)) = 1
+///
+/// Example 2:
+/// Input: nums = [3,4,6,8]
+/// Output: 11
+/// Explanation: The optimal choice of operations is:
+/// (1 * gcd(3, 6)) + (2 * gcd(4, 8)) = 3 + 8 = 11
+///
+/// Example 3:
+/// Input: nums = [1,2,3,4,5,6]
+/// Output: 14
+/// Explanation: The optimal choice of operations is:
+/// (1 * gcd(1, 5)) + (2 * gcd(2, 4)) + (3 * gcd(3, 6)) = 1 + 4 + 9 = 14
+///
+/// Constraints:
+/// 1. 1 <= n <= 7
+/// 2. nums.length == 2 * n
+/// 3. 1 <= nums[i] <= 10^6
+/// </summary>
+int LeetCodeDFS::maxScore(vector<int>& nums)
+{
+    vector<int> cache(1 << nums.size());
+    return maxScore(nums, 0, cache);
+}
 
 #pragma endregion
 

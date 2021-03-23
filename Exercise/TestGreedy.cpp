@@ -985,8 +985,26 @@ void TestLeetCode757(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1792(void)
+{
+    Logger::WriteMessage("Test Leet Code 1792");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> classes = { {1, 2},{3, 5},{2, 2} };
+    int extraStudents = 2;
+    double result = leetCode.maxAverageRatio(classes, extraStudents);
+    Logger::WriteMessage(classes);
+    Logger::WriteMessage("extraStudents = " + to_string(extraStudents) + "; result = " + to_string(result));
+
+    classes = { {2, 4},{3, 9},{4, 5},{2, 10} };
+    extraStudents = 4;
+    result = leetCode.maxAverageRatio(classes, extraStudents);
+    Logger::WriteMessage(classes);
+    Logger::WriteMessage("extraStudents = " + to_string(extraStudents) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode1792();
     TestLeetCode757();
     TestLeetCode1674();
     TestLeetCode1024();

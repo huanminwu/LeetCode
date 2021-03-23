@@ -1169,11 +1169,31 @@ void TestLeetCode1770(void)
     Logger::WriteMessage(nums);
     Logger::WriteMessage(multipliers);
     Logger::WriteMessage("result = " + to_string(result));
+};
 
+void TestLeetCode1799(void)
+{
+    Logger::WriteMessage("Test Leet Code 1799");
+    LeetCodeDFS leetCode;
+    vector<int> nums = { 1,2 };
+    int result = leetCode.maxScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3, 4, 6, 8 };
+    result = leetCode.maxScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 2, 3, 4, 5, 6 };
+    result = leetCode.maxScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
 };
 
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode1799();
     TestLeetCode1770();
     TestLeetCode1728();
     TestLeetCode1723();
@@ -1225,4 +1245,5 @@ void TestLeetCodeDFS(void)
     TestLeetCode1066();
     TestLeetCode1240();
     TestLeetCode1219();
+    TestLeetCode1799();
 }

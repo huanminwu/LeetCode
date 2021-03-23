@@ -2288,8 +2288,66 @@ void TestLeetCode1774(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1787(void)
+{
+    Logger::WriteMessage("Test Leet Code 1787");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 2, 0, 3, 0 };
+    int k = 1;
+    int result = leetCode.minChanges(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3,4,5,2,1,7,3,4,7 };
+    k = 3;
+    result = leetCode.minChanges(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2,4,1,2,5,1,2,6 };
+    k = 3;
+    result = leetCode.minChanges(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1745(void)
+{
+    Logger::WriteMessage("Test Leet Code 1745");
+    LeetCodeDP leetCode;
+    string s = "abcbdd";
+    bool result = leetCode.checkPartitioning(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true":"false"));
+
+    s = "bcbddxy";
+    result = leetCode.checkPartitioning(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "aab";
+    result = leetCode.checkPartitioning(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "abbab";
+    result = leetCode.checkPartitioning(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "accab";
+    result = leetCode.checkPartitioning(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "aaaaa";
+    result = leetCode.checkPartitioning(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "plbqrqbhafkaktrbsaaxpxiobebmkkeivlformfspcdtygcmgpbrekkwpgvujyfpysjsqeclwkkmntaahxferzsyxbivyrohptketkabbmzhxdffvdjbbdvpmeygvygsiglucsavhjdoyosysqmiobvcbwatprfyjnxuuihissatgfjmnzwmbhdfwjyxdxelsxsutugmsthjsblgrjtxylzwlifzuhpfvssovovblhwngcimcoxgmiirecxsawfsahwxdkpdctgozzpfdvnbrpsdevqaaxnrczldpcodubfkoevcpbonckkgnjibzxmztoilwqanashooiytjljrwwznjtmkbyhukvcqhmnnibypxcqevoggsanfgybnxujpjsecynkoguinzypssnsnmbkurkncqhgqiuglqvtwidvbprhkgdvvxgulzlacjmqtbpapdrvanifjuautebqqpfxsetvciazpdrxbtgscvczfnydhpydcbbrmlhjszigimcjjevrxqduaawvoarusqhwsjtpvygdfxyhyytwjyqyezzsrdwwbcrytgiwqqomjsusmhzjfqnihccufgcohdlxcwtitxbevzfuhytrbtqfcpedmfvuhvxsrqqxkrmnnxmyuvkngm";
+    result = leetCode.checkPartitioning(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1745();
+    TestLeetCode1787();
     TestLeetCode1774();
     TestLeetCode1746();
     TestLeetCode1682();

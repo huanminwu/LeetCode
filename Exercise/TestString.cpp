@@ -3971,8 +3971,48 @@ void TestLeetCode1784(void)
     Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1790(void)
+{
+    Logger::WriteMessage("Test Leet Code 1790");
+    LeetCodeString leetCode;
+    string s1 = "bank";
+    string s2 = "kanb";
+    bool result = leetCode.areAlmostEqual(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "; result = " + (string)(result ? "true" : "false"));
+
+    s1 = "attack";
+    s2 = "defend";
+    result = leetCode.areAlmostEqual(s1, s2);
+    Logger::WriteMessage("s1 = " + s1  + "; s2 = " + s2 + "; result = " + (string)(result ? "true" : "false"));
+
+    s1 = "kelb";
+    s2 = "kelb";
+    result = leetCode.areAlmostEqual(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 +"; s2 = " + s2 + "; result = " + (string)(result ? "true" : "false"));
+
+    s1 = "abcd";
+    s2 = "dcba";
+    result = leetCode.areAlmostEqual(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1796(void)
+{
+    Logger::WriteMessage("Test Leet Code 1796");
+    LeetCodeString leetCode;
+    string s = "dfa12321afd";
+    int result = leetCode.secondHighest(s);
+    Logger::WriteMessage("s = " + s  + "; result = " + to_string(result));
+
+    s = "abc1111";
+    result = leetCode.secondHighest(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1796();
+    TestLeetCode1790();
     TestLeetCode1784();
     TestLeetCode1781();
     TestLeetCode1750();

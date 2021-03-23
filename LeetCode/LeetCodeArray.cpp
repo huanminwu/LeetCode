@@ -15498,4 +15498,115 @@ int LeetCodeArray::nearestValidPoint(int x, int y, vector<vector<int>>& points)
     return result;
 }
 
+/// <summary>
+/// Leet code 1793. Maximum Score of a Good Subarray
+/// 
+/// Hard
+/// 
+/// You are given an array of integers nums (0-indexed) and an integer k.
+/// 
+/// The score of a subarray (i, j) is defined as min(nums[i], 
+/// nums[i+1], ..., nums[j]) * (j - i + 1). A good subarray is a subarray 
+/// where i <= k <= j.
+///
+/// Return the maximum possible score of a good subarray.
+///
+/// Example 1:
+/// Input: nums = [1,4,3,7,4,5], k = 3
+/// Output: 15
+/// Explanation: The optimal subarray is (1, 5) with a score of 
+/// min(4,3,7,4,5) * (5-1+1) = 3 * 5 = 15. 
+///
+/// Example 2:
+/// Input: nums = [5,5,4,5,4,1,1,1], k = 0
+/// Output: 20
+/// Explanation: The optimal subarray is (0, 4) with a score of 
+/// min(5,5,4,5,4) * (4-0+1) = 4 * 5 = 20.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 2 * 10^4
+/// 3. 0 <= k < nums.length
+/// </summary>
+int LeetCodeArray::maximumScore(vector<int>& nums, int k)
+{
+    int n = nums.size();
+    priority_queue<pair<int, int>> pq;
+    int result = nums[k];
+    int min_num = nums[k];
+    int count = 1;
+    if (k > 0) pq.push(make_pair(nums[k - 1], k - 1));
+    if (k < n-1) pq.push(make_pair(nums[k + 1], k + 1));
+    while (!pq.empty())
+    {
+        pair<int, int> pos = pq.top();
+        pq.pop();
+        if (pos.second < k && pos.second > 0)
+        {
+            pq.push(make_pair(nums[pos.second - 1], pos.second - 1));
+        }
+        else if (pos.second > k && pos.second < n - 1)
+        {
+            pq.push(make_pair(nums[pos.second + 1], pos.second + 1));
+        }
+        min_num = min(min_num, pos.first);
+        count++;
+        result = max(min_num * count, result);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1800. Maximum Ascending Subarray Sum
+/// 
+/// Easy
+/// 
+/// Given an array of positive integers nums, return the maximum possible 
+/// sum of an ascending subarray in nums.
+///
+/// A subarray is defined as a contiguous sequence of numbers in an array.
+///
+/// A subarray [numsl, numsl+1, ..., numsr-1, numsr] is ascending if for 
+/// all i where l <= i < r, numsi < numsi+1. Note that a subarray of 
+/// size 1 is ascending.
+///
+/// Example 1:
+/// Input: nums = [10,20,30,5,10,50]
+/// Output: 65
+/// Explanation: [5,10,50] is the ascending subarray with the maximum 
+/// sum of 65.
+///
+/// Example 2:
+/// Input: nums = [10,20,30,40,50]
+/// Output: 150
+/// Explanation: [10,20,30,40,50] is the ascending subarray with the 
+/// maximum sum of 150.
+///
+/// Example 3:
+/// Input: nums = [12,17,15,13,10,11,12]
+/// Output: 33
+/// Explanation: [10,11,12] is the ascending subarray with the maximum 
+/// sum of 33.
+///
+/// Example 4:
+/// Input: nums = [100,10,1]
+/// Output: 100
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 100
+/// </summary>
+int LeetCodeArray::maxAscendingSum(vector<int>& nums)
+{
+    int result = 0, sum = 0, last = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] > last) sum += nums[i];
+        else sum = nums[i];
+        last = nums[i];
+        result = max(result, sum);
+    }
+    return result;
+}
+
 #pragma endregion

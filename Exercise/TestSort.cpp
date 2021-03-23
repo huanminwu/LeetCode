@@ -1200,10 +1200,26 @@ void TestLeetCode1775(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1801(void)
+{
+    Logger::WriteMessage("Test Leet Code 1801");
+    LeetCodeSort leetCode;
+    vector<vector<int>> orders = { {10, 5, 0},{15, 2, 1},{25, 1, 1},{30, 4, 0} };
+    int result = leetCode.getNumberOfBacklogOrders(orders);
+    Logger::WriteMessage(orders);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    orders = { {7, 1000000000, 1},{15, 3, 0},{5, 999999995, 0},{5, 1, 1} };
+    result = leetCode.getNumberOfBacklogOrders(orders);
+    Logger::WriteMessage(orders);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 
 
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1801();
     TestLeetCode1775();
     TestLeetCode1752();
     TestLeetCode1710();

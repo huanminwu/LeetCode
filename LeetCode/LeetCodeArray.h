@@ -9269,29 +9269,79 @@ public:
     int nearestValidPoint(int x, int y, vector<vector<int>>& points);
 
     /// <summary>
-    /// Leet code 1784. Check if Binary String Has at Most One Segment of Ones
+    /// Leet code 1793. Maximum Score of a Good Subarray
+    /// 
+    /// Hard
+    /// 
+    /// You are given an array of integers nums (0-indexed) and an integer k.
+    /// 
+    /// The score of a subarray (i, j) is defined as min(nums[i], 
+    /// nums[i+1], ..., nums[j]) * (j - i + 1). A good subarray is a subarray 
+    /// where i <= k <= j.
+    ///
+    /// Return the maximum possible score of a good subarray.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,4,3,7,4,5], k = 3
+    /// Output: 15
+    /// Explanation: The optimal subarray is (1, 5) with a score of 
+    /// min(4,3,7,4,5) * (5-1+1) = 3 * 5 = 15. 
+    ///
+    /// Example 2:
+    /// Input: nums = [5,5,4,5,4,1,1,1], k = 0
+    /// Output: 20
+    /// Explanation: The optimal subarray is (0, 4) with a score of 
+    /// min(5,5,4,5,4) * (4-0+1) = 4 * 5 = 20.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 2 * 10^4
+    /// 3. 0 <= k < nums.length
+    /// </summary>
+    int maximumScore(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code 1800. Maximum Ascending Subarray Sum
     /// 
     /// Easy
     /// 
-    /// Given a binary string s without leading zeros, return true if s 
-    /// contains at most one contiguous segment of ones. Otherwise, return 
-    /// false.
+    /// Given an array of positive integers nums, return the maximum possible 
+    /// sum of an ascending subarray in nums.
+    ///
+    /// A subarray is defined as a contiguous sequence of numbers in an array.
+    ///
+    /// A subarray [numsl, numsl+1, ..., numsr-1, numsr] is ascending if for 
+    /// all i where l <= i < r, numsi < numsi+1. Note that a subarray of 
+    /// size 1 is ascending.
     ///
     /// Example 1:
-    /// Input: s = "1001"
-    /// Output: false
-    /// Explanation: The ones do not form a contiguous segment.
+    /// Input: nums = [10,20,30,5,10,50]
+    /// Output: 65
+    /// Explanation: [5,10,50] is the ascending subarray with the maximum 
+    /// sum of 65.
     ///
     /// Example 2:
-    /// Input: s = "110"
-    /// Output: true
+    /// Input: nums = [10,20,30,40,50]
+    /// Output: 150
+    /// Explanation: [10,20,30,40,50] is the ascending subarray with the 
+    /// maximum sum of 150.
+    ///
+    /// Example 3:
+    /// Input: nums = [12,17,15,13,10,11,12]
+    /// Output: 33
+    /// Explanation: [10,11,12] is the ascending subarray with the maximum 
+    /// sum of 33.
+    ///
+    /// Example 4:
+    /// Input: nums = [100,10,1]
+    /// Output: 100
     /// 
     /// Constraints:
-    /// 1. 1 <= s.length <= 100
-    /// 2. s[i] is either '0' or '1'.
-    /// 3. s[0] is '1'.
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 100
     /// </summary>
-    bool checkOnesSegment(string s);
+    int maxAscendingSum(vector<int>& nums);
+
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

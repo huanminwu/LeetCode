@@ -13728,4 +13728,104 @@ bool LeetCodeString::checkOnesSegment(string s)
     return true;
 }
 
+/// <summary>
+/// Leet code 1790. Check if One String Swap Can Make Strings Equal
+/// 
+/// Easy
+/// 
+/// You are given two strings s1 and s2 of equal length. A string swap 
+/// is an operation where you choose two indices in a string (not 
+/// necessarily different) and swap the characters at these indices.
+///
+/// Return true if it is possible to make both strings equal by performing 
+/// at most one string swap on exactly one of the strings. Otherwise, 
+/// return false.
+///
+/// Example 1:
+/// Input: s1 = "bank", s2 = "kanb"
+/// Output: true
+/// Explanation: For example, swap the first character with the last 
+/// character of s2 to make "bank".
+///
+/// Example 2:
+/// Input: s1 = "attack", s2 = "defend"
+/// Output: false
+/// Explanation: It is impossible to make them equal with one string swap.
+/// 
+/// Example 3:
+/// Input: s1 = "kelb", s2 = "kelb"
+/// Output: true
+/// Explanation: The two strings are already equal, so no string swap 
+/// operation is required.
+///
+/// Example 4:
+/// Input: s1 = "abcd", s2 = "dcba"
+/// Output: false
+///
+/// Constraints:
+/// 1. 1 <= s1.length, s2.length <= 100
+/// 2. s1.length == s2.length
+/// 3. s1 and s2 consist of only lowercase English letters.
+/// </summary>
+bool LeetCodeString::areAlmostEqual(string s1, string s2)
+{
+    string str1, str2;
+    for (size_t i = 0; i < s1.size(); i++)
+    {
+        if (s1[i] == s2[i]) continue;
+        str1.push_back(s1[i]);
+        str2.push_back(s2[i]);
+    }
+    if (str1.empty()) return true;
+    if (str1.size() == 2)
+    {
+        swap(str1[0], str1[1]);
+        if (str1 == str2) return true;
+    }
+    return false;
+}
+
+/// <summary>
+/// Leet code 1796. Second Largest Digit in a String
+/// 
+/// Easy
+/// 
+/// Given an alphanumeric string s, return the second largest numerical 
+/// digit that appears in s, or -1 if it does not exist.
+///
+/// An alphanumeric string is a string consisting of lowercase English 
+/// letters and digits.
+///
+/// Example 1:
+/// Input: s = "dfa12321afd"
+/// Output: 2
+/// Explanation: The digits that appear in s are [1, 2, 3]. The second 
+/// largest digit is 2.
+///
+/// Example 2:
+/// Input: s = "abc1111"
+/// Output: -1
+/// Explanation: The digits that appear in s are [1]. There is no 
+/// second largest digit. 
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 500
+/// 2. s consists of only lowercase English letters and/or digits.
+/// </summary>
+int LeetCodeString::secondHighest(string s)
+{
+    vector<int> digits(10);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (isdigit(s[i])) digits[s[i] - '0'] = 1;
+    }
+    int count = 0;
+    for (int i = 9; i >= 0; i--)
+    {
+        if (digits[i] == 1) count++;
+        if (count == 2) return i;
+    }
+    return -1;
+}
+
 #pragma endregion
