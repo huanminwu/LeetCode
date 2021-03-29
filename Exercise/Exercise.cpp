@@ -3241,19 +3241,19 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 { 
-    TestLeetCodeBinarySearch();
+    TestLeetCodeString();
     TestLeetCodeMath();
-    TestLeetCodeSort();
     TestLeetCodeArray();
+    TestLeetCodeBit();
+    TestLeetCodeBinarySearch();
+    TestLeetCodeSort();
     TestLeetCodeDFS();
     TestLeetCodeMath();
     TestLeetCodeDesign();
-    TestLeetCodeString();
     TestLeetCodeGreedy();
     TestLeetCodeGraph();
     TestLeetCodeDP();
     TestLeetCodeHashtable();
-    TestLeetCodeBit();
     TestLeetCodeTree();
     TestLeetCodeHashtable();
     TestLeetCodeLinkedList();

@@ -634,8 +634,41 @@ void TestLeetCode1734(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1803(void)
+{
+    Logger::WriteMessage("Test Leet Code 1803");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 4, 2, 7 };
+    int low = 2;
+    int high = 6;
+    int result = leetCode.countPairs(nums, low, high);
+    result = leetCode.countPairs2(nums, low, high);
+    result = leetCode.countPairs3(nums, low, high);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("low = " + to_string(low) + "; high = " + to_string(high) + "; result = " + to_string(result));
+
+    nums = { 9,8,4,2,1 };
+    low = 5;
+    high = 14;
+    result = leetCode.countPairs(nums, low, high);
+    result = leetCode.countPairs2(nums, low, high);
+    result = leetCode.countPairs3(nums, low, high);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("low = " + to_string(low) + "; high = " + to_string(high) + "; result = " + to_string(result));
+
+    nums = { 3856, 3174, 2182, 7497, 6155, 4589, 3581, 4548, 3982, 2508 };
+    low = 6903;
+    high = 6946;
+    result = leetCode.countPairs(nums, low, high);
+    result = leetCode.countPairs2(nums, low, high);
+    result = leetCode.countPairs3(nums, low, high);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("low = " + to_string(low) + "; high = " + to_string(high) + "; result = " + to_string(result));        
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode1803();
     TestLeetCode1734();
     TestLeetCode1707();
     TestLeetCode1545();

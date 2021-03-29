@@ -4009,8 +4009,64 @@ void TestLeetCode1796(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode1805(void)
+{
+    Logger::WriteMessage("Test Leet Code 1805");
+    LeetCodeString leetCode;
+    string s = "a123bc34d8ef34";
+    int result = leetCode.numDifferentIntegers(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "leet1234code234";
+    result = leetCode.numDifferentIntegers(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "a1b01c001";
+    result = leetCode.numDifferentIntegers(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "0a0";
+    result = leetCode.numDifferentIntegers(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+ 
+    s = "4r05743a05743n05743yoe";
+    result = leetCode.numDifferentIntegers(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode1807(void)
+{
+    Logger::WriteMessage("Test Leet Code 1807");
+    LeetCodeString leetCode;
+    string s = "(name)is(age)yearsold";
+    vector<vector<string>> knowledge = { {"name", "bob"},{"age", "two"} };
+    string result = leetCode.evaluate(s, knowledge);
+    Logger::WriteMessage(knowledge);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "hi(name)";
+    knowledge = { {"a","b"} };
+    result = leetCode.evaluate(s, knowledge);
+    Logger::WriteMessage(knowledge);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "(a)(a)(a)aaa";
+    knowledge = { {"a","yes"} };
+    result = leetCode.evaluate(s, knowledge);
+    Logger::WriteMessage(knowledge);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "(a)(b)";
+    knowledge = { {"a","b"}, {"b","a"} };
+    result = leetCode.evaluate(s, knowledge);
+    Logger::WriteMessage(knowledge);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1807();
+    TestLeetCode1805();
     TestLeetCode1796();
     TestLeetCode1790();
     TestLeetCode1784();

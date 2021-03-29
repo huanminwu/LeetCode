@@ -1796,4 +1796,225 @@ vector<int> LeetCodeBit::decode(vector<int>& encoded)
     return result;
 }
 
+
+/// <summary>
+/// Leet code 1803. Count Pairs With XOR in a Range
+/// 
+/// Hard
+/// 
+/// Given a (0-indexed) integer array nums and two integers low and 
+/// high, return the number of nice pairs.
+///
+/// A nice pair is a pair (i, j) where 0 <= i < j < nums.length and 
+/// low <= (nums[i] XOR nums[j]) <= high.
+/// 
+/// Example 1:
+/// Input: nums = [1,4,2,7], low = 2, high = 6
+/// Output: 6
+/// Explanation: All nice pairs (i, j) are as follows:
+/// - (0, 1): nums[0] XOR nums[1] = 5 
+/// - (0, 2): nums[0] XOR nums[2] = 3
+/// - (0, 3): nums[0] XOR nums[3] = 6
+/// - (1, 2): nums[1] XOR nums[2] = 6
+/// - (1, 3): nums[1] XOR nums[3] = 3
+/// - (2, 3): nums[2] XOR nums[3] = 5
+///
+/// Example 2:
+/// Input: nums = [9,8,4,2,1], low = 5, high = 14
+/// Output: 8
+/// Explanation: All nice pairs (i, j) are as follows:
+/// - (0, 2): nums[0] XOR nums[2] = 13
+/// - (0, 3): nums[0] XOR nums[3] = 11
+/// - (0, 4): nums[0] XOR nums[4] = 8
+/// - (1, 2): nums[1] XOR nums[2] = 12
+/// - (1, 3): nums[1] XOR nums[3] = 10
+/// - (1, 4): nums[1] XOR nums[4] = 9
+/// - (2, 3): nums[2] XOR nums[3] = 6
+/// - (2, 4): nums[2] XOR nums[4] = 5
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 2 * 10^4
+/// 2. 1 <= nums[i] <= 2 * 10^4
+/// 3. 1 <= low <= high <= 2 * 10^4
+/// </summary>
+int LeetCodeBit::countPairs(vector<int>& nums, int low, int high)
+{
+    vector<int> result(2);
+    vector<int> limits = { low, high + 1 };
+    for (size_t i = 0; i < 2; i++)
+    {
+        unordered_map<int, int> curr, next;
+        for (auto n : nums)
+        {
+            curr[n]++;
+        }
+        int limit = limits[i];
+        while (limit > 0)
+        {            
+            for (auto itr : curr)
+            {
+                if (limit % 2 == 1)
+                {
+                    int target = itr.first ^ (limit - 1);
+                    if (curr.count(target) > 0)
+                    {
+                        result[i] += itr.second * curr[target];
+                    }
+                }
+                next[itr.first >> 1] += itr.second;
+            }
+            curr = next;
+            next.clear();
+            limit /= 2;
+        }
+    }
+    return (result[1] - result[0]) / 2;
+}
+
+/// <summary>
+/// Leet code 1803. Count Pairs With XOR in a Range
+/// Hard
+/// </summary>
+int LeetCodeBit::countPairs2(vector<int>& nums, int low, int high)
+{
+    vector<int> result(2);
+    vector<int> limits = { low, high + 1 };
+    vector<int> num_count(65536);
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int offset = 0;
+        int base = 0;
+        for (int j = 14; j >= 0; j--)
+        {
+            int bit = 1 << j;
+            if ((nums[i] & bit) == 0)
+            {
+                num_count[base + offset]++;
+                offset = offset * 2;
+            }
+            else
+            {
+                num_count[base + offset + 1]++;
+                offset = (offset + 1) * 2;
+            }
+            base = base + (1 << (15 - j));
+        }
+    }
+    for (size_t i = 0; i < 2; i++)
+    {
+        int limit = limits[i];
+        for (size_t j = 0; j < nums.size(); j++)
+        {
+            int num = nums[j];
+            int offset = 0;
+            int base = 0;
+            for (int j = 14; j >= 0; j--)
+            {
+                int bit = 1 << j;
+                if ((limit & bit) == 0)
+                {
+                    if ((num & bit) == 0) offset = offset * 2;
+                    else offset = (offset + 1) * 2;
+                }
+                else
+                {
+                    if ((num & bit) == 0)
+                    {
+                        result[i] += num_count[base + offset];
+                        offset = (offset + 1) * 2;
+                    }
+                    else
+                    {
+                        result[i] += num_count[base + offset + 1];
+                        offset = offset * 2;
+                    }
+                }
+                base = base + (1 << (15 - j));
+            }
+        }
+    }
+    return (result[1] - result[0]) / 2;
+}
+
+/// <summary>
+/// Leet code 1803. Count Pairs With XOR in a Range
+/// </summary>
+int LeetCodeBit::countPairs3(vector<int>& nums, int low, int high)
+{
+    struct TrieBit
+    {
+        int count;
+        TrieBit * children[2];
+
+        TrieBit()
+        {
+            count = 0;
+            children[0] = nullptr;
+            children[1] = nullptr;
+        }
+    };
+    TrieBit * root = new TrieBit();
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        TrieBit * ptr = root;
+        for (int j = 14; j >= 0; j--)
+        {
+            int bit = 1 << j;
+            if ((nums[i] & bit) == 0)
+            {
+                if (ptr->children[0] == nullptr)
+                {
+                    ptr->children[0] = new TrieBit();
+                }
+                ptr->children[0]->count++;
+                ptr = ptr->children[0];
+            }
+            else
+            {
+                if (ptr->children[1] == nullptr)
+                {
+                    ptr->children[1] = new TrieBit();
+                }
+                ptr->children[1]->count++;
+                ptr = ptr->children[1];
+            }
+        }
+    }
+    vector<int> result(2);
+    vector<int> limits = { low, high + 1 };
+    for (size_t i = 0; i < 2; i++)
+    {
+        int limit = limits[i];
+        for (size_t j = 0; j < nums.size(); j++)
+        {
+            int num = nums[j];
+            TrieBit* ptr = root;
+            for (int j = 14; j >= 0; j--)
+            {
+                int bit = 1 << j;
+                if ((limit & bit) == 0)
+                {
+                    if ((num & bit) == 0) ptr = ptr->children[0];
+                    else ptr = ptr->children[1];
+                }
+                else
+                {
+                    if ((num & bit) == 0)
+                    {
+                        if (ptr->children[0] != nullptr) result[i] += ptr->children[0]->count;
+                        ptr = ptr->children[1];
+                    }
+                    else
+                    {
+                        if (ptr->children[1] != nullptr) result[i] += ptr->children[1]->count;
+                        ptr = ptr->children[0];
+                    }
+                }
+                if (ptr == nullptr) break;
+            }
+        }
+    }
+    return (result[1] - result[0]) / 2;
+}
+
 #pragma endregion

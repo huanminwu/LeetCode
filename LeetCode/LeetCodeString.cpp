@@ -13828,4 +13828,182 @@ int LeetCodeString::secondHighest(string s)
     return -1;
 }
 
+/// <summary>
+/// Leet code 1805. Number of Different Integers in a String
+/// 
+/// Easy
+/// 
+/// You are given a string word that consists of digits and lowercase 
+/// English letters.
+///
+/// You will replace every non-digit character with a space. For example, 
+/// "a123bc34d8ef34" will become " 123  34 8  34". Notice that you are left 
+/// with some integers that are separated by at least one space: "123", 
+/// "34", "8", and "34".
+///
+/// Return the number of different integers after performing the 
+/// replacement operations on word.
+///
+/// Two integers are considered different if their decimal representations 
+/// without any leading zeros are different.
+///
+/// Example 1:
+/// Input: word = "a123bc34d8ef34"
+/// Output: 3
+/// Explanation: The three different integers are "123", "34", and "8". 
+/// Notice that "34" is only counted once.
+///
+/// Example 2:
+/// Input: word = "leet1234code234"
+/// Output: 2
+///
+/// Example 3:
+/// Input: word = "a1b01c001"
+/// Output: 1
+/// Explanation: The three integers "1", "01", and "001" all represent 
+/// the same integer because
+/// the leading zeros are ignored when comparing their decimal values.
+///
+/// Constraints:
+/// 1. 1 <= word.length <= 1000
+/// 2. word consists of digits and lowercase English letters.
+/// </summary>
+int LeetCodeString::numDifferentIntegers(string word)
+{
+    unordered_set<string> result;
+
+    string str;
+    for (size_t i = 0; i <= word.size(); i++)
+    {
+        if (i == word.size() || !isdigit(word[i]))
+        {
+            if (!str.empty())
+            {
+                result.insert(str);
+                str.clear();
+            }
+        }
+        else
+        {
+            if (str.empty() || str[0] != '0')
+            {
+                str.push_back(word[i]);
+            }
+            else
+            {
+                str[0] = word[i];
+            }
+        }
+    }
+    return result.size();
+}
+
+
+/// <summary>
+/// Leet code 1807. Evaluate the Bracket Pairs of a String
+/// 
+/// Medium
+/// 
+/// You are given a string s that contains some bracket pairs, with each 
+/// pair containing a non-empty key.
+///
+/// For example, in the string "(name)is(age)yearsold", there are two 
+/// bracket pairs that contain the keys "name" and "age".
+/// You know the values of a wide range of keys. This is represented by 
+/// a 2D string array knowledge where each knowledge[i] = [keyi, valuei] 
+/// indicates that key keyi has a value of valuei.
+///
+/// You are tasked to evaluate all of the bracket pairs. When you 
+/// evaluate a bracket pair that contains some key keyi, you will:
+///
+/// Replace keyi and the bracket pair with the key's corresponding valuei.
+/// If you do not know the value of the key, you will replace keyi and the 
+/// bracket pair with a question mark "?" (without the quotation marks).
+/// Each key will appear at most once in your knowledge. There will not be 
+/// any nested brackets in s.
+///
+/// Return the resulting string after evaluating all of the bracket pairs.
+/// 
+/// Example 1:
+/// Input: s = "(name)is(age)yearsold", knowledge = 
+/// [["name","bob"],["age","two"]]
+/// Output: "bobistwoyearsold"
+/// Explanation:
+/// The key "name" has a value of "bob", so replace "(name)" with "bob".
+/// The key "age" has a value of "two", so replace "(age)" with "two".
+///
+/// Example 2:
+/// Input: s = "hi(name)", knowledge = [["a","b"]]
+/// Output: "hi?"
+/// Explanation: As you do not know the value of the key "name", replace 
+/// "(name)" with "?".
+///
+/// Example 3:
+/// Input: s = "(a)(a)(a)aaa", knowledge = [["a","yes"]]
+/// Output: "yesyesyesaaa"
+/// Explanation: The same key can appear multiple times.
+/// The key "a" has a value of "yes", so replace all occurrences of "(a)" 
+/// with "yes".
+/// Notice that the "a"s not in a bracket pair are not evaluated.
+///
+/// Example 4:
+/// Input: s = "(a)(b)", knowledge = [["a","b"],["b","a"]]
+/// Output: "ba"
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. 0 <= knowledge.length <= 10^5
+/// 3. knowledge[i].length == 2
+/// 4. 1 <= keyi.length, valuei.length <= 10
+/// 5. s consists of lowercase English letters and round 
+///    brackets '(' and ')'.
+/// 6. Every open bracket '(' in s will have a corresponding close 
+///    bracket ')'.
+/// 7. The key in each bracket pair of s will be non-empty.
+/// 8. There will not be any nested bracket pairs in s.
+/// 9. keyi and valuei consist of lowercase English letters.
+/// 10. Each keyi in knowledge is unique.
+/// </summary>
+string LeetCodeString::evaluate(string s, vector<vector<string>>& knowledge)
+{
+    unordered_map<string, string> word_map;
+
+    for (size_t i = 0; i < knowledge.size(); i++)
+    {
+        word_map[knowledge[i][0]] = knowledge[i][1];
+    }
+    int brackets = 0;
+    string str;
+    string result;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == ')')
+        {
+            if (word_map.count(str) > 0)
+            {
+                result.append(word_map[str]);
+            }
+            else
+            {
+                result.append("?");
+            }
+            str.clear();
+            brackets = 0;
+        }
+        else if (s[i] == '(')
+        {
+            brackets = 1;
+        }
+        else if (brackets == 1)
+        {
+            str.push_back(s[i]);
+        }
+        else
+        {
+            result.push_back(s[i]);
+        }
+    }
+    return result;
+}
+
 #pragma endregion

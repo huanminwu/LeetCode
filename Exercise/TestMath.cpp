@@ -3644,9 +3644,26 @@ void TestLeetCode1798(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1808(void)
+{
+    Logger::WriteMessage("Test Leet Code 1808");
+    LeetCodeMath leetCode;
+    int primeFactors = 5;
+    int result = leetCode.maxNiceDivisors(primeFactors);
+    Logger::WriteMessage("primeFactors = " + to_string(primeFactors) + "; result = " + to_string(result));
+
+    primeFactors = 8;
+    result = leetCode.maxNiceDivisors(primeFactors);
+    Logger::WriteMessage("primeFactors = " + to_string(primeFactors) + "; result = " + to_string(result));
+
+    primeFactors = 73;
+    result = leetCode.maxNiceDivisors(primeFactors);
+    Logger::WriteMessage("primeFactors = " + to_string(primeFactors) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
-
+    TestLeetCode1808();
     TestLeetCode1798();
     TestLeetCode1785();
     TestLeetCode1780();

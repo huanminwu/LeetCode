@@ -5452,8 +5452,30 @@ void TestLeetCode1800(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1806(void)
+{
+    Logger::WriteMessage("Test Leet Code 1806");
+    LeetCodeArray leetCode;
+    int n = 2;
+    int result = leetCode.reinitializePermutation(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    result = leetCode.reinitializePermutation(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 6;
+    result = leetCode.reinitializePermutation(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 998;
+    result = leetCode.reinitializePermutation(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1806();
     TestLeetCode1800();
     TestLeetCode1793();
     TestLeetCode1779();
