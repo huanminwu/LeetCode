@@ -2344,8 +2344,36 @@ void TestLeetCode1745(void)
     Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1771(void)
+{
+    Logger::WriteMessage("Test Leet Code 1771");
+    LeetCodeDP leetCode;
+    string word1 = "cacb";
+    string word2 = "cbba";
+    int result = leetCode.longestPalindrome(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 + "; result = " + to_string(result));
+
+    word1 = "ab";
+    word2 = "ab";
+    result = leetCode.longestPalindrome(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 + "; result = " + to_string(result));
+
+    word1 = "aa";
+    word2 = "bb";
+    result = leetCode.longestPalindrome(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 + "; result = " + to_string(result));
+
+    word1 = "afaaadacb";
+    word2 = "ca";
+    result = leetCode.longestPalindrome(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 + "; result = " + to_string(result));
+}
+
+
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1771();
     TestLeetCode1745();
     TestLeetCode1787();
     TestLeetCode1774();

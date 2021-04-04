@@ -10482,3 +10482,113 @@ int LeetCodeMath::maxNiceDivisors(int primeFactors)
     
     return (int)result;
 }
+
+/// <summary>
+/// Leet code 1812. Determine Color of a Chessboard Square 
+/// 
+/// Easy
+/// 
+/// You are given coordinates, a string that represents the coordinates 
+/// of a square of the chessboard. Below is a chessboard for your 
+/// reference.
+/// 
+/// Return true if the square is white, and false if the square is black.
+///
+/// The coordinate will always represent a valid chessboard square. The 
+/// coordinate will always have the letter first, and the number second.
+/// 
+/// Example 1:
+/// Input: coordinates = "a1"
+/// Output: false
+/// Explanation: From the chessboard above, the square with coordinates 
+/// "a1" is black, so return false.
+///
+/// Example 2:
+/// Input: coordinates = "h3"
+/// Output: true
+/// Explanation: From the chessboard above, the square with coordinates 
+/// "h3" is white, so return true.
+///
+/// Example 3:
+/// Input: coordinates = "c7"
+/// Output: false
+/// 
+/// Constraints:
+/// 1. coordinates.length == 2
+/// 2. 'a' <= coordinates[0] <= 'h'
+/// 3. '1' <= coordinates[1] <= '8'
+/// </summary>
+bool LeetCodeMath::squareIsWhite(string coordinates)
+{
+    int value = coordinates[0] - 'a' + coordinates[1] - '1';
+    if (value % 2 == 0)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+/// <summary>
+/// Leet code 1819. Number of Different Subsequences GCDs
+/// 
+/// Hard
+/// 
+/// You are given an array nums that consists of positive integers.
+///
+/// The GCD of a sequence of numbers is defined as the greatest integer 
+/// that divides all the numbers in the sequence evenly.
+///
+/// For example, the GCD of the sequence [4,6,16] is 2.
+/// A subsequence of an array is a sequence that can be formed by removing 
+/// some elements (possibly none) of the array.
+///
+/// For example, [2,5,10] is a subsequence of [1,2,1,2,4,1,5,10].
+/// Return the number of different GCDs among all non-empty subsequences 
+/// of nums.
+/// 
+/// Example 1:
+/// Input: nums = [6,10,3]
+/// Output: 5
+/// Explanation: The figure shows all the non-empty subsequences and their 
+/// GCDs.
+/// The different GCDs are 6, 10, 3, 2, and 1. 
+///
+/// Example 2:
+/// Input: nums = [5,15,40,5,6]
+/// Output: 7
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 2 * 10^5
+/// </summary>
+int LeetCodeMath::countDifferentSubsequenceGCDs(vector<int>& nums)
+{
+    vector<int> gcd_seed(200001);
+    int max_value = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        gcd_seed[nums[i]] = 1;
+        max_value = max(max_value, nums[i]);
+    }
+    for (int i = max_value; i > 0; i--)
+    {
+        if (gcd_seed[i] == 1) continue;
+        int cgcd = 0;
+        for (int j = 2; j * i <= max_value; j++)
+        {
+            if (gcd_seed[j * i] == 0) continue;
+            cgcd = (cgcd == 0) ? j : (int)gcd(cgcd, j);
+            if (cgcd == 1) break;
+        }
+        if (cgcd == 1) gcd_seed[i] = 1;
+    }
+    int result = 0;
+    for (int i = 0; i <= max_value; i++)
+    {
+        if (gcd_seed[i] == 1) result++;
+    }
+    return result;
+}

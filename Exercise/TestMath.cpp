@@ -3661,8 +3661,40 @@ void TestLeetCode1808(void)
     Logger::WriteMessage("primeFactors = " + to_string(primeFactors) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1812(void)
+{
+    Logger::WriteMessage("Test Leet Code 1812");
+    LeetCodeMath leetCode;
+    string coordinates = "a1";
+    bool result = leetCode.squareIsWhite(coordinates);
+    Logger::WriteMessage("coordinates = " + coordinates + "; result = " + (string)(result ? "true" : "false"));
+
+    coordinates = "h3";
+    result = leetCode.squareIsWhite(coordinates);
+    Logger::WriteMessage("coordinates = " + coordinates + "; result = " + (string)(result ? "true" : "false"));
+
+    coordinates = "c7";
+    result = leetCode.squareIsWhite(coordinates);
+    Logger::WriteMessage("coordinates = " + coordinates + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1819(void)
+{
+    Logger::WriteMessage("Test Leet Code 1819");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 6, 10, 3 };
+    int result = leetCode.countDifferentSubsequenceGCDs(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,15,40,5,6 };
+    result = leetCode.countDifferentSubsequenceGCDs(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1819();
+    TestLeetCode1812();
     TestLeetCode1808();
     TestLeetCode1798();
     TestLeetCode1785();

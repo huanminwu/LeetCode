@@ -1184,8 +1184,42 @@ void TestLeetCode1773(void)
     Logger::WriteMessage("ruleKey = " + ruleKey + "; ruleValue = " + ruleValue + "; result = " + to_string(result));
 }
 
+void TestLeetCode1814(void)
+{
+    Logger::WriteMessage("Test Leet Code 1814");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 42, 11, 1, 97 };
+    int result = leetCode.countNicePairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 13,10,35,24,76 };
+    result = leetCode.countNicePairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1817(void)
+{
+    Logger::WriteMessage("Test Leet Code 1817");
+    LeetCodeHashtable leetCode;
+    vector<vector<int>> logs = { {0, 5},{1, 2},{0, 2},{0, 5},{1, 3} };
+    int k = 5;
+    vector<int> result = leetCode.findingUsersActiveMinutes(logs, k);
+    Logger::WriteMessage(logs);
+    Logger::WriteMessage(result);
+
+    logs = { {1,1},{2,2},{2,3} };
+    k = 4;
+    result = leetCode.findingUsersActiveMinutes(logs, k);
+    Logger::WriteMessage(logs);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1817();
+    TestLeetCode1814();
     TestLeetCode1773();
     TestLeetCode1733();
     TestLeetCode1755();

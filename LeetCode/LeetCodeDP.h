@@ -3700,7 +3700,7 @@ public:
     /// 1. 1 <= word1.length, word2.length <= 1000
     /// 2. word1 and word2 consist of lowercase English letters.
     /// </summary>
-    int numDifferentIntegers(string word);
+    int longestPalindrome(string word1, string word2);
 };
 
 

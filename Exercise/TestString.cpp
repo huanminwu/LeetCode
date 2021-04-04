@@ -4063,8 +4063,65 @@ void TestLeetCode1807(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode1813(void)
+{
+    Logger::WriteMessage("Test Leet Code 1813");
+    LeetCodeString leetCode;
+    string sentence1 = "My name is Haley";
+    string sentence2 = "My Haley";
+    bool result = leetCode.areSentencesSimilar(sentence1, sentence2);
+    Logger::WriteMessage("sentence1 = " + sentence1 + "; sentence2 = " + sentence2 + 
+        "; result = " + (string)(result ? "true" : "false"));
+
+    sentence1 = "of";
+    sentence2 = "My Haley";
+    result = leetCode.areSentencesSimilar(sentence1, sentence2);
+    Logger::WriteMessage("sentence1 = " + sentence1 + "; sentence2 = " + sentence2 +
+        "; result = " + (string)(result ? "true" : "false"));
+
+    sentence1 = "Eating right now";
+    sentence2 = "Eating";
+    result = leetCode.areSentencesSimilar(sentence1, sentence2);
+    Logger::WriteMessage("sentence1 = " + sentence1 + "; sentence2 = " + sentence2 +
+        "; result = " + (string)(result ? "true" : "false"));
+    
+    sentence1 = "Eating right now";
+    sentence2 = "Eating right";
+    result = leetCode.areSentencesSimilar(sentence1, sentence2);
+    Logger::WriteMessage("sentence1 = " + sentence1 + "; sentence2 = " + sentence2 +
+        "; result = " + (string)(result ? "true" : "false"));
+
+    sentence1 = "Luky";
+    sentence2 = "Lucccky";
+    result = leetCode.areSentencesSimilar(sentence1, sentence2);
+    Logger::WriteMessage("sentence1 = " + sentence1 + "; sentence2 = " + sentence2 +
+        "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1816(void)
+{
+    Logger::WriteMessage("Test Leet Code 1816");
+    LeetCodeString leetCode;
+    string s = "Hello how are you Contestant";
+    int k = 4;
+    string result = leetCode.truncateSentence(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
+
+    s = "What is the solution to this problem";
+    k = 4;
+    result = leetCode.truncateSentence(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
+
+    s = "chopper is not a tanuki";
+    k = 5;
+    result = leetCode.truncateSentence(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1816();
+    TestLeetCode1813();
     TestLeetCode1807();
     TestLeetCode1805();
     TestLeetCode1796();

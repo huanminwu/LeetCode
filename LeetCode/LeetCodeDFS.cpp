@@ -6341,6 +6341,188 @@ int LeetCodeDFS::maxScore(vector<int>& nums)
     return maxScore(nums, 0, cache);
 }
 
+/// <summary>
+/// Leet code 1766. Tree of Coprimes 
+/// </summary>
+void LeetCodeDFS::getCoprimes(vector<int>& nums, int node, unordered_map<int, unordered_set<int>>& tree, 
+        unordered_map<int, vector<int>>& primes, vector<int>& visited,
+        unordered_map<int, list<pair<int, int>>>& ancestors, vector<int> &result, int level)
+{
+    int my_level = -1;
+    for (auto &prime : primes[nums[node]])
+    {
+        auto &v = ancestors[prime];
+        if (!v.empty() && v.front().second > my_level)
+        {
+            result[node] = v.front().first;
+            my_level = v.front().second;
+        }
+    }
+    visited[node] = 1;
+    ancestors[nums[node]].push_front(make_pair(node, level));
+    for (int child : tree[node])
+    {
+        if (visited[child] == 1) continue;
+        getCoprimes(nums, child, tree, primes, visited, ancestors, result, level + 1);
+    }
+    ancestors[nums[node]].pop_front();
+}
+
+/// <summary>
+/// Leet code 1766. Tree of Coprimes 
+/// 
+/// Hard
+/// 
+/// There is a tree (i.e., a connected, undirected graph that has no 
+/// cycles) consisting of n nodes numbered from 0 to n - 1 and exactly 
+/// n - 1 edges. Each node has a value associated with it, and the root 
+/// of the tree is node 0.
+///
+/// To represent this tree, you are given an integer array nums and a 2D 
+/// array edges. Each nums[i] represents the ith node's value, and each 
+/// edges[j] = [uj, vj] represents an edge between nodes uj and vj in the 
+/// tree.
+///
+/// Two values x and y are coprime if gcd(x, y) == 1 where gcd(x, y) 
+/// is the greatest common divisor of x and y.
+///
+/// An ancestor of a node i is any other node on the shortest path from 
+/// node i to the root. A node is not considered an ancestor of itself.
+///
+/// Return an array ans of size n, where ans[i] is the closest ancestor 
+/// to node i such that nums[i] and nums[ans[i]] are coprime, or -1 if 
+/// there is no such ancestor.
+///
+/// Example 1:
+/// Input: nums = [2,3,3,2], edges = [[0,1],[1,2],[1,3]]
+/// Output: [-1,0,0,1]
+/// Explanation: In the above figure, each node's value is in parentheses.
+/// - Node 0 has no coprime ancestors.
+/// - Node 1 has only one ancestor, node 0. Their values are coprime 
+///   (gcd(2,3) == 1).
+/// - Node 2 has two ancestors, nodes 1 and 0. Node 1's value is not 
+///   coprime (gcd(3,3) == 3), but node 0's
+///   value is (gcd(2,3) == 1), so node 0 is the closest valid ancestor.
+/// - Node 3 has two ancestors, nodes 1 and 0. It is coprime with node 1 
+///  (gcd(3,2) == 1), so node 1 is its
+///  closest valid ancestor.
+///
+/// Example 2:
+/// Input: nums = [5,6,10,2,3,6,15], 
+/// edges = [[0,1],[0,2],[1,3],[1,4],[2,5],[2,6]]
+/// Output: [-1,0,-1,0,0,0,-1]
+///
+/// Constraints:
+/// 1. nums.length == n
+/// 2. 1 <= nums[i] <= 50
+/// 3. 1 <= n <= 10^5
+/// 4. edges.length == n - 1
+/// 5. edges[j].length == 2
+/// 6. 0 <= uj, vj < n
+/// 7. uj != vj
+/// </summary>
+vector<int> LeetCodeDFS::getCoprimes(vector<int>& nums, vector<vector<int>>& edges)
+{
+    unordered_map<int, unordered_set<int>> tree;
+    unordered_set<int> num_set(nums.begin(), nums.end());
+    unordered_map<int, vector<int>> primes;
+    LeetCodeMath lm;
+    for (int s1 : num_set)
+    {
+        for (int s2 : num_set)
+        {
+            if (lm.gcd(s1, s2) == 1) primes[s1].push_back(s2);
+        }
+    }
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        tree[edges[i][0]].insert(edges[i][1]);
+        tree[edges[i][1]].insert(edges[i][0]);
+    }
+    vector<int> visited(nums.size());
+    unordered_map<int, list<pair<int, int>>> ancestors;
+    vector<int> result(nums.size(), -1);
+    getCoprimes(nums, 0, tree, primes, visited, ancestors, result, 0);
+    return result;
+}
+
+/// <summary>
+/// Leet code 1815. Maximum Number of Groups Getting Fresh Donuts
+/// </summary>
+int LeetCodeDFS::maxHappyGroups(int batchSize, int left, vector<int>& groups, int visited, unordered_map<int, int>& cache)
+{
+    if (visited == (1 << groups.size()) - 1)
+    {
+        return 0;
+    }
+    if (cache.count(visited) > 0) return cache[visited];
+    int result = 0;
+    int mask = 0;
+    for (size_t i = 0; i < groups.size(); i++)
+    {
+        if (((1 << i) & visited) != 0) continue;
+        mask = mask | (1 << (groups[i] % batchSize));
+    }
+    if ((mask & (1 << left)) != 0) mask = 1 << left;
+    for (size_t i = 0; i < groups.size(); i++)
+    {
+        if (((1 << i) & visited) != 0) continue;
+        if ((mask & (1 << (groups[i] % batchSize))) == 0) continue;
+        mask ^= (1 << (groups[i] % batchSize));
+        visited |= 1 << i;
+        result = max(result, maxHappyGroups(batchSize, (left + batchSize - groups[i] % batchSize) % batchSize,
+            groups, visited, cache));
+        visited ^= 1 << i;
+    }
+    if (left == 0) result++;
+    cache[visited] = result;
+    return result;
+}
+
+
+/// <summary>
+/// Leet code 1815. Maximum Number of Groups Getting Fresh Donuts
+/// 
+/// Hard
+/// 
+/// There is a donuts shop that bakes donuts in batches of batchSize. 
+/// They have a rule where they must serve all of the donuts of a batch 
+/// before serving any donuts of the next batch. You are given an integer 
+/// batchSize and an integer array groups, where groups[i] denotes that 
+/// there is a group of groups[i] customers that will visit the shop. 
+/// Each customer will get exactly one donut.
+///
+/// When a group visits the shop, all customers of the group must be 
+/// served before serving any of the following groups. A group will be 
+/// happy if they all get fresh donuts. That is, the first customer of 
+/// the group does not receive a donut that was left over from the 
+/// previous group.
+///
+/// You can freely rearrange the ordering of the groups. Return the 
+/// maximum possible number of happy groups after rearranging the groups.
+///
+/// Example 1:
+/// Input: batchSize = 3, groups = [1,2,3,4,5,6] 
+/// Output: 4
+/// Explanation: You can arrange the groups as [6,2,4,5,1,3]. Then 
+/// the 1st, 2nd, 4th, and 6th groups will be happy.
+///
+/// Example 2:
+/// Input: batchSize = 4, groups = [1,3,2,5,2,2,1,6]
+/// Output: 4
+///
+/// Constraints:
+/// 1. 1 <= batchSize <= 9
+/// 2. 1 <= groups.length <= 30
+/// 3. 1 <= groups[i] <= 10^9
+/// </summary>
+int LeetCodeDFS::maxHappyGroups(int batchSize, vector<int>& groups)
+{
+    int visited = 0;
+    unordered_map<int, int> cache;
+    return maxHappyGroups(batchSize, 0, groups, visited, cache);
+}
+
 #pragma endregion
 
 

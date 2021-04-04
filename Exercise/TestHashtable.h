@@ -30,5 +30,7 @@ void TestLeetCode1748(void);
 void TestLeetCode1755(void);
 void TestLeetCode1733(void);
 void TestLeetCode1773(void);
+void TestLeetCode1814(void);
+void TestLeetCode1817(void);
 void TestLeetCodeHashtable(void);
 #endif  // TestHashtable_H

@@ -5473,8 +5473,35 @@ void TestLeetCode1806(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1818(void)
+{
+    Logger::WriteMessage("Test Leet Code 1818");
+    LeetCodeArray leetCode;
+    vector<int> nums1 = { 1, 7, 5 };
+    vector<int> nums2 = { 2, 3, 5 };
+    int result = leetCode.minAbsoluteSumDiff(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 2,4,6,8,10 };
+    nums2 = { 2,4,6,8,10 };
+    result = leetCode.minAbsoluteSumDiff(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,10,4,4,2,7 };
+    nums2 = { 9,3,5,1,7,4 };
+    result = leetCode.minAbsoluteSumDiff(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1818();
     TestLeetCode1806();
     TestLeetCode1800();
     TestLeetCode1793();
