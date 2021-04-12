@@ -3663,8 +3663,47 @@ void TestLeetCode1797(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1825(void)
+{
+    Logger::WriteMessage("Test Leet Code 1825");
+    MKAverage* mkAverage = nullptr;
+    vector<string> commands =
+    {
+        "MKAverage", "addElement", "addElement", "calculateMKAverage", "addElement", "calculateMKAverage", 
+        "addElement", "addElement", "addElement", "calculateMKAverage"
+    };
+    vector<vector<int>> parameters =
+    {
+        { 5, 1 }, {3}, {1}, {}, {3}, {}, {5}, {5}, {10}, {}
+    };
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "MKAverage")
+        {
+            mkAverage = new MKAverage(parameters[i][0], parameters[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "addElement")
+        {
+            mkAverage->addElement(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "calculateMKAverage")
+        {
+            int ret = mkAverage->calculateMKAverage();
+            result.push_back(to_string(ret));
+        }
+    }
+    delete mkAverage;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1825();
     TestLeetCode1797();
     TestLeetCode1724();
     TestLeetCode1756();

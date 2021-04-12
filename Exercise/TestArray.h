@@ -154,5 +154,6 @@ void TestLeetCode1793(void);
 void TestLeetCode1800(void);
 void TestLeetCode1806(void);
 void TestLeetCode1818(void);
+void TestLeetCode1822(void);
 void TestLeetCodeArray(void);
 #endif  // TestArray

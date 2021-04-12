@@ -9550,4 +9550,154 @@ public:
     }
 };
 
+/// <summary>
+/// Leet code 1825. Finding MK Average
+/// 
+/// Hard
+/// 
+/// You are given two integers, m and k, and a stream of integers. You are 
+/// tasked to implement a data structure that calculates the MKAverage for 
+/// the stream.
+///
+/// The MKAverage can be calculated using these steps:
+/// If the number of the elements in the stream is less than m you should 
+/// consider the MKAverage to be -1. Otherwise, copy the last m elements 
+/// of the stream to a separate container.
+/// Remove the smallest k elements and the largest k elements from the 
+/// container.
+/// Calculate the average value for the rest of the elements rounded down 
+/// to the nearest integer.
+/// Implement the MKAverage class:
+///
+/// MKAverage(int m, int k) Initializes the MKAverage object with an empty 
+/// stream and the two integers m and k.
+/// void addElement(int num) Inserts a new element num into the stream.
+/// int calculateMKAverage() Calculates and returns the MKAverage for the 
+/// current stream rounded down to the nearest integer.
+/// 
+/// Example 1:
+/// Input
+/// ["MKAverage", "addElement", "addElement", "calculateMKAverage", 
+/// "addElement", "calculateMKAverage", "addElement", "addElement", 
+/// "addElement", "calculateMKAverage"]
+/// [[3, 1], [3], [1], [], [10], [], [5], [5], [5], []]
+/// Output
+/// [null, null, null, -1, null, 3, null, null, null, 5]
+///
+/// Explanation
+/// MKAverage obj = new MKAverage(3, 1); 
+/// obj.addElement(3);        // current elements are [3]
+/// obj.addElement(1);        // current elements are [3,1]
+/// obj.calculateMKAverage(); 
+/// // return -1, because m = 3 and only 2 elements exist.
+/// obj.addElement(10);       // current elements are [3,1,10]
+/// obj.calculateMKAverage(); // The last 3 elements are [3,1,10].
+/// // After removing smallest and largest 1 element the 
+/// // container will be [3].
+/// // The average of [3] equals 3/1 = 3, return 3
+/// obj.addElement(5);        // current elements are [3,1,10,5]
+/// obj.addElement(5);        // current elements are [3,1,10,5,5]
+/// obj.addElement(5);        // current elements are [3,1,10,5,5,5]
+/// obj.calculateMKAverage(); // The last 3 elements are [5,5,5].
+/// // After removing smallest and largest 1 element the 
+/// // container will be [5].
+/// // The average of [5] equals 5/1 = 5, return 5
+///
+/// Constraints:
+/// 1. 3 <= m <= 10^5
+/// 2. 1 <= k*2 < m
+/// 3. 1 <= num <= 10^5
+/// 4. At most 10^5 calls will be made to addElement and 
+///    calculateMKAverage.
+/// </summary>
+class MKAverage 
+{
+private:
+    size_t _m;
+    size_t _k;
+    list<pair<int, int>> m_stream;
+    int _i;
+    long long m_sum;
+    set<pair<int, int>> m_prefix;
+    set<pair<int, int>> m_body;
+    set<pair<int, int>> m_postfix;
+public:
+    MKAverage(int m, int k) 
+    {
+        _m = m;
+        _k = k;
+        _i = 0;
+        m_sum = 0;
+    }
+
+    void addElement(int num) 
+    {
+        pair<int, int> data = make_pair(num, _i);
+        _i++;
+        m_stream.push_back(data);
+        if (m_stream.size() > _m)
+        {
+            pair<int, int> prev = *m_stream.begin();
+            m_stream.pop_front();
+            if (m_body.count(prev) > 0)
+            {
+                m_sum -= prev.first;
+                m_body.erase(prev);
+            }
+            else if (m_prefix.count(prev) > 0)
+            {
+                m_prefix.erase(prev);
+            }
+            else
+            {
+                m_postfix.erase(prev);
+            }
+        }     
+        m_body.insert(data);
+        m_sum += data.first;
+        if (!m_body.empty() && m_prefix.size() < (size_t)_k)
+        {
+            m_sum -= m_body.begin()->first;
+            m_prefix.insert(*m_body.begin());
+            m_body.erase(m_body.begin());
+        }
+        else if (!m_body.empty() && !m_prefix.empty() && m_body.begin()->first < m_prefix.rbegin()->first)
+        {
+            auto left = *m_body.begin();
+            auto right = *m_prefix.rbegin();
+            m_sum -= left.first;
+            m_sum += right.first;
+            m_body.erase(left);
+            m_body.insert(right);
+            m_prefix.erase(right);
+            m_prefix.insert(left);
+        }
+        
+        if (!m_body.empty() && m_postfix.size() < (size_t)_k)
+        {
+            m_sum -= m_body.rbegin()->first;
+            m_postfix.insert(*m_body.rbegin());
+            m_body.erase(*m_body.rbegin());
+        }
+        else if (!m_body.empty() && !m_postfix.empty() && m_body.rbegin()->first > m_postfix.begin()->first)
+        {
+            auto left = *m_body.rbegin();
+            auto right = *m_postfix.begin();
+            m_sum -= left.first;
+            m_sum += right.first;
+            m_body.erase(left);
+            m_body.insert(right);
+            m_postfix.erase(right);
+            m_postfix.insert(left);
+        }
+    }
+
+    int calculateMKAverage() 
+    {
+        if (m_stream.size() < (size_t)_m) return -1;
+        else return (int)(m_sum / (_m - 2 * _k));  
+    }
+};
+
+
 #endif // LeetcodeDesign_H

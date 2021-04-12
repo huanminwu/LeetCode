@@ -2369,10 +2369,53 @@ void TestLeetCode1771(void)
     Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 + "; result = " + to_string(result));
 }
 
+void TestLeetCode1824(void)
+{
+    Logger::WriteMessage("Test Leet Code 1824");
+    LeetCodeDP leetCode;
+    vector<int> obstacles = { 0, 1, 2, 3, 0 };
+    int result = leetCode.minSideJumps(obstacles);
+    Logger::WriteMessage(obstacles);
+    Logger::WriteMessage("result = " + to_string(result));
 
+    obstacles = { 0,1,1,3,3,0 };
+    result = leetCode.minSideJumps(obstacles);
+    Logger::WriteMessage(obstacles);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    obstacles = { 0,2,1,0,3,0 };
+    result = leetCode.minSideJumps(obstacles);
+    Logger::WriteMessage(obstacles);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1751(void)
+{
+    Logger::WriteMessage("Test Leet Code 1751");
+    LeetCodeDP leetCode;
+    vector<vector<int>> events = { {1, 2, 4},{3, 4, 3},{2, 3, 1} };
+    int k = 2;
+    int result = leetCode.maxValue(events, k);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    events = { {1, 2, 4},{3, 4, 3},{2, 3, 10} };
+    k = 2;
+    result = leetCode.maxValue(events, k);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    events = { {1, 1, 1},{2, 2, 2},{3, 3, 3},{4, 4, 4} };
+    k = 3;
+    result = leetCode.maxValue(events, k);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1751();
+    TestLeetCode1824();
     TestLeetCode1771();
     TestLeetCode1745();
     TestLeetCode1787();

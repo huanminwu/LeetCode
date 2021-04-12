@@ -11525,6 +11525,189 @@ int LeetCodeDP::longestPalindrome(string word1, string word2)
 }
 
 
+/// <summary>
+/// Leet code 1824. Minimum Sideway Jumps
+/// 
+/// Medium
+/// 
+/// There is a 3 lane road of length n that consists of n + 1 points 
+/// labeled from 0 to n. A frog starts at point 0 in the second lane 
+/// and wants to jump to point n. However, there could be obstacles along 
+/// the way.
+///
+/// You are given an array obstacles of length n + 1 where each 
+/// obstacles[i] (ranging from 0 to 3) describes an obstacle on the lane 
+/// obstacles[i] at point i. If obstacles[i] == 0, there are no obstacles 
+/// at point i. There will be at most one obstacle in the 3 lanes at each 
+/// point.
+///
+/// For example, if obstacles[2] == 1, then there is an obstacle on 
+/// lane 1 at point 2.
+/// The frog can only travel from point i to point i + 1 on the same lane 
+/// if there is not an obstacle on the lane at point i + 1. To avoid 
+/// obstacles, the frog can also perform a side jump to jump to another 
+/// lane (even if they are not adjacent) at the same point if there is no 
+/// obstacle on the new lane.
+///
+/// For example, the frog can jump from lane 3 at point 3 to lane 1 at 
+/// point 3.
+/// Return the minimum number of side jumps the frog needs to reach any 
+/// lane at point n starting from lane 2 at point 0.
+///
+/// Note: There will be no obstacles on points 0 and n.
+/// 
+/// Example 1:
+/// Input: obstacles = [0,1,2,3,0]
+/// Output: 2 
+/// Explanation: The optimal solution is shown by the arrows above. 
+/// There are 2 side jumps (red arrows).
+/// Note that the frog can jump over obstacles only when making side 
+/// jumps (as shown at point 2).
+///
+/// Example 2:
+/// Input: obstacles = [0,1,1,3,3,0]
+/// Output: 0
+/// Explanation: There are no obstacles on lane 2. No side jumps 
+/// are required.
+///
+/// Example 3:
+/// Input: obstacles = [0,2,1,0,3,0]
+/// Output: 2
+/// Explanation: The optimal solution is shown by the arrows above. There 
+/// are 2 side jumps.
+///
+/// Constraints:
+/// 1. obstacles.length == n + 1
+/// 2. 1 <= n <= 5 * 10^5
+/// 3. 0 <= obstacles[i] <= 3
+/// 4. obstacles[0] == obstacles[n] == 0
+/// </summary>
+int LeetCodeDP::minSideJumps(vector<int>& obstacles)
+{
+    vector<vector<int>> dp(obstacles.size(), vector<int>(3));
+    for (size_t i = 0; i < obstacles.size(); i++)
+    {
+        if (i == 0)
+        {
+            dp[i][1] = 0;
+            dp[i][0] = 1;
+            dp[i][2] = 1;
+        }
+        else
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                dp[i][j] = INT_MAX;
+                if (obstacles[i] == j + 1) continue;
+                if (dp[i - 1][j] != INT_MAX) dp[i][j] = min(dp[i][j], dp[i - 1][j]);
+            }
+            for (int j = 0; j < 3; j++)
+            {
+                if (obstacles[i] == j + 1) continue;
+                for (int k = 0; k < 3; k++)
+                {
+                    if (j != k)
+                    {
+                        if (dp[i][k] != INT_MAX) dp[i][j] = min(dp[i][j], dp[i][k] + 1);
+                    }
+                 }
+            }
+        }
+    }
+    int result = dp[obstacles.size() - 1][0];
+    result = min(result, dp[obstacles.size() - 1][1]);
+    result = min(result, dp[obstacles.size() - 1][2]);
+    return result;
+}
+
+
+/// <summary>
+/// Leet code 1751. Maximum Number of Events That Can Be Attended II
+/// 
+/// Hard
+/// 
+/// You are given an array of events where events[i] = [startDayi, 
+/// endDayi, valuei]. The ith event starts at startDayi and ends at 
+/// endDayi, and if you attend this event, you will receive a value of 
+/// valuei. You are also given an integer k which represents the 
+/// maximum number of events you can attend.
+///
+/// You can only attend one event at a time. If you choose to attend 
+/// an event, you must attend the entire event. Note that the end day 
+/// is inclusive: that is, you cannot attend two events where one of 
+/// them starts and the other ends on the same day.
+///
+/// Return the maximum sum of values that you can receive by attending 
+/// events.
+///
+/// Example 1:
+/// Input: events = [[1,2,4],[3,4,3],[2,3,1]], k = 2
+/// Output: 7
+/// Explanation: Choose the green events, 0 and 1 (0-indexed) for a total 
+/// value of 4 + 3 = 7.
+///
+/// Example 2:
+/// 
+/// Input: events = [[1,2,4],[3,4,3],[2,3,10]], k = 2
+/// Output: 10
+/// Explanation: Choose event 2 for a total value of 10.
+/// Notice that you cannot attend any other event as they overlap, and 
+/// that you do not have to attend k events.
+///
+/// Example 3:
+/// Input: events = [[1,1,1],[2,2,2],[3,3,3],[4,4,4]], k = 3
+/// Output: 9
+/// Explanation: Although the events do not overlap, you can only attend 
+/// 3 events. Pick the highest valued three.
+///
+/// Constraints:
+/// 1. 1 <= k <= events.length
+/// 2. 1 <= k * events.length <= 10^6
+/// 3. 1 <= startDayi <= endDayi <= 10^9
+/// 4. 1 <= valuei <= 10^6
+/// </summary>
+int LeetCodeDP::maxValue(vector<vector<int>>& events, int k)
+{
+    sort
+    (
+        events.begin(), events.end(),
+        [](vector<int>& a, vector<int>& b) -> bool
+        {
+            return a[1] < b[1];
+        }
+    );
+    map<int, vector<int>> history_events;
+    history_events[0] = { 0 };
+    for (size_t i = 0; i < events.size(); i++)
+    {
+        int start = 0 - events[i][0];
+        int end = 0 - events[i][1];
+        auto prev = history_events.upper_bound(start);
+        auto curr = history_events[end];
+        for (size_t j = 0; j < prev->second.size() + 1; j++)
+        {
+            if (j > (size_t)k) break;
+            if (j >= curr.size()) curr.push_back(0);
+            if (j == 0) curr[j] = 0;
+            else curr[j] = max(curr[j], prev->second[j - 1] + events[i][2]);
+        }
+        prev = history_events.upper_bound(end);
+        for (size_t j = 0; j < prev->second.size(); j++)
+        {
+            if (j > (size_t)k) break;
+            if (j >= curr.size()) curr.push_back(0);
+            curr[j] = max(curr[j], prev->second[j]);
+        }
+        history_events[end] = curr;
+    }
+    int result = 0;
+    auto itr = history_events.begin();
+    for (size_t i = 0; i < itr->second.size(); i++)
+    {
+        result = max(result, itr->second[i]);
+    }
+    return result;
+}
 
 #pragma endregion
 

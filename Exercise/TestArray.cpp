@@ -5499,8 +5499,46 @@ void TestLeetCode1818(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1822(void)
+{
+    Logger::WriteMessage("Test Leet Code 1822");
+    LeetCodeArray leetCode;    
+    vector<int> nums = { -1, -2, -3, -4, 3, 2, 1 };
+    int result = leetCode.arraySign(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,5,0,2,-3 };
+    result = leetCode.arraySign(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -1,1,-1,1,-1 };
+    result = leetCode.arraySign(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1823(void)
+{
+    Logger::WriteMessage("Test Leet Code 1823");
+    LeetCodeArray leetCode;
+    int n = 5;
+    int k = 2;
+    int result = leetCode.findTheWinner(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 6;
+    k = 5;
+    result = leetCode.findTheWinner(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1823();
+    TestLeetCode1822();
     TestLeetCode1818();
     TestLeetCode1806();
     TestLeetCode1800();
