@@ -2134,6 +2134,118 @@ public:
     /// </summary>
     int getNumberOfBacklogOrders(vector<vector<int>>& orders);
 
+    /// <summary>
+    /// Leet code 1833. Maximum Ice Cream Bars
+    /// 
+    /// Medium
+    /// 
+    /// It is a sweltering summer day, and a boy wants to buy some ice cream 
+    /// bars.
+    ///
+    /// At the store, there are n ice cream bars. You are given an array costs 
+    /// of length n, where costs[i] is the price of the ith ice cream bar in 
+    /// coins. The boy initially has coins coins to spend, and he wants to buy 
+    /// as many ice cream bars as possible. 
+    ///
+    /// Return the maximum number of ice cream bars the boy can buy with coins. 
+    /// 
+    /// Note: The boy can buy the ice cream bars in any order.
+    /// 
+    /// Example 1:
+    /// Input: costs = [1,3,2,4,1], coins = 7
+    /// Output: 4
+    /// Explanation: The boy can buy ice cream bars at indices 0,1,2,4 for a 
+    /// total price of 1 + 3 + 2 + 1 = 7.
+    ///
+    /// Example 2:
+    /// Input: costs = [10,6,8,7,7,8], coins = 5
+    /// Output: 0
+    /// Explanation: The boy cannot afford any of the ice cream bars.
+    ///
+    /// Example 3:
+    /// Input: costs = [1,6,3,1,2,5], coins = 20
+    /// Output: 6
+    /// Explanation: The boy can buy all the ice cream bars for a total price 
+    /// of 1 + 6 + 3 + 1 + 2 + 5 = 18.
+    /// 
+    /// Constraints:
+    /// 1. costs.length == n
+    /// 2. 1 <= n <= 10^5
+    /// 3. 1 <= costs[i] <= 10^5
+    /// 4. 1 <= coins <= 10^8
+    /// </summary>
+    int maxIceCream(vector<int>& costs, int coins);
+
+    /// <summary>
+    /// Leet code 1834. Single-Threaded CPU
+    /// 
+    /// Medium
+    /// 
+    /// You are given n tasks labeled from 0 to n - 1 represented by a 2D 
+    /// integer array tasks, where tasks[i] = [enqueueTimei, processingTimei] 
+    /// means that the ith task will be available to process at enqueueTimei 
+    /// and will take processingTimei to finish processing.
+    ///
+    /// You have a single-threaded CPU that can process at most one task at 
+    /// a time and will act in the following way:
+    ///
+    /// If the CPU is idle and there are no available tasks to process, the 
+    /// CPU remains idle.
+    /// If the CPU is idle and there are available tasks, the CPU will choose 
+    /// the one with the shortest processing time. If multiple tasks have the 
+    /// same shortest processing time, it will choose the task with the 
+    /// smallest index.
+    /// Once a task is started, the CPU will process the entire task without 
+    /// stopping.
+    /// The CPU can finish a task then start a new one instantly.
+    /// Return the order in which the CPU will process the tasks.
+    /// 
+    /// Example 1:
+    /// Input: tasks = [[1,2],[2,4],[3,2],[4,1]]
+    /// Output: [0,2,3,1]
+    /// Explanation: The events go as follows: 
+    /// - At time = 1, task 0 is available to process. Available tasks = {0}.
+    /// - Also at time = 1, the idle CPU starts processing task 0. 
+    ///   Available tasks = {}.
+    /// - At time = 2, task 1 is available to process. Available tasks = {1}.
+    /// - At time = 3, task 2 is available to process. Available 
+    ///   tasks = {1, 2}.
+    /// - Also at time = 3, the CPU finishes task 0 and starts processing 
+    ///   task 2 as it is the shortest. Available tasks = {1}.
+    /// - At time = 4, task 3 is available to process. Available 
+    ///   tasks = {1, 3}.
+    /// - At time = 5, the CPU finishes task 2 and starts processing task 3 
+    ///   as it is the shortest. Available tasks = {1}.
+    /// - At time = 6, the CPU finishes task 3 and starts processing task 1. 
+    ///   Available tasks = {}.
+    /// - At time = 10, the CPU finishes task 1 and becomes idle.
+    ///  
+    /// Example 2:
+    /// 
+    /// Input: tasks = [[7,10],[7,12],[7,5],[7,4],[7,2]]
+    /// Output: [4,3,2,0,1]
+    /// Explanation: The events go as follows:
+    /// - At time = 7, all the tasks become available. Available 
+    ///   tasks = {0,1,2,3,4}.
+    /// - Also at time = 7, the idle CPU starts processing task 4. 
+    ///   Available tasks = {0,1,2,3}.
+    /// - At time = 9, the CPU finishes task 4 and starts processing task 3. 
+    ///   Available tasks = {0,1,2}.
+    /// - At time = 13, the CPU finishes task 3 and starts processing task 2. 
+    ///   Available tasks = {0,1}.
+    /// - At time = 18, the CPU finishes task 2 and starts processing task 0. 
+    ///   Available tasks = {1}.
+    /// - At time = 28, the CPU finishes task 0 and starts processing task 1. 
+    ///   Available tasks = {}.
+    /// - At time = 40, the CPU finishes task 1 and becomes idle.
+    /// 
+    /// Constraints:
+    /// 1. tasks.length == n
+    /// 2. 1 <= n <= 10^5
+    /// 3. 1 <= enqueueTimei, processingTimei <= 10^9
+    /// </summary>
+    vector<int> getOrder(vector<vector<int>>& tasks);
+
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

@@ -5534,9 +5534,29 @@ void TestLeetCode1823(void)
     Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1827(void)
+{
+    Logger::WriteMessage("Test Leet Code 1827");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 1, 1 };
+    int result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,5,2,4,1 };
+    result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 8 };
+    result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1827();
     TestLeetCode1823();
     TestLeetCode1822();
     TestLeetCode1818();

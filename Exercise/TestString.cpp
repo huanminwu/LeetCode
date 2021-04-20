@@ -4118,8 +4118,22 @@ void TestLeetCode1816(void)
     Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
 }
 
+void TestLeetCode1832(void)
+{
+    Logger::WriteMessage("Test Leet Code 1832");
+    LeetCodeString leetCode;
+    string sentence = "thequickbrownfoxjumpsoverthelazydog";
+    bool result = leetCode.checkIfPangram(sentence);
+    Logger::WriteMessage("sentence = " + sentence + "; result = " + (string)(result ? "true" : "false"));
+
+    sentence = "leetcode";
+    result = leetCode.checkIfPangram(sentence);
+    Logger::WriteMessage("sentence = " + sentence + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1832();
     TestLeetCode1816();
     TestLeetCode1813();
     TestLeetCode1807();

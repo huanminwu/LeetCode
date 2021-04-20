@@ -9528,6 +9528,90 @@ public:
     /// </summary>
     int findTheWinner(int n, int k);
 
+    /// <summary>
+    /// Leet code 1762. Buildings With an Ocean View
+    /// 
+    /// Medium
+    /// 
+    /// There are n buildings in a line. You are given an integer array 
+    /// heights of size n that represents the heights of the buildings in the 
+    /// line.
+    ///
+    /// The ocean is to the right of the buildings. A building has an ocean 
+    /// view if the building can see the ocean without obstructions. Formally, 
+    /// a building has an ocean view if all the buildings to its right have a 
+    /// smaller height.
+    ///
+    /// Return a list of indices (0-indexed) of buildings that have an ocean 
+    /// view, sorted in increasing order.
+    /// 
+    /// Example 1:
+    /// Input: heights = [4,2,3,1]
+    /// Output: [0,2,3]
+    /// Explanation: Building 1 (0-indexed) does not have an ocean view 
+    /// because building 2 is taller.
+    ///
+    /// Example 2:
+    /// Input: heights = [4,3,2,1]
+    /// Output: [0,1,2,3]
+    /// Explanation: All the buildings have an ocean view.
+    ///
+    /// Example 3:
+    /// Input: heights = [1,3,2,4]
+    /// Output: [3]
+    /// Explanation: Only building 3 has an ocean view.
+    ///
+    /// Example 4:
+    /// Input: heights = [2,2,2,2]
+    /// Output: [3]
+    /// Explanation: Buildings cannot see the ocean if there are 
+    /// buildings of the same height to its right.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= heights.length <= 10^5
+    /// 2. 1 <= heights[i] <= 10^9
+    /// </summary>
+    vector<int> findBuildings(vector<int>& heights);
+
+    /// <summary>
+    /// Leet code 1827. Minimum Operations to Make the Array Increasing
+    /// 
+    /// Easy
+    /// 
+    /// You are given an integer array nums (0-indexed). In one operation, 
+    /// you can choose an element of the array and increment it by 1.
+    ///
+    /// For example, if nums = [1,2,3], you can choose to increment nums[1] 
+    /// to make nums = [1,3,3].
+    /// Return the minimum number of operations needed to make nums 
+    /// strictly increasing.
+    ///
+    /// An array nums is strictly increasing if nums[i] < nums[i+1] for 
+    /// all 0 <= i < nums.length - 1. An array of length 1 is trivially 
+    /// strictly increasing.
+    /// Example 1:
+    ///
+    /// Input: nums = [1,1,1]
+    /// Output: 3
+    /// Explanation: You can do the following operations:
+    /// 1) Increment nums[2], so nums becomes [1,1,2].
+    /// 2) Increment nums[1], so nums becomes [1,2,2].
+    /// 3) Increment nums[2], so nums becomes [1,2,3].
+    ///
+    /// Example 2:
+    /// Input: nums = [1,5,2,4,1]
+    /// Output: 14
+    ///
+    /// Example 3:
+    /// Input: nums = [8]
+    /// Output: 0
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 5000
+    /// 2. 1 <= nums[i] <= 10^4
+    /// </summary>
+    int minOperations(vector<int>& nums);
+
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

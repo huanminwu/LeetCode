@@ -3691,8 +3691,50 @@ void TestLeetCode1819(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1828(void)
+{
+    Logger::WriteMessage("Test Leet Code 1828");
+    LeetCodeMath leetCode;
+    vector<vector<int>> points = { {1, 3},{3, 3},{5, 3},{2, 2} };
+    vector<vector<int>> queries = { {2, 3, 1},{4, 3, 1},{1, 1, 2} };
+    vector<int> result = leetCode.countPoints(points, queries);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    points = { {1, 1}, { 2, 2 }, { 3, 3 }, { 4, 4 }, { 5, 5 } };
+    queries = { {1, 2, 2}, { 2, 2, 2 }, { 4, 3, 2 }, { 4, 3, 3 } };
+    result = leetCode.countPoints(points, queries);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1830(void)
+{
+    Logger::WriteMessage("Test Leet Code 1830");
+    LeetCodeMath leetCode;
+    string s = "cba";
+    int result = leetCode.makeStringSorted(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aabaa";
+    result = leetCode.makeStringSorted(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "cdbea";
+    result = leetCode.makeStringSorted(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "leetcodeleetcodeleetcode";
+    result = leetCode.makeStringSorted(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1830();
+    TestLeetCode1828();
     TestLeetCode1819();
     TestLeetCode1812();
     TestLeetCode1808();

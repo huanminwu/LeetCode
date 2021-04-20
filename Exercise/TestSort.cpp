@@ -1215,10 +1215,57 @@ void TestLeetCode1801(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1833(void)
+{
+    Logger::WriteMessage("Test Leet Code 1833");
+    LeetCodeSort leetCode;
+    vector<int> costs = { 1, 3, 2, 4, 1 };
+    int coins = 7;
+    int result = leetCode.maxIceCream(costs, coins);
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage("coins = " + to_string(coins) + "; result = " + to_string(result));
 
+    costs = { 10,6,8,7,7,8 };
+    coins = 5;
+    result = leetCode.maxIceCream(costs, coins);
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage("coins = " + to_string(coins) + "; result = " + to_string(result));
+
+    costs = { 1,6,3,1,2,5 };
+    coins = 20;
+    result = leetCode.maxIceCream(costs, coins);
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage("coins = " + to_string(coins) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1834(void)
+{
+    Logger::WriteMessage("Test Leet Code 1834");
+    LeetCodeSort leetCode;
+    vector<vector<int>> tasks = { {1, 2},{2, 4},{3, 2},{4, 1} };
+    vector<int> result = leetCode.getOrder(tasks);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage(result);
+
+    tasks = { {7, 10},{7, 12},{7, 5},{7, 4},{7, 2} };
+    result = leetCode.getOrder(tasks);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage(result);
+
+    tasks = 
+    { 
+       {19, 13}, {16, 9}, {21, 10}, {32, 25}, {37, 4}, {49, 24}, {2, 15}, 
+        {38, 41}, {37, 34}, {33, 6}, {45, 4}, {18, 18}, {46, 39}, {12, 24}
+    };
+    result = leetCode.getOrder(tasks);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage(result);
+}
 
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1834();
+    TestLeetCode1833();
     TestLeetCode1801();
     TestLeetCode1775();
     TestLeetCode1752();

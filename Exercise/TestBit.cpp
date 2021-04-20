@@ -666,8 +666,48 @@ void TestLeetCode1803(void)
     Logger::WriteMessage("low = " + to_string(low) + "; high = " + to_string(high) + "; result = " + to_string(result));        
 }
 
+void TestLeetCode1829(void)
+{
+    Logger::WriteMessage("Test Leet Code 1829");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 0,1,1,3 };
+    int maximumBit = 2;
+    vector<int> result = leetCode.getMaximumXor(nums, maximumBit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maximumBit = " + to_string(maximumBit));
+    Logger::WriteMessage(result);
+
+    nums = { 2,3,4,7 };
+    maximumBit = 3;
+    result = leetCode.getMaximumXor(nums, maximumBit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maximumBit = " + to_string(maximumBit));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1835(void)
+{
+    Logger::WriteMessage("Test Leet Code 1835");
+    LeetCodeBit leetCode;
+    vector<int> arr1 = { 1, 2, 3 };
+    vector<int> arr2 = { 6, 5 };
+    int result = leetCode.getXORSum(arr1, arr2);
+    Logger::WriteMessage(arr1);
+    Logger::WriteMessage(arr2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr1 = { 12 };
+    arr2 = { 4 };
+    result = leetCode.getXORSum(arr1, arr2);
+    Logger::WriteMessage(arr1);
+    Logger::WriteMessage(arr2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode1835();
+    TestLeetCode1829();
     TestLeetCode1803();
     TestLeetCode1734();
     TestLeetCode1707();

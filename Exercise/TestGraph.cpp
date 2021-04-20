@@ -3410,8 +3410,35 @@ void TestLeetCode1791(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1820(void)
+{
+    Logger::WriteMessage("Test Leet Code 1820");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid = 
+    {
+        {1, 1, 1},
+        {1, 0, 1},
+        {0, 0, 1}
+    };
+    int result = leetCode.maximumInvitations(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {1, 0, 1, 0},
+        {1, 0, 0, 0},
+        {0, 0, 1, 0},
+        {1, 1, 1, 0}
+    };
+    result = leetCode.maximumInvitations(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1820();
     TestLeetCode1791();
     TestLeetCode1761();
     TestLeetCode1782();
