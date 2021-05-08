@@ -3701,8 +3701,47 @@ void TestLeetCode1825(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1845(void)
+{
+    Logger::WriteMessage("Test Leet Code 1845");
+    SeatManager* seatManager = nullptr;
+    vector<string> commands =
+    {
+        "SeatManager", "reserve", "reserve", "unreserve", "reserve", "reserve", 
+        "reserve", "reserve", "unreserve", "reserve"
+    };
+    vector<vector<int>> parameters =
+    {
+        { 5}, {}, {}, {2}, {}, {}, {}, {}, {5}, {}
+    };
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "SeatManager")
+        {
+            seatManager = new SeatManager(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "reserve")
+        {
+            int ret = seatManager->reserve();
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "unreserve")
+        {
+            seatManager->unreserve(parameters[i][0]);
+            result.push_back("null");
+        }
+    }
+    delete seatManager;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1845();
     TestLeetCode1825();
     TestLeetCode1797();
     TestLeetCode1724();

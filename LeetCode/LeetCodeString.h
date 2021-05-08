@@ -7526,6 +7526,127 @@ public:
     /// 2. sentence consists of lowercase English letters.
     /// </summary>
     bool checkIfPangram(string sentence);
+
+    /// <summary>
+    /// Leet code 1794. Count Pairs of Equal Substrings With Minimum Difference
+    /// 
+    /// Medium
+    /// 
+    /// You are given two strings firstString and secondString that are 
+    /// 0-indexed and consist only of lowercase English letters. Count the 
+    /// number of index quadruples (i,j,a,b) that satisfy the following 
+    /// conditions:
+    ///
+    /// 0 <= i <= j < firstString.length
+    /// 0 <= a <= b < secondString.length
+    /// The substring of firstString that starts at the ith character and ends 
+    /// at the jth character (inclusive) is equal to the substring of 
+    /// secondString that starts at the ath character and ends at the bth 
+    /// character (inclusive).
+    /// j - a is the minimum possible value among all quadruples that satisfy 
+    /// the previous conditions.
+    /// Return the number of such quadruples.
+    ///
+    /// Example 1:
+    /// Input: firstString = "abcd", secondString = "bccda"
+    /// Output: 1
+    /// Explanation: The quadruple (0,0,4,4) is the only one that satisfies 
+    /// all the conditions and minimizes j - a.
+    ///
+    /// Example 2:
+    /// Input: firstString = "ab", secondString = "cd"
+    /// Output: 0
+    /// Explanation: There are no quadruples satisfying all the conditions.
+    ///
+    /// Constraints:
+    /// 1. 1 <= firstString.length, secondString.length <= 2 * 10^5
+    /// 2. Both strings consist only of lowercase English letters.
+    /// </summary>
+    int countQuadruples(string firstString, string secondString);
+
+    /// <summary>
+    /// Leet code 1839. Longest Substring Of All Vowels in Order
+    /// 
+    /// Medium
+    /// 
+    /// A string is considered beautiful if it satisfies the following 
+    /// conditions:
+    ///
+    /// Each of the 5 English vowels ('a', 'e', 'i', 'o', 'u') must 
+    /// appear at least once in it.
+    /// The letters must be sorted in alphabetical order (i.e. all 'a's before 
+    /// 'e's, all 'e's before 'i's, etc.).
+    /// For example, strings "aeiou" and "aaaaaaeiiiioou" are considered 
+    /// beautiful, but "uaeio", "aeoiu", and "aaaeeeooo" are not beautiful.
+    ///
+    /// Given a string word consisting of English vowels, return the length of 
+    /// the longest beautiful substring of word. If no such substring exists, 
+    /// return 0.
+    ///
+    /// A substring is a contiguous sequence of characters in a string.
+    /// Example 1:
+    /// Input: word = "aeiaaioaaaaeiiiiouuuooaauuaeiu"
+    /// Output: 13
+    /// Explanation: The longest beautiful substring in word is "aaaaeiiiiouuu" 
+    /// of length 13.
+    ///
+    /// Example 2:
+    /// Input: word = "aeeeiiiioooauuuaeiou"
+    /// Output: 5
+    /// Explanation: The longest beautiful substring in word is "aeiou" of 
+    /// length 5.
+    ///
+    /// Example 3:
+    /// Input: word = "a"
+    /// Output: 0
+    /// Explanation: There is no beautiful substring, so return 0.
+    ///
+    /// Constraints:
+    /// 1. 1 <= word.length <= 5 * 105
+    /// 2. word consists of characters 'a', 'e', 'i', 'o', and 'u'.
+    /// </summary>
+    int longestBeautifulSubstring(string word);
+
+    /// <summary>
+    /// Leet code 1844. Replace All Digits with Characters
+    /// 
+    /// Easy
+    /// 
+    /// You are given a 0-indexed string s that has lowercase English letters
+    /// in its even indices and digits in its odd indices.
+    /// There is a function shift(c, x), where c is a character and x is a 
+    /// digit, that returns the xth character after c.
+    /// 
+    /// For example, shift('a', 5) = 'f' and shift('x', 0) = 'x'.
+    /// For every odd index i, you want to replace the digit s[i] with 
+    /// shift(s[i-1], s[i]).
+    ///
+    /// Return s after replacing all digits. It is guaranteed that 
+    /// shift(s[i-1], s[i]) will never exceed 'z'.
+    /// 
+    /// Example 1:
+    /// Input: s = "a1c1e1"
+    /// Output: "abcdef"
+    /// Explanation: The digits are replaced as follows:
+    /// - s[1] -> shift('a',1) = 'b'
+    /// - s[3] -> shift('c',1) = 'd'
+    /// - s[5] -> shift('e',1) = 'f'
+    ///
+    /// Example 2:
+    /// Input: s = "a1b2c3d4e"
+    /// Output: "abbdcfdhe"
+    /// Explanation: The digits are replaced as follows:
+    /// - s[1] -> shift('a',1) = 'b'
+    /// - s[3] -> shift('b',2) = 'd'
+    /// - s[5] -> shift('c',3) = 'f'
+    /// - s[7] -> shift('d',4) = 'h'
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s consists only of lowercase English letters and digits.
+    /// 3. shift(s[i-1], s[i]) <= 'z' for all odd indices i.
+    /// </summary>
+    string replaceDigits(string s);
 #pragma endregion
 };
 

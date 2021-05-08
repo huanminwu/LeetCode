@@ -857,9 +857,36 @@ void TestLeetCode1721(void)
     leetCode.freeListNodes(result);
 }
 
+void TestLeetCode1836(void)
+{
+    Logger::WriteMessage("Test Leet Code 1836");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 1,2,3,2 };
+    ListNode* list = leetCode.generateListNodes(data_list);
+    ListNode* result = leetCode.deleteDuplicatesUnsorted(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 2,1,1,2 };
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.deleteDuplicatesUnsorted(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 3,2,2,1,3,2,4 };
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.deleteDuplicatesUnsorted(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+}
+
 
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode1836();
     TestLeetCode1721();
     TestLeetCode1669();
     TestLeetCode1634();

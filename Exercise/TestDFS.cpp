@@ -1244,8 +1244,34 @@ void TestLeetCode1815(void)
     Logger::WriteMessage("batchSize = " + to_string(batchSize) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1849(void)
+{
+    Logger::WriteMessage("Test Leet Code 1849");
+    LeetCodeDFS leetCode;
+    string s = "1234";
+    bool result = leetCode.splitString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "050043";
+    result = leetCode.splitString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "9080701";
+    result = leetCode.splitString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "10009998";
+    result = leetCode.splitString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "100009999";
+    result = leetCode.splitString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode1849();
     TestLeetCode1815();
     TestLeetCode1766();
     TestLeetCode1799();

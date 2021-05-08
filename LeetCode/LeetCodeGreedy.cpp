@@ -3163,4 +3163,5 @@ double LeetCodeGreedy::maxAverageRatio(vector<vector<int>>& classes, int extraSt
     }
     return sum / count;
 }
+
 #pragma endregion

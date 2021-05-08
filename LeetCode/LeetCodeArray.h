@@ -9612,6 +9612,198 @@ public:
     /// </summary>
     int minOperations(vector<int>& nums);
 
+    /// <summary>
+    /// Leet code 1826. Faulty Sensor
+    /// 
+    /// Easy
+    /// 
+    /// An experiment is being conducted in a lab. To ensure accuracy, there 
+    /// are two sensors collecting data simultaneously. You are given 2 arrays 
+    /// sensor1 and sensor2, where sensor1[i] and sensor2[i] are the ith data 
+    /// points collected by the two sensors.
+    ///
+    /// However, this type of sensor has a chance of being defective, which 
+    /// causes exactly one data point to be dropped. After the data is dropped, 
+    /// all the data points to the right of the dropped data are shifted one 
+    /// place to the left, and the last data point is replaced with some 
+    /// random value. It is guaranteed that this random value will not be equal 
+    /// to the dropped value.
+    ///
+    /// For example, if the correct data is [1,2,3,4,5] and 3 is dropped, the 
+    /// sensor could return [1,2,4,5,7] (the last position can be any value, 
+    /// not just 7).
+    /// We know that there is a defect in at most one of the sensors. Return 
+    /// the sensor number (1 or 2) with the defect. If there is no defect in 
+    /// either sensor or if it is impossible to determine the defective sensor,
+    /// return -1.
+    ///
+    /// Example 1:
+    /// Input: sensor1 = [2,3,4,5], sensor2 = [2,1,3,4]
+    /// Output: 1
+    /// Explanation: Sensor 2 has the correct values.
+    /// The second data point from sensor 2 is dropped, and the last value of 
+    /// sensor 1 is replaced by a 5.
+    ///
+    /// Example 2:
+    /// Input: sensor1 = [2,2,2,2,2], sensor2 = [2,2,2,2,5]
+    /// Output: -1
+    /// Explanation: It is impossible to determine which sensor has a defect.
+    /// Dropping the last value for either sensor could produce the output 
+    /// for the other sensor.
+    ///
+    /// Example 3:
+    /// Input: sensor1 = [2,3,2,2,3,2], sensor2 = [2,3,2,3,2,7]
+    /// Output: 2
+    /// Explanation: Sensor 1 has the correct values.
+    /// The fourth data point from sensor 1 is dropped, and the last value 
+    /// of sensor 1 is replaced by a 7.
+    /// 
+    /// Constraints:
+    /// 1. sensor1.length == sensor2.length
+    /// 2. 1 <= sensor1.length <= 100
+    /// 3. 1 <= sensor1[i], sensor2[i] <= 100
+    /// </summary>
+    int badSensor(vector<int>& sensor1, vector<int>& sensor2);
+
+    /// <summary>
+    /// Leet code 1838. Frequency of the Most Frequent Element
+    /// 
+    /// Medium
+    /// 
+    /// The frequency of an element is the number of times it occurs in an 
+    /// array.
+    ///  
+    /// You are given an integer array nums and an integer k. In one 
+    /// operation, you can choose an index of nums and increment the 
+    /// element at that index by 1.
+    ///
+    /// Return the maximum possible frequency of an element after performing 
+    /// at most k operations.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,2,4], k = 5
+    /// Output: 3
+    /// Explanation: Increment the first element three times and the second 
+    /// element two times to make nums = [4,4,4].
+    /// 4 has a frequency of 3.
+    ///
+    /// Example 2: 
+    /// Input: nums = [1,4,8,13], k = 5
+    /// Output: 2
+    /// Explanation: There are multiple optimal solutions:
+    /// - Increment the first element three times to make nums = [4,4,8,13]. 
+    ///   4 has a frequency of 2.
+    /// - Increment the second element four times to make nums = [1,8,8,13]. 
+    ///   8 has a frequency of 2.
+    /// - Increment the third element five times to make nums = [1,4,13,13]. 
+    ///   13 has a frequency of 2.
+    ///
+    /// Example 3:
+    /// Input: nums = [3,9,6], k = 2
+    /// Output: 1
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^5
+    /// 3. 1 <= k <= 10^5
+    /// </summary>
+    int maxFrequency(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code 1840. Maximum Building Height
+    /// 
+    /// Hard
+    /// 
+    /// You want to build n new buildings in a city. The new buildings will 
+    /// be built in a line and are labeled from 1 to n.
+    ///
+    /// However, there are city restrictions on the heights of the new 
+    /// buildings:
+    ///
+    /// The height of each building must be a non-negative integer.
+    /// The height of the first building must be 0.
+    /// The height difference between any two adjacent buildings cannot 
+    /// exceed 1.
+    /// Additionally, there are city restrictions on the maximum height of 
+    /// specific buildings. These restrictions are given as a 2D integer 
+    /// array restrictions where restrictions[i] = [idi, maxHeighti] indicates 
+    /// that building idi must have a height less than or equal to maxHeighti.
+    ///
+    /// It is guaranteed that each building will appear at most once in 
+    /// restrictions, and building 1 will not be in restrictions.
+    ///
+    /// Return the maximum possible height of the tallest building.
+    /// 
+    /// Example 1:
+    /// Input: n = 5, restrictions = [[2,1],[4,1]]
+    /// Output: 2
+    /// Explanation: The green area in the image indicates the maximum 
+    /// allowed height for each building.
+    /// We can build the buildings with heights [0,1,2,1,2], and the tallest 
+    /// building has a height of 2.
+    ///
+    /// Example 2:
+    /// Input: n = 6, restrictions = []
+    /// Output: 5
+    /// Explanation: The green area in the image indicates the maximum 
+    /// allowed height for each building.
+    /// We can build the buildings with heights [0,1,2,3,4,5], and the tallest 
+    /// building has a height of 5.
+    ///
+    /// Example 3:
+    /// Input: n = 10, restrictions = [[5,3],[2,5],[7,4],[10,3]]
+    /// Output: 5
+    /// Explanation: The green area in the image indicates the maximum allowed 
+    /// height for each building.
+    /// We can build the buildings with heights [0,1,2,3,3,4,4,5,4,3], and the 
+    /// tallest building has a height of 5.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n <= 10^9
+    /// 2. 0 <= restrictions.length <= min(n - 1, 10^5)
+    /// 3. 2 <= idi <= n
+    /// 4. idi is unique.
+    /// 5. 0 <= maxHeighti <= 10^9
+    /// </summary>
+    int maxBuilding(int n, vector<vector<int>>& restrictions);
+
+    /// <summary>
+    /// Leet code 1848. Minimum Distance to the Target Element
+    /// 
+    /// Easy
+    /// 
+    /// Given an integer array nums (0-indexed) and two integers target and 
+    /// start, find an index i such that nums[i] == target and abs(i - start) 
+    /// is minimized. Note that abs(x) is the absolute value of x.
+    /// Return abs(i - start).
+    /// It is guaranteed that target exists in nums.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2,3,4,5], target = 5, start = 3
+    /// Output: 1
+    /// Explanation: nums[4] = 5 is the only value equal to target, so the 
+    /// answer is abs(4 - 3) = 1.
+    ///
+    /// Example 2:
+    /// Input: nums = [1], target = 1, start = 0
+    /// Output: 0
+    /// Explanation: nums[0] = 1 is the only value equal to target, so the 
+    /// answer is abs(0 - 0) = 1.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,1,1,1,1,1,1,1,1,1], target = 1, start = 0
+    /// Output: 0
+    /// Explanation: Every value of nums is 1, but nums[0] minimizes 
+    /// abs(i - start), which is abs(0 - 0) = 0.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1000
+    /// 2. 1 <= nums[i] <= 104
+    /// 3. 0 <= start < nums.length
+    /// 4. target is in nums.
+    /// </summary>
+    int getMinDistance(vector<int>& nums, int target, int start);
+
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

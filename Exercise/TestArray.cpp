@@ -5554,8 +5554,145 @@ void TestLeetCode1827(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1762(void)
+{
+    Logger::WriteMessage("Test Leet Code 1762");
+    LeetCodeArray leetCode;
+    vector<int> heights = { 4, 2, 3, 1 };
+    vector<int> result = leetCode.findBuildings(heights);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage(result);
+
+    heights = { 4,3,2,1 };
+    result = leetCode.findBuildings(heights);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage(result);
+
+    heights = { 1,3,2,4 };
+    result = leetCode.findBuildings(heights);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage(result);
+
+    heights = { 2,2,2,2 };
+    result = leetCode.findBuildings(heights);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1826(void)
+{
+    Logger::WriteMessage("Test Leet Code 1826");
+    LeetCodeArray leetCode;
+    vector<int> sensor1 = { 2, 3, 4, 5 };
+    vector<int> sensor2 = { 2, 1, 3, 4 };
+    int result = leetCode.badSensor(sensor1, sensor2);
+    Logger::WriteMessage(sensor1);
+    Logger::WriteMessage(sensor1);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    sensor1 = { 2,2,2,2,2 };
+    sensor2 = { 2,2,2,2,5 };
+    result = leetCode.badSensor(sensor1, sensor2);
+    Logger::WriteMessage(sensor1);
+    Logger::WriteMessage(sensor1);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    sensor1 = { 2,3,2,2,3,2 };
+    sensor2 = { 2,3,2,3,2,7 };
+    result = leetCode.badSensor(sensor1, sensor2);
+    Logger::WriteMessage(sensor1);
+    Logger::WriteMessage(sensor1);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1838(void)
+{
+    Logger::WriteMessage("Test Leet Code 1838");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 4 };
+    int k = 5;
+    int result = leetCode.maxFrequency(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,4,8,13 };
+    k = 5;
+    result = leetCode.maxFrequency(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3,9,6 };
+    k = 2;
+    result = leetCode.maxFrequency(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3 };
+    k = 1;
+    result = leetCode.maxFrequency(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1840(void)
+{
+    Logger::WriteMessage("Test Leet Code 1840");
+    LeetCodeArray leetCode;
+    int n = 5;
+    vector<vector<int>> restrictions = { {2, 1},{4, 1} };
+    int result = leetCode.maxBuilding(n , restrictions);
+    Logger::WriteMessage(restrictions);
+    Logger::WriteMessage("n = " + to_string(n) + ";result = " + to_string(result));
+
+    n = 6;
+    restrictions = { };
+    result = leetCode.maxBuilding(n, restrictions);
+    Logger::WriteMessage(restrictions);
+    Logger::WriteMessage("n = " + to_string(n) + ";result = " + to_string(result));
+
+    n = 10;
+    restrictions = { {5, 3},{2, 5},{7, 4},{10, 3} };
+    result = leetCode.maxBuilding(n, restrictions);
+    Logger::WriteMessage(restrictions);
+    Logger::WriteMessage("n = " + to_string(n) + ";result = " + to_string(result));
+}
+
+void TestLeetCode1848(void)
+{
+    Logger::WriteMessage("Test Leet Code 1848");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5 };
+    int target = 5;
+    int start = 3;
+    int result = leetCode.getMinDistance(nums, target, start);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; start = " + to_string(start) + 
+        "; result = " + to_string(result));
+
+    nums = { 1 };
+    target = 1;
+    start = 0;
+    result = leetCode.getMinDistance(nums, target, start);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; start = " + to_string(start) +
+        "; result = " + to_string(result));
+
+    nums = { 1,1,1,1,1,1,1,1,1,1 };
+    target = 1;
+    start = 0;
+    result = leetCode.getMinDistance(nums, target, start);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; start = " + to_string(start) +
+        "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1848();
+    TestLeetCode1840();
+    TestLeetCode1838();
+    TestLeetCode1826();
+    TestLeetCode1762();
     TestLeetCode1827();
     TestLeetCode1823();
     TestLeetCode1822();

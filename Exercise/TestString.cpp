@@ -4131,8 +4131,60 @@ void TestLeetCode1832(void)
     Logger::WriteMessage("sentence = " + sentence + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1794(void)
+{
+    Logger::WriteMessage("Test Leet Code 1794");
+    LeetCodeString leetCode;
+    string firstString = "abcd";
+    string secondString = "bccda";
+    int result = leetCode.countQuadruples(firstString, secondString);
+    Logger::WriteMessage("firstString = " + firstString + 
+        "; secondString = " + secondString + 
+        "; result = " + to_string(result));
+
+    firstString = "ab";
+    secondString = "cd";
+    result = leetCode.countQuadruples(firstString, secondString);
+    Logger::WriteMessage("firstString = " + firstString +
+        "; secondString = " + secondString +
+        "; result = " + to_string(result));
+}
+
+void TestLeetCode1839(void)
+{
+    Logger::WriteMessage("Test Leet Code 1839");
+    LeetCodeString leetCode;
+    string word = "aeiaaioaaaaeiiiiouuuooaauuaeiu";
+    int result = leetCode.longestBeautifulSubstring(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "aeeeiiiioooauuuaeiou";
+    result = leetCode.longestBeautifulSubstring(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "a";
+    result = leetCode.longestBeautifulSubstring(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+}
+
+void TestLeetCode1844(void)
+{
+    Logger::WriteMessage("Test Leet Code 1844");
+    LeetCodeString leetCode;
+    string s = "a1c1e1";
+    string result = leetCode.replaceDigits(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "a1b2c3d4e";
+    result = leetCode.replaceDigits(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1844();
+    TestLeetCode1839();
+    TestLeetCode1794();
     TestLeetCode1832();
     TestLeetCode1816();
     TestLeetCode1813();

@@ -5767,7 +5767,9 @@ public:
 /// prefix, suffix have lengths in range [0, 10].
 /// words[i] and prefix, suffix queries consist of lowercase letters only.
 /// </summary>
-class WordFilter {
+class WordFilter 
+{
+private:
     unordered_map<string, int> m_WordMap;
 public:
     WordFilter(vector<string> words)
@@ -9699,5 +9701,106 @@ public:
     }
 };
 
+/// <summary>
+/// Leet code 1845. Seat Reservation Manager
+/// 
+/// Medium
+/// 
+/// Design a system that manages the reservation state of n seats that 
+/// are numbered from 1 to n.
+///
+/// Implement the SeatManager class:
+/// SeatManager(int n) Initializes a SeatManager object that will manage n 
+/// seats numbered from 1 to n. All seats are initially available.
+/// int reserve() Fetches the smallest-numbered unreserved seat, reserves 
+/// it, and returns its number.
+/// void unreserve(int seatNumber) Unreserves the seat with the given 
+/// seatNumber.
+///
+/// Example 1:
+/// Input
+/// ["SeatManager", "reserve", "reserve", "unreserve", "reserve", 
+///  "reserve", "reserve", "reserve", "unreserve"]
+/// [[5], [], [], [2], [], [], [], [], [5]]
+/// Output
+/// [null, 1, 2, null, 2, 3, 4, 5, null]
+/// Explanation
+/// SeatManager seatManager = new SeatManager(5); 
+/// Initializes a SeatManager with 5 seats.
+/// seatManager.reserve();    
+/// All seats are available, so return the lowest numbered 
+/// seat, which is 1.
+/// seatManager.reserve();    
+/// The available seats are [2,3,4,5], so return the lowest of them, 
+/// which is 2.
+/// seatManager.unreserve(2); 
+/// Unreserve seat 2, so now the available seats are [2,3,4,5].
+/// seatManager.reserve();    
+/// The available seats are [2,3,4,5], so return the 
+/// lowest of them, which is 2.
+/// seatManager.reserve();    
+/// The available seats are [3,4,5], so return the lowest 
+/// of them, which is 3.
+/// seatManager.reserve();    
+/// The available seats are [4,5], so return the lowest 
+/// of them, which is 4.
+/// seatManager.reserve();    
+/// The only available seat is seat 5, so return 5.
+/// seatManager.unreserve(5); 
+/// Unreserve seat 5, so now the available seats are [5].
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// 2. 1 <= seatNumber <= n
+/// 3. For each call to reserve, it is guaranteed that there will be at 
+///    least one unreserved seat.
+/// 4. For each call to unreserve, it is guaranteed that seatNumber will 
+///    be reserved.
+/// At most 10^5 calls in total will be made to reserve and unreserve.
+/// </summary>
+class SeatManager
+{
+private:
+    set<pair<int, int>> m_seats;
+public:
+    SeatManager(int n) 
+    {
+        m_seats.insert(make_pair(1, n));
+    }
+
+    int reserve() 
+    {
+        pair<int, int> seats = *m_seats.begin();
+        m_seats.erase(seats);
+        int result = seats.first;
+        if (seats.first != seats.second)
+        {
+            seats.first++;
+            m_seats.insert(seats);
+        }
+        return result;
+    }
+
+    void unreserve(int seatNumber) 
+    {
+        pair<int, int> seat = make_pair(seatNumber, seatNumber);
+        auto next = m_seats.lower_bound(make_pair(seatNumber, seatNumber));
+        if (next != m_seats.begin())
+        {
+            auto prev = std::prev(next);
+            if (prev->second + 1 == seatNumber)
+            {
+                seat.first = prev->first;
+                m_seats.erase(prev);
+            }
+        }
+        if (next != m_seats.end() && seatNumber + 1 == next->first)
+        {
+            seat.second = next->second;
+            m_seats.erase(next);
+        }
+        m_seats.insert(seat);
+    }
+};
 
 #endif // LeetcodeDesign_H

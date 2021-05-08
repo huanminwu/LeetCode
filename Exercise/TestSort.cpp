@@ -1262,8 +1262,70 @@ void TestLeetCode1834(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1846(void)
+{
+    Logger::WriteMessage("Test Leet Code 1846");
+    LeetCodeSort leetCode;
+    vector<int>arr = { 2, 2, 1, 2, 1 };
+    int result = leetCode.maximumElementAfterDecrementingAndRearranging(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 100,1,1000 };
+    result = leetCode.maximumElementAfterDecrementingAndRearranging(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1,2,3,4,5 };
+    result = leetCode.maximumElementAfterDecrementingAndRearranging(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1847(void)
+{
+    Logger::WriteMessage("Test Leet Code 1847");
+    LeetCodeSort leetCode;
+    vector<vector<int>> rooms = { {2, 2},{1, 2}, {3, 2} };
+    vector<vector<int>> queries = { {3, 1},{3, 3}, {5, 2} };
+    vector<int> result = leetCode.closestRoom(rooms, queries);
+    Logger::WriteMessage(rooms);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    rooms = { {1, 4},{2, 3},{3, 5},{4, 1}, {5, 2} };
+    queries = { {2, 3},{2, 4},{2, 5} };
+    result = leetCode.closestRoom(rooms, queries);
+    Logger::WriteMessage(rooms);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+
+void TestLeetCode1851(void)
+{
+    Logger::WriteMessage("Test Leet Code 1851");
+    LeetCodeSort leetCode;
+    vector<vector<int>> intervals = { {1, 4},{2, 4},{3, 6},{4, 4} };
+    vector<int>  queries = { 2, 3, 4, 5 };
+    vector<int> result = leetCode.minInterval(intervals, queries);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    intervals = { {2, 3},{2, 5},{1, 8},{20, 25} };
+    queries = { 2,19,5,22 };
+    result = leetCode.minInterval(intervals, queries);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1851();
+    TestLeetCode1847();
+    TestLeetCode1846();
     TestLeetCode1834();
     TestLeetCode1833();
     TestLeetCode1801();

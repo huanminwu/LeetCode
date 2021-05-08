@@ -6359,4 +6359,265 @@ vector<int> LeetCodeSort::getOrder(vector<vector<int>>& tasks)
     return result;
 }
 
+
+/// <summary>
+/// Leet code 1846. Maximum Element After Decreasing and Rearranging
+/// 
+/// Medium
+/// 
+/// You are given an array of positive integers arr. Perform some 
+/// operations (possibly none) on arr so that it satisfies these 
+/// conditions:
+///
+/// The value of the first element in arr must be 1.
+/// The absolute difference between any 2 adjacent elements must be less 
+/// than or equal to 1. In other words, abs(arr[i] - arr[i - 1]) <= 1 
+/// for each i where 1 <= i < arr.length (0-indexed). abs(x) is the 
+/// absolute value of x.
+/// There are 2 types of operations that you can perform any number of 
+/// times:
+///
+/// Decrease the value of any element of arr to a smaller positive integer.
+/// Rearrange the elements of arr to be in any order.
+/// Return the maximum possible value of an element in arr after 
+/// performing the operations to satisfy the conditions.
+/// 
+/// Example 1:
+/// Input: arr = [2,2,1,2,1]
+/// Output: 2
+/// Explanation: 
+/// We can satisfy the conditions by rearranging arr so it becomes [1,2,2,2,1].
+/// The largest element in arr is 2.
+///
+/// Example 2:
+/// Input: arr = [100,1,1000]
+/// Output: 3
+/// Explanation: 
+/// One possible way to satisfy the conditions is by doing the following:
+/// 1. Rearrange arr so it becomes [1,100,1000].
+/// 2. Decrease the value of the second element to 2.
+/// 3. Decrease the value of the third element to 3.
+/// Now arr = [1,2,3], which satisfies the conditions.
+/// The largest element in arr is 3.
+///
+/// Example 3:
+/// Input: arr = [1,2,3,4,5]
+/// Output: 5
+/// Explanation: The array already satisfies the conditions, and the largest 
+/// element is 5.
+///
+/// Constraints:
+/// 1. 1 <= arr.length <= 10^5
+/// 2. 1 <= arr[i] <= 10^9
+/// </summary>
+int LeetCodeSort::maximumElementAfterDecrementingAndRearranging(vector<int>& arr)
+{
+    sort(arr.begin(), arr.end());
+    int last = 0;
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        if (arr[i] > last) last++;
+    }
+    return last;
+}
+
+
+/// <summary>
+/// Leet code 1847. Closest Room
+/// 
+/// Hard
+/// 
+/// There is a hotel with n rooms. The rooms are represented by a 2D 
+/// integer array rooms where rooms[i] = [roomIdi, sizei] denotes that 
+/// there is a room with room number roomIdi and size equal to sizei. 
+/// Each roomIdi is guaranteed to be unique.
+///
+/// You are also given k queries in a 2D array queries where 
+/// queries[j] = [preferredj, minSizej]. The answer to the jth query 
+/// is the room number id of a room such that:
+///
+/// The room has a size of at least minSizej, and
+/// abs(id - preferredj) is minimized, where abs(x) is the absolute 
+/// value of x.
+/// If there is a tie in the absolute difference, then use the room 
+/// with the smallest such id. If there is no such room, the answer 
+/// is -1.
+/// Return an array answer of length k where answer[j] contains the 
+/// answer to the jth query.
+///
+/// Example 1:
+/// Input: rooms = [[2,2],[1,2],[3,2]], queries = [[3,1],[3,3],[5,2]]
+/// Output: [3,-1,3]
+/// Explanation: The answers to the queries are as follows:
+/// Query = [3,1]: Room number 3 is the closest as abs(3 - 3) = 0, 
+/// and its size of 2 is at least 1. The answer is 3.
+/// Query = [3,3]: There are no rooms with a size of at least 3, so 
+/// the answer is -1.
+/// Query = [5,2]: Room number 3 is the closest as abs(3 - 5) = 2, 
+/// and its size of 2 is at least 2. The answer is 3.
+///
+/// Example 2:
+/// Input: rooms = [[1,4],[2,3],[3,5],[4,1],[5,2]], 
+/// queries = [[2,3],[2,4],[2,5]]
+/// Output: [2,1,3]
+/// Explanation: The answers to the queries are as follows:
+/// Query = [2,3]: Room number 2 is the closest as abs(2 - 2) = 0, 
+/// and its size of 3 is at least 3. The answer is 2.
+/// Query = [2,4]: Room numbers 1 and 3 both have sizes of at least 4. 
+/// The answer is 1 since it is smaller.
+/// Query = [2,5]: Room number 3 is the only room with a size of at 
+/// least 5. The answer is 3.
+/// 
+/// Constraints:
+/// 1. n == rooms.length
+/// 2. 1 <= n <= 10^5
+/// 3. k == queries.length
+/// 4. 1 <= k <= 10^4
+/// 5. 1 <= roomIdi, preferredj <= 10^7
+/// 6. 1 <= sizei, minSizej <= 10^7
+/// </summary>
+vector<int> LeetCodeSort::closestRoom(vector<vector<int>>& rooms, vector<vector<int>>& queries)
+{
+    priority_queue<pair<int, int>> rooms_sorted, query_sorted;
+    for (size_t i = 0; i < rooms.size(); i++)
+    {
+        rooms_sorted.push(make_pair(rooms[i][1], rooms[i][0]));
+    }
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        query_sorted.push(make_pair(queries[i][1], i));
+    }
+    vector<int> result(queries.size());
+    set<int> room_ids;
+    while (!query_sorted.empty())
+    {
+        pair<int, int> query = query_sorted.top();
+        query_sorted.pop();
+
+        while (!rooms_sorted.empty())
+        {
+            if (rooms_sorted.top().first < query.first) break;
+            pair<int, int> room = rooms_sorted.top();
+            rooms_sorted.pop();
+            room_ids.insert(room.second);
+        }
+        result[query.second] = -1;
+        if (!room_ids.empty())
+        {
+            int diff = INT_MAX;
+            int preferred_room = queries[query.second][0];
+            auto itr = room_ids.lower_bound(preferred_room);
+            if (itr != room_ids.end())
+            {
+                diff = *itr - preferred_room;
+                result[query.second] = *itr;
+            }
+            if (itr != room_ids.begin())
+            {
+                itr = std::prev(itr);
+                if (preferred_room - *itr <= diff)
+                {
+                    result[query.second] = *itr;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1851. Minimum Interval to Include Each Query
+/// 
+/// Hard
+/// 
+/// You are given a 2D integer array intervals, where intervals[i] = 
+/// [lefti, righti] describes the ith interval starting at lefti and 
+/// ending at righti (inclusive). The size of an interval is defined 
+/// as the number of integers it contains, or more formally 
+/// righti - lefti + 1.
+///
+/// You are also given an integer array queries. The answer to the 
+/// jth query is the size of the smallest interval i such that 
+/// lefti <= queries[j] <= righti. If no such interval exists, the 
+/// answer is -1.
+///
+/// Return an array containing the answers to the queries.
+/// Example 1:
+/// Input: intervals = [[1,4],[2,4],[3,6],[4,4]], queries = [2,3,4,5]
+/// Output: [3,3,1,4]
+/// Explanation: The queries are processed as follows:
+/// - Query = 2: The interval [2,4] is the smallest interval containing 2. 
+///   The answer is 4 - 2 + 1 = 3.
+/// - Query = 3: The interval [2,4] is the smallest interval containing 3. 
+///   The answer is 4 - 2 + 1 = 3.
+/// - Query = 4: The interval [4,4] is the smallest interval containing 4. 
+///   The answer is 4 - 4 + 1 = 1.
+/// - Query = 5: The interval [3,6] is the smallest interval containing 5. 
+/// The answer is 6 - 3 + 1 = 4.
+///
+/// Example 2:
+/// Input: intervals = [[2,3],[2,5],[1,8],[20,25]], queries = [2,19,5,22]
+/// Output: [2,-1,4,6]
+/// Explanation: The queries are processed as follows:
+/// - Query = 2: The interval [2,3] is the smallest interval containing 2. 
+///   The answer is 3 - 2 + 1 = 2.
+/// - Query = 19: None of the intervals contain 19. The answer is -1.
+/// - Query = 5: The interval [2,5] is the smallest interval containing 5. 
+///   The answer is 5 - 2 + 1 = 4.
+/// - Query = 22: The interval [20,25] is the smallest interval 
+///   containing 22. The answer is 25 - 20 + 1 = 6.
+/// 
+/// Constraints:
+/// 1. 1 <= intervals.length <= 10^5
+/// 2. 1 <= queries.length <= 10^5
+/// 3. queries[i].length == 2
+/// 4. 1 <= lefti <= righti <= 10^7
+/// 5. 1 <= queries[j] <= 10^7
+/// </summary>
+vector<int> LeetCodeSort::minInterval(vector<vector<int>>& intervals, vector<int>& queries)
+{
+    sort(intervals.begin(), intervals.end());
+    priority_queue<pair<int, int>> query_pq;
+    priority_queue<pair<int, int>> candidates;
+    vector<int> result(queries.size());
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        query_pq.push(make_pair(-queries[i], i));
+    }
+
+    size_t index = 0;
+    while (!query_pq.empty())
+    {
+        pair<int, int> query = query_pq.top();
+        query_pq.pop();
+        int pos = 0 - query.first;
+        while (index < intervals.size())
+        {
+            if (intervals[index][0] > pos) break;
+            if (intervals[index][1] >= pos)
+            {
+                candidates.push(make_pair(intervals[index][0] - intervals[index][1] - 1, index));
+            }
+            index++;
+        }
+        while (!candidates.empty())
+        {
+            if (intervals[candidates.top().second][1] >= pos)
+            {
+                break;
+            }
+            candidates.pop();
+        }
+        if (candidates.empty())
+        {
+            result[query.second] = -1;
+        }
+        else
+        {
+            result[query.second] = 0 - candidates.top().first;
+        }
+    }
+    return result;
+}
+
 #pragma endregion

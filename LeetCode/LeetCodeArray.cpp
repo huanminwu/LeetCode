@@ -15929,4 +15929,375 @@ int LeetCodeArray::minOperations(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code 1762. Buildings With an Ocean View
+/// 
+/// Medium
+/// 
+/// There are n buildings in a line. You are given an integer array 
+/// heights of size n that represents the heights of the buildings in the 
+/// line.
+///
+/// The ocean is to the right of the buildings. A building has an ocean 
+/// view if the building can see the ocean without obstructions. Formally, 
+/// a building has an ocean view if all the buildings to its right have a 
+/// smaller height.
+///
+/// Return a list of indices (0-indexed) of buildings that have an ocean 
+/// view, sorted in increasing order.
+/// 
+/// Example 1:
+/// Input: heights = [4,2,3,1]
+/// Output: [0,2,3]
+/// Explanation: Building 1 (0-indexed) does not have an ocean view 
+/// because building 2 is taller.
+///
+/// Example 2:
+/// Input: heights = [4,3,2,1]
+/// Output: [0,1,2,3]
+/// Explanation: All the buildings have an ocean view.
+///
+/// Example 3:
+/// Input: heights = [1,3,2,4]
+/// Output: [3]
+/// Explanation: Only building 3 has an ocean view.
+///
+/// Example 4:
+/// Input: heights = [2,2,2,2]
+/// Output: [3]
+/// Explanation: Buildings cannot see the ocean if there are 
+/// buildings of the same height to its right.
+/// 
+/// Constraints:
+/// 1. 1 <= heights.length <= 10^5
+/// 2. 1 <= heights[i] <= 10^9
+/// </summary>
+vector<int> LeetCodeArray::findBuildings(vector<int>& heights)
+{
+    reverse(heights.begin(), heights.end());
+    vector<int> result;
+    for (size_t i = 0; i < heights.size(); i++)
+    {
+        if (i == 0)
+        {
+            result.push_back(0);
+        }
+        else
+        {
+            if (heights[i] > heights[result.back()])
+            {
+                result.push_back(i);
+            }
+        }
+    }
+    reverse(heights.begin(), heights.end());
+    reverse(result.begin(), result.end());
+    for (size_t i = 0; i < result.size(); i++)
+    {
+        result[i] = heights.size() - 1 - result[i];
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet code 1826. Faulty Sensor
+/// 
+/// Easy
+/// 
+/// An experiment is being conducted in a lab. To ensure accuracy, there 
+/// are two sensors collecting data simultaneously. You are given 2 arrays 
+/// sensor1 and sensor2, where sensor1[i] and sensor2[i] are the ith data 
+/// points collected by the two sensors.
+///
+/// However, this type of sensor has a chance of being defective, which 
+/// causes exactly one data point to be dropped. After the data is dropped, 
+/// all the data points to the right of the dropped data are shifted one 
+/// place to the left, and the last data point is replaced with some 
+/// random value. It is guaranteed that this random value will not be equal 
+/// to the dropped value.
+///
+/// For example, if the correct data is [1,2,3,4,5] and 3 is dropped, the 
+/// sensor could return [1,2,4,5,7] (the last position can be any value, 
+/// not just 7).
+/// We know that there is a defect in at most one of the sensors. Return 
+/// the sensor number (1 or 2) with the defect. If there is no defect in 
+/// either sensor or if it is impossible to determine the defective sensor,
+/// return -1.
+///
+/// Example 1:
+/// Input: sensor1 = [2,3,4,5], sensor2 = [2,1,3,4]
+/// Output: 1
+/// Explanation: Sensor 2 has the correct values.
+/// The second data point from sensor 2 is dropped, and the last value of 
+/// sensor 1 is replaced by a 5.
+///
+/// Example 2:
+/// Input: sensor1 = [2,2,2,2,2], sensor2 = [2,2,2,2,5]
+/// Output: -1
+/// Explanation: It is impossible to determine which sensor has a defect.
+/// Dropping the last value for either sensor could produce the output 
+/// for the other sensor.
+///
+/// Example 3:
+/// Input: sensor1 = [2,3,2,2,3,2], sensor2 = [2,3,2,3,2,7]
+/// Output: 2
+/// Explanation: Sensor 1 has the correct values.
+/// The fourth data point from sensor 1 is dropped, and the last value 
+/// of sensor 1 is replaced by a 7.
+/// 
+/// Constraints:
+/// 1. sensor1.length == sensor2.length
+/// 2. 1 <= sensor1.length <= 100
+/// 3. 1 <= sensor1[i], sensor2[i] <= 100
+/// </summary>
+int LeetCodeArray::badSensor(vector<int>& sensor1, vector<int>& sensor2)
+{
+    bool broken = false;
+    for (size_t i = 0; i < sensor1.size(); i++)
+    {
+        if (!broken)
+        {
+            if (sensor1[i] == sensor2[i]) continue;
+            else broken = true;
+        }
+        if (broken)
+        {
+            if (i == sensor1.size() - 1) return -1;
+            if (sensor1[i] == sensor2[i + 1] && sensor1[i + 1] != sensor2[i])
+            {
+                return 1;
+            }
+            else if (sensor2[i] == sensor1[i + 1] && sensor2[i + 1] != sensor1[i])
+            {
+                return 2;
+            }
+        }
+    }
+    return -1;
+}
+
+/// <summary>
+/// Leet code 1838. Frequency of the Most Frequent Element
+/// 
+/// Medium
+/// 
+/// The frequency of an element is the number of times it occurs in an 
+/// array.
+///  
+/// You are given an integer array nums and an integer k. In one 
+/// operation, you can choose an index of nums and increment the 
+/// element at that index by 1.
+///
+/// Return the maximum possible frequency of an element after performing 
+/// at most k operations.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,4], k = 5
+/// Output: 3
+/// Explanation: Increment the first element three times and the second 
+/// element two times to make nums = [4,4,4].
+/// 4 has a frequency of 3.
+///
+/// Example 2: 
+/// Input: nums = [1,4,8,13], k = 5
+/// Output: 2
+/// Explanation: There are multiple optimal solutions:
+/// - Increment the first element three times to make nums = [4,4,8,13]. 
+///   4 has a frequency of 2.
+/// - Increment the second element four times to make nums = [1,8,8,13]. 
+///   8 has a frequency of 2.
+/// - Increment the third element five times to make nums = [1,4,13,13]. 
+///   13 has a frequency of 2.
+///
+/// Example 3:
+/// Input: nums = [3,9,6], k = 2
+/// Output: 1
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// 3. 1 <= k <= 10^5
+/// </summary>
+int LeetCodeArray::maxFrequency(vector<int>& nums, int k)
+{
+    sort(nums.begin(), nums.end(), greater<int>());
+    int sum = 0;
+    queue<int> queue;
+    size_t index = 0;
+    int result = 0;
+    while (index <= nums.size())
+    {
+        if (queue.empty())
+        {
+            queue.push(nums[index]);
+            index++;
+        }
+        
+        if (sum > k)
+        {
+            int first = queue.front();
+            queue.pop();
+            sum = sum - (first - queue.front()) * queue.size();
+        }
+        else
+        {
+            result = max(result, (int)queue.size());
+            if (index < (int)nums.size())
+            {
+                queue.push(nums[index]);
+                sum = sum + queue.front() - nums[index];
+            }
+            index++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1840. Maximum Building Height
+/// 
+/// Hard
+/// 
+/// You want to build n new buildings in a city. The new buildings will 
+/// be built in a line and are labeled from 1 to n.
+///
+/// However, there are city restrictions on the heights of the new 
+/// buildings:
+///
+/// The height of each building must be a non-negative integer.
+/// The height of the first building must be 0.
+/// The height difference between any two adjacent buildings cannot 
+/// exceed 1.
+/// Additionally, there are city restrictions on the maximum height of 
+/// specific buildings. These restrictions are given as a 2D integer 
+/// array restrictions where restrictions[i] = [idi, maxHeighti] indicates 
+/// that building idi must have a height less than or equal to maxHeighti.
+///
+/// It is guaranteed that each building will appear at most once in 
+/// restrictions, and building 1 will not be in restrictions.
+///
+/// Return the maximum possible height of the tallest building.
+/// 
+/// Example 1:
+/// Input: n = 5, restrictions = [[2,1],[4,1]]
+/// Output: 2
+/// Explanation: The green area in the image indicates the maximum 
+/// allowed height for each building.
+/// We can build the buildings with heights [0,1,2,1,2], and the tallest 
+/// building has a height of 2.
+///
+/// Example 2:
+/// Input: n = 6, restrictions = []
+/// Output: 5
+/// Explanation: The green area in the image indicates the maximum 
+/// allowed height for each building.
+/// We can build the buildings with heights [0,1,2,3,4,5], and the tallest 
+/// building has a height of 5.
+///
+/// Example 3:
+/// Input: n = 10, restrictions = [[5,3],[2,5],[7,4],[10,3]]
+/// Output: 5
+/// Explanation: The green area in the image indicates the maximum allowed 
+/// height for each building.
+/// We can build the buildings with heights [0,1,2,3,3,4,4,5,4,3], and the 
+/// tallest building has a height of 5.
+///
+/// Constraints:
+/// 1. 2 <= n <= 10^9
+/// 2. 0 <= restrictions.length <= min(n - 1, 10^5)
+/// 3. 2 <= idi <= n
+/// 4. idi is unique.
+/// 5. 0 <= maxHeighti <= 10^9
+/// </summary>
+int LeetCodeArray::maxBuilding(int n, vector<vector<int>>& restrictions)
+{
+    vector<vector<int>> heights = restrictions;
+    sort(heights.begin(), heights.end());
+
+    vector<int> prev = { 1, 0 };
+    for (size_t i = 0; i < heights.size(); i++)
+    {
+        heights[i][1] = min(heights[i][1], prev[1] + heights[i][0] - prev[0]);
+        prev = heights[i];
+    }
+    if (heights.size() > 1)
+    {
+        prev = heights[heights.size() - 1];
+        for (int i = heights.size() - 2; i >= 0; i--)
+        {
+            heights[i][1] = min(heights[i][1], prev[1] + prev[0] - heights[i][0]);
+            prev = heights[i];
+        }
+    }
+
+    prev = { 1, 0 };
+    int result = 0;
+    for (size_t i = 0; i < heights.size(); i++)
+    {
+        int h = ((heights[i][0] - prev[0]) + abs(heights[i][1] - prev[1])) / 2 +
+            (min(heights[i][1], prev[1]));
+        prev = heights[i];
+        result = max(result, h);
+    }
+    result = max(result, prev[1] + n - prev[0]);
+    return result;
+}
+
+/// <summary>
+/// Leet code 1848. Minimum Distance to the Target Element
+/// 
+/// Easy
+/// 
+/// Given an integer array nums (0-indexed) and two integers target and 
+/// start, find an index i such that nums[i] == target and abs(i - start) 
+/// is minimized. Note that abs(x) is the absolute value of x.
+/// Return abs(i - start).
+/// It is guaranteed that target exists in nums.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,4,5], target = 5, start = 3
+/// Output: 1
+/// Explanation: nums[4] = 5 is the only value equal to target, so the 
+/// answer is abs(4 - 3) = 1.
+///
+/// Example 2:
+/// Input: nums = [1], target = 1, start = 0
+/// Output: 0
+/// Explanation: nums[0] = 1 is the only value equal to target, so the 
+/// answer is abs(0 - 0) = 1.
+///
+/// Example 3:
+/// Input: nums = [1,1,1,1,1,1,1,1,1,1], target = 1, start = 0
+/// Output: 0
+/// Explanation: Every value of nums is 1, but nums[0] minimizes 
+/// abs(i - start), which is abs(0 - 0) = 0.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 104
+/// 3. 0 <= start < nums.length
+/// 4. target is in nums.
+/// </summary>
+int LeetCodeArray::getMinDistance(vector<int>& nums, int target, int start)
+{
+    unordered_map<int, set<int>> num_map;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        num_map[nums[i]].insert(i);
+    }
+    int result = INT_MAX;
+    auto itr = num_map[target].lower_bound(start);
+    if (itr != num_map[target].end())
+    {
+        result = min(result, abs(start - *itr));
+    }
+    if (itr != num_map[target].begin())
+    {
+        itr = prev(itr);
+        result = min(result, abs(start - *itr));
+    }
+    return result;
+}
 #pragma endregion

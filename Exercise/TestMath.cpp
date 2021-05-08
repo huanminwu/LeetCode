@@ -3731,8 +3731,56 @@ void TestLeetCode1830(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode1837(void)
+{
+    Logger::WriteMessage("Test Leet Code 1837");
+    LeetCodeMath leetCode;
+    int n = 34;
+    int k = 6;
+    int result = leetCode.sumBase(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) +  "; result = " + to_string(result));
+
+    n = 10;
+    k = 10;
+    result = leetCode.sumBase(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1850(void)
+{
+    Logger::WriteMessage("Test Leet Code 1850");
+    LeetCodeMath leetCode;
+    string num = "5489355142";
+    int k = 4;
+    int result = leetCode.getMinSwaps(num, k);
+    Logger::WriteMessage("num = " + num + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    num = "11112";
+    k = 4;
+    result = leetCode.getMinSwaps(num, k);
+    Logger::WriteMessage("num = " + num + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    num = "00123";
+    k = 1;
+    result = leetCode.getMinSwaps(num, k);
+    Logger::WriteMessage("num = " + num + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    num = "059";
+    k = 5;
+    result = leetCode.getMinSwaps(num, k);
+    Logger::WriteMessage("num = " + num + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    num = "99499";
+    k = 1;
+    result = leetCode.getMinSwaps(num, k);
+    Logger::WriteMessage("num = " + num + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1850();
+    TestLeetCode1837();
     TestLeetCode1830();
     TestLeetCode1828();
     TestLeetCode1819();
