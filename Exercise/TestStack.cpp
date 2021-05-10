@@ -470,8 +470,29 @@ void TestLeetCode503(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1865(void)
+{
+    Logger::WriteMessage("Test Leet Code 1865");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 1, 2, 3, 2 };
+    int result = leetCode.maxSumMinProduct(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3,3,1,2 };
+    result = leetCode.maxSumMinProduct(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,1,5,6,4,2 };
+    result = leetCode.maxSumMinProduct(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode1865();
     TestLeetCode503();
     TestLeetCode496();
     TestLeetCode1475();

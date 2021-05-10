@@ -1002,8 +1002,35 @@ void TestLeetCode1792(void)
     Logger::WriteMessage("extraStudents = " + to_string(extraStudents) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1854(void)
+{
+    Logger::WriteMessage("Test Leet Code 1854");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> logs = { {1993, 1999},{2000, 2010} };
+    int result = leetCode.maximumPopulation(logs);
+    Logger::WriteMessage(logs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    logs = { {1950, 1961},{1960, 1971},{1970, 1981} };
+    result = leetCode.maximumPopulation(logs);
+    Logger::WriteMessage(logs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+
+    logs = 
+    { 
+        {2008, 2026}, {2004, 2008}, {2034, 2035}, {1999, 2050}, {2049, 2050}, 
+        {2011, 2035}, {1966, 2033}, {2044, 2049} 
+    };
+    result = leetCode.maximumPopulation(logs);
+    Logger::WriteMessage(logs);
+    Logger::WriteMessage("result = " + to_string(result));
+    
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode1854();
     TestLeetCode1792();
     TestLeetCode757();
     TestLeetCode1674();

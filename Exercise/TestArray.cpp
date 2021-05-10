@@ -5686,8 +5686,42 @@ void TestLeetCode1848(void)
         "; result = " + to_string(result));
 }
 
+void TestLeetCode1855(void)
+{
+    Logger::WriteMessage("Test Leet Code 1855");
+    LeetCodeArray leetCode;
+    vector<int> nums1 = { 55, 30, 5, 4, 2 };
+    vector<int> nums2 = { 100, 20, 10, 10, 5 };
+    int result = leetCode.maxDistance(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 2,2,2 };
+    nums2 = { 10,10,1 };
+    result = leetCode.maxDistance(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 30, 29, 19, 5 };
+    nums2 = { 25, 25, 25, 25, 25 };
+    result = leetCode.maxDistance(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 5,4 };
+    nums2 = { 3,2 };
+    result = leetCode.maxDistance(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1855();
     TestLeetCode1848();
     TestLeetCode1840();
     TestLeetCode1838();

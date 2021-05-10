@@ -1321,6 +1321,7 @@ void TestLeetCode1851(void)
     Logger::WriteMessage(result);
 }
 
+
 void TestLeetCodeSort(void)
 {
     TestLeetCode1851();

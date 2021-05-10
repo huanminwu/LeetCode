@@ -3436,8 +3436,26 @@ void TestLeetCode1820(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1857(void)
+{
+    Logger::WriteMessage("Test Leet Code 1857");
+    LeetCodeGraph leetCode;
+    string colors = "abaca";
+    vector<vector<int>> edges = { {0, 1},{0, 2},{2, 3},{3, 4} };
+    int result = leetCode.largestPathValue(colors, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    colors = "a";
+    edges = { {0, 0} };
+    result = leetCode.largestPathValue(colors, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1857();
     TestLeetCode1820();
     TestLeetCode1791();
     TestLeetCode1761();

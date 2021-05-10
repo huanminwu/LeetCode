@@ -10704,4 +10704,90 @@ int LeetCodeGraph::maximumInvitations(vector<vector<int>>& grid)
     return result;
 }
 
+/// <summary>
+/// Leet code 1857. Largest Color Value in a Directed Graph
+/// 
+/// Hard
+/// 
+/// There is a directed graph of n colored nodes and m edges. The nodes 
+/// are numbered from 0 to n - 1.
+///
+/// You are given a string colors where colors[i] is a lowercase English 
+/// letter representing the color of the ith node in this graph 
+/// (0-indexed). You are also given a 2D array edges where edges[j] = 
+/// [aj, bj] indicates that there is a directed edge from node aj to node 
+/// bj.
+///
+/// A valid path in the graph is a sequence of nodes x1 -> x2 -> 
+/// x3 -> ... -> xk such that there is a directed edge from xi to xi+1 
+/// for every 1 <= i < k. The color value of the path is the number of 
+/// nodes that are colored the most frequently occurring color along that 
+/// path.
+///
+/// Return the largest color value of any valid path in the given graph, 
+/// or -1 if the graph contains a cycle.
+/// 
+/// Example 1:
+/// Input: colors = "abaca", edges = [[0,1],[0,2],[2,3],[3,4]]
+/// Output: 3
+/// Explanation: The path 0 -> 2 -> 3 -> 4 contains 3 nodes that are 
+/// colored "a" (red in the above image).
+///
+/// Example 2:
+/// Input: colors = "a", edges = [[0,0]]
+/// Output: -1
+/// Explanation: There is a cycle from 0 to 0.
+///
+/// Constraints:
+/// 1. n == colors.length
+/// 2. m == edges.length
+/// 3. 1 <= n <= 10^5
+/// 4. 0 <= m <= 10^5
+/// 5. colors consists of lowercase English letters.
+/// 6. 0 <= aj, bj < n
+/// </summary>
+int LeetCodeGraph::largestPathValue(string colors, vector<vector<int>>& edges)
+{
+    int n = colors.size();
+    vector<vector<int>> neighbors(n);
+    vector<vector<int>> max_colors(n, vector<int>(26));
+    vector<int> degree(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(edges[i][1]);
+        degree[edges[i][1]] ++;
+    }
+    queue<int> queue;
+    int count = 0;
+    for (size_t i = 0; i < n; i++)
+    {
+        if (degree[i] == 0) queue.push(i);
+    }
+    int result = 0;
+    while (!queue.empty())
+    {
+        int node = queue.front();
+        queue.pop();
+        count++;
+        max_colors[node][colors[node] - 'a']++;
+        result = max(result, max_colors[node][colors[node] - 'a']);
+        for (size_t i = 0; i < neighbors[node].size(); i++)
+        {
+            int next = neighbors[node][i];
+            degree[next]--;
+            if (degree[next] == 0)
+            {
+                queue.push(next);
+            }
+            for (size_t j = 0; j < 26; j++)
+            {
+                max_colors[next][j] = max(max_colors[next][j], max_colors[node][j]);
+            }
+        }
+    }
+    if (count < n) return -1;
+    else return result;
+}
+
+
 #pragma endregion
