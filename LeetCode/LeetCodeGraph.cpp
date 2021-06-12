@@ -10759,7 +10759,7 @@ int LeetCodeGraph::largestPathValue(string colors, vector<vector<int>>& edges)
     }
     queue<int> queue;
     int count = 0;
-    for (size_t i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         if (degree[i] == 0) queue.push(i);
     }

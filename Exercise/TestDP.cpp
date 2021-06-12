@@ -2412,8 +2412,59 @@ void TestLeetCode1751(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1872(void)
+{
+    Logger::WriteMessage("Test Leet Code 1872");
+    LeetCodeDP leetCode;
+    vector<int> stones = { -1, 2, -3, 4, -5 };
+    int result = leetCode.stoneGameVIII(stones);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    stones = { 7,-6,5,10,5,-2,-6 };
+    result = leetCode.stoneGameVIII(stones);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    stones = { -10,-12 };
+    result = leetCode.stoneGameVIII(stones);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1883(void)
+{
+    Logger::WriteMessage("Test Leet Code 1883");
+    LeetCodeDP leetCode;
+    vector<int> dist = { 1, 3, 2 };
+    int speed = 4;
+    int hoursBefore = 2;
+    int result = leetCode.minSkips(dist, speed, hoursBefore);
+    Logger::WriteMessage("speed = " + to_string(speed) + 
+        "; hoursBefore = " + to_string(hoursBefore) +  
+        "; result = " + to_string(result));
+
+    dist = { 7,3,5,5 };
+    speed = 2;
+    hoursBefore = 10;
+    result = leetCode.minSkips(dist, speed, hoursBefore);
+    Logger::WriteMessage("speed = " + to_string(speed) +
+        "; hoursBefore = " + to_string(hoursBefore) +
+        "; result = " + to_string(result));
+
+    dist = { 7,3,5,5 };
+    speed = 1;
+    hoursBefore = 10;
+    result = leetCode.minSkips(dist, speed, hoursBefore);
+    Logger::WriteMessage("speed = " + to_string(speed) +
+        "; hoursBefore = " + to_string(hoursBefore) +
+        "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1883();
+    TestLeetCode1872();
     TestLeetCode1751();
     TestLeetCode1824();
     TestLeetCode1771();

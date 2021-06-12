@@ -1301,7 +1301,6 @@ void TestLeetCode1847(void)
     Logger::WriteMessage(result);
 }
 
-
 void TestLeetCode1851(void)
 {
     Logger::WriteMessage("Test Leet Code 1851");
@@ -1321,9 +1320,35 @@ void TestLeetCode1851(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1889(void)
+{
+    Logger::WriteMessage("Test Leet Code 1889");
+    LeetCodeSort leetCode;
+    vector<int> packages = { 2, 3, 5 };
+    vector<vector<int>> boxes = { {4, 8},{2, 8} };
+    int result = leetCode.minWastedSpace(packages, boxes);
+    Logger::WriteMessage(packages);
+    Logger::WriteMessage(boxes);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    packages = { 2, 3, 5 };
+    boxes = { {1, 4},{2, 3},{3, 4} };
+    result = leetCode.minWastedSpace(packages, boxes);
+    Logger::WriteMessage(packages);
+    Logger::WriteMessage(boxes);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    packages = { 3,5,8,10,11,12 };
+    boxes = { {12},{11, 9},{10, 5, 14} };
+    result = leetCode.minWastedSpace(packages, boxes);
+    Logger::WriteMessage(packages);
+    Logger::WriteMessage(boxes);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1889();
     TestLeetCode1851();
     TestLeetCode1847();
     TestLeetCode1846();

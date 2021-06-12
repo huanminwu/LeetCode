@@ -10872,3 +10872,65 @@ int LeetCodeMath::getMinSwaps(string num, int k)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code 1862. Sum of Floored Pairs
+/// 
+/// Hard
+/// 
+/// Given an integer array nums, return the sum of floor(nums[i] / nums[j])
+/// for all pairs of indices 0 <= i, j < nums.length in the array. Since 
+/// the answer may be too large, return it modulo 10^9 + 7.
+///
+/// The floor() function returns the integer part of the division.
+/// 
+/// Example 1:
+/// Input: nums = [2,5,9]
+/// Output: 10
+/// Explanation:
+/// floor(2 / 5) = floor(2 / 9) = floor(5 / 9) = 0
+/// floor(2 / 2) = floor(5 / 5) = floor(9 / 9) = 1
+/// floor(5 / 2) = 2
+/// floor(9 / 2) = 4
+/// floor(9 / 5) = 1
+/// We calculate the floor of the division for every pair of indices in the array then sum them up.
+///
+/// Example 2:
+/// Input: nums = [7,7,7,7,7,7,7]
+/// Output: 49
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeMath::sumOfFlooredPairs(vector<int>& nums)
+{
+    vector<int> cnt(100001);
+    vector<int> sum(100001);
+    int M = 1000000007;
+    int max_val = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        cnt[nums[i]]++;
+        max_val = max(nums[i], max_val);
+    }
+
+    for (int i = 1; i <= max_val; i++)
+    {
+        if (cnt[i] == 0) continue;
+        for (int f = 1; f * i <= max_val; f++)
+        {
+            sum[f * i] = (sum[f * i] + cnt[i]) % M;
+        }
+    }
+    int result = 0;
+    for (int i = 1; i <= max_val; i++)
+    {
+        sum[i] = (sum[i] + sum[i - 1]) % M;
+        if (cnt[i] != 0)
+        {
+            long long s = ((long long)sum[i] * (long long)cnt[i]) % (long long) M;
+            result = (result + (int)s) % M;
+        }
+    }
+    return result;
+}

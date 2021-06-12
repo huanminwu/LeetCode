@@ -3807,6 +3807,176 @@ public:
     /// 4. 1 <= valuei <= 10^6
     /// </summary>
     int maxValue(vector<vector<int>>& events, int k);
+
+    /// <summary>
+    /// Leet code 1866. Number of Ways to Rearrange Sticks With K Sticks 
+    ///                 Visible
+    /// 
+    /// Hard
+    /// 
+    /// There are n uniquely-sized sticks whose lengths are integers from 1 to 
+    /// n. You want to arrange the sticks such that exactly k sticks are 
+    /// visible from the left. A stick is visible from the left if there are no 
+    /// longer sticks to the left of it.
+    ///  
+    /// For example, if the sticks are arranged [1,3,2,5,4], then the sticks 
+    /// with lengths 1, 3, and 5 are visible from the left.
+    /// Given n and k, return the number of such arrangements. Since the answer 
+    /// may be large, return it modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: n = 3, k = 2
+    /// Output: 3
+    /// Explanation: [1,3,2], [2,3,1], and [2,1,3] are the only arrangements 
+    /// such that exactly 2 sticks are visible.
+    /// The visible sticks are underlined.
+    ///
+    /// Example 2:
+    /// Input: n = 5, k = 5
+    /// Output: 1
+    /// Explanation: [1,2,3,4,5] is the only arrangement such that all 5 sticks
+    /// are visible.
+    /// The visible sticks are underlined.
+    ///
+    /// Example 3:
+    /// Input: n = 20, k = 11
+    /// Output: 647427950
+    /// Explanation: There are 647427950 (mod 10^9 + 7) ways to rearrange the 
+    /// sticks such that exactly 11 sticks are visible.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 1000
+    /// 2. 1 <= k <= n
+    /// </summary>
+    int rearrangeSticks(int n, int k);
+
+    /// <summary>
+    /// Leet code 1872. Stone Game VIII 
+    /// 
+    /// Hard
+    /// 
+    /// Alice and Bob take turns playing a game, with Alice starting first. 
+    /// There are n stones arranged in a row. On each player's turn, while the 
+    /// number of stones is more than one, they will do the following:
+    ///
+    /// Choose an integer x > 1, and remove the leftmost x stones from the row.
+    /// Add the sum of the removed stones' values to the player's score.
+    /// Place a new stone, whose value is equal to that sum, on the left side 
+    /// of the row.
+    /// The game stops when only one stone is left in the row.
+    ///
+    /// The score difference between Alice and Bob is (Alice's score - Bob's 
+    /// score). Alice's goal is to maximize the score difference, and Bob's 
+    /// goal is the minimize the score difference.
+    /// Given an integer array stones of length n where stones[i] represents 
+    /// the value of the ith stone from the left, return the score difference 
+    /// between Alice and Bob if they both play optimally.
+    /// 
+    /// Example 1:
+    /// Input: stones = [-1,2,-3,4,-5]
+    /// Output: 5
+    /// Explanation:
+    /// - Alice removes the first 4 stones, adds (-1) + 2 + (-3) + 4 = 2 to 
+    /// her score, and places a stone of
+    /// value 2 on the left. stones = [2,-5].
+    /// - Bob removes the first 2 stones, adds 2 + (-5) = -3 to his score, 
+    /// and places a stone of value -3 on the left. stones = [-3].
+    /// The difference between their scores is 2 - (-3) = 5.
+    ///
+    /// Example 2:
+    /// Input: stones = [7,-6,5,10,5,-2,-6]
+    /// Output: 13
+    /// Explanation:
+    /// - Alice removes all stones, adds 7 + (-6) + 5 + 10 + 5 + (-2) + 
+    /// (-6) = 13 to her score, and places a
+    /// stone of value 13 on the left. stones = [13].
+    /// The difference between their scores is 13 - 0 = 13.
+    ///
+    /// Example 3:
+    /// Input: stones = [-10,-12]
+    /// Output: -22
+    /// Explanation:
+    /// - Alice can only make one move, which is to remove both stones. She 
+    ///   adds (-10) + (-12) = -22 to her
+    /// score and places a stone of value -22 on the left. stones = [-22].
+    /// The difference between their scores is (-22) - 0 = -22.
+    ///
+    /// Constraints:
+    /// 1. n == stones.length
+    /// 2. 2 <= n <= 10^5
+    /// 3. -10^4 <= stones[i] <= 10^4
+    /// </summary>
+    int stoneGameVIII(vector<int>& stones);
+
+    /// <summary>
+    /// Leet code 1883. Minimum Skips to Arrive at Meeting On Time
+    /// 
+    /// Hard
+    /// 
+    /// You are given an integer hoursBefore, the number of hours you 
+    /// have to travel to your meeting. To arrive at your meeting, you 
+    /// have to travel through n roads. The road lengths are given as 
+    /// an integer array dist of length n, where dist[i] describes the 
+    /// length of the ith road in kilometers. In addition, you are 
+    /// given an integer speed, which is the speed (in km/h) you will 
+    /// travel at.
+    ///
+    /// After you travel road i, you must rest and wait for the next 
+    /// integer hour before you can begin traveling on the next road. 
+    /// Note that you do not have to rest after traveling the last road 
+    /// because you are already at the meeting.
+    ///
+    /// For example, if traveling a road takes 1.4 hours, you must wait 
+    /// until the 2 hour mark before traveling the next road. If traveling 
+    /// a road takes exactly 2 hours, you do not need to wait.
+    /// However, you are allowed to skip some rests to be able to arrive 
+    /// on time, meaning you do not need to wait for the next integer hour. 
+    /// Note that this means you may finish traveling future roads at 
+    /// different hour marks.
+    ///
+    /// For example, suppose traveling the first road takes 1.4 hours and 
+    /// traveling the second road takes 0.6 hours. Skipping the rest after 
+    /// the first road will mean you finish traveling the second road right 
+    /// at the 2 hour mark, letting you start traveling the third road 
+    /// immediately.
+    /// Return the minimum number of skips required to arrive at the meeting 
+    /// on time, or -1 if it is impossible.
+    /// 
+    /// Example 1:
+    /// Input: dist = [1,3,2], speed = 4, hoursBefore = 2
+    /// Output: 1
+    /// Explanation:
+    /// Without skipping any rests, you will arrive in (1/4 + 3/4) + 
+    /// (3/4 + 1/4) + (2/4) = 2.5 hours.
+    /// You can skip the first rest to arrive in ((1/4 + 0) + (3/4 + 0)) + 
+    /// (2/4) = 1.5 hours.
+    /// Note that the second rest is shortened because you finish traveling 
+    /// the second road at an integer hour due to skipping the first rest.
+    ///
+    /// Example 2:
+    /// Input: dist = [7,3,5,5], speed = 2, hoursBefore = 10
+    /// Output: 2
+    /// Explanation:
+    /// Without skipping any rests, you will arrive in (7/2 + 1/2) + 
+    /// (3/2 + 1/2) + (5/2 + 1/2) + (5/2) = 11.5 hours.
+    /// You can skip the first and third rest to arrive in ((7/2 + 0) + 
+    /// (3/2 + 0)) + ((5/2 + 0) + (5/2)) = 10 hours.
+    ///
+    /// Example 3:
+    /// Input: dist = [7,3,5,5], speed = 1, hoursBefore = 10
+    /// Output: -1
+    /// Explanation: It is impossible to arrive at the meeting on time even if 
+    /// you skip all the rests.
+    ///
+    /// Constraints:
+    /// 1. n == dist.length
+    /// 2. 1 <= n <= 1000
+    /// 3. 1 <= dist[i] <= 10^5
+    /// 4. 1 <= speed <= 10^6
+    /// 5. 1 <= hoursBefore <= 10^7
+    /// </summary>
+    int minSkips(vector<int>& dist, int speed, int hoursBefore);
+
 };
 
 

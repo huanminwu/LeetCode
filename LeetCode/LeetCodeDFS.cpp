@@ -6607,6 +6607,69 @@ bool LeetCodeDFS::splitString(string s)
     return splitString(s, 0, 0);
 }
 
+/// <summary>
+/// Leet code 1879. Minimum XOR Sum of Two Arrays 
+/// </summary>
+int LeetCodeDFS::minimumXORSum(vector<int>& nums1, vector<int>& nums2,
+    int index, int bitmask, vector<int>& cache)
+{
+    if (index == nums1.size()) return 0;
+    if (cache[bitmask] != INT_MAX) return cache[bitmask];
+    for (size_t i = 0; i < nums1.size(); i++)
+    {
+        int bit = 1 << i;
+        if ((bitmask & bit) == 0)
+        {
+            int result = nums1[index] ^ nums2[i];
+            result += minimumXORSum(nums1, nums2, index + 1, bitmask | bit, cache);
+            cache[bitmask] = min(cache[bitmask], result);
+        }
+    }
+    return cache[bitmask];
+}
+
+/// <summary>
+/// Leet code 1879. Minimum XOR Sum of Two Arrays 
+/// 
+/// Hard
+/// 
+/// You are given two integer arrays nums1 and nums2 of length n.
+///
+/// The XOR sum of the two integer arrays is (nums1[0] XOR nums2[0]) + 
+/// (nums1[1] XOR nums2[1]) + ... + (nums1[n - 1] XOR nums2[n - 1]) 
+/// (0-indexed).
+///
+/// For example, the XOR sum of [1,2,3] and [3,2,1] is equal to 
+/// (1 XOR 3) + (2 XOR 2) + (3 XOR 1) = 2 + 0 + 2 = 4.
+/// Rearrange the elements of nums2 such that the resulting XOR sum 
+/// is minimized.
+///
+/// Return the XOR sum after the rearrangement.
+///
+/// Example 1:
+/// Input: nums1 = [1,2], nums2 = [2,3]
+/// Output: 2
+/// Explanation: Rearrange nums2 so that it becomes [3,2].
+/// The XOR sum is (1 XOR 3) + (2 XOR 2) = 2 + 0 = 2.
+///
+/// Example 2:
+/// Input: nums1 = [1,0,3], nums2 = [5,3,4]
+/// Output: 8
+/// Explanation: Rearrange nums2 so that it becomes [5,4,3]. 
+/// The XOR sum is (1 XOR 5) + (0 XOR 4) + (3 XOR 3) = 4 + 4 + 0 = 8.
+/// 
+/// Constraints:
+/// 1. n == nums1.length
+/// 2. n == nums2.length
+/// 3. 1 <= n <= 14
+/// 4. 0 <= nums1[i], nums2[i] <= 10^7
+/// </summary>
+int LeetCodeDFS::minimumXORSum(vector<int>& nums1, vector<int>& nums2)
+{
+    vector<int> cache(1 << nums1.size(), INT_MAX);
+    return minimumXORSum(nums1, nums2, 0, 0, cache);
+}
+
 #pragma endregion
 
 

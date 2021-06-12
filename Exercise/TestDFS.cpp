@@ -1269,8 +1269,28 @@ void TestLeetCode1849(void)
     Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1879(void)
+{
+    Logger::WriteMessage("Test Leet Code 1879");
+    LeetCodeDFS leetCode;
+    vector<int> nums1 = { 1, 2 };
+    vector<int> nums2 = { 2, 3 };
+    int result = leetCode.minimumXORSum(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,0,3 };
+    nums2 = { 5,3,4 };
+    result = leetCode.minimumXORSum(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode1879();
     TestLeetCode1849();
     TestLeetCode1815();
     TestLeetCode1766();

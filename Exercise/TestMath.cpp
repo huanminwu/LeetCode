@@ -3777,8 +3777,30 @@ void TestLeetCode1850(void)
 
 }
 
+void TestLeetCode1862(void)
+{
+    Logger::WriteMessage("Test Leet Code 1862");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 2, 5, 9 };
+    int result = leetCode.sumOfFlooredPairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7,7,7,7,7,7,7 };
+    result = leetCode.sumOfFlooredPairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,3,3,9,9,18,18 };
+    result = leetCode.sumOfFlooredPairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1862();
     TestLeetCode1850();
     TestLeetCode1837();
     TestLeetCode1830();
