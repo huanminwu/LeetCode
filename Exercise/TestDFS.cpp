@@ -1288,8 +1288,32 @@ void TestLeetCode1879(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1900(void)
+{
+    Logger::WriteMessage("Test Leet Code 1900");
+    LeetCodeDFS leetCode;
+    int n = 11;
+    int firstPlayer = 2;
+    int secondPlayer = 4;
+    vector<int> result = leetCode.earliestAndLatest(n, firstPlayer, secondPlayer);
+    Logger::WriteMessage("n = " + to_string(n) +
+        "; firstPlayer = " + to_string(firstPlayer) +
+        "; secondPlayer = " + to_string(secondPlayer));
+    Logger::WriteMessage(result);
+ 
+    n = 5;
+    firstPlayer = 1;
+    secondPlayer = 5;
+    result = leetCode.earliestAndLatest(n, firstPlayer, secondPlayer);
+    Logger::WriteMessage("n = " + to_string(n) +
+        "; firstPlayer = " + to_string(firstPlayer) +
+        "; secondPlayer = " + to_string(secondPlayer));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode1900();
     TestLeetCode1879();
     TestLeetCode1849();
     TestLeetCode1815();

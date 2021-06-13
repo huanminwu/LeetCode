@@ -4180,8 +4180,26 @@ void TestLeetCode1844(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode1896(void)
+{
+    Logger::WriteMessage("Test Leet Code 1896");
+    LeetCodeString leetCode;
+    string expression = "1&(0|1)";
+    int result = leetCode.minOperationsToFlip(expression);
+    Logger::WriteMessage("expression = " + expression + "; result = " + to_string(result));
+
+    expression = "(0&0)&(0&0&0)";
+    result = leetCode.minOperationsToFlip(expression);
+    Logger::WriteMessage("expression = " + expression + "; result = " + to_string(result));
+
+    expression = "(0|(1|0&1))";
+    result = leetCode.minOperationsToFlip(expression);
+    Logger::WriteMessage("expression = " + expression + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1896();
     TestLeetCode1844();
     TestLeetCode1839();
     TestLeetCode1794();

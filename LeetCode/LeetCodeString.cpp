@@ -14392,4 +14392,174 @@ string LeetCodeString::replaceDigits(string s)
     return result;
 }
 
+/// <summary>
+/// Leet code 1896. Minimum Cost to Change the Final Value of Expression
+/// </summary>
+void LeetCodeString::minOperationsToFlip_FreeTree(LogicOperation* tree)
+{
+    if (tree == nullptr) return;
+    minOperationsToFlip_FreeTree(tree->left);
+    tree->left = nullptr;
+    minOperationsToFlip_FreeTree(tree->right);
+    tree->right = nullptr;
+    delete tree;
+}
+
+/// <summary>
+/// Leet code 1896. Minimum Cost to Change the Final Value of Expression
+/// </summary>
+LogicOperation* LeetCodeString::minOperationsToFlip_BuildTree(string& expression, int &index)
+{
+    LogicOperation* root = nullptr;
+    while (index < (int)expression.size())
+    {
+        LogicOperation* node = nullptr;
+        if (expression[index] == ')') break;
+        else if (expression[index] == '(')
+        {
+            node = minOperationsToFlip_BuildTree(expression, ++index);
+        }
+        else if (expression[index] == '0' || expression[index] == '1')
+        {
+            node = new LogicOperation(expression[index] - '0', '#');
+        }
+        else if (expression[index] == '|' || expression[index] == '&')
+        {
+            node = new LogicOperation(-1, expression[index]);
+        }
+        if (root == nullptr)
+        {
+            root = node;
+        }
+        else if (root->left == nullptr || root->right != nullptr)
+        {
+            node->left = root;
+            root = node;
+        }
+        else
+        {
+            root->right = node;
+            if (root->operation == '|')
+            {
+                root->value = (root->left->value | root->right->value);
+            }
+            else
+            {
+                root->value = (root->left->value & root->right->value);
+            }
+        }
+        index++;
+    }
+    return root;
+}
+
+/// <summary>
+/// Leet code 1896. Minimum Cost to Change the Final Value of Expression
+/// </summary>
+int LeetCodeString::minOperationsToFlip_FlipTree(LogicOperation* root)
+{
+    if (root->operation == '#') return 1;
+    int left = root->left->value;
+    int right = root->right->value;
+    int result = 0;
+    if (root->operation == '&')
+    {
+        if ((left & right) == 0)
+        {
+            if ((left | right) == 1) return 1;
+            else
+            {
+                result = 1 + min(minOperationsToFlip_FlipTree(root->left), 
+                                 minOperationsToFlip_FlipTree(root->right));
+            }
+        }
+        else
+        {
+            result =  min(minOperationsToFlip_FlipTree(root->left), 
+                          minOperationsToFlip_FlipTree(root->right));
+        }
+    }
+    else
+    {
+        if ((left | right) == 1)
+        {
+            if ((left & right) == 0) return 1;
+            else
+            {
+                result = 1 + min(minOperationsToFlip_FlipTree(root->left),
+                                 minOperationsToFlip_FlipTree(root->right));
+            }
+        }
+        else
+        {
+            result = min(minOperationsToFlip_FlipTree(root->left),
+                         minOperationsToFlip_FlipTree(root->right));
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1896. Minimum Cost to Change the Final Value of Expression
+/// 
+/// Hard
+/// 
+/// You are given a valid boolean expression as a string expression 
+/// consisting of the characters '1','0','&' (bitwise AND operator),'|' 
+/// (bitwise OR operator),'(', and ')'.
+///
+/// For example, "()1|1" and "(1)&()" are not valid while "1", 
+/// "(((1))|(0))", and "1|(0&(1))" are valid expressions.
+/// Return the minimum cost to change the final value of the expression.
+/// 
+/// For example, if expression = "1|1|(0&0)&1", its value is 
+/// 1|1|(0&0)&1 = 1|1|0&1 = 1|0&1 = 1&1 = 1. We want to apply operations 
+/// so that the new expression evaluates to 0.
+/// The cost of changing the final value of an expression is the number 
+/// of operations performed on the expression. The types of operations 
+/// are described as follows:
+///
+/// Turn a '1' into a '0'.
+/// Turn a '0' into a '1'.
+/// Turn a '&' into a '|'.
+/// Turn a '|' into a '&'.
+/// Note: '&' does not take precedence over '|' in the order of 
+/// calculation. Evaluate parentheses first, then in left-to-right order.
+///
+/// Example 1:
+/// Input: expression = "1&(0|1)"
+/// Output: 1
+/// Explanation: We can turn "1&(0|1)" into "1&(0&1)" by changing the '|' 
+/// to a '&' using 1 operation.
+/// The new expression evaluates to 0. 
+///
+/// Example 2:
+/// Input: expression = "(0&0)&(0&0&0)"
+/// Output: 3
+/// Explanation: We can turn "(0&0)&(0&0&0)" into "(0|1)|(0&0&0)" using 
+/// 3 operations.
+/// The new expression evaluates to 1.
+///
+/// Example 3:
+/// Input: expression = "(0|(1|0&1))"
+/// Output: 1
+/// Explanation: We can turn "(0|(1|0&1))" into "(0|(0|0&1))" using 
+/// 1 operation.
+/// The new expression evaluates to 0.
+///
+/// Constraints:
+/// 1. 1 <= expression.length <= 10^5
+/// 2. expression only contains '1','0','&','|','(', and ')'
+/// 3. All parentheses are properly matched.
+/// 4. There will be no empty parentheses (i.e: "()" is not a substring 
+///    of expression).
+/// </summary>
+int LeetCodeString::minOperationsToFlip(string expression)
+{
+    int index = 0;
+    LogicOperation* root = minOperationsToFlip_BuildTree(expression, index);
+    int result = minOperationsToFlip_FlipTree(root);
+    minOperationsToFlip_FreeTree(root);
+    return result;
+}
 #pragma endregion

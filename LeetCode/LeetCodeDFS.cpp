@@ -6670,6 +6670,115 @@ int LeetCodeDFS::minimumXORSum(vector<int>& nums1, vector<int>& nums2)
     return minimumXORSum(nums1, nums2, 0, 0, cache);
 }
 
+/// <summary>
+/// Leet code 1900. The Earliest and Latest Rounds Where Players Compete
+/// </summary>
+void LeetCodeDFS::earliestAndLatest(int bitmask, int i, int j, int n, int first, int second, int round, vector<int>& result)
+{
+    while (i < j)
+    {
+        if ((bitmask & (1 << i)) != 0)
+        {
+            i++;
+        }
+        else if ((bitmask & (1 << j)) != 0)
+        {
+            j--;
+        }
+        else
+        {
+            break;
+        }
+    }
+    if (i >= j)
+    {
+        earliestAndLatest(bitmask, 0, n - 1, n, first, second, round + 1, result);
+    }
+    else if (i == first && j == second)
+    {
+        result[0] = min(result[0], round);
+        result[1] = max(result[1], round);
+    }
+    else
+    {
+        if (i != first && i != second)
+        {
+            earliestAndLatest((bitmask | (1 << i)), i + 1, j - 1, n, first, second, round, result);
+        }
+        if (j != first && j != second)
+        {
+            earliestAndLatest((bitmask | (1 << j)), i + 1, j - 1, n, first, second, round, result);
+        }
+    }
+}
+
+/// <summary>
+/// Leet code 1900. The Earliest and Latest Rounds Where Players Compete
+/// 
+/// Hard
+/// 
+/// There is a tournament where n players are participating. The players 
+/// are standing in a single row and are numbered from 1 to n based on 
+/// their initial standing position (player 1 is the first player in the 
+/// row, player 2 is the second player in the row, etc.).
+///
+/// The tournament consists of multiple rounds (starting from round 
+/// number 1). In each round, the ith player from the front of the row 
+/// competes against the ith player from the end of the row, and the 
+/// winner advances to the next round. When the number of players is 
+/// odd for the current round, the player in the middle automatically 
+/// advances to the next round.
+///
+/// For example, if the row consists of players 1, 2, 4, 6, 7 
+/// Player 1 competes against player 7.
+/// Player 2 competes against player 6.
+/// Player 4 automatically advances to the next round.
+/// After each round is over, the winners are lined back up in the row 
+/// based on the original ordering assigned to them initially (ascending 
+/// order).
+///
+/// The players numbered firstPlayer and secondPlayer are the best in 
+/// the tournament. They can win against any other player before they 
+/// compete against each other. If any two other players compete against 
+/// each other, either of them might win, and thus you may choose the 
+/// outcome of this round.
+///
+/// Given the integers n, firstPlayer, and secondPlayer, return an 
+/// integer array containing two values, the earliest possible round 
+/// number and the latest possible round number in which these two players 
+/// will compete against each other, respectively.
+///
+/// Example 1:
+/// Input: n = 11, firstPlayer = 2, secondPlayer = 4
+/// Output: [3,4]
+/// Explanation:
+/// One possible scenario which leads to the earliest round number:
+/// First round: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+/// Second round: 2, 3, 4, 5, 6, 11
+/// Third round: 2, 3, 4
+/// One possible scenario which leads to the latest round number:
+/// First round: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+/// Second round: 1, 2, 3, 4, 5, 6
+/// Third round: 1, 2, 4
+/// Fourth round: 2, 4
+///
+/// Example 2:
+/// Input: n = 5, firstPlayer = 1, secondPlayer = 5
+/// Output: [1,1]
+/// Explanation: The players numbered 1 and 5 compete in the first round.
+/// There is no way to make them compete in any other round.
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 28
+/// 2. 1 <= firstPlayer < secondPlayer <= n
+/// </summary>
+vector<int> LeetCodeDFS::earliestAndLatest(int n, int first, int second)
+{
+    vector<int> result = { INT_MAX, INT_MIN };
+    earliestAndLatest(0, 0, n - 1, n, first -1, second -1, 1, result);
+    return result;
+}
+
 #pragma endregion
 
 
