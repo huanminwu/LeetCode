@@ -3797,9 +3797,28 @@ void TestLeetCode1862(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1860(void)
+{
+    Logger::WriteMessage("Test Leet Code 1860");
+    LeetCodeMath leetCode;
+    int memory1 = 2;
+    int memory2 = 2;
+    vector<int> result = leetCode.memLeak(memory1, memory2);
+    Logger::WriteMessage("memory1 = " + to_string(memory1));
+    Logger::WriteMessage("memory2 = " + to_string(memory2));
+    Logger::WriteMessage(result);
+
+    memory1 = 8;
+    memory2 = 11;
+    result = leetCode.memLeak(memory1, memory2);
+    Logger::WriteMessage("memory1 = " + to_string(memory1));
+    Logger::WriteMessage("memory2 = " + to_string(memory2));
+    Logger::WriteMessage(result);
+}
 
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1860();
     TestLeetCode1862();
     TestLeetCode1850();
     TestLeetCode1837();

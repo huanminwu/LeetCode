@@ -4197,8 +4197,107 @@ void TestLeetCode1896(void)
     Logger::WriteMessage("expression = " + expression + "; result = " + to_string(result));
 }
 
+void TestLeetCode1859(void)
+{
+    Logger::WriteMessage("Test Leet Code 1859");
+    LeetCodeString leetCode;
+
+    string s = "is2 sentence4 This1 a3";
+    string result = leetCode.sortSentence(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "Myself2 Me1 I4 and3";
+    result = leetCode.sortSentence(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+}
+
+void TestLeetCode1869(void)
+{
+    Logger::WriteMessage("Test Leet Code 1869");
+    LeetCodeString leetCode;
+
+    string s = "1101";
+    bool result = leetCode.checkZeroOnes(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string) (result ? "true" : "false"));
+
+    s = "111000";
+    result = leetCode.checkZeroOnes(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "110100010";
+    result = leetCode.checkZeroOnes(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1876(void)
+{
+    Logger::WriteMessage("Test Leet Code 1876");
+    LeetCodeString leetCode;
+
+    string s = "xyzzaz";
+    int result = leetCode.countGoodSubstrings(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aababcabc";
+    result = leetCode.countGoodSubstrings(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode1880(void)
+{
+    Logger::WriteMessage("Test Leet Code 1880");
+    LeetCodeString leetCode;
+    string firstWord = "acb";
+    string secondWord = "cba";
+    string targetWord = "cdb";
+    bool result = leetCode.isSumEqual(firstWord, secondWord, targetWord);
+    Logger::WriteMessage("firstWord = " + firstWord +
+        "; secondWord = " + secondWord +
+        "; targetWord = " + targetWord + 
+        "; result = " + (string) (result ? "true" : "false"));
+
+    firstWord = "aaa";
+    secondWord = "a";
+    targetWord = "aab";
+    result = leetCode.isSumEqual(firstWord, secondWord, targetWord);
+    Logger::WriteMessage("firstWord = " + firstWord +
+        "; secondWord = " + secondWord +
+        "; targetWord = " + targetWord +
+        "; result = " + (string)(result ? "true" : "false"));
+
+    firstWord = "aaa";
+    secondWord = "a";
+    targetWord = "aaaa";
+    result = leetCode.isSumEqual(firstWord, secondWord, targetWord);
+    Logger::WriteMessage("firstWord = " + firstWord +
+        "; secondWord = " + secondWord +
+        "; targetWord = " + targetWord +
+        "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1897(void)
+{
+    Logger::WriteMessage("Test Leet Code 1897");
+    LeetCodeString leetCode;
+    vector<string> words = { "abc", "aabc", "bc" };
+    bool result = leetCode.makeEqual(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    words = { "ab","a" };
+    result = leetCode.makeEqual(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1897();
+    TestLeetCode1880();
+    TestLeetCode1876();
+    TestLeetCode1869();
+    TestLeetCode1859();
     TestLeetCode1896();
     TestLeetCode1844();
     TestLeetCode1839();

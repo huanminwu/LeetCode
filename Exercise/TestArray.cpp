@@ -5719,8 +5719,44 @@ void TestLeetCode1855(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1886(void)
+{
+    Logger::WriteMessage("Test Leet Code 1886");
+    LeetCodeArray leetCode;
+    vector<vector<int>> mat = { {0, 1},{1, 0} };
+    vector<vector<int>> target = { {1, 0},{0, 1} };
+    bool result = leetCode.findRotation(mat, target);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    mat = { {0, 1},{1, 1} };
+    target = { {1, 0},{0, 1} };
+    result = leetCode.findRotation(mat, target);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    mat = { {0, 0, 0},{0, 1, 0},{1, 1, 1} };
+    target = { {1, 1, 1},{0, 1, 0},{0, 0, 0} };
+    result = leetCode.findRotation(mat, target);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    
+    
+    mat = { {1, 1},{0, 1} };
+    target = { {1, 1},{1, 0} };
+    result = leetCode.findRotation(mat, target);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1886();
     TestLeetCode1855();
     TestLeetCode1848();
     TestLeetCode1840();

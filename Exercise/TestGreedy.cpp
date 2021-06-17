@@ -1028,8 +1028,46 @@ void TestLeetCode1854(void)
     
 }
 
+void TestLeetCode1893(void)
+{
+    Logger::WriteMessage("Test Leet Code 1893");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> ranges = { {1, 2},{3, 4},{5, 6} };
+    int left = 2;
+    int right = 5;
+    bool result = leetCode.isCovered(ranges, left, right);
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage("left = " + to_string(left) + "; right = " + to_string(right) + 
+        "; result = " + (string)(result ? "true" : "false"));
+
+    ranges = { {1, 10},{10, 20} };
+    left = 21;
+    right = 21;
+    result = leetCode.isCovered(ranges, left, right);
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage("left = " + to_string(left) + "; right = " + to_string(right) +
+        "; result = " + (string)(result ? "true" : "false"));
+
+    ranges = { {1, 2},{4, 10} };
+    left = 3;
+    right = 5;
+    result = leetCode.isCovered(ranges, left, right);
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage("left = " + to_string(left) + "; right = " + to_string(right) +
+        "; result = " + (string)(result ? "true" : "false"));
+
+    ranges = { {1, 2},{4, 10} };
+    left = 5;
+    right = 6;
+    result = leetCode.isCovered(ranges, left, right);
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage("left = " + to_string(left) + "; right = " + to_string(right) +
+        "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode1893();
     TestLeetCode1854();
     TestLeetCode1792();
     TestLeetCode757();

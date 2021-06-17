@@ -704,8 +704,29 @@ void TestLeetCode1835(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1863(void)
+{
+    Logger::WriteMessage("Test Leet Code 1863");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 3 };
+    int result = leetCode.subsetXORSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,1,6 };
+    result = leetCode.subsetXORSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3, 4, 5, 6, 7, 8 };
+    result = leetCode.subsetXORSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode1863();
     TestLeetCode1835();
     TestLeetCode1829();
     TestLeetCode1803();

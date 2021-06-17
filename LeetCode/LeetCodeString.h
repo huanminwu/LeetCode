@@ -7733,6 +7733,213 @@ public:
     ///    of expression).
     /// </summary>
     int minOperationsToFlip(string expression);
+
+    /// <summary>
+    /// Leet code 1859. Sorting the Sentence
+    /// 
+    /// Easy
+    /// 
+    /// A sentence is a list of words that are separated by a single space 
+    /// with no leading or trailing spaces. Each word consists of lowercase 
+    /// and uppercase English letters.
+    ///
+    /// A sentence can be shuffled by appending the 1-indexed word position to 
+    /// each word then rearranging the words in the sentence.
+    ///
+    /// For example, the sentence "This is a sentence" can be shuffled as 
+    /// "sentence4 a3 is2 This1" or "is2 sentence4 This1 a3".
+    /// Given a shuffled sentence s containing no more than 9 words, 
+    /// reconstruct and return the original sentence.
+    /// 
+    /// Example 1:
+    /// Input: s = "is2 sentence4 This1 a3"
+    /// Output: "This is a sentence"
+    /// Explanation: Sort the words in s to their original positions "This1 
+    /// is2 a3 sentence4", then remove the numbers.
+    ///
+    /// Example 2:
+    /// Input: s = "Myself2 Me1 I4 and3"
+    /// Output: "Me Myself and I"
+    /// Explanation: Sort the words in s to their original positions "Me1 
+    /// Myself2 and3 I4", then remove the numbers.
+    ///
+    /// Constraints:
+    /// 1. 2 <= s.length <= 200
+    /// 2. s consists of lowercase and uppercase English letters, spaces, and 
+    ///    digits from 1 to 9.
+    /// 3. The number of words in s is between 1 and 9.
+    /// 4. The words in s are separated by a single space.
+    /// 5. s contains no leading or trailing spaces.
+    /// </summary>
+    string sortSentence(string s);
+
+    /// <summary>
+    /// Leet code 1869. Longer Contiguous Segments of Ones than Zeros
+    /// 
+    /// Easy
+    /// 
+    /// Given a binary string s, return true if the longest contiguous segment 
+    /// of 1s is strictly longer than the longest contiguous segment of 0s in 
+    /// s. Return false otherwise.
+    ///
+    /// For example, in s = "110100010" the longest contiguous segment of 1s 
+    /// has length 2, and the longest contiguous segment of 0s has length 3.
+    /// Note that if there are no 0s, then the longest contiguous segment of 
+    /// 0s is considered to have length 0. The same applies if there are no 1s.
+    /// 
+    /// Example 1:
+    /// Input: s = "1101"
+    /// Output: true
+    /// Explanation:
+    /// The longest contiguous segment of 1s has length 2: "1101"
+    /// The longest contiguous segment of 0s has length 1: "1101"
+    /// The segment of 1s is longer, so return true.
+    ///
+    /// Example 2:
+    /// Input: s = "111000"
+    /// Output: false
+    /// Explanation:
+    /// The longest contiguous segment of 1s has length 3: "111000"
+    /// The longest contiguous segment of 0s has length 3: "111000"
+    /// The segment of 1s is not longer, so return false.
+    ///
+    /// Example 3:
+    /// Input: s = "110100010"
+    /// Output: false
+    /// Explanation:
+    /// The longest contiguous segment of 1s has length 2: "110100010"
+    /// The longest contiguous segment of 0s has length 3: "110100010"
+    /// The segment of 1s is not longer, so return false.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s[i] is either '0' or '1'.
+    /// </summary>
+    bool checkZeroOnes(string s);
+
+    /// <summary>
+    /// Leet code 1876. Substrings of Size Three with Distinct Characters
+    /// 
+    /// Easy
+    /// 
+    /// A string is good if there are no repeated characters.
+    ///
+    /// Given a string s return the number of good substrings of length 
+    /// three in s.
+    ///
+    /// Note that if there are multiple occurrences of the same substring, 
+    /// every occurrence should be counted.
+    ///
+    /// A substring is a contiguous sequence of characters in a string.
+    ///
+    /// Example 1:
+    /// 
+    /// Input: s = "xyzzaz"
+    /// Output: 1
+    /// Explanation: There are 4 substrings of size 3: "xyz", "yzz", "zza", 
+    /// and "zaz". 
+    /// The only good substring of length 3 is "xyz".
+    ///
+    /// Example 2:
+    /// Input: s = "aababcabc"
+    /// Output: 4
+    /// Explanation: There are 7 substrings of size 3: "aab", "aba", "bab", 
+    /// "abc", "bca", "cab", and "abc".
+    /// The good substrings are "abc", "bca", "cab", and "abc".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s consists of lowercase English letters.
+    /// </summary>
+    int countGoodSubstrings(string s);
+
+    /// <summary>
+    /// Leet code 1880. Check if Word Equals Summation of Two Words
+    /// 
+    /// Easy
+    /// 
+    /// The letter value of a letter is its position in the alphabet starting 
+    /// from 0 (i.e. 'a' -> 0, 'b' -> 1, 'c' -> 2, etc.).
+    ///
+    /// The numerical value of some string of lowercase English letters s is 
+    /// the concatenation of the letter values of each letter in s, which is 
+    /// then converted into an integer.
+    ///
+    /// For example, if s = "acb", we concatenate each letter's letter value, 
+    /// resulting in "021". After converting it, we get 21.
+    /// You are given three strings firstWord, secondWord, and targetWord, 
+    /// each consisting of lowercase English letters 'a' through 'j' inclusive.
+    ///
+    /// Return true if the summation of the numerical values of firstWord and 
+    /// secondWord equals the numerical value of targetWord, or false otherwise.
+    ///  
+    /// Example 1:
+    /// Input: firstWord = "acb", secondWord = "cba", targetWord = "cdb"
+    /// Output: true
+    /// Explanation:
+    /// The numerical value of firstWord is "acb" -> "021" -> 21.
+    /// The numerical value of secondWord is "cba" -> "210" -> 210.
+    /// The numerical value of targetWord is "cdb" -> "231" -> 231.
+    /// We return true because 21 + 210 == 231.
+    ///
+    /// Example 2:
+    /// Input: firstWord = "aaa", secondWord = "a", targetWord = "aab"
+    /// Output: false
+    /// Explanation: 
+    /// The numerical value of firstWord is "aaa" -> "000" -> 0.
+    /// The numerical value of secondWord is "a" -> "0" -> 0.
+    /// The numerical value of targetWord is "aab" -> "001" -> 1.
+    /// We return false because 0 + 0 != 1.
+    ///
+    /// Example 3:
+    /// Input: firstWord = "aaa", secondWord = "a", targetWord = "aaaa"
+    /// Output: true
+    /// Explanation: 
+    /// The numerical value of firstWord is "aaa" -> "000" -> 0.
+    /// The numerical value of secondWord is "a" -> "0" -> 0.
+    /// The numerical value of targetWord is "aaaa" -> "0000" -> 0.
+    /// We return true because 0 + 0 == 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= firstWord.length, secondWord.length, targetWord.length <= 8
+    /// 2. firstWord, secondWord, and targetWord consist of lowercase English 
+    ///    letters from 'a' to 'j' inclusive.
+    /// </summary>
+    bool isSumEqual(string firstWord, string secondWord, string targetWord);
+
+    /// <summary>
+    /// Leet code 1897. Redistribute Characters to Make All Strings Equal
+    /// 
+    /// Easy
+    /// 
+    /// You are given an array of strings words (0-indexed).
+    ///
+    /// In one operation, pick two distinct indices i and j, where 
+    /// words[i] is a non-empty string, and move any character from words[i] 
+    /// to any position in words[j].
+    ///
+    /// Return true if you can make every string in words equal using any 
+    /// number of operations, and false otherwise.
+    /// 
+    /// Example 1:
+    /// Input: words = ["abc","aabc","bc"]
+    /// Output: true
+    /// Explanation: Move the first 'a' in words[1] to the front of words[2],
+    /// to make words[1] = "abc" and words[2] = "abc".
+    /// All the strings are now equal to "abc", so return true.
+    ///
+    /// Example 2:
+    /// Input: words = ["ab","a"]
+    /// Output: false
+    /// Explanation: It is impossible to make all the strings equal using the 
+    /// operation.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= words.length <= 100
+    /// 2. 1 <= words[i].length <= 100
+    /// 3. words[i] consists of lowercase English letters.
+    /// </summary>
+    bool makeEqual(vector<string>& words);
 #pragma endregion
 };
 
