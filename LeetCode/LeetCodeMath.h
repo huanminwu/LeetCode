@@ -6479,5 +6479,118 @@ public:
     /// 2. You are given an array of strings words (0-indexed).
     /// </summary>
     vector<int> memLeak(int memory1, int memory2);
+
+    /// <summary>
+    /// Leet code 1916. Count Ways to Build Rooms in an Ant Colony
+    /// </summary>
+    int waysToBuildRooms(vector<vector<int>>& tree, int root, long long& product);
+
+    /// <summary>
+    /// Leet code 1916. Count Ways to Build Rooms in an Ant Colony
+    /// 
+    /// Hard
+    /// 
+    /// You are an ant tasked with adding n new rooms numbered 0 to n-1 to 
+    /// your colony. You are given the expansion plan as a 0-indexed integer 
+    /// array of length n, prevRoom, where prevRoom[i] indicates that you 
+    /// must build room prevRoom[i] before building room i, and these two 
+    /// rooms must be connected directly. Room 0 is already built, so 
+    /// prevRoom[0] = -1. The expansion plan is given such that once all 
+    /// the rooms are built, every room will be reachable from room 0.
+    ///
+    /// You can only build one room at a time, and you can travel freely 
+    /// between rooms you have already built only if they are connected. 
+    /// You can choose to build any room as long as its previous room is 
+    /// already built.
+    ///
+    /// Return the number of different orders you can build all the rooms in. 
+    /// Since the answer may be large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: prevRoom = [-1,0,1]
+    /// Output: 1
+    /// Explanation: There is only one way to build the additional 
+    /// rooms: 0 -> 1 -> 2
+    ///
+    /// Example 2:
+    ///Input: prevRoom = [-1,0,0,1,2]
+    /// Output: 6
+    /// Explanation:
+    /// The 6 ways are:
+    /// 0 -> 1 -> 3 -> 2 -> 4
+    /// 0 -> 2 -> 4 -> 1 -> 3
+    /// 0 -> 1 -> 2 -> 3 -> 4
+    /// 0 -> 1 -> 2 -> 4 -> 3
+    /// 0 -> 2 -> 1 -> 3 -> 4
+    /// 0 -> 2 -> 1 -> 4 -> 3
+    ///
+    /// Constraints:
+    /// 1. n == prevRoom.length
+    /// 2. 2 <= n <= 10^5
+    /// 3. prevRoom[0] == -1
+    /// 3. 0 <= prevRoom[i] < n for all 1 <= i < n
+    /// 4. Every room is reachable from room 0 once all the rooms are built.
+    /// </summary>
+    int waysToBuildRooms(vector<int>& prevRoom);
+
+    /// <summary>
+    /// Leet code 1906. Minimum Absolute Difference Queries
+    /// 
+    /// Hard
+    /// 
+    /// The minimum absolute difference of an array a is defined as the 
+    /// minimum value of |a[i] - a[j]|, where 0 <= i < j < a.length and 
+    /// a[i] != a[j]. If all elements of a are the same, the minimum 
+    /// absolute difference is -1.
+    ///
+    /// For example, the minimum absolute difference of the array 
+    /// [5,2,3,7,2] is |2 - 3| = 1. Note that it is not 0 because 
+    /// a[i] and a[j] must be different.
+    /// You are given an integer array nums and the array queries where 
+    /// queries[i] = [li, ri]. For each query i, compute the minimum 
+    /// absolute difference of the subarray nums[li...ri] containing the 
+    /// elements of nums between the 0-based indices li and ri (inclusive).
+    ///
+    /// Return an array ans where ans[i] is the answer to the ith query.
+    /// 
+    /// A subarray is a contiguous sequence of elements in an array.
+    ///
+    /// The value of |x| is defined as:
+    /// 1. x if x >= 0.
+    /// 2. -x if x < 0.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,3,4,8], queries = [[0,1],[1,2],[2,3],[0,3]]
+    /// Output: [2,1,4,1]
+    /// Explanation: The queries are processed as follows:
+    /// - queries[0] = [0,1]: The subarray is [1,3] and the minimum absolute 
+    ///   difference is |1-3| = 2.
+    /// - queries[1] = [1,2]: The subarray is [3,4] and the minimum absolute 
+    ///   difference is |3-4| = 1.
+    /// - queries[2] = [2,3]: The subarray is [4,8] and the minimum absolute 
+    ///   difference is |4-8| = 4.
+    /// - queries[3] = [0,3]: The subarray is [1,3,4,8] and the minimum 
+    ///   absolute difference is |3-4| = 1.
+    ///
+    /// Example 2:
+    /// Input: nums = [4,5,2,2,7,10], queries = [[2,3],[0,2],[0,5],[3,5]]
+    /// Output: [-1,1,1,3]
+    /// Explanation: The queries are processed as follows:
+    /// - queries[0] = [2,3]: The subarray is [2,2] and the minimum absolute 
+    ///   difference is -1 because all the elements are the same.
+    /// - queries[1] = [0,2]: The subarray is [4,5,2] and the minimum absolute 
+    ///   difference is |4-5| = 1.
+    /// - queries[2] = [0,5]: The subarray is [4,5,2,2,7,10] and the minimum 
+    ///   absolute difference is |4-5| = 1.
+    /// - queries[3] = [3,5]: The subarray is [2,7,10] and the minimum absolute
+    ///    difference is |7-10| = 3.
+    ///
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 100
+    /// 3. 1 <= queries.length <= 2 * 10^4
+    /// 4. 0 <= li < ri < nums.length
+    /// </summary>
+    vector<int> minDifference(vector<int>& nums, vector<vector<int>>& queries);
 };
 #endif

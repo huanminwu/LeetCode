@@ -5754,8 +5754,58 @@ void TestLeetCode1886(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1861(void)
+{
+    Logger::WriteMessage("Test Leet Code 1861");
+    LeetCodeArray leetCode;
+    vector<vector<char>> box = { {'#', '.', '#'}};
+    vector<vector<char>> result = leetCode.rotateTheBox(box);
+    Logger::WriteMessage(box);
+    Logger::WriteMessage(result);
+ 
+    box =
+    {
+        {'#', '.', '*', '.'},
+        {'#', '#', '*', '.'}
+    };
+    result = leetCode.rotateTheBox(box);
+    Logger::WriteMessage(box);
+    Logger::WriteMessage(result);
+
+    box =
+    {
+        {'#','#','*','.','*','.'},
+        {'#','#','#','*','.','.'},
+        {'#','#','#','.','#','.'}
+    };
+    result = leetCode.rotateTheBox(box);
+    Logger::WriteMessage(box);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1914(void)
+{
+    Logger::WriteMessage("Test Leet Code 1914");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {40, 10},{30, 20} };
+    int k = 1;
+    vector<vector<int>> result = leetCode.rotateGrid(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    grid = { {1, 2, 3, 4},{5, 6, 7, 8},{9, 10, 11, 12},{13, 14, 15, 16} };
+    k = 2;
+    result = leetCode.rotateGrid(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1914();
+    TestLeetCode1861();
     TestLeetCode1886();
     TestLeetCode1855();
     TestLeetCode1848();

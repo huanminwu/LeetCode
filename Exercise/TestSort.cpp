@@ -1346,8 +1346,50 @@ void TestLeetCode1889(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1909(void)
+{
+    Logger::WriteMessage("Test Leet Code 1909");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 2, 10, 5, 7 };
+    bool result = leetCode.canBeIncreasing(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" :"false"));
+
+    nums = { 2,3,1,2 };
+    result = leetCode.canBeIncreasing(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,1,1 };
+    result = leetCode.canBeIncreasing(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,2,3 };
+    result = leetCode.canBeIncreasing(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1913(void)
+{
+    Logger::WriteMessage("Test Leet Code 1913");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 5, 6, 2, 7, 4 };
+    int result = leetCode.maxProductDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,2,5,9,7,4,8 };
+    result = leetCode.maxProductDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1913();
+    TestLeetCode1909();
     TestLeetCode1889();
     TestLeetCode1851();
     TestLeetCode1847();

@@ -3816,8 +3816,44 @@ void TestLeetCode1860(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1916(void)
+{
+    Logger::WriteMessage("Test Leet Code 1916");
+    LeetCodeMath leetCode;
+    vector<int> prevRoom = { -1, 0, 1 };
+    int result = leetCode.waysToBuildRooms(prevRoom);
+    Logger::WriteMessage(prevRoom);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prevRoom = { -1,0,0,1,2 };
+    result = leetCode.waysToBuildRooms(prevRoom);
+    Logger::WriteMessage(prevRoom);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1906(void)
+{
+    Logger::WriteMessage("Test Leet Code 1906");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 3, 4, 8 };
+    vector<vector<int>> queries = { {0, 1},{1, 2},{2, 3},{0, 3} };
+    vector<int> result = leetCode.minDifference(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 4,5,2,2,7,10 };
+    queries = { {2, 3},{0, 2},{0, 5},{3, 5} };
+    result = leetCode.minDifference(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1916();
+    TestLeetCode1906();
     TestLeetCode1860();
     TestLeetCode1862();
     TestLeetCode1850();

@@ -16425,4 +16425,186 @@ bool LeetCodeArray::findRotation(vector<vector<int>>& mat, vector<vector<int>>& 
     }
     return true;
 }
+
+/// <summary>
+/// Leet code 1861. Rotating the Box
+/// 
+/// Medium
+/// 
+/// You are given an m x n matrix of characters box representing a 
+/// side-view of a box. Each cell of the box is one of the following:
+///  
+/// A stone '#'
+/// A stationary obstacle '*'
+/// Empty '.'
+/// The box is rotated 90 degrees clockwise, causing some of the stones 
+/// to fall due to gravity. Each stone falls down until it lands on an 
+/// obstacle, another stone, or the bottom of the box. Gravity does not 
+/// affect the obstacles' positions, and the inertia from the box's 
+/// rotation does not affect the stones' horizontal positions.
+///
+/// It is guaranteed that each stone in box rests on an obstacle, another 
+/// stone, or the bottom of the box.
+///
+/// Example 1:
+/// Input: box = [["#",".","#"]]
+/// Output: [["."],
+///         ["#"],
+///         ["#"]]
+///
+/// Example 2:
+/// Input: box = [["#",".","*","."],
+///          ["#","#","*","."]]
+/// Output: [["#","."],
+///          ["#","#"],
+///          ["*","*"],
+///          [".","."]]
+///
+/// Example 3:
+/// Input: box = [["#","#","*",".","*","."],
+///           ["#","#","#","*",".","."],
+///          ["#","#","#",".","#","."]]
+/// Output: [[".","#","#"],
+///          [".","#","#"],
+///          ["#","#","*"],
+///          ["#","*","."],
+///          ["#",".","*"],
+///         ["#",".","."]]
+///
+/// Constraints:
+/// 1. m == box.length
+/// 2. n == box[i].length
+/// 3. 1 <= m, n <= 500
+/// 4. box[i][j] is either '#', '*', or '.'.
+/// </summary>
+vector<vector<char>> LeetCodeArray::rotateTheBox(vector<vector<char>>& box)
+{
+    int m = box[0].size();
+    int n = box.size();
+    vector<int> prev(n, m - 1);
+    vector<vector<char>> result(m, vector<char>(n));
+    for (int j = m - 1; j >= 0; j--)
+    {
+        for (int i = n - 1; i >= 0; i--)
+        {
+            result[j][n - 1- i] = '.';
+            if (box[i][j] == '*')
+            {
+                result[j][n-1-i] = '*';
+                prev[i] = j - 1;
+            }
+            else if (box[i][j] == '#')
+            {
+                result[prev[i]][n - 1 - i] = '#';
+                prev[i]--;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1914. Cyclically Rotating a Grid
+/// 
+/// Medium
+/// 
+/// You are given an m x n integer matrix grid where m and n are both 
+/// even integers, and an integer k.
+///
+/// The matrix is composed of several layers, which is shown in the 
+/// below image, where each color is its own layer:
+/// 
+/// A cyclic rotation of the matrix is done by cyclically rotating each 
+/// layer in the matrix. To cyclically rotate a layer once, each element 
+/// in the layer will take the place of the adjacent element in the 
+/// counter-clockwise direction. An example rotation is shown below:
+///
+/// Return the matrix after applying k cyclic rotations to it.
+///
+/// Example 1:
+/// Input: grid = [[40,10],[30,20]], k = 1
+/// Output: [[10,20],[40,30]]
+/// Explanation: The figures above represent the grid at every state.
+///
+/// Example 2:
+/// Input: grid = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]], k = 2
+/// Output: [[3,4,8,12],[2,11,10,16],[1,7,6,15],[5,9,13,14]]
+/// Explanation: The figures above represent the grid at every state.
+///
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 2 <= m, n <= 50
+/// 4. Both m and n are even integers.
+/// 5. 1 <= grid[i][j] <= 5000
+/// 6. 1 <= k <= 10^9
+/// </summary>
+vector<vector<int>> LeetCodeArray::rotateGrid(vector<vector<int>>& grid, int k)
+{
+    int m = grid.size();
+    int n = grid[0].size();
+    int t = min(m, n) / 2;
+    vector<list<int>> arr(t);
+    vector<vector<int>> result(m, vector<int>(n));
+    for (int i = 0; i < t; i++)
+    {
+        int r = i;
+        for (int c = i; c < n - i; c++)
+        {
+            arr[i].push_back(grid[r][c]);
+        }
+        int c = n - 1 - i;
+        for (int r = i+1; r < m - 1 - i; r++)
+        {
+            arr[i].push_back(grid[r][c]);
+        }
+        r = m - 1 - i;
+        for (int c = n - 1 - i; c >= i; c--)
+        {
+            arr[i].push_back(grid[r][c]);
+        }
+        c = i;
+        for (int r = m - 2 - i; r > i; r--)
+        {
+            arr[i].push_back(grid[r][c]);
+        }
+    }
+    for (int i = 0; i < t; i++)
+    {
+        int w = k % arr[i].size();
+        for (int j = 0; j < w; j++)
+        {
+            arr[i].push_back(arr[i].front());
+            arr[i].pop_front();
+        }
+    }
+    for (int i = 0; i < t; i++)
+    {
+        int r = i;
+        for (int c = i; c < n - i; c++)
+        {
+            result[r][c] = arr[i].front();
+            arr[i].pop_front();
+        }
+        int c = n - 1 - i;
+        for (int r = i + 1; r < m - 1 - i; r++)
+        {
+            result[r][c] = arr[i].front();
+            arr[i].pop_front();
+        }
+        r = m - 1 - i;
+        for (int c = n - 1 - i; c >= i; c--)
+        {
+            result[r][c] = arr[i].front();
+            arr[i].pop_front();
+        }
+        c = i;
+        for (int r = m - 2 - i; r > i; r--)
+        {
+            result[r][c] = arr[i].front();
+            arr[i].pop_front();
+        }
+    }
+    return result;
+}
 #pragma endregion

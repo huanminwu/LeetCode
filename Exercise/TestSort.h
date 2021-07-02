@@ -52,5 +52,7 @@ void TestLeetCode1847(void);
 void TestLeetCode1851(void);
 void TestLeetCode1855(void);
 void TestLeetCode1889(void);
+void TestLeetCode1909(void);
+void TestLeetCode1913(void);
 void TestLeetCodeSort(void);
 #endif  // TestTree

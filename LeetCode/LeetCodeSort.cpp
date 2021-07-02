@@ -6709,4 +6709,129 @@ int LeetCodeSort::minWastedSpace(vector<int>& packages, vector<vector<int>>& box
     else return (int)(result % M);
 }
 
+/// <summary>
+/// Leet code 1909. Remove One Element to Make the Array Strictly 
+///                 Increasing
+/// 
+/// Easy
+/// 
+/// Given a 0-indexed integer array nums, return true if it can be made 
+/// strictly increasing after removing exactly one element, or false 
+/// otherwise. If the array is already strictly increasing, return true.
+///
+/// The array nums is strictly increasing if nums[i - 1] < nums[i] for 
+/// each index (1 <= i < nums.length).
+///
+/// Example 1:
+/// Input: nums = [1,2,10,5,7]
+/// Output: true
+/// Explanation: By removing 10 at index 2 from nums, it becomes [1,2,5,7].
+/// [1,2,5,7] is strictly increasing, so return true.
+///
+/// Example 2:
+/// Input: nums = [2,3,1,2]
+/// Output: false
+/// Explanation:
+/// [3,1,2] is the result of removing the element at index 0.
+/// [2,1,2] is the result of removing the element at index 1.
+/// [2,3,2] is the result of removing the element at index 2.
+/// [2,3,1] is the result of removing the element at index 3.
+/// No resulting array is strictly increasing, so return false.
+///
+/// Example 3:
+/// Input: nums = [1,1,1]
+/// Output: false
+/// Explanation: The result of removing any element is [1,1].
+/// [1,1] is not strictly increasing, so return false.
+///
+/// Example 4:
+/// Input: nums = [1,2,3]
+/// Output: true
+/// Explanation: [1,2,3] is already strictly increasing, so 
+/// return true.
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 1000
+/// </summary>
+bool LeetCodeSort::canBeIncreasing(vector<int>& nums)
+{
+    bool b_descrease = false;
+    int prev = 0;
+    for (size_t i = 1; i < nums.size(); i++)
+    {
+        if (nums[i] <= nums[prev])
+        {
+            if (b_descrease) return false;
+            b_descrease = true;
+            if (prev == 0 || nums[i] > nums[prev - 1]) prev = i;
+        }
+        else
+        {
+            prev = i;
+        }
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet code 1913. Maximum Product Difference Between Two Pairs
+/// 
+/// Easy
+/// 
+/// The product difference between two pairs (a, b) and (c, d) is defined 
+/// as (a * b) - (c * d).
+///
+/// For example, the product difference between (5, 6) and (2, 7) is 
+/// (5 * 6) - (2 * 7) = 16.
+/// Given an integer array nums, choose four distinct indices w, x, y, 
+/// and z such that the product difference between pairs (nums[w], 
+/// nums[x]) and (nums[y], nums[z]) is maximized.
+///
+/// Return the maximum such product difference.
+///
+/// Example 1:
+/// Input: nums = [5,6,2,7,4]
+/// Output: 34
+/// Explanation: We can choose indices 1 and 3 for the first pair 
+/// (6, 7) and indices 2 and 4 for the second pair (2, 4).
+/// The product difference is (6 * 7) - (2 * 4) = 34.
+///
+/// Example 2:
+/// Input: nums = [4,2,5,9,7,4,8]
+/// Output: 64
+/// Explanation: We can choose indices 3 and 6 for the first pair (9, 8) 
+/// and indices 1 and 5 for the second pair (2, 4).
+/// The product difference is (9 * 8) - (2 * 4) = 64.
+///
+/// Constraints:
+/// 1. 4 <= nums.length <= 10^4
+/// 2. 1 <= nums[i] <= 10^4
+/// </summary>
+int LeetCodeSort::maxProductDifference(vector<int>& nums)
+{
+    priority_queue<int> min_queue, max_queue;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        min_queue.push(nums[i]);
+        if (min_queue.size() > 2)
+        {
+            int x = min_queue.top();
+            min_queue.pop();
+            max_queue.push(-x);
+            if (max_queue.size() > 2) max_queue.pop();
+        }
+    }
+    int x = min_queue.top();
+    min_queue.pop();
+    int w = min_queue.top();
+    min_queue.pop();
+
+    int y = 0 - max_queue.top();
+    max_queue.pop();
+    int z = 0 - max_queue.top();
+    max_queue.pop();
+
+    return (y * z - x * w);
+}
 #pragma endregion

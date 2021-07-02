@@ -4291,8 +4291,26 @@ void TestLeetCode1897(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1903(void)
+{
+    Logger::WriteMessage("Test Leet Code 1903");
+    LeetCodeString leetCode;
+    string num = "52";
+    string result = leetCode.largestOddNumber(num);
+    Logger::WriteMessage("num = " + num +"; result = " + result);
+
+    num = "4206";
+    result = leetCode.largestOddNumber(num);
+    Logger::WriteMessage("num = " + num + "; result = " + result);
+
+    num = "35427";
+    result = leetCode.largestOddNumber(num);
+    Logger::WriteMessage("num = " + num + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1903();
     TestLeetCode1897();
     TestLeetCode1880();
     TestLeetCode1876();
