@@ -3031,8 +3031,55 @@ void TestLeetCode1740(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode1932(void)
+{
+    Logger::WriteMessage("Test Leet Code 1932");
+    LeetCodeTree leetCode;
+    vector<vector<int>> node_list =
+    {
+        {2,1},{3,2,5},{5,4}
+    };
+
+    vector<TreeNode*> trees = leetCode.buildBSTForest(node_list);
+    TreeNode* root = leetCode.canMerge(trees);
+    Logger::WriteMessage(node_list);
+    string output = leetCode.serialize(root);
+    Logger::WriteMessage(output);
+
+    node_list =
+    {
+        {5,3,8},{3,2,6}
+    };
+    trees = leetCode.buildBSTForest(node_list);
+    root = leetCode.canMerge(trees);
+    Logger::WriteMessage(node_list);
+    output = leetCode.serialize(root);
+    Logger::WriteMessage(output);
+
+    node_list =
+    {
+        {5, 4} ,{3}
+    };
+    trees = leetCode.buildBSTForest(node_list);
+    root = leetCode.canMerge(trees);
+    Logger::WriteMessage(node_list);
+    output = leetCode.serialize(root);
+    Logger::WriteMessage(output);
+
+    node_list =
+    {
+        {2, 1, 3}
+    };
+    trees = leetCode.buildBSTForest(node_list);
+    root = leetCode.canMerge(trees);
+    Logger::WriteMessage(node_list);
+    output = leetCode.serialize(root);
+    Logger::WriteMessage(output);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1932();
     TestLeetCode1740();
     TestLeetCode1666();
     TestLeetCode1597();

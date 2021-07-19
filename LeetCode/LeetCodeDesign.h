@@ -9803,4 +9803,207 @@ public:
     }
 };
 
+/// <summary>
+/// Leet code 1865. Finding Pairs With a Certain Sum
+///                  
+/// Medium
+/// 
+/// You are given two integer arrays nums1 and nums2. You are tasked to 
+/// implement a data structure that supports queries of two types:
+///
+/// Add a positive integer to an element of a given index in the array 
+/// nums2.
+/// Count the number of pairs (i, j) such that nums1[i] + nums2[j] equals a
+/// given value (0 <= i < nums1.length and 0 <= j < nums2.length).
+/// Implement the FindSumPairs class:
+///
+/// FindSumPairs(int[] nums1, int[] nums2) Initializes the FindSumPairs 
+/// object with two integer arrays nums1 and nums2.
+/// void add(int index, int val) Adds val to nums2[index], i.e., apply 
+/// nums2[index] += val.
+/// int count(int tot) Returns the number of pairs (i, j) such that 
+/// nums1[i] + nums2[j] == tot.
+///
+/// Example 1:
+/// Input
+/// ["FindSumPairs", "count", "add", "count", "count", "add", 
+/// "add", "count"]
+/// [[[1, 1, 2, 2, 2, 3], [1, 4, 5, 2, 5, 4]], [7], [3, 2], [8], [4],
+///   [0, 1], [1, 1], [7]]
+/// Output
+/// [null, 8, null, 2, 1, null, null, 11]
+/// Explanation
+/// FindSumPairs findSumPairs = new FindSumPairs([1, 1, 2, 2, 2, 3], 
+/// [1, 4, 5, 2, 5, 4]);
+/// findSumPairs.count(7);  // return 8; pairs (2,2), (3,2), (4,2), (2,4), 
+/// (3,4), (4,4) make 2 + 5 and pairs (5,1), (5,5) make 3 + 4
+/// findSumPairs.add(3, 2); // now nums2 = [1,4,5,4,5,4]
+/// findSumPairs.count(8);  // return 2; pairs (5,2), (5,4) make 3 + 5
+/// findSumPairs.count(4);  // return 1; pair (5,0) makes 3 + 1
+/// findSumPairs.add(0, 1); // now nums2 = [2,4,5,4,5,4]
+/// findSumPairs.add(1, 1); // now nums2 = [2,5,5,4,5,4]
+/// findSumPairs.count(7);  // return 11; pairs (2,1), (2,2), (2,4), 
+/// (3,1), (3,2), (3,4), (4,1), (4,2), (4,4) make 2 + 5 and pairs 
+/// (5,3), (5,5) make 3 + 4
+///
+/// Constraints:
+/// 1. 1 <= nums1.length <= 1000
+/// 2. 1 <= nums2.length <= 10^5
+/// 3. 1 <= nums1[i] <= 10^9
+/// 4. 1 <= nums2[i] <= 10^5
+/// 5. 0 <= index < nums2.length
+/// 6. 1 <= val <= 10^5
+/// 7. 1 <= tot <= 10^9
+/// 8. At most 1000 calls are made to add and count each.
+/// </summary>
+class FindSumPairs
+{
+private: 
+    unordered_map<int, int> m_count;
+    vector<int> m_nums1;
+    vector<int> m_nums2;
+public:
+    FindSumPairs(vector<int>& nums1, vector<int>& nums2)
+    {
+        m_nums1 = nums1;
+        m_nums2 = nums2;
+        for (size_t i = 0; i < nums2.size(); i++)
+        {
+            m_count[nums2[i]]++;
+        }
+    }
+
+    void add(int index, int val) 
+    {
+        m_count[m_nums2[index]]--;
+        m_nums2[index] += val;
+        m_count[m_nums2[index]]++;
+    }
+
+    int count(int tot) 
+    {
+        int result = 0;
+        for (size_t i = 0; i < m_nums1.size(); i++)
+        {
+            int diff = tot - m_nums1[i];
+            if (m_count.count(diff) > 0)
+            {
+                result += m_count[diff];
+            }
+        }
+        return result;
+    }
+};
+
+/// <summary>
+/// Leet code 1912. Design Movie Rental System
+///                                  
+/// Hard
+/// 
+/// You have a movie renting company consisting of n shops. You want to 
+/// implement a renting system that supports searching for, booking, and 
+/// returning movies. The system should also support generating a report 
+/// of the currently rented movies.
+///
+/// Each movie is given as a 2D integer array entries where 
+/// entries[i] = [shopi, moviei, pricei] indicates that there is a copy 
+/// of movie moviei at shop shopi with a rental price of pricei. Each 
+/// shop carries at most one copy of a movie moviei.
+///
+/// The system should support the following functions:
+/// Search: Finds the cheapest 5 shops that have an unrented copy of 
+/// a given movie. The shops should be sorted by price in ascending order, 
+/// and in case of a tie, the one with the smaller shopi should appear 
+/// first. If there are less than 5 matching shops, then all of them 
+/// should be returned. If no shop has an unrented copy, then an 
+/// empty list should be returned.
+/// Rent: Rents an unrented copy of a given movie from a given shop.
+/// Drop: Drops off a previously rented copy of a given movie at a given 
+/// shop.
+/// Report: Returns the cheapest 5 rented movies (possibly of the same 
+/// movie ID) as a 2D list res where res[j] = [shopj, moviej] describes 
+/// that the jth cheapest rented movie moviej was rented from the shop 
+/// shopj. The movies in res should be sorted by price in ascending 
+/// order, and in case of a tie, the one with the smaller shopj should 
+/// appear first, and if there is still tie, the one with the smaller 
+/// moviej should appear first. If there are fewer than 5 rented 
+/// movies, then all of them should be returned. If no movies are 
+/// currently being rented, then an empty list should be returned.
+/// Implement the MovieRentingSystem class:
+///
+/// MovieRentingSystem(int n, int[][] entries) Initializes the 
+/// MovieRentingSystem object with n shops and the movies in entries.
+/// List<Integer> search(int movie) Returns a list of shops that have 
+/// an unrented copy of the given movie as described above.
+/// void rent(int shop, int movie) Rents the given movie from the given 
+/// shop.
+/// void drop(int shop, int movie) Drops off a previously rented movie at 
+/// the given shop.
+/// List<List<Integer>> report() Returns a list of cheapest rented movies 
+/// as described above.
+/// Note: The test cases will be generated such that rent will only be 
+/// called if the shop has an unrented copy of the movie, and drop will 
+/// only be called if the shop had previously rented out the movie.
+/// 
+/// Example 1:
+/// Input
+/// ["MovieRentingSystem", "search", "rent", "rent", "report", "drop", 
+/// "search"]
+/// [[3, [[0, 1, 5], [0, 2, 6], [0, 3, 7], [1, 1, 4], [1, 2, 7], 
+/// [2, 1, 5]]], [1], [0, 1], [1, 2], [], [1, 2], [2]]
+/// Output
+/// [null, [1, 0, 2], null, null, [[0, 1], [1, 2]], null, [0, 1]]
+///
+/// Explanation
+/// MovieRentingSystem movieRentingSystem = new MovieRentingSystem(3, 
+/// [[0, 1, 5], [0, 2, 6], [0, 3, 7], [1, 1, 4], [1, 2, 7], [2, 1, 5]]);
+/// movieRentingSystem.search(1);  
+/// // return [1, 0, 2], Movies of ID 1 are unrented at shops 1, 0, and 2. 
+/// // Shop 1 is cheapest; shop 0 and 2 are the same price, so order by 
+/// // shop number.
+/// movieRentingSystem.rent(0, 1); 
+/// // Rent movie 1 from shop 0. Unrented movies at shop 0 are now [2,3].
+/// movieRentingSystem.rent(1, 2); 
+/// // Rent movie 2 from shop 1. Unrented movies at shop 1 are now [1].
+/// movieRentingSystem.report();   
+/// // return [[0, 1], [1, 2]]. Movie 1 from shop 0 is cheapest, followed 
+/// // by movie 2 from shop 1.
+/// movieRentingSystem.drop(1, 2); 
+/// // Drop off movie 2 at shop 1. Unrented movies at shop 1 are now [1,2].
+/// movieRentingSystem.search(2);  
+/// // return [0, 1]. Movies of ID 2 are unrented at shops 0 and 1. 
+/// // Shop 0 is cheapest, followed by shop 1.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 3 * 10^5
+/// 2. 1 <= entries.length <= 10^5
+/// 3. 0 <= shopi < n
+/// 4. 1 <= moviei, pricei <= 10^4
+/// 5. Each shop carries at most one copy of a movie moviei.
+/// 6. At most 10^5 calls in total will be made to search, rent, drop and 
+///    report.
+/// </summary>
+class MovieRentingSystem {
+public:
+    MovieRentingSystem(int n, vector<vector<int>>& entries) {
+
+    }
+
+    vector<int> search(int movie) {
+
+    }
+
+    void rent(int shop, int movie) {
+
+    }
+
+    void drop(int shop, int movie) {
+
+    }
+
+    vector<vector<int>> report() {
+
+    }
+};
+
 #endif // LeetcodeDesign_H

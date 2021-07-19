@@ -2184,5 +2184,95 @@ int LeetCodeBit::subsetXORSum(vector<int>& nums)
     return result;
 }
 
+/// <summary>
+/// Leet code 1938. Maximum Genetic Difference Query
+/// </summary>
+void LeetCodeBit::maxGeneticDifference(TrieBitNode* root, int node_id, vector<vector<int>>& tree,
+    vector<vector<pair<int, int>>>& query_list, vector<int>& result)
+{
+    root->increase(node_id, 1);
+    for (size_t i = 0; i < query_list[node_id].size(); i++)
+    {
+        int val = root->findMax(query_list[node_id][i].first);
+        result[query_list[node_id][i].second] = val;
+    }
+    for (size_t i = 0; i < tree[node_id].size(); i++)
+    {
+        maxGeneticDifference(root, tree[node_id][i], tree, query_list, result);
+    }
+    root->increase(node_id, -1);
+}
+
+/// <summary>
+/// Leet code 1938. Maximum Genetic Difference Query
+///                                  
+/// Hard
+/// 
+/// There is a rooted tree consisting of n nodes numbered 0 to n - 1. 
+/// Each node's number denotes its unique genetic value (i.e. the genetic 
+/// value of node x is x). The genetic difference between two genetic 
+/// values is defined as the bitwise-XOR of their values. You are given 
+/// the integer array parents, where parents[i] is the parent for node i. 
+/// If node x is the root of the tree, then parents[x] == -1.
+///
+/// You are also given the array queries where queries[i] = [nodei, vali]. 
+/// For each query i, find the maximum genetic difference between vali and 
+/// pi, where pi is the genetic value of any node that is on the path 
+/// between nodei and the root (including nodei and the root). More 
+/// formally, you want to maximize vali XOR pi.
+///
+/// Return an array ans where ans[i] is the answer to the ith query.
+/// 
+/// Example 1:
+/// Input: parents = [-1,0,1,1], queries = [[0,2],[3,2],[2,5]]
+/// Output: [2,3,7]
+/// Explanation: The queries are processed as follows:
+/// - [0,2]: The node with the maximum genetic difference is 0, with a 
+///   difference of 2 XOR 0 = 2.
+/// - [3,2]: The node with the maximum genetic difference is 1, with 
+///   a difference of 2 XOR 1 = 3.
+/// - [2,5]: The node with the maximum genetic difference is 2, with 
+///   a difference of 5 XOR 2 = 7.
+///
+/// Example 2:
+/// Input: parents = [3,7,-1,2,0,7,0,2], queries = [[4,6],[1,15],[0,5]]
+/// Output: [6,14,7]
+/// Explanation: The queries are processed as follows:
+/// - [4,6]: The node with the maximum genetic difference is 0, with a 
+///   difference of 6 XOR 0 = 6.
+/// - [1,15]: The node with the maximum genetic difference is 1, with a 
+///   difference of 15 XOR 1 = 14.
+/// - [0,5]: The node with the maximum genetic difference is 2, with 
+///   a difference of 5 XOR 2 = 7.
+///
+/// Constraints:
+/// 1. 2 <= parents.length <= 10^5
+/// 2. 0 <= parents[i] <= parents.length - 1 for every node i that is not 
+///    the root.
+/// 3. parents[root] == -1
+/// 4. 1 <= queries.length <= 3 * 10^4
+/// 5. 0 <= nodei <= parents.length - 1
+/// 6. 0 <= vali <= 2 * 10^5
+/// </summary>
+vector<int> LeetCodeBit::maxGeneticDifference(vector<int>& parents, vector<vector<int>>& queries)
+{
+    vector<vector<int>> tree(parents.size(), vector<int>());
+    int root_id = -1;
+    for (size_t i = 0; i < parents.size(); i++)
+    {
+        if (parents[i] == -1) root_id = i;
+        else tree[parents[i]].push_back(i);
+    }
+    vector<vector<pair<int, int>>> query_list(parents.size(), vector<pair<int, int>>());
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        query_list[queries[i][0]].push_back(make_pair(queries[i][1], i));
+    }
+    TrieBitNode* root = new TrieBitNode(17);
+    vector<int> result(queries.size());
+    maxGeneticDifference(root, root_id, tree, query_list, result);
+    return result;
+}
+
 
 #pragma endregion

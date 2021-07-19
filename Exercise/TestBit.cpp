@@ -724,8 +724,28 @@ void TestLeetCode1863(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1938(void)
+{
+    Logger::WriteMessage("Test Leet Code 1938");
+    LeetCodeBit leetCode;
+    vector<int> parents = { -1, 0, 1, 1 };
+    vector<vector<int>> queries = { {0, 2},{3, 2},{2, 5} };
+    vector<int> result = leetCode.maxGeneticDifference(parents, queries);
+    Logger::WriteMessage(parents);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    parents = { 3,7,-1,2,0,7,0,2 };
+    queries = { {4, 6},{1, 15},{0, 5} };
+    result = leetCode.maxGeneticDifference(parents, queries);
+    Logger::WriteMessage(parents);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode1938();
     TestLeetCode1863();
     TestLeetCode1835();
     TestLeetCode1829();

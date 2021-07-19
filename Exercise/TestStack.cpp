@@ -470,9 +470,9 @@ void TestLeetCode503(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode1865(void)
+void TestLeetCode1856(void)
 {
-    Logger::WriteMessage("Test Leet Code 1865");
+    Logger::WriteMessage("Test Leet Code 1856");
     LeetCodeStack leetCode;
     vector<int> nums = { 1, 2, 3, 2 };
     int result = leetCode.maxSumMinProduct(nums);
@@ -492,7 +492,7 @@ void TestLeetCode1865(void)
 
 void TestLeetCodeStack(void)
 {
-    TestLeetCode1865();
+    TestLeetCode1856();
     TestLeetCode503();
     TestLeetCode496();
     TestLeetCode1475();

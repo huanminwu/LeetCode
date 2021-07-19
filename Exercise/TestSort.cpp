@@ -1386,8 +1386,66 @@ void TestLeetCode1913(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1877(void)
+{
+    Logger::WriteMessage("Test Leet Code 1877");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 3,5,2,3 };
+    int result = leetCode.minPairSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,5,4,2,4,6 };
+    result = leetCode.minPairSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1881(void)
+{
+    Logger::WriteMessage("Test Leet Code 1881");
+    LeetCodeSort leetCode;
+    string n = "99";
+    int x = 9;
+    string result = leetCode.maxValue(n, x);
+    Logger::WriteMessage("n = " + n + "; x = " + to_string(x) + "; result = " + result);
+    
+    n = "-13";
+    x = 2;
+    result = leetCode.maxValue(n, x);
+    Logger::WriteMessage("n = " + n + "; x = " + to_string(x) + "; result = " + result);
+
+    n = "28824579515";
+    x = 8;
+    result = leetCode.maxValue(n, x);
+    Logger::WriteMessage("n = " + n + "; x = " + to_string(x) + "; result = " + result);
+}
+
+void TestLeetCode1887(void)
+{
+    Logger::WriteMessage("Test Leet Code 1881");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 5, 1, 3 };
+    int result = leetCode.reductionOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("; result = " + to_string(result));
+
+    nums = { 1,1,1 };
+    result = leetCode.reductionOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("; result = " + to_string(result));
+
+    nums = { 1,1,2,2,3 };
+    result = leetCode.reductionOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1887();
+    TestLeetCode1881();
+    TestLeetCode1877();
     TestLeetCode1913();
     TestLeetCode1909();
     TestLeetCode1889();

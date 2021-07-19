@@ -3850,8 +3850,22 @@ void TestLeetCode1906(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1884(void)
+{
+    Logger::WriteMessage("Test Leet Code 1884");
+    LeetCodeMath leetCode;
+    int n = 2;
+    int result = leetCode.twoEggDrop(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 100;
+    result = leetCode.twoEggDrop(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1884();
     TestLeetCode1916();
     TestLeetCode1906();
     TestLeetCode1860();

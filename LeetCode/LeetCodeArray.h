@@ -9980,6 +9980,214 @@ public:
     /// 6. 1 <= k <= 10^9
     /// </summary>
     vector<vector<int>> rotateGrid(vector<vector<int>>& grid, int k);
+
+    /// <summary>
+    /// Leet code 1920. Build Array from Permutation
+    /// 
+    /// Easy
+    /// 
+    /// Given a zero-based permutation nums (0-indexed), build an array ans 
+    /// of the same length where ans[i] = nums[nums[i]] for each 
+    /// 0 <= i < nums.length and return it.
+    ///
+    /// A zero-based permutation nums is an array of distinct integers from 0 
+    /// to nums.length - 1 (inclusive).
+    /// 
+    /// Example 1:
+    /// Input: nums = [0,2,1,5,3,4]
+    /// Output: [0,1,2,4,5,3]
+    /// Explanation: The array ans is built as follows: 
+    /// ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], 
+    /// nums[nums[4]], nums[nums[5]]]
+    /// = [nums[0], nums[2], nums[1], nums[5], nums[3], nums[4]]
+    /// = [0,1,2,4,5,3]
+    ///
+    /// Example 2:
+    /// Input: nums = [5,0,1,2,3,4]
+    /// Output: [4,5,0,1,2,3]
+    /// Explanation: The array ans is built as follows:
+    /// ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], 
+    /// nums[nums[4]], nums[nums[5]]]
+    /// = [nums[5], nums[0], nums[1], nums[2], nums[3], nums[4]]
+    /// = [4,5,0,1,2,3]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1000
+    /// 2. 0 <= nums[i] < nums.length
+    /// 3. The elements in nums are distinct.
+    /// 
+    /// Follow-up: Can you solve it without using an extra space (i.e., O(1) memory)?
+    /// </summary>
+    vector<int> buildArray(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code 1864. Minimum Number of Swaps to Make the Binary String 
+    ///                 Alternating
+    /// 
+    /// Medium
+    /// 
+    /// Given a binary string s, return the minimum number of character swaps 
+    /// to make it alternating, or -1 if it is impossible.
+    ///
+    /// The string is called alternating if no two adjacent characters are 
+    /// equal. For example, the strings "010" and "1010" are alternating, 
+    /// while the string "0100" is not.
+    ///
+    /// Any two characters may be swapped, even if they are not adjacent.
+    /// 
+    /// Example 1:
+    /// Input: s = "111000"
+    /// Output: 1
+    /// Explanation: Swap positions 1 and 4: "111000" -> "101010"
+    /// The string is now alternating.
+    ///
+    /// Example 2:
+    /// Input: s = "010"
+    /// Output: 0
+    /// Explanation: The string is already alternating, no swaps are needed.
+    ///
+    /// Example 3:
+    /// Input: s = "1110"
+    /// Output: -1
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 1000
+    /// 2. s[i] is either '0' or '1'.
+    /// </summary>
+    int minSwaps(string s);
+
+    /// <summary>
+    /// Leet code 1878. Get Biggest Three Rhombus Sums in a Grid
+    ///                  
+    /// Medium
+    /// 
+    /// You are given an m x n integer matrix grid. 
+    /// A rhombus sum is the sum of the elements that form the border of a 
+    /// regular rhombus shape in grid???. The rhombus must have the shape 
+    /// of a square rotated 45 degrees with each of the corners centered 
+    /// in a grid cell. Below is an image of four valid rhombus shapes 
+    /// with the corresponding colored cells that should be included in each 
+    /// rhombus sum:
+    /// 
+    /// Note that the rhombus can have an area of 0, which is depicted by 
+    /// the purple rhombus in the bottom right corner.
+    ///
+    /// Return the biggest three distinct rhombus sums in the grid in 
+    /// descending order. If there are less than three distinct values, return 
+    /// all of them.
+    /// 
+    /// Example 1:
+    /// Input: grid = [[3,4,5,1,3],[3,3,4,2,3],[20,30,200,40,10],
+    ///                [1,5,5,4,1],[4,3,2,2,5]]
+    /// Output: [228,216,211]
+    /// Explanation: The rhombus shapes for the three biggest distinct rhombus 
+    /// sums are depicted above.
+    /// - Blue: 20 + 3 + 200 + 5 = 228
+    /// - Red: 200 + 2 + 10 + 4 = 216
+    /// - Green: 5 + 200 + 4 + 2 = 211
+    ///
+    /// Example 2:
+    /// Input: grid = [[1,2,3],[4,5,6],[7,8,9]]
+    /// Output: [20,9,8]
+    /// Explanation: The rhombus shapes for the three biggest distinct 
+    /// rhombus sums are depicted above.
+    /// - Blue: 4 + 2 + 6 + 8 = 20
+    /// - Red: 9 (area 0 rhombus in the bottom right corner)
+    /// - Green: 8 (area 0 rhombus in the bottom middle)
+    ///
+    /// Example 3:
+    /// Input: grid = [[7,7,7]]
+    /// Output: [7]
+    /// Explanation: All three possible rhombus sums are the same, so 
+    /// return [7].
+    /// 
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 1 <= m, n <= 50
+    /// 4. 1 <= grid[i][j] <= 10^5
+    /// </summary>
+    vector<int> getBiggestThree(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet code 1895. Largest Magic Square
+    ///                  
+    /// Medium
+    /// 
+    /// A k x k magic square is a k x k grid filled with integers such that 
+    /// every row sum, every column sum, and both diagonal sums are all equal. 
+    /// The integers in the magic square do not have to be distinct. Every 
+    /// 1 x 1 grid is trivially a magic square.
+    ///
+    /// Given an m x n integer grid, return the size (i.e., the side length k) 
+    /// of the largest magic square that can be found within this grid.
+    ///
+    /// Example 1:
+    /// Input: grid = [[7,1,4,5,6],[2,5,1,6,4],[1,5,4,3,2],[1,2,7,3,4]]
+    /// Output: 3
+    /// Explanation: The largest magic square has a size of 3.
+    /// Every row sum, column sum, and diagonal sum of this magic square is 
+    /// equal to 12.
+    /// - Row sums: 5+1+6 = 5+4+3 = 2+7+3 = 12
+    /// - Column sums: 5+5+2 = 1+4+7 = 6+3+3 = 12
+    /// - Diagonal sums: 5+4+3 = 6+4+2 = 12
+    ///
+    /// Example 2:
+    /// Input: grid = [[5,1,3,1],[9,3,3,1],[1,3,3,8]]
+    /// Output: 2
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 1 <= m, n <= 50
+    /// 4. 1 <= grid[i][j] <= 10^6
+    /// </summary>
+    int largestMagicSquare(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet code 1888. Minimum Number of Flips to Make the Binary String 
+    ///                 Alternating
+    ///                  
+    /// Medium
+    /// 
+    /// You are given a binary string s. You are allowed to perform two types 
+    /// of operations on the string in any sequence:
+    ///
+    /// Type-1: Remove the character at the start of the string s and append 
+    /// it to the end of the string.
+    /// Type-2: Pick any character in s and flip its value, i.e., if its value 
+    /// is '0' it becomes '1' and vice-versa.
+    /// Return the minimum number of type-2 operations you need to perform 
+    /// such that s becomes alternating.
+    ///
+    /// The string is called alternating if no two adjacent characters are 
+    /// equal.
+    ///
+    /// For example, the strings "010" and "1010" are alternating, while the 
+    /// string "0100" is not.
+    /// Example 1:
+    ///
+    /// Input: s = "111000"
+    /// Output: 2
+    /// Explanation: Use the first operation two times to make s = "100011".
+    /// Then, use the second operation on the third and sixth elements to 
+    /// make s = "101010".
+    ///
+    /// Example 2:
+    /// Input: s = "010"
+    /// Output: 0
+    /// Explanation: The string is already alternating.
+    ///
+    /// Example 3:
+    /// Input: s = "1110"
+    /// Output: 1
+    /// Explanation: Use the second operation on the second element to 
+    /// make s = "1010".
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s[i] is either '0' or '1'.
+    /// </summary>
+    int minFlips(string s);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

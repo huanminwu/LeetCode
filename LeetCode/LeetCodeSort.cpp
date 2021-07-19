@@ -6834,4 +6834,193 @@ int LeetCodeSort::maxProductDifference(vector<int>& nums)
 
     return (y * z - x * w);
 }
+
+/// <summary>
+/// Leet code 1877. Minimize Maximum Pair Sum in Array
+///                  
+/// Medium
+/// 
+/// The pair sum of a pair (a,b) is equal to a + b. The maximum pair sum 
+/// is the largest pair sum in a list of pairs.
+///
+/// For example, if we have pairs (1,5), (2,3), and (4,4), the maximum 
+/// pair sum would be max(1+5, 2+3, 4+4) = max(6, 5, 8) = 8.
+/// Given an array nums of even length n, pair up the elements of nums 
+/// into n / 2 pairs such that:
+///
+/// Each element of nums is in exactly one pair, and
+/// The maximum pair sum is minimized.
+/// Return the minimized maximum pair sum after optimally pairing up the 
+/// elements.
+/// 
+/// Example 1:
+/// Input: nums = [3,5,2,3]
+/// Output: 7
+/// Explanation: The elements can be paired up into pairs (3,3) and (5,2).
+/// The maximum pair sum is max(3+3, 5+2) = max(6, 7) = 7.
+///
+/// Example 2:
+/// Input: nums = [3,5,4,2,4,6]
+/// Output: 8
+/// Explanation: The elements can be paired up into pairs (3,5), (4,4), 
+/// and (6,2).
+/// The maximum pair sum is max(3+5, 4+4, 6+2) = max(8, 8, 8) = 8.
+/// 
+/// Constraints:
+///
+/// 1. n == nums.length
+/// 2. 2 <= n <= 10^5
+/// 3. n is even.
+/// 4. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeSort::minPairSum(vector<int>& nums)
+{
+    sort(nums.begin(), nums.end());
+    int result = 0;
+    for (size_t i = 0; i < nums.size() / 2; i++)
+    {
+        result = max(result, nums[i] + nums[nums.size() - 1 - i]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1881. Maximum Value after Insertion
+///                  
+/// Medium
+/// 
+/// You are given a very large integer n, represented as a string, and an 
+/// integer digit x. The digits in n and the digit x are in the 
+/// inclusive range [1, 9], and n may represent a negative number.
+///
+/// You want to maximize n's numerical value by inserting x anywhere in 
+/// the decimal representation of n. You cannot insert x to the left of 
+/// the negative sign.
+///
+/// For example, if n = 73 and x = 6, it would be best to insert it 
+/// between 7 and 3, making n = 763.
+/// If n = -55 and x = 2, it would be best to insert it before the 
+/// first 5, making n = -255.
+/// Return a string representing the maximum value of n after the 
+/// insertion.
+/// 
+/// Example 1:
+/// Input: n = "99", x = 9
+/// Output: "999"
+/// Explanation: The result is the same regardless of where you insert 9.
+///
+/// Example 2:
+/// Input: n = "-13", x = 2
+/// Output: "-123"
+/// Explanation: You can make n one of {-213, -123, -132}, and the 
+/// largest of those three is -123.
+///
+/// Constraints:
+/// 1. 1 <= n.length <= 105
+/// 2. 1 <= x <= 9
+/// 3. The digits in n are in the range [1, 9].
+/// 4. n is a valid representation of an integer.
+/// 5. In the case of a negative n, it will begin with '-'.
+/// </summary>
+string LeetCodeSort::maxValue(string n, int x)
+{
+    int sign = 1;
+    if (n[0] == '-') sign = -1;
+    string result;
+    for (size_t i = 0; i <= n.size(); i++)
+    {
+        if (i == n.size())
+        {
+            result.push_back('0' + x);
+            break;
+        }
+        if (n[i] == '-') result.push_back(n[i]);
+        else
+        {
+            if (sign == 1 && n[i] >= '0' + x)
+            {
+                result.push_back(n[i]);
+            }
+            else if (sign == -1 && n[i] <= '0' + x)
+            {
+                result.push_back(n[i]);
+            }
+            else
+            {
+                result.push_back('0' + x);
+                result.append(n.substr(i));
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1887. Reduction Operations to Make the Array Elements Equal 
+///                                  
+/// Medium
+/// 
+/// Given an integer array nums, your goal is to make all elements in nums 
+/// equal. To complete one operation, follow these steps:
+///
+/// Find the largest value in nums. Let its index be i (0-indexed) and its 
+/// value be largest. If there are multiple elements with the largest 
+/// value, pick the smallest i.
+/// Find the next largest value in nums strictly smaller than largest. Let 
+/// its value be nextLargest.
+/// Reduce nums[i] to nextLargest.
+/// Return the number of operations to make all elements in nums equal.
+///
+/// Example 1:
+/// Input: nums = [5,1,3]
+/// Output: 3
+/// Explanation: It takes 3 operations to make all elements in nums equal:
+/// 1. largest = 5 at index 0. nextLargest = 3. Reduce nums[0] to 3. 
+///    nums = [3,1,3].
+/// 2. largest = 3 at index 0. nextLargest = 1. Reduce nums[0] to 1. 
+///    nums = [1,1,3].
+/// 3. largest = 3 at index 2. nextLargest = 1. Reduce nums[2] to 1. 
+///    nums = [1,1,1].
+///
+/// Example 2:
+/// Input: nums = [1,1,1]
+/// Output: 0
+/// Explanation: All elements in nums are already equal.
+///
+/// Example 3:
+/// Input: nums = [1,1,2,2,3]
+/// Output: 4
+/// Explanation: It takes 4 operations to make all elements in nums equal:
+/// 1. largest = 3 at index 4. nextLargest = 2. Reduce nums[4] to 2. 
+///    nums = [1,1,2,2,2].
+/// 2. largest = 2 at index 2. nextLargest = 1. Reduce nums[2] to 1. 
+///    nums = [1,1,1,2,2].
+/// 3. largest = 2 at index 3. nextLargest = 1. Reduce nums[3] to 1. 
+///    nums = [1,1,1,1,2].
+/// 4. largest = 2 at index 4. nextLargest = 1. Reduce nums[4] to 1. 
+///    nums = [1,1,1,1,1].
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 5 * 10^4
+/// 2. 1 <= nums[i] <= 5 * 10^4
+/// </summary>
+int LeetCodeSort::reductionOperations(vector<int>& nums)
+{
+    map<int, int> sorted_nums;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        sorted_nums[nums[i]]++;
+    }
+    int result = 0;
+    while (sorted_nums.size() > 1)
+    {
+        int count = sorted_nums.rbegin()->second;
+        sorted_nums.erase(sorted_nums.rbegin()->first);
+        sorted_nums[sorted_nums.rbegin()->first] += count;
+        result += count;
+    }
+    return result;
+}
+
 #pragma endregion

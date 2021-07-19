@@ -716,8 +716,65 @@ void TestLeetCode1802(void)
         "; maxSum = " + to_string(maxSum) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1870(void)
+{
+    Logger::WriteMessage("Test Leet Code 1870");
+    LeetCodeBinarySearch leetCode;
+    vector<int> dist = { 1, 3, 2 };
+    double hour = 6;
+    int result = leetCode.minSpeedOnTime(dist, hour);
+    Logger::WriteMessage(dist);
+    Logger::WriteMessage("hour = " + to_string(hour) + "; result =" + to_string(result));
+
+    dist = { 1, 3, 2 };
+    hour = 2.7;
+    result = leetCode.minSpeedOnTime(dist, hour);
+    Logger::WriteMessage(dist);
+    Logger::WriteMessage("hour = " + to_string(hour) + "; result =" + to_string(result));
+
+    dist = { 1,3,2 };
+    hour = 1.9;
+    result = leetCode.minSpeedOnTime(dist, hour);
+    Logger::WriteMessage(dist);
+    Logger::WriteMessage("hour = " + to_string(hour) + "; result =" + to_string(result));
+}
+
+void TestLeetCode1923(void)
+{
+    Logger::WriteMessage("Test Leet Code 1923");
+    LeetCodeBinarySearch leetCode;
+    int n = 5;
+    vector<vector<int>> paths =
+    { 
+        {0, 1, 2, 3, 4}, {2, 3, 4}, {4, 0, 1, 2, 3} 
+    };
+    int result = leetCode.longestCommonSubpath(n, paths);
+    Logger::WriteMessage(paths);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 5;
+    paths =
+    {
+        {0}, {1}, {2}
+    };
+    result = leetCode.longestCommonSubpath(n, paths);
+    Logger::WriteMessage(paths);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 5;
+    paths =
+    {
+        {0, 1, 2, 3, 4}, {4, 3, 2, 1, 0}
+    };
+    result = leetCode.longestCommonSubpath(n, paths);
+    Logger::WriteMessage(paths);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode1923();
+    TestLeetCode1870();
     TestLeetCode1802();
     TestLeetCode1760();
     TestLeetCode1552();

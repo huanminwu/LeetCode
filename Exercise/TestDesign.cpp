@@ -3739,8 +3739,49 @@ void TestLeetCode1845(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1865(void)
+{
+    Logger::WriteMessage("Test Leet Code 1865");
+    FindSumPairs* findSumPairs = nullptr;
+    vector<string> commands =
+    {
+        "FindSumPairs", "count", "add", "count", "count", "add", "add", "count"
+    };
+    vector<vector<vector<int>>> parameters =
+    {
+        {{1, 1, 2, 2, 2, 3},{1, 4, 5, 2, 5, 4}},{{7}},{{3, 2}},{{8}},{{4}},{{0, 1}},{{1, 1}},{{7}}
+    };
+    vector<string> result;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FindSumPairs")
+        {
+            findSumPairs = new FindSumPairs(parameters[i][0], parameters[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "count")
+        {
+            int ret = findSumPairs->count(parameters[i][0][0]);
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "add")
+        {
+            findSumPairs->add(parameters[i][0][0], parameters[i][0][1]);
+            result.push_back("null");
+        }
+    }
+    delete findSumPairs;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1865();
     TestLeetCode1845();
     TestLeetCode1825();
     TestLeetCode1797();

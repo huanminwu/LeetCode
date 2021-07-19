@@ -1077,6 +1077,120 @@ public:
     /// </summary>
     int maxValue(int n, int index, int maxSum);
 
+    /// <summary>
+    /// Leet code 1870. Minimum Speed to Arrive on Time
+    ///                  
+    /// Medium
+    /// 
+    /// You are given a floating-point number hour, representing the amount 
+    /// of time you have to reach the office. To commute to the office, you 
+    /// must take n trains in sequential order. You are also given an integer 
+    /// array dist of length n, where dist[i] describes the distance 
+    /// (in kilometers) of the ith train ride.
+    ///
+    /// Each train can only depart at an integer hour, so you may need to 
+    /// wait in between each train ride.
+    ///
+    /// For example, if the 1st train ride takes 1.5 hours, you must wait for 
+    /// an additional 0.5 hours before you can depart on the 2nd train ride 
+    /// at the 2 hour mark.
+    /// Return the minimum positive integer speed (in kilometers per hour) 
+    /// that all the trains must travel at for you to reach the office on 
+    /// time, or -1 if it is impossible to be on time.
+    /// 
+    /// Tests are generated such that the answer will not exceed 10^7 and 
+    /// hour will have at most two digits after the decimal point.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: dist = [1,3,2], hour = 6
+    /// Output: 1
+    /// Explanation: At speed 1:
+    /// - The first train ride takes 1/1 = 1 hour.
+    /// - Since we are already at an integer hour, we depart immediately at 
+    ///   the 1 hour mark. The second train takes 3/1 = 3 hours.
+    /// - Since we are already at an integer hour, we depart immediately at 
+    ///   the 4 hour mark. The third train takes 2/1 = 2 hours.
+    /// - You will arrive at exactly the 6 hour mark.
+    ///
+    /// Example 2:
+    /// Input: dist = [1,3,2], hour = 2.7
+    /// Output: 3
+    /// Explanation: At speed 3:
+    /// - The first train ride takes 1/3 = 0.33333 hours.
+    /// - Since we are not at an integer hour, we wait until the 1 hour mark 
+    ///   to depart. The second train ride takes 3/3 = 1 hour.
+    /// - Since we are already at an integer hour, we depart immediately at 
+    ///   the 2 hour mark. The third train takes 2/3 = 0.66667 hours.
+    /// - You will arrive at the 2.66667 hour mark.
+    ///
+    /// Example 3:
+    /// Input: dist = [1,3,2], hour = 1.9
+    /// Output: -1
+    /// Explanation: It is impossible because the earliest the third train 
+    /// can depart is at the 2 hour mark.
+    ///
+    /// Constraints:
+    /// 1. n == dist.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 1 <= dist[i] <= 10^5
+    /// 4. 1 <= hour <= 10^9
+    /// 5. There will be at most two digits after the decimal point in hour.
+    /// </summary>
+    int minSpeedOnTime(vector<int>& dist, double hour);
+
+    /// <summary>
+    /// Leet code 1923. Longest Common Subpath
+    ///                                  
+    /// Hard
+    /// 
+    /// There is a country of n cities numbered from 0 to n - 1. In this 
+    /// country, there is a road connecting every pair of cities.
+    ///
+    /// There are m friends numbered from 0 to m - 1 who are traveling through
+    /// the country. Each one of them will take a path consisting of some 
+    /// cities. Each path is represented by an integer array that contains the 
+    /// visited cities in order. The path may contain a city more than once, 
+    /// but the same city will not be listed consecutively.
+    ///
+    /// Given an integer n and a 2D integer array paths where paths[i] is an 
+    /// integer array representing the path of the ith friend, return the 
+    /// length of the longest common subpath that is shared by every friend's 
+    /// path, or 0 if there is no common subpath at all.
+    ///
+    /// A subpath of a path is a contiguous sequence of cities within that 
+    /// path.
+    /// Example 1:
+    ///
+    /// Input: n = 5, paths = [[0,1,2,3,4],
+    ///                        [2,3,4],
+    ///                        [4,0,1,2,3]]
+    /// Output: 2
+    /// Explanation: The longest common subpath is [2,3].
+    ///
+    /// Example 2:
+    /// Input: n = 3, paths = [[0],[1],[2]]
+    /// Output: 0
+    /// Explanation: There is no common subpath shared by the three paths.
+    ///
+    /// Example 3:
+    ///
+    /// Input: n = 5, paths = [[0,1,2,3,4],
+    ///                        [4,3,2,1,0]]
+    /// Output: 1
+    /// Explanation: The possible longest common subpaths are [0], 
+    /// [1], [2], [3], and [4]. All have a length of 1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 10^5
+    /// 2. m == paths.length
+    /// 3. 2 <= m <= 10^5
+    /// 4. sum(paths[i].length) <= 105
+    /// 5. 0 <= paths[i][j] < n
+    /// 6. The same city is not listed multiple times consecutively in 
+    ///    paths[i].
+    /// </summary>
+    int longestCommonSubpath(int n, vector<vector<int>>& paths);
 #pragma endregion
 };
 #endif  // LeetCodeBinarySearch_H

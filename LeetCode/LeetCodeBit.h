@@ -23,6 +23,48 @@ using namespace std;
 /// <summary>
 /// The class is to implement bit operation related algorithm  
 /// </summary>
+
+struct TrieBitNode 
+{
+    TrieBitNode* m_Child[2] = {};
+    int m_Count = 0; 
+    int m_MaxBits = 17;
+    TrieBitNode(int max_bits)
+    {
+        m_MaxBits = max_bits;
+    }
+    void increase(int number, int d) 
+    {
+        TrieBitNode* cur = this;
+        for (int i = m_MaxBits; i >= 0; --i)
+        {
+            int bit = (number >> i) & 1;
+            if (cur->m_Child[bit] == nullptr) cur->m_Child[bit] = new TrieBitNode(m_MaxBits);
+            cur = cur->m_Child[bit];
+            cur->m_Count += d;
+        }
+    }
+    int findMax(int number) 
+    {
+        TrieBitNode* cur = this;
+        int result = 0;
+        for (int i = m_MaxBits; i >= 0; --i)
+        {
+            int bit = (number >> i) & 1;
+            if (cur->m_Child[1 - bit] != nullptr && cur->m_Child[1 - bit]->m_Count > 0) 
+            {
+                cur = cur->m_Child[1 - bit];
+                result |= (1 << i);
+            }
+            else
+            {
+                cur = cur->m_Child[bit];
+            }
+        }
+        return result;
+    }
+};
+
 class LeetCodeBit
 {
 public:
@@ -1225,6 +1267,65 @@ public:
     /// 2. 1 <= nums[i] <= 20
     /// </summary>
     int subsetXORSum(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code 1938. Maximum Genetic Difference Query
+    /// </summary>
+    void maxGeneticDifference(TrieBitNode* root, int node_id, vector<vector<int>>& tree, 
+        vector<vector<pair<int, int>>>& query_list, vector<int> & result);
+
+    /// <summary>
+    /// Leet code 1938. Maximum Genetic Difference Query
+    ///                                  
+    /// Hard
+    /// 
+    /// There is a rooted tree consisting of n nodes numbered 0 to n - 1. 
+    /// Each node's number denotes its unique genetic value (i.e. the genetic 
+    /// value of node x is x). The genetic difference between two genetic 
+    /// values is defined as the bitwise-XOR of their values. You are given 
+    /// the integer array parents, where parents[i] is the parent for node i. 
+    /// If node x is the root of the tree, then parents[x] == -1.
+    ///
+    /// You are also given the array queries where queries[i] = [nodei, vali]. 
+    /// For each query i, find the maximum genetic difference between vali and 
+    /// pi, where pi is the genetic value of any node that is on the path 
+    /// between nodei and the root (including nodei and the root). More 
+    /// formally, you want to maximize vali XOR pi.
+    ///
+    /// Return an array ans where ans[i] is the answer to the ith query.
+    /// 
+    /// Example 1:
+    /// Input: parents = [-1,0,1,1], queries = [[0,2],[3,2],[2,5]]
+    /// Output: [2,3,7]
+    /// Explanation: The queries are processed as follows:
+    /// - [0,2]: The node with the maximum genetic difference is 0, with a 
+    ///   difference of 2 XOR 0 = 2.
+    /// - [3,2]: The node with the maximum genetic difference is 1, with 
+    ///   a difference of 2 XOR 1 = 3.
+    /// - [2,5]: The node with the maximum genetic difference is 2, with 
+    ///   a difference of 5 XOR 2 = 7.
+    ///
+    /// Example 2:
+    /// Input: parents = [3,7,-1,2,0,7,0,2], queries = [[4,6],[1,15],[0,5]]
+    /// Output: [6,14,7]
+    /// Explanation: The queries are processed as follows:
+    /// - [4,6]: The node with the maximum genetic difference is 0, with a 
+    ///   difference of 6 XOR 0 = 6.
+    /// - [1,15]: The node with the maximum genetic difference is 1, with a 
+    ///   difference of 15 XOR 1 = 14.
+    /// - [0,5]: The node with the maximum genetic difference is 2, with 
+    ///   a difference of 5 XOR 2 = 7.
+    ///
+    /// Constraints:
+    /// 1. 2 <= parents.length <= 10^5
+    /// 2. 0 <= parents[i] <= parents.length - 1 for every node i that is not 
+    ///    the root.
+    /// 3. parents[root] == -1
+    /// 4. 1 <= queries.length <= 3 * 10^4
+    /// 5. 0 <= nodei <= parents.length - 1
+    /// 6. 0 <= vali <= 2 * 10^5
+    /// </summary>
+    vector<int> maxGeneticDifference(vector<int>& parents, vector<vector<int>>& queries);
 #pragma endregion
 };
 #endif  // LeetCodeBit_H

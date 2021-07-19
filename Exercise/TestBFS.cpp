@@ -836,8 +836,32 @@ void TestLeetCode1391(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1871(void)
+{
+    Logger::WriteMessage("Test Leet Code 1871");
+    LeetCodeBFS leetCode;
+    string s = "011010";
+    int minJump = 2;
+    int maxJump = 3;
+    bool result = leetCode.canReach(s, minJump, maxJump);
+    Logger::WriteMessage("s = " + s +
+        "; minJump = " + to_string(minJump) +
+        "; maxJump = " + to_string(maxJump) +
+        "; result = " + (string)(result ? "true" : "false"));
+
+    s = "01101110";
+    minJump = 2;
+    maxJump = 3;
+    result = leetCode.canReach(s, minJump, maxJump);
+    Logger::WriteMessage("s = " + s +
+        "; minJump = " + to_string(minJump) +
+        "; maxJump = " + to_string(maxJump) +
+        "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeBFS(void)
 {
+    TestLeetCode1871();
     TestLeetCode1391();
     TestLeetCode127();
     TestLeetCode130();

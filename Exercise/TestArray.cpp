@@ -5802,8 +5802,116 @@ void TestLeetCode1914(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1920(void)
+{
+    Logger::WriteMessage("Test Leet Code 1920");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 0, 2, 1, 5, 3, 4 };
+    vector<int> result = leetCode.buildArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 5,0,1,2,3,4 };
+    result = leetCode.buildArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1864(void)
+{
+    Logger::WriteMessage("Test Leet Code 1864");
+    LeetCodeArray leetCode;
+    string s = "111000";
+    int result = leetCode.minSwaps(s);
+    Logger::WriteMessage("s = " + s + "result = " + to_string(result));
+
+    s = "010";
+    result = leetCode.minSwaps(s);
+    Logger::WriteMessage("s = " + s + "result = " + to_string(result));
+    
+    s = "1110";
+    result = leetCode.minSwaps(s);
+    Logger::WriteMessage("s = " + s + "result = " + to_string(result));
+}
+
+void TestLeetCode1878(void)
+{
+    Logger::WriteMessage("Test Leet Code 1878");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid =
+    {
+        {3, 4, 5, 1, 3}, {3, 3, 4, 2, 3},
+        {20, 30, 200, 40, 10}, {1, 5, 5, 4, 1},
+        {4, 3, 2, 2, 5}
+    };
+    vector<int> result = leetCode.getBiggestThree(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid =
+    {
+        {1,2,3},{4,5,6},{7,8,9}
+    }; 
+    result = leetCode.getBiggestThree(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid =
+    {
+        {7,7,7}
+    };
+    result = leetCode.getBiggestThree(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1895(void)
+{
+    Logger::WriteMessage("Test Leet Code 1895");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid =
+    {
+        {7, 1, 4, 5, 6},{2, 5, 1, 6, 4},{1, 5, 4, 3, 2},{1, 2, 7, 3, 4}
+    };
+    int result = leetCode.largestMagicSquare(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {{5,1,3,1}},{9,3,3,1},{1,3,3,8}
+    };
+    result = leetCode.largestMagicSquare(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1888(void)
+{
+    Logger::WriteMessage("Test Leet Code 1888");
+    LeetCodeArray leetCode;
+    string s = "111000";
+    int result = leetCode.minFlips(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "010";
+    result = leetCode.minFlips(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "1110";
+    result = leetCode.minFlips(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "01001001101";
+    result = leetCode.minFlips(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1888();
+    TestLeetCode1895();
+    TestLeetCode1878();
+    TestLeetCode1864();
+    TestLeetCode1920();
     TestLeetCode1914();
     TestLeetCode1861();
     TestLeetCode1886();
