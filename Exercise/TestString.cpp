@@ -4308,8 +4308,54 @@ void TestLeetCode1903(void)
     Logger::WriteMessage("num = " + num + "; result = " + result);
 }
 
+void TestLeetCode1935(void)
+{
+    Logger::WriteMessage("Test Leet Code 1935");
+    LeetCodeString leetCode;
+    string text = "hello world";
+    string brokenLetters = "ad";
+    int result = leetCode.canBeTypedWords(text, brokenLetters);
+    Logger::WriteMessage("text = " + text + "; brokenLetters = " + brokenLetters
+        + "; result = " + to_string(result));
+
+    text = "leet code";
+    brokenLetters = "lt";
+    result = leetCode.canBeTypedWords(text, brokenLetters);
+    Logger::WriteMessage("text = " + text + "; brokenLetters = " + brokenLetters
+        + "; result = " + to_string(result));
+
+    text = "leet code";
+    brokenLetters = "e";
+    result = leetCode.canBeTypedWords(text, brokenLetters);
+    Logger::WriteMessage("text = " + text + "; brokenLetters = " + brokenLetters
+        + "; result = " + to_string(result));
+}
+
+void TestLeetCode1945(void)
+{
+    Logger::WriteMessage("Test Leet Code 1945");
+    LeetCodeString leetCode;
+    string s = "zbax";
+    int k = 2;
+    int result = leetCode.getLucky(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "iiii";
+    k = 1;
+    result = leetCode.getLucky(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "leetcode";
+    k = 2;
+    result = leetCode.getLucky(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1935();
+    TestLeetCode1945();
     TestLeetCode1903();
     TestLeetCode1897();
     TestLeetCode1880();

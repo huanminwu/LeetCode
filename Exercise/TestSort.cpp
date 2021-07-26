@@ -1423,7 +1423,7 @@ void TestLeetCode1881(void)
 
 void TestLeetCode1887(void)
 {
-    Logger::WriteMessage("Test Leet Code 1881");
+    Logger::WriteMessage("Test Leet Code 1887");
     LeetCodeSort leetCode;
     vector<int> nums = { 5, 1, 3 };
     int result = leetCode.reductionOperations(nums);
@@ -1441,8 +1441,28 @@ void TestLeetCode1887(void)
     Logger::WriteMessage("; result = " + to_string(result));
 }
 
+void TestLeetCode1882(void)
+{
+    Logger::WriteMessage("Test Leet Code 1882");
+    LeetCodeSort leetCode;
+    vector<int> servers = { 3,3,2 };
+    vector<int> tasks = { 1, 2, 3, 2, 1, 2 };
+    vector<int> result = leetCode.assignTasks(servers, tasks);
+    Logger::WriteMessage(servers);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage(result);
+
+    servers = { 5,1,4,3,2 };
+    tasks = { 2,1,2,4,5,2,1 };
+    result = leetCode.assignTasks(servers, tasks);
+    Logger::WriteMessage(servers);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1882();
     TestLeetCode1887();
     TestLeetCode1881();
     TestLeetCode1877();

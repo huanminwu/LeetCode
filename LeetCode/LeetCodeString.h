@@ -7973,6 +7973,97 @@ public:
     /// 2. num only consists of digits and does not contain any leading zeros.
     /// </summary>
     string largestOddNumber(string num);
+
+    /// <summary>
+    /// Leet code 1945. Sum of Digits of String After Convert
+    ///                                  
+    /// Easy
+    /// 
+    /// 
+    /// You are given a string s consisting of lowercase English letters, and 
+    /// an integer k.
+    ///
+    /// First, convert s into an integer by replacing each letter with its 
+    /// position in the alphabet (i.e., replace 'a' with 1, 'b' with 2, ..., 
+    /// 'z' with 26). Then, transform the integer by replacing it with the sum 
+    /// of its digits. Repeat the transform operation k times in total.
+    /// 
+    /// For example, if s = "zbax" and k = 2, then the resulting integer would 
+    /// be 8 by the following operations:
+    ///
+    /// Convert: "zbax" "(26)(2)(1)(24)" "262124" 262124
+    /// Transform #1: 262124 2 + 6 + 2 + 1 + 2 + 4 17
+    /// Transform #2: 17 1 + 7 8
+    /// Return the resulting integer after performing the operations described 
+    /// above.
+    /// 
+    /// Example 1:
+    /// Input: s = "iiii", k = 1
+    /// Output: 36
+    /// Explanation: The operations are as follows:
+    /// - Convert: "iiii" "(9)(9)(9)(9)" "9999" 9999
+    /// - Transform #1: 9999 9 + 9 + 9 + 9 36
+    /// Thus the resulting integer is 36.
+    ///
+    /// Example 2:
+    /// Input: s = "leetcode", k = 2
+    /// Output: 6
+    /// Explanation: The operations are as follows:
+    /// - Convert: "leetcode" "(12)(5)(5)(20)(3)(15)(4)(5)" "12552031545" 12552031545
+    /// - Transform #1: 12552031545 1 + 2 + 5 + 5 + 2 + 0 + 3 + 1 + 5 + 4 + 5 33
+    /// - Transform #2: 33 3 + 3 6
+    /// Thus the resulting integer is 6.
+    ///
+    /// Example 3:
+    /// Input: s = "zbax", k = 2
+    /// Output: 8
+    ///
+    /// Constraints:
+    /// 1 <= s.length <= 100
+    /// 1 <= k <= 10
+    /// s consists of lowercase English letters.
+    /// </summary>
+    int getLucky(string s, int k);
+
+    /// <summary>
+    /// Leet code 1935. Maximum Number of Words You Can Type
+    ///                                  
+    /// Easy
+    /// 
+    /// There is a malfunctioning keyboard where some letter keys do not work. 
+    /// All other keys on the keyboard work properly.
+    ///
+    /// Given a string text of words separated by a single space (no leading 
+    /// or trailing spaces) and a string brokenLetters of all distinct letter 
+    /// keys that are broken, return the number of words in text you can fully 
+    /// type using this keyboard.
+    /// 
+    /// Example 1:
+    /// Input: text = "hello world", brokenLetters = "ad"
+    /// Output: 1
+    /// Explanation: We cannot type "world" because the 'd' key is broken.
+    ///
+    /// Example 2:
+    /// Input: text = "leet code", brokenLetters = "lt"
+    /// Output: 1
+    /// Explanation: We cannot type "leet" because the 'l' and 't' keys are 
+    /// broken.
+    ///
+    /// Example 3:
+    /// Input: text = "leet code", brokenLetters = "e"
+    /// Output: 0
+    /// Explanation: We cannot type either word because the 'e' key is broken.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= text.length <= 10^4
+    /// 2. 0 <= brokenLetters.length <= 26
+    /// 3. text consists of words separated by a single space without any 
+    ///    leading or trailing spaces.
+    /// 4. Each word only consists of lowercase English letters.
+    /// 5. brokenLetters consists of distinct lowercase English letters.
+    /// </summary>
+    int canBeTypedWords(string text, string brokenLetters);
+
 #pragma endregion
 };
 

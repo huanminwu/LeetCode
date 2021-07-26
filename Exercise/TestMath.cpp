@@ -3863,8 +3863,43 @@ void TestLeetCode1884(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1899(void)
+{
+    Logger::WriteMessage("Test Leet Code 1899");
+    LeetCodeMath leetCode;
+    vector<vector<int>> triplets = { {2, 5, 3},{1, 8, 4},{1, 7, 5} };
+    vector<int> target = { 2, 7, 5 };
+    bool result = leetCode.mergeTriplets(triplets, target);
+    Logger::WriteMessage(triplets);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    triplets = { {1, 3, 4},{2, 5, 8} };
+    target = { 2,5,8 };
+    result = leetCode.mergeTriplets(triplets, target);
+    Logger::WriteMessage(triplets);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+
+    triplets = { {2, 5, 3},{2, 3, 4},{1, 2, 5},{5, 2, 3} };
+    target = { 5,5,5 };
+    result = leetCode.mergeTriplets(triplets, target);
+    Logger::WriteMessage(triplets);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    triplets = { {3, 4, 5},{4, 5, 6} };
+    target = { 3,2,5 };
+    result = leetCode.mergeTriplets(triplets, target);
+    Logger::WriteMessage(triplets);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1899();
     TestLeetCode1884();
     TestLeetCode1916();
     TestLeetCode1906();

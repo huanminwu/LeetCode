@@ -771,8 +771,42 @@ void TestLeetCode1923(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1898(void)
+{
+    Logger::WriteMessage("Test Leet Code 1898");
+    LeetCodeBinarySearch leetCode;
+    string s = "abcacb";
+    string p = "ab";
+    vector<int> removable = { 3, 1, 0 };
+    int result = leetCode.maximumRemovals(s, p, removable);
+    Logger::WriteMessage(removable);
+    Logger::WriteMessage("s = " + s + "; p = " + s +  "; result = " + to_string(result));
+
+    s = "abcbddddd";
+    p = "abcd";
+    removable = { 3,2,1,4,5,6 };
+    result = leetCode.maximumRemovals(s, p, removable);
+    Logger::WriteMessage(removable);
+    Logger::WriteMessage("s = " + s +"; p = " + s + "; result = " + to_string(result));
+
+    s = "abcab";
+    p = "abc";
+    removable = { 0,1,2,3,4 };
+    result = leetCode.maximumRemovals(s, p, removable);
+    Logger::WriteMessage(removable);
+    Logger::WriteMessage("s = " + s + "; p = " + s + "; result = " + to_string(result));
+
+    s = "qobftgcueho";
+    p = "obue";
+    removable = { 5, 3, 0, 6, 4, 9, 10, 7, 2, 8 };
+    result = leetCode.maximumRemovals(s, p, removable);
+    Logger::WriteMessage(removable);
+    Logger::WriteMessage("s = " + s + "; p = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode1898();
     TestLeetCode1923();
     TestLeetCode1870();
     TestLeetCode1802();

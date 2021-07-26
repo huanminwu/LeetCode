@@ -5905,8 +5905,26 @@ void TestLeetCode1888(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode1894(void)
+{
+    Logger::WriteMessage("Test Leet Code 1894");
+    LeetCodeArray leetCode;
+    vector<int> chalk = { 5, 1, 5 };
+    int k = 22;
+    int result = leetCode.chalkReplacer(chalk, k);
+    Logger::WriteMessage(chalk);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    chalk = { 3,4,1,2 };
+    k = 25;
+    result = leetCode.chalkReplacer(chalk, k);
+    Logger::WriteMessage(chalk);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1894();
     TestLeetCode1888();
     TestLeetCode1895();
     TestLeetCode1878();

@@ -1216,8 +1216,24 @@ void TestLeetCode1817(void)
     Logger::WriteMessage(result);
 }
 
+
+void TestLeetCode1941(void)
+{
+    Logger::WriteMessage("Test Leet Code 1941");
+    LeetCodeHashtable leetCode;
+    string s = "abacbc";
+    bool result = leetCode.areOccurrencesEqual(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "aaabb";
+    result = leetCode.areOccurrencesEqual(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1941();
     TestLeetCode1817();
     TestLeetCode1814();
     TestLeetCode1773();
