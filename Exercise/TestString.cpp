@@ -4349,11 +4349,73 @@ void TestLeetCode1945(void)
     k = 2;
     result = leetCode.getLucky(s, k);
     Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
 
+void TestLeetCode1948(void)
+{
+    Logger::WriteMessage("Test Leet Code 1948");
+    LeetCodeString leetCode;
+    vector<vector<string>> paths = 
+    { 
+        {"a"},{"c"},{"d"},{"a", "b"},{"c", "b"},{"d", "a"} 
+    };
+    vector<vector<string>> result = leetCode.deleteDuplicateFolder(paths);
+    Logger::WriteMessage(paths);
+    Logger::WriteMessage(result);
+
+    paths =
+    {
+        {"a"}, { "c" }, { "a", "b" }, { "c", "b" }, { "a", "b", "x" }, { "a", "b", "x", "y" },
+        { "w" }, { "w", "y" }
+    };
+    result = leetCode.deleteDuplicateFolder(paths);
+    Logger::WriteMessage(paths);
+    Logger::WriteMessage(result);
+
+
+    paths =
+    {
+        {"a", "b"} ,{"c", "d"},{"c"},{"a"}
+    };
+    result = leetCode.deleteDuplicateFolder(paths);
+    Logger::WriteMessage(paths);
+    Logger::WriteMessage(result);
+
+    paths =
+    {
+        {"a"} ,{"a","x"},{"a","x","y"},{"a","z"},{"b"},{"b","x"},{"b","x","y"},{"b","z"}
+    };
+    result = leetCode.deleteDuplicateFolder(paths);
+    Logger::WriteMessage(paths);
+    Logger::WriteMessage(result);
+
+    paths =
+    {
+        {"a"} ,{"a","x"},{"a","x","y"},{"a","z"},{"b"},{"b","x"},{"b","x","y"},{"b","z"},{"b","w"}
+    };
+    result = leetCode.deleteDuplicateFolder(paths);
+    Logger::WriteMessage(paths);
+    Logger::WriteMessage(result);
+}
+
+
+void TestLeetCode1960(void)
+{
+    Logger::WriteMessage("Test Leet Code 1960");
+    LeetCodeString leetCode;
+    string s = "ababbb";
+    long long result = leetCode.maxProduct(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "zaaaxbbby";
+    result = leetCode.maxProduct(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
 void TestLeetCodeString(void)
 {
+    TestLeetCode1960();
+    TestLeetCode1948();
     TestLeetCode1935();
     TestLeetCode1945();
     TestLeetCode1903();

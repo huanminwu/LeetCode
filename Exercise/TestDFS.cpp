@@ -1311,8 +1311,34 @@ void TestLeetCode1900(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1931(void)
+{
+    Logger::WriteMessage("Test Leet Code 1931");
+    LeetCodeDFS leetCode;
+    int m = 1;
+    int n = 1;
+    int result = leetCode.colorTheGrid(m, n);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; result = " + to_string(result));
+
+    m = 1;
+    n = 2;
+    result = leetCode.colorTheGrid(m, n);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; result = " + to_string(result));
+
+    m = 5;
+    n = 5;
+    result = leetCode.colorTheGrid(m, n);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; result = " + to_string(result));
+
+    m = 5;
+    n = 500;
+    result = leetCode.colorTheGrid(m, n);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode1931();
     TestLeetCode1900();
     TestLeetCode1879();
     TestLeetCode1849();

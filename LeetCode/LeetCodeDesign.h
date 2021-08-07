@@ -9984,25 +9984,64 @@ public:
 ///    report.
 /// </summary>
 class MovieRentingSystem {
+private:
+    vector<unordered_map<int, int>> m_shops;
+    unordered_map<int, set<pair<int, int>>> m_availableMovies;
+    set<vector<int>> m_rentedMovies;
 public:
-    MovieRentingSystem(int n, vector<vector<int>>& entries) {
-
+    MovieRentingSystem(int n, vector<vector<int>>& entries) 
+    {
+        m_shops = vector<unordered_map<int, int>>(n);
+        for (size_t i = 0; i < entries.size(); i++)
+        {
+            int shop = entries[i][0];
+            int movie = entries[i][1];
+            int price = entries[i][2];
+            m_shops[shop][movie] = price;
+            m_availableMovies[movie].insert(make_pair(price, shop));
+        }
     }
 
-    vector<int> search(int movie) {
-
+    vector<int> search(int movie) 
+    {
+        vector<int> result;
+        auto itr = m_availableMovies[movie].begin();
+        for (size_t i = 0; i < 5 && itr != m_availableMovies[movie].end(); i++, ++itr)
+        {
+            result.push_back(itr->second);
+        }
+        return result;
     }
 
-    void rent(int shop, int movie) {
-
+    void rent(int shop, int movie) 
+    {
+        int price = m_shops[shop][movie];
+        if (m_availableMovies[movie].count(make_pair(price, shop)) > 0)
+        {
+            m_availableMovies[movie].erase(make_pair(price, shop));
+            m_rentedMovies.insert({ price, shop, movie });
+        }
     }
 
-    void drop(int shop, int movie) {
-
+    void drop(int shop, int movie) 
+    {
+        int price = m_shops[shop][movie];
+        if (m_rentedMovies.count({ price, shop, movie }) > 0)
+        {
+            m_availableMovies[movie].insert(make_pair(price, shop));
+            m_rentedMovies.erase({ price, shop, movie });
+        }
     }
 
-    vector<vector<int>> report() {
-
+    vector<vector<int>> report() 
+    {
+        vector<vector<int>> result;
+        auto itr = m_rentedMovies.begin();
+        for (size_t i = 0; i < 5 && itr != m_rentedMovies.end(); i++, ++itr)
+        {
+            result.push_back({ (*itr)[1], (*itr)[2] });
+        }
+        return result;
     }
 };
 

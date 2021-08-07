@@ -3779,8 +3779,75 @@ void TestLeetCode1865(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1912(void)
+{
+    Logger::WriteMessage("Test Leet Code 1912");
+    int n = 3;
+    vector<vector<int>> movies = 
+    { 
+        {0, 1, 5},{0, 2, 6},{0, 3, 7},{1, 1, 4},{1, 2, 7},{2, 1, 5} 
+    };
+    MovieRentingSystem* movieRentingSystem = new MovieRentingSystem(n, movies);
+    vector<string> commands =
+    {
+        "search", "rent", "rent", "report", "drop", "search", "search"
+    };
+    vector<vector<int>> parameters =
+    {
+        {1}, {0, 1}, {1, 2},{}, {1, 2}, {2}, {1}
+    };
+    vector<string> result = { "null" };
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "search")
+        {
+            vector<int> shops = movieRentingSystem->search(parameters[i][0]);
+            string ret;
+            ret.push_back('[');
+            for (size_t j = 0; j < shops.size(); j++)
+            {
+                if (j > 0) ret.append(", ");
+                ret.append(to_string(shops[j]));
+            }
+            ret.push_back(']');
+            result.push_back(ret);
+        }
+        else if (commands[i] == "rent")
+        {
+            movieRentingSystem->rent(parameters[i][0], parameters[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "drop")
+        {
+            movieRentingSystem->drop(parameters[i][0], parameters[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "report")
+        {
+            vector<vector<int>> movies = movieRentingSystem->report();
+            string ret;
+            ret.push_back('[');
+            for (size_t j = 0; j < movies.size(); j++)
+            {
+                if (j > 0) ret.append(", ");
+                ret.append("[" + to_string(movies[j][0]));
+                ret.append(", " + to_string(movies[j][1]));
+                ret.append("]");
+            }
+            ret.push_back(']');
+            result.push_back(ret);
+        }
+    }
+    delete movieRentingSystem;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1912();
     TestLeetCode1865();
     TestLeetCode1845();
     TestLeetCode1825();

@@ -490,8 +490,25 @@ void TestLeetCode1856(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+void TestLeetCode1944(void)
+{
+    Logger::WriteMessage("Test Leet Code 1944");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 10,6,8,5,11,9 };
+    vector<int> result = leetCode.canSeePersonsCount(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 5,1,2,3,10 };
+    result = leetCode.canSeePersonsCount(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode1944();
     TestLeetCode1856();
     TestLeetCode503();
     TestLeetCode496();

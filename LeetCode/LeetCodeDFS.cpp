@@ -6779,6 +6779,79 @@ vector<int> LeetCodeDFS::earliestAndLatest(int n, int first, int second)
     return result;
 }
 
+/// <summary>
+/// Leet code 1931. Painting a Grid With Three Different Colors
+/// </summary>
+int LeetCodeDFS::colorTheGrid(int i, int j, int m, int n, int value, vector<vector<int>>& grid, vector<vector<int>>& cache)
+{
+    int result = 0;
+    int M = 1000000007;
+    if (i == n) return 1;
+   
+    for (int color = 0; color < 3; color++)
+    {
+        // conflict with up
+        if (j > 0 && grid[i][j - 1] == color) continue;
+        // conflict with left;
+        if (i > 0 && grid[i - 1][j] == color) continue;
+        grid[i][j] = color;
+        value = (value << 2) + color;
+        if (j == m - 1)
+        {
+            if (cache[i][value] == -1)
+            {
+                cache[i][value] = colorTheGrid(i + 1, 0, m, n, 0, grid, cache);
+            }
+            result = (result + cache[i][value]) % M;
+        }
+        else
+        {
+            result = (result + colorTheGrid(i, j + 1, m, n, value, grid, cache)) % M;
+        }
+        value = value >> 2;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1931. Painting a Grid With Three Different Colors
+///                                  
+/// Hard
+/// 
+/// You are given two integers m and n. Consider an m x n grid where each 
+/// cell is initially white. You can paint each cell red, green, or blue. 
+/// All cells must be painted.
+///
+/// Return the number of ways to color the grid with no two adjacent 
+/// cells having the same color. Since the answer can be very large, 
+/// return it modulo 10^9 + 7.
+/// 
+/// Example 1:
+/// Input: m = 1, n = 1
+/// Output: 3
+/// Explanation: The three possible colorings are shown in the image above.
+///
+/// Example 2:
+///
+/// Input: m = 1, n = 2
+/// Output: 6
+/// Explanation: The six possible colorings are shown in the image above.
+///
+/// Example 3:
+/// Input: m = 5, n = 5
+/// Output: 580986
+/// 
+/// Constraints:
+/// 1 <= m <= 5
+/// 1 <= n <= 1000
+/// </summary>
+int LeetCodeDFS::colorTheGrid(int m, int n)
+{
+    vector<vector<int>> cache(n, vector<int>(1 << (m * 2), -1));
+    vector<vector<int>> grid(n, vector<int>(m));
+    int result = colorTheGrid(0, 0, m, n, 0, grid, cache);
+    return result;
+}
 #pragma endregion
 
 

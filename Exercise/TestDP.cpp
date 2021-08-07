@@ -2461,8 +2461,29 @@ void TestLeetCode1883(void)
         "; result = " + to_string(result));
 }
 
+void TestLeetCode1955(void)
+{
+    Logger::WriteMessage("Test Leet Code 1955");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 0, 1, 2, 2 };
+    int result = leetCode.countSpecialSubsequences(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,2,0,0 };
+    result = leetCode.countSpecialSubsequences(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,1,2,0,1,2 };
+    result = leetCode.countSpecialSubsequences(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1955();
     TestLeetCode1883();
     TestLeetCode1872();
     TestLeetCode1751();

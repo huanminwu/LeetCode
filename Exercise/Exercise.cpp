@@ -3242,6 +3242,11 @@ void TestLeetCode1199(void)
 void main(int argc, char* argv[])
 { 
     TestLeetCodeString();
+    TestLeetCodeDP();
+    TestLeetCodeStack();
+    TestLeetCodeDFS();
+    TestLeetCodeGraph();
+    TestLeetCodeDesign();
     TestLeetCodeHashtable();
     TestLeetCodeMath();
     TestLeetCodeBinarySearch();
@@ -3249,12 +3254,7 @@ void main(int argc, char* argv[])
     TestLeetCodeSort();
     TestLeetCodeBit();
     TestLeetCodeTree();
-    TestLeetCodeDesign();
     TestLeetCodeGreedy();
-    TestLeetCodeDFS();
-    TestLeetCodeDP();
-    TestLeetCodeStack();
-    TestLeetCodeGraph();
     TestLeetCodeLinkedList();
     TestLeetCodeHashtable();
     TestLeetCodeBFS();
