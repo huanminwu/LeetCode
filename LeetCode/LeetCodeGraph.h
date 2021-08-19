@@ -5538,6 +5538,88 @@ public:
     /// 9. The graph does not contain self loops.
     /// </summary>
     int minCost(int maxTime, vector<vector<int>>& edges, vector<int>& passingFees);
+
+    /// <summary>
+    /// Leet code 1952. Three Divisors
+    ///                                                
+    /// Medium
+    /// 
+    /// A peak element in a 2D grid is an element that is strictly greater 
+    /// than all of its adjacent neighbors to the left, right, top, and bottom.
+    ///
+    /// Given a 0-indexed m x n matrix mat where no two adjacent cells are 
+    /// equal, find any peak element mat[i][j] and return the length 2 
+    /// array [i,j].
+    ///
+    /// You may assume that the entire matrix is surrounded by an outer 
+    /// perimeter with the value -1 in each cell.
+    ///
+    /// You must write an algorithm that runs in O(m log(n)) or O(n log(m)) 
+    /// time.
+    /// 
+    /// Example 1:
+    /// Input: mat = [[1,4],[3,2]]
+    /// Output: [0,1]
+    /// Explanation: Both 3 and 4 are peak elements so [1,0] and [0,1] are 
+    /// both acceptable answers.
+    ///
+    /// Example 2:
+    /// Input: mat = [[10,20,15],[21,30,14],[7,16,32]]
+    /// Output: [1,1]
+    /// Explanation: Both 30 and 32 are peak elements so [1,1] and [2,2] 
+    /// are both acceptable answers.
+    ///
+    /// Constraints:
+    /// 1. m == mat.length
+    /// 2. n == mat[i].length
+    /// 3. 1 <= m, n <= 500
+    /// 4. 1 <= mat[i][j] <= 10^5
+    /// 5. No two adjacent cells are equal.
+    /// </summary>
+    vector<int> findPeakGrid(vector<vector<int>>& mat);
+
+    /// <summary>
+    /// Leet code 1905. Count Sub Islands
+    ///                                                
+    /// Medium
+    /// 
+    /// You are given two m x n binary matrices grid1 and grid2 containing 
+    /// only 0's (representing water) and 1's (representing land). An 
+    /// island is a group of 1's connected 4-directionally (horizontal or 
+    /// vertical). Any cells outside of the grid are considered water cells.
+    ///
+    /// An island in grid2 is considered a sub-island if there is an island 
+    /// in grid1 that contains all the cells that make up this island in grid2.
+    /// 
+    /// Return the number of islands in grid2 that are considered sub-islands.
+    ///
+    /// Example 1:
+    /// Input: grid1 = [[1,1,1,0,0],[0,1,1,1,1],[0,0,0,0,0],[1,0,0,0,0],
+    /// [1,1,0,1,1]], grid2 = [[1,1,1,0,0],[0,0,1,1,1],[0,1,0,0,0],[1,0,1,1,0],
+    /// [0,1,0,1,0]]
+    /// Output: 3
+    /// Explanation: In the picture above, the grid on the left is grid1 and 
+    /// the grid on the right is grid2.
+    /// The 1s colored red in grid2 are those considered to be part of a 
+    /// sub-island. There are three sub-islands.
+    ///
+    /// Example 2:
+    /// Input: grid1 = [[1,0,1,0,1],[1,1,1,1,1],[0,0,0,0,0],[1,1,1,1,1],
+    /// [1,0,1,0,1]], grid2 = [[0,0,0,0,0],[1,1,1,1,1],[0,1,0,1,0],[0,1,0,1,0],
+    /// [1,0,0,0,1]]
+    /// Output: 2 
+    /// Explanation: In the picture above, the grid on the left is grid1 and 
+    /// the grid on the right is grid2.
+    /// The 1s colored red in grid2 are those considered to be part of a 
+    /// sub-island. There are two sub-islands.
+    ///
+    /// Constraints:
+    /// 1. m == grid1.length == grid2.length
+    /// 2. n == grid1[i].length == grid2[i].length
+    /// 3. 1 <= m, n <= 500
+    /// 4. grid1[i][j] and grid2[i][j] are either 0 or 1.
+    /// </summary>
+    int countSubIslands(vector<vector<int>>& grid1, vector<vector<int>>& grid2);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

@@ -4412,8 +4412,26 @@ void TestLeetCode1960(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode1957(void)
+{
+    Logger::WriteMessage("Test Leet Code 1957");
+    LeetCodeString leetCode;
+    string s = "leeetcode";
+    string result = leetCode.makeFancyString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "aaabaaaa";
+    result = leetCode.makeFancyString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "aab";
+    result = leetCode.makeFancyString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1957();
     TestLeetCode1960();
     TestLeetCode1948();
     TestLeetCode1935();

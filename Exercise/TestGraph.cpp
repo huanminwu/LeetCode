@@ -3500,8 +3500,56 @@ void TestLeetCode1928(void)
     Logger::WriteMessage("maxTime = " + to_string(maxTime) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1901(void)
+{
+    Logger::WriteMessage("Test Leet Code 1901");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> mat = { {1, 4},{3, 2} };
+    vector<int> result = leetCode.findPeakGrid(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage(result);
+
+    mat = { {10, 20, 15},{21, 30, 14},{7, 16, 32} };
+    result = leetCode.findPeakGrid(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1905(void)
+{
+    Logger::WriteMessage("Test Leet Code 1905");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid1 =
+    {
+        {1, 1, 1, 0, 0},{0, 1, 1, 1, 1},{0, 0, 0, 0, 0},{1, 0, 0, 0, 0},{1, 1, 0, 1, 1}
+    };
+    vector<vector<int>> grid2 =
+    {
+        {1,1,1,0,0},{0,0,1,1,1},{0,1,0,0,0},{1,0,1,1,0},{0,1,0,1,0}
+    };
+    int result = leetCode.countSubIslands(grid1, grid2);
+    Logger::WriteMessage(grid1);
+    Logger::WriteMessage(grid2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid1 =
+    {
+        {1,0,1,0,1},{1,1,1,1,1},{0,0,0,0,0},{1,1,1,1,1},{1,0,1,0,1}
+    };
+    grid2 =
+    {
+        {0,0,0,0,0},{1,1,1,1,1},{0,1,0,1,0},{0,1,0,1,0},{1,0,0,0,1}
+    };
+    result = leetCode.countSubIslands(grid1, grid2);
+    Logger::WriteMessage(grid1);
+    Logger::WriteMessage(grid2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1905();
+    TestLeetCode1901();
     TestLeetCode1928();
     TestLeetCode1857();
     TestLeetCode1820();

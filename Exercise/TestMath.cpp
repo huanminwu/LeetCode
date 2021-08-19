@@ -3897,8 +3897,61 @@ void TestLeetCode1899(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1952(void)
+{
+    Logger::WriteMessage("Test Leet Code 1952");
+    LeetCodeMath leetCode;
+    int n = 2;
+    bool result = leetCode.isThree(n);
+    Logger::WriteMessage("n = " + to_string(n) + ";result = " + (string)(result ? "true" : "false"));
+
+    n = 4;
+    result = leetCode.isThree(n);
+    Logger::WriteMessage("n = " + to_string(n) + ";result = " + (string)(result ? "true" : "false"));
+
+    n = 14;
+    result = leetCode.isThree(n);
+    Logger::WriteMessage("n = " + to_string(n) + ";result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1925(void)
+{
+    Logger::WriteMessage("Test Leet Code 1925");
+    LeetCodeMath leetCode;
+    int n = 5;
+    int result = leetCode.countTriples(n);
+    Logger::WriteMessage("n = " + to_string(n) + ";result = " + to_string(result));
+
+    n = 10;
+    result = leetCode.countTriples(n);
+    Logger::WriteMessage("n = " + to_string(n) + ";result = " + to_string(result));
+}
+
+void TestLeetCode1904(void)
+{
+    Logger::WriteMessage("Test Leet Code 1904");
+    LeetCodeMath leetCode;
+    string startTime = "12:01";
+    string finishTime = "12:44";
+    int result = leetCode.numberOfRounds(startTime, finishTime);
+    Logger::WriteMessage("startTime = " + startTime + "; finishTime = " + finishTime + "; result = " + to_string(result));
+
+    startTime = "20:00";
+    finishTime = "06:00";
+    result = leetCode.numberOfRounds(startTime, finishTime);
+    Logger::WriteMessage("startTime = " + startTime + "; finishTime = " + finishTime + "; result = " + to_string(result));
+
+    startTime = "00:00";
+    finishTime = "23:59";
+    result = leetCode.numberOfRounds(startTime, finishTime);
+    Logger::WriteMessage("startTime = " + startTime + "; finishTime = " + finishTime + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1904();
+    TestLeetCode1925();
+    TestLeetCode1952();
     TestLeetCode1899();
     TestLeetCode1884();
     TestLeetCode1916();

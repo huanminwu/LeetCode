@@ -5922,8 +5922,24 @@ void TestLeetCode1894(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1929(void)
+{
+    Logger::WriteMessage("Test Leet Code 1929");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 1 };
+    vector<int> result = leetCode.getConcatenation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,3,2,1 };
+    result = leetCode.getConcatenation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1929();
     TestLeetCode1894();
     TestLeetCode1888();
     TestLeetCode1895();

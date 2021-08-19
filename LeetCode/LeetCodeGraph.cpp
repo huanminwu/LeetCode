@@ -10888,4 +10888,158 @@ int LeetCodeGraph::minCost(int maxTime, vector<vector<int>>& edges, vector<int>&
     }
     return -1;
 }
+
+/// <summary>
+/// Leet code 1952. Three Divisors
+///                                                
+/// Medium
+/// 
+/// A peak element in a 2D grid is an element that is strictly greater 
+/// than all of its adjacent neighbors to the left, right, top, and bottom.
+///
+/// Given a 0-indexed m x n matrix mat where no two adjacent cells are 
+/// equal, find any peak element mat[i][j] and return the length 2 
+/// array [i,j].
+///
+/// You may assume that the entire matrix is surrounded by an outer 
+/// perimeter with the value -1 in each cell.
+///
+/// You must write an algorithm that runs in O(m log(n)) or O(n log(m)) 
+/// time.
+/// 
+/// Example 1:
+/// Input: mat = [[1,4],[3,2]]
+/// Output: [0,1]
+/// Explanation: Both 3 and 4 are peak elements so [1,0] and [0,1] are 
+/// both acceptable answers.
+///
+/// Example 2:
+/// Input: mat = [[10,20,15],[21,30,14],[7,16,32]]
+/// Output: [1,1]
+/// Explanation: Both 30 and 32 are peak elements so [1,1] and [2,2] 
+/// are both acceptable answers.
+///
+/// Constraints:
+/// 1. m == mat.length
+/// 2. n == mat[i].length
+/// 3. 1 <= m, n <= 500
+/// 4. 1 <= mat[i][j] <= 10^5
+/// 5. No two adjacent cells are equal.
+/// </summary>
+vector<int> LeetCodeGraph::findPeakGrid(vector<vector<int>>& mat)
+{
+    vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    vector<int> peak = { 0, 0 };
+    queue<vector<int>> pq;
+    pq.push(peak);
+    while (!pq.empty())
+    {
+        vector<int> curr = pq.front();
+        pq.pop();
+        peak = curr;
+        for (size_t d = 0; d < directions.size(); d++)
+        {
+            vector<int> next = curr;
+            next[0] += directions[d][0];
+            next[1] += directions[d][1];
+
+            if (next[0] < 0 || next[0] >= mat.size() ||
+                next[1] < 0 || next[1] >= mat[0].size())
+            {
+                continue;
+            }
+            if (mat[next[0]][next[1]] > mat[peak[0]][peak[1]])
+            {
+                peak = next;
+            }
+        }
+        if (peak == curr) break;
+        pq.push(peak);
+    }
+    return peak;
+}
+
+/// <summary>
+/// Leet code 1905. Count Sub Islands
+///                                                
+/// Medium
+/// 
+/// You are given two m x n binary matrices grid1 and grid2 containing 
+/// only 0's (representing water) and 1's (representing land). An 
+/// island is a group of 1's connected 4-directionally (horizontal or 
+/// vertical). Any cells outside of the grid are considered water cells.
+///
+/// An island in grid2 is considered a sub-island if there is an island 
+/// in grid1 that contains all the cells that make up this island in grid2.
+/// 
+/// Return the number of islands in grid2 that are considered sub-islands.
+///
+/// Example 1:
+/// Input: grid1 = [[1,1,1,0,0],[0,1,1,1,1],[0,0,0,0,0],[1,0,0,0,0],
+/// [1,1,0,1,1]], grid2 = [[1,1,1,0,0],[0,0,1,1,1],[0,1,0,0,0],[1,0,1,1,0],
+/// [0,1,0,1,0]]
+/// Output: 3
+/// Explanation: In the picture above, the grid on the left is grid1 and 
+/// the grid on the right is grid2.
+/// The 1s colored red in grid2 are those considered to be part of a 
+/// sub-island. There are three sub-islands.
+///
+/// Example 2:
+/// Input: grid1 = [[1,0,1,0,1],[1,1,1,1,1],[0,0,0,0,0],[1,1,1,1,1],
+/// [1,0,1,0,1]], grid2 = [[0,0,0,0,0],[1,1,1,1,1],[0,1,0,1,0],[0,1,0,1,0],
+/// [1,0,0,0,1]]
+/// Output: 2 
+/// Explanation: In the picture above, the grid on the left is grid1 and 
+/// the grid on the right is grid2.
+/// The 1s colored red in grid2 are those considered to be part of a 
+/// sub-island. There are two sub-islands.
+///
+/// Constraints:
+/// 1. m == grid1.length == grid2.length
+/// 2. n == grid1[i].length == grid2[i].length
+/// 3. 1 <= m, n <= 500
+/// 4. grid1[i][j] and grid2[i][j] are either 0 or 1.
+/// </summary>
+int LeetCodeGraph::countSubIslands(vector<vector<int>>& grid1, vector<vector<int>>& grid2)
+{
+    vector<vector<int>> grid = grid2;
+    int n = grid1.size();
+    int m = grid1[0].size();
+    int result = 0;
+    vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (grid[i][j] == 0) continue;
+            queue<pair<int, int>> queue;
+            queue.push(make_pair(i, j));
+            int count = 1;
+            while (!queue.empty())
+            {
+                pair<int, int> pos = queue.front();
+                queue.pop();
+                if (grid1[pos.first][pos.second] == 0) count = 0;
+                for (size_t d = 0; d < directions.size(); d++)
+                {
+                    pair<int, int> next = pos;
+                    next.first += directions[d][0];
+                    next.second += directions[d][1];
+                    if (next.first < 0 || next.first >= n ||
+                        next.second < 0 || next.second >= m)
+                    {
+                        continue;
+                    }
+                    if (grid[next.first][next.second] == 1)
+                    {
+                        grid[next.first][next.second] = 0;
+                        queue.push(next);
+                    }
+                }
+            }
+            result += count;
+        }
+    }
+    return result;
+}
 #pragma endregion
