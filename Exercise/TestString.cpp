@@ -4429,8 +4429,65 @@ void TestLeetCode1957(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode1961(void)
+{
+    LeetCodeString leetCode;
+    string s = "iloveleetcode";
+    vector<string> words = { "i", "love", "leetcode", "apples" };
+    bool result = leetCode.isPrefixString(s, words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "iloveleetcode";
+    words = { "apples","i","love","leetcode" };
+    result = leetCode.isPrefixString(s, words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1967(void)
+{
+    LeetCodeString leetCode;
+    vector<string> patterns = { "a", "abc", "bc", "d" };
+    string word = "abc";
+    int result = leetCode.numOfStrings(patterns, word);
+    Logger::WriteMessage(patterns);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    patterns = { "a","b","c" };
+    word = "aaaaabbbbb";
+    result = leetCode.numOfStrings(patterns, word);
+    Logger::WriteMessage(patterns);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    patterns = { "a","a","a" };
+    word = "ab";
+    result = leetCode.numOfStrings(patterns, word);
+    Logger::WriteMessage(patterns);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+}
+
+void TestLeetCode1974(void)
+{
+    LeetCodeString leetCode;
+    string word = "abc";
+    int result = leetCode.minTimeToType(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "bza";
+    result = leetCode.minTimeToType(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "zjpc";
+    result = leetCode.minTimeToType(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1974();
+    TestLeetCode1967();
+    TestLeetCode1961();
     TestLeetCode1957();
     TestLeetCode1960();
     TestLeetCode1948();

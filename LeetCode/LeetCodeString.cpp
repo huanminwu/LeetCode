@@ -15381,4 +15381,188 @@ string LeetCodeString::makeFancyString(string s)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code 1961. Check If String Is a Prefix of Array
+///                                                
+/// Easy
+/// 
+/// Given a string s and an array of strings words, determine whether s 
+/// is a prefix string of words.
+///
+/// A string s is a prefix string of words if s can be made by 
+/// concatenating the first k strings in words for some positive k no 
+/// larger than words.length.
+///
+/// Return true if s is a prefix string of words, or false otherwise.
+/// 
+/// Example 1:
+/// Input: s = "iloveleetcode", words = ["i","love","leetcode","apples"]
+/// Output: true
+/// Explanation:
+/// s can be made by concatenating "i", "love", and "leetcode" together.
+///
+/// Example 2:
+/// Input: s = "iloveleetcode", words = ["apples","i","love","leetcode"]
+/// Output: false
+/// Explanation:
+/// It is impossible to make s using a prefix of arr.
+/// 
+/// Constraints:
+/// 1. 1 <= words.length <= 100
+/// 2. 1 <= words[i].length <= 20
+/// 3. 1 <= s.length <= 1000
+/// 4. words[i] and s consist of only lowercase English letters.
+/// </summary>
+bool LeetCodeString::isPrefixString(string s, vector<string>& words)
+{
+    string t;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        t.append(words[i]);
+        if (s == t)
+        {
+            return true;
+        }
+        else if (t.size() > s.size())
+        {
+            return false;
+        }
+    }
+    return false;
+}
+
+/// <summary>
+/// Leet code 1967. Number of Strings That Appear as Substrings in Word
+///                                                
+/// Easy
+/// 
+/// Given an array of strings patterns and a string word, return the number 
+/// of strings in patterns that exist as a substring in word.
+///
+/// A substring is a contiguous sequence of characters within a string.
+/// 
+/// Example 1:
+/// Input: patterns = ["a","abc","bc","d"], word = "abc"
+/// Output: 3
+/// Explanation:
+/// - "a" appears as a substring in "abc".
+/// - "abc" appears as a substring in "abc".
+/// - "bc" appears as a substring in "abc".
+/// - "d" does not appear as a substring in "abc".
+/// 3 of the strings in patterns appear as a substring in word.
+///
+/// Example 2:
+/// Input: patterns = ["a","b","c"], word = "aaaaabbbbb"
+/// Output: 2
+/// Explanation:
+/// - "a" appears as a substring in "aaaaabbbbb".
+/// - "b" appears as a substring in "aaaaabbbbb".
+/// - "c" does not appear as a substring in "aaaaabbbbb".
+/// 2 of the strings in patterns appear as a substring in word.
+///
+/// Example 3:
+/// 
+/// Input: patterns = ["a","a","a"], word = "ab"
+/// Output: 3
+/// Explanation: Each of the patterns appears as a substring in word "ab".
+///
+/// Constraints:
+/// 1. 1 <= patterns.length <= 100
+/// 2. 1 <= patterns[i].length <= 100
+/// 3. 1 <= word.length <= 100
+/// 4. patterns[i] and word consist of lowercase English letters.
+/// </summary>
+int LeetCodeString::numOfStrings(vector<string>& patterns, string word)
+{
+    int result = 0;
+    for (size_t i = 0; i < patterns.size(); i++)
+    {
+        if (strstr(word.c_str(), patterns[i].c_str()) != nullptr)
+        {
+            result++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 1974. Minimum Time to Type Word Using Special Typewriter
+///                                                
+/// Easy
+/// 
+/// There is a special typewriter with lowercase English letters 'a' to 
+/// 'z' arranged in a circle with a pointer. A character can only be 
+/// typed if the pointer is pointing to that character. The pointer is 
+/// initially pointing to the character 'a'.
+///
+/// Each second, you may perform one of the following operations:
+/// Move the pointer one character counterclockwise or clockwise.
+/// Type the character the pointer is currently on.
+/// Given a string word, return the minimum number of seconds to type out 
+/// the characters in word.
+///
+/// Example 1:
+/// Input: word = "abc"
+/// Output: 5
+/// Explanation: 
+/// The characters are printed as follows:
+/// - Type the character 'a' in 1 second since the pointer is initially 
+///   on 'a'.
+/// - Move the pointer clockwise to 'b' in 1 second.
+/// - Type the character 'b' in 1 second.
+/// - Move the pointer clockwise to 'c' in 1 second.
+/// - Type the character 'c' in 1 second.
+///
+/// Example 2:
+/// Input: word = "bza"
+/// Output: 7
+/// Explanation:
+/// The characters are printed as follows:
+/// - Move the pointer clockwise to 'b' in 1 second.
+/// - Type the character 'b' in 1 second.
+/// - Move the pointer counterclockwise to 'z' in 2 seconds.
+/// - Type the character 'z' in 1 second.
+/// - Move the pointer clockwise to 'a' in 1 second.
+/// - Type the character 'a' in 1 second.
+///
+/// Example 3:
+/// Input: word = "zjpc"
+/// Output: 34
+/// Explanation:
+/// The characters are printed as follows:
+/// - Move the pointer counterclockwise to 'z' in 1 second.
+/// - Type the character 'z' in 1 second.
+/// - Move the pointer clockwise to 'j' in 10 seconds.
+/// - Type the character 'j' in 1 second.
+/// - Move the pointer clockwise to 'p' in 6 seconds.
+/// - Type the character 'p' in 1 second.
+/// - Move the pointer counterclockwise to 'c' in 13 seconds.
+/// - Type the character 'c' in 1 second.
+///
+/// Constraints:
+/// 1. 1 <= word.length <= 100
+/// 2. word consists of lowercase English letters.
+/// </summary>
+int LeetCodeString::minTimeToType(string word)
+{
+    int result = 0;
+    int prev = 0;
+    for (size_t i = 0; i < word.size(); i++)
+    {
+        int curr = word[i] - 'a';
+        if (curr >= prev)
+        {
+            result += min(curr - prev, prev + 26 - curr);
+        }
+        else
+        {
+            result += min(prev - curr, curr + 26 - prev);
+        }
+        prev = curr;
+        result++;
+    }
+    return result;
+}
+
 #pragma endregion

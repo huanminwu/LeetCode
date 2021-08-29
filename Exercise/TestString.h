@@ -149,5 +149,8 @@ void TestLeetCode1945(void);
 void TestLeetCode1948(void);
 void TestLeetCode1957(void);
 void TestLeetCode1960(void);
+void TestLeetCode1961(void);
+void TestLeetCode1967(void);
+void TestLeetCode1974(void);
 void TestLeetCodeString(void);
 #endif  // TestArray
