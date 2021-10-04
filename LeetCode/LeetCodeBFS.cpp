@@ -2797,4 +2797,105 @@ bool LeetCodeBFS::canReach(string s, int minJump, int maxJump)
     return result;
 }
 
+
+/// <summary>
+/// Leet code 2014. Longest Subsequence Repeated k Times
+/// </summary>
+bool LeetCodeBFS::longestSubsequenceRepeatedK(string s, string target, int k)
+{
+    int count = 0;
+    int j = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == target[j])
+        {
+            j++;
+            if (j == target.size())
+            {
+                j = 0;
+                count++;
+            }
+        }
+        if (count == k) return true;
+    }
+    return false;
+}
+
+/// <summary>
+/// Leet code 2014. Longest Subsequence Repeated k Times
+///                                                
+/// Hard
+/// 
+/// You are given a string s of length n, and an integer k. You are tasked 
+/// to find the longest subsequence repeated k times in string s.
+///
+/// A subsequence is a string that can be derived from another string by 
+/// deleting some or no characters without changing the order of the 
+/// remaining characters.
+///
+/// A subsequence seq is repeated k times in the string s if seq * k is a 
+/// subsequence of s, where seq * k represents a string constructed by 
+/// concatenating seq k times.
+///
+/// For example, "bba" is repeated 2 times in the string "bababcba", 
+/// because the string "bbabba", constructed by concatenating "bba" 2 
+/// times, is a subsequence of the string "bababcba".
+/// Return the longest subsequence repeated k times in string s. If 
+/// multiple such subsequences are found, return the lexicographically 
+/// largest one. If there is no such subsequence, return an empty string.
+/// 
+/// Example 1:
+/// example 1
+/// Input: s = "letsleetcode", k = 2
+/// Output: "let"
+/// Explanation: There are two longest subsequences repeated 2 times: 
+/// "let" and "ete".
+/// "let" is the lexicographically largest one.
+///
+/// Example 2:
+/// Input: s = "bb", k = 2
+/// Output: "b"
+/// Explanation: The longest subsequence repeated 2 times is "b".
+///
+/// Example 3:
+/// Input: s = "ab", k = 2
+/// Output: ""
+/// Explanation: There is no subsequence repeated 2 times. Empty 
+/// string is returned.
+///
+/// Example 4:
+/// Input: s = "bbabbabbbbabaababab", k = 3
+/// Output: "bbbb"
+/// Explanation: The longest subsequence "bbbb" is repeated 3 times 
+/// in "bbabbabbbbabaababab".
+///
+/// Constraints:
+/// 1. n == s.length
+/// 2. 2 <= n, k <= 2000
+/// 3. 2 <= n < k * 8
+/// 4. s consists of lowercase English letters.
+/// </summary>
+string LeetCodeBFS::longestSubsequenceRepeatedK(string s, int k)
+{
+    queue<string> queue;
+    queue.push("");
+    string result;
+    while (!queue.empty())
+    {
+        result = queue.front();
+        queue.pop();
+        if (result.size() >= 7) continue;
+        for (char c = 'a'; c <= 'z'; c++)
+        {
+            string target = result;
+            target.push_back(c);
+            if (longestSubsequenceRepeatedK(s, target, k))
+            {
+                queue.push(target);
+            }
+        }
+    }
+    return result;
+}
+
 #pragma endregion

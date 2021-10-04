@@ -4483,8 +4483,23 @@ void TestLeetCode1974(void)
     Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
 }
 
+void TestLeetCode1910(void)
+{
+    LeetCodeString leetCode;
+    string s = "daabcbaabcbc";
+    string part = "abc";
+    string result = leetCode.removeOccurrences(s, part);
+    Logger::WriteMessage("s = " + s + "; part = " + part + "; result = " + result);
+
+    s = "axxxxyyyyb";
+    part = "xy";
+    result = leetCode.removeOccurrences(s, part);
+    Logger::WriteMessage("s = " + s + "; part = " + part + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1910();
     TestLeetCode1974();
     TestLeetCode1967();
     TestLeetCode1961();

@@ -1460,8 +1460,29 @@ void TestLeetCode1882(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1964(void)
+{
+    Logger::WriteMessage("Test Leet Code 1964");
+    LeetCodeSort leetCode;
+    vector<int> obstacles = { 1, 2, 3, 2 };
+    vector<int> result = leetCode.longestObstacleCourseAtEachPosition(obstacles);
+    Logger::WriteMessage(obstacles);
+    Logger::WriteMessage(result);
+
+    obstacles = { 2,2,1 };
+    result = leetCode.longestObstacleCourseAtEachPosition(obstacles);
+    Logger::WriteMessage(obstacles);
+    Logger::WriteMessage(result);
+
+    obstacles = { 3,1,5,6,4,2 };
+    result = leetCode.longestObstacleCourseAtEachPosition(obstacles);
+    Logger::WriteMessage(obstacles);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1964();
     TestLeetCode1882();
     TestLeetCode1887();
     TestLeetCode1881();

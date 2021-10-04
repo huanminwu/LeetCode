@@ -859,8 +859,34 @@ void TestLeetCode1871(void)
         "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2014(void)
+{
+    Logger::WriteMessage("Test Leet Code 2014");
+    LeetCodeBFS leetCode;
+    string s = "letsleetcode";
+    int k = 2;
+    string result = leetCode.longestSubsequenceRepeatedK(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
+
+    s = "bb";
+    k = 2;
+    result = leetCode.longestSubsequenceRepeatedK(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
+
+    s = "ab";
+    k = 2;
+    result = leetCode.longestSubsequenceRepeatedK(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
+ 
+    s = "bbabbabbbbabaababab";
+    k = 3;
+    result = leetCode.longestSubsequenceRepeatedK(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
+}
+
 void TestLeetCodeBFS(void)
 {
+    TestLeetCode2014();
     TestLeetCode1871();
     TestLeetCode1391();
     TestLeetCode127();

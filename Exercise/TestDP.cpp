@@ -2481,8 +2481,29 @@ void TestLeetCode1955(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1911(void)
+{
+    Logger::WriteMessage("Test Leet Code 1911");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 4,2,5,3 };
+    long long result = leetCode.maxAlternatingSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,6,7,8 };
+    result = leetCode.maxAlternatingSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,2,1,2,4,5 };
+    result = leetCode.maxAlternatingSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1911();
     TestLeetCode1955();
     TestLeetCode1883();
     TestLeetCode1872();

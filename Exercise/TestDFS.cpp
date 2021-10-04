@@ -1336,8 +1336,35 @@ void TestLeetCode1931(void)
     Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2003(void)
+{
+    Logger::WriteMessage("Test Leet Code 2003");
+    LeetCodeDFS leetCode;
+    vector<int> parents = { -1, 0, 0, 2 };
+    vector<int> nums = { 1, 2, 3, 4 };
+    vector<int> result = leetCode.smallestMissingValueSubtree(parents, nums);
+    Logger::WriteMessage(parents);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    parents = { -1,0,1,0,3,3 };
+    nums = { 5,4,6,2,1,3 };
+    result = leetCode.smallestMissingValueSubtree(parents, nums);
+    Logger::WriteMessage(parents);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    parents = { -1,2,3,0,2,4,1 };
+    nums = { 2,3,4,5,6,7,8 };
+    result = leetCode.smallestMissingValueSubtree(parents, nums);
+    Logger::WriteMessage(parents);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2003();
     TestLeetCode1931();
     TestLeetCode1900();
     TestLeetCode1879();
