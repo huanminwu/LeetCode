@@ -5937,8 +5937,147 @@ void TestLeetCode1929(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2006(void)
+{
+    Logger::WriteMessage("Test Leet Code 2006");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,2,2,1 };
+    int k = 1;
+    int result = leetCode.countKDifference(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,3 };
+    k = 3;
+    result = leetCode.countKDifference(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3,2,1,5,4 };
+    k = 2;
+    result = leetCode.countKDifference(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2016(void)
+{
+    Logger::WriteMessage("Test Leet Code 2016");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 7,1,5,4 };
+    int result = leetCode.maximumDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 9,4,3,2 };
+    result = leetCode.maximumDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,5,2,10 };
+    result = leetCode.maximumDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2022(void)
+{
+    Logger::WriteMessage("Test Leet Code 2022");
+    LeetCodeArray leetCode;
+    vector<int> original = { 1, 2, 3, 4 };
+    int m = 2;
+    int n = 2;
+    vector<vector<int>> result = leetCode.construct2DArray(original, m, n);
+    Logger::WriteMessage(original);
+    Logger::WriteMessage(result);
+
+    original = { 1, 2, 3 };
+    m = 1;
+    n = 3;
+    result = leetCode.construct2DArray(original, m, n);
+    Logger::WriteMessage(original);
+    Logger::WriteMessage(result);
+
+    original = { 1,2 };
+    m = 1;
+    n = 1;
+    result = leetCode.construct2DArray(original, m, n);
+    Logger::WriteMessage(original);
+    Logger::WriteMessage(result);
+
+    original = { 3 };
+    m = 1;
+    n = 2;
+    result = leetCode.construct2DArray(original, m, n);
+    Logger::WriteMessage(original);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2032(void)
+{
+    Logger::WriteMessage("Test Leet Code 2032");
+    LeetCodeArray leetCode;
+    vector<int> nums1 = { 1, 1, 3, 2 };
+    vector<int> nums2 = { 2, 3 };
+    vector<int> nums3 = { 3 };
+    vector<int> result = leetCode.twoOutOfThree(nums1, nums2, nums3);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(nums3);
+    Logger::WriteMessage(result);
+
+    nums1 = { 3, 1 };
+    nums2 = { 2, 3 };
+    nums3 = { 1, 2 };
+    result = leetCode.twoOutOfThree(nums1, nums2, nums3);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(nums3);
+    Logger::WriteMessage(result);
+
+    nums1 = { 1,2,2 };
+    nums2 = { 4,3,3 };
+    nums3 = { 5 };
+    result = leetCode.twoOutOfThree(nums1, nums2, nums3);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(nums3);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2057(void)
+{
+    Logger::WriteMessage("Test Leet Code 2057");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 0, 1, 2 };
+    int result = leetCode.smallestEqual(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+
+    nums = { 4,3,2,1 };
+    result = leetCode.smallestEqual(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4,5,6,7,8,9,0 };
+    result = leetCode.smallestEqual(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2, 1, 3, 5, 2 };
+    result = leetCode.smallestEqual(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2057();
+    TestLeetCode2032();
+    TestLeetCode2022();
+    TestLeetCode2016();
+    TestLeetCode2006();
     TestLeetCode1929();
     TestLeetCode1894();
     TestLeetCode1888();

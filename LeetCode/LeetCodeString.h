@@ -8451,6 +8451,211 @@ public:
     /// 3. s and part consists of lowercase English letters.
     /// </summary>
     string removeOccurrences(string s, string part);
+
+    /// <summary>
+    /// Leet code 2011. Final Value of Variable After Performing Operations
+    ///                                                
+    /// Easy
+    /// 
+    /// There is a programming language with only four operations and one 
+    /// variable X:
+    ///
+    /// ++X and X++ increments the value of the variable X by 1.
+    /// --X and X-- decrements the value of the variable X by 1.
+    /// Initially, the value of X is 0.
+    ///
+    /// Given an array of strings operations containing a list of operations, 
+    /// return the final value of X after performing all the operations.
+    /// 
+    /// Example 1:
+    /// Input: operations = ["--X","X++","X++"]
+    /// Output: 1
+    /// Explanation: The operations are performed as follows:
+    /// Initially, X = 0.
+    /// --X: X is decremented by 1, X =  0 - 1 = -1.
+    /// X++: X is incremented by 1, X = -1 + 1 =  0.
+    /// X++: X is incremented by 1, X =  0 + 1 =  1.
+    ///
+    /// Example 2:
+    /// Input: operations = ["++X","++X","X++"]
+    /// Output: 3
+    /// Explanation: The operations are performed as follows:
+    /// Initially, X = 0.
+    /// ++X: X is incremented by 1, X = 0 + 1 = 1.
+    /// ++X: X is incremented by 1, X = 1 + 1 = 2.
+    /// X++: X is incremented by 1, X = 2 + 1 = 3.
+    ///
+    /// Example 3:
+    /// Input: operations = ["X++","++X","--X","X--"]
+    /// Output: 0
+    /// Explanation: The operations are performed as follows:
+    /// Initially, X = 0.
+    /// X++: X is incremented by 1, X = 0 + 1 = 1.
+    /// ++X: X is incremented by 1, X = 1 + 1 = 2.
+    /// --X: X is decremented by 1, X = 2 - 1 = 1.
+    /// X--: X is decremented by 1, X = 1 - 1 = 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= operations.length <= 100
+    /// 2. operations[i] will be either "++X", "X++", "--X", or "X--".
+    /// </summary>
+    int finalValueAfterOperations(vector<string>& operations);
+
+    /// <summary>
+    /// Leet code 2027. Minimum Moves to Convert String
+    ///                                                
+    /// Easy
+    /// 
+    /// You are given a string s consisting of n characters which are either 
+    /// 'X' or 'O'.
+    ///
+    /// A move is defined as selecting three consecutive characters of s and 
+    /// converting them to 'O'. Note that if a move is applied to the 
+    /// character 'O', it will stay the same.
+    ///
+    /// Return the minimum number of moves required so that all the characters
+    /// of s are converted to 'O'.
+    ///
+    /// Example 1:
+    ///
+    /// Input: s = "XXX"
+    /// Output: 1
+    /// Explanation: XXX -> OOO
+    /// We select all the 3 characters and convert them in one move.
+    ///
+    /// Example 2:
+    /// Input: s = "XXOX"
+    /// Output: 2
+    /// Explanation: XXOX -> OOOX -> OOOO
+    /// We select the first 3 characters in the first move, and convert them 
+    /// to 'O'.
+    /// Then we select the last 3 characters and convert them so that the 
+    /// final string contains all 'O's.
+    ///
+    /// Example 3:
+    /// Input: s = "OOOO"
+    /// Output: 0
+    /// Explanation: There are no 'X's in s to convert.
+    ///
+    /// Constraints:
+    /// 1. 3 <= s.length <= 1000
+    /// 2. s[i] is either 'X' or 'O'.
+    /// </summary>
+    int minimumMoves(string s);
+
+    /// <summary>
+    /// Leet code 2042. Check if Numbers Are Ascending in a Sentence
+    ///                                                
+    /// Easy
+    /// 
+    /// A sentence is a list of tokens separated by a single space with no 
+    /// leading or trailing spaces. Every token is either a positive number 
+    /// consisting of digits 0-9 with no leading zeros, or a word consisting 
+    /// of lowercase English letters.
+    ///
+    /// For example, "a puppy has 2 eyes 4 legs" is a sentence with seven 
+    /// tokens: "2" and "4" are numbers and the other tokens such as "puppy" 
+    /// are words.
+    /// Given a string s representing a sentence, you need to check if all the 
+    /// numbers in s are strictly increasing from left to right (i.e., other 
+    /// than the last number, each number is strictly smaller than the number 
+    /// on its right in s).
+    ///
+    /// Return true if so, or false otherwise.
+    /// Example 1:
+    /// Input: s = "1 box has 3 blue 4 red 6 green and 12 yellow marbles"
+    /// Output: true
+    /// Explanation: The numbers in s are: 1, 3, 4, 6, 12.
+    /// They are strictly increasing from left to right: 1 < 3 < 4 < 6 < 12.
+    ///
+    /// Example 2:
+    /// Input: s = "hello world 5 x 5"
+    /// Output: false
+    /// Explanation: The numbers in s are: 5, 5. They are not strictly 
+    /// increasing.
+    ///
+    /// Example 3:
+    /// Input: s = "sunset is at 7 51 pm overnight lows will be in the 
+    /// low 50 and 60 s"
+    /// Output: false
+    /// Explanation: The numbers in s are: 7, 51, 50, 60. They are not 
+    /// strictly increasing.
+    ///
+    /// Example 4:
+    /// Input: s = "4 5 11 26"
+    /// Output: true
+    /// Explanation: The numbers in s are: 4, 5, 11, 26.
+    /// They are strictly increasing from left to right: 4 < 5 < 11 < 26.
+    ///
+    /// Constraints:
+    /// 1. 3 <= s.length <= 200
+    /// 2. s consists of lowercase English letters, spaces, and digits 
+    ///    from 0 to 9, inclusive.
+    /// 3. The number of tokens in s is between 2 and 100, inclusive.
+    /// 4. The tokens in s are separated by a single space.
+    /// 5. There are at least two numbers in s.
+    /// 6. Each number in s is a positive number less than 100, with no 
+    ///    leading zeros.
+    /// 7. s contains no leading or trailing spaces.
+    /// </summary>
+    bool areNumbersAscending(string s);
+
+    /// <summary>
+    /// Leet code 2047. Number of Valid Words in a Sentence
+    ///                                                
+    /// Easy
+    /// 
+    /// A sentence consists of lowercase letters ('a' to 'z'), digits 
+    /// ('0' to '9'), hyphens ('-'), punctuation marks ('!', '.', and ','), 
+    /// and spaces (' ') only. Each sentence can be broken down into one or 
+    /// more tokens separated by one or more spaces ' '.
+    ///
+    /// A token is a valid word if all three of the following are true:
+    ///
+    /// It only contains lowercase letters, hyphens, and/or punctuation 
+    /// (no digits).
+    /// There is at most one hyphen '-'. If present, it must be surrounded 
+    /// by lowercase characters ("a-b" is valid, but "-ab" and "ab-" are 
+    /// not valid).
+    /// There is at most one punctuation mark. If present, it must be at 
+    /// the end of the token ("ab,", "cd!", and "." are valid, but 
+    /// "a!b" and "c.," are not valid).
+    /// Examples of valid words include "a-b.", "afad", "ba-c", "a!", and "!".
+    ///
+    /// Given a string sentence, return the number of valid words in sentence.
+    ///
+    /// Example 1:
+    /// Input: sentence = "cat and  dog"
+    /// Output: 3
+    /// Explanation: The valid words in the sentence are "cat", "and", and "dog".
+    ///
+    /// Example 2:
+    /// Input: sentence = "!this  1-s b8d!"
+    /// Output: 0
+    /// Explanation: There are no valid words in the sentence.
+    /// "!this" is invalid because it starts with a punctuation mark.
+    /// "1-s" and "b8d" are invalid because they contain digits.
+    ///
+    /// Example 3:
+    /// Input: sentence = "alice and  bob are playing stone-game10"
+    /// Output: 5
+    /// Explanation: The valid words in the sentence are "alice", "and", 
+    /// "bob", "are", and "playing".
+    /// "stone-game10" is invalid because it contains digits.
+    ///
+    /// Example 4:
+    /// Input: sentence = "he bought 2 pencils, 3 erasers, and 1  pencil-sharpener."
+    /// Output: 6
+    /// Explanation: The valid words in the sentence are "he", "bought", "pencils,", 
+    /// "erasers,", "and", and "pencil-sharpener.".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= sentence.length <= 1000
+    /// 2. sentence only contains lowercase English letters, digits, ' ', '-', 
+    ///    '!', '.', and ','.
+    /// 3. There will be at least 1 token.
+    /// </summary>
+    int countValidWords(string sentence); 
 #pragma endregion
 };
 

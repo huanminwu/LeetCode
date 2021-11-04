@@ -1230,9 +1230,34 @@ void TestLeetCode1941(void)
     Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2053(void)
+{
+    Logger::WriteMessage("Test Leet Code 2053");
+    LeetCodeHashtable leetCode;
+    vector<string> arr = { "d", "b", "c", "b", "c", "a" };
+    int k = 2;
+    string result = leetCode.kthDistinct(arr, k);   
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
+
+    arr = { "aaa","aa","a" };
+    k = 1;
+    result = leetCode.kthDistinct(arr, k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
+
+    arr = { "a","b","a" };
+    k = 3;
+    result = leetCode.kthDistinct(arr, k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
+
+    arr = { "b", "a", "c", "a" };
+    k = 2;
+    result = leetCode.kthDistinct(arr, k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
+}
 
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode2053();
     TestLeetCode1941();
     TestLeetCode1817();
     TestLeetCode1814();

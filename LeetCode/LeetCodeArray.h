@@ -10278,6 +10278,227 @@ public:
     /// 3. 1 <= nums[i] <= 1000
     /// </summary>
     vector<int> getConcatenation(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code 2006. Count Number of Pairs With Absolute Difference K
+    ///                                                
+    /// Easy
+    /// 
+    /// Given an integer array nums and an integer k, return the number of 
+    /// pairs (i, j) where i < j such that |nums[i] - nums[j]| == k.
+    ///
+    /// The value of |x| is defined as:
+    ///
+    /// x if x >= 0.
+    /// -x if x < 0.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2,2,1], k = 1
+    /// Output: 4
+    /// Explanation: The pairs with an absolute difference of 1 are:
+    /// - [1,2,2,1]
+    /// - [1,2,2,1]
+    /// - [1,2,2,1]
+    /// - [1,2,2,1]
+    ///
+    /// Example 2:
+    /// Input: nums = [1,3], k = 3
+    /// Output: 0
+    /// Explanation: There are no pairs with an absolute difference of 3.
+    ///
+    /// Example 3:
+    /// Input: nums = [3,2,1,5,4], k = 2
+    /// Output: 3
+    /// Explanation: The pairs with an absolute difference of 2 are:
+    /// - [3,2,1,5,4]
+    /// - [3,2,1,5,4]
+    /// - [3,2,1,5,4]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 200
+    /// 2. 1 <= nums[i] <= 100
+    /// 3. 1 <= k <= 99
+    /// </summary>
+    int countKDifference(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code 2016. Maximum Difference Between Increasing Elements
+    ///                                                
+    /// Easy
+    /// 
+    /// Given a 0-indexed integer array nums of size n, find the maximum 
+    /// difference between nums[i] and nums[j] (i.e., nums[j] - nums[i]), 
+    /// such that 0 <= i < j < n and nums[i] < nums[j].
+    /// Return the maximum difference. If no such i and j exists, return -1.
+    /// 
+    /// Example 1:
+    /// Input: nums = [7,1,5,4]
+    /// Output: 4
+    /// Explanation:
+    /// The maximum difference occurs with i = 1 and j = 2, 
+    /// nums[j] - nums[i] = 5 - 1 = 4.
+    /// Note that with i = 1 and j = 0, the difference nums[j] - nums[i] 
+    /// = 7 - 1 = 6, but i > j, so it is not valid.
+    ///
+    /// Example 2:
+    /// Input: nums = [9,4,3,2]
+    /// Output: -1
+    /// Explanation:
+    /// There is no i and j such that i < j and nums[i] < nums[j].
+    ///
+    /// Example 3:
+    /// Input: nums = [1,5,2,10]
+    /// Output: 9
+    /// Explanation:
+    /// The maximum difference occurs with i = 0 and j = 3, 
+    /// nums[j] - nums[i] = 10 - 1 = 9.
+    /// 
+    /// Constraints:
+    /// 1. n == nums.length
+    /// 2. 2 <= n <= 1000
+    /// 3. 1 <= nums[i] <= 10^9
+    /// </summary>
+    int maximumDifference(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code 2022. Convert 1D Array Into 2D Array
+    ///                                                
+    /// Easy
+    /// 
+    /// You are given a 0-indexed 1-dimensional (1D) integer array original, 
+    /// and two integers, m and n. You are tasked with creating a 
+    /// 2-dimensional (2D) array with m rows and n columns using all the 
+    /// elements from original.
+    ///
+    /// The elements from indices 0 to n - 1 (inclusive) of original should 
+    /// form the first row of the constructed 2D array, the elements from 
+    /// indices n to 2 * n - 1 (inclusive) should form the second row of 
+    /// the constructed 2D array, and so on.
+    ///
+    /// Return an m x n 2D array constructed according to the above 
+    /// procedure, or an empty 2D array if it is impossible.
+    /// 
+    /// Example 1:
+    /// Input: original = [1,2,3,4], m = 2, n = 2
+    /// Output: [[1,2],[3,4]]
+    /// Explanation:
+    /// The constructed 2D array should contain 2 rows and 2 columns.
+    /// The first group of n=2 elements in original, [1,2], becomes the first 
+    /// row in the constructed 2D array.
+    /// The second group of n=2 elements in original, [3,4], becomes the 
+    /// second row in the constructed 2D array.
+    ///
+    /// Example 2:
+    /// Input: original = [1,2,3], m = 1, n = 3
+    /// Output: [[1,2,3]]
+    /// Explanation:
+    /// The constructed 2D array should contain 1 row and 3 columns.
+    /// Put all three elements in original into the first row of the 
+    /// constructed 2D array.
+    ///
+    /// Example 3:
+    /// Input: original = [1,2], m = 1, n = 1
+    /// Output: []
+    /// Explanation:
+    /// There are 2 elements in original.
+    /// It is impossible to fit 2 elements in a 1x1 2D array, so return an 
+    /// empty 2D array.
+    ///
+    /// Example 4:
+    /// Input: original = [3], m = 1, n = 2
+    /// Output: []
+    /// Explanation:
+    /// There is 1 element in original.
+    /// It is impossible to make 1 element fill all the spots in a 1x2 2D 
+    /// array, so return an empty 2D array.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= original.length <= 5 * 10^4
+    /// 2. 1 <= original[i] <= 10^5
+    /// 3. 1 <= m, n <= 4 * 10^4
+    /// </summary>
+    vector<vector<int>> construct2DArray(vector<int>& original, int m, int n);
+
+    /// <summary>
+    /// Leet code 2032. Two Out of Three
+    ///                                                
+    /// Easy
+    /// 
+    /// Given three integer arrays nums1, nums2, and nums3, return a distinct 
+    /// array containing all the values that are present in at least two out 
+    /// of the three arrays. You may return the values in any order.
+    ///
+    /// Example 1:
+    /// Input: nums1 = [1,1,3,2], nums2 = [2,3], nums3 = [3]
+    /// Output: [3,2]
+    /// Explanation: The values that are present in at least two arrays are:
+    /// - 3, in all three arrays.
+    /// - 2, in nums1 and nums2.
+    ///
+    /// Example 2:
+    /// Input: nums1 = [3,1], nums2 = [2,3], nums3 = [1,2]
+    /// Output: [2,3,1]
+    /// Explanation: The values that are present in at least two arrays are:
+    /// - 2, in nums2 and nums3.
+    /// - 3, in nums1 and nums2.
+    /// - 1, in nums1 and nums3.
+    ///
+    /// Example 3:
+    /// Input: nums1 = [1,2,2], nums2 = [4,3,3], nums3 = [5]
+    /// Output: []
+    /// Explanation: No value is present in at least two arrays.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums1.length, nums2.length, nums3.length <= 100
+    /// 2. 1 <= nums1[i], nums2[j], nums3[k] <= 100
+    /// </summary>
+    vector<int> twoOutOfThree(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3);
+
+    /// <summary>
+    /// Leet code 2057. Smallest Index With Equal Value
+    ///                                                
+    /// Easy
+    /// 
+    /// Given a 0-indexed integer array nums, return the smallest index i of 
+    /// nums such that i mod 10 == nums[i], or -1 if such index does not exist.
+    /// 
+    /// x mod y denotes the remainder when x is divided by y.
+    /// Example 1:
+    /// Input: nums = [0,1,2]
+    /// Output: 0
+    /// Explanation: 
+    /// i=0: 0 mod 10 = 0 == nums[0].
+    /// i=1: 1 mod 10 = 1 == nums[1].
+    /// i=2: 2 mod 10 = 2 == nums[2].
+    /// All indices have i mod 10 == nums[i], so we return the smallest 
+    /// index 0.
+    /// Example 2:
+    ///
+    /// Input: nums = [4,3,2,1]
+    /// Output: 2
+    /// Explanation: 
+    /// i=0: 0 mod 10 = 0 != nums[0].
+    /// i=1: 1 mod 10 = 1 != nums[1].
+    /// i=2: 2 mod 10 = 2 == nums[2].
+    /// i=3: 3 mod 10 = 3 != nums[3].
+    /// 2 is the only index which has i mod 10 == nums[i].
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,3,4,5,6,7,8,9,0]
+    /// Output: -1
+    /// Explanation: No index satisfies i mod 10 == nums[i].
+    ///
+    /// Example 4:
+    /// Input: nums = [2,1,3,5,2]
+    /// Output: 1
+    /// Explanation: 1 is the only index with i mod 10 == nums[i].
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 0 <= nums[i] <= 9
+    /// </summary>
+    int smallestEqual(vector<int>& nums);
+
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

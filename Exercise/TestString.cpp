@@ -4497,8 +4497,87 @@ void TestLeetCode1910(void)
     Logger::WriteMessage("s = " + s + "; part = " + part + "; result = " + result);
 }
 
+void TestLeetCode2011(void)
+{
+    LeetCodeString leetCode;
+    vector<string> operations = { "--X", "X++", "X++" };
+    int result = leetCode.finalValueAfterOperations(operations);
+    Logger::WriteMessage(operations);
+    Logger::WriteMessage("; result = " + to_string(result));
+
+    operations = { "++X","++X","X++" };
+    result = leetCode.finalValueAfterOperations(operations);
+    Logger::WriteMessage(operations);
+    Logger::WriteMessage("; result = " + to_string(result));
+
+    operations = { "X++","++X","--X","X--" };
+    result = leetCode.finalValueAfterOperations(operations);
+    Logger::WriteMessage(operations);
+    Logger::WriteMessage("; result = " + to_string(result));
+}
+
+void TestLeetCode2027(void)
+{
+    LeetCodeString leetCode;
+    string s = "XXX";
+    int result = leetCode.minimumMoves(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "XXOX";
+    result = leetCode.minimumMoves(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "OOOO";
+    result = leetCode.minimumMoves(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2042(void)
+{
+    LeetCodeString leetCode;
+    string s = "1 box has 3 blue 4 red 6 green and 12 yellow marbles";
+    bool result = leetCode.areNumbersAscending(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "hello world 5 x 5";
+    result = leetCode.areNumbersAscending(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "sunset is at 7 51 pm overnight lows will be in the low 50 and 60 s";
+    result = leetCode.areNumbersAscending(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "4 5 11 26";
+    result = leetCode.areNumbersAscending(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2047(void)
+{
+    LeetCodeString leetCode;
+    string sentence = "cat and  dog";
+    int result = leetCode.countValidWords(sentence);
+    Logger::WriteMessage("sentence = " + sentence + "; result = " + to_string(result));
+
+    sentence = "!this  1-s b8d!";
+    result = leetCode.countValidWords(sentence);
+    Logger::WriteMessage("sentence = " + sentence + "; result = " + to_string(result));
+
+    sentence = "alice and  bob are playing stone-game10";
+    result = leetCode.countValidWords(sentence);
+    Logger::WriteMessage("sentence = " + sentence + "; result = " + to_string(result));
+
+    sentence = "he bought 2 pencils, 3 erasers, and 1  pencil-sharpener. a.b .";
+    result = leetCode.countValidWords(sentence);
+    Logger::WriteMessage("sentence = " + sentence + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2047();
+    TestLeetCode2042();
+    TestLeetCode2027();
+    TestLeetCode2011();
     TestLeetCode1910();
     TestLeetCode1974();
     TestLeetCode1967();

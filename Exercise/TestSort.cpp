@@ -1480,8 +1480,35 @@ void TestLeetCode1964(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2037(void)
+{
+    Logger::WriteMessage("Test Leet Code 2037");
+    LeetCodeSort leetCode;
+    vector<int> seats = { 3, 1, 5 };
+    vector<int> students = { 2, 7, 4 };
+    int result = leetCode.minMovesToSeat(seats, students);
+    Logger::WriteMessage(seats);
+    Logger::WriteMessage(students);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    seats = { 4,1,5,9 };
+    students = { 1,3,2,6 };
+    result = leetCode.minMovesToSeat(seats, students);
+    Logger::WriteMessage(seats);
+    Logger::WriteMessage(students);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    seats = { 2,2,6,6 };
+    students = { 1,3,2,6 };
+    result = leetCode.minMovesToSeat(seats, students);
+    Logger::WriteMessage(seats);
+    Logger::WriteMessage(students);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2037();
     TestLeetCode1964();
     TestLeetCode1882();
     TestLeetCode1887();
