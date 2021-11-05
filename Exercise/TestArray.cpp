@@ -6071,8 +6071,35 @@ void TestLeetCode2057(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1991(void)
+{
+    Logger::WriteMessage("Test Leet Code 1991");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2,3,-1,8,4 };
+    int result = leetCode.findMiddleIndex(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+
+    nums = { 1,-1,4 };
+    result = leetCode.findMiddleIndex(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,5 };
+    result = leetCode.findMiddleIndex(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1 };
+    result = leetCode.findMiddleIndex(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1991();
     TestLeetCode2057();
     TestLeetCode2032();
     TestLeetCode2022();

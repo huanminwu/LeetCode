@@ -1255,8 +1255,34 @@ void TestLeetCode2053(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
 }
 
+void TestLeetCode1995(void)
+{
+    Logger::WriteMessage("Test Leet Code 1995");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1,2,3,6 };
+    int result = leetCode.countQuadruplets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,3,6,4,5 };
+    result = leetCode.countQuadruplets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1,3,5 };
+    result = leetCode.countQuadruplets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 28, 8, 49, 85, 37, 90, 20, 8 };
+    result = leetCode.countQuadruplets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1995();
     TestLeetCode2053();
     TestLeetCode1941();
     TestLeetCode1817();

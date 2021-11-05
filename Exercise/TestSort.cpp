@@ -1506,8 +1506,26 @@ void TestLeetCode2037(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1984(void)
+{
+    Logger::WriteMessage("Test Leet Code 1984");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 90 };
+    int k = 1;
+    int result = leetCode.minimumDifference(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 9,4,1,7 };
+    k = 2;
+    result = leetCode.minimumDifference(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1984();
     TestLeetCode2037();
     TestLeetCode1964();
     TestLeetCode1882();

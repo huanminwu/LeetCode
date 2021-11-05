@@ -4572,8 +4572,28 @@ void TestLeetCode2047(void)
     Logger::WriteMessage("sentence = " + sentence + "; result = " + to_string(result));
 }
 
+void TestLeetCode2000(void)
+{
+    LeetCodeString leetCode;
+    string word = "abcdefd";
+    char ch = 'd';
+    string result = leetCode.reversePrefix(word, ch);
+    Logger::WriteMessage("word = " + word + "; ch = " + ch + "; result = " + result);
+
+    word = "xyxzxe";
+    ch = 'z';
+    result = leetCode.reversePrefix(word, ch);
+    Logger::WriteMessage("word = " + word + "; ch = " + ch + "; result = " + result);
+
+    word = "abcd";
+    ch = 'z';
+    result = leetCode.reversePrefix(word, ch);
+    Logger::WriteMessage("word = " + word + "; ch = " + ch + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2000();
     TestLeetCode2047();
     TestLeetCode2042();
     TestLeetCode2027();

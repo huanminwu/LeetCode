@@ -3947,8 +3947,29 @@ void TestLeetCode1904(void)
     Logger::WriteMessage("startTime = " + startTime + "; finishTime = " + finishTime + "; result = " + to_string(result));
 }
 
+void TestLeetCode1979(void)
+{
+    Logger::WriteMessage("Test Leet Code 1979");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 2, 5, 6, 9, 10 };
+    int result = leetCode.findGCD(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7,5,6,8,3 };
+    result = leetCode.findGCD(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,3 };
+    result = leetCode.findGCD(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1979();
     TestLeetCode1904();
     TestLeetCode1925();
     TestLeetCode1952();
