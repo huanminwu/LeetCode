@@ -6013,38 +6013,6 @@ void TestLeetCode2022(void)
     Logger::WriteMessage(result);
 }
 
-void TestLeetCode2032(void)
-{
-    Logger::WriteMessage("Test Leet Code 2032");
-    LeetCodeArray leetCode;
-    vector<int> nums1 = { 1, 1, 3, 2 };
-    vector<int> nums2 = { 2, 3 };
-    vector<int> nums3 = { 3 };
-    vector<int> result = leetCode.twoOutOfThree(nums1, nums2, nums3);
-    Logger::WriteMessage(nums1);
-    Logger::WriteMessage(nums2);
-    Logger::WriteMessage(nums3);
-    Logger::WriteMessage(result);
-
-    nums1 = { 3, 1 };
-    nums2 = { 2, 3 };
-    nums3 = { 1, 2 };
-    result = leetCode.twoOutOfThree(nums1, nums2, nums3);
-    Logger::WriteMessage(nums1);
-    Logger::WriteMessage(nums2);
-    Logger::WriteMessage(nums3);
-    Logger::WriteMessage(result);
-
-    nums1 = { 1,2,2 };
-    nums2 = { 4,3,3 };
-    nums3 = { 5 };
-    result = leetCode.twoOutOfThree(nums1, nums2, nums3);
-    Logger::WriteMessage(nums1);
-    Logger::WriteMessage(nums2);
-    Logger::WriteMessage(nums3);
-    Logger::WriteMessage(result);
-}
-
 void TestLeetCode2057(void)
 {
     Logger::WriteMessage("Test Leet Code 2057");
@@ -6101,7 +6069,6 @@ void TestLeetCodeArray(void)
 {
     TestLeetCode1991();
     TestLeetCode2057();
-    TestLeetCode2032();
     TestLeetCode2022();
     TestLeetCode2016();
     TestLeetCode2006();

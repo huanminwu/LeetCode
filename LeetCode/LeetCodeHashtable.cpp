@@ -135,9 +135,12 @@ string LeetCodeHashtable::fractionToDecimal(int numerator, int denominator)
 /// <summary>
 /// Leet code #202. Happy Number   
 /// Write an algorithm to determine if a number is "happy".
-/// A happy number is a number defined by the following process: Starting with any positive integer,
-/// replace the number by the sum of the squares of its digits, and repeat the process until the number
-/// equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. 
+/// A happy number is a number defined by the following process: 
+/// Starting with any positive integer,
+/// replace the number by the sum of the squares of its digits, and 
+/// repeat the process until the number
+/// equals 1 (where it will stay), or it loops endlessly in a cycle 
+/// which does not include 1. 
 /// Those numbers for which this process ends in 1 are happy numbers.
 /// Example: 19 is a happy number
 /// 1^2 + 9^2 = 82
@@ -313,8 +316,9 @@ vector<int> LeetCodeHashtable::intersectionArrayII(vector<int>& nums1, vector<in
 
 /// <summary>
 /// Leet code #219. Contains Duplicate II
-/// Given an array of integers and an integer k, find out whether there are two distinct 
-/// indices i and j in the array such that nums[i] = nums[j] and the difference between i and j is at most k.	
+/// Given an array of integers and an integer k, find out whether there are 
+/// two distinct indices i and j in the array such that nums[i] = nums[j] 
+/// and the difference between i and j is at most k.	
 /// </summary>
 bool LeetCodeHashtable::containsNearbyDuplicate(vector<int>& nums, int k)
 {
@@ -331,36 +335,99 @@ bool LeetCodeHashtable::containsNearbyDuplicate(vector<int>& nums, int k)
 }
 
 /// <summary>
+/// Leet code #205. Isomorphic Strings
+///
+/// Given two strings s and t, determine if they are isomorphic. 
+/// Two strings are isomorphic if the characters in s can be replaced to 
+/// get t.
+/// All occurrences of a character must be replaced with another character 
+/// while preserving the order of characters. No two characters may map to 
+/// the same character but a character may map to itself.
+/// For example,
+/// Given "egg", "add", return true.
+///
+/// Given "foo", "bar", return false.
+/// Given "paper", "title", return true.
+/// Note:
+/// You may assume both s and t have the same length.
+/// </summary>
+bool LeetCodeHashtable::isIsomorphic(string s, string t)
+{
+    unordered_map<char, char> src_map, dst_map;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (src_map.count(s[i]) == 0 && dst_map.count(t[i]) == 0)
+        {
+            src_map[s[i]] = t[i];
+            dst_map[t[i]] = s[i];
+        }
+        else if (src_map[s[i]] != t[i] || dst_map[t[i]] != s[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet code #242. Valid Anagram 
+///
+/// Given two strings s and t, write a function to determine if t is an 
+/// anagram of s.
+/// For example,  
+/// s = "anagram", t = "nagaram", return true.
+/// s = "rat", t = "car", return false.
+/// Note:
+///   You may assume the string contains only lowercase alphabets.
+/// Follow up:
+///   What if the inputs contain unicode characters? How would you adapt 
+///   your solution to such case? 
+/// </summary>
+bool LeetCodeHashtable::isAnagram(string s, string t)
+{
+    if (s.size() != t.size()) return false;
+    unordered_map<char, int> map;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        map[s[i]]++;
+    }
+    for (size_t i = 0; i < t.size(); i++)
+    {
+        map[t[i]]--;
+        if (map[t[i]] == 0) map.erase(t[i]);
+    }
+    if (map.size() == 0) return true;
+    else return false;
+}
+
+/// <summary>
 /// Leet code #347. Top K Frequent Elements
 /// Given a non-empty array of integers, return the k most frequent elements.
 /// For example,
 /// Given [1,1,1,2,2,3] and k = 2, return [1,2]. 
 /// Note: 
 /// You may assume k is always valid, 1 <= k <= number of unique elements.
-/// Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
+/// Your algorithm's time complexity must be better than O(n log n), 
+/// where n is the array's size.
 /// </summary>
 vector<int> LeetCodeHashtable::topKFrequent(vector<int>& nums, int k)
 {
     vector<int> result;
-    unordered_map<int, int> number_map;
-    for (int num : nums)  number_map[num]++;
-    vector<pair<int, int>> number_list;
-    for (auto itr : number_map)
+    unordered_map<int, int> num_count;
+    for (int num : nums)  num_count[num]++;
+    priority_queue<pair<int, int>> pq;
+    for (auto itr : num_count)
     {
-        pair<int, int> pair = make_pair(itr.first, itr.second);
-        for (size_t i = 0; i < number_list.size(); i++)
-        {
-            if (pair.second > number_list[i].second)
-            {
-                swap(pair, number_list[i]);
-            }
-        }
-        if (number_list.size() < (size_t)k) number_list.push_back(pair);
+        pair<int, int> pair = make_pair(-itr.second, itr.first);
+        pq.push(pair);
+        if (pq.size() > (size_t)k) pq.pop();
     }
-    for (size_t i = 0; i < number_list.size(); i++)
+    while (!pq.empty())
     {
-        result.push_back(number_list[i].first);
+        result.push_back(pq.top().second);
+        pq.pop();
     }
+    std::reverse(result.begin(), result.end());
     return result;
 }
 
@@ -3744,4 +3811,61 @@ int LeetCodeHashtable::countQuadruplets(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet code 2032. Two Out of Three
+///                                                
+/// Easy
+/// 
+/// Given three integer arrays nums1, nums2, and nums3, return a distinct 
+/// array containing all the values that are present in at least two out 
+/// of the three arrays. You may return the values in any order.
+///
+/// Example 1:
+/// Input: nums1 = [1,1,3,2], nums2 = [2,3], nums3 = [3]
+/// Output: [3,2]
+/// Explanation: The values that are present in at least two arrays are:
+/// - 3, in all three arrays.
+/// - 2, in nums1 and nums2.
+///
+/// Example 2:
+/// Input: nums1 = [3,1], nums2 = [2,3], nums3 = [1,2]
+/// Output: [2,3,1]
+/// Explanation: The values that are present in at least two arrays are:
+/// - 2, in nums2 and nums3.
+/// - 3, in nums1 and nums2.
+/// - 1, in nums1 and nums3.
+///
+/// Example 3:
+/// Input: nums1 = [1,2,2], nums2 = [4,3,3], nums3 = [5]
+/// Output: []
+/// Explanation: No value is present in at least two arrays.
+///
+/// Constraints:
+/// 1. 1 <= nums1.length, nums2.length, nums3.length <= 100
+/// 2. 1 <= nums1[i], nums2[j], nums3[k] <= 100
+/// </summary>
+vector<int> LeetCodeHashtable::twoOutOfThree(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3)
+{
+    vector<set<int>> set_map(101);
+    vector<int> result;
+    for (size_t i = 0; i < nums1.size(); i++)
+    {
+        set_map[nums1[i]].insert(1);
+    }
+    for (size_t i = 0; i < nums2.size(); i++)
+    {
+        set_map[nums2[i]].insert(2);
+    }
+    for (size_t i = 0; i < nums3.size(); i++)
+    {
+        set_map[nums3[i]].insert(3);
+    }
+    for (size_t i = 0; i < set_map.size(); i++)
+    {
+        if (set_map[i].size() >= 2) result.push_back(i);
+    }
+    return result;
+}
+
 #pragma endregion

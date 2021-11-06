@@ -149,6 +149,41 @@ public:
     bool isHappy(int n);
 
     /// <summary>
+    /// Leet code #205. Isomorphic Strings
+    ///
+    /// Given two strings s and t, determine if they are isomorphic. 
+    /// Two strings are isomorphic if the characters in s can be replaced to 
+    /// get t.
+    /// All occurrences of a character must be replaced with another character 
+    /// while preserving the order of characters. No two characters may map to 
+    /// the same character but a character may map to itself.
+    /// For example,
+    /// Given "egg", "add", return true.
+    ///
+    /// Given "foo", "bar", return false.
+    /// Given "paper", "title", return true.
+    /// Note:
+    /// You may assume both s and t have the same length.
+    /// </summary>
+    bool isIsomorphic(string s, string t);
+
+    /// <summary>
+    /// Leet code #242. Valid Anagram 
+    ///
+    /// Given two strings s and t, write a function to determine if t is an 
+    /// anagram of s.
+    /// For example,  
+    /// s = "anagram", t = "nagaram", return true.
+    /// s = "rat", t = "car", return false.
+    /// Note:
+    ///   You may assume the string contains only lowercase alphabets.
+    /// Follow up:
+    ///   What if the inputs contain unicode characters? How would you adapt 
+    ///   your solution to such case? 
+    /// </summary>
+    bool isAnagram(string s, string t);
+
+    /// <summary>
     /// Leet code #217. Contains Duplicate
     /// Given an array of integers, find if the array contains any duplicates. Your function should return true 
     /// if any value appears at least twice in the array, and it should return false if every element is distinct.	
@@ -2045,5 +2080,41 @@ public:
     /// 2. 1 <= nums[i] <= 100
     /// </summary>
     int countQuadruplets(vector<int>& nums); 
+
+
+    /// <summary>
+    /// Leet code 2032. Two Out of Three
+    ///                                                
+    /// Easy
+    /// 
+    /// Given three integer arrays nums1, nums2, and nums3, return a distinct 
+    /// array containing all the values that are present in at least two out 
+    /// of the three arrays. You may return the values in any order.
+    ///
+    /// Example 1:
+    /// Input: nums1 = [1,1,3,2], nums2 = [2,3], nums3 = [3]
+    /// Output: [3,2]
+    /// Explanation: The values that are present in at least two arrays are:
+    /// - 3, in all three arrays.
+    /// - 2, in nums1 and nums2.
+    ///
+    /// Example 2:
+    /// Input: nums1 = [3,1], nums2 = [2,3], nums3 = [1,2]
+    /// Output: [2,3,1]
+    /// Explanation: The values that are present in at least two arrays are:
+    /// - 2, in nums2 and nums3.
+    /// - 3, in nums1 and nums2.
+    /// - 1, in nums1 and nums3.
+    ///
+    /// Example 3:
+    /// Input: nums1 = [1,2,2], nums2 = [4,3,3], nums3 = [5]
+    /// Output: []
+    /// Explanation: No value is present in at least two arrays.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums1.length, nums2.length, nums3.length <= 100
+    /// 2. 1 <= nums1[i], nums2[j], nums3[k] <= 100
+    /// </summary>
+    vector<int> twoOutOfThree(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3); 
 };
 #endif  // LeetCodeHashtable

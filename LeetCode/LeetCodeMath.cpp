@@ -11015,7 +11015,7 @@ int LeetCodeMath::waysToBuildRooms(vector<vector<int>>& tree, int root, long lon
         total_cnt += waysToBuildRooms(tree, next, product);
     }
     product = product * total_cnt % M;
-    return root != 0 ? total_cnt : product;
+    return (root != 0) ? total_cnt : (int)product;
 }
 
 /// <summary>
@@ -11066,15 +11066,15 @@ int LeetCodeMath::waysToBuildRooms(vector<vector<int>>& tree, int root, long lon
 /// </summary>
 int LeetCodeMath::waysToBuildRooms(vector<int>& prevRoom)
 {
-    int M = 1000000007;
+    long long M = 1000000007;
     vector<vector<int>> tree(prevRoom.size());
     long long fact = 1, prod = 1;
-    for (int i = 1; i < prevRoom.size(); ++i) 
+    for (size_t i = 1; i < prevRoom.size(); ++i) 
     {
         tree[prevRoom[i]].push_back(i);
-        fact = fact * (i + 1) % M;
+        fact = fact * ((long long)i + 1) % M;
     }
-    return fact * modPow(waysToBuildRooms(tree, 0, prod), M - 2, M) % M;
+    return fact * modPow((long long)waysToBuildRooms(tree, 0, prod), M - 2, M) % M;
 }
 
 /// <summary>
@@ -11455,8 +11455,8 @@ int LeetCodeMath::numberOfRounds(string startTime, string finishTime)
     int start_time = start_hour * 60 + start_minute;
     int finish_time = finish_hour * 60 + finish_minute;
     if (start_time > finish_time) finish_time += 24 * 60;
-    int start_round = ceil((double)start_time / 15);
-    int finish_round = floor((double)finish_time / 15);
+    int start_round = (int)ceil((double)start_time / 15);
+    int finish_round = (int)floor((double)finish_time / 15);
     int result = 0;
     if (finish_round > start_round) result = finish_round - start_round;
     return result;
@@ -11517,4 +11517,100 @@ int LeetCodeMath::findGCD(vector<int>& nums)
         swap(min_val, max_val);
     }
     return max_val;
+}
+
+/// <summary>
+/// Leet code 2035. Partition Array Into Two Arrays to Minimize Sum 
+///                 Difference
+///                                                
+/// Hard
+/// 
+/// You are given an integer array nums of 2 * n integers. You need to 
+/// partition nums into two arrays of length n to minimize the absolute 
+/// difference of the sums of the arrays. To partition nums, put each 
+/// element of nums into one of the two arrays.
+///
+/// Return the minimum possible absolute difference.
+/// 
+/// Example 1:
+/// Input: nums = [3,9,7,3]
+/// Output: 2
+/// Explanation: One optimal partition is: [3,9] and [7,3].
+/// The absolute difference between the sums of the arrays is 
+/// abs((3 + 9) - (7 + 3)) = 2.
+///
+/// Example 2:
+/// Input: nums = [-36,36]
+/// Output: 72
+/// Explanation: One optimal partition is: [-36] and [36].
+/// The absolute difference between the sums of the arrays is 
+/// abs((-36) - (36)) = 72.
+///
+/// Example 3:
+/// Input: nums = [2,-1,0,4,-2,-9]
+/// Output: 0
+/// Explanation: One optimal partition is: [2,4,-9] and [-1,0,-2].
+/// The absolute difference between the sums of the arrays is 
+/// abs((2 + 4 + -9) - (-1 + 0 + -2)) = 0.
+/// 
+/// Constraints:
+/// 1 <= n <= 15
+/// nums.length == 2 * n
+/// -10^7 <= nums[i] <= 10^7
+/// </summary>
+int LeetCodeMath::minimumDifference(vector<int>& nums)
+{
+    int sum = 0;
+    int n = nums.size() / 2;
+    int n_half = n / 2;
+    int left_sum = 0, right_sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        left_sum += nums[i];
+        right_sum += nums[n+i];
+    }
+    int result = abs(right_sum - left_sum);
+
+    vector<vector<int>> left(n_half), right(n_half);
+    for (int mask = 1; mask < (1 << n); mask++)
+    {
+        int count = 0;
+        int l_sum = 0;
+        int r_sum = 0;
+        for (int i = 0; i < n; i++)
+        {
+            int bit = 1 << i;
+            if ((bit & mask) != 0)
+            {
+                count++;
+                l_sum += nums[i];
+                r_sum += nums[i + n];
+            }
+        }
+        if (count > n_half) continue;
+        left[count - 1].push_back(l_sum);
+        right[count - 1].push_back(r_sum);
+    }
+    for (int i = 0;  i < n_half; i++)
+    {
+        sort(right[i].begin(), right[i].end());
+     
+        for (size_t j = 0; j < left[i].size(); j++)
+        {
+            int a = left[i][j];
+            int b = (right_sum - left_sum + 2 * a) / 2;
+            auto itr = lower_bound(right[i].begin(), right[i].end(), b);
+            if (itr != right[i].begin())
+            {
+                int b = *prev(itr);
+                result = min(result, abs(right_sum - left_sum + 2 * a -2 * b));
+            }
+            if (itr != right[i].end())
+            {
+                int b = *itr;
+                result = min(result, abs(right_sum - left_sum + 2 * a - 2 * b));
+            }
+        }
+    }
+    return result;
 }

@@ -544,37 +544,6 @@ string LeetCodeString::minWindow(string s, string t)
 
 
 /// <summary>
-/// Leet code #242. Valid Anagram 
-///
-/// Given two strings s and t, write a function to determine if t is an 
-/// anagram of s.
-/// For example,  
-/// s = "anagram", t = "nagaram", return true.
-/// s = "rat", t = "car", return false.
-/// Note:
-///   You may assume the string contains only lowercase alphabets.
-/// Follow up:
-///   What if the inputs contain unicode characters? How would you adapt 
-///   your solution to such case? 
-/// </summary>
-bool LeetCodeString::isAnagram(string s, string t)
-{
-    if (s.size() != t.size()) return false;
-    unordered_map<char, int> map;
-    for (size_t i = 0; i < s.size(); i++)
-    {
-        map[s[i]]++;
-    }
-    for (size_t i = 0; i < t.size(); i++)
-    {
-        map[t[i]]--;
-        if (map[t[i]] == 0) map.erase(t[i]);
-    }
-    if (map.size() == 0) return true;
-    else return false;
-}
-
-/// <summary>
 /// Leet code #58. Length of Last Word
 ///
 /// Given a string s consists of upper/lower-case alphabets and empty 
@@ -1068,48 +1037,6 @@ int LeetCodeString::countSegments(string s)
     return segments;
 }
 
-/// <summary>
-/// Leet code #205. Isomorphic Strings
-///
-/// Given two strings s and t, determine if they are isomorphic. 
-/// Two strings are isomorphic if the characters in s can be replaced to 
-/// get t.
-/// All occurrences of a character must be replaced with another character 
-/// while preserving the order of characters. No two characters may map to 
-/// the same character but a character may map to itself.
-/// For example,
-/// Given "egg", "add", return true.
-///
-/// Given "foo", "bar", return false.
-/// Given "paper", "title", return true.
-/// Note:
-/// You may assume both s and t have the same length.
-/// </summary>
-bool LeetCodeString::isIsomorphic(string s, string t)
-{
-    unordered_map<char, char> char_map;
-    unordered_set<char> used_chars;
-    for (size_t i = 0; i < s.size(); i++)
-    {
-        if (char_map.find(s[i]) == char_map.end())
-        {
-            if (used_chars.find(t[i]) == used_chars.end())
-            {
-                char_map[s[i]] = t[i];
-                used_chars.insert(t[i]);
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else if (char_map[s[i]] != t[i])
-        {
-            return false;
-        }
-    }
-    return true;
-}
 
 /// <summary>
 /// Leet code #438. Find All Anagrams in a String

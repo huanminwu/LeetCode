@@ -423,6 +423,7 @@ void TestLeetCode1452(void)
         {"leetcode", "google", "facebook"},
         {"google","microsoft"},
         {"google","facebook"},
+        {"facebook","microsoft" },
         {"google"},
         {"amazon"}
     };
@@ -620,6 +621,31 @@ void TestLeetCode594(void)
     int max_length = leetCode.findLHS(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("Longest_Harmonious_Subsequence = " + to_string(max_length));
+}
+
+void TestLeetCode205(void)
+{
+    Logger::WriteMessage("Test Leet Code 205");
+    LeetCodeHashtable leetCode;
+    string s = "egg";
+    string t = "add";
+    bool result = leetCode.isIsomorphic(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "foo";
+    t = "bar";
+    result = leetCode.isIsomorphic(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "paper"; 
+    t = "title";
+    result = leetCode.isIsomorphic(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "ab";
+    t = "aa";
+    result = leetCode.isIsomorphic(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + (string)(result ? "true" : "false"));
 }
 
 void TestLeetCode219(void)
@@ -1280,8 +1306,54 @@ void TestLeetCode1995(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2032(void)
+{
+    Logger::WriteMessage("Test Leet Code 2032");
+    LeetCodeHashtable leetCode;
+    vector<int> nums1 = { 1, 1, 3, 2 };
+    vector<int> nums2 = { 2, 3 };
+    vector<int> nums3 = { 3 };
+    vector<int> result = leetCode.twoOutOfThree(nums1, nums2, nums3);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(nums3);
+    Logger::WriteMessage(result);
+
+    nums1 = { 3, 1 };
+    nums2 = { 2, 3 };
+    nums3 = { 1, 2 };
+    result = leetCode.twoOutOfThree(nums1, nums2, nums3);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(nums3);
+    Logger::WriteMessage(result);
+
+    nums1 = { 1,2,2 };
+    nums2 = { 4,3,3 };
+    nums3 = { 5 };
+    result = leetCode.twoOutOfThree(nums1, nums2, nums3);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(nums3);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode242(void)
+{
+    Logger::WriteMessage("Test Leet Code 242");
+    LeetCodeHashtable leetCode;
+    string s = "anagram";
+    string t = "nagaram";
+    bool result = leetCode.isAnagram(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode242();
+    TestLeetCode205();
+    TestLeetCode1452();
+    TestLeetCode2032();
     TestLeetCode1995();
     TestLeetCode2053();
     TestLeetCode1941();
@@ -1327,7 +1399,6 @@ void TestLeetCodeHashtable(void)
     TestLeetCode1496();
     TestLeetCode1487();
     TestLeetCode1481();
-    TestLeetCode1452();
     TestLeetCode1426();
     TestLeetCode1418();
     TestLeetCode1394();

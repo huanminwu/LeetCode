@@ -3967,8 +3967,29 @@ void TestLeetCode1979(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2035(void)
+{
+    Logger::WriteMessage("Test Leet Code 2035");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 3, 9, 7, 3 };
+    int result = leetCode.minimumDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -36,36 };
+    result = leetCode.minimumDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,-1,0,4,-2,-9 };
+    result = leetCode.minimumDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2035();
     TestLeetCode1979();
     TestLeetCode1904();
     TestLeetCode1925();

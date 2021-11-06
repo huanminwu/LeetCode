@@ -599,18 +599,6 @@ void TestLeetCode76(void)
     Logger::WriteMessage("s = " + s + ";t = " + t + ";min_window=" + min_window);
 }
 
-void TestLeetCode242(void)
-{
-    Logger::WriteMessage("Test Leet Code 242");
-    LeetCodeString leetCode;
-    string s = "anagram";
-    string t = "nagaram";
-    string message;
-    bool isAnagram = leetCode.isAnagram(s, t);
-    message = s + " and " + t + (isAnagram ? " is " : " is not ") + "Anagram";
-    Logger::WriteMessage(message);
-}
-
 void TestLeetCode3(void)
 {
     Logger::WriteMessage("Test Leet Code 3");
@@ -1369,27 +1357,6 @@ void TestLeetCode187(void)
     Logger::WriteMessage("s = " + s);
     result = leetCode.findRepeatedDnaSequences(s);
     Logger::WriteMessage(result);
-}
-
-void TestLeetCode205(void)
-{
-    Logger::WriteMessage("Test Leet Code 205");
-    LeetCodeString leetCode;
-    string s, t;
-    bool isIsomorphic;
-    s = "egg"; t = "add";
-    isIsomorphic = leetCode.isIsomorphic(s, t);
-    Logger::WriteMessage(s + " and " + t + string(isIsomorphic ? " are " : " are not ") + "isIsomorphic");
-    s = "foo"; t = "bar";
-    isIsomorphic = leetCode.isIsomorphic(s, t);
-    Logger::WriteMessage(s + " and " + t + string(isIsomorphic ? " are " : " are not ") + "isIsomorphic");
-    s = "paper"; t = "title";
-    isIsomorphic = leetCode.isIsomorphic(s, t);
-    Logger::WriteMessage(s + " and " + t + string(isIsomorphic ? " are " : " are not ") + "isIsomorphic");
-
-    s = "ab"; t = "aa";
-    isIsomorphic = leetCode.isIsomorphic(s, t);
-    Logger::WriteMessage(s + " and " + t + string(isIsomorphic ? " are " : " are not ") + "isIsomorphic");
 }
 
 void TestLeetCode290(void)
@@ -4752,7 +4719,6 @@ void TestLeetCodeString(void)
     TestLeetCode393();
     TestLeetCode290();
     TestLeetCode187();
-    TestLeetCode205();
     TestLeetCode409();
     TestLeetCode336();
     TestLeetCode125();
@@ -4794,7 +4760,6 @@ void TestLeetCodeString(void)
     TestLeetCode387();
     TestLeetCode383();
     TestLeetCode3();
-    TestLeetCode242();
     TestLeetCode76();
     TestLeetCode68();
     TestLeetCode14();

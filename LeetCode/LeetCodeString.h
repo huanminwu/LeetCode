@@ -154,25 +154,6 @@ public:
     bool isValidNumber(string s);
 
     /// <summary>
-    /// Leet code #205. Isomorphic Strings
-    ///
-    /// Given two strings s and t, determine if they are isomorphic. 
-    /// Two strings are isomorphic if the characters in s can be replaced to 
-    /// get t.
-    /// All occurrences of a character must be replaced with another character 
-    /// while preserving the order of characters. No two characters may map to 
-    /// the same character but a character may map to itself.
-    /// For example,
-    /// Given "egg", "add", return true.
-    ///
-    /// Given "foo", "bar", return false.
-    /// Given "paper", "title", return true.
-    /// Note:
-    /// You may assume both s and t have the same length.
-    /// </summary>
-    bool isIsomorphic(string s, string t);
-
-    /// <summary>
     /// Leet code #125. Valid Palindrome
     ///
     /// Given a string, determine if it is a palindrome, considering only 
@@ -1141,22 +1122,6 @@ public:
     /// and not a substring.
     /// </summary>
     int lengthOfLongestSubstring(string s);
-
-    /// <summary>
-    /// Leet code #242. Valid Anagram 
-    ///
-    /// Given two strings s and t, write a function to determine if t is an 
-    /// anagram of s.
-    /// For example,  
-    /// s = "anagram", t = "nagaram", return true.
-    /// s = "rat", t = "car", return false.
-    /// Note:
-    ///   You may assume the string contains only lowercase alphabets.
-    /// Follow up:
-    ///   What if the inputs contain unicode characters? How would you adapt 
-    ///   your solution to such case? 
-    /// </summary>
-    bool isAnagram(string s, string t);
 
     /// <summary>
     /// Leet code #383. Ransom Note

@@ -17248,62 +17248,6 @@ vector<vector<int>> LeetCodeArray::construct2DArray(vector<int>& original, int m
 }
 
 /// <summary>
-/// Leet code 2032. Two Out of Three
-///                                                
-/// Easy
-/// 
-/// Given three integer arrays nums1, nums2, and nums3, return a distinct 
-/// array containing all the values that are present in at least two out 
-/// of the three arrays. You may return the values in any order.
-///
-/// Example 1:
-/// Input: nums1 = [1,1,3,2], nums2 = [2,3], nums3 = [3]
-/// Output: [3,2]
-/// Explanation: The values that are present in at least two arrays are:
-/// - 3, in all three arrays.
-/// - 2, in nums1 and nums2.
-///
-/// Example 2:
-/// Input: nums1 = [3,1], nums2 = [2,3], nums3 = [1,2]
-/// Output: [2,3,1]
-/// Explanation: The values that are present in at least two arrays are:
-/// - 2, in nums2 and nums3.
-/// - 3, in nums1 and nums2.
-/// - 1, in nums1 and nums3.
-///
-/// Example 3:
-/// Input: nums1 = [1,2,2], nums2 = [4,3,3], nums3 = [5]
-/// Output: []
-/// Explanation: No value is present in at least two arrays.
-///
-/// Constraints:
-/// 1. 1 <= nums1.length, nums2.length, nums3.length <= 100
-/// 2. 1 <= nums1[i], nums2[j], nums3[k] <= 100
-/// </summary>
-vector<int> LeetCodeArray::twoOutOfThree(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3)
-{
-    vector<set<int>> set_map(101);
-    vector<int> result;
-    for (size_t i = 0; i < nums1.size(); i++)
-    {
-        set_map[nums1[i]].insert(1);
-    }
-    for (size_t i = 0; i < nums2.size(); i++)
-    {
-        set_map[nums2[i]].insert(2);
-    }
-    for (size_t i = 0; i < nums3.size(); i++)
-    {
-        set_map[nums3[i]].insert(3);
-    }
-    for (size_t i = 0; i < set_map.size(); i++)
-    {
-        if (set_map[i].size() >= 2) result.push_back(i);
-    }
-    return result;
-}
-
-/// <summary>
 /// Leet code 2057. Smallest Index With Equal Value
 ///                                                
 /// Easy
