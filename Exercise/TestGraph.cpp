@@ -3546,8 +3546,35 @@ void TestLeetCode1905(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1926(void)
+{
+    Logger::WriteMessage("Test Leet Code 1926");
+    LeetCodeGraph leetCode;
+    vector<vector<char>> maze = { {'+', '+', '.', '+'},{'.', '.', '.', '+'},{'+', '+', '+', '.'} };
+    vector<int> entrance = { 1, 2 };
+    int result = leetCode.nearestExit(maze, entrance);
+    Logger::WriteMessage(maze);
+    Logger::WriteMessage(entrance);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    maze = { {'+', '+', '+'},{'.', '.', '.'},{'+', '+', '+'} };
+    entrance = { 1, 0 };
+    result = leetCode.nearestExit(maze, entrance);
+    Logger::WriteMessage(maze);
+    Logger::WriteMessage(entrance);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    maze = { {'.', '+'} };
+    entrance = { 0, 0 };
+    result = leetCode.nearestExit(maze, entrance);
+    Logger::WriteMessage(maze);
+    Logger::WriteMessage(entrance);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1926();
     TestLeetCode1905();
     TestLeetCode1901();
     TestLeetCode1928();

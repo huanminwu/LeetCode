@@ -6065,8 +6065,26 @@ void TestLeetCode1991(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1930(void)
+{
+    Logger::WriteMessage("Test Leet Code 1930");
+    LeetCodeArray leetCode;
+    string s = "aabca";
+    int result = leetCode.countPalindromicSubsequence(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+    
+    s = "adc";
+    result = leetCode.countPalindromicSubsequence(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "bbcbaba";
+    result = leetCode.countPalindromicSubsequence(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1930();
     TestLeetCode1991();
     TestLeetCode2057();
     TestLeetCode2022();

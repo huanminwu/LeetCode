@@ -3868,4 +3868,75 @@ vector<int> LeetCodeHashtable::twoOutOfThree(vector<int>& nums1, vector<int>& nu
     return result;
 }
 
+/// <summary>
+/// Leet code 1915. Number of Wonderful Substrings
+///                                                
+/// Medium
+/// 
+/// A wonderful string is a string where at most one letter appears an odd 
+/// number of times.
+///
+/// For example, "ccjjc" and "abab" are wonderful, but "ab" is not.
+/// Given a string word that consists of the first ten lowercase English 
+/// letters ('a' through 'j'), return the number of wonderful non-empty 
+/// substrings in word. If the same substring appears multiple times in 
+/// word, then count each occurrence separately.
+///
+/// A substring is a contiguous sequence of characters in a string.
+/// 
+/// Example 1:
+/// Input: word = "aba"
+/// Output: 4
+/// Explanation: The four wonderful substrings are underlined below:
+/// - "aba" -> "a"
+/// - "aba" -> "b"
+/// - "aba" -> "a"
+/// - "aba" -> "aba"
+///
+/// Example 2:
+/// Input: word = "aabb"
+/// Output: 9
+/// Explanation: The nine wonderful substrings are underlined below:
+/// - "aabb" -> "a"
+/// - "aabb" -> "aa"
+/// - "aabb" -> "aab"
+/// - "aabb" -> "aabb"
+/// - "aabb" -> "a"
+/// - "aabb" -> "abb"
+/// - "aabb" -> "b"
+/// - "aabb" -> "bb"
+/// - "aabb" -> "b"
+///
+/// Example 3:
+/// Input: word = "he"
+/// Output: 2
+/// Explanation: The two wonderful substrings are underlined below:
+/// - "he" -> "h"
+/// - "he" -> "e"
+/// 
+/// Constraints:
+/// 1. 1 <= word.length <= 10^5
+/// 2. word consists of lowercase English letters from 'a' to 'j'.
+/// </summary>
+long long LeetCodeHashtable::wonderfulSubstrings(string word)
+{
+    vector<int> str_count(2048);
+    str_count[0] = 1;
+    int bit_mask = 0;
+    long long result = 0;
+    for (size_t i = 0; i < word.size(); i++)
+    {
+        bit_mask ^= (1 << (word[i] - 'a'));
+        result += str_count[bit_mask];
+        
+        for (int j = 0; j < 10; j++)
+        {
+            int target_mask = bit_mask ^ (1 << j);
+            result += str_count[target_mask];
+        }
+        str_count[bit_mask] ++;
+    }
+    return result;
+}
+
 #pragma endregion

@@ -1362,8 +1362,39 @@ void TestLeetCode2003(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2060(void)
+{
+    Logger::WriteMessage("Test Leet Code 2003");
+    LeetCodeDFS leetCode;
+    string s1 = "internationalization";
+    string s2 = "i18n";
+    bool result = leetCode.possiblyEquals(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "result = " + (string)(result ? "true" : "false"));
+
+    s1 = "l123e";
+    s2 = "44";
+    result = leetCode.possiblyEquals(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "result = " + (string)(result ? "true" : "false"));
+
+    s1 = "a5b";
+    s2 = "c5b";
+    result = leetCode.possiblyEquals(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "result = " + (string)(result ? "true" : "false"));
+
+    s1 = "112s";
+    s2 = "g841";
+    result = leetCode.possiblyEquals(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "result = " + (string)(result ? "true" : "false"));
+
+    s1 = "ab";
+    s2 = "a2";
+    result = leetCode.possiblyEquals(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2060();
     TestLeetCode2003();
     TestLeetCode1931();
     TestLeetCode1900();

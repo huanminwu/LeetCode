@@ -1348,8 +1348,26 @@ void TestLeetCode242(void)
     Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1915(void)
+{
+    Logger::WriteMessage("Test Leet Code 1915");
+    LeetCodeHashtable leetCode;
+    string word = "aba";
+    int result = leetCode.wonderfulSubstrings(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "aabb";
+    result = leetCode.wonderfulSubstrings(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "he";
+    result = leetCode.wonderfulSubstrings(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode1915();
     TestLeetCode242();
     TestLeetCode205();
     TestLeetCode1452();

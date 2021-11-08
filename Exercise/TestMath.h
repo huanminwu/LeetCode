@@ -160,6 +160,8 @@ void TestLeetCode1952(void);
 void TestLeetCode1925(void);
 void TestLeetCode1904(void);
 void TestLeetCode1979(void);
+void TestLeetCode1922(void);
+void TestLeetCode1927(void);
 void TestLeetCode2035(void);
 void TestLeetCodeMath(void);
 #endif  // TestMath

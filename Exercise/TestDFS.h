@@ -55,5 +55,6 @@ void TestLeetCode1900(void);
 void TestLeetCode1931(void);
 void TestLeetCode1931(void);
 void TestLeetCode2003(void);
+void TestLeetCode2060(void);
 void TestLeetCodeDFS(void);
 #endif  // TestTree

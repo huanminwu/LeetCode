@@ -1523,8 +1523,35 @@ void TestLeetCode1984(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1921(void)
+{
+    Logger::WriteMessage("Test Leet Code 1921");
+    LeetCodeSort leetCode;
+    vector<int> dist = { 1, 3, 4 };
+    vector<int> speed = { 1, 1, 1 };
+    int result = leetCode.eliminateMaximum(dist, speed);
+    Logger::WriteMessage(dist);
+    Logger::WriteMessage(speed);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    dist = { 1,1,2,3 };
+    speed = { 1,1,1,1 };
+    result = leetCode.eliminateMaximum(dist, speed);
+    Logger::WriteMessage(dist);
+    Logger::WriteMessage(speed);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    dist = { 3,2,4 };
+    speed = { 5,3,2 };
+    result = leetCode.eliminateMaximum(dist, speed);
+    Logger::WriteMessage(dist);
+    Logger::WriteMessage(speed);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1921();
     TestLeetCode1984();
     TestLeetCode2037();
     TestLeetCode1964();

@@ -3987,8 +3987,44 @@ void TestLeetCode2035(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1922(void)
+{
+    Logger::WriteMessage("Test Leet Code 1922");
+    LeetCodeMath leetCode;
+    int n = 1;
+    int result = leetCode.countGoodNumbers(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    result = leetCode.countGoodNumbers(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 50;
+    result = leetCode.countGoodNumbers(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1927(void)
+{
+    Logger::WriteMessage("Test Leet Code 1927");
+    LeetCodeMath leetCode;
+    string num = "5023";
+    bool result = leetCode.sumGame(num);
+    Logger::WriteMessage("num = " + num + "; result = " + (string)(result ? "true" : "false"));
+
+    num = "25??";
+    result = leetCode.sumGame(num);
+    Logger::WriteMessage("num = " + num + "; result = " + (string)(result ? "true" : "false"));
+
+    num = "?3295???";
+    result = leetCode.sumGame(num);
+    Logger::WriteMessage("num = " + num + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1927();
+    TestLeetCode1922();
     TestLeetCode2035();
     TestLeetCode1979();
     TestLeetCode1904();
