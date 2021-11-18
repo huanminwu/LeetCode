@@ -7078,6 +7078,116 @@ bool LeetCodeDFS::possiblyEquals(string s1, string s2)
     return possiblyEquals(s1, s2, 0, 0, 0, 0, seen);
 }
 
+/// <summary>
+/// Leet code 1994. The Number of Good Subsets
+/// </summary>
+long long LeetCodeDFS::numberOfGoodSubsets(vector<int>& dp, size_t i, int bit_mask, vector<int>& bit_masks, 
+    long long count, long long& result)
+{
+    unsigned long long M = 1000000007;
+    while (i < dp.size())
+    {
+        if ((dp[i] != 0) && ((bit_mask & bit_masks[i]) == 0) && bit_masks[i] != -1)
+        {
+            long long next = (count * dp[i] % M);
+            if (i != 1)
+            {
+                result = (result + next) % M;
+            }
+            numberOfGoodSubsets(dp, i + 1, bit_mask | bit_masks[i], bit_masks, next, result);
+        }
+        i++;
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet code 1994. The Number of Good Subsets
+///                                                                 
+/// Hard
+/// 
+/// You are given an integer array nums. We call a subset of nums good 
+/// if its product can be represented as a product of one or more 
+/// distinct prime numbers.
+/// 
+/// For example, if nums = [1, 2, 3, 4]:
+/// [2, 3], [1, 2, 3], and [1, 3] are good subsets with products 6 = 2*3, 
+/// 6 = 2*3, and 3 = 3 respectively.
+/// [1, 4] and [4] are not good subsets with products 4 = 2*2 and 
+/// 4 = 2*2 respectively.
+/// Return the number of different good subsets in nums modulo 10^9 + 7.
+///
+/// A subset of nums is any array that can be obtained by deleting some 
+/// (possibly none or all) elements from nums. Two subsets are different 
+/// if and only if the chosen indices to delete are different.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,4]
+/// Output: 6
+/// Explanation: The good subsets are:
+/// - [1,2]: product is 2, which is the product of distinct prime 2.
+/// - [1,2,3]: product is 6, which is the product of distinct primes 2 
+///   and 3.
+/// - [1,3]: product is 3, which is the product of distinct prime 3.
+/// - [2]: product is 2, which is the product of distinct prime 2.
+/// - [2,3]: product is 6, which is the product of distinct primes 2 and 3.
+/// - [3]: product is 3, which is the product of distinct prime 3.
+///
+/// Example 2:
+/// Input: nums = [4,2,3,15]
+/// Output: 5
+/// Explanation: The good subsets are:
+/// - [2]: product is 2, which is the product of distinct prime 2.
+/// - [2,3]: product is 6, which is the product of distinct primes 2 and 3.
+/// - [2,15]: product is 30, which is the product of distinct primes 2, 3, 
+///   and 5.
+/// - [3]: product is 3, which is the product of distinct prime 3.
+/// - [15]: product is 15, which is the product of distinct primes 3 and 5.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 30
+/// </summary>
+int LeetCodeDFS::numberOfGoodSubsets(vector<int>& nums)
+{
+    vector<int> primes = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
+    vector<int> dp(31), bit_masks(31);
+
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        dp[nums[i]]++;
+    }
+
+    for (int i = 2; i <= 30; i++)
+    {
+        if ((i % 4) == 0 || (i % 9) == 0 || (i % 25) == 0)
+        {
+            bit_masks[i] = -1;
+            continue;
+        }
+        for (size_t j = 0; j < primes.size(); j++)
+        {
+            if ((i % primes[j]) == 0)
+            {
+                bit_masks[i] |= 1 << j;
+            }
+        }
+    }
+
+    unsigned long long M = 1000000007;
+    long long ones = 1;
+    for (int i = 0; i < dp[1]; i++)
+    {
+        ones = (ones * 2) % M;
+    }
+    dp[1] = ones - 1;
+    long long result = 0;
+    result = numberOfGoodSubsets(dp, 1, 0, bit_masks, 1, result);
+    return (int)result;
+}
+
+
 #pragma endregion
 
 

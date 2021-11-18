@@ -2273,6 +2273,4 @@ vector<int> LeetCodeBit::maxGeneticDifference(vector<int>& parents, vector<vecto
     maxGeneticDifference(root, root_id, tree, query_list, result);
     return result;
 }
-
-
 #pragma endregion

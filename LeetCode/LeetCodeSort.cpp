@@ -3773,38 +3773,19 @@ vector<vector<int>> LeetCodeSort::kClosest(vector<vector<int>>& points, int K)
 /// </summary>
 int LeetCodeSort::thirdMax(vector<int>& nums)
 {
-    vector<int> max_list;
+    set<int> max_list;
     for (size_t i = 0; i < nums.size(); i++)
     {
-        size_t index = 0;
-        while (index < max_list.size())
-        {
-            if (nums[i] == max_list[index])
-            {
-                break;
-            }
-            else if (nums[i] > max_list[index])
-            {
-                swap(nums[i], max_list[index]);
-            }
-            index++;
-        }
-        if ((index == max_list.size()) && (index < 3))
-        {
-            max_list.push_back(nums[i]);
-        }
+        max_list.insert(nums[i]);
+        if (max_list.size() > 3) max_list.erase(max_list.begin());
     }
     if (max_list.size() == 3)
     {
-        return max_list[2];
-    }
-    else if (max_list.size() == 0)
-    {
-        return 0;
+        return *max_list.begin();
     }
     else
     {
-        return max_list[0];
+        return *max_list.rbegin();
     }
 }
 

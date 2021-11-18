@@ -3572,8 +3572,75 @@ void TestLeetCode1926(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1970(void)
+{
+    Logger::WriteMessage("Test Leet Code 1970");
+    LeetCodeGraph leetCode;
+    int row = 2, col = 2;
+    vector<vector<int>> cells = { {1, 1},{2, 1},{1, 2},{2, 2} };
+    int result = leetCode.latestDayToCross(row, col, cells);
+    Logger::WriteMessage(cells);
+    Logger::WriteMessage("row = " + to_string(row) + "; col = " + to_string(col) + "; result = " + to_string(result));
+
+    row = 2; col = 2;
+    cells = {{ 1, 1 }, { 1, 2 }, { 2, 1 }, { 2, 2 }};
+    result = leetCode.latestDayToCross(row, col, cells);
+    Logger::WriteMessage(cells);
+    Logger::WriteMessage("row = " + to_string(row) + "; col = " + to_string(col) + "; result = " + to_string(result));
+
+    row = 3; col = 3;
+    cells = { {1, 2},{2, 1},{3, 3},{2, 2},{1, 1},{1, 3},{2, 3},{3, 2},{3, 1} };
+    result = leetCode.latestDayToCross(row, col, cells);
+    Logger::WriteMessage(cells);
+    Logger::WriteMessage("row = " + to_string(row) + "; col = " + to_string(col) + "; result = " + to_string(result));
+
+    row = 55; col = 2;
+    cells = { {53,1},{25,1},{9,2},{3,1},{54,1},{14,2},{28,1},{4,1},{44,1},{20,2},{28,2},{24,2},{50,1},{47,2},{21,1},{47,1},{22,2},{10,1},{17,1},{13,1},{12,1},{37,2},{46,2},{51,1},{32,1},{51,2},{6,2},{49,2},{13,2},{34,1},{33,1},{38,2},{52,2},{26,2},{46,1},{20,1},{33,2},{23,2},{17,2},{1,2},{3,2},{50,2},{25,2},{19,1},{21,2},{49,1},{29,1},{30,2},{41,1},{16,1},{39,2},{9,1},{48,2},{23,1},{27,1},{43,1},{45,1},{31,1},{40,1},{6,1},{42,1},{8,2},{12,2},{29,2},{36,2},{39,1},{41,2},{10,2},{44,2},{14,1},{35,1},{30,1},{2,2},{34,2},{55,1},{18,1},{32,2},{27,2},{4,2},{37,1},{38,1},{16,2},{26,1},{15,2},{19,2},{5,1},{45,2},{43,2},{55,2},{35,2},{54,2},{42,2},{22,1},{11,1},{48,1},{1,1},{36,1},{24,1},{8,1},{2,1},{7,1},{15,1},{31,2},{18,2},{7,2},{52,1},{40,2},{53,2},{11,2},{5,2} };
+    result = leetCode.latestDayToCross(row, col, cells);
+    Logger::WriteMessage(cells);
+    Logger::WriteMessage("row = " + to_string(row) + "; col = " + to_string(col) + "; result = " + to_string(result));
+    
+}
+
+void TestLeetCode1998(void)
+{
+    Logger::WriteMessage("Test Leet Code 1998");
+    LeetCodeGraph leetCode;
+    vector<int> nums = { 7, 21, 3 };
+    bool result = leetCode.gcdSort(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 5,2,6,2 };
+    result = leetCode.gcdSort(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 10,5,9,3,15 };
+    result = leetCode.gcdSort(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 8, 9, 4, 2, 3 };
+    result = leetCode.gcdSort(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 100000, 100000, 100000, 100000, 100000 };
+    result = leetCode.gcdSort(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 5, 2, 6, 2 };
+    result = leetCode.gcdSort(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1998();
+    TestLeetCode1970();
     TestLeetCode1926();
     TestLeetCode1905();
     TestLeetCode1901();

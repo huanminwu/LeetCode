@@ -10562,6 +10562,105 @@ public:
     /// </summary>
     int countPalindromicSubsequence(string s);
 
+    /// <summary>
+    /// Leet code 2009. Minimum Number of Operations to Make Array Continuous
+    ///                                                                 
+    /// Hard
+    /// 
+    /// You are given an integer array nums. In one operation, you can replace 
+    /// any element in nums with any integer.
+    ///
+    /// nums is considered continuous if both of the following conditions are 
+    /// fulfilled:
+    ///
+    /// All elements in nums are unique.
+    /// The difference between the maximum element and the minimum element in 
+    /// nums equals nums.length - 1.
+    /// For example, nums = [4, 2, 5, 3] is continuous, but nums = [1, 2, 3, 
+    /// 5, 6] is not continuous.
+    ///
+    /// Return the minimum number of operations to make nums continuous.
+    ///
+    /// Example 1:
+    /// Input: nums = [4,2,5,3]
+    /// Output: 0
+    /// Explanation: nums is already continuous.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,3,5,6]
+    /// Output: 1
+    /// Explanation: One possible solution is to change the last element to 4.
+    /// The resulting array is [1,2,3,5,4], which is continuous.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,10,100,1000]
+    /// Output: 3
+    /// Explanation: One possible solution is to:
+    /// - Change the second element to 2.
+    /// - Change the third element to 3.
+    /// - Change the fourth element to 4.
+    ///
+    /// The resulting array is [1,2,3,4], which is continuous.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    int minOperationsII(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code 1936. Add Minimum Number of Rungs
+    ///                                                                 
+    /// Medium
+    /// 
+    /// You are given a strictly increasing integer array rungs that represents
+    /// the height of rungs on a ladder. You are currently on the floor at 
+    /// height 0, and you want to reach the last rung.
+    ///
+    /// You are also given an integer dist. You can only climb to the next 
+    /// highest rung if the distance between where you are currently at (the 
+    /// floor or on a rung) and the next rung is at most dist. You are able to 
+    /// insert rungs at any positive integer height if a rung is not already 
+    /// there.
+    ///
+    /// Return the minimum number of rungs that must be added to the ladder in 
+    /// order for you to climb to the last rung.
+    /// 
+    /// Example 1:
+    /// Input: rungs = [1,3,5,10], dist = 2
+    /// Output: 2
+    /// Explanation:
+    /// You currently cannot reach the last rung.
+    /// Add rungs at heights 7 and 8 to climb this ladder. 
+    /// The ladder will now have rungs at [1,3,5,7,8,10].
+    ///
+    /// Example 2:
+    /// Input: rungs = [3,6,8,10], dist = 3
+    /// Output: 0
+    /// Explanation:
+    /// This ladder can be climbed without adding additional rungs.
+    ///
+    /// Example 3:
+    /// Input: rungs = [3,4,6,7], dist = 2
+    /// Output: 1
+    /// Explanation:
+    /// You currently cannot reach the first rung from the ground.
+    /// Add a rung at height 1 to climb this ladder.
+    /// The ladder will now have rungs at [1,3,4,6,7].
+    ///
+    /// Example 4:
+    /// Input: rungs = [5], dist = 10
+    /// Output: 0
+    /// Explanation:
+    /// This ladder can be climbed without adding additional rungs.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= rungs.length <= 10^5
+    /// 2. 1 <= rungs[i] <= 10^9
+    /// 3. 1 <= dist <= 10^9
+    /// 4. rungs is strictly increasing.
+    /// </summary>
+    int addRungs(vector<int>& rungs, int dist);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

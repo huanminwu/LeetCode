@@ -5679,6 +5679,106 @@ public:
     /// </summary>
     int nearestExit(vector<vector<char>>& maze, vector<int>& entrance);
 
+    /// <summary>
+    /// Leet code 1970. Last Day Where You Can Still Cross
+    ///                                                                 
+    /// Hard
+    /// 
+    /// There is a 1-based binary matrix where 0 represents land and 1 
+    /// represents water. You are given integers row and col representing 
+    /// the number of rows and columns in the matrix, respectively.
+    ///
+    /// Initially on day 0, the entire matrix is land. However, each day a 
+    /// new cell becomes flooded with water. You are given a 1-based 2D 
+    /// array cells, where cells[i] = [ri, ci] represents that on the ith 
+    /// day, the cell on the rith row and cith column (1-based coordinates) 
+    /// will be covered with water (i.e., changed to 1).
+    ///
+    /// You want to find the last day that it is possible to walk from the 
+    /// top to the bottom by only walking on land cells. You can start from 
+    /// any cell in the top row and end at any cell in the bottom row. You 
+    /// can only travel in the four cardinal directions (left, right, up, 
+    /// and down).
+    ///
+    /// Return the last day where it is possible to walk from the top to 
+    /// the bottom by only walking on land cells.
+    /// 
+    /// Example 1:
+    /// Input: row = 2, col = 2, cells = [[1,1],[2,1],[1,2],[2,2]]
+    /// Output: 2
+    /// Explanation: The above image depicts how the matrix changes each day 
+    /// starting from day 0.
+    /// The last day where it is possible to cross from top to bottom is on 
+    /// day 2.
+    ///
+    /// Example 2:
+    /// Input: row = 2, col = 2, cells = [[1,1],[1,2],[2,1],[2,2]]
+    /// Output: 1
+    /// Explanation: The above image depicts how the matrix changes each day 
+    /// starting from day 0.
+    /// The last day where it is possible to cross from top to bottom is on 
+    /// day 1.
+    ///
+    /// Example 3:
+    /// Input: row = 3, col = 3, cells = [[1,2],[2,1],[3,3],[2,2],[1,1],
+    /// [1,3],[2,3],[3,2],[3,1]]
+    /// Output: 3
+    /// Explanation: The above image depicts how the matrix changes each day 
+    /// starting from day 0.
+    /// The last day where it is possible to cross from top to bottom is on day 3.
+    ///	
+    /// Constraints:
+    /// 1. 2 <= row, col <= 2 * 10^4
+    /// 2. 4 <= row * col <= 2 * 10^4
+    /// 3. cells.length == row * col
+    /// 4. 1 <= ri <= row
+    /// 5. 1 <= ci <= col
+    /// 6. All the values of cells are unique.
+    /// </summary>
+    int latestDayToCross(int row, int col, vector<vector<int>>& cells);
+
+    /// <summary>
+    /// Leet code 1998. GCD Sort of an Array
+    ///                                                                 
+    /// Hard
+    /// 
+    /// You are given an integer array nums, and you can perform the following 
+    /// operation any number of times on nums:
+    ///
+    /// Swap the positions of two elements nums[i] and nums[j] if gcd(nums[i], 
+    /// nums[j]) > 1 where gcd(nums[i], nums[j]) is the greatest common 
+    /// divisor of nums[i] and nums[j].
+    /// Return true if it is possible to sort nums in non-decreasing order 
+    /// using the above swap method, or false otherwise.
+    /// 
+    /// Example 1:
+    ///  
+    /// Input: nums = [7,21,3]
+    /// Output: true
+    /// Explanation: We can sort [7,21,3] by performing the following 
+    /// operations:
+    /// - Swap 7 and 21 because gcd(7,21) = 7. nums = [21,7,3]
+    /// - Swap 21 and 3 because gcd(21,3) = 3. nums = [3,7,21]
+    ///
+    /// Example 2:
+    /// Input: nums = [5,2,6,2]
+    /// Output: false
+    /// Explanation: It is impossible to sort the array because 5 cannot 
+    /// be swapped with any other element.
+    ///
+    /// Example 3:
+    /// Input: nums = [10,5,9,3,15]
+    /// Output: true
+    /// We can sort [10,5,9,3,15] by performing the following operations:
+    /// - Swap 10 and 15 because gcd(10,15) = 5. nums = [15,5,9,3,10]
+    /// - Swap 15 and 3 because gcd(15,3) = 3. nums = [3,5,9,15,10]
+    /// - Swap 10 and 15 because gcd(10,15) = 5. nums = [3,5,9,10,15]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 3 * 10^4
+    /// 2. 2 <= nums[i] <= 10^5
+    /// </summary>
+    bool gcdSort(vector<int>& nums);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

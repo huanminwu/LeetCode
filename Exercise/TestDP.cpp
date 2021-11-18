@@ -2501,8 +2501,60 @@ void TestLeetCode1911(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1977(void)
+{
+    Logger::WriteMessage("Test Leet Code 1977");
+    LeetCodeDP leetCode;
+    string num = "506";
+    int result = leetCode.numberOfCombinations(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+
+    num = "5060";
+    result = leetCode.numberOfCombinations(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+
+    num = "327";
+    result = leetCode.numberOfCombinations(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+
+    num = "094";
+    result = leetCode.numberOfCombinations(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+
+    num = "0";
+    result = leetCode.numberOfCombinations(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+
+    num = "9999999999999";
+    result = leetCode.numberOfCombinations(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+}
+
+void TestLeetCode1987(void)
+{
+    Logger::WriteMessage("Test Leet Code 1987");
+    LeetCodeDP leetCode;
+    string num = "001";
+    int result = leetCode.numberOfUniqueGoodSubsequences(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+
+    num = "11";
+    result = leetCode.numberOfUniqueGoodSubsequences(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+
+    num = "101";
+    result = leetCode.numberOfUniqueGoodSubsequences(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+
+    num = "1001";
+    result = leetCode.numberOfUniqueGoodSubsequences(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1987();
+    TestLeetCode1977();
     TestLeetCode1911();
     TestLeetCode1955();
     TestLeetCode1883();

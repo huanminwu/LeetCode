@@ -6082,8 +6082,60 @@ void TestLeetCode1930(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode2009(void)
+{
+    Logger::WriteMessage("Test Leet Code 2009");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 4, 2, 5, 3 };
+    int result = leetCode.minOperationsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,5,6 };
+    result = leetCode.minOperationsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,10,100,1000 };
+    result = leetCode.minOperationsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode1936(void)
+{
+    Logger::WriteMessage("Test Leet Code 1936");
+    LeetCodeArray leetCode;
+    vector<int> rungs = { 1, 3, 5, 10 };
+    int dist = 2;
+    int result = leetCode.addRungs(rungs, dist);
+    Logger::WriteMessage(rungs);
+    Logger::WriteMessage("dist = " + to_string(dist) + "; result = " + to_string(result));
+
+    rungs = { 3,6,8,10 };
+    dist = 3;
+    result = leetCode.addRungs(rungs, dist);
+    Logger::WriteMessage(rungs);
+    Logger::WriteMessage("dist = " + to_string(dist) + "; result = " + to_string(result));
+
+    rungs = { 3,4,6,7 };
+    dist = 2;
+    result = leetCode.addRungs(rungs, dist);
+    Logger::WriteMessage(rungs);
+    Logger::WriteMessage("dist = " + to_string(dist) + "; result = " + to_string(result));
+
+    rungs = { 5 };
+    dist = 10;
+    result = leetCode.addRungs(rungs, dist);
+    Logger::WriteMessage(rungs);
+    Logger::WriteMessage("dist = " + to_string(dist) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1936();
+    TestLeetCode2009();
     TestLeetCode1930();
     TestLeetCode1991();
     TestLeetCode2057();

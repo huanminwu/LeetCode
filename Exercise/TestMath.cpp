@@ -4021,8 +4021,29 @@ void TestLeetCode1927(void)
     Logger::WriteMessage("num = " + num + "; result = " + (string)(result ? "true" : "false"));
 }
 
+
+void TestLeetCode1982(void)
+{
+    Logger::WriteMessage("Test Leet Code 1982");
+    LeetCodeMath leetCode;
+    int n = 3;
+    vector<int> sums = { -3, -2, -1, 0, 0, 1, 2, 3 };
+    vector<int> result = leetCode.recoverArray(n, sums);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(sums);
+    Logger::WriteMessage(result);
+
+    n = 4;
+    sums = { 0,0,5,5,4,-1,4,9,9,-1,4,3,4,8,3,8 };
+    result = leetCode.recoverArray(n, sums);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(sums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1982();
     TestLeetCode1927();
     TestLeetCode1922();
     TestLeetCode2035();

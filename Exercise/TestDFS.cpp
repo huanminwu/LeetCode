@@ -1364,7 +1364,7 @@ void TestLeetCode2003(void)
 
 void TestLeetCode2060(void)
 {
-    Logger::WriteMessage("Test Leet Code 2003");
+    Logger::WriteMessage("Test Leet Code 2060");
     LeetCodeDFS leetCode;
     string s1 = "internationalization";
     string s2 = "i18n";
@@ -1392,8 +1392,31 @@ void TestLeetCode2060(void)
     Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1994(void)
+{
+    Logger::WriteMessage("Test Leet Code 1994");
+    LeetCodeDFS leetCode;
+    vector<int> nums = { 1, 2, 3, 4 };
+    int result = leetCode.numberOfGoodSubsets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 1, 2 };
+    result = leetCode.numberOfGoodSubsets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,2,3,15 };
+    result = leetCode.numberOfGoodSubsets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeDFS(void)
 {
+
+    TestLeetCode1994();
     TestLeetCode2060();
     TestLeetCode2003();
     TestLeetCode1931();
