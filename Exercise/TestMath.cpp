@@ -4021,7 +4021,6 @@ void TestLeetCode1927(void)
     Logger::WriteMessage("num = " + num + "; result = " + (string)(result ? "true" : "false"));
 }
 
-
 void TestLeetCode1982(void)
 {
     Logger::WriteMessage("Test Leet Code 1982");
@@ -4041,8 +4040,46 @@ void TestLeetCode1982(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1954(void)
+{
+    Logger::WriteMessage("Test Leet Code 1954");
+    LeetCodeMath leetCode;
+    long long neededApples = 1;
+    long long result = leetCode.minimumPerimeter(neededApples);
+    Logger::WriteMessage("neededApples = " + to_string(neededApples) + "; result = " + to_string(result));
+  
+    neededApples = 13;
+    result = leetCode.minimumPerimeter(neededApples);
+    Logger::WriteMessage("neededApples = " + to_string(neededApples) + "; result = " + to_string(result));
+
+    neededApples = 60;
+    result = leetCode.minimumPerimeter(neededApples);
+    Logger::WriteMessage("neededApples = " + to_string(neededApples) + "; result = " + to_string(result));
+
+    neededApples = 1000000000;
+    result = leetCode.minimumPerimeter(neededApples);
+    Logger::WriteMessage("neededApples = " + to_string(neededApples) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1975(void)
+{
+    Logger::WriteMessage("Test Leet Code 1937");
+    LeetCodeMath leetCode;
+    vector<vector<int>> matrix = { {1, -1},{-1, 1} };
+    long long result = leetCode.maxMatrixSum(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    matrix = { {1, 2, 3},{-1, -2, -3},{1, 2, 3} };
+    result = leetCode.maxMatrixSum(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1975();
+    TestLeetCode1954();
     TestLeetCode1982();
     TestLeetCode1927();
     TestLeetCode1922();

@@ -6102,7 +6102,6 @@ void TestLeetCode2009(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-
 void TestLeetCode1936(void)
 {
     Logger::WriteMessage("Test Leet Code 1936");
@@ -6132,8 +6131,54 @@ void TestLeetCode1936(void)
     Logger::WriteMessage("dist = " + to_string(dist) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2025(void)
+{
+    Logger::WriteMessage("Test Leet Code 2025");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2,-1,2 };
+    int k = 3;
+    int result = leetCode.waysToPartition(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 0,0,0 };
+    k = 1;
+    result = leetCode.waysToPartition(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 22,4,-25,-20,-15,15,-16,7,19,-10,0,-13,-14 };
+    k = -33;
+    result = leetCode.waysToPartition(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 0, 0, 0, 1077, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70590, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    k = 1077;
+    result = leetCode.waysToPartition(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1937(void)
+{
+    Logger::WriteMessage("Test Leet Code 1937");
+    LeetCodeArray leetCode;
+    vector<vector<int>> points = { {1, 2, 3},{1, 5, 1},{3, 1, 1} };
+    long long result = leetCode.maxPoints(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {1, 5}, { 2, 3 }, { 4, 2 }};
+    result = leetCode.maxPoints(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1937();
+    TestLeetCode2025();
     TestLeetCode1936();
     TestLeetCode2009();
     TestLeetCode1930();

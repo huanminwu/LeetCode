@@ -1065,8 +1065,30 @@ void TestLeetCode1893(void)
         "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1943(void)
+{
+    Logger::WriteMessage("Test Leet Code 1943");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> segments = { {1, 4, 5},{4, 7, 7},{1, 7, 9} };
+    vector<vector<long long>> result = leetCode.splitPainting(segments);
+    Logger::WriteMessage(segments);
+    Logger::WriteMessage(result);
+
+    segments = { {1, 7, 9},{6, 8, 15},{8, 10, 7}};
+    result = leetCode.splitPainting(segments);
+    Logger::WriteMessage(segments);
+    Logger::WriteMessage(result);
+
+    segments = { {1, 4, 5},{1, 4, 7},{4, 7, 1},{4, 7, 11} };
+    result = leetCode.splitPainting(segments);
+    Logger::WriteMessage(segments);
+    Logger::WriteMessage(result);
+}
+
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode1943();
     TestLeetCode1893();
     TestLeetCode1854();
     TestLeetCode1792();

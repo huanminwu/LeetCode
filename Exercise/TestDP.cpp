@@ -2551,8 +2551,53 @@ void TestLeetCode1987(void)
     Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
 }
 
+void TestLeetCode1997(void)
+{
+    Logger::WriteMessage("Test Leet Code 1997");
+    LeetCodeDP leetCode;
+    vector<int> nextVisit = { 0, 0 };
+    int result = leetCode.firstDayBeenInAllRooms(nextVisit);
+    Logger::WriteMessage(nextVisit);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nextVisit = { 0,0,2 };
+    result = leetCode.firstDayBeenInAllRooms(nextVisit);
+    Logger::WriteMessage(nextVisit);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nextVisit = { 0,1,2,0 };
+    result = leetCode.firstDayBeenInAllRooms(nextVisit);
+    Logger::WriteMessage(nextVisit);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1959(void)
+{
+    Logger::WriteMessage("Test Leet Code 1959");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 10,20 };
+    int k = 0;
+    int result = leetCode.minSpaceWastedKResizing(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 10,20,30 };
+    k = 1;
+    result = leetCode.minSpaceWastedKResizing(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 10,20,15,30,20 };
+    k = 2;
+    result = leetCode.minSpaceWastedKResizing(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1959();
+    TestLeetCode1997();
     TestLeetCode1987();
     TestLeetCode1977();
     TestLeetCode1911();

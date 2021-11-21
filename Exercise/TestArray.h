@@ -179,5 +179,7 @@ void TestLeetCode2057(void);
 void TestLeetCode1991(void);
 void TestLeetCode1930(void);
 void TestLeetCode2009(void);
+void TestLeetCode2025(void);
+void TestLeetCode1937(void);
 void TestLeetCodeArray(void);
 #endif  // TestArray

@@ -1412,10 +1412,94 @@ void TestLeetCode1994(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1981(void)
+{
+    Logger::WriteMessage("Test Leet Code 1981");
+    LeetCodeDFS leetCode;
+    vector<vector<int>> mat =
+    {
+        {1,2,3},{4,5,6},{7,8,9}
+    };
+    int target = 13;
+    int result = leetCode.minimizeTheDifference(mat, target);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    mat =
+    { 
+        {1},{2},{3} 
+    };
+    target = 100;
+    result = leetCode.minimizeTheDifference(mat, target);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    mat = { {1, 2, 9, 8, 7} };
+    target = 6;
+    result = leetCode.minimizeTheDifference(mat, target);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1986(void)
+{
+    Logger::WriteMessage("Test Leet Code 1986");
+    LeetCodeDFS leetCode;
+    vector<int> tasks = { 1, 2, 3 };
+    int sessionTime = 3;
+    int result = leetCode.minSessions(tasks, sessionTime);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("sessionTime = " + to_string(sessionTime) + "; result = " + to_string(result));
+
+    tasks = { 3,1,3,1,1 };
+    sessionTime = 8;
+    result = leetCode.minSessions(tasks, sessionTime);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("sessionTime = " + to_string(sessionTime) + "; result = " + to_string(result));
+
+    tasks = { 1,2,3,4,5 };
+    sessionTime = 15;
+    result = leetCode.minSessions(tasks, sessionTime);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("sessionTime = " + to_string(sessionTime) + "; result = " + to_string(result));
+
+    tasks = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    sessionTime = 13;
+    result = leetCode.minSessions(tasks, sessionTime);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("sessionTime = " + to_string(sessionTime) + "; result = " + to_string(result));
+
+    tasks = { 3, 2, 3, 7, 5, 2, 2, 10, 9, 1, 10 };
+    sessionTime = 11;
+    result = leetCode.minSessions(tasks, sessionTime);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("sessionTime = " + to_string(sessionTime) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1947(void)
+{
+    Logger::WriteMessage("Test Leet Code 1947");
+    LeetCodeDFS leetCode;
+    vector<vector<int>> students = { {1, 1, 0},{1, 0, 1},{0, 0, 1} };
+    vector<vector<int>> mentors = { {1, 0, 0},{0, 0, 1},{1, 1, 0} };
+    int result = leetCode.maxCompatibilitySum(students, mentors);
+    Logger::WriteMessage(students);
+    Logger::WriteMessage(mentors);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    students = { {0, 0},{0, 0},{0, 0} };
+    mentors = { {1, 1},{1, 1},{1, 1} };
+    result = leetCode.maxCompatibilitySum(students, mentors);
+    Logger::WriteMessage(students);
+    Logger::WriteMessage(mentors);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeDFS(void)
 {
-
+    TestLeetCode1947();
+    TestLeetCode1986();
+    TestLeetCode1981();
     TestLeetCode1994();
     TestLeetCode2060();
     TestLeetCode2003();

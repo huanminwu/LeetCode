@@ -10661,6 +10661,107 @@ public:
     /// 4. rungs is strictly increasing.
     /// </summary>
     int addRungs(vector<int>& rungs, int dist);
+
+    /// <summary>
+    /// Leet code 2025. Maximum Number of Ways to Partition an Array
+    ///                                                                 
+    /// Hard
+    /// 
+    /// You are given a 0-indexed integer array nums of length n. The number 
+    /// of ways to partition nums is the number of pivot indices that satisfy 
+    /// both conditions:
+    ///
+    /// 1 <= pivot < n
+    /// nums[0] + nums[1] + ... + nums[pivot - 1] == nums[pivot] + 
+    /// nums[pivot + 1] + ... + nums[n - 1]
+    /// You are also given an integer k. You can choose to change the value 
+    /// of one element of nums to k, or to leave the array unchanged.
+    ///
+    /// Return the maximum possible number of ways to partition nums to 
+    /// satisfy both conditions after changing at most one element.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,-1,2], k = 3
+    /// Output: 1
+    /// Explanation: One optimal approach is to change nums[0] to k. 
+    /// The array becomes [3,-1,2].
+    /// There is one way to partition the array:
+    /// - For pivot = 2, we have the partition [3,-1 | 2]: 3 + -1 == 2.
+    ///
+    /// Example 2:
+    /// 
+    /// Input: nums = [0,0,0], k = 1
+    /// Output: 2
+    /// Explanation: The optimal approach is to leave the array unchanged.
+    /// There are two ways to partition the array:
+    /// - For pivot = 1, we have the partition [0 | 0,0]: 0 == 0 + 0.
+    /// - For pivot = 2, we have the partition [0,0 | 0]: 0 + 0 == 0.
+    ///
+    /// Example 3:
+    /// Input: nums = [22,4,-25,-20,-15,15,-16,7,19,-10,0,-13,-14], k = -33
+    /// Output: 4
+    /// Explanation: One optimal approach is to change nums[2] to k. The 
+    /// array becomes [22,4,-33,-20,-15,15,-16,7,19,-10,0,-13,-14].
+    /// There are four ways to partition the array.
+    /// 
+    /// Constraints:
+    /// 1. n == nums.length
+    /// 2. 2 <= n <= 10^5
+    /// 3. -10^5 <= k, nums[i] <= 10^5
+    /// </summary>
+    int waysToPartition(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet 1937. Maximum Number of Points with Cost
+    ///                                                                 
+    /// Medium
+    /// 
+    /// You are given an m x n integer matrix points (0-indexed). Starting 
+    /// with 0 points, you want to maximize the number of points you can get 
+    /// from the matrix.
+    ///
+    /// To gain points, you must pick one cell in each row. Picking the cell 
+    /// at coordinates (r, c) will add points[r][c] to your score.
+    ///
+    /// However, you will lose points if you pick a cell too far from the cell 
+    /// that you picked in the previous row. For every two adjacent rows r and 
+    /// r + 1 (where 0 <= r < m - 1), picking cells at coordinates (r, c1) and 
+    /// (r + 1, c2) will subtract abs(c1 - c2) from your score.
+    /// 
+    /// Return the maximum number of points you can achieve.
+    /// abs(x) is defined as:
+    /// x for x >= 0.
+    /// -x for x < 0.
+    ///
+    /// Example 1:
+    /// Input: points = [[1,2,3],[1,5,1],[3,1,1]]
+    /// Output: 9
+    /// Explanation:
+    /// The blue cells denote the optimal cells to pick, which have 
+    /// coordinates (0, 2), (1, 1), and (2, 0).
+    /// You add 3 + 5 + 3 = 11 to your score.
+    /// However, you must subtract abs(2 - 1) + abs(1 - 0) = 2 from your score.
+    /// Your final score is 11 - 2 = 9.
+    ///
+    /// Example 2:
+    /// Input: points = [[1,5],[2,3],[4,2]]
+    /// Output: 11
+    /// Explanation:
+    /// The blue cells denote the optimal cells to pick, which have 
+    /// coordinates (0, 1), (1, 1), and (2, 0).
+    /// You add 5 + 3 + 4 = 12 to your score.
+    /// However, you must subtract abs(1 - 1) + abs(1 - 0) = 1 from your score.
+    /// Your final score is 12 - 1 = 11.
+    /// 
+    /// Constraints:
+    /// 1. m == points.length
+    /// 2. n == points[r].length
+    /// 3. 1 <= m, n <= 10^5
+    /// 4. 1 <= m * n <= 10^5
+    /// 5. 0 <= points[r][c] <= 10^5
+    /// </summary>
+    long long maxPoints(vector<vector<int>>& points);
+
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

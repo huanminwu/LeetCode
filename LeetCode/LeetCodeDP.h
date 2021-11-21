@@ -4157,6 +4157,115 @@ public:
     /// 2. binary consists of only '0's and '1's.
     /// </summary>
     int numberOfUniqueGoodSubsequences(string binary);
+
+    /// <summary>
+    /// Leet 1997. First Day Where You Have Been in All the Rooms
+    ///                                                                 
+    /// Medium
+    /// 
+    /// There are n rooms you need to visit, labeled from 0 to n - 1. Each day 
+    /// is labeled, starting from 0. You will go in and visit one room a day.
+    ///
+    /// Initially on day 0, you visit room 0. The order you visit the rooms 
+    /// for the coming days is determined by the following rules and a given 
+    /// 0-indexed array nextVisit of length n:
+    ///
+    /// Assuming that on a day, you visit room i,
+    /// if you have been in room i an odd number of times (including the 
+    /// current visit), on the next day you will visit a room with a lower or 
+    /// equal room number specified by nextVisit[i] where 
+    /// 0 <= nextVisit[i] <= i;
+    /// if you have been in room i an even number of times (including the 
+    /// current visit), on the next day you will visit room (i + 1) mod n.
+    /// Return the label of the first day where you have been in all the rooms. 
+    /// It can be shown that such a day exists. Since the answer may be very 
+    /// large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: nextVisit = [0,0]
+    /// Output: 2
+    /// Explanation:
+    /// - On day 0, you visit room 0. The total times you have been in 
+    ///   room 0 is 1, which is odd.
+    ///   On the next day you will visit room nextVisit[0] = 0
+    /// - On day 1, you visit room 0, The total times you have been in 
+    ///   room 0 is 2, which is even.
+    ///   On the next day you will visit room (0 + 1) mod 2 = 1
+    /// - On day 2, you visit room 1. This is the first day where you 
+    ///   have been in all the rooms.
+    ///
+    /// Example 2:
+    /// Input: nextVisit = [0,0,2]
+    /// Output: 6
+    /// Explanation:
+    /// Your room visiting order for each day is: [0,0,1,0,0,1,2,...].
+    /// Day 6 is the first day where you have been in all the rooms.
+    ///
+    /// Example 3:
+    /// Input: nextVisit = [0,1,2,0]
+    /// Output: 6
+    /// Explanation:
+    /// Your room visiting order for each day is: [0,0,1,1,2,2,3,...].
+    /// Day 6 is the first day where you have been in all the rooms.
+    /// 
+    /// Constraints:
+    /// 1. n == nextVisit.length
+    /// 2. 2 <= n <= 10^5
+    /// 3. 0 <= nextVisit[i] <= i
+    /// </summary>
+    int firstDayBeenInAllRooms(vector<int>& nextVisit); 
+
+    /// <summary>
+    /// Leet Code 1959. Minimum Total Space Wasted With K Resizing Operations
+    ///                                                                 
+    /// Medium
+    /// 
+    /// You are currently designing a dynamic array. You are given a 0-indexed 
+    /// integer array nums, where nums[i] is the number of elements that will 
+    /// be in the array at time i. In addition, you are given an integer k, 
+    /// the maximum number of times you can resize the array (to any size).
+    ///
+    /// The size of the array at time t, sizet, must be at least nums[t] 
+    /// because there needs to be enough space in the array to hold all the 
+    /// elements. The space wasted at time t is defined as sizet - nums[t], 
+    /// and the total space wasted is the sum of the space wasted across 
+    /// every time t where 0 <= t < nums.length.
+    ///
+    /// Return the minimum total space wasted if you can resize the array at 
+    /// most k times.
+    /// 
+    /// Note: The array can have any size at the start and does not count 
+    /// towards the number of resizing operations.
+    ///
+    /// Example 1:
+    /// Input: nums = [10,20], k = 0
+    /// Output: 10
+    /// Explanation: size = [20,20].
+    /// We can set the initial size to be 20.
+    /// The total wasted space is (20 - 10) + (20 - 20) = 10.
+    ///
+    /// Example 2:
+    /// Input: nums = [10,20,30], k = 1
+    /// Output: 10
+    /// Explanation: size = [20,20,30].
+    /// We can set the initial size to be 20 and resize to 30 at time 2. 
+    /// The total wasted space is (20 - 10) + (20 - 20) + (30 - 30) = 10.
+    ///
+    /// Example 3:
+    /// Input: nums = [10,20,15,30,20], k = 2
+    /// Output: 15
+    /// Explanation: size = [10,20,20,30,30].
+    /// We can set the initial size to 10, resize to 20 at time 1, and 
+    /// resize to 30 at time 3.
+    /// The total wasted space is (10 - 10) + (20 - 20) + (20 - 15) + 
+    /// (30 - 30) + (30 - 20) = 15.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 200
+    /// 2. 1 <= nums[i] <= 10^6
+    /// 3. 0 <= k <= nums.length - 1
+    /// </summary>
+    int minSpaceWastedKResizing(vector<int>& nums, int k);
 };
 
 

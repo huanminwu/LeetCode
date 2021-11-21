@@ -1549,8 +1549,56 @@ void TestLeetCode1921(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1985(void)
+{
+    Logger::WriteMessage("Test Leet Code 1985");
+    LeetCodeSort leetCode;
+    vector<string> nums = { "3", "6", "7", "10" };
+    int k = 4;
+    string result = leetCode.kthLargestNumber(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
+
+    nums = { "2","21","12","1" };
+    k = 3;
+    result = leetCode.kthLargestNumber(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
+
+    nums = { "0","0" };
+    k = 2;
+    result = leetCode.kthLargestNumber(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
+}
+
+void TestLeetCode1942(void)
+{
+    Logger::WriteMessage("Test Leet Code 1942");
+    LeetCodeSort leetCode;
+    vector<vector<int>> times = { {1, 4},{2, 3},{4, 6} };
+    int targetFriend = 1;
+    int result = leetCode.smallestChair(times, targetFriend);
+    Logger::WriteMessage(times);
+    Logger::WriteMessage("targetFriend = " + to_string(targetFriend) + "; result = " + to_string(result));
+
+    times = { {3, 10},{1, 5},{2, 6} };
+    targetFriend = 0;
+    result = leetCode.smallestChair(times, targetFriend);
+    Logger::WriteMessage(times);
+    Logger::WriteMessage("targetFriend = " + to_string(targetFriend) + "; result = " + to_string(result));
+
+    times = { {1, 4}, { 2, 3 }, { 4, 6 }, { 3, 4 }, { 5, 6 } };
+    targetFriend = 2;
+    result = leetCode.smallestChair(times, targetFriend);
+    Logger::WriteMessage(times);
+    Logger::WriteMessage("targetFriend = " + to_string(targetFriend) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1942();
+    TestLeetCode1985();
     TestLeetCode1921();
     TestLeetCode1984();
     TestLeetCode2037();

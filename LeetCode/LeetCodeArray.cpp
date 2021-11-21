@@ -17584,5 +17584,187 @@ int LeetCodeArray::addRungs(vector<int>& rungs, int dist)
     return result;
 }
 
+/// <summary>
+/// Leet code 2025. Maximum Number of Ways to Partition an Array
+///                                                                 
+/// Hard
+/// 
+/// You are given a 0-indexed integer array nums of length n. The number 
+/// of ways to partition nums is the number of pivot indices that satisfy 
+/// both conditions:
+///
+/// 1 <= pivot < n
+/// nums[0] + nums[1] + ... + nums[pivot - 1] == nums[pivot] + 
+/// nums[pivot + 1] + ... + nums[n - 1]
+/// You are also given an integer k. You can choose to change the value 
+/// of one element of nums to k, or to leave the array unchanged.
+///
+/// Return the maximum possible number of ways to partition nums to 
+/// satisfy both conditions after changing at most one element.
+/// 
+/// Example 1:
+/// Input: nums = [2,-1,2], k = 3
+/// Output: 1
+/// Explanation: One optimal approach is to change nums[0] to k. 
+/// The array becomes [3,-1,2].
+/// There is one way to partition the array:
+/// - For pivot = 2, we have the partition [3,-1 | 2]: 3 + -1 == 2.
+///
+/// Example 2:
+/// 
+/// Input: nums = [0,0,0], k = 1
+/// Output: 2
+/// Explanation: The optimal approach is to leave the array unchanged.
+/// There are two ways to partition the array:
+/// - For pivot = 1, we have the partition [0 | 0,0]: 0 == 0 + 0.
+/// - For pivot = 2, we have the partition [0,0 | 0]: 0 + 0 == 0.
+///
+/// Example 3:
+/// Input: nums = [22,4,-25,-20,-15,15,-16,7,19,-10,0,-13,-14], k = -33
+/// Output: 4
+/// Explanation: One optimal approach is to change nums[2] to k. The 
+/// array becomes [22,4,-33,-20,-15,15,-16,7,19,-10,0,-13,-14].
+/// There are four ways to partition the array.
+/// 
+/// Constraints:
+/// 1. n == nums.length
+/// 2. 2 <= n <= 10^5
+/// 3. -10^5 <= k, nums[i] <= 10^5
+/// </summary>
+int LeetCodeArray::waysToPartition(vector<int>& nums, int k)
+{
+    vector<long long> sum(nums.size());
+    unordered_map<long long, int> left, right, left_count, right_count;
+    left[nums[0]]++;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        sum[i] = nums[i];
+        if (i > 0)
+        {
+            sum[i] += sum[i - 1];
+            right[nums[i]]++;
+        }
+    }
+    int result = 0;
+    int update = 0;
+    for (size_t p = 1; p < nums.size(); p++)
+    {
+        long long left_sum = sum[p - 1];
+        long long right_sum = sum[nums.size() - 1] - sum[p - 1];
+        long long delta = right_sum - left_sum;
+        if (left_sum == right_sum)
+        {
+            result++;
+        }
+        else if (left.count(k - delta) > 0)
+        {
+            left_count[k - delta]++;
+            update = max(update, left_count[k - delta]);
+        }
+        else if (right.count(k + delta) > 0)
+        {
+            right_count[k + delta]++;
+            update = max(update, right_count[k + delta]);
+        }
+
+        left[nums[p]]++;
+        left_count[nums[p]] = max(left_count[nums[p]], right_count[nums[p]]);
+        right[nums[p]]--;
+        if (right[nums[p]] == 0)
+        {
+            right.erase(nums[p]);
+            right_count.erase(nums[p]);
+        }
+    }
+    result = max(result, update);
+    return result;
+}
+
+/// <summary>
+/// Leet 1937. Maximum Number of Points with Cost
+///                                                                 
+/// Medium
+/// 
+/// You are given an m x n integer matrix points (0-indexed). Starting 
+/// with 0 points, you want to maximize the number of points you can get 
+/// from the matrix.
+///
+/// To gain points, you must pick one cell in each row. Picking the cell 
+/// at coordinates (r, c) will add points[r][c] to your score.
+///
+/// However, you will lose points if you pick a cell too far from the cell 
+/// that you picked in the previous row. For every two adjacent rows r and 
+/// r + 1 (where 0 <= r < m - 1), picking cells at coordinates (r, c1) and 
+/// (r + 1, c2) will subtract abs(c1 - c2) from your score.
+/// 
+/// Return the maximum number of points you can achieve.
+/// abs(x) is defined as:
+/// x for x >= 0.
+/// -x for x < 0.
+///
+/// Example 1:
+/// Input: points = [[1,2,3],[1,5,1],[3,1,1]]
+/// Output: 9
+/// Explanation:
+/// The blue cells denote the optimal cells to pick, which have 
+/// coordinates (0, 2), (1, 1), and (2, 0).
+/// You add 3 + 5 + 3 = 11 to your score.
+/// However, you must subtract abs(2 - 1) + abs(1 - 0) = 2 from your score.
+/// Your final score is 11 - 2 = 9.
+///
+/// Example 2:
+/// Input: points = [[1,5],[2,3],[4,2]]
+/// Output: 11
+/// Explanation:
+/// The blue cells denote the optimal cells to pick, which have 
+/// coordinates (0, 1), (1, 1), and (2, 0).
+/// You add 5 + 3 + 4 = 12 to your score.
+/// However, you must subtract abs(1 - 1) + abs(1 - 0) = 1 from your score.
+/// Your final score is 12 - 1 = 11.
+/// 
+/// Constraints:
+/// 1. m == points.length
+/// 2. n == points[r].length
+/// 3. 1 <= m, n <= 10^5
+/// 4. 1 <= m * n <= 10^5
+/// 5. 0 <= points[r][c] <= 10^5
+/// </summary>
+long long LeetCodeArray::maxPoints(vector<vector<int>>& points)
+{
+    int n = points[0].size();
+    vector<long long> sum(n);
+    for (size_t i = 0; i < points.size(); i++)
+    {
+        for (int j = 0; j <n; j++)
+        {
+            sum[j] += (long long)points[i][j];
+        }
+
+        vector<long long> left(n);
+        for (int j = 0; j < n; j++)
+        {
+            if (j == 0) left[j] = sum[j];
+            else left[j] = max(sum[j], left[j - 1] - 1);
+        }
+        vector<long long> right(n);
+        for (int j = n-1; j >= 0; j--)
+        {
+            if (j == n - 1) right[j] = sum[j];
+            else right[j] = max(sum[j], right[j + 1] - 1);
+        }
+        for (int j = 0; j < n; j++)
+        {
+            sum[j] = max(left[j], right[j]);
+        }
+    }
+
+    long long result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        result = max(result, sum[i]);
+    }
+    return result;
+}
+
 #pragma endregion
 

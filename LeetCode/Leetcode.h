@@ -4734,6 +4734,24 @@ public:
         WriteMessage("]");
     }
 
+    static void WriteMessage(vector<vector<long long>>& data)
+    {
+        WriteMessage("[");
+        for (size_t i = 0; i < data.size(); i++)
+        {
+            std::string message;
+            message.append("[");
+            for (size_t j = 0; j < data[i].size(); j++)
+            {
+                if (j > 0) message.append(",");
+                message.append(to_string(data[i][j]));
+            }
+            message.append("]");
+            WriteMessage(message.c_str());
+        }
+        WriteMessage("]");
+    }
+
     static void WriteMessage(vector<vector<double>> &data)
     {
         WriteMessage("[");

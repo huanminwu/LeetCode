@@ -11842,3 +11842,117 @@ vector<int> LeetCodeMath::recoverArray(int n, vector<int>& sums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 1954. Minimum Garden Perimeter to Collect 
+///                 Enough Apples
+///                                                                 
+/// Medium
+/// 
+/// In a garden represented as an infinite 2D grid, there is an apple tree 
+/// planted at every integer coordinate. The apple tree planted at an 
+/// integer coordinate (i, j) has |i| + |j| apples growing on it.
+///
+/// You will buy an axis-aligned square plot of land that is centered 
+/// at (0, 0).
+///
+/// Given an integer neededApples, return the minimum perimeter of a plot 
+/// such that at least neededApples apples are inside or on the perimeter 
+/// of that plot.
+///
+/// The value of |x| is defined as:
+///
+/// x if x >= 0
+/// -x if x < 0
+/// 
+/// Example 1:
+/// Input: neededApples = 1
+/// Output: 8
+/// Explanation: A square plot of side length 1 does not contain any 
+/// apples.
+/// However, a square plot of side length 2 has 12 apples inside (as 
+/// depicted in the image above).
+/// The perimeter is 2 * 4 = 8.
+///
+/// Example 2:
+/// Input: neededApples = 13
+/// Output: 16
+///
+/// Example 3:
+/// Input: neededApples = 1000000000
+/// Output: 5040
+///
+/// Constraints:
+/// 1. 1 <= neededApples <= 10^15
+/// </summary>
+long long LeetCodeMath::minimumPerimeter(long long neededApples)
+{
+    long long radius = 0;
+    long long result = 0;
+    while (result < neededApples)
+    {
+        radius++;
+        result += (3 * radius) * (radius) * 4; 
+    }
+    return 2 * radius * 4;
+}
+
+/// <summary>
+/// Leet Code 1975. Maximum Matrix Sum
+///                                                                 
+/// Medium
+/// 
+/// You are given an n x n integer matrix. You can do the following 
+/// operation any number of times:
+///
+/// Choose any two adjacent elements of matrix and multiply each of them 
+/// by -1.
+/// Two elements are considered adjacent if and only if they share a 
+/// border.
+///
+/// Your goal is to maximize the summation of the matrix's elements. 
+/// Return the maximum sum of the matrix's elements using the operation 
+/// mentioned above.
+///
+/// Example 1:
+/// Input: matrix = [[1,-1],[-1,1]]
+/// Output: 4
+/// Explanation: We can follow the following steps to reach sum equals 4:
+/// - Multiply the 2 elements in the first row by -1.
+/// - Multiply the 2 elements in the first column by -1.
+///
+/// Example 2:
+/// Input: matrix = [[1,2,3],[-1,-2,-3],[1,2,3]]
+/// Output: 16
+/// Explanation: We can follow the following step to reach sum equals 16:
+/// - Multiply the 2 last elements in the second row by -1.
+/// 
+/// Constraints:
+/// 1. n == matrix.length == matrix[i].length
+/// 2. 2 <= n <= 250
+/// -10^5 <= matrix[i][j] <= 10^5
+/// </summary>
+long long LeetCodeMath::maxMatrixSum(vector<vector<int>>& matrix)
+{
+    long long result = 0;
+    int count = 0;
+    int min_val = INT_MAX;
+    for (size_t i = 0; i < matrix.size(); i++)
+    {
+        for (size_t j = 0; j < matrix[i].size(); j++)
+        {
+            if (matrix[i][j] <= 0)
+            {
+                count++;
+            }
+            int abs_val = abs(matrix[i][j]);
+            min_val = min(min_val, abs_val);
+            result += abs_val;
+        }
+    }
+    if (count % 2 == 1)
+    {
+        result -= (long long)2 * (long long)min_val;
+    }
+    return result;
+}

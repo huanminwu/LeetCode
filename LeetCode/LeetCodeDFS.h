@@ -2857,6 +2857,182 @@ public:
     /// 2. 1 <= nums[i] <= 30
     /// </summary>
     int numberOfGoodSubsets(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 1981. Minimize the Difference Between Target and Chosen 
+    ///                 Elements
+    /// </summary>
+    int minimizeTheDifference(vector<vector<int>>& mat, int r, int sum, vector<vector<int>>& dp, int target);
+
+    /// <summary>
+    /// Leet Code 1981. Minimize the Difference Between Target and Chosen 
+    ///                 Elements
+    ///                                                                 
+    /// Medium
+    /// 
+    /// You are given an m x n integer matrix mat and an integer target.
+    /// Choose one integer from each row in the matrix such that the absolute 
+    /// difference between target and the sum of the chosen elements is 
+    /// minimized.
+    ///
+    /// Return the minimum absolute difference.
+    ///
+    /// The absolute difference between two numbers a and b is the absolute 
+    /// value of a - b.
+    ///
+    /// Example 1:
+    /// 
+    /// Input: mat = [[1,2,3],[4,5,6],[7,8,9]], target = 13
+    /// Output: 0
+    /// Explanation: One possible choice is to:
+    /// - Choose 1 from the first row.
+    /// - Choose 5 from the second row.
+    /// - Choose 7 from the third row.
+    /// The sum of the chosen elements is 13, which equals the target, so 
+    /// the absolute difference is 0.
+    ///
+    /// Example 2:
+    /// Input: mat = [[1],[2],[3]], target = 100
+    /// Output: 94
+    /// Explanation: The best possible choice is to:
+    /// - Choose 1 from the first row.
+    /// - Choose 2 from the second row.
+    /// - Choose 3 from the third row.
+    /// The sum of the chosen elements is 6, and the absolute difference is 94.
+    ///
+    /// Example 3:
+    /// Input: mat = [[1,2,9,8,7]], target = 6
+    /// Output: 1
+    /// Explanation: The best choice is to choose 7 from the first row.
+    /// The absolute difference is 1.
+    /// 
+    /// Constraints:
+    /// 1. m == mat.length
+    /// 2. n == mat[i].length
+    /// 3. 1 <= m, n <= 70 
+    /// 4. 1 <= mat[i][j] <= 70
+    /// 5. 1 <= target <= 800
+    /// </summary>
+    int minimizeTheDifference(vector<vector<int>>& mat, int target);
+
+    /// <summary>
+    /// Leet Code 1986. Minimum Number of Work Sessions to Finish the Tasks
+    /// </summary>
+    int minSessions(vector<int>& tasks, int sessionTime, int bit_mask, 
+            int session_index, int curr_time, vector<vector<int>> &memo);
+
+    /// <summary>
+    /// Leet Code 1986. Minimum Number of Work Sessions to Finish the Tasks
+    ///                                                                 
+    /// Medium
+    /// 
+    /// There are n tasks assigned to you. The task times are represented as 
+    /// an integer array tasks of length n, where the ith task takes tasks[i] 
+    /// hours to finish. A work session is when you work for at most 
+    /// sessionTime consecutive hours and then take a break.
+    ///
+    /// You should finish the given tasks in a way that satisfies the 
+    /// following conditions:
+    ///
+    /// If you start a task in a work session, you must complete it in the 
+    /// same work session.
+    /// You can start a new task immediately after finishing the previous one.
+    ///
+    /// You may complete the tasks in any order.
+    /// Given tasks and sessionTime, return the minimum number of work 
+    /// sessions needed to finish all the tasks following the conditions above.
+    ///
+    /// The tests are generated such that sessionTime is greater than or equal
+    /// to the maximum element in tasks[i].
+    ///
+    /// Example 1:
+    /// Input: tasks = [1,2,3], sessionTime = 3
+    /// Output: 2
+    /// Explanation: You can finish the tasks in two work sessions.
+    /// - First work session: finish the first and the second tasks 
+    ///   in 1 + 2 = 3 hours.
+    /// - Second work session: finish the third task in 3 hours.
+    ///
+    /// Example 2:
+    /// Input: tasks = [3,1,3,1,1], sessionTime = 8
+    /// Output: 2
+    /// Explanation: You can finish the tasks in two work sessions.
+    /// - First work session: finish all the tasks except the last one 
+    ///   in 3 + 1 + 3 + 1 = 8 hours.
+    /// - Second work session: finish the last task in 1 hour.
+    ///
+    /// Example 3:
+    /// Input: tasks = [1,2,3,4,5], sessionTime = 15
+    /// Output: 1
+    /// Explanation: You can finish all the tasks in one work session.
+    ///
+    /// Constraints:
+    /// 1. n == tasks.length
+    /// 2. 1 <= n <= 14
+    /// 3. 1 <= tasks[i] <= 10
+    /// 4. max(tasks[i]) <= sessionTime <= 15
+    /// </summary>
+    int minSessions(vector<int>& tasks, int sessionTime);
+
+    /// <summary>
+    /// Leet Code 1947. Maximum Compatibility Score Sum
+    /// </summary>
+    int maxCompatibilitySum(vector<vector<int>>& scores, int index, int bit_map, int score,
+        vector<int> &memo);
+
+    /// <summary>
+    /// Leet Code 1947. Maximum Compatibility Score Sum
+    ///                                                                 
+    /// Medium
+    /// 
+    /// There is a survey that consists of n questions where each question's 
+    /// answer is either 0 (no) or 1 (yes).
+    ///
+    /// The survey was given to m students numbered from 0 to m - 1 and m 
+    /// mentors numbered from 0 to m - 1. The answers of the students are 
+    /// represented by a 2D integer array students where students[i] is an 
+    /// integer array that contains the answers of the ith student (0-indexed).
+    /// The answers of the mentors are represented by a 2D integer array 
+    /// mentors where mentors[j] is an integer array that contains the answers 
+    /// of the jth mentor (0-indexed).
+    ///
+    /// Each student will be assigned to one mentor, and each mentor will have 
+    /// one student assigned to them. The compatibility score of a 
+    /// student-mentor pair is the number of answers that are the same for both 
+    /// the student and the mentor.
+    ///
+    /// For example, if the student's answers were [1, 0, 1] and the mentor's 
+    /// answers were [0, 0, 1], then their compatibility score is 2 because 
+    /// only the second and the third answers are the same.
+    /// You are tasked with finding the optimal student-mentor pairings to 
+    /// maximize the sum of the compatibility scores.
+    ///
+    /// Given students and mentors, return the maximum compatibility score 
+    /// sum that can be achieved.
+    ///
+    /// Example 1:
+    /// Input: students = [[1,1,0],[1,0,1],[0,0,1]], mentors = [[1,0,0],
+    /// [0,0,1],[1,1,0]]
+    /// Output: 8
+    /// Explanation: We assign students to mentors in the following way:
+    /// - student 0 to mentor 2 with a compatibility score of 3.
+    /// - student 1 to mentor 0 with a compatibility score of 2.
+    /// - student 2 to mentor 1 with a compatibility score of 3.
+    /// The compatibility score sum is 3 + 2 + 3 = 8.
+    ///
+    /// Example 2:
+    //  Input: students = [[0,0],[0,0],[0,0]], mentors = [[1,1],[1,1],[1,1]]
+    /// Output: 0
+    /// Explanation: The compatibility score of any student-mentor pair is 0.
+    ///
+    /// Constraints:
+    /// 1. m == students.length == mentors.length
+    /// 2. n == students[i].length == mentors[j].length
+    /// 3. 1 <= m, n <= 8
+    /// 4. students[i][k] is either 0 or 1.
+    /// 5. mentors[j][k] is either 0 or 1.
+    /// </summary>
+    int maxCompatibilitySum(vector<vector<int>>& students, vector<vector<int>>& mentors);
 #pragma endregion
 };
 

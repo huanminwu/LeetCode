@@ -4558,8 +4558,73 @@ void TestLeetCode2000(void)
     Logger::WriteMessage("word = " + word + "; ch = " + ch + "; result = " + result);
 }
 
+void TestLeetCode2019(void)
+{
+    LeetCodeString leetCode;
+    string s = "7+3*1*2";
+    vector<int> answers = { 20,13,42 };
+    int result = leetCode.scoreOfStudents(s, answers);
+    Logger::WriteMessage(answers);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "3+5*2";
+    answers = { 13, 0, 10, 13, 13, 16, 16 };
+    result = leetCode.scoreOfStudents(s, answers);
+    Logger::WriteMessage(answers);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "6+0*1";
+    answers = { 12,9,6,4,8,6 };
+    result = leetCode.scoreOfStudents(s, answers);
+    Logger::WriteMessage(answers);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "1+2*3+4";
+    answers = { 13,21,11,15 };
+    result = leetCode.scoreOfStudents(s, answers);
+    Logger::WriteMessage(answers);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    
+    s = "9*6+9*6*3+3*3+6*9+9*3+6*9+6*6";
+    answers = { 13,21,11,15 };
+    result = leetCode.scoreOfStudents(s, answers);
+    Logger::WriteMessage(answers);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode1946(void)
+{
+    LeetCodeString leetCode;
+    string num = "132";
+    vector<int> change = { 9, 8, 5, 0, 3, 6, 4, 2, 6, 8 };
+    string result = leetCode.maximumNumber(num, change);
+    Logger::WriteMessage(change);
+    Logger::WriteMessage("num = " + num + "; result = " + result);
+
+    num = "021";
+    change = { 9,4,3,5,7,2,1,9,0,6 };
+    result = leetCode.maximumNumber(num, change);
+    Logger::WriteMessage(change);
+    Logger::WriteMessage("num = " + num + "; result = " + result);
+
+    num = "5";
+    change = { 1,4,7,5,3,2,5,6,9,4 };
+    result = leetCode.maximumNumber(num, change);
+    Logger::WriteMessage(change);
+    Logger::WriteMessage("num = " + num + "; result = " + result);
+
+    num = "13291";
+    change = { 9, 8, 5, 3, 3, 6, 4, 2, 6, 8 };
+    result = leetCode.maximumNumber(num, change);
+    Logger::WriteMessage(change);
+    Logger::WriteMessage("num = " + num + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1946();
+    TestLeetCode2019();
     TestLeetCode2000();
     TestLeetCode2047();
     TestLeetCode2042();

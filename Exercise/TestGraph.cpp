@@ -3637,8 +3637,74 @@ void TestLeetCode1998(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1958(void)
+{
+    Logger::WriteMessage("Test Leet Code 1958");
+    LeetCodeGraph leetCode;
+    vector<vector<char>> board =
+    {
+        {'.','.','.','B','.','.','.','.'}, {'.','.','.','W','.','.','.','.'},
+        {'.','.','.','W','.','.','.','.'}, {'.','.','.','W','.','.','.','.'},
+        {'W','B','B','.','W','W','W','B'}, {'.','.','.','B','.','.','.','.'},
+        {'.','.','.','B','.','.','.','.'}, {'.','.','.','W','.','.','.','.'}
+    };
+    int rMove = 4;
+    int cMove = 3;
+    char color = 'B';
+    bool result = leetCode.checkMove(board, rMove, cMove, color);
+    Logger::WriteMessage(board);
+    Logger::WriteMessage("rMove = " + to_string(rMove) + "; cMove = " + to_string(cMove) + 
+        "; color = " + string(1, color) + "; result = " + (string)(result ? "true" : "false"));
+
+    board =
+    {
+        {'.', '.', '.', '.', '.', '.', '.', '.'}, { '.','B','.','.','W','.','.','.' },
+        { '.','.','W','.','.','.','.','.' }, { '.','.','.','W','B','.','.','.' },
+        { '.','.','.','.','.','.','.','.' }, { '.','.','.','.','B','W','.','.' },
+        { '.','.','.','.','.','.','W','.' }, { '.','.','.','.','.','.','.','B' }
+    }; 
+    rMove = 4;
+    cMove = 4;
+    color = 'W';
+    result = leetCode.checkMove(board, rMove, cMove, color);
+    Logger::WriteMessage(board);
+    Logger::WriteMessage("rMove = " + to_string(rMove) + "; cMove = " + to_string(cMove) +
+        "; color = " + string(1, color) + "; result = " + (string)(result ? "true" : "false"));
+
+    board =
+    {
+        {'W', 'W', '.', 'B', '.', 'B', 'B', '.'}, { 'W','B','.','.','W','B','.','.' },
+        { 'B','B','B','B','W','W','B','.' },  { 'W','B','.','.','B','B','B','.' },
+        { 'W','W','B','.','W','.','B','B' }, { 'B','.','B','W','.','B','.','.' },
+        { '.','B','B','W','B','B','.','.' }, { 'B','B','W','.','.','B','.','.' }
+    };
+    rMove = 7;
+    cMove = 4;
+    color = 'B';
+    result = leetCode.checkMove(board, rMove, cMove, color);
+    Logger::WriteMessage(board);
+    Logger::WriteMessage("rMove = " + to_string(rMove) + "; cMove = " + to_string(cMove) +
+        "; color = " + string(1, color) + "; result = " + (string)(result ? "true" : "false"));
+
+    board =
+    {
+        {'B', 'B', '.', '.', 'B', 'W', 'W', '.'}, { '.','W','W','.','B','W','B','B' },
+        { '.','W','B','B','W','.','W','.' }, { 'B','.','.','B','W','W','W','.' },
+        { 'W','W','W','B','W','.','B','W' }, { '.','.','.','W','.','W','.','B' },
+        { 'B','B','W','B','B','W','W','B' }, { 'W','.','W','W','.','B','.','W' }
+    };
+    rMove = 2;
+    cMove = 5;
+    color = 'W';
+    result = leetCode.checkMove(board, rMove, cMove, color);
+    Logger::WriteMessage(board);
+    Logger::WriteMessage("rMove = " + to_string(rMove) + "; cMove = " + to_string(cMove) +
+        "; color = " + string(1, color) + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1958();
     TestLeetCode1998();
     TestLeetCode1970();
     TestLeetCode1926();

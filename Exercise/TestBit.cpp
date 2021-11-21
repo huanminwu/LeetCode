@@ -743,8 +743,30 @@ void TestLeetCode1938(void)
     Logger::WriteMessage(result);
 }
 
+
+void TestLeetCode1980(void)
+{
+    Logger::WriteMessage("Test Leet Code 1980");
+    LeetCodeBit leetCode;
+    vector<string> nums = { "01", "10" };
+    string result = leetCode.findDifferentBinaryString(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + result);
+
+    nums = { "00","01" };
+    result = leetCode.findDifferentBinaryString(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + result);
+
+    nums = { "111","011","001" };
+    result = leetCode.findDifferentBinaryString(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode1980();
     TestLeetCode1938();
     TestLeetCode1863();
     TestLeetCode1835();

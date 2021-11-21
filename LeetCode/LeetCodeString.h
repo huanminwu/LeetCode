@@ -8664,6 +8664,144 @@ public:
     /// 3. ch is a lowercase English letter.
     /// </summary>
     string reversePrefix(string word, char ch); 
+
+    /// <summary>
+    /// Leet code 2019. The Score of Students Solving Math Expression
+    ///                                                                 
+    /// Hard
+    /// 
+    /// You are given a string s that contains digits 0-9, addition 
+    /// symbols '+', and multiplication symbols '*' only, representing a valid 
+    /// math expression of single digit numbers (e.g., 3+5*2). This expression 
+    /// was given to n elementary school students. The students were 
+    /// instructed to get the answer of the expression by following this order 
+    /// of operations:
+    ///
+    /// Compute multiplication, reading from left to right; Then,
+    /// Compute addition, reading from left to right.
+    /// You are given an integer array answers of length n, which are the 
+    /// submitted answers of the students in no particular order. You are 
+    /// asked to grade the answers, by following these rules:
+    ///
+    /// If an answer equals the correct answer of the expression, this student 
+    /// will be rewarded 5 points;
+    /// Otherwise, if the answer could be interpreted as if the student 
+    /// applied the operators in the wrong order but had correct arithmetic, 
+    /// this student will be rewarded 2 points;
+    /// Otherwise, this student will be rewarded 0 points.
+    /// Return the sum of the points of the students.
+    ///
+    /// Example 1:
+    /// Input: s = "7+3*1*2", answers = [20,13,42]
+    /// Output: 7
+    /// Explanation: As illustrated above, the correct answer of the expression
+    /// is 13, therefore one student is rewarded 5 points: [20,13,42]
+    /// A student might have applied the operators in this wrong order: 
+    /// ((7+3)*1)*2 = 20. Therefore one student is rewarded 2 
+    /// points: [20,13,42]
+    /// The points for the students are: [2,5,0]. The sum of the points 
+    /// is 2+5+0=7.
+    ///
+    /// Example 2:
+    /// Input: s = "3+5*2", answers = [13,0,10,13,13,16,16]
+    /// Output: 19
+    /// Explanation: The correct answer of the expression is 13, therefore 
+    /// three students are rewarded 5 points each: [13,0,10,13,13,16,16]
+    /// A student might have applied the operators in this wrong order: 
+    /// ((3+5)*2 = 16. Therefore two students are rewarded 2 points: 
+    /// [13,0,10,13,13,16,16]
+    /// The points for the students are: [5,0,0,5,5,2,2]. The sum of the 
+    /// points is 5+0+0+5+5+2+2=19.
+    ///
+    /// Example 3:
+    /// Input: s = "6+0*1", answers = [12,9,6,4,8,6]
+    /// Output: 10
+    /// Explanation: The correct answer of the expression is 6.
+    /// If a student had incorrectly done (6+0)*1, the answer would also be 6.
+    /// By the rules of grading, the students will still be rewarded 5 points 
+    /// (as they got the correct answer), not 2 points.
+    /// The points for the students are: [0,0,5,0,0,5]. The sum of the points 
+    /// is 10.
+    ///
+    /// Example 4:
+    /// Input: s = "1+2*3+4", answers = [13,21,11,15]
+    /// Output: 11
+    /// Explanation: The correct answer of the expression is 11.
+    /// Every other student was rewarded 2 points because they could have 
+    /// applied the operators as follows:
+    /// - ((1+2)*3)+4 = 13
+    /// - (1+2)*(3+4) = 21
+    /// - 1+(2*(3+4)) = 15
+    /// The points for the students are: [2,2,5,2]. The sum of the points 
+    /// is 11.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= s.length <= 31
+    /// 2. s represents a valid expression that contains only digits 
+    ///    0-9, '+', and '*' only.
+    /// 3. All the integer operands in the expression are in the inclusive 
+    ///    range [0, 9].
+    /// 4. 1 <= The count of all operators ('+' and '*') in the math 
+    ///    expression <= 15
+    /// 5. Test data are generated such that the correct answer of the 
+    ///    expression is in the range of [0, 1000].
+    /// 6. n == answers.length
+    /// 7. 1 <= n <= 10^4
+    /// 8. 0 <= answers[i] <= 1000
+    /// </summary>
+    int scoreOfStudents(string s, vector<int>& answers);
+
+    /// <summary>
+    /// Leet Code 1946. Largest Number After Mutating Substring
+    ///                                                                 
+    /// Medium
+    /// 
+    /// You are given a string num, which represents a large integer. You are 
+    /// also given a 0-indexed integer array change of length 10 that maps 
+    /// each digit 0-9 to another digit. More formally, digit d maps to digit 
+    /// change[d].
+    ///
+    /// You may choose to mutate a single substring of num. To mutate a 
+    /// substring, replace each digit num[i] with the digit it maps to in 
+    /// change (i.e. replace num[i] with change[num[i]]).
+    ///
+    /// Return a string representing the largest possible integer after 
+    /// mutating (or choosing not to) a single substring of num.
+    ///
+    /// A substring is a contiguous sequence of characters within the string.
+    /// 
+    /// Example 1:
+    /// Input: num = "132", change = [9,8,5,0,3,6,4,2,6,8]
+    /// Output: "832" 
+    /// Explanation: Replace the substring "1":
+    /// - 1 maps to change[1] = 8.
+    /// Thus, "132" becomes "832".
+    /// "832" is the largest number that can be created, so return it.
+    ///
+    /// Example 2:
+    /// Input: num = "021", change = [9,4,3,5,7,2,1,9,0,6]
+    /// Output: "934"
+    /// Explanation: Replace the substring "021":
+    /// - 0 maps to change[0] = 9.
+    /// - 2 maps to change[2] = 3.
+    /// - 1 maps to change[1] = 4.
+    /// Thus, "021" becomes "934".
+    /// "934" is the largest number that can be created, so return it.
+    ///
+    /// Example 3:
+    /// Input: num = "5", change = [1,4,7,5,3,2,5,6,9,4]
+    /// Output: "5"
+    /// Explanation: "5" is already the largest number that can be created, 
+    /// so return it.
+    ///
+    /// Constraints:
+    ///  1. 1 <= num.length <= 10^5
+    /// 2. num consists of only digits 0-9.
+    /// 3. change.length == 10
+    /// 4. 0 <= change[d] <= 9
+    /// </summary>
+    string maximumNumber(string num, vector<int>& change);
+
 #pragma endregion
 };
 
