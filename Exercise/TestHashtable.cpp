@@ -1353,7 +1353,7 @@ void TestLeetCode1915(void)
     Logger::WriteMessage("Test Leet Code 1915");
     LeetCodeHashtable leetCode;
     string word = "aba";
-    int result = leetCode.wonderfulSubstrings(word);
+    long long result = leetCode.wonderfulSubstrings(word);
     Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
 
     word = "aabb";

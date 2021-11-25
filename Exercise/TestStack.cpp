@@ -490,7 +490,6 @@ void TestLeetCode1856(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-
 void TestLeetCode1944(void)
 {
     Logger::WriteMessage("Test Leet Code 1944");
@@ -506,8 +505,42 @@ void TestLeetCode1944(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2030(void)
+{
+    Logger::WriteMessage("Test Leet Code 2030");
+    LeetCodeStack leetCode;
+    string s = "leet";
+    int k = 3;
+    char letter = 'e';
+    int repetition = 1;
+    string result = leetCode.smallestSubsequence(s, k, letter, repetition);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; letter = " + string(1, letter) +"; result = " + result);
+
+    s = "leetcode";
+    k = 4;
+    letter = 'e';
+    repetition = 2;
+    result = leetCode.smallestSubsequence(s, k, letter, repetition);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; letter = " + string(1, letter) + "; result = " + result);
+
+    s = "bb";
+    k = 2;
+    letter = 'b';
+    repetition = 2;
+    result = leetCode.smallestSubsequence(s, k, letter, repetition);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; letter = " + string(1, letter) + "; result = " + result);
+
+    s = "mmmxmxymmm";
+    k = 8;
+    letter = 'm';
+    repetition = 4;
+    result = leetCode.smallestSubsequence(s, k, letter, repetition);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; letter = " + string(1, letter) + "; result = " + result);
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode2030();
     TestLeetCode1944();
     TestLeetCode1856();
     TestLeetCode503();

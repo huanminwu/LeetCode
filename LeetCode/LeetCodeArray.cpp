@@ -17239,7 +17239,7 @@ vector<vector<int>> LeetCodeArray::construct2DArray(vector<int>& original, int m
     for (size_t i = 0; i < m; i++)
     {
         result.push_back(vector<int>());
-        for (size_t j = 0; j < n; j++)
+        for (int j = 0; j < n; j++)
         {
             result[i].push_back(original[i * n + j]);
         }

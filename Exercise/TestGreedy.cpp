@@ -1085,9 +1085,55 @@ void TestLeetCode1943(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2071(void)
+{
+    Logger::WriteMessage("Test Leet Code 2071");
+    LeetCodeGreedy leetCode;
+    vector<int> tasks = { 3, 2, 1 };
+    vector<int> workers = { 0, 3, 3 };
+    int pills = 1;
+    int strength = 1;
+    int result = leetCode.maxTaskAssign(tasks, workers, pills, strength);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage(workers);
+    Logger::WriteMessage("pills = " + to_string(pills) + "; strength = " + to_string(strength) +
+        "; result = " + to_string(result));
+
+    tasks = { 5,4 };
+    workers = { 0, 0, 0 };
+    pills = 1;
+    strength = 5;
+    result = leetCode.maxTaskAssign(tasks, workers, pills, strength);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage(workers);
+    Logger::WriteMessage("pills = " + to_string(pills) + "; strength = " + to_string(strength) +
+        "; result = " + to_string(result));
+
+    tasks = { 10,15,30 };
+    workers = { 0,10,10,10,10 };
+    pills = 3;
+    strength = 10;
+    result = leetCode.maxTaskAssign(tasks, workers, pills, strength);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage(workers);
+    Logger::WriteMessage("pills = " + to_string(pills) + "; strength = " + to_string(strength) +
+        "; result = " + to_string(result));
+
+    tasks = { 5, 9, 8, 5, 9 };
+    workers = { 1, 6, 4, 2, 6 };
+    pills = 1;
+    strength = 5;
+    result = leetCode.maxTaskAssign(tasks, workers, pills, strength);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage(workers);
+    Logger::WriteMessage("pills = " + to_string(pills) + "; strength = " + to_string(strength) +
+        "; result = " + to_string(result));
+}
+
 
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode2071();
     TestLeetCode1943();
     TestLeetCode1893();
     TestLeetCode1854();

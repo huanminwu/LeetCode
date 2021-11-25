@@ -804,8 +804,38 @@ void TestLeetCode1898(void)
     Logger::WriteMessage("s = " + s + "; p = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode2040(void)
+{
+    Logger::WriteMessage("Test Leet Code 2040");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums1 = { 2, 5 };
+    vector<int> nums2 = { 3, 4 };
+    int k = 2;
+    long long result = leetCode.kthSmallestProduct(nums1, nums2, k);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums1 = { -4,-2,0,3 };
+    nums2 = { 2,4 };
+    k = 6;
+    result = leetCode.kthSmallestProduct(nums1, nums2, k);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums1 = { -2,-1,0,1,2 };
+    nums2 = { -3,-1,2,4,5 };
+    k = 3;
+    result = leetCode.kthSmallestProduct(nums1, nums2, k);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode2040();
     TestLeetCode1898();
     TestLeetCode1923();
     TestLeetCode1870();

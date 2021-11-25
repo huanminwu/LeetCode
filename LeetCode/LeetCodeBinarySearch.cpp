@@ -2419,4 +2419,111 @@ int LeetCodeBinarySearch::maximumRemovals(string s, string p, vector<int>& remov
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2040. Kth Smallest Product of Two Sorted Arrays
+/// </summary>
+long long LeetCodeBinarySearch::kthSmallestProductCount(vector<int>& nums1, vector<int>& nums2, long long value)
+{
+    long long cnt = 0;
+    for (int p1 = 0, p2 = nums2.size() - 1; p1 < nums1.size(); ++p1) 
+    {
+        while (p2 >= 0 && (long long)nums1[p1] * nums2[p2] > value)
+        {
+            --p2;
+        }
+        cnt += (long long)p2 + 1;
+    }
+    return cnt;
+}
+
+/// <summary>
+/// Leet Code 2040. Kth Smallest Product of Two Sorted Arrays
+///                                                                 
+/// Hard
+/// 
+/// Given two sorted 0-indexed integer arrays nums1 and nums2 as well as 
+/// an integer k, return the kth (1-based) smallest product of nums1[i] 
+/// * nums2[j] where 0 <= i < nums1.length and 0 <= j < nums2.length.
+///
+/// Example 1:
+/// Input: nums1 = [2,5], nums2 = [3,4], k = 2
+/// Output: 8
+/// Explanation: The 2 smallest products are:
+/// - nums1[0] * nums2[0] = 2 * 3 = 6
+/// - nums1[0] * nums2[1] = 2 * 4 = 8
+/// The 2nd smallest product is 8.
+///
+/// Example 2:
+/// Input: nums1 = [-4,-2,0,3], nums2 = [2,4], k = 6
+/// Output: 0
+/// Explanation: The 6 smallest products are:
+/// - nums1[0] * nums2[1] = (-4) * 4 = -16
+/// - nums1[0] * nums2[0] = (-4) * 2 = -8 
+/// - nums1[1] * nums2[1] = (-2) * 4 = -8
+/// - nums1[1] * nums2[0] = (-2) * 2 = -4
+/// - nums1[2] * nums2[0] = 0 * 2 = 0
+/// - nums1[2] * nums2[1] = 0 * 4 = 0
+/// The 6th smallest product is 0.
+///
+/// Example 3:
+/// Input: nums1 = [-2,-1,0,1,2], nums2 = [-3,-1,2,4,5], k = 3
+/// Output: -6
+/// Explanation: The 3 smallest products are:
+/// - nums1[0] * nums2[4] = (-2) * 5 = -10
+/// - nums1[0] * nums2[3] = (-2) * 4 = -8
+/// - nums1[4] * nums2[0] = 2 * (-3) = -6
+/// The 3rd smallest product is -6.
+/// 
+/// Constraints:
+/// 1. 1 <= nums1.length, nums2.length <= 5 * 10^4
+/// 2. -10^5 <= nums1[i], nums2[j] <= 10^5
+/// 3. 1 <= k <= nums1.length * nums2.length
+/// 4. nums1 and nums2 are sorted.
+/// </summary>
+long long LeetCodeBinarySearch::kthSmallestProduct(vector<int>& nums1, vector<int>& nums2, long long k)
+{
+    long long first = (long long)-100000 * (long long)100000;
+    long long last = (long long)100000 * (long long)100000;
+
+    auto itr1 = lower_bound(nums1.begin(), nums1.end(), 0);
+    auto itr2 = lower_bound(nums2.begin(), nums2.end(), 0);
+    vector<int> neg_num1(nums1.begin(), itr1);
+    vector<int> neg_num2(nums2.begin(), itr2);
+    vector<int> pos_num1(itr1, nums1.end());
+    vector<int> pos_num2(itr2, nums2.end());
+    vector<int> pos_rev1(pos_num1.rbegin(), pos_num1.rend());
+    vector<int> pos_rev2(pos_num2.rbegin(), pos_num2.rend());
+    vector<int> neg_rev1(neg_num1.rbegin(), neg_num1.rend());
+    vector<int> neg_rev2(neg_num2.rbegin(), neg_num2.rend());
+    long long result = 0;
+    while (first <= last)
+    {
+        long long middle = first + (last - first) / 2;
+        long long count = 0;
+        if (middle < 0)
+        {
+            count = kthSmallestProductCount(neg_num1, pos_rev2, middle) +
+                kthSmallestProductCount(neg_num2, pos_rev1, middle);
+        }
+        else
+        {
+            count = kthSmallestProductCount(pos_num1, pos_num2, middle) +
+                kthSmallestProductCount(neg_rev1, neg_rev2, middle) +
+                (long long)neg_num1.size() * (long long)pos_num2.size() + 
+                (long long)neg_num2.size() * (long long)pos_num1.size();
+        }
+        if (count >= k)
+        {
+            result = middle;
+            last = middle - 1;
+        }
+        else if (count < k)
+        {
+            first = middle + 1;
+        }
+    }
+    return result;
+}
+
 #pragma endregion  

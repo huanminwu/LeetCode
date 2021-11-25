@@ -1495,8 +1495,82 @@ void TestLeetCode1947(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2056(void)
+{
+    Logger::WriteMessage("Test Leet Code 2056");
+    LeetCodeDFS leetCode;
+    vector<string>pieces = { "rook" };
+    vector<vector<int>> positions = { {1, 1} };
+    int result = leetCode.countCombinations(pieces, positions);
+    Logger::WriteMessage(pieces);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    pieces = { "queen" };
+    positions = { {1, 1} };
+    result = leetCode.countCombinations(pieces, positions);
+    Logger::WriteMessage(pieces);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    pieces = { "bishop" };
+    positions = { {4, 3} };
+    result = leetCode.countCombinations(pieces, positions);
+    Logger::WriteMessage(pieces);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    pieces = { "rook","rook" };
+    positions = { {1, 1}, {8, 8} };
+    result = leetCode.countCombinations(pieces, positions);
+    Logger::WriteMessage(pieces);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    pieces = { "queen", "bishop" };
+    positions = { {5, 7},{3, 4} };
+    result = leetCode.countCombinations(pieces, positions);
+    Logger::WriteMessage(pieces);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    pieces = { "bishop", "rook" };
+    positions = { {8, 5},{7, 7} };
+    result = leetCode.countCombinations(pieces, positions);
+    Logger::WriteMessage(pieces);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2081(void)
+{
+    Logger::WriteMessage("Test Leet Code 2081");
+    LeetCodeDFS leetCode;
+    int k = 2;
+    int n = 5;
+    long long result = leetCode.kMirror(k, n);
+    Logger::WriteMessage("k = " + to_string(k) + "; n = " + to_string(n) + "; result = " + to_string(result));
+
+    k = 3;
+    n = 7;
+    result = leetCode.kMirror(k, n);
+    Logger::WriteMessage("k = " + to_string(k) + "; n = " + to_string(n) + "; result = " + to_string(result));
+
+    k = 7;
+    n = 17;
+    result = leetCode.kMirror(k, n);
+    Logger::WriteMessage("k = " + to_string(k) + "; n = " + to_string(n) + "; result = " + to_string(result));
+
+    k = 9;
+    n = 30;
+    result = leetCode.kMirror(k, n);
+    Logger::WriteMessage("k = " + to_string(k) + "; n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2081();
+    TestLeetCode2056();
     TestLeetCode1947();
     TestLeetCode1986();
     TestLeetCode1981();

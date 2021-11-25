@@ -3092,6 +3092,7 @@ public:
     /// 6. Each arrivali time is distinct.
     /// </summary>
     int smallestChair(vector<vector<int>>& times, int targetFriend);
+
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

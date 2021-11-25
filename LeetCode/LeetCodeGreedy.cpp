@@ -3380,4 +3380,127 @@ vector<vector<long long>> LeetCodeGreedy::splitPainting(vector<vector<int>>& seg
     return result;
 }
 
+/// <summary>
+/// Leet Code 2071. Maximum Number of Tasks You Can Assign
+///                                                                 
+/// Hard
+/// 
+/// You have n tasks and m workers. Each task has a strength requirement 
+/// stored in a 0-indexed integer array tasks, with the ith task requiring 
+// tasks[i] strength to complete. The strength of each worker is stored in 
+/// a 0-indexed integer array workers, with the jth worker having 
+/// workers[j] strength. Each worker can only be assigned to a single task 
+/// and must have a strength greater than or equal to the task's strength 
+/// requirement (i.e., workers[j] >= tasks[i]).
+/// Additionally, you have pills magical pills that will increase a 
+/// worker's strength by strength. You can decide which workers receive 
+/// the magical pills, however, you may only give each worker at most one 
+/// magical pill.
+///
+/// Given the 0-indexed integer arrays tasks and workers and the integers 
+/// pills and strength, return the maximum number of tasks that can be 
+/// completed.
+///
+/// Example 1:
+/// Input: tasks = [3,2,1], workers = [0,3,3], pills = 1, strength = 1
+/// Output: 3
+/// Explanation:
+/// We can assign the magical pill and tasks as follows:
+/// - Give the magical pill to worker 0.
+/// - Assign worker 0 to task 2 (0 + 1 >= 1)
+/// - Assign worker 1 to task 1 (3 >= 2)
+/// - Assign worker 2 to task 0 (3 >= 3)
+/// Example 2:
+/// Input: tasks = [5,4], workers = [0,0,0], pills = 1, strength = 5
+/// Output: 1
+/// Explanation:
+/// We can assign the magical pill and tasks as follows:
+/// - Give the magical pill to worker 0.
+/// - Assign worker 0 to task 0 (0 + 5 >= 5)
+///
+/// Example 3:
+/// Input: tasks = [10,15,30], workers = [0,10,10,10,10], pills = 3, 
+/// strength = 10
+/// Output: 2
+/// Explanation:
+/// We can assign the magical pills and tasks as follows:
+/// - Give the magical pill to worker 0 and worker 1.
+/// - Assign worker 0 to task 0 (0 + 10 >= 10)
+/// - Assign worker 1 to task 1 (10 + 10 >= 15)
+///
+/// Example 4:
+/// Input: tasks = [5,9,8,5,9], workers = [1,6,4,2,6], pills = 1, 
+/// strength = 5
+/// Output: 3
+/// Explanation:
+/// We can assign the magical pill and tasks as follows:
+/// - Give the magical pill to worker 2.
+/// - Assign worker 1 to task 0 (6 >= 5)
+/// - Assign worker 2 to task 2 (4 + 5 >= 8)
+/// - Assign worker 4 to task 3 (6 >= 5)
+/// 
+/// Constraints:
+/// 1. n == tasks.length
+/// 2. m == workers.length
+/// 3. 1 <= n, m <= 5 * 10^4
+/// 4. 0 <= pills <= m
+/// 5. 0 <= tasks[i], workers[j], strength <= 10^9
+/// </summary>
+int LeetCodeGreedy::maxTaskAssign(vector<int>& tasks, vector<int>& workers, int pills, int strength)
+{
+    int result = 0;
+    int first = 0;
+    int last = min(tasks.size() - 1, workers.size() - 1);
+    sort(tasks.begin(), tasks.end());
+    sort(workers.begin(), workers.end());
+    while (first <= last)
+    {
+        int curr_pills = pills;
+        int middle = first + (last - first) / 2;
+        bool b_complete = true;
+        set<pair<int, int>> sorted_workers;
+        for (int i = workers.size() - 1; i >= (int)workers.size() - middle - 1; i--)
+        {
+            sorted_workers.insert(make_pair(workers[i], i));
+        }
+        for (int i = middle; i >= 0; i--)
+        {
+            int task = tasks[i];
+            auto itr = sorted_workers.lower_bound(make_pair(task, 0));
+            if (itr != sorted_workers.end())
+            {
+                sorted_workers.erase(itr);
+            }
+            else if (curr_pills > 0)
+            {
+                itr = sorted_workers.lower_bound(make_pair(task - strength, 0));
+                if (itr != sorted_workers.end())
+                {
+                    sorted_workers.erase(itr);
+                    curr_pills--;
+                }
+                else
+                {
+                    b_complete = false;
+                    break;
+                }
+            }
+            else
+            {
+                b_complete = false;
+                break;
+            }
+        }
+        if (b_complete)
+        {
+            result = middle + 1;
+            first = middle + 1;
+        }
+        else
+        {
+            last = middle - 1;
+        }
+    }
+    return result;
+}
 #pragma endregion

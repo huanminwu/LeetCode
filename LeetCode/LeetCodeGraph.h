@@ -5837,6 +5837,296 @@ public:
     /// 4. color is either 'B' or 'W'.
     /// </summary>
     bool checkMove(vector<vector<char>> & board, int rMove, int cMove, char color); 
+
+    /// <summary>
+    /// Leet Code 2045. Second Minimum Time to Reach Destination 
+    ///                                                                 
+    /// Hard
+    /// 
+    /// A city is represented as a bi-directional connected graph with n 
+    /// vertices where each vertex is labeled from 1 to n (inclusive). The 
+    /// edges in the graph are represented as a 2D integer array edges, 
+    /// where each edges[i] = [ui, vi] denotes a bi-directional edge between 
+    /// vertex ui and vertex vi. Every vertex pair is connected by at most 
+    /// one edge, and no vertex has an edge to itself. The time taken to 
+    /// traverse any edge is time minutes.
+    ///
+    /// Each vertex has a traffic signal which changes its color from green 
+    /// to red and vice versa every change minutes. All signals change at 
+    /// the same time. You can enter a vertex at any time, but can leave a 
+    /// vertex only when the signal is green. You cannot wait at a vertex if 
+    /// the signal is green.
+    ///
+    /// The second minimum value is defined as the smallest value strictly 
+    /// larger than the minimum value.
+    ///
+    /// For example the second minimum value of [2, 3, 4] is 3, and the 
+    /// second minimum value of [2, 2, 4] is 4.
+    /// Given n, edges, time, and change, return the second minimum time it 
+    /// will take to go from vertex 1 to vertex n.
+    ///
+    /// Notes:
+    /// You can go through any vertex any number of times, including 1 and n.
+    /// You can assume that when the journey starts, all signals have just 
+    /// turned green.
+    /// 
+    /// Example 1:
+    /// Input: n = 5, edges = [[1,2],[1,3],[1,4],[3,4],[4,5]], time = 3, 
+    /// change = 5
+    /// Output: 13
+    /// Explanation:
+    /// The figure on the left shows the given graph.
+    /// The blue path in the figure on the right is the minimum time path.
+    /// The time taken is:
+    /// - Start at 1, time elapsed=0
+    /// - 1 -> 4: 3 minutes, time elapsed=3
+    /// - 4 -> 5: 3 minutes, time elapsed=6
+    /// Hence the minimum time needed is 6 minutes.
+    ///
+    /// The red path shows the path to get the second minimum time.
+    /// - Start at 1, time elapsed=0
+    /// - 1 -> 3: 3 minutes, time elapsed=3
+    /// - 3 -> 4: 3 minutes, time elapsed=6
+    /// - Wait at 4 for 4 minutes, time elapsed=10
+    /// - 4 -> 5: 3 minutes, time elapsed=13
+    /// Hence the second minimum time is 13 minutes.      
+    ///
+    /// Example 2:
+    /// 
+    /// Input: n = 2, edges = [[1,2]], time = 3, change = 2
+    /// Output: 11
+    /// Explanation:
+    /// The minimum time path is 1 -> 2 with time = 3 minutes.
+    /// The second minimum time path is 1 -> 2 -> 1 -> 2 with time = 11 
+    /// minutes.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 10^4
+    /// 2. n - 1 <= edges.length <= min(2 * 104, n * (n - 1) / 2)
+    /// 3. edges[i].length == 2
+    /// 4. 1 <= ui, vi <= n
+    /// 5. ui != vi
+    /// 6. There are no duplicate edges.
+    /// 7. Each vertex can be reached directly or indirectly from every other 
+    ///   vertex.
+    /// 8. 1 <= time, change <= 10^3
+    /// </summary>
+    int secondMinimum(int n, vector<vector<int>>& edges, int time, int change);
+
+    /// <summary>
+    /// Leet Code 2065. Maximum Path Quality of a Graph
+    /// </summary>
+    void maximalPathQuality(vector<int>& values, vector<vector<pair<int, int>>>& neighbors, 
+        vector<int>& scores, int curr_time, int curr_score, int curr_node, int maxTime, int& result);
+
+    /// <summary>
+    /// Leet Code 2065. Maximum Path Quality of a Graph
+    ///                                                                 
+    /// Hard
+    /// 
+    /// There is an undirected graph with n nodes numbered from 0 to n - 1 
+    /// (inclusive). You are given a 0-indexed integer array values where 
+    /// values[i] is the value of the ith node. You are also given a 0-indexed 
+    /// 2D integer array edges, where each edges[j] = [uj, vj, timej] 
+    /// indicates that there is an undirected edge between the nodes uj and 
+    /// vj, and it takes timej seconds to travel between the two nodes. 
+    /// Finally, you are given an integer maxTime.
+    ///
+    /// A valid path in the graph is any path that starts at node 0, ends at 
+    /// node 0, and takes at most maxTime seconds to complete. You may visit 
+    /// the same node multiple times. The quality of a valid path is the sum 
+    /// of the values of the unique nodes visited in the path (each node's 
+    /// value is added at most once to the sum).
+    ///
+    /// Return the maximum quality of a valid path.
+    ///
+    /// Note: There are at most four edges connected to each node.
+    ///
+    /// Example 1:
+    /// Input: values = [0,32,10,43], edges = [[0,1,10],[1,2,15],[0,3,10]], 
+    /// maxTime = 49
+    /// Output: 75
+    /// Explanation:
+    /// One possible path is 0 -> 1 -> 0 -> 3 -> 0. The total time taken is 
+    /// 10 + 10 + 10 + 10 = 40 <= 49.
+    /// The nodes visited are 0, 1, and 3, giving a maximal path quality 
+    /// of 0 + 32 + 43 = 75.
+    ///
+    /// Example 2:
+    /// Input: values = [5,10,15,20], edges = [[0,1,10],[1,2,10],[0,3,10]], 
+    /// maxTime = 30
+    /// Output: 25
+    /// Explanation:
+    /// One possible path is 0 -> 3 -> 0. The total time taken is 10 + 10 = 
+    /// 20 <= 30.
+    /// The nodes visited are 0 and 3, giving a maximal path quality of 5 + 
+    /// 20 = 25.
+    ///
+    /// Example 3:
+    /// Input: values = [1,2,3,4], edges = [[0,1,10],[1,2,11],[2,3,12],
+    /// [1,3,13]], maxTime = 50
+    /// Output: 7
+    /// Explanation:
+    /// One possible path is 0 -> 1 -> 3 -> 1 -> 0. The total time taken 
+    /// is 10 + 13 + 13 + 10 = 46 <= 50.
+    /// The nodes visited are 0, 1, and 3, giving a maximal path quality 
+    /// of 1 + 2 + 4 = 7.
+    ///
+    /// Example 4:
+    /// Input: values = [0,1,2], edges = [[1,2,10]], maxTime = 10
+    /// Output: 0
+    /// Explanation: 
+    /// The only path is 0. The total time taken is 0.
+    /// The only node visited is 0, giving a maximal path quality of 0.
+    ///
+    /// Constraints:
+    /// 1. n == values.length
+    /// 2. 1 <= n <= 1000
+    /// 3. 0 <= values[i] <= 10^8
+    /// 4. 0 <= edges.length <= 2000
+    /// 5. edges[j].length == 3
+    /// 6. 0 <= uj < vj <= n - 1
+    /// 7. 10 <= timej, maxTime <= 100
+    /// 8. All the pairs [uj, vj] are unique.
+    /// 9. There are at most four edges connected to each node.
+    /// 10. The graph may not be connected.
+    /// </summary>
+    int maximalPathQuality(vector<int>& values, vector<vector<int>>& edges, int maxTime);
+
+    /// <summary>
+    /// Leet Code 2076. Process Restricted Friend Requests
+    ///                                                                 
+    /// Hard
+    /// 
+    /// You are given an integer n indicating the number of people in a 
+    /// network. Each person is labeled from 0 to n - 1.
+    ///
+    /// You are also given a 0-indexed 2D integer array restrictions, where 
+    /// restrictions[i] = [xi, yi] means that person xi and person yi cannot 
+    /// become friends, either directly or indirectly through other people.
+    ///
+    /// Initially, no one is friends with each other. You are given a list 
+    /// of friend requests as a 0-indexed 2D integer array requests, where 
+    /// requests[j] = [uj, vj] is a friend request between person uj and 
+    /// person vj.
+    ///
+    /// A friend request is successful if uj and vj can be friends. Each 
+    /// friend request is processed in the given order (i.e., requests[j] 
+    /// occurs before requests[j + 1]), and upon a successful request, 
+    /// uj and vj become direct friends for all future friend requests.
+    ///
+    /// Return a boolean array result, where each result[j] is true if 
+    /// the jth friend request is successful or false if it is not.
+    ///
+    /// Note: If uj and vj are already direct friends, the request is 
+    /// still successful.
+    /// 
+    /// Example 1:
+    /// Input: n = 3, restrictions = [[0,1]], requests = [[0,2],[2,1]]
+    /// Output: [true,false]
+    /// Explanation:
+    /// Request 0: Person 0 and person 2 can be friends, so they become 
+    /// direct friends. 
+    /// Request 1: Person 2 and person 1 cannot be friends since person 0 
+    /// and person 1 would be indirect friends (1--2--0).
+    ///
+    /// Example 2:
+    /// Input: n = 3, restrictions = [[0,1]], requests = [[1,2],[0,2]]
+    /// Output: [true,false]
+    /// Explanation:
+    /// Request 0: Person 1 and person 2 can be friends, so they become 
+    /// direct friends.
+    /// Request 1: Person 0 and person 2 cannot be friends since person 0 
+    /// and person 1 would be indirect friends (0--2--1).
+    ///
+    /// Example 3:
+    /// Input: n = 5, restrictions = [[0,1],[1,2],[2,3]], 
+    /// requests = [[0,4],[1,2],[3,1],[3,4]]
+    /// Output: [true,false,true,false]
+    /// Explanation:
+    /// Request 0: Person 0 and person 4 can be friends, so they become 
+    /// direct friends.
+    /// Request 1: Person 1 and person 2 cannot be friends since they are 
+    /// directly restricted.
+    /// Request 2: Person 3 and person 1 can be friends, so they become 
+    /// direct friends.
+    /// Request 3: Person 3 and person 4 cannot be friends since person 0 
+    /// and person 1 would be indirect friends (0--4--3--1).
+    ///
+    /// Constraints:
+    /// 1. 2 <= n <= 1000
+    /// 2. 0 <= restrictions.length <= 1000
+    /// 3. restrictions[i].length == 2
+    /// 4. 0 <= xi, yi <= n - 1
+    /// 5. xi != yi
+    /// 6. 1 <= requests.length <= 1000
+    /// 7. requests[j].length == 2
+    /// 8. 0 <= uj, vj <= n - 1
+    /// 9. uj != vj
+    /// </summary>
+    vector<bool> friendRequests(int n, vector<vector<int>>& restrictions, vector<vector<int>>& requests);
+
+    /// <summary>
+    /// Leet Code 2050. Parallel Courses III
+    ///                                                                 
+    /// Hard
+    /// 
+    /// You are given an integer n, which indicates that there are n courses 
+    /// labeled from 1 to n. You are also given a 2D integer array relations 
+    /// where relations[j] = [prevCoursej, nextCoursej] denotes that course 
+    /// prevCoursej has to be completed before course nextCoursej 
+    /// (prerequisite relationship). Furthermore, you are given a 0-indexed 
+    /// integer array time where time[i] denotes how many months it takes 
+    /// to complete the (i+1)th course.
+    ///
+    /// You must find the minimum number of months needed to complete all 
+    /// the courses following these rules:
+    ///
+    /// You may start taking a course at any time if the prerequisites are met.
+    ///
+    /// Any number of courses can be taken at the same time.
+    /// Return the minimum number of months needed to complete all the courses.
+    ///
+    /// Note: The test cases are generated such that it is possible to complete 
+    /// every course (i.e., the graph is a directed acyclic graph).
+    ///  
+    /// Example 1:
+    /// Input: n = 3, relations = [[1,3],[2,3]], time = [3,2,5]
+    /// Output: 8
+    /// Explanation: The figure above represents the given graph and the time 
+    /// required to complete each course. 
+    /// We start course 1 and course 2 simultaneously at month 0.
+    /// Course 1 takes 3 months and course 2 takes 2 months to complete 
+    /// respectively.
+    /// Thus, the earliest time we can start course 3 is at month 3, and the 
+    /// total time required is 3 + 5 = 8 months.
+    ///
+    /// Example 2:
+    /// Input: n = 5, relations = [[1,5],[2,5],[3,5],[3,4],[4,5]], 
+    /// time = [1,2,3,4,5]
+    /// Output: 12
+    /// Explanation: The figure above represents the given graph and the time 
+    /// required to complete each course.
+    /// You can start courses 1, 2, and 3 at month 0.
+    /// You can complete them after 1, 2, and 3 months respectively.
+    /// Course 4 can be taken only after course 3 is completed, i.e., after 3 
+    /// months. It is completed after 3 + 4 = 7 months.
+    /// Course 5 can be taken only after courses 1, 2, 3, and 4 have been 
+    /// completed, i.e., after max(1,2,3,7) = 7 months.
+    /// Thus, the minimum time needed to complete all the courses 
+    /// is 7 + 5 = 12 months.
+    /// Constraints:
+    /// 1. 1 <= n <= 5 * 10^4
+    /// 2. 0 <= relations.length <= min(n * (n - 1) / 2, 5 * 10^4)
+    /// 3. relations[j].length == 2
+    /// 4. 1 <= prevCoursej, nextCoursej <= n
+    /// 5. prevCoursej != nextCoursej
+    /// 6. All the pairs [prevCoursej, nextCoursej] are unique.
+    /// 7. time.length == n
+    /// 8. 1 <= time[i] <= 10^4
+    /// 9. The given graph is a directed acyclic graph.
+    /// </summary>
+    int minimumTime(int n, vector<vector<int>>& relations, vector<int>& time);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

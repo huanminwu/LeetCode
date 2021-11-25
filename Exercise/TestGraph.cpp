@@ -3702,8 +3702,122 @@ void TestLeetCode1958(void)
         "; color = " + string(1, color) + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2045(void)
+{
+    Logger::WriteMessage("Test Leet Code 2045");
+    LeetCodeGraph leetCode;
+    int n = 5;
+    vector<vector<int>> edges = { {1, 2},{1, 3},{1, 4},{3, 4},{4, 5} };
+    int time = 3;
+    int change = 5;
+    int result = leetCode.secondMinimum(n, edges, time, change);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; time = " + to_string(time) +
+        "; change = " + to_string(change) + "; result = " + to_string(result));
+
+    n = 2; 
+    edges = { {1, 2} };
+    time = 3;
+    change = 2;
+    result = leetCode.secondMinimum(n, edges, time, change);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; time = " + to_string(time) +
+        "; change = " + to_string(change) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2065(void)
+{
+    Logger::WriteMessage("Test Leet Code 2065");
+    LeetCodeGraph leetCode;
+    vector<int> values = { 0, 32, 10, 43 };
+    vector<vector<int>> edges = { {0, 1, 10},{1, 2, 15},{0, 3, 10} };
+    int maxTime = 49;
+    int result = leetCode.maximalPathQuality(values, edges, maxTime);
+    Logger::WriteMessage(values);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("maxTime = " + to_string(maxTime) + "; result = " + to_string(result));
+
+    values = { 5,10,15,20 };
+    edges = { {0,1,10} ,{1,2,10},{0,3,10} };
+    maxTime = 30;
+    result = leetCode.maximalPathQuality(values, edges, maxTime);
+    Logger::WriteMessage(values);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("maxTime = " + to_string(maxTime) + "; result = " + to_string(result));
+
+    values = { 1,2,3,4 };
+    edges = { {0, 1, 10},{1, 2, 11},{2, 3, 12},{1,3,13} };
+    maxTime = 50;
+    result = leetCode.maximalPathQuality(values, edges, maxTime);
+    Logger::WriteMessage(values);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("maxTime = " + to_string(maxTime) + "; result = " + to_string(result));
+
+    values = { 0,1,2 };
+    edges = { {1,2,10} };
+    maxTime = 10;
+    result = leetCode.maximalPathQuality(values, edges, maxTime);
+    Logger::WriteMessage(values);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("maxTime = " + to_string(maxTime) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2076(void)
+{
+    Logger::WriteMessage("Test Leet Code 2076");
+    LeetCodeGraph leetCode;
+    int n = 3;
+    vector<vector<int>> restrictions = { {0, 1} };
+    vector<vector<int>> requests = { {0, 2},{2, 1} };
+    vector<bool> result = leetCode.friendRequests(n, restrictions, requests);
+    Logger::WriteMessage(restrictions);
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage(result);
+
+    n = 3;
+    restrictions = { {0, 1} };
+    requests = { {1, 2},{0, 2} };
+    result = leetCode.friendRequests(n, restrictions, requests);
+    Logger::WriteMessage(restrictions);
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage(result);
+
+    n = 5;
+    restrictions = { {0, 1},{1, 2},{2, 3} };
+    requests = { {0, 4},{1, 2},{3, 1},{3, 4} };
+    result = leetCode.friendRequests(n, restrictions, requests);
+    Logger::WriteMessage(restrictions);
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2050(void)
+{
+    Logger::WriteMessage("Test Leet Code 2050");
+    LeetCodeGraph leetCode;
+    int n = 3;
+    vector<vector<int>> relations = { {1, 3},{2, 3} };
+    vector<int> time = { 3, 2, 5 };
+    int result = leetCode.minimumTime(n, relations, time);
+    Logger::WriteMessage(relations);
+    Logger::WriteMessage(time);
+    Logger::WriteMessage("n = " + to_string(n) + "result = " + to_string(result));
+
+    n = 5;
+    relations = { {1, 5},{2, 5},{3, 5},{3, 4},{4, 5} };
+    time = { 1,2,3,4,5 };
+    result = leetCode.minimumTime(n, relations, time);
+    Logger::WriteMessage(relations);
+    Logger::WriteMessage(time);
+    Logger::WriteMessage("n = " + to_string(n) + "result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2050();
+    TestLeetCode2076();
+    TestLeetCode2065();
+    TestLeetCode2045();
     TestLeetCode1958();
     TestLeetCode1998();
     TestLeetCode1970();

@@ -7464,6 +7464,279 @@ int LeetCodeDFS::maxCompatibilitySum(vector<vector<int>>& students, vector<vecto
     vector<int> memo(1 << n, -1);
     return maxCompatibilitySum(scores, 0, 0, 0, memo);
 }
+
+/// <summary>
+/// Leet Code 2056. Number of Valid Move Combinations On Chessboard
+/// </summary>
+int LeetCodeDFS::countCombinations(vector<string>& pieces, vector<vector<int>>& positions,
+    int index, vector<vector<vector<int>>>& grid_steps,
+    unordered_map<string, vector<vector<int>>>& directions)
+{
+    int result = 0;
+    if (index == pieces.size())
+    {
+        return 1;
+    }
+    string chess = pieces[index];
+    int r = positions[index][0] - 1;
+    int c = positions[index][1] - 1;
+    for (size_t d = 0; d < directions[chess].size(); d++)
+    {
+        bool blocked = false;
+        for (int step = result == 0 ? 1 : 2; !blocked; ++step)
+        {
+            int x = r + (step - 1) * directions[chess][d][0];
+            int y = c + (step - 1) * directions[chess][d][1];
+            if (min(x, y) < 0 || max(x, y) > 7)
+            { 
+                break;
+            }
+            bool canStop = true;
+            for (int pp = 0; pp < index; ++pp) 
+            {
+                canStop &= grid_steps[pp][x][y] >= 0 && grid_steps[pp][x][y] < step;
+                blocked |= (grid_steps[pp][x][y] < 0 && -grid_steps[pp][x][y] <= step) || (grid_steps[pp][x][y] == step);
+            }
+            if (canStop) 
+            {
+                grid_steps[index][x][y] = -step;
+                result += countCombinations(pieces, positions, index + 1, grid_steps, directions);
+            }
+            grid_steps[index][x][y] = step;
+        }
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++) grid_steps[index][i][j] = 0;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2056. Number of Valid Move Combinations On Chessboard
+///                                                                 
+/// Hard
+/// 
+/// There is an 8 x 8 chessboard containing n pieces (rooks, queens, or 
+/// bishops). You are given a string array pieces of length n, where 
+/// pieces[i] describes the type (rook, queen, or bishop) of the ith 
+/// piece. In addition, you are given a 2D integer array positions also 
+/// of length n, where positions[i] = [ri, ci] indicates that the ith 
+/// piece is currently at the 1-based coordinate (ri, ci) on the 
+/// chessboard.
+///
+/// When making a move for a piece, you choose a destination square 
+/// that the piece will travel toward and stop on.
+///
+/// A rook can only travel horizontally or vertically from (r, c) 
+/// to the direction of (r+1, c), (r-1, c), (r, c+1), or (r, c-1).
+/// A queen can only travel horizontally, vertically, or diagonally 
+/// from (r, c) to the direction of (r+1, c), (r-1, c), (r, c+1), 
+/// (r, c-1), (r+1, c+1), (r+1, c-1), (r-1, c+1), (r-1, c-1).
+/// A bishop can only travel diagonally from (r, c) to the direction 
+/// of (r+1, c+1), (r+1, c-1), (r-1, c+1), (r-1, c-1).
+/// You must make a move for every piece on the board simultaneously. 
+/// A move combination consists of all the moves performed on all the 
+/// given pieces. Every second, each piece will instantaneously travel 
+/// one square towards their destination if they are not already at it. 
+/// All pieces start traveling at the 0th second. A move combination 
+/// is invalid if, at a given time, two or more pieces occupy the same 
+/// square.
+///
+/// Return the number of valid move combinations.
+///
+/// Notes:
+/// No two pieces will start in the same square.
+/// You may choose the square a piece is already on as its destination.
+/// If two pieces are directly adjacent to each other, it is valid for 
+/// them to move past each other and swap positions in one second.
+///
+/// Example 1:
+/// Input: pieces = ["rook"], positions = [[1,1]]
+/// Output: 15
+/// Explanation: The image above shows the possible squares the piece 
+/// can move to.
+///
+/// Example 2:
+/// Input: pieces = ["queen"], positions = [[1,1]]
+/// Output: 22
+/// Explanation: The image above shows the possible squares the piece 
+/// can move to.
+///
+/// Example 3:
+/// Input: pieces = ["bishop"], positions = [[4,3]]
+/// Output: 12
+/// Explanation: The image above shows the possible squares the piece 
+/// can move to.
+///
+/// Example 4:
+/// Input: pieces = ["rook","rook"], positions = [[1,1],[8,8]]
+/// Output: 223
+/// Explanation: There are 15 moves for each rook which results 
+/// in 15 * 15 = 225 move combinations.
+/// However, there are two invalid move combinations:
+/// - Move both rooks to (8, 1), where they collide.
+/// - Move both rooks to (1, 8), where they collide.
+/// Thus there are 225 - 2 = 223 valid move combinations.
+/// Note that there are two valid move combinations that would result 
+/// in one rook at (1, 8) and the other at (8, 1).
+/// Even though the board state is the same, these two move combinations 
+/// are considered different since the moves themselves are different.
+///
+/// Example 5:
+/// Input: pieces = ["queen","bishop"], positions = [[5,7],[3,4]]
+/// Output: 281
+/// Explanation: There are 12 * 24 = 288 move combinations.
+/// However, there are several invalid move combinations:
+/// - If the queen stops at (6, 7), it blocks the bishop from moving 
+///   to (6, 7) or (7, 8).
+/// - If the queen stops at (5, 6), it blocks the bishop from moving 
+///   to (5, 6), (6, 7), or (7, 8).
+/// - If the bishop stops at (5, 2), it blocks the queen from moving 
+///   to (5, 2) or (5, 1).
+/// Of the 288 move combinations, 281 are valid.
+/// Constraints:
+/// 1. n == pieces.length
+/// 2. n == positions.length
+/// 3. 1 <= n <= 4
+/// 4. pieces only contains the strings "rook", "queen", and "bishop".
+/// 5. There will be at most one queen on the chessboard.
+/// 6. 1 <= xi, yi <= 8
+/// 7. Each positions[i] is distinct.
+/// </summary>
+int LeetCodeDFS::countCombinations(vector<string>& pieces, vector<vector<int>>& positions)
+{
+    unordered_map<string, vector<vector<int>>> directions =
+    {
+        {"rook",{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}},
+        {"bishop", {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}}},
+        {"queen", {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}, {-1, 0}, {1, 0}, {0, -1}, {0, 1}}}
+    };
+
+    vector<vector<vector<int>>> grid_steps(pieces.size(), vector<vector<int>>(8, vector<int>(8)));
+    return countCombinations(pieces, positions, 0, grid_steps, directions);
+}
+
+/// <summary>
+/// Leet Code 2081. Sum of k-Mirror Numbers
+/// </summary>
+bool LeetCodeDFS::kMirrorisMirror(long long num, int base)
+{
+    long long mul = 1;
+    while (mul * base <= num)
+    { 
+        mul *= base;
+    }
+    for (; num; mul /= (long long)base * (long long)base) 
+    {
+        if (num / mul != num % base)
+        {
+            return false;
+        }
+        num = (num - (num / mul) * mul - num % base) / base;
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet Code 2081. Sum of k-Mirror Numbers
+/// </summary>
+long long LeetCodeDFS::kMirrorGenerate(int digit, int n, int k, long long first_mul,
+    vector<long long>& mirror1, vector<long long>& mirror2)
+{
+    vector<long long> mirror;
+    long long result = 0;
+    for (int i = 0; n > 0 && i < 10; ++i)
+    {
+        for (int j = 0; n > 0 && j < mirror1.size(); ++j)
+        {
+            mirror.push_back(first_mul * i + mirror1[j] * 10 + i);
+            if (i != 0 && kMirrorisMirror(mirror.back(), k))
+            {
+                result += mirror.back();
+                --n;
+            }
+        }
+    }
+    swap(mirror1, mirror2);
+    swap(mirror2, mirror);
+    return result + (n == 0 ? 0 : kMirrorGenerate(digit + 1, n, k, first_mul * 10, mirror1, mirror2));
+}
+
+/// <summary>
+/// Leet Code 2081. Sum of k-Mirror Numbers
+///                                                                 
+/// Hard
+/// 
+/// A k-mirror number is a positive integer without leading zeros that 
+/// reads the same both forward and backward in base-10 as well as in 
+/// base-k.
+///
+/// For example, 9 is a 2-mirror number. The representation of 9 in 
+/// base-10 and base-2 are 9 and 1001 respectively, which read the 
+/// same both forward and backward.
+/// On the contrary, 4 is not a 2-mirror number. The representation 
+/// of 4 in base-2 is 100, which does not read the same both forward 
+/// and backward.
+/// Given the base k and the number n, return the sum of the n smallest 
+/// k-mirror numbers.
+///  
+/// Example 1:
+/// Input: k = 2, n = 5
+/// Output: 25
+/// Explanation:
+/// The 5 smallest 2-mirror numbers and their representations in 
+/// base-2 are listed as follows:
+/// base-10    base-2
+/// 1          1
+/// 3          11
+/// 5          101
+/// 7          111
+/// 9          1001
+/// Their sum = 1 + 3 + 5 + 7 + 9 = 25. 
+///
+/// Example 2:
+/// Input: k = 3, n = 7
+/// Output: 499
+/// Explanation:
+/// The 7 smallest 3-mirror numbers are and their representations in 
+/// base-3 are listed as follows:
+/// base-10    base-3
+/// 1          1
+/// 2          2
+/// 4          11
+/// 8          22
+/// 121        11111
+/// 151        12121
+/// 212        21212
+/// Their sum = 1 + 2 + 4 + 8 + 121 + 151 + 212 = 499.
+///
+/// Example 3:
+/// Input: k = 7, n = 17
+/// Output: 20379000
+/// Explanation: The 17 smallest 7-mirror numbers are:
+/// 1, 2, 3, 4, 5, 6, 8, 121, 171, 242, 292, 16561, 65656, 2137312, 
+/// 4602064, 6597956, 6958596
+///
+/// Constraints:
+/// 1. 2 <= k <= 9
+/// 2. 1 <= n <= 30
+/// </summary>
+long long LeetCodeDFS::kMirror(int k, int n)
+{
+    long long result = 0;
+    vector<long long> mirror1{ 0 }, mirror2{ 0 };
+    for (int i = 1; n > 0 && i < 10; ++i) 
+    {
+        mirror2.push_back(i);
+        if (kMirrorisMirror(i, k))
+        {
+            result += i;
+            --n;
+        }
+    }
+    return result + kMirrorGenerate(2, n, k, 10, mirror1, mirror2);
+}
 #pragma endregion
 
 
