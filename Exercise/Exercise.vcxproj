@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Exercise.cpp" />
+    <ClCompile Include="TestTwoPointer.cpp" />
     <ClCompile Include="TestArray.cpp" />
     <ClCompile Include="TestBFS.cpp" />
     <ClCompile Include="TestBinarySearch.cpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="TestStack.h" />
     <ClInclude Include="TestString.h" />
     <ClInclude Include="TestTree.h" />
+    <ClInclude Include="TestTwoPointer.h" />
     <ClInclude Include="TestUSACO.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1595,8 +1595,48 @@ void TestLeetCode1942(void)
     Logger::WriteMessage("targetFriend = " + to_string(targetFriend) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1962(void)
+{
+    Logger::WriteMessage("Test Leet Code 1962");
+    LeetCodeSort leetCode;
+    vector<int> piles = { 5, 4, 9 };
+    int k = 2;
+    int result = leetCode.minStoneSum(piles, k);
+    Logger::WriteMessage(piles);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    piles = { 4,3,6,7 };
+    k = 3;
+    result = leetCode.minStoneSum(piles, k);
+    Logger::WriteMessage(piles);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+
+void TestLeetCode1996(void)
+{
+    Logger::WriteMessage("Test Leet Code 1996");
+    LeetCodeSort leetCode;
+    vector<vector<int>> properties = { {5, 5},{6, 3},{3, 6} };
+    int result = leetCode.numberOfWeakCharacters(properties);
+    Logger::WriteMessage(properties);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    properties = { {2, 2},{3, 3} };
+    result = leetCode.numberOfWeakCharacters(properties);
+    Logger::WriteMessage(properties);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    properties = { {1, 5},{10, 4},{4, 3} };
+    result = leetCode.numberOfWeakCharacters(properties);
+    Logger::WriteMessage(properties);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1996();
+    TestLeetCode1962();
     TestLeetCode1942();
     TestLeetCode1985();
     TestLeetCode1921();

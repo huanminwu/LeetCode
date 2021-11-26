@@ -4076,6 +4076,21 @@ void TestLeetCode1975(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2029(void)
+{
+    Logger::WriteMessage("Test Leet Code 2029");
+    LeetCodeMath leetCode;
+    vector<int> stones = { 2, 1 };
+    bool result = leetCode.stoneGameIX(stones);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    stones = { 2 };
+    result = leetCode.stoneGameIX(stones);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeMath(void)
 {
     TestLeetCode1975();

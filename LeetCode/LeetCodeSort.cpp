@@ -2148,58 +2148,6 @@ vector<int> LeetCode::advantageCount(vector<int>& A, vector<int>& B)
 }
 
 /// <summary>
-/// Leet code #881. Boats to Save People
-/// 
-/// The i-th person has weight people[i], and each boat can carry a maximum 
-/// weight of limit.
-///
-/// Each boat carries at most 2 people at the same time, provided the sum of 
-/// the weight of those people is at most limit.
-///
-/// Return the minimum number of boats to carry every given person.  (It is 
-/// guaranteed each person can be carried by a boat.)
-///
-/// Example 1:
-///
-/// Input: people = [1,2], limit = 3
-/// Output: 1
-/// Explanation: 1 boat (1, 2)
-///
-/// Example 2:
-///
-/// Input: people = [3,2,2,1], limit = 3
-/// Output: 3
-/// Explanation: 3 boats (1, 2), (2) and (3)
-///
-/// Example 3:
-/// 
-/// Input: people = [3,5,3,4], limit = 5
-/// Output: 4
-/// Explanation: 4 boats (3), (3), (4), (5)
-/// Note:
-/// 
-/// 1. 1 <= people.length <= 50000
-/// 2. 1 <= people[i] <= limit <= 30000
-/// </summary>
-int LeetCode::numRescueBoats(vector<int>& people, int limit)
-{
-    int result = 0;
-    sort(people.begin(), people.end());
-    int first = 0; 
-    int last = people.size() - 1;
-    while (first <= last)
-    {
-        if (people[first] + people[last] <= limit)
-        {
-            first++;
-        }
-        last--;
-        result++;
-    }
-    return result;
-}
-
-/// <summary>
 /// Leet code #941. Valid Mountain Array
 /// 
 /// Given an array A of integers, return true if and only if it is a valid 
@@ -7313,7 +7261,7 @@ int LeetCodeSort::minimumDifference(vector<int>& nums, int k)
     int result = INT_MAX;
     if (k == 1) return 0;
     sort(nums.begin(), nums.end());
-    for (size_t i = 0; i < (int) nums.size() - (k - 1); i++)
+    for (int i = 0; i < (int) nums.size() - (k - 1); i++)
     {
         result = min(result, nums[i + k - 1] - nums[i]);
     }
@@ -7552,6 +7500,134 @@ int LeetCodeSort::smallestChair(vector<vector<int>>& times, int targetFriend)
             int person = curr.second - 1;
             int seat = people[person];
             seats.push(seat);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 1962. Remove Stones to Minimize the Total
+///                                                                 
+/// Medium
+/// 
+/// You are given a 0-indexed integer array piles, where piles[i] 
+/// represents the number of stones in the ith pile, and an integer 
+/// k. You should apply the following operation exactly k times:
+///
+/// Choose any piles[i] and remove floor(piles[i] / 2) stones from it.
+/// Notice that you can apply the operation on the same pile more than 
+/// once.
+/// 
+/// Return the minimum possible total number of stones remaining after 
+/// applying the k operations.
+///
+/// floor(x) is the greatest integer that is smaller than or equal to x 
+/// (i.e., rounds x down).
+///
+/// Example 1:
+/// Input: piles = [5,4,9], k = 2
+/// Output: 12
+/// Explanation: Steps of a possible scenario are:
+/// - Apply the operation on pile 2. The resulting piles are [5,4,5].
+/// - Apply the operation on pile 0. The resulting piles are [3,4,5].
+/// The total number of stones in [3,4,5] is 12.
+///
+/// Example 2:
+/// Input: piles = [4,3,6,7], k = 3
+/// Output: 12
+/// Explanation: Steps of a possible scenario are:
+/// - Apply the operation on pile 2. The resulting piles are [4,3,3,7].
+/// - Apply the operation on pile 3. The resulting piles are [4,3,3,4].
+/// - Apply the operation on pile 0. The resulting piles are [2,3,3,4].
+/// The total number of stones in [2,3,3,4] is 12.
+/// 
+/// Constraints:
+/// 1. 1 <= piles.length <= 10^5
+/// 2. 1 <= piles[i] <= 10^4
+/// 3. 1 <= k <= 10^5
+/// </summary>
+int LeetCodeSort::minStoneSum(vector<int>& piles, int k)
+{
+    priority_queue<int> pq;
+    int result = 0;
+    for (size_t i = 0; i < piles.size(); i++)
+    {
+        result += piles[i];
+        pq.push(piles[i]);
+    }
+
+    for (int i = 0; i < k; i++)
+    {
+        int stone = pq.top();
+        pq.pop();
+        result -= stone / 2;
+        pq.push(stone - stone / 2);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 1996. The Number of Weak Characters in the Game
+///                                                                 
+/// Medium
+/// 
+/// You are playing a game that contains multiple characters, and each of 
+/// the characters has two main properties: attack and defense. You are 
+/// given a 2D integer array properties where properties[i] = [attacki, 
+/// defensei] represents the properties of the ith character in the game.
+///
+/// A character is said to be weak if any other character has both attack 
+/// and defense levels strictly greater than this character's attack and 
+/// defense levels. More formally, a character i is said to be weak if 
+/// there exists another character j where attackj > attacki and 
+/// defensej > defensei.
+///  
+/// Return the number of weak characters.
+///
+/// Example 1:
+/// Input: properties = [[5,5],[6,3],[3,6]]
+/// Output: 0
+/// Explanation: No character has strictly greater attack and defense 
+/// than the other.
+///
+/// Example 2:
+/// Input: properties = [[2,2],[3,3]]
+/// Output: 1
+/// Explanation: The first character is weak because the second character 
+/// has a strictly greater attack and defense.
+///
+/// Example 3:
+/// Input: properties = [[1,5],[10,4],[4,3]]
+/// Output: 1
+/// Explanation: The third character is weak because the second character 
+/// has a strictly greater attack and defense.
+///
+/// Constraints:
+/// 1. 2 <= properties.length <= 10^5
+/// 2. properties[i].length == 2
+/// 3. 1 <= attacki, defensei <= 10^5
+/// </summary>
+int LeetCodeSort::numberOfWeakCharacters(vector<vector<int>>& properties)
+{
+    map<int, int> defense;
+    sort(properties.begin(), properties.end());
+    int prev_defense = 0;
+    int max_defense = 0;
+    for (int i = properties.size() - 1; i >= 0; i--)
+    {
+        if (i == properties.size() - 1 || properties[i][0] != properties[i + 1][0])
+        {
+            prev_defense = max_defense;
+            defense[properties[i][0]] = prev_defense;
+        }
+        max_defense = max(max_defense, properties[i][1]);
+    }
+    int result = 0;
+    for (size_t i = 0; i < properties.size(); i++)
+    {
+        if (defense[properties[i][0]] > properties[i][1])
+        {
+            result++;
         }
     }
     return result;

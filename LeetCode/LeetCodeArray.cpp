@@ -498,32 +498,30 @@ string LeetCodeArray::findContestMatch(int n)
 /// </summary>
 bool LeetCodeArray::validPalindrome(string s)
 {
-    stack<pair<string, int>> process_stack;
-    process_stack.push(make_pair(s, 0));
-    while (!process_stack.empty())
+    stack<vector<int>> stk;
+    stk.push({ 0, (int)s.size() - 1, 1 });
+    while (!stk.empty())
     {
-        pair<string, int> entity = process_stack.top();
-        process_stack.pop();
-        string str = entity.first;
-        int left = 0, right = str.size() - 1;
-        // if both end are equal we are safe to stripe both end
-        while ((left < right) && (str[left] == str[right]))
+        vector<int> pos = stk.top();
+        stk.pop();
+        while (s[pos[0]] == s[pos[1]] && pos[0] < pos[1])
         {
-            left++;
-            right--;
+            pos[0]++;
+            pos[1]--;
         }
-        if (left < right)
-        {
-            // we stripe either head, if no mismatch found
-            if (entity.second == 0)
-            {
-                process_stack.push(make_pair(str.substr(left + 1, right - left), entity.second + 1));
-                process_stack.push(make_pair(str.substr(left, right - left), entity.second + 1));
-            }
-        }
-        else if (entity.second <= 1)
+        if (pos[0] >= pos[1])
         {
             return true;
+        }
+        if (pos[2] == 0) // we already delete one letter
+        {
+            continue;
+        }
+        else
+        {
+            pos[2]--;
+            stk.push({ pos[0] + 1, pos[1], pos[2] });
+            stk.push({ pos[0], pos[1] - 1, pos[2] });
         }
     }
     return false;

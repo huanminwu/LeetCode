@@ -3812,8 +3812,24 @@ void TestLeetCode2050(void)
     Logger::WriteMessage("n = " + to_string(n) + "result = " + to_string(result));
 }
 
+void TestLeetCode1992(void)
+{
+    Logger::WriteMessage("Test Leet Code 1992");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> land = { {1, 0, 0},{0, 1, 1},{0, 1, 1} };
+    vector<vector<int>> result = leetCode.findFarmland(land);
+    Logger::WriteMessage(land);
+    Logger::WriteMessage(result);
+
+    land = { {1, 1},{1, 1} };
+    result = leetCode.findFarmland(land);
+    Logger::WriteMessage(land);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1992();
     TestLeetCode2050();
     TestLeetCode2076();
     TestLeetCode2065();

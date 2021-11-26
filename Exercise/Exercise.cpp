@@ -2122,28 +2122,7 @@ void TestLeetCode877(void)
 
 
 
-void TestLeetCode881(void)
-{
-    Logger::WriteMessage("Test Leet Code 881");
-    LeetCode leetCode;
-    vector<int> people = { 1, 2 };
-    int limit = 3;
-    int result = leetCode.numRescueBoats(people, limit);
-    Logger::WriteMessage(people);
-    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
 
-    people = { 3,2,2,1 };
-    limit = 3;
-    result = leetCode.numRescueBoats(people, limit);
-    Logger::WriteMessage(people);
-    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
-
-    people = { 3,5,3,4 };
-    limit = 5;
-    result = leetCode.numRescueBoats(people, limit);
-    Logger::WriteMessage(people);
-    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
-}
 
 void TestLeetCode457(void)
 {
@@ -3240,12 +3219,12 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 { 
+    TestLeetCodeSort();
     TestLeetCodeGraph();
     TestLeetCodeDFS();
     TestLeetCodeGreedy();
     TestLeetCodeStack();
     TestLeetCodeBinarySearch();
-    TestLeetCodeSort();
     TestLeetCodeDP();
     TestLeetCodeMath();
     TestLeetCodeArray();
@@ -3349,7 +3328,6 @@ void main(int argc, char* argv[])
     TestLeetCode886();
     TestLeetCode880();
     TestLeetCode887();
-    TestLeetCode881();
     TestLeetCode4();
     TestLeetCode877();
     TestLeetCode589();

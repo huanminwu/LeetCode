@@ -75,6 +75,9 @@
     <ClInclude Include="USACO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LeetCodeTwoPointer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LeetCodeDP.cpp">
@@ -123,6 +126,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="USACO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LeetCodeTwoPointer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

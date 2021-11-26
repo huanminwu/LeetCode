@@ -3093,6 +3093,91 @@ public:
     /// </summary>
     int smallestChair(vector<vector<int>>& times, int targetFriend);
 
+    /// <summary>
+    /// Leet Code 1962. Remove Stones to Minimize the Total
+    ///                                                                 
+    /// Medium
+    /// 
+    /// You are given a 0-indexed integer array piles, where piles[i] 
+    /// represents the number of stones in the ith pile, and an integer 
+    /// k. You should apply the following operation exactly k times:
+    ///
+    /// Choose any piles[i] and remove floor(piles[i] / 2) stones from it.
+    /// Notice that you can apply the operation on the same pile more than 
+    /// once.
+    /// 
+    /// Return the minimum possible total number of stones remaining after 
+    /// applying the k operations.
+    ///
+    /// floor(x) is the greatest integer that is smaller than or equal to x 
+    /// (i.e., rounds x down).
+    ///
+    /// Example 1:
+    /// Input: piles = [5,4,9], k = 2
+    /// Output: 12
+    /// Explanation: Steps of a possible scenario are:
+    /// - Apply the operation on pile 2. The resulting piles are [5,4,5].
+    /// - Apply the operation on pile 0. The resulting piles are [3,4,5].
+    /// The total number of stones in [3,4,5] is 12.
+    ///
+    /// Example 2:
+    /// Input: piles = [4,3,6,7], k = 3
+    /// Output: 12
+    /// Explanation: Steps of a possible scenario are:
+    /// - Apply the operation on pile 2. The resulting piles are [4,3,3,7].
+    /// - Apply the operation on pile 3. The resulting piles are [4,3,3,4].
+    /// - Apply the operation on pile 0. The resulting piles are [2,3,3,4].
+    /// The total number of stones in [2,3,3,4] is 12.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= piles.length <= 10^5
+    /// 2. 1 <= piles[i] <= 10^4
+    /// 3. 1 <= k <= 10^5
+    /// </summary>
+    int minStoneSum(vector<int>& piles, int k);
+
+    /// <summary>
+    /// Leet Code 1996. The Number of Weak Characters in the Game
+    ///                                                                 
+    /// Medium
+    /// 
+    /// You are playing a game that contains multiple characters, and each of 
+    /// the characters has two main properties: attack and defense. You are 
+    /// given a 2D integer array properties where properties[i] = [attacki, 
+    /// defensei] represents the properties of the ith character in the game.
+    ///
+    /// A character is said to be weak if any other character has both attack 
+    /// and defense levels strictly greater than this character's attack and 
+    /// defense levels. More formally, a character i is said to be weak if 
+    /// there exists another character j where attackj > attacki and 
+    /// defensej > defensei.
+    ///  
+    /// Return the number of weak characters.
+    ///
+    /// Example 1:
+    /// Input: properties = [[5,5],[6,3],[3,6]]
+    /// Output: 0
+    /// Explanation: No character has strictly greater attack and defense 
+    /// than the other.
+    ///
+    /// Example 2:
+    /// Input: properties = [[2,2],[3,3]]
+    /// Output: 1
+    /// Explanation: The first character is weak because the second character 
+    /// has a strictly greater attack and defense.
+    ///
+    /// Example 3:
+    /// Input: properties = [[1,5],[10,4],[4,3]]
+    /// Output: 1
+    /// Explanation: The third character is weak because the second character 
+    /// has a strictly greater attack and defense.
+    ///
+    /// Constraints:
+    /// 1. 2 <= properties.length <= 10^5
+    /// 2. properties[i].length == 2
+    /// 3. 1 <= attacki, defensei <= 10^5
+    /// </summary>
+    int numberOfWeakCharacters(vector<vector<int>>& properties);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

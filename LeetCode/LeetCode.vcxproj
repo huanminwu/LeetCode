@@ -141,6 +141,7 @@
     <ClInclude Include="LeetCodeGraph.h" />
     <ClInclude Include="LeetCodeGreedy.h" />
     <ClInclude Include="LeetCodeHashtable.h" />
+    <ClInclude Include="LeetCodeTwoPointer.h" />
     <ClInclude Include="LeetCodeLinkedList.h" />
     <ClInclude Include="LeetCodeMath.h" />
     <ClInclude Include="LeetCodeSort.h" />
@@ -166,6 +167,7 @@
     <ClCompile Include="LeetCodeStack.cpp" />
     <ClCompile Include="LeetCodeString.cpp" />
     <ClCompile Include="LeetCodeTree.cpp" />
+    <ClCompile Include="LeetCodeTwoPointer.cpp" />
     <ClCompile Include="USACO.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

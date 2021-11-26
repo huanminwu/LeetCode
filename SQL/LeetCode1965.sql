@@ -68,15 +68,15 @@
 --- The salary of employee 2 is missing.
 -----------------------------------------------------------------------
 SELECT
-    employee_id = ISNULL(A.[employee_id], [B.employee_id])
+    employee_id = ISNULL(A.[employee_id], B.[employee_id])
 FROM
     Employees AS A
 FULL OUTER JOIN
-    Employees AS B
+    Salaries AS B
 ON
     A.[employee_id] = B.[employee_id]
 WHERE
-    A.[employee_id] = B.[employee_id]
+    A.[employee_id] IS NULL OR B.[employee_id] IS NULL
 ORDER BY 
     employee_id
 ;

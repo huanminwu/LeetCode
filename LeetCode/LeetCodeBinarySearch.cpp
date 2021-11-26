@@ -33,34 +33,34 @@
 int LeetCodeBinarySearch::searchInsert(vector<int>& nums, int target)
 {
     // assign the first as 0, last can be the last item or out of boundary
-    int first = 0, last = nums.size();
-    // middle should start with first
-    int middle = 0;
+    int first = 0, last = nums.size()-1;
+    int result = nums.size();
     // when first == last break out
-    while (first < last)
+    while (first <= last)
     {
         // check the middle point, make sure out overflow
         // please remember this is an int, so always left bias
-        middle = first + (last - first) / 2;
+        int middle = first + (last - first) / 2;
         // if target is located at second half, should go 
         // beyond middle point to avoid dead loop.
-        if (target > nums[middle])
+        if (nums[middle] >= target)
         {
-            first = middle + 1;
-            middle++;
+            result = middle;
+            last = middle - 1;
         }
         else
         {
-            last = middle;
+            first = middle + 1;
         }
     }
     // you can return middle or first, return first is better 
     // because no need to keep track middle
-    return first;
+    return result;
 }
 
 /// <summary>
 /// Leet code #74. Search a 2D Matrix   
+///
 /// Write an efficient algorithm that searches for a value in an m x n matrix. 
 /// This matrix has the following properties:
 /// Integers in each row are sorted from left to right. 
@@ -77,47 +77,23 @@ int LeetCodeBinarySearch::searchInsert(vector<int>& nums, int target)
 /// </summary>
 bool LeetCodeBinarySearch::searchMatrix(vector<vector<int>>& matrix, int target)
 {
-    if (matrix.size() == 0) return false;
-    // Search row first
-    int first = 0, last = matrix.size() - 1;
-    while (first < last)
+    int n = matrix.size();
+    int m = matrix[0].size();
+    int r = 0;
+    int c = matrix[0].size() - 1;
+    while (c >= 0 && r < n)
     {
-        int middle = first + (last - first) / 2;
-        if (target > matrix[middle][matrix[middle].size() - 1])
+        if (matrix[r][c] == target) return true;
+        else if (matrix[r][c] > target)
         {
-            first = middle + 1;
+            c--;
         }
         else
         {
-            last = middle;
+            r++;
         }
     }
-    int row = first;
-
-    // Search column second
-    first = 0;
-    if (matrix[row].size() == 0) return false;
-    last = matrix[row].size() - 1;
-    while (first < last)
-    {
-        int middle = first + (last - first) / 2;
-        if (target > matrix[row][middle])
-        {
-            first = middle + 1;
-        }
-        else
-        {
-            last = middle;
-        }
-    }
-    if (matrix[row][first] == target)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return false;
 }
 
 /// <summary>
@@ -297,30 +273,62 @@ int LeetCodeBinarySearch::firstBadVersion(int n, int bad_version)
 }
 
 /// <summary>
-/// Leet code #275. H-Index II 
-/// Follow up for H-Index: What if the citations array is sorted in ascending order? Could you optimize your algorithm? 
-/// Hint:
-/// 1.Expected runtime complexity is in O(log n) and the input is sorted.
+/// Leet Code 275. H-Index II
+///                                                                 
+/// Medium
+/// 
+/// Given an array of integers citations where citations[i] is the number 
+/// of citations a researcher received for their ith paper and citations 
+/// is sorted in an ascending order, return compute the researcher's 
+/// h-index.
+///
+/// According to the definition of h-index on Wikipedia: A scientist has 
+/// an index h if h of their n papers have at least h citations each, and 
+/// the other n − h papers have no more than h citations each.
+/// 
+/// If there are several possible values for h, the maximum one is taken 
+/// as the h-index.
+///
+/// You must write an algorithm that runs in logarithmic time.
+/// 
+/// Example 1:
+/// Input: citations = [0,1,3,5,6]
+/// Output: 3
+/// Explanation: [0,1,3,5,6] means the researcher has 5 papers in total 
+/// and each of them had received 0, 1, 3, 5, 6 citations respectively.
+/// Since the researcher has 3 papers with at least 3 citations each and 
+/// the remaining two with no more than 3 citations each, their h-index 
+/// is 3.
+///
+/// Example 2:
+/// Input: citations = [1,2,100]
+/// Output: 2
+///
+/// Constraints:
+/// 1. n == citations.length
+/// 2. 1 <= n <= 10^5
+/// 3. 0 <= citations[i] <= 1000
+/// 4. citations is sorted in ascending order.
 /// </summary>
 int LeetCodeBinarySearch::hIndexII(vector<int>& citations)
 {
     int first = 0;
-    int last = citations.size();
-    int middle = first;
-    while (first < last)
+    int last = citations.size() - 1;
+    int result = 0;
+    while (first <= last)
     {
-        middle = first + (last - first) / 2;
-        if ((int)citations.size() - middle > citations[middle])
+        int middle = first + (last - first) / 2;
+        if (citations[middle] >= (int)citations.size() - middle)
         {
-            first = middle + 1;
-            middle++;
+            result = (int)citations.size() - middle;
+            last = middle -1;
         }
         else
         {
-            last = middle;
+            first = middle + 1;
         }
     }
-    return citations.size() - middle;
+    return result;
 }
 
 /// <summary>
@@ -641,28 +649,31 @@ bool LeetCodeBinarySearch::searchII(vector<int>& nums, int target)
 /// </summary>
 int LeetCodeBinarySearch::findMin(vector<int>& nums)
 {
-    if (nums.size() == 0) return 0;
     int first = 0;
     int last = nums.size() - 1;
-    while (first < last)
+    int result = INT_MAX;
+    while (first <= last)
     {
         int middle = first + (last - first) / 2;
         // If first is greater than last, then the minimum item must be 
         // within the range
         if (nums[first] > nums[middle])
         {
-            last = middle;
+            result = min(result, nums[middle]);
+            last = middle - 1;
         }
         else if (nums[middle] > nums[last])
         {
+            result = min(result, nums[last]);
             first = middle + 1;
         }
         else
         {
-            last = middle;
+            result = min(result, nums[first]);
+            break;
         }
     }
-    return nums[first];
+    return result;
 }
 
 /// <summary>
@@ -1359,20 +1370,25 @@ int LeetCodeBinarySearch::binarySearchI(vector<int>& nums, int target)
 {
     int first = 0;
     int last = nums.size() - 1;
-    while (first < last)
+    int result = -1;
+    while (first <= last)
     {
         int middle = first + (last - first) / 2;
         if (nums[middle] < target)
         {
             first = middle + 1;
         }
+        else if (nums[middle] > target)
+        {
+            last = middle - 1;
+        }
         else
         {
-            last = middle;
+            result = middle;
+            break;
         }
     }
-    if (nums[first] == target) return first;
-    else return -1;
+    return result;
 }
 
 
