@@ -11158,32 +11158,43 @@ int LeetCodeDP::waysToDistribute(int n, int k)
 int LeetCodeDP::longestPalindromeSubseqII(string s)
 {
     int n = s.size();
-    vector<vector<vector<int>>> dp(n, vector<vector<int>>(n, vector<int>(26)));
+    vector<vector<int>> dp(n, vector<int>(n));
+    vector<vector<int>> edge(n, vector<int>(n));
     for (int k = 1; k < n; k++)
     {
         for (int i = 0; i < n; i++)
         {
             if (i + k >= n) break;
-            for (int j = 0; j < 26; j++)
+            if (s[i] == s[i + k])
             {
-                dp[i][i + k][j] = max(dp[i][i + k][j], dp[i][i + k - 1][j]);
-                dp[i][i + k][j] = max(dp[i][i + k][j], dp[i + 1][i + k][j]);
-                int inner = 0;
-                if (k > 1)
+                if (k == 1)
                 {
-                    inner = dp[i + 1][i + k - 1][j];
+                    dp[i][i + k] = 2;
                 }
-                dp[i][i + k][j] = max(dp[i][i + k][j], inner);
-                if (s[i] == s[i+k] && s[i] - 'a' != j)
+                else if (dp[i + 1][i + k - 1] == 0 || (s[i] - 'a') != edge[i + 1][i + k - 1])
                 {
-                    dp[i][i + k][s[i] - 'a'] = max(dp[i][i + k][s[i] - 'a'], 2 + inner);
+                    dp[i][i + k] = dp[i + 1][i + k - 1] + 2;
                 }
+                edge[i][i + k] = s[i] - 'a';
+            }
+            else
+            {
+                dp[i][i + k] = dp[i + 1][i + k - 1];
+                edge[i][i + k] = edge[i + 1][i + k - 1];
+            }
+            if (dp[i][i + k - 1] > dp[i][i + k])
+            {
+                dp[i][i + k] = dp[i][i + k - 1];
+                edge[i][i + k] = edge[i][i + k - 1];
+            }
+            if (dp[i + 1][i + k] > dp[i][i + k])
+            {
+                dp[i][i + k] = dp[i + 1][i + k];
+                edge[i][i + k] = edge[i + 1][i + k];
             }
         }
     }
-    int result = 0;
-    for (size_t i = 0; i < 26; i++) result = max(result, dp[0][n - 1][i]);
-    return result;
+    return dp[0][n - 1];
 }
 
 /// <summary>

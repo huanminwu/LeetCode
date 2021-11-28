@@ -430,23 +430,29 @@ public:
     void flatten(TreeNode* root);
 
     /// <summary>
-    /// Leet code #107. Binary Tree Level Order Traversal II 
-    /// Given a binary tree, return the bottom-up level order traversal 
-    /// of its nodes' values. (ie, from left to right, level by level 
-    /// from leaf to root).
-    /// For example:
-    /// Given binary tree [3,9,20,null,null,15,7],
-    ///    3
-    ///   / \
-    ///  9  20
-    ///    /  \
-    ///   15   7
-    /// return its bottom-up level order traversal as:
-    ///	[
-    ///   [15,7],
-    ///   [9,20],
-    ///   [3]
-    /// ]
+    /// Leet Code 107. Binary Tree Level Order Traversal II
+    ///                                                                 
+    /// Medium
+    /// 
+    /// Given the root of a binary tree, return the bottom-up level order 
+    /// traversal of its nodes' values. (i.e., from left to right, level 
+    /// by level from leaf to root).
+    /// 
+    /// Example 1:
+    /// Input: root = [3,9,20,null,null,15,7]
+    /// Output: [[15,7],[9,20],[3]]
+    ///
+    /// Example 2:
+    /// Input: root = [1]
+    /// Output: [[1]]
+    ///
+    /// Example 3:
+    /// Input: root = []
+    /// Output: []
+    ///
+    /// Constraints:
+    /// 1. The number of nodes in the tree is in the range [0, 2000].
+    /// 2. -1000 <= Node.val <= 1000
     /// </summary>
     vector<vector<int>> levelOrderBottom(TreeNode* root);
 
@@ -1260,11 +1266,31 @@ public:
     bool isBalanced(TreeNode* root, int& depth);
 
     /// <summary>
-    /// Leet code #110. Balanced Binary Tree
+    /// Leet Code 110. Balanced Binary Tree
+    ///                                                                 
+    /// Easy
+    ///
     /// Given a binary tree, determine if it is height-balanced.
-    /// For this problem, a height-balanced binary tree is defined as a binary 
-    /// tree in which the depth of the 
-    /// two subtrees of every node never differ by more than 1. 
+    /// 
+    /// For this problem, a height-balanced binary tree is defined as:
+    /// a binary tree in which the left and right subtrees of every node 
+    /// differ in height by no more than 1.
+    /// 
+    /// Example 1:
+    /// Input: root = [3,9,20,null,null,15,7]
+    /// Output: true
+    ///
+    /// Example 2:
+    /// Input: root = [1,2,2,3,3,null,null,4,4]
+    /// Output: false
+    ///
+    /// Example 3:
+    /// Input: root = []
+    /// Output: true
+    ///  
+    /// Constraints:
+    /// 1. The number of nodes in the tree is in the range [0, 5000].
+    /// -10^4 <= Node.val <= 10^4
     /// </summary>
     bool isBalanced(TreeNode* root);
 
@@ -1394,22 +1420,26 @@ public:
     void recoverTreeII(TreeNode* root);
 
     /// <summary>
-    /// Leet code #101. Symmetric Tree 
-    /// Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center). 
-    /// For example, this binary tree [1,2,2,3,4,4,3] is symmetric: 
-    ///     1
-    ///    / \
-    ///   2   2
-    ///  / \ / \
-    /// 3  4 4  3
-    /// But the following [1,2,2,null,3,null,3] is not:
-    ///    1
-    ///   / \
-    ///  2   2
-    ///   \   \
-    ///   3    3
-    /// Note:
-    /// Bonus points if you could solve it both recursively and iteratively.
+    /// Leet Code 101. Symmetric Tree
+    ///                                                                 
+    /// Easy
+    /// 
+    /// Given the root of a binary tree, check whether it is a mirror of 
+    /// itself (i.e., symmetric around its center).
+    ///  
+    /// Example 1:
+    /// Input: root = [1,2,2,3,4,4,3]
+    /// Output: true
+    ///
+    /// Example 2:
+    /// Input: root = [1,2,2,null,3,null,3]
+    /// Output: false
+    ///
+    /// Constraints:
+    /// 1. The number of nodes in the tree is in the range [1, 1000].
+    /// 2. -100 <= Node.val <= 100
+    ///  
+    /// Follow up: Could you solve it both recursively and iteratively?
     /// </summary>
     bool isSymmetric(TreeNode* root);
 
@@ -4444,11 +4474,6 @@ public:
     /// Leet code #1485. Clone Binary Tree With Random Pointer
     /// </summary> 
     TreeNode* setRandomBinaryTree(TreeNode* root, TreeNode * clone, unordered_map<TreeNode*, TreeNode*>& map);
-
-    /// <summary>
-    /// Leet code #1485. Clone Binary Tree With Random Pointer
-    /// </summary> 
-    TreeNode* setRandomBinaryTree(TreeNode* root, TreeNode* clone);
 
     /// <summary>
     /// Leet code #1485. Clone Binary Tree With Random Pointer

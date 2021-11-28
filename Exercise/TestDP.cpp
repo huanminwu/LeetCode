@@ -2596,6 +2596,7 @@ void TestLeetCode1959(void)
 
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1682();
     TestLeetCode1959();
     TestLeetCode1997();
     TestLeetCode1987();
@@ -2611,7 +2612,6 @@ void TestLeetCodeDP(void)
     TestLeetCode1787();
     TestLeetCode1774();
     TestLeetCode1746();
-    TestLeetCode1682();
     TestLeetCode1692();
     TestLeetCode1105();
     TestLeetCode1687();

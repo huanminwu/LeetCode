@@ -4091,8 +4091,51 @@ void TestLeetCode2029(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2005(void)
+{
+    Logger::WriteMessage("Test Leet Code 2005");
+    LeetCodeMath leetCode;
+    int n = 3;
+    bool result = leetCode.findGameWinner(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+
+    n = 1;
+    result = leetCode.findGameWinner(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+
+    n = 2;
+    result = leetCode.findGameWinner(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+
+    n = 95;
+    result = leetCode.findGameWinner(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1908(void)
+{
+    Logger::WriteMessage("Test Leet Code 1908");
+    LeetCodeMath leetCode;
+    vector<int> piles = { 1 };
+    bool result = leetCode.nimGame(piles);
+    Logger::WriteMessage(piles);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    piles = { 1,1 };
+    result = leetCode.nimGame(piles);
+    Logger::WriteMessage(piles);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    piles = { 1,2,3 };
+    result = leetCode.nimGame(piles);
+    Logger::WriteMessage(piles);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1908();
+    TestLeetCode2005();
     TestLeetCode1975();
     TestLeetCode1954();
     TestLeetCode1982();

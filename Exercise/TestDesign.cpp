@@ -3888,6 +3888,7 @@ void TestLeetCode2069(void)
 
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1628();
     TestLeetCode2069();
     TestLeetCode1912();
     TestLeetCode1865();
@@ -3902,7 +3903,6 @@ void TestLeetCodeDesign(void)
     TestLeetCode715();
     TestLeetCode1670();
     TestLeetCode1656();
-    TestLeetCode1628();
     TestLeetCode1622();
     TestLeetCode1570();
     TestLeetCode1586();

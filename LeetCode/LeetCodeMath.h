@@ -7183,6 +7183,178 @@ public:
     /// 2. 1 <= stones[i] <= 10^4
     /// </summary>
     bool stoneGameIX(vector<int>& stones);
+
+    /// <summary>
+    /// Leet Code 2005. Subtree Removal Game with Fibonacci Tree
+    ///
+    /// Hard                                                    
+    ///                                                                 
+    /// A Fibonacci tree is a binary tree created using the order function 
+    /// order(n):
+    ///
+    /// order(0) is the empty tree.
+    /// order(1) is a binary tree with only one node.
+    /// order(n) is a binary tree that consists of a root node with the left 
+    /// subtree as order(n - 2) and the right subtree as order(n - 1).
+    /// Alice and Bob are playing a game with a Fibonacci tree with Alice 
+    /// staring first. On each turn, a player selects a node and removes that 
+    /// node and its subtree. The player that is forced to delete root loses.
+    ///
+    /// Given the integer n, return true if Alice wins the game or false if 
+    /// Bob wins, assuming both players play optimally.
+    ///
+    /// A subtree of a binary tree tree is a tree that consists of a node in 
+    /// tree and all of this node's descendants. The tree tree could also be 
+    /// considered as a subtree of itself.
+    /// 
+    /// Example 1: 
+    /// Input: n = 3
+    /// Output: true
+    /// Explanation:
+    /// Alice takes the node 1 in the right subtree.
+    /// Bob takes either the 1 in the left subtree or the 2 in the right 
+    /// subtree.
+    /// Alice takes whichever node Bob doesn't take.
+    /// Bob is forced to take the root node 3, so Bob will lose.
+    /// Return true because Alice wins.
+    ///
+    /// Example 2:
+    /// Input: n = 1
+    /// Output: false
+    /// Explanation:
+    /// Alice is forced to take the root node 1, so Alice will lose.
+    /// Return false because Alice loses.
+    ///
+    /// Example 3:
+    /// Input: n = 2
+    /// Output: true
+    /// Explanation:
+    /// Alice takes the node 1.
+    /// Bob is forced to take the root node 2, so Bob will lose.
+    /// Return true because Alice wins.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 100
+    /// </summary>
+    bool findGameWinner(int n);
+
+    /// <summary>
+    /// Leet Code 1908. Game of Nim
+    ///
+    /// Medium                                                    
+    /// 
+    /// Alice and Bob take turns playing a game with Alice starting first.
+    ///
+    /// In this game, there are n piles of stones. On each player's turn, the 
+    /// player should remove any positive number of stones from a non-empty 
+    /// pile of his or her choice. The first player who cannot make a move 
+    /// loses, and the other player wins.
+    ///
+    /// Given an integer array piles, where piles[i] is the number of stones 
+    /// in the ith pile, return true if Alice wins, or false if Bob wins.
+    ///
+    /// Both Alice and Bob play optimally.
+    /// 
+    /// Example 1:
+    /// Input: piles = [1]
+    /// Output: true
+    /// Explanation: There is only one possible scenario:
+    /// - On the first turn, Alice removes one stone from the first pile. 
+    ///   piles = [0].
+    /// - On the second turn, there are no stones left for Bob to remove. 
+    ///   Alice wins.
+    ///
+    /// Example 2:
+    /// Input: piles = [1,1]
+    /// Output: false
+    /// Explanation: It can be proven that Bob will always win. One 
+    /// possible scenario is:
+    /// - On the first turn, Alice removes one stone from the first pile. 
+    ///   piles = [0,1].
+    /// - On the second turn, Bob removes one stone from the second pile. 
+    ///   piles = [0,0].
+    /// - On the third turn, there are no stones left for Alice to remove. 
+    ///   Bob wins.
+    ///
+    /// Example 3:
+    /// Input: piles = [1,2,3]
+    /// Output: false
+    /// Explanation: It can be proven that Bob will always win. One possible 
+    /// scenario is:
+    /// - On the first turn, Alice removes three stones from the third pile. 
+    ///   piles = [1,2,0].
+    /// - On the second turn, Bob removes one stone from the second pile. 
+    ///   piles = [1,1,0].
+    /// - On the third turn, Alice removes one stone from the first pile. 
+    ///   piles = [0,1,0].
+    /// - On the fourth turn, Bob removes one stone from the second pile. 
+    ///   piles = [0,0,0].
+    /// - On the fifth turn, there are no stones left for Alice to remove. 
+    ///   Bob wins.
+    ///
+    /// Constraints:
+    /// 1. n == piles.length
+    /// 2. 1 <= n <= 7
+    /// 3. 1 <= piles[i] <= 7
+    /// 
+    /// Follow-up: Could you find a linear time solution? Although the linear 
+    /// time solution may be beyond the scope of an interview, it could be 
+    /// interesting to know.
+    /// </summary>
+    bool nimGame(vector<int>& piles); 
+
+    /// <summary>
+    /// Leet Code 1924. Erect the Fence II
+    /// </summary>
+    vector<double> circleFrom(const pair<double, double>& A, const pair<double, double>& B, const pair<double, double>& C);
+
+    /// <summary>
+    /// Leet Code 1924. Erect the Fence II
+    /// </summary>
+    vector<double> centerAndRadius(const vector<pair<double, double>>& b);
+
+    /// <summary>
+    /// Leet Code 1924. Erect the Fence II
+    /// </summary>
+    vector<double> outerTrees(vector<vector<int>>& trees, int i, vector<pair<double, double>> b);
+
+    /// <summary>
+    /// Leet Code 1924. Erect the Fence II
+    ///                                                                 
+    /// Hard
+    ///
+    /// You are given a 2D integer array trees where trees[i] = [xi, yi] 
+    /// represents the location of the ith tree in the garden.
+    ///
+    /// You are asked to fence the entire garden using the minimum length 
+    /// of rope possible. The garden is well-fenced only if all the trees 
+    /// are enclosed and the rope used forms a perfect circle. A tree is 
+    /// considered enclosed if it is inside or on the border of the circle.
+    ///
+    /// More formally, you must form a circle using the rope with a 
+    /// center (x, y) and radius r where all trees lie inside or on the 
+    /// circle and r is minimum.
+    ///
+    /// Return the center and radius of the circle as a length 3 
+    /// array [x, y, r]. Answers within 10-5 of the actual answer will be 
+    /// accepted.
+    ///
+    /// Example 1:
+    /// Input: trees = [[1,1],[2,2],[2,0],[2,4],[3,3],[4,2]]
+    /// Output: [2.00000,2.00000,2.00000]
+    /// Explanation: The fence will have center = (2, 2) and radius = 2
+    ///
+    /// Example 2:
+    /// Input: trees = [[1,2],[2,2],[4,2]]
+    /// Output: [2.50000,2.00000,1.50000]
+    /// Explanation: The fence will have center = (2.5, 2) and radius = 1.5
+    ///
+    /// Constraints:
+    /// 1. 1 <= trees.length <= 3000
+    /// 2. trees[i].length == 2
+    /// 3. 0 <= xi, yi <= 3000
+    /// </summary>
+    vector<double> outerTrees(vector<vector<int>>& trees);
 };
 
 

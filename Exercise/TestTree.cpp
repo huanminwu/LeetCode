@@ -1383,6 +1383,14 @@ void TestLeetCode333(void)
     int result = leetCode.largestBSTSubtree(root);
     Logger::WriteMessage("Largest BST Subtree = " + to_string(result));
     leetCode.freeTreeNodes(root);
+
+    input = "[1,3,2,4,null,null,5]";
+    Logger::WriteMessage("Original Path:" + input);
+    root = leetCode.deserialize(input);
+    result = leetCode.largestBSTSubtree(root);
+    Logger::WriteMessage("Largest BST Subtree = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+    
 }
 
 void TestLeetCode530(void)
@@ -3079,10 +3087,11 @@ void TestLeetCode1932(void)
 
 void TestLeetCodeTree(void)
 {
+    TestLeetCode333();
+    TestLeetCode1597();
     TestLeetCode1932();
     TestLeetCode1740();
     TestLeetCode1666();
-    TestLeetCode1597();
     TestLeetCode1516();
     TestLeetCode1522();
     TestLeetCode1602();
@@ -3152,7 +3161,6 @@ void TestLeetCodeTree(void)
     TestLeetCode508();
     TestLeetCode501();
     TestLeetCode530();
-    TestLeetCode333();
     TestLeetCode515();
     TestLeetCode437();
     TestLeetCode337();

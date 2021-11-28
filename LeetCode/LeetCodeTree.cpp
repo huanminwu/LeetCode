@@ -667,21 +667,29 @@ vector<vector<int>> LeetCodeTree::zigzagLevelOrder(TreeNode* root)
 
 
 /// <summary>
-/// Leet code #107. Binary Tree Level Order Traversal II 
-/// Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root).
-/// For example:
-/// Given binary tree [3,9,20,null,null,15,7],
-///    3
-///   / \
-///  9  20
-///    /  \
-///   15   7
-/// return its bottom-up level order traversal as:
-///	[
-///   [15,7],
-///   [9,20],
-///   [3]
-/// ]
+/// Leet Code 107. Binary Tree Level Order Traversal II
+///                                                                 
+/// Medium
+/// 
+/// Given the root of a binary tree, return the bottom-up level order 
+/// traversal of its nodes' values. (i.e., from left to right, level 
+/// by level from leaf to root).
+/// 
+/// Example 1:
+/// Input: root = [3,9,20,null,null,15,7]
+/// Output: [[15,7],[9,20],[3]]
+///
+/// Example 2:
+/// Input: root = [1]
+/// Output: [[1]]
+///
+/// Example 3:
+/// Input: root = []
+/// Output: []
+///
+/// Constraints:
+/// 1. The number of nodes in the tree is in the range [0, 2000].
+/// 2. -1000 <= Node.val <= 1000
 /// </summary>
 vector<vector<int>> LeetCodeTree::levelOrderBottom(TreeNode* root)
 {
@@ -1072,11 +1080,31 @@ bool LeetCodeTree::isBalanced(TreeNode* root, int& depth)
 }
 
 /// <summary>
-/// Leet code #110. Balanced Binary Tree
+/// Leet Code 110. Balanced Binary Tree
+///                                                                 
+/// Easy
+///
 /// Given a binary tree, determine if it is height-balanced.
-/// For this problem, a height-balanced binary tree is defined as a binary 
-/// tree in which the depth of the 
-/// two subtrees of every node never differ by more than 1. 
+/// 
+/// For this problem, a height-balanced binary tree is defined as:
+/// a binary tree in which the left and right subtrees of every node 
+/// differ in height by no more than 1.
+/// 
+/// Example 1:
+/// Input: root = [3,9,20,null,null,15,7]
+/// Output: true
+///
+/// Example 2:
+/// Input: root = [1,2,2,3,3,null,null,4,4]
+/// Output: false
+///
+/// Example 3:
+/// Input: root = []
+/// Output: true
+///  
+/// Constraints:
+/// 1. The number of nodes in the tree is in the range [0, 5000].
+/// -10^4 <= Node.val <= 10^4
 /// </summary>
 bool LeetCodeTree::isBalanced(TreeNode* root)
 {
@@ -1105,25 +1133,46 @@ int LeetCodeTree::lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q,
 
     return count;
 }
-
 /// <summary>
-/// Leet code #236. Lowest Common Ancestor of a Binary Tree
-/// Given a binary tree, find the lowest common ancestor (LCA) of two given 
-/// nodes in the tree. 
-/// According to the definition of LCA on Wikipedia: “The lowest common 
-/// ancestor is defined between two 
-/// nodes v and w as the lowest node in T that has both v and w as descendants 
-/// (where we allow a node to be a descendant of itself).” 
-///         _______3______
+/// Leet Code 236. Lowest Common Ancestor of a Binary Tree
+///                                                                 
+/// Medium
+///
+/// Given a binary tree, find the lowest common ancestor (LCA) of two 
+/// given nodes in the tree.
+/// 	    _______3______
 ///        /              \
 ///     ___5__          ___1__
 ///    /      \        /      \
 ///    6       2       0       8
 ///           / \
 ///          7   4
-/// For example, the lowest common ancestor (LCA) of nodes 5 and 1 is 3. 
-/// Another example is LCA of nodes 5 and 4 is 5, 
-///  since a node can be a descendant of itself according to the LCA definition.
+/// According to the definition of LCA on Wikipedia: “The lowest common 
+/// ancestor is defined between two nodes p and q as the lowest node 
+/// in T that has both p and q as descendants (where we allow a node 
+/// to be a descendant of itself).”
+/// 
+/// Example 1:
+/// Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+/// Output: 3
+ /// Explanation: The LCA of nodes 5 and 1 is 3.
+///
+/// Example 2:
+/// Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+/// Output: 5
+/// Explanation: The LCA of nodes 5 and 4 is 5, since a node can be 
+/// a descendant of itself according to the LCA definition.
+///
+/// Example 3:
+/// Input: root = [1,2], p = 1, q = 2
+/// Output: 1
+///
+/// Constraints:
+/// 1. The number of nodes in the tree is in the range [2, 10^5].
+/// 2. -10^9 <= Node.val <= 10^9
+/// 3. All Node.val are unique.
+/// 4. p != q
+/// 5. p and q will exist in the tree.
 /// </summary>
 TreeNode* LeetCodeTree::lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)
 {
@@ -1150,23 +1199,24 @@ TreeNode* LeetCodeTree::lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNo
 /// </summary>
 TreeNode* LeetCodeTree::lowestCommonAncestorBST(TreeNode* root, TreeNode* p, TreeNode* q)
 {
+    TreeNode* node = root;
     while (true)
     {
-        if ((root == nullptr) || (p == nullptr) || (q == nullptr))
+        if ((node == nullptr) || (p == nullptr) || (q == nullptr))
         {
             return nullptr;
         }
-        if ((root->val > p->val) && (root->val > q->val))
+        if ((node->val > p->val) && (node->val > q->val))
         {
-            root = root->left;
+            node = node->left;
         }
-        else if ((root->val < p->val) && (root->val < q->val))
+        else if ((node->val < p->val) && (node->val < q->val))
         {
-            root = root->right;
+            node = node->right;
         }
         else
         {
-            return root;
+            return node;
         }
     }
 }
@@ -1734,22 +1784,26 @@ void LeetCodeTree::recoverTreeII(TreeNode* root)
 }
 
 /// <summary>
-/// Leet code #101. Symmetric Tree 
-/// Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center). 
-/// For example, this binary tree [1,2,2,3,4,4,3] is symmetric: 
-///     1
-///    / \
-///   2   2
-///  / \ / \
-/// 3  4 4  3
-/// But the following [1,2,2,null,3,null,3] is not:
-///    1
-///   / \
-///  2   2
-///   \   \
-///   3    3
-/// Note:
-/// Bonus points if you could solve it both recursively and iteratively.
+/// Leet Code 101. Symmetric Tree
+///                                                                 
+/// Easy
+/// 
+/// Given the root of a binary tree, check whether it is a mirror of 
+/// itself (i.e., symmetric around its center).
+///  
+/// Example 1:
+/// Input: root = [1,2,2,3,4,4,3]
+/// Output: true
+///
+/// Example 2:
+/// Input: root = [1,2,2,null,3,null,3]
+/// Output: false
+///
+/// Constraints:
+/// 1. The number of nodes in the tree is in the range [1, 1000].
+/// 2. -100 <= Node.val <= 100
+///  
+/// Follow up: Could you solve it both recursively and iteratively?
 /// </summary>
 bool LeetCodeTree::isSymmetric(TreeNode* root)
 {
@@ -2084,6 +2138,7 @@ void LeetCodeTree::connectRight(TreeLinkNode *root)
 
 /// <summary>
 /// Leet code #117. Populating Next Right Pointers in Each Node II           
+///
 /// Given a binary tree 
 /// struct TreeLinkNode {
 ///    int val;
@@ -2093,7 +2148,8 @@ void LeetCodeTree::connectRight(TreeLinkNode *root)
 ///
 /// Follow up for problem "Populating Next Right Pointers in Each Node".
 ///
-/// What if the given tree could be any binary tree? Would your previous solution still work?
+/// What if the given tree could be any binary tree? Would your previous 
+/// solution still work?
 ///
 /// Note: 
 /// You may only use constant extra space.
@@ -2189,18 +2245,30 @@ int LeetCodeTree::findKthSmallest(TreeNode* root, int &k)
 }
 
 /// <summary>
-/// Leet code #230. Kth Smallest Element in a BST
-/// Given a binary search tree, write a function kthSmallest to find the kth 
-/// smallest element in it.
-/// Note: 
-/// You may assume k is always valid, 1 ≤ k ≤ BST's total elements.
-/// Follow up:
-/// What if the BST is modified (insert/delete operations) often and you need to find the 
-/// kth smallest frequently? How would you optimize the kthSmallest routine?
-/// Hint:
-/// Try to utilize the property of a BST.
-/// What if you could modify the BST node's structure?
-/// The optimal runtime complexity is O(height of BST).
+/// Leet Code 230. Kth Smallest Element in a BST
+///                                                                 
+/// Medium
+/// 
+/// Given the root of a binary search tree, and an integer k, return the 
+/// kth smallest value (1-indexed) of all the values of the nodes in the 
+/// tree.
+/// 
+/// Example 1:
+/// Input: root = [3,1,4,null,2], k = 1
+/// Output: 1
+///
+/// Example 2:
+/// Input: root = [5,3,6,2,4,null,null,1], k = 3
+/// Output: 3
+///
+/// Constraints:
+/// 1. The number of nodes in the tree is n.
+/// 2. 1 <= k <= n <= 10^4
+/// 3. 0 <= Node.val <= 10^4
+///
+/// Follow up: If the BST is modified often (i.e., we can do insert and 
+/// delete operations) and you need to find the kth smallest frequently, 
+/// how would you optimize?
 /// </summary>
 int LeetCodeTree::kthSmallest(TreeNode* root, int k)
 {
@@ -2677,22 +2745,27 @@ bool LeetCodeTree::checkBSTSubtree(TreeNode* root, int& min_val, int& max_val, i
         size = 0;
         return true;
     }
+    bool isBST = true;
+    // we need to initial new variable to avoid poplue carried in variable, if you use tuple 
+    // or structure to return values, no such issue
     int left_min = root->val, left_max = root->val, left_size = 0;
-    bool left_BSTSubtree = true;
     if (root->left != nullptr)
     {
-        left_BSTSubtree = checkBSTSubtree(root->left, left_min, left_max, left_size);
-        if (left_BSTSubtree) left_BSTSubtree = root->val > left_max;
+        // check should go first to make sure subtree is searched
+        bool ret = checkBSTSubtree(root->left, left_min, left_max, left_size);
+        isBST = ret && isBST;
+        isBST = isBST && (left_max < root->val);
     }
     int right_min = root->val, right_max = root->val, right_size = 0;
-    bool right_BSTSubtree = true;
     if (root->right != nullptr)
     {
-        right_BSTSubtree = checkBSTSubtree(root->right, right_min, right_max, right_size);
-        if (right_BSTSubtree) right_BSTSubtree = root->val < right_min;
+        // check should go first to make sure subtree is searched
+        bool ret = checkBSTSubtree(root->right, right_min, right_max, right_size);
+        isBST = ret && isBST;
+        isBST = isBST && (right_min > root->val);
     }
     min_val = min(left_min, right_min); max_val = max(right_min, right_max);
-    if (left_BSTSubtree && right_BSTSubtree)
+    if (isBST)
     {
         size = 1 + left_size + right_size;
         return true;
@@ -9345,7 +9418,7 @@ TreeNode* LeetCodeTree::expTree(string s)
         }
         else if (s[i] == '+' || s[i] == '-')
         {
-            if (!operators.empty() &&
+            while (!operators.empty() &&
                 operators.back() != '(')
             {
                 TreeNode* node = new TreeNode(operators.back());
@@ -9360,7 +9433,7 @@ TreeNode* LeetCodeTree::expTree(string s)
         }
         else if (s[i] == '*' || s[i] == '/')
         {
-            if (!operators.empty() &&
+            while (!operators.empty() &&
                 operators.back() != '(' &&
                 operators.back() != '+' &&
                 operators.back() != '-')
