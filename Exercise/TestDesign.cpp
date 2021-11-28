@@ -3842,11 +3842,53 @@ void TestLeetCode1912(void)
     Logger::WriteMessage(commands);
     Logger::WriteMessage(parameters);
     Logger::WriteMessage(result);
+}
 
+void TestLeetCode2069(void)
+{
+    Logger::WriteMessage("Test Leet Code 2069");
+    vector<string> commands =
+    {
+        "Robot", "move", "move", "getPos", "getDir", "move", "move", "move", "getPos", "getDir"
+    };
+    vector<vector<int>> parameters =
+    {
+        {6, 3}, {2}, {2}, {}, {}, {2}, {1}, {4}, {}, {}
+    };
+    vector<string> result;
+    Robot* robot = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Robot")
+        {
+            robot = new Robot(parameters[i][0], parameters[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "move")
+        {
+            robot->step(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "getPos")
+        {
+            vector<int> pos = robot->getPos();
+            result.push_back("[" + to_string(pos[0]) + "," + to_string(pos[1]) + "]");
+        }
+        else if (commands[i] == "getDir")
+        {
+            string dir = robot->getDir();
+            result.push_back(dir);
+        }
+    }
+    delete robot;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
 }
 
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2069();
     TestLeetCode1912();
     TestLeetCode1865();
     TestLeetCode1845();

@@ -4623,6 +4623,7 @@ void TestLeetCode1946(void)
 
 void TestLeetCodeString(void)
 {
+    TestLeetCode1618();
     TestLeetCode1946();
     TestLeetCode2019();
     TestLeetCode2000();

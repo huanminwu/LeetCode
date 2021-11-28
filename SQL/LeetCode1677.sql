@@ -77,13 +77,13 @@
 -----------------------------------------------------------------------
 SELECT
     A.name,
-	B.rest,
-	B.paid,
-	B.canceled,
-	B.refunded
+	rest = ISNULL(B.rest, 0),
+	paid = ISNULL(B.paid, 0),
+	canceled = ISNULL(B.canceled,0),
+	refunded = ISNULL(B.refunded, 0)
 FROM
     Product AS A
-INNER JOIN
+LEFT OUTER JOIN
 (
     SELECT 
         product_id, 
@@ -94,8 +94,7 @@ INNER JOIN
 	FROM
 	    Invoice 
     GROUP BY
-        product_id
-    
+        product_id    
 ) AS B
 ON 
    A.product_id  = B.product_id
