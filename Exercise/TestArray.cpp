@@ -6175,8 +6175,29 @@ void TestLeetCode1937(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1788(void)
+{
+    Logger::WriteMessage("Test Leet Code 1788");
+    LeetCodeArray leetCode;
+    vector<int> flowers = { 1, 2, 3, 1, 2 };
+    int result = leetCode.maximumBeauty(flowers);
+    Logger::WriteMessage(flowers);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    flowers = { 100,1,1,-3,1 };
+    result = leetCode.maximumBeauty(flowers);
+    Logger::WriteMessage(flowers);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    flowers = { -1,-2,0,-1 };
+    result = leetCode.maximumBeauty(flowers);
+    Logger::WriteMessage(flowers);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1788();
     TestLeetCode1937();
     TestLeetCode2025();
     TestLeetCode1936();

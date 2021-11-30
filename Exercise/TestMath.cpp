@@ -4132,8 +4132,48 @@ void TestLeetCode1908(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1842(void)
+{
+    Logger::WriteMessage("Test Leet Code 1842");
+    LeetCodeMath leetCode;
+    string num = "1221";
+    string result = leetCode.nextPalindrome(num);
+    Logger::WriteMessage("num = " + num + "; result = " + result);
+
+    num = "32123";
+    result = leetCode.nextPalindrome(num);
+    Logger::WriteMessage("num = " + num + "; result = " + result);
+
+    num = "45544554";
+    result = leetCode.nextPalindrome(num);
+    Logger::WriteMessage("num = " + num + "; result = " + result);
+
+    num = "1234567654321";
+    result = leetCode.nextPalindrome(num);
+    Logger::WriteMessage("num = " + num + "; result = " + result);
+}
+
+void TestLeetCode1969(void)
+{
+    Logger::WriteMessage("Test Leet Code 1969");
+    LeetCodeMath leetCode;
+    int p = 1;
+    int result = leetCode.minNonZeroProduct(p);
+    Logger::WriteMessage("p = " + to_string(p) + "; result = " + to_string(result));
+
+    p = 2;
+    result = leetCode.minNonZeroProduct(p);
+    Logger::WriteMessage("p = " + to_string(p) + "; result = " + to_string(result));
+
+    p = 3;
+    result = leetCode.minNonZeroProduct(p);
+    Logger::WriteMessage("p = " + to_string(p) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1969();
+    TestLeetCode1842();
     TestLeetCode1908();
     TestLeetCode2005();
     TestLeetCode1975();

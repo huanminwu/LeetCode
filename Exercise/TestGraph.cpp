@@ -3827,8 +3827,32 @@ void TestLeetCode1992(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1956(void)
+{
+    Logger::WriteMessage("Test Leet Code 1956");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> points = { {1, 1},{6, 1} };
+    int k = 2;
+    int result = leetCode.minDayskVariants(points, k);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("k = " + to_string(k) + "result = " + to_string(result));
+
+    points = { {3, 3}, {1, 2},{9, 2} };
+    k = 2;
+    result = leetCode.minDayskVariants(points, k);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("k = " + to_string(k) + "result = " + to_string(result));
+
+    points = { {3, 3}, {1, 2},{9, 2} };
+    k = 3;
+    result = leetCode.minDayskVariants(points, k);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("k = " + to_string(k) + "result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1956();
     TestLeetCode1992();
     TestLeetCode2050();
     TestLeetCode2076();

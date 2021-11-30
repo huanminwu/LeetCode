@@ -12225,7 +12225,8 @@ int LeetCodeString::maxFont(string text, int w, int h, vector<int>& fonts)
             first = middle + 1;
         }
     }
-    return result;
+    if (result == -1) return -1;
+    else return fonts[result];
 }
 
 /// <summary>
