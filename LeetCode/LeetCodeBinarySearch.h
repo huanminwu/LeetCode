@@ -117,7 +117,7 @@ public:
     ///
     /// According to the definition of h-index on Wikipedia: A scientist has 
     /// an index h if h of their n papers have at least h citations each, and 
-    /// the other n − h papers have no more than h citations each.
+    /// the other n - h papers have no more than h citations each.
     /// 
     /// If there are several possible values for h, the maximum one is taken 
     /// as the h-index.
@@ -527,7 +527,7 @@ public:
     ///  
     /// A peak element is an element that is greater than its neighbors.
     ///
-    /// Given an input array nums, where nums[i] ¡Ù nums[i+1], find a peak element 
+    /// Given an input array nums, where nums[i] ?ù nums[i+1], find a peak element 
     /// and return its index.
     ///
     /// The array may contain multiple peaks, in that case return the index to 
@@ -803,8 +803,8 @@ public:
     /// If n is the length of array, assume the following constraints are 
     /// satisfied:
     ///
-    /// 1. 1 ¡Ü n ¡Ü 1000
-    /// 2. 1 ¡Ü m ¡Ü min(50, n)
+    /// 1. 1 ?ü n ?ü 1000
+    /// 2. 1 ?ü m ?ü min(50, n)
     ///
     /// Examples:
     /// Input:
@@ -1329,6 +1329,49 @@ public:
     /// 4. nums1 and nums2 are sorted.
     /// </summary>
     long long kthSmallestProduct(vector<int>& nums1, vector<int>& nums2, long long k);
+
+    /// <summary>
+    /// Leet Code 2089. Find Target Indices After Sorting Array
+    ///                                                                 
+    /// Easy
+    /// 
+    /// You are given a 0-indexed integer array nums and a target element 
+    /// target.
+    ///
+    /// A target index is an index i such that nums[i] == target.
+    ///
+    /// Return a list of the target indices of nums after sorting nums in 
+    /// non-decreasing order. If there are no target indices, return an 
+    /// empty list. The returned list must be sorted in increasing order.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,2,5,2,3], target = 2
+    /// Output: [1,2]
+    /// Explanation: After sorting, nums is [1,2,2,3,5].
+    /// The indices where nums[i] == 2 are 1 and 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,5,2,3], target = 3
+    /// Output: [3]
+    /// Explanation: After sorting, nums is [1,2,2,3,5].
+    /// The index where nums[i] == 3 is 3.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,5,2,3], target = 5
+    /// Output: [4]
+    /// Explanation: After sorting, nums is [1,2,2,3,5].
+    /// The index where nums[i] == 5 is 4.
+    ///
+    /// Example 4:
+    /// Input: nums = [1,2,5,2,3], target = 4
+    /// Output: []
+    /// Explanation: There are no elements in nums with value 4.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= nums[i], target <= 100
+    /// </summary>
+    vector<int> targetIndices(vector<int>& nums, int target);
 #pragma endregion
 };
 #endif  // LeetCodeBinarySearch_H

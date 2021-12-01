@@ -4621,8 +4621,90 @@ void TestLeetCode1946(void)
     Logger::WriteMessage("num = " + num + "; result = " + result);
 }
 
+void TestLeetCode1772(void)
+{
+    LeetCodeString leetCode;
+    vector<string> features = { "cooler", "lock", "touch" };
+    vector<string> responses = { "i like cooler cooler", "lock touch cool", "locker like touch" };
+    vector<string> result = leetCode.sortFeatures(features, responses);
+    Logger::WriteMessage(features);
+    Logger::WriteMessage(responses);
+    Logger::WriteMessage(result);
+
+    features = { "a","aa","b","c" };
+    responses = { "a","a aa","a a a a a","b a" };
+    result = leetCode.sortFeatures(features, responses);
+    Logger::WriteMessage(features);
+    Logger::WriteMessage(responses);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2085(void)
+{
+    LeetCodeString leetCode;
+    vector<string> words1 = { "leetcode", "is", "amazing", "as", "is" };
+    vector<string> words2 = { "amazing", "leetcode", "is" };
+    int result = leetCode.countWords(words1, words2);
+    Logger::WriteMessage(words1);
+    Logger::WriteMessage(words2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words1 = { "b","bb","bbb" };
+    words2 = { "a","aa","aaa" };
+    result = leetCode.countWords(words1, words2);
+    Logger::WriteMessage(words1);
+    Logger::WriteMessage(words2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words1 = { "a","ab" };
+    words2 = { "a","a","a","ab" };
+    result = leetCode.countWords(words1, words2);
+    Logger::WriteMessage(words1);
+    Logger::WriteMessage(words2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2068(void)
+{
+    LeetCodeString leetCode;
+    string word1 = "aaaa";
+    string word2 = "bccb";
+    bool result = leetCode.checkAlmostEquivalent(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 =" + word2 + "; result = " + (string)(result ? "true" : "false"));
+
+    word1 = "abcdeef";
+    word2 = "abaaacc";
+    result = leetCode.checkAlmostEquivalent(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 =" + word2 + "; result = " + (string)(result ? "true" : "false"));
+
+    word1 = "cccddabba";
+    word2 = "babababab";
+    result = leetCode.checkAlmostEquivalent(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 =" + word2 + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode1933(void)
+{
+    LeetCodeString leetCode;
+    string s = "000111000";
+    bool result = leetCode.isDecomposable(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "00011111222";
+    result = leetCode.isDecomposable(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "011100022233";
+    result = leetCode.isDecomposable(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1933();
+    TestLeetCode2068();
+    TestLeetCode2085();
+    TestLeetCode1772();
     TestLeetCode1618();
     TestLeetCode1946();
     TestLeetCode2019();

@@ -158,5 +158,9 @@ void TestLeetCode2047(void);
 void TestLeetCode2000(void);
 void TestLeetCode2019(void);
 void TestLeetCode1946(void);
+void TestLeetCode1772(void);
+void TestLeetCode2085(void);
+void TestLeetCode2068(void);
+void TestLeetCode1933(void);
 void TestLeetCodeString(void);
 #endif  // TestArray

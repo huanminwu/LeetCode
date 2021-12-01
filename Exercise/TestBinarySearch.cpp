@@ -833,8 +833,42 @@ void TestLeetCode2040(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2089(void)
+{
+    Logger::WriteMessage("Test Leet Code 2089");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 1, 2, 5, 2, 3 };
+    int target = 2;
+    vector<int> result = leetCode.targetIndices(nums, target);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,2,5,2,3 };
+    target = 3;
+    result = leetCode.targetIndices(nums, target);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,2,5,2,3 };
+    target = 5;
+    result = leetCode.targetIndices(nums, target);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,2,5,2,3 };
+    target = 4;
+    result = leetCode.targetIndices(nums, target);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode2089();
     TestLeetCode2040();
     TestLeetCode1898();
     TestLeetCode1923();

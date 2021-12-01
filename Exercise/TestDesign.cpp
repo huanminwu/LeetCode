@@ -3886,8 +3886,57 @@ void TestLeetCode2069(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2034(void)
+{
+    Logger::WriteMessage("Test Leet Code 2034");
+    vector<string> commands =
+    {
+        //"StockPrice", "update", "update", "current", "maximum", "update", "maximum", "update", "minimum"
+    };
+    vector<vector<int>> parameters =
+    {
+        //{}, {1,10}, {2,5}, {}, {}, {1,3}, {}, {4,2}, {}
+    };
+
+    vector<string> result;
+    StockPrice* stockPrice = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "StockPrice")
+        {
+            stockPrice = new StockPrice();
+            result.push_back("null");
+        }
+        else if (commands[i] == "update")
+        {
+            stockPrice->update(parameters[i][0], parameters[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "current")
+        {
+            int price= stockPrice->current();
+            result.push_back(to_string(price));
+        }
+        else if (commands[i] == "maximum")
+        {
+            int price = stockPrice->maximum();
+            result.push_back(to_string(price));
+        }
+        else if (commands[i] == "minimum")
+        {
+            int price = stockPrice->minimum();
+            result.push_back(to_string(price));
+        }
+    }
+    delete stockPrice;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2034();
     TestLeetCode1628();
     TestLeetCode2069();
     TestLeetCode1912();

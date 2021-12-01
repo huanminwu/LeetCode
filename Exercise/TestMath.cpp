@@ -4170,8 +4170,25 @@ void TestLeetCode1969(void)
     Logger::WriteMessage("p = " + to_string(p) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2001(void)
+{
+    Logger::WriteMessage("Test Leet Code 2001");
+    LeetCodeMath leetCode;
+    vector<vector<int>> rectangles = { {4, 8},{3, 6},{10, 20},{15, 30} };
+    long long result = leetCode.interchangeableRectangles(rectangles);
+    Logger::WriteMessage(rectangles);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    rectangles = { {4, 5},{7, 8} };
+    result = leetCode.interchangeableRectangles(rectangles);
+    Logger::WriteMessage(rectangles);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2001();
     TestLeetCode1969();
     TestLeetCode1842();
     TestLeetCode1908();

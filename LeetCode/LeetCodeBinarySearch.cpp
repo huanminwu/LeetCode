@@ -33,7 +33,7 @@
 int LeetCodeBinarySearch::searchInsert(vector<int>& nums, int target)
 {
     // assign the first as 0, last can be the last item or out of boundary
-    int first = 0, last = nums.size()-1;
+    int first = 0, last = nums.size() - 1;
     int result = nums.size();
     // when first == last break out
     while (first <= last)
@@ -284,7 +284,7 @@ int LeetCodeBinarySearch::firstBadVersion(int n, int bad_version)
 ///
 /// According to the definition of h-index on Wikipedia: A scientist has 
 /// an index h if h of their n papers have at least h citations each, and 
-/// the other n − h papers have no more than h citations each.
+/// the other n - h papers have no more than h citations each.
 /// 
 /// If there are several possible values for h, the maximum one is taken 
 /// as the h-index.
@@ -321,7 +321,7 @@ int LeetCodeBinarySearch::hIndexII(vector<int>& citations)
         if (citations[middle] >= (int)citations.size() - middle)
         {
             result = (int)citations.size() - middle;
-            last = middle -1;
+            last = middle - 1;
         }
         else
         {
@@ -336,7 +336,7 @@ int LeetCodeBinarySearch::hIndexII(vector<int>& citations)
 ///  
 /// A peak element is an element that is greater than its neighbors.
 ///
-/// Given an input array nums, where nums[i] ¡Ù nums[i+1], find a peak element 
+/// Given an input array nums, where nums[i] ?ù nums[i+1], find a peak element 
 /// and return its index.
 ///
 /// The array may contain multiple peaks, in that case return the index to 
@@ -588,7 +588,7 @@ bool LeetCodeBinarySearch::searchII(vector<int>& nums, int target)
         {
             return true;
         }
-        else if (nums[first] <  nums[middle])
+        else if (nums[first] < nums[middle])
         {
             // first check the target is within the ordered range, if not must be
             // in a disordered range
@@ -802,8 +802,8 @@ int LeetCodeBinarySearch::findMedianSortedArrays(vector<int>& nums1, vector<int>
 /// If n is the length of array, assume the following constraints are 
 /// satisfied:
 ///
-/// 1. 1 ¡Ü n ¡Ü 1000
-/// 2. 1 ¡Ü m ¡Ü min(50, n)
+/// 1. 1 ?ü n ?ü 1000
+/// 2. 1 ?ü m ?ü min(50, n)
 ///
 /// Examples:
 /// Input:
@@ -1420,7 +1420,7 @@ int LeetCodeBinarySearch::binarySearchI(vector<int>& nums, int target)
 /// 2. The value of each element in the array will be in the range 
 ///    [-9999, 9999].
 /// </summary>
-int LeetCodeBinarySearch::searchStream(const vector<int>&reader, int target)
+int LeetCodeBinarySearch::searchStream(const vector<int>& reader, int target)
 {
     int index = 0;
     int step = 1;
@@ -1572,7 +1572,7 @@ int LeetCodeBinarySearch::shipWithinDays(vector<int>& weights, int D)
 /// </summary>
 int LeetCodeBinarySearch::fixedPoint(vector<int>& A)
 {
-    int first = 0; 
+    int first = 0;
     int last = A.size();
     while (first < last)
     {
@@ -1621,7 +1621,7 @@ int LeetCodeBinarySearch::fixedPoint(vector<int>& A)
 /// </summary>
 int LeetCodeBinarySearch::missingElement(vector<int>& nums, int k)
 {
-    int first = 0; 
+    int first = 0;
     int last = nums.size() - 1;
     int pos = first;
     while (first <= last)
@@ -1753,7 +1753,7 @@ int LeetCodeBinarySearch::maximizeSweetness(vector<int>& sweetness, int K)
 /// </summary>
 int LeetCodeBinarySearch::smallestDivisor(vector<int>& nums, int threshold)
 {
-    int first = 1; 
+    int first = 1;
     int last = 1000000;
 
     while (first < last)
@@ -1766,7 +1766,7 @@ int LeetCodeBinarySearch::smallestDivisor(vector<int>& nums, int threshold)
             if (nums[i] % middle != 0) sum++;
         }
         if (sum > threshold) first = middle + 1;
-        else last = middle;  
+        else last = middle;
     }
     return first;
 }
@@ -1813,7 +1813,7 @@ int LeetCodeBinarySearch::findBestValue(vector<int>& arr, int target)
     while (first <= last)
     {
         int middle = first + (last - first) / 2;
-        int sum = 0; 
+        int sum = 0;
         for (size_t i = 0; i < arr.size(); i++)
         {
             if (arr[i] > middle) sum += middle;
@@ -2130,7 +2130,7 @@ int LeetCodeBinarySearch::maxValue(int n, int index, int maxSum)
         int mid = first + (last - first) / 2;
         int left = max((mid - index), 1);
         int right = max(mid - ((n - 1) - index), 1);
-        int left_extra = max((index+1-mid), 0);
+        int left_extra = max((index + 1 - mid), 0);
         int right_extra = max((n - index - mid), 0);
         long long sum = ((long long)left + (long long)mid) * ((long long)mid - (long long)left + 1) / 2;
         sum += ((long long)right + (long long)mid) * ((long long)mid - (long long)right + 1) / 2;
@@ -2442,7 +2442,7 @@ int LeetCodeBinarySearch::maximumRemovals(string s, string p, vector<int>& remov
 long long LeetCodeBinarySearch::kthSmallestProductCount(vector<int>& nums1, vector<int>& nums2, long long value)
 {
     long long cnt = 0;
-    for (int p1 = 0, p2 = nums2.size() - 1; p1 < nums1.size(); ++p1) 
+    for (int p1 = 0, p2 = nums2.size() - 1; p1 < nums1.size(); ++p1)
     {
         while (p2 >= 0 && (long long)nums1[p1] * nums2[p2] > value)
         {
@@ -2526,7 +2526,7 @@ long long LeetCodeBinarySearch::kthSmallestProduct(vector<int>& nums1, vector<in
         {
             count = kthSmallestProductCount(pos_num1, pos_num2, middle) +
                 kthSmallestProductCount(neg_rev1, neg_rev2, middle) +
-                (long long)neg_num1.size() * (long long)pos_num2.size() + 
+                (long long)neg_num1.size() * (long long)pos_num2.size() +
                 (long long)neg_num2.size() * (long long)pos_num1.size();
         }
         if (count >= k)
@@ -2542,4 +2542,64 @@ long long LeetCodeBinarySearch::kthSmallestProduct(vector<int>& nums1, vector<in
     return result;
 }
 
+/// <summary>
+/// Leet Code 2089. Find Target Indices After Sorting Array
+///                                                                 
+/// Easy
+/// 
+/// You are given a 0-indexed integer array nums and a target element 
+/// target.
+///
+/// A target index is an index i such that nums[i] == target.
+///
+/// Return a list of the target indices of nums after sorting nums in 
+/// non-decreasing order. If there are no target indices, return an 
+/// empty list. The returned list must be sorted in increasing order.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,5,2,3], target = 2
+/// Output: [1,2]
+/// Explanation: After sorting, nums is [1,2,2,3,5].
+/// The indices where nums[i] == 2 are 1 and 2.
+///
+/// Example 2:
+/// Input: nums = [1,2,5,2,3], target = 3
+/// Output: [3]
+/// Explanation: After sorting, nums is [1,2,2,3,5].
+/// The index where nums[i] == 3 is 3.
+///
+/// Example 3:
+/// Input: nums = [1,2,5,2,3], target = 5
+/// Output: [4]
+/// Explanation: After sorting, nums is [1,2,2,3,5].
+/// The index where nums[i] == 5 is 4.
+///
+/// Example 4:
+/// Input: nums = [1,2,5,2,3], target = 4
+/// Output: []
+/// Explanation: There are no elements in nums with value 4.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i], target <= 100
+/// </summary>
+vector<int> LeetCodeBinarySearch::targetIndices(vector<int>& nums, int target)
+{
+    vector<int> result;
+    sort(nums.begin(), nums.end());
+    auto itr = lower_bound(nums.begin(), nums.end(), target);
+    if (itr == nums.end() || *itr > target)
+    {
+        return result;
+    }
+    else
+    {
+        while (itr != nums.end() && *itr == target)
+        {
+            result.push_back(itr - nums.begin());
+            itr++;
+        }
+    }
+    return result;
+}
 #pragma endregion  

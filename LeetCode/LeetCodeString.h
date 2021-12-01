@@ -8802,7 +8802,202 @@ public:
     /// </summary>
     string maximumNumber(string num, vector<int>& change);
 
+    /// <summary>
+    /// Leet Code 1772. Sort Features by Popularity
+    ///                                                                 
+    /// Medium
+    /// 
+    /// You are given a string array features where features[i] is a single 
+    /// word that represents the name of a feature of the latest product you 
+    /// are working on. You have made a survey where users have reported which 
+    /// features they like. You are given a string array responses, where each 
+    /// responses[i] is a string containing space-separated words.
+    ///
+    /// The popularity of a feature is the number of responses[i] that contain 
+    /// the feature. You want to sort the features in non-increasing order by 
+    /// their popularity. If two features have the same popularity, order them 
+    /// by their original index in features. Notice that one response could 
+    /// contain the same feature multiple times; this feature is only counted 
+    /// once in its popularity.
+    ///
+    /// Return the features in sorted order.
+    /// 
+    /// Example 1:
+    /// Input: features = ["cooler","lock","touch"], responses = ["i like 
+    /// cooler cooler","lock touch cool","locker like touch"]
+    /// Output: ["touch","cooler","lock"]
+    /// Explanation: appearances("cooler") = 1, appearances("lock") = 1, 
+    /// appearances("touch") = 2. Since "cooler" and "lock" both had 1 
+    /// appearance, "cooler" comes first because "cooler" came first in the 
+    /// features array.
+    ///
+    /// Example 2:
+    /// Input: features = ["a","aa","b","c"], responses = ["a","a 
+    /// aa","a a a a a","b a"]
+    /// Output: ["a","aa","b","c"]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= features.length <= 10^4
+    /// 2. 1 <= features[i].length <= 10
+    /// 3. features contains no duplicates.
+    /// 4. features[i] consists of lowercase letters.
+    /// 5. 1 <= responses.length <= 10^2
+    /// 6. 1 <= responses[i].length <= 10^3
+    /// 7. responses[i] consists of lowercase letters and spaces.
+    /// 8. responses[i] contains no two consecutive spaces.
+    /// 9. responses[i] has no leading or trailing spaces.
+    /// </summary>
+    vector<string> sortFeatures(vector<string>& features, vector<string>& responses);
+    /// <summary>
+    /// Leet Code 2085. Count Common Words With One Occurrence
+    ///                                                                 
+    /// Easy
+    /// 
+    /// Given two string arrays words1 and words2, return the number of 
+    /// strings that appear exactly once in each of the two arrays.
+    /// 
+    /// Example 1:
+    /// Input: words1 = ["leetcode","is","amazing","as","is"], 
+    /// words2 = ["amazing","leetcode","is"]
+    /// Output: 2
+    /// Explanation:
+    /// - "leetcode" appears exactly once in each of the two arrays. We 
+    ///   count this string.
+    /// - "amazing" appears exactly once in each of the two arrays. We count 
+    ///   this string.
+    /// - "is" appears in each of the two arrays, but there are 2 occurrences 
+    ///   of it in words1. We do not count this string.
+    /// - "as" appears once in words1, but does not appear in words2. We do 
+    ///   not count this string.
+    /// Thus, there are 2 strings that appear exactly once in each of the 
+    /// two arrays.
+    ///
+    /// Example 2:
+    /// Input: words1 = ["b","bb","bbb"], words2 = ["a","aa","aaa"]
+    /// Output: 0
+    /// Explanation: There are no strings that appear in each of the 
+    /// two arrays.
+    ///
+    /// Example 3:
+    /// Input: words1 = ["a","ab"], words2 = ["a","a","a","ab"]
+    /// Output: 1
+    /// Explanation: The only string that appears exactly once in each of 
+    /// the two arrays is "ab".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= words1.length, words2.length <= 1000
+    /// 2. 1 <= words1[i].length, words2[j].length <= 30
+    /// 3. words1[i] and words2[j] consists only of lowercase English letters.
+    /// </summary>
+    int countWords(vector<string>& words1, vector<string>& words2);
 
+    /// <summary>
+    /// Leet Code 2068. Check Whether Two Strings are Almost Equivalent
+    ///                                                                 
+    /// Easy
+    /// 
+    /// Two strings word1 and word2 are considered almost equivalent if the 
+    /// differences between the frequencies of each letter from 'a' to 'z' 
+    /// between word1 and word2 is at most 3.
+    ///
+    /// Given two strings word1 and word2, each of length n, return true if 
+    /// word1 and word2 are almost equivalent, or false otherwise.
+    ///
+    /// The frequency of a letter x is the number of times it occurs in the 
+    /// string.
+    /// 
+    /// Example 1:
+    /// Input: word1 = "aaaa", word2 = "bccb"
+    /// Output: false
+    /// Explanation: There are 4 'a's in "aaaa" but 0 'a's in "bccb".
+    /// The difference is 4, which is more than the allowed 3.
+    ///
+    /// Example 2:
+    /// Input: word1 = "abcdeef", word2 = "abaaacc"
+    /// Output: true
+    /// Explanation: The differences between the frequencies of each letter 
+    /// in word1 and word2 are at most 3:
+    /// - 'a' appears 1 time in word1 and 4 times in word2. The difference 
+    ///   is 3.
+    /// - 'b' appears 1 time in word1 and 1 time in word2. The difference 
+    ///   is 0.
+    /// - 'c' appears 1 time in word1 and 2 times in word2. The difference 
+    ///   is 1.
+    /// - 'd' appears 1 time in word1 and 0 times in word2. The difference 
+    ///   is 1.
+    /// - 'e' appears 2 times in word1 and 0 times in word2. The difference 
+    ///   is 2.
+    /// - 'f' appears 1 time in word1 and 0 times in word2. The difference 
+    ///   is 1.
+    ///
+    /// Example 3:
+    /// Input: word1 = "cccddabba", word2 = "babababab"
+    /// Output: true
+    /// Explanation: The differences between the frequencies of each letter 
+    /// in word1 and word2 are at most 3:
+    /// - 'a' appears 2 times in word1 and 4 times in word2. The difference 
+    ///   is 2.
+    /// - 'b' appears 2 times in word1 and 5 times in word2. The difference 
+    ///   is 3.
+    /// - 'c' appears 3 times in word1 and 0 times in word2. The difference 
+    ///   is 3.
+    /// - 'd' appears 2 times in word1 and 0 times in word2. The difference 
+    ///   is 2.
+    ///
+    /// Constraints:
+    /// 1. n == word1.length == word2.length
+    /// 2. 1 <= n <= 100
+    /// 3. word1 and word2 consist only of lowercase English letters.
+    /// </summary>
+    bool checkAlmostEquivalent(string word1, string word2);
+
+    /// <summary>
+    /// Leet Code 1933. Check if String Is Decomposable Into Value-Equal 
+    ///                 Substrings
+    /// </summary>
+    bool isDecomposable(string s, int start, bool twoUsed);
+
+    /// <summary>
+    /// Leet Code 1933. Check if String Is Decomposable Into Value-Equal 
+    ///                 Substrings
+    ///                                                                 
+    /// Easy
+    /// 
+    /// A value-equal string is a string where all characters are the same.
+    ///
+    /// For example, "1111" and "33" are value-equal strings.
+    /// In contrast, "123" is not a value-equal string.
+    /// Given a digit string s, decompose the string into some number of 
+    /// consecutive value-equal substrings where exactly one substring has 
+    /// a length of 2 and the remaining substrings have a length of 3.
+    ///
+    /// Return true if you can decompose s according to the above rules. 
+    /// Otherwise, return false.
+    ///
+    /// A substring is a contiguous sequence of characters in a string.
+    ///
+    /// Example 1:
+    /// Input: s = "000111000" 
+    /// Output: false
+    /// Explanation: s cannot be decomposed according to the rules because 
+    /// ["000", "111", "000"] does not have a substring of length 2.
+    ///
+    /// Example 2:
+    /// Input: s = "00011111222"
+    /// Output: true
+    /// Explanation: s can be decomposed into ["000", "111", "11", "222"].
+    ///
+    /// Example 3:
+    /// Input: s = "011100022233"
+    /// Output: false
+    /// Explanation: s cannot be decomposed according to the rules because 
+    /// of the first '0'.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 1000
+    /// 2. s consists of only digits '0' through '9'.
+    /// </summary>
+    bool isDecomposable(string s);
 #pragma endregion
 };
 

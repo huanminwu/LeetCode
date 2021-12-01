@@ -10807,6 +10807,246 @@ public:
     ///    none) flowers.
     /// </summary>
     int maximumBeauty(vector<int>& flowers);
+
+    /// <summary>
+    /// Leet Code 2088. Count Fertile Pyramids in a Land
+    ///                                                                 
+    /// Hard
+    /// 
+    /// A farmer has a rectangular grid of land with m rows and n columns that
+    /// can be divided into unit cells. Each cell is either fertile 
+    /// (represented by a 1) or barren (represented by a 0). All cells outside 
+    /// the grid are considered barren.
+    ///
+    /// A pyramidal plot of land can be defined as a set of cells with the 
+    /// following criteria:
+    ///
+    /// The number of cells in the set has to be greater than 1 and all cells 
+    /// must be fertile.
+    /// The apex of a pyramid is the topmost cell of the pyramid. The height 
+    /// of a pyramid is the number of rows it covers. Let (r, c) be the apex 
+    /// of the pyramid, and its height be h. Then, the plot comprises of 
+    /// cells (i, j) where r <= i <= r + h - 1 and c - (i - r) <= j <= c + 
+    /// (i - r).
+    /// An inverse pyramidal plot of land can be defined as a set of cells 
+    /// with similar criteria:
+    ///
+    /// The number of cells in the set has to be greater than 1 and all 
+    /// cells must be fertile.
+    /// The apex of an inverse pyramid is the bottommost cell of the 
+    /// inverse pyramid. The height of an inverse pyramid is the number of 
+    /// rows it covers. Let (r, c) be the apex of the pyramid, and its height 
+    /// be h. Then, the plot comprises of cells (i, j) where 
+    /// r - h + 1 <= i <= r and c - (r - i) <= j <= c + (r - i).
+    /// Some examples of valid and invalid pyramidal (and inverse pyramidal) 
+    /// plots are shown below. Black cells indicate fertile cells.
+    ///
+    /// Given a 0-indexed m x n binary matrix grid representing the farmland, 
+    /// return the total number of pyramidal and inverse pyramidal plots that 
+    /// can be found in grid.
+    ///
+    /// Example 1:
+    /// Input: grid = [[0,1,1,0],[1,1,1,1]]
+    /// Output: 2
+    /// Explanation:
+    /// The 2 possible pyramidal plots are shown in blue and red respectively.
+    /// There are no inverse pyramidal plots in this grid. 
+    /// Hence total number of pyramidal and inverse pyramidal plots 
+    /// is 2 + 0 = 2.
+    ///
+    /// Example 2:
+    /// Input: grid = [[1,1,1],[1,1,1]]
+    /// Output: 2
+    /// Explanation:
+    /// The pyramidal plot is shown in blue, and the inverse pyramidal plot 
+    /// is shown in red. 
+    /// Hence the total number of plots is 1 + 1 = 2.
+    ///
+    /// Example 3:
+    /// Input: grid = [[1,0,1],[0,0,0],[1,0,1]]
+    /// Output: 0
+    /// Explanation:
+    /// There are no pyramidal or inverse pyramidal plots in the grid.
+    ///
+    /// Example 4:
+    /// Input: grid = [[1,1,1,1,0],[1,1,1,1,1],[1,1,1,1,1],[0,1,0,0,1]]
+    /// Output: 13
+    /// Explanation:
+    /// There are 7 pyramidal plots, 3 of which are shown in the 2nd 
+    /// and 3rd figures.
+    /// There are 6 inverse pyramidal plots, 2 of which are shown in the 
+    /// last figure.
+    /// The total number of plots is 7 + 6 = 13.
+    ///
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 1 <= m, n <= 1000
+    /// 4. 1 <= m * n <= 10^5
+    /// 5. grid[i][j] is either 0 or 1.
+    /// </summary>
+    int countPyramids(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 2090. K Radius Subarray Averages
+    ///                                                                 
+    /// Medium
+    /// 
+    /// You are given a 0-indexed array nums of n integers, and an integer k.
+    ///
+    /// The k-radius average for a subarray of nums centered at some index i 
+    /// with the radius k is the average of all elements in nums between the 
+    /// indices i - k and i + k (inclusive). If there are less than k elements 
+    /// before or after the index i, then the k-radius average is -1.
+    ///
+    /// Build and return an array avgs of length n where avgs[i] is the 
+    /// k-radius average for the subarray centered at index i.
+    ///
+    /// The average of x elements is the sum of the x elements divided by x, 
+    /// using integer division. The integer division truncates toward zero, 
+    /// which means losing its fractional part.
+    ///
+    /// For example, the average of four elements 2, 3, 1, and 5 is 
+    /// (2 + 3 + 1 + 5) / 4 = 11 / 4 = 2.75, which truncates to 2.
+    ///
+    /// Example 1:
+    /// Input: nums = [7,4,3,9,1,8,5,2,6], k = 3
+    /// Output: [-1,-1,-1,5,4,4,-1,-1,-1]
+    /// Explanation:
+    /// - avg[0], avg[1], and avg[2] are -1 because there are less than k 
+    ///  elements before each index.
+    /// - The sum of the subarray centered at index 3 with radius 3 
+    /// is: 7 + 4 + 3 + 9 + 1 + 8 + 5 = 37.
+    /// Using integer division, avg[3] = 37 / 7 = 5.
+    /// - For the subarray centered at index 4, avg[4] = 
+    ///  (4 + 3 + 9 + 1 + 8 + 5 + 2) / 7 = 4.
+    /// - For the subarray centered at index 5, avg[5] = 
+    ///  (3 + 9 + 1 + 8 + 5 + 2 + 6) / 7 = 4.
+    /// - avg[6], avg[7], and avg[8] are -1 because there are less than k 
+    ///   elements after each index.
+    ///
+    /// Example 2:
+    /// Input: nums = [100000], k = 0
+    /// Output: [100000]
+    /// Explanation:
+    /// - The sum of the subarray centered at index 0 with radius 0 
+    ///   is: 100000.
+    /// avg[0] = 100000 / 1 = 100000.
+    ///
+    /// Example 3:
+    /// Input: nums = [8], k = 100000
+    /// Output: [-1]
+    /// Explanation: 
+    /// - avg[0] is -1 because there are less than k elements before and 
+    ///   after index 0.
+    /// 
+    /// Constraints:
+    /// 1. n == nums.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 0 <= nums[i], k <= 10^5
+    /// </summary>
+    vector<int> getAverages(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 1874. Minimize Product Sum of Two Arrays
+    ///                                                                 
+    /// Medium
+    /// 
+    /// The product sum of two equal-length arrays a and b is equal to the 
+    /// sum of a[i] * b[i] for all 0 <= i < a.length (0-indexed).
+    ///
+    /// For example, if a = [1,2,3,4] and b = [5,2,3,1], the product sum would 
+    /// be 1*5 + 2*2 + 3*3 + 4*1 = 22.
+    /// Given two arrays nums1 and nums2 of length n, return the minimum 
+    /// product sum if you are allowed to rearrange the order of the elements 
+    /// in nums1. 
+    /// 
+    /// Example 1:
+    /// Input: nums1 = [5,3,4,2], nums2 = [4,2,2,5]
+    /// Output: 40
+    /// Explanation: We can rearrange nums1 to become [3,5,4,2]. The product 
+    /// sum of [3,5,4,2] and [4,2,2,5] is 3*4 + 5*2 + 4*2 + 2*5 = 40.
+    ///
+    /// Example 2:
+    /// Input: nums1 = [2,1,4,5,7], nums2 = [3,2,4,8,6]
+    /// Output: 65
+    /// Explanation: We can rearrange nums1 to become [5,7,4,1,2]. The product 
+    /// sum of [5,7,4,1,2] and [3,2,4,8,6] is 5*3 + 7*2 + 4*4 + 1*8 + 2*6 = 65.
+    /// 
+    /// Constraints:
+    /// 1. n == nums1.length == nums2.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 1 <= nums1[i], nums2[i] <= 100
+    /// </summary>
+    int minProductSum(vector<int>& nums1, vector<int>& nums2);
+
+    /// <summary>
+    /// Leet Code 2079. Watering Plants 
+    ///                                                                 
+    /// Medium
+    /// 
+    /// You want to water n plants in your garden with a watering can. The 
+    /// plants are arranged in a row and are labeled from 0 to n - 1 from 
+    /// left to right where the ith plant is located at x = i. There is a 
+    /// river at x = -1 that you can refill your watering can at.
+    ///
+    /// Each plant needs a specific amount of water. You will water the 
+    /// plants in the following way:
+    /// 
+    /// Water the plants in order from left to right.
+    /// After watering the current plant, if you do not have enough water 
+    /// to completely water the next plant, return to the river to fully 
+    /// refill the watering can.
+    /// You cannot refill the watering can early.
+    /// You are initially at the river (i.e., x = -1). It takes one step 
+    /// to move one unit on the x-axis.
+    ///  
+    /// Given a 0-indexed integer array plants of n integers, where plants[i] 
+    /// is the amount of water the ith plant needs, and an integer capacity 
+    /// representing the watering can capacity, return the number of steps 
+    /// needed to water all the plants.
+    /// 
+    /// Example 1:
+    /// 
+    /// Input: plants = [2,2,3,3], capacity = 5
+    /// Output: 14
+    /// Explanation: Start at the river with a full watering can:
+    /// - Walk to plant 0 (1 step) and water it. Watering can has 3 units of 
+    ///   water.
+    /// - Walk to plant 1 (1 step) and water it. Watering can has 1 unit of 
+    ///   water.
+    /// - Since you cannot completely water plant 2, walk back to the river 
+    ///   to refill (2 steps).
+    /// - Walk to plant 2 (3 steps) and water it. Watering can has 2 units 
+    ///   of water.
+    /// - Since you cannot completely water plant 3, walk back to the river 
+    ///   to refill (3 steps).
+    /// - Walk to plant 3 (4 steps) and water it.
+    /// Steps needed = 1 + 1 + 2 + 3 + 3 + 4 = 14.
+    ///
+    /// Example 2:
+    /// Input: plants = [1,1,1,4,2,3], capacity = 4
+    /// Output: 30
+    /// Explanation: Start at the river with a full watering can:
+    /// - Water plants 0, 1, and 2 (3 steps). Return to river (3 steps).
+    /// - Water plant 3 (4 steps). Return to river (4 steps).
+    /// - Water plant 4 (5 steps). Return to river (5 steps).
+    /// - Water plant 5 (6 steps).
+    /// Steps needed = 3 + 3 + 4 + 4 + 5 + 5 + 6 = 30.
+    ///
+    /// Example 3:
+    /// Input: plants = [7,7,7,7,7,7,7], capacity = 8
+    /// Output: 49
+    /// Explanation: You have to refill before watering each plant.
+    /// Steps needed = 1 + 1 + 2 + 2 + 3 + 3 + 4 + 4 + 5 + 5 + 6 + 6 + 7 = 49.
+    /// 
+    /// Constraints:
+    /// 1. n == plants.length
+    /// 2. 1 <= n <= 1000
+    /// 3. 1 <= plants[i] <= 10^6
+    /// 4. max(plants[i]) <= capacity <= 10^9
+    /// </summary>
+    int wateringPlants(vector<int>& plants, int capacity);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

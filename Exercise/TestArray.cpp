@@ -6195,8 +6195,117 @@ void TestLeetCode1788(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2088(void)
+{
+    Logger::WriteMessage("Test Leet Code 2088");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = 
+    { 
+        {0, 1, 1, 0},{1, 1, 1, 1} 
+    };
+    int result = leetCode.countPyramids(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        { 1,1,1 },{ 1,1,1 }
+    };
+    result = leetCode.countPyramids(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {1,0,1} ,{0,0,0},{1,0,1}
+    };
+    result = leetCode.countPyramids(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {1, 1, 1, 1, 0} ,{1, 1, 1, 1, 1},{1, 1, 1, 1, 1},{0, 1, 0, 0, 1}
+    };
+    result = leetCode.countPyramids(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2090(void)
+{
+    Logger::WriteMessage("Test Leet Code 2090");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 7, 4, 3, 9, 1, 8, 5, 2, 6 };
+    int k = 3;
+    vector<int> result = leetCode.getAverages(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 100000 };
+    k = 0;
+    result = leetCode.getAverages(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 8 };
+    k = 100000;
+    result = leetCode.getAverages(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1874(void)
+{
+    Logger::WriteMessage("Test Leet Code 1874");
+    LeetCodeArray leetCode;
+    vector<int> nums1 = { 5, 3, 4, 2 };
+    vector<int> nums2 = { 4, 2, 2, 5 };
+    int result = leetCode.minProductSum(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 2,1,4,5,7 };
+    nums2 = { 3,2,4,8,6 };
+    result = leetCode.minProductSum(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2079(void)
+{
+    Logger::WriteMessage("Test Leet Code 2079");
+    LeetCodeArray leetCode;
+    vector<int> plants = { 2, 2, 3, 3 };
+    int capacity = 5;
+    int result = leetCode.wateringPlants(plants, capacity);
+    Logger::WriteMessage(plants);
+    Logger::WriteMessage("capacity = "+ to_string(capacity) + "; result = " + to_string(result));
+
+    plants = { 1,1,1,4,2,3 };
+    capacity = 4;
+    result = leetCode.wateringPlants(plants, capacity);
+    Logger::WriteMessage(plants);
+    Logger::WriteMessage("capacity = " + to_string(capacity) + "; result = " + to_string(result));
+
+    plants = { 7,7,7,7,7,7,7 };
+    capacity = 8;
+    result = leetCode.wateringPlants(plants, capacity);
+    Logger::WriteMessage(plants);
+    Logger::WriteMessage("capacity = " + to_string(capacity) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2079();
+    TestLeetCode1874();
+    TestLeetCode2090();
+    TestLeetCode2088();
     TestLeetCode1788();
     TestLeetCode1937();
     TestLeetCode2025();

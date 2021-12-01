@@ -3085,8 +3085,52 @@ void TestLeetCode1932(void)
     Logger::WriteMessage(output);
 }
 
+void TestLeetCode1644(void)
+{
+    Logger::WriteMessage("Test Leet Code 1644");
+    LeetCodeTree leetCode;
+    TreeNode* p;
+    TreeNode* q;
+    string input = "[3,5,1,6,2,0,8,null,null,7,4]";
+    Logger::WriteMessage("Original Tree:" + input);
+    TreeNode* root = leetCode.deserialize(input);
+    p = leetCode.findTreeNode(root, 5);
+    q = leetCode.findTreeNode(root, 1);
+    TreeNode* result = leetCode.lowestCommonAncestor(root, p, q);
+    Logger::WriteMessage("The lowest common ancester for " +
+        ((p == nullptr) ? "null" : to_string(p->val)) + " and " +
+        ((q == nullptr) ? "null" : to_string(q->val)) + " is " +
+        ((result == nullptr) ? "null" : to_string(result->val)));
+    leetCode.freeTreeNodes(root);
+
+    input = "[3,5,1,6,2,0,8,null,null,7,4]";
+    Logger::WriteMessage("Original Tree:" + input);
+    root = leetCode.deserialize(input);
+    p = leetCode.findTreeNode(root, 5);
+    q = leetCode.findTreeNode(root, 4);
+    result = leetCode.lowestCommonAncestor(root, p, q);
+    Logger::WriteMessage("The lowest common ancester for " +
+        ((p == nullptr) ? "null" : to_string(p->val)) + " and " +
+        ((q == nullptr) ? "null" : to_string(q->val)) + " is " +
+        ((result == nullptr) ? "null" : to_string(result->val)));
+    leetCode.freeTreeNodes(root);
+
+    input = "[3,5,1,6,2,0,8,null,null,7,4]";
+    Logger::WriteMessage("Original Tree:" + input);
+    root = leetCode.deserialize(input);
+    p = leetCode.findTreeNode(root, 5);
+    q = leetCode.findTreeNode(root, 10);
+    result = leetCode.lowestCommonAncestor(root, p, q);
+    Logger::WriteMessage("The lowest common ancester for " +
+        ((p == nullptr) ? "null" : to_string(p->val)) + " and " +
+        ((q == nullptr) ? "null" : to_string(q->val)) + " is " +
+        ((result == nullptr) ? "null" : to_string(result->val)));
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1644();
     TestLeetCode333();
     TestLeetCode1597();
     TestLeetCode1932();

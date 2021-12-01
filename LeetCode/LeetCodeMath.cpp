@@ -11074,7 +11074,7 @@ int LeetCodeMath::waysToBuildRooms(vector<int>& prevRoom)
         tree[prevRoom[i]].push_back(i);
         fact = fact * ((long long)i + 1) % M;
     }
-    return fact * modPow((long long)waysToBuildRooms(tree, 0, prod), M - 2, M) % M;
+    return (int)(fact * (long long)modPow((long long)waysToBuildRooms(tree, 0, prod), M - 2, M) % M);
 }
 
 /// <summary>
@@ -11681,7 +11681,7 @@ int LeetCodeMath::countGoodNumbers(long long n)
             d = d / 2;
         }
     }
-    return result;
+    return (int)result;
 }
 
 /// <summary>
@@ -11826,7 +11826,7 @@ vector<int> LeetCodeMath::recoverArray(int n, vector<int>& sums)
         vector<int> l, r;
         int num = sums[1] - sums[0];
         bool l_zero = false;
-        for (int i = 0, j = 0; i < sums.size(); ++i)
+        for (size_t i = 0, j = 0; i < sums.size(); ++i)
         {
             if (sums[i] != INT_MIN)
             {
@@ -12086,7 +12086,7 @@ bool LeetCodeMath::stoneGameIX(vector<int>& stones)
 bool LeetCodeMath::findGameWinner(int n)
 {
     vector<int> dp(n+1);
-    for (size_t i = 1; i <= n; i++)
+    for (int i = 1; i <= n; i++)
     {
         if (i == 1) dp[i] = 0;
         else if (i == 2) dp[i] = 1;
@@ -12210,7 +12210,7 @@ vector<double> LeetCodeMath::centerAndRadius(const vector<pair<double, double>>&
 vector<double> LeetCodeMath::outerTrees(vector<vector<int>>& trees, int i, vector<pair<double, double>> b)
 {
     if (i == 0) {
-        srand(time(nullptr));
+        srand((int)time(nullptr));
         random_shuffle(begin(trees), end(trees));
     }
     if (i == trees.size() || b.size() == 3)
@@ -12385,5 +12385,73 @@ int LeetCodeMath::minNonZeroProduct(int p)
 {
     long long cnt = (1ll << p) - 1;
     long long  M = 1000000007;
-    return cnt % M * modPow(cnt - 1, cnt / 2, M) % M;
+    return (int)(cnt % M * modPow(cnt - 1, cnt / 2, M) % M);
+}
+
+/// <summary>
+/// Leet Code 2001. Number of Pairs of Interchangeable Rectangles
+///                                                                 
+/// Medium
+/// 
+/// You are given n rectangles represented by a 0-indexed 2D integer 
+/// array rectangles, where rectangles[i] = [widthi, heighti] denotes 
+/// the width and height of the ith rectangle.
+///
+/// Two rectangles i and j (i < j) are considered interchangeable if 
+/// they have the same width-to-height ratio. More formally, two 
+/// rectangles are interchangeable if widthi/heighti == widthj/heightj 
+/// (using decimal division, not integer division).
+///
+/// Return the number of pairs of interchangeable rectangles in rectangles.
+/// 
+/// Example 1:
+/// Input: rectangles = [[4,8],[3,6],[10,20],[15,30]]
+/// Output: 6
+/// Explanation: The following are the interchangeable pairs of rectangles 
+/// by index (0-indexed):
+/// - Rectangle 0 with rectangle 1: 4/8 == 3/6.
+/// - Rectangle 0 with rectangle 2: 4/8 == 10/20.
+/// - Rectangle 0 with rectangle 3: 4/8 == 15/30.
+/// - Rectangle 1 with rectangle 2: 3/6 == 10/20.
+/// - Rectangle 1 with rectangle 3: 3/6 == 15/30.
+/// - Rectangle 2 with rectangle 3: 10/20 == 15/30.
+///
+/// Example 2:
+/// Input: rectangles = [[4,5],[7,8]]
+/// Output: 0
+/// Explanation: There are no interchangeable pairs of rectangles.
+/// 
+/// Constraints:
+/// 1. n == rectangles.length
+/// 2. 1 <= n <= 10^5
+/// 3. rectangles[i].length == 2
+/// 4. 1 <= widthi, heighti <= 10^5
+/// </summary>
+long long LeetCodeMath::interchangeableRectangles(vector<vector<int>>& rectangles)
+{
+    map<pair<int, int>, int> shape_count;
+    for (size_t i = 0; i < rectangles.size(); i++)
+    {
+        int a = rectangles[i][0];
+        int b = rectangles[i][1];
+        if (a > b) swap(a, b);
+        while (a != 0)
+        {
+            b = b % a;
+            swap(a, b);
+        }
+        a = rectangles[i][0] / b;
+        b = rectangles[i][1] / b;
+        shape_count[make_pair(a, b)]++;
+    }
+
+    long long result = 0;
+    for (auto& itr : shape_count)
+    {
+        if (itr.second > 1)
+        {
+            result += (long long)itr.second * ((long long)itr.second - 1) / 2;
+        }
+    }
+    return result;
 }
