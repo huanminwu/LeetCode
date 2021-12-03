@@ -1567,8 +1567,26 @@ void TestLeetCode2081(void)
     Logger::WriteMessage("k = " + to_string(k) + "; n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2002(void)
+{
+    Logger::WriteMessage("Test Leet Code 2002");
+    LeetCodeDFS leetCode;
+    string s = "leetcodecom";
+    long long result = leetCode.maxProduct(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "bb";
+    result = leetCode.maxProduct(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "accbcaxxcxx";
+    result = leetCode.maxProduct(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2002();
     TestLeetCode2081();
     TestLeetCode2056();
     TestLeetCode1947();

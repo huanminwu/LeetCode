@@ -1612,7 +1612,6 @@ void TestLeetCode1962(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
-
 void TestLeetCode1996(void)
 {
     Logger::WriteMessage("Test Leet Code 1996");
@@ -1633,8 +1632,40 @@ void TestLeetCode1996(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1966(void)
+{
+    Logger::WriteMessage("Test Leet Code 1966");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 7 };
+    int result = leetCode.binarySearchableNumbers(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -1, 5, 2 };
+    result = leetCode.binarySearchableNumbers(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1968(void)
+{
+    Logger::WriteMessage("Test Leet Code 1968");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1,2,3,4,5 };
+    vector<int> result = leetCode.rearrangeArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 6,2,0,9,7 };
+    result = leetCode.rearrangeArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode1968();
+    TestLeetCode1966();
     TestLeetCode1996();
     TestLeetCode1962();
     TestLeetCode1942();

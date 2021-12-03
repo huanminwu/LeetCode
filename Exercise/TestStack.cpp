@@ -538,8 +538,24 @@ void TestLeetCode2030(void)
     Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; letter = " + string(1, letter) + "; result = " + result);
 }
 
+void TestLeetCode1776(void)
+{
+    Logger::WriteMessage("Test Leet Code 1776");
+    LeetCodeStack leetCode;
+    vector<vector<int>> cars = { {1, 2},{2, 1},{4, 3},{7, 2} };
+    vector<double> result = leetCode.getCollisionTimes(cars);
+    Logger::WriteMessage(cars);
+    Logger::WriteMessage(result);
+
+    cars = { {3, 4},{5, 4},{6, 3},{9, 1} };
+    result = leetCode.getCollisionTimes(cars);
+    Logger::WriteMessage(cars);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode1776();
     TestLeetCode2030();
     TestLeetCode1944();
     TestLeetCode1856();

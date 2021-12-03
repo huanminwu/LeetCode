@@ -11047,6 +11047,182 @@ public:
     /// 4. max(plants[i]) <= capacity <= 10^9
     /// </summary>
     int wateringPlants(vector<int>& plants, int capacity);
+
+    /// <summary>
+    /// Leet Code 2018. Check if Word Can Be Placed In Crossword 
+    ///                                                                 
+    /// Medium
+    /// 
+    /// You are given an m x n matrix board, representing the current state 
+    /// of a crossword puzzle. The crossword contains lowercase English 
+    /// letters (from solved words), ' ' to represent any empty cells, 
+    /// and '#' to represent any blocked cells.
+    ///
+    /// A word can be placed horizontally (left to right or right to left) or 
+    /// vertically (top to bottom or bottom to top) in the board if:
+    ///
+    /// It does not occupy a cell containing the character '#'.
+    /// The cell each letter is placed in must either be ' ' (empty) or match 
+    /// the letter already on the board.
+    /// There must not be any empty cells ' ' or other lowercase letters 
+    /// directly left or right of the word if the word was placed horizontally.
+    /// There must not be any empty cells ' ' or other lowercase letters directly 
+    /// above or below the word if the word was placed vertically.
+    /// Given a string word, return true if word can be placed in board, or 
+    /// false otherwise.
+    /// 
+    /// Example 1:
+    /// Input: board = [["#", " ", "#"], [" ", " ", "#"], 
+    /// ["#", "c", " "]], word = "abc"
+    /// Output: true
+    /// Explanation: The word "abc" can be placed as shown above 
+    /// (top to bottom).
+    ///
+    /// Example 2:
+    /// Input: board = [[" ", "#", "a"], [" ", "#", "c"], 
+    /// [" ", "#", "a"]], word = "ac"
+    /// Output: false
+    /// Explanation: It is impossible to place the word because there will 
+    /// always be a space/letter above or below it.
+    ///
+    /// Example 3:
+    /// Input: board = [["#", " ", "#"], [" ", " ", "#"], ["#", " ", "c"]], 
+    /// word = "ca"
+    /// Output: true
+    /// Explanation: The word "ca" can be placed as shown above 
+    /// (right to left). 
+    ///
+    /// Constraints:
+    /// 1. m == board.length
+    /// 2. n == board[i].length
+    /// 3. 1 <= m * n <= 2 * 10^5
+    /// 4. board[i][j] will be ' ', '#', or a lowercase English letter.
+    /// 5. 1 <= word.length <= max(m, n)
+    /// 6. word will contain only lowercase English letters.
+    /// </summary>
+    bool placeWordInCrossword(vector<vector<char>>& board, string word);
+
+    /// <summary>
+    /// Leet Code 2078. Two Furthest Houses With Different Colors 
+    ///                                                                 
+    /// Easy
+    /// 
+    /// There are n houses evenly lined up on the street, and each house is 
+    /// beautifully painted. You are given a 0-indexed integer array colors 
+    /// of length n, where colors[i] represents the color of the ith house.
+    ///
+    /// Return the maximum distance between two houses with different colors.
+    ///
+    /// The distance between the ith and jth houses is abs(i - j), where 
+    /// abs(x) is the absolute value of x.
+    ///  
+    /// Example 1:
+    /// Input: colors = [1,1,1,6,1,1,1]
+    /// Output: 3
+    /// Explanation: In the above image, color 1 is blue, and color 6 is red.
+    /// The furthest two houses with different colors are house 0 and house 3.
+    /// House 0 has color 1, and house 3 has color 6. The distance between 
+    /// them is abs(0 - 3) = 3.
+    /// Note that houses 3 and 6 can also produce the optimal answer.
+    ///
+    /// Example 2:
+    /// Input: colors = [1,8,3,8,3]
+    /// Output: 4
+    /// Explanation: In the above image, color 1 is blue, color 8 is yellow, 
+    /// and color 3 is green.
+    /// The furthest two houses with different colors are house 0 and house 4.
+    /// House 0 has color 1, and house 4 has color 3. The distance between 
+    /// them is abs(0 - 4) = 4.
+    ///
+    /// Example 3:
+    /// Input: colors = [0,1]
+    /// Output: 1
+    /// Explanation: The furthest two houses with different colors are 
+    /// house 0 and house 1.
+    /// House 0 has color 0, and house 1 has color 1. The distance between 
+    /// them is abs(0 - 1) = 1.
+    /// 
+    /// Constraints:
+    /// 1. n == colors.length
+    /// 2. 2 <= n <= 100
+    /// 3. 0 <= colors[i] <= 100
+    /// 4. Test data are generated such that at least two houses have different 
+    ///    colors.
+    /// </summary>
+    int maxDistance(vector<int>& colors);
+
+    /// <summary>
+    /// Leet Code 2075. Decode the Slanted Ciphertext
+    ///                                                                 
+    /// Medium
+    /// 
+    /// A string originalText is encoded using a slanted transposition cipher 
+    /// to a string encodedText with the help of a matrix having a fixed 
+    /// number of rows rows.
+    ///
+    /// originalText is placed first in a top-left to bottom-right manner.
+    /// The blue cells are filled first, followed by the red cells, then the 
+    /// yellow cells, and so on, until we reach the end of originalText. The 
+    /// arrow indicates the order in which the cells are filled. All empty 
+    /// cells are filled with ' '. The number of columns is chosen such that 
+    /// the rightmost column will not be empty after filling in originalText.
+    ///
+    /// encodedText is then formed by appending all characters of the matrix 
+    /// in a row-wise fashion.
+    /// 
+    /// The characters in the blue cells are appended first to encodedText, 
+    /// then the red cells, and so on, and finally the yellow cells. The 
+    /// arrow indicates the order in which the cells are accessed.
+    ///
+    /// For example, if originalText = "cipher" and rows = 3, then we encode 
+    /// it in the following manner:
+    ///
+    /// The blue arrows depict how originalText is placed in the matrix, and 
+    /// the red arrows denote the order in which encodedText is formed. In 
+    /// the above example, encodedText = "ch ie pr".
+    ///
+    /// Given the encoded string encodedText and number of rows rows, return 
+    /// the original string originalText.
+    ///
+    /// Note: originalText does not have any trailing spaces ' '. The test 
+    /// cases are generated such that there is only one possible 
+    /// originalText.
+    ///
+    /// Example 1:
+    /// Input: encodedText = "ch   ie   pr", rows = 3
+    /// Output: "cipher"
+    /// Explanation: This is the same example described in the problem 
+    /// description.
+    ///
+    /// Example 2:
+    /// Input: encodedText = "iveo    eed   l te   olc", rows = 4
+    /// Output: "i love leetcode"
+    /// Explanation: The figure above denotes the matrix that was used to 
+    /// encode originalText. 
+    /// The blue arrows show how we can find originalText from encodedText.
+    ///
+    /// Example 3:
+    /// Input: encodedText = "coding", rows = 1
+    /// Output: "coding"
+    /// Explanation: Since there is only 1 row, both originalText and 
+    /// encodedText are the same.
+    ///
+    /// Example 4:
+    /// Input: encodedText = " b  ac", rows = 2
+    /// Output: " abc"
+    /// Explanation: originalText cannot have trailing spaces, but it may be 
+    /// preceded by one or more spaces.
+    ///
+    /// Constraints:
+    /// 1. 0 <= encodedText.length <= 10^6
+    /// 2. encodedText consists of lowercase English letters and ' ' only.
+    /// 3. encodedText is a valid encoding of some originalText that does not 
+    ///    have trailing spaces.
+    /// 4. 1 <= rows <= 1000
+    /// 5. The testcases are generated such that there is only one possible 
+    ///    originalText.
+    /// </summary>
+    string decodeCiphertext(string encodedText, int rows);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

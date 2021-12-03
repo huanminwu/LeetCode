@@ -3850,8 +3850,46 @@ void TestLeetCode1956(void)
     Logger::WriteMessage("k = " + to_string(k) + "result = " + to_string(result));
 }
 
+void TestLeetCode2092(void)
+{
+    Logger::WriteMessage("Test Leet Code 2092");
+    LeetCodeGraph leetCode;
+    int n = 6;
+    vector<vector<int>> meetings = { {1, 2, 5},{2, 3, 8}, {1, 5, 10} };
+    int firstPerson = 1;
+    vector<int> result = leetCode.findAllPeople(n, meetings, firstPerson);
+    Logger::WriteMessage(meetings);
+    Logger::WriteMessage("n = " + to_string(n) + "; firstPerson = " + to_string(firstPerson));
+    Logger::WriteMessage(result);
+
+    n = 4;
+    meetings = { {3, 1, 3 }, { 1, 2, 2 }, { 0, 3, 3 } };
+    firstPerson = 3;
+    result = leetCode.findAllPeople(n, meetings, firstPerson);
+    Logger::WriteMessage(meetings);
+    Logger::WriteMessage("n = " + to_string(n) + "; firstPerson = " + to_string(firstPerson));
+    Logger::WriteMessage(result);
+
+    n = 5;
+    meetings = { {3, 4, 2},{1, 2, 1},{2, 3, 1} };
+    firstPerson = 1;
+    result = leetCode.findAllPeople(n, meetings, firstPerson);
+    Logger::WriteMessage(meetings);
+    Logger::WriteMessage("n = " + to_string(n) + "; firstPerson = " + to_string(firstPerson));
+    Logger::WriteMessage(result);
+
+    n = 6;
+    meetings = { {0, 2, 1},{1, 3, 1},{4, 5, 1} };
+    firstPerson = 1;
+    result = leetCode.findAllPeople(n, meetings, firstPerson);
+    Logger::WriteMessage(meetings);
+    Logger::WriteMessage("n = " + to_string(n) + "; firstPerson = " + to_string(firstPerson));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2092();
     TestLeetCode1956();
     TestLeetCode1992();
     TestLeetCode2050();

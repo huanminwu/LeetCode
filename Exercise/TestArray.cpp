@@ -6300,8 +6300,67 @@ void TestLeetCode2079(void)
     Logger::WriteMessage("capacity = " + to_string(capacity) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2018(void)
+{
+    Logger::WriteMessage("Test Leet Code 2018");
+    LeetCodeArray leetCode;
+    vector<vector<char>> board =
+    {
+        {'#', ' ', '#'},{' ', ' ', '#'},{'#', 'c', ' '}
+    };
+    string word = "abc";
+    bool result = leetCode.placeWordInCrossword(board, word);
+    Logger::WriteMessage(board);
+    Logger::WriteMessage("word = " + word + "; result = " + (string)(result ? "true" : "false"));
+
+    board =
+    {
+        {' ', '#', 'a'}, { ' ', '#', 'c' }, { ' ', '#', 'a' }
+    };
+    word = "ac";
+    result = leetCode.placeWordInCrossword(board, word);
+    Logger::WriteMessage(board);
+    Logger::WriteMessage("word = " + word + "; result = " + (string)(result ? "true" : "false"));
+
+    board =
+    {
+        {'#', ' ', '#'}, { ' ', ' ', '#' }, { '#', ' ', 'c' }
+    };
+    word = "ca";
+    result = leetCode.placeWordInCrossword(board, word);
+    Logger::WriteMessage(board);
+    Logger::WriteMessage("word = " + word + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2075(void)
+{
+    Logger::WriteMessage("Test Leet Code 2075");
+    LeetCodeArray leetCode;
+    string encodedText = "ch   ie   pr";
+    int rows = 3;
+    string result = leetCode.decodeCiphertext(encodedText, rows);
+    Logger::WriteMessage("encodedText = " + encodedText + "; rows = " + to_string(rows) + "; result = " + result);
+
+    encodedText = "iveo    eed   l te   olc";
+    rows = 4;
+    result = leetCode.decodeCiphertext(encodedText, rows);
+    Logger::WriteMessage("encodedText = " + encodedText + "; rows = " + to_string(rows) + "; result = " + result);
+
+    encodedText = "coding";
+    rows = 1;
+    result = leetCode.decodeCiphertext(encodedText, rows);
+    Logger::WriteMessage("encodedText = " + encodedText + "; rows = " + to_string(rows) + "; result = " + result);
+
+    encodedText = " b  ac";
+    rows = 2;
+    result = leetCode.decodeCiphertext(encodedText, rows);
+    Logger::WriteMessage("encodedText = " + encodedText + "; rows = " + to_string(rows) + "; result = " + result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2075();
+    TestLeetCode2018();
     TestLeetCode2079();
     TestLeetCode1874();
     TestLeetCode2090();
