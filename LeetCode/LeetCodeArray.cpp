@@ -18460,5 +18460,236 @@ string LeetCodeArray::decodeCiphertext(string encodedText, int rows)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2086. Minimum Number of Buckets Required to Collect 
+///                 Rainwater from Houses
+///                                                                 
+/// Medium
+/// You are given a 0-indexed string street. Each character in street is 
+/// either 'H' representing a house or '.' representing an empty space.
+///
+/// You can place buckets on the empty spaces to collect rainwater that 
+/// falls from the adjacent houses. The rainwater from a house at index 
+/// i is collected if a bucket is placed at index i - 1 and/or 
+/// index i + 1. A single bucket, if placed adjacent to two houses, can 
+/// collect the rainwater from both houses.
+///
+/// Return the minimum number of buckets needed so that for every house, 
+/// there is at least one bucket collecting rainwater from it, or -1 if 
+/// it is impossible.
+/// 
+/// Example 1:
+/// Input: street = "H..H"
+/// Output: 2
+/// Explanation:
+/// We can put buckets at index 1 and index 2.
+/// "H..H" -> "HBBH" ('B' denotes where a bucket is placed).
+/// The house at index 0 has a bucket to its right, and the house at 
+/// index 3 has a bucket to its left.
+/// Thus, for every house, there is at least one bucket collecting 
+/// rainwater from it.
+///
+/// Example 2:
+/// Input: street = ".H.H."
+/// Output: 1
+/// Explanation:
+/// We can put a bucket at index 2.
+/// ".H.H." -> ".HBH." ('B' denotes where a bucket is placed).
+/// The house at index 1 has a bucket to its right, and the house at 
+/// index 3 has a bucket to its left.
+/// Thus, for every house, there is at least one bucket collecting 
+/// rainwater from it.
+///
+/// Example 3:
+/// Input: street = ".HHH."
+/// Output: -1
+/// Explanation:
+/// There is no empty space to place a bucket to collect the rainwater 
+/// from the house at index 2.
+/// Thus, it is impossible to collect the rainwater from all the houses.
+///
+/// Example 4:
+/// Input: street = "H"
+/// Output: -1
+/// Explanation:
+/// There is no empty space to place a bucket.
+/// Thus, it is impossible to collect the rainwater from the house.
+///
+/// Example 5:
+/// Input: street = "."
+/// Output: 0
+/// Explanation:
+/// There is no house to collect water from.
+/// Thus, 0 buckets are needed.
+///
+/// Constraints:
+/// 1. 1 <= street.length <= 10^5
+/// 2. street[i] is either'H' or '.'.
+/// </summary>
+int LeetCodeArray::minimumBuckets(string street)
+{
+    int result = 0;
+    for (int i = 0; i < (int)street.size(); i++)
+    {
+        if (street[i] == 'H')
+        {
+            if (i > 0 && street[i - 1] == '*')
+            {
+                continue;
+            }
+            else if (i < (int)street.size() - 1 && street[i+1] == '.')
+            {
+                street[i + 1] = '*';
+                result++;
+            }
+            else if (i > 0 && street[i - 1] == '.')
+            {
+                street[i - 1] = '*';
+                result++;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2017. Grid Game
+///                                                                 
+/// Medium
+///
+/// You are given a 0-indexed 2D array grid of size 2 x n, where 
+/// grid[r][c] represents the number of points at position (r, c) 
+/// on the matrix. Two robots are playing a game on this matrix.
+///
+/// Both robots initially start at (0, 0) and want to reach (1, n-1). 
+/// Each robot may only move to the right ((r, c) to (r, c + 1)) or 
+/// down ((r, c) to (r + 1, c)).
+///
+/// At the start of the game, the first robot moves from (0, 0) to 
+/// (1, n-1), collecting all the points from the cells on its path. 
+/// For all cells (r, c) traversed on the path, grid[r][c] is set 
+/// to 0. Then, the second robot moves from (0, 0) to (1, n-1), 
+/// collecting the points on its path. Note that their paths may 
+/// intersect with one another.
+/// The first robot wants to minimize the number of points collected 
+/// by the second robot. In contrast, the second robot wants to 
+/// maximize the number of points it collects. If both robots play 
+/// optimally, return the number of points collected by the second robot.
+/// 
+/// Example 1:
+/// Input: grid = [[2,5,4],[1,5,1]]
+/// Output: 4
+/// Explanation: The optimal path taken by the first robot is shown in 
+/// red, and the optimal path taken by the second robot is shown in blue.
+/// The cells visited by the first robot are set to 0.
+/// The second robot will collect 0 + 0 + 4 + 0 = 4 points.
+///
+/// Example 2:
+/// Input: grid = [[3,3,1],[8,5,2]]
+/// Output: 4
+/// Explanation: The optimal path taken by the first robot is shown in red, 
+/// and the optimal path taken by the second robot is shown in blue.
+/// The cells visited by the first robot are set to 0.
+/// The second robot will collect 0 + 3 + 1 + 0 = 4 points.
+///
+/// Example 3:
+/// Input: grid = [[1,3,1,15],[1,3,3,1]]
+/// Output: 7
+/// Explanation: The optimal path taken by the first robot is shown in red, 
+/// and the optimal path taken by the second robot is shown in blue.
+/// The cells visited by the first robot are set to 0.
+/// The second robot will collect 0 + 1 + 3 + 3 + 0 = 7 points.
+/// 
+/// Constraints:
+/// 1. grid.length == 2
+/// 2. n == grid[r].length
+/// 3. 1 <= n <= 5 * 10^4
+/// 4. 1 <= grid[r][c] <= 10^5
+/// </summary>
+long long LeetCodeArray::gridGame(vector<vector<int>>& grid)
+{
+    long long sum1 = 0;
+    long long sum2 = 0;
+    for (size_t i = 0; i < grid[0].size(); i++) sum1 += grid[0][i];
+    long long result = LONG_MAX;
+    for (size_t i = 0; i < grid[0].size(); i++)
+    {
+        sum1 -= grid[0][i];
+        if (i > 0) sum2 += (long long)grid[1][i-1];
+        result = min(result, max(sum1, sum2));
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2073. Time Needed to Buy Tickets
+///                                                                 
+/// Easy
+///
+/// There are n people in a line queuing to buy tickets, where the 0th 
+/// person is at the front of the line and the (n - 1)th person is at 
+/// the back of the line.
+///
+/// You are given a 0-indexed integer array tickets of length n where 
+/// the number of tickets that the ith person would like to buy is 
+/// tickets[i].
+///
+/// Each person takes exactly 1 second to buy a ticket. A person can 
+/// only buy 1 ticket at a time and has to go back to the end of the 
+/// line (which happens instantaneously) in order to buy more tickets. 
+/// If a person does not have any tickets left to buy, the person will 
+/// leave the line.
+///
+/// Return the time taken for the person at position k (0-indexed) to 
+/// finish buying tickets.
+/// 
+/// Example 1:
+/// Input: tickets = [2,3,2], k = 2
+/// Output: 6
+/// Explanation: 
+/// - In the first pass, everyone in the line buys a ticket and the line 
+/// becomes [1, 2, 1].
+/// - In the second pass, everyone in the line buys a ticket and the 
+/// line becomes [0, 1, 0].
+/// The person at position 2 has successfully bought 2 tickets and it 
+/// took 3 + 3 = 6 seconds.
+///
+/// Example 2:
+/// Input: tickets = [5,1,1,1], k = 0
+/// Output: 8
+/// Explanation:
+/// - In the first pass, everyone in the line buys a ticket and the line 
+///   becomes [4, 0, 0, 0].
+/// - In the next 4 passes, only the person in position 0 is buying 
+///   tickets.
+/// The person at position 0 has successfully bought 5 tickets and it 
+/// took 4 + 1 + 1 + 1 + 1 = 8 seconds.
+///
+/// Constraints:
+/// 1. n == tickets.length
+/// 2. 1 <= n <= 100
+/// 3. 1 <= tickets[i] <= 100
+/// 4. 0 <= k < n
+/// </summary>
+int LeetCodeArray::timeRequiredToBuy(vector<int>& tickets, int k)
+{
+    int result = 0;
+    for (size_t i = 0; i < tickets.size(); i++)
+    {
+        if (i <= k)
+        {
+            result += min(tickets[i], tickets[k]);
+        }
+        else
+        {
+            result += min(tickets[i], tickets[k] - 1);
+        }
+    }
+    return result;
+}
 #pragma endregion
 

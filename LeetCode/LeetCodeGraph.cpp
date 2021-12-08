@@ -12209,4 +12209,161 @@ vector<int> LeetCodeGraph::findAllPeople(int n, vector<vector<int>>& meetings, i
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 1971. Find if Path Exists in Graph
+///                                                                 
+/// Easy
+///
+/// There is a bi-directional graph with n vertices, where each vertex is 
+/// labeled from 0 to n - 1 (inclusive). The edges in the graph are 
+/// represented as a 2D integer array edges, where each edges[i] = [ui, vi]
+/// denotes a bi-directional edge between vertex ui and vertex vi. Every 
+/// vertex pair is connected by at most one edge, and no vertex has an edge 
+/// to itself.
+/// 
+/// You want to determine if there is a valid path that exists from vertex 
+/// start to vertex end.
+/// Given edges and the integers n, start, and end, return true if there is 
+/// a valid path from start to end, or false otherwise.
+/// 
+/// Example 1:
+/// nput: n = 3, edges = [[0,1],[1,2],[2,0]], start = 0, end = 2
+/// Output: true
+/// Explanation: There are two paths from vertex 0 to vertex 2:
+/// 0 -> 1 -> 2
+/// 0 -> 2
+///
+/// Example 2:
+/// Input: n = 6, edges = [[0,1],[0,2],[3,5],[5,4],[4,3]], start = 0, 
+/// end = 5
+/// Output: false
+/// Explanation: There is no path from vertex 0 to vertex 5.
+///
+/// Constraints:
+/// 1. 1 <= n <= 2 * 10^5
+/// 2. 0 <= edges.length <= 2 * 10^5
+/// 3. edges[i].length == 2
+/// 4. 0 <= ui, vi <= n - 1
+/// 5. ui != vi
+/// 6. 0 <= start, end <= n - 1
+/// 7. There are no duplicate edges.
+/// 8. There are no self edges.
+/// </summary>
+bool LeetCodeGraph::validPath(int n, vector<vector<int>>& edges, int start, int end)
+{
+    vector<vector<int>> neighbors(n);
+    vector<int> visited(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(edges[i][1]);
+        neighbors[edges[i][1]].push_back(edges[i][0]);
+    }
+    queue<int> queue;
+    queue.push(start);
+    while (!queue.empty())
+    {
+        int node = queue.front();
+        queue.pop();
+        if (node == end) return true;
+        for (size_t i = 0; i < neighbors[node].size(); i++)
+        {
+            int next = neighbors[node][i];
+            if (visited[next] == 1) continue;
+            queue.push(next);
+            visited[next] = 1;
+        }
+    }
+    return false;
+}
+
+/// <summary>
+/// Leet Code 2077. Paths in Maze That Lead to Same Room
+/// </summary>
+int LeetCodeGraph::numberOfPaths(int start, int curr, int depth, vector<unordered_set<int>>& neighbors)
+{
+    int result = 0;
+    if (depth == 2)
+    {
+        if (neighbors[start].count(curr) > 0)
+        {
+            result = 1;
+        }
+        else
+        {
+            result = 0;
+        }
+        return result;
+    }
+    for (int x : neighbors[curr])
+    {
+        result += numberOfPaths(start, x, depth + 1, neighbors);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2077. Paths in Maze That Lead to Same Room
+///                                                                 
+/// Medium
+///
+/// A maze consists of n rooms numbered from 1 to n, and some rooms are 
+/// connected by corridors. You are given a 2D integer array corridors 
+/// where corridors[i] = [room1i, room2i] indicates that there is a 
+/// corridor connecting room1i and room2i, allowing a person in the 
+/// maze to go from room1i to room2i and vice versa.
+///
+/// The designer of the maze wants to know how confusing the maze is. 
+/// The confusion score of the maze is the number of different cycles 
+/// of length 3.
+///
+/// For example, 1 -> 2 -> 3 -> 1 is a cycle of length 3, 
+/// but 1 -> 2 -> 3 -> 4 and 1 -> 2 -> 3 -> 2 -> 1 are not.
+/// Two cycles are considered to be different if one or more of the 
+/// rooms visited in the first cycle is not in the second cycle.
+///
+/// Return the confusion score of the maze.
+/// Example 1:
+/// Input: n = 5, corridors = [[1,2],[5,2],[4,1],[2,4],[3,1],[3,4]]
+/// Output: 2
+/// Explanation:
+/// One cycle of length 3 is 4 -> 1 -> 3 -> 4, denoted in red.
+/// Note that this is the same cycle as 3 -> 4 -> 1 -> 3 
+/// or 1 -> 3 -> 4 -> 1 because the rooms are the same.
+/// Another cycle of length 3 is 1 -> 2 -> 4 -> 1, denoted in blue.
+/// Thus, there are two different cycles of length 3.
+///
+/// Example 2:
+/// Input: n = 4, corridors = [[1,2],[3,4]]
+/// Output: 0
+/// Explanation:
+/// There are no cycles of length 3.
+///
+/// Constraints:
+/// 1. 2 <= n <= 1000
+/// 2. 1 <= corridors.length <= 5 * 10^4
+/// 3. corridors[i].length == 2
+/// 4. 1 <= room1i, room2i <= n
+/// 5. room1i != room2i
+/// 6. There are no duplicate corridors.
+/// </summary>
+int LeetCodeGraph::numberOfPaths(int n, vector<vector<int>>& corridors)
+{
+    vector<unordered_set<int>> neighbors(n + 1);
+    for (size_t i = 0; i < corridors.size(); i++)
+    {
+        if (corridors[i][0] > corridors[i][1]) 
+        { 
+            swap(corridors[i][0], corridors[i][1]);
+        }
+        neighbors[corridors[i][0]].insert(corridors[i][1]);
+    }
+
+    int result = 0;
+    for (size_t i = 1; i <= n; i++)
+    {
+        result += numberOfPaths(i, i, 0, neighbors);
+    }
+    return result;
+}
 #pragma endregion

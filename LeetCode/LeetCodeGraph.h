@@ -5342,98 +5342,6 @@ public:
     int maximumInvitations(vector<vector<int>>& grid);
 
     /// <summary>
-    /// Leet code 1810. Minimum Path Cost in a Hidden Grid
-    /// 
-    /// Medium
-    /// 
-    /// This is an interactive problem.
-    ///
-    /// There is a robot in a hidden grid, and you are trying to get it from 
-    /// its starting cell to the target cell in this grid. The grid is of size 
-    /// m x n, and each cell in the grid is either empty or blocked. It is 
-    /// guaranteed that the starting cell and the target cell are different, 
-    /// and neither of them is blocked.
-    /// 
-    /// Each cell has a cost that you need to pay each time you move to the 
-    /// cell. The starting cell's cost is not applied before the robot moves.
-    ///
-    /// You want to find the minimum total cost to move the robot to the target
-    /// cell. However, you do not know the grid's dimensions, the starting 
-    /// cell, nor the target cell. You are only allowed to ask queries to the 
-    /// GridMaster object.
-    ///
-    /// The GridMaster class has the following functions:
-    /// boolean canMove(char direction) Returns true if the robot can move in 
-    /// that direction. Otherwise, it returns false.
-    /// int move(char direction) Moves the robot in that direction and returns 
-    /// the cost of moving to that cell. If this move would move the robot to 
-    /// a blocked cell or off the grid, the move will be ignored, the robot 
-    /// will remain in the same position, and the function will return -1.
-    ///
-    /// boolean isTarget() Returns true if the robot is currently on the 
-    /// target cell. Otherwise, it returns false.
-    /// Note that direction in the above functions should be a character 
-    /// from {'U','D','L','R'}, representing the directions up, down, left, 
-    /// and right, respectively.
-    /// 
-    /// Return the minimum total cost to get the robot from its initial 
-    /// starting cell to the target cell. If there is no valid path between 
-    /// the cells, return -1.
-    ///
-    /// Custom testing:
-    /// The test input is read as a 2D matrix grid of size m x n and four 
-    /// integers r1, c1, r2, and c2 where:
-    /// 
-    /// grid[i][j] == 0 indicates that the cell (i, j) is blocked.
-    /// grid[i][j] >= 1 indicates that the cell (i, j) is empty and grid[i][j] 
-    /// is the cost to move to that cell.
-    /// (r1, c1) is the starting cell of the robot.
-    /// (r2, c2) is the target cell of the robot.
-    /// Remember that you will not have this information in your code.
-    ///
-    /// 
-    /// Example 1:
-    /// Input: grid = [[2,3],[1,1]], r1 = 0, c1 = 1, r2 = 1, c2 = 0
-    /// Output: 2
-    /// Explanation: One possible interaction is described below:
-    /// The robot is initially standing on cell (0, 1), denoted by the 3.
-    /// - master.canMove('U') returns false.
-    /// - master.canMove('D') returns true.
-    /// - master.canMove('L') returns true.
-    /// - master.canMove('R') returns false.
-    /// - master.move('L') moves the robot to the cell (0, 0) and returns 2.
-    /// - master.isTarget() returns false.
-    /// - master.canMove('U') returns false.
-    /// - master.canMove('D') returns true.
-    /// - master.canMove('L') returns false.
-    /// - master.canMove('R') returns true.
-    /// - master.move('D') moves the robot to the cell (1, 0) and returns 1.
-    /// - master.isTarget() returns true.
-    /// - master.move('L') doesn't move the robot and returns -1.
-    /// - master.move('R') moves the robot to the cell (1, 1) and returns 1.
-    /// We now know that the target is the cell (0, 1), and the minimum total 
-    /// cost to reach it is 2. 
-    ///
-    /// Example 2:
-    /// Input: grid = [[0,3,1],[3,4,2],[1,2,0]], r1 = 2, c1 = 0, r2 = 0, c2 = 2
-    /// Output: 9
-    /// Explanation: The minimum cost path is (2,0) -> (2,1) -> 
-    /// (1,1) -> (1,2) -> (0,2).
-    ///
-    /// Example 3:
-    /// Input: grid = [[1,0],[0,1]], r1 = 0, c1 = 0, r2 = 1, c2 = 1
-    /// Output: -1
-    /// Explanation: There is no path from the robot to the target cell.
-    /// 
-    /// Constraints:
-    /// 1. 1 <= n, m <= 100
-    /// 2. m == grid.length
-    /// 3. n == grid[i].length
-    /// 4. 0 <= grid[i][j] <= 100
-    /// </summary>
-    int findShortestPath(vector<vector<int>>& grid);
-
-    /// <summary>
     /// Leet code 1857. Largest Color Value in a Directed Graph
     /// 
     /// Hard
@@ -6309,6 +6217,100 @@ public:
     /// 7. 1 <= firstPerson <= n - 1
     /// </summary>
     vector<int> findAllPeople(int n, vector<vector<int>>& meetings, int firstPerson);
+
+    /// <summary>
+    /// Leet Code 1971. Find if Path Exists in Graph
+    ///                                                                 
+    /// Easy
+    ///
+    /// There is a bi-directional graph with n vertices, where each vertex is 
+    /// labeled from 0 to n - 1 (inclusive). The edges in the graph are 
+    /// represented as a 2D integer array edges, where each edges[i] = [ui, vi]
+    /// denotes a bi-directional edge between vertex ui and vertex vi. Every 
+    /// vertex pair is connected by at most one edge, and no vertex has an edge 
+    /// to itself.
+    /// 
+    /// You want to determine if there is a valid path that exists from vertex 
+    /// start to vertex end.
+    /// Given edges and the integers n, start, and end, return true if there is 
+    /// a valid path from start to end, or false otherwise.
+    /// 
+    /// Example 1:
+    /// nput: n = 3, edges = [[0,1],[1,2],[2,0]], start = 0, end = 2
+    /// Output: true
+    /// Explanation: There are two paths from vertex 0 to vertex 2:
+    /// 0 -> 1 -> 2
+    /// 0 -> 2
+    ///
+    /// Example 2:
+    /// Input: n = 6, edges = [[0,1],[0,2],[3,5],[5,4],[4,3]], start = 0, 
+    /// end = 5
+    /// Output: false
+    /// Explanation: There is no path from vertex 0 to vertex 5.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 2 * 10^5
+    /// 2. 0 <= edges.length <= 2 * 10^5
+    /// 3. edges[i].length == 2
+    /// 4. 0 <= ui, vi <= n - 1
+    /// 5. ui != vi
+    /// 6. 0 <= start, end <= n - 1
+    /// 7. There are no duplicate edges.
+    /// 8. There are no self edges.
+    /// </summary>
+    bool validPath(int n, vector<vector<int>>& edges, int start, int end);
+
+    /// <summary>
+    /// Leet Code 2077. Paths in Maze That Lead to Same Room
+    /// </summary>
+    int numberOfPaths(int start, int curr, int depth, vector<unordered_set<int>>& neighbors);
+
+    /// <summary>
+    /// Leet Code 2077. Paths in Maze That Lead to Same Room
+    ///                                                                 
+    /// Medium
+    ///
+    /// A maze consists of n rooms numbered from 1 to n, and some rooms are 
+    /// connected by corridors. You are given a 2D integer array corridors 
+    /// where corridors[i] = [room1i, room2i] indicates that there is a 
+    /// corridor connecting room1i and room2i, allowing a person in the 
+    /// maze to go from room1i to room2i and vice versa.
+    ///
+    /// The designer of the maze wants to know how confusing the maze is. 
+    /// The confusion score of the maze is the number of different cycles 
+    /// of length 3.
+    ///
+    /// For example, 1 -> 2 -> 3 -> 1 is a cycle of length 3, 
+    /// but 1 -> 2 -> 3 -> 4 and 1 -> 2 -> 3 -> 2 -> 1 are not.
+    /// Two cycles are considered to be different if one or more of the 
+    /// rooms visited in the first cycle is not in the second cycle.
+    ///
+    /// Return the confusion score of the maze.
+    /// Example 1:
+    /// Input: n = 5, corridors = [[1,2],[5,2],[4,1],[2,4],[3,1],[3,4]]
+    /// Output: 2
+    /// Explanation:
+    /// One cycle of length 3 is 4 -> 1 -> 3 -> 4, denoted in red.
+    /// Note that this is the same cycle as 3 -> 4 -> 1 -> 3 
+    /// or 1 -> 3 -> 4 -> 1 because the rooms are the same.
+    /// Another cycle of length 3 is 1 -> 2 -> 4 -> 1, denoted in blue.
+    /// Thus, there are two different cycles of length 3.
+    ///
+    /// Example 2:
+    /// Input: n = 4, corridors = [[1,2],[3,4]]
+    /// Output: 0
+    /// Explanation:
+    /// There are no cycles of length 3.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n <= 1000
+    /// 2. 1 <= corridors.length <= 5 * 10^4
+    /// 3. corridors[i].length == 2
+    /// 4. 1 <= room1i, room2i <= n
+    /// 5. room1i != room2i
+    /// 6. There are no duplicate corridors.
+    /// </summary>
+    int numberOfPaths(int n, vector<vector<int>>& corridors);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

@@ -5326,6 +5326,161 @@ public:
     /// 4. p != q
     /// </summary>
     TreeNode* lowestCommonAncestorII(TreeNode* root, TreeNode* p, TreeNode* q);
+
+    /// <summary>
+    /// Leet Code 1902. Depth of BST Given Insertion Order
+    /// </summary>
+    int maxDepthBST(TreeNode * node, int val, int depth);
+
+    /// <summary>
+    /// Leet Code 1902. Depth of BST Given Insertion Order
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given a 0-indexed integer array order of length n, a 
+    /// permutation of integers from 1 to n representing the order of 
+    /// insertion into a binary search tree.
+    ///
+    /// A binary search tree is defined as follows:
+    ///
+    /// The left subtree of a node contains only nodes with keys less than 
+    /// the node's key.
+    /// The right subtree of a node contains only nodes with keys greater than 
+    /// the node's key.
+    /// Both the left and right subtrees must also be binary search trees.
+    /// The binary search tree is constructed as follows:
+    /// 
+    /// order[0] will be the root of the binary search tree.
+    /// All subsequent elements are inserted as the child of any existing node 
+    /// such that the binary search tree properties hold.
+    /// Return the depth of the binary search tree.
+    /// 
+    /// A binary tree's depth is the number of nodes along the longest path 
+    /// from the root node down to the farthest leaf node.
+    ///
+    /// Example 1:
+    /// Input: order = [2,1,4,3]
+    /// Output: 3
+    /// Explanation: The binary search tree has a depth of 3 with path 2->3->4.
+    ///
+    /// Example 2:
+    /// Input: order = [2,1,3,4]
+    /// Output: 3
+    /// Explanation: The binary search tree has a depth of 3 with path 2->3->4.
+    ///
+    /// Example 3:
+    /// Input: order = [1,2,3,4]
+    /// Output: 4
+    /// Explanation: The binary search tree has a depth of 4 with 
+    /// path 1->2->3->4.
+    ///
+    /// Constraints:
+    /// 1. n == order.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. order is a permutation of integers between 1 and n.
+    /// </summary>
+    int maxDepthBST(vector<int>& order);
+
+    /// <summary>
+    /// Leet Code 1650. Lowest Common Ancestor of a Binary Tree III
+    ///                                                                 
+    /// Medium
+    ///
+    /// Given two nodes of a binary tree p and q, return their lowest common 
+    /// ancestor (LCA).
+    ///
+    /// Each node will have a reference to its parent node. The definition 
+    /// for Node is below:
+    ///
+    /// class Node {
+    ///     public int val;
+    ///     public Node left;
+    ///     public Node right;
+    ///     public Node parent;
+    /// }
+    /// According to the definition of LCA on Wikipedia: "The lowest common 
+    /// ancestor of two nodes p and q in a tree T is the lowest node that has 
+    /// both p and q as descendants (where we allow a node to be a descendant 
+    /// of itself)."
+    /// 
+    /// Example 1:
+    /// Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+    /// Output: 3
+    /// Explanation: The LCA of nodes 5 and 1 is 3.
+    ///
+    /// Example 2:
+    /// Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+    /// Output: 5
+    /// Explanation: The LCA of nodes 5 and 4 is 5 since a node can be a 
+    /// descendant of itself according to the LCA definition.
+    ///
+    /// Example 3:
+    /// Input: root = [1,2], p = 1, q = 2
+    /// Output: 1
+    /// 
+    /// Constraints:
+    /// 1. The number of nodes in the tree is in the range [2, 10^5].
+    /// 2. -10^9 <= Node.val <= 10^9
+    /// 3. All Node.val are unique.
+    /// 4. p != q
+    /// 5. p and q exist in the tree.
+    /// </summary>
+    TreeNode* lowestCommonAncestorIII(TreeNode* p, TreeNode* q);
+
+    /// <summary>
+    /// Leet code #1676. Lowest Common Ancestor of a Binary Tree
+    /// </summary>
+    int lowestCommonAncestorIV(TreeNode* node, unordered_set<int>& subtree, TreeNode*& result);
+
+    /// <summary>
+    /// Leet Code 1676. Lowest Common Ancestor of a Binary Tree IV
+    ///                                                                 
+    /// Medium
+    ///
+    /// Given the root of a binary tree and an array of TreeNode objects 
+    /// nodes, return the lowest common ancestor (LCA) of all the nodes 
+    /// in nodes. All the nodes will exist in the tree, and all values 
+    /// of the tree's nodes are unique.
+    ///
+    /// Extending the definition of LCA on Wikipedia: "The lowest common 
+    /// ancestor of n nodes p1, p2, ..., pn in a binary tree T is the 
+    /// lowest node that has every pi as a descendant (where we allow a 
+    /// node to be a descendant of itself) for every valid i". A descendant 
+    /// of a node x is a node y that is on the path from node x to some leaf 
+    /// node.
+    ///
+    /// Example 1:
+    /// Input: root = [3,5,1,6,2,0,8,null,null,7,4], nodes = [4,7]
+    /// Output: 2
+    /// Explanation: The lowest common ancestor of nodes 4 and 7 is node 2.
+    ///
+    /// Example 2:
+    /// Input: root = [3,5,1,6,2,0,8,null,null,7,4], nodes = [1]
+    /// Output: 1
+    /// Explanation: The lowest common ancestor of a single node is the node 
+    /// itself.
+    ///
+    /// Example 3:
+    /// Input: root = [3,5,1,6,2,0,8,null,null,7,4], nodes = [7,6,2,4]
+    /// Output: 5
+    /// Explanation: The lowest common ancestor of the nodes 7, 6, 2, and 4 
+    /// is node 5.
+    ///
+    /// Example 4:
+    /// Input: root = [3,5,1,6,2,0,8,null,null,7,4], 
+    /// nodes = [0,1,2,3,4,5,6,7,8]
+    /// Output: 3
+    /// Explanation: The lowest common ancestor of all the nodes is the 
+    /// root node.
+    ///
+    /// Constraints:
+    /// 1. The number of nodes in the tree is in the range [1, 10^4].
+    /// 2. -10^9 <= Node.val <= 10^9
+    /// 3. All Node.val are unique.
+    /// 4. All nodes[i] will exist in the tree.
+    /// 5. All nodes[i] are distinct.
+    /// </summary>
+    TreeNode* lowestCommonAncestorIV(TreeNode* root, vector<TreeNode*>& nodes);
 #pragma endregion
 };
 

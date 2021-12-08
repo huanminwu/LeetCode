@@ -6357,8 +6357,73 @@ void TestLeetCode2075(void)
     Logger::WriteMessage("encodedText = " + encodedText + "; rows = " + to_string(rows) + "; result = " + result);
 }
 
+void TestLeetCode2086(void)
+{
+    Logger::WriteMessage("Test Leet Code 2086");
+    LeetCodeArray leetCode;
+    string street = "H..H";
+    int result = leetCode.minimumBuckets(street);
+    Logger::WriteMessage("street = " + street + "; result = " + to_string(result));
+
+    street = ".H.H.";
+    result = leetCode.minimumBuckets(street);
+    Logger::WriteMessage("street = " + street + "; result = " + to_string(result));
+
+    street = ".HHH.";
+    result = leetCode.minimumBuckets(street);
+    Logger::WriteMessage("street = " + street + "; result = " + to_string(result));
+
+    street = "H";
+    result = leetCode.minimumBuckets(street);
+    Logger::WriteMessage("street = " + street + "; result = " + to_string(result));
+
+    street = ".";
+    result = leetCode.minimumBuckets(street);
+    Logger::WriteMessage("street = " + street + "; result = " + to_string(result));
+}
+
+void TestLeetCode2017(void)
+{
+    Logger::WriteMessage("Test Leet Code 2017");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {2, 5, 4},{1, 5, 1} };
+    long long result = leetCode.gridGame(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {3, 3, 1},{8, 5, 2} };
+    result = leetCode.gridGame(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1, 3, 1, 15},{1, 3, 3, 1} };
+    result = leetCode.gridGame(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2073(void)
+{
+    Logger::WriteMessage("Test Leet Code 2073");
+    LeetCodeArray leetCode;
+    vector<int> tickets = { 2, 3, 2 };
+    int k = 2;
+    int result = leetCode.timeRequiredToBuy(tickets, k);
+    Logger::WriteMessage(tickets);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    tickets = { 5,1,1,1 };
+    k = 0;
+    result = leetCode.timeRequiredToBuy(tickets, k);
+    Logger::WriteMessage(tickets);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2073();
+    TestLeetCode2017();
+    TestLeetCode2086();
     TestLeetCode2075();
     TestLeetCode2018();
     TestLeetCode2079();

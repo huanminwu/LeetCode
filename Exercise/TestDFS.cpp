@@ -1584,8 +1584,39 @@ void TestLeetCode2002(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode2094(void)
+{
+    Logger::WriteMessage("Test Leet Code 2094");
+    LeetCodeDFS leetCode;
+    vector<int> digits = { 2, 1, 3, 0 };
+    vector<int> result = leetCode.findEvenNumbers(digits);
+    Logger::WriteMessage(digits);
+    Logger::WriteMessage(result);
+
+    digits = { 2,2,8,8,2 };
+    result = leetCode.findEvenNumbers(digits);
+    Logger::WriteMessage(digits);
+    Logger::WriteMessage(result);
+
+    digits = { 3,7,5 };
+    result = leetCode.findEvenNumbers(digits);
+    Logger::WriteMessage(digits);
+    Logger::WriteMessage(result);
+
+    digits = { 0,2,0,0 };
+    result = leetCode.findEvenNumbers(digits);
+    Logger::WriteMessage(digits);
+    Logger::WriteMessage(result);
+
+    digits = { 0,0,0 };
+    result = leetCode.findEvenNumbers(digits);
+    Logger::WriteMessage(digits);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2094();
     TestLeetCode2002();
     TestLeetCode2081();
     TestLeetCode2056();

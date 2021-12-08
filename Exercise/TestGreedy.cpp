@@ -1130,9 +1130,64 @@ void TestLeetCode2071(void)
         "; result = " + to_string(result));
 }
 
+void TestLeetCode2021(void)
+{
+    Logger::WriteMessage("Test Leet Code 2021");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> lights = { {-3, 2},{1, 2},{3, 3} };
+    int result = leetCode.brightestPosition(lights);
+    Logger::WriteMessage(lights);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    lights = { {1, 0},{0, 1} };
+    result = leetCode.brightestPosition(lights);
+    Logger::WriteMessage(lights);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    lights = { {1, 2} };
+    result = leetCode.brightestPosition(lights);
+    Logger::WriteMessage(lights);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    lights = { {-10, 2},{0, 3},{5, 1} };
+    result = leetCode.brightestPosition(lights);
+    Logger::WriteMessage(lights);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1989(void)
+{
+    Logger::WriteMessage("Test Leet Code 1989");
+    LeetCodeGreedy leetCode;
+    vector<int> team = { 0, 1, 0, 1, 0 };
+    int dist = 3;
+    int result = leetCode.catchMaximumAmountofPeople(team, dist);
+    Logger::WriteMessage(team);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    team = { 1 };
+    dist = 1;
+    result = leetCode.catchMaximumAmountofPeople(team, dist);
+    Logger::WriteMessage(team);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    team = { 0 };
+    dist = 1;
+    result = leetCode.catchMaximumAmountofPeople(team, dist);
+    Logger::WriteMessage(team);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    team = { 0, 0, 0, 1, 1, 1 };
+    dist = 3;
+    result = leetCode.catchMaximumAmountofPeople(team, dist);
+    Logger::WriteMessage(team);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode1989();
+    TestLeetCode2021();
     TestLeetCode2071();
     TestLeetCode1943();
     TestLeetCode1893();

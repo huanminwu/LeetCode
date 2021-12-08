@@ -3891,11 +3891,11 @@ void TestLeetCode2034(void)
     Logger::WriteMessage("Test Leet Code 2034");
     vector<string> commands =
     {
-        //"StockPrice", "update", "update", "current", "maximum", "update", "maximum", "update", "minimum"
+        "StockPrice", "update", "update", "current", "maximum", "update", "maximum", "update", "minimum"
     };
     vector<vector<int>> parameters =
     {
-        //{}, {1,10}, {2,5}, {}, {}, {1,3}, {}, {4,2}, {}
+        {}, {1,10}, {2,5}, {}, {}, {1,3}, {}, {4,2}, {}
     };
 
     vector<string> result;
@@ -3934,8 +3934,52 @@ void TestLeetCode2034(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2043(void)
+{
+    Logger::WriteMessage("Test Leet Code 2043");
+    vector<string> commands =
+    {
+        "Bank", "withdraw", "transfer", "deposit", "transfer", "withdraw"
+    };
+    vector<vector<long long>> parameters =
+    {
+        {10, 100, 20, 50, 30},{3, 10},{5, 1, 20},{5, 20},{3, 4, 15},{10, 50}
+    };
+
+    vector<string> result;
+    Bank* bank = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Bank")
+        {
+            bank = new Bank(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "withdraw")
+        {
+            bool ret = bank->withdraw(parameters[i][0], parameters[i][1]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+        else if (commands[i] == "transfer")
+        {
+            bool ret = bank->transfer(parameters[i][0], parameters[i][1], parameters[i][2]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+        else if (commands[i] == "deposit")
+        {
+            bool ret = bank->deposit(parameters[i][0], parameters[i][1]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+    }
+    delete bank;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2043();
     TestLeetCode2034();
     TestLeetCode1628();
     TestLeetCode2069();

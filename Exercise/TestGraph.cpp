@@ -3887,8 +3887,50 @@ void TestLeetCode2092(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1971(void)
+{
+    Logger::WriteMessage("Test Leet Code 1971");
+    LeetCodeGraph leetCode;
+    int n = 3;
+    vector<vector<int>> edges = { {0, 1},{1, 2},{2, 0} };
+    int start = 0;
+    int end = 2;
+    int result = leetCode.validPath(n, edges, start, end);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; start = " + to_string(start) +
+        "; end = " + to_string(end) + "; result = " + (string)(result ? "true":"false"));
+
+    n = 6; 
+    edges = { {0, 1},{0, 2},{3, 5},{5, 4},{4, 3} };
+    start = 0;
+    end = 5;
+    result = leetCode.validPath(n, edges, start, end);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; start = " + to_string(start) +
+        "; end = " + to_string(end) + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2077(void)
+{
+    Logger::WriteMessage("Test Leet Code 2077");
+    LeetCodeGraph leetCode;
+    int n = 5;
+    vector<vector<int>> corridors = { {1, 2},{5, 2},{4, 1},{2, 4},{3, 1},{3, 4} };
+    int result = leetCode.numberOfPaths(n, corridors);
+    Logger::WriteMessage(corridors);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    corridors = { {1, 2},{3, 4} };
+    result = leetCode.numberOfPaths(n, corridors);
+    Logger::WriteMessage(corridors);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2077();
+    TestLeetCode1971();
     TestLeetCode2092();
     TestLeetCode1956();
     TestLeetCode1992();

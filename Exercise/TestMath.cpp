@@ -4185,9 +4185,24 @@ void TestLeetCode2001(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1953(void)
+{
+    Logger::WriteMessage("Test Leet Code 1953");
+    LeetCodeMath leetCode;
+    vector<int> milestones = { 1, 2, 3 };
+    int result = leetCode.numberOfWeeks(milestones);
+    Logger::WriteMessage(milestones);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    milestones = { 5,2,1 };
+    result = leetCode.numberOfWeeks(milestones);
+    Logger::WriteMessage(milestones);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1953();
     TestLeetCode2001();
     TestLeetCode1969();
     TestLeetCode1842();

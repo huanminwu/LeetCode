@@ -3089,47 +3089,180 @@ void TestLeetCode1644(void)
 {
     Logger::WriteMessage("Test Leet Code 1644");
     LeetCodeTree leetCode;
-    TreeNode* p;
-    TreeNode* q;
     string input = "[3,5,1,6,2,0,8,null,null,7,4]";
     Logger::WriteMessage("Original Tree:" + input);
     TreeNode* root = leetCode.deserialize(input);
-    p = leetCode.findTreeNode(root, 5);
-    q = leetCode.findTreeNode(root, 1);
+    int p_val = 5;
+    int q_val = 1;
+    TreeNode* p = leetCode.findTreeNode(root, p_val);
+    TreeNode* q = leetCode.findTreeNode(root, q_val);
     TreeNode* result = leetCode.lowestCommonAncestor(root, p, q);
-    Logger::WriteMessage("The lowest common ancester for " +
-        ((p == nullptr) ? "null" : to_string(p->val)) + " and " +
-        ((q == nullptr) ? "null" : to_string(q->val)) + " is " +
-        ((result == nullptr) ? "null" : to_string(result->val)));
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage("p = " + to_string(p_val) + "; q = " + to_string(q_val));
+    Logger::WriteMessage("result = " + ((result == nullptr) ? "null" : to_string(result->val)));
     leetCode.freeTreeNodes(root);
 
     input = "[3,5,1,6,2,0,8,null,null,7,4]";
     Logger::WriteMessage("Original Tree:" + input);
     root = leetCode.deserialize(input);
-    p = leetCode.findTreeNode(root, 5);
-    q = leetCode.findTreeNode(root, 4);
+    p_val = 5;
+    q_val = 4;
+    p = leetCode.findTreeNode(root, p_val);
+    q = leetCode.findTreeNode(root, q_val);
     result = leetCode.lowestCommonAncestor(root, p, q);
-    Logger::WriteMessage("The lowest common ancester for " +
-        ((p == nullptr) ? "null" : to_string(p->val)) + " and " +
-        ((q == nullptr) ? "null" : to_string(q->val)) + " is " +
-        ((result == nullptr) ? "null" : to_string(result->val)));
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage("p = " + to_string(p_val) + "; q = " + to_string(q_val));
+    Logger::WriteMessage("result = " + ((result == nullptr) ? "null" : to_string(result->val)));
     leetCode.freeTreeNodes(root);
 
     input = "[3,5,1,6,2,0,8,null,null,7,4]";
     Logger::WriteMessage("Original Tree:" + input);
     root = leetCode.deserialize(input);
-    p = leetCode.findTreeNode(root, 5);
-    q = leetCode.findTreeNode(root, 10);
+    p_val = 5;
+    q_val = 10;
+    p = leetCode.findTreeNode(root, p_val);
+    q = leetCode.findTreeNode(root, q_val);
     result = leetCode.lowestCommonAncestor(root, p, q);
-    Logger::WriteMessage("The lowest common ancester for " +
-        ((p == nullptr) ? "null" : to_string(p->val)) + " and " +
-        ((q == nullptr) ? "null" : to_string(q->val)) + " is " +
-        ((result == nullptr) ? "null" : to_string(result->val)));
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage("p = " + to_string(p_val) + "; q = " + to_string(q_val));
+    Logger::WriteMessage("result = " + ((result == nullptr) ? "null" : to_string(result->val)));
+    leetCode.freeTreeNodes(root);
+}
+
+void TestLeetCode1902(void)
+{
+    Logger::WriteMessage("Test Leet Code 1902");
+    LeetCodeTree leetCode;
+    vector<int> order = { 2, 1, 4, 3 };
+    Logger::WriteMessage(order);
+    int result = leetCode.maxDepthBST(order);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    order = { 2,1,3,4 };
+    result = leetCode.maxDepthBST(order);
+    Logger::WriteMessage(order);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    order = { 1,2,3,4 };
+    result = leetCode.maxDepthBST(order);
+    Logger::WriteMessage(order);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1650(void)
+{
+    Logger::WriteMessage("Test Leet Code 1650");
+    LeetCodeTree leetCode;
+    string input = "[3,5,1,6,2,0,8,null,null,7,4]";
+    Logger::WriteMessage("Original Tree:" + input);
+    TreeNode* root = leetCode.deserialize(input);
+    int p_val = 5;
+    int q_val = 1;
+    TreeNode * p = leetCode.findTreeNode(root, p_val);
+    TreeNode * q = leetCode.findTreeNode(root, q_val);
+    TreeNode* result = leetCode.lowestCommonAncestorIII(p, q);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage("p = " + to_string(p_val) + "; q = " + to_string(q_val));
+    Logger::WriteMessage("result = " + ((result == nullptr) ? "null" : to_string(result->val)));
+    leetCode.freeTreeNodes(root);
+
+    input = "[3,5,1,6,2,0,8,null,null,7,4]";
+    Logger::WriteMessage("Original Tree:" + input);
+    root = leetCode.deserialize(input);
+    p_val = 5;
+    q_val = 4;
+    p = leetCode.findTreeNode(root, p_val);
+    q = leetCode.findTreeNode(root, q_val);
+    result = leetCode.lowestCommonAncestorIII(p, q);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage("p = " + to_string(p_val) + "; q = " + to_string(q_val));
+    Logger::WriteMessage("result = " + ((result == nullptr) ? "null" : to_string(result->val)));
+    leetCode.freeTreeNodes(root);
+
+    input = "[1,2]";
+    Logger::WriteMessage("Original Tree:" + input);
+    root = leetCode.deserialize(input);
+    p_val = 1;
+    q_val = 2;
+    p = leetCode.findTreeNode(root, 1);
+    q = leetCode.findTreeNode(root, 2);
+    result = leetCode.lowestCommonAncestorIII(p, q);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage("p = " + to_string(p_val) + "; q = " + to_string(q_val));
+    Logger::WriteMessage("result = " + ((result == nullptr) ? "null" : to_string(result->val)));
+    leetCode.freeTreeNodes(root);
+}
+
+void TestLeetCode1676(void)
+{
+    Logger::WriteMessage("Test Leet Code 1650");
+    LeetCodeTree leetCode;
+    string input = "[3,5,1,6,2,0,8,null,null,7,4]";
+    TreeNode* root = leetCode.deserialize(input);
+    vector<int> nodes = { 4, 7 };
+    vector<TreeNode *> tree_nodes;
+    for (size_t i = 0; i < nodes.size(); i++)
+    {
+        TreeNode* p = leetCode.findTreeNode(root, nodes[i]);
+        tree_nodes.push_back(p);
+    }
+    TreeNode* result = leetCode.lowestCommonAncestorIV(root, tree_nodes);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage(nodes);
+    Logger::WriteMessage("result = " + ((result == nullptr) ? "null" : to_string(result->val)));
+    leetCode.freeTreeNodes(root);
+
+    input = "[3,5,1,6,2,0,8,null,null,7,4]";
+    root = leetCode.deserialize(input);
+    nodes = { 1 };
+    tree_nodes.clear();
+    for (size_t i = 0; i < nodes.size(); i++)
+    {
+        TreeNode* p = leetCode.findTreeNode(root, nodes[i]);
+        tree_nodes.push_back(p);
+    }
+    result = leetCode.lowestCommonAncestorIV(root, tree_nodes);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage(nodes);
+    Logger::WriteMessage("result = " + ((result == nullptr) ? "null" : to_string(result->val)));
+    leetCode.freeTreeNodes(root);
+
+    input = "[3,5,1,6,2,0,8,null,null,7,4]";
+    root = leetCode.deserialize(input);
+    nodes = { 7,6,2,4 };
+    tree_nodes.clear();
+    for (size_t i = 0; i < nodes.size(); i++)
+    {
+        TreeNode* p = leetCode.findTreeNode(root, nodes[i]);
+        tree_nodes.push_back(p);
+    }
+    result = leetCode.lowestCommonAncestorIV(root, tree_nodes);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage(nodes);
+    Logger::WriteMessage("result = " + ((result == nullptr) ? "null" : to_string(result->val)));
+    leetCode.freeTreeNodes(root);
+
+    input = "[3,5,1,6,2,0,8,null,null,7,4]";
+    root = leetCode.deserialize(input);
+    nodes = { 0,1,2,3,4,5,6,7,8 };
+    tree_nodes.clear();
+    for (size_t i = 0; i < nodes.size(); i++)
+    {
+        TreeNode* p = leetCode.findTreeNode(root, nodes[i]);
+        tree_nodes.push_back(p);
+    }
+    result = leetCode.lowestCommonAncestorIV(root, tree_nodes);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage(nodes);
+    Logger::WriteMessage("result = " + ((result == nullptr) ? "null" : to_string(result->val)));
     leetCode.freeTreeNodes(root);
 }
 
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1676();
+    TestLeetCode1650();
+    TestLeetCode1902();
     TestLeetCode1644();
     TestLeetCode333();
     TestLeetCode1597();
