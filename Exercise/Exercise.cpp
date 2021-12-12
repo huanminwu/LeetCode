@@ -38,6 +38,7 @@
 #include "TestString.h"
 #include "TestBinarySearch.h"
 #include "TestBit.h"
+#include "TestTwoPointer.h"
 #include "TestUSACO.h"
 
 
@@ -3140,6 +3141,7 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 { 
+    TestLeetCodeTwoPointer();
     TestLeetCodeStack();
     TestLeetCodeString();
     TestLeetCodeDesign();
