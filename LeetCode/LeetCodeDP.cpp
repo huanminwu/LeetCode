@@ -1143,39 +1143,6 @@ int LeetCodeDP::nthSuperUglyNumber(int n, vector<int>& primes)
 }
 
 /// <summary>
-/// Leet code #85. Maximal Rectangle  
-/// Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.
-/// For example, given the following matrix: 
-/// 1 0 1 0 0
-/// 1 0 1 1 1
-/// 1 1 1 1 1
-/// 1 0 0 1 0
-/// Return 6. 
-/// </summary>
-int LeetCode::maximalRectangle(vector<vector<char>>& matrix)
-{
-    int max_area = 0;
-    if (matrix.empty()) return max_area;
-    vector<int> heights(matrix[0].size());
-    for (size_t i = 0; i < matrix.size(); i++)
-    {
-        for (size_t j = 0; j < matrix[0].size(); j++)
-        {
-            if (matrix[i][j] == '0')
-            {
-                heights[j] = 0;
-            }
-            else
-            {
-                heights[j] = heights[j] + 1;
-            }
-        }
-        max_area = max(max_area, largestRectangleAreaByStack(heights));
-    }
-    return max_area;
-}
-
-/// <summary>
 /// LeetCode #120. Triangle   
 /// Given a triangle, find the minimum path sum from top to bottom. 
 /// Each step you may move to adjacent numbers on the row below.
@@ -6780,46 +6747,6 @@ int LeetCodeDP::largest1BorderedSquare(vector<vector<int>>& grid)
     return result;
 }
 
-/// <summary>
-/// Leet code #84. Largest Rectangle in Histogram  
-/// Given n non-negative integers representing the histogram's bar height 
-/// where the width of each bar is 1, 
-/// find the area of largest rectangle in the histogram. 
-/// Above is a histogram where width of each bar is 1, given 
-/// height = [2,1,5,6,2,3].  
-/// The largest rectangle is shown in the shaded area, which has area = 10 unit.
-/// For example,
-/// Given heights = [2,1,5,6,2,3],
-/// return 10. 
-/// </summary> 
-int LeetCode::largestRectangleAreaByStack(vector<int>& heights)
-{
-    int max_area = 0;
-
-    stack<pair<int, int>> height_stack;
-    for (size_t i = 0; i <= heights.size(); i++)
-    {
-        int height = (i == heights.size()) ? 0 : heights[i];
-        if (height_stack.empty() || (height >= height_stack.top().second))
-        {
-            height_stack.push(make_pair(i, height));
-        }
-        else
-        {
-            int end = height_stack.top().first;
-            pair<int, int> pair;
-            while ((!height_stack.empty()) && (height < height_stack.top().second))
-            {
-                pair = height_stack.top();
-                height_stack.pop();
-                max_area = max(max_area, (end - pair.first + 1) * pair.second);
-            }
-            height_stack.push(make_pair(pair.first, height));
-            height_stack.push(make_pair(i, height));
-        }
-    }
-    return max_area;
-}
 
 /// <summary>
 /// Leet code #84. Largest Rectangle in Histogram  

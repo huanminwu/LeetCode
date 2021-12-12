@@ -1310,24 +1310,6 @@ bool LeetCodeDFS::canIWin(int maxChoosableInteger, int desiredTotal)
 
 /// <summary>
 /// Leet code #416. Partition Equal Subset Sum
-/// </summary>
-bool LeetCodeDFS::canPartition(vector<int>& nums, size_t start, int sum)
-{
-    for (size_t i = start; i < nums.size(); i++)
-    {
-        if (nums[i] > sum) return false;
-        if (nums[i] == sum) return true;
-        if (i > start && nums[i] == nums[i - 1]) continue;
-        if (canPartition(nums, i + 1, sum - nums[i]))
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-/// <summary>
-/// Leet code #416. Partition Equal Subset Sum
 ///
 /// Given a non-empty array containing only positive integers, find if 
 /// the array can be partitioned into two subsets such that the sum of 
@@ -1353,8 +1335,24 @@ bool LeetCodeDFS::canPartition(vector<int>& nums)
     }
     if (sum % 2 == 1) return false;
     sum = sum / 2;
-    sort(nums.begin(), nums.end());
-    return canPartition(nums, 0, sum);
+    unordered_set<int> curr;
+    unordered_set<int> next;
+    curr.insert(0);
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (auto s : curr)
+        {
+            int n = s + nums[i];
+            if (n == sum) return true;
+            else if (n > sum) continue;
+            else
+            {
+                next.insert(n);
+            }
+        }
+        curr.insert(next.begin(), next.end());
+    }
+    return false;
 }
 
 /// <summary>

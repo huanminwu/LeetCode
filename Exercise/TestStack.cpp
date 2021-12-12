@@ -553,8 +553,121 @@ void TestLeetCode1776(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode84(void)
+{
+    Logger::WriteMessage("Test Leet Code 84");
+    LeetCodeStack leetCode;
+    vector<int> heights;
+    int max_area;
+
+    heights = { 3, 6, 5, 7, 4, 8, 1, 0 };
+    max_area = leetCode.largestRectangleArea(heights);
+    Logger::WriteMessage("Heights are");
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage("LargestRectangleAreaByStack = " + to_string(max_area));
+
+    heights = { 9, 0 };
+    max_area = leetCode.largestRectangleArea(heights);
+    Logger::WriteMessage("Heights are");
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage("LargestRectangleArea = " + to_string(max_area));
+
+    heights = { 4, 2, 0, 3, 2, 5 };
+    max_area = leetCode.largestRectangleArea(heights);
+    Logger::WriteMessage("Heights are");
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage("LargestRectangleArea = " + to_string(max_area));
+
+    heights = { 2,1,5,6,2,3 };
+    max_area = leetCode.largestRectangleArea(heights);
+
+    Logger::WriteMessage("Heights are");
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage("LargestRectangleArea = " + to_string(max_area));
+
+    heights = {};
+    max_area = leetCode.largestRectangleArea(heights);
+
+    heights = { 2,1,2 };
+    max_area = leetCode.largestRectangleArea(heights);
+    Logger::WriteMessage("Heights are");
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage("LargestRectangleArea = " + to_string(max_area));
+
+    heights = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    max_area = leetCode.largestRectangleArea(heights);
+    Logger::WriteMessage("Heights are");
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage("LargestRectangleArea = " + to_string(max_area));
+}
+
+void TestLeetCode85(void)
+{
+    Logger::WriteMessage("Test Leet Code 85");
+    LeetCodeStack leetCode;
+    vector<vector<char>> matrix =
+    {
+        { '1', '0', '1', '0', '0' },
+        { '1', '0', '1', '1', '1' },
+        { '1', '1', '1', '1', '1' },
+        { '1', '0', '0', '1', '0' }
+    };
+    int max_rectangle = leetCode.maximalRectangle(matrix);
+    Logger::WriteMessage("The maximum rectangle area is " + to_string(max_rectangle));
+}
+
+void TestLeetCode1438(void)
+{
+    Logger::WriteMessage("Test Leet Code 1438");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 8, 2, 4, 7 };
+    int limit = 4;
+    int result = leetCode.longestSubarray(nums, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
+
+    nums = { 10,1,2,4,7,2 };
+    limit = 5;
+    result = leetCode.longestSubarray(nums, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
+
+    nums = { 4,2,2,2,4,4,2,2 };
+    limit = 0;
+    result = leetCode.longestSubarray(nums, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
+}
+
+void TestLeetCode862(void)
+{
+    Logger::WriteMessage("Test Leet Code 862");
+    LeetCodeStack leetCode;
+    vector<int> A = { 1 };
+    int K = 1;
+    int result = leetCode.shortestSubarray(A, K);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
+
+    A = { 1,2 };
+    K = 4;
+    result = leetCode.shortestSubarray(A, K);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
+
+    A = { 2, -1, 2 };
+    K = 3;
+    result = leetCode.shortestSubarray(A, K);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode862();
+    TestLeetCode1438();
+    TestLeetCode84();
+    TestLeetCode85();
     TestLeetCode1776();
     TestLeetCode2030();
     TestLeetCode1944();

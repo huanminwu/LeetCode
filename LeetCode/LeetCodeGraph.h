@@ -6311,6 +6311,118 @@ public:
     /// 6. There are no duplicate corridors.
     /// </summary>
     int numberOfPaths(int n, vector<vector<int>>& corridors);
+
+    /// <summary>
+    /// Leet Code 2061. Number of Spaces Cleaning Robot Cleaned
+    ///                                                                 
+    /// Medium
+    ///
+    /// A room is represented by a 0-indexed 2D binary matrix room where 
+    /// a 0 represents an empty space and a 1 represents a space with an 
+    /// object. The top left corner of the room will be empty in all test 
+    /// cases.
+    ///
+    /// A cleaning robot starts at the top left corner of the room and is 
+    /// facing right. The robot will continue heading straight until it 
+    /// reaches the edge of the room or it hits an object, after which it 
+    /// will turn 90 degrees clockwise and repeat this process. The starting 
+    /// space and all spaces that the robot visits are cleaned by it.
+    ///
+    /// Return the number of clean spaces in the room if the robot runs 
+    /// indefinetely.
+    /// 
+    /// Example 1:
+    /// Input: room = [[0,0,0],[1,1,0],[0,0,0]]
+    /// Output: 7
+    /// Explanation:
+    /// The robot cleans the spaces at (0, 0), (0, 1), and (0, 2).
+    /// The robot is at the edge of the room, so it turns 90 degrees clockwise 
+    /// and now faces down.
+    /// The robot cleans the spaces at (1, 2), and (2, 2).
+    /// The robot is at the edge of the room, so it turns 90 degrees clockwise 
+    /// and now faces left.
+    /// The robot cleans the spaces at (2, 1), and (2, 0).
+    /// The robot has cleaned all 7 empty spaces, so return 7.
+    ///
+    /// Example 2:
+    /// Input: room = [[0,1,0],[1,0,0],[0,0,0]]
+    /// Output: 1
+    /// Explanation:
+    /// The robot cleans the space at (0, 0).
+    /// The robot hits an object, so it turns 90 degrees clockwise and now 
+    /// faces down.
+    /// The robot hits an object, so it turns 90 degrees clockwise and now 
+    /// faces left.
+    /// The robot is at the edge of the room, so it turns 90 degrees clockwise 
+    /// and now faces up.
+    /// The robot is at the edge of the room, so it turns 90 degrees clockwise 
+    /// and now faces right.
+    /// The robot is back at its starting position.
+    /// The robot has cleaned 1 space, so return 1.
+    ///
+    /// Constraints:
+    /// 1. m == room.length
+    /// 2. n == room[r].length
+    /// 3. 1 <= m, n <= 300
+    /// 4. room[r][c] is either 0 or 1.
+    /// 5. room[0][0] == 0
+    /// </summary>
+    int numberOfCleanRooms(vector<vector<int>>& room);
+
+    /// <summary>
+    /// Leet Code 2097. Valid Arrangement of Pairs
+    /// </summary>
+    void validArrangement(int node, unordered_map<int, vector<int>>& neighbors, 
+        vector<vector<int>> & result);
+
+    /// <summary>
+    /// Leet Code 2097. Valid Arrangement of Pairs
+    ///                                                                 
+    /// Hard
+    ///
+    /// You are given a 0-indexed 2D integer array pairs where pairs[i] = 
+    /// [starti, endi]. An arrangement of pairs is valid if for every index i 
+    /// where 1 <= i < pairs.length, we have endi-1 == starti.
+    ///
+    /// Return any valid arrangement of pairs.
+    ///
+    /// Note: The inputs will be generated such that there exists a valid 
+    /// arrangement of pairs.
+    /// 
+    /// Example 1:
+    /// Input: pairs = [[5,1],[4,5],[11,9],[9,4]]
+    /// Output: [[11,9],[9,4],[4,5],[5,1]]
+    /// Explanation:
+    /// This is a valid arrangement since endi-1 always equals starti.
+    /// end0 = 9 == 9 = start1 
+    /// end1 = 4 == 4 = start2
+    /// end2 = 5 == 5 = start3
+    ///
+    /// Example 2:
+    /// Input: pairs = [[1,3],[3,2],[2,1]]
+    /// Output: [[1,3],[3,2],[2,1]]
+    /// Explanation:
+    /// This is a valid arrangement since endi-1 always equals starti.
+    /// end0 = 3 == 3 = start1
+    /// end1 = 2 == 2 = start2
+    /// The arrangements [[2,1],[1,3],[3,2]] and [[3,2],[2,1],[1,3]] are also valid.
+    ///
+    /// Example 3:
+    /// Input: pairs = [[1,2],[1,3],[2,1]]
+    /// Output: [[1,2],[2,1],[1,3]]
+    /// Explanation:
+    /// This is a valid arrangement since endi-1 always equals starti.
+    /// end0 = 2 == 2 = start1
+    /// end1 = 1 == 1 = start2
+    /// Constraints:
+    /// 1. 1 <= pairs.length <= 10^5
+    /// 2. pairs[i].length == 2
+    /// 3. 0 <= starti, endi <= 10^9
+    /// 4. starti != endi
+    /// 5. No two pairs are exactly the same.
+    /// 6. There exists a valid arrangement of pairs.
+    /// </summary>
+    vector<vector<int>> validArrangement(vector<vector<int>>& pairs);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

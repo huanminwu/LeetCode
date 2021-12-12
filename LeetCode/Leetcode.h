@@ -280,22 +280,6 @@ public:
 #pragma region DynamicProgramming
     /// <summary>
     /// Leet code #84. Largest Rectangle in Histogram  
-    /// Given n non-negative integers representing the histogram's bar 
-    /// height where the width of each bar is 1, 
-    /// find the area of largest rectangle in the histogram. 
-    /// Above is a histogram where width of each bar is 1, given height = [2,1,5,6,2,3].  
-    /// The largest rectangle is shown in the shaded area, which has area = 10 unit.
-    /// For example,
-    /// Given heights = [2,1,5,6,2,3],
-    /// return 10.
-    /// This is the first method by using stack, you keep on pushing when the next bar is 
-    /// higher, and start to pop up and calculate the previous rectangle when the next bar 
-    /// is smaller
-    /// </summary> 
-    int largestRectangleAreaByStack(vector<int>& heights);
-
-    /// <summary>
-    /// Leet code #84. Largest Rectangle in Histogram  
     /// Given n non-negative integers representing the histogram's bar height where the width of each bar is 1, 
     /// find the area of largest rectangle in the histogram. 
     /// Above is a histogram where width of each bar is 1, given height = [2,1,5,6,2,3].  
@@ -319,19 +303,6 @@ public:
     /// When s3 = "aadbbbaccc", return false. 
     /// </summary>
     bool isInterleave(string s1, string s2, string s3);
-
-    /// <summary>
-    /// Leet code #85. Maximal Rectangle  
-    /// Given a 2D binary matrix filled with 0's and 1's, find the largest 
-    /// rectangle containing only 1's and return its area.
-    /// For example, given the following matrix: 
-    /// 1 0 1 0 0
-    /// 1 0 1 1 1
-    /// 1 1 1 1 1
-    /// 1 0 0 1 0
-    /// Return 6. 
-    /// </summary>
-    int maximalRectangle(vector<vector<char>>& matrix);
 
     /// <summary>
     /// Leet code #161. One Edit Distance

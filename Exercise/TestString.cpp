@@ -4699,8 +4699,25 @@ void TestLeetCode1933(void)
     Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1858(void)
+{
+    LeetCodeString leetCode;
+    vector<string> words = { "k", "ki", "kir", "kira", "kiran" };
+    string result = leetCode.longestWordII(words);
+    Logger::WriteMessage("result = " + result);
+
+    words = { "a", "banana", "app", "appl", "ap", "apply", "apple" };
+    result = leetCode.longestWordII(words);
+    Logger::WriteMessage("result = " + result);
+
+    words = { "abc", "bc", "ab", "qwe" };
+    result = leetCode.longestWordII(words);
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1858();
     TestLeetCode1933();
     TestLeetCode2068();
     TestLeetCode2085();

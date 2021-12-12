@@ -74,67 +74,6 @@ void TestLeetCode97(void)
     Logger::WriteMessage(isInterLeave ? "s3 is interleave of s1 and s2" : "s3 is not interleave of s1 and s2");
 }
 
-void TestLeetCode84(void)
-{
-    Logger::WriteMessage("Test Leet Code 84");
-    LeetCode leetCode;
-    vector<int> heights;
-    int max_area_by_stack;
-    int max_area_by_divide;
-
-    heights = { 3, 6, 5, 7, 4, 8, 1, 0 };
-    max_area_by_stack = leetCode.largestRectangleAreaByStack(heights);
-    max_area_by_divide = leetCode.largestRectangleAreaByDivide(heights);
-    Logger::WriteMessage("Heights are");
-    Logger::WriteMessage(heights);
-    Logger::WriteMessage("LargestRectangleAreaByStack = " + to_string(max_area_by_stack));
-    Logger::WriteMessage("LargestRectangleAreaByDivide = " + to_string(max_area_by_divide));
-
-    heights = { 9, 0 };
-    max_area_by_stack = leetCode.largestRectangleAreaByStack(heights);
-    max_area_by_divide = leetCode.largestRectangleAreaByDivide(heights);
-    Logger::WriteMessage("Heights are");
-    Logger::WriteMessage(heights);
-    Logger::WriteMessage("LargestRectangleArea = " + to_string(max_area_by_stack));
-    Logger::WriteMessage("LargestRectangleAreaByDivide = " + to_string(max_area_by_divide));
-
-    heights = { 4, 2, 0, 3, 2, 5 };
-    max_area_by_stack = leetCode.largestRectangleAreaByStack(heights);
-    max_area_by_divide = leetCode.largestRectangleAreaByDivide(heights);
-    Logger::WriteMessage("Heights are");
-    Logger::WriteMessage(heights);
-    Logger::WriteMessage("LargestRectangleArea = " + to_string(max_area_by_stack));
-    Logger::WriteMessage("LargestRectangleAreaByDivide = " + to_string(max_area_by_divide));
-
-    heights = { 2,1,5,6,2,3 };
-    max_area_by_stack = leetCode.largestRectangleAreaByStack(heights);
-    max_area_by_divide = leetCode.largestRectangleAreaByDivide(heights);
-    Logger::WriteMessage("Heights are");
-    Logger::WriteMessage(heights);
-    Logger::WriteMessage("LargestRectangleArea = " + to_string(max_area_by_stack));
-    Logger::WriteMessage("LargestRectangleAreaByDivide = " + to_string(max_area_by_divide));
-
-    heights = {};
-    max_area_by_stack = leetCode.largestRectangleAreaByStack(heights);
-    max_area_by_divide = leetCode.largestRectangleAreaByDivide(heights);
-
-    heights = { 2,1,2 };
-    max_area_by_stack = leetCode.largestRectangleAreaByStack(heights);
-    max_area_by_divide = leetCode.largestRectangleAreaByDivide(heights);
-    Logger::WriteMessage("Heights are");
-    Logger::WriteMessage(heights);
-    Logger::WriteMessage("LargestRectangleArea = " + to_string(max_area_by_stack));
-    Logger::WriteMessage("LargestRectangleAreaByDivide = " + to_string(max_area_by_divide));
-
-    heights = { 0, 0, 0, 0, 0, 0, 0, 0, 2147483647 };
-    heights = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-    max_area_by_stack = leetCode.largestRectangleAreaByStack(heights);
-    max_area_by_divide = leetCode.largestRectangleAreaByDivide(heights);
-    Logger::WriteMessage("Heights are");
-    Logger::WriteMessage(heights);
-    Logger::WriteMessage("LargestRectangleArea = " + to_string(max_area_by_stack));
-    Logger::WriteMessage("LargestRectangleAreaByDivide = " + to_string(max_area_by_divide));
-}
 
 void TestLeetCode164(void)
 {
@@ -242,24 +181,6 @@ void TestLeetCode232(void)
     Logger::WriteMessage(output);
     Logger::WriteMessage("The queue " + string(queueByStack.empty() ? "is" : "is not") + " empty");
 }
-
-
-
-void TestLeetCode85(void)
-{
-    Logger::WriteMessage("Test Leet Code 85");
-    LeetCode leetCode;
-    vector<vector<char>> matrix =
-    {
-        { '1', '0', '1', '0', '0' },
-        { '1', '0', '1', '1', '1' },
-        { '1', '1', '1', '1', '1' },
-        { '1', '0', '0', '1', '0' }
-    };
-    int max_rectangle = leetCode.maximalRectangle(matrix);
-    Logger::WriteMessage("The maximum rectangle area is " + to_string(max_rectangle));
-}
-
 
 void TestLeetCode303(void)
 {
@@ -3219,15 +3140,15 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 { 
-    TestLeetCodeArray();
+    TestLeetCodeStack();
+    TestLeetCodeString();
+    TestLeetCodeDesign();
     TestLeetCodeGraph();
+    TestLeetCodeArray();
     TestLeetCodeDFS();
     TestLeetCodeTree();
-    TestLeetCodeDesign();
     TestLeetCodeGreedy();
-    TestLeetCodeStack();
     TestLeetCodeSort();
-    TestLeetCodeString();
     TestLeetCodeMath();
     TestLeetCodeBinarySearch();
     TestLeetCodeDP();
@@ -3537,7 +3458,6 @@ void main(int argc, char* argv[])
     TestLeetCode273();
     TestLeetCode164();
     TestLeetCode264();
-    TestLeetCode84();
     TestLeetCode335();
     TestLeetCode203();
     TestLeetCode92();

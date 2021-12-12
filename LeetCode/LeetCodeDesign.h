@@ -10365,7 +10365,7 @@ public:
 
     bool transfer(int account1, int account2, long long money) 
     {
-        if (account1 > m_account.size() || account2 > m_account.size())
+        if (account1 > (int)m_account.size() || account2 > (int)m_account.size())
         {
             return false;
         }
@@ -10393,7 +10393,7 @@ public:
 
     bool withdraw(int account, long long money) 
     {
-        if (account > m_account.size())
+        if (account > (int)m_account.size())
         {
             return false;
         }
@@ -10408,5 +10408,251 @@ public:
         }
     }
 };
+
+/// <summary>
+/// Leet Code 2013. Detect Squares
+///                                                                 
+/// Medium
+///
+/// 
+/// You are given a stream of points on the X-Y plane. Design an algorithm 
+/// that:
+///
+/// Adds new points from the stream into a data structure. Duplicate points
+/// are allowed and should be treated as different points.
+/// Given a query point, counts the number of ways to choose three points 
+/// from the data structure such that the three points and the query point 
+/// form an axis-aligned square with positive area.
+/// An axis-aligned square is a square whose edges are all the same length 
+/// and are either parallel or perpendicular to the x-axis and y-axis.
+///
+/// Implement the DetectSquares class:
+/// DetectSquares() Initializes the object with an empty data structure.
+/// void add(int[] point) Adds a new point point = [x, y] to the data 
+/// structure.
+/// int count(int[] point) Counts the number of ways to form axis-aligned 
+/// squares with point point = [x, y] as described above.
+///
+/// Example 1:
+/// Input
+/// ["DetectSquares", "add", "add", "add", "count", "count", "add", 
+///  "count"]
+/// [[], [[3, 10]], [[11, 2]], [[3, 2]], [[11, 10]], [[14, 8]], [[11, 2]], 
+/// [[11, 10]]]
+/// Output
+/// [null, null, null, null, 1, 0, null, 2]
+/// 
+/// Explanation
+/// DetectSquares detectSquares = new DetectSquares();
+/// detectSquares.add([3, 10]);
+/// detectSquares.add([11, 2]);
+/// detectSquares.add([3, 2]);
+/// detectSquares.count([11, 10]); // return 1. You can choose:
+///                                //   - The first, second, and third points
+/// detectSquares.count([14, 8]);  // return 0. The query point cannot form a square with any points in the data structure.
+/// detectSquares.add([11, 2]);    // Adding duplicate points is allowed.
+/// detectSquares.count([11, 10]); // return 2. You can choose:
+///                                //   - The first, second, and third points
+///                                //   - The first, third, and fourth points
+///
+/// Constraints:
+/// 1. point.length == 2
+/// 2. 0 <= x, y <= 1000
+/// 3. At most 3000 calls in total will be made to add and count.
+/// </summary>
+class DetectSquares 
+{
+private:
+    unordered_map<int, unordered_map<int, int>> m_x_axis;
+    unordered_map<int, unordered_map<int, int>> m_y_axis;
+    int m_sqare;
+public:
+    DetectSquares() 
+    {
+        m_sqare = 0;
+    }
+
+    void add(vector<int> point) 
+    {
+        int x = point[0];
+        int y = point[1];
+        m_x_axis[x][y]++;
+        m_y_axis[y][x]++;
+    }
+
+    int count(vector<int> point) 
+    {
+        int x = point[0];
+        int y = point[1];
+        int result = 0;
+        unordered_map<int, int>& y_points = m_x_axis[x];
+        for (auto& itr : y_points)
+        {
+            int side = std::abs(itr.first - y);
+            if (side == 0) continue;
+            for (int k = -1; k <= 1; k += 2)
+            {
+                int x1 = k * side + x;
+                if (m_y_axis[y].count(x1) == 0) continue;
+                if (m_x_axis[x1].count(itr.first) == 0) continue;
+                result += itr.second * m_y_axis[y][x1] * m_x_axis[x1][itr.first];
+            }
+        }
+        return result;
+    }
+};
+
+/// <summary>
+/// Leet Code 1804. Implement Trie II (Prefix Tree)
+///                                                                 
+/// Medium
+///
+/// 
+/// A trie (pronounced as "try") or prefix tree is a tree data structure 
+/// used to efficiently store and retrieve keys in a dataset of strings. 
+/// There are various applications of this data structure, such as 
+/// autocomplete and spellchecker.
+///
+/// Implement the Trie class:
+/// 
+/// Trie() Initializes the trie object.
+/// void insert(String word) Inserts the string word into the trie.
+/// int countWordsEqualTo(String word) Returns the number of instances 
+///                                    of the string word in the trie.
+/// int countWordsStartingWith(String prefix) 
+/// Returns the number of strings in the trie that have the 
+/// string prefix as a prefix.
+/// void erase(String word) Erases the string word from the trie.
+/// 
+/// Example 1:
+/// Input
+/// ["Trie", "insert", "insert", "countWordsEqualTo", 
+/// "countWordsStartingWith", "erase", "countWordsEqualTo", 
+/// "countWordsStartingWith", "erase", "countWordsStartingWith"]
+/// [[], ["apple"], ["apple"], ["apple"], ["app"], ["apple"], ["apple"], 
+/// ["app"], ["apple"], ["app"]]
+/// Output
+/// [null, null, null, 2, 2, null, 1, 1, null, 0]
+///
+/// Explanation
+/// Trie trie = new Trie();
+/// trie.insert("apple");               // Inserts "apple".
+/// trie.insert("apple");               // Inserts another "apple".
+/// trie.countWordsEqualTo("apple");    // There are two instances of 
+///                                     // "apple" so return 2.
+/// trie.countWordsStartingWith("app"); // "app" is a prefix of "apple" 
+///                                     // so return 2.
+/// trie.erase("apple");                // Erases one "apple".
+/// trie.countWordsEqualTo("apple");    // Now there is only one instance 
+///                                     // of "apple" so return 1.
+/// trie.countWordsStartingWith("app"); // return 1
+/// trie.erase("apple");                // Erases "apple". Now the trie is
+///                                     // empty.
+/// trie.countWordsStartingWith("app"); // return 0
+/// 
+/// Constraints:
+/// 1. 1 <= word.length, prefix.length <= 2000
+/// 2. word and prefix consist only of lowercase English letters.
+/// 3. At most 3 * 104 calls in total will be made to insert, 
+///    countWordsEqualTo, countWordsStartingWith, and erase.
+/// 4. It is guaranteed that for any function call to erase, the string 
+///    word will exist in the trie.
+/// </summary>
+class TrieII
+{
+private:
+    int m_words;
+    int m_prefix;
+    vector<TrieII*> m_children;
+public:
+    TrieII() 
+    {
+        m_words = 0;
+        m_prefix = 0;
+        m_children = vector<TrieII*>(26);
+    }
+
+    void insert(string word, int index = 0) 
+    {
+        m_prefix++;
+        if (index == word.size())
+        {
+            m_words++;
+            return;
+        }
+        else
+        {
+            if (m_children[word[index] - 'a'] == nullptr)
+            {
+                m_children[word[index] - 'a'] = new TrieII();
+            }
+            m_children[word[index] - 'a']->insert(word, index + 1);
+        }
+    }
+
+    int countWordsEqualTo(string word, int index = 0) 
+    {
+        if (index == word.size())
+        {
+            return m_words;
+        }
+        else
+        {
+            if (m_children[word[index] - 'a'] == nullptr)
+            {
+                return 0;
+            }
+            else
+            {
+                return m_children[word[index] - 'a']->countWordsEqualTo(word, index + 1);
+            }
+        }
+    }
+
+    int countWordsStartingWith(string prefix, int index = 0) 
+    {
+        if (index == prefix.size())
+        {
+            return m_prefix;
+        }
+        else
+        {
+            if (m_children[prefix[index] - 'a'] == nullptr)
+            {
+                return 0;
+            }
+            else
+            {
+                return m_children[prefix[index] - 'a']->countWordsStartingWith(prefix, index + 1);
+            }
+        }
+
+    }
+
+    void erase(string word, int index = 0) 
+    {
+        m_prefix--;
+        if (index == word.size())
+        {
+            m_words--;
+            return;
+        }
+        else
+        {
+            if (m_children[word[index] - 'a'] == nullptr)
+            {
+                return;
+            }
+            m_children[word[index] - 'a']->erase(word, index + 1);
+        }
+    }
+};
+
+
+
+
+
+
+
 
 #endif // LeetcodeDesign_H

@@ -3977,8 +3977,98 @@ void TestLeetCode2043(void)
     Logger::WriteMessage(result);
 }
 
+
+void TestLeetCode2013(void)
+{
+    Logger::WriteMessage("Test Leet Code 2013");
+    vector<string> commands =
+    {
+        "DetectSquares", "add", "add", "add", "count", "count", "add", "count"
+    };
+    vector<vector<int>> parameters =
+    {
+        {}, {3, 10}, {11, 2},{3, 2}, {11, 10}, {14, 8}, {11, 2}, {11, 10}
+    };
+
+    vector<string> result;
+    DetectSquares* detectSquares = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "DetectSquares")
+        {
+            detectSquares = new DetectSquares();
+            result.push_back("null");
+        }
+        else if (commands[i] == "add")
+        {
+            detectSquares->add(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "count")
+        {
+            int ret = detectSquares->count(parameters[i]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete detectSquares;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1804(void)
+{
+    Logger::WriteMessage("Test Leet Code 1804");
+    vector<string> commands =
+    {
+        "TrieII", "insert", "insert", "countWordsEqualTo", "countWordsStartingWith", "erase", 
+        "countWordsEqualTo", "countWordsStartingWith", "erase", "countWordsStartingWith"
+    };
+    vector<string> parameters =
+    {
+        "", "apple", "apple", "apple", "app", "apple", "apple", "app", "apple", "app"
+    };
+
+    vector<string> result;
+    TrieII* trieII = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "TrieII")
+        {
+            trieII = new TrieII();
+            result.push_back("null");
+        }
+        else if (commands[i] == "insert")
+        {
+            trieII->insert(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "countWordsEqualTo")
+        {
+            int ret = trieII->countWordsEqualTo(parameters[i]);
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "countWordsStartingWith")
+        {
+            int ret = trieII->countWordsStartingWith(parameters[i]);
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "erase")
+        {
+            trieII->erase(parameters[i]);
+            result.push_back("null");
+        }
+    }
+    delete trieII;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode1804();
+    TestLeetCode2013();
     TestLeetCode2043();
     TestLeetCode2034();
     TestLeetCode1628();

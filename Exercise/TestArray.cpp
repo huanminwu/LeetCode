@@ -1786,29 +1786,6 @@ void TestLeetCode1437(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
 }
 
-void TestLeetCode1438(void)
-{
-    Logger::WriteMessage("Test Leet Code 1438");
-    LeetCodeArray leetCode;
-    vector<int> nums = { 8, 2, 4, 7 };
-    int limit = 4;
-    int result = leetCode.longestSubarray(nums, limit);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
-
-    nums = { 10,1,2,4,7,2 };
-    limit = 5;
-    result = leetCode.longestSubarray(nums, limit);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
-
-    nums = { 4,2,2,2,4,4,2,2 };
-    limit = 0;
-    result = leetCode.longestSubarray(nums, limit);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
-}
-
 void TestLeetCode1441(void)
 {
     Logger::WriteMessage("Test Leet Code 1441");
@@ -3677,29 +3654,6 @@ void TestLeetCode838(void)
     result = leetCode.pushDominoes(dominoes);
     Logger::WriteMessage("dominoes = " + dominoes + "; result = " + result);
 
-}
-
-void TestLeetCode862(void)
-{
-    Logger::WriteMessage("Test Leet Code 862");
-    LeetCodeArray leetCode;
-    vector<int> A = { 1 };
-    int K = 1;
-    int result = leetCode.shortestSubarray(A, K);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
-
-    A = { 1,2 };
-    K = 4;
-    result = leetCode.shortestSubarray(A, K);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
-
-    A = { 2, -1, 2 };
-    K = 3;
-    result = leetCode.shortestSubarray(A, K);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
 }
 
 void TestLeetCode835(void)
@@ -6534,7 +6488,6 @@ void TestLeetCodeArray(void)
     TestLeetCode779();
     TestLeetCode238();
     TestLeetCode835();
-    TestLeetCode862();
     TestLeetCode838();
     TestLeetCode849();
     TestLeetCode883();
@@ -6630,7 +6583,6 @@ void TestLeetCodeArray(void)
     TestLeetCode345();
     TestLeetCode1442();
     TestLeetCode1441();
-    TestLeetCode1438();
     TestLeetCode1437();
     TestLeetCode1431();
     TestLeetCode1413();

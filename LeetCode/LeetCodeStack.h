@@ -1006,6 +1006,108 @@ public:
     /// 3. positioni < positioni+1
     /// </summary>
     vector<double> getCollisionTimes(vector<vector<int>>& cars);
+
+    /// <summary>
+    /// Leet code #84. Largest Rectangle in Histogram  
+    /// Given n non-negative integers representing the histogram's bar 
+    /// height where the width of each bar is 1, 
+    /// find the area of largest rectangle in the histogram. 
+    /// Above is a histogram where width of each bar is 1, given height = [2,1,5,6,2,3].  
+    /// The largest rectangle is shown in the shaded area, which has area = 10 unit.
+    /// For example,
+    /// Given heights = [2,1,5,6,2,3],
+    /// return 10.
+    /// This is the first method by using stack, you keep on pushing when the next bar is 
+    /// higher, and start to pop up and calculate the previous rectangle when the next bar 
+    /// is smaller
+    /// </summary> 
+    int largestRectangleArea(vector<int>& heights);
+
+    /// <summary>
+    /// Leet code #85. Maximal Rectangle  
+    /// Given a 2D binary matrix filled with 0's and 1's, find the largest 
+    /// rectangle containing only 1's and return its area.
+    /// For example, given the following matrix: 
+    /// 1 0 1 0 0
+    /// 1 0 1 1 1
+    /// 1 1 1 1 1
+    /// 1 0 0 1 0
+    /// Return 6. 
+    /// </summary>
+    int maximalRectangle(vector<vector<char>>& matrix);
+
+    /// <summary>
+    /// Leet code #1438. Longest Continuous Subarray With Absolute Diff 
+    ///                  Less Than or Equal to Limit
+    /// 
+    /// Medium
+    ///
+    /// Given an array of integers nums and an integer limit, return the 
+    /// size of the longest continuous subarray such that the absolute 
+    /// difference between any two elements is less than or equal to limit.
+    ///
+    /// In case there is no subarray satisfying the given condition return 0.
+    ///
+    /// Example 1:
+    /// Input: nums = [8,2,4,7], limit = 4
+    /// Output: 2 
+    /// Explanation: All subarrays are: 
+    /// [8] with maximum absolute diff |8-8| = 0 <= 4.
+    /// [8,2] with maximum absolute diff |8-2| = 6 > 4. 
+    /// [8,2,4] with maximum absolute diff |8-2| = 6 > 4.
+    /// [8,2,4,7] with maximum absolute diff |8-2| = 6 > 4.
+    /// [2] with maximum absolute diff |2-2| = 0 <= 4.
+    /// [2,4] with maximum absolute diff |2-4| = 2 <= 4.
+    /// [2,4,7] with maximum absolute diff |2-7| = 5 > 4.
+    /// [4] with maximum absolute diff |4-4| = 0 <= 4.
+    /// [4,7] with maximum absolute diff |4-7| = 3 <= 4.
+    /// [7] with maximum absolute diff |7-7| = 0 <= 4. 
+    /// Therefore, the size of the longest subarray is 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [10,1,2,4,7,2], limit = 5
+    /// Output: 4 
+    /// Explanation: The subarray [2,4,7,2] is the longest since the maximum 
+    /// absolute diff is |2-7| = 5 <= 5.
+    ///
+    /// Example 3:
+    /// Input: nums = [4,2,2,2,4,4,2,2], limit = 0
+    /// Output: 3
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. 0 <= limit <= 10^9
+    /// </summary>
+    int longestSubarray(vector<int>& nums, int limit);
+
+    /// <summary>
+    /// Leet code #862. Shortest Subarray with Sum at Least K
+    /// 
+    /// Return the length of the shortest, non-empty, contiguous subarray of A 
+    /// with sum at least K.
+    ///
+    /// If there is no non-empty subarray with sum at least K, return -1.
+    ///
+    /// Example 1:
+    /// Input: A = [1], K = 1
+    /// Output: 1
+    ///
+    /// Example 2:
+    /// Input: A = [1,2], K = 4
+    /// Output: -1
+    ///
+    /// Example 3:
+    /// Input: A = [2,-1,2], K = 3
+    /// Output: 3
+    ///
+    /// Note:
+    /// 1. 1 <= A.length <= 50000
+    /// 2. -10 ^ 5 <= A[i] <= 10 ^ 5
+    /// 3. 1 <= K <= 10 ^ 9
+    /// </summary>
+    int shortestSubarray(vector<int>& A, int K);
+
 #pragma endregion
 };
 #endif  // LeetCodeStack

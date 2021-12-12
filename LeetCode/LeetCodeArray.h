@@ -759,33 +759,6 @@ public:
     string pushDominoes(string dominoes);
 
     /// <summary>
-    /// Leet code #862. Shortest Subarray with Sum at Least K
-    /// 
-    /// Return the length of the shortest, non-empty, contiguous subarray of A 
-    /// with sum at least K.
-    ///
-    /// If there is no non-empty subarray with sum at least K, return -1.
-    ///
-    /// Example 1:
-    /// Input: A = [1], K = 1
-    /// Output: 1
-    ///
-    /// Example 2:
-    /// Input: A = [1,2], K = 4
-    /// Output: -1
-    ///
-    /// Example 3:
-    /// Input: A = [2,-1,2], K = 3
-    /// Output: 3
-    ///
-    /// Note:
-    /// 1. 1 <= A.length <= 50000
-    /// 2. -10 ^ 5 <= A[i] <= 10 ^ 5
-    /// 3. 1 <= K <= 10 ^ 9
-    /// </summary>
-    int shortestSubarray(vector<int>& A, int K);
-
-    /// <summary>
     /// Leet code #1100. Find K-Length Substrings With No Repeated Characters
     /// 
     /// Given a string S, return the number of substrings of length K with no 
@@ -4447,51 +4420,6 @@ public:
     /// 3. nums[i] is 0 or 1
     /// </summary>
     bool kLengthApart(vector<int>& nums, int k);
-
-    /// <summary>
-    /// Leet code #1438. Longest Continuous Subarray With Absolute Diff 
-    ///                  Less Than or Equal to Limit
-    /// 
-    /// Medium
-    ///
-    /// Given an array of integers nums and an integer limit, return the 
-    /// size of the longest continuous subarray such that the absolute 
-    /// difference between any two elements is less than or equal to limit.
-    ///
-    /// In case there is no subarray satisfying the given condition return 0.
-    ///
-    /// Example 1:
-    /// Input: nums = [8,2,4,7], limit = 4
-    /// Output: 2 
-    /// Explanation: All subarrays are: 
-    /// [8] with maximum absolute diff |8-8| = 0 <= 4.
-    /// [8,2] with maximum absolute diff |8-2| = 6 > 4. 
-    /// [8,2,4] with maximum absolute diff |8-2| = 6 > 4.
-    /// [8,2,4,7] with maximum absolute diff |8-2| = 6 > 4.
-    /// [2] with maximum absolute diff |2-2| = 0 <= 4.
-    /// [2,4] with maximum absolute diff |2-4| = 2 <= 4.
-    /// [2,4,7] with maximum absolute diff |2-7| = 5 > 4.
-    /// [4] with maximum absolute diff |4-4| = 0 <= 4.
-    /// [4,7] with maximum absolute diff |4-7| = 3 <= 4.
-    /// [7] with maximum absolute diff |7-7| = 0 <= 4. 
-    /// Therefore, the size of the longest subarray is 2.
-    ///
-    /// Example 2:
-    /// Input: nums = [10,1,2,4,7,2], limit = 5
-    /// Output: 4 
-    /// Explanation: The subarray [2,4,7,2] is the longest since the maximum 
-    /// absolute diff is |2-7| = 5 <= 5.
-    ///
-    /// Example 3:
-    /// Input: nums = [4,2,2,2,4,4,2,2], limit = 0
-    /// Output: 3
-    ///
-    /// Constraints:
-    /// 1. 1 <= nums.length <= 10^5
-    /// 2. 1 <= nums[i] <= 10^9
-    /// 3. 0 <= limit <= 10^9
-    /// </summary>
-    int longestSubarray(vector<int>& nums, int limit);
 
     /// <summary>
     /// Leet code #1441. Build an Array With Stack Operations
