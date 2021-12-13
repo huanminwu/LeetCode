@@ -468,29 +468,6 @@ void TestLeetCode629(void)
     Logger::WriteMessage("n = " + to_string(n) + ";k = " + to_string(k) + ";result = " + to_string(result));
 }
 
-void TestLeetCode123(void)
-{
-    Logger::WriteMessage("Test Leet Code 123");
-    LeetCodeDP leetCode;
-    vector<int> prices;
-    int maxProfit;
-    string message;
-    Logger::WriteMessage("The stock price is ");
-    prices = { 7, 1, 5, 3, 6, 4 };
-    Logger::WriteMessage(prices);
-    maxProfit = leetCode.maxProfitTwoTxns(prices);
-    message.assign("The max profit is ");
-    message.append(std::to_string(maxProfit));
-    Logger::WriteMessage(message);
-
-    Logger::WriteMessage("The stock price is ");
-    prices = { 1, 2 };
-    maxProfit = leetCode.maxProfitTwoTxns(prices);
-    message.assign("The max profit is ");
-    message.append(std::to_string(maxProfit));
-    Logger::WriteMessage(message);
-}
-
 void TestLeetCode920(void)
 {
     Logger::WriteMessage("Test Leet Code 920");
@@ -1751,28 +1728,6 @@ void TestLeetCode1510(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
 }
 
-void TestLeetCode122(void)
-{
-    Logger::WriteMessage("Test Leet Code 122");
-    LeetCodeDP leetCode;
-    vector<int> prices;
-    int maxProfit;
-    string message;
-    Logger::WriteMessage("The stock price is ");
-    prices = { 7, 1, 5, 3, 6, 4 };
-    Logger::WriteMessage(prices);
-    maxProfit = leetCode.maxProfitManyTxns(prices);
-    message.assign("The max profit is ");
-    message.append(std::to_string(maxProfit));
-    Logger::WriteMessage(message);
-
-    Logger::WriteMessage("The stock price is ");
-    prices = { 1, 2 };
-    maxProfit = leetCode.maxProfitManyTxns(prices);
-    message.assign("The max profit is ");
-    message.append(std::to_string(maxProfit));
-    Logger::WriteMessage(message);
-}
 
 void TestLeetCode309(void)
 {
@@ -2594,8 +2549,60 @@ void TestLeetCode1959(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode122(void)
+{
+    Logger::WriteMessage("Test Leet Code 122");
+    LeetCodeDP leetCode;
+    vector<int> prices = { 7, 1, 5, 3, 6, 4 };
+    int result = leetCode.maxProfitManyTxns(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 1, 2 };
+    result = leetCode.maxProfitManyTxns(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 1, 2, 3, 4, 5 };
+    result = leetCode.maxProfitManyTxns(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 7,6,4,3,1 };
+    result = leetCode.maxProfitManyTxns(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode123(void)
+{
+    Logger::WriteMessage("Test Leet Code 123");
+    LeetCodeDP leetCode;
+    vector<int> prices = { 3,3,5,0,0,3,1,4 };
+    int result = leetCode.maxProfitTwoTxns(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 1,2,3,4,5 };
+    result = leetCode.maxProfitTwoTxns(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 7,6,4,3,1 };
+    result = leetCode.maxProfitTwoTxns(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 1 };
+    result = leetCode.maxProfitTwoTxns(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode123();
+    TestLeetCode122();
     TestLeetCode1682();
     TestLeetCode1959();
     TestLeetCode1997();
@@ -2634,7 +2641,6 @@ void TestLeetCodeDP(void)
     TestLeetCode198();
     TestLeetCode96();
     TestLeetCode309();
-    TestLeetCode122();
     TestLeetCode5();
     TestLeetCode121();
     TestLeetCode1510();

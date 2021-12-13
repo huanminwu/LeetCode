@@ -3141,6 +3141,7 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 { 
+    TestLeetCodeDP();
     TestLeetCodeTwoPointer();
     TestLeetCodeStack();
     TestLeetCodeString();
@@ -3153,7 +3154,6 @@ void main(int argc, char* argv[])
     TestLeetCodeSort();
     TestLeetCodeMath();
     TestLeetCodeBinarySearch();
-    TestLeetCodeDP();
     TestLeetCodeBit();
     TestLeetCodeGraph();
     TestLeetCodeHashtable();

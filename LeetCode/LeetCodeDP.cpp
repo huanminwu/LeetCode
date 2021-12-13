@@ -62,20 +62,37 @@ string LeetCodeDP::longestPalindrome(string s)
 
 
 /// <summary>
-/// Leet code #121. Best Time to Buy and Sell Stock
-/// Say you have an array for which the ith element is the price of a given stock on day i.
-/// If you were only permitted to complete at most one transaction (ie, buy one and sell one 
-/// share of the stock), design an algorithm to find the maximum profit.
+/// Leet Code 121. Best Time to Buy and Sell Stock
+///                                                                 
+/// Easy
+///
+/// You are given an array prices where prices[i] is the price of a given 
+/// stock on the ith day.
+///
+/// You want to maximize your profit by choosing a single day to buy one 
+/// stock and choosing a different day in the future to sell that stock.
+///
+/// Return the maximum profit you can achieve from this transaction. If 
+/// you cannot achieve any profit, return 0.
+///
 ///
 /// Example 1:
-/// Input: [7, 1, 5, 3, 6, 4]
+/// Input: prices = [7,1,5,3,6,4]
 /// Output: 5
-/// max. difference = 6-1 = 5 (not 7-1 = 6, as selling price needs to be larger than buying price)
-/// 
+/// Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), 
+/// profit = 6-1 = 5.
+/// Note that buying on day 2 and selling on day 1 is not allowed because 
+/// you must buy before you sell.
+///
 /// Example 2:
-/// Input: [7, 6, 4, 3, 1]
+/// Input: prices = [7,6,4,3,1]
 /// Output: 0
-/// In this case, no transaction is done, i.e. max profit = 0.
+/// Explanation: In this case, no transactions are done and the max 
+/// profit = 0.
+/// 
+/// Constraints:
+/// 1. 1 <= prices.length <= 10^5
+/// 2. 0 <= prices[i] <= 10^4
 /// </summary>
 int LeetCodeDP::maxProfitOneTxn(vector<int>& prices)
 {
@@ -83,101 +100,135 @@ int LeetCodeDP::maxProfitOneTxn(vector<int>& prices)
     {
         return 0;
     }
-    vector<int> balance(prices.size());
-    for (size_t s = 0; s < 1; s++)
+    int best_buy = INT_MAX;
+    int best_profit = 0;
+    for (size_t i = 0; i < prices.size(); i++)
     {
-        int best_buy = INT_MIN;
-        int best_profit = 0;
-        for (size_t i = 0; i < prices.size(); i++)
-        {
-            best_buy = max(best_buy, balance[i] - prices[i]);
-            best_profit = max(best_profit, best_buy + prices[i]);
-            balance[i] = best_profit;
-        }
+        best_buy = min(best_buy, prices[i]);
+        best_profit = max(best_profit, prices[i] - best_buy);
     }
-    return balance[balance.size() - 1];
+    return best_profit;
 }
 
 /// <summary>
-/// Leet code #122. Best Time to Buy and Sell Stock II 
-/// Say you have an array for which the ith element is the price of a given stock on day i.
-/// Design an algorithm to find the maximum profit. You may complete as many transactions as you 
-/// like (ie, buy one and sell one share of the stock multiple times). However, you may not 
-/// engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+/// Leet Code 122. Best Time to Buy and Sell Stock II
+///                                                                 
+/// Medium
+///
+/// You are given an integer array prices where prices[i] is the price of 
+/// a given stock on the ith day.
+///
+/// On each day, you may decide to buy and/or sell the stock. You can only 
+/// hold at most one share of the stock at any time. However, you can buy
+/// it then immediately sell it on the same day.
+///
+/// Find and return the maximum profit you can achieve.
+/// 
+/// Example 1:
+/// Input: prices = [7,1,5,3,6,4]
+/// Output: 7
+/// Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), 
+/// profit = 5-1 = 4.
+/// Then buy on day 4 (price = 3) and sell on day 5 (price = 6), 
+/// profit = 6-3 = 3.
+/// Total profit is 4 + 3 = 7.
+///
+/// Example 2:
+/// Input: prices = [1,2,3,4,5]
+/// Output: 4
+/// Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), 
+/// profit = 5-1 = 4.
+/// Total profit is 4.
+///
+/// Example 3:
+/// Input: prices = [7,6,4,3,1]
+/// Output: 0
+/// Explanation: There is no way to make a positive profit, so we never buy the 
+/// stock to achieve the maximum profit of 0.
+/// 
+/// Constraints:
+/// 1. 1 <= prices.length <= 3 * 10^4
+/// 2. 0 <= prices[i] <= 10^4
 /// </summary>
 int LeetCodeDP::maxProfitManyTxns(vector<int>& prices)
 {
-    int max_profit = 0;
-    vector<int> buy(prices.size());
-    vector<int> sell(prices.size());
+    int prev_buy = INT_MIN;
+    int prev_sell = 0;
+    int result = 0;
+
     for (size_t i = 0; i < prices.size(); i++)
     {
-        if (i == 0)
-        {
-            buy[i] = 0 - prices[i];
-            sell[i] = 0;
-        }
-        else
-        {
-            buy[i] = max(sell[i - 1] - prices[i], buy[i - 1]);
-            sell[i] = max(sell[i - 1], buy[i - 1] + prices[i]);
-        }
-        max_profit = max(max_profit, sell[i]);
+        int buy = max(prev_sell - prices[i], prev_buy);
+        int sell = max(prev_sell, prices[i] + prev_buy);
+        result = max(result, sell);
+        prev_buy = buy;
+        prev_sell = sell;
     }
-    return max_profit;
+    return result;
 }
 
 /// <summary>
-/// Leet code #123. Best Time to Buy and Sell Stock III  
+/// Leet Code 123. Best Time to Buy and Sell Stock III
+///                                                                 
+/// Hard
 ///
-/// Say you have an array for which the ith element is the price of a given 
-/// stock on day i.
-/// Design an algorithm to find the maximum profit. You may complete at most 
-/// two transactions.
-/// Note: You may not engage in multiple transactions at the same time 
+/// You are given an array prices where prices[i] is the price of a given 
+/// stock on the ith day.
+///
+/// Find the maximum profit you can achieve. You may complete at most two 
+/// transactions.
+///
+/// Note: You may not engage in multiple transactions simultaneously 
 /// (i.e., you must sell the stock before you buy again).
 ///
 /// Example 1:
-/// Input: [3,3,5,0,0,3,1,4]
+/// Input: prices = [3,3,5,0,0,3,1,4]
 /// Output: 6
 /// Explanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), 
-///              profit = 3-0 = 3. Then buy on day 7 (price = 1) and sell on 
-///              day 8 (price = 4), profit = 4-1 = 3.
+/// profit = 3-0 = 3.
+/// Then buy on day 7 (price = 1) and sell on day 8 (price = 4), 
+/// profit = 4-1 = 3.
 ///
 /// Example 2:
-/// Input: [1,2,3,4,5]
+/// Input: prices = [1,2,3,4,5]
 /// Output: 4
 /// Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), 
-///              profit = 5-1 = 4.
-///
+/// profit = 5-1 = 4.
 /// Note that you cannot buy on day 1, buy on day 2 and sell them later, 
 /// as you are engaging multiple transactions at the same time. You must 
 /// sell before buying again.
 ///
 /// Example 3:
-/// Input: [7,6,4,3,1]
+/// Input: prices = [7,6,4,3,1]
 /// Output: 0
 /// Explanation: In this case, no transaction is done, i.e. max profit = 0.
+///
+/// Example 4:
+/// Input: prices = [1]
+/// Output: 0
+/// 
+/// Constraints:
+/// 1. 1 <= prices.length <= 10^5
+/// 2. 0 <= prices[i] <= 10^5
 /// </summary>
 int LeetCodeDP::maxProfitTwoTxns(vector<int>& prices)
 {
-    if (prices.size() == 0)
+    vector<int> prev_buy(2), prev_sell(2);
+    vector<int> buy(2), sell(2);
+    // This avoid us to special treat on first day buy
+    prev_buy[0] = prev_buy[1] = INT_MIN;
+    int result = 0;
+    for (size_t i = 0; i < prices.size(); i++)
     {
-        return 0;
+        buy[0] = max(prev_buy[0], 0 - prices[i]);
+        sell[0] = max(prev_sell[0], prev_buy[0] + prices[i]);
+        buy[1] = max(prev_buy[1], prev_sell[0] - prices[i]);
+        sell[1] = max(prev_sell[1], prev_buy[1] + prices[i]);
+        result = max(result, max(sell[0], sell[1]));
+        prev_buy = buy;
+        prev_sell = sell;
     }
-    vector<int> balance(prices.size());
-    for (size_t s = 0; s < 2; s++)
-    {
-        int best_buy = INT_MIN;
-        int best_profit = 0;
-        for (size_t i = 0; i < prices.size(); i++)
-        {
-            best_buy = max(best_buy, balance[i] - prices[i]);
-            best_profit = max(best_profit, best_buy + prices[i]);
-            balance[i] = best_profit;
-        }
-    }
-    return balance[balance.size() - 1];
+    return result;
 }
 
 /// <summary>
@@ -637,7 +688,8 @@ bool LeetCodeDP::canCross(vector<int>& stones)
 /// <summary>
 /// Leet code #70. Climbing Stairs 
 /// You are climbing a stair case. It takes n steps to reach to the top.
-/// Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top? 
+/// Each time you can either climb 1 or 2 steps. In how many distinct 
+/// ways can you climb to the top? 
 /// </summary>
 int LeetCodeDP::climbStairs(int n)
 {
@@ -1354,13 +1406,38 @@ int LeetCodeDP::findMaxOneZeroForm(vector<string>& strs, int m, int n)
 }
 
 /// <summary>
-/// Leet code #276. Paint Fence     
+/// Leet Code 276. Paint Fence
+///                                                                 
+/// Medium
+///
+/// You are painting a fence of n posts with k different colors. You must 
+/// paint the posts following these rules:
+///
+/// Every post must be painted exactly one color.
+/// There cannot be three or more consecutive posts with the same color.
+/// Given the two integers n and k, return the number of ways you can paint
+/// the fence.
+///
+/// Example 1:
+/// Input: n = 3, k = 2
+/// Output: 6
+/// Explanation: All the possibilities are shown.
+/// Note that painting all the posts red or all the posts green is invalid 
+/// because there cannot be three posts in a row with the same color.
+///
+/// Example 2:
+/// Input: n = 1, k = 1
+/// Output: 1
+///
+/// Example 3:
+/// Input: n = 7, k = 2
+/// Output: 42
 /// 
-/// There is a fence with n posts, each post can be painted with one of the k colors.
-/// You have to paint all the posts such that no more than two adjacent fence posts have the same color. 
-/// Return the total number of ways you can paint the fence.
-/// Note:
-/// n and k are non-negative integers. 
+/// Constraints:
+/// 1. 1 <= n <= 50
+/// 2. 1 <= k <= 10^5
+/// 3. The testcases are generated such that the answer is in the range 
+///    [0, 2^31 - 1] for the given n and k.
 /// </summary>
 int LeetCodeDP::numWaysPaintFence(int n, int k)
 {
@@ -1468,13 +1545,13 @@ int LeetCodeDP::minCostII(vector<vector<int>>& costs)
     int result = 0;
     if (costs.empty() || costs[0].empty()) return result;
     int n = costs.size();
-    int k = costs[0].size();
+    int m = costs[0].size();
     vector<pair<int, int>> prev_cost = { { INT_MAX, -1 }, { INT_MAX, -1 } };
 
     for (int i = 0; i < n; i++)
     {
         vector<pair<int, int>> curr_cost = { { INT_MAX, -1 }, { INT_MAX, -1 } };
-        for (int j = 0; j < k; j++)
+        for (int j = 0; j < m; j++)
         {
             pair<int, int> cost = make_pair(costs[i][j], j);
             if (i > 0)
