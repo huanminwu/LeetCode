@@ -530,8 +530,6 @@ void TestLeetCode377(void)
     Logger::WriteMessage(nums);
     int result = leetCode.combinationSum4(nums, target);
     Logger::WriteMessage("Target = " + to_string(target) + ", Result = " + to_string(result));
-    result = leetCode.combinationSum4II(nums, target);
-    Logger::WriteMessage("Target = " + to_string(target) + ", Result = " + to_string(result));
 }
 
 void TestLeetCode1216(void)
@@ -2344,28 +2342,6 @@ void TestLeetCode1824(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode1751(void)
-{
-    Logger::WriteMessage("Test Leet Code 1751");
-    LeetCodeDP leetCode;
-    vector<vector<int>> events = { {1, 2, 4},{3, 4, 3},{2, 3, 1} };
-    int k = 2;
-    int result = leetCode.maxValue(events, k);
-    Logger::WriteMessage(events);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    events = { {1, 2, 4},{3, 4, 3},{2, 3, 10} };
-    k = 2;
-    result = leetCode.maxValue(events, k);
-    Logger::WriteMessage(events);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    events = { {1, 1, 1},{2, 2, 2},{3, 3, 3},{4, 4, 4} };
-    k = 3;
-    result = leetCode.maxValue(events, k);
-    Logger::WriteMessage(events);
-    Logger::WriteMessage("result = " + to_string(result));
-}
 
 void TestLeetCode1872(void)
 {
@@ -2599,8 +2575,145 @@ void TestLeetCode123(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1751(void)
+{
+    Logger::WriteMessage("Test Leet Code 1751");
+    LeetCodeDP leetCode;
+    vector<vector<int>> events = { {1, 2, 4},{3, 4, 3},{2, 3, 1} };
+    int k = 2;
+    int result = leetCode.maxValue(events, k);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    events = { {1, 2, 4},{3, 4, 3},{2, 3, 10} };
+    k = 2;
+    result = leetCode.maxValue(events, k);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    events = { {1, 1, 1},{2, 2, 2},{3, 3, 3},{4, 4, 4} };
+    k = 3;
+    result = leetCode.maxValue(events, k);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2008(void)
+{
+    Logger::WriteMessage("Test Leet Code 2008");
+    LeetCodeDP leetCode;
+    vector<vector<int>> rides = { {2,5,4},{1,5,1} };
+    int n = 5;
+    long long result = leetCode.maxTaxiEarnings(n, rides);
+    Logger::WriteMessage(rides);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    rides = { {1, 6, 1},{3, 10, 2},{10, 12, 3},{11, 12, 2},{12, 15, 2},{13, 18, 1} };
+    n = 20;
+    result = leetCode.maxTaxiEarnings(n, rides);
+    Logger::WriteMessage(rides);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2054(void)
+{
+    Logger::WriteMessage("Test Leet Code 2054");
+    LeetCodeDP leetCode;
+    vector<vector<int>> events = { {1, 3, 2},{4, 5, 2},{2, 4, 3} };
+    int result = leetCode.maxTwoEvents(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    events = { {1, 3, 2},{4, 5, 2},{1, 5, 5} };
+    result = leetCode.maxTwoEvents(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    events = { {1, 5, 3},{1, 5, 1},{6, 6, 5} };
+    result = leetCode.maxTwoEvents(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2036(void)
+{
+    Logger::WriteMessage("Test Leet Code 2036");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 3, -1, 1, 2 };
+    long long result = leetCode.maximumAlternatingSubarraySum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,2,2,2,2 };
+    result = leetCode.maximumAlternatingSubarraySum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1 };
+    result = leetCode.maximumAlternatingSubarraySum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode628(void)
+{
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 2, 3, 4 };
+    Logger::WriteMessage(nums);
+    int result = leetCode.maximumProduct(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -1, -2, -3, -4 };
+    Logger::WriteMessage(nums);
+    result = leetCode.maximumProduct(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1125(void)
+{
+    Logger::WriteMessage("Test Leet Code 1125");
+    LeetCodeDP leetCode;
+    vector<string> req_skills = { "java", "nodejs", "reactjs" };
+    vector<vector<string>> people = { {"java"},{"nodejs"},{"nodejs", "reactjs"} };
+    vector<int> result = leetCode.smallestSufficientTeam(req_skills, people);
+    Logger::WriteMessage(req_skills);
+    Logger::WriteMessage(people);
+    Logger::WriteMessage(result);
+
+    req_skills = { "algorithms","math","java","reactjs","csharp","aws" };
+    people =
+    {
+        {"algorithms", "math", "java"},{"algorithms", "math", "reactjs"},
+        {"java","csharp","aws"},{"reactjs","csharp"},
+        {"csharp","math"},{"aws","java"}
+    };
+    result = leetCode.smallestSufficientTeam(req_skills, people);
+    Logger::WriteMessage(req_skills);
+    Logger::WriteMessage(people);
+    Logger::WriteMessage(result);
+
+    req_skills =
+    {
+        "zp", "jpphhnhwpw", "pscleb", "arn", "acrsxqvus", "fseqih", "fpqbjbbxglivyonn", "cjozlkyodt", "mvtwffgkhjrtibto", "kumdvfwsvrht", "i", "s", "ucr", "oo", "yqkqkhhhwngyjrg", "odiwidzqw"
+    };
+    people =
+    {
+        {"acrsxqvus"}, { "zp" }, {}, { "fpqbjbbxglivyonn" }, {}, {}, { "kumdvfwsvrht" }, {}, { "oo" }, {}, { "fseqih" }, {}, { "arn" }, {}, {}, { "yqkqkhhhwngyjrg" }, {}, {}, {}, { "kumdvfwsvrht" }, { "s" }, {}, {}, { "zp","ucr" }, {}, { "pscleb" }, {}, {}, {}, {}, {}, {}, {}, { "jpphhnhwpw" }, {}, {}, {}, { "oo" }, {}, { "i" }, { "pscleb" }, {}, {}, {}, {}, {}, {}, { "i" }, {}, { "mvtwffgkhjrtibto","odiwidzqw" }, {}, { "cjozlkyodt","odiwidzqw" }, { "arn" }, {}, {}, { "acrsxqvus" }, {}, {}, {}, { "ucr" }
+    };
+    result = leetCode.smallestSufficientTeam(req_skills, people);
+    Logger::WriteMessage(req_skills);
+    Logger::WriteMessage(people);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1125();
+    TestLeetCode628();
+    TestLeetCode2036();
+    TestLeetCode2054();
+    TestLeetCode2008();
+    TestLeetCode1751();
     TestLeetCode123();
     TestLeetCode122();
     TestLeetCode1682();

@@ -957,20 +957,6 @@ void TestLeetCode600(void)
     Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
 }
 
-void TestLeetCode628(void)
-{
-    LeetCode leetCode;
-    vector<int> nums = { 1, 2, 3, 4 };
-    Logger::WriteMessage(nums);
-    int result = leetCode.maximumProduct(nums);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    nums = { -1, -2, -3, -4 };
-    Logger::WriteMessage(nums);
-    result = leetCode.maximumProduct(nums);
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
 void TestLeetCode634(void)
 {
     LeetCode leetCode;
@@ -2975,47 +2961,6 @@ void TestLeetCode1122(void)
     Logger::WriteMessage(result);
 }
 
-
-
-
-void TestLeetCode1125(void)
-{
-    Logger::WriteMessage("Test Leet Code 1125");
-    LeetCode leetCode;
-    vector<string> req_skills = { "java", "nodejs", "reactjs" };
-    vector<vector<string>> people = { {"java"},{"nodejs"},{"nodejs", "reactjs"} };
-    vector<int> result = leetCode.smallestSufficientTeam(req_skills, people);
-    Logger::WriteMessage(req_skills);
-    Logger::WriteMessage(people);
-    Logger::WriteMessage(result);
-
-    req_skills = { "algorithms","math","java","reactjs","csharp","aws" };
-    people =
-    {
-        {"algorithms", "math", "java"},{"algorithms", "math", "reactjs"},
-        {"java","csharp","aws"},{"reactjs","csharp"},
-        {"csharp","math"},{"aws","java"}
-    };
-    result = leetCode.smallestSufficientTeam(req_skills, people);
-    Logger::WriteMessage(req_skills);
-    Logger::WriteMessage(people);
-    Logger::WriteMessage(result);
-
-    req_skills =
-    {
-        "zp", "jpphhnhwpw", "pscleb", "arn", "acrsxqvus", "fseqih", "fpqbjbbxglivyonn", "cjozlkyodt", "mvtwffgkhjrtibto", "kumdvfwsvrht", "i", "s", "ucr", "oo", "yqkqkhhhwngyjrg", "odiwidzqw"
-    };
-    people =
-    {
-        {"acrsxqvus"}, { "zp" }, {}, { "fpqbjbbxglivyonn" }, {}, {}, { "kumdvfwsvrht" }, {}, { "oo" }, {}, { "fseqih" }, {}, { "arn" }, {}, {}, { "yqkqkhhhwngyjrg" }, {}, {}, {}, { "kumdvfwsvrht" }, { "s" }, {}, {}, { "zp","ucr" }, {}, { "pscleb" }, {}, {}, {}, {}, {}, {}, {}, { "jpphhnhwpw" }, {}, {}, {}, { "oo" }, {}, { "i" }, { "pscleb" }, {}, {}, {}, {}, {}, {}, { "i" }, {}, { "mvtwffgkhjrtibto","odiwidzqw" }, {}, { "cjozlkyodt","odiwidzqw" }, { "arn" }, {}, {}, { "acrsxqvus" }, {}, {}, {}, { "ucr" }
-    };
-    result = leetCode.smallestSufficientTeam(req_skills, people);
-    Logger::WriteMessage(req_skills);
-    Logger::WriteMessage(people);
-    Logger::WriteMessage(result);
-}
-
-
 void TestLeetCode1133(void)
 {
     Logger::WriteMessage("Test Leet Code 1133");
@@ -3186,7 +3131,6 @@ void main(int argc, char* argv[])
     TestLeetCode1135();
     TestLeetCode1133();
     TestLeetCode1129();
-    TestLeetCode1125();
     TestLeetCode1121();
     TestLeetCode1124();
     TestLeetCode1122();
@@ -3339,7 +3283,6 @@ void main(int argc, char* argv[])
     TestLeetCode635();
     TestLeetCode634();
     TestLeetCode629();
-    TestLeetCode628();
     TestLeetCode625();
     TestLeetCode604();
     TestLeetCode583();

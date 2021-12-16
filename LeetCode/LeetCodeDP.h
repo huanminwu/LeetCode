@@ -33,24 +33,33 @@ public:
     string longestPalindrome(string s);
 
     /// <summary>
-    /// Leet code #45. Jump Game II
-    /// 
-    /// Given an array of non-negative integers, you are initially positioned 
-    /// at the first index of the array.
+    /// Leet Code 45. Jump Game II
+    ///                                                                 
+    /// Medium
     ///
-    /// Each element in the array represents your maximum jump length at 
-    /// that position.
+    /// Given an array of non-negative integers nums, you are initially 
+    /// positioned at the first index of the array.
+    ///
+    /// Each element in the array represents your maximum jump length at that 
+    /// position.
     ///
     /// Your goal is to reach the last index in the minimum number of jumps.
     ///
-    /// Example:
-    ///
-    /// Input: [2,3,1,1,4]
-    /// Output: 2
-    /// Explanation: The minimum number of jumps to reach the last index is 2.
-    /// Jump 1 step from index 0 to 1, then 3 steps to the last index.
-    /// Note:
     /// You can assume that you can always reach the last index.
+    ///
+    /// Example 1:
+    /// Input: nums = [2,3,1,1,4]
+    /// Output: 2
+    /// Explanation: The minimum number of jumps to reach the last index is 2. 
+    /// Jump 1 step from index 0 to 1, then 3 steps to the last index.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,3,0,1,4]
+    /// Output: 2
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^4
+    /// 2. 0 <= nums[i] <= 1000
     /// </summary>
     int jump(vector<int>& nums);
 
@@ -1086,10 +1095,6 @@ public:
     /// </summary>
     int findMaxOneZeroForm(vector<string>& strs, int m, int n);
 
-    /// <summary>
-    /// Leet code #377. Combination Sum IV 
-    /// </summary>
-    int combinationSum4II(vector<int>& nums, int target);
 
     /// <summary>
     /// Leet code #377. Combination Sum IV 
@@ -1774,16 +1779,32 @@ public:
     int numDistinct(string s, string t);
 
     /// <summary>
-    /// Leet code #55. Jump Game 
+    /// Leet Code 55. Jump Game
+    ///                                                                 
+    /// Medium
     ///
-    /// Given an array of non-negative integers, you are initially positioned 
-    /// at the first index of the array. 
-    /// Each element in the array represents your maximum jump length at that 
-    /// position. 
-    /// Determine if you are able to reach the last index. 
-    /// For example:
-    /// A = [2,3,1,1,4], return true. 
-    /// A = [3,2,1,0,4], return false. 
+    /// You are given an integer array nums. You are initially positioned at 
+    /// the array's first index, and each element in the array represents 
+    /// your maximum jump length at that position.
+    ///
+    /// Return true if you can reach the last index, or false otherwise.
+    ///
+    /// Example 1:
+    /// Input: nums = [2,3,1,1,4]
+    /// Output: true
+    /// Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last 
+    /// index.
+    ///
+    /// Example 2:
+    /// Input: nums = [3,2,1,0,4]
+    /// Output: false
+    /// Explanation: You will always arrive at index 3 no matter what. Its 
+    /// maximum jump length is 0, which makes it impossible to reach the last 
+    /// index.
+    ///  
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^4
+    /// 2. 0 <= nums[i] <= 10^5
     /// </summary>
     bool canJump(vector<int>& nums);
 
@@ -4351,6 +4372,208 @@ public:
     /// 3. 0 <= k <= nums.length - 1
     /// </summary>
     int minSpaceWastedKResizing(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 2008. Maximum Earnings From Taxi
+    ///                                                                 
+    /// Medium
+    ///
+    /// There are n points on a road you are driving your taxi on. The n 
+    /// points on the road are labeled from 1 to n in the direction you 
+    /// are going, and you want to drive from point 1 to point n to make 
+    /// money by picking up passengers. You cannot change the direction 
+    /// of the taxi.
+    ///
+    /// The passengers are represented by a 0-indexed 2D integer array 
+    /// rides, where rides[i] = [starti, endi, tipi] denotes the ith 
+    /// passenger requesting a ride from point starti to point endi who 
+    /// is willing to give a tipi dollar tip.
+    ///
+    /// For each passenger i you pick up, you earn endi - starti + tipi 
+    /// dollars. You may only drive at most one passenger at a time.
+    ///
+    /// Given n and rides, return the maximum number of dollars you can 
+    /// earn by picking up the passengers optimally.
+    ///
+    /// Note: You may drop off a passenger and pick up a different 
+    /// passenger at the same point.
+    ///
+    /// Example 1:
+    ///
+    /// Input: n = 5, rides = [[2,5,4],[1,5,1]]
+    /// Output: 7
+    /// Explanation: We can pick up passenger 0 to earn 5 - 2 + 4 = 7 
+    /// dollars.
+    ///
+    /// Example 2:
+    ///
+    /// Input: n = 20, rides = [[1,6,1],[3,10,2],[10,12,3],[11,12,2],
+    /// [12,15,2],[13,18,1]]
+    /// Output: 20
+    /// Explanation: We will pick up the following passengers:
+    /// - Drive passenger 1 from point 3 to point 10 for a profit of 
+    ///   10 - 3 + 2 = 9 dollars.
+    /// - Drive passenger 2 from point 10 to point 12 for a profit 
+    ///   of 12 - 10 + 3 = 5 dollars.
+    /// - Drive passenger 5 from point 13 to point 18 for a profit 
+    ///   of 18 - 13 + 1 = 6 dollars.
+    /// We earn 9 + 5 + 6 = 20 dollars in total.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^5
+    /// 2. 1 <= rides.length <= 3 * 10^4
+    /// 3. rides[i].length == 3
+    /// 4. 1 <= starti < endi <= n
+    /// 5. 1 <= tipi <= 10^5
+    /// </summary>
+    long long maxTaxiEarnings(int n, vector<vector<int>>& rides);
+
+    /// <summary>
+    /// Leet Code 2054. Two Best Non-Overlapping Events
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given a 0-indexed 2D integer array of events where 
+    /// events[i] = [startTimei, endTimei, valuei]. The ith event 
+    /// starts at startTimei and ends at endTimei, and if you attend this 
+    /// event, you will receive a value of valuei. You can choose at most 
+    /// two non-overlapping events to attend such that the sum of their 
+    /// values is maximized.
+    ///
+    /// Return this maximum sum.
+    ///  
+    /// Note that the start time and end time is inclusive: that is, you 
+    /// cannot attend two events where one of them starts and the other 
+    /// ends at the same time. More specifically, if you attend an event 
+    /// with end time t, the next event must start at or after t + 1.
+    /// 
+    /// Example 1:
+    /// Input: events = [[1,3,2],[4,5,2],[2,4,3]]
+    /// Output: 4
+    /// Explanation: Choose the green events, 0 and 1 for a sum of 2 + 2 = 4.
+    ///
+    /// Example 2:
+    /// Example 1 Diagram
+    /// Input: events = [[1,3,2],[4,5,2],[1,5,5]]
+    /// Output: 5
+    /// Explanation: Choose event 2 for a sum of 5.
+    ///
+    /// Example 3:
+    /// Input: events = [[1,5,3],[1,5,1],[6,6,5]]
+    /// Output: 8
+    /// Explanation: Choose events 0 and 2 for a sum of 3 + 5 = 8.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= events.length <= 10^5
+    /// 2. events[i].length == 3
+    /// 3. 1 <= startTimei <= endTimei <= 10^9
+    /// 4. 1 <= valuei <= 10^6
+    /// </summary>
+    int maxTwoEvents(vector<vector<int>>& events);
+
+    /// <summary>
+    /// Leet Code 2036. Maximum Alternating Subarray Sum
+    ///                                                                 
+    /// Medium
+    ///
+    /// A subarray of a 0-indexed integer array is a contiguous non-empty 
+    /// sequence of elements within an array.
+    ///
+    /// The alternating subarray sum of a subarray that ranges from 
+    /// index i to j (inclusive, 0 <= i <= j < nums.length) is 
+    /// nums[i] - nums[i+1] + nums[i+2] - ... +/- nums[j].
+    ///
+    /// Given a 0-indexed integer array nums, return the maximum alternating 
+    /// subarray sum of any subarray of nums.
+    ///
+    /// Example 1:
+    /// Input: nums = [3,-1,1,2]
+    /// Output: 5
+    /// Explanation:
+    /// The subarray [3,-1,1] has the largest alternating subarray sum.
+    /// The alternating subarray sum is 3 - (-1) + 1 = 5.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,2,2,2,2]
+    /// Output: 2
+    /// Explanation:
+    /// The subarrays [2], [2,2,2], and [2,2,2,2,2] have the largest 
+    /// alternating subarray sum.
+    /// The alternating subarray sum of [2] is 2.
+    /// The alternating subarray sum of [2,2,2] is 2 - 2 + 2 = 2.
+    /// The alternating subarray sum of [2,2,2,2,2] is 2 - 2 + 2 - 2 + 2 = 2.
+    ///
+    /// Example 3:
+    /// Input: nums = [1]
+    /// Output: 1
+    /// Explanation:
+    /// There is only one non-empty subarray, which is [1].
+    /// The alternating subarray sum is 1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^5 <= nums[i] <= 10^5
+    /// </summary>
+    long long maximumAlternatingSubarraySum(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #628. Maximum Product of Three Numbers
+    /// 
+    /// Given an integer array, find three numbers whose product is maximum 
+    /// and output the maximum product.
+    ///
+    /// Example 1:
+    /// Input: [1,2,3]
+    /// Output: 6
+    ///
+    /// Example 2:
+    /// Input: [1,2,3,4]
+    /// Output: 24
+    ///
+    /// Note:
+    /// 1.The length of the given array will be in range [3,104] and all 
+    ///   elements are in the range [-1000, 1000].
+    /// 2.Multiplication of any three numbers in the input won't exceed the 
+    ///   range of 32-bit signed integer.
+    /// </summary>
+    int maximumProduct(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #1125. Smallest Sufficient Team
+    /// 
+    /// In a project, you have a list of required skills req_skills, and a list 
+    /// of people.  The i-th person people[i] contains a list of skills that 
+    /// person has.
+    /// Consider a sufficient team: a set of people such that for every required
+    /// skill in req_skills, there is at least one person in the team who has 
+    /// that skill.  We can represent these teams by the index of each person: 
+    /// for example, team = [0, 1, 3] represents the people with skills people[0], 
+    /// people[1], and people[3].
+    /// Return any sufficient team of the smallest possible size, represented by 
+    /// the index of each person.
+    /// You may return the answer in any order.  It is guaranteed an answer exists.
+    /// 
+    /// Example 1:
+    /// Input: req_skills = ["java","nodejs","reactjs"], 
+    /// people = [["java"],["nodejs"],["nodejs","reactjs"]]
+    /// Output: [0,2]
+    ///
+    /// Example 2:
+    /// Input: req_skills = ["algorithms","math","java","reactjs","csharp","aws"], 
+    /// people = [["algorithms","math","java"],["algorithms","math","reactjs"],
+    /// ["java","csharp","aws"],["reactjs","csharp"],
+    /// ["csharp","math"],["aws","java"]]
+    /// Output: [1,2]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= req_skills.length <= 16
+    /// 2. 1 <= people.length <= 60
+    /// 3. 1 <= people[i].length, req_skills[i].length, people[i][j].length <= 16
+    /// 4. Elements of req_skills and people[i] are (respectively) distinct.
+    /// 5. req_skills[i][j], people[i][j][k] are lowercase English letters.
+    /// 6. It is guaranteed a sufficient team exists.
+    /// </summary>
+    vector<int> smallestSufficientTeam(vector<string>& req_skills, vector<vector<string>>& people);
 };
 
 

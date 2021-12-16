@@ -538,80 +538,95 @@ bool LeetCode::isInterleave(string s1, string s2, string s3)
 }
 
 /// <summary>
-/// Leet code #55. Jump Game 
+/// Leet Code 55. Jump Game
+///                                                                 
+/// Medium
 ///
-/// Given an array of non-negative integers, you are initially positioned 
-/// at the first index of the array. 
-/// Each element in the array represents your maximum jump length at that 
-/// position. 
-/// Determine if you are able to reach the last index. 
-/// For example:
-/// A = [2,3,1,1,4], return true. 
-/// A = [3,2,1,0,4], return false. 
+/// You are given an integer array nums. You are initially positioned at 
+/// the array's first index, and each element in the array represents 
+/// your maximum jump length at that position.
+///
+/// Return true if you can reach the last index, or false otherwise.
+///
+/// Example 1:
+/// Input: nums = [2,3,1,1,4]
+/// Output: true
+/// Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last 
+/// index.
+///
+/// Example 2:
+/// Input: nums = [3,2,1,0,4]
+/// Output: false
+/// Explanation: You will always arrive at index 3 no matter what. Its 
+/// maximum jump length is 0, which makes it impossible to reach the last 
+/// index.
+///  
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^4
+/// 2. 0 <= nums[i] <= 10^5
 /// </summary>
 bool LeetCodeDP::canJump(vector<int>& nums)
 {
-    if (nums.size() <= 1) return true;
-    vector<int> collection;
-    size_t index = 0;
-    collection.push_back(0);
-    // we look at every established position. from starting position of 0
-    while (index < collection.size())
+    int right_most = 0;
+    int index = 0;
+    while (index < right_most + 1 && right_most < (int)nums.size() - 1)
     {
-        int last_stop = collection.back();
-        // here we do a small optimization, only if we jump out of 
-        // farthest position we will care, because other wise, anyway we will 
-        // such position later.
-        for (int i = last_stop + 1; i <= collection[index] + nums[collection[index]]; i++)
-        {
-            collection.push_back(i);
-            if (i == nums.size() - 1)
-            {
-                return true;
-            }
-        }
+        right_most = max(right_most, index + nums[index]);
         index++;
     }
-    return false;
+    if (right_most >= (int)nums.size() - 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 /// <summary>
-/// Leet code #45. Jump Game II
-/// 
-/// Given an array of non-negative integers, you are initially positioned 
-/// at the first index of the array.
+/// Leet Code 45. Jump Game II
+///                                                                 
+/// Medium
 ///
-/// Each element in the array represents your maximum jump length at 
-/// that position.
+/// Given an array of non-negative integers nums, you are initially 
+/// positioned at the first index of the array.
+///
+/// Each element in the array represents your maximum jump length at that 
+/// position.
 ///
 /// Your goal is to reach the last index in the minimum number of jumps.
 ///
-/// Example:
-///
-/// Input: [2,3,1,1,4]
-/// Output: 2
-/// Explanation: The minimum number of jumps to reach the last index is 2.
-/// Jump 1 step from index 0 to 1, then 3 steps to the last index.
-/// Note:
 /// You can assume that you can always reach the last index.
+///
+/// Example 1:
+/// Input: nums = [2,3,1,1,4]
+/// Output: 2
+/// Explanation: The minimum number of jumps to reach the last index is 2. 
+/// Jump 1 step from index 0 to 1, then 3 steps to the last index.
+///
+/// Example 2:
+/// Input: nums = [2,3,0,1,4]
+/// Output: 2
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^4
+/// 2. 0 <= nums[i] <= 1000
 /// </summary>
 int LeetCodeDP::jump(vector<int>& nums)
 {
-    if (nums.size() <= 1) return 0;
-    int first = 0;
-    int last = 0;
-    int next = last;
+    int end = 0;
+    int index = 0;
     int result = 0;
-    while (last < (int)nums.size() - 1)
+    while (end < (int)nums.size() - 1)
     {
+        int right = end;
         result++;
-        for (int i = first; i < last + 1; i++)
+        while (index <= right)
         {
-            next = max(next, nums[i] + i);
+            end = max(end, index + nums[index]);
+            index++;
         }
-        first = min(last + 1, next);
-        if (next <= last) return -1;
-        last = next;
     }
     return result;
 }
@@ -1325,29 +1340,6 @@ int LeetCodeDP::combinationSum4(vector<int>& nums, int target)
             else
             {
                 sum[i] += sum[i - nums[j]];
-            }
-        }
-    }
-    return sum[target];
-}
-
-/// <summary>
-/// Leet code #377. Combination Sum IV 
-/// </summary>
-int LeetCodeDP::combinationSum4II(vector<int>& nums, int target)
-{
-    vector<size_t> sum(target + 1);
-    sum[0] = 1;
-    for (int i = 0; i <= target; i++)
-    {
-        // empty slot no need to calculate
-        if (sum[i] == 0) continue;
-        for (size_t j = 0; j < nums.size(); j++)
-        {
-            // protect not out of boundary
-            if (i + nums[j] <= target)
-            {
-                sum[i + nums[j]] += sum[i];
             }
         }
     }
@@ -2397,7 +2389,7 @@ int LeetCode::findIntegers(int num)
 /// 2.Multiplication of any three numbers in the input won't exceed the 
 ///   range of 32-bit signed integer.
 /// </summary>
-int LeetCode::maximumProduct(vector<int>& nums)
+int LeetCodeDP::maximumProduct(vector<int>& nums)
 {
     vector<pair<int, int>> product_array = vector<pair<int, int>>(3, make_pair(1, 1));
     for (size_t i = 0; i < nums.size(); i++)
@@ -6627,7 +6619,7 @@ int LeetCodeDP::minHeightShelves(vector<vector<int>>& books, int shelf_width)
 /// 5. req_skills[i][j], people[i][j][k] are lowercase English letters.
 /// 6. It is guaranteed a sufficient team exists.
 /// </summary>
-vector<int> LeetCode::smallestSufficientTeam(vector<string>& req_skills, vector<vector<string>>& people)
+vector<int> LeetCodeDP::smallestSufficientTeam(vector<string>& req_skills, vector<vector<string>>& people)
 {
     unordered_map<string, int> skill_ids;
     size_t n = req_skills.size();
@@ -11683,43 +11675,50 @@ int LeetCodeDP::minSideJumps(vector<int>& obstacles)
 /// </summary>
 int LeetCodeDP::maxValue(vector<vector<int>>& events, int k)
 {
-    sort
-    (
-        events.begin(), events.end(),
-        [](vector<int>& a, vector<int>& b) -> bool
-        {
-            return a[1] < b[1];
-        }
-    );
-    map<int, vector<int>> history_events;
-    history_events[0] = { 0 };
+    map<int, vector<int>> event_values;
+    sort(events.begin(), events.end());
+    vector<int> prev_event = { 0 };
+    int result = 0;
     for (size_t i = 0; i < events.size(); i++)
     {
-        int start = 0 - events[i][0];
-        int end = 0 - events[i][1];
-        auto prev = history_events.upper_bound(start);
-        auto curr = history_events[end];
-        for (size_t j = 0; j < prev->second.size() + 1; j++)
+        int start = events[i][0];
+        int end = events[i][1];
+        int value = events[i][2];
+
+        // collect all previous event maximum values
+        while (!event_values.empty() && event_values.begin()->first < start)
         {
-            if (j > (size_t)k) break;
-            if (j >= curr.size()) curr.push_back(0);
-            if (j == 0) curr[j] = 0;
-            else curr[j] = max(curr[j], prev->second[j - 1] + events[i][2]);
+            auto itr = event_values.begin();
+            for (size_t j = 0; j < itr->second.size(); j++)
+            {
+                if (j >= prev_event.size())
+                {
+                    prev_event.push_back(itr->second[j]);
+                }
+                else
+                {
+                    prev_event[j] = max(prev_event[j], itr->second[j]);
+                }
+            }
+            event_values.erase(event_values.begin());
         }
-        prev = history_events.upper_bound(end);
-        for (size_t j = 0; j < prev->second.size(); j++)
+
+        if (event_values.count(end) == 0)
         {
-            if (j > (size_t)k) break;
-            if (j >= curr.size()) curr.push_back(0);
-            curr[j] = max(curr[j], prev->second[j]);
+            event_values[end] = { 0 };
         }
-        history_events[end] = curr;
-    }
-    int result = 0;
-    auto itr = history_events.begin();
-    for (size_t i = 0; i < itr->second.size(); i++)
-    {
-        result = max(result, itr->second[i]);
+        for (int j = 0; (j < prev_event.size() && j < k); j++)
+        {
+            if (j + 1 >= event_values[end].size())
+            {
+                event_values[end].push_back(prev_event[j] + value);
+            }
+            else
+            {
+                event_values[end][j+1] = max(event_values[end][j + 1], prev_event[j] + value);
+            }
+            result = max(result, event_values[end][j + 1]);
+        }
     }
     return result;
 }
@@ -12454,5 +12453,208 @@ int LeetCodeDP::minSpaceWastedKResizing(vector<int>& nums, int k)
     }
     return dp[n - 1][k];
 }
+
+/// <summary>
+/// Leet Code 2008. Maximum Earnings From Taxi
+///                                                                 
+/// Medium
+///
+/// There are n points on a road you are driving your taxi on. The n 
+/// points on the road are labeled from 1 to n in the direction you 
+/// are going, and you want to drive from point 1 to point n to make 
+/// money by picking up passengers. You cannot change the direction 
+/// of the taxi.
+///
+/// The passengers are represented by a 0-indexed 2D integer array 
+/// rides, where rides[i] = [starti, endi, tipi] denotes the ith 
+/// passenger requesting a ride from point starti to point endi who 
+/// is willing to give a tipi dollar tip.
+///
+/// For each passenger i you pick up, you earn endi - starti + tipi 
+/// dollars. You may only drive at most one passenger at a time.
+///
+/// Given n and rides, return the maximum number of dollars you can 
+/// earn by picking up the passengers optimally.
+///
+/// Note: You may drop off a passenger and pick up a different 
+/// passenger at the same point.
+///
+/// Example 1:
+///
+/// Input: n = 5, rides = [[2,5,4],[1,5,1]]
+/// Output: 7
+/// Explanation: We can pick up passenger 0 to earn 5 - 2 + 4 = 7 
+/// dollars.
+///
+/// Example 2:
+///
+/// Input: n = 20, rides = [[1,6,1],[3,10,2],[10,12,3],[11,12,2],
+/// [12,15,2],[13,18,1]]
+/// Output: 20
+/// Explanation: We will pick up the following passengers:
+/// - Drive passenger 1 from point 3 to point 10 for a profit of 
+///   10 - 3 + 2 = 9 dollars.
+/// - Drive passenger 2 from point 10 to point 12 for a profit 
+///   of 12 - 10 + 3 = 5 dollars.
+/// - Drive passenger 5 from point 13 to point 18 for a profit 
+///   of 18 - 13 + 1 = 6 dollars.
+/// We earn 9 + 5 + 6 = 20 dollars in total.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// 2. 1 <= rides.length <= 3 * 10^4
+/// 3. rides[i].length == 3
+/// 4. 1 <= starti < endi <= n
+/// 5. 1 <= tipi <= 10^5
+/// </summary>
+long long LeetCodeDP::maxTaxiEarnings(int n, vector<vector<int>>& rides)
+{
+    long long prev = 0;
+    int index = 0;
+    vector<long long> dp(n + 1);
+    long long result = 0;
+    sort(rides.begin(), rides.end());
+    for (size_t i = 0; i < rides.size(); i++)
+    {
+        while (index <= rides[i][0])
+        {
+            prev = max(prev, dp[index]);
+            index++;
+        }
+        int start = rides[i][0];
+        int end = rides[i][1];
+        int tip = rides[i][2];
+        dp[end] = max(dp[end], prev + (long long)end - (long long)start + (long long)tip);
+        result = max(result, dp[end]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2054. Two Best Non-Overlapping Events
+///                                                                 
+/// Medium
+///
+/// You are given a 0-indexed 2D integer array of events where 
+/// events[i] = [startTimei, endTimei, valuei]. The ith event 
+/// starts at startTimei and ends at endTimei, and if you attend this 
+/// event, you will receive a value of valuei. You can choose at most 
+/// two non-overlapping events to attend such that the sum of their 
+/// values is maximized.
+///
+/// Return this maximum sum.
+///  
+/// Note that the start time and end time is inclusive: that is, you 
+/// cannot attend two events where one of them starts and the other 
+/// ends at the same time. More specifically, if you attend an event 
+/// with end time t, the next event must start at or after t + 1.
+/// 
+/// Example 1:
+/// Input: events = [[1,3,2],[4,5,2],[2,4,3]]
+/// Output: 4
+/// Explanation: Choose the green events, 0 and 1 for a sum of 2 + 2 = 4.
+///
+/// Example 2:
+/// Example 1 Diagram
+/// Input: events = [[1,3,2],[4,5,2],[1,5,5]]
+/// Output: 5
+/// Explanation: Choose event 2 for a sum of 5.
+///
+/// Example 3:
+/// Input: events = [[1,5,3],[1,5,1],[6,6,5]]
+/// Output: 8
+/// Explanation: Choose events 0 and 2 for a sum of 3 + 5 = 8.
+/// 
+/// Constraints:
+/// 1. 2 <= events.length <= 10^5
+/// 2. events[i].length == 3
+/// 3. 1 <= startTimei <= endTimei <= 10^9
+/// 4. 1 <= valuei <= 10^6
+/// </summary>
+int LeetCodeDP::maxTwoEvents(vector<vector<int>>& events)
+{
+    sort(events.begin(), events.end());
+    map<int, int> dp;
+    dp[0] = 0;
+    int prev = 0;
+    int result = 0;
+    for (size_t i = 0; i < events.size(); i++)
+    {
+        while (!dp.empty() && dp.begin()->first < events[i][0])
+        {
+            prev = max(prev, dp.begin()->second);
+            dp.erase(dp.begin());
+        }
+        result = max(result, prev + events[i][2]);
+        dp[events[i][1]] = max(dp[events[i][1]], events[i][2]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2036. Maximum Alternating Subarray Sum
+///                                                                 
+/// Medium
+///
+/// A subarray of a 0-indexed integer array is a contiguous non-empty 
+/// sequence of elements within an array.
+///
+/// The alternating subarray sum of a subarray that ranges from 
+/// index i to j (inclusive, 0 <= i <= j < nums.length) is 
+/// nums[i] - nums[i+1] + nums[i+2] - ... +/- nums[j].
+///
+/// Given a 0-indexed integer array nums, return the maximum alternating 
+/// subarray sum of any subarray of nums.
+///
+/// Example 1:
+/// Input: nums = [3,-1,1,2]
+/// Output: 5
+/// Explanation:
+/// The subarray [3,-1,1] has the largest alternating subarray sum.
+/// The alternating subarray sum is 3 - (-1) + 1 = 5.
+///
+/// Example 2:
+/// Input: nums = [2,2,2,2,2]
+/// Output: 2
+/// Explanation:
+/// The subarrays [2], [2,2,2], and [2,2,2,2,2] have the largest 
+/// alternating subarray sum.
+/// The alternating subarray sum of [2] is 2.
+/// The alternating subarray sum of [2,2,2] is 2 - 2 + 2 = 2.
+/// The alternating subarray sum of [2,2,2,2,2] is 2 - 2 + 2 - 2 + 2 = 2.
+///
+/// Example 3:
+/// Input: nums = [1]
+/// Output: 1
+/// Explanation:
+/// There is only one non-empty subarray, which is [1].
+/// The alternating subarray sum is 1.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. -10^5 <= nums[i] <= 10^5
+/// </summary>
+long long LeetCodeDP::maximumAlternatingSubarraySum(vector<int>& nums)
+{
+    long long prev_positive = 0;
+    long long prev_negative = 0;
+    long long result = LONG_MIN;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        long long positive_sum = max(prev_negative + nums[i], (long long)nums[i]);
+        result = max(result, positive_sum);
+        // first elment can not have negative sum
+        if (i > 0)
+        {
+            long long negative_sum = prev_positive - nums[i];
+            result = max(result, negative_sum);
+            prev_negative = negative_sum;
+        }
+        prev_positive = positive_sum;
+    
+    }
+    return result;
+}
+
 #pragma endregion
 
