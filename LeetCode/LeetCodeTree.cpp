@@ -10035,7 +10035,7 @@ int LeetCodeTree::lowestCommonAncestorIV(TreeNode* node, unordered_set<int>& sub
         count++;
     }
     count += lowestCommonAncestorIV(node->left, subtree, result);
-    if (count < subtree.size())
+    if (count < (int)subtree.size())
     {
         count += lowestCommonAncestorIV(node->right, subtree, result);
     }
@@ -10106,5 +10106,97 @@ TreeNode* LeetCodeTree::lowestCommonAncestorIV(TreeNode* root, vector<TreeNode*>
     return result;
 }
 
+/// <summary>
+/// Leet Code 2096. Step-By-Step Directions From a Binary Tree Node to 
+///                 Another
+/// </summary>
+bool LeetCodeTree::getDirections(TreeNode* node, int target, string& path)
+{
+    if (node == nullptr) return false;
+    if (node->val == target) return true;
+    if (getDirections(node->left, target, path))
+    {
+        path.push_back('L');
+        return true;
+    }
+    else if (getDirections(node->right, target, path))
+    {
+        path.push_back('R');
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
+/// <summary>
+/// Leet Code 2096. Step-By-Step Directions From a Binary Tree Node to 
+///                 Another
+///                                                                 
+/// Medium
+///
+/// You are given the root of a binary tree with n nodes. Each node is 
+/// uniquely assigned a value from 1 to n. You are also given an integer 
+/// startValue representing the value of the start node s, and a 
+/// different integer destValue representing the value of the destination 
+/// node t.
+/// Find the shortest path starting from node s and ending at node t. 
+/// Generate step-by-step directions of such path as a string consisting 
+/// of only the uppercase letters 'L', 'R', and 'U'. Each letter 
+/// indicates a specific direction:
+///
+/// 'L' means to go from a node to its left child node.
+/// 'R' means to go from a node to its right child node.
+/// 'U' means to go from a node to its parent node.
+/// Return the step-by-step directions of the shortest path from node 
+/// s to node t.
+/// 
+/// Example 1:
+/// Input: root = [5,1,2,3,null,6,4], startValue = 3, destValue = 6
+/// Output: "UURL"
+/// Explanation: The shortest path is: 3 -> 1 -> 5 -> 2 -> 6.
+///
+/// Example 2:
+/// Input: root = [2,1], startValue = 2, destValue = 1
+/// Output: "L"
+/// Explanation: The shortest path is: 2 -> 1.
+///
+/// Constraints:
+/// The number of nodes in the tree is n.
+/// 1. 2 <= n <= 10^5
+/// 2. 1 <= Node.val <= n
+/// 3. All the values in the tree are unique.
+/// 4. 1 <= startValue, destValue <= n
+/// 5. startValue != destValue
+/// </summary>
+string LeetCodeTree::getDirections(TreeNode* root, int startValue, int destValue)
+{
+    string startPath, destPath, result;
+    getDirections(root, startValue, startPath);
+    getDirections(root, destValue, destPath);
+    while (!startPath.empty() && !destPath.empty())
+    {
+        if (startPath.back() == destPath.back())
+        {
+            startPath.pop_back();
+            destPath.pop_back();
+        }
+        else
+        {
+            break;
+        }
+    }
+    while (!startPath.empty())
+    {
+        result.push_back('U');
+        startPath.pop_back();
+    }
+    while (!destPath.empty())
+    {
+        result.push_back(destPath.back());
+        destPath.pop_back();
+    }
+    return result;
+}
 #pragma endregion

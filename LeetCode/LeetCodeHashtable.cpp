@@ -3804,7 +3804,7 @@ int LeetCodeHashtable::countQuadruplets(vector<int>& nums)
             if (pairs.count(sum) == 0) continue;
             for (size_t k = 0; k < pairs[sum].size(); k++)
             {
-                if (pairs[sum][k].second >= i) continue;
+                if (pairs[sum][k].second >= (int)i) continue;
                 result++;
             }
         }

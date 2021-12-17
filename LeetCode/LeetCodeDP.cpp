@@ -11707,9 +11707,9 @@ int LeetCodeDP::maxValue(vector<vector<int>>& events, int k)
         {
             event_values[end] = { 0 };
         }
-        for (int j = 0; (j < prev_event.size() && j < k); j++)
+        for (int j = 0; (j < (int)prev_event.size() && j < k); j++)
         {
-            if (j + 1 >= event_values[end].size())
+            if (j + 1 >= (int)event_values[end].size())
             {
                 event_values[end].push_back(prev_event[j] + value);
             }

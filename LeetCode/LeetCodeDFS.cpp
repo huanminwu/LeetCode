@@ -7646,7 +7646,7 @@ long long LeetCodeDFS::kMirrorGenerate(int digit, int n, int k, long long first_
     long long result = 0;
     for (int i = 0; n > 0 && i < 10; ++i)
     {
-        for (int j = 0; n > 0 && j < mirror1.size(); ++j)
+        for (int j = 0; n > 0 && j < (int)mirror1.size(); ++j)
         {
             mirror.push_back(first_mul * i + mirror1[j] * 10 + i);
             if (i != 0 && kMirrorisMirror(mirror.back(), k))
@@ -7925,6 +7925,7 @@ vector<int> LeetCodeDFS::findEvenNumbers(vector<int>& digits)
     findEvenNumbers(digits, visited, 0, result);
     return result;
 }
+
 #pragma endregion
 
 

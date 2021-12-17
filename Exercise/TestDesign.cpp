@@ -3957,17 +3957,17 @@ void TestLeetCode2043(void)
         }
         else if (commands[i] == "withdraw")
         {
-            bool ret = bank->withdraw(parameters[i][0], parameters[i][1]);
+            bool ret = bank->withdraw((int)parameters[i][0], parameters[i][1]);
             result.push_back((string)(ret ? "true" : "false"));
         }
         else if (commands[i] == "transfer")
         {
-            bool ret = bank->transfer(parameters[i][0], parameters[i][1], parameters[i][2]);
+            bool ret = bank->transfer((int)parameters[i][0], (int)parameters[i][1], parameters[i][2]);
             result.push_back((string)(ret ? "true" : "false"));
         }
         else if (commands[i] == "deposit")
         {
-            bool ret = bank->deposit(parameters[i][0], parameters[i][1]);
+            bool ret = bank->deposit((int)parameters[i][0], parameters[i][1]);
             result.push_back((string)(ret ? "true" : "false"));
         }
     }

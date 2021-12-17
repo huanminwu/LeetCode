@@ -6373,8 +6373,162 @@ void TestLeetCode2073(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1868(void)
+{
+    Logger::WriteMessage("Test Leet Code 1868");
+    LeetCodeArray leetCode;
+    vector<vector<int>> encoded1 = { {1, 3},{2, 3} };
+    vector<vector<int>> encoded2 = { {6, 3},{3, 3} };
+    vector<vector<int>> result = leetCode.findRLEArray(encoded1, encoded2);
+    Logger::WriteMessage(encoded1);
+    Logger::WriteMessage(encoded2);
+    Logger::WriteMessage(result);
+
+    encoded1 = { {1, 3},{2, 1},{3, 2} };
+    encoded2 = { {2, 3},{3, 3} };
+    result = leetCode.findRLEArray(encoded1, encoded2);
+    Logger::WriteMessage(encoded1);
+    Logger::WriteMessage(encoded2);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1885(void)
+{
+    Logger::WriteMessage("Test Leet Code 1885");
+    LeetCodeArray leetCode;
+    vector<int> nums1 = { 2, 1, 2, 1 };
+    vector<int> nums2 = { 1, 2, 1, 2 };
+    long long result = leetCode.countPairs(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,10,6,2 };
+    nums2 = { 1,4,1,5 };
+    result = leetCode.countPairs(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1940(void)
+{
+    Logger::WriteMessage("Test Leet Code 1940");
+    LeetCodeArray leetCode;
+    vector<vector<int>> arrays = { {1, 3, 4}, {1, 4, 7, 9} };
+    vector<int> result = leetCode.longestCommonSubsequence(arrays);
+    Logger::WriteMessage(arrays);
+    Logger::WriteMessage(result);
+
+    arrays = { {2, 3, 6, 8}, {1, 2, 3, 5, 6, 7, 10}, {2, 3, 4, 6, 9} };
+    result = leetCode.longestCommonSubsequence(arrays);
+    Logger::WriteMessage(arrays);
+    Logger::WriteMessage(result);
+
+    arrays = { {1, 2, 3, 4, 5}, {6, 7, 8} };
+    result = leetCode.longestCommonSubsequence(arrays);
+    Logger::WriteMessage(arrays);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2007(void)
+{
+    Logger::WriteMessage("Test Leet Code 2007");
+    LeetCodeArray leetCode;
+    vector<int> changed = { 1, 3, 4, 2, 6, 8 };
+    vector<int> result = leetCode.findOriginalArray(changed);
+    Logger::WriteMessage(changed);
+    Logger::WriteMessage(result);
+
+    changed = { 6,3,0,1 };
+    result = leetCode.findOriginalArray(changed);
+    Logger::WriteMessage(changed);
+    Logger::WriteMessage(result);
+
+    changed = { 1 };
+    result = leetCode.findOriginalArray(changed);
+    Logger::WriteMessage(changed);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2099(void)
+{
+    Logger::WriteMessage("Test Leet Code 2099");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 1, 3, 3 };
+    int k = 2;
+    vector<int> result = leetCode.maxSubsequence(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { -1,-2,3,4 };
+    k = 3;
+    result = leetCode.maxSubsequence(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 3,4,3,3 };
+    k = 2;
+    result = leetCode.maxSubsequence(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2103(void)
+{
+    Logger::WriteMessage("Test Leet Code 2103");
+    LeetCodeArray leetCode;
+    string rings = "B0B6G0R6R0R6G9";
+    int result = leetCode.countPoints(rings);
+    Logger::WriteMessage("rings = " + rings + "; result = " + to_string(result));
+
+    rings = "B0R0G0R9R0B0G0";
+    result = leetCode.countPoints(rings);
+    Logger::WriteMessage("rings = " + rings + "; result = " + to_string(result));
+
+    rings = "G4";
+    result = leetCode.countPoints(rings);
+    Logger::WriteMessage("rings = " + rings + "; result = " + to_string(result));
+}
+
+void TestLeetCode1983(void)
+{
+    Logger::WriteMessage("Test Leet Code 1983");
+    LeetCodeArray leetCode;
+    vector<int> nums1 = { 1, 1, 0, 1 };
+    vector<int> nums2 = { 0, 1, 1, 0 };
+    int result = leetCode.widestPairOfIndices(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 0,1 };
+    nums2 = { 1,1 };
+    result = leetCode.widestPairOfIndices(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 0 };
+    nums2 = { 1 };
+    result = leetCode.widestPairOfIndices(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1983();
+    TestLeetCode2103();
+    TestLeetCode2099();
+    TestLeetCode2007();
+    TestLeetCode1940();
+    TestLeetCode1885();
+    TestLeetCode1868();
     TestLeetCode2073();
     TestLeetCode2017();
     TestLeetCode2086();

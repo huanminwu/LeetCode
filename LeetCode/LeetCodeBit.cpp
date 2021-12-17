@@ -2330,7 +2330,7 @@ string LeetCodeBit::findDifferentBinaryString(vector<string>& nums)
     string result;
     for (size_t i = 0; i < nums.size(); i++)
     {
-        if (bit & (1 << nums.size() - 1 - i))
+        if (bit & (1 << (nums.size() - 1 - i)))
         {
             result.push_back('1');
         }

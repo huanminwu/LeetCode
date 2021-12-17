@@ -3328,6 +3328,7 @@ public:
     /// 2. 0 <= digits[i] <= 9
     /// </summary>
     vector<int> findEvenNumbers(vector<int>& digits);
+
 #pragma endregion
 };
 

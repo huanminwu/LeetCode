@@ -16043,7 +16043,7 @@ int LeetCodeString::scoreOfStudents(string s, vector<int>& answers)
                 dp[i / 2][i / 2].insert(s[i] - '0');
                 continue;
             }
-            for (int j = i; j < i + k; j += 2)
+            for (size_t j = i; j < i + k; j += 2)
             {
                 for (int x : dp[i / 2][j / 2])
                 {
@@ -16561,7 +16561,7 @@ string LeetCodeString::longestWordII(vector<string>& words)
             {
                 found = true;
                 hash_set.insert(words[i]);
-                if (length > result.size() || words[i] < result)
+                if (length > (int)result.size() || words[i] < result)
                 {
                     result = words[i];
                 }

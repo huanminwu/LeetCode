@@ -11417,7 +11417,7 @@ bool LeetCodeGraph::checkMove(vector<vector<char>>& board, int rMove, int cMove,
         int r = rMove;
         int c = cMove;
         int state = 0;
-        for (int j = 0; j < board.size(); j++)
+        for (int j = 0; j < (int)board.size(); j++)
         {
             r += directions[i][0];
             c += directions[i][1];
@@ -12064,7 +12064,7 @@ int LeetCodeGraph::minDayskVariants(vector<vector<int>>& points, int k)
     {
         for (int j = 1; j <= 100; j++)
         {
-            for (int p = 0; p < points.size(); p++)
+            for (int p = 0; p < (int)points.size(); p++)
             {
                 int d = abs(i - points[p][0]) + abs(j - points[p][1]);
                 if (d >= 100) continue;
@@ -12360,7 +12360,7 @@ int LeetCodeGraph::numberOfPaths(int n, vector<vector<int>>& corridors)
     }
 
     int result = 0;
-    for (size_t i = 1; i <= n; i++)
+    for (int i = 1; i <= n; i++)
     {
         result += numberOfPaths(i, i, 0, neighbors);
     }

@@ -1893,7 +1893,7 @@ string LeetCodeStack::smallestSubsequence(string s, int k, char letter, int repe
     {
         if (!result.empty() && result.back() > s[i])
         {
-            if ((result.size() + (s.size() - i) > k) &&
+            if ((result.size() + (s.size() - i) > (size_t)k) &&
                 ((letter_count + dp[i] > repetition) ||
                     (letter_count + dp[i] == repetition && result.back() != letter)))
             {
@@ -1907,7 +1907,7 @@ string LeetCodeStack::smallestSubsequence(string s, int k, char letter, int repe
         if (s[i] == letter) letter_count++;
     }
     string tail;
-    while (result.size() + tail.size() > k)
+    while (result.size() + tail.size() > (size_t)k)
     {
         if (result.back() == letter)
         {

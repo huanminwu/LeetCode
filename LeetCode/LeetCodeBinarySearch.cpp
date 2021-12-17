@@ -2442,7 +2442,7 @@ int LeetCodeBinarySearch::maximumRemovals(string s, string p, vector<int>& remov
 long long LeetCodeBinarySearch::kthSmallestProductCount(vector<int>& nums1, vector<int>& nums2, long long value)
 {
     long long cnt = 0;
-    for (int p1 = 0, p2 = nums2.size() - 1; p1 < nums1.size(); ++p1)
+    for (int p1 = 0, p2 = nums2.size() - 1; p1 < (int)nums1.size(); ++p1)
     {
         while (p2 >= 0 && (long long)nums1[p1] * nums2[p2] > value)
         {

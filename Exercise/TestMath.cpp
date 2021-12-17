@@ -4190,7 +4190,7 @@ void TestLeetCode1953(void)
     Logger::WriteMessage("Test Leet Code 1953");
     LeetCodeMath leetCode;
     vector<int> milestones = { 1, 2, 3 };
-    int result = leetCode.numberOfWeeks(milestones);
+    long long result = leetCode.numberOfWeeks(milestones);
     Logger::WriteMessage(milestones);
     Logger::WriteMessage("result = " + to_string(result));
 
@@ -4200,8 +4200,35 @@ void TestLeetCode1953(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1999(void)
+{
+    Logger::WriteMessage("Test Leet Code 1999");
+    LeetCodeMath leetCode;
+    int k = 2;
+    int digit1 = 0;
+    int digit2 = 2;
+    int result = leetCode.findInteger(k, digit1, digit2);
+    Logger::WriteMessage("k = " + to_string(k) + "; digit1 = " + to_string(digit1) +
+        "; digit2 = " + to_string(digit2) + "; result = " + to_string(result));
+
+    k = 3;
+    digit1 = 4;
+    digit2 = 2;
+    result = leetCode.findInteger(k, digit1, digit2);
+    Logger::WriteMessage("k = " + to_string(k) + "; digit1 = " + to_string(digit1) +
+        "; digit2 = " + to_string(digit2) + "; result = " + to_string(result));
+
+    k = 2;
+    digit1 = 0;
+    digit2 = 0;
+    result = leetCode.findInteger(k, digit1, digit2);
+    Logger::WriteMessage("k = " + to_string(k) + "; digit1 = " + to_string(digit1) +
+        "; digit2 = " + to_string(digit2) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode1999();
     TestLeetCode1953();
     TestLeetCode2001();
     TestLeetCode1969();

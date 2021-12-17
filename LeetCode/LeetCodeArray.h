@@ -11327,6 +11327,324 @@ public:
     /// 4. 0 <= k < n
     /// </summary>
     int timeRequiredToBuy(vector<int>& tickets, int k);
+
+    /// <summary>
+    /// Leet Code 1868. Product of Two Run-Length Encoded Arrays
+    ///                                                                 
+    /// Medium
+    ///
+    /// Run-length encoding is a compression algorithm that allows for an 
+    /// integer array nums with many segments of consecutive repeated 
+    /// numbers to be represented by a (generally smaller) 2D array 
+    /// encoded. Each encoded[i] = [vali, freqi] describes the ith 
+    /// segment of repeated numbers in nums where vali is the value that 
+    /// is repeated freqi times.
+    ///
+    /// For example, nums = [1,1,1,2,2,2,2,2] is represented by the 
+    /// run-length encoded array encoded = [[1,3],[2,5]]. Another way to 
+    /// read this is "three 1's followed by five 2's".
+    /// The product of two run-length encoded arrays encoded1 and encoded2 
+    /// can be calculated using the following steps:
+    ///
+    /// Expand both encoded1 and encoded2 into the full arrays nums1 and 
+    /// nums2 respectively.
+    /// Create a new array prodNums of length nums1.length and set 
+    /// prodNums[i] = nums1[i] * nums2[i].
+    /// Compress prodNums into a run-length encoded array and return it.
+    /// You are given two run-length encoded arrays encoded1 and encoded2 
+    /// representing full arrays nums1 and nums2 respectively. Both nums1 
+    /// and nums2 have the same length. Each encoded1[i] = [vali, freqi] 
+    /// describes the ith segment of nums1, and each encoded2[j] = 
+    /// [valj, freqj] describes the jth segment of nums2.
+    ///
+    /// Return the product of encoded1 and encoded2.
+    ///
+    /// Note: Compression should be done such that the run-length encoded 
+    /// array has the minimum possible length.
+    /// 
+    /// Example 1:
+    /// Input: encoded1 = [[1,3],[2,3]], encoded2 = [[6,3],[3,3]]
+    /// Output: [[6,6]]
+    /// Explanation: encoded1 expands to [1,1,1,2,2,2] and encoded2 
+    /// expands to [6,6,6,3,3,3].
+    /// prodNums = [6,6,6,6,6,6], which is compressed into the run-length 
+    /// encoded array [[6,6]].
+    ///
+    /// Example 2:
+    /// Input: encoded1 = [[1,3],[2,1],[3,2]], encoded2 = [[2,3],[3,3]]
+    /// Output: [[2,3],[6,1],[9,2]]
+    /// Explanation: encoded1 expands to [1,1,1,2,3,3] and encoded2 expands 
+    /// to [2,2,2,3,3,3].
+    /// prodNums = [2,2,2,6,9,9], which is compressed into the run-length 
+    /// encoded array [[2,3],[6,1],[9,2]].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= encoded1.length, encoded2.length <= 10^5
+    /// 2. encoded1[i].length == 2
+    /// 3. encoded2[j].length == 2
+    /// 4. 1 <= vali, freqi <= 10^4 for each encoded1[i].
+    /// 5. 1 <= valj, freqj <= 10^4 for each encoded2[j].
+    /// 6. The full arrays that encoded1 and encoded2 represent are the same 
+    ///    length.
+    /// </summary>
+    vector<vector<int>> findRLEArray(vector<vector<int>>& encoded1, vector<vector<int>>& encoded2);
+
+    /// <summary>
+    /// Leet Code 1885. Count Pairs in Two Arrays
+    ///                                                                 
+    /// Medium
+    ///
+    /// Given two integer arrays nums1 and nums2 of length n, count the pairs 
+    /// of indices (i, j) such that i < j and 
+    /// nums1[i] + nums1[j] > nums2[i] + nums2[j].
+    ///
+    /// Return the number of pairs satisfying the condition.
+    ///
+    /// Example 1:
+    /// Input: nums1 = [2,1,2,1], nums2 = [1,2,1,2]
+    /// Output: 1
+    /// Explanation: The pairs satisfying the condition are:
+    /// - (0, 2) where 2 + 2 > 1 + 1.
+    ///
+    /// Example 2:
+    /// Input: nums1 = [1,10,6,2], nums2 = [1,4,1,5]
+    /// Output: 5
+    /// Explanation: The pairs satisfying the condition are:
+    /// - (0, 1) where 1 + 10 > 1 + 4.
+    /// - (0, 2) where 1 + 6 > 1 + 1.
+    /// - (1, 2) where 10 + 6 > 4 + 1.
+    /// - (1, 3) where 10 + 2 > 4 + 5.
+    /// - (2, 3) where 6 + 2 > 1 + 5.
+    /// 
+    /// Constraints:
+    /// 1. n == nums1.length == nums2.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 1 <= nums1[i], nums2[i] <= 10^5
+    /// </summary>
+    long long countPairs(vector<int>& nums1, vector<int>& nums2);
+
+    /// <summary>
+    /// Leet Code 1940. Longest Common Subsequence Between Sorted Arrays
+    ///                                                                 
+    /// Medium
+    ///
+    /// Given an array of integer arrays arrays where each arrays[i] is 
+    /// sorted in strictly increasing order, return an integer array 
+    /// representing the longest common subsequence between all the arrays.
+    ///
+    /// A subsequence is a sequence that can be derived from another 
+    /// sequence by deleting some elements (possibly none) without 
+    /// changing the order of the remaining elements.
+    /// 
+    /// Example 1:
+    /// Input: arrays = [[1,3,4],
+    ///                  [1,4,7,9]]
+    /// Output: [1,4]
+    /// Explanation: The longest common subsequence in the two arrays 
+    ///              is [1,4].
+    ///
+    /// Example 2:
+    /// Input: arrays = [[2,3,6,8],
+    ///                  [1,2,3,5,6,7,10],
+    ///                  [2,3,4,6,9]]
+    /// Output: [2,3,6]
+    /// Explanation: The longest common subsequence in all three arrays 
+    /// is [2,3,6].
+    ///
+    /// Example 3:
+    /// Input: arrays = [[1,2,3,4,5],
+    ///                  [6,7,8]]
+    /// Output: []
+    /// Explanation: There is no common subsequence between the two arrays.
+    ///
+    /// Constraints:
+    /// 1. 2 <= arrays.length <= 100
+    /// 2. 1 <= arrays[i].length <= 100
+    /// 3. 1 <= arrays[i][j] <= 100
+    /// 4. arrays[i] is sorted in strictly increasing order.
+    /// </summary>
+    vector<int> longestCommonSubsequence(vector<vector<int>>& arrays);
+
+    /// <summary>
+    /// Leet Code 2007. Find Original Array From Doubled Array
+    ///                                                                 
+    /// Medium
+    ///
+    /// An integer array original is transformed into a doubled array changed 
+    /// by appending twice the value of every element in original, and then 
+    /// randomly shuffling the resulting array.
+    ///
+    /// Given an array changed, return original if changed is a doubled array. 
+    /// If changed is not a doubled array, return an empty array. The elements 
+    /// in original may be returned in any order.
+    /// 
+    /// Example 1:
+    /// Input: changed = [1,3,4,2,6,8]
+    /// Output: [1,3,4]
+    /// Explanation: One possible original array could be [1,3,4]:
+    /// - Twice the value of 1 is 1 * 2 = 2.
+    /// - Twice the value of 3 is 3 * 2 = 6.
+    /// - Twice the value of 4 is 4 * 2 = 8.
+    /// Other original arrays could be [4,3,1] or [3,1,4].
+    ///
+    /// Example 2:
+    /// Input: changed = [6,3,0,1]
+    /// Output: []
+    /// Explanation: changed is not a doubled array.
+    ///
+    /// Example 3:
+    /// Input: changed = [1]
+    /// Output: []
+    /// Explanation: changed is not a doubled array.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= changed.length <= 10^5
+    /// 2. 0 <= changed[i] <= 10^5
+    /// </summary>
+    vector<int> findOriginalArray(vector<int>& changed);
+
+    /// <summary>
+    /// Leet Code 2099. Find Subsequence of Length K With the Largest Sum 
+    ///                                                                 
+    /// Easy
+    ///
+    /// You are given an integer array nums and an integer k. You want to find 
+    /// a subsequence of nums of length k that has the largest sum.
+    ///
+    /// Return any such subsequence as an integer array of length k.
+    ///
+    /// A subsequence is an array that can be derived from another array by 
+    /// deleting some or no elements without changing the order of the 
+    /// remaining elements.
+    ///
+    /// Example 1:
+    /// Input: nums = [2,1,3,3], k = 2
+    /// Output: [3,3]
+    /// Explanation:
+    /// The subsequence has the largest sum of 3 + 3 = 6.
+    ///
+    /// Example 2:
+    /// Input: nums = [-1,-2,3,4], k = 3
+    /// Output: [-1,3,4]
+    /// Explanation: 
+    /// The subsequence has the largest sum of -1 + 3 + 4 = 6.
+    ///
+    /// Example 3:
+    /// Input: nums = [3,4,3,3], k = 2
+    /// Output: [3,4]
+    /// Explanation:
+    /// The subsequence has the largest sum of 3 + 4 = 7. 
+    /// Another possible subsequence is [4, 3].
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1000
+    /// 2. -10^5 <= nums[i] <= 10^5
+    /// 3. 1 <= k <= nums.length
+    /// </summary>
+    vector<int> maxSubsequence(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 2103. Rings and Rods
+    ///                                                                 
+    /// Easy
+    ///
+    /// There are n rings and each ring is either red, green, or blue. The 
+    /// rings are distributed across ten rods labeled from 0 to 9.
+    ///
+    /// You are given a string rings of length 2n that describes the n rings 
+    /// that are placed onto the rods. Every two characters in rings forms 
+    /// a color-position pair that is used to describe each ring where:
+    ///
+    /// The first character of the ith pair denotes the ith ring's color 
+    /// ('R', 'G', 'B').
+    /// The second character of the ith pair denotes the rod that the ith 
+    /// ring is placed on ('0' to '9').
+    /// For example, "R3G2B1" describes n == 3 rings: a red ring placed 
+    /// onto the rod labeled 3, a green ring placed onto the rod labeled 2, 
+    /// and a blue ring placed onto the rod labeled 1.
+    ///
+    /// Return the number of rods that have all three colors of rings on them.
+    /// 
+    /// Example 1:
+    /// Input: rings = "B0B6G0R6R0R6G9"
+    /// Output: 1 
+    /// Explanation: 
+    /// - The rod labeled 0 holds 3 rings with all colors: red, green, and 
+    ///   blue.
+    /// - The rod labeled 6 holds 3 rings, but it only has red and blue.
+    /// - The rod labeled 9 holds only a green ring.
+    /// Thus, the number of rods with all three colors is 1.
+    ///
+    /// Example 2:
+    /// Input: rings = "B0R0G0R9R0B0G0"
+    /// Output: 1
+    /// Explanation: 
+    /// - The rod labeled 0 holds 6 rings with all colors: red, green, and 
+    ///   blue.
+    /// - The rod labeled 9 holds only a red ring.
+    /// Thus, the number of rods with all three colors is 1.
+    ///
+    /// Example 3:
+    /// Input: rings = "G4"
+    /// Output: 0
+    /// Explanation: 
+    /// Only one ring is given. Thus, no rods have all three colors.
+    ///
+    /// Constraints:
+    /// 1. rings.length == 2 * n
+    /// 2. 1 <= n <= 100
+    /// 3. rings[i] where i is even is either 'R', 'G', or 'B' (0-indexed).
+    /// 4. rings[i] where i is odd is a digit from '0' to '9' (0-indexed).
+    /// </summary>
+    int countPoints(string rings);
+
+    /// <summary>
+    /// Leet Code 1983. Widest Pair of Indices With Equal Range Sum
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given two 0-indexed binary arrays nums1 and nums2. Find the 
+    /// widest pair of indices (i, j) such that i <= j and nums1[i] + 
+    /// nums1[i+1] + ... + nums1[j] == nums2[i] + nums2[i+1] + ... + nums2[j].
+    ///
+    /// The widest pair of indices is the pair with the largest distance 
+    /// between i and j. The distance between a pair of indices is defined as 
+    /// j - i + 1.
+    ///
+    /// Return the distance of the widest pair of indices. If no pair of 
+    /// indices meets the conditions, return 0.
+    ///
+    /// Example 1:
+    /// Input: nums1 = [1,1,0,1], nums2 = [0,1,1,0]
+    /// Output: 3
+    /// Explanation:
+    /// If i = 1 and j = 3:
+    /// nums1[1] + nums1[2] + nums1[3] = 1 + 0 + 1 = 2.
+    /// nums2[1] + nums2[2] + nums2[3] = 1 + 1 + 0 = 2.
+    /// The distance between i and j is j - i + 1 = 3 - 1 + 1 = 3.
+    ///
+    /// Example 2:
+    /// Input: nums1 = [0,1], nums2 = [1,1]
+    /// Output: 1
+    /// Explanation:
+    /// If i = 1 and j = 1:
+    /// nums1[1] = 1.
+    /// nums2[1] = 1.
+    /// The distance between i and j is j - i + 1 = 1 - 1 + 1 = 1.
+    ///
+    /// Example 3:
+    /// Input: nums1 = [0], nums2 = [1]
+    /// Output: 0
+    /// Explanation:
+    /// There are no pairs of indices that meet the requirements.
+    ///
+    /// Constraints:
+    /// 1. n == nums1.length == nums2.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. nums1[i] is either 0 or 1.
+    /// 4. nums2[i] is either 0 or 1.
+    /// </summary>
+    int widestPairOfIndices(vector<int>& nums1, vector<int>& nums2);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H
