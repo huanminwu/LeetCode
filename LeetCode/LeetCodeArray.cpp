@@ -11768,46 +11768,6 @@ int LeetCodeArray::minNumberOperations(vector<int>& target)
     return result;
 }
 
-/// <summary>
-/// Leet code #221. Maximal Square  
-/// 
-/// Given a 2D binary matrix filled with 0's and 1's, find the largest square 
-/// containing only 1's and return its area. 
-/// For example, given the following matrix: 
-/// 1 0 1 0 0
-/// 1 0 1 1 1
-/// 1 1 1 1 1
-/// 1 0 0 1 0
-/// Return 4. 
-/// </summary>
-int LeetCodeArray::maximalSquare(vector<vector<char>>& matrix)
-{
-    int result = 0;
-    if (matrix.size() == 0 || matrix[0].size() == 0) return result;
-    vector<vector<int>> dp(matrix.size(), vector<int>(matrix[0].size()));
-    for (size_t i = 0; i < matrix.size(); i++)
-    {
-        for (size_t j = 0; j < matrix[0].size(); j++)
-        {
-            if (matrix[i][j] == '0') dp[i][j] = 0;
-            else
-            {
-                if ((i == 0) || (j == 0))
-                {
-                    dp[i][j] = 1;
-                }
-                else
-                {
-                    dp[i][j] = min(dp[i - 1][j - 1], dp[i - 1][j]);
-                    dp[i][j] = min(dp[i][j], dp[i][j - 1]);
-                    dp[i][j]++;
-                }
-                result = max(result, dp[i][j] * dp[i][j]);
-            }
-        }
-    }
-    return result;
-}
 
 /// <summary>
 /// Leet code #1534. Count Good Triplets

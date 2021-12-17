@@ -2706,8 +2706,48 @@ void TestLeetCode1125(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode221(void)
+{
+    Logger::WriteMessage("Test Leet Code 221");
+    LeetCodeDP leetCode;
+    vector<vector<char>> matrix =
+    {
+        { '1', '0', '1', '0', '0' },
+        { '1', '0', '1', '1', '1' },
+        { '1' ,'1', '1', '1', '1' },
+        { '1', '0', '0', '1', '0' }
+    };
+    int max_area = leetCode.maximalSquare(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("max_area = " + to_string(max_area));
+}
+
+void TestLeetCode174(void)
+{
+    Logger::WriteMessage("Test Leet Code 174");
+    LeetCodeDP leetCode;
+    vector<vector<int>> dungeon;
+    int min_hp;
+    dungeon = { { -2,-3, 3 }, {-5, -10, 1}, {10, 30, -5} };
+    for (size_t i = 0; i < dungeon.size(); i++)
+    {
+        Logger::WriteMessage(dungeon[i]);
+    }
+    min_hp = leetCode.calculateMinimumHP(dungeon);
+    Logger::WriteMessage("Minimum HP = " + to_string(min_hp));
+    dungeon = { { 1, -3, 3 },{ 0, -2, 0 },{ -3, -3, -3 } };
+    for (size_t i = 0; i < dungeon.size(); i++)
+    {
+        Logger::WriteMessage(dungeon[i]);
+    }
+    min_hp = leetCode.calculateMinimumHP(dungeon);
+    Logger::WriteMessage("Minimum HP = " + to_string(min_hp));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode174();
+    TestLeetCode221();
     TestLeetCode1125();
     TestLeetCode628();
     TestLeetCode2036();

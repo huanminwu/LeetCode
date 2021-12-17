@@ -12656,5 +12656,108 @@ long long LeetCodeDP::maximumAlternatingSubarraySum(vector<int>& nums)
     return result;
 }
 
+/// <summary>
+/// Leet code #221. Maximal Square  
+/// 
+/// Given a 2D binary matrix filled with 0's and 1's, find the largest square 
+/// containing only 1's and return its area. 
+/// For example, given the following matrix: 
+/// 1 0 1 0 0
+/// 1 0 1 1 1
+/// 1 1 1 1 1
+/// 1 0 0 1 0
+/// Return 4. 
+/// </summary>
+int LeetCodeDP::maximalSquare(vector<vector<char>>& matrix)
+{
+    int result = 0;
+    if (matrix.size() == 0 || matrix[0].size() == 0) return result;
+    vector<vector<int>> dp(matrix.size(), vector<int>(matrix[0].size()));
+    for (size_t i = 0; i < matrix.size(); i++)
+    {
+        for (size_t j = 0; j < matrix[0].size(); j++)
+        {
+            if (matrix[i][j] == '0') dp[i][j] = 0;
+            else
+            {
+                if ((i == 0) || (j == 0))
+                {
+                    dp[i][j] = 1;
+                }
+                else
+                {
+                    dp[i][j] = min(dp[i - 1][j - 1], dp[i - 1][j]);
+                    dp[i][j] = min(dp[i][j], dp[i][j - 1]);
+                    dp[i][j]++;
+                }
+                result = max(result, dp[i][j] * dp[i][j]);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #174. Dungeon Game 
+/// The demons had captured the princess (P) and imprisoned her in the 
+/// bottom-right corner of a dungeon. The dungeon consists 
+/// of M x N rooms laid out in a 2D grid. Our valiant knight (K) was 
+/// initially positioned in the top-left room and must fight 
+/// his way through the dungeon to rescue the princess. 
+///
+/// The knight has an initial health point represented by a positive 
+/// integer. If at any point his health point drops to 0 
+/// or below, he dies immediately. 
+/// Some of the rooms are guarded by demons, so the knight loses health 
+/// (negative integers) upon entering these rooms; 
+/// other rooms are either empty (0's) or contain magic orbs that 
+/// increase the knight's health (positive integers).
+/// In order to reach the princess as quickly as possible, the 
+/// knight decides to move only 
+/// rightward or downward in each step. 
+/// Write a function to determine the knight's minimum initial health 
+/// so that he is able to rescue the princess.
+/// For example, given the dungeon below, the initial health of the 
+/// knight must be at least 7 if he follows the optimal path 
+/// RIGHT-> RIGHT -> DOWN -> DOWN.
+/// -2 (K) -3 3 
+/// -5 -10 1 
+/// 10 30 -5 (P) 
+/// Notes: 
+/// 1. The knight's health has no upper bound.
+/// 2. Any room can contain threats or power-ups, even the first room the knight 
+///    enters and the bottom-right room where the princess is imprisoned.
+/// </summary>
+int LeetCodeDP::calculateMinimumHP(vector<vector<int>>& dungeon)
+{
+    if ((dungeon.size() == 0) || dungeon[0].size() == 0) return 1;
+    vector<vector<int>> min_hp(dungeon.size());
+    for (int i = dungeon.size() - 1; i >= 0; i--)
+    {
+        min_hp[i] = vector<int>(dungeon[i].size());
+        for (int j = dungeon[i].size() - 1; j >= 0; j--)
+        {
+            if ((i == dungeon.size() - 1) && (j == dungeon[i].size() - 1))
+            {
+                min_hp[i][j] = max(1, 0 - dungeon[i][j] + 1);
+            }
+            else if (i == dungeon.size() - 1)
+            {
+                min_hp[i][j] = max(1, min_hp[i][j + 1] - dungeon[i][j]);
+            }
+            else if (j == dungeon[i].size() - 1)
+            {
+                min_hp[i][j] = max(1, min_hp[i + 1][j] - dungeon[i][j]);
+            }
+            else
+            {
+                min_hp[i][j] = min(min_hp[i + 1][j], min_hp[i][j + 1]) - dungeon[i][j];
+                min_hp[i][j] = max(1, min_hp[i][j]);
+            }
+        }
+    }
+    return  min_hp[0][0];
+}
+
 #pragma endregion
 

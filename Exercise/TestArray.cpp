@@ -4070,22 +4070,6 @@ void TestLeetCode1526(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode221(void)
-{
-    Logger::WriteMessage("Test Leet Code 221");
-    LeetCodeArray leetCode;
-    vector<vector<char>> matrix =
-    {
-        { '1', '0', '1', '0', '0' },
-        { '1', '0', '1', '1', '1' },
-        { '1' ,'1', '1', '1', '1' },
-        { '1', '0', '0', '1', '0' }
-    };
-    int max_area = leetCode.maximalSquare(matrix);
-    Logger::WriteMessage(matrix);
-    Logger::WriteMessage("max_area = " + to_string(max_area));
-}
-
 void TestLeetCode1534(void)
 {
     Logger::WriteMessage("Test Leet Code 1534");
@@ -6625,7 +6609,6 @@ void TestLeetCodeArray(void)
     TestLeetCode1539();
     TestLeetCode1537();
     TestLeetCode1534();
-    TestLeetCode221();
     TestLeetCode1526();
     TestLeetCode1524();
     TestLeetCode1513();

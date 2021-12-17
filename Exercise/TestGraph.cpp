@@ -1244,28 +1244,6 @@ void TestLeetCode9902(void)
     Logger::WriteMessage("minmum delivery cost = " + to_string(result));
 }
 
-void TestLeetCode174(void)
-{
-    Logger::WriteMessage("Test Leet Code 174");
-    LeetCodeGraph leetCode;
-    vector<vector<int>> dungeon;
-    int min_hp;
-    dungeon = { { -2,-3, 3 }, {-5, -10, 1}, {10, 30, -5} };
-    for (size_t i = 0; i < dungeon.size(); i++)
-    {
-        Logger::WriteMessage(dungeon[i]);
-    }
-    min_hp = leetCode.calculateMinimumHP(dungeon);
-    Logger::WriteMessage("Minimum HP = " + to_string(min_hp));
-    dungeon = { { 1, -3, 3 },{ 0, -2, 0 },{ -3, -3, -3 } };
-    for (size_t i = 0; i < dungeon.size(); i++)
-    {
-        Logger::WriteMessage(dungeon[i]);
-    }
-    min_hp = leetCode.calculateMinimumHP(dungeon);
-    Logger::WriteMessage("Minimum HP = " + to_string(min_hp));
-}
-
 void TestLeetCode1245(void)
 {
     Logger::WriteMessage("Test Leet Code 1245");
@@ -4055,7 +4033,6 @@ void TestLeetCodeGraph(void)
     TestLeetCode1263();
     TestLeetCode1258();
     TestLeetCode133();
-    TestLeetCode174();
     TestLeetCode207();
     TestLeetCode210();
     TestLeetCode261();
