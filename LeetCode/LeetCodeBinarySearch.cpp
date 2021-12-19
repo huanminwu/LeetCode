@@ -1315,11 +1315,12 @@ int LeetCodeBinarySearch::minEatingSpeed(vector<int>& piles, int H)
 {
     int first = 1;
     int last = 1;
+    int result = 0;
     for (size_t i = 0; i < piles.size(); i++)
     {
         last = max(last, piles[i]);
     }
-    while (first < last)
+    while (first <= last)
     {
         int middle = first + (last - first) / 2;
         int count = 0;
@@ -1335,10 +1336,11 @@ int LeetCodeBinarySearch::minEatingSpeed(vector<int>& piles, int H)
         }
         else
         {
-            last = middle;
+            result = middle;
+            last = middle - 1;
         }
     }
-    return first;
+    return result;
 }
 
 /// <summary>
@@ -1507,22 +1509,26 @@ int LeetCodeBinarySearch::shipWithinDays(vector<int>& weights, int D)
     for (size_t i = 0; i < weights.size(); i++) sum += weights[i];
     int first = 1;
     int last = sum;
-    while (first < last)
+    int result = 0;
+    while (first <= last)
     {
         int mid = first + (last - first) / 2;
         int d = 1;
         int sum = 0;
         for (size_t i = 0; i < weights.size(); i++)
         {
-            sum += weights[i];
-            if (sum > mid)
+            if (sum + weights[i] > mid)
             {
-                sum = weights[i];
-                d++;
                 // a single cargo may bust
-                if (sum > mid) d = D + 1;
-                if (d > D) break;
+                if (sum == 0) d = D + 1;
+                else
+                {
+                    sum = 0;
+                    d++;
+                }
             }
+            if (d > D) break;
+            sum += weights[i];
         }
         // ship too small
         if (d > D)
@@ -1531,10 +1537,11 @@ int LeetCodeBinarySearch::shipWithinDays(vector<int>& weights, int D)
         }
         else
         {
-            last = mid;
+            result = mid;
+            last = mid - 1;
         }
     }
-    return first;
+    return result;
 }
 
 /// <summary>

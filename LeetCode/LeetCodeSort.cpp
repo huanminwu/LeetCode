@@ -7781,4 +7781,102 @@ vector<int> LeetCodeSort::rearrangeArray(vector<int>& nums)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2098. Subsequence of Size K With the Largest Even Sum
+///                                                                 
+/// Medium
+///
+/// You are given an integer array nums and an integer k. Find the 
+/// largest even sum of any subsequence of nums that has a length of k.
+///
+/// Return this sum, or -1 if such a sum does not exist.
+///
+/// A subsequence is an array that can be derived from another array 
+/// by deleting some or no elements without changing the order of the 
+/// remaining elements.
+/// 
+/// Example 1:
+/// Input: nums = [4,1,5,3,1], k = 3
+/// Output: 12
+/// Explanation:
+/// The subsequence with the largest possible even sum is [4,5,3]. It 
+/// has a sum of 4 + 5 + 3 = 12.
+///
+/// Example 2:
+/// Input: nums = [4,6,2], k = 3
+/// Output: 12
+/// Explanation:
+/// The subsequence with the largest possible even sum is [4,6,2]. It 
+/// has a sum of 4 + 6 + 2 = 12.
+///
+/// Example 3:
+/// Input: nums = [1,3,5], k = 1
+/// Output: -1
+/// Explanation:
+/// No subsequence of nums with length 1 has an even sum.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^5
+/// 3. 1 <= k <= nums.length
+/// </summary>
+long long LeetCodeSort::largestEvenSum(vector<int>& nums, int k)
+{
+    priority_queue<int> odd, even;
+    for (auto n : nums)
+    {
+        if (n % 2 == 0) even.push(n);
+        else odd.push(n);
+    }
+    long long result = 0;
+    if (k % 2 == 1)
+    {
+        if (even.empty()) return -1;
+        result += (long long)even.top();
+        even.pop();
+        k--;
+    }
+    while (k > 0)
+    {
+        if (odd.size() < 2 && even.size() < 2)
+        {
+            return -1;
+        }
+        else if (odd.size() < 2)
+        {
+            result += (long long)even.top();
+            even.pop();
+            result += (long long)even.top();
+            even.pop();
+        }
+        else if (even.size() < 2)
+        {
+            result += (long long)odd.top();
+            odd.pop();
+            result += (long long)odd.top();
+            odd.pop();
+        }
+        else
+        {
+            int even_top = even.top();
+            even.pop();
+            int odd_top = odd.top();
+            odd.pop();
+            if (even_top + even.top() > odd_top + odd.top())
+            {
+                result += (long long)even_top + (long long)even.top();
+                even.pop();
+                odd.push(odd_top);
+            }
+            else
+            {
+                result += (long long)odd_top + (long long)odd.top();
+                odd.pop();
+                even.push(even_top);
+            }
+        }
+        k -= 2;
+    }
+    return result;
+}
 #pragma endregion

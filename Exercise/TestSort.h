@@ -67,5 +67,6 @@ void TestLeetCode1942(void);
 void TestLeetCode1962(void);
 void TestLeetCode1966(void);
 void TestLeetCode1968(void);
+void TestLeetCode2098(void);
 void TestLeetCodeSort(void);
 #endif  // TestTree

@@ -1662,8 +1662,32 @@ void TestLeetCode1968(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2098(void)
+{
+    Logger::WriteMessage("Test Leet Code 2098");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 4, 1, 5, 3, 1 };
+    int k = 3;
+    long long result = leetCode.largestEvenSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 4,6,2 };
+    k = 3;
+    result = leetCode.largestEvenSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,3,5 };
+    k = 1;
+    result = leetCode.largestEvenSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2098();
     TestLeetCode1968();
     TestLeetCode1966();
     TestLeetCode1996();
