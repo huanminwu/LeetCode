@@ -35,5 +35,6 @@ void TestLeetCode1902(void);
 void TestLeetCode1650(void);
 void TestLeetCode1676(void);
 void TestLeetCode2096(void);
+void TestLeetCode1973(void);
 void TestLeetCodeTree(void);
 #endif  // TestTree

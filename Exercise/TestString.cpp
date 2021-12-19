@@ -4715,8 +4715,25 @@ void TestLeetCode1858(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode2038(void)
+{
+    LeetCodeString leetCode;
+    string colors = "AAABABB";
+    bool result = leetCode.winnerOfGame(colors);
+    Logger::WriteMessage("colors = " + colors + "; result = " + (string)(result ? "true" : "false"));
+
+    colors = "AA";
+    result = leetCode.winnerOfGame(colors);
+    Logger::WriteMessage("colors = " + colors + "; result = " + (string)(result ? "true" : "false"));
+
+    colors = "ABBBBBBBAAA";
+    result = leetCode.winnerOfGame(colors);
+    Logger::WriteMessage("colors = " + colors + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2038();
     TestLeetCode1858();
     TestLeetCode1933();
     TestLeetCode2068();

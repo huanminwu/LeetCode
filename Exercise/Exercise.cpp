@@ -53,29 +53,6 @@ void TestLeetCode22(void)
     Logger::WriteMessage(result);
 }
 
-
-
-void TestLeetCode97(void)
-{
-    Logger::WriteMessage("Test Leet Code 97");
-    LeetCode leetCode;
-    string s1, s2, s3, message;
-
-    s1.assign("aabcc");
-    s2.assign("dbbca");
-    s3.assign("aadbbcbcac");
-    Logger::WriteMessage("s1 = " + s1);
-    Logger::WriteMessage("s2 = " + s2);
-    Logger::WriteMessage("s3 = " + s3);
-    bool isInterLeave = leetCode.isInterleave(s1, s2, s3);
-    Logger::WriteMessage(isInterLeave ? "s3 is interleave of s1 and s2" : "s3 is not interleave of s1 and s2");
-    s3.assign("aadbbbaccc");
-    Logger::WriteMessage("s3 = " + s3);
-    isInterLeave = leetCode.isInterleave(s1, s2, s3);
-    Logger::WriteMessage(isInterLeave ? "s3 is interleave of s1 and s2" : "s3 is not interleave of s1 and s2");
-}
-
-
 void TestLeetCode164(void)
 {
     Logger::WriteMessage("Test Leet Code 164");
@@ -578,35 +555,6 @@ void TestLeetCode294(void)
     Logger::WriteMessage("Can Win = " + (string)(result ? "true" : "false"));
 }
 
-
-
-
-
-void TestLeetCode161(void)
-{
-    Logger::WriteMessage("Test Leet Code 161");
-    LeetCode leetCode;
-    string s = "abcde";
-    string t = "abce";
-
-    bool isOneEditDistance = leetCode.isOneEditDistance(s, t);
-    Logger::WriteMessage("s = " + s + "; t = " + t + ";" + (string)(isOneEditDistance ? " is " : " is not ") + "one distance");
-
-    s = "bat";
-    t = "bot";
-    isOneEditDistance = leetCode.isOneEditDistance(s, t);
-    Logger::WriteMessage("s = " + s + "; t = " + t + ";" + (string)(isOneEditDistance ? " is " : " is not ") + "one distance");
- 
-    s = "aaaaaaaaa";
-    t = "aaaaaaaaaa";
-    isOneEditDistance = leetCode.isOneEditDistance(s, t);
-    Logger::WriteMessage("s = " + s + "; t = " + t + ";" + (string)(isOneEditDistance ? " is " : " is not ") + "one distance");         
-
-    s = "a";
-    t = "ac";
-    isOneEditDistance = leetCode.isOneEditDistance(s, t);
-    Logger::WriteMessage("s = " + s + "; t = " + t + ";" + (string)(isOneEditDistance ? " is " : " is not ") + "one distance");
-}
 
 
 
@@ -2153,19 +2101,6 @@ void TestLeetCode903(void)
 
 
 
-void TestLeetCode902(void)
-{
-    Logger::WriteMessage("Test Leet Code 902");
-    LeetCode leetCode;
-    vector<string> D = { "1", "3", "5", "7" };
-    int N = 960;
-    int result = leetCode.atMostNGivenDigitSet(D, N);
-    Logger::WriteMessage(D);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
-}
-
-
-
 
 
 
@@ -3086,19 +3021,19 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 { 
-    TestLeetCodeArray();
+    TestLeetCodeBinarySearch();
+    TestLeetCodeDP();
+    TestLeetCodeString();
     TestLeetCodeTree();
+    TestLeetCodeArray();
     TestLeetCodeMath();
     TestLeetCodeDFS();
-    TestLeetCodeDP();
     TestLeetCodeTwoPointer();
     TestLeetCodeStack();
-    TestLeetCodeString();
     TestLeetCodeDesign();
     TestLeetCodeGraph();
     TestLeetCodeGreedy();
     TestLeetCodeSort();
-    TestLeetCodeBinarySearch();
     TestLeetCodeBit();
     TestLeetCodeGraph();
     TestLeetCodeHashtable();
@@ -3107,7 +3042,6 @@ void main(int argc, char* argv[])
     TestLeetCodeHashtable();
     TestLeetCode211();
     TestUSACO();
-    TestLeetCode902();
     TestLeetCode1199();
     TestLeetCode5();
     TestLeetCode1192();
@@ -3190,7 +3124,6 @@ void main(int argc, char* argv[])
     TestLeetCode907();
     TestLeetCode903();
     TestLeetCode900();
-    TestLeetCode902();
     TestLeetCode898();
     TestLeetCode886();
     TestLeetCode880();
@@ -3326,7 +3259,6 @@ void main(int argc, char* argv[])
     TestLeetCode494();
     TestLeetCode353();
     TestLeetCode321();
-    TestLeetCode161();
     TestLeetCode360();
     TestLeetCode277();
     TestLeetCode294();
@@ -3409,7 +3341,6 @@ void main(int argc, char* argv[])
     TestLeetCode206();
     TestLeetCode45();
     TestLeetCode55();
-    TestLeetCode97();
     TestLeetCode86();
     TestLeetCode82();
     TestLeetCode83();

@@ -4612,6 +4612,135 @@ public:
      /// Any room can contain threats or power-ups, even the first room the knight enters and the bottom-right room where the princess is imprisoned.
      /// </summary>
     int calculateMinimumHP(vector<vector<int>>& dungeon);
+
+    /// <summary>
+    /// Leet code #902. Numbers At Most N Given Digit Set 
+    /// 
+    /// We have a sorted set of digits D, a non-empty subset of 
+    /// {'1','2','3','4','5','6','7','8','9'}.  (Note that '0' is not included.)
+    /// Now, we write numbers using these digits, using each digit as many times 
+    /// as we want.  For example, if D = {'1','3','5'}, we may write numbers such 
+    /// as '13', '551', '1351315'.
+    ///
+    /// Return the number of positive integers that can be written (using the 
+    /// digits of D) that are less than or equal to N.
+    ///
+    /// Example 1:
+    /// Input: D = ["1","3","5","7"], N = 100
+    /// Output: 20
+    /// Explanation: 
+    /// The 20 numbers that can be written are:
+    /// 1, 3, 5, 7, 11, 13, 15, 17, 31, 33, 35, 37, 51, 53, 55, 57, 71, 73, 75, 77.
+    /// Example 2:
+    ///
+    /// Input: D = ["1","4","9"], N = 1000000000
+    /// Output: 29523
+    /// Explanation: 
+    /// We can write 3 one digit numbers, 9 two digit numbers, 27 three digit 
+    /// numbers,
+    /// 81 four digit numbers, 243 five digit numbers, 729 six digit numbers,
+    /// 2187 seven digit numbers, 6561 eight digit numbers, and 19683 nine digit 
+    /// numbers.
+    /// In total, this is 29523 integers that can be written using the digits of D.
+    ///
+    /// Note:
+    /// D is a subset of digits '1'-'9' in sorted order.
+    /// 1 <= N <= 10^9
+    /// </summary>
+    int atMostNGivenDigitSet(vector<string>& D, int N);
+
+    /// <summary>
+    /// Leet code #97. Interleaving String
+    /// Given s1, s2, s3, find whether s3 is formed by the interleaving of s1 and s2.
+    /// For example,
+    /// Given:
+    /// s1 = "aabcc",
+    /// s2 = "dbbca", 
+    /// When s3 = "aadbbcbcac", return true.
+    /// When s3 = "aadbbbaccc", return false. 
+    /// </summary>
+    bool isInterleave(string s1, string s2, string s3);
+
+    /// <summary>
+    /// Leet code #161. One Edit Distance
+    /// 
+    /// Given two strings S and T, determine if they are both one edit distance apart. 
+    /// </summary>
+    bool isOneEditDistance(string s, string t, size_t i, size_t j, size_t count);
+
+    /// <summary>
+    /// Leet code #161. One Edit Distance 
+    /// 
+    /// Given two strings S and T, determine if they are both one edit distance apart. 
+    /// </summary>
+    bool isOneEditDistance(string s, string t);
+
+    /// <summary>
+    /// Leet Code 2052. Minimum Cost to Separate Sentence Into Rows 
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given a string sentence containing words separated by spaces, 
+    /// and an integer k. Your task is to separate sentence into rows where 
+    /// the number of characters in each row is at most k. You may assume that 
+    /// sentence does not begin or end with a space, and the words in sentence 
+    /// are separated by a single space.
+    /// You can split sentence into rows by inserting line breaks between words
+    /// in sentence. A word cannot be split between two rows. Each word must be 
+    /// used exactly once, and the word order cannot be rearranged. Adjacent 
+    /// words in a row should be separated by a single space, and rows should 
+    /// not begin or end with spaces.
+    ///
+    /// The cost of a row with length n is (k - n)2, and the total cost is the 
+    /// sum of the costs for all rows except the last one.
+    ///
+    /// For example if sentence = "i love leetcode" and k = 12:
+    /// Separating sentence into "i", "love", and "leetcode" has a cost of 
+    /// (12 - 1)^2 + (12 - 4)^2 = 185.
+    /// Separating sentence into "i love", and "leetcode" has a cost of 
+    /// (12 - 6)^2 = 36.
+    /// Separating sentence into "i", and "love leetcode" is not possible 
+    /// because the length of "love leetcode" is greater than k.
+    /// Return the minimum possible total cost of separating sentence into 
+    /// rows.
+    /// 
+    /// Example 1:
+    /// Input: sentence = "i love leetcode", k = 12
+    /// Output: 36
+    /// Explanation:
+    /// Separating sentence into "i", "love", and "leetcode" has a cost of 
+    /// (12 - 1)^2 + (12 - 4)^2 = 185.
+    /// Separating sentence into "i love", and "leetcode" has a cost of 
+    /// (12 - 6)^2 = 36.
+    /// Separating sentence into "i", "love leetcode" is not possible 
+    /// because "love leetcode" has length 13.
+    /// 36 is the minimum possible total cost so return it.
+    ///
+    /// Example 2:
+    /// Input: sentence = "apples and bananas taste great", k = 7
+    /// Output: 21
+    /// Explanation
+    /// Separating sentence into "apples", "and", "bananas", "taste", and 
+    /// "great" has a cost of (7 - 6)2 + (7 - 3)2 + (7 - 7)2 + (7 - 5)2 = 21.
+    /// 21 is the minimum possible total cost so return it.
+    ///
+    /// Example 3:
+    /// Input: sentence = "a", k = 5
+    /// Output: 0
+    /// Explanation:
+    /// The cost of the last row is not included in the total cost, and since 
+    /// there is only one row, return 0.
+    ///
+    /// Constraints:
+    /// 1. 1 <= sentence.length <= 5000
+    /// 2. 1 <= k <= 5000
+    /// 3. The length of each word in sentence is at most k.
+    /// 3. sentence consists of only lowercase English letters and spaces.
+    /// 4. sentence does not begin or end with a space.
+    /// 5. Words in sentence are separated by a single space.
+    /// </summary>
+    int minimumCost(string sentence, int k);
+
 };
 
 

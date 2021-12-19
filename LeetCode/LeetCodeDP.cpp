@@ -511,7 +511,7 @@ bool LeetCodeDP::isWildcardMatch(string s, string p)
 /// When s3 = "aadbbcbcac", return true.
 /// When s3 = "aadbbbaccc", return false. 
 /// </summary>
-bool LeetCode::isInterleave(string s1, string s2, string s3)
+bool LeetCodeDP::isInterleave(string s1, string s2, string s3)
 {
     if (s1.size() + s2.size() != s3.size()) return false;
     vector<set<pair<int, int>>> map(s3.size() + 1);
@@ -1575,7 +1575,7 @@ int LeetCodeDP::minCostII(vector<vector<int>>& costs)
 /// 
 /// Given two strings S and T, determine if they are both one edit distance apart. 
 /// </summary>
-bool LeetCode::isOneEditDistance(string s, string t, size_t i, size_t j, size_t count)
+bool LeetCodeDP::isOneEditDistance(string s, string t, size_t i, size_t j, size_t count)
 {
     while (i < s.size() && j < t.size() && s[i] == t[j])
     {
@@ -1609,7 +1609,7 @@ bool LeetCode::isOneEditDistance(string s, string t, size_t i, size_t j, size_t 
 /// 
 /// Given two strings S and T, determine if they are both one edit distance apart. 
 /// </summary>
-bool LeetCode::isOneEditDistance(string s, string t)
+bool LeetCodeDP::isOneEditDistance(string s, string t)
 {
     return isOneEditDistance(s, t, 0, 0, 0);
 }
@@ -5023,11 +5023,11 @@ int LeetCode::subarrayBitwiseORs(vector<int>& A)
 /// D is a subset of digits '1'-'9' in sorted order.
 /// 1 <= N <= 10^9
 /// </summary>
-int LeetCode::atMostNGivenDigitSet(vector<string>& D, int N)
+int LeetCodeDP::atMostNGivenDigitSet(vector<string>& D, int N)
 {
     int result = 0;
     if (D.empty()) return result;
-    int product = 10;
+    long long product = 10;
     vector<int> dp;
     dp.push_back(1);
     while (product <= N)
@@ -6816,51 +6816,6 @@ int LeetCodeDP::largest1BorderedSquare(vector<vector<int>>& grid)
     return result;
 }
 
-
-/// <summary>
-/// Leet code #84. Largest Rectangle in Histogram  
-/// Given n non-negative integers representing the histogram's bar height 
-/// where the width of each bar is 1, 
-/// find the area of largest rectangle in the histogram. 
-/// Above is a histogram where width of each bar is 1, given height = [2,1,5,6,2,3].  
-/// The largest rectangle is shown in the shaded area, which has area = 10 unit.
-/// For example,
-/// Given heights = [2,1,5,6,2,3],
-/// return 10.
-/// This is the second method by using divide and conquer, find the shortest bar 
-/// and then divide into 2 group.
-/// </summary> 
-int LeetCode::largestRectangleAreaByDivide(vector<int>& heights)
-{
-    int max_area = 0;
-    queue<pair<int, int>> heights_queue;
-    heights_queue.push(make_pair(0, heights.size()));
-    while (!heights_queue.empty())
-    {
-        pair<int, int> pair = heights_queue.front();
-        heights_queue.pop();
-        if (pair.first >= pair.second) continue;
-        int shortest_bar = INT_MAX;
-        int shortest_index = 0;
-        for (int i = pair.first; i < pair.second; i++)
-        {
-            if (heights[i] <= shortest_bar)
-            {
-                shortest_index = i;
-                shortest_bar = heights[i];
-            }
-        }
-        max_area = max(max_area, (pair.second - pair.first) * shortest_bar);
-        while ((pair.first < shortest_index) && (heights[pair.first] == shortest_bar))
-            pair.first++;
-        heights_queue.push(make_pair(pair.first, shortest_index));
-        shortest_index++;
-        while ((shortest_index < pair.second) && (heights[shortest_index] == shortest_bar))
-            shortest_index++;
-        heights_queue.push(make_pair(shortest_index, pair.second));
-    }
-    return max_area;
-}
 
 /// <summary>
 /// Leet code #1143. Longest Common Subsequence
@@ -12757,6 +12712,95 @@ int LeetCodeDP::calculateMinimumHP(vector<vector<int>>& dungeon)
         }
     }
     return  min_hp[0][0];
+}
+
+/// <summary>
+/// Leet Code 2052. Minimum Cost to Separate Sentence Into Rows 
+///                                                                 
+/// Medium
+///
+/// You are given a string sentence containing words separated by spaces, 
+/// and an integer k. Your task is to separate sentence into rows where 
+/// the number of characters in each row is at most k. You may assume that 
+/// sentence does not begin or end with a space, and the words in sentence 
+/// are separated by a single space.
+/// You can split sentence into rows by inserting line breaks between words
+/// in sentence. A word cannot be split between two rows. Each word must be 
+/// used exactly once, and the word order cannot be rearranged. Adjacent 
+/// words in a row should be separated by a single space, and rows should 
+/// not begin or end with spaces.
+///
+/// The cost of a row with length n is (k - n)2, and the total cost is the 
+/// sum of the costs for all rows except the last one.
+///
+/// For example if sentence = "i love leetcode" and k = 12:
+/// Separating sentence into "i", "love", and "leetcode" has a cost of 
+/// (12 - 1)^2 + (12 - 4)^2 = 185.
+/// Separating sentence into "i love", and "leetcode" has a cost of 
+/// (12 - 6)^2 = 36.
+/// Separating sentence into "i", and "love leetcode" is not possible 
+/// because the length of "love leetcode" is greater than k.
+/// Return the minimum possible total cost of separating sentence into 
+/// rows.
+/// 
+/// Example 1:
+/// Input: sentence = "i love leetcode", k = 12
+/// Output: 36
+/// Explanation:
+/// Separating sentence into "i", "love", and "leetcode" has a cost of 
+/// (12 - 1)^2 + (12 - 4)^2 = 185.
+/// Separating sentence into "i love", and "leetcode" has a cost of 
+/// (12 - 6)^2 = 36.
+/// Separating sentence into "i", "love leetcode" is not possible 
+/// because "love leetcode" has length 13.
+/// 36 is the minimum possible total cost so return it.
+///
+/// Example 2:
+/// Input: sentence = "apples and bananas taste great", k = 7
+/// Output: 21
+/// Explanation
+/// Separating sentence into "apples", "and", "bananas", "taste", and 
+/// "great" has a cost of (7 - 6)2 + (7 - 3)2 + (7 - 7)2 + (7 - 5)2 = 21.
+/// 21 is the minimum possible total cost so return it.
+///
+/// Example 3:
+/// Input: sentence = "a", k = 5
+/// Output: 0
+/// Explanation:
+/// The cost of the last row is not included in the total cost, and since 
+/// there is only one row, return 0.
+///
+/// Constraints:
+/// 1. 1 <= sentence.length <= 5000
+/// 2. 1 <= k <= 5000
+/// 3. The length of each word in sentence is at most k.
+/// 3. sentence consists of only lowercase English letters and spaces.
+/// 4. sentence does not begin or end with a space.
+/// 5. Words in sentence are separated by a single space.
+/// </summary>
+int LeetCodeDP::minimumCost(string sentence, int k)
+{
+    int n = sentence.size();
+    if (n <= k) return 0;
+    vector<int> dp(n, INT_MAX);
+    int start = 0;
+    int prev = 0;
+    int result = INT_MAX;
+    while (start < n - k)
+    {
+        for (int i = start; i <= start + k; i++)
+        {
+            if (isspace(sentence[i]))
+            {
+                dp[i] = min(dp[i], prev + (k - (i - start)) * (k - (i - start)));
+                if (i + 1 + k >= n) result = min(result, dp[i]);
+            }
+        }
+        while (!isspace(sentence[start])) start++;
+        prev = dp[start];
+        start++;
+    }
+    return result;
 }
 
 #pragma endregion

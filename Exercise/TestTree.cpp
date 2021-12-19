@@ -3281,8 +3281,36 @@ void TestLeetCode2096(void)
     leetCode.freeTreeNodes(root);
 }
 
+
+void TestLeetCode1973(void)
+{
+    Logger::WriteMessage("Test Leet Code 1973");
+    LeetCodeTree leetCode;
+    string input = "[10,3,4,2,1]";
+    TreeNode* root = leetCode.deserialize(input);
+    int result = leetCode.equalToDescendants(root);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[2,3,null,2,null]";
+    root = leetCode.deserialize(input);
+    result = leetCode.equalToDescendants(root);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[0]";
+    root = leetCode.deserialize(input);
+    result = leetCode.equalToDescendants(root);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode1973();
     TestLeetCode2096();
     TestLeetCode1676();
     TestLeetCode1650();

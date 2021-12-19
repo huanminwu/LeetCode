@@ -2744,8 +2744,104 @@ void TestLeetCode174(void)
     Logger::WriteMessage("Minimum HP = " + to_string(min_hp));
 }
 
+void TestLeetCode902(void)
+{
+    Logger::WriteMessage("Test Leet Code 902");
+    LeetCodeDP leetCode;
+    vector<string> D = { "1", "3", "5", "7" };
+    int N = 960;
+    int result = leetCode.atMostNGivenDigitSet(D, N);
+    Logger::WriteMessage(D);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+}
+
+void TestLeetCode97(void)
+{
+    Logger::WriteMessage("Test Leet Code 97");
+    LeetCodeDP leetCode;
+    string s1, s2, s3, message;
+
+    s1.assign("aabcc");
+    s2.assign("dbbca");
+    s3.assign("aadbbcbcac");
+    Logger::WriteMessage("s1 = " + s1);
+    Logger::WriteMessage("s2 = " + s2);
+    Logger::WriteMessage("s3 = " + s3);
+    bool isInterLeave = leetCode.isInterleave(s1, s2, s3);
+    Logger::WriteMessage(isInterLeave ? "s3 is interleave of s1 and s2" : "s3 is not interleave of s1 and s2");
+    s3.assign("aadbbbaccc");
+    Logger::WriteMessage("s3 = " + s3);
+    isInterLeave = leetCode.isInterleave(s1, s2, s3);
+    Logger::WriteMessage(isInterLeave ? "s3 is interleave of s1 and s2" : "s3 is not interleave of s1 and s2");
+}
+
+void TestLeetCode161(void)
+{
+    Logger::WriteMessage("Test Leet Code 161");
+    LeetCodeDP leetCode;
+    string s = "abcde";
+    string t = "abce";
+
+    bool isOneEditDistance = leetCode.isOneEditDistance(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + ";" + (string)(isOneEditDistance ? " is " : " is not ") + "one distance");
+
+    s = "bat";
+    t = "bot";
+    isOneEditDistance = leetCode.isOneEditDistance(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + ";" + (string)(isOneEditDistance ? " is " : " is not ") + "one distance");
+
+    s = "aaaaaaaaa";
+    t = "aaaaaaaaaa";
+    isOneEditDistance = leetCode.isOneEditDistance(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + ";" + (string)(isOneEditDistance ? " is " : " is not ") + "one distance");
+
+    s = "a";
+    t = "ac";
+    isOneEditDistance = leetCode.isOneEditDistance(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + ";" + (string)(isOneEditDistance ? " is " : " is not ") + "one distance");
+}
+
+void TestLeetCode2052(void)
+{
+    LeetCodeDP leetCode;
+    string sentence = "i love leetcode";
+    int k = 12;
+    int result = leetCode.minimumCost(sentence, 12);
+    Logger::WriteMessage("sentence = " + sentence + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    sentence = "apples and bananas taste great";
+    k = 7;
+    result = leetCode.minimumCost(sentence, k);
+    Logger::WriteMessage("sentence = " + sentence + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    sentence = "a";
+    k = 5;
+    result = leetCode.minimumCost(sentence, k);
+    Logger::WriteMessage("sentence = " + sentence + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    sentence = "ks kdu mcjd";
+    k = 5;
+    result = leetCode.minimumCost(sentence, k);
+    Logger::WriteMessage("sentence = " + sentence + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    sentence = "jjjjj ss eee jjjjj";
+    k = 8;
+    result = leetCode.minimumCost(sentence, k);
+    Logger::WriteMessage("sentence = " + sentence + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    sentence = "eyojph rira djqe h hmljvvdfhjctk";
+    k = 16;
+    result = leetCode.minimumCost(sentence, k);
+    Logger::WriteMessage("sentence = " + sentence + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2052();
+    TestLeetCode161();
+    TestLeetCode97();
+    TestLeetCode902();
     TestLeetCode174();
     TestLeetCode221();
     TestLeetCode1125();

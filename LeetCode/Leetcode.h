@@ -279,46 +279,6 @@ public:
 
 #pragma region DynamicProgramming
     /// <summary>
-    /// Leet code #84. Largest Rectangle in Histogram  
-    /// Given n non-negative integers representing the histogram's bar height where the width of each bar is 1, 
-    /// find the area of largest rectangle in the histogram. 
-    /// Above is a histogram where width of each bar is 1, given height = [2,1,5,6,2,3].  
-    /// The largest rectangle is shown in the shaded area, which has area = 10 unit.
-    /// For example,
-    /// Given heights = [2,1,5,6,2,3],
-    /// return 10.
-    /// This is the second method by using divide and conquer, find the shortest bar 
-    /// and then divide into 2 group.
-    /// </summary> 
-    int largestRectangleAreaByDivide(vector<int>& heights);
-
-    /// <summary>
-    /// Leet code #97. Interleaving String
-    /// Given s1, s2, s3, find whether s3 is formed by the interleaving of s1 and s2.
-    /// For example,
-    /// Given:
-    /// s1 = "aabcc",
-    /// s2 = "dbbca", 
-    /// When s3 = "aadbbcbcac", return true.
-    /// When s3 = "aadbbbaccc", return false. 
-    /// </summary>
-    bool isInterleave(string s1, string s2, string s3);
-
-    /// <summary>
-    /// Leet code #161. One Edit Distance
-    /// 
-    /// Given two strings S and T, determine if they are both one edit distance apart. 
-    /// </summary>
-    bool isOneEditDistance(string s, string t, size_t i, size_t j, size_t count);
-
-    /// <summary>
-    /// Leet code #161. One Edit Distance 
-    /// 
-    /// Given two strings S and T, determine if they are both one edit distance apart. 
-    /// </summary>
-    bool isOneEditDistance(string s, string t);
-
-    /// <summary>
     /// Leet code #484. Find Permutation   
     /// 
     /// By now, you are given a secret signature consisting of character 'D' and 'I'. 
@@ -1642,42 +1602,6 @@ public:
     /// 2. 0 <= A[i] <= 10^9
     /// </summary>
     int subarrayBitwiseORs(vector<int>& A);
-
-    /// <summary>
-    /// Leet code #902. Numbers At Most N Given Digit Set 
-    /// 
-    /// We have a sorted set of digits D, a non-empty subset of 
-    /// {'1','2','3','4','5','6','7','8','9'}.  (Note that '0' is not included.)
-    /// Now, we write numbers using these digits, using each digit as many times 
-    /// as we want.  For example, if D = {'1','3','5'}, we may write numbers such 
-    /// as '13', '551', '1351315'.
-    ///
-    /// Return the number of positive integers that can be written (using the 
-    /// digits of D) that are less than or equal to N.
-    ///
-    /// Example 1:
-    /// Input: D = ["1","3","5","7"], N = 100
-    /// Output: 20
-    /// Explanation: 
-    /// The 20 numbers that can be written are:
-    /// 1, 3, 5, 7, 11, 13, 15, 17, 31, 33, 35, 37, 51, 53, 55, 57, 71, 73, 75, 77.
-    /// Example 2:
-    ///
-    /// Input: D = ["1","4","9"], N = 1000000000
-    /// Output: 29523
-    /// Explanation: 
-    /// We can write 3 one digit numbers, 9 two digit numbers, 27 three digit 
-    /// numbers,
-    /// 81 four digit numbers, 243 five digit numbers, 729 six digit numbers,
-    /// 2187 seven digit numbers, 6561 eight digit numbers, and 19683 nine digit 
-    /// numbers.
-    /// In total, this is 29523 integers that can be written using the digits of D.
-    ///
-    /// Note:
-    /// D is a subset of digits '1'-'9' in sorted order.
-    /// 1 <= N <= 10^9
-    /// </summary>
-    int atMostNGivenDigitSet(vector<string>& D, int N);
 
     /// <summary>
     /// Leet code #903. Valid Permutations for DI Sequence

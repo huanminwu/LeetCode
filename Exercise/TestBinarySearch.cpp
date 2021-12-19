@@ -866,8 +866,50 @@ void TestLeetCode2089(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1891(void)
+{
+    Logger::WriteMessage("Test Leet Code 1891");
+    LeetCodeBinarySearch leetCode;
+    vector<int> ribbons = { 9, 7, 5 };
+    int k = 3;
+    int result = leetCode.maxLength(ribbons, k);
+    Logger::WriteMessage(ribbons);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    ribbons = { 7,5,9 };
+    k = 4;
+    result = leetCode.maxLength(ribbons, k);
+    Logger::WriteMessage(ribbons);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    ribbons = { 5,7,9 };
+    k = 22;
+    result = leetCode.maxLength(ribbons, k);
+    Logger::WriteMessage(ribbons);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1918(void)
+{
+    Logger::WriteMessage("Test Leet Code 1918");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 2, 1, 3 };
+    int k = 4;
+    int result = leetCode.kthSmallestSubarraySum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3,3,5,5 };
+    k = 7;
+    result = leetCode.kthSmallestSubarraySum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode1918();
+    TestLeetCode1891();
     TestLeetCode2089();
     TestLeetCode2040();
     TestLeetCode1898();
