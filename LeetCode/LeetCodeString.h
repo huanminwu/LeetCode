@@ -9105,6 +9105,88 @@ public:
     /// </summary>
     bool winnerOfGame(string colors);
 
+    /// <summary>
+    /// Leet Code 1963. Minimum Number of Swaps to Make the String Balanced
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given a 0-indexed string s of even length n. The string 
+    /// consists of exactly n / 2 opening brackets '[' and n / 2 closing 
+    /// brackets ']'.
+    ///
+    /// A string is called balanced if and only if:
+    ///
+    /// It is the empty string, or
+    /// It can be written as AB, where both A and B are balanced strings, or
+    /// It can be written as [C], where C is a balanced string.
+    /// You may swap the brackets at any two indices any number of times.
+    ///
+    /// Return the minimum number of swaps to make s balanced.
+    ///
+    /// Example 1:
+    /// Input: s = "][]["
+    /// Output: 1
+    /// Explanation: You can make the string balanced by swapping index 0 with
+    /// index 3. 
+    /// The resulting string is "[[]]".
+    /// 
+    /// Example 2:
+    /// Input: s = "]]][[["
+    /// Output: 2
+    /// Explanation: You can do the following to make the string balanced:
+    /// - Swap index 0 with index 4. s = "[]][][".
+    /// - Swap index 1 with index 5. s = "[[][]]".
+    /// The resulting string is "[[][]]".
+    ///
+    /// Example 3:
+    /// Input: s = "[]"
+    /// Output: 0
+    /// Explanation: The string is already balanced.
+    /// 
+    /// Constraints:
+    /// 1. n == s.length
+    /// 2. 2 <= n <= 10^6
+    /// 3. n is even.
+    /// 4. s[i] is either '[' or ']'.
+    /// 5. The number of opening brackets '[' equals n / 2, and the number 
+    ///    of closing brackets ']' equals n / 2.
+    /// </summary>
+    int minSwaps(string s);
+
+    /// <summary>
+    /// Leet Code 2108. Find First Palindromic String in the Array
+    ///                                                                 
+    /// Easy
+    ///
+    /// Given an array of strings words, return the first palindromic string
+    /// in the array. If there is no such string, return an empty string "".
+    ///
+    /// A string is palindromic if it reads the same forward and backward.
+    ///
+    /// Example 1:
+    /// Input: words = ["abc","car","ada","racecar","cool"]
+    /// Output: "ada"
+    /// Explanation: The first string that is palindromic is "ada".
+    /// Note that "racecar" is also palindromic, but it is not the first.
+    ///
+    /// Example 2:
+    /// Input: words = ["notapalindrome","racecar"]
+    /// Output: "racecar"
+    /// Explanation: The first and only string that is palindromic is 
+    /// "racecar".
+    ///
+    /// Example 3:
+    /// Input: words = ["def","ghi"]
+    /// Output: ""
+    /// Explanation: There are no palindromic strings, so the empty string is 
+    /// returned.
+    ///
+    /// Constraints:
+    /// 1. 1 <= words.length <= 100
+    /// 2. 1 <= words[i].length <= 100
+    /// 3. words[i] consists only of lowercase English letters.
+    /// </summary>
+    string firstPalindrome(vector<string>& words);
 #pragma endregion
 };
 

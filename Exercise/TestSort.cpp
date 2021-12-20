@@ -1685,8 +1685,32 @@ void TestLeetCode2098(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2111(void)
+{
+    Logger::WriteMessage("Test Leet Code 2111");
+    LeetCodeSort leetCode;
+    vector<int> arr = { 5, 4, 3, 2, 1 };
+    int k = 1;
+    int result = leetCode.kIncreasing(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    arr = { 4,1,5,2,6,2 };
+    k = 2;
+    result = leetCode.kIncreasing(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    arr = { 4,1,5,2,6,2 };
+    k = 3;
+    result = leetCode.kIncreasing(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2111();
     TestLeetCode2098();
     TestLeetCode1968();
     TestLeetCode1966();

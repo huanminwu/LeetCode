@@ -4731,8 +4731,45 @@ void TestLeetCode2038(void)
     Logger::WriteMessage("colors = " + colors + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode1963(void)
+{
+    LeetCodeString leetCode;
+    string s = "][][";
+    int result = leetCode.minSwaps(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "]]][[[";
+    result = leetCode.minSwaps(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+    
+    s = "[]";
+    result = leetCode.minSwaps(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2108(void)
+{
+    LeetCodeString leetCode;
+    vector<string> words = { "abc", "car", "ada", "racecar", "cool" };
+    string result = leetCode.firstPalindrome(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + result);
+
+    words = { "notapalindrome","racecar" };
+    result = leetCode.firstPalindrome(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + result);
+
+    words = { "def","ghi" };
+    result = leetCode.firstPalindrome(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2108();
+    TestLeetCode1963();
     TestLeetCode2038();
     TestLeetCode1858();
     TestLeetCode1933();

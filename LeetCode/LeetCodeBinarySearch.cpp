@@ -1517,15 +1517,16 @@ int LeetCodeBinarySearch::shipWithinDays(vector<int>& weights, int D)
         int sum = 0;
         for (size_t i = 0; i < weights.size(); i++)
         {
-            if (sum + weights[i] > mid)
+            // a single cargo may burst
+            if (weights[i] > mid)
             {
-                // a single cargo may bust
-                if (sum == 0) d = D + 1;
-                else
-                {
-                    sum = 0;
-                    d++;
-                }
+                d = D + 1;
+                break;
+            }
+            else if (sum + weights[i] > mid)
+            {
+                sum = 0;
+                d++;
             }
             if (d > D) break;
             sum += weights[i];
@@ -1762,8 +1763,8 @@ int LeetCodeBinarySearch::smallestDivisor(vector<int>& nums, int threshold)
 {
     int first = 1;
     int last = 1000000;
-
-    while (first < last)
+    int result = 0;
+    while (first <= last)
     {
         int middle = first + (last - first) / 2;
         int sum = 0;
@@ -1772,10 +1773,17 @@ int LeetCodeBinarySearch::smallestDivisor(vector<int>& nums, int threshold)
             sum += nums[i] / middle;
             if (nums[i] % middle != 0) sum++;
         }
-        if (sum > threshold) first = middle + 1;
-        else last = middle;
+        if (sum > threshold)
+        {
+            first = middle + 1;
+        }
+        else
+        {
+            result = middle;
+            last = middle - 1;
+        }
     }
-    return first;
+    return result;
 }
 
 /// <summary>
@@ -2696,6 +2704,7 @@ int LeetCodeBinarySearch::maxLength(vector<int>& ribbons, int k)
     }
     return result;
 }
+
 /// <summary>
 /// Leet Code 1918. Kth Smallest Subarray Sum
 ///                                                                 

@@ -4065,8 +4065,51 @@ void TestLeetCode1804(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2102(void)
+{
+    Logger::WriteMessage("Test Leet Code 2102");
+    vector<string> commands =
+    {
+       "SORTracker", "add", "add", "get", "add", "get", "add", "get", "add", "get", "add", "get", "get"
+    };
+    vector<pair<string, int>> parameters =
+    {
+       {}, {"bradford", 2}, {"branford", 3}, {}, {"alps", 2}, {}, {"orland", 2},
+       {}, {"orlando", 3}, {}, {"alpine", 2},{},{}
+    };
+
+    vector<string> result;
+    SORTracker* sortTracker = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "SORTracker")
+        {
+            sortTracker = new SORTracker();
+            result.push_back("null");
+        }
+        else if (commands[i] == "add")
+        {
+            sortTracker->add(parameters[i].first, parameters[i].second);
+            result.push_back("null");
+        }
+        else if (commands[i] == "get")
+        {
+            string ret = sortTracker->get();
+            result.push_back(ret);
+        }
+    }
+    delete sortTracker;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage("location = " + parameters[i].first + "; score = " + to_string(parameters[i].second));
+    }
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2102();
     TestLeetCode1804();
     TestLeetCode2013();
     TestLeetCode2043();
