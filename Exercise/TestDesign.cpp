@@ -4107,8 +4107,86 @@ void TestLeetCode2102(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1993(void)
+{
+    Logger::WriteMessage("Test Leet Code 1993");
+    vector<string> commands =
+    {
+       "LockingTree", "lock", "unlock", "unlock", "lock", "upgrade", "lock"
+    };
+    vector<vector<int>> parameters =
+    {
+       {-1, 0, 0, 1, 1, 2, 2}, {2, 2}, {2, 3}, {2, 2}, {4, 5}, {0, 1}, {0, 1}
+    };
+
+    vector<string> result;
+    LockingTree* lockingTree = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "LockingTree")
+        {
+            lockingTree = new LockingTree(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "lock")
+        {
+            bool ret = lockingTree->lock(parameters[i][0], parameters[i][1]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+        else if (commands[i] == "unlock")
+        {
+            bool ret = lockingTree->unlock(parameters[i][0], parameters[i][1]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+        else if (commands[i] == "upgrade")
+        {
+            bool ret = lockingTree->upgrade(parameters[i][0], parameters[i][1]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+    }
+    delete lockingTree;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2080(void)
+{
+    Logger::WriteMessage("Test Leet Code 2080");
+    vector<string> commands =
+    {
+       "RangeFreqQuery", "query", "query"
+    };
+    vector<vector<int>> parameters =
+    {
+        {12, 33, 4, 56, 22, 2, 34, 33, 22, 12, 34, 56},{1, 2, 4},{0, 11, 33}
+    };
+
+    vector<string> result;
+    RangeFreqQuery* rangeFreqQuery = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "RangeFreqQuery")
+        {
+            rangeFreqQuery = new RangeFreqQuery(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "query")
+        {
+            int ret = rangeFreqQuery->query(parameters[i][0], parameters[i][1], parameters[i][2]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete rangeFreqQuery;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2080();
+    TestLeetCode1993();
     TestLeetCode2102();
     TestLeetCode1804();
     TestLeetCode2013();

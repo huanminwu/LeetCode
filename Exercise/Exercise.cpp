@@ -3021,17 +3021,17 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 { 
+    TestLeetCodeStack();
+    TestLeetCodeDesign();
     TestLeetCodeString();
     TestLeetCodeSort();
     TestLeetCodeTwoPointer();
-    TestLeetCodeDesign();
     TestLeetCodeBinarySearch();
     TestLeetCodeDP();
     TestLeetCodeTree();
     TestLeetCodeArray();
     TestLeetCodeMath();
     TestLeetCodeDFS();
-    TestLeetCodeStack();
     TestLeetCodeGraph();
     TestLeetCodeGreedy();
     TestLeetCodeBit();

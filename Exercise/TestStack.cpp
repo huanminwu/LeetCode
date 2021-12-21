@@ -662,8 +662,34 @@ void TestLeetCode862(void)
     Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1950(void)
+{
+    Logger::WriteMessage("Test Leet Code 1950");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 0, 1, 2, 4 };
+    vector<int> result = leetCode.findMaximums(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 10,20,50,10 };
+    result = leetCode.findMaximums(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 4,3,2, 1};
+    result = leetCode.findMaximums(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 4, 3, 2, 1, 6, 5, 2, 3, 4, 9, 0 };
+    result = leetCode.findMaximums(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode1950();
     TestLeetCode862();
     TestLeetCode1438();
     TestLeetCode84();
