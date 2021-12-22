@@ -2833,11 +2833,52 @@ void TestLeetCode2052(void)
     k = 16;
     result = leetCode.minimumCost(sentence, k);
     Logger::WriteMessage("sentence = " + sentence + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
 
+void TestLeetCode2044(void)
+{
+    LeetCodeDP leetCode;
+    vector<int> nums = { 3, 1 };
+    int result = leetCode.countMaxOrSubsets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,2,2 };
+    result = leetCode.countMaxOrSubsets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,2,1,5 };
+    result = leetCode.countMaxOrSubsets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2063(void)
+{
+    Logger::WriteMessage("Test Leet Code 2063");
+    LeetCodeDP leetCode;
+    string word = "aba";
+    long long result = leetCode.countVowels(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "abc";
+    result = leetCode.countVowels(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "ltcd";
+    result = leetCode.countVowels(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "noosabasboosa";
+    result = leetCode.countVowels(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
 }
 
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2063();
+    TestLeetCode2044();
     TestLeetCode2052();
     TestLeetCode161();
     TestLeetCode97();

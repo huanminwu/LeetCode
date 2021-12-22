@@ -12803,5 +12803,141 @@ int LeetCodeDP::minimumCost(string sentence, int k)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2044. Count Number of Maximum Bitwise-OR Subsets
+///                                                                 
+/// Medium
+///
+/// Given an integer array nums, find the maximum possible bitwise OR 
+/// of a subset of nums and return the number of different non-empty 
+/// subsets with the maximum bitwise OR.
+///
+/// An array a is a subset of an array b if a can be obtained from b 
+/// by deleting some (possibly zero) elements of b. Two subsets are 
+/// considered different if the indices of the elements chosen are 
+/// different.
+/// The bitwise OR of an array a is equal to a[0] OR a[1] OR ... OR 
+/// a[a.length - 1] (0-indexed).
+///
+/// Example 1:
+/// Input: nums = [3,1]
+/// Output: 2
+/// Explanation: The maximum possible bitwise OR of a subset is 3. 
+/// There are 2 subsets with a bitwise OR of 3:
+/// - [3]
+/// - [3,1]
+///
+/// Example 2:
+/// Input: nums = [2,2,2]
+/// Output: 7
+/// Explanation: All non-empty subsets of [2,2,2] have a bitwise OR of 2. 
+/// There are 23 - 1 = 7 total subsets.
+///
+/// Example 3:
+/// Input: nums = [3,2,1,5]
+/// Output: 6
+/// Explanation: The maximum possible bitwise OR of a subset is 7. There 
+/// are 6 subsets with a bitwise OR of 7:
+/// - [3,5]
+/// - [3,1,5]
+/// - [3,2,5]
+/// - [3,2,1,5]
+/// - [2,5]
+/// - [2,1,5]
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 16
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeDP::countMaxOrSubsets(vector<int>& nums)
+{
+    int n = 1 << nums.size();
+    int result = 0;
+    int max_bits = 0;
+    for (int i = 1; i < n; i++)
+    {
+        int x = i;
+        int bits = 0;
+        for (size_t j = 0; j < nums.size(); j++)
+        {
+            if (x == 0) break;
+            if (x % 2 == 1) bits |= nums[j];
+            x /= 2;
+        }
+        if (bits > max_bits)
+        {
+            max_bits = bits;
+            result = 1;
+        }
+        else if (bits == max_bits)
+        {
+            result++;
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 2063. Vowels of All Substrings
+///                                                                 
+/// Medium
+///
+/// Given a string word, return the sum of the number of vowels ('a', 
+/// 'e', 'i', 'o', and 'u') in every substring of word.
+///
+/// A substring is a contiguous (non-empty) sequence of characters 
+/// within a string.
+///
+/// Note: Due to the large constraints, the answer may not fit in a 
+/// signed 32-bit integer. Please be careful during the calculations.
+///
+/// Example 1:
+/// Input: word = "aba"
+/// Output: 6
+/// Explanation: 
+/// All possible substrings are: "a", "ab", "aba", "b", "ba", and "a".
+/// - "b" has 0 vowels in it
+/// - "a", "ab", "ba", and "a" have 1 vowel each
+/// - "aba" has 2 vowels in it
+/// Hence, the total sum of vowels = 0 + 1 + 1 + 1 + 1 + 2 = 6. 
+///
+/// Example 2:
+/// Input: word = "abc"
+/// Output: 3
+/// Explanation: 
+/// All possible substrings are: "a", "ab", "abc", "b", "bc", and "c".
+/// - "a", "ab", and "abc" have 1 vowel each
+/// - "b", "bc", and "c" have 0 vowels each
+/// Hence, the total sum of vowels = 1 + 1 + 1 + 0 + 0 + 0 = 3. 
+///
+/// Example 3:
+/// Input: word = "ltcd"
+/// Output: 0
+/// Explanation: There are no vowels in any substring of "ltcd".
+///
+/// Example 4:
+/// Input: word = "noosabasboosa"
+/// Output: 237
+/// Explanation: There are a total of 237 vowels in all the substrings.
+/// 
+/// Constraints:
+/// 1. 1 <= word.length <= 10^5
+/// 2. word consists of lowercase English letters.
+/// </summary>
+long long LeetCodeDP::countVowels(string word)
+{
+    long long result = 0;
+    long long sum = 0;
+    for (size_t i = 0; i < word.size(); i++)
+    {
+        if (word[i] == 'a' || word[i] == 'e' || word[i] == 'i' || word[i] == 'o' || word[i] == 'u')
+        {
+            sum += (long long)i + (long long)1;
+        }
+        result += sum;
+    }
+    return result;
+}
 #pragma endregion
 

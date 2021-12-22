@@ -11631,6 +11631,204 @@ public:
     /// 4. nums2[i] is either 0 or 1.
     /// </summary>
     int widestPairOfIndices(vector<int>& nums1, vector<int>& nums2);
+
+    /// <summary>
+    /// Leet Code 2012. Sum of Beauty in the Array
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given a 0-indexed integer array nums. For each index i 
+    /// (1 <= i <= nums.length - 2) the beauty of nums[i] equals:
+    /// 2, if nums[j] < nums[i] < nums[k], for all 0 <= j < i and for 
+    /// all i < k <= nums.length - 1.
+    /// 1, if nums[i - 1] < nums[i] < nums[i + 1], and the previous 
+    /// condition is not satisfied.
+    /// 0, if none of the previous conditions holds.
+    /// Return the sum of beauty of all nums[i] 
+    /// where 1 <= i <= nums.length - 2.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,2,3]
+    /// Output: 2
+    /// Explanation: For each index i in the range 1 <= i <= 1:
+    /// - The beauty of nums[1] equals 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,4,6,4]
+    /// Output: 1
+    /// Explanation: For each index i in the range 1 <= i <= 2:
+    /// - The beauty of nums[1] equals 1.
+    /// - The beauty of nums[2] equals 0.
+    ///
+    /// Example 3:
+    /// Input: nums = [3,2,1]
+    /// Output: 0
+    /// Explanation: For each index i in the range 1 <= i <= 1:
+    /// - The beauty of nums[1] equals 0.
+    ///
+    /// Constraints:
+    /// 1. 3 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^5
+    /// </summary>
+    int sumOfBeauties(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2055. Plates Between Candles
+    ///                                                                 
+    /// Medium
+    ///
+    /// There is a long table with a line of plates and candles arranged on 
+    /// top of it. You are given a 0-indexed string s consisting of 
+    /// characters '*' and '|' only, where a '*' represents a plate and 
+    /// a '|' represents a candle.
+    ///
+    /// You are also given a 0-indexed 2D integer array queries where 
+    /// queries[i] = [lefti, righti] denotes the substring s[lefti...righti] 
+    /// (inclusive). For each query, you need to find the number of plates 
+    /// between candles that are in the substring. A plate is considered 
+    /// between candles if there is at least one candle to its left and at 
+    /// least one candle to its right in the substring.
+    ///
+    /// For example, s = "||**||**|*", and a query [3, 8] denotes the 
+    /// substring "*||**|". The number of plates between candles in this 
+    /// substring is 2, as each of the two plates has at least one candle 
+    /// in the substring to its left and right.
+    /// Return an integer array answer where answer[i] is the answer to the 
+    /// ith query.
+    ///
+    /// Example 1:
+    /// Input: s = "**|**|***|", queries = [[2,5],[5,9]]
+    /// Output: [2,3]
+    /// Explanation:
+    /// - queries[0] has two plates between candles.
+    /// - queries[1] has three plates between candles.
+    ///
+    /// Example 2:
+    /// Input: s = "***|**|*****|**||**|*", 
+    /// queries = [[1,17],[4,5],[14,17],[5,11],[15,16]]
+    /// Output: [9,0,0,0,0]
+    /// Explanation:
+    /// - queries[0] has nine plates between candles.
+    /// - The other queries have zero plates between candles.
+    /// Constraints:
+    /// 1. 3 <= s.length <= 10^5
+    /// 2. s consists of '*' and '|' characters.
+    /// 3. 1 <= queries.length <= 10^5
+    /// 4. queries[i].length == 2
+    /// 5. 0 <= lefti <= righti < s.length
+    /// </summary>
+    vector<int> platesBetweenCandles(string s, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet Code 2028. Find Missing Observations
+    ///                                                                 
+    /// Medium
+    ///
+    /// You have observations of n + m 6-sided dice rolls with each face 
+    /// numbered from 1 to 6. n of the observations went missing, and you 
+    /// only have the observations of m rolls. Fortunately, you have also 
+    /// calculated the average value of the n + m rolls.
+    ///
+    /// You are given an integer array rolls of length m where rolls[i] 
+    /// is the value of the ith observation. You are also given the two 
+    /// integers mean and n.
+    ///
+    /// Return an array of length n containing the missing observations 
+    /// such that the average value of the n + m rolls is exactly mean. 
+    /// If there are multiple valid answers, return any of them. If no 
+    /// such array exists, return an empty array.
+    ///
+    /// The average value of a set of k numbers is the sum of the 
+    /// numbers divided by k.
+    /// 
+    /// Note that mean is an integer, so the sum of the n + m rolls should 
+    /// be divisible by n + m.
+    /// 
+    /// Example 1:
+    /// Input: rolls = [3,2,4,3], mean = 4, n = 2
+    /// Output: [6,6]
+    /// Explanation: The mean of all n + m rolls is 
+    /// (3 + 2 + 4 + 3 + 6 + 6) / 6 = 4.
+    ///
+    /// Example 2:
+    /// Input: rolls = [1,5,6], mean = 3, n = 4
+    /// Output: [2,3,2,2]
+    /// Explanation: The mean of all n + m rolls is 
+    /// (1 + 5 + 6 + 2 + 3 + 2 + 2) / 7 = 3.
+    ///
+    /// Example 3:
+    /// Input: rolls = [1,2,3,4], mean = 6, n = 4
+    /// Output: []
+    /// Explanation: It is impossible for the mean to be 6 no matter 
+    /// what the 4 missing rolls are.
+    ///
+    /// Example 4:
+    /// Input: rolls = [1], mean = 3, n = 1
+    /// Output: [5]
+    /// Explanation: The mean of all n + m rolls is (1 + 5) / 2 = 3.
+    /// 
+    /// Constraints:
+    /// 1. m == rolls.length
+    /// 2. 1 <= n, m <= 10^5
+    /// 3. 1 <= rolls[i], mean <= 6
+    /// </summary>
+    vector<int> missingRolls(vector<int>& rolls, int mean, int n);
+
+    /// <summary>
+    /// Leet Code 2091. Removing Minimum and Maximum From Array
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given a 0-indexed array of distinct integers nums.
+    ///
+    /// There is an element in nums that has the lowest value and an element 
+    /// that has the highest value. We call them the minimum and maximum 
+    /// respectively. Your goal is to remove both these elements from the 
+    /// array.
+    ///
+    /// A deletion is defined as either removing an element from the front of 
+    /// the array or removing an element from the back of the array.
+    ///
+    /// Return the minimum number of deletions it would take to remove both 
+    /// the minimum and maximum element from the array.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: nums = [2,10,7,5,4,1,8,6]
+    /// Output: 5
+    /// Explanation: 
+    /// The minimum element in the array is nums[5], which is 1.
+    /// The maximum element in the array is nums[1], which is 10.
+    /// We can remove both the minimum and maximum by removing 2 elements from 
+    /// the front and 3 elements from the back.
+    /// This results in 2 + 3 = 5 deletions, which is the minimum number 
+    /// possible.
+    ///
+    /// Example 2:
+    /// Input: nums = [0,-4,19,1,8,-2,-3,5]
+    /// Output: 3
+    /// Explanation: 
+    /// The minimum element in the array is nums[1], which is -4.
+    /// The maximum element in the array is nums[2], which is 19.
+    /// We can remove both the minimum and maximum by removing 3 elements 
+    /// from the front.
+    /// This results in only 3 deletions, which is the minimum number possible.
+    ///
+    /// Example 3:
+    /// Input: nums = [101]
+    /// Output: 1
+    /// Explanation:  
+    /// There is only one element in the array, which makes it both the 
+    /// minimum and maximum element.
+    /// We can remove it with 1 deletion.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^5 <= nums[i] <= 10^5
+    /// 3. The integers in nums are distinct.
+    /// </summary>
+    int minimumDeletions(vector<int>& nums);
+
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

@@ -62,7 +62,7 @@ void TestLeetCode2062(void)
 
 void TestLeetCode2106(void)
 {
-    Logger::WriteMessage("Test Leet Code 2062");
+    Logger::WriteMessage("Test Leet Code 2106");
     LeetCodeTwoPointer leetCode;
     vector<vector<int>> fruits = { {2, 8},{6, 3},{8, 6} };
     int startPos = 5;
@@ -83,8 +83,68 @@ void TestLeetCode2106(void)
     Logger::WriteMessage("startPos = " + to_string(startPos) + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2107(void)
+{
+    Logger::WriteMessage("Test Leet Code 2107");
+    LeetCodeTwoPointer leetCode;
+    vector<int> candies = { 1, 2, 2, 3, 4, 3 };
+    int k = 3;
+    int result = leetCode.shareCandies(candies, k);
+    Logger::WriteMessage(candies);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    candies = { 2,2,2,2,3,3 };
+    k = 2;
+    result = leetCode.shareCandies(candies, k);
+    Logger::WriteMessage(candies);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    candies = { 2,4,5 };
+    k = 0;
+    result = leetCode.shareCandies(candies, k);
+    Logger::WriteMessage(candies);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    candies = { 2,4,5 };
+    k = 3;
+    result = leetCode.shareCandies(candies, k);
+    Logger::WriteMessage(candies);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2105(void)
+{
+    Logger::WriteMessage("Test Leet Code 2105");
+    LeetCodeTwoPointer leetCode;
+    vector<int> plants = { 2, 2, 3, 3 };
+    int capacityA = 5;
+    int capacityB = 5;
+    int result = leetCode.minimumRefill(plants, capacityA, capacityB);
+    Logger::WriteMessage(plants);
+    Logger::WriteMessage("capacityA = " + to_string(capacityA) + "; capacityB = " + to_string(capacityB) + 
+        "; result = " + to_string(result));
+
+    plants = { 2, 2, 3, 3 };
+    capacityA = 3;
+    capacityB = 4;
+    result = leetCode.minimumRefill(plants, capacityA, capacityB);
+    Logger::WriteMessage(plants);
+    Logger::WriteMessage("capacityA = " + to_string(capacityA) + "; capacityB = " + to_string(capacityB) +
+        "; result = " + to_string(result));
+
+    plants = { 5 };
+    capacityA = 10;
+    capacityB = 8;
+    result = leetCode.minimumRefill(plants, capacityA, capacityB);
+    Logger::WriteMessage(plants);
+    Logger::WriteMessage("capacityA = " + to_string(capacityA) + "; capacityB = " + to_string(capacityB) +
+        "; result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2105();
+    TestLeetCode2107();
     TestLeetCode2106();
     TestLeetCode2062();
     TestLeetCode1852();

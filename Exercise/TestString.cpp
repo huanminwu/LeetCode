@@ -4766,8 +4766,31 @@ void TestLeetCode2108(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode2023(void)
+{
+    LeetCodeString leetCode;
+    vector<string> nums = { "777", "7", "77", "77" };
+    string target = "7777";
+    int result = leetCode.numOfPairs(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+
+    nums = { "123","4","12","34" };
+    target = "1234";
+    result = leetCode.numOfPairs(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+
+    nums = { "1","1","1" };
+    target = "11";
+    result = leetCode.numOfPairs(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2023();
     TestLeetCode2108();
     TestLeetCode1963();
     TestLeetCode2038();

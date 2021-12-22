@@ -6504,8 +6504,105 @@ void TestLeetCode1983(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2012(void)
+{
+    Logger::WriteMessage("Test Leet Code 2012");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    int result = leetCode.sumOfBeauties(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,4,6,4 };
+    result = leetCode.sumOfBeauties(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,2,1 };
+    result = leetCode.sumOfBeauties(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+  
+    nums = { 5, 5, 10, 4, 10 };
+    result = leetCode.sumOfBeauties(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2055(void)
+{
+    Logger::WriteMessage("Test Leet Code 2055");
+    LeetCodeArray leetCode;
+    string s = "**|**|***|";
+    vector<vector<int>> queries = { {2, 5},{5, 9} };
+    vector<int> result = leetCode.platesBetweenCandles(s, queries);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    s = "***|**|*****|**||**|*";
+    queries = { {1, 17},{4, 5},{14, 17},{5, 11},{15, 16} };
+    result = leetCode.platesBetweenCandles(s, queries);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2028(void)
+{
+    Logger::WriteMessage("Test Leet Code 2028");
+    LeetCodeArray leetCode;
+    vector<int> rolls = { 3, 2, 4, 3 };
+    int mean = 4;
+    int n = 2;
+    vector<int> result = leetCode.missingRolls(rolls, mean, n);
+    Logger::WriteMessage(rolls);
+    Logger::WriteMessage("mean = " + to_string(mean) + "; n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    rolls = { 1,5,6 };
+    mean = 3;
+    n = 4;
+    result = leetCode.missingRolls(rolls, mean, n);
+    Logger::WriteMessage(rolls);
+    Logger::WriteMessage("mean = " + to_string(mean) + "; n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    rolls = { 1,2,3,4 };
+    mean = 6;
+    n = 4;
+    result = leetCode.missingRolls(rolls, mean, n);
+    Logger::WriteMessage(rolls);
+    Logger::WriteMessage("mean = " + to_string(mean) + "; n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2091(void)
+{
+    Logger::WriteMessage("Test Leet Code 2091");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 10, 7, 5, 4, 1, 8, 6 };
+    int result = leetCode.minimumDeletions(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,-4,19,1,8,-2,-3,5 };
+    result = leetCode.minimumDeletions(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 101 };
+    result = leetCode.minimumDeletions(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2091();
+    TestLeetCode2028();
+    TestLeetCode2055();
+    TestLeetCode2012();
     TestLeetCode1983();
     TestLeetCode2103();
     TestLeetCode2099();
