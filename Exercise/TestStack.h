@@ -2,8 +2,6 @@
 #ifndef TestStack_H
 #define TestStack_H
 #include "..\LeetCode\LeetCodeStack.h"
-void TestLeetCode20(void);
-void TestLeetCode32(void);
 void TestLeetCode150(void);
 void TestLeetCode316(void);
 void TestLeetCode339(void);
@@ -15,7 +13,6 @@ void TestLeetCode636(void);
 void TestLeetCode735(void);
 void TestLeetCode739(void);
 void TestLeetCode907(void);
-void TestLeetCode921(void);
 void TestLeetCode946(void);
 void TestLeetCode1003(void);
 void TestLeetCode1047(void);

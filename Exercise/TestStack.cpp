@@ -1,33 +1,7 @@
 #include "..\LeetCode\LeetCode.h"
 #include "..\LeetCode\LeetCodeStack.h"
 #include "TestStack.h"
-void TestLeetCode20(void)
-{
-    Logger::WriteMessage("Test Leet Code 20");
-    LeetCodeStack leetCode;
-    string message;
-    string parentheses = "()[]{}";
-    Logger::WriteMessage("The parentheses are " + parentheses);
-    Logger::WriteMessage(leetCode.isValidParentheses(parentheses) ? "is valid" : "is not valid");
 
-    parentheses = "([)]";
-    Logger::WriteMessage("The parentheses are " + parentheses);
-    Logger::WriteMessage(leetCode.isValidParentheses(parentheses) ? "is valid" : "is not valid");
-}
-
-void TestLeetCode32(void)
-{
-    Logger::WriteMessage("Test Leet Code 32");
-    LeetCodeStack leetCode;
-    int result;
-    string s;
-    s.assign("(()");
-    result = leetCode.longestValidParentheses(s);
-    Logger::WriteMessage("s = " + s + " longest valid parentheses = " + to_string(result));
-    s.assign(")()())");
-    result = leetCode.longestValidParentheses(s);
-    Logger::WriteMessage("s = " + s + " longest valid parentheses = " + to_string(result));
-}
 
 void TestLeetCode150(void)
 {
@@ -143,30 +117,6 @@ void TestLeetCode735(void)
     Logger::WriteMessage(result);
 };
 
-void TestLeetCode921(void)
-{
-    Logger::WriteMessage("Test Leet Code 921");
-    LeetCodeStack leetCode;
-    string S = "())";
-    int result = leetCode.minAddToMakeValid(S);
-    Logger::WriteMessage(S);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    S = "(((";
-    result = leetCode.minAddToMakeValid(S);
-    Logger::WriteMessage(S);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    S = "()";
-    result = leetCode.minAddToMakeValid(S);
-    Logger::WriteMessage(S);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    S = "()))((";
-    result = leetCode.minAddToMakeValid(S);
-    Logger::WriteMessage(S);
-    Logger::WriteMessage("result = " + to_string(result));
-}
 void TestLeetCode946(void)
 {
     Logger::WriteMessage("Test Leet Code 946");
@@ -352,23 +302,6 @@ void TestLeetCode636(void)
     vector<int> result = leetCode.exclusiveTime(n, logs);
     Logger::WriteMessage(logs);
     Logger::WriteMessage(result);
-}
-
-void TestLeetCode1249(void)
-{
-    Logger::WriteMessage("Test Leet Code 1249");
-    LeetCodeStack leetCode;
-    string s = "lee(t(c)o)de)";
-    string result = leetCode.minRemoveToMakeValid(s);
-    Logger::WriteMessage("s = " + s + "; result = " + result);
-
-    s = "a)b(c)d";
-    result = leetCode.minRemoveToMakeValid(s);
-    Logger::WriteMessage("s = " + s + "; result = " + result);
-
-    s = "))((";
-    result = leetCode.minRemoveToMakeValid(s);
-    Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
 void TestLeetCode739(void)
@@ -703,7 +636,6 @@ void TestLeetCodeStack(void)
     TestLeetCode1475();
     TestLeetCode1425();
     TestLeetCode739();
-    TestLeetCode1249();
     TestLeetCode636();
     TestLeetCode1003();
     TestLeetCode907();
@@ -714,12 +646,9 @@ void TestLeetCodeStack(void)
     TestLeetCode1081();
     TestLeetCode1047();
     TestLeetCode946();
-    TestLeetCode921();
     TestLeetCode735();
     TestLeetCode439();
     TestLeetCode394();
     TestLeetCode385();
     TestLeetCode150();
-    TestLeetCode32();
-    TestLeetCode20();
 }

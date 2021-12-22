@@ -4788,8 +4788,76 @@ void TestLeetCode2023(void)
     Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
 }
 
+void TestLeetCode20(void)
+{
+    Logger::WriteMessage("Test Leet Code 20");
+    LeetCodeString leetCode;
+    string s = "()[]{}";
+    bool result = leetCode.isValidParentheses(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "([)]";
+    result = leetCode.isValidParentheses(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode32(void)
+{
+    Logger::WriteMessage("Test Leet Code 32");
+    LeetCodeString leetCode;
+    string s = "(()";
+    int result = leetCode.longestValidParentheses(s);
+    Logger::WriteMessage("s = " + s + " result = " + to_string(result));
+    
+    s = ")()())";
+    result = leetCode.longestValidParentheses(s);
+    Logger::WriteMessage("s = " + s + " result = " + to_string(result));
+}
+
+void TestLeetCode921(void)
+{
+    Logger::WriteMessage("Test Leet Code 921");
+    LeetCodeString leetCode;
+    string S = "())";
+    int result = leetCode.minAddToMakeValid(S);
+    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
+
+    S = "(((";
+    result = leetCode.minAddToMakeValid(S);
+    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
+
+    S = "()";
+    result = leetCode.minAddToMakeValid(S);
+    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
+
+    S = "()))((";
+    result = leetCode.minAddToMakeValid(S);
+    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
+}
+
+void TestLeetCode1249(void)
+{
+    Logger::WriteMessage("Test Leet Code 1249");
+    LeetCodeString leetCode;
+    string s = "lee(t(c)o)de)";
+    string result = leetCode.minRemoveToMakeValid(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "a)b(c)d";
+    result = leetCode.minRemoveToMakeValid(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "))((";
+    result = leetCode.minRemoveToMakeValid(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode1249();
+    TestLeetCode921();
+    TestLeetCode32();
+    TestLeetCode20();
     TestLeetCode2023();
     TestLeetCode2108();
     TestLeetCode1963();

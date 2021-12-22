@@ -3021,8 +3021,8 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 { 
-    TestLeetCodeDP();
     TestLeetCodeString();
+    TestLeetCodeDP();
     TestLeetCodeTwoPointer();
     TestLeetCodeArray();
     TestLeetCodeStack();

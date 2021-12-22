@@ -7758,7 +7758,6 @@ string LeetCodeString::removeVowels(string S)
     return result;
 }
 
-
 /// <summary>
 /// Leet code #224. Basic Calculator    
 /// Implement a basic calculator to evaluate a simple expression string.
@@ -16848,4 +16847,291 @@ int LeetCodeString::numOfPairs(vector<string>& nums, string target)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 20. Valid Parentheses
+///                                                                 
+/// Easy
+///
+/// Given a string s containing just the characters '(', ')', '{', '}', 
+/// '[' and ']', determine if the input string is valid.
+///
+/// An input string is valid if:
+/// 
+/// Open brackets must be closed by the same type of brackets.
+/// Open brackets must be closed in the correct order.
+///
+/// Example 1:
+/// Input: s = "()"
+/// Output: true
+///
+/// Example 2:
+/// Input: s = "()[]{}"
+/// Output: true
+///
+/// Example 3:
+/// Input: s = "(]"
+/// Output: false
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 10^4 
+/// 2. s consists of parentheses only '()[]{}'.
+/// </summary>
+bool LeetCodeString::isValidParentheses(string s)
+{
+    stack<char> stack;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if ((s[i] == '(') || (s[i] == '[') || (s[i] == '{'))
+        {
+            stack.push(s[i]);
+        }
+        else if (s[i] == ')')
+        {
+            if ((!stack.empty()) && (stack.top() == '('))
+            {
+                stack.pop();
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if (s[i] == ']')
+        {
+            if ((!stack.empty()) && (stack.top() == '['))
+            {
+                stack.pop();
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if (s[i] == '}')
+        {
+            if ((!stack.empty()) && (stack.top() == '{'))
+            {
+                stack.pop();
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+    if (stack.size() == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+/// <summary>
+/// Leet Code 32. Longest Valid Parentheses
+///                                                                 
+/// Hard
+///
+/// Given a string containing just the characters '(' and ')', find the 
+/// length of the longest valid (well-formed) parentheses substring.
+/// 
+/// Example 1:
+/// Input: s = "(()"
+/// Output: 2
+/// Explanation: The longest valid parentheses substring is "()".
+///
+/// Example 2:
+/// Input: s = ")()())"
+/// Output: 4
+/// Explanation: The longest valid parentheses substring is "()()".
+///
+/// Example 3:
+/// Input: s = ""
+/// Output: 0
+/// 
+/// Constraints:
+/// 1. 0 <= s.length <= 3 * 10^4
+/// 2. s[i] is '(', or ')'
+/// </summary>
+int LeetCodeString::longestValidParentheses(string s)
+{
+    vector<int> dp(s.size());
+    int count = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '(') count++;
+        else count--;
+        if (count < 0)
+        {
+            count = 0;
+            dp[i] = -1;
+        }
+    }
+    count = 0;
+    for (int i = s.size() - 1; i >= 0; i--)
+    {
+        if (s[i] == ')') count++;
+        else count--;
+        if (count < 0)
+        {
+            count = 0;
+            dp[i] = -1;
+        }
+    }
+    int result = 0;
+    count = 0;
+    for (size_t i = 0; i < dp.size(); i++)
+    {
+        if (dp[i] == -1) count = 0;
+        else
+        {
+            count++;
+            result = max(result, count);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #921. Minimum Add to Make Parentheses Valid
+/// 
+/// Given a string S of '(' and ')' parentheses, we add the minimum number of 
+/// parentheses ( '(' or ')', and in any positions ) so that the resulting 
+/// parentheses string is valid.
+///
+/// Formally, a parentheses string is valid if and only if:
+///
+/// It is the empty string, or
+/// It can be written as AB (A concatenated with B), where A and B are valid 
+/// strings, or
+/// It can be written as (A), where A is a valid string.
+/// Given a parentheses string, return the minimum number of parentheses we 
+/// must add to make the resulting string valid.
+///
+/// Example 1:
+/// Input: "())"
+/// Output: 1
+///
+/// Example 2:
+/// Input: "((("
+/// Output: 3
+///
+/// Example 3:
+/// Input: "()"
+/// Output: 0
+/// Example 4:
+///
+/// Input: "()))(("
+/// Output: 4
+/// 
+/// Note:
+///
+/// 1. S.length <= 1000
+/// 2. S only consists of '(' and ')' characters.
+/// </summary>
+int LeetCodeString::minAddToMakeValid(string S)
+{
+    int result = 0;
+    int count = 0;
+    for (int i = 0; i < (int)S.size(); i++)
+    {
+        if (S[i] == '(') count++;
+        else count--;
+        if (count < 0)
+        {
+            result++;
+            count = 0;
+        }
+    }
+    count = 0;
+    for (int i = S.size() - 1; i >= 0; i--)
+    {
+        if (S[i] == ')') count++;
+        else count--;
+        if (count < 0)
+        {
+            result++;
+            count = 0;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1249. Minimum Remove to Make Valid Parentheses
+///  
+/// Given a string s of '(' , ')' and lowercase English characters. 
+///
+/// Your task is to remove the minimum number of parentheses ( '(' or ')', 
+/// in any positions ) so that the resulting parentheses string is valid 
+/// and return any valid string.
+///
+/// Formally, a parentheses string is valid if and only if:
+///
+/// It is the empty string, contains only lowercase characters, or
+/// It can be written as AB (A concatenated with B), where A and B are valid 
+/// strings, or It can be written as (A), where A is a valid string.
+/// 
+/// Example 1:
+///
+/// Input: s = "lee(t(c)o)de)"
+/// Output: "lee(t(c)o)de"
+/// Explanation: "lee(t(co)de)" , "lee(t(c)ode)" would also be accepted.
+///
+/// Example 2:
+///
+/// Input: s = "a)b(c)d"
+/// Output: "ab(c)d"
+///
+/// Example 3:
+///
+/// Input: s = "))(("
+/// Output: ""
+/// Explanation: An empty string is also valid.
+///
+/// Example 4:
+///
+/// Input: s = "(a(b(c)d)"
+/// Output: "a(b(c)d)"
+/// 
+/// Constraints:
+///
+/// 1. 1 <= s.length <= 10^5
+/// 2. s[i] is one of  '(' , ')' and lowercase English letters.
+/// </summary>
+string LeetCodeString::minRemoveToMakeValid(string s)
+{
+    int count = 0;
+    string str = s;
+    for (size_t i = 0; i < str.size(); i++)
+    {
+        if (str[i] == '(') count++;
+        else if (str[i] == ')')
+        {
+            if (count == 0) str[i] = '*';
+            else count--;
+        }
+    }
+    count = 0;
+    for (int i = (int)str.size() - 1; i >= 0; i--)
+    {
+        if (str[i] == ')') count++;
+        else if (str[i] == '(')
+        {
+            if (count == 0) str[i] = '*';
+            else count--;
+        }
+    }
+    string result;
+    for (size_t i = 0; i < str.size(); i++)
+    {
+        if (str[i] == '*') continue;
+        result.push_back(str[i]);
+    }
+    return result;
+}
+
 #pragma endregion

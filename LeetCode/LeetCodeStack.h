@@ -26,20 +26,6 @@ class LeetCodeStack
 {
 public:
 #pragma region Stack
-    /// <summary>
-    /// Leet code #20. Valid Parentheses    
-    /// Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. 
-    /// The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
-    /// </summary>
-    bool isValidParentheses(string s);
-
-    /// <summary>
-    /// Leet code #32. Longest Valid Parentheses  
-    /// Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.
-    /// For "(()", the longest valid parentheses substring is "()", which has length = 2.  
-    /// Another example is ")()())", where the longest valid parentheses substring is "()()", which has length = 4.
-    /// </summary> 
-    int longestValidParentheses(string s);
 
     /// <summary>
     /// Leet code #150. Evaluate Reverse Polish Notation Add to List 
@@ -243,45 +229,6 @@ public:
     /// Each asteroid will be a non-zero integer in the range [-1000, 1000]..
     /// </summary> 
     vector<int> asteroidCollision(vector<int>& asteroids);
-
-    /// <summary>
-    /// Leet code #921. Minimum Add to Make Parentheses Valid
-    /// 
-    /// Given a string S of '(' and ')' parentheses, we add the minimum number of 
-    /// parentheses ( '(' or ')', and in any positions ) so that the resulting 
-    /// parentheses string is valid.
-    ///
-    /// Formally, a parentheses string is valid if and only if:
-    ///
-    /// It is the empty string, or
-    /// It can be written as AB (A concatenated with B), where A and B are valid 
-    /// strings, or
-    /// It can be written as (A), where A is a valid string.
-    /// Given a parentheses string, return the minimum number of parentheses we 
-    /// must add to make the resulting string valid.
-    ///
-    /// Example 1:
-    /// Input: "())"
-    /// Output: 1
-    ///
-    /// Example 2:
-    /// Input: "((("
-    /// Output: 3
-    ///
-    /// Example 3:
-    /// Input: "()"
-    /// Output: 0
-    /// Example 4:
-    ///
-    /// Input: "()))(("
-    /// Output: 4
-    /// 
-    /// Note:
-    ///
-    /// 1. S.length <= 1000
-    /// 2. S only consists of '(' and ')' characters.
-    /// </summary>
-    int minAddToMakeValid(string S);
 
     /// <summary>
     /// Leet code #946. Validate Stack Sequences
@@ -599,50 +546,6 @@ public:
     /// 5. 1 <= n <= 100
     /// </summary>
     vector<int> exclusiveTime(int n, vector<string>& logs);
-
-    /// <summary>
-    /// Leet code #1249. Minimum Remove to Make Valid Parentheses
-    ///  
-    /// Given a string s of '(' , ')' and lowercase English characters. 
-    ///
-    /// Your task is to remove the minimum number of parentheses ( '(' or ')', 
-    /// in any positions ) so that the resulting parentheses string is valid 
-    /// and return any valid string.
-    ///
-    /// Formally, a parentheses string is valid if and only if:
-    ///
-    /// It is the empty string, contains only lowercase characters, or
-    /// It can be written as AB (A concatenated with B), where A and B are valid 
-    /// strings, or It can be written as (A), where A is a valid string.
-    /// 
-    /// Example 1:
-    ///
-    /// Input: s = "lee(t(c)o)de)"
-    /// Output: "lee(t(c)o)de"
-    /// Explanation: "lee(t(co)de)" , "lee(t(c)ode)" would also be accepted.
-    ///
-    /// Example 2:
-    ///
-    /// Input: s = "a)b(c)d"
-    /// Output: "ab(c)d"
-    ///
-    /// Example 3:
-    ///
-    /// Input: s = "))(("
-    /// Output: ""
-    /// Explanation: An empty string is also valid.
-    ///
-    /// Example 4:
-    ///
-    /// Input: s = "(a(b(c)d)"
-    /// Output: "a(b(c)d)"
-    /// 
-    /// Constraints:
-    ///
-    /// 1. 1 <= s.length <= 10^5
-    /// 2. s[i] is one of  '(' , ')' and lowercase English letters.
-    /// </summary>
-    string minRemoveToMakeValid(string s);
 
     /// <summary>
     /// Leet code #739. Daily Temperatures
