@@ -4226,8 +4226,26 @@ void TestLeetCode1999(void)
         "; digit2 = " + to_string(digit2) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2048(void)
+{
+    Logger::WriteMessage("Test Leet Code 2048");
+    LeetCodeMath leetCode;
+    int n = 1;
+    int result = leetCode.nextBeautifulNumber(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 1000;
+    result = leetCode.nextBeautifulNumber(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3000;
+    result = leetCode.nextBeautifulNumber(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2048();
     TestLeetCode1999();
     TestLeetCode1953();
     TestLeetCode2001();

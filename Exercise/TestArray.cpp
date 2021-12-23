@@ -6597,8 +6597,28 @@ void TestLeetCode2091(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2113(void)
+{
+    Logger::WriteMessage("Test Leet Code 2113");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 0, 1, 2 };
+    vector<vector<int>> queries = { {0, 2} ,{2, 0},{3, 2},{5, 0} };
+    vector<int> result = leetCode.elementInNums(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 2 };
+    queries = { {0,0} ,{1,0},{2,0},{3,0} };
+    result = leetCode.elementInNums(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2113();
     TestLeetCode2091();
     TestLeetCode2028();
     TestLeetCode2055();
