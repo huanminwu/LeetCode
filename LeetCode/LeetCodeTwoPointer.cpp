@@ -529,4 +529,5 @@ int LeetCodeTwoPointer::minimumRefill(vector<int>& plants, int capacityA, int ca
     }
     return result;
 }
+
 #pragma endregion

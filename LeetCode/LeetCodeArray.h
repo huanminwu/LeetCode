@@ -11890,6 +11890,290 @@ public:
     /// 7. 0 <= indexj < nums.length
     /// </summary>
     vector<int> elementInNums(vector<int>& nums, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet Code 2100. Find Good Days to Rob the Bank
+    ///                                                                 
+    /// Medium
+    ///
+    /// You and a gang of thieves are planning on robbing a bank. You are 
+    /// given a 0-indexed integer array security, where security[i] is the 
+    /// number of guards on duty on the ith day. The days are numbered 
+    /// starting from 0. You are also given an integer time.
+    ///
+    /// The ith day is a good day to rob the bank if:
+    /// There are at least time days before and after the ith day,
+    /// The number of guards at the bank for the time days before i 
+    /// are non-increasing, and
+    /// The number of guards at the bank for the time days after i are 
+    /// non-decreasing.
+    /// More formally, this means day i is a good day to rob the bank 
+    /// if and only if security[i - time] >= security[i - time + 1] 
+    /// >= ... >= security[i] <= ... <= security[i + time - 1] <= 
+    /// security[i + time].
+    ///
+    /// Return a list of all days (0-indexed) that are good days to rob the 
+    /// bank. The order that the days are returned in does not matter.
+    ///
+    /// Example 1:
+    /// Input: security = [5,3,3,3,5,6,2], time = 2
+    /// Output: [2,3]
+    /// Explanation:
+    /// On day 2, we have security[0] >= security[1] >= security[2] 
+    /// <= security[3] <= security[4].
+    /// On day 3, we have security[1] >= security[2] >= security[3] 
+    /// <= security[4] <= security[5].
+    /// No other days satisfy this condition, so days 2 and 3 are 
+    /// the only good days to rob the bank.
+    ///
+    /// Example 2:
+    /// Input: security = [1,1,1,1,1], time = 0
+    /// Output: [0,1,2,3,4]
+    /// Explanation:
+    /// Since time equals 0, every day is a good day to rob the bank, 
+    /// so return every day.
+    ///
+    /// Example 3:
+    /// Input: security = [1,2,3,4,5,6], time = 2
+    /// Output: []
+    /// Explanation:
+    /// No day has 2 days before it that have a non-increasing number 
+    /// of guards.
+    /// Thus, no day is a good day to rob the bank, so return an empty list.
+    ///
+    /// Constraints:
+    /// 1. 1 <= security.length <= 10^5
+    /// 2. 0 <= security[i], time <= 10^5
+    /// </summary>
+    vector<int> goodDaysToRobBank(vector<int>& security, int time);
+
+    /// <summary>
+    /// Leet Code 2024. Maximize the Confusion of an Exam
+    ///                                                                 
+    /// Medium
+    ///
+    /// A teacher is writing a test with n true/false questions, with 'T' 
+    /// denoting true and 'F' denoting false. He wants to confuse the 
+    /// students by maximizing the number of consecutive questions with 
+    /// the same answer (multiple trues or multiple falses in a row).
+    ///
+    /// You are given a string answerKey, where answerKey[i] is the 
+    /// original answer to the ith question. In addition, you are given 
+    /// an integer k, the maximum number of times you may perform the 
+    /// following operation:
+    ///
+    /// Change the answer key for any question to 'T' or 'F' (i.e., 
+    /// set answerKey[i] to 'T' or 'F').
+    /// Return the maximum number of consecutive 'T's or 'F's in the 
+    /// answer key after performing the operation at most k times.
+    /// 
+    /// Example 1:
+    /// Input: answerKey = "TTFF", k = 2
+    /// Output: 4
+    /// Explanation: We can replace both the 'F's with 'T's to make 
+    /// answerKey = "TTTT".
+    /// There are four consecutive 'T's.
+    ///
+    /// Example 2:
+    /// Input: answerKey = "TFFT", k = 1
+    /// Output: 3
+    /// Explanation: We can replace the first 'T' with an 'F' to make 
+    /// answerKey = "FFFT".
+    /// Alternatively, we can replace the second 'T' with an 'F' to make 
+    /// answerKey = "TFFF".
+    /// In both cases, there are three consecutive 'F's.
+    ///
+    /// Example 3:
+    /// Input: answerKey = "TTFTTFTT", k = 1
+    /// Output: 5
+    /// Explanation: We can replace the first 'F' to make 
+    /// answerKey = "TTTTTFTT"
+    /// Alternatively, we can replace the second 'F' to make 
+    /// answerKey = "TTFTTTTT". 
+    /// In both cases, there are five consecutive 'T's.
+    ///
+    /// Constraints:
+    /// 1. n == answerKey.length
+    /// 2. 1 <= n <= 5 * 10^4
+    /// 3. answerKey[i] is either 'T' or 'F'
+    /// 4. 1 <= k <= n
+    /// </summary>
+    int maxConsecutiveAnswers(string answerKey, int k);
+
+    /// <summary>
+    /// Leet Code 2031. Count Subarrays With More Ones Than Zeros
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given a binary array nums containing only the integers 0 
+    /// and 1. Return the number of subarrays in nums that have more 1's 
+    /// than 0's. Since the answer may be very large, return it modulo 
+    /// 10^9 + 7.
+    ///
+    /// A subarray is a contiguous sequence of elements within an array.
+    /// 
+    /// Example 1:
+    /// Input: nums = [0,1,1,0,1]
+    /// Output: 9
+    /// Explanation:
+    /// The subarrays of size 1 that have more ones than zeros 
+    /// are: [1], [1], [1]
+    /// The subarrays of size 2 that have more ones than zeros 
+    /// are: [1,1]
+    /// The subarrays of size 3 that have more ones than zeros 
+    /// are: [0,1,1], [1,1,0], [1,0,1]
+    /// The subarrays of size 4 that have more ones than zeros 
+    /// are: [1,1,0,1]
+    /// The subarrays of size 5 that have more ones than zeros 
+    /// are: [0,1,1,0,1]
+    ///
+    /// Example 2:
+    /// Input: nums = [0]
+    /// Output: 0
+    /// Explanation:
+    /// No subarrays have more ones than zeros.
+    /// Example 3:
+    /// Input: nums = [1]
+    /// Output: 1
+    /// Explanation:
+    /// The subarrays of size 1 that have more ones than zeros are: [1]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 1
+    /// </summary>
+    int subarraysWithMoreZerosThanOnes(vector<int>& nums);
+
+
+    /// <summary>
+    /// Leet Code 2063. Vowels of All Substrings
+    ///                                                                 
+    /// Medium
+    ///
+    /// Given a string word, return the sum of the number of vowels ('a', 
+    /// 'e', 'i', 'o', and 'u') in every substring of word.
+    ///
+    /// A substring is a contiguous (non-empty) sequence of characters 
+    /// within a string.
+    ///
+    /// Note: Due to the large constraints, the answer may not fit in a 
+    /// signed 32-bit integer. Please be careful during the calculations.
+    ///
+    /// Example 1:
+    /// Input: word = "aba"
+    /// Output: 6
+    /// Explanation: 
+    /// All possible substrings are: "a", "ab", "aba", "b", "ba", and "a".
+    /// - "b" has 0 vowels in it
+    /// - "a", "ab", "ba", and "a" have 1 vowel each
+    /// - "aba" has 2 vowels in it
+    /// Hence, the total sum of vowels = 0 + 1 + 1 + 1 + 1 + 2 = 6. 
+    ///
+    /// Example 2:
+    /// Input: word = "abc"
+    /// Output: 3
+    /// Explanation: 
+    /// All possible substrings are: "a", "ab", "abc", "b", "bc", and "c".
+    /// - "a", "ab", and "abc" have 1 vowel each
+    /// - "b", "bc", and "c" have 0 vowels each
+    /// Hence, the total sum of vowels = 1 + 1 + 1 + 0 + 0 + 0 = 3. 
+    ///
+    /// Example 3:
+    /// Input: word = "ltcd"
+    /// Output: 0
+    /// Explanation: There are no vowels in any substring of "ltcd".
+    ///
+    /// Example 4:
+    /// Input: word = "noosabasboosa"
+    /// Output: 237
+    /// Explanation: There are a total of 237 vowels in all the substrings.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= word.length <= 10^5
+    /// 2. word consists of lowercase English letters.
+    /// </summary>
+    long long countVowels(string word);
+
+    /// <summary>
+    /// Leet Code 2110. Number of Smooth Descent Periods of a Stock
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given an integer array prices representing the daily price 
+    /// history of a stock, where prices[i] is the stock price on the ith day.
+    ///
+    /// A smooth descent period of a stock consists of one or more contiguous 
+    /// days such that the price on each day is lower than the price on the 
+    /// preceding day by exactly 1. The first day of the period is exempted 
+    /// from this rule.
+    ///
+    /// Return the number of smooth descent periods.
+    ///
+    /// Example 1:
+    /// Input: prices = [3,2,1,4]
+    /// Output: 7
+    /// Explanation: There are 7 smooth descent periods:
+    /// [3], [2], [1], [4], [3,2], [2,1], and [3,2,1]
+    /// Note that a period with one day is a smooth descent period by the 
+    /// definition.
+    ///
+    /// Example 2:
+    /// Input: prices = [8,6,7,7]
+    /// Output: 4
+    /// Explanation: There are 4 smooth descent periods: [8], [6], [7], and [7]
+    /// Note that [8,6] is not a smooth descent period as 8 - 6 != 1.
+    ///
+    /// Example 3:
+    /// Input: prices = [1]
+    /// Output: 1
+    /// Explanation: There is 1 smooth descent period: [1]
+    ///
+    /// Constraints:
+    /// 1. 1 <= prices.length <= 10^5
+    /// 2. 1 <= prices[i] <= 10^5
+    /// </summary>
+    long long getDescentPeriods(vector<int>& prices);
+
+
+    /// <summary>
+    /// Leet Code 2033. Minimum Operations to Make a Uni-Value Grid
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given a 2D integer grid of size m x n and an integer x. In one 
+    /// operation, you can add x to or subtract x from any element in the grid.
+    ///
+    /// A uni-value grid is a grid where all the elements of it are equal.
+    /// Return the minimum number of operations to make the grid uni-value. 
+    /// If it is not possible, return -1.
+    ///
+    /// Example 1:
+    /// Input: grid = [[2,4],[6,8]], x = 2
+    /// Output: 4
+    /// Explanation: We can make every element equal to 4 by doing the following: 
+    /// - Add x to 2 once.
+    /// - Subtract x from 6 once.
+    /// - Subtract x from 8 twice.
+    /// A total of 4 operations were used.
+    ///
+    /// Example 2:
+    /// Input: grid = [[1,5],[2,3]], x = 1
+    /// Output: 5
+    /// Explanation: We can make every element equal to 3.
+    ///
+    /// Example 3:
+    /// Input: grid = [[1,2],[3,4]], x = 2
+    /// Output: -1
+    /// Explanation: It is impossible to make every element equal.
+    ///
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 1 <= m, n <= 10^5
+    /// 4. 1 <= m * n <= 10^5
+    /// 5. 1 <= x, grid[i][j] <= 10^4
+    /// </summary>
+    int minOperations(vector<vector<int>>& grid, int x);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

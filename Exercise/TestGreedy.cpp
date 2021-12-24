@@ -1184,8 +1184,29 @@ void TestLeetCode1989(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2015(void)
+{
+    Logger::WriteMessage("Test Leet Code 2015");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> buildings = { {1, 4, 2},{3, 9, 4} };
+    vector<vector<int>> result = leetCode.averageHeightOfBuildings(buildings);
+    Logger::WriteMessage(buildings);
+    Logger::WriteMessage(result);
+
+    buildings = { {1, 3, 2},{2, 5, 3}, {2, 8, 3} };
+    result = leetCode.averageHeightOfBuildings(buildings);
+    Logger::WriteMessage(buildings);
+    Logger::WriteMessage(result);
+
+    buildings = { {1, 2, 1},{5, 6, 1} };
+    result = leetCode.averageHeightOfBuildings(buildings);
+    Logger::WriteMessage(buildings);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode2015();
     TestLeetCode1989();
     TestLeetCode2021();
     TestLeetCode2071();

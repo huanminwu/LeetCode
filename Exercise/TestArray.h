@@ -203,5 +203,10 @@ void TestLeetCode2055(void);
 void TestLeetCode2028(void);
 void TestLeetCode2091(void);
 void TestLeetCode2113(void);
+void TestLeetCode2100(void);
+void TestLeetCode2031(void);
+void TestLeetCode2063(void);
+void TestLeetCode2110(void);
+void TestLeetCode2033(void);
 void TestLeetCodeArray(void);
 #endif  // TestArray

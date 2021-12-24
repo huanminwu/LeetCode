@@ -6616,8 +6616,149 @@ void TestLeetCode2113(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2100(void)
+{
+    Logger::WriteMessage("Test Leet Code 2100");
+    LeetCodeArray leetCode;
+    vector<int> security = { 5,3,3,3,5,6,2 };
+    int time = 2;
+    vector<int> result = leetCode.goodDaysToRobBank(security, time);
+    Logger::WriteMessage(security);
+    Logger::WriteMessage("time = " + to_string(time));
+    Logger::WriteMessage(result);
+
+    security = { 1,1,1,1,1 };
+    time = 0;
+    result = leetCode.goodDaysToRobBank(security, time);
+    Logger::WriteMessage(security);
+    Logger::WriteMessage("time = " + to_string(time));
+    Logger::WriteMessage(result);
+
+    security = { 1,2,3,4,5,6 };
+    time = 2;
+    result = leetCode.goodDaysToRobBank(security, time);
+    Logger::WriteMessage(security);
+    Logger::WriteMessage("time = " + to_string(time));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2024(void)
+{
+    Logger::WriteMessage("Test Leet Code 2024");
+    LeetCodeArray leetCode;
+    string answerKey = "TTFF";
+    int k = 2;
+    int result = leetCode.maxConsecutiveAnswers(answerKey, k);
+    Logger::WriteMessage("answerKey" + answerKey + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    answerKey = "TFFT";
+    k = 1;
+    result = leetCode.maxConsecutiveAnswers(answerKey, k);
+    Logger::WriteMessage("answerKey" + answerKey + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    answerKey = "TTFTTFTT";
+    k = 1;
+    result = leetCode.maxConsecutiveAnswers(answerKey, k);
+    Logger::WriteMessage("answerKey" + answerKey + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2031(void)
+{
+    Logger::WriteMessage("Test Leet Code 2031");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 0, 1, 1, 0, 1 };
+    int result = leetCode.subarraysWithMoreZerosThanOnes(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0 };
+    result = leetCode.subarraysWithMoreZerosThanOnes(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1 };
+    result = leetCode.subarraysWithMoreZerosThanOnes(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1 };
+    result = leetCode.subarraysWithMoreZerosThanOnes(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2063(void)
+{
+    Logger::WriteMessage("Test Leet Code 2063");
+    LeetCodeArray leetCode;
+    string word = "aba";
+    long long result = leetCode.countVowels(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "abc";
+    result = leetCode.countVowels(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "ltcd";
+    result = leetCode.countVowels(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "noosabasboosa";
+    result = leetCode.countVowels(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+}
+
+void TestLeetCode2110(void)
+{
+    Logger::WriteMessage("Test Leet Code 2110");
+    LeetCodeArray leetCode;
+    vector<int> prices = { 3, 2, 1, 4 };
+    long long result = leetCode.getDescentPeriods(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 8,6,7,7 };
+    result = leetCode.getDescentPeriods(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 1 };
+    result = leetCode.getDescentPeriods(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2033(void)
+{
+    Logger::WriteMessage("Test Leet Code 2033");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {2, 4}, {6, 8} };
+    int x = 2;
+    int result = leetCode.minOperations(grid, x);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+
+    grid = { {1, 5}, {2, 3} };
+    x = 1;
+    result = leetCode.minOperations(grid, x);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+
+    grid = { {1, 2}, {3, 4} };
+    x = 2;
+    result = leetCode.minOperations(grid, x);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2033();
+    TestLeetCode2110();
+    TestLeetCode2063();
+    TestLeetCode2100();
+    TestLeetCode2031();
+    TestLeetCode2024();
     TestLeetCode2113();
     TestLeetCode2091();
     TestLeetCode2028();
