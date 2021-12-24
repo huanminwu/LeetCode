@@ -4852,8 +4852,68 @@ void TestLeetCode1249(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode2109(void)
+{
+    LeetCodeString leetCode;
+    string s = "LeetcodeHelpsMeLearn";
+    vector<int> spaces = { 8, 13, 15 };
+    string result = leetCode.addSpaces(s, spaces);
+    Logger::WriteMessage(spaces);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "icodeinpython";
+    spaces = { 1,5,7,9 };
+    result = leetCode.addSpaces(s, spaces);
+    Logger::WriteMessage(spaces);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "spacing";
+    spaces = { 0, 1, 2, 3, 4, 5, 6 };
+    result = leetCode.addSpaces(s, spaces);
+    Logger::WriteMessage(spaces);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
+void TestLeetCode2067(void)
+{
+    LeetCodeString leetCode;
+    string s = "aaabcbbcc";
+    int count = 3;
+    int result = leetCode.equalCountSubstrings(s, count);
+    Logger::WriteMessage("s = " + s + "; count = " + to_string(count) + "; result = " + to_string(result));
+
+    s = "abcd";
+    count = 2;
+    result = leetCode.equalCountSubstrings(s, count);
+    Logger::WriteMessage("s = " + s + "; count = " + to_string(count) + "; result = " + to_string(result));
+
+    s = "a";
+    count = 5;
+    result = leetCode.equalCountSubstrings(s, count);
+    Logger::WriteMessage("s = " + s + "; count = " + to_string(count) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2083(void)
+{
+    LeetCodeString leetCode;
+    string s = "abcba";
+    int result = leetCode.numberOfSubstringsII(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "abacad";
+    result = leetCode.numberOfSubstringsII(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "a";
+    result = leetCode.numberOfSubstringsII(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2083();
+    TestLeetCode2067();
+    TestLeetCode2109();
     TestLeetCode1249();
     TestLeetCode921();
     TestLeetCode32();

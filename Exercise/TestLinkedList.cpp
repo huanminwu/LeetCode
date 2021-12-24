@@ -883,9 +883,96 @@ void TestLeetCode1836(void)
     leetCode.freeListNodes(result);
 }
 
+void TestLeetCode2046(void)
+{
+    Logger::WriteMessage("Test Leet Code 2046");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 0,2,-5,5,10,-10 };
+    ListNode* list = leetCode.generateListNodes(data_list);
+    ListNode* result = leetCode.sortLinkedList(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 0,1,2 };
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.sortLinkedList(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 1 };
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.sortLinkedList(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+}
+
+void TestLeetCode2095(void)
+{
+    Logger::WriteMessage("Test Leet Code 2095");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 1,3,4,7,1,2,6 };
+    ListNode* list = leetCode.generateListNodes(data_list);
+    ListNode* result = leetCode.deleteMiddle(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 1,2,3,4 };
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.deleteMiddle(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 2, 1 };
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.deleteMiddle(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 1 };
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.deleteMiddle(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+}
+
+void TestLeetCode2074(void)
+{
+    Logger::WriteMessage("Test Leet Code 2074");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 5,2,6,3,9,1,7,3,8,4 };
+    ListNode* list = leetCode.generateListNodes(data_list);
+    ListNode* result = leetCode.reverseEvenLengthGroups(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 1,1,0,6 };
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.reverseEvenLengthGroups(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 1,1,0,6,5 };
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.reverseEvenLengthGroups(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+}
 
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode2074();
+    TestLeetCode2095();
+    TestLeetCode2046();
     TestLeetCode1836();
     TestLeetCode1721();
     TestLeetCode1669();

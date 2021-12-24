@@ -2487,4 +2487,258 @@ ListNode* LeetCodeLinkedList::deleteDuplicatesUnsorted(ListNode* head)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2046. Sort Linked List Already Sorted Using Absolute Values
+///                                                                 
+/// Medium
+///
+/// Given the head of a singly linked list that is sorted in 
+/// non-decreasing order using the absolute values of its nodes, return 
+/// the list sorted in non-decreasing order using the actual values of 
+/// its nodes.
+/// 
+/// Example 1:
+/// Input: head = [0,2,-5,5,10,-10]
+/// Output: [-10,-5,0,2,5,10]
+/// Explanation:
+/// The list sorted in non-descending order using the absolute values 
+/// of the nodes is [0,2,-5,5,10,-10].
+/// The list sorted in non-descending order using the actual values 
+/// is [-10,-5,0,2,5,10].
+///
+/// Example 2:
+/// Input: head = [0,1,2]
+/// Output: [0,1,2]
+/// Explanation:
+/// The linked list is already sorted in non-decreasing order.
+/// Example 3:
+/// Input: head = [1]
+/// Output: [1]
+/// Explanation:
+/// The linked list is already sorted in non-decreasing order.
+/// 
+/// Constraints:
+/// 1. The number of nodes in the list is the range [1, 10^5].
+/// 2. -5000 <= Node.val <= 5000
+/// 3. head is sorted in non-decreasing order using the absolute value 
+///    of its nodes.
+/// 
+/// Follow up:
+/// 1. Can you think of a solution with O(n) time complexity?
+/// </summary>
+ListNode* LeetCodeLinkedList::sortLinkedList(ListNode* head)
+{
+    ListNode* negative_head = nullptr;
+    ListNode* negative_tail = nullptr;
+
+    ListNode* positive_head = nullptr;
+    ListNode* positive_tail = nullptr;
+
+    ListNode* node = head;
+    while (node != nullptr)
+    {
+        ListNode* next = node->next;
+        node->next = nullptr;
+        if (node->val >= 0)
+        {
+            if (positive_tail == nullptr)
+            {
+                positive_head = node;
+            }
+            else
+            {
+                positive_tail->next = node;
+            }
+            positive_tail = node;
+        }
+        else
+        {
+            if (negative_head == nullptr)
+            {
+                negative_tail = node;
+            }
+            node->next = negative_head;
+            negative_head = node;
+        }
+        node = next;
+    }
+    if (negative_head != nullptr)
+    {
+        head = negative_head;
+        negative_tail->next = positive_head;
+    }
+    else
+    {
+        head = positive_head;
+    }
+    return head;
+}
+
+/// <summary>
+/// Leet Code 2074. Reverse Nodes in Even Length Groups
+///                                                                 
+/// Medium
+///
+/// You are given the head of a linked list.
+///
+/// The nodes in the linked list are sequentially assigned to non-empty 
+/// groups whose lengths form the sequence of the natural numbers 
+/// (1, 2, 3, 4, ...). The length of a group is the number of nodes 
+/// assigned to it. In other words,
+///
+/// The 1st node is assigned to the first group.
+/// The 2nd and the 3rd nodes are assigned to the second group.
+/// The 4th, 5th, and 6th nodes are assigned to the third group, and so on.
+/// Note that the length of the last group may be less than or equal to 
+/// 1 + the length of the second to last group.
+///
+/// Reverse the nodes in each group with an even length, and return the 
+/// head of the modified linked list.
+///
+/// Example 1:
+/// Input: head = [5,2,6,3,9,1,7,3,8,4]
+/// Output: [5,6,2,3,9,1,4,8,3,7]
+/// Explanation:
+/// - The length of the first group is 1, which is odd, hence no reversal 
+///   occurs.
+/// - The length of the second group is 2, which is even, hence the nodes 
+///   are reversed.
+/// - The length of the third group is 3, which is odd, hence no reversal 
+///   occurs.
+/// - The length of the last group is 4, which is even, hence the nodes 
+///   are reversed.
+///
+/// Example 2:
+/// Input: head = [1,1,0,6]
+/// Output: [1,0,1,6]
+/// Explanation:
+/// - The length of the first group is 1. No reversal occurs.
+/// - The length of the second group is 2. The nodes are reversed.
+/// - The length of the last group is 1. No reversal occurs.
+///
+/// Example 3:
+/// Input: head = [1,1,0,6,5]
+/// Output: [1,0,1,5,6]
+/// Explanation:
+/// - The length of the first group is 1. No reversal occurs.
+/// - The length of the second group is 2. The nodes are reversed.
+/// - The length of the last group is 2. The nodes are reversed.
+///
+/// Constraints:
+/// 1. The number of nodes in the list is in the range [1, 10^5].
+/// 2. 0 <= Node.val <= 10^5
+/// </summary>
+ListNode* LeetCodeLinkedList::reverseEvenLengthGroups(ListNode* head)
+{
+    int group = 1;
+    ListNode* prev_tail = head;
+    ListNode* tail = head;
+    int count = 0;
+    while (tail != nullptr)
+    {
+        count++;
+        tail = tail->next;
+    }
+    tail = head;
+    int prev_count = 1;
+    while (tail != nullptr && tail->next != nullptr)
+    {
+        group++;
+        prev_tail = tail;
+        tail = tail->next;
+        int size = min(group, count - prev_count);
+        if (size % 2 == 0)
+        {
+            for (int i = 0; i < size - 1; i++)
+            {
+                if (tail == nullptr || tail->next == nullptr) break;
+                ListNode* next = tail->next;
+                tail->next = next->next;
+                next->next = prev_tail->next;
+                prev_tail->next = next;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < size - 1; i++)
+            {
+                if (tail == nullptr || tail->next == nullptr) break;
+                tail = tail->next;
+            }
+        }
+        prev_count += size;
+    }
+    return head;
+}
+
+/// <summary>
+/// Leet Code 2095. Delete the Middle Node of a Linked List
+///                                                                 
+/// Medium
+///
+/// You are given the head of a linked list. Delete the middle node, and 
+/// return the head of the modified linked list.
+///
+/// The middle node of a linked list of size n is the (n / 2)th node from 
+/// the start using 0-based indexing, where ?x? denotes the largest 
+/// integer less than or equal to x.
+///
+/// For n = 1, 2, 3, 4, and 5, the middle nodes are 0, 1, 1, 2, and 2, 
+/// respectively.
+///
+/// Example 1:
+/// Input: head = [1,3,4,7,1,2,6]
+/// Output: [1,3,4,1,2,6]
+/// Explanation:
+/// The above figure represents the given linked list. The indices of the 
+/// nodes are written below.
+/// Since n = 7, node 3 with value 7 is the middle node, which is marked 
+/// in red.
+/// We return the new list after removing this node. 
+///
+/// Example 2:
+/// Input: head = [1,2,3,4]
+/// Output: [1,2,4]
+/// Explanation:
+/// The above figure represents the given linked list.
+/// For n = 4, node 2 with value 3 is the middle node, which is marked 
+/// in red.
+///
+/// Example 3:
+/// Input: head = [2,1]
+/// Output: [2]
+/// Explanation:
+/// The above figure represents the given linked list.
+/// For n = 2, node 1 with value 1 is the middle node, which is marked 
+/// in red.
+/// Node 0 with value 2 is the only node remaining after removing node 1.
+/// 
+/// Constraints:
+/// 1. The number of nodes in the list is in the range [1, 10^5].
+/// 2. 1 <= Node.val <= 10^5
+/// </summary>
+ListNode* LeetCodeLinkedList::deleteMiddle(ListNode* head)
+{
+    ListNode* slow = nullptr;
+    ListNode* fast = head;
+    while (fast != nullptr && fast->next != nullptr)
+    {
+        if (slow == nullptr)
+        {
+            slow = head;
+        }
+        else
+        {
+            slow = slow->next;
+        }
+        fast = fast->next;
+        fast = fast->next;
+    }
+    if (slow == nullptr) return nullptr;
+    else
+    {
+        slow->next = slow->next->next;
+        return head;
+    }
+}
 #pragma endregion

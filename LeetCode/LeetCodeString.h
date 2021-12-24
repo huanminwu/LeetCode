@@ -9375,6 +9375,147 @@ public:
     /// 2. s[i] is one of  '(' , ')' and lowercase English letters.
     /// </summary>
     string minRemoveToMakeValid(string s);
+
+    /// <summary>
+    /// Leet Code 2109. Adding Spaces to a String
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given a 0-indexed string s and a 0-indexed integer array 
+    /// spaces that describes the indices in the original string where 
+    /// spaces will be added. Each space should be inserted before the 
+    /// character at the given index.
+    ///
+    /// For example, given s = "EnjoyYourCoffee" and spaces = [5, 9], 
+    /// we place spaces before 'Y' and 'C', which are at indices 5 and 9 
+    /// respectively. Thus, we obtain "Enjoy Your Coffee".
+    /// Return the modified string after the spaces have been added.
+    /// 
+    /// Example 1:
+    /// Input: s = "LeetcodeHelpsMeLearn", spaces = [8,13,15]
+    /// Output: "Leetcode Helps Me Learn"
+    /// Explanation: 
+    /// The indices 8, 13, and 15 correspond to the underlined characters 
+    /// in "LeetcodeHelpsMeLearn".
+    /// We then place spaces before those characters.
+    ///
+    /// Example 2:
+    /// Input: s = "icodeinpython", spaces = [1,5,7,9]
+    /// Output: "i code in py thon"
+    /// Explanation:
+    /// The indices 1, 5, 7, and 9 correspond to the underlined characters 
+    /// in "icodeinpython".
+    /// We then place spaces before those characters.
+    ///
+    /// Example 3:
+    /// Input: s = "spacing", spaces = [0,1,2,3,4,5,6]
+    /// Output: " s p a c i n g"
+    /// Explanation:
+    /// We are also able to place spaces before the first character of the 
+    /// string.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 3 * 10^5
+    /// 2. s consists only of lowercase and uppercase English letters.
+    /// 3. 1 <= spaces.length <= 3 * 10^5
+    /// 4. 0 <= spaces[i] <= s.length - 1
+    /// 5. All the values of spaces are strictly increasing.
+    /// </summary>
+    string addSpaces(string s, vector<int>& spaces);
+
+    /// <summary>
+    /// Leet Code 2067. Number of Equal Count Substrings
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given a 0-indexed string s consisting of only lowercase 
+    /// English letters, and an integer count. A substring of s is said 
+    /// to be an equal count substring if, for each unique letter in the 
+    /// substring, it appears exactly count times in the substring.
+    ///
+    /// Return the number of equal count substrings in s.
+    /// A substring is a contiguous non-empty sequence of characters 
+    /// within a string.
+    /// 
+    /// Example 1:
+    /// Input: s = "aaabcbbcc", count = 3
+    /// Output: 3
+    /// Explanation:
+    /// The substring that starts at index 0 and ends at index 2 is "aaa".
+    /// The letter 'a' in the substring appears exactly 3 times.
+    /// The substring that starts at index 3 and ends at index 8 is "bcbbcc".
+    /// The letters 'b' and 'c' in the substring appear exactly 3 times.
+    /// The substring that starts at index 0 and ends at index 8 
+    /// is "aaabcbbcc".
+    /// The letters 'a', 'b', and 'c' in the substring appear exactly 3 times.
+    ///
+    /// Example 2:
+    /// Input: s = "abcd", count = 2
+    /// Output: 0
+    /// Explanation:
+    /// The number of times each letter appears in s is less than count.
+    /// Therefore, no substrings in s are equal count substrings, so return 0.
+    ///
+    /// Example 3:
+    /// Input: s = "a", count = 5
+    /// Output: 0
+    /// Explanation:
+    /// The number of times each letter appears in s is less than count.
+    /// Therefore, no substrings in s are equal count substrings, so return 0
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 3 * 10^4
+    /// 2. 1 <= count <= 3 * 10^4
+    /// 3. s consists only of lowercase English letters.
+    /// </summary>
+    int equalCountSubstrings(string s, int count);
+
+    /// <summary>
+    /// Leet Code 2083. Substrings That Begin and End With the Same Letter
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given a 0-indexed string s consisting of only lowercase 
+    /// English letters. Return the number of substrings in s that begin 
+    /// and end with the same character.
+    ///
+    /// A substring is a contiguous non-empty sequence of characters within 
+    /// a string.
+    /// 
+    /// Example 1:
+    /// Input: s = "abcba"
+    /// Output: 7
+    /// Explanation:
+    /// The substrings of length 1 that start and end with the same letter 
+    /// are: "a", "b", "c", "b", and "a".
+    /// The substring of length 3 that starts and ends with the same letter 
+    /// is: "bcb".
+    /// The substring of length 5 that starts and ends with the same letter 
+    /// is: "abcba".
+    ///
+    /// Example 2:
+    /// Input: s = "abacad"
+    /// Output: 9
+    /// Explanation:
+    /// The substrings of length 1 that start and end with the same letter 
+    /// are: "a", "b", "a", "c", "a", and "d".
+    /// The substrings of length 3 that start and end with the same letter 
+    /// are: "aba" and "aca".
+    /// The substring of length 5 that starts and ends with the same letter 
+    /// is: "abaca".
+    ///
+    /// Example 3:
+    /// Input: s = "a"
+    /// Output: 1
+    /// Explanation:
+    /// The substring of length 1 that starts and ends with the same letter 
+    /// is: "a".
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s consists only of lowercase English letters.
+    /// </summary>
+    long long numberOfSubstringsII(string s);
 #pragma endregion
 };
 

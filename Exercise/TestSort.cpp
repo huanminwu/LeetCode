@@ -1708,8 +1708,44 @@ void TestLeetCode2111(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2070(void)
+{
+    Logger::WriteMessage("Test Leet Code 2070");
+    LeetCodeSort leetCode;
+    vector<vector<int>> items = 
+    {
+        {1, 2},{3, 2},{2, 4},{5, 6},{3, 5} 
+    };
+    vector<int> queries = { 1, 2, 3, 4, 5, 6 };
+    vector<int> result = leetCode.maximumBeauty(items, queries);
+    Logger::WriteMessage(items);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    items =
+    {
+        {1,2},{1,2},{1,3},{1,4}
+    };
+    queries = { 1 };
+    result = leetCode.maximumBeauty(items, queries);
+    Logger::WriteMessage(items);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    items =
+    {
+        {10,1000}
+    };
+    queries = { 5 };
+    result = leetCode.maximumBeauty(items, queries);
+    Logger::WriteMessage(items);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2070();
     TestLeetCode2111();
     TestLeetCode2098();
     TestLeetCode1968();
