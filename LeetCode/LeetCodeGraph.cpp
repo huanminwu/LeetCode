@@ -12484,4 +12484,164 @@ vector<vector<int>> LeetCodeGraph::validArrangement(vector<vector<int>>& pairs)
     reverse(result.begin(), result.end());
     return result;
 }
+
+/// <summary>
+/// Leet Code 1976. Number of Ways to Arrive at Destination
+///                                                                 
+/// Medium
+///
+/// You are in a city that consists of n intersections numbered from 0 to 
+/// n - 1 with bi-directional roads between some intersections. The inputs 
+/// are generated such that you can reach any intersection from any other 
+/// intersection and that there is at most one road between any two 
+/// intersections.
+/// You are given an integer n and a 2D integer array roads where roads[i] 
+/// = [ui, vi, timei] means that there is a road between intersections ui 
+/// and vi that takes timei minutes to travel. You want to know in how 
+/// many ways you can travel from intersection 0 to intersection n - 1 in 
+/// the shortest amount of time.
+/// Return the number of ways you can arrive at your destination in the 
+/// shortest amount of time. Since the answer may be large, return it 
+/// modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: n = 7, roads = [[0,6,7],[0,1,2],[1,2,3],[1,3,3],[6,3,3],
+/// [3,5,1],[6,5,1],[2,5,1],[0,4,5],[4,6,2]]
+/// Output: 4
+/// Explanation: The shortest amount of time it takes to go from 
+/// intersection 0 to intersection 6 is 7 minutes.
+/// The four ways to get there in 7 minutes are:
+/// - 0 -> 6
+/// - 0 -> 4 -> 6
+/// - 0 -> 1 -> 2 -> 5 -> 6
+/// - 0 -> 1 -> 3 -> 5 -> 6
+///
+/// Example 2:
+/// Input: n = 2, roads = [[1,0,10]]
+/// Output: 1
+/// Explanation: There is only one way to go from intersection 0 to 
+/// intersection 1, and it takes 10 minutes.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 200
+/// 2. n - 1 <= roads.length <= n * (n - 1) / 2
+/// 3. roads[i].length == 3
+/// 4. 0 <= ui, vi <= n - 1
+/// 5. 1 <= timei <= 10^9
+/// 6. ui != vi
+/// 7. There is at most one road connecting any two intersections.
+/// 8. You can reach any intersection from any other intersection.
+/// </summary>
+int LeetCodeGraph::countPaths(int n, vector<vector<int>>& roads)
+{
+    vector<pair<long long, int>> dist(n, make_pair(LLONG_MAX, 0));
+    vector<vector<pair<int, int>>> neighbors(n);
+    for (size_t i = 0; i < roads.size(); i++)
+    {
+        neighbors[roads[i][0]].push_back(make_pair(roads[i][1], roads[i][2]));
+        neighbors[roads[i][1]].push_back(make_pair(roads[i][0], roads[i][2]));
+    }
+    priority_queue<pair<long long, int>> pq;
+    pq.push(make_pair(0, 0));
+    dist[0] = make_pair(0, 1);
+    int M = 1000000007;
+    while (!pq.empty())
+    {
+        pair<long long, int> pos = pq.top();
+        pq.pop();
+        int node = pos.second;
+        for (size_t i = 0; i < neighbors[node].size(); i++)
+        {
+            int next = neighbors[node][i].first;
+            long long d = (long long)(0 - pos.first) + (long long)neighbors[node][i].second;
+            if (dist[next].first > d)
+            {
+                dist[next].first = d;
+                dist[next].second = dist[node].second;
+                pq.push(make_pair(0 - d, next));
+            }
+            else if (dist[next].first == d)
+            {
+                dist[next].second = (dist[next].second + dist[node].second) % M;
+            }
+        }
+    }
+    return dist[n - 1].second;
+}
+
+/// <summary>
+/// Leet Code 2087. Minimum Cost Homecoming of a Robot in a Grid
+///                                                                 
+/// Medium
+///
+/// There is an m x n grid, where (0, 0) is the top-left cell and 
+/// (m - 1, n - 1) is the bottom-right cell. You are given an integer 
+/// array startPos where startPos = [startrow, startcol] indicates that 
+/// initially, a robot is at the cell (startrow, startcol). You are also 
+/// given an integer array homePos where homePos = [homerow, homecol] 
+/// indicates that its home is at the cell (homerow, homecol).
+/// The robot needs to go to its home. It can move one cell in four 
+/// directions: left, right, up, or down, and it can not move outside the 
+/// boundary. Every move incurs some cost. You are further given two 
+/// 0-indexed integer arrays: rowCosts of length m and colCosts of length n.
+///
+/// If the robot moves up or down into a cell whose row is r, then this move 
+/// costs rowCosts[r].
+/// If the robot moves left or right into a cell whose column is c, then 
+/// this move costs colCosts[c].
+/// Return the minimum total cost for this robot to return home.
+/// 
+/// Example 1:
+/// Input: startPos = [1, 0], homePos = [2, 3], rowCosts = [5, 4, 3], 
+/// colCosts = [8, 2, 6, 7]
+/// Output: 18
+/// Explanation: One optimal path is that:
+/// Starting from (1, 0)
+/// -> It goes down to (2, 0). This move costs rowCosts[2] = 3.
+/// -> It goes right to (2, 1). This move costs colCosts[1] = 2.
+/// -> It goes right to (2, 2). This move costs colCosts[2] = 6.
+/// -> It goes right to (2, 3). This move costs colCosts[3] = 7.
+/// The total cost is 3 + 2 + 6 + 7 = 18
+///
+/// Example 2:
+/// Input: startPos = [0, 0], homePos = [0, 0], rowCosts = [5], 
+/// colCosts = [26]
+/// Output: 0
+/// Explanation: The robot is already at its home. Since no moves occur, 
+/// the total cost is 0.
+///
+/// Constraints:
+/// 1. m == rowCosts.length
+/// 2. n == colCosts.length
+/// 3. 1 <= m, n <= 10^5
+/// 4. 0 <= rowCosts[r], colCosts[c] <= 10^4
+/// 5. startPos.length == 2
+/// 6. homePos.length == 2
+/// 7. 0 <= startrow, homerow < m
+/// 8. 0 <= startcol, homecol < n
+/// </summary>
+int LeetCodeGraph::minCost(vector<int>& startPos, vector<int>& homePos, vector<int>& rowCosts, vector<int>& colCosts)
+{
+    int start = startPos[0];
+    int end = homePos[0];
+    int step = 1;
+    if (start > end) step = -1;
+    int result = 0;
+    while (start != end)
+    {
+        start += step;
+        result += rowCosts[start];
+    }
+
+    start = startPos[1];
+    end = homePos[1];
+    step = 1;
+    if (start > end) step = -1;
+    while (start != end)
+    {
+        start += step;
+        result += colCosts[start];
+    }
+    return result;
+}
 #pragma endregion

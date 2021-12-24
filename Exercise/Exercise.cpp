@@ -3021,6 +3021,7 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 { 
+    TestLeetCodeGraph();
     TestLeetCodeString();
     TestLeetCodeSort();
     TestLeetCodeLinkedList();
@@ -3036,7 +3037,6 @@ void main(int argc, char* argv[])
     TestLeetCodeDFS();
     TestLeetCodeGraph();
     TestLeetCodeBit();
-    TestLeetCodeGraph();
     TestLeetCodeHashtable();
     TestLeetCodeBFS();
     TestLeetCodeHashtable();

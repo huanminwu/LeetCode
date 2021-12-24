@@ -3940,14 +3940,63 @@ void TestLeetCode2097(void)
     Logger::WriteMessage(pairs);
     Logger::WriteMessage(result);
 
-    pairs = { {5,13},{10,6},{11,16},{15,19},{16,19},{1,10},{19,11},{4,16},{19,9},{5,11},{5,6},{13,5},{13,9},{9,15},{11,3},{6,9},{9,13},{3,1},{16,5},{6,5} };
-    result = leetCode.validArrangement(pairs);
-    Logger::WriteMessage(pairs);
-    Logger::WriteMessage(result);
+}
+
+void TestLeetCode1976(void)
+{
+    Logger::WriteMessage("Test Leet Code 1976");
+    LeetCodeGraph leetCode;
+    int n = 7;
+    vector<vector<int>> roads = 
+    { 
+        {0, 6, 7}, {0, 1, 2},{1, 2, 3}, {1, 3, 3}, {6, 3, 3}, {3, 5, 1},  {6, 5, 1}, 
+        {2, 5, 1}, {0, 4, 5}, {4, 6, 2}
+    };
+    int result = leetCode.countPaths(n, roads);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 2;
+    roads =
+    {
+        {1, 0, 10}
+    };
+    result = leetCode.countPaths(n, roads);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2087(void)
+{
+    Logger::WriteMessage("Test Leet Code 2087");
+    LeetCodeGraph leetCode;
+    vector<int> startPos = { 1, 0 };
+    vector<int> homePos = { 2, 3 };
+    vector<int> rowCosts = { 5, 4, 3 };
+    vector<int> colCosts = { 8, 2, 6, 7 };
+    int result = leetCode.minCost(startPos, homePos, rowCosts, colCosts);
+    Logger::WriteMessage(startPos);
+    Logger::WriteMessage(homePos);
+    Logger::WriteMessage(rowCosts);
+    Logger::WriteMessage(colCosts);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    startPos = { 0, 0 };
+    homePos = { 0, 0 };
+    rowCosts = { 5 };
+    colCosts = { 26 };
+    result = leetCode.minCost(startPos, homePos, rowCosts, colCosts);
+    Logger::WriteMessage(startPos);
+    Logger::WriteMessage(homePos);
+    Logger::WriteMessage(rowCosts);
+    Logger::WriteMessage(colCosts);
+    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2087();
+    TestLeetCode1976();
     TestLeetCode2097();
     TestLeetCode2061();
     TestLeetCode2077();

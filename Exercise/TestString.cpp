@@ -4897,7 +4897,7 @@ void TestLeetCode2083(void)
 {
     LeetCodeString leetCode;
     string s = "abcba";
-    int result = leetCode.numberOfSubstringsII(s);
+    long long result = leetCode.numberOfSubstringsII(s);
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 
     s = "abacad";
