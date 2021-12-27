@@ -3678,19 +3678,20 @@ void LeetCodeSort::merge(vector<int>& nums1, int m, vector<int>& nums2, int n)
 /// 2. -10000 < points[i][0] < 10000
 /// 3. -10000 < points[i][1] < 10000
 /// </summary>
-vector<vector<int>> LeetCodeSort::kClosest(vector<vector<int>>& points, int K)
+vector<vector<int>> LeetCodeSort::kClosest(vector<vector<int>>& points, int k)
 {
-    map<double, vector<int>> selection;
+    priority_queue<pair<double, int>> pq;
     for (size_t i = 0; i < points.size(); i++)
     {
         double distance = sqrt(pow(points[i][0], 2) + pow(points[i][1], 2));
-        selection[-distance] = points[i];
-        if (selection.size() > (size_t) K) selection.erase(selection.begin());
+        pq.push(make_pair(distance, i));
+        if (pq.size() > (size_t) k) pq.pop();
     }
     vector<vector<int>> result;
-    for (auto itr : selection)
+    while (!pq.empty())
     {
-        result.push_back(itr.second);
+        result.push_back(points[pq.top().second]);
+        pq.pop();
     }
     return result;
 }

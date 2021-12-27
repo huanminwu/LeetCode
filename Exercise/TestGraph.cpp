@@ -3993,8 +3993,71 @@ void TestLeetCode2087(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2039(void)
+{
+    Logger::WriteMessage("Test Leet Code 2039");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> edges = { {0, 1},{1, 2} };
+    vector<int> patience = { 0, 2, 1 };
+    int result = leetCode.networkBecomesIdle(edges, patience);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(patience);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {0, 1},{0, 2},{1, 2} };
+    patience = { 0, 10, 10 };
+    result = leetCode.networkBecomesIdle(edges, patience);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(patience);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2049(void)
+{
+    Logger::WriteMessage("Test Leet Code 2049");
+    LeetCodeGraph leetCode;
+    vector<int> parents = { -1, 2, 0, 2, 0 };
+    int result = leetCode.countHighestScoreNodes(parents);
+    Logger::WriteMessage(parents);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    parents = { -1,2,0 };
+    result = leetCode.countHighestScoreNodes(parents);
+    Logger::WriteMessage(parents);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2059(void)
+{
+    Logger::WriteMessage("Test Leet Code 2059");
+    LeetCodeGraph leetCode;
+    vector<int> nums = { 2, 4, 12 };
+    int start = 2;
+    int goal = 12;
+    int result = leetCode.minimumOperations(nums, start, goal);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("start = " + to_string(start) + "; goal = " + to_string(goal) + "; result = " + to_string(result));
+
+    nums = { 3,5,7 };
+    start = 0;
+    goal = -4;
+    result = leetCode.minimumOperations(nums, start, goal);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("start = " + to_string(start) + "; goal = " + to_string(goal) + "; result = " + to_string(result));
+
+    nums = { 2,8,16 };
+    start = 0;
+    goal = 1;
+    result = leetCode.minimumOperations(nums, start, goal);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("start = " + to_string(start) + "; goal = " + to_string(goal) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2059();
+    TestLeetCode2049();
+    TestLeetCode2039();
     TestLeetCode2087();
     TestLeetCode1976();
     TestLeetCode2097();

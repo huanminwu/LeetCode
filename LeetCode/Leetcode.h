@@ -4482,6 +4482,16 @@ public:
         WriteMessage(message.c_str());
     }
 
+    static void WriteMessage(vector<long long>& data)
+    {
+        std::string message;
+        for (size_t i = 0; i < data.size(); i++)
+        {
+            message.append(std::to_string(data[i]) + " ");
+        }
+        WriteMessage(message.c_str());
+    }
+
     static void WriteMessage(vector<double> &data)
     {
         std::string message;

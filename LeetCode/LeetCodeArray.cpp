@@ -19809,5 +19809,237 @@ int LeetCodeArray::minOperations(vector<vector<int>>& grid, int x)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2120. Execution of All Suffix Instructions Staying in a Grid
+///                                                                 
+/// Medium
+///
+/// There is an n x n grid, with the top-left cell at (0, 0) and the 
+/// bottom-right cell at (n - 1, n - 1). You are given the integer n and 
+/// an integer array startPos where startPos = [startrow, startcol] 
+/// indicates that a robot is initially at cell (startrow, startcol).
+///
+/// You are also given a 0-indexed string s of length m where s[i] is 
+/// the ith instruction for the robot: 'L' (move left), 'R' (move right), 
+/// 'U' (move up), and 'D' (move down).
+///
+/// The robot can begin executing from any ith instruction in s. It 
+/// executes the instructions one by one towards the end of s but it 
+/// stops if either of these conditions is met:
+///
+/// The next instruction will move the robot off the grid.
+/// There are no more instructions left to execute.
+/// Return an array answer of length m where answer[i] is the number of 
+/// instructions the robot can execute if the robot begins executing 
+/// from the ith instruction in s.
+/// 
+/// Example 1:
+/// Input: n = 3, startPos = [0,1], s = "RRDDLU"
+/// Output: [1,5,4,3,1,0]
+/// Explanation: Starting from startPos and beginning execution from the 
+/// ith instruction:
+/// - 0th: "RRDDLU". Only one instruction "R" can be executed before it 
+///   moves off the grid.
+/// - 1st:  "RDDLU". All five instructions can be executed while it stays 
+///   in the grid and ends at (1, 1).
+/// - 2nd:   "DDLU". All four instructions can be executed while it 
+///   stays in the grid and ends at (1, 0).
+/// - 3rd:    "DLU". All three instructions can be executed while it 
+///   stays in the grid and ends at (0, 0).
+/// - 4th:     "LU". Only one instruction "L" can be executed 
+///   before it moves off the grid.
+/// - 5th:      "U". If moving up, it would move off the grid.
+///
+/// Example 2:
+/// Input: n = 2, startPos = [1,1], s = "LURD"
+/// Output: [4,1,0,0]
+/// Explanation:
+/// - 0th: "LURD".
+/// - 1st:  "URD".
+/// - 2nd:   "RD".
+/// - 3rd:    "D".
+///
+/// Example 3:
+/// Input: n = 1, startPos = [0,0], s = "LRUD"
+/// Output: [0,0,0,0]
+/// Explanation: No matter which instruction the robot begins execution 
+/// from, it would move off the grid.
+///
+/// Constraints:
+/// 1. m == s.length
+/// 2. 1 <= n, m <= 500
+/// 3. startPos.length == 2
+/// 4. 0 <= startrow, startcol < n
+/// 5. s consists of 'L', 'R', 'U', and 'D'.
+/// </summary>
+vector<int> LeetCodeArray::executeInstructions(int n, vector<int>& startPos, string s)
+{
+    int h = 1000, v = 1000, m = s.size();
+    vector<int> hor(2001, m), ver(2001, m), res(m);
+    for (int i = m - 1; i >= 0; --i)
+    {
+        hor[h] = ver[v] = i;
+        h += s[i] == 'L' ? 1 : s[i] == 'R' ? -1 : 0;
+        v += s[i] == 'U' ? 1 : s[i] == 'D' ? -1 : 0;
+        res[i] = min({ m, hor[h - startPos[1] - 1], hor[h - startPos[1] + n], ver[v - startPos[0] - 1], ver[v - startPos[0] + n] }) - i;
+    }
+    return res;
+}
+
+/// <summary>
+/// Leet Code 2122. Recover the Original Array
+///                                                                 
+/// Hard
+///
+/// Alice had a 0-indexed array arr consisting of n positive integers. 
+/// She chose an arbitrary positive integer k and created two new 
+/// 0-indexed integer arrays lower and higher in the following manner:
+///  
+/// lower[i] = arr[i] - k, for every index i where 0 <= i < n
+/// higher[i] = arr[i] + k, for every index i where 0 <= i < n
+/// Unfortunately, Alice lost all three arrays. However, she remembers 
+/// the integers that were present in the arrays lower and higher, but 
+/// not the array each integer belonged to. Help Alice and recover the 
+/// original array.
+///
+/// Given an array nums consisting of 2n integers, where exactly n of 
+/// the integers were present in lower and the remaining in higher, 
+/// return the original array arr. In case the answer is not unique, 
+/// return any valid array.
+///
+/// Note: The test cases are generated such that there exists at least 
+/// one valid array arr.
+///
+/// Example 1:
+/// Input: nums = [2,10,6,4,8,12]
+/// Output: [3,7,11]
+/// Explanation:
+/// If arr = [3,7,11] and k = 1, we get lower = [2,6,10] and 
+/// higher = [4,8,12].
+/// Combining lower and higher gives us [2,6,10,4,8,12], which is a 
+/// permutation of nums.
+/// Another valid possibility is that arr = [5,7,9] and k = 3. In that 
+/// case, lower = [2,4,6] and higher = [8,10,12]. 
+///
+/// Example 2:
+/// Input: nums = [1,1,3,3]
+/// Output: [2,2]
+/// Explanation:
+/// If arr = [2,2] and k = 1, we get lower = [1,1] and higher = [3,3].
+/// Combining lower and higher gives us [1,1,3,3], which is equal to nums.
+/// Note that arr cannot be [1,3] because in that case, the only possible 
+/// way to obtain [1,1,3,3] is with k = 0.
+/// This is invalid since k must be positive.
+///
+/// Example 3:
+/// Input: nums = [5,435]
+/// Output: [220]
+/// Explanation:
+/// The only possible combination is arr = [220] and k = 215. Using them, 
+/// we get lower = [5] and higher = [435].
+///    
+/// Constraints:
+/// 1. 2 * n == nums.length
+/// 2. 1 <= n <= 1000
+/// 3. 1 <= nums[i] <= 10^9
+/// 4. The test cases are generated such that there exists at least
+///    one valid array arr.
+/// </summary>
+vector<int> LeetCodeArray::recoverArray(vector<int>& nums)
+{
+    int min_val = INT_MAX;
+    sort(nums.begin(), nums.end());
+    vector<int> diff;
+    for (size_t i = 1; i < nums.size(); i++)
+    {
+        if ((nums[i] != nums[0]) && ((nums[i] - nums[0]) % 2 == 0)) diff.push_back(nums[i] - nums[0]);
+    }
+    for (size_t i = 0; i < diff.size(); i++)
+    {
+        int gap = diff[i];
+        multiset<int> num_set(nums.begin(), nums.end());
+        vector<int> result;
+        while (!num_set.empty())
+        {
+            auto low = num_set.begin();
+            auto high = num_set.find(*low + gap);
+            if (high == num_set.end()) break;
+            result.push_back(*low + gap / 2);
+            num_set.erase(low);
+            num_set.erase(high);
+        }
+        if (result.size() == nums.size() / 2) return result;
+    }
+    return vector<int>();
+}
+
+/// <summary>
+/// Leet Code 2121. Intervals Between Identical Elements
+///                                                                 
+/// Medium
+///
+/// You are given a 0-indexed array of n integers arr.
+///
+/// The interval between two elements in arr is defined as the absolute 
+/// difference between their indices. More formally, the interval 
+/// between arr[i] and arr[j] is |i - j|.
+///
+/// Return an array intervals of length n where intervals[i] is the sum of 
+/// intervals between arr[i] and each element in arr with the same value 
+/// as arr[i].
+/// Note: |x| is the absolute value of x.
+///
+/// Example 1:
+/// Input: arr = [2,1,3,1,2,3,3]
+/// Output: [4,2,7,2,4,4,5]
+/// Explanation:
+/// - Index 0: Another 2 is found at index 4. |0 - 4| = 4
+/// - Index 1: Another 1 is found at index 3. |1 - 3| = 2
+/// - Index 2: Two more 3s are found at indices 5 and 6. 
+///   |2 - 5| + |2 - 6| = 7
+/// - Index 3: Another 1 is found at index 1. |3 - 1| = 2
+/// - Index 4: Another 2 is found at index 0. |4 - 0| = 4
+/// - Index 5: Two more 3s are found at indices 2 and 6. 
+///   |5 - 2| + |5 - 6| = 4
+/// - Index 6: Two more 3s are found at indices 2 and 5. 
+///   |6 - 2| + |6 - 5| = 5
+///
+/// Example 2:
+/// Input: arr = [10,5,10,10]
+/// Output: [5,0,3,4]
+/// Explanation:
+/// - Index 0: Two more 10s are found at indices 2 and 3. 
+///   |0 - 2| + |0 - 3| = 5
+/// - Index 1: There is only one 5 in the array, so its sum of intervals 
+///   to identical elements is 0.
+/// - Index 2: Two more 10s are found at indices 0 and 3. 
+///   |2 - 0| + |2 - 3| = 3
+/// - Index 3: Two more 10s are found at indices 0 and 2. 
+///   |3 - 0| + |3 - 2| = 4
+/// 
+/// Constraints:
+/// 1. n == arr.length
+/// 2. 1 <= n <= 10^5
+/// 3. 1 <= arr[i] <= 10^5
+/// </summary>
+vector<long long> LeetCodeArray::getDistances(vector<int>& arr)
+{
+    unordered_map<int, pair<long long, long long>> sum_map;
+    vector<long long> result(arr.size());
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        result[i] += (long long)sum_map[arr[i]].first * (long long)i - sum_map[arr[i]].second;
+        sum_map[arr[i]].first++;
+        sum_map[arr[i]].second += i;
+    }
+    sum_map.clear();
+    for (int i = arr.size() - 1; i >= 0; i--)
+    {
+        result[i] += sum_map[arr[i]].second - (long long)sum_map[arr[i]].first * (long long)i;
+        sum_map[arr[i]].first++;
+        sum_map[arr[i]].second += i;
+    }
+    return result;
+}
 #pragma endregion
 

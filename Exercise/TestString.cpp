@@ -4855,6 +4855,7 @@ void TestLeetCode1249(void)
 void TestLeetCode2109(void)
 {
     LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2109");
     string s = "LeetcodeHelpsMeLearn";
     vector<int> spaces = { 8, 13, 15 };
     string result = leetCode.addSpaces(s, spaces);
@@ -4877,6 +4878,7 @@ void TestLeetCode2109(void)
 void TestLeetCode2067(void)
 {
     LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2067");
     string s = "aaabcbbcc";
     int count = 3;
     int result = leetCode.equalCountSubstrings(s, count);
@@ -4896,6 +4898,7 @@ void TestLeetCode2067(void)
 void TestLeetCode2083(void)
 {
     LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2083");
     string s = "abcba";
     long long result = leetCode.numberOfSubstringsII(s);
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
@@ -4909,8 +4912,52 @@ void TestLeetCode2083(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode2114(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2114");
+    vector<string> sentences =
+    {
+        "alice and bob love leetcode", "i think so too", "this is great thanks very much"
+    };
+    int result = leetCode.mostWordsFound(sentences);
+    Logger::WriteMessage(sentences);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    sentences = { "please wait", "continue to fight", "continue to win" };
+    result = leetCode.mostWordsFound(sentences);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2116(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2116");
+    string s = "))()))";
+    string locked = "010100";
+    bool result = leetCode.canBeValid(s, locked);
+    Logger::WriteMessage("s = " + s + "; locked = " + locked + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "()()";
+    locked = "0000";
+    result = leetCode.canBeValid(s, locked);
+    Logger::WriteMessage("s = " + s + "; locked = " + locked + "; result = " + (string)(result ? "true" : "false"));
+
+    s = ")";
+    locked = "0";
+    result = leetCode.canBeValid(s, locked);
+    Logger::WriteMessage("s = " + s + "; locked = " + locked + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "(()";
+    locked = "000";
+    result = leetCode.canBeValid(s, locked);
+    Logger::WriteMessage("s = " + s + "; locked = " + locked + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2116();
+    TestLeetCode2114();
     TestLeetCode2083();
     TestLeetCode2067();
     TestLeetCode2109();

@@ -9516,6 +9516,99 @@ public:
     /// 2. s consists only of lowercase English letters.
     /// </summary>
     long long numberOfSubstringsII(string s);
+
+    /// <summary>
+    /// Leet Code 2114. Maximum Number of Words Found in Sentences
+    ///                                                                 
+    /// Easy
+    ///
+    /// A sentence is a list of words that are separated by a single space 
+    /// with no leading or trailing spaces.
+    ///
+    /// You are given an array of strings sentences, where each sentences[i] 
+    /// represents a single sentence.
+    ///
+    /// Return the maximum number of words that appear in a single sentence.
+    /// 
+    /// Example 1:
+    /// Input: sentences = ["alice and bob love leetcode", "i think so too", 
+    /// "this is great thanks very much"]
+    /// Output: 6
+    /// Explanation: 
+    /// - The first sentence, "alice and bob love leetcode", 
+    ///   has 5 words in total.
+    /// - The second sentence, "i think so too", has 4 words in total.
+    /// - The third sentence, "this is great thanks very much", 
+    ///   has 6 words in total.
+    /// Thus, the maximum number of words in a single sentence comes from 
+    /// the third sentence, which has 6 words.
+    /// Example 2:
+    /// Input: sentences = ["please wait", "continue to fight", 
+    ///        "continue to win"]
+    /// Output: 3
+    /// Explanation: It is possible that multiple sentences contain the 
+    /// same number of words. 
+    /// In this example, the second and third sentences (underlined) have 
+    /// the same number of words.
+    ///
+    /// Constraints:
+    /// 1. 1 <= sentences.length <= 100
+    /// 2. 1 <= sentences[i].length <= 100
+    /// 3. sentences[i] consists only of lowercase English letters 
+    ///    and ' ' only.
+    /// 4. sentences[i] does not have leading or trailing spaces.
+    /// 5. All the words in sentences[i] are separated by a single space.
+    /// </summary>
+    int mostWordsFound(vector<string>& sentences);
+
+    /// <summary>
+    /// Leet Code 2116. Check if a Parentheses String Can Be Valid
+    ///                                                                 
+    /// Medium
+    ///
+    /// A parentheses string is a non-empty string consisting only of '(' 
+    /// and ')'. It is valid if any of the following conditions is true:
+    ///
+    /// It is ().
+    /// It can be written as AB (A concatenated with B), where A and B 
+    /// are valid parentheses strings.
+    /// It can be written as (A), where A is a valid parentheses string.
+    /// You are given a parentheses string s and a string locked, both of 
+    /// length n. locked is a binary string consisting only of '0's and '1's. 
+    /// For each index i of locked,
+    ///
+    /// If locked[i] is '1', you cannot change s[i].
+    /// But if locked[i] is '0', you can change s[i] to either '(' or ')'.
+    /// Return true if you can make s a valid parentheses string. Otherwise, 
+    /// return false.
+    /// 
+    /// Example 1:
+    /// Input: s = "))()))", locked = "010100"
+    /// Output: true
+    /// Explanation: locked[1] == '1' and locked[3] == '1', so we cannot 
+    /// change s[1] or s[3].
+    /// We change s[0] and s[4] to '(' while leaving s[2] and s[5] unchanged 
+    /// to make s valid.
+    ///
+    /// Example 2:
+    /// Input: s = "()()", locked = "0000"
+    /// Output: true
+    /// Explanation: We do not need to make any changes because s is already 
+    /// valid.
+    ///
+    /// Example 3:
+    /// Input: s = ")", locked = "0"
+    /// Output: false
+    /// Explanation: locked permits us to change s[0]. 
+    /// Changing s[0] to either '(' or ')' will not make s valid.
+    /// 
+    /// Constraints:
+    /// 1. n == s.length == locked.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. s[i] is either '(' or ')'.
+    /// 4. locked[i] is either '0' or '1'.
+    /// </summary>
+    bool canBeValid(string s, string locked);
 #pragma endregion
 };
 

@@ -4243,8 +4243,47 @@ void TestLeetCode2048(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2117(void)
+{
+    Logger::WriteMessage("Test Leet Code 2117");
+    LeetCodeMath leetCode;
+    int left = 1;
+    int right = 4;
+    string result = leetCode.abbreviateProduct(left, right);
+    Logger::WriteMessage("left = " + to_string(left) + "; right = " + to_string(right) + "; result = " + result);
+
+    left = 2;
+    right = 11;
+    result = leetCode.abbreviateProduct(left, right);
+    Logger::WriteMessage("left = " + to_string(left) + "; right = " + to_string(right) + "; result = " + result);
+
+    left = 999998;
+    right = 1000000;
+    result = leetCode.abbreviateProduct(left, right);
+    Logger::WriteMessage("left = " + to_string(left) + "; right = " + to_string(right) + "; result = " + result);
+}
+
+void TestLeetCode2119(void)
+{
+    Logger::WriteMessage("Test Leet Code 2119");
+    LeetCodeMath leetCode;
+    int num = 526;
+    bool result = leetCode.isSameAfterReversals(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + (string)(result ? "true" : "false"));
+
+    num = 1800;
+    result = leetCode.isSameAfterReversals(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + (string)(result ? "true" : "false"));
+
+    num = 0;
+    result = leetCode.isSameAfterReversals(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2119();
+    TestLeetCode2117();
     TestLeetCode2048();
     TestLeetCode1999();
     TestLeetCode1953();

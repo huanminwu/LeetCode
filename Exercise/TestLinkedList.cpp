@@ -968,8 +968,35 @@ void TestLeetCode2074(void)
     leetCode.freeListNodes(result);
 }
 
+void TestLeetCode2058(void)
+{
+    Logger::WriteMessage("Test Leet Code 2058");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 3, 1 };
+    ListNode* list = leetCode.generateListNodes(data_list);
+    vector<int> result = leetCode.nodesBetweenCriticalPoints(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(list);
+
+    data_list = { 5,3,1,2,5,1,2 };
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.nodesBetweenCriticalPoints(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(list);
+
+    data_list = { 1,3,2,2,3,2,2,2,7 };
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.nodesBetweenCriticalPoints(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(list);
+}
+
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode2058();
     TestLeetCode2074();
     TestLeetCode2095();
     TestLeetCode2046();

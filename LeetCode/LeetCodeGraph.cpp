@@ -12644,4 +12644,322 @@ int LeetCodeGraph::minCost(vector<int>& startPos, vector<int>& homePos, vector<i
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2039. The Time When the Network Becomes Idle
+///                                                                 
+/// Medium
+///
+/// There is a network of n servers, labeled from 0 to n - 1. You are 
+/// given a 2D integer array edges, where edges[i] = [ui, vi] indicates 
+/// there is a message channel between servers ui and vi, and they can 
+/// pass any number of messages to each other directly in one second. 
+/// You are also given a 0-indexed integer array patience of length n.
+/// All servers are connected, i.e., a message can be passed from one 
+/// server to any other server(s) directly or indirectly through the 
+/// message channels.
+/// The server labeled 0 is the master server. The rest are data servers. 
+/// Each data server needs to send its message to the master server for 
+/// processing and wait for a reply. Messages move between servers 
+/// optimally, so every message takes the least amount of time to arrive 
+/// at the master server. The master server will process all newly 
+/// arrived messages instantly and send a reply to the originating server 
+/// via the reversed path the message had gone through.
+///
+/// At the beginning of second 0, each data server sends its message to 
+/// be processed. Starting from second 1, at the beginning of every 
+/// second, each data server will check if it has received a reply to 
+/// the message it sent (including any newly arrived replies) from the 
+/// master server:
+///
+/// If it has not, it will resend the message periodically. The data 
+/// server i will resend the message every patience[i] second(s), i.e., 
+/// the data server i will resend the message if patience[i] second(s) 
+/// have elapsed since the last time the message was sent from this server.
+/// Otherwise, no more resending will occur from this server.
+/// The network becomes idle when there are no messages passing between 
+/// servers or arriving at servers.
+/// Return the earliest second starting from which the network becomes 
+/// idle.
+/// 
+/// Example 1:
+/// Input: edges = [[0,1],[1,2]], patience = [0,2,1]
+/// Output: 8
+/// Explanation:
+/// At (the beginning of) second 0,
+/// - Data server 1 sends its message (denoted 1A) to the master server.
+/// - Data server 2 sends its message (denoted 2A) to the master server.
+///
+/// At second 1,
+/// - Message 1A arrives at the master server. Master server processes 
+///   message 1A instantly and sends a reply 1A back. 
+/// - Server 1 has not received any reply. 1 second (1 < patience[1] = 2) 
+///   elapsed since this server has sent the message, therefore it does 
+///   not resend the message.
+/// - Server 2 has not received any reply. 1 second (1 == patience[2] = 1)
+///    elapsed since this server has sent the message, therefore it resends
+///    the message (denoted 2B).
+///
+/// At second 2,
+/// - The reply 1A arrives at server 1. No more resending will occur from 
+///   server 1.
+/// - Message 2A arrives at the master server. Master server processes 
+///   message 2A instantly and sends a reply 2A back.
+/// - Server 2 resends the message (denoted 2C).
+/// ...
+/// At second 4,
+/// - The reply 2A arrives at server 2. No more resending will occur from 
+///   server 2.
+/// ...
+/// At second 7, reply 2D arrives at server 2.
+/// Starting from the beginning of the second 8, there are no messages 
+/// passing between servers or arriving at servers.
+/// This is the time when the network becomes idle.
+///
+/// Example 2:
+/// Input: edges = [[0,1],[0,2],[1,2]], patience = [0,10,10]
+/// Output: 3
+/// Explanation: Data servers 1 and 2 receive a reply back at the 
+/// beginning of second 2.
+/// From the beginning of the second 3, the network becomes idle.
+///  
+/// Constraints:
+/// 1. n == patience.length
+/// 2. 2 <= n <= 10^5
+/// 3. patience[0] == 0
+/// 4. 1 <= patience[i] <= 10^5 for 1 <= i < n
+/// 5. 1 <= edges.length <= min(10^5, n * (n - 1) / 2)
+/// 6. edges[i].length == 2
+/// 7. 0 <= ui, vi < n
+/// 8. ui != vi
+/// 9. There are no duplicate edges.
+/// 10. Each server can directly or indirectly reach another server.
+/// </summary>
+int LeetCodeGraph::networkBecomesIdle(vector<vector<int>>& edges, vector<int>& patience)
+{
+    vector<vector<int>> neighbor(patience.size());
+    vector<int> dist(patience.size(), 0);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbor[edges[i][0]].push_back(edges[i][1]);
+        neighbor[edges[i][1]].push_back(edges[i][0]);
+    }
+    queue<int> queue;
+    queue.push(0);
+    int d = 0;
+    while (!queue.empty())
+    {
+        d++;
+        size_t size = queue.size();
+        for (size_t i = 0; i < size; i++)
+        {
+            int node = queue.front();
+            queue.pop();
+            for (size_t j = 0; j < neighbor[node].size(); j++)
+            {
+                if (neighbor[node][j] == 0 || dist[neighbor[node][j]] != 0)
+                {
+                    continue;
+                }
+                dist[neighbor[node][j]] = d;
+                queue.push(neighbor[node][j]);
+            }
+        }
+    }
+    int result = 0;
+    for (size_t i = 1; i < dist.size(); i++)
+    {
+        int last = (dist[i] * 2 - 1) / patience[i] * patience[i];
+        result = max(result, last + 2 * dist[i]);
+    }
+    return result + 1;
+}
+
+/// <summary>
+/// Leet Code 2049. Count Nodes With the Highest Score
+///                                                                 
+/// Medium
+///
+/// There is a binary tree rooted at 0 consisting of n nodes. The nodes 
+/// are labeled from 0 to n - 1. You are given a 0-indexed integer 
+/// array parents representing the tree, where parents[i] is 
+/// the parent of node i. Since node 0 is the root, parents[0] == -1.
+///
+/// Each node has a score. To find the score of a node, consider if 
+/// the node and the edges connected to it were removed. The tree would 
+/// become one or more non-empty subtrees. The size of a subtree is the 
+/// number of the nodes in it. The score of the node is the product of 
+/// the sizes of all those subtrees.
+///
+/// Return the number of nodes that have the highest score.
+/// 
+/// Example 1:
+/// Input: parents = [-1,2,0,2,0]
+/// Output: 3
+/// Explanation:
+/// - The score of node 0 is: 3 * 1 = 3
+/// - The score of node 1 is: 4 = 4
+/// - The score of node 2 is: 1 * 1 * 2 = 2
+/// - The score of node 3 is: 4 = 4
+/// - The score of node 4 is: 4 = 4
+/// The highest score is 4, and three nodes (node 1, node 3, and node 4) 
+/// have the highest score.
+///
+/// Example 2:
+/// Input: parents = [-1,2,0]
+/// Output: 2
+/// Explanation:
+/// - The score of node 0 is: 2 = 2
+/// - The score of node 1 is: 2 = 2
+/// - The score of node 2 is: 1 * 1 = 1
+/// The highest score is 2, and two nodes (node 0 and node 1) have the 
+/// highest score.
+/// 
+/// Constraints:
+/// 1. n == parents.length
+/// 2. 2 <= n <= 10^5
+/// 3. parents[0] == -1
+/// 4. 0 <= parents[i] <= n - 1 for i != 0
+/// 5. parents represents a valid binary tree.
+/// </summary>
+int LeetCodeGraph::countHighestScoreNodes(vector<int>& parents)
+{
+    vector<int> degree(parents.size());
+    vector<long long> score(parents.size(), 1);
+    vector<int> count(parents.size(), 1);
+    int result = 0;
+    long long max_score = 0;
+    for (size_t i = 1; i < parents.size(); i++)
+    {
+        degree[parents[i]]++;
+    }
+    queue<int> queue;
+    for (size_t i = 0; i < degree.size(); i++)
+    {
+        if (degree[i] == 0) queue.push(i);
+    }
+    while (!queue.empty())
+    {
+        int node = queue.front();
+        queue.pop();
+        if(node != 0) score[node] = ((long long)parents.size() - (long long)count[node]) * score[node];
+        if (score[node] > max_score)
+        {
+            result = 1;
+            max_score = score[node];
+        }
+        else if (score[node] == max_score)
+        {
+            result++;
+        }
+        if (node == 0) break;
+        int parent = parents[node];
+        score[parent] = score[parent] * (long long)count[node];
+        count[parent] += count[node];
+        degree[parent]--;
+        if (degree[parent] == 0)
+        {
+            queue.push(parent);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2059. Minimum Operations to Convert Number
+///                                                                 
+/// Medium
+///
+/// You are given a 0-indexed integer array nums containing distinct 
+/// numbers, an integer start, and an integer goal. There is an integer 
+/// x that is initially set to start, and you want to perform operations 
+/// on x such that it is converted to goal. You can perform the following 
+/// operation repeatedly on the number x:
+///
+/// If 0 <= x <= 1000, then for any index i in the array 
+/// (0 <= i < nums.length), you can set x to any of the following:
+///
+/// x + nums[i]
+/// x - nums[i]
+/// x ^ nums[i] (bitwise-XOR)
+/// Note that you can use each nums[i] any number of times in any order. 
+/// Operations that set x to be out of the range 0 <= x <= 1000 are valid, 
+/// but no more operations can be done afterward.
+///
+/// Return the minimum number of operations needed to convert x = start 
+/// into goal, and -1 if it is not possible.
+///
+/// Example 1:
+/// Input: nums = [2,4,12], start = 2, goal = 12
+/// Output: 2
+/// Explanation: We can go from 2 → 14 → 12 with the following 2 
+/// operations.
+/// - 2 + 12 = 14
+/// - 14 - 2 = 12
+///
+/// Example 2:
+/// Input: nums = [3,5,7], start = 0, goal = -4
+/// Output: 2
+/// Explanation: We can go from 0 -> 3 -> -4 with the following 2 
+/// operations. 
+/// - 0 + 3 = 3
+/// - 3 - 7 = -4
+/// Note that the last operation sets x out of the range 0 <= x <= 1000, 
+/// which is valid.
+///
+/// Example 3:
+/// Input: nums = [2,8,16], start = 0, goal = 1
+/// Output: -1
+/// Explanation: There is no way to convert 0 into 1.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. -10^9 <= nums[i], goal <= 10^9
+/// 3. 0 <= start <= 1000
+/// 4. start != goal
+/// 5. All the integers in nums are distinct.
+/// </summary>
+int LeetCodeGraph::minimumOperations(vector<int>& nums, int start, int goal)
+{
+    vector<int> visited(1001);
+    queue<int> queue;
+    queue.push(start);
+    int result = 0;
+    if (start == goal) return 0;
+    while (!queue.empty())
+    {
+        result++;
+        size_t size = queue.size();
+        for (size_t i = 0; i < size; i++)
+        {
+            int node = queue.front();
+            queue.pop();
+            for (int i = 0; i < nums.size(); i++)
+            {
+                long long next = (long long)node + (long long)nums[i];
+                if (next == goal) return result;
+                if (next >= 0 && next <= 1000 && visited[next] == 0)
+                {
+                    visited[next] = 1;
+                    queue.push(next);
+                }
+                next = (long long)node - (long long)nums[i];
+                if (next == goal) return result;
+                if (next >= 0 && next <= 1000 && visited[next] == 0)
+                {
+                    visited[next] = 1;
+                    queue.push(next);
+                }
+                next = (long long)node ^ (long long)nums[i];
+                if (next == goal) return result;
+                if (next >= 0 && next <= 1000 && visited[next] == 0)
+                {
+                    visited[next] = 1;
+                    queue.push(next);
+                }
+            }
+        }
+    }
+    return -1;
+}
 #pragma endregion

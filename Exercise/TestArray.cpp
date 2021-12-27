@@ -6751,8 +6751,91 @@ void TestLeetCode2033(void)
     Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2120(void)
+{
+    Logger::WriteMessage("Test Leet Code 2120");
+    LeetCodeArray leetCode;
+    int n = 3;
+    vector<int> startPos = { 0, 1 };
+    string s = "RRDDLU";
+    vector<int> result = leetCode.executeInstructions(n, startPos, s);
+    Logger::WriteMessage(startPos);
+    Logger::WriteMessage("n = " + to_string(n) + "; s = " + s);
+    Logger::WriteMessage(result);
+
+    n = 2;
+    startPos = { 1, 1 };
+    s = "LURD";
+    result = leetCode.executeInstructions(n, startPos, s);
+    Logger::WriteMessage(startPos);
+    Logger::WriteMessage("n = " + to_string(n) + "; s = " + s);
+    Logger::WriteMessage(result);
+
+    n = 1;
+    startPos = { 0, 0 };
+    s = "LRUD";
+    result = leetCode.executeInstructions(n, startPos, s);
+    Logger::WriteMessage(startPos);
+    Logger::WriteMessage("n = " + to_string(n) + "; s = " + s);
+    Logger::WriteMessage(result);
+
+    n = 10;
+    startPos = { 9, 6 };
+    s = "UDUD";
+    result = leetCode.executeInstructions(n, startPos, s);
+    Logger::WriteMessage(startPos);
+    Logger::WriteMessage("n = " + to_string(n) + "; s = " + s);
+    Logger::WriteMessage(result);
+
+    n = 2;
+    startPos = { 0, 1 };
+    s = "LRUDDLL";
+    result = leetCode.executeInstructions(n, startPos, s);
+    Logger::WriteMessage(startPos);
+    Logger::WriteMessage("n = " + to_string(n) + "; s = " + s);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2122(void)
+{
+    Logger::WriteMessage("Test Leet Code 2122");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2,10,6,4,8,12 };
+    vector<int> result = leetCode.recoverArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,1,3,3 };
+    result = leetCode.recoverArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 5,435 };
+    result = leetCode.recoverArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2121(void)
+{
+    Logger::WriteMessage("Test Leet Code 2121");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 2, 1, 3, 1, 2, 3, 3 };
+    vector<long long> result = leetCode.getDistances(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(result);
+
+    arr = { 10,5,10,10 };
+    result = leetCode.getDistances(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2121();
+    TestLeetCode2122();
+    TestLeetCode2120();
     TestLeetCode2033();
     TestLeetCode2110();
     TestLeetCode2063();
