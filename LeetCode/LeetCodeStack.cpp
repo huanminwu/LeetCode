@@ -2075,4 +2075,78 @@ vector<int> LeetCodeStack::findMaximums(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2104. Sum of Subarray Ranges
+///                                                                 
+/// Medium
+///
+/// You are given an integer array nums. The range of a subarray of nums 
+/// is the difference between the largest and smallest element in the 
+/// subarray.
+///
+/// Return the sum of all subarray ranges of nums.
+///
+/// A subarray is a contiguous non-empty sequence of elements within an 
+/// array.
+/// 
+/// Example 1:
+///
+/// Input: nums = [1,2,3]
+/// Output: 4
+/// Explanation: The 6 subarrays of nums are the following:
+/// [1], range = largest - smallest = 1 - 1 = 0 
+/// [2], range = 2 - 2 = 0
+/// [3], range = 3 - 3 = 0
+/// [1,2], range = 2 - 1 = 1
+/// [2,3], range = 3 - 2 = 1
+/// [1,2,3], range = 3 - 1 = 2
+/// So the sum of all ranges is 0 + 0 + 0 + 1 + 1 + 2 = 4.
+///
+/// Example 2:
+/// Input: nums = [1,3,3]
+/// Output: 4
+/// Explanation: The 6 subarrays of nums are the following:
+/// [1], range = largest - smallest = 1 - 1 = 0
+/// [3], range = 3 - 3 = 0
+/// [3], range = 3 - 3 = 0
+/// [1,3], range = 3 - 1 = 2
+/// [3,3], range = 3 - 3 = 0
+/// [1,3,3], range = 3 - 1 = 2
+/// So the sum of all ranges is 0 + 0 + 0 + 2 + 0 + 2 = 4.
+///
+/// Example 3:
+/// Input: nums = [4,-2,-3,4,1]
+/// Output: 59
+/// Explanation: The sum of all subarray ranges of nums is 59.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. -10^9 <= nums[i] <= 10^9
+/// 
+/// Follow-up: Could you find a solution with O(n) time complexity?
+/// </summary>
+long long LeetCodeStack::subArrayRanges(vector<int>& nums)
+{
+    vector<vector<long long>>min_stack = { {-1, INT_MIN, 0} }, max_stack = { {-1, INT_MAX, 0} };
+    long long min_sum = 0;
+    long long max_sum = 0;
+    for (int i = 0; i < (int)nums.size(); i++)
+    {
+        // pop up all large numbers for min_stack
+        while (min_stack.back()[1] >= nums[i]) min_stack.pop_back();
+        long long sum = nums[i] * (i - min_stack.back()[0]) + min_stack.back()[2];
+        min_stack.push_back({ i, nums[i], sum });
+        min_sum += sum;
+
+        sum = 0;
+        // pop up all small numbers for max_stack
+        while (max_stack.back()[1] <= nums[i]) max_stack.pop_back();
+        sum = nums[i] * (i - max_stack.back()[0]) + max_stack.back()[2];
+        max_stack.push_back({ i, nums[i], sum });
+        max_sum += sum;
+    }
+    return max_sum - min_sum;
+}
+
 #pragma endregion

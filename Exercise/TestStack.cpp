@@ -620,8 +620,29 @@ void TestLeetCode1950(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2104(void)
+{
+    Logger::WriteMessage("Test Leet Code 2104");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 1,2,3 };
+    int result = leetCode.subArrayRanges(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,3,3 };
+    result = leetCode.subArrayRanges(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,-2,-3,4,1 };
+    result = leetCode.subArrayRanges(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode2104();
     TestLeetCode1950();
     TestLeetCode862();
     TestLeetCode1438();

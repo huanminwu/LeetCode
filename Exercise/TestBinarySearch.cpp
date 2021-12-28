@@ -906,8 +906,32 @@ void TestLeetCode1918(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2064(void)
+{
+    Logger::WriteMessage("Test Leet Code 2064");
+    LeetCodeBinarySearch leetCode;
+    int n = 6;
+    vector<int> quantities = { 11, 6 };
+    int result = leetCode.minimizedMaximum(n, quantities);
+    Logger::WriteMessage(quantities);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 7;
+    quantities = { 15,10,10 };
+    result = leetCode.minimizedMaximum(n, quantities);
+    Logger::WriteMessage(quantities);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 1;
+    quantities = { 100000 };
+    result = leetCode.minimizedMaximum(n, quantities);
+    Logger::WriteMessage(quantities);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode2064();
     TestLeetCode1918();
     TestLeetCode1891();
     TestLeetCode2089();

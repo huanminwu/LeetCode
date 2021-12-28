@@ -4053,8 +4053,120 @@ void TestLeetCode2059(void)
     Logger::WriteMessage("start = " + to_string(start) + "; goal = " + to_string(goal) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2115(void)
+{
+    Logger::WriteMessage("Test Leet Code 2115");
+    LeetCodeGraph leetCode;
+    vector<string> recipes = { "bread" };
+    vector<vector<string>> ingredients = { {"yeast", "flour"} };
+    vector<string> supplies = { "yeast", "flour", "corn" };
+    vector<string> result = leetCode.findAllRecipes(recipes, ingredients, supplies);
+    Logger::WriteMessage(recipes);
+    Logger::WriteMessage(ingredients);
+    Logger::WriteMessage(supplies);
+    Logger::WriteMessage(result);
+
+    recipes = { "bread","sandwich" };
+    ingredients = { {"yeast","flour"}, {"bread","meat"},  };
+    supplies = { "yeast","flour","meat" };
+    result = leetCode.findAllRecipes(recipes, ingredients, supplies);
+    Logger::WriteMessage(recipes);
+    Logger::WriteMessage(ingredients);
+    Logger::WriteMessage(supplies);
+    Logger::WriteMessage(result);
+
+    recipes = { "bread","sandwich","burger" };
+    ingredients = 
+    { 
+        {"yeast","flour"}, {"bread","meat"},
+        {"sandwich","meat","bread" }
+    };
+    supplies = { "yeast","flour","meat" };
+    result = leetCode.findAllRecipes(recipes, ingredients, supplies);
+    Logger::WriteMessage(recipes);
+    Logger::WriteMessage(ingredients);
+    Logger::WriteMessage(supplies);
+    Logger::WriteMessage(result);
+
+    recipes = { "bread","sandwich","burger" };
+    ingredients =
+    {
+        {"yeast","flour"}, {"bread","meat"},
+        {"sandwich","meat","bread" }
+    };
+    supplies = { "yeast","flour","meat" };
+    result = leetCode.findAllRecipes(recipes, ingredients, supplies);
+    Logger::WriteMessage(recipes);
+    Logger::WriteMessage(ingredients);
+    Logger::WriteMessage(supplies);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2101(void)
+{
+    Logger::WriteMessage("Test Leet Code 2101");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> bombs = { {2, 1, 3},{6, 1, 4} };
+    int result = leetCode.maximumDetonation(bombs);
+    Logger::WriteMessage(bombs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    bombs = { {1, 1, 5},{10, 10, 5} };
+    result = leetCode.maximumDetonation(bombs);
+    Logger::WriteMessage(bombs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    bombs = { {1, 2, 3},{2, 3, 1},{3, 4, 2},{4, 5, 3},{5, 6, 4} };
+    result = leetCode.maximumDetonation(bombs);
+    Logger::WriteMessage(bombs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    bombs = { {90, 756, 164}, { 565, 776, 5 }, { 464, 154, 271 }, { 278, 609, 82 }, { 202, 927, 219 }, { 542, 865, 377 }, { 330, 402, 270 }, { 720, 199, 10 } };;
+    result = leetCode.maximumDetonation(bombs);
+    Logger::WriteMessage(bombs);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2093(void)
+{
+    Logger::WriteMessage("Test Leet Code 2093");
+    LeetCodeGraph leetCode;
+    int n = 5;
+    vector<vector<int>> highways =
+    {
+        {0, 1, 4},{2, 1, 3},{1, 4, 11},{3, 2, 3},{3, 4, 2}
+    };
+    int discounts = 1;
+    int result = leetCode.minimumCost(n, highways, discounts);
+    Logger::WriteMessage(highways);
+    Logger::WriteMessage("n = " + to_string(n) + "; discounts = " + to_string(discounts) + "; result = " + to_string(result));
+
+    n = 4;
+    highways =
+    {
+        {1,3,17},{1,2,7},{3,2,5},{0,1,6},{3,0,20}
+    };
+    discounts = 20;
+    result = leetCode.minimumCost(n, highways, discounts);
+    Logger::WriteMessage(highways);
+    Logger::WriteMessage("n = " + to_string(n) + "; discounts = " + to_string(discounts) + "; result = " + to_string(result));
+
+    n = 4;
+    highways =
+    {
+        {0,1,3},{2,3,2}
+    };
+    discounts = 0;
+    result = leetCode.minimumCost(n, highways, discounts);
+    Logger::WriteMessage(highways);
+    Logger::WriteMessage("n = " + to_string(n) + "; discounts = " + to_string(discounts) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2093();
+    TestLeetCode2101();
+    TestLeetCode2115();
     TestLeetCode2059();
     TestLeetCode2049();
     TestLeetCode2039();

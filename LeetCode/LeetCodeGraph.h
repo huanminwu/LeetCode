@@ -6698,6 +6698,187 @@ public:
     /// 5. All the integers in nums are distinct.
     /// </summary>
     int minimumOperations(vector<int>& nums, int start, int goal);
+
+    /// <summary>
+    /// Leet Code 2115. Find All Possible Recipes from Given Supplies
+    ///                                                                 
+    /// Medium
+    ///
+    /// You have information about n different recipes. You are given a string 
+    /// array recipes and a 2D string array ingredients. The ith recipe has 
+    /// the name recipes[i], and you can create it if you have all the needed 
+    /// ingredients from ingredients[i]. Ingredients to a recipe may need to 
+    /// be created from other recipes, i.e., ingredients[i] may contain a 
+    /// string that is in recipes.
+    ///
+    /// You are also given a string array supplies containing all the 
+    /// ingredients that you initially have, and you have an infinite supply 
+    /// of all of them.
+    ///
+    /// Return a list of all the recipes that you can create. You may return 
+    /// the answer in any order.
+    ///
+    /// Note that two recipes may contain each other in their ingredients.
+    /// 
+    /// Example 1:
+    /// Input: recipes = ["bread"], ingredients = [["yeast","flour"]], 
+    /// supplies = ["yeast","flour","corn"]
+    /// Output: ["bread"]
+    /// Explanation:
+    /// We can create "bread" since we have the ingredients "yeast" and 
+    /// "flour".
+    ///
+    /// Example 2:
+    /// Input: recipes = ["bread","sandwich"], ingredients = [["yeast",
+    /// "flour"],["bread","meat"]], supplies = ["yeast","flour","meat"]
+    /// Output: ["bread","sandwich"]
+    /// Explanation:
+    /// We can create "bread" since we have the ingredients "yeast" and 
+    /// "flour".
+    /// We can create "sandwich" since we have the ingredient "meat" and 
+    /// can create the ingredient "bread".
+    ///
+    /// Example 3:
+    /// Input: recipes = ["bread","sandwich","burger"], ingredients = 
+    /// [["yeast","flour"],["bread","meat"],["sandwich","meat","bread"]], 
+    /// supplies = ["yeast","flour","meat"]
+    /// Output: ["bread","sandwich","burger"]
+    ///
+    /// Explanation:
+    /// We can create "bread" since we have the ingredients "yeast" and 
+    /// "flour".
+    /// We can create "sandwich" since we have the ingredient "meat" and 
+    /// can create the ingredient "bread".
+    /// We can create "burger" since we have the ingredient "meat" and 
+    /// can create the ingredients "bread" and "sandwich".
+    ///
+    /// Constraints:
+    /// 1. n == recipes.length == ingredients.length
+    /// 2. 1 <= n <= 100
+    /// 3. 1 <= ingredients[i].length, supplies.length <= 100
+    /// 4. 1 <= recipes[i].length, ingredients[i][j].length, 
+    ///    supplies[k].length <= 10
+    /// 5. recipes[i], ingredients[i][j], and supplies[k] consist only 
+    ///    of lowercase English letters.
+    /// 6. All the values of recipes and supplies combined are unique.
+    /// 7. Each ingredients[i] does not contain any duplicate values.
+    /// </summary>
+    vector<string> findAllRecipes(vector<string>& recipes,
+        vector<vector<string>>& ingredients,
+        vector<string>& supplies);
+
+    /// <summary>
+    /// Leet Code 2101. Detonate the Maximum Bombs
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given a list of bombs. The range of a bomb is defined as the 
+    /// area where its effect can be felt. This area is in the shape of a 
+    /// circle with the center as the location of the bomb.
+    ///
+    /// The bombs are represented by a 0-indexed 2D integer array bombs where 
+    /// bombs[i] = [xi, yi, ri]. xi and yi denote the X-coordinate and 
+    /// Y-coordinate of the location of the ith bomb, whereas ri denotes the 
+    /// radius of its range.
+    ///
+    /// You may choose to detonate a single bomb. When a bomb is detonated, 
+    /// it will detonate all bombs that lie in its range. These bombs will 
+    /// further detonate the bombs that lie in their ranges.
+    ///
+    /// Given the list of bombs, return the maximum number of bombs that can 
+    /// be detonated if you are allowed to detonate only one bomb.
+    /// 
+    /// Example 1:
+    /// 
+    /// Input: bombs = [[2,1,3],[6,1,4]]
+    /// Output: 2
+    /// Explanation:
+    /// The above figure shows the positions and ranges of the 2 bombs.
+    /// If we detonate the left bomb, the right bomb will not be affected.
+    /// But if we detonate the right bomb, both bombs will be detonated.
+    /// So the maximum bombs that can be detonated is max(1, 2) = 2.
+    ///
+    /// Example 2:
+    /// Input: bombs = [[1,1,5],[10,10,5]]
+    /// Output: 1
+    /// Explanation:
+    /// Detonating either bomb will not detonate the other bomb, so the 
+    /// maximum number of bombs that can be detonated is 1.
+    ///
+    /// Example 3:
+    /// Input: bombs = [[1,2,3],[2,3,1],[3,4,2],[4,5,3],[5,6,4]]
+    /// Output: 5
+    /// Explanation:
+    /// The best bomb to detonate is bomb 0 because:
+    /// - Bomb 0 detonates bombs 1 and 2. The red circle denotes the range of 
+    ///   bomb 0.
+    /// - Bomb 2 detonates bomb 3. The blue circle denotes the range of bomb 2.
+    /// - Bomb 3 detonates bomb 4. The green circle denotes the range of 
+    ///   bomb 3.
+    /// Thus all 5 bombs are detonated.
+    /// Constraints:
+    /// 1. 1 <= bombs.length <= 100
+    /// 2. bombs[i].length == 3
+    /// 3. 1 <= xi, yi, ri <= 10^5
+    /// </summary>
+    int maximumDetonation(vector<vector<int>>& bombs);
+
+    /// <summary>
+    /// Leet Code 2093. Minimum Cost to Reach City With Discounts
+    ///                                                                 
+    /// Medium
+    ///
+    /// A series of highways connect n cities numbered from 0 to n - 1. You 
+    /// are given a 2D integer array highways where highways[i] = [city1i, 
+    /// city2i, tolli] indicates that there is a highway that connects city1i 
+    /// and city2i, allowing a car to go from city1i to city2i and vice versa
+    /// for a cost of tolli.
+    ///
+    /// You are also given an integer discounts which represents the number of 
+    /// discounts you have. You can use a discount to travel across the ith 
+    /// highway for a cost of tolli / 2 (integer division). Each discount may 
+    /// only be used once, and you can only use at most one discount per 
+    /// highway.
+    /// 
+    /// Return the minimum total cost to go from city 0 to city n - 1, or -1 
+    /// if it is not possible to go from city 0 to city n - 1.
+    /// 
+    /// Example 1:
+    /// Input: n = 5, highways = [[0,1,4],[2,1,3],[1,4,11],[3,2,3],[3,4,2]], 
+    /// discounts = 1
+    /// Output: 9
+    /// Explanation:
+    /// Go from 0 to 1 for a cost of 4.
+    /// Go from 1 to 4 and use a discount for a cost of 11 / 2 = 5.
+    /// The minimum cost to go from 0 to 4 is 4 + 5 = 9.
+    ///
+    /// Example 2:
+    /// Input: n = 4, highways = [[1,3,17],[1,2,7],[3,2,5],[0,1,6],[3,0,20]], 
+    /// discounts = 20
+    /// Output: 8
+    /// Explanation:
+    /// Go from 0 to 1 and use a discount for a cost of 6 / 2 = 3.
+    /// Go from 1 to 2 and use a discount for a cost of 7 / 2 = 3.
+    /// Go from 2 to 3 and use a discount for a cost of 5 / 2 = 2.
+    /// The minimum cost to go from 0 to 3 is 3 + 3 + 2 = 8.
+    ///
+    /// Example 3:
+    /// Input: n = 4, highways = [[0,1,3],[2,3,2]], discounts = 0
+    /// Output: -1
+    /// Explanation:
+    /// It is impossible to go from 0 to 3 so return -1.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 1000
+    /// 2. 1 <= highways.length <= 1000
+    /// 3. highways[i].length == 3
+    /// 4. 0 <= city1i, city2i <= n - 1
+    /// 5. city1i != city2i
+    /// 6. 0 <= tolli <= 10^5
+    /// 7. 0 <= discounts <= 500
+    /// 8. There are no duplicate highways.
+    /// </summary>
+    int minimumCost(int n, vector<vector<int>>& highways, int discounts);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H
