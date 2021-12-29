@@ -1307,54 +1307,6 @@ bool LeetCodeDFS::canIWin(int maxChoosableInteger, int desiredTotal)
     return canIWin(maxChoosableInteger, desiredTotal, signature, game_map);
 }
 
-
-/// <summary>
-/// Leet code #416. Partition Equal Subset Sum
-///
-/// Given a non-empty array containing only positive integers, find if 
-/// the array can be partitioned into two subsets such that the sum of 
-/// elements in both subsets is equal. 
-/// Note:
-/// Each of the array element will not exceed 100.
-/// The array size will not exceed 200.
-/// Example 1: 
-/// Input: [1, 5, 11, 5]
-/// Output: true
-/// Explanation: The array can be partitioned as [1, 5, 5] and [11].
-/// Example 2: 
-/// Input: [1, 2, 3, 5]
-/// Output: false
-/// Explanation: The array cannot be partitioned into equal sum subsets.
-/// </summary>
-bool LeetCodeDFS::canPartition(vector<int>& nums)
-{
-    int sum = 0;
-    for (size_t i = 0; i < nums.size(); i++)
-    {
-        sum += nums[i];
-    }
-    if (sum % 2 == 1) return false;
-    sum = sum / 2;
-    unordered_set<int> curr;
-    unordered_set<int> next;
-    curr.insert(0);
-    for (size_t i = 0; i < nums.size(); i++)
-    {
-        for (auto s : curr)
-        {
-            int n = s + nums[i];
-            if (n == sum) return true;
-            else if (n > sum) continue;
-            else
-            {
-                next.insert(n);
-            }
-        }
-        curr.insert(next.begin(), next.end());
-    }
-    return false;
-}
-
 /// <summary>
 /// Leet code #241. Different Ways to Add Parentheses 
 ///

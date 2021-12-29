@@ -2625,39 +2625,6 @@ void TestLeetCode1046(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode1049(void)
-{
-    Logger::WriteMessage("Test Leet Code 1049");
-    LeetCode leetCode;
-    vector<int> stones = { 2, 1, 6, 4, 5 };
-    int result = leetCode.lastStoneWeightII(stones);
-    Logger::WriteMessage(stones);
-    Logger::WriteMessage("result = " + to_string(result));
-    result = leetCode.lastStoneWeightIIA(stones);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    stones = { 1, 1, 1, 1, 1 };
-    result = leetCode.lastStoneWeightII(stones);
-    Logger::WriteMessage(stones);
-    Logger::WriteMessage("result = " + to_string(result));
-    result = leetCode.lastStoneWeightIIA(stones);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    stones = { 1, 1, 4, 2, 2 };
-    result = leetCode.lastStoneWeightII(stones);
-    Logger::WriteMessage(stones);
-    Logger::WriteMessage("result = " + to_string(result));
-    result = leetCode.lastStoneWeightIIA(stones);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    stones = { 2,7,4,1,8,1 };
-    result = leetCode.lastStoneWeightII(stones);
-    Logger::WriteMessage(stones);
-    Logger::WriteMessage("result = " + to_string(result));
-    result = leetCode.lastStoneWeightIIA(stones);
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
 void TestLeetCode1048(void)
 {
     Logger::WriteMessage("Test Leet Code 1048");
@@ -3021,6 +2988,7 @@ void TestLeetCode1199(void)
 
 void main(int argc, char* argv[])
 { 
+    TestLeetCodeDP();
     TestLeetCodeGraph();
     TestLeetCodeStack();
     TestLeetCodeBinarySearch();
@@ -3030,7 +2998,6 @@ void main(int argc, char* argv[])
     TestLeetCodeLinkedList();
     TestLeetCodeSort();
     TestLeetCodeGreedy();
-    TestLeetCodeDP();
     TestLeetCodeTwoPointer();
     TestLeetCodeDesign();
     TestLeetCodeTree();
@@ -3085,7 +3052,6 @@ void main(int argc, char* argv[])
     TestLeetCode1065();
     TestLeetCode1053();
     TestLeetCode1051();
-    TestLeetCode1049();
     TestLeetCode1039();
     TestLeetCode1048();
     TestLeetCode1046();

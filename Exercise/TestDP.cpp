@@ -2854,9 +2854,50 @@ void TestLeetCode2044(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode416(void)
+{
+    Logger::WriteMessage("Test Leet Code 416");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 5, 11, 5 };
+    bool result = leetCode.canPartition(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage((string)(result ? "Can" : "Can not") + " partition into equal subset.");
+
+    nums = { 1, 2, 3, 5 };
+    result = leetCode.canPartition(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage((string)(result ? "Can" : "Can not") + " partition into equal subset.");
+}
+
+void TestLeetCode1049(void)
+{
+    Logger::WriteMessage("Test Leet Code 1049");
+    LeetCodeDP leetCode;
+    vector<int> stones = { 2, 1, 6, 4, 5 };
+    int result = leetCode.lastStoneWeightII(stones);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    stones = { 1, 1, 1, 1, 1 };
+    result = leetCode.lastStoneWeightII(stones);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    stones = { 1, 1, 4, 2, 2 };
+    result = leetCode.lastStoneWeightII(stones);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    stones = { 2,7,4,1,8,1 };
+    result = leetCode.lastStoneWeightII(stones);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1049();
+    TestLeetCode416();
     TestLeetCode2044();
     TestLeetCode2052();
     TestLeetCode161();

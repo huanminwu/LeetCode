@@ -420,21 +420,6 @@ void TestLeetCode526(void)
     Logger::WriteMessage("N = " + to_string(N) + "; count Arrangement = " + to_string(result));
 }
 
-void TestLeetCode416(void)
-{
-    Logger::WriteMessage("Test Leet Code 416");
-    LeetCodeDFS leetCode;
-    vector<int> nums = { 1, 5, 11, 5 };
-    bool result = leetCode.canPartition(nums);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage((string)(result ? "Can" : "Can not") + " partition into equal subset.");
-
-    nums = { 1, 2, 3, 5 };
-    result = leetCode.canPartition(nums);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage((string)(result ? "Can" : "Can not") + " partition into equal subset.");
-}
-
 void TestLeetCode491(void)
 {
     Logger::WriteMessage("Test Leet Code 491");
@@ -1664,7 +1649,6 @@ void TestLeetCodeDFS(void)
     TestLeetCode212();
     TestLeetCode1349();
     TestLeetCode126();
-    TestLeetCode416();
     TestLeetCode329();
     TestLeetCode17();
     TestLeetCode37();

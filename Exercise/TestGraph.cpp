@@ -320,38 +320,9 @@ void TestLeetCode444(void)
     Logger::WriteMessage(nums);
     Logger::WriteMessage(sequences);
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
-
-
-    nums = { 1 };
-    sequences = { { },{ } };
-    result = leetCode.sequenceReconstruction(nums, sequences);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage(sequences);
-    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
-
-    nums = { 1 };
-    sequences = { { } };
-    result = leetCode.sequenceReconstruction(nums, sequences);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage(sequences);
-    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
-
-    nums = { 1 };
-    sequences = { { 1 }, {1 } };
-    result = leetCode.sequenceReconstruction(nums, sequences);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage(sequences);
-    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
-
-    nums = { 1, 2, 3 };
-    sequences = { { 1, 2 },{ 2, 3 }, {3, 1} };
-    result = leetCode.sequenceReconstruction(nums, sequences);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage(sequences);
-    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
-    
+   
     nums = { 5, 3, 2, 4, 1 };
-    sequences = { { 5, 3, 2, 4 },{ 4, 1 },{1},{3},{2, 4},{1, 1000000000} };
+    sequences = {{ 5, 3, 2, 4 },{ 4, 1 },{1},{3},{2, 4}};
     result = leetCode.sequenceReconstruction(nums, sequences);
     Logger::WriteMessage(nums);
     Logger::WriteMessage(sequences);

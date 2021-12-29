@@ -2115,7 +2115,7 @@ void LeetCodeTree::connectRight(TreeLinkNode *&head, TreeLinkNode *&ptr, TreeLin
 ///     / \   / \
 ///    4-> 5->6 ->7 -> NULL
 /// </summary>
-void LeetCodeTree::connectRight(TreeLinkNode *root)
+TreeLinkNode* LeetCodeTree::connectRight(TreeLinkNode *root)
 {
     TreeLinkNode* prev_head = nullptr, *prev_ptr = nullptr;
     TreeLinkNode* curr_head, *curr_ptr;
@@ -2133,7 +2133,7 @@ void LeetCodeTree::connectRight(TreeLinkNode *root)
         }
         prev_head = curr_head;
     }
-    return;
+    return root;
 }
 
 /// <summary>
@@ -2170,7 +2170,7 @@ void LeetCodeTree::connectRight(TreeLinkNode *root)
 ///     / \    \
 ///    4-> 5 -> 7 -> NULL
 /// </summary>
-void LeetCodeTree::connectRightII(TreeLinkNode *root)
+TreeLinkNode* LeetCodeTree::connectRightII(TreeLinkNode *root)
 {
     TreeLinkNode* prev_head = nullptr, *prev_ptr = nullptr;
     TreeLinkNode* curr_head, *curr_ptr;
@@ -2188,7 +2188,7 @@ void LeetCodeTree::connectRightII(TreeLinkNode *root)
         }
         prev_head = curr_head;
     }
-    return;
+    return root;
 }
 
 /// <summary>

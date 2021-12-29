@@ -511,7 +511,7 @@ public:
     ///     / \   / \
     ///    4-> 5->6 ->7 -> NULL
     /// </summary>
-    void connectRight(TreeLinkNode* root);
+    TreeLinkNode* connectRight(TreeLinkNode* root);
 
     /// <summary>
     /// Leet code #117. Populating Next Right Pointers in Each Node II
@@ -545,7 +545,7 @@ public:
     ///     / \    \
     ///    4-> 5 -> 7 -> NULL
     /// </summary>
-    void connectRightII(TreeLinkNode* root);
+    TreeLinkNode* connectRightII(TreeLinkNode* root);
 
     /// <summary>
     /// Leet code #222. Count Complete Tree Nodes               

@@ -4788,6 +4788,59 @@ public:
     /// 2. 1 <= nums[i] <= 10^5
     /// </summary>
     int countMaxOrSubsets(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #416. Partition Equal Subset Sum 
+    ///
+    /// Given a non-empty array containing only positive integers, find if 
+    /// the array can be partitioned into two subsets such that the sum of 
+    /// elements in both subsets is equal. 
+    /// Note:
+    /// Each of the array element will not exceed 100.
+    /// The array size will not exceed 200.
+    /// Example 1: 
+    /// Input: [1, 5, 11, 5]
+    /// Output: true
+    /// Explanation: The array can be partitioned as [1, 5, 5] and [11].
+    /// Example 2: 
+    /// Input: [1, 2, 3, 5]
+    /// Output: false
+    /// Explanation: The array cannot be partitioned into equal sum subsets.
+    /// </summary>
+    bool canPartition(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #1049. Last Stone Weight II
+    /// 
+    /// We have a collection of rocks, each rock has a positive integer weight.
+    ///
+    /// Each turn, we choose any two rocks and smash them together.  Suppose 
+    /// the stones have weights x and y with x <= y.  The result of this smash is:
+    ///
+    /// If x == y, both stones are totally destroyed;
+    /// If x != y, the stone of weight x is totally destroyed, and the stone of 
+    /// weight y has new weight y-x.
+    /// At the end, there is at most 1 stone left.  Return the smallest possible 
+    /// weight of this stone (the weight is 0 if there are no stones left.)
+    ///
+    /// 
+    /// Example 1:
+    ///
+    /// Input: [2,7,4,1,8,1]
+    /// Output: 1
+    /// Explanation: 
+    /// We can combine 2 and 4 to get 2 so the array converts to [2,7,1,8,1] then,
+    /// we can combine 7 and 8 to get 1 so the array converts to [2,1,1,1] then,
+    /// we can combine 2 and 1 to get 1 so the array converts to [1,1,1] then,
+    /// we can combine 1 and 1 to get 0 so the array converts to [1] then that's the
+    /// optimal value.
+    /// 
+    /// Note:
+    /// 
+    /// 1. 1 <= stones.length <= 30
+    /// 2. 1 <= stones[i] <= 100
+    /// </summary>
+    int lastStoneWeightII(vector<int>& stones);
 };
 
 
