@@ -108,25 +108,27 @@ UndirectedGraphNode * LeetCodeGraph::cloneGraph(UndirectedGraphNode *node)
 /// The input prerequisites is a graph represented by a list of edges, 
 /// not adjacency matrices. Read more about how a graph is represented. 
 /// </summary>
-bool LeetCodeGraph::canFinishCourse(int numCourses, vector<pair<int, int>>& prerequisites)
+bool LeetCodeGraph::canFinishCourse(int numCourses, vector<vector<int>>& prerequisites)
 {
     vector<int> degree(numCourses);
     vector<unordered_set<int>> dependency(numCourses);
     queue<int> search;
 
     // remember which course dependes on others and which ones depends on me
-    for (pair<int, int> pair : prerequisites)
+    for (size_t i = 0; i <  prerequisites.size(); i++)
     {
-        if (dependency[pair.second].count(pair.first) == 0)
-        {
-            degree[pair.first]++;
-            dependency[pair.second].insert(pair.first);
-        }
+         degree[prerequisites[i][0]]++;
+         dependency[prerequisites[i][1]].insert(prerequisites[i][0]);
     }
+    int result = 0;
     // get all the course not depends on others, this is our starting search scope
     for (size_t i = 0; i < degree.size(); i++)
     {
-        if (degree[i] == 0) search.push(i);
+        if (degree[i] == 0)
+        {
+            search.push(i);
+            result++;
+        }
     }
 
     // Using queue to manage BFS and get every free course and clear the 
@@ -144,20 +146,18 @@ bool LeetCodeGraph::canFinishCourse(int numCourses, vector<pair<int, int>>& prer
             if (degree[next_course] == 0)
             {
                 search.push(next_course);
+                result++;
             }
         }
     }
     // if number of free courses equals to the total course, we can finish 
     // all courses
-    for (size_t i = 0; i < degree.size(); i++)
-    {
-        if (degree[i] > 0)	return false;
-    }
-    return true;
+    return result == numCourses;
 }
 
 /// <summary>
 /// LeetCode #210. Course Schedule II  
+/// 
 /// There are a total of n courses you have to take, labeled from 0 to 
 /// n - 1. 
 /// Some courses may have prerequisites, for example to take course 0 you 
@@ -191,56 +191,49 @@ bool LeetCodeGraph::canFinishCourse(int numCourses, vector<pair<int, int>>& prer
 ///   Coursera explaining the basic concepts of Topological Sort.
 /// 3.Topological sort could also be done via BFS.
 /// </summary>
-vector<int> LeetCodeGraph::findOrder(int numCourses, vector<pair<int, int>>& prerequisites)
+vector<int> LeetCodeGraph::findOrder(int numCourses, vector<vector<int>>& prerequisites)
 {
-    vector<int> result;
-    vector<unordered_set<int>> courseDependency(numCourses);
-    vector<unordered_set<int>> whoDependOnMe(numCourses);
-    queue<int> search_queue;
+    vector<int> degree(numCourses);
+    vector<unordered_set<int>> dependency(numCourses);
+    queue<int> search;
 
     // remember which course dependes on others and which ones depends on me
-    for (pair<int, int> pair : prerequisites)
+    for (size_t i = 0; i < prerequisites.size(); i++)
     {
-        courseDependency[pair.first].insert(pair.second);
-        whoDependOnMe[pair.second].insert(pair.first);
+        degree[prerequisites[i][0]]++;
+        dependency[prerequisites[i][1]].insert(prerequisites[i][0]);
     }
     // get all the course not depends on others, this is our starting search scope
-    for (size_t i = 0; i < courseDependency.size(); i++)
+    vector<int> result;
+    for (size_t i = 0; i < degree.size(); i++)
     {
-        if (courseDependency[i].size() == 0)
+        if (degree[i] == 0)
         {
-            search_queue.push(i);
+            search.push(i);
+            result.push_back(i);
         }
     }
-
-    // Using queue to manage BFS and get every free course and clear the dependency 
-    // with a free course, i.e. you depend on a free course, then such dependency
-    // does not matter. If all dependencies are clear, we got a new free course
-    while (!search_queue.empty())
+    while (!search.empty())
     {
-        int free_course = search_queue.front();
-        result.push_back(free_course);
-        search_queue.pop();
-        unordered_set<int> course_depend_on_me = whoDependOnMe[free_course];
-        for (int dependent_course : course_depend_on_me)
+        int free_course = search.front();
+        search.pop();
+        for (int next_course : dependency[free_course])
         {
-            courseDependency[dependent_course].erase(free_course);
-            if (courseDependency[dependent_course].empty())
+            degree[next_course]--;
+            if (degree[next_course] == 0)
             {
-                search_queue.push(dependent_course);
+                search.push(next_course);
+                result.push_back(next_course);
             }
         }
     }
-
-    // if number of free courses equals to the total course, we can finish all courses
     if (result.size() == numCourses)
     {
         return result;
     }
     else
     {
-        result.clear();
-        return result;
+        return vector<int>();
     }
 }
 
@@ -1259,104 +1252,106 @@ string LeetCodeGraph::alienOrder(vector<string>& words)
 }
 
 /// <summary>
-/// Leet code #444. Sequence Reconstruction
-/// Check whether the original sequence org can be uniquely reconstructed from 
-/// the sequences in seqs. The org sequence is a permutation of the integers 
-/// from 1 to n, with 1 ≤ n ≤ 104. Reconstruction means building a shortest 
-/// common supersequence of the sequences in seqs (i.e., a shortest sequence so 
-/// that all sequences in seqs are subsequences of it). Determine whether there 
-/// is only one sequence that can be reconstructed from seqs and it is the 
-/// org sequence.
+/// Leet Code 444. Sequence Reconstruction
+///                                                                 
+/// Medium
 ///
-/// Example 1: 
-/// Input: 
-/// org: [1,2,3], seqs: [[1,2],[1,3]] 
+/// You are given an integer array nums of length n where nums is a 
+/// permutation of the integers in the range [1, n]. You are also 
+/// given a 2D integer array sequences where sequences[i] is a 
+/// subsequence of nums.
 ///
-/// Output:
-/// false 
+/// Check if nums is the shortest possible and the only supersequence. 
+/// The shortest supersequence is a sequence with the shortest length 
+/// and has all sequences[i] as subsequences. There could be multiple 
+/// valid supersequences for the given array sequences.
+///
+/// For example, for sequences = [[1,2],[1,3]], there are two shortest 
+/// supersequences, [1,2,3] and [1,3,2].
+/// While for sequences = [[1,2],[1,3],[1,2,3]], the only shortest 
+/// supersequence possible is [1,2,3]. [1,2,3,4] is a possible 
+/// supersequence but not the shortest.
+/// Return true if nums is the only shortest supersequence for 
+/// sequences, or false otherwise.
+///
+/// A subsequence is a sequence that can be derived from another sequence 
+/// by deleting some or no elements without changing the order of the 
+/// remaining elements.
 /// 
-/// Explanation:
-///   [1,2,3] is not the only one sequence that can be reconstructed, because 
-///   [1,3,2] is also a valid sequence that can be reconstructed.
+/// Example 1:
+/// Input: nums = [1,2,3], sequences = [[1,2],[1,3]]
+/// Output: false
+/// Explanation: There are two possible supersequences: [1,2,3] and 
+/// [1,3,2].
+/// The sequence [1,2] is a subsequence of both: [1,2,3] and [1,3,2].
+/// The sequence [1,3] is a subsequence of both: [1,2,3] and [1,3,2].
+/// Since nums is not the only shortest supersequence, we return false.
 ///
-/// Example 2: 
-/// Input:
-/// org: [1,2,3], seqs: [[1,2]]
-/// Output:
-/// false
+/// Example 2:
+/// Input: nums = [1,2,3], sequences = [[1,2]]
+/// Output: false
+/// Explanation: The shortest possible supersequence is [1,2].
+/// The sequence [1,2] is a subsequence of it: [1,2].
+/// Since nums is not the shortest supersequence, we return false.
 ///
-/// Explanation:
-/// The reconstructed sequence can only be [1,2].
+/// Example 3:
+/// Input: nums = [1,2,3], sequences = [[1,2],[1,3],[2,3]]
+/// Output: true
+/// Explanation: The shortest possible supersequence is [1,2,3].
+/// The sequence [1,2] is a subsequence of it: [1,2,3].
+/// The sequence [1,3] is a subsequence of it: [1,2,3].
+/// The sequence [2,3] is a subsequence of it: [1,2,3].
+/// Since nums is the only shortest supersequence, we return true.
 ///
-/// Example 3: 
-/// Input:
-/// org: [1,2,3], seqs: [[1,2],[1,3],[2,3]]
-///
-/// Output:
-/// true
-///
-/// Explanation:
-/// The sequences [1,2], [1,3], and [2,3] can uniquely reconstruct the 
-/// original sequence [1,2,3].
-///
-/// Example 4: 
-/// Input:
-/// org: [4,1,5,2,6,3], seqs: [[5,2,6,3],[4,1,5,2]]
-///
-/// Output:
-/// true
+/// Constraints:
+/// 1. n == nums.length
+/// 2. 1 <= n <= 10^4
+/// 3. nums is a permutation of all the integers in the range [1, n].
+/// 4. 1 <= sequences.length <= 10^4 
+/// 5. 1 <= sequences[i].length <= 10^4
+/// 6. 1 <= sum(sequences[i].length) <= 10^5
+/// 7. 1 <= sequences[i][j] <= n
+/// 8. All the arrays of sequences are unique.
+/// 9. sequences[i] is a subsequence of nums.
 /// </summary>
-bool LeetCodeGraph::sequenceReconstruction(vector<int>& org, vector<vector<int>>& seqs)
+bool LeetCodeGraph::sequenceReconstruction(vector<int>& nums, vector<vector<int>>& sequences)
 {
-    unordered_map<int, unordered_set<int>> prev_set;
-    unordered_map<int, unordered_set<int>> next_set;
-    unordered_set<int> root_set;
+    vector<int> degree(nums.size() + 1);
+    vector<vector<int>> dependencies(nums.size() + 1);
 
-    for (size_t i = 0; i < seqs.size(); i++)
+    for (size_t i = 0; i < sequences.size(); i++)
     {
-        for (size_t j = 0; j < seqs[i].size(); j++)
+        for (int j = sequences[i].size() - 1; j > 0; j--)
         {
-            if (j + 1 < seqs[i].size())
-            {
-                next_set[seqs[i][j]].insert(seqs[i][j + 1]);
-                prev_set[seqs[i][j + 1]].insert(seqs[i][j]);
-            }
-            else
-            {
-                next_set[seqs[i][j]].insert(0);
-            }
+            if (sequences[i][j] > (int)nums.size()) return false;
+            degree[sequences[i][j]]++;
+            dependencies[sequences[i][j - 1]].push_back(sequences[i][j]);
         }
     }
-
-    // insert everyone has successor
-    for (auto itr : next_set) root_set.insert(itr.first);
-    // remove everyone has predecessor
-    for (auto itr : prev_set) root_set.erase(itr.first);
-
-    int index = 0;
-    while (!root_set.empty())
+    queue<int> queue;
+    vector<int> result;
+    for (size_t i = 1; i < degree.size(); i++)
     {
-        if (root_set.size() > 1) return false;
-        int prev = *root_set.begin();
-        for (int next : next_set[prev])
+        if (degree[i] == 0) queue.push(i);
+    }
+    while (!queue.empty())
+    {
+        if (queue.size() > 1) return false;
+        int node = queue.front();
+        queue.pop();
+        if (node != nums[result.size()]) return false;
+        result.push_back(node);
+        for (size_t i = 0; i < dependencies[node].size(); i++)
         {
-            // ignore 0
-            if (next == 0) continue;
-
-            prev_set[next].erase(prev);
-            if (prev_set[next].empty())
+            degree[dependencies[node][i]]--;
+            if (degree[dependencies[node][i]] == 0)
             {
-                root_set.insert(next);
-                prev_set.erase(next);
+                queue.push(dependencies[node][i]);
             }
         }
-        root_set.erase(prev);
-        next_set.erase(prev);
-        if (index >= (int)org.size() || org[index] != prev) return false;
-        index++;
-    }
-    if (next_set.empty() && (index == org.size())) return true;
-    else return false;
+    } 
+    if (result.size() != nums.size()) return false;
+    else return true;
 }
 
 /// <summary>
@@ -12934,28 +12929,28 @@ int LeetCodeGraph::minimumOperations(vector<int>& nums, int start, int goal)
         {
             int node = queue.front();
             queue.pop();
-            for (int i = 0; i < nums.size(); i++)
+            for (int i = 0; i < (int)nums.size(); i++)
             {
                 long long next = (long long)node + (long long)nums[i];
                 if (next == goal) return result;
-                if (next >= 0 && next <= 1000 && visited[next] == 0)
+                if (next >= 0 && next <= 1000 && visited[(int)next] == 0)
                 {
-                    visited[next] = 1;
-                    queue.push(next);
+                    visited[(int)next] = 1;
+                    queue.push((int)next);
                 }
                 next = (long long)node - (long long)nums[i];
                 if (next == goal) return result;
-                if (next >= 0 && next <= 1000 && visited[next] == 0)
+                if (next >= 0 && next <= 1000 && visited[(int)next] == 0)
                 {
-                    visited[next] = 1;
-                    queue.push(next);
+                    visited[(int)next] = 1;
+                    queue.push((int)next);
                 }
                 next = (long long)node ^ (long long)nums[i];
                 if (next == goal) return result;
-                if (next >= 0 && next <= 1000 && visited[next] == 0)
+                if (next >= 0 && next <= 1000 && visited[(int)next] == 0)
                 {
-                    visited[next] = 1;
-                    queue.push(next);
+                    visited[(int)next] = 1;
+                    queue.push((int)next);
                 }
             }
         }

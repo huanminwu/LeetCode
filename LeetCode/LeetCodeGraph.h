@@ -80,7 +80,7 @@ public:
     /// The input prerequisites is a graph represented by a list of edges, 
     /// not adjacency matrices. Read more about how a graph is represented. 
     /// </summary>
-    bool canFinishCourse(int numCourses, vector<pair<int, int>>& prerequisites);
+    bool canFinishCourse(int numCourses, vector<vector<int>>& prerequisites);
 
     /// <summary>
     /// LeetCode #210. Course Schedule II  
@@ -117,7 +117,7 @@ public:
     ///   Coursera explaining the basic concepts of Topological Sort.
     /// 3.Topological sort could also be done via BFS.
     /// </summary>
-    vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites);
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites);
 
     /// <summary>
     /// Leet code #310. Minimum Height Trees     
@@ -497,54 +497,69 @@ public:
     string alienOrder(vector<string>& words);
 
     /// <summary>
-    /// Leet code #444. Sequence Reconstruction
-    /// Check whether the original sequence org can be uniquely reconstructed from 
-    /// the sequences in seqs. The org sequence is a permutation of the integers 
-    /// from 1 to n, with 1 ≤ n ≤ 104. Reconstruction means building a shortest 
-    /// common supersequence of the sequences in seqs (i.e., a shortest sequence so 
-    /// that all sequences in seqs are subsequences of it). Determine whether there 
-    /// is only one sequence that can be reconstructed from seqs and it is the 
-    /// org sequence.
+    /// Leet Code 444. Sequence Reconstruction
+    ///                                                                 
+    /// Medium
     ///
-    /// Example 1: 
-    /// Input: 
-    /// org: [1,2,3], seqs: [[1,2],[1,3]] 
+    /// You are given an integer array nums of length n where nums is a 
+    /// permutation of the integers in the range [1, n]. You are also 
+    /// given a 2D integer array sequences where sequences[i] is a 
+    /// subsequence of nums.
     ///
-    /// Output:
-    /// false 
+    /// Check if nums is the shortest possible and the only supersequence. 
+    /// The shortest supersequence is a sequence with the shortest length 
+    /// and has all sequences[i] as subsequences. There could be multiple 
+    /// valid supersequences for the given array sequences.
+    ///
+    /// For example, for sequences = [[1,2],[1,3]], there are two shortest 
+    /// supersequences, [1,2,3] and [1,3,2].
+    /// While for sequences = [[1,2],[1,3],[1,2,3]], the only shortest 
+    /// supersequence possible is [1,2,3]. [1,2,3,4] is a possible 
+    /// supersequence but not the shortest.
+    /// Return true if nums is the only shortest supersequence for 
+    /// sequences, or false otherwise.
+    ///
+    /// A subsequence is a sequence that can be derived from another sequence 
+    /// by deleting some or no elements without changing the order of the 
+    /// remaining elements.
     /// 
-    /// Explanation:
-    ///   [1,2,3] is not the only one sequence that can be reconstructed, because 
-    ///   [1,3,2] is also a valid sequence that can be reconstructed.
+    /// Example 1:
+    /// Input: nums = [1,2,3], sequences = [[1,2],[1,3]]
+    /// Output: false
+    /// Explanation: There are two possible supersequences: [1,2,3] and 
+    /// [1,3,2].
+    /// The sequence [1,2] is a subsequence of both: [1,2,3] and [1,3,2].
+    /// The sequence [1,3] is a subsequence of both: [1,2,3] and [1,3,2].
+    /// Since nums is not the only shortest supersequence, we return false.
     ///
-    /// Example 2: 
-    /// Input:
-    /// org: [1,2,3], seqs: [[1,2]]
-    /// Output:
-    /// false
+    /// Example 2:
+    /// Input: nums = [1,2,3], sequences = [[1,2]]
+    /// Output: false
+    /// Explanation: The shortest possible supersequence is [1,2].
+    /// The sequence [1,2] is a subsequence of it: [1,2].
+    /// Since nums is not the shortest supersequence, we return false.
     ///
-    /// Explanation:
-    /// The reconstructed sequence can only be [1,2].
+    /// Example 3:
+    /// Input: nums = [1,2,3], sequences = [[1,2],[1,3],[2,3]]
+    /// Output: true
+    /// Explanation: The shortest possible supersequence is [1,2,3].
+    /// The sequence [1,2] is a subsequence of it: [1,2,3].
+    /// The sequence [1,3] is a subsequence of it: [1,2,3].
+    /// The sequence [2,3] is a subsequence of it: [1,2,3].
+    /// Since nums is the only shortest supersequence, we return true.
     ///
-    /// Example 3: 
-    /// Input:
-    /// org: [1,2,3], seqs: [[1,2],[1,3],[2,3]]
-    ///
-    /// Output:
-    /// true
-    ///
-    /// Explanation:
-    /// The sequences [1,2], [1,3], and [2,3] can uniquely reconstruct the 
-    /// original sequence [1,2,3].
-    ///
-    /// Example 4: 
-    /// Input:
-    /// org: [4,1,5,2,6,3], seqs: [[5,2,6,3],[4,1,5,2]]
-    ///
-    /// Output:
-    /// true
+    /// Constraints:
+    /// 1. n == nums.length
+    /// 2. 1 <= n <= 10^4
+    /// 3. nums is a permutation of all the integers in the range [1, n].
+    /// 4. 1 <= sequences.length <= 10^4 
+    /// 5. 1 <= sequences[i].length <= 10^4
+    /// 6. 1 <= sum(sequences[i].length) <= 10^5
+    /// 7. 1 <= sequences[i][j] <= n
+    /// 8. All the arrays of sequences are unique.
+    /// 9. sequences[i] is a subsequence of nums.
     /// </summary>
-    bool sequenceReconstruction(vector<int>& org, vector<vector<int>>& seqs);
+    bool sequenceReconstruction(vector<int>& nums, vector<vector<int>>& sequences);
 
     /// <summary>
     /// Leet code #573. Squirrel Simulation

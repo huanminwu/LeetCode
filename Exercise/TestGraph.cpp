@@ -29,13 +29,19 @@ void TestLeetCode207(void)
 {
     Logger::WriteMessage("Test Leet Code 207");
     LeetCodeGraph leetCode;
-    vector<pair<int, int>> prerequisites;
+    vector<vector<int>> prerequisites;
     int numCourses;
     bool canFinish;
     numCourses = 2;
-    prerequisites = { { 0, 1 } };
+    prerequisites = { { 1, 0 } };
     Logger::WriteMessage(prerequisites);
     canFinish = leetCode.canFinishCourse(numCourses, prerequisites);
+    Logger::WriteMessage("Can finish all course: " + string(canFinish ? "true" : "false"));
+
+    numCourses = 2;
+    prerequisites = { { 0, 1 }, {1,0} };
+    canFinish = leetCode.canFinishCourse(numCourses, prerequisites);
+    Logger::WriteMessage(prerequisites);
     Logger::WriteMessage("Can finish all course: " + string(canFinish ? "true" : "false"));
 
     numCourses = 3;
@@ -67,7 +73,7 @@ void TestLeetCode210(void)
 {
     Logger::WriteMessage("Test Leet Code 210");
     LeetCodeGraph leetCode;
-    vector<pair<int, int>> prerequisites;
+    vector<vector<int>> prerequisites;
     vector<int> result;
     int numCourses;
     numCourses = 4;
@@ -287,76 +293,69 @@ void TestLeetCode444(void)
 {
     Logger::WriteMessage("Test Leet Code 444");
     LeetCodeGraph leetCode;
-    vector<int> org = { 1, 2, 3 };
-    vector<vector<int>> seqs = { { 1, 2 },{ 1, 3 } };
-    bool result = leetCode.sequenceReconstruction(org, seqs);
-    Logger::WriteMessage(org);
-    Logger::WriteMessage(seqs);
-    Logger::WriteMessage((string)(result ? "Can " : "Can not ") + "reconstruct sequences");
+    vector<int> nums = { 1, 2, 3 };
+    vector<vector<int>> sequences = { { 1, 2 },{ 1, 3 } };
+    bool result = leetCode.sequenceReconstruction(nums, sequences);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(sequences);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 
-    org = { 1, 2, 3 };
-    seqs = { { 1, 2 } };
-    result = leetCode.sequenceReconstruction(org, seqs);
-    Logger::WriteMessage(org);
-    Logger::WriteMessage(seqs);
-    Logger::WriteMessage((string)(result ? "Can " : "Can not ") + "reconstruct sequences");
+    nums = { 1, 2, 3 };
+    sequences = { { 1, 2 } };
+    result = leetCode.sequenceReconstruction(nums, sequences);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(sequences);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 
-    org = { 1, 2, 3 };
-    seqs = { {1, 2},{1, 3},{2, 3} };
-    result = leetCode.sequenceReconstruction(org, seqs);
-    Logger::WriteMessage(org);
-    Logger::WriteMessage(seqs);
-    Logger::WriteMessage((string)(result ? "Can " : "Can not ") + "reconstruct sequences");
+    nums = { 1, 2, 3 };
+    sequences = { {1, 2},{1, 3},{2, 3} };
+    result = leetCode.sequenceReconstruction(nums, sequences);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(sequences);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 
-    org = { 4,1,5,2,6,3 };
-    seqs = { { 5,2,6,3 },{ 4,1,5,2 } };
-    result = leetCode.sequenceReconstruction(org, seqs);
-    Logger::WriteMessage(org);
-    Logger::WriteMessage(seqs);
-    Logger::WriteMessage((string)(result ? "Can " : "Can not ") + "reconstruct sequences");
+    nums = { 4,1,5,2,6,3 };
+    sequences = { { 5,2,6,3 },{ 4,1,5,2 } };
+    result = leetCode.sequenceReconstruction(nums, sequences);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(sequences);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 
 
-    org = { 1 };
-    seqs = { { },{ } };
-    result = leetCode.sequenceReconstruction(org, seqs);
-    Logger::WriteMessage(org);
-    Logger::WriteMessage(seqs);
-    Logger::WriteMessage((string)(result ? "Can " : "Can not ") + "reconstruct sequences");
+    nums = { 1 };
+    sequences = { { },{ } };
+    result = leetCode.sequenceReconstruction(nums, sequences);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(sequences);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 
-    org = { 1 };
-    seqs = { { },{ } };
-    result = leetCode.sequenceReconstruction(org, seqs);
-    Logger::WriteMessage(org);
-    Logger::WriteMessage(seqs);
-    Logger::WriteMessage((string)(result ? "Can " : "Can not ") + "reconstruct sequences");
+    nums = { 1 };
+    sequences = { { } };
+    result = leetCode.sequenceReconstruction(nums, sequences);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(sequences);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 
-    org = { 1 };
-    seqs = { { } };
-    result = leetCode.sequenceReconstruction(org, seqs);
-    Logger::WriteMessage(org);
-    Logger::WriteMessage(seqs);
-    Logger::WriteMessage((string)(result ? "Can " : "Can not ") + "reconstruct sequences");
+    nums = { 1 };
+    sequences = { { 1 }, {1 } };
+    result = leetCode.sequenceReconstruction(nums, sequences);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(sequences);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 
-    org = { 1 };
-    seqs = { { 1 }, {1 } };
-    result = leetCode.sequenceReconstruction(org, seqs);
-    Logger::WriteMessage(org);
-    Logger::WriteMessage(seqs);
-    Logger::WriteMessage((string)(result ? "Can " : "Can not ") + "reconstruct sequences");
-
-    org = { 1, 2, 3 };
-    seqs = { { 1, 2 },{ 2, 3 }, {3, 1} };
-    result = leetCode.sequenceReconstruction(org, seqs);
-    Logger::WriteMessage(org);
-    Logger::WriteMessage(seqs);
-    Logger::WriteMessage((string)(result ? "Can " : "Can not ") + "reconstruct sequences");
-
-    org = { 5, 3, 2, 4, 1 };
-    seqs = { { 5, 3, 2, 4 },{ 4, 1 },{1},{3},{2, 4},{1, 1000000000} };
-    result = leetCode.sequenceReconstruction(org, seqs);
-    Logger::WriteMessage(org);
-    Logger::WriteMessage(seqs);
-    Logger::WriteMessage((string)(result ? "Can " : "Can not ") + "reconstruct sequences");
+    nums = { 1, 2, 3 };
+    sequences = { { 1, 2 },{ 2, 3 }, {3, 1} };
+    result = leetCode.sequenceReconstruction(nums, sequences);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(sequences);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+    
+    nums = { 5, 3, 2, 4, 1 };
+    sequences = { { 5, 3, 2, 4 },{ 4, 1 },{1},{3},{2, 4},{1, 1000000000} };
+    result = leetCode.sequenceReconstruction(nums, sequences);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(sequences);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
 void TestLeetCode407(void)
@@ -4164,6 +4163,9 @@ void TestLeetCode2093(void)
 
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode444();
+    TestLeetCode207();
+    TestLeetCode210();
     TestLeetCode2093();
     TestLeetCode2101();
     TestLeetCode2115();
@@ -4257,8 +4259,6 @@ void TestLeetCodeGraph(void)
     TestLeetCode1263();
     TestLeetCode1258();
     TestLeetCode133();
-    TestLeetCode207();
-    TestLeetCode210();
     TestLeetCode261();
     TestLeetCode269();
     TestLeetCode277();
@@ -4269,8 +4269,7 @@ void TestLeetCodeGraph(void)
     TestLeetCode323();
     TestLeetCode332();
     TestLeetCode399();
-    TestLeetCode444();
-    TestLeetCode529();
+   TestLeetCode529();
     TestLeetCode568();
     TestLeetCode573();
     TestLeetCode582();
