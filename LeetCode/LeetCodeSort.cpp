@@ -28,7 +28,7 @@
 /// You may assume all elements in the array are non-negative integers and fit 
 /// in the 32-bit signed integer range.
 /// </summary>
-int LeetCode::maximumGap(vector<int>& nums)
+int LeetCodeSort::maximumGap(vector<int>& nums)
 {
     if (nums.size() < 2) return 0;
 
@@ -105,7 +105,7 @@ int LeetCode::maximumGap(vector<int>& nums)
 /// array with total number of 0's, then 1's and followed by 2's.
 /// Could you come up with an one-pass algorithm using only constant space?
 /// </summary>
-void LeetCode::sortColors(vector<int>& nums)
+void LeetCodeSort::sortColors(vector<int>& nums)
 {
     int low, high, mid;
     low = 0;
@@ -149,7 +149,7 @@ void LeetCode::sortColors(vector<int>& nums)
 /// 2.What are the possible values of h-index?
 /// 3.A faster approach is to use extra space.
 /// </summary>
-int LeetCode::hIndex(vector<int>& citations)
+int LeetCodeSort::hIndex(vector<int>& citations)
 {
     vector<int> count_map(citations.size() + 1);
     for (size_t i = 0; i < citations.size(); i++)
@@ -183,7 +183,7 @@ int LeetCode::hIndex(vector<int>& citations)
 /// Follow Up:
 /// Can you do it in O(n) time and/or in-place with O(1) extra space? 
 /// </summary>
-void LeetCode::wiggleSortII(vector<int>& nums)
+void LeetCodeSort::wiggleSortII(vector<int>& nums)
 {
     int n = nums.size();
 
@@ -221,7 +221,7 @@ void LeetCode::wiggleSortII(vector<int>& nums)
 /// For example, given [3, 30, 34, 5, 9], the largest formed number is 9534330.
 /// Note: The result may be very large, so you need to return a string instead of an integer.
 /// </summary>
-string LeetCode::largestNumber(vector<int>& nums)
+string LeetCodeSort::largestNumber(vector<int>& nums)
 {
     string result;
     vector<string> num_strs;
@@ -340,7 +340,7 @@ bool LeetCodeSort::find132pattern(vector<int>& nums)
 /// Output:
 /// [[5,0], [7,0], [5,2], [6,1], [4,4], [7,1]]
 /// </summary>
-vector<pair<int, int>> LeetCode::reconstructQueue(vector<pair<int, int>>& people)
+vector<pair<int, int>> LeetCodeSort::reconstructQueue(vector<pair<int, int>>& people)
 {
     vector<pair<int, int>> result;
     struct heightCompare
@@ -425,7 +425,7 @@ vector<vector<int>> LeetCodeSort::kSmallestPairs(vector<int>& nums1, vector<int>
 /// indices i and j in the array such that the difference between 
 /// nums[i] and nums[j] is at most t and the difference between i and j is at most k. 
 /// </summary>
-bool LeetCode::containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t)
+bool LeetCodeSort::containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t)
 {
     set<int> nums_set;
     for (size_t i = 0; i < nums.size(); i++)
@@ -471,7 +471,7 @@ bool LeetCode::containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t)
 /// To the right of 1 there is 0 smaller element.
 /// Return the array [2, 1, 1, 0]. 
 /// </summary>
-vector<int> LeetCode::countSmallerII(vector<int>& nums)
+vector<int> LeetCodeSort::countSmallerII(vector<int>& nums)
 {
     vector<int> num_map;
     vector<int> result(nums.size());
@@ -542,7 +542,7 @@ vector<int> LeetCodeSort::countSmaller(vector<int>& nums)
 /// <summary>
 /// Leet code #315. Count of Smaller Numbers After Self  
 /// </summary>
-void LeetCode::addBIT(int index, vector<int>& accu_slot)
+void LeetCodeSort::addBIT(int index, vector<int>& accu_slot)
 {
     while (index < (int)accu_slot.size())
     {
@@ -554,7 +554,7 @@ void LeetCode::addBIT(int index, vector<int>& accu_slot)
 /// <summary>
 /// Leet code #315. Count of Smaller Numbers After Self  
 /// </summary>
-int LeetCode::sumBIT(int index, vector<int>& accu_slot)
+int LeetCodeSort::sumBIT(int index, vector<int>& accu_slot)
 {
     int sum = 0;
     while (index != 0)
@@ -579,7 +579,7 @@ int LeetCode::sumBIT(int index, vector<int>& accu_slot)
 /// To the right of 1 there is 0 smaller element.
 /// Return the array [2, 1, 1, 0]. 
 /// </summary>
-vector<int> LeetCode::countSmallerIV(vector<int>& nums)
+vector<int> LeetCodeSort::countSmallerIV(vector<int>& nums)
 {
     vector<int> result(nums.size());
     int max_num = INT_MIN;
@@ -703,7 +703,7 @@ int LeetCodeSort::countRangeSum(vector<int>& nums, int lower, int upper)
 /// For example, given nums = [3, 5, 2, 1, 6, 4], 
 /// one possible answer is [1, 6, 2, 5, 3, 4].
 /// </summary>
-void LeetCode::wiggleSort(vector<int>& nums)
+void LeetCodeSort::wiggleSort(vector<int>& nums)
 {
     for (size_t i = 1; i < nums.size(); i++)
     {
@@ -781,7 +781,7 @@ bool LeetCodeSort::increasingTriplet(vector<int>& nums)
 /// The lexicographical order is [1, 10, 11, 12, 13, 2, 3, 4, 5, 6, 7, 8, 9], 
 /// so the second smallest number is 10.
 /// </summary>
-int LeetCode::findKthNumber(int n, int k)
+int LeetCodeSort::findKthNumber(int n, int k)
 {
     k--;
     int current = 1;
@@ -841,7 +841,7 @@ int LeetCode::findKthNumber(int n, int k)
 /// You may assume k is always valid, ie: 1 ≤ k ≤ input array's size for non-empty 
 /// array.
 /// </summary>
-vector<double> LeetCode::medianSlidingWindow(vector<int>& nums, int k)
+vector<double> LeetCodeSort::medianSlidingWindow(vector<int>& nums, int k)
 {
     vector<double> result;
     multiset<int> low_half;
@@ -916,7 +916,7 @@ vector<double> LeetCode::medianSlidingWindow(vector<int>& nums, int k)
 /// Input: 21
 /// Output: -1
 /// </summary>
-int LeetCode::nextGreaterElement(int n)
+int LeetCodeSort::nextGreaterElement(int n)
 {
     vector<int> nums;
     while (n > 0)
@@ -959,7 +959,7 @@ int LeetCode::nextGreaterElement(int n)
 /// <summary>
 /// Leet code #321. Create Maximum Number 
 /// </summary>
-string LeetCode::createMaxNumber(vector<int>& nums, int k)
+string LeetCodeSort::createMaxNumber(vector<int>& nums, int k)
 {
     string result;
     size_t i = 0;
@@ -987,7 +987,7 @@ string LeetCode::createMaxNumber(vector<int>& nums, int k)
 /// <summary>
 /// Leet code #321. Create Maximum Number 
 /// </summary>
-void LeetCode::createMaxNumber(string num1, string num2, string& result)
+void LeetCodeSort::createMaxNumber(string num1, string num2, string& result)
 {
     while ((!num1.empty()) || (!num2.empty()))
     {
@@ -1038,7 +1038,7 @@ void LeetCode::createMaxNumber(string num1, string num2, string& result)
 /// k = 3
 /// return [9, 8, 9]
 /// </summary>
-vector<int> LeetCode::maxNumber(vector<int>& nums1, vector<int>& nums2, int k)
+vector<int> LeetCodeSort::maxNumber(vector<int>& nums1, vector<int>& nums2, int k)
 {
     vector<int> result;
     string max_num;
@@ -1092,7 +1092,7 @@ vector<int> LeetCode::maxNumber(vector<int>& nums1, vector<int>& nums2, int k)
 /// 1.The input strings will only contain lowercase letters.
 /// 2.The total length of all the strings will not over 1000.
 /// </summary>
-string LeetCode::splitLoopedString(vector<string>& strs)
+string LeetCodeSort::splitLoopedString(vector<string>& strs)
 {
     string max_str;
     vector<string> max_strs;
@@ -1152,7 +1152,7 @@ string LeetCode::splitLoopedString(vector<string>& strs)
 /// n is a positive integer, which is in the range of [1, 10000].
 /// All the integers in the array will be in the range of [-10000, 10000].
 /// </summary>
-int LeetCode::arrayPairSum(vector<int>& nums)
+int LeetCodeSort::arrayPairSum(vector<int>& nums)
 {
     sort(nums.begin(), nums.end());
     int sum = 0;
@@ -1181,7 +1181,7 @@ int LeetCode::arrayPairSum(vector<int>& nums)
 /// 2.The input array may contain duplicates, so ascending order here means 
 /// <=. 
 /// </summary>
-int LeetCode::findUnsortedSubarray(vector<int>& nums)
+int LeetCodeSort::findUnsortedSubarray(vector<int>& nums)
 {
     int first = 0, last = nums.size() - 1;
     vector<int> sorted_array(nums.size());
@@ -1279,7 +1279,7 @@ vector<int> LeetCodeSort::smallestRange(vector<vector<int>>& nums)
 /// 
 /// Note: The n belongs to [1, 10,000]. 
 /// </summary>
-bool LeetCode::checkPossibility(vector<int>& nums)
+bool LeetCodeSort::checkPossibility(vector<int>& nums)
 {
     int decrease = 0;
     for (size_t i = 1; i < nums.size(); i++)
@@ -1325,7 +1325,7 @@ bool LeetCode::checkPossibility(vector<int>& nums)
 /// 1. Try to solve it in O(n log k) time and O(n) extra space.
 /// 2. Can you solve it in O(n) time with only O(k) extra space?
 /// </summary>
-vector<string> LeetCode::topKFrequent(vector<string>& words, int k)
+vector<string> LeetCodeSort::topKFrequent(vector<string>& words, int k)
 {
     unordered_map<string, int> word_count;
     for (string word : words)
@@ -1437,7 +1437,7 @@ int LeetCodeSort::kEmptySlots(vector<int>& flowers, int k)
 /// Output: 299
 /// Note: N is an integer in the range [0, 10^9].
 /// </summary>
-int LeetCode::monotoneIncreasingDigits(int N)
+int LeetCodeSort::monotoneIncreasingDigits(int N)
 {
     string str_num = to_string(N);
     string buffer;
@@ -1509,7 +1509,7 @@ int LeetCode::monotoneIncreasingDigits(int N)
 /// unique letters.
 /// target is a lowercase letter.
 /// </summary> 
-char LeetCode::nextGreatestLetter(vector<char>& letters, char target)
+char LeetCodeSort::nextGreatestLetter(vector<char>& letters, char target)
 {
     int low = 0, high = letters.size();
     while (low < high)
@@ -1562,7 +1562,7 @@ char LeetCode::nextGreatestLetter(vector<char>& letters, char target)
 /// arr will have length in range [1, 10].
 /// arr[i] will be a permutation of [0, 1, ..., arr.length - 1].
 /// </summary>
-int LeetCode::maxChunksToSorted(vector<int>& arr)
+int LeetCodeSort::maxChunksToSorted(vector<int>& arr)
 {
     deque<int> chunks;
     for (size_t i = 0; i < arr.size(); i++)
@@ -1621,7 +1621,7 @@ int LeetCode::maxChunksToSorted(vector<int>& arr)
 /// arr will have length in range [1, 2000].
 /// arr[i] will be an integer in range [0, 10**8].
 /// </summary>
-int LeetCode::maxChunksToSortedII(vector<int>& arr)
+int LeetCodeSort::maxChunksToSortedII(vector<int>& arr)
 {
     deque<int> chunks;
     for (size_t i = 0; i < arr.size(); i++)
@@ -1722,7 +1722,7 @@ double LeetCodeSort::minmaxGasDist(vector<int>& stations, int K)
 /// A will have length in range [1, 5000].
 /// The time limit for this problem has been reduced.
 /// </summary>
-bool LeetCode::isIdealPermutation(vector<int>& A)
+bool LeetCodeSort::isIdealPermutation(vector<int>& A)
 {
     vector<pair<int, int>> nums;
     for (size_t i = 0; i < A.size(); i++)
@@ -1775,7 +1775,7 @@ bool LeetCode::isIdealPermutation(vector<int>& A)
 /// A will have length in range [1, 5000].
 /// The time limit for this problem has been reduced.
 /// </summary>
-bool LeetCode::isIdealPermutationII(vector<int>& A)
+bool LeetCodeSort::isIdealPermutationII(vector<int>& A)
 {
     map<int, int> num_map;
     for (size_t i = 0; i < A.size(); i++)
@@ -1830,7 +1830,7 @@ bool LeetCode::isIdealPermutationII(vector<int>& A)
 /// 1. A will have length at most 20000.
 /// 2. A[i] will be in the range [0, A.length].
 /// </summary> 
-int LeetCode::bestRotation(vector<int>& A)
+int LeetCodeSort::bestRotation(vector<int>& A)
 {
     int result = 0;
     int max_score = 0;
@@ -1973,7 +1973,7 @@ bool LeetCodeSort::isNStraightHand(vector<int>& hand, int W)
 /// 4. 0 <= position[i] < target
 /// 5. All initial positions are different.
 /// </summary>
-int LeetCode::carFleet(int target, vector<int>& position, vector<int>& speed)
+int LeetCodeSort::carFleet(int target, vector<int>& position, vector<int>& speed)
 {
     if (position.empty()) return 0;
     int result = 1;
@@ -2117,7 +2117,7 @@ double LeetCodeSort::mincostToHireWorkers(vector<int>& quality, vector<int>& wag
 /// 2. 0 <= A[i] <= 10^9
 /// 3. 0 <= B[i] <= 10^9
 /// </summary>
-vector<int> LeetCode::advantageCount(vector<int>& A, vector<int>& B)
+vector<int> LeetCodeSort::advantageCount(vector<int>& A, vector<int>& B)
 {
     vector<int> result(A.size());
     vector<int> X = A;
@@ -2177,7 +2177,7 @@ vector<int> LeetCode::advantageCount(vector<int>& A, vector<int>& B)
 /// 1. 0 <= A.length <= 10000
 /// 2. 0 <= A[i] <= 10000 
 /// </summary>
-bool LeetCode::validMountainArray(vector<int>& A)
+bool LeetCodeSort::validMountainArray(vector<int>& A)
 {
     int prev = 0;
     for (size_t i = 1; i < A.size(); i++)
@@ -2228,7 +2228,7 @@ bool LeetCode::validMountainArray(vector<int>& A)
 /// 1. 1 <= S.length <= 10000
 /// 2. S only contains characters "I" or "D".
 /// </summary>
-vector<int> LeetCode::diStringMatch(string S)
+vector<int> LeetCodeSort::diStringMatch(string S)
 {
     vector<int> result(S.size() + 1);
     int first = 0;
@@ -2290,7 +2290,7 @@ vector<int> LeetCode::diStringMatch(string S)
 /// 3. order.length == 26
 /// 4. All characters in words[i] and order are english lowercase letters.
 /// </summary>
-bool LeetCode::isAlienSorted(vector<string>& words, string order)
+bool LeetCodeSort::isAlienSorted(vector<string>& words, string order)
 {
     vector<int> alpha_map(26);
     for (size_t i = 0; i < order.size(); i++)
@@ -2340,7 +2340,7 @@ bool LeetCode::isAlienSorted(vector<string>& words, string order)
 /// 2. A.length is even
 /// 3. -100000 <= A[i] <= 100000
 /// </summary>
-bool LeetCode::canReorderDoubled(vector<int>& A)
+bool LeetCodeSort::canReorderDoubled(vector<int>& A)
 {
     map<int, int> number_map;
     for (auto a : A) number_map[a]++;
@@ -2408,7 +2408,7 @@ bool LeetCode::canReorderDoubled(vector<int>& A)
 /// 1. 1 <= A.length <= 100
 /// 2. 1 <= A[i].length <= 100
 /// </summary>
-int LeetCode::minDeletionSizeII(vector<string>& A)
+int LeetCodeSort::minDeletionSizeII(vector<string>& A)
 {
     int result = 0;
     vector<int> flag(A.size(), -1), remove(A[0].size());
@@ -2473,7 +2473,7 @@ int LeetCode::minDeletionSizeII(vector<string>& A)
 /// 1. 2 <= A.length <= 50000
 /// 2. 0 <= A[i] <= 50000
 /// </summary>
-int LeetCode::maxWidthRamp(vector<int>& A)
+int LeetCodeSort::maxWidthRamp(vector<int>& A)
 {
     vector<int> list;
     map<int, int> val_map;
@@ -2514,7 +2514,7 @@ int LeetCode::maxWidthRamp(vector<int>& A)
 /// 2. -10000 <= A[i] <= 10000
 /// 3. A is sorted in non-decreasing order.
 /// </summary>
-vector<int> LeetCode::sortedSquares(vector<int>& A)
+vector<int> LeetCodeSort::sortedSquares(vector<int>& A)
 {
     vector<int> result;
     for (size_t i = 0; i < A.size(); i++)
@@ -2545,7 +2545,7 @@ vector<int> LeetCode::sortedSquares(vector<int>& A)
 /// 1. 1 <= A.length <= 10000
 /// 2. -50000 <= A[i] <= 50000
 /// </summary>
-vector<int> LeetCode::sortArray(vector<int>& nums)
+vector<int> LeetCodeSort::sortArray(vector<int>& nums)
 {
     vector<int> result = nums;
     sort(result.begin(), result.end());
@@ -2580,7 +2580,7 @@ vector<int> LeetCode::sortArray(vector<int>& nums)
 /// 2. It is guaranteed that costs.length is even.
 /// 3. 1 <= costs[i][0], costs[i][1] <= 1000
 /// </summary>
-int LeetCode::twoCitySchedCost(vector<vector<int>>& costs)
+int LeetCodeSort::twoCitySchedCost(vector<vector<int>>& costs)
 {
     int result = 0;
     priority_queue<int> cost_diff;
@@ -2624,7 +2624,7 @@ int LeetCode::twoCitySchedCost(vector<vector<int>>& costs)
 /// 1. 1 <= stones.length <= 30
 /// 2. 1 <= stones[i] <= 1000
 /// </summary>
-int LeetCode::lastStoneWeight(vector<int>& stones)
+int LeetCodeSort::lastStoneWeight(vector<int>& stones)
 {
     priority_queue<int> pq;
     for (size_t i = 0; i < stones.size(); i++)
@@ -2666,7 +2666,7 @@ int LeetCode::lastStoneWeight(vector<int>& stones)
 /// 1. 1 <= heights.length <= 100
 /// 2. 1 <= heights[i] <= 100
 /// </summary>
-int LeetCode::heightChecker(vector<int>& heights)
+int LeetCodeSort::heightChecker(vector<int>& heights)
 {
     vector<int> sorted = heights;
     std::sort(sorted.begin(), sorted.end());
@@ -2717,7 +2717,7 @@ int LeetCode::heightChecker(vector<int>& heights)
 /// 1. 1 <= A.length <= 10000
 /// 2. 1 <= A[i] <= 10000
 /// </summary>
-vector<int> LeetCode::prevPermOpt1(vector<int>& A)
+vector<int> LeetCodeSort::prevPermOpt1(vector<int>& A)
 {
     vector<int> result = A;
     int first = -1;
@@ -2787,7 +2787,7 @@ vector<int> LeetCode::prevPermOpt1(vector<int>& A)
 /// 2. 0 <= values[i], labels[i] <= 20000
 /// 3. 1 <= num_wanted, use_limit <= values.length
 /// </summary>
-int LeetCode::largestValsFromLabels(vector<int>& values, vector<int>& labels,
+int LeetCodeSort::largestValsFromLabels(vector<int>& values, vector<int>& labels,
     int num_wanted, int use_limit)
 {
     vector<pair<int, int>> val_lab;
@@ -2838,7 +2838,7 @@ int LeetCode::largestValsFromLabels(vector<int>& values, vector<int>& labels,
 /// 4. The score of the students is between 1 to 100
 /// 5. For each student, there are at least 5 scores
 /// </summary>
-vector<vector<int>> LeetCode::highFive(vector<vector<int>>& items)
+vector<vector<int>> LeetCodeSort::highFive(vector<vector<int>>& items)
 {
     map<int, multiset<int>> scores;
     vector<vector<int>> result;
@@ -2882,7 +2882,7 @@ vector<vector<int>> LeetCode::highFive(vector<vector<int>>& items)
 /// Explanation: 
 /// In this case it's not possible to get a pair sum less that 15.
 /// </summary>
-int LeetCode::twoSumLessThanK(vector<int>& A, int K)
+int LeetCodeSort::twoSumLessThanK(vector<int>& A, int K)
 {
     set<int> heap;
     int result = -1;
@@ -2926,7 +2926,7 @@ int LeetCode::twoSumLessThanK(vector<int>& A, int K)
 /// 3. Each arr2[i] is distinct.
 /// 4. Each arr2[i] is in arr1.
 /// </summary>
-vector<int> LeetCode::relativeSortArray(vector<int>& arr1, vector<int>& arr2)
+vector<int> LeetCodeSort::relativeSortArray(vector<int>& arr1, vector<int>& arr2)
 {
     vector<pair<int, int>> arr;
     unordered_map<int, int> num_ord;
@@ -2978,7 +2978,7 @@ vector<int> LeetCode::relativeSortArray(vector<int>& arr1, vector<int>& arr2)
 /// 1. 1 <= A.length <= 2000
 /// 2. 0 <= A[i] <= 1000
 /// </summary>
-int LeetCode::largestUniqueNumber(vector<int>& A)
+int LeetCodeSort::largestUniqueNumber(vector<int>& A)
 {
     map<int, int> num_map;
     for (size_t i = 0; i < A.size(); i++)
@@ -3028,7 +3028,7 @@ int LeetCode::largestUniqueNumber(vector<int>& A)
 /// Follow up:
 /// Can you do it in O(n) time? 
 /// </summary>
-int LeetCode::wiggleMaxLength(vector<int>& nums)
+int LeetCodeSort::wiggleMaxLength(vector<int>& nums)
 {
     int count = 0;
     int sign = 0;
@@ -3100,7 +3100,7 @@ int LeetCode::wiggleMaxLength(vector<int>& nums)
 /// 4. Each {amount} consist of digits, and represent an integer between 
 ///    0 and 2000.
 /// </summary>
-vector<string> LeetCode::invalidTransactions(vector<string>& transactions)
+vector<string> LeetCodeSort::invalidTransactions(vector<string>& transactions)
 {
     vector<pair<string, pair<int, pair<string, pair<int, int>>>>> tran_list;
     for (size_t i = 0; i < transactions.size(); i++)
@@ -3190,7 +3190,7 @@ vector<string> LeetCode::invalidTransactions(vector<string>& transactions)
 /// 1 <= sticks.length <= 10^4
 /// 1 <= sticks[i] <= 10^4
 /// </summary>
-int LeetCode::connectSticks(vector<int>& sticks)
+int LeetCodeSort::connectSticks(vector<int>& sticks)
 {
     int result = 0;
     priority_queue<int> heap;
@@ -3239,7 +3239,7 @@ int LeetCode::connectSticks(vector<int>& sticks)
 /// 5. 0 <= queries[i][0] < colors.length
 /// 6. 1 <= queries[i][1] <= 3
 /// </summary>
-vector<int> LeetCode::shortestDistanceColor(vector<int>& colors, vector<vector<int>>& queries)
+vector<int> LeetCodeSort::shortestDistanceColor(vector<int>& colors, vector<vector<int>>& queries)
 {
     vector<vector<int>> dp(3);
     for (size_t i = 0; i < colors.size(); i++)
@@ -3317,7 +3317,7 @@ vector<int> LeetCode::shortestDistanceColor(vector<int>& colors, vector<vector<i
 /// 2. 1 <= blocks[i] <= 10^5
 /// 3. 1 <= split <= 100
 /// </summary>
-int LeetCode::minBuildTime(vector<int>& blocks, int split)
+int LeetCodeSort::minBuildTime(vector<int>& blocks, int split)
 {
     priority_queue<int> task_queue;
     for (size_t i = 0; i < blocks.size(); i++)

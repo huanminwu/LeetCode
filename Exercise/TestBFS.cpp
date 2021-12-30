@@ -524,23 +524,6 @@ void TestLeetCode733(void)
     Logger::WriteMessage(result);
 };
 
-void TestLeetCode743(void)
-{
-    LeetCodeBFS leetCode;
-    int N = 3;
-    int K = 1;
-    vector<vector<int>> times = { { 1, 2, 1 },{ 2, 3, 2 },{ 1, 3, 4 } };
-    int result = leetCode.networkDelayTime(times, N, K);
-    Logger::WriteMessage(times);
-    Logger::WriteMessage("N = " + to_string(N) + "; K = " + to_string(K) + " result = " + to_string(result));
-
-    N = 5;
-    K = 1;
-    times = { {1, 2, 1}, { 2, 3, 1 }, { 3, 4, 1 }, { 4, 5, 1 } };
-    result = leetCode.networkDelayTime(times, N, K);
-    Logger::WriteMessage(times);
-    Logger::WriteMessage("N = " + to_string(N) + "; K = " + to_string(K) + " result = " + to_string(result));
-}
 
 void TestLeetCode752(void)
 {

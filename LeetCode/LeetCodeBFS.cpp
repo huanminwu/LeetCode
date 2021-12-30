@@ -568,55 +568,6 @@ vector<vector<int>> LeetCodeBFS::floodFill(vector<vector<int>>& image,
     return result;
 }
 
-/// <summary>
-/// Leet code #743. Network Delay Time
-///
-/// There are N network nodes, labeled 1 to N.
-/// Given times, a list of travel times as directed edges 
-/// times[i] = (u, v, w), where u is the source node, v is the target 
-/// node, and w is the time it takes for a signal to travel from source 
-/// to target.
-///
-/// Now, we send a signal from a certain node K. How long will it take 
-/// for all nodes to receive the signal? If it is impossible, return -1.
-///
-/// Note:
-/// 1.N will be in the range [1, 100].
-/// 2.K will be in the range [1, N].
-/// 3.The length of times will be in the range [1, 6000].
-/// 4.All edges times[i] = (u, v, w) will have 1 <= u, v <= N and 
-///   1 <= w <= 100.
-/// </summary>
-int LeetCodeBFS::networkDelayTime(vector<vector<int>>& times, int N, int K)
-{
-    unordered_map<int, unordered_map<int, int>> travel_time;
-    priority_queue<pair<int, int>> travel;
-    unordered_map<int, int> visited_node;
-
-    int result = 0;
-    for (size_t i = 0; i < times.size(); i++)
-    {
-        travel_time[times[i][0]][times[i][1]] = times[i][2];
-    }
-    travel.push(make_pair(0, K));
-    while (!travel.empty())
-    {
-        pair<int, int> destination = travel.top();
-        travel.pop();
-        int time = -destination.first;
-        int next = destination.second;
-
-        if (visited_node.count(next) > 0) continue;
-        visited_node[next] = time;
-        result = max(result, time);
-        for (auto itr : travel_time[next])
-        {
-            travel.push(make_pair(-(itr.second + time), itr.first));
-        }
-    }
-    if (visited_node.size() == N) return result;
-    else return -1;
-}
 
 /// <summary>
 /// Leet code #752. Open the Lock

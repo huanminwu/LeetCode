@@ -13256,4 +13256,77 @@ int LeetCodeGraph::minimumCost(int n, vector<vector<int>>& highways, int discoun
     }
     return -1;
 }
+
+/// <summary>
+/// Leet Code 743. Network Delay Time
+///                                                                 
+/// Medium
+///
+/// You are given a network of n nodes, labeled from 1 to n. You are also 
+/// given times, a list of travel times as directed edges times[i] = 
+/// (ui, vi, wi), where ui is the source node, vi is the target node, and 
+/// wi is the time it takes for a signal to travel from source to target.
+///
+/// We will send a signal from a given node k. Return the time it takes 
+/// for all the n nodes to receive the signal. If it is impossible for 
+/// all the n nodes to receive the signal, return -1.
+///
+/// Example 1:
+/// Input: times = [[2,1,1],[2,3,1],[3,4,1]], n = 4, k = 2
+/// Output: 2
+///
+/// Example 2:
+/// Input: times = [[1,2,1]], n = 2, k = 1
+/// Output: 1
+///
+/// Example 3:
+/// Input: times = [[1,2,1]], n = 2, k = 2
+/// Output: -1
+///
+/// Constraints:
+/// 1. 1 <= k <= n <= 100
+/// 2. 1 <= times.length <= 6000
+/// 3. times[i].length == 3
+/// 4. 1 <= ui, vi <= n
+/// 5. ui != vi
+/// 6. 0 <= wi <= 100
+/// 7. All the pairs (ui, vi) are unique. (i.e., no multiple edges.)
+/// </summary>
+int LeetCodeGraph::networkDelayTime(vector<vector<int>>& times, int n, int k)
+{
+    vector<int> node_times(n+1, INT_MAX);
+    priority_queue<pair<int, int>> pq;
+    vector<vector<pair<int, int>>> neighbors(n+1);
+    for (size_t i = 0; i < times.size(); i++)
+    {
+        neighbors[times[i][0]].push_back(make_pair(times[i][1], times[i][2]));
+    }
+    pq.push(make_pair(0, k));
+    node_times[k] = 0;
+    while (!pq.empty())
+    {
+        pair<int, int> pair = pq.top();
+        pq.pop();
+        int time = -pair.first;
+        int node = pair.second;
+        for (size_t i = 0; i < neighbors[node].size(); i++)
+        {
+            int next_node = neighbors[node][i].first;
+            int next_time = neighbors[node][i].second;
+            if (time + next_time < node_times[next_node])
+            {
+                node_times[next_node] = time + next_time;
+                pq.push(make_pair(-node_times[next_node], next_node));
+            }
+        }
+    }
+    int result = 0;
+    for (size_t i = 1; i < node_times.size(); i++)
+    {
+        if (node_times[i] == INT_MAX) return -1;
+        result = max(result, node_times[i]);
+    }
+    return result;
+}
+
 #pragma endregion

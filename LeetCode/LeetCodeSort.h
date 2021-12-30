@@ -429,7 +429,7 @@ public:
     /// Given an integer array nums, return the number of range sums that 
     /// lie in [lower, upper] inclusive.
     /// Range sum S(i, j) is defined as the sum of the elements in nums 
-    /// between indices i and j (i ?ü j), inclusive.
+    /// between indices i and j (i < j), inclusive.
     /// 
     /// Note:
     /// A naive algorithm of O(n^2) is trivial. You MUST do better than that. 
@@ -2876,7 +2876,7 @@ public:
     /// 2. 1 <= n <= 100
     /// 3. 1 <= seats[i], students[j] <= 100
     /// </summary>
-    int minMovesToSeat(vector<int> & seats, vector<int> & students); 
+    int minMovesToSeat(vector<int>& seats, vector<int>& students);
 
     /// <summary>
     /// Leet code 1984. Minimum Difference Between Highest and Lowest of K 
@@ -2989,7 +2989,7 @@ public:
     /// 2. 1 <= n <= 10^5
     /// 3. 1 <= dist[i], speed[i] <= 10^5
     /// </summary>
-    int eliminateMaximum(vector<int> & dist, vector<int> & speed); 
+    int eliminateMaximum(vector<int>& dist, vector<int>& speed);
 
     /// <summary>
     /// Leet 1985. Find the Kth Largest Integer in the Array
@@ -3450,7 +3450,1399 @@ public:
     /// 3. 1 <= pricei, beautyi, queries[j] <= 10^9
     /// </summary>
     vector<int> maximumBeauty(vector<vector<int>>& items, vector<int>& queries);
+
+    /// <summary>
+    /// Leet code #164. Maximum Gap 
+    /// Given an unsorted array, find the maximum difference between the successive elements in its sorted form.
+    /// Try to solve it in linear time/space.
+    /// Return 0 if the array contains less than 2 elements.
+    /// You may assume all elements in the array are non-negative integers and fit in the 32-bit signed integer range.
+    /// </summary>
+    int maximumGap(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #75. Sort Colors   
+    /// Given an array with n objects colored red, white or blue, sort them so that objects of 
+    /// the same color are adjacent, with the colors in the order red, white and blue. 
+    /// Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.  
+    /// Note:
+    /// You are not suppose to use the library's sort function for this problem.  
+    /// Follow up:
+    /// A rather straight forward solution is a two-pass algorithm using counting sort.
+    /// First, iterate the array counting number of 0's, 1's, and 2's, then overwrite array with total number of 0's, 
+    /// then 1's and followed by 2's.
+    /// Could you come up with an one-pass algorithm using only constant space?
+    /// </summary>
+    void sortColors(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #274. H-Index 
+    /// Given an array of citations (each citation is a non-negative integer) of a researcher, write a function to compute the researcher's h-index.  
+    /// According to the definition of h-index on Wikipedia: "A scientist has index h if h of his/her N papers have at 
+    /// least h citations each, and the other N ? h papers have no more than h citations each." 
+    /// For example, given citations = [3, 0, 6, 1, 5], which means the researcher has 5 papers in total and each of 
+    /// them had received 3, 0, 6, 1, 5 citations respectively. Since the researcher has 3 papers with at least 3 
+    /// citations each and the remaining two with no more than 3 citations each, his h-index is 3. 
+    /// Note: If there are several possible values for h, the maximum one is taken as the h-index. 
+    /// Hint:
+    /// 1.An easy approach is to sort the array first.
+    /// 2.What are the possible values of h-index?
+    /// 3.A faster approach is to use extra space.
+    /// </summary>
+    int hIndex(vector<int>& citations);
+
+    /// <summary>
+    /// Leet code #324. Wiggle Sort II  
+    /// Given an unsorted array nums, reorder it such that nums[0] < nums[1] > nums[2] < nums[3].... 
+    /// Example:
+    /// (1) Given nums = [1, 5, 1, 1, 6, 4], one possible answer is [1, 4, 1, 5, 1, 6]. 
+    /// (2) Given nums = [1, 3, 2, 2, 3, 1], one possible answer is [2, 3, 1, 3, 1, 2]. 
+    /// Note:
+    /// You may assume all input has valid answer. 
+    /// Follow Up:
+    /// Can you do it in O(n) time and/or in-place with O(1) extra space? 
+    /// </summary>
+    void wiggleSortII(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #179. Largest Number        
+    /// Given a list of non negative integers, arrange them such that they form the largest number.  
+    /// For example, given [3, 30, 34, 5, 9], the largest formed number is 9534330.
+    /// Note: The result may be very large, so you need to return a string instead of an integer.
+    /// </summary>
+    string largestNumber(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #406. Queue Reconstruction by Height 
+    /// Suppose you have a random list of people standing in a queue. Each person is described 
+    /// by a pair of integers (h, k), where h is the height of the person and k is the number 
+    /// of people in front of this person who have a height greater than or equal to h. Write 
+    /// an algorithm to reconstruct the queue. 
+    ///
+    /// Note:
+    /// The number of people is less than 1,100. 
+    ///
+    /// Example 
+    /// Input:
+    /// [[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]
+    ///
+    /// Output:
+    /// [[5,0], [7,0], [5,2], [6,1], [4,4], [7,1]]
+    /// </summary>
+    vector<pair<int, int>> reconstructQueue(vector<pair<int, int>>& people);
+
+    /// <summary>
+    /// Leet code #220. Contains Duplicate III
+    /// Given an array of integers, find out whether there are two distinct 
+    /// indices i and j in the array such that the difference between 
+    /// nums[i] and nums[j] is at most t and the difference between i and j is at most k. 
+    /// </summary>
+    bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t);
+
+    /// <summary>
+    /// Leet code #315. Count of Smaller Numbers After Self  
+    /// 
+    /// You are given an integer array nums and you have to return a new counts array. 
+    /// The counts array has the property where counts[i] is the number of smaller 
+    /// elements to the right of nums[i]. 
+    /// Example:
+    /// Given nums = [5, 2, 6, 1]
+    /// To the right of 5 there are 2 smaller elements (2 and 1).
+    /// To the right of 2 there is only 1 smaller element (1).
+    /// To the right of 6 there is 1 smaller element (1).
+    /// To the right of 1 there is 0 smaller element.
+    /// Return the array [2, 1, 1, 0]. 
+    /// </summary>
+    vector<int> countSmallerII(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #315. Count of Smaller Numbers After Self  
+    /// </summary>
+    void addBIT(int index, vector<int>& accu_slot);
+
+    /// <summary>
+    /// Leet code #315. Count of Smaller Numbers After Self  
+    /// </summary>
+    int sumBIT(int index, vector<int>& accu_slot);
+
+    /// <summary>
+    /// Leet code #315. Count of Smaller Numbers After Self  
+    /// 
+    /// You are given an integer array nums and you have to return a new counts array. 
+    /// The counts array has the property where counts[i] is the number of smaller 
+    /// elements to the right of nums[i]. 
+    /// Example:
+    /// Given nums = [5, 2, 6, 1]
+    /// To the right of 5 there are 2 smaller elements (2 and 1).
+    /// To the right of 2 there is only 1 smaller element (1).
+    /// To the right of 6 there is 1 smaller element (1).
+    /// To the right of 1 there is 0 smaller element.
+    /// Return the array [2, 1, 1, 0]. 
+    /// </summary>
+    vector<int> countSmallerIV(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #280. Wiggle Sort
+    /// 
+    /// Given an unsorted array nums, reorder it in-place such that 
+    /// nums[0] <= nums[1] >= nums[2] <= nums[3].... 
+    /// For example, given nums = [3, 5, 2, 1, 6, 4], 
+    /// one possible answer is [1, 6, 2, 5, 3, 4].
+    /// </summary>
+    void wiggleSort(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code # 440. K-th Smallest in Lexicographical Order  
+    ///
+    /// Given integers n and k, find the lexicographically k-th smallest 
+    /// integer in the range from 1 to n. 
+    /// Note: 1 <= k <= n <= 109.
+    /// 
+    /// Example: 
+    /// Input:
+    /// n: 13   k: 2
+    ///
+    /// Output:
+    /// 10
+    /// 
+    /// Explanation:
+    /// The lexicographical order is [1, 10, 11, 12, 13, 2, 3, 4, 5, 6, 7, 8, 9], 
+    /// so the second smallest number is 10.
+    /// </summary>
+    int findKthNumber(int n, int k);
+
+    /// <summary>
+    /// Leet code #480. Sliding Window Median
+    ///
+    /// Median is the middle value in an ordered integer list. If the size of 
+    /// the list is even, there is no middle value. So the median is the mean 
+    /// of the two middle value.
+    /// Examples: 
+    /// [2,3,4] , the median is 3
+    /// [2,3], the median is (2 + 3) / 2 = 2.5 
+    /// Given an array nums, there is a sliding window of size k which is 
+    /// moving from the very left of the array to the very right. You can 
+    /// only see the k numbers in the window. Each time the sliding window 
+    /// moves right by one position. Your job is to output the median array 
+    /// for each window in the original array.
+    ///
+    /// For example,
+    /// Given nums = [1,3,-1,-3,5,3,6,7], and k = 3.
+    /// Window position                Median
+    /// ---------------               -----
+    /// [1  3  -1] -3  5  3  6  7       1
+    /// 1 [3  -1  -3] 5  3  6  7       -1
+    /// 1  3 [-1  -3  5] 3  6  7       -1
+    /// 1  3  -1 [-3  5  3] 6  7       3
+    /// 1  3  -1  -3 [5  3  6] 7       5
+    /// 1  3  -1  -3  5 [3  6  7]      6
+    ///
+    /// Therefore, return the median sliding window as [1,-1,-1,3,5,6].
+    /// Note: 
+    /// You may assume k is always valid, ie: 1 <= k <= input array's size for non-empty 
+    /// array.
+    /// </summary>
+    vector<double> medianSlidingWindow(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code #556. Next Greater Element III  
+    /// 
+    /// Given a positive 32-bit integer n, you need to find the smallest 32-bit 
+    /// integer which has exactly the same digits existing in the integer n and 
+    /// is greater in value than n. If no such positive 32-bit integer exists, 
+    /// you need to return -1.
+    /// Example 1:
+    /// Input: 12
+    /// Output: 21
+    ///
+    /// Example 2:
+    /// Input: 21
+    /// Output: -1
+    /// </summary>
+    int nextGreaterElement(int n);
+
+    /// <summary>
+    /// Leet code #321. Create Maximum Number 
+    /// </summary>
+    string createMaxNumber(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code #321. Create Maximum Number 
+    /// </summary>
+    void createMaxNumber(string num1, string num2, string& result);
+
+    /// <summary>
+    /// Leet code #321. Create Maximum Number 
+    /// 
+    /// Given two arrays of length m and n with digits 0-9 representing two numbers. Create the maximum number of 
+    /// length k <= m + n from digits of the two. The relative order of the digits from the same array must be 
+    /// preserved. Return an array of the k digits. You should try to optimize your time and space complexity. 
+    /// Example 1: 
+    /// nums1 = [3, 4, 6, 5]
+    /// nums2 = [9, 1, 2, 5, 8, 3] 
+    /// k = 5
+    /// return [9, 8, 6, 5, 3]
+    /// 
+    /// Example 2:
+    /// nums1 = [6, 7]
+    /// nums2 = [6, 0, 4]
+    /// k = 5
+    /// return [6, 7, 6, 0, 4] 
+    /// 
+    /// Example 3:
+    /// nums1 = [3, 9]
+    /// nums2 = [8, 9]
+    /// k = 3
+    /// return [9, 8, 9]
+    /// </summary>
+    vector<int> maxNumber(vector<int>& nums1, vector<int>& nums2, int k);
+
+    /// <summary>
+    /// Leet code #555. Split Assembled Strings 
+    /// 
+    /// Given a list of strings, you could assemble these strings together into 
+    /// a loop. Among all the possible loops, you need to find the 
+    /// lexicographically biggest string after cutting and making one 
+    /// breakpoint of the loop, which will make a looped string into a regular one.
+    ///
+    /// So, to find the lexicographically biggest string, you need to experience 
+    /// two phases: 
+    /// 1.Assemble all the strings into a loop, where you can reverse some strings 
+    ///   or not and connect them in the same order as given.
+    /// 2.Cut and make one breakpoint in any place of the loop, which will make a 
+    ///   looped string into a regular string starting from the character at the 
+    ///   cutting point. 
+    /// And your job is to find the lexicographically biggest one among all the 
+    /// regular strings.
+    /// 
+    /// Example:
+    /// Input: "abc", "xyz"
+    /// Output: "zyxcba"
+    /// Explanation: You can get the looped string "-abcxyz-", "-abczyx-", 
+    /// "-cbaxyz-", "-cbazyx-", 
+    /// where '-' represents the looped status. 
+    /// The answer string came from the fourth looped one, 
+    /// where you could cut from the middle and get "zyxcba".
+    /// Note:
+    /// 1.The input strings will only contain lowercase letters.
+    /// 2.The total length of all the strings will not over 1000.
+    /// </summary>
+    string splitLoopedString(vector<string>& strs);
+
+    /// <summary>
+    /// Leet code #561. Array Partition I Add to List?????? 
+    /// 
+    /// Given an array of 2n integers, your task is to group these integers 
+    /// into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which 
+    /// makes sum of min(ai, bi) for all i from 1 to n as large as possible.
+    ///
+    /// Example 1:
+    /// Input: [1,4,3,2]
+    ///
+    /// Output: 4
+    /// Explanation: n is 2, and the maximum sum of pairs is 4.
+    /// Note:
+    /// n is a positive integer, which is in the range of [1, 10000].
+    /// All the integers in the array will be in the range of [-10000, 10000].
+    /// </summary>
+    int arrayPairSum(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #581. Shortest Unsorted Continuous Subarray
+    /// Given an integer array, you need to find one continuous subarray that 
+    /// if you only sort this subarray in ascending order, then the whole 
+    /// array will be sorted in ascending order, too. 
+    /// 
+    /// You need to find the shortest such subarray and output its length.
+    /// Example 1:
+    /// 
+    /// Input: [2, 6, 4, 8, 10, 9, 15]
+    /// Output: 5
+    /// Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to 
+    /// make the whole array sorted in ascending order.
+    /// Note:
+    /// 1.Then length of the input array is in range [1, 10,000].
+    /// 2.The input array may contain duplicates, so ascending order here means 
+    /// <=. 
+    /// </summary>
+    int findUnsortedSubarray(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #665. Non-decreasing Array
+    /// 
+    /// Given an array with n integers, your task is to check if it could 
+    /// become non-decreasing by modifying at most 1 element. 
+    /// We define an array is non-decreasing if array[i] <= array[i + 1] holds 
+    /// for every i (1 <= i < n). 
+    /// Example 1:
+    /// Input: [4,2,3]
+    /// Output: True
+    /// Explanation: You could modify the first 
+    /// 4
+    /// to 
+    /// 1
+    /// to get a non-decreasing array.
+    ///
+    /// Example 2:
+    /// Input: [4,2,1]
+    /// Output: False
+    /// Explanation: You can't get a non-decreasing array by modify at most one 
+    /// element.
+    /// 
+    /// Note: The n belongs to [1, 10,000]. 
+    /// </summary>
+    bool checkPossibility(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #692. Top K Frequent Words
+    ///
+    /// Given a non-empty list of words, return the k most frequent elements.
+    /// Your answer should be sorted by frequency from highest to lowest. If 
+    /// two words have the same frequency, then the word with the lower 
+    /// alphabetical order comes first.
+    ///
+    /// Example 1:
+    /// Input: ["i", "love", "leetcode", "i", "love", "coding"], k = 2
+    /// Output: ["i", "love"]
+    /// Explanation: "i" and "love" are the two most frequent words.
+    /// Note that "i" comes before "love" due to a lower alphabetical order.
+    /// Example 2:
+    /// Input: ["the", "day", "is", "sunny", "the", "the", "the", "sunny", 
+    /// "is", "is"], k = 4
+    /// Output: ["the", "is", "sunny", "day"]
+    /// Explanation: "the", "is", "sunny" and "day" are the four most frequent 
+    /// words, with the number of occurrence being 4, 3, 2 and 1 respectively.
+    /// Note:
+    /// You may assume k is always valid, 1 <= k <= number of unique elements.
+    /// Input words contain only lowercase letters.
+    /// Follow up:
+    /// 1. Try to solve it in O(n log k) time and O(n) extra space.
+    /// 2. Can you solve it in O(n) time with only O(k) extra space?
+    /// </summary>
+    vector<string> topKFrequent(vector<string>& words, int k);
+
+    /// <summary>
+    /// Leet code #738. Monotone Increasing Digits
+    ///
+    /// Given a non-negative integer N, find the largest number that is less than 
+    /// or equal to N with monotone increasing digits.
+    ///
+    /// (Recall that an integer has monotone increasing digits if and only if each 
+    /// pair of adjacent digits x and y satisfy x <= y.)
+    /// 
+    /// Example 1:
+    /// Input: N = 10
+    /// Output: 9
+    /// Example 2:
+    /// Input: N = 1234
+    /// Output: 1234
+    /// Example 3:
+    /// Input: N = 332
+    /// Output: 299
+    /// Note: N is an integer in the range [0, 10^9].
+    /// </summary>
+    int monotoneIncreasingDigits(int N);
+
+    /// <summary>
+    /// Leet code #744. Find Smallest Letter Greater Than Target
+    ///
+    /// Given a list of sorted characters letters containing only lowercase 
+    /// letters, and given a target letter target, find the smallest element 
+    /// in the list that is larger than the given target.
+    ///
+    /// Letters also wrap around. For example, if the target is target = 'z' 
+    /// and letters = ['a', 'b'], the answer is 'a'.
+    ///
+    /// Examples:
+    /// Input:
+    /// letters = ["c", "f", "j"]
+    /// target = "a"
+    /// Output: "c"
+    ///
+    /// Input:
+    /// letters = ["c", "f", "j"]
+    /// target = "c"
+    /// Output: "f"
+    ///  
+    /// Input:
+    /// letters = ["c", "f", "j"]
+    /// target = "d"
+    /// Output: "f"
+    ///
+    /// Input:
+    /// letters = ["c", "f", "j"]
+    /// target = "g"
+    /// Output: "j"
+    ///
+    /// Input:
+    /// letters = ["c", "f", "j"]
+    /// target = "j"
+    /// Output: "c"
+    ///
+    /// Input:
+    /// letters = ["c", "f", "j"]
+    /// target = "k"
+    /// Output: "c"
+    /// Note:
+    /// 1. letters has a length in range [2, 10000].
+    /// 2. letters consists of lowercase letters, and contains at least 2 
+    /// unique letters.
+    /// target is a lowercase letter.
+    /// </summary> 
+    char nextGreatestLetter(vector<char>& letters, char target);
+
+    /// <summary>
+    /// Leet code #769. Max Chunks To Make Sorted   
+    ///
+    /// Given an array arr that is a permutation of 
+    /// [0, 1, ..., arr.length - 1], we split the array into some number of 
+    /// "chunks" (partitions), and individually sort each chunk.  After 
+    /// concatenating them, the result equals the sorted array.
+    ///
+    /// What is the most number of chunks we could have made?
+    ///
+    /// Example 1:
+    ///
+    /// Input: arr = [4,3,2,1,0]
+    /// Output: 1
+    /// Explanation:
+    /// Splitting into two or more chunks will not return the required result.
+    /// For example, splitting into [4, 3], [2, 1, 0] will result in 
+    /// [3, 4, 0, 1, 2], which isn't sorted.
+    ///
+    /// Example 2:
+    ///
+    /// Input: arr = [1,0,2,3,4]
+    /// Output: 4
+    /// Explanation:
+    /// We can split into two chunks, such as [1, 0], [2, 3, 4].
+    /// However, splitting into [1, 0], [2], [3], [4] is the highest number of
+    /// chunks possible.
+    /// Note:
+    /// arr will have length in range [1, 10].
+    /// arr[i] will be a permutation of [0, 1, ..., arr.length - 1].
+    /// </summary>
+    int maxChunksToSorted(vector<int>& arr);
+
+    /// <summary>
+    /// Leetcode #768. Max Chunks To Make Sorted II
+    ///
+    /// This question is the same as "Max Chunks to Make Sorted" except the 
+    /// integers of the given array are not necessarily distinct, the input 
+    /// array could be up to length 2000, and the elements could be up to 
+    /// 10**8.
+    ///
+    /// Given an array arr of integers (not necessarily distinct), we split 
+    /// the array into some number of "chunks" (partitions), and individually 
+    /// sort each chunk.  After concatenating them, the result equals the 
+    /// sorted array.
+    ///
+    /// What is the most number of chunks we could have made?
+    ///
+    /// Example 1:
+    ///
+    /// Input: arr = [5,4,3,2,1]
+    /// Output: 1
+    /// Explanation:
+    /// Splitting into two or more chunks will not return the required result.
+    /// For example, splitting into [5, 4], [3, 2, 1] will result in [4, 5, 1, 
+    /// 2, 3], which isn't sorted.
+    ///
+    /// Example 2:
+    /// Input: arr = [2,1,3,4,4]
+    /// Output: 4
+    /// Explanation:
+    /// We can split into two chunks, such as [2, 1], [3, 4, 4].
+    /// However, splitting into [2, 1], [3], [4], [4] is the highest number of 
+    /// chunks possible.
+    ///
+    /// Note:
+    /// arr will have length in range [1, 2000].
+    /// arr[i] will be an integer in range [0, 10**8].
+    /// </summary>
+    int maxChunksToSortedII(vector<int>& arr);
+
+    /// <summary>
+    /// Leetcode #775. Global and Local Inversions
+    ///
+    /// We have some permutation A of [0, 1, ..., N - 1], where N is the length
+    /// of A.
+    ///
+    /// The number of (global) inversions is the number of i < j with 
+    /// 0 <= i < j < N and A[i] > A[j].
+    ///
+    /// The number of local inversions is the number of i with 0 <= i < N and 
+    /// A[i] > A[i+1].
+    ///
+    /// Return true if and only if the number of global inversions is equal to 
+    /// the number of local inversions.
+    ///
+    /// Example 1:
+    /// Input: A = [1,0,2]
+    /// Output: true
+    /// Explanation: There is 1 global inversion, and 1 local inversion.
+    ///
+    /// Example 2:
+    /// Input: A = [1,2,0]
+    /// Output: false
+    /// Explanation: There are 2 global inversions, and 1 local inversion.
+    /// Note:
+    /// 
+    /// A will be a permutation of [0, 1, ..., A.length - 1].
+    /// A will have length in range [1, 5000].
+    /// The time limit for this problem has been reduced.
+    /// </summary>
+    bool isIdealPermutation(vector<int>& A);
+
+    /// <summary>
+    /// Leetcode #775. Global and Local Inversions
+    ///
+    /// We have some permutation A of [0, 1, ..., N - 1], where N is the length
+    /// of A.
+    ///
+    /// The number of (global) inversions is the number of i < j with 
+    /// 0 <= i < j < N and A[i] > A[j].
+    ///
+    /// The number of local inversions is the number of i with 0 <= i < N and 
+    /// A[i] > A[i+1].
+    ///
+    /// Return true if and only if the number of global inversions is equal to 
+    /// the number of local inversions.
+    ///
+    /// Example 1:
+    /// Input: A = [1,0,2]
+    /// Output: true
+    /// Explanation: There is 1 global inversion, and 1 local inversion.
+    ///
+    /// Example 2:
+    /// Input: A = [1,2,0]
+    /// Output: false
+    /// Explanation: There are 2 global inversions, and 1 local inversion.
+    /// Note:
+    /// 
+    /// A will be a permutation of [0, 1, ..., A.length - 1].
+    /// A will have length in range [1, 5000].
+    /// The time limit for this problem has been reduced.
+    /// </summary>
+    bool isIdealPermutationII(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #798. Smallest Rotation with Highest Score
+    ///
+    /// Given an array A, we may rotate it by a non-negative integer K so that 
+    /// the array becomes A[K], A[K+1], A{K+2], ... A[A.length - 1], A[0], 
+    /// A[1], ..., A[K-1].  Afterward, any entries that are less than or equal 
+    /// to their index are worth 1 point. 
+    /// For example, if we have [2, 4, 1, 3, 0], and we rotate by K = 2, it 
+    /// becomes [1, 3, 0, 2, 4].  This is worth 3 points because 1 > 0 
+    /// [no points], 3 > 1 [no points], 0 <= 2 [one point], 2 <= 3 [one point], 
+    /// 4 <= 4 [one point].
+    /// Over all possible rotations, return the rotation index K that 
+    /// corresponds to the highest score we could receive.  If there are 
+    /// multiple answers, return the smallest such index K.
+    /// Example 1:
+    /// Input: [2, 3, 1, 4, 0]
+    /// Output: 3
+    /// Explanation:  
+    /// Scores for each K are listed below: 
+    /// K = 0,  A = [2,3,1,4,0],    score 2
+    /// K = 1,  A = [3,1,4,0,2],    score 3
+    /// K = 2,  A = [1,4,0,2,3],    score 3
+    /// K = 3,  A = [4,0,2,3,1],    score 4
+    /// K = 4,  A = [0,2,3,1,4],    score 3
+    /// So we should choose K = 3, which has the highest score.
+    ///
+    /// Example 2:
+    /// Input: [1, 3, 0, 2, 4]
+    /// Output: 0
+    /// Explanation:  A will always have 3 points no matter how it shifts.
+    /// So we will choose the smallest K, which is 0.
+    /// Note:
+    /// 1. A will have length at most 20000.
+    /// 2. A[i] will be in the range [0, A.length].
+    /// </summary> 
+    int bestRotation(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #853. Car Fleet
+    /// 
+    /// N cars are going to the same destination along a one lane road.  The 
+    /// destination is target miles away.
+    ///
+    /// Each car i has a constant speed speed[i] (in miles per hour), and initial 
+    /// position position[i] miles towards the target along the road.
+    ///
+    /// A car can never pass another car ahead of it, but it can catch up to it, 
+    /// and drive bumper to bumper at the same speed.
+    ///
+    /// The distance between these two cars is ignored - they are assumed to have 
+    /// the same position.
+    ///
+    /// A car fleet is some non-empty set of cars driving at the same position 
+    /// and same speed.  Note that a single car is also a car fleet.
+    ///
+    /// If a car catches up to a car fleet right at the destination point, it 
+    /// will still be considered as one car fleet.
+    /// 
+    /// How many car fleets will arrive at the destination?
+    /// 
+    /// Example 1:
+    ///
+    /// Input: target = 12, position = [10,8,0,5,3], speed = [2,4,1,1,3]
+    /// Output: 3
+    /// Explanation:
+    /// The cars starting at 10 and 8 become a fleet, meeting each other at 12.
+    /// The car starting at 0 doesn't catch up to any other car, so it is a fleet 
+    /// by itself.
+    /// The cars starting at 5 and 3 become a fleet, meeting each other at 6.
+    /// Note that no other cars meet these fleets before the destination, so the 
+    /// answer is 3.
+    ///
+    /// Note:
+    ///
+    /// 1. 0 <= N <= 10 ^ 4
+    /// 2. 0 < target <= 10 ^ 6
+    /// 3. 0 < speed[i] <= 10 ^ 6
+    /// 4. 0 <= position[i] < target
+    /// 5. All initial positions are different.
+    /// </summary>
+    int carFleet(int target, vector<int>& position, vector<int>& speed);
+
+    /// <summary>
+    /// Leet code #870. Advantage Shuffle
+    /// 
+    /// Given two arrays A and B of equal size, the advantage of A with respect 
+    /// to B is the number of indices i for which A[i] > B[i].
+    ///
+    /// Return any permutation of A that maximizes its advantage with respect 
+    /// to B.
+    /// 
+    /// Example 1:
+    /// Input: A = [2,7,11,15], B = [1,10,4,11]
+    /// Output: [2,11,7,15]
+    ///
+    /// Example 2:
+    /// Input: A = [12,24,8,32], B = [13,25,32,11]
+    /// Output: [24,32,8,12]
+    /// 
+    /// Note:
+    /// 1. 1 <= A.length = B.length <= 10000
+    /// 2. 0 <= A[i] <= 10^9
+    /// 3. 0 <= B[i] <= 10^9
+    /// </summary>
+    vector<int> advantageCount(vector<int>& A, vector<int>& B);
+
+    /// <summary>
+    /// Leet code #941. Valid Mountain Array
+    /// 
+    /// Given an array A of integers, return true if and only if it is a valid 
+    /// mountain array.
+    ///
+    /// Recall that A is a mountain array if and only if:
+    ///
+    /// A.length >= 3
+    /// There exists some i with 0 < i < A.length - 1 such that:
+    /// A[0] < A[1] < ... A[i-1] < A[i]
+    /// A[i] > A[i+1] > ... > A[B.length - 1]
+    /// 
+    ///
+    /// Example 1:
+    /// Input: [2,1]
+    /// Output: false
+    ///
+    /// Example 2:
+    /// Input: [3,5,5]
+    /// Output: false
+    ///
+    /// Example 3:
+    /// Input: [0,3,2,1]
+    /// Output: true
+    ///
+    /// Note:
+    /// 1. 0 <= A.length <= 10000
+    /// 2. 0 <= A[i] <= 10000 
+    /// </summary>
+    bool validMountainArray(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #942. DI String Match
+    /// 
+    /// Given a string S that only contains "I" (increase) or "D" (decrease), 
+    /// let N = S.length.
+    ///
+    /// Return any permutation A of [0, 1, ..., N] such that for all 
+    /// i = 0, ..., N-1:
+    ///
+    /// If S[i] == "I", then A[i] < A[i+1]
+    /// If S[i] == "D", then A[i] > A[i+1]
+    /// 
+    /// Example 1:
+    /// Input: "IDID"
+    /// Output: [0,4,1,3,2]
+    ///
+    /// Example 2:
+    /// Input: "III"
+    /// Output: [0,1,2,3]
+    ///
+    /// Example 3:
+    /// Input: "DDI"
+    /// Output: [3,2,0,1]
+    /// 
+    ///
+    /// Note:
+    /// 
+    /// 1. 1 <= S.length <= 10000
+    /// 2. S only contains characters "I" or "D".
+    /// </summary>
+    vector<int> diStringMatch(string S);
+
+    /// <summary>
+    /// Leet code #953. Verifying an Alien Dictionary
+    /// 
+    /// In an alien language, surprisingly they also use english lowercase 
+    /// letters, but possibly in a different order. The order of the alphabet 
+    /// is some permutation of lowercase letters.
+    ///
+    /// Given a sequence of words written in the alien language, and the order 
+    /// of the alphabet, return true if and only if the given words are sorted 
+    /// lexicographicaly in this alien language.
+    ///
+    /// Example 1:
+    /// Input: words = ["hello","leetcode"], 
+    /// order = "hlabcdefgijkmnopqrstuvwxyz"
+    /// Output: true
+    /// Explanation: As 'h' comes before 'l' in this language, then the 
+    /// sequence is sorted.
+    ///
+    /// Example 2:
+    /// Input: words = ["word","world","row"], 
+    /// order = "worldabcefghijkmnpqstuvxyz"
+    /// Output: false
+    /// Explanation: As 'd' comes after 'l' in this language, then 
+    /// words[0] > words[1], hence the sequence is unsorted.
+    ///
+    /// Example 3:
+    /// Input: words = ["apple","app"], order = "abcdefghijklmnopqrstuvwxyz"
+    /// Output: false
+    /// Explanation: The first three characters "app" match, and the second 
+    /// string is shorter (in size.) According to lexicographical rules 
+    /// "apple" > "app", because 'l' > '\0', where '\0' is defined as the 
+    /// blank character which is less than any other character (More info).
+    /// 
+    /// Note:
+    /// 1. 1 <= words.length <= 100
+    /// 2. 1 <= words[i].length <= 20
+    /// 3. order.length == 26
+    /// 4. All characters in words[i] and order are english lowercase letters.
+    /// </summary>
+    bool isAlienSorted(vector<string>& words, string order);
+
+    /// <summary>
+    /// Leet code #954. Array of Doubled Pairs
+    /// 
+    /// Given an array of integers A with even length, return true if and only 
+    /// if it is possible to reorder it such that A[2 * i + 1] = 2 * A[2 * i] 
+    /// for every 0 <= i < len(A) / 2.
+    ///  
+    /// Example 1:
+    /// Input: [3,1,3,6]
+    /// Output: false
+    ///
+    /// Example 2:
+    /// Input: [2,1,2,6]
+    /// Output: false
+    ///
+    /// Example 3:
+    /// Input: [4,-2,2,-4]
+    /// Output: true
+    /// Explanation: We can take two groups, [-2,-4] and [2,4] to form 
+    /// [-2,-4,2,4] or [2,4,-2,-4].
+    ///
+    /// Example 4:
+    /// Input: [1,2,4,16,8,4]
+    /// Output: false
+    ///
+    /// Note:
+    /// 1. 0 <= A.length <= 30000
+    /// 2. A.length is even
+    /// 3. -100000 <= A[i] <= 100000
+    /// </summary>
+    bool canReorderDoubled(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #955. Delete Columns to Make Sorted II
+    /// 
+    /// We are given an array A of N lowercase letter strings, all of the same 
+    /// length.
+    ///
+    /// Now, we may choose any set of deletion indices, and for each string, 
+    /// we delete all the characters in those indices.
+    ///
+    /// For example, if we have an array A = ["abcdef","uvwxyz"] and deletion 
+    /// indices {0, 2, 3}, then the final array after deletions is ["bef","vyz"].
+    ///
+    /// Suppose we chose a set of deletion indices D such that after deletions, 
+    /// the final array has its elements in lexicographic order 
+    /// (A[0] <= A[1] <= A[2] ... <= A[A.length - 1]).
+    ///
+    /// Return the minimum possible value of D.length.
+    ///
+    /// Example 1:
+    /// Input: ["ca","bb","ac"]
+    /// Output: 1
+    /// Explanation: 
+    /// After deleting the first column, A = ["a", "b", "c"].
+    /// Now A is in lexicographic order (ie. A[0] <= A[1] <= A[2]).
+    /// We require at least 1 deletion since initially A was not in 
+    /// lexicographic order, so the answer is 1.
+    ///
+    /// Example 2:
+    /// Input: ["xc","yb","za"]
+    /// Output: 0
+    /// Explanation: 
+    /// A is already in lexicographic order, so we don't need to delete 
+    /// anything.
+    /// Note that the rows of A are not necessarily in lexicographic order:
+    /// ie. it is NOT necessarily true that (A[0][0] <= A[0][1] <= ...)
+    ///
+    /// Example 3:
+    /// Input: ["zyx","wvu","tsr"]
+    /// Output: 3
+    /// Explanation: 
+    /// We have to delete every column.
+    ///  
+    /// Note:
+    /// 1. 1 <= A.length <= 100
+    /// 2. 1 <= A[i].length <= 100
+    /// </summary>
+    int minDeletionSizeII(vector<string>& A);
+
+    /// <summary>
+    /// Leet code #962. Maximum Width Ramp
+    /// 
+    /// Given an array A of integers, a ramp is a tuple (i, j) for which i < j 
+    /// and A[i] <= A[j].  The width of such a ramp is j - i.
+    ///
+    /// Find the maximum width of a ramp in A.  If one doesn't exist, return 0.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: [6,0,8,2,1,5]
+    /// Output: 4
+    /// Explanation: 
+    /// The maximum width ramp is achieved at (i, j) = (1, 5): A[1] = 0 and 
+    /// A[5] = 5.
+    ///
+    /// Example 2:
+    ///
+    /// Input: [9,8,1,0,1,9,4,0,4,1]
+    /// Output: 7
+    /// Explanation: 
+    /// The maximum width ramp is achieved at (i, j) = (2, 9): A[2] = 1 and 
+    /// A[9] = 1.
+    ///
+    /// Note:
+    ///
+    /// 1. 2 <= A.length <= 50000
+    /// 2. 0 <= A[i] <= 50000
+    /// </summary>
+    int maxWidthRamp(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #977. Squares of a Sorted Array
+    /// 
+    /// Given an array of integers A sorted in non-decreasing order, return 
+    /// an array of the squares of each number, also in sorted 
+    /// non-decreasing order.
+    /// 
+    /// Example 1:
+    /// Input: [-4,-1,0,3,10]
+    /// Output: [0,1,9,16,100]
+    ///
+    /// Example 2:
+    /// Input: [-7,-3,2,3,11]
+    /// Output: [4,9,9,49,121]
+    ///
+    /// Note:
+    /// 1. 1 <= A.length <= 10000
+    /// 2. -10000 <= A[i] <= 10000
+    /// 3. A is sorted in non-decreasing order.
+    /// </summary>
+    vector<int> sortedSquares(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #912. Sort an Array
+    /// 
+    /// Given an array of integers nums, sort the array in ascending order.
+    /// 
+    /// Example 1:
+    /// 
+    /// Input: [5,2,3,1]
+    /// Output: [1,2,3,5]
+    ///
+    /// Example 2:
+    ///
+    /// Input: [5,1,1,2,0,0]
+    /// Output: [0,0,1,1,2,5]
+    /// 
+    /// Note:
+    /// 
+    /// 1. 1 <= A.length <= 10000
+    /// 2. -50000 <= A[i] <= 50000
+    /// </summary>
+    vector<int> sortArray(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #1029. Two City Scheduling
+    /// 
+    /// There are 2N people a company is planning to interview. The cost of flying 
+    /// the i-th person to city A is costs[i][0], and the cost of flying the i-th 
+    /// person to city B is costs[i][1].
+    /// 
+    /// Return the minimum cost to fly every person to a city such that exactly N 
+    /// people arrive in each city.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: [[10,20],[30,200],[400,50],[30,20]]
+    /// Output: 110
+    /// Explanation: 
+    /// The first person goes to city A for a cost of 10.
+    /// The second person goes to city A for a cost of 30.
+    /// The third person goes to city B for a cost of 50.
+    /// The fourth person goes to city B for a cost of 20.
+    ///
+    /// The total minimum cost is 10 + 30 + 50 + 20 = 110 to have half the people 
+    /// interviewing in each city.
+    ///  
+    /// Note:
+    /// 1. 1 <= costs.length <= 100
+    /// 2. It is guaranteed that costs.length is even.
+    /// 3. 1 <= costs[i][0], costs[i][1] <= 1000
+    /// </summary>
+    int twoCitySchedCost(vector<vector<int>>& costs);
+
+    /// <summary>
+    /// Leet code #1046. Last Stone Weight
+    /// 
+    /// We have a collection of rocks, each rock has a positive integer weight.
+    /// Each turn, we choose the two heaviest rocks and smash them together.  
+    /// Suppose the stones have weights x and y with x <= y.  The result of this 
+    /// smash is:
+    /// If x == y, both stones are totally destroyed;
+    /// If x != y, the stone of weight x is totally destroyed, and the stone of 
+    /// weight y has new weight y-x.
+    /// At the end, there is at most 1 stone left.  Return the weight of this 
+    /// stone (or 0 if there are no stones left.)
+    /// 
+    /// Example 1:
+    /// Input: [2,7,4,1,8,1]
+    /// Output: 1
+    /// Explanation: 
+    /// We combine 7 and 8 to get 1 so the array converts to [2,4,1,1,1] then,
+    /// we combine 2 and 4 to get 2 so the array converts to [2,1,1,1] then,
+    /// we combine 2 and 1 to get 1 so the array converts to [1,1,1] then,
+    /// we combine 1 and 1 to get 0 so the array converts to [1] then that's the 
+    /// value of last stone.
+    /// 
+    /// Note:
+    /// 1. 1 <= stones.length <= 30
+    /// 2. 1 <= stones[i] <= 1000
+    /// </summary>
+    int lastStoneWeight(vector<int>& stones);
+
+    /// <summary>
+    /// Leet code #1051. Height Checker
+    /// 
+    /// Students are asked to stand in non-decreasing order of heights for an 
+    /// annual photo.
+    ///
+    /// Return the minimum number of students not standing in the right 
+    /// positions.  (This is the number of students that must move in order 
+    /// for all students to be standing in non-decreasing order of height.)
+    ///
+    /// Example 1:
+    ///
+    /// Input: [1,1,4,2,1,3]
+    /// Output: 3
+    /// Explanation: 
+    /// Students with heights 4, 3 and the last 1 are not standing in the right 
+    /// positions.
+    /// 
+    /// Note:
+    /// 
+    /// 1. 1 <= heights.length <= 100
+    /// 2. 1 <= heights[i] <= 100
+    /// </summary>
+    int heightChecker(vector<int>& heights);
+
+    /// <summary>
+    /// Leet code #1053. Previous Permutation With One Swap
+    /// 
+    /// Given an array A of positive integers (not necessarily distinct), return 
+    /// the lexicographically largest permutation that is smaller than A, that 
+    /// can be made with one swap (A swap exchanges the positions of two numbers 
+    /// A[i] and A[j]).  If it cannot be done, then return the same array.
+    ///
+    /// Example 1:
+    ///
+    /// Input: [3,2,1]
+    /// Output: [3,1,2]
+    /// Explanation: Swapping 2 and 1.
+    ///
+    /// Example 2:
+    ///
+    /// Input: [1,1,5]
+    /// Output: [1,1,5]
+    /// Explanation: This is already the smallest permutation.
+    ///
+    /// Example 3:
+    ///
+    /// Input: [1,9,4,6,7]
+    /// Output: [1,7,4,6,9]
+    /// Explanation: Swapping 9 and 7.
+    ///
+    /// Example 4:
+    ///
+    /// Input: [3,1,1,3]
+    /// Output: [1,3,1,3]
+    /// Explanation: Swapping 1 and 3.
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. 1 <= A.length <= 10000
+    /// 2. 1 <= A[i] <= 10000
+    /// </summary>
+    vector<int> prevPermOpt1(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #1090. Largest Values From Labels
+    /// 
+    /// We have a set of items: the i-th item has value values[i] and label 
+    /// labels[i].
+    ///
+    /// Then, we choose a subset S of these items, such that:
+    /// |S| <= num_wanted
+    /// For every label L, the number of items in S with label L is <= 
+    /// use_limit.
+    /// Return the largest possible sum of the subset S.
+    ///
+    /// Example 1:
+    /// Input: values = [5,4,3,2,1], labels = [1,1,2,2,3], num_wanted = 3, 
+    /// use_limit = 1
+    /// Output: 9
+    /// Explanation: The subset chosen is the first, third, and fifth item.
+    ///
+    /// Example 2: 
+    /// Input: values = [5,4,3,2,1], labels = [1,3,3,3,2], num_wanted = 3, 
+    /// use_limit = 2
+    /// Output: 12
+    /// Explanation: The subset chosen is the first, second, and third item.
+    ///
+    /// Example 3:
+    /// Input: values = [9,8,8,7,6], labels = [0,0,0,1,1], num_wanted = 3, 
+    /// use_limit = 1
+    /// Output: 16
+    /// Explanation: The subset chosen is the first and fourth item.
+    ///
+    /// Example 4:
+    /// Input: values = [9,8,8,7,6], labels = [0,0,0,1,1], num_wanted = 3, 
+    /// use_limit = 2
+    /// Output: 24
+    /// Explanation: The subset chosen is the first, second, and fourth item.
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1. 1 <= values.length == labels.length <= 20000
+    /// 2. 0 <= values[i], labels[i] <= 20000
+    /// 3. 1 <= num_wanted, use_limit <= values.length
+    /// </summary>
+    int largestValsFromLabels(vector<int>& values, vector<int>& labels,
+        int num_wanted, int use_limit);
+
+    /// <summary>
+    /// Leet code #1086. High Five
+    /// 
+    /// Given a list of scores of different students, return the average 
+    /// score of each student's top five scores in the order of each 
+    /// student's id.
+    /// Each entry items[i] has items[i][0] the student's id, and items[i][1] 
+    /// the student's score.  The average score is calculated using integer 
+    /// division.
+    ///
+    /// Example 1:
+    /// Input: [[1,91],[1,92],[2,93],[2,97],[1,60],[2,77],[1,65],[1,87],
+    ///        [1,100],[2,100],[2,76]]
+    /// Output: [[1,87],[2,88]]
+    /// Explanation: 
+    /// The average of the student with id = 1 is 87.
+    /// The average of the student with id = 2 is 88.6. But with integer 
+    /// division their average converts to 88.
+    ///
+    /// Note:
+    /// 1. 1 <= items.length <= 1000
+    /// 2. items[i].length == 2
+    /// 3. The IDs of the students is between 1 to 1000
+    /// 4. The score of the students is between 1 to 100
+    /// 5. For each student, there are at least 5 scores
+    /// </summary>
+    vector<vector<int>> highFive(vector<vector<int>>& items);
+
+    /// <summary>
+    /// Leet code #1099. Two Sum Less Than K
+    /// 
+    /// Given an array A of integers and integer K, return the maximum S such 
+    /// that there exists i < j with A[i] + A[j] = S and S < K. If no i, j 
+    /// exist satisfying this equation, return -1.
+    /// 
+    /// Example 1:
+    /// Input: A = [34,23,1,24,75,33,54,8], K = 60
+    /// Output: 58
+    /// Explanation: 
+    /// We can use 34 and 24 to sum 58 which is less than 60.
+    ///
+    /// Example 2:
+    /// Input: A = [10,20,30], K = 15
+    /// Output: -1
+    /// Explanation: 
+    /// In this case it's not possible to get a pair sum less that 15.
+    /// </summary>
+    int twoSumLessThanK(vector<int>& A, int K);
+
+    /// <summary>
+    /// Leet code #1122. Relative Sort Array
+    /// 
+    /// Given two arrays arr1 and arr2, the elements of arr2 are distinct, 
+    /// and all elements in arr2 are also in arr1.
+    ///
+    /// Sort the elements of arr1 such that the relative ordering of items 
+    /// in arr1 are the same as in arr2.  Elements that don't appear in arr2 
+    /// should be placed at the end of arr1 in ascending order.
+    ///
+    /// 
+    /// Example 1:
+    /// Input: arr1 = [2,3,1,3,2,4,6,7,9,2,19], arr2 = [2,1,4,3,9,6]
+    /// Output: [2,2,2,1,4,3,3,9,6,7,19]
+    /// 
+    /// 
+    /// Constraints:
+    ///
+    /// 1. arr1.length, arr2.length <= 1000
+    /// 2. 0 <= arr1[i], arr2[i] <= 1000
+    /// 3. Each arr2[i] is distinct.
+    /// 4. Each arr2[i] is in arr1.
+    /// </summary>
+    vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2);
+
+    /// <summary>
+    /// Leet code #1133. Largest Unique Number
+    /// 
+    /// Given an array of integers A, return the largest integer that only occurs 
+    /// once.
+    ///
+    /// If no integer occurs once, return -1.
+    ///
+    /// Example 1:
+    /// Input: [5,7,3,9,4,9,8,3,1]
+    /// Output: 8
+    /// Explanation: 
+    /// The maximum integer in the array is 9 but it is repeated. The number 8 
+    /// occurs only once, so it's the answer.
+    ///
+    /// Example 2:
+    /// Input: [9,9,8,8]
+    /// Output: -1
+    /// Explanation: 
+    /// There is no number that occurs only once.
+    /// Note:
+    /// 1. 1 <= A.length <= 2000
+    /// 2. 0 <= A[i] <= 1000
+    /// </summary>
+    int largestUniqueNumber(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #376. Wiggle Subsequence
+    /// A sequence of numbers is called a wiggle sequence if the differences between successive numbers 
+    /// strictly alternate between positive and negative. The first difference (if one
+    /// exists) may be either positive or negative. A sequence with fewer than two elements is trivially 
+    /// a wiggle sequence. 
+    /// 
+    /// For example, [1,7,4,9,2,5] is a wiggle sequence because the differences (6,-3,5,-7,3) are 
+    /// alternately positive and negative. In contrast, [1,4,7,2,5] and [1,7,4,5,5] are 
+    /// not wiggle sequences, the first because its first two differences are 
+    /// positive and the second because its last difference is zero.
+    ///
+    /// Given a sequence of integers, return the length of the longest subsequence that is a 
+    /// wiggle sequence. A subsequence is obtained by deleting some number of elements 
+    /// (eventually, also zero) from the original sequence, leaving the remaining elements 
+    /// in their original order.
+    /// 
+    /// Examples:
+    /// Input: [1,7,4,9,2,5]
+    /// Output: 6
+    /// The entire sequence is a wiggle sequence.
+    ///
+    /// Input: [1,17,5,10,13,15,10,5,16,8]
+    /// Output: 7
+    /// There are several subsequences that achieve this length. One is [1,17,10,13,10,16,8].
+    ///
+    /// Input: [1,2,3,4,5,6,7,8,9]
+    /// Output: 2
+    /// Follow up:
+    /// Can you do it in O(n) time? 
+    /// </summary>
+    int wiggleMaxLength(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #1169. Invalid Transactions
+    ///
+    /// A transaction is possibly invalid if:
+    ///
+    /// the amount exceeds $1000, or;
+    /// if it occurs within (and including) 60 minutes of another transaction 
+    /// with the same name in a different city.
+    /// Each transaction string transactions[i] consists of comma separated 
+    /// values representing the name, time (in minutes), amount, and city of 
+    /// the transaction.
+    ///
+    /// Given a list of transactions, return a list of transactions that are 
+    /// possibly invalid.  You may return the answer in any order.
+    ///
+    /// 
+    ///
+    /// Example 1:
+    /// Input: transactions = ["alice,20,800,mtv","alice,50,100,beijing"]
+    /// Output: ["alice,20,800,mtv","alice,50,100,beijing"]
+    /// Explanation: The first transaction is invalid because the second 
+    /// transaction occurs within a difference of 60 minutes, have the same 
+    /// name and is in a different city. Similarly the second one is 
+    /// invalid too.
+    ///
+    /// Example 2:
+    ///
+    /// Input: transactions = ["alice,20,800,mtv","alice,50,1200,mtv"]
+    /// Output: ["alice,50,1200,mtv"]
+    ///
+    /// Example 3:
+    ///
+    /// Input: transactions = ["alice,20,800,mtv","bob,50,1200,mtv"]
+    /// Output: ["bob,50,1200,mtv"]
+    ///  
+    /// Constraints:
+    /// 
+    /// 1. transactions.length <= 1000
+    /// 2. Each transactions[i] takes the form "{name},{time},{amount},{city}"
+    /// 3. Each {name} and {city} consist of lowercase English letters, and have 
+    ///    lengths between 1 and 10.
+    /// 3. Each {time} consist of digits, and represent an integer between 
+    ///    0 and 1000.
+    /// 4. Each {amount} consist of digits, and represent an integer between 
+    ///    0 and 2000.
+    /// </summary>
+    vector<string> invalidTransactions(vector<string>& transactions);
+
+    /// <summary>
+    /// Leet code #1167. Minimum Cost to Connect Sticks
+    /// 
+    /// You have some sticks with positive integer lengths.
+    /// You can connect any two sticks of lengths X and Y into one stick by 
+    /// paying a cost of X + Y.  You perform this action until there is one 
+    /// stick remaining.
+    /// Return the minimum cost of connecting all the given sticks into one 
+    /// stick in this way.
+    /// 
+    /// Example 1:
+    /// Input: sticks = [2,4,3]
+    /// Output: 14
+    ///
+    /// Example 2:
+    /// Input: sticks = [1,8,3,5]
+    /// Output: 30
+    ///  
+    /// Constraints:
+    /// 1 <= sticks.length <= 10^4
+    /// 1 <= sticks[i] <= 10^4
+    /// </summary>
+    int connectSticks(vector<int>& sticks);
+
+    /// <summary>
+    /// Leet code #1182. Shortest Distance to Target Color
+    /// 
+    /// You are given an array colors, in which there are three colors: 1, 2 and 3.
+    /// You are also given some queries. Each query consists of two integers i 
+    /// and c, return the shortest distance between the given index i and the 
+    /// target color c. If there is no solution return -1.
+    /// 
+    /// Example 1:
+    /// Input: colors = [1,1,2,1,3,2,2,3,3], queries = [[1,3],[2,2],[6,1]]
+    /// Output: [3,0,3]
+    /// Explanation: 
+    /// The nearest 3 from index 1 is at index 4 (3 steps away).
+    /// The nearest 2 from index 2 is at index 2 itself (0 steps away).
+    /// The nearest 1 from index 6 is at index 3 (3 steps away).
+    ///
+    /// Example 2:
+    /// Input: colors = [1,2], queries = [[0,3]]
+    /// Output: [-1]
+    /// Explanation: There is no 3 in the array.
+    ///  
+    /// Constraints:
+    /// 1. 1 <= colors.length <= 5*10^4
+    /// 2. 1 <= colors[i] <= 3
+    /// 3. 1 <= queries.length <= 5*10^4
+    /// 4. queries[i].length == 2
+    /// 5. 0 <= queries[i][0] < colors.length
+    /// 6. 1 <= queries[i][1] <= 3
+    /// </summary>
+    vector<int> shortestDistanceColor(vector<int>& colors, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet code #1199. Minimum Time to Build Blocks
+    /// 
+    /// You are given a list of blocks, where blocks[i] = t means that the i-th 
+    /// block needs t units of time to be built. A block can only be built by 
+    /// exactly one worker.
+    ///
+    /// A worker can either split into two workers (number of workers increases 
+    /// by one) or build a block then go home. Both decisions cost some time.
+    ///
+    /// The time cost of spliting one worker into two workers is given as an 
+    /// integer split. Note that if two workers split at the same time, they 
+    /// split in parallel so the cost would be split.
+    ///
+    /// Output the minimum time needed to build all blocks.
+    ///
+    /// Initially, there is only one worker.
+    /// 
+    /// Example 1:
+    /// Input: blocks = [1], split = 1
+    /// Output: 1
+    /// Explanation: We use 1 worker to build 1 block in 1 time unit.
+    ///
+    /// Example 2:
+    /// Input: blocks = [1,2], split = 5
+    /// Output: 7
+    /// Explanation: We split the worker into 2 workers in 5 time units then 
+    /// assign each of them to a block so the cost is 5 + max(1, 2) = 7.
+    ///
+    /// Example 3:
+    /// Input: blocks = [1,2,3], split = 1
+    /// Output: 4
+    /// Explanation: Split 1 worker into 2, then assign the first worker to 
+    /// the last block and split the second worker into 2.
+    /// Then, use the two unassigned workers to build the first two blocks.
+    /// The cost is 1 + max(3, 1 + max(1, 2)) = 4.
+    /// 
+    ///
+    /// Constraints:
+    ///
+    /// 1. 1 <= blocks.length <= 1000
+    /// 2. 1 <= blocks[i] <= 10^5
+    /// 3. 1 <= split <= 100
+    /// </summary>
+    int minBuildTime(vector<int>& blocks, int split);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H
-
