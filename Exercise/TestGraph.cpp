@@ -4174,6 +4174,7 @@ void TestLeetCode743(void)
 
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode305();
     TestLeetCode743();
     TestLeetCode444();
     TestLeetCode207();
@@ -4235,7 +4236,6 @@ void TestLeetCodeGraph(void)
     TestLeetCode997();
     TestLeetCode1466();
     TestLeetCode1462();
-    TestLeetCode305();
     TestLeetCode1319();
     TestLeetCode547();
     TestLeetCode695();

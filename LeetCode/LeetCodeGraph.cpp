@@ -465,54 +465,59 @@ vector<double> LeetCodeGraph::calcEquation(vector<pair<string, string>> equation
 }
 
 /// <summary>
-/// Leet code #323. Number of Connected Components in an Undirected Graph
-/// 
-/// Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each edge is a 
-/// pair of nodes), write a function to find the number of connected components in an undirected graph. 
-/// Example 1:
-///     0          3
-///     |          |
-///     1 --- 2    4
-/// Given n = 5 and edges = [[0, 1], [1, 2], [3, 4]], return 2. 
+/// Leet Code 323. Number of Connected Components in an Undirected Graph
+///                                                                 
+/// Medium
+///
+/// You have a graph of n nodes. You are given an integer n and an array 
+/// edges where edges[i] = [ai, bi] indicates that there is an edge 
+/// between ai and bi in the graph.
+///
+/// Return the number of connected components in the graph.
+///
+/// Example 1: 
+/// Input: n = 5, edges = [[0,1],[1,2],[3,4]]
+/// Output: 2
 ///
 /// Example 2:
-///
-///     0           4
-///     |           |
-///     1 --- 2 --- 3
-/// Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [3, 4]], return 1. 
-///
-/// Note:
-/// You can assume that no duplicate edges will appear in edges. Since all edges are undirected, 
-/// [0, 1] is the same as [1, 0] and thus will not appear together in edges. 
+/// Input: n = 5, edges = [[0,1],[1,2],[2,3],[3,4]]
+/// Output: 1
+/// Constraints:
+/// 1. 1 <= n <= 2000
+/// 2. 1 <= edges.length <= 5000
+/// 3. edges[i].length == 2
+/// 4. 0 <= ai <= bi < n
+/// 5. ai != bi
+/// 6. There are no repeated edges.
 /// </summary>
 int LeetCodeGraph::countComponents(int n, vector<pair<int, int>>& edges)
 {
-    unordered_map<int, unordered_set<int>> node_map;
-    unordered_set<int> visited;
+    vector<vector<int>> neighbors(n);
+    vector<int> visited(n);
     queue<int> process_queue;
     int count = 0;
 
     for (size_t i = 0; i < edges.size(); i++)
     {
-        node_map[edges[i].first].insert(edges[i].second);
-        node_map[edges[i].second].insert(edges[i].first);
+        neighbors[edges[i].first].push_back(edges[i].second);
+        neighbors[edges[i].second].push_back(edges[i].first);
     }
     for (int i = 0; i < n; i++)
     {
-        if (visited.count(i) == 0)
+        if (visited[i] == 0)
         {
             process_queue.push(i);
+            visited[i] = 1;
             while (!process_queue.empty())
             {
                 int current = process_queue.front();
                 process_queue.pop();
-                visited.insert(current);
-                for (int target : node_map[current])
+                for (int target : neighbors[current])
                 {
-                    if (visited.count(target) == 0)
+                    if (visited[target] == 0)
                     {
                         process_queue.push(target);
+                        visited[target] = 1;
                     }
                 }
             }
@@ -6555,51 +6560,59 @@ int LeetCodeGraph::minTime(int n, vector<vector<int>>& edges, vector<bool>& hasA
 #pragma region UnionFind
 
 /// <summary>
-/// Leet code #305. Number of Islands II         
+/// Leet Code 305. Number of Islands II
+///                                                                 
+/// Hard
+///
+/// You are given an empty 2D binary grid grid of size m x n. The grid 
+/// represents a map where 0's represent water and 1's represent land. 
+/// Initially, all the cells of grid are water cells (i.e., all the 
+/// cells are 0's).
+///  
+/// We may perform an add land operation which turns the water at 
+/// position into a land. You are given an array positions where 
+/// positions[i] = [ri, ci] is the position (ri, ci) at which we 
+/// should operate the ith operation.
+///
+/// Return an array of integers answer where answer[i] is the 
+/// number of islands after turning the cell (ri, ci) into a land.
+///
+/// An island is surrounded by water and is formed by connecting 
+/// adjacent lands horizontally or vertically. You may assume all 
+/// four edges of the grid are all surrounded by water.
+/// Example 1: 
+/// Input: m = 3, n = 3, positions = [[0,0],[0,1],[1,2],[2,1]]
+/// Output: [1,1,2,3]
+/// Explanation:
+/// Initially, the 2d grid is filled with water. 
+/// - Operation #1: addLand(0, 0) turns the water at grid[0][0] into a 
+///   land. We have 1 island.
+/// - Operation #2: addLand(0, 1) turns the water at grid[0][1] into a 
+///   land. We still have 1 island.
+/// - Operation #3: addLand(1, 2) turns the water at grid[1][2] into a 
+///   land. We have 2 islands.
+/// - Operation #4: addLand(2, 1) turns the water at grid[2][1] into a 
+///   land. We have 3 islands.
+///
+/// Example 2:
+/// Input: m = 1, n = 1, positions = [[0,0]]
+/// Output: [1]
+///
+/// Constraints:
+/// 1. 1 <= m, n, positions.length <= 10^4
+/// 2. 1 <= m * n <= 10^4
+/// 3. positions[i].length == 2
+/// 4. 0 <= ri < m
+/// 5. 0 <= ci < n
 /// 
-/// A 2d grid map of m rows and n columns is initially filled with water. We may perform 
-/// an addLand operation which turns the water at position (row, col) into a land. Given 
-/// a list of positions to operate, count the number of islands after each addLand operation. 
-/// An island is surrounded by water and is formed by connecting adjacent lands horizontally 
-/// or vertically. You may assume all four edges of the grid are all surrounded by water.
-///
-/// Example:
-///
-/// Given m = 3, n = 3, positions = [[0,0], [0,1], [1,2], [2,1]].
-/// Initially, the 2d grid grid is filled with water. (Assume 0 represents water and 1 represents land).
-/// 0 0 0
-/// 0 0 0
-/// 0 0 0
-/// Operation #1: addLand(0, 0) turns the water at grid[0][0] into a land.
-/// 1 0 0
-/// 0 0 0   Number of islands = 1
-/// 0 0 0
-/// 
-/// Operation #2: addLand(0, 1) turns the water at grid[0][1] into a land.
-/// 1 1 0
-/// 0 0 0   Number of islands = 1
-/// 0 0 0
-///
-/// Operation #3: addLand(1, 2) turns the water at grid[1][2] into a land.
-/// 1 1 0
-/// 0 0 1   Number of islands = 2
-/// 0 0 0
-///
-/// 
-/// Operation #4: addLand(2, 1) turns the water at grid[2][1] into a land.
-/// 1 1 0
-/// 0 0 1   Number of islands = 3
-/// 0 1 0
-///
-/// We return the result as an array: [1, 1, 2, 3]
-///
-/// Challenge:
-/// Can you do it in time complexity O(k log mn), where k is the length of the positions?
+/// Follow up: Could you solve it in time complexity O(k log(mn)), where 
+/// k == positions.length?
 /// </summary>
 vector<int> LeetCodeGraph::numIslands2(int m, int n, vector<vector<int>>& positions)
 {
     vector<int> result;
-    vector<int> island_map(m * n + 1);
+    vector<int> parent(m * n + 1);
+    for (size_t i = 0; i < parent.size(); i++) parent[i] = i;
     vector<vector<int>> grid_map(m, vector<int>(n));
     int count = 0;
     for (size_t i = 0; i < positions.size(); i++)
@@ -6610,7 +6623,6 @@ vector<int> LeetCodeGraph::numIslands2(int m, int n, vector<vector<int>>& positi
         {
             int island_id = i + 1;
             grid_map[pos[0]][pos[1]] = island_id;
-            island_map[island_id] = 0;
             count++;
 
             vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
@@ -6624,16 +6636,16 @@ vector<int> LeetCodeGraph::numIslands2(int m, int n, vector<vector<int>>& positi
                 {
                     continue;
                 }
-                int neigbor = grid_map[next[0]][next[1]];
+                int neighbor = grid_map[next[0]][next[1]];
                 // water
-                if (neigbor == 0)
+                if (neighbor == 0)
                 {
                     continue;
                 }
-                while (island_map[neigbor] != 0) neigbor = island_map[neigbor];
-                if (neigbor != island_id)
+                while (parent[parent[neighbor]] != parent[neighbor]) parent[neighbor] = parent[parent[neighbor]];
+                if (parent[neighbor] != island_id)
                 {
-                    island_map[neigbor] = island_id;
+                    parent[parent[neighbor]] = island_id;
                     count--;
                 }
             }
@@ -6644,48 +6656,45 @@ vector<int> LeetCodeGraph::numIslands2(int m, int n, vector<vector<int>>& positi
 }
 
 /// <summary>
-/// Leet code #547. Friend Circles  
-/// 
-/// There are N students in a class. Some of them are friends, while some 
-/// are not. Their friendship is transitive in nature. For example, if A 
-/// is a direct friend of B, and B is a direct friend of C, then A is an 
-/// indirect friend of C. And we defined a friend circle is a group of 
-/// students who are direct or indirect friends. 
-/// Given a N*N matrix M representing the friend relationship between 
-/// students in the class. If M[i][j] = 1, then the ith and jth students 
-/// are direct friends with each other, otherwise not. And you have to 
-/// output the total number of friend circles among all the students. 
-/// Example 1:
-/// Input: 
-/// [[1,1,0],
-/// [1,1,0],
-/// [0,0,1]]
-/// Output: 2
-/// Explanation:The 0th and 1st students are direct friends, so they are 
-/// in a friend circle. 
-/// The 2nd student himself is in a friend circle. So return 2.
-/// Example 2:
-/// Input: 
-/// [[1,1,0],
-/// [1,1,1],
-/// [0,1,1]]
-/// Output: 1
-/// Explanation:The 0th and 1st students are direct friends, the 1st and 
-/// 2nd students are direct friends, 
-/// so the 0th and 2nd students are indirect friends. All of them are in 
-/// the same friend circle, so return 1.
+/// Leet Code 547. Number of Provinces
+///                                                                 
+/// Medium
 ///
-/// Note:
-/// N is in range [1,200].
-/// M[i][i] = 1 for all students.
-/// If M[i][j] = 1, then M[j][i] = 1.
+/// There are n cities. Some of them are connected, while some are not. If
+/// city a is connected directly with city b, and city b is connected 
+/// directly with city c, then city a is connected indirectly with city c.
+///
+/// A province is a group of directly or indirectly connected cities and 
+/// no other cities outside of the group.
+///
+/// You are given an n x n matrix isConnected where isConnected[i][j] = 1 
+/// if the ith city and the jth city are directly connected, and 
+/// isConnected[i][j] = 0 otherwise.
+///
+/// Return the total number of provinces.
+///
+/// Example 1:
+/// Input: isConnected = [[1,1,0],[1,1,0],[0,0,1]]
+/// Output: 2
+///
+/// Example 2:
+/// Input: isConnected = [[1,0,0],[0,1,0],[0,0,1]]
+/// Output: 3
+///
+/// Constraints:
+/// 1. 1 <= n <= 200
+/// 2. n == isConnected.length
+/// 3. n == isConnected[i].length
+/// 4. isConnected[i][j] is 1 or 0.
+/// 5. isConnected[i][i] == 1
+/// 6. isConnected[i][j] == isConnected[j][i]
 /// </summary>
 int LeetCodeGraph::findCircleNum(vector<vector<int>>& M)
 {
-    vector<int> circle_map(M.size());
+    vector<int> parent(M.size());
     for (size_t i = 0; i < M.size(); i++)
     {
-        circle_map[i] = i;
+        parent[i] = i;
     }
     for (size_t i = 0; i < M.size(); i++)
     {
@@ -6698,17 +6707,17 @@ int LeetCodeGraph::findCircleNum(vector<vector<int>>& M)
                 // pointing target to the source
                 int source = i;
                 int target = j;
-                while (circle_map[source] != source) source = circle_map[source];
-                while (circle_map[target] != target) target = circle_map[target];
-                circle_map[target] = source;
+                while (parent[parent[source]] != parent[source]) parent[source] = parent[parent[source]];
+                while (parent[target] != parent[parent[target]]) parent[target] = parent[parent[target]];
+                parent[parent[target]] = parent[source];
             }
         }
     }
 
     int count = 0;
-    for (size_t i = 0; i < circle_map.size(); i++)
+    for (size_t i = 0; i < parent.size(); i++)
     {
-        if (circle_map[i] == i) count++;
+        if (parent[i] == i) count++;
     }
 
     return count;
@@ -7188,7 +7197,6 @@ vector<vector<string>> LeetCodeGraph::accountsMergeII(vector<vector<string>>& ac
             }
         }
     }
-
     for (auto itr : parent_map)
     {
         for (size_t j = 1; j < accounts[itr.first].size(); j++)
@@ -7762,33 +7770,33 @@ int LeetCodeGraph::numSimilarGroups(vector<string>& A)
 /// </summary>
 string LeetCodeGraph::smallestStringWithSwaps(string s, vector<vector<int>>& pairs)
 {
-    vector<int> dp(s.size());
+    vector<int> parent(s.size());
     unordered_map<int, priority_queue<char>> char_set;
 
-    for (size_t i = 0; i < dp.size(); i++) dp[i] = i;
+    for (size_t i = 0; i < parent.size(); i++) parent[i] = i;
     for (size_t i = 0; i < pairs.size(); i++)
     {
         int a = pairs[i][0];
         int b = pairs[i][1];
-        while (dp[a] != a)
+        while (parent[a] != a)
         {
-            dp[a] = dp[dp[a]];
-            a = dp[a];
+            parent[a] = parent[parent[a]];
+            a = parent[a];
         }
-        while (dp[b] != b)
+        while (parent[b] != b)
         {
-            dp[b] = dp[dp[b]];
-            b = dp[b];
+            parent[b] = parent[parent[b]];
+            b = parent[b];
         }
-        dp[a] = b;
+        parent[a] = b;
     }
     for (size_t i = 0; i < s.size(); i++)
     {
         int a = i;
-        while (dp[a] != a)
+        while (parent[a] != a)
         {
-            dp[a] = dp[dp[a]];
-            a = dp[a];
+            parent[a] = parent[parent[a]];
+            a = parent[a];
         }
         char_set[a].push('z' - s[i]);
     }
@@ -7796,7 +7804,7 @@ string LeetCodeGraph::smallestStringWithSwaps(string s, vector<vector<int>>& pai
     for (size_t i = 0; i < s.size(); i++)
     {
         int a = i;
-        while (dp[a] != a) a = dp[a];
+        while (parent[a] != a) a = parent[a];
         if (!char_set.empty())
         {
             result.push_back('z' - char_set[a].top());
