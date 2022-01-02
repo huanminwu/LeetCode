@@ -130,7 +130,6 @@ void TestLeetCode1673(void);
 void TestLeetCode1685(void);
 void TestLeetCode1691(void);
 void TestLeetCode1695(void);
-void TestLeetCode1696(void);
 void TestLeetCode1700(void);
 void TestLeetCode1701(void);
 void TestLeetCode1703(void);
