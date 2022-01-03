@@ -105,34 +105,6 @@ void TestLeetCode303(void)
     Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArray.sumRange(i,j)));
 }
 
-void TestLeetCode211(void)
-{
-    Logger::WriteMessage("Test Leet Code 211");
-    WordDictionary wordDictionary;
-    bool isWord;
-    wordDictionary.addWord("at");
-    wordDictionary.addWord("and");
-    wordDictionary.addWord("an");
-    wordDictionary.addWord("add");
-    isWord = wordDictionary.search("a");
-    Logger::WriteMessage("search(a)->" + string(isWord ? "true" : "false"));
-    isWord = wordDictionary.search(".at");
-    Logger::WriteMessage("search(.at)->" + string(isWord ? "true" : "false"));
-    wordDictionary.addWord("bat");
-    isWord = wordDictionary.search(".at");
-    Logger::WriteMessage("search(.at)->" + string(isWord ? "true" : "false"));  
-    isWord = wordDictionary.search("an.");
-    Logger::WriteMessage("search(an.)->" + string(isWord ? "true" : "false"));
-    isWord = wordDictionary.search("a.d.");
-    Logger::WriteMessage("search(a.d.)->" + string(isWord ? "true" : "false"));
-    isWord = wordDictionary.search("b.");
-    Logger::WriteMessage("search(b.)->" + string(isWord ? "true" : "false"));
-    isWord = wordDictionary.search("a.d");
-    Logger::WriteMessage("search(a.d)->" + string(isWord ? "true" : "false"));
-    isWord = wordDictionary.search(".");
-    Logger::WriteMessage("search(.)->" + string(isWord ? "true" : "false"));
-}
-
 void TestLeetCode304(void)
 {
     Logger::WriteMessage("Test Leet Code 304");
@@ -1914,6 +1886,7 @@ void TestLeetCode1187(void)
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeDesign();
     TestLeetCodeGraph();
     TestLeetCodeDP();
     TestLeetCodeStack();
@@ -1925,7 +1898,6 @@ void main(int argc, char* argv[])
     TestLeetCodeSort();
     TestLeetCodeGreedy();
     TestLeetCodeTwoPointer();
-    TestLeetCodeDesign();
     TestLeetCodeTree();
     TestLeetCodeDFS();
     TestLeetCodeGraph();
@@ -1933,9 +1905,8 @@ void main(int argc, char* argv[])
     TestLeetCodeHashtable();
     TestLeetCodeBFS();
     TestLeetCodeHashtable();
-    TestLeetCode211();
     TestUSACO();
-      TestLeetCode5();
+    TestLeetCode5();
     TestLeetCode1192();
     TestLeetCode1185();
     TestLeetCode1187();
@@ -2158,7 +2129,6 @@ void main(int argc, char* argv[])
     TestLeetCode328();
     TestLeetCode162();
     TestLeetCode210();
-    TestLeetCode211();
     TestLeetCode303();
     TestLeetCode234();
     TestLeetCode290();

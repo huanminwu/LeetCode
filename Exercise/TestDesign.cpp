@@ -4183,8 +4183,84 @@ void TestLeetCode2080(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode211(void)
+{
+    Logger::WriteMessage("Test Leet Code 211");
+    vector<string> commands =
+    {
+       "WordDictionary","addWord","addWord","addWord","search","search","search","search"
+    };
+    vector<vector<string>> parameters =
+    {
+        {} ,{"bad"},{"dad"},{"mad"},{"pad"},{"bad"},{".ad"},{"b.."}
+    };
+
+    vector<string> result;
+    WordDictionary* wordDictionary = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "WordDictionary")
+        {
+            wordDictionary = new WordDictionary();
+            result.push_back("null");
+        }
+        else if (commands[i] == "addWord")
+        {
+            wordDictionary->addWord(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "search")
+        {
+            bool ret = wordDictionary->search(parameters[i][0]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+    }
+    delete wordDictionary;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+       "WordDictionary", "addWord", "addWord", "addWord", "addWord", "search", "search", "addWord", 
+       "search", "search", "search", "search", "search", "search"
+    };
+    parameters =
+    {
+        {} ,{"at"},{"and"},{"an"},{"add"},{"a"},{".at"},{"bat"},
+        {".at"},{"an."},{"a.d."}, {"b."},{"a.d"},{"."}
+    };
+
+    result.clear();
+    wordDictionary = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "WordDictionary")
+        {
+            wordDictionary = new WordDictionary();
+            result.push_back("null");
+        }
+        else if (commands[i] == "addWord")
+        {
+            wordDictionary->addWord(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "search")
+        {
+            bool ret = wordDictionary->search(parameters[i][0]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+    }
+    delete wordDictionary;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode211();
     TestLeetCode2080();
     TestLeetCode1993();
     TestLeetCode2102();

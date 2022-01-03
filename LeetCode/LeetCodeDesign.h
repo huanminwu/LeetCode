@@ -2628,7 +2628,8 @@ struct DictNode
 class WordDictionary
 {
 private:
-    DictNode* root;
+    bool m_end;
+    vector<WordDictionary*> m_children;
 public:
     /// <summary>
     /// Constructor an empty WordDictionary
@@ -2636,7 +2637,8 @@ public:
     /// <returns></returns>
     WordDictionary()
     {
-        root = new DictNode();
+        m_end = false;
+        m_children = vector<WordDictionary*>(26, nullptr);
     };
 
     /// <summary>
@@ -2645,7 +2647,11 @@ public:
     /// <returns></returns>
     ~WordDictionary()
     {
-        delete root;
+        // Leet code does not like my destructor so it cause TLE.
+        //for (int i = 0; i < 26; i++)
+        //{
+        //    if (m_children[i] == nullptr) delete m_children[i];
+        //}
     }
 
     /// <summary>
@@ -2653,9 +2659,19 @@ public:
     /// </summary>
     /// <param name="word>The word</param>
     /// <returns></returns>
-    void addWord(string word)
+    void addWord(string word, int p = 0)
     {
-        root->addWord(word, 0);
+        if (p == word.size())
+        {
+            m_end = true;
+            return;
+        }
+        if (m_children[word[p] - 'a'] == nullptr)
+        {
+            m_children[word[p] - 'a'] = new WordDictionary();
+        }
+        WordDictionary * next = m_children[word[p] - 'a'];
+        next->addWord(word, p + 1);
     }
 
     /// <summary>
@@ -2664,9 +2680,36 @@ public:
     /// </summary>
     /// <param name="word">The word</param>
     /// <returns>true, if found</returns>
-    bool search(string word)
+    bool search(string word, int p = 0)
     {
-        return root->search(word, 0);
+        if (p == word.size())
+        {
+            return m_end;
+        }
+        if (word[p] != '.')
+        {
+            if (m_children[word[p] - 'a'] == nullptr)
+            {
+                return false;
+            }
+            else
+            {
+                return m_children[word[p] - 'a']->search(word, p + 1);
+            }
+        }
+        else
+        {
+            bool ret = false;
+            for (int i = 0; i < 26; i++)
+            {
+                if (m_children[i] != nullptr)
+                {
+                    ret = m_children[i]->search(word, p + 1);
+                }
+                if (ret == true) break;
+            }
+            return ret;
+        }
     }
 };
 
