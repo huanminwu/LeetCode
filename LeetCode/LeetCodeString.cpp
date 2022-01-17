@@ -505,38 +505,44 @@ vector<string> LeetCodeString::fullJustify(vector<string>& words, int maxWidth)
 /// </summary> 
 string LeetCodeString::minWindow(string s, string t)
 {
-    vector<int> char_map(128);
+    unordered_map<char, int> source, target;
     for (size_t i = 0; i < t.size(); i++)
     {
-        char_map[t[i]]++;
+        target[t[i]]++;
     }
-    int count = t.size();
-    int begin = 0;
+    int left = -1;
 
     string result;
-    for (int end = 0; end < (int)s.size(); end++)
+    int count = 0;
+    for (int right = 0; right < (int)s.size(); right++)
     {
-        if (char_map[s[end]] > 0)
+        if (target.count(s[right]) == 0)
         {
-            count--;
+            continue;
         }
-        char_map[s[end]]--;
-        // Do we have all the characters matched
-        if (count > 0) continue;
-
-        // reduce slide window, until break the condition
-        while (count == 0)
+        // not interested
+        source[s[right]]++;
+        if (source[s[right]] == target[s[right]])
         {
-            if (result.empty() || (end - begin + 1) < (int)result.size())
+            count++;
+        }
+        while (count == target.size())
+        {
+            if (result.empty() || right - left < (int)result.size())
             {
-                result = s.substr(begin, end - begin + 1);
+                result = s.substr(left + 1, right - left);
             }
-            char_map[s[begin]]++;
-            if (char_map[s[begin]] > 0)
+            left++;
+            // not interested
+            if (target.count(s[left]) == 0)
             {
-                count++;
+                continue;
             }
-            begin++;
+            source[s[left]]--;
+            if (source[s[left]] == target[s[left]] - 1)
+            {
+                count--;
+            }
         }
     }
     return result;
