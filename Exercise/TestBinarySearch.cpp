@@ -929,8 +929,50 @@ void TestLeetCode2064(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2141(void)
+{
+    Logger::WriteMessage("Test Leet Code 2141");
+    LeetCodeBinarySearch leetCode;
+    int n = 2;
+    vector<int> batteries = { 3, 3, 13 };
+    long long result = leetCode.maxRunTime(n, batteries);
+    Logger::WriteMessage(batteries);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 2;
+    batteries = { 1, 1, 1, 1 };
+    result = leetCode.maxRunTime(n, batteries);
+    Logger::WriteMessage(batteries);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2137(void)
+{
+    Logger::WriteMessage("Test Leet Code 2137");
+    LeetCodeBinarySearch leetCode;
+    vector<int> buckets = { 1, 2, 7 };
+    int loss = 80;
+    double result = leetCode.equalizeWater(buckets, loss);
+    Logger::WriteMessage(buckets);
+    Logger::WriteMessage("loss = " + to_string(loss) + "; result = " + to_string(result));
+
+    buckets = { 2,4,6 };
+    loss = 50;
+    result = leetCode.equalizeWater(buckets, loss);
+    Logger::WriteMessage(buckets);
+    Logger::WriteMessage("loss = " + to_string(loss) + "; result = " + to_string(result));
+
+    buckets = { 3,3,3,3 };
+    loss = 40;
+    result = leetCode.equalizeWater(buckets, loss);
+    Logger::WriteMessage(buckets);
+    Logger::WriteMessage("loss = " + to_string(loss) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode2137();
+    TestLeetCode2141();
     TestLeetCode2064();
     TestLeetCode1918();
     TestLeetCode1891();

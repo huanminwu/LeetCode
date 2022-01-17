@@ -2654,8 +2654,46 @@ void TestLeetCode977(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2136(void)
+{
+    Logger::WriteMessage("Test Leet Code 2136");
+    LeetCodeSort leetCode;
+    vector<int> plantTime = { 1, 4, 3 };
+    vector<int> growTime = { 2, 3, 1 };
+    int result = leetCode.earliestFullBloom(plantTime, growTime);
+    Logger::WriteMessage(plantTime);
+    Logger::WriteMessage(growTime);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    plantTime = { 1, 4, 3 };
+    growTime = { 2, 3, 1 };
+    result = leetCode.earliestFullBloom(plantTime, growTime);
+    Logger::WriteMessage(plantTime);
+    Logger::WriteMessage(growTime);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2126(void)
+{
+    Logger::WriteMessage("Test Leet Code 2126");
+    LeetCodeSort leetCode;
+    int mass = 10;
+    vector<int> asteroids = { 3, 9, 19, 5, 21 };
+    bool result = leetCode.asteroidsDestroyed(mass, asteroids);
+    Logger::WriteMessage(asteroids);
+    Logger::WriteMessage("mass = " + to_string(mass) + "; result = " + (string)(result ? "true" : "false"));
+
+    mass = 5;
+    asteroids = { 4,9,23,4 };
+    result = leetCode.asteroidsDestroyed(mass, asteroids);
+    Logger::WriteMessage(asteroids);
+    Logger::WriteMessage("mass = " + to_string(mass) + "; result = " + (string)(result ? "true" :"false"));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2126();
+    TestLeetCode2136();
     TestLeetCode977();
     TestLeetCode953();
     TestLeetCode941();

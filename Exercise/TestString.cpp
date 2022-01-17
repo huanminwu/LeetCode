@@ -948,6 +948,11 @@ void TestLeetCode395(void)
     k = 2;
     result = leetCode.longestSubstring(s, k);
     Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "bbaaacbd";
+    k = 3;
+    result = leetCode.longestSubstring(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
 void TestLeetCode1160(void)
@@ -4954,8 +4959,106 @@ void TestLeetCode2116(void)
     Logger::WriteMessage("s = " + s + "; locked = " + locked + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2124(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2124");
+    string s = "aaabbb";
+     bool result = leetCode.checkString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "abab";
+    result = leetCode.checkString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "bbb";
+    result = leetCode.checkString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2129(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2129");
+    string title = "capiTalIze tHe titLe";
+    string result = leetCode.capitalizeTitle(title);
+    Logger::WriteMessage("title = " + title + "; result = " + result);
+
+    title = "First leTTeR of EACH Word";
+    result = leetCode.capitalizeTitle(title);
+    Logger::WriteMessage("title = " + title + "; result = " + result);
+
+    title = "i lOve leetcode";
+    result = leetCode.capitalizeTitle(title);
+    Logger::WriteMessage("title = " + title + "; result = " + result);
+}
+
+void TestLeetCode2138(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2138");
+    string s = "abcdefghi";
+    int k = 3;
+    char fill = 'x';
+    vector<string> result = leetCode.divideString(s, k, fill);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; char = " + string(1, fill));
+    Logger::WriteMessage(result);
+
+    s = "abcdefghij";
+    k = 3;
+    fill = 'x';
+     result = leetCode.divideString(s, k, fill);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; char = " + string(1, fill));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2135(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2135");
+    vector<string> startWords = { "ant", "act", "tack" };
+    vector<string> targetWords = { "tack", "act", "acti" };
+    int result = leetCode.wordCount(startWords, targetWords);
+    Logger::WriteMessage(startWords);
+    Logger::WriteMessage(targetWords);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    startWords = { "ab","a" };
+    targetWords = { "abc","abcd" };
+    result = leetCode.wordCount(startWords, targetWords);
+    Logger::WriteMessage(startWords);
+    Logger::WriteMessage(targetWords);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2131(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2131");
+    vector<string> words = { "lc", "cl", "gg" };
+    int result = leetCode.longestPalindrome(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words = { "ab","ty","yt","lc","cl","ab" };
+    result = leetCode.longestPalindrome(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words = { "cc","ll","xx" };
+    result = leetCode.longestPalindrome(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2131();
+    TestLeetCode2135();
+    TestLeetCode2138();
+    TestLeetCode2129();
+    TestLeetCode2124();
+    TestLeetCode395();
     TestLeetCode2116();
     TestLeetCode2114();
     TestLeetCode2083();
@@ -5162,7 +5265,6 @@ void TestLeetCodeString(void)
     TestLeetCode1106();
     TestLeetCode1119();
     TestLeetCode1160();
-    TestLeetCode395();
     TestLeetCode424();
     TestLeetCode770();
     TestLeetCode772();

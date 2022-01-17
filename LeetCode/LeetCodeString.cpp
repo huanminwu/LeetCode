@@ -32,17 +32,17 @@
 int LeetCodeString::lengthOfLongestSubstring(string s)
 {
     unordered_map<char, int> char_count;
-    int begin = 0;
+    int begin = -1;
     int result = 0;
     for (int end = 0; end < (int)s.size(); end++)
     {
         char_count[s[end]]++;
         while (char_count[s[end]] > 1)
         {
-            char_count[s[begin]]--;
             begin++;
+            char_count[s[begin]]--;
         }
-        result = max(result, end - begin + 1);
+        result = max(result, end - begin);
     }
     return result;
 }
@@ -1862,7 +1862,7 @@ int LeetCodeString::lengthLongestPath(string input)
 /// all repeating letters you can get after performing the above 
 /// operations.
 /// Note:
-/// Both the string's length and k will not exceed 104. 
+/// Both the string's length and k will not exceed 10^4. 
 ///
 /// Example 1: 
 /// Input:
@@ -1912,7 +1912,8 @@ int LeetCodeString::characterReplacement(string s, int k)
 /// Leet code #395. Longest Substring with At Least K Repeating Characters     
 /// 
 /// Find the length of the longest substring T of a given string 
-/// (consists of lowercase letters only) such that every character in T appears no less than k times. 
+/// (consists of lowercase letters only) such that every character in T 
+/// appears no less than k times. 
 ///
 /// Example 1: 
 /// Input:
@@ -1930,22 +1931,46 @@ int LeetCodeString::characterReplacement(string s, int k)
 /// </summary>
 int LeetCodeString::longestSubstring(string s, int k)
 {
-    if (s.size() == 0 || k > (int)s.size())   return 0;
-    if (k == 0)  return s.size();
-    vector<int> char_count(26);
-    for (char ch : s)
+    int result = 0;
+    for (int i = 1; i <= 26; i++)
     {
-        char_count[ch - 'a']++;
+        vector<int> char_map(26);
+        int char_count = 0;
+        int not_meet = 0;
+        int begin = -1;
+        for (int end = 0; end < (int)s.size(); end++)
+        {
+            char_map[s[end] - 'a']++;
+            if (char_map[s[end] - 'a'] == 1)
+            {
+                char_count++;
+                not_meet++;
+            }
+            if (char_map[s[end] - 'a'] == k)
+            {
+                not_meet--;
+            }
+            while (char_count > i)
+            {
+                begin++;
+                char_map[s[begin] - 'a']--;
+                if (char_map[s[begin] - 'a'] == k -1)
+                {
+                    not_meet++;
+                }
+                if (char_map[s[begin]- 'a'] == 0)
+                {
+                    char_count--;
+                    not_meet--;
+                }
+            }
+            if (not_meet == 0)
+            {
+                result = max(result, end - begin);
+            }
+        }
     }
-    size_t index = 0;
-    while ((index < s.size()) && (char_count[s[index] - 'a'] >= k))
-    {
-        index++;
-    }
-    if (index == s.size()) return s.size();
-    int left = longestSubstring(s.substr(0, index), k);
-    int right = longestSubstring(s.substr(index + 1), k);
-    return max(left, right);
+    return result;
 }
 
 /// <summary>
@@ -2379,38 +2404,31 @@ int LeetCodeString::readNCharsII(char *buf, int n, string& s, int& index, string
 /// <summary>
 /// Leet code #159. Longest Substring with At Most Two Distinct Characters       
 /// 
-/// Given a string, find the length of the longest substring T that contains at most 
-/// 2 distinct characters. 
+/// Given a string, find the length of the longest substring T that contains 
+/// at most 2 distinct characters. 
 /// For example, Given s = “eceba”, 
 /// T is "ece" which its length is 3.
 /// </summary>
 int LeetCodeString::lengthOfLongestSubstringTwoDistinct(string s)
 {
-    unordered_map<char, int> char_map;
-    size_t max_length = 0;
-    size_t first = 0, last = 0;
-    while (last < s.size())
+    unordered_map<char, int> char_count;
+    int begin = -1;
+    int result = 0;
+    for (int end = 0; end < (int)s.size(); end++)
     {
-        if (char_map.size() == 3)
+        char_count[s[end]]++;
+        while (char_count.size() > 2)
         {
-            char_map[s[first]]--;
-            if (char_map[s[first]] == 0)
+            begin++;
+            char_count[s[begin]]--;
+            if (char_count[s[begin]] == 0)
             {
-                char_map.erase(s[first]);
-            }
-            first++;
-        }
-        else
-        {
-            char_map[s[last]]++;
-            last++;
-            if (char_map.size() < 3)
-            {
-                max_length = max(max_length, last - first);
+                char_count.erase(s[begin]);
             }
         }
+        result = max(result, end - begin);
     }
-    return max_length;
+    return result;
 }
 
 /// <summary>
@@ -2423,31 +2441,24 @@ int LeetCodeString::lengthOfLongestSubstringTwoDistinct(string s)
 /// </summary>
 int LeetCodeString::lengthOfLongestSubstringKDistinct(string s, int k)
 {
-    unordered_map<char, int> char_map;
-    int max_length = 0;
-    int first = 0, last = 0;
-    while (last < (int)s.size())
+    unordered_map<char, int> char_count;
+    int begin = -1;
+    int result = 0;
+    for (int end = 0; end < (int)s.size(); end++)
     {
-        if (char_map.size() == k + 1)
+        char_count[s[end]]++;
+        while (char_count.size() > k)
         {
-            char_map[s[first]]--;
-            if (char_map[s[first]] == 0)
+            begin++;
+            char_count[s[begin]]--;
+            if (char_count[s[begin]] == 0)
             {
-                char_map.erase(s[first]);
-            }
-            first++;
-        }
-        else
-        {
-            char_map[s[last]]++;
-            last++;
-            if ((int)char_map.size() < k + 1)
-            {
-                max_length = max(max_length, last - first);
+                char_count.erase(s[begin]);
             }
         }
+        result = max(result, end - begin);
     }
-    return max_length;
+    return result;
 }
 
 /// <summary>
@@ -3560,33 +3571,31 @@ int LeetCodeString::repeatedStringMatch(string A, string B)
 /// </summary>
 string LeetCodeString::longestWord(vector<string>& words)
 {
-    unordered_map<int, set<string>> word_map;
-    for (string word : words)
+    set<pair<int, string>> pq;
+    unordered_set<string> word_map;
+    word_map.insert("");
+    for (size_t i = 0; i < words.size(); i++)
     {
-        word_map[word.size() - 1].insert(word);
+        pq.insert(make_pair((int)words[i].size(), words[i]));
     }
-    int length = 1;
-    while (true)
+    string result;
+    while (!pq.empty())
     {
-        set<string> candidates;
-        for (string word : word_map[length])
+        pair<int, string> pair = *pq.begin();
+        pq.erase(pq.begin());
+        if (pair.first > (int)result.size() + 1) break;
+        if (word_map.count(pair.second.substr(0, pair.first - 1)) == 0)
         {
-            // the string with (0, length -1) exist?
-            if (word_map[length - 1].count(word.substr(0, length)) > 0)
-            {
-                candidates.insert(word);
-            }
+            continue;
         }
-        word_map[length] = candidates;
-
-        // when candidates is empty, no more expansion
-        if (candidates.empty()) break;
-        length++;
+        word_map.insert(pair.second);
+        // longer word found
+        if (pair.first > (int)result.size())
+        {
+            result = pair.second;
+        }
     }
-    // if no result in length - 1, which means no word with length as 1, 
-    // return empty string
-    if (word_map[length - 1].empty()) return "";
-    else return  *word_map[length - 1].begin();
+    return result;
 }
 
 /// <summary>
@@ -17473,4 +17482,357 @@ bool LeetCodeString::canBeValid(string s, string locked)
     if (count == 0) return true;
     else return false;
 }
+
+/// <summary>
+/// Leet Code 2124. Check if All A's Appears Before All B's
+///                                                                 
+/// Easy
+///
+/// Given a string s consisting of only the characters 'a' and 'b', return 
+/// true if every 'a' appears before every 'b' in the string. Otherwise, 
+/// return false.
+///
+/// Example 1:
+/// Input: s = "aaabbb"
+/// Output: true
+/// Explanation:
+/// The 'a's are at indices 0, 1, and 2, while the 'b's are at indices 
+/// 3, 4, and 5.
+/// Hence, every 'a' appears before every 'b' and we return true.
+///
+/// Example 2:
+/// Input: s = "abab"
+/// Output: false 
+/// Explanation:
+/// There is an 'a' at index 2 and a 'b' at index 1.
+/// Hence, not every 'a' appears before every 'b' and we return false.
+///
+/// Example 3:
+/// Input: s = "bbb"
+/// Output: true
+/// Explanation:
+/// There are no 'a's, hence, every 'a' appears before every 'b' and we 
+/// return true.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 100
+/// 2. s[i] is either 'a' or 'b'.
+/// </summary>
+bool LeetCodeString::checkString(string s)
+{
+    bool is_b = false;
+    for (auto ch: s)
+    {
+        if (ch == 'b') is_b = true;
+        else if (is_b == true) return false;
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet Code 2129. Capitalize the Title
+///                                                                 
+/// Easy
+///
+/// You are given a string title consisting of one or more words separated 
+/// by a single space, where each word consists of English letters. 
+/// Capitalize the string by changing the capitalization of each word such 
+/// that:
+///
+/// If the length of the word is 1 or 2 letters, change all letters to 
+/// lowercase.
+/// Otherwise, change the first letter to uppercase and the remaining 
+/// letters to lowercase.
+/// Return the capitalized title.
+///
+/// Example 1:
+/// Input: title = "capiTalIze tHe titLe"
+/// Output: "Capitalize The Title"
+/// Explanation:
+/// Since all the words have a length of at least 3, the first letter of 
+/// each word is uppercase, and the remaining letters are lowercase.
+///
+/// Example 2:
+/// Input: title = "First leTTeR of EACH Word"
+/// Output: "First Letter of Each Word"
+/// Explanation:
+/// The word "of" has length 2, so it is all lowercase.
+/// The remaining words have a length of at least 3, so the first letter 
+/// of each remaining word is uppercase, and the remaining letters are 
+/// lowercase.
+///
+/// Example 3:
+/// Input: title = "i lOve leetcode"
+/// Output: "i Love Leetcode"
+/// Explanation:
+/// The word "i" has length 1, so it is lowercase.
+/// The remaining words have a length of at least 3, so the first letter 
+/// of each remaining word is uppercase, and the remaining letters are 
+/// lowercase.
+///   
+/// Constraints:
+/// 1. 1 <= title.length <= 100
+/// 2. title consists of words separated by a single space without any 
+///    leading or trailing spaces.
+/// 3. Each word consists of uppercase and lowercase English letters and 
+///    is non-empty.
+/// </summary>
+string LeetCodeString::capitalizeTitle(string title)
+{
+    string result;
+    string word;
+    for (size_t i = 0; i <= title.size(); i++)
+    {
+        if (i == title.size() || isspace(title[i]))
+        {
+            if (word.size() < 3)
+            {
+                for (size_t j = 0; j < word.size(); j++)
+                {
+                    word[j] = tolower(word[j]);
+                }
+            }
+            else
+            {
+                word[0] = toupper(word[0]);
+                for (size_t j = 1; j < word.size(); j++)
+                {
+                    word[j] = tolower(word[j]);
+                }
+            }
+            if (!result.empty()) result.push_back(' ');
+            result.append(word);
+            word.clear();
+        }
+        else
+        {
+            word.push_back(title[i]);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2138. Divide a String Into Groups of Size k
+///                                                                 
+/// Easy
+///
+/// A string s can be partitioned into groups of size k using the 
+/// following procedure:
+///
+/// The first group consists of the first k characters of the string, 
+/// the second group consists of the next k characters of the string, and 
+/// so on. Each character can be a part of exactly one group.
+/// For the last group, if the string does not have k characters 
+/// remaining, a character fill is used to complete the group.
+/// Note that the partition is done so that after removing the fill 
+/// character from the last group (if it exists) and concatenating all 
+/// the groups in order, the resultant string should be s.
+/// Given the string s, the size of each group k and the character fill, 
+/// return a string array denoting the composition of every group s has 
+/// been divided into, using the above procedure.
+///
+/// Example 1:
+/// Input: s = "abcdefghi", k = 3, fill = "x"
+/// Output: ["abc","def","ghi"]
+/// Explanation:
+/// The first 3 characters "abc" form the first group.
+/// The next 3 characters "def" form the second group.
+/// The last 3 characters "ghi" form the third group.
+/// Since all groups can be completely filled by characters from the 
+/// string, we do not need to use fill.
+/// Thus, the groups formed are "abc", "def", and "ghi".
+/// Example 2:
+/// Input: s = "abcdefghij", k = 3, fill = "x"
+/// Output: ["abc","def","ghi","jxx"]
+/// Explanation:
+/// Similar to the previous example, we are forming the first three 
+/// groups "abc", "def", and "ghi".
+/// For the last group, we can only use the character 'j' from the string. 
+/// To complete this group, we add 'x' twice.
+/// Thus, the 4 groups formed are "abc", "def", "ghi", and "jxx".
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 100
+/// 2. s consists of lowercase English letters only.
+/// 3. 1 <= k <= 100
+/// 4. fill is a lowercase English letter.
+/// </summary>
+vector<string> LeetCodeString::divideString(string s, int k, char fill)
+{
+    vector<string> result((s.size() + k - 1) / k);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        result[i / k].push_back(s[i]);
+    }
+    while (result.back().size() < k) result.back().push_back(fill);
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2135. Count Words Obtained After Adding a Letter
+///                                                                 
+/// Medium
+///
+/// You are given two 0-indexed arrays of strings startWords and 
+/// targetWords. Each string consists of lowercase English letters only.
+///
+/// For each string in targetWords, check if it is possible to choose a 
+/// string from startWords and perform a conversion operation on it to be 
+/// equal to that from targetWords.
+///
+/// The conversion operation is described in the following two steps:
+///
+/// Append any lowercase letter that is not present in the string to its
+/// end.
+/// For example, if the string is "abc", the letters 'd', 'e', or 'y' can 
+/// be added to it, but not 'a'. If 'd' is added, the resulting string 
+/// will be "abcd".
+/// Rearrange the letters of the new string in any arbitrary order.
+/// For example, "abcd" can be rearranged to "acbd", "bacd", "cbda", and 
+/// so on. Note that it can also be rearranged to "abcd" itself.
+/// Return the number of strings in targetWords that can be obtained by 
+/// performing the operations on any string of startWords.
+///
+/// Note that you will only be verifying if the string in targetWords can 
+/// be obtained from a string in startWords by performing the operations. 
+/// The strings in startWords do not actually change during this process.
+/// 
+/// Example 1:
+/// Input: startWords = ["ant","act","tack"], 
+/// targetWords = ["tack","act","acti"]
+/// Output: 2
+/// Explanation:
+/// - In order to form targetWords[0] = "tack", we use 
+/// startWords[1] = "act", append 'k' to it, and rearrange "actk" 
+/// to "tack".
+/// - There is no string in startWords that can be used to obtain 
+///   targetWords[1] = "act".
+/// Note that "act" does exist in startWords, but we must append one 
+/// letter to the string before rearranging it.
+/// - In order to form targetWords[2] = "acti", we use startWords[1] = 
+/// "act", append 'i' to it, and rearrange "acti" to "acti" itself.
+///
+/// Example 2:
+/// Input: startWords = ["ab","a"], targetWords = ["abc","abcd"]
+/// Output: 1
+/// Explanation:
+/// - In order to form targetWords[0] = "abc", we use startWords[0] = 
+///   "ab", add 'c' to it, and rearrange it to "abc".
+/// - There is no string in startWords that can be used to obtain 
+///   targetWords[1] = "abcd".
+///
+/// Constraints:
+/// 1. 1 <= startWords.length, targetWords.length <= 5 * 10^4
+/// 2. 1 <= startWords[i].length, targetWords[j].length <= 26
+/// 3. Each string of startWords and targetWords consists of lowercase 
+///    English letters only. 
+/// 4. No letter occurs more than once in any string of startWords or 
+///    targetWords.
+/// </summary>
+int LeetCodeString::wordCount(vector<string>& startWords, vector<string>& targetWords)
+{
+    unordered_set<string> source;
+    for (string word: startWords)
+    {  
+        sort(word.begin(), word.end());
+        source.insert(word);
+    }
+    int result = 0;
+    for (string word : targetWords)
+    {
+        sort(word.begin(), word.end());
+        for (size_t i = 0; i < word.size(); i++)
+        {
+            string str = word.substr(0, i) + word.substr(i + 1);
+            if (source.count(str) > 0)
+            {
+                result++;
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2131. Longest Palindrome by Concatenating Two Letter Words
+///                                                                 
+/// Medium
+///
+/// You are given an array of strings words. Each element of words 
+/// consists of two lowercase English letters.
+///
+/// Create the longest possible palindrome by selecting some elements from 
+/// words and concatenating them in any order. Each element can be 
+/// selected at most once.
+///
+/// Return the length of the longest palindrome that you can create. If 
+/// it is impossible to create any palindrome, return 0.
+///
+/// A palindrome is a string that reads the same forward and backward.
+/// 
+/// Example 1:
+/// Input: words = ["lc","cl","gg"]
+/// Output: 6
+/// Explanation: One longest palindrome is "lc" + "gg" + "cl" = "lcggcl", 
+/// of length 6.
+/// Note that "clgglc" is another longest palindrome that can be created.
+///
+/// Example 2:
+/// Input: words = ["ab","ty","yt","lc","cl","ab"]
+/// Output: 8
+/// Explanation: One longest palindrome is "ty" + "lc" + "cl" + "yt" = 
+/// "tylcclyt", of length 8.
+/// Note that "lcyttycl" is another longest palindrome that can be created.
+///
+/// Example 3:
+/// Input: words = ["cc","ll","xx"]
+/// Output: 2
+/// Explanation: One longest palindrome is "cc", of length 2.
+/// Note that "ll" is another longest palindrome that can be created, 
+/// and so is "xx".
+/// 
+/// Constraints:
+/// 1. 1 <= words.length <= 10^5
+/// 2. words[i].length == 2
+/// 3. words[i] consists of lowercase English letters.
+/// </summary>
+int LeetCodeString::longestPalindrome(vector<string>& words)
+{
+    unordered_map<string, int> word_map;
+    int result = 0;
+    for (string&  word : words)
+    {
+        string reverse_word = word;
+        std::reverse(reverse_word.begin(), reverse_word.end());
+        if (word_map.count(reverse_word) > 0)
+        {
+            word_map[reverse_word]--;
+            if (word_map[reverse_word] == 0)
+            {
+                word_map.erase(reverse_word);
+            }
+            result += word.size() * 2;
+        }
+        else
+        {
+            word_map[word]++;
+        } 
+    }
+
+    int central = 0;
+    for (auto& itr : word_map)
+    {
+        string reverse_word = itr.first;
+        std::reverse(reverse_word.begin(), reverse_word.end());
+        if (reverse_word == itr.first)
+        {
+            central = max(central, (int)itr.first.size());
+        }
+    }
+    result += central;
+    return result;
+}
+
 #pragma endregion

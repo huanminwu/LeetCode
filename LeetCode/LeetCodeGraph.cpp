@@ -13337,4 +13337,230 @@ int LeetCodeGraph::networkDelayTime(vector<vector<int>>& times, int n, int k)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2123. Minimum Operations to Remove Adjacent Ones in Matrix
+///                                                                 
+/// Hard
+///
+/// You are given a 0-indexed binary matrix grid. In one operation, you 
+/// can flip any 1 in grid to be 0.
+///
+/// A binary matrix is well-isolated if there is no 1 in the matrix 
+/// that is 4-directionally connected (i.e., horizontal and vertical) 
+/// to another 1.
+///
+/// Return the minimum number of operations to make grid well-isolated.
+///
+/// Example 1:
+/// Input: grid = [[1,1,0],[0,1,1],[1,1,1]]
+/// Output: 3
+/// Explanation: Use 3 operations to change grid[0][1], grid[1][2], 
+/// and grid[2][1] to 0.
+/// After, no more 1's are 4-directionally connected and grid is 
+/// well-isolated.
+///
+/// Example 2:
+/// Input: grid = [[0,0,0],[0,0,0],[0,0,0]]
+/// Output: 0
+/// Explanation: There are no 1's in grid and it is well-isolated.
+/// No operations were done so return 0.
+///
+/// Example 3:
+/// Input: grid = [[0,1],[1,0]]
+ /// Output: 0
+/// Explanation: None of the 1's are 4-directionally connected and grid 
+/// is well-isolated.
+/// No operations were done so return 0.
+/// 
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 1 <= m, n <= 300
+/// 4. grid[i][j] is either 0 or 1.
+/// </summary>
+int LeetCodeGraph::minimumOperations(vector<vector<int>>& grid)
+{
+    int m = grid.size(), n = grid[0].size(), cnt = 0;
+    vector<pair<int, int> > D = { {-1,0},{1,0},{0,-1},{0,1} };
+    vector<vector<int> > match(m, vector<int>(n, -1));
+    vector<vector<int> > vis(m, vector<int>(n, -1));
+
+    function<int(int, int, int)> dfs = [&](int i, int j, int v) 
+    {
+        for (size_t d = 0; d < D.size(); d++)
+        {
+            int x = i + D[d].first, y = j + D[d].second;
+            if (x >= 0 && x < m && y >= 0 && y < n && grid[x][y] && vis[x][y] != v) 
+            {
+                vis[x][y] = v;
+                // found an augment path
+                if (match[x][y] == -1 || dfs(match[x][y] / n, match[x][y] % n, v)) 
+                {
+                    match[x][y] = i * n + j;
+                    match[i][j] = x * n + y;
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    };
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (grid[i][j] && match[i][j] == -1)
+            {
+                cnt += dfs(i, j, vis[i][j] = i * n + j);
+            }
+        }
+    }
+    return cnt;
+}
+
+/// <summary>
+/// Leet Code 2127. Maximum Employees to Be Invited to a Meeting
+/// </summary>
+int LeetCodeGraph::maximumInvitations(vector<vector<int>>& reverse, vector<int>& visited, int node)
+{
+    queue<int> queue;
+    int result = 0;
+    queue.push(node);
+    while (!queue.empty())
+    { 
+        result++;
+        int size = queue.size();
+        for (int i = 0; i < size; i++)
+        {
+            int node = queue.front();
+            queue.pop();
+            for (size_t j = 0; j < reverse[node].size(); j++)
+            {
+                if (visited[reverse[node][j]] == 0)
+                {
+                    visited[reverse[node][j]] = 1;
+                    queue.push(reverse[node][j]);
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2127. Maximum Employees to Be Invited to a Meeting
+/// </summary>
+int LeetCodeGraph::maximumInvitations(vector<int>& favorite, vector<int>& visited, int node)
+{
+    queue<int> queue;
+    while (visited[node] == 0)
+    {
+        visited[node] = 1;
+        queue.push(node);
+        node = favorite[node];
+    }
+    while (!queue.empty() && queue.front() != node)
+    {
+        queue.pop();
+    }
+    return queue.size();
+}
+
+/// <summary>
+/// Leet Code 2127. Maximum Employees to Be Invited to a Meeting
+///                                                                 
+/// Hard
+///
+/// A company is organizing a meeting and has a list of n employees, 
+/// waiting to be invited. They have arranged for a large circular table, 
+/// capable of seating any number of employees.
+///
+/// The employees are numbered from 0 to n - 1. Each employee has a 
+/// favorite person and they will attend the meeting only if they can 
+/// sit next to their favorite person at the table. The favorite person 
+/// of an employee is not themself.
+///
+/// Given a 0-indexed integer array favorite, where favorite[i] denotes 
+/// the favorite person of the ith employee, return the maximum number 
+/// of employees that can be invited to the meeting.
+///
+/// Example 1:
+/// Input: favorite = [2,2,1,2]
+/// Output: 3
+/// Explanation:
+/// The above figure shows how the company can invite employees 0, 1, 
+/// and 2, and seat them at the round table.
+/// All employees cannot be invited because employee 2 cannot sit beside 
+/// employees 0, 1, and 3, simultaneously.
+/// Note that the company can also invite employees 1, 2, and 3, and 
+/// give them their desired seats.
+/// The maximum number of employees that can be invited to the meeting is 3. 
+///
+/// Example 2:
+/// Input: favorite = [1,2,0]
+/// Output: 3
+/// Explanation: 
+/// Each employee is the favorite person of at least one other employee, 
+/// and the only way the company can invite them is if they invite every 
+/// employee.
+/// The seating arrangement will be the same as that in the figure given 
+/// in example 1:
+/// - Employee 0 will sit between employees 2 and 1.
+/// - Employee 1 will sit between employees 0 and 2.
+/// - Employee 2 will sit between employees 1 and 0.
+/// The maximum number of employees that can be invited to the meeting 
+/// is 3.
+///
+/// Example 3:
+/// Input: favorite = [3,0,1,4,1]
+/// Output: 4
+/// Explanation:
+/// The above figure shows how the company will invite employees 0, 1, 3, 
+/// and 4, and seat them at the round table.
+/// Employee 2 cannot be invited because the two spots next to their 
+/// favorite employee 1 are taken.
+/// So the company leaves them out of the meeting.
+/// The maximum number of employees that can be invited to the meeting 
+/// is 4.
+/// 
+/// Constraints:
+/// 1. n == favorite.length
+/// 2. 2 <= n <= 10^5
+/// 3. 0 <= favorite[i] <= n - 1
+/// 4. favorite[i] != i
+/// </summary>
+int LeetCodeGraph::maximumInvitations(vector<int>& favorite)
+{
+    vector<vector<int>> reverse(favorite.size());
+    vector<int> visited(favorite.size());
+
+    for (size_t i = 0; i < favorite.size(); i++)
+    {
+        if (favorite[favorite[i]] != i)
+        {
+            reverse[favorite[i]].push_back(i);
+        }
+    }
+    int loop1 = 0;
+    int loop2 = 0;
+    for (size_t i = 0; i < favorite.size(); i++)
+    {
+        if (favorite[favorite[i]] == i && visited[i] == 0)
+        {
+            visited[i] = 1;
+            visited[favorite[i]] = 1;
+            int sum = maximumInvitations(reverse, visited, i);
+            sum += maximumInvitations(reverse, visited, favorite[i]);
+            loop1 += sum;
+        }
+    }
+    for (size_t i = 0; i < favorite.size(); i++)
+    {
+        if (visited[i] == 0)
+        {
+            loop2 = max(loop2, maximumInvitations(favorite, visited, i));
+        }
+    }
+    return max(loop1, loop2);
+}
+
 #pragma endregion

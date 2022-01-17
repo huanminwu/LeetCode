@@ -4140,40 +4140,84 @@ void TestLeetCode743(void)
     int k = 2;
     int result = leetCode.networkDelayTime(times, n, k);
     Logger::WriteMessage(times);
-    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + " result = " + to_string(result));
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
 
     times = { {1, 2, 1} };
     n = 2;
     k = 1;
     result = leetCode.networkDelayTime(times, n, k);
     Logger::WriteMessage(times);
-    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + " result = " + to_string(result));
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
 
     times = { {1, 2, 1} };
     n = 2;
     k = 2;
     result = leetCode.networkDelayTime(times, n, k);
     Logger::WriteMessage(times);
-    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + " result = " + to_string(result));
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
 
     times = { { 1, 2, 1 },{ 2, 3, 2 },{ 1, 3, 4 } };
     n = 3;
     k = 1;
     result = leetCode.networkDelayTime(times, n, k);
     Logger::WriteMessage(times);
-    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + " result = " + to_string(result));
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
 
     n = 5;
     k = 1;
     times = { {1, 2, 1}, { 2, 3, 1 }, { 3, 4, 1 }, { 4, 5, 1 } };
     result = leetCode.networkDelayTime(times, n, k);
     Logger::WriteMessage(times);
-    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + " result = " + to_string(result));
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
 
+void TestLeetCode2123(void)
+{
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid = { {1, 1, 0},{0, 1, 1},{1, 1, 1} };
+    int result = leetCode.minimumOperations(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {0, 0, 0},{0, 0, 0},{0, 0, 0} };
+    result = leetCode.minimumOperations(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {0, 1},{1, 0} };
+    result = leetCode.minimumOperations(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2127(void)
+{
+    LeetCodeGraph leetCode;
+    vector<int> favorite = { 2, 2, 1, 2 };
+    int result = leetCode.maximumInvitations(favorite);
+    Logger::WriteMessage(favorite);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    favorite = { 1,2,0 };
+    result = leetCode.maximumInvitations(favorite);
+    Logger::WriteMessage(favorite);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    favorite = { 3, 0, 1, 4, 1 };
+    result = leetCode.maximumInvitations(favorite);
+    Logger::WriteMessage(favorite);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    favorite = { 1, 0 };
+    result = leetCode.maximumInvitations(favorite);
+    Logger::WriteMessage(favorite);
+    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2127();
+    TestLeetCode2123();
     TestLeetCode305();
     TestLeetCode743();
     TestLeetCode444();

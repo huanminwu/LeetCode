@@ -8041,4 +8041,154 @@ vector<int> LeetCodeSort::maximumBeauty(vector<vector<int>>&items, vector<int>&q
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2136. Earliest Possible Day of Full Bloom
+///                                                                 
+/// Hard
+///
+/// You have n flower seeds. Every seed must be planted first before it 
+/// can begin to grow, then bloom. Planting a seed takes time and so does 
+/// the growth of a seed. You are given two 0-indexed integer arrays 
+/// plantTime and growTime, of length n each:
+///
+/// plantTime[i] is the number of full days it takes you to plant the ith 
+/// seed. Every day, you can work on planting exactly one seed. You do not 
+/// have to work on planting the same seed on consecutive days, but the 
+/// planting of a seed is not complete until you have worked plantTime[i] 
+/// days on planting it in total.
+/// growTime[i] is the number of full days it takes the ith seed to grow 
+/// after being completely planted. After the last day of its growth, the 
+/// flower blooms and stays bloomed forever.
+/// From the beginning of day 0, you can plant the seeds in any order.
+///
+/// Return the earliest possible day where all seeds are blooming.
+///
+/// Example 1:
+/// Input: plantTime = [1,4,3], growTime = [2,3,1]
+/// Output: 9
+/// Explanation: The grayed out pots represent planting days, colored pots 
+/// represent growing days, and the flower represents the day it blooms.
+/// One optimal way is:
+/// On day 0, plant the 0th seed. The seed grows for 2 full days and 
+/// blooms on day 3.
+/// On days 1, 2, 3, and 4, plant the 1st seed. The seed grows for 3 full 
+/// days and blooms on day 8.
+/// On days 5, 6, and 7, plant the 2nd seed. The seed grows for 1 full day 
+/// and blooms on day 9.
+/// Thus, on day 9, all the seeds are blooming.
+///
+/// Example 2:
+/// Input: plantTime = [1,2,3,2], growTime = [2,1,2,1]
+/// Output: 9
+/// Explanation: The grayed out pots represent planting days, colored pots 
+/// represent growing days, and the flower represents the day it blooms.
+/// One optimal way is:
+/// On day 1, plant the 0th seed. The seed grows for 2 full days and 
+/// blooms on day 4.
+/// On days 0 and 3, plant the 1st seed. The seed grows for 1 full day and 
+/// blooms on day 5.
+/// On days 2, 4, and 5, plant the 2nd seed. The seed grows for 2 full 
+/// days and blooms on day 8.
+/// On days 6 and 7, plant the 3rd seed. The seed grows for 1 full day 
+/// and blooms on day 9.
+/// Thus, on day 9, all the seeds are blooming.
+///
+/// Example 3:
+/// Input: plantTime = [1], growTime = [1]
+/// Output: 2
+/// Explanation: On day 0, plant the 0th seed. The seed grows for 1 full 
+/// day and blooms on day 2.
+/// Thus, on day 2, all the seeds are blooming.
+///
+/// Constraints:
+/// 1. n == plantTime.length == growTime.length
+/// 2. 1 <= n <= 10^5
+/// 3. 1 <= plantTime[i], growTime[i] <= 10^4
+/// </summary>
+int LeetCodeSort::earliestFullBloom(vector<int>& plantTime, vector<int>& growTime)
+{
+    int result = 0;
+    int planStart = 0;
+    priority_queue<pair<int, int>> pq;
+    for (size_t i = 0; i < plantTime.size(); i++)
+    {
+        pq.push(make_pair(growTime[i], plantTime[i]));
+    }
+    while (!pq.empty())
+    {
+        pair<int, int> pair = pq.top();
+        pq.pop();
+        planStart += pair.second;
+        result = max(result, planStart + pair.first);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2126. Destroying Asteroids
+///                                                                 
+/// Medium
+///
+/// You are given an integer mass, which represents the original mass of 
+/// a planet. You are further given an integer array asteroids, where 
+/// asteroids[i] is the mass of the ith asteroid.
+///
+/// You can arrange for the planet to collide with the asteroids in any 
+/// arbitrary order. If the mass of the planet is greater than or equal 
+/// to the mass of the asteroid, the asteroid is destroyed and the planet 
+/// gains the mass of the asteroid. Otherwise, the planet is destroyed.
+/// 
+/// Return true if all asteroids can be destroyed. Otherwise, return false.
+///
+/// 
+/// Example 1:
+/// Input: mass = 10, asteroids = [3,9,19,5,21]
+/// Output: true
+/// Explanation: One way to order the asteroids is [9,19,5,3,21]:
+/// - The planet collides with the asteroid with a mass of 9. New planet 
+///   mass: 10 + 9 = 19
+/// - The planet collides with the asteroid with a mass of 19. New planet 
+///   mass: 19 + 19 = 38
+/// - The planet collides with the asteroid with a mass of 5. New planet 
+///   mass: 38 + 5 = 43
+/// - The planet collides with the asteroid with a mass of 3. New planet 
+///   mass: 43 + 3 = 46
+/// - The planet collides with the asteroid with a mass of 21. New planet 
+///   mass: 46 + 21 = 67
+/// All asteroids are destroyed.
+///
+/// Example 2:
+/// Input: mass = 5, asteroids = [4,9,23,4]
+/// Output: false
+/// Explanation: 
+/// The planet cannot ever gain enough mass to destroy the asteroid with a 
+/// mass of 23.
+/// After the planet destroys the other asteroids, it will have a mass 
+/// of 5 + 4 + 9 + 4 = 22.
+/// This is less than 23, so a collision would not destroy the last 
+/// asteroid.
+/// 
+/// Constraints:
+/// 1. 1 <= mass <= 10^5
+/// 2. 1 <= asteroids.length <= 10^5
+/// 3. 1 <= asteroids[i] <= 10^5
+/// </summary>
+bool LeetCodeSort::asteroidsDestroyed(int mass, vector<int>& asteroids)
+{
+    sort(asteroids.begin(), asteroids.end());
+    long long sum = mass;
+    for (size_t i = 0; i < asteroids.size(); i++)
+    {
+        if (sum < (long long)asteroids[i])
+        {
+            return false;
+        }
+        else
+        {
+            sum += asteroids[i];
+        }
+    }
+    return true;
+}
 #pragma endregion

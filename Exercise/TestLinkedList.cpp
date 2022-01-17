@@ -994,8 +994,47 @@ void TestLeetCode2058(void)
     leetCode.freeListNodes(list);
 }
 
+void TestLeetCode2130(void)
+{
+    Logger::WriteMessage("Test Leet Code 2130");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 5, 4, 2, 1 };
+    ListNode* list = leetCode.generateListNodes(data_list);
+    int result = leetCode.pairSum(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeListNodes(list);
+
+    data_list = { 4,2,2,3 };
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.pairSum(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeListNodes(list);
+
+    data_list = { 1,100000 };
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.pairSum(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeListNodes(list);
+
+    data_list = 
+    { 
+        47, 22, 81, 46, 94, 95, 90, 22, 55, 91, 6, 83, 49, 65, 10, 
+        32, 41, 26, 83, 99, 14, 85, 42, 99, 89, 69, 30, 92, 32, 74, 
+        9, 81, 5, 9 
+    };
+    list = leetCode.generateListNodes(data_list);
+    result = leetCode.pairSum(list);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeListNodes(list);
+}
+
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode2130();
     TestLeetCode2058();
     TestLeetCode2074();
     TestLeetCode2095();

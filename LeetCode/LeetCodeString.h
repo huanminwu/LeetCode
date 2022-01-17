@@ -9609,6 +9609,249 @@ public:
     /// 4. locked[i] is either '0' or '1'.
     /// </summary>
     bool canBeValid(string s, string locked);
+
+    /// <summary>
+    /// Leet Code 2124. Check if All A's Appears Before All B's
+    ///                                                                 
+    /// Easy
+    ///
+    /// Given a string s consisting of only the characters 'a' and 'b', return 
+    /// true if every 'a' appears before every 'b' in the string. Otherwise, 
+    /// return false.
+    ///
+    /// Example 1:
+    /// Input: s = "aaabbb"
+    /// Output: true
+    /// Explanation:
+    /// The 'a's are at indices 0, 1, and 2, while the 'b's are at indices 
+    /// 3, 4, and 5.
+    /// Hence, every 'a' appears before every 'b' and we return true.
+    ///
+    /// Example 2:
+    /// Input: s = "abab"
+    /// Output: false 
+    /// Explanation:
+    /// There is an 'a' at index 2 and a 'b' at index 1.
+    /// Hence, not every 'a' appears before every 'b' and we return false.
+    ///
+    /// Example 3:
+    /// Input: s = "bbb"
+    /// Output: true
+    /// Explanation:
+    /// There are no 'a's, hence, every 'a' appears before every 'b' and we 
+    /// return true.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s[i] is either 'a' or 'b'.
+    /// </summary>
+    bool checkString(string s);
+
+    /// <summary>
+    /// Leet Code 2129. Capitalize the Title
+    ///                                                                 
+    /// Easy
+    ///
+    /// You are given a string title consisting of one or more words separated 
+    /// by a single space, where each word consists of English letters. 
+    /// Capitalize the string by changing the capitalization of each word such 
+    /// that:
+    ///
+    /// If the length of the word is 1 or 2 letters, change all letters to 
+    /// lowercase.
+    /// Otherwise, change the first letter to uppercase and the remaining 
+    /// letters to lowercase.
+    /// Return the capitalized title.
+    ///
+    /// Example 1:
+    /// Input: title = "capiTalIze tHe titLe"
+    /// Output: "Capitalize The Title"
+    /// Explanation:
+    /// Since all the words have a length of at least 3, the first letter of 
+    /// each word is uppercase, and the remaining letters are lowercase.
+    ///
+    /// Example 2:
+    /// Input: title = "First leTTeR of EACH Word"
+    /// Output: "First Letter of Each Word"
+    /// Explanation:
+    /// The word "of" has length 2, so it is all lowercase.
+    /// The remaining words have a length of at least 3, so the first letter 
+    /// of each remaining word is uppercase, and the remaining letters are 
+    /// lowercase.
+    ///
+    /// Example 3:
+    /// Input: title = "i lOve leetcode"
+    /// Output: "i Love Leetcode"
+    /// Explanation:
+    /// The word "i" has length 1, so it is lowercase.
+    /// The remaining words have a length of at least 3, so the first letter 
+    /// of each remaining word is uppercase, and the remaining letters are 
+    /// lowercase.
+    ///   
+    /// Constraints:
+    /// 1. 1 <= title.length <= 100
+    /// 2. title consists of words separated by a single space without any 
+    ///    leading or trailing spaces.
+    /// 3. Each word consists of uppercase and lowercase English letters and 
+    ///    is non-empty.
+    /// </summary>
+    string capitalizeTitle(string title);
+
+    /// <summary>
+    /// Leet Code 2138. Divide a String Into Groups of Size k
+    ///                                                                 
+    /// Easy
+    ///
+    /// A string s can be partitioned into groups of size k using the 
+    /// following procedure:
+    ///
+    /// The first group consists of the first k characters of the string, 
+    /// the second group consists of the next k characters of the string, and 
+    /// so on. Each character can be a part of exactly one group.
+    /// For the last group, if the string does not have k characters 
+    /// remaining, a character fill is used to complete the group.
+    /// Note that the partition is done so that after removing the fill 
+    /// character from the last group (if it exists) and concatenating all 
+    /// the groups in order, the resultant string should be s.
+    /// Given the string s, the size of each group k and the character fill, 
+    /// return a string array denoting the composition of every group s has 
+    /// been divided into, using the above procedure.
+    ///
+    /// Example 1:
+    /// Input: s = "abcdefghi", k = 3, fill = "x"
+    /// Output: ["abc","def","ghi"]
+    /// Explanation:
+    /// The first 3 characters "abc" form the first group.
+    /// The next 3 characters "def" form the second group.
+    /// The last 3 characters "ghi" form the third group.
+    /// Since all groups can be completely filled by characters from the 
+    /// string, we do not need to use fill.
+    /// Thus, the groups formed are "abc", "def", and "ghi".
+    /// Example 2:
+    /// Input: s = "abcdefghij", k = 3, fill = "x"
+    /// Output: ["abc","def","ghi","jxx"]
+    /// Explanation:
+    /// Similar to the previous example, we are forming the first three 
+    /// groups "abc", "def", and "ghi".
+    /// For the last group, we can only use the character 'j' from the string. 
+    /// To complete this group, we add 'x' twice.
+    /// Thus, the 4 groups formed are "abc", "def", "ghi", and "jxx".
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s consists of lowercase English letters only.
+    /// 3. 1 <= k <= 100
+    /// 4. fill is a lowercase English letter.
+    /// </summary>
+    vector<string> divideString(string s, int k, char fill);
+
+    /// <summary>
+    /// Leet Code 2135. Count Words Obtained After Adding a Letter
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given two 0-indexed arrays of strings startWords and 
+    /// targetWords. Each string consists of lowercase English letters only.
+    ///
+    /// For each string in targetWords, check if it is possible to choose a 
+    /// string from startWords and perform a conversion operation on it to be 
+    /// equal to that from targetWords.
+    ///
+    /// The conversion operation is described in the following two steps:
+    ///
+    /// Append any lowercase letter that is not present in the string to its
+    /// end.
+    /// For example, if the string is "abc", the letters 'd', 'e', or 'y' can 
+    /// be added to it, but not 'a'. If 'd' is added, the resulting string 
+    /// will be "abcd".
+    /// Rearrange the letters of the new string in any arbitrary order.
+    /// For example, "abcd" can be rearranged to "acbd", "bacd", "cbda", and 
+    /// so on. Note that it can also be rearranged to "abcd" itself.
+    /// Return the number of strings in targetWords that can be obtained by 
+    /// performing the operations on any string of startWords.
+    ///
+    /// Note that you will only be verifying if the string in targetWords can 
+    /// be obtained from a string in startWords by performing the operations. 
+    /// The strings in startWords do not actually change during this process.
+    /// 
+    /// Example 1:
+    /// Input: startWords = ["ant","act","tack"], 
+    /// targetWords = ["tack","act","acti"]
+    /// Output: 2
+    /// Explanation:
+    /// - In order to form targetWords[0] = "tack", we use 
+    /// startWords[1] = "act", append 'k' to it, and rearrange "actk" 
+    /// to "tack".
+    /// - There is no string in startWords that can be used to obtain 
+    ///   targetWords[1] = "act".
+    /// Note that "act" does exist in startWords, but we must append one 
+    /// letter to the string before rearranging it.
+    /// - In order to form targetWords[2] = "acti", we use startWords[1] = 
+    /// "act", append 'i' to it, and rearrange "acti" to "acti" itself.
+    ///
+    /// Example 2:
+    /// Input: startWords = ["ab","a"], targetWords = ["abc","abcd"]
+    /// Output: 1
+    /// Explanation:
+    /// - In order to form targetWords[0] = "abc", we use startWords[0] = 
+    ///   "ab", add 'c' to it, and rearrange it to "abc".
+    /// - There is no string in startWords that can be used to obtain 
+    ///   targetWords[1] = "abcd".
+    ///
+    /// Constraints:
+    /// 1. 1 <= startWords.length, targetWords.length <= 5 * 10^4
+    /// 2. 1 <= startWords[i].length, targetWords[j].length <= 26
+    /// 3. Each string of startWords and targetWords consists of lowercase 
+    ///    English letters only. 
+    /// 4. No letter occurs more than once in any string of startWords or 
+    ///    targetWords.
+    /// </summary>
+    int wordCount(vector<string>& startWords, vector<string>& targetWords);
+
+    /// <summary>
+    /// Leet Code 2131. Longest Palindrome by Concatenating Two Letter Words
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given an array of strings words. Each element of words 
+    /// consists of two lowercase English letters.
+    ///
+    /// Create the longest possible palindrome by selecting some elements from 
+    /// words and concatenating them in any order. Each element can be 
+    /// selected at most once.
+    ///
+    /// Return the length of the longest palindrome that you can create. If 
+    /// it is impossible to create any palindrome, return 0.
+    ///
+    /// A palindrome is a string that reads the same forward and backward.
+    /// 
+    /// Example 1:
+    /// Input: words = ["lc","cl","gg"]
+    /// Output: 6
+    /// Explanation: One longest palindrome is "lc" + "gg" + "cl" = "lcggcl", 
+    /// of length 6.
+    /// Note that "clgglc" is another longest palindrome that can be created.
+    ///
+    /// Example 2:
+    /// Input: words = ["ab","ty","yt","lc","cl","ab"]
+    /// Output: 8
+    /// Explanation: One longest palindrome is "ty" + "lc" + "cl" + "yt" = 
+    /// "tylcclyt", of length 8.
+    /// Note that "lcyttycl" is another longest palindrome that can be created.
+    ///
+    /// Example 3:
+    /// Input: words = ["cc","ll","xx"]
+    /// Output: 2
+    /// Explanation: One longest palindrome is "cc", of length 2.
+    /// Note that "ll" is another longest palindrome that can be created, 
+    /// and so is "xx".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= words.length <= 10^5
+    /// 2. words[i].length == 2
+    /// 3. words[i] consists of lowercase English letters.
+    /// </summary>
+    int longestPalindrome(vector<string>& words);
 #pragma endregion
 };
 

@@ -4280,8 +4280,29 @@ void TestLeetCode2119(void)
     Logger::WriteMessage("num = " + to_string(num) + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2139(void)
+{
+    Logger::WriteMessage("Test Leet Code 2139");
+    LeetCodeMath leetCode;
+    int target = 5;
+    int maxDoubles = 0;
+    int result = leetCode.minMoves(target, maxDoubles);
+    Logger::WriteMessage("target = " + to_string(target) + "; target = " + to_string(target) + "; result = " + to_string(result));
+
+    target = 19;
+    maxDoubles = 2;
+    result = leetCode.minMoves(target, maxDoubles);
+    Logger::WriteMessage("target = " + to_string(target) + "; target = " + to_string(target) + "; result = " + to_string(result));
+
+    target = 10;
+    maxDoubles = 4;
+    result = leetCode.minMoves(target, maxDoubles);
+    Logger::WriteMessage("target = " + to_string(target) + "; target = " + to_string(target) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2139();
     TestLeetCode2119();
     TestLeetCode2117();
     TestLeetCode2048();

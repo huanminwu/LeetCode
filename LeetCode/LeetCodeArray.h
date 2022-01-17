@@ -12311,6 +12311,225 @@ public:
     /// </summary>
     vector<long long> getDistances(vector<int>& arr);
 
+    /// <summary>
+    /// Leet Code 2132. Stamping the Grid
+    ///                                                                 
+    /// Hard
+    ///
+    /// You are given an m x n binary matrix grid where each cell is either 0 
+    /// (empty) or 1 (occupied).
+    ///
+    /// You are then given stamps of size stampHeight x stampWidth. We want to 
+    /// fit the stamps such that they follow the given restrictions and 
+    /// requirements:
+    ///
+    /// Cover all the empty cells.
+    /// Do not cover any of the occupied cells.
+    /// We can put as many stamps as we want.
+    /// Stamps can overlap with each other.
+    /// Stamps are not allowed to be rotated.
+    /// Stamps must stay completely inside the grid.
+    /// Return true if it is possible to fit the stamps while following the 
+    /// given restrictions and requirements. Otherwise, return false.
+    /// 
+    /// Example 1:
+    /// Input: grid = [[1,0,0,0],[1,0,0,0],[1,0,0,0],[1,0,0,0],[1,0,0,0]], 
+    /// stampHeight = 4, stampWidth = 3
+    /// Output: true
+    /// Explanation: We have two overlapping stamps (labeled 1 and 2 in the 
+    /// image) that are able to cover all the empty cells.
+    ///
+    /// Example 2:
+    /// Input: grid = [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]], 
+    /// stampHeight = 2, stampWidth = 2 
+    /// Output: false 
+    /// Explanation: There is no way to fit the stamps onto all the empty 
+    /// cells without the stamps going outside the grid.
+    ///
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[r].length
+    /// 3. 1 <= m, n <= 10^5
+    /// 4. 1 <= m * n <= 2 * 10^5
+    /// 5. grid[r][c] is either 0 or 1.
+    /// 6. 1 <= stampHeight, stampWidth <= 105
+    /// </summary>
+    bool possibleToStamp(vector<vector<int>>& grid, int stampHeight, int stampWidth);
+
+    /// <summary>
+    /// Leet Code 2133. Check if Every Row and Column Contains All Numbers
+    ///                                                                 
+    /// Easy
+    ///
+    /// An n x n matrix is valid if every row and every column contains all 
+    /// the integers from 1 to n (inclusive).
+    ///
+    /// Given an n x n integer matrix matrix, return true if the matrix is 
+    /// valid. Otherwise, return false.
+    /// 
+    /// Example 1:
+    /// Input: matrix = [[1,2,3],[3,1,2],[2,3,1]]
+    /// Output: true
+    /// Explanation: In this case, n = 3, and every row and column contains 
+    /// the numbers 1, 2, and 3.
+    /// Hence, we return true.
+    ///
+    /// Example 2:
+    /// Input: matrix = [[1,1,1],[1,2,3],[1,2,3]]
+    /// Output: false
+    /// Explanation: In this case, n = 3, but the first row and the first 
+    /// column do not contain the numbers 2 or 3.
+    /// Hence, we return false.
+    /// 
+    /// Constraints:
+    /// 1. n == matrix.length == matrix[i].length
+    /// 2. 1 <= n <= 100
+    /// 3. 1 <= matrix[i][j] <= n
+    /// </summary>
+    bool checkValid(vector<vector<int>>& matrix);
+
+    /// <summary>
+    /// Leet Code 2128. Remove All Ones With Row and Column Flips
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given an m x n binary matrix grid.
+    /// In one operation, you can choose any row or column and flip each value 
+    /// in that row or column (i.e., changing all 0's to 1's, and all 
+    /// 1's to 0's).
+    ///
+    /// Return true if it is possible to remove all 1's from grid using any 
+    /// number of operations or false otherwise.
+    /// 
+    /// Example 1:
+    /// Input: grid = [[0,1,0],[1,0,1],[0,1,0]]
+    /// Output: true
+    /// Explanation: One possible way to remove all 1's from grid is to:
+    /// - Flip the middle row
+    /// - Flip the middle column
+    ///
+    /// Example 2:
+    /// Input: grid = [[1,1,0],[0,0,0],[0,0,0]]
+    /// Output: false
+    /// Explanation: It is impossible to remove all 1's from grid.
+    ///
+    /// Example 3:
+    /// Input: grid = [[0]]
+    /// Output: true
+    /// Explanation: There are no 1's in grid.
+    ///
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2.  n == grid[i].length
+    /// 3. 1 <= m, n <= 300
+    /// 4. grid[i][j] is either 0 or 1.
+    /// </summary>
+    bool removeOnes(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 2125. Number of Laser Beams in a Bank
+    ///                                                                 
+    /// Medium
+    ///
+    /// Anti-theft security devices are activated inside a bank. You are given 
+    /// a 0-indexed binary string array bank representing the floor plan of 
+    /// the bank, which is an m x n 2D matrix. bank[i] represents the ith row, 
+    /// consisting of '0's and '1's. '0' means the cell is empty, while'1' 
+    /// means the cell has a security device.
+    ///
+    /// There is one laser beam between any two security devices if both 
+    /// conditions are met:
+    ///
+    /// The two devices are located on two different rows: r1 and r2, where 
+    /// r1 < r2.
+    /// For each row i where r1 < i < r2, there are no security devices in 
+    /// the ith row.
+    /// Laser beams are independent, i.e., one beam does not interfere nor 
+    /// join with another.
+    ///
+    /// Return the total number of laser beams in the bank.
+    /// 
+    /// Example 1:
+    /// Input: bank = ["011001","000000","010100","001000"]
+    /// Output: 8
+    /// Explanation: Between each of the following device pairs, there is one 
+    /// beam. In total, there are 8 beams:
+    /// * bank[0][1] -- bank[2][1]
+    /// * bank[0][1] -- bank[2][3]
+    /// * bank[0][2] -- bank[2][1]
+    /// * bank[0][2] -- bank[2][3]
+    /// * bank[0][5] -- bank[2][1]
+    /// * bank[0][5] -- bank[2][3]
+    /// * bank[2][1] -- bank[3][2]
+    /// * bank[2][3] -- bank[3][2]
+    /// Note that there is no beam between any device on the 0th row with any 
+    /// on the 3rd row.
+    /// This is because the 2nd row contains security devices, which breaks 
+    /// the second condition.
+    ///
+    /// Example 2:
+    ///
+    /// Input: bank = ["000","111","000"]
+    /// Output: 0
+    /// Explanation: There does not exist two devices located on two different
+    /// rows.
+    /// 
+    /// Constraints:
+    /// 1. m == bank.length
+    /// 2. n == bank[i].length
+    /// 3. 1 <= m, n <= 500
+    /// 4. bank[i][j] is either '0' or '1'.
+    /// </summary>
+    int numberOfBeams(vector<string>& bank);
+
+    /// <summary>
+    /// Leet Code 2134. Minimum Swaps to Group All 1's Together II
+    ///                                                                 
+    /// Medium
+    ///
+    /// A swap is defined as taking two distinct positions in an array and 
+    /// swapping the values in them.
+    ///
+    /// A circular array is defined as an array where we consider the first 
+    /// element and the last element to be adjacent.
+    ///
+    /// Given a binary circular array nums, return the minimum number of 
+    /// swaps required to group all 1's present in the array together at 
+    /// any location.
+    /// 
+    /// Example 1:
+    /// Input: nums = [0,1,0,1,1,0,0]
+    /// Output: 1
+    /// Explanation: Here are a few of the ways to group all the 1's together:
+    /// [0,0,1,1,1,0,0] using 1 swap.
+    /// [0,1,1,1,0,0,0] using 1 swap.
+    /// [1,1,0,0,0,0,1] using 2 swaps (using the circular property of the 
+    /// array).
+    /// There is no way to group all 1's together with 0 swaps.
+    /// Thus, the minimum number of swaps required is 1.
+    ///
+    /// Example 2:
+    /// Input: nums = [0,1,1,1,0,0,1,1,0]
+    /// Output: 2
+    /// Explanation: Here are a few of the ways to group all the 1's together:
+    /// [1,1,1,0,0,0,0,1,1] using 2 swaps (using the circular property of the 
+    /// array).
+    /// [1,1,1,1,1,0,0,0,0] using 2 swaps.
+    /// There is no way to group all 1's together with 0 or 1 swaps.
+    /// Thus, the minimum number of swaps required is 2.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,1,0,0,1]
+    /// Output: 0
+    /// Explanation: All the 1's are already grouped together due to the 
+    /// circular property of the array.
+    /// Thus, the minimum number of swaps required is 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. nums[i] is either 0 or 1.
+    /// </summary>
+    int minSwapsII(vector<int>& nums);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

@@ -2894,8 +2894,24 @@ void TestLeetCode1049(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2140(void)
+{
+    Logger::WriteMessage("Test Leet Code 2140");
+    LeetCodeDP leetCode;
+    vector<vector<int>> questions = { {3, 2},{4, 3},{4, 4},{2, 5} };
+    long long result = leetCode.mostPoints(questions);
+    Logger::WriteMessage(questions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    questions = { {1, 1},{2, 2},{3, 3},{4, 4},{5, 5} };
+    result = leetCode.mostPoints(questions);
+    Logger::WriteMessage(questions);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2140();
     TestLeetCode1049();
     TestLeetCode416();
     TestLeetCode2044();

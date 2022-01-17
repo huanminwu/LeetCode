@@ -6808,8 +6808,110 @@ void TestLeetCode2121(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2132(void)
+{
+    Logger::WriteMessage("Test Leet Code 2132");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = 
+    {
+        {1, 0, 0, 0},{1, 0, 0, 0},{1, 0, 0, 0},{1, 0, 0, 0},{1, 0, 0, 0} 
+    };
+    int stampHeight = 4;
+    int stampWidth = 3;
+    bool result = leetCode.possibleToStamp(grid, stampHeight, stampWidth);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("stampHeight = " + to_string(stampHeight) + "; stampWidth = " + to_string(stampWidth) + 
+        "; result = " + (string)(result ? "true" :"false"));
+
+    grid =
+    {
+        {1, 0, 0, 0},{0, 1, 0, 0},{0, 0, 1, 0},{0, 0, 0, 1}
+    };
+    stampHeight = 2;
+    stampWidth = 2;
+    result = leetCode.possibleToStamp(grid, stampHeight, stampWidth);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("stampHeight = " + to_string(stampHeight) + "; stampWidth = " + to_string(stampWidth) +
+        "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2133(void)
+{
+    Logger::WriteMessage("Test Leet Code 2133");
+    LeetCodeArray leetCode;
+    vector<vector<int>> matrix = { {1, 2, 3},{3, 1, 2},{2, 3, 1} };
+    bool result = leetCode.checkValid(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    matrix = { {1, 1, 1},{1, 2, 3},{1, 2, 3} };
+    result = leetCode.checkValid(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2128(void)
+{
+    Logger::WriteMessage("Test Leet Code 2128");
+    LeetCodeArray leetCode; 
+    vector<vector<int>> grid = { {0, 1, 0},{1, 0, 1},{0, 1, 0} };
+    bool result = leetCode.removeOnes(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    grid = { {1, 1, 0},{0, 0, 0},{0, 0, 0} };
+    result = leetCode.removeOnes(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+    
+    grid = { {0} };
+    result = leetCode.removeOnes(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2125(void)
+{
+    Logger::WriteMessage("Test Leet Code 2125");
+    LeetCodeArray leetCode;
+    vector<string> bank = { "011001", "000000", "010100", "001000" };
+    int result = leetCode.numberOfBeams(bank);
+    Logger::WriteMessage(bank);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    bank = { "000","111","000" };
+    result = leetCode.numberOfBeams(bank);
+    Logger::WriteMessage(bank);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2134(void)
+{
+    Logger::WriteMessage("Test Leet Code 2134");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 0, 1, 0, 1, 1, 0, 0 };
+    int result = leetCode.minSwapsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,1,1,1,0,0,1,1,0 };
+    result = leetCode.minSwapsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,0,0,1 };
+    result = leetCode.minSwapsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2134();
+    TestLeetCode2125();
+    TestLeetCode2128();
+    TestLeetCode2133();
+    TestLeetCode2132();
     TestLeetCode2121();
     TestLeetCode2122();
     TestLeetCode2120();
