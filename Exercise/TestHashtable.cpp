@@ -1365,8 +1365,24 @@ void TestLeetCode1915(void)
     Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
 }
 
+void TestLeetCode2150(void)
+{
+    Logger::WriteMessage("Test Leet Code 2150");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 10, 6, 5, 8 };
+    vector<int> result = leetCode.findLonely(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,3,5,3 };
+    result = leetCode.findLonely(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode2150();
     TestLeetCode1915();
     TestLeetCode242();
     TestLeetCode205();

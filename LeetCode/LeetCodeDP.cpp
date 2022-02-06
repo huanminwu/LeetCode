@@ -12967,5 +12967,107 @@ long long LeetCodeDP::mostPoints(vector<vector<int>>& questions)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2143. Choose Numbers From Two Arrays in Range
+///                                                                 
+/// Hard
+///
+/// You are given two 0-indexed integer arrays nums1 and nums2 of length n.
+///
+/// A range [l, r] (inclusive) where 0 <= l <= r < n is balanced if:
+///
+/// For every i in the range [l, r], you pick either nums1[i] or nums2[i].
+/// The sum of the numbers you pick from nums1 equals to the sum of the 
+/// numbers you pick from nums2 (the sum is considered to be 0 if you pick 
+/// no numbers from an array).
+/// Two balanced ranges from [l1, r1] and [l2, r2] are considered to be 
+/// different if at least one of the following is true:
+///
+/// l1 != l2
+/// r1 != r2
+/// nums1[i] is picked in the first range, and nums2[i] is picked in the 
+/// second range or vice versa for at least one i.
+/// Return the number of different ranges that are balanced. Since the 
+/// answer may be very large, return it modulo 109 + 7.
+/// 
+/// Example 1:
+///
+/// Input: nums1 = [1,2,5], nums2 = [2,6,3]
+/// Output: 3
+/// Explanation: The balanced ranges are:
+/// - [0, 1] where we choose nums2[0], and nums1[1].
+/// The sum of the numbers chosen from nums1 equals the sum of the 
+/// numbers chosen from nums2: 2 = 2.
+/// - [0, 2] where we choose nums1[0], nums2[1], and nums1[2].
+/// The sum of the numbers chosen from nums1 equals the sum of the numbers 
+/// chosen from nums2: 1 + 5 = 6.
+/// - [0, 2] where we choose nums1[0], nums1[1], and nums2[2].
+/// The sum of the numbers chosen from nums1 equals the sum of the numbers 
+/// chosen from nums2: 1 + 2 = 3.
+/// Note that the second and third balanced ranges are different.
+/// In the second balanced range, we choose nums2[1] and in the third 
+/// balanced range, we choose nums1[1].
+///
+/// Example 2:
+/// Input: nums1 = [0,1], nums2 = [1,0]
+/// Output: 4
+/// Explanation: The balanced ranges are:
+/// - [0, 0] where we choose nums1[0].
+/// The sum of the numbers chosen from nums1 equals the sum of the numbers 
+/// chosen from nums2: 0 = 0.
+/// - [1, 1] where we choose nums2[1].
+/// The sum of the numbers chosen from nums1 equals the sum of the numbers
+/// chosen from nums2: 0 = 0.
+/// - [0, 1] where we choose nums1[0] and nums2[1].
+/// The sum of the numbers chosen from nums1 equals the sum of the numbers 
+/// chosen from nums2: 0 = 0.
+/// - [0, 1] where we choose nums2[0] and nums1[1].
+/// The sum of the numbers chosen from nums1 equals the sum of the numbers 
+/// chosen from nums2: 1 = 1.
+///
+/// Constraints:
+/// 1. n == nums1.length == nums2.length
+/// 2. 1 <= n <= 100
+/// 3. 0 <= nums1[i], nums2[i] <= 100
+/// </summary>
+int LeetCodeDP::countSubranges(vector<int>& nums1, vector<int>& nums2)
+{
+    int M = 1000000007;
+    unordered_map<int, int> prev;
+    int n = nums1.size();
+    int result = 0;
+    int sum1 = 0;
+    int sum2 = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum1 += nums1[i];
+        sum2 += nums2[i];
+    }
+    for (int i = 0; i < n; i++)
+    {
+        sum1 -= nums1[i];
+        sum2 -= nums2[i];
+        unordered_map<int, int> curr;
+        for (auto& itr : prev)
+        {
+            int value = nums1[i] + itr.first;
+            if (value <= sum2)
+            {
+                curr[value] = (curr[value] + itr.second) % M;
+            }
+            value = -nums2[i] + itr.first;
+            if (value >= 0 - sum1)
+            {
+                curr[value] = (curr[value] + itr.second) % M;
+            }
+        }
+        curr[nums1[i]] = (curr[nums1[i]] + 1) % M;
+        curr[-nums2[i]] = (curr[-nums2[i]] + 1) % M;
+        result = (result + curr[0]) % M;
+        prev = curr;
+    }
+    return result;
+}
 #pragma endregion
 

@@ -2690,8 +2690,51 @@ void TestLeetCode2126(void)
     Logger::WriteMessage("mass = " + to_string(mass) + "; result = " + (string)(result ? "true" :"false"));
 }
 
+void TestLeetCode2144(void)
+{
+    Logger::WriteMessage("Test Leet Code 2144");
+    LeetCodeSort leetCode;
+    vector<int> cost = { 1, 2, 3 };
+    int result = leetCode.minimumCost(cost);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    cost = { 6,5,7,9,2,2 };
+    result = leetCode.minimumCost(cost);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    cost = { 5,5 };
+    result = leetCode.minimumCost(cost);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2148(void)
+{
+    Logger::WriteMessage("Test Leet Code 2148");
+
+    LeetCodeSort leetCode;
+    vector<int> nums = { 11,7,2,15 };
+    int result = leetCode.countElements(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -3,3,3,90 };
+    result = leetCode.countElements(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,2,2 };
+    result = leetCode.countElements(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2148();
+    TestLeetCode2144();
     TestLeetCode2126();
     TestLeetCode2136();
     TestLeetCode977();

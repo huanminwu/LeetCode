@@ -4214,8 +4214,56 @@ void TestLeetCode2127(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2146(void)
+{
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid = 
+    {
+        {1, 2, 0, 1},{1, 3, 0, 1},{0, 2, 5, 1} 
+    };
+    vector<int> pricing = { 2, 5 };
+    vector<int> start = { 0, 0 };
+    int k = 3;
+    vector<vector<int>> result = leetCode.highestRankedKItems(grid, pricing, start, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(pricing);
+    Logger::WriteMessage(start);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    grid =
+    {
+        {1, 2, 0, 1},{1, 3, 3, 1},{0, 2, 5, 1}
+    };
+    pricing = { 2, 3 };
+    start = { 2, 3 };
+    k = 2;
+    result = leetCode.highestRankedKItems(grid, pricing, start, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(pricing);
+    Logger::WriteMessage(start);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    grid =
+    {
+        {1, 1, 1},{0, 0, 1},{2, 3, 4}
+    };
+    pricing = { 2, 3 };
+    start = { 0, 0 };
+    k = 3;
+    result = leetCode.highestRankedKItems(grid, pricing, start, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(pricing);
+    Logger::WriteMessage(start);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2146();
     TestLeetCode2127();
     TestLeetCode2123();
     TestLeetCode305();

@@ -5051,8 +5051,48 @@ void TestLeetCode2131(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2157(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2157");
+    vector<string> words = { "a", "b", "ab", "cde" };
+    vector<int> result = leetCode.groupStringsII(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+
+    words = { "a","ab","abc" };
+    result = leetCode.groupStringsII(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2156(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2156");
+    string s = "leetcode";
+    int power = 7;
+    int modulo = 20;
+    int k = 2;
+    int hashValue = 0;
+    string result = leetCode.subStrHash(s, power, modulo, k, hashValue);
+    Logger::WriteMessage("s = " + s + "; power = " + to_string(power) + "; modulo = " + to_string(modulo));
+    Logger::WriteMessage("k = " + to_string(k) + "; hashValue = " + to_string(hashValue) + "; result = " + result);
+
+    s = "fbxzaad";
+    power = 31;
+    modulo = 100;
+    k = 3;
+    hashValue = 32;
+    result = leetCode.subStrHash(s, power, modulo, k, hashValue);
+    Logger::WriteMessage("s = " + s + "; power = " + to_string(power) + "; modulo = " + to_string(modulo));
+    Logger::WriteMessage("k = " + to_string(k) + "; hashValue = " + to_string(hashValue) + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2156();
+    TestLeetCode2157();
     TestLeetCode2131();
     TestLeetCode2135();
     TestLeetCode2138();

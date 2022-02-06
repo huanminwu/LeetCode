@@ -4300,8 +4300,69 @@ void TestLeetCode2139(void)
     Logger::WriteMessage("target = " + to_string(target) + "; target = " + to_string(target) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2153(void)
+{
+    Logger::WriteMessage("Test Leet Code 2153");
+    LeetCodeMath leetCode;
+    int target = 5;
+    int maxDoubles = 0;
+    int result = leetCode.minMoves(target, maxDoubles);
+    Logger::WriteMessage("target = " + to_string(target) + "; target = " + to_string(target) + "; result = " + to_string(result));
+
+    target = 19;
+    maxDoubles = 2;
+    result = leetCode.minMoves(target, maxDoubles);
+    Logger::WriteMessage("target = " + to_string(target) + "; target = " + to_string(target) + "; result = " + to_string(result));
+
+    target = 10;
+    maxDoubles = 4;
+    result = leetCode.minMoves(target, maxDoubles);
+    Logger::WriteMessage("target = " + to_string(target) + "; target = " + to_string(target) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2152(void)
+{
+    Logger::WriteMessage("Test Leet Code 2152");
+    LeetCodeMath leetCode;
+    vector<vector<int>> points = { {0, 1},{2, 3},{4, 5},{4, 3} };
+    int result = leetCode.minimumLines(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {0, 2},{-2, -2},{1, 4} };
+    result = leetCode.minimumLines(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2145(void)
+{
+    Logger::WriteMessage("Test Leet Code 2145");
+    LeetCodeMath leetCode;
+    vector<int> differences = { 1, -3, 4 };
+    int lower = 1, upper = 6;
+    int result = leetCode.numberOfArrays(differences, lower, upper);
+    Logger::WriteMessage(differences);
+    Logger::WriteMessage("lower = " + to_string(lower) + "; upper = " + to_string(upper) + "; result = " + to_string(result));
+
+    differences = { 3,-4,5,1,-2 };
+    lower = -4, upper = 5;
+    result = leetCode.numberOfArrays(differences, lower, upper);
+    Logger::WriteMessage(differences);
+    Logger::WriteMessage("lower = " + to_string(lower) + "; upper = " + to_string(upper) + "; result = " + to_string(result));
+
+    differences = { 4,-7,2 };
+    lower = 3, upper = 6;
+    result = leetCode.numberOfArrays(differences, lower, upper);
+    Logger::WriteMessage(differences);
+    Logger::WriteMessage("lower = " + to_string(lower) + "; upper = " + to_string(upper) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2145();
+    TestLeetCode2152();
+    TestLeetCode2153();
     TestLeetCode2139();
     TestLeetCode2119();
     TestLeetCode2117();

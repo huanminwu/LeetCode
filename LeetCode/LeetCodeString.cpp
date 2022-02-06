@@ -2453,7 +2453,7 @@ int LeetCodeString::lengthOfLongestSubstringKDistinct(string s, int k)
     for (int end = 0; end < (int)s.size(); end++)
     {
         char_count[s[end]]++;
-        while (char_count.size() > k)
+        while ((int)char_count.size() > k)
         {
             begin++;
             char_count[s[begin]]--;
@@ -17200,7 +17200,7 @@ string LeetCodeString::addSpaces(string s, vector<int>& spaces)
     int index = 0;
     for (size_t i = 0; i < s.size(); i++)
     {
-        if (index < spaces.size() && i == spaces[index])
+        if (index < (int)spaces.size() && i == spaces[index])
         {
             result.push_back(' ');
             index++;
@@ -17671,7 +17671,7 @@ vector<string> LeetCodeString::divideString(string s, int k, char fill)
     {
         result[i / k].push_back(s[i]);
     }
-    while (result.back().size() < k) result.back().push_back(fill);
+    while ((int)result.back().size() < k) result.back().push_back(fill);
     return result;
 }
 
@@ -17841,4 +17841,205 @@ int LeetCodeString::longestPalindrome(vector<string>& words)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2157. Groups of Strings
+///                                                                 
+/// Hard
+///
+/// You are given a 0-indexed array of strings words. Each string consists 
+/// of lowercase English letters only. No letter occurs more than once in 
+/// any string of words.
+///
+/// Two strings s1 and s2 are said to be connected if the set of letters 
+/// of s2 can be obtained from the set of letters of s1 by any one of the 
+/// following operations:
+///
+/// Adding exactly one letter to the set of the letters of s1.
+/// Deleting exactly one letter from the set of the letters of s1.
+/// Replacing exactly one letter from the set of the letters of s1 with 
+/// any letter, including itself.
+/// The array words can be divided into one or more non-intersecting 
+/// groups. A string belongs to a group if any one of the following is 
+/// true:
+///
+/// It is connected to at least one other string of the group.
+/// It is the only string present in the group.
+/// Note that the strings in words should be grouped in such a manner 
+/// that a string belonging to a group cannot be connected to a string 
+/// present in any other group. It can be proved that such an arrangement 
+/// is always unique.
+///
+/// Return an array ans of size 2 where:
+/// ans[0] is the total number of groups words can be divided into, and
+/// ans[1] is the size of the largest group.
+///
+/// Example 1:
+/// Input: words = ["a","b","ab","cde"]
+/// Output: [2,3]
+/// Explanation:
+/// - words[0] can be used to obtain words[1] (by replacing 'a' with 'b'), 
+///   and words[2] (by adding 'b'). So words[0] is connected to words[1] 
+///   and words[2].
+/// - words[1] can be used to obtain words[0] (by replacing 'b' with 'a'), 
+///   and words[2] (by adding 'a'). So words[1] is connected to words[0] 
+///   and words[2].
+/// - words[2] can be used to obtain words[0] (by deleting 'b'), and 
+///   words[1] (by deleting 'a'). So words[2] is connected to words[0] and 
+///   words[1].
+/// - words[3] is not connected to any string in words.
+/// Thus, words can be divided into 2 groups ["a","b","ab"] and ["cde"]. 
+/// The size of the largest group is 3.  
+///
+/// Example 2:
+/// Input: words = ["a","ab","abc"]
+/// Output: [1,3]
+/// Explanation:
+/// - words[0] is connected to words[1].
+/// - words[1] is connected to words[0] and words[2].
+/// - words[2] is connected to words[1].
+/// Since all strings are connected to each other, they should be grouped 
+/// together.
+/// Thus, the size of the largest group is 3.
+/// 
+/// Constraints:
+/// 1. 1 <= words.length <= 2 * 10^4
+/// 2. 1 <= words[i].length <= 26
+/// 3. words[i] consists of lowercase English letters only.
+/// 4. No letter occurs more than once in words[i].
+/// </summary>
+vector<int> LeetCodeString::groupStringsII(vector<string>& words)
+{
+    vector<int> bit_masks(words.size());
+    unordered_map<int, vector<int>> word_map; 
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        int bitmask = 0;
+        for (size_t j = 0; j < words[i].size(); j++)
+        {
+            bitmask |= (1 << (words[i][j] - 'a'));
+        }
+        word_map[bitmask].push_back(i);
+        bit_masks[i] = bitmask;
+    }
+    vector<int> result(2);
+    int group_size = 0;
+    for (size_t i = 0; i < bit_masks.size(); i++)
+    {
+        if (word_map.count(bit_masks[i]) != 0)
+        {
+            result[0]++;
+            group_size = 0;
+            queue<int> queue;
+            queue.push(i);
+            int bitmask = bit_masks[i];
+            group_size += word_map[bitmask].size();
+            word_map.erase(bitmask);
+
+            while (!queue.empty())
+            {
+                int index = queue.front();
+                queue.pop();
+                int bitmask = bit_masks[index];
+                // flip 1 bit
+                for (int j = 0; j < 26; j++)
+                {
+                    int new_mask = bitmask ^ (1 << j);
+                    if (word_map.count(new_mask) == 0) continue;
+                    queue.push(word_map[new_mask][0]);
+                    group_size += word_map[new_mask].size();
+                    word_map.erase(new_mask);
+                }
+                // flip 2 bit
+                for (int j = 0; j < 26; j++)
+                {
+                    for (int k = j + 1; k < 26; k++)
+                    {
+                        if (((bitmask >> j) & 1) != ((bitmask >> k) & 1))
+                        {
+                            int new_mask = bitmask ^ (1 << j) ^ (1 << k);
+                            if (word_map.count(new_mask) == 0) continue;
+                            queue.push(word_map[new_mask][0]);
+                            group_size += word_map[new_mask].size();
+                            word_map.erase(new_mask);
+                        }
+                    }
+                }
+            }
+            result[1] = max(result[1], group_size);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2156. Find Substring With Given Hash Value
+///                                                                 
+/// Medium
+///
+/// The hash of a 0-indexed string s of length k, given integers p and m, 
+/// is computed using the following function:
+///
+/// hash(s, p, m) = (val(s[0]) * p0 + val(s[1]) * p^1 + ... + val(s[k-1]) * 
+/// p^k-1) mod m.
+/// Where val(s[i]) represents the index of s[i] in the alphabet from 
+/// val('a') = 1 to val('z') = 26. 
+/// 
+/// You are given a string s and the integers power, modulo, k, and 
+/// hashValue. Return sub, the first substring of s of length k such that 
+/// hash(sub, power, modulo) == hashValue.
+///
+/// The test cases will be generated such that an answer always exists.
+/// A substring is a contiguous non-empty sequence of characters within a 
+/// string.
+///
+/// Example 1:
+/// Input: s = "leetcode", power = 7, modulo = 20, k = 2, hashValue = 0
+/// Output: "ee"
+/// Explanation: The hash of "ee" can be computed to be 
+/// hash("ee", 7, 20) = (5 * 1 + 5 * 7) mod 20 = 40 mod 20 = 0. 
+/// "ee" is the first substring of length 2 with hashValue 0. Hence, we 
+/// return "ee".
+///
+/// Example 2:
+/// Input: s = "fbxzaad", power = 31, modulo = 100, k = 3, hashValue = 32
+/// Output: "fbx"
+/// Explanation: The hash of "fbx" can be computed to be 
+/// hash("fbx", 31, 100) = (6 * 1 + 2 * 31 + 24 * 312) mod 100 = 23132 
+/// mod 100 = 32. 
+/// The hash of "bxz" can be computed to be hash("bxz", 31, 100) = 
+/// (2 * 1 + 24 * 31 + 26 * 312) mod 100 = 25732 mod 100 = 32. 
+/// "fbx" is the first substring of length 3 with hashValue 32. Hence, we 
+/// return "fbx".
+/// Note that "bxz" also has a hash of 32 but it appears later than "fbx".
+/// 
+/// Constraints:
+/// 1. 1 <= k <= s.length <= 2 * 10^4
+/// 2. 1 <= power, modulo <= 10^9
+/// 3. 0 <= hashValue < modulo
+/// 4. s consists of lowercase English letters only.
+/// 5. The test cases are generated such that an answer always exists.
+/// </summary>
+string LeetCodeString::subStrHash(string s, int power, int modulo, int k, int hashValue)
+{
+    long long value = 0;
+    long long power_accu = 1;
+    for (size_t i = s.size() - k; i < s.size(); i++)
+    {
+        if (i > s.size() - k)
+        {
+            power_accu = power_accu * (long long)power % (long long)modulo;
+        }
+        value = (value + ((long long)s[i] - (long long)'a' + (long long)1) * power_accu % (long long)modulo) % modulo;
+    }
+    string result;
+    if (value == (long long)hashValue) result = s.substr(s.size() - k);
+    for (int i = (int)s.size() - k - 1; i >= 0; i--)
+    {
+        value = ((value - ((long long)s[i + k] - (long long)'a' + (long long)1) * power_accu % (long long)modulo) + modulo) % modulo;
+        value = (value * (long long)power) % (long long)modulo;
+        value = (value + ((long long)s[i] - (long long)'a' + (long long)1)) % (long long)modulo;
+        if (value == (long long)hashValue) result = s.substr(i, k);
+    }
+    return result;
+}
 #pragma endregion

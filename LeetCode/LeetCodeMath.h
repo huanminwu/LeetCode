@@ -7779,5 +7779,98 @@ public:
     /// 2. 0 <= maxDoubles <= 100
     /// </summary>
     int minMoves(int target, int maxDoubles);
+
+    /// <summary>
+    /// Leet Code 2152. Minimum Number of Lines to Cover Points
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given an array points where points[i] = [xi, yi] represents 
+    /// a point on an X-Y plane.
+    ///
+    /// Straight lines are going to be added to the X-Y plane, such that every 
+    /// point is covered by at least one line.
+    ///
+    /// Return the minimum number of straight lines needed to cover all the 
+    /// points.
+    /// 
+    /// Example 1:
+    /// Input: points = [[0,1],[2,3],[4,5],[4,3]]
+    /// Output: 2
+    /// Explanation: The minimum number of straight lines needed is two. One 
+    /// possible solution is to add:
+    /// - One line connecting the point at (0, 1) to the point at (4, 5).
+    /// - Another line connecting the point at (2, 3) to the point at (4, 3).
+    ///
+    /// Example 2:
+    /// Input: points = [[0,2],[-2,-2],[1,4]]
+    /// Output: 1
+    /// Explanation: The minimum number of straight lines needed is one. The 
+    /// only solution is to add:
+    /// - One line connecting the point at (-2, -2) to the point at (1, 4).
+    /// 
+    /// Constraints:
+    /// 1. 1 <= points.length <= 10
+    /// 2. points[i].length == 2
+    /// 3. -100 <= xi, yi <= 100
+    /// 4. All the points are unique.
+    /// </summary>
+    int minimumLines(vector<vector<int>>& points);
+
+    /// <summary>
+    /// Leet Code 2145. Count the Hidden Sequences
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given a 0-indexed array of n integers differences, which 
+    /// describes the differences between each pair of consecutive integers 
+    /// of a hidden sequence of length (n + 1). More formally, call the 
+    /// hidden sequence hidden, then we have that differences[i] = 
+    /// hidden[i + 1] - hidden[i].
+    ///
+    /// You are further given two integers lower and upper that describe the 
+    /// inclusive range of values [lower, upper] that the hidden sequence can 
+    /// contain.
+    ///
+    /// For example, given differences = [1, -3, 4], lower = 1, upper = 6, the 
+    /// hidden sequence is a sequence of length 4 whose elements are in 
+    /// between 1 and 6 (inclusive).
+    /// [3, 4, 1, 5] and [4, 5, 2, 6] are possible hidden sequences.
+    /// [5, 6, 3, 7] is not possible since it contains an element greater 
+    /// than 6.
+    /// [1, 2, 3, 4] is not possible since the differences are not correct.
+    /// Return the number of possible hidden sequences there are. If there 
+    /// are no possible sequences, return 0.
+    /// 
+    /// Example 1:
+    /// Input: differences = [1,-3,4], lower = 1, upper = 6
+    /// Output: 2
+    /// Explanation: The possible hidden sequences are:
+    /// - [3, 4, 1, 5]
+    /// - [4, 5, 2, 6]
+    /// Thus, we return 2.
+    ///
+    /// Example 2:
+    /// Input: differences = [3,-4,5,1,-2], lower = -4, upper = 5
+    /// Output: 4
+    /// Explanation: The possible hidden sequences are:
+    /// - [-3, 0, -4, 1, 2, 0]
+    /// - [-2, 1, -3, 2, 3, 1]
+    /// - [-1, 2, -2, 3, 4, 2]
+    /// - [0, 3, -1, 4, 5, 3]
+    /// Thus, we return 4.
+    ///
+    /// Example 3:
+    /// Input: differences = [4,-7,2], lower = 3, upper = 6
+    /// Output: 0
+    /// Explanation: There are no possible hidden sequences. Thus, we return 0.
+    ///
+    /// Constraints:
+    /// 1. n == differences.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. -10^5 <= differences[i] <= 10^5
+    /// 4. -10^5 <= lower <= upper <= 10^5
+    /// </summary>
+    int numberOfArrays(vector<int>& differences, int lower, int upper);
 };
 #endif

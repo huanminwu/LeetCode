@@ -2488,38 +2488,38 @@ string LeetCodeGreedy::longestDiverseString(int a, int b, int c)
 int LeetCodeGreedy::minNumberOfFrogs(string croakOfFrogs)
 {
     vector<int> croak_count(5);
-    vector<int> croak_map(26);
+    unordered_map<char, int> croak_map;
     string str = "croak";
     for (size_t i = 0; i < str.size(); i++)
     {
-        croak_map[str[i] - 'a'] = i;
+        croak_map[str[i]] = i;
     }
     int frog_count = 0;
     int result = 0;
     for (size_t i = 0; i < croakOfFrogs.size(); i++)
     {
-        if (croakOfFrogs[i] == 'c')
+        int ord = croak_map[croakOfFrogs[i]];
+        croak_count[ord]++;
+        if (ord == 0)
         {
             frog_count++;
-            croak_count[0]++;
-            result = max(result, frog_count);
+        }
+        else if (croak_count[ord - 1] == 0)
+        {
+            return -1;
         }
         else
         {
-            int ord = croak_map[croakOfFrogs[i] - 'a'];
-            if (croak_count[ord - 1] == 0) return -1;
             croak_count[ord - 1]--;
-            if (croakOfFrogs[i] == 'k')
-            {
-                frog_count--;
-            }
-            else
-            {
-                croak_count[ord]++;
-            }
+        }
+        result = max(result, frog_count);
+        if (ord == 4)
+        {
+            croak_count[ord]--;
+            frog_count--;
         }
     }
-    for (size_t i = 0; i < 5; i++)
+    for (size_t i = 0; i < 4; i++)
     {
         if (croak_count[i] != 0) return -1;
     }

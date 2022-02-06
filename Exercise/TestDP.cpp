@@ -2909,8 +2909,28 @@ void TestLeetCode2140(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2143(void)
+{
+    Logger::WriteMessage("Test Leet Code 2143");
+    LeetCodeDP leetCode;
+    vector<int> nums1 = { 1, 2, 5 };
+    vector<int> nums2 = { 2, 6, 3 };
+    int result = leetCode.countSubranges(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 0, 1 };
+    nums2 = { 1,0 };
+    result = leetCode.countSubranges(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2143();
     TestLeetCode2140();
     TestLeetCode1049();
     TestLeetCode416();

@@ -585,12 +585,32 @@ int LeetCodeGraph::findCelebrity(int n, vector<vector<bool>>& relation_map)
 }
 
 /// <summary>
-/// Leet code #286. Walls and Gates       
+/// Leet code #286. Walls and Gates 
+/// </summary>
+void LeetCodeGraph::wallsAndGatesDFS(vector<vector<int>>& rooms, int row, int col, int distance)
+{
+    if (row < 0 || col < 0 || row >= (int)rooms.size() || col >= (int)rooms[0].size())
+    {
+        return;
+    }
+    if (rooms[row][col] <= distance && distance != 0)
+    {
+        return;
+    }
+    rooms[row][col] = distance;
+    wallsAndGatesDFS(rooms, row - 1, col, distance + 1);
+    wallsAndGatesDFS(rooms, row, col - 1, distance + 1);
+    wallsAndGatesDFS(rooms, row + 1, col, distance + 1);
+    wallsAndGatesDFS(rooms, row, col + 1, distance + 1);
+}
+
+/// <summary>
+/// Leet code #286. Walls and Gates 
 /// 
 /// You are given a m x n 2D grid initialized with these three possible values.  
 /// 1.-1 - A wall or an obstacle.
 /// 2.0 - A gate.
-/// 3.INF - Infinity means an empty room. We use the value 2^31 - 1 = 2147483647 to represent 
+/// 3.INF - Infinity means an empty room. We use the value 231 - 1 = 2147483647 to represent 
 ///   INF as you may assume that the distance to a gate is less than 2147483647.
 /// Fill each empty room with the distance to its nearest gate. If it is impossible to reach a gate, it should be filled with INF.
 /// For example, given the 2D grid:
@@ -604,55 +624,88 @@ int LeetCodeGraph::findCelebrity(int n, vector<vector<bool>>& relation_map)
 ///  1  -1   2  -1
 ///  0  -1   3   4
 /// </summary>
-void LeetCodeGraph::wallsAndGates(vector<vector<int>>& rooms)
+void LeetCodeGraph::wallsAndGatesDFS(vector<vector<int>>& rooms)
 {
-    if ((rooms.size() == 0) || (rooms[0].size() == 0)) return;
-    queue<pair<int, int>> process_queue;
     for (size_t i = 0; i < rooms.size(); i++)
     {
-        for (size_t j = 0; j < rooms[i].size(); j++)
+        for (size_t j = 0; j < rooms[0].size(); j++)
         {
-            if ((rooms[i][j] == 0) || (rooms[i][j] == -1))
+            if (rooms[i][j] == 0)
             {
-                process_queue.push(make_pair(i, j));
+                wallsAndGatesDFS(rooms, i, j, 0);
             }
         }
     }
+}
+
+/// <summary>
+/// Leet Code 286. Walls and Gates
+///                                                                 
+/// Medium
+///
+/// You are given an m x n grid rooms initialized with these three 
+/// possible values.
+///
+/// -1 A wall or an obstacle.
+/// 0 A gate.
+/// INF Infinity means an empty room. We use the value 
+/// 2^31 - 1 = 2147483647 to represent INF as you may assume that the 
+/// distance to a gate is less than 2147483647.
+/// Fill each empty room with the distance to its nearest gate. If it 
+/// is impossible to reach a gate, it should be filled with INF.
+/// 
+/// Example 1:
+/// Input: rooms = [[2147483647,-1,0,2147483647],
+/// [2147483647,2147483647,2147483647,-1], [2147483647,-1,2147483647,-1], 
+/// [0,-1,2147483647,2147483647]]
+/// Output: [[3,-1,0,1],[2,2,1,-1],[1,-1,2,-1],[0,-1,3,4]]
+///
+/// Example 2:
+/// Input: rooms = [[-1]]
+/// Output: [[-1]]
+/// 
+/// Constraints:
+/// 1. m == rooms.length
+/// 2. n == rooms[i].length
+/// 3. 1 <= m, n <= 250
+/// 4. rooms[i][j] is -1, 0, or 2^31 - 1.
+/// </summary>
+void LeetCodeGraph::wallsAndGates(vector<vector<int>>& rooms)
+{
+    int n = rooms.size();
+    int m = rooms[0].size();
+    queue<vector<int>> process_queue;
+    for (int i = 0; i < (int)rooms.size(); i++)
+    {
+        for (int j = 0; j < (int)rooms[i].size(); j++)
+        {
+            if (rooms[i][j] == 0)
+            {
+                process_queue.push({ i, j });
+            }
+        }
+    }
+    vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
     while (!process_queue.empty())
     {
-        pair<int, int> pos = process_queue.front();
+        vector<int> pos = process_queue.front();
         process_queue.pop();
-        if (rooms[pos.first][pos.second] != -1)
+
+        for (size_t d = 0; d < directions.size(); d++)
         {
-            int first, second;
-            first = pos.first - 1;
-            second = pos.second;
-            if ((first >= 0) && (rooms[first][second] == INT_MAX))
+            vector<int> next = pos;
+            next[0] += directions[d][0];
+            next[1] += directions[d][1];
+            if (next[0] < 0 || next[0] >= n || next[1] < 0 || next[1] >= m)
             {
-                rooms[first][second] = rooms[pos.first][pos.second] + 1;
-                process_queue.push(make_pair(first, second));
+                continue;
             }
-            first = pos.first + 1;
-            second = pos.second;
-            if ((first < (int)rooms.size()) && (rooms[first][second] == INT_MAX))
+            if (rooms[next[0]][next[1]] == -1 || rooms[next[0]][next[1]] != INT_MAX)
             {
-                rooms[first][second] = rooms[pos.first][pos.second] + 1;
-                process_queue.push(make_pair(first, second));
+                continue;
             }
-            first = pos.first;
-            second = pos.second - 1;
-            if ((second >= 0) && (rooms[first][second] == INT_MAX))
-            {
-                rooms[first][second] = rooms[pos.first][pos.second] + 1;
-                process_queue.push(make_pair(first, second));
-            }
-            first = pos.first;
-            second = pos.second + 1;
-            if ((second < (int)rooms[first].size()) && (rooms[first][second] == INT_MAX))
-            {
-                rooms[first][second] = rooms[pos.first][pos.second] + 1;
-                process_queue.push(make_pair(first, second));
-            }
+            rooms[next[0]][next[1]] = rooms[pos[0]][pos[1]] + 1;
+            process_queue.push(next);
         }
     }
 }
@@ -13561,6 +13614,162 @@ int LeetCodeGraph::maximumInvitations(vector<int>& favorite)
         }
     }
     return max(loop1, loop2);
+}
+
+/// <summary>
+/// Leet Code 2146. K Highest Ranked Items Within a Price Range
+///                                                                 
+/// Medium
+///
+/// You are given a 0-indexed 2D integer array grid of size m x n that 
+/// represents a map of the items in a shop. The integers in the grid 
+/// represent the following:
+///
+/// 0 represents a wall that you cannot pass through.
+/// 1 represents an empty cell that you can freely move to and from.
+/// All other positive integers represent the price of an item in that 
+/// cell. You may also freely move to and from these item cells.
+/// It takes 1 step to travel between adjacent grid cells.
+///
+/// You are also given integer arrays pricing and start where 
+/// pricing = [low, high] and start = [row, col] indicates that you 
+/// start at the position (row, col) and are interested only in items 
+/// with a price in the range of [low, high] (inclusive). You are further 
+/// given an integer k.
+///
+/// You are interested in the positions of the k highest-ranked items 
+/// whose prices are within the given price range. The rank is determined 
+/// by the first of these criteria that is different:
+///
+/// Distance, defined as the length of the shortest path from the start 
+/// (shorter distance has a higher rank).
+/// Price (lower price has a higher rank, but it must be in the price 
+/// range).
+/// The row number (smaller row number has a higher rank).
+/// The column number (smaller column number has a higher rank).
+/// Return the k highest-ranked items within the price range sorted by 
+/// their rank (highest to lowest). If there are fewer than k reachable 
+/// items within the price range, return all of them.
+/// 
+/// Example 1:
+/// Input: grid = [[1,2,0,1],[1,3,0,1],[0,2,5,1]], pricing = [2,5], 
+/// start = [0,0], k = 3
+/// Output: [[0,1],[1,1],[2,1]]
+/// Explanation: You start at (0,0).
+/// With a price range of [2,5], we can take items from (0,1), (1,1), 
+/// (2,1) and (2,2).
+/// The ranks of these items are:
+/// - (0,1) with distance 1
+/// - (1,1) with distance 2
+/// - (2,1) with distance 3
+/// - (2,2) with distance 4
+/// Thus, the 3 highest ranked items in the price range are (0,1), (1,1), 
+/// and (2,1).
+///
+/// Example 2:
+/// Input: grid = [[1,2,0,1],[1,3,3,1],[0,2,5,1]], pricing = [2,3], 
+/// start = [2,3], k = 2
+/// Output: [[2,1],[1,2]]
+/// Explanation: You start at (2,3).
+/// With a price range of [2,3], we can take items from (0,1), (1,1), 
+/// (1,2) and (2,1).
+/// The ranks of these items are:
+/// - (2,1) with distance 2, price 2
+/// - (1,2) with distance 2, price 3
+/// - (1,1) with distance 3
+/// - (0,1) with distance 4
+/// Thus, the 2 highest ranked items in the price range are (2,1) and 
+/// (1,2).
+///
+/// Example 3:
+/// Input: grid = [[1,1,1],[0,0,1],[2,3,4]], pricing = [2,3], 
+/// start = [0,0], k = 3
+/// Output: [[2,1],[2,0]]
+/// Explanation: You start at (0,0).
+/// With a price range of [2,3], we can take items from (2,0) and (2,1). 
+/// The ranks of these items are: 
+/// - (2,1) with distance 5
+/// - (2,0) with distance 6
+/// Thus, the 2 highest ranked items in the price range are (2,1) 
+/// and (2,0). 
+/// Note that k = 3 but there are only 2 reachable items within the price 
+/// range.
+///
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 1 <= m, n <= 10^5
+/// 4. 1 <= m * n <= 10^5
+/// 5. 0 <= grid[i][j] <= 10^5
+/// 6. pricing.length == 2
+/// 7. 2 <= low <= high <= 10^5
+/// 8. start.length == 2
+/// 9. 0 <= row <= m - 1
+/// 10. 0 <= col <= n - 1
+/// 11. grid[row][col] > 0
+/// 12. 1 <= k <= m * n
+/// </summary>
+vector<vector<int>> LeetCodeGraph::highestRankedKItems(vector<vector<int>>& grid,
+    vector<int>& pricing, vector<int>& start, int k)
+{
+    priority_queue<vector<int>> pq;
+    int m = grid.size();
+    int n = grid[0].size();
+    vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    vector<vector<int>> visited(m, vector<int>(n));
+    queue<vector<int>> queue;
+    queue.push(start);
+    int distance = 0;
+    vector<vector<int>> result;
+    if (grid[start[0]][start[1]] >= pricing[0] && grid[start[0]][start[1]] <= pricing[1])
+    {
+        result.push_back({ start[0], start[1] });
+    }
+    visited[start[0]][start[1]] = 1;
+    while (!queue.empty())
+    {
+        size_t size = queue.size();
+        distance++;
+        for (size_t i = 0; i < size; i++)
+        {
+            vector<int> pos = queue.front();
+            queue.pop();
+            for (size_t d = 0; d < directions.size(); d++)
+            {
+                int dy = pos[0];
+                int dx = pos[1];
+                dy += directions[d][0];
+                dx += directions[d][1];
+                if (dy < 0 || dy >= m || dx < 0 || dx >= n)
+                {
+                    continue;
+                }
+                if (visited[dy][dx] == 1)
+                {
+                    continue;
+                }
+                if (grid[dy][dx] == 0)
+                {
+                    continue;
+                }
+                if (grid[dy][dx] >= pricing[0] && grid[dy][dx] <= pricing[1])
+                {
+                    pq.push({-distance, -grid[dy][dx],  -dy,  -dx });
+                }
+                visited[dy][dx] = 1;
+                queue.push({dy, dx});
+            }
+        }
+        if (pq.size() >= k) break;
+    }
+    for (int i = 0; i < k; i++)
+    {
+        if (pq.empty()) break;
+        vector<int>  pos = pq.top();
+        pq.pop();
+        result.push_back({ -pos[2], -pos[3] });
+    }
+    return result;
 }
 
 #pragma endregion

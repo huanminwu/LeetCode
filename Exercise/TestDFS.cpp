@@ -1599,8 +1599,30 @@ void TestLeetCode2094(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2151(void)
+{
+    Logger::WriteMessage("Test Leet Code 2151");
+    LeetCodeDFS leetCode;
+    vector<vector<int>> statements =
+    {
+        {2, 1, 2},{1, 2, 2},{2, 0, 2}
+    };
+    int result = leetCode.maximumGood(statements);
+    Logger::WriteMessage(statements);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    statements =
+    {
+        {2,0},{0,2}
+    };
+    result = leetCode.maximumGood(statements);
+    Logger::WriteMessage(statements);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2151();
     TestLeetCode2094();
     TestLeetCode2002();
     TestLeetCode2081();

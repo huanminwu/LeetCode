@@ -6905,8 +6905,85 @@ void TestLeetCode2134(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2147(void)
+{
+    Logger::WriteMessage("Test Leet Code 2147");
+    LeetCodeArray leetCode;
+    string corridor = "SSPPSPS";
+    int result = leetCode.numberOfWays(corridor);
+    Logger::WriteMessage("corridor = " + corridor);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    corridor = "PPSPSP";
+    result = leetCode.numberOfWays(corridor);
+    Logger::WriteMessage("corridor = " + corridor);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    corridor = "S";
+    result = leetCode.numberOfWays(corridor);
+    Logger::WriteMessage("corridor = " + corridor);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2154(void)
+{
+    Logger::WriteMessage("Test Leet Code 2154");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 5, 3, 6, 1, 12 };
+    int original = 3;
+    int result = leetCode.findFinalValue(nums, original);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("original = " + to_string(original) + "; result = " + to_string(result));
+
+    nums = { 2,7,9 };
+    original = 4;
+    result = leetCode.findFinalValue(nums, original);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("original = " + to_string(original) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2149(void)
+{
+    Logger::WriteMessage("Test Leet Code 2149");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 1, -2, -5, 2, -4 };
+    vector<int> result = leetCode.rearrangeArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { -1, 1 };
+    result = leetCode.rearrangeArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2155(void)
+{
+    Logger::WriteMessage("Test Leet Code 2155");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 0, 0, 1, 0 };
+    vector<int> result = leetCode.maxScoreIndices(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 0,0,0 };
+    result = leetCode.maxScoreIndices(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,1 };
+    result = leetCode.maxScoreIndices(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2155();
+    TestLeetCode2149();
+    TestLeetCode2154();
+    TestLeetCode2147();
     TestLeetCode2134();
     TestLeetCode2125();
     TestLeetCode2128();
