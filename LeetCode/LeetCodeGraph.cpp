@@ -13760,14 +13760,14 @@ vector<vector<int>> LeetCodeGraph::highestRankedKItems(vector<vector<int>>& grid
                 queue.push({dy, dx});
             }
         }
-        if (pq.size() >= k) break;
-    }
-    for (int i = 0; i < k; i++)
-    {
-        if (pq.empty()) break;
-        vector<int>  pos = pq.top();
-        pq.pop();
-        result.push_back({ -pos[2], -pos[3] });
+        while (result.size() < k)
+        {
+            if (pq.empty()) break;
+            vector<int>  pos = pq.top();
+            pq.pop();
+            result.push_back({ -pos[2], -pos[3] });
+        }
+        if (result.size() >= k) break;
     }
     return result;
 }

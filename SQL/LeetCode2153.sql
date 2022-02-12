@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------
---- Leet code 2142. 2153. The Number of Passengers in Each Bus II
+--- Leet code 2153. The Number of Passengers in Each Bus II
 ---
 --- Hard
 ---
@@ -90,65 +90,24 @@
 --- empty seats.
 ---
 ---------------------------------------------------------------
-WITH Bus_Order AS 
+SELECT
+    A.first_col,
+    B.second_col	
+FROM
 (
-	SELECT
-		A.bus_id,
-		A.arrival_time,
-		A.capacity,
-		RN = ROW_NUMBER() OVER (ORDER BY A.arrival_time)		
-	FROM
-		Buses AS A
-),
-Bus_Load AS
+    SELECT
+        first_col,
+        RN = ROW_NUMBER() OVER (ORDER BY first_col ASC)		
+    FROM
+        [Data]
+) AS A
+INNER JOIN
 (
-	SELECT
-		A.bus_id,
-		A.arrival_time,
-		A.capacity,
-		passengers = (SELECT COUNT(passenger_id) FROM Passengers WHERE arrival_time <= A.arrival_time AND arrival_time > ISNULL(B.arrival_time, 0)),
-		A.RN 
-	FROM
-		Bus_Order AS A
-	LEFT JOIN 
-		Bus_Order AS B
-	ON
-		A.RN = B.RN + 1
-),
-Bus_Recursive AS
-(
-	SELECT
-		bus_id,
-		arrival_time,
-		capacity,
-		passengers_cnt = CASE WHEN capacity >= passengers THEN passengers ELSE capacity END,
-		overflow = 	CASE WHEN capacity >= passengers THEN 0 ELSE passengers - capacity END,
-		RN
-		FROM
-			Bus_Load
-		WHERE
-			RN = 1
-	UNION ALL
-	SELECT
-		A.bus_id,
-		A.arrival_time,
-		A.capacity,
-		passengers_cnt = CASE WHEN A.capacity >= A.passengers + B.overflow THEN A.passengers + B.overflow ELSE A.capacity END,
-		overflow = 	CASE WHEN A.capacity >= A.passengers + B.overflow THEN 0 ELSE A.passengers + B.overflow - A.capacity END,
-		A.RN
-		FROM
-			Bus_Load AS A
-		INNER JOIN 
-			Bus_Recursive AS B
-		ON
-			A.RN = B.RN + 1
-		WHERE
-			A.RN > 1
-)
-SELECT 
-    bus_id, 
-	passengers_cnt
-FROM 
-    Bus_Recursive	
-ORDER BY 
-    bus_id
+    SELECT
+        second_col,
+        RN = ROW_NUMBER() OVER (ORDER BY second_col DESC)		
+    FROM
+        [Data]
+) AS B
+ON
+   A.RN = B.RN

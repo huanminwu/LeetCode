@@ -20608,5 +20608,185 @@ vector<int> LeetCodeArray::maxScoreIndices(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2161. Partition Array According to Given Pivot
+///                                                                 
+/// Medium
+///
+/// You are given a 0-indexed integer array nums and an integer pivot. 
+/// Rearrange nums such that the following conditions are satisfied:
+///
+/// Every element less than pivot appears before every element greater 
+/// than pivot.
+/// Every element equal to pivot appears in between the elements less 
+/// than and greater than pivot.
+/// The relative order of the elements less than pivot and the elements 
+/// greater than pivot is maintained.
+/// More formally, consider every pi, pj where pi is the new position of 
+/// the ith element and pj is the new position of the jth element. For 
+/// elements less than pivot, if i < j and nums[i] < pivot and 
+/// nums[j] < pivot, then pi < pj. Similarly for elements greater than 
+/// pivot, if i < j and nums[i] > pivot and nums[j] > pivot, then pi < pj.
+/// Return nums after the rearrangement.
+///
+/// Example 1:
+/// Input: nums = [9,12,5,10,14,3,10], pivot = 10
+/// Output: [9,5,3,10,10,12,14]
+/// Explanation: 
+/// The elements 9, 5, and 3 are less than the pivot so they are on the 
+/// left side of the array.
+/// The elements 12 and 14 are greater than the pivot so they are on the 
+/// right side of the array.
+/// The relative ordering of the elements less than and greater than pivot 
+/// is also maintained. [9, 5, 3] and [12, 14] are the respective orderings.
+///
+/// Example 2:
+/// Input: nums = [-3,4,3,2], pivot = 2
+/// Output: [-3,2,4,3]
+/// Explanation: 
+/// The element -3 is less than the pivot so it is on the left side of 
+/// the array.
+/// The elements 4 and 3 are greater than the pivot so they are on the 
+/// right side of the array.
+/// The relative ordering of the elements less than and greater than 
+/// pivot is also maintained. [-3] and [4, 3] are the respective orderings.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. -10^6 <= nums[i] <= 10^6
+/// 3. pivot equals to an element of nums.
+/// </summary>
+vector<int> LeetCodeArray::pivotArray(vector<int>& nums, int pivot)
+{
+    vector<int> result;
+    for (int i = 0; i < 3; i++)
+    {
+        for (size_t j = 0; j < nums.size(); j++)
+        {
+            if (i == 0 && nums[j] < pivot)
+            {
+                result.push_back(nums[j]);
+            }
+            else if (i == 1 && nums[j] == pivot)
+            {
+                result.push_back(nums[j]);
+            }
+            else if (i == 2 && nums[j] > pivot)
+            {
+                result.push_back(nums[j]);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2163. Minimum Difference in Sums After Removal of Elements
+///                                                                 
+/// Hard
+///
+/// You are given a 0-indexed integer array nums consisting of 3 * n 
+/// elements.
+///
+/// You are allowed to remove any subsequence of elements of size exactly 
+/// n from nums. The remaining 2 * n elements will be divided into two 
+/// equal parts:
+///
+/// The first n elements belonging to the first part and their sum is 
+/// sumfirst.
+/// The next n elements belonging to the second part and their sum is 
+/// sumsecond.
+/// The difference in sums of the two parts is denoted as 
+/// sumfirst - sumsecond.
+///
+/// For example, if sumfirst = 3 and sumsecond = 2, their difference is 1.
+/// Similarly, if sumfirst = 2 and sumsecond = 3, their difference is -1.
+/// Return the minimum difference possible between the sums of the two 
+/// parts after the removal of n elements.
+/// 
+/// Example 1:
+/// Input: nums = [3,1,2]
+/// Output: -1
+/// Explanation: Here, nums has 3 elements, so n = 1. 
+/// Thus we have to remove 1 element from nums and divide the array into 
+/// two equal parts.
+/// - If we remove nums[0] = 3, the array will be [1,2]. The difference in 
+///   sums of the two parts will be 1 - 2 = -1.
+/// - If we remove nums[1] = 1, the array will be [3,2]. The difference in 
+///   sums of the two parts will be 3 - 2 = 1.
+/// - If we remove nums[2] = 2, the array will be [3,1]. The difference in 
+///   sums of the two parts will be 3 - 1 = 2.
+/// The minimum difference between sums of the two parts is 
+/// min(-1,1,2) = -1. 
+///
+/// Example 2:
+/// Input: nums = [7,9,5,8,1,3]
+/// Output: 1
+/// Explanation: Here n = 2. So we must remove 2 elements and divide the 
+/// remaining array into two parts containing two elements each.
+/// If we remove nums[2] = 5 and nums[3] = 8, the resultant array will be 
+/// [7,9,1,3]. The difference in sums will be (7+9) - (1+3) = 12.
+/// To obtain the minimum difference, we should remove nums[1] = 9 and 
+/// nums[4] = 1. The resultant array becomes [7,5,8,3]. The difference in 
+/// sums of the two parts is (7+5) - (8+3) = 1.
+/// It can be shown that it is not possible to obtain a difference smaller 
+/// than 1.
+///
+/// Constraints:
+/// 1. nums.length == 3 * n
+/// 2. 1 <= n <= 10^5
+/// 3. 1 <= nums[i] <= 10^5
+/// </summary>
+long long LeetCodeArray::minimumDifference(vector<int>& nums)
+{
+    vector<long long> left(nums.size()), right(nums.size());
+    int n = nums.size() / 3;
+    set<pair<long long, int>> min_heap, max_heap;
+    long long sum = 0;
+    for (size_t i = 0; i <= 2 * n; i++)
+    {
+        if (i < n)
+        {
+            left[i] = -1;
+        }
+        else
+        {
+            left[i] = sum;
+        }
+        min_heap.insert(make_pair(nums[i], i));
+        sum += nums[i];
+        if (min_heap.size() > n)
+        {
+            sum -= min_heap.rbegin()->first;
+            min_heap.erase(make_pair(min_heap.rbegin()->first, min_heap.rbegin()->second));
+        }
+    }
+    sum = 0;
+    for (int i = nums.size() - 1; i >= n; i--)
+    {
+        max_heap.insert(make_pair(nums[i], i));
+        sum += nums[i];
+        if (max_heap.size() > n)
+        {
+            sum -= max_heap.begin()->first;
+            max_heap.erase(max_heap.begin());
+        }
+        if (i > (int)nums.size() - n)
+        {
+            right[i] = -1;
+        }
+        else
+        {
+            right[i] = sum;
+        }
+    }
+    long long result = LLONG_MAX;
+    for (int i = n; i <= 2 * n; i++)
+    {
+        result = min(result, left[i] - right[i]);
+    }
+    return result;
+}
 #pragma endregion
 

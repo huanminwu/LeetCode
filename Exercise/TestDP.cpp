@@ -2928,8 +2928,26 @@ void TestLeetCode2143(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2167(void)
+{
+    Logger::WriteMessage("Test Leet Code 2167");
+    LeetCodeDP leetCode;
+    string s = "1100101";
+    int result = leetCode.minimumTime(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "0010";
+    result = leetCode.minimumTime(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "11110";
+    result = leetCode.minimumTime(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2167();
     TestLeetCode2143();
     TestLeetCode2140();
     TestLeetCode1049();

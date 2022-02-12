@@ -1204,8 +1204,29 @@ void TestLeetCode2015(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2158(void)
+{
+    Logger::WriteMessage("Test Leet Code 2158");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> paint = { {1, 4},{4, 7},{5, 8} };
+    vector<int> result = leetCode.amountPainted(paint);
+    Logger::WriteMessage(paint);
+    Logger::WriteMessage(result);
+
+    paint = { {1, 4},{5, 8},{4, 7} };
+    result = leetCode.amountPainted(paint);
+    Logger::WriteMessage(paint);
+    Logger::WriteMessage(result);
+
+    paint = { {1, 5},{2, 4} };
+    result = leetCode.amountPainted(paint);
+    Logger::WriteMessage(paint);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode2158();
     TestLeetCode2015();
     TestLeetCode1989();
     TestLeetCode2021();

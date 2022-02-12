@@ -5048,6 +5048,85 @@ public:
     /// 2. -10^5 <= nums[i] <= 10^5
     /// </summary>
     int countElements(vector<int>& nums);
+
+
+    /// <summary>
+    /// Leet Code 2164. Sort Even and Odd Indices Independently
+    ///                                                                 
+    /// Easy
+    ///
+    /// You are given a 0-indexed integer array nums. Rearrange the values 
+    /// of nums according to the following rules:
+    ///
+    /// Sort the values at odd indices of nums in non-increasing order.
+    /// For example, if nums = [4,1,2,3] before this step, it 
+    /// becomes [4,3,2,1] after. The values at odd indices 1 and 3 are 
+    /// sorted in non-increasing order.
+    /// Sort the values at even indices of nums in non-decreasing order.
+    /// For example, if nums = [4,1,2,3] before this step, it becomes [2,1,4,3] 
+    /// after. The values at even indices 0 and 2 are sorted in non-decreasing 
+    /// order.
+    /// Return the array formed after rearranging the values of nums.
+    ///
+    /// Example 1:
+    /// Input: nums = [4,1,2,3]
+    /// Output: [2,3,4,1]
+    /// Explanation: 
+    /// First, we sort the values present at odd indices (1 and 3) in 
+    /// non-increasing order.
+    /// So, nums changes from [4,1,2,3] to [4,3,2,1].
+    /// Next, we sort the values present at even indices (0 and 2) in 
+    /// non-decreasing order.
+    /// So, nums changes from [4,1,2,3] to [2,3,4,1].
+    /// Thus, the array formed after rearranging the values is [2,3,4,1].
+    ///
+    /// Example 2:
+    /// Input: nums = [2,1]
+    /// Output: [2,1]
+    /// Explanation: 
+    /// Since there is exactly one odd index and one even index, no 
+    /// rearrangement of values takes place.
+    /// The resultant array formed is [2,1], which is the same as the initial 
+    /// array. 
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 100
+    /// </summary>
+    vector<int> sortEvenOdd(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2165. Smallest Value of the Rearranged Number
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given an integer num. Rearrange the digits of num such that 
+    /// its value is minimized and it does not contain any leading zeros.
+    ///
+    /// Return the rearranged number with minimal value.
+    /// Note that the sign of the number does not change after rearranging 
+    /// the digits.
+    ///
+    /// Example 1:
+    /// Input: num = 310
+    /// Output: 103
+    /// Explanation: The possible arrangements for the digits of 310 
+    /// are 013, 031, 103, 130, 301, 310. 
+    /// The arrangement with the smallest value that does not contain any 
+    /// leading zeros is 103.
+    ///
+    /// Example 2:
+    /// Input: num = -7605
+    /// Output: -7650
+    /// Explanation: Some possible arrangements for the digits of -7605 
+    /// are -7650, -6705, -5076, -0567.
+    /// The arrangement with the smallest value that does not contain 
+    /// any leading zeros is -7650.
+    ///
+    /// Constraints:
+    /// 1. -10^15 <= num <= 10^15
+    /// </summary>
+    long long smallestNumber(long long num);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

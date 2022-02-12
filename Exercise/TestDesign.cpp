@@ -4255,11 +4255,73 @@ void TestLeetCode211(void)
     Logger::WriteMessage(commands);
     Logger::WriteMessage(parameters);
     Logger::WriteMessage(result);
+}
 
+
+void TestLeetCode2166(void)
+{
+    Logger::WriteMessage("Test Leet Code 211");
+    vector<string> commands =
+    {
+       "Bitset", "fix", "fix", "flip", "all", "unfix", "flip", "one", "unfix", "count", "toString"
+    };
+    vector<vector<int>> parameters =
+    { 
+        {5},{3},{1},{},{},{0},{},{},{0},{},{}
+    };
+    vector<string> result;
+    Bitset* bitSet = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Bitset")
+        {
+            bitSet = new Bitset(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "fix")
+        {
+            bitSet->fix(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "unfix")
+        {
+            bitSet->unfix(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "flip")
+        {
+            bitSet->flip();
+            result.push_back("null");
+        }
+        else if (commands[i] == "all")
+        {
+            bool ret = bitSet->all();
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+        else if (commands[i] == "one")
+        {
+            bool ret = bitSet->one();
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+        else if (commands[i] == "count")
+        {
+            int ret = bitSet->count();
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "toString")
+        {
+            result.push_back(bitSet->toString());
+        }
+    }
+    delete bitSet;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
 }
 
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2166();
     TestLeetCode211();
     TestLeetCode2080();
     TestLeetCode1993();

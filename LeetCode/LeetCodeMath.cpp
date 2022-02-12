@@ -13043,3 +13043,176 @@ int LeetCodeMath::numberOfArrays(vector<int>& differences, int lower, int upper)
         return (int)(((long long)upper - (long long)lower) - (max_val - min_val) + 1);
     }
 }
+
+
+/// <summary>
+/// Leet Code 2160. Minimum Sum of Four Digit Number After Splitting 
+///                 Digits
+///                                                                 
+/// Easy
+///
+/// You are given a positive integer num consisting of exactly four 
+/// digits. Split num into two new integers new1 and new2 by using 
+/// the digits found in num. Leading zeros are allowed in new1 and 
+/// new2, and all the digits found in num must be used.
+/// 
+/// For example, given num = 2932, you have the following digits: 
+/// two 2's, one 9 and one 3. Some of the possible pairs [new1, new2] 
+/// are [22, 93], [23, 92], [223, 9] and [2, 329].
+/// Return the minimum possible sum of new1 and new2.
+///
+/// Example 1:
+/// Input: num = 2932
+/// Output: 52
+/// Explanation: Some possible pairs [new1, new2] are [29, 23], [223, 9], 
+/// etc.
+/// The minimum sum can be obtained by the pair [29, 23]: 29 + 23 = 52. 
+///
+/// Example 2:
+/// Input: num = 4009
+/// Output: 13
+/// Explanation: Some possible pairs [new1, new2] are [0, 49], [490, 0], 
+/// etc. 
+/// The minimum sum can be obtained by the pair [4, 9]: 4 + 9 = 13.
+///
+/// Constraints:
+/// 1. 1000 <= num <= 9999
+/// </summary>
+int LeetCodeMath::minimumSum(int num)
+{
+    vector<int> nums;
+    while (num > 0)
+    {
+        nums.push_back(num % 10);
+        num /= 10;
+    }
+    sort(nums.begin(), nums.end());
+    int num1 = 0, num2 = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        num1 = num1 * 10 + nums[i];
+        i++;
+        if (i < nums.size())
+        {
+            num2 = num2 * 10 + nums[i];
+        }
+    }
+    return num1 + num2;
+}
+
+/// <summary>
+/// Leet Code 2162. Minimum Cost to Set Cooking Time
+///                                                                 
+/// Medium
+///
+/// A generic microwave supports cooking times for:
+///
+/// at least 1 second.
+/// at most 99 minutes and 99 seconds.
+/// To set the cooking time, you push at most four digits. The microwave 
+/// normalizes what you push as four digits by prepending zeroes. It 
+/// interprets the first two digits as the minutes and the last two digits 
+/// as the seconds. It then adds them up as the cooking time. For example,
+///
+/// You push 9 5 4 (three digits). It is normalized as 0954 and interpreted
+/// as 9 minutes and 54 seconds.
+/// You push 0 0 0 8 (four digits). It is interpreted as 0 minutes and 8 
+/// seconds.
+/// You push 8 0 9 0. It is interpreted as 80 minutes and 90 seconds.
+/// You push 8 1 3 0. It is interpreted as 81 minutes and 30 seconds.
+/// You are given integers startAt, moveCost, pushCost, and targetSeconds. 
+/// Initially, your finger is on the digit startAt. Moving the finger 
+/// above any specific digit costs moveCost units of fatigue. Pushing the 
+/// digit below the finger once costs pushCost units of fatigue.
+///
+/// There can be multiple ways to set the microwave to cook for 
+/// targetSeconds seconds but you are interested in the way with the 
+/// minimum cost.
+///
+/// Return the minimum cost to set targetSeconds seconds of cooking time.
+/// Remember that one minute consists of 60 seconds.
+///
+/// Example 1:
+/// Input: startAt = 1, moveCost = 2, pushCost = 1, targetSeconds = 600
+/// Output: 6
+/// Explanation: The following are the possible ways to set the cooking 
+/// time.
+/// - 1 0 0 0, interpreted as 10 minutes and 0 seconds.
+/// The finger is already on digit 1, pushes 1 (with cost 1), moves 
+/// to 0 (with cost 2), pushes 0 (with cost 1), pushes 0 (with cost 1), 
+/// and pushes 0 (with cost 1).
+/// The cost is: 1 + 2 + 1 + 1 + 1 = 6. This is the minimum cost.
+/// - 0 9 6 0, interpreted as 9 minutes and 60 seconds. That is also 600 
+/// seconds.
+/// The finger moves to 0 (with cost 2), pushes 0 (with cost 1), moves 
+/// to 9 (with cost 2), pushes 9 (with cost 1), moves to 6 (with cost 2), 
+/// pushes 6 (with cost 1), moves to 0 (with cost 2), and pushes 0 
+/// (with cost 1). 
+/// The cost is: 2 + 1 + 2 + 1 + 2 + 1 + 2 + 1 = 12.
+/// - 9 6 0, normalized as 0960 and interpreted as 9 minutes and 60 
+/// seconds.
+/// The finger moves to 9 (with cost 2), pushes 9 (with cost 1), moves 
+/// to 6 (with cost 2), pushes 6 (with cost 1), moves to 0 (with cost 2), 
+/// and pushes 0 (with cost 1).
+/// The cost is: 2 + 1 + 2 + 1 + 2 + 1 = 9.
+///
+/// Example 2:
+/// Input: startAt = 0, moveCost = 1, pushCost = 2, targetSeconds = 76
+/// Output: 6
+/// Explanation: The optimal way is to push two digits: 7 6, interpreted 
+/// as 76 seconds.
+/// The finger moves to 7 (with cost 1), pushes 7 (with cost 2), moves 
+/// to 6 (with cost 1), and pushes 6 (with cost 2). The total cost is: 
+/// 1 + 2 + 1 + 2 = 6
+/// Note other possible ways are 0076, 076, 0116, and 116, but none of 
+/// them produces the minimum cost.
+///
+/// Constraints:
+/// 1. 0 <= startAt <= 9
+/// 2. 1 <= moveCost, pushCost <= 10^5
+/// 3. 1 <= targetSeconds <= 6039
+/// </summary>
+int LeetCodeMath::minCostSetTime(int startAt, int moveCost, int pushCost, int targetSeconds)
+{
+    int time = targetSeconds / 60 * 100 + targetSeconds % 60;
+    string clock;
+    int prev;
+    int result = INT_MAX;
+    int cost;
+    if (time / 100 < 100)
+    {
+        clock = to_string(time);
+        prev = startAt;
+        result = INT_MAX;
+        cost = 0;
+        for (size_t i = 0; i < clock.size(); i++)
+        {
+            if (clock[i] - '0' != prev)
+            {
+                cost += moveCost;
+                prev = clock[i] - '0';
+            }
+            cost += pushCost;
+        }
+        result = min(result, cost);
+    }
+    if (time % 100 < 40 && time / 100 > 0)
+    {
+        prev = startAt;
+        time = time - 100 + 60;
+        clock = to_string(time);
+        cost = 0;
+        for (size_t i = 0; i < clock.size(); i++)
+        {
+            if (clock[i] - '0' != prev)
+            {
+                cost += moveCost;
+                prev = clock[i] - '0';
+            }
+            cost += pushCost;
+        }
+        result = min(result, cost);
+    }
+
+    return result;
+}

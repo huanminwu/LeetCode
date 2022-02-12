@@ -2731,8 +2731,40 @@ void TestLeetCode2148(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2164(void)
+{
+    Logger::WriteMessage("Test Leet Code 2164");
+
+    LeetCodeSort leetCode;
+    vector<int> nums = { 4, 1, 2, 3 };
+    vector<int> result = leetCode.sortEvenOdd(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 2,1 };
+    result = leetCode.sortEvenOdd(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2165(void)
+{
+    Logger::WriteMessage("Test Leet Code 2165");
+
+    LeetCodeSort leetCode;
+    long long  num = 310;
+    long long result = leetCode.smallestNumber(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+
+    num = -7605;
+    result = leetCode.smallestNumber(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2165();
+    TestLeetCode2164();
     TestLeetCode2148();
     TestLeetCode2144();
     TestLeetCode2126();

@@ -4358,8 +4358,47 @@ void TestLeetCode2145(void)
     Logger::WriteMessage("lower = " + to_string(lower) + "; upper = " + to_string(upper) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2160(void)
+{
+    Logger::WriteMessage("Test Leet Code 2160");
+    LeetCodeMath leetCode;
+    int num = 2932;
+    int result = leetCode.minimumSum(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+
+    num = 4009;
+    result = leetCode.minimumSum(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2162(void)
+{
+    Logger::WriteMessage("Test Leet Code 2162");
+    LeetCodeMath leetCode;
+    int startAt = 1, moveCost = 2, pushCost = 1, targetSeconds = 600;
+    int result = leetCode.minCostSetTime(startAt,moveCost, pushCost, targetSeconds);
+    Logger::WriteMessage("startAt = " + to_string(startAt) + "; moveCost = " + to_string(moveCost));
+    Logger::WriteMessage("pushCost = " + to_string(pushCost) + "; targetSeconds = " + to_string(targetSeconds));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    startAt = 0, moveCost = 1, pushCost = 2, targetSeconds = 76;
+    result = leetCode.minCostSetTime(startAt, moveCost, pushCost, targetSeconds);
+    Logger::WriteMessage("startAt = " + to_string(startAt) + "; moveCost = " + to_string(moveCost));
+    Logger::WriteMessage("pushCost = " + to_string(pushCost) + "; targetSeconds = " + to_string(targetSeconds));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    startAt = 1, moveCost = 9403, pushCost = 9402, targetSeconds = 6008;
+    result = leetCode.minCostSetTime(startAt, moveCost, pushCost, targetSeconds);
+    Logger::WriteMessage("startAt = " + to_string(startAt) + "; moveCost = " + to_string(moveCost));
+    Logger::WriteMessage("pushCost = " + to_string(pushCost) + "; targetSeconds = " + to_string(targetSeconds));
+    Logger::WriteMessage("result = " + to_string(result));
+
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2162();
+    TestLeetCode2160();
     TestLeetCode2145();
     TestLeetCode2152();
     TestLeetCode2153();

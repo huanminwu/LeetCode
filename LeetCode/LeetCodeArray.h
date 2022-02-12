@@ -12727,6 +12727,193 @@ public:
     /// 3. nums[i] is either 0 or 1.
     /// </summary>
     vector<int> maxScoreIndices(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2161. Partition Array According to Given Pivot
+    ///                                                                 
+    /// Medium
+    ///
+    /// You are given a 0-indexed integer array nums and an integer pivot. 
+    /// Rearrange nums such that the following conditions are satisfied:
+    ///
+    /// Every element less than pivot appears before every element greater 
+    /// than pivot.
+    /// Every element equal to pivot appears in between the elements less 
+    /// than and greater than pivot.
+    /// The relative order of the elements less than pivot and the elements 
+    /// greater than pivot is maintained.
+    /// More formally, consider every pi, pj where pi is the new position of 
+    /// the ith element and pj is the new position of the jth element. For 
+    /// elements less than pivot, if i < j and nums[i] < pivot and 
+    /// nums[j] < pivot, then pi < pj. Similarly for elements greater than 
+    /// pivot, if i < j and nums[i] > pivot and nums[j] > pivot, then pi < pj.
+    /// Return nums after the rearrangement.
+    ///
+    /// Example 1:
+    /// Input: nums = [9,12,5,10,14,3,10], pivot = 10
+    /// Output: [9,5,3,10,10,12,14]
+    /// Explanation: 
+    /// The elements 9, 5, and 3 are less than the pivot so they are on the 
+    /// left side of the array.
+    /// The elements 12 and 14 are greater than the pivot so they are on the 
+    /// right side of the array.
+    /// The relative ordering of the elements less than and greater than pivot 
+    /// is also maintained. [9, 5, 3] and [12, 14] are the respective orderings.
+    ///
+    /// Example 2:
+    /// Input: nums = [-3,4,3,2], pivot = 2
+    /// Output: [-3,2,4,3]
+    /// Explanation: 
+    /// The element -3 is less than the pivot so it is on the left side of 
+    /// the array.
+    /// The elements 4 and 3 are greater than the pivot so they are on the 
+    /// right side of the array.
+    /// The relative ordering of the elements less than and greater than 
+    /// pivot is also maintained. [-3] and [4, 3] are the respective orderings.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^6 <= nums[i] <= 10^6
+    /// 3. pivot equals to an element of nums.
+    /// </summary>
+    vector<int> pivotArray(vector<int>& nums, int pivot);
+
+    /// <summary>
+    /// Leet Code 2163. Minimum Difference in Sums After Removal of Elements
+    ///                                                                 
+    /// Hard
+    ///
+    /// You are given a 0-indexed integer array nums consisting of 3 * n 
+    /// elements.
+    ///
+    /// You are allowed to remove any subsequence of elements of size exactly 
+    /// n from nums. The remaining 2 * n elements will be divided into two 
+    /// equal parts:
+    ///
+    /// The first n elements belonging to the first part and their sum is 
+    /// sumfirst.
+    /// The next n elements belonging to the second part and their sum is 
+    /// sumsecond.
+    /// The difference in sums of the two parts is denoted as 
+    /// sumfirst - sumsecond.
+    ///
+    /// For example, if sumfirst = 3 and sumsecond = 2, their difference is 1.
+    /// Similarly, if sumfirst = 2 and sumsecond = 3, their difference is -1.
+    /// Return the minimum difference possible between the sums of the two 
+    /// parts after the removal of n elements.
+    /// 
+    /// Example 1:
+    /// Input: nums = [3,1,2]
+    /// Output: -1
+    /// Explanation: Here, nums has 3 elements, so n = 1. 
+    /// Thus we have to remove 1 element from nums and divide the array into 
+    /// two equal parts.
+    /// - If we remove nums[0] = 3, the array will be [1,2]. The difference in 
+    ///   sums of the two parts will be 1 - 2 = -1.
+    /// - If we remove nums[1] = 1, the array will be [3,2]. The difference in 
+    ///   sums of the two parts will be 3 - 2 = 1.
+    /// - If we remove nums[2] = 2, the array will be [3,1]. The difference in 
+    ///   sums of the two parts will be 3 - 1 = 2.
+    /// The minimum difference between sums of the two parts is 
+    /// min(-1,1,2) = -1. 
+    ///
+    /// Example 2:
+    /// Input: nums = [7,9,5,8,1,3]
+    /// Output: 1
+    /// Explanation: Here n = 2. So we must remove 2 elements and divide the 
+    /// remaining array into two parts containing two elements each.
+    /// If we remove nums[2] = 5 and nums[3] = 8, the resultant array will be 
+    /// [7,9,1,3]. The difference in sums will be (7+9) - (1+3) = 12.
+    /// To obtain the minimum difference, we should remove nums[1] = 9 and 
+    /// nums[4] = 1. The resultant array becomes [7,5,8,3]. The difference in 
+    /// sums of the two parts is (7+5) - (8+3) = 1.
+    /// It can be shown that it is not possible to obtain a difference smaller 
+    /// than 1.
+    ///
+    /// Constraints:
+    /// 1. nums.length == 3 * n
+    /// 2. 1 <= n <= 10^5
+    /// 3. 1 <= nums[i] <= 10^5
+    /// </summary>
+    long long minimumDifference(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2167. Minimum Time to Remove All Cars Containing Illegal 
+    ///                 Goods
+    ///                                                                 
+    /// Hard
+    ///
+    /// You are given a 0-indexed binary string s which represents a sequence 
+    /// of train cars. s[i] = '0' denotes that the ith car does not contain 
+    /// illegal goods and s[i] = '1' denotes that the ith car does contain 
+    /// illegal goods.
+    ///
+    /// As the train conductor, you would like to get rid of all the cars 
+    /// containing illegal goods. You can do any of the following three 
+    /// operations any number of times:
+    /// 
+    /// Remove a train car from the left end (i.e., remove s[0]) which takes 
+    /// 1 unit of time.
+    /// Remove a train car from the right end (i.e., remove s[s.length - 1]) 
+    /// which takes 1 unit of time.
+    /// Remove a train car from anywhere in the sequence which takes 2 
+    /// units of time.
+    /// Return the minimum time to remove all the cars containing illegal 
+    /// goods.
+    ///
+    /// Note that an empty sequence of cars is considered to have no cars 
+    /// containing illegal goods.
+    /// 
+    /// Example 1:
+    /// 
+    /// Input: s = "1100101"
+    /// Output: 5
+    /// Explanation: 
+    /// One way to remove all the cars containing illegal goods from the 
+    /// sequence is to
+    /// - remove a car from the left end 2 times. Time taken is 2 * 1 = 2.
+    /// - remove a car from the right end. Time taken is 1.
+    /// - remove the car containing illegal goods found in the middle. Time 
+    ///   taken is 2.
+    /// This obtains a total time of 2 + 1 + 2 = 5. 
+    ///
+    /// An alternative way is to
+    /// - remove a car from the left end 2 times. Time taken is 2 * 1 = 2.
+    /// - remove a car from the right end 3 times. Time taken is 3 * 1 = 3.
+    /// This also obtains a total time of 2 + 3 = 5.
+    /// 5 is the minimum time taken to remove all the cars containing 
+    /// illegal goods. 
+    /// There are no other ways to remove them with less time.
+    ///
+    /// Example 2:
+    /// Input: s = "0010"
+    /// Output: 2
+    /// Explanation:
+    /// One way to remove all the cars containing illegal goods from the 
+    /// sequence is to
+    /// - remove a car from the left end 3 times. Time taken is 3 * 1 = 3.
+    /// This obtains a total time of 3.
+    ///
+    /// Another way to remove all the cars containing illegal goods from 
+    /// the sequence is to
+    /// - remove the car containing illegal goods found in the middle. 
+    /// Time taken is 2.
+    /// This obtains a total time of 2.
+    ///
+    /// Another way to remove all the cars containing illegal goods from 
+    /// the sequence is to 
+    /// - remove a car from the right end 2 times. Time taken is 2 * 1 = 2. 
+    /// This obtains a total time of 2.
+    ///
+    /// 2 is the minimum time taken to remove all the cars containing 
+    /// illegal goods. 
+    /// There are no other ways to remove them with less time.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 2 * 10^5
+    /// 2. s[i] is either '0' or '1'.
+    /// </summary>
+    int minimumTime(string s);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

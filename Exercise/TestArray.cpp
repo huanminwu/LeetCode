@@ -6977,9 +6977,44 @@ void TestLeetCode2155(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2161(void)
+{
+    Logger::WriteMessage("Test Leet Code 2161");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 9,12,5,10,14,3,10 };
+    int pivot = 10;
+    vector<int> result = leetCode.pivotArray(nums, pivot);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("pivot = " + to_string(pivot));
+    Logger::WriteMessage(result);
+
+    nums = { -3,4,3,2 };
+    pivot = 2;
+    result = leetCode.pivotArray(nums, pivot);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("pivot = " + to_string(pivot));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2163(void)
+{
+    Logger::WriteMessage("Test Leet Code 2163");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3,1,2 };
+    int result = leetCode.minimumDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7,9,5,8,1,3 };
+    result = leetCode.minimumDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2163();
+    TestLeetCode2161();
     TestLeetCode2155();
     TestLeetCode2149();
     TestLeetCode2154();

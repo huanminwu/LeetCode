@@ -13069,5 +13069,114 @@ int LeetCodeDP::countSubranges(vector<int>& nums1, vector<int>& nums2)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2167. Minimum Time to Remove All Cars Containing Illegal 
+///                 Goods
+///                                                                 
+/// Hard
+///
+/// You are given a 0-indexed binary string s which represents a sequence 
+/// of train cars. s[i] = '0' denotes that the ith car does not contain 
+/// illegal goods and s[i] = '1' denotes that the ith car does contain 
+/// illegal goods.
+///
+/// As the train conductor, you would like to get rid of all the cars 
+/// containing illegal goods. You can do any of the following three 
+/// operations any number of times:
+/// 
+/// Remove a train car from the left end (i.e., remove s[0]) which takes 
+/// 1 unit of time.
+/// Remove a train car from the right end (i.e., remove s[s.length - 1]) 
+/// which takes 1 unit of time.
+/// Remove a train car from anywhere in the sequence which takes 2 
+/// units of time.
+/// Return the minimum time to remove all the cars containing illegal 
+/// goods.
+///
+/// Note that an empty sequence of cars is considered to have no cars 
+/// containing illegal goods.
+/// 
+/// Example 1:
+/// 
+/// Input: s = "1100101"
+/// Output: 5
+/// Explanation: 
+/// One way to remove all the cars containing illegal goods from the 
+/// sequence is to
+/// - remove a car from the left end 2 times. Time taken is 2 * 1 = 2.
+/// - remove a car from the right end. Time taken is 1.
+/// - remove the car containing illegal goods found in the middle. Time 
+///   taken is 2.
+/// This obtains a total time of 2 + 1 + 2 = 5. 
+///
+/// An alternative way is to
+/// - remove a car from the left end 2 times. Time taken is 2 * 1 = 2.
+/// - remove a car from the right end 3 times. Time taken is 3 * 1 = 3.
+/// This also obtains a total time of 2 + 3 = 5.
+/// 5 is the minimum time taken to remove all the cars containing 
+/// illegal goods. 
+/// There are no other ways to remove them with less time.
+///
+/// Example 2:
+/// Input: s = "0010"
+/// Output: 2
+/// Explanation:
+/// One way to remove all the cars containing illegal goods from the 
+/// sequence is to
+/// - remove a car from the left end 3 times. Time taken is 3 * 1 = 3.
+/// This obtains a total time of 3.
+///
+/// Another way to remove all the cars containing illegal goods from 
+/// the sequence is to
+/// - remove the car containing illegal goods found in the middle. 
+/// Time taken is 2.
+/// This obtains a total time of 2.
+///
+/// Another way to remove all the cars containing illegal goods from 
+/// the sequence is to 
+/// - remove a car from the right end 2 times. Time taken is 2 * 1 = 2. 
+/// This obtains a total time of 2.
+///
+/// 2 is the minimum time taken to remove all the cars containing 
+/// illegal goods. 
+/// There are no other ways to remove them with less time.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 2 * 10^5
+/// 2. s[i] is either '0' or '1'.
+/// </summary>
+int LeetCodeDP::minimumTime(string s)
+{
+    int n = s.size();
+    vector<vector<int>> dp(n, vector<int>(2));
+    int prev = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i] == '0') dp[i][0] = prev;
+        else
+        {
+            dp[i][0] = min(i + 1, prev + 2);
+            prev = dp[i][0];
+        }
+    }
+    prev = 0;
+    for (int i = n - 1; i >= 0; i--)
+    {
+        if (s[i] == '0') dp[i][1] = prev;
+        else
+        {
+            dp[i][1] = min(n - i, prev + 2);
+            prev = dp[i][1];
+        }
+    }
+    if (n == 1) return dp[0][0];
+    int result = INT_MAX;
+    for (int i = 0; i < n - 1; i++)
+    {
+        result = min(result, dp[i][0] + dp[i+1][1]);
+    }
+    return result;
+}
 #pragma endregion
 
