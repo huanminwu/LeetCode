@@ -1224,8 +1224,26 @@ void TestLeetCode2158(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2182(void)
+{
+    Logger::WriteMessage("Test Leet Code 2182");
+    LeetCodeGreedy leetCode;
+    string s = "cczazcc";
+    int repeatLimit = 3;
+    string result = leetCode.repeatLimitedString(s, repeatLimit);
+    Logger::WriteMessage("s = " + s + "; repeatLimit = " + to_string(repeatLimit));
+    Logger::WriteMessage("result = " + result);
+
+    s = "aababab";
+    repeatLimit = 2;
+    result = leetCode.repeatLimitedString(s, repeatLimit);
+    Logger::WriteMessage("s = " + s + "; repeatLimit = " + to_string(repeatLimit));
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode2182();
     TestLeetCode2158();
     TestLeetCode2015();
     TestLeetCode1989();

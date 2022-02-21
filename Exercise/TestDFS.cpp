@@ -1620,8 +1620,47 @@ void TestLeetCode2151(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2172(void)
+{
+    Logger::WriteMessage("Test Leet Code 2172");
+    LeetCodeDFS leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5, 6 };
+    int numSlots = 3;
+    int result = leetCode.maximumANDSum(nums, numSlots);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("numSlots = " + to_string(numSlots) + "; result = " + to_string(result));
+
+    nums = { 1, 3, 10, 4, 7, 1 };
+    numSlots = 9;
+    result = leetCode.maximumANDSum(nums, numSlots);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("numSlots = " + to_string(numSlots) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2174(void)
+{
+    Logger::WriteMessage("Test Leet Code 2174");
+    LeetCodeDFS leetCode;
+    vector<vector<int>> grid = { {1, 1, 1},{1, 1, 1},{0, 1, 0} };
+    int result = leetCode.removeOnes(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {0, 1, 0},{1, 0, 1},{0, 1, 0} };
+    result = leetCode.removeOnes(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {0, 0},{0, 0} };
+    result = leetCode.removeOnes(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2174();
+    TestLeetCode2172();
     TestLeetCode2151();
     TestLeetCode2094();
     TestLeetCode2002();

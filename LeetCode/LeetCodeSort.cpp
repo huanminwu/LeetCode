@@ -8441,4 +8441,79 @@ long long LeetCodeSort::smallestNumber(long long num)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2171. Removing Minimum Number of Magic Beans
+///                                                                                  
+/// Medium
+///
+/// You are given an array of positive integers beans, where each integer 
+/// represents the number of magic beans found in a particular magic bag.
+///
+/// Remove any number of beans (possibly none) from each bag such that 
+/// the number of beans in each remaining non-empty bag (still containing 
+/// at least one bean) is equal. Once a bean has been removed from a bag, 
+/// you are not allowed to return it to any of the bags.
+///
+/// Return the minimum number of magic beans that you have to remove.
+/// 
+/// Example 1:
+/// Input: beans = [4,1,6,5]
+/// Output: 4
+/// Explanation: 
+/// - We remove 1 bean from the bag with only 1 bean.
+/// This results in the remaining bags: [4,0,6,5]
+/// - Then we remove 2 beans from the bag with 6 beans.
+///   This results in the remaining bags: [4,0,4,5]
+/// - Then we remove 1 bean from the bag with 5 beans.
+///   This results in the remaining bags: [4,0,4,4]
+/// We removed a total of 1 + 2 + 1 = 4 beans to make the remaining 
+/// non-empty bags have an equal number of beans.
+/// There are no other solutions that remove 4 beans or fewer.
+///
+/// Example 2:
+/// Input: beans = [2,10,3,2]
+/// Output: 7
+/// Explanation:
+/// - We remove 2 beans from one of the bags with 2 beans.
+///  This results in the remaining bags: [0,10,3,2]
+/// - Then we remove 2 beans from the other bag with 2 beans.
+///  This results in the remaining bags: [0,10,3,0]
+/// - Then we remove 3 beans from the bag with 3 beans. 
+/// This results in the remaining bags: [0,10,0,0]
+/// We removed a total of 2 + 2 + 3 = 7 beans to make the remaining 
+/// non-empty bags have an equal number of beans.
+/// There are no other solutions that removes 7 beans or fewer.
+/// 
+/// Constraints:
+/// 1. 1 <= beans.length <= 10^5
+/// 2. 1 <= beans[i] <= 10^5
+/// </summary>
+long long LeetCodeSort::minimumRemoval(vector<int>& beans)
+{
+    map<int, int> bean_count;
+    long long low_sum = 0;
+    for (size_t i = 0; i < beans.size(); i++)
+    {
+        low_sum += beans[i];
+        bean_count[beans[i]]++;
+    }
+    bean_count.erase(0);
+    long long high_sum = 0;
+    long long prev_count = 0;
+    long long prev_val = 0;
+    long long result = LLONG_MAX;
+    while (!bean_count.empty())
+    {
+        long long val = bean_count.rbegin()->first;
+        long long count = bean_count.rbegin()->second;
+
+        low_sum = low_sum - val * count;
+        high_sum = prev_count * (prev_val - val) + high_sum;
+        result = min(result, low_sum + high_sum);
+        prev_count += count;
+        prev_val = val;
+        bean_count.erase((int)val);
+    }
+    return result;
+}
 #pragma endregion

@@ -7981,5 +7981,184 @@ public:
     /// 3. 1 <= targetSeconds <= 6039
     /// </summary>
     int minCostSetTime(int startAt, int moveCost, int pushCost, int targetSeconds);
+
+    /// <summary>
+    /// Leet Code 2169. Count Operations to Obtain Zero
+    ///                                                                                  
+    /// Easy
+    ///
+    /// You are given two non-negative integers num1 and num2.
+    ///
+    /// In one operation, if num1 >= num2, you must subtract num2 from num1, 
+    /// otherwise subtract num1 from num2.
+    ///
+    /// For example, if num1 = 5 and num2 = 4, subtract num2 from num1, thus 
+    /// obtaining num1 = 1 and num2 = 4. However, if num1 = 4 and num2 = 5, 
+    /// after one operation, num1 = 4 and num2 = 1.
+    /// Return the number of operations required to make either num1 = 0 or 
+    /// num2 = 0.
+    ///
+    /// Example 1:
+    /// Input: num1 = 2, num2 = 3
+    /// Output: 3
+    /// Explanation: 
+    /// - Operation 1: num1 = 2, num2 = 3. Since num1 < num2, we subtract num1 
+    /// from num2 and get num1 = 2, num2 = 3 - 2 = 1.
+    /// - Operation 2: num1 = 2, num2 = 1. Since num1 > num2, we subtract num2 
+    /// from num1.
+    /// - Operation 3: num1 = 1, num2 = 1. Since num1 == num2, we subtract num2 
+    /// from num1.
+    /// Now num1 = 0 and num2 = 1. Since num1 == 0, we do not need to perform 
+    /// any further operations.
+    /// So the total number of operations required is 3.
+    ///
+    /// Example 2:
+    /// Input: num1 = 10, num2 = 10
+    /// Output: 1
+    /// Explanation: 
+    /// - Operation 1: num1 = 10, num2 = 10. Since num1 == num2, we subtract 
+    /// num2 from num1 and get num1 = 10 - 10 = 0.
+    /// Now num1 = 0 and num2 = 10. Since num1 == 0, we are done.
+    /// So the total number of operations required is 1.
+    /// 
+    /// Constraints:
+    /// 1. 0 <= num1, num2 <= 10^5
+    /// </summary>
+    int countOperations(int num1, int num2);
+
+    /// <summary>
+    /// Leet Code 2180. Count Integers With Even Digit Sum
+    ///                                                                                  
+    /// Easy
+    ///
+    /// Given a positive integer num, return the number of positive integers 
+    /// less than or equal to num whose digit sums are even.
+    /// The digit sum of a positive integer is the sum of all its digits.
+    ///
+    /// Example 1:
+    /// Input: num = 4
+    /// Output: 2
+    /// Explanation:
+    /// The only integers less than or equal to 4 whose digit sums are even 
+    /// are 2 and 4.    
+    ///
+    /// Example 2:
+    /// Input: num = 30
+    /// Output: 14
+    /// Explanation:
+    /// The 14 integers less than or equal to 30 whose digit sums are even are
+    /// 2, 4, 6, 8, 11, 13, 15, 17, 19, 20, 22, 24, 26, and 28.
+    ///	
+    /// Constraints:
+    /// 1. 1 <= num <= 1000
+    /// </summary>
+    int countEven(int num);
+
+    /// <summary>
+    /// Leet Code 2177. Find Three Consecutive Integers That Sum to a Given 
+    ///                 Number
+    ///                                                                                  
+    /// Medium
+    ///
+    /// Given an integer num, return three consecutive integers (as a sorted 
+    /// array) that sum to num. If num cannot be expressed as the sum of three 
+    /// consecutive integers, return an empty array.
+    /// 
+    /// Example 1:
+    /// Input: num = 33
+    /// Output: [10,11,12]
+    /// Explanation: 33 can be expressed as 10 + 11 + 12 = 33.
+    /// 10, 11, 12 are 3 consecutive integers, so we return [10, 11, 12].
+    ///
+    /// Example 2:
+    /// Input: num = 4
+    /// Output: []
+    /// Explanation: There is no way to express 4 as the sum of 3 consecutive 
+    /// integers.
+    ///
+    /// Constraints:
+    /// 1. 0 <= num <= 10^15
+    /// </summary>
+    vector<long long> sumOfThree(long long num);
+
+    /// <summary>
+    /// Leet Code 2178. Maximum Split of Positive Even Integers 
+    ///                                                                                  
+    /// Medium
+    ///
+    /// You are given an integer finalSum. Split it into a sum of a maximum 
+    /// number of unique positive even integers.
+    ///
+    /// For example, given finalSum = 12, the following splits are valid 
+    /// (unique positive even integers summing up to finalSum): (2 + 10), 
+    /// (2 + 4 + 6), and (4 + 8). Among them, (2 + 4 + 6) contains the 
+    /// maximum number of integers. Note that finalSum cannot be split into 
+    /// (2 + 2 + 4 + 4) as all the numbers should be unique.
+    /// Return a list of integers that represent a valid split containing a 
+    /// maximum number of integers. If no valid split exists for finalSum, 
+    /// return an empty list. You may return the integers in any order.
+    ///
+    /// Example 1:
+    /// Input: finalSum = 12
+    /// Output: [2,4,6]
+    /// Explanation: The following are some valid splits: (2 + 10), 
+    /// (2 + 4 + 6), and (4 + 8).
+    /// (2 + 4 + 6) has the maximum number of integers, which is 3. Thus, we 
+    /// return [2,4,6].
+    /// Note that [2,6,4], [6,2,4], etc. are also accepted.
+    ///
+    /// Example 2:
+    /// Input: finalSum = 7
+    /// Output: []
+    /// Explanation: There are no valid splits for the given finalSum.
+    /// Thus, we return an empty array.
+    ///
+    /// Example 3:
+    /// Input: finalSum = 28
+    /// Output: [6,8,2,12]
+    /// Explanation: The following are some valid splits: (2 + 26), 
+    /// (6 + 8 + 2 + 12), and (4 + 24). 
+    /// (6 + 8 + 2 + 12) has the maximum number of integers, which is 4. 
+    /// Thus, we return [6,8,2,12].
+    /// Note that [10,2,4,12], [6,2,4,16], etc. are also accepted.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= finalSum <= 10^10
+    /// </summary>
+    vector<long long> maximumEvenSplit(long long finalSum);
+
+    /// <summary>
+    /// Leet Code 2183. Count Array Pairs Divisible by K
+    ///                                                                                  
+    /// Hard
+    ///
+    /// Given a 0-indexed integer array nums of length n and an integer k, 
+    /// return the number of pairs (i, j) such that:
+    ///
+    /// 0 <= i < j <= n - 1 and
+    /// nums[i] * nums[j] is divisible by k.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2,3,4,5], k = 2
+    /// Output: 7
+    /// Explanation: 
+    /// The 7 pairs of indices whose corresponding products are divisible 
+    /// by 2 are
+    /// (0, 1), (0, 3), (1, 2), (1, 3), (1, 4), (2, 3), and (3, 4).
+    /// Their products are 2, 4, 6, 8, 10, 12, and 20 respectively.
+    /// Other pairs such as (0, 2) and (2, 4) have products 3 and 15 
+    /// respectively, which are not divisible by 2.    
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,3,4], k = 5
+    /// Output: 0
+    /// Explanation: There does not exist any pair of indices whose 
+    /// corresponding product is divisible by 5.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i], k <= 10^5
+    /// </summary>
+    long long countPairs(vector<int>& nums, int k);
 };
 #endif

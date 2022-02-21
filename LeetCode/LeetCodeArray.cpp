@@ -20788,5 +20788,229 @@ long long LeetCodeArray::minimumDifference(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2170. Minimum Operations to Make the Array Alternating
+///                                                                                  
+/// Medium
+///
+/// You are given a 0-indexed array nums consisting of n positive integers.
+///
+/// The array nums is called alternating if:
+///
+/// nums[i - 2] == nums[i], where 2 <= i <= n - 1.
+/// nums[i - 1] != nums[i], where 1 <= i <= n - 1.
+/// In one operation, you can choose an index i and change nums[i] into 
+/// any positive integer.
+///
+/// Return the minimum number of operations required to make the array 
+/// alternating.
+/// 
+/// Example 1:
+/// Input: nums = [3,1,3,2,4,3]
+/// Output: 3
+/// Explanation:
+/// One way to make the array alternating is by converting it to 
+/// [3,1,3,1,3,1].
+/// The number of operations required in this case is 3.
+/// It can be proven that it is not possible to make the array alternating 
+/// in less than 3 operations. 
+///
+/// Example 2:
+/// Input: nums = [1,2,2,2,2]
+/// Output: 2
+/// Explanation:
+/// One way to make the array alternating is by converting it to 
+/// [1,2,1,2,1].
+/// The number of operations required in this case is 2.
+/// Note that the array cannot be converted to [2,2,2,2,2] because in this 
+/// case nums[0] == nums[1] which violates the conditions of an 
+/// alternating array.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeArray::minimumOperations(vector<int>& nums)
+{
+    unordered_map<int, int> frequency;
+    for (size_t i = 0; i < nums.size(); i += 2)
+    {
+        frequency[nums[i]]++;
+    }
+    set<pair<int, int>> even;
+    for (auto& itr : frequency)
+    {
+        even.insert(make_pair(itr.second, itr.first));
+        if (even.size() > 2) even.erase(even.begin());
+    }
+    frequency.clear();
+    for (size_t i = 1; i < nums.size(); i += 2)
+    {
+        frequency[nums[i]]++;
+    }
+    set<pair<int, int>> odd;
+    for (auto& itr : frequency)
+    {
+        odd.insert(make_pair(itr.second, itr.first));
+        if (odd.size() > 2) odd.erase(odd.begin());
+    }
+    size_t result = INT_MAX;
+    if (odd.empty()) return 0;
+    if (even.rbegin()->second != odd.rbegin()->second)
+    {
+        result = nums.size() - even.rbegin()->first - odd.rbegin()->first;
+    }
+    if ((even.begin()->second != odd.rbegin()->second))
+    {
+        result = min(result, nums.size() - even.begin()->first - odd.rbegin()->first);
+    }
+    if ((even.rbegin()->second != odd.begin()->second))
+    {
+        result = min(result, nums.size() - even.rbegin()->first - odd.begin()->first);
+    }
+    if ((even.rbegin()->second != odd.begin()->second))
+    {
+        result = min(result, nums.size() - even.rbegin()->first - odd.begin()->first);
+    }
+    result = min(result, nums.size() - max(even.rbegin()->first, odd.rbegin()->first));
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2176. Count Equal and Divisible Pairs in an Array
+///                                                                                  
+/// Easy
+///
+/// Given a 0-indexed integer array nums of length n and an integer k, 
+/// return the number of pairs (i, j) where 0 <= i < j < n, such that 
+/// nums[i] == nums[j] and (i * j) is divisible by k.
+///
+/// Example 1:
+/// Input: nums = [3,1,2,2,2,1,3], k = 2
+/// Output: 4
+/// Explanation:
+/// There are 4 pairs that meet all the requirements:
+/// - nums[0] == nums[6], and 0 * 6 == 0, which is divisible by 2.
+/// - nums[2] == nums[3], and 2 * 3 == 6, which is divisible by 2.
+/// - nums[2] == nums[4], and 2 * 4 == 8, which is divisible by 2.
+/// - nums[3] == nums[4], and 3 * 4 == 12, which is divisible by 2.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4], k = 1
+/// Output: 0
+/// Explanation: Since no value in nums is repeated, there are no 
+/// pairs (i,j) that meet all the requirements.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i], k <= 100
+/// </summary>
+int LeetCodeArray::countPairs(vector<int>& nums, int k)
+{
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (size_t j = 0; j < i; j++)
+        {
+            if (i * j % k == 0 && nums[i] == nums[j])
+            {
+                result++;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2179. Count Good Triplets in an Array
+///                                                                                  
+/// Hard
+///
+/// You are given two 0-indexed arrays nums1 and nums2 of length n, both 
+/// of which are permutations of [0, 1, ..., n - 1].
+///
+/// A good triplet is a set of 3 distinct values which are present in 
+/// increasing order by position both in nums1 and nums2. In other words, 
+/// if we consider pos1v as the index of the value v in nums1 and pos2v 
+/// as the index of the value v in nums2, then a good triplet will be a 
+/// set (x, y, z) where 0 <= x, y, z <= n - 1, such that 
+/// pos1x < pos1y < pos1z and pos2x < pos2y < pos2z.
+///
+/// Return the total number of good triplets.
+/// 
+/// Example 1:
+/// Input: nums1 = [2,0,1,3], nums2 = [0,1,2,3]
+/// Output: 1
+/// Explanation: 
+/// There are 4 triplets (x,y,z) such that pos1x < pos1y < pos1z. They 
+/// are (2,0,1), (2,0,3), (2,1,3), and (0,1,3). 
+/// Out of those triplets, only the triplet (0,1,3) satisfies 
+/// pos2x < pos2y < pos2z. Hence, there is only 1 good triplet.
+///
+/// Example 2:
+/// Input: nums1 = [4,0,1,3,2], nums2 = [4,1,0,2,3]
+/// Output: 4
+/// Explanation: The 4 good triplets are (4,0,3), (4,0,2), (4,1,3), 
+/// and (4,1,2).
+/// 
+/// Constraints:
+/// 1. n == nums1.length == nums2.length
+/// 2. 3 <= n <= 10^5
+/// 3. 0 <= nums1[i], nums2[i] <= n - 1
+/// 4. nums1 and nums2 are permutations of [0, 1, ..., n - 1].
+/// </summary>
+long long LeetCodeArray::goodTriplets(vector<int>& nums1, vector<int>& nums2)
+{
+    int n = nums1.size();
+    vector<int> nums2_pos(n);
+    for (size_t i = 0; i < nums2.size(); i++)
+    {
+         nums2_pos[nums2[i]] = i + 1;
+    }
+    vector<int> prefix(n+1);
+    vector<vector<int>> dp(n, vector<int>(2));
+    for (int i = 0; i < n; i++)
+    {
+        int pos = nums2_pos[nums1[i]];
+        while (pos <= n)
+        {
+            prefix[pos] += 1;
+            pos += (pos & -pos);
+        }
+        pos = nums2_pos[nums1[i]] - 1;
+        int less = 0;
+        while (pos != 0)
+        {
+            less += prefix[pos];
+            pos -= (pos & -pos);
+        }
+        dp[i][0] = less;
+    }
+    vector<int> suffix(n+1);
+    for (int i = n - 1; i >=0; i--)
+    {
+        int pos = n - nums2_pos[nums1[i]] + 1;
+        while (pos <= n)
+        {
+            suffix[pos] += 1;
+            pos += (pos & -pos);
+        }
+        pos = n - nums2_pos[nums1[i]];
+        int less = 0;
+        while (pos != 0)
+        {
+            less += suffix[pos];
+            pos -= (pos & -pos);
+        }
+        dp[i][1] = less;
+    }
+    long long result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        result += (long long)dp[i][0] * (long long)dp[i][1];
+    }
+    return result;
+}
 #pragma endregion
 

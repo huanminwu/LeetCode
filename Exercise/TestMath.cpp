@@ -4392,11 +4392,98 @@ void TestLeetCode2162(void)
     Logger::WriteMessage("startAt = " + to_string(startAt) + "; moveCost = " + to_string(moveCost));
     Logger::WriteMessage("pushCost = " + to_string(pushCost) + "; targetSeconds = " + to_string(targetSeconds));
     Logger::WriteMessage("result = " + to_string(result));
+}
 
+void TestLeetCode2169(void)
+{
+    Logger::WriteMessage("Test Leet Code 2169");
+    LeetCodeMath leetCode;
+    int num1 = 2;
+    int num2 = 3;
+    int result = leetCode.countOperations(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 = " + to_string(num2) + "; result = " + to_string(result));
+
+    num1 = 10;
+    num2 = 10;
+    result = leetCode.countOperations(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 = " + to_string(num2) + "; result = " + to_string(result));
+
+    num1 = 10;
+    num2 = 0;
+    result = leetCode.countOperations(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 = " + to_string(num2) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2180(void)
+{
+    Logger::WriteMessage("Test Leet Code 2180");
+    LeetCodeMath leetCode;
+    int num = 4;
+    int result = leetCode.countEven(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+
+    num = 30;
+    result = leetCode.countEven(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2177(void)
+{
+    Logger::WriteMessage("Test Leet Code 2177");
+    LeetCodeMath leetCode;
+    long long num = 33;
+    vector<long long> result = leetCode.sumOfThree(num);
+    Logger::WriteMessage("num = " + to_string(num));
+    Logger::WriteMessage(result);
+
+    num = 4;
+    result = leetCode.sumOfThree(num);
+    Logger::WriteMessage("num = " + to_string(num));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2178(void)
+{
+    Logger::WriteMessage("Test Leet Code 2178");
+    LeetCodeMath leetCode;
+    long long finalSum = 12;
+    vector<long long> result = leetCode.maximumEvenSplit(finalSum);
+    Logger::WriteMessage("finalSum = " + to_string(finalSum));
+    Logger::WriteMessage(result);
+
+    finalSum = 7;
+    result = leetCode.maximumEvenSplit(finalSum);
+    Logger::WriteMessage("finalSum = " + to_string(finalSum));
+    Logger::WriteMessage(result);
+
+    finalSum = 28;
+    result = leetCode.maximumEvenSplit(finalSum);
+    Logger::WriteMessage("finalSum = " + to_string(finalSum));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2183(void)
+{
+    Logger::WriteMessage("Test Leet Code 2183");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5 };
+    int k = 2;
+    long long result = leetCode.countPairs(nums, k);
+    Logger::WriteMessage("k = 2" + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    k = 5;
+    result = leetCode.countPairs(nums, k);
+    Logger::WriteMessage("k = 2" + to_string(k) + "; result = " + to_string(result));
 }
 
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2183();
+    TestLeetCode2178();
+    TestLeetCode2177();
+    TestLeetCode2180();
+    TestLeetCode2169();
     TestLeetCode2162();
     TestLeetCode2160();
     TestLeetCode2145();

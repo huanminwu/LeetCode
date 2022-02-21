@@ -2761,8 +2761,25 @@ void TestLeetCode2165(void)
     Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2171(void)
+{
+    Logger::WriteMessage("Test Leet Code 2171");
+
+    LeetCodeSort leetCode;
+    vector<int> beans = { 4, 1, 6, 5 };
+    long long result = leetCode.minimumRemoval(beans);
+    Logger::WriteMessage(beans);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    beans = { 2,10,3,2 };
+    result = leetCode.minimumRemoval(beans);
+    Logger::WriteMessage(beans);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2171();
     TestLeetCode2165();
     TestLeetCode2164();
     TestLeetCode2148();

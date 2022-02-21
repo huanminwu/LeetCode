@@ -5089,8 +5089,22 @@ void TestLeetCode2156(void)
     Logger::WriteMessage("k = " + to_string(k) + "; hashValue = " + to_string(hashValue) + "; result = " + result);
 }
 
+void TestLeetCode2168(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2168");
+    string s = "1212";
+    int result = leetCode.equalDigitFrequency(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+  
+    s = "12321";
+    result = leetCode.equalDigitFrequency(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2168();
     TestLeetCode2156();
     TestLeetCode2157();
     TestLeetCode2131();

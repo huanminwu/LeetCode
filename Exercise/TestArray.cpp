@@ -7011,8 +7011,67 @@ void TestLeetCode2163(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2170(void)
+{
+    Logger::WriteMessage("Test Leet Code 2170");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 1, 3, 2, 4, 3 };
+    int result = leetCode.minimumOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,2,2,2 };
+    result = leetCode.minimumOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1 };
+    result = leetCode.minimumOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2176(void)
+{
+    Logger::WriteMessage("Test Leet Code 2176");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3,1,2,2,2,1,3 };
+    int k = 2;
+    int result = leetCode.countPairs(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    k = 1;
+    result = leetCode.countPairs(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2179(void)
+{
+    Logger::WriteMessage("Test Leet Code 2179");
+    LeetCodeArray leetCode;
+    vector<int> nums1 = { 2, 0, 1, 3 };
+    vector<int> nums2 = { 0, 1, 2, 3 };
+    int result = leetCode.goodTriplets(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 4,0,1,3,2 };
+    nums2 = { 4,1,0,2,3 };
+    result = leetCode.goodTriplets(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2179();
+    TestLeetCode2176();
+    TestLeetCode2170();
     TestLeetCode2163();
     TestLeetCode2161();
     TestLeetCode2155();
