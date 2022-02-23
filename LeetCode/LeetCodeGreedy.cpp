@@ -3875,6 +3875,7 @@ vector<int> LeetCodeGreedy::amountPainted(vector<vector<int>>& paint)
     }
     return result;
 }
+
 /// <summary>
 /// Leet Code 2182. Construct String With Repeat Limit
 ///                                                                                  
