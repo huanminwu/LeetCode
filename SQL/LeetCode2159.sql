@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------
 --- Leet code 2159. Order Two Columns Independently
 ---
---- Hard
+--- Medium
 ---
 --- SQL Schema
 --- Table: Data
