@@ -4260,9 +4260,31 @@ void TestLeetCode2146(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2192(void)
+{
+    LeetCodeGraph leetCode;
+    int n = 8;
+    vector<vector<int>> edgeList =
+    { 
+        {0, 3},{0, 4},{1, 3},{2, 4},{2, 7},{3, 5},{3, 6},{3, 7},{4, 6} 
+    };
+    vector<vector<int>> result = leetCode.getAncestors(n, edgeList);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 5;
+    edgeList =
+    { 
+        {0, 1}, { 0, 2 }, { 0, 3 }, { 0, 4 }, { 1, 2 }, { 1, 3 }, { 1, 4 }, { 2, 3 }, { 2, 4 }, { 3, 4 } 
+    };
+    result = leetCode.getAncestors(n, edgeList);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
 
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2192();
     TestLeetCode2146();
     TestLeetCode2127();
     TestLeetCode2123();

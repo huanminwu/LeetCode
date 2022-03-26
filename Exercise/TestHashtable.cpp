@@ -1380,8 +1380,24 @@ void TestLeetCode2150(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2206(void)
+{
+    Logger::WriteMessage("Test Leet Code 2206");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 3, 2, 3, 2, 2, 2 };
+    bool result = leetCode.divideArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,2,3,4 };
+    result = leetCode.divideArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode2206();
     TestLeetCode2150();
     TestLeetCode1915();
     TestLeetCode242();

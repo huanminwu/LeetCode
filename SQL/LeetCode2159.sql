@@ -44,6 +44,7 @@
 SELECT
     A.first_col,
     B.second_col	
+FROM
 (
 	SELECT
 		first_col,

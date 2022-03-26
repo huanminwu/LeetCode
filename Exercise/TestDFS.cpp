@@ -1657,8 +1657,26 @@ void TestLeetCode2174(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2189(void)
+{
+    Logger::WriteMessage("Test Leet Code 2189");
+    LeetCodeDFS leetCode;
+    int n = 16;
+    int result = leetCode.houseOfCards(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 2;
+    result = leetCode.houseOfCards(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    result = leetCode.houseOfCards(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2189();
     TestLeetCode2174();
     TestLeetCode2172();
     TestLeetCode2151();

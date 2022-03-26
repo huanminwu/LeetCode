@@ -5038,6 +5038,105 @@ public:
     /// 2. s[i] is either '0' or '1'.
     /// </summary>
     int minimumTime(string s);
+
+    /// <summary>
+    /// Leet Code 2184. Number of Ways to Build Sturdy Brick Wall
+    ///                                                                                   
+    /// Medium
+    /// You are given integers height and width which specify the dimensions 
+    /// of a brick wall you are building. You are also given a 0-indexed 
+    /// array of unique integers bricks, where the ith brick has a height 
+    /// of 1 and a width of bricks[i]. You have an infinite supply of each 
+    /// type of brick and bricks may not be rotated.
+    /// 
+    /// Each row in the wall must be exactly width units long. For the wall 
+    /// to be sturdy, adjacent rows in the wall should not join bricks at the 
+    /// same location, except at the ends of the wall.
+    ///
+    /// Return the number of ways to build a sturdy wall. Since the answer may 
+    /// be very large, return it modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// 
+    /// Input: height = 2, width = 3, bricks = [1,2]
+    /// Output: 2
+    /// Explanation:
+    /// The first two walls in the diagram show the only two ways to build 
+    /// a sturdy brick wall.
+    /// Note that the third wall in the diagram is not sturdy because adjacent 
+    /// rows join bricks 2 units from the left.
+    /// Example 2:
+    ///
+    /// Input: height = 1, width = 1, bricks = [5]
+    /// Output: 0
+    /// Explanation:
+    /// There are no ways to build a sturdy wall because the only type of 
+    /// brick we have is longer than the width of the wall.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= height <= 100
+    /// 2. 1 <= width <= 10
+    /// 3. 1 <= bricks.length <= 10
+    /// 4. 1 <= bricks[i] <= 10
+    /// 5. All the values of bricks are unique.
+    /// </summary>
+    int buildWall(int height, int width, vector<int>& bricks);
+
+    /// <summary>
+    /// Leet Code 2188. Minimum Time to Finish the Race
+    ///                                                                                   
+    /// Hard
+    ///
+    /// You are given a 0-indexed 2D integer array tires where 
+    /// tires[i] = [fi, ri] indicates that the ith tire can finish its xth 
+    /// successive lap in fi * ri^(x-1) seconds.
+    ///
+    /// For example, if fi = 3 and ri = 2, then the tire would finish its 1st 
+    /// lap in 3 seconds, its 2nd lap in 3 * 2 = 6 seconds, its 3rd lap 
+    /// in 3 * 22 = 12 seconds, etc.
+    /// You are also given an integer changeTime and an integer numLaps.
+    ///
+    /// The race consists of numLaps laps and you may start the race with any 
+    /// tire. You have an unlimited supply of each tire and after every lap, 
+    /// you may change to any given tire (including the current tire type) if 
+    /// you wait changeTime seconds.
+    ///
+    /// Return the minimum time to finish the race.
+    /// 
+    /// Example 1:
+    /// Input: tires = [[2,3],[3,4]], changeTime = 5, numLaps = 4
+    /// Output: 21
+    /// Explanation: 
+    /// Lap 1: Start with tire 0 and finish the lap in 2 seconds.
+    /// Lap 2: Continue with tire 0 and finish the lap in 2 * 3 = 6 seconds.
+    /// Lap 3: Change tires to a new tire 0 for 5 seconds and then finish the 
+    ///        lap in another 2 seconds.
+    /// Lap 4: Continue with tire 0 and finish the lap in 2 * 3 = 6 seconds.
+    /// Total time = 2 + 6 + 5 + 2 + 6 = 21 seconds.
+    /// The minimum time to complete the race is 21 seconds.
+    ///
+    /// Example 2:
+    /// Input: tires = [[1,10],[2,2],[3,4]], changeTime = 6, numLaps = 5
+    /// Output: 25
+    /// Explanation: 
+    /// Lap 1: Start with tire 1 and finish the lap in 2 seconds.
+    /// Lap 2: Continue with tire 1 and finish the lap in 2 * 2 = 4 seconds.
+    /// Lap 3: Change tires to a new tire 1 for 6 seconds and then finish 
+    ///        the lap in another 2 seconds.
+    /// Lap 4: Continue with tire 1 and finish the lap in 2 * 2 = 4 seconds.
+    /// Lap 5: Change tires to tire 0 for 6 seconds then finish the lap in 
+    ///        another 1 second.
+    /// Total time = 2 + 4 + 6 + 2 + 4 + 6 + 1 = 25 seconds.
+    /// The minimum time to complete the race is 25 seconds. 
+    ///
+    /// Constraints:
+    /// 1. 1 <= tires.length <= 10^5
+    /// 2. tires[i].length == 2
+    /// 3. 1 <= fi, changeTime <= 10^5
+    /// 4. 2 <= ri <= 10^5
+    /// 5. 1 <= numLaps <= 1000
+    /// </summary>
+    int minimumFinishTime(vector<vector<int>>& tires, int changeTime, int numLaps);
 };
 
 

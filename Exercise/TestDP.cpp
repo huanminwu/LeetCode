@@ -2945,8 +2945,52 @@ void TestLeetCode2167(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode2184(void)
+{
+    Logger::WriteMessage("Test Leet Code 2184");
+    LeetCodeDP leetCode;
+    int height = 2;
+    int width = 3;
+    vector<int> bricks = { 1, 2 };
+    int result = leetCode.buildWall(height, width, bricks);
+    Logger::WriteMessage(bricks);
+    Logger::WriteMessage("height = " + to_string(height) + "; width = " + to_string(width) + "; result = " + to_string(result));
+
+    height = 1;
+    width = 1;
+    bricks = { 5 };
+    result = leetCode.buildWall(height, width, bricks);
+    Logger::WriteMessage(bricks);
+    Logger::WriteMessage("height = " + to_string(height) + "; width = " + to_string(width) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2188(void)
+{
+    Logger::WriteMessage("Test Leet Code 2188");
+    LeetCodeDP leetCode;
+    vector<vector<int>> tires = { {2, 3},{3, 4} };
+    int changeTime = 5;
+    int numLaps = 4;
+    int result = leetCode.minimumFinishTime(tires, changeTime, numLaps);
+    Logger::WriteMessage(tires);
+    Logger::WriteMessage("changeTime = " + to_string(changeTime) + 
+        "; numLaps = " + to_string(numLaps) + 
+        "; result = " + to_string(result));
+
+    tires = { {1, 10},{2, 2},{3, 4} };
+    changeTime = 6;
+    numLaps = 5;
+    result = leetCode.minimumFinishTime(tires, changeTime, numLaps);
+    Logger::WriteMessage(tires);
+    Logger::WriteMessage("changeTime = " + to_string(changeTime) +
+        "; numLaps = " + to_string(numLaps) +
+        "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2188();
+    TestLeetCode2184();
     TestLeetCode2167();
     TestLeetCode2143();
     TestLeetCode2140();

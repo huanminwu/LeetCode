@@ -969,8 +969,32 @@ void TestLeetCode2137(void)
     Logger::WriteMessage("loss = " + to_string(loss) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2187(void)
+{
+    Logger::WriteMessage("Test Leet Code 2187");
+    LeetCodeBinarySearch leetCode;
+    vector<int> time = { 1, 2, 3 };
+    int totalTrips = 5;
+    long long result = leetCode.minimumTime(time, totalTrips);
+    Logger::WriteMessage(time);
+    Logger::WriteMessage("totalTrips = " + to_string(totalTrips) + "; result = " + to_string(result));
+
+    time = { 2 };
+    totalTrips = 1;
+    result = leetCode.minimumTime(time, totalTrips);
+    Logger::WriteMessage(time);
+    Logger::WriteMessage("totalTrips = " + to_string(totalTrips) + "; result = " + to_string(result));
+
+    time = { 690709, 79, 156068, 359659 };
+    totalTrips = 985484;
+    result = leetCode.minimumTime(time, totalTrips);
+    Logger::WriteMessage(time);
+    Logger::WriteMessage("totalTrips = " + to_string(totalTrips) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode2187();
     TestLeetCode2137();
     TestLeetCode2141();
     TestLeetCode2064();

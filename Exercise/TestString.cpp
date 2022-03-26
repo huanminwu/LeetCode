@@ -5102,8 +5102,95 @@ void TestLeetCode2168(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode2185(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2185");
+    vector<string> words = { "pay", "attention", "practice", "attend" };
+    string pref = "at";
+    int result = leetCode.prefixCount(words, pref);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("pref = " + pref + "; result = " + to_string(result));
+
+    words = { "leetcode","win","loops","success" };
+    pref = "code";
+    result = leetCode.prefixCount(words, pref);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("pref = " + pref + "; result = " + to_string(result));
+}
+
+void TestLeetCode2194(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2194");
+    string s = "K1:L2";
+    vector<string> result = leetCode.cellsInRange(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+
+    s = "A1:F1";
+    result = leetCode.cellsInRange(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2193(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2193");
+    string s = "aabb";
+    int result = leetCode.minMovesToMakePalindrome(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "letelt";
+    result = leetCode.minMovesToMakePalindrome(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2186(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2186");
+    string s = "leetcode";
+    string t = "coats";
+    int result = leetCode.minStepsII(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "night";
+    t = "thing";
+    result = leetCode.minStepsII(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2191(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2191");
+    vector<int> mapping = { 8, 9, 4, 0, 2, 1, 3, 5, 7, 6 };
+    vector<int> nums = { 991, 338, 38 };
+    vector<int> result = leetCode.sortJumbled(mapping, nums);
+    Logger::WriteMessage(mapping);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    mapping = { 0,1,2,3,4,5,6,7,8,9 };
+    nums = { 789,456,123 };
+    result = leetCode.sortJumbled(mapping, nums);
+    Logger::WriteMessage(mapping);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
 void TestLeetCodeString(void)
 {
+    TestLeetCode2191();
+    TestLeetCode2186();
+    TestLeetCode2193();
+    TestLeetCode2194();
+    TestLeetCode2185();
     TestLeetCode2168();
     TestLeetCode2156();
     TestLeetCode2157();

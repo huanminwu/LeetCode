@@ -4477,8 +4477,63 @@ void TestLeetCode2183(void)
     Logger::WriteMessage("k = 2" + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2197(void)
+{
+    Logger::WriteMessage("Test Leet Code 2197");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 6, 4, 3, 2, 7, 6, 2 };
+    vector<int> result = leetCode.replaceNonCoprimes(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 2,2,1,1,3,3,3 };
+    result = leetCode.replaceNonCoprimes(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2198(void)
+{
+    Logger::WriteMessage("Test Leet Code 2198");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 4,6,7,3,2 };
+    long long result = leetCode.singleDivisorTriplet(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,2 };
+    result = leetCode.singleDivisorTriplet(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1 };
+    result = leetCode.singleDivisorTriplet(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2195(void)
+{
+    Logger::WriteMessage("Test Leet Code 2195");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 4, 25, 10, 25 };
+    int k = 2;
+    long long result = leetCode.minimalKSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 5,6 };
+    k = 6;
+    result = leetCode.minimalKSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2195();
+    TestLeetCode2198();
+    TestLeetCode2197();
     TestLeetCode2183();
     TestLeetCode2178();
     TestLeetCode2177();

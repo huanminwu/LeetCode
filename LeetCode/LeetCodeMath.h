@@ -8160,5 +8160,154 @@ public:
     /// 2. 1 <= nums[i], k <= 10^5
     /// </summary>
     long long countPairs(vector<int>& nums, int k);
+
+
+    /// <summary>
+    /// Leet Code 2197. Replace Non-Coprime Numbers in Array
+    ///                                                                                   
+    /// Hard
+    ///
+    /// You are given an array of integers nums. Perform the following steps:
+    ///
+    /// Find any two adjacent numbers in nums that are non-coprime.
+    /// If no such numbers are found, stop the process.
+    /// Otherwise, delete the two numbers and replace them with their LCM 
+    /// (Least Common Multiple).
+    /// Repeat this process as long as you keep finding two adjacent 
+    /// non-coprime numbers.
+    /// Return the final modified array. It can be shown that replacing 
+    /// adjacent non-coprime numbers in any arbitrary order will lead to the 
+    /// same result.
+    ///
+    /// The test cases are generated such that the values in the final array 
+    /// are less than or equal to 108.
+    ///
+    /// Two values x and y are non-coprime if GCD(x, y) > 1 where GCD(x, y) 
+    /// is the Greatest Common Divisor of x and y.
+    /// 
+    /// Example 1:
+    /// Input: nums = [6,4,3,2,7,6,2]
+    /// Output: [12,7,6]
+    /// Explanation: 
+    /// - (6, 4) are non-coprime with LCM(6, 4) = 12. Now, 
+    /// nums = [12,3,2,7,6,2].
+    /// - (12, 3) are non-coprime with LCM(12, 3) = 12. Now, 
+    /// nums = [12,2,7,6,2].
+    /// - (12, 2) are non-coprime with LCM(12, 2) = 12. Now, 
+    /// nums = [12,7,6,2].
+    /// - (6, 2) are non-coprime with LCM(6, 2) = 6. Now, nums = [12,7,6].
+    /// There are no more adjacent non-coprime numbers in nums.
+    /// Thus, the final modified array is [12,7,6].
+    /// Note that there are other ways to obtain the same resultant array.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,2,1,1,3,3,3]
+    /// Output: [2,1,1,3]
+    /// Explanation: 
+    /// - (3, 3) are non-coprime with LCM(3, 3) = 3. Now, nums = [2,2,1,1,3,3].
+    /// - (3, 3) are non-coprime with LCM(3, 3) = 3. Now, nums = [2,2,1,1,3].
+    /// - (2, 2) are non-coprime with LCM(2, 2) = 2. Now, nums = [2,1,1,3].
+    /// There are no more adjacent non-coprime numbers in nums.
+    /// Thus, the final modified array is [2,1,1,3].
+    /// Note that there are other ways to obtain the same resultant array.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 105
+    /// 3. The test cases are generated such that the values in the final 
+    ///    array are less than or equal to 10^8.
+    /// </summary>
+    vector<int> replaceNonCoprimes(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2198. Number of Single Divisor Triplets
+    ///                                                                                   
+    /// Medium
+    ///
+    /// You are given a 0-indexed array of positive integers nums. A triplet 
+    /// of three distinct indices (i, j, k) is called a single divisor triplet 
+    /// of nums if nums[i] + nums[j] + nums[k] is divisible by exactly one 
+    /// of nums[i], nums[j], or nums[k].
+    ///
+    /// Return the number of single divisor triplets of nums.
+    ///
+    /// Example 1:
+    /// Input: nums = [4,6,7,3,2]
+    /// Output: 12
+    /// Explanation:
+    /// The triplets (0, 3, 4), (0, 4, 3), (3, 0, 4), (3, 4, 0), (4, 0, 3), 
+    /// and (4, 3, 0) have the values of [4, 3, 2] (or a permutation of 
+    /// [4, 3, 2]).
+    /// 4 + 3 + 2 = 9 which is only divisible by 3, so all such triplets 
+    /// are single divisor triplets.
+    /// The triplets (0, 2, 3), (0, 3, 2), (2, 0, 3), (2, 3, 0), (3, 0, 2), 
+    /// and (3, 2, 0) have the values of [4, 7, 3] (or a permutation of 
+    /// [4, 7, 3]).
+    /// 4 + 7 + 3 = 14 which is only divisible by 7, so all such triplets 
+    /// are single divisor triplets.
+    /// There are 12 single divisor triplets in total.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,2]
+    /// Output: 6
+    /// Explanation:
+    /// The triplets (0, 1, 2), (0, 2, 1), (1, 0, 2), (1, 2, 0), (2, 0, 1), 
+    /// and (2, 1, 0) have the values of [1, 2, 2] (or a permutation of 
+    /// [1, 2, 2]).
+    /// 1 + 2 + 2 = 5 which is only divisible by 1, so all such triplets 
+    /// are single divisor triplets.
+    /// There are 6 single divisor triplets in total.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,1,1]
+    /// Output: 0
+    /// Explanation:
+    /// There are no single divisor triplets.
+    /// Note that (0, 1, 2) is not a single divisor triplet because nums[0] + 
+    /// nums[1] + nums[2] = 3 and 3 is divisible by nums[0], nums[1], and 
+    /// nums[2].
+    ///
+    /// Constraints:
+    /// 1. 3 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 100
+    /// </summary>
+    long long singleDivisorTriplet(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2195. Append K Integers With Minimal Sum
+    ///                                                                                   
+    /// Medium
+    ///
+    /// You are given an integer array nums and an integer k. Append k unique 
+    /// positive integers that do not appear in nums to nums such that the 
+    /// resulting total sum is minimum.
+    ///
+    /// Return the sum of the k integers appended to nums.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,4,25,10,25], k = 2
+    /// Output: 5
+    /// Explanation: The two unique positive integers that do not appear in 
+    /// nums which we append are 2 and 3.
+    /// The resulting sum of nums is 1 + 4 + 25 + 10 + 25 + 2 + 3 = 70, which 
+    /// is the minimum.
+    /// The sum of the two integers appended is 2 + 3 = 5, so we return 5.
+    ///
+    /// Example 2:
+    /// Input: nums = [5,6], k = 6
+    /// Output: 25
+    /// Explanation: The six unique positive integers that do not appear in 
+    /// nums which we append are 1, 2, 3, 4, 7, and 8.
+    /// The resulting sum of nums is 5 + 6 + 1 + 2 + 3 + 4 + 7 + 8 = 36, which 
+    /// is the minimum. 
+    /// The sum of the six integers appended is 1 + 2 + 3 + 4 + 7 + 8 = 25, so 
+    /// we return 25.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. 1 <= k <= 10^8
+    /// </summary>
+    long long minimalKSum(vector<int>& nums, int k);
 };
 #endif

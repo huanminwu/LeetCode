@@ -9999,6 +9999,210 @@ public:
     /// </summary>
     int equalDigitFrequency(string s);
 
+    /// <summary>
+    /// Leet Code 2185. Counting Words With a Given Prefix
+    ///                                                                                   
+    /// Easy
+    ///
+    /// You are given an array of strings words and a string pref.
+    ///
+    /// Return the number of strings in words that contain pref as a prefix.
+    ///
+    /// A prefix of a string s is any leading contiguous substring of s.
+    ///  
+    /// Example 1:
+    /// Input: words = ["pay","attention","practice","attend"], pref = "at"
+    /// Output: 2
+    /// Explanation: The 2 strings that contain "at" as a prefix 
+    /// are: "attention" and "attend".
+    ///
+    /// Example 2:
+    /// Input: words = ["leetcode","win","loops","success"], pref = "code"
+    /// Output: 0
+    /// Explanation: There are no strings that contain "code" as a prefix.
+    ///
+    /// Constraints:
+    /// 1. 1 <= words.length <= 100
+    /// 2. 1 <= words[i].length, pref.length <= 100
+    /// 3. words[i] and pref consist of lowercase English letters.
+    /// </summary>
+    int prefixCount(vector<string>& words, string pref);
+
+    /// <summary>
+    /// Leet Code 2194. Cells in a Range on an Excel Sheet
+    ///                                                                                   
+    /// Easy
+    ///
+    /// A cell (r, c) of an excel sheet is represented as a string 
+    /// "<col><row>" where:
+    ///
+    /// <col> denotes the column number c of the cell. It is represented 
+    /// by alphabetical letters.
+    /// For example, the 1st column is denoted by 'A', the 2nd by 'B', 
+    /// the 3rd by 'C', and so on.
+    /// <row> is the row number r of the cell. The rth row is represented 
+    /// by the integer r.
+    /// You are given a string s in the format "<col1><row1>:<col2><row2>", 
+    /// where <col1> represents the column c1, <row1> represents the row r1, 
+    /// <col2> represents the column c2, and <row2> represents the row r2, 
+    /// such that r1 <= r2 and c1 <= c2.
+    ///
+    /// Return the list of cells (x, y) such that r1 <= x <= r2 and 
+    /// c1 <= y <= c2. The cells should be represented as strings in the 
+    /// format mentioned above and be sorted in non-decreasing order first 
+    /// by columns and then by rows.
+    /// 
+    /// Example 1:
+    /// Input: s = "K1:L2"
+    /// Output: ["K1","K2","L1","L2"]
+    /// Explanation:
+    /// The above diagram shows the cells which should be present in the list.
+    /// The red arrows denote the order in which the cells should be presented.
+    ///
+    /// Example 2:
+    /// Input: s = "A1:F1"
+    /// Output: ["A1","B1","C1","D1","E1","F1"]
+    /// Explanation:
+    /// The above diagram shows the cells which should be present in the list.
+    /// The red arrow denotes the order in which the cells should be presented.
+    /// 
+    /// Constraints:
+    /// 1. s.length == 5
+    /// 2. 'A' <= s[0] <= s[3] <= 'Z'
+    /// 3. '1' <= s[1] <= s[4] <= '9'
+    /// 4. s consists of uppercase English letters, digits and ':'.
+    /// </summary>
+    vector<string> cellsInRange(string s);
+
+    /// <summary>
+    /// Leet Code 2193. Minimum Number of Moves to Make Palindrome
+    ///                                                                                   
+    /// Hard
+    ///
+    /// You are given a string s consisting only of lowercase English letters.
+    /// In one move, you can select any two adjacent characters of s and swap 
+    /// them.
+    /// Return the minimum number of moves needed to make s a palindrome.
+    /// Note that the input will be generated such that s can always be 
+    /// converted to a palindrome.
+    /// 
+    /// Example 1:
+    /// Input: s = "aabb"
+    /// Output: 2
+    /// Explanation:
+    /// We can obtain two palindromes from s, "abba" and "baab". 
+    /// - We can obtain "abba" from s in 2 moves: "aabb" -> "abab" -> "abba".
+    /// - We can obtain "baab" from s in 2 moves: "aabb" -> "abab" -> "baab".
+    /// Thus, the minimum number of moves needed to make s a palindrome is 2.
+    ///
+    /// Example 2:
+    /// Input: s = "letelt"
+    /// Output: 2
+    ///
+    /// Explanation:
+    /// One of the palindromes we can obtain from s in 2 moves is "lettel".
+    /// One of the ways we can obtain it is "letelt" -> "letetl" -> "lettel".
+    /// Other palindromes such as "tleelt" can also be obtained in 2 moves.
+    /// It can be shown that it is not possible to obtain a palindrome in 
+    /// less than 2 moves.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 2000
+    /// 2. s consists only of lowercase English letters.
+    /// 3. s can be converted to a palindrome using a finite number of moves.
+    /// </summary>
+    int minMovesToMakePalindrome(string s);
+
+    /// <summary>
+    /// Leet Code 2186. Minimum Number of Steps to Make Two Strings Anagram II
+    ///                                                                                   
+    /// Medium
+    ///
+    /// You are given two strings s and t. In one step, you can append any 
+    /// character to either s or t.
+    ///
+    /// Return the minimum number of steps to make s and t anagrams of each 
+    /// other.
+    ///
+    /// An anagram of a string is a string that contains the same characters 
+    /// with a different (or the same) ordering.
+    /// 
+    /// Example 1:
+    /// Input: s = "leetcode", t = "coats"
+    /// Output: 7
+    /// Explanation: 
+    /// - In 2 steps, we can append the letters in "as" onto s = "leetcode", 
+    ///   forming s = "leetcodeas".
+    /// - In 5 steps, we can append the letters in "leede" onto t = "coats", 
+    ///   forming t = "coatsleede".
+    /// "leetcodeas" and "coatsleede" are now anagrams of each other.
+    /// We used a total of 2 + 5 = 7 steps.
+    /// It can be shown that there is no way to make them anagrams of each 
+    /// other with less than 7 steps.
+    ///
+    /// Example 2:
+    /// Input: s = "night", t = "thing"
+    /// Output: 0
+    /// Explanation: The given strings are already anagrams of each other. 
+    /// Thus, we do not need any further steps.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length, t.length <= 2 * 10^5
+    /// 2. s and t consist of lowercase English letters.
+    /// </summary>
+    int minStepsII(string s, string t);
+
+    /// <summary>
+    /// Leet Code 2191. Sort the Jumbled Numbers
+    ///                                                                                   
+    /// Medium
+    ///
+    /// You are given a 0-indexed integer array mapping which represents the 
+    /// mapping rule of a shuffled decimal system. mapping[i] = j means 
+    /// digit i should be mapped to digit j in this system.
+    ///  
+    /// The mapped value of an integer is the new integer obtained by 
+    /// replacing each occurrence of digit i in the integer with mapping[i] 
+    /// for all 0 <= i <= 9.
+    /// 
+    /// You are also given another integer array nums. Return the array nums 
+    /// sorted in non-decreasing order based on the mapped values of its 
+    /// elements.
+    ///
+    /// Notes:
+    /// Elements with the same mapped values should appear in the same 
+    /// relative order as in the input.
+    /// The elements of nums should only be sorted based on their mapped values 
+    /// and not be replaced by them.
+    ///
+    /// Example 1:
+    /// Input: mapping = [8,9,4,0,2,1,3,5,7,6], nums = [991,338,38]
+    /// Output: [338,38,991]
+    /// Explanation:  
+    /// Map the number 991 as follows:
+    /// 1. mapping[9] = 6, so all occurrences of the digit 9 will become 6.
+    /// 2. mapping[1] = 9, so all occurrences of the digit 1 will become 9.
+    /// Therefore, the mapped value of 991 is 669.
+    /// 338 maps to 007, or 7 after removing the leading zeros.
+    /// 38 maps to 07, which is also 7 after removing leading zeros.
+    /// Since 338 and 38 share the same mapped value, they should remain in 
+    /// the same relative order, so 338 comes before 38.
+    /// Thus, the sorted array is [338,38,991].
+    ///
+    /// Example 2:
+    /// Input: mapping = [0,1,2,3,4,5,6,7,8,9], nums = [789,456,123]
+    /// Output: [123,456,789]
+    /// Explanation: 789 maps to 789, 456 maps to 456, and 123 maps to 123. 
+    /// Thus, the sorted array is [123,456,789].
+    /// 
+    /// Constraints:
+    /// 1. mapping.length == 10
+    /// 2. 0 <= mapping[i] <= 9
+    /// 3. All the values of mapping[i] are unique.
+    /// 4. 1 <= nums.length <= 3 * 10^4
+    /// 5. 0 <= nums[i] < 10^9
+    /// </summary>
+    vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums);
 #pragma endregion
 };
 

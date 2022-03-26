@@ -12951,6 +12951,95 @@ public:
     /// 4. nums1 and nums2 are permutations of [0, 1, ..., n - 1].
     /// </summary>
     long long goodTriplets(vector<int>& nums1, vector<int>& nums2);
+
+    /// <summary>
+    /// Leet Code 2190. Most Frequent Number Following Key In an Array
+    ///                                                                                   
+    /// Easy
+    ///
+    /// You are given a 0-indexed integer array nums. You are also given an 
+    /// integer key, which is present in nums.
+    ///
+    /// For every unique integer target in nums, count the number of times 
+    /// target immediately follows an occurrence of key in nums. In other 
+    /// words, count the number of indices i such that:
+    ///
+    /// 0 <= i <= nums.length - 2,
+    /// nums[i] == key and,
+    /// nums[i + 1] == target.
+    /// Return the target with the maximum count. The test cases will be 
+    /// generated such that the target with maximum count is unique.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,100,200,1,100], key = 1
+    /// Output: 100
+    /// Explanation: For target = 100, there are 2 occurrences at indices 1 
+    /// and 4 which follow an occurrence of key.
+    /// No other integers follow an occurrence of key, so we return 100.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,2,2,2,3], key = 2
+    /// Output: 2
+    /// Explanation: For target = 2, there are 3 occurrences at indices 1, 2, 
+    /// and 3 which follow an occurrence of key.
+    /// For target = 3, there is only one occurrence at index 4 which follows 
+    /// an occurrence of key.
+    /// target = 2 has the maximum number of occurrences following an 
+    /// occurrence of key, so we return 2.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 1000
+    /// 2. 1 <= nums[i] <= 1000
+    /// 3. The test cases will be generated such that the answer is unique.
+    /// </summary>
+    int mostFrequent(vector<int>& nums, int key);
+
+    /// <summary>
+    /// Leet Code 2200. Find All K-Distant Indices in an Array
+    ///                                                                                   
+    /// Easy
+    ///
+    /// You are given a 0-indexed integer array nums and two integers key and 
+    /// k. A k-distant index is an index i of nums for which there exists at 
+    /// least one index j such that |i - j| <= k and nums[j] == key.
+    ///
+    /// Return a list of all k-distant indices sorted in increasing order.
+    /// 
+    /// Example 1:
+    /// Input: nums = [3,4,9,1,3,9,5], key = 9, k = 1
+    /// Output: [1,2,3,4,5,6]
+    /// Explanation: Here, nums[2] == key and nums[5] == key.
+    /// - For index 0, |0 - 2| > k and |0 - 5| > k, so there is no j where 
+    /// |0 - j| <= k and nums[j] == key. Thus, 0 is not a k-distant index.
+    /// - For index 1, |1 - 2| <= k and nums[2] == key, so 1 is a k-distant 
+    /// index.
+    /// - For index 2, |2 - 2| <= k and nums[2] == key, so 2 is a k-distant 
+    /// index.
+    /// - For index 3, |3 - 2| <= k and nums[2] == key, so 3 is a k-distant 
+    /// index.
+    /// - For index 4, |4 - 5| <= k and nums[5] == key, so 4 is a k-distant 
+    /// index.
+    /// - For index 5, |5 - 5| <= k and nums[5] == key, so 5 is a k-distant 
+    /// index.
+    /// - For index 6, |6 - 5| <= k and nums[5] == key, so 6 is a k-distant 
+    /// index.
+    /// Thus, we return [1,2,3,4,5,6] which is sorted in increasing order. 
+    ///
+    /// Example 2:
+    /// Input: nums = [2,2,2,2,2], key = 2, k = 2
+    /// Output: [0,1,2,3,4]
+    /// Explanation: For all indices i in nums, there exists some index 
+    /// j such that |i - j| <= k and nums[j] == key, so every index is a 
+    /// k-distant index. 
+    /// Hence, we return [0,1,2,3,4].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1000
+    /// 2. 1 <= nums[i] <= 1000
+    /// 3. key is an integer from the array nums.
+    /// 4. 1 <= k <= nums.length
+    /// </summary>
+    vector<int> findKDistantIndices(vector<int>& nums, int key, int k);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

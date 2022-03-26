@@ -7067,8 +7067,48 @@ void TestLeetCode2179(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2190(void)
+{
+    Logger::WriteMessage("Test Leet Code 2190");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 100, 200, 1, 100 };
+    int key = 1;
+    int result = leetCode.mostFrequent(nums, key);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("key = " + to_string(key) + "; result = " + to_string(result));
+
+    nums = { 2,2,2,2,3 };
+    key = 2;
+    result = leetCode.mostFrequent(nums, key);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("key = " + to_string(key) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2200(void)
+{
+    Logger::WriteMessage("Test Leet Code 2200");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 4, 9, 1, 3, 9, 5 };
+    int key = 9;
+    int k = 1;
+    vector<int> result = leetCode.findKDistantIndices(nums, key, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("key = " + to_string(key) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 2,2,2,2,2 };
+    key = 2;
+    k = 2;
+    result = leetCode.findKDistantIndices(nums, key, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("key = " + to_string(key) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2200();
+    TestLeetCode2190();
     TestLeetCode2179();
     TestLeetCode2176();
     TestLeetCode2170();
