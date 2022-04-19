@@ -2246,5 +2246,82 @@ public:
     /// 3. 1 <= nums[i] <= 500
     /// </summary>
     bool divideArray(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2215. Find the Difference of Two Arrays
+    ///                                                                                   
+    /// Easy
+    ///
+    /// Given two 0-indexed integer arrays nums1 and nums2, return a list 
+    /// answer of size 2 where:
+    ///
+    /// answer[0] is a list of all distinct integers in nums1 which are not 
+    /// present in nums2.
+    /// answer[1] is a list of all distinct integers in nums2 which are not 
+    /// present in nums1.
+    /// Note that the integers in the lists may be returned in any order.
+    /// 
+    /// Example 1:
+    /// Input: nums1 = [1,2,3], nums2 = [2,4,6]
+    /// Output: [[1,3],[4,6]]
+    /// Explanation:
+    /// For nums1, nums1[1] = 2 is present at index 0 of nums2, whereas 
+    /// nums1[0] = 1 and nums1[2] = 3 are not present in nums2. Therefore, 
+    /// answer[0] = [1,3].
+    /// For nums2, nums2[0] = 2 is present at index 1 of nums1, whereas 
+    /// nums2[1] = 4 and nums2[2] = 6 are not present in nums2. Therefore, 
+    /// answer[1] = [4,6].
+    ///
+    /// Example 2:
+    /// Input: nums1 = [1,2,3,3], nums2 = [1,1,2,2]
+    /// Output: [[3],[]]
+    /// Explanation:
+    /// For nums1, nums1[2] and nums1[3] are not present in nums2. Since 
+    /// nums1[2] == nums1[3], their value is only included once and 
+    /// answer[0] = [3].
+    /// Every integer in nums2 is present in nums1. Therefore, answer[1] = [].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums1.length, nums2.length <= 1000
+    /// 2. -1000 <= nums1[i], nums2[i] <= 1000
+    /// </summary>
+    vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2);
+
+    /// <summary>
+    /// Leet Code 2244. Minimum Rounds to Complete All Tasks
+    ///                                                                                   
+    /// Medium
+    /// 
+    /// You are given a 0-indexed integer array tasks, where tasks[i] 
+    /// represents the difficulty level of a task. In each round, you 
+    /// can complete either 2 or 3 tasks of the same difficulty level.
+    ///
+    /// Return the minimum rounds required to complete all the tasks, 
+    /// or -1 if it is not possible to complete all the tasks.
+    ///
+    /// Example 1:
+    /// Input: tasks = [2,2,3,3,2,4,4,4,4,4]
+    /// Output: 4
+    /// Explanation: To complete all the tasks, a possible plan is:
+    /// - In the first round, you complete 3 tasks of difficulty level 2. 
+    /// - In the second round, you complete 2 tasks of difficulty level 3. 
+    /// - In the third round, you complete 3 tasks of difficulty level 4. 
+    /// - In the fourth round, you complete 2 tasks of difficulty level 4.  
+    /// It can be shown that all the tasks cannot be completed in fewer 
+    /// than 4 rounds, so the answer is 4.
+    ///
+    /// Example 2:
+    /// Input: tasks = [2,3,3]
+    /// Output: -1
+    /// Explanation: There is only 1 task of difficulty level 2, but in 
+    /// each round, you can only complete either 2 or 3 tasks of the 
+    /// same difficulty level. Hence, you cannot complete all the tasks, 
+    /// and the answer is -1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= tasks.length <= 10^5
+    /// 2. 1 <= tasks[i] <= 10^9
+    /// </summary>
+    int minimumRounds(vector<int>& tasks);
 };
 #endif  // LeetCodeHashtable

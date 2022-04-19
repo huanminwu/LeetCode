@@ -3961,4 +3961,213 @@ string LeetCodeGreedy::repeatLimitedString(string s, int repeatLimit)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2213. Longest Substring of One Repeating Character
+///                                                                                   
+/// Hard
+///
+/// You are given a 0-indexed string s. You are also given a 0-indexed 
+/// string queryCharacters of length k and a 0-indexed array of integer 
+/// indices queryIndices of length k, both of which are used to describe 
+/// k queries.
+///
+/// The ith query updates the character in s at index queryIndices[i] to 
+/// the character queryCharacters[i].
+///
+/// Return an array lengths of length k where lengths[i] is the length 
+/// of the longest substring of s consisting of only one repeating 
+/// character after the ith query is performed.
+///
+/// Example 1:
+/// Input: s = "babacc", queryCharacters = "bcb", queryIndices = [1,3,3]
+/// Output: [3,3,4]
+/// Explanation: 
+/// - 1st query updates s = "bbbacc". The longest substring consisting of 
+/// one repeating character is "bbb" with length 3.
+/// - 2nd query updates s = "bbbccc". 
+///  The longest substring consisting of one repeating character can be 
+/// "bbb" or "ccc" with length 3.
+/// - 3rd query updates s = "bbbbcc". The longest substring consisting of 
+/// one repeating character is "bbbb" with length 4.
+/// Thus, we return [3,3,4].
+///
+/// Example 2:
+/// Input: s = "abyzz", queryCharacters = "aa", queryIndices = [2,1]
+/// Output: [2,3]
+/// Explanation:
+/// - 1st query updates s = "abazz". The longest substring consisting of 
+/// one repeating character is "zz" with length 2.
+/// - 2nd query updates s = "aaazz". The longest substring consisting of 
+/// one repeating character is "aaa" with length 3.
+/// Thus, we return [2,3].
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists of lowercase English letters.
+/// 3. k == queryCharacters.length == queryIndices.length
+/// 4. 1 <= k <= 105
+/// 5. queryCharacters consists of lowercase English letters.
+/// 6. 0 <= queryIndices[i] < s.length
+/// </summary>
+vector<int> LeetCodeGreedy::longestRepeating(string s, string queryCharacters, vector<int>& queryIndices)
+{
+    set<int> points;
+    set<pair<int, int>> segments;
+
+    points.insert(0);
+    int last = 0;
+    for (int i = 1; i <= (int)s.size(); i++)
+    {
+        if (i == s.size() || s[i] != s[i - 1])
+        {
+            points.insert(i);
+            segments.insert(make_pair(i - last, last));
+            last = i;
+        }
+    }
+    string str = s;
+    vector<int> result(queryIndices.size());
+    for (size_t i = 0; i < queryIndices.size(); i++)
+    {
+        int curr = queryIndices[i];
+        str[curr] = queryCharacters[i];
+        auto pos = points.lower_bound(curr);
+        auto prev = pos;
+        auto next = pos;
+        if (*pos == queryIndices[i])
+        {
+            next = std::next(next);
+        }
+        else
+        {
+            prev = std::prev(prev);
+        }
+        segments.erase(make_pair(*next - *prev, *prev));
+        points.insert(curr);
+        if (curr != *prev)
+        {
+            segments.insert(make_pair(curr - *prev, *prev));
+        }
+        points.insert(curr+1);
+        segments.insert(make_pair(1, curr));
+        if (*next != curr + 1)
+        {
+            segments.insert(make_pair(*next - (curr + 1), curr + 1));
+        }
+        
+        curr = queryIndices[i];
+        pos = points.lower_bound(curr);
+        prev = pos;
+        if (curr != 0) prev = std::prev(pos);
+        else pos = std::next(pos);
+        if (*next != str.size()) next = std::next(next);
+        int index = *prev;
+        while (*pos < *next)
+        {
+            if (str[*prev] == str[*pos])
+            {
+                segments.erase(make_pair(*pos - index, index));
+                index = *pos;
+                auto temp = pos;
+                pos = std::next(pos);
+                points.erase(temp);
+            }
+            else
+            {
+                segments.erase(make_pair(*pos - index, index));
+                segments.insert(make_pair(*pos - *prev, *prev));
+                index = *pos;
+                prev = pos;
+                pos = std::next(pos);
+            }
+        }
+        segments.erase(make_pair(*pos - index, index));
+        segments.insert(make_pair(*next - *prev, *prev));
+        result[i] = segments.rbegin()->first;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2237. Count Positions on Street With Required Brightness
+///                                                                                      
+/// Medium
+/// 
+/// You are given an integer n. A perfectly straight street is represented 
+/// by a number line ranging from 0 to n - 1. You are given a 2D integer 
+/// array lights representing the street lamp(s) on the street. Each 
+/// lights[i] = [positioni, rangei] indicates that there is a street lamp 
+/// at position positioni that lights up the area from 
+/// [max(0, positioni - rangei), min(n - 1, positioni + rangei)] 
+/// (inclusive).
+///
+/// The brightness of a position p is defined as the number of street 
+/// lamps that light up the position p. You are given a 0-indexed integer 
+/// array requirement of size n where requirement[i] is the minimum 
+/// brightness of the ith position on the street.
+///
+/// Return the number of positions i on the street between 0 and n - 1 
+/// that have a brightness of at least requirement[i].
+///
+/// Example 1:
+/// Input: n = 5, lights = [[0,1],[2,1],[3,2]], requirement = [0,2,1,4,1]
+/// Output: 4
+/// Explanation:
+/// - The first street lamp lights up the area from [max(0, 0 - 1), 
+///   min(n - 1, 0 + 1)] = [0, 1] (inclusive).
+/// - The second street lamp lights up the area from [max(0, 2 - 1), 
+///   min(n - 1, 2 + 1)] = [1, 3] (inclusive).
+/// - The third street lamp lights up the area from [max(0, 3 - 2), 
+///   min(n - 1, 3 + 2)] = [1, 4] (inclusive).
+/// 
+/// - Position 0 is covered by the first street lamp. It is covered by 1 
+///   street lamp which is greater than requirement[0].
+/// - Position 1 is covered by the first, second, and third street lamps. 
+///   It is covered by 3 street lamps which is greater than requirement[1].
+/// - Position 2 is covered by the second and third street lamps. It is 
+///   covered by 2 street lamps which is greater than requirement[2].
+/// - Position 3 is covered by the second and third street lamps. It is 
+///   covered by 2 street lamps which is less than requirement[3].
+/// - Position 4 is covered by the third street lamp. It is covered by 1 
+///   street lamp which is equal to requirement[4].
+///
+/// Positions 0, 1, 2, and 4 meet the requirement so we return 4.
+///
+/// Example 2:
+/// Input: n = 1, lights = [[0,1]], requirement = [2]
+/// Output: 0
+/// Explanation:
+/// - The first street lamp lights up the area from [max(0, 0 - 1), 
+///   min(n - 1, 0 + 1)] = [0, 0] (inclusive).
+/// - Position 0 is covered by the first street lamp. It is covered by 1 
+///   street lamp which is less than requirement[0].
+/// - We return 0 because no position meets their brightness requirement.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// 2. 1 <= lights.length <= 10^5
+/// 3. 0 <= positioni < n
+/// 4. 0 <= rangei <= 10^5
+/// 5. requirement.length == n
+/// 6. 0 <= requirement[i] <= 10^5
+/// </summary>
+int LeetCodeGreedy::meetRequirement(int n, vector<vector<int>>& lights, vector<int>& requirement)
+{
+    vector<int> dp(n);
+    for (size_t i = 0; i < lights.size(); i++)
+    {
+        int start = max(0, lights[i][0] - lights[i][1]);
+        int end = lights[i][0] + lights[i][1] + 1;
+        dp[start]++;
+        if (end < n) dp[end]--;
+    }
+    int result = 0;
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum += dp[i];
+        if (sum >= requirement[i]) result++;
+    }
+    return result;
+}
 #pragma endregion

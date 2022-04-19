@@ -4529,8 +4529,142 @@ void TestLeetCode2195(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2202(void)
+{
+    Logger::WriteMessage("Test Leet Code 2202");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 5, 2, 2, 4, 0, 6 };
+    int k = 4;
+    int result = leetCode.maximumTop(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 2 };
+    k = 1;
+    result = leetCode.maximumTop(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2217(void)
+{
+    Logger::WriteMessage("Test Leet Code 2217");
+    LeetCodeMath leetCode;
+    vector<int> queries = { 1, 2, 3, 4, 5, 90 };
+    int intLength = 3;
+    vector<long long> result = leetCode.kthPalindrome(queries, intLength);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("intLength = " + to_string(intLength));
+    Logger::WriteMessage(result);
+
+    queries = { 2,4,6 };
+    intLength = 4;
+    result = leetCode.kthPalindrome(queries, intLength);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("intLength = " + to_string(intLength));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2231(void)
+{
+    Logger::WriteMessage("Test Leet Code 2231");
+    LeetCodeMath leetCode;
+    int num = 1234;
+    int result = leetCode.largestInteger(num);
+    Logger::WriteMessage("num = " + to_string(num));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    num = 65875;
+    result = leetCode.largestInteger(num);
+    Logger::WriteMessage("num = " + to_string(num));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    num = 6;
+    result = leetCode.largestInteger(num);
+    Logger::WriteMessage("num = " + to_string(num));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    num = 6869;
+    result = leetCode.largestInteger(num);
+    Logger::WriteMessage("num = " + to_string(num));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2233(void)
+{
+    Logger::WriteMessage("Test Leet Code 2233");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 0, 4 };
+    int k = 5;
+    int result = leetCode.maximumProduct(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 6,3,3,2 };
+    k = 2;
+    result = leetCode.maximumProduct(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2235(void)
+{
+    Logger::WriteMessage("Test Leet Code 2235");
+    LeetCodeMath leetCode;
+    int num1 = 12, num2 = 5;
+    int result = leetCode.sum(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 =  " + to_string(num2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    num1 = -10, num2 = 4;
+    result = leetCode.sum(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 =  " + to_string(num2));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2239(void)
+{
+    Logger::WriteMessage("Test Leet Code 2239");
+    LeetCodeMath leetCode;
+    vector<int> nums = { -4, -2, 1, 4, 8 };
+    int result = leetCode.findClosestNumber(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,-1,1 };
+    result = leetCode.findClosestNumber(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2240(void)
+{
+    Logger::WriteMessage("Test Leet Code 2240");
+    LeetCodeMath leetCode;
+    int total = 20;
+    int cost1 = 10;
+    int cost2 = 5;
+    long long result = leetCode.waysToBuyPensPencils(total, cost1, cost2);
+    Logger::WriteMessage("total = " + to_string(total) + "; cost1 = " + to_string(cost1));
+    Logger::WriteMessage("cost2 = " + to_string(cost2) + "; result = " + to_string(result));
+
+    total = 5;
+    cost1 = 10;
+    cost2 = 10;
+    result = leetCode.waysToBuyPensPencils(total, cost1, cost2);
+    Logger::WriteMessage("total = " + to_string(total) + "; cost1 = " + to_string(cost1));
+    Logger::WriteMessage("cost2 = " + to_string(cost2) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2240();
+    TestLeetCode2239();
+    TestLeetCode2235();
+    TestLeetCode2233();
+    TestLeetCode2231();
+    TestLeetCode2217();
+    TestLeetCode2202();
     TestLeetCode2195();
     TestLeetCode2198();
     TestLeetCode2197();

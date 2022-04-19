@@ -992,8 +992,27 @@ void TestLeetCode2187(void)
     Logger::WriteMessage("totalTrips = " + to_string(totalTrips) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2226(void)
+{
+    Logger::WriteMessage("Test Leet Code 2226");
+    LeetCodeBinarySearch leetCode;
+    vector<int> candies = { 5, 8, 6 };
+    int k = 3;
+    int result = leetCode.maximumCandies(candies, k);
+    Logger::WriteMessage(candies);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    candies = { 2,5 };
+    k = 11;
+    result = leetCode.maximumCandies(candies, k);
+    Logger::WriteMessage(candies);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode2226();
     TestLeetCode2187();
     TestLeetCode2137();
     TestLeetCode2141();

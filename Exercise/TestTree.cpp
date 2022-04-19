@@ -3331,8 +3331,28 @@ void TestLeetCode2196(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode2236(void)
+{
+    Logger::WriteMessage("Test Leet Code 2236");
+    LeetCodeTree leetCode;
+    string input = "[10,4,6]";
+    TreeNode* root = leetCode.deserialize(input);
+    bool result = leetCode.checkTree(root);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage("result = " + (string)(result? "true":"false"));
+    leetCode.freeTreeNodes(root);
+
+    input = "[5,3,1]";
+    root = leetCode.deserialize(input);
+    result = leetCode.checkTree(root);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode2236();
     TestLeetCode2196();
     TestLeetCode1973();
     TestLeetCode2096();

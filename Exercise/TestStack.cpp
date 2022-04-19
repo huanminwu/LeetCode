@@ -625,7 +625,7 @@ void TestLeetCode2104(void)
     Logger::WriteMessage("Test Leet Code 2104");
     LeetCodeStack leetCode;
     vector<int> nums = { 1,2,3 };
-    int result = leetCode.subArrayRanges(nums);
+    long long result = leetCode.subArrayRanges(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 
@@ -663,8 +663,22 @@ void TestLeetCode1696(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2211(void)
+{
+    Logger::WriteMessage("Test Leet Code 2211");
+    LeetCodeStack leetCode;
+    string directions = "RLRSLL";
+    int result = leetCode.countCollisions(directions);
+    Logger::WriteMessage("directions = " + directions + "; result = " + to_string(result));
+
+    directions = "LLRR";
+    result = leetCode.countCollisions(directions);
+    Logger::WriteMessage("directions = " + directions + "; result = " + to_string(result));
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode2211();
     TestLeetCode1696();
     TestLeetCode2104();
     TestLeetCode1950();

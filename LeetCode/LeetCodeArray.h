@@ -12582,7 +12582,7 @@ public:
     /// 1 <= n <= 10^5
     /// corridor[i] is either 'S' or 'P'.
     /// </summary>
-    int numberOfWays(string corridor);
+    long long numberOfWays(string corridor);
 
     /// <summary>
     /// Leet Code 2154. Keep Multiplying Found Values by Two 
@@ -13040,6 +13040,490 @@ public:
     /// 4. 1 <= k <= nums.length
     /// </summary>
     vector<int> findKDistantIndices(vector<int>& nums, int key, int k);
+
+    /// <summary>
+    /// Leet Code 2214. Minimum Health to Beat Game
+    ///                                                                                   
+    /// Medium
+    ///
+    /// You are playing a game that has n levels numbered from 0 to n - 1. 
+    /// You are given a 0-indexed integer array damage where damage[i] is 
+    /// the amount of health you will lose to complete the ith level.
+    ///
+    /// You are also given an integer armor. You may use your armor ability 
+    /// at most once during the game on any level which will protect you 
+    /// from at most armor damage.
+    ///
+    /// You must complete the levels in order and your health must be greater 
+    /// than 0 at all times to beat the game.
+    ///
+    /// Return the minimum health you need to start with to beat the game.
+    /// 
+    /// Example 1:
+    /// Input: damage = [2,7,4,3], armor = 4
+    /// Output: 13
+    /// Explanation: One optimal way to beat the game starting at 13 health is:
+    /// On round 1, take 2 damage. You have 13 - 2 = 11 health.
+    /// On round 2, take 7 damage. You have 11 - 7 = 4 health.
+    /// On round 3, use your armor to protect you from 4 damage. You 
+    /// have 4 - 0 = 4 health.
+    /// On round 4, take 3 damage. You have 4 - 3 = 1 health.
+    /// Note that 13 is the minimum health you need to start with to beat the 
+    /// game.
+    ///
+    /// Example 2:
+    /// Input: damage = [2,5,3,4], armor = 7
+    /// Output: 10
+    /// Explanation: One optimal way to beat the game starting at 10 health is:
+    /// On round 1, take 2 damage. You have 10 - 2 = 8 health.
+    /// On round 2, use your armor to protect you from 5 damage. You 
+    /// have 8 - 0 = 8 health.
+    /// On round 3, take 3 damage. You have 8 - 3 = 5 health.
+    /// On round 4, take 4 damage. You have 5 - 4 = 1 health.
+    /// Note that 10 is the minimum health you need to start with to beat 
+    /// the game.
+    ///
+    /// Example 3:
+    /// Input: damage = [3,3,3], armor = 0
+    /// Output: 10
+    /// Explanation: One optimal way to beat the game starting at 10 health is:
+    /// On round 1, take 3 damage. You have 10 - 3 = 7 health.
+    /// On round 2, take 3 damage. You have 7 - 3 = 4 health.
+    /// On round 3, take 3 damage. You have 4 - 3 = 1 health.
+    /// Note that you did not use your armor ability.
+    /// 
+    /// Constraints:
+    /// 1. n == damage.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 0 <= damage[i] <= 10^5
+    /// 4. 0 <= armor <= 10^5
+    /// </summary>
+    long long minimumHealth(vector<int>& damage, int armor);
+
+    /// <summary>
+    /// Leet Code 2210. Count Hills and Valleys in an Array
+    ///                                                         
+    /// Easy
+    ///
+    /// You are given a 0-indexed integer array nums. An index i is part of a 
+    /// hill in nums if the closest non-equal neighbors of i are smaller than 
+    /// nums[i]. Similarly, an index i is part of a valley in nums if the 
+    /// closest non-equal neighbors of i are larger than nums[i]. Adjacent 
+    /// indices i and j are part of the same hill or valley if 
+    /// nums[i] == nums[j].
+    /// 
+    /// Note that for an index to be part of a hill or valley, it must have a 
+    /// non-equal neighbor on both the left and right of the index.
+    ///
+    /// Return the number of hills and valleys in nums.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,4,1,1,6,5]
+    /// Output: 3
+    /// Explanation:
+    /// At index 0: There is no non-equal neighbor of 2 on the left, so 
+    /// index 0 is neither a hill nor a valley.
+    /// At index 1: The closest non-equal neighbors of 4 are 2 and 1. 
+    /// Since 4 > 2 and 4 > 1, index 1 is a hill. 
+    /// At index 2: The closest non-equal neighbors of 1 are 4 and 6. 
+    /// Since 1 < 4 and 1 < 6, index 2 is a valley.
+    /// At index 3: The closest non-equal neighbors of 1 are 4 and 6. 
+    /// Since 1 < 4 and 1 < 6, index 3 is a valley, but note that it 
+    /// is part of the same valley as index 2.
+    /// At index 4: The closest non-equal neighbors of 6 are 1 and 5. 
+    /// Since 6 > 1 and 6 > 5, index 4 is a hill.
+    /// At index 5: There is no non-equal neighbor of 5 on the right, so 
+    /// index 5 is neither a hill nor a valley. 
+    /// There are 3 hills and valleys so we return 3.
+    ///
+    /// Example 2:
+    /// Input: nums = [6,6,5,5,4,1]
+    /// Output: 0
+    /// Explanation:
+    /// At index 0: There is no non-equal neighbor of 6 on the left, so 
+    /// index 0 is neither a hill nor a valley.
+    /// At index 1: There is no non-equal neighbor of 6 on the left, so 
+    /// index 1 is neither a hill nor a valley.
+    /// At index 2: The closest non-equal neighbors of 5 are 6 and 4. 
+    /// Since 5 < 6 and 5 > 4, index 2 is neither a hill nor a valley.
+    /// At index 3: The closest non-equal neighbors of 5 are 6 and 4. 
+    /// Since 5 < 6 and 5 > 4, index 3 is neither a hill nor a valley.
+    /// At index 4: The closest non-equal neighbors of 4 are 5 and 1. 
+    /// Since 4 < 5 and 4 > 1, index 4 is neither a hill nor a valley.
+    /// At index 5: There is no non-equal neighbor of 1 on the right, 
+    /// so index 5 is neither a hill nor a valley.
+    /// There are 0 hills and valleys so we return 0.
+    ///
+    /// Constraints:
+    /// 1. 3 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 100
+    /// </summary>
+    int countHillValley(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2207. Maximize Number of Subsequences in a String
+    ///                                                                                   
+    /// Medium
+    ///
+    /// You are given a 0-indexed string text and another 0-indexed string 
+    /// pattern of length 2, both of which consist of only lowercase English 
+    /// letters.
+    ///
+    /// You can add either pattern[0] or pattern[1] anywhere in text exactly 
+    /// once. Note that the character can be added even at the beginning or 
+    /// at the end of text.
+    ///
+    /// Return the maximum number of times pattern can occur as a subsequence 
+    /// of the modified text.
+    ///
+    /// A subsequence is a string that can be derived from another string by 
+    /// deleting some or no characters without changing the order of the 
+    /// remaining characters.
+    /// 
+    /// Example 1:
+    /// Input: text = "abdcdbc", pattern = "ac"
+    /// Output: 4
+    /// Explanation:
+    /// If we add pattern[0] = 'a' in between text[1] and text[2], we get 
+    /// "abadcdbc". Now, the number of times "ac" occurs as a subsequence is 4.
+    /// Some other strings which have 4 subsequences "ac" after adding a 
+    /// character to text are "aabdcdbc" and "abdacdbc".
+    /// However, strings such as "abdcadbc", "abdccdbc", and "abdcdbcc", 
+    /// although obtainable, have only 3 subsequences "ac" and are thus 
+    /// suboptimal.
+    /// It can be shown that it is not possible to get more than 4 
+    /// subsequences "ac" by adding only one character.
+    ///
+    /// Example 2:
+    /// Input: text = "aabb", pattern = "ab"
+    /// Output: 6
+    /// Explanation:
+    /// Some of the strings which can be obtained from text and have 6 
+    /// subsequences "ab" are "aaabb", "aaabb", and "aabbb".
+    ///
+    /// Constraints:
+    /// 1. 1 <= text.length <= 10^5
+    /// 2. pattern.length == 2
+    /// 3. text and pattern consist only of lowercase English letters.
+    /// </summary>
+    long long maximumSubsequenceCount(string text, string pattern);
+
+    /// <summary>
+    /// Leet Code 2208. Minimum Operations to Halve Array Sum
+    ///                                                                                   
+    /// Medium
+    ///
+    /// You are given an array nums of positive integers. In one operation, 
+    /// you can choose any number from nums and reduce it to exactly half 
+    /// the number. (Note that you may choose this reduced number in future 
+    /// operations.)
+    ///
+    /// Return the minimum number of operations to reduce the sum of nums by 
+    /// at least half.
+    ///
+    /// Example 1:
+    /// Input: nums = [5,19,8,1]
+    /// Output: 3
+    /// Explanation: The initial sum of nums is equal to 5 + 19 + 8 + 1 = 33.
+    /// The following is one of the ways to reduce the sum by at least half:
+    /// Pick the number 19 and reduce it to 9.5.
+    /// Pick the number 9.5 and reduce it to 4.75.
+    /// Pick the number 8 and reduce it to 4.
+    /// The final array is [5, 4.75, 4, 1] with a total sum of 
+    /// 5 + 4.75 + 4 + 1 = 14.75. 
+    /// The sum of nums has been reduced by 33 - 14.75 = 18.25, which is at 
+    /// least half of the initial sum, 18.25 >= 33/2 = 16.5.
+    /// Overall, 3 operations were used so we return 3.
+    /// It can be shown that we cannot reduce the sum by at least half in less 
+    /// than 3 operations.
+    ///
+    /// Example 2:
+    /// Input: nums = [3,8,20]
+    /// Output: 3
+    /// Explanation: The initial sum of nums is equal to 3 + 8 + 20 = 31.
+    /// The following is one of the ways to reduce the sum by at least half:
+    /// Pick the number 20 and reduce it to 10.
+    /// Pick the number 10 and reduce it to 5.
+    /// Pick the number 3 and reduce it to 1.5.
+    /// The final array is [1.5, 8, 5] with a total sum of 1.5 + 8 + 5 = 14.5. 
+    /// The sum of nums has been reduced by 31 - 14.5 = 16.5, which is at 
+    /// least half of the initial sum, 16.5 >= 31/2 = 16.5.
+    /// Overall, 3 operations were used so we return 3.
+    /// It can be shown that we cannot reduce the sum by at least half in less 
+    /// than 3 operations.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^7
+    /// </summary>
+    int halveArray(vector<int>& nums);
+
+
+    /// <summary>
+    /// Leet Code 2216. Minimum Deletions to Make Array Beautiful
+    ///                                                                                   
+    /// Medium
+    ///
+    /// You are given a 0-indexed integer array nums. The array nums is 
+    /// beautiful if:
+    /// nums.length is even.
+    /// nums[i] != nums[i + 1] for all i % 2 == 0.
+    /// Note that an empty array is considered beautiful.
+    /// You can delete any number of elements from nums. When you delete 
+    /// an element, all the elements to the right of the deleted element 
+    /// will be shifted one unit to the left to fill the gap created and 
+    /// all the elements to the left of the deleted element will remain 
+    /// unchanged.
+    /// 
+    /// Return the minimum number of elements to delete from nums to 
+    /// make it beautiful.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,1,2,3,5]
+    /// Output: 1
+    /// Explanation: You can delete either nums[0] or nums[1] to make 
+    /// nums = [1,2,3,5] which is beautiful. It can be proven you 
+    /// need at least 1 deletion to make nums beautiful.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,1,2,2,3,3]
+    /// Output: 2
+    /// Explanation: You can delete nums[0] and nums[5] to make 
+    /// nums = [1,2,2,3] which is beautiful. It can be proven you need 
+    /// at least 2 deletions to make nums beautiful.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 10^5
+    /// </summary>
+    int minDeletion(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2219. Maximum Sum Score of Array
+    ///                                                                                   
+    /// Medium
+    ///
+    /// You are given a 0-indexed integer array nums of length n.
+    ///
+    /// The sum score of nums at an index i where 0 <= i < n is the maximum of:
+    ///
+    /// The sum of the first i + 1 elements of nums.
+    /// The sum of the last n - i elements of nums.
+    /// Return the maximum sum score of nums at any index.
+    /// 
+    /// Example 1:
+    /// Input: nums = [4,3,-2,5]
+    /// Output: 10
+    /// Explanation:
+    /// The sum score at index 0 is max(4, 4 + 3 + -2 + 5) = max(4, 10) = 10.
+    /// The sum score at index 1 is max(4 + 3, 3 + -2 + 5) = max(7, 6) = 7.
+    /// The sum score at index 2 is max(4 + 3 + -2, -2 + 5) = max(5, 3) = 5.
+    /// The sum score at index 3 is max(4 + 3 + -2 + 5, 5) = max(10, 5) = 10.
+    /// The maximum sum score of nums is 10.
+    ///
+    /// Example 2:
+    /// Input: nums = [-3,-5]
+    /// Output: -3
+    /// Explanation:
+    /// The sum score at index 0 is max(-3, -3 + -5) = max(-3, -8) = -3.
+    /// The sum score at index 1 is max(-3 + -5, -5) = max(-8, -5) = -5.
+    /// The maximum sum score of nums is -3.
+    /// 
+    /// Constraints:
+    /// 1. n == nums.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. -10^5 <= nums[i] <= 10^5
+    /// </summary>
+    long long maximumSumScore(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2221. Find Triangular Sum of an Array
+    ///                                                                                   
+    /// Medium
+    ///
+    /// You are given a 0-indexed integer array nums, where nums[i] is a 
+    /// digit between 0 and 9 (inclusive).
+    ///
+    /// The triangular sum of nums is the value of the only element present 
+    /// in nums after the following process terminates:
+    ///
+    /// Let nums comprise of n elements. If n == 1, end the process. 
+    /// Otherwise, create a new 0-indexed integer array newNums of length 
+    /// n - 1.
+    /// For each index i, where 0 <= i < n - 1, assign the value of 
+    /// newNums[i] as (nums[i] + nums[i+1]) % 10, where % denotes modulo 
+    /// operator.
+    /// Replace the array nums with newNums.
+    /// Repeat the entire process starting from step 1.
+    /// Return the triangular sum of nums.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2,3,4,5]
+    /// Output: 8 
+    /// Explanation:
+    /// The above diagram depicts the process from which we obtain the 
+    /// triangular sum of the array.
+    /// 
+    /// Example 2:
+    /// Input: nums = [5]
+    /// Output: 5
+    /// Explanation:
+    /// Since there is only one element in nums, the triangular sum is the 
+    /// value of that element itself.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1000
+    /// 2. 0 <= nums[i] <= 9
+    /// </summary>
+    int triangularSum(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2225. Find Players With Zero or One Losses
+    ///                                                                                   
+    /// Medium
+    ///
+    /// You are given an integer array matches where matches[i] = 
+    /// [winneri, loseri] indicates that the player winneri defeated 
+    /// player loseri in a match.
+    ///
+    /// Return a list answer of size 2 where:
+    ///
+    /// answer[0] is a list of all players that have not lost any matches.
+    /// answer[1] is a list of all players that have lost exactly one match.
+    /// The values in the two lists should be returned in increasing order.
+    ///
+    /// Note:
+    /// You should only consider the players that have played at least one match.
+    /// The testcases will be generated such that no two matches will have the 
+    /// same outcome.
+    /// 
+    /// Example 1:
+    /// Input: matches = [[1,3],[2,3],[3,6],[5,6],[5,7],[4,5],[4,8],[4,9],
+    /// [10,4],[10,9]]
+    /// Output: [[1,2,10],[4,5,7,8]]
+    /// Explanation:
+    /// Players 1, 2, and 10 have not lost any matches.
+    /// Players 4, 5, 7, and 8 each have lost one match.
+    /// Players 3, 6, and 9 each have lost two matches.
+    /// Thus, answer[0] = [1,2,10] and answer[1] = [4,5,7,8].
+    /// 
+    /// Example 2:
+    /// Input: matches = [[2,3],[1,3],[5,4],[6,4]]
+    /// Output: [[1,2,5,6],[]]
+    /// Explanation:
+    /// Players 1, 2, 5, and 6 have not lost any matches.
+    /// Players 3 and 4 each have lost two matches.
+    /// Thus, answer[0] = [1,2,5,6] and answer[1] = [].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= matches.length <= 10^5
+    /// 2. matches[i].length == 2
+    /// 3. 1 <= winneri, loseri <= 10^5
+    /// 4. winneri != loseri
+    /// 5. All matches[i] are unique.
+    /// </summary>
+    vector<vector<int>> findWinners(vector<vector<int>>& matches);
+
+    /// <summary>
+    /// Leet Code 2229. Check if an Array Is Consecutive
+    ///                                                                                   
+    /// Easy
+    ///
+    /// Given an integer array nums, return true if nums is consecutive, 
+    /// otherwise return false.
+    ///
+    /// An array is consecutive if it contains every number in the range 
+    /// [x, x + n - 1] (inclusive), where x is the minimum number in the 
+    /// array and n is the length of the array.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,3,4,2]
+    /// Output: true
+    /// Explanation:
+    /// The minimum value is 1 and the length of nums is 4.
+    /// All of the values in the range [x, x + n - 1] = [1, 1 + 4 - 1] = 
+    /// [1, 4] = (1, 2, 3, 4) occur in nums.
+    /// Therefore, nums is consecutive.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,3]
+    /// Output: false
+    /// Explanation:
+    /// The minimum value is 1 and the length of nums is 2.
+    /// The value 2 in the range [x, x + n - 1] = [1, 1 + 2 - 1], 
+    /// = [1, 2] = (1, 2) does not occur in nums.
+    /// Therefore, nums is not consecutive.
+    ///
+    /// Example 3:
+    /// Input: nums = [3,5,4]
+    /// Output: true
+    /// Explanation:
+    /// The minimum value is 3 and the length of nums is 3.
+    /// All of the values in the range [x, x + n - 1] = [3, 3 + 3 - 1] 
+    /// = [3, 5] = (3, 4, 5) occur in nums.
+    /// Therefore, nums is consecutive.
+    ///  
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 10^5
+    /// </summary>
+    bool isConsecutive(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2245. Maximum Trailing Zeros in a Cornered Path
+    ///                                                                                      
+    /// Medium
+    /// 
+    /// You are given a 2D integer array grid of size m x n, where each cell 
+    /// contains a positive integer.
+    /// A cornered path is defined as a set of adjacent cells with at most one 
+    /// turn. More specifically, the path should exclusively move either 
+    /// horizontally or vertically up to the turn (if there is one), without 
+    /// returning to a previously visited cell. After the turn, the path will 
+    /// then move exclusively in the alternate direction: move vertically if 
+    /// it moved horizontally, and vice versa, also without returning to a 
+    /// previously visited cell.
+    ///
+    /// The product of a path is defined as the product of all the values 
+    /// in the path.
+    ///
+    /// Return the maximum number of trailing zeros in the product of a 
+    /// cornered path found in grid.
+    ///
+    /// Note:
+    /// Horizontal movement means moving in either the left or right direction.
+    /// Vertical movement means moving in either the up or down direction.
+    ///
+    /// Example 1:
+    /// Input: grid = [[23,17,15,3,20],[8,1,20,27,11],[9,4,6,2,21],
+    ///                [40,9,1,10,6],[22,7,4,5,3]]
+    /// Output: 3
+    /// Explanation: The grid on the left shows a valid cornered path.
+    /// It has a product of 15 * 20 * 6 * 1 * 10 = 18000 which has 3 trailing 
+    /// zeros.
+    /// It can be shown that this is the maximum trailing zeros in the product 
+    /// of a cornered path.
+    ///
+    /// The grid in the middle is not a cornered path as it has more than 
+    /// one turn.
+    /// The grid on the right is not a cornered path as it requires a return 
+    /// to a previously visited cell.
+    ///
+    /// Example 2:
+    /// Input: grid = [[4,3,2],[7,6,1],[8,8,8]]
+    /// Output: 0
+    /// Explanation: The grid is shown in the figure above.
+    /// There are no cornered paths in the grid that result in a product with 
+    /// a trailing zero.
+    /// 
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 1 <= m, n <= 10^5
+    /// 4. 1 <= m * n <= 10^5
+    /// 5. 1 <= grid[i][j] <= 1000
+    /// </summary>
+    int maxTrailingZeros(vector<vector<int>>& grid);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

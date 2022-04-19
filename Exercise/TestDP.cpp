@@ -2987,8 +2987,60 @@ void TestLeetCode2188(void)
         "; result = " + to_string(result));
 }
 
+void TestLeetCode2218(void)
+{
+    Logger::WriteMessage("Test Leet Code 2218");
+    LeetCodeDP leetCode;
+    vector<vector<int>> piles = { {1, 100, 3},{7, 8, 9} };
+    int k = 2;
+    int result = leetCode.maxValueOfCoins(piles, k);
+    Logger::WriteMessage(piles);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    piles = { {100}, { 100 }, { 100 }, { 100 }, { 100 }, { 100 }, { 1, 1, 1, 1, 1, 1, 700 } };
+    k = 7;
+    result = leetCode.maxValueOfCoins(piles, k);
+    Logger::WriteMessage(piles);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2222(void)
+{
+    Logger::WriteMessage("Test Leet Code 2222");
+    LeetCodeDP leetCode;
+    string s = "001101";
+    long long result = leetCode.numberOfWays(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "11100";
+    result = leetCode.numberOfWays(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2209(void)
+{
+    Logger::WriteMessage("Test Leet Code 2209");
+    LeetCodeDP leetCode;
+    string floor = "10110101";
+    int numCarpets = 2;
+    int carpetLen = 2;
+    int result = leetCode.minimumWhiteTiles(floor, numCarpets, carpetLen);
+    Logger::WriteMessage("floor = " + floor + "; numCarpets = " + to_string(numCarpets));
+    Logger::WriteMessage("carpetLen = " + to_string(carpetLen) + "; result = " + to_string(result));
+ 
+    floor = "11111";
+    numCarpets = 2;
+    carpetLen = 3;
+    result = leetCode.minimumWhiteTiles(floor, numCarpets, carpetLen);
+    Logger::WriteMessage("floor = " + floor + "; numCarpets = " + to_string(numCarpets));
+    Logger::WriteMessage("carpetLen = " + to_string(carpetLen) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2209();
+    TestLeetCode2222();
+    TestLeetCode2218();
     TestLeetCode2188();
     TestLeetCode2184();
     TestLeetCode2167();

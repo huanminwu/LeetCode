@@ -7235,6 +7235,191 @@ public:
     /// 7. The graph is directed and acyclic.
     /// </summary>
     vector<vector<int>> getAncestors(int n, vector<vector<int>>& edges);
+
+    /// <summary>
+    /// Leet Code 2201. Count Artifacts That Can Be Extracted
+    ///                                                                                   
+    /// Medium
+    ///
+    /// There is an n x n 0-indexed grid with some artifacts buried in it. 
+    /// You are given the integer n and a 0-indexed 2D integer array 
+    /// artifacts describing the positions of the rectangular artifacts 
+    /// where artifacts[i] = [r1i, c1i, r2i, c2i] denotes that the ith 
+    /// artifact is buried in the subgrid where:
+    ///
+    /// (r1i, c1i) is the coordinate of the top-left cell of the ith artifact 
+    /// and
+    /// (r2i, c2i) is the coordinate of the bottom-right cell of the ith 
+    /// artifact.
+    /// You will excavate some cells of the grid and remove all the mud from 
+    /// them. If the cell has a part of an artifact buried underneath, it 
+    /// will be uncovered. If all the parts of an artifact are uncovered, you 
+    /// can extract it.
+    ///
+    /// Given a 0-indexed 2D integer array dig where dig[i] = [ri, ci] 
+    /// indicates that you will excavate the cell (ri, ci), return the number 
+    /// of artifacts that you can extract.
+    ///
+    /// The test cases are generated such that:
+    /// No two artifacts overlap.
+    /// Each artifact only covers at most 4 cells.
+    /// The entries of dig are unique.
+    ///
+    /// Example 1:
+    /// Input: n = 2, artifacts = [[0,0,0,0],[0,1,1,1]], dig = [[0,0],[0,1]]
+    /// Output: 1
+    /// Explanation: 
+    /// The different colors represent different artifacts. Excavated cells 
+    /// are labeled with a 'D' in the grid.
+    /// There is 1 artifact that can be extracted, namely the red artifact.
+    /// The blue artifact has one part in cell (1,1) which remains uncovered, 
+    /// so we cannot extract it.
+    /// Thus, we return 1.
+    ///
+    /// Example 2:
+    /// Input: n = 2, artifacts = [[0,0,0,0],[0,1,1,1]], 
+    /// dig = [[0,0],[0,1],[1,1]]
+    /// Output: 2
+    /// Explanation: Both the red and blue artifacts have all parts uncovered 
+    /// (labeled with a 'D') and can be extracted, so we return 2. 
+    ///  
+    /// Constraints:
+    /// 1. 1 <= n <= 1000
+    /// 2. 1 <= artifacts.length, dig.length <= min(n^2, 10^5)
+    /// 3. artifacts[i].length == 4
+    /// 4. dig[i].length == 2
+    /// 5. 0 <= r1i, c1i, r2i, c2i, ri, ci <= n - 1
+    /// 6. r1i <= r2i
+    /// 7. c1i <= c2i
+    /// 8. No two artifacts will overlap.
+    /// 9. The number of cells covered by an artifact is at most 4.
+    /// 10. The entries of dig are unique.
+    /// </summary>
+    int digArtifacts(int n, vector<vector<int>>& artifacts, vector<vector<int>>& dig);
+
+    /// <summary>
+    /// Leet Code 2203. Minimum Weighted Subgraph With the Required Paths
+    /// </summary>
+    long long minimumWeight(vector<vector<pair<int, int>>>& neighbors, int src, vector<long long> &distances);
+
+    /// <summary>
+    /// Leet Code 2203. Minimum Weighted Subgraph With the Required Paths
+    ///                                                                                   
+    /// Hard
+    ///
+    /// You are given an integer n denoting the number of nodes of a weighted 
+    /// directed graph. The nodes are numbered from 0 to n - 1.
+    ///
+    /// You are also given a 2D integer array edges where edges[i] = [fromi, 
+    /// toi, weighti] denotes that there exists a directed edge from fromi to 
+    /// toi with weight weighti.
+    ///
+    /// Lastly, you are given three distinct integers src1, src2, and dest 
+    /// denoting three distinct nodes of the graph.
+    ///
+    /// Return the minimum weight of a subgraph of the graph such that it is 
+    /// possible to reach dest from both src1 and src2 via a set of edges of 
+    /// this subgraph. In case such a subgraph does not exist, return -1.
+    ///
+    /// A subgraph is a graph whose vertices and edges are subsets of the 
+    /// original graph. The weight of a subgraph is the sum of weights of 
+    /// its constituent edges.
+    /// 
+    /// Example 1:
+    /// Input: n = 6, edges = [[0,2,2],[0,5,6],[1,0,3],[1,4,5],[2,1,1],
+    /// [2,3,3],[2,3,4],[3,4,2],[4,5,1]], src1 = 0, src2 = 1, dest = 5
+    /// Output: 9
+    /// Explanation: 
+    /// The above figure represents the input graph.
+    /// The blue edges represent one of the subgraphs that yield the optimal 
+    /// answer.
+    /// Note that the subgraph [[1,0,3],[0,5,6]] also yields the optimal 
+    /// answer. It is not possible to get a subgraph with less weight 
+    /// satisfying all the constraints.
+    ///
+    /// Example 2:
+    /// Input: n = 3, edges = [[0,1,1],[2,1,1]], src1 = 0, src2 = 1, dest = 2
+    /// Output: -1
+    /// Explanation:
+    /// The above figure represents the input graph.
+    /// It can be seen that there does not exist any path from node 1 to 
+    /// node 2, hence there are no subgraphs satisfying all the constraints.
+    ///
+    /// Constraints:
+    /// 1. 3 <= n <= 10^5
+    /// 2. 0 <= edges.length <= 10^5
+    /// 3. edges[i].length == 3
+    /// 4. 0 <= fromi, toi, src1, src2, dest <= n - 1
+    /// 5. fromi != toi
+    /// 6. src1, src2, and dest are pairwise distinct.
+    /// 7. 1 <= weight[i] <= 10^5
+    /// </summary>
+    long long minimumWeight(int n, vector<vector<int>>& edges, int src1, int src2, int dest);
+
+    /// <summary>
+    /// Leet Code 2204. Distance to a Cycle in Undirected Graph
+    /// </summary>
+    int distanceToCycle(vector<vector<int>>& neighbors, vector<int> &path, vector<int>& visited);
+
+    /// <summary>
+    /// Leet Code 2204. Distance to a Cycle in Undirected Graph
+    ///                                                                                   
+    /// Hard
+    ///
+    /// You are given a positive integer n representing the number of nodes 
+    /// in a connected undirected graph containing exactly one cycle. The 
+    /// nodes are numbered from 0 to n - 1 (inclusive).
+    ///
+    /// You are also given a 2D integer array edges, where edges[i] = 
+    /// [node1i, node2i] denotes that there is a bidirectional edge 
+    /// connecting node1i and node2i in the graph.
+    ///
+    /// The distance between two nodes a and b is defined to be the minimum 
+    /// number of edges that are needed to go from a to b.
+    /// 
+    /// Return an integer array answer of size n, where answer[i] is the 
+    /// minimum distance between the ith node and any node in the cycle.
+    /// 
+    /// Example 1:
+    /// Input: n = 7, edges = [[1,2],[2,3],[3,4],[4,1],[0,1],[5,2],[6,5]]
+    /// Output: [1,0,0,0,0,1,2]
+    /// Explanation:
+    /// The nodes 1, 2, 3, and 4 form the cycle.
+    /// The distance from 0 to 1 is 1.
+    /// The distance from 1 to 1 is 0.
+    /// The distance from 2 to 2 is 0.
+    /// The distance from 3 to 3 is 0.
+    /// The distance from 4 to 4 is 0.
+    /// The distance from 5 to 2 is 1.
+    /// The distance from 6 to 2 is 2.
+    ///
+    /// Example 2:
+    /// Input: n = 9, edges = [[0,1],[1,2],[0,2],[2,6],[6,7],[6,8],[1,3],
+    /// [3,4],[3,5]]
+    /// Output: [0,0,0,1,2,2,1,2,2]
+    /// Explanation:
+    /// The nodes 0, 1, and 2 form the cycle.
+    /// The distance from 0 to 0 is 0.
+    /// The distance from 1 to 1 is 0.
+    /// The distance from 2 to 2 is 0.
+    /// The distance from 3 to 1 is 1.
+    /// The distance from 4 to 1 is 2.
+    /// The distance from 5 to 1 is 2.
+    /// The distance from 6 to 2 is 1.
+    /// The distance from 7 to 2 is 2.
+    /// The distance from 8 to 2 is 2.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= n <= 10^5
+    /// 2. edges.length == n
+    /// 3. edges[i].length == 2
+    /// 4. 0 <= node1i, node2i <= n - 1
+    /// 5. node1i != node2i
+    /// 6. The graph is connected.
+    /// 7. The graph has exactly one cycle.
+    /// 8. There is at most one edge between any pair of vertices.
+    /// </summary>
+    vector<int> distanceToCycle(int n, vector<vector<int>>& edges);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

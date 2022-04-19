@@ -1241,8 +1241,52 @@ void TestLeetCode2182(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode2213(void)
+{
+    Logger::WriteMessage("Test Leet Code 2213");
+    LeetCodeGreedy leetCode;
+    string s = "babacc";
+    string queryCharacters = "bcb";
+    vector<int> queryIndices = { 1, 3, 3 };
+    vector<int> result = leetCode.longestRepeating(s, queryCharacters, queryIndices);
+    Logger::WriteMessage("s = " + s + "; queryCharacters = " + queryCharacters);
+    Logger::WriteMessage(queryIndices);
+    Logger::WriteMessage(result);
+
+    s = "abyzz";
+    queryCharacters = "aa";
+    queryIndices = { 2, 1 };
+    result = leetCode.longestRepeating(s, queryCharacters, queryIndices);
+    Logger::WriteMessage("s = " + s + "; queryCharacters = " + queryCharacters);
+    Logger::WriteMessage(queryIndices);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2237(void)
+{
+    Logger::WriteMessage("Test Leet Code 2237");
+    LeetCodeGreedy leetCode;
+    int n = 5;
+    vector<vector<int>> lights = { {0, 1},{2, 1},{3, 2} };
+    vector<int> requirement = { 0, 2, 1, 4, 1 };
+    int result = leetCode.meetRequirement(n, lights, requirement);
+    Logger::WriteMessage(lights);
+    Logger::WriteMessage(requirement);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 1;
+    lights = { {0, 1} };
+    requirement = { 2 };
+    result = leetCode.meetRequirement(n, lights, requirement);
+    Logger::WriteMessage(lights);
+    Logger::WriteMessage(requirement);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode2237();
+    TestLeetCode2213();
     TestLeetCode2182();
     TestLeetCode2158();
     TestLeetCode2015();

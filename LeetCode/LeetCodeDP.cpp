@@ -13349,5 +13349,249 @@ int LeetCodeDP::minimumFinishTime(vector<vector<int>>& tires, int changeTime, in
     }
     return (int)dp[numLaps - 1];
 }
+
+/// <summary>
+/// Leet Code 2218. Maximum Value of K Coins From Piles
+/// </summary>
+int LeetCodeDP::maxValueOfCoins(vector<vector<int>>& piles, int i, int k, vector<vector<int>>& dp)
+{
+    if (k == 0) return 0;
+    if (dp[i][k-1] != 0) return dp[i][k-1];
+    int result = 0;
+    if (i == (int)piles.size() - 1)
+    {
+        int sum = 0;
+        for (int j = 0; j < k && j < (int)piles[i].size(); j++)
+        {
+            sum += piles[i][j];
+            dp[i][j] = sum;
+        }
+        result = sum;
+    }
+    else
+    {
+        int sum = 0;
+        result = max(result, maxValueOfCoins(piles, i + 1, k, dp));
+        for (int j = 0; j < k && j < (int)piles[i].size(); j++)
+        {
+            sum += piles[i][j];
+            result = max(result, sum + maxValueOfCoins(piles, i + 1, k - j - 1, dp));
+        }
+    }
+    dp[i][k-1] = result;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2218. Maximum Value of K Coins From Piles
+///                                                                                   
+/// Hard
+///
+/// There are n piles of coins on a table. Each pile consists of a 
+/// positive number of coins of assorted denominations.
+///
+/// In one move, you can choose any coin on top of any pile, remove it, 
+/// and add it to your wallet.
+///
+/// Given a list piles, where piles[i] is a list of integers denoting 
+/// the composition of the ith pile from top to bottom, and a positive 
+/// integer k, return the maximum total value of coins you can have in 
+/// your wallet if you choose exactly k coins optimally.
+///
+/// Example 1:
+/// Input: piles = [[1,100,3],[7,8,9]], k = 2
+/// Output: 101
+/// Explanation:
+/// The above diagram shows the different ways we can choose k coins.
+/// The maximum total we can obtain is 101.
+///
+/// Example 2:
+/// Input: piles = [[100],[100],[100],[100],[100],[100],
+/// [1,1,1,1,1,1,700]], k = 7
+/// Output: 706
+/// Explanation:
+/// The maximum total can be obtained if we choose all coins from the 
+/// last pile.
+///
+/// Constraints:
+/// 1. n == piles.length
+/// 2. 1 <= n <= 1000
+/// 3. 1 <= piles[i][j] <= 10^5
+/// 4. 1 <= k <= sum(piles[i].length) <= 2000
+/// </summary>
+int LeetCodeDP::maxValueOfCoins(vector<vector<int>>& piles, int k)
+{
+    vector<vector<int>> dp(piles.size(), vector<int>(k));
+    return maxValueOfCoins(piles, 0, k, dp);
+}
+
+/// <summary>
+/// Leet Code 2222. Number of Ways to Select Buildings
+///                                                                                   
+/// Medium
+///
+/// You are given a 0-indexed binary string s which represents the types 
+/// of buildings along a street where:
+///
+/// s[i] = '0' denotes that the ith building is an office and
+/// s[i] = '1' denotes that the ith building is a restaurant.
+/// As a city official, you would like to select 3 buildings for random 
+/// inspection. However, to ensure variety, no two consecutive buildings 
+/// out of the selected buildings can be of the same type.
+///
+/// For example, given s = "001101", we cannot select the 1st, 3rd, and 
+/// 5th buildings as that would form "011" which is not allowed due to 
+/// having two consecutive buildings of the same type.
+/// Return the number of valid ways to select 3 buildings.
+///
+/// Example 1:
+/// Input: s = "001101"
+/// Output: 6
+/// Explanation: 
+/// The following sets of indices selected are valid:
+/// - [0,2,4] from "001101" forms "010"
+/// - [0,3,4] from "001101" forms "010"
+/// - [1,2,4] from "001101" forms "010"
+/// - [1,3,4] from "001101" forms "010"
+/// - [2,4,5] from "001101" forms "101"
+/// - [3,4,5] from "001101" forms "101"
+/// No other selection is valid. Thus, there are 6 total ways.
+///
+/// Example 2:
+/// Input: s = "11100"
+/// Output: 0
+/// Explanation: It can be shown that there are no valid selections.
+/// 
+/// Constraints:
+/// 1. 3 <= s.length <= 10^5
+/// 2. s[i] is either '0' or '1'.
+/// </summary>
+long long LeetCodeDP::numberOfWays(string s)
+{
+    vector<long long> dp00(s.size());
+    vector<long long> dp01(s.size());
+    vector<long long> dp10(s.size());
+    vector<long long> dp11(s.size());
+    vector<long long> dp20(s.size());
+    vector<long long> dp21(s.size());
+    for (int i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '0')
+        {
+            dp00[i]++;
+            if (i > 0)
+            {
+                dp10[i] += dp01[i - 1];
+                dp20[i] += dp11[i - 1];
+            }
+        }
+        else
+        {
+            dp01[i]++;
+            if (i > 0)
+            {
+                dp11[i] += dp00[i - 1];
+                dp21[i] += dp10[i - 1];
+            }
+        }
+        if (i > 0)
+        {
+            dp00[i] += dp00[i - 1];
+            dp01[i] += dp01[i - 1];
+            dp10[i] += dp10[i - 1];
+            dp11[i] += dp11[i - 1];
+            dp20[i] += dp20[i - 1];
+            dp21[i] += dp21[i - 1];
+        }
+    }
+    long long result = 0;
+    result += dp20[s.size() - 1];
+    result += dp21[s.size() - 1];
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2209. Minimum White Tiles After Covering With Carpets
+///                                                                                   
+/// Hard
+///
+/// You are given a 0-indexed binary string floor, which represents the 
+/// colors of tiles on a floor:
+///
+/// floor[i] = '0' denotes that the ith tile of the floor is colored black.
+/// On the other hand, floor[i] = '1' denotes that the ith tile of the 
+/// floor is colored white.
+/// You are also given numCarpets and carpetLen. You have numCarpets black 
+/// carpets, each of length carpetLen tiles. Cover the tiles with the 
+/// given carpets such that the number of white tiles still visible is 
+/// minimum. Carpets may overlap one another.
+///
+/// Return the minimum number of white tiles still visible.
+/// Example 1:
+/// Input: floor = "10110101", numCarpets = 2, carpetLen = 2
+/// Output: 2
+/// Explanation: 
+/// The figure above shows one way of covering the tiles with the carpets 
+/// such that only 2 white tiles are visible.
+/// No other way of covering the tiles with the carpets can leave less 
+/// than 2 white tiles visible.
+///
+/// Example 2:
+/// Input: floor = "11111", numCarpets = 2, carpetLen = 3
+/// Output: 0
+/// Explanation: 
+/// The figure above shows one way of covering the tiles with the carpets 
+/// such that no white tiles are visible.
+/// Note that the carpets are able to overlap one another.
+///
+/// Constraints:
+/// 1. 1 <= carpetLen <= floor.length <= 1000
+/// 2. floor[i] is either '0' or '1'.
+/// 3. 1 <= numCarpets <= 1000
+/// </summary>
+int LeetCodeDP::minimumWhiteTiles(string floor, int numCarpets, int carpetLen)
+{
+    vector<int> sum(floor.size());
+    vector<vector<int>> dp(floor.size(), vector<int>(numCarpets + 1, INT_MAX));
+    for (size_t i = 0; i < floor.size(); i++)
+    {
+        if (floor[i] == '1')
+        {
+            sum[i] = 1;
+        }
+        if (i > 0) sum[i] += sum[i - 1];
+    }
+    for (int i = 0; i < (int)floor.size(); i++)
+    {
+        int prev = i - carpetLen;
+        for (int j = 0; j <= numCarpets; j++)
+        {
+            if (j == 0)
+            {
+                dp[i][j] = sum[i];
+                continue;
+            }
+            else
+            {
+                dp[i][j] = min(dp[i][j], dp[i][j - 1]);
+                if (i > 0)
+                {
+                    dp[i][j] = min(dp[i][j], dp[i - 1][j] + sum[i] - sum[i-1]);
+                }
+                if (prev < 0)
+                {
+                    dp[i][j] = 0;
+                }
+                else
+                {
+                    dp[i][j] = min(dp[i][j], dp[prev][j - 1]);
+                    dp[i][j] = min(dp[i][j], dp[prev][j] + sum[i] - sum[prev]);
+                }
+            }
+        }
+    }
+    return dp[floor.size() - 1][numCarpets];
+}
+
 #pragma endregion
 

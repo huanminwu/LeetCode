@@ -1674,8 +1674,44 @@ void TestLeetCode2189(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2212(void)
+{
+    Logger::WriteMessage("Test Leet Code 2212");
+    LeetCodeDFS leetCode;
+    int numArrows = 9;
+    vector<int> aliceArrows = { 1, 1, 0, 1, 0, 0, 2, 1, 0, 1, 2, 0 };
+    vector<int> result = leetCode.maximumBobPoints(numArrows, aliceArrows);
+    Logger::WriteMessage(aliceArrows);
+    Logger::WriteMessage(result);
+
+    numArrows = 3;
+    aliceArrows = { 0,0,1,0,0,0,0,0,0,0,0,2 };
+    result = leetCode.maximumBobPoints(numArrows, aliceArrows);
+    Logger::WriteMessage(aliceArrows);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2232(void)
+{
+    Logger::WriteMessage("Test Leet Code 2232");
+    LeetCodeDFS leetCode;
+    string expression = "247+38";
+    string result = leetCode.minimizeResult(expression);
+    Logger::WriteMessage("expression = " + expression + "; result = " + result);
+
+    expression = "12+34";
+    result = leetCode.minimizeResult(expression);
+    Logger::WriteMessage("expression = " + expression + "; result = " + result);
+
+    expression = "999+999";
+    result = leetCode.minimizeResult(expression);
+    Logger::WriteMessage("expression = " + expression + "; result = " + result);
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2232();
+    TestLeetCode2212();
     TestLeetCode2189();
     TestLeetCode2174();
     TestLeetCode2172();

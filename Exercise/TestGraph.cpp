@@ -4282,8 +4282,113 @@ void TestLeetCode2192(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2201(void)
+{
+    LeetCodeGraph leetCode;
+    int n = 2;
+    vector<vector<int>> artifacts =
+    {
+        {0, 0, 0, 0},{0, 1, 1, 1}
+    };
+    vector<vector<int>> dig = { {0, 0},{0, 1} };
+    int result = leetCode.digArtifacts(n, artifacts, dig);
+    Logger::WriteMessage(artifacts);
+    Logger::WriteMessage(dig);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 2;
+    artifacts =
+    {
+        {0, 0, 0, 0},{0, 1, 1, 1}
+    };
+    dig = { {0, 0} ,{0, 1},{1, 1} };
+    result = leetCode.digArtifacts(n, artifacts, dig);
+    Logger::WriteMessage(artifacts);
+    Logger::WriteMessage(dig);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 5;
+    artifacts =
+    {
+        {3,1,4,1},{1,1,2,2},{1,0,2,0},{4,3,4,4},{0,3,1,4},{2,3,3,4}
+    };
+    dig = { {0,0} ,{2,1},{2,0},{2,3},{4,3},{2,4},{4,1},{0,2},{4,0},{3,1},{1,2},{1,3},{3,2} };
+    result = leetCode.digArtifacts(n, artifacts, dig);
+    Logger::WriteMessage(artifacts);
+    Logger::WriteMessage(dig);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2203(void)
+{
+    LeetCodeGraph leetCode;
+    int n = 6;
+    vector<vector<int>> edges =
+    {
+        {0, 2, 2},{0, 5, 6},{1, 0, 3},{1, 4, 5},{2, 1, 1},{2, 3, 3},{2, 3, 4},{3, 4, 2},{4, 5, 1}
+    };
+    int src1 = 0, src2 = 1, dest = 5;
+    long long result = leetCode.minimumWeight(n, edges, src1, src2, dest);
+
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("src1 = " + to_string(src1) + "; src2 = " + to_string(src2) + "; dest = " + to_string(dest));
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    edges =
+    {
+        {0,1,1} ,{2,1,1}
+    };
+    src1 = 0, src2 = 1, dest = 2;
+    result = leetCode.minimumWeight(n, edges, src1, src2, dest);
+
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("src1 = " + to_string(src1) + "; src2 = " + to_string(src2) + "; dest = " + to_string(dest));
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 5;
+    edges =
+    {
+        {4, 2, 20} ,{4, 3, 46},{0, 1, 15},{0, 1, 43},{0, 1, 32},{3, 1, 13}
+    };
+    src1 = 0, src2 = 4, dest = 1;
+    result = leetCode.minimumWeight(n, edges, src1, src2, dest);
+
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("src1 = " + to_string(src1) + "; src2 = " + to_string(src2) + "; dest = " + to_string(dest));
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+
+void TestLeetCode2204(void)
+{
+    LeetCodeGraph leetCode;
+    int n = 7;
+    vector<vector<int>> edges =
+    {
+        {1, 2}, {2, 3}, {3, 4}, {4, 1}, {0, 1}, {5, 2}, {6, 5}
+    };
+    vector<int> result = leetCode.distanceToCycle(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 9;
+    edges =
+    {
+        {0,1},{1,2},{0,2},{2,6},{6,7},{6,8},{1,3},{3,4},{3,5}
+    };
+    result = leetCode.distanceToCycle(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2204();
+    TestLeetCode2203();
+    TestLeetCode2201();
     TestLeetCode2192();
     TestLeetCode2146();
     TestLeetCode2127();

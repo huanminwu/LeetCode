@@ -10203,6 +10203,148 @@ public:
     /// 5. 0 <= nums[i] < 10^9
     /// </summary>
     vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2223. Sum of Scores of Built Strings
+    ///                                                                                   
+    /// Hard
+    ///
+    /// You are building a string s of length n one character at a time, 
+    /// prepending each new character to the front of the string. The 
+    /// strings are labeled from 1 to n, where the string with length i 
+    /// is labeled si.
+    ///
+    /// For example, for s = "abaca", s1 == "a", s2 == "ca", s3 == "aca", etc.
+    /// The score of si is the length of the longest common prefix between si 
+    /// and sn (Note that s == sn).
+    ///
+    /// Given the final string s, return the sum of the score of every si.
+    /// 
+    /// Example 1:
+    /// Input: s = "babab"
+    /// Output: 9
+    /// Explanation:
+    /// For s1 == "b", the longest common prefix is "b" which has a score of 1.
+    /// For s2 == "ab", there is no common prefix so the score is 0.
+    /// For s3 == "bab", the longest common prefix is "bab" which has a score 
+    /// of 3.
+    /// For s4 == "abab", there is no common prefix so the score is 0.
+    /// For s5 == "babab", the longest common prefix is "babab" which has a 
+    /// score of 5.
+    /// The sum of the scores is 1 + 0 + 3 + 0 + 5 = 9, so we return 9.
+    ///
+    /// Example 2:
+    /// Input: s = "azbazbzaz"
+    /// Output: 14
+    /// Explanation: 
+    /// For s2 == "az", the longest common prefix is "az" which has a 
+    /// score of 2.
+    /// For s6 == "azbzaz", the longest common prefix is "azb" which has a 
+    /// score of 3.
+    /// For s9 == "azbazbzaz", the longest common prefix is "azbazbzaz" which 
+    /// has a score of 9.
+    /// For all other si, the score is 0. 
+    /// The sum of the scores is 2 + 3 + 9 = 14, so we return 14.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s consists of lowercase English letters.
+    /// </summary>
+    long long sumScores(string s);
+
+    /// <summary>
+    /// Leet Code 2224. Minimum Number of Operations to Convert Time
+    ///                                                                                   
+    /// Easy
+    ///
+    /// You are given two strings current and correct representing two 
+    /// 24-hour times.
+    ///
+    /// 24-hour times are formatted as "HH:MM", where HH is between 00 
+    /// and 23, and MM is between 00 and 59. The earliest 24-hour time is 
+    /// 00:00, and the latest is 23:59.
+    ///
+    /// In one operation you can increase the time current by 1, 5, 15, 
+    /// or 60 minutes. You can perform this operation any number of 
+    /// times.
+    ///  
+    /// Return the minimum number of operations needed to convert current 
+    /// to correct.
+    ///
+    /// Example 1:
+    /// Input: current = "02:30", correct = "04:35"
+    /// Output: 3
+    /// Explanation:
+    /// We can convert current to correct in 3 operations as follows:
+    /// - Add 60 minutes to current. current becomes "03:30".
+    /// - Add 60 minutes to current. current becomes "04:30".
+    /// - Add 5 minutes to current. current becomes "04:35".
+    /// It can be proven that it is not possible to convert current to 
+    /// correct in fewer than 3 operations.
+    ///
+    /// Example 2:
+    /// Input: current = "11:00", correct = "11:01"
+    /// Output: 1
+    /// Explanation: We only have to add one minute to current, so the 
+    /// minimum number of operations needed is 1.
+    ///
+    /// Constraints:
+    /// 1. current and correct are in the format "HH:MM"
+    /// 2. current <= correct
+    /// </summary>
+    int convertTime(string current, string correct);
+
+    /// <summary>
+    /// Leet Code 2243. Calculate Digit Sum of a String
+    ///                                                                                   
+    /// Easy
+    /// 
+    /// You are given a string s consisting of digits and an integer k.
+    ///
+    /// A round can be completed if the length of s is greater than k. In one 
+    /// round, do the following:
+    ///
+    /// Divide s into consecutive groups of size k such that the first k 
+    /// characters are in the first group, the next k characters are in the 
+    /// second group, and so on. Note that the size of the last group can be 
+    /// smaller than k.
+    /// Replace each group of s with a string representing the sum of all its 
+    /// digits. For example, "346" is replaced with "13" because 
+    /// 3 + 4 + 6 = 13.
+    /// Merge consecutive groups together to form a new string. If the length 
+    /// of the string is greater than k, repeat from step 1.
+    /// Return s after all rounds have been completed.
+    /// 
+    /// Example 1:
+    /// Input: s = "11111222223", k = 3
+    /// Output: "135"
+    /// Explanation: 
+    /// For the first round, we divide s into groups of size 3: 
+    /// "111", "112", "222", and "23".
+    /// Then we calculate the digit sum of each group: 1 + 1 + 1 = 3, 
+    /// 1 + 1 + 2 = 4, 2 + 2 + 2 = 6, and 2 + 3 = 5. 
+    /// So, s becomes "3" + "4" + "6" + "5" = "3465" after the first round.
+    /// - For the second round, we divide s into "346" and "5".
+    /// Then we calculate the digit sum of each group: 3 + 4 + 6 = 13, 5 = 5. 
+    /// So, s becomes "13" + "5" = "135" after second round. 
+    /// Now, s.length <= k, so we return "135" as the answer.
+    ///
+    /// Example 2:
+    /// Input: s = "00000000", k = 3
+    /// Output: "000"
+    /// Explanation: 
+    /// We divide s into "000", "000", and "00".
+    /// Then we calculate the digit sum of each group: 0 + 0 + 0 = 0, 
+    /// 0 + 0 + 0 = 0, and 0 + 0 = 0. 
+    /// s becomes "0" + "0" + "0" = "000", whose length is equal to k, 
+    /// so we return "000".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. 2 <= k <= 100
+    /// 3. s consists of digits only.
+    /// </summary>
+    string digitSum(string s, int k);
 #pragma endregion
 };
 

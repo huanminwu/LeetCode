@@ -28,5 +28,7 @@ void TestLeetCode2021(void);
 void TestLeetCode2015(void);
 void TestLeetCode2158(void);
 void TestLeetCode2182(void);
+void TestLeetCode2213(void);
+void TestLeetCode2237(void);
 void TestLeetCodeGreedy(void);
 #endif  // TestArray

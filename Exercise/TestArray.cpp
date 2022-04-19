@@ -6910,7 +6910,7 @@ void TestLeetCode2147(void)
     Logger::WriteMessage("Test Leet Code 2147");
     LeetCodeArray leetCode;
     string corridor = "SSPPSPS";
-    int result = leetCode.numberOfWays(corridor);
+    long long result = leetCode.numberOfWays(corridor);
     Logger::WriteMessage("corridor = " + corridor);
     Logger::WriteMessage("result = " + to_string(result));
 
@@ -7001,7 +7001,7 @@ void TestLeetCode2163(void)
     Logger::WriteMessage("Test Leet Code 2163");
     LeetCodeArray leetCode;
     vector<int> nums = { 3,1,2 };
-    int result = leetCode.minimumDifference(nums);
+    long long result = leetCode.minimumDifference(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 
@@ -7054,7 +7054,7 @@ void TestLeetCode2179(void)
     LeetCodeArray leetCode;
     vector<int> nums1 = { 2, 0, 1, 3 };
     vector<int> nums2 = { 0, 1, 2, 3 };
-    int result = leetCode.goodTriplets(nums1, nums2);
+    long long result = leetCode.goodTriplets(nums1, nums2);
     Logger::WriteMessage(nums1);
     Logger::WriteMessage(nums2);
     Logger::WriteMessage("result = " + to_string(result));
@@ -7105,8 +7105,199 @@ void TestLeetCode2200(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2214(void)
+{
+    Logger::WriteMessage("Test Leet Code 2214");
+    LeetCodeArray leetCode;
+    vector<int> damage = { 2, 7, 4, 3 };
+    int armor = 4;
+    long long result = leetCode.minimumHealth(damage, armor);
+    Logger::WriteMessage(damage);
+    Logger::WriteMessage("armor = " + to_string(armor) + "; result = " + to_string(result));
+
+    damage = { 2,5,3,4 };
+    armor = 7;
+    result = leetCode.minimumHealth(damage, armor);
+    Logger::WriteMessage(damage);
+    Logger::WriteMessage("armor = " + to_string(armor) + "; result = " + to_string(result));
+
+    damage = { 3,3,3 };
+    armor = 0;
+    result = leetCode.minimumHealth(damage, armor);
+    Logger::WriteMessage(damage);
+    Logger::WriteMessage("armor = " + to_string(armor) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2210(void)
+{
+    Logger::WriteMessage("Test Leet Code 2210");
+    LeetCodeArray leetCode;
+    vector<int>nums = { 2, 4, 1, 1, 6, 5 };
+    int result = leetCode.countHillValley(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,6,5,5,4,1 };
+    result = leetCode.countHillValley(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2207(void)
+{
+    Logger::WriteMessage("Test Leet Code 2207");
+    LeetCodeArray leetCode;
+    string text = "abdcdbc";
+    string pattern = "ac";
+    long long result = leetCode.maximumSubsequenceCount(text, pattern);
+    Logger::WriteMessage("text = " + text + "; pattern = " + pattern + "; result = " + to_string(result));
+
+    text = "aabb";
+    pattern = "ab";
+    result = leetCode.maximumSubsequenceCount(text, pattern);
+    Logger::WriteMessage("text = " + text + "; pattern = " + pattern + "; result = " + to_string(result));
+}
+
+void TestLeetCode2208(void)
+{
+    Logger::WriteMessage("Test Leet Code 2208");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 5, 19, 8, 1 };
+    int result = leetCode.halveArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,8,20 };
+    result = leetCode.halveArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2216(void)
+{
+    Logger::WriteMessage("Test Leet Code 2216");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 1, 2, 3, 5 };
+    int result = leetCode.minDeletion(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,2,2,3,3 };
+    result = leetCode.minDeletion(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2219(void)
+{
+    Logger::WriteMessage("Test Leet Code 2219");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 4,3,-2,5 };
+    int result = leetCode.maximumSumScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -3,-5 };
+    result = leetCode.maximumSumScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2221(void)
+{
+    Logger::WriteMessage("Test Leet Code 2221");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5 };
+    int result = leetCode.triangularSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5 };
+    result = leetCode.triangularSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2225(void)
+{
+    Logger::WriteMessage("Test Leet Code 2225");
+    LeetCodeArray leetCode;
+    vector<vector<int>> matches =
+    {
+        {1, 3},{2, 3},{3, 6},{5, 6},{5, 7},{4, 5},{4, 8},{4, 9},{10, 4},{10, 9}
+    };
+    vector<vector<int>> result = leetCode.findWinners(matches);
+    Logger::WriteMessage(matches);
+    Logger::WriteMessage(result);
+
+    matches =
+    {
+        {2,3} ,{1,3},{5,4},{6,4}
+    };
+    result = leetCode.findWinners(matches);
+    Logger::WriteMessage(matches);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2229(void)
+{
+    Logger::WriteMessage("Test Leet Code 2229");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 3, 4, 2 };
+    bool result = leetCode.isConsecutive(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,3 };
+    result = leetCode.isConsecutive(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 3,5,4 };
+    result = leetCode.isConsecutive(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2245(void)
+{
+    Logger::WriteMessage("Test Leet Code 2245");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid =
+    {
+        {23, 17, 15, 3, 20} ,
+        {8, 1, 20, 27, 11},
+        {9, 4, 6, 2, 21},
+        {40, 9, 1, 10, 6},
+        {22, 7, 4, 5, 3}
+    };
+    int result = leetCode.maxTrailingZeros(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {4,3,2} ,
+        {7,6,1},
+        {8,8,8}
+    };
+    result = leetCode.maxTrailingZeros(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2245();
+    TestLeetCode2229();
+    TestLeetCode2225();
+    TestLeetCode2221();
+    TestLeetCode2219();
+    TestLeetCode2216();
+    TestLeetCode2208();
+    TestLeetCode2207();
+    TestLeetCode2210();
+    TestLeetCode2214();
     TestLeetCode2200();
     TestLeetCode2190();
     TestLeetCode2179();

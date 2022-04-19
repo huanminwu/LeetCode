@@ -8309,5 +8309,253 @@ public:
     /// 3. 1 <= k <= 10^8
     /// </summary>
     long long minimalKSum(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 2202. Maximize the Topmost Element After K Moves
+    ///                                                                                   
+    /// Medium
+    ///
+    /// You are given a 0-indexed integer array nums representing the contents 
+    /// of a pile, where nums[0] is the topmost element of the pile.
+    ///
+    /// In one move, you can perform either of the following:
+    ///
+    /// If the pile is not empty, remove the topmost element of the pile.
+    /// If there are one or more removed elements, add any one of them back 
+    /// onto the pile. This element becomes the new topmost element.
+    /// You are also given an integer k, which denotes the total number of 
+    /// moves to be made.  
+    /// Return the maximum value of the topmost element of the pile possible 
+    /// after exactly k moves. In case it is not possible to obtain a 
+    /// non-empty pile after k moves, return -1.
+    /// 
+    /// Example 1:
+    /// Input: nums = [5,2,2,4,0,6], k = 4
+    /// Output: 5
+    /// Explanation:
+    /// One of the ways we can end with 5 at the top of the pile after 4 moves 
+    /// is as follows:
+    /// - Step 1: Remove the topmost element = 5. The pile becomes [2,2,4,0,6].
+    /// - Step 2: Remove the topmost element = 2. The pile becomes [2,4,0,6].
+    /// - Step 3: Remove the topmost element = 2. The pile becomes [4,0,6].
+    /// - Step 4: Add 5 back onto the pile. The pile becomes [5,4,0,6].
+    /// Note that this is not the only way to end with 5 at the top of the 
+    /// pile. It can be shown that 5 is the largest answer possible after 4 
+    /// moves.
+    ///
+    /// Example 2:
+    /// 
+    /// Input: nums = [2], k = 1
+    /// Output: -1
+    /// Explanation: 
+    /// In the first move, our only option is to pop the topmost element of 
+    /// the pile.
+    /// Since it is not possible to obtain a non-empty pile after one move, 
+    /// we return -1.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i], k <= 10^9
+    /// </summary>
+    int maximumTop(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 2217. Find Palindrome With Fixed Length
+    ///                                                                                   
+    /// Medium
+    ///
+    /// Given an integer array queries and a positive integer intLength, 
+    /// return an array answer where answer[i] is either the queries[i]th 
+    /// smallest positive palindrome of length intLength or -1 if no such 
+    /// palindrome exists.
+    ///
+    /// A palindrome is a number that reads the same backwards and forwards. 
+    /// Palindromes cannot have leading zeros.
+    ///
+    /// Example 1:
+    /// Input: queries = [1,2,3,4,5,90], intLength = 3
+    /// Output: [101,111,121,131,141,999]
+    /// Explanation:
+    /// The first few palindromes of length 3 are:
+    /// 101, 111, 121, 131, 141, 151, 161, 171, 181, 191, 202, ...
+    /// The 90th palindrome of length 3 is 999.
+    ///
+    /// Example 2:
+    /// Input: queries = [2,4,6], intLength = 4
+    /// Output: [1111,1331,1551]
+    /// Explanation:
+    /// The first six palindromes of length 4 are:
+    /// 1001, 1111, 1221, 1331, 1441, and 1551.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= queries.length <= 5 * 10^4
+    /// 2. 1 <= queries[i] <= 10^9
+    /// 3. 1 <= intLength <= 15
+    /// </summary>
+    vector<long long> kthPalindrome(vector<int>& queries, int intLength);
+
+    /// <summary>
+    /// Leet Code 2231. Largest Number After Digit Swaps by Parity
+    ///                                                                                   
+    /// Easy
+    ///
+    /// You are given a positive integer num. You may swap any two digits of 
+    /// num that have the same parity (i.e. both odd digits or both even 
+    /// digits).
+    ///
+    /// Return the largest possible value of num after any number of swaps.
+    /// 
+    /// Example 1:
+    /// Input: num = 1234
+    /// Output: 3412
+    /// Explanation: Swap the digit 3 with the digit 1, this results in the 
+    /// number 3214.
+    /// Swap the digit 2 with the digit 4, this results in the number 3412.
+    /// Note that there may be other sequences of swaps but it can be shown 
+    /// that 3412 is the largest possible number.
+    /// Also note that we may not swap the digit 4 with the digit 1 since 
+    ///  they are of different parities.
+    ///
+    /// Example 2:
+    /// Input: num = 65875
+    /// Output: 87655
+    /// Explanation: Swap the digit 8 with the digit 6, this results in the 
+    /// number 85675.
+    /// Swap the first digit 5 with the digit 7, this results in the 
+    /// number 87655.
+    /// Note that there may be other sequences of swaps but it can be shown 
+    /// that 87655 is the largest possible number.
+    ///  
+    /// Constraints:
+    /// 1. 1 <= num <= 10^9
+    /// </summary>
+    int largestInteger(int num);
+
+    /// <summary>
+    /// Leet Code 2233. Maximum Product After K Increments
+    ///                                                                                   
+    /// Medium
+    ///
+    /// You are given an array of non-negative integers nums and an integer k. 
+    /// In one operation, you may choose any element from nums and increment 
+    /// it by 1.
+    ///
+    /// Return the maximum product of nums after at most k operations. Since 
+    /// the answer may be very large, return it modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: nums = [0,4], k = 5
+    /// Output: 20
+    /// Explanation: Increment the first number 5 times.
+    /// Now nums = [5, 4], with a product of 5 * 4 = 20.
+    /// It can be shown that 20 is maximum product possible, so we return 20.
+    /// Note that there may be other ways to increment nums to have the 
+    /// maximum product.
+    ///
+    /// Example 2:
+    /// Input: nums = [6,3,3,2], k = 2
+    /// Output: 216
+    /// Explanation: Increment the second number 1 time and increment the 
+    /// fourth number 1 time.
+    /// Now nums = [6, 4, 3, 3], with a product of 6 * 4 * 3 * 3 = 216.
+    /// It can be shown that 216 is maximum product possible, so we return 216.
+    /// Note that there may be other ways to increment nums to have the maximum 
+    /// product.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length, k <= 10^5
+    /// 2. 0 <= nums[i] <= 10^6
+    /// </summary>
+    int maximumProduct(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 2235. Add Two Integers
+    ///                                                                                   
+    /// Easy
+    /// 
+    /// Given two integers num1 and num2, return the sum of the two integers.
+    ///  
+    /// Example 1:
+    /// Input: num1 = 12, num2 = 5
+    /// Output: 17
+    /// Explanation: num1 is 12, num2 is 5, and their sum is 12 + 5 = 17, 
+    /// so 17 is returned.
+    ///
+    /// Example 2:
+    /// Input: num1 = -10, num2 = 4
+    /// Output: -6
+    /// Explanation: num1 + num2 = -6, so -6 is returned.
+    /// 
+    /// Constraints:
+    /// 1. -100 <= num1, num2 <= 100
+    /// </summary>
+    int sum(int num1, int num2);
+
+    /// <summary>
+    /// Leet Code 2239. Find Closest Number to Zero
+    ///                                                                                   
+    /// Easy
+    /// 
+    /// Given an integer array nums of size n, return the number with the 
+    /// value closest to 0 in nums. If there are multiple answers, return 
+    /// the number with the largest value.
+    ///
+    /// Example 1:
+    /// Input: nums = [-4,-2,1,4,8]
+    /// Output: 1
+    /// Explanation:
+    /// The distance from -4 to 0 is |-4| = 4.
+    /// The distance from -2 to 0 is |-2| = 2.
+    /// The distance from 1 to 0 is |1| = 1.
+    /// The distance from 4 to 0 is |4| = 4.
+    /// The distance from 8 to 0 is |8| = 8.
+    /// Thus, the closest number to 0 in the array is 1.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,-1,1]
+    /// Output: 1
+    /// Explanation: 1 and -1 are both the closest numbers to 0, so 
+    /// 1 being larger is returned.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 1000
+    /// 2. -10^5 <= nums[i] <= 10^5
+    /// </summary>
+    int findClosestNumber(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2240. Number of Ways to Buy Pens and Pencils
+    ///                                                                                   
+    /// Medium
+    /// 
+    /// You are given an integer total indicating the amount of money you 
+    /// have. You are also given two integers cost1 and cost2 indicating 
+    /// the price of a pen and pencil respectively. You can spend part or 
+    /// all of your money to buy multiple quantities (or none) of each 
+    /// kind of writing utensil.
+    ///
+    /// Return the number of distinct ways you can buy some number of 
+    /// pens and pencils.
+    ///
+    /// Example 1:
+    /// Input: total = 20, cost1 = 10, cost2 = 5
+    /// Output: 9
+    /// Explanation: The price of a pen is 10 and the price of a pencil is 5.
+    /// - If you buy 0 pens, you can buy 0, 1, 2, 3, or 4 pencils.
+    /// - If you buy 1 pen, you can buy 0, 1, or 2 pencils.
+    /// - If you buy 2 pens, you cannot buy any pencils.
+    /// The total number of ways to buy pens and pencils is 5 + 3 + 1 = 9.
+    ///
+    /// Example 2:
+    /// Input: total = 5, cost1 = 10, cost2 = 10
+    /// Output: 1
+    /// Explanation: The price of both pens and pencils are 10, which cost 
+    /// more than total, so you cannot buy any writing utensils. Therefore, 
+    /// there is only 1 way: buy 0 pens and 0 pencils.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= total, cost1, cost2 <= 10^6
+    /// </summary>
+    long long waysToBuyPensPencils(int total, int cost1, int cost2);
 };
 #endif

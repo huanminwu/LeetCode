@@ -5137,6 +5137,135 @@ public:
     /// 5. 1 <= numLaps <= 1000
     /// </summary>
     int minimumFinishTime(vector<vector<int>>& tires, int changeTime, int numLaps);
+
+    /// <summary>
+    /// Leet Code 2218. Maximum Value of K Coins From Piles
+    /// </summary>
+    int maxValueOfCoins(vector<vector<int>>& piles, int i, int k, vector<vector<int>>&dp);
+
+
+    /// <summary>
+    /// Leet Code 2218. Maximum Value of K Coins From Piles
+    ///                                                                                   
+    /// Hard
+    ///
+    /// There are n piles of coins on a table. Each pile consists of a 
+    /// positive number of coins of assorted denominations.
+    ///
+    /// In one move, you can choose any coin on top of any pile, remove it, 
+    /// and add it to your wallet.
+    ///
+    /// Given a list piles, where piles[i] is a list of integers denoting 
+    /// the composition of the ith pile from top to bottom, and a positive 
+    /// integer k, return the maximum total value of coins you can have in 
+    /// your wallet if you choose exactly k coins optimally.
+    ///
+    /// Example 1:
+    /// Input: piles = [[1,100,3],[7,8,9]], k = 2
+    /// Output: 101
+    /// Explanation:
+    /// The above diagram shows the different ways we can choose k coins.
+    /// The maximum total we can obtain is 101.
+    ///
+    /// Example 2:
+    /// Input: piles = [[100],[100],[100],[100],[100],[100],
+    /// [1,1,1,1,1,1,700]], k = 7
+    /// Output: 706
+    /// Explanation:
+    /// The maximum total can be obtained if we choose all coins from the 
+    /// last pile.
+    ///
+    /// Constraints:
+    /// 1. n == piles.length
+    /// 2. 1 <= n <= 1000
+    /// 3. 1 <= piles[i][j] <= 10^5
+    /// 4. 1 <= k <= sum(piles[i].length) <= 2000
+    /// </summary>
+    int maxValueOfCoins(vector<vector<int>>& piles, int k);
+
+    /// <summary>
+    /// Leet Code 2222. Number of Ways to Select Buildings
+    ///                                                                                   
+    /// Medium
+    ///
+    /// You are given a 0-indexed binary string s which represents the types 
+    /// of buildings along a street where:
+    ///
+    /// s[i] = '0' denotes that the ith building is an office and
+    /// s[i] = '1' denotes that the ith building is a restaurant.
+    /// As a city official, you would like to select 3 buildings for random 
+    /// inspection. However, to ensure variety, no two consecutive buildings 
+    /// out of the selected buildings can be of the same type.
+    ///
+    /// For example, given s = "001101", we cannot select the 1st, 3rd, and 
+    /// 5th buildings as that would form "011" which is not allowed due to 
+    /// having two consecutive buildings of the same type.
+    /// Return the number of valid ways to select 3 buildings.
+    ///
+    /// Example 1:
+    /// Input: s = "001101"
+    /// Output: 6
+    /// Explanation: 
+    /// The following sets of indices selected are valid:
+    /// - [0,2,4] from "001101" forms "010"
+    /// - [0,3,4] from "001101" forms "010"
+    /// - [1,2,4] from "001101" forms "010"
+    /// - [1,3,4] from "001101" forms "010"
+    /// - [2,4,5] from "001101" forms "101"
+    /// - [3,4,5] from "001101" forms "101"
+    /// No other selection is valid. Thus, there are 6 total ways.
+    ///
+    /// Example 2:
+    /// Input: s = "11100"
+    /// Output: 0
+    /// Explanation: It can be shown that there are no valid selections.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= s.length <= 10^5
+    /// 2. s[i] is either '0' or '1'.
+    /// </summary>
+    long long numberOfWays(string s);
+
+    /// <summary>
+    /// Leet Code 2209. Minimum White Tiles After Covering With Carpets
+    ///                                                                                   
+    /// Hard
+    ///
+    /// You are given a 0-indexed binary string floor, which represents the 
+    /// colors of tiles on a floor:
+    ///
+    /// floor[i] = '0' denotes that the ith tile of the floor is colored black.
+    /// On the other hand, floor[i] = '1' denotes that the ith tile of the 
+    /// floor is colored white.
+    /// You are also given numCarpets and carpetLen. You have numCarpets black 
+    /// carpets, each of length carpetLen tiles. Cover the tiles with the 
+    /// given carpets such that the number of white tiles still visible is 
+    /// minimum. Carpets may overlap one another.
+    ///
+    /// Return the minimum number of white tiles still visible.
+    /// Example 1:
+    /// Input: floor = "10110101", numCarpets = 2, carpetLen = 2
+    /// Output: 2
+    /// Explanation: 
+    /// The figure above shows one way of covering the tiles with the carpets 
+    /// such that only 2 white tiles are visible.
+    /// No other way of covering the tiles with the carpets can leave less 
+    /// than 2 white tiles visible.
+    ///
+    /// Example 2:
+    /// Input: floor = "11111", numCarpets = 2, carpetLen = 3
+    /// Output: 0
+    /// Explanation: 
+    /// The figure above shows one way of covering the tiles with the carpets 
+    /// such that no white tiles are visible.
+    /// Note that the carpets are able to overlap one another.
+    ///
+    /// Constraints:
+    /// 1. 1 <= carpetLen <= floor.length <= 1000
+    /// 2. floor[i] is either '0' or '1'.
+    /// 3. 1 <= numCarpets <= 1000
+    /// </summary>
+    int minimumWhiteTiles(string floor, int numCarpets, int carpetLen);
 };
 
 

@@ -743,7 +743,6 @@ void TestLeetCode1938(void)
     Logger::WriteMessage(result);
 }
 
-
 void TestLeetCode1980(void)
 {
     Logger::WriteMessage("Test Leet Code 1980");
@@ -764,8 +763,26 @@ void TestLeetCode1980(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode2220(void)
+{
+    Logger::WriteMessage("Test Leet Code 2220");
+    LeetCodeBit leetCode;
+    int start = 10;
+    int goal = 7;
+    int result = leetCode.minBitFlips(start, goal);
+    Logger::WriteMessage("start = " + to_string(start) + "; goal =" + to_string(goal));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    start = 3;
+    goal = 4;
+    result = leetCode.minBitFlips(start, goal);
+    Logger::WriteMessage("start = " + to_string(start) + "; goal =" + to_string(goal));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2220();
     TestLeetCode1980();
     TestLeetCode1938();
     TestLeetCode1863();

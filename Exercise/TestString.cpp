@@ -5184,8 +5184,57 @@ void TestLeetCode2191(void)
     Logger::WriteMessage(nums);
     Logger::WriteMessage(result);
 }
+
+void TestLeetCode2223(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2223");
+    string s = "babab";
+    int result = leetCode.sumScores(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "azbazbzaz";
+    result = leetCode.sumScores(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2224(void)
+{
+    LeetCodeString leetCode;
+    Logger::WriteMessage("Test Leet Code 2224");
+    string current = "02:30";
+    string correct = "04:35";
+    int result = leetCode.convertTime(current, correct);
+    Logger::WriteMessage("current = " + current + "correct = " + correct + "; result = " + to_string(result));
+
+    current = "11:00";
+    correct = "11:01";
+    result = leetCode.convertTime(current, correct);
+    Logger::WriteMessage("current = " + current + "correct = " + correct + "; result = " + to_string(result));
+}
+
+void TestLeetCode2243(void)
+{
+    Logger::WriteMessage("Test Leet Code 2243");
+    LeetCodeString leetCode;
+    string s = "11111222223";
+    int k = 3;
+    string result = leetCode.digitSum(s, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "00000000";
+    k = 3;
+    result = leetCode.digitSum(s, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2243();
+    TestLeetCode2224();
+    TestLeetCode2223();
     TestLeetCode2191();
     TestLeetCode2186();
     TestLeetCode2193();

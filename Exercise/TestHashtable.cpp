@@ -1395,8 +1395,44 @@ void TestLeetCode2206(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2244(void)
+{
+    Logger::WriteMessage("Test Leet Code 2244");
+    LeetCodeHashtable leetCode;
+    vector<int> tasks = { 2,2,3,3,2,4,4,4,4,4 };
+    int result = leetCode.minimumRounds(tasks);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    tasks = { 2,3,3 };
+    result = leetCode.minimumRounds(tasks);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2215(void)
+{
+    Logger::WriteMessage("Test Leet Code 2215");
+    LeetCodeHashtable leetCode;
+    vector<int>nums1 = { 1, 2, 3 };
+    vector<int>nums2 = { 2, 4, 6 };
+    vector<vector<int>> result = leetCode.findDifference(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(result);
+
+    nums1 = { 1,2,3,3 };
+    nums2 = { 1,1,2,2 };
+    result = leetCode.findDifference(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode2244();
+    TestLeetCode2215();
     TestLeetCode2206();
     TestLeetCode2150();
     TestLeetCode1915();

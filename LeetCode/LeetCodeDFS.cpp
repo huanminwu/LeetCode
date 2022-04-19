@@ -8246,6 +8246,173 @@ int LeetCodeDFS::houseOfCards(int n)
     return houseOfCards(n + 3, n, memory);
 }
 
+/// <summary>
+/// Leet Code 2212. Maximum Points in an Archery Competition
+///                                                                                   
+/// Medium
+///
+/// Alice and Bob are opponents in an archery competition. The competition 
+/// has set the following rules:
+///
+/// Alice first shoots numArrows arrows and then Bob shoots numArrows 
+/// arrows.
+/// The points are then calculated as follows:
+/// The target has integer scoring sections ranging from 0 to 11 inclusive.
+/// For each section of the target with score k (in between 0 to 11), say 
+/// Alice and Bob have shot ak and bk arrows on that section respectively. 
+/// If ak >= bk, then Alice takes k points. If ak < bk, then Bob takes k 
+/// points.
+/// However, if ak == bk == 0, then nobody takes k points.
+/// For example, if Alice and Bob both shot 2 arrows on the section with 
+/// score 11, then Alice takes 11 points. On the other hand, if Alice 
+/// shot 0 arrows on the section with score 11 and Bob shot 2 arrows on 
+/// that same section, then Bob takes 11 points.
+///
+/// You are given the integer numArrows and an integer array aliceArrows 
+/// of size 12, which represents the number of arrows Alice shot on each 
+/// scoring section from 0 to 11. Now, Bob wants to maximize the total 
+/// number of points he can obtain.
+///
+/// Return the array bobArrows which represents the number of arrows Bob 
+/// shot on each scoring section from 0 to 11. The sum of the values in 
+/// bobArrows should equal numArrows.
+///
+/// If there are multiple ways for Bob to earn the maximum total points, 
+/// return any one of them.
+/// 
+/// Example 1:
+/// Input: numArrows = 9, aliceArrows = [1,1,0,1,0,0,2,1,0,1,2,0]
+/// Output: [0,0,0,0,1,1,0,0,1,2,3,1]
+/// Explanation: The table above shows how the competition is scored. 
+/// Bob earns a total point of 4 + 5 + 8 + 9 + 10 + 11 = 47.
+/// It can be shown that Bob cannot obtain a score higher than 47 points.
+///
+/// Example 2:
+/// Input: numArrows = 3, aliceArrows = [0,0,1,0,0,0,0,0,0,0,0,2]
+/// Output: [0,0,0,0,0,0,0,0,1,1,1,0]
+/// Explanation: The table above shows how the competition is scored.
+/// Bob earns a total point of 8 + 9 + 10 = 27.
+/// It can be shown that Bob cannot obtain a score higher than 27 points.
+/// 
+/// Constraints:
+/// 1. 1 <= numArrows <= 10^5
+/// 2. aliceArrows.length == bobArrows.length == 12
+/// 3. 0 <= aliceArrows[i], bobArrows[i] <= numArrows
+/// 4. sum(aliceArrows[i]) == numArrows
+/// </summary>
+vector<int> LeetCodeDFS::maximumBobPoints(int numArrows, vector<int>& aliceArrows)
+{
+    int n = (1 << aliceArrows.size());
+    int max_points = 0;
+    vector<int> result;
+    for (int i = 0; i < n; i++)
+    {
+        int bits = i;
+        int points = 0;
+        int arrows = numArrows;
+        vector<int> bobArrows(aliceArrows.size());
+        for (size_t j = 0; j < aliceArrows.size(); j++)
+        {
+            if (bits == 0) break;
+            if (bits % 2 == 1 && arrows > aliceArrows[j])
+            {
+                bobArrows[j] = aliceArrows[j] + 1;
+                arrows -= bobArrows[j];
+                points += j;
+            }
+            bits /= 2;
+        }
+        bobArrows[0] += arrows;
+        if (points > max_points)
+        {
+            max_points = points;
+            result = bobArrows;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2232. Minimize Result by Adding Parentheses to Expression
+///                                                                                   
+/// Medium
+///
+/// You are given a 0-indexed string expression of the form 
+/// "<num1>+<num2>" where <num1> and <num2> represent positive integers.
+///
+/// Add a pair of parentheses to expression such that after the addition 
+/// of parentheses, expression is a valid mathematical expression and 
+/// evaluates to the smallest possible value. The left parenthesis must 
+/// be added to the left of '+' and the right parenthesis must be added 
+/// to the right of '+'.
+///
+/// Return expression after adding a pair of parentheses such that 
+/// expression evaluates to the smallest possible value. If there are 
+/// multiple answers that yield the same result, return any of them.
+/// 
+/// The input has been generated such that the original value of 
+/// expression, and the value of expression after adding any pair of 
+/// parentheses that meets the requirements fits within a signed 32-bit 
+/// integer.
+///
+/// Example 1:
+/// Input: expression = "247+38"
+/// Output: "2(47+38)"
+/// Explanation: The expression evaluates to 2 * (47 + 38) = 2 * 85 = 170.
+/// Note that "2(4)7+38" is invalid because the right parenthesis must be 
+/// to the right of the '+'.
+/// It can be shown that 170 is the smallest possible value.
+///
+/// Example 2:
+/// Input: expression = "12+34"
+/// Output: "1(2+3)4"
+/// Explanation: The expression evaluates to 1 * (2 + 3) * 4 = 1 * 5 * 4 = 20.
+/// Example 3:
+/// Input: expression = "999+999"
+/// Output: "(999+999)"
+/// Explanation: The expression evaluates to 999 + 999 = 1998.
+/// 
+/// Constraints:
+/// 1. 3 <= expression.length <= 10
+/// 2. expression consists of digits from '1' to '9' and '+'.
+/// 3. expression starts and ends with digits.
+/// 4. expression contains exactly one '+'.
+/// 5. The original value of expression, and the value of expression after 
+///    adding any pair of parentheses that meets the requirements fits 
+////   within a signed 32-bit integer.
+/// </summary>
+string LeetCodeDFS::minimizeResult(string expression)
+{
+    size_t pos = expression.find('+');
+    string left = expression.substr(0, pos);
+    string right = expression.substr(pos + 1);
+    string result;
+    long long max_val = LLONG_MAX;
+    for (size_t i = 0; i < left.size(); i++)
+    {
+        for (size_t j = 0; j < right.size(); j++)
+        {
+            string str = left.substr(0, i) + "(" + left.substr(i) + "+";
+            str = str + right.substr(0, right.size() - j) + ")" + right.substr(right.size() - j);
+            long long val = atoll(left.substr(i).c_str()) + atoll(right.substr(0, right.size() - j).c_str());
+            if (!left.substr(0, i).empty())
+            {
+                val = val * atoll(left.substr(0, i).c_str());
+            }
+            if (!right.substr(right.size() - j).empty())
+            {
+                val = val * atoll(right.substr(right.size() - j).c_str());
+            }
+            if (val < max_val)
+            {
+                max_val = val;
+                result = str;
+            }
+        }
+    }
+    return result;
+}
+
 #pragma endregion
 
 

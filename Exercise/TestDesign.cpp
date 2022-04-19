@@ -4260,7 +4260,7 @@ void TestLeetCode211(void)
 
 void TestLeetCode2166(void)
 {
-    Logger::WriteMessage("Test Leet Code 211");
+    Logger::WriteMessage("Test Leet Code 2166");
     vector<string> commands =
     {
        "Bitset", "fix", "fix", "flip", "all", "unfix", "flip", "one", "unfix", "count", "toString"
@@ -4319,8 +4319,54 @@ void TestLeetCode2166(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2241(void)
+{
+    Logger::WriteMessage("Test Leet Code 2241");
+    vector<string> commands =
+    {
+       "ATM", "deposit", "withdraw", "deposit", "withdraw", "withdraw"
+    };
+    vector<vector<int>> parameters =
+    {
+        {}, {0,0,1,2,1},{600}, {0,1,0,1,1} , {600}, {550}
+    };
+    vector<string> result;
+    ATM* atm = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "ATM")
+        {
+            atm = new ATM();
+            result.push_back("null");
+        }
+        else if (commands[i] == "deposit")
+        {
+            atm->deposit(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "withdraw")
+        {
+            vector<int> ret = atm->withdraw(parameters[i][0]);
+            string str;
+            str.push_back('[');
+            for (size_t i = 0; i < ret.size(); i++)
+            {
+                if (i != 0) str.push_back(',');
+                str.append(to_string(ret[i]));
+            }
+            str.push_back(']');
+            result.push_back(str);
+        }
+    }
+    delete atm;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2241();
     TestLeetCode2166();
     TestLeetCode211();
     TestLeetCode2080();
