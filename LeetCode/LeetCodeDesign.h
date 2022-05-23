@@ -11333,4 +11333,511 @@ public:
     }
 };
 
+/// <summary>
+/// Leet Code 2227. Encrypt and Decrypt Strings
+///                                                                                      
+/// Hard
+/// 
+/// You are given a character array keys containing unique characters and 
+/// a string array values containing strings of length 2. You are also 
+/// given another string array dictionary that contains all permitted 
+/// original strings after decryption. You should implement a data 
+/// structure that can encrypt or decrypt a 0-indexed string.
+///
+/// A string is encrypted with the following process:
+///
+/// For each character c in the string, we find the index i satisfying 
+/// keys[i] == c in keys.
+/// Replace c with values[i] in the string.
+/// Note that in case a character of the string is not present in keys, 
+/// the encryption process cannot be carried out, and an empty 
+/// string "" is returned.
+///
+/// A string is decrypted with the following process:
+///
+/// For each substring s of length 2 occurring at an even index in the 
+/// string, we find an i such that values[i] == s. If there are multiple 
+/// valid i, we choose any one of them. This means a string could have 
+/// multiple possible strings it can decrypt to.
+/// Replace s with keys[i] in the string.
+/// Implement the Encrypter class:
+///
+/// Encrypter(char[] keys, String[] values, String[] dictionary) 
+/// Initializes the Encrypter class with keys, values, and dictionary.
+/// String encrypt(String word1) Encrypts word1 with the encryption 
+/// process described above and returns the encrypted string.
+/// int decrypt(String word2) Returns the number of possible strings word2 
+/// could decrypt to that also appear in dictionary.
+/// 
+/// Example 1:
+/// Input
+/// ["Encrypter", "encrypt", "decrypt"]
+/// [[['a', 'b', 'c', 'd'], ["ei", "zf", "ei", "am"], ["abcd", "acbd", 
+/// "adbc", "badc", "dacb", "cadb", "cbda", "abad"]], ["abcd"], 
+/// ["eizfeiam"]]
+/// Output
+/// [null, "eizfeiam", 2]
+///
+/// Explanation
+/// Encrypter encrypter = new Encrypter([['a', 'b', 'c', 'd'], 
+/// ["ei", "zf", "ei", "am"], ["abcd", "acbd", "adbc", "badc", "dacb", 
+/// "cadb", "cbda", "abad"]);
+/// encrypter.encrypt("abcd"); // return "eizfeiam". 
+///                            // 'a' maps to "ei", 'b' maps to "zf", 'c' 
+///                            // maps to "ei", and 'd' maps to "am".
+/// encrypter.decrypt("eizfeiam"); // return 2. 
+///                                // "ei" can map to 'a' or 'c', "zf" 
+///                                // maps to 'b', and "am" maps to 'd'. 
+///  // Thus, the possible strings after decryption are "abad", "cbad", 
+///  // "abcd", and "cbcd". 
+///  // 2 of those strings, "abad" and "abcd", appear in dictionary, so 
+///  // the answer is 2.
+///
+/// Constraints:
+/// 1. 1 <= keys.length == values.length <= 26
+/// 2. values[i].length == 2
+/// 3. 1 <= dictionary.length <= 100
+/// 4. 1 <= dictionary[i].length <= 100
+/// 5. All keys[i] and dictionary[i] are unique.
+/// 6. 1 <= word1.length <= 2000
+/// 7. 1 <= word2.length <= 200
+/// 8. All word1[i] appear in keys.
+/// 9. word2.length is even.
+/// 10. keys, values[i], dictionary[i], word1, and word2 only contain 
+///     lowercase English letters.
+/// 11. At most 200 calls will be made to encrypt and decrypt in total.
+/// </summary>
+class Encrypter 
+{
+private:
+    unordered_map<char, string> m_map;
+    unordered_map<string, unordered_set<string>> m_decodes;
+public:
+    Encrypter(vector<char>& keys, vector<string>& values, vector<string>& dictionary) 
+    {
+        for (size_t i = 0; i < keys.size(); i++)
+        {
+            m_map[keys[i]] = values[i];
+        }
+        for (size_t i = 0; i < dictionary.size(); i++)
+        {
+            string str;
+            for (size_t j = 0; j < dictionary[i].size(); j++)
+            {
+                if (m_map.count(dictionary[i][j]) == 0)
+                {
+                    str = "";
+                    break;
+                }
+                else
+                {
+                    str.append(m_map[dictionary[i][j]]);
+                }
+            }
+            if (!str.empty()) m_decodes[str].insert(dictionary[i]);
+        }
+    }
+
+    string encrypt(string word1) 
+    {
+        string str;
+        for (size_t j = 0; j < word1.size(); j++)
+        {
+            if (m_map.count(word1[j]) == 0)
+            {
+                return "";
+            }
+            str.append(m_map[word1[j]]);
+        }
+        return str;
+    }
+
+    int decrypt(string word2) 
+    {
+        return m_decodes[word2].size();
+    }
+};
+
+/// <summary>
+/// Leet Code 2254. Design Video Sharing Platform
+///                                                                                      
+/// Hard
+/// 
+/// You have a video sharing platform where users can upload and delete 
+/// videos. Each video is a string of digits, where the ith digit of the 
+/// string represents the content of the video at minute i. For example, 
+/// the first digit represents the content at minute 0 in the video, the 
+/// second digit represents the content at minute 1 in the video, and so 
+/// on. Viewers of videos can also like and dislike videos. Internally, 
+/// the platform keeps track of the number of views, likes, and dislikes 
+/// on each video.
+///
+/// When a video is uploaded, it is associated with the smallest 
+/// available integer videoId starting from 0. Once a video is deleted, 
+/// the videoId associated with that video can be reused for another video.
+///
+/// Implement the VideoSharingPlatform class:
+///
+/// VideoSharingPlatform() Initializes the object.
+/// int upload(String video) The user uploads a video. Return the videoId 
+/// associated with the video.
+/// void remove(int videoId) If there is a video associated with videoId, 
+/// remove the video.
+/// String watch(int videoId, int startMinute, int endMinute) If there is 
+/// a video associated with videoId, increase the number of views on the 
+/// video by 1 and return the substring of the video string starting at 
+/// startMinute and ending at min(endMinute, video.length - 1) 
+/// (inclusive). Otherwise, return "-1".
+/// void like(int videoId) Increases the number of likes on the video 
+/// associated with videoId by 1 if there is a video associated with 
+/// videoId.
+/// void dislike(int videoId) Increases the number of dislikes on the 
+/// video associated with videoId by 1 if there is a video associated 
+/// with videoId.
+/// int[] getLikesAndDislikes(int videoId) Return a 0-indexed integer 
+/// array values of length 2 where values[0] is the number of likes 
+/// and values[1] is the number of dislikes on the video associated 
+/// with videoId. If there is no video associated with videoId, 
+/// return [-1].
+/// int getViews(int videoId) Return the number of views on the 
+/// video associated with videoId, if there is no video associated 
+/// with videoId, return -1.
+///
+/// Example 1:
+/// Input
+/// ["VideoSharingPlatform", "upload", "upload", "remove", "remove", 
+/// "upload", "watch", "watch", "like", "dislike", "dislike", 
+/// "getLikesAndDislikes", "getViews"]
+/// [[], ["123"], ["456"], [4], [0], ["789"], [1, 0, 5], [1, 0, 1], 
+/// [1], [1], [1], [1], [1]]
+/// Output
+/// [null, 0, 1, null, null, 0, "456", "45", null, null, null, [1, 2], 2]
+///
+/// Explanation
+/// VideoSharingPlatform videoSharingPlatform = new VideoSharingPlatform();
+/// videoSharingPlatform.upload("123");          // return 0.
+/// videoSharingPlatform.upload("456");          // return 1.
+/// videoSharingPlatform.remove(4);              // do nothing.
+/// videoSharingPlatform.remove(0);              // remove videoId 0.
+/// videoSharingPlatform.upload("789");          // return 0,
+/// videoSharingPlatform.watch(1, 0, 5);         // return "456".
+/// videoSharingPlatform.watch(1, 0, 1);         // so return "45".
+/// videoSharingPlatform.like(1);                // like videoId 1.
+/// videoSharingPlatform.dislike(1);             // dislike videoId 1.
+/// videoSharingPlatform.dislike(1);             // dislike videoId 1.
+/// videoSharingPlatform.getLikesAndDislikes(1); // so return [1, 2].
+/// videoSharingPlatform.getViews(1);            // so return 2.
+///
+/// Example 2:
+/// Input
+/// ["VideoSharingPlatform", "remove", "watch", "like", "dislike", 
+///  "getLikesAndDislikes", "getViews"]
+/// [[], [0], [0, 0, 1], [0], [0], [0], [0]]
+/// Output
+/// [null, null, "-1", null, null, [-1], -1]
+///
+/// Explanation
+/// VideoSharingPlatform videoSharingPlatform = new VideoSharingPlatform();
+/// videoSharingPlatform.remove(0);              // do nothing.
+/// videoSharingPlatform.watch(0, 0, 1);         // so return "-1".
+/// videoSharingPlatform.like(0);                // do nothing.
+/// videoSharingPlatform.dislike(0);             // do nothing.
+/// videoSharingPlatform.getLikesAndDislikes(0); // return [-1].
+/// videoSharingPlatform.getViews(0);            // return -1.
+///
+/// Constraints:
+/// 1. 1 <= video.length <= 10^5
+/// 2. The sum of video.length over all calls to upload does not exceed 
+///    exceed 10^5
+/// 3. video consists of digits.
+/// 4. 0 <= videoId <= 10^5
+/// 5. 0 <= startMinute < endMinute < 10^5
+/// 6. startMinute < video.length
+/// 7. The sum of endMinute - startMinute over all calls to watch does 
+///    not exceed 10^5.
+/// 8. At most 105 calls in total will be made to all functions.
+/// </summary>
+class VideoSharingPlatform 
+{
+private:
+    struct Video
+    {
+        string content;
+        int like;
+        int dislike;
+        int views;
+        Video()
+        {
+            like = 0;
+            dislike = 0;
+            views = 0;
+        };
+        Video(string video)
+        {
+            content = video;
+            like = 0;
+            dislike = 0;
+            views = 0;
+        }
+    };
+    unordered_map<int, Video> m_videos;
+    set<int> m_emptySlots;
+public:
+    VideoSharingPlatform() 
+    {
+
+    }
+
+    int upload(string video) 
+    {
+        int id = m_videos.size();
+        if (!m_emptySlots.empty())
+        {
+            id = *m_emptySlots.begin();
+            m_emptySlots.erase(id);
+        }
+        Video v(video);
+        m_videos[id] = v;
+        return id;
+    }
+
+    void remove(int videoId) 
+    {
+        if (m_videos.count(videoId) != 0)
+        {
+            m_videos.erase(videoId);
+            m_emptySlots.insert(videoId);
+        }
+    }
+
+    string watch(int videoId, int startMinute, int endMinute) 
+    {
+        string result = "-1";
+        if (m_videos.count(videoId) == 0)
+        {
+            return result;
+        }
+        result = m_videos[videoId].content.substr(startMinute, endMinute - startMinute + 1);
+        m_videos[videoId].views++;
+        return result;
+    }
+
+    void like(int videoId) 
+    {
+        if (m_videos.count(videoId) != 0)
+        {
+            m_videos[videoId].like++;
+        }
+    }
+
+    void dislike(int videoId) 
+    {
+        if (m_videos.count(videoId) != 0)
+        {
+            m_videos[videoId].dislike++;
+        }
+    }
+
+    vector<int> getLikesAndDislikes(int videoId) 
+    {
+        vector<int> result;
+        if (m_videos.count(videoId) != 0)
+        {
+            result = { m_videos[videoId].like, m_videos[videoId].dislike };
+        }
+        else
+        {
+            result = { -1 };
+        }
+        return result;
+    }
+
+    int getViews(int videoId) 
+    {
+        if (m_videos.count(videoId) != 0)
+        {
+            return m_videos[videoId].views;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+};
+
+enum TOUCH_EVENT { TOUCHDOWN = 0x81, RELEASE = 0x80 };
+typedef struct _TouchContext
+{
+    TOUCH_EVENT event;
+    int x_coord;
+    int y_coord;
+} TouchContext;
+#define PACKET_SIZE 5
+#define BUFFER_SIZE 100
+#define CONTEXT_SIZE BUFFER_SIZE / PACKET_SIZE
+#define PACKET_SIZE 5
+#define BUFFER_SIZE 100
+#define CONTEXT_SIZE BUFFER_SIZE / PACKET_SIZE
+
+class TouchScreen
+{
+public:
+    unsigned char m_buffer[BUFFER_SIZE + PACKET_SIZE];
+    int m_buff_size;
+
+    TouchScreen()
+    {
+        memset(m_buffer, 0, sizeof(m_buffer));
+        m_buff_size = 0;
+    };
+    /* This is your down stream call you, we expect capacity in number of context*/
+    int read_touch_context(TouchContext* context_buff, int capacity)
+    {
+        TouchContext touch_context;
+        int count = 0;
+        for (int i = 0; i < m_buff_size; i++)
+        {
+            if (m_buff_size - i < PACKET_SIZE)
+            {
+                memcpy(&m_buffer[0], &m_buffer[i], m_buff_size - i);
+                m_buff_size = m_buff_size - i;
+                break;
+            }
+            else if (m_buffer[i] != TOUCHDOWN && m_buffer[i] != RELEASE)
+            {
+                /* ignore garbage*/
+                continue;
+            }
+            else
+            {
+                touch_context.event = (TOUCH_EVENT)m_buffer[i];
+                touch_context.x_coord = m_buffer[i + 1] * 256 + m_buffer[i + 2];
+                touch_context.y_coord = m_buffer[i + 3] * 256 + m_buffer[i + 4];
+                i += 4;
+                context_buff[count] = touch_context;
+                count++;
+                /* we read more than customer wanted*/
+                if (count == capacity)
+                {
+                    if (m_buff_size - i > 0)
+                    {
+                        memcpy(&m_buffer[0], &m_buffer[i], m_buff_size - i);
+                        m_buff_size = m_buff_size - i;
+                    }
+                    break;
+                }
+            }
+        }
+        return count;
+    }
+
+    /* This function is use for read stream from RS232, can also be used for unit test*/
+    void read_stream(unsigned char * buffer, int size)
+    {
+        /* Do not feed me more than I can accetpt*/
+        if (size > BUFFER_SIZE - m_buff_size)
+        {
+            size = BUFFER_SIZE - m_buff_size;
+        }
+        memcpy(&m_buffer[m_buff_size], buffer, size);
+        m_buff_size += size;
+    }
+};
+
+/// <summary>
+/// Leet Code 2276. Count Integers in Intervals
+///                                                           
+/// Hard
+/// 
+/// Given an empty set of intervals, implement a data structure that can:
+///
+/// Add an interval to the set of intervals.
+/// Count the number of integers that are present in at least one interval.
+/// Implement the CountIntervals class:
+///
+/// CountIntervals() Initializes the object with an empty set of intervals.
+/// void add(int left, int right) Adds the interval [left, right] to the 
+/// set of intervals.
+/// int count() Returns the number of integers that are present in at least 
+/// one interval.
+/// Note that an interval [left, right] denotes all the integers x where 
+/// left <= x <= right.
+/// 
+/// Example 1:
+/// Input
+/// ["CountIntervals", "add", "add", "count", "add", "count"]
+/// [[], [2, 3], [7, 10], [], [5, 8], []]
+/// Output
+/// [null, null, null, 6, null, 8]
+/// Explanation
+/// CountIntervals countIntervals = new CountIntervals();  
+/// countIntervals.add(2, 3);  
+/// countIntervals.add(7, 10); 
+/// countIntervals.count(); // return 6  
+/// the integers 2 and 3 are present in the interval [2, 3].
+/// the integers 7, 8, 9, and 10 are present in the interval [7, 10].
+/// countIntervals.add(5, 8);  // add [5, 8] to the set of intervals.
+/// countIntervals.count();    // return 8
+/// the integers 2 and 3 are present in the interval [2, 3].
+/// the integers 5 and 6 are present in the interval [5, 8].
+/// the integers 7 and 8 are present in the intervals [5, 8] and [7, 10].
+/// the integers 9 and 10 are present in the interval [7, 10].
+/// 
+/// Constraints:
+/// 1. 1 <= left <= right <= 10^9
+/// 2. At most 10^5 calls in total will be made to add and count.
+/// 3. At least one call will be made to count.
+/// </summary>
+class CountIntervals
+{
+    map<int, int> m_intervals;
+    int m_count;
+public:
+    CountIntervals() 
+    {
+        m_count = 0;
+        m_intervals[INT_MAX] = 0;
+    }
+
+    void add(int left, int right) 
+    {
+        right++;
+        auto itr = m_intervals.lower_bound(left);
+        if (itr->first > right && itr->second == 0)
+        {
+            m_intervals[left] = 0;
+            m_intervals[right] = 1;
+            m_count += right - left;
+        }
+        else 
+        {
+            if (itr->second == 0) m_intervals[left] = 0;
+            int prev = left;
+            int count = 0;
+            while (itr->first <= right)
+            {
+                if (itr->second == 0)
+                {
+                    count += itr->first - prev;
+                }
+                prev = itr->first;
+                auto temp = itr;
+                itr = next(itr);
+                if (temp->second != 0 || temp->first > left) m_intervals.erase(temp);
+            }
+            if (itr->second == 0)
+            {
+                m_intervals[right] = 1;
+                count += right - prev;
+            }
+            m_count += count;
+        }
+    }
+
+    int count() 
+    {
+        return m_count;
+    }
+};
+
 #endif // LeetcodeDesign_H

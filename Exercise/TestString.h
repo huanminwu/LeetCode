@@ -190,5 +190,13 @@ void TestLeetCode2191(void);
 void TestLeetCode2223(void);
 void TestLeetCode2224(void);
 void TestLeetCode2243(void);
+void TestLeetCode2255(void);
+void TestLeetCode2259(void);
+void TestLeetCode2264(void);
+void TestLeetCode2268(void);
+void TestLeetCode2269(void);
+void TestLeetCode2273(void);
+void TestLeetCode2262(void);
+void TestLeetCode2278(void);
 void TestLeetCodeString(void);
 #endif  // TestArray

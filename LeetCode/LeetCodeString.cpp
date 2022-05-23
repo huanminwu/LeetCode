@@ -18375,7 +18375,7 @@ vector<int> LeetCodeString::sortJumbled(vector<int>& mapping, vector<int>& nums)
         jumbled.insert(make_pair(stoi(str), i));
     }
     vector<int> result;
-    for (auto itr : jumbled)
+    for (auto& itr : jumbled)
     {
         result.push_back(nums[itr.second]);
     }
@@ -18438,9 +18438,9 @@ long long LeetCodeString::sumScores(string s)
         { 
             z[i] = min(((long long)r - (long long)i + 1) * 1LL, z[i - l]);
         }
-        while (i + z[i] < n && s[z[i]] == s[i + z[i]])
+        while ((long long)i + z[i] < (long long)n && s[z[i]] == s[i + z[i]])
             ++z[i];
-        if (i + z[i] - 1 > r)
+        if ((long long)i + z[i] - (long long)1 > (long long)r)
         {
             l = i;
             r = i + z[i] - 1;
@@ -18581,4 +18581,559 @@ string LeetCodeString::digitSum(string s, int k)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2255. Count Prefixes of a Given String
+///                                                                                      
+/// Easy
+/// 
+/// You are given a string array words and a string s, where words[i] and 
+/// s comprise only of lowercase English letters.
+///
+/// Return the number of strings in words that are a prefix of s.
+///
+/// A prefix of a string is a substring that occurs at the beginning of 
+/// the string. A substring is a contiguous sequence of characters 
+/// within a string.
+/// 
+/// Example 1:
+/// Input: words = ["a","b","c","ab","bc","abc"], s = "abc"
+/// Output: 3
+/// Explanation:
+/// The strings in words which are a prefix of s = "abc" are:
+/// "a", "ab", and "abc".
+/// Thus the number of strings in words which are a prefix of s is 3.
+///
+/// Example 2:
+/// Input: words = ["a","a"], s = "aa"
+/// Output: 2
+/// Explanation:
+/// Both of the strings are a prefix of s. 
+/// Note that the same string can occur multiple times in words, and it 
+/// should be counted each time.
+/// 
+/// Constraints:
+/// 1. 1 <= words.length <= 1000
+/// 2. 1 <= words[i].length, s.length <= 10
+/// 3. words[i] and s consist of lowercase English letters only.
+/// </summary>
+int LeetCodeString::countPrefixes(vector<string>& words, string s)
+{
+    int result = 0;
+    for (string str : words)
+    {
+        if (s.substr(0, str.size()) == str)
+        {
+            result++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2259. Remove Digit From Number to Maximize Result
+///                                                               
+/// Easy
+/// 
+/// You are given a string number representing a positive integer and 
+/// a character digit.
+///
+/// Return the resulting string after removing exactly one occurrence of 
+/// digit from number such that the value of the resulting string in 
+/// decimal form is maximized. The test cases are generated such that 
+/// digit occurs at least once in number.
+///  
+/// Example 1:
+/// Input: number = "123", digit = "3"
+/// Output: "12"
+/// Explanation: There is only one '3' in "123". After removing '3', 
+/// the result is "12".
+///
+/// Example 2:
+/// Input: number = "1231", digit = "1"
+/// Output: "231"
+/// Explanation: We can remove the first '1' to get "231" or remove 
+/// the second '1' to get "123".
+/// Since 231 > 123, we return "231".
+///
+/// Example 3:
+/// Input: number = "551", digit = "5"
+/// Output: "51"
+/// Explanation: We can remove either the first or second '5' from "551".
+/// Both result in the string "51".
+/// 
+/// Constraints:
+/// 1. 2 <= number.length <= 100
+/// 2. number consists of digits from '1' to '9'.
+/// 3. digit is a digit from '1' to '9'.
+/// 4. digit occurs at least once in number.
+/// </summary>
+string LeetCodeString::removeDigit(string number, char digit)
+{
+    int pos = -1;
+    for (size_t i = 0; i < number.size(); i++)
+    {
+        if (number[i] != digit) continue;
+        pos = i;
+        if ((i < number.size() - 1) && (number[i + 1] > digit))
+        {
+            break;
+        }
+    }
+    string result = number.substr(0, pos);
+    result.append(number.substr(pos + 1));
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 2264. Largest 3-Same-Digit Number in String
+///                                                                                      
+/// Easy
+/// 
+/// You are given a string num representing a large integer. An integer 
+/// is good if it meets the following conditions:
+///
+/// It is a substring of num with length 3.
+/// It consists of only one unique digit.
+/// Return the maximum good integer as a string or an empty string 
+/// "" if no such integer exists.
+///
+/// Note:
+///  
+/// A substring is a contiguous sequence of characters within a string.
+/// There may be leading zeroes in num or a good integer.
+/// 
+/// Example 1:
+/// Input: num = "6777133339"
+/// Output: "777"
+/// Explanation: There are two distinct good integers: "777" and "333".
+//// "777" is the largest, so we return "777".
+///
+/// Example 2:
+/// Input: num = "2300019"
+/// Output: "000"
+/// Explanation: "000" is the only good integer.
+///
+/// Example 3:
+/// Input: num = "42352338"
+/// Output: ""
+/// Explanation: No substring of length 3 consists of only one unique 
+/// digit. Therefore, there are no good integers.
+///
+/// Constraints:
+/// 1. 3 <= num.length <= 1000
+/// 2. num only consists of digits.
+/// </summary>
+string LeetCodeString::largestGoodInteger(string num)
+{
+    string result;
+    for (size_t i = 2; i < num.size(); i++)
+    {
+        if (num[i] == num[i - 1] && num[i] == num[i - 2])
+        {
+            if (result.empty()) result = num.substr(i - 2, 3);
+            else result = max(result, num.substr(i - 2, 3));
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2268. Minimum Number of Keypresses
+///                                                                                      
+/// Medium
+/// 
+/// You have a keypad with 9 buttons, numbered from 1 to 9, each mapped to 
+/// lowercase English letters. You can choose which characters each button 
+/// is matched to as long as:
+///
+/// All 26 lowercase English letters are mapped to.
+/// Each character is mapped to by exactly 1 button.
+/// Each button maps to at most 3 characters.
+/// To type the first character matched to a button, you press the button 
+/// once. To type the second character, you press the button twice, and 
+/// so on.
+///
+/// Given a string s, return the minimum number of keypresses needed to 
+/// type s using your keypad.
+///
+/// Note that the characters mapped to by each button, and the order they 
+/// are mapped in cannot be changed.
+/// 
+/// Example 1:
+/// Input: s = "apple"
+/// Output: 5
+/// Explanation: One optimal way to setup your keypad is shown above.
+/// Type 'a' by pressing button 1 once.
+/// Type 'p' by pressing button 6 once.
+/// Type 'p' by pressing button 6 once.
+/// Type 'l' by pressing button 5 once.
+/// Type 'e' by pressing button 3 once.
+/// A total of 5 button presses are needed, so return 5.
+///
+/// Example 2:
+/// Input: s = "abcdefghijkl"
+/// Output: 15
+/// Explanation: One optimal way to setup your keypad is shown above.
+/// The letters 'a' to 'i' can each be typed by pressing a button once.
+/// Type 'j' by pressing button 1 twice.
+/// Type 'k' by pressing button 2 twice.
+/// Type 'l' by pressing button 3 twice.
+/// A total of 15 button presses are needed, so return 15.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists of lowercase English letters.
+/// </summary>
+int LeetCodeString::minimumKeypresses(string s)
+{
+    vector<int> count(26);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        count[s[i] - 'a']++;
+    }
+    sort(count.begin(), count.end(), greater<int>());
+    int result = 0;
+    for (int i = 0; i < 26; i++)
+    {
+        if (i / 9 == 0)
+        {
+            result += count[i];
+        }
+        else if (i / 9 == 1)
+        {
+            result += count[i] * 2;
+        }
+        else
+        {
+            result += count[i] * 3;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2269. Find the K-Beauty of a Number
+///                                                                                      
+/// Easy
+/// 
+/// The k-beauty of an integer num is defined as the number of substrings 
+/// of num when it is read as a string that meet the following conditions:
+///
+/// It has a length of k.
+/// It is a divisor of num.
+/// Given integers num and k, return the k-beauty of num.
+///
+/// Note:
+/// Leading zeros are allowed.
+/// 0 is not a divisor of any value.
+/// A substring is a contiguous sequence of characters in a string.
+///  
+/// Example 1:
+/// Input: num = 240, k = 2
+/// Output: 2
+/// Explanation: The following are the substrings of num of length k:
+/// - "24" from "240": 24 is a divisor of 240.
+/// - "40" from "240": 40 is a divisor of 240.
+/// Therefore, the k-beauty is 2.
+///
+/// Example 2:
+/// Input: num = 430043, k = 2
+/// Output: 2 
+/// Explanation: The following are the substrings of num of length k:
+/// - "43" from "430043": 43 is a divisor of 430043.
+/// - "30" from "430043": 30 is not a divisor of 430043.
+/// - "00" from "430043": 0 is not a divisor of 430043.
+/// - "04" from "430043": 4 is not a divisor of 430043.
+/// - "43" from "430043": 43 is a divisor of 430043.
+/// Therefore, the k-beauty is 2.
+/// 
+/// Constraints:
+/// 1. 1 <= num <= 10^9
+/// 2. 1 <= k <= num.length (taking num as a string)
+/// </summary>
+int LeetCodeString::divisorSubstrings(int num, int k)
+{
+    string str_num = to_string(num);
+    int result = 0;
+    for (size_t i = 0; i < str_num.size() - (k - 1); i++)
+    {
+        int d = atoi(str_num.substr(i, k).c_str());
+        if (d == 0) continue;
+        if (num % d == 0) result++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2273. Find Resultant Array After Removing Anagrams
+///                                                           
+/// Easy
+/// 
+/// You are given a 0-indexed string array words, where words[i] consists 
+/// of lowercase English letters.
+///
+/// In one operation, select any index i such that 0 < i < words.length 
+/// and words[i - 1] and words[i] are anagrams, and delete words[i] from 
+/// words. Keep performing this operation as long as you can select an 
+/// index that satisfies the conditions.
+///
+/// Return words after performing all operations. It can be shown that 
+/// selecting the indices for each operation in any arbitrary order will 
+/// lead to the same result.
+///
+/// An Anagram is a word or phrase formed by rearranging the letters of 
+/// a different word or phrase using all the original letters exactly 
+/// once. For example, "dacb" is an anagram of "abdc".
+///
+/// Example 1:
+/// Input: words = ["abba","baba","bbaa","cd","cd"]
+/// Output: ["abba","cd"]
+/// Explanation:
+/// One of the ways we can obtain the resultant array is by using the 
+/// following operations:
+/// - Since words[2] = "bbaa" and words[1] = "baba" are anagrams, we 
+///   choose index 2 and delete words[2].
+/// Now words = ["abba","baba","cd","cd"].
+/// - Since words[1] = "baba" and words[0] = "abba" are anagrams, we 
+///   choose index 1 and delete words[1].
+/// Now words = ["abba","cd","cd"].
+/// - Since words[2] = "cd" and words[1] = "cd" are anagrams, we choose 
+///   index 2 and delete words[2].
+/// Now words = ["abba","cd"].
+/// We can no longer perform any operations, so ["abba","cd"] is the 
+/// final answer.
+///
+/// Example 2:
+/// Input: words = ["a","b","c","d","e"]
+/// Output: ["a","b","c","d","e"]
+/// Explanation:
+/// No two adjacent strings in words are anagrams of each other, so no 
+/// operations are performed.
+///
+/// Constraints:
+/// 1. 1 <= words.length <= 100
+/// 2. 1 <= words[i].length <= 10
+/// 3. words[i] consists of lowercase English letters.
+/// </summary>
+vector<string> LeetCodeString::removeAnagrams(vector<string>& words)
+{
+    vector<string> result;
+    string pre_sorted;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        string word = words[i];
+        string sorted = word;
+        sort(sorted.begin(), sorted.end());
+        if (i == 0)
+        {
+            result.push_back(word);
+        }
+        else
+        {
+            if (pre_sorted != sorted)
+            {
+                result.push_back(word);
+            }
+        }
+        pre_sorted = sorted;
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 2272. Substring With Largest Variance
+///                                                           
+/// Hard
+/// 
+/// The variance of a string is defined as the largest difference between 
+/// the number of occurrences of any 2 characters present in the string. 
+/// Note the two characters may or may not be the same.
+///
+/// Given a string s consisting of lowercase English letters only, return 
+/// the largest variance possible among all substrings of s.
+///
+/// A substring is a contiguous sequence of characters within a string.
+/// 
+/// Example 1:
+/// Input: s = "aababbb"
+/// Output: 3
+/// Explanation:
+/// All possible variances along with their respective substrings are 
+/// listed below:
+/// - Variance 0 for substrings "a", "aa", "ab", "abab", "aababb", 
+///   "ba", "b", "bb", and "bbb".
+/// - Variance 1 for substrings "aab", "aba", "abb", "aabab", "ababb", 
+///   "aababbb", and "bab".
+/// - Variance 2 for substrings "aaba", "ababbb", "abbb", and "babb".
+/// - Variance 3 for substring "babbb".
+/// Since the largest possible variance is 3, we return it.
+///
+/// Example 2:
+/// Input: s = "abcde"
+/// Output: 0
+/// Explanation:
+/// No letter occurs more than once in s, so the variance of every 
+/// substring is 0.
+///  
+/// Constraints:
+/// 1. 1 <= s.length <= 10^4
+/// 2. s consists of lowercase English letters.
+/// </summary>
+int LeetCodeString::largestVariance(string s)
+{
+    int result = 0;
+    for (char ch1 = 'a'; ch1 <= 'z'; ch1++)
+    {
+        for (char ch2 = 'a'; ch2 <= 'z'; ch2++)
+        {
+            list<char> deque;
+            if (ch1 == ch2) continue;
+            int count1 = 0;
+            int count2 = 0;
+            for (size_t i = 0; i < s.size(); i++)
+            {
+                if (s[i] != ch1 && s[i] != ch2)
+                {
+                    continue;
+                }
+                deque.push_back(s[i]);
+                if (s[i] == ch1)
+                {
+                    count1++;
+                    if (deque.front() == ch1 && count1 > 1)
+                    {
+                        deque.pop_front();
+                        count1--;
+                    }
+                    if (count1 > count2)
+                    {
+                        deque.clear();
+                        deque.push_back(ch1);
+                        count1 = 1;
+                        count2 = 0;
+                    }
+                }
+                else
+                {
+                    count2++;
+                }
+                if (count1 > 0 && count2 > 0)
+                {
+                    result = max(result, count2 - count1);
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2262. Total Appeal of A String
+///                                                           
+/// Hard
+/// 
+/// The appeal of a string is the number of distinct characters found in 
+/// the string.
+///
+/// For example, the appeal of "abbca" is 3 because it has 3 distinct 
+/// characters: 'a', 'b', and 'c'.
+/// Given a string s, return the total appeal of all of its substrings.
+///
+/// A substring is a contiguous sequence of characters within a string.
+///  
+/// Example 1:
+/// Input: s = "abbca"
+/// Output: 28
+/// Explanation: The following are the substrings of "abbca":
+/// - Substrings of length 1: "a", "b", "b", "c", "a" have an appeal of 
+///   1, 1, 1, 1, and 1 respectively. The sum is 5.
+/// - Substrings of length 2: "ab", "bb", "bc", "ca" have an appeal of 
+///   2, 1, 2, and 2 respectively. The sum is 7.
+/// - Substrings of length 3: "abb", "bbc", "bca" have an appeal of 
+///   2, 2, and 3 respectively. The sum is 7.
+/// - Substrings of length 4: "abbc", "bbca" have an appeal of 3 and 3 
+///   respectively. The sum is 6.
+/// - Substrings of length 5: "abbca" has an appeal of 3. The sum is 3.
+/// The total sum is 5 + 7 + 7 + 6 + 3 = 28.
+///
+/// Example 2:
+/// Input: s = "code"
+/// Output: 20
+/// Explanation: The following are the substrings of "code":
+/// - Substrings of length 1: "c", "o", "d", "e" have an appeal of 
+///   1, 1, 1, and 1 respectively. The sum is 4.
+/// - Substrings of length 2: "co", "od", "de" have an appeal of 
+///   2, 2, and 2 respectively. The sum is 6.
+/// - Substrings of length 3: "cod", "ode" have an appeal of 3 and 3 
+///   respectively. The sum is 6.
+/// - Substrings of length 4: "code" has an appeal of 4. The sum is 4.
+/// The total sum is 4 + 6 + 6 + 4 = 20.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists of lowercase English letters.
+/// </summary>
+long long LeetCodeString::appealSum(string s)
+{
+    vector<int> dp(26);
+    long long result = 0;;
+    set<long long> pos;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        pos.erase(dp[s[i] - 'a']);
+        dp[s[i] - 'a'] = i + 1;
+        pos.insert((long long)i + 1);
+        long long last = 0;
+        long long n = pos.size();
+        for (auto x : pos)
+        {
+            result = result + ((long long)x - last) * n;
+            n--;
+            last = x;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2278. Percentage of Letter in String
+///                                                           
+/// Easy
+/// 
+/// Given a string s and a character letter, return the percentage of 
+/// characters in s that equal letter rounded down to the nearest 
+/// whole percent.
+///
+/// Example 1:
+/// Input: s = "foobar", letter = "o"
+/// Output: 33
+/// Explanation:
+/// The percentage of characters in s that equal the letter 'o' is 
+/// 2 / 6 * 100% = 33% when rounded down, so we return 33.
+///
+/// Example 2:
+/// Input: s = "jjjj", letter = "k"
+/// Output: 0
+/// Explanation:
+/// The percentage of characters in s that equal the letter 'k' is 0%, 
+/// so we return 0.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 100
+/// 2. s consists of lowercase English letters.
+/// 3. letter is a lowercase English letter.
+/// </summary>
+int LeetCodeString::percentageLetter(string s, char letter)
+{
+    int count = 0;
+    for (auto ch : s)
+    {
+        if (ch == letter) count++;
+    }
+    return (count * 100) / s.size();
+}
+
 #pragma endregion

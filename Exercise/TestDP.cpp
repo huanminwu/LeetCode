@@ -3036,8 +3036,76 @@ void TestLeetCode2209(void)
     Logger::WriteMessage("carpetLen = " + to_string(carpetLen) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2263II(void)
+{
+    Logger::WriteMessage("Test Leet Code 2263");
+
+    LeetCodeDP leetCode;
+    vector<int> nums = { 3, 2, 4, 5, 0 };
+    int result = leetCode.convertArrayII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,2,3,4 };
+    result = leetCode.convertArrayII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0 };
+    result = leetCode.convertArrayII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2267(void)
+{
+    Logger::WriteMessage("Test Leet Code 2267");
+
+    LeetCodeDP leetCode;
+    vector<vector<char>>grid =
+    {
+        {'(','(','('},{')','(',')'},{'(','(',')'},{'(','(',')'}
+    };
+    bool result = leetCode.hasValidPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string) (result ? "true" : "false"));
+
+    grid =
+    { 
+        {')',')'},{'(','('} 
+    };
+    result = leetCode.hasValidPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+    
+    grid =
+    { {'(', '(', '(', '(', '('}, { '(','(',')',')',')' }, { ')','(',')',')','(' }, { '(','(',')',')',')' } };
+    result = leetCode.hasValidPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2266(void)
+{
+    Logger::WriteMessage("Test Leet Code 2266");
+
+    LeetCodeDP leetCode;
+    string pressedKeys = "22233";
+    int result = leetCode.countTexts(pressedKeys);
+    Logger::WriteMessage("pressedKeys = " + pressedKeys);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    pressedKeys = "222222222222222222222222222222222222";
+    result = leetCode.countTexts(pressedKeys);
+    Logger::WriteMessage("pressedKeys = " + pressedKeys);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2266();
+    TestLeetCode2267();
+    TestLeetCode2263II();
     TestLeetCode2209();
     TestLeetCode2222();
     TestLeetCode2218();

@@ -4384,8 +4384,112 @@ void TestLeetCode2204(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2242(void)
+{
+    LeetCodeGraph leetCode;
+    vector<int> scores = { 5, 2, 9, 8, 4 };
+    vector<vector<int>> edges = { {0, 1},{1, 2},{2, 3},{0, 2},{1, 3},{2, 4} };
+    int result = leetCode.maximumScore(scores, edges);
+    Logger::WriteMessage(scores);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    scores = { 9, 20, 6, 4, 11, 12 };
+    edges = { {0, 3},{5, 3},{2, 4},{1, 3} };
+    result = leetCode.maximumScore(scores, edges);
+    Logger::WriteMessage(scores);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2247(void)
+{
+    LeetCodeGraph leetCode;
+    int n = 5; 
+    vector<vector<int>> highways = { {0, 1, 4},{2, 1, 3},{1, 4, 11},{3, 2, 3},{3, 4, 2} };
+    int k = 3;
+    int result = leetCode.maximumCost(n, highways, k);
+    Logger::WriteMessage(highways);
+    Logger::WriteMessage("n = " + to_string(n) + "k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 5;
+    highways = { {0, 1, 3},{2, 3, 2} };
+    k = 2;
+    result = leetCode.maximumCost(n, highways, k);
+    Logger::WriteMessage(highways);
+    Logger::WriteMessage("n = " + to_string(n) + "k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2258(void)
+{
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid =
+    {
+        {0, 2, 0, 0, 0, 0, 0},
+        {0, 0, 0, 2, 2, 1, 0},
+        {0, 2, 0, 0, 1, 2, 0},
+        {0, 0, 2, 2, 2, 0, 2},
+        {0, 0, 0, 0, 0, 0, 0}
+    };
+    int result = leetCode.maximumMinutes(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {0,0,0,0},{0,1,2,0},{0,2,0,0}
+    };
+    result = leetCode.maximumMinutes(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {0, 0, 0},{2, 2, 0},{1, 2, 0}
+    };
+    result = leetCode.maximumMinutes(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2257(void)
+{
+    Logger::WriteMessage("Test Leet Code 2257");
+    LeetCodeGraph leetCode;
+    int m = 4;
+    int n = 6;
+    vector<vector<int>> guards = { {0, 0},{1, 1},{2, 3} };
+    vector<vector<int>> walls = { {0, 1},{2, 2},{1, 4} };
+    int result = leetCode.countUnguarded(m, n, guards, walls);
+    Logger::WriteMessage(guards);
+    Logger::WriteMessage(walls);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; result = " + to_string(result));
+
+    m = 3;
+    n = 3;
+    guards = { {1, 1} };
+    walls = { {0, 1},{1, 0},{2, 1}, {1, 2} };
+    result = leetCode.countUnguarded(m, n, guards, walls);
+    Logger::WriteMessage(guards);
+    Logger::WriteMessage(walls);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; result = " + to_string(result));
+
+    m = 8;
+    n = 9;
+    guards = { {5, 8},{5, 5},{4, 6},{0, 5},{6, 5} };
+    walls = { {4, 1} };
+    result = leetCode.countUnguarded(m, n, guards, walls);
+    Logger::WriteMessage(guards);
+    Logger::WriteMessage(walls);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2257();
+    TestLeetCode2258();
+    TestLeetCode2247();
+    TestLeetCode2242();
     TestLeetCode2204();
     TestLeetCode2203();
     TestLeetCode2201();

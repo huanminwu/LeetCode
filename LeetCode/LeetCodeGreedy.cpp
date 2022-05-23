@@ -4170,4 +4170,305 @@ int LeetCodeGreedy::meetRequirement(int n, vector<vector<int>>& lights, vector<i
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2234. Maximum Total Beauty of the Gardens
+///                                                                                      
+/// Hard
+/// 
+/// Alice is a caretaker of n gardens and she wants to plant flowers to 
+/// maximize the total beauty of all her gardens.
+///
+/// You are given a 0-indexed integer array flowers of size n, where 
+/// flowers[i] is the number of flowers already planted in the ith garden. 
+/// Flowers that are already planted cannot be removed. You are then given 
+/// another integer newFlowers, which is the maximum number of flowers 
+/// that Alice can additionally plant. You are also given the integers 
+/// target, full, and partial.
+/// A garden is considered complete if it has at least target flowers. 
+/// The total beauty of the gardens is then determined as the sum of 
+/// the following:
+///
+/// The number of complete gardens multiplied by full.
+/// The minimum number of flowers in any of the incomplete gardens 
+/// multiplied by partial. If there are no incomplete gardens, then 
+/// this value will be 0.
+/// Return the maximum total beauty that Alice can obtain after 
+/// planting at most newFlowers flowers.
+///
+/// Example 1:
+/// Input: flowers = [1,3,1,1], newFlowers = 7, target = 6, 
+/// full = 12, partial = 1
+/// Output: 14
+/// Explanation: Alice can plant
+/// - 2 flowers in the 0th garden
+/// - 3 flowers in the 1st garden
+/// - 1 flower in the 2nd garden
+/// - 1 flower in the 3rd garden
+/// The gardens will then be [3,6,2,2]. She planted a total of 
+/// 2 + 3 + 1 + 1 = 7 flowers.
+/// There is 1 garden that is complete.
+/// The minimum number of flowers in the incomplete gardens is 2.
+/// Thus, the total beauty is 1 * 12 + 2 * 1 = 12 + 2 = 14.
+/// No other way of planting flowers can obtain a total beauty higher 
+/// than 14.
+///
+/// Example 2:
+/// Input: flowers = [2,4,5,3], newFlowers = 10, target = 5, 
+/// full = 2, partial = 6
+/// Output: 30
+/// Explanation: Alice can plant
+/// - 3 flowers in the 0th garden
+/// - 0 flowers in the 1st garden
+/// - 0 flowers in the 2nd garden
+/// - 2 flowers in the 3rd garden
+/// The gardens will then be [5,4,5,5]. She planted a total of 
+/// 3 + 0 + 0 + 2 = 5 flowers.
+/// There are 3 gardens that are complete.
+/// The minimum number of flowers in the incomplete gardens is 4.
+/// Thus, the total beauty is 3 * 2 + 4 * 6 = 6 + 24 = 30.
+/// No other way of planting flowers can obtain a total beauty higher 
+/// than 30.
+/// Note that Alice could make all the gardens complete but in this case, 
+/// she would obtain a lower total beauty.
+///
+/// Constraints:
+/// 1. 1 <= flowers.length <= 10^5
+/// 2. 1 <= flowers[i], target <= 10^5
+/// 3. 1 <= newFlowers <= 10^10
+/// 4. 1 <= full, partial <= 10^5
+/// </summary>
+long long LeetCodeGreedy::maximumBeauty(vector<int>& flowers, long long newFlowers, int target, int full, int partial)
+{
+    sort(flowers.begin(), flowers.end());
+    long long last = flowers.size();
+    long long result = 0;
+    vector <long long> sum(flowers.size());
+    for (int i = flowers.size() - 1; i >= 0; i--)
+    {
+        if (flowers[i] >= target)
+        {
+            last = i;
+        }
+        else
+        {
+            break;
+        }
+    }
+    for (size_t i = 1; i < flowers.size(); i++)
+    {
+        sum[i] = sum[i - 1];
+        if (flowers[i - 1] < target)
+        {
+            sum[i] = sum[i - 1] + ((long long)flowers[i] - (long long)flowers[i - 1]) * i;
+        }
+    }
+    while (last >= 0)
+    {
+        long long low = 0;
+        if (last > 0)
+        {
+            int fill = lower_bound(sum.begin(), sum.end(), newFlowers) - sum.begin() - 1;
+            fill = min(fill, (int)(last - 1));
+            long long remainingFlowers = newFlowers - sum[fill];
+            low = (long long)flowers[fill] + remainingFlowers / ((long long)fill + 1);
+            low = min((long long)target - 1, low);
+        }
+        result = max(result, low * (long long)partial + ((long long)flowers.size() - last) * (long long)full);
+        last--;
+        if (last >= 0)
+        {
+            newFlowers -= (long long)target - (long long)flowers[last];
+        }
+        if (newFlowers < 0) break;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2274. Maximum Consecutive Floors Without Special Floors
+///                                                           
+/// Medium
+/// 
+/// Alice manages a company and has rented some floors of a building as 
+/// office space. Alice has decided some of these floors should be special 
+/// floors, used for relaxation only.
+///
+/// You are given two integers bottom and top, which denote that Alice has 
+/// rented all the floors from bottom to top (inclusive). You are also 
+/// given the integer array special, where special[i] denotes a special 
+/// floor that Alice has designated for relaxation.
+///
+/// Return the maximum number of consecutive floors without a special 
+/// floor.
+/// 
+/// Example 1:
+/// Input: bottom = 2, top = 9, special = [4,6]
+/// Output: 3
+/// Explanation: The following are the ranges (inclusive) of consecutive 
+/// floors without a special floor:
+/// - (2, 3) with a total amount of 2 floors.
+/// - (5, 5) with a total amount of 1 floor.
+/// - (7, 9) with a total amount of 3 floors.
+/// Therefore, we return the maximum number which is 3 floors.
+///
+/// Example 2:
+/// Input: bottom = 6, top = 8, special = [7,6,8]
+/// Output: 0
+/// Explanation: Every floor rented is a special floor, so we return 0.
+///
+/// Constraints:
+/// 1. 1 <= special.length <= 10^5
+/// 2. 1 <= bottom <= special[i] <= top <= 10^9
+/// 3. All the values of special are unique.
+/// </summary>
+int LeetCodeGreedy::maxConsecutive(int bottom, int top, vector<int>& special)
+{
+    sort(special.begin(), special.end());
+    int result = 0;
+    int left = bottom;
+    for (size_t i = 0; i < special.size(); i++)
+    {
+        result = max(result, special[i] - left);
+        left = special[i] + 1;
+    }
+    result = max(result, top - special.back());
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2251. Number of Flowers in Full Bloom
+///                                                           
+/// Hard
+/// 
+/// You are given a 0-indexed 2D integer array flowers, where flowers[i] 
+/// = [starti, endi] means the ith flower will be in full bloom from 
+/// starti to endi (inclusive). You are also given a 0-indexed integer 
+/// array persons of size n, where persons[i] is the time that the ith 
+/// person will arrive to see the flowers.
+///
+/// Return an integer array answer of size n, where answer[i] is the 
+/// number of flowers that are in full bloom when the ith person arrives.
+///
+/// Example 1:
+/// Input: flowers = [[1,6],[3,7],[9,12],[4,13]], persons = [2,3,7,11]
+/// Output: [1,2,2,2]
+/// Explanation: The figure above shows the times when the flowers are 
+/// in full bloom and when the people arrive.
+/// For each person, we return the number of flowers in full bloom 
+/// during their arrival.
+///
+/// Example 2:
+/// Input: flowers = [[1,10],[3,3]], persons = [3,3,2]
+/// Output: [2,2,1]
+/// Explanation: The figure above shows the times when the flowers are 
+/// in full bloom and when the people arrive.
+/// For each person, we return the number of flowers in full bloom during 
+/// their arrival.
+///
+/// Constraints:
+/// 1. 1 <= flowers.length <= 5 * 10^4
+/// 2. flowers[i].length == 2
+/// 3. 1 <= starti <= endi <= 10^9
+/// 4. 1 <= persons.length <= 5 * 10^4
+/// 5. 1 <= persons[i] <= 10^9
+/// </summary>
+vector<int> LeetCodeGreedy::fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& persons)
+{
+    map<int, int> bloom_days;
+    unordered_map<int, int> person_days;
+    for (size_t i = 0; i < flowers.size(); i++)
+    {
+        bloom_days[flowers[i][0]] ++;
+        bloom_days[flowers[i][1] + 1] --;
+    }
+    for (size_t i = 0; i < persons.size(); i++)
+    {
+        bloom_days[persons[i]] += 0;
+        person_days[persons[i]] = 0;
+    }
+    int count = 0;
+    for (auto itr : bloom_days)
+    {
+        count += itr.second;
+        if (person_days.count(itr.first) > 0)
+        {
+            person_days[itr.first] = count;
+        }
+    }
+    vector<int> result(persons.size());
+    for (size_t i = 0; i < persons.size(); i++)
+    {
+        result[i] = person_days[persons[i]];
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2271. Maximum White Tiles Covered by a Carpet
+///                                                           
+/// Medium
+/// 
+/// You are given a 2D integer array tiles where tiles[i] = [li, ri] 
+/// represents that every tile j in the range li <= j <= ri is colored 
+/// white.
+/// 
+/// You are also given an integer carpetLen, the length of a single carpet 
+/// that can be placed anywhere.
+/// 
+/// Return the maximum number of white tiles that can be covered by the 
+/// carpet.
+///
+/// Example 1:
+/// Input: tiles = [[1,5],[10,11],[12,18],[20,25],[30,32]], carpetLen = 10
+/// Output: 9
+/// Explanation: Place the carpet starting on tile 10. 
+/// It covers 9 white tiles, so we return 9.
+/// Note that there may be other places where the carpet covers 9 white 
+/// tiles.
+/// It can be shown that the carpet cannot cover more than 9 white tiles.
+///
+/// Example 2:
+/// Input: tiles = [[10,11],[1,1]], carpetLen = 2
+/// Output: 2
+/// Explanation: Place the carpet starting on tile 10. 
+/// It covers 2 white tiles, so we return 2.
+/// 
+/// Constraints:
+/// 1. 1 <= tiles.length <= 5 * 10^4
+/// 2. tiles[i].length == 2
+/// 3. 1 <= li <= ri <= 10^9
+/// 4. 1 <= carpetLen <= 10^9
+/// 5. The tiles are non-overlapping.
+/// </summary>
+int LeetCodeGreedy::maximumWhiteTiles(vector<vector<int>>& tiles, int carpetLen)
+{
+    sort(tiles.begin(), tiles.end());
+    int result = 0, length = 0;
+
+    deque<vector<int>> deque;
+    for (size_t i = 0; i < tiles.size(); i++)
+    {
+        deque.push_back(tiles[i]);
+        length += tiles[i][1] - tiles[i][0] + 1;
+        int left = tiles[i][1] - carpetLen + 1;
+        while (deque.front()[0] < left)
+        {
+            vector<int> tile = deque.front();
+            deque.pop_front();
+            if (tile[1] < left)
+            {
+                length -= (tile[1] - tile[0] + 1);
+            }
+            else
+            {
+                length -= left - tile[0];
+                tile[0] = left;
+                deque.push_front(tile);
+            }
+        }
+        result = max(result, length);
+    }
+    return result;
+}
 #pragma endregion

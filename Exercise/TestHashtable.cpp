@@ -1429,8 +1429,24 @@ void TestLeetCode2215(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2248(void)
+{
+    Logger::WriteMessage("Test Leet Code 2248");
+    LeetCodeHashtable leetCode;
+    vector<vector<int>> nums = { {3, 1, 2, 4, 5},{1, 2, 3, 4},{3, 4, 5, 6} };
+    vector<int> result = leetCode.intersection(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { {1, 2, 3},{4, 5, 6} };
+    result = leetCode.intersection(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode2248();
     TestLeetCode2244();
     TestLeetCode2215();
     TestLeetCode2206();

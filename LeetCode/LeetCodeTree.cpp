@@ -10376,4 +10376,280 @@ bool LeetCodeTree::checkTree(TreeNode* root)
     return (root->val == (root->left->val + root->right->val));
 }
 
+/// <summary>
+/// Leet Code 2265. Count Nodes Equal to Average of Subtree
+/// </summary>
+int LeetCodeTree::averageOfSubtree(TreeNode* root, int& sum, int& count)
+{
+    if (root == nullptr) return 0;
+    int left_sum = 0;
+    int left_count = 0;
+    int right_sum = 0;
+    int right_count = 0;
+    int result = 0;
+    result += averageOfSubtree(root->left, left_sum, left_count);
+    sum += left_sum;
+    count += left_count;
+    result += averageOfSubtree(root->right, right_sum, right_count);
+    sum += right_sum;
+    count += right_count;
+    sum += root->val;
+    count++;
+    if (root->val == sum / count)
+    {
+        result++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2265. Count Nodes Equal to Average of Subtree
+///                                                                                      
+/// Medium
+/// 
+/// Given the root of a binary tree, return the number of nodes where the 
+/// value of the node is equal to the average of the values in its subtree.
+///
+/// Note:
+/// The average of n elements is the sum of the n elements divided by n 
+/// and rounded down to the nearest integer.
+/// A subtree of root is a tree consisting of root and all of its 
+/// descendants.
+///
+/// Example 1:
+/// Input: root = [4,8,5,0,1,null,6]
+/// Output: 5
+/// Explanation: 
+/// For the node with value 4: The average of its subtree is 
+/// (4 + 8 + 5 + 0 + 1 + 6) / 6 = 24 / 6 = 4.
+/// For the node with value 5: The average of its subtree is 
+/// (5 + 6) / 2 = 11 / 2 = 5.
+/// For the node with value 0: The average of its subtree is 
+/// 0 / 1 = 0.
+/// For the node with value 1: The average of its subtree is 
+/// 1 / 1 = 1.
+/// For the node with value 6: The average of its subtree is 
+/// 6 / 1 = 6.
+///
+/// Example 2:
+/// Input: root = [1]
+/// Output: 1
+/// Explanation: For the node with value 1: The average of its subtree is 
+/// 1 / 1 = 1.
+/// 
+/// 
+/// Constraints:
+/// 1. The number of nodes in the tree is in the range [1, 1000].
+/// 2. 0 <= Node.val <= 1000
+/// </summary>
+int LeetCodeTree::averageOfSubtree(TreeNode* root)
+{
+    int sum = 0;
+    int count = 0;
+    return averageOfSubtree(root, sum, count);
+}
+
+/// <summary>
+/// Leet Code 2246. Longest Path With Different Adjacent Characters
+/// </summary>
+int LeetCodeTree::longestPath(int node, vector<vector<int>>& children, string& s, int& result)
+{
+    int max_length = 0;
+    for (size_t i = 0; i < children[node].size(); i++)
+    {
+        int child = children[node][i];
+        int length = longestPath(child, children, s, result);
+        if (s[node] == s[child]) length = 0;
+        result = max(result, max_length + length + 1);
+        max_length = max(max_length, length);
+    }
+    result = max(result, max_length + 1);
+    return max_length + 1;
+}
+
+
+/// <summary>
+/// Leet Code 2246. Longest Path With Different Adjacent Characters
+///                                                                                      
+/// Hard
+/// 
+/// You are given a tree (i.e. a connected, undirected graph that has no 
+/// cycles) rooted at node 0 consisting of n nodes numbered from 0 to 
+/// n - 1. The tree is represented by a 0-indexed array parent of size n, 
+/// where parent[i] is the parent of node i. Since node 0 is the root, 
+/// parent[0] == -1.
+///
+/// You are also given a string s of length n, where s[i] is the character 
+/// assigned to node i.
+///
+/// Return the length of the longest path in the tree such that no pair 
+/// of adjacent nodes on the path have the same character assigned to them.
+/// 
+/// Example 1:
+/// 
+/// Input: parent = [-1,0,0,1,1,2], s = "abacbe"
+/// Output: 3
+/// Explanation: The longest path where each two adjacent nodes have 
+/// different characters in the tree is the path: 0 -> 1 -> 3. The 
+/// length of this path is 3, so 3 is returned.
+/// It can be proven that there is no longer path that satisfies the 
+/// conditions. 
+///
+/// Example 2:
+/// Input: parent = [-1,0,0,0], s = "aabc"
+/// Output: 3
+/// Explanation: The longest path where each two adjacent nodes have 
+/// different characters is the path: 2 -> 0 -> 3. The length of this 
+/// path is 3, so 3 is returned.
+///  
+/// Constraints:
+/// 1. n == parent.length == s.length
+/// 2. 1 <= n <= 10^5
+/// 3. 0 <= parent[i] <= n - 1 for all i >= 1
+/// 4. parent[0] == -1
+/// 5. parent represents a valid tree.
+/// 6. s consists of only lowercase English letters.
+/// </summary>
+int LeetCodeTree::longestPath(vector<int>& parent, string s)
+{
+    vector<vector<int>> children(s.size());
+    int result = 0;
+
+    for (size_t i = 0; i < parent.size(); i++)
+    {
+        if (parent[i] == -1) continue;
+        children[parent[i]].push_back(i);
+    }
+    longestPath(0, children, s, result);
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2277. Closest Node to Path in Tree
+///                                                           
+/// Hard
+/// 
+/// You are given a positive integer n representing the number of nodes in 
+/// a tree, numbered from 0 to n - 1 (inclusive). You are also given a 2D 
+/// integer array edges of length n - 1, where edges[i] = [node1i, node2i] 
+/// denotes that there is a bidirectional edge connecting node1i and 
+/// node2i in the tree.
+///
+/// You are given a 0-indexed integer array query of length m where 
+/// query[i] = [starti, endi, nodei] means that for the ith query, you are 
+/// tasked with finding the node on the path from starti to endi that is 
+/// closest to nodei.
+///
+/// Return an integer array answer of length m, where answer[i] is the 
+/// answer to the ith query.
+///
+/// Example 1:
+/// Input: n = 7, edges = [[0,1],[0,2],[0,3],[1,4],[2,5],[2,6]], 
+/// query = [[5,3,4],[5,3,6]]
+/// Output: [0,2]
+/// Explanation:
+/// The path from node 5 to node 3 consists of the nodes 5, 2, 0, and 3.
+/// The distance between node 4 and node 0 is 2.
+/// Node 0 is the node on the path closest to node 4, so the answer to 
+/// the first query is 0.
+/// The distance between node 6 and node 2 is 1.
+/// Node 2 is the node on the path closest to node 6, so the answer 
+/// to the second query is 2.
+///
+/// Example 2:
+/// Input: n = 3, edges = [[0,1],[1,2]], query = [[0,1,2]]
+/// Output: [1]
+/// Explanation:
+/// The path from node 0 to node 1 consists of the nodes 0, 1.
+/// The distance between node 2 and node 1 is 1.
+/// Node 1 is the node on the path closest to node 2, so the 
+/// answer to the first query is 1.
+///
+/// Example 3:
+/// Input: n = 3, edges = [[0,1],[1,2]], query = [[0,0,0]]
+/// Output: [0]
+/// Explanation:
+/// The path from node 0 to node 0 consists of the node 0.
+/// Since 0 is the only node on the path, the answer to the first 
+/// query is 0.
+///
+/// Constraints:
+/// 1. 1 <= n <= 1000
+/// 2. edges.length == n - 1
+/// 3. edges[i].length == 2
+/// 4. 0 <= node1i, node2i <= n - 1
+/// 5. node1i != node2i
+/// 6. 1 <= query.length <= 1000
+/// 7. query[i].length == 3
+/// 8. 0 <= starti, endi, nodei <= n - 1
+/// 9. The graph is a tree.
+/// </summary>
+vector<int> LeetCodeTree::closestNode(int n, vector<vector<int>>& edges, vector<vector<int>>& query)
+{
+    vector<int> parent(n, -1), level(n, -1);
+    vector<vector<int>> neighbors(n);
+
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(edges[i][1]);
+        neighbors[edges[i][1]].push_back(edges[i][0]);
+    }
+    queue<int> queue;
+    queue.push(0);
+    int step = 0;
+    while (!queue.empty())
+    {
+        int size = queue.size();
+        for (int i = 0; i < size; i++)
+        {
+            int node = queue.front();
+            queue.pop();
+            level[node] = step;
+            for (size_t i = 0; i < neighbors[node].size(); i++)
+            {
+                int child = neighbors[node][i];
+                if (level[child] == -1)
+                {
+                    parent[child] = node;
+                    queue.push(child);
+                }
+            }
+        }
+        step++;
+    }
+    vector<int> result(query.size(), -1);
+    for (size_t i = 0; i < query.size(); i++)
+    {
+        unordered_set<int> hash;
+        priority_queue<pair<int, int>> pq;
+        for (size_t j = 0; j < query[i].size(); j++)
+        {
+            int node = query[i][j];
+            pq.push(make_pair(level[node], node));
+            if (hash.count(node) > 0)
+            {
+                result[i] = node;
+                while (!pq.empty()) pq.pop();
+                break;
+            }
+            hash.insert(node);
+        }
+        while (result[i] == -1 && !pq.empty())
+        {
+            pair<int, int> node = pq.top();
+            pq.pop();
+            hash.erase(node.second);
+            int p = parent[node.second];
+            if (p == -1) continue;
+            if (hash.count(p) > 0)
+            {
+                result[i] = p;
+                break;
+            }
+            pq.push(make_pair(level[p], p));
+            hash.insert(p);
+        }
+    }
+    return result;
+}
 #pragma endregion

@@ -21845,5 +21845,260 @@ int LeetCodeArray::maxTrailingZeros(vector<vector<int>>& grid)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2256. Minimum Average Difference
+///                                                           
+/// Medium
+/// 
+/// You are given a 0-indexed integer array nums of length n.
+///
+/// The average difference of the index i is the absolute difference 
+/// between the average of the first i + 1 elements of nums and the 
+/// average of the last n - i - 1 elements. Both averages should be 
+/// rounded down to the nearest integer.
+///
+/// Return the index with the minimum average difference. If there are 
+/// multiple such indices, return the smallest one.
+///
+/// Note:
+/// The absolute difference of two numbers is the absolute value of their 
+/// difference.
+/// The average of n elements is the sum of the n elements divided (integer 
+/// division) by n.
+/// The average of 0 elements is considered to be 0.
+///
+/// Example 1:
+/// Input: nums = [2,5,3,9,5,3]
+/// Output: 3
+/// Explanation:
+/// - The average difference of index 0 is: |2 / 1 - (5 + 3 + 9 + 5 + 3) / 
+///   5| = |2 / 1 - 25 / 5| = |2 - 5| = 3.
+/// - The average difference of index 1 is: |(2 + 5) / 2 - (3 + 9 + 
+///   5 + 3) / 4| = |7 / 2 - 20 / 4| = |3 - 5| = 2.
+/// - The average difference of index 2 is: |(2 + 5 + 3) / 3 - 
+///  (9 + 5 + 3) / 3| = |10 / 3 - 17 / 3| = |3 - 5| = 2.
+/// - The average difference of index 3 is: |(2 + 5 + 3 + 9) / 4 - 
+///   (5 + 3) / 2| = |19 / 4 - 8 / 2| = |4 - 4| = 0.
+/// - The average difference of index 4 is: |(2 + 5 + 3 + 9 + 5) / 5 - 3 / 
+///   1| = |24 / 5 - 3 / 1| = |4 - 3| = 1.
+/// - The average difference of index 5 is: |(2 + 5 + 3 + 9 + 5 + 3) / 
+///   6 - 0| = |27 / 6 - 0| = |4 - 0| = 4.
+/// The average difference of index 3 is the minimum average difference 
+/// so return 3.
+///
+/// Example 2:
+/// Input: nums = [0]
+/// Output: 0
+/// Explanation:
+/// The only index is 0 so return 0.
+/// The average difference of index 0 is: |0 / 1 - 0| = |0 - 0| = 0.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeArray::minimumAverageDifference(vector<int>& nums)
+{
+    long long left_sum = 0;
+    long long right_sum = 0;
+    int min_val = INT_MAX;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++) right_sum += (long long)nums[i];
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        left_sum += (long long)nums[i];
+        right_sum -= (long long)nums[i];
+        int diff = 0;
+        if (i == nums.size() - 1)
+        {
+            diff = left_sum / ((long long)i + 1);
+        }
+        else
+        {
+            diff = abs(left_sum / ((long long)i + 1) - (right_sum / (long long)(nums.size() - (i + 1))));
+        }
+        if (diff < min_val)
+        {
+            min_val = diff;
+            result = i;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2270. Number of Ways to Split Array
+///                                                           
+/// Medium
+/// 
+/// You are given a 0-indexed integer array nums of length n.
+/// nums contains a valid split at index i if the following are true:
+///
+/// The sum of the first i + 1 elements is greater than or equal to the 
+/// sum of the last n - i - 1 elements.
+/// There is at least one element to the right of i. That is, 0 <= i < 
+/// n - 1.
+/// Return the number of valid splits in nums.
+/// 
+/// Example 1:
+/// Input: nums = [10,4,-8,7]
+/// Output: 2
+/// Explanation: 
+/// There are three ways of splitting nums into two non-empty parts: 
+/// - Split nums at index 0. Then, the first part is [10], and its sum 
+///   is 10. The second part is [4,-8,7], and its sum is 3. Since 10 >= 3, 
+///   i = 0 is a valid split.
+/// - Split nums at index 1. Then, the first part is [10,4], and its sum 
+///   is 14. The second part is [-8,7], and its sum is -1. Since 14 >= -1, 
+///   i = 1 is a valid split.
+/// - Split nums at index 2. Then, the first part is [10,4,-8], and its 
+///   sum is 6. The second part is [7], and its sum is 7. Since 6 < 7, 
+///   i = 2 is not a valid split.
+/// Thus, the number of valid splits in nums is 2.
+///
+/// Example 2:
+/// Input: nums = [2,3,1,0]
+/// Output: 2
+/// Explanation: 
+/// There are two valid splits in nums:
+/// - Split nums at index 1. Then, the first part is [2,3], and its sum 
+///   is 5. The second part is [1,0], and its sum is 1. Since 5 >= 1, 
+///   i = 1 is a valid split. 
+/// - Split nums at index 2. Then, the first part is [2,3,1], and its 
+///   sum is 6. The second part is [0], and its sum is 0. Since 6 >= 0, 
+///   i = 2 is a valid split.
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length <= 10^5
+/// 2. -10^5 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeArray::waysToSplitArray(vector<int>& nums)
+{
+    long long left_sum = 0;
+    long long right_sum = 0;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++) right_sum += (long long)nums[i];
+    for (size_t i = 0; i < nums.size() - 1; i++)
+    {
+        left_sum += (long long)nums[i];
+        right_sum -= (long long)nums[i];
+        if (left_sum >= right_sum) result++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2261. K Divisible Elements Subarrays
+///                                                           
+/// Medium
+/// 
+/// Given an integer array nums and two integers k and p, return the 
+/// number of distinct subarrays which have at most k elements divisible 
+/// by p.
+///
+/// Two arrays nums1 and nums2 are said to be distinct if:
+/// They are of different lengths, or
+/// There exists at least one index i where nums1[i] != nums2[i].
+/// A subarray is defined as a non-empty contiguous sequence of elements 
+/// in an array.
+/// 
+/// Example 1:
+/// Input: nums = [2,3,3,2,2], k = 2, p = 2
+/// Output: 11
+/// Explanation:
+/// The elements at indices 0, 3, and 4 are divisible by p = 2.
+/// The 11 distinct subarrays which have at most k = 2 elements divisible 
+/// by 2 are:
+/// [2], [2,3], [2,3,3], [2,3,3,2], [3], [3,3], [3,3,2], [3,3,2,2], [3,2], 
+/// [3,2,2], and [2,2].
+/// Note that the subarrays [2] and [3] occur more than once in nums, but 
+/// they should each be counted only once.
+/// The subarray [2,3,3,2,2] should not be counted because it has 3 
+/// elements that are divisible by 2.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4], k = 4, p = 1
+/// Output: 10
+/// Explanation:
+/// All element of nums are divisible by p = 1.
+/// Also, every subarray of nums will have at most 4 elements that are 
+/// divisible by 1.
+/// Since all subarrays are distinct, the total number of subarrays 
+/// satisfying all the constraints is 10.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 200
+/// 2. 1 <= nums[i], p <= 200
+/// 3. 1 <= k <= nums.length
+/// </summary>
+int LeetCodeArray::countDistinct(vector<int>& nums, int k, int p)
+{
+    unordered_set<string> dictionary;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        string str;
+        int count = 0;
+        for (size_t j = i; j < nums.size(); j++)
+        {
+            str.push_back(nums[j]);
+            if (nums[j] % p == 0)
+            {
+                count++;
+            }
+            if (count > k)
+            {
+                break;
+            }
+            dictionary.insert(str);
+        }
+    }
+    return dictionary.size();
+}
+
+/// <summary>
+/// Leet Code 2260. Minimum Consecutive Cards to Pick Up
+///                                                           
+/// Medium
+/// 
+/// You are given an integer array cards where cards[i] represents the 
+/// value of the ith card. A pair of cards are matching if the cards 
+/// have the same value.
+///
+/// Return the minimum number of consecutive cards you have to pick up 
+/// to have a pair of matching cards among the picked cards. If it is 
+/// impossible to have matching cards, return -1.
+/// 
+/// Example 1:
+/// Input: cards = [3,4,2,3,4,7]
+/// Output: 4
+/// Explanation: We can pick up the cards [3,4,2,3] which contain a 
+/// matching pair of cards with value 3. Note that picking up the 
+/// cards [4,2,3,4] is also optimal.
+///
+/// Example 2:
+/// Input: cards = [1,0,5,3]
+/// Output: -1
+/// Explanation: There is no way to pick up a set of consecutive cards 
+/// that contain a pair of matching cards.
+/// 
+/// Constraints:
+/// 1. 1 <= cards.length <= 10^5
+/// 2. 0 <= cards[i] <= 10^6
+/// </summary>
+int LeetCodeArray::minimumCardPickup(vector<int>& cards)
+{
+    unordered_map<int, int> card_map;
+    int result = INT_MAX;
+    for (int i = 0; i < (int)cards.size(); i++)
+    {
+        if (card_map.count(cards[i]) > 0)
+        {
+            result = min(result, i - card_map[cards[i]] + 1);
+        }
+        card_map[cards[i]] = i;
+    }
+    return (result == INT_MAX ? -1 : result);
+}
+
 #pragma endregion
 

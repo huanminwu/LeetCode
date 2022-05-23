@@ -3350,8 +3350,88 @@ void TestLeetCode2236(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode2246(void)
+{
+    Logger::WriteMessage("Test Leet Code 2246");
+    LeetCodeTree leetCode;
+    vector<int> parent = { -1, 0, 0, 1, 1, 2 };
+    string s = "abacbe";
+    int result = leetCode.longestPath(parent, s);
+    Logger::WriteMessage(parent);
+    Logger::WriteMessage("s = " + s + ";result = " + to_string(result));
+
+    parent = { -1,0,0,0 };
+    s = "aabc";
+    result = leetCode.longestPath(parent, s);
+    Logger::WriteMessage(parent);
+    Logger::WriteMessage("s = " + s + ";result = " + to_string(result));
+}
+
+void TestLeetCode2265(void)
+{
+    Logger::WriteMessage("Test Leet Code 2265");
+    LeetCodeTree leetCode;
+    string input = "[4,8,5,0,1,null,6]";
+    TreeNode* root = leetCode.deserialize(input);
+    int result = leetCode.averageOfSubtree(root);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[1]";
+    root = leetCode.deserialize(input);
+    result = leetCode.averageOfSubtree(root);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+}
+
+void TestLeetCode2277(void)
+{
+    Logger::WriteMessage("Test Leet Code 2277");
+    LeetCodeTree leetCode;
+    int n = 7;
+    vector<vector<int>> edges =
+    {
+        {0, 1},{0, 2},{0, 3},{1, 4},{2, 5},{2, 6}
+    };
+    vector<vector<int>> query = { {5, 3, 4},{5, 3, 6} };
+    vector<int> result = leetCode.closestNode(n, edges, query);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(query);
+    Logger::WriteMessage(result);
+
+    n = 3;
+    edges =
+    {
+        {0, 1},{1, 2}
+    };
+    query = { {0, 1, 2} };
+    result = leetCode.closestNode(n, edges, query);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(query);
+    Logger::WriteMessage(result);
+
+    n = 3;
+    edges =
+    {
+        {0, 1},{1, 2}
+    };
+    query = { {0, 0, 0} };
+    result = leetCode.closestNode(n, edges, query);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(query);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode2277();
+    TestLeetCode2246();
+    TestLeetCode2265();
     TestLeetCode2236();
     TestLeetCode2196();
     TestLeetCode1973();

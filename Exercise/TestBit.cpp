@@ -780,8 +780,25 @@ void TestLeetCode2220(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2275(void)
+{
+    Logger::WriteMessage("Test Leet Code 2275");
+    LeetCodeBit leetCode;
+    vector<int> candidates = { 16, 17, 71, 62, 12, 24, 14 };
+    int result = leetCode.largestCombination(candidates);
+    Logger::WriteMessage(candidates);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    candidates = { 8,8 };
+    result = leetCode.largestCombination(candidates);
+    Logger::WriteMessage(candidates);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2275();
     TestLeetCode2220();
     TestLeetCode1980();
     TestLeetCode1938();

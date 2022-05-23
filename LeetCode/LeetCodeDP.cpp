@@ -2742,7 +2742,7 @@ int LeetCode::maxA(int N)
     key_map[1].insert(make_pair(1, 1));
     for (int i = 1; i < N; i++)
     {
-        for (auto step : key_map[i])
+        for (auto& step : key_map[i])
         {
             // handle A or Ctrl V
             pair<int, int> new_step = 
@@ -2757,7 +2757,7 @@ int LeetCode::maxA(int N)
         }
     }
     int result = INT_MIN;
-    for (auto t : key_map[N])
+    for (auto& t : key_map[N])
     {
         result = max(result, t.first);
     }
@@ -13474,7 +13474,7 @@ long long LeetCodeDP::numberOfWays(string s)
     vector<long long> dp11(s.size());
     vector<long long> dp20(s.size());
     vector<long long> dp21(s.size());
-    for (int i = 0; i < s.size(); i++)
+    for (int i = 0; i < (int)s.size(); i++)
     {
         if (s[i] == '0')
         {
@@ -13591,6 +13591,254 @@ int LeetCodeDP::minimumWhiteTiles(string floor, int numCarpets, int carpetLen)
         }
     }
     return dp[floor.size() - 1][numCarpets];
+}
+
+/// <summary>
+/// Leet Code 2263. Make Array Non-decreasing or Non-increasing
+///                                                                                      
+/// Hard
+/// 
+/// You are given a 0-indexed integer array nums. In one operation, you 
+/// can:
+///
+/// Choose an index i in the range 0 <= i < nums.length
+/// Set nums[i] to nums[i] + 1 or nums[i] - 1
+/// Return the minimum number of operations to make nums non-decreasing 
+/// or non-increasing.
+/// 
+/// Example 1:
+/// Input: nums = [3,2,4,5,0]
+/// Output: 4
+/// Explanation:
+/// One possible way to turn nums into non-increasing order is to:
+/// - Add 1 to nums[1] once so that it becomes 3.
+/// - Subtract 1 from nums[2] once so it becomes 3.
+/// - Subtract 1 from nums[3] twice so it becomes 3.
+/// After doing the 4 operations, nums becomes [3,3,3,3,0] which is in 
+/// non-increasing order.
+/// Note that it is also possible to turn nums into [4,4,4,4,0] in 4 
+/// operations.
+/// It can be proven that 4 is the minimum number of operations needed.
+///
+/// Example 2:
+/// Input: nums = [2,2,3,4]
+/// Output: 0
+/// Explanation: nums is already in non-decreasing order, so no operations 
+/// are needed and we return 0.
+///
+/// Example 3:
+/// Input: nums = [0]
+/// Output: 0
+/// Explanation: nums is already in non-decreasing order, so no operations 
+/// are needed and we return 0.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 0 <= nums[i] <= 1000
+/// </summary>
+int LeetCodeDP::convertArrayII(vector<int>& nums)
+{
+    int result = INT_MAX;
+    set<int> levels = set<int>(nums.begin(), nums.end());
+    for (int k = 0; k < 2; k++)
+    {
+        if (k == 1) reverse(nums.begin(), nums.end());
+        vector<int> dp(1001);
+        for (size_t i = 0; i < nums.size(); i++)
+        {
+            int min_ops = INT_MAX;
+            for (auto level : levels)
+            {
+                min_ops = min(min_ops, dp[level]);
+                dp[level] = min_ops + std::abs(level - nums[i]);
+            }
+        }
+        for (auto level : levels)
+        {
+            result = min(result, dp[level]);
+        }
+    }
+    reverse(nums.begin(), nums.end());
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2267. Check if There Is a Valid Parentheses String Path
+///                                                           
+/// Hard
+/// 
+/// A parentheses string is a non-empty string consisting only of '(' and 
+/// ')'. It is valid if any of the following conditions is true:
+///
+/// It is ().
+/// It can be written as AB (A concatenated with B), where A and B are 
+/// valid parentheses strings.
+/// It can be written as (A), where A is a valid parentheses string.
+/// You are given an m x n matrix of parentheses grid. A valid parentheses 
+/// string path in the grid is a path satisfying all of the following 
+/// conditions:
+///
+/// The path starts from the upper left cell (0, 0).
+/// The path ends at the bottom-right cell (m - 1, n - 1).
+/// The path only ever moves down or right.
+/// The resulting parentheses string formed by the path is valid.
+/// Return true if there exists a valid parentheses string path in the 
+/// grid. Otherwise, return false.
+/// 
+/// Example 1:
+/// Input: grid = [["(","(","("],[")","(",")"],["(","(",")"],["(","(",")"]]
+/// Output: true
+/// Explanation: The above diagram shows two possible paths that form valid 
+/// parentheses strings.
+/// The first path shown results in the valid parentheses string "()(())".
+/// The second path shown results in the valid parentheses string "((()))".
+/// Note that there may be other valid parentheses string paths.
+///
+/// Example 2:
+/// Input: grid = [[")",")"],["(","("]]
+/// Output: false
+/// Explanation: The two possible paths form the parentheses strings "))(" 
+/// and ")((". Since neither of them are valid parentheses strings, we 
+/// return false.
+///
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 1 <= m, n <= 100
+/// 4. grid[i][j] is either '(' or ')'.
+/// </summary>
+bool LeetCodeDP::hasValidPath(vector<vector<char>>& grid)
+{
+    int m = grid.size();
+    int n = grid[0].size();
+    if ((m + n - 1) % 2 == 1)
+    {
+        return false;
+    }
+    int k = (m + n - 1) / 2;
+    vector<vector<unordered_set<int>>> dp(m, vector<unordered_set<int>>(n));
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (i == 0 && j == 0)
+            {
+                if (grid[i][j] == ')') return false;
+                else dp[i][j].insert(1);
+            }
+            if (i > 0)
+            {
+                for (auto x : dp[i - 1][j])
+                {
+                    int y = x;
+                    if (grid[i][j] == '(') y++;
+                    else y--;
+                    if (y < 0 || y > min(m + n - 1 - (i + j), k)) continue;
+                    dp[i][j].insert(y);
+                }
+            }
+            if (j > 0)
+            {
+                for (auto x : dp[i][j - 1])
+                {
+                    int y = x;
+                    if (grid[i][j] == '(') y++;
+                    else y--;
+                    if (y < 0 || y > min(m + n - 1 - (i+j), k)) continue;
+                    dp[i][j].insert(y);
+                }
+            }
+        }
+    }
+    if (dp[m - 1][n - 1].count(0) > 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+/// <summary>
+/// Leet Code 2266. Count Number of Texts
+///                                                           
+/// Medium
+/// 
+/// Alice is texting Bob using her phone. The mapping of digits to letters 
+/// is shown in the figure below.
+///
+/// In order to add a letter, Alice has to press the key of the 
+/// corresponding digit i times, where i is the position of the letter in 
+/// the key.
+///
+/// For example, to add the letter 's', Alice has to press '7' four times. 
+/// Similarly, to add the letter 'k', Alice has to press '5' twice.
+/// Note that the digits '0' and '1' do not map to any letters, so Alice 
+/// does not use them.
+/// However, due to an error in transmission, Bob did not receive Alice's 
+/// text message but received a string of pressed keys instead.
+///
+/// For example, when Alice sent the message "bob", Bob received the 
+/// string "2266622".
+/// Given a string pressedKeys representing the string received by Bob, 
+/// return the total number of possible text messages Alice could have 
+/// sent.
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// 
+/// Input: pressedKeys = "22233"
+/// Output: 8
+/// Explanation:
+/// The possible text messages Alice could have sent are:
+/// "aaadd", "abdd", "badd", "cdd", "aaae", "abe", "bae", and "ce".
+/// Since there are 8 possible messages, we return 8.
+///
+/// Example 2:
+/// Input: pressedKeys = "222222222222222222222222222222222222"
+/// Output: 82876089
+/// Explanation:
+/// There are 2082876103 possible text messages Alice could have sent.
+/// Since we need to return the answer modulo 109 + 7, we return
+/// 2082876103 % (10^9 + 7) = 82876089.
+///
+/// Constraints:
+/// 1. 1 <= pressedKeys.length <= 10^5
+/// 2. pressedKeys only consists of digits from '2' - '9'.
+/// </summary>
+int LeetCodeDP::countTexts(string pressedKeys)
+{
+    vector<int> dp(pressedKeys.size());
+    int M = 1000000007;
+    for (int i = 0; i < (int)pressedKeys.size(); i++)
+    {
+        int n = 3;
+        if (pressedKeys[i] == '7' || pressedKeys[i] == '9')
+        {
+            n = 4;
+        }
+        for (int j = 1; j <= n; j++)
+        {
+            if (i - j < 0)
+            {
+                dp[i] = (dp[i] + 1) % M;
+                break;
+            }
+            if (pressedKeys[i] != pressedKeys[i - j])
+            {
+                dp[i] = (dp[i] + dp[i - j]) % M;
+                break;
+            }
+            else
+            {
+                dp[i] = (dp[i] + dp[i - j]) % M;
+            }
+        }
+    }
+    return dp.back();
 }
 
 #pragma endregion

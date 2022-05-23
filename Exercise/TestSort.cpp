@@ -2777,8 +2777,74 @@ void TestLeetCode2171(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2263(void)
+{
+    Logger::WriteMessage("Test Leet Code 2263");
+
+    LeetCodeSort leetCode;
+    vector<int> nums = { 3, 2, 4, 5, 0 };
+    int result = leetCode.convertArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,2,3,4 };
+    result = leetCode.convertArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0 };
+    result = leetCode.convertArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2250(void)
+{
+    Logger::WriteMessage("Test Leet Code 2250");
+
+    LeetCodeSort leetCode;
+    vector<vector<int>> rectangles = { {1, 2},{2, 3},{2, 5} };
+    vector<vector<int>> points = { {2, 1},{1, 4} };
+    vector<int> result = leetCode.countRectangles(rectangles, points);
+    Logger::WriteMessage(rectangles);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage(result);
+
+    rectangles = { {1, 1},{2, 2},{3, 3} };
+    points = { {1, 3},{1, 1} };
+    result = leetCode.countRectangles(rectangles, points);
+    Logger::WriteMessage(rectangles);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage(result);
+
+}
+
+void TestLeetCode2279(void)
+{
+    Logger::WriteMessage("Test Leet Code 2279");
+    LeetCodeSort leetCode;
+    vector<int> capacity = { 2, 3, 4, 5 };
+    vector<int> rocks = { 1, 2, 4, 4 };
+    int additionalRocks = 2;
+    int result = leetCode.maximumBags(capacity, rocks, additionalRocks);
+    Logger::WriteMessage(capacity);
+    Logger::WriteMessage(rocks);
+    Logger::WriteMessage("additionalRocks = " + to_string(additionalRocks) + "; result = " + to_string(result));
+
+    capacity = { 10,2,2 };
+    rocks = { 2,2,0 };
+    additionalRocks = 100;
+    result = leetCode.maximumBags(capacity, rocks, additionalRocks);
+    Logger::WriteMessage(capacity);
+    Logger::WriteMessage(rocks);
+    Logger::WriteMessage("additionalRocks = " + to_string(additionalRocks) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2279();
+    TestLeetCode2250();
+    TestLeetCode2263();
     TestLeetCode2171();
     TestLeetCode2165();
     TestLeetCode2164();

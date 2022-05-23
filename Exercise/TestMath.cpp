@@ -4656,8 +4656,46 @@ void TestLeetCode2240(void)
     Logger::WriteMessage("cost2 = " + to_string(cost2) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2249(void)
+{
+    Logger::WriteMessage("Test Leet Code 2249");
+    LeetCodeMath leetCode;
+    vector<vector<int>> circles = { {2, 2, 1} };
+    int result = leetCode.countLatticePoints(circles);
+    Logger::WriteMessage(circles);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    circles = { {2, 2, 2},{3, 4, 1} };
+    result = leetCode.countLatticePoints(circles);
+    Logger::WriteMessage(circles);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2280(void)
+{
+    Logger::WriteMessage("Test Leet Code 2280");
+    LeetCodeMath leetCode;
+    vector<vector<int>> stockPrices =
+    {
+        {1, 7},{2, 6},{3, 5},{4, 4},{5, 4},{6, 3},{7, 2},{8, 1}
+    };
+    int result = leetCode.minimumLinesII(stockPrices);
+    Logger::WriteMessage(stockPrices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    stockPrices =
+    {
+        {3,4},{1,2},{7,8},{2,3}
+    };
+    result = leetCode.minimumLinesII(stockPrices);
+    Logger::WriteMessage(stockPrices);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2280();
+    TestLeetCode2249();
     TestLeetCode2240();
     TestLeetCode2239();
     TestLeetCode2235();

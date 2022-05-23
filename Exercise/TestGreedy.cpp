@@ -1283,8 +1283,108 @@ void TestLeetCode2237(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+
+void TestLeetCode2234(void)
+{
+    Logger::WriteMessage("Test Leet Code 2234");
+    LeetCodeGreedy leetCode;
+    vector<int> flowers = { 1, 3, 1, 1 };
+    long long newFlowers = 7;
+    int target = 6;
+    int full = 12;
+    int partial = 1;
+    long long result = leetCode.maximumBeauty(flowers, newFlowers, target, full, partial);
+    Logger::WriteMessage(flowers);
+    Logger::WriteMessage("newFlowers = " + to_string(newFlowers) + "; target = " + to_string(target));
+    Logger::WriteMessage("full = " + to_string(full) + "; partial = " + to_string(partial));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    flowers = { 2,4,5,3 };
+    newFlowers = 10;
+    target = 5;
+    full = 2;
+    partial = 6;
+    result = leetCode.maximumBeauty(flowers, newFlowers, target, full, partial);
+    Logger::WriteMessage(flowers);
+    Logger::WriteMessage("newFlowers = " + to_string(newFlowers) + "; target = " + to_string(target));
+    Logger::WriteMessage("full = " + to_string(full) + "; partial = " + to_string(partial));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    flowers = { 8,2 };
+    newFlowers = 24;
+    target = 18;
+    full = 6;
+    partial = 3;
+    result = leetCode.maximumBeauty(flowers, newFlowers, target, full, partial);
+    Logger::WriteMessage(flowers);
+    Logger::WriteMessage("newFlowers = " + to_string(newFlowers) + "; target = " + to_string(target));
+    Logger::WriteMessage("full = " + to_string(full) + "; partial = " + to_string(partial));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2274(void)
+{
+    Logger::WriteMessage("Test Leet Code 2274");
+    LeetCodeGreedy leetCode;
+    int bottom = 2;
+    int top = 9;
+    vector<int> special = { 4, 6 };
+    int result = leetCode.maxConsecutive(bottom, top, special);
+    Logger::WriteMessage(special);
+    Logger::WriteMessage("bottom = " + to_string(bottom) + "; top = " + to_string(top));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    bottom = 6;
+    top = 8;
+    special = { 7, 6, 8 };
+    result = leetCode.maxConsecutive(bottom, top, special);
+    Logger::WriteMessage(special);
+    Logger::WriteMessage("bottom = " + to_string(bottom) + "; top = " + to_string(top));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2251(void)
+{
+    Logger::WriteMessage("Test Leet Code 2251");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> flowers = { {1, 6},{3, 7},{9, 12},{4, 13} };
+    vector<int> persons = { 2, 3, 7, 11 };
+    vector<int> result = leetCode.fullBloomFlowers(flowers, persons);
+    Logger::WriteMessage(flowers);
+    Logger::WriteMessage(persons);
+    Logger::WriteMessage(result);
+
+    flowers = { {1, 10},{3, 3} };
+    persons = { 3,3,2 };
+    result = leetCode.fullBloomFlowers(flowers, persons);
+    Logger::WriteMessage(flowers);
+    Logger::WriteMessage(persons);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2271(void)
+{
+    Logger::WriteMessage("Test Leet Code 2271");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> tiles = { {1, 5},{10, 11},{12, 18}, {20, 25}, {30, 32} };
+    int carpetLen = 10;
+    int result = leetCode.maximumWhiteTiles(tiles, carpetLen);
+    Logger::WriteMessage(tiles);
+    Logger::WriteMessage("carpetLen = " + to_string(carpetLen) + "; result = " + to_string(result));
+
+    tiles = { {10, 11},{1, 1} };
+    carpetLen = 2;
+    result = leetCode.maximumWhiteTiles(tiles, carpetLen);
+    Logger::WriteMessage(tiles);
+    Logger::WriteMessage("carpetLen = " + to_string(carpetLen) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode2271();
+    TestLeetCode2251();
+    TestLeetCode2274();
+    TestLeetCode2234();
     TestLeetCode2237();
     TestLeetCode2213();
     TestLeetCode2182();

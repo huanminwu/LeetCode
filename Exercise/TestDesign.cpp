@@ -4364,8 +4364,181 @@ void TestLeetCode2241(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2227(void)
+{
+    Logger::WriteMessage("Test Leet Code 2227");
+    vector<string> commands =
+    {
+       "Encrypter", "encrypt", "decrypt"
+    };
+    vector<char> keys = { 'a', 'b', 'c', 'd' };
+    vector<string> values = { "ei", "zf", "ei", "am" };
+    vector<vector<string>> parameters =
+    {
+        {"abcd", "acbd", "adbc", "badc", "dacb", "cadb", "cbda", "abad"} ,
+        {"abcd"}, {"eizfeiam"}
+    };
+    vector<string> result;
+    Encrypter* encrypter = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Encrypter")
+        {
+            encrypter = new Encrypter(keys, values, parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "encrypt")
+        {
+            string ret = encrypter->encrypt(parameters[i][0]);
+            result.push_back(ret);
+        }
+        else if (commands[i] == "decrypt")
+        {
+            int ret = encrypter->decrypt(parameters[i][0]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete encrypter;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2254(void)
+{
+    Logger::WriteMessage("Test Leet Code 2254");
+
+    vector<string> commands =
+    {
+       "VideoSharingPlatform", "upload", "upload", "remove", "remove",
+       "upload", "watch", "watch", "like", "dislike", "dislike",
+       "getLikesAndDislikes", "getViews"
+    };
+    vector<vector<string>> parameters =
+    {
+        {} , {"123"}, {"456"}, {"4"}, {"0"}, {"789"}, {"1","0","5"}, {"1","0","1"}, 
+        {"1"}, {"1"}, {"1"},{"1"}, {"1"}
+    };
+    vector<string> result;
+    VideoSharingPlatform* videoSharingPlatform = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "VideoSharingPlatform")
+        {
+            videoSharingPlatform = new VideoSharingPlatform();
+            result.push_back("null");
+        }
+        else if (commands[i] == "upload")
+        {
+            int ret = videoSharingPlatform->upload(parameters[i][0]);
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "remove")
+        {
+            videoSharingPlatform->remove(atoi(parameters[i][0].c_str()));
+            result.push_back("null");
+        }
+        else if (commands[i] == "watch")
+        {
+            string ret = videoSharingPlatform->watch(
+                atoi(parameters[i][0].c_str()), 
+                atoi(parameters[i][1].c_str()),
+                atoi(parameters[i][2].c_str()));
+            result.push_back(ret);
+        }
+        else if (commands[i] == "like")
+        {
+            videoSharingPlatform->like(atoi(parameters[i][0].c_str()));
+            result.push_back("null");
+        }
+        else if (commands[i] == "dislike")
+        {
+            videoSharingPlatform->dislike(atoi(parameters[i][0].c_str()));
+            result.push_back("null");
+        }
+        else if (commands[i] == "getLikesAndDislikes")
+        {
+            vector<int> ret = videoSharingPlatform->getLikesAndDislikes(atoi(parameters[i][0].c_str()));
+            result.push_back("[" + to_string(ret[0]) + ", " + to_string(ret[1]) + "]");
+        }
+        else if (commands[i] == "getViews")
+        {
+            int ret = videoSharingPlatform->getViews(atoi(parameters[i][0].c_str()));
+            result.push_back(to_string(ret));
+        }
+    }
+    delete videoSharingPlatform;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
+void TestTouchScreen(void)
+{
+    Logger::WriteMessage("Test TouchScreen");
+    vector<vector<unsigned char>> streams =
+    {
+        {0x81, 0x08, 0x16, 0x07, 0x41, 0x90, 0x80, 0x08, 0x16, 0x07},
+        {0x41, 0x90, 0x81, 0x01, 0x2, 0x01, 0x02}
+    };
+    TouchContext context_buff[50];
+    TouchScreen touchStreen;
+    for (size_t i = 0; i < streams.size(); i++)
+    {
+        touchStreen.read_stream((unsigned char *)&streams[i][0], streams[i].size());
+        int count = touchStreen.read_touch_context(context_buff, 10);
+        printf("Count = %d\n", count);
+        for (int j = 0; j < count; j++)
+        {
+            printf("TouchContext {event = %d, x_coord = %d, y_coord = %d}\n", 
+                context_buff[j].event, context_buff[j].x_coord, context_buff[j].y_coord);
+        }
+    }
+}
+
+void TestLeetCode2276(void)
+{
+    Logger::WriteMessage("Test Leet Code 2276");
+
+    vector<string> commands =
+    {
+       "CountIntervals", "add", "add", "count", "add", "count", "add", "count"
+    };
+    vector<vector<int>> parameters =
+    {
+        {} , {2, 3}, {7, 10}, {}, {5, 8}, {}, {3, 10}, {}
+    };
+    vector<string> result;
+    CountIntervals* countIntervals = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "CountIntervals")
+        {
+            countIntervals = new CountIntervals();
+            result.push_back("null");
+        }
+        else if (commands[i] == "add")
+        {
+            countIntervals->add(parameters[i][0], parameters[i][1]);
+        }
+        else if (commands[i] == "count")
+        {
+            int ret = countIntervals->count();
+            result.push_back(to_string(ret));
+        }
+    }
+    delete countIntervals;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2276();
+    TestTouchScreen();
+    TestLeetCode2254();
+    TestLeetCode2227();
     TestLeetCode2241();
     TestLeetCode2166();
     TestLeetCode211();

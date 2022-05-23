@@ -7420,6 +7420,230 @@ public:
     /// 8. There is at most one edge between any pair of vertices.
     /// </summary>
     vector<int> distanceToCycle(int n, vector<vector<int>>& edges);
+
+    /// <summary>
+    /// Leet Code 2242. Maximum Score of a Node Sequence
+    ///                                                                                      
+    /// Hard
+    /// 
+    /// There is an undirected graph with n nodes, numbered from 0 to n - 1.
+    ///
+    /// You are given a 0-indexed integer array scores of length n where 
+    /// scores[i] denotes the score of node i. You are also given a 2D 
+    /// integer array edges where edges[i] = [ai, bi] denotes that there 
+    /// exists an undirected edge connecting nodes ai and bi.
+    ///
+    /// A node sequence is valid if it meets the following conditions:
+    ///
+    /// There is an edge connecting every pair of adjacent nodes in the 
+    /// sequence.
+    /// No node appears more than once in the sequence.
+    /// The score of a node sequence is defined as the sum of the scores of 
+    /// the nodes in the sequence.
+    ///
+    /// Return the maximum score of a valid node sequence with a length of 4. 
+    /// If no such sequence exists, return -1.
+    /// 
+    /// Example 1:
+    /// Input: scores = [5,2,9,8,4], 
+    /// edges = [[0,1],[1,2],[2,3],[0,2],[1,3],[2,4]]
+    /// Output: 24
+    /// Explanation: The figure above shows the graph and the chosen node 
+    /// sequence [0,1,2,3].
+    /// The score of the node sequence is 5 + 2 + 9 + 8 = 24.
+    /// It can be shown that no other node sequence has a score of more 
+    /// than 24.
+    /// Note that the sequences [3,1,2,0] and [1,0,2,3] are also valid and 
+    /// have a score of 24.
+    /// The sequence [0,3,2,4] is not valid since no edge connects 
+    /// nodes 0 and 3.
+    ///
+    /// Example 2:
+    /// Input: scores = [9,20,6,4,11,12], edges = [[0,3],[5,3],[2,4],[1,3]]
+    /// Output: -1
+    /// Explanation: The figure above shows the graph.
+    /// There are no valid node sequences of length 4, so we return -1.
+    /// 
+    /// Constraints:
+    /// 1. n == scores.length
+    /// 2. 4 <= n <= 5 * 10^4
+    /// 3. 1 <= scores[i] <= 10^8
+    /// 4. 0 <= edges.length <= 5 * 10^4
+    /// 5. edges[i].length == 2
+    /// 6. 0 <= ai, bi <= n - 1
+    /// 7. ai != bi
+    /// 8. There are no duplicate edges.
+    /// </summary>
+    int maximumScore(vector<int>& scores, vector<vector<int>>& edges);
+
+    /// <summary>
+    /// Leet Code 2247. Maximum Cost of Trip With K Highways
+    /// </summary>
+    int maximumCost(int city, vector<vector<pair<int, int>>>& neighbors, vector<vector<int>>& cache, int bit_mask, int remaining);
+
+    /// <summary>
+    /// Leet Code 2247. Maximum Cost of Trip With K Highways
+    ///                                                                                      
+    /// Hard
+    /// 
+    /// A series of highways connect n cities numbered from 0 to n - 1. You 
+    /// are given a 2D integer array highways where highways[i] = [city1i, 
+    /// city2i, tolli] indicates that there is a highway that connects city1i 
+    /// and city2i, allowing a car to go from city1i to city2i and vice versa 
+    /// for a cost of tolli.
+    ///
+    /// You are also given an integer k. You are going on a trip that crosses 
+    /// exactly k highways. You may start at any city, but you may only visit 
+    /// each city at most once during your trip.
+    ///
+    /// Return the maximum cost of your trip. If there is no trip that meets 
+    /// the requirements, return -1.
+    /// 
+    /// Example 1:
+    /// Input: n = 5, highways = [[0,1,4],[2,1,3],[1,4,11],[3,2,3],[3,4,2]], 
+    /// k = 3
+    /// Output: 17
+    /// Explanation:
+    /// One possible trip is to go from 0 -> 1 -> 4 -> 3. The cost of this 
+    /// trip is 4 + 11 + 2 = 17.
+    /// Another possible trip is to go from 4 -> 1 -> 2 -> 3. The cost of 
+    /// this trip is 11 + 3 + 3 = 17.
+    /// It can be proven that 17 is the maximum possible cost of any valid 
+    /// trip.
+    ///
+    /// Note that the trip 4 -> 1 -> 0 -> 1 is not allowed because you visit 
+    /// the city 1 twice.
+    ///
+    /// Example 2:
+    /// Input: n = 4, highways = [[0,1,3],[2,3,2]], k = 2
+    /// Output: -1
+    /// Explanation: There are no valid trips of length 2, so return -1.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n <= 15
+    /// 2. 1 <= highways.length <= 50
+    /// 3. highways[i].length == 3
+    /// 4. 0 <= city1i, city2i <= n - 1
+    /// 5. city1i != city2i
+    /// 6. 0 <= tolli <= 100
+    /// 7. 1 <= k <= 50
+    /// 8. There are no duplicate highways.
+    /// </summary>
+    int maximumCost(int n, vector<vector<int>>& highways, int k);
+
+    /// <summary>
+    /// Leet Code 2258. Escape the Spreading Fire
+    /// </summary>
+    void maximumMinutes(queue<vector<int>>& queue, vector<vector<int>>&map);
+
+    /// <summary>
+    /// Leet Code 2258. Escape the Spreading Fire
+    ///                                                           
+    /// Hard
+    /// 
+    /// You are given a 0-indexed 2D integer array grid of size m x n which 
+    /// represents a field. Each cell has one of three values:
+    ///
+    /// 0 represents grass,
+    /// 1 represents fire,
+    /// 2 represents a wall that you and fire cannot pass through.
+    /// You are situated in the top-left cell, (0, 0), and you want to travel 
+    /// to the safehouse at the bottom-right cell, (m - 1, n - 1). Every 
+    /// minute, you may move to an adjacent grass cell. After your move, 
+    /// every fire cell will spread to all adjacent cells that are not walls.
+    ///
+    /// Return the maximum number of minutes that you can stay in your initial 
+    /// position before moving while still safely reaching the safehouse. 
+    /// If this is impossible, return -1. If you can always reach the 
+    /// safehouse regardless of the minutes stayed, return 10^9.
+    ///
+    /// Note that even if the fire spreads to the safehouse immediately after 
+    /// you have reached it, it will be counted as safely reaching the 
+    /// safehouse.
+    ///
+    /// A cell is adjacent to another cell if the former is directly north, 
+    /// east, south, or west of the latter (i.e., their sides are touching).
+    ///
+    /// Example 1:
+    /// Input: grid = [[0,2,0,0,0,0,0],[0,0,0,2,2,1,0],[0,2,0,0,1,2,0],
+    /// [0,0,2,2,2,0,2],[0,0,0,0,0,0,0]]
+    /// Output: 3
+    /// Explanation: The figure above shows the scenario where you stay 
+    /// in the initial position for 3 minutes.
+    /// You will still be able to safely reach the safehouse.
+    /// Staying for more than 3 minutes will not allow you to safely reach 
+    /// the safehouse.
+    ///
+    /// Example 2:
+    /// Input: grid = [[0,0,0,0],[0,1,2,0],[0,2,0,0]]
+    /// Output: -1
+    /// Explanation: The figure above shows the scenario where you 
+    /// immediately move towards the safehouse.
+    /// Fire will spread to any cell you move towards and it is impossible 
+    /// to safely reach the safehouse.
+    /// Thus, -1 is returned.
+    ///
+    /// Example 3:
+    /// Input: grid = [[0,0,0],[2,2,0],[1,2,0]]
+    /// Output: 1000000000
+    /// Explanation: The figure above shows the initial grid.
+    /// Notice that the fire is contained by walls and you will always 
+    /// be able to safely reach the safehouse.
+    /// Thus, 109 is returned.
+    /// 
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 2 <= m, n <= 300
+    /// 4. 4 <= m * n <= 2 * 10^4
+    /// 5. grid[i][j] is either 0, 1, or 2.
+    /// 6. grid[0][0] == grid[m - 1][n - 1] == 0
+    /// </summary>
+    int maximumMinutes(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 2257. Count Unguarded Cells in the Grid
+    ///                                                           
+    /// Medium
+    /// 
+    /// You are given two integers m and n representing a 0-indexed m x n 
+    /// grid. You are also given two 2D integer arrays guards and walls 
+    /// where guards[i] = [rowi, coli] and walls[j] = [rowj, colj] represent 
+    /// the positions of the ith guard and jth wall respectively.
+    ///
+    /// A guard can see every cell in the four cardinal directions (north, 
+    /// east, south, or west) starting from their position unless obstructed 
+    /// by a wall or another guard. A cell is guarded if there is at least 
+    /// one guard that can see it.
+    ///
+    /// Return the number of unoccupied cells that are not guarded.
+    /// Example 1:
+    /// Input: m = 4, n = 6, guards = [[0,0],[1,1],[2,3]], 
+    /// walls = [[0,1],[2,2],[1,4]]
+    /// Output: 7
+    /// Explanation: The guarded and unguarded cells are shown in red and 
+    /// green respectively in the above diagram.
+    /// There are a total of 7 unguarded cells, so we return 7.
+    ///
+    /// Example 2:
+    /// Input: m = 3, n = 3, guards = [[1,1]], 
+    ///        walls = [[0,1],[1,0],[2,1],[1,2]]
+    /// Output: 4
+    /// Explanation: The unguarded cells are shown in green in the above 
+    /// diagram.
+    /// There are a total of 4 unguarded cells, so we return 4.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= m, n <= 10^5
+    /// 2. 2 <= m * n <= 10^5
+    /// 3. 1 <= guards.length, walls.length <= 5 * 10^4
+    /// 4. 2 <= guards.length + walls.length <= m * n
+    /// 5. guards[i].length == walls[j].length == 2
+    /// 6. 0 <= rowi, rowj < m
+    /// 7. 0 <= coli, colj < n
+    /// 8. All the positions in guards and walls are unique.
+    /// </summary>
+    int countUnguarded(int m, int n, vector<vector<int>>& guards, vector<vector<int>>& walls);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

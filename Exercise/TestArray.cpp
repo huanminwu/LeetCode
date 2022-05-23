@@ -7286,8 +7286,76 @@ void TestLeetCode2245(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2256(void)
+{
+    Logger::WriteMessage("Test Leet Code 2256");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 5, 3, 9, 5, 3 };
+    int result = leetCode.minimumAverageDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0 };
+    result = leetCode.minimumAverageDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2270(void)
+{
+    Logger::WriteMessage("Test Leet Code 2270");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 10,4,-8,7 };
+    int result = leetCode.waysToSplitArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3,1,0 };
+    result = leetCode.waysToSplitArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2261(void)
+{
+    Logger::WriteMessage("Test Leet Code 2261");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 3, 3, 2, 2 };
+    int k = 2;
+    int p = 2;
+    int result = leetCode.countDistinct(nums, k, p);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; p = " + to_string(p) + "; result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    k = 4;
+    p = 1;
+    result = leetCode.countDistinct(nums, k, p);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; p = " + to_string(p) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2260(void)
+{
+    Logger::WriteMessage("Test Leet Code 2260");
+    LeetCodeArray leetCode;
+    vector<int> cards = { 3, 4, 2, 3, 4, 7 };
+    int result = leetCode.minimumCardPickup(cards);
+    Logger::WriteMessage(cards);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    cards = { 1,0,5,3 };
+    result = leetCode.minimumCardPickup(cards);
+    Logger::WriteMessage(cards);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2260();
+    TestLeetCode2261();
+    TestLeetCode2270();
+    TestLeetCode2256();
     TestLeetCode2245();
     TestLeetCode2229();
     TestLeetCode2225();

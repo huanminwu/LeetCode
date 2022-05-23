@@ -5176,6 +5176,153 @@ public:
     /// 2. 1 <= beans[i] <= 10^5
     /// </summary>
     long long minimumRemoval(vector<int>& beans);
+
+    /// <summary>
+    /// Leet Code 2263. Make Array Non-decreasing or Non-increasing
+    ///                                                                                      
+    /// Hard
+    /// 
+    /// You are given a 0-indexed integer array nums. In one operation, you 
+    /// can:
+    ///
+    /// Choose an index i in the range 0 <= i < nums.length
+    /// Set nums[i] to nums[i] + 1 or nums[i] - 1
+    /// Return the minimum number of operations to make nums non-decreasing 
+    /// or non-increasing.
+    /// 
+    /// Example 1:
+    /// Input: nums = [3,2,4,5,0]
+    /// Output: 4
+    /// Explanation:
+    /// One possible way to turn nums into non-increasing order is to:
+    /// - Add 1 to nums[1] once so that it becomes 3.
+    /// - Subtract 1 from nums[2] once so it becomes 3.
+    /// - Subtract 1 from nums[3] twice so it becomes 3.
+    /// After doing the 4 operations, nums becomes [3,3,3,3,0] which is in 
+    /// non-increasing order.
+    /// Note that it is also possible to turn nums into [4,4,4,4,0] in 4 
+    /// operations.
+    /// It can be proven that 4 is the minimum number of operations needed.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,2,3,4]
+    /// Output: 0
+    /// Explanation: nums is already in non-decreasing order, so no operations 
+    /// are needed and we return 0.
+    ///
+    /// Example 3:
+    /// Input: nums = [0]
+    /// Output: 0
+    /// Explanation: nums is already in non-decreasing order, so no operations 
+    /// are needed and we return 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1000
+    /// 2. 0 <= nums[i] <= 1000
+    /// </summary>
+    int convertArray(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2250. Count Number of Rectangles Containing Each Point
+    ///                                                           
+    /// Medium
+    /// 
+    /// You are given a 2D integer array rectangles where rectangles[i] = 
+    /// [li, hi] indicates that ith rectangle has a length of li and a height 
+    /// of hi. You are also given a 2D integer array points where points[j] = 
+    /// [xj, yj] is a point with coordinates (xj, yj).
+    ///
+    /// The ith rectangle has its bottom-left corner point at the 
+    /// coordinates (0, 0) and its top-right corner point at (li, hi).
+    ///
+    /// Return an integer array count of length points.length where count[j] 
+    /// is the number of rectangles that contain the jth point.
+    ///
+    /// The ith rectangle contains the jth point if 0 <= xj <= li and 
+    /// 0 <= yj <= hi. Note that points that lie on the edges of a rectangle 
+    /// are also considered to be contained by that rectangle.
+    ///
+    /// Example 1:
+    /// Input: rectangles = [[1,2],[2,3],[2,5]], points = [[2,1],[1,4]]
+    /// Output: [2,1]
+    /// Explanation: 
+    /// The first rectangle contains no points.
+    /// The second rectangle contains only the point (2, 1).
+    /// The third rectangle contains the points (2, 1) and (1, 4).
+    /// The number of rectangles that contain the point (2, 1) is 2.
+    /// The number of rectangles that contain the point (1, 4) is 1.
+    /// Therefore, we return [2, 1].
+    ///
+    /// Example 2:
+    /// Input: rectangles = [[1,1],[2,2],[3,3]], points = [[1,3],[1,1]]
+    /// Output: [1,3]
+    /// Explanation:
+    /// The first rectangle contains only the point (1, 1).
+    /// The second rectangle contains only the point (1, 1).
+    /// The third rectangle contains the points (1, 3) and (1, 1).
+    /// The number of rectangles that contain the point (1, 3) is 1.
+    /// The number of rectangles that contain the point (1, 1) is 3.
+    ///
+    /// Therefore, we return [1, 3].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= rectangles.length, points.length <= 5 * 10^4
+    /// 2. rectangles[i].length == points[j].length == 2
+    /// 3. 1 <= li, xj <= 10^9
+    /// 4. 1 <= hi, yj <= 100
+    /// 5. All the rectangles are unique.
+    /// 6. All the points are unique.
+    /// </summary>
+    vector<int> countRectangles(vector<vector<int>>& rectangles, vector<vector<int>>& points);
+
+
+    /// <summary>
+    /// Leet Code 2279. Maximum Bags With Full Capacity of Rocks
+    ///                                                           
+    /// Medium
+    /// 
+    /// You have n bags numbered from 0 to n - 1. You are given two 0-indexed 
+    /// integer arrays capacity and rocks. The ith bag can hold a maximum of 
+    /// capacity[i] rocks and currently contains rocks[i] rocks. You are also 
+    /// given an integer additionalRocks, the number of additional rocks you 
+    /// can place in any of the bags.
+    ///
+    /// Return the maximum number of bags that could have full capacity after 
+    /// placing the additional rocks in some bags.
+    ///
+    /// Example 1:
+    /// Input: capacity = [2,3,4,5], rocks = [1,2,4,4], additionalRocks = 2
+    /// Output: 3
+    /// Explanation:
+    /// Place 1 rock in bag 0 and 1 rock in bag 1.
+    /// The number of rocks in each bag are now [2,3,4,4].
+    /// Bags 0, 1, and 2 have full capacity.
+    /// There are 3 bags at full capacity, so we return 3.
+    /// It can be shown that it is not possible to have more than 3 bags at 
+    /// full capacity.
+    /// Note that there may be other ways of placing the rocks that result in 
+    /// an answer of 3.
+    ///
+    /// Example 2:
+    /// Input: capacity = [10,2,2], rocks = [2,2,0], additionalRocks = 100
+    /// Output: 3
+    /// Explanation:
+    /// Place 8 rocks in bag 0 and 2 rocks in bag 2.
+    /// The number of rocks in each bag are now [10,2,2].
+    /// Bags 0, 1, and 2 have full capacity.
+    /// There are 3 bags at full capacity, so we return 3.
+    /// It can be shown that it is not possible to have more than 3 bags at 
+    /// full capacity.
+    /// Note that we did not use all of the additional rocks.
+    /// 
+    /// Constraints:
+    /// 1. n == capacity.length == rocks.length
+    /// 2. 1 <= n <= 5 * 10^4
+    /// 3. 1 <= capacity[i] <= 10^9
+    /// 4. 0 <= rocks[i] <= capacity[i]
+    /// 5. 1 <= additionalRocks <= 10^9
+    /// </summary>
+    int maximumBags(vector<int>& capacity, vector<int>& rocks, int additionalRocks);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

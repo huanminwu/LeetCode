@@ -2323,5 +2323,37 @@ public:
     /// 2. 1 <= tasks[i] <= 10^9
     /// </summary>
     int minimumRounds(vector<int>& tasks);
+
+    /// <summary>
+    /// Leet Code 2248. Intersection of Multiple Arrays
+    ///                                                                                      
+    /// Easy
+    /// 
+    /// Given a 2D integer array nums where nums[i] is a non-empty array of 
+    /// distinct positive integers, return the list of integers that are 
+    /// present	in each array of nums sorted in ascending order.
+    /// 
+    /// Example 1:
+    /// Input: nums = [[3,1,2,4,5],[1,2,3,4],[3,4,5,6]]
+    /// Output: [3,4]
+    /// Explanation: 
+    /// The only integers present in each of nums[0] = [3,1,2,4,5], nums[1] = 
+    /// [1,2,3,4], and nums[2] = [3,4,5,6] are 3 and 4, so we return [3,4].
+    ///
+    /// Example 2:
+    /// Input: nums = [[1,2,3],[4,5,6]]
+    /// Output: []
+    /// Explanation: 
+    /// There does not exist any integer present both in nums[0] and nums[1], 
+    /// so we return an empty list [].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1000
+    /// 2. 1 <= sum(nums[i].length) <= 1000
+    /// 3. 1 <= nums[i][j] <= 1000
+    /// 4. All the values of nums[i] are unique.
+    /// </summary>
+    vector<int> intersection(vector<vector<int>>& nums);
+
 };
 #endif  // LeetCodeHashtable

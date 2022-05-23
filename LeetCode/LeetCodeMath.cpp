@@ -14079,3 +14079,145 @@ long long LeetCodeMath::waysToBuyPensPencils(int total, int cost1, int cost2)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2249. Count Lattice Points Inside a Circle
+///                                                                                      
+/// Medium
+/// 
+/// Given a 2D integer array circles where circles[i] = [xi, yi, ri] 
+/// represents the center (xi, yi) and radius ri of the ith circle 
+/// drawn on a grid, return the number of lattice points that are 
+/// present inside at least one circle.
+///
+/// Note:
+///
+/// A lattice point is a point with integer coordinates.
+/// Points that lie on the circumference of a circle are also 
+/// considered to be inside it.
+/// 
+/// Example 1:
+/// Input: circles = [[2,2,1]]
+/// Output: 5
+/// Explanation:
+/// The figure above shows the given circle.
+/// The lattice points present inside the circle are (1, 2), (2, 1), 
+/// (2, 2), (2, 3), and (3, 2) and are shown in green.
+/// Other points such as (1, 1) and (1, 3), which are shown in red, 
+/// are not considered inside the circle.
+/// Hence, the number of lattice points present inside at least one 
+/// circle is 5.
+///
+/// Example 2:
+/// Input: circles = [[2,2,2],[3,4,1]]
+/// Output: 16
+/// Explanation:
+/// The figure above shows the given circles.
+/// There are exactly 16 lattice points which are present inside at least 
+/// one circle. 
+/// Some of them are (0, 2), (2, 0), (2, 4), (3, 2), and (4, 4).
+/// 
+/// Constraints:
+/// 1. 1 <= circles.length <= 200
+/// 2. circles[i].length == 3
+/// 3. 1 <= xi, yi <= 100
+/// 4. 1 <= ri <= min(xi, yi)
+/// </summary>
+int LeetCodeMath::countLatticePoints(vector<vector<int>>& circles)
+{
+    int min_X = INT_MAX, min_Y = INT_MAX;
+    int max_X = INT_MIN, max_Y = INT_MIN;
+    for (size_t i = 0; i < circles.size(); i++)
+    {
+        min_X = min(circles[i][0] - circles[i][2], min_X);
+        max_X = max(circles[i][0] + circles[i][2], max_X);
+        min_Y = min(circles[i][1] - circles[i][2], min_Y);
+        max_Y = max(circles[i][1] + circles[i][2], max_Y);
+    }
+    int result = 0;
+    for (int x = min_X; x <= max_X; x++)
+    {
+        for (int y = min_Y; y <= max_Y; y++)
+        {
+            for (size_t i = 0; i < circles.size(); i++)
+            {
+                int d =
+                    (circles[i][0] - x) * (circles[i][0] - x) +
+                    (circles[i][1] - y) * (circles[i][1] - y);
+                int r = circles[i][2] * circles[i][2];
+                if (d <= r)
+                {
+                    result++;
+                    break;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2280. Minimum Lines to Represent a Line Chart
+///                                                           
+/// Medium
+/// 
+/// You are given a 2D integer array stockPrices where stockPrices[i] = 
+/// [dayi, pricei] indicates the price of the stock on day dayi is pricei. 
+/// A line chart is created from the array by plotting the points on an 
+/// XY plane with the X-axis representing the day and the Y-axis 
+/// representing the price and connecting adjacent points. One such 
+/// example is shown below:
+/// 
+/// Return the minimum number of lines needed to represent the line chart.
+/// 
+/// Example 1:
+/// Input: stockPrices = [[1,7],[2,6],[3,5],[4,4],[5,4],[6,3],[7,2],[8,1]]
+/// Output: 3
+/// Explanation:
+/// The diagram above represents the input, with the X-axis representing 
+/// the day and Y-axis representing the price.
+/// The following 3 lines can be drawn to represent the line chart:
+/// - Line 1 (in red) from (1,7) to (4,4) passing through (1,7), (2,6), 
+///  (3,5), and (4,4).
+/// - Line 2 (in blue) from (4,4) to (5,4).
+/// - Line 3 (in green) from (5,4) to (8,1) passing through (5,4), (6,3), 
+///   (7,2), and (8,1).
+/// It can be shown that it is not possible to represent the line chart 
+/// using less than 3 lines.
+///
+/// Example 2:
+/// Input: stockPrices = [[3,4],[1,2],[7,8],[2,3]]
+/// Output: 1
+/// Explanation:
+/// As shown in the diagram above, the line chart can be represented with 
+/// a single line.
+///
+/// Constraints:
+/// 1. 1 <= stockPrices.length <= 10^5
+/// 2. stockPrices[i].length == 2
+/// 3. 1 <= dayi, pricei <= 109
+/// 4. All dayi are distinct.
+/// </summary>
+int LeetCodeMath::minimumLinesII(vector<vector<int>>& stockPrices)
+{
+    sort(stockPrices.begin(), stockPrices.end());
+    long long prev_day_gap = 0, prev_price_gap = 0, day_gap = 0, price_gap = 0;
+    int result = 0;
+    if (stockPrices.size() > 1) result++;
+    for (size_t i = 1; i < stockPrices.size(); i++)
+    {
+        day_gap = (long long)stockPrices[i][0] - (long long)stockPrices[i - 1][0];
+        price_gap = (long long)stockPrices[i][1] - (long long)stockPrices[i - 1][1];
+        if (i > 1)
+        {
+            if (price_gap * prev_day_gap != prev_price_gap * day_gap)
+            {
+                result++;
+            }
+        }
+        prev_day_gap = day_gap;
+        prev_price_gap = price_gap;
+    }
+    return result;
+}
+
