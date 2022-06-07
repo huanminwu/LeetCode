@@ -19136,4 +19136,293 @@ int LeetCodeString::percentageLetter(string s, char letter)
     return (count * 100) / s.size();
 }
 
+/// <summary>
+/// Leet Code 2283. Check if Number Has Equal Digit Count and Digit Value
+///                                                           
+/// Easy
+/// 
+/// You are given a 0-indexed string num of length n consisting of digits.
+///
+/// Return true if for every index i in the range 0 <= i < n, the digit i 
+/// occurs num[i] times in num, otherwise return false.
+///
+///
+/// Example 1:
+/// Input: num = "1210"
+/// Output: true
+/// Explanation:
+/// num[0] = '1'. The digit 0 occurs once in num.
+/// num[1] = '2'. The digit 1 occurs twice in num.
+/// num[2] = '1'. The digit 2 occurs once in num.
+/// num[3] = '0'. The digit 3 occurs zero times in num.
+/// The condition holds true for every index in "1210", so return true.
+///
+/// Example 2:
+/// Input: num = "030"
+/// Output: false
+/// Explanation:
+/// num[0] = '0'. The digit 0 should occur zero times, but actually occurs 
+/// twice in num.
+/// num[1] = '3'. The digit 1 should occur three times, but actually 
+/// occurs zero times in num.
+/// num[2] = '0'. The digit 2 occurs zero times in num.
+/// The indices 0 and 1 both violate the condition, so return false.
+/// 
+/// Constraints:
+/// 1. n == num.length
+/// 2. 1 <= n <= 10
+/// 3. num consists of digits.
+/// </summary>
+bool LeetCodeString::digitCount(string num)
+{
+    vector<int> count(10);
+    for (size_t i = 0; i < num.size(); i++)
+    {
+        count[num[i] - '0']++;
+    }
+    for (size_t i = 0; i < num.size(); i++)
+    {
+        if (count[i] != num[i] - '0')
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet Code 2287. Rearrange Characters to Make Target String
+///                                                           
+/// Easy
+/// 
+/// You are given two 0-indexed strings s and target. You can take some 
+/// letters from s and rearrange them to form new strings.
+///
+/// Return the maximum number of copies of target that can be formed by 
+/// taking letters from s and rearranging them.
+/// 
+/// Example 1:
+/// Input: s = "ilovecodingonleetcode", target = "code"
+/// Output: 2
+/// Explanation:
+/// For the first copy of "code", take the letters at indices 4, 5, 6, 
+/// and 7.
+/// For the second copy of "code", take the letters at indices 17, 18, 19, 
+/// and 20.
+/// The strings that are formed are "ecod" and "code" which can both be 
+/// rearranged into "code".
+/// We can make at most two copies of "code", so we return 2.
+///
+/// Example 2:
+/// Input: s = "abcba", target = "abc"
+/// Output: 1
+/// Explanation:
+/// We can make one copy of "abc" by taking the letters at indices 0, 1, 
+/// and 2.
+/// We can make at most one copy of "abc", so we return 1.
+/// Note that while there is an extra 'a' and 'b' at indices 3 and 4, we 
+/// cannot reuse the letter 'c' at index 2, so we cannot make a second 
+/// copy of "abc".
+///
+/// Example 3:
+/// Input: s = "abbaccaddaeea", target = "aaaaa"
+/// Output: 1
+/// Explanation:
+/// We can make one copy of "aaaaa" by taking the letters at 
+/// indices 0, 3, 6, 9, and 12.
+/// We can make at most one copy of "aaaaa", so we return 1.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 100
+/// 2. 1 <= target.length <= 10
+/// 3. s and target consist of lowercase English letters.
+/// </summary>
+int LeetCodeString::rearrangeCharacters(string s, string target)
+{
+    vector<int> s_count(26);
+    vector<int> t_count(26);
+    for (char ch : s) s_count[ch - 'a']++;
+    for (char ch : target) t_count[ch - 'a']++;
+    int result = INT_MAX;
+    for (size_t i = 0; i < t_count.size(); i++)
+    {
+        if (t_count[i] == 0) continue;
+        result = min(result, s_count[i] / t_count[i]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2288. Apply Discount to Prices
+///                                                           
+/// Medium
+/// 
+/// A sentence is a string of single-space separated words where each 
+/// word can contain digits, lowercase letters, and the dollar sign '$'. 
+/// A word represents a price if it is a non-negative real number 
+/// preceded by a dollar sign.
+///
+/// For example, "$100", "$23", and "$6.75" represent prices while 
+/// "100", "$", and "2$3" do not.
+/// You are given a string sentence representing a sentence and an integer 
+/// discount. For each word representing a price, apply a discount of 
+/// discount% on the price and update the word in the sentence. All 
+/// updated prices should be represented with exactly two decimal places.
+///
+/// Return a string representing the modified sentence.
+/// 
+/// Example 1:
+/// Input: sentence = "there are $1 $2 and 5$ candies in the shop", 
+/// discount = 50
+/// Output: "there are $0.50 $1.00 and 5$ candies in the shop"
+/// Explanation: 
+/// The words which represent prices are "$1" and "$2". 
+/// - A 50% discount on "$1" yields "$0.50", so "$1" is replaced by 
+/// "$0.50".
+/// - A 50% discount on "$2" yields "$1". Since we need to have 
+/// exactly 2 decimal places after a price, we replace "$2" with "$1.00".
+///
+/// Example 2:
+/// Input: sentence = "1 2 $3 4 $5 $6 7 8$ $9 $10$", discount = 100
+/// Output: "1 2 $0.00 4 $0.00 $0.00 7 8$ $0.00 $10$"
+/// Explanation: 
+/// Applying a 100% discount on any price will result in 0.
+/// The words representing prices are "$3", "$5", "$6", and "$9".
+/// Each of them is replaced by "$0.00".
+/// 
+/// Constraints:
+/// 1. 1 <= sentence.length <= 10^5
+/// 2. sentence consists of lowercase English letters, digits, ' ', 
+///    and '$'.
+/// 3. sentence does not have leading or trailing spaces.
+/// 4. All words in sentence are separated by a single space.
+/// 5. All prices will be positive integers without leading zeros.
+/// 6. All prices will have at most 10 digits.
+/// 7. 0 <= discount <= 100
+/// </summary>
+string LeetCodeString::discountPrices(string sentence, int discount)
+{
+    string result;
+    string word;
+    for (size_t i = 0; i <= sentence.size(); i++)
+    {
+        if (i == sentence.size() || isspace(sentence[i]))
+        {
+            if (word[0] == '$')
+            {
+                string amount = word.substr(1);
+                long long ld = 0;
+                for (size_t i = 0; i < amount.size(); i++)
+                {
+                    if (!isdigit(amount[i]))
+                    {
+                        ld = -1;
+                        break;
+                    }
+                    ld = ld * 10 + amount[i] - '0';
+                }
+                if (amount.empty()) ld = -1;
+                if (ld != -1)
+                {
+                    ld = (long long)(ld * (100 - (long long)discount));
+                    string decimal;
+                    if (ld % 100 >= 10) decimal = to_string(ld % 100);
+                    else
+                    {
+                        decimal = "0" + to_string(ld % 100);
+                    }
+                    word = "$" + to_string(ld / 100) + "." + decimal;
+                }
+            }
+            if (!result.empty()) result.push_back(' ');
+            result.append(word);
+            word.clear();
+        }
+        else
+        {
+            word.push_back(sentence[i]);
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 2284. Sender With Largest Word Count
+///                                                           
+/// Medium
+/// 
+/// You have a chat log of n messages. You are given two string arrays 
+/// messages and senders where messages[i] is a message sent by senders[i].
+///
+/// A message is list of words that are separated by a single space with 
+/// no leading or trailing spaces. The word count of a sender is the total 
+/// number of words sent by the sender. Note that a sender may send more 
+/// than one message.
+///
+/// Return the sender with the largest word count. If there is more than 
+/// one sender with the largest word count, return the one with the 
+/// lexicographically largest name.
+///
+/// Note:
+/// Uppercase letters come before lowercase letters in lexicographical 
+/// order.
+/// "Alice" and "alice" are distinct.
+/// 
+/// Example 1:
+/// Input: messages = ["Hello userTwooo","Hi userThree","Wonderful day 
+/// Alice","Nice day userThree"], senders = ["Alice","userTwo",
+/// "userThree","Alice"]
+/// Output: "Alice"
+/// Explanation: Alice sends a total of 2 + 3 = 5 words.
+/// userTwo sends a total of 2 words.
+/// userThree sends a total of 3 words.
+/// Since Alice has the largest word count, we return "Alice".
+///
+/// Example 2:
+/// Input: messages = ["How is leetcode for everyone","Leetcode is useful 
+/// for practice"], senders = ["Bob","Charlie"]
+/// Output: "Charlie"
+/// Explanation: Bob sends a total of 5 words.
+/// Charlie sends a total of 5 words.
+/// Since there is a tie for the largest word count, we return the sender 
+/// with the lexicographically larger name, Charlie.
+///
+/// Constraints:
+/// 1. n == messages.length == senders.length
+/// 2. 1 <= n <= 10^4
+/// 3. 1 <= messages[i].length <= 100
+/// 4. 1 <= senders[i].length <= 10
+/// 5. messages[i] consists of uppercase and lowercase English letters 
+///    and ' '.
+/// 6. All the words in messages[i] are separated by a single space.
+/// 7. messages[i] does not have leading or trailing spaces.
+/// 8. senders[i] consists of uppercase and lowercase English letters only.
+/// </summary>
+string LeetCodeString::largestWordCount(vector<string>& messages, vector<string>& senders)
+{
+    unordered_map<string, int> word_count;
+    for (size_t i = 0; i < messages.size(); i++)
+    {
+        int count = 1;
+        for (size_t j = 0; j < messages[i].size(); j++)
+        {
+            if (isspace(messages[i][j])) count++;
+        }
+        word_count[senders[i]] += count;
+    }
+    int words = 0;
+    string result;
+    for (auto itr : word_count)
+    {
+        if ((itr.second > words) || ((itr.second == words) && (itr.first > result)))
+        {
+            words = itr.second;
+            result = itr.first;
+        }
+    }
+    return result;
+}
+
+
 #pragma endregion

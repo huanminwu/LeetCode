@@ -5368,8 +5368,90 @@ void TestLeetCode2278(void)
     Logger::WriteMessage("s = " + s + "; letter = " + string(1, letter) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2283(void)
+{
+    Logger::WriteMessage("Test Leet Code 2283");
+    LeetCodeString leetCode;
+    string num = "1210";
+    bool result = leetCode.digitCount(num);
+    Logger::WriteMessage("num = " + num  + "; result = " + (string)(result ? "true" :"false"));
+
+    num = "030";
+    result = leetCode.digitCount(num);
+    Logger::WriteMessage("num = " + num + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2287(void)
+{
+    Logger::WriteMessage("Test Leet Code 2287");
+    LeetCodeString leetCode;
+    string s = "ilovecodingonleetcode";
+    string target = "code";
+    int result = leetCode.rearrangeCharacters(s, target);
+    Logger::WriteMessage("s = " + s + + "; target = " + target + "; result = " + to_string(result));
+
+    s = "abcba";
+    target = "abc";
+    result = leetCode.rearrangeCharacters(s, target);
+    Logger::WriteMessage("s = " + s + +"; target = " + target + "; result = " + to_string(result));
+
+    s = "abbaccaddaeea";
+    target = "aaaaa";
+    result = leetCode.rearrangeCharacters(s, target);
+    Logger::WriteMessage("s = " + s + +"; target = " + target + "; result = " + to_string(result));
+}
+
+void TestLeetCode2284(void)
+{
+    Logger::WriteMessage("Test Leet Code 2284");
+    LeetCodeString leetCode;
+    vector<string> messages =
+    {
+        "Hello userTwooo", "Hi userThree", "Wonderful day Alice", "Nice day userThree"
+    };
+    vector<string> senders = { "Alice", "userTwo", "userThree", "Alice" };
+    string result = leetCode.largestWordCount(messages, senders);
+    Logger::WriteMessage(messages);
+    Logger::WriteMessage(senders);
+    Logger::WriteMessage("result = " + result);
+
+    messages =
+    {
+        "How is leetcode for everyone","Leetcode is useful for practice"
+    };
+    senders = { "Bob","Charlie" };
+    result = leetCode.largestWordCount(messages, senders);
+    Logger::WriteMessage(messages);
+    Logger::WriteMessage(senders);
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode2288(void)
+{
+    Logger::WriteMessage("Test Leet Code 2288");
+    LeetCodeString leetCode;
+    string sentence = "there are $1 $2 and 5$ candies in the shop";
+    int discount = 50;
+    string result = leetCode.discountPrices(sentence, discount);
+    Logger::WriteMessage("sentence = " + sentence + +"; discount = " + to_string(discount) + "; result = " + result);
+
+    sentence = "1 2 $3 4 $5 $6 7 8$ $9 $10$";
+    discount = 100;
+    result = leetCode.discountPrices(sentence, discount);
+    Logger::WriteMessage("sentence = " + sentence + +"; discount = " + to_string(discount) + "; result = " + result);
+
+    sentence = "apple $2 lb";
+    discount = 49;
+    result = leetCode.discountPrices(sentence, discount);
+    Logger::WriteMessage("sentence = " + sentence + +"; discount = " + to_string(discount) + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2284();
+    TestLeetCode2288();
+    TestLeetCode2287();
+    TestLeetCode2283();
     TestLeetCode2278();
     TestLeetCode2262();
     TestLeetCode2272();

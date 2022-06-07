@@ -7350,8 +7350,24 @@ void TestLeetCode2260(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2293(void)
+{
+    Logger::WriteMessage("Test Leet Code 2293");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 3, 5, 2, 4, 8, 2, 2 };
+    int result = leetCode.minMaxGame(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3 };
+    result = leetCode.minMaxGame(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2293();
     TestLeetCode2260();
     TestLeetCode2261();
     TestLeetCode2270();

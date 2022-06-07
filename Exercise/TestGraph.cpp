@@ -4484,8 +4484,23 @@ void TestLeetCode2257(void)
     Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2290(void)
+{
+    Logger::WriteMessage("Test Leet Code 2290");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid = { {0, 1, 1},{1, 1, 0},{1, 1, 0} };
+    int result = leetCode.minimumObstacles(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {0, 1, 0, 0, 0},{0, 1, 0, 1, 0},{0, 0, 0, 1, 0} };
+    result = leetCode.minimumObstacles(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2290();
     TestLeetCode2257();
     TestLeetCode2258();
     TestLeetCode2247();

@@ -1224,6 +1224,160 @@ public:
     /// 2. directions[i] is either 'L', 'R', or 'S'.
     /// </summary>
     int countCollisions(string directions);
+
+    /// <summary>
+    /// Leet Code 2281. Sum of Total Strength of Wizards
+    ///                                                           
+    /// Hard
+    /// 
+    /// As the ruler of a kingdom, you have an army of wizards at your command.
+    ///
+    /// You are given a 0-indexed integer array strength, where strength[i] 
+    /// denotes the strength of the ith wizard. For a contiguous group of 
+    /// wizards (i.e. the wizards' strengths form a subarray of strength), 
+    /// the total strength is defined as the product of the following two 
+    /// values:
+    ///
+    /// The strength of the weakest wizard in the group.
+    /// The total of all the individual strengths of the wizards in the group.
+    /// Return the sum of the total strengths of all contiguous groups of 
+    /// wizards. Since the answer may be very large, return it modulo 10^9 + 7.
+    ///
+    /// A subarray is a contiguous non-empty sequence of elements within an 
+    /// array.
+    /// 
+    /// Example 1:
+    /// Input: strength = [1,3,1,2]
+    /// Output: 44
+    /// Explanation: The following are all the contiguous groups of wizards:
+    /// - [1] from [1,3,1,2] has a total strength of 
+    ///   min([1]) * sum([1]) = 1 * 1 = 1
+    /// - [3] from [1,3,1,2] has a total strength of 
+    ///   min([3]) * sum([3]) = 3 * 3 = 9
+    /// - [1] from [1,3,1,2] has a total strength of 
+    ///   min([1]) * sum([1]) = 1 * 1 = 1
+    /// - [2] from [1,3,1,2] has a total strength of 
+    ///   min([2]) * sum([2]) = 2 * 2 = 4
+    /// - [1,3] from [1,3,1,2] has a total strength of 
+    ///   min([1,3]) * sum([1,3]) = 1 * 4 = 4
+    /// - [3,1] from [1,3,1,2] has a total strength of 
+    ///   min([3,1]) * sum([3,1]) = 1 * 4 = 4
+    /// - [1,2] from [1,3,1,2] has a total strength of 
+    ///   min([1,2]) * sum([1,2]) = 1 * 3 = 3
+    /// - [1,3,1] from [1,3,1,2] has a total strength of 
+    ///   min([1,3,1]) * sum([1,3,1]) = 1 * 5 = 5
+    /// - [3,1,2] from [1,3,1,2] has a total strength of 
+    ///   min([3,1,2]) * sum([3,1,2]) = 1 * 6 = 6
+    /// - [1,3,1,2] from [1,3,1,2] has a total strength of 
+    ///   min([1,3,1,2]) * sum([1,3,1,2]) = 1 * 7 = 7
+    /// The sum of all the total strengths is 1 + 9 + 1 + 4 + 4 + 4 + 3 + 
+    /// 5 + 6 + 7 = 44.
+    ///
+    /// Example 2:
+    /// Input: strength = [5,4,6]
+    /// Output: 213
+    /// Explanation: The following are all the contiguous groups of wizards: 
+    /// - [5] from [5,4,6] has a total strength of 
+    ///   min([5]) * sum([5]) = 5 * 5 = 25
+    /// - [4] from [5,4,6] has a total strength of 
+    ///   min([4]) * sum([4]) = 4 * 4 = 16
+    /// - [6] from [5,4,6] has a total strength of 
+    ///   min([6]) * sum([6]) = 6 * 6 = 36
+    /// - [5,4] from [5,4,6] has a total strength of 
+    ///   min([5,4]) * sum([5,4]) = 4 * 9 = 36
+    /// - [4,6] from [5,4,6] has a total strength of 
+    ///   min([4,6]) * sum([4,6]) = 4 * 10 = 40
+    /// - [5,4,6] from [5,4,6] has a total strength of 
+    ///   min([5,4,6]) * sum([5,4,6]) = 4 * 15 = 60
+    /// The sum of all the total strengths is 25 + 16 + 
+    /// 36 + 36 + 40 + 60 = 213.
+    ///
+    /// Constraints:
+    /// 1. 1 <= strength.length <= 10^5
+    /// 2. 1 <= strength[i] <= 10^9
+    /// </summary>
+    int totalStrength(vector<int>& strength);
+
+    /// <summary>
+    /// Leet Code 2289. Steps to Make Array Non-decreasing
+    ///                                                           
+    /// Medium
+    /// 
+    /// You are given a 0-indexed integer array nums. In one step, remove all 
+    /// elements nums[i] where nums[i - 1] > nums[i] for all 
+    /// 0 < i < nums.length.
+    /// Return the number of steps performed until nums becomes a non-
+    /// decreasing array.
+    /// 
+    /// Example 1:
+    /// Input: nums = [5,3,4,4,7,3,6,11,8,5,11]
+    /// Output: 3
+    /// Explanation: The following are the steps performed:
+    /// - Step 1: [5,3,4,4,7,3,6,11,8,5,11] becomes [5,4,4,7,6,11,11]
+    /// - Step 2: [5,4,4,7,6,11,11] becomes [5,4,7,11,11]
+    /// - Step 3: [5,4,7,11,11] becomes [5,7,11,11]
+    /// [5,7,11,11] is a non-decreasing array. Therefore, we return 3.
+    ///
+    /// Example 2:
+    /// Input: nums = [4,5,7,7,13]
+    /// Output: 0
+    /// Explanation: nums is already a non-decreasing array. Therefore, 
+    /// we return 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    int totalSteps(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2282. Number of People That Can Be Seen in a Grid
+    ///                                                           
+    /// Medium
+    /// 
+    /// You are given an m x n 0-indexed 2D array of positive integers 
+    /// heights where heights[i][j] is the height of the person standing at 
+    /// position (i, j).
+    ///
+    /// A person standing at position (row1, col1) can see a person standing 
+    /// at position (row2, col2) if:
+    ///
+    /// The person at (row2, col2) is to the right or below the person at 
+    /// (row1, col1). More formally, this means that either row1 == row2 
+    /// and col1 < col2 or row1 < row2 and col1 == col2.
+    /// Everyone in between them is shorter than both of them.
+    /// Return an m x n 2D array of integers answer where answer[i][j] is 
+    /// the number of people that the person at position (i, j) can see.
+    ///
+    /// Example 1:
+    /// Input: heights = [[3,1,4,2,5]]
+    /// Output: [[2,1,2,1,0]]
+    /// Explanation:
+    /// - The person at (0, 0) can see the people at (0, 1) and (0, 2).
+    ///   Note that he cannot see the person at (0, 4) because the person 
+    ///   at (0, 2) is taller than him.
+    /// - The person at (0, 1) can see the person at (0, 2).
+    /// - The person at (0, 2) can see the people at (0, 3) and (0, 4).
+    /// - The person at (0, 3) can see the person at (0, 4).
+    /// - The person at (0, 4) cannot see anybody.
+    ///
+    /// Example 2:
+    /// Input: heights = [[5,1],[3,1],[4,1]] 
+    /// Output: [[3,1],[2,1],[1,0]]
+    /// Explanation:
+    /// - The person at (0, 0) can see the people at (0, 1), (1, 0) and (2, 0).
+    /// - The person at (0, 1) can see the person at (1, 1).
+    /// - The person at (1, 0) can see the people at (1, 1) and (2, 0).
+    /// - The person at (1, 1) can see the person at (2, 1).
+    /// - The person at (2, 0) can see the person at (2, 1).
+    /// - The person at (2, 1) cannot see anybody.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= heights.length <= 400
+    /// 2. 1 <= heights[i].length <= 400
+    /// 3. 1 <= heights[i][j] <= 10^5
+    /// </summary>
+    vector<vector<int>> seePeople(vector<vector<int>>& heights);
 #pragma endregion
 };
 #endif  // LeetCodeStack

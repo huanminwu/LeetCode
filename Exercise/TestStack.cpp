@@ -676,8 +676,62 @@ void TestLeetCode2211(void)
     Logger::WriteMessage("directions = " + directions + "; result = " + to_string(result));
 }
 
+void TestLeetCode2281(void)
+{
+    Logger::WriteMessage("Test Leet Code 2281");
+    LeetCodeStack leetCode;
+    vector<int> strength = { 1, 3, 1, 2 };
+    int result = leetCode.totalStrength(strength);
+    Logger::WriteMessage(strength);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    strength = { 5,4,6 };
+    result = leetCode.totalStrength(strength);
+    Logger::WriteMessage(strength);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    strength = { 1,2,3 };
+    result = leetCode.totalStrength(strength);
+    Logger::WriteMessage(strength);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode2289(void)
+{
+    Logger::WriteMessage("Test Leet Code 2289");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 5, 3, 4, 4, 7, 3, 6, 11, 8, 5, 11 };
+    int result = leetCode.totalSteps(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,5,7,7,13 };
+    result = leetCode.totalSteps(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2282(void)
+{
+    Logger::WriteMessage("Test Leet Code 2282");
+    LeetCodeStack leetCode;
+    vector<vector<int>> heights = { {3, 1, 4, 2, 5} };
+    vector<vector<int>> result = leetCode.seePeople(heights);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage(result);
+
+    heights = { {5, 1},{3, 1},{4, 1} };
+    result = leetCode.seePeople(heights);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode2282();
+    TestLeetCode2289();
+    TestLeetCode2281();
     TestLeetCode2211();
     TestLeetCode1696();
     TestLeetCode2104();

@@ -2840,8 +2840,27 @@ void TestLeetCode2279(void)
     Logger::WriteMessage("additionalRocks = " + to_string(additionalRocks) + "; result = " + to_string(result));
 }
 
+
+void TestLeetCode2285(void)
+{
+    Logger::WriteMessage("Test Leet Code 2285");
+    LeetCodeSort leetCode;
+    int n = 5;
+    vector<vector<int>> roads = { {0, 1},{1, 2},{2, 3},{0, 2},{1, 3},{2, 4} };
+    long long result = leetCode.maximumImportance(n, roads);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 5;
+    roads = { {0, 3},{2, 4},{1, 3} };
+    result = leetCode.maximumImportance(n, roads);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2285();
     TestLeetCode2279();
     TestLeetCode2250();
     TestLeetCode2263();
