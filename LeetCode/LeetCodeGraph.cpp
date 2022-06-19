@@ -14858,6 +14858,7 @@ bool LeetCodeGraph::checkContradictions(vector<vector<string>>& equations, vecto
             if ((variables.count(a) == 0) && (variables.count(b) == 0))
             {
                 variables[a] = 1.0;
+                if (a == b && (values[e] -  1) > diff) return true;
                 variables[b] = variables[a] / values[e];
             }
             else if (variables.count(a) == 0)
