@@ -3101,8 +3101,33 @@ void TestLeetCode2266(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2291(void)
+{
+    Logger::WriteMessage("Test Leet Code 2291");
+
+    LeetCodeDP leetCode;
+    vector<int> present = { 5, 4, 6, 2, 3 };
+    vector<int> future = { 8, 5, 4, 3, 5 };
+    int budget = 10;
+    int result = leetCode.maximumProfit(present, future, budget);
+    Logger::WriteMessage("budget = " + to_string(budget) + "; result = " + to_string(result));
+
+    present = { 2,2,5 };
+    future = { 3,4,10 };
+    budget = 6;
+    result = leetCode.maximumProfit(present, future, budget);
+    Logger::WriteMessage("budget = " + to_string(budget) + "; result = " + to_string(result));
+
+    present = { 3,3,12 };
+    future = { 0,3,15 };
+    budget = 10;
+    result = leetCode.maximumProfit(present, future, budget);
+    Logger::WriteMessage("budget = " + to_string(budget) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2291();
     TestLeetCode2266();
     TestLeetCode2267();
     TestLeetCode2263II();

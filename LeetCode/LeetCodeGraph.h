@@ -7685,6 +7685,49 @@ public:
     /// 6. grid[0][0] == grid[m - 1][n - 1] == 0
     /// </summary>
     int minimumObstacles(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 2307. Check for Contradictions in Equations
+    ///                                                           
+    /// Hard
+    /// 
+    /// You are given a 2D array of strings equations and an array of real 
+    /// numbers values, where equations[i] = [Ai, Bi] and values[i] means 
+    /// that Ai / Bi = values[i].
+    /// Determine if there exists a contradiction in the equations. Return 
+    /// true if there is a contradiction, or false otherwise.
+    ///
+    /// Note: When checking if two numbers are equal, check that their 
+    /// absolute difference is less than 10^-5.
+    ///
+    /// Example 1:
+    /// Input: equations = [["a","b"],["b","c"],["a","c"]], 
+    /// values = [3,0.5,1.5]
+    /// Output: false
+    /// Explanation:
+    /// The given equations are: a / b = 3, b / c = 0.5, a / c = 1.5
+    /// There are no contradictions in the equations. One possible assignment 
+    /// to satisfy all equations is:
+    /// a = 3, b = 1 and c = 2.
+    ///
+    /// Example 2:
+    /// Input: equations = [["le","et"],["le","code"],["code","et"]], 
+    /// values = [2,5,0.5]
+    /// Output: true
+    /// Explanation:
+    /// The given equations are: le / et = 2, le / code = 5, code / et = 0.5
+    /// Based on the first two equations, we get code / et = 0.4.
+    /// Since the third equation is code / et = 0.5, we get a contradiction.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= equations.length <= 500
+    /// 2. equations[i].length == 2 
+    /// 3. 1 <= Ai.length, Bi.length <= 5
+    /// 4. Ai, Bi consist of lower case English letters.
+    /// 5. equations.length == values.length
+    /// 6. 0.0 < values[i] <= 20.0
+    /// </summary>
+    bool checkContradictions(vector<vector<string>>& equations, vector<double>& values);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

@@ -19424,5 +19424,227 @@ string LeetCodeString::largestWordCount(vector<string>& messages, vector<string>
     return result;
 }
 
+/// <summary>
+/// Leet Code 2299. Strong Password Checker II
+///                                                           
+/// Easy
+/// 
+/// A password is said to be strong if it satisfies all the following 
+/// criteria:
+///
+/// It has at least 8 characters.
+/// It contains at least one lowercase letter.
+/// It contains at least one uppercase letter.
+/// It contains at least one digit.
+/// It contains at least one special character. The special characters 
+/// are the characters in the following string: "!@#$%^&*()-+".
+/// It does not contain 2 of the same character in adjacent positions 
+/// (i.e., "aab" violates this condition, but "aba" does not).
+/// Given a string password, return true if it is a strong password. 
+/// Otherwise, return false.
+/// 
+/// Example 1:
+/// Input: password = "IloveLe3tcode!"
+/// Output: true
+/// Explanation: The password meets all the requirements. Therefore, 
+/// we return true.
+///
+/// Example 2:
+/// Input: password = "Me+You--IsMyDream"
+/// Output: false
+/// Explanation: The password does not contain a digit and also 
+/// contains 2 of the same character in adjacent positions. Therefore, 
+/// we return false.
+///
+/// Example 3:
+/// Input: password = "1aB!"
+/// Output: false
+/// Explanation: The password does not meet the length requirement. 
+/// Therefore, we return false.
+/// 
+/// Constraints:
+/// 1. 1 <= password.length <= 100
+/// 2. password consists of letters, digits, and special characters: "!@#$%^&*()-+".
+/// </summary>
+bool LeetCodeString::strongPasswordCheckerII(string password)
+{
+    bool upper = false, lower = false, digit = false, special = false;
+    if (password.size() < 8) return false;
+    for (int i = 0; i < (int)password.size(); i++)
+    {
+        if (isupper(password[i]))
+        {
+            upper = true;
+        }
+        else if (islower(password[i]))
+        {
+            lower = true;
+        }
+        else if (isdigit(password[i]))
+        {
+            digit = true;
+        }
+        else
+        {
+            special = true;
+        }
+        if (i > 0 && password[i] == password[i - 1])
+        {
+            return false;
+        }
+    }
+    return upper && lower && digit && special;
+}
 
+
+/// <summary>
+/// Leet Code 2301. Match Substring After Replacement
+///                                                           
+/// Hard
+/// 
+/// You are given two strings s and sub. You are also given a 2D character 
+/// array mappings where mappings[i] = [oldi, newi] indicates that you may 
+/// replace any number of oldi characters of sub with newi. Each character 
+/// in sub cannot be replaced more than once.
+///
+/// Return true if it is possible to make sub a substring of s by 
+/// replacing zero or more characters according to mappings. Otherwise, 
+/// return false.
+///
+/// A substring is a contiguous non-empty sequence of characters within 
+/// a string.
+/// 
+/// Example 1:
+/// Input: s = "fool3e7bar", sub = "leet", 
+/// mappings = [["e","3"],["t","7"],["t","8"]]
+/// Output: true
+/// Explanation: Replace the first 'e' in sub with '3' and 't' in 
+/// sub with '7'.
+/// Now sub = "l3e7" is a substring of s, so we return true.
+///
+/// Example 2:
+/// Input: s = "fooleetbar", sub = "f00l", mappings = [["o","0"]]
+/// Output: false
+/// Explanation: The string "f00l" is not a substring of s and no 
+/// replacements can be made.
+/// Note that we cannot replace '0' with 'o'.
+///
+/// Example 3:
+/// Input: s = "Fool33tbaR", sub = "leetd", mappings = [["e","3"],
+/// ["t","7"],["t","8"],["d","b"],["p","b"]]
+/// Output: true
+/// Explanation: Replace the first and second 'e' in sub with '3' and 'd' 
+/// in sub with 'b'.
+/// Now sub = "l33tb" is a substring of s, so we return true.
+/// 
+/// Constraints:
+/// 1. 1 <= sub.length <= s.length <= 5000
+/// 2. 0 <= mappings.length <= 1000
+/// 3. mappings[i].length == 2
+/// 4. oldi != newi
+/// 5. s and sub consist of uppercase and lowercase English letters and 
+///    digits.
+/// 6. oldi and newi are either uppercase or lowercase English letters 
+///    or digits.
+/// </summary>
+bool LeetCodeString::matchReplacement(string s, string sub, vector<vector<char>>& mappings)
+{
+    unordered_map<char, unordered_set<char>> char_map;
+    for (size_t i = 0; i < mappings.size(); i++)
+    {
+        char_map[mappings[i][0]].insert(mappings[i][1]);
+    }
+
+    for (size_t i = 0; i + sub.size() <= s.size(); i++)
+    {
+        bool match = true;
+        for (size_t j = 0; j < sub.size(); j++)
+        {
+            if (s[i + j] != sub[j] && char_map[sub[j]].count(s[i + j]) == 0)
+            {
+                match = false;
+                break;
+            }
+        }
+        if (match == true) return true;
+    }
+    return false;
+}
+
+/// <summary>
+/// Leet Code 2306. Naming a Company
+///                                                           
+/// Hard
+/// 
+/// You are given an array of strings ideas that represents a list of 
+/// names to be used in the process of naming a company. The process 
+/// of naming a company is as follows:
+///
+/// Choose 2 distinct names from ideas, call them ideaA and ideaB.
+/// Swap the first letters of ideaA and ideaB with each other.
+/// If both of the new names are not found in the original ideas, then 
+/// the name ideaA ideaB (the concatenation of ideaA and ideaB, 
+/// separated by a space) is a valid company name.
+/// Otherwise, it is not a valid name.
+/// Return the number of distinct valid names for the company.
+/// 
+/// Example 1:
+///
+/// Input: ideas = ["coffee","donuts","time","toffee"]
+/// Output: 6
+/// Explanation: The following selections are valid:
+/// - ("coffee", "donuts"): The company name created is "doffee conuts".
+/// - ("donuts", "coffee"): The company name created is "conuts doffee".
+/// - ("donuts", "time"): The company name created is "tonuts dime".
+/// - ("donuts", "toffee"): The company name created is "tonuts doffee".
+/// - ("time", "donuts"): The company name created is "dime tonuts".
+/// - ("toffee", "donuts"): The company name created is "doffee tonuts".
+/// Therefore, there are a total of 6 distinct company names.
+///
+/// The following are some examples of invalid selections:
+/// - ("coffee", "time"): The name "toffee" formed after swapping already 
+///   exists in the original array.
+/// - ("time", "toffee"): Both names are still the same after swapping and 
+///   exist in the original array.
+/// - ("coffee", "toffee"): Both names formed after swapping already exist 
+///   in the original array.
+///
+/// Example 2:
+/// Input: ideas = ["lack","back"]
+/// Output: 0
+/// Explanation: There are no valid selections. Therefore, 0 is returned.
+/// 
+/// Constraints:
+/// 1. 2 <= ideas.length <= 5 * 10^4
+/// 2. 1 <= ideas[i].length <= 10
+/// 3. ideas[i] consists of lowercase English letters.
+/// 4. All the strings in ideas are unique.
+/// </summary>
+long long LeetCodeString::distinctNames(vector<string>& ideas)
+{
+    vector<unordered_set<string>> idea_map(26);
+    for (size_t i = 0; i < ideas.size(); i++)
+    {
+        idea_map[ideas[i][0] - 'a'].insert(ideas[i].substr(1));
+    }
+    long long result = 0;
+    for (int i = 0; i < 26; i++)
+    {
+        for (int j = i + 1; j < 26; j++)
+        {
+            long long left = 0;
+            long long right = 0;
+            for (string str : idea_map[i])
+            {
+                if (!idea_map[j].count(str)) left++;
+            }
+            for (string str : idea_map[j])
+            {
+                if (!idea_map[i].count(str)) right++;
+            }
+            result += left * right * 2;
+        }
+    }
+    return result;
+}
 #pragma endregion

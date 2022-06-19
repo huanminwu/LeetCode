@@ -4692,8 +4692,32 @@ void TestLeetCode2280(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2303(void)
+{
+    Logger::WriteMessage("Test Leet Code 2303");
+    LeetCodeMath leetCode;
+    vector<vector<int>> brackets = { {3, 50},{7, 10},{12, 25} };
+    int income = 10;
+    double result = leetCode.calculateTax(brackets, income);
+    Logger::WriteMessage(brackets);
+    Logger::WriteMessage("income = " + to_string(income) + "; result = " + to_string(result));
+
+    brackets = { {1, 0},{4, 25},{5, 50} };
+    income = 2;
+    result = leetCode.calculateTax(brackets, income);
+    Logger::WriteMessage(brackets);
+    Logger::WriteMessage("income = " + to_string(income) + "; result = " + to_string(result));
+
+    brackets = { {2, 50} };
+    income = 0;
+    result = leetCode.calculateTax(brackets, income);
+    Logger::WriteMessage(brackets);
+    Logger::WriteMessage("income = " + to_string(income) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2303();
     TestLeetCode2280();
     TestLeetCode2249();
     TestLeetCode2240();

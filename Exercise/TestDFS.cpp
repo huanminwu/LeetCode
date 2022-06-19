@@ -1708,8 +1708,32 @@ void TestLeetCode2232(void)
     Logger::WriteMessage("expression = " + expression + "; result = " + result);
 }
 
+void TestLeetCode2305(void)
+{
+    Logger::WriteMessage("Test Leet Code 2305");
+    LeetCodeDFS leetCode;
+    vector<int> cookies = { 8, 15, 10, 20, 8 };
+    int k = 2;
+    int result = leetCode.distributeCookies(cookies, k);
+    Logger::WriteMessage(cookies);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    cookies = { 6,1,3,2,2,4,1,2 };
+    k = 3;
+    result = leetCode.distributeCookies(cookies, k);
+    Logger::WriteMessage(cookies);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    cookies = { 6,1,3,2,2,4,1,2 };
+    k = 8;
+    result = leetCode.distributeCookies(cookies, k);
+    Logger::WriteMessage(cookies);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2305();
     TestLeetCode2232();
     TestLeetCode2212();
     TestLeetCode2189();

@@ -5433,21 +5433,82 @@ void TestLeetCode2288(void)
     string sentence = "there are $1 $2 and 5$ candies in the shop";
     int discount = 50;
     string result = leetCode.discountPrices(sentence, discount);
-    Logger::WriteMessage("sentence = " + sentence + +"; discount = " + to_string(discount) + "; result = " + result);
+    Logger::WriteMessage("sentence = " + sentence + "; discount = " + to_string(discount) + "; result = " + result);
 
     sentence = "1 2 $3 4 $5 $6 7 8$ $9 $10$";
     discount = 100;
     result = leetCode.discountPrices(sentence, discount);
-    Logger::WriteMessage("sentence = " + sentence + +"; discount = " + to_string(discount) + "; result = " + result);
+    Logger::WriteMessage("sentence = " + sentence + "; discount = " + to_string(discount) + "; result = " + result);
 
     sentence = "apple $2 lb";
     discount = 49;
     result = leetCode.discountPrices(sentence, discount);
-    Logger::WriteMessage("sentence = " + sentence + +"; discount = " + to_string(discount) + "; result = " + result);
+    Logger::WriteMessage("sentence = " + sentence + "; discount = " + to_string(discount) + "; result = " + result);
+}
+
+void TestLeetCode2299(void)
+{
+    Logger::WriteMessage("Test Leet Code 2299");
+    LeetCodeString leetCode;
+    string password = "IloveLe3tcode!";
+    bool result = leetCode.strongPasswordCheckerII(password);
+    Logger::WriteMessage("password = " + password+ "; result = " + (string) (result ? "true" : "false"));
+
+    password = "Me+You--IsMyDream";
+    result = leetCode.strongPasswordCheckerII(password);
+    Logger::WriteMessage("password = " + password + "; result = " + (string)(result ? "true" : "false"));
+
+    password = "1aB!";
+    result = leetCode.strongPasswordCheckerII(password);
+    Logger::WriteMessage("password = " + password + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2301(void)
+{
+    Logger::WriteMessage("Test Leet Code 2301");
+    LeetCodeString leetCode;
+    string s = "fool3e7bar";
+    string sub = "leet";
+    vector<vector<char>> mappings = { {'e', '3'},{'t', '7'},{'t', '8'} };
+    bool result = leetCode.matchReplacement(s, sub, mappings);
+    Logger::WriteMessage(mappings);
+    Logger::WriteMessage("s = " + s + "sub = " + sub + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "fooleetbar";
+    sub = "f00l";
+    mappings = { {'o', '0'} };
+    result = leetCode.matchReplacement(s, sub, mappings);
+    Logger::WriteMessage(mappings);
+    Logger::WriteMessage("s = " + s + "sub = " + sub + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "Fool33tbaR";
+    sub = "leetd";
+    mappings = { {'e', '3'},{'t', '7'},{'t', '8'},{'d', 'b'},{'p', 'b'} };
+    result = leetCode.matchReplacement(s, sub, mappings);
+    Logger::WriteMessage(mappings);
+    Logger::WriteMessage("s = " + s + "sub = " + sub + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2306(void)
+{
+    Logger::WriteMessage("Test Leet Code 2306");
+    LeetCodeString leetCode;
+    vector<string> ideas = { "coffee", "donuts", "time", "toffee" };
+    long long result = leetCode.distinctNames(ideas);
+    Logger::WriteMessage(ideas);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    ideas = { "lack","back" };
+    result = leetCode.distinctNames(ideas);
+    Logger::WriteMessage(ideas);
+    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCodeString(void)
 {
+    TestLeetCode2306();
+    TestLeetCode2301();
+    TestLeetCode2299();
     TestLeetCode2284();
     TestLeetCode2288();
     TestLeetCode2287();

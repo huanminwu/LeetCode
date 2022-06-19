@@ -1444,8 +1444,35 @@ void TestLeetCode2248(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2295(void)
+{
+    Logger::WriteMessage("Test Leet Code 2295");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1, 2, 4, 6 };
+    vector<vector<int>> operations = { {1, 3},{4, 7},{6, 1} };
+    vector<int> result = leetCode.arrayChange(nums, operations);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(operations);
+    Logger::WriteMessage(result);
+
+    nums = { 1, 2 };
+    operations = { {1, 3},{2, 1},{3, 2} };
+    result = leetCode.arrayChange(nums, operations);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(operations);
+    Logger::WriteMessage(result);
+
+    nums = { 1, 2 };
+    operations = { {1, 2},{2, 3},{3, 4} };
+    result = leetCode.arrayChange(nums, operations);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(operations);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode2295();
     TestLeetCode2248();
     TestLeetCode2244();
     TestLeetCode2215();

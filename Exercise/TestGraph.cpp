@@ -4498,8 +4498,29 @@ void TestLeetCode2290(void)
     Logger::WriteMessage(grid);
     Logger::WriteMessage("result = " + to_string(result));
 }
+
+void TestLeetCode2307(void)
+{
+    Logger::WriteMessage("Test Leet Code 2307");
+    LeetCodeGraph leetCode;
+    vector<vector<string>> equations = { {"a", "b"},{"b", "c"},{"a", "c"} };
+    vector<double> values = { 3, 0.5, 1.5 };
+    bool result = leetCode.checkContradictions(equations, values);
+    Logger::WriteMessage(equations);
+    Logger::WriteMessage(values);
+    Logger::WriteMessage("result = " + (string) (result ? "true" : "false"));
+
+    equations = { {"le", "et"},{"le", "code"},{"code", "et"} };
+    values = { 2,5,0.5 };
+    result = leetCode.checkContradictions(equations, values);
+    Logger::WriteMessage(equations);
+    Logger::WriteMessage(values);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2307();
     TestLeetCode2290();
     TestLeetCode2257();
     TestLeetCode2258();

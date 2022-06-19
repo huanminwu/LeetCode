@@ -4533,8 +4533,57 @@ void TestLeetCode2276(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2296(void)
+{
+    Logger::WriteMessage("Test Leet Code 2296");
+
+    vector<string> commands =
+    {
+       "TextEditor", "addText", "deleteText", "addText", "cursorRight", "cursorLeft", 
+       "deleteText", "cursorLeft", "cursorRight"
+    };
+    vector<vector<string>> parameters =
+    {
+        {} , {"leetcode"}, {"4"}, {"practice"}, {"3"}, {"8"}, {"10"}, {"2"}, {"6"}
+    };
+    vector<string> result;
+    TextEditor* textEditor = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "TextEditor")
+        {
+            textEditor = new TextEditor();
+            result.push_back("null");
+        }
+        else if (commands[i] == "addText")
+        {
+            textEditor->addText(parameters[i][0]);
+        }
+        else if (commands[i] == "deleteText")
+        {
+            int ret = textEditor->deleteText(atoi(parameters[i][0].c_str()));
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "cursorLeft")
+        {
+            string ret = textEditor->cursorLeft(atoi(parameters[i][0].c_str()));
+            result.push_back(ret);
+        }
+        else if (commands[i] == "cursorRight")
+        {
+            string ret = textEditor->cursorRight(atoi(parameters[i][0].c_str()));
+            result.push_back(ret);
+        }
+    }
+    delete textEditor;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2296();
     TestLeetCode2276();
     TestTouchScreen();
     TestLeetCode2254();

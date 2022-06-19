@@ -13747,6 +13747,124 @@ public:
     /// 3. nums.length is a power of 2.
     /// </summary>
     int minMaxGame(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2294. Partition Array Such That Maximum Difference Is K
+    ///                                                           
+    /// Medium
+    /// 
+    /// You are given an integer array nums and an integer k. You may 
+    /// partition nums into one or more subsequences such that each 
+    /// element in nums appears in exactly one of the subsequences.
+    ///
+    /// Return the minimum number of subsequences needed such that the 
+    /// difference between the maximum and minimum values in each 
+    /// subsequence is at most k.
+    ///
+    /// A subsequence is a sequence that can be derived from another 
+    /// sequence by deleting some or no elements without changing the 
+    /// order of the remaining elements.
+    /// 
+    /// Example 1:
+    /// Input: nums = [3,6,1,2,5], k = 2
+    /// Output: 2
+    /// Explanation:
+    /// We can partition nums into the two subsequences [3,1,2] and [6,5].
+    /// The difference between the maximum and minimum value in the first 
+    /// subsequence is 3 - 1 = 2.
+    /// The difference between the maximum and minimum value in the second 
+    /// subsequence is 6 - 5 = 1.
+    /// Since two subsequences were created, we return 2. It can be shown 
+    /// that 2 is the minimum number of subsequences needed.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,3], k = 1
+    /// Output: 2
+    /// Explanation:
+    /// We can partition nums into the two subsequences [1,2] and [3].
+    /// The difference between the maximum and minimum value in the first 
+    /// subsequence is 2 - 1 = 1.
+    /// The difference between the maximum and minimum value in the second 
+    /// subsequence is 3 - 3 = 0.
+    /// Since two subsequences were created, we return 2. Note that another 
+    /// optimal solution is to partition nums into the two subsequences [1] 
+    /// and [2,3].
+    ///
+    /// Example 3:
+    /// Input: nums = [2,2,4,5], k = 0
+    /// Output: 3
+    /// Explanation:
+    /// We can partition nums into the three subsequences [2,2], [4], and [5].
+    /// The difference between the maximum and minimum value in the first 
+    /// subsequences is 2 - 2 = 0.
+    /// The difference between the maximum and minimum value in the second 
+    /// subsequences is 4 - 4 = 0.
+    /// The difference between the maximum and minimum value in the third 
+    /// subsequences is 5 - 5 = 0.
+    /// Since three subsequences were created, we return 3. It can be shown 
+    /// that 3 is the minimum number of subsequences needed.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 10^5
+    /// 3. 0 <= k <= 10^5
+    /// </summary>
+    int partitionArray(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 2304. Minimum Path Cost in a Grid
+    ///                                                           
+    /// Medium
+    /// 
+    /// You are given a 0-indexed m x n integer matrix grid consisting of 
+    /// distinct integers from 0 to m * n - 1. You can move in this matrix 
+    /// from a cell to any other cell in the next row. That is, if you are 
+    /// in cell (x, y) such that x < m - 1, you can move to any of the 
+    /// cells (x + 1, 0), (x + 1, 1), ..., (x + 1, n - 1). Note that it is 
+    /// not possible to move from cells in the last row.
+    ///
+    /// Each possible move has a cost given by a 0-indexed 2D array moveCost 
+    /// of size (m * n) x n, where moveCost[i][j] is the cost of moving from 
+    /// a cell with value i to a cell in column j of the next row. The cost 
+    /// of moving from cells in the last row of grid can be ignored.
+    ///
+    /// The cost of a path in grid is the sum of all values of cells visited 
+    /// plus the sum of costs of all the moves made. Return the minimum cost 
+    /// of a path that starts from any cell in the first row and ends at any 
+    /// cell in the last row.
+    /// 
+    /// Example 1:
+    /// Input: grid = [[5,3],[4,0],[2,1]], 
+    /// moveCost = [[9,8],[1,5],[10,12],[18,6],[2,4],[14,3]]
+    /// Output: 17
+    /// Explanation: The path with the minimum possible cost is the 
+    /// path 5 -> 0 -> 1.
+    /// - The sum of the values of cells visited is 5 + 0 + 1 = 6.
+    /// - The cost of moving from 5 to 0 is 3.
+    /// - The cost of moving from 0 to 1 is 8.
+    /// So the total cost of the path is 6 + 3 + 8 = 17.
+    /// Example 2:
+    ///
+    /// Input: grid = [[5,1,2],[4,0,3]], moveCost = [[12,10,15],[20,23,8],
+    /// [21,7,1],[8,1,13],[9,10,25],[5,3,2]]
+    /// Output: 6
+    /// Explanation: The path with the minimum possible cost is the 
+    /// path 2 -> 3.
+    /// - The sum of the values of cells visited is 2 + 3 = 5.
+    /// - The cost of moving from 2 to 3 is 1.
+    /// So the total cost of this path is 5 + 1 = 6.
+    /// 
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 2 <= m, n <= 50
+    /// 4. grid consists of distinct integers from 0 to m * n - 1.
+    /// 5. moveCost.length == m * n
+    /// 6. moveCost[i].length == n
+    /// 7. 1 <= moveCost[i][j] <= 100
+    /// </summary>
+    int minPathCost(vector<vector<int>>& grid, vector<vector<int>>& moveCost);
+
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

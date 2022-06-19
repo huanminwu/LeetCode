@@ -2840,7 +2840,6 @@ void TestLeetCode2279(void)
     Logger::WriteMessage("additionalRocks = " + to_string(additionalRocks) + "; result = " + to_string(result));
 }
 
-
 void TestLeetCode2285(void)
 {
     Logger::WriteMessage("Test Leet Code 2285");
@@ -2858,8 +2857,32 @@ void TestLeetCode2285(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2300(void)
+{
+    Logger::WriteMessage("Test Leet Code 2300");
+    LeetCodeSort leetCode;
+    vector<int> spells = { 5, 1, 3 };
+    vector<int> potions = { 1, 2, 3, 4, 5 };
+    long long success = 7;
+    vector<int> result = leetCode.successfulPairs(spells, potions, success);
+    Logger::WriteMessage(spells);
+    Logger::WriteMessage(potions);
+    Logger::WriteMessage("success = " + to_string(success));
+    Logger::WriteMessage(result);
+
+    spells = { 3,1,2 };
+    potions = { 8,5,8 };
+    success = 16;
+    result = leetCode.successfulPairs(spells, potions, success);
+    Logger::WriteMessage(spells);
+    Logger::WriteMessage(potions);
+    Logger::WriteMessage("success = " + to_string(success));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2300();
     TestLeetCode2285();
     TestLeetCode2279();
     TestLeetCode2250();

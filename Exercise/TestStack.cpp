@@ -727,8 +727,28 @@ void TestLeetCode2282(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2297(void)
+{
+    Logger::WriteMessage("Test Leet Code 2297");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 3, 2, 4, 4, 1 };
+    vector<int> costs = { 3, 7, 6, 4, 2 };
+    long long result = leetCode.minCost(nums, costs);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,1,2 };
+    costs = { 1,1,1 };
+    result = leetCode.minCost(nums, costs);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode2297();
     TestLeetCode2282();
     TestLeetCode2289();
     TestLeetCode2281();

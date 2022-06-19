@@ -7365,8 +7365,52 @@ void TestLeetCode2293(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2294(void)
+{
+    Logger::WriteMessage("Test Leet Code 2294");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 6, 1, 2, 5 };
+    int k = 2;
+    int result = leetCode.partitionArray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    k = 1;
+    result = leetCode.partitionArray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 2,2,4,5 };
+    k = 0;
+    result = leetCode.partitionArray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2304(void)
+{
+    Logger::WriteMessage("Test Leet Code 2304");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {5, 3},{4, 0},{2, 1} };
+    vector<vector<int>> moveCost = { {9, 8},{1, 5},{10, 12},{18, 6},{2, 4},{14, 3} };
+    int result = leetCode.minPathCost(grid, moveCost);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(moveCost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {5, 1, 2},{4, 0, 3} };
+    moveCost = { {12, 10, 15},{20, 23, 8},{21, 7, 1},{8, 1, 13},{9, 10, 25},{5, 3, 2} };
+    result = leetCode.minPathCost(grid, moveCost);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(moveCost);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2304();
+    TestLeetCode2294();
     TestLeetCode2293();
     TestLeetCode2260();
     TestLeetCode2261();

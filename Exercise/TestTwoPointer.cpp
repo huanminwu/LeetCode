@@ -141,8 +141,26 @@ void TestLeetCode2105(void)
         "; result = " + to_string(result));
 }
 
+void TestLeetCode2302(void)
+{
+    Logger::WriteMessage("Test Leet Code 2302");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 2, 1, 4, 3, 5 };
+    long long k = 10;
+    long long result = leetCode.countSubarrays(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,1,1 };
+    k = 5;
+    result = leetCode.countSubarrays(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2302();
     TestLeetCode2105();
     TestLeetCode2107();
     TestLeetCode2106();
