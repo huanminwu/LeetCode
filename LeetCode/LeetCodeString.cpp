@@ -18438,12 +18438,12 @@ long long LeetCodeString::sumScores(string s)
         { 
             z[i] = min(((long long)r - (long long)i + 1) * 1LL, z[i - l]);
         }
-        while ((long long)i + z[i] < (long long)n && s[z[i]] == s[i + z[i]])
+        while ((long long)i + (long long)z[i] < (long long)n && s[(int)z[i]] == s[i + (int)z[i]])
             ++z[i];
         if ((long long)i + z[i] - (long long)1 > (long long)r)
         {
             l = i;
-            r = i + z[i] - 1;
+            r = (long long)i + z[i] - 1;
         }
     }
     long long result = 0;
@@ -18563,7 +18563,7 @@ int LeetCodeString::convertTime(string current, string correct)
 string LeetCodeString::digitSum(string s, int k)
 {
     string result = s;
-    while (result.size() > k)
+    while ((int)result.size() > k)
     {
         string str = result;
         result.clear();
@@ -19643,6 +19643,190 @@ long long LeetCodeString::distinctNames(vector<string>& ideas)
                 if (!idea_map[i].count(str)) right++;
             }
             result += left * right * 2;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2309. Greatest English Letter in Upper and Lower Case
+///                                                           
+/// Easy
+/// 
+/// Given a string of English letters s, return the greatest English 
+/// letter which occurs as both a lowercase and uppercase letter in s. 
+/// The returned letter should be in uppercase. If no such letter 
+/// exists, return an empty string.
+///
+/// An English letter b is greater than another letter a if b appears 
+/// after a in the English alphabet.
+///
+/// Example 1:
+/// Input: s = "lEeTcOdE"
+/// Output: "E"
+/// Explanation:
+/// The letter 'E' is the only letter to appear in both lower and upper 
+/// case.
+///
+/// Example 2:
+/// Input: s = "arRAzFif"
+/// Output: "R"
+/// Explanation:
+/// The letter 'R' is the greatest letter to appear in both lower and 
+/// upper case.
+/// Note that 'A' and 'F' also appear in both lower and upper case, 
+/// but 'R' is greater than 'F' or 'A'.
+///
+/// Example 3:
+/// Input: s = "AbCdEfGhIjK"
+/// Output: ""
+/// Explanation:
+/// There is no letter that appears in both lower and upper case.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 1000
+/// 2. s consists of lowercase and uppercase English letters.
+/// </summary>
+string LeetCodeString::greatestLetter(string s)
+{
+    vector<int> upper(26);
+    vector<int> lower(26);
+    for (char ch : s)
+    {
+        if (isupper(ch)) upper[ch - 'A'] = 1;
+        else if (islower(ch)) lower[ch - 'a'] = 1;
+    }
+    string result;
+    for (int i = 25; i >= 0; i--)
+    {
+        if (upper[i] == 1 && lower[i] == 1)
+        {
+            result.push_back('A' + i);
+            break;
+        }
+    }
+    return result;
+}
+/// <summary>
+/// Leet Code 2311. Longest Binary Subsequence Less Than or Equal to K
+///                                                           
+/// Medium
+///
+/// You are given a binary string s and a positive integer k.
+///
+/// Return the length of the longest subsequence of s that makes up a 
+/// binary number less than or equal to k.
+///
+/// Note:
+/// The subsequence can contain leading zeroes.
+/// The empty string is considered to be equal to 0.
+/// A subsequence is a string that can be derived from another string 
+/// by deleting some or no characters without changing the order of 
+/// the remaining characters.
+/// 
+/// Example 1:
+/// Input: s = "1001010", k = 5
+/// Output: 5
+/// Explanation: The longest subsequence of s that makes up a binary 
+/// number less than or equal to 5 is "00010", as this number is equal 
+/// to 2 in decimal.
+///
+/// Note that "00100" and "00101" are also possible, which are equal 
+/// to 4 and 5 in decimal, respectively.
+/// The length of this subsequence is 5, so 5 is returned.
+///
+/// Example 2:
+/// Input: s = "00101001", k = 1
+/// Output: 6
+/// Explanation: "000001" is the longest subsequence of s that makes 
+/// up a binary number less than or equal to 1, as this number is equal 
+/// to 1 in decimal.
+/// The length of this subsequence is 6, so 6 is returned.
+///
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 1000
+/// 2. s[i] is either '0' or '1'.
+/// 3. 1 <= k <= 10^9
+/// </summary>
+int LeetCodeString::longestSubsequence(string s, int k)
+{
+    int num = 0;
+    deque<int> deque;
+    int result = 0;
+    int size = 0;
+    for (int i = 0; i < (int)s.size(); i++)
+    {
+        num = num * 2 + s[i] - '0';
+        if (s[i] == '1') deque.push_back(i);
+        size++;
+        while (num > k)
+        {
+            num -= 1 << ((int)i - deque.front());
+            deque.pop_front();
+            size--;
+        }
+        result = max(result, size);
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 2315. Count Asterisks
+///                                                           
+/// Easy
+///
+/// You are given a string s, where every two consecutive vertical 
+/// bars '|' are grouped into a pair. In other words, the 1st and 
+/// 2nd '|' make a pair, the 3rd and 4th '|' make a pair, and so forth.
+///
+/// Return the number of '*' in s, excluding the '*' between each pair 
+/// of '|'.
+///
+/// Note that each '|' will belong to exactly one pair.
+///
+/// Example 1:
+/// 
+/// Input: s = "l|*e*et|c**o|*de|"
+/// Output: 2
+/// Explanation: The considered characters are underlined: 
+/// "l|*e*et|c**o|*de|".
+/// The characters between the first and second '|' are excluded from the 
+/// answer.
+/// Also, the characters between the third and fourth '|' are excluded from 
+/// the answer.
+/// There are 2 asterisks considered. Therefore, we return 2.
+///
+/// Example 2:
+/// Input: s = "iamprogrammer"
+/// Output: 0
+/// Explanation: In this example, there are no asterisks in s. Therefore, 
+/// we return 0.
+///
+/// Example 3:
+/// Input: s = "yo|uar|e**|b|e***au|tifu|l"
+/// Output: 5
+/// Explanation: The considered characters are underlined: 
+/// "yo|uar|e**|b|e***au|tifu|l". There are 5 asterisks considered. 
+/// Therefore, we return 5.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 1000
+/// 2. s consists of lowercase English letters, vertical bars '|', and 
+///    asterisks '*'.
+/// 3. s contains an even number of vertical bars '|'.
+/// </summary>
+int LeetCodeString::countAsterisks(string s) 
+{
+    int flag = 0;
+    int result = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '|') flag = 1 - flag;
+        if (s[i] == '*' && flag == 0)
+        {
+            result++;
         }
     }
     return result;

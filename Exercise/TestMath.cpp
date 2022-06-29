@@ -4715,6 +4715,26 @@ void TestLeetCode2303(void)
     Logger::WriteMessage("income = " + to_string(income) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2310(void)
+{
+    Logger::WriteMessage("Test Leet Code 2310");
+    LeetCodeMath leetCode;
+    int num = 58;
+    int k = 9;
+    int result = leetCode.minimumNumbers(num, k);
+    Logger::WriteMessage("num = " + to_string(num) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    num = 37;
+    k = 2;
+    result = leetCode.minimumNumbers(num, k);
+    Logger::WriteMessage("num = " + to_string(num) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    num = 0;
+    k = 7;
+    result = leetCode.minimumNumbers(num, k);
+    Logger::WriteMessage("num = " + to_string(num) + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
     TestLeetCode2303();

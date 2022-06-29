@@ -5504,8 +5504,60 @@ void TestLeetCode2306(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2309(void)
+{
+    Logger::WriteMessage("Test Leet Code 2309");
+    LeetCodeString leetCode;
+    string s = "lEeTcOdE";
+    string result = leetCode.greatestLetter(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "arRAzFif";
+    result = leetCode.greatestLetter(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "AbCdEfGhIjK";
+    result = leetCode.greatestLetter(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
+void TestLeetCode2311(void)
+{
+    Logger::WriteMessage("Test Leet Code 2311");
+    LeetCodeString leetCode;
+    string s = "1001010";
+    int k = 5;
+    int result = leetCode.longestSubsequence(s, k);
+    Logger::WriteMessage("s= " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "00101001";
+    k = 1;
+    result = leetCode.longestSubsequence(s, k);
+    Logger::WriteMessage("s= " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2315(void)
+{
+    Logger::WriteMessage("Test Leet Code 2315");
+    LeetCodeString leetCode;
+    string s = "l|*e*et|c**o|*de|";
+    int result = leetCode.countAsterisks(s);
+    Logger::WriteMessage("s= " + s + "; result = " + to_string(result));
+
+    s = "iamprogrammer";
+    result = leetCode.countAsterisks(s);
+    Logger::WriteMessage("s= " + s + "; result = " + to_string(result));
+
+    s = "yo|uar|e**|b|e***au|tifu|l";
+    result = leetCode.countAsterisks(s);
+    Logger::WriteMessage("s= " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2315();
+    TestLeetCode2311();
+    TestLeetCode2309();
     TestLeetCode2306();
     TestLeetCode2301();
     TestLeetCode2299();

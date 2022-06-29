@@ -11979,7 +11979,7 @@ public:
             update_sum(2 * i + 1, p, r, k, maxRow);
         }
         else {
-            k -= stree[2 * i + 1][1];
+            k -= (int)stree[2 * i + 1][1];
             update_sum(2 * i + 1, p, r, stree[2 * i + 1][1], maxRow);
             // Be aware: stree[2*i+1][1] updates while updating the left tree
             update_sum(2 * i + 2, r + 1, q, k, maxRow);

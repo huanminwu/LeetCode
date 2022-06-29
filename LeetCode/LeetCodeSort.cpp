@@ -8644,7 +8644,6 @@ vector<int> LeetCodeSort::countRectangles(vector<vector<int>>& rectangles, vecto
         new_points[i].push_back(i);
     }
     sort(new_points.begin(), new_points.end());
-    int ;
     int q = rectangles.size() - 1;
     int n = new_points.size();
     vector<int> levels(101);
@@ -8804,7 +8803,7 @@ long long LeetCodeSort::maximumImportance(int n, vector<vector<int>>& roads)
     long long result = 0;
     for (int i = dp.size() - 1; i >= 0; i--)
     {
-        result += (long long)(i + 1) * dp[i];
+        result += (long long)((long long)i + 1) * dp[i];
     }
     return result;
 }

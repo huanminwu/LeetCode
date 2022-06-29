@@ -4518,8 +4518,52 @@ void TestLeetCode2307(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2316(void)
+{
+    Logger::WriteMessage("Test Leet Code 2316");
+    LeetCodeGraph leetCode;
+    int n = 3;
+    vector<vector<int>> edges = { {0, 1},{0, 2},{1, 2} };
+    long long result = leetCode.countPairs(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 7;
+    edges = { {0, 2},{0, 5},{2, 4},{1, 6},{5, 4} };
+    result = leetCode.countPairs(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 16;
+    edges = { {0, 15},{1, 14},{2, 11},{4, 3},{5, 15},{8, 2},{14, 12} };
+    result = leetCode.countPairs(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2322(void)
+{
+    Logger::WriteMessage("Test Leet Code 2322");
+    LeetCodeGraph leetCode;
+    vector<int> nums = { 1, 5, 5, 4, 11 };
+    vector<vector<int>> edges = { {0, 1},{1, 2},{1, 3},{3, 4} };
+    int result = leetCode.minimumScore(nums, edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,5,2,4,4,2 };
+    edges = { {0,1} ,{1,2},{5,2},{4,3},{1,3} };
+    result = leetCode.minimumScore(nums, edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2322();
+    TestLeetCode2316();
     TestLeetCode2307();
     TestLeetCode2290();
     TestLeetCode2257();

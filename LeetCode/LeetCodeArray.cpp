@@ -22313,5 +22313,140 @@ int LeetCodeArray::minPathCost(vector<vector<int>>& grid, vector<vector<int>>& m
     }
     return result;
 }
+
+
+/// <summary>
+/// Leet Code 2319. Check if Matrix Is X-Matrix
+///                                                           
+/// Easy
+///
+/// A square matrix is said to be an X-Matrix if both of the following 
+/// conditions hold:
+///
+/// All the elements in the diagonals of the matrix are non-zero.
+/// All other elements are 0.
+/// Given a 2D integer array grid of size n x n representing a square 
+/// matrix, return true if grid is an X-Matrix. Otherwise, return false.
+///
+/// Example 1:
+/// Input: grid = [[2,0,0,1],[0,3,1,0],[0,5,2,0],[4,0,0,2]]
+/// Output: true
+/// Explanation: Refer to the diagram above. 
+/// An X-Matrix should have the green elements (diagonals) be non-zero 
+/// and the red elements be 0.
+/// Thus, grid is an X-Matrix.
+///
+/// Example 2:
+/// Input: grid = [[5,7,0],[0,3,1],[0,5,0]]
+/// Output: false
+/// Explanation: Refer to the diagram above.
+/// An X-Matrix should have the green elements (diagonals) be non-zero 
+/// and the red elements be 0.
+/// Thus, grid is not an X-Matrix.
+/// 
+/// Constraints:
+/// 1. n == grid.length == grid[i].length
+/// 2. 3 <= n <= 100
+/// 3. 0 <= grid[i][j] <= 10^5
+/// </summary>
+bool LeetCodeArray::checkXMatrix(vector<vector<int>>& grid)
+{
+    for (size_t i = 0; i < grid.size(); i++)
+    {
+        for (size_t j = 0; j < grid[i].size(); j++)
+        {
+            if (i == j || i + j == grid.size() - 1)
+            {
+                if (grid[i][j] == 0) return false;
+            }
+            else
+            {
+                if (grid[i][j] != 0) return false;
+            }
+        }
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet Code 2321. Maximum Score Of Spliced Array
+///                                                           
+/// Hard
+///
+/// You are given two 0-indexed integer arrays nums1 and nums2, both of 
+/// length n.
+///
+/// You can choose two integers left and right where 
+/// 0 <= left <= right < n and swap the subarray nums1[left...right] 
+/// with the subarray nums2[left...right].
+///
+/// For example, if nums1 = [1,2,3,4,5] and nums2 = [11,12,13,14,15] and 
+/// you choose left = 1 and right = 2, nums1 becomes [1,12,13,4,5] and 
+/// nums2 becomes [11,2,3,14,15].
+/// You may choose to apply the mentioned operation once or not do 
+/// anything.
+///
+/// The score of the arrays is the maximum of sum(nums1) and sum(nums2), 
+/// where sum(arr) is the sum of all the elements in the array arr.
+///
+/// Return the maximum possible score.
+///
+/// A subarray is a contiguous sequence of elements within an array. 
+/// arr[left...right] denotes the subarray that contains the elements 
+/// of nums between indices left and right (inclusive).
+/// 
+/// Example 1:
+/// Input: nums1 = [60,60,60], nums2 = [10,90,10]
+/// Output: 210
+/// Explanation: Choosing left = 1 and right = 1, we have 
+/// nums1 = [60,90,60] and nums2 = [10,60,10].
+/// The score is max(sum(nums1), sum(nums2)) = max(210, 80) = 210.
+///
+/// Example 2:
+/// Input: nums1 = [20,40,20,70,30], nums2 = [50,20,50,40,20]
+/// Output: 220
+/// Explanation: Choosing left = 3, right = 4, we have 
+/// nums1 = [20,40,20,40,20] and nums2 = [50,20,50,70,30].
+/// The score is max(sum(nums1), sum(nums2)) = max(140, 220) = 220.
+///
+/// Example 3:
+/// Input: nums1 = [7,11,13], nums2 = [1,1,1]
+/// Output: 31
+/// Explanation: We choose not to swap any subarray.
+/// The score is max(sum(nums1), sum(nums2)) = max(31, 3) = 31.
+///
+/// Constraints:
+/// 1. n == nums1.length == nums2.length
+/// 2. 1 <= n <= 10^5
+/// 3. 1 <= nums1[i], nums2[i] <= 10^4
+/// </summary>
+int LeetCodeArray::maximumsSplicedArray(vector<int>& nums1, vector<int>& nums2)
+{
+    deque<int> pos_queue;
+    deque<int> neg_queue;
+    int pos_val = 0;
+    int neg_val = 0;
+    int max_val = INT_MIN;
+    int min_val = INT_MAX;
+    int n = nums1.size();
+    int sum1_val = 0;
+    int sum2_val = 0;
+    for (int i = 0; i < n; i++)
+    {
+        pos_val += nums1[i] - nums2[i];
+        if (pos_val < 0) pos_val = 0;
+        max_val = max(max_val, pos_val);
+
+        neg_val += nums1[i] - nums2[i];
+        if (neg_val > 0) neg_val = 0;
+        min_val = min(min_val, neg_val);
+
+        sum1_val += nums1[i];
+        sum2_val += nums2[i];
+
+    }
+    int result = max(sum1_val  - min_val, sum2_val + max_val);
+    return result;
+}
 #pragma endregion
 

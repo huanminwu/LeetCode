@@ -7407,8 +7407,57 @@ void TestLeetCode2304(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2319(void)
+{
+    Logger::WriteMessage("Test Leet Code 2319");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = 
+    { 
+        {2, 0, 0, 1},{0, 3, 1, 0},{0, 5, 2, 0},{4, 0, 0, 2} 
+    };
+    bool result = leetCode.checkXMatrix(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    grid =
+    {
+        {5,7,0} ,{0,3,1},{0,5,0}
+    };
+    result = leetCode.checkXMatrix(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2321(void)
+{
+    Logger::WriteMessage("Test Leet Code 2321");
+    LeetCodeArray leetCode;
+    vector<int>nums1 = { 60, 60, 60 };
+    vector<int>nums2 = { 10, 90, 10 };
+    int result = leetCode.maximumsSplicedArray(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 20,40,20,70,30 };
+    nums2 = { 50,20,50,40,20 };
+    result = leetCode.maximumsSplicedArray(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 7,11,13 };
+    nums2 = { 1,1,1 };
+    result = leetCode.maximumsSplicedArray(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2321();
+    TestLeetCode2319();
     TestLeetCode2304();
     TestLeetCode2294();
     TestLeetCode2293();

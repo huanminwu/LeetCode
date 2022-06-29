@@ -3125,8 +3125,56 @@ void TestLeetCode2291(void)
     Logger::WriteMessage("budget = " + to_string(budget) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2312(void)
+{
+    Logger::WriteMessage("Test Leet Code 2312");
+    LeetCodeDP leetCode;
+    int m = 3;
+    int n = 5;
+    vector<vector<int>> prices = { {1, 4, 2},{2, 2, 7},{2, 1, 3} };
+    int result = leetCode.sellingWood(m, n, prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; result = " + to_string(result));
+
+    m = 4;
+    n = 6;
+    prices = { {3, 2, 10},{1, 4, 2},{4, 1, 3} };
+    result = leetCode.sellingWood(m, n, prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2318(void)
+{
+    Logger::WriteMessage("Test Leet Code 2318");
+    LeetCodeDP leetCode;
+    int n = 2;
+    int result = leetCode.distinctSequences(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    result = leetCode.distinctSequences(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2320(void)
+{
+    Logger::WriteMessage("Test Leet Code 2320");
+    LeetCodeDP leetCode;
+    int n = 1;
+    int result = leetCode.countHousePlacements(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 2;
+    result = leetCode.countHousePlacements(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2318();
+    TestLeetCode2320();
+    TestLeetCode2312();
     TestLeetCode2291();
     TestLeetCode2266();
     TestLeetCode2267();

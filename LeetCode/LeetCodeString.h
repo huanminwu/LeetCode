@@ -11065,6 +11065,138 @@ public:
     /// 4. All the strings in ideas are unique.
     /// </summary>
     long long distinctNames(vector<string>& ideas);
+
+    /// <summary>
+    /// Leet Code 2309. Greatest English Letter in Upper and Lower Case
+    ///                                                           
+    /// Easy
+    /// 
+    /// Given a string of English letters s, return the greatest English 
+    /// letter which occurs as both a lowercase and uppercase letter in s. 
+    /// The returned letter should be in uppercase. If no such letter 
+    /// exists, return an empty string.
+    ///
+    /// An English letter b is greater than another letter a if b appears 
+    /// after a in the English alphabet.
+    ///
+    /// Example 1:
+    /// Input: s = "lEeTcOdE"
+    /// Output: "E"
+    /// Explanation:
+    /// The letter 'E' is the only letter to appear in both lower and upper 
+    /// case.
+    ///
+    /// Example 2:
+    /// Input: s = "arRAzFif"
+    /// Output: "R"
+    /// Explanation:
+    /// The letter 'R' is the greatest letter to appear in both lower and 
+    /// upper case.
+    /// Note that 'A' and 'F' also appear in both lower and upper case, 
+    /// but 'R' is greater than 'F' or 'A'.
+    ///
+    /// Example 3:
+    /// Input: s = "AbCdEfGhIjK"
+    /// Output: ""
+    /// Explanation:
+    /// There is no letter that appears in both lower and upper case.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 1000
+    /// 2. s consists of lowercase and uppercase English letters.
+    /// </summary>
+    string greatestLetter(string s);
+
+    /// <summary>
+    /// Leet Code 2311. Longest Binary Subsequence Less Than or Equal to K
+    ///                                                           
+    /// Medium
+    ///
+    /// You are given a binary string s and a positive integer k.
+    ///
+    /// Return the length of the longest subsequence of s that makes up a 
+    /// binary number less than or equal to k.
+    ///
+    /// Note:
+    /// The subsequence can contain leading zeroes.
+    /// The empty string is considered to be equal to 0.
+    /// A subsequence is a string that can be derived from another string 
+    /// by deleting some or no characters without changing the order of 
+    /// the remaining characters.
+    /// 
+    /// Example 1:
+    /// Input: s = "1001010", k = 5
+    /// Output: 5
+    /// Explanation: The longest subsequence of s that makes up a binary 
+    /// number less than or equal to 5 is "00010", as this number is equal 
+    /// to 2 in decimal.
+    ///
+    /// Note that "00100" and "00101" are also possible, which are equal 
+    /// to 4 and 5 in decimal, respectively.
+    /// The length of this subsequence is 5, so 5 is returned.
+    ///
+    /// Example 2:
+    /// Input: s = "00101001", k = 1
+    /// Output: 6
+    /// Explanation: "000001" is the longest subsequence of s that makes 
+    /// up a binary number less than or equal to 1, as this number is equal 
+    /// to 1 in decimal.
+    /// The length of this subsequence is 6, so 6 is returned.
+    ///
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 1000
+    /// 2. s[i] is either '0' or '1'.
+    /// 3. 1 <= k <= 10^9
+    /// </summary>
+    int longestSubsequence(string s, int k);
+
+    /// <summary>
+    /// Leet Code 2315. Count Asterisks
+    ///                                                           
+    /// Easy
+    ///
+    /// You are given a string s, where every two consecutive vertical 
+    /// bars '|' are grouped into a pair. In other words, the 1st and 
+    /// 2nd '|' make a pair, the 3rd and 4th '|' make a pair, and so forth.
+    ///
+    /// Return the number of '*' in s, excluding the '*' between each pair 
+    /// of '|'.
+    ///
+    /// Note that each '|' will belong to exactly one pair.
+    ///
+    /// Example 1:
+    /// 
+    /// Input: s = "l|*e*et|c**o|*de|"
+    /// Output: 2
+    /// Explanation: The considered characters are underlined: 
+    /// "l|*e*et|c**o|*de|".
+    /// The characters between the first and second '|' are excluded from the 
+    /// answer.
+    /// Also, the characters between the third and fourth '|' are excluded from 
+    /// the answer.
+    /// There are 2 asterisks considered. Therefore, we return 2.
+    ///
+    /// Example 2:
+    /// Input: s = "iamprogrammer"
+    /// Output: 0
+    /// Explanation: In this example, there are no asterisks in s. Therefore, 
+    /// we return 0.
+    ///
+    /// Example 3:
+    /// Input: s = "yo|uar|e**|b|e***au|tifu|l"
+    /// Output: 5
+    /// Explanation: The considered characters are underlined: 
+    /// "yo|uar|e**|b|e***au|tifu|l". There are 5 asterisks considered. 
+    /// Therefore, we return 5.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 1000
+    /// 2. s consists of lowercase English letters, vertical bars '|', and 
+    ///    asterisks '*'.
+    /// 3. s contains an even number of vertical bars '|'.
+    /// </summary>
+    int countAsterisks(string s);
 #pragma endregion
 };
 

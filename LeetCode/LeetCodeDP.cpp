@@ -13900,5 +13900,245 @@ int LeetCodeDP::maximumProfit(vector<int>& present, vector<int>& future, int bud
     return result;
 }
 
+/// <summary>
+/// Leet Code 2312. Selling Pieces of Wood
+///                                                           
+/// Hard
+///
+/// You are given two integers m and n that represent the height and width 
+/// of a rectangular piece of wood. You are also given a 2D integer array 
+/// prices, where prices[i] = [hi, wi, pricei] indicates you can sell a 
+/// rectangular piece of wood of height hi and width wi for pricei dollars.
+///
+/// To cut a piece of wood, you must make a vertical or horizontal cut 
+/// across the entire height or width of the piece to split it into two 
+/// smaller pieces. After cutting a piece of wood into some number of 
+/// smaller pieces, you can sell pieces according to prices. You may 
+/// sell multiple pieces of the same shape, and you do not have to sell 
+/// all the shapes. The grain of the wood makes a difference, so you 
+/// cannot rotate a piece to swap its height and width.
+///
+/// Return the maximum money you can earn after cutting an m x n piece 
+/// of wood.
+///
+/// Note that you can cut the piece of wood as many times as you want.
+///
+/// Example 1:
+/// Input: m = 3, n = 5, prices = [[1,4,2],[2,2,7],[2,1,3]]
+/// Output: 19
+/// Explanation: The diagram above shows a possible scenario. It 
+/// consists of:
+/// - 2 pieces of wood shaped 2 x 2, selling for a price of 2 * 7 = 14.
+/// - 1 piece of wood shaped 2 x 1, selling for a price of 1 * 3 = 3.
+/// - 1 piece of wood shaped 1 x 4, selling for a price of 1 * 2 = 2.
+/// This obtains a total of 14 + 3 + 2 = 19 money earned.
+/// It can be shown that 19 is the maximum amount of money that can be 
+/// earned.
+///
+/// Example 2:
+/// Input: m = 4, n = 6, prices = [[3,2,10],[1,4,2],[4,1,3]]
+/// Output: 32
+/// Explanation: The diagram above shows a possible scenario. It 
+/// consists of:
+/// - 3 pieces of wood shaped 3 x 2, selling for a price of 3 * 10 = 30.
+/// - 1 piece of wood shaped 1 x 4, selling for a price of 1 * 2 = 2.
+/// This obtains a total of 30 + 2 = 32 money earned.
+/// It can be shown that 32 is the maximum amount of money that can be 
+/// earned.
+/// Notice that we cannot rotate the 1 x 4 piece of wood to obtain a 4 x 1 
+/// piece of wood.
+/// 
+/// Constraints:
+/// 1. 1 <= m, n <= 200
+/// 2. 1 <= prices.length <= 2 * 10^4
+/// 3. prices[i].length == 3
+/// 4. 1 <= hi <= m
+/// 5. 1 <= wi <= n
+/// 6. 1 <= pricei <= 10^6
+/// 7. All the shapes of wood (hi, wi) are pairwise distinct.
+/// </summary>
+long long LeetCodeDP::sellingWood(int m, int n, vector<vector<int>>& prices)
+{
+    vector<vector<long long>> dp(m + 1, vector<long long>(n + 1));
+    for (size_t i = 0; i < prices.size(); i++)
+    {
+        dp[prices[i][0]][prices[i][1]] = prices[i][2];
+    }
+    for (int h = 1; h <= m; h++)
+    {
+        for (int w = 1; w <= n; w++)
+        {
+            for (int i = 1; i <= h / 2; i++)
+            {
+                dp[h][w] = max(dp[h][w], dp[h-i][w] + dp[i][w]);
+            }
+            for (int i = 1; i <= w / 2; i++)
+            {
+                dp[h][w] = max(dp[h][w], dp[h][w-i] + dp[h][i]);
+            }
+        }
+    }
+    return dp[m][n];
+}
+
+/// <summary>
+/// Leet Code 2320. Count Number of Ways to Place Houses
+///                                                           
+/// Medium
+///
+/// There is a street with n * 2 plots, where there are n plots on each 
+/// side of the street. The plots on each side are numbered from 1 to n. 
+/// On each plot, a house can be placed.
+///
+/// Return the number of ways houses can be placed such that no two houses 
+/// are adjacent to each other on the same side of the street. Since the 
+/// answer may be very large, return it modulo 10^9 + 7.
+///
+/// Note that if a house is placed on the ith plot on one side of the 
+/// street, a house can also be placed on the ith plot on the other side 
+/// of the street.
+/// 
+/// Example 1:
+/// Input: n = 1
+/// Output: 4
+/// Explanation: 
+/// Possible arrangements:
+/// 1. All plots are empty.
+/// 2. A house is placed on one side of the street.
+/// 3. A house is placed on the other side of the street.
+/// 4. Two houses are placed, one on each side of the street.
+///
+/// Example 2:
+/// Input: n = 2
+/// Output: 9
+/// Explanation: The 9 possible arrangements are shown in the diagram 
+/// above.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^4
+/// </summary>
+int LeetCodeDP::countHousePlacements(int n)
+{
+    int M = 1000000007;
+    vector<vector<int>> dp(n, vector<int>(2));
+    for (int i = 0; i < n; i++)
+    {
+        if (i == 0)
+        {
+            dp[i][0] = 1;
+            dp[i][1] = 1;
+        }
+        else
+        {
+            dp[i][0] = (dp[i - 1][0] + dp[i - 1][1]) % M;
+            dp[i][1] = dp[i - 1][0];
+        }
+    }
+    long long result = ((long long)dp[n - 1][0] + (long long)dp[n - 1][1]) % (long long)M;
+    result = (result * result) % (long long)M;
+    return (int)result;
+}
+
+/// <summary>
+/// Leet Code 2318. Number of Distinct Roll Sequences
+///                                                           
+/// Hard
+///
+/// You are given an integer n. You roll a fair 6-sided dice n times. 
+/// Determine the total number of distinct sequences of rolls possible 
+/// such that the following conditions are satisfied:
+///
+/// The greatest common divisor of any adjacent values in the sequence 
+/// is equal to 1.
+/// There is at least a gap of 2 rolls between equal valued rolls. 
+/// More formally, if the value of the ith roll is equal to the value 
+/// of the jth roll, then abs(i - j) > 2.
+/// Return the total number of distinct sequences possible. Since the 
+/// answer may be very large, return it modulo 10^9 + 7.
+/// 
+/// Two sequences are considered distinct if at least one element is 
+/// different.
+///
+/// Example 1:
+/// Input: n = 4
+/// Output: 184
+/// Explanation: Some of the possible sequences are (1, 2, 3, 4), 
+/// (6, 1, 2, 3), (1, 2, 3, 1), etc.
+/// Some invalid sequences are (1, 2, 1, 3), (1, 2, 3, 6).
+/// (1, 2, 1, 3) is invalid since the first and third roll have an equal 
+/// value and abs(1 - 3) = 2 (i and j are 1-indexed).
+/// (1, 2, 3, 6) is invalid since the greatest common divisor of 3 
+/// and 6 = 3.
+/// There are a total of 184 distinct sequences possible, so we return 184.
+///
+/// Example 2:
+/// Input: n = 2
+/// Output: 22
+/// Explanation: Some of the possible sequences are (1, 2), (2, 1), (3, 2).
+/// Some invalid sequences are (3, 6), (2, 4) since the greatest common 
+/// divisor is not equal to 1.
+/// There are a total of 22 distinct sequences possible, so we return 22.
+/// 
+/// Constraints:
+/// 
+/// 1. 1 <= n <= 10^4
+/// </summary>
+int LeetCodeDP::distinctSequences(int n)
+{
+    int M = 1000000007;
+    vector<vector<vector<int>>> dp(n, vector<vector<int>>(7, vector<int>(7)));
+    for (int i = 0; i < n; i++)
+    {
+        if (i == 0)
+        {
+            for (int j = 0; j < 6; j++)
+            {
+                dp[i][j][0] = 1;
+            }
+        }
+        else if (i == 1)
+        {
+            for (int j = 0; j < 6; j++)
+            {
+                for (int k = 0; k < 6; k++)
+                {
+                    if ((j + 1 == k + 1) || ((j + 1) % 2 == 0 && (k + 1) % 2 == 0) ||
+                        ((j + 1) % 3 == 0 && (k + 1) % 3 == 0))
+                    {
+                        continue;
+                    }
+                    dp[i][j][k] = (dp[i][j][k] + dp[i - 1][k][0]) % M;
+                }
+            }
+        }
+        else 
+        {
+            for (int j = 0; j < 6; j++)
+            {
+                for (int k = 0; k < 6; k++)
+                {
+                    for (int l = 0; l < 6; l++)
+                    {
+                        if ((j == k) || (j == l) || ((j + 1) % 2 == 0 && (k + 1) % 2 == 0) ||
+                            ((j + 1) % 3 == 0 && (k + 1) % 3 == 0))
+                        {
+                            continue;
+                        }
+                        dp[i][j][k] = (dp[i][j][k] + dp[i - 1][k][l]) % M;
+                    }
+                }
+            }
+        }
+    }
+    int result = 0;
+    for (int i = 0; i < 6; i++)
+    {
+        for (int j = 0; j < 6; j++)
+        {
+            result = (result + dp[n - 1][i][j]) % M;
+        }
+    }
+    return result;
+}
 #pragma endregion
 

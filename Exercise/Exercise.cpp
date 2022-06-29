@@ -1886,19 +1886,19 @@ void TestLeetCode1187(void)
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeGraph();
-    TestLeetCodeString();
     TestLeetCodeArray();
+    TestLeetCodeGraph();
+    TestLeetCodeTree();
+    TestLeetCodeDP();
+    TestLeetCodeBit();
+    TestLeetCodeString();
     TestLeetCodeDFS();
     TestLeetCodeMath();
     TestLeetCodeStack();
     TestLeetCodeSort();
     TestLeetCodeDesign();
-    TestLeetCodeDP();
     TestLeetCodeHashtable();
     TestLeetCodeGreedy();
-    TestLeetCodeTree();
-    TestLeetCodeBit();
     TestLeetCodeTwoPointer();
     TestLeetCodeBinarySearch();
     TestLeetCodeLinkedList();

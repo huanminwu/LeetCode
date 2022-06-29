@@ -795,9 +795,24 @@ void TestLeetCode2275(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2317(void)
+{
+    Logger::WriteMessage("Test Leet Code 2317");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 3,2,4,6 };
+    int result = leetCode.maximumXOR(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,9,2 };
+    result = leetCode.maximumXOR(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2317();
     TestLeetCode2275();
     TestLeetCode2220();
     TestLeetCode1980();

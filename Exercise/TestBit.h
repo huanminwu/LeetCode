@@ -8,4 +8,5 @@ void TestLeetCode1863(void);
 void TestLeetCode1938(void);
 void TestLeetCode2220(void);
 void TestLeetCode2275(void);
+void TestLeetCode2317(void);
 #endif  // TestA
