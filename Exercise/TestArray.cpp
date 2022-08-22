@@ -7193,7 +7193,7 @@ void TestLeetCode2219(void)
     Logger::WriteMessage("Test Leet Code 2219");
     LeetCodeArray leetCode;
     vector<int> nums = { 4,3,-2,5 };
-    int result = leetCode.maximumSumScore(nums);
+    long long result = leetCode.maximumSumScore(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 
@@ -7454,8 +7454,143 @@ void TestLeetCode2321(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2326(void)
+{
+    Logger::WriteMessage("Test Leet Code 2326");
+    LeetCodeArray leetCode;
+    LeetCodeLinkedList leetCodeList;
+    vector<int> data_list = { 3,0,2,6,8,1,7,9,4,2,5,5,0 };
+    int m = 3, n = 5;
+    ListNode* head = leetCodeList.generateListNodes(data_list);
+    vector<vector<int>> result = leetCode.spiralMatrix(m, n, head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage(result);
+    leetCodeList.freeListNodes(head);
+
+    data_list = { 0,1,2 };
+    m = 1; n = 4;
+    head = leetCodeList.generateListNodes(data_list);
+    result = leetCode.spiralMatrix(m, n, head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage(result);
+    leetCodeList.freeListNodes(head);
+}
+
+void TestLeetCode2340(void)
+{
+    Logger::WriteMessage("Test Leet Code 2340");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 4, 5, 5, 3, 1 };
+    int result = leetCode.minimumSwaps(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 9 };
+    result = leetCode.minimumSwaps(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2341(void)
+{
+    Logger::WriteMessage("Test Leet Code 2341");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,3,2,1,3,2,2 };
+    vector<int> result = leetCode.numberOfPairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,1 };
+    result = leetCode.numberOfPairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2363(void)
+{
+    Logger::WriteMessage("Test Leet Code 2363");
+    LeetCodeArray leetCode;
+    vector<vector<int>> items1 = { {1, 1},{4, 5},{3, 8} };
+    vector<vector<int>> items2 = { {3, 1},{1, 5} };
+    vector<vector<int>> result = leetCode.mergeSimilarItems(items1, items2);
+    Logger::WriteMessage(items1);
+    Logger::WriteMessage(items2);
+    Logger::WriteMessage(result);
+
+    items1 = { {1, 1},{3, 2},{2, 3} };
+    items2 = { {2, 1},{3, 2},{1, 3} };
+    result = leetCode.mergeSimilarItems(items1, items2);
+    Logger::WriteMessage(items1);
+    Logger::WriteMessage(items2);
+    Logger::WriteMessage(result);
+
+    items1 = { {1, 3},{2, 2} };
+    items2 = { {7, 1},{2, 2},{1, 4} };
+    result = leetCode.mergeSimilarItems(items1, items2);
+    Logger::WriteMessage(items1);
+    Logger::WriteMessage(items2);
+    Logger::WriteMessage(result);
+    
+}
+
+void TestLeetCode2373(void)
+{
+    Logger::WriteMessage("Test Leet Code 2373");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid =
+    {
+        {9, 9, 8, 1},{5, 6, 2, 6},{8, 2, 6, 4},{6, 2, 2, 2}
+    };
+    vector<vector<int>> result = leetCode.largestLocal(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid =
+    {
+        {1,1,1,1,1},{1,1,1,1,1},{1,1,2,1,1},{1,1,1,1,1},{1,1,1,1,1}
+    };
+    result = leetCode.largestLocal(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2383(void)
+{
+    Logger::WriteMessage("Test Leet Code 2383");
+    LeetCodeArray leetCode;
+    int initialEnergy = 5;
+    int initialExperience = 3;
+    vector<int> energy = { 1, 4, 3, 2 };
+    vector<int> experience = { 2, 6, 3, 1 };
+    int result = leetCode.minNumberOfHours(initialEnergy, initialExperience, energy, experience);
+    Logger::WriteMessage("initialEnergy = " + to_string(initialEnergy));
+    Logger::WriteMessage("initialExperience = " + to_string(initialExperience));
+    Logger::WriteMessage(energy);
+    Logger::WriteMessage(experience);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    initialEnergy = 2;
+    initialExperience = 4;
+    energy = { 1 };
+    experience = { 3 };
+    result = leetCode.minNumberOfHours(initialEnergy, initialExperience, energy, experience);
+    Logger::WriteMessage("initialEnergy = " + to_string(initialEnergy));
+    Logger::WriteMessage("initialExperience = " + to_string(initialExperience));
+    Logger::WriteMessage(energy);
+    Logger::WriteMessage(experience);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2383();
+    TestLeetCode2373();
+    TestLeetCode2363();
+    TestLeetCode2341();
+    TestLeetCode2340();
+    TestLeetCode2326();
     TestLeetCode2321();
     TestLeetCode2319();
     TestLeetCode2304();

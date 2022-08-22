@@ -11980,7 +11980,7 @@ public:
         }
         else {
             k -= (int)stree[2 * i + 1][1];
-            update_sum(2 * i + 1, p, r, stree[2 * i + 1][1], maxRow);
+            update_sum(2 * i + 1, p, r, (int)stree[2 * i + 1][1], maxRow);
             // Be aware: stree[2*i+1][1] updates while updating the left tree
             update_sum(2 * i + 2, r + 1, q, k, maxRow);
         }
@@ -12118,7 +12118,7 @@ public:
     int deleteText(int k) 
     {
         int result = min((int)m_left.size(), k);
-        for (size_t i = 0; ((i < k) && (!m_left.empty())); i++)
+        for (int i = 0; ((i < k) && (!m_left.empty())); i++)
         {
             m_left.pop_back();
         }
@@ -12127,7 +12127,7 @@ public:
 
     string cursorLeft(int k)
     {
-        for (size_t i = 0; ((i < k) && (!m_left.empty())); i++)
+        for (int i = 0; ((i < k) && (!m_left.empty())); i++)
         {
             m_right.push_front(m_left.back());
             m_left.pop_back();
@@ -12140,7 +12140,7 @@ public:
 
     string cursorRight(int k) 
     {
-        for (size_t i = 0; ((i < k) && (!m_right.empty())); i++)
+        for (int i = 0; ((i < k) && (!m_right.empty())); i++)
         {
             m_left.push_back(m_right.front());
             m_right.pop_front();
@@ -12152,5 +12152,74 @@ public:
     }
 };
 
+/// <summary>
+/// Leet Code 2336. Smallest Number in Infinite Set
+///                                                           
+/// Medium
+///
+/// You have a set which contains all positive integers 
+/// [1, 2, 3, 4, 5, ...].
+///
+/// Implement the SmallestInfiniteSet class:
+/// SmallestInfiniteSet() Initializes the SmallestInfiniteSet object 
+/// to contain all positive integers.
+/// int popSmallest() Removes and returns the smallest integer 
+/// contained in the infinite set.
+/// void addBack(int num) Adds a positive integer num back into the 
+/// infinite set, if it is not already in the infinite set.
+/// 
+/// Example 1:
+/// Input
+/// ["SmallestInfiniteSet", "addBack", "popSmallest", "popSmallest", 
+/// "popSmallest", "addBack", "popSmallest", "popSmallest", "popSmallest"]
+/// [[], [2], [], [], [], [1], [], [], []]
+/// Output
+/// [null, null, 1, 2, 3, null, 1, 4, 5]
+///
+/// Explanation
+/// SmallestInfiniteSet smallestInfiniteSet = new SmallestInfiniteSet();
+/// smallestInfiniteSet.addBack(2); // 2 is already in the set.
+/// smallestInfiniteSet.popSmallest(); // return 1.
+/// smallestInfiniteSet.popSmallest(); // return 2.
+/// smallestInfiniteSet.popSmallest(); // return 3.
+/// smallestInfiniteSet.addBack(1);    // 1 is added back to the set.
+/// smallestInfiniteSet.popSmallest(); // return 1, since 1 was added
+///  smallestInfiniteSet.popSmallest(); // return 4, and remove it.
+/// smallestInfiniteSet.popSmallest(); // return 5, and remove it from 
+/// the set.
+/// Constraints:
+/// 1. 1 <= num <= 1000
+/// 2. At most 1000 calls will be made in total to popSmallest and addBack.
+/// </summary>
+class SmallestInfiniteSet
+{
+private:
+    int m_max_val;
+    set<int> m_data;
+public:
+    SmallestInfiniteSet() 
+    {
+        m_max_val = 1;
+        m_data.insert(m_max_val);
+    }
+
+    int popSmallest() 
+    {
+        int val = *m_data.begin();
+        m_data.erase(m_data.begin());
+        if (m_data.empty())
+        {
+            m_max_val++;
+            m_data.insert(m_max_val);
+        }
+        return val;
+    }
+
+    void addBack(int num) 
+    {
+        if (num > m_max_val) return;
+        m_data.insert(num);
+    }
+};
 
 #endif // LeetcodeDesign_H

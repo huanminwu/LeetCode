@@ -4735,8 +4735,114 @@ void TestLeetCode2310(void)
     Logger::WriteMessage("num = " + to_string(num) + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2335(void)
+{
+    Logger::WriteMessage("Test Leet Code 2335");
+    vector<int> amount = { 1, 4, 2 };
+    LeetCodeMath leetCode;
+    int result = leetCode.fillCups(amount);
+    Logger::WriteMessage(amount);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    amount = { 5,4,4 };
+    result = leetCode.fillCups(amount);
+    Logger::WriteMessage(amount);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    amount = { 5,0,0 };
+    result = leetCode.fillCups(amount);
+    Logger::WriteMessage(amount);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2333(void)
+{
+    Logger::WriteMessage("Test Leet Code 2333");
+    LeetCodeMath leetCode;
+    vector<int> nums1 = { 1, 2, 3, 4 };
+    vector<int> nums2 = { 2, 10, 20, 19 };
+    int k1 = 0, k2 = 0;
+    long long result = leetCode.minSumSquareDiff(nums1, nums2, k1, k2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k1 = " + to_string(k1) + "; k2 = " + to_string(k2) + "; result = " + to_string(result));
+
+    nums1 = { 1,4,10,12 };
+    nums2 = { 5,8,6,9 };
+    k1 = 1, k2 = 1;
+    result = leetCode.minSumSquareDiff(nums1, nums2, k1, k2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k1 = " + to_string(k1) + "; k2 = " + to_string(k2) + "; result = " + to_string(result));
+
+    nums1 = { 1,4,10,12 };
+    nums2 = { 5,8,6,9 };
+    k1 = 10, k2 = 5;
+    result = leetCode.minSumSquareDiff(nums1, nums2, k1, k2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k1 = " + to_string(k1) + "; k2 = " + to_string(k2) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2344(void)
+{
+    Logger::WriteMessage("Test Leet Code 2344");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 2, 3, 2, 4, 3 };
+    vector<int> numsDivide = { 9, 6, 9, 3, 15 };
+    int result = leetCode.minOperations(nums, numsDivide);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(numsDivide);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,3,6 };
+    numsDivide = { 8,2,6,10 };
+    result = leetCode.minOperations(nums, numsDivide);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(numsDivide);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2367(void)
+{
+    Logger::WriteMessage("Test Leet Code 2367");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 0, 1, 4, 6, 7, 10 };
+    int diff = 3;
+    int result = leetCode.arithmeticTriplets(nums, diff);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("diff = " + to_string(diff) + "; result = " + to_string(result));
+
+    nums = { 4,5,6,7,8,9 };
+    diff = 2;
+    result = leetCode.arithmeticTriplets(nums, diff);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("diff = " + to_string(diff) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2357(void)
+{
+    Logger::WriteMessage("Test Leet Code 2357");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1,5,0,3,5 };
+    int result = leetCode.minimumOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = {0};
+    result = leetCode.minimumOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2357();
+    TestLeetCode2367();
+    TestLeetCode2344();
+    TestLeetCode2333();
+    TestLeetCode2335();
+    TestLeetCode2310();
     TestLeetCode2303();
     TestLeetCode2280();
     TestLeetCode2249();

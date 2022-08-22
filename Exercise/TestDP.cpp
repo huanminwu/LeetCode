@@ -3132,7 +3132,7 @@ void TestLeetCode2312(void)
     int m = 3;
     int n = 5;
     vector<vector<int>> prices = { {1, 4, 2},{2, 2, 7},{2, 1, 3} };
-    int result = leetCode.sellingWood(m, n, prices);
+    long long result = leetCode.sellingWood(m, n, prices);
     Logger::WriteMessage(prices);
     Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; result = " + to_string(result));
 
@@ -3170,8 +3170,24 @@ void TestLeetCode2320(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2338(void)
+{
+    Logger::WriteMessage("Test Leet Code 2338");
+    LeetCodeDP leetCode;
+    int n = 2;
+    int maxValue = 5;
+    int result = leetCode.idealArrays(n, maxValue);
+    Logger::WriteMessage("n = " + to_string(n) + "; max_Value = " + to_string(maxValue) + "; result = " + to_string(result));
+
+    n = 5;
+    maxValue = 3;
+    result = leetCode.idealArrays(n, maxValue);
+    Logger::WriteMessage("n = " + to_string(n) + "; max_Value = " + to_string(maxValue) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2338();
     TestLeetCode2318();
     TestLeetCode2320();
     TestLeetCode2312();

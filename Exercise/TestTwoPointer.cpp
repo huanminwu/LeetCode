@@ -158,8 +158,58 @@ void TestLeetCode2302(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2327(void)
+{
+    Logger::WriteMessage("Test Leet Code 2327");
+    LeetCodeTwoPointer leetCode;
+    int n = 6, delay = 2, forget = 4;
+    int result = leetCode.peopleAwareOfSecret(n, delay, forget);
+    Logger::WriteMessage("n = " + to_string(n) + "; delay = " + to_string(delay) +
+        "; forget = " + to_string(forget) + "; result = " + to_string(result));
+
+    n = 4, delay = 1, forget = 3;
+    result = leetCode.peopleAwareOfSecret(n, delay, forget);
+    Logger::WriteMessage("n = " + to_string(n) + "; delay = " + to_string(delay) +
+        "; forget = " + to_string(forget) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2330(void)
+{
+    Logger::WriteMessage("Test Leet Code 2330");
+    LeetCodeTwoPointer leetCode;
+    string s = "abcdba";
+    bool result = leetCode.makePalindrome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "aa";
+    result = leetCode.makePalindrome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "abcdef";
+    result = leetCode.makePalindrome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2379(void)
+{
+    Logger::WriteMessage("Test Leet Code 2330");
+    LeetCodeTwoPointer leetCode;
+    string blocks = "WBBWWBBWBW";
+    int k = 7;
+    int result = leetCode.minimumRecolors(blocks, k);
+    Logger::WriteMessage("blocks = " + blocks + "; result = " + to_string(result));
+
+    blocks = "WBWBBBW";
+    k = 2;
+    result = leetCode.minimumRecolors(blocks, k);
+    Logger::WriteMessage("blocks = " + blocks + "; result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2379();
+    TestLeetCode2330();
+    TestLeetCode2327();
     TestLeetCode2302();
     TestLeetCode2105();
     TestLeetCode2107();

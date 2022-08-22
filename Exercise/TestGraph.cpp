@@ -4560,8 +4560,24 @@ void TestLeetCode2322(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2328(void)
+{
+    Logger::WriteMessage("Test Leet Code 2328");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid = { {1, 1}, {3, 4} };
+    int result = leetCode.countPaths(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1},{2} };
+    result = leetCode.countPaths(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2328();
     TestLeetCode2322();
     TestLeetCode2316();
     TestLeetCode2307();

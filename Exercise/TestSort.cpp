@@ -2880,8 +2880,50 @@ void TestLeetCode2300(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2323(void)
+{
+    Logger::WriteMessage("Test Leet Code 2323");
+    LeetCodeSort leetCode;
+    vector<int> jobs = { 5, 2, 4 };
+    vector<int> workers = { 1, 7, 5 };
+    int result = leetCode.minimumTime(jobs, workers);
+    Logger::WriteMessage(jobs);
+    Logger::WriteMessage(workers);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    jobs = { 3,18,15,9 };
+    workers = { 6,5,1,3 };
+    result = leetCode.minimumTime(jobs, workers);
+    Logger::WriteMessage(jobs);
+    Logger::WriteMessage(workers);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2332(void)
+{
+    Logger::WriteMessage("Test Leet Code 2332");
+    LeetCodeSort leetCode;
+    vector<int> buses = { 10, 20 };
+    vector<int> passengers = { 2, 17, 18, 19 };
+    int capacity = 2;
+    int result = leetCode.latestTimeCatchTheBus(buses, passengers, capacity);
+    Logger::WriteMessage(buses);
+    Logger::WriteMessage(passengers);
+    Logger::WriteMessage("capacity = " + to_string(capacity) + "; result = " + to_string(result));
+
+    buses = { 20,30,10 };
+    passengers = { 19,13,26,4,25,11,21 };
+    capacity = 2;
+    result = leetCode.latestTimeCatchTheBus(buses, passengers, capacity);
+    Logger::WriteMessage(buses);
+    Logger::WriteMessage(passengers);
+    Logger::WriteMessage("capacity = " + to_string(capacity) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2332();
+    TestLeetCode2323();
     TestLeetCode2300();
     TestLeetCode2285();
     TestLeetCode2279();

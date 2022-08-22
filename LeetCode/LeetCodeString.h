@@ -11197,6 +11197,205 @@ public:
     /// 3. s contains an even number of vertical bars '|'.
     /// </summary>
     int countAsterisks(string s);
+
+    /// <summary>
+    /// Leet Code 2325. Decode the Message
+    ///                                                           
+    /// Easy
+    ///
+    /// You are given the strings key and message, which represent a cipher 
+    /// key and a secret message, respectively. The steps to decode message 
+    /// are as follows:
+    ///
+    /// Use the first appearance of all 26 lowercase English letters in key 
+    /// as the order of the substitution table.
+    /// Align the substitution table with the regular English alphabet.
+    /// Each letter in message is then substituted using the table.
+    /// Spaces ' ' are transformed to themselves.
+    /// For example, given key = "happy boy" (actual key would have at least 
+    /// one instance of each letter in the alphabet), we have the partial 
+    /// substitution table of ('h' -> 'a', 'a' -> 'b', 'p' -> 'c', 'y' -> 'd', 
+    /// 'b' -> 'e', 'o' -> 'f').
+    /// Return the decoded message.
+    /// 
+    /// Example 1:
+    /// Input: key = "the quick brown fox jumps over the lazy dog", 
+    /// message = "vkbs bs t suepuv"
+    /// Output: "this is a secret"
+    /// Explanation: The diagram above shows the substitution table.
+    /// It is obtained by taking the first appearance of each letter in "the 
+    /// quick brown fox jumps over the lazy dog".
+    ///
+    /// Example 2:
+    /// Input: key = "eljuxhpwnyrdgtqkviszcfmabo", message = "zwx hnfx lqantp 
+    ///  mnoeius ycgk vcnjrdb"
+    /// Output: "the five boxing wizards jump quickly"
+    /// Explanation: The diagram above shows the substitution table.
+    /// It is obtained by taking the first appearance of each letter in 
+    /// "eljuxhpwnyrdgtqkviszcfmabo".
+    /// 
+    /// Constraints:
+    /// 1. 26 <= key.length <= 2000
+    /// 2. key consists of lowercase English letters and ' '.
+    /// 3. key contains every letter in the English alphabet ('a' to 'z') at 
+    ///    least once.
+    /// 4. 1 <= message.length <= 2000
+    /// 5. message consists of lowercase English letters and ' '.
+    /// </summary>
+    string decodeMessage(string key, string message);
+
+    /// <summary>
+    /// Leet Code 2343. Query Kth Smallest Trimmed Number
+    ///                                                           
+    /// Medium
+    ///
+    /// You are given a 0-indexed array of strings nums, where each string is 
+    /// of equal length and consists of only digits.
+    ///
+    /// You are also given a 0-indexed 2D integer array queries where 
+    /// queries[i] = [ki, trimi]. For each queries[i], you need to:
+    ///
+    /// Trim each number in nums to its rightmost trimi digits.
+    /// Determine the index of the kith smallest trimmed number in nums. If 
+    /// two trimmed numbers are equal, the number with the lower index is 
+    /// considered to be smaller.
+    /// Reset each number in nums to its original length.
+    /// Return an array answer of the same length as queries, where answer[i] 
+    /// is the answer to the ith query.
+    ///
+    /// Note:
+    /// To trim to the rightmost x digits means to keep removing the leftmost 
+    /// digit, until only x digits remain.
+    /// Strings in nums may contain leading zeros.
+    /// 
+    /// Example 1:
+    /// Input: nums = ["102","473","251","814"], 
+    ///        queries = [[1,1],[2,3],[4,2],[1,2]]
+    /// Output: [2,2,1,0]
+    /// Explanation:
+    /// 1. After trimming to the last digit, nums = ["2","3","1","4"]. 
+    ///    The smallest number is 1 at index 2.
+    /// 2. Trimmed to the last 3 digits, nums is unchanged. The 2nd smallest 
+    ///    number is 251 at index 2.
+    /// 3. Trimmed to the last 2 digits, nums = ["02","73","51","14"]. The 4th 
+    ///    smallest number is 73.
+    /// 4. Trimmed to the last 2 digits, the smallest number is 2 at index 0.
+    /// Note that the trimmed number "02" is evaluated as 2.
+    ///
+    /// Example 2:
+    /// Input: nums = ["24","37","96","04"], queries = [[2,1],[2,2]]
+    /// Output: [3,0]
+    /// Explanation:
+    /// 1. Trimmed to the last digit, nums = ["4","7","6","4"]. 
+    ///    The 2nd smallest number is 4 at index 3.
+    ///    There are two occurrences of 4, but the one at index 0 is considered 
+    ///    smaller than the one at index 3.
+    /// 2. Trimmed to the last 2 digits, nums is unchanged. The 2nd smallest 
+    ///    number is 24.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= nums[i].length <= 100
+    /// 3. nums[i] consists of only digits.
+    /// 4. All nums[i].length are equal.
+    /// 5. 1 <= queries.length <= 100
+    /// 6. queries[i].length == 2
+    /// 7. 1 <= ki <= nums.length
+    /// 8. 1 <= trimi <= nums[i].length
+    /// Follow up: Could you use the Radix Sort Algorithm to solve this 
+    /// problem? What will be the complexity of that solution?
+    /// </summary>
+    vector<int> smallestTrimmedNumbers(vector<string>& nums, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet Code 2337. Move Pieces to Obtain a String
+    ///                                                           
+    /// Medium
+    ///
+    /// You are given two strings start and target, both of length n. Each 
+    /// string consists only of the characters 'L', 'R', and '_' where:
+    ///
+    /// The characters 'L' and 'R' represent pieces, where a piece 'L' can 
+    /// move to the left only if there is a blank space directly to its left, 
+    /// and a piece 'R' can move to the right only if there is a blank space 
+    /// directly to its right.
+    /// The character '_' represents a blank space that can be occupied by 
+    /// any of the 'L' or 'R' pieces.
+    /// Return true if it is possible to obtain the string target by moving 
+    /// the pieces of the string start any number of times. Otherwise, return 
+    /// false.
+    ///
+    /// Example 1:
+    /// Input: start = "_L__R__R_", target = "L______RR"
+    /// Output: true
+    /// Explanation: We can obtain the string target from start by doing the 
+    /// following moves:
+    /// - Move the first piece one step to the left, start becomes equal 
+    ///   to "L___R__R_".
+    /// - Move the last piece one step to the right, start becomes equal 
+    ///   to "L___R___R".
+    /// - Move the second piece three steps to the right, start becomes equal 
+    ///   to "L______RR".
+    /// Since it is possible to get the string target from start, we return 
+    /// true.
+    ///
+    /// Example 2:
+    /// Input: start = "R_L_", target = "__LR"
+    /// Output: false
+    /// Explanation: The 'R' piece in the string start can move one step to 
+    /// the right to obtain "_RL_".
+    /// After that, no pieces can move anymore, so it is impossible to obtain 
+    /// the string target from start.
+    ///
+    /// Example 3:
+    /// Input: start = "_R", target = "R_"
+    /// Output: false
+    /// Explanation: The piece in the string start can move only to the right, 
+    /// so it is impossible to obtain the string target from start.
+    /// 
+    /// Constraints:
+    /// 1. n == start.length == target.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. start and target consist of the characters 'L', 'R', and '_'.
+    /// </summary>
+    bool canChange(string start, string target);
+
+    /// <summary>
+    /// Leet Code 2351. First Letter to Appear Twice
+    ///                                                           
+    /// Easy
+    ///
+    /// Given a string s consisting of lowercase English letters, return the 
+    /// first letter to appear twice.
+    ///
+    /// Note:
+    /// A letter a appears twice before another letter b if the second 
+    /// occurrence of a is before the second occurrence of b.
+    /// s will contain at least one letter that appears twice.
+    /// 
+    /// Example 1:
+    /// Input: s = "abccbaacz"
+    /// Output: "c"
+    /// Explanation:
+    /// The letter 'a' appears on the indexes 0, 5 and 6.
+    /// The letter 'b' appears on the indexes 1 and 4.
+    /// The letter 'c' appears on the indexes 2, 3 and 7.
+    /// The letter 'z' appears on the index 8.
+    /// The letter 'c' is the first letter to appear twice, because out of 
+    /// all the letters the index of its second occurrence is the smallest.
+    ///
+    /// Example 2:
+    /// Input: s = "abcdd"
+    /// Output: "d"
+    /// Explanation:
+    /// The only letter that appears twice is 'd' so we return 'd'.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= s.length <= 100
+    /// 2. s consists of lowercase English letters.
+    /// 3. s has at least one repeated letter.
+    /// </summary>
+    char repeatedCharacter(string s);
 #pragma endregion
 };
 

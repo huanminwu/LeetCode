@@ -1470,8 +1470,51 @@ void TestLeetCode2295(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2342(void)
+{
+    Logger::WriteMessage("Test Leet Code 2342");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 18,43,36,13,7 };
+    int result = leetCode.maximumSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,12,19,14 };
+    result = leetCode.maximumSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2347(void)
+{
+    Logger::WriteMessage("Test Leet Code 2347");
+    LeetCodeHashtable leetCode;
+    vector<int> ranks = { 13, 2, 3, 1, 9 };
+    vector<char> suits = { 'a', 'a', 'a', 'a', 'a' };
+    string result = leetCode.bestHand(ranks, suits);
+    Logger::WriteMessage(ranks);
+    Logger::WriteMessage(suits);
+    Logger::WriteMessage("result = " + result);
+
+    ranks = { 4,4,2,4,4 };
+    suits = { 'd','a','a','b','c' };
+    result = leetCode.bestHand(ranks, suits);
+    Logger::WriteMessage(ranks);
+    Logger::WriteMessage(suits);
+    Logger::WriteMessage("result = " + result);
+
+    ranks = { 10,10,2,12,9 };
+    suits = { 'a','b','c','a','d' };
+    result = leetCode.bestHand(ranks, suits);
+    Logger::WriteMessage(ranks);
+    Logger::WriteMessage(suits);
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode2347();
+    TestLeetCode2342();
     TestLeetCode2295();
     TestLeetCode2248();
     TestLeetCode2244();

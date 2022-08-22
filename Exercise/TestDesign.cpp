@@ -4581,8 +4581,48 @@ void TestLeetCode2296(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2336(void)
+{
+    Logger::WriteMessage("Test Leet Code 2336");
+
+    vector<string> commands =
+    {
+       "SmallestInfiniteSet", "addBack", "popSmallest", "popSmallest", 
+       "popSmallest", "addBack", "popSmallest", "popSmallest", 
+       "popSmallest"
+    };
+    vector<vector<int>> parameters =
+    {
+        {} ,{2},{},{},{},{1},{},{},{}
+    };
+    vector<string> result;
+    SmallestInfiniteSet* smallestInfiniteSet = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "SmallestInfiniteSet")
+        {
+            smallestInfiniteSet = new SmallestInfiniteSet();
+            result.push_back("null");
+        }
+        else if (commands[i] == "addBack")
+        {
+            smallestInfiniteSet->addBack(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "popSmallest")
+        {
+            int ret = smallestInfiniteSet->popSmallest();
+            result.push_back(to_string(ret));
+        }
+    }
+    delete smallestInfiniteSet;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2336();
     TestLeetCode2296();
     TestLeetCode2276();
     TestTouchScreen();

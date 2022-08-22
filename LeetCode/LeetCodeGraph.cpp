@@ -15121,4 +15121,85 @@ int LeetCodeGraph::minimumScore(vector<int>& nums, vector<vector<int>>& edges)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2328. Number of Increasing Paths in a Grid
+///                                                           
+/// Hard
+///
+/// You are given an m x n integer matrix grid, where you can move from a 
+/// cell to any adjacent cell in all 4 directions.
+///
+/// Return the number of strictly increasing paths in the grid such that 
+/// you can start from any cell and end at any cell. Since the answer may 
+/// be very large, return it modulo 10^9 + 7.
+/// 
+/// Two paths are considered different if they do not have exactly the 
+/// same sequence of visited cells.
+///
+/// Example 1:
+/// Input: grid = [[1,1],[3,4]]
+/// Output: 8
+/// Explanation: The strictly increasing paths are:
+/// - Paths with length 1: [1], [1], [3], [4].
+/// - Paths with length 2: [1 -> 3], [1 -> 4], [3 -> 4].
+/// - Paths with length 3: [1 -> 3 -> 4].
+/// The total number of paths is 4 + 3 + 1 = 8.
+///
+/// Example 2:
+/// Input: grid = [[1],[2]]
+/// Output: 3
+/// Explanation: The strictly increasing paths are:
+/// - Paths with length 1: [1], [2].
+/// - Paths with length 2: [1 -> 2].
+/// The total number of paths is 2 + 1 = 3.
+/// 
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 1 <= m, n <= 1000
+/// 4. 1 <= m * n <= 10^5
+/// 5. 1 <= grid[i][j] <= 10^5
+/// </summary>
+int LeetCodeGraph::countPaths(vector<vector<int>>& grid)
+{
+    int m = grid.size();
+    int n = grid[0].size();
+    int M = 1000000007;
+    vector<vector<int>> cells;
+    vector<vector<int>> dp(m, vector<int>(n));
+    vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            cells.push_back({ grid[i][j], i, j });
+        }
+    }
+    sort(cells.begin(), cells.end());
+    int result = 0;
+    for (size_t i = 0; i < cells.size(); i++)
+    {
+        int v = cells[i][0];
+        int r = cells[i][1];
+        int c = cells[i][2];
+        dp[r][c] = (dp[r][c] + 1) % M;
+        for (size_t d = 0; d < directions.size(); d++)
+        {
+            int next_r = r + directions[d][0];
+            int next_c = c + directions[d][1];
+            if (next_r < 0 || next_r >= m || next_c < 0 || next_c >= n)
+            {
+                continue;
+            }
+            if (grid[next_r][next_c] <= v)
+            {
+                continue;
+            }
+            dp[next_r][next_c] = (dp[next_r][next_c] + dp[r][c]) % M;
+        }
+        result = (result + dp[r][c]) % M;
+    }
+    return result;
+}
 #pragma endregion

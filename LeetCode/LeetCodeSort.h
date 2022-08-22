@@ -5424,6 +5424,120 @@ public:
     /// 5. 1 <= success <= 10^10
     /// </summary>
     vector<int> successfulPairs(vector<int>& spells, vector<int>& potions, long long success);
+
+    /// <summary>
+    /// Leet Code 2323. Find Minimum Time to Finish All Jobs II
+    ///                                                           
+    /// Medium
+    ///
+    /// You are given two 0-indexed integer arrays jobs and workers of equal 
+    /// length, where jobs[i] is the amount of time needed to complete the 
+    /// ith job, and workers[j] is the amount of time the jth worker can work 
+    /// each day.
+    ///
+    /// Each job should be assigned to exactly one worker, such that each 
+    /// worker completes exactly one job.
+    ///
+    /// Return the minimum number of days needed to complete all the jobs 
+    /// after assignment.
+    ///
+    /// 
+    /// Example 1:
+    ///
+    /// Input: jobs = [5,2,4], workers = [1,7,5]
+    /// Output: 2
+    /// Explanation:
+    /// - Assign the 2nd worker to the 0th job. It takes them 1 day to finish 
+    ///   the job.
+    /// - Assign the 0th worker to the 1st job. It takes them 2 days to finish 
+    ///   the job.
+    /// - Assign the 1st worker to the 2nd job. It takes them 1 day to finish 
+    ///   the job.
+    /// It takes 2 days for all the jobs to be completed, so return 2.
+    /// It can be proven that 2 days is the minimum number of days needed.
+    ///
+    /// Example 2:
+    /// Input: jobs = [3,18,15,9], workers = [6,5,1,3]
+    /// Output: 3
+    /// Explanation:
+    /// - Assign the 2nd worker to the 0th job. It takes them 3 days to finish 
+    ///   the job.
+    /// - Assign the 0th worker to the 1st job. It takes them 3 days to finish 
+    ///   the job.
+    /// - Assign the 1st worker to the 2nd job. It takes them 3 days to finish 
+    ///   the job.
+    /// - Assign the 3rd worker to the 3rd job. It takes them 3 days to finish 
+    ///   the job.
+    /// It takes 3 days for all the jobs to be completed, so return 3.
+    /// It can be proven that 3 days is the minimum number of days needed.
+    ///
+    /// Constraints:
+    /// 1. n == jobs.length == workers.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 1 <= jobs[i], workers[i] <= 10^5
+    /// </summary>
+    int minimumTime(vector<int>& jobs, vector<int>& workers);
+
+    /// <summary>
+    /// Leet Code 2332. The Latest Time to Catch a Bus
+    ///                                                           
+    /// Medium
+    ///
+    /// You are given a 0-indexed integer array buses of length n, where 
+    /// buses[i] represents the departure time of the ith bus. You are also 
+    /// given a 0-indexed integer array passengers of length m, where 
+    /// passengers[j] represents the arrival time of the jth passenger. All 
+    /// bus departure times are unique. All passenger arrival times are unique.
+    ///
+    /// You are given an integer capacity, which represents the maximum number 
+    /// of passengers that can get on each bus.
+    ///
+    /// When a passenger arrives, they will wait in line for the next 
+    /// available bus. You can get on a bus that departs at x minutes if you 
+    /// arrive at y minutes where y <= x, and the bus is not full. Passengers 
+    /// with the earliest arrival times get on the bus first.
+    ///
+    /// More formally when a bus arrives, either:
+    ///
+    /// If capacity or fewer passengers are waiting for a bus, they will all 
+    /// get on the bus, or
+    /// The capacity passengers with the earliest arrival times will get on 
+    /// the bus.
+    /// Return the latest time you may arrive at the bus station to catch a 
+    /// bus. You cannot arrive at the same time as another passenger.
+    ///
+    /// Note: The arrays buses and passengers are not necessarily sorted.
+    ///
+    /// Example 1:
+    /// Input: buses = [10,20], passengers = [2,17,18,19], capacity = 2
+    /// Output: 16
+    /// Explanation: Suppose you arrive at time 16.
+    /// At time 10, the first bus departs with the 0th passenger. 
+    /// At time 20, the second bus departs with you and the 1st passenger.
+    /// Note that you may not arrive at the same time as another passenger, 
+    /// which is why you must arrive before the 1st passenger to catch the bus.
+    ///
+    /// Example 2:
+    /// Input: buses = [20,30,10], passengers = [19,13,26,4,25,11,21], 
+    /// capacity = 2
+    /// Output: 20
+    /// Explanation: Suppose you arrive at time 20.
+    /// At time 10, the first bus departs with the 3rd passenger. 
+    /// At time 20, the second bus departs with the 5th and 1st 
+    /// passengers.
+    /// At time 30, the third bus departs with the 0th passenger and you.
+    /// Notice if you had arrived any later, then the 6th passenger would have 
+    /// taken your seat on the third bus.
+    ///
+    /// Constraints:
+    /// 1. n == buses.length
+    /// 2. m == passengers.length
+    /// 3. 1 <= n, m, capacity <= 10^5
+    /// 4. 2 <= buses[i], passengers[i] <= 10^9
+    /// 5. Each element in buses is unique.
+    /// 6. Each element in passengers is unique.
+    /// </summary>
+    int latestTimeCatchTheBus(vector<int>& buses, vector<int>& passengers, int capacity);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

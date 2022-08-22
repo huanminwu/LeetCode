@@ -3449,8 +3449,29 @@ void TestLeetCode2313(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode2331(void)
+{
+    Logger::WriteMessage("Test Leet Code 2331");
+    LeetCodeTree leetCode;
+
+    string input = "[2,1,3,null,null,0,1]";
+    TreeNode* root = leetCode.deserialize(input);
+    bool result = leetCode.evaluateTree(root);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+    leetCode.freeTreeNodes(root);
+
+    input = "[0]";
+    root = leetCode.deserialize(input);
+    result = leetCode.evaluateTree(root);
+    Logger::WriteMessage("Tree = " + input);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode2331();
     TestLeetCode2313();
     TestLeetCode2277();
     TestLeetCode2246();

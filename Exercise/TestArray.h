@@ -2,6 +2,7 @@
 #ifndef TestArray_H
 #define TestArray_H
 #include "..\LeetCode\LeetCodeArray.h"
+#include "..\LeetCode\LeetCodeLinkedList.h"
 void TestLeetCode11(void);
 void TestLeetCode16(void);
 void TestLeetCode42(void);
@@ -245,5 +246,11 @@ void TestLeetCode2294(void);
 void TestLeetCode2304(void);
 void TestLeetCode2319(void);
 void TestLeetCode2321(void);
+void TestLeetCode2326(void);
+void TestLeetCode2340(void);
+void TestLeetCode2341(void);
+void TestLeetCode2363(void);
+void TestLeetCode2373(void);
+void TestLeetCode2383(void);
 void TestLeetCodeArray(void);
 #endif  // TestArray

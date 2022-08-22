@@ -22448,5 +22448,415 @@ int LeetCodeArray::maximumsSplicedArray(vector<int>& nums1, vector<int>& nums2)
     int result = max(sum1_val  - min_val, sum2_val + max_val);
     return result;
 }
+
+/// <summary>
+/// Leet Code 2326. Spiral Matrix IV
+///                                                           
+/// Medium
+///
+/// You are given two integers m and n, which represent the dimensions of 
+/// a matrix.
+///
+/// You are also given the head of a linked list of integers.
+///
+/// Generate an m x n matrix that contains the integers in the linked list 
+/// presented in spiral order (clockwise), starting from the top-left of 
+/// the matrix. If there are remaining empty spaces, fill them with -1.
+///
+/// Return the generated matrix.
+///
+/// Example 1:
+/// Input: m = 3, n = 5, head = [3,0,2,6,8,1,7,9,4,2,5,5,0]
+/// Output: [[3,0,2,6,8],[5,0,-1,-1,1],[5,2,4,9,7]]
+/// Explanation: The diagram above shows how the values are printed in the 
+/// matrix.
+/// Note that the remaining spaces in the matrix are filled with -1.
+///
+/// Example 2:
+/// Input: m = 1, n = 4, head = [0,1,2]
+/// Output: [[0,1,2,-1]]
+/// Explanation: The diagram above shows how the values are printed from 
+/// left to right in the matrix.
+/// The last space in the matrix is set to -1.
+/// 
+/// Constraints:
+/// 1. 1 <= m, n <= 10^5
+/// 2. 1 <= m * n <= 10^5
+/// 3. The number of nodes in the list is in the range [1, m * n].
+/// 4. 0 <= Node.val <= 1000
+/// </summary>
+vector<vector<int>> LeetCodeArray::spiralMatrix(int m, int n, ListNode* head)
+{
+    vector<vector<int>> result(m, vector<int>(n, -1));
+    vector<vector<int>> directions = { {0, 1}, {1, 0}, {0, -1}, {-1, 0} };
+    int r = 0, c = 0, d = 0;
+    ListNode* ptr = head;
+    while (ptr != nullptr)
+    {
+        result[r][c] = ptr->val;
+        int n_r = r + directions[d][0], n_c = c + directions[d][1];
+        if (n_r < 0 || n_r == m || n_c < 0 || n_c == n || result[n_r][n_c] != -1)
+        {
+            d = (d + 1) % 4;
+        }
+        r = r + directions[d][0];
+        c = c + directions[d][1];
+        ptr = ptr->next;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2340. Minimum Adjacent Swaps to Make a Valid Array
+///                                                           
+/// Medium
+///
+/// You are given a 0-indexed integer array nums.
+///
+/// Swaps of adjacent elements are able to be performed on nums.
+///
+/// A valid array meets the following conditions:
+///
+/// The largest element (any of the largest elements if there are 
+/// multiple) is at the rightmost position in the array.
+/// The smallest element (any of the smallest elements if there are 
+/// multiple) is at the leftmost position in the array.
+/// Return the minimum swaps required to make nums a valid array.
+///
+/// Example 1:
+/// Input: nums = [3,4,5,5,3,1]
+/// Output: 6
+/// Explanation: Perform the following swaps:
+/// - Swap 1: Swap the 3rd and 4th elements, nums is then [3,4,5,3,5,1].
+/// - Swap 2: Swap the 4th and 5th elements, nums is then [3,4,5,3,1,5].
+/// - Swap 3: Swap the 3rd and 4th elements, nums is then [3,4,5,1,3,5].
+/// - Swap 4: Swap the 2nd and 3rd elements, nums is then [3,4,1,5,3,5].
+/// - Swap 5: Swap the 1st and 2nd elements, nums is then [3,1,4,5,3,5].
+/// - Swap 6: Swap the 0th and 1st elements, nums is then [1,3,4,5,3,5].
+/// It can be shown that 6 swaps is the minimum swaps required to make a 
+/// valid array.
+///
+/// Example 2:
+/// Input: nums = [9]
+/// Output: 0
+/// Explanation: The array is already valid, so we return 0.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeArray::minimumSwaps(vector<int>& nums)
+{
+    pair<int, int> min_num, max_num;
+    min_num.first = nums[0];
+    min_num.second = 0;
+    max_num.first = nums[0];
+    max_num.second = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] < min_num.first)
+        {
+            min_num.first = nums[i];
+            min_num.second = i;
+        }
+        if (nums[i] >= max_num.first)
+        {
+            max_num.first = nums[i];
+            max_num.second = i;
+        }
+    }
+    int result = min_num.second + (nums.size() - 1 - max_num.second);
+    if (min_num.second > max_num.second)
+    {
+        result--;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2341. Maximum Number of Pairs in Array
+///                                                           
+/// Easy
+///
+/// You are given a 0-indexed integer array nums. In one operation, you 
+/// may do the following:
+///
+/// Choose two integers in nums that are equal.
+/// Remove both integers from nums, forming a pair.
+/// The operation is done on nums as many times as possible.
+///
+/// Return a 0-indexed integer array answer of size 2 where answer[0] is 
+/// the number of pairs that are formed and answer[1] is the number of 
+/// leftover integers in nums after doing the operation as many times as 
+/// possible.
+///
+/// Example 1:
+/// Input: nums = [1,3,2,1,3,2,2]
+/// Output: [3,1]
+/// Explanation:
+/// Form a pair with nums[0] and nums[3] and remove them from nums. Now, 
+/// nums = [3,2,3,2,2].
+/// Form a pair with nums[0] and nums[2] and remove them from nums. Now, 
+/// nums = [2,2,2].
+/// Form a pair with nums[0] and nums[1] and remove them from nums. Now, 
+/// nums = [2].
+/// No more pairs can be formed. A total of 3 pairs have been formed, and 
+/// there is 1 number leftover in nums.
+///
+/// Example 2:
+/// Input: nums = [1,1]
+/// Output: [1,0]
+/// Explanation: Form a pair with nums[0] and nums[1] and remove them 
+/// from nums. Now, nums = [].
+/// No more pairs can be formed. A total of 1 pair has been formed, and 
+/// there are 0 numbers leftover in nums.
+///
+/// Example 3:
+/// Input: nums = [0]
+/// Output: [0,1]
+/// Explanation: No pairs can be formed, and there is 1 number leftover 
+/// in nums.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 0 <= nums[i] <= 100
+/// </summary>
+vector<int> LeetCodeArray::numberOfPairs(vector<int>& nums)
+{
+    vector<int> dp(101), result(2);
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        dp[nums[i]]++;
+    }
+    for (int i = 0; i < dp.size(); i++)
+    {
+        result[0] += dp[i] / 2;
+        result[1] += dp[i] % 2;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2363. Merge Similar Items
+///                                                           
+/// Easy
+///
+/// You are given two 2D integer arrays, items1 and items2, representing 
+/// two sets of items. Each array items has the following properties:
+///
+/// items[i] = [valuei, weighti] where valuei represents the value and 
+/// weighti represents the weight of the ith item.
+/// The value of each item in items is unique.
+/// Return a 2D integer array ret where ret[i] = [valuei, weighti], with 
+/// weighti being the sum of weights of all items with value valuei.
+///
+/// Note: ret should be returned in ascending order by value.
+///
+/// Example 1:
+/// Input: items1 = [[1,1],[4,5],[3,8]], items2 = [[3,1],[1,5]]
+/// Output: [[1,6],[3,9],[4,5]]
+/// Explanation: 
+/// The item with value = 1 occurs in items1 with weight = 1 and in 
+/// items2 with weight = 5, total weight = 1 + 5 = 6.
+/// The item with value = 3 occurs in items1 with weight = 8 and in 
+/// items2 with weight = 1, total weight = 8 + 1 = 9.
+/// The item with value = 4 occurs in items1 with weight = 5, total 
+/// weight = 5.  
+/// Therefore, we return [[1,6],[3,9],[4,5]].
+///
+/// Example 2:
+/// Input: items1 = [[1,1],[3,2],[2,3]], items2 = [[2,1],[3,2],[1,3]]
+/// Output: [[1,4],[2,4],[3,4]]
+/// Explanation: 
+/// The item with value = 1 occurs in items1 with weight = 1 and in 
+/// items2 with weight = 3, total weight = 1 + 3 = 4.
+/// The item with value = 2 occurs in items1 with weight = 3 and in 
+/// items2 with weight = 1, total weight = 3 + 1 = 4.
+/// The item with value = 3 occurs in items1 with weight = 2 and in 
+/// items2 with weight = 2, total weight = 2 + 2 = 4.
+/// Therefore, we return [[1,4],[2,4],[3,4]].
+///
+/// Example 3:
+/// Input: items1 = [[1,3],[2,2]], items2 = [[7,1],[2,2],[1,4]]
+/// Output: [[1,7],[2,4],[7,1]]
+/// Explanation:
+/// The item with value = 1 occurs in items1 with weight = 3 and in 
+/// items2 with weight = 4, total weight = 3 + 4 = 7. 
+/// The item with value = 2 occurs in items1 with weight = 2 and in 
+/// items2 with weight = 2, total weight = 2 + 2 = 4. 
+/// The item with value = 7 occurs in items2 with weight = 1, 
+/// total weight = 1.
+/// Therefore, we return [[1,7],[2,4],[7,1]].
+///
+/// Constraints:
+/// 1. 1 <= items1.length, items2.length <= 1000
+/// 2. items1[i].length == items2[i].length == 2
+/// 3. 1 <= valuei, weighti <= 1000
+/// 4. Each valuei in items1 is unique.
+/// 5. Each valuei in items2 is unique.
+/// </summary>
+vector<vector<int>> LeetCodeArray::mergeSimilarItems(
+    vector<vector<int>>& items1, vector<vector<int>>& items2)
+{
+    vector<vector<int>> result;
+    map<int, int> item_map;
+    for (size_t i = 0; i < items1.size(); i++)
+    {
+        item_map[items1[i][0]] += items1[i][1];
+    }
+    for (size_t i = 0; i < items2.size(); i++)
+    {
+        item_map[items2[i][0]] += items2[i][1];
+    }
+    for (auto & itr : item_map)
+    {
+        result.push_back({ itr.first, itr.second });
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2373. Largest Local Values in a Matrix
+///                                                           
+/// Easy
+///
+/// You are given an n x n integer matrix grid.
+///
+/// Generate an integer matrix maxLocal of size (n - 2) x (n - 2) such 
+/// that:
+///
+/// maxLocal[i][j] is equal to the largest value of the 3 x 3 matrix 
+/// in grid centered around row i + 1 and column j + 1.
+/// In other words, we want to find the largest value in every 
+/// contiguous 3 x 3 matrix in grid.
+///
+/// Return the generated matrix.
+/// 
+/// Example 1:
+/// Input: grid = [[9,9,8,1],[5,6,2,6],[8,2,6,4],[6,2,2,2]]
+/// Output: [[9,9],[8,6]]
+/// Explanation: The diagram above shows the original matrix 
+/// and the generated matrix.
+/// Notice that each value in the generated matrix corresponds to the 
+/// largest value of a contiguous 3 x 3 matrix in grid.
+///
+/// Example 2:
+/// Input: grid = [[1,1,1,1,1],[1,1,1,1,1],[1,1,2,1,1],[1,1,1,1,1],
+///                [1,1,1,1,1]]
+/// Output: [[2,2,2],[2,2,2],[2,2,2]]
+/// Explanation: Notice that the 2 is contained within every 
+/// contiguous 3 x 3 matrix in grid.
+///
+/// Constraints:
+/// n == grid.length == grid[i].length
+/// 3 <= n <= 100
+/// 1 <= grid[i][j] <= 100
+/// </summary>
+vector<vector<int>> LeetCodeArray::largestLocal(vector<vector<int>>& grid)
+{
+    int n = grid.size() - 2;
+    vector<vector<int>> result(n, vector<int>(n));
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            int v = 0;
+            for (int r = i; r < i + 3; r++)
+            {
+                for (int c = j; c < j + 3; c++)
+                {
+                    v = max(grid[r][c], v);
+                }
+            }
+            result[i][j] = v;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2383. Minimum Hours of Training to Win a Competition
+///                                                           
+/// Easy
+///
+/// You are entering a competition, and are given two positive integers 
+/// initialEnergy and initialExperience denoting your initial energy and 
+/// initial experience respectively.
+/// You are also given two 0-indexed integer arrays energy and 
+/// experience, both of length n.
+/// You will face n opponents in order. The energy and experience of the 
+/// ith opponent is denoted by energy[i] and experience[i] respectively. 
+/// When you face an opponent, you need to have both strictly greater 
+/// experience and energy to defeat them and move to the next opponent 
+/// if available.
+///
+/// Defeating the ith opponent increases your experience by experience[i], 
+/// but decreases your energy by energy[i].
+///
+/// Before starting the competition, you can train for some number of 
+/// hours. After each hour of training, you can either choose to increase 
+/// your initial experience by one, or increase your initial energy by 
+/// one.
+///
+/// Return the minimum number of training hours required to defeat all 
+/// n opponents.
+///
+/// Example 1:
+/// Input: initialEnergy = 5, initialExperience = 3, energy = [1,4,3,2], 
+/// experience = [2,6,3,1]
+/// Output: 8
+/// Explanation: You can increase your energy to 11 after 6 hours of 
+/// training, and your experience to 5 after 2 hours of training.
+/// You face the opponents in the following order:
+/// - You have more energy and experience than the 0th opponent so you win.
+///   Your energy becomes 11 - 1 = 10, and your experience 
+///   becomes 5 + 2 = 7.
+/// - You have more energy and experience than the 1st opponent so you win.
+///   Your energy becomes 10 - 4 = 6, and your experience 
+///   becomes 7 + 6 = 13.
+/// - You have more energy and experience than the 2nd opponent so you win.
+///   Your energy becomes 6 - 3 = 3, and your experience 
+///   becomes 13 + 3 = 16.
+/// - You have more energy and experience than the 3rd opponent so you win.
+///   Your energy becomes 3 - 2 = 1, and your experience 
+///   becomes 16 + 1 = 17.
+///   You did a total of 6 + 2 = 8 hours of training before the 
+///   competition, so we return 8.
+/// It can be proven that no smaller answer exists.
+///
+/// Example 2:
+/// Input: initialEnergy = 2, initialExperience = 4, energy = [1], 
+/// experience = [3]
+/// Output: 0
+/// Explanation: You do not need any additional energy or experience to 
+/// win the competition, so we return 0.
+///
+/// Constraints:
+/// 1. n == energy.length == experience.length
+/// 2. 1 <= n <= 100
+/// 3. 1 <= initialEnergy, initialExperience, energy[i], 
+///    experience[i] <= 100
+/// </summary>
+int LeetCodeArray::minNumberOfHours(int initialEnergy, int initialExperience, vector<int>& energy, vector<int>& experience)
+{
+    int result = 0;
+    for (size_t i = 0; i < energy.size(); i++)
+    {
+        if (initialEnergy < energy[i] + 1)
+        {
+            result += energy[i] + 1 - initialEnergy;
+            initialEnergy = energy[i] + 1;
+        }
+        initialEnergy -= energy[i];
+        if (initialExperience < experience[i] + 1)
+        {
+            result += experience[i] + 1 - initialExperience;
+            initialExperience = experience[i] + 1;
+        }
+        initialExperience += experience[i];
+    }
+    return result;
+}
+
 #pragma endregion
 

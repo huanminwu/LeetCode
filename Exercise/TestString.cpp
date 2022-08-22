@@ -5553,8 +5553,82 @@ void TestLeetCode2315(void)
     Logger::WriteMessage("s= " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode2325(void)
+{
+    Logger::WriteMessage("Test Leet Code 2325");
+    LeetCodeString leetCode;
+    string key = "the quick brown fox jumps over the lazy dog";
+    string message = "vkbs bs t suepuv";
+    string result = leetCode.decodeMessage(key, message);
+    Logger::WriteMessage("key= " + key + "; message = " + message + "; result = " + result);
+
+    key = "eljuxhpwnyrdgtqkviszcfmabo";
+    message = "zwx hnfx lqantp mnoeius ycgk vcnjrdb";
+    result = leetCode.decodeMessage(key, message);
+    Logger::WriteMessage("key= " + key + "; message = " + message + "; result = " + result);
+}
+
+void TestLeetCode2343(void)
+{
+    Logger::WriteMessage("Test Leet Code 2343");
+    LeetCodeString leetCode;
+    vector<string> nums = { "102", "473", "251", "814" };
+    vector<vector<int>> queries = { {1, 1},{2, 3},{4, 2},{1, 2} };
+    vector<int> result = leetCode.smallestTrimmedNumbers(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { "24","37","96","04" };
+    queries = { {2, 1},{2, 2} };
+    result = leetCode.smallestTrimmedNumbers(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2337(void)
+{
+    Logger::WriteMessage("Test Leet Code 2337");
+    LeetCodeString leetCode;
+    string start = "_L__R__R_";
+    string target = "L______RR";
+    bool result = leetCode.canChange(start, target);
+    Logger::WriteMessage("start = " + start + "; target = " + target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    start = "R_L_";
+    target = "__LR";
+    result = leetCode.canChange(start, target);
+    Logger::WriteMessage("start = " + start + "; target = " + target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    start = "_R";
+    target = "R_";
+    result = leetCode.canChange(start, target);
+    Logger::WriteMessage("start = " + start + "; target = " + target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2351(void)
+{
+    Logger::WriteMessage("Test Leet Code 2351");
+    LeetCodeString leetCode;
+    string s = "abccbaacz";
+    char result = leetCode.repeatedCharacter(s);
+    Logger::WriteMessage("s = " + s + "; result = " + string(1, result));
+
+    s = "abcdd";
+    result = leetCode.repeatedCharacter(s);
+    Logger::WriteMessage("s = " + s + "; result = " + string(1, result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2351();
+    TestLeetCode2337();
+    TestLeetCode2343();
+    TestLeetCode2325();
     TestLeetCode2315();
     TestLeetCode2311();
     TestLeetCode2309();

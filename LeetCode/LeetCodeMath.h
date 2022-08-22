@@ -8754,5 +8754,218 @@ public:
     /// 2. 0 <= k <= 9
     /// </summary>
     int minimumNumbers(int num, int k);
+
+    /// <summary>
+    /// Leet Code 2335. Minimum Amount of Time to Fill Cups
+    ///                                                           
+    /// Easy
+    ///
+    /// You have a water dispenser that can dispense cold, warm, and hot 
+    /// water. Every second, you can either fill up 2 cups with different 
+    /// types of water, or 1 cup of any type of water.
+    ///
+    /// You are given a 0-indexed integer array amount of length 3 where 
+    /// amount[0], amount[1], and amount[2] denote the number of cold, warm, 
+    /// and hot water cups you need to fill respectively. Return the 
+    /// minimum number of seconds needed to fill up all the cups.
+    ///
+    /// 
+    /// Example 1:
+    /// Input: amount = [1,4,2]
+    /// Output: 4
+    /// Explanation: One way to fill up the cups is:
+    /// Second 1: Fill up a cold cup and a warm cup.
+    /// Second 2: Fill up a warm cup and a hot cup.
+    /// Second 3: Fill up a warm cup and a hot cup.
+    /// Second 4: Fill up a warm cup.
+    /// It can be proven that 4 is the minimum number of seconds needed.
+    ///
+    /// Example 2:
+    /// Input: amount = [5,4,4]
+    /// Output: 7
+    /// Explanation: One way to fill up the cups is:
+    /// Second 1: Fill up a cold cup, and a hot cup.
+    /// Second 2: Fill up a cold cup, and a warm cup.
+    /// Second 3: Fill up a cold cup, and a warm cup.
+    /// Second 4: Fill up a warm cup, and a hot cup.
+    /// Second 5: Fill up a cold cup, and a hot cup.
+    /// Second 6: Fill up a cold cup, and a warm cup.
+    /// Second 7: Fill up a hot cup.
+    ///
+    /// Example 3:
+    /// Input: amount = [5,0,0]
+    /// Output: 5
+    /// Explanation: Every second, we fill up a cold cup.
+    /// 
+    /// Constraints:
+    /// 1. amount.length == 3
+    /// 2. 0 <= amount[i] <= 100
+    /// </summary>
+    int fillCups(vector<int>& amount);
+
+    /// <summary>
+    /// Leet Code 2338. Count the Number of Ideal Arrays
+    ///                                                           
+    /// Medium
+    ///
+    /// You are given two positive 0-indexed integer arrays nums1 and nums2, 
+    /// both of length n.
+    ///
+    /// The sum of squared difference of arrays nums1 and nums2 is defined as 
+    /// the sum of (nums1[i] - nums2[i])2 for each 0 <= i < n.
+    ///
+    /// You are also given two positive integers k1 and k2. You can modify any 
+    /// of the elements of nums1 by +1 or -1 at most k1 times. Similarly, you 
+    /// can modify any of the elements of nums2 by +1 or -1 at most k2 times.
+    ///
+    /// Return the minimum sum of squared difference after modifying array 
+    /// nums1 at most k1 times and modifying array nums2 at most k2 times.
+    ///
+    /// Note: You are allowed to modify the array elements to become 
+    /// negative integers.
+    ///
+    /// Example 1:
+    /// Input: nums1 = [1,2,3,4], nums2 = [2,10,20,19], k1 = 0, k2 = 0
+    /// Output: 579
+    /// Explanation: The elements in nums1 and nums2 cannot be modified 
+    /// because k1 = 0 and k2 = 0. 
+    /// The sum of square difference will be: 
+    /// (1 - 2)^2 + (2 - 10)^2 + (3 - 20)^2 + (4 - 19)^2 = 579.
+    ///
+    /// Example 2:
+    /// Input: nums1 = [1,4,10,12], nums2 = [5,8,6,9], k1 = 1, k2 = 1
+    /// Output: 43
+    /// Explanation: One way to obtain the minimum sum of square difference 
+    /// is: 
+    /// - Increase nums1[0] once.
+    /// - Increase nums2[2] once.
+    /// The minimum of the sum of square difference will be: 
+    /// (2 - 5)^2 + (4 - 8)^2 + (10 - 7)^2 + (12 - 9)^2 = 43.
+    /// Note that, there are other ways to obtain the minimum of the sum of 
+    /// square difference, but there is no way to obtain a sum smaller 
+    /// than 43.
+    ///
+    /// Constraints:
+    /// 1. n == nums1.length == nums2.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 0 <= nums1[i], nums2[i] <= 10^5
+    /// 4. 0 <= k1, k2 <= 10^9
+    /// </summary>
+    long long minSumSquareDiff(vector<int>& nums1, vector<int>& nums2, int k1, int k2);
+
+    /// <summary>
+    /// Leet Code 2344. Minimum Deletions to Make Array Divisible
+    ///                                                           
+    /// Hard
+    ///
+    /// You are given two positive integer arrays nums and numsDivide. You can 
+    /// delete any number of elements from nums.
+    ///
+    /// Return the minimum number of deletions such that the smallest element 
+    /// in nums divides all the elements of numsDivide. If this is not 
+    /// possible, return -1.
+    ///
+    /// Note that an integer x divides y if y % x == 0.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,3,2,4,3], numsDivide = [9,6,9,3,15]
+    /// Output: 2
+    /// Explanation: 
+    /// The smallest element in [2,3,2,4,3] is 2, which does not divide all 
+    /// the elements of numsDivide.
+    /// We use 2 deletions to delete the elements in nums that are equal to 2 
+    /// which makes nums = [3,4,3].
+    /// The smallest element in [3,4,3] is 3, which divides all the elements 
+    /// of numsDivide.
+    /// It can be shown that 2 is the minimum number of deletions needed.
+    ///
+    /// Example 2:
+    /// Input: nums = [4,3,6], numsDivide = [8,2,6,10]
+    /// Output: -1
+    /// Explanation: 
+    /// We want the smallest element in nums to divide all the elements of 
+    /// numsDivide.
+    /// There is no way to delete elements from nums to allow this.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length, numsDivide.length <= 10^5
+    /// 2. 1 <= nums[i], numsDivide[i] <= 10^9
+    /// </summary>
+    int minOperations(vector<int>& nums, vector<int>& numsDivide);
+
+    /// <summary>
+    /// Leet Code 2367. Number of Arithmetic Triplets
+    ///                                                           
+    /// Easy
+    ///
+    /// You are given a 0-indexed, strictly increasing integer array nums and 
+    /// a positive integer diff. A triplet (i, j, k) is an arithmetic triplet 
+    /// if the following conditions are met:
+    ///
+    /// i < j < k,
+    /// nums[j] - nums[i] == diff, and
+    /// nums[k] - nums[j] == diff.
+    /// Return the number of unique arithmetic triplets.
+    ///
+    /// 
+    /// Example 1:
+    /// Input: nums = [0,1,4,6,7,10], diff = 3
+    /// Output: 2
+    /// Explanation:
+    /// (1, 2, 4) is an arithmetic triplet because both 7 - 4 == 3 
+    /// and 4 - 1 == 3.
+    /// (2, 4, 5) is an arithmetic triplet because both 10 - 7 == 3 
+    /// and 7 - 4 == 3. 
+    /// Example 2:
+    ///
+    /// Input: nums = [4,5,6,7,8,9], diff = 2
+    /// Output: 2
+    /// Explanation:
+    /// (0, 2, 4) is an arithmetic triplet because both 8 - 6 == 2 
+    /// and 6 - 4 == 2.
+    /// (1, 3, 5) is an arithmetic triplet because both 9 - 7 == 2 
+    /// and 7 - 5 == 2.
+    ///
+    /// Constraints:
+    /// 1. 3 <= nums.length <= 200
+    /// 2. 0 <= nums[i] <= 200
+    /// 3. 1 <= diff <= 50
+    /// 4. nums is strictly increasing.
+    /// </summary>
+    int arithmeticTriplets(vector<int>& nums, int diff);
+
+    /// <summary>
+    /// Leet Code 2357. Make Array Zero by Subtracting Equal Amounts
+    ///                                                           
+    /// Easy
+    ///
+    /// You are given a non-negative integer array nums. In one operation, 
+    /// you must:
+    ///
+    /// Choose a positive integer x such that x is less than or equal to 
+    /// the smallest non-zero element in nums.
+    /// Subtract x from every positive element in nums.
+    /// Return the minimum number of operations to make every element 
+    /// in nums equal to 0.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,5,0,3,5]
+    /// Output: 3
+    /// Explanation:
+    /// In the first operation, choose x = 1. Now, nums = [0,4,0,2,4].
+    /// In the second operation, choose x = 2. Now, nums = [0,2,0,0,2].
+    /// In the third operation, choose x = 2. Now, nums = [0,0,0,0,0].
+    ///
+    /// Example 2:
+    /// Input: nums = [0]
+    /// Output: 0
+    /// Explanation: Each element in nums is already 0 so no operations 
+    /// are needed.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 0 <= nums[i] <= 100
+    /// </summary>
+    int minimumOperations(vector<int>& nums);
 };
 #endif

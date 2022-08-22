@@ -596,4 +596,200 @@ long long LeetCodeTwoPointer::countSubarrays(vector<int>& nums, long long k)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2327. Number of People Aware of a Secret
+///                                                           
+/// Medium
+///
+/// On day 1, one person discovers a secret.
+///
+/// You are given an integer delay, which means that each person will 
+/// share the secret with a new person every day, starting from delay 
+/// days after discovering the secret. You are also given an integer 
+/// forget, which means that each person will forget the secret forget 
+/// days after discovering it. A person cannot share the secret on the 
+/// same day they forgot it, or on any day afterwards.
+///
+/// Given an integer n, return the number of people who know the secret 
+/// at the end of day n. Since the answer may be very large, return it 
+/// modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: n = 6, delay = 2, forget = 4
+/// Output: 5
+/// Explanation:
+/// Day 1: Suppose the first person is named A. (1 person)
+/// Day 2: A is the only person who knows the secret. (1 person)
+/// Day 3: A shares the secret with a new person, B. (2 people)
+/// Day 4: A shares the secret with a new person, C. (3 people)
+/// Day 5: A forgets the secret, and B shares the secret with a new 
+///        person, D. (3 people)
+/// Day 6: B shares the secret with E, and C shares the secret with 
+///        F. (5 people)
+///
+/// Example 2:
+/// Input: n = 4, delay = 1, forget = 3
+/// Output: 6
+/// Explanation:
+/// Day 1: The first person is named A. (1 person)
+/// Day 2: A shares the secret with B. (2 people)
+/// Day 3: A and B share the secret with 2 new people, C and D. (4 people)
+/// Day 4: A forgets the secret. B, C, and D share the secret with 3 new 
+///        people. (6 people)
+///
+/// Constraints:
+/// 1. 2 <= n <= 1000
+/// 2. 1 <= delay < forget <= n
+/// </summary>
+int LeetCodeTwoPointer::peopleAwareOfSecret(int n, int delay, int forget)
+{
+    int M = 1000000007;
+    int share = 0, result = 0;
+    vector<int> dp(n);
+    int left = 0, right = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (i == 0)
+        {
+            share = 0;
+            dp[0] = 1;
+        }
+        else
+        {
+            if (right + delay == i)
+            {
+                share = (share + dp[right]) % M;
+                right++;
+            }
+            if (left + forget == i)
+            {
+                share = (share - dp[left] + M) % M;
+                result = (result - dp[left] + M) % M;
+                left++;
+            }
+            dp[i] = share;
+        }
+        result = (result + dp[i]) % M;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2330. Valid Palindrome IV
+///                                                           
+/// Medium
+///
+/// You are given a 0-indexed string s consisting of only lowercase 
+/// English letters. In one operation, you can change any character 
+/// of s to any other character.
+///
+/// Return true if you can make s a palindrome after performing 
+/// exactly one or two operations, or return false otherwise.
+///
+/// Example 1:
+/// Input: s = "abcdba"
+/// Output: true
+/// Explanation: One way to make s a palindrome using 1 operation is:
+/// - Change s[2] to 'd'. Now, s = "abddba".
+/// One operation could be performed to make s a palindrome so return true.
+/// 
+/// Example 2:
+/// Input: s = "aa"
+/// Output: true
+/// Explanation: One way to make s a palindrome using 2 operations is:
+/// - Change s[0] to 'b'. Now, s = "ba".
+/// - Change s[1] to 'b'. Now, s = "bb".
+/// Two operations could be performed to make s a palindrome so return 
+/// true.
+///
+/// Example 3:
+///
+/// Input: s = "abcdef"
+/// Output: false
+/// Explanation: It is not possible to make s a palindrome using one 
+/// or two operations so return false.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists only of lowercase English letters.
+/// </summary>
+bool LeetCodeTwoPointer::makePalindrome(string s)
+{
+    int left = 0, right = s.size() - 1;
+    int count = 0;
+    while (left < right)
+    {
+        if (s[left] != s[right])
+        {
+            count++;
+            if (count > 2) return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet Code 2379. Minimum Recolors to Get K Consecutive Black Blocks
+///                                                           
+/// Easy
+///
+/// You are given a 0-indexed string blocks of length n, where blocks[i] 
+/// is either 'W' or 'B', representing the color of the ith block. The 
+/// characters 'W' and 'B' denote the colors white and black, respectively.
+/// You are also given an integer k, which is the desired number of 
+/// consecutive black blocks.
+/// In one operation, you can recolor a white block such that it becomes a 
+/// black block.
+///
+/// Return the minimum number of operations needed such that there is at 
+/// least one occurrence of k consecutive black blocks.
+///
+/// Example 1:
+/// Input: blocks = "WBBWWBBWBW", k = 7
+/// Output: 3
+/// Explanation:
+/// One way to achieve 7 consecutive black blocks is to recolor the 0th, 
+/// 3rd, and 4th blocks
+/// so that blocks = "BBBBBBBWBW". 
+/// It can be shown that there is no way to achieve 7 consecutive black 
+/// blocks in less than 3 operations.
+/// Therefore, we return 3.
+///
+/// Example 2:
+/// Input: blocks = "WBWBBBW", k = 2
+/// Output: 0
+/// Explanation:
+/// No changes need to be made, since 2 consecutive black blocks 
+/// already exist.
+/// Therefore, we return 0.
+/// 
+/// Constraints:
+/// 1. n == blocks.length
+/// 2. 1 <= n <= 100
+/// 3. blocks[i] is either 'W' or 'B'.
+/// 4. 1 <= k <= n
+/// </summary>
+int LeetCodeTwoPointer::minimumRecolors(string blocks, int k)
+{
+    int count = 0;
+    size_t prev = -1;
+    int result = k;
+    for (size_t i = 0; i < blocks.size(); i++)
+    {
+        if (blocks[i] == 'B') count++;
+        if (i - prev > k)
+        {
+            prev++;
+            if (blocks[prev] == 'B') count--;
+        }
+        if (i - prev == k)
+        {
+            result = min(result, k - count);
+        }
+    }
+    return result;
+}
 #pragma endregion
