@@ -12222,4 +12222,188 @@ public:
     }
 };
 
+/// <summary>
+/// Leet Code 2353. Design a Food Rating System
+///                                                           
+/// Medium
+///
+/// Design a food rating system that can do the following:
+///
+/// Modify the rating of a food item listed in the system.
+/// Return the highest-rated food item for a type of cuisine in the system.
+/// Implement the FoodRatings class:
+///
+/// FoodRatings(String[] foods, String[] cuisines, int[] ratings) 
+/// Initializes the system. The food items are described by foods, 
+/// cuisines and ratings, all of which have a length of n.
+/// foods[i] is the name of the ith food,
+/// cuisines[i] is the type of cuisine of the ith food, and
+/// ratings[i] is the initial rating of the ith food.
+/// void changeRating(String food, int newRating) Changes the rating of 
+/// the food item with the name food.
+/// String highestRated(String cuisine) Returns the name of the food item 
+/// that has the highest rating for the given type of cuisine. If there 
+/// is a tie, return the item with the lexicographically smaller name.
+/// Note that a string x is lexicographically smaller than string y if x 
+/// comes before y in dictionary order, that is, either x is a prefix of 
+/// y, or if i is the first position such that x[i] != y[i], then x[i] 
+/// comes before y[i] in alphabetic order.
+///
+/// Example 1:
+/// Input ["FoodRatings", "highestRated", "highestRated", "changeRating", 
+/// "highestRated", "changeRating", "highestRated"] [[["kimchi", "miso", 
+/// "sushi", "moussaka", "ramen", "bulgogi"], ["korean", "japanese", 
+/// "japanese", "greek", "japanese", "korean"], [9, 12, 8, 15, 14, 7]], 
+/// ["korean"], ["japanese"], ["sushi", 16], ["japanese"], ["ramen", 16], 
+/// ["japanese"]]
+///
+/// Output
+/// [null, "kimchi", "ramen", null, "sushi", null, "ramen"]
+/// Explanation
+/// FoodRatings foodRatings = new FoodRatings(["kimchi", "miso", 
+/// "sushi", "moussaka", "ramen", "bulgogi"], ["korean", "japanese", 
+/// "japanese", "greek", "japanese", "korean"], [9, 12, 8, 15, 14, 7]);
+/// foodRatings.highestRated("korean"); // return "kimchi"
+/// "kimchi" is the highest rated korean food with a rating of 9.
+/// foodRatings.highestRated("japanese"); // return "ramen"
+/// "ramen" is the highest rated japanese food with a rating of 14.
+/// foodRatings.changeRating("sushi", 16); 
+/// "sushi" now has a rating of 16.
+/// foodRatings.highestRated("japanese"); // return "sushi"
+/// "sushi" is the highest rated japanese food with a rating of 16. 
+/// foodRatings.changeRating("ramen", 16); 
+/// "ramen" now has a rating of 16.
+/// foodRatings.highestRated("japanese"); // return "ramen"
+/// Both "sushi" and "ramen" have a rating of 16.
+/// However, "ramen" is lexicographically smaller than "sushi".
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 2 * 10^4
+/// 2. n == foods.length == cuisines.length == ratings.length
+/// 3. 1 <= foods[i].length, cuisines[i].length <= 10
+/// 4. foods[i], cuisines[i] consist of lowercase English letters.
+/// 5. 1 <= ratings[i] <= 10^8
+/// 6. All the strings in foods are distinct.
+/// 7. food will be the name of a food item in the system across all 
+///    calls to changeRating.
+/// 8. cuisine will be a type of cuisine of at least one food item in 
+///    the system across all calls to highestRated.
+/// 9. At most 2 * 104 calls in total will be made to changeRating and 
+///    highestRated.
+/// </summary>
+class FoodRatings 
+{
+private:
+    unordered_map<string, pair<string, int>> m_food;
+    unordered_map<string, set<pair<int, string>>> m_rating;
+public:
+    FoodRatings(vector<string>& foods, vector<string>& cuisines, vector<int>& ratings) 
+    {
+        int n = foods.size();
+        for (int i = 0; i < n; i++)
+        {
+            m_food[foods[i]] = make_pair(cuisines[i],  ratings[i]);
+            m_rating[cuisines[i]].insert(make_pair(-ratings[i], foods[i]));
+        }
+    }
+
+    void changeRating(string food, int newRating) 
+    {
+        pair<string, int> rating = m_food[food];
+        m_rating[rating.first].erase(make_pair(-rating.second, food));
+        rating.second = newRating;
+        m_food[food] = rating;
+        m_rating[rating.first].insert(make_pair(-rating.second, food));
+    }
+
+    string highestRated(string cuisine) 
+    {
+        return m_rating[cuisine].begin()->second;
+    }
+};
+
+/// <summary>
+/// Leet Code 2349. Design a Number Container System
+///                                                           
+/// Medium
+///
+/// Design a number container system that can do the following:
+/// Insert or Replace a number at the given index in the system.
+/// Return the smallest index for the given number in the system.
+/// Implement the NumberContainers class:
+///
+/// NumberContainers() Initializes the number container system.
+/// void change(int index, int number) Fills the container at index 
+/// with the number. If there is already a number at that index, 
+/// replace it.
+/// int find(int number) Returns the smallest index for the given 
+/// number, or -1 if there is no index that is filled by number in 
+/// the system.
+/// 
+/// Example 1:
+/// Input ["NumberContainers", "find", "change", "change", "change", 
+///        "change", "find", "change", "find"]
+/// [[], [10], [2, 10], [1, 10], [3, 10], [5, 10], [10], [1, 20], [10]]
+/// Output
+/// [null, -1, null, null, null, null, 1, null, 2]
+///
+/// Explanation
+/// NumberContainers nc = new NumberContainers();
+/// nc.find(10); // There is no index that is filled with number 10. 
+///              // Therefore, we return -1.
+/// nc.change(2, 10); // Your container at index 2 will be filled 
+///                   // with number 10.
+/// nc.change(1, 10); // Your container at index 1 will be filled 
+///                   // with number 10.
+/// nc.change(3, 10); // Your container at index 3 will be filled 
+///                   // with number 10.
+/// nc.change(5, 10); // Your container at index 5 will be filled 
+///                   // with number 10.
+/// nc.find(10);      // Number 10 is at the indices 1, 2, 3, and 5. 
+///                   // Since the smallest index that is filled 
+///                   // with 10 is 1, we return 1.
+/// nc.change(1, 20); // Your container at index 1 will be filled 
+///                   // with number 20. Note that index 1 was filled 
+///                   // with 10 and then replaced with 20. 
+/// nc.find(10);      // Number 10 is at the indices 2, 3, and 5. The 
+///                   // smallest index that is filled with 10 is 2. 
+///                   // Therefore, we return 2.
+///
+/// Constraints:
+/// 1. 1 <= index, number <= 10^9
+/// 2. At most 10^5 calls will be made in total to change and find.
+/// </summary>
+class NumberContainers 
+{
+    unordered_map<int, int> m_container;
+    unordered_map<int, set<int>> m_index;
+public:
+    NumberContainers() 
+    {
+    }
+
+    void change(int index, int number) 
+    {
+        if (m_container.count(index) > 0)
+        {
+            int num = m_container[index];
+            m_index[num].erase(index);
+            if (m_index[num].empty()) m_index.erase(num);
+        }
+        m_container[index] = number;
+        m_index[number].insert(index);
+    }
+
+    int find(int number) 
+    {
+        if (m_index.count(number) == 0)
+        {
+            return -1;
+        }
+        else
+        {
+            return *(m_index[number].begin());
+        }
+    }
+};
 #endif // LeetcodeDesign_H

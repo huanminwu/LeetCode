@@ -1425,6 +1425,145 @@ public:
     /// </summary>
     long long minCost(vector<int>& nums, vector<int>& costs);
 
+    /// <summary>
+    /// Leet Code 2334. Subarray With Elements Greater Than Varying Threshold
+    ///                                                  
+    /// Hard
+    ///
+    /// You are given an integer array nums and an integer threshold.
+    ///
+    /// Find any subarray of nums of length k such that every element in the 
+    /// subarray is greater than threshold / k.
+    ///
+    /// Return the size of any such subarray. If there is no such subarray, 
+    /// return -1.
+    ///
+    /// A subarray is a contiguous non-empty sequence of elements within an 
+    /// array.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,3,4,3,1], threshold = 6
+    /// Output: 3
+    /// Explanation: The subarray [3,4,3] has a size of 3, and every element 
+    /// is greater than 6 / 3 = 2.
+    /// Note that this is the only valid subarray.
+    ///
+    /// Example 2:
+    /// 
+    /// Input: nums = [6,5,6,5,8], threshold = 7
+    /// Output: 1
+    /// Explanation: The subarray [8] has a size of 1, and 8 > 7 / 1 = 7. 
+    /// So 1 is returned.
+    /// Note that the subarray [6,5] has a size of 2, and every element is 
+    /// greater than 7 / 2 = 3.5. 
+    /// Similarly, the subarrays [6,5,6], [6,5,6,5], [6,5,6,5,8] also 
+    /// satisfy the given conditions.
+    /// Therefore, 2, 3, 4, or 5 may also be returned.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i], threshold <= 10^9
+    /// </summary>
+    int validSubarraySize(vector<int>& nums, int threshold);
+
+    /// <summary>
+    /// Leet Code 2355. Maximum Number of Books You Can Take
+    ///                                                  
+    /// Hard
+    ///
+    /// You are given a 0-indexed integer array books of length n where 
+    /// books[i] denotes the number of books on the ith shelf of a bookshelf.
+    /// You are going to take books from a contiguous section of the bookshelf 
+    /// spanning from l to r where 0 <= l <= r < n. For each index i in the 
+    /// range l <= i < r, you must take strictly fewer books from shelf i than 
+    /// shelf i + 1.
+    ///
+    /// Return the maximum number of books you can take from the bookshelf.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: books = [8,5,2,7,9]
+    /// Output: 19
+    /// Explanation:
+    /// - Take 1 book from shelf 1.
+    /// - Take 2 books from shelf 2.
+    /// - Take 7 books from shelf 3.
+    /// - Take 9 books from shelf 4.
+    /// You have taken 19 books, so return 19.
+    /// It can be proven that 19 is the maximum 
+    /// number of books you can take.
+    /// Example 2:
+    ///
+    /// Input: books = [7,0,3,4,5]
+    /// Output: 12
+    /// Explanation:
+    /// - Take 3 books from shelf 2.
+    /// - Take 4 books from shelf 3.
+    /// - Take 5 books from shelf 4.
+    /// You have taken 12 books so return 12.
+    /// It can be proven that 12 is the maximum number of books you can take.
+    ///
+    /// Example 3:
+    /// Input: books = [8,2,3,7,3,4,0,1,4,3]
+    /// Output: 13
+    /// Explanation:
+    /// - Take 1 book from shelf 0.
+    /// - Take 2 books from shelf 1.
+    /// - Take 3 books from shelf 2.
+    /// - Take 7 books from shelf 3.
+    /// You have taken 13 books so return 13.
+    /// It can be proven that 13 is the maximum number of books you can take.
+    ///
+    /// Constraints:
+    /// 1. 1 <= books.length <= 10^5
+    /// 2. 0 <= books[i] <= 10^5
+    /// </summary>
+    long long maximumBooks(vector<int>& books);
+
+    /// <summary>
+    /// Leet Code 2345. Finding the Number of Visible Mountains
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given a 0-indexed 2D integer array peaks where 
+    /// peaks[i] = [xi, yi] states that mountain i has a peak at 
+    /// coordinates (xi, yi). A mountain can be described as a 
+    /// right-angled isosceles triangle, with its base along the x-axis 
+    /// and a right angle at its peak. More formally, the gradients of 
+    /// ascending and descending the mountain are 1 and -1 respectively.
+    ///
+    /// A mountain is considered visible if its peak does not lie 
+    /// within another mountain (including the border of other mountains).
+    ///
+    /// Return the number of visible mountains.
+    ///
+    /// Example 1:
+    ///
+    /// Input: peaks = [[2,2],[6,3],[5,4]]
+    /// Output: 2
+    /// Explanation: The diagram above shows the mountains.
+    /// - Mountain 0 is visible since its peak does not lie within another 
+    ///   mountain or its sides.
+    /// - Mountain 1 is not visible since its peak lies within the side 
+    ///   of mountain 2.
+    /// - Mountain 2 is visible since its peak does not lie within 
+    ///   another mountain or its sides.
+    /// There are 2 mountains that are visible.
+    ///
+    /// Example 2:
+    /// 
+    /// Input: peaks = [[1,3],[1,3]]
+    /// Output: 0
+    /// Explanation: The diagram above shows the mountains (they completely 
+    /// overlap).
+    /// Both mountains are not visible since their peaks lie within each 
+    /// other.
+    /// Constraints:
+    /// 1. 1 <= peaks.length <= 10^5
+    /// 2. peaks[i].length == 2
+    /// 3. 1 <= xi, yi <= 10^5
+    /// </summary>
+    int visibleMountains(vector<vector<int>>& peaks);
 #pragma endregion
 };
 #endif  // LeetCodeStack

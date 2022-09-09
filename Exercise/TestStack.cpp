@@ -746,8 +746,63 @@ void TestLeetCode2297(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2334(void)
+{
+    Logger::WriteMessage("Test Leet Code 2334");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 1, 3, 4, 3, 1 };
+    int threshold = 6;
+    int result = leetCode.validSubarraySize(nums, threshold);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("threshold = " + to_string(threshold) + "; result = " + to_string(result));
+
+    nums = { 6,5,6,5,8 };
+    threshold = 7;
+    result = leetCode.validSubarraySize(nums, threshold);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("threshold = " + to_string(threshold) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2355(void)
+{
+    Logger::WriteMessage("Test Leet Code 2355");
+    LeetCodeStack leetCode;
+    vector<int> books = { 8,5,2,7,9 };
+    long long result = leetCode.maximumBooks(books);
+    Logger::WriteMessage(books);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    books = { 7,0,3,4,5 };
+    result = leetCode.maximumBooks(books);
+    Logger::WriteMessage(books);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    books = { 8,2,3,7,3,4,0,1,4,3 };
+    result = leetCode.maximumBooks(books);
+    Logger::WriteMessage(books);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2345(void)
+{
+    Logger::WriteMessage("Test Leet Code 2345");
+    LeetCodeStack leetCode;
+    vector<vector<int>> peaks = { {2, 2},{6, 3},{5, 4} };
+    int result = leetCode.visibleMountains(peaks);
+    Logger::WriteMessage(peaks);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    peaks = { {1, 3},{1, 3} };
+    result = leetCode.visibleMountains(peaks);
+    Logger::WriteMessage(peaks);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode2345();
+    TestLeetCode2355();
+    TestLeetCode2334();
     TestLeetCode2297();
     TestLeetCode2282();
     TestLeetCode2289();

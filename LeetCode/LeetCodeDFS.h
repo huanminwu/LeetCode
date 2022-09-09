@@ -3715,7 +3715,7 @@ public:
     /// 3. 2 <= k <= cookies.length
     /// </summary>
     int distributeCookies(vector<int>& cookies, int k);
-#pragma endregion
+ #pragma endregion
 };
 
 #endif  // LeetCodeDFS_H

@@ -21911,11 +21911,11 @@ int LeetCodeArray::minimumAverageDifference(vector<int>& nums)
         int diff = 0;
         if (i == nums.size() - 1)
         {
-            diff = left_sum / ((long long)i + 1);
+            diff = (int)(left_sum / ((long long)i + 1));
         }
         else
         {
-            diff = abs(left_sum / ((long long)i + 1) - (right_sum / (long long)(nums.size() - (i + 1))));
+            diff = (int)abs(left_sum / ((long long)i + 1) - (right_sum / (long long)(nums.size() - (i + 1))));
         }
         if (diff < min_val)
         {
@@ -22628,7 +22628,7 @@ vector<int> LeetCodeArray::numberOfPairs(vector<int>& nums)
     {
         dp[nums[i]]++;
     }
-    for (int i = 0; i < dp.size(); i++)
+    for (size_t i = 0; i < dp.size(); i++)
     {
         result[0] += dp[i] / 2;
         result[1] += dp[i] % 2;
@@ -22854,6 +22854,432 @@ int LeetCodeArray::minNumberOfHours(int initialEnergy, int initialExperience, ve
             initialExperience = experience[i] + 1;
         }
         initialExperience += experience[i];
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2352. Equal Row and Column Pairs
+///                                                           
+/// Medium
+///
+/// Given a 0-indexed n x n integer matrix grid, return the number of 
+/// pairs (Ri, Cj) such that row Ri and column Cj are equal.
+///
+/// A row and column pair is considered equal if they contain the same 
+/// elements in the same order (i.e. an equal array).
+///
+/// Example 1:
+/// Input: grid = [[3,2,1],[1,7,6],[2,7,7]]
+/// Output: 1
+/// Explanation: There is 1 equal row and column pair:
+/// - (Row 2, Column 1): [2,7,7]
+/// Example 2:
+/// Input: grid = [[3,1,2,2],[1,4,4,5],[2,4,2,2],[2,4,2,2]]
+/// Output: 3
+/// Explanation: There are 3 equal row and column pairs:
+/// - (Row 0, Column 0): [3,1,2,2]
+/// - (Row 2, Column 2): [2,4,2,2]
+/// - (Row 3, Column 2): [2,4,2,2]
+/// 
+/// Constraints:
+/// 1. n == grid.length == grid[i].length
+/// 2. 1 <= n <= 200
+/// 3. 1 <= grid[i][j] <= 10^5
+/// </summary>
+int LeetCodeArray::equalPairs(vector<vector<int>>& grid)
+{
+    unordered_map<string, int> rows;
+    for (size_t i = 0; i < grid.size(); i++)
+    {
+        string row;
+        for (size_t j = 0; j < grid[i].size(); j++)
+        {
+            row += to_string(grid[i][j]) + "_";
+        }
+        rows[row]++;
+    }
+    int result = 0;
+    for (size_t i = 0; i < grid[0].size(); i++)
+    {
+        string col;
+        for (size_t j = 0; j < grid.size(); j++)
+        {
+            col += to_string(grid[j][i]) + "_";
+        }
+        if (rows.count(col) == 0) continue;
+        result += rows[col];
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2364. Count Number of Bad Pairs
+///                                                           
+/// Medium
+///
+/// You are given a 0-indexed integer array nums. A pair of indices 
+/// (i, j) is a bad pair if i < j and j - i != nums[j] - nums[i].
+///
+/// Return the total number of bad pairs in nums.
+///
+/// Example 1:
+/// Input: nums = [4,1,3,3]
+/// Output: 5
+/// Explanation: The pair (0, 1) is a bad pair since 1 - 0 != 1 - 4.
+/// The pair (0, 2) is a bad pair since 2 - 0 != 3 - 4, 2 != -1.
+/// The pair (0, 3) is a bad pair since 3 - 0 != 3 - 4, 3 != -1.
+/// The pair (1, 2) is a bad pair since 2 - 1 != 3 - 1, 1 != 2.
+/// The pair (2, 3) is a bad pair since 3 - 2 != 3 - 3, 1 != 0.
+/// There are a total of 5 bad pairs, so we return 5.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4,5]
+/// Output: 0
+/// Explanation: There are no bad pairs.
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+long long LeetCodeArray::countBadPairs(vector<int>& nums)
+{
+    unordered_map<int, int> num_map;
+    int n = nums.size();
+    for (int i = 0; i < n; i++)
+    {
+        num_map[nums[i] - i]++;
+    }
+    long long result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        int diff = nums[i] - i;
+        result += (long long)n - (long long)num_map[nums[i] - i];
+    }
+    return result / 2;
+}
+
+/// <summary>
+/// Leet Code 2366. Minimum Replacements to Sort the Array
+///                                                  
+/// Hard
+///
+/// You are given a 0-indexed integer array nums. In one operation you 
+/// can replace any element of the array with any two elements that sum 
+/// to it.
+///
+/// For example, consider nums = [5,6,7]. In one operation, we can 
+/// replace nums[1] with 2 and 4 and convert nums to [5,2,4,7].
+/// Return the minimum number of operations to make an array that is 
+/// sorted in non-decreasing order.
+///
+/// Example 1:
+///
+/// Input: nums = [3,9,3]
+/// Output: 2
+/// Explanation: Here are the steps to sort the array in non-decreasing 
+/// order:
+/// - From [3,9,3], replace the 9 with 3 and 6 so the array 
+///   becomes [3,3,6,3]
+/// - From [3,3,6,3], replace the 6 with 3 and 3 so the array 
+///   becomes [3,3,3,3,3]
+/// There are 2 steps to sort the array in non-decreasing order. 
+/// Therefore, we return 2.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4,5]
+/// Output: 0
+/// Explanation: The array is already in non-decreasing order. 
+/// Therefore, we return 0. 
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+long long LeetCodeArray::minimumReplacement(vector<int>& nums)
+{
+    long long result = 0;
+    int upper = 0;
+    for (int i = nums.size() - 1; i >= 0; i--)
+    {
+        if (i == nums.size() - 1)
+        {
+            upper = nums[i];
+        }
+        else
+        {
+            int count = (nums[i] - 1) / upper;
+            upper = nums[i] / (count + 1);
+            result = result + (long long)count;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2348. Number of Zero-Filled Subarrays
+///                                                  
+/// Medium
+///
+/// Given an integer array nums, return the number of subarrays filled 
+/// with 0.
+///
+/// A subarray is a contiguous non-empty sequence of elements within 
+/// an array.
+///
+/// Example 1:
+/// Input: nums = [1,3,0,0,2,0,0,4]
+/// Output: 6
+/// Explanation: 
+/// There are 4 occurrences of [0] as a subarray.
+/// There are 2 occurrences of [0,0] as a subarray.
+/// There is no occurrence of a subarray with a size more than 2 
+/// filled with 0. Therefore, we return 6.
+///
+/// Example 2:
+/// Input: nums = [0,0,0,2,0,0]
+/// Output: 9
+/// Explanation:
+/// There are 5 occurrences of [0] as a subarray.
+/// There are 3 occurrences of [0,0] as a subarray.
+/// There is 1 occurrence of [0,0,0] as a subarray.
+/// There is no occurrence of a subarray with a size more than 3 
+/// filled with 0. Therefore, we return 9.
+///
+/// Example 3:
+/// 
+/// Input: nums = [2,10,2019]
+/// Output: 0
+/// Explanation: There is no subarray filled with 0. 
+/// Therefore, we return 0.
+///
+/// Constraints:
+///  1. 1 <= nums.length <= 10^5
+/// 2. -10^9 <= nums[i] <= 10^9
+/// </summary>
+long long LeetCodeArray::zeroFilledSubarray(vector<int>& nums)
+{
+    long long result = 0;
+    int count = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] == 0) count++;
+        else count = 0;
+        result = result + (long long)count;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2391. Minimum Amount of Time to Collect Garbage
+///                                                  
+/// Medium
+///
+/// You are given a 0-indexed array of strings garbage where garbage[i] 
+/// represents the assortment of garbage at the ith house. garbage[i] 
+/// consists only of the characters 'M', 'P' and 'G' representing one 
+/// unit of metal, paper and glass garbage respectively. Picking up one 
+/// unit of any type of garbage takes 1 minute.
+///
+/// You are also given a 0-indexed integer array travel where travel[i] 
+/// is the number of minutes needed to go from house i to house i + 1.
+///
+/// There are three garbage trucks in the city, each responsible for 
+/// picking up one type of garbage. Each garbage truck starts at house 0 
+/// and must visit each house in order; however, they do not need to 
+/// visit every house.
+///
+/// Only one garbage truck may be used at any given moment. While one 
+/// truck is driving or picking up garbage, the other two trucks cannot 
+/// do anything.
+///
+/// Return the minimum number of minutes needed to pick up all the garbage.
+/// 
+/// Example 1:
+///
+/// Input: garbage = ["G","P","GP","GG"], travel = [2,4,3]
+/// Output: 21
+/// Explanation:
+/// The paper garbage truck:
+/// 1. Travels from house 0 to house 1
+/// 2. Collects the paper garbage at house 1
+/// 3. Travels from house 1 to house 2
+/// 4. Collects the paper garbage at house 2
+/// Altogether, it takes 8 minutes to pick up all the paper garbage.
+/// The glass garbage truck:
+/// 1. Collects the glass garbage at house 0
+/// 2. Travels from house 0 to house 1
+/// 3. Travels from house 1 to house 2
+/// 4. Collects the glass garbage at house 2
+/// 5. Travels from house 2 to house 3
+/// 6. Collects the glass garbage at house 3
+/// Altogether, it takes 13 minutes to pick up all the glass garbage.
+/// Since there is no metal garbage, we do not need to consider the 
+/// metal garbage truck.
+/// Therefore, it takes a total of 8 + 13 = 21 minutes to collect 
+/// all the garbage.
+///
+/// Example 2:
+/// Input: garbage = ["MMM","PGM","GP"], travel = [3,10]
+/// Output: 37
+/// Explanation:
+/// The metal garbage truck takes 7 minutes to pick up all the metal 
+/// garbage.
+/// The paper garbage truck takes 15 minutes to pick up all the paper 
+/// garbage.
+/// The glass garbage truck takes 15 minutes to pick up all the glass 
+/// garbage.
+/// It takes a total of 7 + 15 + 15 = 37 minutes to collect all the garbage.
+///
+/// Constraints:
+/// 1. 2 <= garbage.length <= 10^5
+/// 2. garbage[i] consists of only the letters 'M', 'P', and 'G'.
+/// 3. 1 <= garbage[i].length <= 10
+/// 4. travel.length == garbage.length - 1
+/// 5. 1 <= travel[i] <= 100
+/// </summary>
+int LeetCodeArray::garbageCollection(vector<string>& garbage, vector<int>& travel)
+{
+    int result = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        char type;
+        if (i == 0) type = 'M';
+        else if (i == 1) type = 'P';
+        else type = 'G';
+        int travel_time = 0;
+        for (size_t j = 0; j < garbage.size(); j++)
+        {
+            if (j > 0) travel_time += travel[j - 1];
+            int count = 0;
+            for (size_t k = 0; k < garbage[j].size(); k++)
+            {
+                if (garbage[j][k] == type) count++;
+            }
+            if (count > 0)
+            {
+                result += travel_time;
+                result += count;
+                travel_time = 0;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2371. Minimize Maximum Value in a Grid
+///                                                  
+/// Hard
+///
+/// You are given an m x n integer matrix grid containing distinct 
+/// positive integers.
+///
+/// You have to replace each integer in the matrix with a positive 
+/// integer satisfying the following conditions:
+///
+/// The relative order of every two elements that are in the same 
+/// row or column should stay the same after the replacements.
+/// The maximum number in the matrix after the replacements should 
+/// be as small as possible.
+/// The relative order stays the same if for all pairs of elements 
+/// in the original matrix such that grid[r1][c1] > grid[r2][c2] 
+/// where either r1 == r2 or c1 == c2, then it must be true that 
+/// grid[r1][c1] > grid[r2][c2] after the replacements.
+///
+/// For example, if grid = [[2, 4, 5], [7, 3, 9]] then a good 
+/// replacement could be either grid = [[1, 2, 3], [2, 1, 4]] or 
+/// grid = [[1, 2, 3], [3, 1, 4]].
+/// Return the resulting matrix. If there are multiple answers, 
+/// return any of them.
+/// 
+/// Example 1:
+/// Input: grid = [[3,1],[2,5]]
+/// Output: [[2,1],[1,2]]
+/// Explanation: The above diagram shows a valid replacement.
+/// The maximum number in the matrix is 2. It can be shown that no 
+/// smaller value can be obtained.
+///
+/// Example 2:
+/// Input: grid = [[10]]
+/// Output: [[1]]
+/// Explanation: We replace the only number in the matrix with 1.
+/// 
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 1 <= m, n <= 1000
+/// 4. 1 <= m * n <= 10^5
+/// 5. 1 <= grid[i][j] <= 10^9
+/// 6. grid consists of distinct integers.
+/// </summary>
+vector<vector<int>> LeetCodeArray::minScore(vector<vector<int>>& grid)
+{
+    int m = grid.size();
+    int n = grid[0].size();
+    vector<vector<int>> result(m, vector<int>(n));
+    vector<int> row(m), col(n);
+    set<vector<int>> pq;
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            pq.insert({ grid[i][j],i,j });
+        }
+    }
+    while (!pq.empty())
+    {
+        vector<int> cell = *pq.begin();
+        pq.erase(pq.begin());
+        int r = cell[1];
+        int c = cell[2];
+        result[r][c] = max(row[r], col[c]) + 1;
+        row[r] = result[r][c];
+        col[c] = result[r][c];
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2393. Count Strictly Increasing Subarrays
+///                                                  
+/// Medium
+///
+/// You are given an array nums consisting of positive integers.
+///
+/// Return the number of subarrays of nums that are in strictly 
+/// increasing order.
+///
+/// A subarray is a contiguous part of an array.
+/// 
+/// Example 1:
+///
+/// Input: nums = [1,3,5,4,4,6]
+/// Output: 10
+/// Explanation: The strictly increasing subarrays are the following:
+/// - Subarrays of length 1: [1], [3], [5], [4], [4], [6].
+/// - Subarrays of length 2: [1,3], [3,5], [4,6].
+/// - Subarrays of length 3: [1,3,5].
+/// The total number of subarrays is 6 + 3 + 1 = 10.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4,5]
+/// Output: 15
+/// Explanation: Every subarray is strictly increasing. There 
+/// are 15 possible subarrays that we can take.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^6
+/// </summary>
+long long LeetCodeArray::countSubarrays(vector<int>& nums)
+{
+    long long result = 0;
+    long long count = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (i > 0 && nums[i] <= nums[i - 1]) count = 1;
+        else count++;
+        result = result + count;
     }
     return result;
 }

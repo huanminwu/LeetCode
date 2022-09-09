@@ -4835,8 +4835,84 @@ void TestLeetCode2357(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2358(void)
+{
+    Logger::WriteMessage("Test Leet Code 2358");
+    LeetCodeMath leetCode;
+    vector<int> grades = { 10, 6, 12, 7, 3, 5 };
+    int result = leetCode.maximumGroups(grades);
+    Logger::WriteMessage(grades);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grades = { 8,8 };
+    result = leetCode.maximumGroups(grades);
+    Logger::WriteMessage(grades);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2350(void)
+{
+    Logger::WriteMessage("Test Leet Code 2350");
+    LeetCodeMath leetCode;
+    vector<int> rolls = { 4, 2, 1, 2, 3, 3, 2, 4, 1 };
+    int k = 4;
+    int result = leetCode.shortestSequence(rolls, k);
+    Logger::WriteMessage(rolls);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    rolls = { 1,1,2,2 };
+    k = 2;
+    result = leetCode.shortestSequence(rolls, k);
+    Logger::WriteMessage(rolls);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    rolls = { 1,1,3,2,2,2,3,3 };
+    k = 4;
+    result = leetCode.shortestSequence(rolls, k);
+    Logger::WriteMessage(rolls);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2376(void)
+{
+    Logger::WriteMessage("Test Leet Code 2376");
+    LeetCodeMath leetCode;
+    int n = 20;
+    int result = leetCode.countSpecialNumbers(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 5;
+    result = leetCode.countSpecialNumbers(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 135;
+    result = leetCode.countSpecialNumbers(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 220;
+    result = leetCode.countSpecialNumbers(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2384(void)
+{
+    Logger::WriteMessage("Test Leet Code 2384");
+    LeetCodeMath leetCode;
+    string num = "444947137";
+    string result = leetCode.largestPalindromic(num);
+    Logger::WriteMessage("num = " + num + "; result = " + result);
+
+    num = "00009";
+    result = leetCode.largestPalindromic(num);
+    Logger::WriteMessage("num = " + num + "; result = " + result);
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2384();
+    TestLeetCode2376();
+    TestLeetCode2350();
+    TestLeetCode2358();
     TestLeetCode2357();
     TestLeetCode2367();
     TestLeetCode2344();

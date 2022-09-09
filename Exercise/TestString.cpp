@@ -5623,8 +5623,22 @@ void TestLeetCode2351(void)
     Logger::WriteMessage("s = " + s + "; result = " + string(1, result));
 }
 
+void TestLeetCode2390(void)
+{
+    Logger::WriteMessage("Test Leet Code 2390");
+    LeetCodeString leetCode;
+    string s = "leet**cod*e";
+    string result = leetCode.removeStars(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "erase*****";
+    result = leetCode.removeStars(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2390();
     TestLeetCode2351();
     TestLeetCode2337();
     TestLeetCode2343();

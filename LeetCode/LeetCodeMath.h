@@ -8967,5 +8967,183 @@ public:
     /// 2. 0 <= nums[i] <= 100
     /// </summary>
     int minimumOperations(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2358. Maximum Number of Groups Entering a Competition
+    ///                                                           
+    /// Medium
+    ///
+    /// You are given a positive integer array grades which represents the 
+    /// grades of students in a university. You would like to enter all these 
+    /// students into a competition in ordered non-empty groups, such that 
+    /// the ordering meets the following conditions:
+    ///
+    /// The sum of the grades of students in the ith group is less than the 
+    /// sum of the grades of students in the (i + 1)th group, for all groups 
+    /// (except the last).
+    /// The total number of students in the ith group is less than the total 
+    /// number of students in the (i + 1)th group, for all groups (except the 
+    /// last).
+    /// Return the maximum number of groups that can be formed.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: grades = [10,6,12,7,3,5]
+    /// Output: 3
+    /// Explanation: The following is a possible way to form 3 groups of 
+    /// students:
+    /// - 1st group has the students with grades = [12]. Sum of grades: 12. 
+    ///   Student count: 1
+    /// - 2nd group has the students with grades = [6,7]. Sum of 
+    ///   grades: 6 + 7 = 13. Student count: 2
+    /// - 3rd group has the students with grades = [10,3,5]. Sum of 
+    ///   grades: 10 + 3 + 5 = 18. Student count: 3
+    /// It can be shown that it is not possible to form more than 3 groups.
+    ///
+    /// Example 2:
+    /// Input: grades = [8,8]
+    /// Output: 1
+    /// Explanation: We can only form 1 group, since forming 2 groups 
+    /// would lead to an equal number of students in both groups.
+    ///
+    /// 
+    /// Constraints:
+    /// 1. 1 <= grades.length <= 10^5
+    /// 2. 1 <= grades[i] <= 10^5
+    /// </summary>
+    int maximumGroups(vector<int>& grades);
+
+    /// <summary>
+    /// Leet Code 2350. Shortest Impossible Sequence of Rolls
+    ///                                                  
+    /// Hard
+    ///
+    /// You are given an integer array rolls of length n and an integer k. You 
+    /// roll a k sided dice numbered from 1 to k, n times, where the result of 
+    /// the ith roll is rolls[i].
+    ///
+    /// Return the length of the shortest sequence of rolls that cannot be 
+    /// taken from rolls.
+    ///
+    /// A sequence of rolls of length len is the result of rolling a k sided 
+    /// dice len times.
+    ///
+    /// Note that the sequence taken does not have to be consecutive as long 
+    /// as it is in order.
+    ///  
+    /// 
+    /// Example 1:
+    ///
+    /// Input: rolls = [4,2,1,2,3,3,2,4,1], k = 4
+    /// Output: 3
+    /// Explanation: Every sequence of rolls of length 1, [1], [2], [3], [4], 
+    /// can be taken from rolls.
+    /// Every sequence of rolls of length 2, [1, 1], [1, 2], ..., [4, 4], can 
+    /// be taken from rolls.
+    /// The sequence [1, 4, 2] cannot be taken from rolls, so we return 3.
+    /// Note that there are other sequences that cannot be taken from rolls.
+    ///
+    /// Example 2:
+    /// 
+    /// Input: rolls = [1,1,2,2], k = 2
+    /// Output: 2
+    /// Explanation: Every sequence of rolls of length 1, [1], [2], can be 
+    /// taken from rolls.
+    /// The sequence [2, 1] cannot be taken from rolls, so we return 2.
+    /// Note that there are other sequences that cannot be taken from rolls 
+    /// but [2, 1] is the shortest.
+    ///
+    /// Example 3:
+    /// 
+    /// Input: rolls = [1,1,3,2,2,2,3,3], k = 4
+    /// Output: 1
+    /// Explanation: The sequence [4] cannot be taken from rolls, so we 
+    /// return 1.
+    /// Note that there are other sequences that cannot be taken from rolls 
+    /// but [4] is the shortest.
+    /// 
+    /// Constraints:
+    /// 1. n == rolls.length
+    /// 2. 1 <= n <= 105
+    /// 3. 1 <= rolls[i] <= k <= 105
+    /// </summary>
+    int shortestSequence(vector<int>& rolls, int k);
+
+    /// <summary>
+     /// Leet Code 2376. Count Special Integers
+     /// </summary>
+    int countSpecialNumbers(int lower, int upper, int digits, unordered_set<int>& visited);
+
+    /// <summary>
+    /// Leet Code 2376. Count Special Integers
+    ///                                                  
+    /// Hard
+    ///
+    /// We call a positive integer special if all of its digits are distinct.
+    /// Given a positive integer n, return the number of special integers that 
+    /// belong to the interval [1, n].
+    ///
+    /// Example 1:
+    /// Input: n = 20
+    /// Output: 19
+    /// Explanation: All the integers from 1 to 20, except 11, are special. 
+    /// Thus, there are 19 special integers.
+    ///
+    /// Example 2:
+    /// Input: n = 5
+    /// Output: 5
+    /// Explanation: All the integers from 1 to 5 are special.
+    /// Example 3:
+    ///
+    /// Input: n = 135
+    /// Output: 110
+    /// Explanation: There are 110 integers from 1 to 135 that are special.
+    /// Some of the integers that are not special are: 22, 114, and 131.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 2 * 10^9
+    /// </summary>
+    int countSpecialNumbers(int n);
+
+    /// <summary>
+    /// Leet Code 2384. Largest Palindromic Number
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given a string num consisting of digits only.
+    ///
+    /// Return the largest palindromic integer (in the form of a string) that 
+    /// can be formed using digits taken from num. It should not contain 
+    /// leading zeroes.
+    ///
+    /// Notes:
+    /// 
+    /// You do not need to use all the digits of num, but you must use at 
+    /// least one digit.
+    /// The digits can be reordered.
+    /// 
+    /// Example 1:
+    /// Input: num = "444947137"
+    /// Output: "7449447"
+    /// Explanation: 
+    /// Use the digits "4449477" from "444947137" to form the palindromic 
+    /// integer "7449447".
+    /// It can be shown that "7449447" is the largest palindromic integer 
+    /// that can be formed.
+    ///
+    /// Example 2:
+    /// Input: num = "00009"
+    /// Output: "9"
+    /// Explanation: 
+    /// It can be shown that "9" is the largest palindromic integer 
+    /// that can be formed.
+    /// Note that the integer returned should not contain leading 
+    /// zeroes.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= num.length <= 10^5
+    /// 2. num consists of digits.
+    /// </summary>
+    string largestPalindromic(string num);
 };
 #endif

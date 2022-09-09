@@ -9036,4 +9036,74 @@ int LeetCodeSort::latestTimeCatchTheBus(vector<int>& buses, vector<int>& passeng
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2386. Find the K-Sum of an Array
+///                                                  
+/// Hard
+///
+/// You are given an integer array nums and a positive integer k. You 
+/// can choose any subsequence of the array and sum all of its elements 
+/// together.
+///
+/// We define the K-Sum of the array as the kth largest subsequence sum 
+/// that can be obtained (not necessarily distinct).
+///
+/// Return the K-Sum of the array.
+/// A subsequence is an array that can be derived from another array 
+/// by deleting some or no elements without changing the order of the 
+/// remaining elements.
+///
+/// Note that the empty subsequence is considered to have a sum of 0.
+///
+/// Example 1:
+/// Input: nums = [2,4,-2], k = 5
+/// Output: 2
+/// Explanation: All the possible subsequence sums that we can obtain are 
+/// the following sorted in decreasing order:
+/// - 6, 4, 4, 2, 2, 0, 0, -2.
+/// The 5-Sum of the array is 2.
+///
+/// Example 2:
+/// Input: nums = [1,-2,3,4,-10,12], k = 16
+/// Output: 10
+/// Explanation: The 16-Sum of the array is 10.
+/// 
+/// Constraints:
+/// 1. n == nums.length
+/// 2. 1 <= n <= 10^5
+/// 3. -10^9 <= nums[i] <= 10^9
+/// 4. 1 <= k <= min(2000, 2^n)
+/// </summary>
+long long LeetCodeSort::kSum(vector<int>& nums, int k)
+{
+    int n = nums.size();
+    vector<int> positives(n);
+    long long sum = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] > 0) sum += (long long)nums[i];
+        positives[i] = std::abs(nums[i]);
+    }
+    sort(positives.begin(), positives.end());
+
+    priority_queue<pair<long long, int>> pq;
+    pq.push(make_pair(sum, 0));
+    long long result = sum;
+    for (int i = 0; i < k; i++)
+    {
+        pair<long long, int> p = pq.top();
+        pq.pop();
+        result = p.first;
+        if (p.second < n)
+        {
+            pq.push(make_pair(p.first - (long long)positives[p.second], p.second + 1));
+            if (p.second > 0)
+            {
+                pq.push(make_pair(p.first + (long long)positives[p.second - 1] - (long long)positives[p.second], p.second + 1));
+            }
+        }
+    }
+    return result;
+}
 #pragma endregion

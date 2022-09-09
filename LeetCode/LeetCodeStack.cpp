@@ -2367,35 +2367,36 @@ int LeetCodeStack::countCollisions(string directions)
 /// </summary>
 int LeetCodeStack::totalStrength(vector<int>& strength)
 {
-    long long res = 0, sz = strength.size(), mod = 1000000007;
+    int sz = strength.size();
+    long long res = 0, mod = 1000000007;
     vector<long long> ps_l(sz + 1), pm_l(sz + 1); // prefix sum and prefix mul from the left.
     vector<long long> ps_r(sz + 1), pm_r(sz + 1); // ... from the right.
     vector<long long> st; // mono-increasing stack.
-    for (long long i = 0; i < sz; ++i) 
+    for (int i = 0; i < sz; ++i) 
     {
         ps_l[i + 1] = (ps_l[i] + (long long)strength[i]) % mod;
-        pm_l[i + 1] = (pm_l[i] + (i + 1) * strength[i]) % mod;
+        pm_l[i + 1] = (pm_l[i] + ((long long)i + (long long)1) * (long long)strength[i]) % mod;
     }
-    for (long long i = sz - 1; i >= 0; --i)
+    for (int i = sz - 1; i >= 0; --i)
     {
         ps_r[i] = (ps_r[i + 1] + (long long)strength[i]) % mod;
-        pm_r[i] = (pm_r[i + 1] + (sz - i) * strength[i]) % mod;
+        pm_r[i] = (pm_r[i + 1] + ((long long)sz - (long long)i) * (long long)strength[i]) % mod;
     }
-    for (long long right = 0; right <= sz; ++right)
+    for (int right = 0; right <= sz; ++right)
     {
-        while (!st.empty() && (right == sz || strength[st.back()] >= strength[right]))
+        while (!st.empty() && (right == sz || strength[(int)st.back()] >= strength[right]))
         {
             long long pivot = st.back();
             st.pop_back();
             long long left = st.empty() ? 0 : st.back() + 1;
-            long long left_sum = (mod + pm_l[pivot + 1] - pm_l[left] - left * (ps_l[pivot + 1] - ps_l[left]) % mod) % mod;
-            long long right_sum = (mod + pm_r[pivot + 1] - pm_r[right] - (sz - right) * (ps_r[pivot + 1] - ps_r[right])) % mod;
-            long long all_sum = (right_sum * (pivot - left + 1) + left_sum * (right - pivot)) % mod;
-            res = (res + all_sum * strength[pivot]) % mod;
+            long long left_sum = (mod + pm_l[(int)pivot + 1] - pm_l[(int)left] - left * (ps_l[(int)pivot + 1] - ps_l[(int)left]) % mod) % mod;
+            long long right_sum = (mod + pm_r[(int)pivot + 1] - pm_r[(int)right] - ((long long)sz - (long long)right) * (ps_r[(int)pivot + 1] - ps_r[(int)right])) % mod;
+            long long all_sum = (right_sum * ((long long)pivot - (long long)left + 1) + left_sum * ((long long)right - (long long)pivot)) % mod;
+            res = (res + all_sum * strength[(int)pivot]) % mod;
         }
         st.push_back(right);
     }
-    return res;
+    return (int)res;
 }
 
 /// <summary>
@@ -2617,5 +2618,251 @@ long long LeetCodeStack::minCost(vector<int>& nums, vector<int>& costs)
         stack2.push(i);
     }
     return dp[n - 1];
+}
+
+/// <summary>
+/// Leet Code 2334. Subarray With Elements Greater Than Varying Threshold
+///                                                  
+/// Hard
+///
+/// You are given an integer array nums and an integer threshold.
+///
+/// Find any subarray of nums of length k such that every element in the 
+/// subarray is greater than threshold / k.
+///
+/// Return the size of any such subarray. If there is no such subarray, 
+/// return -1.
+///
+/// A subarray is a contiguous non-empty sequence of elements within an 
+/// array.
+///
+/// Example 1:
+/// Input: nums = [1,3,4,3,1], threshold = 6
+/// Output: 3
+/// Explanation: The subarray [3,4,3] has a size of 3, and every element 
+/// is greater than 6 / 3 = 2.
+/// Note that this is the only valid subarray.
+///
+/// Example 2:
+/// 
+/// Input: nums = [6,5,6,5,8], threshold = 7
+/// Output: 1
+/// Explanation: The subarray [8] has a size of 1, and 8 > 7 / 1 = 7. 
+/// So 1 is returned.
+/// Note that the subarray [6,5] has a size of 2, and every element is 
+/// greater than 7 / 2 = 3.5. 
+/// Similarly, the subarrays [6,5,6], [6,5,6,5], [6,5,6,5,8] also 
+/// satisfy the given conditions.
+/// Therefore, 2, 3, 4, or 5 may also be returned.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i], threshold <= 10^9
+/// </summary>
+int LeetCodeStack::validSubarraySize(vector<int>& nums, int threshold)
+{
+    vector<pair<int, int>> dp;
+    int result = -1;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        pair<int, int> next = make_pair(nums[i], i);
+        while (!dp.empty() && dp.back().first >= nums[i])
+        {
+            pair<int, int> prev = dp.back();
+            dp.pop_back();
+            int left = -1;
+            if (!dp.empty()) left = dp.back().second;
+            int right = i - 1;
+            if ((long long)prev.first * ((long long)right - (long long)left) > (long long)threshold)
+            {
+                result = (right - left);
+            }
+        }
+        dp.push_back(next);
+    }
+    while (!dp.empty())
+    {
+        pair<int, int> prev = dp.back();
+        dp.pop_back();
+        int left = -1;
+        if (!dp.empty()) left = dp.back().second;
+        int right = nums.size() - 1;
+        if ((long long)prev.first * ((long long)right - (long long)left) > (long long)threshold)
+        {
+            return (right - left);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2355. Maximum Number of Books You Can Take
+///                                                  
+/// Hard
+///
+/// You are given a 0-indexed integer array books of length n where 
+/// books[i] denotes the number of books on the ith shelf of a bookshelf.
+/// You are going to take books from a contiguous section of the bookshelf 
+/// spanning from l to r where 0 <= l <= r < n. For each index i in the 
+/// range l <= i < r, you must take strictly fewer books from shelf i than 
+/// shelf i + 1.
+///
+/// Return the maximum number of books you can take from the bookshelf.
+/// 
+/// Example 1:
+///
+/// Input: books = [8,5,2,7,9]
+/// Output: 19
+/// Explanation:
+/// - Take 1 book from shelf 1.
+/// - Take 2 books from shelf 2.
+/// - Take 7 books from shelf 3.
+/// - Take 9 books from shelf 4.
+/// You have taken 19 books, so return 19.
+/// It can be proven that 19 is the maximum 
+/// number of books you can take.
+/// Example 2:
+///
+/// Input: books = [7,0,3,4,5]
+/// Output: 12
+/// Explanation:
+/// - Take 3 books from shelf 2.
+/// - Take 4 books from shelf 3.
+/// - Take 5 books from shelf 4.
+/// You have taken 12 books so return 12.
+/// It can be proven that 12 is the maximum number of books you can take.
+///
+/// Example 3:
+/// Input: books = [8,2,3,7,3,4,0,1,4,3]
+/// Output: 13
+/// Explanation:
+/// - Take 1 book from shelf 0.
+/// - Take 2 books from shelf 1.
+/// - Take 3 books from shelf 2.
+/// - Take 7 books from shelf 3.
+/// You have taken 13 books so return 13.
+/// It can be proven that 13 is the maximum number of books you can take.
+///
+/// Constraints:
+/// 1. 1 <= books.length <= 10^5
+/// 2. 0 <= books[i] <= 10^5
+/// </summary>
+long long LeetCodeStack::maximumBooks(vector<int>& books)
+{
+    long long result = 0, sum = 0;
+    vector<vector<long long>> dp;
+    for (size_t i = 0; i < books.size(); i++)
+    {
+        while 
+            (!dp.empty() && 
+             ((long long)books[i] - dp.back()[1]) < ((long long)i - dp.back()[0]))
+        {
+            dp.pop_back();
+        }
+        long long prev_sum = 0;
+        long long prev_index = -1;
+        if (!dp.empty())
+        {
+            prev_sum = dp.back()[2];
+            prev_index = dp.back()[0];
+        }
+        if ((long long)i - prev_index > books[i]) prev_index = (long long)i - books[i];
+        long long sum = prev_sum +
+            ((long long)books[i] * 2 - ((long long)i - prev_index - 1)) * ((long long)i - prev_index) / (long long)2;
+
+        dp.push_back({ (long long)i, (long long)books[i], sum });
+        result = max(result, sum);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2345. Finding the Number of Visible Mountains
+///                                                  
+/// Medium
+///
+/// You are given a 0-indexed 2D integer array peaks where 
+/// peaks[i] = [xi, yi] states that mountain i has a peak at 
+/// coordinates (xi, yi). A mountain can be described as a 
+/// right-angled isosceles triangle, with its base along the x-axis 
+/// and a right angle at its peak. More formally, the gradients of 
+/// ascending and descending the mountain are 1 and -1 respectively.
+///
+/// A mountain is considered visible if its peak does not lie 
+/// within another mountain (including the border of other mountains).
+///
+/// Return the number of visible mountains.
+///
+/// Example 1:
+///
+/// Input: peaks = [[2,2],[6,3],[5,4]]
+/// Output: 2
+/// Explanation: The diagram above shows the mountains.
+/// - Mountain 0 is visible since its peak does not lie within another 
+///   mountain or its sides.
+/// - Mountain 1 is not visible since its peak lies within the side 
+///   of mountain 2.
+/// - Mountain 2 is visible since its peak does not lie within 
+///   another mountain or its sides.
+/// There are 2 mountains that are visible.
+///
+/// Example 2:
+/// 
+/// Input: peaks = [[1,3],[1,3]]
+/// Output: 0
+/// Explanation: The diagram above shows the mountains (they completely 
+/// overlap).
+/// Both mountains are not visible since their peaks lie within each 
+/// other.
+/// Constraints:
+/// 1. 1 <= peaks.length <= 10^5
+/// 2. peaks[i].length == 2
+/// 3. 1 <= xi, yi <= 10^5
+/// </summary>
+int LeetCodeStack::visibleMountains(vector<vector<int>>& peaks)
+{
+    sort(peaks.begin(), peaks.end());
+    vector<vector<int>> result;
+    for (size_t i = 0; i < peaks.size(); i++)
+    {
+        if (result.empty())
+        {
+            if (i > 0 && peaks[i] == peaks[i - 1])
+            {
+                continue;
+            }
+            else
+            {
+                result.push_back(peaks[i]);
+            }
+        }
+        else if (result.back() == peaks[i])
+        {
+            result.pop_back();
+        }
+        else
+        {
+            if (peaks[i][1] > result.back()[1])
+            {
+                while (!result.empty() && peaks[i][1] - result.back()[1] >= peaks[i][0] - result.back()[0])
+                {
+                    result.pop_back();
+                }
+                result.push_back(peaks[i]);
+            }
+            else
+            {
+                if (result.back()[1] - peaks[i][1] >= peaks[i][0] - result.back()[0])
+                {
+                    continue;
+                }
+                else
+                {
+                    result.push_back(peaks[i]);
+                }
+            }
+        }
+    }
+    return result.size();
 }
 #pragma endregion

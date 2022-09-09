@@ -2692,5 +2692,167 @@ public:
     /// 5. The tiles are non-overlapping.
     /// </summary>
     int maximumWhiteTiles(vector<vector<int>>& tiles, int carpetLen);
+
+    /// <summary>
+    /// Leet Code 2381. Shifting Letters II
+    ///                                                           
+    /// Medium
+    ///
+    /// You are given a string s of lowercase English letters and a 2D 
+    /// integer array shifts where shifts[i] = [starti, endi, directioni]. 
+    /// For every i, shift the characters in s from the index starti to 
+    /// the index endi (inclusive) forward if directioni = 1, or shift 
+    /// the characters backward if directioni = 0.
+    ///
+    /// Shifting a character forward means replacing it with the next 
+    /// letter in the alphabet (wrapping around so that 'z' becomes 'a'). 
+    /// Similarly, shifting a character backward means replacing it with 
+    /// the previous letter in the alphabet (wrapping around so that 'a' 
+    /// becomes 'z').
+    ///
+    /// Return the final string after all such shifts to s are applied.
+    /// 
+    /// Example 1:
+    /// Input: s = "abc", shifts = [[0,1,0],[1,2,1],[0,2,1]]
+    /// Output: "ace"
+    /// Explanation: Firstly, shift the characters from index 0 to index 1 
+    /// backward. Now s = "zac".
+    /// Secondly, shift the characters from index 1 to index 2 forward. 
+    /// Now s = "zbd".
+    /// Finally, shift the characters from index 0 to index 2 forward. 
+    /// Now s = "ace".
+    ///
+    /// Example 2:
+    /// Input: s = "dztz", shifts = [[0,0,0],[1,1,1]]
+    /// Output: "catz"
+    /// Explanation: Firstly, shift the characters from index 0 to 
+    /// index 0 backward. Now s = "cztz".
+    /// Finally, shift the characters from index 1 to index 1 forward. 
+    /// Now s = "catz".
+    /// Constraints:
+    ///
+    /// 1. 1 <= s.length, shifts.length <= 5 * 104
+    /// 2. shifts[i].length == 3
+    /// 3. 0 <= starti <= endi < s.length
+    /// 4. 0 <= directioni <= 1
+    /// 5. s consists of lowercase English letters.
+    /// </summary>
+    string shiftingLetters(string s, vector<vector<int>>& shifts);
+
+    /// <summary>
+    /// Leet Code 2365. Task Scheduler II
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given a 0-indexed array of positive integers tasks, 
+    /// representing tasks that need to be completed in order, where 
+    /// tasks[i] represents the type of the ith task.
+    ///
+    /// You are also given a positive integer space, which represents 
+    /// the minimum number of days that must pass after the completion 
+    /// of a task before another task of the same type can be performed.
+    ///
+    /// Each day, until all tasks have been completed, you must either:
+    ///
+    /// Complete the next task from tasks, or
+    /// Take a break.
+    /// Return the minimum number of days needed to complete all tasks.
+    ///
+    /// Example 1:
+    /// Input: tasks = [1,2,1,2,3,1], space = 3
+    /// Output: 9
+    /// Explanation:
+    /// One way to complete all tasks in 9 days is as follows:
+    /// Day 1: Complete the 0th task.
+    /// Day 2: Complete the 1st task.
+    /// Day 3: Take a break.
+    /// Day 4: Take a break.
+    /// Day 5: Complete the 2nd task.
+    /// Day 6: Complete the 3rd task.
+    /// Day 7: Take a break.
+    /// Day 8: Complete the 4th task.
+    /// Day 9: Complete the 5th task.
+    /// It can be shown that the tasks cannot be completed in less 
+    /// than 9 days.
+    ///
+    /// Example 2:
+    /// Input: tasks = [5,8,8,5], space = 2
+    /// Output: 6
+    /// Explanation:
+    /// One way to complete all tasks in 6 days is as follows:
+    /// Day 1: Complete the 0th task.
+    /// Day 2: Complete the 1st task.
+    /// Day 3: Take a break.
+    /// Day 4: Take a break.
+    /// Day 5: Complete the 2nd task.
+    /// Day 6: Complete the 3rd task.
+    /// It can be shown that the tasks cannot be completed in less than 6 
+    /// days.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= tasks.length <= 10^5
+    /// 2. 1 <= tasks[i] <= 10^9
+    /// 3. 1 <= space <= tasks.length
+    /// </summary>
+    long long taskSchedulerII(vector<int>& tasks, int space);
+
+
+    /// <summary>
+    /// Leet Code 2382. Maximum Segment Sum After Removals
+    ///                                                  
+    /// Hard
+    ///
+    /// You are given two 0-indexed integer arrays nums and removeQueries, 
+    /// both of length n. For the ith query, the element in nums at the 
+    /// index removeQueries[i] is removed, splitting nums into different 
+    /// segments.
+    ///
+    /// A segment is a contiguous sequence of positive integers in nums. 
+    /// A segment sum is the sum of every element in a segment.
+    ///
+    /// Return an integer array answer, of length n, where answer[i] is 
+    /// the maximum segment sum after applying the ith removal.
+    ///
+    /// Note: The same index will not be removed more than once.
+    /// Example 1:
+    /// Input: nums = [1,2,5,6,1], removeQueries = [0,3,2,4,1]
+    /// Output: [14,7,2,2,0]
+    /// Explanation: Using 0 to indicate a removed element, the answer is 
+    /// as follows:
+    /// Query 1: Remove the 0th element, nums becomes [0,2,5,6,1] and the 
+    /// maximum segment sum is 14 for segment [2,5,6,1].
+    /// Query 2: Remove the 3rd element, nums becomes [0,2,5,0,1] and the 
+    /// maximum segment sum is 7 for segment [2,5].
+    /// Query 3: Remove the 2nd element, nums becomes [0,2,0,0,1] and the 
+    /// maximum segment sum is 2 for segment [2]. 
+    /// Query 4: Remove the 4th element, nums becomes [0,2,0,0,0] and the 
+    /// maximum segment sum is 2 for segment [2]. 
+    /// Query 5: Remove the 1st element, nums becomes [0,0,0,0,0] and the 
+    /// maximum segment sum is 0, since there are no segments.
+    /// Finally, we return [14,7,2,2,0].
+    ///
+    /// Example 2:
+    /// Input: nums = [3,2,11,1], removeQueries = [3,2,1,0]
+    /// Output: [16,5,3,0]
+    /// Explanation: Using 0 to indicate a removed element, the answer is 
+    /// as follows:
+    /// Query 1: Remove the 3rd element, nums becomes [3,2,11,0] and the 
+    /// maximum segment sum is 16 for segment [3,2,11].
+    /// Query 2: Remove the 2nd element, nums becomes [3,2,0,0] and the 
+    /// maximum segment sum is 5 for segment [3,2].
+    /// Query 3: Remove the 1st element, nums becomes [3,0,0,0] and the 
+    /// maximum segment sum is 3 for segment [3].
+    /// Query 4: Remove the 0th element, nums becomes [0,0,0,0] and the 
+    /// maximum segment sum is 0, since there are no segments.
+    /// Finally, we return [16,5,3,0].
+    ///
+    /// Constraints:
+    /// 1. n == nums.length == removeQueries.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 1 <= nums[i] <= 10^9
+    /// 4. 0 <= removeQueries[i] < n
+    /// 5. All the values of removeQueries are unique.
+    /// </summary>
+    vector<long long> maximumSegmentSum(vector<int>& nums, vector<int>& removeQueries);
 };
 #endif  // LeetCodeGreedy_H

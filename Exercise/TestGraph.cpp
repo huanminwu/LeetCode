@@ -4575,8 +4575,92 @@ void TestLeetCode2328(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2368(void)
+{
+    Logger::WriteMessage("Test Leet Code 2368");
+    LeetCodeGraph leetCode;
+    int n = 7;
+    vector<vector<int>> edges = 
+    { 
+        {0, 1},{1, 2},{3, 1},{4, 0},{0, 5},{5, 6} 
+    };
+    vector<int> restricted = { 4, 5 };
+    int result = leetCode.reachableNodes(n, edges, restricted);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(restricted);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 7;
+    edges =
+    {
+        {0,1},{0,2},{0,5},{0,4},{3,2},{6,5}
+    };
+    restricted = { 4, 2, 1 };
+    result = leetCode.reachableNodes(n, edges, restricted);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(restricted);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2359(void)
+{
+    Logger::WriteMessage("Test Leet Code 2359");
+    LeetCodeGraph leetCode;
+    vector<int> edges = { 2, 2, 3, -1 };
+    int node1 = 0, node2 = 1;
+    int result = leetCode.closestMeetingNode(edges, node1, node2);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("node1 = " + to_string(node1) + "; node2 = " + to_string(node2) + "; result = " + to_string(result));
+
+    edges = { 1, 2, -1};
+    node1 = 0, node2 = 2;
+    result = leetCode.closestMeetingNode(edges, node1, node2);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("node1 = " + to_string(node1) + "; node2 = " + to_string(node2) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2360(void)
+{
+    Logger::WriteMessage("Test Leet Code 2360");
+    LeetCodeGraph leetCode;
+    vector<int> edges = { 3,3,4,2,3 };
+    int result = leetCode.longestCycle(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { 2,-1,3,1 };
+    result = leetCode.longestCycle(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { -1, 4, -1, 2, 0, 4 };
+    result = leetCode.longestCycle(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode2374(void)
+{
+    Logger::WriteMessage("Test Leet Code 2374");
+    LeetCodeGraph leetCode;
+    vector<int> edges = { 1, 0, 0, 0, 0, 7, 7, 5 };
+    int result = leetCode.edgeScore(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { 2,0,0,2 };
+    result = leetCode.edgeScore(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2374();
+    TestLeetCode2360();
+    TestLeetCode2359();
+    TestLeetCode2368();
     TestLeetCode2328();
     TestLeetCode2322();
     TestLeetCode2316();

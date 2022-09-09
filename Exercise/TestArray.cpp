@@ -7583,8 +7583,129 @@ void TestLeetCode2383(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2352(void)
+{
+    Logger::WriteMessage("Test Leet Code 2352");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {3, 2, 1},{1, 7, 6},{2, 7, 7} };
+    int result = leetCode.equalPairs(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {3, 1, 2, 2},{1, 4, 4, 5},{2, 4, 2, 2},{2, 4, 2, 2} };
+    result = leetCode.equalPairs(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2364(void)
+{
+    Logger::WriteMessage("Test Leet Code 2364");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 4, 1, 3, 3 };
+    long long result = leetCode.countBadPairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4,5 };
+    result = leetCode.countBadPairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2366(void)
+{
+    Logger::WriteMessage("Test Leet Code 2366");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 9, 3 };
+    long long result = leetCode.minimumReplacement(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4,5 };
+    result = leetCode.minimumReplacement(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2348(void)
+{
+    Logger::WriteMessage("Test Leet Code 2348");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 3, 0, 0, 2, 0, 0, 4 };
+    long long result = leetCode.zeroFilledSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,0,0,2,0,0 };
+    result = leetCode.zeroFilledSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2391(void)
+{
+    Logger::WriteMessage("Test Leet Code 2391");
+    LeetCodeArray leetCode;
+    vector<string> garbage = { "G", "P", "GP", "GG" };
+    vector<int> travel = { 2, 4, 3 };
+    int result = leetCode.garbageCollection(garbage, travel);
+    Logger::WriteMessage(garbage);
+    Logger::WriteMessage(travel);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    garbage = { "MMM","PGM","GP" };
+    travel = { 3, 10 };
+    result = leetCode.garbageCollection(garbage, travel);
+    Logger::WriteMessage(garbage);
+    Logger::WriteMessage(travel);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2371(void)
+{
+    Logger::WriteMessage("Test Leet Code 2371");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {3, 1},{2, 5} };
+    vector<vector<int>> result = leetCode.minScore(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid = { {10} };
+    result = leetCode.minScore(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid = { {2, 4, 6},{1, 5, 3} };
+    result = leetCode.minScore(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2393(void)
+{
+    Logger::WriteMessage("Test Leet Code 2393");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 3, 5, 4, 4, 6 };
+    long long result = leetCode.countSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4,5 };
+    result = leetCode.countSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2393();
+    TestLeetCode2371();
+    TestLeetCode2391();
+    TestLeetCode2348();
+    TestLeetCode2366();
+    TestLeetCode2364();
+    TestLeetCode2352();
     TestLeetCode2383();
     TestLeetCode2373();
     TestLeetCode2363();

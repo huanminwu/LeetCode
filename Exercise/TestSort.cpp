@@ -2920,8 +2920,32 @@ void TestLeetCode2332(void)
     Logger::WriteMessage("capacity = " + to_string(capacity) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2386(void)
+{
+    Logger::WriteMessage("Test Leet Code 2386");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 2, 4, -2 };
+    int k = 5;
+    long long result = leetCode.kSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,-2,3,4,-10,12 };
+    k = 16;
+    result = leetCode.kSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 492634335, 899178915, 230945927 };
+    k = 2;
+    result = leetCode.kSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2386();
     TestLeetCode2332();
     TestLeetCode2323();
     TestLeetCode2300();

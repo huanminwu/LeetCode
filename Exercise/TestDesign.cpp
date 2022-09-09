@@ -4620,8 +4620,107 @@ void TestLeetCode2336(void)
     Logger::WriteMessage(parameters);
     Logger::WriteMessage(result);
 }
+
+void TestLeetCode2353(void)
+{
+    Logger::WriteMessage("Test Leet Code 2353");
+
+    vector<string> commands =
+    {
+       "FoodRatings", "highestRated", "highestRated", "changeRating", 
+       "highestRated", "changeRating", "highestRated"
+    };
+
+    vector<string> foods =
+    {
+        {"kimchi", "miso", "sushi", "moussaka", "ramen", "bulgogi"}
+    };
+
+    vector<string> cuisines =
+    {
+        {"korean", "japanese", "japanese", "greek", "japanese", "korean"}
+    };
+
+    vector<int> ratings =
+    {
+        {9, 12, 8, 15, 14, 7}
+    };
+
+    vector<vector<string>> parameters
+    {
+        {"", "0"}, {"korean", "0"} ,{"japanese", "0"}, {"sushi", "16"},{"japanese", "0"},
+        {"ramen", "16"}, {"japanese", "0"}
+    };
+    vector<string> result;
+    FoodRatings* foodRatings = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FoodRatings")
+        {
+            foodRatings = new FoodRatings(foods, cuisines, ratings);
+            result.push_back("null");
+        }
+        else if (commands[i] == "changeRating")
+        {
+            foodRatings->changeRating(parameters[i][0], atoi(parameters[i][1].c_str()));
+            result.push_back("null");
+        }
+        else if (commands[i] == "highestRated")
+        {
+            string ret = foodRatings->highestRated(parameters[i][0]);
+            result.push_back(ret);
+        }
+    }
+    delete foodRatings;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2349(void)
+{
+    Logger::WriteMessage("Test Leet Code 2349");
+
+    vector<string> commands =
+    {
+       "NumberContainers", "find", "change", "change", "change", 
+       "change", "find", "change", "find"
+    };
+
+    vector<vector<int>> parameters
+    {
+        {}, {10}, {2, 10}, {1, 10}, {3, 10}, {5, 10}, {10}, {1, 20}, {10}
+    };
+    vector<string> result;
+    NumberContainers* numberContainers = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "NumberContainers")
+        {
+            numberContainers = new NumberContainers();
+            result.push_back("null");
+        }
+        else if (commands[i] == "change")
+        {
+            numberContainers->change(parameters[i][0], parameters[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "find")
+        {
+            int ret = numberContainers->find(parameters[i][0]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete numberContainers;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2349();
+    TestLeetCode2353();
     TestLeetCode2336();
     TestLeetCode2296();
     TestLeetCode2276();

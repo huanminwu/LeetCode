@@ -3185,8 +3185,32 @@ void TestLeetCode2338(void)
     Logger::WriteMessage("n = " + to_string(n) + "; max_Value = " + to_string(maxValue) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2361(void)
+{
+    Logger::WriteMessage("Test Leet Code 2361");
+    LeetCodeDP leetCode;
+    vector<int> regular = { 1, 6, 9, 5 };
+    vector<int> express = { 5, 2, 3, 10 };
+    int expressCost = 8;
+    vector<long long> result = leetCode.minimumCosts(regular, express, expressCost);
+    Logger::WriteMessage("expressCost = " + to_string(expressCost));
+    Logger::WriteMessage(regular);
+    Logger::WriteMessage(express);
+    Logger::WriteMessage(result);
+
+    regular = { 11,5,13 };
+    express = { 7,10,6 };
+    expressCost = 3;
+    result = leetCode.minimumCosts(regular, express, expressCost);
+    Logger::WriteMessage("expressCost = " + to_string(expressCost));
+    Logger::WriteMessage(regular);
+    Logger::WriteMessage(express);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2361();
     TestLeetCode2338();
     TestLeetCode2318();
     TestLeetCode2320();

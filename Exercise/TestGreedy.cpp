@@ -1379,8 +1379,64 @@ void TestLeetCode2271(void)
     Logger::WriteMessage("carpetLen = " + to_string(carpetLen) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2381(void)
+{
+    Logger::WriteMessage("Test Leet Code 2381");
+    LeetCodeGreedy leetCode;
+    string s = "abc";
+    vector<vector<int>> shifts = { {0, 1, 0},{1, 2, 1},{0, 2, 1} };
+    string result = leetCode.shiftingLetters(s, shifts);
+    Logger::WriteMessage(shifts);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "dztz";
+    shifts = { {0, 0, 0},{1, 1, 1} };
+    result = leetCode.shiftingLetters(s, shifts);
+    Logger::WriteMessage(shifts);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
+void TestLeetCode2365(void)
+{
+    Logger::WriteMessage("Test Leet Code 2365");
+    LeetCodeGreedy leetCode;
+    vector<int> tasks = { 1, 2, 1, 2, 3, 1 };
+    int space = 3;
+    long long result = leetCode.taskSchedulerII(tasks, space);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("space = " + to_string(space) + "; result = " + to_string(result));
+
+    tasks = { 5,8,8,5 };
+    space = 2;
+    result = leetCode.taskSchedulerII(tasks, space);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("space = " + to_string(space) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2382(void)
+{
+    Logger::WriteMessage("Test Leet Code 2382");
+    LeetCodeGreedy leetCode;
+    vector<int> nums = { 1, 2, 5, 6, 1 };
+    vector<int> removeQueries = { 0, 3, 2, 4, 1 };
+    vector<long long> result = leetCode.maximumSegmentSum(nums, removeQueries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(removeQueries);
+    Logger::WriteMessage(result);
+
+    nums = { 3,2,11,1 };
+    removeQueries = { 3,2,1,0 };
+    result = leetCode.maximumSegmentSum(nums, removeQueries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(removeQueries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode2382();
+    TestLeetCode2365();
+    TestLeetCode2381();
     TestLeetCode2271();
     TestLeetCode2251();
     TestLeetCode2274();

@@ -15202,4 +15202,321 @@ int LeetCodeGraph::countPaths(vector<vector<int>>& grid)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2368. Reachable Nodes With Restrictions
+///                                                           
+/// Medium
+///
+/// There is an undirected tree with n nodes labeled from 0 to n - 1 and 
+/// n - 1 edges.
+///
+/// You are given a 2D integer array edges of length n - 1 where 
+//// edges[i] = [ai, bi] indicates that there is an edge between nodes 
+/// ai and bi in the tree. You are also given an integer array restricted 
+/// which represents restricted nodes.
+///
+/// Return the maximum number of nodes you can reach from node 0 without 
+/// visiting a restricted node.
+///
+/// Note that node 0 will not be a restricted node.
+///
+/// Example 1:
+///
+/// Input: n = 7, edges = [[0,1],[1,2],[3,1],[4,0],[0,5],[5,6]], 
+/// restricted = [4,5]
+/// Output: 4
+/// Explanation: The diagram above shows the tree.
+/// We have that [0,1,2,3] are the only nodes that can be reached from 
+/// node 0 without visiting a restricted node.
+///
+/// Example 2:
+/// Input: n = 7, edges = [[0,1],[0,2],[0,5],[0,4],[3,2],[6,5]], 
+/// restricted = [4,2,1]
+/// Output: 3
+/// Explanation: The diagram above shows the tree.
+/// We have that [0,5,6] are the only nodes that can be reached from 
+/// node 0 without visiting a restricted node.
+///
+/// Constraints:
+/// 1. 2 <= n <= 10^5
+/// 2. edges.length == n - 1
+/// 3. edges[i].length == 2
+/// 4. 0 <= ai, bi < n
+/// 5. ai != bi
+/// 6. edges represents a valid tree.
+/// 7. 1 <= restricted.length < n
+/// 8. 1 <= restricted[i] < n
+/// 9. All the values of restricted are unique.
+/// </summary>
+int LeetCodeGraph::reachableNodes(int n, vector<vector<int>>& edges, vector<int>& restricted)
+{
+    vector<vector<int>> neighbors(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(edges[i][1]);
+        neighbors[edges[i][1]].push_back(edges[i][0]);
+    }
+    vector<int> visited(n);
+    for (size_t i = 0; i < restricted.size(); i++) visited[restricted[i]] = 1;
+    visited[0] = 1;
+    queue<int> queue;
+    queue.push(0);
+    int result = 0;
+    while (!queue.empty())
+    {
+        int node = queue.front();
+        queue.pop();
+        result++;
+        for (size_t i = 0; i < neighbors[node].size(); i++)
+        {
+            int next = neighbors[node][i];
+            if (visited[next] == 1) continue;
+            visited[next] = 1;
+            queue.push(next);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2359. Find Closest Node to Given Two Nodes
+///                                                  
+/// Medium
+///
+/// You are given a directed graph of n nodes numbered from 0 to n - 1, 
+/// where each node has at most one outgoing edge.
+/// 
+/// The graph is represented with a given 0-indexed array edges of size n, 
+/// indicating that there is a directed edge from node i to node edges[i]. 
+/// If there is no outgoing edge from i, then edges[i] == -1.
+///
+/// You are also given two integers node1 and node2.
+///
+/// Return the index of the node that can be reached from both node1 and 
+/// node2, such that the maximum between the distance from node1 to that 
+/// node, and from node2 to that node is minimized. If there are multiple 
+/// answers, return the node with the smallest index, and if no possible 
+/// answer exists, return -1.
+///
+/// Note that edges may contain cycles.
+///
+/// Example 1:
+/// Input: edges = [2,2,3,-1], node1 = 0, node2 = 1
+/// Output: 2
+/// Explanation: The distance from node 0 to node 2 is 1, and the 
+/// distance from node 1 to node 2 is 1.
+/// The maximum of those two distances is 1. It can be proven that we 
+/// cannot get a node with a smaller maximum distance than 1, so we 
+/// return node 2.
+///
+/// Example 2:
+/// Input: edges = [1,2,-1], node1 = 0, node2 = 2
+/// Output: 2
+/// Explanation: The distance from node 0 to node 2 is 2, and the 
+/// distance from node 2 to itself is 0.
+/// The maximum of those two distances is 2. It can be proven that we 
+/// cannot get a node with a smaller maximum distance than 2, so we 
+/// return node 2.
+///
+/// Constraints:
+/// n == edges.length
+/// 2 <= n <= 105
+/// -1 <= edges[i] < n
+/// edges[i] != i
+/// 0 <= node1, node2 < n	
+/// </summary>
+int LeetCodeGraph::closestMeetingNode(vector<int>& edges, int node1, int node2)
+{
+    int n = edges.size();
+    vector<int> distance1(n, INT_MAX);
+    queue<int> queue;
+    queue.push(node1);
+    int step = 0;
+    while (!queue.empty())
+    {
+        int node = queue.front();
+        queue.pop();
+        distance1[node] = step;
+        if (edges[node] == -1) continue;
+        if (distance1[edges[node]] != INT_MAX) continue;
+        queue.push(edges[node]);
+        step++;
+    }
+    vector<int> distance2(n, INT_MAX);
+    queue.push(node2);
+    step = 0;
+    while (!queue.empty())
+    {
+        int node = queue.front();
+        queue.pop();
+        distance2[node] = step;
+        if (edges[node] == -1) continue;
+        if (distance2[edges[node]] != INT_MAX) continue;
+        queue.push(edges[node]);
+        step++;
+    }
+    int result = -1;
+    int distance = INT_MAX;
+    for (int i = 0; i < n; i++)
+    {
+        if (distance1[i] == INT_MAX || distance2[i] == INT_MAX)
+        {
+            continue;
+        }
+        if (result == -1 || max(distance1[i], distance2[i]) < distance)
+        {
+            result = i;
+            distance = max(distance1[i], distance2[i]);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2360. Longest Cycle in a Graph
+/// </summary>
+int LeetCodeGraph::longestCycle(vector<int>& edges, int node, int step, vector<int>& visited,
+    vector<int>& path, int& result)
+{
+    if (node == -1) return result;
+    if (path[node] != -1)
+    {
+        result = max(result, step - path[node]);
+        return result;
+    }
+    else if (visited[node] != 0)
+    {
+        return result;
+    }
+    else
+    {
+        visited[node] = 1;
+        path[node] = step;
+        longestCycle(edges, edges[node], step + 1, visited, path, result);
+        path[node] = -1;
+        return result;
+    }
+}
+
+
+/// <summary>
+/// Leet Code 2360. Longest Cycle in a Graph
+///                                                  
+/// Hard
+///
+/// You are given a directed graph of n nodes numbered from 0 to n - 1, 
+/// where each node has at most one outgoing edge.
+///
+/// The graph is represented with a given 0-indexed array edges of size n, 
+/// indicating that there is a directed edge from node i to node edges[i]. 
+/// If there is no outgoing edge from node i, then edges[i] == -1.
+///
+/// Return the length of the longest cycle in the graph. If no cycle exists, 
+/// return -1.
+///
+/// A cycle is a path that starts and ends at the same node.
+///
+/// Example 1:
+/// Input: edges = [3,3,4,2,3]
+/// Output: 3
+/// Explanation: The longest cycle in the graph is the 
+/// cycle: 2 -> 4 -> 3 -> 2.
+/// The length of this cycle is 3, so 3 is returned.
+///
+/// Example 2:
+/// Input: edges = [2,-1,3,1]
+/// Output: -1
+/// Explanation: There are no cycles in this graph.
+/// 
+/// Constraints:
+/// 1. n == edges.length
+/// 2. 2 <= n <= 10^5
+/// 3. -1 <= edges[i] < n
+/// 4. edges[i] != i
+/// </summary>
+int LeetCodeGraph::longestCycle(vector<int>& edges)
+{
+    int n = edges.size();
+    int result = -1;
+    vector<int> path(n, -1);
+    vector<int> visited(n);
+    for (int i = 0; i < n; i++)
+    {
+        if (path[i] == -1)
+        {
+            result = max(result, longestCycle(edges, i, 0, visited, path, result));
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2374. Node With Highest Edge Score
+///                                                  
+/// Medium
+///
+/// You are given a directed graph with n nodes labeled from 0 to n - 1, 
+/// where each node has exactly one outgoing edge.
+///
+/// The graph is represented by a given 0-indexed integer array edges of 
+/// length n, where edges[i] indicates that there is a directed edge from 
+/// node i to node edges[i].
+///
+/// The edge score of a node i is defined as the sum of the labels of all 
+/// the nodes that have an edge pointing to i.
+///
+/// Return the node with the highest edge score. If multiple nodes have 
+/// the same edge score, return the node with the smallest index.
+///
+/// Example 1:
+/// Input: edges = [1,0,0,0,0,7,7,5]
+/// Output: 7
+/// Explanation:
+/// - The nodes 1, 2, 3 and 4 have an edge pointing to node 0. The edge 
+///   score of node 0 is 1 + 2 + 3 + 4 = 10.
+/// - The node 0 has an edge pointing to node 1. The edge score of node 
+///   1 is 0.
+/// - The node 7 has an edge pointing to node 5. The edge score of 
+///   node 5 is 7.
+/// - The nodes 5 and 6 have an edge pointing to node 7. The edge score 
+///   of node 7 is 5 + 6 = 11.
+/// Node 7 has the highest edge score so return 7.
+///
+/// Example 2:
+/// Input: edges = [2,0,0,2]
+/// Output: 0
+/// Explanation:
+/// - The nodes 1 and 2 have an edge pointing to node 0. The edge score 
+///  of node 0 is 1 + 2 = 3.
+/// - The nodes 0 and 3 have an edge pointing to node 2. The edge score 
+///   of node 2 is 0 + 3 = 3.
+/// Nodes 0 and 2 both have an edge score of 3. Since node 0 has a 
+/// smaller index, we return 0.
+/// 
+/// Constraints:
+/// 1. n == edges.length
+/// 2. 2 <= n <= 10^5
+/// 3. 0 <= edges[i] < n
+/// 4. edges[i] != i
+/// </summary>
+int LeetCodeGraph::edgeScore(vector<int>& edges)
+{
+    vector<long long> dp(edges.size());
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        dp[edges[i]] += (long long)i;
+    }
+    long long value = 0;
+    int result = 0;
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        if (dp[i] > value)
+        {
+            value = dp[i];
+            result = i;
+        }
+    }
+    return result;
+}
 #pragma endregion

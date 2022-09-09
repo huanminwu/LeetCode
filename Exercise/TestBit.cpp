@@ -810,8 +810,27 @@ void TestLeetCode2317(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2354(void)
+{
+    Logger::WriteMessage("Test Leet Code 2354");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 2, 3, 1 };
+    int k = 3;
+    long long result = leetCode.countExcellentPairs(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 5,1,1 };
+    k = 10;
+    result = leetCode.countExcellentPairs(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2354();
     TestLeetCode2317();
     TestLeetCode2275();
     TestLeetCode2220();
