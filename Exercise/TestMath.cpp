@@ -4907,8 +4907,150 @@ void TestLeetCode2384(void)
     Logger::WriteMessage("num = " + num + "; result = " + result);
 }
 
+void TestLeetCode2375(void)
+{
+    Logger::WriteMessage("Test Leet Code 2375");
+    LeetCodeMath leetCode;
+    string pattern = "IIIDIDDD";
+    string result = leetCode.smallestNumber(pattern);
+    Logger::WriteMessage("pattern = " + pattern + "; result = " + result);
+
+    pattern = "DDD";
+    result = leetCode.smallestNumber(pattern);
+    Logger::WriteMessage("pattern = " + pattern + "; result = " + result);
+}
+
+void TestLeetCode2404(void)
+{
+    Logger::WriteMessage("Test Leet Code 2404");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 0, 1, 2, 2, 4, 4, 1 };
+    int result = leetCode.mostFrequentEven(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,4,4,9,2,4 };
+    result = leetCode.mostFrequentEven(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 29,47,21,41,13,37,25,7 };
+    result = leetCode.mostFrequentEven(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2396(void)
+{
+    Logger::WriteMessage("Test Leet Code 2396");
+    LeetCodeMath leetCode;
+    int n = 9;
+    bool result = leetCode.isStrictlyPalindromic(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+
+    n = 4;
+    result = leetCode.isStrictlyPalindromic(n);
+    Logger::WriteMessage("n = " + to_string(n) + ";result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2417(void)
+{
+    Logger::WriteMessage("Test Leet Code 2417");
+    LeetCodeMath leetCode;
+    int n = 2;
+    int result = leetCode.closestFair(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 403;
+    result = leetCode.closestFair(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2409(void)
+{
+    Logger::WriteMessage("Test Leet Code 2409");
+    LeetCodeMath leetCode;
+    string arriveAlice = "08-15";
+    string leaveAlice = "08-18";
+    string arriveBob = "08-16"; 
+    string leaveBob = "08-19";
+    int result = leetCode.countDaysTogether(arriveAlice, leaveAlice, arriveBob, leaveBob);
+    Logger::WriteMessage("arriveAlice = " + arriveAlice + "; leaveAlice = " + leaveAlice);
+    Logger::WriteMessage("arriveBob = " + arriveBob + "; leaveBob = " + leaveBob);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arriveAlice = "10-01";
+    leaveAlice = "10-31";
+    arriveBob = "11-01";
+    leaveBob = "12-31";
+    result = leetCode.countDaysTogether(arriveAlice, leaveAlice, arriveBob, leaveBob);
+    Logger::WriteMessage("arriveAlice = " + arriveAlice + "; leaveAlice = " + leaveAlice);
+    Logger::WriteMessage("arriveBob = " + arriveBob + "; leaveBob = " + leaveBob);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arriveAlice = "09-01";
+    leaveAlice = "10-19";
+    arriveBob = "06-19";
+    leaveBob = "12-31";
+    result = leetCode.countDaysTogether(arriveAlice, leaveAlice, arriveBob, leaveBob);
+    Logger::WriteMessage("arriveAlice = " + arriveAlice + "; leaveAlice = " + leaveAlice);
+    Logger::WriteMessage("arriveBob = " + arriveBob + "; leaveBob = " + leaveBob);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2413(void)
+{
+    Logger::WriteMessage("Test Leet Code 2413");
+    LeetCodeMath leetCode;
+    int n = 5;
+    int result = leetCode.smallestEvenMultiple(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 6;
+    result = leetCode.smallestEvenMultiple(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2427(void)
+{
+    Logger::WriteMessage("Test Leet Code 2427");
+    LeetCodeMath leetCode;
+    int a = 12;
+    int b = 6;
+    int result = leetCode.commonFactors(a, b);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) + "; result = " + to_string(result));
+
+    a = 25;
+    b = 30;
+    result = leetCode.commonFactors(a, b);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2436(void)
+{
+    Logger::WriteMessage("Test Leet Code 2436");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 12, 6, 3, 14, 8 };
+    int result = leetCode.minimumSplits(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,12,6,14 };
+    result = leetCode.minimumSplits(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2436();
+    TestLeetCode2427();
+    TestLeetCode2413();
+    TestLeetCode2409();
+    TestLeetCode2417();
+    TestLeetCode2396();
+    TestLeetCode2404();
+    TestLeetCode2375();
     TestLeetCode2384();
     TestLeetCode2376();
     TestLeetCode2350();

@@ -14967,3 +14967,469 @@ string LeetCodeMath::largestPalindromic(string num)
 
     return result;
 }
+/// <summary>
+/// Leet Code 2375. Construct Smallest Number From DI String
+///                                                  
+/// Medium
+///
+/// You are given a 0-indexed string pattern of length n consisting of the 
+/// characters 'I' meaning increasing and 'D' meaning decreasing.
+///
+/// A 0-indexed string num of length n + 1 is created using the following 
+/// conditions:
+///
+/// num consists of the digits '1' to '9', where each digit is used at 
+/// most once.
+/// If pattern[i] == 'I', then num[i] < num[i + 1].
+/// If pattern[i] == 'D', then num[i] > num[i + 1].
+/// Return the lexicographically smallest possible string num that meets 
+/// the conditions.
+///
+/// Example 1:
+/// Input: pattern = "IIIDIDDD"
+/// Output: "123549876"
+/// Explanation:
+/// At indices 0, 1, 2, and 4 we must have that num[i] < num[i+1].
+/// At indices 3, 5, 6, and 7 we must have that num[i] > num[i+1].
+/// Some possible values of num are "245639871", "135749862", 
+/// and "123849765".
+/// It can be proven that "123549876" is the smallest possible num that 
+/// meets the conditions.
+/// Note that "123414321" is not possible because the digit '1' is 
+/// used more than once.
+///
+/// Example 2:
+/// Input: pattern = "DDD"
+/// Output: "4321"
+/// Explanation:
+/// Some possible values of num are "9876", "7321", and "8742".
+/// It can be proven that "4321" is the smallest possible num that meets 
+/// the conditions.
+/// 
+/// Constraints:
+/// 1. 1 <= pattern.length <= 8
+/// 2. pattern consists of only the letters 'I' and 'D'.
+/// </summary>
+string LeetCodeMath::smallestNumber(string pattern)
+{
+    string result;
+    vector<int> dp(pattern.size() + 1);
+    vector<int> visited(10);
+    stack<int> stk;
+    for (size_t i = 0; i <= pattern.size(); i++)
+    {
+        if (i < pattern.size() && pattern[i] == 'D') stk.push(i);
+        else
+        {
+            int level = 1;
+            while (!stk.empty())
+            {
+                dp[stk.top()] = level;
+                level++;
+                stk.pop();
+            }
+        }
+    }
+    for (size_t i = 0; i < pattern.size() + 1; i++)
+    {
+        for (int j = 1; j < 10; j++)
+        {
+            if (visited[j] != 0) continue;
+            dp[i]--;
+            if (dp[i] == -1)
+            {
+                result.push_back('0' + j);
+                visited[j] = 1;
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2404. Most Frequent Even Element
+///                                                  
+/// Easy
+///
+/// Given an integer array nums, return the most frequent even element.
+/// 
+/// If there is a tie, return the smallest one. If there is no such 
+/// element, return -1.
+/// 
+/// Example 1:
+///
+/// Input: nums = [0,1,2,2,4,4,1]
+/// Output: 2
+/// Explanation:
+/// The even elements are 0, 2, and 4. Of these, 2 and 4 appear the most.
+/// We return the smallest one, which is 2.
+///
+/// Example 2:
+///
+/// Input: nums = [4,4,4,9,2,4]
+/// Output: 4
+/// Explanation: 4 is the even element appears the most.
+///
+/// Example 3:
+///
+/// Input: nums = [29,47,21,41,13,37,25,7]
+/// Output: -1
+/// Explanation: There is no even element.
+/// 
+/// Constraints:
+///
+/// 1. 1 <= nums.length <= 2000
+/// 2. 0 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeMath::mostFrequentEven(vector<int>& nums)
+{
+    vector<int> dp(100001);
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        dp[nums[i]]++;
+    }
+    int freq = 0;
+    int result = -1;
+    for (size_t i = 0; i < dp.size(); i+=2)
+    {
+        if (dp[i] == 0) continue;
+        if (dp[i] > freq)
+        {
+            result = i;
+            freq = dp[i];
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2396. Strictly Palindromic Number
+///                                                  
+/// Medium
+///
+/// An integer n is strictly palindromic if, for every base b between 2 
+/// and n - 2 (inclusive), the string representation of the integer n 
+/// in base b is palindromic.
+///
+/// Given an integer n, return true if n is strictly palindromic and 
+/// false otherwise.
+///
+/// A string is palindromic if it reads the same forward and backward.
+/// Example 1:
+/// Input: n = 9
+/// Output: false
+/// Explanation: In base 2: 9 = 1001 (base 2), which is palindromic.
+/// In base 3: 9 = 100 (base 3), which is not palindromic.
+/// Therefore, 9 is not strictly palindromic so we return false.
+/// Note that in bases 4, 5, 6, and 7, n = 9 is also not palindromic.
+///
+/// Example 2:
+/// 
+/// Input: n = 4
+/// Output: false
+/// Explanation: We only consider base 2: 4 = 100 (base 2), which 
+/// is not palindromic.
+/// Therefore, we return false.
+///
+/// Constraints:
+/// 1. 4 <= n <= 10^5
+/// </summary>
+bool LeetCodeMath::isStrictlyPalindromic(int n)
+{
+    vector<int> digits;
+    for (int i = n - 2; i >= 2; i--)
+    {
+        int k = n;
+        while (k != 0)
+        {
+            digits.push_back(k % i);
+            k /= i;
+        }
+        int left = 0;
+        int right = digits.size() - 1;
+        while (left < right)
+        {
+            if (digits[left] != digits[right])
+            {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        digits.clear();
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet Code 2417. Closest Fair Integer
+///                                                  
+/// Medium
+///
+/// You are given a positive integer n.
+///
+/// We call an integer k fair if the number of even digits in k is equal 
+/// to the number of odd digits in it.
+///
+/// Return the smallest fair integer that is greater than or equal to n.
+///
+/// Example 1:
+/// Input: n = 2
+/// Output: 10
+/// Explanation: The smallest fair integer that is greater than or 
+/// equal to 2 is 10.
+/// 10 is fair because it has an equal number of even and odd digits 
+/// (one odd digit and one even digit).
+///
+/// Example 2:
+/// Input: n = 403
+/// Output: 1001
+/// Explanation: The smallest fair integer that is greater than or 
+/// equal to 403 is 1001.
+/// 1001 is fair because it has an equal number of even and odd digits 
+/// (two odd digits and two even digits).
+/// 
+/// Constraints:
+/// 1 <= n <= 10^9
+/// </summary>
+int LeetCodeMath::closestFair(int n)
+{
+    string str_num = to_string(n);
+    int odd = 0;
+    int even = 0;
+    if (str_num.size() % 2 == 1)
+    {
+        int k = str_num.size() + 1;
+        str_num.clear();
+        str_num.push_back('1');
+        for (int i = 0; i < k / 2; i++)
+        {
+            str_num.push_back('0');
+        }
+        for (int i = 0; i < k / 2 - 1; i++)
+        {
+            str_num.push_back('1');
+        }
+        return atoi(str_num.c_str());
+    }
+    else
+    {
+        for (size_t i = 0; i < str_num.size(); i++)
+        {
+            if ((str_num[i] - '0') % 2 == 1)
+            {
+                odd++;
+            }
+            else
+            {
+                even++;
+            }
+        }
+        if (odd == even) return n;
+        else return closestFair(n + 1);
+    }
+}
+
+/// <summary>
+/// Leet Code 2409. Count Days Spent Together
+///                                                  
+/// Easy
+///
+/// Alice and Bob are traveling to Rome for separate business meetings.
+///
+/// You are given 4 strings arriveAlice, leaveAlice, arriveBob, and 
+/// leaveBob. Alice will be in the city from the dates arriveAlice to 
+/// leaveAlice (inclusive), while Bob will be in the city from the dates 
+/// arriveBob to leaveBob (inclusive). Each will be a 5-character string 
+/// in the format "MM-DD", corresponding to the month and day of the date.
+///
+/// Return the total number of days that Alice and Bob are in Rome 
+/// together.
+///
+/// You can assume that all dates occur in the same calendar year, which 
+/// is not a leap year. Note that the number of days per month can be 
+/// represented as: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31].
+/// 
+/// Example 1:
+/// Input: arriveAlice = "08-15", leaveAlice = "08-18", 
+/// arriveBob = "08-16", leaveBob = "08-19"
+/// Output: 3
+/// Explanation: Alice will be in Rome from August 15 to August 18. Bob 
+/// will be in Rome from August 16 to August 19. They are both in Rome 
+/// together on August 16th, 17th, and 18th, so the answer is 3.
+///
+/// Example 2:
+/// Input: arriveAlice = "10-01", leaveAlice = "10-31", 
+/// arriveBob = "11-01", leaveBob = "12-31"
+/// Output: 0
+/// Explanation: There is no day when Alice and Bob are in Rome together, 
+/// so we return 0.
+///
+/// Constraints:
+/// 1. All dates are provided in the format "MM-DD".
+/// 2. Alice and Bob's arrival dates are earlier than or equal to their 
+///    leaving dates.
+/// 3. The given dates are valid dates of a non-leap year.
+/// </summary>
+int LeetCodeMath::countDaysTogether(string arriveAlice, string leaveAlice, string arriveBob, string leaveBob)
+{
+    string arrive = max(arriveAlice, arriveBob);
+    string leave = min(leaveAlice, leaveBob);
+    int start_month = (arrive[0] - '0') * 10 + arrive[1] - '0';
+    int start_day = (arrive[3] - '0') * 10 + arrive[4] - '0';
+    int end_month = (leave[0] - '0') * 10 + leave[1] - '0';
+    int end_day = (leave[3] - '0') * 10 + leave[4] - '0';
+    vector<int> days = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    int result = 0;
+    for (int i = start_month; i <= end_month; i++)
+    {
+        if (i == start_month && i == end_month)
+        {
+            result += max(0, (end_day - start_day) + 1);
+        }
+        else if (i == start_month)
+        {
+            result = days[i - 1] - start_day + 1;
+        }
+        else if (i == end_month)
+        {
+            result += end_day;
+        }
+        else
+        {
+            result += days[i - 1];
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2413. Smallest Even Multiple
+///                                                  
+/// Easy
+///
+/// Given a positive integer n, return the smallest positive integer 
+/// that is a multiple of both 2 and n.
+///
+/// Example 1:
+/// Input: n = 5
+/// Output: 10
+/// Explanation: The smallest multiple of both 5 and 2 is 10.
+///
+/// Example 2:
+/// Input: n = 6
+/// Output: 6
+/// Explanation: The smallest multiple of both 6 and 2 is 6. Note that 
+/// a number is a multiple of itself.
+///
+/// Constraints:
+/// 1. 1 <= n <= 150
+/// </summary>
+int LeetCodeMath::smallestEvenMultiple(int n)
+{
+    int result = n;
+    if (result % 2 == 1) result *= 2;
+    
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2427. Number of Common Factors
+///                                                  
+/// Easy
+///
+/// Given two positive integers a and b, return the number of common 
+/// factors of a and b.
+///
+/// An integer x is a common factor of a and b if x divides both a and b.
+/// 
+/// Example 1:
+/// Input: a = 12, b = 6
+/// Output: 4
+/// Explanation: The common factors of 12 and 6 are 1, 2, 3, 6.
+///
+/// Example 2:
+/// Input: a = 25, b = 30
+/// Output: 2
+/// Explanation: The common factors of 25 and 30 are 1, 5.
+/// 
+/// Constraints:
+/// 1. 1 <= a, b <= 1000
+/// </summary>
+int LeetCodeMath::commonFactors(int a, int b)
+{
+    int val = min(a, b);
+    int result = 0;
+    for (int i = 1; i <= val; i++)
+    {
+        if (a % i == 0 && b % i == 0)
+        {
+            result++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2436. Minimum Split Into Subarrays With GCD Greater Than One            
+///                                                  
+/// Medium
+///
+/// You are given an array nums consisting of positive integers.
+///
+/// Split the array into one or more disjoint subarrays such that:
+///
+/// Each element of the array belongs to exactly one subarray, and
+/// The GCD of the elements of each subarray is strictly greater than 1.
+/// Return the minimum number of subarrays that can be obtained after 
+/// the split.
+///
+/// Note that:
+/// The GCD of a subarray is the largest positive integer that evenly 
+/// divides all the elements of the subarray.
+/// A subarray is a contiguous part of the array.
+/// 
+/// Example 1:
+/// Input: nums = [12,6,3,14,8]
+/// Output: 2
+/// Explanation: We can split the array into the 
+/// subarrays: [12,6,3] and [14,8].
+/// - The GCD of 12, 6 and 3 is 3, which is strictly greater than 1.
+/// - The GCD of 14 and 8 is 2, which is strictly greater than 1.
+/// It can be shown that splitting the array into one subarray will make 
+/// the GCD = 1.
+///
+/// Example 2:
+/// Input: nums = [4,12,6,14]
+/// Output: 1
+/// Explanation: We can split the array into only one subarray, which 
+/// is the whole array.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 2000
+/// 2. 2 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeMath::minimumSplits(vector<int>& nums)
+{
+    int result = 1;
+    int prev = nums[0];
+    for (size_t i = 1; i < nums.size(); i++)
+    {
+        int a = prev;
+        int b = nums[i];
+        if (a < b) swap(a,b);
+        while (a % b != 0)
+        {
+            a = a % b;
+            swap(a, b);
+        }
+        prev = b;
+        if (prev == 1)
+        {
+            prev = nums[i];
+            result++;
+        }
+    }
+    return result;
+}

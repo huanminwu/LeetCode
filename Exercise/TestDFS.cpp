@@ -1731,8 +1731,29 @@ void TestLeetCode2305(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2403(void)
+{
+    Logger::WriteMessage("Test Leet Code 2403");
+    LeetCodeDFS leetCode;
+    vector<int> power = { 3, 1, 4 };
+    long long result = leetCode.minimumTime(power);
+    Logger::WriteMessage(power);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    power = { 1,1,4 };
+    result = leetCode.minimumTime(power);
+    Logger::WriteMessage(power);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    power = { 1, 2, 4, 9 };
+    result = leetCode.minimumTime(power);
+    Logger::WriteMessage(power);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2403();
     TestLeetCode2305();
     TestLeetCode2232();
     TestLeetCode2212();

@@ -205,8 +205,24 @@ void TestLeetCode2379(void)
     Logger::WriteMessage("blocks = " + blocks + "; result = " + to_string(result));
 }
 
+void TestLeetCode2422(void)
+{
+    Logger::WriteMessage("Test Leet Code 2422");
+    LeetCodeTwoPointer leetCode;
+    vector<int>nums = { 4, 3, 2, 1, 2, 3, 1 };
+    int result = leetCode.minimumOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    result = leetCode.minimumOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2422();
     TestLeetCode2379();
     TestLeetCode2330();
     TestLeetCode2327();

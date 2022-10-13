@@ -2865,4 +2865,149 @@ int LeetCodeStack::visibleMountains(vector<vector<int>>& peaks)
     }
     return result.size();
 }
+
+/// <summary>
+/// Leet Code 2398. Maximum Number of Robots Within Budget
+///                                                  
+/// Hard
+///
+/// You have n robots. You are given two 0-indexed integer arrays, 
+/// chargeTimes and runningCosts, both of length n. The ith robot 
+/// costs chargeTimes[i] units to charge and costs runningCosts[i] 
+/// units to run. You are also given an integer budget.
+///
+/// The total cost of running k chosen robots is equal to 
+/// max(chargeTimes) + k * sum(runningCosts), where max(chargeTimes) 
+/// is the largest charge cost among the k robots and sum(runningCosts) 
+/// is the sum of running costs among the k robots.
+///
+/// Return the maximum number of consecutive robots you can run such 
+/// that the total cost does not exceed budget.
+///
+/// Example 1:
+/// Input: chargeTimes = [3,6,1,3,4], runningCosts = [2,1,3,4,5], 
+/// budget = 25
+/// Output: 3
+/// Explanation: 
+/// It is possible to run all individual and consecutive pairs of robots 
+/// within budget.
+/// To obtain answer 3, consider the first 3 robots. The total cost will 
+/// be max(3,6,1) + 3 * sum(2,1,3) = 6 + 3 * 6 = 24 which is less than 25.
+/// It can be shown that it is not possible to run more than 3 consecutive 
+/// robots within budget, so we return 3.
+/// Example 2:
+/// 
+/// Input: chargeTimes = [11,12,19], runningCosts = [10,8,7], budget = 19
+/// Output: 0
+/// Explanation: No robot can be run that does not exceed the budget, so 
+/// we return 0.
+/// 
+/// Constraints:
+/// 1. chargeTimes.length == runningCosts.length == n
+/// 2. 1 <= n <= 5 * 10^4
+/// 3. 1 <= chargeTimes[i], runningCosts[i] <= 10^5
+/// 4. 1 <= budget <= 10^15
+/// </summary>
+int LeetCodeStack::maximumRobots(vector<int>& chargeTimes, vector<int>& runningCosts, long long budget)
+{
+    deque<pair<int, int>> charge_queue;
+    deque<pair<int, int>> running_queue;
+    long long running_sum = 0;
+    int result = 0;
+    for (size_t i = 0; i < chargeTimes.size(); i++)
+    {
+        while (!charge_queue.empty() && 
+               charge_queue.back().second <= chargeTimes[i])
+        {
+            charge_queue.pop_back();
+        }
+        charge_queue.push_back(make_pair(i, chargeTimes[i]));
+        running_queue.push_back(make_pair(i, runningCosts[i]));
+        running_sum += (long long)runningCosts[i];
+        while (!running_queue.empty())
+        {
+            long long total_cost =
+                (long long)charge_queue.front().second +
+                (long long)running_sum * (long long)running_queue.size();
+            if (total_cost <= budget) break;
+            if (charge_queue.front().first == running_queue.front().first)
+            {
+                charge_queue.pop_front();
+            }
+            running_sum -= (long long)running_queue.front().second;
+            running_queue.pop_front();
+        }
+        result = max(result, (int)running_queue.size());
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2434. Using a Robot to Print the Lexicographically Smallest 
+///                 String
+///                                                  
+/// Medium
+///
+/// You are given a string s and a robot that currently holds an empty 
+/// string t. Apply one of the following operations until s and t are 
+/// both empty:
+///
+/// Remove the first character of a string s and give it to the robot. 
+/// The robot will append this character to the string t.
+/// Remove the last character of a string t and give it to the robot. 
+/// The robot will write this character on paper.
+/// Return the lexicographically smallest string that can be written on 
+/// the paper.
+///
+/// Example 1:
+/// Input: s = "zza"
+/// Output: "azz"
+/// Explanation: Let p denote the written string.
+/// Initially p="", s="zza", t="".
+/// Perform first operation three times p="", s="", t="zza".
+/// Perform second operation three times p="azz", s="", t="".
+///
+/// Example 2:
+/// Input: s = "bac"
+/// Output: "abc"
+/// Explanation: Let p denote the written string.
+/// Perform first operation twice p="", s="c", t="ba". 
+/// Perform second operation twice p="ab", s="c", t="". 
+/// Perform first operation p="ab", s="", t="c". 
+/// Perform second operation p="abc", s="", t="".
+///
+/// Example 3:
+/// Input: s = "bdda"
+/// Output: "addb"
+/// Explanation: Let p denote the written string.
+/// Initially p="", s="bdda", t="".
+/// Perform first operation four times p="", s="", t="bdda".
+/// Perform second operation four times p="addb", s="", t="".
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists of only English lowercase letters.
+/// </summary>
+string LeetCodeStack::robotWithString(string s)
+{
+    map<char, int> pq;
+    for (int i = 0; i < s.size(); i++)
+    {
+        pq[s[i]]++;
+    }
+    string result;
+    string stack;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        stack.push_back(s[i]);
+        pq[s[i]]--;
+        if (pq[s[i]] == 0) pq.erase(s[i]);
+        while (!stack.empty() && (pq.empty() || stack.back() <= pq.begin()->first))
+        {
+            result.push_back(stack.back());
+            stack.pop_back();
+        }
+    }
+    return result;
+}
 #pragma endregion

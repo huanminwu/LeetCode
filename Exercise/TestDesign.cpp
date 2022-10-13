@@ -4717,8 +4717,121 @@ void TestLeetCode2349(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2408(void)
+{
+    Logger::WriteMessage("Test Leet Code 2408");
+
+    vector<string> commands =
+    {
+       "SQL", "insertRow", "selectCell", "insertRow", "deleteRow", 
+       "selectCell"
+    };
+    vector<string> table_names = { "one", "two", "three" };
+    vector<int> columns_count = { 2, 3, 1 };
+    vector<vector<vector<string>>> parameters
+    {
+        {{ "one", "two", "three" }, { "2", "3", "1" }},
+        { {"two"},{"first", "second", "third"} },
+        { {"two"}, {"1", "3"}},
+        { {"two"}, {"fourth", "fifth", "sixth"} },
+        {{"two"}, {"1"}},
+        {{"two"}, {"2", "2"}}
+    };
+
+    vector<string> result;
+    SQL* sql = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "SQL")
+        {
+            vector<int> columns;
+            for (size_t j = 0; j < parameters[i][1].size(); j++)
+            {
+                columns.push_back(atoi(parameters[i][1][j].c_str()));
+            }
+
+            sql = new SQL(parameters[0][0], columns);
+            result.push_back("null");
+        }
+        else if (commands[i] == "insertRow")
+        {
+            sql->insertRow(parameters[i][0][0], parameters[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "selectCell")
+        {
+            string ret = sql->selectCell(
+                parameters[i][0][0], 
+                atoi(parameters[i][1][0].c_str()),
+                atoi(parameters[i][1][1].c_str())
+            );
+            result.push_back(ret);
+        }
+        else if (commands[i] == "deleteRow")
+        {
+            sql->deleteRow(
+                parameters[i][0][0],
+                atoi(parameters[i][1][0].c_str())
+            );
+            result.push_back("null");
+        }
+    }
+    delete sql;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2424(void)
+{
+    Logger::WriteMessage("Test Leet Code 2424");
+
+    vector<string> commands =
+    {
+       "LUPrefix", "upload", "longest", "upload", "longest", "upload", "longest"
+    };
+    vector<string> table_names = { "one", "two", "three" };
+    vector<vector<int>> parameters
+    {
+        {4} ,{3},{},{1},{},{2}, {}
+    };
+
+    vector<string> result;
+    LUPrefix* luPrefix = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "LUPrefix")
+        {
+            luPrefix = new LUPrefix(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "upload")
+        {
+            luPrefix->upload(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "longest")
+        {
+            int ret = luPrefix->longest();
+            result.push_back(to_string(ret));
+        }
+    }
+    delete luPrefix;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2424();
+    TestLeetCode2408();
     TestLeetCode2349();
     TestLeetCode2353();
     TestLeetCode2336();

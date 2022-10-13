@@ -5636,8 +5636,126 @@ void TestLeetCode2390(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode2399(void)
+{
+    Logger::WriteMessage("Test Leet Code 2399");
+    LeetCodeString leetCode;
+    string s = "abaccb";
+    vector<int>distance = 
+    { 
+        1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 
+    };
+    bool result = leetCode.checkDistances(s, distance);
+    Logger::WriteMessage(distance);
+    Logger::WriteMessage("s = " + s + "; result = " + (string) (result ? "true" : "false"));
+
+    s = "aa";
+    distance =
+    {
+        1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+    };
+    result = leetCode.checkDistances(s, distance);
+    Logger::WriteMessage(distance);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2380(void)
+{
+    Logger::WriteMessage("Test Leet Code 2380");
+    LeetCodeString leetCode;
+    string s = "0110101";
+    int result = leetCode.secondsToRemoveOccurrences(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "11100";
+    result = leetCode.secondsToRemoveOccurrences(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2416(void)
+{
+    Logger::WriteMessage("Test Leet Code 2416");
+    LeetCodeString leetCode;
+    vector<string> words = { "abc", "ab", "bc", "b" };
+    vector<int> result = leetCode.sumPrefixScores(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+
+    words = { "abcd" };
+    result = leetCode.sumPrefixScores(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2405(void)
+{
+    Logger::WriteMessage("Test Leet Code 2405");
+    LeetCodeString leetCode;
+    string s = "abacaba";
+    int result = leetCode.partitionString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "ssssss";
+    result = leetCode.partitionString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2414(void)
+{
+    Logger::WriteMessage("Test Leet Code 2414");
+    LeetCodeString leetCode;
+    string s = "abacaba";
+    int result = leetCode.longestContinuousSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "abcde";
+    result = leetCode.longestContinuousSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2423(void)
+{
+    Logger::WriteMessage("Test Leet Code 2423");
+    LeetCodeString leetCode;
+    string word = "abcc";
+    bool result = leetCode.equalFrequency(word);
+    Logger::WriteMessage("word = " + word + "; result = " + (string)(result? "true" : "false"));
+
+    word = "aazz";
+    result = leetCode.equalFrequency(word);
+    Logger::WriteMessage("word = " + word + "; result = " + (string)(result ? "true" : "false"));
+
+    word = "abbcc";
+    result = leetCode.equalFrequency(word);
+    Logger::WriteMessage("word = " + word + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2430(void)
+{
+    Logger::WriteMessage("Test Leet Code 2430");
+    LeetCodeString leetCode;
+    string s = "abcabcdabc";
+    int result = leetCode.deleteString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aaabaab";
+    result = leetCode.deleteString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aaaaa";
+    result = leetCode.deleteString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2430();
+    TestLeetCode2423();
+    TestLeetCode2414();
+    TestLeetCode2405();
+    TestLeetCode2416();
+    TestLeetCode2380();
+    TestLeetCode2399();
     TestLeetCode2390();
     TestLeetCode2351();
     TestLeetCode2337();

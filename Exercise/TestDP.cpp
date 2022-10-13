@@ -3208,8 +3208,110 @@ void TestLeetCode2361(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2369(void)
+{
+    Logger::WriteMessage("Test Leet Code 2369");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 4, 4, 4, 5, 6 };
+    bool result = leetCode.validPartition(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,1,1,2 };
+    result = leetCode.validPartition(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2370(void)
+{
+    Logger::WriteMessage("Test Leet Code 2370");
+    LeetCodeDP leetCode;
+    string s = "acfgbd";
+    int k = 2;
+    int result = leetCode.longestIdealString(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "abcd";
+    k = 3;
+    result = leetCode.longestIdealString(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2400(void)
+{
+    Logger::WriteMessage("Test Leet Code 2400");
+    LeetCodeDP leetCode;
+    int startPos = 1, endPos = 2, k = 3;
+    int result = leetCode.numberOfWays(startPos, endPos, k);
+    Logger::WriteMessage("startPos = " + to_string(startPos) + 
+        "; endPos = " + to_string(endPos) + "; k = " + to_string(k) + 
+        "; result = " + to_string(result));
+
+    startPos = 2, endPos = 5, k = 10;
+    result = leetCode.numberOfWays(startPos, endPos, k);
+    Logger::WriteMessage("startPos = " + to_string(startPos) +
+        "; endPos = " + to_string(endPos) + "; k = " + to_string(k) +
+        "; result = " + to_string(result));
+}
+
+void TestLeetCode2431(void)
+{
+    Logger::WriteMessage("Test Leet Code 2431");
+    LeetCodeDP leetCode;
+    vector<int> price = { 10, 20, 20 };
+    vector<int> tastiness = { 5, 8, 8 };
+    int maxAmount = 20;
+    int maxCoupons = 1;
+    int result = leetCode.maxTastiness(price, tastiness, maxAmount, maxCoupons);
+    Logger::WriteMessage(price);
+    Logger::WriteMessage(tastiness);
+    Logger::WriteMessage("maxAmount = " + to_string(maxAmount) +
+        "; maxCoupons = " + to_string(maxCoupons) +
+        "; result = " + to_string(result));
+
+    price = { 10,15,7 };
+    tastiness = { 5,8,20 };
+    maxAmount = 10;
+    maxCoupons = 2;
+    result = leetCode.maxTastiness(price, tastiness, maxAmount, maxCoupons);
+    Logger::WriteMessage(price);
+    Logger::WriteMessage(tastiness);
+    Logger::WriteMessage("maxAmount = " + to_string(maxAmount) +
+        "; maxCoupons = " + to_string(maxCoupons) +
+        "; result = " + to_string(result));
+}
+
+void TestLeetCode2435(void)
+{
+    Logger::WriteMessage("Test Leet Code 2435");
+    LeetCodeDP leetCode;
+    vector<vector<int>> grid = { {5, 2, 4},{3, 0, 5},{0, 7, 2} };
+    int k = 3;
+    int result = leetCode.numberOfPaths(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {0, 0} };
+    k = 5;
+    result = leetCode.numberOfPaths(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {7, 3, 4, 9},{2, 3, 6, 2},{2, 3, 7, 0} };
+    k = 1;
+    result = leetCode.numberOfPaths(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2435();
+    TestLeetCode2431();
+    TestLeetCode2400();
+    TestLeetCode2370();
+    TestLeetCode2369();
     TestLeetCode2361();
     TestLeetCode2338();
     TestLeetCode2318();

@@ -2943,8 +2943,44 @@ void TestLeetCode2386(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2387(void)
+{
+    Logger::WriteMessage("Test Leet Code 2387");
+    LeetCodeSort leetCode;
+    vector<vector<int>>  grid = { {1, 2, 3},{4, 5, 6},{7, 8, 9} };
+    int result = leetCode.matrixMedian(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1,1,3,3,4} };
+    result = leetCode.matrixMedian(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2418(void)
+{
+    Logger::WriteMessage("Test Leet Code 2418");
+    LeetCodeSort leetCode;
+    vector<string>names = { "Mary", "John", "Emma" };
+    vector<int> heights = { 180, 165, 170 };
+    vector<string> result = leetCode.sortPeople(names, heights);
+    Logger::WriteMessage(names);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage(result);
+
+    names = { "Alice","Bob","Bob" };
+    heights = { 155,185,150 };
+    result = leetCode.sortPeople(names, heights);
+    Logger::WriteMessage(names);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2418();
+    TestLeetCode2387();
     TestLeetCode2386();
     TestLeetCode2332();
     TestLeetCode2323();

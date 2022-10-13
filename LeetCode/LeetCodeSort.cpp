@@ -9106,4 +9106,107 @@ long long LeetCodeSort::kSum(vector<int>& nums, int k)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2387. Median of a Row Wise Sorted Matrix
+///                                                  
+/// Medium
+///
+/// Given an m x n matrix grid containing an odd number of integers where 
+/// each row is sorted in non-decreasing order, return the median of the 
+/// matrix.
+///
+/// You must solve the problem in less than O(m * n) time complexity.
+/// 
+/// Example 1:
+/// Input: grid = [[1,1,2],[2,3,3],[1,3,4]]
+/// Output: 2
+/// Explanation: The elements of the matrix in sorted order are 
+/// 1,1,1,2,2,3,3,3,4. The median is 2.
+///
+/// Example 2:
+/// Input: grid = [[1,1,3,3,4]]
+/// Output: 3
+/// Explanation: The elements of the matrix in sorted order are 
+/// 1,1,3,3,4. The median is 3.
+///
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 1 <= m, n <= 500
+/// 4. m and n are both odd.
+/// 5. 1 <= grid[i][j] <= 10^6
+/// 6. grid[i] is sorted in non-decreasing order.
+/// </summary>
+int LeetCodeSort::matrixMedian(vector<vector<int>>& grid)
+{
+    int m = grid.size();
+    int n = grid[0].size();
+    set<vector<int>> pq;
+    for (int i = 0; i < (int)grid.size(); i++)
+    {
+        pq.insert({ grid[i][0], i, 0 });
+    }
+    for (int i = 0; i < m * n / 2; i++)
+    {
+        vector<int> first = *pq.begin();
+        pq.erase(pq.begin());
+        if (first[2] < n - 1)
+        {
+            first[2]++;
+            first[0] = grid[first[1]][first[2]];
+            pq.insert(first);
+        }
+    }
+    return (*pq.begin())[0];
+}
+
+/// <summary>
+/// Leet Code 2418. Sort the People
+///                                                  
+/// Easy
+///
+/// You are given an array of strings names, and an array heights that 
+/// consists of distinct positive integers. Both arrays are of length n.
+///
+/// For each index i, names[i] and heights[i] denote the name and height 
+/// of the ith person.
+///
+/// Return names sorted in descending order by the people's heights.
+///
+/// Example 1:
+/// Input: names = ["Mary","John","Emma"], heights = [180,165,170]
+/// Output: ["Mary","Emma","John"]
+/// Explanation: Mary is the tallest, followed by Emma and John.
+///
+/// Example 2:
+/// Input: names = ["Alice","Bob","Bob"], heights = [155,185,150]
+/// Output: ["Bob","Alice","Bob"]
+/// Explanation: The first Bob is the tallest, followed by Alice and 
+/// the second Bob.
+/// 
+/// Constraints:
+/// 1. n == names.length == heights.length
+/// 2. 1 <= n <= 10^3
+/// 3. 1 <= names[i].length <= 20
+/// 4. 1 <= heights[i] <= 10^5
+/// 5. names[i] consists of lower and upper case English letters.
+/// 6. All the values of heights are distinct.
+/// </summary>
+vector<string> LeetCodeSort::sortPeople(vector<string>& names, vector<int>& heights)
+{
+    vector<pair<int, string>> people;
+    for (size_t i = 0; i < names.size(); i++)
+    {
+        people.push_back(make_pair(-heights[i], names[i]));
+    }
+    sort(people.begin(), people.end());
+    vector<string> result;
+    for (size_t i = 0; i < people.size(); i++)
+    {
+        result.push_back(people[i].second);
+    }
+    return result;
+}
+
 #pragma endregion

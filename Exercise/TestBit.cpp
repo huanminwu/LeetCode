@@ -825,11 +825,62 @@ void TestLeetCode2354(void)
     result = leetCode.countExcellentPairs(nums, k);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
 
+void TestLeetCode2425(void)
+{
+    Logger::WriteMessage("Test Leet Code 2425");
+    LeetCodeBit leetCode;
+    vector<int> nums1 = { 2, 1, 3 };
+    vector<int> nums2 = { 10, 2, 5, 0 };
+    int result = leetCode.xorAllNums(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,2 };
+    nums2 = { 3,4 };
+    result = leetCode.xorAllNums(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2429(void)
+{
+    Logger::WriteMessage("Test Leet Code 2429");
+    LeetCodeBit leetCode;
+    int num1 = 3, num2 = 5;
+    int result = leetCode.minimizeXor(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 = " + to_string(num2) + 
+        "; result = " + to_string(result));
+
+    num1 = 1, num2 = 12;
+    result = leetCode.minimizeXor(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 = " + to_string(num2) +
+        "; result = " + to_string(result));
+}
+
+void TestLeetCode2433(void)
+{
+    Logger::WriteMessage("Test Leet Code 2433");
+    LeetCodeBit leetCode;
+    vector<int> pref = { 5, 2, 0, 3, 1 };
+    vector<int> result = leetCode.findArray(pref);
+    Logger::WriteMessage(pref);
+    Logger::WriteMessage(result);
+
+    pref = { 13 };
+    result = leetCode.findArray(pref);
+    Logger::WriteMessage(pref);
+    Logger::WriteMessage(result);
 }
 
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2433();
+    TestLeetCode2429();
+    TestLeetCode2425();
     TestLeetCode2354();
     TestLeetCode2317();
     TestLeetCode2275();

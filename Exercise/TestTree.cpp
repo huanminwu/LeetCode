@@ -3469,8 +3469,76 @@ void TestLeetCode2331(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode2378(void)
+{
+    Logger::WriteMessage("Test Leet Code 2378");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = { { -1, -1 }, {0, 5},{0, 10},{2, 6},{2, 4} };
+    long long result = leetCode.maxScore(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {-1, -1},{0, 5},{0, -6},{0, 7} };
+    result = leetCode.maxScore(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2385(void)
+{
+    Logger::WriteMessage("Test Leet Code 2385");
+    LeetCodeTree leetCode;
+    string input = "[1,5,3,null,4,10,6,9,2]";
+    TreeNode * root = leetCode.deserialize(input);
+    int start = 3;
+    int result = leetCode.amountOfTime(root, start);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("start = " + to_string(start) + "; result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[1]";
+    root = leetCode.deserialize(input);
+    start = 1;
+    result = leetCode.amountOfTime(root, start);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("start = " + to_string(start) + "; result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+}
+
+void TestLeetCode2415(void)
+{
+    Logger::WriteMessage("Test Leet Code 2415");
+    LeetCodeTree leetCode;
+    string input = "[2,3,5,8,13,21,34]";
+    TreeNode* root = leetCode.deserialize(input);
+    root = leetCode.reverseOddLevels(root);
+    string result = leetCode.serialize(root);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("result = " + result);
+    leetCode.freeTreeNodes(root);
+
+    input = "[7,13,11]";
+    root = leetCode.deserialize(input);
+    root = leetCode.reverseOddLevels(root);
+    result = leetCode.serialize(root);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("result = " + result);
+    leetCode.freeTreeNodes(root);
+
+    input = "[0,1,2,0,0,0,0,1,1,1,1,2,2,2,2]";
+    root = leetCode.deserialize(input);
+    root = leetCode.reverseOddLevels(root);
+    result = leetCode.serialize(root);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("result = " + result);
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode2415();
+    TestLeetCode2385();
+    TestLeetCode2378();
     TestLeetCode2331();
     TestLeetCode2313();
     TestLeetCode2277();

@@ -20173,4 +20173,478 @@ string LeetCodeString::removeStars(string s)
     }
     return result;
 }
+/// <summary>
+/// Leet Code 2399. Check Distances Between Same Letters
+///                                                  
+/// Easy
+///
+/// You are given a 0-indexed string s consisting of only lowercase 
+/// English letters, where each letter in s appears exactly twice. 
+/// You are also given a 0-indexed integer array distance of length 26.
+///
+/// Each letter in the alphabet is numbered from 0 to 25 (i.e. 
+/// 'a' -> 0, 'b' -> 1, 'c' -> 2, ... , 'z' -> 25).
+///
+/// In a well-spaced string, the number of letters between the two 
+/// occurrences of the ith letter is distance[i]. If the ith letter 
+/// does not appear in s, then distance[i] can be ignored.
+///
+/// Return true if s is a well-spaced string, otherwise return false.
+///
+/// Example 1:
+/// Input: s = "abaccb", 
+/// distance = [1,3,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+/// Output: true
+/// Explanation:
+/// - 'a' appears at indices 0 and 2 so it satisfies distance[0] = 1.
+/// - 'b' appears at indices 1 and 5 so it satisfies distance[1] = 3.
+/// - 'c' appears at indices 3 and 4 so it satisfies distance[2] = 0.
+/// Note that distance[3] = 5, but since 'd' does not appear in s, it 
+/// can be ignored.
+/// Return true because s is a well-spaced string.
+///
+/// Example 2:
+/// Input: s = "aa", distance = [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+/// 0,0,0,0,0,0,0,0,0,0]
+/// Output: false
+/// Explanation:
+/// - 'a' appears at indices 0 and 1 so there are zero letters 
+///   between them.
+/// Because distance[0] = 1, s is not a well-spaced string.
+///
+/// Constraints:
+/// 1. 2 <= s.length <= 52
+/// 2. s consists only of lowercase English letters.
+/// 3. Each letter appears in s exactly twice.
+/// 4. distance.length == 26
+/// 5. 0 <= distance[i] <= 50
+/// </summary>
+bool LeetCodeString::checkDistances(string s, vector<int>& distance)
+{
+    vector<int> diff(26, -1);
+    vector<int> pos(26, -1);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        int index = s[i] - 'a';
+        if (pos[index] == -1)
+        {
+            pos[index] = i;
+        }
+        else
+        {
+            diff[index] = i - pos[index] - 1;
+        }
+    }
+    for (size_t i = 0; i < distance.size(); i++)
+    {
+        if (diff[i] == -1) continue;
+        if (diff[i] != distance[i]) return false;
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet Code 2380. Time Needed to Rearrange a Binary String
+///                                                  
+/// Medium
+///
+/// You are given a binary string s. In one second, all occurrences 
+/// of "01" are simultaneously replaced with "10". This process repeats 
+/// until no occurrences of "01" exist.
+///  
+/// Return the number of seconds needed to complete this process.
+///
+/// 
+/// Example 1:
+/// Input: s = "0110101"
+/// Output: 4
+/// Explanation: 
+/// After one second, s becomes "1011010".
+/// After another second, s becomes "1101100".
+/// After the third second, s becomes "1110100".
+/// After the fourth second, s becomes "1111000".
+/// No occurrence of "01" exists any longer, and the process needed 4 
+/// seconds to complete,
+/// so we return 4.
+///
+/// Example 2:
+/// Input: s = "11100"
+/// Output: 0
+/// Explanation:
+/// No occurrence of "01" exists in s, and the processes needed 0 
+/// seconds to complete,
+/// so we return 0.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 1000
+/// 2. s[i] is either '0' or '1'.
+///
+/// Follow up:
+/// Can you solve this problem in O(n) time complexity?
+/// </summary>
+int LeetCodeString::secondsToRemoveOccurrences(string s)
+{
+    int result = 0;
+    int zero = 0;
+    int excess = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '0')
+        {
+            zero++;
+            if (excess > 0) excess--;
+        }
+        else
+        {
+            if (zero != 0)
+            {
+                excess++;
+                result = max(result, zero + excess - 1);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 416. Sum of Prefix Scores of Strings 
+///                                                  
+/// Hard
+///
+/// You are given an array words of size n consisting of non-empty strings.
+///
+/// We define the score of a string word as the number of strings words[i] 
+/// such that word is a prefix of words[i].
+///
+/// For example, if words = ["a", "ab", "abc", "cab"], then the score 
+/// of "ab" is 2, since "ab" is a prefix of both "ab" and "abc".
+/// Return an array answer of size n where answer[i] is the sum of scores 
+/// of every non-empty prefix of words[i].
+///
+/// Note that a string is considered as a prefix of itself.
+/// Example 1:
+/// Input: words = ["abc","ab","bc","b"]
+/// Output: [5,4,3,2]
+/// Explanation: The answer for each string is the following:
+/// - "abc" has 3 prefixes: "a", "ab", and "abc".
+/// - There are 2 strings with the prefix "a", 2 strings with the 
+///   prefix "ab", and 1 string with the prefix "abc".
+/// The total is answer[0] = 2 + 2 + 1 = 5.
+/// - "ab" has 2 prefixes: "a" and "ab".
+/// - There are 2 strings with the prefix "a", and 2 strings with the 
+///   prefix "ab".
+/// The total is answer[1] = 2 + 2 = 4.
+/// - "bc" has 2 prefixes: "b" and "bc".
+/// - There are 2 strings with the prefix "b", and 1 string with the 
+///   prefix "bc".
+/// The total is answer[2] = 2 + 1 = 3.
+/// - "b" has 1 prefix: "b".
+/// - There are 2 strings with the prefix "b".
+/// The total is answer[3] = 2.
+///
+/// Example 2:
+/// Input: words = ["abcd"]
+/// Output: [4]
+/// Explanation:
+/// "abcd" has 4 prefixes: "a", "ab", "abc", and "abcd".
+/// Each prefix has a score of one, so the total is 
+/// answer[0] = 1 + 1 + 1 + 1 = 4.
+///
+/// Constraints:
+/// 1. 1 <= words.length <= 1000
+/// 2. 1 <= words[i].length <= 1000
+/// 3. words[i] consists of lowercase English letters.
+/// </summary>
+vector<int> LeetCodeString::sumPrefixScores(vector<string>& words)
+{
+    struct Trie
+    {
+        Trie* children[26] = {};
+        int cnt = 0;
+        Trie()
+        {
+            cnt = 0;
+        }
+        void insert(string& w)
+        {
+            Trie* curr = this;
+            for (char c : w)
+            {
+                if (curr->children[c - 'a'] == nullptr)
+                {
+                    curr->children[c - 'a'] = new Trie();
+                }
+                curr = curr->children[c - 'a'];
+                curr->cnt++;
+            }
+        }
+        int count(string& w)
+        {
+            Trie* curr = this;
+            int result = 0;
+            for (char c : w)
+            {
+                curr = curr->children[c - 'a'];
+                result += curr->cnt;
+            }
+            return result;
+        }
+    };
+    Trie* trie = new Trie();
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        trie->insert(words[i]);
+    }
+    vector<int> result(words.size());
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        result[i] = trie->count(words[i]);
+    }
+    delete trie;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2405. Optimal Partition of String
+///                                                  
+/// Medium
+///
+/// Given a string s, partition the string into one or more substrings 
+/// such that the characters in each substring are unique. That is, no 
+/// letter appears in a single substring more than once.
+///
+/// Return the minimum number of substrings in such a partition.
+///
+/// Note that each character should belong to exactly one substring 
+/// in a partition.
+///
+/// Example 1:
+/// Input: s = "abacaba"
+/// Output: 4
+/// Explanation:
+/// Two possible partitions are ("a","ba","cab","a") and 
+/// ("ab","a","ca","ba").
+/// It can be shown that 4 is the minimum number of substrings 
+/// needed.
+///
+/// Example 2:
+/// Input: s = "ssssss"
+/// Output: 6
+/// Explanation:
+/// The only valid partition is ("s","s","s","s","s","s").
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists of only English lowercase letters.
+/// </summary>
+int LeetCodeString::partitionString(string s)
+{
+    unordered_set<char> chars;
+    int result = 1;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (chars.count(s[i]) > 0)
+        {
+            chars.clear();
+            result++;
+        }
+        chars.insert(s[i]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2414. Length of the Longest Alphabetical Continuous Substring
+///                                                  
+/// Medium
+///
+/// An alphabetical continuous string is a string consisting of 
+/// consecutive letters in the alphabet. In other words, it is any 
+/// substring of the string "abcdefghijklmnopqrstuvwxyz".
+///
+/// For example, "abc" is an alphabetical continuous string, while "acb" 
+/// and "za" are not.
+/// Given a string s consisting of lowercase letters only, return the
+/// length of the longest alphabetical continuous substring.
+///
+/// Example 1:
+/// Input: s = "abacaba"
+/// Output: 2
+/// Explanation: There are 4 distinct continuous substrings: "a", "b", 
+/// "c" and "ab".
+/// "ab" is the longest continuous substring. 
+///
+/// Example 2:
+/// Input: s = "abcde"
+/// Output: 5
+/// Explanation: "abcde" is the longest continuous substring.
+///
+/// Constraints:
+/// 1 <= s.length <= 10^5
+/// 2. s consists of only English lowercase letters.
+/// </summary>
+int LeetCodeString::longestContinuousSubstring(string s)
+{
+    int result = 0;
+    int count = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (i == 0) count = 1;
+        else if (s[i] - s[i - 1] == 1)
+        {
+            count++;
+        }
+        else
+        {
+            count = 1;
+        }
+        result = max(result, count);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2423. Remove Letter To Equalize Frequency
+///                                                  
+/// Easy
+///
+/// You are given a 0-indexed string word, consisting of lowercase English 
+/// letters. You need to select one index and remove the letter at that 
+/// index from word so that the frequency of every letter present in word 
+/// is equal.
+///
+/// Return true if it is possible to remove one letter so that the 
+/// frequency of all letters in word are equal, and false otherwise.
+///
+/// Note:
+/// The frequency of a letter x is the number of times it occurs in the 
+/// string.
+/// You must remove exactly one letter and cannot chose to do nothing.
+///
+/// Example 1:
+/// Input: word = "abcc"
+/// Output: true
+/// Explanation: Select index 3 and delete it: word becomes "abc" and 
+/// each character has a frequency of 1.
+///
+/// Example 2:
+///
+/// Input: word = "aazz"
+/// Output: false
+/// Explanation: We must delete a character, so either the frequency of 
+/// "a" is 1 and the frequency of "z" is 2, or vice versa. It is 
+/// impossible to make all present letters have equal frequency.
+/// 
+/// Constraints:
+/// 1. 2 <= word.length <= 100
+/// 2. word consists of lowercase English letters only.
+/// </summary>
+bool LeetCodeString::equalFrequency(string word)
+{
+    vector<int> chars(26);
+    for (size_t i = 0; i < word.size(); i++)
+    {
+        chars[word[i] - 'a']++;
+    }
+    map<int, int> count;
+    for (size_t i = 0; i < 26; i++)
+    {
+        if (chars[i] == 0) continue;
+        else count[chars[i]]++;
+    }
+    if (count.size() > 2) return false;
+    if (count.begin()->first == 1)
+    {
+        if (count.size() == 1 || count.begin()->second == 1)
+        {
+            return true;
+        }
+    }
+    if (count.size() == 1 && count.begin()->second == 1)
+    {
+        return true;
+    }
+    if (count.begin()->first + 1 == count.rbegin()->first && count.rbegin()->second == 1)
+    {
+        return true;
+    }
+    return false;
+}
+
+/// <summary>
+/// Leet Code 2430. Maximum Deletions on a String
+///                                                  
+/// Hard
+///
+/// You are given a string s consisting of only lowercase English 
+/// letters. In one operation, you can:
+///
+/// Delete the entire string s, or
+/// Delete the first i letters of s if the first i letters of s are 
+/// equal to the following i letters in s, for any i in the range 
+/// 1 <= i <= s.length / 2.
+/// For example, if s = "ababc", then in one operation, you could 
+/// delete the first two letters of s to get "abc", since the first 
+/// two letters of s and the following two letters of s are both 
+/// equal to "ab".
+/// Return the maximum number of operations needed to delete all of s.
+///
+/// Example 1:
+/// Input: s = "abcabcdabc"
+/// Output: 2
+/// Explanation:
+/// - Delete the first 3 letters ("abc") since the next 3 letters are 
+///   equal. Now, s = "abcdabc".
+/// - Delete all the letters.
+/// We used 2 operations so return 2. It can be proven that 2 is the 
+/// maximum number of operations needed.
+/// Note that in the second operation we cannot delete "abc" again 
+/// because the next occurrence of "abc" does not happen in the next 3 
+/// letters.
+///
+/// Example 2:
+///
+/// Input: s = "aaabaab"
+/// Output: 4
+/// Explanation:
+/// - Delete the first letter ("a") since the next letter is equal. 
+///   Now, s = "aabaab".
+/// - Delete the first 3 letters ("aab") since the next 3 letters are equal. 
+///   Now, s = "aab".
+/// - Delete the first letter ("a") since the next letter is equal. 
+///   Now, s = "ab".
+/// - Delete all the letters.
+/// We used 4 operations so return 4. It can be proven that 4 is the 
+/// maximum number of operations needed.
+///
+/// Example 3:
+/// Input: s = "aaaaa"
+/// Output: 5
+/// Explanation: In each operation, we can delete the first letter of s.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 4000
+/// 2. s consists only of lowercase English letters.
+/// </summary>
+int LeetCodeString::deleteString(string s)
+{
+    int n = s.size();
+    vector<vector<int>> lcs(n + 1, vector<int>(n + 1, 0));
+    vector<int> dp(n, 1);
+    for (int i = n - 1; i >= 0; i--) 
+    {
+        for (int j = i + 1; j < n; j++) 
+        {
+            if (s[i] == s[j])
+            {
+                lcs[i][j] = lcs[i + 1][j + 1] + 1;
+            }
+            if (lcs[i][j] >= j - i)
+            {
+                dp[i] = max(dp[i], dp[j] + 1);
+            }
+        }
+    }
+    return dp[0];
+}
 #pragma endregion

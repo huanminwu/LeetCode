@@ -5706,6 +5706,246 @@ public:
     /// 3. 1 <= regular[i], express[i], expressCost <= 10^5
     /// </summary>
     vector<long long> minimumCosts(vector<int>& regular, vector<int>& express, int expressCost);
+
+    /// <summary>
+    /// Leet Code 2369. Check if There is a Valid Partition For The Array
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given a 0-indexed integer array nums. You have to partition 
+    /// the array into one or more contiguous subarrays.
+    ///
+    /// We call a partition of the array valid if each of the obtained 
+    /// subarrays satisfies one of the following conditions:
+    ///
+    /// The subarray consists of exactly 2 equal elements. For example, the 
+    /// subarray [2,2] is good.
+    /// The subarray consists of exactly 3 equal elements. For example, the 
+    /// subarray [4,4,4] is good.
+    /// The subarray consists of exactly 3 consecutive increasing elements, 
+    /// that is, the difference between adjacent elements is 1. For example, 
+    /// the subarray [3,4,5] is good, but the subarray [1,3,5] is not.
+    /// Return true if the array has at least one valid partition. Otherwise, 
+    /// return false.
+    ///
+    /// Example 1:
+    /// Input: nums = [4,4,4,5,6]
+    /// Output: true
+    /// Explanation: The array can be partitioned into the subarrays 
+    /// [4,4] and [4,5,6].
+    /// This partition is valid, so we return true.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,1,1,2]
+    /// Output: false
+    /// Explanation: There is no valid partition for this array.
+    ///
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^6
+    /// </summary>
+    bool validPartition(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2370. Longest Ideal Subsequence
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given a string s consisting of lowercase letters and an 
+    /// integer k. We call a string t ideal if the following conditions 
+    /// are satisfied:
+    ///
+    /// t is a subsequence of the string s.
+    /// The absolute difference in the alphabet order of every two adjacent 
+    /// letters in t is less than or equal to k.
+    /// Return the length of the longest ideal string.
+    ///
+    /// A subsequence is a string that can be derived from another string by 
+    /// deleting some or no characters without changing the order of the 
+    /// remaining characters.
+    ///
+    /// Note that the alphabet order is not cyclic. For example, the absolute 
+    /// difference in the alphabet order of 'a' and 'z' is 25, not 1.
+    ///
+    /// Example 1:
+    /// Input: s = "acfgbd", k = 2
+    /// Output: 4
+    /// Explanation: The longest ideal string is "acbd". The length of this 
+    /// string is 4, so 4 is returned.
+    /// Note that "acfgbd" is not ideal because 'c' and 'f' have a difference 
+    /// of 3 in alphabet order.
+    ///
+    /// Example 2:
+    /// Input: s = "abcd", k = 3
+    /// Output: 4
+    /// Explanation: The longest ideal string is "abcd". The length of this 
+    /// string is 4, so 4 is returned.
+    /// 
+    /// Constraints:
+    ///
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. 0 <= k <= 25
+    /// 3. s consists of lowercase English letters.
+    /// </summary>
+    int longestIdealString(string s, int k);
+
+    /// <summary>
+    /// Leet Code 2400. Number of Ways to Reach a Position After Exactly 
+    ///                 k Steps
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given two positive integers startPos and endPos. Initially, 
+    /// you are standing at position startPos on an infinite number line. 
+    /// With one step, you can move either one position to the left, or 
+    /// one position to the right.
+    ///
+    /// Given a positive integer k, return the number of different ways 
+    /// to reach the position endPos starting from startPos, such that you 
+    /// perform exactly k steps. Since the answer may be very large, return 
+    /// it modulo 10^9 + 7.
+    ///
+    /// Two ways are considered different if the order of the steps made 
+    /// is not exactly the same.
+    ///
+    /// Note that the number line includes negative integers.
+    /// 
+    /// Example 1:
+    /// Input: startPos = 1, endPos = 2, k = 3
+    /// Output: 3
+    /// Explanation: We can reach position 2 from 1 in exactly 3 
+    /// steps in three ways:
+    /// - 1 -> 2 -> 3 -> 2.
+    /// - 1 -> 2 -> 1 -> 2.
+    /// - 1 -> 0 -> 1 -> 2.
+    /// It can be proven that no other way is possible, so we return 3.
+    ///
+    /// Example 2:
+    /// Input: startPos = 2, endPos = 5, k = 10
+    /// Output: 0
+    /// Explanation: It is impossible to reach position 5 from position 2 
+    /// in exactly 10 steps.
+    ///
+    /// Constraints:
+    /// 1. 1 <= startPos, endPos, k <= 1000
+    /// </summary>
+    int numberOfWays(int startPos, int endPos, int k);
+
+    /// <summary>
+    /// Leet Code 2431. Maximize Total Tastiness of Purchased Fruits
+    /// </summary>
+    int maxTastiness(vector<int>& price, vector<int>& tastiness, int i,  int amount, int coupons, vector<vector<vector<int>>>& dp);
+
+    /// <summary>
+    /// Leet Code 2431. Maximize Total Tastiness of Purchased Fruits
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given two non-negative integer arrays price and tastiness, 
+    /// both arrays have the same length n. You are also given two 
+    /// non-negative integers maxAmount and maxCoupons.
+    ///
+    /// For every integer i in range [0, n - 1]:
+    ///
+    /// price[i] describes the price of ith fruit.
+    /// tastiness[i] describes the tastiness of ith fruit.
+    /// You want to purchase some fruits such that total tastiness is 
+    /// maximized and the total price does not exceed maxAmount.
+    ///
+    /// Additionally, you can use a coupon to purchase fruit for half of 
+    /// its price (rounded down to the closest integer). You can use at 
+    /// most maxCoupons of such coupons.
+    ///
+    /// Return the maximum total tastiness that can be purchased.
+    ///
+    /// Note that:
+    ///
+    /// You can purchase each fruit at most once.
+    /// You can use coupons on some fruit at most once.
+    ///
+    /// Example 1:
+    /// Input: price = [10,20,20], tastiness = [5,8,8], maxAmount = 20, 
+    /// maxCoupons = 1
+    /// Output: 13
+    /// Explanation: It is possible to make total tastiness 13 in following 
+    /// way:
+    /// - Buy first fruit without coupon, so that total price = 0 + 10 and 
+    ///   total tastiness = 0 + 5.
+    /// - Buy second fruit with coupon, so that total price = 10 + 10 and 
+    ///   total tastiness = 5 + 8.
+    /// - Do not buy third fruit, so that total price = 20 and total 
+    ///   tastiness = 13.
+    /// It can be proven that 13 is the maximum total tastiness that can 
+    /// be obtained.
+    ///
+    /// Example 2:
+    /// Input: price = [10,15,7], tastiness = [5,8,20], maxAmount = 10, 
+    /// maxCoupons = 2
+    /// Output: 28
+    /// Explanation: It is possible to make total tastiness 20 in following 
+    /// way:
+    /// - Do not buy first fruit, so that total price = 0 and total 
+    ///   tastiness = 0.
+    /// - Buy second fruit with coupon, so that total price = 0 + 7 and 
+    ///   total tastiness = 0 + 8.
+    /// - Buy third fruit with coupon, so that total price = 7 + 3 and 
+    ///   total tastiness = 8 + 20.
+    /// It can be proven that 28 is the maximum total tastiness that can 
+    /// be obtained.
+    ///  
+    /// Constraints:
+    /// 1. n == price.length == tastiness.length
+    /// 2. 1 <= n <= 100
+    /// 3. 0 <= price[i], tastiness[i], maxAmount <= 1000
+    /// 4. 0 <= maxCoupons <= 5
+    /// </summary>
+    int maxTastiness(vector<int>& price, vector<int>& tastiness, int maxAmount, int maxCoupons);
+
+    /// <summary>
+    /// Leet Code 2435. Paths in Matrix Whose Sum Is Divisible by K
+    ///                                                  
+    /// Hard
+    ///
+    /// You are given a 0-indexed m x n integer matrix grid and an integer k. 
+    /// You are currently at position (0, 0) and you want to reach position 
+    /// (m - 1, n - 1) moving only down or right.
+    ///
+    /// Return the number of paths where the sum of the elements on the path 
+    /// is divisible by k. Since the answer may be very large, return it 
+    /// modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: grid = [[5,2,4],[3,0,5],[0,7,2]], k = 3
+    /// Output: 2
+    /// Explanation: There are two paths where the sum of the elements on the 
+    /// path is divisible by k.
+    /// The first path highlighted in red has a sum of 5 + 2 + 4 + 5 + 2 = 18 
+    /// which is divisible by 3.
+    /// The second path highlighted in blue has a sum of 5 + 3 + 0 + 5 + 2 = 15 
+    /// which is divisible by 3.
+    ///
+    /// Example 2:
+    /// Input: grid = [[0,0]], k = 5
+    /// Output: 1
+    /// Explanation: The path highlighted in red has a sum of 0 + 0 = 0 which 
+    /// is divisible by 5.
+    ///
+    /// Example 3:
+    /// Input: grid = [[7,3,4,9],[2,3,6,2],[2,3,7,0]], k = 1
+    /// Output: 10
+    /// Explanation: Every integer is divisible by 1 so the sum of the 
+    /// elements on every possible path is divisible by k.
+    ///
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 1 <= m, n <= 5 * 10^4
+    /// 4. 1 <= m * n <= 5 * 10^4
+    /// 5. 0 <= grid[i][j] <= 100
+    /// 6. 1 <= k <= 50
+    /// </summary>
+    int numberOfPaths(vector<vector<int>>& grid, int k);
+
 };
 
 

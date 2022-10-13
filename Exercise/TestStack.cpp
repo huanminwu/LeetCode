@@ -798,8 +798,48 @@ void TestLeetCode2345(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2398(void)
+{
+    Logger::WriteMessage("Test Leet Code 2398");
+    LeetCodeStack leetCode;
+    vector<int> chargeTimes = { 3, 6, 1, 3, 4 };
+    vector<int> runningCosts = { 2, 1, 3, 4, 5 };
+    int budget = 25;
+    int result = leetCode.maximumRobots(chargeTimes, runningCosts, budget);
+    Logger::WriteMessage(chargeTimes);
+    Logger::WriteMessage(runningCosts);
+    Logger::WriteMessage("budget = " + to_string(budget) + "; result = " + to_string(result));
+
+    chargeTimes = { 11, 12, 19 };
+    runningCosts = { 10, 8, 7 };
+    budget = 19;
+    result = leetCode.maximumRobots(chargeTimes, runningCosts, budget);
+    Logger::WriteMessage(chargeTimes);
+    Logger::WriteMessage(runningCosts);
+    Logger::WriteMessage("budget = " + to_string(budget) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2434(void)
+{
+    Logger::WriteMessage("Test Leet Code 2434");
+    LeetCodeStack leetCode;
+    string s = "zza";
+    string result = leetCode.robotWithString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "bac";
+    result = leetCode.robotWithString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "bdda";
+    result = leetCode.robotWithString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode2434();
+    TestLeetCode2398();
     TestLeetCode2345();
     TestLeetCode2355();
     TestLeetCode2334();

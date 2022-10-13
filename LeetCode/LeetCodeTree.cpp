@@ -10842,4 +10842,254 @@ bool LeetCodeTree::evaluateTree(TreeNode* root)
         return (left && right);
     }
 }
+
+/// <summary>
+/// Leet Code 2378. Choose Edges to Maximize Score in a Tree
+/// </summary>
+pair<long long, long long> LeetCodeTree::maxScore(int node, vector<vector<pair<int, int>>>& neighbors)
+{
+    pair<long long, long long> result;
+    vector<pair<long long, long long>> children;
+    for (size_t i = 0; i < neighbors[node].size(); i++)
+    {
+        children.push_back(maxScore(neighbors[node][i].first, neighbors));
+    }
+    long long sum_with_children = 0;
+    for (size_t i = 0; i < children.size(); i++)
+    {
+        sum_with_children += children[i].first;
+    }
+    long long with = 0; long long without = 0;
+    for (size_t i = 0; i < children.size(); i++)
+    {
+        with = max(with, 
+            max((long long)0, (long long)neighbors[node][i].second) +
+            sum_with_children - children[i].first + children[i].second);
+        without = without + children[i].first;
+    }
+    result.first = max(with, without);
+    result.second = without;
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 2378. Choose Edges to Maximize Score in a Tree
+///                                                  
+/// Medium
+///
+/// You are given a weighted tree consisting of n nodes numbered from 0 
+/// to n - 1.
+///
+/// The tree is rooted at node 0 and represented with a 2D array edges of 
+/// size n where edges[i] = [pari, weighti] indicates that node pari is 
+/// the parent of node i, and the edge between them has a weight equal to 
+/// weighti. Since the root does not have a parent, you have 
+/// edges[0] = [-1, -1].
+///
+/// Choose some edges from the tree such that no two chosen edges are 
+/// adjacent and the sum of the weights of the chosen edges is maximized.
+///
+/// Return the maximum sum of the chosen edges.
+///
+/// Note:
+/// You are allowed to not choose any edges in the tree, the sum of 
+/// weights in this case will be 0.
+/// Two edges Edge1 and Edge2 in the tree are adjacent if they have a 
+/// common node.
+/// In other words, they are adjacent if Edge1 connects nodes a and b and 
+/// Edge2 connects nodes b and c.
+///
+/// Example 1:
+/// Input: edges = [[-1,-1],[0,5],[0,10],[2,6],[2,4]]
+/// Output: 11
+/// Explanation: The above diagram shows the edges that we have to choose 
+/// colored in red.
+/// The total score is 5 + 6 = 11.
+/// It can be shown that no better score can be obtained.
+///
+/// Example 2:
+/// Input: edges = [[-1,-1],[0,5],[0,-6],[0,7]]
+/// Output: 7
+/// Explanation: We choose the edge with weight 7.
+/// Note that we cannot choose more than one edge because all edges are 
+/// adjacent to each other.
+///
+/// Constraints:
+/// 1. n == edges.length
+/// 2. 1 <= n <= 10^5
+/// 3. edges[i].length == 2
+/// 4. par0 == weight0 == -1
+/// 5. 0 <= pari <= n - 1 for all i >= 1.
+/// 6. pari != i
+/// 7. -10^6 <= weighti <= 10^6 for all i >= 1.
+/// 8. edges represents a valid tree.
+/// </summary>
+long long LeetCodeTree::maxScore(vector<vector<int>>& edges)
+{
+    vector<vector<pair<int, int>>> neighbors(edges.size());
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        if (edges[i][0] == -1) continue;
+        neighbors[edges[i][0]].push_back(make_pair(i, edges[i][1]));
+    }
+    pair<long long, long long> result = maxScore(0, neighbors);
+    return max(result.first, result.second);
+}
+
+/// <summary>
+/// Leet Code 2385. Amount of Time for Binary Tree to Be Infected
+/// </summary>
+pair<int, int> LeetCodeTree::amountOfTime(TreeNode* node, int start, int& result)
+{
+    if (node == nullptr) return make_pair(0, -1);
+    pair<int, int> left = amountOfTime(node->left, start, result);
+    pair<int, int> right = amountOfTime(node->right, start, result);
+    pair<int, int> ret;
+    ret.second = -1;
+    ret.first = max(left.first, right.first) + 1;
+    if (node->val == start)
+    {
+        ret.second = 0;
+        result = max(left.first, right.first);
+    }
+    else if (left.second != -1)
+    {
+        ret.second = left.second + 1;
+        result = max(result, right.first + ret.second);
+    }
+    else if (right.second != -1)
+    {
+        ret.second = right.second + 1;
+        result = max(result, left.first + ret.second);
+    }
+    return ret;
+}
+
+/// <summary>
+/// Leet Code 2385. Amount of Time for Binary Tree to Be Infected
+///                                                  
+/// Medium
+///
+/// You are given the root of a binary tree with unique values, and an 
+/// integer start. At minute 0, an infection starts from the node with 
+/// value start.
+///
+/// Each minute, a node becomes infected if:
+///
+/// The node is currently uninfected.
+/// The node is adjacent to an infected node.
+/// Return the number of minutes needed for the 
+/// entire tree to be infected.
+///
+/// Example 1:
+/// Input: root = [1,5,3,null,4,10,6,9,2], start = 3
+/// Output: 4
+/// Explanation: The following nodes are infected during:
+/// - Minute 0: Node 3
+/// - Minute 1: Nodes 1, 10 and 6
+/// - Minute 2: Node 5
+/// - Minute 3: Node 4
+/// - Minute 4: Nodes 9 and 2
+/// It takes 4 minutes for the whole tree to be infected so we return 4.
+///
+/// Example 2:
+/// Input: root = [1], start = 1
+/// Output: 0
+/// Explanation: At minute 0, the only node in the tree is infected so we 
+/// return 0.
+/// 
+/// Constraints:
+/// 1. The number of nodes in the tree is in the range [1, 10^5].
+/// 2. 1 <= Node.val <= 10^5
+/// 3. Each node has a unique value.
+/// 4. A node with a value of start exists in the tree.
+/// </summary>
+int LeetCodeTree::amountOfTime(TreeNode* root, int start)
+{
+    int result = 0;
+    amountOfTime(root, start, result);
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2415. Reverse Odd Levels of Binary Tree
+///                                                  
+/// Medium
+///
+/// Given the root of a perfect binary tree, reverse the node values at 
+/// each odd level of the tree.
+///
+/// For example, suppose the node values at level 3 are 
+/// [2,1,3,4,7,11,29,18], then it should become [18,29,11,7,4,3,1,2].
+/// Return the root of the reversed tree.
+///
+/// A binary tree is perfect if all parent nodes have two children and 
+/// all leaves are on the same level.
+///
+/// The level of a node is the number of edges along the path between 
+/// it and the root node.
+/// 
+/// Example 1:
+/// Input: root = [2,3,5,8,13,21,34]
+/// Output: [2,5,3,8,13,21,34]
+/// Explanation: 
+/// The tree has only one odd level.
+/// The nodes at level 1 are 3, 5 respectively, which are reversed and 
+/// become 5, 3.
+///
+/// Example 2:
+/// Input: root = [7,13,11]
+/// Output: [7,11,13]
+/// Explanation: 
+/// The nodes at level 1 are 13, 11, which are reversed and become 11, 13.
+///
+/// Example 3:
+/// Input: root = [0,1,2,0,0,0,0,1,1,1,1,2,2,2,2]
+/// Output: [0,2,1,0,0,0,0,2,2,2,2,1,1,1,1]
+/// Explanation: 
+/// The odd levels have non-zero values.
+/// The nodes at level 1 were 1, 2, and are 2, 1 after the reversal.
+/// The nodes at level 3 were 1, 1, 1, 1, 2, 2, 2, 2, and are 2, 2, 2, 
+/// 2, 1, 1, 1, 1 after the reversal.
+///
+/// Constraints:
+/// 1. The number of nodes in the tree is in the range [1, 2^14].
+/// 2. 0 <= Node.val <= 10^5
+/// 3. root is a perfect binary tree.
+/// </summary>
+TreeNode* LeetCodeTree::reverseOddLevels(TreeNode* root)
+{
+    int level = 0;
+    queue<TreeNode*> queue;
+    queue.push(root);
+    while (!queue.empty())
+    {
+        int size = queue.size();
+        vector<TreeNode*> list;
+        for (int i = 0; i < size; i++)
+        {
+            TreeNode* node = queue.front();
+            queue.pop();
+            list.push_back(node);
+            if (node->left != nullptr) queue.push(node->left);
+            if (node->right != nullptr) queue.push(node->right);
+        }
+        if (level % 2 == 1)
+        {
+            vector<int> reverse_list;
+            for (size_t i = 0; i < list.size(); i++)
+            {
+                reverse_list.push_back(list[i]->val);
+            }
+            std::reverse(reverse_list.begin(), reverse_list.end());
+            for (size_t i = 0; i < list.size(); i++)
+            {
+                list[i]->val = reverse_list[i];
+            }
+        }
+        level++;
+    }
+    return root;
+}
 #pragma endregion

@@ -5578,6 +5578,73 @@ public:
     /// 4. 1 <= k <= min(2000, 2^n)
     /// </summary>
     long long kSum(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 2387. Median of a Row Wise Sorted Matrix
+    ///                                                  
+    /// Medium
+    ///
+    /// Given an m x n matrix grid containing an odd number of integers where 
+    /// each row is sorted in non-decreasing order, return the median of the 
+    /// matrix.
+    ///
+    /// You must solve the problem in less than O(m * n) time complexity.
+    /// 
+    /// Example 1:
+    /// Input: grid = [[1,1,2],[2,3,3],[1,3,4]]
+    /// Output: 2
+    /// Explanation: The elements of the matrix in sorted order are 
+    /// 1,1,1,2,2,3,3,3,4. The median is 2.
+    ///
+    /// Example 2:
+    /// Input: grid = [[1,1,3,3,4]]
+    /// Output: 3
+    /// Explanation: The elements of the matrix in sorted order are 
+    /// 1,1,3,3,4. The median is 3.
+    ///
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 1 <= m, n <= 500
+    /// 4. m and n are both odd.
+    /// 5. 1 <= grid[i][j] <= 10^6
+    /// 6. grid[i] is sorted in non-decreasing order.
+    /// </summary>
+    int matrixMedian(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 2418. Sort the People
+    ///                                                  
+    /// Easy
+    ///
+    /// You are given an array of strings names, and an array heights that 
+    /// consists of distinct positive integers. Both arrays are of length n.
+    ///
+    /// For each index i, names[i] and heights[i] denote the name and height 
+    /// of the ith person.
+    ///
+    /// Return names sorted in descending order by the people's heights.
+    ///
+    /// Example 1:
+    /// Input: names = ["Mary","John","Emma"], heights = [180,165,170]
+    /// Output: ["Mary","Emma","John"]
+    /// Explanation: Mary is the tallest, followed by Emma and John.
+    ///
+    /// Example 2:
+    /// Input: names = ["Alice","Bob","Bob"], heights = [155,185,150]
+    /// Output: ["Bob","Alice","Bob"]
+    /// Explanation: The first Bob is the tallest, followed by Alice and 
+    /// the second Bob.
+    /// 
+    /// Constraints:
+    /// 1. n == names.length == heights.length
+    /// 2. 1 <= n <= 10^3
+    /// 3. 1 <= names[i].length <= 20
+    /// 4. 1 <= heights[i] <= 10^5
+    /// 5. names[i] consists of lower and upper case English letters.
+    /// 6. All the values of heights are distinct.
+    /// </summary>
+    vector<string> sortPeople(vector<string>& names, vector<int>& heights);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

@@ -4639,7 +4639,6 @@ void TestLeetCode2360(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-
 void TestLeetCode2374(void)
 {
     Logger::WriteMessage("Test Leet Code 2374");
@@ -4655,8 +4654,66 @@ void TestLeetCode2374(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2392(void)
+{
+    Logger::WriteMessage("Test Leet Code 2392");
+    LeetCodeGraph leetCode;
+    int k = 3;
+    vector<vector<int>> rowConditions = { {1, 2},{3, 2} };
+    vector<vector<int>> colConditions = { {2, 1},{3, 2} };
+    vector<vector<int>> result = leetCode.buildMatrix(k, rowConditions, colConditions);
+    Logger::WriteMessage(rowConditions);
+    Logger::WriteMessage(colConditions);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    k = 3;
+    rowConditions = { {1, 2},{2, 3},{3, 1},{2, 3} };
+    colConditions = { {2, 1} };
+    result = leetCode.buildMatrix(k, rowConditions, colConditions);
+    Logger::WriteMessage(rowConditions);
+    Logger::WriteMessage(colConditions);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2421(void)
+{
+    Logger::WriteMessage("Test Leet Code 2421");
+    LeetCodeGraph leetCode;
+    vector<int> vals = { 1, 3, 2, 1, 3 };
+    vector<vector<int>> edges = { {0, 1},{0, 2},{2, 3},{2, 4} };
+    int result = leetCode.numberOfGoodPaths(vals, edges);
+    Logger::WriteMessage(vals);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    vals = { 1,1,2,2,3 };
+    edges = { {0, 1},{1, 2},{2, 3},{2, 4} };
+    result = leetCode.numberOfGoodPaths(vals, edges);
+    Logger::WriteMessage(vals);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    vals = { 1 };
+    edges = { };
+    result = leetCode.numberOfGoodPaths(vals, edges);
+    Logger::WriteMessage(vals);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    vals = { 2, 5, 5, 1, 5, 2, 3, 5, 1, 5 };
+    edges = { {0, 1},{2, 1},{3, 2},{3, 4},{3, 5},{5, 6},{1, 7},{8, 4},{9, 7} };
+    result = leetCode.numberOfGoodPaths(vals, edges);
+    Logger::WriteMessage(vals);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2421();
+    TestLeetCode2392();
     TestLeetCode2374();
     TestLeetCode2360();
     TestLeetCode2359();

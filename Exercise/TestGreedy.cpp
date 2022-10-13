@@ -1432,8 +1432,101 @@ void TestLeetCode2382(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2407(void)
+{
+    Logger::WriteMessage("Test Leet Code 2407");
+    LeetCodeGreedy leetCode;
+    vector<int> nums = { 4,2,1,4,3,4,5,8,15 };
+    int k = 3;
+    int result = leetCode.lengthOfLIS(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 7,4,5,1,8,12,4,7 };
+    k = 5;
+    result = leetCode.lengthOfLIS(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1, 5 };
+    k = 1;
+    result = leetCode.lengthOfLIS(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2412(void)
+{
+    Logger::WriteMessage("Test Leet Code 2412");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> transactions = { {2, 1},{5, 0},{4, 2} };
+    long long result = leetCode.minimumMoney(transactions);
+    Logger::WriteMessage(transactions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    transactions = { {3, 0},{0, 3} };
+    result = leetCode.minimumMoney(transactions);
+    Logger::WriteMessage(transactions);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2410(void)
+{
+    Logger::WriteMessage("Test Leet Code 2410");
+    LeetCodeGreedy leetCode;
+    vector<int> players = { 4, 7, 9 };
+    vector<int> trainers = { 8, 2, 5, 8 };
+    int result = leetCode.matchPlayersAndTrainers(players, trainers);
+    Logger::WriteMessage(players);
+    Logger::WriteMessage(trainers);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    players = { 1,1,1 };
+    trainers = { 10 };
+    result = leetCode.matchPlayersAndTrainers(players, trainers);
+    Logger::WriteMessage(players);
+    Logger::WriteMessage(trainers);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2402(void)
+{
+    Logger::WriteMessage("Test Leet Code 2402");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> intervals = { {5, 10},{6, 8},{1, 5},{2, 3},{1, 10} };
+    int result = leetCode.minGroups(intervals);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    intervals = { {1, 3},{5, 6},{8, 10},{11, 13} };
+    result = leetCode.minGroups(intervals);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2406(void)
+{
+    Logger::WriteMessage("Test Leet Code 2406");
+    LeetCodeGreedy leetCode;
+    int n = 2;
+    vector<vector<int>> meetings = { {0, 10},{1, 5},{2, 7},{3, 4} };
+    int result = leetCode.mostBooked(n, meetings);
+    Logger::WriteMessage(meetings);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    meetings = { {1, 20},{2, 10},{3, 5},{4, 9},{6, 8} };
+    result = leetCode.mostBooked(n, meetings);
+    Logger::WriteMessage(meetings);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode2406();
+    TestLeetCode2410();
+    TestLeetCode2412();
+    TestLeetCode2407();
     TestLeetCode2382();
     TestLeetCode2365();
     TestLeetCode2381();

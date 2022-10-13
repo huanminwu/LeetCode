@@ -14543,6 +14543,457 @@ public:
     /// 2. 1 <= nums[i] <= 10^6
     /// </summary>
     long long countSubarrays(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2395. Find Subarrays With Equal Sum
+    ///                                                  
+    /// Easy
+    ///
+    /// Given a 0-indexed integer array nums, determine whether there exist 
+    /// two subarrays of length 2 with equal sum. Note that the two 
+    /// subarrays must begin at different indices.
+    ///
+    /// Return true if these subarrays exist, and false otherwise.
+    /// A subarray is a contiguous non-empty sequence of elements 
+    /// within an array.
+    ///
+    /// Example 1:
+    /// Input: nums = [4,2,4]
+    /// Output: true
+    /// Explanation: The subarrays with elements [4,2] and [2,4] have the 
+    /// same sum of 6.
+    ///
+    /// Example 2:
+    ///
+    /// Input: nums = [1,2,3,4,5]
+    /// Output: false
+    /// Explanation: No two subarrays of size 2 have the same sum.
+    ///
+    /// Example 3:
+    /// Input: nums = [0,0,0]
+    /// Output: true
+    /// Explanation: The subarrays [nums[0],nums[1]] and [nums[1],nums[2]] 
+    /// have the same sum of 0. 
+    /// Note that even though the subarrays have the same content, the two 
+    /// subarrays are considered different because they are in different 
+    /// positions in the original array.
+    ///
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 1000
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// </summary>
+    bool findSubarrays(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2389. Longest Subsequence With Limited Sum
+    ///                                                  
+    /// Easy
+    ///
+    /// You are given an integer array nums of length n, and an integer array 
+    /// queries of length m.
+    ///
+    /// Return an array answer of length m where answer[i] is the maximum 
+    /// size of a subsequence that you can take from nums such that the sum 
+    /// of its elements is less than or equal to queries[i].
+    ///
+    /// A subsequence is an array that can be derived from another array by 
+    /// deleting some or no elements without changing the order of the 
+    /// remaining elements.
+    ///
+    /// Example 1:
+    /// Input: nums = [4,5,2,1], queries = [3,10,21]
+    /// Output: [2,3,4]
+    /// Explanation: We answer the queries as follows:
+    /// - The subsequence [2,1] has a sum less than or equal to 3. It can be 
+    ///   proven that 2 is the maximum size of such a subsequence, so 
+    ///   answer[0] = 2.
+    /// - The subsequence [4,5,1] has a sum less than or equal to 10. It can be 
+    ///   proven that 3 is the maximum size of such a subsequence, so 
+    ///   answer[1] = 3.
+    /// - The subsequence [4,5,2,1] has a sum less than or equal to 21. It can 
+    ///   be proven that 4 is the maximum size of such a subsequence, so 
+    ///   answer[2] = 4.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,3,4,5], queries = [1]
+    /// Output: [0]
+    /// Explanation: The empty subsequence is the only subsequence that has a 
+    /// sum less than or equal to 1, so answer[0] = 0.
+    ///
+    /// Constraints:
+    /// 1. n == nums.length
+    /// 2. m == queries.length
+    /// 3. 1 <= n, m <= 1000
+    /// 4. 1 <= nums[i], queries[i] <= 10^6
+    /// </summary>
+    vector<int> answerQueries(vector<int>& nums, vector<int>& queries);
+
+    /// <summary>
+    /// Leet Code 2397. Maximum Rows Covered by Columns
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given a 0-indexed m x n binary matrix matrix and an integer 
+    /// numSelect, which denotes the number of distinct columns you must 
+    /// select from matrix.
+    ///
+    /// Let us consider s = {c1, c2, ...., cnumSelect} as the set of columns 
+    /// selected by you. A row row is covered by s if:
+    ///
+    /// For each cell matrix[row][col] (0 <= col <= n - 1) where 
+    /// matrix[row][col] == 1, col is present in s or,
+    /// No cell in row has a value of 1.
+    /// You need to choose numSelect columns such that the number of rows that 
+    /// are covered is maximized.
+    ///
+    /// Return the maximum number of rows that can be covered by a set of 
+    /// numSelect columns.
+    /// 
+    /// Example 1:
+    /// 
+    /// Input: matrix = [[0,0,0],[1,0,1],[0,1,1],[0,0,1]], numSelect = 2
+    /// Output: 3
+    /// Explanation: One possible way to cover 3 rows is shown in the diagram 
+    /// above.
+    /// We choose s = {0, 2}.
+    /// - Row 0 is covered because it has no occurrences of 1.
+    /// - Row 1 is covered because the columns with value 1, i.e. 0 and 2 are 
+    ///   present in s.
+    /// - Row 2 is not covered because matrix[2][1] == 1 but 1 is not 
+    ///   present in s.
+    /// - Row 3 is covered because matrix[2][2] == 1 and 2 is present in s.
+    /// Thus, we can cover three rows.
+    /// Note that s = {1, 2} will also cover 3 rows, but it can be shown that 
+    /// no more than three rows can be covered.
+    ///
+    /// Example 2:
+    /// 
+    /// Input: matrix = [[1],[0]], numSelect = 1
+    /// Output: 2
+    /// Explanation: Selecting the only column will result in both rows being 
+    /// covered since the entire matrix is selected.
+    /// Therefore, we return 2.
+    ///
+    /// Constraints:
+    /// 1. m == matrix.length
+    /// 2. n == matrix[i].length
+    /// 3. 1 <= m, n <= 12
+    /// 4. matrix[i][j] is either 0 or 1.
+    /// 5. 1 <= numSelect <= n
+    /// </summary>
+    int maximumRows(vector<vector<int>>& matrix, int numSelect);
+
+    /// <summary>
+    /// Leet Code 2401. Longest Nice Subarray 
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given an array nums consisting of positive integers.
+    ///
+    /// We call a subarray of nums nice if the bitwise AND of every pair 
+    /// of elements that are in different positions in the subarray is 
+    /// equal to 0.
+    ///
+    /// Return the length of the longest nice subarray.
+    ///
+    /// A subarray is a contiguous part of an array.
+    ///
+    /// Note that subarrays of length 1 are always considered nice.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,3,8,48,10]
+    /// Output: 3
+    /// Explanation: The longest nice subarray is [3,8,48]. This subarray 
+    /// satisfies the conditions:
+    /// - 3 AND 8 = 0.
+    /// - 3 AND 48 = 0.
+    /// - 8 AND 48 = 0.
+    /// It can be proven that no longer nice subarray can be obtained, 
+    /// so we return 3.
+    ///
+    /// Example 2:
+    /// Input: nums = [3,1,5,11,13]
+    /// Output: 1
+    /// Explanation: The length of the longest nice subarray is 1. Any 
+    /// subarray of length 1 can be chosen.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    int longestNiceSubarray(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2428. Maximum Sum of an Hourglass
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given an m x n integer matrix grid.
+    ///
+    /// We define an hourglass as a part of the matrix with the following form:
+    ///
+    /// Return the maximum sum of the elements of an hourglass.
+    ///
+    /// Note that an hourglass cannot be rotated and must be entirely contained 
+    /// within the matrix.
+    /// 
+    ///
+    /// Example 1:
+    /// Input: grid = [[6,2,1,3],[4,2,1,5],[9,2,8,7],[4,1,2,9]]
+    /// Output: 30
+    /// Explanation: The cells shown above represent the hourglass with the 
+    /// maximum sum: 6 + 2 + 1 + 2 + 9 + 2 + 8 = 30.
+    ///
+    /// Example 2:
+    /// Input: grid = [[1,2,3],[4,5,6],[7,8,9]]
+    /// Output: 35
+    /// Explanation: There is only one hourglass in the matrix, with the 
+    /// sum: 1 + 2 + 3 + 5 + 7 + 8 + 9 = 35.
+    /// 
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 3 <= m, n <= 150
+    /// 4. 0 <= grid[i][j] <= 10^6
+    /// </summary>
+    int maxSum(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 2420. Find All Good Indices
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given a 0-indexed integer array nums of size n and a positive 
+    /// integer k.
+    ///
+    /// We call an index i in the range k <= i < n - k good if the following 
+    /// conditions are satisfied:
+    ///
+    /// The k elements that are just before the index i are in non-increasing 
+    /// order.
+    /// The k elements that are just after the index i are in non-decreasing 
+    /// order.
+    /// Return an array of all good indices sorted in increasing order.
+    ///
+    /// Example 1:
+    /// Input: nums = [2,1,1,1,3,4,1], k = 2
+    /// Output: [2,3]
+    /// Explanation: There are two good indices in the array:
+    /// - Index 2. The subarray [2,1] is in non-increasing order, and the 
+    ///   subarray [1,3] is in non-decreasing order.
+    /// - Index 3. The subarray [1,1] is in non-increasing order, and the 
+    ///   subarray [3,4] is in non-decreasing order.
+    /// Note that the index 4 is not good because [4,1] is not non-decreasing.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,1,1,2], k = 2
+    /// Output: []
+    /// Explanation: There are no good indices in this array.
+    /// 
+    /// Constraints:
+    /// 1. n == nums.length
+    /// 2. 3 <= n <= 10^5
+    /// 3. 1 <= nums[i] <= 10^6
+    /// 4. 1 <= k <= n / 2
+    /// </summary>
+    vector<int> goodIndices(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 2419. Longest Subarray With Maximum Bitwise AND
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given an integer array nums of size n.
+    ///
+    /// Consider a non-empty subarray from nums that has the maximum possible 
+    /// bitwise AND.
+    ///
+    /// In other words, let k be the maximum value of the bitwise AND of any 
+    /// subarray of nums. Then, only subarrays with a bitwise AND equal to k 
+    /// should be considered.
+    /// Return the length of the longest such subarray.
+    ///
+    /// The bitwise AND of an array is the bitwise AND of all the numbers in 
+    /// it.
+    ///
+    /// A subarray is a contiguous sequence of elements within an array.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: nums = [1,2,3,3,2,2]
+    /// Output: 2
+    /// Explanation:
+    /// The maximum possible bitwise AND of a subarray is 3.
+    /// The longest subarray with that value is [3,3], so we return 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,3,4]
+    /// Output: 1
+    /// Explanation:
+    /// The maximum possible bitwise AND of a subarray is 4.
+    /// The longest subarray with that value is [4], so we return 1.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^6
+    /// </summary>
+    int longestSubarrayAnd(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2411. Smallest Subarrays With Maximum Bitwise OR
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given a 0-indexed array nums of length n, consisting of 
+    /// non-negative integers. For each index i from 0 to n - 1, you must 
+    /// determine the size of the minimum sized non-empty subarray of nums 
+    /// starting at i (inclusive) that has the maximum possible bitwise OR.
+    ///
+    /// In other words, let Bij be the bitwise OR of the subarray nums[i...j]. 
+    /// You need to find the smallest subarray starting at i, such that 
+    /// bitwise OR of this subarray is equal to max(Bik) where i <= k <= n - 1.
+    /// The bitwise OR of an array is the bitwise OR of all the numbers in it.
+    ///
+    /// Return an integer array answer of size n where answer[i] is the length 
+    /// of the minimum sized subarray starting at i with maximum bitwise OR.
+    /// 
+    /// A subarray is a contiguous non-empty sequence of elements within an 
+    /// array.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,0,2,1,3]
+    /// Output: [3,3,2,2,1]
+    /// Explanation:
+    /// The maximum possible bitwise OR starting at any index is 3. 
+    /// - Starting at index 0, the shortest subarray that yields it is [1,0,2].
+    /// - Starting at index 1, the shortest subarray that yields the maximum 
+    ///   bitwise OR is [0,2,1].
+    /// - Starting at index 2, the shortest subarray that yields the maximum 
+    ///   bitwise OR is [2,1].
+    /// - Starting at index 3, the shortest subarray that yields the maximum 
+    ///   bitwise OR is [1,3].
+    /// - Starting at index 4, the shortest subarray that yields the maximum 
+    ///   bitwise OR is [3].
+    /// Therefore, we return [3,3,2,2,1]. 
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2]
+    /// Output: [2,1]
+    /// Explanation:
+    /// Starting at index 0, the shortest subarray that yields the maximum 
+    /// bitwise OR is of length 2.
+    /// Starting at index 1, the shortest subarray that yields the maximum 
+    /// bitwise OR is of length 1.
+    /// Therefore, we return [2,1].
+    /// 
+    /// Constraints:
+    /// 1. n == nums.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 0 <= nums[i] <= 10^9
+    /// </summary>
+    vector<int> smallestSubarraysOr(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2426. Number of Pairs Satisfying Inequality
+    ///                                                  
+    /// Hard
+    ///
+    /// You are given two 0-indexed integer arrays nums1 and nums2, each of 
+    /// size n, and an integer diff. Find the number of pairs (i, j) such that:
+    ///
+    /// 0 <= i < j <= n - 1 and
+    /// nums1[i] - nums1[j] <= nums2[i] - nums2[j] + diff.
+    /// Return the number of pairs that satisfy the conditions.
+    ///
+    /// Example 1:
+    /// Input: nums1 = [3,2,5], nums2 = [2,2,1], diff = 1
+    /// Output: 3
+    /// Explanation:
+    /// There are 3 pairs that satisfy the conditions:
+    /// 1. i = 0, j = 1: 3 - 2 <= 2 - 2 + 1. 
+    ///    Since i < j and 1 <= 1, this pair satisfies the conditions.
+    /// 2. i = 0, j = 2: 3 - 5 <= 2 - 1 + 1. 
+    ///    Since i < j and -2 <= 2, this pair satisfies the conditions.
+    /// 3. i = 1, j = 2: 2 - 5 <= 2 - 1 + 1. 
+    /// Since i < j and -3 <= 2, this pair satisfies the conditions.
+    /// Therefore, we return 3.
+    ///
+    /// Example 2:
+    /// Input: nums1 = [3,-1], nums2 = [-2,2], diff = -1
+    /// Output: 0
+    /// Explanation:
+    /// Since there does not exist any pair that satisfies the conditions, 
+    /// we return 0.
+    ///
+    /// Constraints:
+    /// 1. n == nums1.length == nums2.length
+    /// 2. 2 <= n <= 10^5
+    /// 3. -10^4 <= nums1[i], nums2[i] <= 10^4
+    /// 4. -10^4 <= diff <= 10^4
+    /// </summary>
+    long long numberOfPairs(vector<int>& nums1, vector<int>& nums2, int diff);
+
+    /// <summary>
+    /// Leet Code 2432. The Employee That Worked on the Longest Task
+    ///                                                  
+    /// Easy
+    ///
+    /// There are n employees, each with a unique id from 0 to n - 1.
+    ///
+    /// You are given a 2D integer array logs where 
+    /// logs[i] = [idi, leaveTimei] where:
+    ///
+    /// idi is the id of the employee that worked on the ith task, and
+    /// leaveTimei is the time at which the employee finished the ith task. 
+    /// All the values leaveTimei are unique.
+    /// Note that the ith task starts the moment right after the (i - 1)th 
+    /// task ends, and the 0th task starts at time 0.
+    ///
+    /// Return the id of the employee that worked the task with the longest 
+    /// time. If there is a tie between two or more employees, return the 
+    /// smallest id among them.
+    ///
+    /// Example 1:
+    /// Input: n = 10, logs = [[0,3],[2,5],[0,9],[1,15]]
+    /// Output: 1
+    /// Explanation: 
+    /// Task 0 started at 0 and ended at 3 with 3 units of times.
+    /// Task 1 started at 3 and ended at 5 with 2 units of times.
+    /// Task 2 started at 5 and ended at 9 with 4 units of times.
+    /// Task 3 started at 9 and ended at 15 with 6 units of times.
+    /// The task with the longest time is task 3 and the employee with 
+    /// id 1 is the one that worked on it, so we return 1.
+    ///
+    /// Example 2:
+    /// Input: n = 26, logs = [[1,1],[3,7],[2,12],[7,17]]
+    /// Output: 3
+    /// Explanation: 
+    /// Task 0 started at 0 and ended at 1 with 1 unit of times.
+    /// Task 1 started at 1 and ended at 7 with 6 units of times.
+    /// Task 2 started at 7 and ended at 12 with 5 units of times.
+    /// Task 3 started at 12 and ended at 17 with 5 units of times.
+    /// The tasks with the longest time is task 1. The employees that worked 
+    /// on it is 3, so we return 3.
+    ///
+    /// Example 3:
+    /// Input: n = 2, logs = [[0,10],[1,20]]
+    /// Output: 0
+    /// Explanation: 
+    /// Task 0 started at 0 and ended at 10 with 10 units of times.
+    /// Task 1 started at 10 and ended at 20 with 10 units of times.
+    /// The tasks with the longest time are tasks 0 and 1. The employees that 
+    /// worked on them are 0 and 1, so we return the smallest id 0.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n <= 500
+    /// 2. 1 <= logs.length <= 500
+    /// 3. logs[i].length == 2
+    /// 4. 0 <= idi <= n - 1
+    /// 5. 1 <= leaveTimei <= 500
+    /// 6. idi != idi+1
+    /// 7. leaveTimei are sorted in a strictly increasing order.
+    /// </summary>
+    int hardestWorker(int n, vector<vector<int>>& logs);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

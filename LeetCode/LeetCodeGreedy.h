@@ -2854,5 +2854,266 @@ public:
     /// 5. All the values of removeQueries are unique.
     /// </summary>
     vector<long long> maximumSegmentSum(vector<int>& nums, vector<int>& removeQueries);
+
+    /// <summary>
+    /// Leet Code 2407. Longest Increasing Subsequence II
+    /// </summary>
+    void lengthOfLISUpdate(vector<int>& segTree, int index, int val, 
+        int x, int lx, int rx);
+
+    /// <summary>
+    /// Leet Code 2407. Longest Increasing Subsequence II
+    /// </summary>
+    int lengthOfLISQuery(vector<int>& segTree, int l, int r, int x, int lx, int rx);
+
+
+    /// <summary>
+    /// Leet Code 2407. Longest Increasing Subsequence II
+    ///                                                  
+    /// Hard
+    ///
+    /// You are given an integer array nums and an integer k.
+    ///
+    /// Find the longest subsequence of nums that meets the following 
+    /// requirements:
+    ///
+    /// The subsequence is strictly increasing and
+    /// The difference between adjacent elements in the subsequence is 
+    /// at most k. 
+    /// Return the length of the longest subsequence that meets the 
+    /// requirements.
+    ///
+    /// A subsequence is an array that can be derived from another 
+    /// array by deleting some or no elements without changing the 
+    /// order of the remaining elements.
+    /// 
+    /// Example 1:
+    /// Input: nums = [4,2,1,4,3,4,5,8,15], k = 3
+    /// Output: 5
+    /// Explanation:
+    /// The longest subsequence that meets the requirements is [1,3,4,5,8].
+    /// The subsequence has a length of 5, so we return 5.
+    /// Note that the subsequence [1,3,4,5,8,15] does not meet the requirements
+    /// because 15 - 8 = 7 is larger than 3.
+    ///
+    /// Example 2:
+    /// Input: nums = [7,4,5,1,8,12,4,7], k = 5
+    /// Output: 4
+    /// Explanation:
+    /// The longest subsequence that meets the requirements is [4,5,8,12].
+    /// The subsequence has a length of 4, so we return 4.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,5], k = 1
+    /// Output: 1
+    /// Explanation:
+    /// The longest subsequence that meets the requirements is [1].
+    /// The subsequence has a length of 1, so we return 1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i], k <= 10^5
+    /// </summary>
+    int lengthOfLIS(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 2412. Minimum Money Required Before Transactions 
+    ///                                                  
+    /// Hard
+    ///
+    /// You are given a 0-indexed 2D integer array transactions, where 
+    /// transactions[i] = [costi, cashbacki].
+    ///
+    /// The array describes transactions, where each transaction must be 
+    /// completed exactly once in some order. At any given moment, you have 
+    /// a certain amount of money. In order to complete transaction i, 
+    /// money >= costi must hold true. After performing a transaction, 
+    /// money becomes money - costi + cashbacki.
+    /// Return the minimum amount of money required before any transaction 
+    /// so that all of the transactions can be completed regardless of the 
+    /// order of the transactions.
+    ///
+    /// Example 1:
+    /// Input: transactions = [[2,1],[5,0],[4,2]]
+    /// Output: 10
+    /// Explanation:
+    /// Starting with money = 10, the transactions can be performed in any 
+    /// order.
+    /// It can be shown that starting with money < 10 will fail to complete 
+    /// all transactions in some order.
+    ///
+    /// Example 2:
+    /// Input: transactions = [[3,0],[0,3]]
+    /// Output: 3
+    /// Explanation:
+    /// - If transactions are in the order [[3,0],[0,3]], the minimum money 
+    ///   required to complete the transactions is 3.
+    /// - If transactions are in the order [[0,3],[3,0]], the minimum money 
+    ///   required to complete the transactions is 0.
+    /// Thus, starting with money = 3, the transactions can be performed in 
+    /// any order.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= transactions.length <= 10^5
+    /// 2. transactions[i].length == 2
+    /// 3. 0 <= costi, cashbacki <= 10^9
+    /// </summary>
+    long long minimumMoney(vector<vector<int>>& transactions);
+
+    /// <summary>
+    /// Leet Code 2410. Maximum Matching of Players With Trainers 
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given a 0-indexed integer array players, where players[i] 
+    /// represents the ability of the ith player. You are also given a 
+    /// 0-indexed integer array trainers, where trainers[j] represents the 
+    /// training capacity of the jth trainer.
+    ///
+    /// The ith player can match with the jth trainer if the player's ability 
+    /// is less than or equal to the trainer's training capacity. 
+    /// Additionally, the ith player can be matched with at most one trainer, 
+    /// and the jth trainer can be matched with at most one player.
+    ///
+    /// Return the maximum number of matchings between players and trainers 
+    /// that satisfy these conditions.
+    ///
+    /// Example 1:
+    /// Input: players = [4,7,9], trainers = [8,2,5,8]
+    /// Output: 2
+    /// Explanation:
+    /// One of the ways we can form two matchings is as follows:
+    /// - players[0] can be matched with trainers[0] since 4 <= 8.
+    /// - players[1] can be matched with trainers[3] since 7 <= 8.
+    /// It can be proven that 2 is the maximum number of matchings that can 
+    /// be formed.
+    ///
+    /// Example 2:
+    /// Input: players = [1,1,1], trainers = [10]
+    /// Output: 1
+    /// Explanation:
+    /// The trainer can be matched with any of the 3 players.
+    /// Each player can only be matched with one trainer, so the maximum 
+    /// answer is 1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= players.length, trainers.length <= 10^5
+    /// 2. 1 <= players[i], trainers[j] <= 10^9
+    /// </summary>
+    int matchPlayersAndTrainers(vector<int>& players, vector<int>& trainers);
+
+    /// <summary>
+    /// Leet Code 2406. Divide Intervals Into Minimum Number of Groups
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given a 2D integer array intervals where intervals[i] = 
+    /// [lefti, righti] represents the inclusive interval [lefti, righti].
+    ///
+    /// You have to divide the intervals into one or more groups such that 
+    /// each interval is in exactly one group, and no two intervals that 
+    /// are in the same group intersect each other.
+    ///
+    /// Return the minimum number of groups you need to make.
+    ///
+    /// Two intervals intersect if there is at least one common number 
+    /// between them. For example, the intervals [1, 5] and [5, 8] intersect.
+    ///
+    /// Example 1:
+    /// Input: intervals = [[5,10],[6,8],[1,5],[2,3],[1,10]]
+    /// Output: 3
+    /// Explanation: We can divide the intervals into the following groups:
+    /// - Group 1: [1, 5], [6, 8].
+    /// - Group 2: [2, 3], [5, 10].
+    /// - Group 3: [1, 10].
+    /// It can be proven that it is not possible to divide the intervals 
+    /// into fewer than 3 groups.
+    ///
+    /// Example 2:
+    /// Input: intervals = [[1,3],[5,6],[8,10],[11,13]]
+    /// Output: 1
+    /// Explanation: None of the intervals overlap, so we can put all of 
+    /// them in one group.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= intervals.length <= 10^5
+    /// 2. intervals[i].length == 2
+    /// 3. 1 <= lefti <= righti <= 10^6
+    /// </summary>
+    int minGroups(vector<vector<int>>& intervals);
+
+    /// <summary>
+    /// Leet Code 2402. Meeting Rooms III
+    ///                                                  
+    /// Hard
+    ///
+    /// You are given an integer n. There are n rooms numbered from 0 to n - 1.
+    ///
+    /// You are given a 2D integer array meetings where 
+    /// meetings[i] = [starti, endi] means that a meeting will be held during 
+    /// the half-closed time interval [starti, endi). All the values of starti 
+    /// are unique.
+    ///
+    /// Meetings are allocated to rooms in the following manner:
+    ///
+    /// Each meeting will take place in the unused room with the lowest number.
+    /// If there are no available rooms, the meeting will be delayed until a 
+    /// room becomes free. The delayed meeting should have the same duration 
+    /// as the original meeting.
+    /// When a room becomes unused, meetings that have an earlier original 
+    /// start time should be given the room.
+    /// Return the number of the room that held the most meetings. If there 
+    /// are multiple rooms, return the room with the lowest number.
+    ///
+    /// A half-closed interval [a, b) is the interval between a and b 
+    /// including a and not including b.
+    ///
+    /// Example 1:
+    ///
+    /// Input: n = 2, meetings = [[0,10],[1,5],[2,7],[3,4]]
+    /// Output: 0
+    /// Explanation:
+    /// - At time 0, both rooms are not being used. The first meeting 
+    ///   starts in room 0.
+    /// - At time 1, only room 1 is not being used. The second meeting 
+    ///   starts in room 1.
+    /// - At time 2, both rooms are being used. The third meeting is 
+    ///   delayed.
+    /// - At time 3, both rooms are being used. The fourth meeting is delayed.
+    /// - At time 5, the meeting in room 1 finishes. The third meeting starts 
+    ///   in room 1 for the time period [5,10).
+    /// - At time 10, the meetings in both rooms finish. The fourth meeting 
+    ///   starts in room 0 for the time period [10,11).
+    /// Both rooms 0 and 1 held 2 meetings, so we return 0. 
+    ///
+    /// Example 2:
+    /// Input: n = 3, meetings = [[1,20],[2,10],[3,5],[4,9],[6,8]]
+    /// Output: 1
+    /// Explanation:
+    /// - At time 1, all three rooms are not being used. The first meeting 
+    ///   starts in room 0.
+    /// - At time 2, rooms 1 and 2 are not being used. The second meeting 
+    ///   starts in room 1.
+    /// - At time 3, only room 2 is not being used. The third meeting starts 
+    ///   in room 2.
+    /// - At time 4, all three rooms are being used. The fourth meeting is 
+    ///   delayed.
+    /// - At time 5, the meeting in room 2 finishes. The fourth meeting 
+    ///   starts in room 2 for the time period [5,10).
+    /// - At time 6, all three rooms are being used. The fifth meeting 
+    ///   is delayed.
+    /// - At time 10, the meetings in rooms 1 and 2 finish. The fifth meeting 
+    ///   starts in room 1 for the time period [10,12).
+    /// Room 0 held 1 meeting while rooms 1 and 2 each held 2 meetings, so 
+    ///  we return 1. 
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 100
+    /// 2. 1 <= meetings.length <= 10^5
+    /// 3. meetings[i].length == 2
+    /// 4. 0 <= starti < endi <= 5 * 10^5
+    /// 5. All the values of starti are unique.
+    /// </summary>
+    int mostBooked(int n, vector<vector<int>>& meetings);
 };
 #endif  // LeetCodeGreedy_H

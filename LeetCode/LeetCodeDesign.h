@@ -12406,4 +12406,193 @@ public:
         }
     }
 };
+
+/// <summary>
+/// Leet Code 2408. Design SQL
+///                                                  
+/// Medium
+///
+/// You are given n tables represented with two arrays names and columns, 
+/// where names[i] is the name of the ith table and columns[i] is the 
+/// number of columns of the ith table.
+///
+/// You should be able to perform the following operations:
+///
+/// Insert a row in a specific table. Each row you insert has an id. The 
+/// id is assigned using an auto-increment method where the id of the 
+/// first inserted row is 1, and the id of each other row inserted into 
+/// the same table is the id of the last inserted row (even if it was 
+/// deleted) plus one.
+/// Delete a row from a specific table. Note that deleting a row does 
+/// not affect the id of the next inserted row.
+/// Select a specific cell from any table and return its value.
+/// Implement the SQL class:
+///
+/// SQL(String[] names, int[] columns) Creates the n tables.
+/// void insertRow(String name, String[] row) Adds a row to the table 
+/// name. It is guaranteed that the table will exist, and the size of 
+/// the array row is equal to the number of columns in the table. 
+/// void deleteRow(String name, int rowId) Removes the row rowId from 
+/// the table name. It is guaranteed that the table and row will exist.
+/// String selectCell(String name, int rowId, int columnId) Returns the 
+/// value of the cell in the row rowId and the column columnId from the 
+/// table name.
+///
+/// Example 1:
+/// Input
+/// ["SQL", "insertRow", "selectCell", "insertRow", "deleteRow", 
+///  "selectCell"]
+/// [[["one", "two", "three"], [2, 3, 1]], ["two", ["first", "second", 
+/// "third"]], ["two", 1, 3], ["two", ["fourth", "fifth", "sixth"]],
+/// ["two", 1], ["two", 2, 2]]
+/// Output
+/// [null, null, "third", null, null, "fifth"]
+///
+/// Explanation
+/// SQL sql = new SQL(["one", "two", "three"], [2, 3, 1]); 
+/// // creates three tables.
+/// sql.insertRow("two", ["first", "second", "third"]); 
+/// // adds a row to the table "two". Its id is 1.
+/// sql.selectCell("two", 1, 3); 
+/// // return "third", finds the value of the third column in the 
+/// // row with id 1 of the table "two".
+/// sql.insertRow("two", ["fourth", "fifth", "sixth"]); 
+/// // adds another row to the table "two". Its id is 2.
+/// sql.deleteRow("two", 1); 
+/// // deletes the first row of the table "two". Note that the 
+/// // second row will still have the id 2.
+/// sql.selectCell("two", 2, 2); 
+/// // return "fifth", finds the value of the second column in the 
+/// // row with id 2 of the table "two".
+///
+/// Constraints:
+/// 1. n == names.length == columns.length
+/// 2. 1 <= n <= 104
+/// 3. 1 <= names[i].length, row[i].length, name.length <= 20
+/// 4. names[i], row[i], and name consist of lowercase English letters.
+/// 5. 1 <= columns[i] <= 100
+/// 6. All the strings of names are distinct.
+/// 7. name exists in the array names.
+/// 8. row.length equals the number of columns in the chosen table.
+/// 9. rowId and columnId will be valid.
+/// 10. At most 250 calls will be made to insertRow and deleteRow.
+/// 11. At most 104 calls will be made to selectCell.
+/// </summary>
+class SQL
+{
+private:
+    unordered_map <string, unordered_map<int, vector<string>>> m_tables;
+    unordered_map <string, int> m_row_counts;
+public:
+    SQL(vector<string>& names, vector<int>& columns) 
+    {
+        for (size_t i = 0; i < names.size(); i++)
+        {
+            m_row_counts[names[i]] = 0;
+        }
+    }
+
+    void insertRow(string name, vector<string> row) 
+    {
+        m_row_counts[name]++;
+        int row_id = m_row_counts[name];
+        m_tables[name][row_id] = row;
+    }
+
+    void deleteRow(string name, int rowId) 
+    {
+        if (m_tables[name].count(rowId) > 0)
+        {
+            m_tables[name].erase(rowId);
+        }
+    }
+
+    string selectCell(string name, int rowId, int columnId) 
+    {
+        if (m_tables[name].count(rowId) > 0 &&
+            columnId <= (int)m_tables[name][rowId].size())
+        {
+            return m_tables[name][rowId][columnId - 1];
+        }
+        else
+        {
+            return "";
+        }
+    }
+};
+
+/// <summary>
+/// Leet Code 2424. Longest Uploaded Prefix
+///                                                  
+/// Medium
+///
+/// You are given a stream of n videos, each represented by a distinct 
+/// number from 1 to n that you need to "upload" to a server. You need 
+/// to implement a data structure that calculates the length of the 
+/// longest uploaded prefix at various points in the upload process.
+///
+/// We consider i to be an uploaded prefix if all videos in the 
+/// range 1 to i (inclusive) have been uploaded to the server. The 
+/// longest uploaded prefix is the maximum value of i that satisfies 
+/// this definition.
+///
+/// Implement the LUPrefix class:
+/// LUPrefix(int n) Initializes the object for a stream of n videos.
+/// void upload(int video) Uploads video to the server.
+/// int longest() Returns the length of the longest uploaded prefix 
+/// defined above.
+///
+/// Example 1:
+/// Input
+/// ["LUPrefix", "upload", "longest", "upload", "longest", "upload", 
+///  "longest"]
+/// [[4], [3], [], [1], [], [2], []]
+/// Output
+/// [null, null, 0, null, 1, null, 3]
+/// Explanation
+/// LUPrefix server = new LUPrefix(4);   
+/// // Initialize a stream of 4 videos.
+/// server.upload(3);                    // Upload video 3.
+/// server.longest();                    
+/// // Since video 1 has not been uploaded yet, there is no prefix.
+/// // So, we return 0.
+/// server.upload(1);                    
+/// // Upload video 1.
+/// server.longest();                    
+/// // The prefix [1] is the longest uploaded prefix, so we return 1.
+/// server.upload(2);                    
+/// // Upload video 2.
+/// server.longest();                    
+/// // The prefix [1,2,3] is the longest uploaded prefix, so we return 3.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// 2. 1 <= video <= n
+/// 3. All values of video are distinct.
+/// 4. At most 2 * 105 calls in total will be made to upload and longest.
+/// 5. At least one call will be made to longest.
+/// </summary>
+class LUPrefix
+{
+private:
+    set<int> m_missing;
+public:
+    LUPrefix(int n) 
+    {
+        for (int i = 1; i <= n + 1; i++)
+        {
+            m_missing.insert(i);
+        }
+    }
+
+    void upload(int video) 
+    {
+        m_missing.erase(video);
+    }
+
+    int longest() 
+    {
+        return *m_missing.begin() - 1;
+    }
+};
 #endif // LeetcodeDesign_H

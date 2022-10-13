@@ -1535,6 +1535,116 @@ public:
     /// </summary>
     long long countExcellentPairs(vector<int>& nums, int k);
 
+    /// <summary>
+    /// Leet Code 2425. Bitwise XOR of All Pairings
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given two 0-indexed arrays, nums1 and nums2, consisting of 
+    /// non-negative integers. There exists another array, nums3, which 
+    /// contains the bitwise XOR of all pairings of integers between nums1 
+    /// and nums2 (every integer in nums1 is paired with every integer in 
+    /// nums2 exactly once).
+    ///
+    /// Return the bitwise XOR of all integers in nums3.
+    /// Example 1:
+    /// Input: nums1 = [2,1,3], nums2 = [10,2,5,0]
+    /// Output: 13
+    /// Explanation:
+    /// A possible nums3 array is [8,0,7,2,11,3,4,1,9,1,6,3].
+    /// The bitwise XOR of all these numbers is 13, so we return 13.
+    ///
+    /// Example 2:
+    /// Input: nums1 = [1,2], nums2 = [3,4]
+    /// Output: 0
+    /// Explanation:
+    /// All possible pairs of bitwise XORs are nums1[0] ^ nums2[0], 
+    /// nums1[0] ^ nums2[1], nums1[1] ^ nums2[0],
+    /// and nums1[1] ^ nums2[1].
+    /// Thus, one possible nums3 array is [2,5,1,6].
+    /// 2 ^ 5 ^ 1 ^ 6 = 0, so we return 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums1.length, nums2.length <= 10^5
+    /// 2. 0 <= nums1[i], nums2[j] <= 10^9
+    /// </summary>
+    int xorAllNums(vector<int>& nums1, vector<int>& nums2);
+
+    /// <summary>
+    /// Leet Code 2429. Minimize XOR
+    ///                                                  
+    /// Medium
+    ///
+    /// Given two positive integers num1 and num2, find the integer x such 
+    /// that:
+    ///
+    /// x has the same number of set bits as num2, and
+    /// The value x XOR num1 is minimal.
+    /// Note that XOR is the bitwise XOR operation.
+    ///
+    /// Return the integer x. The test cases are generated such that x 
+    /// is uniquely determined.
+    ///
+    /// The number of set bits of an integer is the number of 1's in its 
+    /// binary representation.
+    /// 
+    /// Example 1:
+    /// Input: num1 = 3, num2 = 5
+    /// Output: 3
+    /// Explanation:
+    /// The binary representations of num1 and num2 are 0011 and 0101, 
+    /// respectively.
+    /// The integer 3 has the same number of set bits as num2, and the value 3 
+    /// XOR 3 = 0 is minimal.
+    ///
+    /// Example 2:
+    /// Input: num1 = 1, num2 = 12
+    /// Output: 3
+    /// Explanation:
+    /// The binary representations of num1 and num2 are 0001 and 1100, 
+    /// respectively.
+    /// The integer 3 has the same number of set bits as num2, and the value 3 
+    /// XOR 1 = 2 is minimal.
+    /// 
+    /// Constraints:
+    ///
+    /// 1. 1 <= num1, num2 <= 10^9
+    /// </summary>
+    int minimizeXor(int num1, int num2);
+
+    /// <summary>
+    /// Leet Code 2433. Find The Original Array of Prefix Xor
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given an integer array pref of size n. Find and return the 
+    /// array arr of size n that satisfies:
+    ///
+    /// pref[i] = arr[0] ^ arr[1] ^ ... ^ arr[i].
+    /// Note that ^ denotes the bitwise-xor operation.
+    ///
+    /// It can be proven that the answer is unique.
+    /// 
+    /// Example 1:
+    /// Input: pref = [5,2,0,3,1]
+    /// Output: [5,7,2,3,2]
+    /// Explanation: From the array [5,7,2,3,2] we have the following:
+    /// - pref[0] = 5.
+    /// - pref[1] = 5 ^ 7 = 2.
+    /// - pref[2] = 5 ^ 7 ^ 2 = 0.
+    /// - pref[3] = 5 ^ 7 ^ 2 ^ 3 = 3.
+    /// - pref[4] = 5 ^ 7 ^ 2 ^ 3 ^ 2 = 1.
+    ///
+    /// Example 2:
+    /// Input: pref = [13]
+    /// Output: [13]
+    /// Explanation: We have pref[0] = arr[0] = 13.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= pref.length <= 10^5
+    /// 2. 0 <= pref[i] <= 10^6
+    /// </summary>
+    vector<int> findArray(vector<int>& pref);
 #pragma endregion
 };
 #endif  // LeetCodeBit_H
