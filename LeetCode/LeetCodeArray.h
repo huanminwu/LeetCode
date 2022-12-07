@@ -14994,6 +14994,157 @@ public:
     /// 7. leaveTimei are sorted in a strictly increasing order.
     /// </summary>
     int hardestWorker(int n, vector<vector<int>>& logs);
+
+    /// <summary>
+    /// Leet Code 2445. Number of Nodes With Value One   
+    ///                                                  
+    /// Hard
+    ///
+    /// You are given two positive integer arrays nums and target, of the 
+    /// same length.
+    ///
+    /// In one operation, you can choose any two distinct indices i and j 
+    /// where 0 <= i, j < nums.length and:
+    ///
+    /// set nums[i] = nums[i] + 2 and
+    /// set nums[j] = nums[j] - 2.
+    /// Two arrays are considered to be similar if the frequency of each 
+    /// element is the same.
+    ///
+    /// Return the minimum number of operations required to make nums 
+    /// similar to target. The test cases are generated such that nums 
+    /// can always be similar to target.
+    ///
+    /// Example 1:
+    ///
+    /// Input: nums = [8,12,6], target = [2,14,10]
+    /// Output: 2
+    /// Explanation: It is possible to make nums similar to target in two 
+    /// operations:
+    /// - Choose i = 0 and j = 2, nums = [10,12,4].
+    /// - Choose i = 1 and j = 2, nums = [10,14,2].
+    /// It can be shown that 2 is the minimum number of operations needed.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,5], target = [4,1,3]
+    /// Output: 1
+    /// Explanation: We can make nums similar to target in one operation:
+    /// - Choose i = 1 and j = 2, nums = [1,4,3].
+    ///
+    /// Example 3:
+    /// Input: nums = [1,1,1,1,1], target = [1,1,1,1,1]
+    /// Output: 0
+    /// Explanation: The array nums is already similiar to target.
+    /// 
+    /// Constraints:
+    /// 1. n == nums.length == target.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 1 <= nums[i], target[i] <= 10^6
+    /// 4. It is possible to make nums similar to target.
+    /// </summary>
+    long long makeSimilar(vector<int>& nums, vector<int>& target);
+
+    /// <summary>
+    /// Leet Code 2460. Apply Operations to an Array 
+    ///                                                  
+    /// Easy
+    ///
+    /// You are given a 0-indexed array nums of size n consisting of non-
+    /// negative integers.
+    ///
+    /// You need to apply n - 1 operations to this array where, in the ith 
+    /// operation (0-indexed), you will apply the following on the ith 
+    /// element of nums:
+    ///
+    /// If nums[i] == nums[i + 1], then multiply nums[i] by 2 and set 
+    /// nums[i + 1] to 0. Otherwise, you skip this operation.
+    /// After performing all the operations, shift all the 0's to the end 
+    /// of the array.
+    ///
+    /// For example, the array [1,0,2,0,0,1] after shifting all its 0's to 
+    /// the end, is [1,2,1,0,0,0].
+    /// Return the resulting array.
+    ///
+    /// Note that the operations are applied sequentially, not all at once.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2,2,1,1,0]
+    /// Output: [1,4,2,0,0,0]
+    /// Explanation: We do the following operations:
+    /// - i = 0: nums[0] and nums[1] are not equal, so we skip this operation.
+    /// - i = 1: nums[1] and nums[2] are equal, we multiply nums[1] by 2 and 
+    /// change nums[2] to 0. The array becomes [1,4,0,1,1,0].
+    /// - i = 2: nums[2] and nums[3] are not equal, so we skip this operation.
+    /// - i = 3: nums[3] and nums[4] are equal, we multiply nums[3] by 2 and 
+    /// change nums[4] to 0. The array becomes [1,4,0,2,0,0].
+    /// - i = 4: nums[4] and nums[5] are equal, we multiply nums[4] by 2 and 
+    /// change nums[5] to 0. The array becomes [1,4,0,2,0,0].
+    /// After that, we shift the 0's to the end, which gives the array 
+    /// [1,4,2,0,0,0].
+    ///
+    /// Example 2:
+    /// Input: nums = [0,1]
+    /// Output: [1,0]
+    /// Explanation: No operation can be applied, we just shift the 0 to 
+    /// the end.
+    ///
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 2000
+    /// 2. 0 <= nums[i] <= 1000
+    /// </summary>
+    vector<int> applyOperations(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2459. Sort Array by Moving Items to Empty Space
+    /// 
+    /// Hard
+    ///	
+    /// You are given an integer array nums of size n containing each element 
+    /// from 0 to n - 1 (inclusive). Each of the elements from 1 to n - 1 
+    /// represents an item, and the element 0 represents an empty space.
+    /// 
+    /// In one operation, you can move any item to the empty space. nums is 
+    /// considered to be sorted if the numbers of all the items are in 
+    /// ascending order and the empty space is either at the beginning or 
+    /// at the end of the array.
+    /// 
+    /// For example, if n = 4, nums is sorted if:
+    /// 
+    /// nums = [0,1,2,3] or
+    /// nums = [1,2,3,0]
+    /// ...and considered to be unsorted otherwise.
+    ///
+    /// Return the minimum number of operations needed to sort nums.
+    ///
+    /// Example 1:
+    /// Input: nums = [4,2,0,3,1]
+    /// Output: 3
+    /// Explanation:
+    /// - Move item 2 to the empty space. Now, nums = [4,0,2,3,1].
+    /// - Move item 1 to the empty space. Now, nums = [4,1,2,3,0].
+    /// - Move item 4 to the empty space. Now, nums = [0,1,2,3,4].
+    /// It can be proven that 3 is the minimum number of operations needed.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,3,4,0]
+    /// Output: 0
+    /// Explanation: nums is already sorted so return 0.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,0,2,4,3]
+    /// Output: 2
+    /// Explanation:
+    /// - Move item 2 to the empty space. Now, nums = [1,2,0,4,3].
+    /// - Move item 3 to the empty space. Now, nums = [1,2,3,4,0].
+    /// It can be proven that 2 is the minimum number of operations needed.
+    /// 
+    /// Constraints:
+    /// 1. n == nums.length
+    /// 2. 2 <= n <= 105
+    /// 3. 0 <= nums[i] < n
+    /// 4. All the values of nums are unique.
+    /// </summary>
+    int sortArray(vector<int>& nums);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

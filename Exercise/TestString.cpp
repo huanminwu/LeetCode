@@ -5747,8 +5747,44 @@ void TestLeetCode2430(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode2451(void)
+{
+    Logger::WriteMessage("Test Leet Code 2451");
+    LeetCodeString leetCode;
+    vector<string> words = { "adc", "wzy", "abc" };
+    string result = leetCode.oddString(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + result);
+
+    words = { "aaa","bob","ccc","ddd" };
+    result = leetCode.oddString(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode2452(void)
+{
+    Logger::WriteMessage("Test Leet Code 2452");
+    LeetCodeString leetCode;
+    vector<string> queries = { "word", "note", "ants", "wood" };
+    vector<string> dictionary = { "wood", "joke", "moat" };
+    vector<string> result = leetCode.twoEditWords(queries, dictionary);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(dictionary);
+    Logger::WriteMessage(result);
+
+    queries = { "yes" };
+    dictionary = { "not" };
+    result = leetCode.twoEditWords(queries, dictionary);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(dictionary);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2452();
+    TestLeetCode2451();
     TestLeetCode2430();
     TestLeetCode2423();
     TestLeetCode2414();

@@ -167,7 +167,7 @@ int LeetCodeArray::removeArrayElement(vector<int>& nums, int val)
     {
         if (nums[first] == val)
         {
-            swap(nums[first], nums[last]);
+            std::swap(nums[first], nums[last]);
             last--;
         }
         else
@@ -204,7 +204,7 @@ void LeetCodeArray::moveZeroes(vector<int>& nums)
         }
         if (nums[first] == 0)
         {
-            swap(nums[first], nums[last]);
+            std::swap(nums[first], nums[last]);
             last++;
         }
         if (nums[first] != 0) first++;
@@ -239,7 +239,7 @@ string LeetCodeArray::reverseVowels(string s)
         }
         else
         {
-            swap(s[first], s[last]);
+            std::swap(s[first], s[last]);
             first++; last--;
         }
     }
@@ -944,7 +944,7 @@ string LeetCodeArray::reverseOnlyLetters(string S)
     {
         if (isalpha(result[first]) && isalpha(result[last]))
         {
-            swap(result[first], result[last]);
+            std::swap(result[first], result[last]);
             first++;
             last--;
         }
@@ -1561,7 +1561,7 @@ int LeetCodeArray::firstMissingPositive(vector<int>& nums)
         }
         else
         {
-            swap(nums[index], nums[nums[index] - 1]);
+            std::swap(nums[index], nums[nums[index] - 1]);
         }
     }
     for (size_t i = 0; i < nums.size(); i++)
@@ -1831,9 +1831,9 @@ void LeetCodeArray::rotate(vector<vector<int>>& matrix)
     {
         for (int i = 0; i < (end_col - begin_col); i++)
         {
-            swap(matrix[begin_row][begin_col + i], matrix[begin_row + i][end_col]);
-            swap(matrix[begin_row][begin_col + i], matrix[end_row][end_col - i]);
-            swap(matrix[begin_row][begin_col + i], matrix[end_row - i][begin_col]);
+            std::swap(matrix[begin_row][begin_col + i], matrix[begin_row + i][end_col]);
+            std::swap(matrix[begin_row][begin_col + i], matrix[end_row][end_col - i]);
+            std::swap(matrix[begin_row][begin_col + i], matrix[end_row - i][begin_col]);
         }
         begin_row++;
         end_row--;
@@ -1927,18 +1927,18 @@ void LeetCodeArray::rotateArray(vector<int>& nums, int k)
 {
     if ((nums.size() == 0) || (k == 0)) return;
     size_t a = nums.size(), b = k;
-    if (a < b) swap(a, b);
+    if (a < b) std::swap(a, b);
     while (b != 0)
     {
         a = a % b;
-        swap(a, b);
+        std::swap(a, b);
     }
     for (size_t i = 0; i < a; i++)
     {
         size_t index = i, next = (index + k) % nums.size();
         while (next != index)
         {
-            swap(nums[index], nums[next]);
+            std::swap(nums[index], nums[next]);
             next = (next + k) % nums.size();
         }
     }
@@ -2051,7 +2051,7 @@ vector<int> LeetCodeArray::findDuplicates(vector<int>& nums)
         }
         else
         {
-            swap(nums[index], nums[nums[index] - 1]);
+            std::swap(nums[index], nums[nums[index] - 1]);
         }
     }
 
@@ -3808,7 +3808,7 @@ void LeetCodeArray::dropCandy(vector<vector<int>>& board)
         {
             if (board[i][j] != 0)
             {
-                if (i < bottom[j]) swap(board[i][j], board[bottom[j]][j]);
+                if (i < bottom[j]) std::swap(board[i][j], board[bottom[j]][j]);
                 bottom[j]--;
             }
         }
@@ -4359,7 +4359,7 @@ vector<vector<int>> LeetCodeArray::flipAndInvertImage(vector<vector<int>>& A)
         {
             result[i][first] = 1 - result[i][first];
             result[i][last] = 1 - result[i][last];
-            swap(result[i][first], result[i][last]);
+            std::swap(result[i][first], result[i][last]);
             first++;
             last--;
         }
@@ -5363,7 +5363,7 @@ vector<int> LeetCodeArray::sortArrayByParityII(vector<int>& A)
         else
         {
             while ((odd < A.size()) && (result[odd] % 2 == 1)) odd += 2;
-            swap(result[even], result[odd]);
+            std::swap(result[even], result[odd]);
         }
     }
     return result;
@@ -19198,7 +19198,7 @@ int LeetCodeArray::minimumDeletions(vector<int>& nums)
             max_index = i;
         }
     }
-    if (min_index > max_index) swap(min_index, max_index);
+    if (min_index > max_index) std::swap(min_index, max_index);
     int result = max_index + 1;
     result = min(result, (int)nums.size() - min_index);
     result = min(result, (int)nums.size() - max_index + min_index + 1);
@@ -21605,7 +21605,7 @@ int LeetCodeArray::triangularSum(vector<int>& nums)
         {
             dp[next].push_back((dp[curr][i - 1] + dp[curr][i]) % 10);
         }
-        swap(curr, next);
+        std::swap(curr, next);
     }
     return dp[curr][0];
 }
@@ -23996,6 +23996,232 @@ int LeetCodeArray::hardestWorker(int n, vector<vector<int>>& logs)
         }
     }
     return result;
+}
+
+/// <summary>
+/// Leet Code 2445. Number of Nodes With Value One   
+///                                                  
+/// Hard
+///
+/// You are given two positive integer arrays nums and target, of the 
+/// same length.
+///
+/// In one operation, you can choose any two distinct indices i and j 
+/// where 0 <= i, j < nums.length and:
+///
+/// set nums[i] = nums[i] + 2 and
+/// set nums[j] = nums[j] - 2.
+/// Two arrays are considered to be similar if the frequency of each 
+/// element is the same.
+///
+/// Return the minimum number of operations required to make nums 
+/// similar to target. The test cases are generated such that nums 
+/// can always be similar to target.
+///
+/// Example 1:
+///
+/// Input: nums = [8,12,6], target = [2,14,10]
+/// Output: 2
+/// Explanation: It is possible to make nums similar to target in two 
+/// operations:
+/// - Choose i = 0 and j = 2, nums = [10,12,4].
+/// - Choose i = 1 and j = 2, nums = [10,14,2].
+/// It can be shown that 2 is the minimum number of operations needed.
+///
+/// Example 2:
+/// Input: nums = [1,2,5], target = [4,1,3]
+/// Output: 1
+/// Explanation: We can make nums similar to target in one operation:
+/// - Choose i = 1 and j = 2, nums = [1,4,3].
+///
+/// Example 3:
+/// Input: nums = [1,1,1,1,1], target = [1,1,1,1,1]
+/// Output: 0
+/// Explanation: The array nums is already similiar to target.
+/// 
+/// Constraints:
+/// 1. n == nums.length == target.length
+/// 2. 1 <= n <= 10^5
+/// 3. 1 <= nums[i], target[i] <= 10^6
+/// 4. It is possible to make nums similar to target.
+/// </summary>
+long long LeetCodeArray::makeSimilar(vector<int>& nums, vector<int>& target)
+{
+    vector<int> odd_nums, even_nums;
+    vector<int> odd_target, even_target;
+
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] % 2 == 0) even_nums.push_back(nums[i]);
+        if (nums[i] % 2 == 1) odd_nums.push_back(nums[i]);
+
+        if (target[i] % 2 == 0) even_target.push_back(target[i]);
+        if (target[i] % 2 == 1) odd_target.push_back(target[i]);
+    }
+    sort(even_nums.begin(), even_nums.end());
+    sort(odd_nums.begin(), odd_nums.end());
+    sort(even_target.begin(), even_target.end());
+    sort(odd_target.begin(), odd_target.end());
+    long long result = 0;
+    for (size_t i = 0; i < even_nums.size(); i++)
+    {
+        result += (long long)abs((even_target[i] - even_nums[i]) / 2);
+    }
+    for (size_t i = 0; i < odd_nums.size(); i++)
+    {
+        result += (long long)abs((odd_target[i] - odd_nums[i]) / 2);
+    }
+    return result / 2;
+}
+
+/// <summary>
+/// Leet Code 2460. Apply Operations to an Array 
+///                                                  
+/// Easy
+///
+/// You are given a 0-indexed array nums of size n consisting of non-
+/// negative integers.
+///
+/// You need to apply n - 1 operations to this array where, in the ith 
+/// operation (0-indexed), you will apply the following on the ith 
+/// element of nums:
+///
+/// If nums[i] == nums[i + 1], then multiply nums[i] by 2 and set 
+/// nums[i + 1] to 0. Otherwise, you skip this operation.
+/// After performing all the operations, shift all the 0's to the end 
+/// of the array.
+///
+/// For example, the array [1,0,2,0,0,1] after shifting all its 0's to 
+/// the end, is [1,2,1,0,0,0].
+/// Return the resulting array.
+///
+/// Note that the operations are applied sequentially, not all at once.
+///
+/// Example 1:
+/// Input: nums = [1,2,2,1,1,0]
+/// Output: [1,4,2,0,0,0]
+/// Explanation: We do the following operations:
+/// - i = 0: nums[0] and nums[1] are not equal, so we skip this operation.
+/// - i = 1: nums[1] and nums[2] are equal, we multiply nums[1] by 2 and 
+/// change nums[2] to 0. The array becomes [1,4,0,1,1,0].
+/// - i = 2: nums[2] and nums[3] are not equal, so we skip this operation.
+/// - i = 3: nums[3] and nums[4] are equal, we multiply nums[3] by 2 and 
+/// change nums[4] to 0. The array becomes [1,4,0,2,0,0].
+/// - i = 4: nums[4] and nums[5] are equal, we multiply nums[4] by 2 and 
+/// change nums[5] to 0. The array becomes [1,4,0,2,0,0].
+/// After that, we shift the 0's to the end, which gives the array 
+/// [1,4,2,0,0,0].
+///
+/// Example 2:
+/// Input: nums = [0,1]
+/// Output: [1,0]
+/// Explanation: No operation can be applied, we just shift the 0 to 
+/// the end.
+///
+/// Constraints:
+/// 1. 2 <= nums.length <= 2000
+/// 2. 0 <= nums[i] <= 1000
+/// </summary>
+vector<int> LeetCodeArray::applyOperations(vector<int>& nums)
+{
+    vector<int> arr = nums;
+    for (size_t i = 0; i < arr.size()-1; i++)
+    {
+        if (arr[i] == arr[i + 1])
+        {
+            arr[i] = arr[i] * 2;
+            arr[i + 1] = 0;
+        }
+    }
+    vector<int> result;
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        if (arr[i] != 0) result.push_back(arr[i]);
+    }
+    result.resize(nums.size());
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2459. Sort Array by Moving Items to Empty Space
+/// 
+/// Hard
+///	
+/// You are given an integer array nums of size n containing each element 
+/// from 0 to n - 1 (inclusive). Each of the elements from 1 to n - 1 
+/// represents an item, and the element 0 represents an empty space.
+/// 
+/// In one operation, you can move any item to the empty space. nums is 
+/// considered to be sorted if the numbers of all the items are in 
+/// ascending order and the empty space is either at the beginning or 
+/// at the end of the array.
+/// 
+/// For example, if n = 4, nums is sorted if:
+/// 
+/// nums = [0,1,2,3] or
+/// nums = [1,2,3,0]
+/// ...and considered to be unsorted otherwise.
+///
+/// Return the minimum number of operations needed to sort nums.
+///
+/// Example 1:
+/// Input: nums = [4,2,0,3,1]
+/// Output: 3
+/// Explanation:
+/// - Move item 2 to the empty space. Now, nums = [4,0,2,3,1].
+/// - Move item 1 to the empty space. Now, nums = [4,1,2,3,0].
+/// - Move item 4 to the empty space. Now, nums = [0,1,2,3,4].
+/// It can be proven that 3 is the minimum number of operations needed.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4,0]
+/// Output: 0
+/// Explanation: nums is already sorted so return 0.
+///
+/// Example 3:
+/// Input: nums = [1,0,2,4,3]
+/// Output: 2
+/// Explanation:
+/// - Move item 2 to the empty space. Now, nums = [1,2,0,4,3].
+/// - Move item 3 to the empty space. Now, nums = [1,2,3,4,0].
+/// It can be proven that 2 is the minimum number of operations needed.
+/// 
+/// Constraints:
+/// 1. n == nums.length
+/// 2. 2 <= n <= 105
+/// 3. 0 <= nums[i] < n
+/// 4. All the values of nums are unique.
+/// </summary>
+int LeetCodeArray::sortArray(vector<int>& nums)
+{
+    int n = nums.size();
+
+    vector<int> npos(n);
+    for (int i = 0; i < n; ++i) npos[nums[i]] = i;
+
+    // note that 'npos' is passed by value INTENTIONALLY,
+    // because it calls copy constructor;
+    // if we pass it by referece then the same 'npos'
+    // will be used for both s=0 and s=1
+    auto permute = [n](vector<int> npos, int s) -> int
+    {
+        int cnt = 0, nxt = 1, ni;
+        while (nxt < n)
+        {
+            if (npos[0] == s * (n - 1))
+            {
+                while (npos[nxt] == nxt - s)
+                    if (++nxt == n) return cnt;
+                ni = nxt;
+            }
+            else ni = npos[0] + s;
+            std::swap(npos[0], npos[ni]);
+            ++cnt;
+        }
+        return cnt;
+    };
+
+    return min(permute(npos, 0), permute(npos, 1));
 }
 #pragma endregion
 

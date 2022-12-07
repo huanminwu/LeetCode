@@ -1511,8 +1511,69 @@ void TestLeetCode2347(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode2441(void)
+{
+    Logger::WriteMessage("Test Leet Code 2441");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { -1, 2, -3, 3 };
+    int result = leetCode.findMaxK(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -1,10,6,7,-7,1 };
+    result = leetCode.findMaxK(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -10,8,6,7,-2,-3 };
+    result = leetCode.findMaxK(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2442(void)
+{
+    Logger::WriteMessage("Test Leet Code 2442");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1,13,10,12,31 };
+    int result = leetCode.countDistinctIntegers(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,2,2 };
+    result = leetCode.countDistinctIntegers(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2456(void)
+{
+    Logger::WriteMessage("Test Leet Code 2456");
+    LeetCodeHashtable leetCode;
+    vector<string> creators =  { "alice", "bob", "alice", "chris" }; 
+    vector<string> ids = { "one", "two", "three", "four" };
+    vector<int> views = { 5, 10, 5, 4 };
+    vector<vector<string>> result = leetCode.mostPopularCreator(creators, ids, views);
+    Logger::WriteMessage(creators);
+    Logger::WriteMessage(ids);
+    Logger::WriteMessage(views);
+    Logger::WriteMessage(result);
+
+    creators = { "alice","alice","alice" };
+    ids = { "a","b","c" };
+    views = { 1,2,2 };
+    result = leetCode.mostPopularCreator(creators, ids, views);
+    Logger::WriteMessage(creators);
+    Logger::WriteMessage(ids);
+    Logger::WriteMessage(views);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode2456();
+    TestLeetCode2442();
+    TestLeetCode2441();
     TestLeetCode2347();
     TestLeetCode2342();
     TestLeetCode2295();

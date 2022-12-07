@@ -2991,7 +2991,7 @@ int LeetCodeStack::maximumRobots(vector<int>& chargeTimes, vector<int>& runningC
 string LeetCodeStack::robotWithString(string s)
 {
     map<char, int> pq;
-    for (int i = 0; i < s.size(); i++)
+    for (size_t i = 0; i < s.size(); i++)
     {
         pq[s[i]]++;
     }
@@ -3009,5 +3009,69 @@ string LeetCodeStack::robotWithString(string s)
         }
     }
     return result;
+}
+
+/// <summary>
+/// Leet Code 2439. Minimize Maximum of Array 
+///                                                  
+/// Medium
+///
+/// You are given a 0-indexed array nums comprising of n non-negative 
+/// integers.
+///
+/// In one operation, you must:
+/// 
+/// Choose an integer i such that 1 <= i < n and nums[i] > 0.
+/// Decrease nums[i] by 1.
+/// Increase nums[i - 1] by 1.
+/// Return the minimum possible value of the maximum integer of nums 
+/// after performing any number of operations.
+/// 
+/// Example 1:
+/// Input: nums = [3,7,1,6]
+/// Output: 5
+/// Explanation:
+/// One set of optimal operations is as follows:
+/// 1. Choose i = 1, and nums becomes [4,6,1,6].
+/// 2. Choose i = 3, and nums becomes [4,6,2,5].
+/// 3. Choose i = 1, and nums becomes [5,5,2,5].
+/// The maximum integer of nums is 5. It can be shown that the maximum 
+/// number cannot be less than 5.
+/// Therefore, we return 5.
+///
+/// Example 2:
+/// Input: nums = [10,1]
+/// Output: 10
+/// Explanation:
+/// It is optimal to leave nums as is, and since 10 is the maximum value, 
+/// we return 10.
+///
+/// Constraints:
+/// 1. n == nums.length
+/// 2. 2 <= n <= 10^5
+/// 3. 0 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeStack::minimizeArrayValue(vector<int>& nums)
+{
+    long long result = 0;
+    vector<pair<long long, long long>> stack;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        pair<long long, long long> last = make_pair(nums[i], 1);
+        while ((!stack.empty()) &&
+               ((stack.back().first + stack.back().second - 1) / stack.back().second < 
+                (last.first + last.second - 1) / last.second))
+        {
+            last.first += stack.back().first;
+            last.second += stack.back().second;
+            stack.pop_back();
+        }
+        stack.push_back(last);
+    }
+    for (size_t i = 0; i < stack.size(); i++)
+    {
+        result = max(result, (stack[i].first + stack[i].second - 1) / stack[i].second);
+    }
+    return (int)result;
 }
 #pragma endregion

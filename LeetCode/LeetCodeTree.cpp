@@ -11092,4 +11092,189 @@ TreeNode* LeetCodeTree::reverseOddLevels(TreeNode* root)
     }
     return root;
 }
+
+/// <summary>
+/// Leet Code 2440. Create Components With Same Value     
+/// </summary>
+int LeetCodeTree::componentValue(vector<int>& nums, vector<vector<int>>& neighbors, vector<int>& sum, int curr, int target)
+{
+    sum[curr] = nums[curr];
+    for (size_t i = 0; i < neighbors[curr].size(); i++)
+    {
+        int next = neighbors[curr][i];
+        if (sum[next] != 0) continue;
+        int subtree = componentValue(nums, neighbors, sum, next, target);
+        if (subtree == -1)
+        {
+            return -1;
+        }
+        else
+        {
+            sum[curr] += subtree;
+            if (sum[curr] > target) return -1;
+        }
+    }
+    if (sum[curr] == target) return 0;
+    else return sum[curr];
+}
+
+/// <summary>
+/// Leet Code 2440. Create Components With Same Value     
+///                                                  
+/// Hard
+///
+/// There is an undirected tree with n nodes labeled from 0 to n - 1.
+///
+/// You are given a 0-indexed integer array nums of length n where nums[i] 
+/// represents the value of the ith node. You are also given a 2D integer 
+/// array edges of length n - 1 where edges[i] = [ai, bi] indicates that 
+/// there is an edge between nodes ai and bi in the tree.
+///
+/// You are allowed to delete some edges, splitting the tree into multiple 
+/// connected components. Let the value of a component be the sum of all 
+/// nums[i] for which node i is in the component.
+///
+/// Return the maximum number of edges you can delete, such that every 
+/// connected component in the tree has the same value.
+///  
+/// Example 1:
+/// Input: nums = [6,2,2,2,6], edges = [[0,1],[1,2],[1,3],[3,4]] 
+/// Output: 2 
+/// Explanation: The above figure shows how we can delete the edges [0,1] 
+/// and [3,4]. The created components are nodes [0], [1,2,3] and [4]. 
+/// The sum of the values in each component equals 6. It can be proven 
+/// that no better deletion exists, so the answer is 2.
+///
+/// Example 2:
+///
+/// Input: nums = [2], edges = []
+/// Output: 0
+/// Explanation: There are no edges to be deleted.
+///  
+/// Constraints:
+/// 1. 1 <= n <= 2 * 10^4
+/// 2. nums.length == n
+/// 3. 1 <= nums[i] <= 50
+/// 4. edges.length == n - 1
+/// 5. edges[i].length == 2
+/// 6. 0 <= edges[i][0], edges[i][1] <= n - 1
+/// 7. edges represents a valid tree.
+/// </summary>
+int LeetCodeTree::componentValue(vector<int>& nums, vector<vector<int>>& edges)
+{
+    int n = nums.size();
+    vector<vector<int>> neighbors(n);
+    vector<int> degree(n);
+    int total = 0;
+    for (size_t i = 0; i < nums.size(); i++) total += nums[i];
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        degree[edges[i][0]]++;
+        degree[edges[i][1]]++;
+        neighbors[edges[i][0]].push_back(edges[i][1]);
+        neighbors[edges[i][1]].push_back(edges[i][0]);
+    }
+    int root = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (degree[i] == 1)
+        {
+            root = i;
+            break;
+        }
+    }
+    for (int i = n; i > 0; i--)
+    {
+        if (total % i != 0) continue;
+        int target = total / i;
+        vector<int> sum(n);
+        if (componentValue(nums, neighbors, sum, root, target) == 0)
+        {
+            return i - 1;
+        }
+    }
+    return 0;
+}
+
+/// <summary>
+/// Leet Code 2445. Number of Nodes With Value One   
+/// </summary>
+int LeetCodeTree::numberOfNodes(int n, int curr, vector<int>& flags)
+{
+    int result = 0;
+    if (flags[curr] == 1) result++;
+    int left = curr * 2;
+    int right = curr * 2 + 1;
+    if (left <= n)
+    {
+        flags[left] = (flags[left] + flags[curr]) % 2;
+        result += numberOfNodes(n, left, flags);
+    }
+    if (right <= n)
+    {
+        flags[right] = (flags[right] + flags[curr]) % 2;
+        result += numberOfNodes(n, right, flags);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2445. Number of Nodes With Value One   
+///                                                  
+/// Medium
+///
+/// There is an undirected connected tree with n nodes labeled from 1 to n 
+/// and n - 1 edges. You are given the integer n. The parent node of a 
+/// node with a label v is the node with the label floor (v / 2). The root 
+/// of the tree is the node with the label 1.
+///
+/// For example, if n = 7, then the node with the label 3 has the node 
+/// with the label floor(3 / 2) = 1 as its parent, and the node with the 
+/// label 7 has the node with the label floor(7 / 2) = 3 as its parent.
+/// You are also given an integer array queries. Initially, every node 
+/// has a value 0 on it. For each query queries[i], you should flip all 
+/// values in the subtree of the node with the label queries[i].
+///
+/// Return the total number of nodes with the value 1 after processing all 
+/// the queries.
+///
+/// Note that:
+/// Flipping the value of a node means that the node with the value 0 
+/// becomes 1 and vice versa.
+/// floor(x) is equivalent to rounding x down to the nearest integer.
+///
+/// Example 1:
+/// Input: n = 5 , queries = [1,2,5]
+/// Output: 3
+/// Explanation: The diagram above shows the tree structure and its status 
+/// after performing the queries. The blue node represents the value 0, 
+/// and the red node represents the value 1.
+/// After processing the queries, there are three red nodes (nodes with 
+/// value 1): 1, 3, and 5.
+///
+/// Example 2:
+/// Input: n = 3, queries = [2,3,3]
+/// Output: 1
+/// Explanation: The diagram above shows the tree structure and its 
+/// status after performing the queries. The blue node represents the 
+/// value 0, and the red node represents the value 1.
+/// After processing the queries, there are one red node (node with 
+/// value 1): 2.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// 2. 1 <= queries.length <= 10^5
+/// 3. 1 <= queries[i] <= n
+/// </summary>
+int LeetCodeTree::numberOfNodes(int n, vector<int>& queries)
+{
+    vector<int> flags(n + 1);
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        flags[queries[i]] = (flags[queries[i]] + 1) % 2;
+    }
+    return numberOfNodes(n, 1, flags);
+}
+
+
 #pragma endregion

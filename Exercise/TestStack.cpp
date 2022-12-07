@@ -836,8 +836,24 @@ void TestLeetCode2434(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode2439(void)
+{
+    Logger::WriteMessage("Test Leet Code 2434");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 3, 7, 1, 6 };
+    int result = leetCode.minimizeArrayValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,1 };
+    result = leetCode.minimizeArrayValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode2439();
     TestLeetCode2434();
     TestLeetCode2398();
     TestLeetCode2345();

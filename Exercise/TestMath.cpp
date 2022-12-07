@@ -5041,8 +5041,186 @@ void TestLeetCode2436(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2437(void)
+{
+    Logger::WriteMessage("Test Leet Code 2437");
+    LeetCodeMath leetCode;
+    string time = "?5:00";
+    int result = leetCode.countTime(time);
+    Logger::WriteMessage("time = " + time + "; result = " + to_string(result));
+
+    time = "0?:0?";
+    result = leetCode.countTime(time);
+    Logger::WriteMessage("time = " + time + "; result = " + to_string(result));
+
+    time = "??:??";
+    result = leetCode.countTime(time);
+    Logger::WriteMessage("time = " + time + "; result = " + to_string(result));
+}
+
+void TestLeetCode2438(void)
+{
+    Logger::WriteMessage("Test Leet Code 2438");
+    LeetCodeMath leetCode;
+    int n = 15;
+    vector<vector<int>> queries = { {0, 1},{2, 2},{0, 3} };
+    vector<int> result = leetCode.productQueries(n, queries);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 2;
+    queries = { {0, 0} };
+    result = leetCode.productQueries(n, queries);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2443(void)
+{
+    Logger::WriteMessage("Test Leet Code 2443");
+    LeetCodeMath leetCode;
+    int num = 443;
+    bool result = leetCode.sumOfNumberAndReverse(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + (string)(result? "true" : "false"));
+
+    num = 63;
+    result = leetCode.sumOfNumberAndReverse(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2446(void)
+{
+    Logger::WriteMessage("Test Leet Code 2446");
+    LeetCodeMath leetCode;
+    vector<string> event1 = { "01:15", "02:00" };
+    vector<string> event2 = { "02:00", "03:00" };
+    bool result = leetCode.haveConflict(event1, event2);
+    Logger::WriteMessage(event1);
+    Logger::WriteMessage(event2);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    event1 = { "01:00","02:00" };
+    event2 = { "01:20","03:00" };
+    result = leetCode.haveConflict(event1, event2);
+    Logger::WriteMessage(event1);
+    Logger::WriteMessage(event2);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    event1 = { "10:00","11:00" };
+    event2 = { "14:00","15:00" };
+    result = leetCode.haveConflict(event1, event2);
+    Logger::WriteMessage(event1);
+    Logger::WriteMessage(event2);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2447(void)
+{
+    Logger::WriteMessage("Test Leet Code 2447");
+    LeetCodeMath leetCode;
+    vector<int>nums = { 9, 3, 1, 2, 6, 3 };
+    int k = 3;
+    int result = leetCode.subarrayGCD(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 4 };
+    k = 7;
+    result = leetCode.subarrayGCD(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2455(void)
+{
+    Logger::WriteMessage("Test Leet Code 2455");
+    LeetCodeMath leetCode;
+    vector<int>nums = { 1, 3, 6, 10, 12, 15 };
+    int result = leetCode.averageValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,4,7,10 };
+    result = leetCode.averageValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2453(void)
+{
+    Logger::WriteMessage("Test Leet Code 2453");
+    LeetCodeMath leetCode;
+    vector<int>nums = { 3,7,8,1,1,5 };
+    int space = 2;
+    int result = leetCode.destroyTargets(nums, space);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("space = " + to_string(space) + "; result = " + to_string(result));
+
+    nums = { 1,3,5,2,4,6 };
+    space = 2;
+    result = leetCode.destroyTargets(nums, space);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("space = " + to_string(space) + "; result = " + to_string(result));
+
+    nums = { 6,2,5 };
+    space = 2;
+    result = leetCode.destroyTargets(nums, space);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("space = " + to_string(space) + "; result = " + to_string(result));
+
+    nums = { 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000 };
+    space = 1000000000;
+    result = leetCode.destroyTargets(nums, space);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("space = " + to_string(space) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2457(void)
+{
+    Logger::WriteMessage("Test Leet Code 2457");
+    LeetCodeMath leetCode;
+    long long n = 16; 
+    int target = 6;
+    long long result = leetCode.makeIntegerBeautiful(n, target);
+    Logger::WriteMessage("n = " + to_string(n) + "; target = " + to_string(target)+  "; result = " + to_string(result));
+
+    n = 467;
+    target = 6;
+    result = leetCode.makeIntegerBeautiful(n, target);
+    Logger::WriteMessage("n = " + to_string(n) + "; target = " + to_string(target) + "; result = " + to_string(result));
+
+    n = 1;
+    target = 1;
+    result = leetCode.makeIntegerBeautiful(n, target);
+    Logger::WriteMessage("n = " + to_string(n) + "; target = " + to_string(target) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2450(void)
+{
+    Logger::WriteMessage("Test Leet Code 2450");
+    LeetCodeMath leetCode;
+    string s = "1001";
+    int k = 3;
+    int result = leetCode.countDistinctStrings(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "10110";
+    k = 5;
+    result = leetCode.countDistinctStrings(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2450();
+    TestLeetCode2457();
+    TestLeetCode2453();
+    TestLeetCode2455();
+    TestLeetCode2447();
+    TestLeetCode2446();
+    TestLeetCode2443();
+    TestLeetCode2438();
+    TestLeetCode2437();
     TestLeetCode2436();
     TestLeetCode2427();
     TestLeetCode2413();

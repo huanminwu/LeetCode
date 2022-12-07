@@ -553,5 +553,192 @@ public:
     /// 2. 1 <= nums[i] <= 10^6
     /// </summary>
     int minimumOperations(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2444. Count Subarrays With Fixed Bounds      
+    ///                                                  
+    /// Hard
+    ///
+    /// You are given an integer array nums and two integers minK and maxK.
+    ///
+    /// A fixed-bound subarray of nums is a subarray that satisfies the 
+    /// following conditions:
+    ///
+    /// The minimum value in the subarray is equal to minK.
+    /// The maximum value in the subarray is equal to maxK.
+    /// Return the number of fixed-bound subarrays.
+    ///
+    /// A subarray is a contiguous part of an array.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,3,5,2,7,5], minK = 1, maxK = 5
+    /// Output: 2
+    /// Explanation: The fixed-bound subarrays are [1,3,5] and [1,3,5,2].
+    ///
+    /// Example 2:
+    /// 
+    /// Input: nums = [1,1,1,1], minK = 1, maxK = 1
+    /// Output: 10
+    /// Explanation: Every subarray of nums is a fixed-bound 
+    /// subarray. There are 10 possible subarrays.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i], minK, maxK <= 10^6
+    /// </summary>
+    long long countSubarrays(vector<int>& nums, int minK, int maxK);
+
+    /// <summary>
+    /// Leet Code 2461. Maximum Sum of Distinct Subarrays With Length K 
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given an integer array nums and an integer k. Find the 
+    /// maximum subarray sum of all the subarrays of nums that meet the 
+    /// following conditions:
+    ///
+    /// The length of the subarray is k, and
+    /// All the elements of the subarray are distinct.
+    /// Return the maximum subarray sum of all the subarrays that meet 
+    /// the conditions. If no subarray meets the conditions, return 0.
+    ///
+    /// A subarray is a contiguous non-empty sequence of elements within 
+    /// an array.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,5,4,2,9,9,9], k = 3
+    /// Output: 15
+    /// Explanation: The subarrays of nums with length 3 are:
+    /// - [1,5,4] which meets the requirements and has a sum of 10.
+    /// - [5,4,2] which meets the requirements and has a sum of 11.
+    /// - [4,2,9] which meets the requirements and has a sum of 15.
+    /// - [2,9,9] which does not meet the requirements because the element 9 
+    ///   is repeated.
+    /// - [9,9,9] which does not meet the requirements because the element 9 
+    ///   is repeated.
+    /// We return 15 because it is the maximum subarray sum of all the 
+    /// subarrays that meet the conditions
+    ///
+    /// Example 2:
+    /// Input: nums = [4,4,4], k = 3
+    /// Output: 0
+    /// Explanation: The subarrays of nums with length 3 are:
+    /// - [4,4,4] which does not meet the requirements because the element 4 
+    ///   is repeated.
+    /// We return 0 because no subarrays meet the conditions.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= k <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^5
+    /// </summary>
+    long long maximumSubarraySum(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 2462. Total Cost to Hire K Workers
+    ///                                                  
+    /// Medium
+    /// 
+    /// You are given a 0-indexed integer array costs where costs[i] is the 
+    /// cost of hiring the ith worker.
+    ///
+    /// You are also given two integers k and candidates. We want to hire 
+    /// exactly k workers according to the following rules:
+    ///
+    /// You will run k sessions and hire exactly one worker in each session.
+    /// In each hiring session, choose the worker with the lowest cost from 
+    /// either the first candidates workers or the last candidates workers. 
+    /// Break the tie by the smallest index.
+    /// For example, if costs = [3,2,7,7,1,2] and candidates = 2, then in 
+    /// the first hiring session, we will choose the 4th worker because they 
+    /// have the lowest cost [3,2,7,7,1,2].
+    /// In the second hiring session, we will choose 1st worker because they 
+    /// have the same lowest cost as 4th worker but they have the smallest 
+    /// index [3,2,7,7,2]. Please note that the indexing may be changed in 
+    /// the process.
+    /// If there are fewer than candidates workers remaining, choose the 
+    /// worker with the lowest cost among them. Break the tie by the smallest 
+    /// index.
+    /// A worker can only be chosen once.
+    /// Return the total cost to hire exactly k workers.
+    /// 
+    /// Example 1:
+    /// Input: costs = [17,12,10,2,7,2,11,20,8], k = 3, candidates = 4
+    /// Output: 11
+    /// Explanation: We hire 3 workers in total. The total cost is 
+    /// initially 0.
+    /// - In the first hiring round we choose the worker from 
+    ///   [17,12,10,2,7,2,11,20,8]. The lowest cost is 2, and we break the tie 
+    ///   by the smallest index, which is 3. The total cost = 0 + 2 = 2.
+    /// - In the second hiring round we choose the worker from 
+    ///   [17,12,10,7,2,11,20,8]. The lowest cost is 2 (index 4). The total 
+    ///   cost = 2 + 2 = 4.
+    /// - In the third hiring round we choose the worker from 
+    ///   [17,12,10,7,11,20,8]. The lowest cost is 7 (index 3). The total 
+    ///   cost = 4 + 7 = 11. Notice that the worker with index 3 was common 
+    ///  in the first and last four workers.
+    /// The total hiring cost is 11.
+    ///
+    /// Example 2:
+    /// Input: costs = [1,2,4,1], k = 3, candidates = 3
+    /// Output: 4
+    /// Explanation: We hire 3 workers in total. The total cost is initially 0.
+    /// - In the first hiring round we choose the worker from [1,2,4,1]. The 
+    ///   lowest cost is 1, and we break the tie by the smallest index, which 
+    ///   is 0. The total cost = 0 + 1 = 1. Notice that workers with index 1 
+    ///   and 2 are common in the first and last 3 workers.
+    /// - In the second hiring round we choose the worker from [2,4,1]. The 
+    ///   lowest cost is 1 (index 2). The total cost = 1 + 1 = 2.
+    /// - In the third hiring round there are less than three candidates. We 
+    ///   choose the worker from the remaining workers [2,4]. The lowest cost 
+    ///   is 2 (index 0). The total cost = 2 + 2 = 4.
+    /// The total hiring cost is 4.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= costs.length <= 10^5
+    /// 2. 1 <= costs[i] <= 10^5
+    /// 3. 1 <= k, candidates <= costs.length
+    /// </summary>
+    long long totalCost(vector<int>& costs, int k, int candidates);
+
+    /// <summary>
+    /// Leet Code 2448. Minimum Cost to Make Array Equal
+    /// 
+    /// Hard
+    ///	
+    /// You are given two 0-indexed arrays nums and cost consisting each of 
+    /// n positive integers.
+    ///
+    /// You can do the following operation any number of times:
+    ///
+    /// Increase or decrease any element of the array nums by 1.
+    /// The cost of doing one operation on the ith element is cost[i].
+    ///
+    /// Return the minimum total cost such that all the elements of the array 
+    /// nums become equal.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,3,5,2], cost = [2,3,1,14]
+    /// Output: 8
+    /// Explanation: We can make all the elements equal to 2 in the following 
+    /// way:
+    /// - Increase the 0th element one time. The cost is 2.
+    /// - Decrease the 1st element one time. The cost is 3.
+    /// - Decrease the 2nd element three times. The cost is 1 + 1 + 1 = 3.
+    /// The total cost is 2 + 3 + 3 = 8.
+    /// It can be shown that we cannot make the array equal with a smaller 
+    /// cost.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,2,2,2,2], cost = [4,2,8,1,3]
+    /// Output: 0
+    /// Explanation: All the elements are already equal, so no operations are 
+    /// needed.
+    /// 
+    /// Constraints:
+    /// 1. n == nums.length == cost.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 1 <= nums[i], cost[i] <= 10^6
+    /// </summary>
+    long long minCost(vector<int>& nums, vector<int>& cost);
 };
 #endif  // LeetCodeTwoPointer

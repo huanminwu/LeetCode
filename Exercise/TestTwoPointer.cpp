@@ -220,8 +220,100 @@ void TestLeetCode2422(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2444(void)
+{
+    Logger::WriteMessage("Test Leet Code 2444");
+    LeetCodeTwoPointer leetCode;
+    vector<int>nums = { 1,3,5,2,7,5 };
+    int minK = 1;
+    int maxK = 5;
+    long long result = leetCode.countSubarrays(nums, minK, maxK);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("minK = " + to_string(minK) + "; maxK = " + to_string(maxK) + "; result = " + to_string(result));
+
+    nums = { 1,1,1,1 };
+    minK = 1;
+    maxK = 1;
+    result = leetCode.countSubarrays(nums, minK, maxK);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("minK = " + to_string(minK) + "; maxK = " + to_string(maxK) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2461(void)
+{
+    Logger::WriteMessage("Test Leet Code 2461");
+    LeetCodeTwoPointer leetCode;
+    vector<int>nums = { 1,5,4,2,9,9,9 };
+    int k = 3;
+    long long result = leetCode.maximumSubarraySum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 4,4,4 };
+    k = 3;
+    result = leetCode.maximumSubarraySum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2462(void)
+{
+    Logger::WriteMessage("Test Leet Code 2462");
+    LeetCodeTwoPointer leetCode;
+    vector<int> costs = { 17, 12, 10, 2, 7, 2, 11, 20, 8 };
+    int k = 3;
+    int candidates = 4;
+    long long result = leetCode.totalCost(costs, k, candidates);
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage("k = " + to_string(k) + "; candidates = " + to_string(candidates) + "; result = " + to_string(result));
+
+    costs = { 1,2,4,1 };
+    k = 3;
+    candidates = 3;
+    result = leetCode.totalCost(costs, k, candidates);
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage("k = " + to_string(k) + "; candidates = " + to_string(candidates) + "; result = " + to_string(result));
+
+    costs = { 31, 25, 72, 79, 74, 65, 84, 91, 18, 59, 27, 9, 81, 33, 17, 58 };
+    k = 11;
+    candidates = 2;
+    result = leetCode.totalCost(costs, k, candidates);
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage("k = " + to_string(k) + "; candidates = " + to_string(candidates) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2448(void)
+{
+    Logger::WriteMessage("Test Leet Code 2448");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 1, 3, 5, 2 };
+    vector<int> cost = { 2, 3, 1, 14 };
+    long long result = leetCode.minCost(nums, cost);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,2,2,2,2 };
+    cost = { 4,2,8,1,3 };
+    result = leetCode.minCost(nums, cost);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+    
+    nums = { 387, 341, 26 };
+    cost = { 12, 3, 2 };
+    result = leetCode.minCost(nums, cost);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2448();
+    TestLeetCode2462();
+    TestLeetCode2461();
+    TestLeetCode2444();
     TestLeetCode2422();
     TestLeetCode2379();
     TestLeetCode2330();

@@ -2977,8 +2977,25 @@ void TestLeetCode2418(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2454(void)
+{
+    Logger::WriteMessage("Test Leet Code 2418");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 2, 4, 0, 9, 6 };
+    vector<int> result = leetCode.secondGreaterElement(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 3,3 };
+    result = leetCode.secondGreaterElement(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2454();
     TestLeetCode2418();
     TestLeetCode2387();
     TestLeetCode2386();

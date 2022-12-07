@@ -4433,4 +4433,179 @@ string LeetCodeHashtable::bestHand(vector<int>& ranks, vector<char>& suits)
     if (result.empty()) result = "High Card";
     return result;
 }
+
+/// <summary>
+/// Leet Code 2441. Largest Positive Integer That Exists With Its Negative           
+///                                                  
+/// Easy
+///
+/// Given an integer array nums that does not contain any zeros, find the 
+/// largest positive integer k such that -k also exists in the array.
+///
+/// Return the positive integer k. If there is no such integer, return -1.
+///
+/// Example 1:
+/// Input: nums = [-1,2,-3,3]
+/// Output: 3
+/// Explanation: 3 is the only valid k we can find in the array.
+///
+/// Example 2:
+/// Input: nums = [-1,10,6,7,-7,1]
+/// Output: 7
+/// Explanation: Both 1 and 7 have their corresponding negative values 
+/// in the array. 7 has a larger value.
+///
+/// Example 3:
+/// Input: nums = [-10,8,6,7,-2,-3]
+/// Output: -1
+/// Explanation: There is no a single valid k, we return -1.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. -1000 <= nums[i] <= 1000
+/// 3. nums[i] != 0
+/// </summary>
+int LeetCodeHashtable::findMaxK(vector<int>& nums)
+{
+    unordered_set<int> data_set = unordered_set<int>(nums.begin(), nums.end());
+    int result = -1;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] > result && nums[i] > 0 && data_set.count(-nums[i]) > 0)
+        {
+            result = nums[i];
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2442. Count Number of Distinct Integers After Reverse 
+///                 Operations           
+///                                                  
+/// Medium
+///
+/// You are given an array nums consisting of positive integers.
+///
+/// You have to take each integer in the array, reverse its digits, 
+/// and add it to the end of the array. You should apply this operation 
+/// to the original integers in nums.
+///
+/// Return the number of distinct integers in the final array.
+/// 
+/// Example 1:
+/// Input: nums = [1,13,10,12,31]
+/// Output: 6
+/// Explanation: After including the reverse of each number, the 
+/// resulting array is [1,13,10,12,31,1,31,1,21,13].
+/// The reversed integers that were added to the end of the array are 
+/// underlined. Note that for the integer 10, after reversing it, it 
+/// becomes 01 which is just 1.
+/// The number of distinct integers in this array is 6 (The 
+/// numbers 1, 10, 12, 13, 21, and 31).
+///
+/// Example 2:
+/// Input: nums = [2,2,2]
+/// Output: 1
+/// Explanation: After including the reverse of each number, the 
+/// resulting array is [2,2,2,2,2,2].
+/// The number of distinct integers in this array is 1 (The number 2).
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^6
+/// </summary>
+int LeetCodeHashtable::countDistinctIntegers(vector<int>& nums)
+{
+    set<int> data_set;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        data_set.insert(nums[i]);
+        string str = to_string(nums[i]);
+        reverse(str.begin(), str.end());
+        data_set.insert(atoi(str.c_str()));
+    }
+    return data_set.size();
+}
+
+/// <summary>
+/// Leet Code 2456. Most Popular Video Creator 
+///                                                  
+/// Medium
+///
+/// You are given two string arrays creators and ids, and an integer 
+/// array views, all of length n. The ith video on a platform was created 
+/// by creator[i], has an id of ids[i], and has views[i] views.
+///
+/// The popularity of a creator is the sum of the number of views on all 
+/// of the creator's videos. Find the creator with the highest popularity 
+/// and the id of their most viewed video.
+///
+/// If multiple creators have the highest popularity, find all of them.
+/// If multiple videos have the highest view count for a creator, find 
+/// the lexicographically smallest id.
+/// Return a 2D array of strings answer where answer[i] = [creatori, idi] 
+/// means that creatori has the highest popularity and idi is the id of 
+/// their most popular video. The answer can be returned in any order.
+/// Example 1:
+/// Input: creators = ["alice","bob","alice","chris"], ids = 
+/// ["one","two","three","four"], views = [5,10,5,4]
+/// Output: [["alice","one"],["bob","two"]]
+/// Explanation:
+/// The popularity of alice is 5 + 5 = 10.
+/// The popularity of bob is 10.
+/// The popularity of chris is 4.
+/// alice and bob are the most popular creators.
+/// For bob, the video with the highest view count is "two".
+/// For alice, the videos with the highest view count are "one" and 
+/// "three". Since "one" is lexicographically smaller than "three", 
+/// it is included in the answer.
+///
+/// Example 2:
+///
+/// Input: creators = ["alice","alice","alice"], ids = ["a","b","c"], 
+///        views = [1,2,2]
+/// Output: [["alice","b"]]
+/// Explanation:
+/// The videos with id "b" and "c" have the highest view count.
+/// Since "b" is lexicographically smaller than "c", it is included in 
+/// the answer.
+/// 
+/// Constraints:
+/// 1. n == creators.length == ids.length == views.length
+/// 2. 1 <= n <= 10^5
+/// 3. 1 <= creators[i].length, ids[i].length <= 5
+/// 4. creators[i] and ids[i] consist only of lowercase English letters.
+/// 5. 0 <= views[i] <= 10^5
+/// </summary>
+vector<vector<string>> LeetCodeHashtable::mostPopularCreator(vector<string>& creators, vector<string>& ids, vector<int>& views)
+{
+    unordered_map<string, long long> score;
+    unordered_map<string, pair<string, int>> popular;
+    int n = creators.size();
+    long long max_score = 0;
+    for (int i = 0; i < n; i++)
+    {
+        string creator = creators[i];
+        score[creator] += views[i];
+        max_score = max(max_score, score[creator]);
+        if (popular.count(creator) == 0 || 
+            views[i] > popular[creator].second ||
+            (views[i] == popular[creator].second && ids[i] < popular[creator].first))
+        {
+            popular[creator].first = ids[i];
+            popular[creator].second = views[i];
+        }
+    }
+    vector<vector<string>> result;
+    for (auto itr : score)
+    {
+        if (itr.second == max_score)
+        {
+            string creator = itr.first;
+            result.push_back({ creator, popular[creator].first });
+        }
+    }
+    return result;
+}
 #pragma endregion

@@ -11742,6 +11742,96 @@ public:
     /// </summary>
     int deleteString(string s);
 
+    /// <summary>
+    /// Leet Code 2451. Odd String Difference 
+    ///                                                  
+    /// Easy
+    ///
+    /// You are given an array of equal-length strings words. Assume that 
+    /// the length of each string is n.
+    /// Each string words[i] can be converted into a difference integer array 
+    /// difference[i] of length n - 1 where difference[i][j] = words[i][j+1] 
+    /// - words[i][j] where 0 <= j <= n - 2. Note that the difference 
+    /// between two letters is the difference between their positions in 
+    /// the alphabet i.e. the position of 'a' is 0, 'b' is 1, and 'z' is 25.
+    ///
+    /// For example, for the string "acb", the difference integer array is 
+    /// [2 - 0, 1 - 2] = [2, -1].
+    /// All the strings in words have the same difference integer array, 
+    /// except one. You should find that string.
+    ///
+    /// Return the string in words that has different difference integer array.
+    /// 
+    /// Example 1:
+    /// Input: words = ["adc","wzy","abc"]
+    /// Output: "abc"
+    /// Explanation: 
+    /// - The difference integer array of "adc" is [3 - 0, 2 - 3] = [3, -1].
+    /// - The difference integer array of "wzy" is [25 - 22, 24 - 25]= [3, -1].
+    /// - The difference integer array of "abc" is [1 - 0, 2 - 1] = [1, 1]. 
+    /// The odd array out is [1, 1], so we return the corresponding string, "abc".
+    ///
+    /// Example 2:
+    /// Input: words = ["aaa","bob","ccc","ddd"]
+    /// Output: "bob"
+    /// Explanation: All the integer arrays are [0, 0] except for "bob", 
+    /// which corresponds to [13, -13].
+    ///
+    /// Constraints:
+    /// 1. 3 <= words.length <= 100
+    /// 2. n == words[i].length
+    /// 3. 2 <= n <= 20
+    /// 4. words[i] consists of lowercase English letters.
+    /// </summary>
+    string oddString(vector<string>& words);
+
+    /// <summary>
+    /// Leet Code 2452. Words Within Two Edits of Dictionary 
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given two string arrays, queries and dictionary. All words 
+    /// in each array comprise of lowercase English letters and have the 
+    /// same length.
+    ///
+    /// In one edit you can take a word from queries, and change any letter 
+    /// in it to any other letter. Find all words from queries that, after 
+    /// a maximum of two edits, equal some word from dictionary.
+    ///
+    /// Return a list of all words from queries, that match with some word 
+    /// from dictionary after a maximum of two edits. Return the words in 
+    /// the same order they appear in queries.
+    ///
+    /// Example 1:
+    /// Input: queries = ["word","note","ants","wood"], dictionary = 
+    /// ["wood","joke","moat"]
+    /// Output: ["word","note","wood"]
+    /// Explanation:
+    /// - Changing the 'r' in "word" to 'o' allows it to equal the dictionary 
+    ///   word "wood".
+    /// - Changing the 'n' to 'j' and the 't' to 'k' in "note" changes it 
+    ///   to "joke".
+    /// - It would take more than 2 edits for "ants" to equal a dictionary 
+    ///   word.
+    /// - "wood" can remain unchanged (0 edits) and match the corresponding 
+    ///   dictionary word.
+    /// Thus, we return ["word","note","wood"].
+    ///
+    /// Example 2:
+    /// Input: queries = ["yes"], dictionary = ["not"]
+    /// Output: []
+    /// Explanation:
+    /// Applying any two edits to "yes" cannot make it equal to "not". Thus, 
+    /// we return an empty array.
+    ///
+    /// Constraints:
+    /// 1. 1 <= queries.length, dictionary.length <= 100
+    /// 2. n == queries[i].length == dictionary[j].length
+    /// 3. 1 <= n <= 100
+    /// 4. All queries[i] and dictionary[j] are composed of lowercase English 
+    ///    letters.
+    /// </summary>
+    vector<string> twoEditWords(vector<string>& queries, vector<string>& dictionary);
 #pragma endregion
 };
 

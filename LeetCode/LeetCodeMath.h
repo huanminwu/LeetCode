@@ -9427,5 +9427,383 @@ public:
     /// 2. 2 <= nums[i] <= 10^9
     /// </summary>
     int minimumSplits(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2437. Number of Valid Clock Times           
+    ///                                                  
+    /// Easy
+    ///
+    /// You are given a string of length 5 called time, representing the 
+    /// current time on a digital clock in the format "hh:mm". The earliest 
+    /// possible time is "00:00" and the latest possible time is "23:59".
+    ///
+    /// In the string time, the digits represented by the ? symbol are 
+    /// unknown, and must be replaced with a digit from 0 to 9.
+    ///
+    /// Return an integer answer, the number of valid clock times that can 
+    /// be created by replacing every ? with a digit from 0 to 9.
+    ///
+    /// Example 1:
+    /// Input: time = "?5:00"
+    /// Output: 2
+    /// Explanation: We can replace the ? with either a 0 or 1, producing 
+    /// "05:00" or "15:00". Note that we cannot replace it with a 2, since 
+    /// the time "25:00" is invalid. In total, we have two choices.
+    ///
+    /// Example 2:
+    /// Input: time = "0?:0?"
+    /// Output: 100
+    /// Explanation: Each ? can be replaced by any digit from 0 to 9, so 
+    /// we have 100 total choices.
+    ///
+    /// Example 3:
+    /// Input: time = "??:??"
+    /// Output: 1440
+    /// Explanation: There are 24 possible choices for the hours, and 60 
+    /// possible choices for the minutes. In total, we have 24 * 60 = 1440 
+    /// choices.
+    ///
+    ///
+    /// Constraints:
+    /// 1. time is a valid string of length 5 in the format "hh:mm".
+    /// 2. "00" <= hh <= "23"
+    /// 3. "00" <= mm <= "59"
+    /// 4. Some of the digits might be replaced with '?' and need to be 
+    ///    replaced with digits from 0 to 9.
+    /// </summary>
+    int countTime(string time);
+
+
+    /// <summary>
+    /// Leet Code 2438. Range Product Queries of Powers      
+    ///                                                  
+    /// Medium
+    ///
+    /// Given a positive integer n, there exists a 0-indexed array called 
+    /// powers, composed of the minimum number of powers of 2 that sum to n. 
+    /// The array is sorted in non-decreasing order, and there is only one 
+    /// way to form the array.
+    ///
+    /// You are also given a 0-indexed 2D integer array queries, where 
+    /// queries[i] = [lefti, righti]. Each queries[i] represents a query 
+    /// where you have to find the product of all powers[j] with 
+    /// lefti <= j <= righti.
+    ///
+    /// Return an array answers, equal in length to queries, where answers[i] 
+    /// is the answer to the ith query. Since the answer to the ith query may 
+    /// be too large, each answers[i] should be returned modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: n = 15, queries = [[0,1],[2,2],[0,3]]
+    /// Output: [2,4,64]
+    /// Explanation:
+    /// For n = 15, powers = [1,2,4,8]. It can be shown that powers cannot be 
+    /// a smaller size.
+    /// Answer to 1st query: powers[0] * powers[1] = 1 * 2 = 2.
+    /// Answer to 2nd query: powers[2] = 4.
+    /// Answer to 3rd query: powers[0] * powers[1] * powers[2] * powers[3] 
+    /// = 1 * 2 * 4 * 8 = 64.
+    /// Each answer modulo 109 + 7 yields the same answer, so [2,4,64] is 
+    /// returned.
+    ///
+    /// Example 2:
+    /// Input: n = 2, queries = [[0,0]]
+    /// Output: [2]
+    /// Explanation:
+    /// For n = 2, powers = [2].
+    /// The answer to the only query is powers[0] = 2. The answer 
+    /// modulo 10^9 + 7 is the same, so [2] is returned.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^9
+    /// 2. 1 <= queries.length <= 10^5
+    /// 3. 0 <= starti <= endi < powers.length
+    /// </summary>
+    vector<int> productQueries(int n, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet Code 2443. Sum of Number and Its Reverse      
+    ///                                                  
+    /// Medium
+    ///
+    /// Given a non-negative integer num, return true if num can be expressed 
+    /// as the sum of any non-negative integer and its reverse, or false 
+    /// otherwise.
+    /// 
+    /// Example 1:
+    /// Input: num = 443
+    /// Output: true
+    /// Explanation: 172 + 271 = 443 so we return true.
+    ///
+    /// Example 2:
+    /// Input: num = 63
+    /// Output: false
+    /// Explanation: 63 cannot be expressed as the sum of a non-negative 
+    /// integer and its reverse so we return false.
+    ///
+    /// Example 3:
+    ///
+    /// Input: num = 181
+    /// Output: true
+    /// Explanation: 140 + 041 = 181 so we return true. Note that when a 
+    /// number is reversed, there may be leading zeros.
+    /// 
+    /// Constraints:
+    /// 1. 0 <= num <= 10^5
+    /// </summary>
+    bool sumOfNumberAndReverse(int num);
+
+    /// <summary>
+    /// Leet Code 2446. Determine if Two Events Have Conflict     
+    ///                                                  
+    /// Easy
+    ///
+    /// You are given two arrays of strings that represent two inclusive 
+    /// events that happened on the same day, event1 and event2, where:
+    ///
+    /// event1 = [startTime1, endTime1] and
+    /// event2 = [startTime2, endTime2].
+    /// Event times are valid 24 hours format in the form of HH:MM.
+    ///
+    /// A conflict happens when two events have some non-empty intersection 
+    /// (i.e., some moment is common to both events).
+    ///
+    /// Return true if there is a conflict between two events. Otherwise, 
+    /// return false.
+    ///  
+    /// Example 1:
+    /// Input: event1 = ["01:15","02:00"], event2 = ["02:00","03:00"]
+    /// Output: true
+    /// Explanation: The two events intersect at time 2:00.
+    ///
+    /// Example 2:
+    /// Input: event1 = ["01:00","02:00"], event2 = ["01:20","03:00"]
+    /// Output: true
+    /// Explanation: The two events intersect starting from 01:20 to 02:00.
+    ///
+    /// Example 3:
+    /// Input: event1 = ["10:00","11:00"], event2 = ["14:00","15:00"]
+    /// Output: false
+    /// Explanation: The two events do not intersect.
+    /// 
+    /// Constraints:
+    /// 1. evnet1.length == event2.length == 2.
+    /// 2. event1[i].length == event2[i].length == 5
+    /// 3. startTime1 <= endTime1
+    /// 3. startTime2 <= endTime2
+    /// 4. All the event times follow the HH:MM format.
+    /// </summary>
+    bool haveConflict(vector<string>& event1, vector<string>& event2);
+
+    /// <summary>
+    /// Leet Code 2447. Number of Subarrays With GCD Equal to K    
+    ///                                                  
+    /// Medium
+    ///
+    /// Given an integer array nums and an integer k, return the number of 
+    /// subarrays of nums where the greatest common divisor of the subarray's 
+    /// elements is k.
+    ///
+    /// A subarray is a contiguous non-empty sequence of elements within an 
+    /// array.
+    ///
+    /// The greatest common divisor of an array is the largest integer that 
+    /// evenly divides all the array elements.
+    ///
+    /// Example 1:
+    /// Input: nums = [9,3,1,2,6,3], k = 3
+    /// Output: 4
+    /// Explanation: The subarrays of nums where 3 is the greatest common 
+    /// divisor of all the subarray's elements are:
+    /// - [9,3,1,2,6,3]
+    /// - [9,3,1,2,6,3]
+    /// - [9,3,1,2,6,3]
+    /// - [9,3,1,2,6,3]
+    ///
+    /// Example 2:
+    /// Input: nums = [4], k = 7
+    /// Output: 0
+    /// Explanation: There are no subarrays of nums where 7 is the greatest 
+    /// common divisor of all the subarray's elements.
+    ///  
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1000
+    /// 2. 1 <= nums[i], k <= 10^9
+    /// </summary>
+    int subarrayGCD(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 2455. Average Value of Even Numbers That Are Divisible by 
+    ///                 Three 
+    ///                                                  
+    /// Easy
+    ///
+    /// Given an integer array nums of positive integers, return the average 
+    /// value of all even integers that are divisible by 3.
+    ///
+    /// Note that the average of n elements is the sum of the n elements 
+    /// divided by n and rounded down to the nearest integer.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,3,6,10,12,15]
+    /// Output: 9
+    /// Explanation: 6 and 12 are even numbers that are divisible by 3. 
+    /// (6 + 12) / 2 = 9.
+    /// Example 2:
+    ///
+    /// Input: nums = [1,2,4,7,10]
+    /// Output: 0
+    /// Explanation: There is no single number that satisfies the 
+    /// requirement, so return 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1000
+    /// 2. 1 <= nums[i] <= 1000
+    /// </summary>
+    int averageValue(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2453. Destroy Sequential Targets 
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given a 0-indexed array nums consisting of positive integers, 
+    /// representing targets on a number line. You are also given an integer 
+    /// space.
+    ///
+    /// You have a machine which can destroy targets. Seeding the machine with 
+    /// some nums[i] allows it to destroy all targets with values that can be 
+    /// represented as nums[i] + c * space, where c is any non-negative 
+    /// integer. You want to destroy the maximum number of targets in nums.
+    ///
+    /// Return the minimum value of nums[i] you can seed the machine with to 
+    /// destroy the maximum number of targets.
+    ///
+    /// Example 1:
+    /// Input: nums = [3,7,8,1,1,5], space = 2 
+    /// Output: 1
+    /// Explanation: If we seed the machine with nums[3], then we destroy all 
+    /// targets equal to 1,3,5,7,9,... 
+    /// In this case, we would destroy 5 total targets (all except for 
+    /// nums[2]). 
+    /// It is impossible to destroy more than 5 targets, so we return nums[3].
+    ///
+    /// Example 2:
+    /// Input: nums = [1,3,5,2,4,6], space = 2
+    /// Output: 1
+    /// Explanation: Seeding the machine with nums[0], or nums[3] destroys 3 
+    /// targets. 
+    /// It is not possible to destroy more than 3 targets.
+    /// Since nums[0] is the minimal integer that can destroy 3 targets, we 
+    /// return 1.
+    ///
+    /// Example 3:
+    /// Input: nums = [6,2,5], space = 100
+    /// Output: 2
+    /// Explanation: Whatever initial seed we select, we can only destroy 1 
+    /// target. The minimal seed is nums[1].
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. 1 <= space <= 10^9
+    /// </summary>
+    int destroyTargets(vector<int>& nums, int space);
+
+    /// <summary>
+    /// Leet Code 2457. Minimum Addition to Make Integer Beautiful 
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given two positive integers n and target.
+    ///
+    /// An integer is considered beautiful if the sum of its digits is 
+    /// less than or equal to target.
+    ///
+    /// Return the minimum non-negative integer x such that n + x is 
+    /// beautiful. The input will be generated such that it is always 
+    /// possible to make n beautiful.
+    ///
+    /// Example 1:
+    /// Input: n = 16, target = 6
+    /// Output: 4
+    /// Explanation: Initially n is 16 and its digit sum is 1 + 6 = 7. 
+    /// After adding 4, n becomes 20 and digit sum becomes 2 + 0 = 2. 
+    /// It can be shown that we can not make n beautiful with adding 
+    /// non-negative integer less than 4.
+    ///
+    /// Example 2:
+    /// Input: n = 467, target = 6
+    /// Output: 33
+    /// Explanation: Initially n is 467 and its digit sum is 4 + 6 + 7 = 17. 
+    /// After adding 33, n becomes 500 and digit sum becomes 5 + 0 + 0 = 5. 
+    /// It can be shown that we can not make n beautiful with adding 
+    /// non-negative integer less than 33.
+    ///
+    /// Example 3:
+    /// Input: n = 1, target = 1
+    /// Output: 0
+    /// Explanation: Initially n is 1 and its digit sum is 1, which is already 
+    /// smaller than or equal to target.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 10^12
+    /// 2. 1 <= target <= 150
+    /// 3. The input will be generated such that it is always possible to 
+    ///    make n beautiful.
+    /// </summary>
+    long long makeIntegerBeautiful(long long n, int target);
+
+    /// <summary>
+    /// Leet Code 2450. Number of Distinct Binary Strings After Applying 
+    ///                 Operations 
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given a binary string s and a positive integer k.
+    ///
+    /// You can apply the following operation on the string any number of 
+    /// times:
+    ///
+    /// Choose any substring of size k from s and flip all its characters, 
+    /// that is, turn all 1's into 0's, and all 0's into 1's.
+    /// Return the number of distinct strings you can obtain. Since the 
+    /// answer may be too large, return it modulo 10^9 + 7.
+    ///
+    /// Note that:
+    ///
+    /// A binary string is a string that consists only of the 
+    /// characters 0 and 1.
+    /// A substring is a contiguous part of a string.
+    /// 
+    /// Example 1:
+    /// Input: s = "1001", k = 3
+    /// Output: 4
+    /// Explanation: We can obtain the following strings:
+    /// - Applying no operation on the string gives s = "1001".
+    /// - Applying one operation on the substring starting at index 0 
+    ///   gives s = "0111".
+    /// - Applying one operation on the substring starting at index 1 
+    ///   gives s = "1110".
+    /// - Applying one operation on both the substrings starting at indices 0 
+    ///   and 1 gives s = "0000".
+    /// It can be shown that we cannot obtain any other string, so the 
+    /// answer is 4.
+    ///
+    /// Example 2:
+    /// Input: s = "10110", k = 5
+    /// Output: 2
+    /// Explanation: We can obtain the following strings:
+    /// - Applying no operation on the string gives s = "10110".
+    /// - Applying one operation on the whole string gives s = "01001".
+    /// It can be shown that we cannot obtain any other string, so the 
+    /// answer is 2.
+    ///
+    /// 
+    /// Constraints:
+    /// 1. 1 <= k <= s.length <= 10^5
+    /// 2. s[i] is either 0 or 1.
+    /// </summary>
+    int countDistinctStrings(string s, int k);
 };
 #endif

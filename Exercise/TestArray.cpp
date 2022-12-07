@@ -7924,8 +7924,67 @@ void TestLeetCode2432(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2449(void)
+{
+    Logger::WriteMessage("Test Leet Code 2449");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 8, 12, 6 };
+    vector<int> target = { 2, 14, 10 };
+    long long result = leetCode.makeSimilar(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,5 };
+    target = { 4,1,3 };
+    result = leetCode.makeSimilar(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1,1,1 };
+    target = { 1,1,1,1,1 };
+    result = leetCode.makeSimilar(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2460(void)
+{
+    Logger::WriteMessage("Test Leet Code 2460");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 2, 1, 1, 0 };
+    vector<int> result = leetCode.applyOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 0,1 };
+    result = leetCode.applyOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2459(void)
+{
+    Logger::WriteMessage("Test Leet Code 2459");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 4,2,0,3,1 };
+    int result = leetCode.sortArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4,0 };
+    result = leetCode.sortArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2459();
+    TestLeetCode2460();
+    TestLeetCode2449();
     TestLeetCode2432();
     TestLeetCode2426();
     TestLeetCode2411();

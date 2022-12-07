@@ -3534,8 +3534,46 @@ void TestLeetCode2415(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode2440(void)
+{
+    Logger::WriteMessage("Test Leet Code 2440");
+    LeetCodeTree leetCode;
+    vector<int> nums = { 6, 2, 2, 2, 6 };
+    vector<vector<int>> edges = { {0, 1},{1, 2},{1, 3},{3, 4} };
+    int result = leetCode.componentValue(nums, edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2 };
+    edges = { };
+    result = leetCode.componentValue(nums, edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2445(void)
+{
+    Logger::WriteMessage("Test Leet Code 2445");
+    LeetCodeTree leetCode;
+    int n = 5;
+    vector<int> queries = { 1, 2, 5 };
+    int result = leetCode.numberOfNodes(n, queries);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    queries = { 2, 3, 3 };
+    result = leetCode.numberOfNodes(n, queries);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode2445();
+    TestLeetCode2440();
     TestLeetCode2415();
     TestLeetCode2385();
     TestLeetCode2378();
