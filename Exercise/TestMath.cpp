@@ -5210,8 +5210,70 @@ void TestLeetCode2450(void)
     Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2469(void)
+{
+    Logger::WriteMessage("Test Leet Code 2469");
+    LeetCodeMath leetCode;
+    double celsius = 36.50;
+    vector<double> result = leetCode.convertTemperature(celsius);
+    Logger::WriteMessage("celsius = " + to_string(celsius));
+    Logger::WriteMessage(result);
+
+    celsius = 122.11;
+    result = leetCode.convertTemperature(celsius);
+    Logger::WriteMessage("celsius = " + to_string(celsius));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2481(void)
+{
+    Logger::WriteMessage("Test Leet Code 2481");
+    LeetCodeMath leetCode;
+    int n = 4;
+    int result = leetCode.numberOfCuts(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    result = leetCode.numberOfCuts(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2485(void)
+{
+    Logger::WriteMessage("Test Leet Code 2485");
+    LeetCodeMath leetCode;
+    int n = 8;
+    int result = leetCode.pivotInteger(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 1;
+    result = leetCode.pivotInteger(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    result = leetCode.pivotInteger(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2507(void)
+{
+    Logger::WriteMessage("Test Leet Code 2507");
+    LeetCodeMath leetCode;
+    int n = 15;
+    int result = leetCode.smallestValue(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    result = leetCode.smallestValue(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2507();
+    TestLeetCode2485();
+    TestLeetCode2481();
+    TestLeetCode2469();
     TestLeetCode2450();
     TestLeetCode2457();
     TestLeetCode2453();

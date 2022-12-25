@@ -4828,8 +4828,87 @@ void TestLeetCode2424(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2502(void)
+{
+    Logger::WriteMessage("Test Leet Code 2502");
+
+    vector<string> commands =
+    {
+       "Allocator","allocate","allocate","allocate","free",
+       "allocate","allocate","allocate","free","allocate",
+       "free"
+    };
+    vector<vector<int>> parameters
+    {
+        {10},{1,1},{1,2},{1,3},{2},{3,4},{1,1},{1,1},{1},{10,2},{7}
+    };
+
+    vector<string> result;
+    Allocator* allocator = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Allocator")
+        {
+            allocator = new Allocator(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "allocate")
+        {
+            int ret = allocator->allocate(parameters[i][0], parameters[i][1]);
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "free")
+        {
+            int ret = allocator->free(parameters[i][0]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete allocator;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+       "Allocator","allocate","allocate","allocate","free",
+       "free","allocate","allocate","free","allocate",
+       "free"
+    };
+    parameters = 
+    {
+        {10},{1,1},{1,2},{1,3},{2},{3},{3,4},{1,1},{1},{10,2},{7}
+    };
+
+    result.clear();
+    allocator = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Allocator")
+        {
+            allocator = new Allocator(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "allocate")
+        {
+            int ret = allocator->allocate(parameters[i][0], parameters[i][1]);
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "free")
+        {
+            int ret = allocator->free(parameters[i][0]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete allocator;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2502();
     TestLeetCode2424();
     TestLeetCode2408();
     TestLeetCode2349();

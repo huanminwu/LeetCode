@@ -5781,8 +5781,84 @@ void TestLeetCode2452(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2490(void)
+{
+    Logger::WriteMessage("Test Leet Code 2490");
+    LeetCodeString leetCode;
+    string sentence = "leetcode exercises sound delightful";
+    bool result = leetCode.isCircularSentence(sentence);
+    Logger::WriteMessage("sentence = " + sentence + "; result = " + (string)(result? "true" : "false"));
+
+    sentence = "eetcode";
+    result = leetCode.isCircularSentence(sentence);
+    Logger::WriteMessage("sentence = " + sentence + "; result = " + (string)(result ? "true" : "false"));
+
+    sentence = "Leetcode is cool";
+    result = leetCode.isCircularSentence(sentence);
+    Logger::WriteMessage("sentence = " + sentence + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2486(void)
+{
+    Logger::WriteMessage("Test Leet Code 2486");
+    LeetCodeString leetCode;
+    string s = "coaching";
+    string t = "coding";
+    int result = leetCode.appendCharacters(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+
+    s = "abcde";
+    t = "a";
+    result = leetCode.appendCharacters(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+
+    s = "z";
+    t = "abcde";
+    result = leetCode.appendCharacters(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+}
+
+void TestLeetCode2496(void)
+{
+    Logger::WriteMessage("Test Leet Code 2496");
+    LeetCodeString leetCode;
+    vector<string> strs = { "alic3", "bob", "3", "4", "00000" };
+    int result = leetCode.maximumValue(strs);
+    Logger::WriteMessage(strs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    strs = { "1","01","001","0001" };
+    result = leetCode.maximumValue(strs);
+    Logger::WriteMessage(strs);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2506(void)
+{
+    Logger::WriteMessage("Test Leet Code 2506");
+    LeetCodeString leetCode;
+    vector<string> strs = { "aba", "aabb", "abcd", "bac", "aabc" };
+    int result = leetCode.similarPairs(strs);
+    Logger::WriteMessage(strs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    strs = { "aabb","ab","ba" };
+    result = leetCode.similarPairs(strs);
+    Logger::WriteMessage(strs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    strs = { "nba","cba","dba" };
+    result = leetCode.similarPairs(strs);
+    Logger::WriteMessage(strs);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2506();
+    TestLeetCode2496();
+    TestLeetCode2486();
+    TestLeetCode2490();
     TestLeetCode2452();
     TestLeetCode2451();
     TestLeetCode2430();

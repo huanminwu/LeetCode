@@ -2979,7 +2979,7 @@ void TestLeetCode2418(void)
 
 void TestLeetCode2454(void)
 {
-    Logger::WriteMessage("Test Leet Code 2418");
+    Logger::WriteMessage("Test Leet Code 2454");
     LeetCodeSort leetCode;
     vector<int> nums = { 2, 4, 0, 9, 6 };
     vector<int> result = leetCode.secondGreaterElement(nums);
@@ -2992,9 +2992,29 @@ void TestLeetCode2454(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2491(void)
+{
+    Logger::WriteMessage("Test Leet Code 2491");
+    LeetCodeSort leetCode;
+    vector<int> skill = { 3,2,5,1,3,4 };
+    long long result = leetCode.dividePlayers(skill);
+    Logger::WriteMessage(skill);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    skill = { 3,4 };
+    result = leetCode.dividePlayers(skill);
+    Logger::WriteMessage(skill);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    skill = { 1,1,2,3 };
+    result = leetCode.dividePlayers(skill);
+    Logger::WriteMessage(skill);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2491();
     TestLeetCode2454();
     TestLeetCode2418();
     TestLeetCode2387();

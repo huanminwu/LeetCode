@@ -4710,8 +4710,235 @@ void TestLeetCode2421(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2467(void)
+{
+    Logger::WriteMessage("Test Leet Code 2467");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> edges = { {0, 1},{1, 2},{1, 3},{3, 4} };
+    int bob = 3;
+    vector<int> amount = { -2, 4, 2, -4, 6 };
+    int result = leetCode.mostProfitablePath(edges, bob, amount);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(amount);
+    Logger::WriteMessage("bob = " + to_string(bob) + "; result = " + to_string(result));
+
+    edges = { {0, 1}};
+    bob = 1;
+    amount = { -7280, 2350 };
+    result = leetCode.mostProfitablePath(edges, bob, amount);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(amount);
+    Logger::WriteMessage("bob = " + to_string(bob) + "; result = " + to_string(result));
+
+    edges = { {0, 38}, { 0,59 }, { 1,30 }, { 1,62 }, { 1,53 }, { 2,41 }, { 2,37 }, { 3,21 }, { 4,35 }, { 4,54 }, { 5,32 }, { 5,69 }, { 6,26 }, { 6,16 }, { 6,61 }, { 6,52 }, { 7,34 }, { 8,10 }, { 9,11 }, { 9,43 }, { 10,48 }, { 11,29 }, { 12,63 }, { 12,58 }, { 12,13 }, { 13,36 }, { 13,34 }, { 14,65 }, { 14,15 }, { 15,17 }, { 15,49 }, { 16,40 }, { 17,20 }, { 17,24 }, { 18,58 }, { 19,25 }, { 21,34 }, { 22,55 }, { 23,45 }, { 23,59 }, { 25,43 }, { 27,32 }, { 28,49 }, { 28,33 }, { 31,61 }, { 33,39 }, { 33,51 }, { 33,53 }, { 34,68 }, { 34,69 }, { 37,52 }, { 42,52 }, { 43,61 }, { 44,58 }, { 46,49 }, { 47,55 }, { 47,50 }, { 48,56 }, { 48,66 }, { 50,58 }, { 52,66 }, { 52,65 }, { 53,57 }, { 54,63 }, { 55,57 }, { 59,60 }, { 59,67 }, { 59,65 }, { 64,69 } };
+    bob = 15;
+    amount = { 4664, 5822, -9152, 7258, -5468, 4698, 2568, 9880, -4046, 9884, -3540, -2260, 5264, -7050, -6998, -1688, -6256, -5350, 5136, 7476, -4108, 1288, 1336, -6126, 2940, 698, -2900, -2342, -2310, 858, 572, 640, -9674, 5746, 5068, 7128, 636, 6680, -1840, 3574, 7592, -5882, -1974, -2766, -620, 1088, -8930, 7756, 9966, 380, 8884, -954, -8198, -5862, -3100, 7728, 7090, -4648, 4076, 994, 4232, 9810, -2904, -1106, -4172, -5884, -9582, 5320, -4086, 6346 };
+    result = leetCode.mostProfitablePath(edges, bob, amount);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(amount);
+    Logger::WriteMessage("bob = " + to_string(bob) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2473(void)
+{
+    Logger::WriteMessage("Test Leet Code 2473");
+    LeetCodeGraph leetCode;
+    int n = 4;
+    vector<vector<int>> roads = 
+    {
+        {1, 2, 4},{2, 3, 2},{2, 4, 5},{3, 4, 1},{1, 3, 4} 
+    };
+    vector<int> appleCost = { 56, 42, 102, 301 };
+    int k = 2;
+    vector<long long> result = leetCode.minCost(n, roads, appleCost, k);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage(appleCost);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 3;
+    roads =
+    {
+        {1,2,5},{2,3,1},{3,1,2}
+    };
+    appleCost = { 2, 3, 1 };
+    k = 3;
+    result = leetCode.minCost(n, roads, appleCost, k);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage(appleCost);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2477(void)
+{
+    Logger::WriteMessage("Test Leet Code 2477");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> roads = { {0, 1},{0, 2},{0, 3} };
+    int seats = 5;
+    long long result = leetCode.minimumFuelCost(roads, seats);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("seats = " + to_string(seats) + "; result = " + to_string(result));
+
+    roads = { {3, 1},{3, 2},{1, 0},{0, 4},{0, 5},{4, 6} };
+    seats = 2;
+    result = leetCode.minimumFuelCost(roads, seats);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("seats = " + to_string(seats) + "; result = " + to_string(result));
+
+    roads = { };
+    seats = 1;
+    result = leetCode.minimumFuelCost(roads, seats);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("seats = " + to_string(seats) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2492(void)
+{
+    Logger::WriteMessage("Test Leet Code 2492");
+    LeetCodeGraph leetCode;
+    int n = 4;
+    vector<vector<int>> roads = { {1, 2, 9},{2, 3, 6},{2, 4, 5},{1, 4, 7} };
+    int result = leetCode.minScore(n, roads);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    roads = { {1, 2, 2},{1, 3, 4},{3, 4, 7} };
+    result = leetCode.minScore(n, roads);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2497(void)
+{
+    Logger::WriteMessage("Test Leet Code 2497");
+    LeetCodeGraph leetCode;
+    vector<int> vals = { 1, 2, 3, 4, 10, -10, -20 };
+    vector<vector<int>> edges = 
+    { 
+        {0, 1},{1, 2},{1, 3},{3, 4},{3, 5},{3, 6} 
+    };
+    int k = 2;
+    int result = leetCode.maxStarSum(vals, edges, k);
+    Logger::WriteMessage(vals);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    vals = { -5 };
+    edges =
+    {
+    };
+    k = 0;
+    result = leetCode.maxStarSum(vals, edges, k);
+    Logger::WriteMessage(vals);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2493(void)
+{
+    Logger::WriteMessage("Test Leet Code 2493");
+    LeetCodeGraph leetCode;
+    int n = 7;
+    vector<vector<int>> edges =
+    {
+        {1, 2},{1, 4},{1, 5},{2, 6},{2, 3},{4, 6}
+    };
+    int result = leetCode.magnificentSets(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    edges =
+    {
+        {1,2},{2,3},{3,4},{4,1}
+    };
+    result = leetCode.magnificentSets(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 92;
+    edges =
+    {
+        {67,29},{13,29},{77,29},{36,29},{82,29},{54,29},{57,29},{53,29},{68,29},{26,29},{21,29},
+        {46,29},{41,29},{45,29},{56,29},{88,29},{2,29},{7,29},{5,29},{16,29},{37,29},{50,29},{79,29},
+        {91,29},{48,29},{87,29},{25,29},{80,29},{71,29},{9,29},{78,29},{33,29},{4,29},{44,29},{72,29},
+        {65,29},{61,29}
+    };
+    result = leetCode.magnificentSets(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+    
+}
+
+void TestLeetCode2503(void)
+{
+    Logger::WriteMessage("Test Leet Code 2503");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid =
+    {
+        {1,2,3} ,{2,5,7}, {3,5,1}
+    };
+    vector<int> queries = { 5,6,2 };
+    vector<int> result = leetCode.maxPoints(grid, queries);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    grid =
+    {
+        { 5,2,1 }, { 1,1,2 }
+    };
+    queries = { 5, 3, 1 };
+    result = leetCode.maxPoints(grid, queries);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2508(void)
+{
+    Logger::WriteMessage("Test Leet Code 2508");
+    LeetCodeGraph leetCode;
+    int n = 5;
+    vector<vector<int>> edges = 
+    {
+        {1, 2},{2, 3},{3, 4},{4, 2},{1, 4},{2, 5} 
+    };
+    bool result = leetCode.isPossible(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "result = " + (string)(result ? "true" : "false"));
+
+    n = 4;
+    edges =
+    {
+        {1, 2},{3, 4}
+    };
+    result = leetCode.isPossible(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "result = " + (string)(result ? "true" : "false"));
+
+    n = 4;
+    edges =
+    {
+        {1, 2},{1, 3}, {1, 4}
+    };
+    result = leetCode.isPossible(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2508();
+    TestLeetCode2503();
+    TestLeetCode2493();
+    TestLeetCode2497();
+    TestLeetCode2492();
+    TestLeetCode2477();
+    TestLeetCode2473();
+    TestLeetCode2467();
     TestLeetCode2421();
     TestLeetCode2392();
     TestLeetCode2374();

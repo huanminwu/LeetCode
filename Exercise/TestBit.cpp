@@ -876,8 +876,52 @@ void TestLeetCode2433(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2479(void)
+{
+    Logger::WriteMessage("Test Leet Code 2479");
+    LeetCodeBit leetCode;
+    int n = 6;
+    vector<vector<int>> edges =
+    {
+        {0, 1},{0, 2},{1, 3},{1, 4},{2, 5}
+    };
+    vector<int> values = { 2, 8, 3, 6, 2, 5 };
+    long long result = leetCode.maxXor(n, edges, values);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(values);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    edges =
+    {
+        {0,1},{1,2}
+    };
+    values = { 4, 6, 1 };
+    result = leetCode.maxXor(n, edges, values);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(values);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2505(void)
+{
+    Logger::WriteMessage("Test Leet Code 2505");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 2, 1, 0, 3 };
+    long long result = leetCode.subsequenceSumOr(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,0,0 };
+    result = leetCode.subsequenceSumOr(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2505();
+    TestLeetCode2479();
     TestLeetCode2433();
     TestLeetCode2429();
     TestLeetCode2425();

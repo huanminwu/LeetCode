@@ -14696,5 +14696,632 @@ int LeetCodeDP::numberOfPaths(vector<vector<int>>& grid, int k)
     return dp[m - 1][n - 1][0];
 }
 
+/// <summary>
+/// Leet Code 2495. Number of Subarrays Having Even Product
+/// 
+/// Medium
+///	
+/// Given a 0-indexed integer array nums, return the number of subarrays
+/// of nums having an even product.
+/// 
+/// Example 1:
+/// Input: nums = [9,6,7,13]
+/// Output: 6
+/// Explanation: There are 6 subarrays with an even product:
+/// - nums[0..1] = 9 * 6 = 54.
+/// - nums[0..2] = 9 * 6 * 7 = 378.
+/// - nums[0..3] = 9 * 6 * 7 * 13 = 4914.
+/// - nums[1..1] = 6.
+/// - nums[1..2] = 6 * 7 = 42.
+/// - nums[1..3] = 6 * 7 * 13 = 546.
+///
+/// Example 2:
+/// Input: nums = [7,3,5]
+/// Output: 0
+/// Explanation: There are no subarrays with an even product.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+long long LeetCodeDP::evenProduct(vector<int>& nums)
+{
+    long long result = 0;
+    int last_even = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] % 2 == 0)
+        {
+            last_even = i + 1;
+        }
+        result += (long long)last_even;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2484. Count Palindromic Subsequences
+/// 
+/// Hard
+///	
+/// Given a string of digits s, return the number of palindromic 
+/// subsequences of s having length 5. Since the answer may be very 
+/// large, return it modulo 10^9 + 7.
+///
+/// Note:
+/// A string is palindromic if it reads the same forward and backward.
+/// A subsequence is a string that can be derived from another string by 
+/// deleting some or no characters without changing the order of the 
+/// remaining characters.
+///  
+/// Example 1:
+/// Input: s = "103301"
+/// Output: 2
+/// Explanation: 
+/// There are 6 possible subsequences of length 5: "10330","10331",
+/// "10301","10301","13301","03301". 
+/// Two of them (both equal to "10301") are palindromic.
+///
+/// Example 2:
+/// Input: s = "0000000"
+/// Output: 21
+/// Explanation: All 21 subsequences are "00000", which is palindromic.
+///
+/// Example 3:
+///
+/// Input: s = "9999900000"
+/// Output: 2
+/// Explanation: The only two palindromic subsequences are "99999" 
+/// and "00000".
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 10^4
+/// 2. s consists of digits.
+/// </summary>
+int LeetCodeDP::countPalindromes(string s)
+{
+    long long M = 1000000007;
+    int n = s.size();
+    vector<int> digits(10);    
+    vector<vector<vector<int>>> prefix(n, vector<vector<int>>(10, vector<int>(10)));
+    vector<vector<vector<int>>> suffix(n, vector<vector<int>>(10, vector<int>(10)));
+    for (int i = 0; i < (int)s.size(); i++)
+    {
+        if (i > 0)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                prefix[i][j][s[i] - '0'] += digits[j];
+                for (int k = 0; k < 10; k++)
+                {
+                    prefix[i][j][k] += prefix[i - 1][j][k];
+                    prefix[i][j][k] %= (int)M;
+                }
+            }
+        }
+        digits[s[i] - '0'] ++;
+    }
+    digits = vector<int>(10);
+
+    for (int i = s.size() - 1; i >= 0; i--)
+    {
+        if (i < (int)s.size() - 1)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                suffix[i][j][s[i] - '0'] += digits[j];
+                for (int k = 0; k < 10; k++)
+                {
+                    suffix[i][j][k] += suffix[i + 1][j][k];
+                    suffix[i][j][k] %= (int)M;
+                }
+            }
+        }
+        digits[s[i] - '0'] ++;
+    }
+    long long result = 0;
+    for (int i = 2; i < (int)s.size() - 2; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+           for (int k = 0; k < 10; k++)
+           {
+                result += (long long)prefix[i-1][j][k] * (long long)suffix[i + 1][j][k];
+                result = result % M;
+           }
+        }
+    }
+    return (int)result;
+}
+
+/// <summary>
+/// Leet Code 2478. Number of Beautiful Partitions
+/// 
+/// Hard
+///	
+/// You are given a string s that consists of the digits '1' to '9' and 
+/// two integers k and minLength.
+///
+/// A partition of s is called beautiful if:
+///
+/// s is partitioned into k non-intersecting substrings.
+/// Each substring has a length of at least minLength.
+/// Each substring starts with a prime digit and ends with a non-prime 
+/// digit. Prime digits are '2', '3', '5', and '7', and the rest of the 
+/// digits are non-prime.
+/// Return the number of beautiful partitions of s. Since the answer may 
+/// be very large, return it modulo 10^9 + 7.
+///
+/// A substring is a contiguous sequence of characters within a string.
+///
+/// Example 1:
+/// Input: s = "23542185131", k = 3, minLength = 2
+/// Output: 3
+/// Explanation: There exists three ways to create a beautiful partition:
+/// "2354 | 218 | 5131"
+/// "2354 | 21851 | 31"
+/// "2354218 | 51 | 31"
+///
+/// Example 2:
+/// Input: s = "23542185131", k = 3, minLength = 3
+/// Output: 1
+/// Explanation: There exists one way to create a beautiful partition: 
+/// "2354 | 218 | 5131".
+///
+/// Example 3:
+/// Input: s = "3312958", k = 3, minLength = 1
+/// Output: 1
+/// Explanation: There exists one way to create a beautiful 
+/// partition: "331 | 29 | 58".
+///
+///
+/// Constraints:
+/// 1. 1 <= k, minLength <= s.length <= 1000
+/// 2. s consists of the digits '1' to '9'.
+/// </summary>
+int LeetCodeDP::beautifulPartitions(string s, int k, int minLength)
+{
+    int M = 1000000007;
+    unordered_set<int> prime = { 2, 3, 5, 7 };
+    int n = s.size();
+    vector<vector<int>> dp(n, vector<int>(k));
+    vector<int> accumulate(k);
+    if (prime.count(s[0] - '0') == 0 || prime.count(s[s.size() - 1] - '0') == 1) return 0;
+    list<int> prev;
+    for (int i = 0; i < n; i++)
+    {
+        if ((i < n - 1 && prime.count(s[i] - '0') == 0 && prime.count(s[i + 1] - '0') == 1) ||
+            (i == n - 1 && prime.count(s[i] - '0') == 0))
+        {
+            if (i >= minLength - 1) dp[i][0] = 1;
+            int first = -1;
+            while (!prev.empty() && i - prev.front() >= minLength)
+            {
+                first = prev.front();
+                prev.pop_front();
+                for (int j = 1; j < k; j++)
+                {
+                    accumulate[j] = (accumulate[j] + dp[first][j - 1]) % M;
+                }
+            }
+            for (int j = 1; j < k; j++)
+            {
+                dp[i][j] = (dp[i][j] + accumulate[j]) % M;
+            }
+            prev.push_back(i);
+        }
+    }
+    return dp[n - 1][k - 1];
+}
+
+/// <summary>
+/// Leet Code 2464. Minimum Subarrays in a Valid Split
+/// 
+/// Medium
+///
+/// You are given an integer array nums.
+/// Splitting of an integer array nums into subarrays is valid if:
+/// the greatest common divisor of the first and last elements of 
+/// each subarray is greater than 1, and
+/// each element of nums belongs to exactly one subarray.
+/// Return the minimum number of subarrays in a valid subarray 
+/// splitting of nums. If a valid subarray splitting is not possible, 
+/// return -1.
+///
+/// Note that:
+/// The greatest common divisor of two numbers is the largest positive 
+/// integer that evenly divides both numbers.
+/// A subarray is a contiguous non-empty part of an array.
+///
+/// Example 1:
+/// Input: nums = [2,6,3,4,3]
+/// Output: 2
+/// Explanation: We can create a valid split in the following way: 
+/// [2,6] | [3,4,3].
+/// - The starting element of the 1st subarray is 2 and the ending 
+///   is 6. Their greatest common divisor is 2, which is greater than 1.
+/// - The starting element of the 2nd subarray is 3 and the ending is 3. 
+///   Their greatest common divisor is 3, which is greater than 1.
+/// It can be proved that 2 is the minimum number of subarrays that we 
+/// can obtain in a valid split.
+///
+/// Example 2:
+/// Input: nums = [3,5]
+/// Output: 2
+/// Explanation: We can create a valid split in the following 
+/// way: [3] | [5].
+/// - The starting element of the 1st subarray is 3 and the ending is 3. 
+/// Their greatest common divisor is 3, which is greater than 1.
+/// - The starting element of the 2nd subarray is 5 and the ending is 5. 
+/// Their greatest common divisor is 5, which is greater than 1.
+/// It can be proved that 2 is the minimum number of subarrays that we 
+/// can obtain in a valid split.
+///
+/// Example 3:
+///
+/// Input: nums = [1,2,1] 
+/// Output: -1
+/// Explanation: It is impossible to create valid split.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeDP::validSubarraySplit(vector<int>& nums)
+{
+    int n = nums.size();
+    vector<int>dp(n, -1);
+    for (int i = 0; i < (int)nums.size(); i++)
+    {
+        for (int j = 0; j <= i; j++)
+        {
+            int a = nums[i];
+            int b = nums[j];
+            while (a != 0 && b != 0)
+            {
+                if (a < b) swap(a, b);
+                a = a % b;
+            }
+            if (b != 1)
+            {
+                if (j == 0) 
+                {
+                    dp[i] = 1;
+                }
+                else
+                {
+                    if (dp[j - 1] != -1)
+                    {
+
+                        if (dp[i] == -1) dp[i] = dp[j - 1] + 1;
+                        else dp[i] = min(dp[i], dp[j - 1] + 1);
+                    }
+                }
+            }
+        }
+    }
+    return dp[n - 1];
+}
+
+/// <summary>
+/// Leet Code 2466. Count Ways To Build Good Strings
+/// 
+/// Medium
+///	
+/// Given the integers zero, one, low, and high, we can construct a string 
+/// by starting with an empty string, and then at each step perform either 
+/// of the following:
+///
+/// Append the character '0' zero times.
+/// Append the character '1' one times.
+/// This can be performed any number of times.
+///
+/// A good string is a string constructed by the above process having a 
+/// length between low and high (inclusive).
+///
+/// Return the number of different good strings that can be constructed 
+/// satisfying these properties. Since the answer can be large, return 
+/// it modulo 10^9 + 7.
+///
+/// 
+/// Example 1:
+/// Input: low = 3, high = 3, zero = 1, one = 1
+/// Output: 8
+/// Explanation: 
+/// One possible valid good string is "011". 
+/// It can be constructed as follows: "" -> "0" -> "01" -> "011". 
+/// All binary strings from "000" to "111" are good strings in this 
+/// example.
+/// Example 2:
+///
+/// Input: low = 2, high = 3, zero = 1, one = 2
+/// Output: 5
+/// Explanation: The good strings are "00", "11", "000", "110", 
+/// and "011".
+///
+/// Constraints:
+/// 1. 1 <= low <= high <= 10^5
+/// 2. 1 <= zero, one <= low
+/// </summary>
+int LeetCodeDP::countGoodStrings(int low, int high, int zero, int one)
+{
+    int M = 1000000007;
+    vector<int> dp(high + 1);
+    dp[0] = 1;
+    for (int i = 0; i <= high; i++)
+    {
+        int next = i + zero;
+        if (next <= high)
+        {
+            dp[next] = (dp[next] + dp[i]) % M;
+        }
+        next = i + one;
+        if (next <= high)
+        {
+            dp[next] = (dp[next] + dp[i]) % M;
+        }
+    }
+    int result = 0;
+    for (int i = low; i <= high; i++)
+    {
+        result = (result + dp[i]) % M;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2501. Longest Square Streak in an Array
+/// 
+/// Medium
+///	
+/// You are given an integer array nums. A subsequence of nums is called a 
+/// square streak if:
+///
+/// The length of the subsequence is at least 2, and
+/// after sorting the subsequence, each element (except the first element) 
+/// is the square of the previous number.
+/// Return the length of the longest square streak in nums, or return -1 
+/// if there is no square streak.
+///
+/// A subsequence is an array that can be derived from another array by 
+/// deleting some or no elements without changing the order of the 
+/// remaining elements.
+///
+/// Example 1:
+/// Input: nums = [4,3,6,16,8,2]
+/// Output: 3
+/// Explanation: Choose the subsequence [4,16,2]. After sorting it, it 
+/// becomes [2,4,16].
+/// - 4 = 2 * 2.
+/// - 16 = 4 * 4.
+/// Therefore, [4,16,2] is a square streak.
+/// It can be shown that every subsequence of length 4 is not a square 
+/// streak.
+///
+/// Example 2:
+/// Input: nums = [2,3,5,6,7]
+/// Output: -1
+/// Explanation: There is no square streak in nums so return -1.
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length <= 10^5
+/// 2. 2 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeDP::longestSquareStreak(vector<int>& nums)
+{
+    unordered_map<long long, int> streak;
+    sort(nums.begin(), nums.end());
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        streak[nums[i]] = 1;
+    }
+    int result = -1;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        long long square = (long long)nums[i] * (long long)nums[i];
+        if (streak.count(square) == 0)
+        {
+            continue;
+        }
+        streak[square] = max(streak[square], streak[nums[i]] + 1);
+        result = max(result, streak[square]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2472. Maximum Number of Non-overlapping Palindrome Substrings
+/// 
+/// Hard
+///	
+/// You are given a string s and a positive integer k.
+///
+/// Select a set of non-overlapping substrings from the string s that 
+/// satisfy the following conditions:
+///
+/// The length of each substring is at least k.
+/// Each substring is a palindrome.
+/// Return the maximum number of substrings in an optimal selection.
+///
+/// A substring is a contiguous sequence of characters within a string.
+/// 
+/// Example 1:
+/// Input: s = "abaccdbbd", k = 3
+/// Output: 2
+/// Explanation: We can select the substrings underlined in 
+/// s = "abaccdbbd". Both "aba" and "dbbd" are palindromes and have a 
+/// length of at least k = 3.
+/// It can be shown that we cannot find a selection with more than two 
+/// valid substrings.
+///
+/// Example 2:
+/// Input: s = "adbcda", k = 2
+/// Output: 0
+/// Explanation: There is no palindrome substring of length at least 2 in 
+/// the string.
+/// Constraints:
+/// 1. 1 <= k <= s.length <= 2000
+/// 2. s consists of lowercase English letters.
+/// </summary>
+int LeetCodeDP::maxPalindromes(string s, int k)
+{
+    int n = s.size();
+    vector<vector<int>> pal(n, vector<int>(n));
+    vector<int>len(n, 1);
+    for (int i = 0; i < n; i++)
+    {
+        pal[i][i] = 1;
+        for (int j = i; j >= 0; j--)
+        {
+            if ((i == j) || (j == i - 1 && s[j] == s[i]) ||
+                (s[j] == s[i] && pal[j + 1][i - 1] == 1))
+            {
+                len[i] = i - j + 1;
+                pal[j][i] = 1;
+            }
+            if (len[i] >= k) break;
+        }
+    }
+    vector<int> dp(n);
+    for (int i = 0; i < n; i++)
+    {
+        if (len[i] >= k)
+        {
+            if (i - len[i] >= 0)  dp[i] = max(dp[i], dp[i - len[i]] + 1);
+            else dp[i] = max(dp[i], 1);
+        }
+        if (i > 0) dp[i] = max(dp[i], dp[i - 1]);
+    }
+    return dp[n - 1];
+}
+
+/// <summary>
+/// Leet Code 2463. Minimum Total Distance Traveled
+///    repair every robot.
+/// </summary>
+long long LeetCodeDP::minimumTotalDistance(vector<int>& robot, vector<vector<int>>& factory,
+    int r, int f, int k, vector<vector<vector<long long>>>& dp)
+{
+    if (r == robot.size()) return 0;
+    if (f == factory.size()) return -1;
+    if (k >= factory[f][1])
+    {
+        return minimumTotalDistance(robot, factory, r, f + 1, 0, dp);
+    }
+    if (dp[r][f][k] != -1)
+    {
+        return dp[r][f][k];
+    }
+    long long result = minimumTotalDistance(robot, factory, r, f + 1, 0, dp);
+    long long distance = minimumTotalDistance(robot, factory, r + 1, f, k + 1, dp);
+    if (result == -1 && distance == -1)
+    {
+        return -1;
+    }
+    else if (result == -1)
+    {
+        distance = distance + (long long)abs(robot[r] - factory[f][0]);
+        result = distance;
+    }
+    else if (distance != -1)
+    {
+        distance = distance + (long long)abs(robot[r] - factory[f][0]);
+        result = min(result, distance);
+    }
+    dp[r][f][k] = result;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2463. Minimum Total Distance Traveled
+/// 
+/// Hard
+///	
+/// There are some robots and factories on the X-axis. You are given an 
+/// integer array robot where robot[i] is the position of the ith robot. 
+/// You are also given a 2D integer array factory where 
+/// factory[j] = [positionj, limitj] indicates that positionj is the 
+/// position of the jth factory and that the jth factory can repair at 
+/// most limitj robots.
+///
+/// The positions of each robot are unique. The positions of each factory 
+/// are also unique. Note that a robot can be in the same position as a 
+/// factory initially.
+///
+/// All the robots are initially broken; they keep moving in one direction. 
+/// The direction could be the negative or the positive direction of the 
+/// X-axis. When a robot reaches a factory that did not reach its limit, 
+/// the factory repairs the robot, and it stops moving.
+///
+/// At any moment, you can set the initial direction of moving for some 
+/// robot. Your target is to minimize the total distance traveled by all 
+/// the robots.
+///
+/// Return the minimum total distance traveled by all the robots. The 
+/// test cases are generated such that all the robots can be repaired.
+///
+/// Note that
+/// 
+/// All robots move at the same speed.
+/// If two robots move in the same direction, they will never collide.
+/// If two robots move in opposite directions and they meet at some 
+/// point, they do not collide. They cross each other.
+/// If a robot passes by a factory that reached its limits, it crosses 
+/// it as if it does not exist.
+/// If the robot moved from a position x to a position y, the distance 
+/// it moved is |y - x|.
+/// 
+/// Example 1:
+///
+/// Input: robot = [0,4,6], factory = [[2,2],[6,2]]
+/// Output: 4
+/// Explanation: As shown in the figure:
+/// - The first robot at position 0 moves in the positive direction. 
+///   It will be repaired at the first factory.
+/// - The second robot at position 4 moves in the negative direction. 
+///   It will be repaired at the first factory.
+/// - The third robot at position 6 will be repaired at the second 
+///   factory. It does not need to move.
+/// The limit of the first factory is 2, and it fixed 2 robots.
+/// The limit of the second factory is 2, and it fixed 1 robot.
+/// The total distance is |2 - 0| + |2 - 4| + |6 - 6| = 4. It can be 
+/// shown that we cannot achieve a better total distance than 4.
+///
+/// Example 2:
+/// Input: robot = [1,-1], factory = [[-2,1],[2,1]]
+/// Output: 2
+/// Explanation: As shown in the figure:
+/// - The first robot at position 1 moves in the positive direction. 
+///   It will be repaired at the second factory.
+/// - The second robot at position -1 moves in the negative direction. 
+///   It will be repaired at the first factory.
+/// The limit of the first factory is 1, and it fixed 1 robot.
+/// The limit of the second factory is 1, and it fixed 1 robot.
+/// The total distance is |2 - 1| + |(-2) - (-1)| = 2. It can be shown 
+/// that we cannot achieve a better total distance than 2.
+/// 
+/// Constraints:
+/// 1. 1 <= robot.length, factory.length <= 100
+/// 2. factory[j].length == 2
+/// 3. -10^9 <= robot[i], positionj <= 10^9
+/// 4. 0 <= limitj <= robot.length
+/// 5. The input will be generated such that it is always possible to 
+///    repair every robot.
+/// </summary>
+long long LeetCodeDP::minimumTotalDistance(vector<int>& robot, vector<vector<int>>& factory)
+{
+    int k = 0;
+    sort(robot.begin(), robot.end());
+    sort(factory.begin(), factory.end());
+    for (size_t i = 0; i < factory.size(); i++)
+    {
+        k = max(k, factory[i][1]);
+    }
+    int r = robot.size();
+    int f = factory.size();
+    vector<vector<vector<long long>>> dp(r, vector<vector<long long>>(f, vector<long long>(k, -1)));
+    return minimumTotalDistance(robot, factory, 0, 0, 0, dp);
+}
+
 #pragma endregion
 

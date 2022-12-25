@@ -2193,7 +2193,7 @@ void LeetCodeBit::maxGeneticDifference(TrieBitNode* root, int node_id, vector<ve
     root->increase(node_id, 1);
     for (size_t i = 0; i < query_list[node_id].size(); i++)
     {
-        int val = root->findMax(query_list[node_id][i].first);
+        int val = (int)root->findMax(query_list[node_id][i].first);
         result[query_list[node_id][i].second] = val;
     }
     for (size_t i = 0; i < tree[node_id].size(); i++)
@@ -2765,6 +2765,169 @@ vector<int> LeetCodeBit::findArray(vector<int>& pref)
         {
             result[i] = pref[i - 1] ^ pref[i];
         }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2479. Maximum XOR of Two Non-Overlapping Subtrees
+/// </summary>
+long long LeetCodeBit::maxXorSum(int node, vector<vector<int>>& neighbors,
+    vector<int>& values, vector<int>& visited, vector<long long>& sums)
+{
+    long long sum = values[node];
+    visited[node] = 1;
+    for (size_t i = 0; i < neighbors[node].size(); i++)
+    {
+        int child = neighbors[node][i];
+        if (visited[child] == 1)
+        {
+            continue;
+        }
+        sum += maxXorSum(child, neighbors, values, visited, sums);
+    }
+    sums[node] = sum;
+    return sum;
+}
+
+/// <summary>
+/// Leet Code 2479. Maximum XOR of Two Non-Overlapping Subtrees
+/// </summary>
+void LeetCodeBit::maxXorFind(int node, vector<vector<int>>& neighbors,
+    vector<int>& visited, vector<long long>& sums, TrieBitNode* trie, 
+    long long& result)
+{
+    long long sum = sums[node];
+    visited[node] = 1;
+    result = max(result, trie->findMax(sum));
+    for (size_t i = 0; i < neighbors[node].size(); i++)
+    {
+        int child = neighbors[node][i];
+        if (visited[child] == 1)
+        {
+            continue;
+        }
+        maxXorFind(child, neighbors, visited, sums, trie, result);
+    }
+    trie->increase(sum, 1);
+}
+
+/// <summary>
+/// Leet Code 2479. Maximum XOR of Two Non-Overlapping Subtrees
+/// 
+/// Hard
+///	
+/// There is an undirected tree with n nodes labeled from 0 to n - 1. 
+/// You are given the integer n and a 2D integer array edges of length 
+/// n - 1, where edges[i] = [ai, bi] indicates that there is an edge 
+/// between nodes ai and bi in the tree. The root of the tree is the node 
+/// labeled 0.
+///
+/// Each node has an associated value. You are given an array values of 
+/// length n, where values[i] is the value of the ith node.
+///
+/// Select any two non-overlapping subtrees. Your score is the bitwise 
+/// XOR of the sum of the values within those subtrees.
+///
+/// Return the maximum possible score you can achieve. If it is impossible 
+/// to find two nonoverlapping subtrees, return 0.
+///
+/// Note that:
+/// 1. The subtree of a node is the tree consisting of that node and all 
+///    of its descendants.
+/// 2. Two subtrees are non-overlapping if they do not share any common 
+///    node.
+/// 
+/// Example 1:
+/// 1. Input: n = 6, edges = [[0,1],[0,2],[1,3],[1,4],[2,5]], 
+///    values = [2,8,3,6,2,5] 
+/// Output: 24
+/// Explanation: Node 1's subtree has sum of values 16, while node 2's 
+/// subtree has sum of values 8, so choosing these nodes will yield a 
+/// score of 16 XOR 8 = 24. It can be proved that is the maximum possible 
+/// score we can obtain.
+///
+/// Example 2:
+/// Input: n = 3, edges = [[0,1],[1,2]], values = [4,6,1]
+/// Output: 0
+/// Explanation: There is no possible way to select two non-overlapping 
+/// subtrees, so we just return 0.
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 5 * 10^4
+/// 2. edges.length == n - 1
+/// 3. 0 <= ai, bi < n
+/// 4. values.length == n
+/// 5. 1 <= values[i] <= 10^9
+/// 6. It is guaranteed that edges represents a valid tree.
+/// </summary>
+long long LeetCodeBit::maxXor(int n, vector<vector<int>>& edges, vector<int>& values)
+{
+    vector<vector<int>> neighbors(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(edges[i][1]);
+        neighbors[edges[i][1]].push_back(edges[i][0]);
+    }
+    vector<long long> sums(n);
+    vector<int> visited(n);
+    maxXorSum(0, neighbors, values, visited, sums);
+    visited = vector<int>(n);
+    TrieBitNode* trie = new TrieBitNode(63);
+    long long result = 0;
+    maxXorFind(0, neighbors, visited, sums, trie, result);
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2505. Bitwise OR of All Subsequence Sums
+/// 
+/// Medium
+///	
+/// Given an integer array nums, return the value of the bitwise OR of 
+/// the sum of all possible subsequences in the array.
+///
+/// A subsequence is a sequence that can be derived from another 
+/// sequence by removing zero or more elements without changing the 
+/// order of the remaining elements.
+///
+/// Example 1:
+/// Input: nums = [2,1,0,3]
+/// Output: 7
+/// Explanation: All possible subsequence sums that we can have 
+/// are: 0, 1, 2, 3, 4, 5, 6.
+/// And we have 0 OR 1 OR 2 OR 3 OR 4 OR 5 OR 6 = 7, so we return 7.
+///
+/// Example 2:
+/// Input: nums = [0,0,0]
+/// Output: 0
+/// Explanation: 0 is the only possible subsequence sum we can have, 
+/// so we return 0.
+///
+/// Constraints:
+/// 
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^9
+/// </summary>
+long long LeetCodeBit::subsequenceSumOr(vector<int>& nums)
+{
+    long long result = 0;
+    long long sum = 0;
+    for (int i = 0; i < 64; i++)
+    {
+        if (i < 32)
+        {
+            for (size_t j = 0; j < nums.size(); j++)
+            {
+                long long num = nums[j];
+                if ((num & (((long long)1) << i)) != 0)
+                {
+                    sum++;
+                }
+            }
+        }
+        if (sum > 0) result = result | (((long long)1) << i);
+        sum /= 2;
     }
     return result;
 }

@@ -24223,5 +24223,727 @@ int LeetCodeArray::sortArray(vector<int>& nums)
 
     return min(permute(npos, 0), permute(npos, 1));
 }
+
+/// <summary>
+/// Leet Code 2475. Number of Unequal Triplets in Array
+/// 
+/// Easy
+///	
+/// You are given a 0-indexed array of positive integers nums. Find the 
+/// number of triplets (i, j, k) that meet the following conditions:
+///
+/// 0 <= i < j < k < nums.length
+/// nums[i], nums[j], and nums[k] are pairwise distinct.
+/// In other words, nums[i] != nums[j], nums[i] != nums[k], and 
+/// nums[j] != nums[k].
+/// Return the number of triplets that meet the conditions.
+/// 
+/// Example 1:
+///
+/// Input: nums = [4,4,2,4,3]
+/// Output: 3
+/// Explanation: The following triplets meet the conditions:
+/// - (0, 2, 4) because 4 != 2 != 3
+/// - (1, 2, 4) because 4 != 2 != 3
+/// - (2, 3, 4) because 2 != 4 != 3
+/// Since there are 3 triplets, we return 3.
+/// Note that (2, 0, 4) is not a valid triplet because 2 > 0.
+///
+/// Example 2:
+///  
+/// Input: nums = [1,1,1,1,1]
+/// Output: 0
+/// Explanation: No triplets meet the conditions so we return 0.
+/// 
+/// Constraints:
+/// 1. 3 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 1000
+/// </summary>
+int LeetCodeArray::unequalTriplets(vector<int>& nums)
+{
+    int result = 0;
+    sort(nums.begin(), nums.end());
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (size_t j = i + 1; j < nums.size(); j++)
+        {
+            if (nums[i] == nums[j]) continue;
+            for (size_t k = j + 1; k < nums.size(); k++)
+            {
+                if (nums[j] == nums[k]) continue;
+                result++;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2465. Number of Distinct Averages
+/// 
+/// Easy
+///	
+/// You are given a 0-indexed integer array nums of even length.
+///
+/// As long as nums is not empty, you must repetitively:
+///
+/// Find the minimum number in nums and remove it.
+/// Find the maximum number in nums and remove it.
+/// Calculate the average of the two removed numbers.
+/// The average of two numbers a and b is (a + b) / 2.
+///
+/// For example, the average of 2 and 3 is (2 + 3) / 2 = 2.5.
+/// Return the number of distinct averages calculated using the above 
+/// process.
+///
+/// Note that when there is a tie for a minimum or maximum number, any 
+/// can be removed.
+/// 
+/// Example 1:
+/// Input: nums = [4,1,4,0,3,5]
+/// Output: 2
+/// Explanation:
+/// 1. Remove 0 and 5, and the average is (0 + 5) / 2 = 2.5. Now, 
+///    nums = [4,1,4,3].
+/// 2. Remove 1 and 4. The average is (1 + 4) / 2 = 2.5, and 
+///    nums = [4,3].
+/// 3. Remove 3 and 4, and the average is (3 + 4) / 2 = 3.5.
+/// Since there are 2 distinct numbers among 2.5, 2.5, and 3.5, we 
+/// return 2.
+///
+/// Example 2:
+/// Input: nums = [1,100]
+/// Output: 1
+/// Explanation:
+/// There is only one average to be calculated after removing 1 and 100, 
+/// so we return 1.
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length <= 100
+/// 2. nums.length is even.
+/// 3. 0 <= nums[i] <= 100
+/// </summary>
+int LeetCodeArray::distinctAverages(vector<int>& nums)
+{
+    unordered_set<int> set;
+    sort(nums.begin(), nums.end());
+    int left = 0; 
+    int right = nums.size() - 1;
+    while (left < right)
+    {
+        set.insert(nums[left] + nums[right]);
+        left++;
+        right--;
+    }
+    return set.size();
+}
+
+/// <summary>
+/// Leet Code 2482. Difference Between Ones and Zeros in Row and Column
+/// 
+/// Medium
+///	
+/// You are given a 0-indexed m x n binary matrix grid.
+///
+/// A 0-indexed m x n difference matrix diff is created with the following 
+/// procedure:
+///
+/// Let the number of ones in the ith row be onesRowi.
+/// Let the number of ones in the jth column be onesColj.
+/// Let the number of zeros in the ith row be zerosRowi.
+/// Let the number of zeros in the jth column be zerosColj.
+/// diff[i][j] = onesRowi + onesColj - zerosRowi - zerosColj
+/// Return the difference matrix diff.
+///
+/// Example 1:
+/// 
+/// Input: grid = [[0,1,1],[1,0,1],[0,0,1]]
+/// Output: [[0,0,4],[0,0,4],[-2,-2,2]]
+/// Explanation:
+/// - diff[0][0] = onesRow0 + onesCol0 - zerosRow0 - zerosCol0 = 
+///   2 + 1 - 1 - 2 = 0 
+/// - diff[0][1] = onesRow0 + onesCol1 - zerosRow0 - zerosCol1 = 
+///   2 + 1 - 1 - 2 = 0 
+/// - diff[0][2] = onesRow0 + onesCol2 - zerosRow0 - zerosCol2 = 
+///   2 + 3 - 1 - 0 = 4 
+/// - diff[1][0] = onesRow1 + onesCol0 - zerosRow1 - zerosCol0 = 
+///   2 + 1 - 1 - 2 = 0 
+/// - diff[1][1] = onesRow1 + onesCol1 - zerosRow1 - zerosCol1 = 
+///   2 + 1 - 1 - 2 = 0 
+/// - diff[1][2] = onesRow1 + onesCol2 - zerosRow1 - zerosCol2 = 
+///   2 + 3 - 1 - 0 = 4 
+/// - diff[2][0] = onesRow2 + onesCol0 - zerosRow2 - zerosCol0 = 
+///   1 + 1 - 2 - 2 = -2
+/// - diff[2][1] = onesRow2 + onesCol1 - zerosRow2 - zerosCol1 = 
+///   1 + 1 - 2 - 2 = -2
+/// - diff[2][2] = onesRow2 + onesCol2 - zerosRow2 - zerosCol2 = 
+///   1 + 3 - 2 - 0 = 2
+///
+/// Example 2:
+/// Input: grid = [[1,1,1],[1,1,1]]
+/// Output: [[5,5,5],[5,5,5]]
+/// Explanation:
+/// - diff[0][0] = onesRow0 + onesCol0 - zerosRow0 - zerosCol0 = 
+///   3 + 2 - 0 - 0 = 5
+/// - diff[0][1] = onesRow0 + onesCol1 - zerosRow0 - zerosCol1 = 
+///   3 + 2 - 0 - 0 = 5
+/// - diff[0][2] = onesRow0 + onesCol2 - zerosRow0 - zerosCol2 = 
+//    3 + 2 - 0 - 0 = 5
+/// - diff[1][0] = onesRow1 + onesCol0 - zerosRow1 - zerosCol0 = 
+///   3 + 2 - 0 - 0 = 5
+/// - diff[1][1] = onesRow1 + onesCol1 - zerosRow1 - zerosCol1 = 
+///   3 + 2 - 0 - 0 = 5
+/// - diff[1][2] = onesRow1 + onesCol2 - zerosRow1 - zerosCol2 = 
+///   3 + 2 - 0 - 0 = 5
+/// 
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 1 <= m, n <= 105
+/// 4. 1 <= m * n <= 105
+/// 5. grid[i][j] is either 0 or 1.
+/// </summary>
+vector<vector<int>> LeetCodeArray::onesMinusZeros(vector<vector<int>>& grid)
+{
+    vector<int> row(grid.size());
+    vector<int> col(grid[0].size());
+    vector<vector<int>> result(grid.size(), vector<int>(grid[0].size()));
+    for (size_t i = 0; i < grid.size(); i++)
+    {
+        for (size_t j = 0; j < grid[i].size(); j++)
+        {
+            if (grid[i][j] == 1)
+            {
+                row[i]++;
+                col[j]++;
+            }
+            else
+            {
+                row[i]--;
+                col[j]--;
+            }
+        }
+    }
+
+    for (size_t i = 0; i < grid.size(); i++)
+    {
+        for (size_t j = 0; j < grid[i].size(); j++)
+        {
+            result[i][j] = row[i] + col[j];
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2483. Minimum Penalty for a Shop
+/// 
+/// Medium
+///	
+/// You are given the customer visit log of a shop represented by a 
+/// 0-indexed string customers consisting only of characters 'N' and 'Y':
+///
+/// if the ith character is 'Y', it means that customers come at the ith 
+/// hour
+/// whereas 'N' indicates that no customers come at the ith hour.
+/// If the shop closes at the jth hour (0 <= j <= n), the penalty is 
+/// calculated as follows:
+///
+/// For every hour when the shop is open and no customers come, the 
+/// penalty increases by 1.
+/// For every hour when the shop is closed and customers come, the 
+/// penalty increases by 1.
+/// Return the earliest hour at which the shop must be closed to incur a 
+/// minimum penalty.
+///
+/// Note that if a shop closes at the jth hour, it means the shop is 
+/// closed at the hour j.
+/// 
+/// Example 1:
+/// Input: customers = "YYNY"
+/// Output: 2
+/// Explanation: 
+/// - Closing the shop at the 0th hour incurs in 1+1+0+1 = 3 penalty.
+/// - Closing the shop at the 1st hour incurs in 0+1+0+1 = 2 penalty.
+/// - Closing the shop at the 2nd hour incurs in 0+0+0+1 = 1 penalty.
+/// - Closing the shop at the 3rd hour incurs in 0+0+1+1 = 2 penalty.
+/// - Closing the shop at the 4th hour incurs in 0+0+1+0 = 1 penalty.
+/// Closing the shop at 2nd or 4th hour gives a minimum penalty. 
+/// Since 2 is earlier, the optimal closing time is 2.
+///
+/// Example 2:
+/// Input: customers = "NNNNN"
+/// Output: 0
+/// Explanation: It is best to close the shop at the 0th hour as no 
+/// customers arrive.
+///
+/// Example 3:
+/// Input: customers = "YYYY"
+/// Output: 4
+/// Explanation: It is best to close the shop at the 4th hour as 
+/// customers arrive at each hour.
+///
+/// 
+/// Constraints:
+/// 
+/// 1. 1 <= customers.length <= 10^5
+/// 2. customers consists only of characters 'Y' and 'N'.
+/// </summary>
+int LeetCodeArray::bestClosingTime(string customers)
+{
+    int total_yes = 0;
+    for (size_t i = 0; i < customers.size(); i++)
+    {
+        if (customers[i] == 'Y') total_yes++;
+    }
+    int current_no = 0;
+    int current_yes = 0;
+    int min_penalty = INT_MAX;
+    int result = -1;
+    for (size_t i = 0; i <= customers.size(); i++)
+    {
+        int penalty = current_no + total_yes - current_yes;
+        if (penalty < min_penalty)
+        {
+            min_penalty = penalty;
+            result = i;
+        }
+        if (i == customers.size()) break;
+        if (customers[i] == 'Y') current_yes++;
+        else current_no++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2500. Delete Greatest Value in Each Row
+/// 
+/// Easy
+///	
+/// You are given an m x n matrix grid consisting of positive integers.
+///
+/// Perform the following operation until grid becomes empty:
+///
+/// Delete the element with the greatest value from each row. If multiple 
+/// such elements exist, delete any of them.
+/// Add the maximum of deleted elements to the answer.
+/// Note that the number of columns decreases by one after each operation.
+///
+/// Return the answer after performing the operations described above.
+/// 
+/// Example 1:
+/// Input: grid = [[1,2,4],[3,3,1]]
+/// Output: 8
+/// Explanation: The diagram above shows the removed values in each step.
+/// - In the first operation, we remove 4 from the first row and 3 from 
+///   the second row (notice that, there are two cells with value 3 and 
+///   we can remove any of them). We add 4 to the answer.
+/// - In the second operation, we remove 2 from the first row and 3 from 
+///   the second row. We add 3 to the answer.
+/// - In the third operation, we remove 1 from the first row and 1 from 
+///   the second row. We add 1 to the answer.
+/// The final answer = 4 + 3 + 1 = 8.
+///
+/// Example 2:
+/// Input: grid = [[10]]
+/// Output: 10
+/// Explanation: The diagram above shows the removed values in each step.
+/// - In the first operation, we remove 10 from the first row. We add 10 
+///   to the answer.
+/// The final answer = 10.
+///
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 1 <= m, n <= 50
+/// 4. 1 <= grid[i][j] <= 100
+/// </summary>
+int LeetCodeArray::deleteGreatestValue(vector<vector<int>>& grid)
+{
+    int m = grid.size();
+    int n = grid[0].size();
+    for (int i = 0; i < m; i++)
+    {
+        sort(grid[i].begin(), grid[i].end());
+    }
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        int val = 0;
+        for (int j = 0; j < m; j++)
+        {
+            val = max(val, grid[j][i]);
+        }
+        result += val;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2470. Number of Subarrays With LCM Equal to K
+/// 
+/// Medium
+///	
+/// Given an integer array nums and an integer k, return the number of 
+/// subarrays of nums where the least common multiple of the subarray's 
+/// elements is k.
+///
+/// A subarray is a contiguous non-empty sequence of elements within an 
+/// array.
+///
+/// The least common multiple of an array is the smallest positive 
+/// integer that is divisible by all the array elements.
+///
+/// Example 1:
+///  
+/// Input: nums = [3,6,2,7,1], k = 6
+/// Output: 4
+/// Explanation: The subarrays of nums where 6 is the least common 
+/// multiple of all the subarray's elements are:
+/// - [3,6,2,7,1]
+/// - [3,6,2,7,1]
+/// - [3,6,2,7,1]
+/// - [3,6,2,7,1]
+///
+/// Example 2:
+/// Input: nums = [3], k = 2
+/// Output: 0
+/// Explanation: There are no subarrays of nums where 2 is the least 
+/// common multiple of all the subarray's elements.
+///  
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 1 <= nums[i], k <= 1000
+/// </summary>
+int LeetCodeArray::subarrayLCM(vector<int>& nums, int k)
+{
+    int left = 0;
+    int lcm = 0;
+    int n = nums.size();
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i; j >= 0; j--)
+        {
+            if (j == i)
+            {
+                lcm = nums[i];
+            }
+            else
+            {
+                int a = lcm;
+                int b = nums[j];
+                while (a != 0 && b != 0)
+                {
+                    if (a < b) swap(a, b);
+                    a = a % b;
+                }
+                lcm = lcm * nums[j] / b;
+            }
+            if (lcm == k) result++;
+            else if (k % lcm != 0) break;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2489. Number of Substrings With Fixed Ratio
+/// 
+/// Medium
+///	
+/// You are given a binary string s, and two integers num1 and num2. num1 
+/// and num2 are coprime numbers.
+///
+/// A ratio substring is a substring of s where the ratio between the 
+/// number of 0's and the number of 1's in the substring is exactly 
+/// num1 : num2.
+///
+/// For example, if num1 = 2 and num2 = 3, then "01011" and "1110000111" 
+/// are ratio substrings, while "11000" is not.
+/// Return the number of non-empty ratio substrings of s.
+///
+/// Note that:
+/// A substring is a contiguous sequence of characters within a string.
+/// Two values x and y are coprime if gcd(x, y) == 1 where gcd(x, y) is 
+/// the greatest common divisor of x and y.
+/// 
+/// Example 1:
+/// Input: s = "0110011", num1 = 1, num2 = 2
+/// Output: 4
+/// Explanation: There exist 4 non-empty ratio substrings.
+/// - The substring s[0..2]: "0110011". It contains one 0 and two 1's. 
+///   The ratio is 1 : 2.
+/// - The substring s[1..4]: "0110011". It contains one 0 and two 1's. 
+///   The ratio is 1 : 2.
+/// - The substring s[4..6]: "0110011". It contains one 0 and two 1's. 
+///   The ratio is 1 : 2.
+/// - The substring s[1..6]: "0110011". It contains two 0's and four 1's. 
+///   The ratio is 2 : 4 == 1 : 2.
+/// It can be shown that there are no more ratio substrings.
+///
+/// Example 2:
+/// Input: s = "10101", num1 = 3, num2 = 1
+/// Output: 0
+/// Explanation: There is no ratio substrings of s. We return 0.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. 1 <= num1, num2 <= s.length
+/// 3. num1 and num2 are coprime integers.
+/// </summary>
+long long LeetCodeArray::fixedRatio(string s, int num1, int num2)
+{
+    long long result = 0;
+    unordered_map<long long, long long> prefix_sum;
+    prefix_sum[0] = 1;
+    long long sum = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '0') sum += (long long)num2;
+        else sum -= (long long)num1;
+        result += prefix_sum[sum];
+        prefix_sum[sum]++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2498. Frog Jump II
+/// 
+/// Medium
+///	
+/// You are given a 0-indexed integer array stones sorted in strictly 
+/// increasing order representing the positions of stones in a river.
+///
+/// A frog, initially on the first stone, wants to travel to the last 
+/// stone and then return to the first stone. However, it can jump to 
+/// any stone at most once.
+///
+/// The length of a jump is the absolute difference between the position 
+/// of the stone the frog is currently on and the position of the stone 
+/// to which the frog jumps.
+///
+/// More formally, if the frog is at stones[i] and is jumping to 
+/// stones[j], the length of the jump is |stones[i] - stones[j]|.
+/// The cost of a path is the maximum length of a jump among all jumps 
+/// in the path.
+/// 
+/// Return the minimum cost of a path for the frog.
+/// Example 1:
+/// Input: stones = [0,2,5,6,7]
+/// Output: 5
+/// Explanation: The above figure represents one of the optimal paths 
+/// the frog can take.
+/// The cost of this path is 5, which is the maximum length of a jump.
+/// Since it is not possible to achieve a cost of less than 5, we return 
+/// it.
+///
+/// Example 2:
+/// Input: stones = [0,3,9]
+/// Output: 9
+/// Explanation: 
+/// The frog can jump directly to the last stone and come back to the 
+/// first stone. 
+/// In this case, the length of each jump will be 9. The cost for the 
+/// path will be max(9, 9) = 9.
+/// It can be shown that this is the minimum achievable cost.
+/// 
+/// Constraints:
+/// 1. 2 <= stones.length <= 10^5
+/// 2. 0 <= stones[i] <= 10^9
+/// 3. stones[0] == 0
+/// 4. stones is sorted in a strictly increasing order.
+/// </summary>
+int LeetCodeArray::maxJump(vector<int>& stones)
+{
+    int result = 0;
+    for (size_t i = 1; i < stones.size(); i++)
+    {
+        if (i == 1)
+        {
+            result = max(result, stones[i] - stones[i - 1]);
+        }
+        else
+        {
+            result = max(result, stones[i] - stones[i - 2]);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2488. Count Subarrays With Median K
+/// 
+/// Hard
+///	
+/// You are given an array nums of size n consisting of distinct integers 
+/// from 1 to n and a positive integer k.
+///
+/// Return the number of non-empty subarrays in nums that have a median 
+/// equal to k.
+///
+/// Note:
+/// The median of an array is the middle element after sorting the array 
+/// in ascending order. If the array is of even length, the median is the 
+/// left middle element.
+/// For example, the median of [2,3,1,4] is 2, and the 
+/// median of [8,4,3,5,1] is 4.
+/// A subarray is a contiguous part of an array.
+/// 
+/// Example 1:
+/// Input: nums = [3,2,1,4,5], k = 4
+/// Output: 3
+/// Explanation: The subarrays that have a median equal to 4 are: [4], 
+/// [4,5] and [1,4,5].
+/// Example 2:
+///
+/// Input: nums = [2,3,1], k = 3
+/// Output: 1
+/// Explanation: [3] is the only subarray that has a median equal to 3.
+/// 
+/// Constraints:
+/// 1. n == nums.length
+/// 2. 1 <= n <= 10^5
+/// 3. 1 <= nums[i], k <= n
+/// 4. The integers in nums are distinct.
+/// </summary>
+int LeetCodeArray::countSubarrays(vector<int>& nums, int k)
+{
+    unordered_map<int, int> prefix_sum;
+    prefix_sum[0] = 1;
+    bool is_k_found = false;
+    int sum = 0;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] == k)
+        {
+            is_k_found = true;
+        }
+        else if (nums[i] > k)
+        {
+            sum++;
+        }
+        else
+        {
+            sum--;
+        }
+        if (is_k_found)
+        {
+            if (prefix_sum.count(sum) > 0)
+            {
+                result += prefix_sum[sum];
+            }
+            if (prefix_sum.count(sum - 1) > 0)
+            {
+                result += prefix_sum[sum - 1];
+            }
+        }
+        else
+        {
+            prefix_sum[sum]++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2499. Minimum Total Cost to Make Arrays Unequal
+/// 
+/// Hard
+///	
+/// You are given two 0-indexed integer arrays nums1 and nums2, of equal 
+/// length n.
+///
+/// In one operation, you can swap the values of any two indices of nums1. 
+/// The cost of this operation is the sum of the indices.
+///
+/// Find the minimum total cost of performing the given operation any 
+/// number of times such that nums1[i] != nums2[i] for all 
+/// 0 <= i <= n - 1 after performing all the operations.
+///
+/// Return the minimum total cost such that nums1 and nums2 satisfy 
+/// the above condition. In case it is not possible, return -1.
+///
+/// Example 1:
+/// Input: nums1 = [1,2,3,4,5], nums2 = [1,2,3,4,5]
+/// Output: 10
+/// Explanation: 
+/// One of the ways we can perform the operations is:
+/// - Swap values at indices 0 and 3, incurring cost = 0 + 3 = 3. 
+///   Now, nums1 = [4,2,3,1,5]
+/// - Swap values at indices 1 and 2, incurring cost = 1 + 2 = 3. 
+///   Now, nums1 = [4,3,2,1,5].
+/// - Swap values at indices 0 and 4, incurring cost = 0 + 4 = 4. 
+///   Now, nums1 =[5,3,2,1,4].
+/// We can see that for each index i, nums1[i] != nums2[i]. 
+/// The cost required here is 10.
+/// Note that there are other ways to swap values, but it can be proven 
+/// that it is not possible to obtain a cost less than 10.
+///
+/// Example 2:
+/// Input: nums1 = [2,2,2,1,3], nums2 = [1,2,2,3,3]
+/// Output: 10
+/// Explanation: 
+/// One of the ways we can perform the operations is:
+/// - Swap values at indices 2 and 3, incurring cost = 2 + 3 = 5. 
+///   Now, nums1 = [2,2,1,2,3].
+/// - Swap values at indices 1 and 4, incurring cost = 1 + 4 = 5. 
+///   Now, nums1 = [2,3,1,2,2].
+/// The total cost needed here is 10, which is the minimum possible.
+///
+/// Example 3:
+/// Input: nums1 = [1,2,2], nums2 = [1,2,2]
+/// Output: -1
+/// Explanation: 
+/// It can be shown that it is not possible to satisfy the given 
+/// conditions irrespective of the number of operations we perform.
+/// Hence, we return -1.
+///
+/// Constraints:
+/// 1. n == nums1.length == nums2.length
+/// 2. 1 <= n <= 10^5
+/// 3. 1 <= nums1[i], nums2[i] <= n
+/// </summary>
+long long LeetCodeArray::minimumTotalCost(vector<int>& nums1, vector<int>& nums2)
+{
+    int n = nums1.size();
+    long long result = 0;
+    map<int, int> freq;
+    int maxFrequency = 0;
+    int maxFrequencyValue = 0; 
+    int toSwap = 0;
+
+    for (int i = 0; i < n; i++) 
+    {
+        if (nums1[i] == nums2[i])
+        {
+            freq[nums1[i]]++;
+            if (freq[nums1[i]] > maxFrequency)
+            {
+                maxFrequencyValue = nums1[i];
+                maxFrequency = freq[nums1[i]];
+            }
+            toSwap++;
+            result += (long long)i;
+        }
+    }
+
+    for (int i = 0; i < n; i++) 
+    {
+        if (maxFrequency > toSwap / 2 && 
+            nums1[i] != nums2[i] && 
+            nums1[i] != maxFrequencyValue && 
+            nums2[i] != maxFrequencyValue) 
+        {
+            result += (long long)i;
+            toSwap++;
+        }
+    }
+    if (maxFrequency > toSwap / 2) return -1;
+    return result;
+}
+
 #pragma endregion
 

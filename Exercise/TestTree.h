@@ -48,5 +48,9 @@ void TestLeetCode2385(void);
 void TestLeetCode2415(void);
 void TestLeetCode2440(void);
 void TestLeetCode2445(void);
+void TestLeetCode2471(void);
+void TestLeetCode2476(void);
+void TestLeetCode2458(void);
+void TestLeetCode2509(void);
 void TestLeetCodeTree(void);
 #endif  // TestTree

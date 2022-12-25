@@ -3305,8 +3305,193 @@ void TestLeetCode2435(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2495(void)
+{
+    Logger::WriteMessage("Test Leet Code 2495");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 9, 6, 7, 13 };
+    long long result = leetCode.evenProduct(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7,3,5 };
+    result = leetCode.evenProduct(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2484(void)
+{
+    Logger::WriteMessage("Test Leet Code 2484");
+    LeetCodeDP leetCode;
+    string s = "103301";
+    int result = leetCode.countPalindromes(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+     s = "0000000";
+    result = leetCode.countPalindromes(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "9999900000";
+    result = leetCode.countPalindromes(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2478(void)
+{
+    Logger::WriteMessage("Test Leet Code 2478");
+    LeetCodeDP leetCode;
+    string s = "23542185131";
+    int k = 3;
+    int minLength = 2;
+    int result = leetCode.beautifulPartitions(s, k, minLength);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("minLength = " + to_string(minLength) + "; result = " + to_string(result));
+
+    s = "23542185131";
+    k = 3;
+    minLength = 3;
+    result = leetCode.beautifulPartitions(s, k, minLength);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("minLength = " + to_string(minLength) + "; result = " + to_string(result));
+
+    s = "3312958";
+    k = 3;
+    minLength = 1;
+    result = leetCode.beautifulPartitions(s, k, minLength);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("minLength = " + to_string(minLength) + "; result = " + to_string(result));
+
+    s = "783938233588472343879134266968";
+    k = 4;
+    minLength = 6;
+    result = leetCode.beautifulPartitions(s, k, minLength);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("minLength = " + to_string(minLength) + "; result = " + to_string(result));
+
+}
+
+void TestLeetCode2464(void)
+{
+    Logger::WriteMessage("Test Leet Code 2464");
+    LeetCodeDP leetCode;
+    vector<int>nums = { 2, 6, 3, 4, 3 };
+    int result = leetCode.validSubarraySplit(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,5 };
+    result = leetCode.validSubarraySplit(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,1 };
+    result = leetCode.validSubarraySplit(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2, 6, 3, 4, 1, 2, 5, 7, 6, 8, 9, 1, 3 };
+    result = leetCode.validSubarraySplit(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2466(void)
+{
+    Logger::WriteMessage("Test Leet Code 2466");
+    LeetCodeDP leetCode;
+    int low = 3;
+    int high = 3;
+    int zero = 1;
+    int one = 1;
+    int result = leetCode.countGoodStrings(low, high, zero, one);
+    Logger::WriteMessage("low = " + to_string(low) + "; high = " + to_string(high));
+    Logger::WriteMessage("zero = " + to_string(zero) + "; one = " + to_string(one));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    low = 2; 
+    high = 3; 
+    zero = 1; 
+    one = 2;
+    result = leetCode.countGoodStrings(low, high, zero, one);
+    Logger::WriteMessage("low = " + to_string(low) + "; high = " + to_string(high));
+    Logger::WriteMessage("zero = " + to_string(zero) + "; one = " + to_string(one));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2501(void)
+{
+    Logger::WriteMessage("Test Leet Code 2501");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 4, 3, 6, 16, 8, 2 };
+    int result = leetCode.longestSquareStreak(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3,5,6,7 };
+    result = leetCode.longestSquareStreak(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2472(void)
+{
+    Logger::WriteMessage("Test Leet Code 2472");
+    LeetCodeDP leetCode;
+    string s = "abaccdbbd";
+    int k = 3;
+    int result = leetCode.maxPalindromes(s, k);
+    Logger::WriteMessage(s);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "adbcda";
+    k = 2;
+    result = leetCode.maxPalindromes(s, k);
+    Logger::WriteMessage(s);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "fttfjofpnpfydwdwdnns";
+    k = 2;
+    result = leetCode.maxPalindromes(s, k);
+    Logger::WriteMessage(s);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "iqqibcecvrbxxj";
+    k = 1;
+    result = leetCode.maxPalindromes(s, k);
+    Logger::WriteMessage(s);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2463(void)
+{
+    Logger::WriteMessage("Test Leet Code 2463");
+    LeetCodeDP leetCode;
+    vector<int> robot = { 0, 4, 6 };
+    vector<vector<int>> factory = { {2, 2},{6, 2} };
+    long long result = leetCode.minimumTotalDistance(robot, factory);
+    Logger::WriteMessage(robot);
+    Logger::WriteMessage(factory);
+    Logger::WriteMessage(";result = " + to_string(result));
+
+    robot = { 1,-1 };
+    factory = { {-2,1},{2,1} };
+    result = leetCode.minimumTotalDistance(robot, factory);
+    Logger::WriteMessage(robot);
+    Logger::WriteMessage(factory);
+    Logger::WriteMessage(";result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2463();
+    TestLeetCode2472();
+    TestLeetCode2501();
+    TestLeetCode2466();
+    TestLeetCode2464();
+    TestLeetCode2478();
+    TestLeetCode2484();
+    TestLeetCode2495();
     TestLeetCode2435();
     TestLeetCode2431();
     TestLeetCode2400();

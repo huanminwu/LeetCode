@@ -7980,8 +7980,195 @@ void TestLeetCode2459(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2475(void)
+{
+    Logger::WriteMessage("Test Leet Code 2475");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 4,4,2,4,3 };
+    int result = leetCode.unequalTriplets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1,1,1 };
+    result = leetCode.unequalTriplets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2465(void)
+{
+    Logger::WriteMessage("Test Leet Code 2465");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 4,1,4,0,3,5 };
+    int result = leetCode.distinctAverages(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,100 };
+    result = leetCode.distinctAverages(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2482(void)
+{
+    Logger::WriteMessage("Test Leet Code 2482");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = 
+    { 
+        {0, 1, 1},{1, 0, 1},{0, 0, 1} 
+    };
+    vector<vector<int>> result = leetCode.onesMinusZeros(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid =
+    {
+        {1,1,1} ,{1,1,1}
+    };
+    result = leetCode.onesMinusZeros(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2483(void)
+{
+    Logger::WriteMessage("Test Leet Code 2483");
+    LeetCodeArray leetCode;
+    string customers = "YYNY";
+    int result = leetCode.bestClosingTime(customers);
+    Logger::WriteMessage("customers = " + customers + "; result = " + to_string(result));
+
+    customers = "NNNNN";
+    result = leetCode.bestClosingTime(customers);
+    Logger::WriteMessage("customers = " + customers + "; result = " + to_string(result));
+
+    customers = "YYYY";
+    result = leetCode.bestClosingTime(customers);
+    Logger::WriteMessage("customers = " + customers + "; result = " + to_string(result));
+}
+
+void TestLeetCode2500(void)
+{
+    Logger::WriteMessage("Test Leet Code 2500");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {1, 2, 4},{3, 3, 1} };
+    int result = leetCode.deleteGreatestValue(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {10} };
+    result = leetCode.deleteGreatestValue(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2470(void)
+{
+    Logger::WriteMessage("Test Leet Code 2470");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 6, 2, 7, 1 };
+    int k = 6;
+    int result = leetCode.subarrayLCM(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3 };
+    k = 2;
+    result = leetCode.subarrayLCM(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2489(void)
+{
+    Logger::WriteMessage("Test Leet Code 2489");
+    LeetCodeArray leetCode;
+    string s = "0110011";
+    int num1 = 1;
+    int num2 = 2;
+    long long result = leetCode.fixedRatio(s, num1, num2);
+    Logger::WriteMessage("s = " + s + "; num1 = " + to_string(num1));
+    Logger::WriteMessage("num2 = " + to_string(num2) + "; result = " + to_string(result));
+
+    s = "10101";
+    num1 = 3;
+    num2 = 1;
+    result = leetCode.fixedRatio(s, num1, num2);
+    Logger::WriteMessage("s = " + s + "; num1 = " + to_string(num1));
+    Logger::WriteMessage("num2 = " + to_string(num2) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2498(void)
+{
+    Logger::WriteMessage("Test Leet Code 2498");
+    LeetCodeArray leetCode;
+    vector<int>stones = { 0, 2, 5, 6, 7 };
+    int result = leetCode.maxJump(stones);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    stones = { 0,3,9 };
+    result = leetCode.maxJump(stones);
+    Logger::WriteMessage(stones);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2488(void)
+{
+    Logger::WriteMessage("Test Leet Code 2488");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 2, 1, 4, 5 };
+    int k = 4;
+    int result = leetCode.countSubarrays(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " +to_string(k) + "; result = " + to_string(result));
+
+    nums = { 2,3,1 };
+    k = 3;
+    result = leetCode.countSubarrays(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2499(void)
+{
+    Logger::WriteMessage("Test Leet Code 2499");
+    LeetCodeArray leetCode;
+    vector<int> nums1 = { 1, 2, 3, 4, 5 };
+    vector<int> nums2 = { 1, 2, 3, 4, 5 };
+    long long result = leetCode.minimumTotalCost(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 2,2,2,1,3 };
+    nums2 = { 1,2,2,3,3 };
+    result = leetCode.minimumTotalCost(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,2,2 };
+    nums2 = { 1,2,2 };
+    result = leetCode.minimumTotalCost(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2499();
+    TestLeetCode2488();
+    TestLeetCode2498();
+    TestLeetCode2489();
+    TestLeetCode2470();
+    TestLeetCode2500();
+    TestLeetCode2483();
+    TestLeetCode2482();
+    TestLeetCode2465();
+    TestLeetCode2475();
     TestLeetCode2459();
     TestLeetCode2460();
     TestLeetCode2449();

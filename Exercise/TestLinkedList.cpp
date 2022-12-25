@@ -1051,8 +1051,28 @@ void TestLeetCode2181(void)
     leetCode.freeListNodes(result);
 }
 
+void TestLeetCode2487(void)
+{
+    Logger::WriteMessage("Test Leet Code 2487");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 5,2,13,3,8 };
+    ListNode* head = leetCode.generateListNodes(data_list);
+    ListNode* result = leetCode.removeNodes(head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 1,1,1,1 };
+    head = leetCode.generateListNodes(data_list);
+    result = leetCode.removeNodes(head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+}
+
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode2487();
     TestLeetCode2181();
     TestLeetCode2130();
     TestLeetCode2058();

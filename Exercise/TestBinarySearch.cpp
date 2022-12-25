@@ -1009,9 +1009,40 @@ void TestLeetCode2226(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2468(void)
+{
+    Logger::WriteMessage("Test Leet Code 2468");
+    LeetCodeBinarySearch leetCode;
+    string message = "this is really a very awesome message";
+    int limit = 9;
+    vector<string> result = leetCode.splitMessage(message, limit);
+    Logger::WriteMessage("message = " + message + "; limit = " + to_string(limit));
+    Logger::WriteMessage(result);
+    
+    message = "short message";
+    limit = 15;
+    result = leetCode.splitMessage(message, limit);
+    Logger::WriteMessage("message = " + message + "; limit = " + to_string(limit));
+    Logger::WriteMessage(result);
+
+    message = "abcdefghijklmnopqrstu";
+    limit = 8;
+    result = leetCode.splitMessage(message, limit);
+    Logger::WriteMessage("message = " + message + "; limit = " + to_string(limit));
+    Logger::WriteMessage(result);
+
+    message = 
+    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
+    limit = 10;
+    result = leetCode.splitMessage(message, limit);
+    Logger::WriteMessage("message = " + message + "; limit = " + to_string(limit));
+    Logger::WriteMessage(result);
+
+}
 
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode2468();
     TestLeetCode2226();
     TestLeetCode2187();
     TestLeetCode2137();

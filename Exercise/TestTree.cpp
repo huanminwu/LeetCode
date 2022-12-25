@@ -3570,8 +3570,103 @@ void TestLeetCode2445(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2471(void)
+{
+    Logger::WriteMessage("Test Leet Code 2471");
+    LeetCodeTree leetCode;
+    string input = "[1,4,3,7,6,8,5,null,null,null,null,9,null,10]";
+    TreeNode* root = leetCode.deserialize(input);
+    int result = leetCode.minimumOperations(root);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[1,3,2,7,6,5,4]";
+    root = leetCode.deserialize(input);
+    result = leetCode.minimumOperations(root);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[1,2,3,4,5,6]";
+    root = leetCode.deserialize(input);
+    result = leetCode.minimumOperations(root);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+}
+
+void TestLeetCode2476(void)
+{
+    Logger::WriteMessage("Test Leet Code 2476");
+    LeetCodeTree leetCode;
+    string input = "[6,2,13,1,4,9,15,null,null,null,null,null,null,14]";
+    vector<int> queries = { 2,5,16 };
+    TreeNode* root = leetCode.deserialize(input);
+    vector<vector<int>> result = leetCode.closestNodes(root, queries);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+    leetCode.freeTreeNodes(root);
+
+    input = "[4,null,9]";
+    queries = { 3 };
+    root = leetCode.deserialize(input);
+    result = leetCode.closestNodes(root, queries);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+    leetCode.freeTreeNodes(root);
+}
+
+void TestLeetCode2458(void)
+{
+    Logger::WriteMessage("Test Leet Code 2458");
+    LeetCodeTree leetCode;
+    string input = "[1,3,4,2,null,6,5,null,null,null,null,null,7]";
+    vector<int> queries = { 4};
+    TreeNode* root = leetCode.deserialize(input);
+    vector<int> result = leetCode.treeQueries(root, queries);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+    leetCode.freeTreeNodes(root);
+
+    input = "[5,8,9,2,1,3,7,4,6]";
+    queries = { 3,2,4,8 };
+    root = leetCode.deserialize(input);
+    result = leetCode.treeQueries(root, queries);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+    leetCode.freeTreeNodes(root);
+}
+
+void TestLeetCode2509(void)
+{
+    Logger::WriteMessage("Test Leet Code 2509");
+    LeetCodeTree leetCode;
+    int n = 3;
+    vector<vector<int>> queries = { {5, 3},{4, 7},{2, 3} };
+    vector<int> result = leetCode.cycleLengthQueries(n, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 2;
+    queries = { {1, 2} };
+    result = leetCode.cycleLengthQueries(n, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode2509();
+    TestLeetCode2458();
+    TestLeetCode2476();
+    TestLeetCode2471();
     TestLeetCode2445();
     TestLeetCode2440();
     TestLeetCode2415();

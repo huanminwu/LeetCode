@@ -6170,6 +6170,237 @@ public:
     /// 3. 1 <= queries[i] <= n
     /// </summary>
     int numberOfNodes(int n, vector<int>& queries);
+
+    /// <summary>
+    /// Leet Code 2471. Minimum Number of Operations to Sort a Binary Tree 
+    ///                 by Level
+    /// 
+    /// Medium
+    ///	
+    /// You are given the root of a binary tree with unique values.
+    ///
+    /// In one operation, you can choose any two nodes at the same level 
+    /// and swap their values.
+    ///
+    /// Return the minimum number of operations needed to make the values 
+    /// at each level sorted in a strictly increasing order.
+    ///
+    /// The level of a node is the number of edges along the path between 
+    /// it and the root node.
+    ///
+    /// Example 1:
+    /// Input: root = [1,4,3,7,6,8,5,null,null,null,null,9,null,10]
+    /// Output: 3
+    /// Explanation:
+    /// - Swap 4 and 3. The 2nd level becomes [3,4].
+    /// - Swap 7 and 5. The 3rd level becomes [5,6,8,7].
+    /// - Swap 8 and 7. The 3rd level becomes [5,6,7,8].
+    /// We used 3 operations so return 3.
+    /// It can be proven that 3 is the minimum number of operations needed.
+    ///
+    /// Example 2:
+    /// Input: root = [1,3,2,7,6,5,4]
+    /// Output: 3
+    /// Explanation:
+    /// - Swap 3 and 2. The 2nd level becomes [2,3].
+    /// - Swap 7 and 4. The 3rd level becomes [4,6,5,7].
+    /// - Swap 6 and 5. The 3rd level becomes [4,5,6,7].
+    /// We used 3 operations so return 3.
+    /// It can be proven that 3 is the minimum number of operations needed.
+    ///
+    /// Example 3:
+    /// Input: root = [1,2,3,4,5,6]
+    /// Output: 0
+    /// Explanation: Each level is already sorted in increasing order so 
+    /// return 0.
+    ///
+    /// Constraints:
+    /// 1. The number of nodes in the tree is in the range [1, 10^5].
+    /// 2. 1 <= Node.val <= 105
+    /// 3. All the values of the tree are unique.
+    /// </summary>
+    int minimumOperations(TreeNode* root);
+
+    /// <summary>
+    /// Leet Code 2476. Closest Nodes Queries in a Binary Search Tree 
+    /// </summary>
+    void closestNodesSort(TreeNode* node, vector<int>& sorted);
+
+    /// <summary>
+    /// Leet Code 2476. Closest Nodes Queries in a Binary Search Tree 
+    /// 
+    /// Medium
+    ///	
+    /// You are given the root of a binary search tree and an array queries of 
+    /// size n consisting of positive integers.
+    ///
+    /// Find a 2D array answer of size n where answer[i] = [mini, maxi]:
+    ///
+    /// mini is the largest value in the tree that is smaller than or equal to 
+    /// queries[i]. If a such value does not exist, add -1 instead.
+    /// maxi is the smallest value in the tree that is greater than or equal to
+    /// queries[i]. If a such value does not exist, add -1 instead.
+    /// Return the array answer.
+    ///
+    /// Example 1:
+    /// Input: root = [6,2,13,1,4,9,15,null,null,null,null,null,null,14], 
+    /// queries = [2,5,16]
+    /// Output: [[2,2],[4,6],[15,-1]]
+    /// Explanation: We answer the queries in the following way:
+    /// - The largest number that is smaller or equal than 2 in the tree 
+    ///   is 2, and the smallest number that is greater or equal than 2 
+    ///   is still 2. So the answer for the first query is [2,2].
+    /// - The largest number that is smaller or equal than 5 in the tree is 4, 
+    /// and the smallest number that is greater or equal than 5 is 6. So the 
+    /// answer for the second query is [4,6].
+    /// - The largest number that is smaller or equal than 16 in the tree 
+    ///   is 15, and the smallest number that is greater or equal than 16 
+    ///   does not exist. So the answer for the third query is [15,-1].
+    ///
+    /// Example 2:
+    /// Input: root = [4,null,9], queries = [3]
+    /// Output: [[-1,4]]
+    /// Explanation: The largest number that is smaller or equal to 3 in 
+    /// the tree does not exist, and the smallest number that is greater or 
+    /// equal to 3 is 4. So the answer for the query is [-1,4].
+    /// 
+    /// Constraints:
+    /// 1. The number of nodes in the tree is in the range [2, 10^5].
+    /// 2. 1 <= Node.val <= 10^6
+    /// 3. n == queries.length
+    /// 4. 1 <= n <= 10^5
+    /// 5. 1 <= queries[i] <= 10^6
+    /// </summary>
+    vector<vector<int>> closestNodes(TreeNode* root, vector<int>& queries);
+
+    /// <summary>
+    /// Leet Code 2458. Height of Binary Tree After Subtree Removal Queries
+    /// </summary>
+    int treeQueriesDepth(TreeNode* root, int level, unordered_map<int, int>& levels,
+        unordered_map<int, int>& depths, unordered_map<int, int>& depth1,
+        unordered_map<int, int>& depth2);
+
+
+    /// <summary>
+    /// Leet Code 2458. Height of Binary Tree After Subtree Removal Queries
+    /// 
+    /// Medium
+    ///
+    /// You are given the root of a binary tree with n nodes. Each node is 
+    /// assigned a unique value from 1 to n. You are also given an array 
+    /// queries of size m.
+    ///
+    /// You have to perform m independent queries on the tree where in 
+    /// the ith query you do the following:
+    ///
+    /// Remove the subtree rooted at the node with the value queries[i] from 
+    /// the tree. It is guaranteed that queries[i] will not be equal to the 
+    /// value of the root.
+    /// Return an array answer of size m where answer[i] is the height of the 
+    /// tree after performing the ith query.
+    ///
+    /// Note:
+    ///
+    /// The queries are independent, so the tree returns to its initial 
+    /// state after each query.
+    /// The height of a tree is the number of edges in the longest simple 
+    /// path from the root to some node in the tree.
+    /// 
+    /// Example 1:
+    /// Input: root = [1,3,4,2,null,6,5,null,null,null,null,null,7], 
+    ///        queries = [4]
+    /// Output: [2]
+    /// Explanation: The diagram above shows the tree after removing the 
+    /// subtree rooted at node with value 4.
+    /// The height of the tree is 2 (The path 1 -> 3 -> 2).
+    ///
+    /// Example 2:
+    /// Input: root = [5,8,9,2,1,3,7,4,6], queries = [3,2,4,8]
+    /// Output: [3,2,3,2]
+    /// Explanation: We have the following queries:
+    /// - Removing the subtree rooted at node with value 3. The height of the tree 
+    ///   becomes 3 (The path 5 -> 8 -> 2 -> 4).
+    /// - Removing the subtree rooted at node with value 2. 
+    ///   The height of the tree becomes 2 (The path 5 -> 8 -> 1).
+    /// - Removing the subtree rooted at node with value 4. 
+    ///   The height of the tree becomes 3 (The path 5 -> 8 -> 2 -> 6).
+    /// - Removing the subtree rooted at node with value 8. The height 
+    ///   of the tree becomes 2 (The path 5 -> 9 -> 3).
+    ///
+    /// Constraints:
+    /// 1. The number of nodes in the tree is n.
+    /// 2. 2 <= n <= 10^5
+    /// 3. 1 <= Node.val <= n
+    /// 4. All the values in the tree are unique.
+    /// 5. m == queries.length
+    /// 6. 1 <= m <= min(n, 10^4)
+    /// 7. 1 <= queries[i] <= n
+    /// 8. queries[i] != root.val
+    /// </summary>
+    vector<int> treeQueries(TreeNode* root, vector<int>& queries);
+
+    /// <summary>
+    /// Leet Code 2509. Cycle Length Queries in a Tree
+    /// 
+    /// Hard
+    ///	
+    /// You are given an integer n. There is a complete binary tree with 
+    /// 2n - 1 nodes. The root of that tree is the node with the value 1, 
+    /// and every node with a value val in the range [1, 2n - 1 - 1] has 
+    /// two children where:
+    ///
+    /// The left node has the value 2 * val, and
+    /// The right node has the value 2 * val + 1.
+    /// You are also given a 2D integer array queries of length m, where 
+    /// queries[i] = [ai, bi]. For each query, solve the following 
+    /// problem:
+    ///
+    /// Add an edge between the nodes with values ai and bi.
+    /// Find the length of the cycle in the graph.
+    /// Remove the added edge between nodes with values ai and bi.
+    /// Note that:
+    /// A cycle is a path that starts and ends at the same node, and each 
+    /// edge in the path is visited only once.
+    /// The length of a cycle is the number of edges visited in the cycle.
+    /// There could be multiple edges between two nodes in the tree after 
+    /// adding the edge of the query.
+    /// Return an array answer of length m where answer[i] is the answer 
+    /// to the ith query.
+    /// 
+    /// Example 1:
+    /// 1. Input: n = 3, queries = [[5,3],[4,7],[2,3]]
+    /// 2. Output: [4,5,3]
+    /// Explanation: The diagrams above show the tree of 2^3 - 1 nodes. 
+    /// Nodes colored in red describe the nodes in the cycle after adding 
+    /// the edge.
+    /// - After adding the edge between nodes 3 and 5, the graph contains 
+    ///   a cycle of nodes [5,2,1,3]. Thus answer to the first query is 4. 
+    ///   We delete the added edge and process the next query.
+    /// - After adding the edge between nodes 4 and 7, the graph contains 
+    ///   a cycle of nodes [4,2,1,3,7]. Thus answer to the second query is 5. 
+    ///   We delete the added edge and process the next query.
+    /// - After adding the edge between nodes 2 and 3, the graph contains 
+    ///   a cycle of nodes [2,1,3]. Thus answer to the third query is 3. 
+    ///   We delete the added edge.
+    ///
+    /// Example 2:
+    /// Input: n = 2, queries = [[1,2]]
+    /// Output: [2]
+    /// Explanation: The diagram above shows the tree of 22 - 1 nodes. Nodes 
+    /// colored in red describe the nodes in the cycle after adding the edge.
+    /// - After adding the edge between nodes 1 and 2, the graph contains a 
+    ///   cycle of nodes [2,1]. Thus answer for the first query is 2. We 
+    ///   delete the added edge.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 30
+    /// 2. m == queries.length
+    /// 3. 1 <= m <= 10^5
+    /// 4. queries[i].length == 2
+    /// 5. 1 <= ai, bi <= 2n - 1
+    /// 6. ai != bi
+    /// </summary>
+    vector<int> cycleLengthQueries(int n, vector<vector<int>>& queries);
 #pragma endregion
 };
 

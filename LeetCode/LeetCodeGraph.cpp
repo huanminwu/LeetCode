@@ -15771,4 +15771,840 @@ int LeetCodeGraph::numberOfGoodPaths(vector<int>& vals, vector<vector<int>>& edg
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2467. Most Profitable Path in a Tree
+/// 
+/// Medium
+///	
+/// There is an undirected tree with n nodes labeled from 0 to n - 1, 
+/// rooted at node 0. You are given a 2D integer array edges of length 
+/// n - 1 where edges[i] = [ai, bi] indicates that there is an edge 
+/// between nodes ai and bi in the tree.
+///
+/// At every node i, there is a gate. You are also given an array of 
+/// even integers amount, where amount[i] represents:
+///
+/// the price needed to open the gate at node i, if 
+/// amount[i] is negative, or,
+/// the cash reward obtained on opening the gate at 
+/// node i, otherwise.
+/// The game goes on as follows:
+/// 
+/// Initially, Alice is at node 0 and Bob is at node bob.
+/// At every second, Alice and Bob each move to an adjacent node. Alice 
+/// moves towards some leaf node, while Bob moves towards node 0.
+/// For every node along their path, Alice and Bob either spend money 
+/// to open the gate at that node, or accept the reward. Note that:
+/// If the gate is already open, no price will be required, nor will 
+/// there be any cash reward.
+/// If Alice and Bob reach the node simultaneously, they share the 
+/// price/reward for opening the gate there. In other words, if the 
+/// price to open the gate is c, then both Alice and Bob pay c / 2 each. 
+/// Similarly, if the reward at the gate is c, both of them receive 
+/// c / 2 each.
+/// If Alice reaches a leaf node, she stops moving. Similarly, if Bob 
+/// reaches node 0, he stops moving. Note that these events are 
+/// independent of each other.
+/// Return the maximum net income Alice can have if she travels 
+/// towards the optimal leaf node.
+///
+/// Example 1:
+/// Input: edges = [[0,1],[1,2],[1,3],[3,4]], bob = 3, 
+/// amount = [-2,4,2,-4,6]
+/// Output: 6
+/// Explanation: 
+/// The above diagram represents the given tree. The game goes as follows:
+/// - Alice is initially on node 0, Bob on node 3. They open the gates of 
+///   their respective nodes.
+///  Alice's net income is now -2.
+/// - Both Alice and Bob move to node 1. 
+///   Since they reach here simultaneously, they open the gate together 
+///   and share the reward.
+/// Alice's net income becomes -2 + (4 / 2) = 0.
+/// - Alice moves on to node 3. Since Bob already opened its gate, Alice's 
+///   income remains unchanged.
+///  Bob moves on to node 0, and stops moving.
+/// - Alice moves on to node 4 and opens the gate there. Her net income 
+///   becomes 0 + 6 = 6.
+/// Now, neither Alice nor Bob can make any further moves, and the 
+/// game ends.
+/// It is not possible for Alice to get a higher net income.
+///
+/// Example 2:
+/// 
+/// Input: edges = [[0,1]], bob = 1, amount = [-7280,2350]
+/// Output: -7280
+/// Explanation: 
+/// Alice follows the path 0->1 whereas Bob follows the path 1->0.
+/// Thus, Alice opens the gate at node 0 only. Hence, her net income 
+/// is -7280. 
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 10^5
+/// 2. edges.length == n - 1
+/// 3. edges[i].length == 2
+/// 4. 0 <= ai, bi < n
+/// 5. ai != bi
+/// 6. edges represents a valid tree.
+/// 7. 1 <= bob < n
+/// 8. amount.length == n
+/// 9. amount[i] is an even integer in the range [-10^4, 10^4].
+/// </summary>
+int LeetCodeGraph::mostProfitablePath(vector<vector<int>>& edges, int bob, vector<int>& amount)
+{
+    int n = edges.size() + 1;
+    vector<vector<int>> neighbors(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(edges[i][1]);
+        neighbors[edges[i][1]].push_back(edges[i][0]);
+    }
+    vector<vector<int>>tree(n);
+    vector<int>reverse(n);
+
+    vector<int> visited(n);
+    queue<int> queue;
+    queue.push(0);
+    visited[0] = 1;
+    while (!queue.empty())
+    {
+        int node = queue.front();
+        queue.pop();
+        for (size_t i = 0; i < neighbors[node].size(); i++)
+        {
+            int next = neighbors[node][i];
+            if (visited[next] == 0)
+            {
+                visited[next] = 1;
+                tree[node].push_back(next);
+                reverse[next] = node;
+                queue.push(next);
+            }
+        }
+    }
+    vector<int> bobs(n, -1);
+    int b = bob;
+    int step = 0;
+    while (b != 0)
+    {
+        bobs[b] = step;
+        b = reverse[b];
+        step++;
+    }
+    bobs[b] = step;
+    vector<int> alices(n);
+    int result = INT_MIN;
+    alices[0] = amount[0];
+    if (bob == 0) alices[0] = alices[0] / 2;
+    queue.push(0);
+    step = 0;
+    int max_node = 0;
+    while (!queue.empty())
+    {
+        int size = queue.size();
+        step++;
+        for (int k = 0; k < size; k++)
+        {
+            int node = queue.front();
+            queue.pop();
+            for (size_t i = 0; i < tree[node].size(); i++)
+            {
+                int next = tree[node][i];
+                alices[next] += alices[node];
+                if (bobs[next] == -1) alices[next] += amount[next];
+                else if (bobs[next] > step) alices[next] += amount[next];
+                else if (bobs[next] == step) alices[next] += amount[next] / 2;
+                else alices[next] += 0;
+                queue.push(next);
+            }
+            if (tree[node].empty())
+            {
+                if (alices[node] > result) max_node = node;
+                result = max(result, alices[node]);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2473. Minimum Cost to Buy Apples
+/// </summary>
+long long LeetCodeGraph::minCost(int start, vector<vector<pair<int, int>>>& neighbors, vector<int>& appleCost, int k)
+{
+    long long result = LLONG_MAX;
+    int distance = 0;
+    set<pair<int, int>> pq;
+    pq.insert(make_pair(0, start));
+    vector<int> visited(neighbors.size());
+    while (!pq.empty())
+    {
+        pair<int, int> pair = *pq.begin();
+        pq.erase(pq.begin());
+        int distance = pair.first;
+        int node = pair.second;
+        if (visited[node] == 1) continue;
+        visited[node] = 1;
+        result = min(result, (long long)appleCost[node-1] + ((long long)1 + (long long)k) * (long long)distance);
+        for (size_t i = 0; i < neighbors[node].size(); i++)
+        {
+            pq.insert(make_pair(neighbors[node][i].second + distance, neighbors[node][i].first));
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 2473. Minimum Cost to Buy Apples
+/// 
+/// Medium
+///	
+/// You are given a positive integer n representing n cities numbered 
+/// from 1 to n. You are also given a 2D array roads, where 
+/// roads[i] = [ai, bi, costi] indicates that there is a bidirectional 
+/// road between cities ai and bi with a cost of traveling equal to costi.
+///
+/// You can buy apples in any city you want, but some cities have 
+/// different costs to buy apples. You are given the array appleCost 
+/// where appleCost[i] is the cost of buying one apple from city i.
+///
+/// You start at some city, traverse through various roads, and 
+// eventually buy exactly one apple from any city. After you buy that 
+/// apple, you have to return back to the city you started at, but 
+/// now the cost of all the roads will be multiplied by a given 
+/// factor k.
+///
+/// Given the integer k, return an array answer of size n where 
+/// answer[i] is the minimum total cost to buy an apple if you start 
+/// at city i.
+///
+/// Example 1:
+/// Input: n = 4, roads = [[1,2,4],[2,3,2],[2,4,5],[3,4,1],[1,3,4]], 
+/// appleCost = [56,42,102,301], k = 2
+/// Output: [54,42,48,51]
+/// Explanation: The minimum cost for each starting city is the following:
+/// - Starting at city 1: You take the path 1 -> 2, buy an apple at 
+/// city 2, and finally take the path 2 -> 1. The total cost 
+/// is 4 + 42 + 4 * 2 = 54.
+/// - Starting at city 2: You directly buy an apple at city 2. 
+///   The total cost is 42.
+/// - Starting at city 3: You take the path 3 -> 2, buy an apple at 
+///   city 2, and finally take the path 2 -> 3. The total cost is 
+///   2 + 42 + 2 * 2 = 48.
+/// - Starting at city 4: You take the path 4 -> 3 -> 2 then you buy at 
+///   city 2, and 
+///   finally take the path 2 -> 3 -> 4. The total cost is 
+///   1 + 2 + 42 + 1 * 2 + 2 * 2 = 51.
+///
+/// Example 2:
+/// Input: n = 3, roads = [[1,2,5],[2,3,1],[3,1,2]], 
+/// appleCost = [2,3,1], k = 3
+/// Output: [2,3,1]
+/// Explanation: It is always optimal to buy the apple in the starting 
+/// city.
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 1000
+/// 2. 1 <= roads.length <= 1000
+/// 3. 1 <= ai, bi <= n
+/// 4. ai != bi
+/// 5. 1 <= costi <= 10^5
+/// 6. appleCost.length == n
+/// 7. 1 <= appleCost[i] <= 10^5
+/// 8. 1 <= k <= 100
+/// 9. There are no repeated edges.
+/// </summary>
+vector<long long> LeetCodeGraph::minCost(int n, vector<vector<int>>& roads, vector<int>& appleCost, int k)
+{
+    vector<vector<pair<int, int>>> neighbors(n+1);
+    for (size_t i = 0; i < roads.size(); i++)
+    {
+        neighbors[roads[i][0]].push_back(make_pair(roads[i][1], roads[i][2]));
+        neighbors[roads[i][1]].push_back(make_pair(roads[i][0], roads[i][2]));
+    }
+    vector<long long> result(n);
+    for (int i = 0; i < n; i++)
+    {
+        result[i] = minCost(i + 1, neighbors, appleCost, k);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2477. Minimum Fuel Cost to Report to the Capital
+/// 
+/// Medium
+///	
+/// There is a tree (i.e., a connected, undirected graph with no cycles) 
+/// structure country network consisting of n cities numbered from 0 to 
+/// n - 1 and exactly n - 1 roads. The capital city is city 0. You are 
+/// given a 2D integer array roads where roads[i] = [ai, bi] denotes 
+/// that there exists a bidirectional road connecting cities ai and bi.
+///
+/// There is a meeting for the representatives of each city. The meeting 
+/// is in the capital city.
+///
+/// There is a car in each city. You are given an integer seats that 
+/// indicates the number of seats in each car.
+///
+/// A representative can use the car in their city to travel or change 
+/// the car and ride with another representative. The cost of traveling 
+/// between two cities is one liter of fuel.
+///
+/// Return the minimum number of liters of fuel to reach the capital city.
+/// 
+/// Example 1:
+/// Input: roads = [[0,1],[0,2],[0,3]], seats = 5
+/// Output: 3
+/// Explanation: 
+/// - Representative1 goes directly to the capital with 1 liter of fuel.
+/// - Representative2 goes directly to the capital with 1 liter of fuel.
+/// - Representative3 goes directly to the capital with 1 liter of fuel.
+/// It costs 3 liters of fuel at minimum. 
+/// It can be proven that 3 is the minimum number of liters of fuel needed.
+///
+/// Example 2:
+/// Input: roads = [[3,1],[3,2],[1,0],[0,4],[0,5],[4,6]], seats = 2
+/// Output: 7
+/// Explanation: 
+/// - Representative2 goes directly to city 3 with 1 liter of fuel.
+/// - Representative2 and representative3 go together to city 1 with 1 
+///   liter of fuel.
+/// - Representative2 and representative3 go together to the capital 
+///   with 1 liter of fuel.
+/// - Representative1 goes directly to the capital with 1 liter of fuel.
+/// - Representative5 goes directly to the capital with 1 liter of fuel.
+/// - Representative6 goes directly to city 4 with 1 liter of fuel.
+/// - Representative4 and representative6 go together to the capital with 1 
+///   liter of fuel.
+/// It costs 7 liters of fuel at minimum. 
+/// It can be proven that 7 is the minimum number of liters of fuel needed.
+///
+/// Example 3:
+/// Input: roads = [], seats = 1
+/// Output: 0
+/// Explanation: No representatives need to travel to the capital city.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// 2. roads.length == n - 1
+/// 3. roads[i].length == 2
+/// 4. 0 <= ai, bi < n
+/// 5. ai != bi
+/// 6. roads represents a valid tree.
+/// 7. 1 <= seats <= 10^5
+/// </summary>
+long long LeetCodeGraph::minimumFuelCost(vector<vector<int>>& roads, int seats)
+{
+    int n = 0;
+    for (size_t i = 0; i < roads.size(); i++)
+    {
+        n = max(n, roads[i][0]);
+        n = max(n, roads[i][1]);
+    }
+    n++;
+    vector<vector<int>> neighbors(n);
+    for (size_t i = 0; i < roads.size(); i++)
+    {
+        neighbors[roads[i][0]].push_back(roads[i][1]);
+        neighbors[roads[i][1]].push_back(roads[i][0]);
+    }
+    vector<int> degree(n);
+    vector<int> parents(n, -1);
+    queue<int> queue;
+    queue.push(0);
+    parents[0] = 0;
+    while (!queue.empty())
+    {
+        int node = queue.front();
+        queue.pop();
+        for (size_t i = 0; i < neighbors[node].size(); i++)
+        {
+            int next = neighbors[node][i];
+            if (parents[next] != -1) continue;
+            parents[next] = node;
+            degree[node]++;
+            queue.push(next);
+        }
+    }
+    long long result = 0;
+    vector<int> people(n, 1);
+    for (int i = 0; i < n; i++)
+    {
+        if (degree[i] == 0 && i != 0) queue.push(i);
+    }
+    while (!queue.empty())
+    {
+        int node = queue.front();
+        queue.pop();
+        result = result + ((long long)people[node] + (long long)seats - (long long)1) / (long long)seats;
+        int parent = parents[node];
+        degree[parent]--;
+        people[parent] += people[node];
+        if (degree[parent] == 0 && parent != 0) queue.push(parent);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2492. Minimum Score of a Path Between Two Cities
+/// 
+/// Medium
+///	
+/// You are given a positive integer n representing n cities numbered from 
+/// 1 to n. You are also given a 2D array roads where roads[i] = [ai, bi, 
+/// distancei] indicates that there is a bidirectional road between cities 
+/// ai and bi with a distance equal to distancei. The cities graph is not 
+/// necessarily connected.
+///
+/// The score of a path between two cities is defined as the minimum 
+/// distance of a road in this path.
+///
+/// Return the minimum possible score of a path between cities 1 and n.
+///
+/// Note:
+/// A path is a sequence of roads between two cities.
+/// It is allowed for a path to contain the same road multiple times, and 
+/// you can visit cities 1 and n multiple times along the path.
+/// The test cases are generated such that there is at least one path 
+/// between 1 and n.
+/// 
+/// Example 1:
+/// Input: n = 4, roads = [[1,2,9],[2,3,6],[2,4,5],[1,4,7]]
+/// Output: 5
+/// Explanation: The path from city 1 to 4 with the minimum score 
+/// is: 1 -> 2 -> 4. The score of this path is min(9,5) = 5.
+/// It can be shown that no other path has less score.
+///
+/// Example 2:
+/// Input: n = 4, roads = [[1,2,2],[1,3,4],[3,4,7]]
+/// Output: 2
+/// Explanation: The path from city 1 to 4 with the minimum score 
+/// is: 1 -> 2 -> 1 -> 3 -> 4. The score of this path is min(2,2,4,7) = 2.
+/// Constraints:
+/// 1. 2 <= n <= 10^5
+/// 2. 1 <= roads.length <= 10^5
+/// 3. roads[i].length == 3
+/// 4. 1 <= ai, bi <= n
+/// 5. ai != bi
+/// 6. 1 <= distancei <= 10^4
+/// 7. There are no repeated edges.
+/// 8. There is at least one path between 1 and n.
+/// </summary>
+int LeetCodeGraph::minScore(int n, vector<vector<int>>& roads)
+{
+    set<vector<int>> pq;
+    for (size_t i = 0; i < roads.size(); i++)
+    {
+        pq.insert({ roads[i][2], roads[i][0], roads[i][1] });
+    }
+    vector<int> parents(n + 1);
+    for (int i = 1; i <= n; i++) parents[i] = i;
+    vector<int> scores(n + 1, INT_MAX);
+    while (!pq.empty())
+    {
+        vector<int> path = *pq.begin();
+        pq.erase(pq.begin());
+
+        int a = path[1];
+        int b = path[2];
+        while (parents[a] != parents[parents[a]])
+        {
+            parents[a] = parents[parents[a]];
+        }
+        while (parents[b] != parents[parents[b]])
+        {
+            parents[b] = parents[parents[b]];
+        }
+        a = parents[a];
+        b = parents[b];
+        parents[b] = a;
+        scores[a] = min(scores[a], path[0]);
+        scores[a] = min(scores[a], scores[b]);
+    }
+    while (parents[n] != parents[parents[n]])
+    {
+        parents[n] = parents[parents[n]];
+    }
+    return scores[parents[n]];
+}
+
+
+/// <summary>
+/// Leet Code 2497. Maximum Star Sum of a Graph
+/// 
+/// Medium
+///	
+/// There is an undirected graph consisting of n nodes numbered from 0 
+/// to n - 1. You are given a 0-indexed integer array vals of length n 
+/// where vals[i] denotes the value of the ith node.
+///
+/// You are also given a 2D integer array edges where edges[i] = [ai, bi] 
+/// denotes that there exists an undirected edge connecting nodes ai 
+/// and bi.
+///
+/// A star graph is a subgraph of the given graph having a center node 
+/// containing 0 or more neighbors. In other words, it is a subset of 
+/// edges of the given graph such that there exists a common node for 
+/// all edges.
+///
+/// The image below shows star graphs with 3 and 4 neighbors respectively, 
+/// centered at the blue node.
+///
+///
+/// The star sum is the sum of the values of all the nodes present in the 
+/// star graph.
+///
+/// Given an integer k, return the maximum star sum of a star graph 
+/// containing at most k edges.
+///
+/// Example 1:
+/// Input: vals = [1,2,3,4,10,-10,-20], edges = 
+/// [[0,1],[1,2],[1,3],[3,4],[3,5],[3,6]], k = 2
+/// Output: 16
+/// Explanation: The above diagram represents the input graph.
+/// The star graph with the maximum star sum is denoted by blue. It is 
+/// centered at 3 and includes its neighbors 1 and 4.
+/// It can be shown it is not possible to get a star graph with a sum 
+/// greater than 16.
+///
+/// Example 2:
+/// 
+/// Input: vals = [-5], edges = [], k = 0
+/// Output: -5
+/// Explanation: There is only one possible star graph, which is node 0 
+/// itself.
+/// Hence, we return -5.
+/// 
+/// Constraints:
+/// 1. n == vals.length
+/// 2. 1 <= n <= 105
+/// 3. -104 <= vals[i] <= 104
+/// 4. 0 <= edges.length <= min(n * (n - 1) / 2, 105)
+/// 5. edges[i].length == 2
+/// 6. 0 <= ai, bi <= n - 1
+/// 7. ai != bi
+/// 8. 0 <= k <= n - 1
+/// </summary>
+int LeetCodeGraph::maxStarSum(vector<int>& vals, vector<vector<int>>& edges, int k)
+{
+    int n = vals.size();
+    vector<priority_queue<int>> pq(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        pq[edges[i][0]].push(vals[edges[i][1]]);
+        pq[edges[i][1]].push(vals[edges[i][0]]);
+    }
+    int result = INT_MIN;
+    for (int i = 0; i < n; i++)
+    {
+        int sum = vals[i];
+        for (int j = 0; j < k && !pq[i].empty(); j++)
+        {
+            if (pq[i].top() < 0) break;
+            sum += pq[i].top();
+            pq[i].pop();
+        }
+        result = max(result, sum);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2493. Divide Nodes Into the Maximum Number of Groups
+/// 
+/// Hard
+///	
+/// You are given a positive integer n representing the number of nodes 
+/// in an undirected graph. The nodes are labeled from 1 to n.
+///
+/// You are also given a 2D integer array edges, where 
+/// edges[i] = [ai, bi] indicates that there is a bidirectional edge 
+/// between nodes ai and bi. Notice that the given graph may be 
+/// disconnected.
+///
+/// Divide the nodes of the graph into m groups (1-indexed) such that:
+/// Each node in the graph belongs to exactly one group.
+/// For every pair of nodes in the graph that are connected by an 
+/// edge [ai, bi], if ai belongs to the group with index x, and bi belongs 
+/// to the group with index y, then |y - x| = 1.
+/// Return the maximum number of groups (i.e., maximum m) into which you 
+/// can divide the nodes. Return -1 if it is impossible to group the nodes 
+/// with the given conditions.
+///
+/// Example 1:
+/// Input: n = 6, edges = [[1,2],[1,4],[1,5],[2,6],[2,3],[4,6]]
+/// Output: 4
+/// Explanation: As shown in the image we:
+/// - Add node 5 to the first group.
+/// - Add node 1 to the second group.
+/// - Add nodes 2 and 4 to the third group.
+/// - Add nodes 3 and 6 to the fourth group.
+/// We can see that every edge is satisfied.
+/// It can be shown that that if we create a fifth group and move any node 
+/// from the third or fourth group to it, at least on of the edges will 
+/// not be satisfied.
+///
+/// Example 2:
+/// Input: n = 3, edges = [[1,2],[2,3],[3,1]]
+/// Output: -1
+/// Explanation: If we add node 1 to the first group, node 2 to the second 
+/// group, and node 3 to the third group to satisfy the first two edges, 
+/// we can see that the third edge will not be satisfied.
+/// It can be shown that no grouping is possible.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 500
+/// 2. 1 <= edges.length <= 10^4
+/// 3. edges[i].length == 2
+/// 4. 1 <= ai, bi <= n
+/// 5. ai != bi
+/// 6. There is at most one edge between any pair of vertices.
+/// </summary>
+int LeetCodeGraph::magnificentSets(int n, vector<vector<int>>& edges)
+{
+    vector<vector<int>> neighbors(n+1);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(edges[i][1]);
+        neighbors[edges[i][1]].push_back(edges[i][0]);
+    }
+    vector<int> groups(n + 1);
+    vector<int> depths(n + 1);
+    for (int i = 1; i <= n; i++)
+    {
+        int level = 1;
+        queue<int>q;
+        q.push(i);
+        vector<int> levels(n + 1);
+        levels[i] = 1;
+        while (!q.empty())
+        {
+            int size = q.size();
+            level++;
+            for (int j = 0; j < size; j++)
+            {
+                auto u = q.front();
+                q.pop();
+                if (groups[u] == 0) groups[u] = i;
+                for (int& v : neighbors[u])
+                {
+                    if (levels[v] == 0)
+                    {
+                        levels[v] = level;
+                        q.push(v);
+                    }
+                    else
+                    {
+                        if ((levels[v] % 2) != (level % 2))
+                        {
+                            return -1;
+                        }
+                    }
+                }
+            }
+        }
+        depths[groups[i]] = max(depths[groups[i]], level - 1);
+    }
+    int result = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        result = result + depths[i];
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2503. Maximum Number of Points From Grid Queries
+/// 
+/// Hard
+///	
+/// You are given an m x n integer matrix grid and an array queries of 
+/// size k.
+/// Find an array answer of size k such that for each integer queres[i] 
+/// you start in the top left cell of the matrix and repeat the following 
+/// process:
+///
+/// If queries[i] is strictly greater than the value of the current cell 
+/// that you are in, then you get one point if it is your first time visiting 
+/// this cell, and you can move to any adjacent cell in all 4 directions: 
+/// up, down, left, and right.
+/// Otherwise, you do not get any points, and you end this process.
+/// After the process, answer[i] is the maximum number of points you can get. 
+/// Note that for each query you are allowed to visit the same cell multiple 
+/// times.
+///
+/// Return the resulting array answer.
+/// 
+/// Example 1:
+/// Input: grid = [[1,2,3],[2,5,7],[3,5,1]], queries = [5,6,2]
+/// Output: [5,8,1]
+/// Explanation: The diagrams above show which cells we visit to get 
+/// points for each query.
+///
+/// Example 2:
+/// Input: grid = [[5,2,1],[1,1,2]], queries = [3]
+/// Output: [0]
+/// Explanation: We can not get any points because the value of the top 
+/// left cell is already greater than or equal to 3.
+/// 
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 2 <= m, n <= 1000
+/// 4. 4 <= m * n <= 10^5
+/// 5. k == queries.length
+/// 6. 1 <= k <= 10^4
+/// 7. 1 <= grid[i][j], queries[i] <= 10^6
+/// </summary>
+vector<int> LeetCodeGraph::maxPoints(vector<vector<int>>& grid, vector<int>& queries)
+{
+    int m = grid.size();
+    int n = grid[0].size();
+    vector<vector<int>> map = grid;
+    set<vector<int>> pq;
+    vector<vector<int>> visited(m, vector<int>(n));
+    pq.insert({ map[0][0], 0, 0 });
+    visited[0][0] = 1;
+    vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    int max_v = 0;
+    while (!pq.empty())
+    {
+        vector<int> pos = *pq.begin();
+        max_v = max(max_v, pos[0]);
+        pq.erase(pq.begin());
+        for (int d = 0; d < (int)directions.size(); d++)
+        {
+            int next_r = pos[1] + directions[d][0];
+            int next_c = pos[2] + directions[d][1];
+            if (next_r < 0 || next_r >= m || next_c < 0 || next_c >= n)
+            {
+                continue;
+            }
+            if (visited[next_r][next_c] == 1) continue;
+            visited[next_r][next_c] = 1;
+            map[next_r][next_c] = max(map[next_r][next_c], pos[0]);
+            pq.insert({ map[next_r][next_c], next_r, next_c });
+        }
+    }
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        max_v = max(max_v, queries[i]);
+    }
+    vector<int> dp(max_v+1);
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            dp[map[i][j]]++;
+        }
+    }
+    for (int i = 1; i <= max_v; i++)
+    {
+        dp[i] = dp[i] + dp[i - 1];
+    }
+    vector<int> result(queries.size());
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        result[i] = dp[queries[i] - 1];
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2508. Add Edges to Make Degrees of All Nodes Even
+/// 
+/// Hard
+///	
+/// There is an undirected graph consisting of n nodes numbered from 
+/// 1 to n. You are given the integer n and a 2D array edges where 
+/// edges[i] = [ai, bi] indicates that there is an edge between nodes 
+/// ai and bi. The graph can be disconnected.
+///
+/// You can add at most two additional edges (possibly none) to this 
+/// graph so that there are no repeated edges and no self-loops.
+///
+/// Return true if it is possible to make the degree of each node in 
+/// the graph even, otherwise return false.
+///
+/// The degree of a node is the number of edges connected to it.
+/// 
+/// Example 1:
+/// Input: n = 5, edges = [[1,2],[2,3],[3,4],[4,2],[1,4],[2,5]]
+/// Output: true
+/// Explanation: The above diagram shows a valid way of adding an edge.
+/// Every node in the resulting graph is connected to an even number of 
+/// edges.
+///
+/// Example 2:
+/// Input: n = 4, edges = [[1,2],[3,4]]
+/// Output: true
+/// Explanation: The above diagram shows a valid way of adding two edges.
+///
+/// Example 3:
+/// Input: n = 4, edges = [[1,2],[1,3],[1,4]]
+/// Output: false
+/// Explanation: It is not possible to obtain a valid graph with adding 
+/// at most 2 edges.
+///
+/// Constraints:
+/// 1. 3 <= n <= 10^5
+/// 2. 2 <= edges.length <= 10^5
+/// 3. edges[i].length == 2
+/// 4. 1 <= ai, bi <= n
+/// 5. ai != bi
+/// 6. There are no repeated edges.
+/// </summary>
+bool LeetCodeGraph::isPossible(int n, vector<vector<int>>& edges)
+{
+    vector<unordered_set<int>> neighbors(n + 1);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].insert(edges[i][1]);
+        neighbors[edges[i][1]].insert(edges[i][0]);
+    }
+    vector<int> odds;
+    for (int i = 1; i <= n; i++)
+    {
+        if (neighbors[i].size() % 2 == 1) odds.push_back(i);
+    }
+    if (odds.empty()) return true;
+    if (odds.size() % 2 == 1 || odds.size() > 4) return false;
+    if (odds.size() == 2)
+    {
+        if (neighbors[odds[0]].count(odds[1]) == 0)
+        {
+            return true;
+        }
+        for (int i = 1; i <= n; i++)
+        {
+            if (
+                (odds[0] != i) && (odds[1] != i) &&
+                (neighbors[odds[0]].count(i) == 0) && 
+                (neighbors[odds[1]].count(i) == 0)
+                )
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    if (
+        (neighbors[odds[0]].count(odds[1]) == 0 &&
+         neighbors[odds[2]].count(odds[3]) == 0) ||
+        (neighbors[odds[0]].count(odds[2]) == 0 &&
+         neighbors[odds[1]].count(odds[3]) == 0) || 
+        (neighbors[odds[0]].count(odds[3]) == 0 &&
+         neighbors[odds[1]].count(odds[2]) == 0)
+        )
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 #pragma endregion

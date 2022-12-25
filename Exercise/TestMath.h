@@ -225,5 +225,9 @@ void TestLeetCode2455(void);
 void TestLeetCode2453(void);
 void TestLeetCode2457(void);
 void TestLeetCode2450(void);
+void TestLeetCode2469(void);
+void TestLeetCode2481(void);
+void TestLeetCode2485(void);
+void TestLeetCode2507(void);
 void TestLeetCodeMath(void);
 #endif  // TestMath

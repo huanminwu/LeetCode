@@ -11832,6 +11832,201 @@ public:
     ///    letters.
     /// </summary>
     vector<string> twoEditWords(vector<string>& queries, vector<string>& dictionary);
+
+    /// <summary>
+    /// Leet Code 2490. Circular Sentence
+    /// 
+    /// Easy
+    ///	
+    /// A sentence is a list of words that are separated by a single space 
+    /// with no leading or trailing spaces.
+    ///
+    /// For example, "Hello World", "HELLO", "hello world hello world" are 
+    /// all sentences.
+    /// Words consist of only uppercase and lowercase English letters. 
+    /// Uppercase and lowercase English letters are considered different.
+    ///
+    /// A sentence is circular if:
+    /// The last character of a word is equal to the first character of the 
+    /// next word.
+    /// The last character of the last word is equal to the first character 
+    /// of the first word.
+    /// For example, "leetcode exercises sound delightful", "eetcode", 
+    /// "leetcode eats soul" are all circular sentences. However, 
+    /// "Leetcode is cool", "happy Leetcode", "Leetcode" and "I like Leetcode" 
+    /// are not circular sentences.
+    ///
+    /// Given a string sentence, return true if it is circular. Otherwise, 
+    /// return false.
+    /// Example 1:
+    ///
+    /// Input: sentence = "leetcode exercises sound delightful"
+    /// Output: true
+    /// Explanation: The words in sentence are ["leetcode", "exercises", 
+    /// "sound", "delightful"].
+    /// - leetcode's last character is equal to exercises's first character.
+    /// - exercises's last character is equal to sound's first character.
+    /// - sound's last character is equal to delightful's first character.
+    /// - delightful's last character is equal to leetcode's first character.
+    /// The sentence is circular.
+    ///
+    /// Example 2:
+    /// Input: sentence = "eetcode"
+    /// Output: true
+    /// Explanation: The words in sentence are ["eetcode"].
+    /// - eetcode's last character is equal to eetcode's first character.
+    /// The sentence is circular.
+    ///
+    /// Example 3:
+    /// Input: sentence = "Leetcode is cool"
+    /// Output: false
+    /// Explanation: The words in sentence are ["Leetcode", "is", "cool"].
+    /// - Leetcode's last character is not equal to is's first character.
+    /// The sentence is not circular.
+    ///
+    /// Constraints:
+    ///
+    /// 1. 1 <= sentence.length <= 500
+    /// 2. sentence consist of only lowercase and uppercase English letters 
+    ///    and spaces.
+    /// 3. The words in sentence are separated by a single space.
+    /// 4. There are no leading or trailing spaces.
+    /// </summary>
+    bool isCircularSentence(string sentence);
+
+    /// <summary>
+    /// Leet Code 2486. Append Characters to String to Make Subsequence
+    /// 
+    /// Medium
+    ///	
+    /// You are given two strings s and t consisting of only lowercase English 
+    /// letters.
+    ///
+    /// Return the minimum number of characters that need to be appended to 
+    /// the end of s so that t becomes a subsequence of s.
+    ///
+    /// A subsequence is a string that can be derived from another string by 
+    /// deleting some or no characters without changing the order of the 
+    /// remaining characters.
+    ///
+    /// Example 1:
+    /// Input: s = "coaching", t = "coding"
+    /// Output: 4
+    /// Explanation: Append the characters "ding" to the end of s so that 
+    /// s = "coachingding".
+    /// Now, t is a subsequence of s ("coachingding").
+    /// It can be shown that appending any 3 characters to the end of s will 
+    /// never make t a subsequence.
+    ///
+    /// Example 2:
+    /// Input: s = "abcde", t = "a"
+    /// Output: 0
+    /// Explanation: t is already a subsequence of s ("abcde").
+    ///
+    /// Example 3:
+    /// Input: s = "z", t = "abcde"
+    /// Output: 5
+    /// Explanation: Append the characters "abcde" to the end of s so that 
+    /// s = "zabcde".
+    /// Now, t is a subsequence of s ("zabcde").
+    /// It can be shown that appending any 4 characters to the end of s will 
+    /// never make t a subsequence.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length, t.length <= 10^5
+    /// 2. s and t consist only of lowercase English letters.
+    /// </summary>
+    int appendCharacters(string s, string t);
+
+    /// <summary>
+    /// Leet Code 2496. Maximum Value of a String in an Array
+    /// 
+    /// Easy
+    ///	
+    /// The value of an alphanumeric string can be defined as:
+    ///
+    /// The numeric representation of the string in base 10, if it comprises 
+    /// of digits only.
+    /// The length of the string, otherwise.
+    /// Given an array strs of alphanumeric strings, return the maximum 
+    /// value of any string in strs.
+    ///
+    /// Example 1:
+    /// Input: strs = ["alic3","bob","3","4","00000"]
+    /// Output: 5
+    /// Explanation: 
+    /// - "alic3" consists of both letters and digits, so its value is its 
+    ///   length, i.e. 5.
+    /// - "bob" consists only of letters, so its value is also its length, 
+    ///   i.e. 3.
+    /// - "3" consists only of digits, so its value is its numeric equivalent, 
+    ///   i.e. 3.
+    /// - "4" also consists only of digits, so its value is 4.
+    /// - "00000" consists only of digits, so its value is 0.
+    /// Hence, the maximum value is 5, of "alic3".
+    /// 
+    /// Example 2:
+    /// Input: strs = ["1","01","001","0001"]
+    /// Output: 1
+    /// Explanation: 
+    /// Each string in the array has value 1. Hence, we return 1.
+    ///  
+    /// Constraints:
+    /// 1. 1 <= strs.length <= 100
+    /// 2. 1 <= strs[i].length <= 9
+    /// 3. strs[i] consists of only lowercase English letters and digits.
+    /// </summary>
+    int maximumValue(vector<string>& strs);
+
+    /// <summary>
+    /// Leet Code 2506. Count Pairs Of Similar Strings
+    /// 
+    /// Easy
+    ///	
+    /// You are given a 0-indexed string array words.
+    ///
+    /// Two strings are similar if they consist of the same characters.
+    ///
+    /// For example, "abca" and "cba" are similar since both consist of 
+    /// characters 'a', 'b', and 'c'.
+    /// However, "abacba" and "bcfd" are not similar since they do not 
+    /// consist of the same characters.
+    /// Return the number of pairs (i, j) such that 
+    /// 0 <= i < j <= word.length - 1 and the two strings words[i] and 
+    /// words[j] are similar.
+    /// 
+    /// Example 1:
+    /// Input: words = ["aba","aabb","abcd","bac","aabc"]
+    /// Output: 2
+    /// Explanation: There are 2 pairs that satisfy the conditions:
+    /// - i = 0 and j = 1 : both words[0] and words[1] only consist of 
+    ///   characters 'a' and 'b'. 
+    /// - i = 3 and j = 4 : both words[3] and words[4] only consist of 
+    ///   characters 'a', 'b', and 'c'. 
+    ///
+    /// Example 2:
+    /// Input: words = ["aabb","ab","ba"]
+    /// Output: 3
+    /// Explanation: There are 3 pairs that satisfy the conditions:
+    /// - i = 0 and j = 1 : both words[0] and words[1] only consist of 
+    ///   characters 'a' and 'b'. 
+    /// - i = 0 and j = 2 : both words[0] and words[2] only consist of 
+    ///   characters 'a' and 'b'.
+    /// - i = 1 and j = 2 : both words[1] and words[2] only consist of 
+    ///   characters 'a' and 'b'.
+    ///
+    /// Example 3:
+    /// Input: words = ["nba","cba","dba"]
+    /// Output: 0
+    /// Explanation: Since there does not exist any pair that satisfies 
+    /// the conditions, we return 0.
+    ///
+    /// Constraints:
+    /// 1. 1 <= words.length <= 100
+    /// 2. 1 <= words[i].length <= 100
+    /// 3. words[i] consist of only lowercase English letters.
+    /// </summary>
+    int similarPairs(vector<string>& words);
 #pragma endregion
 };
 

@@ -15996,3 +15996,203 @@ int LeetCodeMath::countDistinctStrings(string s, int k)
     }
     return (int)result;
 }
+
+/// <summary>
+/// Leet Code 2469. Convert the Temperature
+/// 
+/// Easy
+///	
+/// You are given a non-negative floating point number rounded to two 
+/// decimal places celsius, that denotes the temperature in Celsius.
+///
+/// You should convert Celsius into Kelvin and Fahrenheit and return 
+/// it as an array ans = [kelvin, fahrenheit].
+/// 
+/// Return the array ans. Answers within 10-5 of the actual answer will 
+/// be accepted.
+///
+/// Note that:
+///
+/// Kelvin = Celsius + 273.15
+/// Fahrenheit = Celsius * 1.80 + 32.00
+///
+/// Example 1: 
+/// Input: celsius = 36.50
+/// Output: [309.65000,97.70000]
+/// Explanation: Temperature at 36.50 Celsius converted in Kelvin is 
+/// 309.65 and converted in Fahrenheit is 97.70. 
+///
+/// Example 2:
+/// Input: celsius = 122.11
+/// Output: [395.26000,251.79800]
+/// Explanation: Temperature at 122.11 Celsius converted in Kelvin 
+/// is 395.26 and converted in Fahrenheit is 251.798.
+///
+/// Constraints:
+/// 1. 0 <= celsius <= 1000
+/// </summary>
+vector<double> LeetCodeMath::convertTemperature(double celsius)
+{
+    vector<double> result(2);
+    result[0] = celsius + 273.15;
+    result[1] = celsius * 1.80 + 32.00;
+
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2481. Minimum Cuts to Divide a Circle
+/// 
+/// Easy
+///	
+/// A valid cut in a circle can be:
+///
+/// A cut that is represented by a straight line that touches two points 
+/// on the edge of the circle and passes through its center, or
+/// A cut that is represented by a straight line that touches one 
+/// point on the edge of the circle and its center.
+/// Some valid and invalid cuts are shown in the figures below.
+///
+/// Given the integer n, return the minimum number of cuts needed to 
+/// divide a circle into n equal slices.
+///
+/// Example 1:
+/// Input: n = 4
+/// Output: 2
+/// Explanation: 
+/// The above figure shows how cutting the circle twice through the 
+/// middle divides it into 4 equal slices.
+///
+/// Example 2:
+/// Input: n = 3
+/// Output: 3
+/// Explanation:
+/// At least 3 cuts are needed to divide the circle into 3 equal slices. 
+/// It can be shown that less than 3 cuts cannot result in 3 slices of 
+/// equal size and shape.
+/// Also note that the first cut will not divide the circle into distinct 
+/// parts.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 100
+/// </summary>
+int LeetCodeMath::numberOfCuts(int n)
+{
+    if (n == 1) return 0;
+    else if (n % 2 == 1) return n;
+    else return n / 2;
+}
+
+/// <summary>
+/// Leet Code 2485. Find the Pivot Integer
+/// 
+/// Easy
+///	
+/// Given a positive integer n, find the pivot integer x such that:
+///  
+/// The sum of all elements between 1 and x inclusively equals the sum 
+/// of all elements between x and n inclusively.
+/// Return the pivot integer x. If no such integer exists, return -1. 
+/// It is guaranteed that there will be at most one pivot index for the 
+/// given input.
+///
+/// Example 1:
+/// Input: n = 8
+/// Output: 6
+/// Explanation: 6 is the pivot integer since: 
+/// 1 + 2 + 3 + 4 + 5 + 6 = 6 + 7 + 8 = 21.
+///
+/// Example 2:
+/// Input: n = 1
+/// Output: 1
+/// Explanation: 1 is the pivot integer since: 1 = 1.
+///
+/// Example 3:
+/// Input: n = 4
+/// Output: -1
+/// Explanation: It can be proved that no such integer exist.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 1000
+/// </summary>
+int LeetCodeMath::pivotInteger(int n)
+{
+    int sum = n * n + n;
+    int result = (int)sqrt(sum / 2);
+    if (2 * result * result == sum) return result;
+    else return -1;
+}
+
+/// <summary>
+/// Leet Code 2507. Smallest Value After Replacing With Sum of Prime 
+///                 Factors
+/// 
+/// Medium
+///	
+/// You are given a positive integer n.
+///
+/// Continuously replace n with the sum of its prime factors.
+///
+/// Note that if a prime factor divides n multiple times, it should 
+/// be included in the sum as many times as it divides n.
+/// Return the smallest value n will take on.
+///
+/// Example 1:
+///
+/// Input: n = 15
+/// Output: 5
+/// Explanation: Initially, n = 15.
+/// 15 = 3 * 5, so replace n with 3 + 5 = 8.
+/// 8 = 2 * 2 * 2, so replace n with 2 + 2 + 2 = 6.
+/// 6 = 2 * 3, so replace n with 2 + 3 = 5.
+/// 5 is the smallest value n will take on.
+///
+/// Example 2:
+/// Input: n = 3
+/// Output: 3
+/// Explanation: Initially, n = 3.
+/// 3 is the smallest value n will take on.
+///
+/// Constraints:
+/// 1. 2 <= n <= 10^5
+/// </summary>
+int LeetCodeMath::smallestValue(int n)
+{
+    int sq = (int)std::sqrt(n);
+    vector<int> arr(sq + 1);
+    vector<int> primes;
+
+    for (int i = 2; i <= sq; i++)
+    {
+        if (arr[i] == 1) continue;
+        int factor = 2;
+        while (i * factor <= sq)
+        {
+            arr[i * factor] = 1;
+            factor++;
+        }
+    }
+    for (int i = 2; i <= sq; i++)
+    {
+        if (arr[i] == 0) primes.push_back(i);
+    }
+    int result = INT_MAX;
+    while (true)
+    {
+        int sum = 0;
+        int temp = n;
+        for (int i = 0; i < (int)primes.size(); i++)
+        {
+            while (temp % primes[i] == 0)
+            {
+                sum += primes[i];
+                temp /= primes[i];
+            }
+        }
+        if (temp != 1) sum += temp;
+        result = sum;
+        if (n == sum) break;
+        n = sum;
+    }
+    return result;
+}
