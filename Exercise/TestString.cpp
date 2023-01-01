@@ -5853,8 +5853,66 @@ void TestLeetCode2506(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2512(void)
+{
+    Logger::WriteMessage("Test Leet Code 2512");
+    LeetCodeString leetCode;
+    vector<string> positive_feedback = { "smart", "brilliant", "studious" };
+    vector<string> negative_feedback = { "not" };
+    vector<string> report = { "this student is studious", "the student is smart" };
+    vector<int> student_id = { 1, 2 };
+    int k = 2;
+    vector<int> result = leetCode.topStudents(positive_feedback, negative_feedback, report, student_id, k);
+    Logger::WriteMessage(positive_feedback);
+    Logger::WriteMessage(negative_feedback);
+    Logger::WriteMessage(report);
+    Logger::WriteMessage(student_id);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    positive_feedback = { "smart", "brilliant", "studious" };
+    negative_feedback = { "not" };
+    report = { "this student is not studious", "the student is smart" };
+    student_id = { 1, 2 };
+    k = 2;
+    result = leetCode.topStudents(positive_feedback, negative_feedback, report, student_id, k);
+    Logger::WriteMessage(positive_feedback);
+    Logger::WriteMessage(negative_feedback);
+    Logger::WriteMessage(report);
+    Logger::WriteMessage(student_id);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2516(void)
+{
+    Logger::WriteMessage("Test Leet Code 2516");
+    LeetCodeString leetCode;
+    string s = "aabaaaacaabc";
+    int k = 2;
+    int result = leetCode.takeCharacters(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "a";
+    k = 1;
+    result = leetCode.takeCharacters(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "ccbabcc";
+    k = 1;
+    result = leetCode.takeCharacters(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "cbaabccac";
+    k = 3;
+    result = leetCode.takeCharacters(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2516();
+    TestLeetCode2512();
     TestLeetCode2506();
     TestLeetCode2496();
     TestLeetCode2486();

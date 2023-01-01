@@ -1030,18 +1030,58 @@ void TestLeetCode2468(void)
     result = leetCode.splitMessage(message, limit);
     Logger::WriteMessage("message = " + message + "; limit = " + to_string(limit));
     Logger::WriteMessage(result);
+}
 
-    message = 
-    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
-    limit = 10;
-    result = leetCode.splitMessage(message, limit);
-    Logger::WriteMessage("message = " + message + "; limit = " + to_string(limit));
-    Logger::WriteMessage(result);
+void TestLeetCode2513(void)
+{
+    Logger::WriteMessage("Test Leet Code 2513");
+    LeetCodeBinarySearch leetCode;
+    int divisor1 = 2, divisor2 = 7, uniqueCnt1 = 1, uniqueCnt2 = 3;
+    int result = leetCode.minimizeSet(divisor1, divisor2, uniqueCnt1, uniqueCnt2);
+    Logger::WriteMessage("divisor1 = " + to_string(divisor1) + "; divisor2 = " + to_string(divisor2));
+    Logger::WriteMessage("uniqueCnt1 = " + to_string(uniqueCnt1) + "; uniqueCnt2 = " + to_string(uniqueCnt2));
+    Logger::WriteMessage("result = " + to_string(result));
 
+    divisor1 = 3, divisor2 = 5, uniqueCnt1 = 2, uniqueCnt2 = 1;
+    result = leetCode.minimizeSet(divisor1, divisor2, uniqueCnt1, uniqueCnt2);
+    Logger::WriteMessage("divisor1 = " + to_string(divisor1) + "; divisor2 = " + to_string(divisor2));
+    Logger::WriteMessage("uniqueCnt1 = " + to_string(uniqueCnt1) + "; uniqueCnt2 = " + to_string(uniqueCnt2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    divisor1 = 2, divisor2 = 4, uniqueCnt1 = 8, uniqueCnt2 = 2;
+    result = leetCode.minimizeSet(divisor1, divisor2, uniqueCnt1, uniqueCnt2);
+    Logger::WriteMessage("divisor1 = " + to_string(divisor1) + "; divisor2 = " + to_string(divisor2));
+    Logger::WriteMessage("uniqueCnt1 = " + to_string(uniqueCnt1) + "; uniqueCnt2 = " + to_string(uniqueCnt2));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2517(void)
+{
+    Logger::WriteMessage("Test Leet Code 2517");
+    LeetCodeBinarySearch leetCode;
+    vector<int> price = { 13, 5, 1, 8, 21, 2 };
+    int k = 3;
+    int result = leetCode.maximumTastiness(price, k);
+    Logger::WriteMessage(price);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    price = { 1,3,1 };
+    k = 2;
+    result = leetCode.maximumTastiness(price, k);
+    Logger::WriteMessage(price);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    price = { 7,7,7,7 };
+    k = 2;
+    result = leetCode.maximumTastiness(price, k);
+    Logger::WriteMessage(price);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode2517();
+    TestLeetCode2513();
     TestLeetCode2468();
     TestLeetCode2226();
     TestLeetCode2187();

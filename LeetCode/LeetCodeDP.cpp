@@ -14142,93 +14142,6 @@ int LeetCodeDP::distinctSequences(int n)
 }
 
 /// <summary>
-/// Leet Code 2338. Count the Number of Ideal Arrays
-///                                                           
-/// Hard
-///
-/// You are given two integers n and maxValue, which are used to describe 
-/// an ideal array.
-///
-/// A 0-indexed integer array arr of length n is considered ideal if the 
-/// following conditions hold:
-///
-/// Every arr[i] is a value from 1 to maxValue, for 0 <= i < n.
-/// Every arr[i] is divisible by arr[i - 1], for 0 < i < n.
-/// Return the number of distinct ideal arrays of length n. Since the 
-/// answer may be very large, return it modulo 10^9 + 7.
-/// 
-/// Example 1:
-/// Input: n = 2, maxValue = 5
-/// Output: 10
-/// Explanation: The following are the possible ideal arrays:
-/// - Arrays starting with the value 1 (5 arrays): 
-///   [1,1], [1,2], [1,3], [1,4], [1,5]
-/// - Arrays starting with the value 2 (2 arrays): [2,2], [2,4]
-/// - Arrays starting with the value 3 (1 array): [3,3]
-/// - Arrays starting with the value 4 (1 array): [4,4]
-/// - Arrays starting with the value 5 (1 array): [5,5]
-/// There are a total of 5 + 2 + 1 + 1 + 1 = 10 distinct ideal arrays.
-///
-/// Example 2:
-/// Input: n = 5, maxValue = 3
-/// Output: 11
-/// Explanation: The following are the possible ideal arrays:
-/// - Arrays starting with the value 1 (9 arrays): 
-/// - With no other distinct values (1 array): [1,1,1,1,1] 
-/// - With 2nd distinct value 2 (4 arrays): [1,1,1,1,2], [1,1,1,2,2], 
-///   [1,1,2,2,2], [1,2,2,2,2]
-/// - With 2nd distinct value 3 (4 arrays): [1,1,1,1,3], [1,1,1,3,3], 
-///   [1,1,3,3,3], [1,3,3,3,3]
-/// - Arrays starting with the value 2 (1 array): [2,2,2,2,2]
-/// - Arrays starting with the value 3 (1 array): [3,3,3,3,3]
-/// There are a total of 9 + 1 + 1 = 11 distinct ideal arrays.
-///
-/// Constraints:
-/// 2 <= n <= 10^4
-/// 3. 1 <= maxValue <= 10^4
-/// </summary>
-int LeetCodeDP::idealArrays(int n, int maxValue)
-{
-    vector<vector<int>> comb(10001, vector<int>(14));
-    comb[0][0] = 1;
-    vector<vector<int>> cnt(10001, vector<int>(14));
-    int M = 1000000007;
-    if (comb[1][1] == 0) 
-    { 
-        // one-time computation.
-        for (int s = 1; s <= 10000; ++s) // nCr (comb)
-        {
-            for (int r = 0; r < 14; ++r)
-            {
-                comb[s][r] 
-                    = (r == 0) ? 1 : (comb[s - 1][r - 1] + comb[s - 1][r]) % M;
-            }
-        }
-        for (int div = 1; div <= 10000; ++div) 
-        { 
-            // Sieve of Eratosthenes
-            ++cnt[div][0];
-            for (int i = 2 * div; i <= 10000; i += div)
-            {
-                for (int bars = 0; cnt[div][bars]; ++bars)
-                {
-                    cnt[i][bars + 1] += cnt[div][bars];
-                }
-            }
-        }
-    }
-    int result = 0;
-    for (int i = 1; i <= maxValue; ++i)
-    {
-        for (int bars = 0; bars < min(14, n) && cnt[i][bars]; ++bars)
-        {
-            result = (1LL * cnt[i][bars] * comb[n - 1][bars] + result) % M;
-        }
-    }
-    return result;
-}
-
-/// <summary>
 /// Leet Code 2361. Minimum Costs Using the Train Line
 ///                                                  
 /// Hard
@@ -15321,6 +15234,139 @@ long long LeetCodeDP::minimumTotalDistance(vector<int>& robot, vector<vector<int
     int f = factory.size();
     vector<vector<vector<long long>>> dp(r, vector<vector<long long>>(f, vector<long long>(k, -1)));
     return minimumTotalDistance(robot, factory, 0, 0, 0, dp);
+}
+
+/// <summary>
+/// Leet Code 2510. Check if There is a Path With Equal Number of 0's 
+///                    And 1's
+/// 
+/// Medium
+///	
+/// You are given a 0-indexed m x n binary matrix grid. You can move from 
+/// a cell (row, col) to any of the cells (row + 1, col) or (row, col + 1).
+///
+/// Return true if there is a path from (0, 0) to (m - 1, n - 1) that 
+/// visits an equal number of 0's and 1's. Otherwise return false.
+///
+/// Example 1:
+/// Input: grid = [[0,1,0,0],[0,1,0,0],[1,0,1,0]]
+/// Output: true
+/// Explanation: The path colored in blue in the above diagram is a valid 
+/// path because we have 3 cells with a value of 1 and 3 with a value 
+/// of 0. Since there is a valid path, we return true.
+///
+/// Example 2:
+/// Input: grid = [[1,1,0],[0,0,1],[1,0,0]]
+/// Output: false
+/// Explanation: There is no path in this grid with an equal number 
+/// of 0's and 1's.
+///
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 2 <= m, n <= 100
+/// 4. grid[i][j] is either 0 or 1.
+/// </summary>
+bool LeetCodeDP::isThereAPath(vector<vector<int>>& grid)
+{
+    int m = grid.size();
+    int n = grid[0].size();
+    vector<vector<unordered_set<int>>> matrix(m, vector<unordered_set<int>>(n));
+    if (grid[0][0] == 0) matrix[0][0].insert(-1);
+    else matrix[0][0].insert(1);
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            int delta = 0;
+            if (grid[i][j] == 0) delta = -1;
+            else delta = 1;
+            if (i > 0)
+            {
+                for (auto x : matrix[i - 1][j])
+                {
+                    matrix[i][j].insert(x + delta);
+                }
+            }
+            if (j > 0)
+            {
+                for (auto x : matrix[i][j - 1])
+                {
+                    matrix[i][j].insert(x + delta);
+                }
+            }
+        }
+    }
+    if (matrix[m - 1][n - 1].count(0) > 0) return true;
+    return false;
+}
+
+/// <summary>
+/// Leet Code 2518. Number of Great Partitions
+/// 
+/// Hard
+///	
+/// You are given an array nums consisting of positive integers and an 
+/// integer k.
+///
+/// Partition the array into two ordered groups such that each element 
+/// is in exactly one group. A partition is called great if the sum of 
+/// elements of each group is greater than or equal to k.
+///
+/// Return the number of distinct great partitions. Since the answer 
+/// may be too large, return it modulo 10^9 + 7.
+///
+/// Two partitions are considered distinct if some element nums[i] is 
+/// in different groups in the two partitions.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,4], k = 4
+/// Output: 6
+/// Explanation: The great partitions are: ([1,2,3], [4]), ([1,3], 
+/// [2,4]), ([1,4], [2,3]), ([2,3], [1,4]), ([2,4], [1,3]) and ([4], 
+/// [1,2,3]).
+///
+/// Example 2:
+/// Input: nums = [3,3,3], k = 4
+/// Output: 0
+/// Explanation: There are no great partitions for this array.
+///
+/// Example 3:
+/// Input: nums = [6,6], k = 2
+/// Output: 2
+/// Explanation: We can either put nums[0] in the first partition or in 
+/// the second partition.
+/// The great partitions will be ([6], [6]) and ([6], [6]).
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length, k <= 1000
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeDP::countPartitions(vector<int>& nums, int k)
+{
+    long long sum = 0;
+    long long M = 1000000007;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        sum += (long long)nums[i];
+    }
+    if (sum < 2 * (long long) k) return 0;
+    vector<long long> dp(k);
+    dp[0] = 1;
+    long long result = 1;
+    for (auto a : nums)
+    {
+        for (int i = k - 1 - a; i >= 0; i--)
+        {
+            dp[i + a] = (dp[i + a] + dp[i]) % M;
+        }
+        result = (result * 2) % M;
+    }
+    for (int i = 0; i < k; i++)
+    {
+        result = (result - 2 * dp[i] + 2 * M) % M;
+    }
+    return (int)result;
 }
 
 #pragma endregion

@@ -3170,20 +3170,6 @@ void TestLeetCode2320(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
-void TestLeetCode2338(void)
-{
-    Logger::WriteMessage("Test Leet Code 2338");
-    LeetCodeDP leetCode;
-    int n = 2;
-    int maxValue = 5;
-    int result = leetCode.idealArrays(n, maxValue);
-    Logger::WriteMessage("n = " + to_string(n) + "; max_Value = " + to_string(maxValue) + "; result = " + to_string(result));
-
-    n = 5;
-    maxValue = 3;
-    result = leetCode.idealArrays(n, maxValue);
-    Logger::WriteMessage("n = " + to_string(n) + "; max_Value = " + to_string(maxValue) + "; result = " + to_string(result));
-}
 
 void TestLeetCode2361(void)
 {
@@ -3482,8 +3468,54 @@ void TestLeetCode2463(void)
     Logger::WriteMessage(";result = " + to_string(result));
 }
 
+void TestLeetCode2510(void)
+{
+    Logger::WriteMessage("Test Leet Code 2510");
+    LeetCodeDP leetCode;
+    vector<vector<int>> grid = 
+    { 
+        {0, 1, 0, 0},{0, 1, 0, 0},{1, 0, 1, 0} 
+    };
+    bool result = leetCode.isThereAPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    grid =
+    {
+        {1,1,0},{0,0,1},{1,0,0}
+    };
+    result = leetCode.isThereAPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2518(void)
+{
+    Logger::WriteMessage("Test Leet Code 2518");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 2, 3, 4 };
+    int k = 4;
+    int result = leetCode.countPartitions(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3,3,3 };
+    k = 4;
+    result = leetCode.countPartitions(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 6, 6 };
+    k = 4;
+    result = leetCode.countPartitions(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2518();
+    TestLeetCode2510();
     TestLeetCode2463();
     TestLeetCode2472();
     TestLeetCode2501();
@@ -3498,7 +3530,6 @@ void TestLeetCodeDP(void)
     TestLeetCode2370();
     TestLeetCode2369();
     TestLeetCode2361();
-    TestLeetCode2338();
     TestLeetCode2318();
     TestLeetCode2320();
     TestLeetCode2312();

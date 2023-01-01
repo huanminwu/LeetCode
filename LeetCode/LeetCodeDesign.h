@@ -12184,7 +12184,7 @@ public:
 /// smallestInfiniteSet.popSmallest(); // return 3.
 /// smallestInfiniteSet.addBack(1);    // 1 is added back to the set.
 /// smallestInfiniteSet.popSmallest(); // return 1, since 1 was added
-///  smallestInfiniteSet.popSmallest(); // return 4, and remove it.
+/// smallestInfiniteSet.popSmallest(); // return 4, and remove it.
 /// smallestInfiniteSet.popSmallest(); // return 5, and remove it from 
 /// the set.
 /// Constraints:

@@ -10667,12 +10667,12 @@ vector<int> LeetCodeMath::countPoints(vector<vector<int>>& points, vector<vector
 /// <summary>
 /// Leet code 1830. Minimum Number of Operations to Make String Sorted
 /// </summary>
-int LeetCodeMath::modPow(long long x, long long y, long long M)
+long long LeetCodeMath::modPow(long long x, long long y, long long M)
 {
     if (y == 0) return 1;
     long long p = modPow(x, y / 2, M) % M;
     p = (p * p) % M;
-    return (int)((y % 2) ? (p * x % M) % M : p);
+    return ((y % 2) ? (p * x % M) % M : p);
 }
 
 /// <summary>
@@ -14441,7 +14441,7 @@ int LeetCodeMath::fillCups(vector<int>& amount)
 /// both of length n.
 ///
 /// The sum of squared difference of arrays nums1 and nums2 is defined as 
-/// the sum of (nums1[i] - nums2[i])2 for each 0 <= i < n.
+/// the sum of (nums1[i] - nums2[i])^2 for each 0 <= i < n.
 ///
 /// You are also given two positive integers k1 and k2. You can modify any 
 /// of the elements of nums1 by +1 or -1 at most k1 times. Similarly, you 
@@ -16193,6 +16193,176 @@ int LeetCodeMath::smallestValue(int n)
         result = sum;
         if (n == sum) break;
         n = sum;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2514. Count Anagrams
+/// </summary>
+long long LeetCodeMath::factorial(long long n, long long M)
+{
+    long long result = 1;
+    for (long long i = 1; i <= n; i++)
+    {
+        result = result * i % M;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2514. Count Anagrams
+/// 
+/// Hard
+///	
+/// You are given a string s containing one or more words. Every 
+/// consecutive pair of words is separated by a single space ' '.
+///
+/// A string t is an anagram of string s if the ith word of t is a 
+/// permutation of the ith word of s.
+///
+/// For example, "acb dfe" is an anagram of "abc def", but "def cab" 
+/// and "adc bef" are not.
+/// Return the number of distinct anagrams of s. Since the answer may 
+/// be very large, return it modulo 10^9 + 7.
+/// 
+/// Example 1:
+/// Input: s = "too hot"
+/// Output: 18
+/// Explanation: Some of the anagrams of the given string are "too hot", 
+/// "oot hot", "oto toh", "too toh", and "too oht".
+///
+/// Example 2:
+/// Input: s = "aa"
+/// Output: 1
+/// Explanation: There is only one anagram possible for the given string.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists of lowercase English letters and spaces ' '.
+/// 3. There is single space between consecutive words.
+/// </summary>
+int LeetCodeMath::countAnagrams(string s)
+{
+    long long result = 1;
+    long long M = 1000000007;
+    if (s == " ") return 0;
+
+    string word;
+    for (size_t i = 0; i <= s.size(); i++)
+    {
+        if (i == s.size() || s[i] == ' ')
+        {
+            vector<int> arr(26);
+            for (int j = 0; j < (int)word.size(); j++)
+            {
+                arr[word[j] - 'a']++;
+            }
+            long long factor = 1;
+            factor = factor * factorial((long long)word.size(), M);
+            
+            long long factorInv = 1;
+            for (int i = 0; i < 26; i++)
+            {
+                if (arr[i] == 0) continue;
+                factorInv = factorInv * factorial((long long)arr[i], M) % M;
+            }
+            factorInv = modPow(factorInv, M - 2, M);
+            factor = (factor * factorInv) % M;
+            result = (result * factor) % M;
+            word.clear();
+        }
+        else
+        {
+            word.push_back(s[i]);
+        }
+    }
+    return (int)result;
+}
+
+/// <summary>
+/// Leet Code 2338. Count the Number of Ideal Arrays
+///                                                           
+/// Hard
+///
+/// You are given two integers n and maxValue, which are used to describe 
+/// an ideal array.
+///
+/// A 0-indexed integer array arr of length n is considered ideal if the 
+/// following conditions hold:
+///
+/// Every arr[i] is a value from 1 to maxValue, for 0 <= i < n.
+/// Every arr[i] is divisible by arr[i - 1], for 0 < i < n.
+/// Return the number of distinct ideal arrays of length n. Since the 
+/// answer may be very large, return it modulo 10^9 + 7.
+/// 
+/// Example 1:
+/// Input: n = 2, maxValue = 5
+/// Output: 10
+/// Explanation: The following are the possible ideal arrays:
+/// - Arrays starting with the value 1 (5 arrays): 
+///   [1,1], [1,2], [1,3], [1,4], [1,5]
+/// - Arrays starting with the value 2 (2 arrays): [2,2], [2,4]
+/// - Arrays starting with the value 3 (1 array): [3,3]
+/// - Arrays starting with the value 4 (1 array): [4,4]
+/// - Arrays starting with the value 5 (1 array): [5,5]
+/// There are a total of 5 + 2 + 1 + 1 + 1 = 10 distinct ideal arrays.
+///
+/// Example 2:
+/// Input: n = 5, maxValue = 3
+/// Output: 11
+/// Explanation: The following are the possible ideal arrays:
+/// - Arrays starting with the value 1 (9 arrays): 
+/// - With no other distinct values (1 array): [1,1,1,1,1] 
+/// - With 2nd distinct value 2 (4 arrays): [1,1,1,1,2], [1,1,1,2,2], 
+///   [1,1,2,2,2], [1,2,2,2,2]
+/// - With 2nd distinct value 3 (4 arrays): [1,1,1,1,3], [1,1,1,3,3], 
+///   [1,1,3,3,3], [1,3,3,3,3]
+/// - Arrays starting with the value 2 (1 array): [2,2,2,2,2]
+/// - Arrays starting with the value 3 (1 array): [3,3,3,3,3]
+/// There are a total of 9 + 1 + 1 = 11 distinct ideal arrays.
+///
+/// Constraints:
+/// 2 <= n <= 10^4
+/// 3. 1 <= maxValue <= 10^4
+/// </summary>
+int LeetCodeMath::idealArrays(int n, int maxValue)
+{
+    vector<vector<int>> comb(10001, vector<int>(14));
+    comb[0][0] = 1;
+    vector<vector<int>> cnt(10001, vector<int>(14));
+    int M = 1000000007;
+    if (comb[1][1] == 0)
+    {
+        // one-time computation.
+        for (int s = 1; s <= 10000; ++s) // nCr (comb)
+        {
+            for (int r = 0; r < 14; ++r)
+            {
+                comb[s][r]
+                    = (r == 0) ? 1 : (comb[s - 1][r - 1] + comb[s - 1][r]) % M;
+            }
+        }
+        for (int div = 1; div <= 10000; ++div)
+        {
+            // Sieve of Eratosthenes
+            ++cnt[div][0];
+            for (int i = 2 * div; i <= 10000; i += div)
+            {
+                for (int bars = 0; cnt[div][bars]; ++bars)
+                {
+                    cnt[i][bars + 1] += cnt[div][bars];
+                }
+            }
+        }
+    }
+    int result = 0;
+    for (int i = 1; i <= maxValue; ++i)
+    {
+        for (int bars = 0; bars < min(14, n) && cnt[i][bars]; ++bars)
+        {
+            result = (1LL * cnt[i][bars] * comb[n - 1][bars] + result) % M;
+        }
     }
     return result;
 }

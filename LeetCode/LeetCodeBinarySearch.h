@@ -1788,6 +1788,96 @@ public:
     /// 3. 1 <= limit <= 10^4
     /// </summary>
     vector<string> splitMessage(string message, int limit);
+
+    /// <summary>
+    /// Leet Code 2513. Minimize the Maximum of Two Arrays
+    /// 
+    /// Medium
+    ///	
+    /// We have two arrays arr1 and arr2 which are initially empty. You need 
+    /// to add positive integers to them such that they satisfy all the 
+    /// following conditions:
+    ///
+    /// arr1 contains uniqueCnt1 distinct positive integers, each of which 
+    /// is not divisible by divisor1.
+    /// arr2 contains uniqueCnt2 distinct positive integers, each of which 
+    /// is not divisible by divisor2.
+    /// No integer is present in both arr1 and arr2.
+    /// Given divisor1, divisor2, uniqueCnt1, and uniqueCnt2, return the 
+    /// minimum possible maximum integer that can be present in either array.
+    ///
+    /// Example 1:
+    /// Input: divisor1 = 2, divisor2 = 7, uniqueCnt1 = 1, uniqueCnt2 = 3
+    /// Output: 4
+    /// Explanation: 
+    /// We can distribute the first 4 natural numbers into arr1 and arr2.
+    /// arr1 = [1] and arr2 = [2,3,4].
+    /// We can see that both arrays satisfy all the conditions.
+    /// Since the maximum value is 4, we return it.
+    ///
+    /// Example 2:
+    /// Input: divisor1 = 3, divisor2 = 5, uniqueCnt1 = 2, uniqueCnt2 = 1
+    /// Output: 3
+    /// Explanation: 
+    /// Here arr1 = [1,2], and arr2 = [3] satisfy all conditions.
+    /// Since the maximum value is 3, we return it.
+    ///
+    /// Example 3:
+    /// Input: divisor1 = 2, divisor2 = 4, uniqueCnt1 = 8, uniqueCnt2 = 2
+    /// Output: 15
+    /// Explanation: 
+    /// Here, the final possible arrays can be arr1 = [1,3,5,7,9,11,13,15], 
+    /// and arr2 = [2,6].
+    /// It can be shown that it is not possible to obtain a lower maximum 
+    /// satisfying all conditions. 
+    ///
+    /// Constraints:
+    /// 1. 2 <= divisor1, divisor2 <= 10^5
+    /// 2. 1 <= uniqueCnt1, uniqueCnt2 < 10^9
+    /// 3. 2 <= uniqueCnt1 + uniqueCnt2 <= 10^9
+    /// </summary>
+    int minimizeSet(int divisor1, int divisor2, int uniqueCnt1, int uniqueCnt2);
+
+    /// <summary>
+    /// Leet Code 2517. Maximum Tastiness of Candy Basket
+    /// 
+    /// Medium
+    ///	
+    /// You are given an array of positive integers price where price[i] 
+    /// denotes the price of the ith candy and a positive integer k.
+    ///
+    /// The store sells baskets of k distinct candies. The tastiness of a 
+    /// candy basket is the smallest absolute difference of the prices of 
+    /// any two candies in the basket. 
+    ///
+    /// Return the maximum tastiness of a candy basket.
+    ///
+    /// Example 1:
+    /// Input: price = [13,5,1,8,21,2], k = 3
+    /// Output: 8
+    /// Explanation: Choose the candies with the prices [13,5,21].
+    /// The tastiness of the candy basket is: min(|13 - 5|, |13 - 21|, 
+    /// |5 - 21|) = min(8, 8, 16) = 8.
+    /// It can be proven that 8 is the maximum tastiness that can be achieved.
+    ///
+    /// Example 2:
+    /// Input: price = [1,3,1], k = 2
+    /// Output: 2
+    /// Explanation: Choose the candies with the prices [1,3].
+    /// The tastiness of the candy basket is: min(|1 - 3|) = min(2) = 2.
+    /// It can be proven that 2 is the maximum tastiness that can be achieved.
+    ///
+    /// Example 3:
+    /// Input: price = [7,7,7,7], k = 2
+    /// Output: 0
+    /// Explanation: Choosing any two distinct candies from the candies we 
+    /// have will result in a tastiness of 0.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= k <= price.length <= 10^5
+    /// 2. 1 <= price[i] <= 10^9
+    /// </summary>
+    int maximumTastiness(vector<int>& price, int k);
 #pragma endregion
 };
 #endif  // LeetCodeBinarySearch_H

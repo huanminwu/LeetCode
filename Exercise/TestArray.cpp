@@ -8157,8 +8157,51 @@ void TestLeetCode2499(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2511(void)
+{
+    Logger::WriteMessage("Test Leet Code 2511");
+    LeetCodeArray leetCode;
+    vector<int> forts = { 1, 0, 0, -1, 0, 0, 0, 0, 1 };
+    int result = leetCode.captureForts(forts);
+    Logger::WriteMessage(forts);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    forts = { 0,0,1,-1 };
+    result = leetCode.captureForts(forts);
+    Logger::WriteMessage(forts);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2515(void)
+{
+    Logger::WriteMessage("Test Leet Code 2515");
+    LeetCodeArray leetCode;
+    vector<string> words = { "hello", "i", "am", "leetcode", "hello" };
+    string target = "hello"; 
+    int startIndex = 1;
+    int result = leetCode.closetTarget(words, target, startIndex);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("target = " + target + "; startIndex = " + to_string(startIndex) + "; result = " + to_string(result));
+
+    words = { "a","b","leetcode" };
+    target = "leetcode";
+    startIndex = 0;
+    result = leetCode.closetTarget(words, target, startIndex);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("target = " + target + "; startIndex = " + to_string(startIndex) + "; result = " + to_string(result));
+
+    words = { "i","eat","leetcode" };
+    target = "ate";
+    startIndex = 0;
+    result = leetCode.closetTarget(words, target, startIndex);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("target = " + target + "; startIndex = " + to_string(startIndex) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2515();
+    TestLeetCode2511();
     TestLeetCode2499();
     TestLeetCode2488();
     TestLeetCode2498();

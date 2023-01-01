@@ -5268,8 +5268,41 @@ void TestLeetCode2507(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2514(void)
+{
+    Logger::WriteMessage("Test Leet Code 2514");
+    LeetCodeMath leetCode;
+    string s = "too hot";
+    int result = leetCode.countAnagrams(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aa";
+    result = leetCode.countAnagrams(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "toogahdahgdgaggyyyy hohadhagdhagdyyywvdadwwwwt";
+    result = leetCode.countAnagrams(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2338(void)
+{
+    Logger::WriteMessage("Test Leet Code 2338");
+    LeetCodeMath leetCode;
+    int n = 2;
+    int maxValue = 5;
+    int result = leetCode.idealArrays(n, maxValue);
+    Logger::WriteMessage("n = " + to_string(n) + "; max_Value = " + to_string(maxValue) + "; result = " + to_string(result));
+
+    n = 5;
+    maxValue = 3;
+    result = leetCode.idealArrays(n, maxValue);
+    Logger::WriteMessage("n = " + to_string(n) + "; max_Value = " + to_string(maxValue) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2514();
     TestLeetCode2507();
     TestLeetCode2485();
     TestLeetCode2481();

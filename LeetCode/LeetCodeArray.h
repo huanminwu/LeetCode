@@ -15629,6 +15629,103 @@ public:
     /// 3. 1 <= nums1[i], nums2[i] <= n
     /// </summary>
     long long minimumTotalCost(vector<int>& nums1, vector<int>& nums2);
+
+    /// <summary>
+    /// Leet Code 2511. Maximum Enemy Forts That Can Be Captured
+    /// 
+    /// Easy
+    ///	
+    /// You are given a 0-indexed integer array forts of length n representing 
+    /// the positions of several forts. forts[i] can be -1, 0, or 1 where:
+    ///
+    /// -1 represents there is no fort at the ith position.
+    /// 0 indicates there is an enemy fort at the ith position.
+    /// 1 indicates the fort at the ith the position is under your command.
+    /// Now you have decided to move your army from one of your forts at 
+    /// position i to an empty position j such that:
+    ///
+    /// 0 <= i, j <= n - 1
+    /// The army travels over enemy forts only. Formally, for all k 
+    /// where min(i,j) < k < max(i,j), forts[k] == 0.
+    /// While moving the army, all the enemy forts that come in the way are 
+    /// captured.
+    ///
+    /// Return the maximum number of enemy forts that can be captured. In 
+    /// case it is impossible to move your army, or you do not have any fort 
+    /// under your command, return 0.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: forts = [1,0,0,-1,0,0,0,0,1]
+    /// Output: 4
+    /// Explanation:
+    /// - Moving the army from position 0 to position 3 captures 2 enemy 
+    ///   forts, at 1 and 2.
+    /// - Moving the army from position 8 to position 3 captures 4 enemy forts.
+    /// Since 4 is the maximum number of enemy forts that can be captured, we 
+    /// return 4.
+    ///
+    /// Example 2:
+    /// Input: forts = [0,0,1,-1]
+    /// Output: 0
+    /// Explanation: Since no enemy fort can be captured, 0 is returned.
+    ///
+    /// Constraints:
+    /// 1. 1 <= forts.length <= 1000
+    /// 2. -1 <= forts[i] <= 1
+    /// </summary>
+    int captureForts(vector<int>& forts);
+
+    /// <summary>
+    /// Leet Code 2515. Shortest Distance to Target String in a Circular Array
+    /// 
+    /// Easy
+    ///	
+    /// You are given a 0-indexed circular string array words and a string 
+    /// target. A circular array means that the array's end connects to the 
+    /// array's beginning.
+    ///
+    /// Formally, the next element of words[i] is words[(i + 1) % n] and the 
+    /// previous element of words[i] is words[(i - 1 + n) % n], where n is 
+    /// the length of words.
+    /// Starting from startIndex, you can move to either the next word or 
+    /// the previous word with 1 step at a time.
+    ///
+    /// Return the shortest distance needed to reach the string target. 
+    /// If the string target does not exist in words, return -1.
+    ///
+    /// Example 1:
+    /// Input: words = ["hello","i","am","leetcode","hello"], 
+    /// target = "hello", startIndex = 1
+    /// Output: 1
+    /// Explanation: We start from index 1 and can reach "hello" by
+    /// - moving 3 units to the right to reach index 4.
+    /// - moving 2 units to the left to reach index 4.
+    /// - moving 4 units to the right to reach index 0.
+    /// - moving 1 unit to the left to reach index 0.
+    /// The shortest distance to reach "hello" is 1.
+    /// Example 2:
+    /// Input: words = ["a","b","leetcode"], target = "leetcode", 
+    /// startIndex = 0
+    /// Output: 1
+    /// Explanation: We start from index 0 and can reach "leetcode" by
+    /// - moving 2 units to the right to reach index 3.
+    /// - moving 1 unit to the left to reach index 3.
+    /// The shortest distance to reach "leetcode" is 1.
+    ///
+    /// Example 3:
+    /// Input: words = ["i","eat","leetcode"], target = "ate", 
+    /// startIndex = 0
+    /// Output: -1
+    /// Explanation: Since "ate" does not exist in words, we return -1.
+    ///
+    /// Constraints:
+    /// 1. 1 <= words.length <= 100
+    /// 2. 1 <= words[i].length <= 100
+    /// 3. words[i] and target consist of only lowercase English letters.
+    /// 4. 0 <= startIndex < words.length
+    /// </summary>
+    int closetTarget(vector<string>& words, string target, int startIndex);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

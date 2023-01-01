@@ -280,5 +280,7 @@ void TestLeetCode2488(void);
 void TestLeetCode2498(void);
 void TestLeetCode2499(void);
 void TestLeetCode2500(void);
+void TestLeetCode2511(void);
+void TestLeetCode2515(void);
 void TestLeetCodeArray(void);
 #endif  // TestArray

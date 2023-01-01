@@ -16607,4 +16607,5 @@ bool LeetCodeGraph::isPossible(int n, vector<vector<int>>& edges)
         return false;
     }
 }
+
 #pragma endregion

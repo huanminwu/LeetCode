@@ -1489,9 +1489,9 @@ void TestLeetCode2410(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode2402(void)
+void TestLeetCode2406(void)
 {
-    Logger::WriteMessage("Test Leet Code 2402");
+    Logger::WriteMessage("Test Leet Code 2406");
     LeetCodeGreedy leetCode;
     vector<vector<int>> intervals = { {5, 10},{6, 8},{1, 5},{2, 3},{1, 10} };
     int result = leetCode.minGroups(intervals);
@@ -1504,9 +1504,9 @@ void TestLeetCode2402(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode2406(void)
+void TestLeetCode2402(void)
 {
-    Logger::WriteMessage("Test Leet Code 2406");
+    Logger::WriteMessage("Test Leet Code 2402");
     LeetCodeGreedy leetCode;
     int n = 2;
     vector<vector<int>> meetings = { {0, 10},{1, 5},{2, 7},{3, 4} };

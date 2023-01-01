@@ -6254,7 +6254,7 @@ public:
     /// <summary>
     /// Leet code 1830. Minimum Number of Operations to Make String Sorted
     /// </summary>
-    int modPow(long long x, long long y, long long m);
+    long long modPow(long long x, long long y, long long m);
     
     /// <summary>
     /// Leet code 1830. Minimum Number of Operations to Make String Sorted
@@ -9948,5 +9948,92 @@ public:
     /// 1. 2 <= n <= 10^5
     /// </summary>
     int smallestValue(int n);
+
+    /// <summary>
+    /// Leet Code 2514. Count Anagrams
+    /// </summary>
+    long long factorial(long long n, long long M);
+
+    /// <summary>
+    /// Leet Code 2514. Count Anagrams
+    /// 
+    /// Hard
+    ///	
+    /// You are given a string s containing one or more words. Every 
+    /// consecutive pair of words is separated by a single space ' '.
+    ///
+    /// A string t is an anagram of string s if the ith word of t is a 
+    /// permutation of the ith word of s.
+    ///
+    /// For example, "acb dfe" is an anagram of "abc def", but "def cab" 
+    /// and "adc bef" are not.
+    /// Return the number of distinct anagrams of s. Since the answer may 
+    /// be very large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: s = "too hot"
+    /// Output: 18
+    /// Explanation: Some of the anagrams of the given string are "too hot", 
+    /// "oot hot", "oto toh", "too toh", and "too oht".
+    ///
+    /// Example 2:
+    /// Input: s = "aa"
+    /// Output: 1
+    /// Explanation: There is only one anagram possible for the given string.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s consists of lowercase English letters and spaces ' '.
+    /// 3. There is single space between consecutive words.
+    /// </summary>
+    int countAnagrams(string s);
+
+    /// <summary>
+    /// Leet Code 2338. Count the Number of Ideal Arrays
+    ///                                                           
+    /// Hard
+    ///
+    /// You are given two integers n and maxValue, which are used to describe 
+    /// an ideal array.
+    ///
+    /// A 0-indexed integer array arr of length n is considered ideal if the 
+    /// following conditions hold:
+    ///
+    /// Every arr[i] is a value from 1 to maxValue, for 0 <= i < n.
+    /// Every arr[i] is divisible by arr[i - 1], for 0 < i < n.
+    /// Return the number of distinct ideal arrays of length n. Since the 
+    /// answer may be very large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: n = 2, maxValue = 5
+    /// Output: 10
+    /// Explanation: The following are the possible ideal arrays:
+    /// - Arrays starting with the value 1 (5 arrays): 
+    ///   [1,1], [1,2], [1,3], [1,4], [1,5]
+    /// - Arrays starting with the value 2 (2 arrays): [2,2], [2,4]
+    /// - Arrays starting with the value 3 (1 array): [3,3]
+    /// - Arrays starting with the value 4 (1 array): [4,4]
+    /// - Arrays starting with the value 5 (1 array): [5,5]
+    /// There are a total of 5 + 2 + 1 + 1 + 1 = 10 distinct ideal arrays.
+    ///
+    /// Example 2:
+    /// Input: n = 5, maxValue = 3
+    /// Output: 11
+    /// Explanation: The following are the possible ideal arrays:
+    /// - Arrays starting with the value 1 (9 arrays): 
+    /// - With no other distinct values (1 array): [1,1,1,1,1] 
+    /// - With 2nd distinct value 2 (4 arrays): [1,1,1,1,2], [1,1,1,2,2], 
+    ///   [1,1,2,2,2], [1,2,2,2,2]
+    /// - With 2nd distinct value 3 (4 arrays): [1,1,1,1,3], [1,1,1,3,3], 
+    ///   [1,1,3,3,3], [1,3,3,3,3]
+    /// - Arrays starting with the value 2 (1 array): [2,2,2,2,2]
+    /// - Arrays starting with the value 3 (1 array): [3,3,3,3,3]
+    /// There are a total of 9 + 1 + 1 = 11 distinct ideal arrays.
+    ///
+    /// Constraints:
+    /// 2 <= n <= 10^4
+    /// 3. 1 <= maxValue <= 10^4
+    /// </summary>
+    int idealArrays(int n, int maxValue);
 };
 #endif
