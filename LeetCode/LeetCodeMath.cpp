@@ -16366,3 +16366,174 @@ int LeetCodeMath::idealArrays(int n, int maxValue)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2523. Closest Prime Numbers in Range
+/// 
+/// Medium
+///	
+/// Given two positive integers left and right, find the two integers num1 
+/// and num2 such that:
+///
+/// left <= nums1 < nums2 <= right .
+/// nums1 and nums2 are both prime numbers.
+/// nums2 - nums1 is the minimum amongst all other pairs satisfying the 
+/// above conditions.
+/// Return the positive integer array ans = [nums1, nums2]. If there are 
+/// multiple pairs satisfying these conditions, return the one with the 
+/// minimum nums1 value or [-1, -1] if such numbers do not exist.
+///
+/// A number greater than 1 is called prime if it is only divisible by 1 
+/// and itself.
+///
+/// Example 1:
+///
+/// Input: left = 10, right = 19
+/// Output: [11,13]
+/// Explanation: The prime numbers between 10 and 19 are 11, 13, 17, 
+/// and 19.
+/// The closest gap between any pair is 2, which can be achieved by 
+/// [11,13] or [17,19].
+/// Since 11 is smaller than 17, we return the first pair.
+///
+/// Example 2:
+/// Input: left = 4, right = 6
+/// Output: [-1,-1]
+/// Explanation: There exists only one prime number in the given range, 
+/// so the conditions cannot be satisfied.
+/// 
+/// Constraints:
+/// 1. 1 <= left <= right <= 10^6
+/// </summary>
+vector<int> LeetCodeMath::closestPrimes(int left, int right)
+{
+    vector<int> dp(right + 1, 1);
+    dp[0] = dp[1] = 0;
+    for (int i = 2; i <= right; i++)
+    {
+        if (dp[i] == 0) continue;
+        for (int j = 2 * i; j <= right; j += i)
+        {
+            dp[j] = 0;
+        }
+    }
+    int prev = -1;
+    vector<int> result = { -1, -1 };
+    int min_diff = INT_MAX;
+    for (int i = left; i <= right; i++)
+    {
+        if (dp[i] == 1)
+        {
+            if (prev != -1)
+            {
+                if (i - prev < min_diff)
+                {
+                    result[0] = prev;
+                    result[1] = i;
+                    min_diff = i - prev;
+                }
+            }
+            prev = i;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2520. Count the Digits That Divide a Number
+/// 
+/// Easy
+///	
+/// Given an integer num, return the number of digits in num that divide 
+/// num.
+///
+/// An integer val divides nums if nums % val == 0.
+///
+/// Example 1:
+/// Input: num = 7
+/// Output: 1
+/// Explanation: 7 divides itself, hence the answer is 1.
+///
+/// Example 2:
+/// Input: num = 121
+/// Output: 2
+/// Explanation: 121 is divisible by 1, but not 2. Since 1 occurs twice 
+/// as a digit, we return 2.
+///
+/// Example 3:
+/// Input: num = 1248
+/// Output: 4
+/// Explanation: 1248 is divisible by all of its digits, hence the 
+/// answer is 4.
+/// 
+/// Constraints:
+/// 1. 1 <= num <= 10^9
+/// 2. num does not contain 0 as one of its digits.
+/// </summary>
+int LeetCodeMath::countDigits(int num)
+{
+    string str_num = to_string(num);
+    int result = 0;
+    for (size_t i = 0; i < str_num.size(); i++)
+    {
+        if (num % (str_num[i] - '0') == 0)
+        {
+            result++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2521. Distinct Prime Factors of Product of Array
+/// 
+/// Medium
+///	
+/// Given an array of positive integers nums, return the number of 
+/// distinct prime factors in the product of the elements of nums.
+///
+/// Note that:
+///
+/// A number greater than 1 is called prime if it is divisible by 
+/// only 1 and itself.
+/// An integer val1 is a factor of another integer val2 if 
+/// val2 / val1 is an integer.
+///
+/// Example 1:
+/// Input: nums = [2,4,3,7,10,6]
+/// Output: 4
+/// Explanation:
+/// The product of all the elements in nums is: 
+/// 2 * 4 * 3 * 7 * 10 * 6 = 10080 = 25 * 32 * 5 * 7.
+/// There are 4 distinct prime factors so we return 4.
+///
+/// Example 2:
+/// Input: nums = [2,4,8,16]
+/// Output: 1
+/// Explanation:
+/// The product of all the elements in nums is: 
+/// 2 * 4 * 8 * 16 = 1024 = 210.
+/// There is 1 distinct prime factor so we return 1.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^4
+/// 2. 2 <= nums[i] <= 1000
+/// </summary>
+int LeetCodeMath::distinctPrimeFactors(vector<int>& nums)
+{
+    unordered_set<int> primes;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int n = nums[i];
+        for (int j = 2; j <= (int)sqrt(n); j++)
+        {
+            if (n % j == 0)
+            {
+                while (n % j == 0) n /= j;
+                primes.insert(j);
+            }
+        }
+        if (n != 1) primes.insert(n);
+    }
+    return primes.size();
+}

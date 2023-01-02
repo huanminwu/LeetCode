@@ -5909,8 +5909,24 @@ void TestLeetCode2516(void)
     Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2522(void)
+{
+    Logger::WriteMessage("Test Leet Code 2522");
+    LeetCodeString leetCode;
+    string s = "165462";
+    int k = 60;
+    int result = leetCode.minimumPartition(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "238182";
+    k = 5;
+    result = leetCode.minimumPartition(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2522();
     TestLeetCode2516();
     TestLeetCode2512();
     TestLeetCode2506();

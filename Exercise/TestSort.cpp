@@ -3012,8 +3012,26 @@ void TestLeetCode2491(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2519(void)
+{
+    Logger::WriteMessage("Test Leet Code 2519");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 2, 3, 6, 5, 2, 3 };
+    int k = 2;
+    int result = leetCode.kBigIndices(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,1,1 };
+    k = 3;
+    result = leetCode.kBigIndices(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2519();
     TestLeetCode2491();
     TestLeetCode2454();
     TestLeetCode2418();

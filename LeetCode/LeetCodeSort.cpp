@@ -9342,4 +9342,67 @@ long long LeetCodeSort::dividePlayers(vector<int>& skill)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2519. Count the Number of K-Big Indices
+/// 
+/// Hard
+///	
+/// You are given a 0-indexed integer array nums and a positive integer k.
+///
+/// We call an index i k-big if the following conditions are satisfied:
+///
+/// There exist at least k different indices idx1 such that idx1 < i and 
+/// nums[idx1] < nums[i].
+/// There exist at least k different indices idx2 such that idx2 > i and 
+/// nums[idx2] < nums[i].
+/// Return the number of k-big indices.
+/// 
+/// Example 1:
+///Input: nums = [2,3,6,5,2,3], k = 2
+/// Output: 2
+/// Explanation: There are only two 2-big indices in nums:
+/// - i = 2 --> There are two valid idx1: 0 and 1. There are three valid 
+/// idx2: 3, 4, and 5.
+/// - i = 3 --> There are two valid idx1: 0 and 1. There are two valid 
+/// idx2: 4 and 5.
+///
+/// Example 2:
+/// Input: nums = [1,1,1], k = 3
+/// Output: 0
+/// Explanation: There are no 3-big indices in nums.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i], k <= nums.length
+/// </summary>
+int LeetCodeSort::kBigIndices(vector<int>& nums, int k)
+{
+    int n = nums.size();
+    vector<int> dp(n);
+    priority_queue<int> pq;
+    for (int i = 0; i < n; i++)
+    {
+        if ((int)pq.size() >= k && pq.top() < nums[i])
+        {
+            dp[i]++;
+        }
+        pq.push(nums[i]);
+        if ((int)pq.size() > k) pq.pop();
+    }
+    pq = priority_queue<int>();
+    int result = 0;
+    for (int i = n - 1; i >= 0; i--)
+    {
+        if ((int)pq.size() >= k && pq.top() < nums[i])
+        {
+            dp[i]++;
+        }
+        pq.push(nums[i]);
+        if ((int)pq.size() > k) pq.pop();
+        if (dp[i] == 2) result++;
+    }
+    return result;
+}
+
 #pragma endregion
