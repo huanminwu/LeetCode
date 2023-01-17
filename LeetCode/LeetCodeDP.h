@@ -6349,6 +6349,107 @@ public:
     /// 2. 1 <= nums[i] <= 10^9
     /// </summary>
     int countPartitions(vector<int>& nums, int k);
+
+
+    /// <summary>
+    /// Leet Code 2430. Maximum Deletions on a String
+    ///                                                  
+    /// Hard
+    ///
+    /// You are given a string s consisting of only lowercase English 
+    /// letters. In one operation, you can:
+    ///
+    /// Delete the entire string s, or
+    /// Delete the first i letters of s if the first i letters of s are 
+    /// equal to the following i letters in s, for any i in the range 
+    /// 1 <= i <= s.length / 2.
+    /// For example, if s = "ababc", then in one operation, you could 
+    /// delete the first two letters of s to get "abc", since the first 
+    /// two letters of s and the following two letters of s are both 
+    /// equal to "ab".
+    /// Return the maximum number of operations needed to delete all of s.
+    ///
+    /// Example 1:
+    /// Input: s = "abcabcdabc"
+    /// Output: 2
+    /// Explanation:
+    /// - Delete the first 3 letters ("abc") since the next 3 letters are 
+    ///   equal. Now, s = "abcdabc".
+    /// - Delete all the letters.
+    /// We used 2 operations so return 2. It can be proven that 2 is the 
+    /// maximum number of operations needed.
+    /// Note that in the second operation we cannot delete "abc" again 
+    /// because the next occurrence of "abc" does not happen in the next 3 
+    /// letters.
+    ///
+    /// Example 2:
+    ///
+    /// Input: s = "aaabaab"
+    /// Output: 4
+    /// Explanation:
+    /// - Delete the first letter ("a") since the next letter is equal. 
+    ///   Now, s = "aabaab".
+    /// - Delete the first 3 letters ("aab") since the next 3 letters are equal. 
+    ///   Now, s = "aab".
+    /// - Delete the first letter ("a") since the next letter is equal. 
+    ///   Now, s = "ab".
+    /// - Delete all the letters.
+    /// We used 4 operations so return 4. It can be proven that 4 is the 
+    /// maximum number of operations needed.
+    ///
+    /// Example 3:
+    /// Input: s = "aaaaa"
+    /// Output: 5
+    /// Explanation: In each operation, we can delete the first letter of s.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 4000
+    /// 2. s consists only of lowercase English letters.
+    /// </summary>
+    int deleteString(string s);
+
+    /// <summary>
+    /// Leet Code 2533. Number of Good Binary Strings
+    /// 
+    /// Medium
+    ///	
+    /// You are given four integers minLenght, maxLength, oneGroup and 
+    /// zeroGroup.
+    ///
+    /// A binary string is good if it satisfies the following conditions:
+    ///
+    /// The length of the string is in the range [minLength, maxLength].
+    /// The size of each block of consecutive 1's is a multiple of oneGroup.
+    /// For example in a binary string 00110111100 sizes of each block of 
+    /// consecutive ones are [2,4].
+    /// The size of each block of consecutive 0's is a multiple of zeroGroup.
+    /// For example, in a binary string 00110111100 sizes of each block of 
+    /// consecutive ones are [2,1,2].
+    /// Return the number of good binary strings. Since the answer may be too 
+    /// large, return it modulo 10^9 + 7.
+    ///
+    /// Note that 0 is considered a multiple of all the numbers.
+    /// 
+    /// Example 1:
+    /// Input: minLength = 2, maxLength = 3, oneGroup = 1, zeroGroup = 2
+    /// Output: 5
+    /// Explanation: There are 5 good binary strings in this example: 
+    /// "00", "11", "001", "100", and "111".
+    /// It can be proven that there are only 5 good strings satisfying 
+    /// all conditions.
+    ///
+    /// Example 2:
+    /// Input: minLength = 4, maxLength = 4, oneGroup = 4, zeroGroup = 3
+    /// Output: 1
+    /// Explanation: There is only 1 good binary string in this 
+    /// example: "1111".
+    /// It can be proven that there is only 1 good string satisfying all 
+    /// conditions.
+    /// Constraints:
+    /// 1. 1 <= minLength <= maxLength <= 10^5
+    /// 2. 1 <= oneGroup, zeroGroup <= maxLength
+    /// </summary>
+    int goodBinaryStrings(int minLength, int maxLength, int oneGroup, int zeroGroup);
 };
 
 

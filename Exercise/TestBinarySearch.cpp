@@ -1078,8 +1078,26 @@ void TestLeetCode2517(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2528(void)
+{
+    Logger::WriteMessage("Test Leet Code 2528");
+    LeetCodeBinarySearch leetCode;
+    vector<int> stations = { 1, 2, 4, 5, 0 };
+    int r = 1, k = 2;
+    long long result = leetCode.maxPower(stations, r, k);
+    Logger::WriteMessage(stations);
+    Logger::WriteMessage("r = " + to_string(r) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    stations = { 4,4,4,4 };
+    r = 0, k = 3;
+    result = leetCode.maxPower(stations, r, k);
+    Logger::WriteMessage(stations);
+    Logger::WriteMessage("r = " + to_string(r) + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode2528();
     TestLeetCode2517();
     TestLeetCode2513();
     TestLeetCode2468();

@@ -3512,8 +3512,45 @@ void TestLeetCode2518(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2430(void)
+{
+    Logger::WriteMessage("Test Leet Code 2430");
+    LeetCodeDP leetCode;
+    string s = "abcabcdabc";
+    int result = leetCode.deleteString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aaabaab";
+    result = leetCode.deleteString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aaaaa";
+    result = leetCode.deleteString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2533(void)
+{
+    Logger::WriteMessage("Test Leet Code 2533");
+    LeetCodeDP leetCode;
+    int minLength = 2, maxLength = 3, oneGroup = 1, zeroGroup = 2;
+    int result = leetCode.goodBinaryStrings(minLength, maxLength, oneGroup, zeroGroup);
+    Logger::WriteMessage("minLength = " + to_string(minLength) + "; maxLength = " + to_string(maxLength));
+    Logger::WriteMessage("oneGroup = " + to_string(oneGroup) + "; zeroGroup = " + to_string(zeroGroup));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    minLength = 4, maxLength = 4, oneGroup = 4, zeroGroup = 3;
+    result = leetCode.goodBinaryStrings(minLength, maxLength, oneGroup, zeroGroup);
+    Logger::WriteMessage("minLength = " + to_string(minLength) + "; maxLength = " + to_string(maxLength));
+    Logger::WriteMessage("oneGroup = " + to_string(oneGroup) + "; zeroGroup = " + to_string(zeroGroup));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2533();
+    TestLeetCode2430();
     TestLeetCode2518();
     TestLeetCode2510();
     TestLeetCode2463();

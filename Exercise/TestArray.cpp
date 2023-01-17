@@ -8198,8 +8198,70 @@ void TestLeetCode2515(void)
     Logger::WriteMessage("target = " + target + "; startIndex = " + to_string(startIndex) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2444(void)
+{
+    Logger::WriteMessage("Test Leet Code 2444");
+    LeetCodeArray leetCode;
+    vector<int>nums = { 1,3,5,2,7,5 };
+    int minK = 1;
+    int maxK = 5;
+    long long result = leetCode.countSubarrays(nums, minK, maxK);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("minK = " + to_string(minK) + "; maxK = " + to_string(maxK) + "; result = " + to_string(result));
+
+    nums = { 1,1,1,1 };
+    minK = 1;
+    maxK = 1;
+    result = leetCode.countSubarrays(nums, minK, maxK);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("minK = " + to_string(minK) + "; maxK = " + to_string(maxK) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2535(void)
+{
+    Logger::WriteMessage("Test Leet Code 2535");
+    LeetCodeArray leetCode;
+    vector<int>nums = { 1, 15, 6, 3 };
+    int result = leetCode.differenceOfSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    result = leetCode.differenceOfSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2536(void)
+{
+    Logger::WriteMessage("Test Leet Code 2536");
+    LeetCodeArray leetCode;
+    int n = 3;
+    vector<vector<int>> queries = 
+    { 
+        {1, 1, 2, 2},{0, 0, 1, 1} 
+    };
+    vector<vector<int>> result = leetCode.rangeAddQueries(n, queries);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 2;
+    queries =
+    {
+        {0,0,1,1}
+    };
+    result = leetCode.rangeAddQueries(n, queries);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2536();
+    TestLeetCode2535();
+    TestLeetCode2444();
     TestLeetCode2515();
     TestLeetCode2511();
     TestLeetCode2499();

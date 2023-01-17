@@ -4905,9 +4905,43 @@ void TestLeetCode2502(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2526(void)
+{
+    Logger::WriteMessage("Test Leet Code 2526");
+
+    vector<string> commands =
+    {
+       "DataStream","consec","consec","consec","consec"
+    };
+    vector<vector<int>> parameters
+    {
+        {4,3}, {4},{4},{4},{3}
+    };
+
+    vector<string> result;
+    DataStream* dataStream = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "DataStream")
+        {
+            dataStream = new DataStream(parameters[i][0], parameters[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "consec")
+        {
+            bool ret = dataStream->consec(parameters[i][0]);
+            result.push_back(ret ? "true" : "false");
+        }
+    }
+    delete dataStream;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
 
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2526();
     TestLeetCode2502();
     TestLeetCode2424();
     TestLeetCode2408();

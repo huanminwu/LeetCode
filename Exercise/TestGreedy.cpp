@@ -1521,8 +1521,59 @@ void TestLeetCode2402(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2532(void)
+{
+    Logger::WriteMessage("Test Leet Code 2532");
+    LeetCodeGreedy leetCode;
+    int n = 1, k = 3;
+    vector<vector<int>>time = { {1, 1, 2, 1},{1, 1, 3, 1},{1, 1, 4, 1} };
+    int result = leetCode.findCrossingTime(n, k, time);
+    Logger::WriteMessage(time);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) +  "; result = " + to_string(result));
+
+    n = 3, k = 2;
+    time = { {1, 9, 1, 8},{10, 10, 10, 10} };
+    result = leetCode.findCrossingTime(n, k, time);
+    Logger::WriteMessage(time);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 10, k = 6;
+    time = { {2, 10, 5, 8},{3, 5, 2, 2},{5, 8, 10, 10},{7, 8, 8, 5},{5, 6, 6, 10},{6, 10, 6, 2} };
+    result = leetCode.findCrossingTime(n, k, time);
+    Logger::WriteMessage(time);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2534(void)
+{
+    Logger::WriteMessage("Test Leet Code 2534");
+    LeetCodeGreedy leetCode;
+    vector<int> arrival = { 0, 1, 1, 2, 4 };
+    vector<int> state = { 0, 1, 0, 0, 1 };
+    vector<int> result = leetCode.timeTaken(arrival, state);
+    Logger::WriteMessage(arrival);
+    Logger::WriteMessage(state);
+    Logger::WriteMessage(result);
+
+    arrival = { 0,0,0 };
+    state = { 1,0,1 };
+    result = leetCode.timeTaken(arrival, state);
+    Logger::WriteMessage(arrival);
+    Logger::WriteMessage(state);
+    Logger::WriteMessage(result);
+
+    arrival = { 1, 1, 2, 3, 3, 3, 3, 3, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
+    state = { 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1 };
+    result = leetCode.timeTaken(arrival, state);
+    Logger::WriteMessage(arrival);
+    Logger::WriteMessage(state);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode2534();
+    TestLeetCode2532();
     TestLeetCode2406();
     TestLeetCode2410();
     TestLeetCode2412();

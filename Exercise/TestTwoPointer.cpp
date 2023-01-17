@@ -220,25 +220,6 @@ void TestLeetCode2422(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode2444(void)
-{
-    Logger::WriteMessage("Test Leet Code 2444");
-    LeetCodeTwoPointer leetCode;
-    vector<int>nums = { 1,3,5,2,7,5 };
-    int minK = 1;
-    int maxK = 5;
-    long long result = leetCode.countSubarrays(nums, minK, maxK);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage("minK = " + to_string(minK) + "; maxK = " + to_string(maxK) + "; result = " + to_string(result));
-
-    nums = { 1,1,1,1 };
-    minK = 1;
-    maxK = 1;
-    result = leetCode.countSubarrays(nums, minK, maxK);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage("minK = " + to_string(minK) + "; maxK = " + to_string(maxK) + "; result = " + to_string(result));
-}
-
 void TestLeetCode2461(void)
 {
     Logger::WriteMessage("Test Leet Code 2461");
@@ -308,12 +289,30 @@ void TestLeetCode2448(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2537(void)
+{
+    Logger::WriteMessage("Test Leet Code 2537");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 1, 1, 1, 1, 1 };
+    int k = 10;
+    long long result = leetCode.countGood(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3,1,4,3,2,2,4 };
+    k = 2;
+    result = leetCode.countGood(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2537();
     TestLeetCode2448();
     TestLeetCode2462();
     TestLeetCode2461();
-    TestLeetCode2444();
     TestLeetCode2422();
     TestLeetCode2379();
     TestLeetCode2330();

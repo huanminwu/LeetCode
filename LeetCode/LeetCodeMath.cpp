@@ -16537,3 +16537,202 @@ int LeetCodeMath::distinctPrimeFactors(vector<int>& nums)
     }
     return primes.size();
 }
+
+/// <summary>
+/// Leet Code 2525. Categorize Box According to Criteria
+/// 
+/// Easy
+///	
+/// Given four integers length, width, height, and mass, representing 
+/// the dimensions and mass of a box, respectively, return a string 
+/// representing the category of the box.
+///
+/// The box is "Bulky" if:
+/// Any of the dimensions of the box is greater or equal to 10^4.
+/// Or, the volume of the box is greater or equal to 10^9.
+/// If the mass of the box is greater or equal to 100, it is "Heavy".
+/// If the box is both "Bulky" and "Heavy", then its category is "Both".
+/// If the box is neither "Bulky" nor "Heavy", then its category is 
+/// "Neither".
+/// If the box is "Bulky" but not "Heavy", then its category is "Bulky".
+/// If the box is "Heavy" but not "Bulky", then its category is "Heavy".
+/// Note that the volume of the box is the product of its length, width 
+/// and height.
+///
+/// Example 1:
+/// Input: length = 1000, width = 35, height = 700, mass = 300
+/// Output: "Heavy"
+/// Explanation: 
+/// None of the dimensions of the box is greater or equal to 10^4. 
+/// Its volume = 24500000 <= 10^9. So it cannot be categorized as "Bulky". 
+/// However mass >= 100, so the box is "Heavy".
+/// Since the box is not "Bulky" but "Heavy", we return "Heavy".
+///
+/// Example 2:
+/// Input: length = 200, width = 50, height = 800, mass = 50
+/// Output: "Neither"
+/// Explanation: 
+/// None of the dimensions of the box is greater or equal to 10^4.
+/// Its volume = 8 * 106 <= 109. So it cannot be categorized as "Bulky".
+/// Its mass is also less than 100, so it cannot be categorized as 
+/// "Heavy" either. 
+/// Since its neither of the two above categories, we return "Neither".
+///
+/// Constraints:
+/// 1 <= length, width, height <= 10^5
+/// 2. 1 <= mass <= 10^3
+/// </summary>
+string LeetCodeMath::categorizeBox(int length, int width, int height, int mass)
+{
+    long long volume = (long long)length * (long long)width * (long long)height;
+    bool is_bulky = false;
+    bool is_heavy = false;
+    if (length >= 1e4 || width >= 1e4 || height >= 1e4 || volume >= (long long)1e9)
+    {
+        is_bulky = true;
+    }
+    if (mass >= 100)
+    {
+        is_heavy = true;
+    }
+    if (is_bulky && is_heavy)
+    {
+        return "Both";
+    }
+    else if (is_bulky)
+    {
+        return "Bulky";
+    }
+    else if (is_heavy)
+    {
+        return "Heavy";
+    }
+    else
+    {
+        return "Neither";
+    }
+}
+
+/// <summary>
+/// Leet Code 2529. Maximum Count of Positive Integer and Negative Integer
+/// 
+/// Easy
+///	
+/// Given an array nums sorted in non-decreasing order, return the maximum 
+/// between the number of positive integers and the number of negative 
+/// integers. 
+///
+/// In other words, if the number of positive integers in nums is pos and 
+/// the number of negative integers is neg, then return the maximum of pos 
+/// and neg.
+/// Note that 0 is neither positive nor negative.
+/// 
+/// Example 1:
+/// Input: nums = [-2,-1,-1,1,2,3]
+/// Output: 3
+/// Explanation: There are 3 positive integers and 3 negative integers. 
+/// The maximum count among them is 3.
+///
+/// Example 2:
+/// Input: nums = [-3,-2,-1,0,0,1,2]
+/// Output: 3
+/// Explanation: There are 2 positive integers and 3 negative integers. 
+/// The maximum count among them is 3.
+///
+/// Example 3:
+/// Input: nums = [5,20,66,1314]
+/// Output: 4
+/// Explanation: There are 4 positive integers and 0 negative integers. 
+/// The maximum count among them is 4.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 2000
+/// 2. -2000 <= nums[i] <= 2000
+/// 3. nums is sorted in a non-decreasing order.
+/// </summary>
+int LeetCodeMath::maximumCount(vector<int>& nums)
+{
+    int pos = 0, neg = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] > 0) pos++;
+        else if (nums[i] < 0) neg++;
+    }
+    return max(pos, neg);
+}
+
+/// <summary>
+/// Leet Code 2524. Maximum Frequency Score of a Subarray
+/// 
+/// Hard
+///	
+/// You are given an integer array nums and a positive integer k.
+/// 
+/// The frequency score of an array is the sum of the distinct values in 
+/// the array raised to the power of their frequencies, taking the sum 
+/// modulo 10^9 + 7.
+///
+/// For example, the frequency score of the array [5,4,5,7,4,4] is 
+/// (43 + 52 + 71) modulo (109 + 7) = 96.
+/// Return the maximum frequency score of a subarray of size k in nums. 
+/// You should maximize the value under the modulo and not the actual 
+/// value.
+///
+/// A subarray is a contiguous part of an array.
+/// 
+/// Example 1:
+/// Input: nums = [1,1,1,2,1,2], k = 3
+/// Output: 5
+/// Explanation: The subarray [2,1,2] has a frequency score equal to 5. 
+/// It can be shown that it is the maximum frequency score we can have.
+///
+/// Example 2:
+/// Input: nums = [1,1,1,1,1,1], k = 4
+/// Output: 1
+/// Explanation: All the subarrays of length 4 have a frequency score 
+/// equal to 1.
+/// 
+/// Constraints:
+/// 1. 1 <= k <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^6
+/// </summary>
+int LeetCodeMath::maxFrequencyScore(vector<int>& nums, int k)
+{
+    unordered_map<int, pair<long long, int>> scores;
+    long long M = 1000000007;
+    long long sum = 0, result = 0;
+
+    for (int i = 0; i < (int)nums.size(); i++)
+    {
+        int n = nums[i];
+        if (scores[n].second > 0)
+        {
+            long long prev = scores[n].first;
+            long long product = (prev * (long long)nums[i]) % M;
+            scores[n].first = product;
+            sum = (sum - prev + product + M) % M;
+        }
+        else
+        {
+            scores[n].first = n;
+            sum = (sum + n) % M;
+        }
+        scores[n].second++;
+
+        if (i >= k)
+        {
+            int n = nums[i-k];
+            long long prev = scores[n].first;
+            long long product = 0;
+            if (scores[n].second > 1)
+            {
+                product = (prev * modPow(n, M - 2, M)) % M;
+            }
+            scores[n].first = product;
+            scores[n].second--;
+            sum = (sum - prev + product + M) % M;
+        }
+        if (i >= k - 1) result = max(result, sum);
+    }
+    return (int)result;
+}

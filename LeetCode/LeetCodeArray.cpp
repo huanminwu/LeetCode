@@ -25086,5 +25086,197 @@ int LeetCodeArray::closetTarget(vector<string>& words, string target, int startI
     return result;
 }
 
+/// <summary>
+/// Leet Code 2444. Count Subarrays With Fixed Bounds      
+///                                                  
+/// Hard
+///
+/// You are given an integer array nums and two integers minK and maxK.
+///
+/// A fixed-bound subarray of nums is a subarray that satisfies the 
+/// following conditions:
+///
+/// The minimum value in the subarray is equal to minK.
+/// The maximum value in the subarray is equal to maxK.
+/// Return the number of fixed-bound subarrays.
+///
+/// A subarray is a contiguous part of an array.
+/// 
+/// Example 1:
+/// Input: nums = [1,3,5,2,7,5], minK = 1, maxK = 5
+/// Output: 2
+/// Explanation: The fixed-bound subarrays are [1,3,5] and [1,3,5,2].
+///
+/// Example 2:
+/// 
+/// Input: nums = [1,1,1,1], minK = 1, maxK = 1
+/// Output: 10
+/// Explanation: Every subarray of nums is a fixed-bound 
+/// subarray. There are 10 possible subarrays.
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length <= 10^5
+/// 2. 1 <= nums[i], minK, maxK <= 10^6
+/// </summary>
+long long LeetCodeArray::countSubarrays(vector<int>& nums, int minK, int maxK)
+{
+    long long result = 0;
+    unordered_map<int, int> set_flag;
+    int left = 0;
+    set_flag[minK] = -1;
+    set_flag[maxK] = -1;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] == minK)
+        {
+            set_flag[minK] = i;
+        }
+        if (nums[i] == maxK)
+        {
+            set_flag[maxK] = i;
+        }
+        if (nums[i] < minK || nums[i] > maxK)
+        {
+            set_flag[minK] = -1;
+            set_flag[maxK] = -1;
+            left = i + 1;
+        }
+        if (set_flag[minK] >= 0 && set_flag[maxK] >= 0)
+        {
+            int count = min(set_flag[minK], set_flag[maxK]) - left + 1;
+            result += (long long)count;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2535. Difference Between Element Sum and Digit Sum of 
+///                 an Array
+/// 
+/// Easy
+///	
+/// You are given a positive integer array nums.
+///
+/// The element sum is the sum of all the elements in nums.
+/// The digit sum is the sum of all the digits (not necessarily distinct) 
+/// that appear in nums.
+/// Return the absolute difference between the element sum and digit 
+/// sum of nums.
+///
+/// Note that the absolute difference between two integers x and y is 
+/// defined as |x - y|.
+///
+/// Example 1:
+/// Input: nums = [1,15,6,3]
+/// Output: 9
+/// Explanation: 
+/// The element sum of nums is 1 + 15 + 6 + 3 = 25.
+/// The digit sum of nums is 1 + 1 + 5 + 6 + 3 = 16.
+/// The absolute difference between the element sum and digit sum 
+/// is |25 - 16| = 9.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4]
+/// Output: 0
+/// Explanation:
+/// The element sum of nums is 1 + 2 + 3 + 4 = 10.
+/// The digit sum of nums is 1 + 2 + 3 + 4 = 10.
+/// The absolute difference between the element sum and digit 
+/// sum is |10 - 10| = 0.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 2000
+/// 2. 1 <= nums[i] <= 2000
+/// </summary>
+int LeetCodeArray::differenceOfSum(vector<int>& nums)
+{
+    int sum = 0;
+    int digit_sum = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int n = nums[i];
+        sum += n;
+        while (n > 0)
+        {
+            digit_sum += n % 10;
+            n /= 10;
+        }
+    }
+    return abs(sum - digit_sum);
+}
+
+/// <summary>
+/// Leet Code 2536. Increment Submatrices by One
+/// 
+/// Medium
+///	
+/// You are given a positive integer n, indicating that we initially have 
+/// an n x n 0-indexed integer matrix mat filled with zeroes.
+///
+/// You are also given a 2D integer array query. For each 
+/// query[i] = [row1i, col1i, row2i, col2i], you should do the following 
+/// operation:
+///
+/// Add 1 to every element in the submatrix with the top left 
+/// corner (row1i, col1i) and the bottom right corner (row2i, col2i). 
+/// That is, add 1 to mat[x][y] for for all row1i <= x <= row2i and 
+/// col1i <= y <= col2i.
+/// Return the matrix mat after performing every query.
+/// 
+/// Example 1:
+/// Input: n = 3, queries = [[1,1,2,2],[0,0,1,1]]
+/// Output: [[1,1,0],[1,2,1],[0,1,1]]
+/// Explanation: The diagram above shows the initial matrix, the matrix 
+/// after the first query, and the matrix after the second query.
+/// - In the first query, we add 1 to every element in the submatrix with 
+///    the top left corner (1, 1) and bottom right corner (2, 2).
+/// - In the second query, we add 1 to every element in the submatrix with 
+/// the top left corner (0, 0) and bottom right corner (1, 1).
+///
+/// Example 2:
+/// Input: n = 2, queries = [[0,0,1,1]]
+/// Output: [[1,1],[1,1]]
+/// Explanation: The diagram above shows the initial matrix and the matrix 
+/// after the first query.
+/// - In the first query we add 1 to every element in the matrix.
+///
+/// Constraints:
+/// 1. 1 <= n <= 500
+/// 2. 1 <= queries.length <= 10^4
+/// 3. 0 <= row1i <= row2i < n
+/// 4. 0 <= col1i <= col2i < n
+/// </summary>
+vector<vector<int>> LeetCodeArray::rangeAddQueries(int n, vector<vector<int>>& queries)
+{
+    vector<vector<int>> dp(n, vector<int>(n));
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        int r0 = queries[i][0];
+        int c0 = queries[i][1];
+        int r1 = queries[i][2];
+        int c1 = queries[i][3];
+        dp[r0][c0]++;
+        if (c1 + 1 < n) dp[r0][c1 + 1]--;
+        if (r1 + 1 < n) dp[r1 + 1][c0]--;
+        if ((r1 + 1 < n) && (c1 + 1 < n)) dp[r1 + 1][c1 + 1]++;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (i > 0) dp[i][j] += dp[i - 1][j];
+        }
+    }
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (j > 0) dp[i][j] += dp[i][j - 1];
+        }
+    }
+    return dp;
+}
+
 #pragma endregion
 

@@ -11686,63 +11686,6 @@ public:
     bool equalFrequency(string word);
 
     /// <summary>
-    /// Leet Code 2430. Maximum Deletions on a String
-    ///                                                  
-    /// Hard
-    ///
-    /// You are given a string s consisting of only lowercase English 
-    /// letters. In one operation, you can:
-    ///
-    /// Delete the entire string s, or
-    /// Delete the first i letters of s if the first i letters of s are 
-    /// equal to the following i letters in s, for any i in the range 
-    /// 1 <= i <= s.length / 2.
-    /// For example, if s = "ababc", then in one operation, you could 
-    /// delete the first two letters of s to get "abc", since the first 
-    /// two letters of s and the following two letters of s are both 
-    /// equal to "ab".
-    /// Return the maximum number of operations needed to delete all of s.
-    ///
-    /// Example 1:
-    /// Input: s = "abcabcdabc"
-    /// Output: 2
-    /// Explanation:
-    /// - Delete the first 3 letters ("abc") since the next 3 letters are 
-    ///   equal. Now, s = "abcdabc".
-    /// - Delete all the letters.
-    /// We used 2 operations so return 2. It can be proven that 2 is the 
-    /// maximum number of operations needed.
-    /// Note that in the second operation we cannot delete "abc" again 
-    /// because the next occurrence of "abc" does not happen in the next 3 
-    /// letters.
-    ///
-    /// Example 2:
-    ///
-    /// Input: s = "aaabaab"
-    /// Output: 4
-    /// Explanation:
-    /// - Delete the first letter ("a") since the next letter is equal. 
-    ///   Now, s = "aabaab".
-    /// - Delete the first 3 letters ("aab") since the next 3 letters are equal. 
-    ///   Now, s = "aab".
-    /// - Delete the first letter ("a") since the next letter is equal. 
-    ///   Now, s = "ab".
-    /// - Delete all the letters.
-    /// We used 4 operations so return 4. It can be proven that 4 is the 
-    /// maximum number of operations needed.
-    ///
-    /// Example 3:
-    /// Input: s = "aaaaa"
-    /// Output: 5
-    /// Explanation: In each operation, we can delete the first letter of s.
-    ///
-    /// Constraints:
-    /// 1. 1 <= s.length <= 4000
-    /// 2. s consists only of lowercase English letters.
-    /// </summary>
-    int deleteString(string s);
-
-    /// <summary>
     /// Leet Code 2451. Odd String Difference 
     ///                                                  
     /// Easy
@@ -12167,6 +12110,46 @@ public:
     /// 3. 1 <= k <= 10^9
     /// </summary>
     int minimumPartition(string s, int k);
+
+    /// <summary>
+    /// Leet Code 2531. Make Number of Distinct Characters Equal
+    /// 
+    /// Medium
+    ///	
+    /// You are given two 0-indexed strings word1 and word2.
+    ///
+    /// A move consists of choosing two indices i and j such that 
+    /// 0 <= i < word1.length and 0 <= j < word2.length and swapping 
+    /// word1[i] with word2[j].
+    ///
+    /// Return true if it is possible to get the number of distinct 
+    /// characters in word1 and word2 to be equal with exactly one move. 
+    /// Return false otherwise.
+    /// 
+    /// Example 1:
+    /// Input: word1 = "ac", word2 = "b"
+    /// Output: false
+    /// Explanation: Any pair of swaps would yield two distinct characters 
+    /// in the first string, and one in the second string.
+    ///
+    /// Example 2:
+    /// Input: word1 = "abcc", word2 = "aab"
+    /// Output: true
+    /// Explanation: We swap index 2 of the first string with index 0 of the 
+    /// second string. The resulting strings are word1 = "abac" and 
+    /// word2 = "cab", which both have 3 distinct characters.
+    ///
+    /// Example 3:
+    /// Input: word1 = "abcde", word2 = "fghij"
+    /// Output: true
+    /// Explanation: Both resulting strings will have 5 distinct characters, 
+    /// regardless of which indices we swap.
+    ///
+    /// Constraints:
+    /// 1. 1 <= word1.length, word2.length <= 10^5
+    /// 2. word1 and word2 consist of only lowercase English letters.
+    /// </summary>
+    bool isItPossible(string word1, string word2);
 #pragma endregion
 };
 

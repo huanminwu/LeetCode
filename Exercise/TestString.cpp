@@ -5730,23 +5730,6 @@ void TestLeetCode2423(void)
     Logger::WriteMessage("word = " + word + "; result = " + (string)(result ? "true" : "false"));
 }
 
-void TestLeetCode2430(void)
-{
-    Logger::WriteMessage("Test Leet Code 2430");
-    LeetCodeString leetCode;
-    string s = "abcabcdabc";
-    int result = leetCode.deleteString(s);
-    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
-
-    s = "aaabaab";
-    result = leetCode.deleteString(s);
-    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
-
-    s = "aaaaa";
-    result = leetCode.deleteString(s);
-    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
-}
-
 void TestLeetCode2451(void)
 {
     Logger::WriteMessage("Test Leet Code 2451");
@@ -5924,8 +5907,26 @@ void TestLeetCode2522(void)
     Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2531(void)
+{
+    Logger::WriteMessage("Test Leet Code 2531");
+    LeetCodeString leetCode;
+    string word1 = "ac", word2 = "b";
+    bool result = leetCode.isItPossible(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 + "; result = " + (string)(result ? "true" : "false"));
+
+    word1 = "abcc", word2 = "aab";
+    result = leetCode.isItPossible(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 + "; result = " + (string)(result ? "true" : "false"));
+
+    word1 = "abcde", word2 = "fghij";
+    result = leetCode.isItPossible(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2531();
     TestLeetCode2522();
     TestLeetCode2516();
     TestLeetCode2512();
@@ -5935,7 +5936,6 @@ void TestLeetCodeString(void)
     TestLeetCode2490();
     TestLeetCode2452();
     TestLeetCode2451();
-    TestLeetCode2430();
     TestLeetCode2423();
     TestLeetCode2414();
     TestLeetCode2405();

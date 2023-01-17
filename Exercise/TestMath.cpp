@@ -5352,8 +5352,65 @@ void TestLeetCode2521(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2525(void)
+{
+    Logger::WriteMessage("Test Leet Code 2525");
+    LeetCodeMath leetCode;
+    int length = 1000, width = 35, height = 700, mass = 300;
+    string result = leetCode.categorizeBox(length, width, height, mass);
+    Logger::WriteMessage("length = " + to_string(length) + ", width = " + to_string(width));
+    Logger::WriteMessage("height = " + to_string(height) + ", mass = " + to_string(mass));
+    Logger::WriteMessage("result = " + result);
+
+    length = 200, width = 50, height = 800, mass = 50;
+    result = leetCode.categorizeBox(length, width, height, mass);
+    Logger::WriteMessage("length = " + to_string(length) + ", width = " + to_string(width));
+    Logger::WriteMessage("height = " + to_string(height) + ", mass = " + to_string(mass));
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode2529(void)
+{
+    Logger::WriteMessage("Test Leet Code 2529");
+    LeetCodeMath leetCode;
+    vector<int> nums = { -2, -1, -1, 1, 2, 3 };
+    int result = leetCode.maximumCount(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -3,-2,-1,0,0,1,2 };
+    result = leetCode.maximumCount(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,20,66,1314 };
+    result = leetCode.maximumCount(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2524(void)
+{
+    Logger::WriteMessage("Test Leet Code 2524");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 1, 1, 2, 1, 2 };
+    int k = 3;
+    int result = leetCode.maxFrequencyScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,1,1,1,1,1 };
+    k = 4;
+    result = leetCode.maxFrequencyScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2524();
+    TestLeetCode2529();
+    TestLeetCode2525();
     TestLeetCode2521();
     TestLeetCode2520();
     TestLeetCode2523();

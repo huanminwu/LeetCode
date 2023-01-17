@@ -3661,8 +3661,30 @@ void TestLeetCode2509(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2538(void)
+{
+    Logger::WriteMessage("Test Leet Code 2538");
+    LeetCodeTree leetCode;
+    int n = 6;
+    vector<vector<int>> edges = { {0, 1},{1, 2},{1, 3},{3, 4},{3, 5} };
+    vector<int> price = { 9, 8, 7, 6, 10, 5 };
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(price);
+    long long result = leetCode.maxOutput(n, edges, price);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    edges = { {0, 1},{1, 2} };
+    price = { 1, 1, 1 };
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(price);
+    result = leetCode.maxOutput(n, edges, price);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode2538();
     TestLeetCode2509();
     TestLeetCode2458();
     TestLeetCode2476();

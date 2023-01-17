@@ -918,8 +918,24 @@ void TestLeetCode2505(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2527(void)
+{
+    Logger::WriteMessage("Test Leet Code 2527");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 4 };
+    int result = leetCode.xorBeauty(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 15,45,20,2,34,35,5,44,32,30 };
+    result = leetCode.xorBeauty(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2527();
     TestLeetCode2505();
     TestLeetCode2479();
     TestLeetCode2433();

@@ -3029,8 +3029,26 @@ void TestLeetCode2519(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2530(void)
+{
+    Logger::WriteMessage("Test Leet Code 2530");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 10,10,10,10,10 };
+    int k = 5;
+    int result = leetCode.maxKelements(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,10,3,3,3 };
+    k = 3;
+    result = leetCode.maxKelements(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2530();
     TestLeetCode2519();
     TestLeetCode2491();
     TestLeetCode2454();

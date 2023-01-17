@@ -3115,5 +3115,173 @@ public:
     /// 5. All the values of starti are unique.
     /// </summary>
     int mostBooked(int n, vector<vector<int>>& meetings);
+
+    /// <summary>
+    /// Leet Code 2532. Time to Cross a Bridge
+    /// 
+    /// Hard
+    ///	
+    /// There are k workers who want to move n boxes from an old warehouse to 
+    /// a new one. You are given the two integers n and k, and a 2D integer 
+    /// array time of size k x 4 where time[i] = [leftToRighti, pickOldi, 
+    /// rightToLefti, putNewi].
+    ///
+    /// The warehouses are separated by a river and connected by a bridge. 
+    /// The old warehouse is on the right bank of the river, and the new 
+    /// warehouse is on the left bank of the river. Initially, all k 
+    /// workers are waiting on the left side of the bridge. To move 
+    /// the boxes, the ith worker (0-indexed) can :
+    ///
+    /// Cross the bridge from the left bank (new warehouse) to the right 
+    /// bank (old warehouse) in leftToRighti minutes.
+    /// Pick a box from the old warehouse and return to the bridge in 
+    /// pickOldi minutes. Different workers can pick up their boxes 
+    /// simultaneously.
+    /// Cross the bridge from the right bank (old warehouse) to the left 
+    /// bank (new warehouse) in rightToLefti minutes.
+    /// Put the box in the new warehouse and return to the bridge in putNewi 
+    /// minutes. Different workers can put their boxes simultaneously.
+    ///
+    /// A worker i is less efficient than a worker j if either condition is 
+    /// met:
+    ///
+    /// leftToRighti + rightToLefti > leftToRightj + rightToLeftj
+    /// leftToRighti + rightToLefti == leftToRightj + rightToLeftj and i > j
+    /// The following rules regulate the movement of the workers through the 
+    /// bridge :
+    ///
+    /// If a worker x reaches the bridge while another worker y is crossing 
+    /// the bridge, x waits at their side of the bridge.
+    /// If the bridge is free, the worker waiting on the right side of the 
+    /// bridge gets to cross the bridge. If more than one worker is waiting 
+    /// on the right side, the one with the lowest efficiency crosses first.
+    /// If the bridge is free and no worker is waiting on the right side, 
+    /// and at least one box remains at the old warehouse, the worker on the 
+    /// left side of the river gets to cross the bridge. If more than one 
+    /// worker is waiting on the left side, the one with the lowest 
+    /// efficiency crosses first.
+    /// Return the instance of time at which the last worker reaches the 
+    /// left bank of the river after all n boxes have been put in the 
+    /// new warehouse.
+    /// 
+    /// Example 1:
+    /// Input: n = 1, k = 3, time = [[1,1,2,1],[1,1,3,1],[1,1,4,1]]
+    /// Output: 6
+    /// Explanation: 
+    /// From 0 to 1: worker 2 crosses the bridge from the left bank to the 
+    /// right bank.
+    /// From 1 to 2: worker 2 picks up a box from the old warehouse.
+    /// From 2 to 6: worker 2 crosses the bridge from the right bank to the 
+    /// left bank.
+    /// From 6 to 7: worker 2 puts a box at the new warehouse.
+    /// The whole process ends after 7 minutes. We return 6 because the 
+    /// problem asks for the instance of time at which the last worker reaches 
+    /// the left bank.
+    ///
+    /// Example 2:
+    /// Input: n = 3, k = 2, time = [[1,9,1,8],[10,10,10,10]]
+    /// Output: 50
+    /// Explanation: 
+    /// From 0  to 10: worker 1 crosses the bridge from the left bank to the 
+    /// right bank.
+    /// From 10 to 20: worker 1 picks up a box from the old warehouse.
+    /// From 10 to 11: worker 0 crosses the bridge from the left bank to the 
+    /// right bank.
+    /// From 11 to 20: worker 0 picks up a box from the old warehouse.
+    /// From 20 to 30: worker 1 crosses the bridge from the right bank to 
+    /// the left bank.
+    /// From 30 to 40: worker 1 puts a box at the new warehouse.
+    /// From 30 to 31: worker 0 crosses the bridge from the right bank 
+    /// to the left bank.
+    /// From 31 to 39: worker 0 puts a box at the new warehouse.
+    /// From 39 to 40: worker 0 crosses the bridge from the left bank to 
+    /// the right bank.
+    /// From 40 to 49: worker 0 picks up a box from the old warehouse.
+    /// From 49 to 50: worker 0 crosses the bridge from the right bank 
+    /// to the left bank.
+    /// From 50 to 58: worker 0 puts a box at the new warehouse.
+    /// The whole process ends after 58 minutes. We return 50 because the 
+    /// problem asks for the instance of time at which the last worker 
+    /// reaches the left bank.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n, k <= 10^4
+    /// 2. time.length == k
+    /// 3. time[i].length == 4
+    /// 4. 1 <= leftToRighti, pickOldi, rightToLefti, putNewi <= 1000
+    /// </summary>
+    int findCrossingTime(int n, int k, vector<vector<int>>& time);
+
+    /// <summary>
+    /// Leet Code 2534. Time Taken to Cross the Door
+    /// 
+    /// Hard
+    ///	
+    /// There are n persons numbered from 0 to n - 1 and a door. Each person 
+    /// can enter or exit through the door once, taking one second.
+    ///
+    /// You are given a non-decreasing integer array arrival of size n, where 
+    /// arrival[i] is the arrival time of the ith person at the door. You are 
+    /// also given an array state of size n, where state[i] is 0 if person i 
+    /// wants to enter through the door or 1 if they want to exit through the 
+    /// door.
+    ///
+    /// If two or more persons want to use the door at the same time, they 
+    /// follow the following rules:
+    ///
+    /// If the door was not used in the previous second, then the person who 
+    /// wants to exit goes first.
+    /// If the door was used in the previous second for entering, the person 
+    /// who wants to enter goes first.
+    /// If the door was used in the previous second for exiting, the person 
+    /// who wants to exit goes first.
+    /// If multiple persons want to go in the same direction, the person with 
+    /// the smallest index goes first.
+    /// Return an array answer of size n where answer[i] is the second at 
+    /// which the ith person crosses the door.
+    ///
+    /// Note that:
+    ///
+    /// Only one person can cross the door at each second.
+    /// A person may arrive at the door and wait without entering or exiting 
+    /// to follow the mentioned rules.
+    /// 
+    /// Example 1:
+    /// Input: arrival = [0,1,1,2,4], state = [0,1,0,0,1]
+    /// Output: [0,3,1,2,4]
+    /// Explanation: At each second we have the following:
+    /// - At t = 0: Person 0 is the only one who wants to enter, so they just 
+    ///   enter through the door.
+    /// - At t = 1: Person 1 wants to exit, and person 2 wants to enter. Since 
+    ///   the door was used the previous second for entering, person 2 enters.
+    /// - At t = 2: Person 1 still wants to exit, and person 3 wants to enter. 
+    ///   Since the door was used the previous second for entering, person 3 
+    ///   enters.
+    /// - At t = 3: Person 1 is the only one who wants to exit, so they just 
+    ///   exit through the door.
+    /// - At t = 4: Person 4 is the only one who wants to exit, so they just 
+    ///   exit through the door.
+    ///
+    /// Example 2:
+    /// Input: arrival = [0,0,0], state = [1,0,1]
+    /// Output: [0,2,1]
+    /// Explanation: At each second we have the following:
+    /// - At t = 0: Person 1 wants to enter while persons 0 and 2 want to 
+    ///   exit. Since the door was not used in the previous second, the 
+    ///   persons who want to exit get to go first. Since person 0 has a 
+    ///   smaller index, they exit first.
+    /// - At t = 1: Person 1 wants to enter, and person 2 wants to exit. Since 
+    ///   the door was used in the previous second for exiting, person 2 exits.
+    /// - At t = 2: Person 1 is the only one who wants to enter, so they just 
+    ///   enter through the door.
+    /// 
+    /// Constraints:
+    /// 1. n == arrival.length == state.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 0 <= arrival[i] <= n
+    /// 4. arrival is sorted in non-decreasing order.
+    /// 5. state[i] is either 0 or 1.
+    /// </summary>
+    vector<int> timeTaken(vector<int>& arrival, vector<int>& state);
 };
 #endif  // LeetCodeGreedy_H

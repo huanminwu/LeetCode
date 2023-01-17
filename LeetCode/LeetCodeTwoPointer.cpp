@@ -875,70 +875,6 @@ int LeetCodeTwoPointer::minimumOperations(vector<int>& nums)
 }
 
 /// <summary>
-/// Leet Code 2444. Count Subarrays With Fixed Bounds      
-///                                                  
-/// Hard
-///
-/// You are given an integer array nums and two integers minK and maxK.
-///
-/// A fixed-bound subarray of nums is a subarray that satisfies the 
-/// following conditions:
-///
-/// The minimum value in the subarray is equal to minK.
-/// The maximum value in the subarray is equal to maxK.
-/// Return the number of fixed-bound subarrays.
-///
-/// A subarray is a contiguous part of an array.
-/// 
-/// Example 1:
-/// Input: nums = [1,3,5,2,7,5], minK = 1, maxK = 5
-/// Output: 2
-/// Explanation: The fixed-bound subarrays are [1,3,5] and [1,3,5,2].
-///
-/// Example 2:
-/// 
-/// Input: nums = [1,1,1,1], minK = 1, maxK = 1
-/// Output: 10
-/// Explanation: Every subarray of nums is a fixed-bound 
-/// subarray. There are 10 possible subarrays.
-/// 
-/// Constraints:
-/// 1. 2 <= nums.length <= 10^5
-/// 2. 1 <= nums[i], minK, maxK <= 10^6
-/// </summary>
-long long LeetCodeTwoPointer::countSubarrays(vector<int>& nums, int minK, int maxK)
-{
-    long long result = 0;
-    unordered_map<int, int> set_flag;
-    int left = 0;
-    set_flag[minK] = -1;
-    set_flag[maxK] = -1;
-    for (size_t i = 0; i < nums.size(); i++)
-    {
-        if (nums[i] == minK)
-        {
-            set_flag[minK] = i;
-        }
-        if (nums[i] == maxK)
-        {
-            set_flag[maxK] = i;
-        }
-        if (nums[i] < minK || nums[i] > maxK)
-        {
-            set_flag[minK] = -1;
-            set_flag[maxK] = -1;
-            left = i + 1;
-        }
-        if (set_flag[minK] >= 0 && set_flag[maxK] >= 0)
-        {
-            int count = min(set_flag[minK], set_flag[maxK]) - left + 1;
-            result += (long long)count;
-        }
-    }
-    return result;
-}
-
-/// <summary>
 /// Leet Code 2461. Maximum Sum of Distinct Subarrays With Length K 
 ///                                                  
 /// Medium
@@ -1182,6 +1118,69 @@ long long LeetCodeTwoPointer::minCost(vector<int>& nums, vector<int>& cost)
     for (size_t i = 0; i < total_cost.size(); i++)
     {
         result = min(result, total_cost[i].first + total_cost[i].second);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2537. Count the Number of Good Subarrays
+/// 
+/// Medium
+///	
+/// Given an integer array nums and an integer k, return the number of 
+/// good subarrays of nums.
+///
+/// A subarray arr is good if it there are at least k pairs of 
+/// indices (i, j) such that i < j and arr[i] == arr[j].
+///
+/// A subarray is a contiguous non-empty sequence of elements within an 
+/// array.
+/// 
+/// Example 1:
+/// Input: nums = [1,1,1,1,1], k = 10
+/// Output: 1
+/// Explanation: The only good subarray is the array nums itself.
+///
+/// Example 2:
+/// Input: nums = [3,1,4,3,2,2,4], k = 2
+/// Output: 4
+/// Explanation: There are 4 different good subarrays:
+/// - [3,1,4,3,2,2] that has 2 pairs.
+/// - [3,1,4,3,2,2,4] that has 3 pairs.
+/// - [1,4,3,2,2,4] that has 2 pairs.
+/// - [4,3,2,2,4] that has 2 pairs.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i], k <= 10^9
+/// </summary>
+long long LeetCodeTwoPointer::countGood(vector<int>& nums, int k)
+{
+    long long result = 0;
+    unordered_map<int, long long> num_count;
+    long long sum = 0;
+    int head = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        num_count[nums[i]]++;
+        long long count = num_count[nums[i]];
+        if (count > 1)
+        {
+            sum += (long long)count * (long long)(count - 1) / 2;
+            sum -= (long long)(count - 1) * (long long)(count - 2) / 2;
+        }
+        while (sum >= (long long)k)
+        {
+            num_count[nums[head]]--;
+            long long count = num_count[nums[head]];
+            if (num_count[nums[head]] > 0)
+            {
+                sum -= (long long)(count + 1) * (long long)count / 2;
+                sum += (long long)count * (long long)(count - 1) / 2;
+            }
+            head++;
+        }
+        result += (long long)head;
     }
     return result;
 }
