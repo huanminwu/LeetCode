@@ -1532,13 +1532,41 @@ public:
 };
 
 /// <summary>
-/// Leet code #303. Range Sum Query - Immutable          
-/// Given an integer array nums, find the sum of the elements between indices i and j (i ≤ j), inclusive.
-/// Example:
-/// Given nums = [-2, 0, 3, -5, 2, -1]
-/// sumRange(0, 2) -> 1
-/// sumRange(2, 5) -> -1
-/// sumRange(0, 5) -> -3
+/// Leet Code 303. Range Sum Query - Immutable
+/// 
+/// Easy
+///	
+/// Given an integer array nums, handle multiple queries of the following 
+/// type:
+///
+/// Calculate the sum of the elements of nums between indices left and 
+/// right inclusive where left <= right.
+/// Implement the NumArray class:
+///
+/// NumArray(int[] nums) Initializes the object with the integer array 
+/// nums.
+/// int sumRange(int left, int right) Returns the sum of the elements 
+/// of nums between indices left and right inclusive (i.e. 
+/// nums[left] + nums[left + 1] + ... + nums[right]).
+///
+/// Example 1:
+/// Input
+/// ["NumArray", "sumRange", "sumRange", "sumRange"]
+/// [[[-2, 0, 3, -5, 2, -1]], [0, 2], [2, 5], [0, 5]]
+/// Output
+/// [null, 1, -1, -3]
+///
+/// Explanation
+/// NumArray numArray = new NumArray([-2, 0, 3, -5, 2, -1]);
+/// numArray.sumRange(0, 2); // return (-2) + 0 + 3 = 1
+/// numArray.sumRange(2, 5); // return 3 + (-5) + 2 + (-1) = -1
+/// numArray.sumRange(0, 5); // return (-2) + 0 + 3 + (-5) + 2 + (-1) = -3
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^4
+/// 2. -10^5 <= nums[i] <= 10^5
+/// 3. 0 <= left <= right < nums.length
+/// 4. At most 10^4 calls will be made to sumRange.
 /// </summary>
 class NumArray
 {
@@ -1874,17 +1902,53 @@ public:
 };
 
 /// <summary>
-/// Leet code #232. Implement Queue using Stacks  
-/// Implement the following operations of a queue using stacks.
-/// push(x) -- Push element x to the back of queue.
-/// pop() -- Removes the element from in front of queue.
-/// peek() -- Get the front element.
-/// empty() -- Return whether the queue is empty. 
+/// Leet Code 232. Implement Queue using Stacks
+/// 
+/// Easy
+///
+/// Implement a first in first out (FIFO) queue using only two stacks. 
+/// The implemented queue should support all the functions of a normal 
+/// queue (push, peek, pop, and empty).
+///
+/// Implement the MyQueue class:
+///
+/// void push(int x) Pushes element x to the back of the queue.
+/// int pop() Removes the element from the front of the queue and 
+/// returns it.
+/// int peek() Returns the element at the front of the queue.
+/// boolean empty() Returns true if the queue is empty, false otherwise. 
 /// Notes:
-/// You must use only standard operations of a stack -- which means only push to top, peek/pop from top, size, and is empty operations are valid.
-/// Depending on your language, stack may not be supported natively. You may simulate a stack by using a list or deque (double-ended queue), 
-/// as long as you use only standard operations of a stack. 
-/// You may assume that all operations are valid (for example, no pop or peek operations will be called on an empty queue).
+/// You must use only standard operations of a stack, which means only 
+/// push to top, peek/pop from top, size, and is empty operations are 
+/// valid.
+/// Depending on your language, the stack may not be supported natively. 
+/// You may simulate a stack using a list or deque (double-ended queue) 
+/// as long as you use only a stack's standard operations.
+///
+/// Example 1:
+/// Input
+/// ["MyQueue", "push", "push", "peek", "pop", "empty"]
+/// [[], [1], [2], [], [], []]
+/// Output
+/// [null, null, null, 1, 1, false]
+///
+/// Explanation
+/// MyQueue myQueue = new MyQueue();
+/// myQueue.push(1); // queue is: [1]
+/// myQueue.push(2); // queue is: [1, 2] (leftmost is front of the queue)
+/// myQueue.peek(); // return 1
+/// myQueue.pop(); // return 1, queue is [2]
+/// myQueue.empty(); // return false
+///
+/// Constraints:
+/// 1. 1 <= x <= 9
+/// 2. At most 100 calls will be made to push, pop, peek, and empty.
+/// 3. All the calls to pop and peek are valid.
+///
+/// Follow-up: Can you implement the queue such that each operation is 
+/// amortized O(1) time complexity? In other words, performing n operations 
+/// will take overall O(n) time even if one of those operations may take 
+/// longer.
 /// </summary>
 class QueueByStack
 {

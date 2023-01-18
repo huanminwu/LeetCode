@@ -3546,6 +3546,31 @@ void TestLeetCode2533(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode1187(void)
+{
+    Logger::WriteMessage("Test Leet Code 1187");
+    LeetCodeDP leetCode;
+    vector<int> arr1 = { 1, 5, 3, 6, 7 };
+    vector<int> arr2 = { 1, 3, 2, 4 };
+    int result = leetCode.makeArrayIncreasing(arr1, arr2);
+    Logger::WriteMessage(arr1);
+    Logger::WriteMessage(arr2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr1 = { 1, 5, 3, 6, 7 };
+    arr2 = { 4, 3, 1 };
+    result = leetCode.makeArrayIncreasing(arr1, arr2);
+    Logger::WriteMessage(arr1);
+    Logger::WriteMessage(arr2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr1 = { 1, 5, 3, 6, 7 };
+    arr2 = { 1, 6, 3, 3 };
+    result = leetCode.makeArrayIncreasing(arr1, arr2);
+    Logger::WriteMessage(arr1);
+    Logger::WriteMessage(arr2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeDP(void)
 {
@@ -3661,6 +3686,7 @@ void TestLeetCodeDP(void)
     TestLeetCode132();
     TestLeetCode1320();
     TestLeetCode1139();
+    TestLeetCode1187();
     TestLeetCode1312();
     TestLeetCode1301();
     TestLeetCode1289();
@@ -3680,7 +3706,6 @@ void TestLeetCodeDP(void)
     TestLeetCode474();
     TestLeetCode923();
     TestLeetCode920();
-    TestLeetCode123();
     TestLeetCode629();
     TestLeetCode514();
     TestLeetCode264();
@@ -3711,4 +3736,7 @@ void TestLeetCodeDP(void)
     TestLeetCode62();
     TestLeetCode63();
     TestLeetCode64();
+    TestLeetCode45();
+    TestLeetCode55();
+    TestLeetCode5();
 }

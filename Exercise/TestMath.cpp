@@ -5646,6 +5646,7 @@ void TestLeetCodeMath(void)
     TestLeetCode319();
     TestLeetCode335();
     TestLeetCode66();
+    TestLeetCode273();
     TestLeetCode1040();
     TestLeetCode1058();
     TestLeetCode1085();
@@ -5671,5 +5672,7 @@ void TestLeetCodeMath(void)
     TestLeetCode1144();
     TestLeetCode1154();
     TestLeetCode1175();
+    TestLeetCode1185();
     TestLeetCode258();
+    TestLeetCode453(); 
 }

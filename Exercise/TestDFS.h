@@ -3,6 +3,7 @@
 #define TestDFS_H
 #include "..\LeetCode\LeetCodeDFS.h"
 void TestLeetCode17(void);
+void TestLeetCode22(void);
 void TestLeetCode37(void);
 void TestLeetCode39(void);
 void TestLeetCode40(void);
@@ -26,6 +27,7 @@ void TestLeetCode464(void);
 void TestLeetCode473(void);
 void TestLeetCode491(void);
 void TestLeetCode526(void);
+void TestLeetCode784(void);
 void TestLeetCode996(void);
 void TestLeetCode980(void);
 void TestLeetCode1066(void);

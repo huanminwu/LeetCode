@@ -58,6 +58,43 @@ void TestLeetCode146(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode232(void)
+{
+    Logger::WriteMessage("Test Leet Code 232");
+    QueueByStack queueByStack;
+    string output;
+    queueByStack.push(1);
+    queueByStack.push(2);
+    queueByStack.push(3);
+    output = "push(1), push(2), push(3)";
+    Logger::WriteMessage(output);
+    output = "pop(" + to_string(queueByStack.peek()) + ")";
+    queueByStack.pop();
+    Logger::WriteMessage(output);
+    output = "pop(" + to_string(queueByStack.peek()) + ")";
+    queueByStack.pop();
+    Logger::WriteMessage(output);
+    output = "pop(" + to_string(queueByStack.peek()) + ")";
+    queueByStack.pop();
+    Logger::WriteMessage(output);
+    Logger::WriteMessage("The queue " + string(queueByStack.empty() ? "is" : "is not") + " empty");
+}
+
+void TestLeetCode303(void)
+{
+    Logger::WriteMessage("Test Leet Code 303");
+    vector<int> nums = { -2, 0, 3, -5, 2, -1 };
+    NumArray numArray(nums);
+    Logger::WriteMessage(nums);
+    int i, j;
+    i = 0; j = 2;
+    Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArray.sumRange(i, j)));
+    i = 2; j = 5;
+    Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArray.sumRange(i, j)));
+    i = 0; j = 5;
+    Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArray.sumRange(i, j)));
+}
+
 void TestLeetCode355(void)
 {
     Logger::WriteMessage("Test Leet Code 355");
@@ -4939,6 +4976,45 @@ void TestLeetCode2526(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode304(void)
+{
+    Logger::WriteMessage("Test Leet Code 304");
+    vector<vector<int>> matrix =
+    {
+        { 3, 0, 1, 4, 2 },
+        { 5, 6, 3, 2, 1 },
+        { 1, 2, 0, 1, 5 },
+        { 4, 1, 0, 1, 7 },
+        { 1, 0, 3, 0, 5 }
+    };
+    Logger::WriteMessage(matrix);
+    NumMatrix numMatrix(matrix);
+    int sum = numMatrix.sumRegion(2, 1, 4, 3);
+    Logger::WriteMessage("Sum of Region(2,1,4,3) = " + to_string(sum));
+    sum = numMatrix.sumRegion(1, 1, 2, 2);
+    Logger::WriteMessage("Sum of Region(1,1,2,2) = " + to_string(sum));
+    sum = numMatrix.sumRegion(1, 2, 2, 4);
+    Logger::WriteMessage("Sum of Region(1,2,2,4) = " + to_string(sum));
+}
+
+void TestLeetCode307(void)
+{
+    Logger::WriteMessage("Test Leet Code 307");
+    vector<int> nums = { -2, 0, 3, -5, 2, -1 };
+    NumArrayMutable numArrayMutable(nums);
+    Logger::WriteMessage(nums);
+    int i, j;
+    i = 0; j = 2;
+    Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArrayMutable.sumRange(i, j)));
+    i = 2; j = 5;
+    Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArrayMutable.sumRange(i, j)));
+    i = 0; j = 5;
+    Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArrayMutable.sumRange(i, j)));
+    numArrayMutable.update(1, 2);
+    i = 0; j = 5;
+    Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArrayMutable.sumRange(i, j)));
+}
+
 void TestLeetCodeDesign(void)
 {
     TestLeetCode2526();
@@ -5045,7 +5121,10 @@ void TestLeetCodeDesign(void)
     TestLeetCode895();
     TestLeetCode900();
     TestLeetCode981();
+    TestLeetCode303();
     TestLeetCode1146();
     TestLeetCode1244();
     TestLeetCode1274();
+    TestLeetCode304();
+    TestLeetCode307();
 }

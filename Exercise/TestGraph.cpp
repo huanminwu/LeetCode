@@ -5102,5 +5102,9 @@ void TestLeetCodeGraph(void)
     TestLeetCode1245();
     TestLeetCode1245();
     TestLeetCode1254();
+    TestLeetCode778();
+    TestLeetCode815();
+    TestLeetCode444();
+    TestLeetCode269();
     TestLeetCode9902();
 }

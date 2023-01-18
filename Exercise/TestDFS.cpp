@@ -19,6 +19,16 @@ void TestLeetCode17(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode22(void)
+{
+    Logger::WriteMessage("Test Leet Code 22");
+    LeetCodeDFS leetCode;
+    int n = 3;
+    Logger::WriteMessage("n= " + to_string(n));
+    vector<string> result = leetCode.generateParenthesis(n);
+    Logger::WriteMessage("Parenthesis combinations are: ");
+    Logger::WriteMessage(result);
+}
 
 void TestLeetCode37(void)
 {
@@ -1751,6 +1761,63 @@ void TestLeetCode2403(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode784(void)
+{
+    Logger::WriteMessage("Test Leet Code 784");
+    LeetCodeDFS leetCode;
+    string S = "a1b2";
+    vector<string> result = leetCode.letterCasePermutation(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+
+    S = "3z4";
+    result = leetCode.letterCasePermutation(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+
+    S = "12345";
+    result = leetCode.letterCasePermutation(S);
+    Logger::WriteMessage("S = " + S);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode282(void)
+{
+    Logger::WriteMessage("Test Leet Code 282");
+    LeetCodeDFS leetCode;
+
+    string num = "232";
+    int target = 8;
+    vector<string> result = leetCode.addOperators(num, target);
+    Logger::WriteMessage("num = " + num + "," + to_string(target) + " -> ");
+    Logger::WriteMessage(result);
+
+    num = "123";
+    target = 6;
+    result = leetCode.addOperators(num, target);
+    Logger::WriteMessage("num = " + num + "," + to_string(target) + " -> ");
+    Logger::WriteMessage(result);
+
+
+    num = "105";
+    target = 5;
+    result = leetCode.addOperators(num, target);
+    Logger::WriteMessage("num = " + num + "," + to_string(target) + " -> ");
+    Logger::WriteMessage(result);
+
+    num = "00";
+    target = 0;
+    result = leetCode.addOperators(num, target);
+    Logger::WriteMessage("num = " + num + "," + to_string(target) + " -> ");
+    Logger::WriteMessage(result);
+
+    num = "3456237490";
+    target = 9191;
+    result = leetCode.addOperators(num, target);
+    Logger::WriteMessage("num = " + num + "," + to_string(target) + " -> ");
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDFS(void)
 {
     TestLeetCode2403();
@@ -1782,6 +1849,8 @@ void TestLeetCodeDFS(void)
     TestLeetCode1728();
     TestLeetCode1723();
     TestLeetCode1718();
+    TestLeetCode22();
+    TestLeetCode784();
     TestLeetCode797();
     TestLeetCode856();
     TestLeetCode489();
@@ -1829,4 +1898,7 @@ void TestLeetCodeDFS(void)
     TestLeetCode1240();
     TestLeetCode1219();
     TestLeetCode1799();
+    TestLeetCode93();
+    TestLeetCode282();
+    TestLeetCode216();
 }

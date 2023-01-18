@@ -1093,6 +1093,7 @@ void TestLeetCodeLinkedList(void)
     TestLeetCode725();
     TestLeetCode2();
     TestLeetCode24();
+    TestLeetCode61();
     TestLeetCode1171();
     TestLeetCode1019();
     TestLeetCode1290();
@@ -1101,6 +1102,14 @@ void TestLeetCodeLinkedList(void)
     TestLeetCode21();
     TestLeetCode23();
     TestLeetCode25();
+    TestLeetCode82();
+    TestLeetCode83();
+    TestLeetCode86();
     TestLeetCode138();
     TestLeetCode148();
+    TestLeetCode147();
+    TestLeetCode160();
+    TestLeetCode234();
+    TestLeetCode328();
+    TestLeetCode445();
 }

@@ -42,144 +42,10 @@
 #include "TestUSACO.h"
 
 
-void TestLeetCode22(void)
-{
-    Logger::WriteMessage("Test Leet Code 22");
-    LeetCodeDFS leetCode;
-    int n = 3;
-    Logger::WriteMessage("n= " + to_string(n));
-    vector<string> result = leetCode.generateParenthesis(n);
-    Logger::WriteMessage("Parenthesis combinations are: ");
-    Logger::WriteMessage(result);
-}
-
-void TestLeetCode217(void)
-{
-    Logger::WriteMessage("Test Leet Code 217");
-    LeetCodeHashtable leetCode;
-    vector<int> nums = { 1, 2, 3, 4, 5, 3 };
-    Logger::WriteMessage(nums);
-    bool containsDuplicate = leetCode.containsDuplicate(nums);
-    Logger::WriteMessage("The list " + string(containsDuplicate? "contains ": "does not contain ") + "duplicates.");
-
-    nums = { 1, 2, 2, 3, 4, 4, 3 };
-    Logger::WriteMessage(nums);
-    containsDuplicate = leetCode.containsDuplicate(nums);
-    Logger::WriteMessage("The list " + string(containsDuplicate ? "contains " : "does not contain ") + "duplicates.");
-}
-
-void TestLeetCode232(void)
-{
-    Logger::WriteMessage("Test Leet Code 232");
-    QueueByStack queueByStack;
-    string output;
-    queueByStack.push(1);
-    queueByStack.push(2);
-    queueByStack.push(3);
-    output = "push(1), push(2), push(3)";
-    Logger::WriteMessage(output);
-    output = "pop(" + to_string(queueByStack.peek()) + ")";
-    queueByStack.pop();
-    Logger::WriteMessage(output);
-    output = "pop(" + to_string(queueByStack.peek()) + ")";
-    queueByStack.pop();
-    Logger::WriteMessage(output);
-    output = "pop(" + to_string(queueByStack.peek()) + ")";
-    queueByStack.pop();
-    Logger::WriteMessage(output);
-    Logger::WriteMessage("The queue " + string(queueByStack.empty() ? "is" : "is not") + " empty");
-}
-
-void TestLeetCode303(void)
-{
-    Logger::WriteMessage("Test Leet Code 303");
-    vector<int> nums = { -2, 0, 3, -5, 2, -1 };
-    NumArray numArray(nums);
-    Logger::WriteMessage(nums);
-    int i, j;
-    i = 0; j = 2;
-    Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArray.sumRange(i,j)));
-    i = 2; j = 5;
-    Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArray.sumRange(i,j)));
-    i = 0; j = 5;
-    Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArray.sumRange(i,j)));
-}
-
-void TestLeetCode304(void)
-{
-    Logger::WriteMessage("Test Leet Code 304");
-    vector<vector<int>> matrix = 
-    {
-        { 3, 0, 1, 4, 2 },
-        { 5, 6, 3, 2, 1 },
-        { 1, 2, 0, 1, 5 },
-        { 4, 1, 0, 1, 7 },
-        { 1, 0, 3, 0, 5 }
-    };
-    Logger::WriteMessage(matrix);
-    NumMatrix numMatrix(matrix);
-    int sum = numMatrix.sumRegion(2, 1, 4, 3);
-    Logger::WriteMessage("Sum of Region(2,1,4,3) = " + to_string(sum));
-    sum = numMatrix.sumRegion(1, 1, 2, 2);
-    Logger::WriteMessage("Sum of Region(1,1,2,2) = " + to_string(sum));
-    sum = numMatrix.sumRegion(1, 2, 2, 4);
-    Logger::WriteMessage("Sum of Region(1,2,2,4) = " + to_string(sum));
-}
-
-void TestLeetCode307(void)
-{
-    Logger::WriteMessage("Test Leet Code 307");
-    vector<int> nums = { -2, 0, 3, -5, 2, -1 };
-    NumArrayMutable numArrayMutable(nums);
-    Logger::WriteMessage(nums);
-    int i, j;
-    i = 0; j = 2;
-    Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArrayMutable.sumRange(i, j)));
-    i = 2; j = 5;
-    Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArrayMutable.sumRange(i, j)));
-    i = 0; j = 5;
-    Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArrayMutable.sumRange(i, j)));
-    numArrayMutable.update(1, 2);
-    i = 0; j = 5;
-    Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArrayMutable.sumRange(i, j)));
-}
-
-void TestLeetCode282(void)
-{
-    Logger::WriteMessage("Test Leet Code 282");
-    LeetCode leetCode;
-
-    string num = "232";
-    int target = 8;
-    vector<string> result = leetCode.addOperators(num, target);
-    Logger::WriteMessage("num = " + num + "," + to_string(target) + " -> ");
-    Logger::WriteMessage(result);
-
-    num = "123";
-    target = 6;
-    result = leetCode.addOperators(num, target);
-    Logger::WriteMessage("num = " + num + "," + to_string(target) + " -> ");
-    Logger::WriteMessage(result);
 
 
-    num = "105";
-    target = 5;
-    result = leetCode.addOperators(num, target);
-    Logger::WriteMessage("num = " + num + "," + to_string(target) + " -> ");
-    Logger::WriteMessage(result);
 
-    num = "00";
-    target = 0;
-    result = leetCode.addOperators(num, target);
-    Logger::WriteMessage("num = " + num + "," + to_string(target) + " -> ");
-    Logger::WriteMessage(result);
 
-    num = "3456237490";
-    target = 9191;
-    result = leetCode.addOperators(num, target);
-    Logger::WriteMessage("num = " + num + "," + to_string(target) + " -> ");
-    Logger::WriteMessage(result);
-}
 
 void TestLeetCode301(void)
 {
@@ -1046,25 +912,6 @@ void TestLeetCode764(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode784(void)
-{
-    Logger::WriteMessage("Test Leet Code 784");
-    LeetCodeDFS leetCode;
-    string S = "a1b2";
-    vector<string> result = leetCode.letterCasePermutation(S);
-    Logger::WriteMessage("S = " + S);
-    Logger::WriteMessage(result);
-
-    S = "3z4";
-    result = leetCode.letterCasePermutation(S);
-    Logger::WriteMessage("S = " + S);
-    Logger::WriteMessage(result);
-
-    S = "12345";
-    result = leetCode.letterCasePermutation(S);
-    Logger::WriteMessage("S = " + S);
-    Logger::WriteMessage(result);
-}
 
 void TestLeetCode788(void)
 {
@@ -1858,32 +1705,6 @@ void TestLeetCode1095(void)
     Logger::WriteMessage("result = " + (string)(to_string(result)));
 }
 
-void TestLeetCode1187(void)
-{
-    Logger::WriteMessage("Test Leet Code 1187");
-    LeetCodeDP leetCode;
-    vector<int> arr1 = { 1, 5, 3, 6, 7 };
-    vector<int> arr2 = { 1, 3, 2, 4 };
-    int result = leetCode.makeArrayIncreasing(arr1, arr2);
-    Logger::WriteMessage(arr1);
-    Logger::WriteMessage(arr2);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    arr1 = { 1, 5, 3, 6, 7 };
-    arr2 = { 4, 3, 1 };
-    result = leetCode.makeArrayIncreasing(arr1, arr2);
-    Logger::WriteMessage(arr1);
-    Logger::WriteMessage(arr2);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    arr1 = { 1, 5, 3, 6, 7 };
-    arr2 = { 1, 6, 3, 3 };
-    result = leetCode.makeArrayIncreasing(arr1, arr2);
-    Logger::WriteMessage(arr1);
-    Logger::WriteMessage(arr2);
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
 void main(int argc, char* argv[])
 {
     TestLeetCodeBinarySearch();
@@ -1904,15 +1725,6 @@ void main(int argc, char* argv[])
     TestLeetCodeDFS();
     TestLeetCodeBFS();
     TestUSACO();
-    TestLeetCode5();
-    TestLeetCode1192();
-    TestLeetCode1185();
-    TestLeetCode1187();
-    TestLeetCode778();
-    TestLeetCode773();
-    TestLeetCode815();
-    TestLeetCode444();
-    TestLeetCode269();
     TestLeetCode1176();
     TestLeetCode1168();
     TestLeetCode1171();
@@ -2002,7 +1814,6 @@ void main(int argc, char* argv[])
     TestLeetCode786();
     TestLeetCode785();
     TestLeetCode780();
-    TestLeetCode784();
     TestLeetCode774();
     TestLeetCode764();
     TestLeetCode765();
@@ -2072,7 +1883,6 @@ void main(int argc, char* argv[])
     TestLeetCode514();
     TestLeetCode401();
     TestLeetCode17();
-    TestLeetCode22();
     TestLeetCode267();
     TestLeetCode351();
     TestLeetCode472();
@@ -2112,70 +1922,7 @@ void main(int argc, char* argv[])
     TestLeetCode301();
     TestLeetCode332();
     TestLeetCode310();
-    TestLeetCode388();
-    TestLeetCode216();
-    TestLeetCode282();
-    TestLeetCode130();
-    TestLeetCode81();
-    TestLeetCode240();
-    TestLeetCode445();
-    TestLeetCode307();
-    TestLeetCode468();
-    TestLeetCode432();
-    TestLeetCode300();
-    TestLeetCode304();
-    TestLeetCode328();
-    TestLeetCode162();
-    TestLeetCode210();
-    TestLeetCode303();
-    TestLeetCode234();
-    TestLeetCode290();
-    TestLeetCode438();
-    TestLeetCode462();
-    TestLeetCode147();
-    TestLeetCode160();
-    TestLeetCode133();
-    TestLeetCode48();
-    TestLeetCode93();
-    TestLeetCode453();
-    TestLeetCode393();
-    TestLeetCode212();
-    TestLeetCode126();
-    TestLeetCode85();
-    TestLeetCode383();
-    TestLeetCode455();
-    TestLeetCode463();
-    TestLeetCode38();
-    TestLeetCode125();
-    TestLeetCode232();
-    TestLeetCode223();
-    TestLeetCode59();
-    TestLeetCode217();
-    TestLeetCode127();
-    TestLeetCode34();
-    TestLeetCode322();
-    TestLeetCode123();
-    TestLeetCode90();
-    TestLeetCode78();
-    TestLeetCode273();
-    TestLeetCode264();
-    TestLeetCode335();
-    TestLeetCode203();
-    TestLeetCode92();
-    TestLeetCode206();
-    TestLeetCode45();
-    TestLeetCode55();
-    TestLeetCode86();
-    TestLeetCode82();
-    TestLeetCode83();
-    TestLeetCode61();
-    TestLeetCode21();
-    TestLeetCode11();
-    TestLeetCode151();
-    TestLeetCode410();
-    TestLeetCode66();
-    TestLeetCode354();
-    TestLeetCode56();
+
 
     printf("Please press a key to end");
     int key = _getch();

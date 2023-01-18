@@ -1358,7 +1358,7 @@ vector<int> LeetCodeDFS::diffWaysToCompute(string input)
 /// <summary>
 /// Leet code #282. Expression Add Operators
 /// </summary>
-void LeetCode::calculate(vector<string> & result, string path, string num, long long target, long long eval, long long product)
+void LeetCodeDFS::calculate(vector<string> & result, string path, string num, long long target, long long eval, long long product)
 {
     if (num.empty())
     {
@@ -1384,19 +1384,39 @@ void LeetCode::calculate(vector<string> & result, string path, string num, long 
 }
 
 /// <summary>
-/// Leet code #282. Expression Add Operators
-///
-/// Given a string that contains only digits 0-9 and a target value, return all possibilities to 
-/// add binary operators (not unary) +, -, or * between the digits so they evaluate to the target value. 
+/// Leet Code 282. Expression Add Operators
 /// 
-/// Examples:  
-/// "123", 6 -> ["1+2+3", "1*2*3"] 
-/// "232", 8 -> ["2*3+2", "2+3*2"]
-/// "105", 5 -> ["1*0+5","10-5"]
-/// "00", 0 -> ["0+0", "0-0", "0*0"]
-/// "3456237490", 9191 -> []
+/// Hard
+///	
+/// Given a string num that contains only digits and an integer target, 
+/// return all possibilities to insert the binary operators '+', '-', 
+/// and/or '*' between the digits of num so that the resultant expression 
+/// evaluates to the target value.
+///
+/// Note that operands in the returned expressions should not contain 
+/// leading zeros.
+///
+/// Example 1:
+/// Input: num = "123", target = 6
+/// Output: ["1*2*3","1+2+3"]
+/// Explanation: Both "1*2*3" and "1+2+3" evaluate to 6.
+///
+/// Example 2:
+/// Input: num = "232", target = 8
+/// Output: ["2*3+2","2+3*2"]
+/// Explanation: Both "2*3+2" and "2+3*2" evaluate to 8.
+/// Example 3:
+/// Input: num = "3456237490", target = 9191
+/// Output: []
+/// Explanation: There are no expressions that can be created from 
+/// "3456237490" to evaluate to 9191.
+/// 
+/// Constraints:
+/// 1. 1 <= num.length <= 10
+/// 2. num consists of only digits.
+/// 3. -2^31 <= target <= 2^31 - 1
 /// </summary>
-vector<string> LeetCode::addOperators(string num, int target)
+vector<string> LeetCodeDFS::addOperators(string num, int target)
 {
     vector<string> result;
     unordered_map<string, unordered_map<string, int>> cache;

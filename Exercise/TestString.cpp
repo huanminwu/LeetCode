@@ -6223,6 +6223,7 @@ void TestLeetCodeString(void)
     TestLeetCode459();
     TestLeetCode1316();
     TestLeetCode28();
+    TestLeetCode388();
     TestLeetCode1309();
     TestLeetCode1297();
     TestLeetCode1268();

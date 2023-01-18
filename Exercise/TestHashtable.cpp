@@ -140,6 +140,21 @@ void TestLeetCode18(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode217(void)
+{
+    Logger::WriteMessage("Test Leet Code 217");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5, 3 };
+    Logger::WriteMessage(nums);
+    bool containsDuplicate = leetCode.containsDuplicate(nums);
+    Logger::WriteMessage("The list " + string(containsDuplicate ? "contains " : "does not contain ") + "duplicates.");
+
+    nums = { 1, 2, 2, 3, 4, 4, 3 };
+    Logger::WriteMessage(nums);
+    containsDuplicate = leetCode.containsDuplicate(nums);
+    Logger::WriteMessage("The list " + string(containsDuplicate ? "contains " : "does not contain ") + "duplicates.");
+}
+
 void TestLeetCode734(void)
 {
     LeetCodeHashtable leetCode;
@@ -1571,6 +1586,7 @@ void TestLeetCode2456(void)
 
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode217();
     TestLeetCode2456();
     TestLeetCode2442();
     TestLeetCode2441();

@@ -869,6 +869,7 @@ void TestLeetCode2014(void)
 
 void TestLeetCodeBFS(void)
 {
+    TestLeetCode773();
     TestLeetCode2014();
     TestLeetCode1871();
     TestLeetCode1391();
