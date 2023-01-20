@@ -1358,7 +1358,8 @@ vector<int> LeetCodeDFS::diffWaysToCompute(string input)
 /// <summary>
 /// Leet code #282. Expression Add Operators
 /// </summary>
-void LeetCodeDFS::calculate(vector<string> & result, string path, string num, long long target, long long eval, long long product)
+void LeetCodeDFS::calculate(vector<string> & result, string path, string num, long long target, 
+    long long eval, long long product)
 {
     if (num.empty())
     {

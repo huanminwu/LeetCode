@@ -3035,7 +3035,7 @@ void TestLeetCode2530(void)
     LeetCodeSort leetCode;
     vector<int> nums = { 10,10,10,10,10 };
     int k = 5;
-    int result = leetCode.maxKelements(nums, k);
+    long long result = leetCode.maxKelements(nums, k);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 

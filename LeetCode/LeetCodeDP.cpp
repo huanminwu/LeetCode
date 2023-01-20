@@ -1722,7 +1722,7 @@ int LeetCodeDP::maxKilledEnemies(vector<vector<char>>& grid)
 /// The input string will only contain the character 'D' and 'I'.
 /// The length of input string is a positive integer and will not exceed 10,000
 /// </summary>
-vector<int> LeetCode::findPermutation(string s)
+vector<int> LeetCodeDP::findPermutation(string s)
 {
     int index = 0;
     int count = 0;
@@ -1788,7 +1788,7 @@ vector<int> LeetCode::findPermutation(string s)
 /// 5.As a follow-up, how would you modify your code to solve the problem of minimizing the 
 ///   expected loss, instead of the worst-case loss? 
 /// </summary>
-int LeetCode::getMoneyAmount(int n)
+int LeetCodeDP::getMoneyAmount(int n)
 {
     vector<vector<int>> matrix(n, vector<int>(n));
     for (int step = 0; step < n; step++)
@@ -2106,7 +2106,7 @@ int LeetCodeDP::findRotateSteps(string ring, string key)
 /// absent times. 
 /// Note: The value of n won't exceed 100,000. 
 /// </summary>
-int LeetCode::checkRecord(int n)
+int LeetCodeDP::checkRecord(int n)
 {
     unsigned long long M = 1000000007;
 
@@ -2203,7 +2203,7 @@ int LeetCode::checkRecord(int n)
 /// 1. The length of given words won't exceed 500.
 /// 2. Characters in given words can only be lower-case letters.
 /// </summary>
-int LeetCode::minDeleteDistance(string word1, string word2)
+int LeetCodeDP::minDeleteDistance(string word1, string word2)
 {
     vector<vector<int>> dp(word1.size() + 1, vector<int>(word2.size() + 1));
     for (size_t i = 0; i < word1.size() + 1; i++)
@@ -2320,7 +2320,7 @@ int LeetCodeDP::findPaths(int m, int n, int N, int i, int j)
 /// and the other 5 satisfy the rule. 
 /// Note: 1 <= n <= 10^9 
 /// </summary>
-int LeetCode::findIntegers(int num)
+int LeetCodeDP::findIntegers(int num)
 {
     vector<int> bit_map;
     int result = 0;
@@ -2486,7 +2486,7 @@ int LeetCodeDP::kInversePairs(int n, int k)
 /// Note:
 /// n is in the range of [1, 10^6].
 /// </summary>
-int LeetCode::findDerangement(int n)
+int LeetCodeDP::findDerangement(int n)
 {
     int M = 1000000007;
     vector<int> dp = vector<int>(n + 1);
@@ -2529,7 +2529,7 @@ int LeetCode::findDerangement(int n)
 /// The length of the input string will fit in range [1, 10^5].
 /// The input string will only contain the character '*' and digits '0' - '9'.
 /// </summary>
-int LeetCode::numDecodingsII(string s)
+int LeetCodeDP::numDecodingsII(string s)
 {
     if (s.empty()) return 0;
     int M = 1000000007;
@@ -2605,7 +2605,7 @@ int LeetCode::numDecodingsII(string s)
 /// Note:
 /// The input string length won't exceed 1000.
 /// </summary>
-int LeetCode::countSubstrings(string s)
+int LeetCodeDP::countSubstrings(string s)
 {
     int n = s.size();
     int result = 0;
@@ -2658,7 +2658,7 @@ int LeetCode::countSubstrings(string s)
 /// Note:
 /// 1. The n will be in the range [1, 1000].
 /// </summary>
-int LeetCode::minSteps(int n)
+int LeetCodeDP::minSteps(int n)
 {
     if (n <= 0) return 0;
     vector<int> dp(n, n);
@@ -2684,7 +2684,7 @@ int LeetCode::minSteps(int n)
 /// otherwise throw away.
 /// In the same trip, we retire the loser in the set
 /// </summary>
-void LeetCode::insert_step(pair<int, int>&step, set<pair<int, int>> &step_set)
+void LeetCodeDP::insert_step(pair<int, int>&step, set<pair<int, int>> &step_set)
 {
     for (set<pair<int, int>>::iterator itr = step_set.begin(); itr != step_set.end();)
     {
@@ -2734,7 +2734,7 @@ void LeetCode::insert_step(pair<int, int>&step, set<pair<int, int>> &step_set)
 /// 1. 1 <= N <= 50
 /// 2. Answers will be in the range of 32-bit signed integer.
 /// </summary>
-int LeetCode::maxA(int N)
+int LeetCodeDP::maxA(int N)
 {
     // the pair is (position, step);
     vector<set<pair<int, int>>> key_map(N + 1);
@@ -2855,7 +2855,7 @@ vector<int> LeetCodeDP::cheapestJump(vector<int>& A, int B)
 /// Output: 10
 /// Hint: n will not exceed 9 x 10^8.
 /// </summary>
-int LeetCode::newInteger(int n)
+int LeetCodeDP::newInteger(int n)
 {
     // remeber each digit of the result;
     vector<int> nums;
@@ -2915,7 +2915,7 @@ int LeetCode::newInteger(int n)
 ///
 /// Hint: Length of the given string will not exceed 100.
 /// </summary>
-int LeetCode::strangePrinter(string s)
+int LeetCodeDP::strangePrinter(string s)
 {
     if (s.empty()) return 0;
     vector<vector<int>> dp(s.size(), vector<int>(s.size(), INT_MAX));
@@ -2973,7 +2973,7 @@ int LeetCode::strangePrinter(string s)
 /// 2. K will be between 0 and 100.
 /// 3. The knight always initially starts on the board.
 /// </summary>
-double LeetCode::knightProbability(int N, int K, int r, int c)
+double LeetCodeDP::knightProbability(int N, int K, int r, int c)
 {
     vector<pair<int, int>> steps =
     {
@@ -3038,7 +3038,7 @@ double LeetCode::knightProbability(int N, int K, int r, int c)
 /// 0 < s1.length, s2.length <= 1000.
 /// All elements of each string will have an ASCII value in {97, 122}.
 /// </summary>
-int LeetCode::minimumDeleteSum(string s1, string s2)
+int LeetCodeDP::minimumDeleteSum(string s1, string s2)
 {
     vector<vector<int>> dp(s1.size() + 1, vector<int>(s2.size() + 1));
     for (size_t i = 0; i <= s1.size(); i++)
@@ -3095,7 +3095,7 @@ int LeetCode::minimumDeleteSum(string s1, string s2)
 /// 1. 1 <= len(A), len(B) <= 1000
 /// 2. 0 <= A[i], B[i] < 100
 /// </summary>
-int LeetCode::findLength(vector<int>& A, vector<int>& B)
+int LeetCodeDP::findLength(vector<int>& A, vector<int>& B)
 {
     int result = 0;
     vector<vector<int>> dp(A.size(), vector<int>(B.size()));
@@ -3138,7 +3138,7 @@ int LeetCode::findLength(vector<int>& A, vector<int>& B)
 /// 2.nums[i] will be between 1 and 65535.
 /// 3.k will be between 1 and floor(nums.length / 3).
 /// </summary>
-vector<int> LeetCode::maxSumOfThreeSubarrays(vector<int>& nums, int k)
+vector<int> LeetCodeDP::maxSumOfThreeSubarrays(vector<int>& nums, int k)
 {
     vector<int> result;
     vector<int> sum_k(nums.size());
@@ -3218,7 +3218,7 @@ vector<int> LeetCode::maxSumOfThreeSubarrays(vector<int>& nums, int k)
 /// 2. 0 < prices[i] < 50000.
 /// 3. 0 <= fee < 50000.	
 /// </summary>
-int LeetCode::maxProfitWithFee(vector<int>& prices, int fee)
+int LeetCodeDP::maxProfitWithFee(vector<int>& prices, int fee)
 {
     vector<int> dp;
     for (size_t i = 0; i < prices.size(); i++)
@@ -3286,7 +3286,7 @@ int LeetCode::maxProfitWithFee(vector<int>& prices, int fee)
 /// The length of S will be in the range [1, 20000].
 /// The length of T will be in the range [1, 100].
 /// </summary>
-string LeetCode::minWindowIII(string S, string T)
+string LeetCodeDP::minWindowIII(string S, string T)
 {
     vector<int> prev(T.size(), -1);
     string result = "";
@@ -3361,7 +3361,7 @@ string LeetCode::minWindowIII(string S, string T)
 /// len, we count the total palindromic subsequences start with 
 /// ch = 'a' to 'd' 
 /// </hint>
-int LeetCode::countPalindromicSubsequences(string S)
+int LeetCodeDP::countPalindromicSubsequences(string S)
 {
     unsigned long long mod = 1000000007;
     vector<vector<map<char, int>>> dp(3, vector<map<char, int>>(S.size(), map<char, int>()));
@@ -3440,7 +3440,7 @@ int LeetCode::countPalindromicSubsequences(string S)
 /// The length of nums is at most 20000.
 /// Each element nums[i] is an integer in the range [1, 10000].
 /// </summary> 
-int LeetCode::deleteAndEarn(vector<int>& nums)
+int LeetCodeDP::deleteAndEarn(vector<int>& nums)
 {
     if (nums.empty()) return 0;
     int result = 0;
@@ -3524,7 +3524,7 @@ int LeetCode::deleteAndEarn(vector<int>& nums)
 /// Each grid[i][j] is an integer in the set {-1, 0, 1}.
 /// It is guaranteed that grid[0][0] and grid[N-1][N-1] are not -1.
 /// </summary> 
-int LeetCode::cherryPickup(vector<vector<int>>& grid)
+int LeetCodeDP::cherryPickup(vector<vector<int>>& grid)
 {
     size_t n = grid.size();
     if (n == 0) return 0;
@@ -3577,7 +3577,7 @@ int LeetCode::cherryPickup(vector<vector<int>>& grid)
     return max(0, dp[n - 1][n - 1]);
 }
 
-int LeetCode::cherryPickupII(vector<vector<int>>& grid)
+int LeetCodeDP::cherryPickupX(vector<vector<int>>& grid)
 {
     int n = grid.size();
     if (n == 0) return 0;
@@ -3660,7 +3660,7 @@ int LeetCode::cherryPickupII(vector<vector<int>>& grid)
 /// 1. cost will have a length in the range [2, 1000].
 /// 2. Every cost[i] will be an integer in the range [0, 999].
 /// </summary>
-int LeetCode::minCostClimbingStairs(vector<int>& cost)
+int LeetCodeDP::minCostClimbingStairs(vector<int>& cost)
 {
     vector<int> dp(cost.size() + 1);
     for (size_t i = 0; i <= cost.size(); i++)
@@ -3741,7 +3741,7 @@ int LeetCode::minCostClimbingStairs(vector<int>& cost)
 /// (Additionally, programs submitted in C, C++, or C# will be judged 
 /// with a slightly smaller time limit.)
 /// </summary>
-int LeetCode::orderOfLargestPlusSign(int N, vector<vector<int>>& mines)
+int LeetCodeDP::orderOfLargestPlusSign(int N, vector<vector<int>>& mines)
 {
     int result = 0;
     vector<vector<int>> plus(N, vector<int>(N, INT_MAX));
@@ -3823,7 +3823,7 @@ int LeetCode::orderOfLargestPlusSign(int N, vector<vector<int>>& mines)
 /// Leetcode #788. Rotated Digits
 /// return 0 if not rotate, 1 if rotate but same, 2 if rotate but diff
 /// </summary>
-int LeetCode::checkIfRotateDigits(int N)
+int LeetCodeDP::checkIfRotateDigits(int N)
 {
     map<int, int> number_map = { { 0, 0 },{ 1, 0 },{ 2, 1 },{ 5, 1 },{ 6, 1 },{ 8, 0 },{ 9, 1 } };
     int result = 1;
@@ -3846,7 +3846,7 @@ int LeetCode::checkIfRotateDigits(int N)
 /// <summary>
 /// Leetcode #788. Rotated Digits
 /// </summary>
-int LeetCode::rotatedDigits(int N, bool is_diff)
+int LeetCodeDP::rotatedDigits(int N, bool is_diff)
 {
     map<int, int> number_map = { { 0, 0 },{ 1, 0 },{ 2, 1 },{ 5, 1 },{ 6, 1 },{ 8, 0 },{ 9, 1 } };
 
@@ -3915,7 +3915,7 @@ int LeetCode::rotatedDigits(int N, bool is_diff)
 ///
 /// 1. N  will be in range [1, 10000].
 /// </summary>
-int LeetCode::rotatedDigits(int N)
+int LeetCodeDP::rotatedDigits(int N)
 {
     return rotatedDigits(N, true);
 }
@@ -3950,7 +3950,7 @@ int LeetCode::rotatedDigits(int N)
 ///
 /// 1. N  will be in range [1, 1000].
 /// </summary>
-int LeetCode::numTilings(int N)
+int LeetCodeDP::numTilings(int N)
 {
     unordered_map<int, int> dp = { { 0, 0 },{ 1, 1 },{ 2, 2 },{ 3, 5 } };
     int mod = 1000000007;
@@ -3985,7 +3985,7 @@ int LeetCode::numTilings(int N)
 /// 1. L, R  and A[i] will be an integer in the range [0, 10^9].
 /// 2. The length of A will be in the range of [1, 50000].
 /// </summary>
-int LeetCode::numSubarrayBoundedMax(vector<int>& A, int L, int R)
+int LeetCodeDP::numSubarrayBoundedMax(vector<int>& A, int L, int R)
 {
     int first = -1;
     size_t last = 0;
@@ -4043,7 +4043,7 @@ int LeetCode::numSubarrayBoundedMax(vector<int>& A, int L, int R)
 /// Note:
 /// 1. K will be an integer in the range [0, 10^9].
 /// </summary>
-int LeetCode::preimageSizeFZF(int K)
+int LeetCodeDP::preimageSizeFZF(int K)
 {
     vector<int> dp = { 0 };
     while (K > 5 * dp.back())
@@ -4122,7 +4122,7 @@ int LeetCode::preimageSizeFZF(int K)
 /// 1. poured will be in the range of [0, 10 ^ 9].
 /// 2. query_glass and query_row will be in the range of [0, 99].
 /// </summary>
-double LeetCode::champagneTower(int poured, int query_row, int query_glass)
+double LeetCodeDP::champagneTower(int poured, int query_row, int query_glass)
 {
     vector<vector<double>> dp(query_row + 1);
     for (size_t i = 0; i <= (size_t)query_row; i++)
@@ -4175,7 +4175,7 @@ double LeetCode::champagneTower(int poured, int query_row, int query_glass)
 ///    range [1, 1000].
 /// 2. A[i], B[i] are integer values in the range [0, 2000].
 /// </summary>
-int LeetCode::minSwap(vector<int>& A, vector<int>& B)
+int LeetCodeDP::minSwap(vector<int>& A, vector<int>& B)
 {
     vector<int> no_swap_dp;
     vector<int> swap_dp;
@@ -4211,7 +4211,7 @@ int LeetCode::minSwap(vector<int>& A, vector<int>& B)
 /// <summary>
 /// Leet code #808. Soup Servings
 /// </summary>
-double LeetCode::soupServings(int A, int B, unordered_map<int, unordered_map<int, double>> &possibility)
+double LeetCodeDP::soupServings(int A, int B, unordered_map<int, unordered_map<int, double>> &possibility)
 {
     double result = 0;
     if (possibility.count(A) > 0 && possibility[A].count(B) > 0)
@@ -4278,7 +4278,7 @@ double LeetCode::soupServings(int A, int B, unordered_map<int, unordered_map<int
 /// 1. 0 <= N <= 10^9. 
 /// 2. Answers within 10^-6 of the true value will be accepted as correct.
 /// </summary>
-double LeetCode::soupServings(int N)
+double LeetCodeDP::soupServings(int N)
 {
     N = (int)ceil(N / 25.0);
     unordered_map<int, unordered_map<int, double>> possibility;
@@ -4335,7 +4335,7 @@ double LeetCode::soupServings(int N)
 /// 4. Answers within 10^-6 of the correct answer will be accepted as 
 ///    correct.
 /// </summary>
-double LeetCode::largestSumOfAverages(vector<int>& A, int K)
+double LeetCodeDP::largestSumOfAverages(vector<int>& A, int K)
 {
     vector<vector<double>> dp(K, vector<double>(A.size()));
     vector<double> sum(A.size());
@@ -4395,7 +4395,7 @@ double LeetCode::largestSumOfAverages(vector<int>& A, int K)
 /// 1. 1 <= A.length <= 1000.
 /// 2. 2 <= A[i] <= 10 ^ 9.
 /// </summary>
-int LeetCode::numFactoredBinaryTrees(vector<int>& A)
+int LeetCodeDP::numFactoredBinaryTrees(vector<int>& A)
 {
     sort(A.begin(), A.end());
     unordered_map<int, unsigned long long> dp;
@@ -4460,7 +4460,7 @@ int LeetCode::numFactoredBinaryTrees(vector<int>& A)
 ///
 /// Note: 0 <= S.length <= 10000.
 /// </summary>
-int LeetCode::uniqueLetterString(string S)
+int LeetCodeDP::uniqueLetterString(string S)
 {
     int mod = 1000000007;
     vector<int> prev_one(26, -1);
@@ -4501,7 +4501,7 @@ int LeetCode::uniqueLetterString(string S)
 /// <summary>
 /// Leet code #834. Sum of Distances in Tree
 /// </summary>
-void LeetCode::calcuateChildrenDistance(int root, int parent, vector<vector<int>> &tree,
+void LeetCodeDP::calcuateChildrenDistance(int root, int parent, vector<vector<int>> &tree,
     unordered_map<int, pair<int, int>> &tree_stat)
 {
     // node count
@@ -4524,7 +4524,7 @@ void LeetCode::calcuateChildrenDistance(int root, int parent, vector<vector<int>
 /// <summary>
 /// Leet code #834. Sum of Distances in Tree
 /// </summary>
-void LeetCode::calcuateAllDistance(int root, int parent, vector<vector<int>> &tree, unordered_map<int, pair<int, int>> &tree_stat)
+void LeetCodeDP::calcuateAllDistance(int root, int parent, vector<vector<int>> &tree, unordered_map<int, pair<int, int>> &tree_stat)
 {
     for (size_t i = 0; i < tree[root].size(); i++)
     {
@@ -4564,7 +4564,7 @@ void LeetCode::calcuateAllDistance(int root, int parent, vector<vector<int>> &tr
 /// equals 1 + 1 + 2 + 2 + 2 = 8.  Hence, answer[0] = 8, and so on.
 /// Note: 1 <= N <= 10000
 /// </summary>
-vector<int> LeetCode::sumOfDistancesInTree(int N, vector<vector<int>>& edges)
+vector<int> LeetCodeDP::sumOfDistancesInTree(int N, vector<vector<int>>& edges)
 {
     vector<int> result(N);
     vector<vector<int>> tree(N);
@@ -4622,7 +4622,7 @@ vector<int> LeetCode::sumOfDistancesInTree(int N, vector<vector<int>>& edges)
 ///    the correct answer.
 /// 4. The judging time limit has been reduced for this question.
 /// </summary>
-double LeetCode::new21Game(int N, int K, int W)
+double LeetCodeDP::new21Game(int N, int K, int W)
 {
     vector<double> dp(N+1);
     dp[0] = 1.0;
@@ -4674,7 +4674,7 @@ double LeetCode::new21Game(int N, int K, int W)
 /// 1. 3 <= A.length <= 1000
 /// 2. 1 <= A[0] < A[1] < ... < A[A.length - 1] <= 10^9	/// </summary>
 /// </summary>
-int LeetCode::lenLongestFibSubseq(vector<int>& A)
+int LeetCodeDP::lenLongestFibSubseq(vector<int>& A)
 {
     vector<vector<int>> dp(A.size(), vector<int>(A.size(), 2));
     unordered_map<int, int> num_map;
@@ -4736,7 +4736,7 @@ int LeetCode::lenLongestFibSubseq(vector<int>& A)
 /// 3. 1 <= piles[i] <= 500
 /// 4. sum(piles) is odd.
 /// </summary>
-bool LeetCode::stoneGame(vector<int>& piles)
+bool LeetCodeDP::stoneGame(vector<int>& piles)
 {
     size_t size = piles.size();
     vector<vector<int>> dp(size, vector<int>(size));
@@ -4803,7 +4803,7 @@ bool LeetCode::stoneGame(vector<int>& piles)
 /// 1 <= K <= 100
 /// 1 <= N <= 10000
 /// </summary>
-int LeetCode::superEggDrop(int K, int N)
+int LeetCodeDP::superEggDrop(int K, int N)
 {
     vector<vector<int>> dp;
     int result = 0;
@@ -4867,7 +4867,7 @@ int LeetCode::superEggDrop(int K, int N)
 /// 4. 1 <= K <= 10^9
 /// 5. The decoded string is guaranteed to have less than 2^63 letters.
 /// </summary>
-string LeetCode::decodeAtIndex(string S, int K)
+string LeetCodeDP::decodeAtIndex(string S, int K)
 {
     stack<vector<long long>> sub_count;
     stack<string> sub_strings;
@@ -4965,7 +4965,7 @@ string LeetCode::decodeAtIndex(string S, int K)
 /// 1. 1 <= A.length <= 50000
 /// 2. 0 <= A[i] <= 10^9
 /// </summary>
-int LeetCode::subarrayBitwiseORs(vector<int>& A)
+int LeetCodeDP::subarrayBitwiseORs(vector<int>& A)
 {
     unordered_set<int> next, result;
     for (size_t i = 0; i < A.size(); i++)
@@ -5097,7 +5097,7 @@ int LeetCodeDP::atMostNGivenDigitSet(vector<string>& D, int N)
 /// 1. 1 <= S.length <= 200
 /// 2. S consists only of characters from the set {'D', 'I'}.
 /// </summary>
-int LeetCode::numPermsDISequence(string S)
+int LeetCodeDP::numPermsDISequence(string S)
 {
     size_t M = 1000000007;
     vector<vector<int>> dp;
@@ -5215,7 +5215,7 @@ int LeetCodeDP::numMusicPlaylists(int N, int L, int K)
 /// 1. 1 <= A.length == A[0].length <= 100
 /// 2. -100 <= A[i][j] <= 100
 /// </summary>
-int LeetCode::minFallingPathSum(vector<vector<int>>& A)
+int LeetCodeDP::minFallingPathSum(vector<vector<int>>& A)
 {
     vector<int> prev(A.size());
     for (int i = 0; i < (int)A.size(); i++)
@@ -5271,7 +5271,7 @@ int LeetCode::minFallingPathSum(vector<vector<int>>& A)
 /// 
 /// 1 <= N <= 5000
 /// </summary>
-int LeetCode::knightDialer(int N)
+int LeetCodeDP::knightDialer(int N)
 {
     int M = 1000000007;
     vector<vector<int>> key_jump =
@@ -5341,7 +5341,7 @@ int LeetCode::knightDialer(int N)
 /// 1. S contains only lowercase letters.
 /// 2. 1 <= S.length <= 2000
 /// </summary>
-int LeetCode::distinctSubseqII(string S)
+int LeetCodeDP::distinctSubseqII(string S)
 {
     int M = 1000000007;
     vector<int> dp(S.size()), sum(S.size());
@@ -5410,7 +5410,7 @@ int LeetCode::distinctSubseqII(string S)
 /// 2. 1 <= rods[i] <= 1000
 /// 3. The sum of rods is at most 5000.
 /// </summary>
-int LeetCode::tallestBillboard(vector<int>& rods)
+int LeetCodeDP::tallestBillboard(vector<int>& rods)
 {
     int sum = 0;
     for (auto r : rods) sum += r;
@@ -5490,7 +5490,7 @@ int LeetCode::tallestBillboard(vector<int>& rods)
 /// 1. 1 <= A.length <= 100
 /// 2. 1 <= A[i].length <= 100
 /// </summary>
-int LeetCode::minDeletionSizeIII(vector<string>& A)
+int LeetCodeDP::minDeletionSizeIII(vector<string>& A)
 {
     // remeber with column i, what is the longest sequence.
     vector<int> dp(A[0].size());
@@ -5608,7 +5608,7 @@ int LeetCode::minDeletionSizeIII(vector<string>& A)
 /// 1. 1 <= A.length <= 20000
 /// 2. 0 <= A[i] < 100000
 /// </summary>
-int LeetCode::oddEvenJumps(vector<int>& A)
+int LeetCodeDP::oddEvenJumps(vector<int>& A)
 {
     vector<vector<int>> dp(A.size(), vector<int>(2));
     vector<pair<int, int>> num_list;
@@ -5689,7 +5689,7 @@ int LeetCode::oddEvenJumps(vector<int>& A)
 /// 1. 1 <= A.length <= 40000
 /// 2. 0 <= A[i] <= 10^9
 /// </summary>
-int LeetCode::maxTurbulenceSize(vector<int>& A)
+int LeetCodeDP::maxTurbulenceSize(vector<int>& A)
 {
     int last_sign = 0;
     int sign = 0;
@@ -5751,7 +5751,7 @@ int LeetCode::maxTurbulenceSize(vector<int>& A)
 /// 1. 1 <= A.length <= 1000
 /// 2. 0 <= A[i] < 2^16
 /// </summary>
-int LeetCode::countTriplets(vector<int>& A)
+int LeetCodeDP::countTriplets(vector<int>& A)
 {
     unordered_map<int, int> prev, curr;
     int result = 0;
@@ -5782,7 +5782,7 @@ int LeetCode::countTriplets(vector<int>& A)
 /// <summary>
 /// Leet code #983. Minimum Cost For Tickets
 /// </summary>
-int LeetCode::mincostTickets(int index, vector<int>& days, vector<int>& dp, vector<int>& costs)
+int LeetCodeDP::mincostTickets(int index, vector<int>& days, vector<int>& dp, vector<int>& costs)
 {
     if (index >= (int)days.size()) return 0;
     else if (dp[index] > 0) return dp[index];
@@ -5846,7 +5846,7 @@ int LeetCode::mincostTickets(int index, vector<int>& days, vector<int>& dp, vect
 /// 4. costs.length == 3
 /// 5. 1 <= costs[i] <= 1000
 /// </summary>
-int LeetCode::mincostTickets(vector<int>& days, vector<int>& costs)
+int LeetCodeDP::mincostTickets(vector<int>& days, vector<int>& costs)
 {
     vector<int> dp(days.size());
     return mincostTickets(0, days, dp, costs);
@@ -5880,7 +5880,7 @@ int LeetCode::mincostTickets(vector<int>& days, vector<int>& costs)
 /// Note:
 /// 1. 1 <= N <= 1000
 /// </summary>
-bool LeetCode::divisorGame(int N)
+bool LeetCodeDP::divisorGame(int N)
 {
     vector<bool> dp(N + 1);
     for (int i = 1; i <= N; i++)
@@ -5939,7 +5939,7 @@ bool LeetCode::divisorGame(int N)
 /// 1. 2 <= A.length <= 2000
 /// 2. 0 <= A[i] <= 10000
 /// </summary>
-int LeetCode::longestArithSeqLength(vector<int>& A)
+int LeetCodeDP::longestArithSeqLength(vector<int>& A)
 {
     int result = 0;
     vector<unordered_map<int, int>> arithmeticCount(A.size());
@@ -6005,7 +6005,7 @@ int LeetCode::longestArithSeqLength(vector<int>& A)
 /// 3. L + M <= A.length <= 1000
 /// 4. 0 <= A[i] <= 1000
 /// </summary>
-int LeetCode::maxSumTwoNoOverlap(vector<int>& A, int L, int M)
+int LeetCodeDP::maxSumTwoNoOverlap(vector<int>& A, int L, int M)
 {
     vector<int> sum(A.size() + 1);
     sum[0] = 0;
@@ -6082,7 +6082,9 @@ int LeetCodeDP::maxUncrossedLines(vector<int>& A, vector<int>& B)
 /// <summary>
 /// Leet code #1039. Minimum Score Triangulation of Polygon
 /// </summary>
-int LeetCode::minScoreTriangulation(vector<int>& A, int start, int end, unordered_map<string, int>& cache)
+int LeetCodeDP::minScoreTriangulation(vector<int>& A, 
+    int start, int end, 
+    unordered_map<string, int>& cache)
 {
     if (end - start < 2) return 0;
     string key = to_string(start) + "," + to_string(end);
@@ -6140,7 +6142,7 @@ int LeetCode::minScoreTriangulation(vector<int>& A, int start, int end, unordere
 /// 1. 3 <= A.length <= 50
 /// 2. 1 <= A[i] <= 100
 /// </summary>
-int LeetCode::minScoreTriangulationII(vector<int>& A)
+int LeetCodeDP::minScoreTriangulationII(vector<int>& A)
 {
     unordered_map<string, int> cache;
 
@@ -6150,7 +6152,7 @@ int LeetCode::minScoreTriangulationII(vector<int>& A)
 /// <summary>
 /// Leet code #1039. Minimum Score Triangulation of Polygon
 /// </summary>
-int LeetCode::minScoreTriangulation(vector<int>& A)
+int LeetCodeDP::minScoreTriangulation(vector<int>& A)
 {
     vector<vector<int>> dp(A.size(), vector<int>(A.size()));
     for (size_t k = 2; k < A.size(); k++)
@@ -6198,7 +6200,7 @@ int LeetCode::minScoreTriangulation(vector<int>& A)
 /// 1. 1 <= K <= A.length <= 500
 /// 2. 0 <= A[i] <= 10^6
 /// </summary>
-int LeetCode::maxSumAfterPartitioning(vector<int>& A, int K)
+int LeetCodeDP::maxSumAfterPartitioning(vector<int>& A, int K)
 {
     vector<int> result(A.size());
     vector<int> dp(A.size());
@@ -6251,7 +6253,7 @@ int LeetCode::maxSumAfterPartitioning(vector<int>& A, int K)
 /// 2. 1 <= words[i].length <= 16
 /// 3. words[i] only consists of English lowercase letters.
 /// </summary>
-int LeetCode::longestStrChain(vector<string>& words)
+int LeetCodeDP::longestStrChain(vector<string>& words)
 {
     unordered_map<string, int> word_set;
     map<int, vector<string>> word_index;
@@ -6369,7 +6371,7 @@ int LeetCodeDP::lastStoneWeightII(vector<int> &stones)
 /// 1. The string S consists of only lowercase English letters from 'a' - 'z'.
 /// 2. 1 <= S.length <= 1500
 /// </summary>
-int LeetCode::longestRepeatingSubstring(string S)
+int LeetCodeDP::longestRepeatingSubstring(string S)
 {
     vector<vector<int>> dp(S.size(), vector<int>(S.size()));
     int result = 0;
@@ -6420,7 +6422,7 @@ int LeetCode::longestRepeatingSubstring(string S)
 /// 1. 1 <= str1.length, str2.length <= 1000
 /// 2. str1 and str2 consist of lowercase English letters.
 /// </summary>
-string LeetCode::shortestCommonSupersequence(string str1, string str2)
+string LeetCodeDP::shortestCommonSupersequence(string str1, string str2)
 {
     vector<vector<int>> dp(str1.size(), vector<int>(str2.size()));
     for (size_t i = 0; i < str1.size(); i++)
@@ -8417,7 +8419,7 @@ int LeetCodeDP::palindromePartition(string s, int k)
 /// 1. 1 <= arr.length == arr[i].length <= 200
 /// 2. -99 <= arr[i][j] <= 99
 /// </summary>
-int LeetCodeDP::minFallingPathSum(vector<vector<int>>& arr)
+int LeetCodeDP::minFallingPathSumII(vector<vector<int>>& arr)
 {
     priority_queue<pair<int, int>> pq;
     pq.push({ 0, -1 });
@@ -9625,7 +9627,7 @@ int LeetCodeDP::maxDotProduct(vector<int>& nums1, vector<int>& nums2)
 /// 3. 2 <= rows, cols <= 70
 /// 4. 0 <= grid[i][j] <= 100 
 /// </summary>
-int LeetCodeDP::cherryPickup(vector<vector<int>>& grid)
+int LeetCodeDP::cherryPickupII(vector<vector<int>>& grid)
 {
     int row = grid.size();
     int col = grid[0].size();
