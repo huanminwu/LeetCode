@@ -13523,38 +13523,25 @@ long long LeetCodeMath::countPairs(vector<int>& nums, int k)
 /// </summary>
 vector<int> LeetCodeMath::replaceNonCoprimes(vector<int>& nums)
 {
-    vector<int> arr = nums;
-    deque<int> processed;
-    while (!arr.empty())
+    vector<int> result;
+    for (size_t i = 0; i < nums.size(); i++)
     {
-        if (processed.empty())
+        int right = nums[i];
+        while (!result.empty())
         {
-            processed.push_front(arr.back());
-            arr.pop_back();
-        }
-        else
-        {
-            int left = arr.back();
-            int right = processed.front();
+            int left = result.back();
             int common = (int)gcd((long long)left, (long long)right);
-            if (common == 1)
+            if (common != 1)
             {
-                processed.push_front(arr.back());
-                arr.pop_back();
+                right = (left / common) * right;
+                result.pop_back();
             }
             else
             {
-                int product = (left / common) * right;
-                arr.pop_back();
-                processed.pop_front();
-                arr.push_back(product);
+                break;
             }
         }
-    }
-    vector<int> result;
-    for (size_t i = 0; i < processed.size(); i++)
-    {
-        result.push_back(processed[i]);
+        result.push_back(right);
     }
     return result;
 }
