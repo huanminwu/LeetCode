@@ -933,8 +933,24 @@ void TestLeetCode2527(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2546(void)
+{
+    Logger::WriteMessage("Test Leet Code 2546");
+    LeetCodeBit leetCode;
+    string s = "1010", target = "0110";
+    bool result = leetCode.makeStringsEqual(s, target);
+    Logger::WriteMessage("s = "+ s + "; target =" + target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    s = "11", target = "00";
+    result = leetCode.makeStringsEqual(s, target);
+    Logger::WriteMessage("s = " + s + "; target =" + target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2546();
     TestLeetCode2527();
     TestLeetCode2505();
     TestLeetCode2479();

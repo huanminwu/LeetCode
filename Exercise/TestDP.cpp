@@ -3572,8 +3572,32 @@ void TestLeetCode1187(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2547(void)
+{
+    Logger::WriteMessage("Test Leet Code 2547");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1,2,1,2,1,3,3 };
+    int k = 2;
+    int result = leetCode.minCost(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2,1,2,1 };
+    k = 2;
+    result = leetCode.minCost(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2,1,2,1 };
+    k = 5;
+    result = leetCode.minCost(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2547();
     TestLeetCode2533();
     TestLeetCode2430();
     TestLeetCode2518();

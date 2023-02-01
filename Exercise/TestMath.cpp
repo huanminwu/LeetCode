@@ -5406,8 +5406,93 @@ void TestLeetCode2524(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2543(void)
+{
+    Logger::WriteMessage("Test Leet Code 2543");
+    LeetCodeMath leetCode;
+    int targetX = 6, targetY = 9;
+    bool result = leetCode.isReachable(targetX, targetY);
+    Logger::WriteMessage("targetX = " + to_string(targetX) + "; targetY = " + to_string(targetY));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    targetX = 4, targetY = 7;
+    result = leetCode.isReachable(targetX, targetY);
+    Logger::WriteMessage("targetX = " + to_string(targetX) + "; targetY = " + to_string(targetY));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+    
+    targetX = 536870912, targetY = 536870912;
+    result = leetCode.isReachable(targetX, targetY);
+    Logger::WriteMessage("targetX = " + to_string(targetX) + "; targetY = " + to_string(targetY));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2544(void)
+{
+    Logger::WriteMessage("Test Leet Code 2544");
+    LeetCodeMath leetCode;
+    int n = 521;
+    int result = leetCode.alternateDigitSum(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 111;
+    result = leetCode.alternateDigitSum(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 886996;
+    result = leetCode.alternateDigitSum(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2539(void)
+{
+    Logger::WriteMessage("Test Leet Code 2539");
+    LeetCodeMath leetCode;
+    string s = "aabb";
+    int result = leetCode.countGoodSubsequences(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "leet";
+    result = leetCode.countGoodSubsequences(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "abcd";
+    result = leetCode.countGoodSubsequences(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2549(void)
+{
+    Logger::WriteMessage("Test Leet Code 2549");
+    LeetCodeMath leetCode;
+    int n = 5;
+    int result = leetCode.distinctIntegers(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    result = leetCode.distinctIntegers(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2550(void)
+{
+    Logger::WriteMessage("Test Leet Code 2550");
+    LeetCodeMath leetCode;
+    int n = 3;
+    int result = leetCode.monkeyMove(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    result = leetCode.monkeyMove(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2550();
+    TestLeetCode2549();
+    TestLeetCode2539();
+    TestLeetCode2544();
+    TestLeetCode2543();
     TestLeetCode2524();
     TestLeetCode2529();
     TestLeetCode2525();

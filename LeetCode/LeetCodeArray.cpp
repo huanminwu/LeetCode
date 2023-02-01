@@ -25278,5 +25278,245 @@ vector<vector<int>> LeetCodeArray::rangeAddQueries(int n, vector<vector<int>>& q
     return dp;
 }
 
+/// <summary>
+/// Leet Code 2540. Minimum Common Value
+/// 
+/// Easy
+///	
+/// Given two integer arrays nums1 and nums2, sorted in non-decreasing 
+/// order, return the minimum integer common to both arrays. If there 
+/// is no common integer amongst nums1 and nums2, return -1.
+///
+/// Note that an integer is said to be common to nums1 and nums2 if both 
+/// arrays have at least one occurrence of that integer.
+///
+/// Example 1:
+/// Input: nums1 = [1,2,3], nums2 = [2,4]
+/// Output: 2
+/// Explanation: The smallest element common to both arrays is 2, so we 
+/// return 2.
+///
+/// Example 2:
+/// Input: nums1 = [1,2,3,6], nums2 = [2,3,4,5]
+/// Output: 2
+/// Explanation: There are two common elements in the array 2 and 3 out 
+/// of which 2 is the smallest, so 2 is returned.
+///
+/// Constraints:
+/// 1. 1 <= nums1.length, nums2.length <= 10^5
+/// 2. 1 <= nums1[i], nums2[j] <= 10^9
+/// 3. Both nums1 and nums2 are sorted in non-decreasing order.
+/// </summary>
+int LeetCodeArray::getCommon(vector<int>& nums1, vector<int>& nums2)
+{
+    int p1 = 0;
+    int p2 = 0;
+    while (p1 < (int)nums1.size() && p2 < (int)nums2.size())
+    {
+        if (nums1[p1] == nums2[p2])
+        {
+            return nums1[p1];
+        }
+        else if (nums1[p1] < nums2[p2])
+        {
+            p1++;
+        }
+        else
+        {
+            p2++;
+        }
+    }
+    return -1;
+}
+
+/// <summary>
+/// Leet Code 2545. Sort the Students by Their Kth Score
+/// 
+/// Medium
+///	
+/// There is a class with m students and n exams. You are given a 
+/// 0-indexed m x n integer matrix score, where each row represents one 
+/// student and score[i][j] denotes the score the ith student got in the 
+/// jth exam. The matrix score contains distinct integers only.
+///
+/// You are also given an integer k. Sort the students (i.e., the rows of 
+/// the matrix) by their scores in the kth (0-indexed) exam from the 
+/// highest to the lowest.
+///
+/// Return the matrix after sorting it.
+/// 
+/// Example 1:
+/// Input: score = [[10,6,9,1],[7,5,11,2],[4,8,3,15]], k = 2
+/// Output: [[7,5,11,2],[10,6,9,1],[4,8,3,15]]
+/// Explanation: In the above diagram, S denotes the student, while E 
+/// denotes the exam.
+/// - The student with index 1 scored 11 in exam 2, which is the highest 
+///   score, so they got first place.
+/// - The student with index 0 scored 9 in exam 2, which is the second 
+///   highest score, so they got second place.
+/// - The student with index 2 scored 3 in exam 2, which is the lowest 
+///   score, so they got third place.
+///
+/// Example 2:
+/// Input: score = [[3,4],[5,6]], k = 0
+/// Output: [[5,6],[3,4]]
+/// Explanation: In the above diagram, S denotes the student, while E 
+/// denotes the exam.
+/// - The student with index 1 scored 5 in exam 0, which is the highest 
+///   score, so they got first place.
+/// - The student with index 0 scored 3 in exam 0, which is the lowest 
+///   score, so they got second place.
+///
+/// Constraints:
+/// 1. m == score.length
+/// 2. n == score[i].length
+/// 3. 1 <= m, n <= 250
+/// 4. 1 <= score[i][j] <= 10^5
+/// 5. score consists of distinct integers.
+/// 6. 0 <= k < n
+/// </summary>
+vector<vector<int>> LeetCodeArray::sortTheStudents(vector<vector<int>>& score, int k)
+{
+    priority_queue<pair<int, int>> pq;
+    int n = score.size();
+    int m = score[0].size();
+    for (int i = 0; i < n; i++)
+    {
+        pq.push(make_pair(score[i][k], i));
+    }
+    vector<vector<int>> result(n, vector<int>(m));
+    for (int i = 0; i < n; i++)
+    {
+        int r = pq.top().second;
+        pq.pop();
+        for (int j = 0; j < m; j++)
+        {
+            result[i][j] = score[r][j];
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2541. Minimum Operations to Make Array Equal II
+/// 
+/// Medium
+///	
+/// You are given two integer arrays nums1 and nums2 of equal length n and 
+/// an integer k. You can perform the following operation on nums1:
+///
+/// Choose two indexes i and j and increment nums1[i] by k and decrement 
+/// nums1[j] by k. In other words, nums1[i] = nums1[i] + k and 
+/// nums1[j] = nums1[j] - k.
+/// nums1 is said to be equal to nums2 if for all indices i such that 
+/// 0 <= i < n, nums1[i] == nums2[i].
+///
+/// Return the minimum number of operations required to make nums1 equal 
+/// to nums2. If it is impossible to make them equal, return -1.
+///
+/// Example 1:
+/// Input: nums1 = [4,3,1,4], nums2 = [1,3,7,1], k = 3
+/// Output: 2
+/// Explanation: In 2 operations, we can transform nums1 to nums2.
+/// 1st operation: i = 2, j = 0. After applying the operation, 
+/// nums1 = [1,3,4,4].
+/// 2nd operation: i = 2, j = 3. After applying the operation, 
+/// nums1 = [1,3,7,1].
+/// One can prove that it is impossible to make arrays equal in fewer 
+/// operations.
+///
+/// Example 2:
+/// Input: nums1 = [3,8,5,2], nums2 = [2,4,1,6], k = 1
+/// Output: -1
+/// Explanation: It can be proved that it is impossible to make the 
+/// two arrays equal.
+///
+/// Constraints:
+/// 1. n == nums1.length == nums2.length
+/// 2. 2 <= n <= 10^5
+/// 3. 0 <= nums1[i], nums2[j] <= 10^9
+/// 4. 0 <= k <= 10^5
+/// </summary>
+long long LeetCodeArray::minOperations(vector<int>& nums1, vector<int>& nums2, int k)
+{
+    long long pos = 0, neg = 0;
+    for (size_t i = 0; i < nums1.size(); i++)
+    {
+        if (nums1[i] == nums2[i]) continue;
+        if ((k == 0) || (abs(nums1[i] - nums2[i]) % k != 0))
+        {
+            return -1;
+        }
+        if (nums1[i] > nums2[i])
+        {
+            pos += (nums1[i] - nums2[i]) / k;
+        }
+        else
+        {
+            neg += (nums2[i] - nums1[i]) / k;
+        }
+    }
+    if (pos == neg) return pos;
+    else return -1;
+}
+
+
+/// <summary>
+/// Leet Code 2552. Count Increasing Quadruplets
+/// 
+/// Hard
+///	
+/// Given a 0-indexed integer array nums of size n containing all numbers 
+/// from 1 to n, return the number of increasing quadruplets.
+///
+/// A quadruplet (i, j, k, l) is increasing if:
+///
+/// 0 <= i < j < k < l < n, and
+/// nums[i] < nums[k] < nums[j] < nums[l].
+///
+/// Example 1:
+/// Input: nums = [1,3,2,4,5]
+/// Output: 2
+/// Explanation: 
+/// - When i = 0, j = 1, k = 2, and l = 3, nums[i] < nums[k] < 
+//    nums[j] < nums[l].
+/// - When i = 0, j = 1, k = 2, and l = 4, nums[i] < nums[k] < 
+///   nums[j] < nums[l]. 
+/// There are no other quadruplets, so we return 2.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4]
+/// Output: 0
+/// Explanation: There exists only one quadruplet with i = 0, j = 1, 
+/// k = 2, l = 3, but since nums[j] < nums[k], we return 0.
+///
+/// Constraints:
+/// 1. 4 <= nums.length <= 4000
+/// 2. 1 <= nums[i] <= nums.length
+/// 3. All the integers of nums are unique. nums is a permutation.
+/// </summary>
+long long LeetCodeArray::countQuadruplets(vector<int>& nums)
+{
+    int n = nums.size();
+    vector<long long> dp(n);
+    long long result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        long long smaller = 0;
+        for (int j = 0; j < i; j++)
+        {
+            if (nums[j] < nums[i])
+            {
+                smaller++;
+                result += dp[j];
+            }
+            else
+            {
+                dp[j] += smaller;
+            }
+        }
+    }
+    return result;
+}
 #pragma endregion
 

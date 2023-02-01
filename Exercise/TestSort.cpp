@@ -3046,8 +3046,44 @@ void TestLeetCode2530(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2548(void)
+{
+    Logger::WriteMessage("Test Leet Code 2548");
+    LeetCodeSort leetCode;
+    vector<vector<int>> items = { {50, 1},{10, 8} };
+    int capacity = 5;
+    double result = leetCode.maxPrice(items, capacity);
+    Logger::WriteMessage(items);
+    Logger::WriteMessage("capacity = " + to_string(capacity) + "; result = " + to_string(result));
+
+    items = { {100, 30} };
+    capacity = 50;
+    result = leetCode.maxPrice(items, capacity);
+    Logger::WriteMessage(items);
+    Logger::WriteMessage("capacity = " + to_string(capacity) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2551(void)
+{
+    Logger::WriteMessage("Test Leet Code 2551");
+    LeetCodeSort leetCode;
+    vector<int> weights = { 1, 3, 5, 1 };
+    int k = 2;
+    long long result = leetCode.putMarbles(weights, k);
+    Logger::WriteMessage(weights);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    weights = { 1, 3 };
+    k = 2;
+    result = leetCode.putMarbles(weights, k);
+    Logger::WriteMessage(weights);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2551();
+    TestLeetCode2548();
     TestLeetCode2530();
     TestLeetCode2519();
     TestLeetCode2491();

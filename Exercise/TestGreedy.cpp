@@ -1570,8 +1570,35 @@ void TestLeetCode2534(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2542(void)
+{
+    Logger::WriteMessage("Test Leet Code 2542");
+    LeetCodeGreedy leetCode;
+    vector<int> nums1 = { 1, 3, 3, 2 }, nums2 = { 2, 1, 3, 4 };
+    int k = 3;
+    long long result = leetCode.maxScore(nums1, nums2, k);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums1 = { 4,2,3,1,1 }, nums2 = { 7,5,10,9,6 };
+    k = 1;
+    result = leetCode.maxScore(nums1, nums2, k);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums1 = { 2,1,14,12 }, nums2 = { 11,7,13,6 };
+    k = 3;
+    result = leetCode.maxScore(nums1, nums2, k);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode2542();
     TestLeetCode2534();
     TestLeetCode2532();
     TestLeetCode2406();

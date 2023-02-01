@@ -8257,8 +8257,97 @@ void TestLeetCode2536(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2540(void)
+{
+    Logger::WriteMessage("Test Leet Code 2540");
+    LeetCodeArray leetCode;
+    vector<int> nums1 = { 1,2,3 };
+    vector<int> nums2 = { 2,4 };
+    int result = leetCode.getCommon(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,2,3,6 };
+    nums2 = { 2,3,4,5 };
+    result = leetCode.getCommon(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2545(void)
+{
+    Logger::WriteMessage("Test Leet Code 2545");
+    LeetCodeArray leetCode;
+    vector<vector<int>> score =
+    {
+        {10, 6, 9, 1},{7, 5, 11, 2},{4, 8, 3, 15}
+    };
+    int k = 2;
+    vector<vector<int>> result = leetCode.sortTheStudents(score, k);
+    Logger::WriteMessage(score);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    score =
+    {
+        {3,4},{5,6}
+    };
+    k = 0;
+    result = leetCode.sortTheStudents(score, k);
+    Logger::WriteMessage(score);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2541(void)
+{
+    Logger::WriteMessage("Test Leet Code 2541");
+    LeetCodeArray leetCode;
+    vector<int> num1 = { 4, 3, 1, 4 };
+    vector<int> num2 = { 1,3,7,1 };
+    int k = 3;
+    long long result = leetCode.minOperations(num1, num2, k);
+    Logger::WriteMessage(num1);
+    Logger::WriteMessage(num2);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    num1 = { 3,8,5,2 };
+    num2 = { 2,4,1,6 };
+    k = 1;
+    result = leetCode.minOperations(num1, num2, k);
+    Logger::WriteMessage(num1);
+    Logger::WriteMessage(num2);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2552(void)
+{
+    Logger::WriteMessage("Test Leet Code 2552");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 3, 2, 4, 5 };
+    long long result = leetCode.countQuadruplets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 2, 3, 4 };
+    result = leetCode.countQuadruplets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 2, 5, 3, 4, 6 };
+    result = leetCode.countQuadruplets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2552();
+    TestLeetCode2541();
+    TestLeetCode2545();
+    TestLeetCode2540();
     TestLeetCode2536();
     TestLeetCode2535();
     TestLeetCode2444();

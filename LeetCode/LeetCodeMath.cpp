@@ -16723,3 +16723,273 @@ int LeetCodeMath::maxFrequencyScore(vector<int>& nums, int k)
     }
     return (int)result;
 }
+
+/// <summary>
+/// Leet Code 2543. Check if Point Is Reachable
+/// 
+/// Hard
+///	
+/// There exists an infinitely large grid. You are currently at 
+/// point (1, 1), and you need to reach the point (targetX, targetY) 
+/// using a finite number of steps.
+///
+/// In one step, you can move from point (x, y) to any one of the 
+/// following points:
+///
+/// (x, y - x)
+/// (x - y, y)
+/// (2 * x, y)
+/// (x, 2 * y)
+/// Given two integers targetX and targetY representing the 
+/// X-coordinate and Y-coordinate of your final position, return 
+/// true if you can reach the point from (1, 1) using some number 
+/// of steps, and false otherwise.
+///
+/// Example 1:
+/// Input: targetX = 6, targetY = 9
+/// Output: false
+/// Explanation: It is impossible to reach (6,9) from (1,1) using any 
+/// sequence of moves, so false is returned.
+///
+/// Example 2:
+/// Input: targetX = 4, targetY = 7
+/// Output: true
+/// Explanation: You can follow the path (1,1) -> (1,2) -> (1,4) -> 
+/// (1,8) -> (1,7) -> (2,7) -> (4,7).
+///
+/// Constraints:
+/// 1. 1 <= targetX, targetY <= 10^9
+/// </summary>
+bool LeetCodeMath::isReachable(int targetX, int targetY)
+{
+    while (targetX != targetY || targetX % 2 == 0)
+    {
+        if (targetX % 2 == 0) targetX /= 2;
+        else if (targetY % 2 == 0) targetY /= 2;
+        else if (targetX < targetY)
+        {
+            targetY = (targetX + targetY) / 2;
+        }
+        else
+        {
+            targetX = (targetX + targetY) / 2;
+        }
+    }
+    if (targetX == 1) return true;
+    else return false;
+}
+
+/// <summary>
+/// Leet Code 2544. Alternating Digit Sum
+/// 
+/// Easy
+///	
+/// You are given a positive integer n. Each digit of n has a sign 
+/// according to the following rules:
+///
+/// The most significant digit is assigned a positive sign.
+/// Each other digit has an opposite sign to its adjacent digits.
+/// Return the sum of all digits with their corresponding sign.
+/// 
+/// Example 1:
+/// Input: n = 521
+/// Output: 4
+/// Explanation: (+5) + (-2) + (+1) = 4.
+///
+/// Example 2:
+/// Input: n = 111
+/// Output: 1
+/// Explanation: (+1) + (-1) + (+1) = 1.
+///
+/// Example 3:
+/// Input: n = 886996
+/// Output: 0
+/// Explanation: (+8) + (-8) + (+6) + (-9) + (+9) + (-6) = 0.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 10^9
+/// </summary>
+int LeetCodeMath::alternateDigitSum(int n)
+{
+    string str = to_string(n);
+    int result = 0;
+    for (size_t i = 0; i < str.size(); i++)
+    {
+        if (i % 2 == 0)
+        {
+            result = result + (str[i] - '0');
+        }
+        else
+        {
+            result = result - (str[i] - '0');
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2539. Count the Number of Good Subsequences
+/// 
+/// Medium
+///	
+/// A subsequence of a string is good if it is not empty and the frequency 
+/// of each one of its characters is the same.
+///
+/// Given a string s, return the number of good subsequences of s. Since 
+/// the answer may be too large, return it modulo 10^9 + 7.
+///
+/// A subsequence is a string that can be derived from another string by 
+/// deleting some or no characters without changing the order of the 
+/// remaining characters.
+///
+/// Example 1:
+/// Input: s = "aabb"
+/// Output: 11
+/// Explanation: The total number of subsequences is 24. There are five 
+/// subsequences which are not good: "aabb", "aabb", "aabb", "aabb", and 
+/// the empty subsequence. Hence, the number of good subsequences 
+/// is 24-5 = 11.
+///
+/// Example 2:
+/// Input: s = "leet"
+/// Output: 12
+/// Explanation: There are four subsequences which are not good: "leet", 
+/// "leet", "leet", and the empty subsequence. Hence, the number of good 
+/// subsequences is 24-4 = 12.
+///
+/// Example 3:
+/// Input: s = "abcd"
+/// Output: 15
+/// Explanation: All of the non-empty subsequences are good subsequences. 
+/// Hence, the number of good subsequences is 2^4-1 = 15.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 104
+/// 2. s consists of only lowercase English letters.
+/// </summary>
+int LeetCodeMath::countGoodSubsequences(string s)
+{
+    vector<long long> chars(26), pows(26, 1);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        chars[s[i] - 'a']++;
+    }
+    long long M = 1000000007;
+    long long result = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        long long product = 1;
+        for (int j = 0; j < 26; j++)
+        {
+            if (chars[j] > i)
+            {
+                pows[j] = pows[j] * (chars[j] - i) % M;
+                pows[j] = pows[j] * modPow((long long)i + (long long)1, M - 2, M) % M;
+                product = product * (1 + pows[j]) % M;
+            }
+        }
+        if (product == 1) break;
+        result = (result + product - 1) % M;
+    }
+    return (int)result;
+}
+
+/// <summary>
+/// Leet Code 2549. Count Distinct Numbers on Board
+/// 
+/// Easy
+///	
+/// You are given a positive integer n, that is initially placed on a 
+/// board. Every day, for 109 days, you perform the following procedure:
+///
+/// For each number x present on the board, find all numbers 1 <= i <= n 
+/// such that x % i == 1.
+/// Then, place those numbers on the board.
+/// Return the number of distinct integers present on the board after 10^9 
+/// days have elapsed.
+///
+/// Note:
+/// Once a number is placed on the board, it will remain on it until the 
+/// end.
+/// % stands for the modulo operation. For example, 14 % 3 is 2.
+///
+/// Example 1:
+/// Input: n = 5
+/// Output: 4
+/// Explanation: Initially, 5 is present on the board. 
+/// The next day, 2 and 4 will be added since 5 % 2 == 1 and 5 % 4 == 1. 
+/// After that day, 3 will be added to the board because 4 % 3 == 1. 
+/// At the end of a billion days, the distinct numbers on the board will 
+/// be 2, 3, 4, and 5. 
+///
+/// Example 2:
+/// Input: n = 3
+/// Output: 2
+/// Explanation: 
+/// Since 3 % 2 == 1, 2 will be added to the board. 
+/// After a billion days, the only two distinct numbers on the board 
+/// are 2 and 3. 
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 100
+/// </summary>
+int LeetCodeMath::distinctIntegers(int n)
+{
+    if (n == 1) return 1;
+    else return n - 1;
+}
+
+
+/// <summary>
+/// Leet Code 2550. Count Collisions of Monkeys on a Polygon
+/// 
+/// Medium
+///	
+/// There is a regular convex polygon with n vertices. The vertices are 
+/// labeled from 0 to n - 1 in a clockwise direction, and each vertex 
+/// has exactly one monkey. The following figure shows a convex polygon 
+/// of 6 vertices.
+/// 
+/// Each monkey moves simultaneously to a neighboring vertex. A 
+/// neighboring vertex for a vertex i can be:
+///
+/// the vertex (i + 1) % n in the clockwise direction, or
+/// the vertex (i - 1 + n) % n in the counter-clockwise direction.
+/// A collision happens if at least two monkeys reside on the same vertex 
+/// after the movement.
+///
+/// Return the number of ways the monkeys can move so that at least one 
+/// collision happens. Since the answer may be very large, return it 
+/// modulo 10^9 + 7.
+///
+/// Note that each monkey can only move once.
+///
+/// Example 1:
+/// Input: n = 3
+/// Output: 6
+/// Explanation: There are 8 total possible movements.
+/// Two ways such that they collide at some point are:
+/// - Monkey 1 moves in a clockwise direction; monkey 2 moves in an 
+///   anticlockwise direction; monkey 3 moves in a clockwise direction. 
+///   Monkeys 1 and 2 collide.
+/// - Monkey 1 moves in an anticlockwise direction; monkey 2 moves in 
+///   an anticlockwise direction; monkey 3 moves in a clockwise direction. 
+///   Monkeys 1 and 3 collide.
+/// It can be shown 6 total movements result in a collision.
+///
+/// Example 2:
+/// Input: n = 4
+/// Output: 14 
+/// Explanation: It can be shown that there are 14 ways for the monkeys 
+/// to collide.
+/// 
+/// Constraints:
+/// 1. 3 <= n <= 10^9
+/// </summary>
+int LeetCodeMath::monkeyMove(int n)
+{
+    long long M = 1000000007;
+    long long result = modPow(2, n, M);
+    result = (result - 2 + M) % M;
+    return (int)result;
+}
