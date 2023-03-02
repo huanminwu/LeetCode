@@ -8670,6 +8670,108 @@ public:
     /// 6. There are no repeated edges.
     /// </summary>
     bool isPossible(int n, vector<vector<int>>& edges);
+
+    /// <summary>
+    /// Leet Code 2556. Disconnect Path in a Binary Matrix by at Most One Flip
+    /// </summary>
+    bool isPossibleToCutPath(vector<vector<int>>& grid, vector<vector<int>>& visited, int r, int c);
+
+    /// <summary>
+    /// Leet Code 2556. Disconnect Path in a Binary Matrix by at Most One Flip
+    /// 
+    /// Medium
+    ///	
+    /// You are given a 0-indexed m x n binary matrix grid. You can move from 
+    /// a cell (row, col) to any of the cells (row + 1, col) or (row, col + 1) 
+    /// that has the value 1. The matrix is disconnected if there is no path 
+    /// from (0, 0) to (m - 1, n - 1).
+    ///
+    /// You can flip the value of at most one (possibly none) cell. You cannot 
+    /// flip the cells (0, 0) and (m - 1, n - 1).
+    ///
+    /// Return true if it is possible to make the matrix disconnect or false 
+    /// otherwise.
+    ///
+    /// Note that flipping a cell changes its value from 0 to 1 or from 1 to 0.
+    ///
+    /// Example 1:
+    /// Input: grid = [[1,1,1],[1,0,0],[1,1,1]]
+    /// Output: true
+    /// Explanation: We can change the cell shown in the diagram above. There 
+    /// is no path from (0, 0) to (2, 2) in the resulting grid.
+    ///
+    /// Example 2:
+    /// Input: grid = [[1,1,1],[1,0,1],[1,1,1]]
+    /// Output: false
+    /// Explanation: It is not possible to change at most one cell such that 
+    /// there is not path from (0, 0) to (2, 2).
+    ///
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 1 <= m, n <= 1000
+    /// 4. 1 <= m * n <= 10^5
+    /// 5. grid[i][j] is either 0 or 1.
+    /// 6. grid[0][0] == grid[m - 1][n - 1] == 1
+    /// </summary>
+    bool isPossibleToCutPath(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 2577. Minimum Time to Visit a Cell In a Grid
+    /// 
+    /// Hard
+    ///	
+    /// You are given a m x n matrix grid consisting of non-negative integers 
+    /// where grid[row][col] represents the minimum time required to be able 
+    /// to visit the cell (row, col), which means you can visit the cell 
+    /// (row, col) only when the time you visit it is greater than or equal 
+    /// to grid[row][col].
+    ///
+    /// You are standing in the top-left cell of the matrix in the 0th second, 
+    /// and you must move to any adjacent cell in the four directions: up, 
+    /// down, left, and right. Each move you make takes 1 second.
+    ///
+    /// Return the minimum time required in which you can visit the 
+    /// bottom-right cell of the matrix. If you cannot visit the bottom-right 
+    /// cell, then return -1.
+    ///
+    /// Example 1:
+    /// Input: grid = [[0,1,3,2],[5,1,2,5],[4,3,8,6]]
+    /// Output: 7
+    /// Explanation: One of the paths that we can take is the following:
+    /// - at t = 0, we are on the cell (0,0).
+    /// - at t = 1, we move to the cell (0,1). It is possible because 
+    ///   grid[0][1] <= 1.
+    /// - at t = 2, we move to the cell (1,1). It is possible because 
+    ///   grid[1][1] <= 2.
+    /// - at t = 3, we move to the cell (1,2). It is possible because 
+    ///   grid[1][2] <= 3.
+    /// - at t = 4, we move to the cell (1,1). It is possible because 
+    ///   grid[1][1] <= 4.
+    /// - at t = 5, we move to the cell (1,2). It is possible because 
+    ///   grid[1][2] <= 5.
+    /// - at t = 6, we move to the cell (1,3). It is possible because 
+    ///   grid[1][3] <= 6.
+    /// - at t = 7, we move to the cell (2,3). It is possible because 
+    ///   grid[1][3] <= 7.
+    /// The final time is 7. It can be shown that it is the minimum time 
+    /// possible.
+    ///
+    /// Example 2:
+    /// Input: grid = [[0,2,4],[3,2,1],[1,0,4]]
+    /// Output: -1
+    /// Explanation: There is no path from the top left to the 
+    /// bottom-right cell.
+    /// 
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 2 <= m, n <= 1000
+    /// 4. 4 <= m * n <= 10^5
+    /// 5. 0 <= grid[i][j] <= 10^5
+    /// 6. grid[0][0] == 0
+    /// </summary>
+    int minimumTime(vector<vector<int>>& grid);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

@@ -306,9 +306,48 @@ void TestLeetCode2537(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2576(void)
+{
+    Logger::WriteMessage("Test Leet Code 2576");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 3, 5, 2, 4 };
+    int result = leetCode.maxNumOfMarkedIndices(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 9,2,5,4 };
+    result = leetCode.maxNumOfMarkedIndices(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7,6,8 };
+    result = leetCode.maxNumOfMarkedIndices(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2555(void)
+{
+    Logger::WriteMessage("Test Leet Code 2555");
+    LeetCodeTwoPointer leetCode;
+    vector<int> prizePositions = { 1, 1, 2, 2, 3, 3, 5 };
+    int k = 2;
+    int result = leetCode.maximizeWin(prizePositions, 2);
+    Logger::WriteMessage(prizePositions);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    prizePositions = { 1,2,3,4 };
+    k = 0;
+    result = leetCode.maximizeWin(prizePositions, 0);
+    Logger::WriteMessage(prizePositions);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2555();
+    TestLeetCode2576();
     TestLeetCode2537();
     TestLeetCode2448();
     TestLeetCode2462();

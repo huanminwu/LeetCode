@@ -3558,4 +3558,136 @@ long long LeetCodeBinarySearch::maxPower(vector<int>& stations, int r, int k)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2560. House Robber IV
+/// 
+/// Medium
+///	
+/// There are several consecutive houses along a street, each of which has 
+/// some money inside. There is also a robber, who wants to steal money 
+/// from the homes, but he refuses to steal from adjacent homes.
+///
+/// The capability of the robber is the maximum amount of money he steals 
+/// from one house of all the houses he robbed.
+///
+/// You are given an integer array nums representing how much money is 
+/// stashed in each house. More formally, the ith house from the left 
+/// has nums[i] dollars.
+///
+/// You are also given an integer k, representing the minimum number 
+/// of houses the robber will steal from. It is always possible to 
+/// steal at least k houses.
+///
+/// Return the minimum capability of the robber out of all the possible 
+/// ways to steal at least k houses.
+///
+/// Example 1:
+/// Input: nums = [2,3,5,9], k = 2
+/// Output: 5
+/// Explanation: 
+/// There are three ways to rob at least 2 houses:
+/// - Rob the houses at indices 0 and 2. Capability is 
+///   max(nums[0], nums[2]) = 5.
+/// - Rob the houses at indices 0 and 3. Capability is 
+///   max(nums[0], nums[3]) = 9.
+/// - Rob the houses at indices 1 and 3. Capability is 
+///   max(nums[1], nums[3]) = 9.
+/// Therefore, we return min(5, 9, 9) = 5.
+///
+/// Example 2:
+/// Input: nums = [2,7,9,3,1], k = 2
+/// Output: 2
+/// Explanation: There are 7 ways to rob the houses. The way which leads 
+/// to minimum capability is to rob the house at index 0 and 4. Return 
+/// max(nums[0], nums[4]) = 2.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= k <= (nums.length + 1)/2
+/// </summary>
+int LeetCodeBinarySearch::minCapability(vector<int>& nums, int k)
+{
+    int left = 0, right = 0;
+    for (int n : nums) right = max(right, n);
+
+    int result = right;
+    while (left <= right)
+    {
+        int middle = left + (right - left) / 2;
+        int prev = -2;
+        int count = 0;
+        for (int i = 0; i < (int)nums.size(); i++)
+        {
+            if (nums[i] <= middle && (i - prev) > 1)
+            {
+                count++;
+                prev = i;
+                if (count >= k) break;
+            }
+        }
+        if (count >= k)
+        {
+            result = middle;
+            right = middle - 1;
+        }
+        else
+        {
+            left = middle + 1;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2563. Count the Number of Fair Pairs
+/// 
+/// Medium
+///	
+/// Given a 0-indexed integer array nums of size n and two integers lower 
+/// and upper, return the number of fair pairs.
+///
+/// A pair (i, j) is fair if:
+/// 
+/// 0 <= i < j < n, and
+/// lower <= nums[i] + nums[j] <= upper
+///
+/// Example 1:
+/// Input: nums = [0,1,7,4,4,5], lower = 3, upper = 6
+/// Output: 6
+/// Explanation: There are 6 fair pairs: (0,3), (0,4), (0,5), (1,3), 
+/// (1,4), and (1,5).
+///
+/// Example 2:
+/// Input: nums = [1,7,9,2,5], lower = 11, upper = 11
+/// Output: 1
+/// Explanation: There is a single fair pair: (2,3).
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. nums.length == n
+/// 3. -10^9 <= nums[i] <= 10^9
+/// 4. -10^9 <= lower <= upper <= 10^9
+/// </summary>
+long long LeetCodeBinarySearch::countFairPairs(vector<int>& nums, int lower, int upper)
+{
+    sort(nums.begin(), nums.end());
+    long long result = 0;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        int low = lower - nums[i];
+        int high = upper - nums[i];
+        int left = lower_bound(nums.begin(), nums.end(), low) - nums.begin();
+        int right = upper_bound(nums.begin(), nums.end(), high) - nums.begin();
+        result += (long long)right - (long long)left;
+        if (nums[i] >= low && nums[i] <= high)
+        {
+            result--;
+        }
+    }
+    result /= 2;
+    return result;
+}
+
 #pragma endregion  

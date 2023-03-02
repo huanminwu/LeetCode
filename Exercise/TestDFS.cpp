@@ -1818,8 +1818,25 @@ void TestLeetCode282(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2572(void)
+{
+    Logger::WriteMessage("Test Leet Code 2572");
+    LeetCodeDFS leetCode;
+
+    vector<int> nums = { 3, 4, 4, 5 };
+    int result = leetCode.squareFreeSubsets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1 };
+    result = leetCode.squareFreeSubsets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2572();
     TestLeetCode2403();
     TestLeetCode2305();
     TestLeetCode2232();

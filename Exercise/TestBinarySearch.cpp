@@ -1095,8 +1095,46 @@ void TestLeetCode2528(void)
     Logger::WriteMessage("r = " + to_string(r) + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2560(void)
+{
+    Logger::WriteMessage("Test Leet Code 2560");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 2, 3, 5, 9 };
+    int k = 2;
+    int result = leetCode.minCapability(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 2, 7, 9, 3, 1 }; 
+    k = 2;
+    result = leetCode.minCapability(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2563(void)
+{
+    Logger::WriteMessage("Test Leet Code 2563");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 0,1,7,4,4,5 };
+    int lower = 3;
+    int upper = 6;
+    long long result = leetCode.countFairPairs(nums, lower, upper);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("lower = " + to_string(lower) + "; upper = " + to_string(upper) + "; result = " + to_string(result));
+
+    nums = { 1,7,9,2,5 };
+    lower = 11;
+    upper = 11;
+    result = leetCode.countFairPairs(nums, lower, upper);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("lower = " + to_string(lower) + "; upper = " + to_string(upper) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode2563();
+    TestLeetCode2560();
     TestLeetCode2528();
     TestLeetCode2517();
     TestLeetCode2513();

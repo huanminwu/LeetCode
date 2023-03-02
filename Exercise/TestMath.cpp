@@ -5486,8 +5486,111 @@ void TestLeetCode2550(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2553(void)
+{
+    Logger::WriteMessage("Test Leet Code 2553");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 13, 25, 83, 77 };
+    vector<int> result = leetCode.separateDigits(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 7,1,3,9 };
+    result = leetCode.separateDigits(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2554(void)
+{
+    Logger::WriteMessage("Test Leet Code 2554");
+    LeetCodeMath leetCode;
+    vector<int> banned = { 1, 6, 5 };
+    int n = 5;
+    int maxSum = 6;
+    int result = leetCode.maxCount(banned, n, maxSum);
+    Logger::WriteMessage(banned);
+    Logger::WriteMessage("n = " + to_string(n) + "; maxSum = " + to_string(maxSum) + "; result = " + to_string(result));
+
+    banned = { 1,2,3,4,5,6,7 };
+    n = 8;
+    maxSum = 1;
+    result = leetCode.maxCount(banned, n, maxSum);
+    Logger::WriteMessage(banned);
+    Logger::WriteMessage("n = " + to_string(n) + "; maxSum = " + to_string(maxSum) + "; result = " + to_string(result));
+
+    banned = { 11 };
+    n = 7;
+    maxSum = 50;
+    result = leetCode.maxCount(banned, n, maxSum);
+    Logger::WriteMessage(banned);
+    Logger::WriteMessage("n = " + to_string(n) + "; maxSum = " + to_string(maxSum) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2557(void)
+{
+    Logger::WriteMessage("Test Leet Code 2557");
+    LeetCodeMath leetCode;
+    vector<int> banned = { 1,4,6 };
+    int n = 6;
+    long long maxSum = 4;
+    int result = leetCode.maxCount(banned, n, maxSum);
+    Logger::WriteMessage(banned);
+    Logger::WriteMessage("n = " + to_string(n) + "; maxSum = " + to_string(maxSum) + "; result = " + to_string(result));
+
+    banned = { 4,3,5,6 };
+    n = 7;
+    maxSum = 18;
+    result = leetCode.maxCount(banned, n, maxSum);
+    Logger::WriteMessage(banned);
+    Logger::WriteMessage("n = " + to_string(n) + "; maxSum = " + to_string(maxSum) + "; result = " + to_string(result));
+
+    banned = { 1,2,3,4,5,6,7,8,88888888 };
+    n = 1000000000;
+    maxSum = 100000000000;
+    result = leetCode.maxCount(banned, n, maxSum);
+    Logger::WriteMessage(banned);
+    Logger::WriteMessage("n = " + to_string(n) + "; maxSum = " + to_string(maxSum) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2566(void)
+{
+    Logger::WriteMessage("Test Leet Code 2566");
+    LeetCodeMath leetCode;
+    int num = 11891;
+    int result = leetCode.minMaxDifference(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+
+    num = 90;
+    result = leetCode.minMaxDifference(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2575(void)
+{
+    Logger::WriteMessage("Test Leet Code 2575");
+    LeetCodeMath leetCode;
+    string word = "998244353";
+    int m = 3;
+    vector<int> result = leetCode.divisibilityArray(word, m);
+    Logger::WriteMessage("word = " + word + "; m = " + to_string(m));
+    Logger::WriteMessage(result);
+
+    word = "1010";
+    m = 10;
+    result = leetCode.divisibilityArray(word, m);
+    Logger::WriteMessage("word = " + word + "; m = " + to_string(m));
+    Logger::WriteMessage(result);
+}
+
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2575();
+    TestLeetCode2566();
+    TestLeetCode2557();
+    TestLeetCode2554();
+    TestLeetCode2553();
     TestLeetCode2550();
     TestLeetCode2549();
     TestLeetCode2539();

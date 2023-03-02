@@ -10468,5 +10468,202 @@ public:
     /// 1. 3 <= n <= 10^9
     /// </summary>
     int monkeyMove(int n);
+
+    /// <summary>
+    /// Leet Code 2553. Separate the Digits in an Array
+    /// 
+    /// Easy
+    ///	
+    /// Given an array of positive integers nums, return an array answer that 
+    /// consists of the digits of each integer in nums after separating them 
+    /// in the same order they appear in nums.
+    ///
+    /// To separate the digits of an integer is to get all the digits it has 
+    /// in the same order.
+    ///
+    /// For example, for the integer 10921, the separation of its digits 
+    /// is [1,0,9,2,1].
+    /// 
+    /// Example 1:
+    /// Input: nums = [13,25,83,77]
+    /// Output: [1,3,2,5,8,3,7,7]
+    /// Explanation: 
+    /// - The separation of 13 is [1,3].
+    /// - The separation of 25 is [2,5].
+    /// - The separation of 83 is [8,3].
+    /// - The separation of 77 is [7,7].
+    /// answer = [1,3,2,5,8,3,7,7]. Note that answer contains the separations 
+    /// in the same order.
+    ///
+    /// Example 2:
+    /// Input: nums = [7,1,3,9]
+    /// Output: [7,1,3,9]
+    /// Explanation: The separation of each integer in nums is itself.
+    /// answer = [7,1,3,9].
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1000
+    /// 2. 1 <= nums[i] <= 10^5
+    /// </summary>
+    vector<int> separateDigits(vector<int>& nums);
+
+
+    /// <summary>
+    /// Leet Code 2554. Maximum Number of Integers to Choose From a Range I
+    /// 
+    /// Medium
+    ///	
+    /// You are given an integer array banned and two integers n and maxSum. 
+    /// You are choosing some number of integers following the below rules:
+    ///
+    /// The chosen integers have to be in the range [1, n].
+    /// Each integer can be chosen at most once.
+    /// The chosen integers should not be in the array banned.
+    /// The sum of the chosen integers should not exceed maxSum.
+    /// Return the maximum number of integers you can choose following the 
+    /// mentioned rules.
+    ///
+    /// Example 1:
+    /// Input: banned = [1,6,5], n = 5, maxSum = 6
+    /// Output: 2
+    /// Explanation: You can choose the integers 2 and 4.
+    /// 2 and 4 are from the range [1, 5], both did not appear in banned, 
+    /// and their sum is 6, which did not exceed maxSum.
+    ///
+    /// Example 2:
+    /// Input: banned = [1,2,3,4,5,6,7], n = 8, maxSum = 1
+    /// Output: 0
+    /// Explanation: You cannot choose any integer while following the 
+    /// mentioned conditions.
+    ///
+    /// Example 3:
+    /// Input: banned = [11], n = 7, maxSum = 50
+    /// Output: 7
+    /// Explanation: You can choose the integers 1, 2, 3, 4, 5, 6, and 7.
+    /// They are from the range [1, 7], all did not appear in banned, and 
+    /// their sum is 28, which did not exceed maxSum.
+    ///    
+    /// Constraints:
+    /// 1. 1 <= banned.length <= 10^4
+    /// 2. 1 <= banned[i], n <= 10^4
+    /// 3. 1 <= maxSum <= 10^9
+    /// </summary>
+    int maxCount(vector<int>& banned, int n, int maxSum);
+
+    /// <summary>
+    /// Leet Code 2557. Maximum Number of Integers to Choose From a Range II
+    /// 
+    /// Medium
+    ///	
+    /// You are given an integer array banned and two integers n and maxSum. 
+    /// You are choosing some number of integers following the below rules:
+    ///
+    /// The chosen integers have to be in the range [1, n].
+    /// Each integer can be chosen at most once.
+    /// The chosen integers should not be in the array banned.
+    /// The sum of the chosen integers should not exceed maxSum.
+    /// Return the maximum number of integers you can choose following the 
+    /// mentioned rules.
+    /// 
+    /// Example 1:
+    /// Input: banned = [1,4,6], n = 6, maxSum = 4
+    /// Output: 1
+    /// Explanation: You can choose the integer 3.
+    /// 3 is in the range [1, 6], and do not appear in banned. The sum of the 
+    /// choosen integers is 3, which does not ecxeed maxSum.
+    ///
+    /// Example 2:
+    /// Input: banned = [4,3,5,6], n = 7, maxSum = 18
+    /// Output: 3
+    /// Explanation: You can choose the integers 1, 2, and 7.
+    /// All these integers are in the range [1, 7], all do not appear in banned, 
+    /// and their sum is 18, which does not exceed maxSum.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= banned.length <= 10^5
+    /// 2. 1 <= banned[i] <= n <= 10^9
+    /// 3. 1 <= maxSum <= 10^15
+    /// </summary>
+    int maxCount(vector<int>& banned, int n, long long maxSum);
+
+    /// <summary>
+    /// Leet Code 2566. Maximum Difference by Remapping a Digit
+    /// 
+    /// Easy
+    ///	
+    /// You are given an integer num. You know that Danny Mittal will sneakily 
+    /// remap one of the 10 possible digits (0 to 9) to another digit.
+    ///
+    /// Return the difference between the maximum and minimum values Danny 
+    /// can make by remapping exactly one digit in num.
+    ///
+    /// Notes:
+    /// When Danny remaps a digit d1 to another digit d2, Danny replaces all 
+    /// occurrences of d1 in num with d2.
+    /// Danny can remap a digit to itself, in which case num does not change.
+    /// Danny can remap different digits for obtaining minimum and maximum 
+    /// values respectively.
+    /// The resulting number after remapping can contain leading zeroes.
+    /// We mentioned "Danny Mittal" to congratulate him on being in the top 
+    /// 10 in Weekly Contest 326.
+    /// 
+    /// Example 1:
+    /// Input: num = 11891
+    /// Output: 99009
+    /// Explanation: 
+    /// To achieve the maximum value, Danny can remap the digit 1 to the 
+    /// digit 9 to yield 99899.
+    /// To achieve the minimum value, Danny can remap the digit 1 to the 
+    /// digit 0, yielding 890.
+    /// The difference between these two numbers is 99009.
+    ///
+    /// Example 2:
+    /// Input: num = 90
+    /// Output: 99
+    /// Explanation:
+    /// The maximum value that can be returned by the function is 99 (if 0 
+    /// is replaced by 9) and the minimum value that can be returned by the 
+    /// function is 0 (if 9 is replaced by 0).
+    /// Thus, we return 99.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= num <= 10^8
+    /// </summary>
+    int minMaxDifference(int num);
+
+    /// <summary>
+    /// Leet Code 2575. Find the Divisibility Array of a String
+    /// 
+    /// Medium
+    ///	
+    /// You are given a 0-indexed string word of length n consisting of 
+    /// digits, and a positive integer m.
+    ///
+    /// The divisibility array div of word is an integer array of length n 
+    /// such that:
+    ///
+    /// div[i] = 1 if the numeric value of word[0,...,i] is divisible by m, or
+    /// div[i] = 0 otherwise.
+    /// Return the divisibility array of word.
+    /// 
+    /// Example 1:
+    /// Input: word = "998244353", m = 3
+    /// Output: [1,1,0,0,0,1,1,0,0]
+    /// Explanation: There are only 4 prefixes that are divisible 
+    /// by 3: "9", "99", "998244", and "9982443".
+    ///
+    /// Example 2:
+    /// Input: word = "1010", m = 10
+    /// Output: [0,1,0,1]
+    /// Explanation: There are only 2 prefixes that are divisible 
+    /// by 10: "10", and "1010".
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^5
+    /// 2. word.length == n
+    /// 3. word consists of digits from 0 to 9
+    /// 4. 1 <= m <= 10^9
+    /// </summary>
+    vector<int> divisibilityArray(string word, int m);
 };
 #endif

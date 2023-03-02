@@ -996,14 +996,6 @@ void TestLeetCode801(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-
-
-
-
-
-
-
-
 void TestLeetCode808(void)
 {
     Logger::WriteMessage("Test Leet Code 808");
@@ -1012,8 +1004,6 @@ void TestLeetCode808(void)
     double result = leetCode.soupServings(N);
     Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
 }
-
-
 
 void TestLeetCode813(void)
 {
@@ -1702,22 +1692,22 @@ void TestLeetCode1095(void)
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeSort();
-    TestLeetCodeDP();
     TestLeetCodeArray();
-    TestLeetCodeMath();
-    TestLeetCodeGreedy();
-    TestLeetCodeBit();
-    TestLeetCodeBinarySearch();
-    TestLeetCodeTree();
-    TestLeetCodeTwoPointer();
-    TestLeetCodeString();
-    TestLeetCodeDesign();
     TestLeetCodeGraph();
+    TestLeetCodeTwoPointer();
+    TestLeetCodeMath();
+    TestLeetCodeDFS();
+    TestLeetCodeBit();
+    TestLeetCodeSort();
+    TestLeetCodeString();
+    TestLeetCodeBinarySearch();
+    TestLeetCodeDP();
+    TestLeetCodeGreedy();
+    TestLeetCodeTree();
+    TestLeetCodeDesign();
     TestLeetCodeLinkedList();
     TestLeetCodeStack();
     TestLeetCodeHashtable();
-    TestLeetCodeDFS();
     TestLeetCodeBFS();
     TestUSACO();
     TestLeetCode1176();

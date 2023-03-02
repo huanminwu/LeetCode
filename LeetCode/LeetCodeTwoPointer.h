@@ -740,5 +740,93 @@ public:
     /// 2. 1 <= nums[i], k <= 10^9
     /// </summary>
     long long countGood(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 2576. Find the Maximum Number of Marked Indices
+    /// 
+    /// Medium
+    ///	
+    /// You are given a 0-indexed integer array nums.
+    /// 
+    /// Initially, all of the indices are unmarked. You are allowed to make 
+    /// this operation any number of times:
+    ///
+    /// Pick two different unmarked indices i and j such that 
+    /// 2 * nums[i] <= nums[j], then mark i and j.
+    /// Return the maximum possible number of marked indices in nums using 
+    /// the above operation any number of times.
+    ///
+    /// Example 1:
+    /// Input: nums = [3,5,2,4]
+    /// Output: 2
+    /// Explanation: In the first operation: pick i = 2 and j = 1, the 
+    /// operation is allowed because 2 * nums[2] <= nums[1]. Then mark 
+    /// index 2 and 1.
+    /// It can be shown that there's no other valid operation so the 
+    /// answer is 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [9,2,5,4]
+    /// Output: 4
+    /// Explanation: In the first operation: pick i = 3 and j = 0, the 
+    /// operation is allowed because 2 * nums[3] <= nums[0]. Then mark 
+    /// index 3 and 0.
+    /// In the second operation: pick i = 1 and j = 2, the operation is 
+    /// allowed because 2 * nums[1] <= nums[2]. Then mark index 1 and 2.
+    /// Since there is no other operation, the answer is 4.
+    ///
+    /// Example 3:
+    /// Input: nums = [7,6,8]
+    /// Output: 0
+    /// Explanation: There is no valid operation to do, so the answer is 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    int maxNumOfMarkedIndices(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2555. Maximize Win From Two Segments
+    /// 
+    /// Medium
+    ///	
+    /// There are some prizes on the X-axis. You are given an integer array 
+    /// prizePositions that is sorted in non-decreasing order, where 
+    /// prizePositions[i] is the position of the ith prize. There could be 
+    /// different prizes at the same position on the line. You are also given 
+    /// an integer k.
+    ///
+    /// You are allowed to select two segments with integer endpoints. The 
+    /// length of each segment must be k. You will collect all prizes whose 
+    /// position falls within at least one of the two selected segments 
+    /// (including the endpoints of the segments). The two selected segments 
+    /// may intersect.
+    ///
+    /// For example if k = 2, you can choose segments [1, 3] and [2, 4], and 
+    /// you will win any prize i that satisfies 1 <= prizePositions[i] <= 3 
+    /// or 2 <= prizePositions[i] <= 4.
+    /// Return the maximum number of prizes you can win if you choose the two 
+    /// segments optimally.
+    ///
+    /// Example 1:
+    /// Input: prizePositions = [1,1,2,2,3,3,5], k = 2
+    /// Output: 7
+    /// Explanation: In this example, you can win all 7 prizes by selecting 
+    /// two segments [1, 3] and [3, 5].
+    ///
+    /// Example 2:
+    /// Input: prizePositions = [1,2,3,4], k = 0
+    /// Output: 2
+    /// Explanation: For this example, one choice for the segments 
+    /// is [3, 3] and [4, 4], and you will be able to get 2 prizes. 
+    ///
+    /// Constraints:
+    /// 1. 1 <= prizePositions.length <= 10^5
+    /// 2. 1 <= prizePositions[i] <= 10^9
+    /// 3. 0 <= k <= 10^9 
+    /// 4. prizePositions is sorted in non-decreasing order.
+    /// </summary>
+    int maximizeWin(vector<int>& prizePositions, int k);
 };
 #endif  // LeetCodeTwoPointer

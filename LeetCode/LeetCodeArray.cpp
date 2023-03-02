@@ -25518,5 +25518,369 @@ long long LeetCodeArray::countQuadruplets(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2559. Count Vowel Strings in Ranges
+/// 
+/// Medium
+///	
+/// You are given a 0-indexed array of strings words and a 2D array of 
+/// integers queries.
+///
+/// Each query queries[i] = [li, ri] asks us to find the number of strings 
+/// present in the range li to ri (both inclusive) of words that start and 
+/// end with a vowel.
+///
+/// Return an array ans of size queries.length, where ans[i] is the answer 
+/// to the ith query.
+///
+/// Note that the vowel letters are 'a', 'e', 'i', 'o', and 'u'.
+///
+/// Example 1:
+/// Input: words = ["aba","bcb","ece","aa","e"], 
+/// queries = [[0,2],[1,4],[1,1]]
+/// Output: [2,3,0]
+/// Explanation: The strings starting and ending with a vowel are "aba", 
+/// "ece", "aa" and "e".
+/// The answer to the query [0,2] is 2 (strings "aba" and "ece").
+/// to query [1,4] is 3 (strings "ece", "aa", "e").
+/// to query [1,1] is 0.
+/// We return [2,3,0].
+///
+/// Example 2:
+/// Input: words = ["a","e","i"], queries = [[0,2],[0,1],[2,2]]
+/// Output: [3,2,1]
+/// Explanation: Every string satisfies the conditions, so we return [3,2,1].
+/// 
+/// Constraints:
+/// 1. 1 <= words.length <= 10^5
+/// 2. 1 <= words[i].length <= 40
+/// 3. words[i] consists only of lowercase English letters.
+/// 4. sum(words[i].length) <= 3 * 10^5
+/// 5. 1 <= queries.length <= 10^5
+/// 6. 0 <= li <= ri < words.length
+/// </summary>
+vector<int> LeetCodeArray::vowelStrings(vector<string>& words, vector<vector<int>>& queries)
+{
+    vector<int> dp(words.size());
+    unordered_set<char> vowels = { 'a', 'e', 'i', 'o', 'u' };
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        if (i > 0) dp[i] = dp[i - 1];
+        if (vowels.count(words[i][0]) > 0 && vowels.count(words[i].back()) > 0)
+        {
+            dp[i]++;
+        }
+    }
+    vector<int> result(queries.size());
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        result[i] = dp[queries[i][1]];
+        if (queries[i][0] > 0)
+        {
+            result[i] -= dp[queries[i][0] - 1];
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 2562. Find the Array Concatenation Value
+/// 
+/// Easy
+///	
+/// You are given a 0-indexed integer array nums.
+///
+/// The concatenation of two numbers is the number formed by concatenating 
+/// their numerals.
+///
+/// For example, the concatenation of 15, 49 is 1549.
+/// The concatenation value of nums is initially equal to 0. Perform this 
+/// operation until nums becomes empty:
+///
+/// If there exists more than one number in nums, pick the first element 
+/// and last element in nums respectively and add the value of their 
+/// concatenation to the concatenation value of nums, then delete the 
+/// first and last element from nums.
+/// If one element exists, add its value to the concatenation value of 
+/// nums, then delete it.
+/// Return the concatenation value of the nums.
+/// 
+/// Example 1:
+/// Input: nums = [7,52,2,4]
+/// Output: 596
+/// Explanation: Before performing any operation, nums is [7,52,2,4] and 
+/// concatenation value is 0.
+///  - In the first operation:
+/// We pick the first element, 7, and the last element, 4.
+/// Their concatenation is 74, and we add it to the concatenation value, 
+/// so it becomes equal to 74.
+/// Then we delete them from nums, so nums becomes equal to [52,2].
+///  - In the second operation:
+/// We pick the first element, 52, and the last element, 2.
+/// Their concatenation is 522, and we add it to the concatenation value, 
+/// so it becomes equal to 596.
+/// Then we delete them from the nums, so nums becomes empty.
+/// Since the concatenation value is 596 so the answer is 596.
+///
+/// Example 2:
+/// Input: nums = [5,14,13,8,12]
+/// Output: 673
+/// Explanation: Before performing any operation, nums is [5,14,13,8,12] 
+/// and concatenation value is 0.
+/// - In the first operation:
+/// We pick the first element, 5, and the last element, 12.
+/// Their concatenation is 512, and we add it to the concatenation value, 
+/// so it becomes equal to 512.
+/// Then we delete them from the nums, so nums becomes equal to [14,13,8].
+/// - In the second operation:
+/// We pick the first element, 14, and the last element, 8.
+/// Their concatenation is 148, and we add it to the concatenation value, 
+/// so it becomes equal to 660.
+/// Then we delete them from the nums, so nums becomes equal to [13].
+///  - In the third operation:
+/// nums has only one element, so we pick 13 and add it to the 
+/// concatenation value, so it becomes equal to 673.
+/// Then we delete it from nums, so nums become empty.
+/// Since the concatenation value is 673 so the answer is 673.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 10^4
+/// </summary>
+long long LeetCodeArray::findTheArrayConcVal(vector<int>& nums)
+{
+    int left = 0;
+    int right = nums.size() - 1;
+    long long result = 0;
+    while (left <= right)
+    {
+        if (left == right)
+        {
+            result += (long long)nums[left];
+        }
+        else
+        {
+            string str = to_string(nums[left]) + to_string(nums[right]);
+            result += atol(str.c_str());
+        }
+        left++;
+        right--;
+    }
+    return result;
+};
+
+
+/// <summary>
+/// Leet Code 2570. Merge Two 2D Arrays by Summing Values
+/// 
+/// Easy
+///	
+/// You are given two 2D integer arrays nums1 and nums2.
+///
+/// nums1[i] = [idi, vali] indicate that the number with the id idi 
+/// has a value equal to vali.
+/// nums2[i] = [idi, vali] indicate that the number with the id idi 
+/// has a value equal to vali.
+/// Each array contains unique ids and is sorted in ascending order by id.
+///
+/// Merge the two arrays into one array that is sorted in ascending order 
+/// by id, respecting the following conditions:
+///
+/// Only ids that appear in at least one of the two arrays should be 
+/// included in the resulting array.
+/// Each id should be included only once and its value should be the sum 
+/// of the values of this id in the two arrays. If the id does not exist 
+/// in one of the two arrays then its value in that array is considered 
+/// to be 0.
+/// Return the resulting array. The returned array must be sorted in 
+/// ascending order by id.
+/// 
+/// Example 1:
+/// Input: nums1 = [[1,2],[2,3],[4,5]], nums2 = [[1,4],[3,2],[4,1]]
+/// Output: [[1,6],[2,3],[3,2],[4,6]]
+/// Explanation: The resulting array contains the following:
+/// - id = 1, the value of this id is 2 + 4 = 6.
+/// - id = 2, the value of this id is 3.
+/// - id = 3, the value of this id is 2.
+/// - id = 4, the value of this id is 5 + 1 = 6.
+///
+/// Example 2:
+/// Input: nums1 = [[2,4],[3,6],[5,5]], nums2 = [[1,3],[4,3]]
+/// Output: [[1,3],[2,4],[3,6],[4,3],[5,5]]
+/// Explanation: There are no common ids, so we just include each id with 
+/// its value in the resulting list.
+///
+/// Constraints:
+/// 1. 1 <= nums1.length, nums2.length <= 200
+/// 2. nums1[i].length == nums2[j].length == 2
+/// 3. 1 <= idi, vali <= 1000
+/// 4. Both arrays contain unique ids.
+/// 5. Both arrays are in strictly ascending order by id.
+/// </summary>
+vector<vector<int>> LeetCodeArray::mergeArrays(vector<vector<int>>& nums1, vector<vector<int>>& nums2)
+{
+    map<int, int> map;
+    for (size_t i = 0; i < nums1.size(); i++)
+    {
+        map[nums1[i][0]] += nums1[i][1];
+    }
+    for (size_t i = 0; i < nums2.size(); i++)
+    {
+        map[nums2[i][0]] += nums2[i][1];
+    }
+    vector<vector<int>> result;
+    for (auto itr : map)
+    {
+        result.push_back({ itr.first, itr.second });
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2573. Find the String with LCP
+/// 
+/// Hard
+///	
+/// We define the lcp matrix of any 0-indexed string word of n lowercase 
+/// English letters as an n x n grid such that:
+///
+/// lcp[i][j] is equal to the length of the longest common prefix between 
+/// the substrings word[i,n-1] and word[j,n-1].
+/// Given an n x n matrix lcp, return the alphabetically smallest string 
+/// word that corresponds to lcp. If there is no such string, return an 
+/// empty string.
+///
+/// A string a is lexicographically smaller than a string b (of the same 
+/// length) if in the first position where a and b differ, string a has 
+/// a letter that appears earlier in the alphabet than the corresponding 
+/// letter in b. For example, "aabd" is lexicographically smaller than 
+/// "aaca" because the first position they differ is at the third 
+/// letter, and 'b' comes before 'c'.
+///
+/// Example 1:
+/// Input: lcp = [[4,0,2,0],[0,3,0,1],[2,0,2,0],[0,1,0,1]]
+/// Output: "abab"
+/// Explanation: lcp corresponds to any 4 letter string with two 
+/// alternating letters. The lexicographically smallest of them is "abab".
+///
+/// Example 2:
+/// Input: lcp = [[4,3,2,1],[3,3,2,1],[2,2,2,1],[1,1,1,1]]
+/// Output: "aaaa"
+/// Explanation: lcp corresponds to any 4 letter string with a single 
+/// distinct letter. The lexicographically smallest of them is "aaaa". 
+///
+/// Example 3:
+/// Input: lcp = [[4,3,2,1],[3,3,2,1],[2,2,2,1],[1,1,1,3]]
+/// Output: ""
+/// Explanation: lcp[3][3] cannot be equal to 3 since word[3,...,3] 
+/// consists of only a single letter; Thus, no answer exists.
+///
+/// Constraints:
+/// 1. 1 <= n == lcp.length == lcp[i].length <= 1000
+/// 2. 0 <= lcp[i][j] <= n
+/// </summary>
+string LeetCodeArray::findTheString(vector<vector<int>>& lcp)
+{
+    int n = lcp.size();
+    string result(n, '#');
+    set<char> set;
+    for (int i = 0; i < 26; i++) set.insert('a' + i);
+    for (int i = 0; i < n; i++)
+    {
+        char ch = result[i];
+        if (result[i] == '#')
+        {
+            if (set.empty()) return "";
+            ch = *set.begin();
+            set.erase(ch);
+        }
+        for (int j = i; j < n; j++)
+        {
+            if (lcp[i][j] > 0)
+            {
+                if (result[j] == '#') result[j] = ch;
+            }
+        }
+    }
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (result[i] == result[j])
+            {
+                if (i == n - 1 || j == n - 1)
+                {
+                    if (lcp[i][j] != 1) return "";
+                }
+                else
+                {
+                    if (lcp[i][j] != lcp[i + 1][j + 1] + 1) return "";
+                }
+            }
+            else
+            {
+                if (lcp[i][j] != 0) return "";
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2574. Left and Right Sum Differences
+/// 
+/// Easy
+///	
+/// Given a 0-indexed integer array nums, find a 0-indexed integer 
+/// array answer where:
+///
+/// answer.length == nums.length.
+/// answer[i] = |leftSum[i] - rightSum[i]|.
+/// Where:
+///
+/// leftSum[i] is the sum of elements to the left of the index i in the 
+/// array nums. If there is no such element, leftSum[i] = 0.
+/// rightSum[i] is the sum of elements to the right of the index i in 
+/// the array nums. If there is no such element, rightSum[i] = 0.
+/// Return the array answer.
+/// 
+/// Example 1:
+/// Input: nums = [10,4,8,3]
+/// Output: [15,1,11,22]
+/// Explanation: The array leftSum is [0,10,14,22] and the array 
+/// rightSum is [15,11,3,0].
+/// The array answer is [|0 - 15|,|10 - 11|,|14 - 3|,|22 - 0|] 
+/// = [15,1,11,22].
+///
+/// Example 2:
+/// Input: nums = [1]
+/// Output: [0]
+/// Explanation: The array leftSum is [0] and the array rightSum is [0].
+/// The array answer is [|0 - 0|] = [0].
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+vector<int> LeetCodeArray::leftRigthDifference(vector<int>& nums)
+{
+    vector<int> leftSum(nums.size()), result(nums.size());
+    int left = 0, right = 0;
+
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        leftSum[i] = left;
+        left += nums[i];
+    }
+
+    for (int i = nums.size() - 1; i >=  0; i--)
+    {
+        result[i] = abs(leftSum[i] - right);
+        right += nums[i];
+    }
+    return result;
+}
 #pragma endregion
 

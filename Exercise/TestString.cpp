@@ -5924,8 +5924,22 @@ void TestLeetCode2531(void)
     Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2 + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2565(void)
+{
+    Logger::WriteMessage("Test Leet Code 2565");
+    LeetCodeString leetCode;
+    string s = "abacaba", t = "bzaa";
+    int result = leetCode.minimumScore(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+
+    s = "cde", t = "xyz";
+    result = leetCode.minimumScore(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2565();
     TestLeetCode2531();
     TestLeetCode2522();
     TestLeetCode2516();

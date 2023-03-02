@@ -3080,8 +3080,69 @@ void TestLeetCode2551(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2558(void)
+{
+    Logger::WriteMessage("Test Leet Code 2558");
+    LeetCodeSort leetCode;
+    vector<int> gifts = { 25, 64, 9, 4, 100 };
+    int k = 4;
+    long long result = leetCode.pickGifts(gifts, k);
+    Logger::WriteMessage(gifts);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    gifts = { 1,1,1,1 };
+    k = 4;
+    result = leetCode.pickGifts(gifts, k);
+    Logger::WriteMessage(gifts);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2561(void)
+{
+    Logger::WriteMessage("Test Leet Code 2561");
+    LeetCodeSort leetCode;
+    vector<int> basket1 = { 4,2,2,2 };
+    vector<int> basket2 = { 1,4,1,2 };
+    long long result = leetCode.minCost(basket1, basket2);
+    Logger::WriteMessage(basket1);
+    Logger::WriteMessage(basket2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    basket1 = { 2,3,4,1 };
+    basket2 = { 3,2,5,1 };
+    result = leetCode.minCost(basket1, basket2);
+    Logger::WriteMessage(basket1);
+    Logger::WriteMessage(basket2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    basket1 = { 1,1,2,2,3,3,4,4 };
+    basket2 = { 5,5,6,6,7,7,8,8 };
+    result = leetCode.minCost(basket1, basket2);
+    Logger::WriteMessage(basket1);
+    Logger::WriteMessage(basket2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2567(void)
+{
+    Logger::WriteMessage("Test Leet Code 2567");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 4, 3 };
+    int result = leetCode.minimizeSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,4,7,8,5 };
+    result = leetCode.minimizeSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2567();
+    TestLeetCode2561();
+    TestLeetCode2558();
     TestLeetCode2551();
     TestLeetCode2548();
     TestLeetCode2530();

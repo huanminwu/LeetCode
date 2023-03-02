@@ -8607,6 +8607,96 @@ long long LeetCodeDFS::minimumTime(vector<int>& power)
     return minimumTime(power, memo, 0, 1);
 }
 
+/// <summary>
+/// Leet Code 2572. Count the Number of Square-Free Subsets
+/// </summary>
+int LeetCodeDFS::squareFreeSubsets(vector<int>& nums, vector<vector<int>>& dp, 
+    int index, int mask, vector<int>& prime)
+{
+    int M = 1000000007;
+    if (index >= (int)nums.size())
+    {
+        return 0;
+    }
+    if (dp[index][mask] != -1) return dp[index][mask];
+    dp[index][mask] = squareFreeSubsets(nums, dp, index + 1, mask, prime);
+    int n = nums[index];
+    int new_mask = mask;
+    for (size_t i = 0; i < prime.size(); i++)
+    {
+        int bit = 1 << i;
+        while (n % prime[i] == 0)
+        {
+            if ((bit & new_mask) == 0)
+            {
+                new_mask |= bit;
+            }
+            else
+            {
+                return dp[index][mask];
+            }
+            n /= prime[i];
+        }
+    }
+    dp[index][mask] = (dp[index][mask] + 1 + squareFreeSubsets(nums, dp, index + 1, new_mask, prime))% M;
+    return dp[index][mask];
+}
+
+/// <summary>
+/// Leet Code 2572. Count the Number of Square-Free Subsets
+/// 
+/// Medium
+///	
+/// You are given a positive integer 0-indexed array nums.
+///
+/// A subset of the array nums is square-free if the product of its 
+/// elements is a square-free integer.
+///
+/// A square-free integer is an integer that is divisible by no square 
+/// number other than 1.
+///
+/// Return the number of square-free non-empty subsets of the array 
+/// nums. Since the answer may be too large, return it modulo 10^9 + 7.
+///
+/// A non-empty subset of nums is an array that can be obtained by 
+/// deleting some (possibly none but not all) elements from nums. 
+/// Two subsets are different if and only if the chosen indices to 
+/// delete are different.
+/// 
+/// Example 1:
+/// Input: nums = [3,4,4,5]
+/// Output: 3
+/// Explanation: There are 3 square-free subsets in this example:
+/// - The subset consisting of the 0th element [3]. The product of 
+///   its elements is 3, which is a square-free integer.
+/// - The subset consisting of the 3rd element [5]. The product of 
+///   its elements is 5, which is a square-free integer.
+/// - The subset consisting of 0th and 3rd elements [3,5]. The product 
+///   of its elements is 15, which is a square-free integer.
+/// It can be proven that there are no more than 3 square-free 
+/// subsets in the given array.
+///
+/// Example 2:
+/// Input: nums = [1]
+/// Output: 1
+/// Explanation: There is 1 square-free subset in this example:
+/// - The subset consisting of the 0th element [1]. The product 
+///   of its elements is 1, which is a square-free integer.
+/// It can be proven that there is no more than 1 square-free subset 
+/// in the given array.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 30
+/// </summary>
+int LeetCodeDFS::squareFreeSubsets(vector<int>& nums)
+{
+    vector<vector<int>> dp(nums.size(), vector<int>(1024, -1));
+    vector<int> prime = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
+    squareFreeSubsets(nums, dp, 0, 0, prime);
+    return dp[0][0];
+}
+
 #pragma endregion
 
 

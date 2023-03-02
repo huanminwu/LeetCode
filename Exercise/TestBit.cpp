@@ -948,8 +948,89 @@ void TestLeetCode2546(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2564(void)
+{
+    Logger::WriteMessage("Test Leet Code 2564");
+    LeetCodeBit leetCode;
+    string s = "101101";
+    vector<vector<int>> queries = { {0, 5},{1, 2} };
+    vector<vector<int>> result = leetCode.substringXorQueries(s, queries);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    s = "0101";
+    queries = { {12, 8} };
+    result = leetCode.substringXorQueries(s, queries);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    s = "1"; 
+    queries = { {4, 5} };
+    result = leetCode.substringXorQueries(s, queries);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2568(void)
+{
+    Logger::WriteMessage("Test Leet Code 2568");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 2, 1 };
+    int result = leetCode.minImpossibleOR(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5, 3, 2 };
+    result = leetCode.minImpossibleOR(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2571(void)
+{
+    Logger::WriteMessage("Test Leet Code 2571");
+    LeetCodeBit leetCode;
+    int n = 39;
+    int result = leetCode.minOperations(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 54;
+    result = leetCode.minOperations(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2569(void)
+{
+    Logger::WriteMessage("Test Leet Code 2569");
+    LeetCodeBit leetCode;
+    vector<int> nums1 = { 1, 0, 1 };
+    vector<int> nums2 = { 0, 0, 0 };
+    vector<vector<int>> queries = { {1, 1, 1},{2, 1, 0},{3, 0, 0} };
+    vector<long long> result = leetCode.handleQuery(nums1, nums2, queries);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums1 = { 1 };
+    nums2 = { 5 };
+    queries = { {2, 0, 0},{3, 0, 0} };
+    result = leetCode.handleQuery(nums1, nums2, queries);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2569();
+    TestLeetCode2571();
+    TestLeetCode2568();
+    TestLeetCode2564();
     TestLeetCode2546();
     TestLeetCode2527();
     TestLeetCode2505();

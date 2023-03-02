@@ -4929,8 +4929,52 @@ void TestLeetCode2508(void)
     Logger::WriteMessage("n = " + to_string(n) + "result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2556(void)
+{
+    Logger::WriteMessage("Test Leet Code 2556");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid = 
+    { 
+        {1, 1, 1},{1, 0, 0},{1, 1, 1} 
+    };
+    bool result = leetCode.isPossibleToCutPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    grid =
+    {
+        {1,1,1},{1,0,1},{1,1,1}
+    };
+    result = leetCode.isPossibleToCutPath(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2577(void)
+{
+    Logger::WriteMessage("Test Leet Code 2577");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid =
+    {
+        {0,1,3,2}, {5,1,2,5}, {4,3,8,6}
+    };
+    int result = leetCode.minimumTime(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {0,2,4} ,{3,2,1},{1,0,4}
+    };
+    result = leetCode.minimumTime(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2577();
+    TestLeetCode2556();
     TestLeetCode2508();
     TestLeetCode2503();
     TestLeetCode2493();

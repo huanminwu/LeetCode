@@ -8342,8 +8342,110 @@ void TestLeetCode2552(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2559(void)
+{
+    Logger::WriteMessage("Test Leet Code 2559");
+    LeetCodeArray leetCode;
+    vector<string> words = { "aba", "bcb", "ece", "aa", "e" };
+    vector<vector<int>> queries = { {0, 2},{1, 4},{1, 1} };
+    vector<int> result = leetCode.vowelStrings(words, queries);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    words = { "a","e","i" };
+    queries = { {0, 2},{0, 1},{2, 2} };
+    result = leetCode.vowelStrings(words, queries);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2562(void)
+{
+    Logger::WriteMessage("Test Leet Code 2562");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 7,52,2,4 };
+    long long result = leetCode.findTheArrayConcVal(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,14,13,8,12 };
+    result = leetCode.findTheArrayConcVal(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2570(void)
+{
+    Logger::WriteMessage("Test Leet Code 2570");
+    LeetCodeArray leetCode;
+    vector<vector<int>> nums1 = { {1, 2},{2, 3},{4, 5} };
+    vector<vector<int>> nums2 = { {1, 4},{3, 2},{4, 1} };
+    vector<vector<int>> result = leetCode.mergeArrays(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(result);
+
+    nums1 = { {2, 4},{3, 6},{5, 5} };
+    nums2 = { {1, 3},{4, 3} };
+    result = leetCode.mergeArrays(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2574(void)
+{
+    Logger::WriteMessage("Test Leet Code 2574");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 10, 4, 8, 3 };
+    vector<int> result = leetCode.leftRigthDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1 };
+    result = leetCode.leftRigthDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2573(void)
+{
+    Logger::WriteMessage("Test Leet Code 2573");
+    LeetCodeArray leetCode;
+    vector<vector<int>> lcp =
+    {
+        {4, 0, 2, 0},{0, 3, 0, 1},{2, 0, 2, 0},{0, 1, 0, 1}
+    };
+    string result = leetCode.findTheString(lcp);
+    Logger::WriteMessage(lcp);
+    Logger::WriteMessage(result);
+
+    lcp =
+    {
+        {4,3,2,1} ,{3,3,2,1},{2,2,2,1},{1,1,1,1}
+    };
+    result = leetCode.findTheString(lcp);
+    Logger::WriteMessage(lcp);
+    Logger::WriteMessage(result);
+
+    lcp =
+    {
+        {4,3,2,1} ,{3,3,2,1},{2,2,2,1},{1,1,1,3}
+    };
+    result = leetCode.findTheString(lcp);
+    Logger::WriteMessage(lcp);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2573();
+    TestLeetCode2574();
+    TestLeetCode2570();
+    TestLeetCode2562();
+    TestLeetCode2559();
     TestLeetCode2552();
     TestLeetCode2541();
     TestLeetCode2545();

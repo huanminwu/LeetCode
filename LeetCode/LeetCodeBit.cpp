@@ -3042,4 +3042,270 @@ bool LeetCodeBit::makeStringsEqual(string s, string target)
     return false;
 }
 
+/// <summary>
+/// Leet Code 2564. Substring XOR Queries
+/// 
+/// Medium
+///	
+/// You are given a binary string s, and a 2D integer array queries where 
+/// queries[i] = [firsti, secondi].
+///
+/// For the ith query, find the shortest substring of s whose decimal 
+/// value, val, yields secondi when bitwise XORed with firsti. In other 
+/// words, val ^ firsti == secondi.
+///
+/// The answer to the ith query is the endpoints (0-indexed) of the 
+/// substring [lefti, righti] or [-1, -1] if no such substring exists. 
+/// If there are multiple answers, choose the one with the minimum lefti.
+///
+/// Return an array ans where ans[i] = [lefti, righti] is the answer to 
+/// the ith query.
+///
+/// A substring is a contiguous non-empty sequence of characters within 
+/// a string.
+/// 
+/// Example 1:
+/// Input: s = "101101", queries = [[0,5],[1,2]]
+/// Output: [[0,2],[2,3]]
+/// Explanation: For the first query the substring in range [0,2] is "101" 
+/// which has a decimal value of 5, and 5 ^ 0 = 5, hence the answer to the 
+/// first query is [0,2]. In the second query, the substring in 
+/// range [2,3] is "11", and has a decimal value of 3, and 3 ^ 1 = 2. 
+/// So, [2,3] is returned for the second query. 
+///
+/// Example 2:
+/// Input: s = "0101", queries = [[12,8]]
+/// Output: [[-1,-1]]
+/// Explanation: In this example there is no substring that answers 
+/// the query, hence [-1,-1] is returned.
+///
+/// Example 3:
+/// Input: s = "1", queries = [[4,5]]
+/// Output: [[0,0]]
+/// Explanation: For this example, the substring in range [0,0] has a 
+/// decimal value of 1, and 1 ^ 4 = 5. So, the answer is [0,0].
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^4
+/// 2. s[i] is either '0' or '1'.
+/// 3. 1 <= queries.length <= 10^5
+/// 4. 0 <= firsti, secondi <= 10^9
+/// </summary>
+vector<vector<int>> LeetCodeBit::substringXorQueries(string s, vector<vector<int>>& queries)
+{
+    vector<vector<int>> result(queries.size(), { -1, -1 });
+    unordered_map<int, vector<int>> num_map;
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        int val = queries[i][0] ^ queries[i][1];
+        num_map[val].push_back(i);
+    }
+    for (int i = 0; i < 31; i++)
+    {
+        int val = 0;
+        for (int j = 0; j + i < (int)s.size(); j++)
+        {
+            int val = 0;
+            for (int k = 0; k <= i; k++)
+            {
+                val *= 2;
+                val = val + s[j + k] - '0';
+            }
+            if (num_map.count(val) > 0)
+            {
+                for (size_t k = 0; k < num_map[val].size(); k++)
+                {
+                    result[num_map[val][k]] = { j, i + j };
+                }
+                num_map.erase(val);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2568. Minimum Impossible OR
+/// 
+/// Medium
+///	
+/// You are given a 0-indexed integer array nums.
+///
+/// We say that an integer x is expressible from nums if there exist 
+/// some integers 0 <= index1 < index2 < ... < indexk < nums.length 
+/// for which nums[index1] | nums[index2] | ... | nums[indexk] = x. 
+/// In other words, an integer is expressible if it can be written as 
+/// the bitwise OR of some subsequence of nums.
+///
+/// Return the minimum positive non-zero integer that is not 
+/// expressible from nums.
+/// 
+/// Example 1:
+/// Input: nums = [2,1]
+/// Output: 4
+/// Explanation: 1 and 2 are already present in the array. We know 
+/// that 3 is expressible, since nums[0] | nums[1] = 2 | 1 = 3. 
+/// Since 4 is not expressible, we return 4.
+///
+/// Example 2:
+/// Input: nums = [5,3,2]
+/// Output: 1
+/// Explanation: We can show that 1 is the smallest number that is not 
+/// expressible.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeBit::minImpossibleOR(vector<int>& nums)
+{
+    unordered_set<int> num_set;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        num_set.insert(nums[i]);
+    }
+    int result = 1;
+    for (int i = 0; i < 31; i++)
+    {
+        if (num_set.count(result) == 0) return result;
+        result <<= 1;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2571. Minimum Operations to Reduce an Integer to 0
+/// 
+/// Medium
+///	
+/// You are given a positive integer n, you can do the following operation 
+/// any number of times:
+///
+/// Add or subtract a power of 2 from n.
+/// Return the minimum number of operations to make n equal to 0.
+///
+/// A number x is power of 2 if x == 2^i where i >= 0.
+/// 
+/// Example 1:
+/// Input: n = 39
+/// Output: 3
+/// Explanation: We can do the following operations:
+/// - Add 2^0 = 1 to n, so now n = 40.
+/// - Subtract 2^3 = 8 from n, so now n = 32.
+/// - Subtract 2^5 = 32 from n, so now n = 0.
+/// It can be shown that 3 is the minimum number of operations we need 
+/// to make n equal to 0.
+///
+/// Example 2:
+/// Input: n = 54
+/// Output: 3
+/// Explanation: We can do the following operations:
+/// - Add 2^1 = 2 to n, so now n = 56.
+/// - Add 2^3 = 8 to n, so now n = 64.
+/// - Subtract 2^6 = 64 from n, so now n = 0.
+/// So the minimum number of operations is 3.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// </summary>
+int LeetCodeBit::minOperations(int n)
+{
+    int result = 0, count = 0;
+    while (n > 0)
+    {
+        int bit = n % 2;
+        n /= 2;
+        if (bit == 1) count++;
+        else
+        {
+            if (count > 1)
+            {
+                result++;
+                count = 1;
+            }
+            else if (count == 1)
+            {
+                result++;
+                count = 0;
+            }
+        }
+    }
+    if (count > 1) result += 2;
+    else if (count == 1) result++;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2569. Handling Sum Queries After Update
+/// 
+/// Hard
+///	
+/// You are given two 0-indexed arrays nums1 and nums2 and a 2D array 
+/// queries of queries. There are three types of queries:
+///
+/// For a query of type 1, queries[i] = [1, l, r]. Flip the values 
+/// from 0 to 1 and from 1 to 0 in nums1 from index l to index r. 
+/// Both l and r are 0-indexed.
+/// For a query of type 2, queries[i] = [2, p, 0]. For every 
+/// index 0 <= i < n, set nums2[i] = nums2[i] + nums1[i] * p.
+/// For a query of type 3, queries[i] = [3, 0, 0]. Find the sum of the 
+/// elements in nums2.
+/// Return an array containing all the answers to the third type queries.
+///
+/// Example 1:
+/// Input: nums1 = [1,0,1], nums2 = [0,0,0], 
+/// queries = [[1,1,1],[2,1,0],[3,0,0]]
+/// Output: [3]
+/// Explanation: After the first query nums1 becomes [1,1,1]. After the 
+/// second query, nums2 becomes [1,1,1], so the answer to the third 
+/// query is 3. Thus, [3] is returned.
+///
+/// Example 2:
+/// Input: nums1 = [1], nums2 = [5], queries = [[2,0,0],[3,0,0]]
+/// Output: [5]
+/// Explanation: After the first query, nums2 remains [5], so 
+/// the answer to the second query is 5. Thus, [5] is returned.
+///
+/// Constraints:
+/// 1. 1 <= nums1.length,nums2.length <= 10^5
+/// 2. nums1.length = nums2.length
+/// 3. 1 <= queries.length <= 10^5
+/// </summary>
+vector<long long> LeetCodeBit::handleQuery(vector<int>& nums1, vector<int>& nums2, vector<vector<int>>& queries)
+{
+    vector<long long> result;
+    size_t n = nums1.size();
+    #define N 100005
+    std::bitset<N> bit_set;
+    std::bitset<N> full_bits(0);
+    full_bits.flip();
+
+    long long sum = 0;
+    for (size_t i = 0; i < nums1.size(); i++)
+    {
+        if (nums1[i] == 1) bit_set.set(i);
+        sum += (long long)nums2[i];
+    }
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        vector<int> q = queries[i];
+        if (q[0] == 1)
+        {
+            int sz = q[2] - q[1] + 1;
+            std::bitset<N> mask(full_bits << sz);
+            mask = ~mask;
+            mask <<= q[1];
+            bit_set ^= mask;
+        }
+        else if (q[0] == 2)
+        {
+            sum += (long long)q[1] * (long long)bit_set.count();
+        }
+        else
+        {
+            result.push_back(sum);
+        }
+    }
+    return result;
+}
 #pragma endregion

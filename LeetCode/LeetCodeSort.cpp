@@ -9600,4 +9600,229 @@ long long LeetCodeSort::putMarbles(vector<int>& weights, int k)
     }
     return max_val - min_val;
 }
+
+/// <summary>
+/// Leet Code 2558. Take Gifts From the Richest Pile
+/// 
+/// Easy
+///	
+/// You are given an integer array gifts denoting the number of gifts 
+/// in various piles. Every second, you do the following:
+///
+/// Choose the pile with the maximum number of gifts.
+/// If there is more than one pile with the maximum number of gifts, 
+/// choose any.
+/// Leave behind the floor of the square root of the number of gifts 
+/// in the pile. Take the rest of the gifts.
+/// Return the number of gifts remaining after k seconds.
+/// 
+/// Example 1:
+/// Input: gifts = [25,64,9,4,100], k = 4
+/// Output: 29
+/// Explanation: 
+/// The gifts are taken in the following way:
+/// - In the first second, the last pile is chosen and 10 gifts are left 
+///   behind.
+/// - Then the second pile is chosen and 8 gifts are left behind.
+/// - After that the first pile is chosen and 5 gifts are left behind.
+/// - Finally, the last pile is chosen again and 3 gifts are left behind.
+/// The final remaining gifts are [5,8,9,4,3], so the total number of 
+/// gifts remaining is 29.
+///
+/// Example 2:
+/// Input: gifts = [1,1,1,1], k = 4
+/// Output: 4
+/// Explanation: 
+/// In this case, regardless which pile you choose, you have to leave 
+/// behind 1 gift in each pile. 
+/// That is, you can't take any pile with you. 
+/// So, the total gifts remaining are 4.
+///
+/// Constraints:
+/// 1. 1 <= gifts.length <= 10^3
+/// 2. 1 <= gifts[i] <= 10^9
+/// 3. 1 <= k <= 10^3
+/// </summary>
+long long LeetCodeSort::pickGifts(vector<int>& gifts, int k)
+{
+    long long result = 0;
+    priority_queue<int> pq;
+    for (size_t i = 0; i < gifts.size(); i++)
+    {
+        pq.push(gifts[i]);
+        result += gifts[i];
+    }
+    for (int i = 0; i < k; i++)
+    {
+        int val = pq.top();
+        pq.pop();
+        result -= val;
+        val = (int)sqrt(val);
+        result += val;
+        pq.push(val);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2561. Rearranging Fruits
+/// 
+/// Hard
+///	
+/// You have two fruit baskets containing n fruits each. You are given 
+/// two 0-indexed integer arrays basket1 and basket2 representing the 
+/// cost of fruit in each basket. You want to make both baskets equal. 
+/// To do so, you can use the following operation as many times as you 
+/// want:
+///
+/// Chose two indices i and j, and swap the ith fruit of basket1 with 
+/// the jth fruit of basket2.
+/// The cost of the swap is min(basket1[i],basket2[j]).
+/// Two baskets are considered equal if sorting them according to the 
+/// fruit cost makes them exactly the same baskets.
+///
+/// Return the minimum cost to make both the baskets equal or -1 if 
+/// impossible.
+///
+/// Example 1:
+/// Input: basket1 = [4,2,2,2], basket2 = [1,4,1,2]
+/// Output: 1
+/// Explanation: Swap index 1 of basket1 with index 0 of basket2, which 
+/// has cost 1. Now basket1 = [4,1,2,2] and basket2 = [2,4,1,2]. 
+/// Rearranging both the arrays makes them equal.
+///
+/// Example 2:
+/// Input: basket1 = [2,3,4,1], basket2 = [3,2,5,1]
+/// Output: -1
+/// Explanation: It can be shown that it is impossible to make both the 
+/// baskets equal.
+/// 
+/// Constraints:
+/// 1. basket1.length == bakste2.length
+/// 2. 1 <= basket1.length <= 10^5
+/// 3. 1 <= basket1[i],basket2[i] <= 10^9
+/// </summary>
+long long LeetCodeSort::minCost(vector<int>& basket1, vector<int>& basket2)
+{
+    unordered_map<int, int> fruit1, fruit2, both;
+    int smallest = INT_MAX;
+    for (size_t i = 0; i < basket1.size(); i++)
+    {
+        fruit1[basket1[i]]++;
+        fruit2[basket2[i]]++;
+        both[basket1[i]]++;
+        both[basket2[i]]++;
+        smallest = min(smallest, basket1[i]);
+        smallest = min(smallest, basket2[i]);
+    }
+    map<int, int> pos1, pos2;
+    long long result = 0;
+    for (auto itr : both)
+    {
+        int diff = fruit1[itr.first] * 2 - both[itr.first];
+        if (diff == 0) continue;
+        if (diff % 2 == 1) return -1;
+        diff /= 2;
+        if (diff > 0)
+        {
+            pos1[itr.first] = diff;
+        }
+        else
+        {
+            pos2[itr.first] = -diff;
+        }
+    }
+    while (!pos1.empty() && !pos2.empty())
+    {
+        int min_count = min(pos1.begin()->second, pos2.rbegin()->second);
+        int min_val = min(pos1.begin()->first, pos2.rbegin()->first);
+        min_val = min(min_val, 2 * smallest);
+        result += (long long)min_val * (long long)(min_count);
+        if (pos1.begin()->second > min_count)
+        {
+            pos1.begin()->second -= min_count;
+        }
+        else
+        {
+            pos1.erase(pos1.begin()->first);
+        }
+        if (pos2.rbegin()->second > min_count)
+        {
+            pos2.rbegin()->second -= min_count;
+        }
+        else
+        {
+            pos2.erase(pos2.rbegin()->first);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2567. Minimum Score by Changing Two Elements
+/// 
+/// Medium
+///	
+/// You are given a 0-indexed integer array nums.
+///
+/// The low score of nums is the minimum value of |nums[i] - nums[j]| 
+/// over all 0 <= i < j < nums.length.
+/// The high score of nums is the maximum value of |nums[i] - nums[j]| 
+/// over all 0 <= i < j < nums.length.
+/// The score of nums is the sum of the high and low scores of nums.
+/// To minimize the score of nums, we can change the value of at most 
+/// two elements of nums.
+///
+/// Return the minimum possible score after changing the value of at 
+/// most two elements of nums.
+///
+/// Note that |x| denotes the absolute value of x.
+///
+/// Example 1:
+/// Input: nums = [1,4,3]
+/// Output: 0
+/// Explanation: Change value of nums[1] and nums[2] to 1 so that nums 
+/// becomes [1,1,1]. Now, the value of |nums[i] - nums[j]| is always 
+/// equal to 0, so we return 0 + 0 = 0.
+///
+/// Example 2:
+/// Input: nums = [1,4,7,8,5]
+/// Output: 3
+/// Explanation: Change nums[0] and nums[1] to be 6. Now nums 
+/// becomes [6,6,7,8,5]. 
+/// Our low score is achieved when i = 0 and j = 1, in which 
+/// case |nums[i] - nums[j]| = |6 - 6| = 0.
+/// Our high score is achieved when i = 3 and j = 4, in which 
+/// case |nums[i] - nums[j]| = |8 - 5| = 3.
+/// The sum of our high and low score is 3, which we can prove to 
+/// be minimal.
+///
+/// Constraints:
+/// 1. 3 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeSort::minimizeSum(vector<int>& nums)
+{
+    set<pair<int, int>> min_set, max_set;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        min_set.insert(make_pair(nums[i], i));
+        if (min_set.size() > 3)
+        {
+            pair<int, int> num = *min_set.rbegin();
+            min_set.erase(num);
+            max_set.insert(num);
+            if (max_set.size() > 3) max_set.erase(max_set.begin());
+        }
+    }
+    vector<int> arr;
+    for (auto itr : min_set) arr.push_back(itr.first);
+    for (auto itr : max_set) arr.push_back(itr.first);
+    int left = 0, right = arr.size() - 1;
+    int result = INT_MAX;
+    result = min(result, arr[right - 1] - arr[left + 1]);
+    result = min(result, arr[right] - arr[left + 2]);
+    result = min(result, arr[right - 2] - arr[left]);
+    return result;
+}
 #pragma endregion
