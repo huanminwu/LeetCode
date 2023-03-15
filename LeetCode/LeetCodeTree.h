@@ -6466,6 +6466,108 @@ public:
     /// 6. 1 <= price[i] <= 10^5
     /// </summary>
     long long maxOutput(int n, vector<vector<int>>& edges, vector<int>& price);
+
+    /// <summary>
+    /// Leet Code 2583. Kth Largest Sum in a Binary Tree
+    /// 
+    /// Medium
+    ///	
+    /// You are given the root of a binary tree and a positive integer k.
+    /// The level sum in the tree is the sum of the values of the nodes that 
+    /// are on the same level.
+    ///
+    /// Return the kth largest level sum in the tree (not necessarily 
+    /// distinct). If there are fewer than k levels in the tree, return -1.
+    ///
+    /// Note that two nodes are on the same level if they have the same 
+    /// distance from the root.
+    ///
+    /// Example 1:
+    /// Input: root = [5,8,9,2,1,3,7,4,6], k = 2
+    /// Output: 13
+    /// Explanation: The level sums are the following:
+    /// - Level 1: 5.
+    /// - Level 2: 8 + 9 = 17.
+    /// - Level 3: 2 + 1 + 3 + 7 = 13.
+    /// - Level 4: 4 + 6 = 10.
+    /// The 2nd largest level sum is 13.
+    ///
+    /// Example 2:
+    /// Input: root = [1,2,null,3], k = 1
+    /// Output: 3
+    /// Explanation: The largest level sum is 3.
+    ///
+    /// Constraints:
+    /// 1. The number of nodes in the tree is n.
+    /// 2. 2 <= n <= 10^5
+    /// 3. 1 <= Node.val <= 10^6
+    /// 4. 1 <= k <= n
+    /// </summary>
+    long long kthLargestLevelSum(TreeNode* root, int k);
+
+    /// <summary>
+    /// Leet Code 2581. Count Number of Possible Root Nodes
+    /// 
+    /// Hard
+    ///	
+    /// Alice has an undirected tree with n nodes labeled from 0 to n - 1. 
+    /// The tree is represented as a 2D integer array edges of length n - 1 
+    /// where edges[i] = [ai, bi] indicates that there is an edge between 
+    /// nodes ai and bi in the tree.
+    ///
+    /// Alice wants Bob to find the root of the tree. She allows Bob to make 
+    /// several guesses about her tree. In one guess, he does the following:
+    ///
+    /// Chooses two distinct integers u and v such that there exists an 
+    /// edge [u, v] in the tree.
+    /// He tells Alice that u is the parent of v in the tree.
+    /// Bob's guesses are represented by a 2D integer array guesses where 
+    /// guesses[j] = [uj, vj] indicates Bob guessed uj to be the parent of vj.
+    /// 
+    /// Alice being lazy, does not reply to each of Bob's guesses, but just 
+    /// says that at least k of his guesses are true.
+    /// 
+    /// Given the 2D integer arrays edges, guesses and the integer k, return 
+    /// the number of possible nodes that can be the root of Alice's tree. 
+    /// If there is no such tree, return 0.
+    /// 
+    /// Example 1:
+    /// Input: edges = [[0,1],[1,2],[1,3],[4,2]], 
+    /// guesses = [[1,3],[0,1],[1,0],[2,4]], k = 3
+    /// Output: 3
+    /// Explanation: 
+    /// Root = 0, correct guesses = [1,3], [0,1], [2,4]
+    /// Root = 1, correct guesses = [1,3], [1,0], [2,4]
+    /// Root = 2, correct guesses = [1,3], [1,0], [2,4]
+    /// Root = 3, correct guesses = [1,0], [2,4]
+    /// Root = 4, correct guesses = [1,3], [1,0]
+    /// Considering 0, 1, or 2 as root node leads to 3 correct guesses.
+    ///
+    /// Example 2:
+    /// Input: edges = [[0,1],[1,2],[2,3],[3,4]], 
+    /// guesses = [[1,0],[3,4],[2,1],[3,2]], k = 1
+    /// Output: 5
+    /// Explanation: 
+    /// Root = 0, correct guesses = [3,4]
+    /// Root = 1, correct guesses = [1,0], [3,4]
+    /// Root = 2, correct guesses = [1,0], [2,1], [3,4]
+    /// Root = 3, correct guesses = [1,0], [2,1], [3,2], [3,4]
+    /// Root = 4, correct guesses = [1,0], [2,1], [3,2]
+    /// Considering any node as root will give at least 1 correct guess. 
+    ///
+    /// Constraints:
+    /// 1. edges.length == n - 1
+    /// 2. 2 <= n <= 10^5
+    /// 3. 1 <= guesses.length <= 10^5
+    /// 4. 0 <= ai, bi, uj, vj <= n - 1
+    /// 5. ai != bi
+    /// 6. uj != vj
+    /// 7. edges represents a valid tree.
+    /// 8. guesses[j] is an edge of the tree.
+    /// 9. guesses is unique.
+    /// 10. 0 <= k <= guesses.length
+    /// </summary>
+    int rootCount(vector<vector<int>>& edges, vector<vector<int>>& guesses, int k);
 #pragma endregion
 };
 

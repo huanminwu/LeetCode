@@ -3682,8 +3682,65 @@ void TestLeetCode2538(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2583(void)
+{
+    Logger::WriteMessage("Test Leet Code 2583");
+    LeetCodeTree leetCode;
+    string input = "[5,8,9,2,1,3,7,4,6]";
+    int k = 2;
+    TreeNode* root = leetCode.deserialize(input);
+    long long result = leetCode.kthLargestLevelSum(root, k);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[1,2,null,3]";
+    k = 1;
+    root = leetCode.deserialize(input);
+    result = leetCode.kthLargestLevelSum(root, k);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+}
+
+void TestLeetCode2581(void)
+{
+    Logger::WriteMessage("Test Leet Code 2581");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = { {0, 1},{1, 2},{1, 3},{4, 2} };
+    vector<vector<int>> guesses = { {1, 3},{0, 1},{1, 0},{2, 4} };
+    int k = 3;
+    int result = leetCode.rootCount(edges, guesses, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(guesses);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {0, 1},{1, 2},{2, 3},{3, 4} };
+    guesses = { {1, 0},{3, 4},{2, 1},{3, 2} };
+    k = 1;
+    result = leetCode.rootCount(edges, guesses, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(guesses);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges =
+    {
+        {0, 1},{2, 0},{0, 3},{4, 2},{3, 5},{6, 0},
+        {1, 7},{2, 8},{2, 9},{4, 10},{9, 11},{3, 12},
+        {13, 8},{14, 9},{15, 9},{10, 16}
+    };
+    guesses = { {8,2} ,{12,3},{0,1},{16,10} };
+    k = 2;
+    result = leetCode.rootCount(edges, guesses, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(guesses);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode2581();
+    TestLeetCode2583();
     TestLeetCode2538();
     TestLeetCode2509();
     TestLeetCode2458();

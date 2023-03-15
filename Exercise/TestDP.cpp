@@ -3595,8 +3595,32 @@ void TestLeetCode2547(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2585(void)
+{
+    Logger::WriteMessage("Test Leet Code 2585");
+    LeetCodeDP leetCode;
+    int target = 6; 
+    vector<vector<int>> types = { {6, 1},{3, 2},{2, 3} };
+    int result = leetCode.waysToReachTarget(target, types);
+    Logger::WriteMessage(types);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    target = 5;
+    types = { {50, 1},{50, 2},{50, 5} };
+    result = leetCode.waysToReachTarget(target, types);
+    Logger::WriteMessage(types);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    target = 18;
+    types = { {6, 1},{3, 2},{2, 3} };
+    result = leetCode.waysToReachTarget(target, types);
+    Logger::WriteMessage(types);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2585();
     TestLeetCode2547();
     TestLeetCode2533();
     TestLeetCode2430();

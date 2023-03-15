@@ -5937,8 +5937,26 @@ void TestLeetCode2565(void)
     Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
 }
 
+void TestLeetCode2586(void)
+{
+    Logger::WriteMessage("Test Leet Code 2586");
+    LeetCodeString leetCode;
+    vector<string> words = { "are", "amy", "u" };
+    int left = 0, right = 2;
+    int result = leetCode.vowelStrings(words, left, right);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("left = " + to_string(left) + "; right = " + to_string(right) + "; result = " + to_string(result));
+
+    words = { "hey","aeo","mu","ooo","artro" };
+    left = 1, right = 4;
+    result = leetCode.vowelStrings(words, left, right);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("left = " + to_string(left) + "; right = " + to_string(right) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2586();
     TestLeetCode2565();
     TestLeetCode2531();
     TestLeetCode2522();

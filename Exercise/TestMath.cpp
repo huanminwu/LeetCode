@@ -5583,9 +5583,71 @@ void TestLeetCode2575(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2578(void)
+{
+    Logger::WriteMessage("Test Leet Code 2578");
+    LeetCodeMath leetCode;
+    int num = 4325;
+    int result = leetCode.splitNum(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+
+    num = 687;
+    result = leetCode.splitNum(num);
+    Logger::WriteMessage("num = " + to_string(num) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2582(void)
+{
+    Logger::WriteMessage("Test Leet Code 2582");
+    LeetCodeMath leetCode;
+    int n = 4, time = 5;
+    int result = leetCode.passThePillow(n, time);
+    Logger::WriteMessage("n = " + to_string(n) + "; time = " + to_string(time) + "; result = " + to_string(result));
+
+    n = 3, time = 2;
+    result = leetCode.passThePillow(n, time);
+    Logger::WriteMessage("n = " + to_string(n) + "; time = " + to_string(time) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2579(void)
+{
+    Logger::WriteMessage("Test Leet Code 2579");
+    LeetCodeMath leetCode;
+    int n = 1;
+    long long result = leetCode.coloredCells(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 2;
+    result = leetCode.coloredCells(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2584(void)
+{
+    Logger::WriteMessage("Test Leet Code 2584");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 4, 7, 8, 15, 3, 5 };
+    int result = leetCode.findValidSplit(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,7,15,8,3,5 };
+    result = leetCode.findValidSplit(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 1, 89 };
+    result = leetCode.findValidSplit(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2584();
+    TestLeetCode2579();
+    TestLeetCode2582();
+    TestLeetCode2578();
     TestLeetCode2575();
     TestLeetCode2566();
     TestLeetCode2557();

@@ -1596,8 +1596,40 @@ void TestLeetCode2542(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2580(void)
+{
+    Logger::WriteMessage("Test Leet Code 2580");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> ranges = { {6, 10},{5, 15} };
+    int result = leetCode.countWays(ranges);
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    ranges = { {1, 3},{10, 20},{2, 5},{4, 8} };
+    result = leetCode.countWays(ranges);
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2589(void)
+{
+    Logger::WriteMessage("Test Leet Code 2589");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> tasks = { {2, 3, 1},{4, 5, 1},{1, 5, 2} };
+    int result = leetCode.findMinimumTime(tasks);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    tasks = { {1, 3, 2},{2, 5, 3},{5, 6, 2} };
+    result = leetCode.findMinimumTime(tasks);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode2589();
+    TestLeetCode2580();
     TestLeetCode2542();
     TestLeetCode2534();
     TestLeetCode2532();

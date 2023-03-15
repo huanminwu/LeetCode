@@ -16243,6 +16243,90 @@ public:
     /// 2. 1 <= nums[i] <= 10^5
     /// </summary>
     vector<int> leftRigthDifference(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2587. Rearrange Array to Maximize Prefix Score
+    /// 
+    /// Medium
+    ///	
+    /// You are given a 0-indexed integer array nums. You can rearrange the 
+    /// elements of nums to any order (including the given order).
+    ///
+    /// Let prefix be the array containing the prefix sums of nums after 
+    /// rearranging it. In other words, prefix[i] is the sum of the elements 
+    /// from 0 to i in nums after rearranging it. The score of nums is the 
+    /// number of positive integers in the array prefix.
+    ///
+    /// Return the maximum score you can achieve.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,-1,0,1,-3,3,-3]
+    /// Output: 6
+    /// Explanation: We can rearrange the array into nums = [2,3,1,-1,-3,0,-3].
+    /// prefix = [2,5,6,5,2,2,-1], so the score is 6.
+    /// It can be shown that 6 is the maximum score we can obtain.
+    ///
+    /// Example 2:
+    /// Input: nums = [-2,-3,0]
+    /// Output: 0
+    /// Explanation: Any rearrangement of the array will result in a score of 0.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^6 <= nums[i] <= 10^6
+    /// </summary>
+    int maxScore(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2588. Count the Number of Beautiful Subarrays
+    /// 
+    /// Medium
+    ///	
+    /// You are given a 0-indexed integer array nums. In one operation, you 
+    /// can:
+    ///
+    /// Choose two different indices i and j such that 0 <= i, j < nums.length.
+    /// Choose a non-negative integer k such that the kth bit (0-indexed) in 
+    /// the binary representation of nums[i] and nums[j] is 1.
+    /// Subtract 2k from nums[i] and nums[j].
+    /// A subarray is beautiful if it is possible to make all of its elements 
+    /// equal to 0 after applying the above operation any number of times.
+    ///
+    /// Return the number of beautiful subarrays in the array nums.
+    /// 
+    /// A subarray is a contiguous non-empty sequence of elements within 
+    /// an array.
+    ///
+    /// Example 1:
+    /// Input: nums = [4,3,1,2,4]
+    /// Output: 2
+    /// Explanation: There are 2 beautiful subarrays in nums: [4,3,1,2,4] 
+    /// and [4,3,1,2,4].
+    /// - We can make all elements in the subarray [3,1,2] equal to 0 in the 
+    ///   following way:
+    /// - Choose [3, 1, 2] and k = 1. Subtract 21 from both numbers. The subarray 
+    ///   becomes [1, 1, 0].
+    /// - Choose [1, 1, 0] and k = 0. Subtract 20 from both numbers. The subarray 
+    ///   becomes [0, 0, 0].
+    /// - We can make all elements in the subarray [4,3,1,2,4] equal to 0 in the 
+    ///   following way:
+    /// - Choose [4, 3, 1, 2, 4] and k = 2. Subtract 22 from both numbers. The 
+    ///   subarray becomes [0, 3, 1, 2, 0].
+    /// - Choose [0, 3, 1, 2, 0] and k = 0. Subtract 20 from both numbers. The 
+    ///   subarray becomes [0, 2, 0, 2, 0].
+    /// - Choose [0, 2, 0, 2, 0] and k = 1. Subtract 21 from both numbers. The 
+    ///   subarray becomes [0, 0, 0, 0, 0].
+    ///
+    /// Example 2:
+    /// Input: nums = [1,10,4]
+    /// Output: 0
+    /// Explanation: There are no beautiful subarrays in nums.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 10^6
+    /// </summary>
+    long long beautifulSubarrays(vector<int>& nums);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

@@ -10665,5 +10665,156 @@ public:
     /// 4. 1 <= m <= 10^9
     /// </summary>
     vector<int> divisibilityArray(string word, int m);
+
+    /// <summary>
+    /// Leet Code 2578. Split With Minimum Sum
+    /// 
+    /// Easy
+    ///	
+    /// Given a positive integer num, split it into two non-negative integers 
+    /// num1 and num2 such that:
+    ///
+    /// The concatenation of num1 and num2 is a permutation of num.
+    /// In other words, the sum of the number of occurrences of each digit in 
+    /// num1 and num2 is equal to the number of occurrences of that digit in 
+    /// num.
+    /// num1 and num2 can contain leading zeros.
+    /// Return the minimum possible sum of num1 and num2.
+    ///
+    /// Notes:
+    /// It is guaranteed that num does not contain any leading zeros.
+    /// The order of occurrence of the digits in num1 and num2 may differ from 
+    /// the order of occurrence of num.
+    ///
+    /// Example 1:
+    /// Input: num = 4325
+    /// Output: 59
+    /// Explanation: We can split 4325 so that num1 is 24 and num2 is 35, 
+    /// giving a sum of 59. We can prove that 59 is indeed the minimal 
+    /// possible sum.
+    ///
+    /// Example 2:
+    /// Input: num = 687
+    /// Output: 75
+    /// Explanation: We can split 687 so that num1 is 68 and num2 is 7, which 
+    /// would give an optimal sum of 75.
+    ///
+    /// Constraints:
+    /// 1. 10 <= num <= 10^9
+    /// </summary>
+    int splitNum(int num);
+
+    /// <summary>
+    /// Leet Code 2582. Pass the Pillow
+    /// 
+    /// Easy
+    ///	
+    /// There are n people standing in a line labeled from 1 to n. The first 
+    /// person in the line is holding a pillow initially. Every second, the 
+    /// person holding the pillow passes it to the next person standing in 
+    /// the line. Once the pillow reaches the end of the line, the direction 
+    /// changes, and people continue passing the pillow in the opposite 
+    /// direction.
+    /// 
+    /// For example, once the pillow reaches the nth person they pass it to 
+    /// the n - 1th person, then to the n - 2th person and so on.
+    /// Given the two positive integers n and time, return the index of the 
+    /// person holding the pillow after time seconds.
+    ///
+    /// Example 1:
+    /// Input: n = 4, time = 5
+    /// Output: 2
+    /// Explanation: People pass the pillow in the following 
+    /// way: 1 -> 2 -> 3 -> 4 -> 3 -> 2.
+    /// Afer five seconds, the pillow is given to the 2nd person.
+    ///
+    /// Example 2:
+    /// Input: n = 3, time = 2
+    /// Output: 3
+    /// Explanation: People pass the pillow in the following way: 1 -> 2 -> 3.
+    /// Afer two seconds, the pillow is given to the 3rd person.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n <= 1000
+    /// 2. 1 <= time <= 1000
+    /// </summary>
+    int passThePillow(int n, int time);
+
+    /// <summary>
+    /// Leet Code 2579. Count Total Number of Colored Cells
+    /// 
+    /// Medium
+    ///	
+    /// There exists an infinitely large two-dimensional grid of uncolored 
+    /// unit cells. You are given a positive integer n, indicating that you 
+    /// must do the following routine for n minutes:
+    ///
+    /// At the first minute, color any arbitrary unit cell blue.
+    /// Every minute thereafter, color blue every uncolored cell that 
+    /// touches a blue cell.
+    /// Below is a pictorial representation of the state of the grid 
+    /// after minutes 1, 2, and 3.
+    ///
+    /// Return the number of colored cells at the end of n minutes.
+    /// 
+    /// Example 1:
+    /// Input: n = 1
+    /// Output: 1
+    /// Explanation: After 1 minute, there is only 1 blue cell, so we return 1.
+    ///
+    /// Example 2:
+    /// Input: n = 2
+    /// Output: 5
+    /// Explanation: After 2 minutes, there are 4 colored cells on the boundary
+    /// and 1 in the center, so we return 5. 
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 10^5
+    /// </summary>
+    long long coloredCells(int n);
+
+    /// <summary>
+    /// Leet Code 2584. Split the Array to Make Coprime Products
+    /// 
+    /// Hard
+    ///	
+    /// You are given a 0-indexed integer array nums of length n.
+    ///
+    /// A split at an index i where 0 <= i <= n - 2 is called valid if the 
+    /// product of the first i + 1 elements and the product of the remaining 
+    /// elements are coprime.
+    ///
+    /// For example, if nums = [2, 3, 3], then a split at the index i = 0 is 
+    /// valid because 2 and 9 are coprime, while a split at the index i = 1 
+    /// is not valid because 6 and 3 are not coprime. A split at the index 
+    /// i = 2 is not valid because i == n - 1.
+    /// Return the smallest index i at which the array can be split validly 
+    /// or -1 if there is no such split.
+    ///
+    /// Two values val1 and val2 are coprime if gcd(val1, val2) == 1 where 
+    /// gcd(val1, val2) is the greatest common divisor of val1 and val2.
+    ///
+    /// Example 1:
+    /// Input: nums = [4,7,8,15,3,5]
+    /// Output: 2
+    /// Explanation: The table above shows the values of the product of the 
+    /// first i + 1 elements, the remaining elements, and their gcd at each 
+    /// index i.
+    /// The only valid split is at index 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [4,7,15,8,3,5]
+    /// Output: -1
+    /// Explanation: The table above shows the values of the product of the 
+    /// first i + 1 elements, the remaining elements, and their gcd at each 
+    /// index i.
+    /// There is no valid split.
+    /// 
+    /// Constraints:
+    /// 1. n == nums.length
+    /// 2. 1 <= n <= 10^4
+    /// 3. 1 <= nums[i] <= 10^6
+    /// </summary>
+    int findValidSplit(vector<int>& nums);
 };
 #endif
