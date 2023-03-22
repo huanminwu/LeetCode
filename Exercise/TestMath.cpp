@@ -5642,8 +5642,56 @@ void TestLeetCode2584(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2591(void)
+{
+    Logger::WriteMessage("Test Leet Code 2591");
+    LeetCodeMath leetCode;
+    int money = 20, children = 3;
+    int result = leetCode.distMoney(money, children);
+    Logger::WriteMessage("money = " + to_string(money) + "; children = " + to_string(children) + "; result = " + to_string(result));
+
+    money = 16, children = 2;
+    result = leetCode.distMoney(money, children);
+    Logger::WriteMessage("money = " + to_string(money) + "; children = " + to_string(children) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2595(void)
+{
+    Logger::WriteMessage("Test Leet Code 2595");
+    LeetCodeMath leetCode;
+    int n = 17;
+    vector<int> result = leetCode.evenOddBit(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 2;
+    result = leetCode.evenOddBit(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2598(void)
+{
+    Logger::WriteMessage("Test Leet Code 2598");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, -10, 7, 13, 6, 8 };
+    int value = 5;
+    int result = leetCode.findSmallestInteger(nums, value);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("value = " + to_string(value) + "; result = " + to_string(result));
+
+    nums = { 1,-10,7,13,6,8 };
+    value = 7;
+    result = leetCode.findSmallestInteger(nums, value);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("value = " + to_string(value) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2598();
+    TestLeetCode2595();
+    TestLeetCode2591();
     TestLeetCode2584();
     TestLeetCode2579();
     TestLeetCode2582();

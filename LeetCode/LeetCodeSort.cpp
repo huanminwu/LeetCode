@@ -9825,4 +9825,85 @@ int LeetCodeSort::minimizeSum(vector<int>& nums)
     result = min(result, arr[right - 2] - arr[left]);
     return result;
 }
+
+/// <summary>
+/// Leet Code 2594. Minimum Time to Repair Cars
+/// 
+/// Medium
+///
+/// You are given an integer array ranks representing the ranks of some 
+/// mechanics. ranksi is the rank of the ith mechanic. A mechanic with a 
+/// rank r can repair n cars in r * n2 minutes.
+///
+/// You are also given an integer cars representing the total number of 
+/// cars waiting in the garage to be repaired.
+///
+/// Return the minimum time taken to repair all the cars.
+///
+/// Note: All the mechanics can repair the cars simultaneously.
+///
+/// Example 1:
+/// Input: ranks = [4,2,3,1], cars = 10
+/// Output: 16
+/// Explanation: 
+/// - The first mechanic will repair two cars. The time required 
+///   is 4 * 2 * 2 = 16 minutes.
+/// - The second mechanic will repair two cars. The time required 
+///   is 2 * 2 * 2 = 8 minutes.
+/// - The third mechanic will repair two cars. The time required 
+///   is 3 * 2 * 2 = 12 minutes.
+/// - The fourth mechanic will repair four cars. The time required 
+///   is 1 * 4 * 4 = 16 minutes.
+/// It can be proved that the cars cannot be repaired in less than 16 
+/// minutes.
+///
+/// Example 2:
+/// Input: ranks = [5,1,8], cars = 6
+/// Output: 16
+/// Explanation: 
+/// - The first mechanic will repair one car. The time required 
+///   is 5 * 1 * 1 = 5 minutes.
+/// - The second mechanic will repair four cars. The time required 
+///   is 1 * 4 * 4 = 16 minutes.
+/// - The third mechanic will repair one car. The time required 
+///   is 8 * 1 * 1 = 8 minutes.
+/// It can be proved that the cars cannot be repaired in less 
+/// than 16 minutes.
+///
+/// Constraints:
+/// 1. 1 <= ranks.length <= 10^5
+/// 2. 1 <= ranks[i] <= 100
+/// 3. 1 <= cars <= 106
+/// </summary>
+long long LeetCodeSort::repairCars(vector<int>& ranks, int cars)
+{
+    set<pair<long long, pair<int, int>>> pq;
+    vector<int> count(101);
+    for (size_t i = 0; i < ranks.size(); i++)
+    {
+        count[ranks[i]]++;
+    }
+    for (int i = 1; i <=100; i++)
+    {
+        if (count[i] != 0)
+        {
+            long long time = (long long)i * 1 * 1;
+            pq.insert(make_pair(time, make_pair(i, count[i])));
+        }
+    }
+    long long result = 0;
+    int car = cars;
+    while (car > 0)
+    {
+        pair<long long, pair<int, int>> pair = *pq.begin();
+        pq.erase(pair);
+        result = max(result, pair.first);
+        long long n = (long long)sqrt(pair.first / (long long)pair.second.first);
+        n++;
+        pair.first = (long long)pair.second.first * n * n;
+        pq.insert(pair);
+        car -= pair.second.second;
+    }
+    return result;
+}
 #pragma endregion

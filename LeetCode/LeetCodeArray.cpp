@@ -25991,5 +25991,187 @@ long long LeetCodeArray::beautifulSubarrays(vector<int>& nums)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2592. Maximize Greatness of an Array
+/// 
+/// Medium
+///	
+/// You are given a 0-indexed integer array nums. You are allowed to 
+/// permute nums into a new array perm of your choosing.
+///
+/// We define the greatness of nums be the number of indices 
+/// 0 <= i < nums.length for which perm[i] > nums[i].
+///
+/// Return the maximum possible greatness you can achieve after permuting 
+/// nums.
+///
+/// Example 1:
+/// Input: nums = [1,3,5,2,1,3,1]
+/// Output: 4
+/// Explanation: One of the optimal rearrangements is 
+/// perm = [2,5,1,3,3,1,1].
+/// At indices = 0, 1, 3, and 4, perm[i] > nums[i]. Hence, we return 4.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4]
+/// Output: 3
+/// Explanation: We can prove the optimal perm is [2,3,4,1].
+/// At indices = 0, 1, and 2, perm[i] > nums[i]. Hence, we return 3.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeArray::maximizeGreatness(vector<int>& nums)
+{
+    sort(nums.begin(), nums.end());
+    int result = 0, right = nums.size() - 1;
+    for (int i = nums.size() - 1; i >= 0; i--)
+    {
+        if (nums[right] > nums[i])
+        {
+            right--;
+            result++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2593. Find Score of an Array After Marking All Elements
+/// 
+/// Medium
+///	
+/// You are given an array nums consisting of positive integers.
+///
+/// Starting with score = 0, apply the following algorithm:
+///
+/// Choose the smallest integer of the array that is not marked. If 
+/// there is a tie, choose the one with the smallest index.
+/// Add the value of the chosen integer to score.
+/// Mark the chosen element and its two adjacent elements if they exist.
+/// Repeat until all the array elements are marked.
+/// Return the score you get after applying the above algorithm.
+///
+/// Example 1:
+/// Input: nums = [2,1,3,4,5,2]
+/// Output: 7
+/// Explanation: We mark the elements as follows:
+/// - 1 is the smallest unmarked element, so we mark it and its two 
+///   adjacent elements: [2,1,3,4,5,2].
+/// - 2 is the smallest unmarked element, so we mark it and its left 
+///   adjacent element: [2,1,3,4,5,2].
+/// - 4 is the only remaining unmarked element, so we mark 
+///   it: [2,1,3,4,5,2].
+/// Our score is 1 + 2 + 4 = 7.
+///
+/// Example 2:
+/// Input: nums = [2,3,5,1,3,2]
+/// Output: 5
+/// Explanation: We mark the elements as follows:
+/// - 1 is the smallest unmarked element, so we mark it and its two 
+///   adjacent elements: [2,3,5,1,3,2].
+/// - 2 is the smallest unmarked element, since there are two of them, we 
+///   choose the left-most one, so we mark the one at index 0 and its 
+///   right adjacent element: [2,3,5,1,3,2].
+/// - 2 is the only remaining unmarked element, so we mark it: 
+///  [2,3,5,1,3,2].
+/// Our score is 1 + 2 + 2 = 5.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^6
+/// </summary>
+long long LeetCodeArray::findScore(vector<int>& nums)
+{
+    set<pair<int, int>> pq;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        pq.insert(make_pair(nums[i], i));
+    }
+    long long result = 0;
+    while (!pq.empty())
+    {
+        pair<int, int> pair = *pq.begin();
+        pq.erase(pq.begin());
+        result += pair.first;
+        if (pair.second > 0)
+        {
+            pq.erase(make_pair(nums[pair.second - 1], pair.second - 1));
+        }
+        if (pair.second < (int)nums.size() - 1)
+        {
+            pq.erase(make_pair(nums[pair.second + 1], pair.second + 1));
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2596. Check Knight Tour Configuration
+/// 
+/// Medium
+///	
+/// There is a knight on an n x n chessboard. In a valid configuration, 
+/// the knight starts at the top-left cell of the board and visits every 
+/// cell on the board exactly once.
+///
+/// You are given an n x n integer matrix grid consisting of distinct 
+/// integers from the range [0, n * n - 1] where grid[row][col] indicates 
+/// that the cell (row, col) is the grid[row][col]th cell that the knight 
+/// visited. The moves are 0-indexed.
+///
+/// Return true if grid represents a valid configuration of the knight's 
+/// movements or false otherwise.
+///
+/// Note that a valid knight move consists of moving two squares 
+/// vertically and one square horizontally, or two squares horizontally 
+/// and one square vertically. The figure below illustrates all the 
+/// possible eight moves of a knight from some cell.
+/// 
+/// Example 1:
+/// Input: grid = [[0,11,16,5,20],[17,4,19,10,15],[12,1,8,21,6],
+/// [3,18,23,14,9],[24,13,2,7,22]]
+/// Output: true
+/// Explanation: The above diagram represents the grid. It can be 
+/// shown that it is a valid configuration.
+///
+/// Example 2:
+/// Input: grid = [[0,3,6],[5,8,1],[2,7,4]]
+/// Output: false
+/// Explanation: The above diagram represents the grid. The 8th move of 
+/// the knight is not valid considering its position after the 7th move.
+///
+/// Constraints:
+/// 1. n == grid.length == grid[i].length
+/// 2. 3 <= n <= 7
+/// 3. 0 <= grid[row][col] < n * n
+/// 4. All integers in grid are unique.
+/// </summary>
+bool LeetCodeArray::checkValidGrid(vector<vector<int>>& grid)
+{
+    int n = grid.size();
+    int m = grid[0].size();
+    vector<pair<int, int>> dp(n * m);
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            int k = grid[i][j];
+            dp[k].first = i;
+            dp[k].second = j;
+        }
+    }
+    if (dp[0].first != 0 || dp[0].second != 0) return false;
+    for (int i = 1; i < n * m; i++)
+    {
+        int delta_y = abs(dp[i].first - dp[i - 1].first);
+        int delta_x = abs(dp[i].second - dp[i - 1].second);
+        if (delta_y == 2 && delta_x == 1) continue;
+        if (delta_y == 1 && delta_x == 2) continue;
+        return false;
+    }
+    return true;
+}
 #pragma endregion
 

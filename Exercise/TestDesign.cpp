@@ -5015,8 +5015,82 @@ void TestLeetCode307(void)
     Logger::WriteMessage("sum [" + to_string(i) + "," + to_string(j) + "] = " + to_string(numArrayMutable.sumRange(i, j)));
 }
 
+void TestLeetCode2590(void)
+{
+    Logger::WriteMessage("Test Leet Code 2590");
+
+    vector<string> commands =
+    {
+       "TodoList", "addTask", "addTask", "getAllTasks", 
+       "getAllTasks", "addTask", "getTasksForTag", "completeTask", 
+       "completeTask", "getTasksForTag", "getAllTasks"
+    };
+    vector<vector<vector<string>>> parameters
+    {
+        {{}}, {{"1"}, {"Task1"}, {"50"},{} },
+        {{"1"}, {"Task2"}, {"100"},{"P1"} },
+        {{"1"}}, {{"5"}},
+        {{"1"}, {"Task3"}, {"30"},{"P1"}},
+        {{"1"}, {"P1"}}, { {"5"}, {"1"} }, {{ "1" }, {"2" }}, 
+        {{"1"}, {"P1" }}, {{ "1" }}
+    };
+
+    vector<vector<string>> result;
+    TodoList* todoList = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "TodoList")
+        {
+            todoList = new TodoList();
+            result.push_back({ "null" });
+        }
+        else if (commands[i] == "addTask")
+        {
+            int ret = todoList->addTask(
+                atoi(parameters[i][0][0].c_str()), 
+                parameters[i][1][0],
+                atoi(parameters[i][2][0].c_str()),
+                parameters[i][3]
+                );
+            result.push_back({ to_string(ret) });
+        }
+        else if (commands[i] == "getAllTasks")
+        {
+            vector<string> ret = todoList->getAllTasks(
+                atoi(parameters[i][0][0].c_str()));
+            result.push_back(ret);
+        }
+        else if (commands[i] == "getTasksForTag")
+        {
+            vector<string> ret = todoList->getTasksForTag(
+                atoi(parameters[i][0][0].c_str()),
+                parameters[i][1][0]
+                );
+            result.push_back(ret);
+        }
+        else if (commands[i] == "completeTask")
+        {
+            todoList->completeTask(
+                atoi(parameters[i][0][0].c_str()),
+                atoi(parameters[i][1][0].c_str())
+            );
+            result.push_back({"null"});
+        }
+        
+    }
+    delete todoList;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2590();
     TestLeetCode2526();
     TestLeetCode2502();
     TestLeetCode2424();

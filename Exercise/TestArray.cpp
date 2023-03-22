@@ -8459,7 +8459,7 @@ void TestLeetCode2588(void)
     Logger::WriteMessage("Test Leet Code 2588");
     LeetCodeArray leetCode;
     vector<int> nums = { 4,3,1,2,4 };
-    int result = leetCode.beautifulSubarrays(nums);
+    long long result = leetCode.beautifulSubarrays(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 
@@ -8469,8 +8469,63 @@ void TestLeetCode2588(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2592(void)
+{
+    Logger::WriteMessage("Test Leet Code 2592");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 3, 5, 2, 1, 3, 1 };
+    int result = leetCode.maximizeGreatness(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    result = leetCode.maximizeGreatness(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2593(void)
+{
+    Logger::WriteMessage("Test Leet Code 2593");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 1, 3, 4, 5, 2 };
+    long long result = leetCode.findScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3,5,1,3,2 };
+    result = leetCode.findScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2596(void)
+{
+    Logger::WriteMessage("Test Leet Code 2596");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid =
+    {
+        {0, 11, 16, 5, 20},{17, 4, 19, 10, 15},{12, 1, 8, 21, 6},
+        {3, 18, 23, 14, 9},{24, 13, 2, 7, 22}
+    };
+    bool result = leetCode.checkValidGrid(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    grid =
+    {
+        {0,3,6},{5,8,1},{2,7,4}
+    };
+    result = leetCode.checkValidGrid(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2596();
+    TestLeetCode2593();
+    TestLeetCode2592();
     TestLeetCode2588();
     TestLeetCode2587();
     TestLeetCode2573();

@@ -3138,8 +3138,26 @@ void TestLeetCode2567(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2594(void)
+{
+    Logger::WriteMessage("Test Leet Code 2594");
+    LeetCodeSort leetCode;
+    vector<int> ranks = { 4, 2, 3, 1 };
+    int cars = 10;
+    long long result = leetCode.repairCars(ranks, cars);
+    Logger::WriteMessage(ranks);
+    Logger::WriteMessage("cars = " + to_string(cars) + "; result = " + to_string(result));
+
+    ranks = { 5,1,8 };
+    cars = 6;
+    result = leetCode.repairCars(ranks, cars);
+    Logger::WriteMessage(ranks);
+    Logger::WriteMessage("cars = " + to_string(cars) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2594();
     TestLeetCode2567();
     TestLeetCode2561();
     TestLeetCode2558();

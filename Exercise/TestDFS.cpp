@@ -1834,8 +1834,27 @@ void TestLeetCode2572(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2597(void)
+{
+    Logger::WriteMessage("Test Leet Code 2597");
+    LeetCodeDFS leetCode;
+
+    vector<int> nums = { 2, 4, 6 };
+    int k = 2;
+    int result = leetCode.beautifulSubsets(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = {1 };
+    k = 1;
+    result = leetCode.beautifulSubsets(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2597();
     TestLeetCode2572();
     TestLeetCode2403();
     TestLeetCode2305();

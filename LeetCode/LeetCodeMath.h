@@ -10816,5 +10816,124 @@ public:
     /// 3. 1 <= nums[i] <= 10^6
     /// </summary>
     int findValidSplit(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2591. Distribute Money to Maximum Children
+    /// 
+    /// Easy
+    ///	
+    /// You are given an integer money denoting the amount of money 
+    /// (in dollars) that you have and another integer children denoting 
+    /// the number of children that you must distribute the money to.
+    ///
+    /// You have to distribute the money according to the following rules:
+    ///
+    /// All money must be distributed.
+    /// Everyone must receive at least 1 dollar.
+    /// Nobody receives 4 dollars.
+    /// Return the maximum number of children who may receive exactly 8 
+    /// dollars if you distribute the money according to the aforementioned 
+    /// rules. If there is no way to distribute the money, return -1.
+    ///
+    /// Example 1:
+    /// Input: money = 20, children = 3
+    /// Output: 1
+    /// Explanation: 
+    /// The maximum number of children with 8 dollars will be 1. One of the 
+    /// ways to distribute the money is:
+    /// - 8 dollars to the first child.
+    /// - 9 dollars to the second child. 
+    /// - 3 dollars to the third child.
+    /// It can be proven that no distribution exists such that number of 
+    /// children getting 8 dollars is greater than 1.
+    ///
+    /// Example 2:
+    /// Input: money = 16, children = 2
+    /// Output: 2
+    /// Explanation: Each child can be given 8 dollars.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= money <= 200
+    /// 2. 2 <= children <= 30
+    /// </summary>
+    int distMoney(int money, int children);
+
+    /// <summary>
+    /// Leet Code 2595. Number of Even and Odd Bits
+    /// 
+    /// Easy
+    ///	
+    /// You are given a positive integer n.
+    /// Let even denote the number of even indices in the binary 
+    /// representation of n (0-indexed) with value 1.
+    ///
+    /// Let odd denote the number of odd indices in the binary 
+    /// representation of n (0-indexed) with value 1.
+    ///
+    /// Return an integer array answer where answer = [even, odd].
+    ///
+    /// Example 1:
+    /// Input: n = 17
+    /// Output: [2,0]
+    /// Explanation: The binary representation of 17 is 10001. 
+    /// It contains 1 on the 0th and 4th indices. 
+    /// There are 2 even and 0 odd indices.
+    ///
+    /// Example 2:
+    /// Input: n = 2
+    /// Output: [0,1]
+    /// Explanation: The binary representation of 2 is 10.
+    /// It contains 1 on the 1st index. 
+    /// There are 0 even and 1 odd indices.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 1000
+    /// </summary>
+    vector<int> evenOddBit(int n);
+
+    /// <summary>
+    /// Leet Code 2598. Smallest Missing Non-negative Integer After Operations
+    /// 
+    /// Medium
+    ///	
+    /// You are given a 0-indexed integer array nums and an integer value.
+    ///
+    /// In one operation, you can add or subtract value from any element of 
+    /// nums.
+    ///
+    /// For example, if nums = [1,2,3] and value = 2, you can choose to 
+    /// subtract value from nums[0] to make nums = [-1,2,3].
+    /// The MEX (minimum excluded) of an array is the smallest missing 
+    /// non-negative integer in it.
+    /// For example, the MEX of [-1,2,3] is 0 while the MEX of [1,0,3] is 2. 
+    /// Return the maximum MEX of nums after applying the mentioned operation 
+    /// any number of times.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,-10,7,13,6,8], value = 5
+    /// Output: 4
+    /// Explanation: One can achieve this result by applying the following 
+    /// operations:
+    /// - Add value to nums[1] twice to make nums = [1,0,7,13,6,8]
+    /// - Subtract value from nums[2] once to make nums = [1,0,2,13,6,8]
+    /// - Subtract value from nums[3] twice to make nums = [1,0,2,3,6,8]
+    /// The MEX of nums is 4. It can be shown that 4 is the maximum MEX we 
+    /// can achieve.
+    ///   
+    /// Example 2:
+    /// Input: nums = [1,-10,7,13,6,8], value = 7
+    /// Output: 2
+    /// Explanation: One can achieve this result by applying the following 
+    /// operation:
+    /// - subtract value from nums[2] once to make nums = [1,-10,0,13,6,8]
+    /// The MEX of nums is 2. It can be shown that 2 is the maximum MEX we 
+    /// can achieve.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length, value <= 10^5
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// 3. You are given a positive integer n.
+    /// </summary>
+    int findSmallestInteger(vector<int>& nums, int value);
 };
 #endif
