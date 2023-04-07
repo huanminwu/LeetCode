@@ -1131,8 +1131,49 @@ void TestLeetCode2563(void)
     Logger::WriteMessage("lower = " + to_string(lower) + "; upper = " + to_string(upper) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2604(void)
+{
+    Logger::WriteMessage("Test Leet Code 2604");
+    LeetCodeBinarySearch leetCode;
+    vector<int> hens = { 3, 6, 7 };
+    vector<int> grains = { 2, 4, 7, 9 };
+    int result = leetCode.minimumTime(hens, grains);
+    Logger::WriteMessage(hens);
+    Logger::WriteMessage(grains);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    hens = { 4,6,109,111,213,215 };
+    grains = { 5,110,214 };
+    result = leetCode.minimumTime(hens, grains);
+    Logger::WriteMessage(hens);
+    Logger::WriteMessage(grains);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    hens = { 1,9,4 };
+    grains = { 8,9,2,4,1 };
+    result = leetCode.minimumTime(hens, grains);
+    Logger::WriteMessage(hens);
+    Logger::WriteMessage(grains);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    hens = { 6, 0, 4 };
+    grains = { 8,7 };
+    result = leetCode.minimumTime(hens, grains);
+    Logger::WriteMessage(hens);
+    Logger::WriteMessage(grains);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    hens = { 10,5,7,8 };
+    grains = { 1 };
+    result = leetCode.minimumTime(hens, grains);
+    Logger::WriteMessage(hens);
+    Logger::WriteMessage(grains);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode2604();
     TestLeetCode2563();
     TestLeetCode2560();
     TestLeetCode2528();

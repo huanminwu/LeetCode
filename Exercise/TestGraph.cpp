@@ -4971,8 +4971,69 @@ void TestLeetCode2577(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2603(void)
+{
+    Logger::WriteMessage("Test Leet Code 2603");
+    LeetCodeGraph leetCode;
+    vector<int> coins = { 1, 0, 0, 0, 0, 1 };
+    vector<vector<int>> edges = { {0, 1},{1, 2},{2, 3},{3, 4},{4, 5} };
+    int result = leetCode.collectTheCoins(coins, edges);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    coins = { 0, 0, 0, 1, 1, 0, 0, 1 };
+    edges = { {0, 1},{0, 2},{1, 3},{1, 4},{2, 5},{5, 6},{5, 7} };
+    result = leetCode.collectTheCoins(coins, edges);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    coins = { 0, 1, 0, 0, 0, 1, 0, 0 };
+    edges = { {0, 1},{0, 2},{1, 3},{1, 4},{2, 5},{5, 6},{5, 7} };
+    result = leetCode.collectTheCoins(coins, edges);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2608(void)
+{
+    Logger::WriteMessage("Test Leet Code 2608");
+    LeetCodeGraph leetCode;
+    int n = 7;
+    vector<vector<int>> edges =
+    {
+        {0, 1},{1, 2},{2, 0},{3, 4}, {4, 5 }, { 5, 6 }, { 6, 3 }
+    };
+    int result = leetCode.findShortestCycle(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    edges = { {0, 1},{0, 2} };
+    result = leetCode.findShortestCycle(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 20;
+    edges =
+    {
+        {8, 19}, { 1, 19 }, { 0, 19 }, { 7, 15 }, { 13, 17 }, { 4, 19 },
+        { 2, 6 }, { 17, 18 }, { 7, 14 }, { 7, 18 }, { 5, 6 }, { 16, 17 },
+        { 1, 12 }, { 9, 16 }, { 6, 15 }, { 2, 14 }, { 4, 17 }, { 2, 10 },
+        { 0, 18 }, { 7, 11 }, { 5, 14 }, { 8, 14 }, { 4, 9 },
+        { 7, 9 }, { 9, 18 }, { 0, 14 }
+    };
+    result = leetCode.findShortestCycle(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2608();
+    TestLeetCode2603();
     TestLeetCode2577();
     TestLeetCode2556();
     TestLeetCode2508();

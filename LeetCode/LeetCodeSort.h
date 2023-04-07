@@ -6093,6 +6093,130 @@ public:
     /// 3. 1 <= cars <= 106
     /// </summary>
     long long repairCars(vector<int>& ranks, int cars);
+
+    /// <summary>
+    /// Leet Code 2599. Make the Prefix Sum Non-negative
+    /// 
+    /// Medium
+    ///	
+    /// You are given a 0-indexed integer array nums. You can apply the 
+    /// following operation any number of times:
+    ///
+    /// Pick any element from nums and put it at the end of nums.
+    /// The prefix sum array of nums is an array prefix of the same length 
+    /// as nums such that prefix[i] is the sum of all the integers nums[j] 
+    /// where j is in the inclusive range [0, i].
+    ///
+    /// Return the minimum number of operations such that the prefix sum 
+    /// array does not contain negative integers. The test cases are generated 
+    /// such that it is always possible to make the prefix sum array 
+    /// non-negative.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: nums = [2,3,-5,4]
+    /// Output: 0
+    /// Explanation: we do not need to do any operations.
+    /// The array is [2,3,-5,4]. The prefix sum array is [2, 5, 0, 4].
+    ///
+    /// Example 2:
+    ///
+    /// Input: nums = [3,-5,-2,6]
+    /// Output: 1
+    /// Explanation: we can do one operation on index 1.
+    /// The array after the operation is [3,-2,6,-5]. The prefix sum 
+    /// array is [3, 1, 7, 2].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// </summary>
+    int makePrefSumNonNegative(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2611. Mice and Cheese
+    /// 
+    /// Medium
+    ///	
+    /// There are two mice and n different types of cheese, each type of 
+    /// cheese should be eaten by exactly one mouse.
+    ///
+    /// A point of the cheese with index i (0-indexed) is:
+    ///
+    /// reward1[i] if the first mouse eats it.
+    /// reward2[i] if the second mouse eats it.
+    /// You are given a positive integer array reward1, a positive integer 
+    /// array reward2, and a non-negative integer k.
+    ///
+    /// Return the maximum points the mice can achieve if the first mouse 
+    /// eats exactly k types of cheese.
+    ///
+    /// Example 1:
+    ///
+    /// Input: reward1 = [1,1,3,4], reward2 = [4,4,1,1], k = 2
+    /// Output: 15
+    /// Explanation: In this example, the first mouse eats the 2nd (0-indexed) 
+    /// and the 3rd types of cheese, and the second mouse eats the 0th and 
+    /// the 1st types of cheese.
+    /// The total points are 4 + 4 + 3 + 4 = 15.
+    /// It can be proven that 15 is the maximum total points that the mice 
+    /// can achieve.
+    ///
+    /// Example 2:
+    /// Input: reward1 = [1,1], reward2 = [1,1], k = 2
+    /// Output: 2
+    /// Explanation: In this example, the first mouse eats the 0th (0-indexed) 
+    /// and 1st types of cheese, and the second mouse does not eat any cheese.
+    /// The total points are 1 + 1 = 2.
+    /// It can be proven that 2 is the maximum total points that the mice can 
+    /// achieve.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == reward1.length == reward2.length <= 10^5
+    /// 2. 1 <= reward1[i], reward2[i] <= 1000
+    /// 3. 0 <= k <= n
+    /// </summary>
+    int miceAndCheese(vector<int>& reward1, vector<int>& reward2, int k);
+
+    /// <summary>
+    /// Leet Code 2613. Beautiful Pairs
+    /// 
+    /// Hard
+    ///	
+    /// You are given two 0-indexed integer arrays nums1 and nums2 of the same 
+    /// length. A pair of indices (i,j) is called beautiful 
+    /// if|nums1[i] - nums1[j]| + |nums2[i] - nums2[j]| is the smallest 
+    /// amongst all possible indices pairs where i < j.
+    ///
+    /// Return the beautiful pair. In the case that there are multiple 
+    /// beautiful pairs, return the lexicographically smallest pair.
+    ///
+    /// Note that
+    /// |x| denotes the absolute value of x.
+    /// A pair of indices (i1, j1) is lexicographically smaller than (i2, j2) 
+    /// if i1 < i2 or i1 == i2 and j1 < j2.
+    ///
+    /// Example 1:
+    /// Input: nums1 = [1,2,3,2,4], nums2 = [2,3,1,2,3]
+    /// Output: [0,3]
+    /// Explanation: Consider index 0 and index 3. The value of 
+    /// |nums1[i]-nums1[j]| + |nums2[i]-nums2[j]| is 1, which is the smallest 
+    /// value we can achieve.
+    ///
+    /// Example 2:
+    /// Input: nums1 = [1,2,4,3,2,5], nums2 = [1,4,2,3,5,1]
+    /// Output: [1,4]
+    /// Explanation: Consider index 1 and index 4. The value of 
+    /// |nums1[i]-nums1[j]| + |nums2[i]-nums2[j]| is 1, which is the smallest 
+    /// value we can achieve.
+    ///
+    /// Constraints:
+    /// 1. 2 <= nums1.length, nums2.length <= 10^5
+    /// 2. nums1.length == nums2.length
+    /// 3. 0 <= nums1i <= nums1.length
+    /// 4. 0 <= nums2i <= nums2.length
+    /// </summary>
+    vector<int> beautifulPair(vector<int>& nums1, vector<int>& nums2);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

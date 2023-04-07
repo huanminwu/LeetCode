@@ -8521,8 +8521,110 @@ void TestLeetCode2596(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2602(void)
+{
+    Logger::WriteMessage("Test Leet Code 2602");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 1, 6, 8 };
+    vector<int> queries = { 1, 5 };
+    vector<long long> result = leetCode.minOperationsII(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 2,9,6,3 };
+    queries = { 10 };
+    result = leetCode.minOperationsII(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2607(void)
+{
+    Logger::WriteMessage("Test Leet Code 2607");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 1, 4, 1, 3 };
+    int k = 2;
+    long long result = leetCode.makeSubKSumEqual(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    arr = { 2,5,5,7 };
+    k = 3;
+    result = leetCode.makeSubKSumEqual(arr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2609(void)
+{
+    Logger::WriteMessage("Test Leet Code 2609");
+    LeetCodeArray leetCode;
+    string s = "01000111";
+    int result = leetCode.findTheLongestBalancedSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "00111";
+    result = leetCode.findTheLongestBalancedSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "111";
+    result = leetCode.findTheLongestBalancedSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2610(void)
+{
+    Logger::WriteMessage("Test Leet Code 2610");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 3, 4, 1, 2, 3, 1 };
+    vector<vector<int>> result = leetCode.findMatrix(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,2,3,4 };
+    result = leetCode.findMatrix(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2612(void)
+{
+    Logger::WriteMessage("Test Leet Code 2612");
+    LeetCodeArray leetCode;
+    int n = 4, p = 0;
+    vector<int> banned = { 1, 2 };
+    int k = 4;
+    vector<int> result = leetCode.minReverseOperations(n, p, banned, k);
+    Logger::WriteMessage(banned);
+    Logger::WriteMessage("n = " + to_string(n) + "; p = " + to_string(p) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    n = 5, p = 0;
+    banned = { 2, 4 };
+    k = 3;
+    result = leetCode.minReverseOperations(n, p, banned, k);
+    Logger::WriteMessage(banned);
+    Logger::WriteMessage("n = " + to_string(n) + "; p = " + to_string(p) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    n = 4, p = 2;
+    banned = { 0,1,3 };
+    k = 1;
+    result = leetCode.minReverseOperations(n, p, banned, k);
+    Logger::WriteMessage(banned);
+    Logger::WriteMessage("n = " + to_string(n) + "; p = " + to_string(p) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2612();
+    TestLeetCode2610();
+    TestLeetCode2609();
+    TestLeetCode2607();
+    TestLeetCode2602();
     TestLeetCode2596();
     TestLeetCode2593();
     TestLeetCode2592();

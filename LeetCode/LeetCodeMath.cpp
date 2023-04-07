@@ -624,7 +624,7 @@ int LeetCodeMath::divide(int dividend, int divisor)
     {
         return INT_MAX;
     }
-    int sign = (dividend < 0) ^ (divisor < 0) ? -1 : 1;
+    int sign = ((dividend < 0) ^ (divisor < 0)) ? -1 : 1;
     long long long_dividend = abs((long long)dividend);
     long long long_divisor = abs((long long)divisor);
     long long sum = 0;
@@ -17693,5 +17693,170 @@ int LeetCodeMath::findSmallestInteger(vector<int>& nums, int value)
     }
     int result = min_index + min_val * value;
     return result;
+}
+
+/// <summary>
+/// Leet Code 2600. K Items With the Maximum Sum
+/// 
+/// Easy
+///	
+/// There is a bag that consists of items, each item has a number 1, 0, 
+/// or -1 written on it.
+///
+/// You are given four non-negative integers numOnes, numZeros, 
+/// numNegOnes, and k.
+///
+/// The bag initially contains:
+///
+/// numOnes items with 1s written on them.
+/// numZeroes items with 0s written on them.
+/// numNegOnes items with -1s written on them.
+/// We want to pick exactly k items among the available items. Return the 
+/// maximum possible sum of numbers written on the items.
+///
+/// Example 1:
+/// Input: numOnes = 3, numZeros = 2, numNegOnes = 0, k = 2
+/// Output: 2
+/// Explanation: We have a bag of items with numbers written on them 
+/// {1, 1, 1, 0, 0}. We take 2 items with 1 written on them and get a sum 
+/// in a total of 2.
+/// It can be proven that 2 is the maximum possible sum.
+///
+/// Example 2:
+/// Input: numOnes = 3, numZeros = 2, numNegOnes = 0, k = 4
+/// Output: 3
+/// Explanation: We have a bag of items with numbers written on them 
+/// {1, 1, 1, 0, 0}. We take 3 items with 1 written on them, and 1 item 
+/// with 0 written on it, and get a sum in a total of 3.
+/// It can be proven that 3 is the maximum possible sum.
+///
+/// Constraints:
+/// 1. 0 <= numOnes, numZeros, numNegOnes <= 50
+/// 2. 0 <= k <= numOnes + numZeros + numNegOnes
+/// </summary>
+int LeetCodeMath::kItemsWithMaximumSum(int numOnes, int numZeros, int numNegOnes, int k)
+{
+    int result = 0;
+    result += min(k, numOnes);
+    k -= numOnes;
+    k -= numZeros;
+    if (k > 0) result -= k;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2601. Prime Subtraction Operation
+/// 
+/// Medium
+///	
+/// You are given a 0-indexed integer array nums of length n.
+///
+/// You can perform the following operation as many times as you want:
+///
+/// Pick an index i that you haven’t picked before, and pick a prime p 
+/// strictly less than nums[i], then subtract p from nums[i].
+/// Return true if you can make nums a strictly increasing array using the 
+/// above operation and false otherwise.
+///
+/// A strictly increasing array is an array whose each element is strictly 
+/// greater than its preceding element.
+///
+/// Example 1:
+/// Input: nums = [4,9,6,10]
+/// Output: true
+/// Explanation: In the first operation: Pick i = 0 and p = 3, and then 
+/// subtract 3 from nums[0], so that nums becomes [1,9,6,10].
+/// In the second operation: i = 1, p = 7, subtract 7 from nums[1], so nums 
+/// becomes equal to [1,2,6,10].
+/// After the second operation, nums is sorted in strictly increasing order, 
+/// so the answer is true.
+///
+/// Example 2:
+///
+/// Input: nums = [6,8,11,12]
+/// Output: true
+/// Explanation: Initially nums is sorted in strictly increasing order, so 
+/// we don't need to make any operations.
+///
+/// Example 3:
+/// Input: nums = [5,8,3]
+/// Output: false
+/// Explanation: It can be proven that there is no way to perform operations 
+/// to make nums sorted in strictly increasing order, so the answer is false.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 1000
+/// 3. nums.length == n
+/// </summary>
+bool LeetCodeMath::primeSubOperation(vector<int>& nums)
+{
+    vector<int> arr(1000);
+    vector<int> prime;
+    arr[0] = arr[1] = 1;
+    for (int i = 2; i < 1000; i++)
+    {
+        if (arr[i] == 1) continue;
+        prime.push_back(i);
+        for (int j = i; j < 1000; j += i)
+        {
+            arr[j] = 1;
+        }
+    }
+    arr = nums;
+    for (int i = arr.size() - 2; i >= 0; i--)
+    {
+        if (arr[i] < arr[i + 1]) continue;
+        int diff = arr[i] - arr[i + 1];
+        int index = upper_bound(prime.begin(), prime.end(), diff) - prime.begin();
+        if (index == prime.size()) return false;
+        arr[i] -= prime[index];
+        if (arr[i] <= 0) return false;
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet Code 2605. Form Smallest Number From Two Digit Arrays
+/// 
+/// Easy
+///	
+/// Given two arrays of unique digits nums1 and nums2, return the smallest 
+/// number that contains at least one digit from each array.
+///
+///
+/// Example 1:
+/// Input: nums1 = [4,1,3], nums2 = [5,7]
+/// Output: 15
+/// Explanation: The number 15 contains the digit 1 from nums1 and the 
+/// digit 5 from nums2. It can be proven that 15 is the smallest number 
+/// we can have.
+///
+/// Example 2:
+/// Input: nums1 = [3,5,2,6], nums2 = [3,1,7]
+/// Output: 3
+/// Explanation: The number 3 contains the digit 3 which exists in 
+/// both arrays.
+///
+/// Constraints:
+/// 1. 1 <= nums1.length, nums2.length <= 9
+/// 2. 1 <= nums1[i], nums2[i] <= 9
+/// 3. All digits in each array are unique.
+/// </summary>
+int LeetCodeMath::minNumber(vector<int>& nums1, vector<int>& nums2)
+{
+    set<int> nums1_set = set<int>(nums1.begin(), nums1.end());
+    set<int> nums2_set = set<int>(nums2.begin(), nums2.end());
+
+    int result = 0;
+    for (int i = 1; i <= 9; i++)
+    {
+        if (nums1_set.count(i) > 0 && nums2_set.count(i) > 0)
+        {
+            return i;
+        }
+    }
+    return min((*nums1_set.begin() * 10 + *nums2_set.begin()),
+        (*nums2_set.begin() * 10 + *nums1_set.begin()));
 }
 

@@ -5687,8 +5687,72 @@ void TestLeetCode2598(void)
     Logger::WriteMessage("value = " + to_string(value) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2600(void)
+{
+    Logger::WriteMessage("Test Leet Code 2600");
+    LeetCodeMath leetCode;
+    int numOnes = 3, numZeros = 2, numNegOnes = 0, k = 2;
+    int result = leetCode.kItemsWithMaximumSum(numOnes, numZeros, numNegOnes, k);
+    Logger::WriteMessage("numOnes = " + to_string(numOnes) + "; numZeros = " + to_string(numZeros));
+    Logger::WriteMessage("numNegOnes = " + to_string(numNegOnes));
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    numOnes = 3, numZeros = 2, numNegOnes = 0, k = 4;
+    result = leetCode.kItemsWithMaximumSum(numOnes, numZeros, numNegOnes, k);
+    Logger::WriteMessage("numOnes = " + to_string(numOnes) + "; numZeros = " + to_string(numZeros));
+    Logger::WriteMessage("numNegOnes = " + to_string(numNegOnes));
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2601(void)
+{
+    Logger::WriteMessage("Test Leet Code 2601");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 4, 9, 6, 10 };
+    int result = leetCode.primeSubOperation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 6,8,11,12 };
+    result = leetCode.primeSubOperation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 5, 8, 3 };
+    result = leetCode.primeSubOperation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 4, 2, 3 };
+    result = leetCode.primeSubOperation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2605(void)
+{
+    Logger::WriteMessage("Test Leet Code 2605");
+    LeetCodeMath leetCode;
+    vector<int> nums1 = { 4, 1, 3 };
+    vector<int> nums2 = { 5, 7 };
+    int result = leetCode.minNumber(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 3,5,2,6 };
+    nums2 = { 3,1,7 };
+    result = leetCode.minNumber(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2605();
+    TestLeetCode2601();
+    TestLeetCode2600();
     TestLeetCode2598();
     TestLeetCode2595();
     TestLeetCode2591();

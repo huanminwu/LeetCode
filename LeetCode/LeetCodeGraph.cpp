@@ -16774,4 +16774,163 @@ int LeetCodeGraph::minimumTime(vector<vector<int>>& grid)
     }
     return -1;
 }
+
+/// <summary>
+/// Leet Code 2603. Collect Coins in a Tree
+/// 
+/// Hard
+///	
+/// There exists an undirected and unrooted tree with n nodes indexed 
+/// from 0 to n - 1. You are given an integer n and a 2D integer array 
+/// edges of length n - 1, where edges[i] = [ai, bi] indicates that 
+/// there is an edge between nodes ai and bi in the tree. You are also 
+/// given an array coins of size n where coins[i] can be either 0 or 1, 
+/// where 1 indicates the presence of a coin in the vertex i.
+///
+/// Initially, you choose to start at any vertex in the tree. Then, you 
+/// can perform the following operations any number of times: 
+///
+/// Collect all the coins that are at a distance of at most 2 from the 
+/// current vertex, or
+/// Move to any adjacent vertex in the tree.
+/// Find the minimum number of edges you need to go through to collect 
+/// all the coins and go back to the initial vertex.
+///
+/// Note that if you pass an edge several times, you need to count it 
+/// into the answer several times.
+///
+/// Example 1:
+///
+/// Input: coins = [1,0,0,0,0,1], edges = [[0,1],[1,2],[2,3],[3,4],[4,5]]
+/// Output: 2
+/// Explanation: Start at vertex 2, collect the coin at vertex 0, move to 
+/// vertex 3, collect the coin at vertex 5 then move back to vertex 2.
+///
+/// Example 2:
+/// Input: coins = [0,0,0,1,1,0,0,1], edges = [[0,1],[0,2],[1,3],[1,4],
+/// [2,5],[5,6],[5,7]]
+/// Output: 2
+/// Explanation: Start at vertex 0, collect the coins at vertices 4 and 3, 
+/// move to vertex 2,  collect the coin at vertex 7, then move back to 
+/// vertex 0.
+///
+/// Constraints:
+/// 1. n == coins.length
+/// 2. 1 <= n <= 3 * 10^4
+/// 3. 0 <= coins[i] <= 1
+/// 4. edges.length == n - 1
+/// 5. edges[i].length == 2
+/// 6. 0 <= ai, bi < n
+/// 7. ai != bi
+/// 8. edges represents a valid tree.
+/// </summary>
+int LeetCodeGraph::collectTheCoins(vector<int>& coins, vector<vector<int>>& edges)
+{
+    int n = coins.size();
+    vector<set<int>> neighbors(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].insert(edges[i][1]);
+        neighbors[edges[i][1]].insert(edges[i][0]);
+    }
+    queue<int> queue;
+    for (int i = 0; i < n; i++)
+    {
+        if (neighbors[i].size() == 1)
+        {
+            queue.push(i);
+        }
+    }
+    int result = n;
+    while (!queue.empty())
+    {
+        int v = queue.front();
+        queue.pop();
+        if (neighbors[v].empty()) continue;
+        int p = *neighbors[v].begin();
+        neighbors[v].erase(p);
+        neighbors[p].erase(v);
+        if (coins[v] > 0) coins[p] = max(coins[p], coins[v] + 1);
+        if (neighbors[p].size() == 1 && coins[p] < 3)
+        {
+            queue.push(p);
+        }
+        result--;
+    }
+    return (max(result, 1) - 1) * 2;
+}
+
+/// <summary>
+/// Leet Code 2608. Shortest Cycle in a Graph
+/// 
+/// Hard
+///	
+/// There is a bi-directional graph with n vertices, where each vertex is 
+/// labeled from 0 to n - 1. The edges in the graph are represented by a 
+/// given 2D integer array edges, where edges[i] = [ui, vi] denotes an 
+/// edge between vertex ui and vertex vi. Every vertex pair is connected 
+/// by at most one edge, and no vertex has an edge to itself.
+///
+/// Return the length of the shortest cycle in the graph. If no cycle 
+/// exists, return -1.
+///
+/// A cycle is a path that starts and ends at the same node, and each edge 
+/// in the path is used only once.
+/// 
+/// Example 1:
+/// Input: n = 7, edges = [[0,1],[1,2],[2,0],[3,4],[4,5],[5,6],[6,3]]
+/// Output: 3
+/// Explanation: The cycle with the smallest length is : 0 -> 1 -> 2 -> 0 
+///
+/// Example 2:
+/// Input: n = 4, edges = [[0,1],[0,2]]
+/// Output: -1
+/// Explanation: There are no cycles in this graph.
+///
+/// Constraints:
+/// 1. 2 <= n <= 1000
+/// 2. 1 <= edges.length <= 1000
+/// 3. edges[i].length == 2
+/// 4. 0 <= ui, vi < n
+/// 5. ui != vi
+/// 6. There are no repeated edges.
+/// </summary>
+int LeetCodeGraph::findShortestCycle(int n, vector<vector<int>>& edges)
+{
+    vector<vector<int>> neighbors(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(edges[i][1]);
+        neighbors[edges[i][1]].push_back(edges[i][0]);
+    }
+    int result = INT_MAX;
+    for (int i = 0; i < n; i++)
+    {
+        vector<int> visited(neighbors.size());
+        queue<pair<int, int>> queue;
+        queue.push(make_pair(-1, i));
+        visited[i] = 1;
+        while (!queue.empty())
+        {
+            pair<int, int> v = queue.front();
+            queue.pop();
+            for (int next :neighbors[v.second])
+            {
+                if (next == v.first) continue;
+                if (visited[next] == 0)
+                {
+                    visited[next] = visited[v.second] + 1;
+                    queue.push(make_pair(v.second, next));
+                }
+                else
+                {
+                    result = min(result, visited[v.second] - 1 + visited[next]);
+                }
+            }
+        }
+    }
+    if (result == INT_MAX) result = -1;
+    return result;
+}
+
 #pragma endregion

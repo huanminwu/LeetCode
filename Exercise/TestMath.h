@@ -253,5 +253,8 @@ void TestLeetCode2584(void);
 void TestLeetCode2591(void);
 void TestLeetCode2595(void);
 void TestLeetCode2598(void);
+void TestLeetCode2600(void);
+void TestLeetCode2601(void);
+void TestLeetCode2605(void);
 void TestLeetCodeMath(void);
 #endif  // TestMath

@@ -5954,8 +5954,28 @@ void TestLeetCode2586(void)
     Logger::WriteMessage("left = " + to_string(left) + "; right = " + to_string(right) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2606(void)
+{
+    Logger::WriteMessage("Test Leet Code 2606");
+    LeetCodeString leetCode;
+    string s = "adaa", chars = "d";
+    vector<int> vals = { -1000 };
+    int result = leetCode.maximumCostSubstring(s, chars, vals);
+    Logger::WriteMessage("s = " + s + "; chars = " + chars);
+    Logger::WriteMessage(vals);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "abc", chars = "abc";
+    vals = { -1, -1, -1 };
+    result = leetCode.maximumCostSubstring(s, chars, vals);
+    Logger::WriteMessage("s = " + s + "; chars = " + chars);
+    Logger::WriteMessage(vals);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2606();
     TestLeetCode2586();
     TestLeetCode2565();
     TestLeetCode2531();

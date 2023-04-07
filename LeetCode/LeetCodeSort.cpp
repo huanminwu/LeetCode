@@ -9906,4 +9906,261 @@ long long LeetCodeSort::repairCars(vector<int>& ranks, int cars)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2599. Make the Prefix Sum Non-negative
+/// 
+/// Medium
+///	
+/// You are given a 0-indexed integer array nums. You can apply the 
+/// following operation any number of times:
+///
+/// Pick any element from nums and put it at the end of nums.
+/// The prefix sum array of nums is an array prefix of the same length 
+/// as nums such that prefix[i] is the sum of all the integers nums[j] 
+/// where j is in the inclusive range [0, i].
+///
+/// Return the minimum number of operations such that the prefix sum 
+/// array does not contain negative integers. The test cases are generated 
+/// such that it is always possible to make the prefix sum array 
+/// non-negative.
+/// 
+/// Example 1:
+///
+/// Input: nums = [2,3,-5,4]
+/// Output: 0
+/// Explanation: we do not need to do any operations.
+/// The array is [2,3,-5,4]. The prefix sum array is [2, 5, 0, 4].
+///
+/// Example 2:
+///
+/// Input: nums = [3,-5,-2,6]
+/// Output: 1
+/// Explanation: we can do one operation on index 1.
+/// The array after the operation is [3,-2,6,-5]. The prefix sum 
+/// array is [3, 1, 7, 2].
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. -10^9 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeSort::makePrefSumNonNegative(vector<int>& nums)
+{
+    set<pair<int, int>> neg;
+    long long sum = 0;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] < 0)
+        {
+            neg.insert(make_pair(nums[i], i));
+        }
+        sum += nums[i];
+        while (sum < 0 && !neg.empty())
+        {
+            sum -= neg.begin()->first;
+            neg.erase(neg.begin());
+            result++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2611. Mice and Cheese
+/// 
+/// Medium
+///	
+/// There are two mice and n different types of cheese, each type of 
+/// cheese should be eaten by exactly one mouse.
+///
+/// A point of the cheese with index i (0-indexed) is:
+///
+/// reward1[i] if the first mouse eats it.
+/// reward2[i] if the second mouse eats it.
+/// You are given a positive integer array reward1, a positive integer 
+/// array reward2, and a non-negative integer k.
+///
+/// Return the maximum points the mice can achieve if the first mouse 
+/// eats exactly k types of cheese.
+///
+/// Example 1:
+///
+/// Input: reward1 = [1,1,3,4], reward2 = [4,4,1,1], k = 2
+/// Output: 15
+/// Explanation: In this example, the first mouse eats the 2nd (0-indexed) 
+/// and the 3rd types of cheese, and the second mouse eats the 0th and 
+/// the 1st types of cheese.
+/// The total points are 4 + 4 + 3 + 4 = 15.
+/// It can be proven that 15 is the maximum total points that the mice 
+/// can achieve.
+///
+/// Example 2:
+/// Input: reward1 = [1,1], reward2 = [1,1], k = 2
+/// Output: 2
+/// Explanation: In this example, the first mouse eats the 0th (0-indexed) 
+/// and 1st types of cheese, and the second mouse does not eat any cheese.
+/// The total points are 1 + 1 = 2.
+/// It can be proven that 2 is the maximum total points that the mice can 
+/// achieve.
+/// 
+/// Constraints:
+/// 1. 1 <= n == reward1.length == reward2.length <= 10^5
+/// 2. 1 <= reward1[i], reward2[i] <= 1000
+/// 3. 0 <= k <= n
+/// </summary>
+int LeetCodeSort::miceAndCheese(vector<int>& reward1, vector<int>& reward2, int k)
+{
+    int result = 0;
+    for (size_t i = 0; i < reward2.size(); i++)
+    {
+        result += reward2[i];
+    }
+    priority_queue<int> pq;
+    for (size_t i = 0; i < reward1.size(); i++)
+    {
+        pq.push(reward1[i] - reward2[i]);
+    }
+    for (int i = 0; i < k; i++)
+    {
+        result += pq.top();
+        pq.pop();
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 2613. Beautiful Pairs
+/// </summary>
+inline void better(const vector<int>& v, int& x, int y)
+{
+    if (x < 0) {
+        x = y;
+    }
+    if (y >= 0 && (v[x] < v[y] || (v[x] == v[y] && y < x))) {
+        x = y;
+    }
+}
+
+
+/// <summary>
+/// Leet Code 2613. Beautiful Pairs
+/// </summary>
+void update(vector<int>& tree, const vector<int>& v, int ind, int left, int right, int x, int y) 
+{
+    better(v, tree[ind], y);
+    if (left >= x && right <= x) {
+        return;
+    }
+    const int mid = (left + right) >> 1;
+    if (x <= mid) {
+        update(tree, v, ind << 1, left, mid, x, y);
+    }
+    else {
+        update(tree, v, (ind << 1) | 1, mid + 1, right, x, y);
+    }
+}
+
+/// <summary>
+/// Leet Code 2613. Beautiful Pairs
+/// </summary>
+int query(const vector<int>& tree, const vector<int>& v, int ind, int left, int right, int x, int y) 
+{
+    if (left >= x && right <= y) {
+        return tree[ind];
+    }
+    const int mid = (left + right) >> 1;
+    int r = -1;
+    if (x <= mid) {
+        r = query(tree, v, ind << 1, left, mid, x, y);
+    }
+    if (y > mid) {
+        better(v, r, query(tree, v, (ind << 1) | 1, mid + 1, right, x, y));
+    }
+    return r;
+}
+
+/// <summary>
+/// Leet Code 2613. Beautiful Pairs
+/// 
+/// Hard
+///	
+/// You are given two 0-indexed integer arrays nums1 and nums2 of the same 
+/// length. A pair of indices (i,j) is called beautiful 
+/// if|nums1[i] - nums1[j]| + |nums2[i] - nums2[j]| is the smallest 
+/// amongst all possible indices pairs where i < j.
+///
+/// Return the beautiful pair. In the case that there are multiple 
+/// beautiful pairs, return the lexicographically smallest pair.
+///
+/// Note that
+/// |x| denotes the absolute value of x.
+/// A pair of indices (i1, j1) is lexicographically smaller than (i2, j2) 
+/// if i1 < i2 or i1 == i2 and j1 < j2.
+///
+/// Example 1:
+/// Input: nums1 = [1,2,3,2,4], nums2 = [2,3,1,2,3]
+/// Output: [0,3]
+/// Explanation: Consider index 0 and index 3. The value of 
+/// |nums1[i]-nums1[j]| + |nums2[i]-nums2[j]| is 1, which is the smallest 
+/// value we can achieve.
+///
+/// Example 2:
+/// Input: nums1 = [1,2,4,3,2,5], nums2 = [1,4,2,3,5,1]
+/// Output: [1,4]
+/// Explanation: Consider index 1 and index 4. The value of 
+/// |nums1[i]-nums1[j]| + |nums2[i]-nums2[j]| is 1, which is the smallest 
+/// value we can achieve.
+///
+/// Constraints:
+/// 1. 2 <= nums1.length, nums2.length <= 10^5
+/// 2. nums1.length == nums2.length
+/// 3. 0 <= nums1i <= nums1.length
+/// 4. 0 <= nums2i <= nums2.length
+/// </summary>
+vector<int> LeetCodeSort::beautifulPair(vector<int>& nums1, vector<int>& nums2)
+{
+    const int N = 100005;
+    const int n = nums1.size();
+    vector<int> p1(n), p2(n), ind(n);
+    for (int i = 0; i < n; ++i) 
+    {
+        p1[i] = nums2[i] + nums1[i];
+        p2[i] = nums2[i] - nums1[i];
+        ind[i] = i;
+    }
+    sort(ind.begin(), ind.end(), [&](const int x, const int y) {
+        return nums2[x] < nums2[y];
+        });
+    vector<int> tree1(N << 2, -1), tree2(N << 2, -1), ans(2, n);
+    int d = INT_MAX;
+    for (int i = 0; i < n; ++i) {
+        const int i1 = query(tree1, p1, 1, 0, n, 0, nums1[ind[i]]);
+        if (i1 >= 0) {
+            const int may = p1[ind[i]] - p1[i1];
+            if (may < d) {
+                d = may;
+                ans = { min(ind[i], i1), max(ind[i], i1) };
+            }
+            else if (may == d) {
+                ans = min(ans, { min(ind[i], i1), max(ind[i], i1) });
+            }
+        }
+        const int i2 = query(tree2, p2, 1, 0, n, nums1[ind[i]], n);
+        if (i2 >= 0) {
+            const int may = p2[ind[i]] - p2[i2];
+            if (may < d) {
+                d = may;
+                ans = { min(ind[i], i2), max(ind[i], i2) };
+            }
+            else if (may == d) {
+                ans = min(ans, { min(ind[i], i2), max(ind[i], i2) });
+            }
+        }
+        update(tree1, p1, 1, 0, n, nums1[ind[i]], ind[i]);
+        update(tree2, p2, 1, 0, n, nums1[ind[i]], ind[i]);
+    }
+    return ans;
+}
 #pragma endregion

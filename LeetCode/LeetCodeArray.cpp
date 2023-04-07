@@ -26173,5 +26173,375 @@ bool LeetCodeArray::checkValidGrid(vector<vector<int>>& grid)
     }
     return true;
 }
+
+/// <summary>
+/// Leet Code 2602. Minimum Operations to Make All Array Elements Equal
+/// 
+/// Medium
+///	
+/// You are given an array nums consisting of positive integers.
+///
+/// You are also given an integer array queries of size m. For the ith 
+/// query, you want to make all of the elements of nums equal to 
+/// queries[i]. You can perform the following operation on the array 
+/// any number of times:
+///
+/// Increase or decrease an element of the array by 1.
+/// Return an array answer of size m where answer[i] is the minimum 
+/// number of operations to make all elements of nums equal to queries[i].
+///
+/// Note that after each query the array is reset to its original state.
+/// 
+/// Example 1:
+/// Input: nums = [3,1,6,8], queries = [1,5]
+/// Output: [14,10]
+/// Explanation: For the first query we can do the following operations:
+/// - Decrease nums[0] 2 times, so that nums = [1,1,6,8].
+/// - Decrease nums[2] 5 times, so that nums = [1,1,1,8].
+/// - Decrease nums[3] 7 times, so that nums = [1,1,1,1].
+/// So the total number of operations for the first query is 
+/// 2 + 5 + 7 = 14.
+/// For the second query we can do the following operations:
+/// - Increase nums[0] 2 times, so that nums = [5,1,6,8].
+/// - Increase nums[1] 4 times, so that nums = [5,5,6,8].
+/// - Decrease nums[2] 1 time, so that nums = [5,5,5,8].
+/// - Decrease nums[3] 3 times, so that nums = [5,5,5,5].
+/// So the total number of operations for the second query is 
+/// 2 + 4 + 1 + 3 = 10.
+///
+/// Example 2:
+/// Input: nums = [2,9,6,3], queries = [10]
+/// Output: [20]
+/// Explanation: We can increase each value in the array to 10. The total 
+/// number of operations will be 8 + 1 + 4 + 7 = 20.
+///
+/// Constraints:
+/// 1. n == nums.length
+/// 2. m == queries.length
+/// 3. 1 <= n, m <= 10^5
+/// 4. 1 <= nums[i], queries[i] <= 10^9
+/// </summary>
+vector<long long> LeetCodeArray::minOperationsII(vector<int>& nums, vector<int>& queries)
+{
+    vector<long long> result(queries.size());
+    sort(nums.begin(), nums.end());
+    vector<long long> dp(nums.size() + 1);
+    dp[0] = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        dp[i + 1] += nums[i];
+        dp[i + 1] += dp[i];
+    }
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        int index = lower_bound(nums.begin(), nums.end(), queries[i]) - nums.begin() + 1;
+        result[i] = ((long long)dp.back() - (long long)dp[index-1]) - ((long long)dp.size() - (long long)index) * (long long)queries[i];
+        result[i] += ((long long)index - (long long)1) * (long long)queries[i] - (long long)dp[index - 1];
+    }
+
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2607. Make K-Subarray Sums Equal
+/// 
+/// Medium
+///	
+/// You are given a 0-indexed integer array arr and an integer k. The 
+/// array arr is circular. In other words, the first element of the 
+/// array is the next element of the last element, and the last element 
+/// of the array is the previous element of the first element.
+///
+/// You can do the following operation any number of times:
+///
+/// Pick any element from arr and increase or decrease it by 1.
+/// Return the minimum number of operations such that the sum of each 
+/// subarray of length k is equal.
+///
+/// A subarray is a contiguous part of the array.
+///
+///
+/// Example 1:
+/// Input: arr = [1,4,1,3], k = 2
+/// Output: 1
+/// Explanation: we can do one operation on index 1 to make its value 
+/// equal to 3.
+/// The array after the operation is [1,3,1,3]
+/// - Subarray starts at index 0 is [1, 3], and its sum is 4 
+/// - Subarray starts at index 1 is [3, 1], and its sum is 4 
+/// - Subarray starts at index 2 is [1, 3], and its sum is 4 
+/// - Subarray starts at index 3 is [3, 1], and its sum is 4 
+///
+/// Example 2:
+/// Input: arr = [2,5,5,7], k = 3
+/// Output: 5
+/// Explanation: we can do three operations on index 0 to make its value 
+/// equal to 5 and two operations on index 3 to make its value equal to 5.
+/// The array after the operations is [5,5,5,5]
+/// - Subarray starts at index 0 is [5, 5, 5], and its sum is 15
+/// - Subarray starts at index 1 is [5, 5, 5], and its sum is 15
+/// - Subarray starts at index 2 is [5, 5, 5], and its sum is 15
+/// - Subarray starts at index 3 is [5, 5, 5], and its sum is 15 
+///
+/// Constraints:
+/// 1. 1 <= k <= arr.length <= 10^5
+/// 2. 1 <= arr[i] <= 10^9
+/// </summary>
+long long LeetCodeArray::makeSubKSumEqual(vector<int>& arr, int k)
+{
+    vector<int> visited(arr.size());
+    long long result = 0;
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        if (visited[i] == 1) continue;
+        int p = i;
+        vector<int> sub_arr;
+        while (visited[p] == 0)
+        {
+            visited[p] = 1;
+            sub_arr.push_back(arr[p]);
+            p = (p + k) % arr.size();
+        }
+        sort(sub_arr.begin(), sub_arr.end());
+        long long left_sum = 0;
+        long long right_sum = 0;
+        long long sum = 0;
+        int n = sub_arr.size();
+        for (int j = 0; j < n; j++)
+        {
+            right_sum += sub_arr[j] - sub_arr[0];
+        }
+        sum = left_sum + right_sum;
+        for (int j = 1; j < n; j++)
+        {
+            left_sum += ((long long)sub_arr[j] - (long long)sub_arr[j - 1]) * (long long)j;
+            right_sum -= ((long long)sub_arr[j] - (long long)sub_arr[j - 1]) * (long long)(n - j);
+            sum = min(sum, left_sum + right_sum);
+        }
+        result += sum;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2609. Find the Longest Balanced Substring of a Binary String
+/// 
+/// Easy
+///	
+/// You are given a binary string s consisting only of zeroes and ones.
+/// A substring of s is considered balanced if all zeroes are before ones 
+/// and the number of zeroes is equal to the number of ones inside the 
+/// substring. Notice that the empty substring is considered a balanced 
+/// substring.
+///
+/// Return the length of the longest balanced substring of s.
+/// A substring is a contiguous sequence of characters within a string.
+/// 
+/// Example 1:
+///
+/// Input: s = "01000111"
+/// Output: 6
+/// Explanation: The longest balanced substring is "000111", which has 
+/// length 6.
+///
+/// Example 2:
+/// Input: s = "00111"
+/// Output: 4
+/// Explanation: The longest balanced substring is "0011", which has 
+/// length 4. 
+///
+/// Example 3:
+/// Input: s = "111"
+/// Output: 0
+/// Explanation: There is no balanced substring except the empty 
+/// substring, so the answer is 0.
+/// Constraints:
+/// 1. 1 <= s.length <= 50
+/// 2. '0' <= s[i] <= '1'
+/// </summary>
+int LeetCodeArray::findTheLongestBalancedSubstring(string s)
+{
+    int zeros = 0, ones = 0;
+    int result = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '0')
+        {
+            if (ones != 0)
+            {
+                ones = 0;
+                zeros = 0;
+            }
+            zeros++;
+        }
+        else
+        {
+            ones++;
+            if (ones <= zeros)
+            {
+                result = max(result, 2 * ones);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2610. Convert an Array Into a 2D Array With Conditions
+/// 
+/// Medium
+///	
+/// You are given an integer array nums. You need to create a 2D array 
+/// from nums satisfying the following conditions:
+/// 
+/// The 2D array should contain only the elements of the array nums.
+/// Each row in the 2D array contains distinct integers.
+/// The number of rows in the 2D array should be minimal.
+/// Return the resulting array. If there are multiple answers, return 
+/// any of them.
+///
+/// Note that the 2D array can have a different number of elements on each 
+/// row.
+///
+/// Example 1:
+/// Input: nums = [1,3,4,1,2,3,1]
+/// Output: [[1,3,4,2],[1,3],[1]]
+/// Explanation: We can create a 2D array that contains the following rows:
+/// - 1,3,4,2
+/// - 1,3
+/// - 1
+/// All elements of nums were used, and each row of the 2D array contains 
+/// distinct integers, so it is a valid answer.
+/// It can be shown that we cannot have less than 3 rows in a valid array.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4]
+/// Output: [[4,3,2,1]]
+/// Explanation: All elements of the array are distinct, so we can keep 
+/// all of them in the first row of the 2D array.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 200
+/// 2. 1 <= nums[i] <= nums.length
+/// </summary>
+vector<vector<int>> LeetCodeArray::findMatrix(vector<int>& nums)
+{
+    unordered_map<int, int> num_map;
+    vector<vector<int>> result;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        num_map[nums[i]]++;
+        if (num_map[nums[i]] > (int)result.size())
+        {
+            result.push_back(vector<int>());
+        }
+        result[num_map[nums[i]] - 1].push_back(nums[i]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2612. Minimum Reverse Operations
+/// </summary>
+pair<int, int> LeetCodeArray::getRange(int x, int n, int k)
+{
+    int l = max(x - k + 1, 0), r = min(x, n - k);
+    int L = 2 * l + k - 1 - x, R = 2 * r + k - 1 - x;
+    return { L, R };
+};
+
+/// <summary>
+/// Leet Code 2612. Minimum Reverse Operations
+/// 
+/// Hard
+///	
+/// You are given an integer n and an integer p in the range [0, n - 1]. 
+/// Representing a 0-indexed array arr of length n where all positions 
+/// are set to 0's, except position p which is set to 1.
+/// 
+/// You are also given an integer array banned containing some positions 
+/// from the array. For the ith position in banned, arr[banned[i]] = 0, 
+/// and banned[i] != p.
+///
+/// You can perform multiple operations on arr. In an operation, you can 
+/// choose a subarray with size k and reverse the subarray. However, 
+/// the 1 in arr should never go to any of the positions in banned. In 
+/// other words, after each operation arr[banned[i]] remains 0.
+///
+/// Return an array ans where for each i from [0, n - 1], ans[i] is the 
+/// minimum number of reverse operations needed to bring the 1 to 
+/// position i in arr, or -1 if it is impossible.
+///
+/// A subarray is a contiguous non-empty sequence of elements within an 
+/// array.
+/// The values of ans[i] are independent for all i's.
+/// The reverse of an array is an array containing the values in reverse 
+/// order.
+///
+/// Example 1:
+/// Input: n = 4, p = 0, banned = [1,2], k = 4
+/// Output: [0,-1,-1,1]
+/// Explanation: In this case k = 4 so there is only one possible reverse 
+/// operation we can perform, which is reversing the whole array. 
+/// Initially, 1 is placed at position 0 so the amount of operations we 
+/// need for position 0 is 0. We can never place a 1 on the banned 
+/// positions, so the answer for positions 1 and 2 is -1. Finally, with 
+/// one reverse operation we can bring the 1 to index 3, so the answer 
+/// for position 3 is 1. 
+///
+/// Example 2:
+/// Input: n = 5, p = 0, banned = [2,4], k = 3
+/// Output: [0,-1,-1,-1,-1]
+/// Explanation: In this case the 1 is initially at position 0, so the 
+/// answer for that position is 0. We can perform reverse operations of 
+/// size 3. The 1 is currently located at position 0, so we need to 
+/// reverse the subarray [0, 2] for it to leave that position, but 
+/// reversing that subarray makes position 2 have a 1, which shouldn't 
+/// happen. So, we can't move the 1 from position 0, making the result 
+/// for all the other positions -1. 
+///
+/// Example 3:
+///
+/// Input: n = 4, p = 2, banned = [0,1,3], k = 1
+/// Output: [-1,-1,0,-1]
+/// Explanation: In this case we can only perform reverse operations 
+/// of size 1. So the 1 never changes its position.
+///
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// 2. 0 <= p <= n - 1
+/// 3. 0 <= banned.length <= n - 1
+/// 4. 0 <= banned[i] <= n - 1
+/// 5. 1 <= k <= n 
+/// 6. banned[i] != p
+/// 7. all values in banned are unique 
+/// </summary>
+vector<int> LeetCodeArray::minReverseOperations(int n, int p, vector<int>& banned, int k)
+{
+    set<int> E[2];
+    for (int i = 0; i < n; i++) E[i & 1].insert(i);
+    int B = (int)banned.size();
+    for (int i = 0; i < B; i++) E[banned[i] & 1].erase(banned[i]);
+    vector<int> ans(n, -1);
+    queue<int> q;
+    q.push(p);
+    ans[p] = 0;
+    E[p & 1].erase(p);
+    while (!q.empty())
+    {
+        int x = q.front(); q.pop();
+        pair<int, int> R = getRange(x, n, k);
+        set<int>& cur = E[R.first & 1];
+        auto it = cur.lower_bound(R.first);
+        while (it != cur.end() && *it <= R.second)
+        {
+            ans[*it] = ans[x] + 1;
+            q.push(*it);
+            it = cur.erase(it);
+        }
+    }
+    return ans;
+}
 #pragma endregion
 

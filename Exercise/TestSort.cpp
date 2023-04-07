@@ -3155,8 +3155,66 @@ void TestLeetCode2594(void)
     Logger::WriteMessage("cars = " + to_string(cars) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2599(void)
+{
+    Logger::WriteMessage("Test Leet Code 2599");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 2, 3, -5, 4 };
+    int result = leetCode.makePrefSumNonNegative(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,-5,-2,6 };
+    result = leetCode.makePrefSumNonNegative(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2611(void)
+{
+    Logger::WriteMessage("Test Leet Code 2611");
+    LeetCodeSort leetCode;
+    vector<int> reward1 = { 1, 1, 3, 4 };
+    vector<int> reward2 = { 4, 4, 1, 1 };
+    int k = 2;
+    int result = leetCode.miceAndCheese(reward1, reward2, k);
+    Logger::WriteMessage(reward1);
+    Logger::WriteMessage(reward2);
+    Logger::WriteMessage("k = " + to_string(k) + "; `result = " + to_string(result));
+
+    reward1 = { 1,1 };
+    reward2 = { 1,1 };
+    k = 2;
+    result = leetCode.miceAndCheese(reward1, reward2, k);
+    Logger::WriteMessage(reward1);
+    Logger::WriteMessage(reward2);
+    Logger::WriteMessage("k = " + to_string(k) + "; `result = " + to_string(result));
+}
+
+void TestLeetCode2613(void)
+{
+    Logger::WriteMessage("Test Leet Code 2613");
+    LeetCodeSort leetCode;
+    vector<int> nums1 = { 1, 2, 3, 2, 4 }; 
+    vector<int> nums2 = { 2, 3, 1, 2, 3 };
+    vector<int> result = leetCode.beautifulPair(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(result);
+
+    nums1 = { 1,2,4,3,2,5 };
+    nums2 = { 1,4,2,3,5,1 };
+    result = leetCode.beautifulPair(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2613();
+    TestLeetCode2611();
+    TestLeetCode2599();
     TestLeetCode2594();
     TestLeetCode2567();
     TestLeetCode2561();
