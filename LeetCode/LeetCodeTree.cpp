@@ -11956,4 +11956,83 @@ int LeetCodeTree::rootCount(vector<vector<int>>& edges, vector<vector<int>>& gue
     return result;
 }
 
+/// <summary>
+/// Leet Code 2641. Cousins in Binary Tree II
+/// 
+/// Medium
+///	
+/// Given the root of a binary tree, replace the value of each node in 
+/// the tree with the sum of all its cousins' values.
+///
+/// Two nodes of a binary tree are cousins if they have the same depth 
+/// with different parents.
+/// 
+/// Return the root of the modified tree.
+///
+/// Note that the depth of a node is the number of edges in the path 
+/// from the root node to it.
+/// 
+/// Example 1:
+/// Input: root = [5,4,9,1,10,null,7]
+/// Output: [0,0,0,7,7,null,11]
+/// Explanation: The diagram above shows the initial binary tree and 
+/// the binary tree after changing the value of each node.
+/// - Node with value 5 does not have any cousins so its sum is 0.
+/// - Node with value 4 does not have any cousins so its sum is 0.
+/// - Node with value 9 does not have any cousins so its sum is 0.
+/// - Node with value 1 has a cousin with value 7 so its sum is 7.
+/// - Node with value 10 has a cousin with value 7 so its sum is 7.
+/// - Node with value 7 has cousins with values 1 and 10 so its sum is 11.
+///
+/// Example 2:
+/// Input: root = [3,1,2]
+/// Output: [0,0,0]
+/// Explanation: The diagram above shows the initial binary tree and the 
+/// binary tree after changing the value of each node.
+/// - Node with value 3 does not have any cousins so its sum is 0.
+/// - Node with value 1 does not have any cousins so its sum is 0.
+/// - Node with value 2 does not have any cousins so its sum is 0.
+/// 
+/// Constraints:
+/// 1. The number of nodes in the tree is in the range [1, 10^5].
+/// 2. 1 <= Node.val <= 10^4
+/// </summary>
+TreeNode* LeetCodeTree::replaceValueInTree(TreeNode* root)
+{
+    queue<TreeNode*> queue;
+    queue.push(root);
+    unordered_map<TreeNode*, TreeNode*> parent_map;
+    unordered_map<TreeNode*, int> parent_sum;
+    int prev_sum = 0;
+    parent_map[nullptr] = root;
+    parent_sum[nullptr] = 0;
+    while (!queue.empty())
+    {
+        int sum = 0;
+        size_t size = queue.size();
+        for (size_t i = 0; i < size; i++)
+        {
+            TreeNode* node = queue.front();
+            TreeNode* parent_node = parent_map[node];
+            node->val = prev_sum - parent_sum[parent_node];
+            queue.pop();
+            if (node->left != nullptr)
+            {
+                parent_map[node->left] = node;
+                parent_sum[node] += node->left->val;
+                sum += node->left->val;
+                queue.push(node->left);
+            }
+            if (node->right != nullptr)
+            {
+                parent_map[node->right] = node;
+                parent_sum[node] += node->right->val;
+                sum += node->right->val;
+                queue.push(node->right);
+            }
+        }
+        prev_sum = sum;
+    }
+    return root;
+}
 #pragma endregion

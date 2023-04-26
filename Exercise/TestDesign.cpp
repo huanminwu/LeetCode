@@ -5085,11 +5085,58 @@ void TestLeetCode2590(void)
         Logger::WriteMessage(parameters[i]);
     }
     Logger::WriteMessage(result);
+}
 
+void TestLeetCode2642(void)
+{
+    Logger::WriteMessage("Test Leet Code 2642");
+    vector<string> commands =
+    {
+        "Graph", "shortestPath", "shortestPath", "addEdge", "shortestPath"
+    };
+    vector<vector<vector<int>>> parameters
+    {
+        {{4}, {0, 2, 5},{0, 1, 2},{1, 2, 1},{3, 0, 3}},
+        {{3, 2}}, {{0, 3}},{{1, 3, 4}}, {{0, 3}}
+    };
+    vector<string> result;
+    Graph* graph = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Graph")
+        {
+            vector<vector<int>> edges;
+            for (size_t j = 1; j < parameters[i].size(); j++)
+            {
+                edges.push_back(parameters[i][j]);
+            }
+            graph = new Graph(parameters[i][0][0], edges);
+            result.push_back({ "null" });
+        }
+        else if (commands[i] == "addEdge")
+        {
+            graph->addEdge(parameters[i][0]);
+            result.push_back({ "null" });
+        }
+        else if (commands[i] == "shortestPath")
+        {
+            int ret = graph->shortestPath(
+                parameters[i][0][0], parameters[i][0][1]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete graph;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
 }
 
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2642();
     TestLeetCode2590();
     TestLeetCode2526();
     TestLeetCode2502();

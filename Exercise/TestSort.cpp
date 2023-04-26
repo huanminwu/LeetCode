@@ -3210,8 +3210,35 @@ void TestLeetCode2613(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2653(void)
+{
+    Logger::WriteMessage("Test Leet Code 2653");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, -1, -3, -2, 3 };
+    int k = 3, x = 2;
+    vector<int> result = leetCode.getSubarrayBeauty(nums, k, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+
+    nums = { -1,-2,-3,-4,-5 };
+    k = 2, x = 2;
+    result = leetCode.getSubarrayBeauty(nums, k, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+
+    nums = { -3,1,2,-3,0,-3 };
+    k = 2, x = 1;
+    result = leetCode.getSubarrayBeauty(nums, k, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2653();
     TestLeetCode2613();
     TestLeetCode2611();
     TestLeetCode2599();

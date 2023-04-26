@@ -3618,8 +3618,38 @@ void TestLeetCode2585(void)
     Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2638(void)
+{
+    Logger::WriteMessage("Test Leet Code 2638");
+    LeetCodeDP leetCode;
+    vector<int>nums = { 5, 4, 6 };
+    int k = 1;
+    long long result = leetCode.countTheNumOfKFreeSubsets(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 2,3,5,8 };
+    k = 5;
+    result = leetCode.countTheNumOfKFreeSubsets(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 10, 5, 9, 11 };
+    k = 20;
+    result = leetCode.countTheNumOfKFreeSubsets(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1, 5, 9, 2, 6 };
+    k = 4;
+    result = leetCode.countTheNumOfKFreeSubsets(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2638();
     TestLeetCode2585();
     TestLeetCode2547();
     TestLeetCode2533();

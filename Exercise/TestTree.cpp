@@ -3737,8 +3737,28 @@ void TestLeetCode2581(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2641(void)
+{
+    Logger::WriteMessage("Test Leet Code 2641");
+    LeetCodeTree leetCode;
+    string input = "[5,4,9,1,10,null,7]";
+    TreeNode* root = leetCode.deserialize(input);
+    TreeNode* result = leetCode.replaceValueInTree(root);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("result = " + leetCode.serialize(result));
+    leetCode.freeTreeNodes(result);
+
+    input = "[3,1,2]";
+    root = leetCode.deserialize(input);
+    result = leetCode.replaceValueInTree(root);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("result = " + leetCode.serialize(result));
+    leetCode.freeTreeNodes(result);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode2641();
     TestLeetCode2581();
     TestLeetCode2583();
     TestLeetCode2538();

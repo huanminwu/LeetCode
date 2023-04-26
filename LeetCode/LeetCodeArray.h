@@ -16698,6 +16698,173 @@ public:
     /// 7. all values in banned are unique 
     /// </summary>
     vector<int> minReverseOperations(int n, int p, vector<int>& banned, int k);
+
+    /// <summary>
+    /// Leet Code 2615. Sum of Distances
+    /// 
+    /// Medium
+    ///	
+    /// You are given a 0-indexed integer array nums. There exists an array 
+    /// arr of length nums.length, where arr[i] is the sum of |i - j| over 
+    /// all j such that nums[j] == nums[i] and j != i. If there is no such j, 
+    /// set arr[i] to be 0.
+    ///
+    /// Return the array arr.
+    /// Example 1:
+    /// Input: nums = [1,3,1,1,2]
+    /// Output: [5,0,3,4,0]
+    /// Explanation: 
+    /// When i = 0, nums[0] == nums[2] and nums[0] == nums[3]. Therefore, 
+    /// arr[0] = |0 - 2| + |0 - 3| = 5. 
+    /// When i = 1, arr[1] = 0 because there is no other index with value 3.
+    /// When i = 2, nums[2] == nums[0] and nums[2] == nums[3]. Therefore, 
+    /// arr[2] = |2 - 0| + |2 - 3| = 3. 
+    /// When i = 3, nums[3] == nums[0] and nums[3] == nums[2]. Therefore, 
+    /// arr[3] = |3 - 0| + |3 - 2| = 4. 
+    /// When i = 4, arr[4] = 0 because there is no other index with value 2. 
+    ///
+    /// Example 2:
+    ///
+    /// Input: nums = [0,5,3]
+    /// Output: [0,0,0]
+    /// Explanation: Since each element in nums is distinct, arr[i] = 0 for 
+    /// all i.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 10^9
+    /// </summary>
+    vector<long long> distance(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2643. Row With Maximum Ones
+    /// 
+    /// Easy
+    ///	
+    /// Given a m x n binary matrix mat, find the 0-indexed position of the 
+    /// row that contains the maximum count of ones, and the number of ones 
+    /// in that row.
+    ///
+    /// In case there are multiple rows that have the maximum count of ones, 
+    /// the row with the smallest row number should be selected.
+    ///
+    /// Return an array containing the index of the row, and the number of 
+    /// ones in it.
+    ///
+    /// Example 1:
+    /// Input: mat = [[0,1],[1,0]]
+    /// Output: [0,1]
+    /// Explanation: Both rows have the same number of 1's. So we return the 
+    /// index of the smaller row, 0, and the maximum count of ones (1). So, 
+    /// the answer is [0,1]. 
+    ///
+    /// Example 2:
+    /// Input: mat = [[0,0,0],[0,1,1]]
+    /// Output: [1,2]
+    /// Explanation: The row indexed 1 has the maximum count of ones (2). So 
+    /// we return its index, 1, and the count. So, the answer is [1,2].
+    ///
+    /// Example 3:
+    /// Input: mat = [[0,0],[1,1],[0,0]]
+    /// Output: [1,2]
+    /// Explanation: The row indexed 1 has the maximum count of ones (2). So 
+    /// the answer is [1,2].
+    ///
+    /// Constraints:
+    /// 1. m == mat.length 
+    /// 2. n == mat[i].length 
+    /// 3. 1 <= m, n <= 100 
+    /// 4. mat[i][j] is either 0 or 1.
+    /// </summary>
+    vector<int> rowAndMaximumOnes(vector<vector<int>>& mat);
+
+    /// <summary>
+    /// Leet Code 2639. Find the Width of Columns of a Grid
+    /// 
+    /// Easy
+    ///	
+    /// You are given a 0-indexed m x n integer matrix grid. The width of a 
+    /// column is the maximum length of its integers.
+    ///
+    /// For example, if grid = [[-10], [3], [12]], the width of the only 
+    /// column is 3 since -10 is of length 3.
+    /// Return an integer array ans of size n where ans[i] is the width of 
+    /// the ith column.
+    ///
+    /// The length of an integer x with len digits is equal to len if x is 
+    /// non-negative, and len + 1 otherwise.
+    /// 
+    /// Example 1:
+    /// Input: grid = [[1],[22],[333]]
+    /// Output: [3]
+    /// Explanation: In the 0th column, 333 is of length 3.
+    ///
+    /// Example 2:
+    /// Input: grid = [[-15,1,3],[15,7,12],[5,6,-2]]
+    /// Output: [3,1,2]
+    /// Explanation: 
+    /// In the 0th column, only -15 is of length 3.
+    /// In the 1st column, all integers are of length 1. 
+    /// In the 2nd column, both 12 and -2 are of length 2.
+    ///
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 1 <= m, n <= 100 
+    /// 4. -10^9 <= grid[r][c] <= 10^9
+    /// </summary>
+    vector<int> findColumnWidth(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 2640. Find the Score of All Prefixes of an Array
+    /// 
+    /// Medium
+    ///	
+    /// We define the conversion array conver of an array arr as follows:
+    ///
+    /// conver[i] = arr[i] + max(arr[0..i]) where max(arr[0..i]) is the 
+    /// maximum value of arr[j] over 0 <= j <= i.
+    /// We also define the score of an array arr as the sum of the values 
+    /// of the conversion array of arr.
+    ///
+    /// Given a 0-indexed integer array nums of length n, return an array 
+    /// ans of length n where ans[i] is the score of the prefix nums[0..i].
+    ///
+    /// Example 1:
+    /// Input: nums = [2,3,7,5,10]
+    /// Output: [4,10,24,36,56]
+    /// Explanation: 
+    /// For the prefix [2], the conversion array is [4] hence the score is 4
+    /// For the prefix [2, 3], the conversion array is [4, 6] hence the 
+    /// score is 10
+    /// For the prefix [2, 3, 7], the conversion array is [4, 6, 14] hence 
+    /// the score is 24
+    /// For the prefix [2, 3, 7, 5], the conversion array is [4, 6, 14, 12] 
+    /// hence the score is 36
+    /// For the prefix [2, 3, 7, 5, 10], the conversion array is [4, 6, 14, 
+    /// 12, 20] hence the score is 56
+    ///
+    /// Example 2:
+    /// Input: nums = [1,1,2,4,8,16]
+    /// Output: [2,4,8,16,32,64]
+    /// Explanation: 
+    /// For the prefix [1], the conversion array is [2] hence the score is 2
+    /// For the prefix [1, 1], the conversion array is [2, 2] hence the 
+    /// score is 4
+    /// For the prefix [1, 1, 2], the conversion array is [2, 2, 4] hence 
+    /// the score is 8
+    /// For the prefix [1, 1, 2, 4], the conversion array is [2, 2, 4, 8] 
+    /// hence the score is 16
+    /// For the prefix [1, 1, 2, 4, 8], the conversion array is [2, 2, 4, 8, 16] 
+    /// hence the score is 32
+    /// For the prefix [1, 1, 2, 4, 8, 16], the conversion array is [2, 2, 4, 8, 
+    /// 16, 32] hence the score is 64
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    vector<long long> findPrefixScore(vector<int>& nums);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

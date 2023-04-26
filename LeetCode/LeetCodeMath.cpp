@@ -17860,3 +17860,395 @@ int LeetCodeMath::minNumber(vector<int>& nums1, vector<int>& nums2)
         (*nums2_set.begin() * 10 + *nums1_set.begin()));
 }
 
+/// <summary>
+/// Leet Code 2614. Prime In Diagonal
+/// 
+/// Easy
+///	
+/// You are given a 0-indexed two-dimensional integer array nums.
+///
+/// Return the largest prime number that lies on at least one of the 
+/// diagonals of nums. In case, no prime is present on any of the 
+/// diagonals, return 0.
+///
+/// Note that:
+/// An integer is prime if it is greater than 1 and has no positive 
+/// integer divisors other than 1 and itself.
+/// An integer val is on one of thediagonals of nums if there exists 
+/// an integer i for which nums[i][i] = val or an i for which 
+/// nums[i][nums.length - i - 1]= val.
+///
+/// In the above diagram, one diagonal is [1,5,9] and another 
+/// diagonal is [3,5,7].
+/// 
+/// Example 1:
+/// Input: nums = [[1,2,3],[5,6,7],[9,10,11]]
+/// Output: 11
+/// Explanation: The numbers 1, 3, 6, 9, and 11 are the only numbers 
+/// present on at least one of the diagonals. Since 11 is the largest 
+/// prime, we return 11.
+///
+/// Example 2:
+/// Input: nums = [[1,2,3],[5,17,7],[9,11,10]]
+/// Output: 17
+/// Explanation: The numbers 1, 3, 9, 10, and 17 are all present on at 
+/// least one of the diagonals. 17 is the largest prime, so we return 17.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 300
+/// 2. nums.length == numsi.length
+/// 3. 1 <= nums[i][j] <= 4*10^6
+/// </summary>
+int LeetCodeMath::diagonalPrime(vector<vector<int>>& nums)
+{
+    int result = 0;
+
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (size_t j = 0; j < nums[0].size(); j++)
+        {
+            if (i == j || j == nums[i].size() - 1 - i)
+            {
+                if (isPrime(nums[i][j]))
+                {
+                    result = max(result, nums[i][j]);
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2644. Find the Maximum Divisibility Score
+/// 
+/// Easy
+///	
+/// You are given two 0-indexed integer arrays nums and divisors.
+/// 
+/// The divisibility score of divisors[i] is the number of indices j 
+/// such that nums[j] is divisible by divisors[i].
+///
+/// Return the integer divisors[i] with the maximum divisibility score. 
+/// If there is more than one integer with the maximum score, return 
+/// the minimum of them.
+///
+/// Example 1:
+/// Input: nums = [4,7,9,3,9], divisors = [5,2,3]
+/// Output: 3
+/// Explanation: The divisibility score for every element in divisors is:
+/// The divisibility score of divisors[0] is 0 since no number in nums is 
+/// divisible by 5.
+/// The divisibility score of divisors[1] is 1 since nums[0] is divisible 
+/// by 2.
+/// The divisibility score of divisors[2] is 3 since nums[2], nums[3], 
+/// and nums[4] are divisible by 3.
+/// Since divisors[2] has the maximum divisibility score, we return it.
+///
+/// Example 2:
+/// Input: nums = [20,14,21,10], divisors = [5,7,5]
+/// Output: 5
+/// Explanation: The divisibility score for every element in divisors is:
+/// The divisibility score of divisors[0] is 2 since nums[0] and nums[3] 
+/// are divisible by 5.
+/// The divisibility score of divisors[1] is 2 since nums[1] and nums[2] 
+/// are divisible by 7.
+/// The divisibility score of divisors[2] is 2 since nums[0] and nums[3] 
+/// are divisible by 5.
+/// Since divisors[0], divisors[1], and divisors[2] all have the maximum 
+/// divisibility score, we return the minimum of them (i.e., divisors[2]).
+///
+/// Example 3:
+/// Input: nums = [12], divisors = [10,16]
+/// Output: 10
+/// Explanation: The divisibility score for every element in divisors is:
+/// The divisibility score of divisors[0] is 0 since no number in nums is 
+/// divisible by 10.
+/// The divisibility score of divisors[1] is 0 since no number in nums is 
+/// divisible by 16.
+/// Since divisors[0] and divisors[1] both have the maximum divisibility 
+/// score, we return the minimum of them (i.e., divisors[0]).
+///
+/// Constraints:
+/// 1. 1 <= nums.length, divisors.length <= 1000
+/// 2. 1 <= nums[i], divisors[i] <= 10^9
+/// </summary>
+int LeetCodeMath::maxDivScore(vector<int>& nums, vector<int>& divisors)
+{
+    int max_score = -1;
+    int result = 0;
+    for (size_t i = 0; i < divisors.size(); i++)
+    {
+        int score = 0;
+        for (size_t j = 0; j < nums.size(); j++)
+        {
+            if (nums[j] % divisors[i] == 0)
+            {
+                score++;
+            }
+        }
+        if (score > max_score)
+        {
+            result = divisors[i];
+            max_score = score;
+        }
+        else if (score == max_score)
+        {
+            result = min(result, divisors[i]);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2647. Color the Triangle Red
+/// 
+/// Hard
+///	
+/// You are given an integer n. Consider an equilateral triangle of side 
+/// length n, broken up into n2 unit equilateral triangles. The triangle 
+/// has n 1-indexed rows where the ith row has 2i - 1 unit equilateral 
+/// triangles.
+///
+/// The triangles in the ith row are also 1-indexed with coordinates 
+/// from (i, 1) to (i, 2i - 1). The following image shows a triangle of 
+/// side length 4 with the indexing of its triangle.
+///
+/// Two triangles are neighbors if they share a side. For example:
+///
+/// Triangles (1,1) and (2,2) are neighbors
+/// Triangles (3,2) and (3,3) are neighbors.
+/// Triangles (2,2) and (3,3) are not neighbors because they do not share 
+/// any side.
+/// Initially, all the unit triangles are white. You want to choose k 
+/// triangles and color them red. We will then run the following algorithm:
+///
+/// Choose a white triangle that has at least two red neighbors.
+/// If there is no such triangle, stop the algorithm.
+/// Color that triangle red.
+/// Go to step 1.
+/// Choose the minimum k possible and set k triangles red before running 
+/// this algorithm such that after the algorithm stops, all unit triangles 
+/// are colored red.
+///
+/// Return a 2D list of the coordinates of the triangles that you will color 
+/// red initially. The answer has to be of the smallest size possible. If 
+/// there are multiple valid solutions, return any.
+///
+/// Example 1:
+/// Input: n = 3
+/// Output: [[1,1],[2,1],[2,3],[3,1],[3,5]]
+/// Explanation: Initially, we choose the shown 5 triangles to be red. 
+/// Then, we run the algorithm:
+/// - Choose (2,2) that has three red neighbors and color it red.
+/// - Choose (3,2) that has two red neighbors and color it red.
+/// - Choose (3,4) that has three red neighbors and color it red.
+/// - Choose (3,3) that has three red neighbors and color it red.
+/// It can be shown that choosing any 4 triangles and running the 
+/// algorithm will not make all triangles red.
+///
+/// Example 2:
+/// Input: n = 2
+/// Output: [[1,1],[2,1],[2,3]]
+/// Explanation: Initially, we choose the shown 3 triangles to be red. 
+/// Then, we run the algorithm:
+/// - Choose (2,2) that has three red neighbors and color it red.
+/// It can be shown that choosing any 2 triangles and running the 
+/// algorithm will not make all triangles red.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 1000
+/// </summary>
+vector<vector<int>> LeetCodeMath::colorRed(int n)
+{
+    vector<vector<int>> result;
+    int tip = n % 4;
+    if (tip >= 1)
+    {
+        result.push_back({1, 1});
+    }
+    for (int i = 2; i <= tip; i++)
+    {
+        result.push_back({ i, 1 });
+        result.push_back({ i, 2 * i - 1 });
+    }
+    for (int i = tip + 1; i <= n; i += 4)
+    {
+        result.push_back({ i, 1 });
+        for (int j = 1; j < i + 1; j++)
+        {
+            result.push_back({ i + 1, 2 * j + 1 });
+        }
+        result.push_back({ i + 2, 2 });
+        for (int j = 0; j < i + 3; j++)
+        {
+            result.push_back({ i + 3, 2 * j + 1 });
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2651. Calculate Delayed Arrival Time
+/// 
+/// Easy
+///	
+/// You are given a positive integer arrivalTime denoting the arrival 
+/// time of a train in hours, and another positive integer delayedTime 
+/// denoting the amount of delay in hours.
+///
+/// Return the time when the train will arrive at the station.
+/// Note that the time in this problem is in 24-hours format.
+/// 
+/// Example 1:
+/// Input: arrivalTime = 15, delayedTime = 5 
+/// Output: 20 
+/// Explanation: Arrival time of the train was 15:00 hours. It is 
+/// delayed by 5 hours. Now it will reach at 15+5 = 20 (20:00 hours).
+///
+/// Example 2:
+/// Input: arrivalTime = 13, delayedTime = 11
+/// Output: 0
+/// Explanation: Arrival time of the train was 13:00 hours. It is 
+/// delayed by 11 hours. Now it will reach at 13+11=24 (Which is 
+/// denoted by 00:00 in 24 hours format so return 0).
+///
+/// Constraints:
+/// 1. 1 <= arrivaltime < 24
+/// 2. 1 <= delayedTime <= 24
+/// </summary>
+int LeetCodeMath::findDelayedArrivalTime(int arrivalTime, int delayedTime)
+{
+    return (arrivalTime + delayedTime) % 24;
+}
+
+
+/// <summary>
+/// Leet Code 2652. Sum Multiples
+/// 
+/// Easy
+///	
+/// Given a positive integer n, find the sum of all integers in the range 
+/// [1, n] inclusive that are divisible by 3, 5, or 7.
+///
+/// Return an integer denoting the sum of all numbers in the given range 
+/// satisfying the constraint.
+///
+/// Example 1:
+/// Input: n = 7
+/// Output: 21
+/// Explanation: Numbers in the range [1, 7] that are divisible by 3, 5, 
+/// or 7 are 3, 5, 6, 7. The sum of these numbers is 21.
+///
+/// Example 2:
+/// Input: n = 10
+/// Output: 40
+/// Explanation: Numbers in the range [1, 10] that are divisible by 3, 5, 
+/// or 7 are 3, 5, 6, 7, 9, 10. The sum of these numbers is 40.
+///
+/// Example 3:
+/// Input: n = 9
+/// Output: 30
+/// Explanation: Numbers in the range [1, 9] that are divisible by 3, 5, 
+/// or 7 are 3, 5, 6, 7, 9. The sum of these numbers is 30.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^3
+/// </summary>
+int LeetCodeMath::sumOfMultiples(int n)
+{
+    int result = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        if (i % 3 == 0 || i % 5 == 0 || i % 7 == 0)
+        {
+            result += i;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2654. Minimum Number of Operations to Make All Array 
+///                 Elements Equal to 1
+/// 
+/// Medium
+///	
+/// You are given a 0-indexed array nums consisiting of positive integers. 
+/// You can do the following operation on the array any number of times:
+///
+/// Select an index i such that 0 <= i < n - 1 and replace either of 
+/// nums[i] or nums[i+1] with their gcd value.
+/// Return the minimum number of operations to make all elements of nums 
+/// equal to 1. If it is impossible, return -1.
+///
+/// The gcd of two integers is the greatest common divisor of the two integers.
+///
+/// Example 1:
+/// Input: nums = [2,6,3,4]
+/// Output: 4
+/// Explanation: We can do the following operations:
+/// - Choose index i = 2 and replace nums[2] with gcd(3,4) = 1. Now we have 
+///   nums = [2,6,1,4].
+/// - Choose index i = 1 and replace nums[1] with gcd(6,1) = 1. Now we have 
+///   nums = [2,1,1,4].
+/// - Choose index i = 0 and replace nums[0] with gcd(2,1) = 1. Now we have 
+///   nums = [1,1,1,4].
+/// - Choose index i = 2 and replace nums[3] with gcd(1,4) = 1. Now we have 
+///   nums = [1,1,1,1].
+//
+/// Example 2:
+/// Input: nums = [2,10,6,14]
+/// Output: -1
+/// Explanation: It can be shown that it is impossible to make all the 
+/// elements equal to 1.
+///
+/// Constraints:
+/// 1. 2 <= nums.length <= 50
+/// 2. 1 <= nums[i] <= 10^6
+/// </summary>
+int LeetCodeMath::minOperationsII(vector<int>& nums)
+{
+    int count = 0;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] == 1) count++;
+    }
+    if (count > 0)
+    {
+        result = nums.size() - count;
+        return result;
+    }
+    unordered_map<int, int> accu_length;
+    int min_length = INT_MAX;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        unordered_map<int, int> gcd_length;
+        int k = nums[i];
+        for (int j = 2; j <= (int)sqrt(k); j++)
+        {
+            if (k % j == 0)
+            {
+                gcd_length[j] = accu_length[j] + 1;
+                while (k % j == 0)
+                {
+                    k /= j;
+                }
+            }
+        }
+        gcd_length[k] = accu_length[k] + 1;
+        int max_length = 0;
+        for (auto itr : gcd_length)
+        {
+            max_length = max(max_length, itr.second);
+        }
+        if (max_length < (int)(i+1))
+        {
+            min_length = min(min_length, max_length);
+        }
+        accu_length = gcd_length;
+    }
+    if (min_length == INT_MAX) return -1;
+    else return nums.size() - 1 + min_length;
+}

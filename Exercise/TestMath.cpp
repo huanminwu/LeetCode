@@ -5748,8 +5748,135 @@ void TestLeetCode2605(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2614(void)
+{
+    Logger::WriteMessage("Test Leet Code 2614");
+    LeetCodeMath leetCode;
+    vector<vector<int>> nums =
+    {
+        {1, 2, 3},{5, 6, 7},{9, 10, 11}
+    };
+    int result = leetCode.diagonalPrime(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+    
+    nums = { {1, 2, 3},{5, 17, 7},{9, 11, 10} };
+    result = leetCode.diagonalPrime(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2644(void)
+{
+    Logger::WriteMessage("Test Leet Code 2644");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 4, 7, 9, 3, 9 };
+    vector<int> divisors = { 5, 2, 3 };
+    int result = leetCode.maxDivScore(nums, divisors);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(divisors);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 20,14,21,10 };
+    divisors = { 5,7,5 };
+    result = leetCode.maxDivScore(nums, divisors);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(divisors);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 12 };
+    divisors = { 10,16 };
+    result = leetCode.maxDivScore(nums, divisors);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(divisors);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2647(void)
+{
+    Logger::WriteMessage("Test Leet Code 2647");
+    LeetCodeMath leetCode;
+    int n = 3;
+    vector<vector<int>> result = leetCode.colorRed(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 2;
+    result = leetCode.colorRed(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 7;
+    result = leetCode.colorRed(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2651(void)
+{
+    Logger::WriteMessage("Test Leet Code 2651");
+    LeetCodeMath leetCode;
+    int arrivalTime = 15, delayedTime = 5;
+    int result = leetCode.findDelayedArrivalTime(arrivalTime, delayedTime);
+    Logger::WriteMessage("arrivalTime = " + to_string(arrivalTime));
+    Logger::WriteMessage("delayedTime = " + to_string(delayedTime));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arrivalTime = 13, delayedTime = 11;
+    result = leetCode.findDelayedArrivalTime(arrivalTime, delayedTime);
+    Logger::WriteMessage("arrivalTime = " + to_string(arrivalTime));
+    Logger::WriteMessage("delayedTime = " + to_string(delayedTime));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2652(void)
+{
+    Logger::WriteMessage("Test Leet Code 2652");
+    LeetCodeMath leetCode;
+    int n = 7;
+    int result = leetCode.sumOfMultiples(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 10;
+    result = leetCode.sumOfMultiples(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 9;
+    result = leetCode.sumOfMultiples(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2654(void)
+{
+    Logger::WriteMessage("Test Leet Code 2654");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 2, 6, 3, 4 };
+    int result = leetCode.minOperationsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,10,6,14 };
+    result = leetCode.minOperationsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,30,70,21 };
+    result = leetCode.minOperationsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2654();
+    TestLeetCode2652();
+    TestLeetCode2651();
+    TestLeetCode2647();
+    TestLeetCode2644();
+    TestLeetCode2614();
     TestLeetCode2605();
     TestLeetCode2601();
     TestLeetCode2600();

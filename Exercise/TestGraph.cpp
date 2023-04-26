@@ -5030,8 +5030,71 @@ void TestLeetCode2608(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2617(void)
+{
+    Logger::WriteMessage("Test Leet Code 2617");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid =
+    {
+        {3, 4, 2, 1},{4, 2, 3, 1},{2, 1, 0, 0},{2, 4, 0, 0}
+    };
+    int result = leetCode.minimumVisitedCells(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {3,4,2,1},{4,2,1,1},{2,1,1,0},{3,4,1,0 }
+    };
+    result = leetCode.minimumVisitedCells(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {2,1,0},{1,0,0}
+    };
+    result = leetCode.minimumVisitedCells(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2646(void)
+{
+    Logger::WriteMessage("Test Leet Code 2646");
+    LeetCodeGraph leetCode;
+    int n = 4; 
+    vector<vector<int>> edges =
+    {
+        {0, 1} ,{1, 2},{1, 3}
+    };
+    vector<int> price = { 2, 2, 10, 6 };
+    vector<vector<int>> trips = { {0, 3},{2, 1},{2, 3} };
+    int result = leetCode.minimumTotalPrice(n, edges, price, trips);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(price);
+    Logger::WriteMessage(trips);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 2;
+    edges =
+    {
+        {0, 1}
+    };
+    price = { 2, 2};
+    trips = { {0, 0} };
+    result = leetCode.minimumTotalPrice(n, edges, price, trips);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(price);
+    Logger::WriteMessage(trips);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2646();
+    TestLeetCode2617();
     TestLeetCode2608();
     TestLeetCode2603();
     TestLeetCode2577();

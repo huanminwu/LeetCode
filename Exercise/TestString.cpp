@@ -5973,8 +5973,29 @@ void TestLeetCode2606(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2645(void)
+{
+    Logger::WriteMessage("Test Leet Code 2645");
+    LeetCodeString leetCode;
+    string word = "b";
+    int result = leetCode.addMinimum(word);
+    Logger::WriteMessage("word = " + word);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word = "aaa";
+    result = leetCode.addMinimum(word);
+    Logger::WriteMessage("word = " + word);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word = "abc";
+    result = leetCode.addMinimum(word);
+    Logger::WriteMessage("word = " + word);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2645();
     TestLeetCode2606();
     TestLeetCode2586();
     TestLeetCode2565();

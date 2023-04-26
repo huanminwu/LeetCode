@@ -13024,6 +13024,98 @@ public:
             if (m_tasks[i] != nullptr) delete m_tasks[i];
         }
     }
+};
 
+/// <summary>
+/// Leet Code 2642. Design Graph With Shortest Path Calculator
+/// 
+/// Hard
+///	
+/// There is a directed weighted graph that consists of n nodes numbered 
+/// from 0 to n - 1. The edges of the graph are initially represented by 
+/// the given array edges where edges[i] = [fromi, toi, edgeCosti] meaning 
+/// that there is an edge from fromi to toi with the cost edgeCosti.
+///
+/// Implement the Graph class:
+///
+/// Graph(int n, int[][] edges) initializes the object with n nodes and 
+/// the given edges.
+/// addEdge(int[] edge) adds an edge to the list of edges where edge = 
+/// [from, to, edgeCost]. It is guaranteed that there is no edge between 
+/// the two nodes before adding this one.
+/// int shortestPath(int node1, int node2) returns the minimum cost of a 
+/// path from node1 to node2. If no path exists, return -1. The cost of 
+/// a path is the sum of the costs of the edges in the path.
+/// 
+/// Example 1:
+/// Input
+/// ["Graph", "shortestPath", "shortestPath", "addEdge", "shortestPath"]
+/// [[4, [[0, 2, 5], [0, 1, 2], [1, 2, 1], [3, 0, 3]]], [3, 2], [0, 3], 
+/// [[1, 3, 4]], [0, 3]]
+/// Output
+/// [null, 6, -1, null, 6]
+///
+/// Explanation
+/// Graph g = new Graph(4, [[0, 2, 5], [0, 1, 2], [1, 2, 1], [3, 0, 3]]);
+/// g.shortestPath(3, 2); // return 6. The shortest path from 3 to 2 in 
+/// the first diagram above is 3 -> 0 -> 1 -> 2 with a total cost of 
+/// 3 + 2 + 1 = 6.
+/// g.shortestPath(0, 3); // return -1. There is no path from 0 to 3.
+/// g.addEdge([1, 3, 4]); // We add an edge from node 1 to node 3, 
+///                       // and we get the second diagram above.
+/// g.shortestPath(0, 3); // return 6. The shortest path from 0 to 3 now 
+///                       // is 0 -> 1 -> 3 with a total cost of 2 + 4 = 6.
+///
+/// Constraints:
+/// 1. 1 <= n <= 100
+/// 2. 0 <= edges.length <= n * (n - 1)
+/// 3. edges[i].length == edge.length == 3
+/// 4. 0 <= fromi, toi, from, to, node1, node2 <= n - 1
+/// 5. 1 <= edgeCosti, edgeCost <= 106
+/// 6. There are no repeated edges and no self-loops in the graph at any 
+///    point.
+/// 7. At most 100 calls will be made for addEdge.
+/// 8. At most 100 calls will be made for shortestPath.
+/// </summary>
+class Graph 
+{
+    vector<map<int, int>> m_edges;
+public:
+    Graph(int n, vector<vector<int>>& edges) 
+    {
+        m_edges = vector<map<int, int>>(n);
+        for (auto edge : edges)
+        {
+            m_edges[edge[0]][edge[1]] = edge[2];
+        }
+    }
+
+    void addEdge(vector<int> edge) 
+    {
+        m_edges[edge[0]][edge[1]] = edge[2];
+    }
+
+    int shortestPath(int node1, int node2) 
+    {
+        vector<int> distance(m_edges.size(), INT_MAX);
+        distance[node1] = 0;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        pq.push(make_pair(0, node1));
+        while (!pq.empty())
+        {
+            auto top = pq.top();
+            pq.pop();
+            if (top.second == node2) return top.first;
+            for (auto itr : m_edges[top.second])
+            {
+                if (distance[itr.first] > top.first + itr.second)
+                {
+                    distance[itr.first] = top.first + itr.second;
+                    pq.push(make_pair(distance[itr.first], itr.first));
+                }
+            }
+        }
+        return -1;
+    }
 };
 #endif // LeetcodeDesign_H

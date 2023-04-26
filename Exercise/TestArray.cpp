@@ -8618,8 +8618,77 @@ void TestLeetCode2612(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2615(void)
+{
+    Logger::WriteMessage("Test Leet Code 2615");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 3, 1, 1, 2 };
+    vector<long long> result = leetCode.distance(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 0,5,3 };
+    result = leetCode.distance(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2643(void)
+{
+    Logger::WriteMessage("Test Leet Code 2643");
+    LeetCodeArray leetCode;
+    vector<vector<int>> mat = { {0, 1},{1, 0} };
+    vector<int> result = leetCode.rowAndMaximumOnes(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage(result);
+
+    mat = { {0, 0, 0},{0, 1, 1} };
+    result = leetCode.rowAndMaximumOnes(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage(result);
+
+    mat = { {0, 0},{1, 1},{0, 0} };
+    result = leetCode.rowAndMaximumOnes(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2639(void)
+{
+    Logger::WriteMessage("Test Leet Code 2639");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {1} ,{22},{333} };
+    vector<int> result = leetCode.findColumnWidth(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid = { { -15, 1, 3 }, {15, 7, 12}, {5, 6, -2} };
+    result = leetCode.findColumnWidth(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2640(void)
+{
+    Logger::WriteMessage("Test Leet Code 2640");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 3, 7, 5, 10 };
+    vector<long long> result = leetCode.findPrefixScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,1,2,4,8,16 };
+    result = leetCode.findPrefixScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2640();
+    TestLeetCode2639();
+    TestLeetCode2643();
+    TestLeetCode2615();
     TestLeetCode2612();
     TestLeetCode2610();
     TestLeetCode2609();
