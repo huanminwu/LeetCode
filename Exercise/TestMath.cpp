@@ -5869,8 +5869,90 @@ void TestLeetCode2654(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2656(void)
+{
+    Logger::WriteMessage("Test Leet Code 2656");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5 };
+    int k = 3;
+    int result = leetCode.maximizeSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 5,5,5 };
+    k = 2;
+    result = leetCode.maximizeSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2682(void)
+{
+    Logger::WriteMessage("Test Leet Code 2682");
+    LeetCodeMath leetCode;
+    int n = 5, k = 2;
+    vector<int> result = leetCode.circularGameLosers(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    n = 4, k = 4;
+    result = leetCode.circularGameLosers(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2698(void)
+{
+    Logger::WriteMessage("Test Leet Code 2698");
+    LeetCodeMath leetCode;
+    int n = 10;
+    int result = leetCode.punishmentNumber(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 37;
+    result = leetCode.punishmentNumber(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2706(void)
+{
+    Logger::WriteMessage("Test Leet Code 2706");
+    LeetCodeMath leetCode;
+    vector<int> prices = { 1, 2, 2 };
+    int money = 3;
+    int result = leetCode.buyChoco(prices, money);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("money = " + to_string(money) + "; result = " + to_string(result));
+
+    prices = { 3,2,3 };
+    money = 3;
+    result = leetCode.buyChoco(prices, money);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("money = " + to_string(money) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2708(void)
+{
+    Logger::WriteMessage("Test Leet Code 2708");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 3, -1, -5, 2, 5, -9 };
+    long long result = leetCode.maxStrength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -4,-5,-4 };
+    result = leetCode.maxStrength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2708();
+    TestLeetCode2706();
+    TestLeetCode2698();
+    TestLeetCode2682();
+    TestLeetCode2656();
     TestLeetCode2654();
     TestLeetCode2652();
     TestLeetCode2651();

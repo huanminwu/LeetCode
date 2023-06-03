@@ -1990,6 +1990,91 @@ public:
     /// 3. 1 <= queries.length <= 10^5
     /// </summary>
     vector<long long> handleQuery(vector<int>& nums1, vector<int>& nums2, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet Code 2683. Neighboring Bitwise XOR
+    /// 
+    /// Medium
+    ///	
+    /// A 0-indexed array derived with length n is derived by computing the 
+    /// bitwise XOR (^) of adjacent values in a binary array original of 
+    /// length n.
+    ///
+    /// Specifically, for each index i in the range [0, n - 1]:
+    ///
+    /// If i = n - 1, then derived[i] = original[i] xor original[0].
+    /// Otherwise, derived[i] = original[i] xor original[i + 1].
+    /// Given an array derived, your task is to determine whether there exists 
+    /// a valid binary array original that could have formed derived.
+    ///
+    /// Return true if such an array exists or false otherwise.
+    ///
+    /// A binary array is an array containing only 0's and 1's
+    /// 
+    /// Example 1:
+    /// Input: derived = [1,1,0]
+    /// Output: true
+    /// Explanation: A valid original array that gives derived is [0,1,0].
+    /// derived[0] = original[0] xor original[1] = 0 xor 1 = 1 
+    /// derived[1] = original[1] xor original[2] = 1 xor 0 = 1
+    /// derived[2] = original[2] xor original[0] = 0 xor 0 = 0
+    ///
+    /// Example 2:
+    /// Input: derived = [1,1]
+    /// Output: true
+    /// Explanation: A valid original array that gives derived is [0,1].
+    /// derived[0] = original[0] xor original[1] = 1
+    /// derived[1] = original[1] xor original[0] = 1
+    ///
+    /// Example 3:
+    /// Input: derived = [1,0]
+    /// Output: false
+    /// Explanation: There is no valid original array that gives derived.
+    ///
+    /// Constraints:
+    /// 1. n == derived.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. The values in derived are either 0's or 1's
+    /// </summary>
+    bool doesValidArrayExist(vector<int>& derived);
+
+    /// <summary>
+    /// Leet Code 2680. Maximum OR
+    /// 
+    /// Medium
+    ///	
+    /// You are given a 0-indexed integer array nums of length n and an 
+    /// integer k. In an operation, you can choose an element and 
+    /// multiply it by 2.
+    ///
+    /// Return the maximum possible value of nums[0] | 
+    /// nums[1] | ... | nums[n - 1] that can be obtained after applying 
+    /// the operation on nums at most k times.
+    ///
+    /// Note that a | b denotes the bitwise or between two integers a 
+    /// and b.
+    ///
+    /// Example 1:
+    ///
+    /// Input: nums = [12,9], k = 1
+    /// Output: 30
+    /// Explanation: If we apply the operation to index 1, our new 
+    /// array nums will be equal to [12,18]. Thus, we return the bitwise or 
+    /// of 12 and 18, which is 30.
+    ///
+    /// Example 2:
+    /// Input: nums = [8,1,2], k = 2
+    /// Output: 35
+    /// Explanation: If we apply the operation twice on index 0, we yield a 
+    /// new array of [32,1,2]. Thus, we return 32|1|2 = 35.
+    /// 
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. 1 <= k <= 15
+    /// </summary>
+    long long maximumOr(vector<int>& nums, int k);
 #pragma endregion
 };
 #endif  // LeetCodeBit_H

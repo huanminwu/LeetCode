@@ -12323,6 +12323,209 @@ public:
     /// 2. word consists of letters "a", "b" and "c" only. 
     /// </summary>
     int addMinimum(string word);
+
+    /// <summary>
+    /// Leet Code 2663. Lexicographically Smallest Beautiful String
+    /// 
+    /// Hard
+    ///	
+    /// A string is beautiful if:
+    ///
+    /// It consists of the first k letters of the English lowercase alphabet.
+    /// It does not contain any substring of length 2 or more which is a 
+    /// palindrome.
+    /// You are given a beautiful string s of length n and a positive 
+    /// integer k.
+    ///
+    /// Return the lexicographically smallest string of length n, which is 
+    /// larger than s and is beautiful. If there is no such string, return 
+    /// an empty string.
+    ///
+    /// A string a is lexicographically larger than a string b (of the same 
+    /// length) if in the first position where a and b differ, a has a 
+    /// character strictly larger than the corresponding character in b.
+    ///
+    /// For example, "abcd" is lexicographically larger than "abcc" because 
+    /// the first position they differ is at the fourth character, and d 
+    /// is greater than c.
+    ///
+    ///
+    /// Example 1:
+    ///
+    /// Input: s = "abcz", k = 26
+    /// Output: "abda"
+    /// Explanation: The string "abda" is beautiful and lexicographically 
+    /// larger than the string "abcz".
+    /// It can be proven that there is no string that is lexicographically 
+    /// larger than the string "abcz", beautiful, and lexicographically 
+    /// smaller than the string "abda".
+    ///
+    /// Example 2:
+    /// Input: s = "dc", k = 4
+    /// Output: ""
+    /// Explanation: It can be proven that there is no string that is 
+    /// lexicographically larger than the string "dc" and is beautiful.
+    /// 
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == s.length <= 10^5
+    /// 2. 4 <= k <= 26
+    /// 3. s is a beautiful string.
+    /// </summary>
+    string smallestBeautifulString(string s, int k);
+
+    /// <summary>
+    /// Leet Code 2678. Number of Senior Citizens
+    /// 
+    /// Easy
+    ///	
+    /// You are given a 0-indexed array of strings details. Each element of 
+    /// details provides information about a given passenger compressed into
+    /// a string of length 15. The system is such that:
+    ///
+    /// The first ten characters consist of the phone number of passengers.
+    /// The next character denotes the gender of the person.
+    /// The following two characters are used to indicate the age of the 
+    /// person.
+    /// The last two characters determine the seat allotted to that person.
+    /// Return the number of passengers who are strictly more than 60 years 
+    /// old.
+    /// 
+    /// Example 1:
+    /// Input: details = ["7868190130M7522","5303914400F9211",
+    ///                   "9273338290F4010"]
+    /// Output: 2
+    /// Explanation: The passengers at indices 0, 1, and 2 have ages 
+    /// 75, 92, and 40. Thus, there are 2 people who are over 60 years old.
+    ///
+    /// Example 2:
+    /// Input: details = ["1313579440F2036","2921522980M5644"]
+    /// Output: 0
+    /// Explanation: None of the passengers are older than 60.
+    ///
+    /// Constraints:
+    /// 1. 1 <= details.length <= 100
+    /// 2. details[i].length == 15
+    /// 3. details[i] consists of digits from '0' to '9'.
+    /// 4. details[i][10] is either 'M' or 'F' or 'O'.
+    /// 5. The phone numbers and seat numbers of the passengers are distinct.
+    /// </summary>
+    int countSeniors(vector<string>& details);
+
+    /// <summary>
+    /// Leet Code 2696. Minimum String Length After Removing Substrings
+    /// 
+    /// Easy
+    ///	
+    /// You are given a string s consisting only of uppercase English letters.
+    ///
+    /// You can apply some operations to this string where, in one operation, 
+    /// you can remove any occurrence of one of the substrings "AB" or "CD" 
+    /// from s.
+    ///
+    /// Return the minimum possible length of the resulting string that you 
+    /// can obtain.
+    ///
+    /// Note that the string concatenates after removing the substring and 
+    /// could produce new "AB" or "CD" substrings.
+    ///
+    /// Example 1:
+    /// Input: s = "ABFCACDB"
+    /// Output: 2
+    /// Explanation: We can do the following operations:
+    /// - Remove the substring "ABFCACDB", so s = "FCACDB".
+    /// - Remove the substring "FCACDB", so s = "FCAB".
+    /// - Remove the substring "FCAB", so s = "FC".
+    /// So the resulting length of the string is 2.
+    /// It can be shown that it is the minimum length that we can obtain.
+    ///
+    /// Example 2:
+    ///
+    /// Input: s = "ACBBD"
+    /// Output: 5
+    /// Explanation: We cannot do any operations on the string so the length 
+    /// remains the same.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s consists only of uppercase English letters.
+    /// </summary>
+    int minLength(string s);
+
+    /// <summary>
+    /// Leet Code 2697. Lexicographically Smallest Palindrome
+    /// 
+    /// Easy
+    ///	
+    /// You are given a string s consisting of lowercase English letters, and 
+    /// you are allowed to perform operations on it. In one operation, you 
+    /// can replace a character in s with another lowercase English letter.
+    ///
+    /// Your task is to make s a palindrome with the minimum number of 
+    /// operations possible. If there are multiple palindromes that can be 
+    /// made using the minimum number of operations, make the 
+    /// lexicographically smallest one.
+    ///
+    /// A string a is lexicographically smaller than a string b (of the same 
+    /// length) if in the first position where a and b differ, string a has 
+    /// a letter that appears earlier in the alphabet than the corresponding 
+    /// letter in b.
+    ///
+    /// Return the resulting palindrome string.
+    /// 
+    /// Example 1:
+    /// Input: s = "egcfe"
+    /// Output: "efcfe"
+    /// Explanation: The minimum number of operations to make "egcfe" a 
+    /// palindrome is 1, and the lexicographically smallest palindrome string 
+    /// we can get by modifying one character is "efcfe", by changing 'g'.
+    ///
+    /// Example 2:
+    /// Input: s = "abcd"
+    /// Output: "abba"
+    /// Explanation: The minimum number of operations to make "abcd" a 
+    /// palindrome is 2, and the lexicographically smallest palindrome string 
+    /// we can get by modifying two characters is "abba".
+    ///
+    /// Example 3:
+    /// Input: s = "seven"
+    /// Output: "neven"
+    /// Explanation: The minimum number of operations to make "seven" a 
+    /// palindrome is 1, and the lexicographically smallest palindrome string 
+    /// we can get by modifying one character is "neven".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 1000
+    /// 2. s consists of only lowercase English letters.
+    /// </summary>
+    string makeSmallestPalindrome(string s);
+
+    /// <summary>
+    /// Leet Code 2710. Remove Trailing Zeros From a String
+    /// 
+    /// Easy
+    ///	
+    /// Given a positive integer num represented as a string, return the 
+    /// integer num without trailing zeros as a string.
+    ///
+    /// Example 1:
+    /// Input: num = "51230100"
+    /// Output: "512301"
+    /// Explanation: Integer "51230100" has 2 trailing zeros, we remove 
+    /// them and return integer "512301".
+    ///
+    /// Example 2:
+    /// Input: num = "123"
+    /// Output: "123"
+    /// Explanation: Integer "123" has no trailing zeros, we return 
+    /// integer "123".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= num.length <= 1000
+    /// 2. num consists of only digits.
+    /// 3. num doesn't have any leading zeros
+    /// </summary>
+    string removeTrailingZeros(string num);
 #pragma endregion
 };
 

@@ -3647,8 +3647,46 @@ void TestLeetCode2638(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2707(void)
+{
+    Logger::WriteMessage("Test Leet Code 2707");
+    LeetCodeDP leetCode;
+    string s = "leetscode";
+    vector<string> dictionary = { "leet", "code", "leetcode" };
+    int result = leetCode.minExtraChar(s, dictionary);
+    Logger::WriteMessage(dictionary);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "sayhelloworld";
+    dictionary = { "hello", "world" };
+    result = leetCode.minExtraChar(s, dictionary);
+    Logger::WriteMessage(dictionary);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "abcdefg";
+    dictionary = { "abc", "cdefg" };
+    result = leetCode.minExtraChar(s, dictionary);
+    Logger::WriteMessage(dictionary);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2712(void)
+{
+    Logger::WriteMessage("Test Leet Code 2712");
+    LeetCodeDP leetCode;
+    string s = "0011";
+    int64_t result = leetCode.minimumCost(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "010101";
+    result = leetCode.minimumCost(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2712();
+    TestLeetCode2707();
     TestLeetCode2638();
     TestLeetCode2585();
     TestLeetCode2547();

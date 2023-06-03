@@ -91,7 +91,9 @@ string LeetCodeHashtable::fractionToDecimal(int numerator, int denominator)
     unordered_map<long long, int> map;
     if (denominator == 0) return "overflow";
     if (numerator == 0) return "0";
-    int sign = ((numerator > 0) ^ (denominator > 0)) ? -1 : 1;
+    bool numerator_greater_zero = numerator > 0;
+    bool denominator_grater_zero = denominator > 0;
+    int sign = (numerator_greater_zero ^ denominator_grater_zero) ? -1 : 1;
     if (sign < 0) result = "-";
     long long long_numerator = abs((long long)numerator);
     long long long_denominator = abs((long long)denominator);
@@ -4605,6 +4607,126 @@ vector<vector<string>> LeetCodeHashtable::mostPopularCreator(vector<string>& cre
             string creator = itr.first;
             result.push_back({ creator, popular[creator].first });
         }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2657. Find the Prefix Common Array of Two Arrays
+/// 
+/// Medium
+///	
+/// You are given two 0-indexed integer permutations A and B of length n.
+///
+/// A prefix common array of A and B is an array C such that C[i] is equal 
+/// to the count of numbers that are present at or before the index i in 
+/// both A and B.
+///
+/// Return the prefix common array of A and B.
+///
+/// A sequence of n integers is called a permutation if it contains all 
+/// integers from 1 to n exactly once.
+/// 
+/// Example 1:
+/// Input: A = [1,3,2,4], B = [3,1,2,4]
+/// Output: [0,2,3,4]
+/// Explanation: At i = 0: no number is common, so C[0] = 0.
+/// At i = 1: 1 and 3 are common in A and B, so C[1] = 2.
+/// At i = 2: 1, 2, and 3 are common in A and B, so C[2] = 3.
+/// At i = 3: 1, 2, 3, and 4 are common in A and B, so C[3] = 4.
+///
+/// Example 2:
+/// Input: A = [2,3,1], B = [3,1,2]
+/// Output: [0,1,3]
+/// Explanation: At i = 0: no number is common, so C[0] = 0.
+/// At i = 1: only 3 is common in A and B, so C[1] = 1.
+/// At i = 2: 1, 2, and 3 are common in A and B, so C[2] = 3.
+///
+/// Constraints:
+/// 1. 1 <= A.length == B.length == n <= 50
+/// 2. 1 <= A[i], B[i] <= n
+/// 3. It is guaranteed that A and B are both a permutation of n integers.
+/// </summary>
+vector<int> LeetCodeHashtable::findThePrefixCommonArray(vector<int>& A, vector<int>& B)
+{
+    unordered_map<int, int> num_count;
+    vector<int> result(A.size());
+    int sum = 0;
+    for (size_t i = 0; i < A.size(); i++)
+    {
+        num_count[A[i]]++;
+        if (num_count[A[i]] > 1) sum++;
+        num_count[B[i]]++;
+        if (num_count[B[i]] > 1) sum++;
+        result[i] = sum;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2670. Find the Distinct Difference Array
+/// 
+/// Easy
+///	
+/// You are given a 0-indexed array nums of length n.
+///
+/// The distinct difference array of nums is an array diff of length n 
+/// such that diff[i] is equal to the number of distinct elements in 
+/// the suffix nums[i + 1, ..., n - 1] subtracted from the number of 
+/// distinct elements in the prefix nums[0, ..., i].
+///
+/// Return the distinct difference array of nums.
+///
+/// Note that nums[i, ..., j] denotes the subarray of nums starting 
+/// at index i and ending at index j inclusive. Particularly, if i > j 
+/// then nums[i, ..., j] denotes an empty subarray.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,4,5]
+/// Output: [-3,-1,1,3,5]
+/// Explanation: For index i = 0, there is 1 element in the prefix 
+/// and 4 distinct elements in the suffix. Thus, diff[0] = 1 - 4 = -3.
+/// For index i = 1, there are 2 distinct elements in the prefix and 3 
+/// distinct elements in the suffix. Thus, diff[1] = 2 - 3 = -1.
+/// For index i = 2, there are 3 distinct elements in the prefix and 2 
+/// distinct elements in the suffix. Thus, diff[2] = 3 - 2 = 1.
+/// For index i = 3, there are 4 distinct elements in the prefix and 1 
+/// distinct element in the suffix. Thus, diff[3] = 4 - 1 = 3.
+/// For index i = 4, there are 5 distinct elements in the prefix and 
+/// no elements in the suffix. Thus, diff[4] = 5 - 0 = 5.
+///
+/// Example 2:
+/// Input: nums = [3,2,3,4,2]
+/// Output: [-2,-1,0,2,3]
+/// Explanation: For index i = 0, there is 1 element in the prefix 
+/// and 3 distinct elements in the suffix. Thus, diff[0] = 1 - 3 = -2.
+/// For index i = 1, there are 2 distinct elements in the prefix and 3 
+/// distinct elements in the suffix. Thus, diff[1] = 2 - 3 = -1.
+/// For index i = 2, there are 2 distinct elements in the prefix and 2 
+/// distinct elements in the suffix. Thus, diff[2] = 2 - 2 = 0.
+/// For index i = 3, there are 3 distinct elements in the prefix and 1 
+/// distinct element in the suffix. Thus, diff[3] = 3 - 1 = 2.
+/// For index i = 4, there are 3 distinct elements in the prefix and 
+/// no elements in the suffix. Thus, diff[4] = 3 - 0 = 3.
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 50 
+/// 2. 1 <= nums[i] <= 50
+/// </summary>
+vector<int> LeetCodeHashtable::distinctDifferenceArray(vector<int>& nums)
+{
+    vector<int> result(nums.size());
+    unordered_map<int, int> prefix, suffix;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        suffix[nums[i]]++;
+    }
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        prefix[nums[i]]++;
+        suffix[nums[i]]--;
+        if (suffix[nums[i]] == 0) suffix.erase(nums[i]);
+        result[i] = prefix.size() - suffix.size();
     }
     return result;
 }

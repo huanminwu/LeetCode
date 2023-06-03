@@ -5594,4 +5594,172 @@ int LeetCodeGreedy::findMinimumTime(vector<vector<int>>& tasks)
     int result = std::count(dp.begin(), dp.end(), 1);
     return result;
 }
+
+/// <summary>
+/// Leet Code 2655. Find Maximal Uncovered Ranges
+/// 
+/// Medium
+///	
+/// You are given an integer n which is the length of a 0-indexed array 
+/// nums, and a 0-indexed 2D-array ranges, which is a list of sub-ranges 
+/// of nums (sub-ranges may overlap).
+///
+/// Each row ranges[i] has exactly 2 cells:
+///
+/// ranges[i][0], which shows the start of the ith range (inclusive)
+/// ranges[i][1], which shows the end of the ith range (inclusive)
+/// These ranges cover some cells of nums and leave some cells uncovered. 
+/// Your task is to find all of the uncovered ranges with maximal length.
+///
+/// Return a 2D-array answer of the uncovered ranges, sorted by the 
+/// starting point in ascending order.
+///
+/// By all of the uncovered ranges with maximal length, we mean satisfying 
+/// two conditions:
+/// 
+/// Each uncovered cell should belong to exactly one sub-range
+/// There should not exist two ranges (l1, r1) and (l2, r2) such 
+/// that r1 + 1 = l2
+///
+/// Example 1:
+/// Input: n = 10, ranges = [[3,5],[7,8]]
+/// Output: [[0,2],[6,6],[9,9]]
+/// Explanation: The ranges (3, 5) and (7, 8) are covered, so if we 
+/// simplify the array nums to a binary array where 0 shows an uncovered 
+/// cell and 1 shows a covered cell, the array becomes 
+/// [0,0,0,1,1,1,0,1,1,0] in which we can observe that the ranges (0, 2), 
+/// (6, 6) and (9, 9) aren't covered.
+///
+/// Example 2:
+/// Input: n = 3, ranges = [[0,2]]
+/// Output: []
+/// Explanation: In this example, the whole of the array nums is covered 
+/// and there are no uncovered cells so the output is an empty array.
+///
+/// Example 3:
+/// Input: n = 7, ranges = [[2,4],[0,3]]
+/// Output: [[5,6]]
+/// Explanation: The ranges (0, 3) and (2, 4) are covered, so if we 
+/// simplify the array nums to a binary array where 0 shows an uncovered 
+/// cell and 1 shows a covered cell, the array becomes [1,1,1,1,1,0,0] 
+/// in which we can observe that the range (5, 6) is uncovered.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^9
+/// 2. 0 <= ranges.length <= 10^6
+/// 3. ranges[i].length = 2
+/// 4. 0 <= ranges[i][j] <= n - 1
+/// 5. ranges[i][0] <= ranges[i][1]
+/// </summary>
+vector<vector<int>> LeetCodeGreedy::findMaximalUncoveredRanges(int n, vector<vector<int>>& ranges)
+{
+    vector<vector<int>> result;
+    int start = 0;
+    sort(ranges.begin(), ranges.end());
+    for (size_t i = 0; i < ranges.size(); i++)
+    {
+        if (ranges[i][0] > start)
+        {
+            result.push_back({ start, ranges[i][0] - 1 });
+        }
+        start = max(start, ranges[i][1] + 1);
+    }
+    if (start < n)
+    {
+        result.push_back({ start, n - 1 });
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2672. Number of Adjacent Elements With the Same Color
+/// 
+/// Medium
+///	
+/// There is a 0-indexed array nums of length n. Initially, all elements 
+/// are uncolored (has a value of 0).
+/// You are given a 2D integer array queries where 
+/// queries[i] = [indexi, colori].
+///
+/// For each query, you color the index indexi with the color colori in 
+/// the array nums.
+///
+/// Return an array answer of the same length as queries where answer[i] 
+/// is the number of adjacent elements with the same color after the 
+/// ith query.
+///
+/// More formally, answer[i] is the number of indices j, such 
+/// that 0 <= j < n - 1 and nums[j] == nums[j + 1] and nums[j] != 0 after 
+/// the ith query.
+///
+/// Example 1:
+/// Input: n = 4, queries = [[0,2],[1,2],[3,1],[1,1],[2,1]]
+/// Output: [0,1,1,0,2]
+/// Explanation: Initially array nums = [0,0,0,0], where 0 denotes 
+/// uncolored elements of the array.
+/// - After the 1st query nums = [2,0,0,0]. The count of adjacent elements
+///   with the same color is 0.
+/// - After the 2nd query nums = [2,2,0,0]. The count of adjacent elements 
+///   with the same color is 1.
+/// - After the 3rd query nums = [2,2,0,1]. The count of adjacent elements 
+///   with the same color is 1.
+/// - After the 4th query nums = [2,1,0,1]. The count of adjacent elements 
+///   with the same color is 0.
+/// - After the 5th query nums = [2,1,1,1]. The count of adjacent elements 
+///   with the same color is 2.
+///
+/// Example 2:
+/// Input: n = 1, queries = [[0,100000]]
+/// Output: [0]
+/// Explanation: Initially array nums = [0], where 0 denotes uncolored 
+/// elements of the array.
+/// - After the 1st query nums = [100000]. The count of adjacent elements 
+///   with the same color is 0.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// 2. 1 <= queries.length <= 10^5
+/// 3. queries[i].length == 2
+/// 4. 0 <= indexi <= n - 1
+/// 5. 1 <=  colori <= 10^5
+/// </summary>
+vector<int> LeetCodeGreedy::colorTheArray(int n, vector<vector<int>>& queries)
+{
+    vector<int> colors(n);
+    vector<int> result;
+    int count = 0;
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        int index = queries[i][0];
+        int new_color = queries[i][1];
+        int old_color = colors[index];
+        colors[index] = new_color;
+        int decrease = 0;
+        if (old_color != 0)
+        {
+            if (index > 0 && colors[index - 1] == old_color)
+            {
+                decrease++;
+            }
+            if (index < n - 1 && colors[index + 1] == old_color)
+            {
+                decrease++;
+            }
+        }
+
+        int increase = 0;
+        if (index > 0 && colors[index - 1] == new_color)
+        {
+            increase++;
+        }
+        if (index < n - 1 && colors[index + 1] == new_color)
+        {
+            increase++;
+        }
+        count += increase - decrease;
+        result.push_back(count);
+    }
+    return result;
+}
+
 #pragma endregion

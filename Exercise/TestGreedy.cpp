@@ -1626,8 +1626,55 @@ void TestLeetCode2589(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2655(void)
+{
+    Logger::WriteMessage("Test Leet Code 2655");
+    LeetCodeGreedy leetCode;
+    int n = 10;
+    vector<vector<int>> ranges = { {3, 5},{7, 8} };
+    vector<vector<int>> result = leetCode.findMaximalUncoveredRanges(n, ranges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage(result);
+
+    n = 3;
+    ranges = { {0, 2} };
+    result = leetCode.findMaximalUncoveredRanges(n, ranges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage(result);
+
+    n = 7;
+    ranges = { {2, 4},{0, 3} };
+    result = leetCode.findMaximalUncoveredRanges(n, ranges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(ranges);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2672(void)
+{
+    Logger::WriteMessage("Test Leet Code 2672");
+    LeetCodeGreedy leetCode;
+    int n = 4;
+    vector<vector<int>> queries = { {0, 2},{1, 2},{3, 1},{1, 1},{2, 1} };
+    vector<int> result = leetCode.colorTheArray(n, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 1; 
+    queries = { {0, 100000} };
+    result = leetCode.colorTheArray(n, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode2672();
+    TestLeetCode2655();
     TestLeetCode2589();
     TestLeetCode2580();
     TestLeetCode2542();

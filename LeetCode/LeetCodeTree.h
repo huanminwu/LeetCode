@@ -19,6 +19,30 @@
 #include <stack> 
 #include "leetcode.h"
 using namespace std;
+struct RopeTreeNode 
+{
+    int len;
+    string val;
+    RopeTreeNode* left;
+    RopeTreeNode* right;
+    RopeTreeNode() 
+        : len(0), val(""), left(nullptr), right(nullptr) 
+    {
+    }
+    RopeTreeNode(string s) 
+        : len(0), val(std::move(s)), left(nullptr), right(nullptr) 
+    {
+    }
+    RopeTreeNode(int x) 
+        : len(x), val(""), left(nullptr), right(nullptr) 
+    {
+    }
+    RopeTreeNode(int x, RopeTreeNode* left, RopeTreeNode* right) 
+        : len(x), val(""), left(left), right(right) 
+    {
+    }
+};
+
 /// <summary>
 /// The class is to implement binary tree related algorithm  
 /// </summary>
@@ -6611,6 +6635,127 @@ public:
     /// 2. 1 <= Node.val <= 10^4
     /// </summary>
     TreeNode* replaceValueInTree(TreeNode* root);
+
+    /// <summary>
+    /// Leet Code 2673. Make Costs of Paths Equal in a Binary Tree
+    /// 
+    /// Medium
+    ///	
+    /// You are given a 0-indexed array nums of length n.
+    ///
+    /// You are given an integer n representing the number of nodes in a 
+    /// perfect binary tree consisting of nodes numbered from 1 to n. The 
+    /// root of the tree is node 1 and each node i in the tree has two 
+    /// children where the left child is the node 2 * i and the right 
+    /// child is 2 * i + 1.
+    ///
+    /// Each node in the tree also has a cost represented by a given 
+    /// 0-indexed integer array cost of size n where cost[i] is the 
+    /// cost of node i + 1. You are allowed to increment the cost of any 
+    /// node by 1 any number of times.
+    ///
+    /// Return the minimum number of increments you need to make the cost 
+    /// of paths from the root to each leaf node equal.
+    ///
+    /// Note:
+    /// A perfect binary tree is a tree where each node, except the leaf 
+    /// nodes, has exactly 2 children.
+    /// The cost of a path is the sum of costs of nodes in the path.
+    ///
+    /// Example 1:
+    /// Input: n = 7, cost = [1,5,2,2,3,3,1]
+    /// Output: 6
+    /// Explanation: We can do the following increments:
+    /// - Increase the cost of node 4 one time.
+    /// - Increase the cost of node 3 three times.
+    /// - Increase the cost of node 7 two times.
+    /// Each path from the root to a leaf will have a total cost of 9.
+    /// The total increments we did is 1 + 3 + 2 = 6.
+    /// It can be shown that this is the minimum answer we can achieve.
+    ///
+    /// Example 2:
+    /// Input: n = 3, cost = [5,3,3]
+    /// Output: 0
+    /// Explanation: The two paths already have equal total costs, so 
+    /// no increments are needed.
+    ///
+    /// Constraints:
+    /// 1. 3 <= n <= 10^5
+    /// 2. n + 1 is a power of 2
+    /// 3. cost.length == n
+    /// 4. 1 <= cost[i] <= 10^4
+    /// </summary>
+    int minIncrements(int n, vector<int>& cost);
+
+    /// <summary>
+    /// Leet Code 2689. Extract Kth Character From The Rope Tree
+    /// </summary>
+    string getKthCharacter(RopeTreeNode* node);
+
+    /// <summary>
+    /// Leet Code 2689. Extract Kth Character From The Rope Tree
+    /// 
+    /// Easy
+    ///	
+    /// You are given the root of a binary tree and an integer k. Besides the 
+    /// left and right children, every node of this tree has two other 
+    /// properties, a string node.val containing only lowercase English 
+    /// letters (possibly empty) and a non-negative integer node.len. There 
+    /// are two types of nodes in this tree:
+    ///
+    /// Leaf: These nodes have no children, node.len = 0, and node.val is some 
+    /// non-empty string.
+    /// Internal: These nodes have at least one child (also at most two 
+    /// children), node.len > 0, and node.val is an empty string.
+    /// The tree described above is called a Rope binary tree. Now we define 
+    /// S[node] recursively as follows:
+    ///
+    /// If node is some leaf node, S[node] = node.val,
+    /// Otherwise if node is some internal node, S[node] = 
+    /// concat(S[node.left], S[node.right]).
+    /// Return k-th character of the string S[root].
+    /// Note: If s and p are two strings, concat(s, p) is a string obtained 
+    /// by concatenating p to s. For example, concat("ab", "zz") = "abzz".
+    ///
+    /// Example 1:
+    /// Input: root = [10,4,"abcpoe","g","rta"], k = 6
+    /// Output: "b"
+    /// Explanation: In the picture below, we put an integer on internal 
+    /// nodes that represents node.len, and a string on leaf nodes that 
+    /// represents node.val.
+    /// You can see that S[root] = concat(concat("g", "rta"), "abcpoe") = 
+    /// "grtaabcpoe". So S[root][5], which represents 6th character of it, 
+    /// is equal to "b".
+    ///
+    /// Example 2:
+    /// Input: root = [12,6,6,"abc","efg","hij","klm"], k = 3
+    /// Output: "c"
+    /// Explanation: In the picture below, we put an integer on internal 
+    /// nodes that represents node.len, and a string on leaf nodes that 
+    /// represents node.val.
+    /// You can see that S[root] = concat(concat("abc", "efg"), 
+    /// concat("hij", "klm")) = "abcefghijklm". So S[root][2], which 
+    /// represents the 3rd character of it, is equal to "c".
+    ///
+    /// Example 3:
+    /// Input: root = ["ropetree"], k = 8
+    /// Output: "e"
+    /// Explanation: In the picture below, we put an integer on 
+    /// internal nodes that represents node.len, and a string on 
+    /// leaf nodes that represents node.val.
+    /// You can see that S[root] = "ropetree". So S[root][7], which 
+    /// represents 8th character of it, is equal to "e".
+    ///
+    /// Constraints:
+    /// 1. The number of nodes in the tree is in the range [1, 10^3]
+    /// 2. node.val contains only lowercase English letters
+    /// 3. 0 <= node.val.length <= 50
+    /// 4. 0 <= node.len <= 10^4
+    /// 5. for leaf nodes, node.len = 0 and node.val is non-empty
+    /// 6. for internal nodes, node.len > 0 and node.val is empty
+    /// 7. 1 <= k <= S[root].length
+    /// </summary>
+    char getKthCharacter(RopeTreeNode* root, int k);
 #pragma endregion
 };
 

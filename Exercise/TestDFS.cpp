@@ -1852,8 +1852,24 @@ void TestLeetCode2597(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2664(void)
+{
+    Logger::WriteMessage("Test Leet Code 2664");
+    LeetCodeDFS leetCode;
+    int m = 1, n = 1, r = 0, c = 0;
+    vector<vector<int>> result = leetCode.tourOfKnight(m, n, r, c);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; r = " + to_string(r) + "; c = " + to_string(c));
+    Logger::WriteMessage(result);
+
+    m = 3, n = 4, r = 0, c = 0;
+    result = leetCode.tourOfKnight(m, n, r, c);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n) + "; r = " + to_string(r) + "; c = " + to_string(c));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2664();
     TestLeetCode2597();
     TestLeetCode2572();
     TestLeetCode2403();

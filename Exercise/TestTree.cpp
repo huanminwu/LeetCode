@@ -3756,8 +3756,26 @@ void TestLeetCode2641(void)
     leetCode.freeTreeNodes(result);
 }
 
+void TestLeetCode2673(void)
+{
+    Logger::WriteMessage("Test Leet Code 2673");
+    LeetCodeTree leetCode;
+    int n = 7;
+    vector<int> cost = { 1, 5, 2, 2, 3, 3, 1 };
+    int result = leetCode.minIncrements(n, cost);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    cost = { 5, 3, 3 };
+    result = leetCode.minIncrements(n, cost);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode2673();
     TestLeetCode2641();
     TestLeetCode2581();
     TestLeetCode2583();

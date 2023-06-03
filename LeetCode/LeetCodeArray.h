@@ -16865,6 +16865,243 @@ public:
     /// 2. 1 <= nums[i] <= 10^9
     /// </summary>
     vector<long long> findPrefixScore(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2660. Determine the Winner of a Bowling Game
+    /// 
+    /// Easy
+    ///	
+    /// You are given two 0-indexed integer arrays player1 and player2, that 
+    /// represent the number of pins that player 1 and player 2 hit in a 
+    /// bowling game, respectively.
+    ///
+    /// The bowling game consists of n turns, and the number of pins in each 
+    /// turn is exactly 10.
+    ///
+    /// Assume a player hit xi pins in the ith turn. The value of the ith 
+    /// turn for the player is:
+    ///
+    /// 2xi if the player hit 10 pins in any of the previous two turns.
+    /// Otherwise, It is xi.
+    /// The score of the player is the sum of the values of their n turns.
+    ///
+    /// Return
+    /// 
+    /// 1 if the score of player 1 is more than the score of player 2,
+    /// 2 if the score of player 2 is more than the score of player 1, and
+    /// 0 in case of a draw.
+    /// 
+    /// Example 1:
+    /// Input: player1 = [4,10,7,9], player2 = [6,5,2,3]
+    /// Output: 1
+    /// Explanation: The score of player1 is 4 + 10 + 2*7 + 2*9 = 46.
+    /// The score of player2 is 6 + 5 + 2 + 3 = 16.
+    /// Score of player1 is more than the score of player2, so, player1 is 
+    /// the winner, and the answer is 1.
+    ///
+    /// Example 2:
+    /// Input: player1 = [3,5,7,6], player2 = [8,10,10,2]
+    /// Output: 2
+    /// Explanation: The score of player1 is 3 + 5 + 7 + 6 = 21.
+    /// The score of player2 is 8 + 10 + 2*10 + 2*2 = 42.
+    /// Score of player2 is more than the score of player1, so, player2 is 
+    /// the winner, and the answer is 2.
+    ///
+    /// Example 3:
+    /// Input: player1 = [2,3], player2 = [4,1]
+    /// Output: 0
+    /// Explanation: The score of player1 is 2 + 3 = 5
+    /// The score of player2 is 4 + 1 = 5
+    /// The score of player1 equals to the score of player2, so, there is 
+    /// a draw, and the answer is 0.
+    /// 
+    /// Constraints:
+    /// 1. n == player1.length == player2.length
+    /// 2. 1 <= n <= 1000
+    /// 3. 0 <= player1[i], player2[i] <= 10
+    /// </summary>
+    int isWinner(vector<int>& player1, vector<int>& player2);
+
+    /// <summary>
+    /// Leet Code 2661. First Completely Painted Row or Column
+    /// 
+    /// Medium
+    ///	
+    /// You are given a 0-indexed integer array arr, and an m x n integer 
+    /// matrix mat. arr and mat both contain all the integers in the range 
+    /// [1, m * n].
+    ///
+    /// Go through each index i in arr starting from index 0 and paint the 
+    /// cell in mat containing the integer arr[i].
+    ///
+    /// Return the smallest index i at which either a row or a column will 
+    /// be completely painted in mat.
+    /// 
+    /// Example 1:
+    /// image explanation for example 1
+    /// Input: arr = [1,3,4,2], mat = [[1,4],[2,3]]
+    /// Output: 2
+    /// Explanation: The moves are shown in order, and both the first row 
+    /// and second column of the matrix become fully painted at arr[2].
+    ///
+    /// Example 2:
+    /// image explanation for example 2
+    /// Input: arr = [2,8,7,4,1,3,5,6,9], mat = [[3,2,5],[1,4,6],[8,7,9]]
+    /// Output: 3
+    /// Explanation: The second column becomes fully painted at arr[3].
+    ///
+    /// Constraints:
+    /// 1. m == mat.length
+    /// 2. n = mat[i].length
+    /// 3. arr.length == m * n
+    /// 4. 1 <= m, n <= 10^5
+    /// 5. 1 <= m * n <= 10^5
+    /// 6. 1 <= arr[i], mat[r][c] <= m * n
+    /// 7. All the integers of arr are unique.
+    /// 8. All the integers of mat are unique.
+    /// </summary>
+    int firstCompleteIndex(vector<int>& arr, vector<vector<int>>& mat);
+
+    /// <summary>
+    /// Leet Code 2684. Maximum Number of Moves in a Grid
+    /// 
+    /// Medium
+    ///	
+    /// You are given a 0-indexed m x n matrix grid consisting of positive 
+    /// integers.
+    ///
+    /// You can start at any cell in the first column of the matrix, and 
+    /// traverse the grid in the following way:
+    ///
+    /// From a cell (row, col), you can move to any of the cells: 
+    /// (row - 1, col + 1), (row, col + 1) and (row + 1, col + 1) such that 
+    /// the value of the cell you move to, should be strictly bigger than 
+    /// the value of the current cell.
+    /// Return the maximum number of moves that you can perform.
+    ///
+    /// Example 1:
+    /// Input: grid = [[2,4,3,5],[5,4,9,3],[3,4,2,11],[10,9,13,15]]
+    /// Output: 3
+    /// Explanation: We can start at the cell (0, 0) and make the following 
+    /// moves:
+    /// - (0, 0) -> (0, 1).
+    /// - (0, 1) -> (1, 2).
+    /// - (1, 2) -> (2, 3).
+    /// It can be shown that it is the maximum number of moves that can be 
+    /// made.
+    ///
+    /// Example 2:
+    /// Input: grid = [[3,2,4],[2,1,9],[1,1,7]]
+    /// Output: 0
+    /// Explanation: Starting from any cell in the first column we cannot 
+    /// perform any moves.
+    /// 
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 2 <= m, n <= 1000
+    /// 4. 4 <= m * n <= 10^5
+    /// 5. 1 <= grid[i][j] <= 10^6
+    /// </summary>
+    int maxMoves(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 2681. Power of Heroes
+    /// 
+    /// Hard
+    ///	
+    /// You are given a 0-indexed integer array nums representing the strength 
+    /// of some heroes. The power of a group of heroes is defined as follows:
+    ///
+    /// Let i0, i1, ... ,ik be the indices of the heroes in a group. Then, 
+    /// the power of this group is max(nums[i0], nums[i1], ... ,nums[ik])^2 * 
+    /// min(nums[i0], nums[i1], ... ,nums[ik]).
+    /// Return the sum of the power of all non-empty groups of heroes 
+    /// possible. Since the sum could be very large, return it modulo 10^9 + 7.
+    /// Example 1:
+    /// Input: nums = [2,1,4]
+    /// Output: 141
+    /// Explanation: 
+    /// 1st group: [2] has power = 2^2 * 2 = 8.
+    /// 2nd group: [1] has power = 1^2 * 1 = 1. 
+    /// 3rd group: [4] has power = 4^2 * 4 = 64. 
+    /// 4th group: [2,1] has power = 2^2 * 1 = 4. 
+    /// 5th group: [2,4] has power = 4^2 * 2 = 32. 
+    /// 6th group: [1,4] has power = 4^2 * 1 = 16. 
+    /// 7th group: [2,1,4] has power = 4^2 * 1 = 16. 
+    /// The sum of powers of all groups is 8 + 1 + 64 + 4 + 32 + 16 + 16 = 141.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,1,1]
+    /// Output: 7
+    /// Explanation: A total of 7 groups are possible, and the power of each 
+    /// group will be 1. Therefore, the sum of the powers of all groups is 7.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    int sumOfPower(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2711. Difference of Number of Distinct Values on Diagonals
+    /// 
+    /// Easy
+    ///	
+    /// Given a 0-indexed 2D grid of size m x n, you should find the matrix 
+    /// answer of size m x n.
+    ///
+    /// The value of each cell (r, c) of the matrix answer is calculated in 
+    /// the following way:
+    ///
+    /// Let topLeft[r][c] be the number of distinct values in the top-left 
+    /// diagonal of the cell (r, c) in the matrix grid.
+    /// Let bottomRight[r][c] be the number of distinct values in the 
+    /// bottom-right diagonal of the cell (r, c) in the matrix grid. 
+    /// Then answer[r][c] = |topLeft[r][c] - bottomRight[r][c]|. 
+    ///
+    /// Return the matrix answer.
+    ///
+    /// A matrix diagonal is a diagonal line of cells starting from some 
+    /// cell in either the topmost row or leftmost column and going in 
+    /// the bottom-right direction until reaching the matrix's end.
+    ///
+    /// A cell (r1, c1) belongs to the top-left diagonal of the cell (r, c), 
+    /// if both belong to the same diagonal and r1 < r. Similarly is defined 
+    /// bottom-right diagonal.
+    ///
+    /// Example 1:
+    /// Input: grid = [[1,2,3],[3,1,5],[3,2,1]]
+    /// Output: [[1,1,0],[1,0,1],[0,1,1]]
+    /// Explanation: The 1st diagram denotes the initial grid. 
+    /// The 2nd diagram denotes a grid for cell (0,0), where blue-colored 
+    /// cells are cells on its bottom-right diagonal.
+    /// The 3rd diagram denotes a grid for cell (1,2), where red-colored 
+    /// cells are cells on its top-left diagonal.
+    /// The 4th diagram denotes a grid for cell (1,1), where blue-colored 
+    /// cells are cells on its bottom-right diagonal and red-colored cells 
+    /// are cells on its top-left diagonal.
+    /// - The cell (0,0) contains [1,1] on its bottom-right diagonal and [] 
+    /// on its top-left diagonal. The answer is |1 - 0| = 1.
+    /// - The cell (1,2) contains [] on its bottom-right diagonal and [2] 
+    /// on its top-left diagonal. The answer is |0 - 1| = 1.
+    /// - The cell (1,1) contains [1] on its bottom-right diagonal and [1] 
+    /// on its top-left diagonal. The answer is |1 - 1| = 0.
+    /// The answers of other cells are similarly calculated.
+    ///
+    /// Example 2:
+    ///
+    /// Input: grid = [[1]]
+    /// Output: [[0]]
+    /// Explanation: - The cell (0,0) contains [] on its bottom-right diagonal 
+    /// and [] on its top-left diagonal. The answer is |0 - 0| = 0.
+    /// 
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 1 <= m, n, grid[i][j] <= 50
+    /// </summary>
+    vector<vector<int>> differenceOfDistinctValues(vector<vector<int>>& grid);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

@@ -1025,8 +1025,53 @@ void TestLeetCode2569(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2683(void)
+{
+    Logger::WriteMessage("Test Leet Code 2683");
+    LeetCodeBit leetCode;
+    vector<int> derived = { 1, 1, 0 };
+    bool result = leetCode.doesValidArrayExist(derived);
+    Logger::WriteMessage(derived);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    derived = { 1, 1 };
+    result = leetCode.doesValidArrayExist(derived);
+    Logger::WriteMessage(derived);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    derived = { 1, 0 };
+    result = leetCode.doesValidArrayExist(derived);
+    Logger::WriteMessage(derived);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2680(void)
+{
+    Logger::WriteMessage("Test Leet Code 2680");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 12, 9 };
+    int k = 1;
+    long long result = leetCode.maximumOr(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 8,1,2 };
+    k = 2;
+    result = leetCode.maximumOr(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 84, 99999999, 99911223 };
+    k = 1;
+    result = leetCode.maximumOr(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2680();
+    TestLeetCode2683();
     TestLeetCode2569();
     TestLeetCode2571();
     TestLeetCode2568();

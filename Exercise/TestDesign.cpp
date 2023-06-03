@@ -5134,8 +5134,125 @@ void TestLeetCode2642(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2671(void)
+{
+    Logger::WriteMessage("Test Leet Code 2671");
+    vector<string> commands =
+    {
+        "FrequencyTracker","add","add","hasFrequency"
+    };
+    vector<vector<int>> parameters =
+    {
+        {}, {3},{3},{2}
+    };
+    vector<string> result;
+    FrequencyTracker* frequencyTracker = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FrequencyTracker")
+        {
+            frequencyTracker = new FrequencyTracker();
+        }
+        else if (commands[i] == "add")
+        {
+            frequencyTracker->add(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "deleteOne")
+        {
+            frequencyTracker->deleteOne(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "hasFrequency")
+        {
+            bool ret = frequencyTracker->hasFrequency(parameters[i][0]);
+            result.push_back((string) (ret ? "true" : "false"));
+        }
+    }
+    delete frequencyTracker;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+        "FrequencyTracker", "add", "deleteOne", "hasFrequency"
+    };
+    parameters = 
+    {
+        {},{1},{1},{1}
+    };
+    result.clear();
+    frequencyTracker = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FrequencyTracker")
+        {
+            frequencyTracker = new FrequencyTracker();
+        }
+        else if (commands[i] == "add")
+        {
+            frequencyTracker->add(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "deleteOne")
+        {
+            frequencyTracker->deleteOne(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "hasFrequency")
+        {
+            bool ret = frequencyTracker->hasFrequency(parameters[i][0]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+    }
+    delete frequencyTracker;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+        "FrequencyTracker", "hasFrequency", "add", "hasFrequency"
+    };
+    parameters =
+    {
+        {} ,{2},{3},{1}
+    };
+    result.clear();
+    frequencyTracker = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "FrequencyTracker")
+        {
+            frequencyTracker = new FrequencyTracker();
+            result.push_back("null");
+        }
+        else if (commands[i] == "add")
+        {
+            frequencyTracker->add(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "deleteOne")
+        {
+            frequencyTracker->deleteOne(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "hasFrequency")
+        {
+            bool ret = frequencyTracker->hasFrequency(parameters[i][0]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+    }
+    delete frequencyTracker;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode2671();
     TestLeetCode2642();
     TestLeetCode2590();
     TestLeetCode2526();

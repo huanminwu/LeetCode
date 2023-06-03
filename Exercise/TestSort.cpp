@@ -3236,8 +3236,51 @@ void TestLeetCode2653(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2659(void)
+{
+    Logger::WriteMessage("Test Leet Code 2659");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 3, 4, -1 };
+    long long result = leetCode.countOperationsToEmptyArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,4,3 };
+    result = leetCode.countOperationsToEmptyArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    result = leetCode.countOperationsToEmptyArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2679(void)
+{
+    Logger::WriteMessage("Test Leet Code 2679");
+    LeetCodeSort leetCode;
+    vector<vector<int>> nums =
+    {
+        {7, 2, 1},{6, 4, 2}, {6, 5, 3},{3, 2, 1}
+    };
+    int result = leetCode.matrixSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums =
+    {
+        {1}
+    };
+    result = leetCode.matrixSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2679();
+    TestLeetCode2659();
     TestLeetCode2653();
     TestLeetCode2613();
     TestLeetCode2611();

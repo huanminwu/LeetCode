@@ -8683,8 +8683,123 @@ void TestLeetCode2640(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2660(void)
+{
+    Logger::WriteMessage("Test Leet Code 2660");
+    LeetCodeArray leetCode;
+    vector<int> player1 = { 4, 10, 7, 9 };
+    vector<int> player2 = { 6, 5, 2, 3 };
+    int result = leetCode.isWinner(player1, player2);
+    Logger::WriteMessage(player1);
+    Logger::WriteMessage(player2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    player1 = { 3,5,7,6 };
+    player2 = { 8,10,10,2 };
+    result = leetCode.isWinner(player1, player2);
+    Logger::WriteMessage(player1);
+    Logger::WriteMessage(player2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    player1 = { 2,3 };
+    player2 = { 4,1 };
+    result = leetCode.isWinner(player1, player2);
+    Logger::WriteMessage(player1);
+    Logger::WriteMessage(player2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2661(void)
+{
+    Logger::WriteMessage("Test Leet Code 2661");
+    LeetCodeArray leetCode;
+    vector<int> arr = { 1, 3, 4, 2 };
+    vector<vector<int>> mat = { {1, 4},{2, 3} };
+    int result = leetCode.firstCompleteIndex(arr, mat);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 2, 8, 7, 4, 1, 3, 5, 6, 9 };
+    mat = { {3, 2, 5},{1, 4, 6},{8, 7, 9} };
+    result = leetCode.firstCompleteIndex(arr, mat);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr = { 1, 4, 5, 2, 6, 3 };
+    mat = { {4, 3, 5},{1, 2, 6} };
+    result = leetCode.firstCompleteIndex(arr, mat);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2684(void)
+{
+    Logger::WriteMessage("Test Leet Code 2684");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid =
+    {
+        {2, 4, 3, 5},{5, 4, 9, 3},{3, 4, 2, 11},{10, 9, 13, 15}
+    };
+    int result = leetCode.maxMoves(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {3,2,4},{2,1,9},{1,1,7}
+    };
+    result = leetCode.maxMoves(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2681(void)
+{
+    Logger::WriteMessage("Test Leet Code 2681");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 1, 4 };
+    int result = leetCode.sumOfPower(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 1, 1 };
+    result = leetCode.sumOfPower(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode2711(void)
+{
+    Logger::WriteMessage("Test Leet Code 2711");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid =
+    { 
+        {1, 2, 3},{3, 1, 5},{3, 2, 1} 
+    };
+    vector<vector<int>> result = leetCode.differenceOfDistinctValues(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid =
+    {
+        {1}
+    };
+    result = leetCode.differenceOfDistinctValues(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2711();
+    TestLeetCode2681();
+    TestLeetCode2684();
+    TestLeetCode2661();
+    TestLeetCode2660();
     TestLeetCode2640();
     TestLeetCode2639();
     TestLeetCode2643();

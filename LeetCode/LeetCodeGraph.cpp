@@ -17158,5 +17158,737 @@ int LeetCodeGraph::minimumTotalPrice(int n, vector<vector<int>>& edges,
 }
 
 
+/// <summary>
+/// Leet Code 2658. Maximum Number of Fish in a Grid
+/// 
+/// Medium
+///	
+/// You are given a 0-indexed 2D matrix grid of size m x n, where (r, c) 
+/// represents:
+///
+/// A land cell if grid[r][c] = 0, or
+/// A water cell containing grid[r][c] fish, if grid[r][c] > 0.
+/// A fisher can start at any water cell (r, c) and can do the following 
+/// operations any number of times:
+/// Catch all the fish at cell (r, c), or
+/// Move to any adjacent water cell.
+/// Return the maximum number of fish the fisher can catch if he chooses 
+/// his starting cell optimally, or 0 if no water cell exists.
+///
+/// An adjacent cell of the cell (r, c), is one of the cells (r, c + 1), 
+/// (r, c - 1), (r + 1, c) or (r - 1, c) if it exists.
+///
+/// Example 1:
+/// Input: grid = [[0,2,1,0],[4,0,0,3],[1,0,0,4],[0,3,2,0]]
+/// Output: 7
+/// Explanation: The fisher can start at cell (1,3) and collect 3 fish, 
+/// then move to cell (2,3) and collect 4 fish.
+///
+/// Example 2:
+/// Input: grid = [[1,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,1]]
+/// Output: 1
+/// Explanation: The fisher can start at cells (0,0) or (3,3) and 
+/// collect a single fish. 
+///
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 1 <= m, n <= 10
+/// 4. 0 <= grid[i][j] <= 10
+/// </summary>
+int LeetCodeGraph::findMaxFish(vector<vector<int>>& grid)
+{
+    vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    int m = grid.size();
+    int n = grid[0].size();
+    vector<vector<int>> mat = grid;
+    int result = 0;
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (mat[i][j] == 0) continue;
+            int sum = mat[i][j];
+            mat[i][j] = 0;
+            queue<vector<int>> queue;
+            queue.push({ i, j });
+            while (!queue.empty())
+            {
+                vector<int> pos = queue.front();
+                queue.pop();
+                for (size_t k = 0; k < directions.size(); k++)
+                {
+                    int x = pos[0] + directions[k][0];
+                    int y = pos[1] + directions[k][1];
+                    if (x < 0 || x >= m || y < 0 || y >= n) continue;
+                    if (mat[x][y] == 0) continue;
+                    if (mat[x][y] > 0)
+                    {
+                        sum += mat[x][y];
+                        mat[x][y] = 0;
+                        queue.push({ x, y });
+                    }
+                }
+            }
+            result = max(result, sum);
+        }
+    }
+    return result;
+}
 
+/// <summary>
+/// Leet Code 2662. Minimum Cost of a Path With Special Roads
+/// 
+/// Medium
+///	
+/// You are given an array start where start = [startX, startY] represents 
+/// your initial position (startX, startY) in a 2D space. You are also 
+/// given the array target where target = [targetX, targetY] represents 
+/// your target position (targetX, targetY).
+/// The cost of going from a position (x1, y1) to any other position in 
+/// the space (x2, y2) is |x2 - x1| + |y2 - y1|.
+/// There are also some special roads. You are given a 2D array 
+/// specialRoads where specialRoads[i] = [x1i, y1i, x2i, y2i, costi] 
+/// indicates that the ith special road can take you from (x1i, y1i) to 
+/// (x2i, y2i) with a cost equal to costi. You can use each special road 
+/// any number of times.
+///
+/// Return the minimum cost required to go from (startX, startY) to 
+/// (targetX, targetY).
+///
+/// Example 1:
+/// Input: start = [1,1], target = [4,5], 
+/// specialRoads = [[1,2,3,3,2],[3,4,4,5,1]]
+/// Output: 5
+/// Explanation: The optimal path from (1,1) to (4,5) is the following:
+/// - (1,1) -> (1,2). This move has a cost of |1 - 1| + |2 - 1| = 1.
+/// - (1,2) -> (3,3). This move uses the first special edge, the cost is 2.
+/// - (3,3) -> (3,4). This move has a cost of |3 - 3| + |4 - 3| = 1.
+/// - (3,4) -> (4,5). This move uses the second special edge, the cost 
+///   is 1.
+/// So the total cost is 1 + 2 + 1 + 1 = 5.
+/// It can be shown that we cannot achieve a smaller total cost than 5.
+///
+/// Example 2:
+/// Input: start = [3,2], target = [5,7], specialRoads = 
+/// [[3,2,3,4,4],[3,3,5,5,5],[3,4,5,6,6]]
+/// Output: 7
+/// Explanation: It is optimal to not use any special edges and go 
+/// directly from the starting to the ending position with a 
+/// cost |5 - 3| + |7 - 2| = 7.
+/// 
+/// Constraints:
+/// 1. start.length == target.length == 2
+/// 2. 1 <= startX <= targetX <= 10^5
+/// 3. 1 <= startY <= targetY <= 10^5
+/// 4. 1 <= specialRoads.length <= 200
+/// 5. specialRoads[i].length == 5
+/// 6. startX <= x1i, x2i <= targetX
+/// 7. startY <= y1i, y2i <= targetY
+/// 8. 1 <= costi <= 10^5
+/// </summary>
+int LeetCodeGraph::minimumCost(vector<int>& start, vector<int>& target,
+    vector<vector<int>>& specialRoads)
+{
+    unordered_map<int, unordered_map<int, int>> distance;
+    distance[start[0]][start[1]] = 0;
+    distance[target[0]][target[1]] = 
+        abs(start[0] - target[0]) + abs(start[1] - target[1]);
+    set<vector<int>> pq;
+    pq.insert({ 0, start[0], start[1] });
+    pq.insert({ distance[target[0]][target[1]], target[0], target[1] });
+    for (size_t i = 0; i < specialRoads.size(); i++)
+    {
+        int x = specialRoads[i][0];
+        int y = specialRoads[i][1];
+        distance[x][y] =
+            abs(start[0] - x) + abs(start[1] - y);
+        pq.insert({ distance[x][y], x, y });
+    }
+    while (!pq.empty())
+    {
+        vector<int> pos = *pq.begin();
+        pq.erase(pq.begin());
+        int d = pos[0];
+        int x = pos[1];
+        int y = pos[2];
+        if (x == target[0] && y == target[1]) return d;
+        for (size_t i = 0; i < specialRoads.size(); i++)
+        {
+            int x1 = specialRoads[i][0];
+            int y1 = specialRoads[i][1];
+            int x2 = specialRoads[i][2];
+            int y2 = specialRoads[i][3];
+            int cost = specialRoads[i][4];
+            if (x == x1 && y == y1)
+            {
+                if (distance[x2][y2] == 0)
+                {
+                    distance[x2][y2] = d + cost;
+                    pq.insert({ distance[x2][y2], x2, y2 });
+                }
+                else if (distance[x2][y2] > d + cost)
+                {
+                    pq.erase({ distance[x2][y2], x2, y2 });
+                    distance[x2][y2] = d + cost;
+                    pq.insert({ distance[x2][y2], x2, y2 });
+                }
+            }
+            else 
+            {
+                int cost = abs(x - x1) + abs(y - y1);
+                if (distance[x1][y1] > d + cost)
+                {
+                    pq.erase({ distance[x1][y1], x1, y1 });
+                    distance[x1][y1] = d + cost;
+                    pq.insert({ distance[x1][y1], x1, y1 });
+                }
+            }
+        }
+        int x1 = target[0];
+        int y1 = target[1];
+        int cost = abs(x - x1) + abs(y - y1);
+        if (distance[x1][y1] > d + cost)
+        {
+            pq.erase({ distance[x1][y1], x1, y1 });
+            distance[x1][y1] = d + cost;
+            pq.insert({ distance[x1][y1], x1, y1 });
+        }
+    }
+    return -1;
+}
+
+/// <summary>
+/// Leet Code 2685. Count the Number of Complete Components
+/// 
+/// Medium
+///	
+/// You are given an integer n. There is an undirected graph with n 
+/// vertices, numbered from 0 to n - 1. You are given a 2D integer 
+/// array edges where edges[i] = [ai, bi] denotes that there exists 
+/// an undirected edge connecting vertices ai and bi.
+/// 
+/// Return the number of complete connected components of the graph.
+///
+/// A connected component is a subgraph of a graph in which there 
+/// exists a path between any two vertices, and no vertex of the 
+/// subgraph shares an edge with a vertex outside of the subgraph.
+///
+/// A connected component is said to be complete if there exists 
+/// an edge between every pair of its vertices.
+///
+/// Example 1:
+/// Input: n = 6, edges = [[0,1],[0,2],[1,2],[3,4]]
+/// Output: 3
+/// Explanation: From the picture above, one can see that all of 
+/// the components of this graph are complete.
+///
+/// Example 2:
+/// Input: n = 6, edges = [[0,1],[0,2],[1,2],[3,4],[3,5]]
+/// Output: 1
+/// Explanation: The component containing vertices 0, 1, and 2 is 
+/// complete since there is an edge between every pair of two 
+/// vertices. On the other hand, the component containing vertices 3, 4, 
+/// and 5 is not complete since there is no edge between vertices 4 
+/// and 5. Thus, the number of complete components in this graph is 1.
+///
+///
+/// Constraints:
+/// 1. 1 <= n <= 50
+/// 2. 0 <= edges.length <= n * (n - 1) / 2
+/// 3. edges[i].length == 2
+/// 4. 0 <= ai, bi <= n - 1
+/// 5. ai != bi
+/// 6. There are no repeated edges.
+/// </summary>
+int LeetCodeGraph::countCompleteComponents(int n, vector<vector<int>>& edges)
+{
+    unordered_map<int, set<int>> neighbors;
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].insert(edges[i][1]);
+        neighbors[edges[i][1]].insert(edges[i][0]);
+    }
+    vector<bool> visited(n, false);
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (!visited[i])
+        {
+            int count = 1;
+            visited[i] = true;
+            neighbors[i].insert(i);
+            for (auto k : neighbors[i])
+            {
+                if (k == i) continue;
+                if (visited[k])
+                {
+                    count = 0;
+                    continue;
+                }
+                visited[k] = true;
+                neighbors[k].insert(k);
+                if (neighbors[k] != neighbors[i])
+                {
+                    count = 0;
+                }
+            }
+            result += count;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2699. Modify Graph Edge Weights
+/// </summary>
+int LeetCodeGraph::modifiedGraphEdges(vector<unordered_map<int, int>>& neighbors,
+    int source, int destination)
+{
+    // calculate shortest distance from source to destination
+    int n = neighbors.size();
+    priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
+    pq.push({ 0, source });
+    vector<int> distance(n, INT_MAX);
+    distance[source] = 0;
+    while (!pq.empty())
+    {
+        int curr_node = pq.top()[1];
+        if (curr_node == destination) break;
+        int curr_dist = pq.top()[0];
+        pq.pop();
+        if (distance[curr_node] < curr_dist) continue;
+        for (auto itr : neighbors[curr_node])
+        {
+            int next = itr.first;
+            int dist = itr.second;
+            if (distance[next] > curr_dist + dist)
+            {
+                distance[next] = curr_dist + dist;
+                pq.push({ distance[next], next });
+            }
+        }
+    }
+    return distance[destination];
+}
+
+/// <summary>
+/// Leet Code 2699. Modify Graph Edge Weights
+/// 
+/// Hard
+///	
+/// You are given an undirected weighted connected graph containing n 
+/// nodes labeled from 0 to n - 1, and an integer array edges where 
+/// edges[i] = [ai, bi, wi] indicates that there is an edge between 
+/// nodes ai and bi with weight wi.
+///
+/// Some edges have a weight of -1 (wi = -1), while others have a 
+/// positive weight (wi > 0).
+///
+/// Your task is to modify all edges with a weight of -1 by assigning 
+/// them positive integer values in the range [1, 2 * 109] so that the 
+/// shortest distance between the nodes source and destination becomes 
+/// equal to an integer target. If there are multiple modifications 
+/// that make the shortest distance between source and destination equal 
+/// to target, any of them will be considered correct.
+///
+/// Return an array containing all edges (even unmodified ones) in any 
+/// order if it is possible to make the shortest distance from source 
+/// to destination equal to target, or an empty array if it's impossible.
+///
+/// Note: You are not allowed to modify the weights of edges with initial 
+/// positive weights.
+///
+/// Example 1:
+/// Input: n = 5, edges = [[4,1,-1],[2,0,-1],[0,3,-1],[4,3,-1]], 
+/// source = 0, destination = 1, target = 5
+/// Output: [[4,1,1],[2,0,1],[0,3,3],[4,3,1]]
+/// Explanation: The graph above shows a possible modification to the 
+/// edges, making the distance from 0 to 1 equal to 5.
+/// 
+/// Example 2:
+/// Input: n = 3, edges = [[0,1,-1],[0,2,5]], source = 0, destination = 2, 
+/// target = 6
+/// Output: []
+/// Explanation: The graph above contains the initial edges. It is not 
+/// possible to make the distance from 0 to 2 equal to 6 by modifying the 
+/// edge with weight -1. So, an empty array is returned.
+///
+/// Example 3:
+/// Input: n = 4, edges = [[1,0,4],[1,2,3],[2,3,5],[0,3,-1]], source = 0, 
+/// destination = 2, target = 6
+/// Output: [[1,0,4],[1,2,3],[2,3,5],[0,3,1]]
+/// Explanation: The graph above shows a modified graph having the 
+/// shortest distance from 0 to 2 as 6.
+///
+/// Constraints:
+/// 1. 1 <= n <= 100
+/// 2. 1 <= edges.length <= n * (n - 1) / 2
+/// 3. edges[i].length == 3
+/// 4. 0 <= ai, bi < n
+/// 5. wi = -1 or 1 <= wi <= 10^7
+/// 6. ai != bi
+/// 7. 0 <= source, destination < n
+/// 8. source != destination
+/// 9. 1 <= target <= 10^9
+/// 10. The graph is connected, and there are no self-loops or repeated 
+///     edges
+/// </summary>
+vector<vector<int>> LeetCodeGraph::modifiedGraphEdges(int n, 
+    vector<vector<int>>& edges,
+    int source, int destination, int target)
+{
+    vector<unordered_map<int, int>> neighbors(n);
+    queue<int> blocks;
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        if (edges[i][2] != -1)
+        {
+            neighbors[edges[i][0]][edges[i][1]] = edges[i][2];
+            neighbors[edges[i][1]][edges[i][0]] = edges[i][2];
+        }
+        else
+        {
+            blocks.push(i);
+        }
+    }
+    int distance = modifiedGraphEdges(neighbors, source, destination);
+    if (distance < target) return {};
+    while (!blocks.empty())
+    {
+        int index = blocks.front();
+        blocks.pop();
+        vector<int> edge = edges[index];
+        neighbors[edge[0]][edge[1]] = 1;
+        neighbors[edge[1]][edge[0]] = 1;
+        edges[index][2] = 1;
+        distance = modifiedGraphEdges(neighbors, source, destination);
+        if (distance <= target)
+        {
+            edges[index][2] += target - distance;
+            break;
+        }
+    }
+    while (!blocks.empty())
+    {
+        int index = blocks.front();
+        blocks.pop();
+        vector<int> edge = edges[index];
+        edges[index][2] = (int)2e9;
+    }
+    if (distance > target) return {};
+    return edges;
+}
+
+/// <summary>
+/// Leet Code 2713. Maximum Strictly Increasing Cells in a Matrix
+/// 
+/// Hard
+///
+/// Given a 1-indexed m x n integer matrix mat, you can select any cell 
+/// in the matrix as your starting cell.
+///
+/// From the starting cell, you can move to any other cell in the same 
+/// row or column, but only if the value of the destination cell is 
+/// strictly greater than the value of the current cell. You can repeat 
+/// this process as many times as possible, moving from cell to cell 
+/// until you can no longer make any moves.
+///
+/// Your task is to find the maximum number of cells that you can visit 
+/// in the matrix by starting from some cell.
+///
+/// Return an integer denoting the maximum number of cells that can be 
+/// visited.
+/// 
+/// Example 1:
+/// Input: mat = [[3,1],[3,4]]
+/// Output: 2
+/// Explanation: The image shows how we can visit 2 cells starting from 
+/// row 1, column 2. It can be shown that we cannot visit more than 2 
+/// cells no matter where we start from, so the answer is 2. 
+///
+/// Example 2:
+/// Input: mat = [[1,1],[1,1]]
+/// Output: 1
+/// Explanation: Since the cells must be strictly increasing, we can 
+/// only visit one cell in this example. 
+///
+/// Example 3:
+/// Input: mat = [[3,1,6],[-9,5,7]]
+/// Output: 4
+/// Explanation: The image above shows how we can visit 4 cells starting 
+/// from row 2, column 1. It can be shown that we cannot visit more 
+/// than 4 cells no matter where we start from, so the answer is 4. 
+/// 
+/// Constraints:
+/// 1. m == mat.length 
+/// 2. n == mat[i].length 
+/// 3. 1 <= m, n <= 10^5
+/// 4. 1 <= m * n <= 10^5
+/// 5. -10^5 <= mat[i][j] <= 10^5
+/// </summary>
+int LeetCodeGraph::maxIncreasingCells(vector<vector<int>>& mat)
+{
+    int m = mat.size();
+    int n = mat[0].size();
+    vector<vector<pair<int, int>>> rows(m, vector<pair<int, int>>(2, { INT_MAX, 0 }));
+    vector<vector<pair<int, int>>> cols(n, vector<pair<int, int>>(2, { INT_MAX, 0 }));
+    map<int, vector<pair<int, int>>> mat_group;
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            mat_group[mat[i][j]].push_back(make_pair(i, j));
+        }
+    }
+    int result = 0;
+    for (auto itr : mat_group)
+    {
+        int v = itr.first;
+        for (size_t i = 0; i < itr.second.size(); i++)
+        {
+            int length = 1;
+            int r = itr.second[i].first;
+            int c = itr.second[i].second;
+            if (rows[r][0].first < v)
+            {
+                rows[r][1] = rows[r][0];
+            }
+            length = max(length, rows[r][1].second + 1);
+            if (cols[c][0].first < v)
+            {
+                cols[c][1] = cols[c][0];
+            }
+            length = max(length, cols[c][1].second + 1);
+            rows[r][0].first = v;
+            rows[r][0].second = max(rows[r][0].second, length);
+            cols[c][0].first = v;
+            cols[c][0].second = max(cols[c][0].second, length);
+            result = max(result, length);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2709. Greatest Common Divisor Traversal
+/// 
+/// Hard
+///
+/// You are given a 0-indexed integer array nums, and you are allowed to 
+/// traverse between its indices. You can traverse between index i and 
+/// index j, i != j, if and only if gcd(nums[i], nums[j]) > 1, where 
+/// gcd is the greatest common divisor.
+///
+/// Your task is to determine if for every pair of indices i and j in 
+/// nums, where i < j, there exists a sequence of traversals that can 
+/// take us from i to j.
+///
+/// Return true if it is possible to traverse between all such pairs 
+/// of indices, or false otherwise.
+///
+/// Example 1:
+/// Input: nums = [2,3,6]
+/// Output: true
+/// Explanation: In this example, there are 3 possible pairs of 
+/// indices: (0, 1), (0, 2), and (1, 2).
+/// To go from index 0 to index 1, we can use the sequence of 
+/// traversals 0 -> 2 -> 1, where we move from index 0 to index 2 
+/// because gcd(nums[0], nums[2]) = gcd(2, 6) = 2 > 1, and then move 
+/// from index 2 to index 1 because gcd(nums[2], 
+/// nums[1]) = gcd(6, 3) = 3 > 1.
+/// To go from index 0 to index 2, we can just go directly because 
+/// gcd(nums[0], nums[2]) = gcd(2, 6) = 2 > 1. Likewise, to go from 
+/// index 1 to index 2, we can just go directly because gcd(nums[1], 
+/// nums[2]) = gcd(3, 6) = 3 > 1.
+///
+/// Example 2:
+/// Input: nums = [3,9,5]
+/// Output: false
+/// Explanation: No sequence of traversals can take us from index 0 
+/// to index 2 in this example. So, we return false.
+///
+/// Example 3:
+/// Input: nums = [4,3,12,8]
+/// Output: true
+/// Explanation: There are 6 possible pairs of indices to traverse 
+/// between: (0, 1), (0, 2), (0, 3), (1, 2), (1, 3), and (2, 3). A 
+/// valid sequence of traversals exists for each pair, so we return true.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+bool LeetCodeGraph::canTraverseAllPairs(vector<int>& nums)
+{
+    vector<int> primes;
+    for (int i = 2; i < sqrt(1e5) + 1; i++)
+    {
+        bool is_prime = true;
+        for (size_t j = 0; j < primes.size(); j++)
+        {
+            if (i % primes[j] == 0)
+            {
+                is_prime = false;
+                break;
+            }
+        }
+        if (is_prime) primes.push_back(i);
+    }
+    unordered_map<int, int> prime_map;
+    vector<int> parent(nums.size());
+    unordered_map<int, int> visited;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        parent[i] = i;
+        int n = nums[i];
+        if (visited.count(n) > 0)
+        {
+            parent[i] = visited[n];
+            continue;
+        }
+        for (size_t j = 0; j < primes.size() && n > 1; j++)
+        {
+            int d = primes[j];
+            if (d * d > n) d = n;
+            if (n % d == 0)
+            {
+                while (n % d == 0) n /= d;
+                if (prime_map.count(d) > 0)
+                {
+                    int p = prime_map[d];
+                    while (parent[p] != parent[parent[p]])
+                    {
+                        parent[p] = parent[parent[p]];
+                    }
+                    parent[parent[p]] = parent[i];
+                    prime_map[d] = i;
+                }
+                else
+                {
+                    prime_map[d] = i;
+                }
+            }
+        }
+        if (nums[i] > 1) visited[nums[i]] = parent[i];
+    }
+    unordered_set<int> result;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        while (parent[i] != parent[parent[i]])
+        {
+            parent[i] = parent[parent[i]];
+        }
+        result.insert(parent[i]);
+    }
+    return result.size() == 1;
+}
+
+/// <summary>
+/// Leet Code 2714. Find Shortest Path with K Hops
+/// 
+/// Hard
+///
+/// You are given a positive integer n which is the number of nodes of 
+/// a 0-indexed undirected weighted connected graph and a 0-indexed 2D 
+/// array edges where edges[i] = [ui, vi, wi] indicates that there is 
+/// an edge between nodes ui and vi with weight wi.
+///
+/// You are also given two nodes s and d, and a positive integer k, 
+/// your task is to find the shortest path from s to d, but you can hop 
+/// over at most k edges. In other words, make the weight of at most k 
+/// edges 0 and then find the shortest path from s to d.
+///
+/// Return the length of the shortest path from s to d with the given 
+/// condition.
+///
+/// Example 1:
+/// Input: n = 4, edges = [[0,1,4],[0,2,2],[2,3,6]], s = 1, d = 3, k = 2
+/// Output: 2
+/// Explanation: In this example there is only one path from node 1 (the 
+/// green node) to node 3 (the red node), which is (1->0->2->3) and the 
+/// length of it is 4 + 2 + 6 = 12. Now we can make weight of two edges 0, 
+/// we make weight of the blue edges 0, then we have 0 + 2 + 0 = 2. It 
+/// can be shown that 2 is the minimum length of a path we can achieve 
+/// with the given condition.
+///
+/// Example 2:
+/// Input: n = 7, edges = [[3,1,9],[3,2,4],[4,0,9],[0,5,6],[3,6,2],
+/// [6,0,4],[1,2,4]], s = 4, d = 1, k = 2
+/// Output: 6
+/// Explanation: In this example there are 2 paths from node 4 (the 
+/// green node) to node 1 (the red node), which are (4->0->6->3->2->1) 
+/// and (4->0->6->3->1). The first one has the 
+/// length 9 + 4 + 2 + 4 + 4 = 23, and the second one has the 
+/// length 9 + 4 + 2 + 9 = 24. Now if we make weight of the blue edges 0, 
+/// we get the shortest path with the length 0 + 4 + 2 + 0 = 6. It can 
+/// be shown that 6 is the minimum length of a path we can achieve with 
+/// the given condition.
+/// 
+/// Example 3:
+/// Input: n = 5, edges = [[0,4,2],[0,1,3],[0,2,1],[2,1,4],[1,3,4],
+/// [3,4,7]], s = 2, d = 3, k = 1
+/// Output: 3
+/// Explanation: In this example there are 4 paths from node 2 
+/// (the green node) to node 3 (the red node), which are (2->1->3), 
+/// (2->0->1->3), (2->1->0->4->3) and (2->0->4->3). The first two 
+/// have the length 4 + 4 = 1 + 3 + 4 = 8, the third one has the 
+/// length 4 + 3 + 2 + 7 = 16 and the last one has the 
+/// length 1 + 2 + 7 = 10. Now if we make weight of the blue edge 0, 
+/// we get the shortest path with the length 1 + 2 + 0 = 3. It can be 
+/// shown that 3 is the minimum length of a path we can achieve with 
+/// the given condition.
+///
+/// Constraints:
+/// 1. 2 <= n <= 500
+/// 2. n - 1 <= edges.length <= min(10^4, n * (n - 1) / 2)
+/// 3. edges[i].length = 3
+/// 4. 0 <= edges[i][0], edges[i][1] <= n - 1
+/// 5. 1 <= edges[i][2] <= 10^6
+/// 6. 0 <= s, d, k <= n - 1
+/// 7. s != d
+/// 8. The input is generated such that the graph is connected and has 
+///    no repeated edges or self-loops
+/// </summary>
+int LeetCodeGraph::shortestPathWithHops(int n, vector<vector<int>>& edges, int s, int d, int k)
+{
+    vector <vector<pair<int, int>>> neighbors(n);
+    int result = INT_MAX;
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back({ edges[i][1], edges[i][2] });
+        neighbors[edges[i][1]].push_back({ edges[i][0], edges[i][2] });
+    }
+    priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
+    vector<vector<int>> distance(n, vector<int>(k + 1, INT_MAX));
+    pq.push({0, s, 0});
+    while (!pq.empty())
+    {
+        vector<int> top = pq.top();
+        pq.pop();
+        if (top[1] == d)
+        {
+            result = top[0];
+            break;
+        }
+        if (top[0] > distance[top[1]][top[2]]) continue;
+        for (size_t i = 0; i < neighbors[top[1]].size(); i++)
+        {
+            int next = neighbors[top[1]][i].first;
+            int dist = top[0] + neighbors[top[1]][i].second;
+            if (dist < distance[next][top[2]])
+            {
+                distance[next][top[2]] = dist;
+                pq.push({ dist, next, top[2]});
+            }
+            dist = top[0];
+            if (top[2] < k && dist < distance[next][top[2] + 1])
+            {
+                distance[next][top[2] + 1] = dist;
+                pq.push({ dist, next, top[2] + 1 });
+            }
+        }
+    }
+    return result;
+}
 #pragma endregion

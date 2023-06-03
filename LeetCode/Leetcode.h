@@ -1231,10 +1231,11 @@ public:
     {
         ListNode* current = data;
         std::string message;
-        while (data != nullptr)
+        while (current != nullptr)
         {
-            message.append(to_string(data->val) + " ");
-            data = data->next;
+            message.append(to_string(current->val) + " ");
+            current = current->next;
+            if (current == data) break;
         }
         WriteMessage(message.c_str());
     }

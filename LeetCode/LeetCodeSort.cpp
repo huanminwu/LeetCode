@@ -10233,17 +10233,17 @@ vector<int> LeetCodeSort::getSubarrayBeauty(vector<int>& nums, int k, int x)
                 heap1.erase(*heap1.rbegin());
             }
         }
-        if (i >= k)
+        if ((int)i >= k)
         {
             heap1.erase(make_pair(nums[i - k], i - k));
             heap2.erase(make_pair(nums[i - k], i - k));
-            if (heap1.size() < x && !heap2.empty())
+            if ((int)heap1.size() < x && !heap2.empty())
             {
                 heap1.insert(*heap2.begin());
                 heap2.erase(*heap2.begin());
             }
         }
-        if (i >= k - 1)
+        if ((int)i >= k - 1)
         {
             if (heap1.size() == x)
             {
@@ -10254,6 +10254,130 @@ vector<int> LeetCodeSort::getSubarrayBeauty(vector<int>& nums, int k, int x)
                 result.push_back(0);
             }
         }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2659. Make Array Empty
+/// 
+/// Hard
+///	
+/// You are given an integer array nums containing distinct numbers, and 
+/// you can perform the following operations until the array is empty:
+///
+/// If the first element has the smallest value, remove it
+/// Otherwise, put the first element at the end of the array.
+/// Return an integer denoting the number of operations it takes to make 
+/// nums empty.
+///
+/// Example 1:
+///
+/// Input: nums = [3,4,-1]
+/// Output: 5
+/// Operation Array
+/// 1 [4, -1, 3]
+/// 2 [-1, 3, 4]
+/// 3 [3, 4]
+/// 4 [4]
+/// 5 []
+///
+/// Example 2:
+/// Input: nums = [1,2,4,3]
+/// Output: 5
+/// Operation Array
+/// 1 [2, 4, 3]
+/// 2 [4, 3]
+/// 3 [3, 4]
+/// 4 [4]
+/// 5 []
+///
+/// Example 3:
+/// Input: nums = [1,2,3]
+/// Output: 3
+/// Operation Array
+/// 1 [2, 3]
+/// 2 [3]
+/// 3 []
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. -10^9 <= nums[i] <= 10^9
+/// 3. All values in nums are distinct.
+/// </summary>
+long long LeetCodeSort::countOperationsToEmptyArray(vector<int>& nums)
+{
+    long long result = 0;
+    int n = nums.size();
+    vector<pair<int, int>> arr(n);
+    for (int i = 0; i < n; i++)
+    {
+        arr[i] = make_pair(nums[i], i);
+    }
+    sort(arr.begin(), arr.end());
+    for (int i = 1; i < n; i++)
+    {
+        if (arr[i].second < arr[i - 1].second)
+        {
+            result += (long long)n - (long long)i;
+        }
+    }
+    result += (long long)n;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2679. Sum in a Matrix
+/// 
+/// Medium
+///	
+/// You are given a 0-indexed 2D integer array nums. Initially, your score 
+/// is 0. Perform the following operations until the matrix becomes empty:
+///
+/// From each row in the matrix, select the largest number and remove it. 
+/// In the case of a tie, it does not matter which number is chosen.
+/// Identify the highest number amongst all those removed in step 1. Add 
+/// that number to your score.
+/// Return the final score.
+/// 
+/// Example 1:
+/// Input: nums = [[7,2,1],[6,4,2],[6,5,3],[3,2,1]]
+/// Output: 15
+/// Explanation: In the first operation, we remove 7, 6, 6, and 3. We 
+/// then add 7 to our score. Next, we remove 2, 4, 5, and 2. We add 5 to 
+/// our score. Lastly, we remove 1, 2, 3, and 1. We add 3 to our score. 
+/// Thus, our final score is 7 + 5 + 3 = 15.
+///
+/// Example 2:
+/// Input: nums = [[1]]
+/// Output: 1
+/// Explanation: We remove 1 and add it to the answer. We return 1.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 300
+/// 2. 1 <= nums[i].length <= 500
+/// 3. 0 <= nums[i][j] <= 10^3
+/// </summary>
+int LeetCodeSort::matrixSum(vector<vector<int>>& nums)
+{
+    int result = 0;
+    vector<priority_queue<int>> row(nums.size());
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (size_t j = 0; j < nums[i].size(); j++)
+        {
+            row[i].push(nums[i][j]);
+        }
+    }
+    for (size_t i = 0; i < nums[0].size(); i++)
+    {
+        int max_val = INT_MIN;;
+        for (size_t j = 0; j < nums.size(); j++)
+        {
+            max_val = max(max_val, row[j].top());
+            row[j].pop();
+        }
+        result += max_val;
     }
     return result;
 }

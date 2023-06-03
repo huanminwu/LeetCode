@@ -5993,8 +5993,100 @@ void TestLeetCode2645(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2663(void)
+{
+    Logger::WriteMessage("Test Leet Code 2663");
+    LeetCodeString leetCode;
+    string s = "abcz";
+    int k = 26;
+    string result = leetCode.smallestBeautifulString(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+
+    s = "dc";
+    k = 4;
+    result = leetCode.smallestBeautifulString(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+
+    s = "cegaf";
+    k = 7;
+    result = leetCode.smallestBeautifulString(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode2678(void)
+{
+    Logger::WriteMessage("Test Leet Code 2678");
+    LeetCodeString leetCode;
+    vector<string> details = 
+    { 
+        "7868190130M7522", "5303914400F9211", "9273338290F4010" 
+    };
+    int result = leetCode.countSeniors(details);
+    Logger::WriteMessage(details);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    details =
+    {
+        "1313579440F2036","2921522980M5644"
+    };
+    result = leetCode.countSeniors(details);
+    Logger::WriteMessage(details);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2696(void)
+{
+    Logger::WriteMessage("Test Leet Code 2696");
+    LeetCodeString leetCode;
+    string s = "ABFCACDB";
+    int result = leetCode.minLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "ACBBD";
+    result = leetCode.minLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2697(void)
+{
+    Logger::WriteMessage("Test Leet Code 2697");
+    LeetCodeString leetCode;
+    string  s = "egcfe";
+    string result = leetCode.makeSmallestPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "abcd";
+    result = leetCode.makeSmallestPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "seven";
+    result = leetCode.makeSmallestPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
+void TestLeetCode2710(void)
+{
+    Logger::WriteMessage("Test Leet Code 2710");
+    LeetCodeString leetCode;
+    string  num = "51230100";
+    string result = leetCode.removeTrailingZeros(num);
+    Logger::WriteMessage("num = " + num + "; result = " + result);
+
+    num = "123";
+    result = leetCode.removeTrailingZeros(num);
+    Logger::WriteMessage("num = " + num + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2710();
+    TestLeetCode2697();
+    TestLeetCode2696();
+    TestLeetCode2678();
+    TestLeetCode2663();
     TestLeetCode2645();
     TestLeetCode2606();
     TestLeetCode2586();

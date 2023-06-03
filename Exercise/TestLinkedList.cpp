@@ -1070,8 +1070,64 @@ void TestLeetCode2487(void)
     leetCode.freeListNodes(result);
 }
 
+void TestLeetCode2674(void)
+{
+    Logger::WriteMessage("Test Leet Code 2674");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 1,5 };
+    ListNode * head = nullptr;
+    ListNode* prev = nullptr;
+    for (size_t i = 0; i < data_list.size(); i++)
+    {
+        ListNode* ptr = new ListNode(data_list[i]);
+        if (i == 0)
+        {
+            head = ptr;
+        }
+        else
+        {
+            prev->next = ptr;
+        }
+        prev = ptr;
+        if (i == data_list.size() - 1)
+        {
+            ptr->next = head;
+        }
+    }
+    vector<ListNode*> result = leetCode.splitCircularLinkedList(head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result[0]);
+    Logger::WriteMessage(result[1]);
+
+    data_list = { 2,6,1,5 };
+    head = nullptr;
+    prev = nullptr;
+    for (size_t i = 0; i < data_list.size(); i++)
+    {
+        ListNode* ptr = new ListNode(data_list[i]);
+        if (i == 0)
+        {
+            head = ptr;
+        }
+        else
+        {
+            prev->next = ptr;
+        }
+        prev = ptr;
+        if (i == data_list.size() - 1)
+        {
+            ptr->next = head;
+        }
+    }
+    result = leetCode.splitCircularLinkedList(head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result[0]);
+    Logger::WriteMessage(result[1]);
+}
+
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode2674();
     TestLeetCode2487();
     TestLeetCode2181();
     TestLeetCode2130();

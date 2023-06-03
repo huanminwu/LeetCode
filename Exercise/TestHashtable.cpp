@@ -1584,8 +1584,44 @@ void TestLeetCode2456(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2657(void)
+{
+    Logger::WriteMessage("Test Leet Code 2657");
+    LeetCodeHashtable leetCode;
+    vector<int> A = { 1, 3, 2, 4 };
+    vector<int> B = { 3, 1, 2, 4 };
+    vector<int> result = leetCode.findThePrefixCommonArray(A, B);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(B);
+    Logger::WriteMessage(result);
+
+    A = { 2,3,1 };
+    B = { 3,1,2 };
+    result = leetCode.findThePrefixCommonArray(A, B);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(B);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2670(void)
+{
+    Logger::WriteMessage("Test Leet Code 2670");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5 };
+    vector<int> result = leetCode.distinctDifferenceArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 3,2,3,4,2 };
+    result = leetCode.distinctDifferenceArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode2670();
+    TestLeetCode2657();
     TestLeetCode217();
     TestLeetCode2456();
     TestLeetCode2442();

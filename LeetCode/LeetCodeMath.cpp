@@ -624,7 +624,9 @@ int LeetCodeMath::divide(int dividend, int divisor)
     {
         return INT_MAX;
     }
-    int sign = ((dividend < 0) ^ (divisor < 0)) ? -1 : 1;
+    bool dividend_less_zero = dividend < 0;
+    bool divisor_less_zero = divisor < 0;
+    int sign = (dividend_less_zero ^ divisor_less_zero) ? -1 : 1;
     long long long_dividend = abs((long long)dividend);
     long long long_divisor = abs((long long)divisor);
     long long sum = 0;
@@ -18251,4 +18253,328 @@ int LeetCodeMath::minOperationsII(vector<int>& nums)
     }
     if (min_length == INT_MAX) return -1;
     else return nums.size() - 1 + min_length;
+}
+
+/// <summary>
+/// Leet Code 2656. Maximum Sum With Exactly K Elements
+/// 
+/// Easy
+///	
+/// You are given a 0-indexed integer array nums and an integer k. Your 
+/// task is to perform the following operation exactly k times in order 
+/// to maximize your score:
+///
+/// Select an element m from nums.
+/// Remove the selected element m from the array.
+/// Add a new element with a value of m + 1 to the array.
+/// Increase your score by m.
+/// Return the maximum score you can achieve after performing the 
+/// operation exactly k times.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,4,5], k = 3
+/// Output: 18
+/// Explanation: We need to choose exactly 3 elements from nums to 
+/// maximize the sum.
+/// For the first iteration, we choose 5. Then sum is 5 and 
+/// nums = [1,2,3,4,6]
+/// For the second iteration, we choose 6. Then sum is 5 + 6 and 
+/// nums = [1,2,3,4,7]
+/// For the third iteration, we choose 7. Then sum is 5 + 6 + 7 = 18 
+/// and nums = [1,2,3,4,8]
+/// So, we will return 18.
+/// It can be proven, that 18 is the maximum answer that we can achieve.
+///
+/// Example 2:
+/// Input: nums = [5,5,5], k = 2
+/// Output: 11
+/// Explanation: We need to choose exactly 2 elements from nums to 
+/// maximize the sum.
+/// For the first iteration, we choose 5. Then sum is 5 and nums = [5,5,6]
+/// For the second iteration, we choose 6. Then sum is 5 + 6 = 11 and 
+/// nums = [5,5,7]
+/// So, we will return 11.
+/// It can be proven, that 11 is the maximum answer that we can achieve.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 100
+/// 3. 1 <= k <= 100
+/// </summary>
+int LeetCodeMath::maximizeSum(vector<int>& nums, int k)
+{
+    int max_val = *max_element(nums.begin(), nums.end());
+    int result = (max_val + max_val + k - 1) * k / 2;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2682. Find the Losers of the Circular Game
+/// 
+/// Easy
+///	
+/// There are n friends that are playing a game. The friends are sitting 
+/// in a circle and are numbered from 1 to n in clockwise order. More 
+/// formally, moving clockwise from the ith friend brings you to the 
+/// (i+1)th friend for 1 <= i < n, and moving clockwise from the nth 
+/// friend brings you to the 1st friend.
+///
+/// The rules of the game are as follows:
+///
+/// 1st friend receives the ball.
+/// After that, 1st friend passes it to the friend who is k steps away 
+/// from them in the clockwise direction.
+/// After that, the friend who receives the ball should pass it to the 
+/// friend who is 2 * k steps away from them in the clockwise direction.
+/// After that, the friend who receives the ball should pass it to the 
+/// friend who is 3 * k steps away from them in the clockwise direction, 
+/// and so on and so forth.
+/// In other words, on the ith turn, the friend holding the ball should 
+/// pass it to the friend who is i * k steps away from them in the 
+/// clockwise direction.
+///
+/// The game is finished when some friend receives the ball for the 
+/// second time.
+///
+/// The losers of the game are friends who did not receive the ball in 
+/// the entire game.
+///
+/// Given the number of friends, n, and an integer k, return the array 
+/// answer, which contains the losers of the game in the ascending order.
+///
+/// 
+/// Example 1:
+/// Input: n = 5, k = 2
+/// Output: [4,5]
+/// Explanation: The game goes as follows:
+/// 1) Start at 1st friend and pass the ball to the friend who is 2 steps 
+///    away from them - 3rd friend.
+/// 2) 3rd friend passes the ball to the friend who is 4 steps away from 
+///    them - 2nd friend.
+/// 3) 2nd friend passes the ball to the friend who is 6 steps away from 
+///    them  - 3rd friend.
+/// 4) The game ends as 3rd friend receives the ball for the second time.
+///
+/// Example 2:
+/// Input: n = 4, k = 4
+/// Output: [2,3,4]
+/// Explanation: The game goes as follows:
+/// 1) Start at the 1st friend and pass the ball to the friend who is 4 
+///    steps away from them - 1st friend.
+/// 2) The game ends as 1st friend receives the ball for the second time.
+/// 
+/// Constraints:
+/// 1. 1 <= k <= n <= 50
+/// </summary>
+vector<int> LeetCodeMath::circularGameLosers(int n, int k)
+{
+    vector<int> result;
+    vector<int> arr(n);
+    int index = 0; 
+    int count = 1;
+    while (arr[index] == 0)
+    {
+        arr[index] = 1;
+        index = (index + k * count) % n;
+        count++;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] == 0) result.push_back(i + 1);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2698. Find the Punishment Number of an Integer
+/// </summary>
+bool LeetCodeMath::punishmentNumber(string str, int sum, int pos, int target)
+{
+    for (size_t i = pos; i < str.size(); i++)
+    {
+        string sub_str = str.substr(pos, i - pos + 1);
+        int num = atoi(sub_str.c_str());
+        sum += num;
+        if (sum > target) return false;
+        if (punishmentNumber(str, sum, i + 1, target)) return true;
+        sum -= num;
+    }
+    if (sum == target) return true;
+    else return false;
+}
+
+
+/// <summary>
+/// Leet Code 2698. Find the Punishment Number of an Integer
+/// 
+/// Medium
+///	
+/// Given a positive integer n, return the punishment number of n.
+///
+/// The punishment number of n is defined as the sum of the squares of all 
+/// integers i such that:
+///
+/// 1 <= i <= n
+/// The decimal representation of i * i can be partitioned into contiguous 
+/// substrings such that the sum of the integer values of these substrings 
+/// equals i.
+/// 
+/// Example 1:
+/// Input: n = 10
+/// Output: 182
+/// Explanation: There are exactly 3 integers i that satisfy the 
+/// conditions in the statement:
+/// - 1 since 1 * 1 = 1
+/// - 9 since 9 * 9 = 81 and 81 can be partitioned into 8 + 1.
+/// - 10 since 10 * 10 = 100 and 100 can be partitioned into 10 + 0.
+/// Hence, the punishment number of 10 is 1 + 81 + 100 = 182
+///
+/// Example 2:
+/// Input: n = 37
+/// Output: 1478
+/// Explanation: There are exactly 4 integers i that satisfy the 
+/// conditions in the statement:
+/// - 1 since 1 * 1 = 1. 
+/// - 9 since 9 * 9 = 81 and 81 can be partitioned into 8 + 1. 
+/// - 10 since 10 * 10 = 100 and 100 can be partitioned into 10 + 0. 
+/// - 36 since 36 * 36 = 1296 and 1296 can be partitioned into 1 + 29 + 6.
+/// Hence, the punishment number of 37 is 1 + 81 + 100 + 1296 = 1478
+///
+/// Constraints:
+/// 1. 1 <= n <= 1000
+/// </summary>
+int LeetCodeMath::punishmentNumber(int n)
+{
+    int result = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        int s = i * i;
+        string str = to_string(s);
+        int sum = 0;
+   
+        if (punishmentNumber(str, sum, 0, (int)i))
+        {
+            result += s;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2706. Buy Two Chocolates
+/// 
+/// Easy
+///	
+/// You are given an integer array prices representing the prices of 
+/// various chocolates in a store. You are also given a single integer 
+/// money, which represents your initial amount of money.
+///
+/// You must buy exactly two chocolates in such a way that you still 
+/// have some non-negative leftover money. You would like to minimize 
+/// the sum of the prices of the two chocolates you buy.
+///
+/// Return the amount of money you will have leftover after buying 
+/// the two chocolates. If there is no way for you to buy two 
+/// chocolates without ending up in debt, return money. Note that the 
+/// leftover must be non-negative.
+///
+/// Example 1:
+/// Input: prices = [1,2,2], money = 3
+/// Output: 0
+/// Explanation: Purchase the chocolates priced at 1 and 2 units 
+/// respectively. You will have 3 - 3 = 0 units of money afterwards. 
+/// Thus, we return 0.
+///
+/// Example 2:
+/// Input: prices = [3,2,3], money = 3
+/// Output: 3
+/// Explanation: You cannot buy 2 chocolates without going in debt, so 
+/// we return 3.
+///
+/// Constraints:
+/// 1. 2 <= prices.length <= 50
+/// 2. 1 <= prices[i] <= 100
+/// 3. 1 <= money <= 100
+/// </summary>
+int LeetCodeMath::buyChoco(vector<int>& prices, int money)
+{
+    int result = -1;
+    for (size_t i = 0; i < prices.size(); i++)
+    {
+        for (size_t j = i + 1; j < prices.size(); j++)
+        {
+            if (prices[i] + prices[j] <= money)
+            {
+                result = max(result, money - (prices[i] + prices[j]));
+            }
+        }
+    }
+    if (result == -1) result = money;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2708. Maximum Strength of a Group
+///
+/// Medium
+///
+/// You are given a 0-indexed integer array nums representing the score of 
+/// students in an exam. The teacher would like to form one non-empty 
+/// group of students with maximal strength, where the strength of a group 
+/// of students of indices i0, i1, i2, ... , ik is defined as 
+/// nums[i0] * nums[i1] * nums[i2] * ... * nums[ik?].
+///
+/// Return the maximum strength of a group the teacher can create.
+/// 
+/// Example 1:
+/// Input: nums = [3,-1,-5,2,5,-9]
+/// Output: 1350
+/// Explanation: One way to form a group of maximal strength is to group 
+/// the students at indices [0,2,3,4,5]. Their strength 
+/// is 3 * (-5) * 2 * 5 * (-9) = 1350, which we can show is optimal.
+///
+/// Example 2:
+/// Input: nums = [-4,-5,-4]
+/// Output: 20
+/// Explanation: Group the students at indices [0, 1] . Then, we’ll have 
+/// a resulting strength of 20. We cannot achieve greater strength.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 13
+/// 2. -9 <= nums[i] <= 9
+/// </summary>
+long long LeetCodeMath::maxStrength(vector<int>& nums)
+{
+    if (nums.size() == 1) return nums[0];
+    set<pair<int, int>> pos, neg, zero;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] > 0)
+        {
+            pos.insert(make_pair(nums[i], i));
+        }
+        else if (nums[i] == 0)
+        {
+            zero.insert(make_pair(nums[i], i));
+        }
+        else
+        {
+            neg.insert(make_pair(nums[i], i));
+        }
+    }
+    long long result = 1;
+    if (zero.size() > 0 && pos.empty() && neg.size() <= 1) return 0;
+    while (!pos.empty())
+    {
+        result = result * pos.begin()->first;
+        pos.erase(pos.begin());
+    }
+    while (neg.size() > 1)
+    {
+        result = result * neg.begin()->first;
+        neg.erase(neg.begin());
+        result = result * neg.begin()->first;
+        neg.erase(neg.begin());
+    }
+    return result;
 }

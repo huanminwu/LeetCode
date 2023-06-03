@@ -1194,8 +1194,28 @@ void TestLeetCode2616(void)
     Logger::WriteMessage("p = " + to_string(p) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2702(void)
+{
+    Logger::WriteMessage("Test Leet Code 2702");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 3,4,1,7,6 };
+    int x = 4, y = 2;
+    int result = leetCode.minOperations(nums, x, y);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,1 };
+    x = 2, y = 1;
+    result = leetCode.minOperations(nums, x, y);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode2702();
     TestLeetCode2616();
     TestLeetCode2604();
     TestLeetCode2563();

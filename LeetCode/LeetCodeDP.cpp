@@ -15739,5 +15739,159 @@ long long LeetCodeDP::countTheNumOfKFreeSubsets(vector<int>& nums, int k)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2707. Extra Characters in a String
+/// 
+/// Medium
+///
+/// You are given a 0-indexed string s and a dictionary of words 
+/// dictionary. You have to break s into one or more non-overlapping 
+/// substrings such that each substring is present in dictionary. 
+/// There may be some extra characters in s which are not present 
+/// in any of the substrings.
+///
+/// Return the minimum number of extra characters left over if 
+/// you break up s optimally.
+///
+/// Example 1:
+/// Input: s = "leetscode", dictionary = ["leet","code","leetcode"]
+/// Output: 1
+/// Explanation: We can break s in two substrings: "leet" from index 0 
+/// to 3 and "code" from index 5 to 8. There is only 1 unused character 
+/// (at index 4), so we return 1.
+///
+/// Example 2:
+/// Input: s = "sayhelloworld", dictionary = ["hello","world"]
+/// Output: 3
+/// Explanation: We can break s in two substrings: "hello" from index 3 
+/// to 7 and "world" from index 8 to 12. The characters at indices 0, 1, 2 
+/// are not used in any substring and thus are considered as extra 
+/// characters. Hence, we return 3.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 50
+/// 2. 1 <= dictionary.length <= 50
+/// 3. 1 <= dictionary[i].length <= 50
+/// 4. dictionary[i] and s consists of only lowercase English letters
+/// 5. dictionary contains distinct words
+/// 6. You are given a 0-indexed integer array nums representing the score of 
+/// </summary>
+int LeetCodeDP::minExtraChar(string s, vector<string>& dictionary)
+{
+    unordered_set<string> dict;
+    int min_len = INT_MAX;
+    int max_len = 0;
+    for (string str : dictionary)
+    {
+        dict.insert(str);
+        min_len = min(min_len, (int)str.size());
+        max_len = max(max_len, (int)str.size());
+    }
+    int n = s.size();
+    vector<int>dp(n + 1, n);
+    for (int i = 0; i <= n; i++)
+    {
+        if (i == 0) dp[i] = 0;
+        else dp[i] = min(dp[i], dp[i - 1] + 1);
+        for (int j = min_len; j <= max_len && i + j <= n; j++)
+        {
+            if (dict.count(s.substr(i, j)))
+            {
+                dp[i + j] = min(dp[i + j], dp[i]);
+            }
+        }
+    }
+    return dp[n];
+}
+
+/// <summary>
+/// Leet Code 2712. Minimum Cost to Make All Characters Equal
+/// 
+/// Medium
+///
+/// You are given a 0-indexed binary string s of length n on which you can 
+/// apply two types of operations:
+///
+/// Choose an index i and invert all characters from index 0 to index i 
+/// (both inclusive), with a cost of i + 1
+/// Choose an index i and invert all characters from index i to index 
+/// n - 1 (both inclusive), with a cost of n - i
+/// Return the minimum cost to make all characters of the string equal.
+///
+/// Invert a character means if its value is '0' it becomes '1' and 
+/// vice-versa.
+///
+/// Example 1:
+/// Input: s = "0011"
+/// Output: 2
+/// Explanation: Apply the second operation with i = 2 to obtain 
+/// s = "0000" for a cost of 2. It can be shown that 2 is the 
+/// minimum cost to make all characters equal.
+/// Example 2:
+///
+/// Input: s = "010101"
+/// Output: 9
+/// Explanation: Apply the first operation with i = 2 to obtain 
+/// s = "101101" for a cost of 3.
+/// Apply the first operation with i = 1 to obtain s = "011101" 
+/// for a cost of 2. 
+/// Apply the first operation with i = 0 to obtain s = "111101" 
+/// for a cost of 1. 
+/// Apply the second operation with i = 4 to obtain s = "111110" 
+/// for a cost of 2.
+/// Apply the second operation with i = 5 to obtain s = "111111" 
+/// for a cost of 1. 
+/// The total cost to make all characters equal is 9. It can be 
+/// shown that 9 is the minimum cost to make all characters equal.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length == n <= 10^5
+/// 2. s[i] is either '0' or '1'
+/// </summary>
+long long LeetCodeDP::minimumCost(string s)
+{
+    int n = s.size();
+    vector<vector<long long>> left(n, vector<long long>(2));
+    vector<vector<long long>> right(n, vector<long long>(2));
+    for (int i = 0; i < n; i++)
+    {
+        int v = s[i] - '0';
+        if (i == 0)
+        {
+            left[i][v] = 0;
+            left[i][1 - v] = 1;
+        }
+        else
+        {
+            left[i][v] = min(left[i - 1][v], left[i - 1][1 - v] + i);
+            left[i][1 - v] = left[i - 1][v] + i + 1;
+        }
+    }
+    for (int i = n - 1; i >= 0; i--)
+    {
+        int v = s[i] - '0';
+        if (i == n-1)
+        {
+            right[i][v] = 0;
+            right[i][1 - v] = 1;
+        }
+        else
+        {
+            right[i][v] = min(right[i + 1][v], right[i + 1][1 - v] + n - 1 - i);
+            right[i][1 - v] = right[i + 1][v] + n - i;
+        }
+    }
+    long long result = LLONG_MAX;
+    for (int i = 0; i < n - 1; i++)
+    {
+        result = min(result, left[i][0] + right[i + 1][0]);
+        result = min(result, left[i][1] + right[i + 1][1]);
+    }
+    result = min(result, left[n - 1][0]);
+    result = min(result, left[n - 1][1]);
+    result = min(result, right[0][0]);
+    result = min(result, right[0][1]);
+    return result;
+}
 #pragma endregion
 
