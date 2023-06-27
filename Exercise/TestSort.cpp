@@ -3277,8 +3277,67 @@ void TestLeetCode2679(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2740(void)
+{
+    Logger::WriteMessage("Test Leet Code 2740");
+    LeetCodeSort leetCode;
+    vector<int> nums = {1,3,2,4};
+    int result = leetCode.findValueOfPartition(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 100,1,10 };
+    result = leetCode.findValueOfPartition(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2736(void)
+{
+    Logger::WriteMessage("Test Leet Code 2736");
+    LeetCodeSort leetCode;
+    vector<int> nums1 = { 4, 3, 1, 2 };
+    vector<int> nums2 = { 2, 4, 9, 5 }; 
+    vector<vector<int>> queries = { {4, 1},{1, 3},{2, 5} };
+    vector<int> result = leetCode.maximumSumQueries(nums1, nums2, queries);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums1 = { 3,2,5 };
+    nums2 = { 2,3,4 };
+    queries = { {4,4} ,{3,2},{1,1} };
+    result = leetCode.maximumSumQueries(nums1, nums2, queries);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums1 = { 2,1 };
+    nums2 = { 2,3 };
+    queries = { {3,3} };
+    result = leetCode.maximumSumQueries(nums1, nums2, queries);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums1 = { 13, 67, 90, 92, 47 };
+    nums2 = { 52,60,69,49,73 };
+    queries = { {32,70} };
+    result = leetCode.maximumSumQueries(nums1, nums2, queries);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2736();
+    TestLeetCode2740();
     TestLeetCode2679();
     TestLeetCode2659();
     TestLeetCode2653();

@@ -17891,4 +17891,99 @@ int LeetCodeGraph::shortestPathWithHops(int n, vector<vector<int>>& edges, int s
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 	2737. Find the Closest Marked Node
+/// 
+/// Medium
+///
+/// You are given a positive integer n which is the number of nodes of 
+/// a 0-indexed directed weighted graph and a 0-indexed 2D array edges 
+/// where edges[i] = [ui, vi, wi] indicates that there is an edge from 
+/// node ui to node vi with weight wi.
+///
+/// You are also given a node s and a node array marked; your task is 
+/// to find the minimum distance from s to any of the nodes in marked.
+///
+/// Return an integer denoting the minimum distance from s to any node 
+/// in marked or -1 if there are no paths from s to any of the marked 
+/// nodes.
+///
+/// Example 1:
+/// Input: n = 4, edges = [[0,1,1],[1,2,3],[2,3,2],[0,3,4]], s = 0, 
+/// marked = [2,3]
+/// Output: 4
+/// Explanation: There is one path from node 0 (the green node) to 
+/// node 2 (a red node), which is 0->1->2, and has a distance 
+/// of 1 + 3 = 4.
+/// There are two paths from node 0 to node 3 (a red node), which 
+/// are 0->1->2->3 and 0->3, the first one has a distance of 1 + 3 + 2 = 6 
+/// and the second one has a distance of 4.
+/// The minimum of them is 4.
+///
+/// Example 2:
+/// Input: n = 5, edges = [[0,1,2],[0,2,4],[1,3,1],[2,3,3],[3,4,2]], 
+/// s = 1, marked = [0,4]
+/// Output: 3
+/// Explanation: There are no paths from node 1 (the green node) to 
+/// node 0 (a red node).
+/// There is one path from node 1 to node 4 (a red node), which 
+/// is 1->3->4, and has a distance of 1 + 2 = 3.
+/// So the answer is 3.
+/// 
+/// Example 3:
+/// Input: n = 4, edges = [[0,1,1],[1,2,3],[2,3,2]], s = 3, marked = [0,1]
+/// Output: -1
+/// Explanation: There are no paths from node 3 (the green node) to any of 
+/// the marked nodes (the red nodes), so the answer is -1.
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 500
+/// 2. 1 <= edges.length <= 10^4
+/// 3. edges[i].length = 3
+/// 4. 0 <= edges[i][0], edges[i][1] <= n - 1
+/// 5. 1 <= edges[i][2] <= 10^6
+/// 6. 1 <= marked.length <= n - 1
+/// 7. 0 <= s, marked[i] <= n - 1
+/// 8. s != marked[i]
+/// 9. marked[i] != marked[j] for every i != j
+/// 10. The graph might have repeated edges.
+/// 11. The graph is generated such that it has no self-loops.
+/// </summary>
+int LeetCodeGraph::minimumDistance(int n, vector<vector<int>>& edges, int s, vector<int>& marked)
+{
+    vector <vector<pair<int, int>>> neighbors(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back({ edges[i][1], edges[i][2] });
+    }
+    unordered_set<int> destinations = { marked.begin(), marked.end() };
+
+    priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
+    vector<int> distance(n, INT_MAX);
+    pq.push({ 0, s });
+    int result = -1;
+    while (!pq.empty())
+    {
+        vector<int> top = pq.top();
+        pq.pop();
+        if (destinations.count(top[1]) > 0)
+        {
+            result = top[0];
+            break;
+        }
+        if (top[0] > distance[top[1]]) continue;
+        for (size_t i = 0; i < neighbors[top[1]].size(); i++)
+        {
+            int next = neighbors[top[1]][i].first;
+            int dist = top[0] + neighbors[top[1]][i].second;
+            if (dist < distance[next])
+            {
+                distance[next] = dist;
+                pq.push({ dist, next });
+            }
+        }
+    }
+    return result;
+};
 #pragma endregion

@@ -6356,6 +6356,110 @@ public:
     /// 3. 0 <= nums[i][j] <= 10^3
     /// </summary>
     int matrixSum(vector<vector<int>>& nums);
+
+    /// <summary>
+    /// Leet Code 2740. Find the Value of the Partition
+    /// 
+    /// Medium
+    ///
+    /// You are given a positive integer array nums.
+    /// Partition nums into two arrays, nums1 and nums2, such that:
+    /// Each element of the array nums belongs to either the array nums1 or 
+    /// the array nums2.
+    /// Both arrays are non-empty.
+    /// The value of the partition is minimized.
+    /// The value of the partition is |max(nums1) - min(nums2)|.
+    ///
+    /// Here, max(nums1) denotes the maximum element of the array nums1, and 
+    /// min(nums2) denotes the minimum element of the array nums2.
+    ///
+    /// Return the integer denoting the value of such partition.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,3,2,4]
+    /// Output: 1
+    /// Explanation: We can partition the array nums into nums1 = [1,2] and 
+    /// nums2 = [3,4].
+    /// - The maximum element of the array nums1 is equal to 2.
+    /// - The minimum element of the array nums2 is equal to 3.
+    /// The value of the partition is |2 - 3| = 1. 
+    /// It can be proven that 1 is the minimum value out of all partitions.
+    ///
+    /// Example 2:
+    /// Input: nums = [100,1,10]
+    /// Output: 9
+    /// Explanation: We can partition the array nums into nums1 = [10] and 
+    /// nums2 = [100,1].
+    /// - The maximum element of the array nums1 is equal to 10.
+    /// - The minimum element of the array nums2 is equal to 1.
+    /// The value of the partition is |10 - 1| = 9.
+    /// It can be proven that 9 is the minimum value out of all partitions.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    int findValueOfPartition(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2736. Maximum Sum Queries
+    /// 
+    /// Hard
+    ///
+    /// You are given two 0-indexed integer arrays nums1 and nums2, each of 
+    /// length n, and a 1-indexed 2D array queries where queries[i] = [xi, yi].
+    ///
+    /// For the ith query, find the maximum value of nums1[j] + nums2[j] among 
+    /// all indices j (0 <= j < n), where nums1[j] >= xi and nums2[j] >= yi, 
+    /// or -1 if there is no j satisfying the constraints.
+    ///
+    /// Return an array answer where answer[i] is the answer to the ith query.
+    /// 
+    /// Example 1:
+    /// Input: nums1 = [4,3,1,2], nums2 = [2,4,9,5], 
+    /// queries = [[4,1],[1,3],[2,5]]
+    /// Output: [6,10,7]
+    /// Explanation: 
+    /// For the 1st query xi = 4 and yi = 1, we can select index j = 0 since 
+    /// nums1[j] >= 4 and nums2[j] >= 1. The sum nums1[j] + nums2[j] is 6, 
+    /// and we can show that 6 is the maximum we can obtain.
+    ///
+    /// For the 2nd query xi = 1 and yi = 3, we can select index j = 2 since 
+    /// nums1[j] >= 1 and nums2[j] >= 3. The sum nums1[j] + nums2[j] is 10, 
+    /// and we can show that 10 is the maximum we can obtain. 
+    ///
+    /// For the 3rd query xi = 2 and yi = 5, we can select index j = 3 since 
+    /// nums1[j] >= 2 and nums2[j] >= 5. The sum nums1[j] + nums2[j] is 7, 
+    /// and we can show that 7 is the maximum we can obtain.
+    ///
+    /// Therefore, we return [6,10,7].
+    ///
+    /// Example 2:
+    /// Input: nums1 = [3,2,5], nums2 = [2,3,4], queries = [[4,4],[3,2],[1,1]]
+    /// Output: [9,9,9]
+    /// Explanation: For this example, we can use index j = 2 for all the 
+    /// queries since it satisfies the constraints for each query.
+    ///
+    /// Example 3:
+    /// Input: nums1 = [2,1], nums2 = [2,3], queries = [[3,3]]
+    /// Output: [-1]
+    /// Explanation: There is one query in this example with xi = 3 and yi = 3. 
+    /// For every index, j, either nums1[j] < xi or nums2[j] < yi. Hence, there 
+    /// is no solution. 
+    /// 
+    /// Constraints:
+    /// 1. nums1.length == nums2.length 
+    /// 2. n == nums1.length 
+    /// 3. 1 <= n <= 10^5
+    /// 4. 1 <= nums1[i], nums2[i] <= 10^9 
+    /// 5. 1 <= queries.length <= 10^5
+    /// 6. queries[i].length == 2
+    /// 7. xi == queries[i][1]
+    /// 8. yi == queries[i][2]
+    /// 9. 1 <= xi, yi <= 10^9
+    /// </summary>
+    vector<int> maximumSumQueries(vector<int>& nums1, vector<int>& nums2, 
+        vector<vector<int>>& queries);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

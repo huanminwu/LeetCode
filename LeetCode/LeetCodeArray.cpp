@@ -27153,5 +27153,458 @@ vector<vector<int>> LeetCodeArray::differenceOfDistinctValues(vector<vector<int>
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2717. Semi-Ordered Permutation
+/// 
+/// Easy
+///
+/// You are given a 0-indexed permutation of n integers nums.
+///
+/// A permutation is called semi-ordered if the first number 
+/// equals 1 and the last number equals n. You can perform the 
+/// below operation as many times as you want until you make 
+/// nums a semi-ordered permutation:
+///
+/// Pick two adjacent elements in nums, then swap them.
+/// Return the minimum number of operations to make nums a 
+/// semi-ordered permutation.
+///
+/// A permutation is a sequence of integers from 1 to n of 
+/// length n containing each number exactly once.  
+///
+/// Example 1:
+///
+/// Input: nums = [2,1,4,3]
+/// Output: 2
+/// Explanation: We can make the permutation semi-ordered using these 
+/// sequence of operations: 
+/// 1 - swap i = 0 and j = 1. The permutation becomes [1,2,4,3].
+/// 2 - swap i = 2 and j = 3. The permutation becomes [1,2,3,4].
+/// It can be proved that there is no sequence of less than two 
+/// operations that make nums a semi-ordered permutation. 
+///
+/// Example 2:
+/// Input: nums = [2,4,1,3]
+/// Output: 3
+/// Explanation: We can make the permutation semi-ordered using these 
+/// sequence of operations:
+/// 1 - swap i = 1 and j = 2. The permutation becomes [2,1,4,3].
+/// 2 - swap i = 0 and j = 1. The permutation becomes [1,2,4,3].
+/// 3 - swap i = 2 and j = 3. The permutation becomes [1,2,3,4].
+/// It can be proved that there is no sequence of less than three 
+/// operations that make nums a semi-ordered permutation.
+///
+/// Example 3:
+/// Input: nums = [1,3,4,2,5]
+/// Output: 0
+/// Explanation: The permutation is already a semi-ordered permutation.
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length == n <= 50
+/// 2. 1 <= nums[i] <= 50
+/// 3. nums is a permutation.
+/// </summary>
+int LeetCodeArray::semiOrderedPermutation(vector<int>& nums)
+{
+    int first = 0, last = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] == 1) first = i;
+        if (nums[i] == nums.size()) last = i;
+    }
+    int result = first + nums.size() - 1 - last;
+    if (last < first) result--;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2718. Sum of Matrix After Queries
+/// 
+/// Medium
+///
+/// You are given an integer n and a 0-indexed 2D array queries where 
+/// queries[i] = [typei, indexi, vali].
+///
+/// Initially, there is a 0-indexed n x n matrix filled with 0's. For 
+/// each query, you must apply one of the following changes:
+///
+/// if typei == 0, set the values in the row with indexi to vali, 
+/// overwriting any previous values.
+/// if typei == 1, set the values in the column with indexi to vali, 
+/// overwriting any previous values.
+/// Return the sum of integers in the matrix after all queries are applied.
+///
+/// Example 1:
+/// Input: n = 3, queries = [[0,0,1],[1,2,2],[0,2,3],[1,0,4]]
+/// Output: 23
+/// Explanation: The image above describes the matrix after each query. 
+/// The sum of the matrix after all queries are applied is 23. 
+///
+/// Example 2:
+/// Input: n = 3, queries = [[0,0,4],[0,1,2],[1,0,1],[0,2,3],[1,2,1]]
+/// Output: 17
+/// Explanation: The image above describes the matrix after each query. 
+/// The sum of the matrix after all queries are applied is 17.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 10^4
+/// 2. 1 <= queries.length <= 5 * 10^4
+/// 3. queries[i].length == 3
+/// 4. 0 <= typei <= 1
+/// 5. 0 <= indexi < n
+/// 6. 0 <= vali <= 10^5
+/// </summary>
+long long LeetCodeArray::matrixSumQueries(int n, vector<vector<int>>& queries)
+{
+    vector<vector<int>> visited(2, vector<int>(n));
+    vector<int>count(2);
+    long long result = 0;
+    for (int i = queries.size() - 1; i >= 0; i--)
+    {
+        int type = queries[i][0];
+        int index = queries[i][1];
+        int value = queries[i][2];
+        if (visited[type][index] == 1) continue;
+        visited[type][index] = 1;
+        result = result + (long long)(n - count[1 - type]) * (long long)value;
+        count[type]++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2733. Neither Minimum nor Maximum
+/// 
+/// Easy
+///
+/// Given an integer array nums containing distinct positive integers, 
+/// find and return any number from the array that is neither the 
+/// minimum nor the maximum value in the array, or -1 if there is no 
+/// such number.
+///
+/// Return the selected integer.
+/// 
+/// Example 1:
+/// Input: nums = [3,2,1,4]
+/// Output: 2
+/// Explanation: In this example, the minimum value is 1 and the maximum 
+/// value is 4. Therefore, either 2 or 3 can be valid answers.
+///
+/// Example 2:
+/// Input: nums = [1,2]
+/// Output: -1
+/// Explanation: Since there is no number in nums that is neither the 
+/// maximum nor the minimum, we cannot select a number that satisfies 
+/// the given condition. Therefore, there is no answer.
+///
+/// Example 3:
+/// Input: nums = [2,1,3]
+/// Output: 2
+/// Explanation: Since 2 is neither the maximum nor the minimum value in 
+/// nums, it is the only valid answer. 
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 100
+/// 3. All values in nums are distinct
+/// </summary>
+int LeetCodeArray::findNonMinOrMax(vector<int>& nums)
+{
+    int min_val = INT_MAX;
+    int max_val = INT_MIN;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        min_val = min(min_val, nums[i]);
+        max_val = max(max_val, nums[i]);
+    }
+    int result = -1;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] > min_val && nums[i] < max_val)
+        {
+            result = nums[i];
+            break;
+        }
+    }
+    return result;
+}
+/// <summary>
+/// Leet Code 2728. Count Houses in a Circular Street
+/// 
+/// Easy
+///
+/// You are given an object street of class Street that represents a 
+/// circular street and a positive integer k which represents a 
+/// maximum bound for the number of houses in that street (in other 
+/// words, the number of houses is less than or equal to k). Houses' 
+/// doors could be open or closed initially.
+///
+/// Initially, you are standing in front of a door to a house on this 
+/// street. Your task is to count the number of houses in the street.
+///
+/// The class Street contains the following functions which may help you:
+///
+/// void openDoor(): Open the door of the house you are in front of.
+/// void closeDoor(): Close the door of the house you are in front of.
+/// boolean isDoorOpen(): Returns true if the door of the current house 
+/// is open and false otherwise.
+/// void moveRight(): Move to the right house.
+/// void moveLeft(): Move to the left house.
+/// Return ans which represents the number of houses on this street.
+///  
+/// Example 1:
+/// Input: street = [0,0,0,0], k = 10
+/// Output: 4
+/// Explanation: There are 4 houses, and all their doors are closed. 
+/// The number of houses is less than k, which is 10.
+///
+/// Example 2:
+/// Input: street = [1,0,1,1,0], k = 5
+/// Output: 5
+/// Explanation: There are 5 houses, and the doors of the 1st, 3rd, 
+/// and 4th house (moving in the right direction) are open, and the 
+/// rest are closed.
+/// The number of houses is equal to k, which is 5.
+///
+/// Constraints:
+/// 1. n == number of houses
+/// 2. 1 <= n <= k <= 10^3
+/// </summary>
+int LeetCodeArray::houseCount(Street* street, int k)
+{
+    for (int i = 0; i < k; i++)
+    {
+        street->closeDoor();
+        street->moveRight();
+    }
+    int result = 0;
+    for (int i = 0; i < k; i++)
+    {
+        if (street->isDoorOpen()) return result;
+        result++;
+        street->openDoor();
+        street->moveRight();
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2731. Movement of Robots
+/// 
+/// Medium
+///
+/// Some robots are standing on an infinite number line with their initial 
+/// coordinates given by a 0-indexed integer array nums and will start 
+/// moving once given the command to move. The robots will move a unit 
+/// distance each second.
+///
+/// You are given a string s denoting the direction in which robots will 
+/// move on command. 'L' means the robot will move towards the left side 
+/// or negative side of the number line, whereas 'R' means the robot 
+/// will move towards the right side or positive side of the number line.
+///
+/// If two robots collide, they will start moving in opposite directions.
+///
+/// Return the sum of distances between all the pairs of robots d seconds 
+/// after the command. Since the sum can be very large, return it 
+/// modulo 10^9 + 7.
+///
+/// Note:
+/// For two robots at the index i and j, pair (i,j) and pair (j,i) are 
+/// considered the same pair.
+/// When robots collide, they instantly change their directions without 
+/// wasting any time.
+/// Collision happens when two robots share the same place in a moment.
+/// For example, if a robot is positioned in 0 going to the right and 
+/// another is positioned in 2 going to the left, the next second they'll 
+/// be both in 1 and they will change direction and the next second the 
+/// first one will be in 0, heading left, and another will be in 2, 
+/// heading right.
+/// For example, if a robot is positioned in 0 going to the right and 
+/// another is positioned in 1 going to the left, the next second the 
+/// first one will be in 0, heading left, and another will be in 1, 
+/// heading right.
+///
+/// Example 1:
+/// Input: nums = [-2,0,2], s = "RLL", d = 3
+/// Output: 8
+/// Explanation: 
+/// After 1 second, the positions are [-1,-1,1]. Now, the robot at 
+/// index 0 will move left, and the robot at index 1 will move right.
+/// After 2 seconds, the positions are [-2,0,0]. Now, the robot at index 1 
+/// will move left, and the robot at index 2 will move right.
+/// After 3 seconds, the positions are [-3,-1,1].
+/// The distance between the robot at index 0 and 1 is abs(-3 - (-1)) = 2.
+/// The distance between the robot at index 0 and 2 is abs(-3 - 1) = 4.
+/// The distance between the robot at index 1 and 2 is abs(-1 - 1) = 2.
+/// The sum of the pairs of all distances = 2 + 4 + 2 = 8.
+///
+/// Example 2:
+/// Input: nums = [1,0], s = "RL", d = 2
+/// Output: 5
+/// Explanation: 
+/// After 1 second, the positions are [2,-1].
+/// After 2 seconds, the positions are [3,-2].
+/// The distance between the two robots is abs(-2 - 3) = 5.
+///
+/// Constraints:
+/// 1. 2 <= nums.length <= 10^5
+/// 2. -2 * 10^9 <= nums[i] <= 2 * 10^9
+/// 3. 0 <= d <= 10^9
+/// 4. nums.length == s.length 
+/// 5. s consists of 'L' and 'R' only
+/// 6. nums[i] will be unique.
+/// </summary>
+int LeetCodeArray::sumDistance(vector<int>& nums, string s, int d)
+{
+    long long M = 1000000007;
+    long long result = 0;
+    vector<long long> pos;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        pos.push_back((long long)nums[i] + (long long)d * (s[i] == 'L' ? -1 : 1));
+    }
+    sort(pos.begin(), pos.end());
+    long long sum = 0;
+    for (size_t i = 1; i < pos.size(); i++)
+    {
+        sum += (pos[i] - pos[i - 1]) * (long long)i;
+        sum %= M;
+        result += sum;
+        result = result % M;
+    }
+    return (int)result;
+}
+
+/// <summary>
+/// Leet Code 	2735. Collecting Chocolates
+/// 
+/// Medium
+///
+/// You are given a 0-indexed integer array nums of size n representing 
+/// the cost of collecting different chocolates. The cost of collecting 
+/// the chocolate at the index i is nums[i]. Each chocolate is of a 
+/// different type, and initially, the chocolate at the index i is of 
+/// ith type.
+///
+/// In one operation, you can do the following with an incurred cost of x:
+/// 
+/// Simultaneously change the chocolate of ith type to ((i + 1) mod n)th 
+/// type for all chocolates.
+/// Return the minimum cost to collect chocolates of all types, given that 
+/// you can perform as many operations as you would like.
+///
+/// Example 1:
+/// Input: nums = [20,1,15], x = 5
+/// Output: 13
+/// Explanation: Initially, the chocolate types are [0,1,2]. We will buy 
+/// the 1st type of chocolate at a cost of 1.
+/// Now, we will perform the operation at a cost of 5, and the types of 
+/// chocolates will become [1,2,0]. We will buy the 2nd type of chocolate 
+/// at a cost of 1.
+/// Now, we will again perform the operation at a cost of 5, and the 
+/// chocolate types will become [2,0,1]. We will buy the 0th type of 
+/// chocolate at a cost of 1. 
+/// Thus, the total cost will become (1 + 5 + 1 + 5 + 1) = 13. We can 
+/// prove that this is optimal.
+///
+/// Example 2:
+/// Input: nums = [1,2,3], x = 4
+/// Output: 6
+/// Explanation: We will collect all three types of chocolates at their 
+/// own price without performing any operations. Therefore, the total 
+/// cost is 1 + 2 + 3 = 6.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= x <= 10^9
+/// </summary>
+long long LeetCodeArray::minCost(vector<int>& nums, int x)
+{
+    int n = nums.size();
+    vector<int> cost = nums;
+    long long sum = 0;
+    int count = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum += nums[i];
+    }
+    long long result = sum;
+    for (int i = 0; i < n; i++)
+    {
+        count++;
+        int val = cost[0];
+        for (int j = 0; j < n - 1; j++)
+        {
+            if (cost[j] > cost[j + 1])
+            {
+                sum -= cost[j] - cost[j + 1];
+                cost[j] = cost[j + 1];
+            }
+        }
+        if (cost[n - 1] > val)
+        {
+            sum -= cost[n-1] - val;
+            cost[n-1] = val;
+        }
+        result = min(result, sum + (long long)count * x);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2750. Ways to Split Array Into Good Subarrays
+/// 
+/// Medium
+///
+/// You are given a binary array nums.
+///
+/// A subarray of an array is good if it contains exactly one element 
+/// with the value 1.
+///
+/// Return an integer denoting the number of ways to split the array 
+/// nums into good subarrays. As the number may be too large, return 
+/// it modulo 10^9 + 7.
+///
+/// A subarray is a contiguous non-empty sequence of elements within 
+/// an array.
+/// 
+/// Example 1:
+/// Input: nums = [0,1,0,0,1]
+/// Output: 3
+/// Explanation: There are 3 ways to split nums into good subarrays:
+/// - [0,1] [0,0,1]
+/// - [0,1,0] [0,1]
+/// - [0,1,0,0] [1]
+///
+/// Example 2:
+/// Input: nums = [0,1,0]
+/// Output: 1
+/// Explanation: There is 1 way to split nums into good subarrays:
+/// - [0,1,0]
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 1
+/// </summary>
+int LeetCodeArray::numberOfGoodSubarraySplits(vector<int>& nums)
+{
+    long long M = 1000000007;
+    int prev = -1;
+    int n = nums.size();
+    long long result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (nums[i] == 1)
+        {
+            if (prev == -1) result = 1;
+            else result = result * (i - prev) % M;
+            prev = i;
+        }
+    }
+    return (int)result;
+}
 #pragma endregion
 

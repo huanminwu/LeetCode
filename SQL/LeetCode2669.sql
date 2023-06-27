@@ -1,64 +1,68 @@
 -----------------------------------------------------------------------
---- LeetCode 2504. Concatenate the Name and the Profession
+--- LeetCode 2669. Count Artist Occurrences On Spotify Ranking List
 --- 
 --- Easy
 ---
 --- SQL Schema
---- Table: Person
+--- Table: Spotify
 ---
+--- +-------------+---------+ 
+--- | Column Name | Type    | 
+--- +-------------+---------+ 
+--- | id          | int     | 
+--- | track_name  | varchar |
+--- | artist      | varchar |
 --- +-------------+---------+
---- | Column Name | Type    |
---- +-------------+---------+
---- | person_id   | int     |
---- | name        | varchar |
---- | profession  | ENUM    |
---- +-------------+---------+
---- person_id is the primary key for this table.
---- Each row in this table contains a person's ID, name, and profession.
---- The profession   column in an enum of the type ('Doctor', 'Singer', 
---- 'Actor', 'Player', 'Engineer', or 'Lawyer')
----  
+--- id is the primary Key for this table.
+--- Each row contains an id, track_name, and artist.
+--- Write an SQL query to find how many times each artist appeared 
+--- on the spotify ranking list.
 ---
---- Write an SQL query to report each person's name followed by the first 
---- letter of their profession enclosed in parentheses.
+--- Return the result table having the artist's name along with the 
+--- corresponding number of occurrences ordered by occurrence count in 
+--- descending order. If the occurrences are equal, then it is ordered 
+--- by the artist name in ascending order.
 ---
---- Return the result table ordered by person_id in descending order.
----
---- The query result format is shown in the following example.
----
+--- The query result format is in the following example
+--- 
 --- Example 1:
 ---
---- Input: 
---- Person table:
---- +-----------+-------+------------+
---- | person_id | name  | profession |
---- +-----------+-------+------------+
---- | 1         | Alex  | Singer     |
---- | 3         | Alice | Actor      |
---- | 2         | Bob   | Player     |
---- | 4         | Messi | Doctor     |
---- | 6         | Tyson | Engineer   |
---- | 5         | Meir  | Lawyer     |
---- +-----------+-------+------------+
---- Output: 
---- +-----------+----------+
---- | person_id | name     |
---- +-----------+----------+
---- | 6         | Tyson(E) |
---- | 5         | Meir(L)  |
---- | 4         | Messi(D) |
---- | 3         | Alice(A) |
---- | 2         | Bob(P)   |
---- | 1         | Alex(S)  |
---- +-----------+----------+
---- Explanation: Note that there should not be any white space between the 
---- name and the first letter of the profession.
+--- Input:
+--- Spotify table: 
+--- +---------+--------------------+------------+ 
+--- | id      | track_name         | artist     |  
+--- +---------+--------------------+------------+
+--- | 303651  | Heart Won't Forget | Sia        |
+--- | 1046089 | Shape of you       | Ed Sheeran |
+--- | 33445   | I'm the one        | DJ Khalid  |
+--- | 811266  | Young Dumb & Broke | DJ Khalid  | 
+--- | 505727  | Happier            | Ed Sheeran |
+--- +---------+--------------------+------------+ 
+--- Output:
+--- +------------+-------------+
+--- | artist     | occurrences | 
+--- +------------+-------------+
+--- | DJ Khalid  | 2           |
+--- | Ed Sheeran | 2           |
+--- | Sia        | 1           | 
+--- +------------+-------------+ 
+---
+--- Explanation: The count of occurrences is listed in descending order 
+--- under the column name "occurrences". If the number of occurrences is 
+--- the same, the artist's names are sorted in ascending order.
 ---------------------------------------------------------------
 SELECT
-    person_id, 
-	name + '(' + substr(profession, 1, 1) + ')' AS name
-FROM 
-    Person
+    artist, 
+	occurrences
+FROM
+(
+    SELECT
+        artist, 
+	    occurrences = count(id)
+    FROM 
+        Spotify
+    GROUP BY artist
+) AS T
 ORDER BY 
-    person_id DESC
+    occurrences DESC, artist
 ;

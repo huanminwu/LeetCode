@@ -3890,7 +3890,7 @@ int LeetCodeBinarySearch::minOperations(vector<int>& nums, int x, int y)
         if (count <= middle)
         {
             last = middle - 1;
-            result = middle;
+            result = (int)middle;
         }
         else
         {

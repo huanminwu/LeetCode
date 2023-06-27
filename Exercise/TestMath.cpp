@@ -5946,8 +5946,119 @@ void TestLeetCode2708(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2719(void)
+{
+    Logger::WriteMessage("Test Leet Code 2719");
+    LeetCodeMath leetCode;
+    string num1 = "1", num2 = "12";
+    int min_num = 1, max_num = 8;
+    int result = leetCode.count(num1, num2, min_num, max_num);
+    Logger::WriteMessage("num1 = " + num1 + "; num2 = " + num2);
+    Logger::WriteMessage("min_num = " + to_string(min_num) + "; max_num = " + to_string(max_num));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    num1 = "1", num2 = "5";
+    min_num = 1, max_num = 5;
+    result = leetCode.count(num1, num2, min_num, max_num);
+    Logger::WriteMessage("num1 = " + num1 + "; num2 = " + num2);
+    Logger::WriteMessage("min_num = " + to_string(min_num) + "; max_num = " + to_string(max_num));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    num1 = "1", num2 = "999";
+    min_num = 5, max_num = 10;
+    result = leetCode.count(num1, num2, min_num, max_num);
+    Logger::WriteMessage("num1 = " + num1 + "; num2 = " + num2);
+    Logger::WriteMessage("min_num = " + to_string(min_num) + "; max_num = " + to_string(max_num));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2729(void)
+{
+    Logger::WriteMessage("Test Leet Code 2729");
+    LeetCodeMath leetCode;
+    int n = 192;
+    bool result = leetCode.isFascinating(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+
+    n = 100;
+    result = leetCode.isFascinating(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2739(void)
+{
+    Logger::WriteMessage("Test Leet Code 2739");
+    LeetCodeMath leetCode;
+    int mainTank = 5, additionalTank = 10;
+    int result = leetCode.distanceTraveled(mainTank, additionalTank);
+    Logger::WriteMessage("mainTank = " + to_string(mainTank) + "; additionalTank = " + to_string(additionalTank));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    mainTank = 1, additionalTank = 2;
+    result = leetCode.distanceTraveled(mainTank, additionalTank);
+    Logger::WriteMessage("mainTank = " + to_string(mainTank) + "; additionalTank = " + to_string(additionalTank));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    mainTank = 100, additionalTank = 100;
+    result = leetCode.distanceTraveled(mainTank, additionalTank);
+    Logger::WriteMessage("mainTank = " + to_string(mainTank) + "; additionalTank = " + to_string(additionalTank));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2748(void)
+{
+    Logger::WriteMessage("Test Leet Code 2748");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 2, 5, 1, 4 };
+    int result = leetCode.countBeautifulPairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 11,21,12 };
+    result = leetCode.countBeautifulPairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2745(void)
+{
+    Logger::WriteMessage("Test Leet Code 2745");
+    LeetCodeMath leetCode;
+    int x = 2, y = 5, z = 1;
+    int result = leetCode.longestString(x, y, z);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; z = " + to_string(z));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    x = 3, y = 2, z = 2;
+    result = leetCode.longestString(x, y, z);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; z = " + to_string(z));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode2749(void)
+{
+    Logger::WriteMessage("Test Leet Code 2749");
+    LeetCodeMath leetCode;
+    int num1 = 3, num2 = -2;
+    int result = leetCode.makeTheIntegerZero(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 = " + to_string(num2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    num1 = 5, num2 = 7;
+    result = leetCode.makeTheIntegerZero(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 = " + to_string(num2));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2749();
+    TestLeetCode2745();
+    TestLeetCode2748();
+    TestLeetCode2739();
+    TestLeetCode2729();
+    TestLeetCode2719();
     TestLeetCode2708();
     TestLeetCode2706();
     TestLeetCode2698();

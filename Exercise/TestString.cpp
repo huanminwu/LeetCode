@@ -6080,8 +6080,107 @@ void TestLeetCode2710(void)
     Logger::WriteMessage("num = " + num + "; result = " + result);
 }
 
+void TestLeetCode2716(void)
+{
+    Logger::WriteMessage("Test Leet Code 2716");
+    LeetCodeString leetCode;
+    string s = "aaabc";
+    int result = leetCode.minimizedStringLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "cbbd";
+    result = leetCode.minimizedStringLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "dddaaa";
+    result = leetCode.minimizedStringLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2730(void)
+{
+    Logger::WriteMessage("Test Leet Code 2730");
+    LeetCodeString leetCode;
+    string s = "52233";
+    int result = leetCode.longestSemiRepetitiveSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "5494";
+    result = leetCode.longestSemiRepetitiveSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "1111111";
+    result = leetCode.longestSemiRepetitiveSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "51134568782212345678933";
+    result = leetCode.longestSemiRepetitiveSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2734(void)
+{
+    Logger::WriteMessage("Test Leet Code 2734");
+    LeetCodeString leetCode;
+    string s = "cbabc";
+    string result = leetCode.smallestString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "acbbc";
+    result = leetCode.smallestString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "leetcode";
+    result = leetCode.smallestString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
+void TestLeetCode2744(void)
+{
+    Logger::WriteMessage("Test Leet Code 2744");
+    LeetCodeString leetCode;
+    vector<string> words = { "cd", "ac", "dc", "ca", "zz" };
+    int result = leetCode.maximumNumberOfStringPairs(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words = { "ab","ba","cc" };
+    result = leetCode.maximumNumberOfStringPairs(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words = { "aa","ab" };
+    result = leetCode.maximumNumberOfStringPairs(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2746(void)
+{
+    Logger::WriteMessage("Test Leet Code 2746");
+    LeetCodeString leetCode;
+    vector<string> words = { "aa", "ab", "bc" };
+    int result = leetCode.minimizeConcatenatedLength(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words = { "ab","b" };
+    result = leetCode.minimizeConcatenatedLength(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words = { "aaa","c","aba" };
+    result = leetCode.minimizeConcatenatedLength(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2746();
+    TestLeetCode2744();
+    TestLeetCode2730();
+    TestLeetCode2716();
     TestLeetCode2710();
     TestLeetCode2697();
     TestLeetCode2696();

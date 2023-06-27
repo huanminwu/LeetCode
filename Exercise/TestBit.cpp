@@ -1068,8 +1068,38 @@ void TestLeetCode2680(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2732(void)
+{
+    Logger::WriteMessage("Test Leet Code 2732");
+    LeetCodeBit leetCode;
+    vector<vector<int>> grid =
+    {
+        {0, 1, 1, 0},{0, 0, 0, 1},{1, 1, 1, 1}
+    };
+    vector<int> result = leetCode.goodSubsetofBinaryMatrix(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid =
+    {
+        {0}
+    };
+    result = leetCode.goodSubsetofBinaryMatrix(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid =
+    {
+        {1, 1, 1}, { 1, 1, 1 }
+    };
+    result = leetCode.goodSubsetofBinaryMatrix(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2732();
     TestLeetCode2680();
     TestLeetCode2683();
     TestLeetCode2569();

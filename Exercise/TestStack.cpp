@@ -851,8 +851,59 @@ void TestLeetCode2439(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2751(void)
+{
+    Logger::WriteMessage("Test Leet Code 2751");
+    LeetCodeStack leetCode;
+    vector<int> positions =
+    {
+        5, 4, 3, 2, 1
+    };
+    vector<int> healths =
+    {
+        2, 17, 9, 15, 10
+    }; 
+    string directions = "RRRRR";
+    vector<int> result = leetCode.survivedRobotsHealths(positions, healths, directions);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage(healths);
+    Logger::WriteMessage("directions = "  + directions);
+    Logger::WriteMessage(result);
+
+    positions =
+    {
+        3,5,2,6
+    };
+    healths =
+    {
+        10,10,15,12
+    };
+    directions = "RLRL";
+    result = leetCode.survivedRobotsHealths(positions, healths, directions);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage(healths);
+    Logger::WriteMessage("directions = " + directions);
+    Logger::WriteMessage(result);
+
+    positions =
+    {
+        1,2,5,6
+    };
+    healths =
+    {
+       10,10,11,11
+    };
+    directions = "RLRL";
+    result = leetCode.survivedRobotsHealths(positions, healths, directions);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage(healths);
+    Logger::WriteMessage("directions = " + directions);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode2751();
     TestLeetCode2439();
     TestLeetCode2434();
     TestLeetCode2398();

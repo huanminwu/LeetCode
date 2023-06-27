@@ -18578,3 +18578,385 @@ long long LeetCodeMath::maxStrength(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2719. Count of Integers
+/// </summary>
+int LeetCodeMath::count(string num, int min_sum, int max_sum, vector<vector<int>>& dp)
+{
+    int n = num.size();
+    int prev_sum = 0;
+    int result = 0;
+    int M = (int)1e9 + 7;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j <= num[i] - '0'; j++)
+        {
+            int sum = prev_sum + j;
+            if (i == n - 1)
+            {
+                if (sum >= min_sum && sum <= max_sum)
+                {
+                    result = (result + 1) % M;
+                }
+            }
+            else if (j < num[i] - '0')
+            {
+                int min_val = max(0, min_sum - sum);
+                int max_val = min(9 * (n - 1 - i), max_sum - sum);
+                if (max_val >= 0 && min_val <= max_val)
+                {
+                    if (min_val == 0)
+                    {
+                        result = (result + dp[n - 2 - i][max_val]) % M;
+                    }
+                    else
+                    {
+                        result = (result + dp[n - 2 - i][max_val]) % M;
+                        result = (result - dp[n - 2 - i][min_val - 1] + M) % M;
+                    }
+                }
+            }
+        }
+        prev_sum += num[i] - '0';
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2719. Count of Integers
+/// 
+/// Hard
+///
+/// You are given two numeric strings num1 and num2 and two integers 
+/// max_sum and min_sum. We denote an integer x to be good if:
+///
+/// num1 <= x <= num2
+/// min_sum <= digit_sum(x) <= max_sum.
+/// Return the number of good integers. Since the answer may be 
+/// large, return it modulo 10^9 + 7.
+///
+/// Note that digit_sum(x) denotes the sum of the digits of x.
+/// Example 1:
+/// Input: num1 = "1", num2 = "12", min_num = 1, max_num = 8
+/// Output: 11
+/// Explanation: There are 11 integers whose sum of digits lies 
+/// between 1 and 8 are 1,2,3,4,5,6,7,8,10,11, and 12. Thus, we 
+/// return 11.
+///
+/// Example 2:
+/// Input: num1 = "1", num2 = "5", min_num = 1, max_num = 5
+/// Output: 5
+/// Explanation: The 5 integers whose sum of digits lies between 1 and 5 
+/// are 1,2,3,4, and 5. Thus, we return 5.
+/// 
+/// Constraints:
+/// 1. 1 <= num1 <= num2 <= 10^22
+/// 2. 1 <= min_sum <= max_sum <= 400
+/// </summary>
+int LeetCodeMath::count(string num1, string num2, int min_sum, int max_sum)
+{
+    int M = (int)1e9 + 7;
+    int n = num2.size();
+    vector<vector<int>> dp(n, vector<int>(n * 9 + 1));
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j <= 9; j++)
+        {
+            if (i == 0) dp[i][j] = 1;
+            else
+            {
+                for (int k = 0; k <= 9 * i; k++)
+                {
+                    dp[i][j + k] = (dp[i][j + k] + dp[i - 1][k]) % M;
+                }
+            }
+        }
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 1; j <= 9 * (i + 1); j++)
+        {
+            dp[i][j] = (dp[i][j] + dp[i][j-1]) % M;
+        }
+    }
+    int result = count(num2, min_sum, max_sum, dp);
+    result = (result - count(num1, min_sum, max_sum, dp) + M) % M;
+    int sum = 0;
+    for (size_t i = 0; i < num1.size(); i++) sum += num1[i] - '0';
+    if (sum >= min_sum && sum <= max_sum) result = (result + 1) % M;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2729. Check if The Number is Fascinating
+/// 
+/// Easy
+///
+/// You are given an integer n that consists of exactly 3 digits.
+///
+/// We call the number n fascinating if, after the following modification, 
+/// the resulting number contains all the digits from 1 to 9 exactly once 
+/// and does not contain any 0's:
+///
+/// Concatenate n with the numbers 2 * n and 3 * n.
+/// Return true if n is fascinating, or false otherwise.
+///
+/// Concatenating two numbers means joining them together. For example, 
+/// the concatenation of 121 and 371 is 121371.
+///
+/// Example 1:
+/// Input: n = 192
+/// Output: true
+/// Explanation: We concatenate the numbers n = 192 and 2 * n = 384 
+/// and 3 * n = 576. The resulting number is 192384576. This number 
+/// contains all the digits from 1 to 9 exactly once.
+///
+/// Example 2:
+/// Input: n = 100
+/// Output: false
+/// Explanation: We concatenate the numbers n = 100 and 2 * n = 200 
+/// and 3 * n = 300. The resulting number is 100200300. This number 
+/// does not satisfy any of the conditions.
+/// 
+/// Constraints:
+/// 1. 100 <= n <= 999
+/// </summary>
+bool LeetCodeMath::isFascinating(int n)
+{
+    vector<int> digits(10);
+    string str = to_string(n) + to_string(2 *n) + to_string(3 * n);
+    if (str.size() > 9) return false;
+    for (size_t i = 0; i < str.size(); i++)
+    {
+        digits[str[i] - '0']++; 
+    }
+    for (int i = 1; i <= 9; i++)
+    {
+        if (digits[i] != 1) return false;
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet Code 2739. Total Distance Traveled
+/// 
+/// Easy
+///
+/// A truck has two fuel tanks. You are given two integers, mainTank 
+/// representing the fuel present in the main tank in liters and 
+/// additionalTank representing the fuel present in the additional tank 
+/// in liters.
+///
+/// The truck has a mileage of 10 km per liter. Whenever 5 liters of fuel 
+/// get used up in the main tank, if the additional tank has at least 1 
+/// liters of fuel, 1 liters of fuel will be transferred from the 
+/// additional tank to the main tank.
+///
+/// Return the maximum distance which can be traveled.
+///
+/// Note: Injection from the additional tank is not continuous. It happens 
+/// suddenly and immediately for every 5 liters consumed.
+/// 
+/// Example 1:
+/// Input: mainTank = 5, additionalTank = 10
+/// Output: 60
+/// Explanation: 
+/// After spending 5 litre of fuel, fuel remaining is (5 - 5 + 1) = 1 litre 
+/// and distance traveled is 50km.
+/// After spending another 1 litre of fuel, no fuel gets injected in the main 
+/// tank and the main tank becomes empty.
+/// Total distance traveled is 60km.
+///
+/// Example 2:
+/// Input: mainTank = 1, additionalTank = 2
+/// Output: 10
+/// Explanation: 
+/// After spending 1 litre of fuel, the main tank becomes empty.
+/// Total distance traveled is 10km.
+/// 
+/// Constraints:
+/// 1. 1 <= mainTank, additionalTank <= 100
+/// </summary>
+int LeetCodeMath::distanceTraveled(int mainTank, int additionalTank)
+{
+    int result = 0;
+    while (mainTank >= 5)
+    {
+        int count = mainTank / 5;
+        mainTank = mainTank % 5;
+        result += count * 5 * 10;
+        mainTank += min(count, additionalTank);
+        additionalTank -= min(count, additionalTank);
+    }
+    result += mainTank * 10;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2748. Number of Beautiful Pairs
+/// 
+/// Easy
+///
+/// You are given a 0-indexed integer array nums. A pair of indices i, j 
+/// where 0 <= i < j < nums.length is called beautiful if the first digit 
+/// of nums[i] and the last digit of nums[j] are coprime.
+///
+/// Return the total number of beautiful pairs in nums.
+/// Two integers x and y are coprime if there is no integer greater than 1 
+/// that divides both of them. In other words, x and y are coprime if 
+/// gcd(x, y) == 1, where gcd(x, y) is the greatest common divisor of x 
+/// and y.
+/// 
+/// Example 1:
+/// Input: nums = [2,5,1,4]
+/// Output: 5
+/// Explanation: There are 5 beautiful pairs in nums:
+/// When i = 0 and j = 1: the first digit of nums[0] is 2, and the last 
+/// digit of nums[1] is 5. We can confirm that 2 and 5 are coprime, 
+/// since gcd(2,5) == 1.
+/// When i = 0 and j = 2: the first digit of nums[0] is 2, and the last 
+/// digit of nums[2] is 1. Indeed, gcd(2,1) == 1.
+/// When i = 1 and j = 2: the first digit of nums[1] is 5, and the last 
+/// digit of nums[2] is 1. Indeed, gcd(5,1) == 1.
+/// When i = 1 and j = 3: the first digit of nums[1] is 5, and the last 
+/// digit of nums[3] is 4. Indeed, gcd(5,4) == 1.
+/// When i = 2 and j = 3: the first digit of nums[2] is 1, and the last 
+/// digit of nums[3] is 4. Indeed, gcd(1,4) == 1.
+/// Thus, we return 5.
+///
+/// Example 2:
+/// Input: nums = [11,21,12]
+/// Output: 2
+/// Explanation: There are 2 beautiful pairs:
+/// When i = 0 and j = 1: the first digit of nums[0] is 1, and the last 
+/// digit of nums[1] is 1. Indeed, gcd(1,1) == 1.
+/// When i = 0 and j = 2: the first digit of nums[0] is 1, and the last 
+/// digit of nums[2] is 2. Indeed, gcd(1,2) == 1.
+/// Thus, we return 2.
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 9999
+/// 3. nums[i] % 10 != 0
+/// </summary>
+int LeetCodeMath::countBeautifulPairs(vector<int>& nums)
+{
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (size_t j = i + 1; j < nums.size(); j++)
+        {
+            int a = to_string(nums[i])[0] - '0';
+            int b = to_string(nums[j]).back() - '0';
+            if (gcd(a, b) == 1)
+            {
+                result++;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2745. Construct the Longest New String
+/// 
+/// Medium
+///
+/// You are given three integers x, y, and z.
+///
+/// You have x strings equal to "AA", y strings equal to "BB", and z 
+/// strings equal to "AB". You want to choose some (possibly all or 
+/// none) of these strings and concactenate them in some order to 
+/// form a new string. This new string must not contain "AAA" or "BBB" 
+/// as a substring.
+///
+/// Return the maximum possible length of the new string.
+/// A substring is a contiguous non-empty sequence of characters within 
+/// a string.
+/// 
+/// Example 1:
+/// Input: x = 2, y = 5, z = 1
+/// Output: 12
+/// Explanation: We can concactenate the strings "BB", "AA", "BB", "AA", 
+/// "BB", and "AB" in that order. Then, our new string is "BBAABBAABBAB". 
+/// That string has length 12, and we can show that it is impossible to 
+/// construct a string of longer length.
+///
+/// Example 2:
+/// Input: x = 3, y = 2, z = 2
+/// Output: 14
+/// Explanation: We can concactenate the strings "AB", "AB", "AA", "BB", 
+/// "AA", "BB", and "AA" in that order. Then, our new string is 
+/// "ABABAABBAABBAA". 
+/// That string has length 14, and we can show that it is impossible to 
+/// construct a string of longer length.
+///
+/// Constraints:
+/// 1. 1 <= x, y, z <= 50
+/// </summary>
+int LeetCodeMath::longestString(int x, int y, int z)
+{
+    if (x > y + 1) x = y + 1;
+    if (y > x + 1) y = x + 1;
+    return (x + y + z) * 2;
+}
+
+/// <summary>
+/// Leet Code 2749. Minimum Operations to Make the Integer Zero
+/// 
+/// Medium
+///
+/// You are given two integers num1 and num2.
+///
+/// In one operation, you can choose integer i in the range [0, 60] and 
+/// subtract 2i + num2 from num1.
+///
+/// Return the integer denoting the minimum number of operations needed 
+/// to make num1 equal to 0.
+///
+/// If it is impossible to make num1 equal to 0, return -1.
+/// 
+/// Example 1:
+/// Input: num1 = 3, num2 = -2
+/// Output: 3
+/// Explanation: We can make 3 equal to 0 with the following operations:
+/// - We choose i = 2 and substract 22 + (-2) from 3, 3 - (4 + (-2)) = 1.
+/// - We choose i = 2 and substract 22 + (-2) from 1, 1 - (4 + (-2)) = -1.
+/// - We choose i = 0 and substract 20 + (-2) from 
+///   -1, (-1) - (1 + (-2)) = 0.
+/// It can be proven, that 3 is the minimum number of operations that we 
+/// need to perform.
+/// Example 2:
+///
+/// Input: num1 = 5, num2 = 7
+/// Output: -1
+/// Explanation: It can be proven, that it is impossible to make 5 equal 
+/// to 0 with the given operation.
+/// 
+/// Constraints:
+/// 1. 1 <= num1 <= 10^9
+/// 2. -10^9 <= num2 <= 10^9
+/// </summary>
+int LeetCodeMath::makeTheIntegerZero(int num1, int num2)
+{
+    int result = -1;
+    for (int i = 0; i <= 60; i++)
+    {
+        long long remaining = ((long long)num1 - (long long)num2 * i);
+        if (remaining < 0) return -1;
+        int bits_count = 0;
+        for (int j = 0; j < 64; j++)
+        {
+            if (remaining & ((long long) 1 << j)) bits_count++;
+        }
+        if (bits_count > i || remaining < i) continue;
+        result = i;
+        break;
+    }
+    return result;
+}
+
+#pragma endregion
+

@@ -1867,8 +1867,24 @@ void TestLeetCode2664(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2741(void)
+{
+    Logger::WriteMessage("Test Leet Code 2741");
+    LeetCodeDFS leetCode;
+    vector<int> nums = { 2, 3, 6 };
+    int result = leetCode.specialPerm(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,4,3 };
+    result = leetCode.specialPerm(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2741();
     TestLeetCode2664();
     TestLeetCode2597();
     TestLeetCode2572();

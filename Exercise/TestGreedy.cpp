@@ -1671,8 +1671,38 @@ void TestLeetCode2672(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2747(void)
+{
+    Logger::WriteMessage("Test Leet Code 2747");
+    LeetCodeGreedy leetCode;
+    int n = 3;
+    vector<vector<int>> logs =
+    { {1, 3},{2, 6},{1, 5} };
+    int x = 5;
+    vector<int> queries = { 10, 11 };
+    vector<int> result = leetCode.countServers(n, logs, x, queries);
+    Logger::WriteMessage("n = " + to_string(n) + "; x = " + to_string(x));
+    Logger::WriteMessage(logs);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 3;
+    logs =
+    { 
+        {2, 4},{2, 1},{1, 2},{3, 1} 
+    };
+    x = 2;
+    queries = { 3, 4 };
+    result = leetCode.countServers(n, logs, x, queries);
+    Logger::WriteMessage("n = " + to_string(n) + "; x = " + to_string(x));
+    Logger::WriteMessage(logs);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode2747();
     TestLeetCode2672();
     TestLeetCode2655();
     TestLeetCode2589();

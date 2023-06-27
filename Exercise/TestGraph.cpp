@@ -5297,8 +5297,53 @@ void TestLeetCode2714(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2737(void)
+{
+    Logger::WriteMessage("Test Leet Code 2737");
+    LeetCodeGraph leetCode;
+    int n = 4;
+    int s = 0;
+    vector<vector<int>> edges =
+    {
+        {0, 1, 1} ,{1, 2, 3}, {2, 3, 2}, {0, 3, 4}
+    };
+    vector<int> marked = { 2, 3 };
+    int result = leetCode.minimumDistance(n, edges, s, marked);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(marked);
+    Logger::WriteMessage("n = " + to_string(n) + "; s = " + to_string(s));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 5;
+    s = 1;
+    edges =
+    {
+        {0, 1, 2}, {0, 2, 4}, {1, 3, 1}, {2, 3, 3}, {3, 4, 2}
+    };
+    marked = { 0, 4 };
+    result = leetCode.minimumDistance(n, edges, s, marked);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(marked);
+    Logger::WriteMessage("n = " + to_string(n) + "; s = " + to_string(s));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4;
+    s = 3;
+    edges =
+    {
+        {0,1,1} ,{1,2,3}, {2,3,2}
+    };
+    marked = { 0, 1 };
+    result = leetCode.minimumDistance(n, edges, s, marked);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(marked);
+    Logger::WriteMessage("n = " + to_string(n) + "; s = " + to_string(s));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2737();
     TestLeetCode2714();
     TestLeetCode2709();
     TestLeetCode2713();

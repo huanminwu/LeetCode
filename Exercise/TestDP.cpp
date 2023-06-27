@@ -3683,8 +3683,35 @@ void TestLeetCode2712(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode2742(void)
+{
+    Logger::WriteMessage("Test Leet Code 2742");
+    LeetCodeDP leetCode;
+    vector<int> cost = { 1, 2, 3, 2 };
+    vector<int> time = { 1, 2, 3, 2 };
+    int result = leetCode.paintWalls(cost, time);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage(time);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    cost = { 2,3,4,2 };
+    time = { 1,1,1,1 };
+    result = leetCode.paintWalls(cost, time);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage(time);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    cost = { 1,2,3,4,5,6,7,8,9,10 };
+    time = { 1,2,3,4,5,6,7,8,9,10 };
+    result = leetCode.paintWalls(cost, time);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage(time);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2742();
     TestLeetCode2712();
     TestLeetCode2707();
     TestLeetCode2638();

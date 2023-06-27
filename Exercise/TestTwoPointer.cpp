@@ -343,9 +343,26 @@ void TestLeetCode2555(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2743(void)
+{
+    Logger::WriteMessage("Test Leet Code 2743");
+    LeetCodeTwoPointer leetCode;
+    string s = "abcd";
+    int result = leetCode.numberOfSpecialSubstrings(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "ooo";
+    result = leetCode.numberOfSpecialSubstrings(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "abab";
+    result = leetCode.numberOfSpecialSubstrings(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
 
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2743();
     TestLeetCode2555();
     TestLeetCode2576();
     TestLeetCode2537();

@@ -12526,6 +12526,260 @@ public:
     /// 3. num doesn't have any leading zeros
     /// </summary>
     string removeTrailingZeros(string num);
+
+    /// <summary>
+    /// Leet Code 2716. Minimize String Length
+    /// 
+    /// Easy
+    ///
+    /// Given a 0-indexed string s, repeatedly perform the following operation 
+    /// any number of times:
+    ///
+    /// Choose an index i in the string, and let c be the character in 
+    /// position i. Delete the closest occurrence of c to the left of i 
+    /// (if any) and the closest occurrence of c to the right of i (if any).
+    /// Your task is to minimize the length of s by performing the above 
+    /// operation any number of times.
+    ///
+    /// Return an integer denoting the length of the minimized string.
+    ///
+    /// Example 1:
+    /// Input: s = "aaabc"
+    /// Output: 3
+    /// Explanation: In this example, s is "aaabc". We can start by selecting 
+    /// the character 'a' at index 1. We then remove the closest 'a' to the 
+    /// left of index 1, which is at index 0, and the closest 'a' to the 
+    /// right of index 1, which is at index 2. After this operation, the 
+    /// string becomes "abc". Any further operation we perform on the 
+    /// string will leave it unchanged. Therefore, the length of the minimized 
+    /// string is 3.
+    ///
+    /// Example 2:
+    /// Input: s = "cbbd"
+    /// Output: 3
+    /// Explanation: For this we can start with character 'b' at index 1. 
+    /// There is no occurrence of 'b' to the left of index 1, but there is 
+    /// one to the right at index 2, so we delete the 'b' at index 2. The 
+    /// string becomes "cbd" and further operations will leave it unchanged. 
+    /// Hence, the minimized length is 3. 
+    ///
+    /// Example 3:
+    /// Input: s = "dddaaa"
+    /// Output: 2
+    /// Explanation: For this, we can start with the character 'd' at index 1. 
+    /// The closest occurrence of a 'd' to its left is at index 0, and the 
+    /// closest occurrence of a 'd' to its right is at index 2. We delete both 
+    /// index 0 and 2, so the string becomes "daaa". In the new string, we 
+    /// can select the character 'a' at index 2. The closest occurrence of 
+    /// an 'a' to its left is at index 1, and the closest occurrence of an 'a' 
+    /// to its right is at index 3. We delete both of them, and the string 
+    /// becomes "da". We cannot minimize this further, so the minimized length 
+    /// is 2.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s contains only lowercase English letters
+    /// </summary>
+    int minimizedStringLength(string s);
+
+    /// <summary>
+    /// Leet Code 2730. Find the Longest Semi-Repetitive Substring
+    /// 
+    /// Medium
+    ///
+    /// You are given a 0-indexed string s that consists of digits from 0 to 9.
+    /// A string t is called a semi-repetitive if there is at most one 
+    /// consecutive pair of the same digits inside t. For example, 0010, 
+    /// 002020, 0123, 2002, and 54944 are semi-repetitive while 00101022, and 
+    /// 1101234883 are not.
+    ///
+    /// Return the length of the longest semi-repetitive substring inside s.
+    ///
+    /// A substring is a contiguous non-empty sequence of characters within a 
+    /// string.
+    ///
+    /// Example 1:
+    /// Input: s = "52233"
+    /// Output: 4
+    /// Explanation: The longest semi-repetitive substring is "5223", which 
+    /// starts at i = 0 and ends at j = 3. 
+    ///
+    /// Example 2:
+    /// Input: s = "5494"
+    /// Output: 4
+    /// Explanation: s is a semi-reptitive string, so the answer is 4.
+    /// Example 3:
+    ///
+    /// Input: s = "1111111"
+    /// Output: 2
+    /// Explanation: The longest semi-repetitive substring is "11", which 
+    /// starts at i = 0 and ends at j = 1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 50
+    /// 2. '0' <= s[i] <= '9'
+    /// </summary>
+    int longestSemiRepetitiveSubstring(string s);
+
+    /// <summary>
+    /// Leet Code 2734. Lexicographically Smallest String After Substring 
+    ///                 Operation
+    /// 
+    /// Medium
+    ///
+    /// You are given a string s consisting of only lowercase English letters. 
+    /// In one operation, you can do the following:
+    ///
+    /// Select any non-empty substring of s, possibly the entire string, then 
+    /// replace each one of its characters with the previous character of the 
+    /// English alphabet. For example, 'b' is converted to 'a', and 'a' is 
+    /// converted to 'z'.
+    /// Return the lexicographically smallest string you can obtain after 
+    /// performing the above operation exactly once.
+    ///
+    /// A substring is a contiguous sequence of characters in a string.
+    ///
+    /// A string x is lexicographically smaller than a string y of the same 
+    /// length if x[i] comes before y[i] in alphabetic order for the first 
+    /// position i such that x[i] != y[i].
+    ///
+    /// Example 1:
+    /// Input: s = "cbabc"
+    /// Output: "baabc"
+    /// Explanation: We apply the operation on the substring starting at 
+    /// index 0, and ending at index 1 inclusive. 
+    /// It can be proven that the resulting string is the lexicographically 
+    /// smallest. 
+    ///
+    /// Example 2:
+    /// Input: s = "acbbc" 
+    /// Output: "abaab"
+    /// Explanation: We apply the operation on the substring starting at 
+    /// index 1, and ending at index 4 inclusive. 
+    /// It can be proven that the resulting string is the lexicographically 
+    /// smallest.
+    ///
+    /// Example 3:
+    /// Input: s = "leetcode"
+    /// Output: "kddsbncd"
+    /// Explanation: We apply the operation on the entire string. 
+    /// It can be proven that the resulting string is the lexicographically 
+    /// smallest. 
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 3 * 10^5
+    /// 2. s consists of lowercase English letters
+    /// </summary>
+    string smallestString(string s);
+
+    /// <summary>
+    /// Leet Code 2744. Find Maximum Number of String Pairs
+    /// 
+    /// Easy
+    ///
+    /// You are given a 0-indexed array words consisting of distinct strings.
+    ///
+    /// The string words[i] can be paired with the string words[j] if:
+    /// The string words[i] is equal to the reversed string of words[j].
+    /// 0 <= i < j < words.length.
+    /// Return the maximum number of pairs that can be formed from the array 
+    /// words.
+    ///
+    /// Note that each string can belong in at most one pair.
+    /// Example 1:
+    /// Input: words = ["cd","ac","dc","ca","zz"]
+    /// Output: 2
+    /// Explanation: In this example, we can form 2 pair of strings in 
+    /// the following way:
+    /// - We pair the 0th string with the 2nd string, as the reversed 
+    ///   string of word[0] is "dc" and is equal to words[2].
+    /// - We pair the 1st string with the 3rd string, as the reversed string 
+    ///   of word[1] is "ca" and is equal to words[3].
+    /// It can be proven that 2 is the maximum number of pairs that can be 
+    /// formed.
+    ///
+    /// Example 2:
+    /// Input: words = ["ab","ba","cc"]
+    /// Output: 1
+    /// Explanation: In this example, we can form 1 pair of strings in the 
+    /// following way:
+    /// - We pair the 0th string with the 1st string, as the reversed string 
+    ///   of words[1] is "ab" and is equal to words[0].
+    /// It can be proven that 1 is the maximum number of pairs that can be 
+    /// formed.
+    ///
+    /// Example 3:
+    /// Input: words = ["aa","ab"]
+    /// Output: 0
+    /// Explanation: In this example, we are unable to form any pair of 
+    /// strings.
+    ///
+    /// Constraints:
+    /// 1. 1 <= words.length <= 50
+    /// 2. words[i].length == 2
+    /// 3. words consists of distinct strings.
+    /// 4. words[i] contains only lowercase English letters.
+    /// </summary>
+    int maximumNumberOfStringPairs(vector<string>& words);
+
+    /// <summary>
+    /// Leet Code 2746. Decremental String Concatenation
+    /// 
+    /// Medium
+    ///
+    /// You are given a 0-indexed array words containing n strings.
+    ///
+    /// Let's define a join operation join(x, y) between two strings x 
+    /// and y as concatenating them into xy. However, if the last 
+    /// character of x is equal to the first character of y, one of 
+    /// them is deleted.
+    ///
+    /// For example join("ab", "ba") = "aba" and join("ab", "cde") = "abcde".
+    ///
+    /// You are to perform n - 1 join operations. Let str0 = words[0]. 
+    /// Starting from i = 1 up to i = n - 1, for the ith operation, you can 
+    /// do one of the following:
+    ///
+    /// Make stri = join(stri - 1, words[i])
+    /// Make stri = join(words[i], stri - 1)
+    /// Your task is to minimize the length of strn - 1.
+    ///
+    /// Return an integer denoting the minimum possible length of strn - 1.
+    /// 
+    /// Example 1:
+    /// Input: words = ["aa","ab","bc"]
+    /// Output: 4
+    /// Explanation: In this example, we can perform join operations in the 
+    /// following order to minimize the length of str2: 
+    /// str0 = "aa"
+    /// str1 = join(str0, "ab") = "aab"
+    /// str2 = join(str1, "bc") = "aabc" 
+    /// It can be shown that the minimum possible length of str2 is 4.
+    ///
+    /// Example 2:
+    /// Input: words = ["ab","b"]
+    /// Output: 2
+    /// Explanation: In this example, str0 = "ab", there are two ways to 
+    /// get str1: 
+    /// join(str0, "b") = "ab" or join("b", str0) = "bab". 
+    /// The first string, "ab", has the minimum length. Hence, the answer is 2.
+    ///
+    /// Example 3:
+    /// Input: words = ["aaa","c","aba"]
+    /// Output: 6
+    /// Explanation: In this example, we can perform join operations in the 
+    /// following order to minimize the length of str2: 
+    /// str0 = "aaa"
+    /// str1 = join(str0, "c") = "aaac"
+    /// str2 = join("aba", str1) = "abaaac"
+    /// It can be shown that the minimum possible length of str2 is 6.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= words.length <= 1000
+    /// 2. 1 <= words[i].length <= 50
+    /// 3. Each character in words[i] is an English lowercase letter
+    /// </summary>
+    int minimizeConcatenatedLength(vector<string>& words);
 #pragma endregion
 };
 

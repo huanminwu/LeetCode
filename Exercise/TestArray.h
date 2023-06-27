@@ -313,5 +313,12 @@ void TestLeetCode2661(void);
 void TestLeetCode2684(void);
 void TestLeetCode2681(void);
 void TestLeetCode2711(void);
+void TestLeetCode2717(void);
+void TestLeetCode2718(void);
+void TestLeetCode2733(void);
+void TestLeetCode2728(void);
+void TestLeetCode2731(void);
+void TestLeetCode2735(void);
+void TestLeetCode2750(void);
 void TestLeetCodeArray(void);
 #endif  // TestArray
