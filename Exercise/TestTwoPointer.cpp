@@ -360,8 +360,24 @@ void TestLeetCode2743(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode2762(void)
+{
+    Logger::WriteMessage("Test Leet Code 2762");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 5, 4, 2, 4 };
+    long long result = leetCode.continuousSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    result = leetCode.continuousSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2762();
     TestLeetCode2743();
     TestLeetCode2555();
     TestLeetCode2576();

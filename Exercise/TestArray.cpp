@@ -8942,8 +8942,44 @@ void TestLeetCode2750(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2760(void)
+{
+    Logger::WriteMessage("Test Leet Code 2760");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 2, 5, 4 };
+    int threshold = 5;
+    int result = leetCode.longestAlternatingSubarray(nums, threshold);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2 };
+    threshold = 2;
+    result = leetCode.longestAlternatingSubarray(nums, threshold);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3,4,5 };
+    threshold = 4;
+    result = leetCode.longestAlternatingSubarray(nums, threshold);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2, 10, 5 };
+    threshold = 7;
+    result = leetCode.longestAlternatingSubarray(nums, threshold);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3,3,10 };
+    threshold = 18;
+    result = leetCode.longestAlternatingSubarray(nums, threshold);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2760();
     TestLeetCode2750();
     TestLeetCode2735();
     TestLeetCode2731();

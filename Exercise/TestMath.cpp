@@ -6051,8 +6051,25 @@ void TestLeetCode2749(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+void TestLeetCode2761(void)
+{
+    Logger::WriteMessage("Test Leet Code 2761");
+    LeetCodeMath leetCode;
+    int n = 10;
+    vector<vector<int>> result = leetCode.findPrimePairs(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 2;
+    result = leetCode.findPrimePairs(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2761();
     TestLeetCode2749();
     TestLeetCode2745();
     TestLeetCode2748();
