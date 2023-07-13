@@ -3333,9 +3333,24 @@ void TestLeetCode2736(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2763(void)
+{
+    Logger::WriteMessage("Test Leet Code 2763");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 2, 3, 1, 4 };
+    int result = leetCode.sumImbalanceNumbers(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,3,3,3,5 };
+    result = leetCode.sumImbalanceNumbers(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2763();
     TestLeetCode2736();
     TestLeetCode2740();
     TestLeetCode2679();

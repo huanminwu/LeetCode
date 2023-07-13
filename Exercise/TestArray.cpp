@@ -8977,8 +8977,29 @@ void TestLeetCode2760(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2753(void)
+{
+    Logger::WriteMessage("Test Leet Code 2753");
+    LeetCodeArray leetCode;
+    vector<int> doors = { 1, 1, 1, 1 };
+    int k = 10;
+    Street street = Street(doors);
+    int result = leetCode.houseCountII(&street, k);
+    Logger::WriteMessage(doors);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    doors = { 1,0,1,1,0 };
+    k = 5;
+    street = Street(doors);
+    result = leetCode.houseCountII(&street, k);
+    Logger::WriteMessage(doors);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2753();
     TestLeetCode2760();
     TestLeetCode2750();
     TestLeetCode2735();

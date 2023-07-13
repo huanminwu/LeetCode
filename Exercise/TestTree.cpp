@@ -3773,8 +3773,30 @@ void TestLeetCode2673(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2764(void)
+{
+    Logger::WriteMessage("Test Leet Code 2764");
+    LeetCodeTree leetCode;
+    vector<vector<int>> nodes = 
+    { 
+        {0, -1},{1, 0},{2, 0},{3, 2},{4, 2} 
+    };
+    bool result = leetCode.isPreorder(nodes);
+    Logger::WriteMessage(nodes);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nodes =
+    {
+        {0,-1},{1,0},{2,0},{3,1},{4,1}
+    };
+    result = leetCode.isPreorder(nodes);
+    Logger::WriteMessage(nodes);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode2764();
     TestLeetCode2673();
     TestLeetCode2641();
     TestLeetCode2581();

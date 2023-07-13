@@ -1437,5 +1437,4 @@ long long LeetCodeTwoPointer::continuousSubarrays(vector<int>& nums)
     }
     return result;
 }
-
 #pragma endregion
