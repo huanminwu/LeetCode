@@ -8762,6 +8762,161 @@ public:
     /// 4. 1 <= time[i] <= 500
     /// </summary>
     int paintWalls(vector<int>& cost, vector<int>& time);
+
+
+    /// <summary>
+    /// Leet Code 2767. Partition String Into Minimum Beautiful Substrings
+    /// 
+    /// Medium
+    ///
+    /// Given a binary string s, partition the string into one or more 
+    /// substrings such that each substring is beautiful.
+    ///
+    /// A string is beautiful if:
+    /// It doesn't contain leading zeros.
+    /// It's the binary representation of a number that is a power of 5.
+    /// Return the minimum number of substrings in such partition. If it 
+    /// is impossible to partition the string s into beautiful substrings, 
+    /// return -1.
+    ///
+    /// A substring is a contiguous sequence of characters in a string.
+    /// 
+    /// Example 1:
+    /// Input: s = "1011"
+    /// Output: 2
+    /// Explanation: We can paritition the given string into ["101", "1"].
+    /// - The string "101" does not contain leading zeros and is the binary 
+    ///   representation of integer 51 = 5.
+    /// - The string "1" does not contain leading zeros and is the binary 
+    ///   representation of integer 50 = 1.
+    /// It can be shown that 2 is the minimum number of beautiful substrings 
+    /// that s can be partitioned into.
+    ///
+    /// Example 2:
+    /// Input: s = "111"
+    /// Output: 3
+    /// Explanation: We can paritition the given string into ["1", "1", "1"].
+    /// - The string "1" does not contain leading zeros and is the binary 
+    ///   representation of integer 50 = 1.
+    /// It can be shown that 3 is the minimum number of beautiful substrings 
+    /// that s can be partitioned into.
+    ///
+    /// Example 3:
+    /// Input: s = "0"
+    /// Output: -1
+    /// Explanation: We can not partition the given string into beautiful 
+    /// substrings.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 15
+    /// 2. s[i] is either '0' or '1'.
+    /// </summary>
+    int minimumBeautifulSubstrings(string s);
+
+    /// <summary>
+    /// Leet Code 2770. Maximum Number of Jumps to Reach the Last Index
+    /// 
+    /// Medium
+    ///
+    /// You are given a 0-indexed array nums of n integers and an integer 
+    /// target.
+    ///
+    /// You are initially positioned at index 0. In one step, you can jump 
+    /// from index i to any index j such that:
+    ///
+    /// 0 <= i < j < n
+    /// -target <= nums[j] - nums[i] <= target
+    /// Return the maximum number of jumps you can make to reach index n - 1.
+    ///
+    /// If there is no way to reach index n - 1, return -1.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,3,6,4,1,2], target = 2
+    /// Output: 3
+    /// Explanation: To go from index 0 to index n - 1 with the maximum number 
+    /// of jumps, you can perform the following jumping sequence:
+    /// - Jump from index 0 to index 1. 
+    /// - Jump from index 1 to index 3.
+    /// - Jump from index 3 to index 5.
+    /// It can be proven that there is no other jumping sequence that goes 
+    /// from 0 to n - 1 with more than 3 jumps. Hence, the answer is 3. 
+    ///
+    /// Example 2:
+    /// Input: nums = [1,3,6,4,1,2], target = 3
+    /// Output: 5
+    /// Explanation: To go from index 0 to index n - 1 with the maximum number 
+    /// of jumps, you can perform the following jumping sequence:
+    /// - Jump from index 0 to index 1.
+    /// - Jump from index 1 to index 2.
+    /// - Jump from index 2 to index 3.
+    /// - Jump from index 3 to index 4.
+    /// - Jump from index 4 to index 5.
+    /// It can be proven that there is no other jumping sequence that goes 
+    /// from 0 to n - 1 with more than 5 jumps. Hence, the answer is 5. 
+    ///
+    /// Example 3:
+    /// Input: nums = [1,3,6,4,1,2], target = 0
+    /// Output: -1
+    /// Explanation: It can be proven that there is no jumping sequence that 
+    /// goes from 0 to n - 1. Hence, the answer is -1. 
+    ///
+    /// Constraints:
+    /// 1. 2 <= nums.length == n <= 1000
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// 3. 0 <= target <= 2 * 10^9
+    /// </summary>
+    int maximumJumps(vector<int>& nums, int target);
+
+    /// <summary>
+    /// Leet Code 2771. Longest Non-decreasing Subarray From Two Arrays
+    /// 
+    /// Medium
+    ///
+    /// You are given two 0-indexed integer arrays nums1 and nums2 of length n.
+    ///
+    /// Let's define another 0-indexed integer array, nums3, of length n. For 
+    /// each index i in the range [0, n - 1], you can assign either nums1[i] 
+    /// or nums2[i] to nums3[i].
+    ///
+    /// Your task is to maximize the length of the longest non-decreasing 
+    /// subarray in nums3 by choosing its values optimally.
+    ///
+    /// Return an integer representing the length of the longest 
+    /// non-decreasing subarray in nums3.
+    ///
+    /// Note: A subarray is a contiguous non-empty sequence of elements 
+    /// within an array.
+    /// 
+    /// Example 1:
+    /// Input: nums1 = [2,3,1], nums2 = [1,2,1]
+    /// Output: 2
+    /// Explanation: One way to construct nums3 is: 
+    /// nums3 = [nums1[0], nums2[1], nums2[2]] => [2,2,1]. 
+    /// The subarray starting from index 0 and ending at index 1, [2,2], 
+    /// forms a non-decreasing subarray of length 2. 
+    /// We can show that 2 is the maximum achievable length.
+    ///
+    /// Example 2:
+    /// Input: nums1 = [1,3,2,1], nums2 = [2,2,3,4]
+    /// Output: 4
+    /// Explanation: One way to construct nums3 is: 
+    /// nums3 = [nums1[0], nums2[1], nums2[2], nums2[3]] => [1,2,3,4]. 
+    /// The entire array forms a non-decreasing subarray of length 4, making 
+    /// it the maximum achievable length.
+    ///
+    /// Example 3:
+    /// Input: nums1 = [1,1], nums2 = [2,2]
+    /// Output: 2
+    /// Explanation: One way to construct nums3 is: 
+    /// nums3 = [nums1[0], nums1[1]] => [1,1]. 
+    /// The entire array forms a non-decreasing subarray of length 2, making 
+    /// it the maximum achievable length.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums1.length == nums2.length == n <= 10^5
+    /// 2. 1 <= nums1[i], nums2[i] <= 10^9
+    /// </summary>
+    int maxNonDecreasingLength(vector<int>& nums1, vector<int>& nums2);
 };
 
 

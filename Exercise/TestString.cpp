@@ -6175,8 +6175,39 @@ void TestLeetCode2746(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2781(void)
+{
+    Logger::WriteMessage("Test Leet Code 2781");
+    LeetCodeString leetCode;
+    string word = "cbaaaabc";
+    vector<string> forbidden = { "aaa", "cb" };
+    int result = leetCode.longestValidSubstring(word,forbidden);
+    Logger::WriteMessage(forbidden);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "leetcode";
+    forbidden = { "de","le","e" };
+    result = leetCode.longestValidSubstring(word, forbidden);
+    Logger::WriteMessage(forbidden);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "acbc";
+    forbidden = { "cbc", "acb", "acb", "acbc" };
+    result = leetCode.longestValidSubstring(word, forbidden);
+    Logger::WriteMessage(forbidden);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "aaaabaaacc";
+    forbidden = { "bcca","aaa","aabaa","baaac" };
+    result = leetCode.longestValidSubstring(word, forbidden);
+    Logger::WriteMessage(forbidden);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+    
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2781();
     TestLeetCode2746();
     TestLeetCode2744();
     TestLeetCode2730();

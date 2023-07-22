@@ -1618,8 +1618,32 @@ void TestLeetCode2670(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2766(void)
+{
+    Logger::WriteMessage("Test Leet Code 2766");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1, 6, 7, 8 };
+    vector<int> moveFrom = { 1, 7, 2 };
+    vector<int> moveTo = { 2, 9, 5 };
+    vector<int> result = leetCode.relocateMarbles(nums, moveFrom, moveTo);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(moveFrom);
+    Logger::WriteMessage(moveTo);
+    Logger::WriteMessage(result);
+
+    nums = { 1,1,3,3 };
+    moveFrom = { 1,3 };
+    moveTo = { 2,2 };
+    result = leetCode.relocateMarbles(nums, moveFrom, moveTo);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(moveFrom);
+    Logger::WriteMessage(moveTo);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode2766();
     TestLeetCode2670();
     TestLeetCode2657();
     TestLeetCode217();

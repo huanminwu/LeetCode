@@ -22216,4 +22216,75 @@ int LeetCodeString::minimizeConcatenatedLength(vector<string>& words)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2781. Length of the Longest Valid Substring
+/// 
+/// Hard
+///
+/// You are given a string word and an array of strings forbidden.
+///
+/// A string is called valid if none of its substrings are present in 
+/// forbidden.
+///
+/// Return the length of the longest valid substring of the string word.
+/// A substring is a contiguous sequence of characters in a string, 
+/// possibly empty.
+/// 
+/// Example 1:
+/// Input: word = "cbaaaabc", forbidden = ["aaa","cb"]
+/// Output: 4
+/// Explanation: There are 9 valid substrings in word: "c", "b", "a", 
+/// "ba", "aa", "bc", "baa", "aab", and "aabc". The length of the 
+/// longest valid substring is 4. 
+/// It can be shown that all other substrings contain either "aaa" 
+/// or "cb" as a substring. 
+///
+/// Example 2:
+///
+/// Input: word = "leetcode", forbidden = ["de","le","e"]
+/// Output: 4
+/// Explanation: There are 11 valid substrings in word: "l", "t", "c", 
+/// "o", "d", "tc", "co", "od", "tco", "cod", and "tcod". The length of 
+/// the longest valid substring is 4.
+/// It can be shown that all other substrings contain either "de", "le", 
+/// or "e" as a substring. 
+///
+/// Constraints:
+/// 1. 1 <= word.length <= 10^5
+/// 2. word consists only of lowercase English letters.
+/// 3. 1 <= forbidden.length <= 10^5
+/// 4. 1 <= forbidden[i].length <= 10
+/// 5. forbidden[i] consists only of lowercase English letters.
+/// </summary>
+int LeetCodeString::longestValidSubstring(string word, vector<string>& forbidden)
+{
+    unordered_set<string> forbidden_set;
+    int len = 0;
+    for (size_t i = 0; i < forbidden.size(); i++)
+    {
+        string str = forbidden[i];
+        reverse(str.begin(), str.end());
+        forbidden_set.insert(str);
+        len = max(len, (int)str.size());
+    }
+    int left = -1;
+    int result = 0;
+    for (int right = 0; right < (int)word.size(); right++)
+    {
+        string str;
+        for (int k = 0; k < len; k++)
+        {
+            if (right - k < 0) break;
+            str.push_back(word[right - k]);
+            if (forbidden_set.count(str) > 0)
+            {
+                left = right - k;
+                break;
+            }
+        }
+        result = max(result, right - left);
+    }
+    return result;
+}
 #pragma endregion

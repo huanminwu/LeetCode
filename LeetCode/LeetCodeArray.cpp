@@ -27750,5 +27750,376 @@ int LeetCodeArray::houseCountII(Street* street, int k)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2765. Longest Alternating Subarray
+/// 
+/// Easy
+///
+/// You are given a 0-indexed integer array nums. A subarray s of length 
+/// m is called alternating if:
+///
+/// m is greater than 1.
+/// s1 = s0 + 1.
+/// The 0-indexed subarray s looks like [s0, s1, s0, s1,...,s(m-1) % 2]. In
+/// other words, s1 - s0 = 1, s2 - s1 = -1, s3 - s2 = 1, s4 - s3 = -1, and 
+/// so on up to s[m - 1] - s[m - 2] = (-1)m.
+/// Return the maximum length of all alternating subarrays present in 
+/// nums or -1 if no such subarray exists.
+///
+/// A subarray is a contiguous non-empty sequence of elements within an 
+/// array.
+///
+/// Example 1:
+/// Input: nums = [2,3,4,3,4]
+/// Output: 4
+/// Explanation: The alternating subarrays are [3,4], [3,4,3], and 
+/// [3,4,3,4]. The longest of these is [3,4,3,4], which is of length 4.
+///
+/// Example 2:
+///
+/// Input: nums = [4,5,6]
+/// Output: 2
+/// Explanation: [4,5] and [5,6] are the only two alternating subarrays. 
+/// They are both of length 2.
+///
+///
+/// Constraints:
+/// 1. 2 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 10^4
+/// </summary>
+int LeetCodeArray::alternatingSubarray(vector<int>& nums)
+{
+    int result = -1;
+    int count = 0;
+    int prev = -1;
+    for (size_t i = 1; i < nums.size(); i++)
+    {
+        if (nums[i] == nums[i - 1] + 1)
+        {
+            if (prev == -1)
+            {
+                count++;
+            }
+            else
+            {
+                count = 1;
+            }
+            prev = 1;
+        }
+        else if (nums[i] == nums[i - 1] - 1)
+        {
+            if (prev == 1)
+            {
+                count++;
+            }
+            else
+            {
+                count = 0;
+            }
+            prev = -1;
+        }
+        else
+        {
+            count = 0;
+            prev = -1;
+        }
+        if (count > 0)  result = max(result, count + 1);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2768. Number of Black Blocks
+/// 
+/// Medium
+///
+/// You are given two integers m and n representing the dimensions of a 
+/// 0-indexed m x n grid.
+///
+/// You are also given a 0-indexed 2D integer matrix coordinates, where 
+/// coordinates[i] = [x, y] indicates that the cell with coordinates 
+/// [x, y] is colored black. All cells in the grid that do not appear 
+/// in coordinates are white.
+///
+/// A block is defined as a 2 x 2 submatrix of the grid. More 
+/// formally, a block with cell [x, y] as its top-left corner 
+/// where 0 <= x < m - 1 and 0 <= y < n - 1 contains the coordinates 
+/// [x, y], [x + 1, y], [x, y + 1], and [x + 1, y + 1].
+///
+/// Return a 0-indexed integer array arr of size 5 such that arr[i] 
+/// is the number of blocks that contains exactly i black cells.
+///
+/// Example 1:
+/// Input: m = 3, n = 3, coordinates = [[0,0]]
+/// Output: [3,1,0,0,0]
+/// Explanation: The grid looks like this:
+/// 
+/// There is only 1 block with one black cell, and it is the block 
+/// starting with cell [0,0].
+/// The other 3 blocks start with cells [0,1], [1,0] and [1,1]. They all 
+/// have zero black cells.  
+/// Thus, we return [3,1,0,0,0]. 
+///
+/// Example 2:
+/// Input: m = 3, n = 3, coordinates = [[0,0],[1,1],[0,2]]
+/// Output: [0,2,2,0,0]
+/// Explanation: The grid looks like this:
+/// There are 2 blocks with two black cells (the ones starting with cell 
+/// coordinates [0,0] and [0,1]).
+/// The other 2 blocks have starting cell coordinates of [1,0] and [1,1]. 
+/// They both have 1 black cell.
+/// Therefore, we return [0,2,2,0,0].
+///  
+/// Constraints:
+/// 1. 2 <= m <= 10^5
+/// 2. 2 <= n <= 10^5
+/// 3. 0 <= coordinates.length <= 10^4
+/// 4. coordinates[i].length == 2
+/// 5. 0 <= coordinates[i][0] < m
+/// 6. 0 <= coordinates[i][1] < n
+/// 7. It is guaranteed that coordinates contains pairwise distinct 
+///    coordinates.
+/// </summary>
+vector<long long> LeetCodeArray::countBlackBlocks(int m, int n, vector<vector<int>>& coordinates)
+{
+    unordered_map<int, unordered_map<int, int>> matrix;
+    for (size_t i = 0; i < coordinates.size(); i++)
+    {
+        int x = coordinates[i][0];
+        int y = coordinates[i][1];
+        matrix[x][y]++;
+        if (x > 0) matrix[x - 1][y]++;
+        if (y > 0) matrix[x][y - 1]++;
+        if (x > 0 && y > 0) matrix[x - 1][y - 1]++;
+    }
+    vector<long long> result(5);
+    for (auto& itr_1 : matrix)
+    {
+        int x = itr_1.first;
+        for (auto& itr2 : matrix[x])
+        {
+            int y = itr2.first;
+            int z = itr2.second;
+            if (z > 4) continue;
+            if (x < m - 1 && y < n - 1)
+            {
+                result[z]++;
+            }
+        }
+    }
+    result[0] = (long long)(m - 1) * (long long)(n - 1);
+    for (int i = 1; i < 5; i++)
+    {
+        result[0] -= result[i];
+    }
+    return result;
+}
+/// <summary>
+/// Leet Code 2780. Minimum Index of a Valid Split
+/// 
+/// Medium
+///
+/// An element x of an integer array arr of length m is dominant if 
+/// freq(x) * 2 > m, where freq(x) is the number of occurrences of x 
+/// in arr. Note that this definition implies that arr can have at 
+/// most one dominant element.
+///
+/// You are given a 0-indexed integer array nums of length n with one 
+/// dominant element.
+///
+/// You can split nums at an index i into two arrays nums[0, ..., i] and 
+/// nums[i + 1, ..., n - 1], but the split is only valid if:
+///
+/// 0 <= i < n - 1
+/// nums[0, ..., i], and nums[i + 1, ..., n - 1] have the same dominant 
+/// element.
+/// Here, nums[i, ..., j] denotes the subarray of nums starting at index i 
+/// and ending at index j, both ends being inclusive. Particularly, 
+/// if j < i then nums[i, ..., j] denotes an empty subarray.
+///
+/// Return the minimum index of a valid split. If no valid split exists, 
+/// return -1.
+///
+/// Example 1:
+/// Input: nums = [1,2,2,2]
+/// Output: 2
+/// Explanation: We can split the array at index 2 to obtain 
+/// arrays [1,2,2] and [2]. 
+/// In array [1,2,2], element 2 is dominant since it occurs twice in the 
+/// array and 2 * 2 > 3. 
+/// In array [2], element 2 is dominant since it occurs once in the array 
+/// and 1 * 2 > 1.
+/// Both [1,2,2] and [2] have the same dominant element as nums, so this 
+/// is a valid split. 
+/// It can be shown that index 2 is the minimum index of a valid split. 
+///
+/// Example 2:
+/// Input: nums = [2,1,3,1,1,1,7,1,2,1]
+/// Output: 4
+/// Explanation: We can split the array at index 4 to obtain arrays 
+/// [2,1,3,1,1] and [1,7,1,2,1].
+/// In array [2,1,3,1,1], element 1 is dominant since it occurs thrice in 
+/// the array and 3 * 2 > 5.
+/// In array [1,7,1,2,1], element 1 is dominant since it occurs thrice in 
+/// the array and 3 * 2 > 5.
+/// Both [2,1,3,1,1] and [1,7,1,2,1] have the same dominant element as 
+/// nums, so this is a valid split.
+/// It can be shown that index 4 is the minimum index of a valid split.
+///
+/// Example 3:
+/// Input: nums = [3,3,3,3,7,2,2]
+/// Output: -1
+/// Explanation: It can be shown that there is no valid split.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. nums has exactly one dominant element.
+/// </summary>
+int LeetCodeArray::minimumIndex(vector<int>& nums)
+{
+    int n = nums.size();
+    unordered_map<int, int> num_count;
+    for (auto x : nums) num_count[x]++;
+    int val = 0;
+    int count = 0;
+    for (auto itr : num_count)
+    {
+        if (itr.second * 2 > n)
+        {
+            val = itr.first;
+            count = itr.second;
+            break;
+        }
+    }
+    int left = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        if (nums[i-1] == val) left++;
+        if (left * 2 > i && (count - left) * 2 > (n - i))
+        {
+            return i - 1;
+
+        }
+    }
+    return -1;
+}
+
+/// <summary>
+/// Leet Code 2772. Apply Operations to Make All Array Elements Equal to 
+///                 Zero
+/// 
+/// Medium
+///
+/// You are given a 0-indexed integer array nums and a positive integer k.
+///
+/// You can apply the following operation on the array any number of times:
+/// 
+/// Choose any subarray of size k from the array and decrease all its 
+/// elements by 1.
+/// Return true if you can make all the array elements equal to 0, or false 
+/// otherwise.
+///
+/// A subarray is a contiguous non-empty part of an array.
+///
+/// Example 1:
+/// Input: nums = [2,2,3,1,1,0], k = 3
+/// Output: true
+/// Explanation: We can do the following operations:
+/// - Choose the subarray [2,2,3]. The resulting array will be 
+///   nums = [1,1,2,1,1,0].
+/// - Choose the subarray [2,1,1]. The resulting array will be 
+///   nums = [1,1,1,0,0,0].
+/// - Choose the subarray [1,1,1]. The resulting array will be 
+///   nums = [0,0,0,0,0,0].
+//
+/// Example 2:
+/// Input: nums = [1,3,1,1], k = 2
+/// Output: false
+/// Explanation: It is not possible to make all the array 
+/// elements equal to 0.
+/// 
+/// Constraints:
+/// 1. 1 <= k <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^6
+/// </summary>
+bool LeetCodeArray::checkArray(vector<int>& nums, int k)
+{
+    int sum = 0;
+    vector<int> delta(nums.size());
+    int n = nums.size();
+    for (int i = 0; i < (int)nums.size(); i++)
+    {
+        if (i >= k) sum -= delta[i - k];
+        if (nums[i] < sum) return false;
+        if (nums[i] > sum && n - i < k) return false;
+        delta[i] = nums[i] - sum;
+        sum = nums[i];
+    }
+    return true;
+}
+/// <summary>
+/// Leet Code 2782. Number of Unique Categories
+/// 
+/// Medium
+///
+/// You are given an integer n and an object categoryHandler of class 
+/// CategoryHandler.
+///
+/// There are nelements, numbered from 0 to n - 1. Each element has a 
+/// category, and your task is to find the number of unique categories.
+///
+/// The class CategoryHandler contains the following function, which may 
+/// help you:
+///
+/// boolean haveSameCategory(integer a, integer b): Returns true if a and 
+/// b are in the same category and false otherwise. Also, if either a or 
+/// b is not a valid number (i.e. it's greater than or equal to nor less 
+/// than 0), it returns false.
+/// Return the number of unique categories.
+/// 
+/// Example 1:
+/// Input: n = 6, catagoryHandler = [1,1,2,2,3,3]
+/// Output: 3
+/// Explanation: There are 6 elements in this example. The first two 
+/// elements belong to category 1, the second two belong to category 2, 
+/// and the last two elements belong to category 3. So there are 3 unique 
+/// categories.
+///
+/// Example 2:
+/// Input: n = 5, catagoryHandler = [1,2,3,4,5]
+/// Output: 5
+/// Explanation: There are 5 elements in this example. Each element 
+/// belongs to a unique category. So there are 5 unique categories.
+///
+/// Example 3:
+/// Input: n = 3, catagoryHandler = [1,1,1]
+/// Output: 1
+/// Explanation: There are 3 elements in this example. All of them belong 
+/// to one category. So there is only 1 unique category.
+///
+///
+/// Constraints:
+/// 1. 1 <= n <= 100
+/// </summary>
+int LeetCodeArray::numberOfCategories(int n, vector<int>& categoryHandler)
+{
+    vector<int> arr;
+    for (int i = 0; i < n; i++)
+    {
+        bool same = false;
+        for (size_t j = 0; j < arr.size(); j++)
+        {
+            if (categoryHandler[arr[j]] == categoryHandler[i])
+            {
+                same = true;
+                break;
+            }
+        }
+        if (same == false) arr.push_back(i);
+    }
+    return arr.size();
+}
 #pragma endregion
 

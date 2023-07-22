@@ -375,8 +375,28 @@ void TestLeetCode2762(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2779(void)
+{
+    Logger::WriteMessage("Test Leet Code 2779");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 4, 6, 1, 2 };
+    int k = 2;
+    int result = leetCode.maximumBeauty(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1,1 };
+    k = 10;
+    result = leetCode.maximumBeauty(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2779();
     TestLeetCode2762();
     TestLeetCode2743();
     TestLeetCode2555();

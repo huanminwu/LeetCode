@@ -3709,8 +3709,87 @@ void TestLeetCode2742(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2767(void)
+{
+    Logger::WriteMessage("Test Leet Code 2767");
+    LeetCodeDP leetCode;
+    string s = "1011";
+    int result = leetCode.minimumBeautifulSubstrings(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "111";
+    result = leetCode.minimumBeautifulSubstrings(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "0";
+    result = leetCode.minimumBeautifulSubstrings(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2770(void)
+{
+    Logger::WriteMessage("Test Leet Code 2770");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 3, 6, 4, 1, 2 };
+    int target = 2;
+    int result = leetCode.maximumJumps(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { 1,3,6,4,1,2 };
+    target = 3;
+    result = leetCode.maximumJumps(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { 1,3,6,4,1,2 };
+    target = 0;
+    result = leetCode.maximumJumps(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2771(void)
+{
+    Logger::WriteMessage("Test Leet Code 2771");
+    LeetCodeDP leetCode;
+    vector<int> nums1 = { 2, 3, 1 };
+    vector<int> nums2 = { 1, 2, 1 };
+    int result = leetCode.maxNonDecreasingLength(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1, 3, 2, 1 };
+    nums2 = { 2, 2, 3, 4 };
+    result = leetCode.maxNonDecreasingLength(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1, 1 };
+    nums2 = { 2, 2 };
+    result = leetCode.maxNonDecreasingLength(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 14, 4 };
+    nums2 = { 2, 13 };
+    result = leetCode.maxNonDecreasingLength(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2771();
+    TestLeetCode2770();
+    TestLeetCode2767();
     TestLeetCode2742();
     TestLeetCode2712();
     TestLeetCode2707();

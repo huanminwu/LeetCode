@@ -6067,8 +6067,40 @@ void TestLeetCode2761(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2769(void)
+{
+    Logger::WriteMessage("Test Leet Code 2769");
+    LeetCodeMath leetCode;
+    int num = 4;
+    int t = 1;
+    int result = leetCode.theMaximumAchievableX(num, t);
+    Logger::WriteMessage("num = " + to_string(num) + "; t = " + to_string(t) + "; result = " + to_string(result));
+
+    num = 3;
+    t = 2;
+    result = leetCode.theMaximumAchievableX(num, t);
+    Logger::WriteMessage("num = " + to_string(num) + "; t = " + to_string(t) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2778(void)
+{
+    Logger::WriteMessage("Test Leet Code 2778");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 2, 3, 4 };
+    int result = leetCode.sumOfSquares(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,7,1,19,18,3 };
+    result = leetCode.sumOfSquares(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2778();
+    TestLeetCode2769();
     TestLeetCode2761();
     TestLeetCode2749();
     TestLeetCode2745();

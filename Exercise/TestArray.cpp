@@ -8996,9 +8996,118 @@ void TestLeetCode2753(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2765(void)
+{
+    Logger::WriteMessage("Test Leet Code 2765");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 3, 4, 3, 4 };
+    int result = leetCode.alternatingSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4, 5, 6 };
+    result = leetCode.alternatingSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4, 5, 7, 6,7, 6 };
+    result = leetCode.alternatingSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2768(void)
+{
+    Logger::WriteMessage("Test Leet Code 2768");
+    LeetCodeArray leetCode;
+    int m = 3, n = 3;
+    vector<vector<int>> coordinates =
+    {
+        {0, 0}
+    };
+    vector<long long> result = leetCode.countBlackBlocks(m, n, coordinates);
+    Logger::WriteMessage(coordinates);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    m = 3, n = 3;
+    coordinates =
+    {
+        {0, 0},{1, 1},{0, 2}
+    };
+    result = leetCode.countBlackBlocks(m, n, coordinates);
+    Logger::WriteMessage(coordinates);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2780(void)
+{
+    Logger::WriteMessage("Test Leet Code 2780");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 2, 2 };
+    int result = leetCode.minimumIndex(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,1,3,1,1,1,7,1,2,1 };
+    result = leetCode.minimumIndex(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,3,3,3,7,2,2 };
+    result = leetCode.minimumIndex(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2772(void)
+{
+    Logger::WriteMessage("Test Leet Code 2772");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2,2,3,1,1,0 };
+    int k = 3;
+    bool result = leetCode.checkArray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,3,1,1 };
+    k = 2;
+    result = leetCode.checkArray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2782(void)
+{
+    Logger::WriteMessage("Test Leet Code 2782");
+    LeetCodeArray leetCode;
+    int n = 6;
+    vector<int> catagoryHandler = { 1, 1, 2, 2, 3, 3 };
+    int result = leetCode.numberOfCategories(n, catagoryHandler);
+    Logger::WriteMessage(catagoryHandler);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 5;
+    catagoryHandler = { 1,2,3,4,5 };
+    result = leetCode.numberOfCategories(n, catagoryHandler);
+    Logger::WriteMessage(catagoryHandler);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    catagoryHandler = { 1,1,1 };
+    result = leetCode.numberOfCategories(n, catagoryHandler);
+    Logger::WriteMessage(catagoryHandler);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
 
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2782();
+    TestLeetCode2772();
+    TestLeetCode2780();
+    TestLeetCode2768();
+    TestLeetCode2765();
     TestLeetCode2753();
     TestLeetCode2760();
     TestLeetCode2750();
