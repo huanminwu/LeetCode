@@ -8941,6 +8941,86 @@ int LeetCodeDFS::specialPerm(vector<int>& nums)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2787. Ways to Express an Integer as Sum of Powers
+/// </summary>
+int LeetCodeDFS::numberOfWays(int n, int index, vector<int>& power, vector<vector<int>>& cache)
+{
+    long long M = 1000000007;
+    if (n == 0)
+    {
+        return 1;
+    }
+    else if (cache[index][n] != -1) 
+    {
+        return cache[index][n];
+    }
+    else if (power[index] > n)
+    {
+        cache[index][n] = 0;
+        return 0;
+    }
+    cache[index][n] = numberOfWays(n - power[index], index + 1, power, cache);
+    if (n > power[index])
+    {
+        cache[index][n] += numberOfWays(n, index + 1, power, cache);
+    }
+    cache[index][n] %= M;
+    return cache[index][n];
+}
+
+/// <summary>
+/// Leet Code 2787. Ways to Express an Integer as Sum of Powers
+/// 
+/// Medium
+///
+/// Given two positive integers n and x.
+///
+/// Return the number of ways n can be expressed as the sum of the xth 
+/// power of unique positive integers, in other words, the number of sets 
+/// of unique integers [n1, n2, ..., nk] where n = n1^x + n2^x + ... + nk^x.
+///
+/// Since the result can be very large, return it modulo 10^9 + 7.
+///
+/// For example, if n = 160 and x = 3, one way to express n is 
+/// n = 23 + 33 + 53.
+///
+/// Example 1:
+/// Input: n = 10, x = 2
+/// Output: 1
+/// Explanation: We can express n as the following: n = 3^2 + 1^2 = 10.
+/// It can be shown that it is the only way to express 10 as the sum of the 
+/// 2nd power of unique integers.
+///
+/// Example 2:
+///
+/// Input: n = 4, x = 1
+/// Output: 2
+/// Explanation: We can express n in the following ways:
+/// - n = 4^1 = 4.
+/// - n = 3^1 + 1^1 = 4.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 300
+/// 2. 1 <= x <= 5
+/// </summary>
+int LeetCodeDFS::numberOfWays(int n, int x)
+{
+    vector<int> power(n + 1);
+    for (int i = 1; i <= n; i++)
+    {
+        power[i] = 1;
+        for (int j = 0; j < x; j++)
+        {
+            power[i] = power[i] * i;
+        }
+        if (power[i] > n) break;
+    }
+    vector<vector<int>> cache(n + 1, vector<int>(n + 1, -1));
+    int result = numberOfWays(n, 1, power, cache);
+    return result;
+}
+
 #pragma endregion
 
 

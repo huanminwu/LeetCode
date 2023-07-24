@@ -1882,8 +1882,24 @@ void TestLeetCode2741(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2787(void)
+{
+    Logger::WriteMessage("Test Leet Code 2787");
+    LeetCodeDFS leetCode;
+    int n = 10, x = 2;
+    int result = leetCode.numberOfWays(n, x);
+    Logger::WriteMessage("n = " + to_string(n) + "; x = " + to_string(x));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4, x = 1;
+    result = leetCode.numberOfWays(n, x);
+    Logger::WriteMessage("n = " + to_string(n) + "; x = " + to_string(x));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2787();
     TestLeetCode2741();
     TestLeetCode2664();
     TestLeetCode2597();

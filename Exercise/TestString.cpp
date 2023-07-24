@@ -6205,8 +6205,50 @@ void TestLeetCode2781(void)
     
 }
 
+void TestLeetCode2785(void)
+{
+    Logger::WriteMessage("Test Leet Code 2785");
+    LeetCodeString leetCode;
+    string s = "lEetcOde";
+    string result = leetCode.sortVowels(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "lYmpH";
+    result = leetCode.sortVowels(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
+void TestLeetCode2788(void)
+{
+    Logger::WriteMessage("Test Leet Code 2788");
+    LeetCodeString leetCode;
+    vector<string> words = { "one.two.three", "four.five", "six" };
+    char separator = '.';
+    vector<string> result = leetCode.splitWordsBySeparator(words, separator);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("separator = " + string(1, separator));
+    Logger::WriteMessage(result);
+
+    words = { "$easy$","$problem$" };
+    separator = '$';
+    result = leetCode.splitWordsBySeparator(words, separator);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("separator = " + string(1, separator));
+    Logger::WriteMessage(result);
+
+
+    words = { "|||" };
+    separator = '|';
+    result = leetCode.splitWordsBySeparator(words, separator);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("separator = " + string(1, separator));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2788();
+    TestLeetCode2785();
     TestLeetCode2781();
     TestLeetCode2746();
     TestLeetCode2744();

@@ -28121,5 +28121,141 @@ int LeetCodeArray::numberOfCategories(int n, vector<int>& categoryHandler)
     }
     return arr.size();
 }
+
+/// <summary>
+/// Leet Code 2784. Check if Array is Good
+/// 
+/// Easy
+///
+/// You are given an integer array nums. We consider an array good if it 
+/// is a permutation of an array base[n].
+///
+/// base[n] = [1, 2, ..., n - 1, n, n] (in other words, it is an array 
+/// of length n + 1 which contains 1 to n - 1 exactly once, plus two 
+/// occurrences of n). For example, base[1] = [1, 1] and 
+/// base[3] = [1, 2, 3, 3].
+///
+/// Return true if the given array is good, otherwise return false.
+///
+/// Note: A permutation of integers represents an arrangement of these 
+/// numbers.
+///
+/// Example 1:
+/// Input: nums = [2, 1, 3]
+/// Output: false
+/// Explanation: Since the maximum element of the array is 3, the only 
+/// candidate n for which this array could be a permutation of base[n], 
+/// is n = 3. However, base[3] has four elements but array nums has 
+/// three. Therefore, it can not be a permutation of base[3] = 
+/// [1, 2, 3, 3]. So the answer is false.
+///
+/// Example 2:
+/// Input: nums = [1, 3, 3, 2]
+/// Output: true
+/// Explanation: Since the maximum element of the array is 3, the only 
+/// candidate n for which this array could be a permutation of base[n], 
+/// is n = 3. It can be seen that nums is a permutation of base[3] = 
+/// [1, 2, 3, 3] (by swapping the second and fourth elements in nums, 
+/// we reach base[3]). Therefore, the answer is true.
+///
+/// Example 3:
+/// Input: nums = [1, 1]
+/// Output: true
+/// Explanation: Since the maximum element of the array is 1, the only 
+/// candidate n for which this array could be a permutation of base[n], 
+/// is n = 1. It can be seen that nums is a permutation of 
+/// base[1] = [1, 1]. Therefore, the answer is true.
+///
+/// Example 4:
+/// Input: nums = [3, 4, 4, 1, 2, 1]
+/// Output: false
+/// Explanation: Since the maximum element of the array is 4, the only 
+/// candidate n for which this array could be a permutation of base[n], 
+/// is n = 4. However, base[4] has five elements but array nums has six. 
+/// Therefore, it can not be a permutation of base[4] = [1, 2, 3, 4, 4]. 
+/// So the answer is false.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= num[i] <= 200
+/// </summary>
+bool LeetCodeArray::isGood(vector<int>& nums)
+{
+    vector<int> dp(201);
+    for (int x : nums) dp[x]++;
+    int n = nums.size() - 1;
+    for (int i = 1; i < n; i++)
+    {
+        if (dp[i] != 1) return false;
+    }
+    if (dp[n] != 2) return false;
+    return true;
+}
+
+/// <summary>
+/// Leet Code 2789. Largest Element in an Array after Merge Operations
+/// 
+/// Medium
+///
+/// You are given a 0-indexed array nums consisting of positive integers.
+///
+/// You can do the following operation on the array any number of times:
+///
+/// Choose an integer i such that 0 <= i < nums.length - 1 and 
+/// nums[i] <= nums[i + 1]. Replace the element nums[i + 1] with 
+/// nums[i] + nums[i + 1] and delete the element nums[i] from the array.
+/// Return the value of the largest element that you can possibly obtain 
+/// in the final array.
+///
+/// Example 1:
+/// Input: nums = [2,3,7,9,3]
+/// Output: 21
+/// Explanation: We can apply the following operations on the array:
+/// - Choose i = 0. The resulting array will be nums = [5,7,9,3].
+/// - Choose i = 1. The resulting array will be nums = [5,16,3].
+/// - Choose i = 0. The resulting array will be nums = [21,3].
+/// The largest element in the final array is 21. It can be shown that 
+/// we cannot obtain a larger element.
+///
+/// Example 2:
+/// Input: nums = [5,3,3]
+/// Output: 11
+/// Explanation: We can do the following operations on the array:
+/// - Choose i = 1. The resulting array will be nums = [5,6].
+/// - Choose i = 0. The resulting array will be nums = [11].
+/// There is only one element in the final array, which is 11.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^6
+/// </summary>
+long long LeetCodeArray::maxArrayValue(vector<int>& nums)
+{
+    long long sum = 0;
+    vector<int> arr = nums;
+    long long result = 0;
+    while (!arr.empty())
+    {
+        if (sum == 0)
+        {
+            sum = arr.back();
+            arr.pop_back();
+        }
+        else
+        {
+            if (sum >= arr.back())
+            {
+                sum += arr.back();
+                arr.pop_back();
+            }
+            else
+            {
+                sum = 0;
+            }
+        }
+        result = max(result, sum);
+    }
+    return result;
+}
 #pragma endregion
 

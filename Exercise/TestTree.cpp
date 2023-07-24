@@ -3794,7 +3794,6 @@ void TestLeetCode2764(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
-
 void TestLeetCode2773(void)
 {
     Logger::WriteMessage("Test Leet Code 2773");
@@ -3821,8 +3820,26 @@ void TestLeetCode2773(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode2791(void)
+{
+    Logger::WriteMessage("Test Leet Code 2791");
+    LeetCodeTree leetCode;
+    vector<int> parent = { -1, 0, 0, 1, 1, 2 }; 
+    string s = "acaabc";
+    long long result = leetCode.countPalindromePaths(parent, s);
+    Logger::WriteMessage(parent);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = { -1, 0, 0, 0, 0 };
+    s = "aaaaa";
+    result = leetCode.countPalindromePaths(parent, s);
+    Logger::WriteMessage(parent);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode2791();
     TestLeetCode2773();
     TestLeetCode2764();
     TestLeetCode2673();

@@ -9101,8 +9101,50 @@ void TestLeetCode2782(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2784(void)
+{
+    Logger::WriteMessage("Test Leet Code 2784");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 1, 3 };
+    bool result = leetCode.isGood(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1, 3, 3, 2 };
+    result = leetCode.isGood(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result? "true" : "false"));
+
+    nums = { 1, 1 };
+    result = leetCode.isGood(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 3, 4, 4, 1, 2, 1 };
+    result = leetCode.isGood(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2789(void)
+{
+    Logger::WriteMessage("Test Leet Code 2789");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 3, 7, 9, 3 };
+    long long result = leetCode.maxArrayValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,3,3 };
+    result = leetCode.maxArrayValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2789();
+    TestLeetCode2784();
     TestLeetCode2782();
     TestLeetCode2772();
     TestLeetCode2780();

@@ -3785,8 +3785,26 @@ void TestLeetCode2771(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2786(void)
+{
+    Logger::WriteMessage("Test Leet Code 2786");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 2,3,6,1,9,2 };
+    int x = 5;
+    long long result = leetCode.maxScore(nums, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,4,6,8 };
+    x = 3;
+    result = leetCode.maxScore(nums, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2786();
     TestLeetCode2771();
     TestLeetCode2770();
     TestLeetCode2767();

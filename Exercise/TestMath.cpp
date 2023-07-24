@@ -6097,8 +6097,40 @@ void TestLeetCode2778(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2790(void)
+{
+    Logger::WriteMessage("Test Leet Code 2790");
+    LeetCodeMath leetCode;
+    vector<int> usageLimits = { 1, 2, 5 };
+    int result = leetCode.maxIncreasingGroups(usageLimits);
+    Logger::WriteMessage(usageLimits);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    usageLimits = { 2,1,2 };
+    result = leetCode.maxIncreasingGroups(usageLimits);
+    Logger::WriteMessage(usageLimits);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    usageLimits = { 1,1 };
+    result = leetCode.maxIncreasingGroups(usageLimits);
+    Logger::WriteMessage(usageLimits);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    usageLimits = { 2,2,2 };
+    result = leetCode.maxIncreasingGroups(usageLimits);
+    Logger::WriteMessage(usageLimits);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    usageLimits = { 3,1,1 };
+    result = leetCode.maxIncreasingGroups(usageLimits);
+    Logger::WriteMessage(usageLimits);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2790();
     TestLeetCode2778();
     TestLeetCode2769();
     TestLeetCode2761();

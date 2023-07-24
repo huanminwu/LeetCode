@@ -142,8 +142,8 @@ public:
     /// <summary>
     /// Leet code #17. Letter Combinations of a Phone Number 
     /// </summary>
-    void letterCombinations(string& digits, string& path, 
-        unordered_map<char, string> &phone_keyboard, vector<string>& result);
+    void letterCombinations(string& digits, string& path,
+        unordered_map<char, string>& phone_keyboard, vector<string>& result);
 
     /// <summary>
     /// Leet code #17. Letter Combinations of a Phone Number
@@ -169,7 +169,7 @@ public:
     /// <summary>
     /// Leet code #22. Generate Parentheses 
     /// </summary>
-    void generateParenthesis(string& path, int n, int left, 
+    void generateParenthesis(string& path, int n, int left,
         int right, vector<string>& result);
 
     /// <summary>
@@ -294,7 +294,7 @@ public:
     /// <summary>
     /// Leet code #40. Combination Sum II
     /// </summary>
-    void combinationSum2(vector<int>& candidates, int target, int index, 
+    void combinationSum2(vector<int>& candidates, int target, int index,
         vector<int>& path, vector<vector<int>>& result);
 
     /// <summary>
@@ -522,7 +522,7 @@ public:
     /// All words contain only lowercase alphabetic characters.
     /// </summary>
     vector<vector<string>> findLadders(string beginWord, string endWord,
-        unordered_set<string> &wordList);
+        unordered_set<string>& wordList);
 
 
     /// <summary>
@@ -576,8 +576,8 @@ public:
     /// <summary>
     /// Leet code #329. Longest Increasing Path in a Matrix
     /// </summary>
-    int longestIncreasingPath(vector<vector<int>>& matrix, 
-        vector<vector<int>>& path, vector<vector<int>>& directions, 
+    int longestIncreasingPath(vector<vector<int>>& matrix,
+        vector<vector<int>>& path, vector<vector<int>>& directions,
         int i, int j);
 
     /// <summary>
@@ -816,7 +816,7 @@ public:
     /// <summary>
     /// Leet code #1240. Tiling a Rectangle with the Fewest Squares
     /// </summary>
-    int tilingRectangle(int n, int m, vector<int>& heights, unordered_map<long long, int>&shape, int count, int result);
+    int tilingRectangle(int n, int m, vector<int>& heights, unordered_map<long long, int>& shape, int count, int result);
 
     /// <summary>
     /// Leet code #1240. Tiling a Rectangle with the Fewest Squares
@@ -848,7 +848,7 @@ public:
     /// </summary>
     int tilingRectangle(int n, int m);
 
- 
+
     /// <summary>
     /// Leetcode #1307. Verbal Arithmetic Puzzle
     /// </summary>
@@ -952,7 +952,7 @@ public:
     /// <summary>
     /// Leet code #1349. Maximum Students Taking Exam
     /// </summary>
-    int maxStudents(vector<vector<char>>& seats, int level, vector<vector<int>> &cache);
+    int maxStudents(vector<vector<char>>& seats, int level, vector<vector<int>>& cache);
 
     /// <summary>
     /// Leet code #1349. Maximum Students Taking Exam
@@ -1011,8 +1011,8 @@ public:
     /// <summary>
     /// Leet code #212. Word Search II
     /// </summary>
-    void wordSearchII(vector<vector<char>>& board, string& word, TrieNode * trie_node,
-        int x, int y, unordered_set<string> &result);
+    void wordSearchII(vector<vector<char>>& board, string& word, TrieNode* trie_node,
+        int x, int y, unordered_set<string>& result);
 
     /// <summary>
     /// Leet code #212. Word Search II
@@ -1041,7 +1041,7 @@ public:
     /// <summary>
     /// Leet code #425. Word Squares
     /// </summary>
-    void wordSquares(TrieNode *trie, vector<string>& wordSquare, vector<vector<string>>& result);
+    void wordSquares(TrieNode* trie, vector<string>& wordSquare, vector<vector<string>>& result);
 
     /// <summary>
     /// Leet code #425. Word Squares
@@ -1115,8 +1115,8 @@ public:
     /// Leet code #1397. Find All Good Strings
     /// </summary>
     int findGoodStrings(int index, string& s1, string& s2, string& evil,
-        int pre_s1, int pre_s2, int pre_evil, vector<int> &kmp,
-        vector<vector<vector<vector<int>>>> &cache);
+        int pre_s1, int pre_s2, int pre_evil, vector<int>& kmp,
+        vector<vector<vector<vector<int>>>>& cache);
 
     /// <summary>
     /// Leet code #1397. Find All Good Strings
@@ -1291,8 +1291,8 @@ public:
     /// <summary>
     /// Leet code #1595. Minimum Cost to Connect Two Groups of Points
     /// </summary>
-    int connectTwoGroups(vector<vector<int>>& cost, int index, vector<vector<int>>&cache, 
-        int mask, vector<int>& min_s1, vector<int> &min_s2);
+    int connectTwoGroups(vector<vector<int>>& cost, int index, vector<vector<int>>& cache,
+        int mask, vector<int>& min_s1, vector<int>& min_s2);
 
     /// <summary>
     /// Leet code #1595. Minimum Cost to Connect Two Groups of Points
@@ -1354,7 +1354,7 @@ public:
     /// Leet code #1593. Split a String Into the Max Number of Unique 
     ///                  Substrings
     /// </summary>
-    int maxUniqueSplit(string& s, vector<int> &dels, unordered_set<string>&set);
+    int maxUniqueSplit(string& s, vector<int>& dels, unordered_set<string>& set);
 
     /// <summary>
     /// Leet code #1593. Split a String Into the Max Number of Unique 
@@ -1525,8 +1525,8 @@ public:
     /// <summary>
     /// Leet code #1659. Maximize Grid Happiness
     /// </summary>
-    int getMaxGridHappiness(int m, int n, int pos, int introvertsCount, 
-        int extrovertsCount, int mask, vector<string> &grid, 
+    int getMaxGridHappiness(int m, int n, int pos, int introvertsCount,
+        int extrovertsCount, int mask, vector<string>& grid,
         vector<vector<vector<vector<int>>>>& cache);
 
     /// <summary>
@@ -1600,8 +1600,8 @@ public:
     /// <summary>
     /// Leet code #1681. Minimum Incompatibility
     /// </summary>
-    int minimumIncompatibility(vector<int>& nums, int k, vector<int>&path, int bitmask,
-        vector<int> &cache);
+    int minimumIncompatibility(vector<int>& nums, int k, vector<int>& path, int bitmask,
+        vector<int>& cache);
 
     /// <summary>
     /// Leet code #1681. Minimum Incompatibility
@@ -2154,8 +2154,8 @@ public:
     /// <summary>
     /// Leet code 1728. Cat and Mouse II
     /// </summary>
-    bool canMouseWin(vector<string>& grid, int catJump, int mouseJump, 
-        vector<int> &cat, vector<int>& mouse, vector<vector<int>>&dirs,
+    bool canMouseWin(vector<string>& grid, int catJump, int mouseJump,
+        vector<int>& cat, vector<int>& mouse, vector<vector<int>>& dirs,
         vector<int>& visited, int turn);
 
     /// <summary>
@@ -2232,7 +2232,7 @@ public:
     /// <summary>
     /// Leet code 1770. Maximum Score from Performing Multiplication Operations
     /// </summary>
-    int maximumScore(vector<int>& nums, vector<int>& multipliers, int left, int right, vector<vector<int>> &dp);
+    int maximumScore(vector<int>& nums, vector<int>& multipliers, int left, int right, vector<vector<int>>& dp);
 
     /// <summary>
     /// Leet code 1770. Maximum Score from Performing Multiplication Operations
@@ -2283,7 +2283,7 @@ public:
     /// <summary>
     /// Leet code 1799. Maximize Score After N Operations
     /// </summary>
-    int maxScore(vector<int>& nums, int bitmask, vector<int>&cache);
+    int maxScore(vector<int>& nums, int bitmask, vector<int>& cache);
 
     /// <summary>
     /// Leet code 1799. Maximize Score After N Operations
@@ -2330,9 +2330,9 @@ public:
     /// <summary>
     /// Leet code 1766. Tree of Coprimes 
     /// </summary>
-    void getCoprimes(vector<int>& nums, int node, unordered_map<int, unordered_set<int>>& tree, 
+    void getCoprimes(vector<int>& nums, int node, unordered_map<int, unordered_set<int>>& tree,
         unordered_map<int, vector<int>>& primes, vector<int>& visited,
-        unordered_map<int, list<pair<int, int>>>& ancestors, vector<int> &result, int level);
+        unordered_map<int, list<pair<int, int>>>& ancestors, vector<int>& result, int level);
 
     /// <summary>
     /// Leet code 1766. Tree of Coprimes 
@@ -2393,7 +2393,7 @@ public:
     /// <summary>
     /// Leet code 1815. Maximum Number of Groups Getting Fresh Donuts
     /// </summary>
-    int maxHappyGroups(int batchSize, int left, vector<int>& groups, int visited, unordered_map<int, int> &cache);
+    int maxHappyGroups(int batchSize, int left, vector<int>& groups, int visited, unordered_map<int, int>& cache);
 
     /// <summary>
     /// Leet code 1815. Maximum Number of Groups Getting Fresh Donuts
@@ -2540,7 +2540,7 @@ public:
     /// <summary>
     /// Leet code 1900. The Earliest and Latest Rounds Where Players Compete
     /// </summary>
-    void earliestAndLatest(int bitmask, int i, int j, int n, int first, int second, int round, vector<int> &result);
+    void earliestAndLatest(int bitmask, int i, int j, int n, int first, int second, int round, vector<int>& result);
 
     /// <summary>
     /// Leet code 1900. The Earliest and Latest Rounds Where Players Compete
@@ -2607,7 +2607,7 @@ public:
     /// <summary>
     /// Leet code 1931. Painting a Grid With Three Different Colors
     /// </summary>
-    int colorTheGrid(int i, int j, int m, int n, int value, vector<vector<int>>& grid, vector<vector<int>> &cache);
+    int colorTheGrid(int i, int j, int m, int n, int value, vector<vector<int>>& grid, vector<vector<int>>& cache);
 
     /// <summary>
     /// Leet code 1931. Painting a Grid With Three Different Colors
@@ -2821,7 +2821,7 @@ public:
     /// <summary>
     /// Leet code 1994. The Number of Good Subsets
     /// </summary>
-    long long numberOfGoodSubsets(vector<int>& dp, size_t index, int bit_mask, vector<int> &bit_masks, 
+    long long numberOfGoodSubsets(vector<int>& dp, size_t index, int bit_mask, vector<int>& bit_masks,
         long long count, long long& result);
 
 
@@ -2934,8 +2934,8 @@ public:
     /// <summary>
     /// Leet Code 1986. Minimum Number of Work Sessions to Finish the Tasks
     /// </summary>
-    int minSessions(vector<int>& tasks, int sessionTime, int bit_mask, 
-            int session_index, int curr_time, vector<vector<int>> &memo);
+    int minSessions(vector<int>& tasks, int sessionTime, int bit_mask,
+        int session_index, int curr_time, vector<vector<int>>& memo);
 
     /// <summary>
     /// Leet Code 1986. Minimum Number of Work Sessions to Finish the Tasks
@@ -2994,7 +2994,7 @@ public:
     /// Leet Code 1947. Maximum Compatibility Score Sum
     /// </summary>
     int maxCompatibilitySum(vector<vector<int>>& scores, int index, int bit_map, int score,
-        vector<int> &memo);
+        vector<int>& memo);
 
     /// <summary>
     /// Leet Code 1947. Maximum Compatibility Score Sum
@@ -3161,7 +3161,7 @@ public:
     /// Leet Code 2081. Sum of k-Mirror Numbers
     /// </summary>
     long long kMirrorGenerate(int digit, int n, int k, long long first_mul,
-        vector<long long>& mirror1, vector<long long> &mirror2);
+        vector<long long>& mirror1, vector<long long>& mirror2);
 
     /// <summary>
     /// Leet Code 2081. Sum of k-Mirror Numbers
@@ -3228,7 +3228,7 @@ public:
     /// Leet Code 2002. Maximum Product of the Length of Two Palindromic 
     ///                 Subsequences 
     /// </summary>
-    int maxProduct(string s, int index, string &s1, string& s2);
+    int maxProduct(string s, int index, string& s1, string& s2);
 
     /// <summary>
     /// Leet Code 2002. Maximum Product of the Length of Two Palindromic 
@@ -3440,7 +3440,7 @@ public:
     /// <summary>
     /// Leet Code 2172. Maximum AND Sum of Array
     /// </summary>
-    int maximumANDSum(vector<int>& nums, int numSlots, int index, int bit_mask, vector<int> &memory);
+    int maximumANDSum(vector<int>& nums, int numSlots, int index, int bit_mask, vector<int>& memory);
 
     /// <summary>
     /// Leet Code 2172. Maximum AND Sum of Array
@@ -3760,7 +3760,7 @@ public:
     /// <summary>
     /// Leet Code 2403. Minimum Time to Kill All Monsters
     /// </summary>
-    long long minimumTime(vector<int>& power, vector<long long>&memo, int bit, 
+    long long minimumTime(vector<int>& power, vector<long long>& memo, int bit,
         long long gain);
 
 
@@ -3834,7 +3834,7 @@ public:
     /// <summary>
     /// Leet Code 2572. Count the Number of Square-Free Subsets
     /// </summary>
-    int squareFreeSubsets(vector<int>& nums, vector<vector<int>> &dp, int index, int mask, vector<int> &prime);
+    int squareFreeSubsets(vector<int>& nums, vector<vector<int>>& dp, int index, int mask, vector<int>& prime);
 
     /// <summary>
     /// Leet Code 2572. Count the Number of Square-Free Subsets
@@ -3931,9 +3931,9 @@ public:
     /// <summary>
     /// Leet Code 2664. The Knight¡¯s Tour
     /// </summary>
-    bool tourOfKnight(int m, int n, int r, int c, 
+    bool tourOfKnight(int m, int n, int r, int c,
         vector<vector<int>>& board,
-        int seq, 
+        int seq,
         vector<vector<int>>& directions);
 
     /// <summary>
@@ -3982,7 +3982,7 @@ public:
     /// <summary>
     /// Leet Code 	2741. Special Permutations
     /// </summary>
-    int specialPerm(int k, int bits, vector<vector<int>> &neighbors, vector<vector<int>>& dp);
+    int specialPerm(int k, int bits, vector<vector<int>>& neighbors, vector<vector<int>>& dp);
 
     /// <summary>
     /// Leet Code 	2741. Special Permutations
@@ -4069,6 +4069,47 @@ public:
     /// </summary>
     int maximumJumps(vector<int>& nums, int target);
 
+    /// <summary>
+    /// Leet Code 2787. Ways to Express an Integer as Sum of Powers
+    /// </summary>
+    int numberOfWays(int n, int index, vector<int>&power, vector<vector<int>>& cache);
+
+    /// <summary>
+    /// Leet Code 2787. Ways to Express an Integer as Sum of Powers
+    /// 
+    /// Medium
+    ///
+    /// Given two positive integers n and x.
+    ///
+    /// Return the number of ways n can be expressed as the sum of the xth 
+    /// power of unique positive integers, in other words, the number of sets 
+    /// of unique integers [n1, n2, ..., nk] where n = n1^x + n2^x + ... + nk^x.
+    ///
+    /// Since the result can be very large, return it modulo 10^9 + 7.
+    ///
+    /// For example, if n = 160 and x = 3, one way to express n is 
+    /// n = 23 + 33 + 53.
+    ///
+    /// Example 1:
+    /// Input: n = 10, x = 2
+    /// Output: 1
+    /// Explanation: We can express n as the following: n = 3^2 + 1^2 = 10.
+    /// It can be shown that it is the only way to express 10 as the sum of the 
+    /// 2nd power of unique integers.
+    ///
+    /// Example 2:
+    ///
+    /// Input: n = 4, x = 1
+    /// Output: 2
+    /// Explanation: We can express n in the following ways:
+    /// - n = 4^1 = 4.
+    /// - n = 3^1 + 1^1 = 4.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 300
+    /// 2. 1 <= x <= 5
+    /// </summary>
+    int numberOfWays(int n, int x);
 #pragma endregion
 };
 

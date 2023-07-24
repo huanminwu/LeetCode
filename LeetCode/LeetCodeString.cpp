@@ -22275,7 +22275,7 @@ int LeetCodeString::longestValidSubstring(string word, vector<string>& forbidden
         string str;
         for (int k = 0; k < len; k++)
         {
-            if (right - k < 0) break;
+            if (right - k < 0 || right - k < left) break;
             str.push_back(word[right - k]);
             if (forbidden_set.count(str) > 0)
             {
@@ -22287,4 +22287,144 @@ int LeetCodeString::longestValidSubstring(string word, vector<string>& forbidden
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2785. Sort Vowels in a String
+/// 
+/// Medium
+///
+/// Given a 0-indexed string s, permute s to get a new string t such that:
+///
+/// All consonants remain in their original places. More formally, if 
+/// there is an index i with 0 <= i < s.length such that s[i] is a 
+/// consonant, then t[i] = s[i].
+/// The vowels must be sorted in the nondecreasing order of their ASCII 
+/// values. More formally, for pairs of indices i, j with 
+/// 0 <= i < j < s.length such that s[i] and s[j] are vowels, then t[i] 
+/// must not have a higher ASCII value than t[j].
+/// Return the resulting string.
+/// 
+/// The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in 
+/// lowercase or uppercase. Consonants comprise all letters that are not 
+/// vowels.
+///
+/// Example 1:
+/// Input: s = "lEetcOde"
+/// Output: "lEOtcede"
+/// Explanation: 'E', 'O', and 'e' are the vowels in s; 'l', 't', 'c', 
+/// and 'd' are all consonants. The vowels are sorted according to their 
+/// ASCII values, and the consonants remain in the same places.
+///
+/// Example 2:
+/// Input: s = "lYmpH"
+/// Output: "lYmpH"
+/// Explanation: There are no vowels in s (all characters in s are 
+/// consonants), so we return "lYmpH".
+///  
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists only of letters of the English alphabet in uppercase and 
+///     lowercase.
+/// </summary>
+string LeetCodeString::sortVowels(string s)
+{
+    unordered_set<char> vowels = { 'a', 'e', 'i', 'o', 'u' };
+    set<pair<char, int>> vowel_pairs;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (vowels.count(tolower(s[i])) > 0)
+        {
+            vowel_pairs.insert(make_pair(s[i], i));
+        }
+    }
+    string result = s;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (vowels.count(tolower(s[i])) > 0)
+        {
+            result[i] = vowel_pairs.begin()->first;
+            vowel_pairs.erase(vowel_pairs.begin());
+        }
+    }
+    return result;
+}
+/// <summary>
+/// Leet Code 2788. Split Strings by Separator
+/// 
+/// Easy
+///
+/// Given an array of strings words and a character separator, split each 
+/// string in words by separator.
+///
+/// Return an array of strings containing the new strings formed after the 
+/// splits, excluding empty strings.
+///
+/// Notes
+///
+/// separator is used to determine where the split should occur, but it is 
+/// not included as part of the resulting strings.
+/// A split may result in more than two strings.
+/// The resulting strings must maintain the same order as they were 
+/// initially given.
+///
+/// Example 1:
+/// Input: words = ["one.two.three","four.five","six"], separator = "."
+/// Output: ["one","two","three","four","five","six"]
+/// Explanation: In this example we split as follows:
+///
+/// "one.two.three" splits into "one", "two", "three"
+/// "four.five" splits into "four", "five"
+/// "six" splits into "six" 
+///
+/// Hence, the resulting array is ["one","two","three","four","five",
+/// "six"].
+/// Example 2:
+///
+/// Input: words = ["$easy$","$problem$"], separator = "$"
+/// Output: ["easy","problem"]
+/// Explanation: In this example we split as follows: 
+///
+/// "$easy$" splits into "easy" (excluding empty strings)
+/// "$problem$" splits into "problem" (excluding empty strings)
+///
+/// Hence, the resulting array is ["easy","problem"].
+///
+/// Example 3:
+///
+/// Input: words = ["|||"], separator = "|"
+/// Output: []
+/// Explanation: In this example the resulting split of "|||" will contain 
+/// only empty strings, so we return an empty array []. 
+///
+/// Constraints:
+/// 1. 1 <= words.length <= 100
+/// 2. 1 <= words[i].length <= 20
+/// 3. characters in words[i] are either lowercase English letters or 
+///    characters from the string ".,|$#@" (excluding the quotes)
+/// 4. separator is a character from the string ".,|$#@" (excluding the 
+///   quotes)
+/// </summary>
+vector<string> LeetCodeString::splitWordsBySeparator(vector<string>& words, char separator)
+{
+    vector<string> result;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        string word = words[i];
+        string str;
+        for (size_t j = 0; j <= word.size(); j++)
+        {
+            if (j == word.size() || word[j] == separator)
+            {
+                if (!str.empty()) result.push_back(str);
+                str.clear();
+            }
+            else
+            {
+                str.push_back(word[j]);
+            }
+        }
+    }
+    return result;
+}
+
 #pragma endregion
