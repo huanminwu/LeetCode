@@ -27267,7 +27267,7 @@ long long LeetCodeArray::matrixSumQueries(int n, vector<vector<int>>& queries)
         int value = queries[i][2];
         if (visited[type][index] == 1) continue;
         visited[type][index] = 1;
-        result = result + (long long)(n - count[1 - type]) * (long long)value;
+        result = result + ((long long)n - (long long)count[1 - type]) * (long long)value;
         count[type]++;
     }
     return result;
