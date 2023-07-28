@@ -3837,6 +3837,19 @@ void TestLeetCode2791(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode589(void)
+{
+    Logger::WriteMessage("Test Leet Code 589");
+    LeetCodeTree leetCode;
+    NaryTreeCodec  treeCodec;
+    string input = "[1 [3[5 6] 2 4]]";
+    Logger::WriteMessage(input);
+    Node* root = treeCodec.deserialize(input);
+    vector<int> result = leetCode.preorder(root);
+    Logger::WriteMessage(result);
+    leetCode.freeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
     TestLeetCode2791();
@@ -3903,6 +3916,7 @@ void TestLeetCodeTree(void)
     TestLeetCode814();
     TestLeetCode654();
     TestLeetCode652();
+    TestLeetCode589();
     TestLeetCode297();
     TestLeetCode776();
     TestLeetCode623();

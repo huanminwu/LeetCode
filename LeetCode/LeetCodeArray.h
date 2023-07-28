@@ -18,6 +18,7 @@
 #include <vector> 
 #include <stack> 
 #include "leetcode.h"
+#include "LeetCodeDesign.h"
 using namespace std;
 /// <summary>
 /// The street class

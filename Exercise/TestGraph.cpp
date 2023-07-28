@@ -5494,7 +5494,7 @@ void TestLeetCodeGraph(void)
     TestLeetCode323();
     TestLeetCode332();
     TestLeetCode399();
-   TestLeetCode529();
+    TestLeetCode529();
     TestLeetCode568();
     TestLeetCode573();
     TestLeetCode582();
@@ -5532,5 +5532,6 @@ void TestLeetCodeGraph(void)
     TestLeetCode815();
     TestLeetCode444();
     TestLeetCode269();
+    TestLeetCode286();
     TestLeetCode9902();
 }

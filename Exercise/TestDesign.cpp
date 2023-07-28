@@ -22,6 +22,33 @@ void TestLeetCode155(void)
     minStack.getMin();
 }
 
+void TestLeetCode341(void)
+{
+    Logger::WriteMessage("Test Leet Code 341");
+    vector<NestedInteger> n10;
+    n10.push_back(1);
+    n10.push_back(1);
+    NestedInteger n1 = n10;
+    NestedInteger n2 = 2;
+    vector<NestedInteger> n30;
+    n30.push_back(1);
+    n30.push_back(1);
+    NestedInteger n3 = n30;
+    vector<NestedInteger> n4;
+    vector<NestedInteger> input;
+    input.push_back(n1);
+    input.push_back(n2);
+    input.push_back(n3);
+    input.push_back(n4);
+    NestedIterator nested_iterator(input);
+    vector<int> result;
+    while (nested_iterator.hasNext())
+    {
+        result.push_back(nested_iterator.next());
+    }
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCode146(void)
 {
     Logger::WriteMessage("Test Leet Code 146");
@@ -56,6 +83,23 @@ void TestLeetCode146(void)
     }
     delete lruCache;
     Logger::WriteMessage(result);
+}
+
+void TestLeetCode362(void)
+{
+    Logger::WriteMessage("Test Leet Code 362");
+    HitCounter counter;
+    int result;
+    counter.hit(1);
+    counter.hit(2);
+    counter.hit(3);
+    result = counter.getHits(4);
+    Logger::WriteMessage("Get Hits(4)" + to_string(result));
+    counter.hit(300);
+    result = counter.getHits(300);
+    Logger::WriteMessage("Get Hits(300)" + to_string(result));
+    result = counter.getHits(301);
+    Logger::WriteMessage("Get Hits(301)" + to_string(result));
 }
 
 void TestLeetCode232(void)
@@ -5250,6 +5294,146 @@ void TestLeetCode2671(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode346(void)
+{
+    Logger::WriteMessage("Test Leet Code 346");
+    MovingAverage m(3);
+    Logger::WriteMessage("MovingAverage(3)");
+    double result;
+    result = m.next(1);
+    Logger::WriteMessage("m.next(1)" + to_string(result));
+    result = m.next(10);
+    Logger::WriteMessage("m.next(10)" + to_string(result));
+    result = m.next(3);
+    Logger::WriteMessage("m.next(3)" + to_string(result));
+    result = m.next(5);
+    Logger::WriteMessage("m.next(5)" + to_string(result));
+}
+
+void TestLeetCode308(void)
+{
+    Logger::WriteMessage("Test Leet Code 308");
+    vector<vector<int>> matrix =
+    {
+        { 3, 0, 1, 4, 2 },
+        { 5, 6, 3, 2, 1 },
+        { 1, 2, 0, 1, 5 },
+        { 4, 1, 0, 1, 7 },
+        { 1, 0, 3, 0, 5 }
+    };
+    NumMatrixMutable numMatrix = NumMatrixMutable(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("sumRegion(2, 1, 4, 3) -> " + to_string(numMatrix.sumRegion(2, 1, 4, 3)));
+    numMatrix.update(3, 2, 2);
+    Logger::WriteMessage("sumRegion(2, 1, 4, 3) -> " + to_string(numMatrix.sumRegion(2, 1, 4, 3)));
+}
+
+void TestLeetCode1095(void)
+{
+    Logger::WriteMessage("Test Leet Code 1095");
+    vector<int> a = { 1,2,3,4,5,3,1 };
+    int target = 3;
+    MountainArray mountainArr;
+    mountainArr = a;
+    int result = mountainArr.findInMountainArray(target, mountainArr);
+    Logger::WriteMessage(a);
+    Logger::WriteMessage("result = " + (string)(to_string(result)));
+    target = 1;
+    result = mountainArr.findInMountainArray(target, mountainArr);
+    Logger::WriteMessage(a);
+    Logger::WriteMessage("result = " + (string)(to_string(result)));
+
+    target = 5;
+    result = mountainArr.findInMountainArray(target, mountainArr);
+    Logger::WriteMessage(a);
+    Logger::WriteMessage("result = " + (string)(to_string(result)));
+
+    a = { 0,1,2,4,2,1 };
+    target = 3;
+    mountainArr = a;
+    result = mountainArr.findInMountainArray(target, mountainArr);
+    Logger::WriteMessage(a);
+    Logger::WriteMessage("result = " + (string)(to_string(result)));
+
+    a = { 1,5,2 };
+    target = 1;
+    mountainArr = a;
+    result = mountainArr.findInMountainArray(target, mountainArr);
+    Logger::WriteMessage(a);
+    Logger::WriteMessage("result = " + (string)(to_string(result)));
+
+    a = { 3, 5, 3, 2, 0 };
+    target = 0;
+    mountainArr = a;
+    result = mountainArr.findInMountainArray(target, mountainArr);
+    Logger::WriteMessage(a);
+    Logger::WriteMessage("result = " + (string)(to_string(result)));
+}
+
+void TestLeetCode359(void)
+{
+    Logger::WriteMessage("Test Leet Code 359");
+    Logger1 logger;
+    bool result;
+    result = logger.shouldPrintMessage(1, "foo");
+    result = logger.shouldPrintMessage(2, "bar");
+    result = logger.shouldPrintMessage(3, "foo");
+    result = logger.shouldPrintMessage(8, "bar");
+    result = logger.shouldPrintMessage(10, "foo");
+    result = logger.shouldPrintMessage(11, "foo");
+}
+
+void TestLeetCode635(void)
+{
+    LogSystem logSystem;
+
+    logSystem.put(1, "2017:01:01:23:59:59");
+    logSystem.put(2, "2017:01:01:22:59:59");
+    logSystem.put(2, "2016:01:01:00:00:00");
+
+    vector<int> result = logSystem.retrieve("2016:01:01:01:01:01", "2017:01:01:23:00:00", "Hour");
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode729(void)
+{
+    MyCalendar myCalendar = MyCalendar();
+    vector<pair<int, int>> booking = { { 10, 20 },{ 15, 25 },{ 20, 30 } };
+    vector<int> result;
+    for (size_t i = 0; i < booking.size(); i++)
+    {
+        if (myCalendar.book(booking[i].first, booking[i].second))
+        {
+            result.push_back(1);
+        }
+        else
+        {
+            result.push_back(0);
+        }
+    }
+    Logger::WriteMessage(result);
+}
+
+void TestSalesOrg(void)
+{
+    SalesOrg salesOrg;
+    vector<vector<string>> input =
+    {
+        { "Alice","","5" },{ "Bob","Alice","3" },{ "Carol","Bob","2" },
+        { "David","Bob","3" }, {"Eve","Alice","2"}, { "Ferris","Eve","1" }
+    };
+    Logger::WriteMessage(input);
+    for (size_t i = 0; i < input.size(); i++)
+    {
+        salesOrg.addSalesRecord(input[i][0], input[i][1], atoi(input[i][2].c_str()));
+    }
+    vector<string> result = salesOrg.print();
+    for (size_t i = 0; i < result.size(); i++)
+    {
+        Logger::WriteMessage(result[i]);
+    }
+}
+
 void TestLeetCodeDesign(void)
 {
     TestLeetCode2671();
@@ -5290,6 +5474,7 @@ void TestLeetCodeDesign(void)
     TestLeetCode731();
     TestLeetCode732();
     TestLeetCode715();
+    TestLeetCode635();
     TestLeetCode1670();
     TestLeetCode1656();
     TestLeetCode1622();
@@ -5306,6 +5491,7 @@ void TestLeetCodeDesign(void)
     TestLeetCode1157();
     TestLeetCode911();
     TestLeetCode901();
+    TestLeetCode729();
     TestLeetCode641();
     TestLeetCode622();
     TestLeetCode497();
@@ -5319,6 +5505,7 @@ void TestLeetCodeDesign(void)
     TestLeetCode1206();
     TestLeetCode244();
     TestLeetCode703();
+    TestLeetCode341();
     TestLeetCode919();
     TestLeetCode173();
     TestLeetCode1429();
@@ -5360,9 +5547,16 @@ void TestLeetCodeDesign(void)
     TestLeetCode900();
     TestLeetCode981();
     TestLeetCode303();
+    TestLeetCode359();
     TestLeetCode1146();
     TestLeetCode1244();
     TestLeetCode1274();
     TestLeetCode304();
     TestLeetCode307();
+    TestLeetCode362();
+    TestLeetCode346();
+    TestLeetCode308();
+    TestLeetCode353();
+    TestLeetCode1095();
+    TestSalesOrg();
 }

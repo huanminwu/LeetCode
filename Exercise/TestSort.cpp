@@ -3386,6 +3386,7 @@ void TestLeetCodeSort(void)
     TestLeetCode2144();
     TestLeetCode2126();
     TestLeetCode2136();
+    TestLeetCode912();
     TestLeetCode977();
     TestLeetCode953();
     TestLeetCode941();

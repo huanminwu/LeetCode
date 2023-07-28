@@ -19,6 +19,142 @@
 #include <stack> 
 using namespace std;
 
+class NestedInteger
+{
+private:
+    vector<NestedInteger> m_NestedIntegers;
+    int m_Integer;
+    bool m_IsInteger;
+    int m_Size;
+public:
+    // Constructure on single integter.
+    NestedInteger()
+    {
+        m_NestedIntegers = vector<NestedInteger>();
+        m_Size = 0;
+        m_Integer = 0;
+        m_IsInteger = false;
+    }
+
+    // Constructure on single integter.
+    NestedInteger(int value)
+    {
+        m_NestedIntegers = vector<NestedInteger>();
+        m_Integer = value;
+        m_IsInteger = true;
+        m_Size = 1;
+    }
+
+    // Constructure on nested integers.
+    NestedInteger(vector<NestedInteger> nested_integers)
+    {
+        m_NestedIntegers = nested_integers;
+        m_Integer = 0;
+        m_IsInteger = false;
+        m_Size = nested_integers.size();
+    }
+
+    // Return true if this NestedInteger holds a single integer, rather than a nested list.
+    bool isInteger() const
+    {
+        return m_IsInteger;
+    };
+
+    // Return the single integer that this NestedInteger holds, if it holds a single integer
+    // The result is undefined if this NestedInteger holds a nested list
+    int getInteger() const
+    {
+        return m_Integer;
+    };
+
+    // Set this NestedInteger to hold a single integer.
+    void setInteger(int value)
+    {
+        m_Integer = value;
+        m_IsInteger = true;
+        m_NestedIntegers.clear();
+        m_Size = 1;
+    };
+
+    // Set this NestedInteger to hold a nested list and adds a nested integer to it.
+    void add(const NestedInteger& ni)
+    {
+        if (m_Size == 1 && isInteger())
+        {
+            m_NestedIntegers.push_back(m_Integer);
+        }
+        m_NestedIntegers.push_back((NestedInteger)ni);
+        m_IsInteger = false;
+        m_Size++;
+    };
+
+    // Return the nested list that this NestedInteger holds, if it holds a nested list
+    // The result is undefined if this NestedInteger holds a single integer
+    const vector<NestedInteger>& getList() const
+    {
+        return m_NestedIntegers;
+    };
+};
+
+
+struct TrieNode
+{
+    bool is_end;
+    vector<TrieNode*> children;
+
+    TrieNode()
+    {
+        is_end = false;
+        children = vector<TrieNode*>(26, nullptr);
+    };
+
+    ~TrieNode()
+    {
+        for (size_t i = 0; i < children.size(); i++)
+        {
+            if (children[i] != nullptr) delete children[i];
+        }
+    }
+
+    void insert(string word, int i)
+    {
+        if (i == word.size())
+        {
+            is_end = true;
+        }
+        else
+        {
+            int k = word[i] - 'a';
+            if (children[k] == nullptr)
+            {
+                children[k] = new TrieNode();
+            }
+            children[k]->insert(word, i + 1);
+        }
+    }
+
+    TrieNode* next(char ch)
+    {
+        int k = ch - 'a';
+        return children[k];
+    }
+
+    void get_words(string& word, vector<string>& result)
+    {
+        if (is_end) result.push_back(word);
+
+        for (size_t i = 0; i < children.size(); i++)
+        {
+            if (children[i] != nullptr)
+            {
+                word.push_back((char)('a' + i));
+                children[i]->get_words(word, result);
+                word.pop_back();
+            }
+        }
+    }
+};
+
 /// <summary>
 /// Leet code #146. LRU Cache
 /// 

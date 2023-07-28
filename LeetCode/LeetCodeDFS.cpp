@@ -1481,7 +1481,7 @@ vector<vector<int>> LeetCodeDFS::combinationSum3(int k, int n)
 /// <summary>
 /// Leet code #301. Remove Invalid Parentheses 
 /// </summary>
-void LeetCode::removeInvalidParentheses(
+void LeetCodeDFS::removeInvalidParentheses(
     string s, vector<char> p, int scan, int remove, vector<string> &result)
 {
     int count = 0;
@@ -1522,7 +1522,7 @@ void LeetCode::removeInvalidParentheses(
 /// "(a)())()" -> ["(a)()()", "(a())()"]
 /// ")(" -> [""]
 /// </summary>
-vector<string> LeetCode::removeInvalidParentheses(string s)
+vector<string> LeetCodeDFS::removeInvalidParentheses(string s)
 {
     vector<string> result;
     vector<char> p = { '(', ')' };
@@ -1533,7 +1533,7 @@ vector<string> LeetCode::removeInvalidParentheses(string s)
 /// <summary>
 /// Leet code #254. Factor Combinations    
 /// </summary>
-void LeetCode::getFactors(int n, vector<int> factors, vector<vector<int>> &result)
+void LeetCodeDFS::getFactors(int n, vector<int> factors, vector<vector<int>> &result)
 {
     int start = 2;
     if (!factors.empty()) start = factors.back();
@@ -1560,7 +1560,7 @@ void LeetCode::getFactors(int n, vector<int> factors, vector<vector<int>> &resul
 /// 1.You may assume that n is always positive. 
 /// 2.Factors should be greater than 1 and less than n.
 /// </summary>
-vector<vector<int>> LeetCode::getFactors(int n)
+vector<vector<int>> LeetCodeDFS::getFactors(int n)
 {
     vector<vector<int>>  result;
     vector<int> factors;
@@ -1571,7 +1571,7 @@ vector<vector<int>> LeetCode::getFactors(int n)
 /// <summary>
 /// Leet code #320. Generalized Abbreviation  
 /// </summary>
-vector<string> LeetCode::generateAbbreviations(string word,
+vector<string> LeetCodeDFS::generateAbbreviations(string word,
     unordered_map<string, vector<string>> &cache)
 {
     vector<string> result;
@@ -1608,7 +1608,7 @@ vector<string> LeetCode::generateAbbreviations(string word,
 /// ["word", "1ord", "w1rd", "wo1d", "wor1", "2rd", "w2d", "wo2", "1o1d", 
 ///  "1or1", "w1r1", "1o2", "2r1", "3d", "w3", "4"]
 /// </summary>
-vector<string> LeetCode::generateAbbreviations(string word)
+vector<string> LeetCodeDFS::generateAbbreviations(string word)
 {
     vector<string> result;
     unordered_map<string, vector<string>> cache;
@@ -1625,7 +1625,7 @@ vector<string> LeetCode::generateAbbreviations(string word)
 /// ["word", "1ord", "w1rd", "wo1d", "wor1", "2rd", "w2d", "wo2", "1o1d", 
 ///  "1or1", "w1r1", "1o2", "2r1", "3d", "w3", "4"]
 /// </summary>
-vector<string> LeetCode::generateAbbreviationsII(string word)
+vector<string> LeetCodeDFS::generateAbbreviationsII(string word)
 {
     vector<string> result;
     if (word.empty())
@@ -1674,7 +1674,7 @@ vector<string> LeetCode::generateAbbreviationsII(string word)
 /// <summary>
 /// Leet code #411. Minimum Unique Word Abbreviation         
 /// </summary>
-void LeetCode::getAbbrBits(int index, int digits, int target_digits, string &abbr_bits, vector<string> &result)
+void LeetCodeDFS::getAbbrBits(int index, int digits, int target_digits, string &abbr_bits, vector<string> &result)
 {
     if (digits == target_digits)
     {
@@ -1692,7 +1692,7 @@ void LeetCode::getAbbrBits(int index, int digits, int target_digits, string &abb
 /// <summary>
 /// Leet code #411. Minimum Unique Word Abbreviation         
 /// </summary>
-string LeetCode::getAbbrWord(string word, string abbr_bits, int& length)
+string LeetCodeDFS::getAbbrWord(string word, string abbr_bits, int& length)
 {
     if (word.size() != abbr_bits.size())
     {
@@ -1752,7 +1752,7 @@ string LeetCode::getAbbrWord(string word, string abbr_bits, int& length)
 /// "apple", ["plain", "amber", "blade"] -> "1p3" (other valid answers include "ap3", "a3e", 
 /// "2p2", "3le", "3l1").
 /// </summary>
-string LeetCode::minAbbreviation(string target, vector<string>& dictionary)
+string LeetCodeDFS::minAbbreviation(string target, vector<string>& dictionary)
 {
     string result = target;
     int min_length = target.size();
@@ -1866,7 +1866,7 @@ bool LeetCodeDFS::makesquare(vector<int>& nums)
 /// <summary>
 /// Leet code #267. Palindrome Permutation II 
 /// </summary>
-void LeetCode::generatePalindromes(string s, string partial_result, unordered_set<int>&visited, vector<string>& result)
+void LeetCodeDFS::generatePalindromes(string s, string partial_result, unordered_set<int>&visited, vector<string>& result)
 {
     if (s.size() == partial_result.size())
     {
@@ -1903,7 +1903,7 @@ void LeetCode::generatePalindromes(string s, string partial_result, unordered_se
 /// 2.To generate all distinct permutations of a (half of) string, use a similar approach from: 
 ///   Permutations II or Next Permutation.
 /// </summary>
-vector<string> LeetCode::generatePalindromes(string s)
+vector<string> LeetCodeDFS::generatePalindromes(string s)
 {
     unordered_map<char, int> char_map;
     vector<string> result;
@@ -1951,7 +1951,7 @@ vector<string> LeetCode::generatePalindromes(string s)
 /// <summary>
 /// Leet code #294. Flip Game II  
 /// </summary>
-bool LeetCode::canWin(string s, unordered_map<string, bool>& cache)
+bool LeetCodeDFS::canWin(string s, unordered_map<string, bool>& cache)
 {
     for (int i = 0; i < (int)s.size() - 1; i++)
     {
@@ -1984,7 +1984,7 @@ bool LeetCode::canWin(string s, unordered_map<string, bool>& cache)
 /// Follow up:
 /// Derive your algorithm's runtime complexity. 
 /// </summary>
-bool LeetCode::canWin(string s)
+bool LeetCodeDFS::canWin(string s)
 {
     unordered_map<string, bool> cache;
     return canWin(s, cache);
@@ -1994,7 +1994,7 @@ bool LeetCode::canWin(string s)
 /// <summary>
 /// Leet code #291. Word Pattern II    
 /// </summary>
-bool LeetCode::wordPatternMatch(string& pattern, string& str, int pat_index, int str_index,
+bool LeetCodeDFS::wordPatternMatch(string& pattern, string& str, int pat_index, int str_index,
     map<char, string>& pat_map, map<string, char>& str_map)
 {
     if (pat_index == pattern.size() && str_index == str.size())
@@ -2048,7 +2048,7 @@ bool LeetCode::wordPatternMatch(string& pattern, string& str, int pat_index, int
 /// Notes:
 /// You may assume both pattern and str contains only lowercase letters. 
 /// </summary>
-bool LeetCode::wordPatternMatch(string pattern, string str)
+bool LeetCodeDFS::wordPatternMatch(string pattern, string str)
 {
     map<char, string> pat_map;
     map<string, char> str_map;
@@ -2114,7 +2114,7 @@ vector<vector<int>> LeetCodeDFS::findSubsequences(vector<int>& nums)
 /// <summary>
 /// Leet code #488. Zuma Game
 /// </summary>
-void LeetCode::shrinkZuma(string &board)
+void LeetCodeDFS::shrinkZuma(string &board)
 {
     size_t first = 0, last = 0;
     while (last < board.size())
@@ -2139,7 +2139,7 @@ void LeetCode::shrinkZuma(string &board)
 /// <summary>
 /// Leet code #488. Zuma Game
 /// </summary>
-int LeetCode::findMinStep(string board, unordered_map<char, int>& hand_map, unordered_map<string, int>& cache)
+int LeetCodeDFS::findMinStep(string board, unordered_map<char, int>& hand_map, unordered_map<string, int>& cache)
 {
     shrinkZuma(board);
     if (cache.count(board) > 0) return cache[board];
@@ -2213,7 +2213,7 @@ int LeetCode::findMinStep(string board, unordered_map<char, int>& hand_map, unor
 ///   is called "hand" in the input.
 /// 4.Both input strings will be non-empty and only contain characters 'R','Y','B','G','W'.
 /// </summary>
-int LeetCode::findMinStep(string board, string hand)
+int LeetCodeDFS::findMinStep(string board, string hand)
 {
     unordered_map<char, int> hand_map;
     unordered_map<string, int> cache;
@@ -2228,7 +2228,7 @@ int LeetCode::findMinStep(string board, string hand)
 /// <summary>
 /// Leet code #465. Optimal Account Balancing
 /// </summary>
-int LeetCode::minTransfers(vector<int>& debt, size_t index)
+int LeetCodeDFS::minTransfers(vector<int>& debt, size_t index)
 {
     int min_count = INT_MAX;
     while (index < debt.size() && debt[index] == 0) index++;
@@ -2290,7 +2290,7 @@ int LeetCode::minTransfers(vector<int>& debt, size_t index)
 ///
 /// Therefore, person #1 only need to give person #0 $4, and all debt is settled.
 /// </summary>
-int LeetCode::minTransfers(vector<vector<int>>& transactions)
+int LeetCodeDFS::minTransfers(vector<vector<int>>& transactions)
 {
     unordered_map<int, int> balances;
     for (size_t i = 0; i < transactions.size(); i++)
@@ -2326,7 +2326,7 @@ int LeetCode::minTransfers(vector<vector<int>>& transactions)
 /// <summary>
 /// Leet code #472. Concatenated Words
 /// </summary>
-bool LeetCode::findAllConcatenatedWordsInADict(string word, int start, unordered_set<string>& dictionary)
+bool LeetCodeDFS::findAllConcatenatedWordsInADict(string word, int start, unordered_set<string>& dictionary)
 {
     if ((start == word.size()) && (start != 0)) return true;
     for (size_t end = start + 1; end <= word.size(); end++)
@@ -2365,7 +2365,7 @@ bool LeetCode::findAllConcatenatedWordsInADict(string word, int start, unordered
 /// 3.All the input string will only include lower case letters.
 /// 4.The returned elements order does not matter. 
 /// </summary>
-vector<string> LeetCode::findAllConcatenatedWordsInADict(vector<string>& words)
+vector<string> LeetCodeDFS::findAllConcatenatedWordsInADict(vector<string>& words)
 {
     vector<string> result;
     unordered_set<string>  dictionary;
@@ -2502,7 +2502,7 @@ vector<vector<string>> LeetCodeDFS::wordSquares(vector<string>& words)
 /// <summary>
 /// Leet code #351. Android Unlock Patterns
 /// </summary>
-void LeetCode::nextPattern(vector<int> &keys, vector<int> &visited, int m, int n, int &count)
+void LeetCodeDFS::nextPattern(vector<int> &keys, vector<int> &visited, int m, int n, int &count)
 {
     unordered_map<int, set<int>> key_map =
     {
@@ -2528,7 +2528,7 @@ void LeetCode::nextPattern(vector<int> &keys, vector<int> &visited, int m, int n
 /// <summary>
 /// Leet code #351. Android Unlock Patterns
 /// </summary>
-int LeetCode::nextPattern(int key, int m, int n)
+int LeetCodeDFS::nextPattern(int key, int m, int n)
 {
     vector<int> keys;
     vector<int> visited(10);
@@ -2573,7 +2573,7 @@ int LeetCode::nextPattern(int key, int m, int n)
 /// Example:
 /// Given m = 1, n = 1, return 9. 
 /// </summary>
-int LeetCode::numberOfPatterns(int m, int n)
+int LeetCodeDFS::numberOfPatterns(int m, int n)
 {
     int result = 0;
     result += nextPattern(1, m, n) * 4;
@@ -2803,7 +2803,7 @@ int LeetCodeDFS::strobogrammaticInRange(string low, string high)
 /// Assume you are given a list of integer and you can add '+', '*' or '(' , ')'.  
 /// Please try to get the maximum result.
 /// </summary>
-pair<int, int> LeetCode::getMaxExprResult(vector<int>& nums, int start, int end,
+pair<int, int> LeetCodeDFS::getMaxExprResult(vector<int>& nums, int start, int end,
     unordered_map<string, pair<int, int>> &cache)
 {
     pair<int, int> min_max;
@@ -2849,7 +2849,7 @@ pair<int, int> LeetCode::getMaxExprResult(vector<int>& nums, int start, int end,
 /// Assume you are given a list of integer and you can add '+', '*' or '(' , ')'.  
 /// Please try to get the maximum result.
 /// </summary>
-int LeetCode::getMaxExprResult(vector<int> nums)
+int LeetCodeDFS::getMaxExprResult(vector<int> nums)
 {
     unordered_map<string, pair<int, int>> cache;
     pair<int, int>  min_max = getMaxExprResult(nums, 0, nums.size() - 1, cache);
@@ -2859,7 +2859,7 @@ int LeetCode::getMaxExprResult(vector<int> nums)
 /// <summary>
 /// Leet code #546. Remove Boxes 
 /// </summary>
-string LeetCode::toString(vector<int>& boxes)
+string LeetCodeDFS::toString(vector<int>& boxes)
 {
     string result;
     for (size_t i = 0; i < boxes.size(); i++)
@@ -2873,7 +2873,7 @@ string LeetCode::toString(vector<int>& boxes)
 /// <summary>
 /// Leet code #546. Remove Boxes 
 /// </summary>
-int LeetCode::calculatePoints(vector<int>&boxes, int start, int end, int k, vector<vector<vector<int>>>scores)
+int LeetCodeDFS::calculatePoints(vector<int>&boxes, int start, int end, int k, vector<vector<vector<int>>>scores)
 {
     if (start > end) return 0;
     if (scores[start][end][k] != 0) return scores[start][end][k];
@@ -2920,7 +2920,7 @@ int LeetCode::calculatePoints(vector<int>&boxes, int start, int end, int k, vect
 /// ----> [] (2*2=4 points)
 /// Note: The number of boxes n would not exceed 100.
 /// </summary>
-int LeetCode::removeBoxes(vector<int>& boxes)
+int LeetCodeDFS::removeBoxes(vector<int>& boxes)
 {
     vector<vector<vector<int>>> scores(20, vector<vector<int>>(20, vector<int>(20)));
     return calculatePoints(boxes, 0, boxes.size() - 1, 0, scores);
@@ -2929,7 +2929,7 @@ int LeetCode::removeBoxes(vector<int>& boxes)
 /// <summary>
 /// Leet code #638. Shopping Offers
 /// </summary>
-int LeetCode::tryOffer(vector<vector<int>>& special, vector<int>& needs, int index)
+int LeetCodeDFS::tryOffer(vector<vector<int>>& special, vector<int>& needs, int index)
 {
     for (size_t i = 0; i < needs.size(); i++)
     {
@@ -2945,7 +2945,7 @@ int LeetCode::tryOffer(vector<vector<int>>& special, vector<int>& needs, int ind
 /// <summary>
 /// Leet code #638. Shopping Offers
 /// </summary>
-void LeetCode::shoppingOffers(vector<int>& price, vector<vector<int>>& special,
+void LeetCodeDFS::shoppingOffers(vector<int>& price, vector<vector<int>>& special,
     vector<int>& needs, int index, int&total_price, int& min_price)
 {
     if (index == special.size())
@@ -3020,7 +3020,7 @@ void LeetCode::shoppingOffers(vector<int>& price, vector<vector<int>>& special,
 /// 3. You are not allowed to buy more items than you want, even if that would 
 /// lower the overall price.
 /// </summary>
-int LeetCode::shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs)
+int LeetCodeDFS::shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs)
 {
     int total_price = 0;
     int min_price = INT_MAX;
@@ -3031,7 +3031,7 @@ int LeetCode::shoppingOffers(vector<int>& price, vector<vector<int>>& special, v
 /// <summary>
 /// Leet code #681. Next Closest Time
 /// </summary>
-bool LeetCode::isValidTime(string& time)
+bool LeetCodeDFS::isValidTime(string& time)
 {
     if (time[0] > '2') return false;
     if (time[0] == '2' && time[1] > '4') return false;
@@ -3042,7 +3042,7 @@ bool LeetCode::isValidTime(string& time)
 /// <summary>
 /// Leet code #681. Next Closest Time
 /// </summary>
-bool LeetCode::NextTime(string& time, int index, set<char>& nums)
+bool LeetCodeDFS::NextTime(string& time, int index, set<char>& nums)
 {
     if (index == time.size()) return true;
     if (time[index] == '#')
@@ -3103,7 +3103,7 @@ bool LeetCode::NextTime(string& time, int index, set<char>& nums)
 /// 22:22. It may be assumed that the returned time is next day's time 
 /// since it is smaller than the input time numerically.
 /// </summary>
-string LeetCode::nextClosestTime(string time)
+string LeetCodeDFS::nextClosestTime(string time)
 {
     set<char> nums;
     for (size_t i = 0; i < time.size(); i++)
@@ -3132,7 +3132,7 @@ string LeetCode::nextClosestTime(string time)
 /// <summary>
 /// Leet code #698. Partition to K Equal Sum Subsets
 /// </summary>
-bool LeetCode::buildPartitionKSubsets(vector<int>& nums, int index, vector<vector<int>> &path,
+bool LeetCodeDFS::buildPartitionKSubsets(vector<int>& nums, int index, vector<vector<int>> &path,
     int partition_id, int partition_count, int sum, vector<int>& visited,
     unordered_map<string, int> &search_map)
 {
@@ -3217,7 +3217,7 @@ bool LeetCode::buildPartitionKSubsets(vector<int>& nums, int index, vector<vecto
 /// 1 <= k <= len(nums) <= 16.
 /// 0 < nums[i] < 10000.
 /// </summary>
-bool LeetCode::canPartitionKSubsets(vector<int>& nums, int k)
+bool LeetCodeDFS::canPartitionKSubsets(vector<int>& nums, int k)
 {
     vector<vector<int>> path(k, vector<int>());
     int sum = 0;
@@ -3238,7 +3238,7 @@ bool LeetCode::canPartitionKSubsets(vector<int>& nums, int k)
 ///
 /// search target
 /// </summary>
-int LeetCode::searchTarget(vector<vector<int>>&sticker_chars, vector<bool>& sticker_visited, string& target,
+int LeetCodeDFS::searchTarget(vector<vector<int>>&sticker_chars, vector<bool>& sticker_visited, string& target,
     unordered_map<string, int> &cache)
 {
     int result = -1;
@@ -3278,7 +3278,7 @@ int LeetCode::searchTarget(vector<vector<int>>&sticker_chars, vector<bool>& stic
 ///
 /// check dominated stickers
 /// </summary>
-void LeetCode::checkDominatedStickers(vector<vector<int>>&sticker_chars, vector<bool>& sticker_visited)
+void LeetCodeDFS::checkDominatedStickers(vector<vector<int>>&sticker_chars, vector<bool>& sticker_visited)
 {
     for (size_t i = 0; i < sticker_chars.size(); i++)
     {
@@ -3311,7 +3311,7 @@ void LeetCode::checkDominatedStickers(vector<vector<int>>&sticker_chars, vector<
 ///
 /// Convert string to characters count
 /// </summary>
-void LeetCode::convertStringToCharCount(string& word, vector<int>&char_count, vector<int>& target_count)
+void LeetCodeDFS::convertStringToCharCount(string& word, vector<int>&char_count, vector<int>& target_count)
 {
     for (char ch : word)
     {
@@ -3328,7 +3328,7 @@ void LeetCode::convertStringToCharCount(string& word, vector<int>&char_count, ve
 ///
 /// reduce the target by sticker
 /// </summary>
-void LeetCode::reduceTarget(vector<int>&sticker_count, string &target)
+void LeetCodeDFS::reduceTarget(vector<int>&sticker_count, string &target)
 {
     string buffer;
     vector<int> target_count(26);
@@ -3397,7 +3397,7 @@ void LeetCode::reduceTarget(vector<int>&sticker_count, string &target)
 /// The time limit may be more challenging than usual. It is expected 
 /// that a 50 sticker test case can be solved within 35ms on average.
 /// </summary>
-int LeetCode::minStickers(vector<string>& stickers, string target)
+int LeetCodeDFS::minStickers(vector<string>& stickers, string target)
 {
     int result = 0;
 
@@ -3421,7 +3421,7 @@ int LeetCode::minStickers(vector<string>& stickers, string target)
 /// <summary>
 /// Leet code #753. Cracking the Safe
 /// </summary>
-void LeetCode::crackSafe(string& result, unordered_set<string>& password_set, int n, int k)
+void LeetCodeDFS::crackSafe(string& result, unordered_set<string>& password_set, int n, int k)
 {
     size_t total_count = (size_t)pow(k, n);
     if (password_set.size() == total_count) return;
@@ -3478,7 +3478,7 @@ void LeetCode::crackSafe(string& result, unordered_set<string>& password_set, in
 /// 2. k will be in the range [1, 10].
 /// 3. k^n will be at most 4096.
 /// </summary>
-string LeetCode::crackSafe(int n, int k)
+string LeetCodeDFS::crackSafe(int n, int k)
 {
     string result;
     unordered_set<string> password_set;
@@ -3489,7 +3489,7 @@ string LeetCode::crackSafe(int n, int k)
 /// <summary>
 /// Leet code #756. Pyramid Transition Matrix
 /// </summary>
-void LeetCode::nextPyramidTop(string& bottom, string &top, unordered_map<char, unordered_map<char, set<char>>> &allowed_map)
+void LeetCodeDFS::nextPyramidTop(string& bottom, string &top, unordered_map<char, unordered_map<char, set<char>>> &allowed_map)
 
 {
     char ch = 'A';
@@ -3531,7 +3531,7 @@ void LeetCode::nextPyramidTop(string& bottom, string &top, unordered_map<char, u
 /// <summary>
 /// Leet code #756. Pyramid Transition Matrix
 /// </summary>
-bool LeetCode::buildPyramidTransition(string& bottom, unordered_map<char, unordered_map<char, set<char>>> &allowed_map)
+bool LeetCodeDFS::buildPyramidTransition(string& bottom, unordered_map<char, unordered_map<char, set<char>>> &allowed_map)
 {
     if (bottom.size() == 1)
     {
@@ -3598,7 +3598,7 @@ bool LeetCode::buildPyramidTransition(string& bottom, unordered_map<char, unorde
 /// 3. Letters in all strings will be chosen from the set 
 ///    {'A', 'B', 'C', 'D', 'E', 'F', 'G'}.
 /// </summary>
-bool LeetCode::pyramidTransition(string bottom, vector<string>& allowed)
+bool LeetCodeDFS::pyramidTransition(string bottom, vector<string>& allowed)
 {
     unordered_set<string> top_set;
     unordered_set<string> bottom_set;

@@ -27540,13 +27540,13 @@ long long LeetCodeArray::minCost(vector<int>& nums, int x)
         {
             if (cost[j] > cost[j + 1])
             {
-                sum -= cost[j] - cost[j + 1];
+                sum -= (long long)cost[j] - (long long)cost[j + 1];
                 cost[j] = cost[j + 1];
             }
         }
         if (cost[n - 1] > val)
         {
-            sum -= cost[n-1] - val;
+            sum -= (long long)cost[n-1] - (long long)val;
             cost[n-1] = val;
         }
         result = min(result, sum + (long long)count * x);

@@ -6438,4 +6438,6 @@ void TestLeetCodeMath(void)
     TestLeetCode1185();
     TestLeetCode258();
     TestLeetCode453(); 
+    TestLeetCode1103();
+    TestLeetCode360();
 }

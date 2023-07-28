@@ -6245,6 +6245,32 @@ void TestLeetCode2788(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1023(void)
+{
+    Logger::WriteMessage("Test Leet Code 1023");
+    LeetCodeString leetCode;
+    vector<string> queries = { "FooBar", "FooBarTest", "FootBall", "FrameBuffer", "ForceFeedBack" };
+    string pattern = "FB";
+    vector<bool> result = leetCode.camelMatch(queries, pattern);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("pattern = " + pattern);
+    Logger::WriteMessage(result);
+
+    queries = { "FooBar","FooBarTest","FootBall","FrameBuffer", "ForceFeedBack" };
+    pattern = "FoBa";
+    result = leetCode.camelMatch(queries, pattern);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("pattern = " + pattern);
+    Logger::WriteMessage(result);
+
+    queries = { "FooBar","FooBarTest","FootBall","FrameBuffer", "ForceFeedBack" };
+    pattern = "FoBaT";
+    result = leetCode.camelMatch(queries, pattern);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("pattern = " + pattern);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeString(void)
 {
     TestLeetCode2788();
@@ -6421,6 +6447,7 @@ void TestLeetCodeString(void)
     TestLeetCode1021();
     TestLeetCode763();
     TestLeetCode9904();
+    TestLeetCode1023();
     TestLeetCode899();
     TestLeetCode929();
     TestLeetCode893();
@@ -6568,4 +6595,5 @@ void TestLeetCodeString(void)
     TestLeetCode1247();
     TestLeetCode1234();
     TestLeetCode1233();
+    TestLeetCode1065();
 }

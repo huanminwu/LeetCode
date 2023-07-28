@@ -9141,6 +9141,36 @@ void TestLeetCode2789(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode457(void)
+{
+    Logger::WriteMessage("Test Leet Code 457");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, -1, 1, 2, 2 };
+    bool result = leetCode.circularArrayLoop(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { -1, 2 };
+    result = leetCode.circularArrayLoop(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 2, -1, 1, -2, -2 };
+    result = leetCode.circularArrayLoop(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { -2, 1, -1, -2, -2 };
+    result = leetCode.circularArrayLoop(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 3, 1, 2 };
+    result = leetCode.circularArrayLoop(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeArray(void)
 {
     TestLeetCode2789();
@@ -9476,6 +9506,7 @@ void TestLeetCodeArray(void)
     TestLeetCode755();
     TestLeetCode713();
     TestLeetCode544();
+    TestLeetCode457();
     TestLeetCode443();
     TestLeetCode904();
     TestLeetCode917();
@@ -9568,6 +9599,8 @@ void TestLeetCodeArray(void)
     TestLeetCode1198();
     TestLeetCode1208();
     TestLeetCode1228();
+    TestLeetCode1124();
+    TestLeetCode1121();
     TestLeetCode11();
     TestLeetCode16();
     TestLeetCode42();
