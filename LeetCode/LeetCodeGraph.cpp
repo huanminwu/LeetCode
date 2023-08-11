@@ -17986,4 +17986,172 @@ int LeetCodeGraph::minimumDistance(int n, vector<vector<int>>& edges, int s, vec
     }
     return result;
 };
+
+/// <summary>
+/// Leet Code 2814. Minimum Time Takes to Reach Destination Without Drowning
+/// 
+/// Hard
+///
+/// You are given an n * m 0-indexed grid of string land. Right now, you are 
+/// standing at the cell that contains "S", and you want to get to the cell 
+/// containing "D". There are three other types of cells in this land:
+///  
+/// ".": These cells are empty.
+/// "X": These cells are stone.
+/// "*": These cells are flooded.
+/// At each second, you can move to a cell that shares a side with your 
+/// current cell (if it exists). Also, at each second, every empty cell that 
+/// shares a side with a flooded cell becomes flooded as well.
+/// There are two problems ahead of your journey:
+///
+/// You can't step on stone cells.
+/// You can't step on flooded cells since you will drown (also, you can't 
+/// step on a cell that will be flooded at the same time as you step on it).
+/// Return the minimum time it takes you to reach the destination in seconds, 
+/// or -1 if it is impossible.
+///
+/// Note that the destination will never be flooded.
+///
+/// 
+/// Example 1:
+///
+/// Input: land = [["D",".","*"],[".",".","."],[".","S","."]]
+/// Output: 3
+/// Explanation: The picture below shows the simulation of the land second 
+/// by second. The blue cells are flooded, and the gray cells are stone.
+/// Picture (0) shows the initial state and picture (3) shows the final state 
+/// when we reach destination. As you see, it takes us 3 second to reach 
+/// destination and the answer would be 3.
+/// It can be shown that 3 is the minimum time needed to reach from S to D.
+/// 
+/// Example 2:
+/// Input: land = [["D","X","*"],[".",".","."],[".",".","S"]]
+/// Output: -1
+/// Explanation: The picture below shows the simulation of the land second 
+/// by second. The blue cells are flooded, and the gray cells are stone.
+/// Picture (0) shows the initial state. As you see, no matter which paths we 
+/// choose, we will drown at the 3rd second. Also the minimum path takes us 4 
+/// seconds to reach from S to D.
+/// So the answer would be -1.
+/// 
+/// Example 3:
+///
+/// Input: land = [["D",".",".",".","*","."],[".","X",".","X",".","."],
+/// [".",".",".",".","S","."]]
+/// Output: 6
+/// Explanation: It can be shown that we can reach destination in 6 seconds. 
+/// Also it can be shown that 6 is the minimum seconds one need to reach 
+/// from S to D.
+///
+/// Constraints: 
+/// 1. 2 <= n, m <= 100
+/// 2. land consists only of "S", "D", ".", "*" and "X".
+/// 3. Exactly one of the cells is equal to "S".
+/// 4. Exactly one of the cells is equal to "D".
+/// </summary>
+int LeetCodeGraph::minimumSeconds(vector<vector<string>>& land)
+{
+    vector<int> s(2), d(2);
+    int n = land.size();
+    int m = land[0].size();
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (land[i][j] == "S")
+            {
+                s[0] = i; 
+                s[1] = j;
+            }
+            if (land[i][j] == "D")
+            {
+                d[0] = i;
+                d[1] = j;
+            }
+        }
+    }
+    vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    vector<vector<int>> water(n, vector<int>(m));
+    queue<vector<int>> queue;
+    queue.push(d);
+    while (!queue.empty())
+    {
+        vector<int> p = queue.front();
+        queue.pop();
+        for (size_t i = 0; i < directions.size(); i++)
+        {
+            vector<int> next_p = p;
+            next_p[0] += directions[i][0];
+            next_p[1] += directions[i][1];
+            if (next_p[0] < 0 || next_p[0] >= n)
+            {
+                continue;
+            }
+            if (next_p[1] < 0 || next_p[1] >= m)
+            {
+                continue;
+            }
+            if (land[next_p[0]][next_p[1]] == "X")
+            {
+                continue;
+            }
+            if (water[next_p[0]][next_p[1]] > 0)
+            {
+                continue;
+            }
+            if (next_p == d)
+            {
+                continue;
+            }
+            water[next_p[0]][next_p[1]] = water[p[0]][p[1]] + 1;
+            queue.push(next_p);
+        }
+    }
+
+    vector<vector<int>> step(n, vector<int>(m));
+    queue.push(s);
+    while (!queue.empty())
+    {
+        vector<int> p = queue.front();
+        queue.pop();
+        for (size_t i = 0; i < directions.size(); i++)
+        {
+            vector<int> next_p = p;
+            next_p[0] += directions[i][0];
+            next_p[1] += directions[i][1];
+            if (next_p[0] < 0 || next_p[0] >= n)
+            {
+                continue;
+            }
+            if (next_p[1] < 0 || next_p[1] >= m)
+            {
+                continue;
+            }
+            if (land[next_p[0]][next_p[1]] == "X")
+            {
+                continue;
+            }
+            if (step[next_p[0]][next_p[1]] > 0)
+            {
+                continue;
+            }
+            if (next_p == s)
+            {
+                continue;
+            }
+            step[next_p[0]][next_p[1]] = step[p[0]][p[1]] + 1;
+            if (step[next_p[0]][next_p[1]] <= water[next_p[0]][next_p[1]])
+            {
+                continue;
+            }
+            queue.push(next_p);
+            if (land[next_p[0]][next_p[1]] == "D")
+            {
+                return step[next_p[0]][next_p[1]];
+            }
+        }
+    }
+    return -1;
+}
+
 #pragma endregion

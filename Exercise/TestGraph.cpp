@@ -5341,8 +5341,38 @@ void TestLeetCode2737(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2814(void)
+{
+    Logger::WriteMessage("Test Leet Code 2814");
+    LeetCodeGraph leetCode;
+    vector<vector<string>> land =
+    {
+        {"D", ".", "*"},{".", ".", "."},{".", "S", "."}
+    };
+    int result = leetCode.minimumSeconds(land);
+    Logger::WriteMessage(land);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    land =
+    {
+        {"D","X","*"}, {".",".","."}, {".",".","S"}
+    };
+    result = leetCode.minimumSeconds(land);
+    Logger::WriteMessage(land);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    land =
+    {
+        {"D",".",".",".","*","."},{".","X",".","X",".","."},{".",".",".",".","S","."}
+    };
+    result = leetCode.minimumSeconds(land);
+    Logger::WriteMessage(land);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2814();
     TestLeetCode2737();
     TestLeetCode2714();
     TestLeetCode2709();
