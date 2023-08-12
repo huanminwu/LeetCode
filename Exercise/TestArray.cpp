@@ -9171,8 +9171,71 @@ void TestLeetCode457(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2798(void)
+{
+    Logger::WriteMessage("Test Leet Code 2798");
+    LeetCodeArray leetCode;
+    vector<int> hours = { 0, 1, 2, 3, 4 };
+    int target = 2;
+    int result = leetCode.numberOfEmployeesWhoMetTarget(hours, target);
+    Logger::WriteMessage(hours);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    hours = { 5,1,4,2,2 };
+    target = 6;
+    result = leetCode.numberOfEmployeesWhoMetTarget(hours, target);
+    Logger::WriteMessage(hours);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2808(void)
+{
+    Logger::WriteMessage("Test Leet Code 2808");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 1, 2 };
+    int result = leetCode.minimumSeconds(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,1,3,3,2 };
+    result = leetCode.minimumSeconds(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+    
+    nums = { 5, 5, 5, 5 };
+    result = leetCode.minimumSeconds(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2811(void)
+{
+    Logger::WriteMessage("Test Leet Code 2811");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 2, 1 };
+    int m = 4;
+    bool result = leetCode.canSplitArray(nums, m);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + (string)(result ? "true" : "false"));
+
+    nums = { 2, 1, 3 };
+    m = 5;
+    result = leetCode.canSplitArray(nums, m);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + (string)(result ? "true" : "false"));
+
+    nums = { 2, 3, 3, 2, 3 };
+    m = 6;
+    result = leetCode.canSplitArray(nums, m);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2811();
+    TestLeetCode2808();
+    TestLeetCode2798();
     TestLeetCode2789();
     TestLeetCode2784();
     TestLeetCode2782();

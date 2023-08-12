@@ -6271,8 +6271,38 @@ void TestLeetCode1023(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2800(void)
+{
+    Logger::WriteMessage("Test Leet Code 2800");
+    LeetCodeString leetCode;
+    string a = "abc", b = "bca", c = "aaa";
+    string result = leetCode.minimumString(a, b, c);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; c = " + c);
+    Logger::WriteMessage("result = " + result);
+
+    a = "ab", b = "ba", c = "aba";
+    result = leetCode.minimumString(a, b, c);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; c = " + c);
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode2810(void)
+{
+    Logger::WriteMessage("Test Leet Code 2810");
+    LeetCodeString leetCode;
+    string s = "string";
+    string result = leetCode.finalString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "poiinter";
+    result = leetCode.finalString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2810();
+    TestLeetCode2800();
     TestLeetCode2788();
     TestLeetCode2785();
     TestLeetCode2781();

@@ -1125,8 +1125,28 @@ void TestLeetCode2674(void)
     Logger::WriteMessage(result[1]);
 }
 
+void TestLeetCode2807(void)
+{
+    Logger::WriteMessage("Test Leet Code 2807");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 18, 6, 10, 3 };
+    ListNode* head = leetCode.generateListNodes(data_list);
+    ListNode* result = leetCode.insertGreatestCommonDivisors(head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 7 };
+    head = leetCode.generateListNodes(data_list);
+    result = leetCode.insertGreatestCommonDivisors(head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+}
+
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode2807();
     TestLeetCode2674();
     TestLeetCode2487();
     TestLeetCode2181();

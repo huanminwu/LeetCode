@@ -2268,8 +2268,29 @@ void TestLeetCode753(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode2801(void)
+{
+    Logger::WriteMessage("Test Leet Code 2801");
+    LeetCodeDFS leetCode;
+    string low = "1", high = "11";
+    int result = leetCode.countSteppingNumbers(low,high);
+    Logger::WriteMessage("low = " + low + "; high = " + high);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    low = "90", high = "101";
+    result = leetCode.countSteppingNumbers(low, high);
+    Logger::WriteMessage("low = " + low + "; high = " + high);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    low = "1", high = "200";
+    result = leetCode.countSteppingNumbers(low, high);
+    Logger::WriteMessage("low = " + low + "; high = " + high);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2801();
     TestLeetCode2787();
     TestLeetCode2741();
     TestLeetCode2664();

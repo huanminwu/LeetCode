@@ -9021,6 +9021,146 @@ int LeetCodeDFS::numberOfWays(int n, int x)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2801. Count Stepping Numbers in Range
+/// </summary>
+int LeetCodeDFS::countSteppingNumbers(string& limit, int index, vector<vector<int>>& dp,
+    int prev, bool leadingzero, bool leadinglimit)
+{
+    long long result = 0;
+    long long M = 1000000007;
+    if (index == limit.size())
+    {
+        if (leadingzero) return 0;
+        else return 1;
+    }
+    if (leadinglimit == false && leadingzero == false && dp[index][prev] != -1)
+    {
+        return dp[index][prev];
+    }
+
+    int count = 0;
+    if (leadingzero)
+    {
+        count = countSteppingNumbers(limit, index + 1, dp, 0, true, false);
+        result = (result + count) % M;
+        for (int i = 1; i < 10; i++)
+        {
+            if (leadinglimit)
+            {
+                if (i < limit[index] - '0')
+                {
+                    count = countSteppingNumbers(limit, index + 1, dp, i, false, false);
+                }
+                else if (i == limit[index] - '0')
+                {
+                    count = countSteppingNumbers(limit, index + 1, dp, i, false, true);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            else
+            {
+                count = countSteppingNumbers(limit, index + 1, dp, i, false, false);
+            }
+            result = (result + count) % M;
+        }
+    }
+    else 
+    {
+        for (int i = prev - 1; i <= prev + 1; i += 2)
+        {
+            if (i < 0 || i > 9) continue;
+            if (leadinglimit)
+            {
+                if (i < limit[index] - '0')
+                {
+                    count = countSteppingNumbers(limit, index + 1, dp, i, false, false);
+                }
+                else if (i == limit[index] - '0')
+                {
+                    count = countSteppingNumbers(limit, index + 1, dp, i, false, true);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            else
+            {
+                count = countSteppingNumbers(limit, index + 1, dp, i, false, false);
+            }
+            result = (result + count) % M;
+        }
+    }
+    if (leadinglimit == false && leadingzero == false)
+    {
+        dp[index][prev] = (int)result;
+    }
+    return (int)result;
+}
+
+
+/// <summary>
+/// Leet Code 2801. Count Stepping Numbers in Range
+/// 
+/// Hard
+///
+/// Given two positive integers low and high represented as strings, find 
+/// the count of stepping numbers in the inclusive range [low, high].
+///
+/// A stepping number is an integer such that all of its adjacent digits 
+/// have an absolute difference of exactly 1.
+///
+/// Return an integer denoting the count of stepping numbers in the 
+/// inclusive range [low, high].
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+///
+/// Note: A stepping number should not have a leading zero.
+///
+/// Example 1:
+/// Input: low = "1", high = "11"
+/// Output: 10
+/// Explanation: The stepping numbers in the range [1,11] are 1, 2, 3, 
+/// 4, 5, 6, 7, 8, 9 and 10. There are a total of 10 stepping numbers in 
+/// the range. Hence, the output is 10.
+///
+/// Example 2:
+/// Input: low = "90", high = "101"
+/// Output: 2
+/// Explanation: The stepping numbers in the range [90,101] are 98 and 
+/// 101. There are a total of 2 stepping numbers in the range. Hence, the 
+/// output is 2. 
+///
+/// Constraints:
+/// 1. 1 <= int(low) <= int(high) < 10^100
+/// 2. 1 <= low.length, high.length <= 100
+/// 3. low and high consist of only digits.
+/// 4. low and high don't have any leading zeros.
+/// </summary>
+int LeetCodeDFS::countSteppingNumbers(string low, string high)
+{
+    int M = 1000000007;
+    vector<vector<int>> dp = vector<vector<int>>(low.size(), vector<int>(10, -1));
+    int low_count = countSteppingNumbers(low, 0, dp, 0, true, true);
+    dp = vector<vector<int>>(high.size(), vector<int>(10, -1));
+    int high_count = countSteppingNumbers(high, 0, dp, 0, true, true);
+    int result = ((high_count - low_count) % M + M) % M;
+    int count = 1;
+    for (size_t i = 1; i < low.size(); i++)
+    {
+        if (abs(low[i] - low[i - 1]) != 1)
+        {
+            count = 0;
+            break;
+        }
+    }
+    result = (result + count) % M;
+    return result;
+}
 #pragma endregion
 
 

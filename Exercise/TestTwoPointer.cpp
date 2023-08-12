@@ -394,8 +394,24 @@ void TestLeetCode2779(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2799(void)
+{
+    Logger::WriteMessage("Test Leet Code 2799");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 1,3,1,2,2 };
+    int result = leetCode.countCompleteSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,5,5,5 };
+    result = leetCode.countCompleteSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2799();
     TestLeetCode2779();
     TestLeetCode2762();
     TestLeetCode2743();

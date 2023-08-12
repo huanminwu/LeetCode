@@ -4734,8 +4734,46 @@ void TestLeetCode651(void)
     Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2809(void)
+{
+    LeetCodeDP leetCode;
+    vector<int> nums1 = { 1, 2, 3 };
+    vector<int> nums2 = { 1, 2, 3 };
+    int x = 4;
+    int result = leetCode.minimumTime(nums1, nums2, x);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+
+    nums1 = { 1,2,3 };
+    nums2 = { 3,3,3 };
+    x = 4;
+    result = leetCode.minimumTime(nums1, nums2, x);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+
+    nums1 = { 8, 2, 3 };
+    nums2 = { 1, 4, 2 };
+    x = 13;
+    result = leetCode.minimumTime(nums1, nums2, x);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+
+    nums1 = { 6, 6, 8, 7, 1, 7 };
+    nums2 = { 2, 2, 1, 1, 2, 3 };
+    x = 27;
+    result = leetCode.minimumTime(nums1, nums2, x);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+}
+
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2809();
     TestLeetCode2786();
     TestLeetCode2771();
     TestLeetCode2770();

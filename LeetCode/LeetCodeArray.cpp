@@ -28257,5 +28257,196 @@ long long LeetCodeArray::maxArrayValue(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2798. Number of Employees Who Met the Target
+/// 
+/// Easy
+///
+/// There are n employees in a company, numbered from 0 to n - 1. Each 
+/// employee i has worked for hours[i] hours in the company.
+///
+/// The company requires each employee to work for at least target hours.
+///
+/// You are given a 0-indexed array of non-negative integers hours of 
+/// length n and a non-negative integer target.
+///
+/// Return the integer denoting the number of employees who worked at 
+/// least target hours.
+///
+/// Example 1:
+/// Input: hours = [0,1,2,3,4], target = 2
+/// Output: 3
+/// Explanation: The company wants each employee to work for at least 2 
+/// hours.
+/// - Employee 0 worked for 0 hours and didn't meet the target.
+/// - Employee 1 worked for 1 hours and didn't meet the target.
+/// - Employee 2 worked for 2 hours and met the target.
+/// - Employee 3 worked for 3 hours and met the target.
+/// - Employee 4 worked for 4 hours and met the target.
+/// There are 3 employees who met the target.
+///
+/// Example 2:
+/// Input: hours = [5,1,4,2,2], target = 6
+/// Output: 0
+/// Explanation: The company wants each employee to work for at least 6 
+/// hours.
+/// There are 0 employees who met the target.
+///
+/// Constraints:
+/// 1. 1 <= n == hours.length <= 50
+/// 2. 0 <= hours[i], target <= 10^5
+/// </summary>
+int LeetCodeArray::numberOfEmployeesWhoMetTarget(vector<int>& hours, int target)
+{
+    int result = 0;
+    for (size_t i = 0; i < hours.size(); i++)
+    {
+        if (hours[i] >= target)
+        {
+            result++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2808. Minimum Seconds to Equalize a Circular Array
+/// 
+/// Medium
+///
+/// You are given a 0-indexed array nums containing n integers.
+///
+/// At each second, you perform the following operation on the array:
+///
+/// For every index i in the range [0, n - 1], replace nums[i] with 
+/// either nums[i], nums[(i - 1 + n) % n], or nums[(i + 1) % n].
+/// Note that all the elements get replaced simultaneously.
+///
+/// Return the minimum number of seconds needed to make all elements 
+/// in the array nums equal.
+///
+/// Example 1:
+/// Input: nums = [1,2,1,2]
+/// Output: 1
+/// Explanation: We can equalize the array in 1 second in the following 
+/// way:
+/// - At 1st second, replace values at each index with [nums[3],nums[1],
+/// nums[3],nums[3]]. After replacement, nums = [2,2,2,2].
+/// It can be proven that 1 second is the minimum amount of seconds 
+/// needed for equalizing the array.
+///
+/// Example 2:
+/// Input: nums = [2,1,3,3,2]
+/// Output: 2
+/// Explanation: We can equalize the array in 2 seconds in the following 
+/// way:
+/// - At 1st second, replace values at each index with [nums[0],nums[2],
+///   nums[2],nums[2],nums[3]]. After replacement, nums = [2,3,3,3,3].
+/// - At 2nd second, replace values at each index with [nums[1],nums[1],
+///   nums[2],nums[3],nums[4]]. After replacement, nums = [3,3,3,3,3].
+/// It can be proven that 2 seconds is the minimum amount of seconds 
+/// needed for equalizing the array.
+///
+/// Example 3:
+/// Input: nums = [5,5,5,5]
+/// Output: 0
+/// Explanation: We don't need to perform any operations as all elements 
+/// in the initial array are the same.
+///
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeArray::minimumSeconds(vector<int>& nums)
+{
+    unordered_map<int, int> head, tail, distance;
+    int result = nums.size();
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int n = nums[i];
+        if (head.count(n) > 0)
+        {
+            distance[n] = max(distance[n], ((int)i - tail[n]) / 2);
+        }
+        else
+        {
+            head[n] = i;
+        }
+        tail[n] = i;
+    }
+    for (auto itr : head)
+    {
+        int d = max(distance[itr.first], (head[itr.first] + (int)nums.size() - tail[itr.first]) / 2);
+        result = min(result, d);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2811. Check if it is Possible to Split Array
+/// 
+/// Medium
+///
+/// You are given an array nums of length n and an integer m. You need to 
+/// determine if it is possible to split the array into n non-empty 
+/// arrays by performing a series of steps.
+///
+/// In each step, you can select an existing array (which may be the 
+/// result of previous steps) with a length of at least two and split 
+/// it into two subarrays, if, for each resulting subarray, at least 
+/// one of the following holds:
+///
+/// The length of the subarray is one, or
+/// The sum of elements of the subarray is greater than or equal to m.
+/// Return true if you can split the given array into n arrays, otherwise 
+/// return false.
+///
+/// Note: A subarray is a contiguous non-empty sequence of elements 
+/// within an array.
+///  
+/// Example 1:
+/// Input: nums = [2, 2, 1], m = 4
+/// Output: true
+/// Explanation: We can split the array into [2, 2] and [1] in the 
+/// first step. Then, in the second step, we can split [2, 2] into [2] 
+/// and [2]. As a result, the answer is true.
+///
+/// Example 2:
+/// Input: nums = [2, 1, 3], m = 5 
+/// Output: false
+/// Explanation: We can try splitting the array in two different ways: 
+/// the first way is to have [2, 1] and [3], and the second way is to 
+/// have [2] and [1, 3]. However, both of these ways are not valid. So, 
+/// the answer is false.
+///
+/// Example 3:
+/// Input: nums = [2, 3, 3, 2, 3], m = 6
+/// Output: true
+/// Explanation: We can split the array into [2, 3, 3, 2] and [3] 
+/// in the first step. Then, in the second step, we can split 
+/// [2, 3, 3, 2] into [2, 3, 3] and [2]. Then, in the third step, 
+/// we can split [2, 3, 3] into [2] and [3, 3]. And in the last 
+/// step we can split [3, 3] into [3] and [3]. As a result, 
+/// the answer is true.
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 100
+/// 2. 1 <= nums[i] <= 100
+/// 3. 1 <= m <= 200
+/// </summary>
+bool LeetCodeArray::canSplitArray(vector<int>& nums, int m)
+{
+    int n = nums.size();
+    if (n <= 2) return true;
+    int sum = accumulate(nums.begin(), nums.end(), 0);
+    for (int i = 0; i < n - 1; i++)
+    {
+        if (sum < m) return false;
+        if (nums[i] + nums[i + 1] >= m) return true;
+        sum -= nums[i];
+    }
+    return true;
+}
 #pragma endregion
 

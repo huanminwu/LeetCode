@@ -14,7 +14,9 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <numeric>
+#include <random>
+#include <ctime>
+
 #include "Leetcode.h"
 #include "LeetcodeMath.h"
 #pragma region Math
@@ -12213,7 +12215,8 @@ vector<double> LeetCodeMath::outerTrees(vector<vector<int>>& trees, int i, vecto
 {
     if (i == 0) {
         srand((int)time(nullptr));
-        random_shuffle(begin(trees), end(trees));
+        std::mt19937 rng((int)std::time(nullptr));
+        std::shuffle(trees.begin(), trees.end(), rng);
     }
     if (i == trees.size() || b.size() == 3)
         return centerAndRadius(b);
@@ -19182,6 +19185,98 @@ int LeetCodeMath::maxIncreasingGroups(vector<int>& usageLimits)
             result++;
         }
     }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2802. Find The K-th Lucky Number
+/// 
+/// Medium
+///
+/// We know that 4 and 7 are lucky digits. Also, a number is called lucky 
+/// if it contains only lucky digits.
+///
+/// You are given an integer k, return the kth lucky number represented 
+/// as a string.
+/// 
+/// Example 1:
+/// Input: k = 4
+/// Output: "47"
+/// Explanation: The first lucky number is 4, the second one is 7, the 
+/// third one is 44 and the fourth one is 47.
+///
+/// Example 2:
+/// Input: k = 10
+/// Output: "477"
+/// Explanation: Here are lucky numbers sorted in increasing order:
+/// 4, 7, 44, 47, 74, 77, 444, 447, 474, 477. So the 10th lucky number 
+/// is 477.
+///
+/// Example 3:
+/// Input: k = 1000
+/// Output: "777747447"
+/// Explanation: It can be shown that the 1000th lucky number is 777747447.
+///
+/// Constraints:
+/// 1. 1 <= k <= 10^9
+/// </summary>
+string LeetCodeMath::kthLuckyNumber(int k)
+{
+    string result;
+    k++;
+    while (k > 1)
+    {
+        if (k % 2 == 0) result.push_back('4');
+        else result.push_back('7');
+        k /= 2;
+    }
+    std::reverse(result.begin(), result.end());
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2806. Account Balance After Rounded Purchase
+/// 
+/// Easy
+///
+/// Initially, you have a bank account balance of 100 dollars.
+///
+/// You are given an integer purchaseAmount representing the amount you 
+/// will spend on a purchase in dollars.
+///
+/// At the store where you will make the purchase, the purchase amount 
+/// is rounded to the nearest multiple of 10. In other words, you pay a 
+/// non-negative amount, roundedAmount, such that roundedAmount is a 
+/// multiple of 10 and abs(roundedAmount - purchaseAmount) is minimized.
+///
+/// If there is more than one nearest multiple of 10, the largest multiple 
+/// is chosen.
+///
+/// Return an integer denoting your account balance after making a 
+/// purchase worth purchaseAmount dollars from the store.
+///
+/// Note: 0 is considered to be a multiple of 10 in this problem.
+/// 
+/// Example 1:
+/// 
+/// Input: purchaseAmount = 9
+/// Output: 90
+/// Explanation: In this example, the nearest multiple of 10 to 9 is 10. 
+/// Hence, your account balance becomes 100 - 10 = 90.
+///
+/// Example 2:
+/// Input: purchaseAmount = 15
+/// Output: 80
+/// Explanation: In this example, there are two nearest multiples of 10 
+/// to 15: 10 and 20. So, the larger multiple, 20, is chosen.
+/// Hence, your account balance becomes 100 - 20 = 80.
+///
+/// Constraints:
+/// 1. 0 <= purchaseAmount <= 100
+/// </summary>
+int LeetCodeMath::accountBalanceAfterPurchase(int purchaseAmount)
+{
+    int result = 100 - (purchaseAmount + 5) / 10 * 10;
     return result;
 }
 

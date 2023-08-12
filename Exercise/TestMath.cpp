@@ -6127,9 +6127,44 @@ void TestLeetCode2790(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2802(void)
+{
+    Logger::WriteMessage("Test Leet Code 2802");
+    LeetCodeMath leetCode;
+    int k = 4;
+    string result = leetCode.kthLuckyNumber(k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
+
+    k = 10;
+    result = leetCode.kthLuckyNumber(k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
+
+    k = 1000;
+    result = leetCode.kthLuckyNumber(k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
+}
+
+void TestLeetCode2806(void)
+{
+    Logger::WriteMessage("Test Leet Code 2806");
+    LeetCodeMath leetCode;
+    int purchaseAmount = 9;
+    int result = leetCode.accountBalanceAfterPurchase(purchaseAmount);
+    Logger::WriteMessage("purchaseAmount = " + to_string(purchaseAmount) + "; result = " + to_string(result));
+
+    purchaseAmount = 15;
+    result = leetCode.accountBalanceAfterPurchase(purchaseAmount);
+    Logger::WriteMessage("purchaseAmount = " + to_string(purchaseAmount) + "; result = " + to_string(result));
+
+    purchaseAmount = 100;
+    result = leetCode.accountBalanceAfterPurchase(purchaseAmount);
+    Logger::WriteMessage("purchaseAmount = " + to_string(purchaseAmount) + "; result = " + to_string(result));
+}
 
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2806();
+    TestLeetCode2802();
     TestLeetCode2790();
     TestLeetCode2778();
     TestLeetCode2769();
