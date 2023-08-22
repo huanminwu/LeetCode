@@ -18051,9 +18051,12 @@ int LeetCodeGraph::minimumDistance(int n, vector<vector<int>>& edges, int s, vec
 /// </summary>
 int LeetCodeGraph::minimumSeconds(vector<vector<string>>& land)
 {
-    vector<int> s(2), d(2);
+    vector<int> s(2);
+    queue<vector<int>> queue;
+
     int n = land.size();
     int m = land[0].size();
+    vector<vector<int>> water(n, vector<int>(m, INT_MAX));
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
@@ -18063,17 +18066,14 @@ int LeetCodeGraph::minimumSeconds(vector<vector<string>>& land)
                 s[0] = i; 
                 s[1] = j;
             }
-            if (land[i][j] == "D")
+            if (land[i][j] == "*")
             {
-                d[0] = i;
-                d[1] = j;
+                queue.push({ i, j });
+                water[i][j] = 0;
             }
         }
     }
     vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
-    vector<vector<int>> water(n, vector<int>(m));
-    queue<vector<int>> queue;
-    queue.push(d);
     while (!queue.empty())
     {
         vector<int> p = queue.front();
@@ -18091,15 +18091,11 @@ int LeetCodeGraph::minimumSeconds(vector<vector<string>>& land)
             {
                 continue;
             }
-            if (land[next_p[0]][next_p[1]] == "X")
+            if (land[next_p[0]][next_p[1]] == "X" || land[next_p[0]][next_p[1]] == "D")
             {
                 continue;
             }
-            if (water[next_p[0]][next_p[1]] > 0)
-            {
-                continue;
-            }
-            if (next_p == d)
+            if (water[next_p[0]][next_p[1]] != INT_MAX)
             {
                 continue;
             }
@@ -18140,18 +18136,156 @@ int LeetCodeGraph::minimumSeconds(vector<vector<string>>& land)
                 continue;
             }
             step[next_p[0]][next_p[1]] = step[p[0]][p[1]] + 1;
-            if (step[next_p[0]][next_p[1]] <= water[next_p[0]][next_p[1]])
-            {
-                continue;
-            }
-            queue.push(next_p);
             if (land[next_p[0]][next_p[1]] == "D")
             {
                 return step[next_p[0]][next_p[1]];
             }
+            if (step[next_p[0]][next_p[1]] >= water[next_p[0]][next_p[1]])
+            {
+                continue;
+            }
+            queue.push(next_p);
         }
     }
     return -1;
 }
 
+/// <summary>
+/// Leet 2812. Find the Safest Path in a Grid
+/// 
+/// Medium
+///
+/// You are given a 0-indexed 2D matrix grid of size n x n, where (r, c) 
+/// represents:
+///
+/// A cell containing a thief if grid[r][c] = 1
+/// An empty cell if grid[r][c] = 0
+/// You are initially positioned at cell (0, 0). In one move, you can 
+/// move to any adjacent cell in the grid, including cells containing 
+/// thieves.
+///
+/// The safeness factor of a path on the grid is defined as the minimum 
+/// manhattan distance from any cell in the path to any thief in the grid.
+///
+/// Return the maximum safeness factor of all paths leading to cell 
+/// (n - 1, n - 1).
+///
+/// An adjacent cell of cell (r, c), is one of the cells (r, c + 1), 
+/// (r, c - 1), (r + 1, c) and (r - 1, c) if it exists.
+///
+/// The Manhattan distance between two cells (a, b) and (x, y) is 
+/// equal to |a - x| + |b - y|, where |val| denotes the absolute value 
+/// of val.
+///
+/// Example 1:
+/// Input: grid = [[1,0,0],[0,0,0],[0,0,1]]
+/// Output: 0
+/// Explanation: All paths from (0, 0) to (n - 1, n - 1) go through the 
+/// thieves in cells (0, 0) and (n - 1, n - 1).
+///
+/// Example 2:
+/// Input: grid = [[0,0,1],[0,0,0],[0,0,0]]
+/// Output: 2
+/// Explanation: The path depicted in the picture above has a safeness 
+/// factor of 2 since:
+/// - The closest cell of the path to the thief at cell (0, 2) is cell 
+/// (0, 0). The distance between them is | 0 - 0 | + | 0 - 2 | = 2.
+/// It can be shown that there are no other paths with a higher safeness 
+/// factor.
+///
+/// Example 3:
+/// Input: grid = [[0,0,0,1],[0,0,0,0],[0,0,0,0],[1,0,0,0]]
+/// Output: 2
+/// Explanation: The path depicted in the picture above has a safeness 
+/// factor of 2 since:
+/// - The closest cell of the path to the thief at cell (0, 3) is cell 
+///  (1, 2). The distance between them is | 0 - 1 | + | 3 - 2 | = 2.
+/// - The closest cell of the path to the thief at cell (3, 0) is cell 
+///  (3, 2). The distance between them is | 3 - 3 | + | 0 - 2 | = 2.
+/// It can be shown that there are no other paths with a higher safeness 
+/// factor.
+/// 
+/// Constraints:
+/// 1. 1 <= grid.length == n <= 400
+/// 2. grid[i].length == n
+/// 3. grid[i][j] is either 0 or 1.
+/// 4. There is at least one thief in the grid.
+/// </summary>
+int LeetCodeGraph::maximumSafenessFactor(vector<vector<int>>& grid)
+{
+    queue<pair<int, int>> thiefs;
+    int n = grid.size();
+    vector<vector<int>> distance(n, vector<int>(n, INT_MAX));
+    for (size_t i = 0; i < grid.size(); i++)
+    {
+        for (size_t j = 0; j < grid.size(); j++)
+        {
+            if (grid[i][j] == 1)
+            {
+                thiefs.push({ i, j });
+                distance[i][j] = 0;
+            }
+        }
+    }
+    vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    while (!thiefs.empty())
+    {
+        pair<int, int> pos = thiefs.front();
+        thiefs.pop();
+        for (size_t d = 0; d < directions.size(); d++)
+        {
+            pair<int, int> nextpos = pos;
+            nextpos.first += directions[d][0];
+            nextpos.second += directions[d][1];
+            if (nextpos.first < 0 || nextpos.first >= n ||
+                nextpos.second < 0 || nextpos.second >= n)
+            {
+                continue;
+            }
+            if (distance[nextpos.first][nextpos.second] <= distance[pos.first][pos.second] + 1)
+            {
+                continue;
+            }
+            distance[nextpos.first][nextpos.second] = distance[pos.first][pos.second] + 1;
+            thiefs.push(nextpos);
+        }
+    }
+    vector<vector<int>> visited(n, vector<int>(n));
+    priority_queue<vector<int>> pq;
+    pq.push({ distance[0][0], 0, 0 });
+    visited[0][0] = 1;
+    while (!pq.empty())
+    {
+        vector<int> pos = pq.top();
+        pq.pop();
+        for (size_t d = 0; d < directions.size(); d++)
+        {
+            vector<int> nextpos = pos;
+            nextpos[1] += directions[d][0];
+            nextpos[2] += directions[d][1];
+            if (nextpos[1] < 0 || nextpos[1] >= n ||
+                nextpos[2] < 0 || nextpos[2] >= n)
+            {
+                continue;
+            }
+            if (visited[nextpos[1]][nextpos[2]] == 1)
+            {
+                continue;
+            }
+            if (grid[nextpos[1]][nextpos[2]] == 1)
+            {
+                continue;
+            }
+            nextpos[0] = distance[nextpos[1]][nextpos[2]];
+            visited[nextpos[1]][nextpos[2]] = 1;
+            distance[nextpos[1]][nextpos[2]] = min(distance[pos[1]][pos[2]], distance[nextpos[1]][nextpos[2]]);
+            if (nextpos[1] == n - 1 && nextpos[2] == n - 1)
+            {
+                return distance[n - 1][n - 1];
+            }
+            pq.push(nextpos);
+        }
+    }
+    return 0;
+}
 #pragma endregion

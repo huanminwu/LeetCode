@@ -409,8 +409,26 @@ void TestLeetCode2799(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2831(void)
+{
+    Logger::WriteMessage("Test Leet Code 2831");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 1, 3, 2, 3, 1, 3 };
+    int k = 3;
+    int result = leetCode.longestEqualSubarray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,1,2,2,1,1 };
+    k = 2;
+    result = leetCode.longestEqualSubarray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2831();
     TestLeetCode2799();
     TestLeetCode2779();
     TestLeetCode2762();

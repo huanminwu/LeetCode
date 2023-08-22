@@ -1641,8 +1641,40 @@ void TestLeetCode2766(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2815(void)
+{
+    Logger::WriteMessage("Test Leet Code 2815");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 51, 71, 17, 24, 42 };
+    int result = leetCode.maxSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    result = leetCode.maxSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2829(void)
+{
+    Logger::WriteMessage("Test Leet Code 2829");
+    LeetCodeHashtable leetCode;
+    int n = 5, k = 4;
+    int result = leetCode.minimumSum(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 2, k = 6;
+    result = leetCode.minimumSum(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode2829();
+    TestLeetCode2815();
     TestLeetCode2766();
     TestLeetCode2670();
     TestLeetCode2657();

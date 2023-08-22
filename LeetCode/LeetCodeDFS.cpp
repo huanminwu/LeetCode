@@ -9042,29 +9042,25 @@ int LeetCodeDFS::countSteppingNumbers(string& limit, int index, vector<vector<in
     int count = 0;
     if (leadingzero)
     {
-        count = countSteppingNumbers(limit, index + 1, dp, 0, true, false);
-        result = (result + count) % M;
-        for (int i = 1; i < 10; i++)
+        for (int i = 0; i < 10; i++)
         {
-            if (leadinglimit)
+            bool next_leadingzero = false;
+            bool next_leadinglimit = false;
+            if (i == 0)
             {
-                if (i < limit[index] - '0')
-                {
-                    count = countSteppingNumbers(limit, index + 1, dp, i, false, false);
-                }
-                else if (i == limit[index] - '0')
-                {
-                    count = countSteppingNumbers(limit, index + 1, dp, i, false, true);
-                }
-                else
-                {
-                    break;
-                }
+                next_leadingzero = true;
             }
             else
             {
-                count = countSteppingNumbers(limit, index + 1, dp, i, false, false);
+                next_leadingzero = false;
             }
+            if (leadinglimit)
+            {
+                if (i > limit[index] - '0') break;
+                if (i == limit[index] - '0') next_leadinglimit = true;
+                else next_leadinglimit = false;
+            }
+            count = countSteppingNumbers(limit, index + 1, dp, i, next_leadingzero, next_leadinglimit);
             result = (result + count) % M;
         }
     }
@@ -9072,26 +9068,15 @@ int LeetCodeDFS::countSteppingNumbers(string& limit, int index, vector<vector<in
     {
         for (int i = prev - 1; i <= prev + 1; i += 2)
         {
+            bool next_leadinglimit = false;
             if (i < 0 || i > 9) continue;
             if (leadinglimit)
             {
-                if (i < limit[index] - '0')
-                {
-                    count = countSteppingNumbers(limit, index + 1, dp, i, false, false);
-                }
-                else if (i == limit[index] - '0')
-                {
-                    count = countSteppingNumbers(limit, index + 1, dp, i, false, true);
-                }
-                else
-                {
-                    break;
-                }
+                if (i > limit[index] - '0') break;
+                if (i == limit[index] - '0') next_leadinglimit = true;
+                else next_leadinglimit = false;
             }
-            else
-            {
-                count = countSteppingNumbers(limit, index + 1, dp, i, false, false);
-            }
+            count = countSteppingNumbers(limit, index + 1, dp, i, false, next_leadinglimit);
             result = (result + count) % M;
         }
     }
@@ -9161,6 +9146,117 @@ int LeetCodeDFS::countSteppingNumbers(string low, string high)
     result = (result + count) % M;
     return result;
 }
+
+/// <summary>
+/// Leet Code 2827. Number of Beautiful Integers in the Range
+/// </summary>
+int LeetCodeDFS::numberOfBeautifulIntegers(string limit, int k, int remainder, int parity, int index,
+    vector<vector<vector<int>>>& dp, bool is_leadingzero, bool is_leadinglimit)
+{
+    int result = 0;
+    if (index == limit.size())
+    {
+        if (parity != 10 || remainder != 0 || is_leadingzero) return 0;
+        else return 1;
+    }
+    if (is_leadinglimit == false && is_leadingzero == false && dp[index][remainder][parity] != -1)
+    {
+        return dp[index][remainder][parity];
+    }
+
+    int count = 0;
+    for (int i = 0; i < 10; i++)
+    {
+        bool next_leadingzero = false;
+        bool next_leadinglimit = false;
+        if (i == 0 && is_leadingzero) next_leadingzero = true;
+        else next_leadingzero = false;
+        if (is_leadinglimit)
+        {
+            if (i > limit[index] - '0') break;
+            if (i == limit[index] - '0') next_leadinglimit = true;
+            else next_leadinglimit = false;
+        }
+        int r = (remainder * 10 + i) % k;
+        int p = next_leadingzero ? 0 : ((i % 2 == 0) ? 1 : -1);
+        count = numberOfBeautifulIntegers(limit, k, r, parity + p, index + 1, dp, next_leadingzero, next_leadinglimit);
+        result = result + count;
+    }
+
+    if (is_leadinglimit == false && is_leadingzero == false)
+    {
+        dp[index][remainder][parity] = (int)result;
+    }
+    return (int)result;
+}
+
+/// <summary>
+/// Leet Code 2827. Number of Beautiful Integers in the Range
+/// 
+/// Hard
+///
+/// You are given positive integers low, high, and k.
+///
+/// A number is beautiful if it meets both of the following conditions:
+///
+/// The count of even digits in the number is equal to the count of odd 
+/// digits.
+/// The number is divisible by k.
+/// Return the number of beautiful integers in the range [low, high].
+///
+/// Example 1:
+///
+/// Input: low = 10, high = 20, k = 3
+/// Output: 2
+/// Explanation: There are 2 beautiful integers in the given range: 
+/// [12,18]. 
+/// - 12 is beautiful because it contains 1 odd digit and 1 even digit, 
+///   and is divisible by k = 3.
+/// - 18 is beautiful because it contains 1 odd digit and 1 even digit, 
+///   and is divisible by k = 3.
+/// Additionally we can see that:
+/// - 16 is not beautiful because it is not divisible by k = 3.
+/// - 15 is not beautiful because it does not contain equal counts even 
+///   and odd digits.
+/// It can be shown that there are only 2 beautiful integers in the given 
+/// range.
+///
+/// Example 2:
+/// Input: low = 1, high = 10, k = 1
+/// Output: 1
+/// Explanation: There is 1 beautiful integer in the given range: [10].
+/// - 10 is beautiful because it contains 1 odd digit and 1 even digit, 
+///   and is divisible by k = 1. 
+/// It can be shown that there is only 1 beautiful integer in the given 
+/// range.
+///
+/// Example 3:
+/// Input: low = 5, high = 5, k = 2
+/// Output: 0
+/// Explanation: There are 0 beautiful integers in the given range.
+/// - 5 is not beautiful because it is not divisible by k = 2 and it 
+///   does not contain equal even and odd digits.
+///
+/// Constraints:
+/// 1. 0 < low <= high <= 10^9
+/// 2. 0 < k <= 20
+/// </summary>
+int LeetCodeDFS::numberOfBeautifulIntegers(int low, int high, int k)
+{
+    string str_low = to_string(low-1);
+    string str_high = to_string(high);
+
+    vector<vector<vector<int>>> dp = vector<vector<vector<int>>>(str_low.size(), 
+        vector<vector<int>>(k, vector<int>(20, -1)));
+
+    int low_count = numberOfBeautifulIntegers(str_low, k, 0, 10, 0, dp, true, true);
+    dp = vector<vector<vector<int>>>(str_high.size(),
+        vector<vector<int>>(k, vector<int>(20, -1)));
+    int high_count = numberOfBeautifulIntegers(str_high, k, 0, 10, 0, dp, true, true);
+    int result = high_count - low_count;
+    return result;
+}
+
 #pragma endregion
 
 

@@ -3587,5 +3587,122 @@ public:
     /// 8. x < queries[i] <= 10^6
     /// </summary>
     vector<int> countServers(int n, vector<vector<int>>& logs, int x, vector<int>& queries);
+
+    /// <summary>
+    /// Leet 2813. Maximum Elegance of a K-Length Subsequence
+    /// 
+    /// Hard
+    ///
+    /// You are given a 0-indexed 2D integer array items of length n and an 
+    /// integer k.
+    ///
+    /// items[i] = [profiti, categoryi], where profiti and categoryi denote 
+    /// the profit and category of the ith item respectively.
+    ///
+    /// Let's define the elegance of a subsequence of items as total_profit + 
+    /// distinct_categories2, where total_profit is the sum of all profits 
+    /// in the subsequence, and distinct_categories is the number of distinct 
+    /// categories from all the categories in the selected subsequence.
+    ///
+    /// Your task is to find the maximum elegance from all subsequences of 
+    /// size k in items.
+    ///
+    /// Return an integer denoting the maximum elegance of a subsequence of 
+    /// items with size exactly k.
+    ///
+    /// Note: A subsequence of an array is a new array generated from the 
+    /// original array by deleting some elements (possibly none) without 
+    /// changing the remaining elements' relative order.
+    /// 
+    /// Example 1:
+    /// Input: items = [[3,2],[5,1],[10,1]], k = 2
+    /// Output: 17
+    /// Explanation: In this example, we have to select a subsequence of 
+    /// size 2.
+    /// We can select items[0] = [3,2] and items[2] = [10,1].
+    /// The total profit in this subsequence is 3 + 10 = 13, and the 
+    /// subsequence contains 2 distinct categories [2,1].
+    /// Hence, the elegance is 13 + 22 = 17, and we can show that it is 
+    /// the maximum achievable elegance. 
+    ///
+    /// Example 2:
+    /// Input: items = [[3,1],[3,1],[2,2],[5,3]], k = 3
+    /// Output: 19
+    /// Explanation: In this example, we have to select a subsequence of 
+    /// size 3. 
+    /// We can select items[0] = [3,1], items[2] = [2,2], and 
+    /// items[3] = [5,3]. 
+    /// The total profit in this subsequence is 3 + 2 + 5 = 10, and the 
+    /// subsequence contains 3 distinct categories [1,2,3]. 
+    /// Hence, the elegance is 10 + 32 = 19, and we can show that it is the 
+    /// maximum achievable elegance.
+    ///
+    /// Example 3:
+    /// Input: items = [[1,1],[2,1],[3,1]], k = 3
+    /// Output: 7
+    /// Explanation: In this example, we have to select a subsequence of 
+    /// size 3. 
+    /// We should select all the items. 
+    /// The total profit will be 1 + 2 + 3 = 6, and the subsequence 
+    /// contains 1 distinct category [1]. 
+    /// Hence, the maximum elegance is 6 + 12 = 7.  
+    ///
+    /// Constraints:
+    /// 1. 1 <= items.length == n <= 10^5
+    /// 2. items[i].length == 2
+    /// 3. items[i][0] == profiti
+    /// 4. items[i][1] == categoryi
+    /// 5. 1 <= profiti <= 10^9
+    /// 6. 1 <= categoryi <= n 
+    /// 7. 1 <= k <= n
+    /// </summary>
+    long long findMaximumElegance(vector<vector<int>>& items, int k);
+
+    /// <summary>
+    /// Leet Code 2830. Maximize the Profit as the Salesman
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer n representing the number of houses on a 
+    /// number line, numbered from 0 to n - 1.
+    ///
+    /// Additionally, you are given a 2D integer array offers where 
+    /// offers[i] = [starti, endi, goldi], indicating that ith buyer wants 
+    /// to buy all the houses from starti to endi for goldi amount of gold.
+    ///
+    /// As a salesman, your goal is to maximize your earnings by 
+    /// strategically selecting and selling houses to buyers.
+    ///
+    /// Return the maximum amount of gold you can earn.
+    ///
+    /// Note that different buyers can't buy the same house, and some 
+    /// houses may remain unsold.
+    ///
+    /// Example 1:
+    /// Input: n = 5, offers = [[0,0,1],[0,2,2],[1,3,2]]
+    /// Output: 3
+    /// Explanation: There are 5 houses numbered from 0 to 4 and there 
+    /// are 3 purchase offers.
+    /// We sell houses in the range [0,0] to 1st buyer for 1 gold and houses 
+    /// in the range [1,3] to 3rd buyer for 2 golds.
+    /// It can be proven that 3 is the maximum amount of gold we can achieve.
+    ///
+    /// Example 2:
+    ///
+    /// Input: n = 5, offers = [[0,0,1],[0,2,10],[1,3,2]]
+    /// Output: 10
+    /// Explanation: There are 5 houses numbered from 0 to 4 and there are 3 
+    /// purchase offers.
+    /// We sell houses in the range [0,2] to 2nd buyer for 10 golds.
+    /// It can be proven that 10 is the maximum amount of gold we can achieve.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^5
+    /// 2. 1 <= offers.length <= 10^5
+    /// 3. offers[i].length == 3
+    /// 4. 0 <= starti <= endi <= n - 1
+    /// 5. 1 <= goldi <= 10^3
+    /// </summary>
+    int maximizeTheProfit(int n, vector<vector<int>>& offers);
 };
 #endif  // LeetCodeGreedy_H

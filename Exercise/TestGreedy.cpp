@@ -1700,8 +1700,58 @@ void TestLeetCode2747(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2813(void)
+{
+    Logger::WriteMessage("Test Leet Code 2813");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> items = { {3, 2},{5, 1},{10, 1} };
+    int k = 2;
+    long long result = leetCode.findMaximumElegance(items, k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    items = { {3, 1},{3, 1},{2, 2},{5, 3} };
+    k = 3;
+    result = leetCode.findMaximumElegance(items, k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    items = { {1, 1},{2, 1},{3, 1} };
+    k = 3;
+    result = leetCode.findMaximumElegance(items, k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    items = { {4, 2},{4, 4},{10, 4},{9, 1} };
+    k = 3;
+    result = leetCode.findMaximumElegance(items, k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2830(void)
+{
+    Logger::WriteMessage("Test Leet Code 2830");
+    LeetCodeGreedy leetCode;
+    int n = 5; 
+    vector<vector<int>> offers = { {0, 0, 1},{0, 2, 2},{1, 3, 2} };
+    int result = leetCode.maximizeTheProfit(n, offers);
+    Logger::WriteMessage(offers);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 5;
+    offers = { {0, 0, 1},{0, 2, 10},{1, 3, 2} };
+    result = leetCode.maximizeTheProfit(n, offers);
+    Logger::WriteMessage(offers);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    offers = { {0, 0, 5},{3, 3, 1},{1, 2, 5},{0, 0, 7} };
+    result = leetCode.maximizeTheProfit(n, offers);
+    Logger::WriteMessage(offers);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode2830();
+    TestLeetCode2813();
     TestLeetCode2747();
     TestLeetCode2672();
     TestLeetCode2655();

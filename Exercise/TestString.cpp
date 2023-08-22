@@ -6299,8 +6299,58 @@ void TestLeetCode2810(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode2825(void)
+{
+    Logger::WriteMessage("Test Leet Code 2825");
+    LeetCodeString leetCode;
+    string str1 = "abc", str2 = "ad";
+    bool result = leetCode.canMakeSubsequence(str1, str2);
+    Logger::WriteMessage("str1 = " + str1 + "; str2 = " + str2);
+    Logger::WriteMessage("result = " + (string)(result? "true" : "false"));
+
+    str1 = "zc", str2 = "ad";
+    result = leetCode.canMakeSubsequence(str1, str2);
+    Logger::WriteMessage("str1 = " + str1 + "; str2 = " + str2);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    str1 = "ab", str2 = "d";
+    result = leetCode.canMakeSubsequence(str1, str2);
+    Logger::WriteMessage("str1 = " + str1 + "; str2 = " + str2);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    str1 = "fp", str2 = "p";
+    result = leetCode.canMakeSubsequence(str1, str2);
+    Logger::WriteMessage("str1 = " + str1 + "; str2 = " + str2);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2828(void)
+{
+    Logger::WriteMessage("Test Leet Code 2828");
+    LeetCodeString leetCode;
+    vector<string> words = { "alice", "bob", "charlie" };
+    string s = "abc";
+    bool result = leetCode.isAcronym(words, s);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    words = { "an","apple" };
+    s = "a";
+    result = leetCode.isAcronym(words, s);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    words = { "never","gonna","give","up","on","you" };
+    s = "ngguoy";
+    result = leetCode.isAcronym(words, s);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2828();
+    TestLeetCode2825();
     TestLeetCode2810();
     TestLeetCode2800();
     TestLeetCode2788();

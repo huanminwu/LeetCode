@@ -5370,8 +5370,29 @@ void TestLeetCode2814(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2812(void)
+{
+    Logger::WriteMessage("Test Leet Code 2812");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid = { {1, 0, 0},{0, 0, 0},{0, 0, 1} };
+    int result = leetCode.maximumSafenessFactor(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {0, 0, 1},{0, 0, 0},{0, 0, 0} };
+    result = leetCode.maximumSafenessFactor(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {0, 0, 0, 1},{0, 0, 0, 0},{0, 0, 0, 0},{1, 0, 0, 0} };
+    result = leetCode.maximumSafenessFactor(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2812();
     TestLeetCode2814();
     TestLeetCode2737();
     TestLeetCode2714();

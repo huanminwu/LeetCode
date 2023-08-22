@@ -4770,9 +4770,28 @@ void TestLeetCode2809(void)
     Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2826(void)
+{
+    LeetCodeDP leetCode;
+    vector<int> nums = { 2, 1, 3, 2, 1 };
+    int result = leetCode.minimumOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,3,2,1,3,3 };
+    result = leetCode.minimumOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,2,2,2,3,3 };
+    result = leetCode.minimumOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2826();
     TestLeetCode2809();
     TestLeetCode2786();
     TestLeetCode2771();

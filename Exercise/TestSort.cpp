@@ -3348,8 +3348,32 @@ void TestLeetCode2763(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2817(void)
+{
+    Logger::WriteMessage("Test Leet Code 2817");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 4, 3, 2, 4 };
+    int x = 2;
+    int result = leetCode.minAbsoluteDifference(nums, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+
+    nums = { 5,3,2,10,15 };
+    x = 1;
+    result = leetCode.minAbsoluteDifference(nums, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    x = 3;
+    result = leetCode.minAbsoluteDifference(nums, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2817();
     TestLeetCode2763();
     TestLeetCode2736();
     TestLeetCode2740();

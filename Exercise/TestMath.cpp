@@ -6161,8 +6161,26 @@ void TestLeetCode2806(void)
     Logger::WriteMessage("purchaseAmount = " + to_string(purchaseAmount) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2818(void)
+{
+    Logger::WriteMessage("Test Leet Code 2818");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 8, 3, 9, 3, 8 };
+    int k = 2;
+    int result = leetCode.maximumScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 19,12,14,6,10,18 };
+    k = 3;
+    result = leetCode.maximumScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2818();
     TestLeetCode2806();
     TestLeetCode2802();
     TestLeetCode2790();

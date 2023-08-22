@@ -2288,9 +2288,30 @@ void TestLeetCode2801(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2827(void)
+{
+    Logger::WriteMessage("Test Leet Code 2817");
+    LeetCodeDFS leetCode;
+    int low = 10, high = 20, k = 3;
+    int result = leetCode.numberOfBeautifulIntegers(low, high, k);
+    Logger::WriteMessage("low = " + to_string(low) + "; high = " + to_string(high) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    low = 1, high = 10, k = 1;
+    result = leetCode.numberOfBeautifulIntegers(low, high, k);
+    Logger::WriteMessage("low = " + to_string(low) + "; high = " + to_string(high) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    low = 5, high = 5, k = 2;
+    result = leetCode.numberOfBeautifulIntegers(low, high, k);
+    Logger::WriteMessage("low = " + to_string(low) + "; high = " + to_string(high) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
     TestLeetCode2801();
+    TestLeetCode2827();
     TestLeetCode2787();
     TestLeetCode2741();
     TestLeetCode2664();

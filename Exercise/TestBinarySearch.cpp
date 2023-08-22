@@ -1213,8 +1213,35 @@ void TestLeetCode2702(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2819(void)
+{
+    Logger::WriteMessage("Test Leet Code 2819");
+    LeetCodeBinarySearch leetCode;
+    vector<int> prices = { 1, 9, 22, 10, 19 };
+    vector<vector<int>> queries = { {18, 4},{5, 2} };
+    vector<long long> result = leetCode.minimumRelativeLosses(prices, queries);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    prices = { 1, 5, 4, 3, 7, 11, 9 };
+    queries = { {5, 4},{5, 7},{7, 3},{4, 5} };
+    result = leetCode.minimumRelativeLosses(prices, queries);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    prices = { 5, 6, 7 };
+    queries = { {10, 1} ,{5, 3},{3, 3} };
+    result = leetCode.minimumRelativeLosses(prices, queries);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode2819();
     TestLeetCode2702();
     TestLeetCode2616();
     TestLeetCode2604();

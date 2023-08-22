@@ -1144,8 +1144,28 @@ void TestLeetCode2807(void)
     leetCode.freeListNodes(result);
 }
 
+void TestLeetCode2816(void)
+{
+    Logger::WriteMessage("Test Leet Code 2816");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 1, 8, 9 };
+    ListNode* head = leetCode.generateListNodes(data_list);
+    ListNode* result = leetCode.doubleIt(head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 9,9,9 };
+    head = leetCode.generateListNodes(data_list);
+    result = leetCode.doubleIt(head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+}
+
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode2816();
     TestLeetCode2807();
     TestLeetCode2674();
     TestLeetCode2487();

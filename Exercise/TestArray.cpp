@@ -9231,8 +9231,26 @@ void TestLeetCode2811(void)
     Logger::WriteMessage("m = " + to_string(m) + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2824(void)
+{
+    Logger::WriteMessage("Test Leet Code 2824");
+    LeetCodeArray leetCode;
+    vector<int> nums = { -1, 1, 2, 3, 1 };
+    int target = 2;
+    int result = leetCode.countPairsII(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { -6,2,5,-2,-7,-1,3 };
+    target = -2;
+    result = leetCode.countPairsII(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2824();
     TestLeetCode2811();
     TestLeetCode2808();
     TestLeetCode2798();
