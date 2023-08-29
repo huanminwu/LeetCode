@@ -43,6 +43,7 @@
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeStack();
     TestLeetCodeDFS();
     TestLeetCodeTwoPointer();
     TestLeetCodeGreedy();
@@ -58,7 +59,6 @@ void main(int argc, char* argv[])
     TestLeetCodeTree();
     TestLeetCodeBit();
     TestLeetCodeDesign();
-    TestLeetCodeStack();
     TestLeetCodeBFS();
     TestUSACO();
     TestLeetCode933();

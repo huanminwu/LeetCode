@@ -901,8 +901,25 @@ void TestLeetCode2751(void)
     Logger::WriteMessage(result);
 }
 
+
+void TestLeetCode2832(void)
+{
+    Logger::WriteMessage("Test Leet Code 2832");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 1, 5, 4, 3, 6 };
+    vector<int> result = leetCode.maximumLengthOfRanges(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,2,3,4,5 };
+    result = leetCode.maximumLengthOfRanges(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode2832();
     TestLeetCode2751();
     TestLeetCode2439();
     TestLeetCode2434();
