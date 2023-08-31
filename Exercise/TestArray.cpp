@@ -9248,8 +9248,26 @@ void TestLeetCode2824(void)
     Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2836(void)
+{
+    Logger::WriteMessage("Test Leet Code 2836");
+    LeetCodeArray leetCode;
+    vector<int> receiver = { 2, 0, 1 };
+    int k = 4;
+    long long result = leetCode.getMaxFunctionValue(receiver, k);
+    Logger::WriteMessage(receiver);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    receiver = { 1,1,1,2,3 };
+    k = 3;
+    result = leetCode.getMaxFunctionValue(receiver, k);
+    Logger::WriteMessage(receiver);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2836();
     TestLeetCode2824();
     TestLeetCode2811();
     TestLeetCode2808();

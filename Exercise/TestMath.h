@@ -280,5 +280,6 @@ void TestLeetCode2790(void);
 void TestLeetCode2802(void);
 void TestLeetCode2806(void);
 void TestLeetCode2818(void);
+void TestLeetCode2833(void);
 void TestLeetCodeMath(void);
 #endif  // TestMath

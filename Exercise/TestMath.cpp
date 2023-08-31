@@ -6178,8 +6178,26 @@ void TestLeetCode2818(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2833(void)
+{
+    Logger::WriteMessage("Test Leet Code 2833");
+    LeetCodeMath leetCode;
+    string moves = "L_RL__R";
+    int result = leetCode.furthestDistanceFromOrigin(moves);
+    Logger::WriteMessage("moves = " + moves + "; result = " + to_string(result));
+
+    moves = "_R__LL_";
+    result = leetCode.furthestDistanceFromOrigin(moves);
+    Logger::WriteMessage("moves = " + moves + "; result = " + to_string(result));
+
+    moves = "_______";
+    result = leetCode.furthestDistanceFromOrigin(moves);
+    Logger::WriteMessage("moves = " + moves + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2833();
     TestLeetCode2818();
     TestLeetCode2806();
     TestLeetCode2802();

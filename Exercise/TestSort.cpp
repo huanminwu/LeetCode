@@ -3371,8 +3371,32 @@ void TestLeetCode2817(void)
     Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2835(void)
+{
+    Logger::WriteMessage("Test Leet Code 2835");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 2, 8 };
+    int target = 7;
+    int result = leetCode.minOperations(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { 1, 32, 1, 2 };
+    target = 12;
+    result = leetCode.minOperations(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { 1,32,1 };
+    target = 35;
+    result = leetCode.minOperations(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2835();
     TestLeetCode2817();
     TestLeetCode2763();
     TestLeetCode2736();
