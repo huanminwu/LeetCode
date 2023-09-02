@@ -3394,8 +3394,32 @@ void TestLeetCode2835(void)
     Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2838(void)
+{
+    Logger::WriteMessage("Test Leet Code 2838");
+    LeetCodeSort leetCode;
+    vector<int> heroes = { 1, 4, 2 };
+    vector<int> monsters = { 1, 1, 5, 2, 3 };
+    vector<int> coins = { 2, 3, 4, 5, 6 };
+    vector<long long> result = leetCode.maximumCoins(heroes, monsters, coins);
+    Logger::WriteMessage(heroes);
+    Logger::WriteMessage(monsters);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage(result);
+
+    heroes = { 5 };
+    monsters = { 2,3,1,2 };
+    coins = { 10,6,5,2 };
+    result = leetCode.maximumCoins(heroes, monsters, coins);
+    Logger::WriteMessage(heroes);
+    Logger::WriteMessage(monsters);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2838();
     TestLeetCode2835();
     TestLeetCode2817();
     TestLeetCode2763();
