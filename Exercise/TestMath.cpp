@@ -6195,8 +6195,62 @@ void TestLeetCode2833(void)
     Logger::WriteMessage("moves = " + moves + "; result = " + to_string(result));
 }
 
+void TestLeetCode2842(void)
+{
+    Logger::WriteMessage("Test Leet Code 2842");
+    LeetCodeMath leetCode;
+    string s = "bcca";
+    int k = 2;
+    int result = leetCode.countKSubsequencesWithMaxBeauty(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "abbcd";
+    k = 4;
+    result = leetCode.countKSubsequencesWithMaxBeauty(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2844(void)
+{
+    Logger::WriteMessage("Test Leet Code 2844");
+    LeetCodeMath leetCode;
+    string num = "2245047";
+    int result = leetCode.minimumOperations(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+
+    num = "2908305";
+    result = leetCode.minimumOperations(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+
+    num = "10";
+    result = leetCode.minimumOperations(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+}
+
+void TestLeetCode2847(void)
+{
+    Logger::WriteMessage("Test Leet Code 2847");
+    LeetCodeMath leetCode;
+    long long n = 105;
+    string result = leetCode.smallestNumber(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + result);
+
+    n = 7;
+    result = leetCode.smallestNumber(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + result);
+
+    n = 44;
+    result = leetCode.smallestNumber(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + result);
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2847();
+    TestLeetCode2844();
+    TestLeetCode2842();
     TestLeetCode2833();
     TestLeetCode2818();
     TestLeetCode2806();

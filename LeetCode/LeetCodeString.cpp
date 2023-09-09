@@ -22699,4 +22699,164 @@ bool LeetCodeString::isAcronym(vector<string>& words, string s)
     else return false;
 }
 
+/// <summary>
+/// Leet Code 2839. Check if Strings Can be Made Equal With Operations I
+/// 
+/// Easy
+///
+/// You are given two strings s1 and s2, both of length 4, consisting of 
+/// lowercase English letters.
+///
+/// You can apply the following operation on any of the two strings any 
+/// number of times:
+///
+/// Choose any two indices i and j such that j - i = 2, then swap the 
+/// two characters at those indices in the string.
+/// Return true if you can make the strings s1 and s2 equal, and false 
+/// otherwise.
+/// Example 1:
+///
+/// Input: s1 = "abcd", s2 = "cdab"
+/// Output: true
+/// Explanation: We can do the following operations on s1:
+/// - Choose the indices i = 0, j = 2. The resulting string is s1 = "cbad".
+/// - Choose the indices i = 1, j = 3. The resulting string is 
+///   s1 = "cdab" = s2.
+///
+/// Example 2:
+/// Input: s1 = "abcd", s2 = "dacb"
+/// Output: false
+/// Explanation: It is not possible to make the two strings equal.
+///
+/// Constraints:
+/// 1. s1.length == s2.length == 4
+/// 2. s1 and s2 consist only of lowercase English letters.
+/// </summary>
+bool LeetCodeString::canBeEqual(string s1, string s2)
+{
+    int n = s1.size();
+    for (int i = 0; i < n; i++)
+    {
+        if (s1[i] == s2[i]) continue;
+        if (i < n - 2)
+        {
+            swap(s1[i], s1[i + 2]);
+        }
+        if (s1[i] != s2[i]) return false;
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet Code 2843. Count Symmetric Integers
+/// 
+/// Easy
+///
+/// You are given two positive integers low and high.
+///
+/// An integer x consisting of 2 * n digits is symmetric if the sum of the 
+/// first n digits of x is equal to the sum of the last n digits of x. 
+/// Numbers with an odd number of digits are never symmetric.
+///
+/// Return the number of symmetric integers in the range [low, high].
+///
+/// Example 1:
+/// Input: low = 1, high = 100
+/// Output: 9
+/// Explanation: There are 9 symmetric integers between 1 and 100: 11, 22, 
+/// 33, 44, 55, 66, 77, 88, and 99.
+///
+/// Example 2:
+/// Input: low = 1200, high = 1230
+/// Output: 4
+/// Explanation: There are 4 symmetric integers between 1200 and 1230: 
+/// 1203, 1212, 1221, and 1230.
+///
+/// Constraints:
+///
+///  1 <= low <= high <= 10^4
+/// </summary>
+int LeetCodeString::countSymmetricIntegers(int low, int high)
+{
+    int result = 0;
+    for (int i = 10; i <= high; i++)
+    {
+        if (i < low) continue;
+        string str = to_string(i);
+        if (str.size() % 2 == 1) continue;
+        int sum1 = 0, sum2 = 0;
+        for (size_t j = 0; j < str.size() / 2; j++)
+        {
+            sum1 += str[j] - '0';
+            sum2 += str[str.size() - 1 - j] - '0';
+        }
+        if (sum1 == sum2) result++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2840. Check if Strings Can be Made Equal With Operations II
+/// 
+/// Medium
+///
+/// You are given two strings s1 and s2, both of length n, consisting of 
+/// lowercase English letters.
+///
+/// You can apply the following operation on any of the two strings any 
+/// number of times:
+///
+/// Choose any two indices i and j such that i < j and the difference 
+/// j - i is even, then swap the two characters at those indices in the 
+/// string.
+/// Return true if you can make the strings s1 and s2 equal, and false 
+/// otherwise.
+/// 
+/// Example 1:
+/// Input: s1 = "abcdba", s2 = "cabdab"
+/// Output: true
+/// Explanation: We can apply the following operations on s1:
+/// - Choose the indices i = 0, j = 2. The resulting string is 
+///   s1 = "cbadba".
+/// - Choose the indices i = 2, j = 4. The resulting string is 
+///   s1 = "cbbdaa".
+/// - Choose the indices i = 1, j = 5. The resulting string is 
+///   s1 = "cabdab" = s2.
+///
+/// Example 2:
+/// Input: s1 = "abe", s2 = "bea"
+/// Output: false
+/// Explanation: It is not possible to make the two strings equal.
+/// 
+/// Constraints:
+/// 1. n == s1.length == s2.length
+/// 2. 1 <= n <= 10^5
+/// 3. s1 and s2 consist only of lowercase English letters.
+/// </summary>
+bool LeetCodeString::checkStrings(string s1, string s2)
+{
+    vector<int> even_count(26), odd_count(26);
+    for (size_t i = 0; i < s1.size(); i++)
+    {
+        if (i % 2 == 0)
+        {
+            even_count[s1[i] - 'a']++;
+            even_count[s2[i] - 'a']--;
+        }
+        else
+        {
+            odd_count[s1[i] - 'a']++;
+            odd_count[s2[i] - 'a']--;
+        }
+    }
+    for (int i = 0; i < 26; i++)
+    {
+        if (even_count[i] != 0 || odd_count[i] != 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 #pragma endregion

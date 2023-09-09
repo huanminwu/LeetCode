@@ -6347,8 +6347,56 @@ void TestLeetCode2828(void)
     Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2839(void)
+{
+    Logger::WriteMessage("Test Leet Code 2839");
+    LeetCodeString leetCode;
+    string s1 = "abcd", s2 = "cdab";
+    bool result = leetCode.canBeEqual(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    s1 = "abcd", s2 = "dacb";
+    result = leetCode.canBeEqual(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2840(void)
+{
+    Logger::WriteMessage("Test Leet Code 2840");
+    LeetCodeString leetCode;
+    string s1 = "abcdba", s2 = "cabdab";
+    bool result = leetCode.checkStrings(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    s1 = "abe", s2 = "bea";
+    result = leetCode.checkStrings(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2843(void)
+{
+    Logger::WriteMessage("Test Leet Code 2843");
+    LeetCodeString leetCode;
+    int low = 1, high = 100;
+    int result = leetCode.countSymmetricIntegers(low, high);
+    Logger::WriteMessage("low = " + to_string(low) + "; high = " + to_string(high));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    low = 1200, high = 1230;
+    result = leetCode.countSymmetricIntegers(low, high);
+    Logger::WriteMessage("low = " + to_string(low) + "; high = " + to_string(high));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2840();
+    TestLeetCode2843();
+    TestLeetCode2839();
     TestLeetCode2828();
     TestLeetCode2825();
     TestLeetCode2810();

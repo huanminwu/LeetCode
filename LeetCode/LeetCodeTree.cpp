@@ -12552,4 +12552,157 @@ int LeetCodeTree::countGreatEnoughNodes(TreeNode* root, int k)
     int result = countGreatEnoughNodes(root, k, pq);
     return result;
 }
+
+/// <summary>
+/// Leet Code 2846. Minimum Edge Weight Equilibrium Queries in a Tree
+/// 
+/// Hard
+///
+/// There is an undirected tree with n nodes labeled from 0 to n - 1. You 
+/// are given the integer n and a 2D integer array edges of length n - 1, 
+/// where edges[i] = [ui, vi, wi] indicates that there is an edge between 
+/// nodes ui and vi with weight wi in the tree.
+///
+/// You are also given a 2D integer array queries of length m, where 
+/// queries[i] = [ai, bi]. For each query, find the minimum number of 
+/// operations required to make the weight of every edge on the path from 
+/// ai to bi equal. In one operation, you can choose any edge of the tree 
+/// and change its weight to any value.
+///
+/// Note that:
+///
+/// Queries are independent of each other, meaning that the tree returns 
+/// to its initial state on each new query.
+/// The path from ai to bi is a sequence of distinct nodes starting with 
+/// node ai and ending with node bi such that every two adjacent nodes in 
+/// the sequence share an edge in the tree.
+/// Return an array answer of length m where answer[i] is the answer to 
+/// the ith query.
+///
+/// Example 1:
+/// Input: n = 7, edges = [[0,1,1],[1,2,1],[2,3,1],[3,4,2],[4,5,2],
+/// [5,6,2]], queries = [[0,3],[3,6],[2,6],[0,6]]
+/// Output: [0,0,1,3]
+/// Explanation: In the first query, all the edges in the path from 0 to 3 
+/// have a weight of 1. Hence, the answer is 0.
+/// In the second query, all the edges in the path from 3 to 6 have a 
+/// weight of 2. Hence, the answer is 0.
+/// In the third query, we change the weight of edge [2,3] to 2. After 
+/// this operation, all the edges in the path from 2 to 6 have a weight 
+/// of 2. Hence, the answer is 1.
+/// In the fourth query, we change the weights of edges [0,1], [1,2] and 
+/// [2,3] to 2. After these operations, all the edges in the path from 0 
+/// to 6 have a weight of 2. Hence, the answer is 3.
+/// For each queries[i], it can be shown that answer[i] is the minimum 
+/// number of operations needed to equalize all the edge weights in the 
+/// path from ai to bi.
+///
+/// Example 2:
+/// Input: n = 8, edges = [[1,2,6],[1,3,4],[2,4,6],[2,5,3],[3,6,6],
+/// [3,0,8],[7,0,2]], queries = [[4,6],[0,4],[6,5],[7,4]]
+/// Output: [1,2,2,3]
+/// Explanation: In the first query, we change the weight of edge [1,3] 
+/// to 6. After this operation, all the edges in the path from 4 to 6 
+/// have a weight of 6. Hence, the answer is 1.
+/// In the second query, we change the weight of edges [0,3] and [3,1] 
+/// to 6. After these operations, all the edges in the path from 0 to 4 
+/// have a weight of 6. Hence, the answer is 2.
+/// In the third query, we change the weight of edges [1,3] and [5,2] 
+/// to 6. After these operations, all the edges in the path from 6 to 5 
+/// have a weight of 6. Hence, the answer is 2.
+/// In the fourth query, we change the weights of edges [0,7], [0,3] 
+/// and [1,3] to 6. After these operations, all the edges in the path 
+/// from 7 to 4 have a weight of 6. Hence, the answer is 3.
+/// For each queries[i], it can be shown that answer[i] is the minimum 
+/// number of operations needed to equalize all the edge weights in the 
+/// path from ai to bi.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^4
+/// 2. edges.length == n - 1 
+/// 3. edges[i].length == 3
+/// 4. 0 <= ui, vi < n
+/// 5. 1 <= wi <= 26
+/// 6. The input is generated such that edges represents a valid tree.
+/// 7. 1 <= queries.length == m <= 2 * 10^4
+/// 8. queries[i].length == 2
+/// 9. 0 <= ai, bi < n
+/// </summary>
+vector<int> LeetCodeTree::minOperationsQueries(int n, vector<vector<int>>& edges,
+    vector<vector<int>>& queries)
+{
+    vector<vector<pair<int, int>>> children(n);
+    int m = 0; while ((1 << m) < n) m++;
+    vector<vector<int>> parents(n, vector<int>(m));
+    vector<vector<int>> edge_count(n, vector<int>(27));
+    vector<int> depths(n, -1);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        children[edges[i][0]].push_back(make_pair(edges[i][1], edges[i][2]));
+        children[edges[i][1]].push_back(make_pair(edges[i][0], edges[i][2]));
+    }
+    queue<int> queue;
+    queue.push(0);
+    depths[0] = 0;
+    int step = 0;
+    while (!queue.empty())
+    {
+        size_t size = queue.size();
+        step++;
+        for (size_t i = 0; i < size; i++)
+        {
+            int parent = queue.front();
+            queue.pop();
+            for (size_t i = 0; i < children[parent].size(); i++)
+            {
+                int child = children[parent][i].first;
+                int edge = children[parent][i].second;
+                if (depths[child] != -1) continue;
+                depths[child] = step;
+                queue.push(child);
+                edge_count[child] = edge_count[parent];
+                edge_count[child][edge]++;
+                parents[child][0] = parent;
+                for (int j = 1; j < m; j++)
+                {
+                    parents[child][j] = parents[parents[child][j - 1]][j - 1];
+                }
+            }
+        }
+    }
+    vector<int> result(queries.size());
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        int a = queries[i][0];
+        int b = queries[i][1];
+        if (depths[a] > depths[b]) swap(a, b);
+        // adjust x and y to the same depth:
+        for (int p = 0; (1 << p) <= depths[b] - depths[a]; ++p)
+        {
+            if ((1 << p) & (depths[b] - depths[a])) b = parents[b][p];
+        }
+        for (int p = m - 1; p >= 0; p--)
+        {
+            if (parents[a][p] != parents[b][p])
+            {
+                a = parents[a][p];
+                b = parents[b][p];
+            }
+        }
+        int lca = a;
+        if (a != b) lca = parents[a][0];
+        int max_val = 0;
+        int sum = 0;
+        a = queries[i][0];
+        b = queries[i][1];
+        for (int j = 1; j < 27; j++)
+        {
+            int count = edge_count[a][j] + edge_count[b][j] - 2 * edge_count[lca][j];
+            sum += count;
+            max_val = max(max_val, count);
+        }
+        result[i] = sum - max_val;
+    }
+    return result;
+}
 #pragma endregion

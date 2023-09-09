@@ -24,5 +24,6 @@ void TestLeetCode2762(void);
 void TestLeetCode2779(void);
 void TestLeetCode2799(void);
 void TestLeetCode2831(void);
+void TestLeetCode2841(void);
 void TestLeetCodeTwoPointer(void);
 #endif  // TestStack_H

@@ -5558,5 +5558,7 @@ void TestLeetCodeDesign(void)
     TestLeetCode308();
     TestLeetCode353();
     TestLeetCode1095();
+    TestLeetCode933();
+    TestLeetCode707();
     TestSalesOrg();
 }

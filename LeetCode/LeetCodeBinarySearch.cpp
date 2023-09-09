@@ -4002,7 +4002,7 @@ vector<long long> LeetCodeBinarySearch::minimumRelativeLosses(vector<int>& price
             }
         }
         // select the sum of left side choices and sum of right side choices
-        result[i] = sum[high + 1] + 2LL * k * (m - (high + 1)) - (sum[n] - sum[n - (m - (high + 1))]);
+        result[i] = sum[high + 1] + 2LL * k * ((long long)m - ((long long)high + 1LL)) - (sum[n] - sum[n - (m - (high + 1))]);
     }
     return result;
 }

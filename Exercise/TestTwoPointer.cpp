@@ -426,8 +426,35 @@ void TestLeetCode2831(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2841(void)
+{
+    Logger::WriteMessage("Test Leet Code 2841");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 2, 6, 7, 3, 1, 7 };
+    int m = 3, k = 4;
+    long long result = leetCode.maxSum(nums, m, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("m = " + to_string(m) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,9,9,2,4,5,4 };
+    m = 1, k = 3;
+    result = leetCode.maxSum(nums, m, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("m = " + to_string(m) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,1,2,1,2,1 };
+    m = 3, k = 3;
+    result = leetCode.maxSum(nums, m, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("m = " + to_string(m) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2841();
     TestLeetCode2831();
     TestLeetCode2799();
     TestLeetCode2779();

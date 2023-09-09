@@ -9265,8 +9265,26 @@ void TestLeetCode2836(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2845(void)
+{
+    Logger::WriteMessage("Test Leet Code 2845");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 2, 4 };
+    int modulo = 2, k = 1;
+    long long result = leetCode.countInterestingSubarrays(nums, modulo, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3,1,9,6 };
+    modulo = 3, k = 0;
+    result = leetCode.countInterestingSubarrays(nums, modulo, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2845();
     TestLeetCode2836();
     TestLeetCode2824();
     TestLeetCode2811();

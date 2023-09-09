@@ -2290,7 +2290,7 @@ void TestLeetCode2801(void)
 
 void TestLeetCode2827(void)
 {
-    Logger::WriteMessage("Test Leet Code 2817");
+    Logger::WriteMessage("Test Leet Code 2827");
     LeetCodeDFS leetCode;
     int low = 10, high = 20, k = 3;
     int result = leetCode.numberOfBeautifulIntegers(low, high, k);
@@ -2417,4 +2417,5 @@ void TestLeetCodeDFS(void)
     TestLeetCode301();
     TestLeetCode691();
     TestLeetCode546();
+    TestLeetCode401();
 }

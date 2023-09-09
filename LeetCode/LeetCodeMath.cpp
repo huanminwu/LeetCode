@@ -19462,5 +19462,243 @@ int LeetCodeMath::furthestDistanceFromOrigin(string moves)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2842. Count K-Subsequences of a String With Maximum Beauty
+/// 
+/// Hard
+///
+/// You are given a string s and an integer k.
+///
+/// A k-subsequence is a subsequence of s, having length k, and all its 
+/// characters are unique, i.e., every character occurs once.
+///
+/// Let f(c) denote the number of times the character c occurs in s.
+///
+/// The beauty of a k-subsequence is the sum of f(c) for every character 
+/// c in the k-subsequence.
+///
+/// For example, consider s = "abbbdd" and k = 2:
+/// f('a') = 1, f('b') = 3, f('d') = 2
+/// Some k-subsequences of s are:
+/// "abbbdd" -> "ab" having a beauty of f('a') + f('b') = 4
+/// "abbbdd" -> "ad" having a beauty of f('a') + f('d') = 3
+/// "abbbdd" -> "bd" having a beauty of f('b') + f('d') = 5
+/// Return an integer denoting the number of k-subsequences whose beauty 
+/// is the maximum among all k-subsequences. Since the answer may be too 
+/// large, return it modulo 10^9 + 7.
+///
+/// A subsequence of a string is a new string formed from the original 
+/// string by deleting some (possibly none) of the characters without 
+/// disturbing the relative positions of the remaining characters.
+///
+/// Notes
+/// f(c) is the number of times a character c occurs in s, not a 
+/// k-subsequence.
+/// Two k-subsequences are considered different if one is formed by an 
+/// index that is not present in the other. So, two k-subsequences may 
+/// form the same string.
+///
+/// Example 1:
+/// Input: s = "bcca", k = 2
+/// Output: 4
+/// Explanation: From s we have f('a') = 1, f('b') = 1, and f('c') = 2.
+/// The k-subsequences of s are: 
+/// bcca having a beauty of f('b') + f('c') = 3 
+/// bcca having a beauty of f('b') + f('c') = 3 
+/// bcca having a beauty of f('b') + f('a') = 2 
+/// bcca having a beauty of f('c') + f('a') = 3
+/// bcca having a beauty of f('c') + f('a') = 3 
+/// There are 4 k-subsequences that have the maximum beauty, 3. 
+/// Hence, the answer is 4. 
+///
+/// Example 2:
+/// Input: s = "abbcd", k = 4
+/// Output: 2
+/// Explanation: From s we have f('a') = 1, f('b') = 2, f('c') = 1, 
+/// and f('d') = 1. 
+/// The k-subsequences of s are: 
+/// abbcd having a beauty of f('a') + f('b') + f('c') + f('d') = 5
+/// abbcd having a beauty of f('a') + f('b') + f('c') + f('d') = 5 
+/// There are 2 k-subsequences that have the maximum beauty, 5. 
+/// Hence, the answer is 2. 
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 2 * 10^5
+/// 2. 1 <= k <= s.length
+/// 3. s consists only of lowercase English letters.
+/// </summary>
+int LeetCodeMath::countKSubsequencesWithMaxBeauty(string s, int k)
+{
+    long long M = 1000000007;
+    long long result = 1;
+    vector<int> char_count(26);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        char_count[s[i] - 'a']++;
+    }
+    sort(char_count.begin(), char_count.end());
+    int prev = -1;
+    int count = 0;
+    for (int i = 0; i <= 26 && k > 0; i++)
+    {
+        int curr = 0;
+        if (i < 26) curr = char_count[char_count.size() - 1 - i];
+        if (prev != curr)
+        {
+            if (prev != -1)
+            {
+                if (count <= k)
+                {
+                    for (int j = 0; j < count; j++)
+                    {
+                        result = result * prev % M;
+                    }
+                    k -= count;
+                }
+                else
+                {
+                    for (int j = 0; j < k; j++)
+                    {
+                        result = result * prev % M;
+                    }
+                    long long product = 1;
+                    for (int j = 1; j <= k; j++)
+                    {
+                        product = product * ((long long)count + 1LL - (long long)j) / j;
+                    }
+                    result = result * product % M;
+                    k = 0;
+                }
+            }
+            count = 0;
+        }
+        prev = curr;
+        count++;
+    }
+    if (k > 0) result = 0;
+    return (int)result;
+}
+
+/// <summary>
+/// Leet Code 2844. Minimum Operations to Make a Special Number
+/// 
+/// Medium
+///
+/// You are given a 0-indexed string num representing a non-negative 
+/// integer.
+///
+/// In one operation, you can pick any digit of num and delete it. Note 
+/// that if you delete all the digits of num, num becomes 0.
+///
+/// Return the minimum number of operations required to make num special.
+///
+/// An integer x is considered special if it is divisible by 25.
+///  
+/// Example 1:
+/// Input: num = "2245047"
+/// Output: 2
+/// Explanation: Delete digits num[5] and num[6]. The resulting number 
+/// is "22450" which is special since it is divisible by 25.
+/// It can be shown that 2 is the minimum number of operations required 
+/// to get a special number.
+///
+/// Example 2:
+/// Input: num = "2908305"
+/// Output: 3
+/// Explanation: Delete digits num[3], num[4], and num[6]. The resulting 
+/// number is "2900" which is special since it is divisible by 25.
+/// It can be shown that 3 is the minimum number of operations required 
+/// to get a special number.
+///
+/// Example 3:
+/// Input: num = "10"
+/// Output: 1
+/// Explanation: Delete digit num[0]. The resulting number is "0" which 
+/// is special since it is divisible by 25.
+/// It can be shown that 1 is the minimum number of operations required 
+/// to get a special number.
+/// 
+/// Constraints:
+/// 1. 1 <= num.length <= 100
+/// 2. num only consists of digits '0' through '9'.
+/// 3. num does not contain any leading zeros.
+/// </summary>
+int LeetCodeMath::minimumOperations(string num)
+{
+    int n = num.size();
+    vector<int> digits_pos(10, -1);
+    int result = n;
+    int del = 0;
+    for (int i = 0; i < n; i++)
+    {
+        int digit = num[i] - '0';
+        if (digit == 5)
+        {
+            int prev = max(digits_pos[2], digits_pos[7]);
+            if (prev != -1)
+            {
+                result = min(result, (i - prev - 1) + (n - i - 1));
+            }
+        }
+        else if (digit == 0)
+        {
+            int prev = max(digits_pos[0], digits_pos[5]);
+            result = min(result, (i - prev - 1) + (n - i - 1));
+        }
+        digits_pos[digit] = i;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2847. Smallest Number With Given Digit Product
+/// 
+/// Medium
+///
+/// Given a positive integer n, return a string representing the smallest 
+/// positive integer such that the product of its digits is equal to n, 
+/// or "-1" if no such number exists.
+/// 
+/// Example 1:
+/// Input: n = 10^5
+/// Output: "357"
+/// Explanation: 3 * 5 * 7 = 105. It can be shown that 357 is the smallest 
+/// number with a product of digits equal to 105. So the answer would be 
+/// "105".
+///
+/// Example 2:
+/// Input: n = 7
+/// Output: "7"
+/// Explanation: Since 7 has only one digit, its product of digits would 
+/// be 7. We will show that 7 is the smallest number with a product of 
+/// digits equal to 7. Since the product of numbers 1 to 6 is 1 to 6 
+/// respectively, so "7" would be the answer.
+///
+/// Example 3:
+/// Input: n = 44
+/// Output: "-1"
+/// Explanation: It can be shown that there is no number such that its 
+/// product of digits is equal to 44. So the answer would be "-1".
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^18
+/// </summary>
+string LeetCodeMath::smallestNumber(long long n)
+{
+    string result;
+    if (n == 1) return "1";
+    for (int i = 9; i > 1; i--)
+    {
+        while (n % i == 0)
+        {
+            result.push_back('0' + i);
+            n = n / i;
+        }
+    }
+    if (n != 1) return "-1";
+    std::reverse(result.begin(), result.end());
+    return result;
+}
+
 #pragma endregion
 
