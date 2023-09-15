@@ -5390,8 +5390,29 @@ void TestLeetCode2812(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2852(void)
+{
+    Logger::WriteMessage("Test Leet Code 2852");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid = { {-1, 1, -1},  {5, -1, 4}, {-1, 3, -1} };
+    long long result = leetCode.sumRemoteness(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {-1, 3, 4}, { -1, -1, -1 }, { 3, -1, -1 } };
+    result = leetCode.sumRemoteness(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1} };
+    result = leetCode.sumRemoteness(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2852();
     TestLeetCode2812();
     TestLeetCode2814();
     TestLeetCode2737();

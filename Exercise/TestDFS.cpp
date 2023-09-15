@@ -2308,8 +2308,24 @@ void TestLeetCode2827(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2850(void)
+{
+    Logger::WriteMessage("Test Leet Code 2850");
+    LeetCodeDFS leetCode;
+    vector<vector<int>> grid = { {1, 1, 0},{1, 1, 1},{1, 2, 1} };
+    int result = leetCode.minimumMoves(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1, 3, 0},{1, 0, 0},{1, 0, 3} };
+    result = leetCode.minimumMoves(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2850();
     TestLeetCode2801();
     TestLeetCode2827();
     TestLeetCode2787();

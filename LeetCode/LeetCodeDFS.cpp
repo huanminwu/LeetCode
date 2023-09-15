@@ -9257,6 +9257,110 @@ int LeetCodeDFS::numberOfBeautifulIntegers(int low, int high, int k)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2850. Minimum Moves to Spread Stones Over Grid
+/// </summary>
+int LeetCodeDFS::minimumMoves(
+    vector<pair<int, int>>& empty,
+    vector<pair<int, int>>& path,
+    vector<vector<int>>& grid,
+    int& result)
+{
+    if (path.size() == empty.size())
+    {
+        int distance = 0;
+        for (size_t i = 0; i < path.size(); i++)
+        {
+            distance += abs(path[i].first - empty[i].first) +
+                abs(path[i].second - empty[i].second);
+        }
+        result = min(result, distance);
+    }
+    else
+    {
+        for (int r = 0; r < 3; r++)
+        {
+            for (int c = 0; c < 3; c++)
+            {
+                if (grid[r][c] > 1)
+                {
+                    grid[r][c]--;
+                    path.push_back(make_pair(r, c));
+                    minimumMoves(empty, path, grid, result);
+                    path.pop_back();
+                    grid[r][c]++;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2850. Minimum Moves to Spread Stones Over Grid
+/// 
+/// Medium
+///
+/// You are given a 0-indexed 2D integer matrix grid of size 3 * 3, 
+/// representing the number of stones in each cell. The grid contains 
+/// exactly 9 stones, and there can be multiple stones in a single cell.
+///
+/// In one move, you can move a single stone from its current cell to 
+/// any other cell if the two cells share a side.
+///
+/// Return the minimum number of moves required to place one stone in 
+/// each cell.
+///
+/// Example 1:
+/// Input: grid = [[1,1,0],[1,1,1],[1,2,1]]
+/// Output: 3
+/// Explanation: One possible sequence of moves to place one stone in each 
+/// cell is: 
+/// 1- Move one stone from cell (2,1) to cell (2,2).
+/// 2- Move one stone from cell (2,2) to cell (1,2).
+/// 3- Move one stone from cell (1,2) to cell (0,2).
+/// In total, it takes 3 moves to place one stone in each cell of the grid.
+/// It can be shown that 3 is the minimum number of moves required to place
+/// one stone in each cell.
+///
+/// Example 2:
+/// Input: grid = [[1,3,0],[1,0,0],[1,0,3]]
+/// Output: 4
+/// Explanation: One possible sequence of moves to place one stone in each 
+/// cell is:
+/// 1- Move one stone from cell (0,1) to cell (0,2).
+/// 2- Move one stone from cell (0,1) to cell (1,1).
+/// 3- Move one stone from cell (2,2) to cell (1,2).
+/// 4- Move one stone from cell (2,2) to cell (2,1).
+/// In total, it takes 4 moves to place one stone in each cell of the grid.
+/// It can be shown that 4 is the minimum number of moves required to place 
+/// one stone in each cell.
+/// 
+/// Constraints:
+/// 1. grid.length == grid[i].length == 3
+/// 2. 0 <= grid[i][j] <= 9
+/// 3. Sum of grid is equal to 9.
+/// </summary>
+int LeetCodeDFS::minimumMoves(vector<vector<int>>& grid)
+{
+    vector<vector<int>> stones = grid;
+    vector<pair<int, int>> empty;
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (grid[i][j] == 0)
+            {
+                empty.push_back(make_pair(i, j));
+            }
+        }
+    }
+    vector<pair<int, int>> path;
+    int result = 100;
+    minimumMoves(empty, path, stones, result);
+    return result;
+}
+
 #pragma endregion
 
 

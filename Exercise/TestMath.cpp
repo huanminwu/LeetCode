@@ -6246,8 +6246,26 @@ void TestLeetCode2847(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + result);
 }
 
+void TestLeetCode2849(void)
+{
+    Logger::WriteMessage("Test Leet Code 2849");
+    LeetCodeMath leetCode;
+    int sx = 2, sy = 4, fx = 7, fy = 7, t = 6;
+    bool result = leetCode.isReachableAtTime(sx, sy, fx, fy, t);
+    Logger::WriteMessage("sx = " + to_string(sx) + "; sy = " + to_string(sy));
+    Logger::WriteMessage("fx = " + to_string(fx) + "; fy = " + to_string(fy));
+    Logger::WriteMessage("result = " + (string)(result ? "true" :"false"));
+
+    sx = 3, sy = 1, fx = 7, fy = 3, t = 3;
+    result = leetCode.isReachableAtTime(sx, sy, fx, fy, t);
+    Logger::WriteMessage("sx = " + to_string(sx) + "; sy = " + to_string(sy));
+    Logger::WriteMessage("fx = " + to_string(fx) + "; fy = " + to_string(fy));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2849();
     TestLeetCode2847();
     TestLeetCode2844();
     TestLeetCode2842();

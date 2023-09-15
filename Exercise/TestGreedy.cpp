@@ -1748,8 +1748,24 @@ void TestLeetCode2830(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2848(void)
+{
+    Logger::WriteMessage("Test Leet Code 2848");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> nums = { {3, 6},{1, 5},{4, 7} };
+    int result = leetCode.numberOfPoints(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { {1, 3},{5, 8} };
+    result = leetCode.numberOfPoints(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode2848();
     TestLeetCode2830();
     TestLeetCode2813();
     TestLeetCode2747();
