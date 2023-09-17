@@ -5410,8 +5410,42 @@ void TestLeetCode2852(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2858(void)
+{
+    Logger::WriteMessage("Test Leet Code 2858");
+    LeetCodeGraph leetCode;
+    int n = 4;
+    vector<vector<int>> edges = { {2, 0},{2, 1},{1, 3} };
+    vector<int> result = leetCode.minEdgeReversals(n, edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+
+    n = 3;
+    edges = { {1, 2},{2, 0} };
+    result = leetCode.minEdgeReversals(n, edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+
+    n = 4;
+    edges = { {0, 2},{0, 3},{3, 1} };
+    result = leetCode.minEdgeReversals(n, edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+
+    n = 4;
+    edges = { {0, 3},{1, 2},{2, 3} };
+    result = leetCode.minEdgeReversals(n, edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2858();
     TestLeetCode2852();
     TestLeetCode2812();
     TestLeetCode2814();

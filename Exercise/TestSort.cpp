@@ -3417,8 +3417,50 @@ void TestLeetCode2838(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2855(void)
+{
+    Logger::WriteMessage("Test Leet Code 2855");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 3, 4, 5, 1, 2 };
+    int result = leetCode.minimumRightShifts(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,3,5 };
+    result = leetCode.minimumRightShifts(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,1,4 };
+    result = leetCode.minimumRightShifts(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2856(void)
+{
+    Logger::WriteMessage("Test Leet Code 2856");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1,3,4,9 };
+    int result = leetCode.minLengthAfterRemovals(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3,6,9 };
+    result = leetCode.minLengthAfterRemovals(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,2 };
+    result = leetCode.minLengthAfterRemovals(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2856();
+    TestLeetCode2855();
     TestLeetCode2838();
     TestLeetCode2835();
     TestLeetCode2817();

@@ -4969,4 +4969,73 @@ long long LeetCodeHashtable::minimumPossibleSum(int n, int target)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2857. Count Pairs of Points With Distance k
+/// 
+/// Medium
+///
+/// You are given a 2D integer array coordinates and an integer k, where 
+/// coordinates[i] = [xi, yi] are the coordinates of the ith point in a 
+/// 2D plane.
+///
+/// We define the distance between two points (x1, y1) and (x2, y2) as 
+/// (x1 XOR x2) + (y1 XOR y2) where XOR is the bitwise XOR operation.
+///
+/// Return the number of pairs (i, j) such that i < j and the distance 
+/// between points i and j is equal to k.
+///
+/// Example 1:
+/// Input: coordinates = [[1,2],[4,2],[1,3],[5,2]], k = 5
+/// Output: 2
+/// Explanation: We can choose the following pairs:
+/// - (0,1): Because we have (1 XOR 4) + (2 XOR 2) = 5.
+/// - (2,3): Because we have (1 XOR 5) + (3 XOR 2) = 5.
+///
+/// Example 2:
+/// Input: coordinates = [[1,3],[1,3],[1,3],[1,3],[1,3]], k = 0
+/// Output: 10
+/// Explanation: Any two chosen pairs will have a distance of 0. There 
+/// are 10 ways to choose two pairs.
+/// Constraints:
+/// 1. 2 <= coordinates.length <= 50000
+/// 2. 0 <= xi, yi <= 10^6
+/// 3. 0 <= k <= 100
+/// 4. You are given a 0-indexed sorted array of integers nums.
+/// </summary>
+int LeetCodeHashtable::countPairs(vector<vector<int>>& coordinates, int k)
+{
+    unordered_map<int, unordered_map<int, int>> num_count;
+    for (size_t i = 0; i < coordinates.size(); i++)
+    {
+        num_count[coordinates[i][0]][coordinates[i][1]]++;
+    }
+    int result = 0;
+    for (int i = 0; i <= k; i++)
+    {
+        int j = k - i;
+        for (auto& itr : num_count)
+        {
+            int x = itr.first;
+            int y = i ^ x;
+            if (num_count.count(y) == 0) continue;
+            auto& itr1 = num_count[y];
+            for (auto& itr3 : num_count[x])
+            {
+                int p = itr3.first;
+                int q = j ^ p;
+                if (itr1.count(q) == 0) continue;
+                if (x == y && p == q)
+                {
+                    result += itr3.second * (itr3.second - 1);
+                }
+                else
+                {
+                    result += itr3.second * itr1[q];
+                }
+            }
+        }
+    }
+    return result / 2;
+}
 #pragma endregion

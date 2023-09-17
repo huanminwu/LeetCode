@@ -1691,9 +1691,32 @@ void TestLeetCode2834(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2857(void)
+{
+    Logger::WriteMessage("Test Leet Code 2857");
+    LeetCodeHashtable leetCode;
+    vector<vector<int>> coordinates =
+    {
+        {1, 2},{4, 2},{1, 3},{5, 2}
+    };
+    int k = 5;
+    int result = leetCode.countPairs(coordinates, k);
+    Logger::WriteMessage(coordinates);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    coordinates =
+    {
+        {1,3},{1,3},{1,3},{1,3},{1,3}
+    };
+    k = 0;
+    result = leetCode.countPairs(coordinates, k);
+    Logger::WriteMessage(coordinates);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
 
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode2857();
     TestLeetCode2834();
     TestLeetCode2829();
     TestLeetCode2815();
