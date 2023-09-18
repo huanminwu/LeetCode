@@ -3457,8 +3457,24 @@ void TestLeetCode2856(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2860(void)
+{
+    Logger::WriteMessage("Test Leet Code 2860");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 1 };
+    int result = leetCode.countWays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6, 0, 3, 3, 6, 7, 2, 7 };
+    result = leetCode.countWays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2860();
     TestLeetCode2856();
     TestLeetCode2855();
     TestLeetCode2838();

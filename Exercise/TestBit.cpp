@@ -1097,8 +1097,26 @@ void TestLeetCode2732(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2859(void)
+{
+    Logger::WriteMessage("Test Leet Code 2732");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 5, 10, 1, 5, 2 };
+    int k = 1;
+    int result = leetCode.sumIndicesWithKSetBits(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4, 3, 2, 1 };
+    k = 2;
+    result = leetCode.sumIndicesWithKSetBits(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2859();
     TestLeetCode2732();
     TestLeetCode2680();
     TestLeetCode2683();

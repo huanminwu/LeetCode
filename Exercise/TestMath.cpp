@@ -6263,8 +6263,24 @@ void TestLeetCode2849(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2862(void)
+{
+    Logger::WriteMessage("Test Leet Code 2862");
+    LeetCodeMath leetCode;
+    vector<int>nums = { 8, 7, 3, 5, 7, 2, 4, 9 };
+    long long result = leetCode.maximumSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,10,3,10,1,13,7,9,4 };
+    result = leetCode.maximumSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2862();
     TestLeetCode2849();
     TestLeetCode2847();
     TestLeetCode2844();

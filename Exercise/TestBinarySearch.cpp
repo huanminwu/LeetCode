@@ -1239,8 +1239,68 @@ void TestLeetCode2819(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2861(void)
+{
+    Logger::WriteMessage("Test Leet Code 2861");
+    LeetCodeBinarySearch leetCode;
+    int n = 3, k = 2, budget = 15;
+    vector<vector<int>> composition = 
+    { 
+        {1, 1, 1},{1, 1, 10} 
+    };
+    vector<int> stock = { 0, 0, 0 };
+    vector<int> cost = { 1, 2, 3 };
+    int result = leetCode.maxNumberOfAlloys(n, k, budget, composition, stock, cost);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("budget = " + to_string(budget));
+    Logger::WriteMessage(composition);
+    Logger::WriteMessage(stock);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3, k = 2, budget = 15;
+    composition =
+    {
+        {1, 1, 1},{1, 1, 10}
+    };
+    stock = { 0,0,100 };
+    cost = { 1, 2, 3 };
+    result = leetCode.maxNumberOfAlloys(n, k, budget, composition, stock, cost);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("budget = " + to_string(budget));
+    Logger::WriteMessage(composition);
+    Logger::WriteMessage(stock);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 2, k = 3, budget = 10; 
+    composition = { {2, 1},{1, 2},{1, 1} }; 
+    stock = { 1, 1 }; 
+    cost = { 5, 5 };
+    result = leetCode.maxNumberOfAlloys(n, k, budget, composition, stock, cost);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("budget = " + to_string(budget));
+    Logger::WriteMessage(composition);
+    Logger::WriteMessage(stock);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 1, k = 7, budget = 48;
+    composition = { {2, 1},{1, 2},{1, 1} };
+    stock = { 1, 1 };
+    cost = { 5, 5 };
+    result = leetCode.maxNumberOfAlloys(n, k, budget, composition, stock, cost);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("budget = " + to_string(budget));
+    Logger::WriteMessage(composition);
+    Logger::WriteMessage(stock);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode2861();
     TestLeetCode2819();
     TestLeetCode2702();
     TestLeetCode2616();
