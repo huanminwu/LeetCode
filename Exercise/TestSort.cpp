@@ -3472,8 +3472,34 @@ void TestLeetCode2860(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2863(void)
+{
+    Logger::WriteMessage("Test Leet Code 2863");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 7, 6, 5, 4, 3, 2, 1, 6, 10, 11 };
+    int result = leetCode.maxSubarrayLength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 57,55,50,60,61,58,63,59,64,60,63 };
+    result = leetCode.maxSubarrayLength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    result = leetCode.maxSubarrayLength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -1, 600, 940, 401, -499, 988, -501 };
+    result = leetCode.maxSubarrayLength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2863();
     TestLeetCode2860();
     TestLeetCode2856();
     TestLeetCode2855();
