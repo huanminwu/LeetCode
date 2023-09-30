@@ -5443,8 +5443,28 @@ void TestLeetCode2858(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2867(void)
+{
+    Logger::WriteMessage("Test Leet Code 2867");
+    LeetCodeGraph leetCode;
+    int n = 5;
+    vector<vector<int>> edges = { {1, 2},{1, 3},{2, 4},{2, 5} };
+    long long result = leetCode.countPathsII(n, edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 6; 
+    edges = { {1, 2},{1, 3},{2, 4},{3, 5},{3, 6} };
+    result = leetCode.countPathsII(n, edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2867();
     TestLeetCode2858();
     TestLeetCode2852();
     TestLeetCode2812();

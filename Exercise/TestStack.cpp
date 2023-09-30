@@ -917,8 +917,50 @@ void TestLeetCode2832(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2865(void)
+{
+    Logger::WriteMessage("Test Leet Code 2865");
+    LeetCodeStack leetCode;
+    vector<int> maxHeights = { 5, 3, 4, 1, 1 };
+    long long result = leetCode.maximumSumOfHeights(maxHeights);
+    Logger::WriteMessage(maxHeights);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    maxHeights = { 6,5,3,9,2,7 };
+    result = leetCode.maximumSumOfHeights(maxHeights);
+    Logger::WriteMessage(maxHeights);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    maxHeights = { 3,2,5,5,2,3 };
+    result = leetCode.maximumSumOfHeights(maxHeights);
+    Logger::WriteMessage(maxHeights);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2866(void)
+{
+    Logger::WriteMessage("Test Leet Code 2866");
+    LeetCodeStack leetCode;
+    vector<int> maxHeights = { 5, 3, 4, 1, 1 };
+    long long result = leetCode.maximumSumOfHeightsII(maxHeights);
+    Logger::WriteMessage(maxHeights);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    maxHeights = { 6,5,3,9,2,7 };
+    result = leetCode.maximumSumOfHeightsII(maxHeights);
+    Logger::WriteMessage(maxHeights);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    maxHeights = { 3,2,5,5,2,3 };
+    result = leetCode.maximumSumOfHeightsII(maxHeights);
+    Logger::WriteMessage(maxHeights);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode2866();
+    TestLeetCode2865();
     TestLeetCode2832();
     TestLeetCode2751();
     TestLeetCode2439();

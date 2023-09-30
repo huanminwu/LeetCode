@@ -81,5 +81,6 @@ void TestLeetCode2787(void);
 void TestLeetCode2801(void);
 void TestLeetCode2827(void);
 void TestLeetCode2850(void);
+void TestLeetCode2868(void);
 void TestLeetCodeDFS(void);
 #endif  // TestTree

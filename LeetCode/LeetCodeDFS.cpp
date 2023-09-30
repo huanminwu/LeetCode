@@ -9361,6 +9361,133 @@ int LeetCodeDFS::minimumMoves(vector<vector<int>>& grid)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2868. The Wording Game
+/// </summary>
+int LeetCodeDFS::canAliceWin(vector<vector<string>>& strs, int turn, int index,
+    vector<vector<int>>& win, vector<vector<int>>& starts)
+{
+    int next_turn = 1 - turn;
+    string& word = strs[turn][index];
+    int next_start = starts[turn][index];
+    for (size_t i = next_start; i < strs[next_turn].size(); i++)
+    {
+        if (strs[next_turn][i][0] > word[0] + 1) break;
+        if (i < strs[next_turn].size() - 1 && strs[next_turn][i + 1][0] == strs[next_turn][i][0])
+        {
+            continue;
+        }
+        if (win[next_turn][i] == 0)
+        {
+            win[next_turn][i] = canAliceWin(strs, next_turn, i, win, starts);
+        }
+        if (win[next_turn][i] == 1) return -1;
+    }
+    return 1;
+}
+
+
+/// <summary>
+/// Leet Code 2868. The Wording Game
+/// 
+/// Hard
+/// 
+/// Alice and Bob each have a lexicographically sorted array of strings 
+/// named a and b respectively.
+///
+/// They are playing a wording game with the following rules:
+///
+/// On each turn, the current player should play a word from their list 
+/// such that the new word is closely greater than the last played word; 
+/// then it's the other player's turn.
+/// If a player can't play a word on their turn, they lose.
+/// Alice starts the game by playing her lexicographically smallest word.
+///
+/// Given a and b, return true if Alice can win knowing that both players 
+/// play their best, and false otherwise.
+///
+/// A word w is closely greater than a word z if the following conditions 
+/// are met:
+///
+/// w is lexicographically greater than z.
+/// If w1 is the first letter of w and z1 is the first letter of z, w1 
+/// should either be equal to z1 or be the letter after z1 in the alphabet.
+/// For example, the word "care" is closely greater than "book" and "car", 
+/// but is not closely greater than "ant" or "cook".
+/// A string s is lexicographically greater than a string t if in the 
+/// first position where s and t differ, string s has a letter that 
+/// appears later in the alphabet than the corresponding letter in t. If 
+/// the first min(s.length, t.length) characters do not differ, then the 
+/// longer string is the lexicographically greater one.
+///
+/// Example 1:
+/// Input: a = ["avokado","dabar"], b = ["brazil"]
+/// Output: false
+/// Explanation: Alice must start the game by playing the word "avokado" 
+/// since it's her smallest word, then Bob plays his only word, "brazil", 
+/// which he can play because its first letter, 'b', is the letter after 
+/// Alice's word's first letter, 'a'.
+/// Alice can't play a word since the first letter of the only word left 
+/// is not equal to 'b' or the letter after 'b', 'c'.
+/// So, Alice loses, and the game ends.
+///
+/// Example 2:
+/// Input: a = ["ananas","atlas","banana"], b = ["albatros","cikla",
+/// "nogomet"]
+/// Output: true
+/// Explanation: Alice must start the game by playing the word "ananas".
+/// Bob can't play a word since the only word he has that starts with the 
+/// letter 'a' or 'b' is "albatros", which is smaller than Alice's word.
+/// So Alice wins, and the game ends.
+///
+/// Example 3:
+/// Input: a = ["hrvatska","zastava"], b = ["bijeli","galeb"]
+/// Output: true
+/// Explanation: Alice must start the game by playing the word "hrvatska".
+/// Bob can't play a word since the first letter of both of his words are 
+/// smaller than the first letter of Alice's word, 'h'.
+/// So Alice wins, and the game ends.
+///
+/// Constraints:
+/// 1. 1 <= a.length, b.length <= 10^5
+/// 2. a[i] and b[i] consist only of lowercase English letters.
+/// 3. a and b are lexicographically sorted.
+/// 4. All the words in a and b combined are distinct.
+/// 5. The sum of the lengths of all the words in a and b combined does 
+///    not exceed 106.
+/// </summary>
+bool LeetCodeDFS::canAliceWin(vector<string>& a, vector<string>& b)
+{
+    vector<vector<int>> win(2);
+    win[0] = vector<int>(a.size());
+    win[1] = vector<int>(b.size());
+
+    vector<vector<int>> starts(2);
+    starts[0] = vector<int>(a.size());
+    starts[1] = vector<int>(b.size());
+
+    vector<vector<string>> strs(2);
+    strs[0] = a;
+    strs[1] = b;
+
+    size_t p = 0;
+    for (size_t i = 0; i < a.size(); i++)
+    {
+        while (p < b.size() && b[p] <= a[i]) p++;
+        starts[0][i] = p;
+    }
+
+    p = 0;
+    for (size_t i = 0; i < b.size(); i++)
+    {
+        while (p < a.size() && a[p] <= b[i]) p++;
+        starts[1][i] = p;
+    }
+    win[0][0] = canAliceWin(strs, 0, 0, win, starts);
+    if (win[0][0] == 1) return true;
+    else return false;
+}
+
 #pragma endregion
 
 

@@ -2323,8 +2323,35 @@ void TestLeetCode2850(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2868(void)
+{
+    Logger::WriteMessage("Test Leet Code 2868");
+    LeetCodeDFS leetCode;
+    vector<string> a = { "avokado", "dabar" };
+    vector<string> b = { "brazil" };
+    bool result = leetCode.canAliceWin(a, b);
+    Logger::WriteMessage(a);
+    Logger::WriteMessage(b);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    a = { "ananas","atlas","banana" };
+    b = { "albatros","cikla","nogomet" };
+    result = leetCode.canAliceWin(a, b);
+    Logger::WriteMessage(a);
+    Logger::WriteMessage(b);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+   
+    a = { "hrvatska", "zastava" };
+    b = { "bijeli", "galeb" };
+    result = leetCode.canAliceWin(a, b);
+    Logger::WriteMessage(a);
+    Logger::WriteMessage(b);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2868();
     TestLeetCode2850();
     TestLeetCode2801();
     TestLeetCode2827();

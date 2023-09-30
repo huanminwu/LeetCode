@@ -25,4 +25,5 @@ void TestLeetCode2683(void);
 void TestLeetCode2680(void);
 void TestLeetCode2732(void);
 void TestLeetCode2859(void);
+void TestLeetCode2864(void);
 #endif  // TestA

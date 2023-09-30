@@ -18530,4 +18530,116 @@ vector<int> LeetCodeGraph::minEdgeReversals(int n, vector<vector<int>>& edges)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2867. Count Valid Paths in a Tree
+/// </summary>
+pair<int, int> LeetCodeGraph::countPathsII(int parent, int node,
+    vector<vector<int>>& neighbors, vector<int>& prime,
+    long long& result)
+{
+    unordered_map<int, int> children;
+    pair<int, int> curr;
+    if (prime[node] == 1) curr.second = 1;
+    else curr.first = 1;        
+    for (size_t i = 0; i < neighbors[node].size(); i++)
+    {
+        if (neighbors[node][i] == parent) continue;
+        pair<int, int> next = countPathsII(node, neighbors[node][i],
+            neighbors, prime, result);
+        if (prime[node] == 1)
+        {
+            result += (long long)curr.second * (long)next.first;
+            curr.second += next.first;
+        }
+        else
+        {
+            result += (long long)curr.second * (long)next.first;
+            result += (long long)curr.first * (long)next.second;
+            curr.first += next.first;
+            curr.second += next.second;
+        }
+    }
+    return curr;
+}
+
+
+
+/// <summary>
+/// Leet Code 2867. Count Valid Paths in a Tree
+/// 
+/// Hard
+/// 
+/// There is an undirected tree with n nodes labeled from 1 to n. You are 
+/// given the integer n and a 2D integer array edges of length n - 1, 
+/// where edges[i] = [ui, vi] indicates that there is an edge between 
+/// nodes ui and vi in the tree.
+///
+/// Return the number of valid paths in the tree.
+///
+/// A path (a, b) is valid if there exists exactly one prime number 
+/// among the node labels in the path from a to b.
+///
+/// Note that:
+/// The path (a, b) is a sequence of distinct nodes starting with node a 
+/// and ending with node b such that every two adjacent nodes in the 
+/// sequence share an edge in the tree.
+/// Path (a, b) and path (b, a) are considered the same and counted only 
+/// once.
+///
+/// Example 1:
+/// Input: n = 5, edges = [[1,2],[1,3],[2,4],[2,5]]
+/// Output: 4
+/// Explanation: The pairs with exactly one prime number on the path 
+/// between them are: 
+/// - (1, 2) since the path from 1 to 2 contains prime number 2. 
+/// - (1, 3) since the path from 1 to 3 contains prime number 3.
+/// - (1, 4) since the path from 1 to 4 contains prime number 2.
+/// - (2, 4) since the path from 2 to 4 contains prime number 2.
+/// It can be shown that there are only 4 valid paths.
+///
+/// Example 2:
+/// Input: n = 6, edges = [[1,2],[1,3],[2,4],[3,5],[3,6]]
+/// Output: 6
+/// Explanation: The pairs with exactly one prime number on the path 
+/// between them are: 
+/// - (1, 2) since the path from 1 to 2 contains prime number 2.
+/// - (1, 3) since the path from 1 to 3 contains prime number 3.
+/// - (1, 4) since the path from 1 to 4 contains prime number 2.
+/// - (1, 6) since the path from 1 to 6 contains prime number 3.
+/// - (2, 4) since the path from 2 to 4 contains prime number 2.
+/// - (3, 6) since the path from 3 to 6 contains prime number 3.
+/// It can be shown that there are only 6 valid paths.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// 2. edges.length == n - 1
+/// 3. edges[i].length == 2
+/// 4. 1 <= ui, vi <= n
+/// 5. The input is generated such that edges represent a valid tree.
+/// </summary>
+long long LeetCodeGraph::countPathsII(int n, vector<vector<int>>& edges)
+{
+    vector<int>  prime(n + 1, 1);
+    prime[0] = prime[1] = 0;
+    for (int i = 2; i <= n; i++)
+    {
+        if (prime[i] == 1)
+        {
+            for (int j = i + i; j <= n; j += i)
+            {
+                prime[j] = 0;
+            }
+        }
+    }
+    vector<vector<int>> neighbors(n+1);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(edges[i][1]);
+        neighbors[edges[i][1]].push_back(edges[i][0]);
+    }
+    long long result = 0;
+    countPathsII(-1, 1, neighbors, prime, result);
+    return result;
+}
 #pragma endregion

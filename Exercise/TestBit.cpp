@@ -1114,8 +1114,22 @@ void TestLeetCode2859(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2864(void)
+{
+    Logger::WriteMessage("Test Leet Code 2864");
+    LeetCodeBit leetCode;
+    string s = "010";
+    string result = leetCode.maximumOddBinaryNumber(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "0101";
+    result = leetCode.maximumOddBinaryNumber(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2864();
     TestLeetCode2859();
     TestLeetCode2732();
     TestLeetCode2680();
