@@ -1714,8 +1714,24 @@ void TestLeetCode2857(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2870(void)
+{
+    Logger::WriteMessage("Test Leet Code 2870");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 2, 3, 3, 2, 2, 4, 2, 3, 4 };
+    int result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,1,2,2,3,3 };
+    result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode2870();
     TestLeetCode2857();
     TestLeetCode2834();
     TestLeetCode2829();

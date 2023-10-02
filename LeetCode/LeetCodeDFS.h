@@ -5030,7 +5030,7 @@ public:
     /// 3. a and b are lexicographically sorted.
     /// 4. All the words in a and b combined are distinct.
     /// 5. The sum of the lengths of all the words in a and b combined does 
-    ///    not exceed 106.
+    ///    not exceed 10^6.
     /// </summary>
     bool canAliceWin(vector<string>& a, vector<string>& b);
 #pragma endregion

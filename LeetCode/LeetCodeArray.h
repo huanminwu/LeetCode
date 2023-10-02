@@ -18227,6 +18227,229 @@ public:
     /// 4. 0 <= k < modulo
     /// </summary>
     long long countInterestingSubarrays(vector<int>& nums, int modulo, int k);
+
+    /// <summary>
+    /// Leet Code 2869. Minimum Operations to Collect Elements
+    /// 
+    /// Easy
+    /// 
+    /// You are given an array nums of positive integers and an integer k.
+    ///
+    /// In one operation, you can remove the last element of the array and 
+    /// add it to your collection.
+    ///
+    /// Return the minimum number of operations needed to collect 
+    /// elements 1, 2, ..., k.
+    /// 
+    /// Example 1:
+    /// Input: nums = [3,1,5,4,2], k = 2
+    /// Output: 4
+    /// Explanation: After 4 operations, we collect elements 2, 4, 5, and 1, 
+    /// in this order. Our collection contains elements 1 and 2. Hence, the 
+    /// answer is 4.
+    ///
+    /// Example 2:
+    /// Input: nums = [3,1,5,4,2], k = 5
+    /// Output: 5
+    /// Explanation: After 5 operations, we collect elements 2, 4, 5, 1, 
+    /// and 3, in this order. Our collection contains elements 1 through 5. 
+    /// Hence, the answer is 5.
+    ///
+    /// Example 3:
+    /// Input: nums = [3,2,5,3,1], k = 3
+    /// Output: 4
+    /// Explanation: After 4 operations, we collect elements 1, 3, 5, and 2, 
+    /// in this order. Our collection contains elements 1 through 3. Hence, 
+    /// the answer is 4.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 50
+    /// 2. 1 <= nums[i] <= nums.length
+    /// 3. 1 <= k <= nums.length
+    /// 4. The input is generated such that you can collect 
+    ///    elements 1, 2, ..., k.
+    /// </summary>
+    int minOperationsII(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 2873. Maximum Value of an Ordered Triplet I
+    /// 
+    /// Easy
+    /// 
+    /// You are given a 0-indexed integer array nums.
+    ///
+    /// Return the maximum value over all triplets of indices (i, j, k) such 
+    /// that i < j < k. If all such triplets have a negative value, return 0.
+    ///
+    /// The value of a triplet of indices (i, j, k) is equal to 
+    /// (nums[i] - nums[j]) * nums[k].
+    ///
+    /// Example 1:
+    /// Input: nums = [12,6,1,2,7]
+    /// Output: 77
+    /// Explanation: The value of the triplet (0, 2, 4) is 
+    /// (nums[0] - nums[2]) * nums[4] = 77.
+    /// It can be shown that there are no ordered triplets of indices with a 
+    /// value greater than 77. 
+    ///
+    /// Example 2:
+    /// Input: nums = [1,10,3,4,19]
+    /// Output: 133
+    /// Explanation: The value of the triplet (1, 2, 4) is 
+    /// (nums[1] - nums[2]) * nums[4] = 133.
+    /// It can be shown that there are no ordered triplets of indices 
+    /// with a value greater than 133.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,3]
+    /// Output: 0
+    /// Explanation: The only ordered triplet of indices (0, 1, 2) has a 
+    /// negative value of (nums[0] - nums[1]) * nums[2] = -3. Hence, the 
+    /// answer would be 0.
+    ///
+    /// Constraints:
+    /// 1. 3 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 10^6
+    /// </summary>
+    long long maximumTripletValue(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2874. Maximum Value of an Ordered Triplet II
+    /// 
+    /// Medium
+    /// 
+    /// You are given a 0-indexed integer array nums.
+    ///
+    /// Return the maximum value over all triplets of indices (i, j, k) such 
+    /// that i < j < k. If all such triplets have a negative value, return 0.
+    ///
+    /// The value of a triplet of indices (i, j, k) is equal to 
+    /// (nums[i] - nums[j]) * nums[k].
+    ///  
+    /// Example 1:
+    /// Input: nums = [12,6,1,2,7]
+    /// Output: 77
+    /// Explanation: The value of the triplet (0, 2, 4) is 
+    /// (nums[0] - nums[2]) * nums[4] = 77.
+    /// It can be shown that there are no ordered triplets of indices with a 
+    /// value greater than 77. 
+    ///
+    /// Example 2:
+    /// Input: nums = [1,10,3,4,19]
+    /// Output: 133
+    /// Explanation: The value of the triplet (1, 2, 4) is 
+    /// (nums[1] - nums[2]) * nums[4] = 133.
+    /// It can be shown that there are no ordered triplets of indices with a 
+    /// value greater than 133.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,3]
+    /// Output: 0
+    /// Explanation: The only ordered triplet of indices (0, 1, 2) has a 
+    /// negative value of (nums[0] - nums[1]) * nums[2] = -3. Hence, the 
+    /// answer would be 0.
+    ///
+    /// Constraints:
+    /// 1. 3 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^6
+    /// </summary>
+    long long maximumTripletValueII(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2871. Split Array Into Maximum Number of Subarrays
+    /// 
+    /// Medium
+    /// 
+    /// You are given an array nums consisting of non-negative integers.
+    ///
+    /// We define the score of subarray nums[l..r] such that l <= r as 
+    /// nums[l] AND nums[l + 1] AND ... AND nums[r] where AND is the bitwise 
+    /// AND operation.
+    ///
+    /// Consider splitting the array into one or more subarrays such that 
+    /// the following conditions are satisfied:
+    ///
+    /// Each element of the array belongs to exactly one subarray.
+    /// The sum of scores of the subarrays is the minimum possible.
+    /// Return the maximum number of subarrays in a split that satisfies 
+    /// the conditions above.
+    ///
+    /// A subarray is a contiguous part of an array.
+    ///
+    /// Example 1:
+    ///
+    /// Input: nums = [1,0,2,0,1,2]
+    /// Output: 3
+    /// Explanation: We can split the array into the following subarrays:
+    /// - [1,0]. The score of this subarray is 1 AND 0 = 0.
+    /// - [2,0]. The score of this subarray is 2 AND 0 = 0.
+    /// - [1,2]. The score of this subarray is 1 AND 2 = 0.
+    /// The sum of scores is 0 + 0 + 0 = 0, which is the minimum possible 
+    /// score that we can obtain.
+    /// It can be shown that we cannot split the array into more than 3 
+    /// subarrays with a total score of 0. So we return 3.
+    ///
+    /// Example 2:
+    /// Input: nums = [5,7,1,3]
+    /// Output: 1
+    /// Explanation: We can split the array into one subarray: [5,7,1,3] 
+    /// with a score of 1, which is the minimum possible score that we can 
+    /// obtain.
+    /// It can be shown that we cannot split the array into more than 1 
+    /// subarray with a total score of 1. So we return 1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 10^6
+    /// </summary>
+    int maxSubarrays(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2875. Minimum Size Subarray in Infinite Array
+    /// 
+    /// Medium
+    /// 
+    /// You are given a 0-indexed array nums and an integer target.
+    ///
+    /// A 0-indexed array infinite_nums is generated by infinitely appending 
+    /// the elements of nums to itself.
+    ///
+    /// Return the length of the shortest subarray of the array infinite_nums 
+    /// with a sum equal to target. If there is no such subarray return -1.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2,3], target = 5
+    /// Output: 2
+    /// Explanation: In this example infinite_nums = [1,2,3,1,2,3,1,2,...].
+    /// The subarray in the range [1,2], has the sum equal to target = 5 and 
+    /// length = 2.
+    /// It can be proven that 2 is the shortest length of a subarray with sum 
+    /// equal to target = 5.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,1,1,2,3], target = 4
+    /// Output: 2
+    /// Explanation: In this example infinite_nums = 
+    /// [1,1,1,2,3,1,1,1,2,3,1,1,...].
+    /// The subarray in the range [4,5], has the sum equal to target = 4 and 
+    /// length = 2.
+    /// It can be proven that 2 is the shortest length of a subarray with sum 
+    /// equal to target = 4.
+    ///
+    /// Example 3:
+    ///
+    /// Input: nums = [2,4,6,8], target = 3
+    /// Output: -1
+    /// Explanation: In this example infinite_nums = [2,4,6,8,2,4,6,8,...].
+    /// It can be proven that there is no subarray with sum equal to 
+    /// target = 3.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^5
+    /// 3. 1 <= target <= 10^9
+    /// </summary>
+    int minSizeSubarray(vector<int>& nums, int target);
 #pragma endregion
 };
 #endif  // LeetCodeArray_H

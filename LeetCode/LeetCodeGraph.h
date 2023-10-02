@@ -9756,6 +9756,114 @@ public:
     /// 5. The input is generated such that edges represent a valid tree.
     /// </summary>
     long long countPathsII(int n, vector<vector<int>>& edges);
+
+    /// <summary>
+    /// Leet Code 2872. Maximum Number of K-Divisible Components
+    /// 
+    /// Hard
+    /// 
+    /// There is an undirected tree with n nodes labeled from 0 to n - 1. You 
+    /// are given the integer n and a 2D integer array edges of length n - 1, 
+    /// where edges[i] = [ai, bi] indicates that there is an edge between 
+    /// nodes ai and bi in the tree.
+    ///
+    /// You are also given a 0-indexed integer array values of length n, where 
+    /// values[i] is the value associated with the ith node, and an integer k.
+    ///
+    /// A valid split of the tree is obtained by removing any set of edges, 
+    /// possibly empty, from the tree such that the resulting components all 
+    /// have values that are divisible by k, where the value of a connected 
+    /// component is the sum of the values of its nodes.
+    /// 
+    /// Return the maximum number of components in any valid split.
+    /// 
+    /// Example 1:
+    /// Input: n = 5, edges = [[0,2],[1,2],[1,3],[2,4]], values = [1,8,1,4,4], 
+    /// k = 6
+    /// Output: 2
+    /// Explanation: We remove the edge connecting node 1 with 2. The 
+    /// resulting split is valid because:
+    /// - The value of the component containing nodes 1 and 3 is 
+    ///   values[1] + values[3] = 12.
+    /// - The value of the component containing nodes 0, 2, and 4 is 
+    ///   values[0] + values[2] + values[4] = 6.
+    /// It can be shown that no other valid split has more than 2 connected 
+    /// components.
+    ///
+    /// Example 2:
+    /// Input: n = 7, edges = [[0,1],[0,2],[1,3],[1,4],[2,5],[2,6]], 
+    /// values = [3,0,6,1,5,2,1], k = 3
+    /// Output: 3
+    /// Explanation: We remove the edge connecting node 0 with 2, and the edge 
+    /// connecting node 0 with 1. The resulting split is valid because:
+    /// - The value of the component containing node 0 is values[0] = 3.
+    /// - The value of the component containing nodes 2, 5, and 6 is 
+    ///   values[2] + values[5] + values[6] = 9.
+    /// - The value of the component containing nodes 1, 3, and 4 is 
+    ///   values[1] + values[3] + values[4] = 6.
+    /// It can be shown that no other valid split has more than 3 connected 
+    /// components.
+    ///
+    /// Constraints:
+    /// 1 <= n <= 3 * 10^4
+    /// 2. edges.length == n - 1
+    /// 3. edges[i].length == 2
+    /// 4. 0 <= ai, bi < n
+    /// 5. values.length == n
+    /// 6. 0 <= values[i] <= 109
+    /// 7. 1 <= k <= 10^9
+    /// 8. Sum of values is divisible by k.
+    /// 9. The input is generated such that edges represents a valid tree.
+    /// </summary>
+    int maxKDivisibleComponents(int n, vector<vector<int>>& edges, vector<int>& values, int k);
+
+    /// <summary>
+    /// Leet Code 2876. Count Visited Nodes in a Directed Graph
+    /// 
+    /// Hard
+    /// 
+    /// There is a directed graph consisting of n nodes numbered from 0 to 
+    /// n - 1 and n directed edges.
+    ///
+    /// You are given a 0-indexed array edges where edges[i] indicates that 
+    /// there is an edge from node i to node edges[i].
+    ///
+    /// Consider the following process on the graph:
+    ///
+    /// You start from a node x and keep visiting other nodes through edges 
+    /// until you reach a node that you have already visited before on this 
+    /// same process.
+    /// Return an array answer where answer[i] is the number of different 
+    /// nodes that you will visit if you perform the process starting from 
+    /// node i.
+    ///
+    /// Example 1:
+    /// Input: edges = [1,2,0,0]
+    /// Output: [3,3,3,4]
+    /// Explanation: We perform the process starting from each node in 
+    /// the following way:
+    /// - Starting from node 0, we visit the nodes 0 -> 1 -> 2 -> 0. The 
+    ///   number of different nodes we visit is 3.
+    /// - Starting from node 1, we visit the nodes 1 -> 2 -> 0 -> 1. The 
+    ///   number of different nodes we visit is 3.
+    /// - Starting from node 2, we visit the nodes 2 -> 0 -> 1 -> 2. The 
+    ///   number of different nodes we visit is 3.
+    /// - Starting from node 3, we visit the nodes 3 -> 0 -> 1 -> 2 -> 0. The 
+    ///   number of different nodes we visit is 4.
+    ///
+    /// Example 2:
+    /// Input: edges = [1,2,3,4,0]
+    /// Output: [5,5,5,5,5]
+    /// Explanation: Starting from any node we can visit every node in the 
+    /// graph in the process.
+    /// 
+    /// Constraints:
+    /// 1. n == edges.length
+    /// 2. 2 <= n <= 10^5
+    /// 3. 0 <= edges[i] <= n - 1
+    /// 4. edges[i] != i
+    /// </summary>
+    vector<int> countVisitedNodes(vector<int>& edges);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

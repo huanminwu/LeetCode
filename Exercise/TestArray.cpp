@@ -9282,8 +9282,120 @@ void TestLeetCode2845(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2869(void)
+{
+    Logger::WriteMessage("Test Leet Code 2869");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 1, 5, 4, 2 };
+    int k = 2;
+    int result = leetCode.minOperationsII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3,1,5,4,2 };
+    k = 5;
+    result = leetCode.minOperationsII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3,2,5,3,1 };
+    k = 3;
+    result = leetCode.minOperationsII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2873(void)
+{
+    Logger::WriteMessage("Test Leet Code 2873");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 12, 6, 1, 2, 7 };
+    long long result = leetCode.maximumTripletValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,10,3,4,19 };
+    result = leetCode.maximumTripletValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    result = leetCode.maximumTripletValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2874(void)
+{
+    Logger::WriteMessage("Test Leet Code 2874");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 12, 6, 1, 2, 7 };
+    long long result = leetCode.maximumTripletValueII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,10,3,4,19 };
+    result = leetCode.maximumTripletValueII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    result = leetCode.maximumTripletValueII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2871(void)
+{
+    Logger::WriteMessage("Test Leet Code 2871");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 0, 2, 0, 1, 2 };
+    int result = leetCode.maxSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,7,1,3 };
+    result = leetCode.maxSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2875(void)
+{
+    Logger::WriteMessage("Test Leet Code 2875");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,2,3 };
+    int target = 5;
+    int result = leetCode.minSizeSubarray(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { 1,1,1,2,3 };
+    target = 4;
+    result = leetCode.minSizeSubarray(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { 2,4,6,8 };
+    target = 3;
+    result = leetCode.minSizeSubarray(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { 1, 6, 5, 5, 1, 1, 2, 5, 3, 1, 5, 3, 2, 4, 6, 6 };
+    target = 56;
+    result = leetCode.minSizeSubarray(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2875();
+    TestLeetCode2871();
+    TestLeetCode2874();
+    TestLeetCode2873();
+    TestLeetCode2869();
     TestLeetCode2845();
     TestLeetCode2836();
     TestLeetCode2824();

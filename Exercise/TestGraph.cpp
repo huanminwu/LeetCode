@@ -5462,8 +5462,50 @@ void TestLeetCode2867(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2872(void)
+{
+    Logger::WriteMessage("Test Leet Code 2872");
+    LeetCodeGraph leetCode;
+    int n = 5;
+    vector<vector<int>> edges = { {0, 2},{1, 2},{1, 3},{2, 4} }; 
+    vector<int> values = { 1, 8, 1, 4, 4 };
+    int k = 6;
+    int result = leetCode.maxKDivisibleComponents(n, edges, values, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(values);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 7;
+    edges = { {0, 1},{0, 2},{1, 3},{1, 4},{2, 5}, {2, 6} };
+    values = { 3, 0, 6, 1, 5, 2, 1 };
+    k = 3;
+    result = leetCode.maxKDivisibleComponents(n, edges, values, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(values);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2876(void)
+{
+    Logger::WriteMessage("Test Leet Code 2876");
+    LeetCodeGraph leetCode;
+    vector<int> edges = { 1, 2, 0, 0 };
+    vector<int> result = leetCode.countVisitedNodes(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+
+    edges = { 1,2,3,4,0 };
+    result = leetCode.countVisitedNodes(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2876();
+    TestLeetCode2872();
     TestLeetCode2867();
     TestLeetCode2858();
     TestLeetCode2852();
