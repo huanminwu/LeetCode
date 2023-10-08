@@ -417,19 +417,18 @@ vector<int> LeetCodeHashtable::topKFrequent(vector<int>& nums, int k)
     vector<int> result;
     unordered_map<int, int> num_count;
     for (int num : nums)  num_count[num]++;
-    priority_queue<pair<int, int>> pq;
+    set<pair<int, int>> pq;
     for (auto itr : num_count)
     {
-        pair<int, int> pair = make_pair(-itr.second, itr.first);
-        pq.push(pair);
-        if (pq.size() > (size_t)k) pq.pop();
+        pair<int, int> pair = make_pair(itr.second, itr.first);
+        pq.insert(pair);
+        if (pq.size() > (size_t)k) pq.erase(pq.begin());
     }
     while (!pq.empty())
     {
-        result.push_back(pq.top().second);
-        pq.pop();
+        result.push_back(pq.begin()->second);
+        pq.erase(pq.begin());
     }
-    std::reverse(result.begin(), result.end());
     return result;
 }
 
@@ -5005,38 +5004,27 @@ long long LeetCodeHashtable::minimumPossibleSum(int n, int target)
 /// </summary>
 int LeetCodeHashtable::countPairs(vector<vector<int>>& coordinates, int k)
 {
-    unordered_map<int, unordered_map<int, int>> num_count;
+    unordered_map<int, unordered_map<int, int>> coord_count;
+    int result = 0;
     for (size_t i = 0; i < coordinates.size(); i++)
     {
-        num_count[coordinates[i][0]][coordinates[i][1]]++;
-    }
-    int result = 0;
-    for (int i = 0; i <= k; i++)
-    {
-        int j = k - i;
-        for (auto& itr : num_count)
+        int x1 = coordinates[i][0];
+        int y1 = coordinates[i][1];
+        for (int i = 0; i <= k; i++)
         {
-            int x = itr.first;
-            int y = i ^ x;
-            if (num_count.count(y) == 0) continue;
-            auto& itr1 = num_count[y];
-            for (auto& itr3 : num_count[x])
+            int x2 = i ^ x1;
+            int y2 = (k - i) ^ y1;
+            if (coord_count.count(x2) > 0)
             {
-                int p = itr3.first;
-                int q = j ^ p;
-                if (itr1.count(q) == 0) continue;
-                if (x == y && p == q)
+                if (coord_count[x2].count(y2) > 0)
                 {
-                    result += itr3.second * (itr3.second - 1);
-                }
-                else
-                {
-                    result += itr3.second * itr1[q];
+                    result += coord_count[x2][y2];
                 }
             }
         }
+        coord_count[x1][y1]++;
     }
-    return result / 2;
+    return result;
 }
 
 /// <summary>

@@ -9389,8 +9389,26 @@ void TestLeetCode2875(void)
     Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2892(void)
+{
+    Logger::WriteMessage("Test Leet Code 2892");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2,3,3,7,3,5 };
+    int k = 20;
+    int result = leetCode.minArrayLength(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3,3,3,3 };
+    k = 6;
+    result = leetCode.minArrayLength(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2892();
     TestLeetCode2875();
     TestLeetCode2871();
     TestLeetCode2874();

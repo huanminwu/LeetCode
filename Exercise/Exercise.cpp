@@ -43,8 +43,8 @@
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeGraph();
     TestLeetCodeArray();
+    TestLeetCodeGraph();
     TestLeetCodeHashtable();
     TestLeetCodeDFS();
     TestLeetCodeStack();
