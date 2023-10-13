@@ -1127,8 +1127,26 @@ void TestLeetCode2864(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode2897(void)
+{
+    Logger::WriteMessage("Test Leet Code 2897");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 2, 6, 5, 8 };
+    int k = 2;
+    int result = leetCode.maxSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 4,5,4,7 };
+    k = 3;
+    result = leetCode.maxSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2897();
     TestLeetCode2864();
     TestLeetCode2859();
     TestLeetCode2732();

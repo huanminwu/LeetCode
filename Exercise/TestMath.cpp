@@ -6278,8 +6278,29 @@ void TestLeetCode2862(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2894(void)
+{
+    Logger::WriteMessage("Test Leet Code 2894");
+    LeetCodeMath leetCode;
+    int n = 10, m = 3;
+    int result = leetCode.differenceOfSums(n, m);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 5, m = 6;
+    result = leetCode.differenceOfSums(n, m);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 5, m = 1;
+    result = leetCode.differenceOfSums(n, m);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2894();
     TestLeetCode2862();
     TestLeetCode2849();
     TestLeetCode2847();

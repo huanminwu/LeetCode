@@ -2947,6 +2947,5 @@ public:
     /// 2. 1 <= nums[i] <= 10^6
     /// </summary>
     int minOperations(vector<int>& nums);
-
 };
 #endif  // LeetCodeHashtable

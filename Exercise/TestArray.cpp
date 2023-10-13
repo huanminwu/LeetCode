@@ -9406,8 +9406,24 @@ void TestLeetCode2892(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2898(void)
+{
+    Logger::WriteMessage("Test Leet Code 2898");
+    LeetCodeArray leetCode;
+    vector<int> prices = { 1, 5, 3, 7, 8 };
+    long long result = leetCode.maxScore(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 5,6,7,8,9 };
+    result = leetCode.maxScore(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2898();
     TestLeetCode2892();
     TestLeetCode2875();
     TestLeetCode2871();

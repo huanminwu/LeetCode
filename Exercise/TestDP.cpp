@@ -4789,8 +4789,34 @@ void TestLeetCode2826(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2896(void)
+{
+    LeetCodeDP leetCode;
+    string s1 = "1100011000";
+    string s2 = "0101001010";
+    int x = 2;
+    int result = leetCode.minOperationsDFS(s1, s2, x);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+
+    s1 = "10110";
+    s2 = "00011";
+    x = 4;
+    result = leetCode.minOperationsDFS(s1, s2, x);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+
+    s1 = "0101101001111010111001000111";
+    s2 = "1001000010101001010111000110";
+    x = 6;
+    result = leetCode.minOperationsDFS(s1, s2, x);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2);
+    Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2896();
     TestLeetCode2826();
     TestLeetCode2809();
     TestLeetCode2786();

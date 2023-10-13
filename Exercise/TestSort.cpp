@@ -3497,8 +3497,28 @@ void TestLeetCode2863(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2895(void)
+{
+    Logger::WriteMessage("Test Leet Code 2895");
+    LeetCodeSort leetCode;
+    vector<int> processorTime = { 8,10 };
+    vector<int> tasks = { 2,2,3,1,8,7,4,5 };
+    int result = leetCode.minProcessingTime(processorTime, tasks);
+    Logger::WriteMessage(processorTime);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    processorTime = { 10,20 };
+    tasks = { 2,3,1,2,5,8,4,3 };
+    result = leetCode.minProcessingTime(processorTime, tasks);
+    Logger::WriteMessage(processorTime);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2895();
     TestLeetCode2863();
     TestLeetCode2860();
     TestLeetCode2856();
