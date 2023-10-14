@@ -6088,4 +6088,5 @@ int LeetCodeGreedy::numberOfPoints(vector<vector<int>>& nums)
     }
     return result;
 }
+
 #pragma endregion

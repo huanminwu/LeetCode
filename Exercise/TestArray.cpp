@@ -9421,8 +9421,52 @@ void TestLeetCode2898(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2900(void)
+{
+    Logger::WriteMessage("Test Leet Code 2900");
+    LeetCodeArray leetCode;
+    int n = 3;
+    vector<string> words = { "e", "a", "b" };
+    vector<int> groups = { 0, 0, 1 };
+    vector<string> result = leetCode.getWordsInLongestSubsequence(n, words, groups);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(groups);
+    Logger::WriteMessage(result);
+
+    n = 4;
+    words = { "a","b","c","d" };
+    groups = { 1,0,1,1 };
+    result = leetCode.getWordsInLongestSubsequence(n, words, groups);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(groups);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2901(void)
+{
+    Logger::WriteMessage("Test Leet Code 2901");
+    LeetCodeArray leetCode;
+    int n = 3;
+    vector<string> words = { "bab", "dab", "cab" };
+    vector<int> groups = { 1, 2, 2 };
+    vector<string> result = leetCode.getWordsInLongestSubsequenceII(n, words, groups);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(groups);
+    Logger::WriteMessage(result);
+
+    n = 4;
+    words = { "a","b","c","d" };
+    groups = { 1,2,3,4 };
+    result = leetCode.getWordsInLongestSubsequenceII(n, words, groups);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(groups);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2901();
+    TestLeetCode2900();
     TestLeetCode2898();
     TestLeetCode2892();
     TestLeetCode2875();

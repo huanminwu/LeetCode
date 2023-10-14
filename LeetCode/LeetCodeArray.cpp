@@ -29135,5 +29135,190 @@ long long LeetCodeArray::maxStockScore(vector<int>& prices)
     return result;
 }
 
+/// <summary>
+/// Leet Code 2900. Longest Unequal Adjacent Groups Subsequence I
+/// 
+/// Medium
+/// 
+/// You are given an integer n, a 0-indexed string array words, and a 
+/// 0-indexed binary array groups, both arrays having length n.
+///
+/// You need to select the longest subsequence from an array of indices 
+/// [0, 1, ..., n - 1], such that for the subsequence denoted as 
+/// [i0, i1, ..., ik - 1] having length k, groups[ij] != groups[ij + 1], 
+/// for each j where 0 < j + 1 < k.
+///
+/// Return a string array containing the words corresponding to the 
+/// indices (in order) in the selected subsequence. If there are 
+/// multiple answers, return any of them.
+///
+/// A subsequence of an array is a new array that is formed from the 
+/// original array by deleting some (possibly none) of the elements 
+/// without disturbing the relative positions of the remaining elements.
+///
+/// Note: strings in words may be unequal in length.
+///
+/// Example 1:
+/// Input: n = 3, words = ["e","a","b"], groups = [0,0,1]
+/// Output: ["e","b"]
+/// Explanation: A subsequence that can be selected is [0,2] because 
+/// groups[0] != groups[2].
+/// So, a valid answer is [words[0],words[2]] = ["e","b"].
+/// Another subsequence that can be selected is [1,2] because 
+/// groups[1] != groups[2].
+/// This results in [words[1],words[2]] = ["a","b"].
+/// It is also a valid answer.
+/// It can be shown that the length of the longest subsequence of 
+/// indices that satisfies the condition is 2.
+///
+/// Example 2:
+/// Input: n = 4, words = ["a","b","c","d"], groups = [1,0,1,1]
+/// Output: ["a","b","c"]
+/// Explanation: A subsequence that can be selected is [0,1,2] because 
+/// groups[0] != groups[1] and groups[1] != groups[2].
+/// So, a valid answer is [words[0],words[1],words[2]] = ["a","b","c"].
+/// Another subsequence that can be selected is [0,1,3] because 
+/// groups[0] != groups[1] and groups[1] != groups[3].
+/// This results in [words[0],words[1],words[3]] = ["a","b","d"].
+/// It is also a valid answer.
+/// It can be shown that the length of the longest subsequence of indices 
+/// that satisfies the condition is 3.
+///
+/// Constraints:
+/// 1. 1 <= n == words.length == groups.length <= 100
+/// 2. 1 <= words[i].length <= 10
+/// 3. 0 <= groups[i] < 2
+/// 4. words consists of distinct strings.
+/// 5. words[i] consists of lowercase English letters.
+/// </summary>
+vector<string> LeetCodeArray::getWordsInLongestSubsequence(int n, vector<string>& words, vector<int>& groups)
+{
+    int prev = -1;
+    vector<string> result;
+    for (int i = 0; i < n; i++)
+    {
+        if (result.empty() || prev != groups[i])
+        {
+            result.push_back(words[i]);
+            prev = groups[i];
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2901. Longest Unequal Adjacent Groups Subsequence II
+/// 
+/// Medium
+/// 
+/// You are given an integer n, a 0-indexed string array words, and a 
+/// 0-indexed array groups, both arrays having length n.
+///
+/// The hamming distance between two strings of equal length is the number 
+/// of positions at which the corresponding characters are different.
+///
+/// You need to select the longest subsequence from an array of indices 
+/// [0, 1, ..., n - 1], such that for the subsequence denoted as 
+/// [i0, i1, ..., ik - 1] having length k, the following holds:
+///
+/// For adjacent indices in the subsequence, their corresponding groups 
+/// are unequal, i.e., groups[ij] != groups[ij + 1], for each j 
+/// where 0 < j + 1 < k.
+/// words[ij] and words[ij + 1] are equal in length, and the hamming 
+/// distance between them is 1, where 0 < j + 1 < k, for all indices in 
+/// the subsequence.
+/// Return a string array containing the words corresponding to the 
+/// indices (in order) in the selected subsequence. If there are multiple 
+/// answers, return any of them.
+///
+/// A subsequence of an array is a new array that is formed from the 
+/// original array by deleting some (possibly none) of the elements 
+/// without disturbing the relative positions of the remaining elements.
+///
+/// Note: strings in words may be unequal in length.
+/// 
+/// Example 1:
+/// Input: n = 3, words = ["bab","dab","cab"], groups = [1,2,2]
+/// Output: ["bab","cab"]
+/// Explanation: A subsequence that can be selected is [0,2].
+/// - groups[0] != groups[2]
+/// - words[0].length == words[2].length, and the hamming distance 
+///   between them is 1.
+/// So, a valid answer is [words[0],words[2]] = ["bab","cab"].
+/// Another subsequence that can be selected is [0,1].
+/// - groups[0] != groups[1]
+/// - words[0].length == words[1].length, and the hamming distance 
+///   between them is 1.
+/// So, another valid answer is [words[0],words[1]] = ["bab","dab"].
+/// It can be shown that the length of the longest subsequence of indices 
+/// that satisfies the conditions is 2.  
+///
+/// Example 2:
+/// Input: n = 4, words = ["a","b","c","d"], groups = [1,2,3,4]
+/// Output: ["a","b","c","d"]
+/// Explanation: We can select the subsequence [0,1,2,3].
+/// It satisfies both conditions.
+/// Hence, the answer is [words[0],words[1],words[2],words[3]] = 
+/// ["a","b","c","d"].
+/// It has the longest length among all subsequences of indices that 
+/// satisfy the conditions.
+/// Hence, it is the only answer.
+///
+/// Constraints:
+/// 1. 1 <= n == words.length == groups.length <= 1000
+/// 2. 1 <= words[i].length <= 10
+/// 3. 1 <= groups[i] <= n
+/// 4. words consists of distinct strings.
+/// 5. words[i] consists of lowercase English letters.
+/// </summary>
+vector<string> LeetCodeArray::getWordsInLongestSubsequenceII(int n, vector<string>& words, vector<int>& groups)
+{
+    vector<pair<int, int>> tracking(n, {1, -1});
+    int max_len = 1;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < i; j++)
+        {
+            if (groups[i] == groups[j]) continue;
+            if (words[i].size() != words[j].size()) continue;
+            int count = 0;
+            for (size_t k = 0; k < words[i].size(); k++)
+            {
+                if (words[i][k] != words[j][k])
+                {
+                    count++;
+                    if (count > 1) break;
+                }
+            }
+            if (count == 1)
+            {
+                if (tracking[i].first < tracking[j].first + 1)
+                {
+                    tracking[i].first = tracking[j].first + 1;
+                    tracking[i].second = j;
+                    max_len = max(max_len, tracking[i].first);
+                }
+            }
+        }
+    }
+    vector<string> result;
+    for (int i = 0; i < n; i++)
+    {
+        if (tracking[i].first == max_len)
+        {
+            int x = i;
+            while (x != -1)
+            {
+                result.push_back(words[x]);
+                x = tracking[x].second;
+            }
+            break;
+        }
+    }
+    reverse(result.begin(), result.end());
+    return result;
+}
+
+
 #pragma endregion
 
