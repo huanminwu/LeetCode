@@ -9421,8 +9421,24 @@ void TestLeetCode2898(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2899(void)
+{
+    Logger::WriteMessage("Test Leet Code 2899");
+    LeetCodeArray leetCode;
+    vector<string> words = { "1", "2", "prev", "prev", "prev" };
+    vector<int> result = leetCode.lastVisitedIntegers(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+
+    words = { "1","prev","2","prev","prev" };
+    result = leetCode.lastVisitedIntegers(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2899();
     TestLeetCode2898();
     TestLeetCode2892();
     TestLeetCode2875();
