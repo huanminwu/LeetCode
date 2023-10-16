@@ -452,8 +452,38 @@ void TestLeetCode2841(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2904(void)
+{
+    Logger::WriteMessage("Test Leet Code 2904");
+    LeetCodeTwoPointer leetCode;
+    string s = "100011001";
+    int k = 3;
+    string result = leetCode.shortestBeautifulSubstring(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+
+    s = "1011";
+    k = 2;
+    result = leetCode.shortestBeautifulSubstring(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+
+    s = "000";
+    k = 1;
+    result = leetCode.shortestBeautifulSubstring(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+
+    s = "1100001110111100100";
+    k = 8;
+    result = leetCode.shortestBeautifulSubstring(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2904();
     TestLeetCode2841();
     TestLeetCode2831();
     TestLeetCode2799();

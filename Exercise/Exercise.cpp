@@ -43,19 +43,19 @@
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeTwoPointer();
     TestLeetCodeArray();
+    TestLeetCodeMath();
     TestLeetCodeGreedy();
     TestLeetCodeHashtable();
     TestLeetCodeBit();
     TestLeetCodeDP();
     TestLeetCodeSort();
-    TestLeetCodeMath();
     TestLeetCodeGraph();
     TestLeetCodeDFS();
     TestLeetCodeStack();
     TestLeetCodeBinarySearch();
     TestLeetCodeTree();
-    TestLeetCodeTwoPointer();
     TestLeetCodeString();
     TestLeetCodeLinkedList();
     TestLeetCodeDesign();

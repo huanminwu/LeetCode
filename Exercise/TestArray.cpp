@@ -9477,8 +9477,84 @@ void TestLeetCode2901(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2903(void)
+{
+    Logger::WriteMessage("Test Leet Code 2903");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 5, 1, 4, 1 };
+    int indexDifference = 2, valueDifference = 4;
+    vector<int> result = leetCode.findIndices(nums, indexDifference, valueDifference);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("indexDifference = " + to_string(indexDifference));
+    Logger::WriteMessage("valueDifference = " + to_string(valueDifference));
+    Logger::WriteMessage(result);
+
+    nums = { 2,1 };
+    indexDifference = 0, valueDifference = 0;
+    result = leetCode.findIndices(nums, indexDifference, valueDifference);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("indexDifference = " + to_string(indexDifference));
+    Logger::WriteMessage("valueDifference = " + to_string(valueDifference));
+    Logger::WriteMessage(result);
+
+    nums = { 1, 2, 3 };
+    indexDifference = 2, valueDifference = 4;
+    result = leetCode.findIndices(nums, indexDifference, valueDifference);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("indexDifference = " + to_string(indexDifference));
+    Logger::WriteMessage("valueDifference = " + to_string(valueDifference));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2905(void)
+{
+    Logger::WriteMessage("Test Leet Code 2905");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 5, 1, 4, 1 };
+    int indexDifference = 2, valueDifference = 4;
+    vector<int> result = leetCode.findIndicesII(nums, indexDifference, valueDifference);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("indexDifference = " + to_string(indexDifference));
+    Logger::WriteMessage("valueDifference = " + to_string(valueDifference));
+    Logger::WriteMessage(result);
+
+    nums = { 2,1 };
+    indexDifference = 0, valueDifference = 0;
+    result = leetCode.findIndicesII(nums, indexDifference, valueDifference);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("indexDifference = " + to_string(indexDifference));
+    Logger::WriteMessage("valueDifference = " + to_string(valueDifference));
+    Logger::WriteMessage(result);
+
+    nums = { 1, 2, 3 };
+    indexDifference = 2, valueDifference = 4;
+    result = leetCode.findIndicesII(nums, indexDifference, valueDifference);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("indexDifference = " + to_string(indexDifference));
+    Logger::WriteMessage("valueDifference = " + to_string(valueDifference));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2906(void)
+{
+    Logger::WriteMessage("Test Leet Code 2906");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {1, 2},{3, 4} };
+    vector<vector<int>> result = leetCode.constructProductMatrix(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid = { {12345} ,{2}, {1} };
+    result = leetCode.constructProductMatrix(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2905();
+    TestLeetCode2906();
+    TestLeetCode2903();
     TestLeetCode2899();
     TestLeetCode2901();
     TestLeetCode2900();

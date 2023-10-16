@@ -29193,7 +29193,7 @@ vector<int> LeetCodeArray::lastVisitedIntegers(vector<string>& words)
     {
         if (words[i] == "prev")
         {
-            if (prev_count >= nums.size())
+            if (prev_count >= (int)nums.size())
             {
                 result.push_back(-1);
             }
@@ -29393,5 +29393,281 @@ vector<string> LeetCodeArray::getWordsInLongestSubsequenceII(int n, vector<strin
         }
     }
     reverse(result.begin(), result.end());
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 2903. Find Indices With Index and Value Difference I
+/// 
+/// Easy
+/// 
+/// You are given a 0-indexed integer array nums having length n, an 
+/// integer indexDifference, and an integer valueDifference.
+///
+/// Your task is to find two indices i and j, both in the range 
+/// [0, n - 1], that satisfy the following conditions:
+///
+/// abs(i - j) >= indexDifference, and
+/// abs(nums[i] - nums[j]) >= valueDifference
+/// Return an integer array answer, where answer = [i, j] if there are 
+/// two such indices, and answer = [-1, -1] otherwise. If there are 
+/// multiple choices for the two indices, return any of them.
+///
+/// Note: i and j may be equal.
+/// 
+/// Example 1:
+/// Input: nums = [5,1,4,1], indexDifference = 2, valueDifference = 4
+/// Output: [0,3]
+/// Explanation: In this example, i = 0 and j = 3 can be selected.
+/// abs(0 - 3) >= 2 and abs(nums[0] - nums[3]) >= 4.
+/// Hence, a valid answer is [0,3].
+/// [3,0] is also a valid answer.
+///
+/// Example 2:
+/// Input: nums = [2,1], indexDifference = 0, valueDifference = 0
+/// Output: [0,0]
+/// Explanation: In this example, i = 0 and j = 0 can be selected.
+/// abs(0 - 0) >= 0 and abs(nums[0] - nums[0]) >= 0.
+/// Hence, a valid answer is [0,0].
+/// Other valid answers are [0,1], [1,0], and [1,1].
+///
+/// Example 3:
+/// Input: nums = [1,2,3], indexDifference = 2, valueDifference = 4
+/// Output: [-1,-1]
+/// Explanation: In this example, it can be shown that it is 
+/// impossible to find two indices that satisfy both conditions.
+/// Hence, [-1,-1] is returned.
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 100
+/// 2. 0 <= nums[i] <= 50
+/// 3. 0 <= indexDifference <= 100
+/// 4. 0 <= valueDifference <= 50
+/// </summary>
+vector<int> LeetCodeArray::findIndices(vector<int>& nums, int indexDifference, int valueDifference)
+{
+    pair<int, int> min_val = { 1000, -1 };
+    pair<int, int> max_val = { -1000, -1 };
+    vector<int> result = { -1, -1 };
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int k = (int)i - indexDifference;
+        if (k >= 0)
+        {
+            if (nums[k] < min_val.first)
+            {
+                min_val.first = nums[k];
+                min_val.second = k;
+            }
+            if (nums[k] > max_val.first)
+            {
+                max_val.first = nums[k];
+                max_val.second = k;
+            }
+        }
+        if (nums[i] - min_val.first >= valueDifference)
+        {
+            result[0] = min_val.second;
+            result[1] = i;
+            break;
+        }
+        else if (max_val.first - nums[i] >= valueDifference)
+        {
+            result[0] = max_val.second;
+            result[1] = i;
+            break;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2906. Construct Product Matrix
+/// 
+/// Medium
+/// Given a 0-indexed 2D integer matrix grid of size n * m, we define a 
+/// 0-indexed 2D matrix p of size n * m as the product matrix of grid if 
+/// the following condition is met:
+///
+/// Each element p[i][j] is calculated as the product of all elements in 
+/// grid except for the element grid[i][j]. This product is then taken 
+/// modulo 12345.
+/// Return the product matrix of grid.
+/// 
+/// Example 1:
+/// Input: grid = [[1,2],[3,4]]
+/// Output: [[24,12],[8,6]]
+/// Explanation: p[0][0] = grid[0][1] * grid[1][0] * grid[1][1] 
+/// = 2 * 3 * 4 = 24
+/// p[0][1] = grid[0][0] * grid[1][0] * grid[1][1] = 1 * 3 * 4 = 12
+/// p[1][0] = grid[0][0] * grid[0][1] * grid[1][1] = 1 * 2 * 4 = 8
+/// p[1][1] = grid[0][0] * grid[0][1] * grid[1][0] = 1 * 2 * 3 = 6
+/// So the answer is [[24,12],[8,6]].
+///
+/// Example 2:
+/// Input: grid = [[12345],[2],[1]]
+/// Output: [[2],[0],[0]]
+/// Explanation: p[0][0] = grid[0][1] * grid[0][2] = 2 * 1 = 2.
+/// p[0][1] = grid[0][0] * grid[0][2] = 12345 * 1 = 12345. 
+/// 12345 % 12345 = 0. So p[0][1] = 0.
+/// p[0][2] = grid[0][0] * grid[0][1] = 12345 * 2 = 24690. 
+/// 24690 % 12345 = 0. So p[0][2] = 0.
+/// So the answer is [[2],[0],[0]].
+///
+/// Constraints:
+/// 1. 1 <= n == grid.length <= 10^5
+/// 2. 1 <= m == grid[i].length <= 10^5
+/// 3. 2 <= n * m <= 10^5
+/// 4. 1 <= grid[i][j] <= 10^9
+/// </summary>
+vector<vector<int>> LeetCodeArray::constructProductMatrix(vector<vector<int>>& grid)
+{
+    long long M = 12345;
+    long long product = 1;
+    int n = grid.size();
+    int m = grid[0].size();
+    vector<vector<pair<int, int>>> grid_product(n, vector<pair<int, int>>(m));
+    vector<pair<int, int>> row_product(n);
+    for (size_t i = 0; i < grid.size(); i++)
+    {
+        long long product = 1;
+        for (size_t j = 0; j < grid[0].size(); j++)
+        {
+            product = product * (long long)grid[i][j] % M;
+            grid_product[i][j].first = (int)product;
+        }
+        row_product[i].first = (int)product;
+        if (i > 0)
+        {
+            row_product[i].first = (row_product[i].first * row_product[i - 1].first) % M;
+        }
+    }
+
+    for (int i = n - 1; i >= 0; i--)
+    {
+        long long product = 1;
+        for (int j = m - 1; j >= 0; j--)
+        {
+            product = (product * (long long)grid[i][j]) % M;
+            grid_product[i][j].second = (int)product;
+        }
+        row_product[i].second = (int)product;
+        if (i < n - 1)
+        {
+            row_product[i].second = (row_product[i].second * row_product[i + 1].second) % M;
+        }
+    }
+
+    vector<vector<int>> result(n, vector<int>(m));
+    for (int i = 0; i < (int)grid.size(); i++)
+    {
+        for (int j = 0; j < (int)grid[0].size(); j++)
+        {
+            result[i][j] = 1;
+            if (i > 0)
+            {
+                result[i][j] = (result[i][j] * row_product[i - 1].first) % M;
+            }
+            if (i < n - 1)
+            {
+                result[i][j] = (result[i][j] * row_product[i + 1].second) % M;
+            }
+            if (j > 0)
+            {
+                result[i][j] = result[i][j] * grid_product[i][j - 1].first % M;
+            }
+            if (j < m - 1)
+            {
+                result[i][j] = result[i][j] * grid_product[i][j + 1].second % M;
+            }
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 2905. Find Indices With Index and Value Difference II
+/// 
+/// Medium
+///
+/// You are given a 0-indexed integer array nums having length n, an 
+/// integer indexDifference, and an integer valueDifference.
+///
+/// Your task is to find two indices i and j, both in the range 
+/// [0, n - 1], that satisfy the following conditions:
+///
+/// abs(i - j) >= indexDifference, and 
+/// abs(nums[i] - nums[j]) >= valueDifference
+/// Return an integer array answer, where answer = [i, j] if there are 
+/// two such indices, and answer = [-1, -1] otherwise. If there are 
+/// multiple choices for the two indices, return any of them.
+///
+/// Note: i and j may be equal.
+/// 
+/// Example 1:
+/// Input: nums = [5,1,4,1], indexDifference = 2, valueDifference = 4
+/// Output: [0,3]
+/// Explanation: In this example, i = 0 and j = 3 can be selected.
+/// abs(0 - 3) >= 2 and abs(nums[0] - nums[3]) >= 4.
+/// Hence, a valid answer is [0,3].
+/// [3,0] is also a valid answer.
+///
+/// Example 2:
+/// Input: nums = [2,1], indexDifference = 0, valueDifference = 0
+/// Output: [0,0]
+/// Explanation: In this example, i = 0 and j = 0 can be selected.
+/// abs(0 - 0) >= 0 and abs(nums[0] - nums[0]) >= 0.
+/// Hence, a valid answer is [0,0].
+/// Other valid answers are [0,1], [1,0], and [1,1].
+///
+/// Example 3:
+/// Input: nums = [1,2,3], indexDifference = 2, valueDifference = 4
+/// Output: [-1,-1]
+/// Explanation: In this example, it can be shown that it is impossible to 
+/// find two indices that satisfy both conditions.
+/// Hence, [-1,-1] is returned.
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^9
+/// 3. 0 <= indexDifference <= 10^5
+/// 4. 0 <= valueDifference <= 10^9
+/// </summary>
+vector<int> LeetCodeArray::findIndicesII(vector<int>& nums, int indexDifference, int valueDifference)
+{
+    pair<int, int> min_val = { 1000000001, -1 };
+    pair<int, int> max_val = { -1000000001, -1 };
+    vector<int> result = { -1, -1 };
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int k = (int)i - indexDifference;
+        if (k >= 0)
+        {
+            if (nums[k] < min_val.first)
+            {
+                min_val.first = nums[k];
+                min_val.second = k;
+            }
+            if (nums[k] > max_val.first)
+            {
+                max_val.first = nums[k];
+                max_val.second = k;
+            }
+        }
+        if (nums[i] - min_val.first >= valueDifference)
+        {
+            result[0] = min_val.second;
+            result[1] = i;
+            break;
+        }
+        else if (max_val.first - nums[i] >= valueDifference)
+        {
+            result[0] = max_val.second;
+            result[1] = i;
+            break;
+        }
+    }
     return result;
 }
