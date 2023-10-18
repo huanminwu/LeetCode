@@ -2044,8 +2044,8 @@ void TestLeetCode406(void)
 {
     Logger::WriteMessage("Test Leet Code 406");
     LeetCodeSort leetCode;
-    vector<pair<int, int>> heights = { { 7, 0 },{ 4, 4 },{ 7, 1 },{ 5, 0 },{ 6, 1 },{ 5, 2 } };
-    vector<pair<int, int>> result = leetCode.reconstructQueue(heights);
+    vector<vector<int>> heights = { { 7, 0 },{ 4, 4 },{ 7, 1 },{ 5, 0 },{ 6, 1 },{ 5, 2 } };
+    vector<vector<int>> result = leetCode.reconstructQueue(heights);
     Logger::WriteMessage(result);
 }
 

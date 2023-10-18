@@ -3461,33 +3461,64 @@ public:
     int maximumGap(vector<int>& nums);
 
     /// <summary>
-    /// Leet code #75. Sort Colors   
-    /// Given an array with n objects colored red, white or blue, sort them so that objects of 
-    /// the same color are adjacent, with the colors in the order red, white and blue. 
-    /// Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.  
-    /// Note:
-    /// You are not suppose to use the library's sort function for this problem.  
-    /// Follow up:
-    /// A rather straight forward solution is a two-pass algorithm using counting sort.
-    /// First, iterate the array counting number of 0's, 1's, and 2's, then overwrite array with total number of 0's, 
-    /// then 1's and followed by 2's.
-    /// Could you come up with an one-pass algorithm using only constant space?
+    /// Leet Code 75. Sort Colors
+    /// 
+    /// Medium
+    ///
+    /// Given an array nums with n objects colored red, white, or blue, sort 
+    /// them in-place so that objects of the same color are adjacent, with 
+    /// the colors in the order red, white, and blue.
+    ///
+    /// We will use the integers 0, 1, and 2 to represent the color red, 
+    /// white, and blue, respectively.
+    ///
+    /// You must solve this problem without using the library's sort function.
+    ///
+    /// Example 1:
+    /// Input: nums = [2,0,2,1,1,0]
+    /// Output: [0,0,1,1,2,2]
+    ///
+    /// Example 2:
+    /// Input: nums = [2,0,1]
+    /// Output: [0,1,2]
+    ///
+    /// Constraints:
+    /// 1. n == nums.length
+    /// 2. 1 <= n <= 300
+    /// 3. nums[i] is either 0, 1, or 2.
     /// </summary>
     void sortColors(vector<int>& nums);
 
     /// <summary>
-    /// Leet code #274. H-Index 
-    /// Given an array of citations (each citation is a non-negative integer) of a researcher, write a function to compute the researcher's h-index.  
-    /// According to the definition of h-index on Wikipedia: "A scientist has index h if h of his/her N papers have at 
-    /// least h citations each, and the other N ? h papers have no more than h citations each." 
-    /// For example, given citations = [3, 0, 6, 1, 5], which means the researcher has 5 papers in total and each of 
-    /// them had received 3, 0, 6, 1, 5 citations respectively. Since the researcher has 3 papers with at least 3 
-    /// citations each and the remaining two with no more than 3 citations each, his h-index is 3. 
-    /// Note: If there are several possible values for h, the maximum one is taken as the h-index. 
-    /// Hint:
-    /// 1.An easy approach is to sort the array first.
-    /// 2.What are the possible values of h-index?
-    /// 3.A faster approach is to use extra space.
+    /// Leet Code 274. H-Index
+    /// 
+    /// Medium
+    ///
+    /// Given an array of integers citations where citations[i] is the number 
+    /// of citations a researcher received for their ith paper, return the 
+    /// researcher's h-index.
+    ///
+    /// According to the definition of h-index on Wikipedia: The h-index is 
+    /// defined as the maximum value of h such that the given researcher has 
+    /// published at least h papers that have each been cited at least h times.
+    ///
+    /// Example 1:
+    /// Input: citations = [3,0,6,1,5]
+    /// Output: 3
+    /// Explanation: [3,0,6,1,5] means the researcher has 5 papers in total 
+    /// and each of them had received 3, 0, 6, 1, 5 citations respectively.
+    /// Since the researcher has 3 papers with at least 3 citations each and 
+    /// the remaining two with no more than 3 citations each, their 
+    /// h-index is 3.
+    ///
+    /// Example 2:
+    /// Input: citations = [1,3,1]
+    /// Output: 1
+    ///
+    /// Constraints:
+    /// 1. n == citations.length
+    /// 2. 1 <= n <= 5000
+    /// 3. 0 <= citations[i] <= 1000
     /// </summary>
     int hIndex(vector<int>& citations);
 
@@ -3513,23 +3544,50 @@ public:
     string largestNumber(vector<int>& nums);
 
     /// <summary>
-    /// Leet code #406. Queue Reconstruction by Height 
-    /// Suppose you have a random list of people standing in a queue. Each person is described 
-    /// by a pair of integers (h, k), where h is the height of the person and k is the number 
-    /// of people in front of this person who have a height greater than or equal to h. Write 
-    /// an algorithm to reconstruct the queue. 
+    /// Leet Code 406. Queue Reconstruction by Height
+    /// 
+    /// Medium
     ///
-    /// Note:
-    /// The number of people is less than 1,100. 
+    /// You are given an array of people, people, which are the attributes of 
+    /// some people in a queue (not necessarily in order). Each 
+    /// people[i] = [hi, ki] represents the ith person of height hi with 
+    /// exactly ki other people in front who have a height greater than or 
+    /// equal to hi.
     ///
-    /// Example 
-    /// Input:
-    /// [[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]
+    /// Reconstruct and return the queue that is represented by the input 
+    /// array people. The returned queue should be formatted as an array 
+    /// queue, where queue[j] = [hj, kj] is the attributes of the jth person 
+    /// in the queue (queue[0] is the person at the front of the queue).
     ///
-    /// Output:
-    /// [[5,0], [7,0], [5,2], [6,1], [4,4], [7,1]]
+    /// Example 1:
+    /// Input: people = [[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]]
+    /// Output: [[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]]
+    /// Explanation:
+    /// Person 0 has height 5 with no other people taller or the same height 
+    /// in front.
+    /// Person 1 has height 7 with no other people taller or the same height 
+    /// in front.
+    /// Person 2 has height 5 with two persons taller or the same height in 
+    /// front, which is person 0 and 1.
+    /// Person 3 has height 6 with one person taller or the same height in 
+    /// front, which is person 1.
+    /// Person 4 has height 4 with four people taller or the same height in 
+    /// front, which are people 0, 1, 2, and 3.
+    /// Person 5 has height 7 with one person taller or the same height in 
+    /// front, which is person 1.
+    /// Hence [[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]] is the reconstructed queue.
+    ///
+    /// Example 2:
+    /// Input: people = [[6,0],[5,0],[4,0],[3,2],[2,2],[1,4]]
+    /// Output: [[4,0],[5,0],[2,2],[3,2],[1,4],[6,0]]
+    ///
+    /// Constraints:
+    /// 1. 1 <= people.length <= 2000
+    /// 2. 0 <= hi <= 10^6
+    /// 3. 0 <= ki < people.length
+    /// 4. It is guaranteed that the queue can be reconstructed.
     /// </summary>
-    vector<pair<int, int>> reconstructQueue(vector<pair<int, int>>& people);
+    vector<vector<int>> reconstructQueue(vector<vector<int>>& people);
 
     /// <summary>
     /// Leet code #220. Contains Duplicate III
@@ -3582,12 +3640,28 @@ public:
     vector<int> countSmallerIV(vector<int>& nums);
 
     /// <summary>
-    /// Leet code #280. Wiggle Sort
+    /// Leet Code 280. Wiggle Sort
     /// 
-    /// Given an unsorted array nums, reorder it in-place such that 
-    /// nums[0] <= nums[1] >= nums[2] <= nums[3].... 
-    /// For example, given nums = [3, 5, 2, 1, 6, 4], 
-    /// one possible answer is [1, 6, 2, 5, 3, 4].
+    /// Medium
+    ///
+    /// Given an integer array nums, reorder it such that 
+    /// nums[0] <= nums[1] >= nums[2] <= nums[3]
+    ///
+    /// You may assume the input array always has a valid answer.
+    /// Example 1:
+    /// Input: nums = [3,5,2,1,6,4]
+    /// Output: [3,5,1,6,2,4]
+    /// Explanation: [1,6,2,5,3,4] is also accepted.
+    ///
+    /// Example 2:
+    /// Input: nums = [6,6,5,6,3,8]
+    /// Output: [6,6,5,6,3,8]
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 5 * 10^4
+    /// 2. 0 <= nums[i] <= 10^4
+    /// 3. It is guaranteed that there will be an answer for the given input 
+    ///    nums.
     /// </summary>
     void wiggleSort(vector<int>& nums);
 
