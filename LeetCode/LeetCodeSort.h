@@ -6991,6 +6991,144 @@ public:
     /// 4. tasks.length == 4 * n
     /// </summary>
     int minProcessingTime(vector<int>& processorTime, vector<int>& tasks);
+
+    /// <summary>
+    /// Leet Code 2907. Maximum Profitable Triplets With Increasing Prices I 
+    /// 
+    /// Medium
+    ///
+    /// Given the 0-indexed arrays prices and profits of length n. There are n 
+    /// items in an store where the ith item has a price of prices[i] and a 
+    /// profit of profits[i].
+    ///
+    /// We have to pick three items with the following condition:
+    /// prices[i] < prices[j] < prices[k] where i < j < k.
+    /// If we pick items with indices i, j and k satisfying the above 
+    /// condition, the profit would be profits[i] + profits[j] + profits[k].
+    ///
+    /// Return the maximum profit we can get, and -1 if it's not possible 
+    /// to pick three items with the given condition.
+    ///
+    /// Example 1:
+    /// Input: prices = [10,2,3,4], profits = [100,2,7,10]
+    /// Output: 19
+    /// Explanation: We can't pick the item with index i=0 since there are no 
+    /// indices j and k such that the condition holds.
+    /// So the only triplet we can pick, are the items with indices 1, 2 and 3 
+    /// and it's a valid pick since prices[1] < prices[2] < prices[3].
+    /// The answer would be sum of their profits which is 2 + 7 + 10 = 19.
+    ///
+    /// Example 2:
+    /// Input: prices = [1,2,3,4,5], profits = [1,5,3,4,6]
+    /// Output: 15
+    /// Explanation: We can select any triplet of items since for each triplet 
+    /// of indices i, j and k such that i < j < k, the condition holds.
+    /// Therefore the maximum profit we can get would be the 3 most profitable 
+    /// items which are indices 1, 3 and 4.
+    /// The answer would be sum of their profits which is 5 + 4 + 6 = 15.
+    ///
+    /// Example 3:
+    /// Input: prices = [4,3,2,1], profits = [33,20,19,87]
+    /// Output: -1
+    /// Explanation: We can't select any triplet of indices such that the 
+    /// condition holds, so we return -1.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= prices.length == profits.length <= 2000
+    /// 2. 1 <= prices[i] <= 10^6
+    /// 3. 1 <= profits[i] <= 10^6
+    /// </summary>
+    int maxProfit(vector<int>& prices, vector<int>& profits);
+
+    /// <summary>
+    /// Leet Code 2908. Minimum Sum of Mountain Triplets I 
+    /// 
+    /// Easy
+    ///
+    /// You are given a 0-indexed array nums of integers.
+    ///
+    /// A triplet of indices (i, j, k) is a mountain if:
+    /// 
+    /// i < j < k
+    /// nums[i] < nums[j] and nums[k] < nums[j]
+    /// Return the minimum possible sum of a mountain triplet of nums. If no 
+    /// such triplet exists, return -1.
+    ///
+    /// Example 1:
+    /// Input: nums = [8,6,1,5,3]
+    /// Output: 9
+    /// Explanation: Triplet (2, 3, 4) is a mountain triplet of sum 9 since: 
+    /// - 2 < 3 < 4
+    /// - nums[2] < nums[3] and nums[4] < nums[3]
+    /// And the sum of this triplet is nums[2] + nums[3] + nums[4] = 9. It 
+    /// can be shown that there are no mountain triplets with a sum of less 
+    /// than 9.
+    ///
+    /// Example 2:
+    /// Input: nums = [5,4,8,7,10,2]
+    /// Output: 13
+    /// Explanation: Triplet (1, 3, 5) is a mountain triplet of sum 13 since: 
+    /// - 1 < 3 < 5
+    /// - nums[1] < nums[3] and nums[5] < nums[3]
+    /// And the sum of this triplet is nums[1] + nums[3] + nums[5] = 13. It 
+    /// can be shown that there are no mountain triplets with a sum of less 
+    /// than 13.
+    ///
+    /// Example 3:
+    /// Input: nums = [6,5,4,3,4,5]
+    /// Output: -1
+    /// Explanation: It can be shown that there are no mountain triplets in 
+    /// nums.
+    ///
+    /// Constraints:
+    /// 1. 3 <= nums.length <= 50
+    /// 2. 1 <= nums[i] <= 50
+    /// </summary>
+    int minimumSum(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2909. Minimum Sum of Mountain Triplets II
+    /// 
+    /// Medium
+    ///
+    /// You are given a 0-indexed array nums of integers.
+    ///
+    /// A triplet of indices (i, j, k) is a mountain if:
+    /// i < j < k
+    /// nums[i] < nums[j] and nums[k] < nums[j]
+    /// Return the minimum possible sum of a mountain triplet of nums. If no 
+    /// such triplet exists, return -1.
+    /// 
+    /// Example 1:
+    /// Input: nums = [8,6,1,5,3]
+    /// Output: 9
+    /// Explanation: Triplet (2, 3, 4) is a mountain triplet of sum 9 since: 
+    /// - 2 < 3 < 4
+    /// - nums[2] < nums[3] and nums[4] < nums[3]
+    /// And the sum of this triplet is nums[2] + nums[3] + nums[4] = 9. It can 
+    /// be shown that there are no mountain triplets with a sum of less than 9.
+    ///
+    /// Example 2:
+    /// Input: nums = [5,4,8,7,10,2]
+    /// Output: 13
+    /// Explanation: Triplet (1, 3, 5) is a mountain triplet of sum 13 since: 
+    /// - 1 < 3 < 5
+    /// - nums[1] < nums[3] and nums[5] < nums[3]
+    /// And the sum of this triplet is nums[1] + nums[3] + nums[5] = 13. It 
+    /// can be shown that there are no mountain triplets with a sum of less 
+    /// than 13.
+    ///
+    /// Example 3:
+    /// Input: nums = [6,5,4,3,4,5]
+    /// Output: -1
+    /// Explanation: It can be shown that there are no mountain triplets in 
+    /// nums.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^8
+    /// </summary>
+    int minimumSumII(vector<int>& nums);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

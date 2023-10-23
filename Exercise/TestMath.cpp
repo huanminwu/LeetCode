@@ -6298,8 +6298,30 @@ void TestLeetCode2894(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+void TestLeetCode2910(void)
+{
+    Logger::WriteMessage("Test Leet Code 2910");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 3, 2, 3, 2, 3 };
+    int result = leetCode.minGroupsForValidAssignment(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,10,10,3,1,1 };
+    result = leetCode.minGroupsForValidAssignment(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 };
+    result = leetCode.minGroupsForValidAssignment(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2910();
     TestLeetCode2894();
     TestLeetCode2862();
     TestLeetCode2849();

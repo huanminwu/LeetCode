@@ -11301,4 +11301,268 @@ int LeetCodeSort::minProcessingTime(vector<int>& processorTime, vector<int>& tas
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2907. Maximum Profitable Triplets With Increasing Prices I 
+/// 
+/// Medium
+///
+/// Given the 0-indexed arrays prices and profits of length n. There are n 
+/// items in an store where the ith item has a price of prices[i] and a 
+/// profit of profits[i].
+///
+/// We have to pick three items with the following condition:
+/// prices[i] < prices[j] < prices[k] where i < j < k.
+/// If we pick items with indices i, j and k satisfying the above 
+/// condition, the profit would be profits[i] + profits[j] + profits[k].
+///
+/// Return the maximum profit we can get, and -1 if it's not possible 
+/// to pick three items with the given condition.
+///
+/// Example 1:
+/// Input: prices = [10,2,3,4], profits = [100,2,7,10]
+/// Output: 19
+/// Explanation: We can't pick the item with index i=0 since there are no 
+/// indices j and k such that the condition holds.
+/// So the only triplet we can pick, are the items with indices 1, 2 and 3 
+/// and it's a valid pick since prices[1] < prices[2] < prices[3].
+/// The answer would be sum of their profits which is 2 + 7 + 10 = 19.
+///
+/// Example 2:
+/// Input: prices = [1,2,3,4,5], profits = [1,5,3,4,6]
+/// Output: 15
+/// Explanation: We can select any triplet of items since for each triplet 
+/// of indices i, j and k such that i < j < k, the condition holds.
+/// Therefore the maximum profit we can get would be the 3 most profitable 
+/// items which are indices 1, 3 and 4.
+/// The answer would be sum of their profits which is 5 + 4 + 6 = 15.
+///
+/// Example 3:
+/// Input: prices = [4,3,2,1], profits = [33,20,19,87]
+/// Output: -1
+/// Explanation: We can't select any triplet of indices such that the 
+/// condition holds, so we return -1.
+/// 
+/// Constraints:
+/// 1. 3 <= prices.length == profits.length <= 2000
+/// 2. 1 <= prices[i] <= 10^6
+/// 3. 1 <= profits[i] <= 10^6
+/// </summary>
+int LeetCodeSort::maxProfit(vector<int>& prices, vector<int>& profits)
+{
+    int n = prices.size();
+    vector<pair<int, int>> max_profits(n);
+    map<int, int> profit_map;
+    for (int i = 0; i < n; i++)
+    {
+        auto next_itr = profit_map.lower_bound(prices[i]);
+        auto prev_itr = (next_itr != profit_map.begin()) ? prev(next_itr) : profit_map.end();
+        while (next_itr != profit_map.end())
+        {
+            if (next_itr->second <= profits[i])
+            {
+                auto temp = next_itr;
+                next_itr = next(next_itr);
+                profit_map.erase(temp);
+            }
+            else
+            {
+                break;
+            }
+        }
+        if (prev_itr == profit_map.end() || prev_itr->second < profits[i])
+        {
+            if (profit_map.count(prices[i]) == 0)
+            {
+                profit_map[prices[i]] = profits[i];
+            }
+        }
+        if (prev_itr != profit_map.end())
+        {
+            max_profits[i].first = prev_itr->second;
+        }
+        else
+        {
+            max_profits[i].first = -1;
+        }
+    }
+    profit_map.clear();
+    for (int i = n - 1; i >=0; i--)
+    {
+        auto next_itr = profit_map.lower_bound(-prices[i]);
+        auto prev_itr = (next_itr != profit_map.begin()) ? prev(next_itr) : profit_map.end();
+        while (next_itr != profit_map.end())
+        {
+            if (next_itr->second <= profits[i])
+            {
+                auto temp = next_itr;
+                next_itr = next(next_itr);
+                profit_map.erase(temp);
+            }
+            else
+            {
+                break;
+            }
+        }
+        if (prev_itr == profit_map.end() || prev_itr->second < profits[i])
+        {
+            if (profit_map.count(-prices[i]) == 0)
+            {
+                profit_map[-prices[i]] = profits[i];
+            }
+        }
+        if (prev_itr != profit_map.end())
+        {
+            max_profits[i].second = prev_itr->second;
+        }
+        else
+        {
+            max_profits[i].second = -1;
+        }
+    }
+    int result = -1;
+    for (int i = 0; i < n; i++)
+    {
+        if (max_profits[i].first != -1 && max_profits[i].second != -1)
+        {
+            result = max(result, max_profits[i].first + max_profits[i].second + profits[i]);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2908. Minimum Sum of Mountain Triplets I 
+/// 
+/// Easy
+///
+/// You are given a 0-indexed array nums of integers.
+///
+/// A triplet of indices (i, j, k) is a mountain if:
+/// 
+/// i < j < k
+/// nums[i] < nums[j] and nums[k] < nums[j]
+/// Return the minimum possible sum of a mountain triplet of nums. If no 
+/// such triplet exists, return -1.
+///
+/// Example 1:
+/// Input: nums = [8,6,1,5,3]
+/// Output: 9
+/// Explanation: Triplet (2, 3, 4) is a mountain triplet of sum 9 since: 
+/// - 2 < 3 < 4
+/// - nums[2] < nums[3] and nums[4] < nums[3]
+/// And the sum of this triplet is nums[2] + nums[3] + nums[4] = 9. It 
+/// can be shown that there are no mountain triplets with a sum of less 
+/// than 9.
+///
+/// Example 2:
+/// Input: nums = [5,4,8,7,10,2]
+/// Output: 13
+/// Explanation: Triplet (1, 3, 5) is a mountain triplet of sum 13 since: 
+/// - 1 < 3 < 5
+/// - nums[1] < nums[3] and nums[5] < nums[3]
+/// And the sum of this triplet is nums[1] + nums[3] + nums[5] = 13. It 
+/// can be shown that there are no mountain triplets with a sum of less 
+/// than 13.
+///
+/// Example 3:
+/// Input: nums = [6,5,4,3,4,5]
+/// Output: -1
+/// Explanation: It can be shown that there are no mountain triplets in 
+/// nums.
+///
+/// Constraints:
+/// 1. 3 <= nums.length <= 50
+/// 2. 1 <= nums[i] <= 50
+/// </summary>
+int LeetCodeSort::minimumSum(vector<int>& nums)
+{
+    vector<pair<int, int>> pairs(nums.size(), {-1, -1});
+    int min_val = INT_MAX;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (min_val < nums[i]) pairs[i].first = min_val;
+        min_val = min(min_val, nums[i]);
+    }
+    min_val = INT_MAX;
+    int result = INT_MAX;
+    for (int i = nums.size() - 1; i >= 0; i--)
+    {
+        if (min_val < nums[i]) pairs[i].second = min_val;
+        min_val = min(min_val, nums[i]);
+        if (pairs[i].first != -1 && pairs[i].second != -1)
+        {
+            result = min(result, pairs[i].first + pairs[i].second + nums[i]);
+        }
+    }
+    result = (result == INT_MAX) ? -1 : result;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2909. Minimum Sum of Mountain Triplets II
+/// 
+/// Medium
+///
+/// You are given a 0-indexed array nums of integers.
+///
+/// A triplet of indices (i, j, k) is a mountain if:
+/// i < j < k
+/// nums[i] < nums[j] and nums[k] < nums[j]
+/// Return the minimum possible sum of a mountain triplet of nums. If no 
+/// such triplet exists, return -1.
+/// 
+/// Example 1:
+/// Input: nums = [8,6,1,5,3]
+/// Output: 9
+/// Explanation: Triplet (2, 3, 4) is a mountain triplet of sum 9 since: 
+/// - 2 < 3 < 4
+/// - nums[2] < nums[3] and nums[4] < nums[3]
+/// And the sum of this triplet is nums[2] + nums[3] + nums[4] = 9. It can 
+/// be shown that there are no mountain triplets with a sum of less than 9.
+///
+/// Example 2:
+/// Input: nums = [5,4,8,7,10,2]
+/// Output: 13
+/// Explanation: Triplet (1, 3, 5) is a mountain triplet of sum 13 since: 
+/// - 1 < 3 < 5
+/// - nums[1] < nums[3] and nums[5] < nums[3]
+/// And the sum of this triplet is nums[1] + nums[3] + nums[5] = 13. It 
+/// can be shown that there are no mountain triplets with a sum of less 
+/// than 13.
+///
+/// Example 3:
+/// Input: nums = [6,5,4,3,4,5]
+/// Output: -1
+/// Explanation: It can be shown that there are no mountain triplets in 
+/// nums.
+/// 
+/// Constraints:
+/// 1. 3 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^8
+/// </summary>
+int LeetCodeSort::minimumSumII(vector<int>& nums)
+{
+    vector<pair<int, int>> pairs(nums.size(), { -1, -1 });
+    int min_val = INT_MAX;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (min_val < nums[i]) pairs[i].first = min_val;
+        min_val = min(min_val, nums[i]);
+    }
+    min_val = INT_MAX;
+    int result = INT_MAX;
+    for (int i = nums.size() - 1; i >= 0; i--)
+    {
+        if (min_val < nums[i]) pairs[i].second = min_val;
+        min_val = min(min_val, nums[i]);
+        if (pairs[i].first != -1 && pairs[i].second != -1)
+        {
+            result = min(result, pairs[i].first + pairs[i].second + nums[i]);
+        }
+    }
+    result = (result == INT_MAX) ? -1 : result;
+    return result;
+}
+
 #pragma endregion

@@ -3516,8 +3516,83 @@ void TestLeetCode2895(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2907(void)
+{
+    Logger::WriteMessage("Test Leet Code 2907");
+    LeetCodeSort leetCode;
+    vector<int> prices = { 10, 2, 3, 4 };
+    vector<int> profits = { 100, 2, 7, 10 };
+    int result = leetCode.maxProfit(prices, profits);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(profits);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 1,2,3,4,5 };
+    profits = { 1,5,3,4,6 };
+    result = leetCode.maxProfit(prices, profits);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(profits);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 4,3,2,1 };
+    profits = { 33,20,19,87 };
+    result = leetCode.maxProfit(prices, profits);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(profits);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 2, 8, 9, 9 };
+    profits = { 34,20,13,64 };
+    result = leetCode.maxProfit(prices, profits);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(profits);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2908(void)
+{
+    Logger::WriteMessage("Test Leet Code 2908");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 8, 6, 1, 5, 3 };
+    int result = leetCode.minimumSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,4,8,7,10,2 };
+    result = leetCode.minimumSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,5,4,3,4,5 };
+    result = leetCode.minimumSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2909(void)
+{
+    Logger::WriteMessage("Test Leet Code 2909");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 8, 6, 1, 5, 3 };
+    int result = leetCode.minimumSumII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,4,8,7,10,2 };
+    result = leetCode.minimumSumII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,5,4,3,4,5 };
+    result = leetCode.minimumSumII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2908();
+    TestLeetCode2907();
     TestLeetCode2895();
     TestLeetCode2863();
     TestLeetCode2860();
