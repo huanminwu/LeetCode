@@ -19968,5 +19968,155 @@ int LeetCodeMath::minGroupsForValidAssignment(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2912. Number of Ways to Reach Destination in the Grid
+/// 
+/// Hard
+///
+/// You are given two integers n and m which represent the size of a 
+/// 1-indexed grid. You are also given an integer k, a 1-indexed 
+/// integer array source and a 1-indexed integer array dest, where 
+/// source and dest are in the form [x, y] representing a cell on the 
+/// given grid.
+/// 
+/// You can move through the grid in the following way:
+/// You can go from cell [x1, y1] to cell [x2, y2] if either x1 == x2 
+/// or y1 == y2.
+/// Note that you can't move to the cell you are already in e.g. x1 == x2 
+/// and y1 == y2.
+/// Return the number of ways you can reach dest from source by moving 
+/// through the grid exactly k times.
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: n = 3, m = 2, k = 2, source = [1,1], dest = [2,2]
+/// Output: 2
+/// Explanation: There are 2 possible sequences of reaching [2,2] 
+/// from [1,1]:
+/// - [1,1] -> [1,2] -> [2,2]
+/// - [1,1] -> [2,1] -> [2,2]
+///
+/// Example 2:
+/// Input: n = 3, m = 4, k = 3, source = [1,2], dest = [2,3]
+/// Output: 9
+/// Explanation: There are 9 possible sequences of reaching [2,3] 
+/// from [1,2]:
+/// - [1,2] -> [1,1] -> [1,3] -> [2,3]
+/// - [1,2] -> [1,1] -> [2,1] -> [2,3]
+/// - [1,2] -> [1,3] -> [3,3] -> [2,3]
+/// - [1,2] -> [1,4] -> [1,3] -> [2,3]
+/// - [1,2] -> [1,4] -> [2,4] -> [2,3]
+/// - [1,2] -> [2,2] -> [2,1] -> [2,3]
+/// - [1,2] -> [2,2] -> [2,4] -> [2,3]
+/// - [1,2] -> [3,2] -> [2,2] -> [2,3]
+/// - [1,2] -> [3,2] -> [3,3] -> [2,3]
+/// 
+/// Constraints:
+/// 1. 2 <= n, m <= 10^9
+/// 2. 1 <= k <= 10^5
+/// 3. source.length == dest.length == 2
+/// 4. 1 <= source[1], dest[1] <= n
+/// 5. 1 <= source[2], dest[2] <= m
+/// </summary>
+int LeetCodeMath::numberOfWays(int n, int m, int k, vector<int>& source, vector<int>& dest)
+{
+    long long M = 1000000007;
+    long long center = 1, samer = 0, samec = 0, other = 0;
+    for (int i = 0; i < k; i++) 
+    {
+        long long prev_center = center;
+        long long prev_samer = samer;
+        long long prev_samec = samec;
+        long long prev_other = other;
+        center = (prev_samer * ((long long)m - 1) + prev_samec * ((long long)n - 1)) % M;
+        samer = (prev_samer * ((long long)m - 2) + prev_center + prev_other * ((long long)n - 1)) % M;
+        samec = (prev_samec * ((long long)n - 2) + prev_center + prev_other * ((long long)m - 1)) % M;
+        other = (prev_other * ((long long)m - 2) + prev_other * ((long long)n - 2) + prev_samec + prev_samer) % M;
+    }
+    if (source[0] == dest[0] && source[1] == dest[1]) return (int)center;
+    if (source[0] == dest[0]) return (int)samer;
+    if (source[1] == dest[1]) return (int)samec;
+    return (int)other;
+}
+
+/// <summary>
+/// Leet Code 2918. Minimum Equal Sum of Two Arrays After Replacing Zeros
+/// 
+/// Medium
+///
+/// You are given two arrays nums1 and nums2 consisting of positive 
+/// integers.
+///
+/// You have to replace all the 0's in both arrays with strictly positive 
+/// integers such that the sum of elements of both arrays becomes equal.
+///
+/// Return the minimum equal sum you can obtain, or -1 if it is impossible.
+///
+/// Example 1:
+/// Input: nums1 = [3,2,0,1,0], nums2 = [6,5,0]
+/// Output: 12
+/// Explanation: We can replace 0's in the following way:
+/// - Replace the two 0's in nums1 with the values 2 and 4. The resulting 
+///   array is nums1 = [3,2,2,1,4].
+/// - Replace the 0 in nums2 with the value 1. The resulting array is 
+//    nums2 = [6,5,1].
+/// Both arrays have an equal sum of 12. It can be shown that it is the 
+/// minimum sum we can obtain.
+///
+/// Example 2:
+/// Input: nums1 = [2,0,2,0], nums2 = [1,4]
+/// Output: -1
+/// Explanation: It is impossible to make the sum of both arrays equal.
+///
+/// Constraints:
+/// 1. 1 <= nums1.length, nums2.length <= 10^5
+/// 2. 0 <= nums1[i], nums2[i] <= 10^6
+/// </summary>
+long long LeetCodeMath::minSum(vector<int>& nums1, vector<int>& nums2)
+{
+    long long sum1 = 0, zero1 = 0, sum2 = 0, zero2 = 0;
+    for (size_t i = 0; i < nums1.size(); i++)
+    {
+        if (nums1[i] == 0)
+        {
+            zero1++;
+        }
+        else
+        {
+            sum1 += nums1[i];
+        }
+    }
+    for (size_t i = 0; i < nums2.size(); i++)
+    {
+        if (nums2[i] == 0)
+        {
+            zero2++;
+        }
+        else
+        {
+            sum2 += nums2[i];
+        }
+    }
+    sum1 += zero1;
+    sum2 += zero2;
+    long long result = 0;
+    if (sum1 > sum2)
+    {
+        if (zero2 > 0) result = sum1;
+        else result = -1;
+    }
+    else if (sum1 < sum2)
+    {
+        if (zero1 > 0) result = sum2;
+        else result = -1;
+    }
+    else
+    {
+        result = sum1;
+    }
+    return result;
+}
 #pragma endregion
 

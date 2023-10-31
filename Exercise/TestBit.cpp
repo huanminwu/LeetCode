@@ -1144,8 +1144,32 @@ void TestLeetCode2897(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2917(void)
+{
+    Logger::WriteMessage("Test Leet Code 2917");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 7, 12, 9, 8, 9, 15 };
+    int k = 4;
+    int result = leetCode.findKOr(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 2,12,1,11,4,5 };
+    k = 6;
+    result = leetCode.findKOr(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 10,8,5,9,11,6,8 };
+    k = 1;
+    result = leetCode.findKOr(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2917();
     TestLeetCode2897();
     TestLeetCode2864();
     TestLeetCode2859();

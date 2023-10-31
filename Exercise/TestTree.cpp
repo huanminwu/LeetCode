@@ -3908,8 +3908,38 @@ void TestLeetCode2846(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2920(void)
+{
+    Logger::WriteMessage("Test Leet Code 2920");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = { {0, 1},{1, 2},{2, 3} };
+    vector<int> coins = { 10, 10, 3, 3 };
+    int k = 5;
+    int result = leetCode.maximumPoints(edges, coins, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    edges = { {0, 1},{0, 2} };
+    coins = { 8,4,4 };
+    k = 0;
+    result = leetCode.maximumPoints(edges, coins, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    edges = { {0, 1}, { 0, 2 }, { 1, 3 }, { 3, 4 }, { 0, 5 }, { 6, 3 }, { 5, 7 }, { 3, 8 }, { 9, 7 } };
+    coins = { 0,5,10,5,6,5,0,2,0,0 };
+    k = 7;
+    result = leetCode.maximumPoints(edges, coins, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode2920();
     TestLeetCode2846();
     TestLeetCode2793();
     TestLeetCode2791();

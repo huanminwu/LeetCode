@@ -9216,5 +9216,114 @@ public:
     /// 4. 0 <= l <= r <= 2 * 10^4
     /// </summary>
     int countSubMultisets(vector<int>& nums, int l, int r);
+
+    /// <summary>
+    /// Leet Code 2915. Length of the Longest Subsequence That Sums to Target
+    /// 
+    /// Medium
+    ///
+    /// You are given a 0-indexed array of integers nums, and an integer
+    /// target.
+    /// Return the length of the longest subsequence of nums that sums up 
+    /// to target. If no such subsequence exists, return -1.
+    ///
+    /// A subsequence is an array that can be derived from another array by 
+    /// deleting some or no elements without changing the order of the 
+    /// remaining elements.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,2,3,4,5], target = 9
+    /// Output: 3
+    /// Explanation: There are 3 subsequences with a sum equal to 9: [4,5], 
+    /// [1,3,5], and [2,3,4]. The longest subsequences are [1,3,5], and 
+    /// [2,3,4]. Hence, the answer is 3.
+    ///
+    /// Example 2:
+    /// Input: nums = [4,1,3,2,1,5], target = 7
+    /// Output: 4
+    /// Explanation: There are 5 subsequences with a sum equal to 7: [4,3], 
+    /// [4,1,2], [4,2,1], [1,1,5], and [1,3,2,1]. The longest subsequence 
+    /// is [1,3,2,1]. Hence, the answer is 4.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,1,5,4,5], target = 3
+    /// Output: -1
+    /// Explanation: It can be shown that nums has no subsequence that sums 
+    /// up to 3.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1000
+    /// 2. 1 <= nums[i] <= 1000
+    /// 3. 1 <= target <= 1000
+    /// </summary>
+    int lengthOfLongestSubsequence(vector<int>& nums, int target);
+
+    /// <summary>
+    /// Leet Code 2919. Minimum Increment Operations to Make Array Beautiful
+    /// 
+    /// Medium
+    ///
+    /// You are given a 0-indexed integer array nums having length n, and an 
+    /// integer k.
+    ///
+    /// You can perform the following increment operation any number of times 
+    /// (including zero):
+    /// 
+    /// Choose an index i in the range [0, n - 1], and increase nums[i] by 1.
+    /// An array is considered beautiful if, for any subarray with a size of 3 
+    /// or more, its maximum element is greater than or equal to k.
+    ///
+    /// Return an integer denoting the minimum number of increment operations 
+    /// needed to make nums beautiful.
+    ///
+    /// A subarray is a contiguous non-empty sequence of elements within an 
+    /// array.
+    ///
+    /// Example 1:
+    /// Input: nums = [2,3,0,0,2], k = 4
+    /// Output: 3
+    /// Explanation: We can perform the following increment operations to 
+    /// make nums beautiful:
+    /// Choose index i = 1 and increase nums[1] by 1 -> [2,4,0,0,2].
+    /// Choose index i = 4 and increase nums[4] by 1 -> [2,4,0,0,3].
+    /// Choose index i = 4 and increase nums[4] by 1 -> [2,4,0,0,4].
+    /// The subarrays with a size of 3 or more are: [2,4,0], [4,0,0], 
+    /// [0,0,4], [2,4,0,0], [4,0,0,4], [2,4,0,0,4].
+    /// In all the subarrays, the maximum element is equal to k = 4, so 
+    /// nums is now beautiful.
+    /// It can be shown that nums cannot be made beautiful with fewer 
+    /// than 3 increment operations.
+    /// Hence, the answer is 3.
+    ///
+    /// Example 2:
+    /// Input: nums = [0,1,3,3], k = 5
+    /// Output: 2
+    /// Explanation: We can perform the following increment operations to make 
+    /// nums beautiful:
+    /// Choose index i = 2 and increase nums[2] by 1 -> [0,1,4,3].
+    /// Choose index i = 2 and increase nums[2] by 1 -> [0,1,5,3].
+    /// The subarrays with a size of 3 or more are: [0,1,5], [1,5,3], 
+    /// [0,1,5,3].
+    /// In all the subarrays, the maximum element is equal to k = 5, so nums 
+    /// is now beautiful.
+    /// It can be shown that nums cannot be made beautiful with fewer than 2 
+    /// increment operations.
+    /// Hence, the answer is 2.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,1,2], k = 1
+    /// Output: 0
+    /// Explanation: The only subarray with a size of 3 or more in this 
+    /// example is [1,1,2].
+    /// The maximum element, 2, is already greater than k = 1, so we don't 
+    /// need any increment operation.
+    /// Hence, the answer is 0.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= n == nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 10^9
+    /// 3. 0 <= k <= 10^9
+    /// </summary>
+    long long minIncrementOperations(vector<int>& nums, int k);
 };
 #endif  // LeetCodeDP

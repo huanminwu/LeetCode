@@ -6319,8 +6319,51 @@ void TestLeetCode2910(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+void TestLeetCode2912(void)
+{
+    Logger::WriteMessage("Test Leet Code 2912");
+    LeetCodeMath leetCode;
+    int n = 3, m = 2, k = 2;
+    vector<int> source = { 1, 1 }, dest = { 2, 2 };
+    int result = leetCode.numberOfWays(n, m, k, source, dest);
+    Logger::WriteMessage(source);
+    Logger::WriteMessage(dest);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m));
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 3, m = 4, k = 3;
+    source = { 1, 2 }, dest = { 2, 3 };
+    result = leetCode.numberOfWays(n, m, k, source, dest);
+    Logger::WriteMessage(source);
+    Logger::WriteMessage(dest);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m));
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2918(void)
+{
+    Logger::WriteMessage("Test Leet Code 2918");
+    LeetCodeMath leetCode;
+    vector<int> nums1 = { 3, 2, 0, 1, 0 };
+    vector<int> nums2 = { 6, 5, 0 };
+    long long result = leetCode.minSum(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 2,0,2,0 };
+    nums2 = { 1,4 };
+    result = leetCode.minSum(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2918();
+    TestLeetCode2912();
     TestLeetCode2910();
     TestLeetCode2894();
     TestLeetCode2862();

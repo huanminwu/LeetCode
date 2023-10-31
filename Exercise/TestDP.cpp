@@ -4814,8 +4814,68 @@ void TestLeetCode2896(void)
     Logger::WriteMessage("x = " + to_string(x) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2915(void)
+{
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5 };
+    int target = 9;
+    int result = leetCode.lengthOfLongestSubsequence(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { 4,1,3,2,1,5 };
+    target = 7;
+    result = leetCode.lengthOfLongestSubsequence(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { 1,1,5,4,5 };
+    target = 3;
+    result = leetCode.lengthOfLongestSubsequence(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
+
+void TestLeetCode2919(void)
+{
+    Logger::WriteMessage("Test Leet Code 2919");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 2, 3, 0, 0, 2 };
+    int k = 4;
+    long long result = leetCode.minIncrementOperations(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 0,1,3,3 };
+    k = 5;
+    result = leetCode.minIncrementOperations(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,1,2 };
+    k = 1;
+    result = leetCode.minIncrementOperations(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 4, 0, 10, 2, 10, 6 };
+    k = 8;
+    result = leetCode.minIncrementOperations(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 13, 34, 0, 13, 9, 19 };
+    k = 82;
+    result = leetCode.minIncrementOperations(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2919();
+    TestLeetCode2915();
     TestLeetCode2896();
     TestLeetCode2826();
     TestLeetCode2809();

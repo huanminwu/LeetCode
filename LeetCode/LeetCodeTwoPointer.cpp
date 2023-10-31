@@ -1803,4 +1803,5 @@ string LeetCodeTwoPointer::shortestBeautifulSubstring(string s, int k)
     }
     return result;
 }
+
 #pragma endregion

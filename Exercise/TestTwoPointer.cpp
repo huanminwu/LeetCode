@@ -481,6 +481,7 @@ void TestLeetCode2904(void)
     Logger::WriteMessage("result = " + result);
 }
 
+
 void TestLeetCodeTwoPointer(void)
 {
     TestLeetCode2904();

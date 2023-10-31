@@ -9550,8 +9550,42 @@ void TestLeetCode2906(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2913(void)
+{
+    Logger::WriteMessage("Test Leet Code 2913");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 1 };
+    int result = leetCode.sumCounts(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1 };
+    result = leetCode.sumCounts(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2914(void)
+{
+    Logger::WriteMessage("Test Leet Code 2914");
+    LeetCodeArray leetCode;
+    string s = "1001";
+    int result = leetCode.minChanges(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "10";
+    result = leetCode.minChanges(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "0000";
+    result = leetCode.minChanges(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2914();
+    TestLeetCode2913();
     TestLeetCode2905();
     TestLeetCode2906();
     TestLeetCode2903();
