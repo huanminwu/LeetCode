@@ -25,6 +25,122 @@ class LeetCodeTwoPointer
 {
 public:
     /// <summary>
+    /// Leet Code 11. Container With Most Water
+    ///  
+    /// Medium
+    ///
+    /// You are given an integer array height of length n. There are n 
+    /// vertical lines drawn such that the two endpoints of the ith 
+    /// line are (i, 0) and (i, height[i]).
+    ///
+    /// Find two lines that together with the x-axis form a container, 
+    /// such that the container contains the most water.
+    ///
+    /// Return the maximum amount of water a container can store.
+    /// Notice that you may not slant the container.
+    /// 
+    /// Example 1:
+    /// Input: height = [1,8,6,2,5,4,8,3,7]
+    /// Output: 49
+    /// Explanation: The above vertical lines are represented by array 
+    /// [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue 
+    /// section) the container can contain is 49.
+    ///
+    /// Example 2:
+    /// Input: height = [1,1]
+    /// Output: 1
+    /// 
+    /// Constraints:
+    /// 1. n == height.length
+    /// 2. 2 <= n <= 10^5
+    /// 3. 0 <= height[i] <= 10^4
+    /// </summary>
+    int maxArea(vector<int>& height);
+
+    /// <summary>
+    /// Leet Code 42. Trapping Rain Water
+    ///  
+    /// Hard
+    ///
+    /// Given n non-negative integers representing an elevation map where the 
+    /// width of each bar is 1, compute how much water it can trap after 
+    /// raining.
+    ///
+    /// Example 1:
+    /// Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+    /// Output: 6
+    /// Explanation: The above elevation map (black section) is represented 
+    /// by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain 
+    /// water (blue section) are being trapped.
+    ///
+    /// Example 2:
+    /// Input: height = [4,2,0,3,2,5]
+    /// Output: 9
+    /// 
+    /// Constraints:
+    /// 1. n == height.length
+    /// 2. 1 <= n <= 2 * 10^4
+    /// 3. 0 <= height[i] <= 10^5
+    /// </summary>
+    int trap(vector<int>& height);
+
+    /// <summary>
+    /// Leet Code 658. Find K Closest Elements
+    ///  
+    /// Medium
+    ///
+    /// Given a sorted integer array arr, two integers k and x, return the k 
+    /// closest integers to x in the array. The result should also be sorted 
+    /// in ascending order.
+    ///
+    /// An integer a is closer to x than an integer b if:
+    ///
+    /// |a - x| < |b - x|, or
+    /// |a - x| == |b - x| and a < b
+    /// 
+    /// Example 1:
+    /// Input: arr = [1,2,3,4,5], k = 4, x = 3
+    /// Output: [1,2,3,4]
+    ///
+    /// Example 2:
+    /// Input: arr = [1,2,3,4,5], k = 4, x = -1
+    /// Output: [1,2,3,4]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= k <= arr.length
+    /// 2. 1 <= arr.length <= 10^4
+    /// 3. arr is sorted in ascending order.
+    /// 4. -10^4 <= arr[i], x <= 10^4
+    /// </summary>
+    vector<int> findClosestElements(vector<int>& arr, int k, int x);
+
+    /// <summary>
+    /// Leet Code 680. Valid Palindrome II
+    ///  
+    /// Easy
+    ///
+    /// Given a string s, return true if the s can be palindrome after 
+    /// deleting at most one character from it.
+    /// 
+    /// Example 1:
+    /// Input: s = "aba"
+    /// Output: true
+    ///
+    /// Example 2:
+    /// Input: s = "abca"
+    /// Output: true
+    /// Explanation: You could delete the character 'c'.
+    ///
+    /// Example 3:
+    /// Input: s = "abc"
+    /// Output: false
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s consists of lowercase English letters.
+    /// </summary>
+    bool validPalindrome(string s);
+
+    /// <summary>
     /// Leet code #881. Boats to Save People
     /// 
     /// The i-th person has weight people[i], and each boat can carry a maximum 
@@ -59,6 +175,93 @@ public:
     /// 2. 1 <= people[i] <= limit <= 30000
     /// </summary>
     int numRescueBoats(vector<int>& people, int limit);
+
+    /// <summary>
+    /// Leet code #922. Sort Array By Parity II
+    /// 
+    /// Given an array A of non-negative integers, half of the integers in A are 
+    /// odd, and half of the integers are even.
+    ///
+    /// Sort the array so that whenever A[i] is odd, i is odd; and whenever A[i] 
+    /// is even, i is even.
+    ///
+    /// You may return any answer array that satisfies this condition.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: [4,2,5,7]
+    /// Output: [4,5,2,7]
+    /// Explanation: [4,7,2,5], [2,5,4,7], [2,7,4,5] would also have been 
+    /// accepted.
+    /// 
+    /// Note:
+    /// 1. 2 <= A.length <= 20000
+    /// 2. A.length % 2 == 0
+    /// 3. 0 <= A[i] <= 1000
+    /// </summary>
+    vector<int> sortArrayByParityII(vector<int>& A);
+
+    /// <summary>
+    /// Leet code #1100. Find K-Length Substrings With No Repeated Characters
+    /// 
+    /// Given a string S, return the number of substrings of length K with no 
+    /// repeated characters.
+    /// 
+    /// Example 1:
+    /// Input: S = "havefunonleetcode", K = 5
+    /// Output: 6
+    /// Explanation: 
+    /// There are 6 substrings they are : 'havef','avefu','vefun','efuno',
+    /// 'etcod','tcode'.
+    ///
+    /// Example 2:
+    /// Input: S = "home", K = 5
+    /// Output: 0
+    /// Explanation: 
+    /// Notice K can be larger than the length of S. In this case is not 
+    /// possible to find any substring.
+    /// 
+    /// Note:
+    /// 1 <= S.length <= 10^4
+    /// 2. All characters of S are lowercase English letters.
+    /// 3. 1 <= K <= 10^4
+    /// </summary>
+    int numKLenSubstrNoRepeats(string S, int K);
+
+    /// <summary>
+    /// Leet Code 1156. Swap For Longest Repeated Character Substring
+    ///  
+    /// Medium
+    ///
+    /// You are given a string text. You can swap two of the characters in the 
+    /// text.
+    ///
+    /// Return the length of the longest substring with repeated characters.
+    /// 
+    /// Example 1:
+    /// Input: text = "ababa"
+    /// Output: 3
+    /// Explanation: We can swap the first 'b' with the last 'a', or the last 
+    /// 'b' with the first 'a'. Then, the longest repeated character 
+    /// substring is "aaa" with length 3.
+    ///
+    /// Example 2:
+    /// Input: text = "aaabaaa"
+    /// Output: 6
+    /// Explanation: Swap 'b' with the last 'a' (or the first 'a'), and we get 
+    /// longest repeated character substring "aaaaaa" with length 6.
+    ///
+    /// Example 3:
+    /// Input: text = "aaaaa"
+    /// Output: 5
+    /// Explanation: No need to swap, longest repeated character substring is 
+    /// "aaaaa" with length is 5.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= text.length <= 2 * 10^4
+    /// 2. text consist of lowercase English characters only.
+    /// </summary>
+    int maxRepOpt1(string text);
 
     /// <summary>
     /// Leet Code 1852. Distinct Numbers in Each Subarray

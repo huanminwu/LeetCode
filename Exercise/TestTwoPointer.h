@@ -2,7 +2,13 @@
 #ifndef TestTwoPointer_H
 #define TestTwoPointer_H
 #include "..\LeetCode\LeetCodeTwoPointer.h"
+void TestLeetCode42(void);
+void TestLeetCode658(void);
+void TestLeetCode680(void);
 void TestLeetCode881(void);
+void TestLeetCode922(void);
+void TestLeetCode1100(void);
+void TestLeetCode1156(void);
 void TestLeetCode1852(void);
 void TestLeetCode2062(void);
 void TestLeetCode2106(void);

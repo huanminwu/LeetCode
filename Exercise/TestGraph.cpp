@@ -5502,8 +5502,26 @@ void TestLeetCode2876(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2924(void)
+{
+    Logger::WriteMessage("Test Leet Code 2924");
+    LeetCodeGraph leetCode;
+    int n = 3;
+    vector<vector<int>> edges = { {0, 1},{1, 2} };
+    int result = leetCode.findChampion(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4;
+    edges = { {0, 2},{1, 3},{1, 2} };
+    result = leetCode.findChampion(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2924();
     TestLeetCode2876();
     TestLeetCode2872();
     TestLeetCode2867();

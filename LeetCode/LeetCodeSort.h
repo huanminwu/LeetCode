@@ -7129,6 +7129,117 @@ public:
     /// 2. 1 <= nums[i] <= 10^8
     /// </summary>
     int minimumSumII(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2921. Maximum Profitable Triplets With Increasing Prices II
+    ///  
+    /// Hard
+    ///
+    /// Given the 0-indexed arrays prices and profits of length n. There are n 
+    /// items in an store where the ith item has a price of prices[i] and a 
+    /// profit of profits[i].
+    ///
+    /// We have to pick three items with the following condition:
+    ///
+    /// prices[i] < prices[j] < prices[k] where i < j < k.
+    /// If we pick items with indices i, j and k satisfying the above 
+    /// condition, the profit would be profits[i] + profits[j] + profits[k].
+    ///
+    /// Return the maximum profit we can get, and -1 if it's not possible to 
+    /// pick three items with the given condition.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: prices = [10,2,3,4], profits = [100,2,7,10]
+    /// Output: 19
+    /// Explanation: We can't pick the item with index i=0 since there are no 
+    /// indices j and k such that the condition holds.
+    /// So the only triplet we can pick, are the items with indices 1, 2 and 3 
+    /// and it's a valid pick since prices[1] < prices[2] < prices[3].
+    /// The answer would be sum of their profits which is 2 + 7 + 10 = 19.
+    ///
+    /// Example 2:
+    ///
+    /// Input: prices = [1,2,3,4,5], profits = [1,5,3,4,6]
+    /// Output: 15
+    /// Explanation: We can select any triplet of items since for each triplet 
+    /// of indices i, j and k such that i < j < k, the condition holds.
+    /// Therefore the maximum profit we can get would be the 3 most profitable 
+    /// items which are indices 1, 3 and 4.
+    /// The answer would be sum of their profits which is 5 + 4 + 6 = 15.
+    ///
+    /// Example 3:
+    /// Input: prices = [4,3,2,1], profits = [33,20,19,87]
+    /// Output: -1
+    /// Explanation: We can't select any triplet of indices such that the 
+    /// condition holds, so we return -1.
+    ///
+    ///
+    /// Constraints:
+    /// 1. 3 <= prices.length == profits.length <= 50000
+    /// 2. 1 <= prices[i] <= 5000
+    /// 3. 1 <= profits[i] <= 10^6
+    /// </summary>
+    int maxProfitII(vector<int>& prices, vector<int>& profits);
+
+    /// <summary>
+    /// Leet Code 2926. Maximum Balanced Subsequence Sum
+    ///  
+    /// Hard
+    ///
+    /// You are given a 0-indexed integer array nums.
+    ///
+    /// A subsequence of nums having length k and consisting of indices 
+    /// i0 < i1 < ... < ik-1 is balanced if the following holds:
+    ///
+    /// nums[ij] - nums[ij-1] >= ij - ij-1, for every j in the range 
+    /// [1, k - 1].
+    /// A subsequence of nums having length 1 is considered balanced.
+    ///
+    /// Return an integer denoting the maximum possible sum of elements in a 
+    /// balanced subsequence of nums.
+    ///
+    /// A subsequence of an array is a new non-empty array that is formed 
+    /// from the original array by deleting some (possibly none) of the 
+    /// elements without disturbing the relative positions of the remaining 
+    /// elements.
+    /// 
+    /// Example 1:
+    /// Input: nums = [3,3,5,6]
+    /// Output: 14
+    /// Explanation: In this example, the subsequence [3,5,6] consisting of 
+    /// indices 0, 2, and 3 can be selected.
+    /// nums[2] - nums[0] >= 2 - 0.
+    /// nums[3] - nums[2] >= 3 - 2.
+    /// Hence, it is a balanced subsequence, and its sum is the maximum among 
+    /// the balanced subsequences of nums.
+    /// The subsequence consisting of indices 1, 2, and 3 is also valid.
+    /// It can be shown that it is not possible to get a balanced subsequence 
+    /// with a sum greater than 14.
+    ///
+    /// Example 2:
+    /// Input: nums = [5,-1,-3,8]
+    /// Output: 13
+    /// Explanation: In this example, the subsequence [5,8] consisting of 
+    /// indices 0 and 3 can be selected.
+    /// nums[3] - nums[0] >= 3 - 0.
+    /// Hence, it is a balanced subsequence, and its sum is the maximum among 
+    /// the balanced subsequences of nums.
+    /// It can be shown that it is not possible to get a balanced subsequence 
+    /// with a sum greater than 13.
+    ///
+    /// Example 3:
+    /// Input: nums = [-2,-1]
+    /// Output: -1
+    /// Explanation: In this example, the subsequence [-1] can be selected.
+    /// It is a balanced subsequence, and its sum is the maximum among the 
+    /// balanced subsequences of nums.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// </summary>
+    long long maxBalancedSubsequenceSum(vector<int>& nums);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

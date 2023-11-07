@@ -20,40 +20,6 @@
 #pragma region Array
 
 /// <summary>
-/// Leet code #11. Container With Most Water 
-/// 
-/// Given n non-negative integers a1, a2, ..., an, where each represents 
-/// a point at coordinate (i, ai). n vertical lines are drawn such that 
-/// the two endpoints of line i is at (i, ai) and (i, 0). 
-/// Find two lines, which together with x-axis forms a container, such 
-/// that the container contains the most water. 
-/// Note: You may not slant the container. 
-/// </summary>
-int LeetCodeArray::maxArea(vector<int>& height)
-{
-    int maxArea = 0;
-    int first = 0, last = height.size() - 1;
-    while (first < last)
-    {
-        int area = min(height[first], height[last]) * (last - first);
-        if (area > maxArea)
-        {
-            maxArea = area;
-        }
-
-        if (height[first] < height[last])
-        {
-            first++;
-        }
-        else
-        {
-            last--;
-        }
-    }
-    return maxArea;
-}
-
-/// <summary>
 /// Leet code #16. 3Sum Closest 
 /// Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. 
 /// Return the sum of the three integers. You may assume that each input would have exactly one solution.
@@ -93,56 +59,6 @@ int LeetCodeArray::threeSumClosest(vector<int>& nums, int target)
         }
     }
     return global_sum;
-}
-
-/// <summary>
-/// Leet code #42. Trapping Rain Water    
-/// Given n non-negative integers representing an elevation map where the 
-/// width of each bar is 1, 
-/// compute how much water it is able to trap after raining.
-/// For example, 
-/// Given [0,1,0,2,1,0,1,3,2,1,2,1], return 6. 
-/// The above elevation map is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. 
-/// In this case, 6 units of rain water (blue section) are being trapped. 
-/// </summary>
-int LeetCodeArray::trapWater(vector<int>& height)
-{
-    int sum = 0;
-    int left_index = 0;
-    int right_index = height.size() - 1;
-    int left_value = height[left_index];
-    int right_value = height[right_index];
-    while (left_index < right_index)
-    {
-
-        if (left_value < right_value)
-        {
-            left_index++;
-            // if left side become lower, take the water and fill it
-            if (height[left_index] < left_value)
-            {
-                sum = sum + left_value - height[left_index];
-            }
-            else
-            {
-                left_value = height[left_index];
-            }
-        }
-        else
-        {
-            right_index--;
-            // if right side become lower, take the water and fill it
-            if (height[right_index] < right_value)
-            {
-                sum = sum + right_value - height[right_index];
-            }
-            else
-            {
-                right_value = height[right_index];
-            }
-        }
-    }
-    return sum;
 }
 
 /// <summary>
@@ -477,54 +393,6 @@ string LeetCodeArray::findContestMatch(int n)
         n = n / 2;
     }
     return match[0];
-}
-
-
-/// <summary>
-/// Leet code #680. Valid Palindrome II
-/// 
-/// Given a non-empty string s, you may delete at most one character. 
-/// Judge whether you can make it a palindrome.
-/// Example 1:
-/// Input: "aba"
-/// Output: True
-/// Example 2:
-/// Input: "abca"
-/// Output: True
-/// Explanation: You could delete the character 'c'.
-/// Note:
-/// The string will only contain lowercase characters a-z. The maximum 
-/// length of the string is 50000.
-/// </summary>
-bool LeetCodeArray::validPalindrome(string s)
-{
-    stack<vector<int>> stk;
-    stk.push({ 0, (int)s.size() - 1, 1 });
-    while (!stk.empty())
-    {
-        vector<int> pos = stk.top();
-        stk.pop();
-        while (s[pos[0]] == s[pos[1]] && pos[0] < pos[1])
-        {
-            pos[0]++;
-            pos[1]--;
-        }
-        if (pos[0] >= pos[1])
-        {
-            return true;
-        }
-        if (pos[2] == 0) // we already delete one letter
-        {
-            continue;
-        }
-        else
-        {
-            pos[2]--;
-            stk.push({ pos[0] + 1, pos[1], pos[2] });
-            stk.push({ pos[0], pos[1] - 1, pos[2] });
-        }
-    }
-    return false;
 }
 
 /// <summary>
@@ -1023,141 +891,6 @@ int LeetCodeArray::partitionDisjoint(vector<int>& A)
         }
     }
     return first + 1;
-}
-
-/// <summary>
-/// Leet code #1156. Swap For Longest Repeated Character Substring
-/// 
-/// Given a string text, we are allowed to swap two of the characters in the 
-/// string. Find the length of the longest substring with repeated characters.
-/// 
-/// Example 1:
-/// Input: text = "ababa"
-/// Output: 3
-/// Explanation: We can swap the first 'b' with the last 'a', or the last 'b' 
-/// with the first 'a'. Then, the longest repeated character substring is 
-/// "aaa", which its length is 3.
-///
-/// Example 2:
-/// Input: text = "aaabaaa"
-/// Output: 6
-/// Explanation: Swap 'b' with the last 'a' (or the first 'a'), and we get 
-/// longest repeated character substring "aaaaaa", which its length is 6.
-///
-/// Example 3:
-/// Input: text = "aaabbaaa"
-/// Output: 4
-///
-/// Example 4:
-/// Input: text = "aaaaa"
-/// Output: 5
-/// Explanation: No need to swap, longest repeated character substring is 
-/// "aaaaa", length is 5.
-///
-/// Example 5:
-/// Input: text = "abcdef"
-/// Output: 1
-/// 
-/// Constraints:
-/// 1. 1 <= text.length <= 20000
-/// 2. text consist of lowercase English characters only.
-/// </summary>
-int LeetCodeArray::maxRepOpt1(string text)
-{
-    vector<int> count(26);
-    vector<int> window(26);
-    for (size_t i = 0; i < text.size(); i++)
-    {
-        count[text[i] - 'a']++;
-    }
-    int first = 0;
-    int last = 0;
-    int result = 0;
-    window[text[0] - 'a']++;
-    while (last < (int)text.size())
-    {
-        bool match = false;
-        int length = last - first + 1;
-        for (int i = 0; i < 26; i++)
-        {
-            if (window[i] == length)
-            {
-                match = true;
-                result = max(result, length);
-                break;
-            }
-            else if ((window[i] == length - 1) && (count[i] > window[i]))
-            {
-                match = true;
-                result = max(result, length);
-                break;
-            }
-        }
-        if (match)
-        {
-            last++;
-            if (last < (int)text.size()) window[text[last] - 'a']++;
-        }
-        else
-        {
-            window[text[first] - 'a']--;
-            first++;
-        }
-    }
-    return result;
-}
-
-/// <summary>
-/// Leet code #1100. Find K-Length Substrings With No Repeated Characters
-/// 
-/// Given a string S, return the number of substrings of length K with no 
-/// repeated characters.
-/// 
-/// Example 1:
-/// Input: S = "havefunonleetcode", K = 5
-/// Output: 6
-/// Explanation: 
-/// There are 6 substrings they are : 'havef','avefu','vefun','efuno',
-/// 'etcod','tcode'.
-///
-/// Example 2:
-/// Input: S = "home", K = 5
-/// Output: 0
-/// Explanation: 
-/// Notice K can be larger than the length of S. In this case is not 
-/// possible to find any substring.
-/// 
-/// Note:
-/// 1 <= S.length <= 10^4
-/// 2. All characters of S are lowercase English letters.
-/// 3. 1 <= K <= 10^4
-/// </summary>
-int LeetCodeArray::numKLenSubstrNoRepeats(string S, int K)
-{
-    vector<int> substring(26);
-    int first = 0;
-    int last = 0;
-    int result = 0;
-    while (last < (int)S.size())
-    {
-        if (substring[S[last] - 'a'] == 1)
-        {
-            substring[S[first] - 'a'] = 0;
-            first++;
-        }
-        else
-        {
-            substring[S[last] - 'a'] = 1;
-            last++;
-            if (last - first == K)
-            {
-                result++;
-                substring[S[first] - 'a'] = 0;
-                first++;
-            }
-        }
-    }
-    return result;
 }
 
 /// <summary>
@@ -5321,49 +5054,6 @@ vector<int> LeetCodeArray::sortArrayByParity(vector<int>& A)
         {
             result[last] = A[i];
             last--;
-        }
-    }
-    return result;
-}
-
-
-/// <summary>
-/// Leet code #922. Sort Array By Parity II
-/// 
-/// Given an array A of non-negative integers, half of the integers in A are 
-/// odd, and half of the integers are even.
-///
-/// Sort the array so that whenever A[i] is odd, i is odd; and whenever A[i] 
-/// is even, i is even.
-///
-/// You may return any answer array that satisfies this condition.
-///
-/// 
-/// Example 1:
-///
-/// Input: [4,2,5,7]
-/// Output: [4,5,2,7]
-/// Explanation: [4,7,2,5], [2,5,4,7], [2,7,4,5] would also have been accepted.
-/// 
-///
-/// Note:
-///
-/// 1. 2 <= A.length <= 20000
-/// 2. A.length % 2 == 0
-/// 3. 0 <= A[i] <= 1000
-/// </summary>
-vector<int> LeetCodeArray::sortArrayByParityII(vector<int>& A)
-{
-    size_t even = 0;
-    size_t odd = 1;
-    vector<int> result = A;
-    while (even < A.size())
-    {
-        if (result[even] % 2 == 0) even +=2;
-        else
-        {
-            while ((odd < A.size()) && (result[odd] % 2 == 1)) odd += 2;
-            std::swap(result[even], result[odd]);
         }
     }
     return result;
@@ -29809,4 +29499,60 @@ int LeetCodeArray::minChanges(string s)
         }
     }
     return result;
+}
+
+/// <summary>
+/// Leet Code 2923. Find Champion I
+///  
+/// Easy
+///
+/// There are n teams numbered from 0 to n - 1 in a tournament.
+///
+/// Given a 0-indexed 2D boolean matrix grid of size n * n. For all i, j 
+/// that 0 <= i, j <= n - 1 and i != j team i is stronger than team j if 
+/// grid[i][j] == 1, otherwise, team j is stronger than team i.
+///
+/// Team a will be the champion of the tournament if there is no team b 
+/// that is stronger than team a.
+///
+/// Return the team that will be the champion of the tournament.
+///
+/// Example 1:
+/// Input: grid = [[0,1],[0,0]]
+/// Output: 0
+/// Explanation: There are two teams in this tournament.
+/// grid[0][1] == 1 means that team 0 is stronger than team 1. So team 0 
+/// will be the champion.
+///
+/// Example 2:
+/// Input: grid = [[0,0,1],[1,0,1],[0,0,0]]
+/// Output: 1
+/// Explanation: There are three teams in this tournament.
+/// grid[1][0] == 1 means that team 1 is stronger than team 0.
+/// grid[1][2] == 1 means that team 1 is stronger than team 2.
+/// So team 1 will be the champion.
+///
+/// Constraints:
+/// 1. n == grid.length
+/// 2. n == grid[i].length
+/// 3. 2 <= n <= 100
+/// 4. grid[i][j] is either 0 or 1.
+/// 5. For all i, j that i != j, grid[i][j] != grid[j][i].
+/// 6. The input is generated such that if team a is stronger than team b 
+///    and team b is stronger than team c, then team a is stronger than 
+///    team c.
+/// </summary>
+int LeetCodeArray::findChampion(vector<vector<int>>& grid)
+{
+    int n = grid[0].size();
+    for (int i = 0; i < n; i++)
+    {
+        int count = 0;
+        for (int j = 0; j < n; j++)
+        {
+            if (grid[i][j] == 0) count++;
+        }
+        if (count == 1) return i;
+    }
+    return -1;
 }

@@ -3,9 +3,7 @@
 #define TestArray_H
 #include "..\LeetCode\LeetCodeArray.h"
 #include "..\LeetCode\LeetCodeLinkedList.h"
-void TestLeetCode11(void);
 void TestLeetCode16(void);
-void TestLeetCode42(void);
 void TestLeetCode26(void);
 void TestLeetCode36(void);
 void TestLeetCode41(void);
@@ -348,5 +346,6 @@ void TestLeetCode2905(void);
 void TestLeetCode2906(void);
 void TestLeetCode2913(void);
 void TestLeetCode2914(void);
+void TestLeetCode2923(void);
 void TestLeetCodeArray(void);
 #endif  // TestArray

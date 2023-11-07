@@ -3589,8 +3589,67 @@ void TestLeetCode2909(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2921(void)
+{
+    Logger::WriteMessage("Test Leet Code 2921");
+    LeetCodeSort leetCode;
+    vector<int> prices = { 10, 2, 3, 4 };
+    vector<int> profits = { 100, 2, 7, 10 };
+    int result = leetCode.maxProfitII(prices, profits);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(profits);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 1,2,3,4,5 };
+    profits = { 1,5,3,4,6 };
+    result = leetCode.maxProfitII(prices, profits);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(profits);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 4,3,2,1 };
+    profits = { 33,20,19,87 };
+    result = leetCode.maxProfitII(prices, profits);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(profits);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 2, 8, 9, 9 };
+    profits = { 34,20,13,64 };
+    result = leetCode.maxProfitII(prices, profits);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(profits);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2926(void)
+{
+    Logger::WriteMessage("Test Leet Code 2926");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 3, 3, 5, 6 };
+    long long result = leetCode.maxBalancedSubsequenceSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,-1,-3,8 };
+    result = leetCode.maxBalancedSubsequenceSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -2,-1 };
+    result = leetCode.maxBalancedSubsequenceSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -3, -4, -2 };
+    result = leetCode.maxBalancedSubsequenceSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2926();
     TestLeetCode2908();
     TestLeetCode2907();
     TestLeetCode2895();

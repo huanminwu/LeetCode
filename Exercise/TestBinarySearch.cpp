@@ -447,23 +447,6 @@ void TestLeetCode35(void)
     Logger::WriteMessage("Search " + to_string(target) + " -> " + to_string(result));
 }
 
-void TestLeetCode658(void)
-{
-    LeetCodeBinarySearch leetCode;
-    vector<int> arr = { 1, 2, 3, 4, 5 };
-    int k = 4, x = 3;
-    Logger::WriteMessage(arr);
-    vector<int> result = leetCode.findClosestElements(arr, k, x);
-    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
-    Logger::WriteMessage(result);
-
-    arr = { 1, 3, 5, 7, 9 };
-    k = 2;  x = 4;
-    Logger::WriteMessage(arr);
-    result = leetCode.findClosestElements(arr, k, x);
-    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
-    Logger::WriteMessage(result);
-}
 
 void TestLeetCode852(void)
 {
@@ -1336,7 +1319,6 @@ void TestLeetCodeBinarySearch(void)
     TestLeetCode1060();
     TestLeetCode69();
     TestLeetCode852();
-    TestLeetCode658();
     TestLeetCode35();
     TestLeetCode74();
     TestLeetCode702();

@@ -1,6 +1,91 @@
 #include "..\LeetCode\LeetCode.h"
 #include "..\LeetCode\LeetCodeTwoPointer.h"
 #include "TestTwoPointer.h"
+void TestLeetCode11(void)
+{
+    LeetCodeTwoPointer leetCode;
+    Logger::WriteMessage("Test Leet Code 11");
+    string message;
+    vector<int> heights = { 2, 6, 7, 8, 3, 1 };
+    Logger::WriteMessage(heights);
+    int maxArea = leetCode.maxArea(heights);
+    message.assign("Max Area = " + to_string(maxArea));
+    Logger::WriteMessage(message.c_str());
+}
+
+void TestLeetCode42(void)
+{
+    Logger::WriteMessage("Test Leet Code 42");
+    LeetCodeTwoPointer leetCode;
+    string message;
+    vector<int> heights = { 0,1,0,2,1,0,1,3,2,1,2,1 };
+    Logger::WriteMessage("The array of heights is ");
+    Logger::WriteMessage(heights);
+    int sum = leetCode.trap(heights);
+    message.assign("Trap water = " + to_string(sum));
+    Logger::WriteMessage(message);
+
+    heights = { 0,1,2,3,4,5,6 };
+    Logger::WriteMessage("The array of heights is ");
+    Logger::WriteMessage(heights);
+    sum = leetCode.trap(heights);
+    message.assign("Trap water = " + to_string(sum));
+    Logger::WriteMessage(message);
+}
+
+void TestLeetCode658(void)
+{
+    LeetCodeTwoPointer leetCode;
+    vector<int> arr = { 1, 2, 3, 4, 5 };
+    int k = 4, x = 3;
+    Logger::WriteMessage(arr);
+    vector<int> result = leetCode.findClosestElements(arr, k, x);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+
+    arr = { 1, 3, 5, 7, 9 };
+    k = 2;  x = 4;
+    Logger::WriteMessage(arr);
+    result = leetCode.findClosestElements(arr, k, x);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode680(void)
+{
+    LeetCodeTwoPointer leetCode;
+    string s = "acbca";
+    bool result = leetCode.validPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; valid palindrome = " + (string)(result ? " true" : "false"));
+
+    s = "abcda";
+    result = leetCode.validPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; valid palindrome = " + (string)(result ? " true" : "false"));
+
+    s = "aba";
+    result = leetCode.validPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; valid palindrome = " + (string)(result ? " true" : "false"));
+
+    s = "abca";
+    result = leetCode.validPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; valid palindrome = " + (string)(result ? " true" : "false"));
+
+    s = "abcca";
+    result = leetCode.validPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; valid palindrome = " + (string)(result ? " true" : "false"));
+}
+
+void TestLeetCode922(void)
+{
+    Logger::WriteMessage("Test Leet Code 922");
+    LeetCodeTwoPointer leetCode;
+    vector<int> A = { 4,2,5,7 };
+    vector<int> result = leetCode.sortArrayByParityII(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage(result);
+}
+
+
 void TestLeetCode881(void)
 {
     Logger::WriteMessage("Test Leet Code 881");
@@ -22,6 +107,46 @@ void TestLeetCode881(void)
     result = leetCode.numRescueBoats(people, limit);
     Logger::WriteMessage(people);
     Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
+}
+
+void TestLeetCode1100(void)
+{
+    Logger::WriteMessage("Test Leet Code 1100");
+    LeetCodeTwoPointer leetCode;
+    string S = "havefunonleetcode";
+    int K = 5;
+    int result = leetCode.numKLenSubstrNoRepeats(S, K);
+    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
+
+    S = "home";
+    K = 5;
+    result = leetCode.numKLenSubstrNoRepeats(S, K);
+    Logger::WriteMessage("S = " + S + "; result = " + to_string(result));
+}
+
+void TestLeetCode1156(void)
+{
+    Logger::WriteMessage("Test Leet Code 1156");
+    LeetCodeTwoPointer leetCode;
+    string text = "ababa";
+    int result = leetCode.maxRepOpt1(text);
+    Logger::WriteMessage("text = " + text + "; result = " + to_string(result));
+
+    text = "aaabaaa";
+    result = leetCode.maxRepOpt1(text);
+    Logger::WriteMessage("text = " + text + "; result = " + to_string(result));
+
+    text = "aaabbaaa";
+    result = leetCode.maxRepOpt1(text);
+    Logger::WriteMessage("text = " + text + "; result = " + to_string(result));
+
+    text = "aaaaa";
+    result = leetCode.maxRepOpt1(text);
+    Logger::WriteMessage("text = " + text + "; result = " + to_string(result));
+
+    text = "abcdef";
+    result = leetCode.maxRepOpt1(text);
+    Logger::WriteMessage("text = " + text + "; result = " + to_string(result));
 }
 
 void TestLeetCode1852(void)
@@ -507,5 +632,12 @@ void TestLeetCodeTwoPointer(void)
     TestLeetCode2106();
     TestLeetCode2062();
     TestLeetCode1852();
+    TestLeetCode1156();
+    TestLeetCode1100();
+    TestLeetCode922();
     TestLeetCode881();
+    TestLeetCode680();
+    TestLeetCode658();
+    TestLeetCode42();
+    TestLeetCode11();
 }
