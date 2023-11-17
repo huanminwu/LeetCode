@@ -359,37 +359,6 @@ public:
     bool reachingPoints(int sx, int sy, int tx, int ty);
 
     /// <summary>
-    /// Leet code #878. Nth Magical Number
-    /// 
-    /// A positive integer is magical if it is divisible by either A or B.
-    ///
-    /// Return the N-th magical number.  Since the answer may be very large, 
-    /// return it modulo 10^9 + 7.
-    ///
-    /// Example 1:
-    /// Input: N = 1, A = 2, B = 3
-    /// Output: 2
-    ///
-    /// Example 2:
-    /// Input: N = 4, A = 2, B = 3
-    /// Output: 6
-    ///
-    /// Example 3:
-    /// Input: N = 5, A = 2, B = 4
-    /// Output: 10
-    ///
-    /// Example 4:
-    /// Input: N = 3, A = 6, B = 4
-    /// Output: 8
-    ///
-    /// Note:
-    /// 1. 1 <= N <= 10^9
-    /// 2. 2 <= A <= 40000
-    /// 3. 2 <= B <= 40000
-    /// </summary>
-    int nthMagicalNumber(int N, int A, int B);
-
-    /// <summary>
     /// Leet code #914. X of a Kind in a Deck of Cards
     /// 
     /// In a deck of cards, each card has an integer written on it.
@@ -12564,5 +12533,105 @@ public:
     /// 2. 0 <= nums1[i], nums2[i] <= 10^6
     /// </summary>
     long long minSum(vector<int>& nums1, vector<int>& nums2);
+
+    /// <summary>
+    /// Leet Code 2928. Distribute Candies Among Children I
+    ///  
+    /// Easy
+    ///
+    /// You are given two positive integers n and limit.
+    ///
+    /// Return the total number of ways to distribute n candies among 3 
+    /// children such that no child gets more than limit candies.
+    ///
+    /// Example 1:
+    /// Input: n = 5, limit = 2
+    /// Output: 3
+    /// Explanation: There are 3 ways to distribute 5 candies such that 
+    /// no child gets more than 2 candies: (1, 2, 2), (2, 1, 2) 
+    /// and (2, 2, 1).
+    ///
+    /// Example 2:
+    /// Input: n = 3, limit = 3
+    /// Output: 10
+    /// Explanation: There are 10 ways to distribute 3 candies such that 
+    /// no child gets more than 3 candies: (0, 0, 3), (0, 1, 2), (0, 2, 1), 
+    /// (0, 3, 0), (1, 0, 2), (1, 1, 1), (1, 2, 0), (2, 0, 1), (2, 1, 0) 
+    /// and (3, 0, 0).
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 50
+    /// 2. 1 <= limit <= 50
+    /// </summary>
+    int distributeCandiesI(int n, int limit);
+
+    /// <summary>
+    /// Leet Code 2929. Distribute Candies Among Children II
+    ///  
+    /// Medium
+    ///
+    /// You are given two positive integers n and limit.
+    ///
+    /// Return the total number of ways to distribute n candies among 3 
+    /// children such that no child gets more than limit candies.
+    ///
+    /// Example 1:
+    /// Input: n = 5, limit = 2
+    /// Output: 3
+    /// Explanation: There are 3 ways to distribute 5 candies such that no 
+    /// child gets more than 2 candies: (1, 2, 2), (2, 1, 2) and (2, 2, 1).
+    ///
+    /// Example 2:
+    /// Input: n = 3, limit = 3
+    /// Output: 10
+    /// Explanation: There are 10 ways to distribute 3 candies such that no 
+    /// child gets more than 3 candies: (0, 0, 3), (0, 1, 2), (0, 2, 1), 
+    /// (0, 3, 0), (1, 0, 2), (1, 1, 1), (1, 2, 0), (2, 0, 1), (2, 1, 0) and 
+    /// (3, 0, 0).
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^6
+    /// 2. 1 <= limit <= 10^6
+    /// </summary>
+    long long distributeCandiesII(int n, int limit);
+
+    /// <summary>
+    /// Leet Code 2930. Number of Strings Which Can Be Rearranged to Contain 
+    ///                 Substring
+    ///  
+    /// Medium
+    ///
+    /// A string s is called good if it contains only lowercase English 
+    /// characters and it is possible to rearrange the characters of s such 
+    /// that the new string contains "leet" as a substring.
+    ///
+    /// For example:
+    /// The string "lteer" is good because we can rearrange it to form 
+    /// "leetr" .
+    /// "letl" is not good because we cannot rearrange it to contain "leet" 
+    /// as a substring.
+    /// Return the total number of good strings of length n.
+    ///
+    /// Since the answer may be large, return it modulo 10^9 + 7.
+    /// A substring is a contiguous sequence of characters within a string.
+    /// 
+    /// Example 1:
+    /// Input: n = 4
+    /// Output: 12
+    /// Explanation: The 12 strings which can be rearranged to have "leet" 
+    /// as a substring are: "eelt", "eetl", "elet", "elte", "etel", "etle", 
+    /// "leet", "lete", "ltee", "teel", "tele", and "tlee".
+    ///
+    /// Example 2:
+    /// Input: n = 10
+    /// Output: 83943898
+    /// Explanation: The number of strings with length 10 which can be 
+    /// rearranged to have "leet" as a substring is 526083947580. Hence the 
+    /// answer is 526083947580 % (10^9 + 7) = 83943898.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^5
+    /// </summary>
+    int stringCount(int n);
 };
 #endif

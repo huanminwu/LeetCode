@@ -9491,8 +9491,35 @@ void TestLeetCode2923(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2934(void)
+{
+    Logger::WriteMessage("Test Leet Code 2934");
+    LeetCodeArray leetCode;
+    vector<int> nums1 = { 1, 2, 7 };
+    vector<int> nums2 = { 4, 5, 3 };
+    int result = leetCode.minOperationsSwap(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 2,3,4,5,9 };
+    nums2 = { 8,8,4,4,4 };
+    result = leetCode.minOperationsSwap(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,5,4 };
+    nums2 = { 2,5,3 };
+    result = leetCode.minOperationsSwap(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2934();
     TestLeetCode2923();
     TestLeetCode2914();
     TestLeetCode2913();

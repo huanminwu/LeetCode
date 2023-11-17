@@ -6392,8 +6392,32 @@ void TestLeetCode2843(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2933(void)
+{
+    Logger::WriteMessage("Test Leet Code 2933");
+    LeetCodeString leetCode;
+    vector<vector<string>> access_times =
+    { {"a", "0549"},{"b", "0457"},{"a", "0532"},{"a", "0621"},{"b", "0540"} };
+    vector<string>  result = leetCode.findHighAccessEmployees(access_times);
+    Logger::WriteMessage(access_times);
+    Logger::WriteMessage(result);
+
+    access_times =
+    { {"d", "0002"},{"c", "0808"},{"c", "0829"},{"e", "0215"},{"d", "1508"},{"d", "1444"},{"d", "1410"},{"c", "0809"} };
+    result = leetCode.findHighAccessEmployees(access_times);
+    Logger::WriteMessage(access_times);
+    Logger::WriteMessage(result);
+
+    access_times =
+    { {"cd", "1025"},{"ab", "1025"},{"cd", "1046"},{"cd", "1055"},{"ab", "1124"},{"ab", "1120"} };
+    result = leetCode.findHighAccessEmployees(access_times);
+    Logger::WriteMessage(access_times);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2933();
     TestLeetCode2840();
     TestLeetCode2843();
     TestLeetCode2839();

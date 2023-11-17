@@ -366,19 +366,22 @@ int LeetCodeBinarySearch::findPeakElement(vector<int>& nums)
     int first = 0;
     int last = nums.size() - 1;
     int middle = last;
+    int result = last;
     while (first < last)
     {
         middle = first + (last - first) / 2;
         if (nums[middle] < nums[middle + 1])
         {
+            result = middle + 1;
             first = middle + 1;
         }
         else
         {
+            result = middle;
             last = middle;
         }
     }
-    return last;
+    return result;
 }
 
 /// <summary>
@@ -472,7 +475,8 @@ int LeetCodeBinarySearch::kthSmallest(vector<vector<int>>& matrix, int k)
 {
     int low = matrix[0][0];
     int high = matrix[matrix.size() - 1][matrix[0].size() - 1];
-    while (low < high)
+    int result = 0;
+    while (low <= high)
     {
         int mid = low + (high - low) / 2;
         if (countNoGreaterValue(matrix, mid, k) < k)
@@ -481,7 +485,8 @@ int LeetCodeBinarySearch::kthSmallest(vector<vector<int>>& matrix, int k)
         }
         else
         {
-            high = mid;
+            result = mid;
+            high = mid - 1;
         }
     }
     return low;
@@ -792,56 +797,61 @@ int LeetCodeBinarySearch::findMedianSortedArrays(vector<int>& nums1, vector<int>
 }
 
 /// <summary>
-/// Leet code #410. Split Array Largest Sum
+/// Leet Code 410. Split Array Largest Sum
 ///  
-/// Given an array which consists of non-negative integers and an integer m, 
-/// you can split the array into m non-empty continuous subarrays. Write an 
-/// algorithm to minimize the largest sum among these m subarrays.
+/// Hard
 ///
-/// Note:
-/// If n is the length of array, assume the following constraints are 
-/// satisfied:
+/// Given an integer array nums and an integer k, split nums into k 
+/// non-empty subarrays such that the largest sum of any subarray is 
+/// minimized.
 ///
-/// 1. 1 ?ü n ?ü 1000
-/// 2. 1 ?ü m ?ü min(50, n)
+/// Return the minimized largest sum of the split.
+/// A subarray is a contiguous part of the array.
 ///
-/// Examples:
-/// Input:
-/// nums = [7,2,5,10,8]
-/// m = 2
+/// Example 1:
+/// Input: nums = [7,2,5,10,8], k = 2
+/// Output: 18
+/// Explanation: There are four ways to split nums into two subarrays.
+/// The best way is to split it into [7,2,5] and [10,8], where the 
+/// largest sum among the two subarrays is only 18.
 ///
-/// Output:
-/// 18
+/// Example 2:
+/// Input: nums = [1,2,3,4,5], k = 2
+/// Output: 9
+/// Explanation: There are four ways to split nums into two subarrays.
+/// The best way is to split it into [1,2,3] and [4,5], where the largest 
+/// sum among the two subarrays is only 9.
 ///
-/// Explanation:
-/// There are four ways to split nums into two subarrays.
-/// The best way is to split it into [7,2,5] and [10,8],
-/// where the largest sum among the two subarrays is only 18.
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 0 <= nums[i] <= 10^6 
+/// 3. 1 <= k <= min(50, nums.length)
 /// </summary>
-int LeetCodeBinarySearch::splitArray(vector<int>& nums, int m)
+int LeetCodeBinarySearch::splitArray(vector<int>& nums, int k)
 {
-    unsigned long long first = 0;
-    unsigned long long last = 0;
+    int first = 0;
+    int last = 0;
     for (size_t i = 0; i < nums.size(); i++)
     {
-        last += (unsigned long long) nums[i];
-        first = max(first, (unsigned long long)nums[i]);
+        last += nums[i];
+        first = max(first, nums[i]);
     }
     // the maximum slice size must be between the maximum number and the total 
     // sum of the slice, try all possible by binary search.
-    while (first < last)
+    int result = 0;
+    while (first <= last)
     {
         // assume the mid is the sum of maximum slice
-        unsigned long long mid = (first + last) / 2;
+        int mid = first + (last - first) / 2;
 
         int count = 1;
-        unsigned long long subTotal = 0;
+        int subTotal = 0;
         for (size_t i = 0; i < nums.size(); i++)
         {
             if (subTotal + nums[i] > mid)
             {
                 count++;
-                if (count > m)
+                if (count > k)
                 {
                     break;
                 }
@@ -852,17 +862,18 @@ int LeetCodeBinarySearch::splitArray(vector<int>& nums, int m)
             }
             subTotal += nums[i];
         }
-        // if count is greater than m, it means bursted
-        if (count > m)
+        // if count is greater than k, it means bursted
+        if (count > k)
         {
             first = mid + 1;
         }
         else // if not bursted, find the smaller sum greedily
         {
-            last = mid;
+            result = mid;
+            last = mid - 1;
         }
     }
-    return (int)last;
+    return result;
 }
 
 /// <summary>
@@ -950,26 +961,39 @@ int LeetCodeBinarySearch::findKthNumber(int m, int n, int k)
 }
 
 /// <summary>
-/// Leet code #719. Find K-th Smallest Pair Distance
-/// Given an integer array, return the k-th smallest distance among all 
-/// the pairs. The distance of a pair (A, B) is defined as the absolute 
-/// difference between A and B.
+/// Leet Code 719. Find K-th Smallest Pair Distance
+///  
+/// Hard
+///
+/// The distance of a pair of integers a and b is defined as the absolute 
+/// difference between a and b.
+///
+/// Given an integer array nums and an integer k, return the kth smallest 
+/// distance among all the pairs nums[i] and nums[j] where 
+/// 0 <= i < j < nums.length.
 ///
 /// Example 1:
-/// Input:
-/// nums = [1,3,1]
-/// k = 1
-/// Output: 0 
-/// Explanation:
-/// Here are all the pairs:
+/// Input: nums = [1,3,1], k = 1
+/// Output: 0
+/// Explanation: Here are all the pairs:
 /// (1,3) -> 2
 /// (1,1) -> 0
 /// (3,1) -> 2
 /// Then the 1st smallest distance pair is (1,1), and its distance is 0.
-/// Note:
-/// 1. 2 <= len(nums) <= 10000.
-/// 2. 0 <= nums[i] < 1000000.
-/// 3. 1 <= k <= len(nums) * (len(nums) - 1) / 2.	
+///
+/// Example 2:
+/// Input: nums = [1,1,1], k = 2
+/// Output: 0
+///
+/// Example 3:
+/// Input: nums = [1,6,1], k = 3
+/// Output: 5
+/// 
+/// Constraints:
+/// 1. n == nums.length
+/// 2. 2 <= n <= 10^4
+/// 3. 0 <= nums[i] <= 10^6
+/// 4. 1 <= k <= n * (n - 1) / 2
 /// </summary>
 int LeetCodeBinarySearch::smallestDistancePair(vector<int>& nums, int k)
 {
@@ -981,7 +1005,8 @@ int LeetCodeBinarySearch::smallestDistancePair(vector<int>& nums, int k)
         low = min(low, nums[i + 1] - nums[i]);
     }
     int high = nums[nums.size() - 1] - nums[0];
-    while (low < high)
+    int result = 0;
+    while (low <= high)
     {
         int mid = (low + high) / 2;
 
@@ -998,10 +1023,17 @@ int LeetCodeBinarySearch::smallestDistancePair(vector<int>& nums, int k)
             if (count > k) break;
             first++;
         }
-        if (count >= k) high = mid;
-        else low = mid + 1;
+        if (count >= k)
+        {
+            result = mid;
+            high = mid - 1;
+        }
+        else
+        {
+            low = mid + 1;
+        }
     }
-    return low;
+    return result;
 }
 
 /// <summary>
@@ -1169,7 +1201,7 @@ int LeetCodeBinarySearch::peakIndexInMountainArray(vector<int>& A)
 /// 2. piles.length <= H <= 10^9
 /// 3. 1 <= piles[i] <= 10^9
 /// </summary>
-int LeetCodeBinarySearch::minEatingSpeed(vector<int>& piles, int H)
+int LeetCodeBinarySearch::minEatingSpeed(vector<int>& piles, int h)
 {
     int first = 1;
     int last = 1;
@@ -1186,9 +1218,9 @@ int LeetCodeBinarySearch::minEatingSpeed(vector<int>& piles, int H)
         {
             count += piles[i] / middle;
             if (piles[i] % middle != 0) count++;
-            if (count > H) break;
+            if (count > h) break;
         }
-        if (count > H)
+        if (count > h)
         {
             first = middle + 1;
         }
@@ -1199,6 +1231,51 @@ int LeetCodeBinarySearch::minEatingSpeed(vector<int>& piles, int H)
         }
     }
     return result;
+}
+
+/// <summary>
+/// Leet code #878. Nth Magical Number
+/// 
+/// A positive integer is magical if it is divisible by either A or B.
+///
+/// Return the N-th magical number.  Since the answer may be very large, 
+/// return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: N = 1, A = 2, B = 3
+/// Output: 2
+///
+/// Example 2:
+/// Input: N = 4, A = 2, B = 3
+/// Output: 6
+///
+/// Example 3:
+/// Input: N = 5, A = 2, B = 4
+/// Output: 10
+///
+/// Example 4:
+/// Input: N = 3, A = 6, B = 4
+/// Output: 8
+///
+/// Note:
+/// 1. 1 <= N <= 10^9
+/// 2. 2 <= A <= 40000
+/// 3. 2 <= B <= 40000
+/// </summary>
+int LeetCodeBinarySearch::nthMagicalNumber(int n, int a, int b)
+{
+    int c = a * b / (int)std::gcd(a, b);
+    int mod = 1000000007;
+    unsigned long long first = 1;
+    unsigned long long last = (unsigned long long)a * n;
+    while (first < last)
+    {
+        unsigned long long middle = first + (last - first) / 2;
+        unsigned long long k = middle / a + middle / b - middle / c;
+        if (k < n) first = middle + 1;
+        else last = middle;
+    }
+    return (int)(first % mod);
 }
 
 /// <summary>
@@ -1361,7 +1438,7 @@ int LeetCodeBinarySearch::searchStream(const vector<int>& reader, int target)
 /// 1. 1 <= D <= weights.length <= 50000
 /// 2. 1 <= weights[i] <= 500
 /// </summary>
-int LeetCodeBinarySearch::shipWithinDays(vector<int>& weights, int D)
+int LeetCodeBinarySearch::shipWithinDays(vector<int>& weights, int days)
 {
     int sum = 0;
     for (size_t i = 0; i < weights.size(); i++) sum += weights[i];
@@ -1378,7 +1455,7 @@ int LeetCodeBinarySearch::shipWithinDays(vector<int>& weights, int D)
             // a single cargo may burst
             if (weights[i] > mid)
             {
-                d = D + 1;
+                d = days + 1;
                 break;
             }
             else if (sum + weights[i] > mid)
@@ -1386,11 +1463,11 @@ int LeetCodeBinarySearch::shipWithinDays(vector<int>& weights, int D)
                 sum = 0;
                 d++;
             }
-            if (d > D) break;
+            if (d > days) break;
             sum += weights[i];
         }
         // ship too small
-        if (d > D)
+        if (d > days)
         {
             first = mid + 1;
         }
@@ -3975,4 +4052,87 @@ int LeetCodeBinarySearch::maxNumberOfAlloys(int n, int k, int budget,
     return (int)result;
 }
 
+/// <summary>
+/// Leet Code 2936. Number of Equal Numbers Blocks
+///  
+/// Medium
+///
+/// You are given a 0-indexed array of integers, nums. The following 
+/// property holds for nums:
+///
+/// All occurrences of a value are adjacent. In other words, if there are 
+/// two indices i < j such that nums[i] == nums[j], then for every index 
+/// k that i < k < j, nums[k] == nums[i].
+/// Since nums is a very large array, you are given an instance of the 
+/// class BigArray which has the following functions:
+///
+/// int at(long long index): Returns the value of nums[i].
+/// void size(): Returns nums.length.
+/// Let's partition the array into maximal blocks such that each block 
+/// contains equal values. Return the number of these blocks.
+///
+/// Note that if you want to test your solution using a custom test, 
+/// behavior for tests with nums.length > 10 is undefined.
+///
+///
+/// Example 1:
+///
+/// Input: nums = [3,3,3,3,3]
+/// Output: 1
+/// Explanation: There is only one block here which is the whole array 
+/// (because all numbers are equal) and that is: [3,3,3,3,3]. So the 
+/// answer would be 1. 
+///
+/// Example 2:
+/// Input: nums = [1,1,1,3,9,9,9,2,10,10]
+/// Output: 5
+/// Explanation: There are 5 blocks here:
+/// Block number 1: [1,1,1,3,9,9,9,2,10,10]
+/// Block number 2: [1,1,1,3,9,9,9,2,10,10]
+/// Block number 3: [1,1,1,3,9,9,9,2,10,10]
+/// Block number 4: [1,1,1,3,9,9,9,2,10,10]
+/// Block number 5: [1,1,1,3,9,9,9,2,10,10]
+/// So the answer would be 5.
+///
+/// Example 3:
+/// Input: nums = [1,2,3,4,5,6,7]
+/// Output: 7
+/// Explanation: Since all numbers are distinct, there are 7 blocks here 
+/// and each element representing one block. So the answer would be 7. 
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^15
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. The input is generated such that all equal values are adjacent.
+/// 4. The sum of the elements of nums is at most 10^15.
+/// </summary>
+int LeetCodeBinarySearch::countBlocks(vector<int> nums)
+{
+    long long n = nums.size();
+    long long start = 0;
+    long long end = n - 1;
+    int result = 0;
+    while (start <= end)
+    {
+        long long first = start;
+        long long last = end;
+        long long finish = first;
+        while (first <= last)
+        {
+            long long middle = first + (last - first) / 2;
+            if (nums[(int)middle] != nums[(int)start])
+            {
+                last = middle - 1;
+            }
+            else
+            {
+                finish = middle;
+                first = middle + 1;
+            }
+        }
+        start = finish + 1;
+        result++;
+    }
+    return result;
+}
 #pragma endregion  

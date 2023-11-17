@@ -128,5 +128,6 @@ void TestLeetCode2908(void);
 void TestLeetCode2909(void);
 void TestLeetCode2921(void);
 void TestLeetCode2926(void);
+void TestLeetCode2931(void);
 void TestLeetCodeSort(void);
 #endif  // TestTree

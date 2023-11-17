@@ -1167,8 +1167,50 @@ void TestLeetCode2917(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2932(void)
+{
+    Logger::WriteMessage("Test Leet Code 2932");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5 };
+    int result = leetCode.maximumStrongPairXorI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,100 };
+    result = leetCode.maximumStrongPairXorI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,6,25,30 };
+    result = leetCode.maximumStrongPairXorI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2935(void)
+{
+    Logger::WriteMessage("Test Leet Code 2935");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1,2,3,4,5 };
+    int result = leetCode.maximumStrongPairXorII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,100 };
+    result = leetCode.maximumStrongPairXorII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 500,520,2500,3000 };
+    result = leetCode.maximumStrongPairXorI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2935();
+    TestLeetCode2932();
     TestLeetCode2917();
     TestLeetCode2897();
     TestLeetCode2864();

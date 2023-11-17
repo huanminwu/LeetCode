@@ -656,7 +656,7 @@ public:
     /// 1. 1 <= D <= weights.length <= 50000
     /// 2. 1 <= weights[i] <= 500
     /// </summary>
-    int shipWithinDays(vector<int>& weights, int D);
+    int shipWithinDays(vector<int>& weights, int days);
 
     /// <summary>
     /// LeetCode #875. Koko Eating Bananas
@@ -693,29 +693,42 @@ public:
     /// 2. piles.length <= H <= 10^9
     /// 3. 1 <= piles[i] <= 10^9
     /// </summary>
-    int minEatingSpeed(vector<int>& piles, int H);
+    int minEatingSpeed(vector<int>& piles, int h);
 
     /// <summary>
-    /// Leet code #719. Find K-th Smallest Pair Distance
-    /// Given an integer array, return the k-th smallest distance among all 
-    /// the pairs. The distance of a pair (A, B) is defined as the absolute 
-    /// difference between A and B.
+    /// Leet Code 719. Find K-th Smallest Pair Distance
+    ///  
+    /// Hard
+    ///
+    /// The distance of a pair of integers a and b is defined as the absolute 
+    /// difference between a and b.
+    ///
+    /// Given an integer array nums and an integer k, return the kth smallest 
+    /// distance among all the pairs nums[i] and nums[j] where 
+    /// 0 <= i < j < nums.length.
     ///
     /// Example 1:
-    /// Input:
-    /// nums = [1,3,1]
-    /// k = 1
-    /// Output: 0 
-    /// Explanation:
-    /// Here are all the pairs:
+    /// Input: nums = [1,3,1], k = 1
+    /// Output: 0
+    /// Explanation: Here are all the pairs:
     /// (1,3) -> 2
     /// (1,1) -> 0
     /// (3,1) -> 2
     /// Then the 1st smallest distance pair is (1,1), and its distance is 0.
-    /// Note:
-    /// 1. 2 <= len(nums) <= 10000.
-    /// 2. 0 <= nums[i] < 1000000.
-    /// 3. 1 <= k <= len(nums) * (len(nums) - 1) / 2.	
+    ///
+    /// Example 2:
+    /// Input: nums = [1,1,1], k = 2
+    /// Output: 0
+    ///
+    /// Example 3:
+    /// Input: nums = [1,6,1], k = 3
+    /// Output: 5
+    /// 
+    /// Constraints:
+    /// 1. n == nums.length
+    /// 2. 2 <= n <= 10^4
+    /// 3. 0 <= nums[i] <= 10^6
+    /// 4. 1 <= k <= n * (n - 1) / 2
     /// </summary>
     int smallestDistancePair(vector<int>& nums, int k);
 
@@ -746,33 +759,37 @@ public:
     vector<int> kthSmallestPrimeFraction(vector<int>& A, int K);
 
     /// <summary>
-    /// Leet code #410. Split Array Largest Sum
+    /// Leet Code 410. Split Array Largest Sum
     ///  
-    /// Given an array which consists of non-negative integers and an integer m, 
-    /// you can split the array into m non-empty continuous subarrays. Write an 
-    /// algorithm to minimize the largest sum among these m subarrays.
+    /// Hard
     ///
-    /// Note:
-    /// If n is the length of array, assume the following constraints are 
-    /// satisfied:
+    /// Given an integer array nums and an integer k, split nums into k 
+    /// non-empty subarrays such that the largest sum of any subarray is 
+    /// minimized.
     ///
-    /// 1. 1 ?ü n ?ü 1000
-    /// 2. 1 ?ü m ?ü min(50, n)
+    /// Return the minimized largest sum of the split.
+    /// A subarray is a contiguous part of the array.
     ///
-    /// Examples:
-    /// Input:
-    /// nums = [7,2,5,10,8]
-    /// m = 2
+    /// Example 1:
+    /// Input: nums = [7,2,5,10,8], k = 2
+    /// Output: 18
+    /// Explanation: There are four ways to split nums into two subarrays.
+    /// The best way is to split it into [7,2,5] and [10,8], where the 
+    /// largest sum among the two subarrays is only 18.
     ///
-    /// Output:
-    /// 18
+    /// Example 2:
+    /// Input: nums = [1,2,3,4,5], k = 2
+    /// Output: 9
+    /// Explanation: There are four ways to split nums into two subarrays.
+    /// The best way is to split it into [1,2,3] and [4,5], where the largest 
+    /// sum among the two subarrays is only 9.
     ///
-    /// Explanation:
-    /// There are four ways to split nums into two subarrays.
-    /// The best way is to split it into [7,2,5] and [10,8],
-    /// where the largest sum among the two subarrays is only 18.
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1000
+    /// 2. 0 <= nums[i] <= 10^6 
+    /// 3. 1 <= k <= min(50, nums.length)
     /// </summary>
-    int splitArray(vector<int>& nums, int m);
+    int splitArray(vector<int>& nums, int k);
 
     /// <summary>
     /// Leet code #378. Kth Smallest Element in a Sorted Matrix   
@@ -795,6 +812,37 @@ public:
     /// return 13.
     /// </summary>
     int kthSmallest(vector<vector<int>>& matrix, int k);
+
+    /// <summary>
+    /// Leet code #878. Nth Magical Number
+    /// 
+    /// A positive integer is magical if it is divisible by either A or B.
+    ///
+    /// Return the N-th magical number.  Since the answer may be very large, 
+    /// return it modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: N = 1, A = 2, B = 3
+    /// Output: 2
+    ///
+    /// Example 2:
+    /// Input: N = 4, A = 2, B = 3
+    /// Output: 6
+    ///
+    /// Example 3:
+    /// Input: N = 5, A = 2, B = 4
+    /// Output: 10
+    ///
+    /// Example 4:
+    /// Input: N = 3, A = 6, B = 4
+    /// Output: 8
+    ///
+    /// Note:
+    /// 1. 1 <= N <= 10^9
+    /// 2. 2 <= A <= 40000
+    /// 3. 2 <= B <= 40000
+    /// </summary>
+    int nthMagicalNumber(int n, int a, int b);
 
     /// <summary>
     /// Leet code #1283. Find the Smallest Divisor Given a Threshold
@@ -2240,6 +2288,62 @@ public:
     int maxNumberOfAlloys(int n, int k, int budget, 
         vector<vector<int>>& composition,
         vector<int>& stock, vector<int>& cost);
+
+    /// <summary>
+    /// Leet Code 2936. Number of Equal Numbers Blocks
+    ///  
+    /// Medium
+    ///
+    /// You are given a 0-indexed array of integers, nums. The following 
+    /// property holds for nums:
+    ///
+    /// All occurrences of a value are adjacent. In other words, if there are 
+    /// two indices i < j such that nums[i] == nums[j], then for every index 
+    /// k that i < k < j, nums[k] == nums[i].
+    /// Since nums is a very large array, you are given an instance of the 
+    /// class BigArray which has the following functions:
+    ///
+    /// int at(long long index): Returns the value of nums[i].
+    /// void size(): Returns nums.length.
+    /// Let's partition the array into maximal blocks such that each block 
+    /// contains equal values. Return the number of these blocks.
+    ///
+    /// Note that if you want to test your solution using a custom test, 
+    /// behavior for tests with nums.length > 10 is undefined.
+    ///
+    ///
+    /// Example 1:
+    ///
+    /// Input: nums = [3,3,3,3,3]
+    /// Output: 1
+    /// Explanation: There is only one block here which is the whole array 
+    /// (because all numbers are equal) and that is: [3,3,3,3,3]. So the 
+    /// answer would be 1. 
+    ///
+    /// Example 2:
+    /// Input: nums = [1,1,1,3,9,9,9,2,10,10]
+    /// Output: 5
+    /// Explanation: There are 5 blocks here:
+    /// Block number 1: [1,1,1,3,9,9,9,2,10,10]
+    /// Block number 2: [1,1,1,3,9,9,9,2,10,10]
+    /// Block number 3: [1,1,1,3,9,9,9,2,10,10]
+    /// Block number 4: [1,1,1,3,9,9,9,2,10,10]
+    /// Block number 5: [1,1,1,3,9,9,9,2,10,10]
+    /// So the answer would be 5.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,3,4,5,6,7]
+    /// Output: 7
+    /// Explanation: Since all numbers are distinct, there are 7 blocks here 
+    /// and each element representing one block. So the answer would be 7. 
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^15
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. The input is generated such that all equal values are adjacent.
+    /// 4. The sum of the elements of nums is at most 10^15.
+    /// </summary>
+    int countBlocks(vector<int> nums);
 #pragma endregion
 };
 #endif  // LeetCodeBinarySearch_H

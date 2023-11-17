@@ -3647,8 +3647,24 @@ void TestLeetCode2926(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2931(void)
+{
+    Logger::WriteMessage("Test Leet Code 2931");
+    LeetCodeSort leetCode;
+    vector<vector<int>> values = { {8, 5, 2},{6, 4, 1},{9, 7, 3} };
+    long long result = leetCode.maxSpending(values);
+    Logger::WriteMessage(values);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    values = { {10, 8, 6, 4, 2},{9, 7, 5, 3, 2} };
+    result = leetCode.maxSpending(values);
+    Logger::WriteMessage(values);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2931();
     TestLeetCode2926();
     TestLeetCode2908();
     TestLeetCode2907();

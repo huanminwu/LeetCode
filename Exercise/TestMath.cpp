@@ -101,41 +101,6 @@ void TestLeetCode592(void)
     Logger::WriteMessage("expression = " + expression + "; result = " + result);
 }
 
-void TestLeetCode878(void)
-{
-    Logger::WriteMessage("Test Leet Code 878");
-    LeetCodeMath leetCode;
-    int N = 1;
-    int A = 2;
-    int B = 3;
-    int result = leetCode.nthMagicalNumber(N, A, B);
-    Logger::WriteMessage("N = " + to_string(N) + "; A = " + to_string(A) + "; B = " + to_string(B) + "; result = " + to_string(result));
-
-    N = 4;
-    A = 2;
-    B = 3;
-    result = leetCode.nthMagicalNumber(N, A, B);
-    Logger::WriteMessage("N = " + to_string(N) + "; A = " + to_string(A) + "; B = " + to_string(B) + "; result = " + to_string(result));
-
-    N = 5;
-    A = 2;
-    B = 4;
-    result = leetCode.nthMagicalNumber(N, A, B);
-    Logger::WriteMessage("N = " + to_string(N) + "; A = " + to_string(A) + "; B = " + to_string(B) + "; result = " + to_string(result));
-
-    N = 3;
-    A = 6;
-    B = 4;
-    result = leetCode.nthMagicalNumber(N, A, B);
-    Logger::WriteMessage("N = " + to_string(N) + "; A = " + to_string(A) + "; B = " + to_string(B) + "; result = " + to_string(result));
-
-    N = 1000000000;
-    A = 40000;
-    B = 40000;
-    result = leetCode.nthMagicalNumber(N, A, B);
-    Logger::WriteMessage("N = " + to_string(N) + "; A = " + to_string(A) + "; B = " + to_string(B) + "; result = " + to_string(result));
-}
-
 void TestLeetCode914(void)
 {
     Logger::WriteMessage("Test Leet Code 914");
@@ -6360,8 +6325,55 @@ void TestLeetCode2918(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2928(void)
+{
+    Logger::WriteMessage("Test Leet Code 2928");
+    LeetCodeMath leetCode;
+    int n = 5, limit = 2;
+    int result = leetCode.distributeCandiesI(n, limit);
+    Logger::WriteMessage("n = " + to_string(n) + "; limit = " + to_string(limit));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3, limit = 3;
+    result = leetCode.distributeCandiesI(n, limit);
+    Logger::WriteMessage("n = " + to_string(n) + "; limit = " + to_string(limit));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode2929(void)
+{
+    Logger::WriteMessage("Test Leet Code 2929");
+    LeetCodeMath leetCode;
+    int n = 5, limit = 2;
+    long long result = leetCode.distributeCandiesII(n, limit);
+    Logger::WriteMessage("n = " + to_string(n) + "; limit = " + to_string(limit));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3, limit = 3;
+    result = leetCode.distributeCandiesII(n, limit);
+    Logger::WriteMessage("n = " + to_string(n) + "; limit = " + to_string(limit));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2930(void)
+{
+    Logger::WriteMessage("Test Leet Code 2930");
+    LeetCodeMath leetCode;
+    int n = 4;
+    int result = leetCode.stringCount(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 5;
+    result = leetCode.stringCount(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2930();
+    TestLeetCode2929();
+    TestLeetCode2928();
     TestLeetCode2918();
     TestLeetCode2912();
     TestLeetCode2910();
@@ -6671,7 +6683,6 @@ void TestLeetCodeMath(void)
     TestLeetCode6();
     TestLeetCode553();
     TestLeetCode592();
-    TestLeetCode878();
     TestLeetCode914();
     TestLeetCode1118();
     TestLeetCode1131();

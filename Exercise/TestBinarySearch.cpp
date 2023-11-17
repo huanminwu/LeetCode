@@ -102,7 +102,7 @@ void TestLeetCode162(void)
     int index = leetCode.findPeakElement(nums);
     Logger::WriteMessage("Peak Element is " + to_string(index));
 
-    nums = { 3, 1, 2, 3 };
+    nums = { 1,2,1,3,5,6,4 };
     Logger::WriteMessage(nums);
     index = leetCode.findPeakElement(nums);
     Logger::WriteMessage("Peak Element is " + to_string(index));
@@ -214,6 +214,41 @@ void TestLeetCode875(void)
     result = leetCode.minEatingSpeed(piles, H);
     Logger::WriteMessage(piles);
     Logger::WriteMessage("H = " + to_string(H) + "; result = " + to_string(result));
+}
+
+void TestLeetCode878(void)
+{
+    Logger::WriteMessage("Test Leet Code 878");
+    LeetCodeBinarySearch leetCode;
+    int n = 1;
+    int a = 2;
+    int b = 3;
+    int result = leetCode.nthMagicalNumber(n, a, b);
+    Logger::WriteMessage("n = " + to_string(n) + "; a = " + to_string(a) + "; b = " + to_string(b) + "; result = " + to_string(result));
+
+    n = 4;
+    a = 2;
+    b = 3;
+    result = leetCode.nthMagicalNumber(n, a, b);
+    Logger::WriteMessage("n = " + to_string(n) + "; a = " + to_string(a) + "; b = " + to_string(b) + "; result = " + to_string(result));
+
+    n = 5;
+    a = 2;
+    b = 4;
+    result = leetCode.nthMagicalNumber(n, a, b);
+    Logger::WriteMessage("n = " + to_string(n) + "; a = " + to_string(a) + "; b = " + to_string(b) + "; result = " + to_string(result));
+
+    n = 3;
+    a = 6;
+    b = 4;
+    result = leetCode.nthMagicalNumber(n, a, b);
+    Logger::WriteMessage("n = " + to_string(n) + "; a = " + to_string(a) + "; b = " + to_string(b) + "; result = " + to_string(result));
+
+    n = 1000000000;
+    a = 40000;
+    b = 40000;
+    result = leetCode.nthMagicalNumber(n, a, b);
+    Logger::WriteMessage("n = " + to_string(n) + "; a = " + to_string(a) + "; b = " + to_string(b) + "; result = " + to_string(result));
 }
 
 void TestLeetCode719(void)
@@ -1281,8 +1316,32 @@ void TestLeetCode2861(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2936(void)
+{
+    Logger::WriteMessage("Test Leet Code 2936");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 3, 3, 3, 3, 3 };
+    int result = leetCode.countBlocks(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1,3,9,9,9,2,10,10 };
+    result = leetCode.countBlocks(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4,5,6,7 };
+    result = leetCode.countBlocks(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode2936();
+    TestLeetCode153();
+    TestLeetCode162();
+    TestLeetCode35();
     TestLeetCode2861();
     TestLeetCode2819();
     TestLeetCode2702();
@@ -1319,7 +1378,6 @@ void TestLeetCodeBinarySearch(void)
     TestLeetCode1060();
     TestLeetCode69();
     TestLeetCode852();
-    TestLeetCode35();
     TestLeetCode74();
     TestLeetCode702();
     TestLeetCode668();
@@ -1334,11 +1392,10 @@ void TestLeetCodeBinarySearch(void)
     TestLeetCode33();
     TestLeetCode34();
     TestLeetCode81();
-    TestLeetCode153();
     TestLeetCode154();
-    TestLeetCode162();
     TestLeetCode240();
     TestLeetCode875();
+    TestLeetCode878();
     TestLeetCode1011();
     TestLeetCode1231();
 }
