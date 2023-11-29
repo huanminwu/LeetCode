@@ -1207,8 +1207,37 @@ void TestLeetCode2935(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2939(void)
+{
+    Logger::WriteMessage("Test Leet Code 2939");
+    LeetCodeBit leetCode;
+    long long a = 12, b = 5;
+    int n = 4;
+    int result = leetCode.maximumXorProduct(a, b, n);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) + "; n = " + to_string(n));
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    a = 6, b = 7, n = 5;
+    result = leetCode.maximumXorProduct(a, b, n);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) + "; n = " + to_string(n));
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    a = 1, b = 6, n = 3;
+    result = leetCode.maximumXorProduct(a, b, n);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) + "; n = " + to_string(n));
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+    
+    a = 570713374625622;
+    b = 553376364476768;
+    n = 35;
+    result = leetCode.maximumXorProduct(a, b, n);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b) + "; n = " + to_string(n));
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2939();
     TestLeetCode2935();
     TestLeetCode2932();
     TestLeetCode2917();

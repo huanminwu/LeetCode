@@ -6369,8 +6369,53 @@ void TestLeetCode2930(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2943(void)
+{
+    Logger::WriteMessage("Test Leet Code 2943");
+    LeetCodeMath leetCode;
+    int n = 2, m = 1;
+    vector<int> hBars = { 2, 3 }, vBars = { 2 };
+    int result = leetCode.maximizeSquareHoleArea(n, m, hBars, vBars);
+    Logger::WriteMessage(hBars);
+    Logger::WriteMessage(vBars);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; result = " + to_string(result));
+
+    n = 1, m = 1;
+    hBars = { 2 }, vBars = { 2 };
+    result = leetCode.maximizeSquareHoleArea(n, m, hBars, vBars);
+    Logger::WriteMessage(hBars);
+    Logger::WriteMessage(vBars);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; result = " + to_string(result));
+
+    n = 2, m = 3;
+    hBars = { 2, 3 }, vBars = { 2, 3, 4 };
+    result = leetCode.maximizeSquareHoleArea(n, m, hBars, vBars);
+    Logger::WriteMessage(hBars);
+    Logger::WriteMessage(vBars);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2941(void)
+{
+    Logger::WriteMessage("Test Leet Code 2941");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 2, 1, 4, 4, 4, 2 };
+    int k = 2;
+    long long result = leetCode.maxGcdSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 7,3,9,4 };
+    k = 1;
+    result = leetCode.maxGcdSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2941();
+    TestLeetCode2943();
     TestLeetCode2930();
     TestLeetCode2929();
     TestLeetCode2928();

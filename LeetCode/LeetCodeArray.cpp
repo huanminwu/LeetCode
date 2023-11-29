@@ -29644,3 +29644,202 @@ int LeetCodeArray::minOperationsSwap(vector<int>& nums1, vector<int>& nums2)
     }
     return min(count[0], count[1]);
 }
+
+/// <summary>
+/// Leet Code 2938. Separate Black and White Balls
+///  
+/// Medium
+///
+/// There are n balls on a table, each ball has a color black or white.
+///
+/// You are given a 0-indexed binary string s of length n, where 1 and 0 
+/// represent black and white balls, respectively.
+///
+/// In each step, you can choose two adjacent balls and swap them.
+///
+/// Return the minimum number of steps to group all the black balls to the 
+/// right and all the white balls to the left.
+/// 
+/// Example 1:
+/// Input: s = "101"
+/// Output: 1
+/// Explanation: We can group all the black balls to the right in the 
+/// following way:
+/// - Swap s[0] and s[1], s = "011".
+/// Initially, 1s are not grouped together, requiring at least 1 step to 
+/// group them to the right.
+///
+/// Example 2:
+/// Input: s = "100"
+/// Output: 2
+/// Explanation: We can group all the black balls to the right in the 
+/// following way:
+/// - Swap s[0] and s[1], s = "010".
+/// - Swap s[1] and s[2], s = "001".
+/// It can be proven that the minimum number of steps needed is 2.
+///
+/// Example 3:
+/// Input: s = "0111"
+/// Output: 0
+/// Explanation: All the black balls are already grouped to the right.
+/// 
+/// Constraints:
+/// 1. 1 <= n == s.length <= 10^5
+/// 2. s[i] is either '0' or '1'.
+/// </summary>
+long long LeetCodeArray::minimumSteps(string s)
+{
+    int one = 0;
+    long long result = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '1') one++;
+        else (result += (long long)one);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2946. Matrix Similarity After Cyclic Shifts
+///  
+/// Easy
+///
+/// You are given a 0-indexed m x n integer matrix mat and an integer k. You 
+/// have to cyclically right shift odd indexed rows k times and cyclically 
+/// left shift even indexed rows k times.
+///
+/// Return true if the initial and final matrix are exactly the same and false 
+/// otherwise.
+/// 
+/// Example 1:
+/// Input: mat = [[1,2,1,2],[5,5,5,5],[6,3,6,3]], k = 2
+/// Output: true
+/// Explanation:
+/// Initially, the matrix looks like the first figure. 
+/// Second figure represents the state of the matrix after one right and left 
+/// cyclic shifts to even and odd indexed rows.
+/// Third figure is the final state of the matrix after two cyclic shifts 
+/// which is similar to the initial matrix.
+/// Therefore, return true.
+///
+/// Example 2:
+/// Input: mat = [[2,2],[2,2]], k = 3
+/// Output: true
+/// Explanation: As all the values are equal in the matrix, even after 
+/// performing cyclic shifts the matrix will remain the same. Therefeore, 
+/// we return true.
+///
+/// Example 3:
+/// Input: mat = [[1,2]], k = 1
+/// Output: false
+/// Explanation: After one cyclic shift, mat = [[2,1]] which is not equal 
+/// to the initial matrix. Therefore we return false.
+/// 
+/// Constraints:
+/// 1. 1 <= mat.length <= 25
+/// 2. 1 <= mat[i].length <= 25
+/// 3. 1 <= mat[i][j] <= 25
+/// 4. 1 <= k <= 50
+/// </summary>
+bool LeetCodeArray::areSimilar(vector<vector<int>>& mat, int k)
+{
+    int n = mat[0].size();
+    k = k % n;
+    for (size_t i = 0; i < mat.size(); i++)
+    {
+        for (size_t j = 0; j < mat[i].size(); j++)
+        {
+            if (i % 2 == 0)
+            {
+                if (mat[i][j] != mat[i][(j + k) % n])
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (mat[i][j] != mat[i][(j - k + n) % n])
+                {
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet Code 2945. Find Maximum Non-decreasing Array Length
+///  
+/// Hard
+///
+/// You are given a 0-indexed integer array nums.
+///
+/// You can perform any number of operations, where each operation involves 
+/// selecting a subarray of the array and replacing it with the sum of its 
+/// elements. For example, if the given array is [1,3,5,6] and you select 
+/// subarray [3,5] the array will convert to [1,8,6].
+///
+/// Return the maximum length of a non-decreasing array that can be made after 
+/// applying operations.
+///
+/// A subarray is a contiguous non-empty sequence of elements within an array.
+///
+/// Example 1:
+/// Input: nums = [5,2,2]
+/// Output: 1
+/// Explanation: This array with length 3 is not non-decreasing.
+/// We have two ways to make the array length two.
+/// First, choosing subarray [2,2] converts the array to [5,4].
+/// Second, choosing subarray [5,2] converts the array to [7,2].
+/// In these two ways the array is not non-decreasing.
+/// And if we choose subarray [5,2,2] and replace it with [9] it becomes 
+/// non-decreasing. 
+/// So the answer is 1.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4]
+/// Output: 4
+/// Explanation: The array is non-decreasing. So the answer is 4.
+///
+/// Example 3:
+/// Input: nums = [4,3,2,6]
+/// Output: 3
+/// Explanation: Replacing [3,2] with [5] converts the given array to [4,5,6] 
+/// that is non-decreasing.
+/// Because the given array is not non-decreasing, the maximum possible 
+/// answer is 3.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeArray::findMaximumLength(vector<int>& nums)
+{
+    vector<vector<long long>> arr = { {0, 0, 0} };
+    size_t p = 0;
+    long long sum = 0;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        sum += nums[i];
+        p = min(p, arr.size() - 1);
+        while (p < arr.size())
+        {
+            if (sum - arr[p][0] < arr[p][1])
+            {
+                break;
+            }
+            p++;
+        }
+        long long last = sum - arr[p - 1][0];
+        int count = (int)(arr[p-1][2] + 1);
+        while (arr.back()[0] + arr.back()[1] > sum + last)
+        {
+            arr.pop_back();
+        }
+        arr.push_back({ sum, last, count });
+        result = max(result, (int)count);
+    }
+    return result;
+}

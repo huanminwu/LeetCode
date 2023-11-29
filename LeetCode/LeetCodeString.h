@@ -13291,6 +13291,79 @@ public:
     /// 7. access_times[i][1] consists only of '0' to '9'.
     /// </summary>
     vector<string> findHighAccessEmployees(vector<vector<string>>& access_times);
+
+    /// <summary>
+    /// Leet Code 2937. Make Three Strings Equal
+    ///  
+    /// Easy
+    ///
+    /// You are given three strings s1, s2, and s3. You have to perform the 
+    /// following operation on these three strings as many times as you want.
+    ///  
+    /// In one operation you can choose one of these three strings such that 
+    /// its length is at least 2 and delete the rightmost character of it.
+    ///  
+    /// Return the minimum number of operations you need to perform to make the 
+    /// three strings equal if there is a way to make them equal, otherwise, 
+    /// return -1.
+    /// 
+    /// Example 1:
+    /// Input: s1 = "abc", s2 = "abb", s3 = "ab"
+    /// Output: 2
+    /// Explanation: Performing operations on s1 and s2 once will lead to three 
+    /// equal strings.
+    /// It can be shown that there is no way to make them equal with less than 
+    /// two operations.
+    ///
+    /// Example 2:
+    /// Input: s1 = "dac", s2 = "bac", s3 = "cac"
+    /// Output: -1
+    /// Explanation: Because the leftmost letters of s1 and s2 are not equal, they 
+    /// could not be equal after any number of operations. So the answer is -1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s1.length, s2.length, s3.length <= 100
+    /// 2. s1, s2 and s3 consist only of lowercase English letters.
+    /// </summary>
+    int findMinimumOperations(string s1, string s2, string s3);
+
+    /// <summary>
+    /// Leet Code 2942. Find Words Containing Character
+    ///  
+    /// Easy
+    ///
+    /// You are given a 0-indexed array of strings words and a character x.
+    ///
+    /// Return an array of indices representing the words that contain the 
+    /// character x.
+    ///
+    /// Note that the returned array may be in any order.
+    /// 
+    /// Example 1:
+    /// Input: words = ["leet","code"], x = "e"
+    /// Output: [0,1]
+    /// Explanation: "e" occurs in both words: "leet", and "code". Hence, we 
+    /// return indices 0 and 1.
+    ///
+    /// Example 2:
+    /// Input: words = ["abc","bcd","aaaa","cbc"], x = "a"
+    /// Output: [0,2]
+    /// Explanation: "a" occurs in "abc", and "aaaa". Hence, we return 
+    /// indices 0 and 2.
+    ///
+    /// Example 3:
+    /// Input: words = ["abc","bcd","aaaa","cbc"], x = "z"
+    /// Output: []
+    /// Explanation: "z" does not occur in any of the words. Hence, we return an 
+    /// empty array.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= words.length <= 50
+    /// 2. 1 <= words[i].length <= 50
+    /// 3. x is a lowercase English letter.
+    /// 4. words[i] consists only of lowercase English letters.
+    /// </summary>
+    vector<int> findWordsContaining(vector<string>& words, char x);
 #pragma endregion
 };
 

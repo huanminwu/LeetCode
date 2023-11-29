@@ -3662,8 +3662,69 @@ void TestLeetCode2931(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2940(void)
+{
+    Logger::WriteMessage("Test Leet Code 2940");
+    LeetCodeSort leetCode;
+    vector<int> heights = { 6, 4, 8, 5, 2, 7 };
+    vector<vector<int>> queries = { {0, 1},{0, 3},{2, 4},{3, 4},{2, 2} };
+    vector<int> result = leetCode.leftmostBuildingQueries(heights, queries);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    heights = { 5, 3, 8, 2, 6, 1, 4, 6 };
+    queries = { {0, 7},{3, 5},{5, 2},{3, 0},{1, 6} };
+    result = leetCode.leftmostBuildingQueries(heights, queries);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    heights = { 1, 2, 1, 2, 1, 2 };
+    queries = { {1, 2} };
+    result = leetCode.leftmostBuildingQueries(heights, queries);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2948(void)
+{
+    Logger::WriteMessage("Test Leet Code 2948");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 5, 3, 9, 8 };
+    int limit = 2;
+    vector<int> result = leetCode.lexicographicallySmallestArray(nums, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("limit = " +  to_string(limit));
+    Logger::WriteMessage(result);
+
+    nums = { 1,7,6,18,2,1 };
+    limit = 3;
+    result = leetCode.lexicographicallySmallestArray(nums, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("limit = " + to_string(limit));
+    Logger::WriteMessage(result);
+
+    nums = { 1,7,28,19,10 };
+    limit = 3;
+    result = leetCode.lexicographicallySmallestArray(nums, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("limit = " + to_string(limit));
+    Logger::WriteMessage(result);
+
+    nums = { 4, 52, 38, 59, 71, 27, 31, 83, 88, 10 };
+    limit = 14;
+    result = leetCode.lexicographicallySmallestArray(nums, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("limit = " + to_string(limit));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode2948();
+    TestLeetCode2940();
     TestLeetCode2931();
     TestLeetCode2926();
     TestLeetCode2908();

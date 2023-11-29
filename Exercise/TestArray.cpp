@@ -9517,8 +9517,81 @@ void TestLeetCode2934(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2938(void)
+{
+    Logger::WriteMessage("Test Leet Code 2938");
+    LeetCodeArray leetCode;
+    string s = "101";
+    long long result = leetCode.minimumSteps(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "100";
+    result = leetCode.minimumSteps(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "0111";
+    result = leetCode.minimumSteps(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode2946(void)
+{
+    Logger::WriteMessage("Test Leet Code 2946");
+    LeetCodeArray leetCode;
+    vector<vector<int>> mat = { {1, 2, 1, 2},{5, 5, 5, 5},{6, 3, 6, 3} };
+    int k = 2;
+    bool result = leetCode.areSimilar(mat, k);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    mat = { {2, 2},{2, 2} };
+    k = 3;
+    result = leetCode.areSimilar(mat, k);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    mat = { {1, 2} };
+    k = 1;
+    result = leetCode.areSimilar(mat, k);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2945(void)
+{
+    Logger::WriteMessage("Test Leet Code 2945");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 5, 2, 2 };
+    int result = leetCode.findMaximumLength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    result = leetCode.findMaximumLength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,3,2,6 };
+    result = leetCode.findMaximumLength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 618, 615, 742, 314, 584, 376 };
+    result = leetCode.findMaximumLength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 546, 575, 247, 650, 178, 752, 356, 318, 131, 438 };
+    result = leetCode.findMaximumLength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2945();
+    TestLeetCode2946();
+    TestLeetCode2938();
     TestLeetCode2934();
     TestLeetCode2923();
     TestLeetCode2914();

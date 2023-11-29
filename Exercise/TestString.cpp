@@ -6415,8 +6415,51 @@ void TestLeetCode2933(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2937(void)
+{
+    Logger::WriteMessage("Test Leet Code 2937");
+    LeetCodeString leetCode;
+    string s1 = "abc", s2 = "abb", s3 = "ab";
+    int result = leetCode.findMinimumOperations(s1, s2, s3);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "; s3 = " + s3);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s1 = "dac", s2 = "bac", s3 = "cac";
+    result = leetCode.findMinimumOperations(s1, s2, s3);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "; s3 = " + s3);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2942(void)
+{
+    Logger::WriteMessage("Test Leet Code 2942");
+    LeetCodeString leetCode;
+    vector<string> words = { "leet", "code" };
+    char x = 'e';
+    vector<int> result = leetCode.findWordsContaining(words, x);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("x = " + string(1, x));
+    Logger::WriteMessage(result);
+
+    words = { "abc","bcd","aaaa","cbc" };
+    x = 'a';
+    result = leetCode.findWordsContaining(words, x);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("x = " + string(1, x));
+    Logger::WriteMessage(result);
+
+    words = { "abc","bcd","aaaa","cbc" };
+    x = 'z';
+    result = leetCode.findWordsContaining(words, x);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("x = " + string(1, x));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2942();
+    TestLeetCode2937();
     TestLeetCode2933();
     TestLeetCode2840();
     TestLeetCode2843();
