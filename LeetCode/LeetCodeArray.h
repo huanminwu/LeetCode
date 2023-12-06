@@ -19065,5 +19065,214 @@ public:
     /// 2. 1 <= nums[i] <= 10^5
     /// </summary>
     int findMaximumLength(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2950. Number of Divisible Substrings
+    ///  
+    /// Medium
+    ///
+    /// Each character of the English alphabet has been mapped to a digit as shown 
+    /// below.
+    ///
+    /// A string is divisible if the sum of the mapped values of its characters is 
+    /// divisible by its length.
+    ///
+    /// Given a string s, return the number of divisible substrings of s.
+    ///
+    /// A substring is a contiguous non-empty sequence of characters within a string.
+    ///
+    /// Example 1:
+    /// Substring   Mapped  Sum Length  Divisible?
+    /// a   1   1   1   Yes
+    /// s   7   7   1   Yes
+    /// d   2   2   1   Yes
+    /// f   3   3   1   Yes
+    /// as  1,  7   8   2   Yes
+    /// sd  7, 2    9   2   No
+    /// df  2, 3    5   2   No
+    /// asd 1, 7, 2 10  3   No
+    /// sdf 7, 2, 3 12  3   Yes
+    /// asdf    1, 7, 2, 3  13  4   No
+    /// Input: word = "asdf"
+    /// Output: 6
+    /// Explanation: The table above contains the details about every substring of 
+    /// word, and we can see that 6 of them are divisible.
+    ///
+    /// Example 2:
+    /// Input: word = "bdh"
+    /// Output: 4
+    /// Explanation: The 4 divisible substrings are: "b", "d", "h", "bdh".
+    /// It can be shown that there are no other substrings of word that are 
+    /// divisible.
+    ///
+    /// Example 3:
+    /// Input: word = "abcd"
+    /// Output: 6
+    /// Explanation: The 6 divisible substrings are: "a", "b", "c", "d", "ab", 
+    /// "cd".
+    /// It can be shown that there are no other substrings of word that are 
+    /// divisible.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= word.length <= 2000
+    /// </summary>
+    int countDivisibleSubstrings(string word);
+
+    /// <summary>
+    /// Leet Code 2947. Count Beautiful Substrings I
+    ///  
+    /// Medium
+    ///
+    /// You are given a string s and a positive integer k.
+    ///
+    /// Let vowels and consonants be the number of vowels and consonants in a 
+    /// string.
+    ///
+    /// A string is beautiful if:
+    ///
+    /// vowels == consonants.
+    /// (vowels * consonants) % k == 0, in other terms the multiplication of 
+    /// vowels and consonants is divisible by k.
+    /// Return the number of non-empty beautiful substrings in the given string s.
+    ///
+    /// A substring is a contiguous sequence of characters in a string.
+    /// Vowel letters in English are 'a', 'e', 'i', 'o', and 'u'.
+    /// Consonant letters in English are every letter except vowels.
+    ///
+    /// Example 1:
+    /// Input: s = "baeyh", k = 2
+    /// Output: 2
+    /// Explanation: There are 2 beautiful substrings in the given string.
+    /// - Substring "baeyh", vowels = 2 (["a",e"]), consonants = 2 (["y","h"]).
+    /// You can see that string "aeyh" is beautiful as vowels == consonants and 
+    /// vowels * consonants % k == 0.
+    /// - Substring "baeyh", vowels = 2 (["a",e"]), consonants = 2 (["b","y"]). 
+    /// You can see that string "baey" is beautiful as vowels == consonants and 
+    /// vowels * consonants % k == 0.
+    /// It can be shown that there are only 2 beautiful substrings in the given 
+    /// string.
+    ///
+    /// Example 2:
+    /// Input: s = "abba", k = 1
+    /// Output: 3
+    /// Explanation: There are 3 beautiful substrings in the given string.
+    /// - Substring "abba", vowels = 1 (["a"]), consonants = 1 (["b"]). 
+    /// - Substring "abba", vowels = 1 (["a"]), consonants = 1 (["b"]).
+    /// - Substring "abba", vowels = 2 (["a","a"]), consonants = 2 (["b","b"]).
+    /// It can be shown that there are only 3 beautiful substrings in the given 
+    /// string.
+    ///
+    /// Example 3:
+    /// Input: s = "bcdf", k = 1
+    /// Output: 0
+    /// Explanation: There are no beautiful substrings in the given string.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 1000
+    /// 2. 1 <= k <= 1000
+    /// 3. s consists of only English lowercase letters.
+    /// </summary>
+    int beautifulSubstrings(string s, int k);
+
+    /// <summary>
+    /// Leet Code 2949. Count Beautiful Substrings II
+    ///  
+    /// Hard
+    ///
+    /// You are given a string s and a positive integer k.
+    /// 
+    /// Let vowels and consonants be the number of vowels and consonants in a 
+    /// string.
+    ///
+    /// A string is beautiful if:
+    ///
+    /// vowels == consonants.
+    /// (vowels * consonants) % k == 0, in other terms the multiplication of 
+    /// vowels and consonants is divisible by k.
+    /// Return the number of non-empty beautiful substrings in the given string s.
+    ///
+    /// A substring is a contiguous sequence of characters in a string.
+    ///
+    /// Vowel letters in English are 'a', 'e', 'i', 'o', and 'u'.
+    ///
+    /// Consonant letters in English are every letter except vowels.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: s = "baeyh", k = 2
+    /// Output: 2
+    /// Explanation: There are 2 beautiful substrings in the given string.
+    /// - Substring "baeyh", vowels = 2 (["a",e"]), consonants = 2 (["y","h"]).
+    /// You can see that string "aeyh" is beautiful as vowels == consonants and 
+    /// vowels * consonants % k == 0.
+    /// - Substring "baeyh", vowels = 2 (["a",e"]), consonants = 2 (["b","y"]).
+    /// You can see that string "baey" is beautiful as vowels == consonants and 
+    /// vowels * consonants % k == 0.
+    /// It can be shown that there are only 2 beautiful substrings in the given 
+    /// string.
+    ///
+    /// Example 2:
+    /// Input: s = "abba", k = 1
+    /// Output: 3
+    /// Explanation: There are 3 beautiful substrings in the given string.
+    /// - Substring "abba", vowels = 1 (["a"]), consonants = 1 (["b"]).
+    /// - Substring "abba", vowels = 1 (["a"]), consonants = 1 (["b"]).
+    /// - Substring "abba", vowels = 2 (["a","a"]), consonants = 2 (["b","b"]).
+    /// It can be shown that there are only 3 beautiful substrings in the given 
+    /// string.
+    ///
+    /// Example 3:
+    /// Input: s = "bcdf", k = 1
+    /// Output: 0
+    /// Explanation: There are no beautiful substrings in the given string.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 5 * 10^4
+    /// 2. 1 <= k <= 1000
+    /// 3. s consists of only English lowercase letters.
+    /// </summary>
+    long long beautifulSubstringsII(string s, int k);
+
+    /// <summary>
+    /// Leet Code 2951. Find the Peaks
+    ///  
+    /// Easy
+    /// You are given a 0-indexed array mountain. Your task is to find all the 
+    /// peaks in the mountain array.
+    ///
+    /// Return an array that consists of indices of peaks in the given array in 
+    /// any order.
+    ///
+    /// Notes:
+    ///
+    /// A peak is defined as an element that is strictly greater than its 
+    /// neighboring elements.
+    /// The first and last elements of the array are not a peak.
+    /// 
+    /// Example 1:
+    /// Input: mountain = [2,4,4]
+    /// Output: []
+    /// Explanation: mountain[0] and mountain[2] can not be a peak because they 
+    /// are first and last elements of the array.
+    /// mountain[1] also can not be a peak because it is not strictly greater than 
+    /// mountain[2].
+    /// So the answer is [].
+    ///
+    /// Example 2:
+    /// Input: mountain = [1,4,3,8,5]
+    /// Output: [1,3]
+    /// Explanation: mountain[0] and mountain[4] can not be a peak because they 
+    /// are first and last elements of the array.
+    /// mountain[2] also can not be a peak because it is not strictly greater 
+    /// than mountain[3] and mountain[1].
+    /// But mountain [1] and mountain[3] are strictly greater than their 
+    /// neighboring elements.
+    /// So the answer is [1,3].
+    /// 
+    /// Constraints:
+    /// 1. 3 <= mountain.length <= 100
+    /// 2. 1 <= mountain[i] <= 100
+    /// </summary>
+    vector<int> findPeaks(vector<int>& mountain);
 };
 #endif  // LeetCodeArray_H

@@ -6456,8 +6456,29 @@ void TestLeetCode2942(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2953(void)
+{
+    Logger::WriteMessage("Test Leet Code 2953");
+    LeetCodeString leetCode;
+    string word = "igigee";
+    int k = 2;
+    int result = leetCode.countCompleteSubstrings(word, k);
+    Logger::WriteMessage("word = " + word + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    word = "aaabbbccc";
+    k = 3;
+    result = leetCode.countCompleteSubstrings(word, k);
+    Logger::WriteMessage("word = " + word + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    word = "baaa";
+    k = 2;
+    result = leetCode.countCompleteSubstrings(word, k);
+    Logger::WriteMessage("word = " + word + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2953();
     TestLeetCode2942();
     TestLeetCode2937();
     TestLeetCode2933();

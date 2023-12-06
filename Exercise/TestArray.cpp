@@ -9587,8 +9587,80 @@ void TestLeetCode2945(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2950(void)
+{
+    Logger::WriteMessage("Test Leet Code 2950");
+    LeetCodeArray leetCode;
+    string word = "asdf";
+    int result = leetCode.countDivisibleSubstrings(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "bdh";
+    result = leetCode.countDivisibleSubstrings(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "abcd";
+    result = leetCode.countDivisibleSubstrings(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+}
+
+void TestLeetCode2947(void)
+{
+    Logger::WriteMessage("Test Leet Code 2947");
+    LeetCodeArray leetCode;
+    string s = "baeyh";
+    int k = 2;
+    int result = leetCode.beautifulSubstrings(s, k);
+    Logger::WriteMessage("s = " + s + "k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "abba", k = 1;
+    result = leetCode.beautifulSubstrings(s, k);
+    Logger::WriteMessage("s = " + s + "k = " + to_string(k) + "; result = " + to_string(result));
+    
+    s = "bcdf", k = 1;
+    result = leetCode.beautifulSubstrings(s, k);
+    Logger::WriteMessage("s = " + s + "k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2949(void)
+{
+    Logger::WriteMessage("Test Leet Code 2949");
+    LeetCodeArray leetCode;
+    string s = "baeyh";
+    int k = 2;
+    long long result = leetCode.beautifulSubstringsII(s, k);
+    Logger::WriteMessage("s = " + s + "k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "abba", k = 1;
+    result = leetCode.beautifulSubstringsII(s, k);
+    Logger::WriteMessage("s = " + s + "k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "bcdf", k = 1;
+    result = leetCode.beautifulSubstringsII(s, k);
+    Logger::WriteMessage("s = " + s + "k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2951(void)
+{
+    Logger::WriteMessage("Test Leet Code 2951");
+    LeetCodeArray leetCode;
+    vector<int> mountain = { 2, 4, 4 };
+    vector<int> result = leetCode.findPeaks(mountain);
+    Logger::WriteMessage(mountain);
+    Logger::WriteMessage(result);
+
+    mountain = { 1,4,3,8,5 };
+    result = leetCode.findPeaks(mountain);
+    Logger::WriteMessage(mountain);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2951();
+    TestLeetCode2949();
+    TestLeetCode2947();
+    TestLeetCode2950();
     TestLeetCode2945();
     TestLeetCode2946();
     TestLeetCode2938();

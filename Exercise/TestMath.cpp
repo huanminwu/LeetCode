@@ -6412,8 +6412,32 @@ void TestLeetCode2941(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2952(void)
+{
+    Logger::WriteMessage("Test Leet Code 2952");
+    LeetCodeMath leetCode;
+    vector<int> coins = { 1, 4, 10 };
+    int target = 19;
+    int result = leetCode.minimumAddedCoins(coins, target);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    coins = { 1,4,10,5,7,19 };
+    target = 19;
+    result = leetCode.minimumAddedCoins(coins, target);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    coins = { 1,1,1 };
+    target = 20;
+    result = leetCode.minimumAddedCoins(coins, target);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode2952();
     TestLeetCode2941();
     TestLeetCode2943();
     TestLeetCode2930();
