@@ -43,9 +43,9 @@
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeArray();
     TestLeetCodeString();
     TestLeetCodeMath();
-    TestLeetCodeArray();
     TestLeetCodeSort();
     TestLeetCodeDP();
     TestLeetCodeBit();

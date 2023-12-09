@@ -9655,8 +9655,28 @@ void TestLeetCode2951(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2955(void)
+{
+    Logger::WriteMessage("Test Leet Code 2955");
+    LeetCodeArray leetCode;
+    string s = "abcaab";
+    vector<vector<int>> queries = { {0, 0},{1, 4},{2, 5},{0, 5} };
+    vector<int> result = leetCode.sameEndSubstringCount(s, queries);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    s = "abcd";
+    queries = { {0,3} };
+    result = leetCode.sameEndSubstringCount(s, queries);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2955();
     TestLeetCode2951();
     TestLeetCode2949();
     TestLeetCode2947();
