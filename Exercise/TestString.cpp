@@ -6476,8 +6476,26 @@ void TestLeetCode2953(void)
     Logger::WriteMessage("word = " + word + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2957(void)
+{
+    Logger::WriteMessage("Test Leet Code 2957");
+    LeetCodeString leetCode;
+    string word = "aaaaa";
+    int result = leetCode.removeAlmostEqualCharacters(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "abddez";
+    result = leetCode.removeAlmostEqualCharacters(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "zyxyxyz";
+    result = leetCode.removeAlmostEqualCharacters(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2957();
     TestLeetCode2953();
     TestLeetCode2942();
     TestLeetCode2937();

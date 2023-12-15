@@ -5094,4 +5094,221 @@ int LeetCodeHashtable::minOperations(vector<int>& nums)
     return result;
 }
 
+
+/// <summary>
+/// Leet Code 2956. Find Common Elements Between Two Arrays
+///  
+/// Easy
+///
+/// You are given two 0-indexed integer arrays nums1 and nums2 of sizes n and 
+/// m, respectively.
+///
+/// Consider calculating the following values:
+///
+/// The number of indices i such that 0 <= i < n and nums1[i] occurs at least 
+/// once in nums2.
+/// The number of indices i such that 0 <= i < m and nums2[i] occurs at least 
+/// once in nums1.
+/// Return an integer array answer of size 2 containing the two values in the 
+/// above order.
+/// 
+/// Example 1:
+/// Input: nums1 = [4,3,2,3,1], nums2 = [2,2,5,2,3,6]
+/// Output: [3,4]
+/// Explanation: We calculate the values as follows:
+/// - The elements at indices 1, 2, and 3 in nums1 occur at least once in 
+///   nums2. So the first value is 3.
+/// - The elements at indices 0, 1, 3, and 4 in nums2 occur at least once in 
+///   nums1. So the second value is 4.
+///
+/// Example 2:
+/// Input: nums1 = [3,4,2,3], nums2 = [1,5]
+/// Output: [0,0]
+/// Explanation: There are no common elements between the two arrays, so the 
+/// two values will be 0.
+///
+/// Constraints:
+/// 1. n == nums1.length
+/// 2. m == nums2.length
+/// 3. 1 <= n, m <= 100
+/// 4. 1 <= nums1[i], nums2[i] <= 100
+/// </summary>
+vector<int> LeetCodeHashtable::findIntersectionValues(vector<int>& nums1, vector<int>& nums2)
+{
+    unordered_set<int> set1, set2;
+    for (auto x : nums1) set1.insert(x);
+    for (auto x : nums2) set2.insert(x);
+    vector<int> result(2);
+    for (size_t i = 0; i < nums1.size(); i++)
+    {
+        if (set2.count(nums1[i]) > 0)
+        {
+            result[0]++;
+        }
+    }
+    for (size_t i = 0; i < nums2.size(); i++)
+    {
+        if (set1.count(nums2[i]) > 0)
+        {
+            result[1]++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2961. Double Modular Exponentiation
+///  
+/// Medium
+///
+/// You are given a 0-indexed 2D array variables where variables[i] = [ai, bi, 
+/// ci, mi], and an integer target.
+///
+/// An index i is good if the following formula holds:
+/// 
+/// 0 <= i < variables.length
+/// ((ai^bi % 10)^ci) % mi == target
+/// Return an array consisting of good indices in any order.
+/// 
+/// Example 1:
+/// Input: variables = [[2,3,3,10],[3,3,3,1],[6,1,1,4]], target = 2
+/// Output: [0,2]
+/// Explanation: For each index i in the variables array:
+/// 1) For the index 0, variables[0] = [2,3,3,10], (2^3 % 10)^3 % 10 = 2.
+/// 2) For the index 1, variables[1] = [3,3,3,1], (3^3 % 10)^3 % 1 = 0.
+/// 3) For the index 2, variables[2] = [6,1,1,4], (6^1 % 10)^1 % 4 = 2.
+/// Therefore we return [0,2] as the answer.
+///
+/// Example 2:
+/// Input: variables = [[39,3,1000,1000]], target = 17
+/// Output: []
+/// Explanation: For each index i in the variables array:
+/// 1) For the index 0, variables[0] = [39,3,1000,1000], (39^3 % 10)^1000 % 1000 = 1.
+/// Therefore we return [] as the answer.
+/// 
+/// Constraints:
+/// 1. 1 <= variables.length <= 100
+/// 2. variables[i] == [ai, bi, ci, mi]
+/// 3. 1 <= ai, bi, ci, mi <= 10^3
+/// 4. 0 <= target <= 10^3
+/// </summary>
+vector<int> LeetCodeHashtable::getGoodIndices(vector<vector<int>>& variables, int target)
+{
+    vector<int> result;
+    for (size_t i = 0; i < variables.size(); i++)
+    {
+        int count = 0;
+        unordered_set<int> repeat;
+        int a = variables[i][0];
+        int b = variables[i][1];
+        int c = variables[i][2];
+        int m = variables[i][3];
+
+        int p = 0;
+        int product = 1;
+        for (int j = 0; j < b; j++)
+        {
+            product = product * a % 10;
+            if (repeat.count(product) > 0)
+            {
+                b = b % j;
+                if (b == 0) b = j;
+                break;
+            }
+            if (product == 0)
+            {
+                a = 0;
+                b = 1;
+                break;
+            }
+            repeat.insert(product);
+        }
+        product = 1;
+        for (int j = 0; j < b; j++)
+        {
+            product = product * a % 10;
+        }
+        a = product;
+        product = 1;
+        repeat.clear();
+        for (int j = 0; j < c; j++)
+        {
+            product = product * a % m;
+            if (repeat.count(product) > 0)
+            {
+                c = c % j;
+                if (c == 0) c = j;
+                break;
+            }
+            if (product == 0)
+            {
+                a = 0;
+                c = 1;
+                break;
+            }
+            repeat.insert(product);
+        }
+        product = 1;
+        for (int j = 0; j < c; j++)
+        {
+            product = product * a % m;
+        }
+        if (product == target) result.push_back(i);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2964. Number of Divisible Triplet Sums
+///  
+/// Medium
+///
+/// Given a 0-indexed integer array nums and an integer d, return the number 
+/// of triplets (i, j, k) such that i < j < k and (nums[i] + nums[j] + 
+/// nums[k]) % d == 0.
+///
+/// Example 1:
+/// Input: nums = [3,3,4,7,8], d = 5
+/// Output: 3
+/// Explanation: The triplets which are divisible by 5 are: (0, 1, 2), 
+/// (0, 2, 4), (1, 2, 4).
+/// It can be shown that no other triplet is divisible by 5. Hence, the answer 
+/// is 3.
+///
+/// Example 2:
+/// Input: nums = [3,3,3,3], d = 3
+/// Output: 4
+/// Explanation: Any triplet chosen here has a sum of 9, which is divisible 
+/// by 3. Hence, the answer is the total number of triplets which is 4.
+///
+/// Example 3:
+/// Input: nums = [3,3,3,3], d = 6
+/// Output: 0
+/// Explanation: Any triplet chosen here has a sum of 9, which is not 
+/// divisible by 6. Hence, the answer is 0.
+///  
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= d <= 10^9
+/// </summary>
+int LeetCodeHashtable::divisibleTripletCount(vector<int>& nums, int d)
+{
+    int result = 0;
+    unordered_map<int, int> num_count;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (size_t j = i + 1; j < nums.size(); j++)
+        {
+            long long sum = (long long)nums[i] + (long long)nums[j];
+            int reminder = (d - sum % d) % d;
+            if (num_count.count(reminder) > 0)
+            {
+                result += num_count[reminder];
+            }
+        }
+        num_count[nums[i] % d]++;
+    }
+    return result;
+}
 #pragma endregion

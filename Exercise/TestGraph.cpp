@@ -5519,8 +5519,54 @@ void TestLeetCode2924(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2959(void)
+{
+    Logger::WriteMessage("Test Leet Code 2959");
+    LeetCodeGraph leetCode;
+    int n = 3;
+    int maxDistance = 5;
+    vector<vector<int>> roads = { {0, 1, 2},{1, 2, 10},{0, 2, 10} };
+    int result = leetCode.numberOfSets(n, maxDistance, roads);
+    Logger::WriteMessage("n = " + to_string(n) + "; maxDistance = " + to_string(maxDistance));
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    maxDistance = 5;
+    roads = { {0, 1, 20},{0, 1, 10},{1, 2, 2},{0, 2, 2} };
+    result = leetCode.numberOfSets(n, maxDistance, roads);
+    Logger::WriteMessage("n = " + to_string(n) + "; maxDistance = " + to_string(maxDistance));
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 1;
+    maxDistance = 10;
+    roads = { };
+    result = leetCode.numberOfSets(n, maxDistance, roads);
+    Logger::WriteMessage("n = " + to_string(n) + "; maxDistance = " + to_string(maxDistance));
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4;
+    maxDistance = 17;
+    roads = { {2, 1, 28},{2, 0, 6},{1, 0, 28},{1, 0, 24},{1, 0, 18},{1, 0, 25},{0, 3, 10} };
+    result = leetCode.numberOfSets(n, maxDistance, roads);
+    Logger::WriteMessage("n = " + to_string(n) + "; maxDistance = " + to_string(maxDistance));
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 5;
+    maxDistance = 20;
+    roads = { {1, 0, 27},{2, 0, 8}, {2, 1, 3},{1, 0, 41},{4, 3, 36},{4, 2, 36},{4, 1, 8},{1, 0, 31},{3, 1, 12} };
+    result = leetCode.numberOfSets(n, maxDistance, roads);
+    Logger::WriteMessage("n = " + to_string(n) + "; maxDistance = " + to_string(maxDistance));
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2959();
     TestLeetCode2924();
     TestLeetCode2876();
     TestLeetCode2872();

@@ -606,9 +606,29 @@ void TestLeetCode2904(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode2958(void)
+{
+    Logger::WriteMessage("Test Leet Code 2958");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 1, 2, 3, 1, 2, 3, 1, 2 };
+    int k = 2;
+    int result = leetCode.maxSubarrayLength(nums, k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2,1,2,1,2,1,2 };
+    k = 1;
+    result = leetCode.maxSubarrayLength(nums, k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 5,5,5,5,5,5,5 };
+    k = 4;
+    result = leetCode.maxSubarrayLength(nums, k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
 
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2958();
     TestLeetCode2904();
     TestLeetCode2841();
     TestLeetCode2831();

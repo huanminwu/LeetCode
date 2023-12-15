@@ -9674,8 +9674,63 @@ void TestLeetCode2955(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2960(void)
+{
+    Logger::WriteMessage("Test Leet Code 2960");
+    LeetCodeArray leetCode;
+    vector<int> batteryPercentages = { 1, 1, 2, 1, 3 };
+    int result = leetCode.countTestedDevices(batteryPercentages);
+    Logger::WriteMessage(batteryPercentages);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    batteryPercentages = { 0,1,2 };
+    result = leetCode.countTestedDevices(batteryPercentages);
+    Logger::WriteMessage(batteryPercentages);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2962(void)
+{
+    Logger::WriteMessage("Test Leet Code 2962");
+    LeetCodeArray leetCode;
+    vector<int>nums = { 1, 3, 2, 3, 3 };
+    int k = 2;
+    long long result = leetCode.countSubarraysMaxValue(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,4,2,1 };
+    k = 3;
+    result = leetCode.countSubarraysMaxValue(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2963(void)
+{
+    Logger::WriteMessage("Test Leet Code 2963");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3, 4 };
+    int result = leetCode.numberOfGoodPartitions(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1,1 };
+    result = leetCode.numberOfGoodPartitions(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 2, 1, 3 };
+    result = leetCode.numberOfGoodPartitions(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2963();
+    TestLeetCode2962();
+    TestLeetCode2960();
     TestLeetCode2955();
     TestLeetCode2951();
     TestLeetCode2949();

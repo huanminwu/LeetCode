@@ -1729,8 +1729,98 @@ void TestLeetCode2870(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2956(void)
+{
+    Logger::WriteMessage("Test Leet Code 2956");
+    LeetCodeHashtable leetCode;
+    vector<int> nums1 = { 4, 3, 2, 3, 1 };
+    vector<int> nums2 = { 2, 2, 5, 2, 3, 6 };
+    vector<int> result = leetCode.findIntersectionValues(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(result);
+
+    nums1 = { 3,4,2,3 };
+    nums2 = { 1,5 };
+    result = leetCode.findIntersectionValues(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2961(void)
+{
+    Logger::WriteMessage("Test Leet Code 2961");
+    LeetCodeHashtable leetCode;
+    vector<vector<int>> variables =
+    { 
+        {2, 3, 3, 10},{3, 3, 3, 1},{6, 1, 1, 4} 
+    };
+    int target = 2;
+    vector<int> result = leetCode.getGoodIndices(variables, target);
+    Logger::WriteMessage(variables);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(result);
+
+    variables =
+    {
+        {39,3,1000,1000}
+    };
+    target = 17;
+    result = leetCode.getGoodIndices(variables, target);
+    Logger::WriteMessage(variables);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(result);
+
+    variables =
+    {
+        {2,2,3,2}
+    };
+    target = 0;
+    result = leetCode.getGoodIndices(variables, target);
+    Logger::WriteMessage(variables);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(result);
+
+    variables =
+    {
+        {8, 3, 5, 8}
+    };
+    target = 4;
+    result = leetCode.getGoodIndices(variables, target);
+    Logger::WriteMessage(variables);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2964(void)
+{
+    Logger::WriteMessage("Test Leet Code 2964");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = {3,3,4,7,8};
+    int d = 5;
+    int result = leetCode.divisibleTripletCount(nums, d);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+
+    nums = { 3,3,3,3 };
+    d = 3;
+    result = leetCode.divisibleTripletCount(nums, d);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+
+    nums = { 3,3,3,3 };
+    d = 6;
+    result = leetCode.divisibleTripletCount(nums, d);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode2964();
+    TestLeetCode2961();
+    TestLeetCode2956();
     TestLeetCode2870();
     TestLeetCode2857();
     TestLeetCode2834();
