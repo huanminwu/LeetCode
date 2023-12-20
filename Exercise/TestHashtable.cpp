@@ -155,6 +155,21 @@ void TestLeetCode217(void)
     Logger::WriteMessage("The list " + string(containsDuplicate ? "contains " : "does not contain ") + "duplicates.");
 }
 
+void TestLeetCode575(void)
+{
+    LeetCodeHashtable leetCode;
+    vector<int> candies = { 1, 1, 2, 2, 3, 3 };
+    int result = leetCode.distributeCandies(candies);
+    Logger::WriteMessage(candies);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    candies = { 1, 1, 2, 3 };
+    result = leetCode.distributeCandies(candies);
+    Logger::WriteMessage(candies);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCode734(void)
 {
     LeetCodeHashtable leetCode;

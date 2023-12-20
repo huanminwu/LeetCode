@@ -57,6 +57,18 @@ void TestLeetCode57(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode370(void)
+{
+    Logger::WriteMessage("Test Leet Code 370");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> updates = { {1, 3, 2}, {2, 4, 3}, {0, 2, -2} };
+    int length = 5;
+    vector<int> result = leetCode.getModifiedArray(length, updates);
+    Logger::WriteMessage(updates);
+    Logger::WriteMessage(result);
+}
+
+
 void TestLeetCode452(void)
 {
     Logger::WriteMessage("Test Leet Code 452");
@@ -1818,6 +1830,7 @@ void TestLeetCodeGreedy(void)
     TestLeetCode699();
     TestLeetCode495();
     TestLeetCode452();
+    TestLeetCode370();
     TestLeetCode435();
     TestLeetCode358();
     TestLeetCode253();

@@ -594,26 +594,6 @@ void TestLeetCode679(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
-void TestLeetCode422(void)
-{
-    Logger::WriteMessage("Test Leet Code 422");
-    LeetCodeDFS leetCode;
-    vector<string> words = { "abcd",  "bnrt", "crmy",  "dtye" };
-    bool isWordSquare = leetCode.validWordSquare(words);
-    Logger::WriteMessage(words);
-    Logger::WriteMessage("It is" + (string)(isWordSquare ? " " : " not ") + "a valid word square");
-
-    words = { "abcd",  "bnrt", "crm",  "dt" };
-    isWordSquare = leetCode.validWordSquare(words);
-    Logger::WriteMessage(words);
-    Logger::WriteMessage("It is" + (string)(isWordSquare ? " " : " not ") + "a valid word square");
-
-    words = { "ball",  "area", "read",  "lady" };
-    isWordSquare = leetCode.validWordSquare(words);
-    Logger::WriteMessage(words);
-    Logger::WriteMessage("It is" + (string)(isWordSquare ? " " : " not ") + "a valid word square");
-}
-
 void TestLeetCode87(void)
 {
     Logger::WriteMessage("Test Leet Code 87");
@@ -2413,7 +2393,6 @@ void TestLeetCodeDFS(void)
     TestLeetCode140();
     TestLeetCode131();
     TestLeetCode87();
-    TestLeetCode422();
     TestLeetCode679();
     TestLeetCode1397();
     TestLeetCode425();

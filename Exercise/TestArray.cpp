@@ -266,6 +266,26 @@ void TestLeetCode325(void)
     Logger::WriteMessage("k = " + to_string(k) + "; max_length = " + to_string(max_length));
 }
 
+void TestLeetCode422(void)
+{
+    Logger::WriteMessage("Test Leet Code 422");
+    LeetCodeArray leetCode;
+    vector<string> words = { "abcd",  "bnrt", "crmy",  "dtye" };
+    bool isWordSquare = leetCode.validWordSquare(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("It is" + (string)(isWordSquare ? " " : " not ") + "a valid word square");
+
+    words = { "abcd",  "bnrt", "crm",  "dt" };
+    isWordSquare = leetCode.validWordSquare(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("It is" + (string)(isWordSquare ? " " : " not ") + "a valid word square");
+
+    words = { "ball",  "area", "read",  "lady" };
+    isWordSquare = leetCode.validWordSquare(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("It is" + (string)(isWordSquare ? " " : " not ") + "a valid word square");
+}
+
 void TestLeetCode523(void)
 {
     Logger::WriteMessage("Test Leet Code 523");
@@ -2243,20 +2263,6 @@ void TestLeetCode548(void)
     Logger::WriteMessage("Can split into equal sum: " + (string)(result ? "true" : " false"));
 }
 
-void TestLeetCode575(void)
-{
-    LeetCodeArray leetCode;
-    vector<int> candies = { 1, 1, 2, 2, 3, 3 };
-    int result = leetCode.distributeCandies(candies);
-    Logger::WriteMessage(candies);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    candies = { 1, 1, 2, 3 };
-    result = leetCode.distributeCandies(candies);
-    Logger::WriteMessage(candies);
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
 void TestLeetCode1089(void)
 {
     Logger::WriteMessage("Test Leet Code 1089");
@@ -2395,17 +2401,6 @@ void TestLeetCode1460(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
-void TestLeetCode370(void)
-{
-    Logger::WriteMessage("Test Leet Code 370");
-    LeetCodeArray leetCode;
-    vector<vector<int>> updates = { {1, 3, 2}, {2, 4, 3}, {0, 2, -2} };
-    int length = 5;
-    vector<int> result = leetCode.getModifiedArray(length, updates);
-    Logger::WriteMessage(updates);
-    Logger::WriteMessage(result);
-}
-
 void TestLeetCode565(void)
 {
     LeetCodeArray leetCode;
@@ -2437,23 +2432,6 @@ void TestLeetCode644(void)
     nums = { 1, 2, 3, 4, -1, -2, -3, -4 };
     k = 4;
     max_avg = leetCode.findMaxAverageII(nums, 4);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage("k = " + to_string(k) + "; Maximum Average = " + to_string(max_avg));
-}
-
-void TestLeetCode643(void)
-{
-    Logger::WriteMessage("Test Leet Code 643");
-    LeetCodeArray leetCode;
-    vector<int> nums = { 1, 12, -5, -6, 50, 3 };
-    int k = 4;
-    double max_avg = leetCode.findMaxAverage(nums, 4);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage("k = " + to_string(k) + "; Maximum Average = " + to_string(max_avg));
-
-    nums = { 1, 2, 3, 4, -1, -2, -3, -4 };
-    k = 4;
-    max_avg = leetCode.findMaxAverage(nums, 4);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("k = " + to_string(k) + "; Maximum Average = " + to_string(max_avg));
 }
@@ -9726,8 +9704,44 @@ void TestLeetCode2963(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2965(void)
+{
+    Logger::WriteMessage("Test Leet Code 2965");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {1, 3},{2, 2} };
+    vector<int> result = leetCode.findMissingAndRepeatedValues(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid = { {9, 1, 7},{8, 9, 2},{3, 4, 6} };
+    result = leetCode.findMissingAndRepeatedValues(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2966(void)
+{
+    Logger::WriteMessage("Test Leet Code 2966");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 3, 4, 8, 7, 9, 3, 5, 1 };
+    int k = 2;
+    Logger::WriteMessage(nums);
+    vector<vector<int>> result = leetCode.divideArray(nums, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 1,3,3,2,7,3 };
+    k = 3;
+    Logger::WriteMessage(nums);
+    result = leetCode.divideArray(nums, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2966();
+    TestLeetCode2965();
     TestLeetCode2963();
     TestLeetCode2962();
     TestLeetCode2960();
@@ -10066,11 +10080,9 @@ void TestLeetCodeArray(void)
     TestLeetCode1470();
     TestLeetCode645();
     TestLeetCode605();
-    TestLeetCode643();
     TestLeetCode644();
     TestLeetCode624();
     TestLeetCode565();
-    TestLeetCode370();
     TestLeetCode1460();
     TestLeetCode475();
     TestLeetCode891();
@@ -10078,7 +10090,6 @@ void TestLeetCodeArray(void)
     TestLeetCode1074();
     TestLeetCode1063();
     TestLeetCode1089();
-    TestLeetCode575();
     TestLeetCode548();
     TestLeetCode566();
     TestLeetCode531();
@@ -10173,6 +10184,7 @@ void TestLeetCodeArray(void)
     TestLeetCode930();
     TestLeetCode560();
     TestLeetCode525();
+    TestLeetCode422();
     TestLeetCode523();
     TestLeetCode325();
     TestLeetCode152();

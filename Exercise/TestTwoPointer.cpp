@@ -33,6 +33,38 @@ void TestLeetCode42(void)
     Logger::WriteMessage(message);
 }
 
+void TestLeetCode424(void)
+{
+    Logger::WriteMessage("Test Leet Code 424");
+    LeetCodeTwoPointer leetCode;
+    string s = "AABABBA";
+    int k = 1;
+    int max_length = leetCode.characterReplacement(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + ";max length = " + to_string(max_length));
+
+    s = "ABAB";
+    k = 2;
+    max_length = leetCode.characterReplacement(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + ";max length = " + to_string(max_length));
+}
+
+void TestLeetCode643(void)
+{
+    Logger::WriteMessage("Test Leet Code 643");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 1, 12, -5, -6, 50, 3 };
+    int k = 4;
+    double max_avg = leetCode.findMaxAverage(nums, 4);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; Maximum Average = " + to_string(max_avg));
+
+    nums = { 1, 2, 3, 4, -1, -2, -3, -4 };
+    k = 4;
+    max_avg = leetCode.findMaxAverage(nums, 4);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; Maximum Average = " + to_string(max_avg));
+}
+
 void TestLeetCode658(void)
 {
     LeetCodeTwoPointer leetCode;
@@ -626,8 +658,26 @@ void TestLeetCode2958(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2968(void)
+{
+    Logger::WriteMessage("Test Leet Code 2968");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 1,2,6,4 };
+    int k = 3;
+    int result = leetCode.maxFrequencyScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,4,4,2,4 };
+    k = 0;
+    result = leetCode.maxFrequencyScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2968();
     TestLeetCode2958();
     TestLeetCode2904();
     TestLeetCode2841();
@@ -658,6 +708,8 @@ void TestLeetCodeTwoPointer(void)
     TestLeetCode881();
     TestLeetCode680();
     TestLeetCode658();
+    TestLeetCode643();
+    TestLeetCode424();
     TestLeetCode42();
     TestLeetCode11();
 }

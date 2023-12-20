@@ -2050,59 +2050,6 @@ int LeetCodeArray::shortestWordDistance(vector<string>& words, string word1, str
     return distance;
 }
 
-
-/// <summary>
-/// Leet code #370. Range Addition      
-/// 
-/// Assume you have an array of length n initialized with all 0's and are given k update operations.
-/// Each operation is represented as a triplet: [startIndex, endIndex, inc] which increments each 
-/// element of subarray A[startIndex ... endIndex] (startIndex and endIndex inclusive) with inc.
-/// 
-/// Return the modified array after all k operations were executed.
-/// Example: 
-/// Given:
-/// length = 5,
-/// updates = [
-///    [1,  3,  2],
-///    [2,  4,  3],
-///    [0,  2, -2]
-/// ]
-///
-/// Output:
-/// [-2, 0, 3, 5, 3]
-/// Explanation: 
-/// Initial state:
-/// [ 0, 0, 0, 0, 0 ]
-/// After applying operation [1, 3, 2]:
-/// [ 0, 2, 2, 2, 0 ]
-/// After applying operation [2, 4, 3]:
-/// [ 0, 2, 5, 5, 3 ]
-/// After applying operation [0, 2, -2]:
-/// [-2, 0, 3, 5, 3 ]
-/// Hint:
-/// 1.Thinking of using advanced data structures? You are thinking it too complicated.
-/// 2.For each update operation, do you really need to update all elements between i and j?
-/// 3.Update only the first and end element is sufficient.
-/// 4.The optimal time complexity is O(k + n) and uses O(1) extra space.
-/// </summary>
-vector<int> LeetCodeArray::getModifiedArray(int length, vector<vector<int>>& updates)
-{
-    vector<int> result(length);
-    for (size_t i = 0; i < updates.size(); i++)
-    {
-        result[updates[i][0]] += updates[i][2];
-        if (updates[i][1] + 1 < length)
-        {
-            result[updates[i][1] + 1] -= updates[i][2];
-        }
-    }
-    for (int i = 1; i < length; i++)
-    {
-        result[i] += result[i - 1];
-    }
-    return result;
-}
-
 /// <summary>
 /// Leet code #311. Sparse Matrix Multiplication       
 /// 
@@ -2602,41 +2549,6 @@ vector<vector<int>> LeetCodeArray::matrixReshape(vector<vector<int>>& nums, int 
     return result;
 }
 
-/// <summary>
-/// Leet code #575. Distribute Candies       
-/// 
-/// Given an integer array with even length, where different numbers in 
-/// this array represent different kinds of candies. Each number means one
-/// candy of the corresponding kind. You need to distribute these candies 
-/// equally in number to brother and sister. Return the maximum number of 
-/// kinds of candies the sister could gain. 
-/// 
-/// Example 1:
-/// Input: candies = [1,1,2,2,3,3]
-/// Output: 3
-/// Explanation:
-/// There are three different kinds of candies (1, 2 and 3), and two 
-/// candies for each kind.
-/// Optimal distribution: The sister has candies [1,2,3] and the brother 
-/// has candies [1,2,3], too. 
-/// The sister has three different kinds of candies. 
-/// Example 2:
-/// Input: candies = [1,1,2,3]
-/// Output: 2
-/// Explanation: For example, the sister has candies [2,3] and the brother 
-/// has candies [1,1]. 
-/// The sister has two different kinds of candies, the brother has only one
-/// kind of candies. 
-/// Note: 
-/// The length of the given array is in range [2, 10,000], and will be even.
-/// The number in given array is in range [-100,000, 100,000].
-/// </summary>
-int LeetCodeArray::distributeCandies(vector<int>& candies)
-{
-    unordered_map<int, int> candy_map;
-    for (int candy : candies) candy_map[candy]++;
-    return min(candy_map.size(), candies.size() / 2);
-}
 
 /// <summary>
 /// Leet code #565. Array Nesting   
@@ -2800,39 +2712,6 @@ int LeetCodeArray::maxDistance(vector<vector<int>>& arrays)
         max_distance = max(abs((int)(min_pairs[1].first + max_pairs[0].first)), abs((int)(min_pairs[0].first + max_pairs[1].first)));
     }
     return max_distance;
-}
-
-/// <summary>
-/// Leet code #643. Maximum Average Subarray I
-/// 
-/// Given an array consisting of n integers, find the contiguous subarray 
-/// of given length k that has the maximum average value. And you need to 
-/// output the maximum average value. 
-///
-/// Example 1:
-/// Input: [1,12,-5,-6,50,3], k = 4
-/// Output: 12.75
-/// Explanation: Maximum average is (12-5-6+50)/4 = 51/4 = 12.75
-/// Note:
-/// 1 <= k <= n <= 30,000.
-/// Elements of the given array will be in the range [-10,000, 10,000].
-/// </summary>
-double LeetCodeArray::findMaxAverage(vector<int>& nums, int k)
-{
-    double sum = 0, max_sum = (double)INT_MIN;
-    for (int i = 0; i < (int)nums.size(); i++)
-    {
-        if (i >= k)
-        {
-            sum = sum - nums[i - k];
-        }
-        sum += nums[i];
-        if (i >= k - 1)
-        {
-            max_sum = max(sum, max_sum);
-        }
-    }
-    return (double)max_sum / k;
 }
 
 /// <summary>
@@ -7523,6 +7402,84 @@ int LeetCodeArray::maxSubArrayLen(vector<int>& nums, int k)
         }
     }
     return max_length;
+}
+
+/// <summary>
+/// Leet code #422. Valid Word Square    
+/// 
+/// Given a sequence of words, check whether it forms a valid word square. 
+/// A sequence of words forms a valid word square if the kth row and column 
+/// read the exact same string, where 0 ≤ k < max(numRows, numColumns).
+/// Note:
+/// 1.The number of words given is at least 1 and does not exceed 500.
+/// 2.Word length will be at least 1 and does not exceed 500.
+/// 3.Each word contains only lowercase English alphabet a-z.
+/// Example 1: 
+/// Input:
+/// [
+///  "abcd",
+///  "bnrt",
+///  "crmy",
+///  "dtye"
+/// ]
+/// Output:
+/// true
+/// Explanation:
+/// The first row and first column both read "abcd".
+/// The second row and second column both read "bnrt".
+/// The third row and third column both read "crmy".
+/// The fourth row and fourth column both read "dtye".
+/// Therefore, it is a valid word square.
+///
+/// Example 2: 
+/// Input:
+/// [
+///  "abcd",
+///  "bnrt",
+///  "crm",
+///  "dt"
+/// ]
+/// Output:
+/// true
+///
+/// Explanation:
+/// The first row and first column both read "abcd".
+/// The second row and second column both read "bnrt".
+/// The third row and third column both read "crm".
+/// The fourth row and fourth column both read "dt".
+/// Therefore, it is a valid word square.
+/// Example 3: 
+/// Input:
+/// [
+///  "ball",
+///  "area",
+///  "read",
+///  "lady"
+/// ]
+///
+/// Output:
+/// false
+/// Explanation:
+/// The third row reads "read" while the third column reads "lead".
+/// Therefore, it is NOT a valid word square.
+/// </summary>
+bool LeetCodeArray::validWordSquare(vector<string>& words)
+{
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        for (size_t j = 0; j < words[i].size(); j++)
+        {
+            if (j >= words.size() || i >= words[j].size())
+            {
+                return false;
+            }
+            if (words[i][j] != words[j][i])
+            {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 /// <summary>
@@ -30417,6 +30374,127 @@ int LeetCodeArray::numberOfGoodPartitions(vector<int>& nums)
     for (int i = 0; i < partition - 1; i++)
     {
         result = result * 2 % M;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2965. Find Missing and Repeated Values
+///  
+/// Easy
+///
+/// You are given a 0-indexed 2D integer matrix grid of size n * n with values 
+/// in the range [1, n^2]. Each integer appears exactly once except a which 
+/// appears twice and b which is missing. The task is to find the repeating 
+/// and missing numbers a and b.
+///
+/// Return a 0-indexed integer array ans of size 2 where ans[0] equals to a 
+/// and ans[1] equals to b.
+///
+/// Example 1:
+/// Input: grid = [[1,3],[2,2]]
+/// Output: [2,4]
+/// Explanation: Number 2 is repeated and number 4 is missing so the answer 
+/// is [2,4].
+///
+/// Example 2:
+/// Input: grid = [[9,1,7],[8,9,2],[3,4,6]]
+/// Output: [9,5]
+/// Explanation: Number 9 is repeated and number 5 is missing so the answer 
+/// is [9,5].
+/// 
+/// Constraints:
+/// 1. 2 <= n == grid.length == grid[i].length <= 50
+/// 2. 1 <= grid[i][j] <= n * n
+/// 3. For all x that 1 <= x <= n * n there is exactly one x that is not equal 
+///    to any of the grid members.
+/// 4. For all x that 1 <= x <= n * n there is exactly one x that is equal to 
+///    exactly two of the grid members.
+/// 5. For all x that 1 <= x <= n * n except two of them there is exatly one 
+///    pair of i, j that 0 <= i, j <= n - 1 and grid[i][j] == x.
+/// </summary>
+vector<int> LeetCodeArray::findMissingAndRepeatedValues(vector<vector<int>>& grid)
+{
+    int n = grid.size();
+    vector<int> dp(n * n + 1);
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            dp[grid[i][j]]++;
+        }
+    }
+    vector<int> result(2);
+    for (int i = 1; i <= n * n; i++)
+    {
+        if (dp[i] == 2)
+        {
+            result[0] = i;
+        }
+        else if (dp[i] == 0)
+        {
+            result[1] = i;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2966. Divide Array Into Arrays With Max Difference
+///  
+/// Medium
+///
+/// You are given an integer array nums of size n and a positive integer k.
+/// Divide the array into one or more arrays of size 3 satisfying the 
+/// following conditions:
+///
+/// Each element of nums should be in exactly one array.
+/// The difference between any two elements in one array is less than or 
+/// equal to k.
+/// Return a 2D array containing all the arrays. If it is impossible to 
+/// satisfy the conditions, return an empty array. And if there are multiple 
+/// answers, return any of them.
+/// 
+/// Example 1:
+/// Input: nums = [1,3,4,8,7,9,3,5,1], k = 2
+/// Output: [[1,1,3],[3,4,5],[7,8,9]]
+/// Explanation: We can divide the array into the following arrays: [1,1,3], 
+/// [3,4,5] and [7,8,9].
+/// The difference between any two elements in each array is less than or 
+/// equal to 2.
+/// Note that the order of elements is not important.
+///
+/// Example 2:
+/// Input: nums = [1,3,3,2,7,3], k = 3
+/// Output: []
+/// Explanation: It is not possible to divide the array satisfying all the 
+/// conditions.
+/// 
+/// Constraints:
+/// 1. n == nums.length
+/// 2. 1 <= n <= 10^5
+/// 3. n is a multiple of 3.
+/// 4. 1 <= nums[i] <= 10^5
+/// 5. 1 <= k <= 10^5
+/// </summary>
+vector<vector<int>> LeetCodeArray::divideArray(vector<int>& nums, int k)
+{
+    vector<vector<int>> result;
+    sort(nums.begin(), nums.end());
+    for (size_t i = 2; i < nums.size(); i += 3)
+    {
+        if (nums[i] - nums[i - 2] > k)
+        {
+            return result;
+        }
+    }
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (i % 3 == 0)
+        {
+            result.push_back(vector<int>());
+        }
+        result.back().push_back(nums[i]);
     }
     return result;
 }

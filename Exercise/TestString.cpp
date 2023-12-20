@@ -920,21 +920,6 @@ void TestLeetCode388(void)
     Logger::WriteMessage("absolute path = " + to_string(max_length));
 }
 
-void TestLeetCode424(void)
-{
-    Logger::WriteMessage("Test Leet Code 424");
-    LeetCodeString leetCode;
-    string s = "AABABBA";
-    int k = 1;
-    int max_length = leetCode.characterReplacement(s, k);
-    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + ";max length = " + to_string(max_length));
-
-    s = "ABAB";
-    k = 2;
-    max_length = leetCode.characterReplacement(s, k);
-    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + ";max length = " + to_string(max_length));
-}
-
 void TestLeetCode395(void)
 {
     Logger::WriteMessage("Test Leet Code 395");
@@ -6787,7 +6772,6 @@ void TestLeetCodeString(void)
     TestLeetCode1106();
     TestLeetCode1119();
     TestLeetCode1160();
-    TestLeetCode424();
     TestLeetCode770();
     TestLeetCode772();
     TestLeetCode224();

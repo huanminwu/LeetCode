@@ -1172,6 +1172,67 @@ public:
     int maxSubArrayLen(vector<int>& nums, int k);
 
     /// <summary>
+    /// Leet code #422. Valid Word Square    
+    /// 
+    /// Given a sequence of words, check whether it forms a valid word square. 
+    /// A sequence of words forms a valid word square if the kth row and column 
+    /// read the exact same string, where 0 ¡Ü k < max(numRows, numColumns).
+    /// Note:
+    /// 1.The number of words given is at least 1 and does not exceed 500.
+    /// 2.Word length will be at least 1 and does not exceed 500.
+    /// 3.Each word contains only lowercase English alphabet a-z.
+    /// Example 1: 
+    /// Input:
+    /// [
+    ///  "abcd",
+    ///  "bnrt",
+    ///  "crmy",
+    ///  "dtye"
+    /// ]
+    /// Output:
+    /// true
+    /// Explanation:
+    /// The first row and first column both read "abcd".
+    /// The second row and second column both read "bnrt".
+    /// The third row and third column both read "crmy".
+    /// The fourth row and fourth column both read "dtye".
+    /// Therefore, it is a valid word square.
+    ///
+    /// Example 2: 
+    /// Input:
+    /// [
+    ///  "abcd",
+    ///  "bnrt",
+    ///  "crm",
+    ///  "dt"
+    /// ]
+    /// Output:
+    /// true
+    ///
+    /// Explanation:
+    /// The first row and first column both read "abcd".
+    /// The second row and second column both read "bnrt".
+    /// The third row and third column both read "crm".
+    /// The fourth row and fourth column both read "dt".
+    /// Therefore, it is a valid word square.
+    /// Example 3: 
+    /// Input:
+    /// [
+    ///  "ball",
+    ///  "area",
+    ///  "read",
+    ///  "lady"
+    /// ]
+    ///
+    /// Output:
+    /// false
+    /// Explanation:
+    /// The third row reads "read" while the third column reads "lead".
+    /// Therefore, it is NOT a valid word square.
+    /// </summary>
+    bool validWordSquare(vector<string>& words);
+
+    /// <summary>
     /// Leet code #523. Continuous Subarray Sum   
     /// 
     /// Given a list of non-negative numbers and a target integer k, write a 
@@ -2100,42 +2161,6 @@ public:
 #pragma endregion
 
 #pragma region Array
-    /// <summary>
-    /// Leet code #370. Range Addition
-    /// 
-    /// Assume you have an array of length n initialized with all 0's and are given k update operations.
-    /// Each operation is represented as a triplet: [startIndex, endIndex, inc] which increments each 
-    /// element of subarray A[startIndex ... endIndex] (startIndex and endIndex inclusive) with inc.
-    /// 
-    /// Return the modified array after all k operations were executed.
-    /// Example: 
-    /// Given:
-    /// length = 5,
-    /// updates = [
-    ///    [1,  3,  2],
-    ///    [2,  4,  3],
-    ///    [0,  2, -2]
-    /// ]
-    ///
-    /// Output:
-    /// [-2, 0, 3, 5, 3]
-    /// Explanation: 
-    /// Initial state:
-    /// [ 0, 0, 0, 0, 0 ]
-    /// After applying operation [1, 3, 2]:
-    /// [ 0, 2, 2, 2, 0 ]
-    /// After applying operation [2, 4, 3]:
-    /// [ 0, 2, 5, 5, 3 ]
-    /// After applying operation [0, 2, -2]:
-    /// [-2, 0, 3, 5, 3 ]
-    /// Hint:
-    /// 1.Thinking of using advanced data structures? You are thinking it too complicated.
-    /// 2.For each update operation, do you really need to update all elements between i and j?
-    /// 3.Update only the first and end element is sufficient.
-    /// 4.The optimal time complexity is O(k + n) and uses O(1) extra space.
-    /// </summary>
-    vector<int> getModifiedArray(int length, vector<vector<int>>& updates);
-
     /// <summary>
     /// Leet code # 531. Lonely Pixel I
     ///
@@ -4624,37 +4649,6 @@ public:
     vector<vector<int>> matrixReshape(vector<vector<int>>& nums, int r, int c);
 
     /// <summary>
-    /// Leet code #575. Distribute Candies
-    /// 
-    /// Given an integer array with even length, where different numbers in 
-    /// this array represent different kinds of candies. Each number means one
-    /// candy of the corresponding kind. You need to distribute these candies 
-    /// equally in number to brother and sister. Return the maximum number of 
-    /// kinds of candies the sister could gain. 
-    /// 
-    /// Example 1:
-    /// Input: candies = [1,1,2,2,3,3]
-    /// Output: 3
-    /// Explanation:
-    /// There are three different kinds of candies (1, 2 and 3), and two 
-    /// candies for each kind.
-    /// Optimal distribution: The sister has candies [1,2,3] and the brother 
-    /// has candies [1,2,3], too. 
-    /// The sister has three different kinds of candies. 
-    /// Example 2:
-    /// Input: candies = [1,1,2,3]
-    /// Output: 2
-    /// Explanation: For example, the sister has candies [2,3] and the brother 
-    /// has candies [1,1]. 
-    /// The sister has two different kinds of candies, the brother has only one
-    /// kind of candies. 
-    /// Note: 
-    /// The length of the given array is in range [2, 10,000], and will be even.
-    /// The number in given array is in range [-100,000, 100,000].
-    /// </summary>
-    int distributeCandies(vector<int>& candies);
-
-    /// <summary>
     /// Leet code #1089. Duplicate Zeros
     /// 
     /// Given a fixed length array arr of integers, duplicate each occurrence 
@@ -4786,23 +4780,6 @@ public:
     /// 3.The integers in the m arrays will be in the range of [-10000, 10000].
     /// </summary>
     int maxDistance(vector<vector<int>>& arrays);
-
-    /// <summary>
-    /// Leet code #643. Maximum Average Subarray I
-    /// 
-    /// Given an array consisting of n integers, find the contiguous subarray 
-    /// of given length k that has the maximum average value. And you need to 
-    /// output the maximum average value. 
-    ///
-    /// Example 1:
-    /// Input: [1,12,-5,-6,50,3], k = 4
-    /// Output: 12.75
-    /// Explanation: Maximum average is (12-5-6+50)/4 = 51/4 = 12.75
-    /// Note:
-    /// 1 <= k <= n <= 30,000.
-    /// Elements of the given array will be in the range [-10,000, 10,000].
-    /// </summary>
-    double findMaxAverage(vector<int>& nums, int k);
 
     /// <summary>
     /// Leet code #644. Maximum Average Subarray II
@@ -19445,5 +19422,82 @@ public:
     /// 2. 1 <= nums[i] <= 10^9
     /// </summary>
     int numberOfGoodPartitions(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2965. Find Missing and Repeated Values
+    ///  
+    /// Easy
+    ///
+    /// You are given a 0-indexed 2D integer matrix grid of size n * n with values 
+    /// in the range [1, n^2]. Each integer appears exactly once except a which 
+    /// appears twice and b which is missing. The task is to find the repeating 
+    /// and missing numbers a and b.
+    ///
+    /// Return a 0-indexed integer array ans of size 2 where ans[0] equals to a 
+    /// and ans[1] equals to b.
+    ///
+    /// Example 1:
+    /// Input: grid = [[1,3],[2,2]]
+    /// Output: [2,4]
+    /// Explanation: Number 2 is repeated and number 4 is missing so the answer 
+    /// is [2,4].
+    ///
+    /// Example 2:
+    /// Input: grid = [[9,1,7],[8,9,2],[3,4,6]]
+    /// Output: [9,5]
+    /// Explanation: Number 9 is repeated and number 5 is missing so the answer 
+    /// is [9,5].
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n == grid.length == grid[i].length <= 50
+    /// 2. 1 <= grid[i][j] <= n * n
+    /// 3. For all x that 1 <= x <= n * n there is exactly one x that is not equal 
+    ///    to any of the grid members.
+    /// 4. For all x that 1 <= x <= n * n there is exactly one x that is equal to 
+    ///    exactly two of the grid members.
+    /// 5. For all x that 1 <= x <= n * n except two of them there is exatly one 
+    ///    pair of i, j that 0 <= i, j <= n - 1 and grid[i][j] == x.
+    /// </summary>
+    vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 2966. Divide Array Into Arrays With Max Difference
+    ///  
+    /// Medium
+    ///
+    /// You are given an integer array nums of size n and a positive integer k.
+    /// Divide the array into one or more arrays of size 3 satisfying the 
+    /// following conditions:
+    ///
+    /// Each element of nums should be in exactly one array.
+    /// The difference between any two elements in one array is less than or 
+    /// equal to k.
+    /// Return a 2D array containing all the arrays. If it is impossible to 
+    /// satisfy the conditions, return an empty array. And if there are multiple 
+    /// answers, return any of them.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,3,4,8,7,9,3,5,1], k = 2
+    /// Output: [[1,1,3],[3,4,5],[7,8,9]]
+    /// Explanation: We can divide the array into the following arrays: [1,1,3], 
+    /// [3,4,5] and [7,8,9].
+    /// The difference between any two elements in each array is less than or 
+    /// equal to 2.
+    /// Note that the order of elements is not important.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,3,3,2,7,3], k = 3
+    /// Output: []
+    /// Explanation: It is not possible to divide the array satisfying all the 
+    /// conditions.
+    /// 
+    /// Constraints:
+    /// 1. n == nums.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. n is a multiple of 3.
+    /// 4. 1 <= nums[i] <= 10^5
+    /// 5. 1 <= k <= 10^5
+    /// </summary>
+    vector<vector<int>> divideArray(vector<int>& nums, int k);
 };
 #endif  // LeetCodeArray_H

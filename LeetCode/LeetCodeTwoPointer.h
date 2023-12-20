@@ -85,6 +85,36 @@ public:
     int trap(vector<int>& height);
 
     /// <summary>
+    /// Leet code #424. Longest Repeating Character Replacement    
+    /// 
+    /// Given a string that consists of only uppercase English letters, 
+    /// you can replace any letter in the string with another letter at 
+    /// most k times. Find the length of a longest substring containing 
+    /// all repeating letters you can get after performing the above 
+    /// operations.
+    /// Note:
+    /// Both the string's length and k will not exceed 104. 
+    ///
+    /// Example 1: 
+    /// Input:
+    /// s = "ABAB", k = 2
+    /// Output:
+    /// 4
+    /// Explanation:
+    /// Replace the two 'A's with two 'B's or vice versa.
+    /// 
+    /// Example 2: 
+    /// Input:
+    /// s = "AABABBA", k = 1
+    /// Output:
+    /// 4
+    /// Explanation:
+    /// Replace the one 'A' in the middle with 'B' and form "AABBBBA".
+    /// The substring "BBBB" has the longest repeating letters, which is 4.
+    /// </summary>
+    int characterReplacement(string s, int k);
+
+    /// <summary>
     /// Leet Code 658. Find K Closest Elements
     ///  
     /// Medium
@@ -139,6 +169,24 @@ public:
     /// 2. s consists of lowercase English letters.
     /// </summary>
     bool validPalindrome(string s);
+
+
+    /// <summary>
+    /// Leet code #643. Maximum Average Subarray I
+    /// 
+    /// Given an array consisting of n integers, find the contiguous subarray 
+    /// of given length k that has the maximum average value. And you need to 
+    /// output the maximum average value. 
+    ///
+    /// Example 1:
+    /// Input: [1,12,-5,-6,50,3], k = 4
+    /// Output: 12.75
+    /// Explanation: Maximum average is (12-5-6+50)/4 = 51/4 = 12.75
+    /// Note:
+    /// 1 <= k <= n <= 30,000.
+    /// Elements of the given array will be in the range [-10,000, 10,000].
+    /// </summary>
+    double findMaxAverage(vector<int>& nums, int k);
 
     /// <summary>
     /// Leet code #881. Boats to Save People
@@ -1403,5 +1451,49 @@ public:
     /// 3. 1 <= k <= nums.length
     /// </summary>
     int maxSubarrayLength(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 2968. Apply Operations to Maximize Frequency Score
+    ///  
+    /// Hard
+    ///
+    /// You are given a 0-indexed integer array nums and an integer k.
+    ///
+    /// You can perform the following operation on the array at most k times:
+    ///
+    /// Choose any index i from the array and increase or decrease nums[i] by 1.
+    /// The score of the final array is the frequency of the most frequent element
+    /// in the array.
+    ///
+    /// Return the maximum score you can achieve.
+    ///
+    /// The frequency of an element is the number of occurences of that element in 
+    /// the array.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2,6,4], k = 3
+    /// Output: 3
+    /// Explanation: We can do the following operations on the array:
+    /// - Choose i = 0, and increase the value of nums[0] by 1. The resulting 
+    ///   array is [2,2,6,4].
+    /// - Choose i = 3, and decrease the value of nums[3] by 1. The resulting 
+    ///   array is [2,2,6,3].
+    /// - Choose i = 3, and decrease the value of nums[3] by 1. The resulting 
+    ///   array is [2,2,6,2].
+    /// The element 2 is the most frequent in the final array so our score is 3.
+    /// It can be shown that we cannot achieve a better score.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,4,4,2,4], k = 0
+    /// Output: 3
+    /// Explanation: We cannot apply any operations so our score will be the 
+    /// frequency of the most frequent element in the original array, which is 3.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. 0 <= k <= 10^14
+    /// </summary>
+    int maxFrequencyScore(vector<int>& nums, long long k);
 };
 #endif  // LeetCodeTwoPointer
