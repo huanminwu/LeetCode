@@ -1047,16 +1047,6 @@ public:
     void reverseWordsII(string &s);
 
     /// <summary>
-    /// Leet code #344. Reverse String 
-    ///
-    /// Write a function that takes a string as input and returns the string 
-    /// reversed.
-    /// Example:
-    ///  Given s = "hello", return "olleh".	
-    /// </summary>
-    string reverseString(string s);
-
-    /// <summary>
     /// Leet code #14. Longest Common Prefix 
     ///
     /// Write a function to find the longest common prefix string amongst 
@@ -3379,16 +3369,6 @@ public:
     /// The read function may be called multiple times. 
     /// </summary>
     int readNCharsII(char* buf, int n, string& s, int& index, string& m_buffer);
-
-    /// <summary>
-    /// Leet code #159. Longest Substring with At Most Two Distinct Characters
-    /// 
-    /// Given a string, find the length of the longest substring T that contains at most 
-    /// 2 distinct characters. 
-    /// For example, Given s = "eceba", 
-    /// T is "ece" which its length is 3.
-    /// </summary>
-    int lengthOfLongestSubstringTwoDistinct(string s);
 
     /// <summary>
     /// Leet code #340. Longest Substring with At Most K Distinct Characters

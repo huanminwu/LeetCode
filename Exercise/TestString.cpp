@@ -533,15 +533,6 @@ void TestLeetCode186(void)
     Logger::WriteMessage("reverse = " + s);
 }
 
-void TestLeetCode344(void)
-{
-    Logger::WriteMessage("Test Leet Code 344");
-    LeetCodeString leetCode;
-    string s("Hello");
-    string r = leetCode.reverseString(s);
-    Logger::WriteMessage("Reverse " + s + " = " + r);
-}
-
 void TestLeetCode14(void)
 {
     LeetCodeString leetCode;
@@ -2111,15 +2102,6 @@ void TestLeetCode158(void)
     n = 5;
     n_read = leetCode.readNCharsII(buff, n, s, index, m_buffer);
     Logger::WriteMessage("buff = " + (string)buff);
-}
-
-void TestLeetCode159(void)
-{
-    Logger::WriteMessage("Test Leet Code 159");
-    LeetCodeString leetCode;
-    string s = "eceba";
-    int max_length = leetCode.lengthOfLongestSubstringTwoDistinct(s);
-    Logger::WriteMessage("s = " + s + "; max_length = " + to_string(max_length));
 }
 
 void TestLeetCode340(void)
@@ -6708,7 +6690,6 @@ void TestLeetCodeString(void)
     TestLeetCode467();
     TestLeetCode524();
     TestLeetCode340();
-    TestLeetCode159();
     TestLeetCode157();
     TestLeetCode158();
     TestLeetCode481();
@@ -6788,7 +6769,6 @@ void TestLeetCodeString(void)
     TestLeetCode76();
     TestLeetCode68();
     TestLeetCode14();
-    TestLeetCode344();
     TestLeetCode151();
     TestLeetCode186();
     TestLeetCode71();

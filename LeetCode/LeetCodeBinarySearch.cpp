@@ -4135,4 +4135,5 @@ int LeetCodeBinarySearch::countBlocks(vector<int> nums)
     }
     return result;
 }
+
 #pragma endregion  

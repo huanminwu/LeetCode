@@ -380,26 +380,6 @@ int LeetCodeString::strStr(string haystack, string needle)
 }
 
 /// <summary>
-/// Leet code #344. Reverse String 
-///
-/// Write a function that takes a string as input and returns the string 
-/// reversed.
-/// Example:
-///  Given s = "hello", return "olleh".	
-/// </summary>
-string LeetCodeString::reverseString(string s)
-{
-    int first = 0, last = s.size() - 1;
-    while (first < last)
-    {
-        swap(s[first], s[last]);
-        first++;
-        last--;
-    }
-    return s;
-}
-
-/// <summary>
 /// Leet code #68. Text Justification 
 ///
 /// Given an array of words and a length L, format the text such that 
@@ -2352,35 +2332,6 @@ int LeetCodeString::readNCharsII(char *buf, int n, string& s, int& index, string
     return i;
 }
 
-/// <summary>
-/// Leet code #159. Longest Substring with At Most Two Distinct Characters       
-/// 
-/// Given a string, find the length of the longest substring T that contains 
-/// at most 2 distinct characters. 
-/// For example, Given s = “eceba”, 
-/// T is "ece" which its length is 3.
-/// </summary>
-int LeetCodeString::lengthOfLongestSubstringTwoDistinct(string s)
-{
-    unordered_map<char, int> char_count;
-    int begin = -1;
-    int result = 0;
-    for (int end = 0; end < (int)s.size(); end++)
-    {
-        char_count[s[end]]++;
-        while (char_count.size() > 2)
-        {
-            begin++;
-            char_count[s[begin]]--;
-            if (char_count[s[begin]] == 0)
-            {
-                char_count.erase(s[begin]);
-            }
-        }
-        result = max(result, end - begin);
-    }
-    return result;
-}
 
 /// <summary>
 /// Leet code #340. Longest Substring with At Most K Distinct Characters

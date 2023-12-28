@@ -19499,5 +19499,138 @@ public:
     /// 5. 1 <= k <= 10^5
     /// </summary>
     vector<vector<int>> divideArray(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 2971. Find Polygon With the Largest Perimeter
+    ///  
+    /// Medium
+    ///
+    /// You are given an array of positive integers nums of length n.
+    ///
+    /// A polygon is a closed plane figure that has at least 3 sides. The longest 
+    /// side of a polygon is smaller than the sum of its other sides.
+    ///
+    /// Conversely, if you have k (k >= 3) positive real numbers a1, a2, a3, ..., 
+    /// ak where a1 <= a2 <= a3 <= ... <= ak and a1 + a2 + a3 + ... + ak-1 > ak, 
+    /// then there always exists a polygon with k sides whose lengths are a1, a2, 
+    /// a3, ..., ak.
+    ///
+    /// The perimeter of a polygon is the sum of lengths of its sides.
+    ///
+    /// Return the largest possible perimeter of a polygon whose sides can be 
+    /// formed from nums, or -1 if it is not possible to create a polygon.
+    ///
+    /// Example 1:
+    /// Input: nums = [5,5,5]
+    /// Output: 15
+    /// Explanation: The only possible polygon that can be made from nums has 3 
+    /// sides: 5, 5, and 5. The perimeter is 5 + 5 + 5 = 15.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,12,1,2,5,50,3]
+    /// Output: 12
+    /// Explanation: The polygon with the largest perimeter which can be made from 
+    /// nums has 5 sides: 1, 1, 2, 3, and 5. The perimeter 
+    /// is 1 + 1 + 2 + 3 + 5 = 12.
+    /// We cannot have a polygon with either 12 or 50 as the longest side because 
+    /// it is not possible to include 2 or more smaller sides that have a greater 
+    /// sum than either of them.
+    /// It can be shown that the largest possible perimeter is 12.
+    ///
+    /// Example 3:
+    /// Input: nums = [5,5,50]
+    /// Output: -1
+    /// Explanation: There is no possible way to form a polygon from nums, as a 
+    /// polygon has at least 3 sides and 50 > 5 + 5.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= n <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    long long largestPerimeter(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2974. Minimum Number Game
+    ///  
+    /// Easy
+    ///
+    /// You are given a 0-indexed integer array nums of even length and there is 
+    /// also an empty array arr. Alice and Bob decided to play a game where in 
+    /// every round Alice and Bob will do one move. The rules of the game are as 
+    /// follows:
+    ///
+    /// Every round, first Alice will remove the minimum element from nums, and 
+    /// then Bob does the same.
+    /// Now, first Bob will append the removed element in the array arr, and then 
+    /// Alice does the same.
+    /// The game continues until nums becomes empty.
+    /// Return the resulting array arr.
+    ///
+    ///
+    /// Example 1:
+    /// Input: nums = [5,4,2,3]
+    /// Output: [3,2,5,4]
+    /// Explanation: In round one, first Alice removes 2 and then Bob removes 3. 
+    /// Then in arr firstly Bob appends 3 and then Alice appends 2. So arr = [3,2].
+    /// At the begining of round two, nums = [5,4]. Now, first Alice removes 4 and 
+    /// then Bob removes 5. Then both append in arr which becomes [3,2,5,4].
+    ///
+    /// Example 2:
+    /// Input: nums = [2,5]
+    /// Output: [5,2]
+    /// Explanation: In round one, first Alice removes 2 and then Bob removes 5. 
+    /// Then in arr firstly Bob appends and then Alice appends. So arr = [5,2].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 100
+    /// 3. nums.length % 2 == 0
+    /// </summary>
+    vector<int> numberGame(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 2975. Maximum Square Area by Removing Fences From a Field
+    ///  
+    /// Medium
+    ///
+    /// There is a large (m - 1) x (n - 1) rectangular field with corners 
+    /// at (1, 1) and (m, n) containing some horizontal and vertical fences 
+    /// given in arrays hFences and vFences respectively.
+    ///
+    /// Horizontal fences are from the coordinates (hFences[i], 1) to 
+    /// (hFences[i], n) and vertical fences are from the coordinates 
+    /// (1, vFences[i]) to (m, vFences[i]).
+    ///
+    /// Return the maximum area of a square field that can be formed by 
+    /// removing some fences (possibly none) or -1 if it is impossible to make 
+    /// a square field.
+    ///
+    /// Since the answer may be large, return it modulo 10^9 + 7.
+    ///
+    /// Note: The field is surrounded by two horizontal fences from the 
+    /// coordinates (1, 1) to (1, n) and (m, 1) to (m, n) and two vertical fences 
+    /// from the coordinates (1, 1) to (m, 1) and (1, n) to (m, n). These fences 
+    /// cannot be removed.
+    /// 
+    /// Example 1:
+    /// Input: m = 4, n = 3, hFences = [2,3], vFences = [2]
+    /// Output: 4
+    /// Explanation: Removing the horizontal fence at 2 and the vertical fence 
+    /// at 2 will give a square field of area 4.
+    ///
+    /// Example 2:
+    /// Input: m = 6, n = 7, hFences = [2], vFences = [4]
+    /// Output: -1
+    /// Explanation: It can be proved that there is no way to create a square 
+    /// field by removing fences.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= m, n <= 10^9
+    /// 2. 1 <= hFences.length, vFences.length <= 600
+    /// 3. 1 < hFences[i] < m
+    /// 4. 1 < vFences[i] < n
+    /// 5. hFences and vFences are unique.
+    /// </summary>
+    int maximizeSquareArea(int m, int n, vector<int>& hFences, vector<int>& vFences);
 };
 #endif  // LeetCodeArray_H

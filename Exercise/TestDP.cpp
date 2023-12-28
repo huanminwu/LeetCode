@@ -4892,8 +4892,29 @@ void TestLeetCode2944(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2969(void)
+{
+    Logger::WriteMessage("Test Leet Code 2969");
+    LeetCodeDP leetCode;
+    vector<int> prices = { 3,1,2 };
+    int result = leetCode.minimumCoins(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 1,10,1,1 };
+    result = leetCode.minimumCoins(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 26, 18, 6, 12, 49, 7, 45, 45 };
+    result = leetCode.minimumCoins(prices);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode2969();
     TestLeetCode2944();
     TestLeetCode2919();
     TestLeetCode2915();

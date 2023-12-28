@@ -9738,8 +9738,73 @@ void TestLeetCode2966(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode2971(void)
+{
+    Logger::WriteMessage("Test Leet Code 2971");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 5, 5, 5 };
+    Logger::WriteMessage(nums);
+    long long result = leetCode.largestPerimeter(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,12,1,2,5,50,3 };
+    Logger::WriteMessage(nums);
+    result = leetCode.largestPerimeter(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,5,50 };
+    Logger::WriteMessage(nums);
+    result = leetCode.largestPerimeter(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2974(void)
+{
+    Logger::WriteMessage("Test Leet Code 2974");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 5, 4, 2, 3 };
+    Logger::WriteMessage(nums);
+    vector<int> result = leetCode.numberGame(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 2,5 };
+    Logger::WriteMessage(nums);
+    result = leetCode.numberGame(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2975(void)
+{
+    Logger::WriteMessage("Test Leet Code 2975");
+    LeetCodeArray leetCode;
+    int m = 4, n = 3;
+    vector<int> hFences = { 2, 3 };
+    vector<int> vFences = { 2 };
+    int result = leetCode.maximizeSquareArea(m, n, hFences, vFences);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    m = 6, n = 7;
+    hFences = { 2 };
+    vFences = { 4 };
+    result = leetCode.maximizeSquareArea(m, n, hFences, vFences);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    m = 8, n = 5;
+    hFences = { 5, 4 };
+    vFences = { 4 };
+    result = leetCode.maximizeSquareArea(m, n, hFences, vFences);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode2975();
+    TestLeetCode2971();
+    TestLeetCode2974();
     TestLeetCode2966();
     TestLeetCode2965();
     TestLeetCode2963();

@@ -5564,8 +5564,113 @@ void TestLeetCode2959(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+void TestLeetCode2973(void)
+{
+    Logger::WriteMessage("Test Leet Code 2973");
+    LeetCodeGraph leetCode;
+    vector <vector<int>> edges = { {0, 1},{0, 2},{0, 3},{0, 4},{0, 5} };
+    vector<int> cost = { 1, 2, 3, 4, 5, 6 };
+    vector<long long> result = leetCode.placedCoins(edges, cost);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage(result);
+
+    edges = { {0, 1}, { 0, 2 }, { 1, 3 }, { 1, 4 }, { 1, 5 }, { 2, 6 }, { 2, 7 }, { 2, 8 }};
+    cost = { 1,4,2,3,5,7,8,-4,2 };
+    result = leetCode.placedCoins(edges, cost);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage(result);
+
+    edges = { {0, 1},{0, 2} };
+    cost = { 1, 2, -2 };
+    result = leetCode.placedCoins(edges, cost);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode2976(void)
+{
+    Logger::WriteMessage("Test Leet Code 2976");
+    LeetCodeGraph leetCode;
+    string source = "abcd", target = "acbe";
+    vector<char> original = { 'a', 'b', 'c', 'c', 'e', 'd' };
+    vector<char> changed = { 'b', 'c', 'b', 'e', 'b', 'e' };
+    vector<int> cost = { 2, 5, 5, 1, 2, 20 };
+    long long result = leetCode.minimumCost(source, target, original, changed, cost);
+    Logger::WriteMessage("source = " + source + "; target = " + target);
+    Logger::WriteMessage(original);
+    Logger::WriteMessage(changed);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    source = "aaaa", target = "bbbb";
+    original = { 'a','c' };
+    changed = { 'c','b' };
+    cost = { 1,2 };
+    result = leetCode.minimumCost(source, target, original, changed, cost);
+    Logger::WriteMessage("source = " + source + "; target = " + target);
+    Logger::WriteMessage(original);
+    Logger::WriteMessage(changed);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    source = "abcd", target = "abce";
+    original = { 'a' };
+    changed = { 'e' };
+    cost = { 10000 };
+    result = leetCode.minimumCost(source, target, original, changed, cost);
+    Logger::WriteMessage("source = " + source + "; target = " + target);
+    Logger::WriteMessage(original);
+    Logger::WriteMessage(changed);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2977(void)
+{
+    Logger::WriteMessage("Test Leet Code 2977");
+    LeetCodeGraph leetCode;
+    string source = "abcd", target = "acbe";
+    vector<string> original = { "a", "b", "c", "c", "e", "d" };
+    vector<string> changed = { "b", "c", "b", "e", "b", "e" };
+    vector<int> cost = { 2, 5, 5, 1, 2, 20 };
+    long long result = leetCode.minimumCost(source, target, original, changed, cost);
+    Logger::WriteMessage("source = " + source + "; target = " + target);
+    Logger::WriteMessage(original);
+    Logger::WriteMessage(changed);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    source = "abcdefgh", target = "acdeeghh";
+    original = { "bcd", "fgh", "thh" }, changed = { "cde", "thh", "ghh" };
+    cost = { 1, 3, 5 };
+    result = leetCode.minimumCost(source, target, original, changed, cost);
+    Logger::WriteMessage("source = " + source + "; target = " + target);
+    Logger::WriteMessage(original);
+    Logger::WriteMessage(changed);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    source = "abcdefgh", target = "addddddd";
+    original = { "bcd", "defgh" };
+    changed = { "ddd", "ddddd" };
+    cost = { 100, 1578 };
+    result = leetCode.minimumCost(source, target, original, changed, cost);
+    Logger::WriteMessage("source = " + source + "; target = " + target);
+    Logger::WriteMessage(original);
+    Logger::WriteMessage(changed);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2977();
+    TestLeetCode2973();
+    TestLeetCode2976();
     TestLeetCode2959();
     TestLeetCode2924();
     TestLeetCode2876();

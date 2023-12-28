@@ -316,25 +316,6 @@ vector<int> LeetCodeHashtable::intersectionArrayII(vector<int>& nums1, vector<in
     return result;
 }
 
-/// <summary>
-/// Leet code #219. Contains Duplicate II
-/// Given an array of integers and an integer k, find out whether there are 
-/// two distinct indices i and j in the array such that nums[i] = nums[j] 
-/// and the difference between i and j is at most k.	
-/// </summary>
-bool LeetCodeHashtable::containsNearbyDuplicate(vector<int>& nums, int k)
-{
-    unordered_map<int, int> pos_map;
-    for (size_t i = 0; i < nums.size(); i++)
-    {
-        if (pos_map.find(nums[i]) != pos_map.end())
-        {
-            if ((int)(i - pos_map[nums[i]]) <= k) return true;
-        }
-        pos_map[nums[i]] = i;
-    }
-    return false;
-}
 
 /// <summary>
 /// Leet code #205. Isomorphic Strings
@@ -369,6 +350,46 @@ bool LeetCodeHashtable::isIsomorphic(string s, string t)
         }
     }
     return true;
+}
+
+/// <summary>
+/// Leet Code 219. Contains Duplicate II
+///  
+/// Easy
+///
+/// Given an integer array nums and an integer k, return true if there are two 
+/// distinct indices i and j in the array such that nums[i] == nums[j] and 
+/// abs(i - j) <= k.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,3,1], k = 3
+/// Output: true
+///
+/// Example 2:
+/// Input: nums = [1,0,1,1], k = 1
+/// Output: true
+///
+/// Example 3:
+/// Input: nums = [1,2,3,1,2,3], k = 2
+/// Output: false
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. -10^9 <= nums[i] <= 10^9
+/// 3. 0 <= k <= 10^5
+/// </summary>
+bool LeetCodeHashtable::containsNearbyDuplicate(vector<int>& nums, int k)
+{
+    unordered_map<int, int> pos_map;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (pos_map.find(nums[i]) != pos_map.end())
+        {
+            if ((int)(i - pos_map[nums[i]]) <= k) return true;
+        }
+        pos_map[nums[i]] = i;
+    }
+    return false;
 }
 
 /// <summary>

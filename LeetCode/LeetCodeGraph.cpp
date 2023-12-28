@@ -19060,4 +19060,384 @@ int LeetCodeGraph::numberOfSets(int n, int maxDistance, vector<vector<int>>& roa
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2976. Minimum Cost to Convert String I
+///  
+/// Medium
+///
+/// You are given two 0-indexed strings source and target, both of length n 
+/// and consisting of lowercase English letters. You are also given two 
+/// 0-indexed character arrays original and changed, and an integer array 
+/// cost, where cost[i] represents the cost of changing the character 
+/// original[i] to the character changed[i].
+///
+/// You start with the string source. In one operation, you can pick a 
+/// character x from the string and change it to the character y at a cost 
+/// of z if there exists any index j such that cost[j] == z, 
+/// original[j] == x, and changed[j] == y.
+///
+/// Return the minimum cost to convert the string source to the string 
+/// target using any number of operations. If it is impossible to convert 
+/// source to target, return -1.
+///
+/// Note that there may exist indices i, j such that 
+/// original[j] == original[i] and changed[j] == changed[i].
+///
+///  
+/// Example 1:
+/// Input: source = "abcd", target = "acbe", original = 
+/// ["a","b","c","c","e","d"], changed = ["b","c","b","e","b","e"], 
+/// cost = [2,5,5,1,2,20]
+/// Output: 28
+/// Explanation: To convert the string "abcd" to string "acbe":
+/// - Change value at index 1 from 'b' to 'c' at a cost of 5.
+/// - Change value at index 2 from 'c' to 'e' at a cost of 1.
+/// - Change value at index 2 from 'e' to 'b' at a cost of 2.
+/// - Change value at index 3 from 'd' to 'e' at a cost of 20.
+/// The total cost incurred is 5 + 1 + 2 + 20 = 28.
+/// It can be shown that this is the minimum possible cost.
+///
+/// Example 2:
+/// Input: source = "aaaa", target = "bbbb", original = ["a","c"], 
+/// changed = ["c","b"], cost = [1,2]
+/// Output: 12
+/// Explanation: To change the character 'a' to 'b' change the character 'a' 
+/// to 'c' at a cost of 1, followed by changing the character 'c' to 'b' at a 
+/// cost of 2, for a total cost of 1 + 2 = 3. To change all occurrences of 'a' 
+/// to 'b', a total cost of 3 * 4 = 12 is incurred.
+///
+/// Example 3:
+/// Input: source = "abcd", target = "abce", original = ["a"], 
+/// changed = ["e"], cost = [10000]
+/// Output: -1
+/// Explanation: It is impossible to convert source to target because the 
+/// value at index 3 cannot be changed from 'd' to 'e'.
+/// 
+/// Constraints:
+/// 1. 1 <= source.length == target.length <= 10^5
+/// 2. source, target consist of lowercase English letters.
+/// 3. 1 <= cost.length == original.length == changed.length <= 2000
+/// 4. original[i], changed[i] are lowercase English letters.
+/// 5. 1 <= cost[i] <= 10^6
+/// 6. original[i] != changed[i]
+/// </summary>
+long long LeetCodeGraph::minimumCost(string source, string target, vector<char>& original,
+    vector<char>& changed, vector<int>& cost)
+{
+    vector<vector<long long>> dp(26, vector<long long>(26, LLONG_MAX));
+    int n = original.size();
+    for (int i = 0; i < n; i++)
+    {
+        dp[original[i] - 'a'][changed[i] - 'a'] = min(dp[original[i] - 'a'][changed[i] - 'a'], (long long)cost[i]);
+    }
+    for (int k = 0; k < 26; k++)
+    {
+        for (int i = 0; i < 26; i++)
+        {
+            if (i == k) continue;
+            for (int j = 0; j < 26; j++)
+            {
+                if (k == j || i == j) continue;
+                if (dp[i][k] != LLONG_MAX && dp[k][j] != LLONG_MAX)
+                {
+                    dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]);
+                }
+            }
+        }
+    }
+    long long result = 0;
+    for (size_t i = 0; i < source.size(); i++)
+    {
+        if (source[i] != target[i])
+        {
+            if (dp[source[i] - 'a'][target[i] - 'a'] == LLONG_MAX)
+            {
+                result = -1;
+                break;
+            }
+            else
+            {
+                result += dp[source[i] - 'a'][target[i] - 'a'];
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2973. Find Number of Coins to Place in Tree Nodes
+/// </summary>
+vector<set<pair<int, int>>> LeetCodeGraph::placedCoins(vector<vector<int>>& neighbors, vector<int>& cost,
+    int parent, int node, vector<long long>& result)
+{
+    vector<set<pair<int, int>>> node_costs = { {make_pair(cost[node], node)}, {make_pair(cost[node], node)} };
+    for (size_t i = 0; i < neighbors[node].size(); i++)
+    {
+        if (neighbors[node][i] == parent) continue;
+        vector<set<pair<int, int>>> children_cost = placedCoins(neighbors, cost, node, neighbors[node][i], result);
+        node_costs[0].insert(children_cost[0].begin(), children_cost[0].end());
+        node_costs[1].insert(children_cost[1].begin(), children_cost[1].end());
+        while (node_costs[0].size() > 2) node_costs[0].erase(*node_costs[0].rbegin());
+        while (node_costs[1].size() > 3) node_costs[1].erase(*node_costs[1].begin());
+    }
+    result[node] = 1;
+    if (node_costs[1].size() == 3)
+    {
+        long long product = 0;
+        if (node_costs[0].size() == 2)
+        {
+            product = 1;
+            for (auto& pair : node_costs[0])
+            {
+                product = product * (long long)pair.first;
+            }
+            product = product * (long long)node_costs[1].rbegin()->first;
+        }
+        for (auto& pair : node_costs[1])
+        {
+            result[node] = result[node] * pair.first;
+        }
+        result[node] = max(max(result[node], product), (long long)0);
+    }
+    return node_costs;
+}
+
+
+/// <summary>
+/// Leet Code 2973. Find Number of Coins to Place in Tree Nodes
+///  
+/// Hard
+///
+/// You are given an undirected tree with n nodes labeled from 0 to n - 1, 
+/// and rooted at node 0. You are given a 2D integer array edges of length 
+/// n - 1, where edges[i] = [ai, bi] indicates that there is an edge 
+/// between nodes ai and bi in the tree.
+/// 
+/// You are also given a 0-indexed integer array cost of length n, where 
+/// cost[i] is the cost assigned to the ith node.
+///
+/// You need to place some coins on every node of the tree. The number of 
+/// coins to be placed at node i can be calculated as:
+///
+/// If size of the subtree of node i is less than 3, place 1 coin.
+/// Otherwise, place an amount of coins equal to the maximum product of cost 
+/// values assigned to 3 distinct nodes in the subtree of node i. If this 
+/// product is negative, place 0 coins.
+/// Return an array coin of size n such that coin[i] is the number of coins 
+/// placed at node i.
+///
+/// Example 1:
+/// Input: edges = [[0,1],[0,2],[0,3],[0,4],[0,5]], cost = [1,2,3,4,5,6]
+/// Output: [120,1,1,1,1,1]
+/// Explanation: For node 0 place 6 * 5 * 4 = 120 coins. All other nodes are 
+/// leaves with subtree of size 1, place 1 coin on each of them.
+///
+/// Example 2:
+/// Input: edges = [[0,1],[0,2],[1,3],[1,4],[1,5],[2,6],[2,7],[2,8]], 
+/// cost = [1,4,2,3,5,7,8,-4,2]
+/// Output: [280,140,32,1,1,1,1,1,1]
+/// Explanation: The coins placed on each node are:
+/// - Place 8 * 7 * 5 = 280 coins on node 0.
+/// - Place 7 * 5 * 4 = 140 coins on node 1.
+/// - Place 8 * 2 * 2 = 32 coins on node 2.
+/// - All other nodes are leaves with subtree of size 1, place 1 coin on each 
+///   of them.
+///
+/// Example 3:
+/// Input: edges = [[0,1],[0,2]], cost = [1,2,-2]
+/// Output: [0,1,1]
+/// Explanation: Node 1 and 2 are leaves with subtree of size 1, place 1 coin 
+/// on each of them. For node 0 the only possible product of cost 
+/// is 2 * 1 * -2 = -4. Hence place 0 coins on node 0.
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 2 * 10^4
+/// 2. edges.length == n - 1
+/// 3. edges[i].length == 2
+/// 4. 0 <= ai, bi < n
+/// 5. cost.length == n
+/// 6. 1 <= |cost[i]| <= 10^4
+/// 7. The input is generated such that edges represents a valid tree.
+/// </summary>
+vector<long long> LeetCodeGraph::placedCoins(vector<vector<int>>& edges, vector<int>& cost)
+{
+    vector<vector<int>> neighbors(cost.size());
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(edges[i][1]);
+        neighbors[edges[i][1]].push_back(edges[i][0]);
+    }
+    vector<long long> result(cost.size());
+    placedCoins(neighbors, cost, -1, 0, result);
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 2977. Minimum Cost to Convert String II
+///  
+/// Hard
+///
+/// You are given two 0-indexed strings source and target, both of length n 
+/// and consisting of lowercase English characters. You are also given two 
+/// 0-indexed string arrays original and changed, and an integer array cost, 
+/// where cost[i] represents the cost of converting the string original[i] 
+/// to the string changed[i].
+///
+/// You start with the string source. In one operation, you can pick a 
+/// substring x from the string, and change it to y at a cost of z if there 
+/// exists any index j such that cost[j] == z, original[j] == x, and 
+/// changed[j] == y. You are allowed to do any number of operations, but 
+/// any pair of operations must satisfy either of these two conditions:
+///
+/// The substrings picked in the operations are source[a..b] and source[c..d] 
+/// with either b < c or d < a. In other words, the indices picked in both 
+/// operations are disjoint.
+/// The substrings picked in the operations are source[a..b] and source[c..d] 
+/// with a == c and b == d. In other words, the indices picked in both 
+/// operations are identical.
+/// Return the minimum cost to convert the string source to the string target 
+/// using any number of operations. If it is impossible to convert source to 
+/// target, return -1.
+///
+/// Note that there may exist indices i, j such that 
+/// original[j] == original[i] and changed[j] == changed[i].
+///
+/// Example 1:
+/// Input: source = "abcd", target = "acbe", 
+/// original = ["a","b","c","c","e","d"], changed = ["b","c","b","e","b","e"], 
+/// cost = [2,5,5,1,2,20]
+/// Output: 28
+/// Explanation: To convert "abcd" to "acbe", do the following operations:
+/// - Change substring source[1..1] from "b" to "c" at a cost of 5.
+/// - Change substring source[2..2] from "c" to "e" at a cost of 1.
+/// - Change substring source[2..2] from "e" to "b" at a cost of 2.
+/// - Change substring source[3..3] from "d" to "e" at a cost of 20.
+/// The total cost incurred is 5 + 1 + 2 + 20 = 28. 
+/// It can be shown that this is the minimum possible cost.
+///
+/// Example 2:
+/// Input: source = "abcdefgh", target = "acdeeghh", 
+/// original = ["bcd","fgh","thh"], changed = ["cde","thh","ghh"], 
+/// cost = [1,3,5]
+/// Output: 9
+/// Explanation: To convert "abcdefgh" to "acdeeghh", do the following 
+/// operations:
+/// - Change substring source[1..3] from "bcd" to "cde" at a cost of 1.
+/// - Change substring source[5..7] from "fgh" to "thh" at a cost of 3. 
+///   We can do this operation because indices [5,7] are disjoint with 
+/// indices picked in the first operation.
+/// - Change substring source[5..7] from "thh" to "ghh" at a cost of 5. 
+///   We can do this operation because indices [5,7] are disjoint with 
+///   indices picked in the first operation, and identical with indices 
+///   picked in the second operation.
+/// The total cost incurred is 1 + 3 + 5 = 9.
+/// It can be shown that this is the minimum possible cost.
+///
+/// Example 3:
+/// Input: source = "abcdefgh", target = "addddddd", 
+/// original = ["bcd","defgh"], changed = ["ddd","ddddd"], cost = [100,1578]
+/// Output: -1
+/// Explanation: It is impossible to convert "abcdefgh" to "addddddd".
+/// If you select substring source[1..3] as the first operation to change 
+/// "abcdefgh" to "adddefgh", you cannot select substring source[3..7] as the 
+/// second operation because it has a common index, 3, with the first 
+/// operation.
+/// If you select substring source[3..7] as the first operation to change 
+/// "abcdefgh" to "abcddddd", you cannot select substring source[1..3] as the 
+/// second operation because it has a common index, 3, with the first 
+/// operation.
+/// 
+/// Constraints:
+/// 1. 1 <= source.length == target.length <= 1000
+/// 2. source, target consist only of lowercase English characters.
+/// 3. 1 <= cost.length == original.length == changed.length <= 100
+/// 4. 1 <= original[i].length == changed[i].length <= source.length
+/// 5. original[i], changed[i] consist only of lowercase English characters.
+/// 6. original[i] != changed[i]
+/// 7. 1 <= cost[i] <= 10^6
+/// </summary>
+long long LeetCodeGraph::minimumCost(string source, string target, vector<string>& original,
+    vector<string>& changed, vector<int>& cost)
+{
+    unordered_map<string, int> str_map;
+    for (size_t i = 0; i < original.size(); i++)
+    {
+        int s = 0;
+        if (str_map.count(original[i]) > 0)
+        {
+            s = str_map[original[i]];
+        }
+        else
+        {
+            s = str_map.size();
+            str_map[original[i]] = s;
+        }
+        int d = 0;
+        if (str_map.count(changed[i]) > 0)
+        {
+            d = str_map[changed[i]];
+        }
+        else
+        {
+            d = str_map.size();
+            str_map[changed[i]] = d;
+        }
+    }
+    int n = str_map.size();
+    vector<vector<long long>> costs(n, vector<long long>(n, LLONG_MAX));
+    for (size_t i = 0; i < original.size(); i++)
+    {
+        int s = str_map[original[i]];
+        int d = str_map[changed[i]];
+        costs[s][d] = min(costs[s][d], (long long)cost[i]);
+    }
+    for (int k = 0; k < n; k++)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            if (i == k) continue;
+            for (int j = 0; j < n; j++)
+            {
+                if (k == j || i == j) continue;
+                if (costs[i][k] != LLONG_MAX && costs[k][j] != LLONG_MAX)
+                {
+                    costs[i][j] = min(costs[i][j] , (long long)costs[i][k] + (long long)costs[k][j]);
+                }
+            }
+        }
+    }
+    set<int> str_size;
+    for (auto itr : str_map) str_size.insert(itr.first.size());
+    n = source.size();
+    vector<long long>dp(n + 1, LLONG_MAX);
+    dp[0] = 0;
+    for (size_t i = 0; i < source.size(); i++)
+    {
+        if (source[i] == target[i])
+        {
+            dp[i + 1] = min(dp[i], dp[i+1]);
+        }
+        if (dp[i] == LLONG_MAX) continue;
+        for (auto size : str_size)
+        {
+            if ((int)i + size > n) break;
+            string sub_source = source.substr(i, size);
+            string sub_target = target.substr(i, size);
+            if (str_map.count(sub_source) > 0 && str_map.count(sub_target) > 0)
+            {
+                int s = str_map[sub_source];
+                int t = str_map[sub_target];
+                if (costs[s][t] != LLONG_MAX)
+                {
+                    dp[i + size] = min(dp[i + size], dp[i] + costs[s][t]);
+                }
+            }
+        }
+    }
+    if (dp[n] == LLONG_MAX) return -1;
+    else return dp[n];
+}
+
 #pragma endregion

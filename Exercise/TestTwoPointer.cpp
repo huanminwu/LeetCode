@@ -33,6 +33,28 @@ void TestLeetCode42(void)
     Logger::WriteMessage(message);
 }
 
+void TestLeetCode159(void)
+{
+    Logger::WriteMessage("Test Leet Code 159");
+    LeetCodeTwoPointer leetCode;
+    string s = "eceba";
+    int max_length = leetCode.lengthOfLongestSubstringTwoDistinct(s);
+    Logger::WriteMessage("s = " + s + "; max_length = " + to_string(max_length));
+    
+    s = "ccaabbb";
+    max_length = leetCode.lengthOfLongestSubstringTwoDistinct(s);
+    Logger::WriteMessage("s = " + s + "; max_length = " + to_string(max_length));
+}
+
+void TestLeetCode344(void)
+{
+    Logger::WriteMessage("Test Leet Code 344");
+    LeetCodeTwoPointer leetCode;
+    string s("Hello");
+    string r = leetCode.reverseString(s);
+    Logger::WriteMessage("Reverse " + s + " = " + r);
+}
+
 void TestLeetCode424(void)
 {
     Logger::WriteMessage("Test Leet Code 424");
@@ -675,8 +697,50 @@ void TestLeetCode2968(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2970(void)
+{
+    Logger::WriteMessage("Test Leet Code 2970");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 1,2,3,4 };
+    Logger::WriteMessage(nums);
+    int result = leetCode.incremovableSubarrayCount(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,5,7,8 };
+    Logger::WriteMessage(nums);
+    result = leetCode.incremovableSubarrayCount(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 8,7,6,6 };
+    Logger::WriteMessage(nums);
+    result = leetCode.incremovableSubarrayCount(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode2972(void)
+{
+    Logger::WriteMessage("Test Leet Code 2972");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 1,2,3,4 };
+    Logger::WriteMessage(nums);
+    long long result = leetCode.incremovableSubarrayCountII(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,5,7,8 };
+    Logger::WriteMessage(nums);
+    result = leetCode.incremovableSubarrayCountII(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 8,7,6,6 };
+    Logger::WriteMessage(nums);
+    result = leetCode.incremovableSubarrayCountII(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode2972();
+    TestLeetCode2970();
     TestLeetCode2968();
     TestLeetCode2958();
     TestLeetCode2904();
@@ -710,6 +774,8 @@ void TestLeetCodeTwoPointer(void)
     TestLeetCode658();
     TestLeetCode643();
     TestLeetCode424();
+    TestLeetCode344();
+    TestLeetCode159();
     TestLeetCode42();
     TestLeetCode11();
 }

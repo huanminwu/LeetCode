@@ -190,6 +190,35 @@ public:
     /// </summary>
     bool containsDuplicate(vector<int>& nums);
 
+
+    /// <summary>
+    /// Leet Code 219. Contains Duplicate II
+    ///  
+    /// Easy
+    ///
+    /// Given an integer array nums and an integer k, return true if there are two 
+    /// distinct indices i and j in the array such that nums[i] == nums[j] and 
+    /// abs(i - j) <= k.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,2,3,1], k = 3
+    /// Output: true
+    ///
+    /// Example 2:
+    /// Input: nums = [1,0,1,1], k = 1
+    /// Output: true
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,3,1,2,3], k = 2
+    /// Output: false
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// 3. 0 <= k <= 10^5
+    /// </summary>
+    bool containsNearbyDuplicate(vector<int>& nums, int k);
+
     /// <summary>
     /// Leet code #299. Bulls and Cows
     ///
@@ -239,13 +268,6 @@ public:
     /// you cannot load all elements into the memory at once?
     /// </summary>
     vector<int> intersectionArrayII(vector<int>& nums1, vector<int>& nums2);
-
-    /// <summary>
-    /// Leet code #219. Contains Duplicate II
-    /// Given an array of integers and an integer k, find out whether there are two distinct 
-    /// indices i and j in the array such that nums[i] = nums[j] and the difference between i and j is at most k.	
-    /// </summary>
-    bool containsNearbyDuplicate(vector<int>& nums, int k);
 
     /// <summary>
     /// Leet code #347. Top K Frequent Elements
