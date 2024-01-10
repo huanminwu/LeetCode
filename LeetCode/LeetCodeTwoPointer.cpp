@@ -2471,8 +2471,8 @@ int LeetCodeTwoPointer::maxFrequencyScore(vector<int>& nums, long long k)
     while(last < n)
     {
         int mid = (first + last) / 2;
-        long long ops = (long long)nums[mid] * (long long)(mid - first) - (sum[mid] - sum[first]);
-        ops += (sum[last + 1] - sum[mid + 1]) - (long long)nums[mid] * (long long)(last - mid);
+        long long ops = (long long)nums[mid] * ((long long)mid - (long long)first) - (sum[mid] - sum[first]);
+        ops += (sum[last + 1] - sum[mid + 1]) - (long long)nums[mid] * ((long long)last - (long long)mid);
         if (ops > k) first++;
         else
         {
@@ -2640,4 +2640,50 @@ long long LeetCodeTwoPointer::incremovableSubarrayCountII(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 1004. Max Consecutive Ones III
+///  
+/// Medium
+///
+/// Given a binary array nums and an integer k, return the maximum number of 
+/// consecutive 1's in the array if you can flip at most k 0's.
+///
+/// Example 1:
+/// Input: nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2
+/// Output: 6
+/// Explanation: [1,1,1,0,0,1,1,1,1,1,1]
+/// Bolded numbers were flipped from 0 to 1. The longest subarray is 
+/// underlined.
+///
+/// Example 2:
+/// Input: nums = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], k = 3
+/// Output: 10
+/// Explanation: [0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1]
+/// Bolded numbers were flipped from 0 to 1. The longest subarray is 
+/// underlined.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. nums[i] is either 0 or 1.
+/// 3. 0 <= k <= nums.length
+/// </summary>
+int LeetCodeTwoPointer::longestOnes(vector<int>& nums, int k)
+{
+    int result = 0;
+    int prev = -1;
+    int zero = 0;
+    for (int i = 0; i < (int)nums.size(); i++)
+    {
+        if (nums[i] == 0) zero++;
+        while (zero > k)
+        {
+            prev++; 
+            if (nums[prev] == 0) zero--;
+        }
+        result = max(result, i - prev);
+    }
+    return result;
+}
+
 #pragma endregion

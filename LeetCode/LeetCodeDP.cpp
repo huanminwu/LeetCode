@@ -21,18 +21,24 @@
 #pragma region DynamicProgramming
 
 /// <summary>
-/// Leet code #5. Longest Palindromic Substring 
-/// Given a string S, find the longest palindromic substring in S. 
-/// You may assume that the maximum length of S is 1000.
+/// Leet Code 5. Longest Palindromic Substring
+///  
+/// Medium
 ///
+/// Given a string s, return the longest palindromic substring in s.
+/// 
 /// Example 1:
-/// Input: "babad"
-/// Output : "bab"
-/// Note : "aba" is also a valid answer.
+/// Input: s = "babad"
+/// Output: "bab"
+/// Explanation: "aba" is also a valid answer.
 ///
-/// Example 2 :
-/// Input : "cbbd"
-/// Output : "bb"
+/// Example 2:
+/// Input: s = "cbbd"
+/// Output: "bb"
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 1000
+/// 2. s consist of only digits and English letters.
 /// </summary>
 string LeetCodeDP::longestPalindrome(string s)
 {
@@ -40,18 +46,18 @@ string LeetCodeDP::longestPalindrome(string s)
     size_t n = s.size();
     vector<vector<int>> dp(n, vector<int>(n));
 
-    for (size_t k = 0; k < n; k++)
+    for (size_t j = 0; j < n; j++)
     {
-        for (size_t i = 0; i < n - k; i++)
+        for (size_t  i = 0; i <= j; i++)
         {
-            if (s[i] == s[i + k])
+            if (s[i] == s[j])
             {
-                if ((k < 2) || (dp[i + 1][i + k - 1] == 1))
+                if ((j - i <= 2) || (dp[i + 1][j - 1] == 1))
                 {
-                    dp[i][i + k] = 1;
-                    if (k + 1 > result.size())
+                    dp[i][j] = 1;
+                    if ((j - i + 1) > result.size())
                     {
-                        result = s.substr(i, k + 1);
+                        result = s.substr(i, j - i + 1);
                     }
                 }
             }
@@ -1776,17 +1782,6 @@ vector<int> LeetCodeDP::findPermutation(string s)
 /// You end up paying $5 + $7 + $9 = $21.
 /// Given a particular n ≥ 1, find out how much money you need to have to 
 /// guarantee a win.
-/// Hint:
-/// 1.The best strategy to play the game is to minimize the maximum loss you 
-///    could possibly face. 
-///    Another strategy is to minimize the expected loss. Here, we are interested 
-///    in the first scenario.
-/// 2.Take a small example (n = 3). What do you end up paying in the worst case?
-/// 3.Check out this article if you're still stuck.
-/// 4.The purely recursive implementation of minimax would be worthless for even a small n. 
-///   You MUST use dynamic programming. 
-/// 5.As a follow-up, how would you modify your code to solve the problem of minimizing the 
-///   expected loss, instead of the worst-case loss? 
 /// </summary>
 int LeetCodeDP::getMoneyAmount(int n)
 {
@@ -16951,6 +16946,175 @@ int LeetCodeDP::minimumCoinsII(vector<int>& prices)
         future_prices.push_back(make_pair(i * 2, dp[i][0]));
     }
     return dp[n][1];
+}
+
+/// <summary>
+/// Leet Code 3003. Maximize the Number of Partitions After Operations
+///                 
+/// Hard
+///
+/// You are given a 0-indexed string s and an integer k.
+/// 
+/// You are to perform the following partitioning operations until s is empty:
+///
+/// Choose the longest prefix of s containing at most k distinct characters.
+/// Delete the prefix from s and increase the number of partitions by one. The 
+/// remaining characters (if any) in s maintain their initial order.
+/// Before the operations, you are allowed to change at most one index in s to 
+/// another lowercase English letter.
+///
+/// Return an integer denoting the maximum number of resulting partitions 
+/// after the operations by optimally choosing at most one index to change.
+/// 
+/// Example 1: 
+/// Input: s = "accca", k = 2
+/// Output: 3
+/// Explanation: In this example, to maximize the number of resulting 
+/// partitions, s[2] can be changed to 'b'.
+/// s becomes "acbca".
+/// The operations can now be performed as follows until s becomes empty:
+/// - Choose the longest prefix containing at most 2 distinct characters, 
+///   "acbca".
+/// - Delete the prefix, and s becomes "bca". The number of partitions is 
+///   now 1.
+/// - Choose the longest prefix containing at most 2 distinct characters,
+///   "bca".
+/// - Delete the prefix, and s becomes "a". The number of partitions is 
+///   now 2.
+/// - Choose the longest prefix containing at most 2 distinct characters, 
+///   "a".
+/// - Delete the prefix, and s becomes empty. The number of partitions 
+///   is now 3.
+/// Hence, the answer is 3.
+/// It can be shown that it is not possible to obtain more than 3 partitions.
+///
+/// Example 2:
+/// Input: s = "aabaab", k = 3
+/// Output: 1
+/// Explanation: In this example, to maximize the number of resulting 
+/// partitions we can leave s as it is.
+/// The operations can now be performed as follows until s becomes empty: 
+/// - Choose the longest prefix containing at most 3 distinct characters, 
+///   "aabaab".
+/// - Delete the prefix, and s becomes empty. The number of partitions 
+///   becomes 1. 
+/// Hence, the answer is 1. 
+/// It can be shown that it is not possible to obtain more than 1 partition.
+///
+/// Example 3:
+/// Input: s = "xxyz", k = 1
+/// Output: 4
+/// Explanation: In this example, to maximize the number of resulting 
+/// partitions, s[1] can be changed to 'a'.
+/// s becomes "xayz".
+/// The operations can now be performed as follows until s becomes empty:
+/// - Choose the longest prefix containing at most 1 distinct character, 
+///   "xayz".
+/// - Delete the prefix, and s becomes "ayz". The number of partitions is 
+///   now 1.
+/// - Choose the longest prefix containing at most 1 distinct character, 
+///   "ayz".
+/// - Delete the prefix, and s becomes "yz". The number of partitions is 
+///   now 2.
+/// - Choose the longest prefix containing at most 1 distinct character, 
+///   "yz".
+/// - Delete the prefix, and s becomes "z". The number of partitions is 
+///   now 3.
+/// - Choose the longest prefix containing at most 1 distinct character, 
+///   "z".
+/// - Delete the prefix, and s becomes empty. The number of partitions is 
+///   now 4.
+/// Hence, the answer is 4.
+/// It can be shown that it is not possible to obtain more than 4 partitions.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^4
+/// 2. s consists only of lowercase English letters.
+/// 3. 1 <= k <= 26
+/// </summary>
+int LeetCodeDP::maxPartitionsAfterOperations(string s, int k)
+{
+    int n = s.size();
+    vector<pair<int, int>> dp_parts(n), dp_bits(n);
+    int bit_map = 0;
+    int count = 0;
+    int partitions = 0;
+    int result = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if ((bit_map & (1 << (s[i] - 'a'))) == 0) 
+        {
+            count++;
+            if (count > k)
+            {
+                partitions++;
+                bit_map = 0;
+                count = 1;
+            }
+        }
+        bit_map |= (1 << (s[i] - 'a'));
+        dp_parts[i].first = partitions;
+        dp_bits[i].first = bit_map;
+    }
+
+    bit_map = 0;
+    count = 0;
+    partitions = 0;
+    for (int i = n - 1; i >= 0; i--)
+    {
+        if ((bit_map & (1 << (s[i] - 'a'))) == 0)
+        {
+            count++;
+            if (count > k)
+            {
+                partitions++;
+                bit_map = 0;
+                count = 1;
+            }
+        }
+        bit_map |= (1 << (s[i] - 'a'));
+        dp_parts[i].second = partitions;
+        dp_bits[i].second = bit_map;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        int left = 0, right = 0, common = 0, center = 0;
+        for (int j = 0; j < 26; j++)
+        {
+            if (i > 0 && (dp_bits[i - 1].first & (1 << j)) != 0) left++;
+            if (i < n - 1 && (dp_bits[i + 1].second & (1 << j)) != 0) right++;
+            if ((i > 0 && i < n - 1 && 
+                ((dp_bits[i - 1].first & (1 << j)) == 0) &&
+                ((dp_bits[i + 1].second & (1 << j)) == 0)) ||
+                (i == 0 && i < n - 1 && ((dp_bits[i + 1].second & (1 << j)) == 0)) ||
+                (i == n - 1 && i > 0 && ((dp_bits[i - 1].first & (1 << j)) == 0)))
+            {
+                center = 1;
+            }
+            if ((i > 0) && (i < n - 1) && 
+                ((dp_bits[i - 1].first & (1 << j)) != 0) &&
+                ((dp_bits[i + 1].second & (1 << j)) != 0))
+            {
+                common++;
+            }
+        }
+        int left_parts = i > 0 ? dp_parts[i - 1].first : 0;
+        int right_parts = i < n - 1 ? dp_parts[i + 1].second : 0;
+        if (left == k && right == k && center == 1)
+        {
+            result = max(result, left_parts + right_parts + 3);
+        }
+        else if (left + right - common + center > k)
+        {
+            result = max(result, left_parts + right_parts + 2);
+        }
+        else
+        {
+            result = max(result, left_parts + right_parts + 1);
+        }
+    }
+    return result;
 }
 #pragma endregion
 

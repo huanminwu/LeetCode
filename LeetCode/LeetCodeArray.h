@@ -675,37 +675,6 @@ public:
     /// </summary>
     int subarraysWithKDistinct(vector<int>& A, int K);
 
-    /// <summary>
-    /// Leet code #1004. Max Consecutive Ones III
-    /// 
-    /// Given an array A of 0s and 1s, we may change up to K values from 0 to 1.
-    ///
-    /// Return the length of the longest (contiguous) subarray that contains 
-    /// only 1s. 
-    ///
-    /// Example 1:
-    /// Input: A = [1,1,1,0,0,0,1,1,1,1,0], K = 2
-    /// Output: 6
-    /// Explanation: 
-    /// [1,1,1,0,0,1,1,1,1,1,1]
-    /// Bolded numbers were flipped from 0 to 1.  The longest subarray is 
-    /// underlined.
-    ///
-    /// Example 2:
-    /// Input: A = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], K = 3
-    /// Output: 10
-    /// Explanation: 
-    /// [0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1]
-    /// Bolded numbers were flipped from 0 to 1.  The longest subarray is 
-    /// underlined.
-    /// 
-    /// Note:
-    ///
-    /// 1. 1 <= A.length <= 20000
-    /// 2. 0 <= K <= A.length
-    /// 3. A[i] is 0 or 1 
-    /// </summary>
-    int longestOnes(vector<int>& A, int K);
 
     /// <summary>
     /// Leet code #838. Push Dominoes
@@ -3402,32 +3371,35 @@ public:
     void rotateArray(vector<int>& nums, int k);
 
     /// <summary>
-    /// Leet code #419. Battleships in a Board  
+    /// Leet Code 419. Battleships in a Board
+    ///  
+    /// Medium
     ///
-    /// Given an 2D board, count how many different battleships are in it. 
-    /// The battleships are represented with 'X's, empty slots are 
-    /// represented with '.'s. You may assume the following rules: 
-    /// You receive a valid board, made of only battleships or empty slots.
-    /// Battleships can only be placed horizontally or vertically. In other 
-    /// words, they can only be made of the shape 1xN (1 row, N columns) or 
-    /// Nx1 (N rows, 1 column), where N can be of any size.
-    /// At least one horizontal or vertical cell separates between two 
-    /// battleships - there are no adjacent battleships.
-    /// Example:
-    /// X..X
-    /// ...X
-    /// ...X
-    /// In the above board there are 2 battleships. 
-    /// Invalid Example:
-    /// ...X
-    /// XXXX
-    /// ...X
-    /// This is an invalid board that you will not receive - as battleships 
-    /// will always have a cell separating between them. 
-    /// Follow up:
-    /// Could you do it in one-pass, using only O(1) extra memory and 
-    /// without modifying the value of the board?    
-    /// </summary>
+    /// Given an m x n matrix board where each cell is a battleship 'X' or empty 
+    /// '.', return the number of the battleships on board.
+    ///
+    /// Battleships can only be placed horizontally or vertically on board. In 
+    /// other words, they can only be made of the shape 1 x k (1 row, k columns) 
+    /// or k x 1 (k rows, 1 column), where k can be of any size. At least one 
+    /// horizontal or vertical cell separates between two battleships (i.e., 
+    /// there are no adjacent battleships).
+    ///
+    /// Example 1:
+    /// Input: board = [["X",".",".","X"],[".",".",".","X"],[".",".",".","X"]]
+    /// Output: 2
+    ///
+    /// Example 2:
+    /// Input: board = [["."]]
+    /// Output: 0
+    /// 
+    /// Constraints:
+    /// 1. m == board.length
+    /// 2. n == board[i].length
+    /// 3. 1 <= m, n <= 200
+    /// 4. board[i][j] is either '.' or 'X'.
+    /// Follow up: Could you do it in one-pass, using only O(1) extra memory and 
+    /// without modifying the values board?
+    /// </summary>    
     int countBattleships(vector<vector<char>>& board);
 
     /// <summary>
@@ -3444,36 +3416,6 @@ public:
     /// [2,3]
     /// </summary>
     vector<int> findDuplicates(vector<int>& nums);
-
-    /// <summary>
-    /// Leet code #243. Shortest Word Distance  
-    /// 
-    /// Given a list of words and two words word1 and word2, return the 
-    /// shortest distance between these two words in the list. 
-    /// For example,
-    /// Assume that words = ["practice", "makes", "perfect", "coding", "makes"]
-    /// Given word1 = "coding", word2 = "practice", return 3. 
-    /// Given word1 = "makes", word2 = "coding", return 1.
-    /// </summary>
-    int shortestDistance(vector<string>& words, string word1, string word2);
-
-    /// <summary>
-    /// Leet code #245. Shortest Word Distance III  
-    /// 
-    /// This is a follow up of Shortest Word Distance. The only difference is 
-    /// now word1 could be the same as word2.
-    /// Given a list of words and two words word1 and word2, return the 
-    /// shortest distance between these two words in the list.
-    /// word1 and word2 may be the same and they represent two individual 
-    /// words in the list.
-    /// For example,
-    /// Assume that words = ["practice", "makes", "perfect", "coding", "makes"]. 
-    /// Given word1 = ¡°makes¡±, word2 = ¡°coding¡±, return 1.
-    /// Given word1 = "makes", word2 = "makes", return 3. 
-    /// Note:
-    /// You may assume word1 and word2 are both in the list. 
-    /// </summary>
-    int shortestWordDistance(vector<string>& words, string word1, string word2);
 
     /// <summary>
     /// Leet code #1330. Reverse Subarray To Maximize Array Value 
@@ -19632,5 +19574,128 @@ public:
     /// 5. hFences and vFences are unique.
     /// </summary>
     int maximizeSquareArea(int m, int n, vector<int>& hFences, vector<int>& vFences);
+
+    /// <summary>
+    /// Leet Code 2981. Find Longest Special Substring That Occurs Thrice I
+    ///  
+    /// Medium
+    ///
+    /// You are given a string s that consists of lowercase English letters.
+    ///
+    /// A string is called special if it is made up of only a single character. 
+    /// For example, the string "abc" is not special, whereas the strings "ddd", 
+    /// "zz", and "f" are special.
+    ///
+    /// Return the length of the longest special substring of s which occurs 
+    /// at least thrice, or -1 if no special substring occurs at least thrice.
+    ///
+    /// A substring is a contiguous non-empty sequence of characters within a 
+    /// string.
+    /// 
+    /// Example 1:
+    /// Input: s = "aaaa"
+    /// Output: 2
+    /// Explanation: The longest special substring which occurs thrice is "aa": 
+    /// substrings "aaaa", "aaaa", and "aaaa".
+    /// It can be shown that the maximum length achievable is 2.
+    ///
+    /// Example 2:
+    /// Input: s = "abcdef"
+    /// Output: -1
+    /// Explanation: There exists no special substring which occurs at least 
+    /// thrice. Hence return -1.
+    ///
+    /// Example 3:
+    /// Input: s = "abcaba"
+    /// Output: 1
+    /// Explanation: The longest special substring which occurs thrice is 
+    /// "a": substrings "abcaba", "abcaba", and "abcaba".
+    /// It can be shown that the maximum length achievable is 1.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= s.length <= 50
+    /// 2. s consists of only lowercase English letters.
+    /// </summary>
+    int maximumLength(string s);
+
+    /// <summary>
+    /// Leet Code 2982. Find Longest Special Substring That Occurs Thrice II
+    ///  
+    /// Medium
+    ///
+    /// You are given a string s that consists of lowercase English letters.
+    ///
+    /// A string is called special if it is made up of only a single character. 
+    /// For example, the string "abc" is not special, whereas the strings "ddd", 
+    /// "zz", and "f" are special.
+    ///
+    /// Return the length of the longest special substring of s which occurs at 
+    /// least thrice, or -1 if no special substring occurs at least thrice.
+    ///
+    /// A substring is a contiguous non-empty sequence of characters within a 
+    /// string.
+    /// 
+    /// Example 1:
+    /// Input: s = "aaaa"
+    /// Output: 2
+    /// Explanation: The longest special substring which occurs thrice is "aa": 
+    /// substrings "aaaa", "aaaa", and "aaaa".
+    /// It can be shown that the maximum length achievable is 2.
+    ///
+    /// Example 2:
+    /// Input: s = "abcdef"
+    /// Output: -1
+    /// Explanation: There exists no special substring which occurs at least 
+    /// thrice. Hence return -1.
+    ///
+    /// Example 3:
+    /// Input: s = "abcaba"
+    /// Output: 1
+    /// Explanation: The longest special substring which occurs thrice is 
+    /// "a": substrings "abcaba", "abcaba", and "abcaba".
+    /// It can be shown that the maximum length achievable is 1.
+    ///  
+    /// Constraints:
+    /// 1. 3 <= s.length <= 5 * 10^5
+    /// 2. s consists of only lowercase English letters.
+    /// </summary>
+    int maximumLengthII(string s);
+
+    /// <summary>
+    /// Leet Code 2996. Smallest Missing Integer Greater Than Sequential 
+    ///                 Prefix Sum
+    /// 
+    /// Easy
+    ///
+    /// You are given a 0-indexed array of integers nums.
+    ///
+    /// A prefix nums[0..i] is sequential if, for all 1 <= j <= i, 
+    /// nums[j] = nums[j - 1] + 1. In particular, the prefix consisting only 
+    /// of nums[0] is sequential.
+    ///
+    /// Return the smallest integer x missing from nums such that x is greater 
+    /// than or equal to the sum of the longest sequential prefix.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2,3,2,5]
+    /// Output: 6
+    /// Explanation: The longest sequential prefix of nums is [1,2,3] with a 
+    /// sum of 6. 6 is not in the array, therefore 6 is the smallest missing 
+    /// integer greater than or equal to the sum of the longest sequential 
+    /// prefix.
+    ///
+    /// Example 2:
+    /// Input: nums = [3,4,5,1,12,14,13]
+    /// Output: 15
+    /// Explanation: The longest sequential prefix of nums is [3,4,5] with 
+    /// a sum of 12. 12, 13, and 14 belong to the array while 15 does not. 
+    /// Therefore 15 is the smallest missing integer greater than or equal 
+    /// to the sum of the longest sequential prefix.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 50
+    /// 2. 1 <= nums[i] <= 50
+    /// </summary>
+    int missingInteger(vector<int>& nums);
 };
 #endif  // LeetCodeArray_H

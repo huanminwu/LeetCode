@@ -4912,8 +4912,39 @@ void TestLeetCode2969(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3003(void)
+{
+    Logger::WriteMessage("Test Leet Code 3003");
+    LeetCodeDP leetCode;
+    string s = "accca";
+    int k = 2;
+    int result = leetCode.maxPartitionsAfterOperations(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "aabaab";
+    k = 3;
+    result = leetCode.maxPartitionsAfterOperations(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "xxyz";
+    k = 1;
+    result = leetCode.maxPartitionsAfterOperations(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "tzaxomrbtieqpkduclsjhdyxonfwwbnbqgbvdxaqhbip";
+    k = 26;
+    result = leetCode.maxPartitionsAfterOperations(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3003();
+    TestLeetCode801();
     TestLeetCode2969();
     TestLeetCode2944();
     TestLeetCode2919();
@@ -4980,7 +5011,6 @@ void TestLeetCodeDP(void)
     TestLeetCode823();
     TestLeetCode813();
     TestLeetCode808();
-    TestLeetCode801();
     TestLeetCode799();
     TestLeetCode793();
     TestLeetCode795();

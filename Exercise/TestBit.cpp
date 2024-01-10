@@ -1235,8 +1235,47 @@ void TestLeetCode2939(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode2980(void)
+{
+    Logger::WriteMessage("Test Leet Code 2980");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5 };
+    bool result = leetCode.hasTrailingZeros(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string) (result ? "true" : "false"));
+
+    nums = { 2,4,8,16 };
+    result = leetCode.hasTrailingZeros(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,3,5,7,9 };
+    result = leetCode.hasTrailingZeros(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode2997(void)
+{
+    Logger::WriteMessage("Test Leet Code 2997");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 2,1,3,4 };
+    int k = 1;
+    int result = leetCode.minOperations(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 2,0,2,0 };
+    k = 0;
+    result = leetCode.minOperations(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode2997();
+    TestLeetCode2980();
     TestLeetCode2939();
     TestLeetCode2935();
     TestLeetCode2932();

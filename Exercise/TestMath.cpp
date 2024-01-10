@@ -6460,8 +6460,60 @@ void TestLeetCode2967(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2979(void)
+{
+    Logger::WriteMessage("Test Leet Code 2979");
+    LeetCodeMath leetCode;
+    int primeOne = 2, primeTwo = 5;
+    int result = leetCode.mostExpensiveItem(primeOne, primeTwo);
+    Logger::WriteMessage("primeOne = " + to_string(primeOne) + "; primeTwo = " + to_string(primeTwo));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    primeOne = 5, primeTwo = 7;
+    result = leetCode.mostExpensiveItem(primeOne, primeTwo);
+    Logger::WriteMessage("primeOne = " + to_string(primeOne) + "; primeTwo = " + to_string(primeTwo));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3000(void)
+{
+    Logger::WriteMessage("Test Leet Code 3000");
+    LeetCodeMath leetCode;
+    vector<vector<int>> dimensions = { {9, 3},{8, 6} };
+    int result = leetCode.areaOfMaxDiagonal(dimensions);
+    Logger::WriteMessage(dimensions);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    dimensions = { {3,4} ,{4,3} };
+    result = leetCode.areaOfMaxDiagonal(dimensions);
+    Logger::WriteMessage(dimensions);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3001(void)
+{
+    Logger::WriteMessage("Test Leet Code 3001");
+    LeetCodeMath leetCode;
+    int a = 1, b = 1, c = 8, d = 8, e = 2, f = 3;
+    int result = leetCode.minMovesToCaptureTheQueen(a, b, c, d, e, f);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b));
+    Logger::WriteMessage("c = " + to_string(c) + "; d = " + to_string(d));
+    Logger::WriteMessage("e = " + to_string(e) + "; f = " + to_string(f));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    a = 5, b = 3, c = 3, d = 4, e = 5, f = 2;
+    result = leetCode.minMovesToCaptureTheQueen(a, b, c, d, e, f);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b));
+    Logger::WriteMessage("c = " + to_string(c) + "; d = " + to_string(d));
+    Logger::WriteMessage("e = " + to_string(e) + "; f = " + to_string(f));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3001();
+    TestLeetCode3000();
+    TestLeetCode2979();
     TestLeetCode2967();
     TestLeetCode2952();
     TestLeetCode2941();

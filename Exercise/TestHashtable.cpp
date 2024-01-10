@@ -1831,8 +1831,74 @@ void TestLeetCode2964(void)
     Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3002(void)
+{
+    Logger::WriteMessage("Test Leet Code 3002");
+    LeetCodeHashtable leetCode;
+    vector<int> nums1 = { 1, 2, 1, 2 };
+    vector<int> nums2 = { 1, 1, 1, 1 };
+    int result = leetCode.maximumSetSize(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,2,3,4,5,6 };
+    nums2 = { 2,3,2,3,2,3 };
+    result = leetCode.maximumSetSize(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,1,2,2,3,3 };
+    nums2 = { 4,4,5,5,6,6 };
+    result = leetCode.maximumSetSize(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode243(void)
+{
+    Logger::WriteMessage("Test Leet Code 243");
+    LeetCodeHashtable leetCode;
+    vector<string> words = { "practice", "makes", "perfect", "coding", "makes" };
+    string word1 = "coding";
+    string word2 = "practice";
+    int distance = leetCode.shortestDistance(words, word1, word2);
+    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
+
+    word1 = "makes";
+    word2 = "coding";
+    distance = leetCode.shortestDistance(words, word1, word2);
+    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
+}
+
+void TestLeetCode245(void)
+{
+    Logger::WriteMessage("Test Leet Code 245");
+    LeetCodeHashtable leetCode;
+    vector<string> words = { "practice", "makes", "perfect", "coding", "makes" };
+    string word1 = "coding";
+    string word2 = "practice";
+    int distance = leetCode.shortestWordDistance(words, word1, word2);
+    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
+
+    word1 = "makes";
+    word2 = "coding";
+    distance = leetCode.shortestWordDistance(words, word1, word2);
+    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
+
+    word1 = "makes";
+    word2 = "makes";
+    distance = leetCode.shortestWordDistance(words, word1, word2);
+    Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode245();
+    TestLeetCode243();
+    TestLeetCode3002();
     TestLeetCode2964();
     TestLeetCode2961();
     TestLeetCode2956();

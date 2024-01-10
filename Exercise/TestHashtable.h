@@ -3,7 +3,8 @@
 #define TestHashtable_H
 #include "..\LeetCode\LeetCodeHashtable.h"
 void TestLeetCode1(void);
-void TestLeetCode15(void); 
+void TestLeetCode15(void);
+void TestLeetCode243(void);
 void TestLeetCode454(void);
 void TestLeetCode18(void);
 void TestLeetCode170(void);
@@ -60,5 +61,6 @@ void TestLeetCode2870(void);
 void TestLeetCode2956(void);
 void TestLeetCode2961(void);
 void TestLeetCode2964(void);
+void TestLeetCode3002(void);
 void TestLeetCodeHashtable(void);
 #endif  // TestHashtable_H

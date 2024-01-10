@@ -163,6 +163,23 @@ void TestLeetCode881(void)
     Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
 }
 
+void TestLeetCode1004(void)
+{
+    Logger::WriteMessage("Test Leet Code 1004");
+    LeetCodeTwoPointer leetCode;
+    vector<int> A = { 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0 };
+    int K = 2;
+    int result = leetCode.longestOnes(A, K);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
+
+    A = { 0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1 };
+    K = 3;
+    result = leetCode.longestOnes(A, K);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
+}
+
 void TestLeetCode1100(void)
 {
     Logger::WriteMessage("Test Leet Code 1100");

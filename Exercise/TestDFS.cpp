@@ -2329,8 +2329,53 @@ void TestLeetCode2868(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode2992(void)
+{
+    Logger::WriteMessage("Test Leet Code 2992");
+    LeetCodeDFS leetCode;
+    int n = 1;
+    int result = leetCode.selfDivisiblePermutationCount(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 2;
+    result = leetCode.selfDivisiblePermutationCount(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    result = leetCode.selfDivisiblePermutationCount(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode2999(void)
+{
+    Logger::WriteMessage("Test Leet Code 2999");
+    LeetCodeDFS leetCode;
+    long long start = 1, finish = 6000;
+    int limit = 4;
+    string s = "124";
+    long long result = leetCode.numberOfPowerfulInt(start, finish, limit, s);
+    Logger::WriteMessage("start = " + to_string(start) + "; finish = " + to_string(finish));
+    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
+
+    start = 15, finish = 215;
+    limit = 6;
+    s = "10";
+    result = leetCode.numberOfPowerfulInt(start, finish, limit, s);
+    Logger::WriteMessage("start = " + to_string(start) + "; finish = " + to_string(finish));
+    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
+
+    start = 1000, finish = 2000;
+    limit = 4;
+    s = "3000";
+    result = leetCode.numberOfPowerfulInt(start, finish, limit, s);
+    Logger::WriteMessage("start = " + to_string(start) + "; finish = " + to_string(finish));
+    Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2999();
+    TestLeetCode2992();
     TestLeetCode2868();
     TestLeetCode2850();
     TestLeetCode2801();

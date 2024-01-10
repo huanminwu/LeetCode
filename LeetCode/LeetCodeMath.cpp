@@ -20582,5 +20582,231 @@ long long LeetCodeMath::minimumCost(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 2979. Most Expensive Item That Can Not Be Bought
+///  
+/// Medium
+///
+/// You are given two distinct prime numbers primeOne and primeTwo.
+///
+/// Alice and Bob are visiting a market. The market has an infinite number of 
+/// items, for any positive integer x there exists an item whose price is x. 
+/// Alice wants to buy some items from the market to gift to Bob. She has an 
+/// infinite number of coins in the denomination primeOne and primeTwo. She 
+/// wants to know the most expensive item she can not buy to gift to Bob.
+///
+/// Return the price of the most expensive item which Alice can not gift to 
+/// Bob.
+/// 
+/// Example 1:
+/// Input: primeOne = 2, primeTwo = 5
+/// Output: 3
+/// Explanation: The prices of items which cannot be bought are [1,3]. It 
+/// can be shown that all items with a price greater than 3 can be bought 
+/// using a combination of coins of denominations 2 and 5.
+///
+/// Example 2:
+/// Input: primeOne = 5, primeTwo = 7
+/// Output: 23
+/// Explanation: The prices of items which cannot be bought are [1,2,3,4,
+/// 6,8,9,11,13,16,18,23]. It can be shown that all items with a price 
+/// greater than 23 can be bought.
+/// 
+/// Constraints:
+/// 1. 1 < primeOne, primeTwo < 10^4
+/// 2. primeOne, primeTwo are prime numbers.
+/// 3. primeOne * primeTwo < 10^5
+/// </summary>
+int LeetCodeMath::mostExpensiveItem(int primeOne, int primeTwo)
+{
+    vector<int> dp(primeOne * primeTwo);
+    dp[0] = 1;
+    int result = 0;
+    for (int i = 0; i < primeOne * primeTwo; i++)
+    {
+        if (dp[i] == 0)
+        {
+            result = max(result, i);
+            continue;
+        }
+        if (i + primeOne < primeOne * primeTwo)
+        {
+            dp[i + primeOne] = 1;
+        }
+        if (i + primeTwo < primeOne * primeTwo)
+        {
+            dp[i + primeTwo] = 1;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3000. Maximum Area of Longest Diagonal Rectangle
+///                 
+/// Easy
+///
+/// You are given a 2D 0-indexed integer array dimensions.
+///
+/// For all indices i, 0 <= i < dimensions.length, dimensions[i][0] represents 
+/// the length and dimensions[i][1] represents the width of the rectangle i.
+///
+/// Return the area of the rectangle having the longest diagonal. If there are 
+/// multiple rectangles with the longest diagonal, return the area of the 
+/// rectangle having the maximum area.
+/// 
+/// Example 1:
+/// Input: dimensions = [[9,3],[8,6]]
+/// Output: 48
+/// Explanation: 
+/// For index = 0, length = 9 and width = 3. Diagonal 
+/// length = sqrt(9 * 9 + 3 * 3) = sqrt(90) ≈ 9.487.
+/// For index = 1, length = 8 and width = 6. Diagonal 
+/// length = sqrt(8 * 8 + 6 * 6) = sqrt(100) = 10.
+/// So, the rectangle at index 1 has a greater diagonal length therefore we 
+/// return area = 8 * 6 = 48.
+///
+/// Example 2:
+/// Input: dimensions = [[3,4],[4,3]]
+/// Output: 12
+/// Explanation: Length of diagonal is the same for both which is 5, so 
+/// maximum area = 12.
+/// 
+/// Constraints:
+/// 1. 1 <= dimensions.length <= 100
+/// 2. dimensions[i].length == 2
+/// 3. 1 <= dimensions[i][0], dimensions[i][1] <= 100
+/// </summary>
+int LeetCodeMath::areaOfMaxDiagonal(vector<vector<int>>& dimensions)
+{
+    int max_diagonal = 0;
+    int max_area = 0;
+    for (size_t i = 0; i < dimensions.size(); i++)
+    {
+        int sqaure_diagonal = dimensions[i][0] * dimensions[i][0] + dimensions[i][1] * dimensions[i][1];
+        int area = dimensions[i][0] * dimensions[i][1];
+        if (sqaure_diagonal > max_diagonal)
+        {
+            max_diagonal = sqaure_diagonal;
+            max_area = area;
+        }
+        else if (sqaure_diagonal == max_diagonal && area > max_area)
+        {
+            max_area = area;
+        }
+    }
+    return max_area;
+}
+
+/// <summary>
+/// Leet Code 3001. Minimum Moves to Capture The Queen
+///                 
+/// Medium
+///
+/// There is a 1-indexed 8 x 8 chessboard containing 3 pieces.
+///
+/// You are given 6 integers a, b, c, d, e, and f where:
+///
+/// (a, b) denotes the position of the white rook.
+/// (c, d) denotes the position of the white bishop.
+/// (e, f) denotes the position of the black queen.
+/// Given that you can only move the white pieces, return the minimum number 
+/// of moves required to capture the black queen.
+///
+/// Note that:
+/// 
+/// Rooks can move any number of squares either vertically or horizontally, 
+/// but cannot jump over other pieces.
+/// Bishops can move any number of squares diagonally, but cannot jump over 
+/// other pieces.
+/// A rook or a bishop can capture the queen if it is located in a square 
+/// that they can move to.
+/// The queen does not move.
+///  
+/// 
+/// Example 1:
+/// Input: a = 1, b = 1, c = 8, d = 8, e = 2, f = 3
+/// Output: 2
+/// Explanation: We can capture the black queen in two moves by moving the 
+/// white rook to (1, 3) then to (2, 3).
+/// It is impossible to capture the black queen in less than two moves since 
+/// it is not being attacked by any of the pieces at the beginning.
+///
+/// Example 2:
+/// Input: a = 5, b = 3, c = 3, d = 4, e = 5, f = 2
+/// Output: 1
+/// Explanation: We can capture the black queen in a single move by doing one 
+/// of the following: 
+/// - Move the white rook to (5, 2).
+/// - Move the white bishop to (5, 2).
+///
+/// Constraints:
+/// 1. 1 <= a, b, c, d, e, f <= 8
+/// 2. No two pieces are on the same square.
+/// </summary>
+int LeetCodeMath::minMovesToCaptureTheQueen(int a, int b, int c, int d, int e, int f)
+{
+    int rook = 0, bishop = 0;
+    if (a == e)
+    {
+        if (a == c && (d > min(b, f) && d < max(b, f)))
+        {
+            rook = 2;
+        }
+        else
+        {
+            rook = 1;
+        }
+    }
+    else if (b == f)
+    {
+        if (b == d && (c > min(a, e) && c < max(a, e)))
+        {
+            rook = 2;
+        }
+        else
+        {
+            rook = 1;
+        }
+    }
+    else
+    {
+        rook = 2;
+    }
+    if ((c + d) % 2 != (e + f) % 2)
+    {
+        bishop = INT_MAX;
+    }
+    else if ((c + d) == (e + f))
+    {
+        if ((a + b == c + d) && a > min(c, e) && a < max(c, e))
+        {
+            bishop = 2;
+        }
+        else
+        {
+            bishop = 1;
+        }
+    }
+    else if ((c - d) == (e - f))
+    {
+        if ((a - b == c - d) && a > min(c, e) && a < max(c, e))
+        {
+            bishop = 2;
+        }
+        else
+        {
+            bishop = 1;
+        }
+
+    }
+    else
+    {
+        bishop = 2;
+    }
+    return min(rook, bishop);
+}
+
 #pragma endregion
 

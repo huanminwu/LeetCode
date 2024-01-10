@@ -3977,4 +3977,123 @@ int LeetCodeBit::maximumXorProduct(long long a, long long b, int n)
     }
     return (int)((a % M) * (b % M) % M);
 }
+
+/// <summary>
+/// Leet Code 2980. Check if Bitwise OR Has Trailing Zeros
+///  
+/// Easy
+///
+/// You are given an array of positive integers nums.
+///
+/// You have to check if it is possible to select two or more elements in the 
+/// array such that the bitwise OR of the selected elements has at least one 
+/// trailing zero in its binary representation.
+///
+/// For example, the binary representation of 5, which is "101", does not 
+/// have any trailing zeros, whereas the binary representation of 4, which 
+/// is "100", has two trailing zeros.
+///
+/// Return true if it is possible to select two or more elements whose bitwise 
+/// OR has trailing zeros, return false otherwise.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,4,5]
+/// Output: true
+/// Explanation: If we select the elements 2 and 4, their bitwise OR is 6, 
+/// which has the binary representation "110" with one trailing zero.
+///
+/// Example 2:
+/// Input: nums = [2,4,8,16]
+/// Output: true
+/// Explanation: If we select the elements 2 and 4, their bitwise OR is 6, 
+/// which has the binary representation "110" with one trailing zero.
+/// Other possible ways to select elements to have trailing zeroes in the 
+/// binary representation of their bitwise OR are: (2, 8), (2, 16), (4, 8), 
+/// (4, 16), (8, 16), (2, 4, 8), (2, 4, 16), (2, 8, 16), (4, 8, 16), and 
+/// (2, 4, 8, 16).
+///
+/// Example 3:
+/// Input: nums = [1,3,5,7,9]
+/// Output: false
+/// Explanation: There is no possible way to select two or more elements 
+/// to have trailing zeros in the binary representation of their bitwise OR.
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 100
+/// </summary>
+bool LeetCodeBit::hasTrailingZeros(vector<int>& nums)
+{
+    int count = 0;
+    for (auto x : nums)
+    {
+        if (x % 2 == 0)
+        {
+            count++;
+            if (count == 2) return true;
+        }
+    }
+    return false;
+}
+
+/// <summary>
+/// Leet Code 2997. Minimum Number of Operations to Make Array XOR Equal to K 
+///                 
+/// Medium
+///
+/// You are given a 0-indexed integer array nums and a positive integer k.
+///
+/// You can apply the following operation on the array any number of times:
+///
+/// Choose any element of the array and flip a bit in its binary 
+/// representation. Flipping a bit means changing a 0 to 1 or vice versa.
+/// Return the minimum number of operations required to make the bitwise XOR 
+/// of all elements of the final array equal to k.
+///
+/// Note that you can flip leading zero bits in the binary representation of 
+/// elements. For example, for the number (101)2 you can flip the fourth bit 
+/// and obtain (1101)2.
+///
+/// Example 1:
+/// Input: nums = [2,1,3,4], k = 1
+/// Output: 2
+/// Explanation: We can do the following operations:
+/// - Choose element 2 which is 3 == (011)2, we flip the first bit and we 
+///   obtain (010)2 == 2. nums becomes [2,1,2,4].
+/// - Choose element 0 which is 2 == (010)2, we flip the third bit and we 
+///   obtain (110)2 = 6. nums becomes [6,1,2,4].
+/// The XOR of elements of the final array is (6 XOR 1 XOR 2 XOR 4) == 1 == k.
+/// It can be shown that we cannot make the XOR equal to k in less than 2 
+/// operations.
+///
+/// Example 2:
+/// Input: nums = [2,0,2,0], k = 0
+/// Output: 0
+/// Explanation: The XOR of elements of the array is (2 XOR 0 XOR 2 XOR 0) 
+/// == 0 == k. So no operation is needed.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^6
+/// 3. 0 <= k <= 10^6
+/// </summary>
+int LeetCodeBit::minOperations(vector<int>& nums, int k)
+{
+    int result = 0;
+    for (size_t i = 0; i < 32; i++)
+    {
+        int bit = 1 << i;
+        int count = 0;
+        for (size_t j = 0; j < nums.size(); j++)
+        {
+            if ((nums[j] & bit) != 0)
+            {
+                count = (count + 1) % 2;
+            }
+        }
+        if ((k & bit) != 0) count = (count + 1) % 2;
+        result += count;
+    }
+    return result;
+}
 #pragma endregion

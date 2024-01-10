@@ -9410,6 +9410,195 @@ bool LeetCodeDFS::canAliceWin(vector<string>& a, vector<string>& b)
     else return false;
 }
 
+/// <summary>
+/// Leet Code 2992. Number of Self-Divisible Permutations
+/// </summary>
+int LeetCodeDFS::selfDivisiblePermutationCount(int i, int n, int bit_mask, unordered_map<int, int>& cache)
+{
+    if (i > n) return 1;
+    int count = 0;
+    if (cache.count(bit_mask) > 0) return cache[bit_mask];
+    for (int k = 1; k <= n; k++)
+    {
+        // not good
+        if (std::gcd(i, k) != 1) continue;
+        // already occupied
+        if ((bit_mask & (2 << (k - 1))) != 0)
+        {
+            continue;
+        }
+        count += selfDivisiblePermutationCount(i + 1, n, bit_mask | (2 << (k - 1)), cache);
+    }
+    cache[bit_mask] = count;
+    return count;
+}
+
+/// <summary>
+/// Leet Code 2992. Number of Self-Divisible Permutations
+/// 
+/// Medium
+///
+/// Given an integer n, return the number of permutations of the 1-indexed 
+/// array nums = [1, 2, ..., n], such that it's self-divisible.
+///
+/// Array nums is self-divisible if for every 1 <= i <= n, at least one of 
+/// the following conditions holds:
+///
+/// nums[i] % i == 0
+/// i % nums[i] == 0
+/// A permutation of an array is a rearrangement of the elements of that 
+/// array, for example here are all of the permutations of the array 
+/// [1, 2, 3]:
+/// [1, 2, 3]
+/// [1, 3, 2]
+/// [2, 1, 3]
+/// [2, 3, 1]
+/// [3, 1, 2]
+/// [3, 2, 1]
+///
+/// Example 1:
+/// Input: n = 1
+/// Output: 1
+/// Explanation: The array [1] has only 1 permutation which is 
+/// self-divisible.
+///
+/// Example 2:
+/// Input: n = 2
+/// Output: 2
+/// Explanation: The array [1,2] has 2 permutations both of which are 
+/// self-divisible:
+/// nums = [1,2]: This is self-divisible since nums[1] % 1 == 0 and 
+/// nums[2] % 2 == 0.
+/// nums = [2,1]: This is self-divisible since nums[1] % 1 == 0 and 
+/// 2 % nums[2] == 0.
+///
+/// Example 3:
+/// Input: n = 3
+/// Output: 3
+/// Explanation: The array [1,2,3] has 3 self-divisble permutations: 
+/// [1,2,3], [2,1,3], [3,2,1].
+/// It can be shown that the other 3 permutations are not self-divisible. 
+/// Hence the answer is 3.
+///
+/// Constraints:
+/// 1. 1 <= n <= 15
+/// </summary>
+int LeetCodeDFS::selfDivisiblePermutationCount(int n)
+{
+    unordered_map<int, int> cache;
+    return selfDivisiblePermutationCount(1, n, 0, cache);
+}
+
+/// <summary>
+/// Leet Code 2999. Count the Number of Powerful Integers 
+/// </summary>
+long long LeetCodeDFS::numberOfPowerfulInt(string str_num, int index, int limit, bool leading_limit)
+{
+    if (str_num.empty()) return 0;
+    if (index == str_num.size())
+    {
+        return 1;
+    }
+    long long result = 0;
+    if (leading_limit)
+    {
+        if (str_num[index] > '0')
+        {
+            result += min((limit + 1), str_num[index] - '0') *
+                numberOfPowerfulInt(str_num, index + 1, limit, false);
+        }
+        if (str_num[index] - '0' <= limit)
+        {
+            result += numberOfPowerfulInt(str_num, index + 1, limit, true);
+        }
+    }
+    else
+    {
+        result += (limit  + 1) * numberOfPowerfulInt(str_num, index + 1, limit, false);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2999. Count the Number of Powerful Integers 
+/// </summary>
+string LeetCodeDFS::numberOfPowerfulInt(long long num, string s)
+{
+    string str = to_string(num);
+    string result;
+    if ((str.size() < s.size()) || (str.size() == s.size() && str < s))
+    {
+        return result;
+    }
+    else if (str.size() == s.size() && str >= s)
+    {
+        result = "0";
+    }
+    else
+    {
+        result = str.substr(0, str.size() - s.size());
+        if (result + s > str)
+        {
+            result = to_string((atol(result.c_str()) - 1));
+        }
+    }
+    return result;
+}
+
+
+
+/// <summary>
+/// Leet Code 2999. Count the Number of Powerful Integers 
+///                 
+/// Hard
+///
+/// You are given three integers start, finish, and limit. You are also given 
+/// a 0-indexed string s representing a positive integer.
+///
+/// A positive integer x is called powerful if it ends with s (in other words, 
+/// s is a suffix of x) and each digit in x is at most limit.
+///
+/// Return the total number of powerful integers in the range [start..finish].
+///
+/// A string x is a suffix of a string y if and only if x is a substring of y 
+/// that starts from some index (including 0) in y and extends to the index 
+// y.length - 1. For example, 25 is a suffix of 5125 whereas 512 is not.
+/// 
+/// Example 1:
+/// Input: start = 1, finish = 6000, limit = 4, s = "124"
+/// Output: 5
+/// Explanation: The powerful integers in the range [1..6000] are 124, 1124, 
+/// 2124, 3124, and, 4124. All these integers have each digit <= 4, and "124" 
+/// as a suffix. Note that 5124 is not a powerful integer because the first 
+/// digit is 5 which is greater than 4.
+/// It can be shown that there are only 5 powerful integers in this range.
+///
+/// Example 2:
+/// Input: start = 15, finish = 215, limit = 6, s = "10"
+/// Output: 2
+/// Explanation: The powerful integers in the range [15..215] are 110 and 
+/// 210. All these integers have each digit <= 6, and "10" as a suffix.
+/// It can be shown that there are only 2 powerful integers in this range.
+///
+/// Example 3:
+/// Input: start = 1000, finish = 2000, limit = 4, s = "3000"
+/// Output: 0
+/// Explanation: All integers in the range [1000..2000] are smaller 
+/// than 3000, hence "3000" cannot be a suffix of any integer in this range.
+/// 
+/// Constraints:
+/// 1. 1 <= start <= finish <= 10^15
+/// 2. 1 <= limit <= 9
+/// 3. 1 <= s.length <= floor(log10(finish)) + 1
+/// 4. s only consists of numeric digits which are at most limit.
+/// 5. s does not have leading zeros.
+/// </summary>
+long long LeetCodeDFS::numberOfPowerfulInt(long long start, long long finish, int limit, string s)
+{
+    string str_start = numberOfPowerfulInt(start - 1, s);
+    string str_finish = numberOfPowerfulInt(finish, s);
+    return numberOfPowerfulInt(str_finish, 0, limit, true) - numberOfPowerfulInt(str_start, 0, limit, true);
+}
 #pragma endregion
 
 

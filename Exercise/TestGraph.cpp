@@ -5666,8 +5666,34 @@ void TestLeetCode2977(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2998(void)
+{
+    Logger::WriteMessage("Test Leet Code 2998");
+    LeetCodeGraph leetCode;
+    int x = 26, y = 1;
+    int result = leetCode.minimumOperationsToMakeEqual(x, y);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    x = 54, y = 2;
+    result = leetCode.minimumOperationsToMakeEqual(x, y);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    x = 25, y = 30;
+    result = leetCode.minimumOperationsToMakeEqual(x, y);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    x = 11, y = 1;
+    result = leetCode.minimumOperationsToMakeEqual(x, y);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode2998();
     TestLeetCode2977();
     TestLeetCode2973();
     TestLeetCode2976();

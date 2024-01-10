@@ -7912,17 +7912,42 @@ public:
 };
 
 /// <summary>
-/// Leet code #244. Shortest Word Distance II  
+/// Leet Code 244. Shortest Word Distance II
+///                 
+/// Medium
+///
+/// Design a data structure that will be initialized with a string array, and 
+/// then it should answer queries of the shortest distance between two 
+/// different strings from the array.
+///
+/// Implement the WordDistance class:
+/// WordDistance(String[] wordsDict) initializes the object with the strings 
+/// array wordsDict.
+///
+/// int shortest(String word1, String word2) returns the shortest distance 
+/// between word1 and word2 in the array wordsDict.
+///
+/// Example 1:
+/// Input
+/// ["WordDistance", "shortest", "shortest"]
+/// [[["practice", "makes", "perfect", "coding", "makes"]], 
+///  ["coding", "practice"], ["makes", "coding"]]
+/// Output
+/// [null, 3, 1]
+///
+/// Explanation
+/// WordDistance wordDistance = new WordDistance(["practice", "makes", 
+/// "perfect", "coding", "makes"]);
+/// wordDistance.shortest("coding", "practice"); // return 3
+/// wordDistance.shortest("makes", "coding");    // return 1
 /// 
-/// This is a follow up of Shortest Word Distance. The only difference is now you are given 
-/// the list of words and your method will be called repeatedly many times with different 
-/// parameters. How would you optimize it?
-/// Design a class which receives a list of words in the constructor, and implements a method 
-/// that takes two words word1 and word2 and return the shortest distance between these two words in the list.
-/// For example,
-/// Assume that words = ["practice", "makes", "perfect", "coding", "makes"]. 
-/// Given word1 = “coding”, word2 = “practice”, return 3.
-/// Given word1 = "makes", word2 = "coding", return 1. 
+/// Constraints:
+/// 1. 1 <= wordsDict.length <= 3 * 10^4
+/// 2. 1 <= wordsDict[i].length <= 10
+/// 3. wordsDict[i] consists of lowercase English letters.
+/// 4. word1 and word2 are in wordsDict.
+/// 5. word1 != word2
+/// 6. At most 5000 calls will be made to shortest.
 /// </summary>
 class WordDistance
 {
@@ -7942,11 +7967,17 @@ public:
         int distance = INT_MAX;
         if ((m_StrDist.count(word1) == 0) || (m_StrDist[word1].count(word2) == 0))
         {
-            for (size_t i = 0; i < m_StrPos[word1].size(); i++)
+            size_t i = 0, j = 0;
+            while (i < m_StrPos[word1].size() && j < m_StrPos[word2].size())
             {
-                for (size_t j = 0; j < m_StrPos[word2].size(); j++)
+                distance = min(distance, abs(m_StrPos[word1][i] - m_StrPos[word2][j]));
+                if (m_StrPos[word1][i] <= m_StrPos[word2][j])
                 {
-                    distance = min(distance, abs(m_StrPos[word1][i] - m_StrPos[word2][j]));
+                    i++;
+                }
+                else
+                {
+                    j++;
                 }
             }
             m_StrDist[word1][word2] = distance;

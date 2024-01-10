@@ -1678,33 +1678,35 @@ void LeetCodeArray::rotateArray(vector<int>& nums, int k)
 }
 
 /// <summary>
-/// Leet code #419. Battleships in a Board  
+/// Leet Code 419. Battleships in a Board
+///  
+/// Medium
 ///
-/// Given an 2D board, count how many different battleships are in it. 
-/// The battleships are represented with 'X's, empty slots are represented 
-/// with '.'s. You may assume the following rules: 
-/// You receive a valid board, made of only battleships or empty slots.
-/// Battleships can only be placed horizontally or vertically. In other words, 
-/// they can only be made of the shape 1xN (1 row, N columns) or Nx1 (N rows, 
-/// 1 column), where N can 
-/// be of any size.
-/// At least one horizontal or vertical cell separates between 
-/// two battleships - there are no adjacent battleships.
-/// Example:
-/// X..X
-/// ...X
-/// ...X
-/// In the above board there are 2 battleships. 
-/// Invalid Example:
-/// ...X
-/// XXXX
-/// ...X
-/// This is an invalid board that you will not receive - as battleships will 
-/// always have a cell separating between them. 
-/// Follow up:
-/// Could you do it in one-pass, using only O(1) extra memory and without 
-/// modifying the value of the board?    
-/// </summary>
+/// Given an m x n matrix board where each cell is a battleship 'X' or empty 
+/// '.', return the number of the battleships on board.
+///
+/// Battleships can only be placed horizontally or vertically on board. In 
+/// other words, they can only be made of the shape 1 x k (1 row, k columns) 
+/// or k x 1 (k rows, 1 column), where k can be of any size. At least one 
+/// horizontal or vertical cell separates between two battleships (i.e., 
+/// there are no adjacent battleships).
+///
+/// Example 1:
+/// Input: board = [["X",".",".","X"],[".",".",".","X"],[".",".",".","X"]]
+/// Output: 2
+///
+/// Example 2:
+/// Input: board = [["."]]
+/// Output: 0
+/// 
+/// Constraints:
+/// 1. m == board.length
+/// 2. n == board[i].length
+/// 3. 1 <= m, n <= 200
+/// 4. board[i][j] is either '.' or 'X'.
+/// Follow up: Could you do it in one-pass, using only O(1) extra memory and 
+/// without modifying the values board?
+/// </summary> 
 int LeetCodeArray::countBattleships(vector<vector<char>>& board)
 {
     int count = 0;
@@ -1984,69 +1986,6 @@ void LeetCodeArray::gameOfLife(vector<vector<int>>& board)
             board[i][j] /= 10;
         }
     }
-}
-
-/// <summary>
-/// Leet code #243. Shortest Word Distance  
-/// 
-/// Given a list of words and two words word1 and word2, return the 
-/// shortest distance between these two words in the list. 
-/// For example,
-/// Assume that words = ["practice", "makes", "perfect", "coding", "makes"]
-/// Given word1 = "coding", word2 = "practice", return 3. 
-/// Given word1 = "makes", word2 = "coding", return 1.
-/// </summary>
-int LeetCodeArray::shortestDistance(vector<string>& words, string word1, string word2)
-{
-    unordered_map<string, vector<int>> string_position;
-    for (size_t i = 0; i < words.size(); i++)
-    {
-        string_position[words[i]].push_back(i);
-    }
-    int distance = INT_MAX;
-    for (size_t i = 0; i < string_position[word1].size(); i++)
-    {
-        for (size_t j = 0; j < string_position[word2].size(); j++)
-        {
-            distance = min(distance, abs(string_position[word1][i] - string_position[word2][j]));
-        }
-    }
-    return distance;
-}
-
-/// <summary>
-/// Leet code #245. Shortest Word Distance III  
-/// 
-/// This is a follow up of Shortest Word Distance. The only difference is 
-/// now word1 could be the same as word2.
-/// Given a list of words and two words word1 and word2, return the 
-/// shortest distance between these two words in the list.
-/// word1 and word2 may be the same and they represent two individual 
-/// words in the list.
-/// For example,
-/// Assume that words = ["practice", "makes", "perfect", "coding", "makes"]. 
-/// Given word1 = “makes”, word2 = “coding”, return 1.
-/// Given word1 = "makes", word2 = "makes", return 3. 
-/// Note:
-/// You may assume word1 and word2 are both in the list. 
-/// </summary>
-int LeetCodeArray::shortestWordDistance(vector<string>& words, string word1, string word2)
-{
-    unordered_map<string, vector<int>> string_position;
-    for (size_t i = 0; i < words.size(); i++)
-    {
-        string_position[words[i]].push_back(i);
-    }
-    int distance = INT_MAX;
-    for (size_t i = 0; i < string_position[word1].size(); i++)
-    {
-        for (size_t j = 0; j < string_position[word2].size(); j++)
-        {
-            if (string_position[word1][i] == string_position[word2][j]) continue;
-            distance = min(distance, abs(string_position[word1][i] - string_position[word2][j]));
-        }
-    }
-    return distance;
 }
 
 /// <summary>
@@ -3207,22 +3146,20 @@ bool LeetCodeArray::isPossible(vector<int>& nums)
 /// </summary>
 int LeetCodeArray::countBinarySubstrings(string s)
 {
-    vector<int> count_array;
+    int prev = 0, count = 0;
     int result = 0;
-    int count = 0;
     for (size_t i = 0; i < s.size(); i++)
     {
         if ((i > 0) && (s[i] != s[i - 1]))
         {
-            count_array.push_back(count);
+            prev = count;
             count = 1;
         }
         else
         {
             count++;
         }
-
-        if ((!count_array.empty()) && (count_array.back() >= count))
+        if (prev >= count)
         {
             result++;
         }
@@ -5831,61 +5768,6 @@ int LeetCodeArray::numRookCaptures(vector<vector<char>>& board)
                     }
                 }
                 return result;
-            }
-        }
-    }
-    return result;
-}
-
-
-/// <summary>
-/// Leet code #1004. Max Consecutive Ones III
-/// 
-/// Given an array A of 0s and 1s, we may change up to K values from 0 to 1.
-///
-/// Return the length of the longest (contiguous) subarray that contains 
-/// only 1s. 
-///
-/// Example 1:
-/// Input: A = [1,1,1,0,0,0,1,1,1,1,0], K = 2
-/// Output: 6
-/// Explanation: 
-/// [1,1,1,0,0,1,1,1,1,1,1]
-/// Bolded numbers were flipped from 0 to 1.  The longest subarray is 
-/// underlined.
-///
-/// Example 2:
-/// Input: A = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], K = 3
-/// Output: 10
-/// Explanation: 
-/// [0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1]
-/// Bolded numbers were flipped from 0 to 1.  The longest subarray is 
-/// underlined.
-/// 
-/// Note:
-///
-/// 1. 1 <= A.length <= 20000
-/// 2. 0 <= K <= A.length
-/// 3. A[i] is 0 or 1 
-/// </summary>
-int LeetCodeArray::longestOnes(vector<int>& A, int K)
-{
-    int result = 0;
-    int first = -1;
-    deque<int> zeros;
-    for (int i = 0; i < (int)A.size(); i++)
-    {
-        if (A[i] == 1 || (int)zeros.size() < K)
-        {
-            result = max(result, i - first);
-        }
-        if (A[i] == 0)
-        {
-            zeros.push_back(i);
-            if ((int)zeros.size() > K)
-            {
-                first = zeros.front();
-                zeros.pop_front();
             }
         }
     }
@@ -29186,7 +29068,7 @@ vector<vector<int>> LeetCodeArray::constructProductMatrix(vector<vector<int>>& g
         row_product[i].first = (int)product;
         if (i > 0)
         {
-            row_product[i].first = (row_product[i].first * row_product[i - 1].first) % M;
+            row_product[i].first = (int)(((long long)row_product[i].first * (long long)row_product[i - 1].first) % M);
         }
     }
 
@@ -29201,7 +29083,7 @@ vector<vector<int>> LeetCodeArray::constructProductMatrix(vector<vector<int>>& g
         row_product[i].second = (int)product;
         if (i < n - 1)
         {
-            row_product[i].second = (row_product[i].second * row_product[i + 1].second) % M;
+            row_product[i].second = (row_product[i].second * row_product[i + 1].second) % (int)M;
         }
     }
 
@@ -29213,19 +29095,19 @@ vector<vector<int>> LeetCodeArray::constructProductMatrix(vector<vector<int>>& g
             result[i][j] = 1;
             if (i > 0)
             {
-                result[i][j] = (result[i][j] * row_product[i - 1].first) % M;
+                result[i][j] = (int)((long long)result[i][j] * (long long)row_product[i - 1].first % M);
             }
             if (i < n - 1)
             {
-                result[i][j] = (result[i][j] * row_product[i + 1].second) % M;
+                result[i][j] = (int)((long long)result[i][j] * (long long)row_product[i + 1].second % M);
             }
             if (j > 0)
             {
-                result[i][j] = result[i][j] * grid_product[i][j - 1].first % M;
+                result[i][j] = (int)((long long)result[i][j] * (long long)grid_product[i][j - 1].first % M);
             }
             if (j < m - 1)
             {
-                result[i][j] = result[i][j] * grid_product[i][j + 1].second % M;
+                result[i][j] = (int)((long long)result[i][j] * (long long)grid_product[i][j + 1].second % M);
             }
         }
     }
@@ -30692,3 +30574,236 @@ int LeetCodeArray::maximizeSquareArea(int m, int n, vector<int>& hFences, vector
     else return (long long)result * (long long)result % M;
 }
 
+/// <summary>
+/// Leet Code 2981. Find Longest Special Substring That Occurs Thrice I
+///  
+/// Medium
+///
+/// You are given a string s that consists of lowercase English letters.
+///
+/// A string is called special if it is made up of only a single character. 
+/// For example, the string "abc" is not special, whereas the strings "ddd", 
+/// "zz", and "f" are special.
+///
+/// Return the length of the longest special substring of s which occurs 
+/// at least thrice, or -1 if no special substring occurs at least thrice.
+///
+/// A substring is a contiguous non-empty sequence of characters within a 
+/// string.
+/// 
+/// Example 1:
+/// Input: s = "aaaa"
+/// Output: 2
+/// Explanation: The longest special substring which occurs thrice is "aa": 
+/// substrings "aaaa", "aaaa", and "aaaa".
+/// It can be shown that the maximum length achievable is 2.
+///
+/// Example 2:
+/// Input: s = "abcdef"
+/// Output: -1
+/// Explanation: There exists no special substring which occurs at least 
+/// thrice. Hence return -1.
+///
+/// Example 3:
+/// Input: s = "abcaba"
+/// Output: 1
+/// Explanation: The longest special substring which occurs thrice is 
+/// "a": substrings "abcaba", "abcaba", and "abcaba".
+/// It can be shown that the maximum length achievable is 1.
+/// 
+/// Constraints:
+/// 1. 3 <= s.length <= 50
+/// 2. s consists of only lowercase English letters.
+/// </summary>
+int LeetCodeArray::maximumLength(string s)
+{
+    vector<map<int, int>> len_count(26);
+    int count = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        count++;
+        if (i + 1 == s.size() || s[i] != s[i + 1])
+        {
+            len_count[s[i] - 'a'][count]++;
+            count = 0;
+        }
+    }
+    int result = -1;
+    for (size_t i = 0; i < 26; i++)
+    {
+        pair<int, int> prev = { 0, 0 };
+        while (!len_count[i].empty())
+        {
+            auto itr = len_count[i].rbegin();
+            if (prev.second > 0)
+            {
+                itr->second += prev.second + prev.first - itr->first;
+            }
+            if ((itr->second == 1) && (itr->first >= 3))
+            {
+                result = max(result, itr->first - 2);
+            }
+            else if ((itr->second == 2) && (itr->first >= 2))
+            {
+                result = max(result, itr->first - 1);
+            }
+            else if (itr->second >= 3)
+            {
+                result = max(result, itr->first);
+            }
+            prev = { itr->first, itr->second };
+            len_count[i].erase(itr->first);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2982. Find Longest Special Substring That Occurs Thrice II
+///  
+/// Medium
+///
+/// You are given a string s that consists of lowercase English letters.
+///
+/// A string is called special if it is made up of only a single character. 
+/// For example, the string "abc" is not special, whereas the strings "ddd", 
+/// "zz", and "f" are special.
+///
+/// Return the length of the longest special substring of s which occurs at 
+/// least thrice, or -1 if no special substring occurs at least thrice.
+///
+/// A substring is a contiguous non-empty sequence of characters within a 
+/// string.
+/// 
+/// Example 1:
+/// Input: s = "aaaa"
+/// Output: 2
+/// Explanation: The longest special substring which occurs thrice is "aa": 
+/// substrings "aaaa", "aaaa", and "aaaa".
+/// It can be shown that the maximum length achievable is 2.
+///
+/// Example 2:
+/// Input: s = "abcdef"
+/// Output: -1
+/// Explanation: There exists no special substring which occurs at least 
+/// thrice. Hence return -1.
+///
+/// Example 3:
+/// Input: s = "abcaba"
+/// Output: 1
+/// Explanation: The longest special substring which occurs thrice is 
+/// "a": substrings "abcaba", "abcaba", and "abcaba".
+/// It can be shown that the maximum length achievable is 1.
+///  
+/// Constraints:
+/// 1. 3 <= s.length <= 5 * 10^5
+/// 2. s consists of only lowercase English letters.
+/// </summary>
+int LeetCodeArray::maximumLengthII(string s)
+{
+    vector<map<int, int>> len_count(26);
+    int count = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        count++;
+        if (i + 1 == s.size() || s[i] != s[i + 1])
+        {
+            len_count[s[i] - 'a'][count]++;
+            count = 0;
+        }
+    }
+    int result = -1;
+    for (size_t i = 0; i < 26; i++)
+    {
+        pair<int, int> prev = { 0, 0 };
+        while (!len_count[i].empty())
+        {
+            auto itr = len_count[i].rbegin();
+            if (prev.second > 0)
+            {
+                itr->second += prev.second + prev.first - itr->first;
+            }
+            if ((itr->second == 1) && (itr->first >= 3))
+            {
+                result = max(result, itr->first - 2);
+            }
+            else if ((itr->second == 2) && (itr->first >= 2))
+            {
+                result = max(result, itr->first - 1);
+            }
+            else if (itr->second >= 3)
+            {
+                result = max(result, itr->first);
+            }
+            prev = { itr->first, itr->second };
+            len_count[i].erase(itr->first);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 2996. Smallest Missing Integer Greater Than Sequential 
+///                 Prefix Sum
+/// 
+/// Easy
+///
+/// You are given a 0-indexed array of integers nums.
+///
+/// A prefix nums[0..i] is sequential if, for all 1 <= j <= i, 
+/// nums[j] = nums[j - 1] + 1. In particular, the prefix consisting only 
+/// of nums[0] is sequential.
+///
+/// Return the smallest integer x missing from nums such that x is greater 
+/// than or equal to the sum of the longest sequential prefix.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,2,5]
+/// Output: 6
+/// Explanation: The longest sequential prefix of nums is [1,2,3] with a 
+/// sum of 6. 6 is not in the array, therefore 6 is the smallest missing 
+/// integer greater than or equal to the sum of the longest sequential 
+/// prefix.
+///
+/// Example 2:
+/// Input: nums = [3,4,5,1,12,14,13]
+/// Output: 15
+/// Explanation: The longest sequential prefix of nums is [3,4,5] with 
+/// a sum of 12. 12, 13, and 14 belong to the array while 15 does not. 
+/// Therefore 15 is the smallest missing integer greater than or equal 
+/// to the sum of the longest sequential prefix.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 50
+/// 2. 1 <= nums[i] <= 50
+/// </summary>
+int LeetCodeArray::missingInteger(vector<int>& nums)
+{
+    unordered_set<int> num_set;
+    int sum = 0;
+    int max_val = 0;
+    bool sequential = true;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (sequential && (i == 0 || nums[i] == nums[i - 1] + 1))
+        {
+            sum += nums[i];
+        }
+        else
+        {
+            sequential = false;
+        }
+        max_val = max(max_val, nums[i]);
+        num_set.insert(nums[i]);
+    }
+    int result = sum;
+    while (result <= max_val)
+    {
+        if (num_set.count(result) == 0)
+        {
+            return result;
+        }
+        result++;
+    }
+    return result;
+}

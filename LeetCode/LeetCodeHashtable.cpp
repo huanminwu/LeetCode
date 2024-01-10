@@ -423,6 +423,105 @@ bool LeetCodeHashtable::isAnagram(string s, string t)
     else return false;
 }
 
+
+/// <summary>
+/// Leet Code 243. Shortest Word Distance
+///                 
+/// Easy
+///
+/// Given an array of strings wordsDict and two different strings that already 
+/// exist in the array word1 and word2, return the shortest distance between 
+/// these two words in the list.
+///
+/// Example 1:
+/// Input: wordsDict = ["practice", "makes", "perfect", "coding", "makes"], 
+/// word1 = "coding", word2 = "practice"
+/// Output: 3
+///
+/// Example 2:
+/// Input: wordsDict = ["practice", "makes", "perfect", "coding", "makes"], 
+/// word1 = "makes", word2 = "coding"
+/// Output: 1
+///
+/// Constraints:
+/// 1. 2 <= wordsDict.length <= 3 * 10^4
+/// 2. 1 <= wordsDict[i].length <= 10
+/// 3. wordsDict[i] consists of lowercase English letters.
+/// 4. word1 and word2 are in wordsDict.
+/// 5. word1 != word2
+/// </summary>
+int LeetCodeHashtable::shortestDistance(vector<string>& wordsDict, string word1, string word2)
+{
+    int word1_pos = -1, word2_pos = -1;
+    int result = INT_MAX;
+    for (size_t i = 0; i < wordsDict.size(); i++)
+    {
+        if (wordsDict[i] == word1) word1_pos = i;
+        if (wordsDict[i] == word2) word2_pos = i;
+        if (word1_pos != -1 && word2_pos != -1)
+        {
+            result = min(result, abs(word1_pos-word2_pos));
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 245. Shortest Word Distance III
+///                 
+/// Medium
+///
+/// Given an array of strings wordsDict and two strings that already exist in 
+/// the array word1 and word2, return the shortest distance between the 
+/// occurrence of these two words in the list.
+///
+/// Note that word1 and word2 may be the same. It is guaranteed that they 
+/// represent two individual words in the list.
+///  
+/// Example 1:
+/// Input: wordsDict = ["practice", "makes", "perfect", "coding", "makes"], 
+/// word1 = "makes", word2 = "coding"
+/// Output: 1
+///
+/// Example 2:
+///
+/// Input: wordsDict = ["practice", "makes", "perfect", "coding", "makes"], 
+/// word1 = "makes", word2 = "makes"
+/// Output: 3
+///
+/// Constraints:
+/// 1. 1 <= wordsDict.length <= 10^5
+/// 2. 1 <= wordsDict[i].length <= 10
+/// 3. wordsDict[i] consists of lowercase English letters.
+/// 4. word1 and word2 are in wordsDict.
+/// </summary>
+int LeetCodeHashtable::shortestWordDistance(vector<string>& wordsDict, string word1, string word2)
+{
+    unordered_map<string, vector<int>> wordsPos;
+    for (size_t i = 0; i < wordsDict.size(); i++)
+    {
+        wordsPos[wordsDict[i]].push_back(i);
+    }
+    size_t i = 0, j = 0;
+    int result = INT_MAX;
+    while (i < wordsPos[word1].size() && j < wordsPos[word2].size())
+    {
+        if (wordsPos[word1][i] != wordsPos[word2][j])
+        {
+            result = min(result, abs(wordsPos[word1][i] - wordsPos[word2][j]));
+        }
+        if (wordsPos[word1][i] <= wordsPos[word2][j])
+        {
+            i++;
+        }
+        else
+        {
+            j++;
+        }
+    }
+    return result;
+}
+
 /// <summary>
 /// Leet code #347. Top K Frequent Elements
 /// Given a non-empty array of integers, return the k most frequent elements.
@@ -5366,6 +5465,79 @@ int LeetCodeHashtable::divisibleTripletCount(vector<int>& nums, int d)
         }
         num_count[nums[i] % d]++;
     }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3002. Maximum Size of a Set After Removals
+///                 
+/// Medium
+///
+/// You are given two 0-indexed integer arrays nums1 and nums2 of even 
+/// length n.
+///
+/// You must remove n / 2 elements from nums1 and n / 2 elements from nums2. 
+/// After the removals, you insert the remaining elements of nums1 and nums2 
+/// into a set s.
+///
+/// Return the maximum possible size of the set s.
+/// 
+/// Example 1:
+///
+/// Input: nums1 = [1,2,1,2], nums2 = [1,1,1,1]
+/// Output: 2
+/// Explanation: We remove two occurences of 1 from nums1 and nums2. After the 
+/// removals, the arrays become equal to nums1 = [2,2] and nums2 = [1,1]. 
+/// Therefore, s = {1,2}.
+/// It can be shown that 2 is the maximum possible size of the set s after the 
+/// removals.
+///
+/// Example 2:
+///
+/// Input: nums1 = [1,2,3,4,5,6], nums2 = [2,3,2,3,2,3]
+/// Output: 5
+/// Explanation: We remove 2, 3, and 6 from nums1, as well as 2 and two 
+/// occurrences of 3 from nums2. After the removals, the arrays become equal 
+/// to nums1 = [1,4,5] and nums2 = [2,3,2]. Therefore, s = {1,2,3,4,5}.
+/// It can be shown that 5 is the maximum possible size of the set s after 
+/// the removals.
+///
+/// Example 3:
+/// Input: nums1 = [1,1,2,2,3,3], nums2 = [4,4,5,5,6,6]
+/// Output: 6
+/// Explanation: We remove 1, 2, and 3 from nums1, as well as 4, 5, and 6 from 
+/// nums2. After the removals, the arrays become equal to nums1 = [1,2,3] and 
+/// nums2 = [4,5,6]. Therefore, s = {1,2,3,4,5,6}.
+/// It can be shown that 6 is the maximum possible size of the set s after the 
+/// removals.
+/// 
+/// Constraints:
+/// 1. n == nums1.length == nums2.length
+/// 2. 1 <= n <= 2 * 10^4
+/// 3. n is even.
+/// 4. 1 <= nums1[i], nums2[i] <= 10^9
+/// </summary>
+int LeetCodeHashtable::maximumSetSize(vector<int>& nums1, vector<int>& nums2)
+{
+    unordered_set<int> set1, set2, common;
+    for (size_t i = 0; i < nums1.size(); i++)
+    {
+        set1.insert(nums1[i]);
+        set2.insert(nums2[i]);
+    }
+    for (auto x : set1)
+    {
+        if (set2.count(x) > 0) common.insert(x);
+    }
+    for (auto x : common)
+    {
+        set1.erase(x);
+        set2.erase(x);
+    }
+    size_t set1_size = min(set1.size(), nums1.size() / 2);
+    size_t set2_size = min(set2.size(), nums1.size() / 2);
+    int result = set1_size + set2_size;
+    result += min(nums1.size() - set1_size - set2_size, common.size());    
     return result;
 }
 #pragma endregion
