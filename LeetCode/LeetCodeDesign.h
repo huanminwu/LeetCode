@@ -410,7 +410,7 @@ public:
 class Iterator {
 private:
     vector<int> m_nums;
-    int m_index;
+    int m_index  = 0;
 public:
     Iterator(const vector<int>& nums)
     {
@@ -419,6 +419,7 @@ public:
     };
     Iterator(const Iterator& iter)
     {
+        m_index = 0;
         m_nums = iter.m_nums;
     }
     virtual ~Iterator()

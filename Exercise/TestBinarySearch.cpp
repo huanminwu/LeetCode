@@ -1336,8 +1336,26 @@ void TestLeetCode2936(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3007(void)
+{
+    Logger::WriteMessage("Test Leet Code 3007");
+    LeetCodeBinarySearch leetCode;
+    long long k = 9;
+    int x = 1;
+    long long result = leetCode.findMaximumNumber(k, x);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    k = 7;
+    x = 2;
+    result = leetCode.findMaximumNumber(k, x);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode3007();
     TestLeetCode2936();
     TestLeetCode153();
     TestLeetCode162();

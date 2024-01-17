@@ -486,39 +486,45 @@ public:
     int findRotateSteps(string ring, string key);
 
     /// <summary>
-    /// Leet code #518. Coin Change 2
-    /// 
-    /// You are given coins of different denominations and a total amount of 
-    /// money. Write a function to compute the number of combinations that 
-    /// make up that amount. You may assume that you have infinite number of 
-    /// each kind of coin.
+    /// Leet Code 518. Coin Change II
+    ///                 
+    /// Medium
     ///
-    /// Note: You can assume that
+    /// You are given an integer array coins representing coins of different 
+    /// denominations and an integer amount representing a total amount of 
+    /// money.
     ///
-    /// 1. 0 <= amount <= 5000
-    /// 2. 1 <= coin <= 5000
-    /// 3. the number of coins is less than 500
-    /// 4. the answer is guaranteed to fit into signed 32-bit integer
+    /// Return the number of combinations that make up that amount. If that 
+    /// amount of money cannot be made up by any combination of the coins, 
+    /// return 0.
+    ///
+    /// You may assume that you have an infinite number of each kind of coin.
+    ///
+    /// The answer is guaranteed to fit into a signed 32-bit integer.
     /// 
     /// Example 1:
-    /// Input: amount = 5, coins = [1, 2, 5]
+    /// Input: amount = 5, coins = [1,2,5]
     /// Output: 4
     /// Explanation: there are four ways to make up the amount:
     /// 5=5
     /// 5=2+2+1
     /// 5=2+1+1+1
     /// 5=1+1+1+1+1
-    /// 
     ///
     /// Example 2:
     /// Input: amount = 3, coins = [2]
     /// Output: 0
     /// Explanation: the amount of 3 cannot be made up just with coins of 2.
-    /// 
     ///
     /// Example 3:
-    /// Input: amount = 10, coins = [10] 
+    /// Input: amount = 10, coins = [10]
     /// Output: 1
+    ///
+    /// Constraints:
+    /// 1. 1 <= coins.length <= 300
+    /// 2. 1 <= coins[i] <= 5000
+    /// 3. All the values of coins are unique.
+    /// 4. 0 <= amount <= 5000
     /// </summary>
     int change(int amount, vector<int>& coins);
 
@@ -926,20 +932,36 @@ public:
     vector<int> getPascalTriangleRow(int rowIndex);
 
     /// <summary>
-    /// Leet code #322. Coin Change 
-    /// You are given coins of different denominations and a total amount 
-    /// of money amount. Write a function to 
-    /// compute the fewest number of coins that you need to make up that 
-    /// amount. If that amount of money cannot 
-    /// be made up by any combination of the coins, return -1. 	
+    /// Leet Code 322. Coin Change
+    ///                 
+    /// Medium
+    ///
+    /// You are given an integer array coins representing coins of different 
+    /// denominations and an integer amount representing a total amount of money.
+    ///
+    /// Return the fewest number of coins that you need to make up that amount. 
+    /// If that amount of money cannot be made up by any combination of the coins, 
+    /// return -1.
+    ///
+    /// You may assume that you have an infinite number of each kind of coin.
+    /// 
     /// Example 1:
-    /// coins = [1, 2, 5], amount = 11
-    /// return 3 (11 = 5 + 5 + 1) 
+    /// Input: coins = [1,2,5], amount = 11
+    /// Output: 3
+    /// Explanation: 11 = 5 + 5 + 1
+    ///
     /// Example 2:
-    /// coins = [2], amount = 3
-    /// return -1. 
-    /// Note:
-    /// You may assume that you have an infinite number of each kind of coin. 
+    /// Input: coins = [2], amount = 3
+    /// Output: -1
+    ///
+    /// Example 3:
+    /// Input: coins = [1], amount = 0
+    /// Output: 0
+    /// 
+    /// Constraints:
+    /// 1. 1 <= coins.length <= 12
+    /// 2. 1 <= coins[i] <= 2^31 - 1
+    /// 3. 0 <= amount <= 10^4
     /// </summary>
     int coinChange(vector<int>& coins, int amount);
 
@@ -3126,14 +3148,20 @@ public:
 
 
     /// <summary>
-    /// Leet code #377. Combination Sum IV 
+    /// Leet Code 377. Combination Sum IV
+    ///                 
+    /// Medium
     ///
-    /// Given an integer array with all positive numbers and no duplicates, 
-    /// find the number of possible combinations that add up to a positive integer target.
+    /// Given an array of distinct integers nums and a target integer target, 
+    /// return the number of possible combinations that add up to target.
+    ///
+    /// The test cases are generated so that the answer can fit in a 32-bit 
+    /// integer.
     /// 
-    /// Example: 
-    /// nums = [1, 2, 3]
-    /// target = 4
+    /// Example 1:
+    /// Input: nums = [1,2,3], target = 4
+    /// Output: 7
+    /// Explanation:
     /// The possible combination ways are:
     /// (1, 1, 1, 1)
     /// (1, 1, 2)
@@ -3143,11 +3171,20 @@ public:
     /// (2, 2)
     /// (3, 1)
     /// Note that different sequences are counted as different combinations.
-    /// Therefore the output is 7.
-    /// Follow up:
-    /// What if negative numbers are allowed in the given array?
-    /// How does it change the problem?
-    /// What limitation we need to add to the question to allow negative numbers? 
+    ///
+    /// Example 2:
+    /// Input: nums = [9], target = 3
+    /// Output: 0
+
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 200
+    /// 2. 1 <= nums[i] <= 1000
+    /// 3. All the elements of nums are unique.
+    /// 4. 1 <= target <= 1000
+    /// 
+    /// Follow up: What if negative numbers are allowed in the given array? How 
+    /// does it change the problem? What limitation we need to add to the question 
+    /// to allow negative numbers?
     /// </summary>
     int combinationSum4(vector<int>& nums, int target);
 
@@ -6819,53 +6856,66 @@ public:
     int countMaxOrSubsets(vector<int>& nums);
 
     /// <summary>
-    /// Leet code #416. Partition Equal Subset Sum 
+    /// Leet Code 416. Partition Equal Subset Sum
+    ///                 
+    /// Medium
     ///
-    /// Given a non-empty array containing only positive integers, find if 
-    /// the array can be partitioned into two subsets such that the sum of 
-    /// elements in both subsets is equal. 
-    /// Note:
-    /// Each of the array element will not exceed 100.
-    /// The array size will not exceed 200.
-    /// Example 1: 
-    /// Input: [1, 5, 11, 5]
+    /// Given an integer array nums, return true if you can partition the array 
+    /// into two subsets such that the sum of the elements in both subsets is 
+    /// equal or false otherwise.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,5,11,5]
     /// Output: true
     /// Explanation: The array can be partitioned as [1, 5, 5] and [11].
-    /// Example 2: 
-    /// Input: [1, 2, 3, 5]
+    ///
+    /// Example 2:
+    /// 
+    /// Input: nums = [1,2,3,5]
     /// Output: false
     /// Explanation: The array cannot be partitioned into equal sum subsets.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 200
+    /// 2. 1 <= nums[i] <= 100
     /// </summary>
     bool canPartition(vector<int>& nums);
 
     /// <summary>
-    /// Leet code #1049. Last Stone Weight II
-    /// 
-    /// We have a collection of rocks, each rock has a positive integer weight.
+    /// Leet Code 1049. Last Stone Weight II
+    ///                 
+    /// Medium
     ///
-    /// Each turn, we choose any two rocks and smash them together.  Suppose 
-    /// the stones have weights x and y with x <= y.  The result of this smash is:
+    /// You are given an array of integers stones where stones[i] is the weight 
+    /// of the ith stone.
     ///
-    /// If x == y, both stones are totally destroyed;
-    /// If x != y, the stone of weight x is totally destroyed, and the stone of 
-    /// weight y has new weight y-x.
-    /// At the end, there is at most 1 stone left.  Return the smallest possible 
-    /// weight of this stone (the weight is 0 if there are no stones left.)
+    /// We are playing a game with the stones. On each turn, we choose any two 
+    /// stones and smash them together. Suppose the stones have weights x and y 
+    /// with x <= y. The result of this smash is:
     ///
+    /// If x == y, both stones are destroyed, and
+    /// If x != y, the stone of weight x is destroyed, and the stone of weight y 
+    /// has new weight y - x.
+    /// At the end of the game, there is at most one stone left.
+    ///
+    /// Return the smallest possible weight of the left stone. If there are no 
+    /// stones left, return 0.
     /// 
     /// Example 1:
-    ///
-    /// Input: [2,7,4,1,8,1]
+    /// Input: stones = [2,7,4,1,8,1]
     /// Output: 1
-    /// Explanation: 
-    /// We can combine 2 and 4 to get 2 so the array converts to [2,7,1,8,1] then,
-    /// we can combine 7 and 8 to get 1 so the array converts to [2,1,1,1] then,
-    /// we can combine 2 and 1 to get 1 so the array converts to [1,1,1] then,
-    /// we can combine 1 and 1 to get 0 so the array converts to [1] then that's the
-    /// optimal value.
+    /// Explanation:
+    /// We can combine 2 and 4 to get 2, so the array converts to [2,7,1,8,1] then,
+    /// we can combine 7 and 8 to get 1, so the array converts to [2,1,1,1] then,
+    /// we can combine 2 and 1 to get 1, so the array converts to [1,1,1] then,
+    /// we can combine 1 and 1 to get 0, so the array converts to [1], then that's 
+    /// the optimal value.
+    ///
+    /// Example 2:
+    /// Input: stones = [31,26,33,21,40]
+    /// Output: 5
     /// 
-    /// Note:
-    /// 
+    /// Constraints:
     /// 1. 1 <= stones.length <= 30
     /// 2. 1 <= stones[i] <= 100
     /// </summary>

@@ -530,6 +530,13 @@ void TestLeetCode377(void)
     Logger::WriteMessage(nums);
     int result = leetCode.combinationSum4(nums, target);
     Logger::WriteMessage("Target = " + to_string(target) + ", Result = " + to_string(result));
+
+    nums = { 1, 2, 3, 4};
+    target = 15;
+    Logger::WriteMessage(nums);
+    result = leetCode.combinationSum4(nums, target);
+    Logger::WriteMessage("Target = " + to_string(target) + ", Result = " + to_string(result));
+    
 }
 
 void TestLeetCode1216(void)
@@ -2866,6 +2873,11 @@ void TestLeetCode416(void)
     result = leetCode.canPartition(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage((string)(result ? "Can" : "Can not") + " partition into equal subset.");
+
+    nums = { 2, 2, 1, 1 };
+    result = leetCode.canPartition(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage((string)(result ? "Can" : "Can not") + " partition into equal subset.");
 }
 
 void TestLeetCode1049(void)
@@ -4943,6 +4955,9 @@ void TestLeetCode3003(void)
 
 void TestLeetCodeDP(void)
 {
+    TestLeetCode377();
+    TestLeetCode416();
+    TestLeetCode518();
     TestLeetCode3003();
     TestLeetCode801();
     TestLeetCode2969();
@@ -5028,7 +5043,6 @@ void TestLeetCodeDP(void)
     TestLeetCode688();
     TestLeetCode664();
     TestLeetCode660();
-    TestLeetCode416();
     TestLeetCode2044();
     TestLeetCode2052();
     TestLeetCode161();
@@ -5124,7 +5138,6 @@ void TestLeetCodeDP(void)
     TestLeetCode1223();
     TestLeetCode1220();
     TestLeetCode1216();
-    TestLeetCode377();
     TestLeetCode474();
     TestLeetCode923();
     TestLeetCode920();
@@ -5151,7 +5164,6 @@ void TestLeetCodeDP(void)
     TestLeetCode213();
     TestLeetCode9905();
     TestLeetCode494();
-    TestLeetCode518();
     TestLeetCode562();
     TestLeetCode879();
     TestLeetCode1143();

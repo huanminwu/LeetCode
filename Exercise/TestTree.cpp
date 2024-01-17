@@ -3956,8 +3956,35 @@ void TestLeetCode2925(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3004(void)
+{
+    Logger::WriteMessage("Test Leet Code 3004");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = { {0, 1},{0, 2},{0, 3} };
+    vector<int> colors = { 1, 1, 2, 3 };
+    int result = leetCode.maximumSubtreeSize(edges, colors);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {0, 1},{0, 2},{0, 3} };
+    colors = { 1, 1, 1, 1 };
+    result = leetCode.maximumSubtreeSize(edges, colors);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {0, 1},{0, 2},{2, 3},{2, 4} };
+    colors = { 1, 2, 3, 3, 3 };
+    result = leetCode.maximumSubtreeSize(edges, colors);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3004();
     TestLeetCode2925();
     TestLeetCode2920();
     TestLeetCode2846();

@@ -1306,15 +1306,20 @@ int LeetCodeDP::numSquares(int n)
 }
 
 /// <summary>
-/// Leet code #377. Combination Sum IV 
+/// Leet Code 377. Combination Sum IV
+///                 
+/// Medium
 ///
-/// Given an integer array with all positive numbers and no duplicates, 
-/// find the number of possible combinations that add up to a positive 
-/// integer target.
+/// Given an array of distinct integers nums and a target integer target, 
+/// return the number of possible combinations that add up to target.
+///
+/// The test cases are generated so that the answer can fit in a 32-bit 
+/// integer.
 /// 
-/// Example: 
-/// nums = [1, 2, 3]
-/// target = 4
+/// Example 1:
+/// Input: nums = [1,2,3], target = 4
+/// Output: 7
+/// Explanation:
 /// The possible combination ways are:
 /// (1, 1, 1, 1)
 /// (1, 1, 2)
@@ -1324,28 +1329,35 @@ int LeetCodeDP::numSquares(int n)
 /// (2, 2)
 /// (3, 1)
 /// Note that different sequences are counted as different combinations.
-/// Therefore the output is 7.
-/// Follow up:
-/// What if negative numbers are allowed in the given array?
-/// How does it change the problem?
-/// What limitation we need to add to the question to allow negative numbers? 
+///
+/// Example 2:
+/// Input: nums = [9], target = 3
+/// Output: 0
+
+/// Constraints:
+/// 1. 1 <= nums.length <= 200
+/// 2. 1 <= nums[i] <= 1000
+/// 3. All the elements of nums are unique.
+/// 4. 1 <= target <= 1000
+/// 
+/// Follow up: What if negative numbers are allowed in the given array? How 
+/// does it change the problem? What limitation we need to add to the question 
+/// to allow negative numbers?
 /// </summary>
 int LeetCodeDP::combinationSum4(vector<int>& nums, int target)
 {
-    vector<int> sum(target + 1);
+    vector<size_t> sum(target + 1);
+    sum[0] = 1;
     for (int i = 0; i <= target; i++)
     {
-        if (i == 0) sum[0] = 0;
+        // empty slot no need to calculate
+        if (sum[i] == 0) continue;
         for (size_t j = 0; j < nums.size(); j++)
         {
-            if (i - nums[j] < 0) continue;
-            else if (i == nums[j])
+            // protect not out of boundary
+            if (i + nums[j] <= target)
             {
-                sum[i] += 1;
-            }
-            else
-            {
-                sum[i] += sum[i - nums[j]];
+                sum[i + nums[j]] += sum[i];
             }
         }
     }
@@ -6278,33 +6290,40 @@ int LeetCodeDP::longestStrChain(vector<string>& words)
 }
 
 /// <summary>
-/// Leet code #1049. Last Stone Weight II
-/// 
-/// We have a collection of rocks, each rock has a positive integer weight.
+/// Leet Code 1049. Last Stone Weight II
+///                 
+/// Medium
 ///
-/// Each turn, we choose any two rocks and smash them together.  Suppose 
-/// the stones have weights x and y with x <= y.  The result of this smash is:
+/// You are given an array of integers stones where stones[i] is the weight 
+/// of the ith stone.
 ///
-/// If x == y, both stones are totally destroyed;
-/// If x != y, the stone of weight x is totally destroyed, and the stone of 
-/// weight y has new weight y-x.
-/// At the end, there is at most 1 stone left.  Return the smallest possible 
-/// weight of this stone (the weight is 0 if there are no stones left.)
+/// We are playing a game with the stones. On each turn, we choose any two 
+/// stones and smash them together. Suppose the stones have weights x and y 
+/// with x <= y. The result of this smash is:
 ///
+/// If x == y, both stones are destroyed, and
+/// If x != y, the stone of weight x is destroyed, and the stone of weight y 
+/// has new weight y - x.
+/// At the end of the game, there is at most one stone left.
+///
+/// Return the smallest possible weight of the left stone. If there are no 
+/// stones left, return 0.
 /// 
 /// Example 1:
-///
-/// Input: [2,7,4,1,8,1]
+/// Input: stones = [2,7,4,1,8,1]
 /// Output: 1
-/// Explanation: 
-/// We can combine 2 and 4 to get 2 so the array converts to [2,7,1,8,1] then,
-/// we can combine 7 and 8 to get 1 so the array converts to [2,1,1,1] then,
-/// we can combine 2 and 1 to get 1 so the array converts to [1,1,1] then,
-/// we can combine 1 and 1 to get 0 so the array converts to [1] then that's the
-/// optimal value.
+/// Explanation:
+/// We can combine 2 and 4 to get 2, so the array converts to [2,7,1,8,1] then,
+/// we can combine 7 and 8 to get 1, so the array converts to [2,1,1,1] then,
+/// we can combine 2 and 1 to get 1, so the array converts to [1,1,1] then,
+/// we can combine 1 and 1 to get 0, so the array converts to [1], then that's 
+/// the optimal value.
+///
+/// Example 2:
+/// Input: stones = [31,26,33,21,40]
+/// Output: 5
 /// 
-/// Note:
-/// 
+/// Constraints:
 /// 1. 1 <= stones.length <= 30
 /// 2. 1 <= stones[i] <= 100
 /// </summary>
@@ -6322,12 +6341,12 @@ int LeetCodeDP::lastStoneWeightII(vector<int> &stones)
     {
         for (int i = sum / 2; i >= a; --i)
         {
-            dp[i] = dp[i] + dp[i - a];
+            dp[i] = (dp[i - a] == 1) ? 1 : dp[i];
         }
     }
     for (int i = sum / 2; i > 0; --i)
     {
-        if (dp[i]) return sum - i - i;
+        if (dp[i] == 1) return sum - i - i;
     }
     return 0;
 }
@@ -7076,39 +7095,45 @@ int LeetCodeDP::makeArrayIncreasing(vector<int>& arr1, vector<int>& arr2)
 }
 
 /// <summary>
-/// Leet code #518. Coin Change 2
-/// 
-/// You are given coins of different denominations and a total amount of 
-/// money. Write a function to compute the number of combinations that 
-/// make up that amount. You may assume that you have infinite number of 
-/// each kind of coin.
+/// Leet Code 518. Coin Change II
+///                 
+/// Medium
 ///
-/// Note: You can assume that
+/// You are given an integer array coins representing coins of different 
+/// denominations and an integer amount representing a total amount of 
+/// money.
 ///
-/// 1. 0 <= amount <= 5000
-/// 2. 1 <= coin <= 5000
-/// 3. the number of coins is less than 500
-/// 4. the answer is guaranteed to fit into signed 32-bit integer
+/// Return the number of combinations that make up that amount. If that 
+/// amount of money cannot be made up by any combination of the coins, 
+/// return 0.
+///
+/// You may assume that you have an infinite number of each kind of coin.
+///
+/// The answer is guaranteed to fit into a signed 32-bit integer.
 /// 
 /// Example 1:
-/// Input: amount = 5, coins = [1, 2, 5]
+/// Input: amount = 5, coins = [1,2,5]
 /// Output: 4
 /// Explanation: there are four ways to make up the amount:
 /// 5=5
 /// 5=2+2+1
 /// 5=2+1+1+1
 /// 5=1+1+1+1+1
-/// 
 ///
 /// Example 2:
 /// Input: amount = 3, coins = [2]
 /// Output: 0
 /// Explanation: the amount of 3 cannot be made up just with coins of 2.
-/// 
 ///
 /// Example 3:
-/// Input: amount = 10, coins = [10] 
+/// Input: amount = 10, coins = [10]
 /// Output: 1
+///
+/// Constraints:
+/// 1. 1 <= coins.length <= 300
+/// 2. 1 <= coins[i] <= 5000
+/// 3. All the values of coins are unique.
+/// 4. 0 <= amount <= 5000
 /// </summary>
 int LeetCodeDP::change(int amount, vector<int>& coins)
 {
@@ -7430,42 +7455,52 @@ vector<int> LeetCodeDP::getPascalTriangleRow(int rowIndex)
 }
 
 /// <summary>
-/// Leet code #322. Coin Change 
-/// You are given coins of different denominations and a total amount of money 
-/// amount. Write a function to 
-/// compute the fewest number of coins that you need to make up that amount. 
-/// If that amount of money cannot 
-/// be made up by any combination of the coins, return -1. 	
+/// Leet Code 322. Coin Change
+///                 
+/// Medium
+///
+/// You are given an integer array coins representing coins of different 
+/// denominations and an integer amount representing a total amount of money.
+///
+/// Return the fewest number of coins that you need to make up that amount. 
+/// If that amount of money cannot be made up by any combination of the coins, 
+/// return -1.
+///
+/// You may assume that you have an infinite number of each kind of coin.
+/// 
 /// Example 1:
-/// coins = [1, 2, 5], amount = 11
-/// return 3 (11 = 5 + 5 + 1) 
+/// Input: coins = [1,2,5], amount = 11
+/// Output: 3
+/// Explanation: 11 = 5 + 5 + 1
+///
 /// Example 2:
-/// coins = [2], amount = 3
-/// return -1. 
-/// Note:
-/// You may assume that you have an infinite number of each kind of coin. 
+/// Input: coins = [2], amount = 3
+/// Output: -1
+///
+/// Example 3:
+/// Input: coins = [1], amount = 0
+/// Output: 0
+/// 
+/// Constraints:
+/// 1. 1 <= coins.length <= 12
+/// 2. 1 <= coins[i] <= 2^31 - 1
+/// 3. 0 <= amount <= 10^4
 /// </summary>
 int LeetCodeDP::coinChange(vector<int>& coins, int amount)
 {
-    vector<int> dp(amount + 1, -1);
+    vector<int> dp(amount + 1, INT_MAX);
     for (int i = 0; i <= amount; i++)
     {
         if (i == 0) dp[i] = 0;
-        else if (dp[i] == -1) continue;
+        if (dp[i] == INT_MAX) continue;
         for (size_t j = 0; j < coins.size(); j++)
         {
-            // take care overflow
-            if ((long long)i + coins[j] > (long long) amount) continue;
-            if (dp[i + coins[j]] == -1)
-            {
-                dp[i + coins[j]] = dp[i] + 1;
-            }
-            else
-            {
-                dp[i + coins[j]] = min(dp[i + coins[j]], dp[i] + 1);
-            }
+            if (coins[j] > amount) continue;
+            if (i + coins[j] > amount) continue;
+            dp[i + coins[j]] = min(dp[i + coins[j]], dp[i] + 1);
         }
     }
+    dp[amount] = (dp[amount] == INT_MAX) ? -1 : dp[amount];
     return dp[amount];
 }
 
@@ -12850,22 +12885,28 @@ int LeetCodeDP::countMaxOrSubsets(vector<int>& nums)
 }
 
 /// <summary>
-/// Leet code #416. Partition Equal Subset Sum
+/// Leet Code 416. Partition Equal Subset Sum
+///                 
+/// Medium
 ///
-/// Given a non-empty array containing only positive integers, find if 
-/// the array can be partitioned into two subsets such that the sum of 
-/// elements in both subsets is equal. 
-/// Note:
-/// Each of the array element will not exceed 100.
-/// The array size will not exceed 200.
-/// Example 1: 
-/// Input: [1, 5, 11, 5]
+/// Given an integer array nums, return true if you can partition the array 
+/// into two subsets such that the sum of the elements in both subsets is 
+/// equal or false otherwise.
+///
+/// Example 1:
+/// Input: nums = [1,5,11,5]
 /// Output: true
 /// Explanation: The array can be partitioned as [1, 5, 5] and [11].
-/// Example 2: 
-/// Input: [1, 2, 3, 5]
+///
+/// Example 2:
+/// 
+/// Input: nums = [1,2,3,5]
 /// Output: false
 /// Explanation: The array cannot be partitioned into equal sum subsets.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 200
+/// 2. 1 <= nums[i] <= 100
 /// </summary>
 bool LeetCodeDP::canPartition(vector<int>& nums)
 {
@@ -12876,24 +12917,16 @@ bool LeetCodeDP::canPartition(vector<int>& nums)
     }
     if (sum % 2 == 1) return false;
     sum = sum / 2;
-    unordered_set<int> curr;
-    unordered_set<int> next;
-    curr.insert(0);
+    vector<int> dp(sum + 1);
+    dp[0] = 1;
     for (size_t i = 0; i < nums.size(); i++)
     {
-        for (auto s : curr)
+        for (int j = sum; j >= nums[i]; j--)
         {
-            int n = s + nums[i];
-            if (n == sum) return true;
-            else if (n > sum) continue;
-            else
-            {
-                next.insert(n);
-            }
+            dp[j] = (dp[j - nums[i]] == 1) ? 1 : dp[j];
         }
-        curr.insert(next.begin(), next.end());
     }
-    return false;
+    return dp[sum] != 0;
 }
 
 /// <summary>

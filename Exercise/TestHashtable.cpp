@@ -1894,8 +1894,24 @@ void TestLeetCode245(void)
     Logger::WriteMessage("word1 =" + word1 + "; word2 = " + word2 + "; distance = " + to_string(distance));
 }
 
+void TestLeetCode3005(void)
+{
+    Logger::WriteMessage("Test Leet Code 3005");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1, 2, 2, 3, 1, 4 };
+    int result = leetCode.maxFrequencyElements(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4,5 };
+    result = leetCode.maxFrequencyElements(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3005();
     TestLeetCode245();
     TestLeetCode243();
     TestLeetCode3002();

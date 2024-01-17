@@ -56,6 +56,11 @@ public:
 
 #pragma region String
     /// <summary>
+    /// generate kmp array
+    /// </summary>
+    vector<int> kmp(string& s);
+
+    /// <summary>
     /// Leet code #1446. Consecutive Characters
     ///
     /// Easy
@@ -221,16 +226,27 @@ public:
     vector<string> findRepeatedDnaSequences(string s);
 
     /// <summary>
-    /// Leet code #214. Shortest Palindrome    
-    /// 
-    /// Given a string S, you are allowed to convert it to a palindrome by 
-    /// adding characters in front of it. Find and return the shortest palindrome 
-    /// you can find by performing this transformation. 
+    /// Leet Code 214. Shortest Palindrome
+    ///                 
+    /// Hard
     ///
-    /// For example: 
-    /// Given "aacecaaa", return "aaacecaaa".
-    /// Given "abcd", return "dcbabcd".
-    /// Given an array of n positive integers and a positive integer s, 
+    /// You are given a string s. You can convert s to a palindrome by adding 
+    /// characters in front of it.
+    ///
+    /// Return the shortest palindrome you can find by performing this 
+    /// transformation.
+    /// 
+    /// Example 1:
+    /// Input: s = "aacecaaa"
+    /// Output: "aaacecaaa"
+    ///
+    /// Example 2:
+    /// Input: s = "abcd"
+    /// Output: "dcbabcd"
+    /// 
+    /// Constraints:
+    /// 1. 0 <= s.length <= 5 * 10^4
+    /// 2. s consists of lowercase English letters only.
     /// </summary>
     string shortestPalindrome(string s);
 
@@ -699,43 +715,84 @@ public:
     int distinctEchoSubstrings(string text);
 
     /// <summary>
-    /// Leet code #459. Repeated Substring Pattern  
-    /// Given a non-empty string check if it can be constructed by taking a substring of it 
-    /// and appending multiple copies of the substring together. You may assume the given string 
-    /// consists of lowercase English letters only and its length will not exceed 10000. 
+    /// Leet code #1316. Distinct Echo Substrings
+    ///
+    /// Hard
+    ///
+    /// Return the number of distinct non-empty substrings of text that can be 
+    /// written as the concatenation of some string with itself.
+    /// 
+    /// Example 1:
+    /// Input: text = "abcabcabc"
+    /// Output: 3
+    /// Explanation: The 3 substrings are "abcabc", "bcabca" and "cabcab".
+    /// Example 2:
+    /// Input: text = "leetcodeleetcode"
+    /// Output: 2
+    /// Explanation: The 2 substrings are "ee" and "leetcodeleetcode".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= text.length <= 2000
+    /// 2. text has only lowercase English letters.
+    /// </summary>
+    int distinctEchoSubstringsII(string text);
+
+    /// <summary>
+    /// Leet Code 459. Repeated Substring Pattern
+    ///                 
+    /// Easy
+    ///
+    /// Given a string s, check if it can be constructed by taking a substring 
+    /// of it and appending multiple copies of the substring together.
     ///
     /// Example 1:
-    /// Input: "abab"
-    /// Output: True
+    /// Input: s = "abab"
+    /// Output: true
+    /// Explanation: It is the substring "ab" twice.
     ///
-    /// Explanation: It's the substring "ab" twice.
     /// Example 2:
-    /// Input: "aba"
-    /// Output: False
-    /// 
-    /// Example 3:
-    /// Input: "abcabcabcabc" 
-    /// Output: True
-    /// Explanation: It's the substring "abc" four times. (And the substring "abcabc" twice.)
+    /// Input: s = "aba"
+    /// Output: false
     ///
+    /// Example 3:
+    /// Input: s = "abcabcabcabc"
+    /// Output: true
+    /// Explanation: It is the substring "abc" four times or the substring 
+    /// "abcabc" twice.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^4
+    /// 2. s consists of lowercase English letters.
     /// </summary>
     bool repeatedSubstringPattern(string s);
 
     /// <summary>
-    /// Leet code #686. Repeated String Match
-    /// Given two strings A and B, find the minimum number of times A has to 
-    /// be repeated such that B is a substring of it. If no such solution, 
+    /// Leet Code 686. Repeated String Match
+    ///                 
+    /// Medium
+    ///
+    /// Given two strings a and b, return the minimum number of times you 
+    /// should repeat string a so that string b is a substring of it. If 
+    /// it is impossible for b to be a substring of a after repeating it, 
     /// return -1.
     ///
-    /// For example, with A = "abcd" and B = "cdabcdab".
-    /// Return 3, because by repeating A three times ("abcdabcdabcd"), 
-    /// B is a substring of it; and B is not a substring of A repeated 
-    /// two times ("abcdabcd").
+    /// Notice: string "abc" repeated 0 times is "", repeated 1 time is 
+    /// "abc" and repeated 2 times is "abcabc".
     ///
-    /// Note:
-    /// The length of A and B will be between 1 and 10000.
+    /// Example 1:
+    /// Input: a = "abcd", b = "cdabcdab"
+    /// Output: 3
+    /// Explanation: We return 3 because by repeating a three times 
+    /// "abcdabcdabcd", b is a substring of it.
+    ///
+    /// Example 2:
+    /// Input: a = "a", b = "aa"
+    /// Output: 2
+    /// Constraints:
+    /// 1 . 1 <= a.length, b.length <= 10^4
+    /// 2. a and b consist of lowercase English letters.
     /// </summary>
-    int repeatedStringMatch(string A, string B);
+    int repeatedStringMatch(string a, string b);
 
     /// <summary>
     /// Leet code #796. Rotate String
@@ -2422,39 +2479,29 @@ public:
     string generateTheString(int n);
 
     /// <summary>
-    /// Leet code #1392. Longest Happy Prefix
-    /// 
+    /// Leet Code 1392. Longest Happy Prefix
+    ///                 
     /// Hard
     ///
-    /// A string is called a happy prefix if is a non-empty prefix which is 
-    /// also a suffix (excluding itself).
+    /// A string is called a happy prefix if is a non-empty prefix which is also 
+    /// a suffix (excluding itself).
     ///
-    /// Given a string s. Return the longest happy prefix of s .
-    ///
-    /// Return an empty string if no such prefix exists.
+    /// Given a string s, return the longest happy prefix of s. Return an empty 
+    /// string "" if no such prefix exists.
     /// 
     /// Example 1:
-    ///
     /// Input: s = "level"
     /// Output: "l"
-    /// Explanation: s contains 4 prefix excluding itself ("l", "le", "lev", "leve"), 
-    /// and suffix ("l", "el", "vel", "evel"). The largest prefix which is also 
-    /// suffix is given by "l".
+    /// Explanation: s contains 4 prefix excluding itself ("l", "le", "lev", 
+    /// "leve"), and suffix ("l", "el", "vel", "evel"). The largest prefix which 
+    /// is also suffix is given by "l".
     ///
     /// Example 2:
     /// Input: s = "ababab"
     /// Output: "abab"
-    /// Explanation: "abab" is the largest prefix which is also suffix. They can 
+    /// Explanation: "abab" is the largest prefix which is also suffix. They can
     /// overlap in the original string.
-    ///
-    /// Example 3:
-    /// Input: s = "leetcodeleet"
-    /// Output: "leet"
-    ///
-    /// Example 4:
-    /// Input: s = "a"
-    /// Output: ""
-    ///
+    /// 
     /// Constraints:
     /// 1. 1 <= s.length <= 10^5
     /// 2. s contains only lowercase English letters.
@@ -13398,6 +13445,96 @@ public:
     /// 2. word consists only of lowercase English letters.
     /// </summary>
     int removeAlmostEqualCharacters(string word);
+
+    /// <summary>
+    /// Leet Code 3006. Find Beautiful Indices in the Given Array I
+    ///                 
+    /// Medium
+    ///
+    /// You are given a 0-indexed string s, a string a, a string b, and an 
+    /// integer k.
+    ///
+    /// An index i is beautiful if:
+    /// 
+    /// 0 <= i <= s.length - a.length
+    /// s[i..(i + a.length - 1)] == a
+    /// There exists an index j such that:
+    /// 0 <= j <= s.length - b.length
+    /// s[j..(j + b.length - 1)] == b
+    /// |j - i| <= k
+    /// Return the array that contains beautiful indices in sorted order from 
+    /// smallest to largest.
+    /// 
+    /// Example 1:
+    /// Input: s = "isawsquirrelnearmysquirrelhouseohmy", a = "my", 
+    /// b = "squirrel", k = 15
+    /// Output: [16,33]
+    /// Explanation: There are 2 beautiful indices: [16,33].
+    /// - The index 16 is beautiful as s[16..17] == "my" and there exists an 
+    ///   index 4 with s[4..11] == "squirrel" and |16 - 4| <= 15.
+    /// - The index 33 is beautiful as s[33..34] == "my" and there exists an 
+    ///   index 18 with s[18..25] == "squirrel" and |33 - 18| <= 15.
+    /// Thus we return [16,33] as the result.
+    ///
+    /// Example 2:
+    /// Input: s = "abcd", a = "a", b = "a", k = 4
+    /// Output: [0]
+    /// Explanation: There is 1 beautiful index: [0].
+    /// - The index 0 is beautiful as s[0..0] == "a" and there exists an 
+    ///   index 0 with s[0..0] == "a" and |0 - 0| <= 4.
+    /// Thus we return [0] as the result.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= k <= s.length <= 10^5
+    /// 2. 1 <= a.length, b.length <= 10
+    /// 3. s, a, and b contain only lowercase English letters.
+    /// </summary>
+    vector<int> beautifulIndices(string s, string a, string b, int k);
+
+    /// <summary>
+    /// Leet Code 3008. Find Beautiful Indices in the Given Array II
+    ///                 
+    /// Hard
+    ///
+    /// You are given a 0-indexed string s, a string a, a string b, and an 
+    /// integer k.
+    /// 
+    /// An index i is beautiful if:
+    /// 0 <= i <= s.length - a.length
+    /// s[i..(i + a.length - 1)] == a
+    /// There exists an index j such that:
+    /// 0 <= j <= s.length - b.length
+    /// s[j..(j + b.length - 1)] == b
+    /// |j - i| <= k
+    /// Return the array that contains beautiful indices in sorted order from 
+    /// smallest to largest.
+    ///
+    /// Example 1:
+    /// Input: s = "isawsquirrelnearmysquirrelhouseohmy", a = "my", 
+    ///        b = "squirrel", k = 15
+    /// Output: [16,33]
+    /// Explanation: There are 2 beautiful indices: [16,33].
+    /// - The index 16 is beautiful as s[16..17] == "my" and there exists an 
+    ///   index 4 with s[4..11] == "squirrel" and |16 - 4| <= 15.
+    /// - The index 33 is beautiful as s[33..34] == "my" and there exists an 
+    ///   index 18 with s[18..25] == "squirrel" and |33 - 18| <= 15.
+    /// Thus we return [16,33] as the result.
+    ///
+    /// Example 2:
+    /// Input: s = "abcd", a = "a", b = "a", k = 4
+    /// Output: [0]
+    /// Explanation: There is 1 beautiful index: [0].
+    /// - The index 0 is beautiful as s[0..0] == "a" and there exists an index 0 
+    ///   with s[0..0] == "a" and |0 - 0| <= 4.
+    /// Thus we return [0] as the result.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= k <= s.length <= 5 * 10^5
+    /// 2. 1 <= a.length, b.length <= 5 * 10^5
+    /// 3. s, a, and b contain only lowercase English letters.
+    /// </summary>
+    vector<int> beautifulIndicesII(string s, string a, string b, int k);
+
 #pragma endregion
 };
 

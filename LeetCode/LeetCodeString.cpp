@@ -18,6 +18,25 @@
 #include "Leetcode.h"
 #include "LeetCodeString.h"
 #pragma region String
+
+/// <summary>
+/// generate kmp array
+/// </summary>
+vector<int> LeetCodeString::kmp(string& s)
+{
+    vector<int> dp(s.size());
+    for (size_t i = 1; i < s.size(); i++)
+    {
+        int pos = dp[i - 1];
+        while (pos != 0 && s[i] != s[pos])
+        {
+            pos = dp[pos - 1];
+        }
+        dp[i] = pos + (s[i] == s[pos] ? 1 : 0);
+    }
+    return dp;
+}
+
 /// <summary>
 /// Leet code #3. Longest Substring Without Repeating Characters
 /// Given a string, find the length of the longest substring without 
@@ -890,52 +909,36 @@ vector<string> LeetCodeString::findRepeatedDnaSequences(string s)
 }
 
 /// <summary>
-/// Leet code #459. Repeated Substring Pattern  
-/// Given a non-empty string check if it can be constructed by taking a 
-/// substring of it and appending multiple copies of the substring together. 
-/// You may assume the given string consists of lowercase English letters 
-/// only and its length will not exceed 10000. 
+/// Leet Code 459. Repeated Substring Pattern
+///                 
+/// Easy
+///
+/// Given a string s, check if it can be constructed by taking a substring 
+/// of it and appending multiple copies of the substring together.
 ///
 /// Example 1:
-/// Input: "abab"
-/// Output: True
+/// Input: s = "abab"
+/// Output: true
+/// Explanation: It is the substring "ab" twice.
 ///
-/// Explanation: It's the substring "ab" twice.
 /// Example 2:
-/// Input: "aba"
-/// Output: False
-/// 
+/// Input: s = "aba"
+/// Output: false
+///
 /// Example 3:
-/// Input: "abcabcabcabc" 
-/// Output: True
-/// Explanation: It's the substring "abc" four times. (And the substring 
-/// "abcabc" twice.)
+/// Input: s = "abcabcabcabc"
+/// Output: true
+/// Explanation: It is the substring "abc" four times or the substring 
+/// "abcabc" twice.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^4
+/// 2. s consists of lowercase English letters.
 /// </summary>
 bool LeetCodeString::repeatedSubstringPattern(string s)
 {
-    vector<int> kmp(s.size());
-    int i = 1;
-    int j = 0;
-    while (i < (int)s.size())
-    {
-        if (s[i] == s[j])
-        {
-            j++;
-            kmp[i] = j;
-            i++;
-        }
-        else if (j == 0)
-        {
-            i++;
-        }
-        else
-        {
-            j = kmp[j - 1];
-        }
-    }
-    int last = kmp.back();
-    int size = s.size();
-    if ((last != 0) && (size % (size - last) == 0))
+    vector<int> dp = kmp(s);
+    if ((dp.back() != 0) && (s.size() % (s.size() - dp.back()) == 0))
     {
         return true;
     }
@@ -1611,63 +1614,39 @@ bool LeetCodeString::isAdditiveNumber(string num)
 }
 
 /// <summary>
-/// Leet code #214. Shortest Palindrome
-/// 
-/// Given a string S, you are allowed to convert it to a palindrome by 
-/// adding characters in front of it. Find and return the shortest palindrome 
-/// you can find by performing this transformation. 
+/// Leet Code 214. Shortest Palindrome
+///                 
+/// Hard
 ///
-/// For example: 
-/// Given "aacecaaa", return "aaacecaaa".
-/// Given "abcd", return "dcbabcd".
-/// Given an array of n positive integers and a positive integer s, 
+/// You are given a string s. You can convert s to a palindrome by adding 
+/// characters in front of it.
+///
+/// Return the shortest palindrome you can find by performing this 
+/// transformation.
+/// 
+/// Example 1:
+/// Input: s = "aacecaaa"
+/// Output: "aaacecaaa"
+///
+/// Example 2:
+/// Input: s = "abcd"
+/// Output: "dcbabcd"
+/// 
+/// Constraints:
+/// 1. 0 <= s.length <= 5 * 10^4
+/// 2. s consists of lowercase English letters only.
 /// </summary>
 string LeetCodeString::shortestPalindrome(string s)
 {
+    string reverse_s = s;
+    std::reverse(reverse_s.begin(), reverse_s.end());
+    string str_s = s + "#" + reverse_s;
+    vector<int> dp = kmp(str_s);
+    
     string result;
-    int n = s.size();
-    vector<int> kmp(n);
-    int i = 1; 
-    int j = 0;
-    while (i < n)
+    for (size_t i = 0; i < s.size() - dp.back(); i++)
     {
-        if (s[i] == s[j])
-        {
-            j++;
-            kmp[i] = j;
-            i++;
-        }
-        else if (j == 0)
-        {
-            i++;
-        }
-        else
-        {
-            j = kmp[j - 1];
-        }
-    }
-
-    int s_i = 0, r_i = 0;
-    while (s_i + r_i <  n)
-    {
-        if (s[s_i] == s[n-1-r_i])
-        {
-            s_i++;
-            r_i++;
-        }
-        else
-        {
-            if (s_i > 0)
-            {
-                s_i = kmp[s_i-1];
-            }
-            else r_i++;
-        }
-    }
-    r_i -= s_i;
-    for (int i = 0; i < r_i; i++)
-    {
-        result.push_back(s[n-1-i]);
+        result.push_back(s[s.size() - 1 - i]);
     }
     result.append(s);
     return result;
@@ -3369,75 +3348,58 @@ string LeetCodeString::replaceWords(vector<string>& dict, string sentence)
 }
 
 /// <summary>
-/// Leet code #686. Repeated String Match
+/// Leet Code 686. Repeated String Match
+///                 
+/// Medium
 ///
-/// Given two strings A and B, find the minimum number of times A has to 
-/// be repeated such that B is a substring of it. If no such solution, 
+/// Given two strings a and b, return the minimum number of times you 
+/// should repeat string a so that string b is a substring of it. If 
+/// it is impossible for b to be a substring of a after repeating it, 
 /// return -1.
 ///
-/// For example, with A = "abcd" and B = "cdabcdab".
-/// Return 3, because by repeating A three times ("abcdabcdabcd"), 
-/// B is a substring of it; and B is not a substring of A repeated 
-/// two times ("abcdabcd").
+/// Notice: string "abc" repeated 0 times is "", repeated 1 time is 
+/// "abc" and repeated 2 times is "abcabc".
 ///
-/// Note:
-/// The length of A and B will be between 1 and 10000.
+/// Example 1:
+/// Input: a = "abcd", b = "cdabcdab"
+/// Output: 3
+/// Explanation: We return 3 because by repeating a three times 
+/// "abcdabcdabcd", b is a substring of it.
+///
+/// Example 2:
+/// Input: a = "a", b = "aa"
+/// Output: 2
+/// Constraints:
+/// 1 . 1 <= a.length, b.length <= 10^4
+/// 2. a and b consist of lowercase English letters.
 /// </summary>
-int LeetCodeString::repeatedStringMatch(string A, string B)
+int LeetCodeString::repeatedStringMatch(string a, string b)
 {
-    vector<int> kmp(B.size());
-    int i = 1;
-    int j = 0;
-    while (i < (int)B.size())
+    vector<int> dp = kmp(b);
+    size_t i = 0, j = 0;
+    while (j < b.size())
     {
-        if (B[i] == B[j])
-        {
-            j++;
-            kmp[i] = j;
-            i++;
-        }
-        else if (j == 0)
-        {
-            i++;
-        }
-        else
-        {
-            j = kmp[j - 1];
-        }
-    }
-    int result = 0;
-    i = 0;
-    j = 0;
-    while (j < (int)B.size())
-    {
-        if (i == A.size())
-        {
-            result++;
-            i = 0;
-        }
-        else if (A[i] == B[j])
+        if (a[i % a.size()] == b[j])
         {
             i++;
             j++;
         }
         else
         {
-            if ((result - 1) * (int)A.size() + i > j)
+            if (i - j >= a.size()) return -1;
+            while (j != 0 && a[i % a.size()] != b[j])
             {
-                return -1;
+                j = dp[j - 1];
             }
-            if (j == 0)
+            if (a[i % a.size()] != b[j])
             {
                 i++;
             }
-            else
-            {
-                j = kmp[j - 1];
-            }
         }
     }
-    return result + 1;
+    return (i + a.size() - 1) / a.size();
 }
+
 
 /// <summary>
 /// Leet code #720. Longest Word in Dictionary
@@ -8792,6 +8754,53 @@ string LeetCodeString::freqAlphabets(string s)
 /// </summary>
 int LeetCodeString::distinctEchoSubstrings(string text)
 {
+    unordered_set<string> result_set;
+    for (size_t len = 1; len <= text.size() / 2; len++)
+    {
+        int count = 0;
+        for (int i = 0; i + len < text.size(); i++)
+        {
+            if (text[i] == text[i + len])
+            {
+                count++;
+            }
+            else
+            {
+                count = 0;
+            }
+            if (count == len)
+            {
+                result_set.insert(text.substr(i, len));
+                count--;
+            }
+        }
+    }
+    return result_set.size();
+}
+
+/// <summary>
+/// Leet code #1316. Distinct Echo Substrings
+///
+/// Hard
+///
+/// Return the number of distinct non-empty substrings of text that can be 
+/// written as the concatenation of some string with itself.
+/// 
+/// Example 1:
+/// Input: text = "abcabcabc"
+/// Output: 3
+/// Explanation: The 3 substrings are "abcabc", "bcabca" and "cabcab".
+/// Example 2:
+/// Input: text = "leetcodeleetcode"
+/// Output: 2
+/// Explanation: The 2 substrings are "ee" and "leetcodeleetcode".
+/// 
+/// Constraints:
+/// 1. 1 <= text.length <= 2000
+/// 2. text has only lowercase English letters.
+/// </summary>
+int LeetCodeString::distinctEchoSubstringsII(string text)
+{
     int n = text.size();
     unordered_set<string> result_set;
     for (int s = 0; s < (int)text.size(); s++)
@@ -9427,39 +9436,29 @@ string LeetCodeString::generateTheString(int n)
 }
 
 /// <summary>
-/// Leet code #1392. Longest Happy Prefix
-/// 
+/// Leet Code 1392. Longest Happy Prefix
+///                 
 /// Hard
 ///
-/// A string is called a happy prefix if is a non-empty prefix which is 
-/// also a suffix (excluding itself).
+/// A string is called a happy prefix if is a non-empty prefix which is also 
+/// a suffix (excluding itself).
 ///
-/// Given a string s. Return the longest happy prefix of s .
-///
-/// Return an empty string if no such prefix exists.
+/// Given a string s, return the longest happy prefix of s. Return an empty 
+/// string "" if no such prefix exists.
 /// 
 /// Example 1:
-///
 /// Input: s = "level"
 /// Output: "l"
-/// Explanation: s contains 4 prefix excluding itself ("l", "le", "lev", "leve"), 
-/// and suffix ("l", "el", "vel", "evel"). The largest prefix which is also 
-/// suffix is given by "l".
+/// Explanation: s contains 4 prefix excluding itself ("l", "le", "lev", 
+/// "leve"), and suffix ("l", "el", "vel", "evel"). The largest prefix which 
+/// is also suffix is given by "l".
 ///
 /// Example 2:
 /// Input: s = "ababab"
 /// Output: "abab"
-/// Explanation: "abab" is the largest prefix which is also suffix. They can 
+/// Explanation: "abab" is the largest prefix which is also suffix. They can
 /// overlap in the original string.
-///
-/// Example 3:
-/// Input: s = "leetcodeleet"
-/// Output: "leet"
-///
-/// Example 4:
-/// Input: s = "a"
-/// Output: ""
-///
+/// 
 /// Constraints:
 /// 1. 1 <= s.length <= 10^5
 /// 2. s contains only lowercase English letters.
@@ -18280,7 +18279,7 @@ vector<int> LeetCodeString::sortJumbled(vector<int>& mapping, vector<int>& nums)
 
 /// <summary>
 /// Leet Code 2223. Sum of Scores of Built Strings
-///                                                                                   
+/// 
 /// Hard
 ///
 /// You are building a string s of length n one character at a time, 
@@ -18326,26 +18325,19 @@ vector<int> LeetCodeString::sortJumbled(vector<int>& mapping, vector<int>& nums)
 /// </summary>
 long long LeetCodeString::sumScores(string s)
 {
-    int n = (int)s.size();
-    vector <long long> z(s.size());
-    for (int i = 1, l = 0, r = 0; i < n; ++i)
-    {
-        if (i <= r)
-        { 
-            z[i] = min(((long long)r - (long long)i + 1) * 1LL, z[i - l]);
-        }
-        while ((long long)i + (long long)z[i] < (long long)n && s[(int)z[i]] == s[i + (int)z[i]])
-            ++z[i];
-        if ((long long)i + z[i] - (long long)1 > (long long)r)
-        {
-            l = i;
-            r = (int)i + (int)z[i] - (int)1;
-        }
-    }
+    vector<int> arr = kmp(s);
+    vector<int> dp(s.size());
     long long result = 0;
-    for (auto xt : z) result += xt;
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        if (arr[i] == 0) dp[i] = 0;
+        else
+        {
+            dp[i] = dp[arr[i] - 1] + 1;
+        }
+        result += (long long)dp[i];
+    }
     result += (long long)s.size();
-    
     return result;
 }
 
@@ -23076,4 +23068,161 @@ int LeetCodeString::removeAlmostEqualCharacters(string word)
     return result;
 }
 
+
+/// <summary>
+/// Leet Code 3006. Find Beautiful Indices in the Given Array I
+///                 
+/// Medium
+///
+/// You are given a 0-indexed string s, a string a, a string b, and an 
+/// integer k.
+///
+/// An index i is beautiful if:
+/// 
+/// 0 <= i <= s.length - a.length
+/// s[i..(i + a.length - 1)] == a
+/// There exists an index j such that:
+/// 0 <= j <= s.length - b.length
+/// s[j..(j + b.length - 1)] == b
+/// |j - i| <= k
+/// Return the array that contains beautiful indices in sorted order from 
+/// smallest to largest.
+/// 
+/// Example 1:
+/// Input: s = "isawsquirrelnearmysquirrelhouseohmy", a = "my", 
+/// b = "squirrel", k = 15
+/// Output: [16,33]
+/// Explanation: There are 2 beautiful indices: [16,33].
+/// - The index 16 is beautiful as s[16..17] == "my" and there exists an 
+///   index 4 with s[4..11] == "squirrel" and |16 - 4| <= 15.
+/// - The index 33 is beautiful as s[33..34] == "my" and there exists an 
+///   index 18 with s[18..25] == "squirrel" and |33 - 18| <= 15.
+/// Thus we return [16,33] as the result.
+///
+/// Example 2:
+/// Input: s = "abcd", a = "a", b = "a", k = 4
+/// Output: [0]
+/// Explanation: There is 1 beautiful index: [0].
+/// - The index 0 is beautiful as s[0..0] == "a" and there exists an 
+///   index 0 with s[0..0] == "a" and |0 - 0| <= 4.
+/// Thus we return [0] as the result.
+/// 
+/// Constraints:
+/// 1. 1 <= k <= s.length <= 10^5
+/// 2. 1 <= a.length, b.length <= 10
+/// 3. s, a, and b contain only lowercase English letters.
+/// </summary>
+vector<int> LeetCodeString::beautifulIndices(string s, string a, string b, int k)
+{
+    queue<int> queue_a, queue_b;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s.substr(i, a.size()) == a)
+        {
+            queue_a.push(i);
+        }
+        if (s.substr(i, b.size()) == b)
+        {
+            queue_b.push(i);
+        }
+    }
+    vector<int> result;
+    while (!queue_a.empty() && !queue_b.empty())
+    {
+        if (abs(queue_a.front() - queue_b.front()) <= k)
+        {
+            result.push_back(queue_a.front());
+            queue_a.pop();
+        }
+        else if (queue_b.front() < queue_a.front())
+        {
+            queue_b.pop();
+        }
+        else
+        {
+            queue_a.pop();
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3008. Find Beautiful Indices in the Given Array II
+///                 
+/// Medium
+///
+/// You are given a 0-indexed string s, a string a, a string b, and an 
+/// integer k.
+/// 
+/// An index i is beautiful if:
+/// 0 <= i <= s.length - a.length
+/// s[i..(i + a.length - 1)] == a
+/// There exists an index j such that:
+/// 0 <= j <= s.length - b.length
+/// s[j..(j + b.length - 1)] == b
+/// |j - i| <= k
+/// Return the array that contains beautiful indices in sorted order from 
+/// smallest to largest.
+///
+/// Example 1:
+/// Input: s = "isawsquirrelnearmysquirrelhouseohmy", a = "my", 
+///        b = "squirrel", k = 15
+/// Output: [16,33]
+/// Explanation: There are 2 beautiful indices: [16,33].
+/// - The index 16 is beautiful as s[16..17] == "my" and there exists an 
+///   index 4 with s[4..11] == "squirrel" and |16 - 4| <= 15.
+/// - The index 33 is beautiful as s[33..34] == "my" and there exists an 
+///   index 18 with s[18..25] == "squirrel" and |33 - 18| <= 15.
+/// Thus we return [16,33] as the result.
+///
+/// Example 2:
+/// Input: s = "abcd", a = "a", b = "a", k = 4
+/// Output: [0]
+/// Explanation: There is 1 beautiful index: [0].
+/// - The index 0 is beautiful as s[0..0] == "a" and there exists an index 0 
+///   with s[0..0] == "a" and |0 - 0| <= 4.
+/// Thus we return [0] as the result.
+/// 
+/// Constraints:
+/// 1. 1 <= k <= s.length <= 5 * 10^5
+/// 2. 1 <= a.length, b.length <= 5 * 10^5
+/// 3. s, a, and b contain only lowercase English letters.
+/// </summary>
+vector<int> LeetCodeString::beautifulIndicesII(string s, string a, string b, int k)
+{
+    string str_a = a + "#" + s;
+    string str_b = b + "#" + s;
+    vector<int> kmp_a = kmp(str_a);
+    vector<int> kmp_b = kmp(str_b);
+    queue<int> queue_a, queue_b;
+    for (size_t i = 0; i < kmp_a.size(); i++)
+    {
+        if (kmp_a[i] >= (int)a.size())
+        queue_a.push(i - 2 * a.size());
+    }
+    for (size_t i = 0; i < kmp_b.size(); i++)
+    {
+        if (kmp_b[i] >= (int)b.size())
+            queue_b.push(i - 2 * b.size());
+    }
+
+    vector<int> result;
+    while (!queue_a.empty() && !queue_b.empty())
+    {
+        if (abs(queue_a.front() - queue_b.front()) <= k)
+        {
+            result.push_back(queue_a.front());
+            queue_a.pop();
+        }
+        else if (queue_b.front() < queue_a.front())
+        {
+            queue_b.pop();
+        }
+        else
+        {
+            queue_a.pop();
+        }
+    }
+    return result;
+}
 #pragma endregion

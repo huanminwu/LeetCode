@@ -314,20 +314,30 @@ void TestLeetCode459(void)
 void TestLeetCode686(void)
 {
     LeetCodeString leetCode;
-    string A = "abcd";
-    string B = "cdabcdab";
-    int repeat = leetCode.repeatedStringMatch(A, B);
-    Logger::WriteMessage("A = " + A + "; B = " + B + "; Repeat = " + to_string(repeat));
+    string a = "abcd";
+    string b = "cdabcdab";
+    int repeat = leetCode.repeatedStringMatch(a, b);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; Repeat = " + to_string(repeat));
 
-    A = "abcdabab";
-    B = "ababc";
-    repeat = leetCode.repeatedStringMatch(A, B);
-    Logger::WriteMessage("A = " + A + "; B = " + B + "; Repeat = " + to_string(repeat));
+    a = "abcdabab";
+    b = "ababc";
+    repeat = leetCode.repeatedStringMatch(a, b);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; Repeat = " + to_string(repeat));
 
-    A = "abcd";
-    B = "cdabcdacdabcda";
-    repeat = leetCode.repeatedStringMatch(A, B);
-    Logger::WriteMessage("A = " + A + "; B = " + B + "; Repeat = " + to_string(repeat));
+    a = "abcd";
+    b = "cdabcdacdabcda";
+    repeat = leetCode.repeatedStringMatch(a, b);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; Repeat = " + to_string(repeat));
+
+    a = "aabaa";
+    b = "aaab";
+    repeat = leetCode.repeatedStringMatch(a, b);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; Repeat = " + to_string(repeat));
+
+    a = "baa";
+    b = "abaab";
+    repeat = leetCode.repeatedStringMatch(a, b);
+    Logger::WriteMessage("a = " + a + "; b = " + b + "; Repeat = " + to_string(repeat));
 }
 
 void TestLeetCode796(void)
@@ -5163,6 +5173,11 @@ void TestLeetCode2223(void)
     s = "azbazbzaz";
     result = leetCode.sumScores(s);
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aabaab";
+    result = leetCode.sumScores(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
 }
 
 void TestLeetCode2224(void)
@@ -6460,8 +6475,48 @@ void TestLeetCode2957(void)
     Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
 }
 
+void TestLeetCode3006(void)
+{
+    Logger::WriteMessage("Test Leet Code 3006");
+    LeetCodeString leetCode;
+    string s = "isawsquirrelnearmysquirrelhouseohmy", a = "my", b = "squirrel";
+    int k = 15;
+    vector<int> result = leetCode.beautifulIndices(s, a, b, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("a = " + a + "; b = " + b);
+    Logger::WriteMessage(result);
+
+    s = "abcd", a = "a", b = "a";
+    result = leetCode.beautifulIndices(s, a, b, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("a = " + a + "; b = " + b);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3008(void)
+{
+    Logger::WriteMessage("Test Leet Code 3008");
+    LeetCodeString leetCode;
+    string s = "isawsquirrelnearmysquirrelhouseohmy", a = "my", b = "squirrel";
+    int k = 15;
+    vector<int> result = leetCode.beautifulIndicesII(s, a, b, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("a = " + a + "; b = " + b);
+    Logger::WriteMessage(result);
+
+    s = "abcd", a = "a", b = "a";
+    result = leetCode.beautifulIndicesII(s, a, b, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("a = " + a + "; b = " + b);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode2223();
+    TestLeetCode686();
+    TestLeetCode3008();
+    TestLeetCode3006();
     TestLeetCode2957();
     TestLeetCode2953();
     TestLeetCode2942();
@@ -6532,7 +6587,6 @@ void TestLeetCodeString(void)
     TestLeetCode2255();
     TestLeetCode2243();
     TestLeetCode2224();
-    TestLeetCode2223();
     TestLeetCode2191();
     TestLeetCode2186();
     TestLeetCode2193();
@@ -6781,7 +6835,6 @@ void TestLeetCodeString(void)
     TestLeetCode1181();
     TestLeetCode1189();
     TestLeetCode796();
-    TestLeetCode686();
     TestLeetCode459();
     TestLeetCode1316();
     TestLeetCode28();
