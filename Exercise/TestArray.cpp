@@ -9816,8 +9816,29 @@ void TestLeetCode2996(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3010(void)
+{
+    Logger::WriteMessage("Test Leet Code 3010");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,2,3,12 };
+    int result = leetCode.minimumCostI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,4,3 };
+    result = leetCode.minimumCostI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,3,1,1 };
+    result = leetCode.minimumCostI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3010();
     TestLeetCode2996();
     TestLeetCode2982();
     TestLeetCode2981();

@@ -5691,8 +5691,29 @@ void TestLeetCode2998(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3015(void)
+{
+    Logger::WriteMessage("Test Leet Code 3015");
+    LeetCodeGraph leetCode;
+    int n = 3, x = 1, y = 3;
+    vector<int> result = leetCode.countOfPairs(n, x, y);
+    Logger::WriteMessage("n = " + to_string(n) + "; x = " + to_string(x) + "; y = " + to_string(y));
+    Logger::WriteMessage(result);
+
+    n = 5, x = 2, y = 4;
+    result = leetCode.countOfPairs(n, x, y);
+    Logger::WriteMessage("n = " + to_string(n) + "; x = " + to_string(x) + "; y = " + to_string(y));
+    Logger::WriteMessage(result);
+
+    n = 4, x = 1, y = 1;
+    result = leetCode.countOfPairs(n, x, y);
+    Logger::WriteMessage("n = " + to_string(n) + "; x = " + to_string(x) + "; y = " + to_string(y));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3015();
     TestLeetCode2998();
     TestLeetCode2977();
     TestLeetCode2973();

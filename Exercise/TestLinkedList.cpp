@@ -1165,6 +1165,8 @@ void TestLeetCode2816(void)
 
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode206();
+    TestLeetCode82();
     TestLeetCode2816();
     TestLeetCode2807();
     TestLeetCode2674();
@@ -1183,7 +1185,6 @@ void TestLeetCodeLinkedList(void)
     TestLeetCode382();
     TestLeetCode203();
     TestLeetCode92();
-    TestLeetCode206();
     TestLeetCode143();
     TestLeetCode369();
     TestLeetCode725();
@@ -1198,7 +1199,6 @@ void TestLeetCodeLinkedList(void)
     TestLeetCode21();
     TestLeetCode23();
     TestLeetCode25();
-    TestLeetCode82();
     TestLeetCode83();
     TestLeetCode86();
     TestLeetCode138();

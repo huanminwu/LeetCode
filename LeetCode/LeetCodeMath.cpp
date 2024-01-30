@@ -20808,5 +20808,312 @@ int LeetCodeMath::minMovesToCaptureTheQueen(int a, int b, int c, int d, int e, i
     return min(rook, bishop);
 }
 
+/// <summary>
+/// Leet Code 3012. Minimize Length of Array Using Operations
+///                 
+/// Medium
+/// 
+/// You are given a 0-indexed integer array nums containing positive 
+/// integers.
+///
+/// Your task is to minimize the length of nums by performing the following 
+/// operations any number of times (including zero):
+///
+/// Select two distinct indices i and j from nums, such that nums[i] > 0 and 
+/// nums[j] > 0.
+/// Insert the result of nums[i] % nums[j] at the end of nums.
+/// Delete the elements at indices i and j from nums.
+/// Return an integer denoting the minimum length of nums after performing 
+/// the operation any number of times.
+/// 
+/// Example 1:
+/// Input: nums = [1,4,3,1]
+/// Output: 1
+/// Explanation: One way to minimize the length of the array is as follows:
+/// Operation 1: Select indices 2 and 1, insert nums[2] % nums[1] at the end 
+/// and it becomes [1,4,3,1,3], then delete elements at indices 2 and 1.
+/// nums becomes [1,1,3].
+/// Operation 2: Select indices 1 and 2, insert nums[1] % nums[2] at the end 
+/// and it becomes [1,1,3,1], then delete elements at indices 1 and 2.
+/// nums becomes [1,1].
+/// Operation 3: Select indices 1 and 0, insert nums[1] % nums[0] at the end 
+/// and it becomes [1,1,0], then delete elements at indices 1 and 0.
+/// nums becomes [0].
+/// The length of nums cannot be reduced further. Hence, the answer is 1.
+/// It can be shown that 1 is the minimum achievable length. 
+///
+/// Example 2:
+/// Input: nums = [5,5,5,10,5]
+/// Output: 2
+/// Explanation: One way to minimize the length of the array is as follows:
+/// Operation 1: Select indices 0 and 3, insert nums[0] % nums[3] at the end 
+/// and it becomes [5,5,5,10,5,5], then delete elements at indices 0 and 3.
+/// nums becomes [5,5,5,5]. 
+/// Operation 2: Select indices 2 and 3, insert nums[2] % nums[3] at the 
+/// end and it becomes [5,5,5,5,0], then delete elements at indices 2 and 3. 
+/// nums becomes [5,5,0]. 
+/// Operation 3: Select indices 0 and 1, insert nums[0] % nums[1] at the end 
+/// and it becomes [5,5,0,0], then delete elements at indices 0 and 1.
+/// nums becomes [0,0].
+/// The length of nums cannot be reduced further. Hence, the answer is 2.
+/// It can be shown that 2 is the minimum achievable length. 
+///
+/// Example 3:
+/// Input: nums = [2,3,4]
+/// Output: 1
+/// Explanation: One way to minimize the length of the array is as follows: 
+/// Operation 1: Select indices 1 and 2, insert nums[1] % nums[2] at the end 
+/// and it becomes [2,3,4,3], then delete elements at indices 1 and 2.
+/// nums becomes [2,3].
+/// Operation 2: Select indices 1 and 0, insert nums[1] % nums[0] at the end 
+/// and it becomes [2,3,1], then delete elements at indices 1 and 0.
+/// nums becomes [1].
+/// The length of nums cannot be reduced further. Hence, the answer is 1.
+/// It can be shown that 1 is the minimum achievable length.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeMath::minimumArrayLength(vector<int>& nums)
+{
+    int min_val = INT_MAX;
+    int min_count = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] < min_val)
+        {
+            min_val = nums[i];
+            min_count = 1;
+        }
+        else if (nums[i] == min_val)
+        {
+            min_count++;
+        }
+    }
+    if (min_count == 1) return 1;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] % min_val != 0)
+        {
+            return 1;
+        }
+    }
+    return min_count / 2;
+}
+
+/// <summary>
+/// Leet Code 3014. Minimum Number of Pushes to Type Word I
+///                 
+/// Easy
+/// 
+/// You are given a string word containing distinct lowercase English letters.
+///
+/// Telephone keypads have keys mapped with distinct collections of lowercase 
+/// English letters, which can be used to form words by pushing them. For 
+/// example, the key 2 is mapped with ["a","b","c"], we need to push the key 
+/// one time to type "a", two times to type "b", and three times to type "c" .
+///
+/// It is allowed to remap the keys numbered 2 to 9 to distinct collections 
+/// of letters. The keys can be remapped to any amount of letters, but each 
+/// letter must be mapped to exactly one key. You need to find the minimum 
+/// number of times the keys will be pushed to type the string word.
+///
+/// Return the minimum number of pushes needed to type word after remapping 
+/// the keys.
+///
+/// An example mapping of letters to keys on a telephone keypad is given 
+/// below. Note that 1, *, #, and 0 do not map to any letters.
+///
+/// Example 1:
+/// Input: word = "abcde"
+/// Output: 5
+/// Explanation: The remapped keypad given in the image provides the 
+/// minimum cost.
+/// "a" -> one push on key 2
+/// "b" -> one push on key 3
+/// "c" -> one push on key 4
+/// "d" -> one push on key 5
+/// "e" -> one push on key 6
+/// Total cost is 1 + 1 + 1 + 1 + 1 = 5.
+/// It can be shown that no other mapping can provide a lower cost.
+///
+/// Example 2:
+/// Input: word = "xycdefghij"
+/// Output: 12
+/// Explanation: The remapped keypad given in the image provides the 
+/// minimum cost.
+/// "x" -> one push on key 2
+/// "y" -> two pushes on key 2
+/// "c" -> one push on key 3
+/// "d" -> two pushes on key 3
+/// "e" -> one push on key 4
+/// "f" -> one push on key 5
+/// "g" -> one push on key 6
+/// "h" -> one push on key 7
+/// "i" -> one push on key 8
+/// "j" -> one push on key 9
+/// Total cost is 1 + 2 + 1 + 2 + 1 + 1 + 1 + 1 + 1 + 1 = 12.
+/// It can be shown that no other mapping can provide a lower cost.
+/// 
+/// Constraints:
+/// 1. 1 <= word.length <= 26
+/// 2. word consists of lowercase English letters.
+/// 3. All letters in word are distinct.
+/// </summary>
+int LeetCodeMath::minimumPushesI(string word)
+{
+    vector<int>letters(26);
+    for (auto ch : word)
+    {
+        letters[ch - 'a'] = 1;
+    }
+    int count = 0;
+    for (size_t i = 0; i < letters.size(); i++)
+    {
+        if (letters[i] == 1) count++;
+    }
+    int result = 0;
+    for (int i = 1; i <= 4; i++)
+    {
+        if (count == 0) break;
+        result += min(count, 8) * i;
+        count -= min(count, 8);
+    }     
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3017. Count the Number of Houses at a Certain Distance II
+///                 
+/// Hard
+///
+/// You are given three positive integers n, x, and y.
+///
+/// In a city, there exist houses numbered 1 to n connected by n streets. 
+/// There is a street connecting the house numbered i with the house 
+/// numbered i + 1 for all 1 <= i <= n - 1 . An additional street connects 
+/// the house numbered x with the house numbered y.
+///
+/// For each k, such that 1 <= k <= n, you need to find the number of 
+/// pairs of houses (house1, house2) such that the minimum number of 
+/// streets that need to be traveled to reach house2 from house1 is k.
+///
+/// Return a 1-indexed array result of length n where result[k] represents 
+/// the total number of pairs of houses such that the minimum streets 
+/// required to reach one house from the other is k.
+///
+/// Note that x and y can be equal.
+/// 
+/// Example 1:
+/// Input: n = 3, x = 1, y = 3
+/// Output: [6,0,0]
+/// Explanation: Let's look at each pair of houses:
+/// - For the pair (1, 2), we can go from house 1 to house 2 directly.
+/// - For the pair (2, 1), we can go from house 2 to house 1 directly.
+/// - For the pair (1, 3), we can go from house 1 to house 3 directly.
+/// - For the pair (3, 1), we can go from house 3 to house 1 directly.
+/// - For the pair (2, 3), we can go from house 2 to house 3 directly.
+/// - For the pair (3, 2), we can go from house 3 to house 2 directly.
+///
+/// Example 2:
+/// Input: n = 5, x = 2, y = 4
+/// Output: [10,8,2,0,0]
+/// Explanation: For each distance k the pairs are:
+/// - For k == 1, the pairs are (1, 2), (2, 1), (2, 3), (3, 2), (2, 4), 
+///  (4, 2), (3, 4), (4, 3), (4, 5), and (5, 4).
+/// - For k == 2, the pairs are (1, 3), (3, 1), (1, 4), (4, 1), (2, 5), 
+///  (5, 2), (3, 5), and (5, 3).
+/// - For k == 3, the pairs are (1, 5), and (5, 1).
+/// - For k == 4 and k == 5, there are no pairs.
+///
+/// Example 3:
+/// Input: n = 4, x = 1, y = 1
+/// Output: [6,4,2,0]
+/// Explanation: For each distance k the pairs are:
+/// - For k == 1, the pairs are (1, 2), (2, 1), (2, 3), (3, 2), (3, 4), 
+///   and (4, 3).
+/// - For k == 2, the pairs are (1, 3), (3, 1), (2, 4), and (4, 2).
+/// - For k == 3, the pairs are (1, 4), and (4, 1).
+/// - For k == 4, there are no pairs.
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 10^5
+/// 2. 1 <= x, y <= n
+/// </summary>
+vector<long long> LeetCodeMath::countOfPairsII(int n, int x, int y)
+{
+    vector<long long> result(n);
+    if (x > y) swap(x, y);
+    for (int i = 1; i <= n; ++i) 
+    {
+        result[0] += 2;                                // go left and right
+        result[min(i - 1, abs(i - y) + x)]--;          // reach 1 then stop
+        result[min(n - i, abs(i - x) + 1 + n - y)]--;  // reach n then stop
+        result[min(abs(i - x), abs(y - i) + 1)]++;     // reach x then split
+        result[min(abs(i - x) + 1, abs(y - i))]++;     // reach y then split
+        int r = max(x - i, 0) + max(i - y, 0);
+        result[r + (y - x + 0) / 2]--;                 // i -> x -> y <- x
+        result[r + (y - x + 1) / 2]--;                 // i -> y -> x <- y
+    }
+    for (int i = 1; i < n; ++i)
+    {
+        result[i] += result[i - 1];
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3021. Alice and Bob Playing Flower Game
+///
+/// Medium
+///
+/// Alice and Bob are playing a turn-based game on a circular field surrounded 
+/// by flowers. The circle represents the field, and there are x flowers in 
+/// the clockwise direction between Alice and Bob, and y flowers in the 
+/// anti-clockwise direction between them.
+///
+/// The game proceeds as follows:
+///
+/// Alice takes the first turn.
+/// In each turn, a player must choose either the clockwise or anti-clockwise 
+/// direction and pick one flower from that side.
+/// At the end of the turn, if there are no flowers left at all, the current 
+/// player captures their opponent and wins the game.
+/// Given two integers, n and m, the task is to compute the number of 
+/// possible pairs (x, y) that satisfy the conditions:
+/// 
+/// Alice must win the game according to the described rules.
+/// The number of flowers x in the clockwise direction must be in the range 
+/// [1,n].
+/// The number of flowers y in the anti-clockwise direction must be in the range 
+/// [1,m].
+/// Return the number of possible pairs (x, y) that satisfy the conditions 
+/// mentioned in the statement.
+/// 
+/// Example 1:
+/// Input: n = 3, m = 2
+/// Output: 3
+/// Explanation: The following pairs satisfy conditions described in the 
+/// statement: (1,2), (3,2), (2,1).
+///
+/// Example 2:
+/// Input: n = 1, m = 1
+/// Output: 0
+/// Explanation: No pairs satisfy the conditions described in the statement.
+///
+/// Constraints:
+/// 1. 1 <= n, m <= 10^5
+/// </summary>
+long long LeetCodeMath::flowerGame(int n, int m)
+{
+    long long result = 0;
+    long long odd_n = (n + 1) / 2;
+    long long even_n = n / 2;
+    long long odd_m = (m + 1) / 2;
+    long long even_m = m / 2;
+    result = odd_n * even_m + even_n * odd_m;
+    return result;
+}
 #pragma endregion
 

@@ -3258,5 +3258,116 @@ public:
     /// 2. 1 <= nums[i] <= 100
     /// </summary>
     int maxFrequencyElements(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3016. Minimum Number of Pushes to Type Word II
+    ///                 
+    /// Medium
+    ///
+    /// You are given a string word containing lowercase English letters.
+    ///
+    /// Telephone keypads have keys mapped with distinct collections of lowercase 
+    /// English letters, which can be used to form words by pushing them. For 
+    /// example, the key 2 is mapped with ["a","b","c"], we need to push the key 
+    /// one time to type "a", two times to type "b", and three times to type "c" .
+    ///
+    /// It is allowed to remap the keys numbered 2 to 9 to distinct collections 
+    /// of letters. The keys can be remapped to any amount of letters, but each 
+    /// letter must be mapped to exactly one key. You need to find the minimum 
+    /// number of times the keys will be pushed to type the string word.
+    ///
+    /// Return the minimum number of pushes needed to type word after remapping 
+    /// the keys.
+    ///
+    /// An example mapping of letters to keys on a telephone keypad is given 
+    /// below. Note that 1, *, #, and 0 do not map to any letters.
+    /// 
+    /// Example 1:
+    /// Input: word = "abcde"
+    /// Output: 5
+    /// Explanation: The remapped keypad given in the image provides the minimum 
+    /// cost.
+    /// "a" -> one push on key 2
+    /// "b" -> one push on key 3
+    /// "c" -> one push on key 4
+    /// "d" -> one push on key 5
+    /// "e" -> one push on key 6
+    /// Total cost is 1 + 1 + 1 + 1 + 1 = 5.
+    /// It can be shown that no other mapping can provide a lower cost.
+    ///
+    /// Example 2:
+    /// Input: word = "xyzxyzxyzxyz"
+    /// Output: 12
+    /// Explanation: The remapped keypad given in the image provides the minimum 
+    /// cost.
+    /// "x" -> one push on key 2
+    /// "y" -> one push on key 3
+    /// "z" -> one push on key 4
+    /// Total cost is 1 * 4 + 1 * 4 + 1 * 4 = 12
+    /// It can be shown that no other mapping can provide a lower cost.
+    /// Note that the key 9 is not mapped to any letter: it is not necessary to 
+    /// map letters to every key, but to map all the letters.
+    ///
+    /// Example 3:
+    /// Input: word = "aabbccddeeffgghhiiiiii"
+    /// Output: 24
+    /// Explanation: The remapped keypad given in the image provides the minimum 
+    /// cost.
+    /// "a" -> one push on key 2
+    /// "b" -> one push on key 3
+    /// "c" -> one push on key 4
+    /// "d" -> one push on key 5
+    /// "e" -> one push on key 6
+    /// "f" -> one push on key 7
+    /// "g" -> one push on key 8
+    /// "h" -> two pushes on key 9
+    /// "i" -> one push on key 9
+    /// Total cost is 1 * 2 + 1 * 2 + 1 * 2 + 1 * 2 + 1 * 2 + 1 * 2 + 1 * 2 
+    /// + 2 * 2 + 6 * 1 = 24.
+    /// It can be shown that no other mapping can provide a lower cost.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= word.length <= 10^5
+    /// 2. word consists of lowercase English letters.
+    /// </summary>
+    int minimumPushesII(string word);
+
+    /// <summary>
+    /// Leet Code 3020. Find the Maximum Number of Elements in Subset
+    ///
+    /// Medium
+    ///
+    /// You are given an array of positive integers nums.
+    /// 
+    /// You need to select a subset of nums which satisfies the following 
+    /// condition:
+    ///
+    /// You can place the selected elements in a 0-indexed array such that 
+    /// it follows the pattern: [x, x2, x4, ..., xk/2, xk, xk/2, ..., x4, x2, x] 
+    /// (Note that k can be be any non-negative power of 2). For example, [2, 4, 
+    /// 16, 4, 2] and [3, 9, 3] follow the pattern while [2, 4, 8, 4, 2] does not.
+    /// Return the maximum number of elements in a subset that satisfies these 
+    /// conditions.
+    /// 
+    /// Example 1:
+    /// Input: nums = [5,4,1,2,2]
+    /// Output: 3
+    /// Explanation: We can select the subset {4,2,2}, which can be placed in 
+    /// the array as [2,4,2] which follows the pattern and 22 == 4. Hence the 
+    /// answer is 3.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,3,2,4]
+    /// Output: 1
+    /// Explanation: We can select the subset {1}, which can be placed in the 
+    /// array as [1] which follows the pattern. Hence the answer is 1. Note 
+    /// that we could have also selected the subsets {2}, {4}, or {3}, there 
+    /// may be multiple subsets which provide the same answer. 
+    /// 
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    int maximumLength(vector<int>& nums);
 };
 #endif  // LeetCodeHashtable

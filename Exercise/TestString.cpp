@@ -6511,8 +6511,22 @@ void TestLeetCode3008(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3019(void)
+{
+    Logger::WriteMessage("Test Leet Code 3019");
+    LeetCodeString leetCode;
+    string s = "aAbBcC";
+    int result = leetCode.countKeyChanges(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "AaAaAaaA";
+    result = leetCode.countKeyChanges(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3019();
     TestLeetCode2223();
     TestLeetCode686();
     TestLeetCode3008();

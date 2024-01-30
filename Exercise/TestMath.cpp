@@ -6509,8 +6509,85 @@ void TestLeetCode3001(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3012(void)
+{
+    Logger::WriteMessage("Test Leet Code 3012");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1,4,3,1 };
+    int result = leetCode.minimumArrayLength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,5,5,10,5 };
+    result = leetCode.minimumArrayLength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2, 3, 4 };
+    result = leetCode.minimumArrayLength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3014(void)
+{
+    Logger::WriteMessage("Test Leet Code 3014");
+    LeetCodeMath leetCode;
+    string word = "abcde";
+    int result = leetCode.minimumPushesI(word);
+    Logger::WriteMessage("word = " + word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "xycdefghij";
+    result = leetCode.minimumPushesI(word);
+    Logger::WriteMessage("word = " + word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+}
+
+void TestLeetCode3017(void)
+{
+    Logger::WriteMessage("Test Leet Code 3017");
+    LeetCodeMath leetCode;
+    int n = 3, x = 1, y = 3;
+    vector<long long> result = leetCode.countOfPairsII(n, x, y);
+    Logger::WriteMessage("n = " + to_string(n) + "; x = " + to_string(x));
+    Logger::WriteMessage("y = " + to_string(y));
+    Logger::WriteMessage(result);
+
+    n = 5, x = 2, y = 4;
+    result = leetCode.countOfPairsII(n, x, y);
+    Logger::WriteMessage("n = " + to_string(n) + "; x = " + to_string(x));
+    Logger::WriteMessage("y = " + to_string(y));
+    Logger::WriteMessage(result);
+
+    n = 4, x = 1, y = 1;
+    result = leetCode.countOfPairsII(n, x, y);
+    Logger::WriteMessage("n = " + to_string(n) + "; x = " + to_string(x));
+    Logger::WriteMessage("y = " + to_string(y));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3021(void)
+{
+    Logger::WriteMessage("Test Leet Code 3021");
+    LeetCodeMath leetCode;
+    int n = 3, m = 2;
+    long long result = leetCode.flowerGame(n, m);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 1, m = 1;
+    result = leetCode.flowerGame(n, m);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3021();
+    TestLeetCode3017();
+    TestLeetCode3014();
+    TestLeetCode3012();
     TestLeetCode3001();
     TestLeetCode3000();
     TestLeetCode2979();

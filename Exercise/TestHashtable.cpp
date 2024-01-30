@@ -1909,8 +1909,47 @@ void TestLeetCode3005(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3016(void)
+{
+    Logger::WriteMessage("Test Leet Code 3016");
+    LeetCodeHashtable leetCode;
+    string word = "abcde";
+    int result = leetCode.minimumPushesII(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "xyzxyzxyzxyz";
+    result = leetCode.minimumPushesII(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "aabbccddeeffgghhiiiiii";
+    result = leetCode.minimumPushesII(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+}
+
+void TestLeetCode3020(void)
+{
+    Logger::WriteMessage("Test Leet Code 3020");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 5, 4, 1, 2, 2 };
+    int result = leetCode.maximumLength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,3,2,4 };
+    result = leetCode.maximumLength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1,1,1,1,1,1,1 };
+    result = leetCode.maximumLength(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3020();
+    TestLeetCode3016();
     TestLeetCode3005();
     TestLeetCode245();
     TestLeetCode243();

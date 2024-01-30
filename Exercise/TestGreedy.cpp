@@ -1775,8 +1775,24 @@ void TestLeetCode2848(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3009(void)
+{
+    Logger::WriteMessage("Test Leet Code 3009");
+    LeetCodeGreedy leetCode;
+    vector<int> y = { 1,2,1,2,1,3,2 };
+    int result = leetCode.maxIntersectionCount(y);
+    Logger::WriteMessage(y);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    y = { 2, 1, 3, 4, 5 };
+    result = leetCode.maxIntersectionCount(y);
+    Logger::WriteMessage(y);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode3009();
     TestLeetCode2848();
     TestLeetCode2830();
     TestLeetCode2813();

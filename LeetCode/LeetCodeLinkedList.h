@@ -476,12 +476,26 @@ public:
     ListNode* deleteDuplicates(ListNode* head);
 
     /// <summary>
-    /// Leet code #82. Remove Duplicates from Sorted List II 
-    /// Given a sorted linked list, delete all nodes that have duplicate numbers, 
-    /// leaving only distinct numbers from the original list. 
-    /// For example,
-    /// Given 1->2->3->3->4->4->5, return 1->2->5.
-    /// Given 1->1->1->2->3, return 2->3. 
+    /// Leet Code 82. Remove Duplicates from Sorted List II
+    ///
+    /// Medium
+    /// 
+    /// Given the head of a sorted linked list, delete all nodes that have 
+    /// duplicate numbers, leaving only distinct numbers from the original 
+    /// list. Return the linked list sorted as well.
+    ///
+    /// Example 1:
+    /// Input: head = [1,2,3,3,4,4,5]
+    /// Output: [1,2,5]
+    ///
+    /// Example 2:
+    /// Input: head = [1,1,1,2,3]
+    /// Output: [2,3]
+    /// 
+    /// Constraints:
+    /// The number of nodes in the list is in the range [0, 300].
+    /// 1. -100 <= Node.val <= 100
+    /// 2. The list is guaranteed to be sorted in ascending order.
     /// </summary>
     ListNode* deleteDuplicatesII(ListNode* head);
 
@@ -507,10 +521,34 @@ public:
     bool hasCycle(ListNode* head);
 
     /// <summary>
-    /// Leet code #206. Reverse Linked List     
-    /// Reverse a singly linked list.
+    /// Leet Code 206. Reverse Linked List
+    ///
+    /// Easy
+    /// 
+    /// Given the head of a singly linked list, reverse the list, and return 
+    /// the reversed list.
+    /// 
+    /// Example 1:
+    /// Input: head = [1,2,3,4,5]
+    /// Output: [5,4,3,2,1]
+    ///
+    /// Example 2:
+    /// Input: head = [1,2]
+    /// Output: [2,1]
+    ///
+    /// Example 3:
+    /// Input: head = []
+    /// Output: []
+    /// 
+    /// Constraints:
+    /// 1. The number of nodes in the list is the range [0, 5000].
+    /// 2. -5000 <= Node.val <= 5000
+    ///  
+    /// Follow up: A linked list can be reversed either iteratively or 
+    /// recursively. Could you implement both?
     /// </summary>
     ListNode* reverseList(ListNode* head);
+
 
     /// <summary>
     /// Leet code #92. Reverse Linked List II     

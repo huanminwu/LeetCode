@@ -1333,16 +1333,16 @@ int LeetCodeDP::numSquares(int n)
 /// Example 2:
 /// Input: nums = [9], target = 3
 /// Output: 0
-
+///
 /// Constraints:
 /// 1. 1 <= nums.length <= 200
 /// 2. 1 <= nums[i] <= 1000
 /// 3. All the elements of nums are unique.
 /// 4. 1 <= target <= 1000
 /// 
-/// Follow up: What if negative numbers are allowed in the given array? How 
-/// does it change the problem? What limitation we need to add to the question 
-/// to allow negative numbers?
+/// Follow up: What if negative numbers are allowed in the given array? 
+/// How does it change the problem? What limitation we need to add to 
+/// the question to allow negative numbers?
 /// </summary>
 int LeetCodeDP::combinationSum4(vector<int>& nums, int target)
 {

@@ -3721,8 +3721,61 @@ void TestLeetCode2948(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3011(void)
+{
+    Logger::WriteMessage("Test Leet Code 3011");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 8,4,2,30,15 };
+    bool result = leetCode.canSortArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,2,3,4,5 };
+    result = leetCode.canSortArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 3,16,8,4,2 };
+    result = leetCode.canSortArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 18, 3, 8 };
+    result = leetCode.canSortArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3013(void)
+{
+    Logger::WriteMessage("Test Leet Code 3013");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 3, 2, 6, 4, 2 };
+    int k = 3, dist = 3;
+    long long result = leetCode.minimumCost(nums, k, dist);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; dist = " + to_string(dist));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,1,2,2,2,1 };
+    k = 4, dist = 3;
+    result = leetCode.minimumCost(nums, k, dist);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; dist = " + to_string(dist));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,8,18,9 };
+    k = 3, dist = 1;
+    result = leetCode.minimumCost(nums, k, dist);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; dist = " + to_string(dist));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3013();
+    TestLeetCode3011();
     TestLeetCode2948();
     TestLeetCode2940();
     TestLeetCode2931();

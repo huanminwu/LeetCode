@@ -1272,8 +1272,32 @@ void TestLeetCode2997(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3022(void)
+{
+    Logger::WriteMessage("Test Leet Code 3022");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 6,5,7,1 };
+    int k = 2;
+    int result = leetCode.minOrAfterOperations(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 7,3,15,14,2,8 };
+    k = 4;
+    result = leetCode.minOrAfterOperations(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 10,7,10,3,9,14,9,4 };
+    k = 1;
+    result = leetCode.minOrAfterOperations(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3022();
     TestLeetCode2997();
     TestLeetCode2980();
     TestLeetCode2939();

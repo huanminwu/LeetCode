@@ -389,47 +389,57 @@ ListNode* LeetCodeLinkedList::deleteDuplicates(ListNode* head)
 }
 
 /// <summary>
-/// Leet code #82. Remove Duplicates from Sorted List II 
-/// Given a sorted linked list, delete all nodes that have duplicate numbers, 
-/// leaving only distinct numbers from the original list. 
-/// For example,
-/// Given 1->2->3->3->4->4->5, return 1->2->5.
-/// Given 1->1->1->2->3, return 2->3. 
+/// Leet Code 82. Remove Duplicates from Sorted List II
+///
+/// Medium
+/// 
+/// Given the head of a sorted linked list, delete all nodes that have 
+/// duplicate numbers, leaving only distinct numbers from the original 
+/// list. Return the linked list sorted as well.
+///
+/// Example 1:
+/// Input: head = [1,2,3,3,4,4,5]
+/// Output: [1,2,5]
+///
+/// Example 2:
+/// Input: head = [1,1,1,2,3]
+/// Output: [2,3]
+/// 
+/// Constraints:
+/// The number of nodes in the list is in the range [0, 300].
+/// 1. -100 <= Node.val <= 100
+/// 2. The list is guaranteed to be sorted in ascending order.
 /// </summary>
 ListNode* LeetCodeLinkedList::deleteDuplicatesII(ListNode* head)
 {
-    ListNode* previous = nullptr;
-    ListNode* current = head;
-    ListNode * next = nullptr;
-    while (current != nullptr)
+    ListNode* previous = new ListNode(1000);
+    previous->next = head;
+    ListNode* current = previous;
+    ListNode* next = head;
+    while (next != nullptr)
     {
-        next = current->next;
-        if ((next != nullptr) && (current->val == next->val))
+        int prev_val = next->val;
+        if (next->next != nullptr && next->next->val == prev_val)
         {
-            while ((next != nullptr) && (current->val == next->val))
+            while (next != nullptr && next->val == prev_val)
             {
-                delete current;
-                current = next;
+                ListNode* temp = next;
                 next = next->next;
-            }
-            delete current;
-            if (previous == nullptr)
-            {
-                head = next;
-            }
-            else
-            {
-                previous->next = next;
+                current->next = next;
+                delete temp;
             }
         }
         else
         {
-            previous = current;
+            current = next;
+            next = next->next;
         }
-        current = next;
     }
-    return head;
+    ListNode* result = previous->next;
+    delete previous;
+    return result;
 }
+
 /// <summary>
 /// Leet code #86. Partition List
 /// 
@@ -518,21 +528,46 @@ bool LeetCodeLinkedList::hasCycle(ListNode *head)
 }
 
 /// <summary>
-/// Leet code #206. Reverse Linked List     
-/// Reverse a singly linked list.
+/// Leet Code 206. Reverse Linked List
+///
+/// Easy
+/// 
+/// Given the head of a singly linked list, reverse the list, and return 
+/// the reversed list.
+/// 
+/// Example 1:
+/// Input: head = [1,2,3,4,5]
+/// Output: [5,4,3,2,1]
+///
+/// Example 2:
+/// Input: head = [1,2]
+/// Output: [2,1]
+///
+/// Example 3:
+/// Input: head = []
+/// Output: []
+/// 
+/// Constraints:
+/// 1. The number of nodes in the list is the range [0, 5000].
+/// 2. -5000 <= Node.val <= 5000
+///  
+/// Follow up: A linked list can be reversed either iteratively or 
+/// recursively. Could you implement both?
 /// </summary>
 ListNode* LeetCodeLinkedList::reverseList(ListNode* head)
 {
-    ListNode* prev = nullptr;
-    ListNode* curr = head;
-    while (curr != nullptr)
+    ListNode* prev = new ListNode(0);
+    prev->next = head;
+    ListNode* curr = prev->next;
+    while (curr != nullptr && curr->next != nullptr)
     {
-        ListNode *next = curr->next;
-        curr->next = prev;
-        prev = curr;
-        curr = next;
+        ListNode* next = curr->next;
+        curr->next = next->next;
+        next->next = prev->next;
+        prev->next = next;
     }
-    return prev;
+    ListNode* result = prev->next;
+    return result;
 }
 
 /// <summary>
