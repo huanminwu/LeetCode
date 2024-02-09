@@ -9836,8 +9836,68 @@ void TestLeetCode3010(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3026(void)
+{
+    Logger::WriteMessage("Test Leet Code 3026");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,2,3,4,5,6 };
+    int k = 1;
+    long long result = leetCode.maximumSubarraySum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { -1,3,2,4,5 };
+    k = 3;
+    result = leetCode.maximumSubarraySum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { -1,-2,-3,-4 };
+    k = 2;
+    result = leetCode.maximumSubarraySum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3030(void)
+{
+    Logger::WriteMessage("Test Leet Code 3030");
+    LeetCodeArray leetCode;
+    vector<vector<int>> image =
+    {
+        {5, 6, 7, 10},{8, 9, 10, 10},{11, 12, 13, 10}
+    };
+    int threshold = 3;
+    vector<vector<int>> result = leetCode.resultGrid(image, threshold);
+    Logger::WriteMessage(image);
+    Logger::WriteMessage("threshold = " + to_string(threshold));
+    Logger::WriteMessage(result);
+
+    image =
+    {
+        {10,20,30} ,{15,25,35},{20,30,40},{25,35,45}
+    };
+    threshold = 12;
+    result = leetCode.resultGrid(image, threshold);
+    Logger::WriteMessage(image);
+    Logger::WriteMessage("threshold = " + to_string(threshold));
+    Logger::WriteMessage(result);
+
+    image =
+    {
+        {5,6,7},{8,9,10},{11,12,13}
+    };
+    threshold = 1;
+    result = leetCode.resultGrid(image, threshold);
+    Logger::WriteMessage(image);
+    Logger::WriteMessage("threshold = " + to_string(threshold));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3030();
+    TestLeetCode3026();
     TestLeetCode3010();
     TestLeetCode2996();
     TestLeetCode2982();

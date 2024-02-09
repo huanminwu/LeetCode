@@ -6524,8 +6524,58 @@ void TestLeetCode3019(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode3023(void)
+{
+    Logger::WriteMessage("Test Leet Code 3023");
+    LeetCodeString leetCode;
+    vector<int> stream = { 1, 1, 1, 0, 1, 1, 1 };
+    vector<int> pattern = { 0, 1 };
+    int result = leetCode.findPattern(stream, pattern);
+    Logger::WriteMessage(stream);
+    Logger::WriteMessage(pattern);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    stream = { 0,0,0,0};
+    pattern = { 0 };
+    result = leetCode.findPattern(stream, pattern);
+    Logger::WriteMessage(stream);
+    Logger::WriteMessage(pattern);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    stream = { 1,0,1,1,0,1,1,0,1 };
+    pattern = { 1,1,0,1 };
+    result = leetCode.findPattern(stream, pattern);
+    Logger::WriteMessage(stream);
+    Logger::WriteMessage(pattern);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3029(void)
+{
+    Logger::WriteMessage("Test Leet Code 3029");
+    LeetCodeString leetCode;
+    string word = "abacaba";
+    int k = 3;
+    int result = leetCode.minimumTimeToInitialStateII(word, k);
+    Logger::WriteMessage("word = " + word + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word = "abacaba";
+    k = 4;
+    result = leetCode.minimumTimeToInitialStateII(word, k);
+    Logger::WriteMessage("word = " + word + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word = "abcbabcd";
+    k = 2;
+    result = leetCode.minimumTimeToInitialStateII(word, k);
+    Logger::WriteMessage("word = " + word + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
 void TestLeetCodeString(void)
 {
+    TestLeetCode3029();
+    TestLeetCode3023();
     TestLeetCode3019();
     TestLeetCode2223();
     TestLeetCode686();

@@ -6582,8 +6582,41 @@ void TestLeetCode3021(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+void TestLeetCode3024(void)
+{
+    Logger::WriteMessage("Test Leet Code 3024");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 3, 3, 3 };
+    string result = leetCode.triangleType(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + result);
+
+    nums = { 3, 4, 5 };
+    result = leetCode.triangleType(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode3028(void)
+{
+    Logger::WriteMessage("Test Leet Code 3028");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 2, 3, -5 };
+    int result = leetCode.returnToBoundaryCount(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,2,-3,-4 };
+    result = leetCode.returnToBoundaryCount(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3028();
+    TestLeetCode3024();
     TestLeetCode3021();
     TestLeetCode3017();
     TestLeetCode3014();

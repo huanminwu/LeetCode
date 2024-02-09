@@ -19739,5 +19739,121 @@ public:
     /// 2. 1 <= nums[i] <= 50
     /// </summary>
     int minimumCostI(vector<int>& nums);
+
+
+    /// <summary>
+    /// Leet Code 3026. Maximum Good Subarray Sum
+    ///
+    /// Medium
+    ///
+    /// You are given an array nums of length n and a positive integer k.
+    /// A subarray of nums is called good if the absolute difference between 
+    /// its first and last element is exactly k, in other words, the subarray 
+    /// nums[i..j] is good if |nums[i] - nums[j]| == k.
+    ///
+    /// Return the maximum sum of a good subarray of nums. If there are no 
+    /// good subarrays, return 0.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,2,3,4,5,6], k = 1
+    /// Output: 11
+    /// Explanation: The absolute difference between the first and last 
+    /// element must be 1 for a good subarray. All the good subarrays 
+    /// are: [1,2], [2,3], [3,4], [4,5], and [5,6]. The maximum subarray 
+    /// sum is 11 for the subarray [5,6].
+    ///
+    /// Example 2:
+    /// Input: nums = [-1,3,2,4,5], k = 3
+    /// Output: 11
+    /// Explanation: The absolute difference between the first and last 
+    /// element must be 3 for a good subarray. All the good subarrays are: 
+    /// [-1,3,2], and [2,4,5]. The maximum subarray sum is 11 for the 
+    /// subarray [2,4,5].
+    ///
+    /// Example 3:
+    /// Input: nums = [-1,-2,-3,-4], k = 2
+    /// Output: -6
+    /// Explanation: The absolute difference between the first and last 
+    /// element must be 2 for a good subarray. All the good subarrays 
+    /// are: [-1,-2,-3], and [-2,-3,-4]. The maximum subarray sum is -6 
+    /// for the subarray [-1,-2,-3].
+    /// 
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 10^5
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// 3. 1 <= k <= 10^9
+    /// </summary>
+    long long maximumSubarraySum(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3030. Find the Grid of Region Average
+    ///
+    /// Medium
+    ///
+    /// You are given a 0-indexed m x n grid image which represents a 
+    /// grayscale image, where image[i][j] represents a pixel with 
+    /// intensity in the range[0..255]. You are also given a non-negative 
+    /// integer threshold.
+    ///
+    /// Two pixels image[a][b] and image[c][d] are said to be adjacent 
+    /// if |a - c| + |b - d| == 1.
+    ///
+    /// A region is a 3 x 3 subgrid where the absolute difference in 
+    /// intensity between any two adjacent pixels is less than or equal to 
+    /// threshold.
+    ///
+    /// All pixels in a region belong to that region, note that a pixel 
+    /// can belong to multiple regions.
+    ///
+    /// You need to calculate a 0-indexed m x n grid result, where 
+    /// result[i][j] is the average intensity of the region to which 
+    /// image[i][j] belongs, rounded down to the nearest integer. If 
+    /// image[i][j] belongs to multiple regions, result[i][j] is the average 
+    /// of the rounded down average intensities of these regions, rounded 
+    /// down to the nearest integer. If image[i][j] does not belong to any 
+    /// region, result[i][j] is equal to image[i][j].
+    ///
+    /// Return the grid result.
+    /// 
+    /// Example 1:
+    /// Input: image = [[5,6,7,10],[8,9,10,10],[11,12,13,10]], threshold = 3
+    /// Output: [[9,9,9,9],[9,9,9,9],[9,9,9,9]]
+    /// Explanation: There exist two regions in the image, which are shown 
+    /// as the shaded areas in the picture. The average intensity of the 
+    /// first region is 9, while the average intensity of the second region 
+    /// is 9.67 which is rounded down to 9. The average intensity of both of 
+    /// the regions is (9 + 9) / 2 = 9. As all the pixels belong to either 
+    /// region 1, region 2, or both of them, the intensity of every pixel in 
+    /// the result is 9. 
+    /// Please note that the rounded-down values are used when calculating 
+    /// the average of multiple regions, hence the calculation is done 
+    /// using 9 as the average intensity of region 2, not 9.67.
+    ///
+    /// Example 2:
+    /// Input: image = [[10,20,30],[15,25,35],[20,30,40],[25,35,45]], 
+    /// threshold = 12
+    /// Output: [[25,25,25],[27,27,27],[27,27,27],[30,30,30]]
+    /// Explanation: There exist two regions in the image, which are shown as 
+    /// the shaded areas in the picture. The average intensity of the first 
+    /// region is 25, while the average intensity of the second region is 30. 
+    /// The average intensity of both of the regions is (25 + 30) / 2 = 27.5 
+    /// which is rounded down to 27. All the pixels in row 0 of the image 
+    /// belong to region 1, hence all the pixels in row 0 in the result 
+    /// are 25. Similarly, all the pixels in row 3 in the result are 30. The 
+    /// pixels in rows 1 and 2 of the image belong to region 1 and region 2, 
+    /// hence their assigned value is 27 in the result.
+    ///
+    /// Example 3:
+    /// Input: image = [[5,6,7],[8,9,10],[11,12,13]], threshold = 1
+    /// Output: [[5,6,7],[8,9,10],[11,12,13]]
+    /// Explanation: There does not exist any region in image, hence 
+    /// result[i][j] == image[i][j] for all the pixels.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= n, m <= 500
+    /// 2. 0 <= image[i][j] <= 255
+    /// 3. 0 <= threshold <= 255
+    /// </summary>
+    vector<vector<int>> resultGrid(vector<vector<int>>& image, int threshold);
 };
 #endif  // LeetCodeArray_H

@@ -3772,8 +3772,60 @@ void TestLeetCode3013(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+void TestLeetCode3025(void)
+{
+    Logger::WriteMessage("Test Leet Code 3025");
+    LeetCodeSort leetCode;
+    vector<vector<int>> points = { {1, 1},{2, 2},{3, 3} };
+    Logger::WriteMessage(points);
+    int result = leetCode.numberOfPairsI(points);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {6, 2},{4, 4},{2, 6} };
+    Logger::WriteMessage(points);
+    result = leetCode.numberOfPairsI(points);
+    Logger::WriteMessage("result = " + to_string(result));
+    
+    points = { {3, 1},{1, 3},{1, 1} };
+    Logger::WriteMessage(points);
+    result = leetCode.numberOfPairsI(points);
+    Logger::WriteMessage("result = " + to_string(result));
+    
+    points = { {1, 1},{0, 4},{6, 3},{0, 5} };
+    Logger::WriteMessage(points);
+    result = leetCode.numberOfPairsI(points);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3027(void)
+{
+    Logger::WriteMessage("Test Leet Code 3027");
+    LeetCodeSort leetCode;
+    vector<vector<int>> points = { {1, 1},{2, 2},{3, 3} };
+    Logger::WriteMessage(points);
+    int result = leetCode.numberOfPairsII(points);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {6, 2},{4, 4},{2, 6} };
+    Logger::WriteMessage(points);
+    result = leetCode.numberOfPairsII(points);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {3, 1},{1, 3},{1, 1} };
+    Logger::WriteMessage(points);
+    result = leetCode.numberOfPairsII(points);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {1, 1},{0, 4},{6, 3},{0, 5} };
+    Logger::WriteMessage(points);
+    result = leetCode.numberOfPairsII(points);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3025();
     TestLeetCode3013();
     TestLeetCode3011();
     TestLeetCode2948();

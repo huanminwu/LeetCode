@@ -23277,5 +23277,207 @@ int LeetCodeString::countKeyChanges(string s)
     return result;
 }
 
+/// <summary>
+/// Leet Code 3023. Find Pattern in Infinite Stream I
+/// 
+/// Medium
+///
+/// You are given a binary array pattern and an object stream of class 
+/// InfiniteStream representing a 0 - indexed infinite stream of bits.
+///
+/// The class InfiniteStream contains the following function :
+/// int next() : Reads a single bit(which is either 0 or 1) from the 
+/// stream and returns it.
+/// Return the first starting index where the pattern matches the bits 
+/// read from the stream.For example, if the pattern is[1, 0], the first 
+/// match is the highlighted part in the stream[0, 1, 0, 1, ...].
+/// Example 1 :
+/// Input : stream = [1, 1, 1, 0, 1, 1, 1, ...], pattern = [0, 1]
+/// Output : 3
+/// Explanation : The first occurrence of the pattern[0, 1] is 
+/// highlighted in the stream[1, 1, 1, 0, 1, ...], which starts at 
+/// index 3.
+/// 
+/// Example 2 :
+/// Input : stream = [0, 0, 0, 0, ...], pattern = [0]
+/// Output : 0
+/// Explanation : The first occurrence of the pattern[0] is highlighted 
+/// in the stream[0, ...], which starts at index 0.
+///
+/// Example 3 :
+/// Input : stream = [1, 0, 1, 1, 0, 1, 1, 0, 1, ...], 
+/// pattern = [1, 1, 0, 1]
+/// Output : 2
+/// Explanation : The first occurrence of the pattern[1, 1, 0, 1] is 
+/// highlighted in the stream[1, 0, 1, 1, 0, 1, ...], which starts 
+/// at index 2.
+///
+/// Constraints :
+/// 1. 1 <= pattern.length <= 100
+/// 2. pattern consists only of 0 and 1.
+/// 3. stream consists only of 0 and 1.
+/// 4. The input is generated such that the pattern's start index 
+///    exists in the first 105 bits of the stream.
+/// </summary>
+int LeetCodeString::findPattern(vector<int> stream, vector<int>& pattern)
+{
+    vector<int> dp(pattern.size());
+    for (size_t i = 1; i < pattern.size(); i++)
+    {
+        int pos = dp[i - 1];
+        while (pos != 0 && pattern[i] != pattern[pos])
+        {
+            pos = dp[pos - 1];
+        }
+        dp[i] = pos + (pattern[i] == pattern[pos] ? 1 : 0);
+    }
+    size_t i = 0, j = 0;
+    while (i < stream.size() && j < pattern.size())
+    {
+        while (j != 0 && stream[i] != pattern[j])
+        {
+            j = dp[j - 1];
+        }
+        j = j + (stream[i] == pattern[j] ? 1 : 0);
+        i++;
+    }
+    return i - pattern.size();
+}
 
+/// <summary>
+/// Leet Code 3029. Minimum Time to Revert Word to Initial State I
+///
+/// Medium
+///
+/// You are given a 0-indexed string word and an integer k.
+/// 
+/// At every second, you must perform the following operations:
+///
+/// Remove the first k characters of word.
+/// Add any k characters to the end of word.
+/// Note that you do not necessarily need to add the same characters 
+/// that you removed. However, you must perform both operations at every 
+/// second.
+///
+/// Return the minimum time greater than zero required for word to revert 
+/// to its initial state.
+/// 
+/// Example 1:
+/// Input: word = "abacaba", k = 3
+/// Output: 2
+/// Explanation: At the 1st second, we remove characters "aba" from the 
+/// prefix of word, and add characters "bac" to the end of word. Thus, 
+/// word becomes equal to "cababac".
+/// At the 2nd second, we remove characters "cab" from the prefix of word, 
+/// and add "aba" to the end of word. Thus, word becomes equal to 
+/// "abacaba" and reverts to its initial state.
+/// It can be shown that 2 seconds is the minimum time greater than zero 
+/// required for word to revert to its initial state.
+///
+/// Example 2:
+/// Input: word = "abacaba", k = 4
+/// Output: 1
+/// Explanation: At the 1st second, we remove characters "abac" from the 
+/// prefix of word, and add characters "caba" to the end of word. Thus, 
+/// word becomes equal to "abacaba" and reverts to its initial state.
+/// It can be shown that 1 second is the minimum time greater than zero 
+/// required for word to revert to its initial state.
+//
+/// Example 3:
+/// Input: word = "abcbabcd", k = 2
+/// Output: 4
+/// Explanation: At every second, we will remove the first 2 characters 
+/// of word, and add the same characters to the end of word.
+/// After 4 seconds, word becomes equal to "abcbabcd" and reverts to its 
+/// initial state.
+/// It can be shown that 4 seconds is the minimum time greater than zero 
+/// required for word to revert to its initial state.
+/// 
+/// Constraints:
+/// 1. 1 <= word.length <= 50 
+/// 2. 1 <= k <= word.length
+/// 3. word consists only of lowercase English letters.
+/// </summary>
+int LeetCodeString::minimumTimeToInitialStateI(string word, int k)
+{
+    vector<int> kmp(word.size());
+    for (size_t i = 1; i < word.size(); i++)
+    {
+        int pos = kmp[i - 1];
+        while ((pos != 0) && ((word[i] != word[pos]) || (i % k != pos % k)))
+        {
+            pos = kmp[pos - 1];
+        }
+        kmp[i] = pos + (((word[i] == word[pos]) && ((i % k) == (pos % k))) ? 1 : 0);
+    }
+    return (word.size() - kmp[word.size() - 1] + k - 1) / k;
+}
+
+/// <summary>
+/// Leet Code 3031. Minimum Time to Revert Word to Initial State II
+///
+/// Hard
+///
+/// You are given a 0-indexed string word and an integer k.
+/// At every second, you must perform the following operations:
+///
+/// Remove the first k characters of word.
+/// Add any k characters to the end of word.
+/// Note that you do not necessarily need to add the same characters 
+/// that you removed. However, you must perform both operations at every 
+/// second.
+///
+/// Return the minimum time greater than zero required for word to 
+/// revert to its initial state.
+///
+/// Example 1:
+/// Input: word = "abacaba", k = 3
+/// Output: 2
+/// Explanation: At the 1st second, we remove characters "aba" from the 
+/// prefix of word, and add characters "bac" to the end of word. Thus, 
+/// word becomes equal to "cababac".
+/// At the 2nd second, we remove characters "cab" from the prefix of word, 
+/// and add "aba" to the end of word. Thus, word becomes equal to 
+/// "abacaba" and reverts to its initial state.
+/// It can be shown that 2 seconds is the minimum time greater than zero 
+/// required for word to revert to its initial state.
+///
+/// Example 2:
+/// Input: word = "abacaba", k = 4
+/// Output: 1
+/// Explanation: At the 1st second, we remove characters "abac" from the 
+/// prefix of word, and add characters "caba" to the end of word. Thus, 
+/// word becomes equal to "abacaba" and reverts to its initial state.
+/// It can be shown that 1 second is the minimum time greater than zero 
+/// required for word to revert to its initial state.
+///
+/// Example 3:
+/// Input: word = "abcbabcd", k = 2
+/// Output: 4
+/// Explanation: At every second, we will remove the first 2 characters 
+/// of word, and add the same characters to the end of word.
+/// After 4 seconds, word becomes equal to "abcbabcd" and reverts to 
+/// its initial state.
+/// It can be shown that 4 seconds is the minimum time greater than zero 
+/// required for word to revert to its initial state.
+///
+/// Constraints:
+/// 1. 1 <= word.length <= 10^6
+/// 2. 1 <= k <= word.length
+/// 3. word consists only of lowercase English letters.
+/// </summary>
+int LeetCodeString::minimumTimeToInitialStateII(string word, int k)
+{
+    vector<int> kmp(word.size());
+    for (size_t i = 1; i < word.size(); i++)
+    {
+        int pos = kmp[i - 1];
+        while ((pos != 0) && ((word[i] != word[pos]) || (i % k != pos % k)))
+        {
+            pos = kmp[pos - 1];
+        }
+        kmp[i] = pos + (((word[i] == word[pos]) && ((i % k) == (pos % k))) ? 1 : 0);
+    }
+    return (word.size() - kmp[word.size() - 1] + k - 1) / k;
+}
 #pragma endregion
