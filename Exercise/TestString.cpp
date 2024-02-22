@@ -63,30 +63,6 @@ void TestLeetCode30(void)
     Logger::WriteMessage(result);
 }
 
-
-void TestLeetCode139(void)
-{
-    Logger::WriteMessage("Test Leet Code 139");
-    LeetCodeString leetCode;
-    string s = "leetcode";
-    vector<string> wordDict = { "leet", "code" };
-    bool result = leetCode.wordBreak(s, wordDict);
-    Logger::WriteMessage(wordDict);
-    Logger::WriteMessage("string = " + s + "result = " + string(result ? "true" : "false"));
-
-    s = "applepenapple";
-    wordDict = { "apple", "pen" };
-    result = leetCode.wordBreak(s, wordDict);
-    Logger::WriteMessage(wordDict);
-    Logger::WriteMessage("string = " + s + "result = " + string(result ? "true" : "false"));
-
-    s = "catsandog";
-    wordDict = { "cats", "dog", "sand", "and", "cat" };
-    result = leetCode.wordBreak(s, wordDict);
-    Logger::WriteMessage(wordDict);
-    Logger::WriteMessage("string = " + s + "result = " + string(result ? "true" : "false"));
-}
-
 void TestLeetCode1233(void)
 {
     Logger::WriteMessage("Test Leet Code 1233");
@@ -6530,21 +6506,21 @@ void TestLeetCode3023(void)
     LeetCodeString leetCode;
     vector<int> stream = { 1, 1, 1, 0, 1, 1, 1 };
     vector<int> pattern = { 0, 1 };
-    int result = leetCode.findPattern(stream, pattern);
+    int result = leetCode.findPatternI(stream, pattern);
     Logger::WriteMessage(stream);
     Logger::WriteMessage(pattern);
     Logger::WriteMessage("result = " + to_string(result));
 
     stream = { 0,0,0,0};
     pattern = { 0 };
-    result = leetCode.findPattern(stream, pattern);
+    result = leetCode.findPatternI(stream, pattern);
     Logger::WriteMessage(stream);
     Logger::WriteMessage(pattern);
     Logger::WriteMessage("result = " + to_string(result));
 
     stream = { 1,0,1,1,0,1,1,0,1 };
     pattern = { 1,1,0,1 };
-    result = leetCode.findPattern(stream, pattern);
+    result = leetCode.findPatternI(stream, pattern);
     Logger::WriteMessage(stream);
     Logger::WriteMessage(pattern);
     Logger::WriteMessage("result = " + to_string(result));
@@ -6572,8 +6548,171 @@ void TestLeetCode3029(void)
     Logger::WriteMessage("word = " + word + "; k = " + to_string(k));
     Logger::WriteMessage("result = " + to_string(result));
 }
+
+void TestLeetCode3035(void)
+{
+    Logger::WriteMessage("Test Leet Code 3035");
+    LeetCodeString leetCode;
+    vector<string> words = { "abbb", "ba", "aa" };
+    int result = leetCode.maxPalindromesAfterOperations(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words = { "abc","ab" };
+    result = leetCode.maxPalindromesAfterOperations(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words = { "cd","ef","a" };
+    result = leetCode.maxPalindromesAfterOperations(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3034(void)
+{
+    Logger::WriteMessage("Test Leet Code 3034");
+    LeetCodeString leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5, 6 };
+    vector<int> pattern = { 1, 1 };
+    int result = leetCode.countMatchingSubarraysI(nums, pattern);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(pattern);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,4,4,1,3,5,5,3 };
+    pattern = { 1,0,-1 };
+    result = leetCode.countMatchingSubarraysI(nums, pattern);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(pattern);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3036(void)
+{
+    Logger::WriteMessage("Test Leet Code 3036");
+    LeetCodeString leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5, 6 };
+    vector<int> pattern = { 1, 1 };
+    int result = leetCode.countMatchingSubarraysII(nums, pattern);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(pattern);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,4,4,1,3,5,5,3 };
+    pattern = { 1,0,-1 };
+    result = leetCode.countMatchingSubarraysII(nums, pattern);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(pattern);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3037(void)
+{
+    Logger::WriteMessage("Test Leet Code 3037");
+    LeetCodeString leetCode;
+    vector<int> stream = { 1, 1, 1, 0, 1, 1, 1 };
+    vector<int> pattern = { 0, 1 };
+    int result = leetCode.findPatternII(stream, pattern);
+    Logger::WriteMessage(stream);
+    Logger::WriteMessage(pattern);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    stream = { 0,0,0,0 };
+    pattern = { 0 };
+    result = leetCode.findPatternII(stream, pattern);
+    Logger::WriteMessage(stream);
+    Logger::WriteMessage(pattern);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    stream = { 1,0,1,1,0,1,1,0,1 };
+    pattern = { 1,1,0,1 };
+    result = leetCode.findPatternII(stream, pattern);
+    Logger::WriteMessage(stream);
+    Logger::WriteMessage(pattern);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3039(void)
+{
+    Logger::WriteMessage("Test Leet Code 3039");
+    LeetCodeString leetCode;
+    string s = "aabcbbca";
+    string result = leetCode.lastNonEmptyString(s);
+    Logger::WriteMessage("; s = " + s + "; result = " + result);
+
+    s = "abcd";
+    result = leetCode.lastNonEmptyString(s);
+    Logger::WriteMessage("; s = " + s + "; result = " + result);
+}
+
+void TestLeetCode3042(void)
+{
+    Logger::WriteMessage("Test Leet Code 3042");
+    LeetCodeString leetCode;
+    vector<string> words = { "a", "aba", "ababa", "aa" };
+    int result = leetCode.countPrefixSuffixPairsI(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words = { "pa","papa","ma","mama" };
+    result = leetCode.countPrefixSuffixPairsI(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words = { "abab","ab" };
+    result = leetCode.countPrefixSuffixPairsI(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3043(void)
+{
+    Logger::WriteMessage("Test Leet Code 3043");
+    LeetCodeString leetCode;
+    vector<int> arr1 = { 1, 10, 100 }, arr2 = { 1000 };
+    int result = leetCode.longestCommonPrefix(arr1, arr2);
+    Logger::WriteMessage(arr1);
+    Logger::WriteMessage(arr2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arr1 = { 1,2,3 }, arr2 = { 4, 4, 4};
+    result = leetCode.longestCommonPrefix(arr1, arr2);
+    Logger::WriteMessage(arr1);
+    Logger::WriteMessage(arr2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3045(void)
+{
+    Logger::WriteMessage("Test Leet Code 3045");
+    LeetCodeString leetCode;
+    vector<string> words = { "a", "aba", "ababa", "aa" };
+    long long result = leetCode.countPrefixSuffixPairsII(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words = { "pa","papa","ma","mama" };
+    result = leetCode.countPrefixSuffixPairsII(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words = { "abab","ab" };
+    result = leetCode.countPrefixSuffixPairsII(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3045();
+    TestLeetCode3043();
+    TestLeetCode3042();
+    TestLeetCode3039();
+    TestLeetCode3037();
+    TestLeetCode3036();
+    TestLeetCode3034();
+    TestLeetCode3035();
     TestLeetCode3029();
     TestLeetCode3023();
     TestLeetCode3019();
@@ -6754,7 +6893,6 @@ void TestLeetCodeString(void)
     TestLeetCode1525();
     TestLeetCode1528();
     TestLeetCode1531();
-    TestLeetCode139();
     TestLeetCode1507();
     TestLeetCode678();
     TestLeetCode804();

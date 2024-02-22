@@ -4953,8 +4953,37 @@ void TestLeetCode3003(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3041(void)
+{
+    Logger::WriteMessage("Test Leet Code 3041");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 2, 1, 5, 1, 1 };
+    Logger::WriteMessage(nums);
+    int result = leetCode.maxSelectedElements(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,4,7,10 };
+    Logger::WriteMessage(nums);
+    result = leetCode.maxSelectedElements(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode87(void)
+{
+    Logger::WriteMessage("Test Leet Code 87");
+    LeetCodeDP leetCode;
+    string s1 = "great", s2 = "rgeat";
+    bool result = leetCode.isScramble(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "; result = " + (string)(result? "true" : "false"));
+    s1 = "abc", s2 = "bca";
+    result = leetCode.isScramble(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode87();
+    TestLeetCode3041();
     TestLeetCode377();
     TestLeetCode416();
     TestLeetCode518();

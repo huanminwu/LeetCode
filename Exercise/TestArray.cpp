@@ -9894,8 +9894,46 @@ void TestLeetCode3030(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3033(void)
+{
+    Logger::WriteMessage("Test Leet Code 3033");
+    LeetCodeArray leetCode;
+    vector<vector<int>> matrix =
+    {
+        {1, 2, -1} ,{4, -1, 6},{7, 8, 9}
+    };
+    vector<vector<int>> result = leetCode.modifiedMatrix(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage(result);
+
+    matrix =
+    {
+        {3,-1} ,{5,2}
+    };
+    result = leetCode.modifiedMatrix(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3038(void)
+{
+    Logger::WriteMessage("Test Leet Code 3038");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 2, 1, 4, 5 };
+    int result = leetCode.maxOperationsI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,2,6,1,4 };
+    result = leetCode.maxOperationsI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3038();
+    TestLeetCode3033();
     TestLeetCode3030();
     TestLeetCode3026();
     TestLeetCode3010();

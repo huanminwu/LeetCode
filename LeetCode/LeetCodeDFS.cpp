@@ -1182,55 +1182,64 @@ vector<string> LeetCodeDFS::restoreIpAddresses(string s)
 }
 
 /// <summary>
-/// Palindrome Partitioning with cache
+/// Leet code #131. Palindrome Partitioning
 /// </summary>
-vector<vector<string>> LeetCodeDFS::partitionPalindrome(string s, unordered_map<string, vector<vector<string>>> &partition)
+void LeetCodeDFS::partition(string& s, vector<string> &arr, size_t start, vector<vector<int>> 
+    &dp, vector<vector<string>> &result)
 {
-    if (partition.find(s) != partition.end())
+    if (start == s.size())
     {
-        return partition[s];
+        result.push_back(arr);
     }
-    vector<vector<string>> result;
-
-    for (size_t i = 0; i < s.size(); i++)
+    for (size_t end = start; end < s.size(); end++)
     {
-        string substring = s.substr(0, i + 1);
-        if (substring == string(substring.rbegin(), substring.rend()))
-        {
-            if (i + 1 == s.size())
-            {
-                result.push_back(vector<string>({ substring }));
-            }
-            else
-            {
-                vector<vector<string>> sub_result = partitionPalindrome(s.substr(i + 1), partition);
-                for (vector<string> one_result : sub_result)
-                {
-                    one_result.insert(one_result.begin(), substring);
-                    result.push_back(one_result);
-                }
-            }
-        }
+        if (dp[start][end] == 0) continue;
+        arr.push_back(s.substr(start, end - start + 1));
+        partition(s, arr, end + 1, dp, result);
+        arr.pop_back();
     }
-    partition[s] = result;
-    return result;
 }
 
 /// <summary>
-/// Leet code #131. Palindrome Partitioning       
-/// Given a string s, partition s such that every substring of the partition is a palindrome. 
-/// Return all possible palindrome partitioning of s. 
-/// For example, given s = "aab",
-/// Return 
-/// [
-///  ["aa","b"],
-///  ["a","a","b"]
-/// ]
+/// Leet Code 131. Palindrome Partitioning
+///   
+/// Medium
+///
+/// Given a string s, partition s such that every substring of the 
+/// partition is a palindrome.
+/// Return all possible palindrome partitioning of s.
+/// 
+/// Example 1:
+/// Input: s = "aab"
+/// Output: [["a","a","b"],["aa","b"]]
+///
+/// Example 2:
+/// Input: s = "a"
+/// Output: [["a"]]
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 16
+/// 2. s contains only lowercase English letters.
 /// </summary>
-vector<vector<string>> LeetCodeDFS::partitionPalindrome(string s)
+vector<vector<string>> LeetCodeDFS::partition(string s)
 {
-    unordered_map<string, vector<vector<string>>> partition;
-    return partitionPalindrome(s, partition);
+    vector<vector<int>> dp(s.size(), vector<int>(s.size()));
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        dp[i][i] = 1;
+        for (size_t j = 0; j < i; j++)
+        {
+            if (s[i] != s[j]) continue;
+            if ((i == j + 1) || (dp[j + 1][i - 1] == 1))
+            {
+                dp[j][i] = 1;
+            }
+        }
+    }
+    vector<vector<string>> result;
+    vector<string> path;
+    partition(s, path, 0, dp, result);
+    return result;
 }
 
 /// <summary>
@@ -2647,61 +2656,158 @@ int LeetCodeDFS::countArrangement(int N)
 }
 
 /// <summary>
-/// Leet code #140. Word Break II
-/// Recursive break the word according to dictionary, return word list 
+/// Leet Code 139. Word Break
 /// </summary>
-vector<string> LeetCodeDFS::wordBreakII(string s, unordered_set<string>& wordDict,
-    unordered_map<string, vector<string>>&search_map)
+bool LeetCodeDFS::wordBreakI(string s, size_t pos, vector<int>& visited, size_t min_len, size_t max_len,
+    unordered_set<string>& wordDict)
 {
-    vector<string> result;
+    if (pos == s.size()) return true;
+    if (visited[pos] == 1) return false;
+    for (size_t i = min_len; i <= max_len; i++)
+    {
+        if (pos + i > s.size()) break;
+        if (wordDict.count(s.substr(pos, i)) == 0) continue;
+        bool ret = wordBreakI(s, pos + i, visited, min_len, max_len, wordDict);
+        if (ret) return ret;
+    }
+    visited[pos] = 1;
+    return false;
+}
 
-    if (s.size() == 0)
-    {
-        return result;
-    }
-    if (search_map.find(s) != search_map.end())
-    {
-        return search_map[s];
-    }
 
-    for (size_t i = 0; i < s.size(); i++)
+/// <summary>
+/// Leet code #139. Word Break
+/// 
+/// Medium
+///
+/// Given a non-empty string s and a dictionary wordDict containing a 
+/// list of non-empty words, determine if s can be segmented into a 
+/// space-separated sequence of one or more dictionary words.
+///
+/// Note:
+///
+/// The same word in the dictionary may be reused multiple times in 
+/// the segmentation.
+/// You may assume the dictionary does not contain duplicate words.
+///
+/// Example 1:
+/// Input: s = "leetcode", wordDict = ["leet", "code"]
+/// Output: true
+/// Explanation: Return true because "leetcode" can be segmented 
+/// as "leet code".
+///
+/// Example 2:
+/// Input: s = "applepenapple", wordDict = ["apple", "pen"]
+/// Output: true
+/// Explanation: Return true because "applepenapple" can be segmented 
+/// as "apple pen apple".Note that you are allowed to reuse a dictionary
+/// word.
+///
+/// Example 3:
+/// Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
+/// Output: false
+/// </summary>
+bool LeetCodeDFS::wordBreakI(string s, vector<string>& wordDict)
+{
+    unordered_set<string> word_set;
+    size_t min_len = INT_MAX;
+    size_t max_len = 0;
+    for (string str : wordDict)
     {
-        string sub_word = s.substr(0, i + 1);
-        if (wordDict.find(sub_word) != wordDict.end())
-        {
-            if (i == s.size() - 1)
-            {
-                result.push_back(sub_word);
-            }
-            else
-            {
-                vector<string> sentence_list = wordBreakII(s.substr(i + 1), wordDict, search_map);
-                for (string sentence : sentence_list)
-                {
-                    result.push_back(sub_word + " " + sentence);
-                }
-            }
-        }
+        min_len = min(min_len, str.size());
+        max_len = max(max_len, str.size());
+        word_set.insert(str);
     }
-    search_map[s] = result;
-    return result;
+    vector<int> visited(s.size());
+    return wordBreakI(s, 0, visited, min_len, max_len, word_set);
 }
 
 /// <summary>
-/// Leet code #140. Word Break II  
-/// Given a string s and a dictionary of words dict, add spaces in s to construct a sentence where each word is a valid dictionary word. 
-/// Return all such possible sentences.
-/// For example, given
-/// s = "catsanddog",
-/// dict = ["cat", "cats", "and", "sand", "dog"]. 
-/// A solution is ["cats and dog", "cat sand dog"].
+/// Leet code #140. Word Break II
+/// </summary>
+void LeetCodeDFS::wordBreakII(string& s, vector<string>& path, size_t start, 
+    vector<vector<bool>> &dp, vector<string>& result)
+{
+    if (start == s.size())
+    {
+        string buff;
+        for (size_t i = 0; i < path.size(); i++)
+        {
+            if (!buff.empty()) buff.push_back(' ');
+            buff.append(path[i]);
+        }
+        result.push_back(buff);
+    }
+
+    for (size_t end = start; end < s.size(); end++)
+    {
+        if (dp[start][end] == true)
+        {
+            path.push_back(s.substr(start, end - start + 1));
+            wordBreakII(s, path, end + 1, dp, result);
+            path.pop_back();
+        }
+    }
+}
+
+/// <summary>
+/// Leet Code 140. Word Break II
+///
+/// Hard
+///
+/// Given a string s and a dictionary of strings wordDict, add spaces in 
+/// s to construct a sentence where each word is a valid dictionary word. 
+/// Return all such possible sentences in any order.
+/// Note that the same word in the dictionary may be reused multiple 
+/// times in the segmentation.
+///
+/// Example 1:
+/// Input: s = "catsanddog", wordDict = ["cat","cats","and","sand","dog"]
+/// Output: ["cats and dog","cat sand dog"]
+///
+/// Example 2:
+/// Input: s = "pineapplepenapple", wordDict = ["apple","pen","applepen",
+/// "pine","pineapple"]
+/// Output: ["pine apple pen apple","pineapple pen apple","pine 
+/// applepen apple"]
+/// Explanation: Note that you are allowed to reuse a dictionary word.
+///
+/// Example 3:
+/// Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
+/// Output: []
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 20
+/// 2. 1 <= wordDict.length <= 1000
+/// 3. 1 <= wordDict[i].length <= 10
+/// 4. s and wordDict[i] consist of only lowercase English letters.
+/// 5. All the strings of wordDict are unique.
+/// 6. Input is generated in a way that the length of the answer doesn't 
+///    exceed 105.
 /// </summary>
 vector<string> LeetCodeDFS::wordBreakII(string s, vector<string>& wordDict)
 {
-    unordered_map<string, vector<string>> search_map;
-    unordered_set<string> word_set;
-    for (string str : wordDict) word_set.insert(str);
-    return wordBreakII(s, word_set, search_map);
+    vector<vector<bool>> dp(s.size(), vector<bool>(s.size()));
+    unordered_set<string> dict;
+    for (string str : wordDict)
+    {
+        dict.insert(str);
+    }
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        for (size_t j = i; j < s.size(); j++)
+        {
+            string str = s.substr(i, j - i + 1);
+            if (dict.count(str) > 0)
+            {
+                dp[i][j] = true;
+            }
+        }
+    }
+    vector<string> result;
+    vector<string> path;
+    wordBreakII(s, path, 0, dp, result);
+    return result;
 }
 
 /// <summary>
@@ -4259,35 +4365,24 @@ vector<string> LeetCodeDFS::expand(string S)
 }
 
 /// <summary>
-/// Leet code #1066. Campus Bikes II
+/// Leet Code 1066. Campus Bikes II
 /// </summary>
-int LeetCodeDFS::assignBikesII(vector<vector<pair<int, int>>> &worker_distance, int worker,
-    vector<int> &visited, int sum, unordered_map<int, int>& cache, int& result)
+int LeetCodeDFS::assignBikesII(vector<vector<int>>& workers, vector<vector<int>>& bikes,
+    int worker, int bit_mask, vector<int>& dp)
 {
-    if (worker == worker_distance.size())
+    if (worker == workers.size())
     {
-        result = min(sum, result);
-        return result;
+        return 0;
     }
-    for (size_t i = 0; i < worker_distance[worker].size(); i++)
+    if (dp[bit_mask] != INT_MAX) return dp[bit_mask];
+    int result = INT_MAX;
+    for (size_t i = 0; i < bikes.size(); i++)
     {
-        int bike = worker_distance[worker][i].second;
-        if (visited[bike] == 1) continue;
-        visited[bike] = 1;
-        sum += worker_distance[worker][i].first;
-        int key = 0;
-        for (size_t j = 0; j < visited.size(); j++)
-        {
-            key = (key << 1) | visited[j];
-        }
-        if (cache.count(key) == 0 || cache[key] > sum)
-        {
-            cache[key] = sum;
-            result = assignBikesII(worker_distance, worker + 1, visited, sum, cache, result);
-        }
-        sum -= worker_distance[worker][i].first;
-        visited[bike] = 0;
+        if ((bit_mask & (1 << i)) != 0) continue;
+        int distance = std::abs(workers[worker][0] - bikes[i][0]) + std::abs(workers[worker][1] - bikes[i][1]);
+        result = min(result, distance + assignBikesII(workers, bikes, worker + 1, bit_mask | (1 << i), dp));
     }
+    dp[bit_mask] = result;
     return result;
 }
 
@@ -4329,22 +4424,8 @@ int LeetCodeDFS::assignBikesII(vector<vector<pair<int, int>>> &worker_distance, 
 /// </summary>
 int LeetCodeDFS::assignBikesII(vector<vector<int>>& workers, vector<vector<int>>& bikes)
 {
-    vector<vector<pair<int, int>>> worker_distance(workers.size());
-    for (size_t i = 0; i < workers.size(); i++)
-    {
-        for (size_t j = 0; j < bikes.size(); j++)
-        {
-            int distance = std::abs(workers[i][0] - bikes[j][0]) +
-                std::abs(workers[i][1] - bikes[j][1]);
-            worker_distance[i].push_back(make_pair(distance, j));
-        }
-        sort(worker_distance[i].begin(), worker_distance[i].end());
-    }
-    vector<int> visited(bikes.size());
-    int sum = 0;
-    int result = INT_MAX;
-    unordered_map<int, int> cache;
-    assignBikesII(worker_distance, 0, visited, sum, cache, result);
+    vector<int> dp(1 << bikes.size(), INT_MAX);
+    int result = assignBikesII(workers, bikes, 0, 0, dp);
     return result;
 }
 
@@ -4419,83 +4500,6 @@ int LeetCodeDFS::stoneGameII(vector<int>& piles)
     return stoneGameII(sum, 0, 1, memo);
 }
 
-/// <summary>
-/// Leet code #1219. Path with Maximum Gold
-/// </summary>
-int LeetCodeDFS::getMaximumGold(vector<vector<int>>& grid, int r, int c)
-{
-    int result = 0;
-    if (r < 0 || r >= (int)grid.size() || c < 0 || c >= (int)grid[0].size())
-    {
-        return result;
-    }
-    if (grid[r][c] == 0) return result;
-    result = grid[r][c];
-    grid[r][c] = 0;
-    // due to the DFS fact, please do not set directions as local variable.
-    int more = 0;
-    more = max(more, getMaximumGold(grid, r + 1, c));
-    more = max(more, getMaximumGold(grid, r - 1, c));
-    more = max(more, getMaximumGold(grid, r, c + 1));
-    more = max(more, getMaximumGold(grid, r, c - 1));
-    grid[r][c] = result;
-    return result + more;
-}
-
-/// <summary>
-/// Leet code #1219. Path with Maximum Gold
-/// 
-/// In a gold mine grid of size m * n, each cell in this mine has an 
-/// integer representing the amount of gold in that cell, 0 if it is 
-/// empty.
-/// Return the maximum amount of gold you can collect under the 
-/// conditions:
-/// Every time you are located in a cell you will collect all the 
-/// gold in that cell.
-/// From your position you can walk one step to the left, right, up
-/// or down.
-/// You can't visit the same cell more than once.
-/// Never visit a cell with 0 gold.
-/// You can start and stop collecting gold from any position in the 
-/// grid that has some gold.
-///
-/// Example 1:
-/// Input: grid = [[0,6,0],[5,8,7],[0,9,0]]
-/// Output: 24
-/// Explanation:
-/// [[0,6,0],
-///  [5,8,7],
-///  [0,9,0]]
-/// Path to get the maximum gold, 9 -> 8 -> 7.
-///
-/// Example 2:
-/// Input: grid = [[1,0,7],[2,0,6],[3,4,5],[0,3,0],[9,0,20]]
-/// Output: 28
-/// Explanation:
-/// [[1,0,7],
-///  [2,0,6],
-///  [3,4,5],
-/// [0,3,0],
-///  [9,0,20]]
-/// Path to get the maximum gold, 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7.
-/// 
-/// Constraints:
-/// 1. 1 <= grid.length, grid[i].length <= 15
-/// 2. 0 <= grid[i][j] <= 100
-/// 3. There are at most 25 cells containing gold.
-/// </summary>
-int LeetCodeDFS::getMaximumGold(vector<vector<int>>& grid)
-{
-    int result = 0;
-    for (size_t i = 0; i < grid.size(); i++)
-    {
-        for (size_t j = 0; j < grid[i].size(); j++)
-        {
-            result = max(result, getMaximumGold(grid, i, j));
-        }
-    }
-    return result;
-}
 
 /// <summary>
 /// Leet code #1240. Tiling a Rectangle with the Fewest Squares
@@ -5051,83 +5055,6 @@ bool LeetCodeDFS::judgePoint24(vector<int>& nums)
     for (size_t i = 0; i < result.size(); i++)
     {
         if (calculatePoint24(result[i])) return true;
-    }
-    return false;
-}
-
-/// <summary>
-/// Leet code #87. Scramble String 
-/// Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively. 
-/// Below is one possible representation of s1 = "great": 
-///      great
-///     /    \
-///    gr    eat
-///   / \    /  \
-///  g   r  e   at
-///            / \
-///           a   t
-///
-/// To scramble the string, we may choose any non-leaf node and swap its two children. 
-/// For example, if we choose the node "gr" and swap its two children, it produces a scrambled string "rgeat". 
-///      rgeat
-///     /    \
-///    rg    eat
-///   / \    /  \
-///  r   g  e   at
-///            / \
-///           a   t
-/// We say that "rgeat" is a scrambled string of "great". 
-/// Similarly, if we continue to swap the children of nodes "eat" and "at", it produces a scrambled string "rgtae". 
-///      rgtae
-///     /    \
-///    rg    tae
-///   / \    /  \
-///  r   g  ta  e
-///        / \
-///       t   a
-/// We say that "rgtae" is a scrambled string of "great". 
-/// Given two strings s1 and s2 of the same length, determine if s2 is a scrambled string of s1. 
-/// </summary>
-bool LeetCodeDFS::isScramble(string s1, string s2)
-{
-    if (s1.size() != s2.size())
-    {
-        return false;
-    }
-    if (s1 == s2) return true;
-    size_t len = s1.size();
-
-    vector<int> alpha_table(26, 0);
-
-    for (size_t i = 0; i < len; i++)
-    {
-        alpha_table[s1[i] - 'a']++;
-    }
-    for (size_t i = 0; i < len; i++)
-    {
-        alpha_table[s2[i] - 'a']--;
-    }
-    for (size_t i = 0; i < 26; i++)
-    {
-        if (alpha_table[i] != 0) return false;
-    }
-
-    for (size_t i = 1; i < len; i++)
-    {
-        string sub1 = s1.substr(0, i);
-        string sub2 = s1.substr(i, len - i);
-
-        if (isScramble(s1.substr(0, i), s2.substr(0, i)) &&
-            isScramble(s1.substr(i, len - i), s2.substr(i, len - i)))
-        {
-            return true;
-        }
-
-        if (isScramble(s1.substr(0, i), s2.substr(len - i, i)) &&
-            isScramble(s1.substr(i, len - i), s2.substr(0, len - i)))
-        {
-            return true;
-        }
     }
     return false;
 }
@@ -9598,6 +9525,85 @@ long long LeetCodeDFS::numberOfPowerfulInt(long long start, long long finish, in
     string str_start = numberOfPowerfulInt(start - 1, s);
     string str_finish = numberOfPowerfulInt(finish, s);
     return numberOfPowerfulInt(str_finish, 0, limit, true) - numberOfPowerfulInt(str_start, 0, limit, true);
+}
+
+/// <summary>
+/// Leet Code 3040. Maximum Number of Operations With the Same Score II
+/// </summary>
+int LeetCodeDFS::maxOperations(vector<int>& nums, int left, int right, int sum, vector<vector<int>>& dp)
+{
+    if (left >= right) return 0;
+    if (dp[left][right] != -1) return dp[left][right];
+    int result = 0;
+    if (nums[left] + nums[right] == sum)
+    {
+        result = max(result, 1 + maxOperations(nums, left + 1, right - 1, sum, dp));
+    }
+    if (nums[left] + nums[left + 1] == sum)
+    {
+        result = max(result, 1 + maxOperations(nums, left + 2, right, sum, dp));
+    }
+    if (nums[right - 1] + nums[right] == sum)
+    {
+        result = max(result, 1 + maxOperations(nums, left, right - 2, sum, dp));
+    }
+    dp[left][right] = result;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3040. Maximum Number of Operations With the Same Score II
+///
+/// Medium
+/// 
+/// Given an array of integers called nums, you can perform any of the 
+/// following operation while nums contains at least 2 elements:
+///
+/// Choose the first two elements of nums and delete them.
+/// Choose the last two elements of nums and delete them.
+/// Choose the first and the last elements of nums and delete them.
+/// The score of the operation is the sum of the deleted elements.
+///
+/// Your task is to find the maximum number of operations that can be 
+/// performed, such that all operations have the same score.
+///
+/// Return the maximum number of operations possible that satisfy the 
+/// condition mentioned above.
+///
+/// Example 1:
+/// Input: nums = [3,2,1,2,3,4]
+/// Output: 3
+/// Explanation: We perform the following operations:
+/// - Delete the first two elements, with score 3 + 2 = 5, 
+///   nums = [1,2,3,4].
+/// - Delete the first and the last elements, with score 1 + 4 = 5, 
+///   nums = [2,3].
+/// - Delete the first and the last elements, with score 2 + 3 = 5, 
+///   nums = [].
+/// We are unable to perform any more operations as nums is empty.
+///
+/// Example 2:
+/// Input: nums = [3,2,6,1,4]
+/// Output: 2
+/// Explanation: We perform the following operations:
+/// - Delete the first two elements, with score 3 + 2 = 5, nums = [6,1,4].
+/// - Delete the last two elements, with score 1 + 4 = 5, nums = [6].
+/// It can be proven that we can perform at most 2 operations.
+///
+/// Constraints:
+/// 1. 2 <= nums.length <= 2000
+/// 2. 1 <= nums[i] <= 1000
+/// </summary>
+int LeetCodeDFS::maxOperations(vector<int>& nums)
+{
+    vector<vector<int>> dp(nums.size(), vector<int>(nums.size(), -1));
+    int result = 0;
+    result = max(result, maxOperations(nums, 0, nums.size() - 1, nums[0] + nums[1], dp));
+    dp = vector<vector<int>>(nums.size(), vector<int>(nums.size(), -1));
+    result = max(result, maxOperations(nums, 0, nums.size() - 1, nums[0] + nums[nums.size() - 1], dp));
+    dp = vector<vector<int>>(nums.size(), vector<int>(nums.size(), -1));
+    result = max(result, maxOperations(nums, 0, nums.size() - 1, nums[nums.size() - 2] + nums[nums.size() - 1], dp));
+    return result;
 }
 #pragma endregion
 

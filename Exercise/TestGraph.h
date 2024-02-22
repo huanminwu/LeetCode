@@ -55,6 +55,7 @@ void TestLeetCode1153(void);
 void TestLeetCode1168(void);
 void TestLeetCode1192(void);
 void TestLeetCode1203(void);
+void TestLeetCode1219(void);
 void TestLeetCode1245(void);
 void TestLeetCode1245(void);
 void TestLeetCode1254(void);

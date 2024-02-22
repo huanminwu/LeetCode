@@ -130,70 +130,6 @@ vector<int> LeetCodeString::findSubstring(string s, vector<string>& words)
 }
 
 /// <summary>
-/// Leet code #139. Word Break
-/// 
-/// Medium
-///
-/// Given a non-empty string s and a dictionary wordDict containing a 
-/// list of non-empty words, determine if s can be segmented into a 
-/// space-separated sequence of one or more dictionary words.
-///
-/// Note:
-///
-/// The same word in the dictionary may be reused multiple times in 
-/// the segmentation.
-/// You may assume the dictionary does not contain duplicate words.
-///
-/// Example 1:
-/// Input: s = "leetcode", wordDict = ["leet", "code"]
-/// Output: true
-/// Explanation: Return true because "leetcode" can be segmented 
-/// as "leet code".
-///
-/// Example 2:
-/// Input: s = "applepenapple", wordDict = ["apple", "pen"]
-/// Output: true
-/// Explanation: Return true because "applepenapple" can be segmented 
-/// as "apple pen apple".Note that you are allowed to reuse a dictionary
-/// word.
-///
-/// Example 3:
-/// Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
-/// Output: false
-/// </summary>
-bool LeetCodeString::wordBreak(string s, vector<string>& wordDict)
-{
-    if (s.empty()) return false;
-    size_t max_len = 0;
-    unordered_set<string> dict;
-    for (size_t i = 0; i < wordDict.size(); i++)
-    {
-        max_len = max(max_len, wordDict[i].size());
-        dict.insert(wordDict[i]);
-    }
-
-    vector<bool> dp(s.size(), false);
-    for (size_t i = 0; i < s.size(); i++)
-    {
-        for (size_t j = 1; j <= max_len; j++)
-        {
-            if (i < j - 1) break;
-            int pos = i - (j - 1);
-            string str = s.substr(pos, j);
-            if (dict.count(str) > 0)
-            {
-                if (pos == 0 || dp[pos - 1] == 1)
-                {
-                    dp[i] = true;
-                    break;
-                }
-            }
-        }
-    }
-    return dp[s.size() - 1];
-}
-
-/// <summary>
 /// Leet code #151. Reverse Words in a String
 /// Given an input string, reverse the string word by word. 
 /// For example,
@@ -23319,7 +23255,7 @@ int LeetCodeString::countKeyChanges(string s)
 /// 4. The input is generated such that the pattern's start index 
 ///    exists in the first 105 bits of the stream.
 /// </summary>
-int LeetCodeString::findPattern(vector<int> stream, vector<int>& pattern)
+int LeetCodeString::findPatternI(vector<int> stream, vector<int>& pattern)
 {
     vector<int> dp(pattern.size());
     for (size_t i = 1; i < pattern.size(); i++)
@@ -23480,4 +23416,642 @@ int LeetCodeString::minimumTimeToInitialStateII(string word, int k)
     }
     return (word.size() - kmp[word.size() - 1] + k - 1) / k;
 }
+
+
+/// <summary>
+/// Leet Code 3035. Maximum Palindromes After Operations
+///
+/// Medium
+///
+/// You are given a 0-indexed string array words having length n and 
+/// containing 0-indexed strings.
+///
+/// You are allowed to perform the following operation any number of 
+/// times (including zero):
+///
+/// Choose integers i, j, x, and y such that 0 <= i, j < n, 0 <= 
+/// x < words[i].length, 0 <= y < words[j].length, and swap the characters 
+/// words[i][x] and words[j][y].
+/// Return an integer denoting the maximum number of palindromes words can 
+/// contain, after performing some operations.
+///
+/// Note: i and j may be equal during an operation.
+/// Example 1:
+/// Input: words = ["abbb","ba","aa"]
+/// Output: 3
+/// Explanation: In this example, one way to get the maximum number of 
+/// palindromes is:
+/// Choose i = 0, j = 1, x = 0, y = 0, so we swap words[0][0] and 
+/// words[1][0]. words becomes ["bbbb","aa","aa"].
+/// All strings in words are now palindromes.
+/// Hence, the maximum number of palindromes achievable is 3.
+///
+/// Example 2:
+/// Input: words = ["abc","ab"]
+/// Output: 2
+/// Explanation: In this example, one way to get the maximum number of 
+/// palindromes is: 
+/// Choose i = 0, j = 1, x = 1, y = 0, so we swap words[0][1] and 
+/// words[1][0]. words becomes ["aac","bb"].
+/// Choose i = 0, j = 0, x = 1, y = 2, so we swap words[0][1] and 
+/// words[0][2]. words becomes ["aca","bb"].
+/// Both strings are now palindromes.
+/// Hence, the maximum number of palindromes achievable is 2.
+///
+/// Example 3:
+/// Input: words = ["cd","ef","a"]
+/// Output: 1
+/// Explanation: In this example, there is no need to perform any 
+/// operation.
+/// There is one palindrome in words "a".
+/// It can be shown that it is not possible to get more than one 
+/// palindrome after any number of operations.
+///
+/// Hence, the answer is 1.
+/// 
+/// Constraints:
+/// 1. 1 <= words.length <= 1000
+/// 2. 1 <= words[i].length <= 100
+/// 3. words[i] consists only of lowercase English letters.
+/// </summary>
+int LeetCodeString::maxPalindromesAfterOperations(vector<string>& words)
+{
+    vector<int> dp(26);
+    map<int, int> word_size;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        for (size_t j = 0; j < words[i].size(); j++)
+        {
+            dp[words[i][j] - 'a']++;
+        }
+        word_size[words[i].size()]++;
+    }
+    int odd = 0;
+    int even = 0;
+    for (int i = 0; i < 26; i++)
+    {
+        if (dp[i] % 2 == 1)
+        {
+            odd ++;
+            even += dp[i] - 1;
+        }
+        else
+        {
+            even += dp[i];
+        }
+    }
+    int result = 0;
+    for (auto itr : word_size)
+    {
+        while (itr.second > 0)
+        {
+            if (itr.first % 2 == 0)
+            {
+                if (even >= itr.first)
+                {
+                    result++;
+                    even -= itr.first;
+                }
+            }
+            else
+            {
+                if (odd > 0 && even >= itr.first - 1)
+                {
+                    result++;
+                    odd--;
+                    even -= itr.first - 1;
+                }
+                else if (even > itr.first)
+                {
+                    result++;
+                    even -= itr.first + 1;
+                    odd++;
+                }
+            }
+            itr.second--;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3034. Number of Subarrays That Match a Pattern I
+///
+/// Medium
+/// You are given a 0-indexed integer array nums of size n, and a 
+/// 0-indexed integer array pattern of size m consisting of 
+/// integers -1, 0, and 1.
+/// A subarray nums[i..j] of size m + 1 is said to match the pattern if 
+/// the following conditions hold for each element pattern[k]:
+/// nums[i + k + 1] > nums[i + k] if pattern[k] == 1.
+/// nums[i + k + 1] == nums[i + k] if pattern[k] == 0.
+/// nums[i + k + 1] < nums[i + k] if pattern[k] == -1.
+/// Return the count of subarrays in nums that match the pattern.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,3,4,5,6], pattern = [1,1]
+/// Output: 4
+/// Explanation: The pattern [1,1] indicates that we are looking for 
+/// strictly increasing subarrays of size 3. In the array nums, the 
+/// subarrays [1,2,3], [2,3,4], [3,4,5], and [4,5,6] match this pattern.
+/// Hence, there are 4 subarrays in nums that match the pattern.
+///
+/// Example 2:
+/// Input: nums = [1,4,4,1,3,5,5,3], pattern = [1,0,-1]
+/// Output: 2
+/// Explanation: Here, the pattern [1,0,-1] indicates that we are looking 
+/// for a sequence where the first number is smaller than the second, the 
+/// second is equal to the third, and the third is greater than the 
+/// fourth. In the array nums, the subarrays [1,4,4,1], and [3,5,5,3] 
+/// match this pattern.
+/// Hence, there are 2 subarrays in nums that match the pattern.
+/// 
+/// Constraints:
+/// 1. 2 <= n == nums.length <= 100
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= m == pattern.length < n
+/// 4. -1 <= pattern[i] <= 1
+/// </summary>
+int LeetCodeString::countMatchingSubarraysI(vector<int>& nums, vector<int>& pattern)
+{
+    vector<int> dp = pattern;
+    dp.push_back(2);
+    for (size_t i = 1; i < nums.size(); i++)
+    {
+        if (nums[i] < nums[i - 1]) dp.push_back(-1);
+        else if (nums[i] == nums[i - 1]) dp.push_back(0);
+        else dp.push_back(1);
+    }
+    vector<int> kmp(dp.size());
+    for (size_t i = 1; i < dp.size(); i++)
+    {
+        int pos = kmp[i - 1];
+        while ((pos != 0) && (dp[i] != dp[pos]))
+        {
+            pos = kmp[pos - 1];
+        }
+        kmp[i] = pos + ((dp[i] == dp[pos]) ? 1 : 0);
+    }
+    int result = 0;
+    for (size_t i = pattern.size() + 1; i < kmp.size(); i++)
+    {
+        if (kmp[i] == pattern.size()) result++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3036. Number of Subarrays That Match a Pattern II
+///
+/// Hard
+/// 
+/// You are given a 0-indexed integer array nums of size n, and 
+/// a 0-indexed integer array pattern of size m consisting of 
+/// integers -1, 0, and 1.
+///
+/// A subarray nums[i..j] of size m + 1 is said to match the pattern 
+/// if the following conditions hold for each element pattern[k]:
+///
+/// nums[i + k + 1] > nums[i + k] if pattern[k] == 1.
+/// nums[i + k + 1] == nums[i + k] if pattern[k] == 0.
+/// nums[i + k + 1] < nums[i + k] if pattern[k] == -1.
+/// Return the count of subarrays in nums that match the pattern.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,4,5,6], pattern = [1,1]
+/// Output: 4
+/// Explanation: The pattern [1,1] indicates that we are looking 
+/// for strictly increasing subarrays of size 3. In the array nums, 
+/// the subarrays [1,2,3], [2,3,4], [3,4,5], and [4,5,6] match this 
+/// pattern.
+/// Hence, there are 4 subarrays in nums that match the pattern.
+///
+/// Example 2:
+/// Input: nums = [1,4,4,1,3,5,5,3], pattern = [1,0,-1]
+/// Output: 2
+/// Explanation: Here, the pattern [1,0,-1] indicates that we are 
+/// looking for a sequence where the first number is smaller than 
+/// the second, the second is equal to the third, and the third is 
+/// greater than the fourth. In the array nums, the subarrays [1,4,4,1], 
+/// and [3,5,5,3] match this pattern.
+/// Hence, there are 2 subarrays in nums that match the pattern.
+///
+/// Constraints:
+/// 1. 2 <= n == nums.length <= 10^6
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= m == pattern.length < n
+/// 4. -1 <= pattern[i] <= 1
+/// </summary>
+int LeetCodeString::countMatchingSubarraysII(vector<int>& nums, vector<int>& pattern)
+{
+    vector<int> dp = pattern;
+    dp.push_back(2);
+    for (size_t i = 1; i < nums.size(); i++)
+    {
+        if (nums[i] < nums[i - 1]) dp.push_back(-1);
+        else if (nums[i] == nums[i - 1]) dp.push_back(0);
+        else dp.push_back(1);
+    }
+    vector<int> kmp(dp.size());
+    for (size_t i = 1; i < dp.size(); i++)
+    {
+        int pos = kmp[i - 1];
+        while ((pos != 0) && (dp[i] != dp[pos]))
+        {
+            pos = kmp[pos - 1];
+        }
+        kmp[i] = pos + ((dp[i] == dp[pos]) ? 1 : 0);
+    }
+    int result = 0;
+    for (size_t i = pattern.size() + 1; i < kmp.size(); i++)
+    {
+        if (kmp[i] == pattern.size()) result++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3037. Find Pattern in Infinite Stream II
+///
+/// Hard
+/// 
+/// You are given a binary array pattern and an object stream of class 
+/// InfiniteStream representing a 0-indexed infinite stream of bits.
+///
+/// The class InfiniteStream contains the following function:
+///
+/// int next(): Reads a single bit (which is either 0 or 1) from the 
+/// stream and returns it.
+/// Return the first starting index where the pattern matches the bits 
+/// read from the stream. For example, if the pattern is [1, 0], the 
+/// first match is the highlighted part in the stream [0, 1, 0, 1, ...].
+/// 
+/// Example 1:
+/// Input: stream = [1,1,1,0,1,1,1,...], pattern = [0,1]
+/// Output: 3
+/// Explanation: The first occurrence of the pattern [0,1] is highlighted 
+/// in the stream [1,1,1,0,1,...], which starts at index 3.
+///
+/// Example 2:
+/// Input: stream = [0,0,0,0,...], pattern = [0]
+/// Output: 0
+/// Explanation: The first occurrence of the pattern [0] is highlighted 
+/// in the stream [0,...], which starts at index 0.
+///
+/// Example 3:
+/// Input: stream = [1,0,1,1,0,1,1,0,1,...], pattern = [1,1,0,1]
+/// Output: 2
+/// Explanation: The first occurrence of the pattern [1,1,0,1] is 
+/// highlighted in the stream [1,0,1,1,0,1,...], which starts at index 2.
+///
+///
+/// Constraints:
+/// 1. 1 <= pattern.length <= 10^4
+/// 2. pattern consists only of 0 and 1.
+/// 3. stream consists only of 0 and 1.
+/// 4. The input is generated such that the pattern's start index exists 
+///    in the first 105 bits of the stream.
+/// </summary>
+int LeetCodeString::findPatternII(vector<int> stream, vector<int>& pattern)
+{
+    vector<int> dp(pattern.size());
+    for (size_t i = 1; i < pattern.size(); i++)
+    {
+        int pos = dp[i - 1];
+        while (pos != 0 && pattern[i] != pattern[pos])
+        {
+            pos = dp[pos - 1];
+        }
+        dp[i] = pos + (pattern[i] == pattern[pos] ? 1 : 0);
+    }
+    size_t i = 0, j = 0;
+    while (i < stream.size() && j < pattern.size())
+    {
+        while (j != 0 && stream[i] != pattern[j])
+        {
+            j = dp[j - 1];
+        }
+        j = j + (stream[i] == pattern[j] ? 1 : 0);
+        i++;
+    }
+    return i - pattern.size();
+}
+
+/// <summary>
+/// Leet Code 3039. Apply Operations to Make String Empty
+///
+/// Medium
+///
+/// You are given a string s.
+/// Consider performing the following operation until s becomes empty:
+/// For every alphabet character from 'a' to 'z', remove the first 
+/// occurrence of that character in s (if it exists).
+/// For example, let initially s = "aabcbbca". We do the following 
+/// operations:
+/// Remove the underlined characters s = "aabcbbca". The resulting string 
+/// is s = "abbca".
+/// Remove the underlined characters s = "abbca". The resulting string is 
+/// s = "ba".
+/// Remove the underlined characters s = "ba". The resulting string is 
+/// s = "".
+/// Return the value of the string s right before applying the last 
+/// operation. In the example above, answer is "ba".
+/// 
+/// Example 1:
+/// Input: s = "aabcbbca"
+/// Output: "ba"
+/// Explanation: Explained in the statement.
+///
+/// Example 2:
+/// Input: s = "abcd"
+/// Output: "abcd"
+/// Explanation: We do the following operation:
+/// - Remove the underlined characters s = "abcd". The resulting string 
+///   is s = "".
+/// The string just before the last operation is "abcd".
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 5 * 10^5
+/// 2. s consists only of lowercase English letters.
+/// </summary>
+string LeetCodeString::lastNonEmptyString(string s)
+{
+    vector<int> dp(s.size());
+    vector<int> count(26);
+    int max_count = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        count[s[i] - 'a']++;
+        dp[i] = count[s[i] - 'a'];
+        max_count = max(max_count, dp[i]);
+    }
+    string result;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (dp[i] == max_count)
+        {
+            result.push_back(s[i]);
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3042. Count Prefix and Suffix Pairs I
+///
+/// Easy
+///
+/// You are given a 0-indexed string array words.
+/// Let's define a boolean function isPrefixAndSuffix that takes two 
+/// strings, str1 and str2:
+///
+/// isPrefixAndSuffix(str1, str2) returns true if str1 is both a 
+/// prefix and a suffix of str2, and false otherwise.
+/// For example, isPrefixAndSuffix("aba", "ababa") is true because "aba" 
+/// is a prefix of "ababa" and also a suffix, but isPrefixAndSuffix("abc", 
+/// "abcd") is false.
+///
+/// Return an integer denoting the number of index pairs (i, j) such that 
+/// i < j, and isPrefixAndSuffix(words[i], words[j]) is true.
+///
+/// Example 1:
+/// Input: words = ["a","aba","ababa","aa"]
+/// Output: 4
+/// Explanation: In this example, the counted index pairs are:
+/// i = 0 and j = 1 because isPrefixAndSuffix("a", "aba") is true.
+/// i = 0 and j = 2 because isPrefixAndSuffix("a", "ababa") is true.
+/// i = 0 and j = 3 because isPrefixAndSuffix("a", "aa") is true.
+/// i = 1 and j = 2 because isPrefixAndSuffix("aba", "ababa") is true.
+/// Therefore, the answer is 4.
+/// 
+/// Example 2:
+/// Input: words = ["pa","papa","ma","mama"]
+/// Output: 2
+/// Explanation: In this example, the counted index pairs are:
+/// i = 0 and j = 1 because isPrefixAndSuffix("pa", "papa") is true.
+/// i = 2 and j = 3 because isPrefixAndSuffix("ma", "mama") is true.
+/// Therefore, the answer is 2.  
+///
+/// Example 3:
+/// Input: words = ["abab","ab"]
+/// Output: 0
+/// Explanation: In this example, the only valid index pair is i = 0 
+/// and j = 1, and isPrefixAndSuffix("abab", "ab") is false.
+/// Therefore, the answer is 0.
+///  
+/// Constraints:
+/// 1. 1 <= words.length <= 50
+/// 2. 1 <= words[i].length <= 10
+/// 3. words[i] consists only of lowercase English letters.
+/// </summary>
+int LeetCodeString::countPrefixSuffixPairsI(vector<string>& words)
+{
+    unordered_map<string, int> hash_map;
+    int result = 0;
+    for (string str : words)
+    {
+        for (size_t i = 1; i <= str.size(); i++)
+        {
+            string prefix = str.substr(0, i);
+            string suffix = str.substr(str.size() - i, i);
+            if (prefix != suffix) continue;
+            if (hash_map.count(prefix) > 0) result += hash_map[prefix];
+        }
+        hash_map[str]++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3043. Find the Length of the Longest Common Prefix
+///
+/// Medium
+///
+/// You are given two arrays with positive integers arr1 and arr2.
+/// A prefix of a positive integer is an integer formed by one or more of 
+/// its digits, starting from its leftmost digit. For example, 123 is a 
+/// prefix of the integer 12345, while 234 is not.
+///
+/// A common prefix of two integers a and b is an integer c, such that c 
+/// is a prefix of both a and b. For example, 5655359 and 56554 have a 
+/// common prefix 565 while 1223 and 43456 do not have a common prefix.
+/// You need to find the length of the longest common prefix between all 
+/// pairs of integers (x, y) such that x belongs to arr1 and y belongs to 
+/// arr2.
+///
+/// Return the length of the longest common prefix among all pairs. If no 
+/// common prefix exists among them, return 0.
+/// 
+/// Example 1:
+/// Input: arr1 = [1,10,100], arr2 = [1000]
+/// Output: 3
+/// Explanation: There are 3 pairs (arr1[i], arr2[j]):
+/// - The longest common prefix of (1, 1000) is 1.
+/// - The longest common prefix of (10, 1000) is 10.
+/// - The longest common prefix of (100, 1000) is 100.
+/// The longest common prefix is 100 with a length of 3.
+///
+/// Example 2:
+/// Input: arr1 = [1,2,3], arr2 = [4,4,4]
+/// Output: 0
+/// Explanation: There exists no common prefix for any pair 
+/// (arr1[i], arr2[j]), hence we return 0.
+/// Note that common prefixes between elements of the same array do 
+/// not count.
+/// 
+/// Constraints:
+/// 1. 1 <= arr1.length, arr2.length <= 5 * 10^4
+/// 2. 1 <= arr1[i], arr2[i] <= 10^8
+/// </summary>
+int LeetCodeString::longestCommonPrefix(vector<int>& arr1, vector<int>& arr2)
+{
+    struct Trie
+    {
+        Trie* children[10] = {};
+        Trie()
+        {
+        }
+        ~Trie()
+        {
+            for (size_t i = 0; i < 10; i++)
+            {
+                if (children[i] != nullptr) delete children[i];
+            }
+        }
+        void insert(string& w)
+        {
+            Trie* curr = this;
+            for (char c : w)
+            {
+                if (curr->children[c - '0'] == nullptr)
+                {
+                    curr->children[c - '0'] = new Trie();
+                }
+                curr = curr->children[c - '0'];
+            }
+        }
+        int measure(string& w)
+        {
+            Trie* curr = this;
+            int result = 0;
+            for (char c : w)
+            {
+                curr = curr->children[c - '0'];
+                if (curr == nullptr) break;
+                result ++;
+            }
+            return result;
+        }
+    };
+    Trie trie;
+    int result = 0;
+    for (auto n : arr1)
+    {
+        string str = to_string(n);
+        trie.insert(str);
+    }
+    for (auto n : arr2)
+    {
+        string str = to_string(n);
+        result = max(result, trie.measure(str));
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3045. Count Prefix and Suffix Pairs II
+///
+/// Hard
+///
+/// You are given a 0-indexed string array words.
+///
+/// Let's define a boolean function isPrefixAndSuffix that takes two 
+/// strings, str1 and str2:
+/// 
+/// isPrefixAndSuffix(str1, str2) returns true if str1 is both a prefix
+/// and a suffix of str2, and false otherwise.
+/// For example, isPrefixAndSuffix("aba", "ababa") is true because "aba" 
+/// is a prefix of "ababa" and also a suffix, but 
+/// isPrefixAndSuffix("abc", "abcd") is false.
+///
+/// Return an integer denoting the number of index pairs (i, j) such t
+/// hat i < j, and isPrefixAndSuffix(words[i], words[j]) is true.
+/// 
+/// Example 1:
+/// Input: words = ["a","aba","ababa","aa"]
+/// Output: 4
+/// Explanation: In this example, the counted index pairs are:
+/// i = 0 and j = 1 because isPrefixAndSuffix("a", "aba") is true.
+/// i = 0 and j = 2 because isPrefixAndSuffix("a", "ababa") is true.
+/// i = 0 and j = 3 because isPrefixAndSuffix("a", "aa") is true.
+/// i = 1 and j = 2 because isPrefixAndSuffix("aba", "ababa") is true.
+/// Therefore, the answer is 4.
+///
+/// Example 2:
+/// Input: words = ["pa","papa","ma","mama"]
+/// Output: 2
+/// Explanation: In this example, the counted index pairs are:
+/// i = 0 and j = 1 because isPrefixAndSuffix("pa", "papa") is true.
+/// i = 2 and j = 3 because isPrefixAndSuffix("ma", "mama") is true.
+/// Therefore, the answer is 2.  
+///
+/// Example 3:
+/// Input: words = ["abab","ab"]
+/// Output: 0
+/// Explanation: In this example, the only valid index pair is i = 0 
+/// and j = 1, and isPrefixAndSuffix("abab", "ab") is false.
+/// Therefore, the answer is 0.
+///
+/// Constraints:
+/// 1. 1 <= words.length <= 10^5
+/// 2. 1 <= words[i].length <= 10^5
+/// 3. words[i] consists only of lowercase English letters.
+/// 4. The sum of the lengths of all words[i] does not exceed 5 * 10^5
+/// </summary>
+long long LeetCodeString::countPrefixSuffixPairsII(vector<string>& words)
+{
+    struct Trie
+    {
+        unordered_map<int, Trie*> children;
+        long long count = 0;
+        Trie()
+        {
+            count = 0;
+        }
+        ~Trie()
+        {
+            for (auto itr : children)
+            {
+                if (itr.second != nullptr) delete itr.second;
+            }
+        }
+        long long insert(string& w)
+        {
+            Trie* curr = this;
+            long long result = 0;
+            for (size_t i = 0; i < w.size(); i++)
+            {
+                int key = w[i] * 128 + w[w.size() - 1 - i];
+                if (curr->children.count(key) == 0)
+                {
+                    curr->children[key] = new Trie();
+                }
+                curr = curr->children[key];
+                result += curr->count;
+            }
+            curr->count++;
+            return result;
+        }
+    };
+    Trie trie;
+    long long result = 0;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        result += trie.insert(words[i]);
+    }
+    return result;
+}
+
 #pragma endregion

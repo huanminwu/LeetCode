@@ -304,44 +304,6 @@ void TestLeetCode464(void)
     Logger::WriteMessage("Can " + (string)(result == true ? "Win" : "Not Win"));
 }
 
-void TestLeetCode1219(void)
-{
-    Logger::WriteMessage("Test Leet Code 1219");
-    LeetCodeDFS leetCode;
-    vector<vector<int>> grid =
-    {
-        {0,6,0},
-        {5,8,7},
-        {0,9,0}
-    };
-    int result = leetCode.getMaximumGold(grid);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    grid =
-    {
-        {1,0,7},
-        {2,0,6},
-        {3,4,5},
-        {0,3,0},
-        {9,0,20}
-    };
-    result = leetCode.getMaximumGold(grid);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    grid =
-    {
-        {3, 31, 23, 3, 15, 20, 12},
-        {0, 8, 11, 25, 0, 31, 20},
-        {39, 30, 16, 11, 2, 29, 34},
-        {13, 38, 35, 3, 0, 14, 9},
-    };
-    result = leetCode.getMaximumGold(grid);
-    Logger::WriteMessage(grid);
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
 void TestLeetCode1240(void)
 {
     Logger::WriteMessage("Test Leet Code 1240");
@@ -594,29 +556,18 @@ void TestLeetCode679(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
-void TestLeetCode87(void)
-{
-    Logger::WriteMessage("Test Leet Code 87");
-    LeetCodeDFS leetCode;
-    string s1, s2;
-    bool is_scramble;
-    s1.assign("great");
-    s2.assign("rgeat");
-    is_scramble = leetCode.isScramble(s1, s2);
-    Logger::WriteMessage(s1 + " and " + s2 + (is_scramble ? " are " : " are not ") + "scramble string");
-    s2.assign("rgtae");
-    is_scramble = leetCode.isScramble(s1, s2);
-    Logger::WriteMessage(s1 + " and " + s2 + (is_scramble ? " are " : " are not ") + "scramble string");
-}
-
-
 void TestLeetCode131(void)
 {
     Logger::WriteMessage("Test Leet Code 131");
     LeetCodeDFS leetCode;
     string s = "aab";
     Logger::WriteMessage(s);
-    vector<vector<string>> partitions = leetCode.partitionPalindrome(s);
+    vector<vector<string>> partitions = leetCode.partition(s);
+    Logger::WriteMessage(partitions);
+
+    s = "a";
+    Logger::WriteMessage(s);
+    partitions = leetCode.partition(s);
     Logger::WriteMessage(partitions);
 }
 
@@ -627,14 +578,6 @@ void TestLeetCode140(void)
     string s;
     vector<string> wordDict;
     vector<string> result;
-
-    s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-    wordDict = { "a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa", "aaaaaaa", "aaaaaaaa", "aaaaaaaaa", "aaaaaaaaaa" };
-    result = leetCode.wordBreakII(s, wordDict);
-    Logger::WriteMessage("string = " + s);
-    Logger::WriteMessage("Dictionary = ");
-    Logger::WriteMessage(wordDict);
-    Logger::WriteMessage(result);
 
     s = "catsanddog";
     wordDict = { "cat", "cats", "and", "sand", "dog" };
@@ -2372,8 +2315,51 @@ void TestLeetCode2999(void)
     Logger::WriteMessage("limit = " + to_string(limit) + "; result = " + to_string(result));
 }
 
+void TestLeetCode139(void)
+{
+    Logger::WriteMessage("Test Leet Code 139");
+    LeetCodeDFS leetCode;
+    string s = "leetcode";
+    vector<string> wordDict = { "leet", "code" };
+    bool result = leetCode.wordBreakI(s, wordDict);
+    Logger::WriteMessage(wordDict);
+    Logger::WriteMessage("string = " + s + "; result = " + string(result ? "true" : "false"));
+
+    s = "applepenapple";
+    wordDict = { "apple", "pen" };
+    result = leetCode.wordBreakI(s, wordDict);
+    Logger::WriteMessage(wordDict);
+    Logger::WriteMessage("string = " + s + "; result = " + string(result ? "true" : "false"));
+
+    s = "catsandog";
+    wordDict = { "cats", "dog", "sand", "and", "cat" };
+    result = leetCode.wordBreakI(s, wordDict);
+    Logger::WriteMessage(wordDict);
+    Logger::WriteMessage("string = " + s + "; result = " + string(result ? "true" : "false"));
+}
+
+void TestLeetCode3040(void)
+{
+    Logger::WriteMessage("Test Leet Code 3040");
+    LeetCodeDFS leetCode;
+    vector<int> nums = { 3, 2, 1, 2, 3, 4 };
+    int result = leetCode.maxOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,2,6,1,4 };
+    result = leetCode.maxOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode140();
+    TestLeetCode131();
+    TestLeetCode1066();
+    TestLeetCode3040();
+    TestLeetCode139();
     TestLeetCode2999();
     TestLeetCode2992();
     TestLeetCode2868();
@@ -2435,9 +2421,6 @@ void TestLeetCodeDFS(void)
     TestLeetCode1595();
     TestLeetCode248();
     TestLeetCode247();
-    TestLeetCode140();
-    TestLeetCode131();
-    TestLeetCode87();
     TestLeetCode679();
     TestLeetCode1397();
     TestLeetCode425();
@@ -2460,9 +2443,7 @@ void TestLeetCodeDFS(void)
     TestLeetCode464();
     TestLeetCode526();
     TestLeetCode1307();
-    TestLeetCode1066();
     TestLeetCode1240();
-    TestLeetCode1219();
     TestLeetCode1799();
     TestLeetCode93();
     TestLeetCode282();

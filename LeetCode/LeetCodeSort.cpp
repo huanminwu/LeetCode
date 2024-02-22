@@ -12379,7 +12379,6 @@ int LeetCodeSort::numberOfPairsI(vector<vector<int>>& points)
     return result;
 }
 
-
 /// <summary>
 /// Leet Code 3027. Find the Number of Ways to Place People II
 ///
@@ -12477,4 +12476,5 @@ int LeetCodeSort::numberOfPairsII(vector<vector<int>>& points)
     }
     return result;
 }
+
 #pragma endregion

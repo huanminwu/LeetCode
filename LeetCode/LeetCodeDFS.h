@@ -624,41 +624,119 @@ public:
     int minStickers(vector<string>& stickers, string target);
 
     /// <summary>
-    /// Palindrome Partitioning with cache
+    /// Leet code #131. Palindrome Partitioning
     /// </summary>
-    vector<vector<string>> partitionPalindrome(string s, unordered_map<string, vector<vector<string>>>& partition);
+    void partition(string& s, vector<string>& arr, size_t start, vector<vector<int>>& dp, vector<vector<string>>& result);
 
     /// <summary>
-    /// Leet code #131. Palindrome Partitioning       
-    /// Given a string s, partition s such that every substring of the partition is a palindrome. 
-    /// Return all possible palindrome partitioning of s. 
-    /// For example, given s = "aab",
-    /// Return 
-    /// [
-    ///  ["aa","b"],
-    ///  ["a","a","b"]
-    /// ]
+    /// Leet Code 131. Palindrome Partitioning
+    ///   
+    /// Medium
+    ///
+    /// Given a string s, partition s such that every substring of the 
+    /// partition is a palindrome.
+    /// Return all possible palindrome partitioning of s.
+    /// 
+    /// Example 1:
+    /// Input: s = "aab"
+    /// Output: [["a","a","b"],["aa","b"]]
+    ///
+    /// Example 2:
+    /// Input: s = "a"
+    /// Output: [["a"]]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 16
+    /// 2. s contains only lowercase English letters.
     /// </summary>
-    vector<vector<string>> partitionPalindrome(string s);
+    vector<vector<string>> partition(string s);
+
+    /// <summary>
+    /// Leet Code 139. Word Break
+    /// </summary>
+    bool wordBreakI(string s, size_t pos, vector<int>& visited, size_t min_len, size_t max_len,  
+        unordered_set<string>& wordDict);
+
+    /// <summary>
+    /// Leet Code 139. Word Break
+    ///
+    /// Medium
+    /// Given a string s and a dictionary of strings wordDict, return true if 
+    /// s can be segmented into a space-separated sequence of one or more 
+    /// dictionary words.
+    ///
+    /// Note that the same word in the dictionary may be reused multiple times 
+    /// in the segmentation.
+    ///
+    /// Example 1:
+    /// Input: s = "leetcode", wordDict = ["leet","code"]
+    /// Output: true
+    /// Explanation: Return true because "leetcode" can be segmented as 
+    /// "leet code".
+    ///
+    /// Example 2:
+    /// Input: s = "applepenapple", wordDict = ["apple","pen"]
+    /// Output: true
+    /// Explanation: Return true because "applepenapple" can be segmented as 
+    /// "apple pen apple".
+    /// Note that you are allowed to reuse a dictionary word.
+    ///
+    /// Example 3:
+    /// Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
+    ///
+    /// Output: false
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 300
+    /// 2. 1 <= wordDict.length <= 1000
+    /// 3. 1 <= wordDict[i].length <= 20
+    /// 4. s and wordDict[i] consist of only lowercase English letters.
+    /// 5. All the strings of wordDict are unique.
+    /// </summary>
+    bool wordBreakI(string s, vector<string>& wordDict);
 
     /// <summary>
     /// Leet code #140. Word Break II
-    /// Recursive break the word according to dictionary, return word list 
     /// </summary>
-    vector<string> wordBreakII(string s, unordered_set<string>& wordDict,
-        unordered_map<string, vector<string>>& search_map);
+    void LeetCodeDFS::wordBreakII(string& s, vector<string>& path, size_t start,
+        vector<vector<bool>>& dp, vector<string>& result);
 
     /// <summary>
-    /// Leet code #140. Word Break II  
-    /// Given a string s and a dictionary of words dict, add spaces in s to 
-    /// construct a sentence where each word is a valid dictionary word. 
-    /// Return all such possible sentences.
-    /// For example, given
-    /// s = "catsanddog",
-    /// dict = ["cat", "cats", "and", "sand", "dog"]. 
-    /// A solution is ["cats and dog", "cat sand dog"].
+    /// Leet Code 140. Word Break II
+    ///
+    /// Hard
+    ///
+    /// Given a string s and a dictionary of strings wordDict, add spaces in 
+    /// s to construct a sentence where each word is a valid dictionary word. 
+    /// Return all such possible sentences in any order.
+    /// Note that the same word in the dictionary may be reused multiple 
+    /// times in the segmentation.
+    ///
+    /// Example 1:
+    /// Input: s = "catsanddog", wordDict = ["cat","cats","and","sand","dog"]
+    /// Output: ["cats and dog","cat sand dog"]
+    ///
+    /// Example 2:
+    /// Input: s = "pineapplepenapple", wordDict = ["apple","pen","applepen",
+    /// "pine","pineapple"]
+    /// Output: ["pine apple pen apple","pineapple pen apple","pine 
+    /// applepen apple"]
+    /// Explanation: Note that you are allowed to reuse a dictionary word.
+    ///
+    /// Example 3:
+    /// Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
+    /// Output: []
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 20
+    /// 2. 1 <= wordDict.length <= 1000
+    /// 3. 1 <= wordDict[i].length <= 10
+    /// 4. s and wordDict[i] consist of only lowercase English letters.
+    /// 5. All the strings of wordDict are unique.
+    /// 6. Input is generated in a way that the length of the answer doesn't 
+    ///    exceed 10^5.
     /// </summary>
-    vector<string> wordBreakII(string s, vector<string>& wordDictt);
+    vector<string> wordBreakII(string s, vector<string>& wordDict);
 
     /// <summary>
     /// Leet code #247. Strobogrammatic Number II 
@@ -1361,55 +1439,6 @@ public:
     int countArrangement(int N);
 
     /// <summary>
-    /// Leet code #1219. Path with Maximum Gold
-    /// </summary>
-    int getMaximumGold(vector<vector<int>>& grid, int r, int c);
-
-    /// <summary>
-    /// Leet code #1219. Path with Maximum Gold
-    /// 
-    /// In a gold mine grid of size m * n, each cell in this mine has an 
-    /// integer representing the amount of gold in that cell, 0 if it is 
-    /// empty.
-    /// Return the maximum amount of gold you can collect under the 
-    /// conditions:
-    /// Every time you are located in a cell you will collect all the 
-    /// gold in that cell.
-    /// From your position you can walk one step to the left, right, up
-    /// or down.
-    /// You can't visit the same cell more than once.
-    /// Never visit a cell with 0 gold.
-    /// You can start and stop collecting gold from any position in the 
-    /// grid that has some gold.
-    ///
-    /// Example 1:
-    /// Input: grid = [[0,6,0],[5,8,7],[0,9,0]]
-    /// Output: 24
-    /// Explanation:
-    /// [[0,6,0],
-    ///  [5,8,7],
-    ///  [0,9,0]]
-    /// Path to get the maximum gold, 9 -> 8 -> 7.
-    ///
-    /// Example 2:
-    /// Input: grid = [[1,0,7],[2,0,6],[3,4,5],[0,3,0],[9,0,20]]
-    /// Output: 28
-    /// Explanation:
-    /// [[1,0,7],
-    ///  [2,0,6],
-    ///  [3,4,5],
-    /// [0,3,0],
-    ///  [9,0,20]]
-    /// Path to get the maximum gold, 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7.
-    /// 
-    /// Constraints:
-    /// 1. 1 <= grid.length, grid[i].length <= 15
-    /// 2. 0 <= grid[i][j] <= 100
-    /// 3. There are at most 25 cells containing gold.
-    /// </summary>
-    int getMaximumGold(vector<vector<int>>& grid);
-
-    /// <summary>
     /// Leet code #1240. Tiling a Rectangle with the Fewest Squares
     /// </summary>
     int tilingRectangle(int n, int m, vector<int>& heights, unordered_map<long long, int>& shape, int count, int result);
@@ -1502,26 +1531,28 @@ public:
     bool isSolvable(vector<string>& words, string result);
 
     /// <summary>
-    /// Leet code #1066. Campus Bikes II
+    /// Leet Code 1066. Campus Bikes II
     /// </summary>
-    int assignBikesII(vector<vector<pair<int, int>>>& worker_distance, int worker,
-        vector<int>& visited, int sum, unordered_map<int, int>& cache, int& result);
+    int assignBikesII(vector<vector<int>>& workers, vector<vector<int>>& bikes, 
+        int worker, int bit_mask, vector<int>&dp);
 
     /// <summary>
-    /// Leet code #1066. Campus Bikes II
-    /// 
-    /// On a campus represented as a 2D grid, there are N workers and M bikes,
-    /// with N <= M. Each worker and bike is a 2D coordinate on this grid.
+    /// Leet Code 1066. Campus Bikes II
+    ///   
+    /// Medium
+    ///
+    /// On a campus represented as a 2D grid, there are n workers and m bikes, 
+    /// with n <= m. Each worker and bike is a 2D coordinate on this grid.
     ///
     /// We assign one unique bike to each worker so that the sum of the 
     /// Manhattan distances between each worker and their assigned bike is 
     /// minimized.
     ///
-    /// The Manhattan distance between two points p1 and p2 is 
-    /// Manhattan(p1, p2) = |p1.x - p2.x| + |p1.y - p2.y|.
-    ///
     /// Return the minimum possible sum of Manhattan distances between each 
     /// worker and their assigned bike.
+    ///
+    /// The Manhattan distance between two points p1 and p2 is 
+    /// Manhattan(p1, p2) = |p1.x - p2.x| + |p1.y - p2.y|.
     ///
     /// Example 1:
     /// Input: workers = [[0,0],[2,1]], bikes = [[1,2],[3,3]]
@@ -1537,11 +1568,20 @@ public:
     /// We first assign bike 0 to worker 0, then assign bike 1 to worker 1 
     /// or worker 2, bike 2 to worker 2 or worker 1. Both assignments lead 
     /// to sum of the Manhattan distances as 4.
-    ///  
-    /// Note:
-    /// 1. 0 <= workers[i][0], workers[i][1], bikes[i][0], bikes[i][1] < 1000
-    /// 2. All worker and bike locations are distinct.
-    /// 3. 1 <= workers.length <= bikes.length <= 10
+    ///
+    /// Example 3:
+    /// Input: workers = [[0,0],[1,0],[2,0],[3,0],[4,0]], 
+    /// bikes = [[0,999],[1,999],[2,999],[3,999],[4,999]]
+    /// Output: 4995
+    /// 
+    /// Constraints:
+    /// 1. n == workers.length
+    /// 2. m == bikes.length
+    /// 3. 1 <= n <= m <= 10
+    /// 4. workers[i].length == 2
+    /// 5. bikes[i].length == 2
+    /// 6. 0 <= workers[i][0], workers[i][1], bikes[i][0], bikes[i][1] < 1000
+    /// 7. All the workers and the bikes locations are unique.
     /// </summary>
     int assignBikesII(vector<vector<int>>& workers, vector<vector<int>>& bikes);
 
@@ -1787,42 +1827,6 @@ public:
     /// the expression -1 - 1 - 1 - 1 is not allowed.
     /// </summary>
     bool judgePoint24(vector<int>& nums);
-
-
-    /// <summary>
-    /// Leet code #87. Scramble String 
-    /// Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively. 
-    /// Below is one possible representation of s1 = "great": 
-    ///      great
-    ///     /    \
-    ///    gr    eat
-    ///   / \    /  \
-    ///  g   r  e   at
-    ///            / \
-    ///           a   t
-    ///
-    /// To scramble the string, we may choose any non-leaf node and swap its two children. 
-    /// For example, if we choose the node "gr" and swap its two children, it produces a scrambled string "rgeat". 
-    ///      rgeat
-    ///     /    \
-    ///    rg    eat
-    ///   / \    /  \
-    ///  r   g  e   at
-    ///            / \
-    ///           a   t
-    /// We say that "rgeat" is a scrambled string of "great". 
-    /// Similarly, if we continue to swap the children of nodes "eat" and "at", it produces a scrambled string "rgtae". 
-    ///      rgtae
-    ///     /    \
-    ///    rg    tae
-    ///   / \    /  \
-    ///  r   g  ta  e
-    ///        / \
-    ///       t   a
-    /// We say that "rgtae" is a scrambled string of "great". 
-    /// Given two strings s1 and s2 of the same length, determine if s2 is a scrambled string of s1. 
-    /// </summary>
-    bool isScramble(string s1, string s2);
 
     /// <summary>
     /// Leet code #1595. Minimum Cost to Connect Two Groups of Points
@@ -5088,6 +5092,56 @@ public:
     /// 5. s does not have leading zeros.
     /// </summary>
     long long numberOfPowerfulInt(long long start, long long finish, int limit, string s);
+
+    /// <summary>
+    /// Leet Code 3040. Maximum Number of Operations With the Same Score II
+    /// </summary>
+    int maxOperations(vector<int>& nums, int left, int right, int sum, vector<vector<int>>& dp);
+
+    /// <summary>
+    /// Leet Code 3040. Maximum Number of Operations With the Same Score II
+    ///
+    /// Medium
+    /// 
+    /// Given an array of integers called nums, you can perform any of the 
+    /// following operation while nums contains at least 2 elements:
+    ///
+    /// Choose the first two elements of nums and delete them.
+    /// Choose the last two elements of nums and delete them.
+    /// Choose the first and the last elements of nums and delete them.
+    /// The score of the operation is the sum of the deleted elements.
+    ///
+    /// Your task is to find the maximum number of operations that can be 
+    /// performed, such that all operations have the same score.
+    ///
+    /// Return the maximum number of operations possible that satisfy the 
+    /// condition mentioned above.
+    ///
+    /// Example 1:
+    /// Input: nums = [3,2,1,2,3,4]
+    /// Output: 3
+    /// Explanation: We perform the following operations:
+    /// - Delete the first two elements, with score 3 + 2 = 5, 
+    ///   nums = [1,2,3,4].
+    /// - Delete the first and the last elements, with score 1 + 4 = 5, 
+    ///   nums = [2,3].
+    /// - Delete the first and the last elements, with score 2 + 3 = 5, 
+    ///   nums = [].
+    /// We are unable to perform any more operations as nums is empty.
+    ///
+    /// Example 2:
+    /// Input: nums = [3,2,6,1,4]
+    /// Output: 2
+    /// Explanation: We perform the following operations:
+    /// - Delete the first two elements, with score 3 + 2 = 5, nums = [6,1,4].
+    /// - Delete the last two elements, with score 1 + 4 = 5, nums = [6].
+    /// It can be proven that we can perform at most 2 operations.
+    ///
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 2000
+    /// 2. 1 <= nums[i] <= 1000
+    /// </summary>
+    int maxOperations(vector<int>& nums);
 #pragma endregion
 };
 

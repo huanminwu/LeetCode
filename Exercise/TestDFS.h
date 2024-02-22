@@ -33,7 +33,6 @@ void TestLeetCode980(void);
 void TestLeetCode1066(void);
 void TestLeetCode1079(void);
 void TestLeetCode1140(void);
-void TestLeetCode1219(void);
 void TestLeetCode1240(void);
 void TestLeetCode1307(void);
 void TestLeetCode1349(void);
@@ -84,5 +83,6 @@ void TestLeetCode2850(void);
 void TestLeetCode2868(void);
 void TestLeetCode2992(void);
 void TestLeetCode2999(void);
+void TestLeetCode3040(void);
 void TestLeetCodeDFS(void);
 #endif  // TestTree

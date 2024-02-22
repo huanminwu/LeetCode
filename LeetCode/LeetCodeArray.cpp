@@ -31083,3 +31083,117 @@ vector<vector<int>> LeetCodeArray::resultGrid(vector<vector<int>>& image, int th
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3033. Modify the Matrix
+///
+/// Easy
+///
+/// Given a 0-indexed m x n integer matrix matrix, create a new 0-indexed 
+/// matrix called answer. Make answer equal to matrix, then replace each 
+/// element with the value -1 with the maximum element in its respective 
+/// column.
+///
+/// Return the matrix answer.
+///
+/// Example 1:
+/// Input: matrix = [[1,2,-1],[4,-1,6],[7,8,9]]
+/// Output: [[1,2,9],[4,8,6],[7,8,9]]
+/// Explanation: The diagram above shows the elements that are changed 
+/// (in blue).
+/// - We replace the value in the cell [1][1] with the maximum value in 
+///   the column 1, that is 8.
+/// - We replace the value in the cell [0][2] with the maximum value in 
+///   the column 2, that is 9.
+///
+/// Example 2:
+/// Input: matrix = [[3,-1],[5,2]]
+/// Output: [[3,2],[5,2]]
+/// Explanation: The diagram above shows the elements that are changed 
+/// (in blue).
+/// 
+/// Constraints:
+/// 1. m == matrix.length
+/// 2. n == matrix[i].length
+/// 3. 2 <= m, n <= 50
+/// 4. -1 <= matrix[i][j] <= 100
+/// 5. The input is generated such that each column contains at least 
+///    one non-negative integer.
+/// </summary>
+vector<vector<int>> LeetCodeArray::modifiedMatrix(vector<vector<int>>& matrix)
+{
+    vector<int> column_max(matrix[0].size());
+    for (size_t i = 0; i < matrix.size(); i++)
+    {
+        for (size_t j = 0; j < matrix[0].size(); j++)
+        {
+            column_max[j] = max(column_max[j], matrix[i][j]);
+        }
+    }
+    vector<vector<int>> result = matrix;
+    for (size_t i = 0; i < matrix.size(); i++)
+    {
+        for (size_t j = 0; j < matrix[0].size(); j++)
+        {
+            if (result[i][j] == -1) result[i][j] = column_max[j];
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3038. Maximum Number of Operations With the Same Score I
+///
+/// Easy
+///
+/// Given an array of integers called nums, you can perform the following 
+/// operation while nums contains at least 2 elements:
+///
+/// Choose the first two elements of nums and delete them.
+/// The score of the operation is the sum of the deleted elements.
+///
+/// Your task is to find the maximum number of operations that can be 
+/// performed, such that all operations have the same score.
+///
+/// Return the maximum number of operations possible that satisfy the 
+/// condition mentioned above.
+/// 
+/// Example 1:
+/// Input: nums = [3,2,1,4,5]
+/// Output: 2
+/// Explanation: We perform the following operations:
+/// - Delete the first two elements, with score 3 + 2 = 5, nums = [1,4,5].
+/// - Delete the first two elements, with score 1 + 4 = 5, nums = [5].
+/// We are unable to perform any more operations as nums contain only 1 
+/// element.
+///
+/// Example 2:
+/// Input: nums = [3,2,6,1,4]
+/// Output: 1
+/// Explanation: We perform the following operations:
+/// - Delete the first two elements, with score 3 + 2 = 5, nums = [6,1,4].
+/// We are unable to perform any more operations as the score of the next 
+/// operation isn't the same as the previous one.
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 1000
+/// </summary>
+int LeetCodeArray::maxOperationsI(vector<int>& nums)
+{
+    int result = 0;
+    int sum = 0;
+    for (size_t i = 0; i  + 1 < nums.size(); i+=2)
+    {
+        if (result == 0)
+        {
+            sum = nums[i] + nums[i + 1];
+        }
+        else
+        {
+            if (nums[i] + nums[i + 1] != sum) break;
+        }
+        result++;
+    }
+    return result;
+}

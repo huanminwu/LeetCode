@@ -5711,8 +5711,48 @@ void TestLeetCode3015(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode1219(void)
+{
+    Logger::WriteMessage("Test Leet Code 1219");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid =
+    {
+        {0,6,0},
+        {5,8,7},
+        {0,9,0}
+    };
+    int result = leetCode.getMaximumGold(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {1,0,7},
+        {2,0,6},
+        {3,4,5},
+        {0,3,0},
+        {9,0,20}
+    };
+    result = leetCode.getMaximumGold(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {3, 31, 23, 3, 15, 20, 12},
+        {0, 8, 11, 25, 0, 31, 20},
+        {39, 30, 16, 11, 2, 29, 34},
+        {13, 38, 35, 3, 0, 14, 9},
+    };
+    result = leetCode.getMaximumGold(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode1219();
     TestLeetCode3015();
     TestLeetCode2998();
     TestLeetCode2977();

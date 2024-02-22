@@ -175,40 +175,6 @@ public:
     bool isPalindrome(string s);
 
     /// <summary>
-    /// Leet code #139. Word Break
-    /// 
-    /// Medium
-    ///
-    /// Given a non-empty string s and a dictionary wordDict containing a 
-    /// list of non-empty words, determine if s can be segmented into a 
-    /// space-separated sequence of one or more dictionary words.
-    ///
-    /// Note:
-    ///
-    /// The same word in the dictionary may be reused multiple times in 
-    /// the segmentation.
-    /// You may assume the dictionary does not contain duplicate words.
-    ///
-    /// Example 1:
-    /// Input: s = "leetcode", wordDict = ["leet", "code"]
-    /// Output: true
-    /// Explanation: Return true because "leetcode" can be segmented 
-    /// as "leet code".
-    ///
-    /// Example 2:
-    /// Input: s = "applepenapple", wordDict = ["apple", "pen"]
-    /// Output: true
-    /// Explanation: Return true because "applepenapple" can be segmented 
-    /// as "apple pen apple".Note that you are allowed to reuse a dictionary
-    /// word.
-    ///
-    /// Example 3:
-    /// Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
-    /// Output: false
-    /// </summary>
-    bool wordBreak(string s, vector<string>& wordDict);
-
-    /// <summary>
     /// Leet code #187. Repeated DNA Sequences 
     ///
     /// All DNA is composed of a series of nucleotides abbreviated 
@@ -13617,7 +13583,7 @@ public:
     /// 4. The input is generated such that the pattern's start index 
     ///    exists in the first 105 bits of the stream.
     /// </summary>
-    int findPattern(vector<int> stream, vector<int>& pattern);
+    int findPatternI(vector<int> stream, vector<int>& pattern);
 
     /// <summary>
     /// Leet Code 3029. Minimum Time to Revert Word to Initial State I
@@ -13729,6 +13695,377 @@ public:
     /// 3. word consists only of lowercase English letters.
     /// </summary>
     int minimumTimeToInitialStateII(string word, int k);
+
+
+    /// <summary>
+    /// Leet Code 3035. Maximum Palindromes After Operations
+    ///
+    /// Medium
+    ///
+    /// You are given a 0-indexed string array words having length n and 
+    /// containing 0-indexed strings.
+    ///
+    /// You are allowed to perform the following operation any number of 
+    /// times (including zero):
+    ///
+    /// Choose integers i, j, x, and y such that 0 <= i, j < n, 0 <= 
+    /// x < words[i].length, 0 <= y < words[j].length, and swap the characters 
+    /// words[i][x] and words[j][y].
+    /// Return an integer denoting the maximum number of palindromes words can 
+    /// contain, after performing some operations.
+    ///
+    /// Note: i and j may be equal during an operation.
+    /// Example 1:
+    /// Input: words = ["abbb","ba","aa"]
+    /// Output: 3
+    /// Explanation: In this example, one way to get the maximum number of 
+    /// palindromes is:
+    /// Choose i = 0, j = 1, x = 0, y = 0, so we swap words[0][0] and 
+    /// words[1][0]. words becomes ["bbbb","aa","aa"].
+    /// All strings in words are now palindromes.
+    /// Hence, the maximum number of palindromes achievable is 3.
+    ///
+    /// Example 2:
+    /// Input: words = ["abc","ab"]
+    /// Output: 2
+    /// Explanation: In this example, one way to get the maximum number of 
+    /// palindromes is: 
+    /// Choose i = 0, j = 1, x = 1, y = 0, so we swap words[0][1] and 
+    /// words[1][0]. words becomes ["aac","bb"].
+    /// Choose i = 0, j = 0, x = 1, y = 2, so we swap words[0][1] and 
+    /// words[0][2]. words becomes ["aca","bb"].
+    /// Both strings are now palindromes.
+    /// Hence, the maximum number of palindromes achievable is 2.
+    ///
+    /// Example 3:
+    /// Input: words = ["cd","ef","a"]
+    /// Output: 1
+    /// Explanation: In this example, there is no need to perform any 
+    /// operation.
+    /// There is one palindrome in words "a".
+    /// It can be shown that it is not possible to get more than one 
+    /// palindrome after any number of operations.
+    ///
+    /// Hence, the answer is 1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= words.length <= 1000
+    /// 2. 1 <= words[i].length <= 100
+    /// 3. words[i] consists only of lowercase English letters.
+    /// </summary>
+    int maxPalindromesAfterOperations(vector<string>& words);
+
+    /// <summary>
+    /// Leet Code 3034. Number of Subarrays That Match a Pattern I
+    ///
+    /// Medium
+    /// You are given a 0-indexed integer array nums of size n, and a 
+    /// 0-indexed integer array pattern of size m consisting of 
+    /// integers -1, 0, and 1.
+    /// A subarray nums[i..j] of size m + 1 is said to match the pattern if 
+    /// the following conditions hold for each element pattern[k]:
+    /// nums[i + k + 1] > nums[i + k] if pattern[k] == 1.
+    /// nums[i + k + 1] == nums[i + k] if pattern[k] == 0.
+    /// nums[i + k + 1] < nums[i + k] if pattern[k] == -1.
+    /// Return the count of subarrays in nums that match the pattern.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,2,3,4,5,6], pattern = [1,1]
+    /// Output: 4
+    /// Explanation: The pattern [1,1] indicates that we are looking for 
+    /// strictly increasing subarrays of size 3. In the array nums, the 
+    /// subarrays [1,2,3], [2,3,4], [3,4,5], and [4,5,6] match this pattern.
+    /// Hence, there are 4 subarrays in nums that match the pattern.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,4,4,1,3,5,5,3], pattern = [1,0,-1]
+    /// Output: 2
+    /// Explanation: Here, the pattern [1,0,-1] indicates that we are looking 
+    /// for a sequence where the first number is smaller than the second, the 
+    /// second is equal to the third, and the third is greater than the 
+    /// fourth. In the array nums, the subarrays [1,4,4,1], and [3,5,5,3] 
+    /// match this pattern.
+    /// Hence, there are 2 subarrays in nums that match the pattern.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n == nums.length <= 100
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. 1 <= m == pattern.length < n
+    /// 4. -1 <= pattern[i] <= 1
+    /// </summary>
+    int countMatchingSubarraysI(vector<int>& nums, vector<int>& pattern);
+
+    /// <summary>
+    /// Leet Code 3036. Number of Subarrays That Match a Pattern II
+    ///
+    /// Hard
+    /// 
+    /// You are given a 0-indexed integer array nums of size n, and 
+    /// a 0-indexed integer array pattern of size m consisting of 
+    /// integers -1, 0, and 1.
+    ///
+    /// A subarray nums[i..j] of size m + 1 is said to match the pattern 
+    /// if the following conditions hold for each element pattern[k]:
+    ///
+    /// nums[i + k + 1] > nums[i + k] if pattern[k] == 1.
+    /// nums[i + k + 1] == nums[i + k] if pattern[k] == 0.
+    /// nums[i + k + 1] < nums[i + k] if pattern[k] == -1.
+    /// Return the count of subarrays in nums that match the pattern.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2,3,4,5,6], pattern = [1,1]
+    /// Output: 4
+    /// Explanation: The pattern [1,1] indicates that we are looking 
+    /// for strictly increasing subarrays of size 3. In the array nums, 
+    /// the subarrays [1,2,3], [2,3,4], [3,4,5], and [4,5,6] match this 
+    /// pattern.
+    /// Hence, there are 4 subarrays in nums that match the pattern.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,4,4,1,3,5,5,3], pattern = [1,0,-1]
+    /// Output: 2
+    /// Explanation: Here, the pattern [1,0,-1] indicates that we are 
+    /// looking for a sequence where the first number is smaller than 
+    /// the second, the second is equal to the third, and the third is 
+    /// greater than the fourth. In the array nums, the subarrays [1,4,4,1], 
+    /// and [3,5,5,3] match this pattern.
+    /// Hence, there are 2 subarrays in nums that match the pattern.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n == nums.length <= 10^6
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. 1 <= m == pattern.length < n
+    /// 4. -1 <= pattern[i] <= 1
+    /// </summary>
+    int countMatchingSubarraysII(vector<int>& nums, vector<int>& pattern);
+
+    /// <summary>
+    /// Leet Code 3037. Find Pattern in Infinite Stream II
+    ///
+    /// Hard
+    /// 
+    /// You are given a binary array pattern and an object stream of class 
+    /// InfiniteStream representing a 0-indexed infinite stream of bits.
+    ///
+    /// The class InfiniteStream contains the following function:
+    ///
+    /// int next(): Reads a single bit (which is either 0 or 1) from the 
+    /// stream and returns it.
+    /// Return the first starting index where the pattern matches the bits 
+    /// read from the stream. For example, if the pattern is [1, 0], the 
+    /// first match is the highlighted part in the stream [0, 1, 0, 1, ...].
+    /// 
+    /// Example 1:
+    /// Input: stream = [1,1,1,0,1,1,1,...], pattern = [0,1]
+    /// Output: 3
+    /// Explanation: The first occurrence of the pattern [0,1] is highlighted 
+    /// in the stream [1,1,1,0,1,...], which starts at index 3.
+    ///
+    /// Example 2:
+    /// Input: stream = [0,0,0,0,...], pattern = [0]
+    /// Output: 0
+    /// Explanation: The first occurrence of the pattern [0] is highlighted 
+    /// in the stream [0,...], which starts at index 0.
+    ///
+    /// Example 3:
+    /// Input: stream = [1,0,1,1,0,1,1,0,1,...], pattern = [1,1,0,1]
+    /// Output: 2
+    /// Explanation: The first occurrence of the pattern [1,1,0,1] is 
+    /// highlighted in the stream [1,0,1,1,0,1,...], which starts at index 2.
+    ///
+    ///
+    /// Constraints:
+    /// 1. 1 <= pattern.length <= 10^4
+    /// 2. pattern consists only of 0 and 1.
+    /// 3. stream consists only of 0 and 1.
+    /// 4. The input is generated such that the pattern's start index exists 
+    ///    in the first 105 bits of the stream.
+    /// </summary>
+    int findPatternII(vector<int> stream, vector<int>& pattern);
+
+    /// <summary>
+    /// Leet Code 3039. Apply Operations to Make String Empty
+    ///
+    /// Medium
+    ///
+    /// You are given a string s.
+    /// Consider performing the following operation until s becomes empty:
+    /// For every alphabet character from 'a' to 'z', remove the first 
+    /// occurrence of that character in s (if it exists).
+    /// For example, let initially s = "aabcbbca". We do the following 
+    /// operations:
+    /// Remove the underlined characters s = "aabcbbca". The resulting string 
+    /// is s = "abbca".
+    /// Remove the underlined characters s = "abbca". The resulting string is 
+    /// s = "ba".
+    /// Remove the underlined characters s = "ba". The resulting string is 
+    /// s = "".
+    /// Return the value of the string s right before applying the last 
+    /// operation. In the example above, answer is "ba".
+    /// 
+    /// Example 1:
+    /// Input: s = "aabcbbca"
+    /// Output: "ba"
+    /// Explanation: Explained in the statement.
+    ///
+    /// Example 2:
+    /// Input: s = "abcd"
+    /// Output: "abcd"
+    /// Explanation: We do the following operation:
+    /// - Remove the underlined characters s = "abcd". The resulting string 
+    ///   is s = "".
+    /// The string just before the last operation is "abcd".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 5 * 10^5
+    /// 2. s consists only of lowercase English letters.
+    /// </summary>
+    string lastNonEmptyString(string s);
+
+    /// <summary>
+    /// Leet Code 3042. Count Prefix and Suffix Pairs I
+    ///
+    /// Easy
+    ///
+    /// You are given a 0-indexed string array words.
+    /// Let's define a boolean function isPrefixAndSuffix that takes two 
+    /// strings, str1 and str2:
+    ///
+    /// isPrefixAndSuffix(str1, str2) returns true if str1 is both a 
+    /// prefix and a suffix of str2, and false otherwise.
+    /// For example, isPrefixAndSuffix("aba", "ababa") is true because "aba" 
+    /// is a prefix of "ababa" and also a suffix, but isPrefixAndSuffix("abc", 
+    /// "abcd") is false.
+    ///
+    /// Return an integer denoting the number of index pairs (i, j) such that 
+    /// i < j, and isPrefixAndSuffix(words[i], words[j]) is true.
+    ///
+    /// Example 1:
+    /// Input: words = ["a","aba","ababa","aa"]
+    /// Output: 4
+    /// Explanation: In this example, the counted index pairs are:
+    /// i = 0 and j = 1 because isPrefixAndSuffix("a", "aba") is true.
+    /// i = 0 and j = 2 because isPrefixAndSuffix("a", "ababa") is true.
+    /// i = 0 and j = 3 because isPrefixAndSuffix("a", "aa") is true.
+    /// i = 1 and j = 2 because isPrefixAndSuffix("aba", "ababa") is true.
+    /// Therefore, the answer is 4.
+    /// 
+    /// Example 2:
+    /// Input: words = ["pa","papa","ma","mama"]
+    /// Output: 2
+    /// Explanation: In this example, the counted index pairs are:
+    /// i = 0 and j = 1 because isPrefixAndSuffix("pa", "papa") is true.
+    /// i = 2 and j = 3 because isPrefixAndSuffix("ma", "mama") is true.
+    /// Therefore, the answer is 2.  
+    ///
+    /// Example 3:
+    /// Input: words = ["abab","ab"]
+    /// Output: 0
+    /// Explanation: In this example, the only valid index pair is i = 0 
+    /// and j = 1, and isPrefixAndSuffix("abab", "ab") is false.
+    /// Therefore, the answer is 0.
+    ///  
+    /// Constraints:
+    /// 1. 1 <= words.length <= 50
+    /// 2. 1 <= words[i].length <= 10
+    /// 3. words[i] consists only of lowercase English letters.
+    /// </summary>
+    int countPrefixSuffixPairsI(vector<string>& words);
+
+    /// <summary>
+    /// Leet Code 3043. Find the Length of the Longest Common Prefix
+    ///
+    /// Medium
+    ///
+    /// You are given two arrays with positive integers arr1 and arr2.
+    /// A prefix of a positive integer is an integer formed by one or more of 
+    /// its digits, starting from its leftmost digit. For example, 123 is a 
+    /// prefix of the integer 12345, while 234 is not.
+    ///
+    /// A common prefix of two integers a and b is an integer c, such that c 
+    /// is a prefix of both a and b. For example, 5655359 and 56554 have a 
+    /// common prefix 565 while 1223 and 43456 do not have a common prefix.
+    /// You need to find the length of the longest common prefix between all 
+    /// pairs of integers (x, y) such that x belongs to arr1 and y belongs to 
+    /// arr2.
+    ///
+    /// Return the length of the longest common prefix among all pairs. If no 
+    /// common prefix exists among them, return 0.
+    /// 
+    /// Example 1:
+    /// Input: arr1 = [1,10,100], arr2 = [1000]
+    /// Output: 3
+    /// Explanation: There are 3 pairs (arr1[i], arr2[j]):
+    /// - The longest common prefix of (1, 1000) is 1.
+    /// - The longest common prefix of (10, 1000) is 10.
+    /// - The longest common prefix of (100, 1000) is 100.
+    /// The longest common prefix is 100 with a length of 3.
+    ///
+    /// Example 2:
+    /// Input: arr1 = [1,2,3], arr2 = [4,4,4]
+    /// Output: 0
+    /// Explanation: There exists no common prefix for any pair 
+    /// (arr1[i], arr2[j]), hence we return 0.
+    /// Note that common prefixes between elements of the same array do 
+    /// not count.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= arr1.length, arr2.length <= 5 * 10^4
+    /// 2. 1 <= arr1[i], arr2[i] <= 10^8
+    /// </summary>
+    int longestCommonPrefix(vector<int>& arr1, vector<int>& arr2);
+
+    /// <summary>
+    /// Leet Code 3045. Count Prefix and Suffix Pairs II
+    ///
+    /// Hard
+    ///
+    /// You are given a 0-indexed string array words.
+    ///
+    /// Let's define a boolean function isPrefixAndSuffix that takes two 
+    /// strings, str1 and str2:
+    /// 
+    /// isPrefixAndSuffix(str1, str2) returns true if str1 is both a prefix
+    /// and a suffix of str2, and false otherwise.
+    /// For example, isPrefixAndSuffix("aba", "ababa") is true because "aba" 
+    /// is a prefix of "ababa" and also a suffix, but 
+    /// isPrefixAndSuffix("abc", "abcd") is false.
+    ///
+    /// Return an integer denoting the number of index pairs (i, j) such t
+    /// hat i < j, and isPrefixAndSuffix(words[i], words[j]) is true.
+    /// 
+    /// Example 1:
+    /// Input: words = ["a","aba","ababa","aa"]
+    /// Output: 4
+    /// Explanation: In this example, the counted index pairs are:
+    /// i = 0 and j = 1 because isPrefixAndSuffix("a", "aba") is true.
+    /// i = 0 and j = 2 because isPrefixAndSuffix("a", "ababa") is true.
+    /// i = 0 and j = 3 because isPrefixAndSuffix("a", "aa") is true.
+    /// i = 1 and j = 2 because isPrefixAndSuffix("aba", "ababa") is true.
+    /// Therefore, the answer is 4.
+    ///
+    /// Example 2:
+    /// Input: words = ["pa","papa","ma","mama"]
+    /// Output: 2
+    /// Explanation: In this example, the counted index pairs are:
+    /// i = 0 and j = 1 because isPrefixAndSuffix("pa", "papa") is true.
+    /// i = 2 and j = 3 because isPrefixAndSuffix("ma", "mama") is true.
+    /// Therefore, the answer is 2.  
+    ///
+    /// Example 3:
+    /// Input: words = ["abab","ab"]
+    /// Output: 0
+    /// Explanation: In this example, the only valid index pair is i = 0 
+    /// and j = 1, and isPrefixAndSuffix("abab", "ab") is false.
+    /// Therefore, the answer is 0.
+    ///
+    /// Constraints:
+    /// 1. 1 <= words.length <= 10^5
+    /// 2. 1 <= words[i].length <= 10^5
+    /// 3. words[i] consists only of lowercase English letters.
+    /// 4. The sum of the lengths of all words[i] does not exceed 5 * 10^5
+    /// </summary>
+    long long countPrefixSuffixPairsII(vector<string>& words);
 #pragma endregion
 };
 

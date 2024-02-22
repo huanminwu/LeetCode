@@ -6613,8 +6613,53 @@ void TestLeetCode3028(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3032(void)
+{
+    Logger::WriteMessage("Test Leet Code 3032");
+    LeetCodeMath leetCode;
+    int a = 1;
+    int b = 20;
+    int result = leetCode.numberCount(a, b);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    a = 9;
+    b = 19;
+    result = leetCode.numberCount(a, b);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    a = 80;
+    b = 120;
+    result = leetCode.numberCount(a, b);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3044(void)
+{
+    Logger::WriteMessage("Test Leet Code 3044");
+    LeetCodeMath leetCode;
+    vector<vector<int>> mat = { {1, 1},{9, 9},{1, 1} };
+    int result = leetCode.mostFrequentPrime(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    mat = { {7} };
+    result = leetCode.mostFrequentPrime(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    mat = { {9,7,8} ,{4,6,5},{2,8,6} };
+    result = leetCode.mostFrequentPrime(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3044();
+    TestLeetCode3032();
     TestLeetCode3028();
     TestLeetCode3024();
     TestLeetCode3021();

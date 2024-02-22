@@ -7704,6 +7704,7 @@ public:
     /// 4. All points[i] are distinct.
     /// </summary>
     int numberOfPairsII(vector<vector<int>>& points);
+
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

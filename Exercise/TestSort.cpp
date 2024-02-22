@@ -3825,6 +3825,7 @@ void TestLeetCode3027(void)
 
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3027();
     TestLeetCode3025();
     TestLeetCode3013();
     TestLeetCode3011();
