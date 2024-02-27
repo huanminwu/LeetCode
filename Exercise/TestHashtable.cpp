@@ -1946,8 +1946,24 @@ void TestLeetCode3020(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3046(void)
+{
+    Logger::WriteMessage("Test Leet Code 3046");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1,1,2,2,3,4 };
+    bool result = leetCode.isPossibleToSplit(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,1,1,1 };
+    result = leetCode.isPossibleToSplit(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3046();
     TestLeetCode3020();
     TestLeetCode3016();
     TestLeetCode3005();

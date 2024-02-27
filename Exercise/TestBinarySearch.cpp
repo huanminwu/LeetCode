@@ -1353,8 +1353,62 @@ void TestLeetCode3007(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3048(void)
+{
+    Logger::WriteMessage("Test Leet Code 3048");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 2,2,0 };
+    vector<int> changeIndices = { 2,2,2,2,3,2,2,1 };
+    int result = leetCode.earliestSecondToMarkIndicesI(nums, changeIndices);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(changeIndices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,3 };
+    changeIndices = { 1,1,1,2,1,1,1 };
+    result = leetCode.earliestSecondToMarkIndicesI(nums, changeIndices);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(changeIndices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,1 };
+    changeIndices = { 2,2,2 };
+    result = leetCode.earliestSecondToMarkIndicesI(nums, changeIndices);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(changeIndices);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3049(void)
+{
+    Logger::WriteMessage("Test Leet Code 3049");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 3, 2, 3 };
+    vector<int> changeIndices = { 1, 3, 2, 2, 2, 2, 3 };
+    int result = leetCode.earliestSecondToMarkIndicesII(nums, changeIndices);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(changeIndices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,0,1,2 };
+    changeIndices = { 1,2,1,2,1,2,1,2 };
+    result = leetCode.earliestSecondToMarkIndicesII(nums, changeIndices);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(changeIndices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    changeIndices = { 1,2,3 };
+    result = leetCode.earliestSecondToMarkIndicesII(nums, changeIndices);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(changeIndices);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode3048();
+    TestLeetCode3049();
     TestLeetCode3007();
     TestLeetCode2936();
     TestLeetCode153();

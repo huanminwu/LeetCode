@@ -6656,8 +6656,35 @@ void TestLeetCode3044(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3047(void)
+{
+    Logger::WriteMessage("Test Leet Code 3047");
+    LeetCodeMath leetCode;
+    vector<vector<int>> bottomLeft = { {1, 1},{2, 2},{3, 1} };
+    vector<vector<int>> topRight = { {3, 3},{4, 4},{6, 6} };
+    long long result = leetCode.largestSquareArea(bottomLeft, topRight);
+    Logger::WriteMessage(bottomLeft);
+    Logger::WriteMessage(topRight);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    bottomLeft = { {1, 1},{2, 2},{1, 2} };
+    topRight = { {3,3} ,{4,4},{3,4} };
+    result = leetCode.largestSquareArea(bottomLeft, topRight);
+    Logger::WriteMessage(bottomLeft);
+    Logger::WriteMessage(topRight);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    bottomLeft = { {1,1} ,{3,3},{3,1} };
+    topRight = { {2,2} ,{4,4},{4,2} };
+    result = leetCode.largestSquareArea(bottomLeft, topRight);
+    Logger::WriteMessage(bottomLeft);
+    Logger::WriteMessage(topRight);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3047();
     TestLeetCode3044();
     TestLeetCode3032();
     TestLeetCode3028();
