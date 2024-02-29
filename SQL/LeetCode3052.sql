@@ -1,93 +1,105 @@
 -----------------------------------------------------------------------
---- LeetCode 2995. Viewers Turned Streamers
+--- LeetCode 3052. Maximize Items
 --- 
 --- Hard
---- SQL Schema
---- Table: Sessions
---- 
---- +---------------+----------+
---- | Column Name   | Type     |
---- +---------------+----------+
---- | user_id       | int      |
---- | session_start | datetime |
---- | session_end   | datetime |
---- | session_id    | int      |
---- | session_type  | enum     |
---- +---------------+----------+
---- session_id is column of unique values for this table.
---- session_type is an ENUM (category) type of (Viewer, Streamer).
---- This table contains user id, session start, session end, session id and 
---- session type.
---- Write a solution to find the number of streaming sessions for users whose 
---- first session was as a viewer.
 ---
---- Return the result table ordered by count of streaming sessions, user_id 
---- in descending order.
+--- SQL Schema
+--- Pandas Schema
+---
+--- Table: Inventory
+---
+--- +----------------+---------+ 
+--- | Column Name    | Type    | 
+--- +----------------+---------+ 
+--- | item_id        | int     | 
+--- | item_type      | varchar |
+--- | item_category  | varchar |
+--- | square_footage | decimal |
+--- +----------------+---------+
+--- item_id is the column of unique values for this table.
+--- Each row includes item id, item type, item category and sqaure footage.
+--- Leetcode warehouse wants to maximize the number of items it can stock in 
+--- a 500,000 square feet warehouse. It wants to stock as many prime items as 
+--- possible, and afterwards use the remaining square footage to stock the 
+--- most number of non-prime items.
+---
+--- Write a solution to find the number of prime and non-prime items that can 
+--- be stored in the 500,000 square feet warehouse. Output the item type with 
+--- prime_eligible followed by not_prime and the maximum number of items that 
+--- can be stocked.
+---
+--- Note:
+---
+--- Item count must be a whole number (integer).
+--- If the count for the not_prime category is 0, you should output 0 for that 
+--- particular category.
+--- Return the result table ordered by item count in ascending order.
 ---
 --- The result format is in the following example.
---- 
---- Example 1:
 ---
+--- Example 1:
 --- Input: 
---- Sessions table:
---- +---------+---------------------+---------------------+------------+--------------+
---- | user_id | session_start       | session_end         | session_id | session_type | 
---- +---------+---------------------+---------------------+------------+--------------+
---- | 101     | 2023-11-06 13:53:42 | 2023-11-06 14:05:42 | 375        | Viewer       |  
---- | 101     | 2023-11-22 16:45:21 | 2023-11-22 20:39:21 | 594        | Streamer     |   
---- | 102     | 2023-11-16 13:23:09 | 2023-11-16 16:10:09 | 777        | Streamer     | 
---- | 102     | 2023-11-17 13:23:09 | 2023-11-17 16:10:09 | 778        | Streamer     | 
---- | 101     | 2023-11-20 07:16:06 | 2023-11-20 08:33:06 | 315        | Streamer     | 
---- | 104     | 2023-11-27 03:10:49 | 2023-11-27 03:30:49 | 797        | Viewer       | 
---- | 103     | 2023-11-27 03:10:49 | 2023-11-27 03:30:49 | 798        | Streamer     |  
---- +---------+---------------------+---------------------+------------+--------------+
+--- Inventory table:
+--- +---------+----------------+---------------+----------------+
+--- | item_id | item_type      | item_category | square_footage | 
+--- +---------+----------------+---------------+----------------+
+--- | 1374    | prime_eligible | Watches       | 68.00          | 
+--- | 4245    | not_prime      | Art           | 26.40          | 
+--- | 5743    | prime_eligible | Software      | 325.00         | 
+--- | 8543    | not_prime      | Clothing      | 64.50          |  
+--- | 2556    | not_prime      | Shoes         | 15.00          |
+--- | 2452    | prime_eligible | Scientific    | 85.00          |
+--- | 3255    | not_prime      | Furniture     | 22.60          | 
+--- | 1672    | prime_eligible | Beauty        | 8.50           |  
+--- | 4256    | prime_eligible | Furniture     | 55.50          |
+--- | 6325    | prime_eligible | Food          | 13.20          | 
+--- +---------+----------------+---------------+----------------+
 --- Output: 
---- +---------+----------------+
---- | user_id | sessions_count | 
---- +---------+----------------+
---- | 101     | 2              | 
---- +---------+----------------+
---- Explanation
---- - user_id 101, initiated their initial session as a viewer on 2023-11-06 
----   at 13:53:42, followed by two subsequent sessions as a Streamer, the 
----   count will be 2.
---- - user_id 102, although there are two sessions, the initial session was as 
----   a Streamer, so this user will be excluded.
---- - user_id 103 participated in only one session, which was as a Streamer, 
----   hence, it won't be considered.
---- - User_id 104 commenced their first session as a viewer but didn't have 
----   any subsequent sessions, therefore, they won't be included in the final 
----   count. 
---- Output table is ordered by sessions count and user_id in descending order.
+--- +----------------+-------------+
+--- | item_type      | item_count  | 
+--- +----------------+-------------+
+--- | prime_eligible | 5400        | 
+--- | not_prime      | 8           | 
+--- +----------------+-------------+
+--- Explanation: 
+--- - The prime-eligible category comprises a total of 6 items, amounting to 
+---   a combined square footage of 555.20 (68 + 325 + 85 + 8.50 + 55.50 + 
+---   13.20). It is possible to store 900 combinations of these 6 items, 
+--- totaling 5400 items and occupying 499,680 square footage.
+--- - In the not_prime category, there are a total of 4 items with a combined 
+---   square footage of 128.50. After deducting the storage used by 
+---  prime-eligible items (500,000 - 499,680 = 320), there is room for 2 
+---  combinations of non-prime items, accommodating a total of 8 non-prime 
+--- items within the available 320 square footage.
+--- Output table is ordered by item count in descending order.
 ---------------------------------------------------------------
+WITH Agg AS
+(
+    SELECT 
+        item_type,
+        total_footage = SUM(square_footage),
+        item_count = COUNT(*)
+    FROM 
+        Inventory
+    GROUP BY 
+        item_type
+)
 SELECT
-    A.[user_id],
-    A.[sessions_count]
-FROM
+    item_type,
+    item_count = 
+    CASE WHEN item_type = 'prime_eligible' 
+             THEN CONVERT(INT, 500000 / total_footage) * item_count
+         WHEN item_type = 'not_prime'
+             THEN CONVERT(INT,(500000 - 
+                   CONVERT(INT, 500000 / 
+                        (sum_footage - total_footage)) * 
+                        (sum_footage - total_footage)) /  total_footage) 
+                        * item_count
+    END
+FROM Agg AS A
+CROSS JOIN 
 (
-    SELECT
-        [user_id],
-        sessions_count = COUNT(*)
-    FROM
-        [Sessions]
-    WHERE 
-        session_type = 'Streamer'
-    GROUP BY
-        [user_id]
-) AS A
-INNER JOIN
-(
-    SELECT
-        [user_id],
-        session_type,
-        RN = ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY session_start)
-    FROM
-        [Sessions]
+    SELECT sum_footage = SUM(total_footage) FROM Agg
 ) AS B
-ON
-    A.[user_id] = B.[user_id]
-WHERE 
-    B.RN = 1 AND B.session_type = 'Viewer'
-ORDER BY 
-    [sessions_count] desc,  [user_id] desc
-;
+ORDER BY item_count DESC 
+

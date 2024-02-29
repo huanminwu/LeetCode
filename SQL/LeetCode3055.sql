@@ -1,93 +1,97 @@
 -----------------------------------------------------------------------
---- LeetCode 2995. Viewers Turned Streamers
+--- LeetCode 3055. Top Percentile Fraud
 --- 
---- Hard
---- SQL Schema
---- Table: Sessions
---- 
---- +---------------+----------+
---- | Column Name   | Type     |
---- +---------------+----------+
---- | user_id       | int      |
---- | session_start | datetime |
---- | session_end   | datetime |
---- | session_id    | int      |
---- | session_type  | enum     |
---- +---------------+----------+
---- session_id is column of unique values for this table.
---- session_type is an ENUM (category) type of (Viewer, Streamer).
---- This table contains user id, session start, session end, session id and 
---- session type.
---- Write a solution to find the number of streaming sessions for users whose 
---- first session was as a viewer.
+--- Medium
 ---
---- Return the result table ordered by count of streaming sessions, user_id 
---- in descending order.
+--- SQL Schema
+--- Pandas Schema
+--- Table: Fraud
+---
+--- +-------------+---------+
+--- | Column Name | Type    |
+--- +-------------+---------+
+--- | policy_id   | int     |
+--- | state       | varchar |
+--- | fraud_score | int     |
+--- +-------------+---------+
+--- policy_id is column of unique values for this table.
+--- This table contains policy id, state, and fraud score.
+--- The Leetcode Insurance Corp has developed an ML-driven predictive model 
+--- to detect the likelihood of fraudulent claims. Consequently, they 
+--- allocate their most seasoned claim adjusters to address the top 5% of 
+--- claims flagged by this model.
+---
+--- Write a solution to find the top 5 percentile of claims from each state.
+---
+--- Return the result table ordered by state in ascending order, fraud_score 
+--- in descending order, and policy_id in ascending order.
 ---
 --- The result format is in the following example.
---- 
---- Example 1:
 ---
+--- Example 1:
 --- Input: 
---- Sessions table:
---- +---------+---------------------+---------------------+------------+--------------+
---- | user_id | session_start       | session_end         | session_id | session_type | 
---- +---------+---------------------+---------------------+------------+--------------+
---- | 101     | 2023-11-06 13:53:42 | 2023-11-06 14:05:42 | 375        | Viewer       |  
---- | 101     | 2023-11-22 16:45:21 | 2023-11-22 20:39:21 | 594        | Streamer     |   
---- | 102     | 2023-11-16 13:23:09 | 2023-11-16 16:10:09 | 777        | Streamer     | 
---- | 102     | 2023-11-17 13:23:09 | 2023-11-17 16:10:09 | 778        | Streamer     | 
---- | 101     | 2023-11-20 07:16:06 | 2023-11-20 08:33:06 | 315        | Streamer     | 
---- | 104     | 2023-11-27 03:10:49 | 2023-11-27 03:30:49 | 797        | Viewer       | 
---- | 103     | 2023-11-27 03:10:49 | 2023-11-27 03:30:49 | 798        | Streamer     |  
---- +---------+---------------------+---------------------+------------+--------------+
+--- Fraud table:
+--- +-----------+------------+-------------+
+--- | policy_id | state      | fraud_score | 
+--- +-----------+------------+-------------+
+--- | 1         | California | 0.92        | 
+--- | 2         | California | 0.68        |   
+--- | 3         | California | 0.17        | 
+--- | 4         | New York   | 0.94        | 
+--- | 5         | New York   | 0.81        | 
+--- | 6         | New York   | 0.77        |  
+--- | 7         | Texas      | 0.98        |  
+--- | 8         | Texas      | 0.97        | 
+--- | 9         | Texas      | 0.96        | 
+--- | 10        | Florida    | 0.97        |  
+--- | 11        | Florida    | 0.98        | 
+--- | 12        | Florida    | 0.78        | 
+--- | 13        | Florida    | 0.88        | 
+--- | 14        | Florida    | 0.66        | 
+--- +-----------+------------+-------------+
 --- Output: 
---- +---------+----------------+
---- | user_id | sessions_count | 
---- +---------+----------------+
---- | 101     | 2              | 
---- +---------+----------------+
+--- +-----------+------------+-------------+
+--- | policy_id | state      | fraud_score |
+--- +-----------+------------+-------------+
+--- | 1         | California | 0.92        | 
+--- | 11        | Florida    | 0.98        | 
+--- | 4         | New York   | 0.94        | 
+--- | 7         | Texas      | 0.98        |  
+--- +-----------+------------+-------------+
 --- Explanation
---- - user_id 101, initiated their initial session as a viewer on 2023-11-06 
----   at 13:53:42, followed by two subsequent sessions as a Streamer, the 
----   count will be 2.
---- - user_id 102, although there are two sessions, the initial session was as 
----   a Streamer, so this user will be excluded.
---- - user_id 103 participated in only one session, which was as a Streamer, 
----   hence, it won't be considered.
---- - User_id 104 commenced their first session as a viewer but didn't have 
----   any subsequent sessions, therefore, they won't be included in the final 
----   count. 
---- Output table is ordered by sessions count and user_id in descending order.
+--- - For the state of California, only policy ID 1, with a fraud score 
+---   of 0.92, falls within the top 5 percentile for this state.
+--- - For the state of Florida, only policy ID 11, with a fraud score 
+---   of 0.98, falls within the top 5 percentile for this state. 
+--- - For the state of New York, only policy ID 4, with a fraud score 
+---   of 0.94, falls within the top 5 percentile for this state. 
+--- - For the state of Texas, only policy ID 7, with a fraud score of 0.98, 
+--- falls within the top 5 percentile for this state. 
+--- Output table is ordered by state in ascending order, fraud score in 
+--- descending order, and policy ID in ascending order.
 ---------------------------------------------------------------
 SELECT
-    A.[user_id],
-    A.[sessions_count]
+    A.[policy_id],
+    A.[state],
+    A.[fraud_score]
 FROM
-(
-    SELECT
-        [user_id],
-        sessions_count = COUNT(*)
-    FROM
-        [Sessions]
-    WHERE 
-        session_type = 'Streamer'
-    GROUP BY
-        [user_id]
-) AS A
+    [Fraud] AS A
 INNER JOIN
 (
-    SELECT
-        [user_id],
-        session_type,
-        RN = ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY session_start)
+    SELECT 
+        DISTINCT
+        [State],
+        [Top_5_Pct] =
+            PERCENTILE_DISC(0.05) 
+                WITHIN GROUP (ORDER BY fraud_score DESC)   
+                OVER (PARTITION BY [state])  
     FROM
-        [Sessions]
+        [Fraud]
 ) AS B
 ON
-    A.[user_id] = B.[user_id]
-WHERE 
-    B.RN = 1 AND B.session_type = 'Viewer'
+    A.[State] = B.[State]
+WHERE
+    A.[fraud_score] >= B.[Top_5_Pct]
 ORDER BY 
-    [sessions_count] desc,  [user_id] desc
+    [state] asc,  [fraud_score] desc, [policy_id] asc
 ;

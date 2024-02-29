@@ -3213,10 +3213,11 @@ int LeetCodeGraph::maximumMinimumPath(vector<vector<int>>& A)
 /// 4. 0 <= connections[i][2] <= 10^5
 /// 5. connections[i][0] != connections[i][1]
 /// </summary>
-int LeetCodeGraph::minimumCost(int N, vector<vector<int>>& connections)
+int LeetCodeGraph::minimumCost(int n, vector<vector<int>>& connections)
 {
     priority_queue<vector<int>> paths;
-    vector<int> parent(N + 1);
+    vector<int> parent(n);
+    for (size_t i = 0; i < n; i++) parent[i] = i;
     int result = 0;
     for (size_t i = 0; i < connections.size(); i++)
     {
@@ -3225,7 +3226,7 @@ int LeetCodeGraph::minimumCost(int N, vector<vector<int>>& connections)
         int d = connections[i][2];
         paths.push({ -d, x, y });
     }
-    int n = N;
+    int count = n;
     while (!paths.empty())
     {
         vector<int> pos = paths.top();
@@ -3233,17 +3234,19 @@ int LeetCodeGraph::minimumCost(int N, vector<vector<int>>& connections)
 
         int x = pos[1];
         int y = pos[2];
-        while (parent[x] != 0) x = parent[x];
-        while (parent[y] != 0) y = parent[y];
+        while (parent[x] != parent[parent[x]]) parent[x] = parent[parent[x]];
+        while (parent[y] != parent[parent[y]]) parent[y] = parent[parent[y]];
+        x = parent[x];
+        y = parent[y];
         if (x != y)
         {
             result += -pos[0];
             parent[x] = y;
-            n--;
+            count--;
         }
+        if (count == 1) return result;
     }
-    if (n == 1) return result;
-    else return -1;
+    return -1;
 }
 
 /// <summary>
