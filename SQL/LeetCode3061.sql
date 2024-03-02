@@ -1,93 +1,78 @@
 -----------------------------------------------------------------------
---- LeetCode 2995. Viewers Turned Streamers
+--- LeetCode 3061. Calculate Trapping Rain Water
 --- 
 --- Hard
+---
 --- SQL Schema
---- Table: Sessions
+--- Pandas Schema
+--- Table: Heights
+---
+--- +-------------+------+
+--- | Column Name | Type |
+--- +-------------+------+
+--- | id          | int  |
+--- | height      | int  |
+--- +-------------+------+
+--- id is the primary key (column with unique values) for this table, and it 
+--- is guaranteed to be in sequential order.
+--- Each row of this table contains an id and height.
+--- Write a solution to calculate the amount of rainwater can be trapped 
+--- between the bars in the landscape, considering that each bar has a width 
+--- of 1 unit.
+---
+--- Return the result table in any order.
 --- 
---- +---------------+----------+
---- | Column Name   | Type     |
---- +---------------+----------+
---- | user_id       | int      |
---- | session_start | datetime |
---- | session_end   | datetime |
---- | session_id    | int      |
---- | session_type  | enum     |
---- +---------------+----------+
---- session_id is column of unique values for this table.
---- session_type is an ENUM (category) type of (Viewer, Streamer).
---- This table contains user id, session start, session end, session id and 
---- session type.
---- Write a solution to find the number of streaming sessions for users whose 
---- first session was as a viewer.
----
---- Return the result table ordered by count of streaming sessions, user_id 
---- in descending order.
----
 --- The result format is in the following example.
 --- 
 --- Example 1:
----
+--- 
 --- Input: 
---- Sessions table:
---- +---------+---------------------+---------------------+------------+--------------+
---- | user_id | session_start       | session_end         | session_id | session_type | 
---- +---------+---------------------+---------------------+------------+--------------+
---- | 101     | 2023-11-06 13:53:42 | 2023-11-06 14:05:42 | 375        | Viewer       |  
---- | 101     | 2023-11-22 16:45:21 | 2023-11-22 20:39:21 | 594        | Streamer     |   
---- | 102     | 2023-11-16 13:23:09 | 2023-11-16 16:10:09 | 777        | Streamer     | 
---- | 102     | 2023-11-17 13:23:09 | 2023-11-17 16:10:09 | 778        | Streamer     | 
---- | 101     | 2023-11-20 07:16:06 | 2023-11-20 08:33:06 | 315        | Streamer     | 
---- | 104     | 2023-11-27 03:10:49 | 2023-11-27 03:30:49 | 797        | Viewer       | 
---- | 103     | 2023-11-27 03:10:49 | 2023-11-27 03:30:49 | 798        | Streamer     |  
---- +---------+---------------------+---------------------+------------+--------------+
+--- Heights table:
+--- +-----+--------+
+--- | id  | height |
+--- +-----+--------+
+--- | 1   | 0      |
+--- | 2   | 1      |
+--- | 3   | 0      |
+--- | 4   | 2      |
+--- | 5   | 1      |
+--- | 6   | 0      |
+--- | 7   | 1      |
+--- | 8   | 3      |
+--- | 9   | 2      |
+--- | 10  | 1      |
+--- | 11  | 2      |
+--- | 12  | 1      |
+--- +-----+--------+
 --- Output: 
---- +---------+----------------+
---- | user_id | sessions_count | 
---- +---------+----------------+
---- | 101     | 2              | 
---- +---------+----------------+
---- Explanation
---- - user_id 101, initiated their initial session as a viewer on 2023-11-06 
----   at 13:53:42, followed by two subsequent sessions as a Streamer, the 
----   count will be 2.
---- - user_id 102, although there are two sessions, the initial session was as 
----   a Streamer, so this user will be excluded.
---- - user_id 103 participated in only one session, which was as a Streamer, 
----   hence, it won't be considered.
---- - User_id 104 commenced their first session as a viewer but didn't have 
----   any subsequent sessions, therefore, they won't be included in the final 
----   count. 
---- Output table is ordered by sessions count and user_id in descending order.
+--- +---------------------+
+--- | total_trapped_water | 
+--- +---------------------+
+--- | 6                   | 
+--- +---------------------+
+--- Explanation: 
+---
+--- The elevation map depicted above (in the black section) is graphically 
+--- represented with the x-axis denoting the id and the y-axis representing 
+--- the heights [0,1,0,2,1,0,1,3,2,1,2,1]. In this scenario, 6 units of 
+--- rainwater are trapped within the blue section.
 ---------------------------------------------------------------
-SELECT
-    A.[user_id],
-    A.[sessions_count]
+SELECT 
+    total_trapped_water = ISNULL(SUM([water]), 0)
 FROM
 (
     SELECT
-        [user_id],
-        sessions_count = COUNT(*)
+        T.[id],
+        [water] = CASE WHEN  [left_bar] < [right_bar] THEN [left_bar] - [height] ELSE [right_bar] - [height] END
     FROM
-        [Sessions]
-    WHERE 
-        session_type = 'Streamer'
-    GROUP BY
-        [user_id]
-) AS A
-INNER JOIN
-(
-    SELECT
-        [user_id],
-        session_type,
-        RN = ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY session_start)
-    FROM
-        [Sessions]
-) AS B
-ON
-    A.[user_id] = B.[user_id]
-WHERE 
-    B.RN = 1 AND B.session_type = 'Viewer'
-ORDER BY 
-    [sessions_count] desc,  [user_id] desc
-;
+    (
+        SELECT
+            [id],
+            [height],
+            [left_bar] = ISNULL((SELECT MAX(height) FROM Heights AS B WHERE B.id < A.id), 0),
+            [right_bar] = ISNULL((SELECT MAX(height) FROM Heights AS C WHERE C.id > A.id), 0)
+        FROM
+            Heights AS A
+    ) AS T
+) AS T
+WHERE [water] > 0;

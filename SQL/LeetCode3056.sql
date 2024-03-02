@@ -1,93 +1,118 @@
 -----------------------------------------------------------------------
---- LeetCode 2995. Viewers Turned Streamers
+--- LeetCode 3056. Snaps Analysis
 --- 
---- Hard
---- SQL Schema
---- Table: Sessions
---- 
---- +---------------+----------+
---- | Column Name   | Type     |
---- +---------------+----------+
---- | user_id       | int      |
---- | session_start | datetime |
---- | session_end   | datetime |
---- | session_id    | int      |
---- | session_type  | enum     |
---- +---------------+----------+
---- session_id is column of unique values for this table.
---- session_type is an ENUM (category) type of (Viewer, Streamer).
---- This table contains user id, session start, session end, session id and 
---- session type.
---- Write a solution to find the number of streaming sessions for users whose 
---- first session was as a viewer.
+--- Medium
 ---
---- Return the result table ordered by count of streaming sessions, user_id 
---- in descending order.
+--- SQL Schema
+--- Pandas Schema
+--- Table: Activities
+---
+--- +---------------+---------+
+--- | Column Name   | Type    |
+--- +---------------+---------+
+--- | activity_id   | int     |
+--- | user_id       | int     |
+--- | activity_type | enum    |
+--- | time_spent    | decimal |
+--- +---------------+---------+
+--- activity_id is column of unique values for this table.
+--- activity_type is an ENUM (category) type of ('send', 'open'). 
+--- This table contains activity id, user id, activity type and time spent.
+--- Table: Age
+---
+--- +-------------+------+
+--- | Column Name | Type |
+--- +-------------+------+
+--- | user_id     | int  |
+--- | age_bucket  | enum |
+--- +-------------+------+
+--- user_id is the column of unique values for this table.
+--- age_bucket is an ENUM (category) type of ('21-25', '26-30', '31-35'). 
+--- This table contains user id and age group.
+--- Write a solution to calculate the percentage of the total time spent 
+--- on sending and opening snaps for each age group. Precentage should be 
+--- rounded to 2 decimal places.
+---
+--- Return the result table in any order.
 ---
 --- The result format is in the following example.
---- 
---- Example 1:
 ---
+--- Example 1:
 --- Input: 
---- Sessions table:
---- +---------+---------------------+---------------------+------------+--------------+
---- | user_id | session_start       | session_end         | session_id | session_type | 
---- +---------+---------------------+---------------------+------------+--------------+
---- | 101     | 2023-11-06 13:53:42 | 2023-11-06 14:05:42 | 375        | Viewer       |  
---- | 101     | 2023-11-22 16:45:21 | 2023-11-22 20:39:21 | 594        | Streamer     |   
---- | 102     | 2023-11-16 13:23:09 | 2023-11-16 16:10:09 | 777        | Streamer     | 
---- | 102     | 2023-11-17 13:23:09 | 2023-11-17 16:10:09 | 778        | Streamer     | 
---- | 101     | 2023-11-20 07:16:06 | 2023-11-20 08:33:06 | 315        | Streamer     | 
---- | 104     | 2023-11-27 03:10:49 | 2023-11-27 03:30:49 | 797        | Viewer       | 
---- | 103     | 2023-11-27 03:10:49 | 2023-11-27 03:30:49 | 798        | Streamer     |  
---- +---------+---------------------+---------------------+------------+--------------+
+--- Activities table:
+--- +-------------+---------+---------------+------------+
+--- | activity_id | user_id | activity_type | time_spent |
+--- +-------------+---------+---------------+------------+
+--- | 7274        | 123     | open          | 4.50       | 
+--- | 2425        | 123     | send          | 3.50       | 
+--- | 1413        | 456     | send          | 5.67       | 
+--- | 2536        | 456     | open          | 3.00       | 
+--- | 8564        | 456     | send          | 8.24       | 
+--- | 5235        | 789     | send          | 6.24       | 
+--- | 4251        | 123     | open          | 1.25       | 
+--- | 1435        | 789     | open          | 5.25       | 
+--- +-------------+---------+---------------+------------+
+---
+--- Age table:
+--- +---------+------------+
+--- | user_id | age_bucket | 
+--- +---------+------------+
+--- | 123     | 31-35      | 
+--- | 789     | 21-25      | 
+--- | 456     | 26-30      | 
+--- +---------+------------+
 --- Output: 
---- +---------+----------------+
---- | user_id | sessions_count | 
---- +---------+----------------+
---- | 101     | 2              | 
---- +---------+----------------+
---- Explanation
---- - user_id 101, initiated their initial session as a viewer on 2023-11-06 
----   at 13:53:42, followed by two subsequent sessions as a Streamer, the 
----   count will be 2.
---- - user_id 102, although there are two sessions, the initial session was as 
----   a Streamer, so this user will be excluded.
---- - user_id 103 participated in only one session, which was as a Streamer, 
----   hence, it won't be considered.
---- - User_id 104 commenced their first session as a viewer but didn't have 
----   any subsequent sessions, therefore, they won't be included in the final 
----   count. 
---- Output table is ordered by sessions count and user_id in descending order.
+--- +------------+-----------+-----------+
+--- | age_bucket | send_perc | open_perc |
+--- +------------+-----------+-----------+
+--- | 31-35      | 37.84     | 62.16     |
+--- | 26-30      | 82.26     | 17.74     |
+--- | 21-25      | 54.31     | 45.69     |
+--- +------------+-----------+-----------+
+--- Explanation: 
+--- For age group 31-35:
+---  - There is only one user belonging to this group with the user ID 123.
+---  - The total time spent on sending snaps by this user is 3.50, and the 
+---    time spent on opening snaps is 4.50 + 1.25 = 5.75.
+---  - The overall time spent by this user is 3.50 + 5.75 = 9.25.
+---  - Therefore, the sending snap percentage will be 
+---    (3.50 / 9.25) * 100 = 37.84, and the opening snap percentage will be 
+---    (5.75 / 9.25) * 100 = 62.16.
+--- For age group 26-30: 
+---  - There is only one user belonging to this group with the user ID 456. 
+---  - The total time spent on sending snaps by this user is 
+---    5.67 + 8.24 = 13.91, and the time spent on opening snaps is 3.00. 
+---  - The overall time spent by this user is 13.91 + 3.00 = 16.91. 
+---  - Therefore, the sending snap percentage will be 
+---    (13.91 / 16.91) * 100 = 82.26, and the opening snap percentage will be 
+---    (3.00 / 16.91) * 100 = 17.74.
+---  - For age group 21-25: 
+---  - There is only one user belonging to this group with the user ID 789. 
+---  - The total time spent on sending snaps by this user is 6.24, and the 
+---    time spent on opening snaps is 5.25. 
+---  - The overall time spent by this user is 6.24 + 5.25 = 11.49. 
+---  - Therefore, the sending snap percentage will be 
+---    (6.24 / 11.49) * 100 = 54.31, and the opening snap percentage will be 
+---    (5.25 / 11.49) * 100 = 45.69.
+---    All percentages in output table rounded to the two decimal places.
 ---------------------------------------------------------------
 SELECT
-    A.[user_id],
-    A.[sessions_count]
+    [age_bucket],
+    [send_perc] = CONVERT(NUMERIC(8, 2), [send_time] * 100 / ([send_time] + [open_time])),
+    [open_perc] = CONVERT(NUMERIC(8, 2), [open_time] * 100 / ([send_time] + [open_time]))
 FROM
 (
-    SELECT
-        [user_id],
-        sessions_count = COUNT(*)
+    SELECT 
+        B.[age_bucket],
+        [send_time] = SUM(CASE WHEN A.[activity_type] = 'send' THEN A.[time_spent] ELSE 0 END),
+        [open_time] = SUM(CASE WHEN A.[activity_type] = 'open' THEN A.[time_spent] ELSE 0 END)
     FROM
-        [Sessions]
-    WHERE 
-        session_type = 'Streamer'
+        [Activities] AS A
+    INNER JOIN
+        [Age] AS B
+    ON
+        A.[user_id] = B.[user_id]
     GROUP BY
-        [user_id]
-) AS A
-INNER JOIN
-(
-    SELECT
-        [user_id],
-        session_type,
-        RN = ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY session_start)
-    FROM
-        [Sessions]
-) AS B
-ON
-    A.[user_id] = B.[user_id]
-WHERE 
-    B.RN = 1 AND B.session_type = 'Viewer'
-ORDER BY 
-    [sessions_count] desc,  [user_id] desc
+        B.[age_bucket]
+)  AS T
 ;

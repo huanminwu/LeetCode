@@ -7370,28 +7370,47 @@ bool LeetCodeGraph::areSentencesSimilarTwo(vector<string>& words1, vector<string
 /// </summary>
 int LeetCodeGraph::removeStones(vector<vector<int>>& stones)
 {
-    unordered_map<int, int> row_map;
-    unordered_map<int, int> col_map;
-    unordered_map<int, int> union_map;
+    vector<int> visited(stones.size());
+    unordered_map<int, queue<int>> row_map;
+    unordered_map<int, queue<int>> col_map;
     for (size_t i = 0; i < stones.size(); i++)
     {
-        int index = i;
-        int row = stones[i][0];
-        int col = stones[i][1];
-        if (row_map.count(row) == 0) row_map[row] = index;
-        if (col_map.count(col) == 0) col_map[col] = index;
-        int source = row_map[row];
-        int target = col_map[col];
-        if (union_map.count(source) == 0) union_map[source] = source;
-        if (union_map.count(target) == 0) union_map[target] = target;
-        while (source != union_map[source]) source = union_map[source];
-        while (union_map.count(target) > 0 && target != union_map[target]) target = union_map[target];
-        union_map[source] = target;
+        row_map[stones[i][0]].push(i);
+        col_map[stones[i][1]].push(i);
     }
     int result = 0;
-    for (auto r : union_map)
+    for (size_t i = 0; i < stones.size(); i++)
     {
-        if (r.first == r.second) result++;
+        if (visited[i] == 1) continue;
+        result++;
+        queue<int> queue;
+        queue.push(i);
+        visited[i] = 1;
+        while (!queue.empty())
+        {
+            int node = queue.front();
+            queue.pop();
+            while (!row_map[stones[node][0]].empty())
+            {
+                int next = row_map[stones[node][0]].front();
+                row_map[stones[node][0]].pop();
+                if (visited[next] == 0)
+                {
+                    visited[next] = 1;
+                    queue.push(next);
+                }
+            }
+            while (!col_map[stones[node][1]].empty())
+            {
+                int next = col_map[stones[node][1]].front();
+                col_map[stones[node][1]].pop();
+                if (visited[next] == 0)
+                {
+                    visited[next] = 1;
+                    queue.push(next);
+                }
+            }
+        }
     }
     return stones.size() - result;
 }

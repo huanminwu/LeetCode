@@ -1,10 +1,12 @@
 -----------------------------------------------------------------------
---- LeetCode 2995. Viewers Turned Streamers
+--- LeetCode 3060. User Activities within Time Bounds
 --- 
 --- Hard
+---
 --- SQL Schema
+--- Pandas Schema
 --- Table: Sessions
---- 
+---
 --- +---------------+----------+
 --- | Column Name   | Type     |
 --- +---------------+----------+
@@ -18,76 +20,77 @@
 --- session_type is an ENUM (category) type of (Viewer, Streamer).
 --- This table contains user id, session start, session end, session id and 
 --- session type.
---- Write a solution to find the number of streaming sessions for users whose 
---- first session was as a viewer.
+--- Write a solution to find the the users who have had at least one 
+--- consecutive session of the same type (either 'Viewer' or 'Streamer') with 
+--- a maximum gap of 12 hours between sessions.
 ---
---- Return the result table ordered by count of streaming sessions, user_id 
---- in descending order.
+--- Return the result table ordered by user_id in ascending order.
 ---
 --- The result format is in the following example.
---- 
---- Example 1:
 ---
+--- Example:
 --- Input: 
 --- Sessions table:
 --- +---------+---------------------+---------------------+------------+--------------+
 --- | user_id | session_start       | session_end         | session_id | session_type | 
 --- +---------+---------------------+---------------------+------------+--------------+
---- | 101     | 2023-11-06 13:53:42 | 2023-11-06 14:05:42 | 375        | Viewer       |  
---- | 101     | 2023-11-22 16:45:21 | 2023-11-22 20:39:21 | 594        | Streamer     |   
---- | 102     | 2023-11-16 13:23:09 | 2023-11-16 16:10:09 | 777        | Streamer     | 
---- | 102     | 2023-11-17 13:23:09 | 2023-11-17 16:10:09 | 778        | Streamer     | 
---- | 101     | 2023-11-20 07:16:06 | 2023-11-20 08:33:06 | 315        | Streamer     | 
---- | 104     | 2023-11-27 03:10:49 | 2023-11-27 03:30:49 | 797        | Viewer       | 
---- | 103     | 2023-11-27 03:10:49 | 2023-11-27 03:30:49 | 798        | Streamer     |  
+--- | 101     | 2023-11-01 08:00:00 | 2023-11-01 09:00:00 | 1          | Viewer       |  
+--- | 101     | 2023-11-01 10:00:00 | 2023-11-01 11:00:00 | 2          | Streamer     |   
+--- | 102     | 2023-11-01 13:00:00 | 2023-11-01 14:00:00 | 3          | Viewer       | 
+--- | 102     | 2023-11-01 15:00:00 | 2023-11-01 16:00:00 | 4          | Viewer       | 
+--- | 101     | 2023-11-02 09:00:00 | 2023-11-02 10:00:00 | 5          | Viewer       | 
+--- | 102     | 2023-11-02 12:00:00 | 2023-11-02 13:00:00 | 6          | Streamer     | 
+--- | 101     | 2023-11-02 13:00:00 | 2023-11-02 14:00:00 | 7          | Streamer     | 
+--- | 102     | 2023-11-02 16:00:00 | 2023-11-02 17:00:00 | 8          | Viewer       | 
+--- | 103     | 2023-11-01 08:00:00 | 2023-11-01 09:00:00 | 9          | Viewer       | 
+--- | 103     | 2023-11-02 20:00:00 | 2023-11-02 23:00:00 | 10         | Viewer       | 
+--- | 103     | 2023-11-03 09:00:00 | 2023-11-03 10:00:00 | 11         | Viewer       | 
 --- +---------+---------------------+---------------------+------------+--------------+
 --- Output: 
---- +---------+----------------+
---- | user_id | sessions_count | 
---- +---------+----------------+
---- | 101     | 2              | 
---- +---------+----------------+
---- Explanation
---- - user_id 101, initiated their initial session as a viewer on 2023-11-06 
----   at 13:53:42, followed by two subsequent sessions as a Streamer, the 
----   count will be 2.
---- - user_id 102, although there are two sessions, the initial session was as 
----   a Streamer, so this user will be excluded.
---- - user_id 103 participated in only one session, which was as a Streamer, 
----   hence, it won't be considered.
---- - User_id 104 commenced their first session as a viewer but didn't have 
----   any subsequent sessions, therefore, they won't be included in the final 
----   count. 
---- Output table is ordered by sessions count and user_id in descending order.
+--- +---------+
+--- | user_id |
+--- +---------+
+--- | 102     |
+--- | 103     |
+--- +---------+
+--- Explanation:
+--- - User ID 101 will not be included in the final output as they do not have 
+---   any consecutive sessions of the same session type.
+--- - User ID 102 will be included in the final output as they had two viewer 
+---   sessions with session IDs 3 and 4, respectively, and the time gap between 
+---   them was less than 12 hours.
+--- - User ID 103 participated in two viewer sessions with a gap of less than 
+---   12 hours between them, identified by session IDs 10 and 11. Therefore, 
+---   user 103 will be included in the final output.
+--- Output table is ordered by user_id in increasing order.
 ---------------------------------------------------------------
-SELECT
-    A.[user_id],
-    A.[sessions_count]
+WITH [Session_OrderByTime] AS
+(
+   SELECT
+        [user_id],
+        [session_start],
+        [session_end],
+        [session_id] = ROW_NUMBER() OVER (PARTITION BY [user_id],[session_type] ORDER BY [session_start]),
+        [session_type]
+    FROM
+        [Sessions]
+)
+SELECT 
+    DISTINCT [user_id]
 FROM
 (
     SELECT
-        [user_id],
-        sessions_count = COUNT(*)
+        A.[user_id]
     FROM
-        [Sessions]
-    WHERE 
-        session_type = 'Streamer'
-    GROUP BY
-        [user_id]
-) AS A
-INNER JOIN
-(
-    SELECT
-        [user_id],
-        session_type,
-        RN = ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY session_start)
-    FROM
-        [Sessions]
-) AS B
-ON
-    A.[user_id] = B.[user_id]
-WHERE 
-    B.RN = 1 AND B.session_type = 'Viewer'
-ORDER BY 
-    [sessions_count] desc,  [user_id] desc
+       [Session_OrderByTime] AS A
+    INNER JOIN 
+       [Session_OrderByTime] AS B
+    ON
+       A.[user_id] = B.[user_id] AND
+       A.[session_id] + 1= B.[session_id] AND
+       A.[session_type] = B.[session_type]
+    WHERE
+       DATEADD(HOUR, 12, A.[session_end]) >= B.[session_start]
+) AS T
+ORDER BY [user_id]
 ;

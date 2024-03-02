@@ -1,93 +1,111 @@
 -----------------------------------------------------------------------
---- LeetCode 2995. Viewers Turned Streamers
+--- LeetCode 3058. Friends With No Mutual Friends
 --- 
---- Hard
+--- Medium
+--- 
 --- SQL Schema
---- Table: Sessions
---- 
---- +---------------+----------+
---- | Column Name   | Type     |
---- +---------------+----------+
---- | user_id       | int      |
---- | session_start | datetime |
---- | session_end   | datetime |
---- | session_id    | int      |
---- | session_type  | enum     |
---- +---------------+----------+
---- session_id is column of unique values for this table.
---- session_type is an ENUM (category) type of (Viewer, Streamer).
---- This table contains user id, session start, session end, session id and 
---- session type.
---- Write a solution to find the number of streaming sessions for users whose 
---- first session was as a viewer.
+--- Pandas Schema
+--- Table: Friends
 ---
---- Return the result table ordered by count of streaming sessions, user_id 
---- in descending order.
+--- +-------------+------+
+--- | Column Name | Type |
+--- +-------------+------+
+--- | user_id1    | int  |
+--- | user_id2    | int  |
+--- +-------------+------+
+--- (user_id1, user_id2) is the primary key (combination of columns with 
+--- unique values) for this table.
+--- Each row contains user id1, user id2, both of whom are friends with each 
+--- other.
+--- Write a solution to find all pairs of users who are friends with each 
+--- other and have no mutual friends.
+---
+--- Return the result table ordered by user_id1, user_id2 in ascending order.
 ---
 --- The result format is in the following example.
 --- 
 --- Example 1:
----
+--- 
 --- Input: 
---- Sessions table:
---- +---------+---------------------+---------------------+------------+--------------+
---- | user_id | session_start       | session_end         | session_id | session_type | 
---- +---------+---------------------+---------------------+------------+--------------+
---- | 101     | 2023-11-06 13:53:42 | 2023-11-06 14:05:42 | 375        | Viewer       |  
---- | 101     | 2023-11-22 16:45:21 | 2023-11-22 20:39:21 | 594        | Streamer     |   
---- | 102     | 2023-11-16 13:23:09 | 2023-11-16 16:10:09 | 777        | Streamer     | 
---- | 102     | 2023-11-17 13:23:09 | 2023-11-17 16:10:09 | 778        | Streamer     | 
---- | 101     | 2023-11-20 07:16:06 | 2023-11-20 08:33:06 | 315        | Streamer     | 
---- | 104     | 2023-11-27 03:10:49 | 2023-11-27 03:30:49 | 797        | Viewer       | 
---- | 103     | 2023-11-27 03:10:49 | 2023-11-27 03:30:49 | 798        | Streamer     |  
---- +---------+---------------------+---------------------+------------+--------------+
+--- Friends table:
+--- +----------+----------+
+--- | user_id1 | user_id2 | 
+--- +----------+----------+
+--- | 1        | 2        | 
+--- | 2        | 3        | 
+--- | 2        | 4        | 
+--- | 1        | 5        | 
+--- | 6        | 7        | 
+--- | 3        | 4        | 
+--- | 2        | 5        | 
+--- | 8        | 9        | 
+--- +----------+----------+
 --- Output: 
---- +---------+----------------+
---- | user_id | sessions_count | 
---- +---------+----------------+
---- | 101     | 2              | 
---- +---------+----------------+
---- Explanation
---- - user_id 101, initiated their initial session as a viewer on 2023-11-06 
----   at 13:53:42, followed by two subsequent sessions as a Streamer, the 
----   count will be 2.
---- - user_id 102, although there are two sessions, the initial session was as 
----   a Streamer, so this user will be excluded.
---- - user_id 103 participated in only one session, which was as a Streamer, 
----   hence, it won't be considered.
---- - User_id 104 commenced their first session as a viewer but didn't have 
----   any subsequent sessions, therefore, they won't be included in the final 
----   count. 
---- Output table is ordered by sessions count and user_id in descending order.
+--- +----------+----------+
+--- | user_id1 | user_id2 | 
+--- +----------+----------+
+--- | 6        | 7        | 
+--- | 8        | 9        | 
+--- +----------+----------+
+--- Explanation: 
+--- - Users 1 and 2 are friends with each other, but they share a mutual 
+---   friend with user ID 5, so this pair is not included.
+--- - Users 2 and 3 are friends, they both share a mutual friend with user 
+---   ID 4, resulting in exclusion, similarly for users 2 and 4 who share a 
+---   mutual friend with user ID 3, hence not included.
+--- - Users 1 and 5 are friends with each other, but they share a mutual 
+---   friend with user ID 2, so this pair is not included.
+--- - Users 6 and 7, as well as users 8 and 9, are friends with each other, 
+---   and they don't have any mutual friends, hence included.
+--- - Users 3 and 4 are friends with each other, but their mutual connection 
+---   with user ID 2 means they are not included, similarly for users 2 and 5 
+---   are friends but are excluded due to their mutual connection with user 
+---   ID 1.
+--- Output table is ordered by user_id1 in ascending order.
 ---------------------------------------------------------------
+WITH Mutual_Friends AS
+(
+    SELECT
+        [user_id1],
+        [user_id2]
+    FROM
+        [Friends]
+    UNION
+    SELECT
+        [user_id1] = [user_id2],
+        [user_id2] = [user_id1]
+    FROM
+        [Friends]
+)
 SELECT
-    A.[user_id],
-    A.[sessions_count]
+    A.[user_id1],
+    A.[user_id2]
 FROM
+    Friends AS A
+LEFT OUTER JOIN
 (
-    SELECT
-        [user_id],
-        sessions_count = COUNT(*)
-    FROM
-        [Sessions]
-    WHERE 
-        session_type = 'Streamer'
-    GROUP BY
-        [user_id]
-) AS A
-INNER JOIN
-(
-    SELECT
-        [user_id],
-        session_type,
-        RN = ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY session_start)
-    FROM
-        [Sessions]
+SELECT
+    A.[user_id1],
+    A.[user_id2]
+FROM
+    [Friends] AS A
+INNER JOIN 
+    Mutual_Friends AS B
+ON
+    A.[user_id1] = B.[user_id1]
+INNER JOIN 
+    Mutual_Friends AS C
+ON
+    A.[user_id2] = C.[user_id1]
+WHERE
+    B.[user_id2] = C.[user_id2]
 ) AS B
 ON
-    A.[user_id] = B.[user_id]
+    A.[user_id1] = B.[user_id1] AND
+    A.[user_id2] = B.[user_id2]
 WHERE 
-    B.RN = 1 AND B.session_type = 'Viewer'
-ORDER BY 
-    [sessions_count] desc,  [user_id] desc
+    B.[user_id1] IS NULL
+ORDER BY
+    [user_id1] ASC,
+    [user_id2] ASC 
 ;
