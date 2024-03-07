@@ -5749,9 +5749,58 @@ void TestLeetCode1219(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3067(void)
+{
+    Logger::WriteMessage("Test Leet Code 3067");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> edges =
+    {
+        {0,1,1},
+        {1,2,5},
+        {2,3,13},
+        {3,4,9},
+        {4,5,2}
+    };
+    int signalSpeed = 1;
+    vector<int> result = leetCode.countPairsOfConnectableServers(edges, signalSpeed);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("signalSpeed = " + to_string(signalSpeed));
+    Logger::WriteMessage(result);
+
+    edges =
+    {
+        {0,6,3},
+        {6,5,3},
+        {0,3,1},
+        {3,2,7},
+        {3,1,6},
+        {3,4,2}
+    };
+    signalSpeed = 3;
+    result = leetCode.countPairsOfConnectableServers(edges, signalSpeed);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("signalSpeed = " + to_string(signalSpeed));
+    Logger::WriteMessage(result);
+
+    edges =
+    {
+        {1, 0, 1},
+        {2, 1, 1},
+        {3, 2, 4},
+        {4, 0, 3},
+        {5, 4, 1},
+        {6, 5, 3}
+    };
+    signalSpeed = 2;
+    result = leetCode.countPairsOfConnectableServers(edges, signalSpeed);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("signalSpeed = " + to_string(signalSpeed));
+    Logger::WriteMessage(result);
+}
 
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3067();
     TestLeetCode1219();
     TestLeetCode3015();
     TestLeetCode2998();

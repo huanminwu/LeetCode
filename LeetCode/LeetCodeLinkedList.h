@@ -1726,6 +1726,106 @@ public:
     ///    does not have leading zeros, except the number 0 itself.
     /// </summary>
     ListNode* doubleIt(ListNode* head);
+
+    /// <summary>
+    /// Leet Code 3062. Winner of the Linked List Game
+    ///
+    /// Easy
+    ///
+    /// You are given the head of a linked list of even length containing 
+    /// integers.
+    ///
+    /// Each odd-indexed node contains an odd integer and each even-indexed 
+    /// node contains an even integer.
+    ///
+    /// We call each even-indexed node and its next node a pair, e.g., the 
+    /// nodes with indices 0 and 1 are a pair, the nodes with indices 2 and 3 
+    /// are a pair, and so on.
+    ///
+    /// For every pair, we compare the values of the nodes in the pair:
+    ///
+    /// If the odd-indexed node is higher, the "Odd" team gets a point.
+    /// If the even-indexed node is higher, the "Even" team gets a point.
+    /// Return the name of the team with the higher points, if the points are 
+    /// equal, return "Tie".
+    ///
+    /// Example 1:
+    /// Input: head = [2,1]
+    /// Output: "Even"
+    /// Explanation: There is only one pair in this linked list and that 
+    /// is (2,1). Since 2 > 1, the Even team gets the point.
+    ///
+    /// Hence, the answer would be "Even".
+    ///
+    /// Example 2:
+    /// Input: head = [2,5,4,7,20,5]
+    //// Output: "Odd"
+    /// Explanation: There are 3 pairs in this linked list. Let's investigate 
+    /// each pair individually:
+    /// (2,5) -> Since 2 < 5, The Odd team gets the point.
+    /// (4,7) -> Since 4 < 7, The Odd team gets the point.
+    /// (20,5) -> Since 20 > 5, The Even team gets the point.
+    ///
+    /// The Odd team earned 2 points while the Even team got 1 point and the 
+    /// Odd team has the higher points.
+    ///
+    /// Hence, the answer would be "Odd".
+    /// Example 3:
+    /// Input: head = [4,5,2,1]
+    /// Output: "Tie"
+    /// Explanation: There are 2 pairs in this linked list. Let's investigate 
+    /// each pair individually:
+    /// (4,5) -> Since 4 < 5, the Odd team gets the point.
+    /// (2,1) -> Since 2 > 1, the Even team gets the point.
+    /// Both teams earned 1 point.
+    /// Hence, the answer would be "Tie".
+    /// 
+    /// Constraints:
+    /// 1. The number of nodes in the list is in the range [2, 100].
+    /// 2. The number of nodes in the list is even.
+    /// 3. 1 <= Node.val <= 100
+    /// 4. The value of each odd-indexed node is odd.
+    /// 5. The value of each even-indexed node is even.
+    /// </summary>
+    string gameResult(ListNode* head);
+
+    /// <summary>
+    /// Leet Code 3063. Linked List Frequency
+    ///
+    /// Medium
+    ///
+    /// Given the head of a linked list containing k distinct elements, 
+    /// return the head to a linked list of length k containing the 
+    /// frequency of each distinct element in the given linked list in 
+    /// any order.
+    ///
+    /// Example 1:
+    /// Input: head = [1,1,1,2,2,3]
+    /// Output: [3,2,1]
+    /// Explanation: There are 3 distinct elements in the list. The frequency 
+    /// of 1 is 3, the frequency of 2 is 2 and the frequency of 3 is 1. Hence, 
+    /// we return 3 -> 2 -> 1.
+    ///
+    /// Note that 1 -> 2 -> 3, 1 -> 3 -> 2, 2 -> 1 -> 3, 2 -> 3 -> 1, 
+    /// and 3 -> 1 -> 2 are also valid answers.
+    ///
+    /// Example 2:
+    /// Input: head = [1,1,2,2,2]
+    /// Output: [2,3]
+    /// Explanation: There are 2 distinct elements in the list. The frequency 
+    /// of 1 is 2 and the frequency of 2 is 3. Hence, we return 2 -> 3.
+    ///
+    /// Example 3:
+    /// Input: head = [6,5,4,3,2,1]
+    /// Output: [1,1,1,1,1,1]
+    /// Explanation: There are 6 distinct elements in the list. The frequency 
+    /// of each of them is 1. Hence, we return 1 -> 1 -> 1 -> 1 -> 1 -> 1.
+    /// 
+    /// Constraints:
+    /// 1. The number of nodes in the list is in the range [1, 10^5].
+    /// 2. 1 <= Node.val <= 105
+    /// </summary>
+    ListNode* frequenciesOfElements(ListNode* head);
 #pragma endregion
 };
 #endif  // LeetCodeLinkedList

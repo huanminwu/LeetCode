@@ -4980,8 +4980,25 @@ void TestLeetCode87(void)
     Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2 + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode3070(void)
+{
+    Logger::WriteMessage("Test Leet Code 3070");
+    LeetCodeDP leetCode;
+    vector<vector<int>> grid = { {7, 6, 3},{6, 6, 1} };
+    int k = 18;
+    int result = leetCode.countSubmatrices(grid, k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {7, 2, 9},{1, 5, 0},{2, 6, 6} };
+    k = 20;
+    result = leetCode.countSubmatrices(grid, k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3070();
     TestLeetCode87();
     TestLeetCode3041();
     TestLeetCode377();

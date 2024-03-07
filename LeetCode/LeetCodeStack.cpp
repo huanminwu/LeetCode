@@ -1227,6 +1227,7 @@ int LeetCodeStack::constrainedSubsetSum(vector<int>& nums, int k)
 
 /// <summary>
 /// Leet code #239. Sliding Window Maximum  
+/// 
 /// Given an array nums, there is a sliding window of size k which is moving 
 /// from the very left of the array to the very right. 
 /// You can only see the k numbers in the window. Each time the sliding window 
@@ -1256,31 +1257,25 @@ int LeetCodeStack::constrainedSubsetSum(vector<int>& nums, int k)
 vector<int> LeetCodeStack::maxSlidingWindow(vector<int>& nums, int k)
 {
     vector<int> result;
-    deque<int> max_window;
+    deque<pair<int, int>> max_window;
     for (size_t i = 0; i < nums.size(); i++)
     {
         if (max_window.empty())
         {
-            max_window.push_back(nums[i]);
+            max_window.push_back(make_pair(i, nums[i]));
         }
         else
         {
-            if (max_window.size() == k) max_window.pop_front();
-            size_t count = 0;
-            while (!max_window.empty() && max_window.back() < nums[i])
+            if ((int)i - k == max_window.front().first) max_window.pop_front();
+            while (!max_window.empty() && max_window.back().second < nums[i])
             {
                 max_window.pop_back();
-                count++;
             }
-            for (size_t j = 0; j < count; j++)
-            {
-                max_window.push_back(nums[i]);
-            }
-            max_window.push_back(nums[i]);
+            max_window.push_back(make_pair(i, nums[i]));
         }
-        if (max_window.size() == k)
+        if ((int)i >= k - 1)
         {
-            result.push_back(max_window.front());
+            result.push_back(max_window.front().second);
         }
     }
     return result;
@@ -1799,22 +1794,21 @@ int LeetCodeStack::largestRectangleArea(vector<int>& heights)
     for (size_t i = 0; i <= heights.size(); i++)
     {
         int height = (i == heights.size()) ? 0 : heights[i];
-        if (height_stack.empty() || (height >= height_stack.top().second))
+        if (height_stack.empty() || (height > height_stack.top().second))
         {
             height_stack.push(make_pair(i, height));
         }
         else
         {
-            int end = height_stack.top().first;
+            int end = i;
             pair<int, int> pair;
-            while ((!height_stack.empty()) && (height < height_stack.top().second))
+            while ((!height_stack.empty()) && (height <= height_stack.top().second))
             {
                 pair = height_stack.top();
                 height_stack.pop();
-                max_area = max(max_area, (end - pair.first + 1) * pair.second);
+                max_area = max(max_area, (end - pair.first) * pair.second);
             }
             height_stack.push(make_pair(pair.first, height));
-            height_stack.push(make_pair(i, height));
         }
     }
     return max_area;

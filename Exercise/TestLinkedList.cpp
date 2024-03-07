@@ -1163,8 +1163,52 @@ void TestLeetCode2816(void)
     leetCode.freeListNodes(result);
 }
 
+void TestLeetCode3062(void)
+{
+    Logger::WriteMessage("Test Leet Code 3062");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 2, 1 };
+    ListNode* head = leetCode.generateListNodes(data_list);
+    string result = leetCode.gameResult(head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage("result = " + result);
+
+    data_list = { 2,5,4,7,20,5 };
+    head = leetCode.generateListNodes(data_list);
+    result = leetCode.gameResult(head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage("result = " + result);
+
+    data_list = { 4,5,2,1 };
+    head = leetCode.generateListNodes(data_list);
+    result = leetCode.gameResult(head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode3063(void)
+{
+    Logger::WriteMessage("Test Leet Code 3063");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 1,1,1,2,2,3 };
+    ListNode* head = leetCode.generateListNodes(data_list);
+    ListNode* result = leetCode.frequenciesOfElements(head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    data_list = { 1,1,2,2,2 };
+    head = leetCode.generateListNodes(data_list);
+    result = leetCode.frequenciesOfElements(head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+}
+
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode3063();
+    TestLeetCode3062();
     TestLeetCode206();
     TestLeetCode82();
     TestLeetCode2816();

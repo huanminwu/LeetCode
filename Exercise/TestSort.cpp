@@ -3823,8 +3823,26 @@ void TestLeetCode3027(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3066(void)
+{
+    Logger::WriteMessage("Test Leet Code 3066");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 2, 11, 10, 1, 3 };
+    int k = 10;
+    int result = leetCode.minOperationsII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,1,2,4,9 };
+    k = 20;
+    result = leetCode.minOperationsII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3066();
     TestLeetCode3027();
     TestLeetCode3025();
     TestLeetCode3013();
