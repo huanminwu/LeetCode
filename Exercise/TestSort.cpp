@@ -3840,8 +3840,89 @@ void TestLeetCode3066(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3073(void)
+{
+    Logger::WriteMessage("Test Leet Code 3073");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 5, 6, 9 };
+    int result = leetCode.maximumTripletValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,5,3,6 };
+    result = leetCode.maximumTripletValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3074(void)
+{
+    Logger::WriteMessage("Test Leet Code 3074");
+    LeetCodeSort leetCode;
+    vector<int> apple = { 1, 3, 2 }, capacity = { 4, 3, 1, 5, 2 };
+    int result = leetCode.minimumBoxes(apple, capacity);
+    Logger::WriteMessage(apple);
+    Logger::WriteMessage(capacity);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    apple = { 5,5,5 }, capacity = { 2,4,2,7 };
+    result = leetCode.minimumBoxes(apple, capacity);
+    Logger::WriteMessage(apple);
+    Logger::WriteMessage(capacity);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3075(void)
+{
+    Logger::WriteMessage("Test Leet Code 3075");
+    LeetCodeSort leetCode;
+    vector<int> happiness = { 1,2,3 };
+    int k = 2;
+    long long result = leetCode.maximumHappinessSum(happiness, k);
+    Logger::WriteMessage(happiness);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    happiness = { 1,1,1,1 };
+    k = 2;
+    result = leetCode.maximumHappinessSum(happiness, k);
+    Logger::WriteMessage(happiness);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    happiness = { 2,3,4,5 };
+    k = 1;
+    result = leetCode.maximumHappinessSum(happiness, k);
+    Logger::WriteMessage(happiness);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3080(void)
+{
+    Logger::WriteMessage("Test Leet Code 3080");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1,2,2,1,2,3,1 };
+    vector<vector<int>> queries = { {1, 2},{3, 3},{4, 2} };
+    vector<long long> result = leetCode.unmarkedSumArray(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 1,4,2,3 };
+    queries = { {0,1} };
+    result = leetCode.unmarkedSumArray(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3080();
+    TestLeetCode3075();
+    TestLeetCode3074();
+    TestLeetCode3073();
     TestLeetCode3066();
     TestLeetCode3027();
     TestLeetCode3025();

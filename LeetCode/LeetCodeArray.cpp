@@ -31322,3 +31322,336 @@ vector<int> LeetCodeArray::resultArrayI(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet 3071. Minimum Operations to Write the Letter Y on a Grid
+///
+/// Medium
+///
+/// You are given a 0-indexed n x n grid where n is odd, and 
+/// grid[r][c] is 0, 1, or 2.
+///
+/// We say that a cell belongs to the Letter Y if it belongs to one of 
+/// the following:
+///
+/// The diagonal starting at the top-left cell and ending at the center 
+/// cell of the grid.
+/// The diagonal starting at the top-right cell and ending at the center 
+/// cell of the grid.
+/// The vertical line starting at the center cell and ending at the bottom 
+/// border of the grid.
+/// The Letter Y is written on the grid if and only if:
+///
+/// All values at cells belonging to the Y are equal.
+/// All values at cells not belonging to the Y are equal.
+/// The values at cells belonging to the Y are different from the values 
+/// at cells not belonging to the Y.
+/// Return the minimum number of operations needed to write the letter Y 
+/// on the grid given that in one operation you can change the value at 
+/// any cell to 0, 1, or 2.
+/// 
+/// Example 1:
+/// Input: grid = [[1,2,2],[1,1,0],[0,1,0]]
+/// Output: 3
+/// Explanation: We can write Y on the grid by applying the changes 
+/// highlighted in blue in the image above. After the operations, all 
+/// cells that belong to Y, denoted in bold, have the same value of 1 
+/// while those that do not belong to Y are equal to 0.
+/// It can be shown that 3 is the minimum number of operations needed to 
+/// write Y on the grid.
+///
+/// Example 2:
+/// Input: grid = [[0,1,0,1,0],[2,1,0,1,2],[2,2,2,0,1],[2,2,2,2,2],
+///                [2,1,2,2,2]]
+/// Output: 12
+/// Explanation: We can write Y on the grid by applying the changes 
+/// highlighted in blue in the image above. After the operations, all 
+/// cells that belong to Y, denoted in bold, have the same value of 0 
+/// while those that do not belong to Y are equal to 2. 
+/// It can be shown that 12 is the minimum number of operations needed to 
+/// write Y on the grid.
+/// 
+/// Constraints:
+/// 1. 3 <= n <= 49 
+/// 2. n == grid.length == grid[i].length
+/// 3. 0 <= grid[i][j] <= 2
+/// 4. n is odd.
+/// </summary>
+int LeetCodeArray::minimumOperationsToWriteY(vector<vector<int>>& grid)
+{
+    int n = grid.size();
+    vector<vector<int>> temp = grid;
+    vector<int> x(3), y(3);
+    for (int i = 0; i < n; i++)
+    {
+        if (i < n / 2)
+        {
+            y[temp[i][i]]++;
+            temp[i][i] = -1;
+            y[temp[i][n-1-i]]++;
+            temp[i][n - 1 - i] = -1;
+        }
+        else
+        {
+            y[temp[i][n / 2]]++;
+            temp[i][n / 2] = -1;
+        }
+    }
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (temp[i][j] != -1)
+            {
+                x[temp[i][j]]++;
+            }
+        }
+    }
+    int result = n * n;
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (i == j) continue;
+            result = min(result, n * n - (x[i] + y[j]));
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet 3078. Match Alphanumerical Pattern in Matrix I
+///
+/// Medium
+///
+/// You are given a 2D integer matrix board and a 2D character matrix 
+/// pattern. Where 0 <= board[r][c] <= 9 and each element of pattern 
+/// is either a digit or a lowercase English letter.
+///
+/// Your task is to find a submatrix of board that matches pattern.
+///
+/// An integer matrix part matches pattern if we can replace cells 
+/// containing letters in pattern with some digits (each distinct 
+/// letter with a unique digit) in such a way that the resulting matrix 
+/// becomes identical to the integer matrix part. In other words,
+/// 
+/// The matrices have identical dimensions.
+/// If pattern[r][c] is a digit, then part[r][c] must be the same digit.
+/// If pattern[r][c] is a letter x:
+/// For every pattern[i][j] == x, part[i][j] must be the same as 
+/// part[r][c].
+/// For every pattern[i][j] != x, part[i][j] must be different than 
+/// part[r][c].
+/// Return an array of length 2 containing the row number and column 
+/// number of the upper-left corner of a submatrix of board which matches 
+/// pattern. If there is more than one such submatrix, return the 
+/// coordinates of the submatrix with the lowest row index, and in case 
+/// there is still a tie, return the coordinates of the submatrix with 
+/// the lowest column index. If there are no suitable answers, 
+/// return [-1, -1].
+///
+/// Example 1:
+/// 1	2	2
+/// 2	2	3
+/// 2	3	3
+/// a	b
+/// b	b
+/// Input: board = [[1,2,2],[2,2,3],[2,3,3]], pattern = ["ab","bb"]
+///
+/// Output: [0,0]
+/// 
+/// Explanation: If we consider this mapping: "a" -> 1 and "b" -> 2; 
+/// the submatrix with the upper-left corner (0,0) is a match as outlined 
+/// in the matrix above.
+///
+/// Note that the submatrix with the upper-left corner (1,1) is also a 
+/// match but since it comes after the other one, we return [0,0].
+///
+/// Example 2:
+/// 1	1	2
+/// 3	3	4
+/// 6	6	6
+/// a	b
+/// 6	6
+/// Input: board = [[1,1,2],[3,3,4],[6,6,6]], pattern = ["ab","66"]
+/// Output: [1,1]
+/// Explanation: If we consider this mapping: "a" -> 3 and "b" -> 4; 
+/// the submatrix with the upper-left corner (1,1) is a match as 
+/// outlined in the matrix above.
+/// Note that since the corresponding values of "a" and "b" must 
+/// differ, the submatrix with the upper-left corner (1,0) is not a 
+/// match. Hence, we return [1,1].
+///
+/// Example 3:
+/// 1	2
+/// 2	1
+/// x	x
+/// Input: board = [[1,2],[2,1]], pattern = ["xx"]
+///
+/// Output: [-1,-1]
+///
+/// Explanation: Since the values of the matched submatrix must be the 
+/// same, there is no match. Hence, we return [-1,-1].
+/// 
+/// Constraints:
+/// 1. 1 <= board.length <= 50
+/// 2. 1 <= board[i].length <= 50
+/// 3. 0 <= board[i][j] <= 9
+/// 4. 1 <= pattern.length <= 50
+/// 5. 1 <= pattern[i].length <= 50
+/// 6. pattern[i][j] is either a digit represented as a string or a 
+///    lowercase English letter.
+/// </summary>
+vector<int> LeetCodeArray::findPattern(vector<vector<int>>& board, vector<string>& pattern)
+{
+    vector<int> result(2, -1);
+    for (size_t i = 0; i < board.size(); i++)
+    {
+        for (size_t j = 0; j < board[i].size(); j++)
+        {
+            vector<int> digits(10, -1), letters(26, -1);
+            bool match = true;
+            for (size_t k = 0; k < pattern.size(); k++)
+            {
+                if (i + k >= board.size())
+                {
+                    match = false;
+                    break;
+                }
+                for (size_t l = 0; l < pattern[k].size(); l++)
+                {
+                    if (j + l >= board[i].size())
+                    {
+                        match = false;
+                        break;
+                    }
+                    if (pattern[k][l] >= '0' && pattern[k][l] <= '9')
+                    {
+                        if (board[i + k][j + l] == pattern[k][l] - '0') continue;
+                    }
+                    else if (pattern[k][l] >= 'a' && pattern[k][l] <= 'z')
+                    {
+                        if (letters[pattern[k][l] - 'a'] == board[i + k][j + l]) continue;
+                        if (letters[pattern[k][l] - 'a'] == -1 && digits[board[i + k][j + l]] == -1)
+                        {
+                            letters[pattern[k][l] - 'a'] = board[i + k][j + l];
+                            digits[board[i + k][j + l]] = pattern[k][l] - 'a';
+                            continue;
+                        }
+                    }
+                    match = false;
+                    break;
+                }
+                if (match == false) break;
+            }
+            if (match)
+            {
+                result[0] = i;
+                result[1] = j;
+                return result;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet 3086. Minimum Moves to Pick K Ones
+///
+/// Hard
+///
+/// You are given a binary array nums of length n, a positive integer k 
+/// and a non-negative integer maxChanges.
+///
+/// Alice plays a game, where the goal is for Alice to pick up k ones 
+/// from nums using the minimum number of moves. When the game starts, 
+/// Alice picks up any index aliceIndex in the range [0, n - 1] and 
+/// stands there. If nums[aliceIndex] == 1 , Alice picks up the one 
+/// and nums[aliceIndex] becomes 0(this does not count as a move). 
+/// After this, Alice can make any number of moves (including zero) 
+/// where in each move Alice must perform exactly one of the following 
+/// actions:
+///
+/// Select any index j != aliceIndex such that nums[j] == 0 and set 
+/// nums[j] = 1. This action can be performed at most maxChanges times.
+/// Select any two adjacent indices x and y (|x - y| == 1) such that 
+/// nums[x] == 1, nums[y] == 0, then swap their values (set nums[y] = 1 
+/// and nums[x] = 0). If y == aliceIndex, Alice picks up the one after 
+/// this move and nums[y] becomes 0.
+/// Return the minimum number of moves required by Alice to pick 
+/// exactly k ones.
+///
+/// Example 1:
+/// Input: nums = [1,1,0,0,0,1,1,0,0,1], k = 3, maxChanges = 1
+/// Output: 3
+///
+/// Explanation: Alice can pick up 3 ones in 3 moves, if Alice performs 
+/// the following actions in each move when standing at aliceIndex == 1:
+///
+/// At the start of the game Alice picks up the one and nums[1] becomes 0. 
+/// nums becomes [1,0,1,0,0,1,1,0,0,1].
+/// Select j == 2 and perform an action of the first type. nums 
+/// becomes [1,0,1,0,0,1,1,0,0,1]
+/// Select x == 2 and y == 1, and perform an action of the second type. 
+/// nums becomes [1,1,0,0,0,1,1,0,0,1]. As y == aliceIndex, Alice picks 
+/// up the one and nums becomes [1,0,0,0,0,1,1,0,0,1].
+/// Select x == 0 and y == 1, and perform an action of the second type. 
+/// nums becomes [0,1,0,0,0,1,1,0,0,1]. As y == aliceIndex, Alice picks 
+/// up the one and nums becomes [0,0,0,0,0,1,1,0,0,1].
+/// Note that it may be possible for Alice to pick up 3 ones using some 
+/// other sequence of 3 moves.
+/// 
+/// Example 2:
+/// Input: nums = [0,0,0,0], k = 2, maxChanges = 3
+/// Output: 4
+/// Explanation: Alice can pick up 2 ones in 4 moves, if Alice performs 
+/// the following actions in each move when standing at aliceIndex == 0:
+///
+/// Select j == 1 and perform an action of the first type. nums 
+/// becomes [0,1,0,0].
+/// Select x == 1 and y == 0, and perform an action of the second type. 
+/// nums becomes [1,0,0,0]. As y == aliceIndex, Alice picks up the one 
+/// and nums becomes [0,0,0,0].
+/// Select j == 1 again and perform an action of the first type. nums 
+/// becomes [0,1,0,0].
+/// Select x == 1 and y == 0 again, and perform an action of the second 
+/// type. nums becomes [1,0,0,0]. As y == aliceIndex, Alice picks up the 
+/// one and nums becomes [0,0,0,0].
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 10^5
+/// 2. 0 <= nums[i] <= 1
+/// 3. 1 <= k <= 10^5
+/// 4. 0 <= maxChanges <= 10^5
+/// 5. maxChanges + sum(nums) >= k
+/// </summary>
+long long LeetCodeArray::minimumMoves(vector<int>& nums, int k, int maxChanges)
+{
+    vector<long long> sum = { 0 };
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] == 0) continue;
+        sum.push_back(sum[sum.size() - 1] + i);
+    }
+    int n = sum.size();
+    if (n == 1) return (long long)k * 2;
+    int m = max(0, k - 1 - maxChanges);
+    long long result = LLONG_MAX;
+    for (int i = 1; i < n; i++)
+    {
+        for (int j = m; j <= min(k-1, max(m, 2)); j++)
+        {
+            int left = i; 
+            if (i + j > n - 1) break;
+            int right = i + j;
+            int mid_left = left + (right - left) / 2;
+            int mid_right = left + (right + 1 - left) / 2;
+            long long left_sum = sum[mid_left] - sum[left-1];
+            long long right_sum = sum[right] - sum[mid_right - 1];
+            long long distance = right_sum - left_sum;
+            result = min(result, distance + (long long)(k - (right - left + 1)) * 2);
+        }
+    }
+    return result;
+}

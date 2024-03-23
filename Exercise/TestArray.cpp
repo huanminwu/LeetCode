@@ -9968,8 +9968,81 @@ void TestLeetCode3069(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3071(void)
+{
+    Logger::WriteMessage("Test Leet Code 3071");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {1, 2, 2},{1, 1, 0},{0, 1, 0} };
+    int result = leetCode.minimumOperationsToWriteY(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {0, 1, 0, 1, 0},{2, 1, 0, 1, 2},{2, 2, 2, 0, 1},{2, 2, 2, 2, 2},{2, 1, 2, 2, 2} };
+    result = leetCode.minimumOperationsToWriteY(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3078(void)
+{
+    Logger::WriteMessage("Test Leet Code 3078");
+    LeetCodeArray leetCode;
+    vector<vector<int>> board = { {1, 2, 2},{2, 2, 3},{2, 3, 3} };
+    vector<string> pattern = { "ab", "bb" };
+    vector<int> result = leetCode.findPattern(board, pattern);
+    Logger::WriteMessage(board);
+    Logger::WriteMessage(pattern);
+    Logger::WriteMessage(result);
+
+    board = { {1, 1, 2},{3, 3, 4},{6, 6, 6} };
+    pattern = { "ab","66" };
+    result = leetCode.findPattern(board, pattern);
+    Logger::WriteMessage(board);
+    Logger::WriteMessage(pattern);
+    Logger::WriteMessage(result);
+
+    board = { {1, 2},{2, 1} };
+    pattern = { "xx" };
+    result = leetCode.findPattern(board, pattern);
+    Logger::WriteMessage(board);
+    Logger::WriteMessage(pattern);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3086(void)
+{
+    Logger::WriteMessage("Test Leet Code 3086");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,1,0,0,0,1,1,0,0,1 };
+    int k = 5;
+    int maxChanges = 1;
+    long long result = leetCode.minimumMoves(nums,k , maxChanges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; maxChanges = " + to_string(maxChanges));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,0,0,0 };
+    k = 2;
+    maxChanges = 3;
+    result = leetCode.minimumMoves(nums, k, maxChanges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; maxChanges = " + to_string(maxChanges));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1 };
+    k = 2;
+    maxChanges = 4;
+    result = leetCode.minimumMoves(nums, k, maxChanges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; maxChanges = " + to_string(maxChanges));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3086();
+    TestLeetCode3078();
+    TestLeetCode3071();
     TestLeetCode3069();
     TestLeetCode3065();
     TestLeetCode3038();

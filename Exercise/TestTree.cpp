@@ -3982,8 +3982,35 @@ void TestLeetCode3004(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3068(void)
+{
+    Logger::WriteMessage("Test Leet Code 3068");
+    LeetCodeTree leetCode;
+    vector<int> nums = { 1, 2, 1 };
+    int k = 3; 
+    vector<vector<int>> edges = { {0, 1},{0, 2} };
+    long long result = leetCode.maximumValueSum(nums, k, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 2, 3 };
+    k = 7;
+    edges = { {0, 1} };
+    result = leetCode.maximumValueSum(nums, k, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 7,7,7,7,7,7 };
+    k = 3;
+    edges = { {0, 1},{0, 2},{0, 3},{0, 4},{0, 5} };
+    result = leetCode.maximumValueSum(nums, k, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3068();
     TestLeetCode3004();
     TestLeetCode2925();
     TestLeetCode2920();

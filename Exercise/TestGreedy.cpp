@@ -1790,8 +1790,22 @@ void TestLeetCode3009(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3081(void)
+{
+    Logger::WriteMessage("Test Leet Code 3081");
+    LeetCodeGreedy leetCode;
+    string s = "???";
+    string result = leetCode.minimizeStringValue(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "a?a?";
+    result = leetCode.minimizeStringValue(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode3081();
     TestLeetCode3009();
     TestLeetCode2848();
     TestLeetCode2830();

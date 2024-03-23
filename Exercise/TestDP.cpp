@@ -4993,11 +4993,58 @@ void TestLeetCode3070(void)
     k = 20;
     result = leetCode.countSubmatrices(grid, k);
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
 
+void TestLeetCode3082(void)
+{
+    Logger::WriteMessage("Test Leet Code 3082");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    int k = 3;
+    int result = leetCode.sumOfPower(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 2,3,3 };
+    k = 5;
+    result = leetCode.sumOfPower(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    k = 7;
+    result = leetCode.sumOfPower(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3077(void)
+{
+    Logger::WriteMessage("Test Leet Code 3077");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 2, 3, -1, 2 };
+    int k = 3;
+    long long result = leetCode.maximumStrength(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 12,-2,-2,-2,-2 };
+    k = 5;
+    result = leetCode.maximumStrength(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { -1,-2,-3 };
+    k = 1;
+    result = leetCode.maximumStrength(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3077();
+    TestLeetCode3082();
     TestLeetCode3070();
     TestLeetCode87();
     TestLeetCode3041();

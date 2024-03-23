@@ -6703,8 +6703,58 @@ void TestLeetCode3045(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3076(void)
+{
+    Logger::WriteMessage("Test Leet Code 3076");
+    LeetCodeString leetCode;
+    vector<string> arr = { "cab", "ad", "bad", "c" };
+    vector<string> result = leetCode.shortestSubstrings(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(result);
+
+    arr = { "abc","bcd","abcd" };
+    result = leetCode.shortestSubstrings(arr);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3083(void)
+{
+    Logger::WriteMessage("Test Leet Code 3083");
+    LeetCodeString leetCode;
+    string  s = "leetcode";
+    bool result = leetCode.isSubstringPresent(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result? "true" : "false"));
+
+    s = "abcba";
+    result = leetCode.isSubstringPresent(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "abcd";
+    result = leetCode.isSubstringPresent(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3084(void)
+{
+    Logger::WriteMessage("Test Leet Code 3084");
+    LeetCodeString leetCode;
+    string  s = "abada";
+    char c = 'a';
+    long long result = leetCode.countSubstrings(s, c);
+    Logger::WriteMessage("s = " + s + "; c = " + string(1, c) + "; result = " + to_string(result));
+
+    s = "zzz";
+    c = 'z';
+    result = leetCode.countSubstrings(s, c);
+    Logger::WriteMessage("s = " + s + "; c = " + string(1, c) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3084();
+    TestLeetCode3083();
+    TestLeetCode3076();
     TestLeetCode3045();
     TestLeetCode3043();
     TestLeetCode3042();

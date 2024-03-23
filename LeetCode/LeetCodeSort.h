@@ -7756,6 +7756,197 @@ public:
     ///    of the array are greater than or equal to k.
     /// </summary>
     int minOperationsII(vector<int>& nums, int k);
+
+
+    /// <summary>
+    /// Leet 3073. Maximum Increasing Triplet Value
+    ///
+    /// Medium
+    ///
+    /// Given an array nums, return the maximum value of a triplet (i, j, k) 
+    /// such that i < j < k and nums[i] < nums[j] < nums[k].
+    ///
+    /// The value of a triplet (i, j, k) is nums[i] - nums[j] + nums[k].
+    /// 
+    /// Example 1:
+    /// Input: nums = [5,6,9] 
+    /// Output: 8 
+    /// Explanation: We only have one choice for an increasing triplet and 
+    /// that is choosing all three elements. The value of this triplet would 
+    /// be 5 - 6 + 9 = 8.
+    ///
+    /// Example 2:
+    /// Input:  nums = [1,5,3,6] 
+    /// Output:  4 
+    /// Explanation: There are only two increasing triplets:
+    /// (0, 1, 3): The value of this triplet is nums[0] - nums[1] + nums[3] = 
+    /// 1 - 5 + 6 = 2.
+    /// (0, 2, 3): The value of this triplet is nums[0] - nums[2] + nums[3] = 
+    /// 1 - 3 + 6 = 4.
+    /// Thus the answer would be 4.
+    ///
+    /// Constraints:
+    /// 1. 3 <= nums.length <= 10^5 
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. The input is generated such that at least one triplet meets the 
+    ///    given condition.
+    /// </summary>
+    int maximumTripletValue(vector<int>& nums);
+
+    /// <summary>
+    /// Leet 3074. Apple Redistribution into Boxes
+    ///
+    /// Easy
+    ///
+    /// You are given an array apple of size n and an array capacity of size m.
+    /// There are n packs where the ith pack contains apple[i] apples. There 
+    /// are m boxes as well, and the ith box has a capacity of capacity[i] 
+    /// apples.
+    ///
+    /// Return the minimum number of boxes you need to select to redistribute
+    /// these n packs of apples into boxes.
+    ///
+    /// Note that, apples from the same pack can be distributed into different 
+    /// boxes.
+    ///
+    /// Example 1:
+    /// Input: apple = [1,3,2], capacity = [4,3,1,5,2]
+    /// Output: 2
+    /// Explanation: We will use boxes with capacities 4 and 5.
+    /// It is possible to distribute the apples as the total capacity is 
+    /// greater than or equal to the total number of apples.
+    ///
+    /// Example 2:
+    /// Input: apple = [5,5,5], capacity = [2,4,2,7]
+    /// Output: 4
+    /// Explanation: We will need to use all the boxes.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == apple.length <= 50
+    /// 2. 1 <= m == capacity.length <= 50
+    /// 3. 1 <= apple[i], capacity[i] <= 50
+    /// 4. The input is generated such that it's possible to redistribute 
+    ///    packs of apples into boxes.
+    /// </summary>
+    int minimumBoxes(vector<int>& apple, vector<int>& capacity);
+
+
+    /// <summary>
+    /// Leet 3075. Maximize Happiness of Selected Children
+    ///
+    /// Medium
+    ///
+    /// You are given an array happiness of length n, and a positive integer k.
+    ///
+    /// There are n children standing in a queue, where the ith child has 
+    /// happiness value happiness[i]. You want to select k children from these 
+    /// n children in k turns.
+    ///
+    /// In each turn, when you select a child, the happiness value of all the 
+    /// children that have not been selected till now decreases by 1. Note that 
+    /// the happiness value cannot become negative and gets decremented only if 
+    /// it is positive.
+    ///
+    /// Return the maximum sum of the happiness values of the selected 
+    /// children you can achieve by selecting k children.
+    ///
+    /// Example 1:
+    /// Input: happiness = [1,2,3], k = 2
+    /// Output: 4
+    /// Explanation: We can pick 2 children in the following way:
+    /// - Pick the child with the happiness value == 3. The happiness value 
+    ///   of the remaining children becomes [0,1].
+    /// - Pick the child with the happiness value == 1. The happiness value 
+    ///   of the remaining child becomes [0]. Note that the happiness value 
+    ///   cannot become less than 0.
+    /// The sum of the happiness values of the selected children is 3 + 1 = 4.
+    ///
+    /// Example 2:
+    /// Input: happiness = [1,1,1,1], k = 2
+    /// Output: 1
+    /// Explanation: We can pick 2 children in the following way:
+    /// - Pick any child with the happiness value == 1. The happiness value 
+    ///   of the remaining children becomes [0,0,0].
+    /// - Pick the child with the happiness value == 0. The happiness value 
+    ///   of the remaining child becomes [0,0].
+    /// The sum of the happiness values of the selected children is 1 + 0 = 1.
+    ///
+    /// Example 3:
+    /// Input: happiness = [2,3,4,5], k = 1
+    ///
+    /// Output: 5
+    /// Explanation: We can pick 1 child in the following way:
+    /// - Pick the child with the happiness value == 5. The happiness value 
+    ///   of the remaining children becomes [1,2,3].
+    /// The sum of the happiness values of the selected children is 5.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == happiness.length <= 2 * 10^5
+    /// 2. 1 <= happiness[i] <= 10^8
+    /// 3. 1 <= k <= n
+    /// </summary>
+    long long maximumHappinessSum(vector<int>& happiness, int k);
+
+
+    /// <summary>
+    /// Leet 3080. Mark Elements on Array by Performing Queries
+    ///
+    /// Medium
+    ///
+    /// You are given a 0-indexed array nums of size n consisting of positive 
+    /// integers.
+    ///
+    /// You are also given a 2D array queries of size m where 
+    /// queries[i] = [indexi, ki].
+    ///
+    /// Initially all elements of the array are unmarked.
+    /// You need to apply m queries on the array in order, where on the ith 
+    /// query you do the following:
+    ///
+    /// Mark the element at index indexi if it is not already marked.
+    /// Then mark ki unmarked elements in the array with the smallest values. 
+    /// If multiple such elements exist, mark the ones with the smallest 
+    /// indices. And if less than ki unmarked elements exist, then mark all 
+    /// of them.
+    /// Return an array answer of size m where answer[i] is the sum of 
+    /// unmarked elements in the array after the ith query.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2,2,1,2,3,1], queries = [[1,2],[3,3],[4,2]]
+    /// Output: [8,3,0]
+    ///
+    /// Explanation:
+    /// We do the following queries on the array:
+    /// Mark the element at index 1, and 2 of the smallest unmarked elements 
+    /// with the smallest indices if they exist, the marked elements now are 
+    /// nums = [1,2,2,1,2,3,1]. The sum of unmarked elements 
+    /// is 2 + 2 + 3 + 1 = 8.
+    /// Mark the element at index 3, since it is already marked we skip it. 
+    /// Then we mark 3 of the smallest unmarked elements with the smallest 
+    /// indices, the marked elements now are nums = [1,2,2,1,2,3,1]. The sum 
+    /// of unmarked elements is 3.
+    /// Mark the element at index 4, since it is already marked we skip it. 
+    /// Then we mark 2 of the smallest unmarked elements with the smallest 
+    /// indices if they exist, the marked elements now are 
+    /// nums = [1,2,2,1,2,3,1]. The sum of unmarked elements is 0.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,4,2,3], queries = [[0,1]]
+    /// Output: [7]
+    /// Explanation: We do one query which is mark the element at index 0 
+    /// and mark the smallest element among unmarked elements. The marked 
+    /// elements will be nums = [1,4,2,3], and the sum of unmarked elements 
+    /// is 4 + 3 = 7.
+    ///
+    /// Constraints:
+    /// 1. n == nums.length
+    /// 2. m == queries.length
+    /// 3. 1 <= m <= n <= 10^5
+    /// 4. 1 <= nums[i] <= 10^5
+    /// 5. queries[i].length == 2
+    /// 6. 0 <= indexi, ki <= n - 1
+    /// </summary>
+    vector<long long> unmarkedSumArray(vector<int>& nums, vector<vector<int>>& queries);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

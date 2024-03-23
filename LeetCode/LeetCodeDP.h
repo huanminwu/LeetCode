@@ -9688,5 +9688,107 @@ public:
     /// 5. 1 <= k <= 10^9
     /// </summary>
     int countSubmatrices(vector<vector<int>>& grid, int k);
+
+
+    /// <summary>
+    /// Leet 3082. Find the Sum of the Power of All Subsequences
+    ///
+    /// Hard
+    ///
+    /// You are given an integer array nums of length n and a positive 
+    /// integer k.
+    /// The power of an array of integers is defined as the number of 
+    /// subsequences with their sum equal to k.
+    ///
+    /// Return the sum of power of all subsequences of nums.
+    /// Since the answer may be very large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input:  nums = [1,2,3], k = 3 
+    /// Output:  6 
+    /// Explanation:
+    /// There are 5 subsequences of nums with non-zero power:
+    /// The subsequence [1,2,3] has 2 subsequences with sum == 3: [1,2,3] 
+    /// and [1,2,3].
+    /// The subsequence [1,2,3] has 1 subsequence with sum == 3: [1,2,3].
+    /// The subsequence [1,2,3] has 1 subsequence with sum == 3: [1,2,3].
+    /// The subsequence [1,2,3] has 1 subsequence with sum == 3: [1,2,3].
+    /// The subsequence [1,2,3] has 1 subsequence with sum == 3: [1,2,3].
+    /// Hence the answer is 2 + 1 + 1 + 1 + 1 = 6.
+    ///
+    /// Example 2:
+    /// Input:  nums = [2,3,3], k = 5 
+    /// Output:  4 
+    /// Explanation:
+    /// There are 3 subsequences of nums with non-zero power:
+    /// The subsequence [2,3,3] has 2 subsequences with sum == 5: [2,3,3] 
+    /// and [2,3,3].
+    /// The subsequence [2,3,3] has 1 subsequence with sum == 5: [2,3,3].
+    /// The subsequence [2,3,3] has 1 subsequence with sum == 5: [2,3,3].
+    /// Hence the answer is 2 + 1 + 1 = 4.
+    ///
+    /// Example 3:
+    /// Input:  nums = [1,2,3], k = 7 
+    /// Output:  0 
+    /// Explanation: There exists no subsequence with sum 7. Hence all 
+    /// subsequences of nums have power = 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 100
+    /// 2. 1 <= nums[i] <= 10^4
+    /// 3. 1 <= k <= 100
+    /// </summary>
+    int sumOfPower(vector<int>& nums, int k);
+
+
+    /// <summary>
+    /// Leet 3077. Maximum Strength of K Disjoint Subarrays
+    ///
+    /// Hard
+    ///
+    /// You are given a 0-indexed array of integers nums of length n, and a 
+    /// positive odd integer k.
+    ///
+    /// The strength of x subarrays is defined as strength = sum[1] * x - 
+    /// sum[2] * (x - 1) + sum[3] * (x - 2) - sum[4] * (x - 3) + ... + 
+    /// sum[x] * 1 where sum[i] is the sum of the elements in the ith subarray. 
+    /// Formally, strength is sum of (-1)i+1 * sum[i] * (x - i + 1) 
+    /// over all i's such that 1 <= i <= x.
+    ///
+    /// You need to select k disjoint subarrays from nums, such that their 
+    /// strength is maximum.
+    ///
+    /// Return the maximum possible strength that can be obtained.
+    /// Note that the selected subarrays don't need to cover the entire array.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,2,3,-1,2], k = 3
+    /// Output: 22
+    /// Explanation: The best possible way to select 3 subarrays is: 
+    /// nums[0..2], nums[3..3], and nums[4..4]. The strength is 
+    /// (1 + 2 + 3) * 3 - (-1) * 2 + 2 * 1 = 22.
+    ///
+    /// Example 2:
+    /// Input: nums = [12,-2,-2,-2,-2], k = 5
+    /// Output: 64
+    /// Explanation: The only possible way to select 5 disjoint subarrays 
+    /// is: nums[0..0], nums[1..1], nums[2..2], nums[3..3], and nums[4..4]. 
+    /// The strength is 12 * 5 - (-2) * 4 + (-2) * 3 - (-2) * 2 + 
+    /// (-2) * 1 = 64.
+    ///
+    /// Example 3:
+    /// Input: nums = [-1,-2,-3], k = 1
+    /// Output: -1
+    /// Explanation: The best possible way to select 1 subarray is: 
+    /// nums[0..0]. The strength is -1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 10^4
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// 3. 1 <= k <= n
+    /// 4. 1 <= n * k <= 10^6
+    /// 5. k is odd.
+    /// </summary>
+    long long maximumStrength(vector<int>& nums, int k);
 };
 #endif  // LeetCodeDP

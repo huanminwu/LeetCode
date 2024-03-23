@@ -23959,7 +23959,6 @@ int LeetCodeString::longestCommonPrefix(vector<int>& arr1, vector<int>& arr2)
     return result;
 }
 
-
 /// <summary>
 /// Leet Code 3045. Count Prefix and Suffix Pairs II
 ///
@@ -24050,6 +24049,189 @@ long long LeetCodeString::countPrefixSuffixPairsII(vector<string>& words)
     for (size_t i = 0; i < words.size(); i++)
     {
         result += trie.insert(words[i]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet 3076. Shortest Uncommon Substring in an Array
+///
+/// Medium
+///
+/// You are given an array arr of size n consisting of non-empty strings.
+/// Find a string array answer of size n such that:
+/// answer[i] is the shortest substring of arr[i] that does not occur as 
+/// a substring in any other string in arr. If multiple such substrings 
+/// exist, answer[i] should be the lexicographically smallest. And if no 
+/// such substring exists, answer[i] should be an empty string.
+/// Return the array answer.
+/// 
+/// Example 1:
+/// Input: arr = ["cab","ad","bad","c"]
+/// Output: ["ab","","ba",""]
+/// Explanation: We have the following:
+/// - For the string "cab", the shortest substring that does not occur in 
+///   any other string is either "ca" or "ab", we choose the 
+///   lexicographically smaller substring, which is "ab".
+/// - For the string "ad", there is no substring that does not occur in 
+///   any other string.
+/// - For the string "bad", the shortest substring that does not occur in 
+///   any other string is "ba".
+/// - For the string "c", there is no substring that does not occur in any 
+///   other string.
+///
+/// Example 2:
+/// Input: arr = ["abc","bcd","abcd"]
+/// Output: ["","","abcd"]
+/// Explanation: We have the following:
+/// - For the string "abc", there is no substring that does not occur in 
+///   any other string.
+/// - For the string "bcd", there is no substring that does not occur in 
+///   any other string.
+/// - For the string "abcd", the shortest substring that does not occur in 
+///   any other string is "abcd".
+///
+/// Constraints:
+/// 1. n == arr.length
+/// 2. 2 <= n <= 100
+/// 3. 1 <= arr[i].length <= 20
+/// 4. arr[i] consists only of lowercase English letters.
+/// </summary>
+vector<string> LeetCodeString::shortestSubstrings(vector<string>& arr)
+{
+    int n = arr.size();
+    vector<vector<set<string>>> string_tables(n);
+    vector<string> result(arr.size());
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        string_tables[i] = vector<set<string>>(arr[i].size());
+        for (size_t j = 0; j < arr[i].size(); j++)
+        {
+            string s;
+            for (size_t k = j; k < arr[i].size(); k++)
+            {
+                s.push_back(arr[i][k]);
+                string_tables[i][k - j].insert(s);
+            }
+        }
+    }
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        string str;
+        for (size_t j = 0; j < arr[i].size(); j++)
+        {
+            for (auto& s : string_tables[i][j])
+            {
+                str = s;
+                for (size_t k = 0; k < arr.size(); k++)
+                {
+                    if (i == k) continue;
+                    if (j < string_tables[k].size() && 
+                        string_tables[k][j].count(s) > 0)
+                    {
+                        str.clear();
+                        break;
+                    }
+                }
+                if (!str.empty()) break;
+            }
+            if (!str.empty())
+            {
+                result[i] = str;
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet 3083. Existence of a Substring in a String and Its Reverse
+///
+/// Easy
+///
+/// Given a string s, find any substring of length 2 which is also present 
+/// in the reverse of s.
+///
+/// Return true if such a substring exists, and false otherwise.
+/// 
+/// Example 1:
+/// Input: s = "leetcode"
+/// Output: true
+/// 
+/// Explanation: Substring "ee" is of length 2 which is also present in 
+/// reverse(s) == "edocteel".
+///
+/// Example 2:
+/// Input: s = "abcba"
+/// Output: true
+/// 
+/// Explanation: All of the substrings of length 2 "ab", "bc", "cb", "ba" 
+/// are also present in reverse(s) == "abcba".
+///
+/// Example 3:
+/// Input: s = "abcd"
+/// Output: false
+/// Explanation: There is no substring of length 2 in s, which is also 
+/// present in the reverse of s.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 100
+/// 2. s consists only of lowercase English letters.
+/// </summary>
+bool LeetCodeString::isSubstringPresent(string s)
+{
+    string rev_s = s;
+    reverse(rev_s.begin(), rev_s.end());
+    for (size_t i = 0; i < s.size() - 1; i++)
+    {
+        string sub_str = s.substr(i, 2);
+        if (rev_s.find(sub_str) != string::npos)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+/// <summary>
+/// Leet 3084. Count Substrings Starting and Ending with Given Character
+///
+/// Medium
+///
+/// You are given a string s and a character c. Return the total number of 
+/// substrings of s that start and end with c.
+/// 
+/// Example 1:
+/// Input: s = "abada", c = "a"
+/// Output: 6
+///
+/// Explanation: Substrings starting and ending with "a" are: "abada", 
+/// "abada", "abada", "abada", "abada", "abada".
+///
+/// Example 2:
+/// Input: s = "zzz", c = "z"
+/// Output: 6
+///
+/// Explanation: There are a total of 6 substrings in s and all start 
+/// and end with "z".
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s and c consist only of lowercase English letters.
+/// </summary>
+long long LeetCodeString::countSubstrings(string s, char c)
+{
+    long long result = 0;
+    long long count = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == c)
+        {
+            count++;
+            result += count;
+        }
     }
     return result;
 }

@@ -754,8 +754,39 @@ void TestLeetCode2972(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3085(void)
+{
+    Logger::WriteMessage("Test Leet Code 3085");
+    LeetCodeTwoPointer leetCode;
+    string word = "aabcaba";
+    int k = 0;
+    int result = leetCode.minimumDeletions(word, k);
+    Logger::WriteMessage("word = " + word + "; k = " + to_string(k)+ "; result = " + to_string(result));
+
+    word = "dabdcbdcdcd";
+    k = 2;
+    result = leetCode.minimumDeletions(word, k);
+    Logger::WriteMessage("word = " + word + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    word = "aaabaaa";
+    k = 1;
+    result = leetCode.minimumDeletions(word, k);
+    Logger::WriteMessage("word = " + word + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    word = "ahahnhahhah";
+    k = 1;
+    result = leetCode.minimumDeletions(word, k);
+    Logger::WriteMessage("word = " + word + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    word = "vvnowvov";
+    k = 2;
+    result = leetCode.minimumDeletions(word, k);
+    Logger::WriteMessage("word = " + word + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode3085();
     TestLeetCode2972();
     TestLeetCode2970();
     TestLeetCode2968();

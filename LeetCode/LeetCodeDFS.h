@@ -698,7 +698,7 @@ public:
     /// <summary>
     /// Leet code #140. Word Break II
     /// </summary>
-    void LeetCodeDFS::wordBreakII(string& s, vector<string>& path, size_t start,
+    void wordBreakII(string& s, vector<string>& path, size_t start,
         vector<vector<bool>>& dp, vector<string>& result);
 
     /// <summary>

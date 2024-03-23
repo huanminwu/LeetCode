@@ -6682,8 +6682,24 @@ void TestLeetCode3047(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3079(void)
+{
+    Logger::WriteMessage("Test Leet Code 3079");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    int result = leetCode.sumOfEncryptedInt(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,21,31 };
+    result = leetCode.sumOfEncryptedInt(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3079();
     TestLeetCode3047();
     TestLeetCode3044();
     TestLeetCode3032();

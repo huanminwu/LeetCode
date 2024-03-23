@@ -14066,6 +14066,117 @@ public:
     /// 4. The sum of the lengths of all words[i] does not exceed 5 * 10^5
     /// </summary>
     long long countPrefixSuffixPairsII(vector<string>& words);
+
+    /// <summary>
+    /// Leet 3076. Shortest Uncommon Substring in an Array
+    ///
+    /// Medium
+    ///
+    /// You are given an array arr of size n consisting of non-empty strings.
+    /// Find a string array answer of size n such that:
+    /// answer[i] is the shortest substring of arr[i] that does not occur as 
+    /// a substring in any other string in arr. If multiple such substrings 
+    /// exist, answer[i] should be the lexicographically smallest. And if no 
+    /// such substring exists, answer[i] should be an empty string.
+    /// Return the array answer.
+    /// 
+    /// Example 1:
+    /// Input: arr = ["cab","ad","bad","c"]
+    /// Output: ["ab","","ba",""]
+    /// Explanation: We have the following:
+    /// - For the string "cab", the shortest substring that does not occur in 
+    ///   any other string is either "ca" or "ab", we choose the 
+    ///   lexicographically smaller substring, which is "ab".
+    /// - For the string "ad", there is no substring that does not occur in 
+    ///   any other string.
+    /// - For the string "bad", the shortest substring that does not occur in 
+    ///   any other string is "ba".
+    /// - For the string "c", there is no substring that does not occur in any 
+    ///   other string.
+    ///
+    /// Example 2:
+    /// Input: arr = ["abc","bcd","abcd"]
+    /// Output: ["","","abcd"]
+    /// Explanation: We have the following:
+    /// - For the string "abc", there is no substring that does not occur in 
+    ///   any other string.
+    /// - For the string "bcd", there is no substring that does not occur in 
+    ///   any other string.
+    /// - For the string "abcd", the shortest substring that does not occur in 
+    ///   any other string is "abcd".
+    ///
+    /// Constraints:
+    /// 1. n == arr.length
+    /// 2. 2 <= n <= 100
+    /// 3. 1 <= arr[i].length <= 20
+    /// 4. arr[i] consists only of lowercase English letters.
+    /// </summary>
+    vector<string> shortestSubstrings(vector<string>& arr);
+
+    /// <summary>
+    /// Leet 3083. Existence of a Substring in a String and Its Reverse
+    ///
+    /// Easy
+    ///
+    /// Given a string s, find any substring of length 2 which is also present 
+    /// in the reverse of s.
+    ///
+    /// Return true if such a substring exists, and false otherwise.
+    /// 
+    /// Example 1:
+    /// Input: s = "leetcode"
+    /// Output: true
+    /// 
+    /// Explanation: Substring "ee" is of length 2 which is also present in 
+    /// reverse(s) == "edocteel".
+    ///
+    /// Example 2:
+    /// Input: s = "abcba"
+    /// Output: true
+    /// 
+    /// Explanation: All of the substrings of length 2 "ab", "bc", "cb", "ba" 
+    /// are also present in reverse(s) == "abcba".
+    ///
+    /// Example 3:
+    /// Input: s = "abcd"
+    /// Output: false
+    /// Explanation: There is no substring of length 2 in s, which is also 
+    /// present in the reverse of s.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s consists only of lowercase English letters.
+    /// </summary>
+    bool isSubstringPresent(string s);
+
+
+    /// <summary>
+    /// Leet 3084. Count Substrings Starting and Ending with Given Character
+    ///
+    /// Medium
+    ///
+    /// You are given a string s and a character c. Return the total number of 
+    /// substrings of s that start and end with c.
+    /// 
+    /// Example 1:
+    /// Input: s = "abada", c = "a"
+    /// Output: 6
+    ///
+    /// Explanation: Substrings starting and ending with "a" are: "abada", 
+    /// "abada", "abada", "abada", "abada", "abada".
+    ///
+    /// Example 2:
+    /// Input: s = "zzz", c = "z"
+    /// Output: 6
+    ///
+    /// Explanation: There are a total of 6 substrings in s and all start 
+    /// and end with "z".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s and c consist only of lowercase English letters.
+    /// </summary>
+    long long countSubstrings(string s, char c);
 #pragma endregion
 };
 
