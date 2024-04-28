@@ -1405,8 +1405,29 @@ void TestLeetCode3049(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3134(void)
+{
+    Logger::WriteMessage("Test Leet Code 3134");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 1,2,3 };
+    int result = leetCode.medianOfUniquenessArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,4,3,4,5 };
+    result = leetCode.medianOfUniquenessArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,3,5,4 };
+    result = leetCode.medianOfUniquenessArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode3134();
     TestLeetCode3048();
     TestLeetCode3049();
     TestLeetCode3007();

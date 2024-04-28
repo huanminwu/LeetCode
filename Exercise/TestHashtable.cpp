@@ -1961,8 +1961,28 @@ void TestLeetCode3046(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode3092(void)
+{
+    Logger::WriteMessage("Test Leet Code 3092");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 2, 3, 2, 1 };
+    vector<int> freq = { 3, 2, -3, 1 };
+    vector<long long> result = leetCode.mostFrequentIDs(nums, freq);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(freq);
+    Logger::WriteMessage(result);
+
+    nums = { 5,5,3 };
+    freq = { 2,-2,1 };
+    result = leetCode.mostFrequentIDs(nums, freq);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(freq);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3092();
     TestLeetCode3046();
     TestLeetCode3020();
     TestLeetCode3016();

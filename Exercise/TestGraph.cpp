@@ -5798,8 +5798,101 @@ void TestLeetCode3067(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3112(void)
+{
+    Logger::WriteMessage("Test Leet Code 3112");
+    LeetCodeGraph leetCode;
+    int n = 3; 
+    vector<vector<int>> edges = { {0, 1, 2},{1, 2, 1},{0, 2, 4} };
+    vector<int> disappear = { 1, 1, 5 };
+    vector<int> result = leetCode.minimumTimeDisappear(n, edges, disappear);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(disappear);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 3;
+    edges = { {0, 1, 2},{1, 2, 1},{0, 2, 4} };
+    disappear = { 1, 3, 5 };
+    result = leetCode.minimumTimeDisappear(n, edges, disappear);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(disappear);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 2; 
+    edges = { {0, 1, 1} };
+    disappear = { 1, 1 };
+    result = leetCode.minimumTimeDisappear(n, edges, disappear);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(disappear);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3108(void)
+{
+    Logger::WriteMessage("Test Leet Code 3108");
+    LeetCodeGraph leetCode;
+    int n = 5;
+    vector<vector<int>> edges = { {0, 1, 7},{1, 3, 7},{1, 2, 1} };
+    vector<vector<int>> query = { {0, 3},{3, 4} };
+    vector<int> result = leetCode.minimumCost(n, edges, query);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(query);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 3;
+    edges = { {0, 2, 7},{0, 1, 15},{1, 2, 6},{1, 2, 1} };
+    query = { {1, 2} };
+    result = leetCode.minimumCost(n, edges, query);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(query);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 8;
+    edges =
+    {
+        {2, 6, 7},{0, 3, 1},{7, 6, 6},{0, 5, 4},{0, 6, 7},
+        {4, 2, 4},{0, 5, 1},{5, 7, 8},{3, 1, 3}
+    };
+    query = { {6,5},{2,4},{5,7},{2,7},{3,7},{3,7},{7,0} };
+    result = leetCode.minimumCost(n, edges, query);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(query);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3123(void)
+{
+    Logger::WriteMessage("Test Leet Code 3123");
+    LeetCodeGraph leetCode;
+    int n = 6;
+    vector<vector<int>> edges = 
+    { 
+        {0, 1, 4},{0, 2, 1},{1, 3, 2},{1, 4, 3},{1, 5, 1},{2, 3, 1},{3, 5, 3},{4, 5, 2} 
+    };
+    vector<bool> result = leetCode.findAnswer(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 4;
+    edges = { {2, 0, 1},{0, 1, 1},{0, 3, 4},{3, 2, 2} };
+    result = leetCode.findAnswer(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3123();
+    TestLeetCode3108();
+    TestLeetCode3112();
     TestLeetCode3067();
     TestLeetCode1219();
     TestLeetCode3015();

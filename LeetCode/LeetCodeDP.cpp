@@ -17535,5 +17535,337 @@ long long LeetCodeDP::maximumStrength(vector<int>& nums, int k)
     }
     return dp[k - 1][nums.size() - 1];
 }
+
+/// <summary>
+/// LeetCode 3122. Minimum Number of Operations to Satisfy Conditions
+///                
+/// Medium
+///
+/// You are given a 2D matrix grid of size m x n. In one operation, you 
+/// can change the value of any cell to any non-negative number. You need 
+/// to perform some operations such that each cell grid[i][j] is:
+///
+/// Equal to the cell below it, i.e. grid[i][j] == grid[i + 1][j] (if it 
+/// exists).
+/// Different from the cell to its right, i.e. 
+/// grid[i][j] != grid[i][j + 1] (if it exists).
+/// Return the minimum number of operations needed.
+/// 
+/// Example 1:
+/// Input: grid = [[1,0,2],[1,0,2]]
+/// Output: 0
+/// Explanation:
+/// All the cells in the matrix already satisfy the properties.
+///
+/// Example 2:
+/// Input: grid = [[1,1,1],[0,0,0]]
+/// Output: 3
+/// Explanation:
+/// The matrix becomes [[1,0,1],[1,0,1]] which satisfies the properties, 
+/// by doing these 3 operations:
+///
+/// Change grid[1][0] to 1.
+/// Change grid[0][1] to 0.
+/// Change grid[1][2] to 1.
+/// Example 3:
+/// Input: grid = [[1],[2],[3]]
+/// Output: 2
+/// Explanation:
+/// There is a single column. We can change the value to 1 in each cell 
+/// using 2 operations.
+/// 
+/// Constraints:
+/// 1. 1 <= n, m <= 1000
+/// 2. 0 <= grid[i][j] <= 9
+/// </summary>
+int LeetCodeDP::minimumOperationsGrid(vector<vector<int>>& grid)
+{
+    vector<int> prev(10);
+    for (size_t i = 0; i < grid[0].size(); i++)
+    {
+        vector<int> frequency(10);
+        for (size_t j = 0; j < grid.size(); j++)
+        {
+            frequency[grid[j][i]]++;
+        }
+        vector<int> dp(10);
+        for (int j = 0; j < 10; j++)
+        {
+            dp[j] = INT_MAX;
+            for (int k = 0; k < 10; k++)
+            {
+                if (j == k) continue;
+                dp[j] = min(dp[j], prev[k]);
+            }
+            dp[j] += grid.size() - frequency[j];
+        }
+        prev = dp;
+    }
+    int result = INT_MAX;
+    for (int i = 0; i < 10; i++)
+    {
+        result = min(result, prev[i]);
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3117. Minimum Sum of Values by Dividing Array
+/// </summary>
+int LeetCodeDP::minimumValueSum(vector<int>& nums, vector<int>& andValues, int numIndex, int andIndex,
+    int value, vector<vector<unordered_map<int, int>>>& cache)
+{
+    if (numIndex == nums.size() && andIndex == andValues.size())
+    {
+        return 0;
+    }
+    else if (numIndex == nums.size()) return INT_MAX;
+    else if (andIndex == andValues.size()) return INT_MAX;
+    // return cache
+    value &= nums[numIndex];
+    if (cache[numIndex][andIndex].count(value) > 0) return cache[numIndex][andIndex][value];
+    // test bit
+    for (int i = 0; i < 20; i++)
+    {
+        int bit = (1 << i);
+        if (((bit & value) == 0) && ((bit & andValues[andIndex]) != 0))
+        {
+            return INT_MAX;
+        }
+    }
+    int result = INT_MAX;
+    if (value == andValues[andIndex])
+    {
+        result = minimumValueSum(nums, andValues, numIndex + 1, andIndex + 1,
+            ((1 << 20) - 1), cache);
+        result = result == INT_MAX ? result : result + nums[numIndex];
+    }
+    result = min(result, minimumValueSum(nums, andValues, numIndex + 1, andIndex,
+        value, cache));
+    
+    cache[numIndex][andIndex][value] = result;
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3117. Minimum Sum of Values by Dividing Array
+///                
+/// Hard
+///
+/// You are given two arrays nums and andValues of length n and m 
+/// respectively.
+///
+/// The value of an array is equal to the last element of that array.
+///
+/// You have to divide nums into m disjoint contiguous subarrays such 
+/// that for the ith subarray [li, ri], the bitwise AND of the subarray 
+/// elements is equal to andValues[i], in other words, 
+/// nums[li] & nums[li + 1] & ... & nums[ri] == andValues[i] for 
+/// all 1 <= i <= m, where & represents the bitwise AND operator.
+///
+/// Return the minimum possible sum of the values of the m subarrays 
+/// nums is divided into. If it is not possible to divide nums into m 
+/// subarrays satisfying these conditions, return -1.
+///
+/// Example 1:
+/// Input: nums = [1,4,3,3,2], andValues = [0,3,3,2]
+/// Output: 12
+/// Explanation:
+/// The only possible way to divide nums is:
+/// [1,4] as 1 & 4 == 0.
+/// [3] as the bitwise AND of a single element subarray is that element 
+/// itself.
+/// [3] as the bitwise AND of a single element subarray is that element 
+/// itself.
+/// [2] as the bitwise AND of a single element subarray is that element 
+/// itself.
+/// The sum of the values for these subarrays is 4 + 3 + 3 + 2 = 12.
+///
+/// Example 2:
+/// Input: nums = [2,3,5,7,7,7,5], andValues = [0,7,5]
+/// Output: 17
+/// Explanation:
+/// There are three ways to divide nums:
+/// [[2,3,5],[7,7,7],[5]] with the sum of the values 5 + 7 + 5 == 17.
+/// [[2,3,5,7],[7,7],[5]] with the sum of the values 7 + 7 + 5 == 19.
+/// [[2,3,5,7,7],[7],[5]] with the sum of the values 7 + 7 + 5 == 19.
+/// The minimum possible sum of the values is 17.
+///
+/// Example 3:
+/// Input: nums = [1,2,3,4], andValues = [2]
+/// Output: -1
+/// Explanation:
+/// The bitwise AND of the entire array nums is 0. As there is no 
+/// possible way to divide nums into a single subarray to have the 
+/// bitwise AND of elements 2, return -1.
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 10^4
+/// 2. 1 <= m == andValues.length <= min(n, 10)
+/// 3. 1 <= nums[i] < 10^5
+/// 4. 0 <= andValues[j] < 10^5
+/// </summary>
+int LeetCodeDP::minimumValueSum(vector<int>& nums, vector<int>& andValues)
+{
+    int n = nums.size();
+    int m = andValues.size();
+    vector<vector<unordered_map<int, int>>> cache(n, 
+        vector<unordered_map<int, int>>(andValues.size()));
+    int result = minimumValueSum(nums, andValues, 0, 0, nums[0], cache);
+    result = (result == INT_MAX) ? -1 : result;
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3129. Find All Possible Stable Binary Arrays I
+///                
+/// Medium
+///
+/// You are given 3 positive integers zero, one, and limit.
+/// A binary array arr is called stable if:
+///
+/// The number of occurrences of 0 in arr is exactly zero.
+/// The number of occurrences of 1 in arr is exactly one.
+/// Each subarray of arr with a size greater than limit must contain 
+/// both 0 and 1.
+/// Return the total number of stable binary arrays.
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: zero = 1, one = 1, limit = 2
+/// Output: 2
+/// Explanation:
+/// The two possible stable binary arrays are [1,0] and [0,1], as both 
+/// arrays have a single 0 and a single 1, and no subarray has a length 
+/// greater than 2.
+///
+/// Example 2:
+/// Input: zero = 1, one = 2, limit = 1
+/// Output: 1
+/// Explanation:
+/// The only possible stable binary array is [1,0,1].
+/// Note that the binary arrays [1,1,0] and [0,1,1] have subarrays of 
+/// length 2 with identical elements, hence, they are not stable.
+///
+/// Example 3:
+/// Input: zero = 3, one = 3, limit = 2
+/// Output: 14
+/// Explanation:
+/// All the possible stable binary arrays are [0,0,1,0,1,1], 
+/// [0,0,1,1,0,1], [0,1,0,0,1,1], [0,1,0,1,0,1], [0,1,0,1,1,0], 
+/// [0,1,1,0,0,1], [0,1,1,0,1,0], [1,0,0,1,0,1], [1,0,0,1,1,0], 
+/// [1,0,1,0,0,1], [1,0,1,0,1,0], [1,0,1,1,0,0], [1,1,0,0,1,0], 
+/// and [1,1,0,1,0,0].
+///
+/// Constraints:
+/// 1. 1 <= zero, one, limit <= 200
+/// </summary>
+int LeetCodeDP::numberOfStableArraysI(int zero, int one, int limit)
+{
+    vector <vector<pair<long long, long long>>> dp(zero+1, vector<pair<long long, long long>>(one+1));
+    long long M = 1000000007;
+
+    for (int i = 0; i < zero+1; i++)
+    {
+        for (int j = 0; j < one+1; j++)
+        {
+            if (i == 0 && j == 0)
+            {
+                dp[i][j].first = 0;
+                dp[i][j].second = 0;
+            }
+            else if (i == 0)
+            {
+                if (j <= limit) dp[i][j].second = 1;
+            }
+            else if (j == 0)
+            {
+                if (i <= limit) dp[i][j].first = 1;
+            }
+            else
+            {
+                dp[i][j].first = (dp[i - 1][j].first + dp[i - 1][j].second) % M;
+                dp[i][j].second = (dp[i][j - 1].first + dp[i][j - 1].second) % M;
+                if (i > limit) dp[i][j].first = (dp[i][j].first + M - dp[i - limit - 1][j].second) % M;
+                if (j > limit) dp[i][j].second = (dp[i][j].second + M - dp[i][j - limit - 1].first) % M;
+            }
+        }
+    }
+    int result = (int)(dp[zero][one].first + dp[zero][one].second) % M;
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3130. Find All Possible Stable Binary Arrays II
+///                
+/// Hard
+///
+/// You are given 3 positive integers zero, one, and limit.
+/// A binary array arr is called stable if:
+/// The number of occurrences of 0 in arr is exactly zero.
+/// The number of occurrences of 1 in arr is exactly one.
+/// Each subarray of arr with a size greater than limit must contain 
+/// both 0 and 1.
+/// Return the total number of stable binary arrays.
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+/// 
+/// Example 1:
+/// Input: zero = 1, one = 1, limit = 2
+/// Output: 2
+/// Explanation:
+/// The two possible stable binary arrays are [1,0] and [0,1].
+///
+/// Example 2:
+/// Input: zero = 1, one = 2, limit = 1
+/// Output: 1
+/// Explanation:
+/// The only possible stable binary array is [1,0,1].
+///
+/// Example 3:
+/// Input: zero = 3, one = 3, limit = 2
+/// Output: 14
+/// Explanation:
+/// All the possible stable binary arrays are [0,0,1,0,1,1], [0,0,1,1,0,1],
+/// [0,1,0,0,1,1], [0,1,0,1,0,1], [0,1,0,1,1,0], [0,1,1,0,0,1], 
+/// [0,1,1,0,1,0], [1,0,0,1,0,1], [1,0,0,1,1,0], [1,0,1,0,0,1], 
+/// [1,0,1,0,1,0], [1,0,1,1,0,0], [1,1,0,0,1,0], and [1,1,0,1,0,0].
+///
+/// Constraints:
+/// 1. 1 <= zero, one, limit <= 1000
+/// </summary>
+int LeetCodeDP::numberOfStableArraysII(int zero, int one, int limit)
+{
+    vector <vector<pair<long long, long long>>> dp(zero + 1, vector<pair<long long, long long>>(one + 1));
+    long long M = 1000000007;
+
+    for (int i = 0; i < zero + 1; i++)
+    {
+        for (int j = 0; j < one + 1; j++)
+        {
+            if (i == 0 && j == 0)
+            {
+                dp[i][j].first = 0;
+                dp[i][j].second = 0;
+            }
+            else if (i == 0)
+            {
+                if (j <= limit) dp[i][j].second = 1;
+            }
+            else if (j == 0)
+            {
+                if (i <= limit) dp[i][j].first = 1;
+            }
+            else
+            {
+                dp[i][j].first = (dp[i - 1][j].first + dp[i - 1][j].second) % M;
+                dp[i][j].second = (dp[i][j - 1].first + dp[i][j - 1].second) % M;
+                if (i > limit) dp[i][j].first = (dp[i][j].first + M - dp[i - limit - 1][j].second) % M;
+                if (j > limit) dp[i][j].second = (dp[i][j].second + M - dp[i][j - limit - 1].first) % M;
+            }
+        }
+    }
+    int result = (int)(dp[zero][one].first + dp[zero][one].second) % M;
+    return result;
+}
 #pragma endregion
 

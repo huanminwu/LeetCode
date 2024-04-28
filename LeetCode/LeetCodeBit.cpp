@@ -4181,4 +4181,391 @@ int LeetCodeBit::minOrAfterOperations(vector<int>& nums, int k)
     }
     return result ^ ((size_t)(1 << 31) - 1);
 }
+
+/// <summary>
+/// Leet 3095. Shortest Subarray With OR at Least K I
+///
+/// Easy
+///
+/// You are given an array nums of non-negative integers and an integer k.
+///
+/// An array is called special if the bitwise OR of all of its elements 
+/// is at least k.
+/// Return the length of the shortest special non-empty subarray of nums, 
+/// or return -1 if no special subarray exists.
+///
+/// Example 1:
+/// Input: nums = [1,2,3], k = 2
+/// Output: 1
+/// Explanation:
+/// The subarray [3] has OR value of 3. Hence, we return 1.
+///
+/// Example 2:
+/// Input: nums = [2,1,8], k = 10
+/// Output: 3
+/// Explanation:
+/// The subarray [2,1,8] has OR value of 11. Hence, we return 3.
+///
+/// Example 3:
+/// Input: nums = [1,2], k = 0
+/// Output: 1
+/// Explanation:
+/// The subarray [1] has OR value of 1. Hence, we return 1.
+///  
+/// Constraints:
+/// 1. 1 <= nums.length <= 50
+/// 2. 0 <= nums[i] <= 50
+/// 3. 0 <= k < 64
+/// </summary>
+int LeetCodeBit::minimumSubarrayLengthI(vector<int>& nums, int k)
+{
+    int result = INT_MAX;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int sum = 0;
+        for (int j = i; j >= 0; j--)
+        {
+            sum = sum | nums[j];
+            if (sum >= k)
+            {
+                result = min(result, (int)i - j + 1);
+                break;
+            }
+        }
+    }
+    return (result == INT_MAX) ? -1 : result;
+}
+
+/// <summary>
+/// Leet 3064. Guess the Number Using Bitwise Questions I
+///
+/// Medium
+///
+/// There is a number n that you have to find.
+///
+/// There is also a pre-defined API int commonSetBits(int num), which 
+/// returns the number of bits where both n and num are 1 in that position 
+/// of their binary representation. In other words, it returns the number 
+/// of set bits in n & num, where & is the bitwise AND operator.
+/// 
+/// Return the number n.
+///
+/// Example 1:
+/// Input: n = 31
+/// Output: 31
+/// Explanation: It can be proven that it's possible to find 31 using the 
+/// provided API.
+///
+/// Example 2:
+/// Input: n = 33
+/// Output: 33
+/// Explanation: It can be proven that it's possible to find 33 using 
+/// the provided API.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 2^30 - 1
+/// 2. 0 <= num <= 2^30 - 1
+/// 3. If you ask for some num out of the given range, the output wouldn't 
+///    be reliable.
+/// </summary>
+int LeetCodeBit::findNumberI(int n)
+{
+    struct CommonBits
+    {
+        int num;
+        CommonBits(int n)
+        {
+            num = n;
+        }
+        int Test(int n)
+        {
+            int result = 0;
+            int k = num & n;
+            for (size_t i = 0; i < 30; i++)
+            {
+                int bit = 1 << i;
+                if ((k & bit) != 0)
+                {
+                    result++;
+                }
+            }
+            return result;
+        }
+    };
+    CommonBits bit_set(n);
+    int result = 0;
+    for (size_t i = 0; i < 30; i++)
+    {
+        int bit = 1 << i;
+        if (bit_set.Test(bit) != 0)
+        {
+            result |= bit;
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet 3094. Guess the Number Using Bitwise Questions II
+///
+/// Medium
+///
+/// There is a number n that you have to find.
+///
+/// There is a number n between 0 and 23^0 - 1 (both inclusive) that you 
+/// have to find.
+///
+/// There is a pre-defined API int commonBits(int num) that helps you with 
+/// your mission. But here is the challenge, every time you call this 
+/// function, n changes in some way. But keep in mind, that you have to 
+/// find the initial value of n.
+///
+/// commonBits(int num) acts as follows:
+/// Calculate count which is the number of bits where both n and num have 
+/// the same value in that position of their binary representation.
+/// n = n XOR num
+/// Return count.
+/// Return the number n.
+///
+/// Note: In this world, all numbers are between 0 and 2^30 - 1 (both 
+/// inclusive), thus for counting common bits, we see only the first 30 
+/// bits of those numbers.
+///
+/// Example 1:
+/// Input: n = 31
+/// Output: 31
+///
+/// Explanation: It can be proven that it's possible to find 31 using the 
+/// provided API.
+///
+/// Example 2:
+/// Input: n = 33
+/// Output: 33
+/// Explanation: It can be proven that it's possible to find 33 using the 
+/// provided API.
+///
+/// Constraints:
+/// 1. 0 <= n <= 2^30 - 1
+/// 2. 0 <= num <= 2^30 - 1
+/// 3. If you ask for some num out of the given range, the output wouldn't 
+///    be reliable.
+/// </summary>
+int LeetCodeBit::findNumberII(int n)
+{
+    struct CommonBits
+    {
+        int num;
+        CommonBits(int n)
+        {
+            num = n;
+        }
+        int Test(int n)
+        {
+            int result = 0;
+            for (size_t i = 0; i < 30; i++)
+            {
+                int bit = 1 << i;
+                if ((n & bit) == (num & bit))
+                {
+                    result++;
+                }
+            }
+            num = num ^ n;
+            return result;
+        }
+    };
+    CommonBits bit_set(n);
+    int result = 0;
+    for (size_t i = 0; i < 30; i++)
+    {
+        int bit = 1 << i;
+        int count1 = bit_set.Test(bit);
+        int count2 = bit_set.Test(bit);
+        if (count1 > count2)
+        {
+            result |= bit;
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet 3097. Shortest Subarray With OR at Least K II
+///
+/// Medium
+///
+/// There is a number n that you have to find.
+///
+/// You are given an array nums of non-negative integers and an integer k.
+///
+/// An array is called special if the bitwise OR of all of its elements 
+/// is at least k.
+///
+/// Return the length of the shortest special non-empty subarray of nums, 
+/// or return -1 if no special subarray exists.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,3], k = 2
+/// Output: 1
+/// Explanation:
+/// The subarray [3] has OR value of 3. Hence, we return 1.
+///
+/// Example 2:
+/// Input: nums = [2,1,8], k = 10
+/// Output: 3
+/// Explanation:
+/// The subarray [2,1,8] has OR value of 11. Hence, we return 3.
+///
+/// Example 3:
+/// Input: nums = [1,2], k = 0
+/// Output: 1
+/// Explanation:
+/// The subarray [1] has OR value of 1. Hence, we return 1.
+/// Constraints:
+/// 1. 1 <= nums.length <= 2 * 10^5
+/// 2. 0 <= nums[i] <= 10^9
+/// 3. 0 <= k <= 10^9
+/// </summary>
+int LeetCodeBit::minimumSubarrayLengthII(vector<int>& nums, int k)
+{
+    vector<int> bits(31, INT_MAX);
+    int result = INT_MAX;
+    if (k == 0) return 1;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (int j = 0; j < 31; j++)
+        {
+            int bit = 1 << j;
+            if ((nums[i] & bit) != 0)
+            {
+                bits[j] = i;
+            }
+        }
+        int k_dist = 0;
+        int k_bits = 0;
+        for (int j = 30; j >= 0; j--)
+        {
+            if (bits[j] == INT_MAX) continue;
+            int bit = 1 << j;
+            int dist = max(k_dist, (int)i - bits[j] + 1);
+            if ((k_bits | bit) >= k)
+            {
+                result = min(result, dist);
+            }
+            if ((k & bit) != 0)
+            {
+                k_bits = k_bits | bit;
+                k_dist = dist;
+            }
+        }
+    }
+    return result == INT_MAX ? -1 : result;
+}
+
+/// <summary>
+/// LeetCode 3125. Maximum Number That Makes Result of Bitwise AND Zero
+///                
+/// Medium
+///
+/// Given an integer n, return the maximum integer x such that x <= n, and 
+/// the bitwise AND of all the numbers in the range [x, n] is 0.
+/// 
+/// Example 1:
+/// Input: n = 7
+/// Output: 3
+/// Explanation:
+/// The bitwise AND of [6, 7] is 6.
+/// The bitwise AND of [5, 6, 7] is 4.
+/// The bitwise AND of [4, 5, 6, 7] is 4.
+/// The bitwise AND of [3, 4, 5, 6, 7] is 0.
+///
+/// Example 2:
+/// Input: n = 9
+/// Output: 7
+/// Explanation:
+/// The bitwise AND of [7, 8, 9] is 0.
+///
+/// Example 3:
+/// Input: n = 17
+/// Output: 15
+/// Explanation:
+/// The bitwise AND of [15, 16, 17] is 0.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 10^15
+/// </summary>
+long long LeetCodeBit::maxNumber(long long n)
+{
+    long long result = ((long long)1 << 62);
+    while ((result & n) == 0)
+    {
+        result = result >> 1;
+    }
+    result = result - 1;
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3133. Minimum Array End
+///                
+/// Medium
+///
+/// You are given two integers n and x. You have to construct an array of 
+/// positive integers nums of size n where for every 0 <= i < n - 1, 
+/// nums[i + 1] is greater than nums[i], and the result of the bitwise 
+/// AND operation between all elements of nums is x.
+///
+/// Return the minimum possible value of nums[n - 1].
+///
+/// Example 1:
+/// Input: n = 3, x = 4
+/// Output: 6
+/// Explanation:
+/// nums can be [4,5,6] and its last element is 6.
+///
+/// Example 2:
+/// Input: n = 2, x = 7
+/// Output: 15
+/// Explanation:
+/// nums can be [7,15] and its last element is 15.
+/// 
+/// Constraints:
+/// 1. 1 <= n, x <= 10^8
+/// </summary>
+long long LeetCodeBit::minEnd(int n, int x)
+{
+    int m = 1;
+    long long bit = 1;
+    n--;
+    for (int i = 0; i < 63; i++)
+    {
+        bit = 1LL << i;
+        if ((bit & (long long)x) == 0)
+        {
+            m *= 2;
+            if (m > n && bit > (long long)x) break;
+        }
+    }
+    long long result = 0;
+    while (bit > 0)
+    {
+        if ((bit & (long long)x) == 0)
+        {
+            if (m / 2 <= n)
+            {
+                result |= bit;
+                n -= m / 2;
+            }
+            m /= 2;
+        }
+        else
+        {
+            result |= bit;
+        }
+        bit >>= 1;
+    }
+    return result;
+}
 #pragma endregion

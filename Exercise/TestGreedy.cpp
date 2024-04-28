@@ -1803,8 +1803,26 @@ void TestLeetCode3081(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode3088(void)
+{
+    Logger::WriteMessage("Test Leet Code 3088");
+    LeetCodeGreedy leetCode;
+    string s = "abca";
+    string result = leetCode.makeAntiPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "abba";
+    result = leetCode.makeAntiPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "cccd";
+    result = leetCode.makeAntiPalindrome(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode3088();
     TestLeetCode3081();
     TestLeetCode3009();
     TestLeetCode2848();

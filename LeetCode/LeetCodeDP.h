@@ -9790,5 +9790,202 @@ public:
     /// 5. k is odd.
     /// </summary>
     long long maximumStrength(vector<int>& nums, int k);
+
+    /// <summary>
+    /// LeetCode 3122. Minimum Number of Operations to Satisfy Conditions
+    ///                
+    /// Medium
+    ///
+    /// You are given a 2D matrix grid of size m x n. In one operation, you 
+    /// can change the value of any cell to any non-negative number. You need 
+    /// to perform some operations such that each cell grid[i][j] is:
+    ///
+    /// Equal to the cell below it, i.e. grid[i][j] == grid[i + 1][j] (if it 
+    /// exists).
+    /// Different from the cell to its right, i.e. 
+    /// grid[i][j] != grid[i][j + 1] (if it exists).
+    /// Return the minimum number of operations needed.
+    /// 
+    /// Example 1:
+    /// Input: grid = [[1,0,2],[1,0,2]]
+    /// Output: 0
+    /// Explanation:
+    /// All the cells in the matrix already satisfy the properties.
+    ///
+    /// Example 2:
+    /// Input: grid = [[1,1,1],[0,0,0]]
+    /// Output: 3
+    /// Explanation:
+    /// The matrix becomes [[1,0,1],[1,0,1]] which satisfies the properties, 
+    /// by doing these 3 operations:
+    ///
+    /// Change grid[1][0] to 1.
+    /// Change grid[0][1] to 0.
+    /// Change grid[1][2] to 1.
+    /// Example 3:
+    /// Input: grid = [[1],[2],[3]]
+    /// Output: 2
+    /// Explanation:
+    /// There is a single column. We can change the value to 1 in each cell 
+    /// using 2 operations.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n, m <= 1000
+    /// 2. 0 <= grid[i][j] <= 9
+    /// </summary>
+    int minimumOperationsGrid(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// LeetCode 3117. Minimum Sum of Values by Dividing Array
+    /// </summary>
+    int minimumValueSum(vector<int>& nums, vector<int>& andValues, int numIndex, int andIndex, 
+        int value, vector<vector<unordered_map<int, int>>> &cache);
+
+
+    /// <summary>
+    /// LeetCode 3117. Minimum Sum of Values by Dividing Array
+    ///                
+    /// Hard
+    ///
+    /// You are given two arrays nums and andValues of length n and m 
+    /// respectively.
+    ///
+    /// The value of an array is equal to the last element of that array.
+    ///
+    /// You have to divide nums into m disjoint contiguous subarrays such 
+    /// that for the ith subarray [li, ri], the bitwise AND of the subarray 
+    /// elements is equal to andValues[i], in other words, 
+    /// nums[li] & nums[li + 1] & ... & nums[ri] == andValues[i] for 
+    /// all 1 <= i <= m, where & represents the bitwise AND operator.
+    ///
+    /// Return the minimum possible sum of the values of the m subarrays 
+    /// nums is divided into. If it is not possible to divide nums into m 
+    /// subarrays satisfying these conditions, return -1.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,4,3,3,2], andValues = [0,3,3,2]
+    /// Output: 12
+    /// Explanation:
+    /// The only possible way to divide nums is:
+    /// [1,4] as 1 & 4 == 0.
+    /// [3] as the bitwise AND of a single element subarray is that element 
+    /// itself.
+    /// [3] as the bitwise AND of a single element subarray is that element 
+    /// itself.
+    /// [2] as the bitwise AND of a single element subarray is that element 
+    /// itself.
+    /// The sum of the values for these subarrays is 4 + 3 + 3 + 2 = 12.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,3,5,7,7,7,5], andValues = [0,7,5]
+    /// Output: 17
+    /// Explanation:
+    /// There are three ways to divide nums:
+    /// [[2,3,5],[7,7,7],[5]] with the sum of the values 5 + 7 + 5 == 17.
+    /// [[2,3,5,7],[7,7],[5]] with the sum of the values 7 + 7 + 5 == 19.
+    /// [[2,3,5,7,7],[7],[5]] with the sum of the values 7 + 7 + 5 == 19.
+    /// The minimum possible sum of the values is 17.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,3,4], andValues = [2]
+    /// Output: -1
+    /// Explanation:
+    /// The bitwise AND of the entire array nums is 0. As there is no 
+    /// possible way to divide nums into a single subarray to have the 
+    /// bitwise AND of elements 2, return -1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 10^4
+    /// 2. 1 <= m == andValues.length <= min(n, 10)
+    /// 3. 1 <= nums[i] < 10^5
+    /// 4. 0 <= andValues[j] < 10^5
+    /// </summary>
+    int minimumValueSum(vector<int>& nums, vector<int>& andValues);
+
+    /// <summary>
+    /// LeetCode 3129. Find All Possible Stable Binary Arrays I
+    ///                
+    /// Medium
+    ///
+    /// You are given 3 positive integers zero, one, and limit.
+    /// A binary array arr is called stable if:
+    ///
+    /// The number of occurrences of 0 in arr is exactly zero.
+    /// The number of occurrences of 1 in arr is exactly one.
+    /// Each subarray of arr with a size greater than limit must contain 
+    /// both 0 and 1.
+    /// Return the total number of stable binary arrays.
+    /// Since the answer may be very large, return it modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: zero = 1, one = 1, limit = 2
+    /// Output: 2
+    /// Explanation:
+    /// The two possible stable binary arrays are [1,0] and [0,1], as both 
+    /// arrays have a single 0 and a single 1, and no subarray has a length 
+    /// greater than 2.
+    ///
+    /// Example 2:
+    /// Input: zero = 1, one = 2, limit = 1
+    /// Output: 1
+    /// Explanation:
+    /// The only possible stable binary array is [1,0,1].
+    /// Note that the binary arrays [1,1,0] and [0,1,1] have subarrays of 
+    /// length 2 with identical elements, hence, they are not stable.
+    ///
+    /// Example 3:
+    /// Input: zero = 3, one = 3, limit = 2
+    /// Output: 14
+    /// Explanation:
+    /// All the possible stable binary arrays are [0,0,1,0,1,1], 
+    /// [0,0,1,1,0,1], [0,1,0,0,1,1], [0,1,0,1,0,1], [0,1,0,1,1,0], 
+    /// [0,1,1,0,0,1], [0,1,1,0,1,0], [1,0,0,1,0,1], [1,0,0,1,1,0], 
+    /// [1,0,1,0,0,1], [1,0,1,0,1,0], [1,0,1,1,0,0], [1,1,0,0,1,0], 
+    /// and [1,1,0,1,0,0].
+    ///
+    /// Constraints:
+    /// 1. 1 <= zero, one, limit <= 200
+    /// </summary>
+    int numberOfStableArraysI(int zero, int one, int limit);
+
+    /// <summary>
+    /// LeetCode 3130. Find All Possible Stable Binary Arrays II
+    ///                
+    /// Hard
+    ///
+    /// You are given 3 positive integers zero, one, and limit.
+    /// A binary array arr is called stable if:
+    /// The number of occurrences of 0 in arr is exactly zero.
+    /// The number of occurrences of 1 in arr is exactly one.
+    /// Each subarray of arr with a size greater than limit must contain 
+    /// both 0 and 1.
+    /// Return the total number of stable binary arrays.
+    /// Since the answer may be very large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: zero = 1, one = 1, limit = 2
+    /// Output: 2
+    /// Explanation:
+    /// The two possible stable binary arrays are [1,0] and [0,1].
+    ///
+    /// Example 2:
+    /// Input: zero = 1, one = 2, limit = 1
+    /// Output: 1
+    /// Explanation:
+    /// The only possible stable binary array is [1,0,1].
+    ///
+    /// Example 3:
+    /// Input: zero = 3, one = 3, limit = 2
+    /// Output: 14
+    /// Explanation:
+    /// All the possible stable binary arrays are [0,0,1,0,1,1], [0,0,1,1,0,1],
+    /// [0,1,0,0,1,1], [0,1,0,1,0,1], [0,1,0,1,1,0], [0,1,1,0,0,1], 
+    /// [0,1,1,0,1,0], [1,0,0,1,0,1], [1,0,0,1,1,0], [1,0,1,0,0,1], 
+    /// [1,0,1,0,1,0], [1,0,1,1,0,0], [1,1,0,0,1,0], and [1,1,0,1,0,0].
+    ///
+    /// Constraints:
+    /// 1. 1 <= zero, one, limit <= 1000
+    /// </summary>
+    int numberOfStableArraysII(int zero, int one, int limit);
 };
 #endif  // LeetCodeDP

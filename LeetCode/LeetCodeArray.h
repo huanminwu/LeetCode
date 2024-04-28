@@ -20243,5 +20243,366 @@ public:
     /// 5. maxChanges + sum(nums) >= k
     /// </summary>
     long long minimumMoves(vector<int>& nums, int k, int maxChanges);
+
+    /// <summary>
+    /// Leet 3101. Count Alternating Subarrays
+    ///
+    /// Medium
+    ///
+    /// You are given a binary array nums. 
+    /// We call a subarray alternating if no two adjacent elements in the 
+    /// subarray have the same value.
+    ///
+    /// Return the number of alternating subarrays in nums.
+    /// 
+    /// Example 1:
+    /// Input: nums = [0,1,1,1]
+    /// Output: 5
+    /// Explanation:
+    /// The following subarrays are alternating: [0], [1], [1], [1], and [0,1].
+    ///
+    /// Example 2:
+    /// Input: nums = [1,0,1,0]
+    /// Output: 10
+    /// Explanation:
+    /// Every subarray of the array is alternating. There are 10 possible 
+    /// subarrays that we can choose.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. nums[i] is either 0 or 1.
+    /// </summary>
+    long long countAlternatingSubarrays(vector<int>& nums);
+
+
+    /// <summary>
+    /// Leet 3096. Minimum Levels to Gain More Points
+    ///
+    /// Medium
+    ///
+    /// You are given a binary array possible of length n.
+    ///
+    /// Danielchandg and Bob are playing a game that consists of n levels. 
+    /// Some of the levels in the game are impossible to clear while others 
+    /// can always be cleared. In particular, if possible[i] == 0, then the 
+    /// ith level is impossible to clear for both the players. A player 
+    /// gains 1 point on clearing a level and loses 1 point if the player 
+    /// fails to clear it.
+    ///
+    /// At the start of the game, Danielchandg will play some levels in the 
+    /// given order starting from the 0th level, after which Bob will play 
+    /// for the rest of the levels.
+    ///
+    /// Danielchandg wants to know the minimum number of levels he should 
+    /// play to gain more points than Bob, if both players play optimally 
+    /// to maximize their points.
+    ///
+    /// Return the minimum number of levels danielchandg should play to 
+    /// gain more points. If this is not possible, return -1.
+    ///
+    /// Note that each player must play at least 1 level.
+    /// 
+    /// Example 1:
+    /// Input: possible = [1,0,1,0]
+    /// Output: 1
+    ///
+    /// Explanation:
+    /// Let's look at all the levels that Danielchandg can play up to:
+    ///
+    /// If Danielchandg plays only level 0 and Bob plays the rest of the 
+    /// levels, Danielchandg has 1 point, while Bob has -1 + 1 - 1 = -1 point.
+    /// If Danielchandg plays till level 1 and Bob plays the rest of the 
+    /// levels, Danielchandg has 1 - 1 = 0 points, while Bob has 1 - 1 = 0 
+    /// points.
+    /// If Danielchandg plays till level 2 and Bob plays the rest of the 
+    /// levels, Danielchandg has 1 - 1 + 1 = 1 point, while Bob has -1 point.
+    /// Danielchandg must play a minimum of 1 level to gain more points.
+    ///
+    /// Example 2:
+    /// Input: possible = [1,1,1,1,1]
+    /// Output: 3 
+    ///
+    /// Explanation:
+    /// Let's look at all the levels that Danielchandg can play up to:
+    /// If Danielchandg plays only level 0 and Bob plays the rest of the 
+    /// levels, Danielchandg has 1 point, while Bob has 4 points.
+    /// If Danielchandg plays till level 1 and Bob plays the rest of the 
+    /// levels, Danielchandg has 2 points, while Bob has 3 points.
+    /// If Danielchandg plays till level 2 and Bob plays the rest of the 
+    /// levels, Danielchandg has 3 points, while Bob has 2 points.
+    /// If Danielchandg plays till level 3 and Bob plays the rest of the 
+    ///  levels, Danielchandg has 4 points, while Bob has 1 point.
+    /// Danielchandg must play a minimum of 3 levels to gain more points.
+    ///
+    /// Example 3:
+    /// Input: possible = [0,0]
+    /// Output: -1
+    /// Explanation:
+    /// The only possible way is for both players to play 1 level each. 
+    /// Danielchandg plays level 0 and loses 1 point. Bob plays level 1 and 
+    /// loses 1 point. As both players have equal points, Danielchandg can't 
+    /// gain more points than Bob.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n == possible.length <= 10^5
+    /// 2. possible[i] is either 0 or 1.
+    /// </summary>
+    int minimumLevels(vector<int>& possible);
+
+    /// <summary>
+    /// Leet 3105. Longest Strictly Increasing or Strictly Decreasing Subarray
+    ///
+    /// Easy
+    ///
+    /// You are given an array of integers nums. Return the length of the 
+    /// longest subarray of nums which is either strictly increasing or
+    /// strictly decreasing
+    ///
+    /// Example 1:
+    /// Input: nums = [1,4,3,3,2]
+    /// Output: 2
+    /// Explanation:
+    /// The strictly increasing subarrays of nums are [1], [2], [3], [3], [4], 
+    /// and [1,4].
+    /// The strictly decreasing subarrays of nums are [1], [2], [3], [3], [4], 
+    /// [3,2], and [4,3].
+    /// Hence, we return 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [3,3,3,3]
+    /// Output: 1
+    /// Explanation:
+    /// The strictly increasing subarrays of nums are [3], [3], [3], and [3].
+    /// The strictly decreasing subarrays of nums are [3], [3], [3], and [3].
+    /// Hence, we return 1.
+    ///
+    /// Example 3:
+    /// Input: nums = [3,2,1]
+    /// Output: 3
+    /// Explanation:
+    /// The strictly increasing subarrays of nums are [3], [2], and [1].
+    /// The strictly decreasing subarrays of nums are [3], [2], [1], [3,2], 
+    /// [2,1], and [3,2,1].
+    /// Hence, we return 3.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 50
+    /// 2. 1 <= nums[i] <= 50
+    /// </summary>
+    int longestMonotonicSubarray(vector<int>& nums);
+
+
+    /// <summary>
+    /// Leet 3107. Minimum Operations to Make Median of Array Equal to K 
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums and a non-negative integer k. 
+    /// In one operation, you can increase or decrease any element by 1.
+    ///
+    /// Return the minimum number of operations needed to make the median of 
+    /// nums equal to k.
+    ///
+    /// The median of an array is defined as the middle element of the array 
+    /// when it is sorted in non-decreasing order. If there are two choices 
+    /// for a median, the larger of the two values is taken.
+    ///
+    /// Example 1:
+    /// Input: nums = [2,5,6,8,5], k = 4
+    /// Output: 2
+    /// Explanation:
+    /// We can subtract one from nums[1] and nums[4] to obtain 
+    /// [2, 4, 6, 8, 4]. The median of the resulting array is equal to k.
+    /// 
+    /// Example 2:
+    /// Input: nums = [2,5,6,8,5], k = 7
+    /// Output: 3
+    /// Explanation:
+    /// We can add one to nums[1] twice and add one to nums[2] once to 
+    /// obtain [2, 7, 7, 8, 5].
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,3,4,5,6], k = 4
+    /// Output: 0
+    /// Explanation:
+    /// The median of the array is already equal to k.
+    ///  
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 2 * 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. 1 <= k <= 10^9
+    /// </summary>
+    long long minOperationsToMakeMedianK(vector<int>& nums, int k);
+
+    /// <summary>
+    /// LeetCode 3127. Make a Square with the Same Color
+    ///                
+    /// Easy
+    ///
+    /// You are given a 2D matrix grid of size 3 x 3 consisting only of 
+    /// characters 'B' and 'W'. Character 'W' represents the white color, 
+    /// and character 'B' represents the black color.
+    ///
+    /// Your task is to change the color of at most one cell so that the 
+    /// matrix has a 2 x 2 square where all cells are of the same color.
+    ///
+    /// Return true if it is possible to create a 2 x 2 square of the same 
+    /// color, otherwise, return false.
+    /// 
+    /// Example 1:
+    /// Input: grid = [["B","W","B"],["B","W","W"],["B","W","B"]]
+    /// Output: true
+    /// Explanation:
+    /// It can be done by changing the color of the grid[0][2].
+    ///
+    /// Example 2:
+    /// Input: grid = [["B","W","B"],["W","B","W"],["B","W","B"]]
+    /// Output: false
+    /// Explanation:
+    /// It cannot be done by changing at most one cell.
+    ///
+    /// Example 3:
+    /// Input: grid = [["B","W","B"],["B","W","W"],["B","W","W"]]
+    /// Output: true
+    /// Explanation:
+    /// The grid already contains a 2 x 2 square of the same color.
+    ///
+    /// Constraints:
+    /// 1. grid.length == 3
+    /// 2. grid[i].length == 3
+    /// 3. grid[i][j] is either 'W' or 'B'.
+    /// </summary>
+    bool canMakeSquare(vector<vector<char>>& grid);
+
+
+    /// <summary>
+    /// LeetCode 3128. Right Triangles
+    ///                
+    /// Medium
+    ///
+    /// You are given a 2D boolean matrix grid.
+    /// Return an integer that is the number of right triangles that can be 
+    /// made with the 3 elements of grid such that all of them have a value 
+    /// of 1.
+    ///
+    /// Note:
+    /// A collection of 3 elements of grid is a right triangle if one of its
+    /// elements is in the same row with another element and in the same 
+    /// column with the third element. The 3 elements do not have to be next 
+    /// to each other.
+    /// 
+    /// Example 1:
+    /// 0	1	0
+    /// 0	1	1
+    /// 0	1	0
+    ///
+    /// Input: grid = [[0,1,0],[0,1,1],[0,1,0]]
+    /// Output: 2
+    /// Explanation:
+    /// There are two right triangles.
+    ///
+    /// Example 2:
+    /// 1	0	0	0
+    /// 0	1	0	1
+    /// 1	0	0	0
+    /// Input: grid = [[1,0,0,0],[0,1,0,1],[1,0,0,0]]
+    /// Output: 0
+    /// Explanation:
+    /// There are no right triangles.
+    ////
+    /// Example 3:
+    /// 1	0	1
+    /// 1	0	0
+    /// 1	0	0
+    /// Input: grid = [[1,0,1],[1,0,0],[1,0,0]]
+    /// Output: 2
+    /// Explanation:
+    /// There are two right triangles.
+    ///  
+    /// Constraints:
+    /// 1. 1 <= grid.length <= 1000
+    /// 2. 1 <= grid[i].length <= 1000
+    /// 3. 0 <= grid[i][j] <= 1
+    /// </summary>
+    long long numberOfRightTriangles(vector<vector<int>>& grid);
+
+    /// LeetCode 3131. Find the Integer Added to Array I
+    ///                
+    /// Easy
+    ///
+    /// You are given two arrays of equal length, nums1 and nums2.
+    /// Each element in nums1 has been increased (or decreased in the case of 
+    /// negative) by an integer, represented by the variable x.
+    ///
+    /// As a result, nums1 becomes equal to nums2. Two arrays are considered 
+    /// equal when they contain the same integers with the same frequencies.
+    ///
+    /// Return the integer x.
+    /// 
+    /// Example 1:
+    /// Input: nums1 = [2,6,4], nums2 = [9,7,5]
+    /// Output: 3
+    /// Explanation:
+    /// The integer added to each element of nums1 is 3.
+    ///
+    /// Example 2:
+    /// Input: nums1 = [10], nums2 = [5]
+    /// Output: -5
+    /// Explanation:
+    /// The integer added to each element of nums1 is -5.
+    ///
+    /// Example 3:
+    /// Input: nums1 = [1,1,1,1], nums2 = [1,1,1,1]
+    /// Output: 0
+    /// Explanation:
+    /// The integer added to each element of nums1 is 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums1.length == nums2.length <= 100
+    /// 2. 0 <= nums1[i], nums2[i] <= 1000
+    /// 3. The test cases are generated in a way that there is an integer x 
+    ///    such that nums1 can become equal to nums2 by adding x to each 
+    ///    element of nums1.
+    /// </summary>
+    int addedIntegerI(vector<int>& nums1, vector<int>& nums2);
+
+    /// <summary>
+    /// LeetCode 3132. Find the Integer Added to Array II
+    ///                
+    /// Medium
+    ///
+    /// You are given two integer arrays nums1 and nums2.
+    /// From nums1 two elements have been removed, and all other elements have 
+    /// been increased (or decreased in the case of negative) by an integer, 
+    /// represented by the variable x.
+    ///
+    /// As a result, nums1 becomes equal to nums2. Two arrays are considered 
+    /// equal when they contain the same integers with the same frequencies.
+    ///
+    /// Return the minimum possible integer x that achieves this equivalence.
+    ///
+    /// Example 1:
+    /// Input: nums1 = [4,20,16,12,8], nums2 = [14,18,10]
+    /// Output: -2
+    /// Explanation:
+    /// After removing elements at indices [0,4] and adding -2, nums1 
+    /// becomes [18,14,10].
+    ///
+    /// Example 2:
+    /// Input: nums1 = [3,5,5,3], nums2 = [7,7]
+    /// Output: 2
+    /// Explanation:
+    /// After removing elements at indices [0,3] and adding 2, nums1 
+    /// becomes [7,7].
+    ///
+    /// Constraints:
+    /// 1. 3 <= nums1.length <= 200
+    /// 2. nums2.length == nums1.length - 2
+    /// 3. 0 <= nums1[i], nums2[i] <= 1000
+    /// 4. The test cases are generated in a way that there is an integer x 
+    ///    such that nums1 can become equal to nums2 by removing two elements 
+    ///    and adding x to each element of nums1.
+    /// </summary>
+    int addedIntegerII(vector<int>& nums1, vector<int>& nums2);
 };
 #endif  // LeetCodeArray_H

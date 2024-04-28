@@ -5041,8 +5041,101 @@ void TestLeetCode3077(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3122(void)
+{
+    Logger::WriteMessage("Test Leet Code 3122");
+    LeetCodeDP leetCode;
+    vector<vector<int>> grid = { {1, 0, 2},{1, 0, 2} };
+    int result = leetCode.minimumOperationsGrid(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1,1,1} ,{0,0,0} };
+    result = leetCode.minimumOperationsGrid(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1},{2},{3} };
+    result = leetCode.minimumOperationsGrid(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3117(void)
+{
+    Logger::WriteMessage("Test Leet Code 3117");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 4, 3, 3, 2 };
+    vector<int> andValues = { 0, 3, 3, 2 };
+    int result = leetCode.minimumValueSum(nums, andValues);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3,5,7,7,7,5 };
+    andValues = { 0,7,5 };
+    result = leetCode.minimumValueSum(nums, andValues);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    andValues = { 2 };
+    result = leetCode.minimumValueSum(nums, andValues);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4, 8, 10, 7, 6 };
+    andValues = { 0, 6 };
+    result = leetCode.minimumValueSum(nums, andValues);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3129(void)
+{
+    Logger::WriteMessage("Test Leet Code 3129");
+    LeetCodeDP leetCode;
+    int zero = 1, one = 1, limit = 2;
+    int result = leetCode.numberOfStableArraysI(zero, one, limit);
+    Logger::WriteMessage("zero = " + to_string(zero) + "; one = " + to_string(one));
+    Logger::WriteMessage("limit = " + to_string(zero) + "; result = " + to_string(result));
+
+    zero = 1, one = 2, limit = 1;
+    result = leetCode.numberOfStableArraysI(zero, one, limit);
+    Logger::WriteMessage("zero = " + to_string(zero) + "; one = " + to_string(one));
+    Logger::WriteMessage("limit = " + to_string(zero) + "; result = " + to_string(result));
+
+    zero = 3, one = 3, limit = 2;
+    result = leetCode.numberOfStableArraysI(zero, one, limit);
+    Logger::WriteMessage("zero = " + to_string(zero) + "; one = " + to_string(one));
+    Logger::WriteMessage("limit = " + to_string(zero) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3130(void)
+{
+    Logger::WriteMessage("Test Leet Code 3130");
+    LeetCodeDP leetCode;
+    int zero = 1, one = 1, limit = 2;
+    int result = leetCode.numberOfStableArraysII(zero, one, limit);
+    Logger::WriteMessage("zero = " + to_string(zero) + "; one = " + to_string(one));
+    Logger::WriteMessage("limit = " + to_string(zero) + "; result = " + to_string(result));
+
+    zero = 1, one = 2, limit = 1;
+    result = leetCode.numberOfStableArraysII(zero, one, limit);
+    Logger::WriteMessage("zero = " + to_string(zero) + "; one = " + to_string(one));
+    Logger::WriteMessage("limit = " + to_string(zero) + "; result = " + to_string(result));
+
+    zero = 3, one = 3, limit = 2;
+    result = leetCode.numberOfStableArraysII(zero, one, limit);
+    Logger::WriteMessage("zero = " + to_string(zero) + "; one = " + to_string(one));
+    Logger::WriteMessage("limit = " + to_string(zero) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3130();
+    TestLeetCode3129();
+    TestLeetCode3117();
+    TestLeetCode3122();
     TestLeetCode3077();
     TestLeetCode3082();
     TestLeetCode3070();

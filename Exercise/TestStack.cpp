@@ -957,8 +957,24 @@ void TestLeetCode2866(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3113(void)
+{
+    Logger::WriteMessage("Test Leet Code 3113");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 1, 4, 3, 3, 2 };
+    long long result = leetCode.numberOfSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,3,3 };
+    result = leetCode.numberOfSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode3113();
     TestLeetCode2866();
     TestLeetCode2865();
     TestLeetCode2832();

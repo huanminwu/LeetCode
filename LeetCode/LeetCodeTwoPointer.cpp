@@ -2761,4 +2761,49 @@ int LeetCodeTwoPointer::minimumDeletions(string word, int k)
     }
     return result;
 }
+
+/// <summary>
+/// Leet 3090. Maximum Length Substring With Two Occurrences
+///
+/// Easy
+///
+/// Given a string s, return the maximum length of a substring such that 
+/// it contains at most two occurrences of each character.
+/// 
+/// Example 1:
+/// Input: s = "bcbbbcba"
+/// Output: 4
+/// Explanation:
+/// The following substring has a length of 4 and contains at most two 
+/// occurrences of each character: "bcbbbcba".
+///
+/// Example 2:
+/// Input: s = "aaaa"
+/// Output: 2
+/// Explanation:
+/// The following substring has a length of 2 and contains at most two 
+/// occurrences of each character: "aaaa".
+///
+/// Constraints:
+/// 1. 2 <= s.length <= 100
+/// 2. s consists only of lowercase English letters.
+/// </summary>
+int LeetCodeTwoPointer::maximumLengthSubstring(string s)
+{
+    vector<int> dp(26);
+    int prev = -1;
+    int result = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        dp[s[i] - 'a']++;
+        while (dp[s[i] - 'a'] > 2)
+        {
+            prev++;
+            dp[s[prev] - 'a']--;
+        }
+        result = max(result, (int)i - prev);
+    }
+    return result;
+}
+
 #pragma endregion

@@ -6750,8 +6750,179 @@ void TestLeetCode3084(void)
     Logger::WriteMessage("s = " + s + "; c = " + string(1, c) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3093(void)
+{
+    Logger::WriteMessage("Test Leet Code 3093");
+    LeetCodeString leetCode;
+    vector<string> wordsContainer = { "abcd", "bcd", "xbcd" };
+    vector<string> wordsQuery = { "cd", "bcd", "xyz" };
+    vector<int> result = leetCode.stringIndices(wordsContainer, wordsQuery);
+    Logger::WriteMessage(wordsContainer);
+    Logger::WriteMessage(wordsQuery);
+    Logger::WriteMessage(result);
+
+    wordsContainer = { "abcdefgh","poiuygh","ghghgh" };
+    wordsQuery = { "gh","acbfgh","acbfegh" };
+    result = leetCode.stringIndices(wordsContainer, wordsQuery);
+    Logger::WriteMessage(wordsContainer);
+    Logger::WriteMessage(wordsQuery);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3106(void)
+{
+    Logger::WriteMessage("Test Leet Code 3106");
+    LeetCodeString leetCode;
+    string s = "zbbz";
+    int k = 3;
+    string result = leetCode.getSmallestString(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+
+    s = "xaxcd";
+    k = 4;
+    result = leetCode.getSmallestString(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+
+    s = "lol";
+    k = 0;
+    result = leetCode.getSmallestString(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode3104(void)
+{
+    Logger::WriteMessage("Test Leet Code 3104");
+    LeetCodeString leetCode;
+    string s = "abba";
+    int result = leetCode.maxSubstringLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "abab";
+    result = leetCode.maxSubstringLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "abacd";
+    result = leetCode.maxSubstringLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "eabcda";
+    result = leetCode.maxSubstringLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "alulu";
+    result = leetCode.maxSubstringLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "dgede";
+    result = leetCode.maxSubstringLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "dgaaabbbede";
+    result = leetCode.maxSubstringLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "agxga";
+    result = leetCode.maxSubstringLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "kvkrhpslrtedkgikwxs";
+    result = leetCode.maxSubstringLength(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode3110(void)
+{
+    Logger::WriteMessage("Test Leet Code 3110");
+    LeetCodeString leetCode;
+    string s = "hello";
+    int result = leetCode.scoreOfString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "zaz";
+    result = leetCode.scoreOfString(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode3114(void)
+{
+    Logger::WriteMessage("Test Leet Code 3114");
+    LeetCodeString leetCode;
+    string s = "1?:?4";
+    string result = leetCode.findLatestTime(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "0?:5?";
+    result = leetCode.findLatestTime(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
+void TestLeetCode3119(void)
+{
+    Logger::WriteMessage("Test Leet Code 3119");
+    LeetCodeString leetCode;
+    string road = "..";
+    int budget = 5;
+    int result = leetCode.maxPotholes(road, budget);
+    Logger::WriteMessage("road = " + road + "; budget = " + to_string(budget) + "; result = " + to_string(result));
+
+    road = "..xxxxx";
+    budget = 4;
+    result = leetCode.maxPotholes(road, budget);
+    Logger::WriteMessage("road = " + road + "; budget = " + to_string(budget) + "; result = " + to_string(result));
+
+    road = "x.x.xxx...x";
+    budget = 14;
+    result = leetCode.maxPotholes(road, budget);
+    Logger::WriteMessage("road = " + road + "; budget = " + to_string(budget) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3120(void)
+{
+    Logger::WriteMessage("Test Leet Code 3120");
+    LeetCodeString leetCode;
+    string word = "aaAbcBC";
+    int result = leetCode.numberOfSpecialCharsI(word);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word = "abc";
+    result = leetCode.numberOfSpecialCharsI(word);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word = "abBCab";
+    result = leetCode.numberOfSpecialCharsI(word);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3121(void)
+{
+    Logger::WriteMessage("Test Leet Code 3121");
+    LeetCodeString leetCode;
+    string word = "aaAbcBC";
+    int result = leetCode.numberOfSpecialCharsII(word);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word = "abc";
+    result = leetCode.numberOfSpecialCharsII(word);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word = "abBCab";
+    result = leetCode.numberOfSpecialCharsII(word);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3121();
+    TestLeetCode3120();
+    TestLeetCode3119();
+    TestLeetCode3114();
+    TestLeetCode3110();
+    TestLeetCode3104();
+    TestLeetCode3106();
+    TestLeetCode3093();
     TestLeetCode3084();
     TestLeetCode3083();
     TestLeetCode3076();

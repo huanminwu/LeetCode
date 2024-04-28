@@ -24,6 +24,16 @@ using namespace std;
 /// </summary>
 class LeetCodeGraph
 {
+private:
+    /// <summary>
+    /// unionFind two nodes in graph
+    /// </summary>
+    pair<int, int> unionFind(vector<int>& parents, int a, int b);
+
+    /// <summary>
+    /// find shortest path from start to end graph
+    /// </summary>
+    vector<int> shortestPath(int n, vector<vector<pair<int, int>>>& neighbors, int start, int end);
 public:
 #pragma region Graph
     /// <summary>
@@ -10439,6 +10449,188 @@ public:
     /// You are given a 0-indexed integer array nums, and an integer k.
     /// </summary>
     vector<int> countPairsOfConnectableServers(vector<vector<int>>& edges, int signalSpeed);
+
+    /// <summary>
+    /// LeetCode 3112. Minimum Time to Visit Disappearing Nodes
+    ///
+    /// Medium
+    ///
+    /// There is an undirected graph of n nodes. You are given a 2D array 
+    /// edges, where edges[i] = [ui, vi, lengthi] describes an edge between 
+    /// node ui and node vi with a traversal time of lengthi units.
+    ///
+    /// Additionally, you are given an array disappear, where disappear[i] 
+    /// denotes the time when the node i disappears from the graph and you 
+    /// won't be able to visit it.
+    ///
+    /// Notice that the graph might be disconnected and might contain multiple 
+    /// edges.
+    ///
+    /// Return the array answer, with answer[i] denoting the minimum units of 
+    /// time required to reach node i from node 0. If node i is unreachable 
+    /// from node 0 then answer[i] is -1.
+    /// 
+    /// Example 1:
+    /// Input: n = 3, edges = [[0,1,2],[1,2,1],[0,2,4]], disappear = [1,1,5]
+    /// Output: [0,-1,4]
+    /// Explanation:
+    /// We are starting our journey from node 0, and our goal is to find the 
+    /// minimum time required to reach each node before it disappears.
+    ///
+    /// For node 0, we don't need any time as it is our starting point.
+    /// For node 1, we need at least 2 units of time to traverse edges[0]. 
+    /// Unfortunately, it disappears at that moment, so we won't be able to 
+    /// visit it.
+    /// For node 2, we need at least 4 units of time to traverse edges[2].
+    ///
+    /// Example 2:
+    /// Input: n = 3, edges = [[0,1,2],[1,2,1],[0,2,4]], disappear = [1,3,5]
+    /// Output: [0,2,3]
+    /// Explanation:
+    /// We are starting our journey from node 0, and our goal is to find the 
+    /// minimum time required to reach each node before it disappears.
+    ///
+    /// For node 0, we don't need any time as it is the starting point.
+    /// For node 1, we need at least 2 units of time to traverse edges[0].
+    /// For node 2, we need at least 3 units of time to traverse edges[0] and 
+    /// edges[1].
+    ///
+    /// Example 3:
+    /// Input: n = 2, edges = [[0,1,1]], disappear = [1,1]
+    ///
+    /// Output: [0,-1]
+    /// Explanation:
+    /// Exactly when we reach node 1, it disappears.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 5 * 10^4
+    /// 2. 0 <= edges.length <= 10^5
+    /// 3. edges[i] == [ui, vi, lengthi]
+    /// 4. 0 <= ui, vi <= n - 1
+    /// 5. 1 <= lengthi <= 10^5
+    /// 6. disappear.length == n
+    /// 7. 1 <= disappear[i] <= 10^5
+    /// </summary>
+    vector<int> minimumTimeDisappear(int n, vector<vector<int>>& edges, vector<int>& disappear);
+
+    /// <summary>
+    /// LeetCode 3108. Minimum Cost Walk in Weighted Graph
+    ///                
+    /// Hard
+    ///
+    /// There is an undirected weighted graph with n vertices labeled from 0 
+    /// to n - 1.
+    ///
+    /// You are given the integer n and an array edges, where 
+    /// edges[i] = [ui, vi, wi] indicates that there is an edge between 
+    /// vertices ui and vi with a weight of wi.
+    ///
+    /// A walk on a graph is a sequence of vertices and edges. The walk 
+    /// starts and ends with a vertex, and each edge connects the vertex 
+    /// that comes before it and the vertex that comes after it. It's 
+    /// important to note that a walk may visit the same edge or vertex 
+    /// more than once.
+    ///
+    /// The cost of a walk starting at node u and ending at node v is defined 
+    /// as the bitwise AND of the weights of the edges traversed during the 
+    /// walk. In other words, if the sequence of edge weights encountered 
+    /// during the walk is w0, w1, w2, ..., wk, then the cost is calculated 
+    /// as w0 & w1 & w2 & ... & wk, where & denotes the bitwise AND operator.
+    ///
+    /// You are also given a 2D array query, where query[i] = [si, ti]. For 
+    /// each query, you need to find the minimum cost of the walk starting at 
+    /// vertex si and ending at vertex ti. If there exists no such walk, the 
+    /// answer is -1.
+    ///
+    /// Return the array answer, where answer[i] denotes the minimum cost of 
+    /// a walk for query i.
+    ///
+    /// Example 1:
+    /// Input: n = 5, edges = [[0,1,7],[1,3,7],[1,2,1]], 
+    /// query = [[0,3],[3,4]]
+    ///
+    /// Output: [1,-1]
+    /// 
+    /// Explanation:
+    /// To achieve the cost of 1 in the first query, we need to move on the 
+    /// following edges: 0->1 (weight 7), 1->2 (weight 1), 2->1 (weight 1), 
+    /// 1->3 (weight 7).
+    ///
+    /// In the second query, there is no walk between nodes 3 and 4, so the 
+    /// answer is -1.
+    ///
+    /// Example 2:
+    /// Input: n = 3, edges = [[0,2,7],[0,1,15],[1,2,6],[1,2,1]], 
+    /// query = [[1,2]]
+    ///
+    /// Output: [0]
+    /// Explanation:
+    /// To achieve the cost of 0 in the first query, we need to move on the 
+    /// following edges: 1->2 (weight 1), 2->1 (weight 6), 1->2 (weight 1).
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 10^5
+    /// 2. 0 <= edges.length <= 10^5
+    /// 3. edges[i].length == 3
+    /// 4. 0 <= ui, vi <= n - 1
+    /// 5. ui != vi
+    /// 6. 0 <= wi <= 10^5
+    /// 7. 1 <= query.length <= 10^5
+    /// 8. query[i].length == 2
+    /// 9. 0 <= si, ti <= n - 1
+    /// 10. si != ti
+    /// </summary>
+    vector<int> minimumCost(int n, vector<vector<int>>& edges, vector<vector<int>>& query);
+
+
+    /// <summary>
+    /// LeetCode 3123. Find Edges in Shortest Paths
+    ///                
+    /// Hard
+    ///
+    /// You are given an undirected weighted graph of n nodes numbered from 0 
+    /// to n - 1. The graph consists of m edges represented by a 2D array 
+    /// edges, where edges[i] = [ai, bi, wi] indicates that there is an edge 
+    /// between nodes ai and bi with weight wi.
+    ///
+    /// Consider all the shortest paths from node 0 to node n - 1 in the 
+    /// graph. You need to find a boolean array answer where answer[i] is true 
+    /// if the edge edges[i] is part of at least one shortest path. Otherwise, 
+    /// answer[i] is false.
+    ///
+    /// Return the array answer.
+    /// Note that the graph may not be connected.
+    /// 
+    /// Example 1:
+    /// Input: n = 6, edges = [[0,1,4],[0,2,1],[1,3,2],[1,4,3],[1,5,1],
+    ///                        [2,3,1],[3,5,3],[4,5,2]]
+    ///
+    /// Output: [true,true,true,false,true,true,true,false]
+    /// Explanation:
+    /// The following are all the shortest paths between nodes 0 and 5:
+    ///
+    /// The path 0 -> 1 -> 5: The sum of weights is 4 + 1 = 5.
+    /// The path 0 -> 2 -> 3 -> 5: The sum of weights is 1 + 1 + 3 = 5.
+    /// The path 0 -> 2 -> 3 -> 1 -> 5: The sum of weights is 
+    /// 1 + 1 + 2 + 1 = 5.
+    ///
+    /// Example 2:
+    /// Input: n = 4, edges = [[2,0,1],[0,1,1],[0,3,4],[3,2,2]]
+    /// Output: [true,false,false,true]
+    /// Explanation:
+    /// There is one shortest path between nodes 0 and 3, which is the path 
+    /// 0 -> 2 -> 3 with the sum of weights 1 + 2 = 3.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n <= 5 * 10^4
+    /// 2. m == edges.length
+    /// 3. 1 <= m <= min(5 * 10^4, n * (n - 1) / 2)
+    /// 4. 0 <= ai, bi < n
+    /// 5. ai != bi
+    /// 6. 1 <= wi <= 105
+    /// 7. There are no repeated edges.
+    /// </summary>
+    vector<bool> findAnswer(int n, vector<vector<int>>& edges);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

@@ -1295,8 +1295,118 @@ void TestLeetCode3022(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3095(void)
+{
+    Logger::WriteMessage("Test Leet Code 3095");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    int k = 2;
+    int result = leetCode.minimumSubarrayLengthI(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 2,1,8 };
+    k = 10;
+    result = leetCode.minimumSubarrayLengthI(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2 };
+    k = 0;
+    result = leetCode.minimumSubarrayLengthI(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3064(void)
+{
+    Logger::WriteMessage("Test Leet Code 3064");
+    LeetCodeBit leetCode;
+    int n = 31;
+    int result = leetCode.findNumberI(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 33;
+    result = leetCode.findNumberI(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3094(void)
+{
+    Logger::WriteMessage("Test Leet Code 3094");
+    LeetCodeBit leetCode;
+    int n = 31;
+    int result = leetCode.findNumberII(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 33;
+    result = leetCode.findNumberII(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3097(void)
+{
+    Logger::WriteMessage("Test Leet Code 3097");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    int k = 2;
+    int result = leetCode.minimumSubarrayLengthII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 2,1,8 };
+    k = 10;
+    result = leetCode.minimumSubarrayLengthII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2 };
+    k = 0;
+    result = leetCode.minimumSubarrayLengthII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3125(void)
+{
+    Logger::WriteMessage("Test Leet Code 3125");
+    LeetCodeBit leetCode;
+    int n = 7;
+    int result = leetCode.maxNumber(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 9;
+    result = leetCode.maxNumber(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 17;
+    result = leetCode.maxNumber(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3133(void)
+{
+    Logger::WriteMessage("Test Leet Code 3133");
+    LeetCodeBit leetCode;
+    int n = 3, x = 4;
+    long long result = leetCode.minEnd(n, x);
+    Logger::WriteMessage("n = " + to_string(n) + "; x = " + to_string(x));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 2, x = 7;
+    result = leetCode.minEnd(n, x);
+    Logger::WriteMessage("n = " + to_string(n) + "; x = " + to_string(x));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3133();
+    TestLeetCode3125();
+    TestLeetCode3097();
+    TestLeetCode3094();
+    TestLeetCode3064();
+    TestLeetCode3095();
     TestLeetCode3022();
     TestLeetCode2997();
     TestLeetCode2980();

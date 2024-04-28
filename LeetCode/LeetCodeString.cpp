@@ -24236,4 +24236,592 @@ long long LeetCodeString::countSubstrings(string s, char c)
     return result;
 }
 
+/// <summary>
+/// Leet 3093. Longest Common Suffix Queries
+///
+/// Hard
+///
+/// You are given two arrays of strings wordsContainer and wordsQuery.
+///
+/// For each wordsQuery[i], you need to find a string from wordsContainer 
+/// that has the longest common suffix with wordsQuery[i]. If there are 
+/// two or more strings in wordsContainer that share the longest common 
+/// suffix, find the string that is the smallest in length. If there are 
+/// two or more such strings that have the same smallest length, find 
+/// the one that occurred earlier in wordsContainer.
+///
+/// Return an array of integers ans, where ans[i] is the index of the 
+/// string in wordsContainer that has the longest common suffix with 
+/// wordsQuery[i].
+/// 
+/// Example 1:
+/// Input: wordsContainer = ["abcd","bcd","xbcd"], wordsQuery = 
+/// ["cd","bcd","xyz"]
+///
+/// Output: [1,1,1]
+///
+/// Explanation:
+/// Let's look at each wordsQuery[i] separately:
+/// For wordsQuery[0] = "cd", strings from wordsContainer that share the 
+/// longest common suffix "cd" are at indices 0, 1, and 2. Among these, 
+/// the answer is the string at index 1 because it has the shortest length 
+/// of 3.
+/// For wordsQuery[1] = "bcd", strings from wordsContainer that share the 
+/// longest common suffix "bcd" are at indices 0, 1, and 2. Among these, 
+/// the answer is the string at index 1 because it has the shortest length 
+/// of 3.
+/// For wordsQuery[2] = "xyz", there is no string from wordsContainer that 
+/// shares a common suffix. Hence the longest common suffix is "", that 
+/// is shared with strings at index 0, 1, and 2. Among these, the answer 
+/// is the string at index 1 because it has the shortest length of 3.
+///
+/// Example 2:
+/// Input: wordsContainer = ["abcdefgh","poiuygh","ghghgh"], 
+/// wordsQuery = ["gh","acbfgh","acbfegh"]
+/// Output: [2,0,2]
+///
+/// Explanation:
+/// Let's look at each wordsQuery[i] separately:
+/// For wordsQuery[0] = "gh", strings from wordsContainer that share the 
+/// longest common suffix "gh" are at indices 0, 1, and 2. Among these, 
+/// the answer is the string at index 2 because it has the shortest length 
+/// of 6.
+/// For wordsQuery[1] = "acbfgh", only the string at index 0 shares the 
+/// longest common suffix "fgh". Hence it is the answer, even though the 
+/// string at index 2 is shorter.
+/// For wordsQuery[2] = "acbfegh", strings from wordsContainer that share 
+/// the longest common suffix "gh" are at indices 0, 1, and 2. 
+/// Among these, the answer is the string at index 2 because it has the 
+/// shortest length of 6.
+/// 
+/// Constraints:
+///
+/// 1. 1 <= wordsContainer.length, wordsQuery.length <= 10^4
+/// 2. 1 <= wordsContainer[i].length <= 5 * 10^3
+/// 3. 1 <= wordsQuery[i].length <= 5 * 10^3
+/// 4. wordsContainer[i] consists only of lowercase English letters.
+/// 5. wordsQuery[i] consists only of lowercase English letters.
+/// 6. Sum of wordsContainer[i].length is at most 5 * 10^5.
+/// 7. Sum of wordsQuery[i].length is at most 5 * 10^5.
+/// </summary>
+vector<int> LeetCodeString::stringIndices(vector<string>& wordsContainer, vector<string>& wordsQuery)
+{
+    struct Trie
+    {
+        Trie* children[26] = {};
+        pair<int, int> shortest_word;
+        Trie()
+        {
+        }
+        void insert(string& w, int index, int length)
+        {
+            Trie* curr = this;
+            if (shortest_word.first == 0 || shortest_word.first > length ||
+                (shortest_word.first == length && shortest_word.second > index))
+            {
+                shortest_word.first = length;
+                shortest_word.second = index;
+            }
+            for (char c : w)
+            {
+                if (curr->children[c - 'a'] == nullptr)
+                {
+                    curr->children[c - 'a'] = new Trie();
+                }
+                curr = curr->children[c - 'a'];
+                if (curr->shortest_word.first == 0 || curr->shortest_word.first > length ||
+                    (curr->shortest_word.first == length && curr->shortest_word.second > index))
+                {
+                    curr->shortest_word.first = length;
+                    curr->shortest_word.second = index;
+                }
+            }
+        }
+        int query(string& w)
+        {
+            Trie* curr = this;
+            int result = shortest_word.second;
+            for (char c : w)
+            {
+                if (curr->children[c - 'a'] == nullptr)
+                {
+                    break;
+                }
+                curr = curr->children[c - 'a'];
+                result = curr->shortest_word.second;
+            }
+            return result;
+        }
+    };
+    Trie* trie = new Trie();
+    for (size_t i = 0; i < wordsContainer.size(); i++)
+    {
+        string word = wordsContainer[i];
+        reverse(word.begin(), word.end());
+        trie->insert(word, i, word.size());
+    }
+    vector<int> result(wordsQuery.size());
+    for (size_t i = 0; i < wordsQuery.size(); i++)
+    {
+        string word = wordsQuery[i];
+        reverse(word.begin(), word.end());
+        result[i] = trie->query(word);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet 3106. Lexicographically Smallest String After Operations With 
+////           Constraint
+///
+/// Medium
+///
+/// You are given a string s and an integer k.
+///
+/// Define a function distance(s1, s2) between two strings s1 and s2 of 
+/// the same length n as:
+///
+/// The sum of the minimum distance between s1[i] and s2[i] when the 
+/// characters from 'a' to 'z' are placed in a cyclic order, for all i 
+/// in the range [0, n - 1].
+/// For example, distance("ab", "cd") == 4, and distance("a", "z") == 1.
+///
+/// You can change any letter of s to any other lowercase English letter, 
+/// any number of times.
+///
+/// Return a string denoting the lexicographically smallest string t you 
+/// can get after some changes, such that distance(s, t) <= k.
+///
+/// Example 1:
+/// Input: s = "zbbz", k = 3
+/// Output: "aaaz"
+/// Explanation:
+/// Change s to "aaaz". The distance between "zbbz" and "aaaz" is equal 
+/// to k = 3.
+///
+/// Example 2:
+/// Input: s = "xaxcd", k = 4
+/// Output: "aawcd"
+/// Explanation:
+/// The distance between "xaxcd" and "aawcd" is equal to k = 4.
+///
+/// Example 3:
+/// Input: s = "lol", k = 0
+/// Output: "lol"
+/// Explanation:
+/// It's impossible to change any character as k = 0.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 100
+/// 2. 0 <= k <= 2000
+/// 3. s consists only of lowercase English letters.
+/// </summary>
+string LeetCodeString::getSmallestString(string s, int k)
+{
+    string result;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (k == 0) result.push_back(s[i]);
+        else
+        {
+            int dist = min(s[i] - 'a', 'a' + 26 - s[i]);
+            if (k >= dist)
+            {
+                result.push_back('a');
+                k -= dist;
+            }
+            else
+            {
+                result.push_back(s[i] - k);
+                k = 0;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet 3104. Find Longest Self-Contained Substring
+///
+/// Medium
+///
+/// Given a string s, your task is to find the length of the longest self-
+/// contained substring of s.
+/// A substring t of a string s is called self-contained if t != s and for 
+/// every character in t, it doesn't exist in the rest of s.
+///
+/// Return the length of the longest self-contained substring of s if it 
+/// exists, otherwise, return -1.
+///
+/// Example 1:
+/// Input: s = "abba"
+/// Output: 2
+/// Explanation:
+/// Let's check the substring "bb". You can see that no other "b" is 
+/// outside of this substring. Hence the answer is 2.
+///
+/// Example 2:
+/// Input: s = "abab"
+/// Output: -1
+/// Explanation:
+/// Every substring we choose does not satisfy the described property 
+/// (there is some character which is inside and outside of that 
+/// substring). So the answer would be -1.
+///
+/// Example 3:
+/// Input: s = "abacd"
+/// Output: 4
+/// Explanation:
+/// Let's check the substring "abac". There is only one character 
+/// outside of this substring and that is "d". There is no "d" inside the 
+/// chosen substring, so it satisfies the condition and the answer is 4.
+/// 
+/// Constraints:
+/// 1. 2 <= s.length <= 5 * 10^4
+/// 2. s consists only of lowercase English letters.
+/// </summary>
+int LeetCodeString::maxSubstringLength(string s)
+{
+    int n = s.size();
+    vector<int> count(26), start(26, -1);
+    vector<vector<int>> freq(n + 1, vector<int>(26));
+    for (int i = 0; i < n; i++)
+    {
+        count[s[i] - 'a']++;
+        if (start[s[i] - 'a'] == -1)
+        {
+            start[s[i] - 'a'] = i;
+        }
+        freq[i + 1] = freq[i];
+        freq[i + 1][s[i] - 'a']++;
+
+    }
+    int result = -1;
+    for (int i = 0; i < n; i++)
+    {
+        if (freq[i + 1][s[i] - 'a'] != count[s[i] - 'a']) continue;
+        for (int j = 0; j < 26; j++)
+        {
+            if (freq[i + 1][j] != count[j] || count[j] == 0) continue;
+            int si = start[j];
+            if (si == 0 && i == n - 1) continue;
+            bool valid = true;
+            for (int k = 0; k < 26; k++)
+            {
+                int diff = freq[i + 1][k] - freq[si][k];
+                if (diff != 0 && diff != count[k])
+                {
+                    valid = false;
+                    break;
+                }
+            }
+            if (valid) result = max(result, i + 1 - si);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3110. Score of a String
+///
+/// Easy
+///
+/// You are given a string s. The score of a string is defined as the sum 
+/// of the absolute difference between the ASCII values of adjacent 
+/// characters.
+///
+/// Return the score of s.
+/// 
+/// Example 1:
+/// Input: s = "hello"
+/// Output: 13
+/// Explanation:
+/// The ASCII values of the characters in s are: 'h' = 104, 'e' = 101, 
+/// 'l' = 108, 'o' = 111. So, the score of s would be |104 - 101| + 
+/// |101 - 108| + |108 - 108| + |108 - 111| = 3 + 7 + 0 + 3 = 13.
+///
+/// Example 2:
+/// Input: s = "zaz"
+/// Output: 50
+/// Explanation:
+/// The ASCII values of the characters in s are: 'z' = 122, 'a' = 97. 
+/// So, the score of s would be |122 - 97| + |97 - 122| = 25 + 25 = 50.
+/// 
+/// Constraints:
+/// 1. 2 <= s.length <= 100
+/// 2. s consists only of lowercase English letters.
+/// </summary>
+int LeetCodeString::scoreOfString(string s)
+{
+    int result = 0;
+    for (size_t i = 1; i < s.size(); i++)
+    {
+        result += std::abs(s[i] - s[i - 1]);
+    }
+    return result;
+}
+
+
+/// <summary>
+/// LeetCode 3114. Latest Time You Can Obtain After Replacing Characters
+///
+/// Easy
+///
+/// You are given a string s representing a 12-hour format time where some 
+/// of the digits (possibly none) are replaced with a "?".
+///
+/// 12-hour times are formatted as "HH:MM", where HH is between 00 and 11, 
+/// and MM is between 00 and 59. The earliest 12-hour time is 00:00, and 
+/// the latest is 11:59.
+///
+/// You have to replace all the "?" characters in s with digits such that 
+/// the time we obtain by the resulting string is a valid 12-hour format 
+/// time and is the latest possible.
+/// 
+/// Return the resulting string.
+/// Example 1:
+/// Input: s = "1?:?4"
+/// Output: "11:54"
+/// Explanation: The latest 12-hour format time we can achieve by 
+/// replacing "?" characters is "11:54".
+///
+/// Example 2:
+/// Input: s = "0?:5?"
+/// Output: "09:59"
+/// Explanation: The latest 12-hour format time we can achieve by 
+/// replacing "?" characters is "09:59".
+///
+/// Constraints:
+/// 1. s.length == 5
+/// 2. s[2] is equal to the character ":".
+/// 3. All characters except s[2] are digits or "?" characters.
+/// 4. The input is generated such that there is at least one time between 
+///    "00:00" and "11:59" that you can obtain after replacing the "?" 
+///    characters.
+/// </summary>
+string LeetCodeString::findLatestTime(string s)
+{
+    string result = s;
+    if (result[0] == '?' && result[1] == '?')
+    {
+        result[0] = '1';
+        result[1] = '1';
+    }
+    else if (result[0] == '0' && result[1] == '?')
+    {
+        result[1] = '9';
+    }
+    else if (result[0] == '1' && result[1] == '?')
+    {
+        result[1] = '1';
+    }
+    else if (result[0] == '?' && result[1] < '2')
+    {
+        result[0] = '1';
+    }
+    else if (result[0] == '?' && result[1] > '1')
+    {
+        result[0] = '0';
+    }
+    if (result[3] == '?')
+    {
+        result[3] = '5';
+    }
+    if (result[4] == '?')
+    {
+        result[4] = '9';
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3119. Maximum Number of Potholes That Can Be Fixed 
+///                
+///
+/// Medium
+///
+/// You are given a string road, consisting only of characters "x" 
+/// and ".", where each "x" denotes a pothole and each "." denotes a 
+/// smooth road, and an integer budget.
+///
+/// In one repair operation, you can repair n consecutive potholes for 
+/// a price of n + 1.
+///
+/// Return the maximum number of potholes that can be fixed such that 
+/// the sum of the prices of all of the fixes doesn't go over the given 
+/// budget.
+/// 
+/// Example 1:
+/// Input: road = "..", budget = 5
+/// Output: 0
+/// Explanation:
+/// There are no potholes to be fixed.
+///
+/// Example 2:
+/// Input: road = "..xxxxx", budget = 4
+/// Output: 3
+/// Explanation:
+/// We fix the first three potholes (they are consecutive). The budget 
+/// needed for this task is 3 + 1 = 4.
+///
+/// Example 3:
+/// Input: road = "x.x.xxx...x", budget = 14
+/// Output: 6
+/// Explanation:
+/// We can fix all the potholes. The total cost would be (1 + 1) + 
+/// (1 + 1) + (3 + 1) + (1 + 1) = 10 which is within our budget of 14.
+///
+/// Constraints:
+/// 1. 1 <= road.length <= 10^5
+/// 2. 1 <= budget <= 10^5 + 1
+/// 3. road consists only of characters '.' and 'x'.
+/// </summary>
+int LeetCodeString::maxPotholes(string road, int budget)
+{
+    priority_queue<int> pq;
+    int count = 0;
+    for (size_t i = 0; i <= road.size(); i++)
+    {
+        if (i == road.size() || road[i] == '.')
+        {
+            if (count > 0)
+            {
+                pq.push(count);
+                count = 0;
+            }
+        }
+        else count++;
+    }
+    int result = 0;
+    while (!pq.empty() && budget > 0)
+    {
+        int potholes = pq.top();
+        pq.pop();
+        potholes = min(budget - 1, potholes);
+        result += potholes;
+        budget -= potholes + 1;
+    }
+    return result;
+}
+
+/// LeetCode 3120. Count the Number of Special Characters I
+///                
+/// Easy
+///
+/// You are given a string word. A letter is called special if it appears 
+/// both in lowercase and uppercase in word.
+///
+/// Return the number of special letters in word.
+/// 
+/// Example 1:
+/// Input: word = "aaAbcBC"
+/// Output: 3
+/// Explanation:
+/// The special characters in word are 'a', 'b', and 'c'.
+/// 
+/// Example 2:
+/// Input: word = "abc"
+/// Output: 0
+/// Explanation:
+/// No character in word appears in uppercase.
+///
+/// Example 3:
+/// Input: word = "abBCab"
+/// Output: 1
+/// Explanation:
+/// The only special character in word is 'b'.
+/// 
+/// Constraints:
+/// 1. 1 <= word.length <= 50
+/// 2. word consists of only lowercase and uppercase English letters.
+/// </summary>
+int LeetCodeString::numberOfSpecialCharsI(string word)
+{
+    vector<vector<int>> chars(26, vector<int>(2));
+    for (size_t i = 0; i < word.size(); i++)
+    {
+        if (word[i] >= 'a' && word[i] <= 'z')
+        {
+            chars[word[i] - 'a'][0] = 1;
+        }
+        else if (word[i] >= 'A' && word[i] <= 'Z')
+        {
+            chars[word[i] - 'A'][1] = 1;
+        }
+    }
+    int result = 0;
+    for (int i = 0; i < 26; i++)
+    {
+        if (chars[i][0] + chars[i][1] == 2)
+        {
+            result++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3121. Count the Number of Special Characters II
+///                
+/// Medium
+///
+/// You are given a string word. A letter c is called special if it 
+/// appears both in lowercase and uppercase in word, and every 
+/// lowercase occurrence of c appears before the first uppercase 
+/// occurrence of c.
+///
+/// Return the number of special letters in word.
+///
+/// Example 1:
+/// Input: word = "aaAbcBC"
+/// Output: 3
+/// Explanation:
+/// The special characters are 'a', 'b', and 'c'.
+///
+/// Example 2:
+/// Input: word = "abc"
+/// Output: 0
+/// Explanation:
+/// There are no special characters in word.
+/// 
+/// Example 3:
+/// Input: word = "AbBCab"
+/// Output: 0
+/// Explanation:
+/// There are no special characters in word.
+/// 
+/// Constraints:
+/// 1. 1 <= word.length <= 2 * 10^5
+/// 2. word consists of only lowercase and uppercase English letters.
+/// </summary>
+int LeetCodeString::numberOfSpecialCharsII(string word)
+{
+    vector<vector<int>> chars(26, vector<int>(2));
+    vector<int> invalid(26);
+    for (size_t i = 0; i < word.size(); i++)
+    {
+        if (word[i] >= 'a' && word[i] <= 'z')
+        {
+            int index = word[i] - 'a';
+            chars[index][0] = 1;
+            if (chars[index][1] == 1)
+            {
+                invalid[index] = 1;
+            }
+        }
+        else if (word[i] >= 'A' && word[i] <= 'Z')
+        {
+            chars[word[i] - 'A'][1] = 1;
+        }
+    }
+    int result = 0;
+    for (int i = 0; i < 26; i++)
+    {
+        if (chars[i][0] + chars[i][1] == 2 && invalid[i] == 0)
+        {
+            result++;
+        }
+    }
+    return result;
+}
 #pragma endregion

@@ -21536,5 +21536,521 @@ int LeetCodeMath::sumOfEncryptedInt(vector<int>& nums)
     return result;
 }
 
+
+
+/// <summary>
+/// Leet 3091. Apply Operations to Make Sum of Array Greater Than or Equal 
+///            to k
+///
+/// Medium
+///
+/// You are given a positive integer k. Initially, you have an array 
+/// nums = [1].
+/// You can perform any of the following operations on the array any 
+/// number of times (possibly zero):
+/// Choose any element in the array and increase its value by 1.
+/// Duplicate any element in the array and add it to the end of the array.
+///
+/// Return the minimum number of operations required to make the sum of 
+/// elements of the final array greater than or equal to k.
+/// 
+/// Example 1:
+/// Input: k = 11
+/// Output: 5
+/// Explanation:
+/// We can do the following operations on the array nums = [1]:
+/// Increase the element by 1 three times. The resulting array is 
+/// nums = [4].
+/// Duplicate the element two times. The resulting array is nums = [4,4,4].
+/// The sum of the final array is 4 + 4 + 4 = 12 which is greater than or 
+/// equal to k = 11.
+/// The total number of operations performed is 3 + 2 = 5.
+///
+/// Example 2:
+/// Input: k = 1
+/// Output: 0
+///
+/// Explanation:
+/// The sum of the original array is already greater than or equal to 1, 
+/// so no operations are needed.
+///
+/// Constraints:
+/// 1. 1 <= k <= 10^5
+/// </summary>
+int LeetCodeMath::minOperationsK(int k)
+{
+    int result = k;
+    for (int i = 0; i < k; i++)
+    {
+        result = min(result, (k + i) / (1 + i) - 1 + i);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet 3099. Harshad Number
+///
+/// Easy
+///
+/// An integer divisible by the sum of its digits is said to be a Harshad 
+/// number. You are given an integer x. Return the sum of the digits of x 
+/// if x is a Harshad number, otherwise, return -1.
+///
+/// Example 1:
+/// Input: x = 18
+/// Output: 9
+/// Explanation:
+/// The sum of digits of x is 9. 18 is divisible by 9. So 18 is a Harshad 
+/// number and the answer is 9.
+///
+/// Example 2:
+/// Input: x = 23
+/// Output: -1
+///
+/// Explanation:
+/// The sum of digits of x is 5. 23 is not divisible by 5. So 23 is not a 
+/// Harshad number and the answer is -1.
+/// 
+/// Constraints:
+/// 1. 1 <= x <= 100
+/// </summary>
+int LeetCodeMath::sumOfTheDigitsOfHarshadNumber(int x)
+{
+    int sum = 0;
+    int n = x;
+    while (n > 0)
+    {
+        sum += n % 10;
+        n /= 10;
+    }
+    if (x % sum == 0) return sum;
+    else return -1;
+}
+
+
+/// <summary>
+/// Leet 3100. Water Bottles II
+///
+/// Medium
+///
+/// You are given two integers numBottles and numExchange.
+/// 
+/// numBottles represents the number of full water bottles that you 
+/// initially have. In one operation, you can perform one of the following 
+/// operations:
+///
+/// Drink any number of full water bottles turning them into empty bottles.
+/// Exchange numExchange empty bottles with one full water bottle. Then, 
+/// increase numExchange by one.
+/// Note that you cannot exchange multiple batches of empty bottles for 
+/// the same value of numExchange. For example, if numBottles == 3 and 
+/// numExchange == 1, you cannot exchange 3 empty water bottles 
+/// for 3 full bottles.
+/// 
+/// Return the maximum number of water bottles you can drink.
+/// 
+/// Example 1:
+/// Input: numBottles = 13, numExchange = 6
+/// Output: 15
+/// Explanation: The table above shows the number of full water bottles, 
+/// empty water bottles, the value of numExchange, and the number of 
+/// bottles drunk.
+///
+/// Example 2:
+/// Input: numBottles = 10, numExchange = 3
+/// Output: 13
+/// Explanation: The table above shows the number of full water bottles, 
+/// empty water bottles, the value of numExchange, and the number of 
+/// bottles drunk.
+///  
+/// Constraints:
+/// 1. 1 <= numBottles <= 100 
+/// 2. 1 <= numExchange <= 100
+/// </summary>
+int LeetCodeMath::maxBottlesDrunk(int numBottles, int numExchange)
+{
+    int result = 0;
+    while (numBottles >= numExchange)
+    {
+        result += numExchange;
+        numBottles -= (numExchange - 1);
+        numExchange++;
+    }
+    result += numBottles;
+    return result;
+}
+
+/// <summary>
+/// Leet 3102. Minimize Manhattan Distances 
+///
+/// Hard
+///
+/// You are given a array points representing integer coordinates of some 
+/// points on a 2D plane, where points[i] = [xi, yi].
+///
+/// The distance between two points is defined as their Manhattan distance.
+///
+/// Return the minimum possible value for maximum distance between any two 
+/// points by removing exactly one point.
+/// 
+/// Example 1:
+/// Input: points = [[3,10],[5,15],[10,2],[4,4]]
+/// Output: 12
+/// Explanation:
+/// The maximum distance after removing each point is the following:
+/// After removing the 0th point the maximum distance is between 
+/// points (5, 15) and (10, 2), which is |5 - 10| + |15 - 2| = 18.
+/// After removing the 1st point the maximum distance is between 
+/// points (3, 10) and (10, 2), which is |3 - 10| + |10 - 2| = 15.
+/// After removing the 2nd point the maximum distance is between 
+/// points (5, 15) and (4, 4), which is |5 - 4| + |15 - 4| = 12.
+/// After removing the 3rd point the maximum distance is between 
+/// points (5, 15) and (10, 2), which is |5 - 10| + |15 - 2| = 18.
+/// 12 is the minimum possible maximum distance between any two 
+/// points after removing exactly one point.
+/// 
+/// Example 2:
+/// Input: points = [[1,1],[1,1],[1,1]]
+/// Output: 0
+/// Explanation:
+/// Removing any of the points results in the maximum distance between 
+/// any two points of 0.
+///  
+/// Constraints:
+/// 1. 3 <= points.length <= 10^5
+/// 2. points[i].length == 2
+/// 3. 1 <= points[i][0], points[i][1] <= 10^8
+/// </summary>
+int LeetCodeMath::minimumDistance(vector<vector<int>>& points)
+{
+    vector<int> sum(points.size()), diff(points.size());
+    set<pair<int, int>> sum_sorted, diff_sorted;
+    for (size_t i = 0; i < points.size(); i++)
+    {
+        sum[i] = points[i][0] + points[i][1];
+        diff[i] = points[i][0] - points[i][1];
+        sum_sorted.insert(make_pair(sum[i], i));
+        diff_sorted.insert(make_pair(diff[i], i));
+    }
+    int result = INT_MAX;
+    for (size_t i = 0; i < points.size(); i++)
+    {
+        sum_sorted.erase(make_pair(sum[i], i));
+        diff_sorted.erase(make_pair(diff[i], i));
+        int sum_gap = sum_sorted.rbegin()->first - sum_sorted.begin()->first;
+        int diff_gap = diff_sorted.rbegin()->first - diff_sorted.begin()->first;
+        result = min(result, max(sum_gap, diff_gap));
+        sum_sorted.insert(make_pair(sum[i], i));
+        diff_sorted.insert(make_pair(diff[i], i));
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet 3109. Find the Index of Permutation 
+///
+/// Medium
+///
+/// Given an array perm of length n which is a permutation of 
+/// [1, 2, ..., n], return the index of perm in the lexicographically 
+/// sorted array of all of the permutations of [1, 2, ..., n].
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: perm = [1,2]
+/// Output: 0
+/// Explanation:
+/// There are only two permutations in the following order:
+/// [1,2], [2,1]
+/// And [1,2] is at index 0.
+///
+/// Example 2:
+/// Input: perm = [3,1,2]
+/// Output: 4
+/// Explanation:
+/// There are only six permutations in the following order:
+/// [1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]
+/// And [3,1,2] is at index 4.
+/// 
+/// Constraints:
+/// 1. 1 <= n == perm.length <= 10^5
+/// 2. perm is a permutation of [1, 2, ..., n].
+/// </summary>
+int LeetCodeMath::getPermutationIndex(vector<int>& perm)
+{
+    struct BITree
+    {
+        vector<int> m_arr;
+        int m_count;
+        BITree(int n)
+        {
+            m_arr = vector<int>(n + 1, 0);
+            m_count = n + 1;
+        }
+        void add(int index, int val)
+        {
+            while (index < m_count)
+            {
+                m_arr[index] += val;
+                index += (index & -index);
+            }
+        }
+        int sum(int index)
+        {
+            int sum = 0;
+            while (index != 0)
+            {
+                sum += m_arr[index];
+                index -= index & -index;
+            }
+            return sum;
+
+        }
+    };
+    int n = perm.size();
+    vector<int> factorial(n + 1,1);
+    int M = 1000000007;
+    int result = 0;
+    BITree bit(n);
+    for (int i = 1; i <= n; i++)
+    {
+        bit.add(i, 1);
+        factorial[i] = (int)((long long)factorial[i - 1] * (long long)i % (long long)M);
+    }
+    for (int i = 0; i < n; i++)
+    {
+        result = 
+            (result + (int)((long long)(bit.sum(perm[i]) - 1) * (long long)factorial[n - 1 - i] % 
+                      (long long)M)) % M;
+        bit.add(perm[i], -1);
+    }
+    return result;
+
+}
+
+/// <summary>
+/// LeetCode 3111. Minimum Rectangles to Cover Points
+///
+/// Medium
+///
+/// You are given a 2D integer array points, where points[i] = [xi, yi]. 
+/// You are also given an integer w. Your task is to cover all the given 
+/// points with rectangles.
+///
+/// Each rectangle has its lower end at some point (x1, 0) and its upper 
+/// end at some point (x2, y2), where x1 <= x2, y2 >= 0, and the condition 
+/// x2 - x1 <= w must be satisfied for each rectangle.
+///
+/// A point is considered covered by a rectangle if it lies within or on 
+/// the boundary of the rectangle.
+///
+/// Return an integer denoting the minimum number of rectangles needed so 
+/// that each point is covered by at least one rectangle.
+///
+/// Note: A point may be covered by more than one rectangle.
+/// 
+/// Example 1:
+/// Input: points = [[2,1],[1,0],[1,4],[1,8],[3,5],[4,6]], w = 1
+/// Output: 2
+/// Explanation:
+/// The image above shows one possible placement of rectangles to cover 
+/// the points:
+/// A rectangle with a lower end at (1, 0) and its upper end at (2, 8)
+/// A rectangle with a lower end at (3, 0) and its upper end at (4, 8)
+//
+/// Example 2:
+/// Input: points = [[0,0],[1,1],[2,2],[3,3],[4,4],[5,5],[6,6]], w = 2
+/// Output: 3
+/// Explanation:
+/// The image above shows one possible placement of rectangles to cover 
+/// the points:
+///
+/// A rectangle with a lower end at (0, 0) and its upper end at (2, 2)
+/// A rectangle with a lower end at (3, 0) and its upper end at (5, 5)
+/// A rectangle with a lower end at (6, 0) and its upper end at (6, 6)
+///
+/// Example 3:
+/// Input: points = [[2,3],[1,2]], w = 0
+/// Output: 2
+/// Explanation:
+/// The image above shows one possible placement of rectangles to cover 
+/// the points:
+///
+/// A rectangle with a lower end at (1, 0) and its upper end at (1, 2)
+/// A rectangle with a lower end at (2, 0) and its upper end at (2, 3)
+/// 
+/// Constraints:
+/// 1. 1 <= points.length <= 10^5
+/// 2. points[i].length == 2
+/// 3. 0 <= xi == points[i][0] <= 10^9
+/// 4. 0 <= yi == points[i][1] <= 10^9
+/// 5. 0 <= w <= 10^9
+/// 6. All pairs (xi, yi) are distinct.
+/// </summary>
+int LeetCodeMath::minRectanglesToCoverPoints(vector<vector<int>>& points, int w)
+{
+    sort(points.begin(), points.end());
+    size_t index = 0;
+    int result = 1;
+    int start = points[index][0];
+    while (index < points.size())
+    {
+        if (start + w >= points[index][0])
+        {
+            index++;
+        }
+        else
+        {
+            result++;
+            start = points[index][0];
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// LeetCode 3115. Maximum Prime Difference
+///
+/// Medium
+///
+/// You are given an integer array nums.
+/// Return an integer that is the maximum distance between the indices of 
+/// two (not necessarily different) prime numbers in nums.
+///
+/// Example 1:
+/// Input: nums = [4,2,9,5,3]
+/// Output: 3
+/// Explanation: nums[1], nums[3], and nums[4] are prime. So the answer 
+/// is |4 - 1| = 3.
+///
+/// Example 2:
+/// Input: nums = [4,8,2,8]
+///  Output: 0
+/// Explanation: nums[2] is prime. Because there is just one prime number, 
+/// the answer is |2 - 2| = 0.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 3 * 10^5
+/// 2. 1 <= nums[i] <= 100
+/// 3. The input is generated such that the number of prime numbers in 
+///    the nums is at least one.
+/// </summary>
+int LeetCodeMath::maximumPrimeDifference(vector<int>& nums)
+{
+    int start = nums.size();
+    int end = 0;
+    int n = nums.size();
+    for (int i = 0; i < n; i++)
+    {
+        if (isPrime(nums[i]))
+        {
+            start = min(start, i);
+            end = max(end, i);
+        }
+    }
+    return end - start;
+}
+
+/// <summary>
+/// LeetCode 3116. Kth Smallest Amount With Single Denomination Combination
+///
+/// Hard
+///
+/// You are given an integer array coins representing coins of different 
+/// denominations and an integer k.
+///
+/// You have an infinite number of coins of each denomination. However, 
+/// you are not allowed to combine coins of different denominations.
+///
+/// Return the kth smallest amount that can be made using these coins.
+///
+/// Example 1:
+/// Input: coins = [3,6,9], k = 3
+/// Output: 9
+/// Explanation: The given coins can make the following amounts:
+/// Coin 3 produces multiples of 3: 3, 6, 9, 12, 15, etc.
+/// Coin 6 produces multiples of 6: 6, 12, 18, 24, etc.
+/// Coin 9 produces multiples of 9: 9, 18, 27, 36, etc.
+/// All of the coins combined produce: 3, 6, 9, 12, 15, etc.
+///
+/// Example 2:
+/// Input: coins = [5,2], k = 7
+/// Output: 12
+/// Explanation: The given coins can make the following amounts:
+/// Coin 5 produces multiples of 5: 5, 10, 15, 20, etc.
+/// Coin 2 produces multiples of 2: 2, 4, 6, 8, 10, 12, etc.
+/// All of the coins combined produce: 2, 4, 5, 6, 8, 10, 12, 14, 15, etc.
+///
+/// Constraints:
+/// 1. 1 <= coins.length <= 15
+/// 2. 1 <= coins[i] <= 25
+/// 3. 1 <= k <= 2 * 10^9
+/// 4. coins contains pairwise distinct integers.
+/// </summary>
+long long LeetCodeMath::findKthSmallest(vector<int>& coins, int k)
+{
+    vector<int> reduced_coins;
+    int n = coins.size();
+    for (int i = 0; i < n; i++)
+    {
+        bool divisible = false;
+        for (int j = 0; j < n; j++)
+        {
+            if (i == j) continue;
+            if (coins[i] % coins[j] == 0)
+            {
+                divisible = true;
+                break;
+            }
+        }
+        if (!divisible) reduced_coins.push_back(coins[i]);
+    }
+    n = reduced_coins.size();
+    int bit_full = 1 << n;
+    vector<vector<long long>> factors(2);
+    for (int i = 1; i < bit_full; i++)
+    {
+        int bit_count = 0;
+        long long product = 1;
+        for (int j = 0; j < n; j++)
+        {
+            if ((i & (1 << j)) != 0)
+            {
+                bit_count++;
+                long long gcd_j = std::gcd(product, (long long)reduced_coins[j]);
+                product = product * (long long)reduced_coins[j] / gcd_j;
+            }
+        }
+        if (bit_count % 2 == 1) factors[0].push_back(product);
+        else factors[1].push_back(product);
+    }
+    long long result = 0;
+    long long first = 0, last = LLONG_MAX;
+    while (first <= last)
+    {
+        long long mid = first + (last - first) / 2;
+        long long count = 0;
+        for (size_t i = 0; i < factors.size(); i++)
+        {
+            for (size_t j = 0; j < factors[i].size(); j++)
+            {
+                if (i == 0) count += mid / factors[i][j];
+                else count -= mid / factors[i][j];
+            }
+        }
+        if (count >= (long long)k)
+        {
+            result = mid;
+            last = mid - 1;
+        }
+        else
+        {
+            first = mid + 1;
+        }
+    }
+    return result;
+}
 #pragma endregion
 

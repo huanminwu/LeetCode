@@ -784,8 +784,23 @@ void TestLeetCode3085(void)
     Logger::WriteMessage("word = " + word + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3090(void)
+{
+    Logger::WriteMessage("Test Leet Code 3090");
+    LeetCodeTwoPointer leetCode;
+    string s = "bcbbbcba";
+    int result = leetCode.maximumLengthSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aaaa";
+    result = leetCode.maximumLengthSubstring(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode3090();
     TestLeetCode3085();
     TestLeetCode2972();
     TestLeetCode2970();
