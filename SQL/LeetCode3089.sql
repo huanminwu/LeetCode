@@ -100,8 +100,7 @@ Max_User_Post AS
             post_date BETWEEN '2024-02-01' AND '2024-02-28'
     ) AS T
     GROUP BY
-        [user_id],
-        [post_date]
+        [user_id]
 )
 SELECT
     A.[user_id],

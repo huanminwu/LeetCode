@@ -4524,16 +4524,16 @@ int LeetCodeBinarySearch::earliestSecondToMarkIndicesII(vector<int>& nums, vecto
 /// </summary>
 int LeetCodeBinarySearch::medianOfUniquenessArray(vector<int>& nums)
 {
-    int n = nums.size();
-    int first = 0;
-    int last = (n + 1) * n / 2;
+    long long n = nums.size();
+    long long first = 0;
+    long long last = (n + 1) * n / 2;
     int result = 0;
     while (first <= last)
     {
-        int middle = first + (last - first) / 2;
+        long long middle = first + (last - first) / 2;
         unordered_map<int, int> num_count;
         int i = 0;
-        int count = 0;
+        long long count = 0;
         for (size_t j = 0; j < nums.size(); j++)
         {
             num_count[nums[j]]++;
@@ -4558,7 +4558,7 @@ int LeetCodeBinarySearch::medianOfUniquenessArray(vector<int>& nums)
         }
         else
         {
-            result = middle;
+            result = (int)middle;
             last = middle - 1;
         }
     }
