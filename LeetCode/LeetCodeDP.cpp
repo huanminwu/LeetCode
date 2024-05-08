@@ -17867,5 +17867,72 @@ int LeetCodeDP::numberOfStableArraysII(int zero, int one, int limit)
     int result = (int)(dp[zero][one].first + dp[zero][one].second) % M;
     return result;
 }
+
+/// <summary>
+/// LeetCode 3135. Equalize Strings by Adding or Removing Characters at 
+///                Ends
+/// 
+/// Medium
+///
+/// Given two strings initial and target, your task is to modify initial 
+/// by performing a series of operations to make it equal to target.
+///
+/// In one operation, you can add or remove one character only at the 
+/// beginning or the end of the string initial.
+///
+/// Return the minimum number of operations required to transform initial 
+/// into target.
+/// 
+/// Example 1:
+/// Input: initial = "abcde", target = "cdef"
+/// Output: 3
+/// Explanation:
+/// Remove 'a' and 'b' from the beginning of initial, then add 'f' to 
+/// the end.
+///
+/// Example 2:
+/// Input: initial = "axxy", target = "yabx"
+/// Output: 6
+/// Explanation:
+/// Operation	Resulting String
+/// Add 'y' to the beginning	"yaxxy"
+/// Remove from end	"yaxx"
+/// Remove from end	"yax"
+/// Remove from end	"ya"
+/// Add 'b' to the end	"yab"
+/// Add 'x' to the end	"yabx"
+///
+/// Example 3:
+/// Input: initial = "xyz", target = "xyz"
+/// Output: 0
+/// Explanation:
+/// No operations are needed as the strings are already equal.
+/// 
+/// Constraints:
+/// 1. 1 <= initial.length, target.length <= 1000
+/// 2. initial and target consist only of lowercase English letters.
+/// </summary>
+int LeetCodeDP::minOperations(string initial, string target)
+{
+    vector<vector<int>>dp(initial.size(), vector<int>(target.size()));
+    int max_len = 0;
+    for (size_t i = 0; i < initial.size(); i++)
+    {
+        for (size_t j = 0; j < target.size(); j++)
+        {
+            if (initial[i] == target[j])
+            {
+                dp[i][j] = 1;
+                if (i > 0 && j > 0)
+                {
+                    dp[i][j] += dp[i - 1][j - 1];
+                }
+                max_len = max(max_len, dp[i][j]);
+            }
+        }
+    }
+    return initial.size() + target.size() - 2 * max_len;
+}
+
 #pragma endregion
 

@@ -5130,8 +5130,29 @@ void TestLeetCode3130(void)
     Logger::WriteMessage("limit = " + to_string(zero) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3135(void)
+{
+    Logger::WriteMessage("Test Leet Code 3135");
+    LeetCodeDP leetCode;
+    string initial = "abcde", target = "cdef";
+    int result = leetCode.minOperations(initial, target);
+    Logger::WriteMessage("initial = " + initial + "; target = " + target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    initial = "axxy", target = "yabx";
+    result = leetCode.minOperations(initial, target);
+    Logger::WriteMessage("initial = " + initial + "; target = " + target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    initial = "xyz", target = "xyz";
+    result = leetCode.minOperations(initial, target);
+    Logger::WriteMessage("initial = " + initial + "; target = " + target);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3135();
     TestLeetCode3130();
     TestLeetCode3129();
     TestLeetCode3117();

@@ -6885,10 +6885,12 @@ void TestLeetCode3120(void)
     LeetCodeString leetCode;
     string word = "aaAbcBC";
     int result = leetCode.numberOfSpecialCharsI(word);
+    Logger::WriteMessage("word = " + word);
     Logger::WriteMessage("result = " + to_string(result));
 
     word = "abc";
     result = leetCode.numberOfSpecialCharsI(word);
+    Logger::WriteMessage("word = " + word);
     Logger::WriteMessage("result = " + to_string(result));
 
     word = "abBCab";
@@ -6902,19 +6904,61 @@ void TestLeetCode3121(void)
     LeetCodeString leetCode;
     string word = "aaAbcBC";
     int result = leetCode.numberOfSpecialCharsII(word);
+    Logger::WriteMessage("word = " + word);
     Logger::WriteMessage("result = " + to_string(result));
 
     word = "abc";
     result = leetCode.numberOfSpecialCharsII(word);
+    Logger::WriteMessage("word = " + word);
     Logger::WriteMessage("result = " + to_string(result));
 
     word = "abBCab";
     result = leetCode.numberOfSpecialCharsII(word);
+    Logger::WriteMessage("word = " + word);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3136(void)
+{
+    Logger::WriteMessage("Test Leet Code 3136");
+    LeetCodeString leetCode;
+    string word = "234Adas";
+    bool result = leetCode.isValidWord(word);
+    Logger::WriteMessage("word = " + word);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : " false"));
+
+    word = "b3";
+    result = leetCode.isValidWord(word);
+    Logger::WriteMessage("word = " + word);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : " false"));
+
+    word = "a3$e";
+    result = leetCode.isValidWord(word);
+    Logger::WriteMessage("word = " + word);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : " false"));
+}
+
+void TestLeetCode3137(void)
+{
+    Logger::WriteMessage("Test Leet Code 3137");
+    LeetCodeString leetCode;
+    string word = "leetcodeleet";
+    int k = 4;
+    int result = leetCode.minimumOperationsToMakeKPeriodic(word, k);
+    Logger::WriteMessage("word = " + word + "k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word = "leetcoleet";
+    k = 2;
+    result = leetCode.minimumOperationsToMakeKPeriodic(word, k);
+    Logger::WriteMessage("word = " + word + "k = " + to_string(k));
     Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCodeString(void)
 {
+    TestLeetCode3137();
+    TestLeetCode3136();
     TestLeetCode3121();
     TestLeetCode3120();
     TestLeetCode3119();

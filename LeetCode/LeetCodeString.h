@@ -14521,6 +14521,96 @@ public:
     /// 2. word consists of only lowercase and uppercase English letters.
     /// </summary>
     int numberOfSpecialCharsII(string word);
+
+    /// <summary>
+    /// LeetCode 3136. Valid Word 
+    /// 
+    /// Easy
+    ///
+    /// A word is considered valid if:
+    /// It contains a minimum of 3 characters.
+    /// It consists of the digits 0-9, and the uppercase and lowercase English 
+    /// letters. (Not necessary to have all of them.)
+    /// It includes at least one vowel.
+    /// It includes at least one consonant.
+    /// You are given a string word.
+    /// 
+    /// Return true if word is valid, otherwise, return false.
+    ///
+    /// Notes:
+    /// 'a', 'e', 'i', 'o', 'u', and their uppercases are vowels.
+    /// A consonant is an English letter that is not a vowel.
+    /// Example 1:
+    /// Input: word = "234Adas"
+    /// Output: true
+    /// Explanation:
+    /// This word satisfies the conditions.
+    ///
+    /// Example 2:
+    /// Input: word = "b3"
+    /// Output: false
+    /// Explanation:
+    /// The length of this word is fewer than 3, and does not have a vowel.
+    ///
+    /// Example 3:
+    /// Input: word = "a3$e"
+    /// Output: false
+    /// Explanation:
+    /// This word contains a '$' character and does not have a consonant.
+    /// Constraints:
+    /// 1. 1 <= word.length <= 20
+    /// 2. word consists of English uppercase and lowercase letters, 
+    ///    digits, '@', '#', and '$'.
+    /// </summary>
+    bool isValidWord(string word);
+
+    /// <summary>
+    /// LeetCode 3137. Minimum Number of Operations to Make Word K-Periodic
+    /// 
+    /// Medium
+    ///
+    /// You are given a string word of size n, and an integer k such that 
+    /// k divides n.
+    ///
+    /// In one operation, you can pick any two indices i and j, that are 
+    /// divisible by k, then replace the substring of length k starting at 
+    /// i with the substring of length k starting at j. That is, replace 
+    /// the substring word[i..i + k - 1] with the substring 
+    /// word[j..j + k - 1].
+    ///
+    /// Return the minimum number of operations required to make word 
+    /// k-periodic.
+    ///
+    /// We say that word is k-periodic if there is some string s of length 
+    /// k such that word can be obtained by concatenating s an arbitrary 
+    /// number of times. For example, if word == ¡°ababab¡±, then word is 
+    /// 2-periodic for s = "ab".
+    ///
+    /// Example 1:
+    /// Input: word = "leetcodeleet", k = 4
+    /// Output: 1
+    /// Explanation:
+    /// We can obtain a 4-periodic string by picking i = 4 and j = 0. After 
+    /// this operation, word becomes equal to "leetleetleet".
+    ///
+    /// Example 2:
+    /// Input: word = "leetcoleet", k = 2
+    /// Output: 3
+    /// Explanation:
+    /// We can obtain a 2-periodic string by applying the operations in the 
+    /// table below.
+    /// i	j	word
+    /// 0	2	etetcoleet
+    /// 4	0	etetetleet
+    /// 6	0	etetetetet
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == word.length <= 10^5
+    /// 2. 1 <= k <= word.length
+    /// 3. k divides word.length.
+    /// 4. word consists only of lowercase English letters.
+    /// </summary>
+    int minimumOperationsToMakeKPeriodic(string word, int k);
 #pragma endregion
 };
 
