@@ -6955,8 +6955,37 @@ void TestLeetCode3137(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3138(void)
+{
+    Logger::WriteMessage("Test Leet Code 3138");
+    LeetCodeString leetCode;
+    string s = "abba";
+    int result = leetCode.minAnagramLength(s);
+    Logger::WriteMessage("s = " + s + "result = " + to_string(result));
+
+    s = "cdef";
+    result = leetCode.minAnagramLength(s);
+    Logger::WriteMessage("s = " + s + "result = " + to_string(result));
+}
+
+void TestLeetCode3146(void)
+{
+    Logger::WriteMessage("Test Leet Code 3146");
+    LeetCodeString leetCode;
+    string s = "abc", t = "bac";
+    int result = leetCode.findPermutationDifference(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+
+    s = "abcde", t = "edbac";
+    result = leetCode.findPermutationDifference(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+}
+
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3146();
+    TestLeetCode3138();
     TestLeetCode3137();
     TestLeetCode3136();
     TestLeetCode3121();

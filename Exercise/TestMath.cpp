@@ -6823,8 +6823,111 @@ void TestLeetCode3116(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3139(void)
+{
+    Logger::WriteMessage("Test Leet Code 3139");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 4, 1 };
+    int cost1 = 5, cost2 = 2;
+    int result = leetCode.minCostToEqualizeArray(nums, cost1, cost2);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("cost1 = " + to_string(cost1) + "; cost2 =  " + to_string(cost2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3,3,3,5 };
+    cost1 = 2, cost2 = 1;
+    result = leetCode.minCostToEqualizeArray(nums, cost1, cost2);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("cost1 = " + to_string(cost1) + "; cost2 =  " + to_string(cost2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,5,3 };
+    cost1 = 1, cost2 = 3;
+    result = leetCode.minCostToEqualizeArray(nums, cost1, cost2);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("cost1 = " + to_string(cost1) + "; cost2 =  " + to_string(cost2));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3143(void)
+{
+    Logger::WriteMessage("Test Leet Code 3143");
+    LeetCodeMath leetCode;
+    vector<vector<int>> points = { {2, 2},{-1, -2},{-4, 4},{-3, 1},{3, -3} };
+    string s = "abdca";
+    int result = leetCode.maxPointsInsideSquare(points, s);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    points = { {1, 1},{-2, -2},{-2, 2} };
+    s = "abb";
+    result = leetCode.maxPointsInsideSquare(points, s);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    points = { {1, 1},{-1, -1},{2, -2} };
+    s = "ccd";
+    result = leetCode.maxPointsInsideSquare(points, s);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode3153(void)
+{
+    Logger::WriteMessage("Test Leet Code 3153");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 13, 23, 12 };
+    long long result = leetCode.sumDigitDifferences(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,10,10,10 };
+    result = leetCode.sumDigitDifferences(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3154(void)
+{
+    Logger::WriteMessage("Test Leet Code 3154");
+    LeetCodeMath leetCode;
+    int k = 0;
+    int result = leetCode.waysToReachStair(k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    k = 1;
+    result = leetCode.waysToReachStair(k);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3155(void)
+{
+    Logger::WriteMessage("Test Leet Code 3155");
+    LeetCodeMath leetCode;
+    vector<int> count = { 4, 3 }, upgrade = { 3, 5 }, sell = { 4, 2 }, money = { 8, 9 };
+    vector<int> result = leetCode.maxUpgrades(count, upgrade, sell, money);
+    Logger::WriteMessage(count);
+    Logger::WriteMessage(upgrade);
+    Logger::WriteMessage(sell);
+    Logger::WriteMessage(money);
+    Logger::WriteMessage(result);
+
+    count = { 1 }, upgrade = { 2 }, sell = { 1 }, money = { 1 };
+    result = leetCode.maxUpgrades(count, upgrade, sell, money);
+    Logger::WriteMessage(count);
+    Logger::WriteMessage(upgrade);
+    Logger::WriteMessage(sell);
+    Logger::WriteMessage(money);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3155();
+    TestLeetCode3154();
+    TestLeetCode3153();
+    TestLeetCode3143();
+    TestLeetCode3139();
     TestLeetCode3116();
     TestLeetCode3115();
     TestLeetCode3111();

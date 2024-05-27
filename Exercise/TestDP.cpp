@@ -5150,8 +5150,40 @@ void TestLeetCode3135(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3144(void)
+{
+    Logger::WriteMessage("Test Leet Code 3144");
+    LeetCodeDP leetCode;
+    string s = "fabccddg";
+    int result = leetCode.minimumSubstringsInPartition(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "abababaccddb";
+    result = leetCode.minimumSubstringsInPartition(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode3147(void)
+{
+    Logger::WriteMessage("Test Leet Code 3147");
+    LeetCodeDP leetCode;
+    vector<int>energy = { 5, 2, -10, -5, 1 };
+    int k = 3;
+    int result = leetCode.maximumEnergy(energy, k);
+    Logger::WriteMessage(energy);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    energy = { -2,-3,-1 };
+    k = 2;
+    result = leetCode.maximumEnergy(energy, k);
+    Logger::WriteMessage(energy);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3144();
+    TestLeetCode3147();
     TestLeetCode3135();
     TestLeetCode3130();
     TestLeetCode3129();

@@ -1399,8 +1399,28 @@ void TestLeetCode3133(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3141(void)
+{
+    Logger::WriteMessage("Test Leet Code 3141");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 9, 12, 9, 11 };
+    int m = 4;
+    vector<int> result = leetCode.maxHammingDistances(nums, m);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("m = " + to_string(m));
+    Logger::WriteMessage(result);
+
+    nums = { 3, 4, 6, 10 };
+    m = 4;
+    result = leetCode.maxHammingDistances(nums, m);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("m = " + to_string(m));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3141();
     TestLeetCode3133();
     TestLeetCode3125();
     TestLeetCode3097();

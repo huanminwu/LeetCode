@@ -10202,8 +10202,90 @@ void TestLeetCode3132(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3142(void)
+{
+    Logger::WriteMessage("Test Leet Code 3142");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {1, 0, 2},{1, 0, 2} };
+    bool result = leetCode.satisfiesConditions(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    grid = { {1, 1, 1},{0, 0, 0} };
+    result = leetCode.satisfiesConditions(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    grid = { {1},{2},{3} };
+    result = leetCode.satisfiesConditions(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3148(void)
+{
+    Logger::WriteMessage("Test Leet Code 3148");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid =
+    {
+        {9, 5, 7, 3},{8, 9, 6, 1},{6, 7, 14, 3},{2, 5, 3, 1}
+    };
+    int result = leetCode.maxScore(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {4,3,2},{3,2,1}
+    };
+    result = leetCode.maxScore(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3151(void)
+{
+    Logger::WriteMessage("Test Leet Code 3151");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1 };
+    bool result = leetCode.isArraySpecial(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result? "true" : "false"));
+
+    nums = { 2,1,4 };
+    result = leetCode.isArraySpecial(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 4,3,1,6 };
+    result = leetCode.isArraySpecial(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3152(void)
+{
+    Logger::WriteMessage("Test Leet Code 3152");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 4, 1, 2, 6 };
+    vector<vector<int>> queries = { {0, 4} };
+    vector<bool> result = leetCode.isArraySpecial(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 4,3,1,6 };
+    queries = { {0,2} ,{2,3} };
+    result = leetCode.isArraySpecial(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3152();
+    TestLeetCode3151();
+    TestLeetCode3148();
+    TestLeetCode3142();
     TestLeetCode3132();
     TestLeetCode3131();
     TestLeetCode3128();

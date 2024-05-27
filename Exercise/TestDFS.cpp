@@ -2353,8 +2353,29 @@ void TestLeetCode3040(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3149(void)
+{
+    Logger::WriteMessage("Test Leet Code 3149");
+    LeetCodeDFS leetCode;
+    vector<int> nums = { 1,0,2 };
+    vector<int> result = leetCode.findPermutation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 0,2,1 };
+    result = leetCode.findPermutation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 0, 2, 3, 4, 1 };
+    result = leetCode.findPermutation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3149();
     TestLeetCode140();
     TestLeetCode131();
     TestLeetCode1066();

@@ -22052,5 +22052,381 @@ long long LeetCodeMath::findKthSmallest(vector<int>& coins, int k)
     }
     return result;
 }
+
+/// <summary>
+/// LeetCode 3139. Minimum Cost to Equalize Array
+/// 
+/// Hard
+/// 
+/// You are given an integer array nums and two integers cost1 and cost2. 
+/// You are allowed to perform either of the following operations any 
+/// number of times:
+///
+/// Choose an index i from nums and increase nums[i] by 1 for a cost of 
+/// cost1.
+/// Choose two different indices i, j, from nums and increase nums[i] and 
+/// nums[j] by 1 for a cost of cost2.
+/// Return the minimum cost required to make all elements in the array 
+/// equal.
+/// 
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+/// 
+/// Example 1:
+/// Input: nums = [4,1], cost1 = 5, cost2 = 2
+/// Output: 15
+/// Explanation:
+/// The following operations can be performed to make the values equal:
+/// Increase nums[1] by 1 for a cost of 5. nums becomes [4,2].
+/// Increase nums[1] by 1 for a cost of 5. nums becomes [4,3].
+/// Increase nums[1] by 1 for a cost of 5. nums becomes [4,4].
+/// The total cost is 15.
+///
+/// Example 2:
+/// Input: nums = [2,3,3,3,5], cost1 = 2, cost2 = 1
+/// Output: 6
+/// Explanation:
+/// The following operations can be performed to make the values equal:
+/// Increase nums[0] and nums[1] by 1 for a cost of 1. nums becomes 
+/// [3,4,3,3,5].
+/// Increase nums[0] and nums[2] by 1 for a cost of 1. nums becomes 
+/// [4,4,4,3,5].
+/// Increase nums[0] and nums[3] by 1 for a cost of 1. nums becomes 
+/// [5,4,4,4,5].
+/// Increase nums[1] and nums[2] by 1 for a cost of 1. nums becomes 
+/// [5,5,5,4,5].
+/// Increase nums[3] by 1 for a cost of 2. nums becomes [5,5,5,5,5].
+/// The total cost is 6.
+///
+/// Example 3:
+/// Input: nums = [3,5,3], cost1 = 1, cost2 = 3
+/// Output: 4
+/// Explanation:
+/// The following operations can be performed to make the values equal:
+/// Increase nums[0] by 1 for a cost of 1. nums becomes [4,5,3].
+/// Increase nums[0] by 1 for a cost of 1. nums becomes [5,5,3].
+/// Increase nums[2] by 1 for a cost of 1. nums becomes [5,5,4].
+/// Increase nums[2] by 1 for a cost of 1. nums becomes [5,5,5].
+/// The total cost is 4.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^6
+/// 3. 1 <= cost1 <= 10^6
+/// 4. 1 <= cost2 <= 10^6
+/// </summary>
+int LeetCodeMath::minCostToEqualizeArray(vector<int>& nums, int cost1, int cost2)
+{
+    int ma = *max_element(nums.begin(), nums.end());
+    int mi = *min_element(nums.begin(), nums.end());
+    int n = nums.size(), M = 1000000007;
+    long long sum = accumulate(nums.begin(), nums.end(), 0LL);
+    long long total = 1LL * ma * n - sum;
+
+    // case 1
+    if (cost1 * 2 <= cost2 || n <= 2) 
+    {
+        return (total * cost1) % M;
+    }
+
+    // case 2
+    long long op1 = max(0LL, (ma - mi) * 2 - total);
+    long long op2 = total - op1;
+    long long result = (op1 + op2 % 2) * cost1 + op2 / 2 * cost2;
+
+    // case 3
+    total += op1 / (n - 2) * n;
+    op1 %= n - 2;
+    op2 = total - op1;
+    result = min(result, (op1 + op2 % 2) * cost1 + op2 / 2 * cost2);
+
+    // case 4
+    for (int i = 0; i < 2; i++) 
+    {
+        total += n;
+        result = min(result, total % 2 * cost1 + total / 2 * cost2);
+    }
+
+    return result % M;
+}
+
+/// <summary>
+/// LeetCode 3143. Maximum Points Inside the Square
+/// 
+/// Medium
+///
+/// You are given a 2D array points and a string s where, points[i] 
+/// represents the coordinates of point i, and s[i] represents the tag 
+/// of point i.
+///
+/// A valid square is a square centered at the origin (0, 0), has edges 
+/// parallel to the axes, and does not contain two points with the same 
+/// tag.
+///
+/// Return the maximum number of points contained in a valid square.
+///
+/// Note:
+/// A point is considered to be inside the square if it lies on or 
+/// within the square's boundaries.
+/// The side length of the square can be zero.
+///
+/// Example 1:
+/// Input: points = [[2,2],[-1,-2],[-4,4],[-3,1],[3,-3]], s = "abdca"
+/// Output: 2
+/// Explanation:
+/// The square of side length 4 covers two points points[0] and points[1].
+///
+/// Example 2:
+/// Input: points = [[1,1],[-2,-2],[-2,2]], s = "abb"
+/// Output: 1
+/// Explanation:
+/// The square of side length 2 covers one point, which is points[0].
+///
+/// Example 3:
+/// Input: points = [[1,1],[-1,-1],[2,-2]], s = "ccd"
+/// Output: 0
+/// Explanation:
+/// It's impossible to make any valid squares centered at the origin such 
+/// that it covers only one point among points[0] and points[1].
+///
+/// Constraints:
+/// 1. 1 <= s.length, points.length <= 10^5
+/// 2. points[i].length == 2
+/// 3. -10^9 <= points[i][0], points[i][1] <= 10^9
+/// 4. s.length == points.length
+/// 5. points consists of distinct coordinates.
+/// 6. s consists only of lowercase English letters.
+/// </summary>
+int LeetCodeMath::maxPointsInsideSquare(vector<vector<int>>& points, string s)
+{
+    map<int, vector<char>> distances;
+    unordered_set<char> chars;
+    for (size_t i = 0; i < points.size(); i++)
+    {
+        distances[max(abs(points[i][0]), abs(points[i][1]))].push_back(s[i]);
+    }
+    int result = 0;
+    while (!distances.empty())
+    {
+        auto itr = distances.begin();
+        for (char c : itr->second)
+        {
+            if (chars.count(c) > 0)
+            {
+                return result;
+            }
+            chars.insert(c);
+        }
+        result += itr->second.size();
+        distances.erase(distances.begin());
+    }
+    return result;
+}
+
+
+/// <summary>
+/// LeetCode 3153. Sum of Digit Differences of All Pairs
+/// 
+/// Medium
+///
+/// You are given an array nums consisting of positive integers where all 
+/// integers have the same number of digits.
+///
+/// The digit difference between two integers is the count of different 
+/// digits that are in the same position in the two integers.
+///
+/// Return the sum of the digit differences between all pairs of integers 
+/// in nums.
+///
+/// Example 1:
+/// Input: nums = [13,23,12]
+/// Output: 4
+/// Explanation:
+/// We have the following:
+/// - The digit difference between 13 and 23 is 1.
+/// - The digit difference between 13 and 12 is 1.
+/// - The digit difference between 23 and 12 is 2.
+/// So the total sum of digit differences between all pairs of integers 
+/// is 1 + 1 + 2 = 4.
+///
+/// Example 2:
+/// Input: nums = [10,10,10,10]
+/// Output: 0
+/// Explanation:
+/// All the integers in the array are the same. So the total sum of digit 
+/// differences between all pairs of integers will be 0.
+///
+/// Constraints:
+/// 1. 2 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] < 10^9
+/// 3. All integers in nums have the same number of digits.
+/// </summary>
+long long LeetCodeMath::sumDigitDifferences(vector<int>& nums)
+{
+    int n = to_string(nums[0]).size();
+    vector<vector<int>> dp(n, vector<int>(10));
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        string str = to_string(nums[i]);
+        for (size_t j = 0; j < str.size(); j++)
+        {
+            int d = str[j] - '0';
+            dp[j][d]++;
+        }
+    }
+    long long result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        long long count = 0;
+        for (int j = 0; j < 10; j++)
+        {
+            count += dp[i][j] * (nums.size() - dp[i][j]);
+        }
+        count /= 2;
+        result += count;
+    }
+    return result;
+}
+
+
+/// <summary>
+/// LeetCode 3154. Find Number of Ways to Reach the K-th Stair
+/// 
+/// Hard
+///
+/// You are given a non-negative integer k. There exists a staircase with 
+/// an infinite number of stairs, with the lowest stair numbered 0.
+///
+/// Alice has an integer jump, with an initial value of 0. She starts on 
+/// stair 1 and wants to reach stair k using any number of operations. If 
+/// she is on stair i, in one operation she can:
+///
+/// Go down to stair i - 1. This operation cannot be used consecutively or 
+/// on stair 0.
+/// Go up to stair i + 2jump. And then, jump becomes jump + 1.
+/// Return the total number of ways Alice can reach stair k.
+///
+/// Note that it is possible that Alice reaches the stair k, and performs 
+/// some operations to reach the stair k again.
+///
+/// Example 1:
+/// Input: k = 0
+/// Output: 2
+/// Explanation:
+/// The 2 possible ways of reaching stair 0 are:
+/// Alice starts at stair 1.
+/// Using an operation of the first type, she goes down 1 stair to 
+/// reach stair 0.
+/// Alice starts at stair 1.
+/// Using an operation of the first type, she goes down 1 stair to reach 
+/// stair 0.
+/// Using an operation of the second type, she goes up 20 stairs to reach 
+/// stair 1.
+/// Using an operation of the first type, she goes down 1 stair to reach 
+/// stair 0.
+///
+/// Example 2:
+/// Input: k = 1
+/// Output: 4
+/// Explanation:
+/// The 4 possible ways of reaching stair 1 are:
+/// Alice starts at stair 1. Alice is at stair 1.
+/// Alice starts at stair 1.
+/// Using an operation of the first type, she goes down 1 stair to reach 
+/// stair 0.
+/// Using an operation of the second type, she goes up 20 stairs to reach 
+/// stair 1.
+/// Alice starts at stair 1.
+/// Using an operation of the second type, she goes up 20 stairs to reach 
+/// stair 2.
+/// Using an operation of the first type, she goes down 1 stair to reach 
+/// stair 1.
+/// Alice starts at stair 1.
+/// Using an operation of the first type, she goes down 1 stair to reach 
+/// stair 0.
+/// Using an operation of the second type, she goes up 20 stairs to reach 
+/// stair 1.
+/// Using an operation of the first type, she goes down 1 stair to reach 
+/// stair 0.
+/// Using an operation of the second type, she goes up 21 stairs to reach 
+/// stair 2.
+/// Using an operation of the first type, she goes down 1 stair to reach 
+/// stair 1.
+///
+/// Constraints:
+/// 1. 0 <= k <= 10^9
+/// </summary>
+int LeetCodeMath::waysToReachStair(int k)
+{
+    int result = 0;
+    for (long long i = 0; i < k + 4; i++)
+    {
+        long long x = 1LL << (long long)i;
+        long long n = (long long)i + 1;
+        if (x < (long long)k) continue;
+        if (x - n > (long long)k + 1) break;
+        long long y = x - k;
+        long long product = 1;
+        for (long long j = 0; j < y; j++)
+        {
+            product = product * (n - j) / (j + 1);
+        }
+        result += (int)product;
+    }
+    return result;
+}
+
+
+/// <summary>
+/// LeetCode 3155. Maximum Number of Upgradable Servers
+/// 
+/// Medium
+///
+/// You have n data centers and need to upgrade their servers.
+///
+/// You are given four arrays count, upgrade, sell, and money of length n, 
+/// which show:
+///
+/// The number of servers
+/// The cost of upgrading a single server
+/// The money you get by selling a server
+/// The money you initially have for each data center respectively.
+/// Return an array answer, where for each data center, the corresponding 
+/// element in answer represents the maximum number of servers that can 
+/// be upgraded.
+///
+/// Note that the money from one data center cannot be used for another 
+/// data center.
+///
+/// Example 1:
+/// Input: count = [4,3], upgrade = [3,5], sell = [4,2], money = [8,9]
+/// Output: [3,2]
+/// Explanation:
+/// For the first data center, if we sell one server, we'll have 
+/// 8 + 4 = 12 units of money and we can upgrade the remaining 3 servers.
+///
+/// For the second data center, if we sell one server, we'll have 
+/// 9 + 2 = 11 units of money and we can upgrade the remaining 2 servers.
+///
+/// Example 2:
+/// Input: count = [1], upgrade = [2], sell = [1], money = [1]
+/// Output: [0]
+/// 
+/// Constraints:
+/// 1. 1 <= count.length == upgrade.length == sell.length == money.length 
+/// <= 10^5
+/// 2. 1 <= count[i], upgrade[i], sell[i], money[i] <= 10^5
+/// </summary>
+vector<int> LeetCodeMath::maxUpgrades(vector<int>& count, vector<int>& upgrade,
+    vector<int>& sell, vector<int>& money)
+{
+    int n = count.size();
+    vector<int> result(count.size());
+    for (int i = 0; i < n; i++)
+    {
+
+        result[i] = (int)min((long long)count[i], ((long long)money[i] + (long long)count[i] * (long long)sell[i]) / ((long long)upgrade[i] + (long long)sell[i]));
+    }
+    return result;
+}
 #pragma endregion
 

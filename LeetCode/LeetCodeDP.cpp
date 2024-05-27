@@ -17934,5 +17934,132 @@ int LeetCodeDP::minOperations(string initial, string target)
     return initial.size() + target.size() - 2 * max_len;
 }
 
+/// <summary>
+/// LeetCode 3147. Taking Maximum Energy From the Mystic Dungeon
+/// 
+/// Medium
+///
+/// In a mystic dungeon, n magicians are standing in a line. Each magician 
+/// has an attribute that gives you energy. Some magicians can give you 
+/// negative energy, which means taking energy from you.
+///
+/// You have been cursed in such a way that after absorbing energy from 
+/// magician i, you will be instantly transported to magician (i + k). 
+/// This process will be repeated until you reach the magician where 
+/// (i + k) does not exist.
+///
+/// In other words, you will choose a starting point and then teleport 
+/// with k jumps until you reach the end of the magicians' sequence, 
+/// absorbing all the energy during the journey.
+///
+/// You are given an array energy and an integer k. Return the maximum 
+/// possible energy you can gain.
+/// 
+/// Example 1:
+/// Input: energy = [5,2,-10,-5,1], k = 3
+/// Output: 3
+/// Explanation: We can gain a total energy of 3 by starting from 
+/// magician 1 absorbing 2 + 1 = 3.
+/// Example 2:
+/// Input: energy = [-2,-3,-1], k = 2
+///
+/// Output: -1
+/// Explanation: We can gain a total energy of -1 by starting from 
+/// magician 2.
+/// 
+/// Constraints:
+/// 1. 1 <= energy.length <= 10^5
+/// 2. -1000 <= energy[i] <= 1000
+/// 3. 1 <= k <= energy.length - 1
+/// </summary>
+int LeetCodeDP::maximumEnergy(vector<int>& energy, int k)
+{
+    vector<int> dp(energy.size());
+    int result = INT_MIN;
+    int prev = 0;
+    for (int i = 0; i < (int)energy.size(); i++)
+    {
+        if (i - k < 0)
+        {
+            dp[i] = energy[i];
+        }
+        else
+        {
+            dp[i] = max(dp[i-k], 0) + energy[i];
+        }
+        if (i + k >= (int)dp.size()) result = max(result, dp[i]);
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3144. Minimum Substring Partition of Equal Character Frequency
+/// 
+/// Medium
+///
+/// Given a string s, you need to partition it into one or more balanced 
+/// substrings. For example, if s == "ababcc" then ("abab", "c", "c"), 
+/// ("ab", "abc", "c"), and ("ababcc") are all valid partitions, but 
+/// ("a", "bab", "cc"), ("aba", "bc", "c"), and ("ab", "abcc") are not. 
+/// The unbalanced substrings are bolded.
+///
+/// Return the minimum number of substrings that you can partition s into.
+///
+/// Note: A balanced string is a string where each character in the string 
+/// occurs the same number of times.
+/// 
+/// Example 1:
+/// Input: s = "fabccddg"
+/// Output: 3
+/// Explanation:
+/// We can partition the string s into 3 substrings in one of the 
+/// following ways: ("fab, "ccdd", "g"), or ("fabc", "cd", "dg").
+///
+/// Example 2:
+/// Input: s = "abababaccddb"
+///
+/// Output: 2
+/// Explanation:
+/// We can partition the string s into 2 substrings like so: ("abab", 
+/// "abaccddb").
+/// 
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 1000
+/// 2. s consists only of English lowercase letters.
+/// </summary>
+int LeetCodeDP::minimumSubstringsInPartition(string s)
+{
+    vector<int> dp(s.size(), INT_MAX);
+    dp[0] = 0;
+    int result = INT_MAX;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        vector<int> chars(26);
+        set<pair<int, char>> char_set;
+        for (size_t j = i; j < s.size(); j++)
+        {
+            int idx = s[j] - 'a';
+            chars[idx]++;
+            int max_f = chars[idx];
+            bool balance = true;
+            for (int k = 0; k < 26; k++)
+            {
+                if (chars[k] == 0) continue;
+                if (chars[k] != max_f)
+                {
+                    balance = false;
+                    break;
+                }
+            }
+            if (balance == true)
+            {
+                if (j + 1 == s.size()) result = min(result, dp[i] + 1);
+                else dp[j + 1] = min(dp[j+1], dp[i] + 1);
+            }
+        }
+    }
+    return result;
+}
 #pragma endregion
 

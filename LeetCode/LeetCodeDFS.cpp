@@ -9605,6 +9605,92 @@ int LeetCodeDFS::maxOperations(vector<int>& nums)
     result = max(result, maxOperations(nums, 0, nums.size() - 1, nums[nums.size() - 2] + nums[nums.size() - 1], dp));
     return result;
 }
+
+/// <summary>
+/// LeetCode 3149. Find the Minimum Cost Array Permutation
+/// </summary>
+void LeetCodeDFS::findPermutation(vector<int>& nums, int bit, int score, vector<int>& perm,
+    vector<vector<int>>& cache, int& min_score, vector<int>& result)
+{
+    if (!perm.empty())
+    {
+        if (cache[bit][perm.back()] <= score)
+        {
+            return;
+        }
+        cache[bit][perm.back()] = score;
+    }
+    if (perm.size() == nums.size())
+    {
+        score += abs(perm.back() - nums[perm[0]]);
+        if (score < min_score)
+        {
+            min_score = score;
+            result = vector<int>(perm);
+        }
+        return;
+    }
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (((1 << i) & bit) != 0)
+        {
+            continue;
+        }
+        int next_score = score;
+        if (!perm.empty())
+        {
+            next_score += abs(perm.back() - nums[i]);
+        }
+        perm.push_back(i);
+        findPermutation(nums, bit | (1 << i), next_score, perm, cache, min_score, result);
+        perm.pop_back();
+    }
+    return;
+}
+
+/// <summary>
+/// LeetCode 3149. Find the Minimum Cost Array Permutation
+/// 
+/// Hard
+///
+/// You are given an array nums which is a permutation of [0, 1, 2, ..., 
+/// n - 1]. The score of any permutation of [0, 1, 2, ..., n - 1] named 
+/// perm is defined as:
+/// score(perm) = |perm[0] - nums[perm[1]]| + |perm[1] - nums[perm[2]]| + 
+/// ... + |perm[n - 1] - nums[perm[0]]|
+///
+/// Return the permutation perm which has the minimum possible score. 
+/// If multiple permutations exist with this score, return the one 
+/// that is lexicographically smallest among them.
+/// 
+/// Example 1:
+/// Input: nums = [1,0,2]
+/// Output: [0,1,2]
+/// Explanation:
+/// The lexicographically smallest permutation with minimum cost is 
+/// [0,1,2]. The cost of this permutation is |0 - 0| + |1 - 2| + 
+/// |2 - 1| = 2.
+///
+/// Example 2:
+/// Input: nums = [0,2,1]
+/// Output: [0,2,1]
+/// Explanation:
+/// The lexicographically smallest permutation with minimum cost is 
+/// [0,2,1]. The cost of this permutation is |0 - 1| + |2 - 2| + 
+/// |1 - 0| = 2.
+/// Constraints:
+/// 1. 2 <= n == nums.length <= 14
+/// 2. nums is a permutation of [0, 1, 2, ..., n - 1].
+/// </summary>
+vector<int> LeetCodeDFS::findPermutation(vector<int>& nums)
+{
+    vector<vector<int>> cache(1 << nums.size(), vector<int>(nums.size(), INT_MAX));
+    int min_score = INT_MAX;
+    vector<int> result(nums.size());
+    vector<int> perm;
+    findPermutation(nums, 0, 0, perm, cache, min_score, result);
+    return result;
+}
 #pragma endregion
 
 

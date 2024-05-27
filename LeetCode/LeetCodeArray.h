@@ -20604,5 +20604,163 @@ public:
     ///    and adding x to each element of nums1.
     /// </summary>
     int addedIntegerII(vector<int>& nums1, vector<int>& nums2);
+
+    /// <summary>
+    /// LeetCode 3142. Check if Grid Satisfies Conditions
+    /// 
+    /// Easy
+    /// 
+    /// You are given a 2D matrix grid of size m x n. You need to check if 
+    /// each cell grid[i][j] is:
+    ///
+    /// Equal to the cell below it, i.e. grid[i][j] == grid[i + 1][j] (if 
+    /// it exists).
+    /// Different from the cell to its right, i.e. grid[i][j] != 
+    /// grid[i][j + 1] (if it exists).
+    /// Return true if all the cells satisfy these conditions, otherwise, 
+    /// return false.
+    /// 
+    /// Example 1:
+    /// Input: grid = [[1,0,2],[1,0,2]]
+    /// Output: true
+    /// Explanation:
+    /// All the cells in the grid satisfy the conditions.
+    ///
+    /// Example 2:
+    /// Input: grid = [[1,1,1],[0,0,0]]
+    /// Output: false
+    /// Explanation:
+    /// All cells in the first row are equal.
+    ///
+    /// Example 3:
+    /// Input: grid = [[1],[2],[3]]
+    /// Output: false
+    /// Explanation:
+    /// Cells in the first column have different values.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n, m <= 10
+    /// 2. 0 <= grid[i][j] <= 9
+    /// </summary>
+    bool satisfiesConditions(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// LeetCode 3148. Maximum Difference Score in a Grid
+    /// 
+    /// Medium
+    ///
+    /// You are given an m x n matrix grid consisting of positive integers. 
+    /// You can move from a cell in the matrix to any other cell that is 
+    /// either to the bottom or to the right (not necessarily adjacent). 
+    /// The score of a move from a cell with the value c1 to a cell with the 
+    /// value c2 is c2 - c1.
+    ///
+    /// You can start at any cell, and you have to make at least one move.
+    ///
+    /// Return the maximum total score you can achieve.
+    /// 
+    /// Example 1:
+    /// Input: grid = [[9,5,7,3],[8,9,6,1],[6,7,14,3],[2,5,3,1]]
+    /// Output: 9
+    /// Explanation: We start at the cell (0, 1), and we perform the following 
+    /// moves:
+    /// - Move from the cell (0, 1) to (2, 1) with a score of 7 - 5 = 2.
+    /// - Move from the cell (2, 1) to (2, 2) with a score of 14 - 7 = 7.
+    /// The total score is 2 + 7 = 9.
+    ///
+    /// Example 2:
+    /// Input: grid = [[4,3,2],[3,2,1]]
+    /// Output: -1
+    /// Explanation: We start at the cell (0, 0), and we perform one move: 
+    /// (0, 0) to (0, 1). The score is 3 - 4 = -1.
+    /// 
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 2 <= m, n <= 1000
+    /// 4. 4 <= m * n <= 10^5
+    /// 5. 1 <= grid[i][j] <= 10^5
+    /// </summary>
+    int maxScore(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// LeetCode 3151. Special Array I
+    /// 
+    /// Easy
+    ///
+    /// An array is considered special if every pair of its adjacent elements 
+    /// contains two numbers with different parity.
+    ///
+    /// You are given an array of integers nums. Return true if nums is a 
+    /// special array, otherwise, return false.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1]
+    ///
+    /// Output: true
+    ///
+    /// Explanation:
+    /// There is only one element. So the answer is true.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,1,4]
+    /// Output: true
+    /// Explanation:
+    /// There is only two pairs: (2,1) and (1,4), and both of them contain 
+    /// numbers with different parity. So the answer is true.
+    ///
+    /// Example 3:
+    /// Input: nums = [4,3,1,6]
+    /// Output: false 
+    /// Explanation:
+    /// nums[1] and nums[2] are both odd. So the answer is false.
+    ///
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 100
+    /// </summary>
+    bool isArraySpecial(vector<int>& nums);
+
+
+    /// <summary>
+    /// LeetCode 3152. Special Array II
+    /// 
+    /// Medium
+    ///
+    /// An array is considered special if every pair of its adjacent elements 
+    /// contains two numbers with different parity.
+    ///
+    /// You are given an array of integer nums and a 2D integer matrix queries, 
+    /// where for queries[i] = [fromi, toi] your task is to check that subarray
+    /// nums[fromi..toi] is special or not.
+    ///
+    /// Return an array of booleans answer such that answer[i] is true if 
+    /// nums[fromi..toi] is special.
+    ///
+    /// Example 1:
+    /// Input: nums = [3,4,1,2,6], queries = [[0,4]]
+    /// Output: [false]
+    ///
+    /// Explanation:
+    /// The subarray is [3,4,1,2,6]. 2 and 6 are both even.
+    ///
+    /// Example 2: 
+    /// Input: nums = [4,3,1,6], queries = [[0,2],[2,3]]
+    /// Output: [false,true]
+    /// Explanation:
+    /// The subarray is [4,3,1]. 3 and 1 are both odd. So the answer to this 
+    /// query is false.
+    /// The subarray is [1,6]. There is only one pair: (1,6) and it contains 
+    /// numbers with different parity. So the answer to this query is true.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^5
+    /// 3. 1 <= queries.length <= 10^5
+    /// 4. queries[i].length == 2
+    /// 5. 0 <= queries[i][0] <= queries[i][1] <= nums.length - 1
+    /// </summary>
+    vector<bool> isArraySpecial(vector<int>& nums, vector<vector<int>>& queries);
 };
 #endif  // LeetCodeArray_H
