@@ -6921,8 +6921,30 @@ void TestLeetCode3155(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3162(void)
+{
+    Logger::WriteMessage("Test Leet Code 3162");
+    LeetCodeMath leetCode;
+    vector<int> nums1 = { 1, 3, 4 };
+    vector<int> nums2 = { 1, 3, 4 };
+    int k = 1;
+    int result = leetCode.numberOfPairsI(nums1, nums2, k);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums1 = { 1,2,4,12 };
+    nums2 = { 2,4 };
+    k = 3;
+    result = leetCode.numberOfPairsI(nums1, nums2, k);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3162();
     TestLeetCode3155();
     TestLeetCode3154();
     TestLeetCode3153();

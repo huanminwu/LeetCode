@@ -20200,11 +20200,11 @@ int LeetCodeMath::stringCount(int n)
 {
     long count = 0, mod = (long)1e9 + 7;
     return ((
-        +modPow(26, n, mod)
-        - (n + 75) * modPow(25, n - 1, mod)
-        + (2 * n + 72) * modPow(24, n - 1, mod)
-        - (n + 23) * modPow(23, n - 1, mod)
-        ) % mod + mod) % mod;
+        +modPow(26, (long long)n, (long long)mod)
+        - ((long long)n + 75) * modPow(25, (long long)n - 1, (long long)mod)
+        + (2 * (long long)n + 72) * modPow(24, (long long)n - 1, (long long)mod)
+        - (n + 23) * modPow(23, (long long)n - 1, (long long)mod)
+        ) % (long long)mod + (long long)mod) % (long long)mod;
 }
 
 /// <summary>
@@ -22129,13 +22129,13 @@ int LeetCodeMath::minCostToEqualizeArray(vector<int>& nums, int cost1, int cost2
     }
 
     // case 2
-    long long op1 = max(0LL, (ma - mi) * 2 - total);
+    long long op1 = max(0LL, ((long long)ma - (long long)mi) * 2 - total);
     long long op2 = total - op1;
     long long result = (op1 + op2 % 2) * cost1 + op2 / 2 * cost2;
 
     // case 3
-    total += op1 / (n - 2) * n;
-    op1 %= n - 2;
+    total += op1 / ((long long)n - 2) * (long long)n;
+    op1 %= (long long)n - 2;
     op2 = total - op1;
     result = min(result, (op1 + op2 % 2) * cost1 + op2 / 2 * cost2);
 
@@ -22279,7 +22279,7 @@ long long LeetCodeMath::sumDigitDifferences(vector<int>& nums)
         long long count = 0;
         for (int j = 0; j < 10; j++)
         {
-            count += dp[i][j] * (nums.size() - dp[i][j]);
+            count += (long long)dp[i][j] * ((long long)nums.size() - (long long)dp[i][j]);
         }
         count /= 2;
         result += count;
@@ -22358,7 +22358,7 @@ long long LeetCodeMath::sumDigitDifferences(vector<int>& nums)
 int LeetCodeMath::waysToReachStair(int k)
 {
     int result = 0;
-    for (long long i = 0; i < k + 4; i++)
+    for (long long i = 0; i < (long long)k + 4; i++)
     {
         long long x = 1LL << (long long)i;
         long long n = (long long)i + 1;
@@ -22428,5 +22428,65 @@ vector<int> LeetCodeMath::maxUpgrades(vector<int>& count, vector<int>& upgrade,
     }
     return result;
 }
+
+/// <summary>
+/// LeetCode 3162. Find the Number of Good Pairs I
+/// 
+/// Easy
+///
+/// You are given 2 integer arrays nums1 and nums2 of lengths n and m 
+/// respectively. You are also given a positive integer k.
+///
+/// A pair (i, j) is called good if nums1[i] is divisible by 
+/// nums2[j] * k (0 <= i <= n - 1, 0 <= j <= m - 1).
+///
+/// Return the total number of good pairs.
+///
+/// Example 1:
+/// Input: nums1 = [1,3,4], nums2 = [1,3,4], k = 1
+/// Output: 5
+/// Explanation:
+/// The 5 good pairs are (0, 0), (1, 0), (1, 1), (2, 0), and (2, 2).
+///
+/// Example 2:
+/// Input: nums1 = [1,2,4,12], nums2 = [2,4], k = 3
+/// Output: 2
+/// Explanation:
+/// The 2 good pairs are (3, 0) and (3, 1).
+///
+/// Constraints:
+/// 1. 1 <= n, m <= 50
+/// 2. 1 <= nums1[i], nums2[j] <= 50
+/// 3. 1 <= k <= 50
+/// </summary>
+int LeetCodeMath::numberOfPairsI(vector<int>& nums1, vector<int>& nums2, int k)
+{
+    unordered_map<int, int> num_count;
+    for (size_t i = 0; i < nums2.size(); i++)
+    {
+        num_count[nums2[i]]++;
+    }
+    int result = 0;
+    for (size_t i = 0; i < nums1.size(); i++)
+    {
+        if (nums1[i] % k != 0) continue;
+        int n = nums1[i] / k;
+        for (int j = 1; j <= (int)sqrt(n); j++)
+        {
+            if (n % j != 0) continue;
+            if (num_count.count(j) > 0)
+            {
+                result += num_count[j];
+            }
+            if (n / j == j) continue;
+            if (num_count.count(n / j) > 0)
+            {
+                result += num_count[n / j];
+            }
+        }
+    }
+    return result;
+}
+
 #pragma endregion
 

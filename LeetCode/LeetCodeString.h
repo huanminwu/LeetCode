@@ -14687,6 +14687,86 @@ public:
     /// </summary>
     int findPermutationDifference(string s, string t);
 
+    /// <summary>
+    /// LeetCode 3167. Better Compression of String
+    /// 
+    /// Medium
+    ///
+    /// You are given a string compressed representing a compressed version of 
+    /// a string. The format is a character followed by its frequency. For 
+    /// example, "a3b1a1c2" is a compressed version of the string "aaabacc".
+    ///
+    /// We seek a better compression with the following conditions:
+    /// Each character should appear only once in the compressed version.
+    /// The characters should be in alphabetical order.
+    /// Return the better compression of compressed.
+    ///
+    /// Note: In the better version of compression, the order of letters may 
+    /// change, which is acceptable.
+    /// 
+    /// Example 1:
+    /// Input: compressed = "a3c9b2c1"
+    /// Output: "a3b2c10"
+    /// Explanation:
+    /// Characters "a" and "b" appear only once in the input, but "c" appears 
+    /// twice, once with a size of 9 and once with a size of 1.
+    ///
+    /// Hence, in the resulting string, it should have a size of 10.
+    ///
+    /// Example 2:
+    /// Input: compressed = "c2b3a1"
+    /// Output: "a1b3c2"
+    ///
+    /// Example 3:
+    /// Input: compressed = "a2b4c1"
+    /// Output: "a2b4c1"
+    ///
+    /// Constraints:
+    /// 1. 1 <= compressed.length <= 6 * 10^4
+    /// 2. compressed consists only of lowercase English letters and digits.
+    /// 3. compressed is a valid compression, i.e., each character is followed 
+    ///    by its frequency.
+    /// 4. Frequencies are in the range [1, 104] and have no leading zeroes.
+    /// </summary>
+    string betterCompression(string compressed);
+
+    /// <summary>
+    /// LeetCode 3163. String Compression III
+    /// 
+    /// Medium
+    ///
+    /// Given a string word, compress it using the following algorithm:
+    /// Begin with an empty string comp. While word is not empty, use the 
+    /// following operation:
+    /// Remove a maximum length prefix of word made of a single character c 
+    /// repeating at most 9 times.
+    /// Append the length of the prefix followed by c to comp.
+    /// Return the string comp.
+    ///
+    /// Example 1:
+    /// Input: word = "abcde"
+    /// Output: "1a1b1c1d1e"
+    /// Explanation:
+    /// Initially, comp = "". Apply the operation 5 times, choosing "a", "b", 
+    /// "c", "d", and "e" as the prefix in each operation.
+    /// For each prefix, append "1" followed by the character to comp.
+    ///
+    /// Example 2:
+    /// Input: word = "aaaaaaaaaaaaaabb"
+    /// Output: "9a5a2b"
+    /// Explanation:
+    /// Initially, comp = "". Apply the operation 3 times, choosing 
+    /// "aaaaaaaaa", "aaaaa", and "bb" as the prefix in each operation.
+    ///
+    /// For prefix "aaaaaaaaa", append "9" followed by "a" to comp.
+    /// For prefix "aaaaa", append "5" followed by "a" to comp.
+    /// For prefix "bb", append "2" followed by "b" to comp.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= word.length <= 2 * 10^5
+    /// 2. word consists only of lowercase English letters.
+    /// </summary>
+    string compressedStringIII(string word);
 #pragma endregion
 };
 

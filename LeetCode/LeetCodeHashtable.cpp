@@ -538,7 +538,7 @@ vector<int> LeetCodeHashtable::topKFrequent(vector<int>& nums, int k)
     unordered_map<int, int> num_count;
     for (int num : nums)  num_count[num]++;
     set<pair<int, int>> pq;
-    for (auto itr : num_count)
+    for (auto &itr : num_count)
     {
         pair<int, int> pair = make_pair(itr.second, itr.first);
         pq.insert(pair);
@@ -682,7 +682,7 @@ vector<string> LeetCodeHashtable::findRelativeRanks(vector<int>& nums)
     }
     int rank = 0;
     int count = 0;
-    int last_value;
+    int last_value = 0;
     for (map<int, int>::reverse_iterator itr = score_map.rbegin(); itr != score_map.rend(); ++itr)
     {
         count++;
@@ -749,7 +749,7 @@ int LeetCodeHashtable::findPairs(vector<int>& nums, int k)
         num_map[nums[i]]++;
     }
 
-    for (auto itr : num_map)
+    for (auto &itr : num_map)
     {
         if (k == 0)
         {
@@ -817,7 +817,7 @@ int LeetCodeHashtable::findLHS(vector<int>& nums)
     unordered_map<int, int> num_count;
     for (int num : nums) num_count[num]++;
     int max_length = 0;
-    for (auto itr : num_count)
+    for (auto &itr : num_count)
     {
         if (num_count.count(itr.first + 1) > 0)
         {
@@ -920,7 +920,7 @@ void LeetCodeHashtable::mergeAccount(unordered_map<string, set<int>> &account_ma
     for (size_t next = 1; next < merge_list.size(); next++)
     {
         account_map[name].erase(merge_list[next]);
-        for (auto email : account_emails[merge_list[next]])
+        for (auto &email : account_emails[merge_list[next]])
         {
             account_emails[index].insert(email);
         }
@@ -1007,13 +1007,13 @@ vector<vector<string>> LeetCodeHashtable::accountsMerge(vector<vector<string>>& 
     }
 
     // fetch all the result
-    for (auto itr : account_map)
+    for (auto &itr : account_map)
     {
         for (auto email_id : itr.second)
         {
             vector<string> account;
             account.push_back(itr.first);
-            for (auto email : account_emails[email_id])
+            for (auto &email : account_emails[email_id])
             {
                 account.push_back(email);
             }
@@ -1061,7 +1061,7 @@ bool LeetCodeHashtable::areSentencesSimilar(vector<string>& words1, vector<strin
 {
     if (words1.size() != words2.size()) return false;
     unordered_map<string, unordered_set<string>> similar_words;
-    for (auto itr : pairs)
+    for (auto &itr : pairs)
     {
         similar_words[itr.first].insert(itr.second);
         similar_words[itr.second].insert(itr.first);
@@ -1136,7 +1136,7 @@ string LeetCodeHashtable::shortestCompletingWord(string licensePlate, vector<str
             word_map[ch]++;
         }
         bool satisfy = true;
-        for (auto itr : license_map)
+        for (auto &itr : license_map)
         {
             if (word_map[itr.first] < itr.second)
             {
@@ -1322,7 +1322,7 @@ vector<string> LeetCodeHashtable::subdomainVisits(vector<string>& cpdomains)
     }
 
     vector<string> result;
-    for (auto itr : domain_map)
+    for (auto &itr : domain_map)
     {
         string str = to_string(itr.second) + " " + itr.first;
         result.push_back(str);
@@ -1389,7 +1389,7 @@ vector<string> LeetCodeHashtable::uncommonFromSentences(string A, string B)
         }
     }
 
-    for (auto itr : word_map)
+    for (auto &itr : word_map)
     {
         if (itr.second == 1) result.push_back(itr.first);
     }
@@ -1860,7 +1860,7 @@ vector<string> LeetCodeHashtable::mostVisitedPattern(vector<string>& username,
     {
         user_visit[username[i]].push_back(make_pair(timestamp[i], website[i]));
     }
-    for (auto itr : user_visit)
+    for (auto &itr : user_visit)
     {
         string user = itr.first;
         sort(user_visit[user].begin(), user_visit[user].end());
@@ -1879,7 +1879,7 @@ vector<string> LeetCodeHashtable::mostVisitedPattern(vector<string>& username,
                 }
             }
         }
-        for (auto web : hit)
+        for (auto &web : hit)
         {
             web_count[web]++;
         }
@@ -2209,7 +2209,7 @@ bool LeetCodeHashtable::uniqueOccurrences(vector<int>& arr)
     {
         num_occur[arr[i]]++;
     }
-    for (auto itr : num_occur)
+    for (auto &itr : num_occur)
     {
         if (occur_set.count(itr.second) > 0)
         {
@@ -2483,7 +2483,7 @@ int LeetCodeHashtable::maxNumberOfFamilies(int n, vector<vector<int>>& reservedS
         bit_map[reservedSeats[i][0] - 1] |= (1 << (reservedSeats[i][1] - 1));
     }
     int result = 0;
-    for (auto itr : bit_map)
+    for (auto &itr : bit_map)
     {
         if ((itr.second & 0B0111111110) == 0)
         {
@@ -2557,7 +2557,7 @@ int LeetCodeHashtable::findLucky(vector<int>& arr)
     }
 
     int result = -1;
-    for (auto itr : num_map)
+    for (auto &itr : num_map)
     {
         if (itr.first == itr.second && itr.first > result)
         {
@@ -2661,7 +2661,7 @@ vector<vector<string>> LeetCodeHashtable::displayTable(vector<vector<string>>& o
             table_id = tables[i];
             line.push_back(to_string(table_id));
         }
-        for (auto itr : tbl_orders)
+        for (auto &itr : tbl_orders)
         {
             if (i == -1) line.push_back(itr.first);
             else
@@ -3028,7 +3028,7 @@ int LeetCodeHashtable::numIdenticalPairs(vector<int>& nums)
         count_map[nums[i]]++;
     }
     int result = 0;
-    for (auto itr : count_map)
+    for (auto &itr : count_map)
     {
         result += itr.second * (itr.second - 1) / 2;
     }
@@ -3188,7 +3188,7 @@ vector<string> LeetCodeHashtable::alertNames(vector<string>& keyName, vector<str
     {
         entries[keyName[i]].push_back(keyTime[i]);
     }
-    for (auto itr : entries)
+    for (auto &itr : entries)
     {
         sort(itr.second.begin(), itr.second.end());
         for (size_t i = 2; i < itr.second.size(); i++)
@@ -3788,7 +3788,7 @@ vector<int> LeetCodeHashtable::findingUsersActiveMinutes(vector<vector<int>>& lo
     {
         access_map[logs[i][0]].insert(logs[i][1]);
     }
-    for (auto itr : access_map)
+    for (auto &itr : access_map)
     {
         if ((int)itr.second.size() <= k) result[itr.second.size() - 1]++;
     }
@@ -5882,4 +5882,78 @@ vector<long long> LeetCodeHashtable::mostFrequentIDs(vector<int>& nums, vector<i
     }
     return result;
 }
+
+/// <summary>
+/// LeetCode 3160. Find the Number of Distinct Colors Among the Balls
+/// 
+/// Medium
+///
+/// You are given an integer limit and a 2D array queries of size n x 2.
+///
+/// There are limit + 1 balls with distinct labels in the range 
+/// [0, limit]. Initially, all balls are uncolored. For every query in 
+/// queries that is of the form [x, y], you mark ball x with the color y. 
+/// After each query, you need to find the number of distinct colors 
+/// among the balls.
+/// 
+/// Return an array result of length n, where result[i] denotes the number 
+/// of distinct colors after ith query.
+///
+/// Note that when answering a query, lack of a color will not be 
+/// considered as a color.
+///
+/// Example 1:
+/// Input: limit = 4, queries = [[1,4],[2,5],[1,3],[3,4]]
+/// Output: [1,2,2,3]
+///
+/// Explanation:
+/// After query 0, ball 1 has color 4.
+/// After query 1, ball 1 has color 4, and ball 2 has color 5.
+/// After query 2, ball 1 has color 3, and ball 2 has color 5.
+/// After query 3, ball 1 has color 3, ball 2 has color 5, and ball 3 has 
+/// color 4.
+///
+/// Example 2:
+/// Input: limit = 4, queries = [[0,1],[1,2],[2,2],[3,4],[4,5]]
+///
+/// Output: [1,2,2,3,4]
+/// 
+/// Explanation:
+/// After query 0, ball 0 has color 1.
+/// After query 1, ball 0 has color 1, and ball 1 has color 2.
+/// After query 2, ball 0 has color 1, and balls 1 and 2 have color 2.
+/// After query 3, ball 0 has color 1, balls 1 and 2 have color 2, and 
+/// ball 3 has color 4.
+/// After query 4, ball 0 has color 1, balls 1 and 2 have color 2, ball 3 
+/// has color 4, and ball 4 has color 5.
+///
+/// Constraints:
+/// 1 <= limit <= 10^9
+/// 2. 1 <= n == queries.length <= 10^5
+/// 3. queries[i].length == 2
+/// 4. 0 <= queries[i][0] <= limit
+/// 5. 1 <= queries[i][1] <= 10^9
+/// </summary>
+vector<int> LeetCodeHashtable::queryResults(int limit, vector<vector<int>>& queries)
+{
+    vector<int> result;
+    unordered_map<int, int> balls, colors;
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        if (balls.count(queries[i][0]) > 0)
+        {
+            colors[balls[queries[i][0]]]--;
+            if (colors[balls[queries[i][0]]] == 0)
+            {
+                colors.erase(balls[queries[i][0]]);
+            }
+
+        }
+        balls[queries[i][0]] = queries[i][1];
+        colors[queries[i][1]]++;
+        result.push_back(colors.size());
+    }
+    return result;
+}
+
 #pragma endregion
