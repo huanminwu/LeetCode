@@ -3612,7 +3612,7 @@ void LeetCodeString::multiplyFormula(map<string, int> &atom_count, int& count)
 void LeetCodeString::mergeFormula(map<string, int> &atom_count, vector<map<string, int>>& formula_array)
 {
     int index = formula_array.size() - 1;
-    for (auto itr : atom_count)
+    for (auto &itr : atom_count)
     {
         formula_array[index][itr.first] += atom_count[itr.first];
     }
@@ -4464,7 +4464,7 @@ void LeetCodeString::calculatePolyExpression(
     if (op == "+")
     {
         result = poly1;
-        for (auto itr : poly2)
+        for (auto &itr : poly2)
         {
             result[itr.first] += itr.second;
         }
@@ -4479,9 +4479,9 @@ void LeetCodeString::calculatePolyExpression(
     }
     else if (op == "*")
     {
-        for (auto itr1 : poly1)
+        for (auto &itr1 : poly1)
         {
-            for (auto itr2 : poly2)
+            for (auto &itr2 : poly2)
             {
                 vector<string> term = itr1.first;
                 term.insert(term.end(), itr2.first.begin(), itr2.first.end());
@@ -4906,7 +4906,7 @@ string LeetCodeString::customSortString(string S, string T)
         }
     }
 
-    for (auto itr : char_map)
+    for (auto &itr : char_map)
     {
         result.append(itr.second);
     }
@@ -5232,7 +5232,7 @@ string LeetCodeString::mostCommonWord(string paragraph, vector<string>& banned)
     }
     int max_count = 0;
     string result;
-    for (auto itr : word_map)
+    for (auto &itr : word_map)
     {
         if (itr.second > max_count)
         {
@@ -6292,11 +6292,11 @@ vector<string> LeetCodeString::reorderLogFiles(vector<string>& logs)
 
     sort(letter_logs.begin(), letter_logs.end());
 
-    for (auto itr : letter_logs)
+    for (auto &itr : letter_logs)
     {
         result.push_back(itr.second + " " + itr.first);
     }
-    for (auto itr : digit_logs)
+    for (auto &itr : digit_logs)
     {
         result.push_back(itr.second + " " + itr.first);
     }
@@ -7201,9 +7201,9 @@ void LeetCodeString::braceExpansionIIUnion(string &expression, size_t& pos, unor
             unordered_set<string> right;
             braceExpansionIIProduct(expression, pos, right);
             if (result.empty()) result.insert("");
-            for (auto left_str : result)
+            for (auto &left_str : result)
             {
-                for (auto right_str : right)
+                for (auto &right_str : right)
                 {
                     left.insert(left_str + right_str);
                 }
@@ -7228,7 +7228,7 @@ void LeetCodeString::braceExpansionIIUnion(string &expression, size_t& pos, unor
             unordered_set<string> right;
             pos++;
             braceExpansionIIUnion(expression, pos, right);
-            for (auto right_str : right)
+            for (auto &right_str : right)
             {
                 result.insert(right_str);
             }
@@ -7296,7 +7296,7 @@ vector<string> LeetCodeString::braceExpansionII(string expression)
     unordered_set<string> left;
     size_t pos = 0;
     braceExpansionIIUnion(expression, pos, left);
-    for (auto str : left) result.push_back(str);
+    for (auto &str : left) result.push_back(str);
 
     sort(result.begin(), result.end());
     return result;
@@ -8102,9 +8102,9 @@ vector<string> LeetCodeString::beforeAndAfterPuzzles(vector<string>& phrases)
     }
     vector<string> result;
     set<string> out_set;
-    for (auto first : phrase_map)
+    for (auto &first : phrase_map)
     {
-        for (auto itr : first.second)
+        for (auto &itr : first.second)
         {
             string sentence = itr.first;
             size_t pos = sentence.find_last_of(' ');
@@ -8118,7 +8118,7 @@ vector<string> LeetCodeString::beforeAndAfterPuzzles(vector<string>& phrases)
             {
                 continue;
             }
-            for (auto after : phrase_map[last])
+            for (auto& after : phrase_map[last])
             {
                 // only one instance of the sentence
                 if ((sentence == after.first) && (after.second == 1))
@@ -8596,7 +8596,7 @@ int LeetCodeString::maxFreq(string s, int maxLetters, int minSize, int maxSize)
         second++;
     }
     int result = 0;
-    for (auto itr : words)
+    for (auto& itr : words)
     {
         result = max(result, itr.second);
     }
@@ -14837,7 +14837,7 @@ void LeetCodeString::addDuplicateFolderPaths(FolderNode* root, vector<vector<str
 string LeetCodeString::deleteDuplicateFolderPaths(FolderNode* root, unordered_map<string, FolderNode*>& node_map)
 {
     string subfolders;
-    for (auto itr : root->children)
+    for (auto& itr : root->children)
     {
         subfolders += deleteDuplicateFolderPaths(itr.second, node_map);
     }
@@ -14862,7 +14862,7 @@ string LeetCodeString::deleteDuplicateFolderPaths(FolderNode* root, unordered_ma
 vector<vector<string>> LeetCodeString::outputFolderPaths(FolderNode* root)
 {
     vector<vector<string>> paths;
-    for (auto itr : root->children)
+    for (auto& itr : root->children)
     {
         if (itr.second->is_deleted == 1) continue;
         vector<vector<string>> sub_paths = outputFolderPaths(itr.second);
@@ -16083,7 +16083,7 @@ vector<string> LeetCodeString::sortFeatures(vector<string>& features, vector<str
     vector<string> result;
     while (!pq.empty())
     {
-        auto itr = pq.top();
+        auto& itr = pq.top();
         pq.pop();
         result.push_back(features[0-itr.second]);
     }
@@ -16675,7 +16675,7 @@ int LeetCodeString::numOfPairs(vector<string>& nums, string target)
         str_map[nums[i]]++;
     }
     int result = 0;
-    for (auto itr : str_map)
+    for (auto& itr : str_map)
     {
         if (target.substr(0, itr.first.size()) == itr.first)
         {
@@ -19237,7 +19237,7 @@ string LeetCodeString::largestWordCount(vector<string>& messages, vector<string>
     }
     int words = 0;
     string result;
-    for (auto itr : word_count)
+    for (auto& itr : word_count)
     {
         if ((itr.second > words) || ((itr.second == words) && (itr.first > result)))
         {
@@ -20791,7 +20791,7 @@ int LeetCodeString::similarPairs(vector<string>& words)
         str_groups[str]++;
     }
     int result = 0;
-    for (auto itr : str_groups)
+    for (auto &itr : str_groups)
     {
         result += itr.second * (itr.second - 1) / 2;
     }
@@ -20891,7 +20891,7 @@ vector<int> LeetCodeString::topStudents(
         }
     }
     priority_queue<pair<int, int>> pq;
-    for (auto itr : scores)
+    for (auto &itr : scores)
     {
         pq.push(make_pair(itr.second, -itr.first));
     }
@@ -22761,7 +22761,7 @@ vector<string> LeetCodeString::findHighAccessEmployees(vector<vector<string>>& a
             ((access_times[i][1][2] - '0') * 10 + access_times[i][1][3] - '0');
         employee[access_times[i][0]].push_back(minutes);
     }
-    for (auto itr : employee)
+    for (auto& itr : employee)
     {
         sort(itr.second.begin(), itr.second.end());
         for (size_t i = 2; i < itr.second.size(); i++)
@@ -23501,7 +23501,7 @@ int LeetCodeString::maxPalindromesAfterOperations(vector<string>& words)
         }
     }
     int result = 0;
-    for (auto itr : word_size)
+    for (auto& itr : word_size)
     {
         while (itr.second > 0)
         {
@@ -24021,7 +24021,7 @@ long long LeetCodeString::countPrefixSuffixPairsII(vector<string>& words)
         }
         ~Trie()
         {
-            for (auto itr : children)
+            for (auto& itr : children)
             {
                 if (itr.second != nullptr) delete itr.second;
             }
@@ -24954,7 +24954,7 @@ int LeetCodeString::minimumOperationsToMakeKPeriodic(string word, int k)
         word_count[str]++;
     }
     int max_count = 0;
-    for (auto itr : word_count)
+    for (auto& itr : word_count)
     {
         max_count = max(max_count, itr.second);
     }
@@ -25074,4 +25074,143 @@ int LeetCodeString::findPermutationDifference(string s, string t)
     }
     return result;
 }
+
+/// <summary>
+/// LeetCode 3167. Better Compression of String
+/// 
+/// Medium
+///
+/// You are given a string compressed representing a compressed version of 
+/// a string. The format is a character followed by its frequency. For 
+/// example, "a3b1a1c2" is a compressed version of the string "aaabacc".
+///
+/// We seek a better compression with the following conditions:
+/// Each character should appear only once in the compressed version.
+/// The characters should be in alphabetical order.
+/// Return the better compression of compressed.
+///
+/// Note: In the better version of compression, the order of letters may 
+/// change, which is acceptable.
+/// 
+/// Example 1:
+/// Input: compressed = "a3c9b2c1"
+/// Output: "a3b2c10"
+/// Explanation:
+/// Characters "a" and "b" appear only once in the input, but "c" appears 
+/// twice, once with a size of 9 and once with a size of 1.
+///
+/// Hence, in the resulting string, it should have a size of 10.
+///
+/// Example 2:
+/// Input: compressed = "c2b3a1"
+/// Output: "a1b3c2"
+///
+/// Example 3:
+/// Input: compressed = "a2b4c1"
+/// Output: "a2b4c1"
+///
+/// Constraints:
+/// 1. 1 <= compressed.length <= 6 * 10^4
+/// 2. compressed consists only of lowercase English letters and digits.
+/// 3. compressed is a valid compression, i.e., each character is followed 
+///    by its frequency.
+/// 4. Frequencies are in the range [1, 104] and have no leading zeroes.
+/// </summary>
+string LeetCodeString::betterCompression(string compressed)
+{
+    string result;
+    vector<int> arr(26);
+    int char_index = 0, char_count = 0;
+    for (size_t i = 0; i < compressed.size(); i++)
+    {
+        if (isalpha(compressed[i]))
+        {
+            arr[char_index] += char_count;
+            char_index = compressed[i] - 'a';
+            char_count = 0;
+        }
+        else
+        {
+            char_count = char_count * 10 + compressed[i] - '0';
+        }
+    }
+    arr[char_index] += char_count;
+    for (int i = 0; i < 26; i++)
+    {
+        if (arr[i] == 0) continue;
+        result.push_back('a' + i);
+        result.append(to_string(arr[i]));
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3163. String Compression III
+/// 
+/// Medium
+///
+/// Given a string word, compress it using the following algorithm:
+/// Begin with an empty string comp. While word is not empty, use the 
+/// following operation:
+/// Remove a maximum length prefix of word made of a single character c 
+/// repeating at most 9 times.
+/// Append the length of the prefix followed by c to comp.
+/// Return the string comp.
+///
+/// Example 1:
+/// Input: word = "abcde"
+/// Output: "1a1b1c1d1e"
+/// Explanation:
+/// Initially, comp = "". Apply the operation 5 times, choosing "a", "b", 
+/// "c", "d", and "e" as the prefix in each operation.
+/// For each prefix, append "1" followed by the character to comp.
+///
+/// Example 2:
+/// Input: word = "aaaaaaaaaaaaaabb"
+/// Output: "9a5a2b"
+/// Explanation:
+/// Initially, comp = "". Apply the operation 3 times, choosing 
+/// "aaaaaaaaa", "aaaaa", and "bb" as the prefix in each operation.
+///
+/// For prefix "aaaaaaaaa", append "9" followed by "a" to comp.
+/// For prefix "aaaaa", append "5" followed by "a" to comp.
+/// For prefix "bb", append "2" followed by "b" to comp.
+/// 
+/// Constraints:
+/// 1. 1 <= word.length <= 2 * 10^5
+/// 2. word consists only of lowercase English letters.
+/// </summary>
+string LeetCodeString::compressedStringIII(string word)
+{
+    string result;
+    char ch = '#';
+    int char_count = 0;
+    for (size_t i = 0; i < word.size(); i++)
+    {
+        if (i == 0)
+        {
+            ch = word[i];
+            char_count = 1;
+        }
+        else if (word[i] != ch)
+        {
+            result.push_back('0' + char_count);
+            result.push_back(ch);
+            ch = word[i];
+            char_count = 1;
+        }
+        else if (char_count == 9)
+        {
+            result.push_back('0' + char_count);
+            result.push_back(ch);
+            ch = word[i];
+            char_count = 1;
+        }
+        else char_count++;
+    }
+    result.push_back('0' + char_count);
+    result.push_back(ch);
+    return result;
+}
+
 #pragma endregion

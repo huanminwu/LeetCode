@@ -1980,8 +1980,28 @@ void TestLeetCode3092(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3160(void)
+{
+    Logger::WriteMessage("Test Leet Code 3160");
+    LeetCodeHashtable leetCode;
+    int limit = 4;
+    vector<vector<int>> queries = { {1, 4},{2, 5},{1, 3},{3, 4} };
+    vector<int> result = leetCode.queryResults(limit, queries);
+    Logger::WriteMessage("limit = " + to_string(limit));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    limit = 4;
+    queries = { {0, 1},{1, 2},{2, 2},{3, 4},{4, 5} };
+    result = leetCode.queryResults(limit, queries);
+    Logger::WriteMessage("limit = " + to_string(limit));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3160();
     TestLeetCode3092();
     TestLeetCode3046();
     TestLeetCode3020();

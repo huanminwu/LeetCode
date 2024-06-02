@@ -6981,9 +6981,44 @@ void TestLeetCode3146(void)
     Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
 }
 
+void TestLeetCode3167(void)
+{
+    Logger::WriteMessage("Test Leet Code 3167");
+    LeetCodeString leetCode;
+    string compressed = "a3c9b2c1";
+    string result = leetCode.betterCompression(compressed);
+    Logger::WriteMessage("compressed = " + compressed + "; result = " + result);
+
+    compressed = "c2b3a1";
+    result = leetCode.betterCompression(compressed);
+    Logger::WriteMessage("compressed = " + compressed + "; result = " + result);
+
+    compressed = "a2b4c1";
+    result = leetCode.betterCompression(compressed);
+    Logger::WriteMessage("compressed = " + compressed + "; result = " + result);
+
+    compressed = "z3001c9b2c1";
+    result = leetCode.betterCompression(compressed);
+    Logger::WriteMessage("compressed = " + compressed + "; result = " + result);
+}
+
+void TestLeetCode3163(void)
+{
+    Logger::WriteMessage("Test Leet Code 3163");
+    LeetCodeString leetCode;
+    string word = "abcde";
+    string result = leetCode.compressedStringIII(word);
+    Logger::WriteMessage("compressed = " + word + "; result = " + result);
+
+    word = "aaaaaaaaaaaaaabb";
+    result = leetCode.compressedStringIII(word);
+    Logger::WriteMessage("compressed = " + word + "; result = " + result);
+}
 
 void TestLeetCodeString(void)
 {
+    TestLeetCode3163();
+    TestLeetCode3167();
     TestLeetCode3146();
     TestLeetCode3138();
     TestLeetCode3137();
