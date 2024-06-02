@@ -10280,8 +10280,32 @@ void TestLeetCode3152(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3159(void)
+{
+    Logger::WriteMessage("Test Leet Code 3159");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 3, 1, 7 };
+    vector<int> queries = { 1, 3, 2, 4 };
+    int x = 1;
+    vector<int> result = leetCode.occurrencesOfElement(nums, queries, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("x = " + to_string(x));
+    Logger::WriteMessage(result);
+
+    nums = { 1,2,3 };
+    queries = { 10 };
+    x = 5;
+    result = leetCode.occurrencesOfElement(nums, queries, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("x = " + to_string(x));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3159();
     TestLeetCode3152();
     TestLeetCode3151();
     TestLeetCode3148();

@@ -1372,7 +1372,7 @@ void TestLeetCode3125(void)
     Logger::WriteMessage("Test Leet Code 3125");
     LeetCodeBit leetCode;
     int n = 7;
-    int result = leetCode.maxNumber(n);
+    long long result = leetCode.maxNumber(n);
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 
     n = 9;
@@ -1418,8 +1418,29 @@ void TestLeetCode3141(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3158(void)
+{
+    Logger::WriteMessage("Test Leet Code 3158");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 2, 1, 3 };
+    int result = leetCode.duplicateNumbersXOR(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    result = leetCode.duplicateNumbersXOR(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,2,1 };
+    result = leetCode.duplicateNumbersXOR(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3158();
     TestLeetCode3141();
     TestLeetCode3133();
     TestLeetCode3125();
