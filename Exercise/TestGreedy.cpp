@@ -1820,8 +1820,50 @@ void TestLeetCode3088(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode3168(void)
+{
+    Logger::WriteMessage("Test Leet Code 3168");
+    LeetCodeGreedy leetCode;
+    string s = "EEEEEEE";
+    int result = leetCode.minimumChairs(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "ELELEEL";
+    result = leetCode.minimumChairs(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "ELEELEELLL";
+    result = leetCode.minimumChairs(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode3169(void)
+{
+    Logger::WriteMessage("Test Leet Code 3169");
+    LeetCodeGreedy leetCode;
+    int days = 10;
+    vector<vector<int>>  meetings = { {5, 7},{1, 3},{9, 10} };
+    int result = leetCode.countDays(days, meetings);
+    Logger::WriteMessage(meetings);
+    Logger::WriteMessage("days = " + to_string(days) + "; result = " + to_string(result));
+
+    days = 5;
+    meetings = { {2, 4},{1, 3} };
+    result = leetCode.countDays(days, meetings);
+    Logger::WriteMessage(meetings);
+    Logger::WriteMessage("days = " + to_string(days) + "; result = " + to_string(result));
+
+    days = 6;
+    meetings = { {1, 6} };
+    result = leetCode.countDays(days, meetings);
+    Logger::WriteMessage(meetings);
+    Logger::WriteMessage("days = " + to_string(days) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode3169();
+    TestLeetCode3168();
     TestLeetCode3088();
     TestLeetCode3081();
     TestLeetCode3009();
