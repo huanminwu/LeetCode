@@ -6367,4 +6367,153 @@ string LeetCodeGreedy::makeAntiPalindrome(string s)
     return result;
 }
 
+/// <summary>
+/// LeetCode 3168. Minimum Number of Chairs in a Waiting Room
+/// 
+/// Easy
+/// 
+/// You are given a string s. Simulate events at each second i:
+/// If s[i] == 'E', a person enters the waiting room and takes one of the 
+/// chairs in it.
+/// If s[i] == 'L', a person leaves the waiting room, freeing up a chair.
+/// Return the minimum number of chairs needed so that a chair is 
+/// available for every person who enters the waiting room given that it 
+/// is initially empty.
+///
+/// Example 1:
+/// Input: s = "EEEEEEE"
+/// Output: 7
+/// Explanation:
+/// After each second, a person enters the waiting room and no person 
+/// leaves it. Therefore, a minimum of 7 chairs is needed.
+///
+/// Example 2:
+/// Input: s = "ELELEEL"
+/// Output: 2
+/// Explanation:
+/// Let's consider that there are 2 chairs in the waiting room. The table 
+/// below shows the state of the waiting room at each second.
+///
+/// Second Event People in the Waiting Room Available Chairs
+/// 0   Enter   1   1
+/// 1   Leave   0   2
+/// 2   Enter   1   1
+/// 3   Leave   0   2
+/// 4   Enter   1   1
+/// 5   Enter   2   0
+/// 6   Leave   1   1
+///
+/// Example 3:
+/// Input: s = "ELEELEELLL"
+/// Output: 3
+///
+/// Explanation:
+/// Let's consider that there are 3 chairs in the waiting room. The table 
+/// below shows the state of the waiting room at each second.
+///
+/// Second  Event   People in the Waiting Room  Available Chairs
+/// 0   Enter   1   2
+/// 1   Leave   0   3
+/// 2   Enter   1   2
+/// 3   Enter   2   1
+/// 4   Leave   1   2
+/// 5   Enter   2   1
+/// 6   Enter   3   0
+/// 7   Leave   2   1
+/// 8   Leave   1   2
+/// 9   Leave   0   3
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 50
+/// 2. s consists only of the letters 'E' and 'L'.
+/// 3. s represents a valid sequence of entries and exits.
+/// </summary>
+int LeetCodeGreedy::minimumChairs(string s)
+{
+    int result = 0, count = 0;
+    for (char c : s)
+    {
+        if (c == 'E')
+        {
+            count++;
+            result = max(result, count);
+        }
+        else
+        {
+            count--;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3169. Count Days Without Meetings
+/// 
+/// Medium
+/// 
+/// You are given a positive integer days representing the total number of 
+/// days an employee is available for work (starting from day 1). You are 
+/// also given a 2D array meetings of size n where, meetings[i] = 
+/// [start_i, end_i] represents the starting and ending days of meeting i 
+/// (inclusive).
+///
+/// Return the count of days when the employee is available for work but 
+/// no meetings are scheduled.
+///
+/// Note: The meetings may overlap.
+/// Example 1:
+/// Input: days = 10, meetings = [[5,7],[1,3],[9,10]]
+/// Output: 2
+/// Explanation:
+/// There is no meeting scheduled on the 4th and 8th days.
+///  
+/// Example 2:
+/// Input: days = 5, meetings = [[2,4],[1,3]]
+/// Output: 1
+/// Explanation:
+/// There is no meeting scheduled on the 5th day.
+///
+/// Example 3:
+/// Input: days = 6, meetings = [[1,6]]
+/// Output: 0
+/// Explanation:
+/// Meetings are scheduled for all working days.
+/// 
+/// Constraints:
+/// 1. 1 <= days <= 10^9
+/// 2. 1 <= meetings.length <= 10^5
+/// 3. meetings[i].length == 2
+/// 4. 1 <= meetings[i][0] <= meetings[i][1] <= days
+/// </summary>
+int LeetCodeGreedy::countDays(int days, vector<vector<int>>& meetings)
+{
+    map<int, int> scan_line;
+    for (size_t i = 0; i < meetings.size(); i++)
+    {
+        scan_line[meetings[i][0]]++;
+        scan_line[meetings[i][1] + 1]--;
+    }
+    int result = 0;
+    int prev = 1;
+    long long sum = 0;
+    for (auto itr : scan_line)
+    {
+        sum += itr.second;
+        if (sum != 0)
+        {
+            if (prev != -1)
+            {
+                result += itr.first - prev;
+                prev = -1;
+            }
+        }
+        else
+        {
+            if (prev == -1) prev = itr.first;
+        }
+    }
+    result += days + 1 - prev;
+    return result;
+}
+
 #pragma endregion

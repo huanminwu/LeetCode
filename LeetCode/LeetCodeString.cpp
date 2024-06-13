@@ -25213,4 +25213,70 @@ string LeetCodeString::compressedStringIII(string word)
     return result;
 }
 
+/// <summary>
+/// LeetCode 3170. Lexicographically Minimum String After Removing Stars
+/// 
+/// Medium
+/// 
+/// You are given a string s. It may contain any number of '*' characters. 
+/// Your task is to remove all '*' characters.
+/// 
+/// While there is a '*', do the following operation:
+/// Delete the leftmost '*' and the smallest non-'*' character to its left.
+/// If there are several smallest characters, you can delete any of them.
+/// Return the lexicographically smallest resulting string after removing 
+/// all '*' characters.
+///
+/// Example 1:
+/// Input: s = "aaba*"
+/// Output: "aab"
+/// Explanation:
+/// We should delete one of the 'a' characters with '*'. If we choose 
+/// s[3], s becomes the lexicographically smallest.
+/// Example 2:
+/// Input: s = "abc"
+/// Output: "abc"
+/// Explanation:
+/// There is no '*' in the string.
+///  
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists only of lowercase English letters and '*'.
+/// 3. The input is generated such that it is possible to delete all '*' 
+///    characters.
+/// </summary>
+string LeetCodeString::clearStars(string s)
+{
+    vector<int> del(s.size());
+    vector<vector<int>>dp(26);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] != '*')
+        {
+            dp[s[i] - 'a'].push_back(i);
+        }
+        else
+        {
+            for (int j = 0; j < 26; j++)
+            {
+                if (!dp[j].empty())
+                {
+                    del[dp[j].back()] = 1;
+                    dp[j].pop_back();
+                    break;
+                }
+            }
+        }
+    }
+    string result;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] != '*' && del[i] != 1)
+        {
+            result.push_back(s[i]);
+        }
+    }
+    return result;
+}
+
 #pragma endregion

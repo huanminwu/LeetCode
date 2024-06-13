@@ -4008,8 +4008,35 @@ void TestLeetCode3068(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3157(void)
+{
+    Logger::WriteMessage("Test Leet Code 3157");
+    LeetCodeTree leetCode;
+    string input = "[50,6,2,30,80,7]";
+    TreeNode * root = leetCode.deserialize(input);
+    int result = leetCode.minimumSumLevel(root);
+    Logger::WriteMessage(input);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[36,17,10,null,null,24]";
+    root = leetCode.deserialize(input);
+    result = leetCode.minimumSumLevel(root);
+    Logger::WriteMessage(input);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[5,null,5,null,5]";
+    root = leetCode.deserialize(input);
+    result = leetCode.minimumSumLevel(root);
+    Logger::WriteMessage(input);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3157();
     TestLeetCode3068();
     TestLeetCode3004();
     TestLeetCode2925();

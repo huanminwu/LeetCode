@@ -1418,8 +1418,86 @@ void TestLeetCode3141(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3158(void)
+{
+    Logger::WriteMessage("Test Leet Code 3158");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 2, 1, 3 };
+    int result = leetCode.duplicateNumbersXOR(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    result = leetCode.duplicateNumbersXOR(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,2,1 };
+    result = leetCode.duplicateNumbersXOR(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3173(void)
+{
+    Logger::WriteMessage("Test Leet Code 3173");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 3, 7, 15 };
+    vector<int> result = leetCode.orArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 8,4,2 };
+    result = leetCode.orArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 5,4,9,11 };
+    result = leetCode.orArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3171(void)
+{
+    Logger::WriteMessage("Test Leet Code 3171");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 2, 4, 5 };
+    int k = 3;
+    int result = leetCode.minimumDifference(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2,1,2 };
+    k = 2;
+    result = leetCode.minimumDifference(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1 };
+    k = 10;
+    result = leetCode.minimumDifference(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1, 50, 16, 90, 59 };
+    k = 40;
+    result = leetCode.minimumDifference(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 6 };
+    k = 2;
+    result = leetCode.minimumDifference(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3171();
+    TestLeetCode3173();
+    TestLeetCode3158();
     TestLeetCode3141();
     TestLeetCode3133();
     TestLeetCode3125();

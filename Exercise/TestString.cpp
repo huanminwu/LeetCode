@@ -7015,8 +7015,22 @@ void TestLeetCode3163(void)
     Logger::WriteMessage("compressed = " + word + "; result = " + result);
 }
 
+void TestLeetCode3170(void)
+{
+    Logger::WriteMessage("Test Leet Code 3170");
+    LeetCodeString leetCode;
+    string s = "aaba*";
+    string result = leetCode.clearStars(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "abc";
+    result = leetCode.clearStars(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3170();
     TestLeetCode3163();
     TestLeetCode3167();
     TestLeetCode3146();

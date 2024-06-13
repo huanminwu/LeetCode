@@ -2874,6 +2874,111 @@ public:
     /// 3. 0 <= nums[i] < 2^m
     /// </summary>
     vector<int> maxHammingDistances(vector<int>& nums, int m);
+
+    /// <summary>
+    /// LeetCode 3158. Find the XOR of Numbers Which Appear Twice
+    /// 
+    /// Easy
+    /// 
+    /// You are given an array nums, where each number in the array appears 
+    /// either once or twice.
+    ///
+    /// Return the bitwise XOR of all the numbers that appear twice in the 
+    /// array, or 0 if no number appears twice.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,2,1,3]
+    /// Output: 1
+    /// Explanation:
+    /// The only number that appears twice in nums is 1.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,3]
+    /// Output: 0
+    /// Explanation:
+    /// No number appears twice in nums.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,2,1]
+    /// Output: 3
+    /// Explanation:
+    /// Numbers 1 and 2 appeared twice. 1 XOR 2 == 3.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 50
+    /// 2. 1 <= nums[i] <= 50
+    /// 3. Each number in nums appears either once or twice.
+    /// </summary>
+    int duplicateNumbersXOR(vector<int>& nums);
+
+    /// <summary>
+    /// LeetCode 3173. Bitwise OR of Adjacent Elements
+    /// 
+    /// Easy
+    /// 
+    /// Given an array nums of length n, return an array answer of length 
+    /// n - 1 such that answer[i] = nums[i] | nums[i + 1] where | is the 
+    /// bitwise OR operation.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,3,7,15]
+    /// Output: [3,7,15]
+    ///
+    /// Example 2:
+    /// Input: nums = [8,4,2]
+    /// Output: [12,6]
+    ///
+    /// Example 3:
+    /// Input: nums = [5,4,9,11]
+    /// Output: [5,13,11]
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 100
+    /// 2. 0 <= nums[i] <= 100
+    /// </summary>
+    vector<int> orArray(vector<int>& nums);
+
+    /// <summary>
+    /// LeetCode 3171. Find Subarray With Bitwise AND Closest to K
+    /// 
+    /// Hard
+    /// 
+    /// You are given an array nums and an integer k. You need to find a 
+    /// subarray of nums such that the absolute difference between k and the 
+    /// bitwise AND of the subarray elements is as small as possible. In other 
+    /// words, select a subarray nums[l..r] such that |k - (nums[l] AND 
+    /// nums[l + 1] ... AND nums[r])| is minimum.
+    ///
+    /// Return the minimum possible value of the absolute difference.
+    /// A subarray is a contiguous non-empty sequence of elements within an 
+    /// array.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,2,4,5], k = 3
+    /// Output: 1
+    /// Explanation:
+    /// The subarray nums[2..3] has AND value 4, which gives the minimum 
+    /// absolute difference |3 - 4| = 1.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,1,2], k = 2
+    /// Output: 0
+    /// Explanation:
+    /// The subarray nums[1..1] has AND value 2, which gives the minimum 
+    /// absolute difference |2 - 2| = 0.
+    ///
+    /// Example 3:
+    /// Input: nums = [1], k = 10
+    /// Output: 9
+    /// Explanation:
+    /// There is a single subarray with AND value 1, which gives the minimum 
+    /// absolute difference |10 - 1| = 9.
+    /// 
+    /// Constraints:
+    /// 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. 1 <= k <= 10^9
+    /// </summary>
+    int minimumDifference(vector<int>& nums, int k);
 #pragma endregion
 };
 #endif  // LeetCodeBit_H

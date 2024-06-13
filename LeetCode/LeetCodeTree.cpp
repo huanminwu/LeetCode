@@ -13072,4 +13072,61 @@ long long LeetCodeTree::maximumValueSum(vector<int>& nums, int k, vector<vector<
     vector<long long> result = maximumValueSum(0, -1, k, nums, neighbors);
     return result[0];
 }
+
+/// <summary>
+/// LeetCode 3157. Find the Level of Tree with Minimum Sum
+/// 
+/// Medium
+/// 
+/// Given the root of a binary tree root where each node has a value, 
+/// return the level of the tree that has the minimum sum of values 
+/// among all the levels (in case of a tie, return the lowest level).
+///
+/// Note that the root of the tree is at level 1 and the level of any 
+/// other node is its distance from the root + 1.
+///
+/// Example 1:
+/// Input: root = [50,6,2,30,80,7]
+/// Output: 2
+///
+/// Example 2:
+/// Input: root = [36,17,10,null,null,24]
+/// Output: 3
+///
+/// Example 3:
+/// Input: root = [5,null,5,null,5]
+///
+/// Output: 1
+///
+/// Constraints:
+/// 1. The number of nodes in the tree is in the range [1, 10^5].
+/// 2. 1 <= Node.val <= 10^9
+/// </summary>
+int LeetCodeTree::minimumSumLevel(TreeNode* root)
+{
+    queue<TreeNode*> queue;
+    queue.push(root);
+    long long sum = LLONG_MAX;
+    int result = 0, level = 0;
+    while (!queue.empty())
+    {
+        level++;
+        long long local_sum = 0;
+        size_t size = queue.size();
+        for (size_t i = 0; i < size; i++)
+        {
+            TreeNode* node = queue.front();
+            queue.pop();
+            local_sum += node->val;
+            if (node->left != nullptr) queue.push(node->left);
+            if (node->right != nullptr) queue.push(node->right);
+        }
+        if (local_sum < sum)
+        {
+            sum = local_sum;
+            result = level;
+        }
+    }
+    return result;
+}
 #pragma endregion
