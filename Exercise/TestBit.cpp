@@ -1372,7 +1372,7 @@ void TestLeetCode3125(void)
     Logger::WriteMessage("Test Leet Code 3125");
     LeetCodeBit leetCode;
     int n = 7;
-    int result = leetCode.maxNumber(n);
+    long long result = leetCode.maxNumber(n);
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 
     n = 9;

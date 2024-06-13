@@ -2968,7 +2968,7 @@ int LeetCodeMath::numRabbits(vector<int>& answers)
     {
         rabbits_count[r]++;
     }
-    for (auto itr : rabbits_count)
+    for (auto &itr : rabbits_count)
     {
         while (itr.second > 0)
         {
@@ -5775,7 +5775,7 @@ int LeetCodeMath::nthUglyNumber(int n, int a, int b, int c)
     while (first < last)
     {
         int middle = first + (last - first) / 2;
-        int x = (int)(middle / a + middle / b + middle / c -
+        int x = (int)((long long)middle / a + (long long)middle / b + (long long)middle / c -
             middle / ab - middle / ac - middle / bc +
             middle / abc);
         if (x < n)
@@ -6852,7 +6852,7 @@ vector<int> LeetCodeMath::sortByBits(vector<int>& arr)
         nums[count].push(-arr[i]);
     }
     vector<int> result;
-    for (auto itr : nums)
+    for (auto &itr : nums)
     {
         while (!itr.second.empty())
         {
@@ -7295,7 +7295,7 @@ int LeetCodeMath::countLargestGroup(int n)
     }
     int max_sum = 0;
     int result = 0;
-    for (auto itr : digits_count)
+    for (auto &itr : digits_count)
     {
         if (itr.second > max_sum)
         {
@@ -8470,7 +8470,7 @@ int LeetCodeMath::maxArea(int h, int w, vector<int>& horizontalCuts, vector<int>
         else width = verticalCuts[j] - verticalCuts[j - 1];
         max_width = max(max_width, width);
     }
-    result = (int)((long long)max_width * (long long)max_height % M);
+    result = ((long long)max_width * (long long)max_height % M);
     return (int)result;
 }
 
@@ -8622,7 +8622,7 @@ int LeetCodeMath::minAreaRect(vector<vector<int>>& points)
 
     for (auto i = coord_map.begin(); i != coord_map.end(); i++)
     {
-        auto j = i;
+        auto &j = i;
         j++;
         for (; j != coord_map.end(); j++)
         {
@@ -10610,7 +10610,7 @@ vector<int> LeetCodeMath::countPoints(vector<vector<int>>& points, vector<vector
         if (start != points.end())
         {
             auto end = upper_bound(points.begin(), points.end(), point1);
-            for (auto itr = start; itr != end; ++itr)
+            for (auto& itr = start; itr != end; ++itr)
             {
                 vector<int> pos = *itr;
                 if ((pos[0] - x) * (pos[0] - x) + (pos[1] - y) * (pos[1] - y) <= r * r)
@@ -10709,7 +10709,7 @@ int LeetCodeMath::makeStringSorted(string s)
     {
         cnt[s[i] - 'a'] += 1;
         long long prems = 0;
-        prems = accumulate(begin(cnt), begin(cnt) + (s[i] - 'a'), 0l) * ft[sz - i - 1] % M;
+        prems = accumulate(begin(cnt), begin(cnt) + (s[i] - 'a'), 0LL) * ft[sz - i - 1] % M;
         for (int n : cnt)
             prems = prems * im[n] % M;
         result = (result + prems) % M;
@@ -12275,7 +12275,7 @@ string LeetCodeMath::nextPalindrome(string num)
             result = num.substr(0, i);
             result.push_back(itr->first + '0');
             digits.erase(itr);
-            for (auto t : digits)
+            for (auto &t : digits)
             {
                 result.push_back(t.first + '0');
             }
@@ -13414,7 +13414,7 @@ long long LeetCodeMath::countPairs(vector<int>& nums, int k)
     {
         long long g = gcd(nums[i], k);
 
-        for (auto itr : gcd_count)
+        for (auto &itr : gcd_count)
         {
             if ((long long)itr.first * (long long)g % (long long)k == 0)
             {
@@ -14454,7 +14454,7 @@ long long LeetCodeMath::minSumSquareDiff(
         }
     }
     long long result = 0;
-    for (auto itr : diff)
+    for (auto &itr : diff)
     {
         result += (long long)(itr.first) * (long long)(itr.first) * (long long)itr.second;
     }
@@ -17452,7 +17452,7 @@ int LeetCodeMath::findValidSplit(vector<int>& nums)
     map<int, int> common;
     for (size_t i = 0; i < nums.size() - 1; i++)
     {
-        for (auto itr : arr[i])
+        for (auto &itr : arr[i])
         {
             if (factors.count(itr.first) > 0)
             {
@@ -18199,7 +18199,7 @@ int LeetCodeMath::minOperationsII(vector<int>& nums)
         }
         gcd_length[k] = accu_length[k] + 1;
         int max_length = 0;
-        for (auto itr : gcd_length)
+        for (auto &itr : gcd_length)
         {
             max_length = max(max_length, itr.second);
         }
@@ -19887,13 +19887,13 @@ int LeetCodeMath::minGroupsForValidAssignment(vector<int>& nums)
         num_count[nums[i]]++;
     }
     int min_val = nums.size();
-    for (auto itr : num_count) min_val = min(min_val, itr.second);
+    for (auto &itr : num_count) min_val = min(min_val, itr.second);
     int result = 0;
     for (int i = min_val + 1; i > 1; i--)
     {
         int a = i;
         result = 0;
-        for (auto itr : num_count)
+        for (auto &itr : num_count)
         {
             if (itr.second % a == 0)
             {
@@ -20203,7 +20203,7 @@ int LeetCodeMath::stringCount(int n)
         +modPow(26, (long long)n, (long long)mod)
         - ((long long)n + 75) * modPow(25, (long long)n - 1, (long long)mod)
         + (2 * (long long)n + 72) * modPow(24, (long long)n - 1, (long long)mod)
-        - (n + 23) * modPow(23, (long long)n - 1, (long long)mod)
+        - ((long long)n + 23) * modPow(23, (long long)n - 1, (long long)mod)
         ) % (long long)mod + (long long)mod) % (long long)mod;
 }
 
@@ -21107,11 +21107,11 @@ vector<long long> LeetCodeMath::countOfPairsII(int n, int x, int y)
 /// </summary>
 long long LeetCodeMath::flowerGame(int n, int m)
 {
-    long long result = 0;
-    long long odd_n = (n + 1) / 2;
-    long long even_n = n / 2;
-    long long odd_m = (m + 1) / 2;
-    long long even_m = m / 2;
+    long long result = 0LL;
+    long long odd_n = ((long long)n + 1) / 2;
+    long long even_n = (long long)n / 2;
+    long long odd_m = ((long long)m + 1) / 2;
+    long long even_m = (long long)m / 2;
     result = odd_n * even_m + even_n * odd_m;
     return result;
 }
@@ -21400,7 +21400,7 @@ int LeetCodeMath::mostFrequentPrime(vector<vector<int>>& mat)
     }
     int freq = 0;
     int result = -1;
-    for (auto itr : hash_count)
+    for (auto &itr : hash_count)
     {
         if (itr.second > freq)
         {
