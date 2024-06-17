@@ -7028,8 +7028,22 @@ void TestLeetCode3170(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode3174(void)
+{
+    Logger::WriteMessage("Test Leet Code 3174");
+    LeetCodeString leetCode;
+    string s = "abc";
+    string result = leetCode.clearDigits(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "cb34";
+    result = leetCode.clearDigits(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3174();
     TestLeetCode3170();
     TestLeetCode3163();
     TestLeetCode3167();

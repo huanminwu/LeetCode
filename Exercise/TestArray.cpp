@@ -10303,8 +10303,40 @@ void TestLeetCode3159(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3175(void)
+{
+    Logger::WriteMessage("Test Leet Code 3175");
+    LeetCodeArray leetCode;
+    vector<int> skills = { 4, 2, 6, 3, 9 };
+    int k = 2;
+    int result = leetCode.findWinningPlayer(skills, k);
+    Logger::WriteMessage(skills);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    skills = { 2,5,4 };
+    k = 3;
+    result = leetCode.findWinningPlayer(skills, k);
+    Logger::WriteMessage(skills);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3179(void)
+{
+    Logger::WriteMessage("Test Leet Code 3179");
+    LeetCodeArray leetCode;
+    int n = 4, k = 5;
+    int result = leetCode.valueAfterKSeconds(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 5, k = 3;
+    result = leetCode.valueAfterKSeconds(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3179();
+    TestLeetCode3175();
     TestLeetCode3159();
     TestLeetCode3152();
     TestLeetCode3151();

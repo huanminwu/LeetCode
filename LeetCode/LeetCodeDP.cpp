@@ -18061,5 +18061,170 @@ int LeetCodeDP::minimumSubstringsInPartition(string s)
     }
     return result;
 }
+
+/// <summary>
+/// LeetCode 3176. Find the Maximum Length of a Good Subsequence I
+/// 
+/// Medium
+/// 
+/// You are given an integer array nums and a non-negative integer k. A 
+/// sequence of integers seq is called good if there are at most k indices 
+/// i in the range [0, seq.length - 2] such that seq[i] != seq[i + 1].
+///
+/// Return the maximum possible length of a good subsequence of nums.
+///
+/// Example 1:
+/// Input: nums = [1,2,1,1,3], k = 2
+/// Output: 4
+/// Explanation:
+/// The maximum length subsequence is [1,2,1,1,3].
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4,5,1], k = 0
+/// Output: 2
+/// Explanation:
+/// The maximum length subsequence is [1,2,3,4,5,1].
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 500
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 0 <= k <= min(nums.length, 25)
+/// </summary>
+int LeetCodeDP::maximumLengthI(vector<int>& nums, int k)
+{
+    int result = 0;
+    vector<unordered_map<int, int>>dp(k + 1);
+    vector<int>max_length(k + 1);
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int a = nums[i];
+        for (int j = k; j >= 0; j--)
+        {
+            dp[j][a] = dp[j][a] + 1;
+            if (j > 0)
+            {
+                dp[j][a] = max(dp[j][a], max_length[j - 1] + 1);
+            }
+            max_length[j] = max(max_length[j], dp[j][a]);
+            result = max(result, max_length[j]);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3177. Find the Maximum Length of a Good Subsequence II
+/// 
+/// Hard
+///
+/// You are given an integer array nums and a non-negative integer k. A 
+/// sequence of integers seq is called good if there are at most k indices 
+/// i in the range [0, seq.length - 2] such that seq[i] != seq[i + 1].
+///
+/// Return the maximum possible length of a good subsequence of nums.
+///
+/// Example 1:
+/// Input: nums = [1,2,1,1,3], k = 2
+/// Output: 4
+/// Explanation:
+/// The maximum length subsequence is [1,2,1,1,3].
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4,5,1], k = 0
+/// Output: 2
+/// Explanation:
+/// The maximum length subsequence is [1,2,3,4,5,1].
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 5 * 10^3
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 0 <= k <= min(50, nums.length)
+/// </summary>
+int LeetCodeDP::maximumLengthII(vector<int>& nums, int k)
+{
+    int result = 0;
+    vector<unordered_map<int, int>>dp(k + 1);
+    vector<int>max_length(k + 1);
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int a = nums[i];
+        for (int j = k; j >= 0; j--)
+        {
+            dp[j][a] = dp[j][a] + 1;
+            if (j > 0)
+            {
+                dp[j][a] = max(dp[j][a], max_length[j - 1] + 1);
+            }
+            max_length[j] = max(max_length[j], dp[j][a]);
+            result = max(result, max_length[j]);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3180. Maximum Total Reward Using Operations I
+/// 
+/// Medium
+///
+/// You are given an integer array rewardValues of length n, representing 
+/// the values of rewards.
+///
+/// Initially, your total reward x is 0, and all indices are unmarked. You 
+/// are allowed to perform the following operation any number of times:
+///
+/// Choose an unmarked index i from the range [0, n - 1].
+/// If rewardValues[i] is greater than your current total reward x, then 
+/// add rewardValues[i] to x (i.e., x = x + rewardValues[i]), and mark the 
+/// index i.
+/// Return an integer denoting the maximum total reward you can collect by 
+/// performing the operations optimally.
+///
+/// Example 1:
+/// Input: rewardValues = [1,1,3,3]
+/// Output: 4
+/// Explanation:
+/// During the operations, we can choose to mark the indices 0 and 2 in 
+/// order, and the total reward will be 4, which is the maximum.
+///
+/// Example 2:
+/// Input: rewardValues = [1,6,4,3,2]
+///
+/// Output: 11
+/// Explanation:
+/// Mark the indices 0, 2, and 1 in order. The total reward will then be 
+/// 11, which is the maximum.
+///
+/// Constraints:
+/// 1. 1 <= rewardValues.length <= 2000
+/// 2. 1 <= rewardValues[i] <= 2000
+/// </summary>
+int LeetCodeDP::maxTotalRewardI(vector<int>& rewardValues)
+{
+    sort(rewardValues.begin(), rewardValues.end());
+    int k = rewardValues.back();
+    vector<int>dp(k);
+    dp[0] = 1;
+    int result = 0;
+    for (size_t i = 0; i < rewardValues.size(); i++)
+    {
+        if (i > 0 && rewardValues[i] == rewardValues[i - 1]) continue;
+        int m = rewardValues[i];
+        if (m != k) m = min(m, k - rewardValues[i]);
+        for (int j = m - 1; j >= 0; j--)
+        {
+            if (dp[j] == 1)
+            {
+                int p = j + rewardValues[i];
+                result = max(result, p);
+                if (p < k)
+                {
+                    dp[p] = 1;
+                }
+            }
+        }
+    }
+    return result;
+}
 #pragma endregion
 

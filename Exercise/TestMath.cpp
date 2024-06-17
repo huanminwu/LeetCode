@@ -6942,8 +6942,48 @@ void TestLeetCode3162(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3178(void)
+{
+    Logger::WriteMessage("Test Leet Code 3178");
+    LeetCodeMath leetCode;
+    int n = 3, k = 5;
+    int result = leetCode.numberOfChild(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 5, k = 6;
+    result = leetCode.numberOfChild(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 4, k = 2;
+    result = leetCode.numberOfChild(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3183(void)
+{
+    Logger::WriteMessage("Test Leet Code 3183");
+    LeetCodeMath leetCode;
+    int n = 4;
+    int result = leetCode.numberOfWays(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 12;
+    result = leetCode.numberOfWays(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 5;
+    result = leetCode.numberOfWays(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 100000;
+    result = leetCode.numberOfWays(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3183();
+    TestLeetCode3178();
     TestLeetCode3162();
     TestLeetCode3155();
     TestLeetCode3154();

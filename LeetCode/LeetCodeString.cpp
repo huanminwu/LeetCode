@@ -25114,7 +25114,7 @@ int LeetCodeString::findPermutationDifference(string s, string t)
 /// 2. compressed consists only of lowercase English letters and digits.
 /// 3. compressed is a valid compression, i.e., each character is followed 
 ///    by its frequency.
-/// 4. Frequencies are in the range [1, 104] and have no leading zeroes.
+/// 4. Frequencies are in the range [1, 10^4] and have no leading zeroes.
 /// </summary>
 string LeetCodeString::betterCompression(string compressed)
 {
@@ -25279,4 +25279,52 @@ string LeetCodeString::clearStars(string s)
     return result;
 }
 
+
+/// <summary>
+/// LeetCode 3174. Clear Digits
+/// 
+/// Easy
+/// 
+/// You are given a string s.
+/// Your task is to remove all digits by doing this operation repeatedly:
+///
+/// Delete the first digit and the closest non-digit character to its left.
+/// Return the resulting string after removing all digits.
+/// 
+/// Example 1:
+/// Input: s = "abc"
+/// Output: "abc"
+/// Explanation:
+/// There is no digit in the string.
+/// 
+/// Example 2:
+/// Input: s = "cb34"
+/// Output: ""
+/// Explanation:
+/// First, we apply the operation on s[2], and s becomes "c4".
+/// 
+/// Then we apply the operation on s[1], and s becomes "".
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 100
+/// 2. s consists only of lowercase English letters and digits.
+/// 3. The input is generated such that it is possible to delete all 
+///    digits.
+/// </summary>
+string LeetCodeString::clearDigits(string s)
+{
+    string result;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (isdigit(s[i]))
+        {
+            result.pop_back();
+        }
+        else
+        {
+            result.push_back(s[i]);
+        }
+    }
+    return result;
+}
 #pragma endregion

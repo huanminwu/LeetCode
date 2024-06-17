@@ -1999,9 +1999,30 @@ void TestLeetCode3160(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3158(void)
+{
+    Logger::WriteMessage("Test Leet Code 3158");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1, 2, 1, 3 };
+    int result = leetCode.duplicateNumbersXOR(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    result = leetCode.duplicateNumbersXOR(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,2,1 };
+    result = leetCode.duplicateNumbersXOR(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
     TestLeetCode3160();
+    TestLeetCode3158();
     TestLeetCode3092();
     TestLeetCode3046();
     TestLeetCode3020();

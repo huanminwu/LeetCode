@@ -9688,7 +9688,9 @@ vector<int> LeetCodeDFS::findPermutation(vector<int>& nums)
     int min_score = INT_MAX;
     vector<int> result(nums.size());
     vector<int> perm;
-    findPermutation(nums, 0, 0, perm, cache, min_score, result);
+    perm.push_back(0);
+    int bitmask = 1;
+    findPermutation(nums, bitmask, 0, perm, cache, min_score, result);
     return result;
 }
 #pragma endregion
