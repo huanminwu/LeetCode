@@ -3106,7 +3106,7 @@ bool LeetCodeArray::isPossible(vector<int>& nums)
         }
     }
 
-    for (auto itr : heap_map)
+    for (auto &itr : heap_map)
     {
         if (itr.second.top() < 3) return false;
     }
@@ -10338,7 +10338,7 @@ bool LeetCodeArray::canBeEqual(vector<int>& target, vector<int>& arr)
         dest_map[target[i]]++;
     }
 
-    for (auto itr : src_map)
+    for (auto &itr : src_map)
     {
         if (dest_map[itr.first] != itr.second) return false;
     }
@@ -12746,7 +12746,7 @@ vector<int> LeetCodeArray::frequencySort(vector<int>& nums)
         num_map[nums[i]]++;
     }
     priority_queue<pair<int, int>> pq;
-    for (auto itr : num_map)
+    for (auto &itr : num_map)
     {
         pq.push(make_pair(-itr.second, itr.first));
     }
@@ -32607,4 +32607,82 @@ int LeetCodeArray::valueAfterKSeconds(int n, int k)
         }
     }
     return dp[n - 1];
+}
+
+/// <summary>
+/// LeetCode 3189. Minimum Moves to Get a Peaceful Board
+///
+/// Medium
+/// 
+/// Given a 2D array rooks of length n, where rooks[i] = [xi, yi] 
+/// indicates the position of a rook on an n x n chess board. Your 
+/// task is to move the rooks 1 cell at a time vertically or horizontally 
+/// (to an adjacent cell) such that the board becomes peaceful.
+///
+/// A board is peaceful if there is exactly one rook in each row and each 
+/// column.
+///
+/// Return the minimum number of moves required to get a peaceful board.
+///
+/// Note that at no point can there be two rooks in the same cell.
+/// 
+/// Example 1:
+/// Input: rooks = [[0,0],[1,0],[1,1]]
+/// Output: 3
+/// Explanation:
+///
+/// Example 2:
+/// Input: rooks = [[0,0],[0,1],[0,2],[0,3]]
+/// Output: 6
+/// Explanation:
+///
+/// Constraints:
+/// 1. 1 <= n == rooks.length <= 500
+/// 2. 0 <= xi, yi <= n - 1
+/// 3. The input is generated such that there are no 2 rooks in the same 
+///    cell.
+/// </summary>
+int LeetCodeArray::minMoves(vector<vector<int>>& rooks)
+{
+    int result = 0;
+    int n = rooks.size();
+    vector<int> rows(n), cols(n);
+    for (size_t i = 0; i < rooks.size(); i++)
+    {
+        rows[rooks[i][0]]++;
+        cols[rooks[i][1]]++;
+    }
+    queue<int> row_dup, row_empty, col_dup, col_empty;
+    for (int i = 0; i < n; i++)
+    {
+        if (rows[i] > 1)
+        {
+            for (int j = 0; j < rows[i] - 1; j++) row_dup.push(i);
+        }
+        else if (rows[i] == 0)
+        {
+            row_empty.push(i);
+        }
+        if (cols[i] > 1)
+        {
+            for (int j = 0; j < cols[i] - 1; j++) col_dup.push(i);
+        }
+        else if (cols[i] == 0)
+        {
+            col_empty.push(i);
+        }
+    }
+    while (!row_dup.empty())
+    {
+        result += abs(row_dup.front() - row_empty.front());
+        row_dup.pop();
+        row_empty.pop();
+    }
+    while (!col_dup.empty())
+    {
+        result += abs(col_dup.front() - col_empty.front());
+        col_dup.pop();
+        col_empty.pop();
+    }
+    return result;
 }

@@ -5229,8 +5229,24 @@ void TestLeetCode3180(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3186(void)
+{
+    Logger::WriteMessage("Test Leet Code 3186");
+    LeetCodeDP leetCode;
+    vector<int> power = { 1, 1, 3, 4 };
+    long long result = leetCode.maximumTotalDamage(power);
+    Logger::WriteMessage(power);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    power = { 7,1,6,6 };
+    result = leetCode.maximumTotalDamage(power);
+    Logger::WriteMessage(power);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3186();
     TestLeetCode3180();
     TestLeetCode3177();
     TestLeetCode3176();

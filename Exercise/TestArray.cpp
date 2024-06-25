@@ -10333,8 +10333,24 @@ void TestLeetCode3179(void)
     Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3189(void)
+{
+    Logger::WriteMessage("Test Leet Code 3189");
+    LeetCodeArray leetCode;
+    vector<vector<int>> rooks = { {0, 0},{1, 0},{1, 1} };
+    int result = leetCode.minMoves(rooks);
+    Logger::WriteMessage(rooks);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    rooks = { {0, 0},{0, 1},{0, 2},{0, 3} };
+    result = leetCode.minMoves(rooks);
+    Logger::WriteMessage(rooks);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3189();
     TestLeetCode3179();
     TestLeetCode3175();
     TestLeetCode3159();

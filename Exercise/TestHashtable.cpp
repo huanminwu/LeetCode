@@ -2019,8 +2019,41 @@ void TestLeetCode3158(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3184(void)
+{
+    Logger::WriteMessage("Test Leet Code 3184");
+    LeetCodeHashtable leetCode;
+    vector<int> hours = { 12,12,30,24,24 };
+    int result = leetCode.countCompleteDayPairsI(hours);
+    Logger::WriteMessage(hours);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    hours = { 72,48,24,3 };
+    result = leetCode.countCompleteDayPairsI(hours);
+    Logger::WriteMessage(hours);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode3185(void)
+{
+    Logger::WriteMessage("Test Leet Code 3185");
+    LeetCodeHashtable leetCode;
+    vector<int> hours = { 12,12,30,24,24 };
+    long long result = leetCode.countCompleteDayPairsII(hours);
+    Logger::WriteMessage(hours);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    hours = { 72,48,24,3 };
+    result = leetCode.countCompleteDayPairsII(hours);
+    Logger::WriteMessage(hours);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3185();
+    TestLeetCode3184();
     TestLeetCode3160();
     TestLeetCode3158();
     TestLeetCode3092();
