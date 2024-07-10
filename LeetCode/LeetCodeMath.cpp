@@ -22671,5 +22671,397 @@ int LeetCodeMath::numberOfWays(int n)
     }
     return result;
 }
+
+/// <summary>
+/// LeetCode 3190. Find Minimum Operations to Make All Elements Divisible 
+///                by Three
+///
+/// Easy
+/// 
+/// You are given an integer array nums. In one operation, you can add or 
+/// subtract 1 from any element of nums.
+///
+/// Return the minimum number of operations to make all elements of nums 
+/// divisible by 3.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,4]
+/// Output: 3
+/// Explanation:
+/// All array elements can be made divisible by 3 using 3 operations:
+///
+/// Subtract 1 from 1.
+/// Add 1 to 2.
+/// Subtract 1 from 4.
+///
+/// Example 2:
+/// Input: nums = [3,6,9]
+/// Output: 0
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 50
+/// 2. 1 <= nums[i] <= 50
+/// </summary>
+int LeetCodeMath::minimumOperationsII(vector<int>& nums)
+{
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] % 3 != 0) result++;
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3195. Find the Minimum Area to Cover All Ones I 
+///
+/// Medium
+/// 
+/// You are given a 2D binary array grid. Find a rectangle with horizontal 
+/// and vertical sides with the smallest area, such that all the 1's in 
+/// grid lie inside this rectangle.
+///
+/// Return the minimum possible area of the rectangle.
+/// 
+/// Example 1:
+/// Input: grid = [[0,1,0],[1,0,1]]
+/// Output: 6
+/// Explanation:
+/// The smallest rectangle has a height of 2 and a width of 3, so it has 
+/// an area of 2 * 3 = 6.
+///
+/// Example 2:
+/// Input: grid = [[1,0],[0,0]]
+/// Output: 1
+/// Explanation:
+/// The smallest rectangle has both height and width 1, so its area 
+/// is 1 * 1 = 1.
+/// 
+/// Constraints:
+/// 1. 1 <= grid.length, grid[i].length <= 1000
+/// 2. grid[i][j] is either 0 or 1.
+/// 3. The input is generated such that there is at least one 1 in grid.
+/// </summary>
+int LeetCodeMath::minimumArea(vector<vector<int>>& grid)
+{
+    int bottom = INT_MAX, up = INT_MIN, left = INT_MAX, right = INT_MIN;
+    for (int i = 0; i < (int)grid.size(); i++)
+    {
+        for (int j = 0; j < (int)grid[0].size(); j++)
+        {
+            if (grid[i][j] == 1)
+            {
+                bottom = min(bottom, i);
+                up = max(up, i);
+                left = min(left, j);
+                right = max(right, j);
+            }
+        }
+    }
+    if (right < left) return 0;
+    int result = (right - left + 1) * (up - bottom + 1);
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3197. Find the Minimum Area to Cover All Ones II
+/// </summary>
+int LeetCodeMath::minimumSumArea(vector<vector<int>>& grid, int y1, int y2, int x1, int x2)
+{
+    int bottom = INT_MAX, up = INT_MIN, left = INT_MAX, right = INT_MIN;
+    for (int i = y1; i < y2; i++)
+    {
+        for (int j = x1; j < x2; j++)
+        {
+            if (grid[i][j] == 1)
+            {
+                bottom = min(bottom, i);
+                up = max(up, i);
+                left = min(left, j);
+                right = max(right, j);
+            }
+        }
+    }
+    if (right < left) return 0;
+    int result = (right - left + 1) * (up - bottom + 1);
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3197. Find the Minimum Area to Cover All Ones II
+///
+/// Hard
+///
+/// You are given a 2D binary array grid. You need to find 3 
+/// non-overlapping rectangles having non-zero areas with horizontal and 
+/// vertical sides such that all the 1's in grid lie inside these 
+/// rectangles.
+///
+/// Return the minimum possible sum of the area of these rectangles.
+/// Note that the rectangles are allowed to touch.
+/// 
+/// Example 1:
+/// Input: grid = [[1,0,1],[1,1,1]]
+/// Output: 5
+/// Explanation:
+/// The 1's at (0, 0) and (1, 0) are covered by a rectangle of area 2.
+/// The 1's at (0, 2) and (1, 2) are covered by a rectangle of area 2.
+/// The 1 at (1, 1) is covered by a rectangle of area 1.
+///
+/// Example 2:
+/// Input: grid = [[1,0,1,0],[0,1,0,1]]
+/// Output: 5
+///
+/// Explanation:
+/// The 1's at (0, 0) and (0, 2) are covered by a rectangle of area 3.
+/// The 1 at (1, 1) is covered by a rectangle of area 1.
+/// The 1 at (1, 3) is covered by a rectangle of area 1.
+///
+/// Constraints:
+/// 1. 1 <= grid.length, grid[i].length <= 30
+/// 2. grid[i][j] is either 0 or 1.
+/// 3. The input is generated such that there are at least three 1's in 
+///    grid.
+/// </summary>
+int LeetCodeMath::minimumSumArea(vector<vector<int>>& grid)
+{
+    int result = INT_MAX;
+    int n = grid.size();
+    int m = grid[0].size();
+    /*
+        -------------
+        |    (1)    |
+        -------------
+        |    (2)    |
+        -------------
+        |    (3)    |
+        -------------
+    */
+    for (int i = 1; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            int one = minimumSumArea(grid, 0, i, 0, m);
+            int two = minimumSumArea(grid, i, j, 0, m);
+            int three = minimumSumArea(grid, j, n, 0, m);
+            result = min(result, one + two + three);
+        }
+    }
+    /*
+       -------------
+       |   |   |   |
+       |   |   |   |
+       |(1)|(2)|(3)|
+       |   |   |   |
+       |   |   |   |
+       -------------
+   */
+    for (int i = 1; i < m; i++)
+    {
+        for (int j = i + 1; j < m; j++)
+        {
+            int one = minimumSumArea(grid, 0, n, 0, i);
+            int two = minimumSumArea(grid, 0, n, i, j);
+            int three = minimumSumArea(grid, 0, n, j, m);
+            result = min(result, one + two + three);
+        }
+    }
+    for (int i = 1; i < n; i++)
+    {
+        for (int j = 1; j < m; j++)
+        {
+            /*
+            -------------
+            |    (1)    |
+            |           |
+            -------------
+            | (2) | (3) |
+            |     |     |
+            -------------
+            */
+            int one = minimumSumArea(grid, 0, i, 0, m);
+            int two = minimumSumArea(grid, i, n, 0, j);
+            int three = minimumSumArea(grid, i, n, j, m);
+            result = min(result, one + two + three);
+
+            /*
+            -------------
+            | (1) | (2) |
+            |     |     |
+            ------------
+            |           |
+            |    (3)    |
+            -------------
+            */
+            one = minimumSumArea(grid, 0, i, 0, j);
+            two = minimumSumArea(grid, 0, i, j, m);
+            three = minimumSumArea(grid, i, n, 0, m);
+            result = min(result, one + two + three);
+
+            /*
+            -------------
+            |     |     |
+            | (1) |     |
+            ------- (3) |
+            |     |     |
+            | (2) |     |
+            -------------
+            */
+            one = minimumSumArea(grid, 0, i, 0, j);
+            two = minimumSumArea(grid, i, n, 0, j);
+            three = minimumSumArea(grid, 0, n, j, m);
+            result = min(result, one + two + three);
+
+            /*
+            -------------
+            |     | (2) |
+            |     |     |
+              (1) -------
+            |     |     |
+            |     | (3) |
+            -------------
+            */
+            one = minimumSumArea(grid, 0, n, 0, j);
+            two = minimumSumArea(grid, 0, i, j, m);
+            three = minimumSumArea(grid, i, n, j, m);
+            result = min(result, one + two + three);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3200. Maximum Height of a Triangle
+///
+/// Easy
+///
+/// You are given two integers red and blue representing the count of 
+/// red and blue colored balls. You have to arrange these balls to form 
+/// a triangle such that the 1st row will have 1 ball, the 2nd row will 
+/// have 2 balls, the 3rd row will have 3 balls, and so on.
+///
+/// All the balls in a particular row should be the same color, and 
+/// adjacent rows should have different colors.
+///
+/// Return the maximum height of the triangle that can be achieved.
+/// 
+/// Example 1:
+/// Input: red = 2, blue = 4
+/// Output: 3
+/// Explanation:
+/// The only possible arrangement is shown above.
+///
+/// Example 2:
+/// Input: red = 2, blue = 1
+/// Output: 2
+/// Explanation:
+/// The only possible arrangement is shown above.
+///
+/// Example 3:
+/// Input: red = 1, blue = 1
+/// Output: 1
+///
+/// Example 4:
+/// Input: red = 10, blue = 1
+/// Output: 2
+/// Explanation:
+/// The only possible arrangement is shown above.
+///
+/// Constraints:
+/// 1. 1 <= red, blue <= 100
+/// </summary>
+int LeetCodeMath::maxHeightOfTriangle(int red, int blue)
+{
+    int odd = 0, even = 0;
+    int max_val = max(red, blue);
+    int min_val = min(red, blue);
+    int result = 0;
+    for (int i = 1; i < 100; i++)
+    {
+        if (i % 2 == 0) even += i;
+        else odd += i;
+        if (even > max_val || odd > max_val) break;
+        if (even > min_val && odd > min_val) break;
+        result++;
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3207. Maximum Points After Enemy Battles
+///
+/// Medium
+///
+/// You are given an integer array enemyEnergies denoting the energy 
+/// values of various enemies.
+///
+/// You are also given an integer currentEnergy denoting the amount of 
+/// energy you have initially.
+///
+/// You start with 0 points, and all the enemies are unmarked initially.
+///
+/// You can perform either of the following operations zero or multiple 
+/// times to gain points:
+///
+/// Choose an unmarked enemy, i, such that currentEnergy >= 
+/// enemyEnergies[i]. By choosing this option:
+/// You gain 1 point.
+/// Your energy is reduced by the enemy's energy, i.e. currentEnergy = 
+/// currentEnergy - enemyEnergies[i].
+/// If you have at least 1 point, you can choose an unmarked enemy, i. By 
+/// choosing this option:
+/// Your energy increases by the enemy's energy, i.e. currentEnergy = 
+/// currentEnergy + enemyEnergies[i].
+/// The enemy i is marked.
+/// Return an integer denoting the maximum points you can get in the end 
+/// by optimally performing operations.
+/// 
+/// Example 1:
+/// Input: enemyEnergies = [3,2,2], currentEnergy = 2
+/// Output: 3
+/// Explanation:
+/// The following operations can be performed to get 3 points, which is 
+/// the maximum:
+///
+/// First operation on enemy 1: points increases by 1, and currentEnergy 
+/// decreases by 2. So, points = 1, and currentEnergy = 0.
+/// Second operation on enemy 0: currentEnergy increases by 3, and enemy 0 
+/// is marked. So, points = 1, currentEnergy = 3, and marked enemies = [0].
+/// First operation on enemy 2: points increases by 1, and currentEnergy 
+/// decreases by 2. So, points = 2, currentEnergy = 1, and marked 
+/// enemies = [0].
+/// Second operation on enemy 2: currentEnergy increases by 2, and enemy 2 
+/// is marked. So, points = 2, currentEnergy = 3, and marked 
+/// enemies = [0, 2].
+/// First operation on enemy 1: points increases by 1, and currentEnergy 
+/// decreases by 2. So, points = 3, currentEnergy = 1, and marked 
+/// enemies = [0, 2].
+///
+/// Example 2:
+/// Input: enemyEnergies = [2], currentEnergy = 10
+/// Output: 5
+/// Explanation:
+/// Performing the first operation 5 times on enemy 0 results in the 
+/// maximum number of points.
+///
+/// Constraints:
+/// 1. 1 <= enemyEnergies.length <= 10^5
+/// 2. 1 <= enemyEnergies[i] <= 10^9
+/// 3. 0 <= currentEnergy <= 10^9
+/// </summary>
+long long LeetCodeMath::maximumPoints(vector<int>& enemyEnergies, int currentEnergy)
+{
+    sort(enemyEnergies.begin(), enemyEnergies.end());
+    long long result = 0;
+    if (currentEnergy < enemyEnergies[0]) return -0;
+    for (size_t i = 1; i < enemyEnergies.size(); i++)
+    {
+        result += enemyEnergies[i];
+    }
+    result += currentEnergy;
+    result /= enemyEnergies[0];
+    return result;
+}
+
 #pragma endregion
 

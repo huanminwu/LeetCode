@@ -20946,5 +20946,231 @@ public:
     ///    cell.
     /// </summary>
     int minMoves(vector<vector<int>>& rooks);
+
+    /// <summary>
+    /// LeetCode 3194. Minimum Average of Smallest and Largest Elements 
+    ///
+    /// Easy
+    /// 
+    /// You have an array of floating point numbers averages which is 
+    /// initially empty. You are given an array nums of n integers where n 
+    /// is even.
+    ///
+    /// You repeat the following procedure n / 2 times:
+    ///
+    /// Remove the smallest element, minElement, and the largest element 
+    /// maxElement, from nums.
+    /// Add (minElement + maxElement) / 2 to averages.
+    /// Return the minimum element in averages.
+    ///
+    /// Example 1:
+    /// Input: nums = [7,8,3,4,15,13,4,1]
+    /// Output: 5.5
+    /// Explanation:
+    /// step	nums	averages
+    /// 0	[7,8,3,4,15,13,4,1]	[]
+    /// 1	[7,8,3,4,13,4]	[8]
+    /// 2	[7,8,4,4]	[8,8]
+    /// 3	[7,4]	[8,8,6]
+    /// 4	[]	[8,8,6,5.5]
+    /// The smallest element of averages, 5.5, is returned.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,9,8,3,10,5]
+    /// Output: 5.5
+    /// Explanation:
+    /// step	nums	averages
+    /// 0	[1,9,8,3,10,5]	[]
+    /// 1	[9,8,3,5]	[5.5]
+    /// 2	[8,5]	[5.5,6]
+    /// 3	[]	[5.5,6,6.5]
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,3,7,8,9]
+    /// Output: 5.0
+    /// Explanation:
+    /// step	nums	averages
+    /// 0	[1,2,3,7,8,9]	[]
+    /// 1	[2,3,7,8]	[5]
+    /// 2	[3,7]	[5,5]
+    /// 3	[]	[5,5,5]
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n == nums.length <= 50
+    /// 2. n is even.
+    /// 3. 1 <= nums[i] <= 50
+    /// </summary>
+    double minimumAverage(vector<int>& nums);
+
+    /// <summary>
+    /// LeetCode 3191. Minimum Operations to Make Binary Array Elements Equal 
+    ///                to One I
+    ///
+    /// Medium
+    /// 
+    /// You are given a binary array nums.
+    ///
+    /// You can do the following operation on the array any number of times 
+    /// (possibly zero):
+    ///
+    /// Choose any 3 consecutive elements from the array and flip all of them.
+    /// Flipping an element means changing its value from 0 to 1, and from 1 
+    /// to 0.
+    ///
+    /// Return the minimum number of operations required to make all elements 
+    /// in nums equal to 1. If it is impossible, return -1.
+    ///
+    /// Example 1:
+    /// Input: nums = [0,1,1,1,0,0]
+    /// Output: 3
+    /// Explanation:
+    /// We can do the following operations:
+    /// Choose the elements at indices 0, 1 and 2. The resulting array is 
+    /// nums = [1,0,0,1,0,0].
+    /// Choose the elements at indices 1, 2 and 3. The resulting array is 
+    /// nums = [1,1,1,0,0,0].
+    /// Choose the elements at indices 3, 4 and 5. The resulting array is 
+    /// nums = [1,1,1,1,1,1].
+    ///
+    /// Example 2:
+    /// Input: nums = [0,1,1,1]
+    /// Output: -1
+    /// Explanation:
+    /// It is impossible to make all elements equal to 1.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 1
+    /// </summary>
+    int minOperationsFlipI(vector<int>& nums);
+
+    /// <summary>
+    /// LeetCode 3192. Minimum Operations to Make Binary Array Elements Equal 
+    ///                to One II 
+    ///
+    /// Medium
+    /// 
+    /// You are given a binary array nums.
+    /// You can do the following operation on the array any number of times 
+    /// (possibly zero):
+    ///
+    /// Choose any index i from the array and flip all the elements from 
+    /// index i to the end of the array.
+    /// Flipping an element means changing its value from 0 to 1, and from 1 
+    /// to 0.
+    ///
+    /// Return the minimum number of operations required to make all elements 
+    /// in nums equal to 1.
+    /// 
+    /// Example 1:
+    /// Input: nums = [0,1,1,0,1]
+    /// Output: 4
+    /// Explanation:
+    /// We can do the following operations:
+    /// Choose the index i = 1. The resulting array will be nums = [0,0,0,1,0].
+    /// Choose the index i = 0. The resulting array will be nums = [1,1,1,0,1].
+    /// Choose the index i = 4. The resulting array will be nums = [1,1,1,0,0].
+    /// Choose the index i = 3. The resulting array will be nums = [1,1,1,1,1].
+    ///
+    /// Example 2:
+    /// Input: nums = [1,0,0,0]
+    /// Output: 1
+    /// Explanation:
+    /// We can do the following operation:
+    /// Choose the index i = 1. The resulting array will be nums = [1,1,1,1].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 1
+    /// </summary>
+    int minOperationsFlipII(vector<int>& nums);
+
+    /// <summary>
+    /// LeetCode 3187. Peaks in Array
+    /// </summary>
+    int IsPeak(vector<int>& nums, int i);
+
+    /// <summary>
+    /// LeetCode 3187. Peaks in Array
+    ///
+    /// Hard
+    ///
+    /// A peak in an array arr is an element that is greater than its previous 
+    /// and next element in arr.
+    ///
+    /// You are given an integer array nums and a 2D integer array queries.
+    ///
+    /// You have to process queries of two types:
+    /// queries[i] = [1, li, ri], determine the count of peak elements in the 
+    /// subarray nums[li..ri]. queries[i] = [2, indexi, vali], change 
+    /// nums[indexi] to vali.
+    /// Return an array answer containing the results of the queries of the 
+    /// first type in order.
+    ///
+    /// Notes:
+    /// The first and the last element of an array or a subarray cannot be a 
+    /// peak.
+    /// 
+    /// Example 1:
+    /// Input: nums = [3,1,4,2,5], queries = [[2,3,4],[1,0,4]]
+    /// Output: [0]
+    /// Explanation:
+    /// First query: We change nums[3] to 4 and nums becomes [3,1,4,4,5].
+    /// Second query: The number of peaks in the [3,1,4,4,5] is 0.
+    ///
+    /// Example 2:
+    /// Input: nums = [4,1,4,2,1,5], queries = [[2,2,4],[1,0,2],[1,0,4]]
+    /// Output: [0,1]
+    ///
+    /// Explanation:
+    /// First query: nums[2] should become 4, but it is already set to 4.
+    /// Second query: The number of peaks in the [4,1,4] is 0.
+    ///
+    /// Third query: The second 4 is a peak in the [4,1,4,2,1].
+    /// 
+    /// Constraints:
+    /// 1. 3 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^5
+    /// 3. 1 <= queries.length <= 10^5
+    /// 4. queries[i][0] == 1 or queries[i][0] == 2
+    /// 5. For all i that:
+    ///    queries[i][0] == 1: 0 <= queries[i][1] <= queries[i][2] <= 
+    ///    nums.length - 1
+    ///    queries[i][0] == 2: 0 <= queries[i][1] <= nums.length - 1, 
+    ///    1 <= queries[i][2] <= 10^5
+    /// </summary>
+    vector<int> countOfPeaks(vector<int>& nums, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// LeetCode 3212. Count Submatrices With Equal Frequency of X and Y
+    ///
+    /// Medium
+    ///
+    /// Given a 2D character matrix grid, where grid[i][j] is either 'X', 'Y', 
+    /// or '.', return the number of submatrices that contains:
+    /// grid[0][0] an equal frequency of 'X' and 'Y'. at least one 'X'.
+    ///  
+    /// Example 1:
+    /// Input: grid = [["X","Y","."],["Y",".","."]]
+    /// Output: 3
+    /// Explanation:
+    /// 
+    /// Example 2:
+    /// Input: grid = [["X","X"],["X","Y"]]
+    /// Output: 0
+    /// Explanation:
+    /// No submatrix has an equal frequency of 'X' and 'Y'.
+    ///
+    /// Example 3:
+    /// Input: grid = [[".","."],[".","."]]
+    /// Output: 0
+    /// Explanation:
+    /// No submatrix has at least one 'X'.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= grid.length, grid[i].length <= 1000
+    /// 2. grid[i][j] is either 'X', 'Y', or '.'.
+    /// </summary>
+    int numberOfSubmatrices(vector<vector<char>>& grid);
 };
 #endif  // LeetCodeArray_H

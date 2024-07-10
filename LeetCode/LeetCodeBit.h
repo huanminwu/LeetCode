@@ -2943,6 +2943,71 @@ public:
     /// 3. 1 <= k <= 10^9
     /// </summary>
     int minimumDifference(vector<int>& nums, int k);
+
+    /// <summary>
+    /// LeetCode 3199. Count Triplets with Even XOR Set Bits I 
+    ///
+    /// Easy
+    ///
+    /// Given three integer arrays a, b, and c, return the number of triplets 
+    /// (a[i], b[j], c[k]), such that the bitwise XOR of the elements of each 
+    /// triplet has an even number of set bits.
+    ///
+    /// Example 1:
+    /// Input: a = [1], b = [2], c = [3]
+    /// Output: 1
+    /// Explanation:
+    /// The only triplet is (a[0], b[0], c[0]) and their XOR is: 1 XOR 2 
+    /// XOR 3 = 002.
+    ///
+    /// Example 2:
+    /// Input: a = [1,1], b = [2,3], c = [1,5]
+    /// Output: 4
+    /// Explanation:
+    /// Consider these four triplets:
+    /// (a[0], b[1], c[0]): 1 XOR 3 XOR 1 = 0112
+    /// (a[1], b[1], c[0]): 1 XOR 3 XOR 1 = 0112
+    /// (a[0], b[0], c[1]): 1 XOR 2 XOR 5 = 1102
+    /// (a[1], b[0], c[1]): 1 XOR 2 XOR 5 = 1102
+    ///
+    /// Constraints:
+    /// 1. 1 <= a.length, b.length, c.length <= 100
+    /// 2. 0 <= a[i], b[i], c[i] <= 100
+    /// </summary>
+    int tripletCount(vector<int>& a, vector<int>& b, vector<int>& c);
+
+    /// <summary>
+    /// LeetCode 3209. Number of Subarrays With AND Value of K
+    ///
+    /// Hard
+    ///
+    /// Given an array of integers nums and an integer k, return the number of
+    /// subarrays of nums where the bitwise AND of the elements of the 
+    /// subarray equals k.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,1,1], k = 1
+    /// Output: 6
+    /// Explanation:
+    /// All subarrays contain only 1's.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,1,2], k = 1
+    /// Output: 3
+    /// Explanation:
+    /// Subarrays having an AND value of 1 are: [1,1,2], [1,1,2], [1,1,2].
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,3], k = 2
+    /// Output: 2
+    /// Explanation:
+    /// Subarrays having an AND value of 2 are: [1,2,3], [1,2,3].
+    ///  
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i], k <= 10^9
+    /// </summary>
+    long long countSubarrays(vector<int>& nums, int k);
 #pragma endregion
 };
 #endif  // LeetCodeBit_H

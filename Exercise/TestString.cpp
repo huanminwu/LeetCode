@@ -7041,8 +7041,24 @@ void TestLeetCode3174(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+void TestLeetCode3210(void)
+{
+    Logger::WriteMessage("Test Leet Code 3210");
+    LeetCodeString leetCode;
+    string s = "dart";
+    int k = 3;
+    string result = leetCode.getEncryptedString(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
+
+    s = "aaa";
+    k = 1;
+    result = leetCode.getEncryptedString(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3210();
     TestLeetCode3174();
     TestLeetCode3170();
     TestLeetCode3163();

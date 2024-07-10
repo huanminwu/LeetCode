@@ -2373,8 +2373,24 @@ void TestLeetCode3149(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3211(void)
+{
+    Logger::WriteMessage("Test Leet Code 3211");
+    LeetCodeDFS leetCode;
+    int n = 3;
+    vector<string> result = leetCode.validStrings(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 1;
+    result = leetCode.validStrings(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3211();
     TestLeetCode3149();
     TestLeetCode140();
     TestLeetCode131();

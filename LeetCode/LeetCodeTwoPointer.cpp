@@ -2806,4 +2806,128 @@ int LeetCodeTwoPointer::maximumLengthSubstring(string s)
     return result;
 }
 
+/// <summary>
+/// LeetCode 3206. Alternating Groups I
+///
+/// Easy
+///
+/// There is a circle of red and blue tiles. You are given an array of 
+/// integers colors. The color of tile i is represented by colors[i]:
+///
+/// colors[i] == 0 means that tile i is red.
+/// colors[i] == 1 means that tile i is blue.
+/// Every 3 contiguous tiles in the circle with alternating colors (the 
+/// middle tile has a different color from its left and right tiles) is 
+/// called an alternating group.
+///
+/// Return the number of alternating groups.
+///
+/// Note that since colors represents a circle, the first and the last 
+/// tiles are considered to be next to each other.
+/// 
+/// Example 1:
+/// Input: colors = [1,1,1]
+/// Output: 0
+/// Explanation:
+///
+/// Example 2:
+/// Input: colors = [0,1,0,0,1]
+/// Output: 3
+/// Explanation:
+/// 
+/// Alternating groups:
+/// Constraints:
+/// 1. 3 <= colors.length <= 100
+/// 2. 0 <= colors[i] <= 1
+/// </summary>
+int LeetCodeTwoPointer::numberOfAlternatingGroupsI(vector<int>& colors)
+{
+    int k = 3;
+    int first = 0, last = 0, n = colors.size();
+    int result = 0;
+    while (first < n)
+    {
+        if (last - first + 1 < k)
+        {
+            int color = colors[last % n];
+            last++;
+            if (colors[last % n] == color)
+            {
+                first = last;
+            }
+        }
+        else
+        {
+            result++;
+            first++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3208. Alternating Groups II
+///
+/// Medium
+///
+/// There is a circle of red and blue tiles. You are given an array of 
+/// integers colors and an integer k. The color of tile i is represented 
+/// by colors[i]:
+///
+/// colors[i] == 0 means that tile i is red.
+/// colors[i] == 1 means that tile i is blue.
+/// An alternating group is every k contiguous tiles in the circle with 
+/// alternating colors (each tile in the group except the first and last 
+/// one has a different color from its left and right tiles).
+///
+/// Return the number of alternating groups.
+///
+/// Note that since colors represents a circle, the first and the last 
+/// tiles are considered to be next to each other.
+///
+/// Example 1:
+/// Input: colors = [0,1,0,1,0], k = 3
+/// Output: 3
+/// Explanation:
+/// 
+/// Alternating groups:
+/// Example 2:
+/// Input: colors = [0,1,0,0,1,0,1], k = 6
+/// Output: 2
+/// Explanation:
+/// Alternating groups:
+///
+/// Example 3:
+/// Input: colors = [1,1,0,1], k = 4
+/// Output: 0
+/// Explanation:
+/// 
+/// Constraints:
+/// 1. 3 <= colors.length <= 10^5
+/// 2. 0 <= colors[i] <= 1
+/// 3. 3 <= k <= colors.length
+/// </summary>
+int LeetCodeTwoPointer::numberOfAlternatingGroupsII(vector<int>& colors, int k)
+{
+    int first = 0, last = 0, n = colors.size();
+    int result = 0;
+    while (first < n)
+    {
+        if (last - first + 1 < k)
+        {
+            int color = colors[last % n];
+            last++;
+            if (colors[last % n] == color)
+            {
+                first = last;
+            }
+        }
+        else
+        {
+            result++;
+            first++;
+        }
+    }
+    return result;
+}
 #pragma endregion

@@ -4034,8 +4034,28 @@ void TestLeetCode3157(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode3203(void)
+{
+    Logger::WriteMessage("Test Leet Code 3203");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges1 = { {0, 1},{0, 2},{0, 3} };
+    vector<vector<int>> edges2 = { {0, 1} };
+    int result = leetCode.minimumDiameterAfterMerge(edges1, edges2);
+    Logger::WriteMessage(edges1);
+    Logger::WriteMessage(edges2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges1 = { {0, 1},{0, 2},{0, 3},{2, 4},{2, 5},{3, 6},{2, 7} };
+    edges2 = { {0, 1},{0, 2},{0, 3},{2, 4},{2, 5},{3, 6},{2, 7} };
+    result = leetCode.minimumDiameterAfterMerge(edges1, edges2);
+    Logger::WriteMessage(edges1);
+    Logger::WriteMessage(edges2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3203();
     TestLeetCode3157();
     TestLeetCode3068();
     TestLeetCode3004();

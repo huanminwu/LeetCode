@@ -324,5 +324,10 @@ void TestLeetCode3155(void);
 void TestLeetCode3162(void);
 void TestLeetCode3178(void);
 void TestLeetCode3183(void);
+void TestLeetCode3190(void);
+void TestLeetCode3195(void);
+void TestLeetCode3197(void);
+void TestLeetCode3200(void);
+void TestLeetCode3207(void);
 void TestLeetCodeMath(void);
 #endif  // TestMath

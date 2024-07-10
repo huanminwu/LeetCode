@@ -1473,8 +1473,52 @@ void TestLeetCode3171(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3199(void)
+{
+    Logger::WriteMessage("Test Leet Code 3199");
+    LeetCodeBit leetCode;
+    vector<int> a = { 1 }, b = { 2 }, c = { 3 };
+    int result = leetCode.tripletCount(a, b, c);
+    Logger::WriteMessage(a);
+    Logger::WriteMessage(b);
+    Logger::WriteMessage(c);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    a = { 1, 1 }, b = { 2, 3 }, c = { 1, 5 };
+    result = leetCode.tripletCount(a, b, c);
+    Logger::WriteMessage(a);
+    Logger::WriteMessage(b);
+    Logger::WriteMessage(c);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3209(void)
+{
+    Logger::WriteMessage("Test Leet Code 3209");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 1, 1 };
+    int k = 1;
+    long long result = leetCode.countSubarrays(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(result) + "; result = " + to_string(result));
+
+    nums = { 1,1,2 };
+    k = 1;
+    result = leetCode.countSubarrays(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(result) + "; result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    k = 2;
+    result = leetCode.countSubarrays(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(result) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3209();
+    TestLeetCode3199();
     TestLeetCode3171();
     TestLeetCode3173();
     TestLeetCode3141();

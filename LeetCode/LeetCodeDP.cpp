@@ -18269,7 +18269,7 @@ long long LeetCodeDP::maximumTotalDamage(vector<int>& power)
     map<int, long long> power_count;
     for (auto i : power) power_count[i] += i;
     queue<pair<int, long long>> queue;
-    for (auto itr : power_count)
+    for (auto& itr : power_count)
     {
         while (!queue.empty() && queue.front().first + 2 < itr.first)
         {
@@ -18279,6 +18279,276 @@ long long LeetCodeDP::maximumTotalDamage(vector<int>& power)
         long long val = prev + itr.second;
         result = max(result, val);
         queue.push(make_pair(itr.first, val));
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3196. Maximize Total Cost of Alternating Subarrays 
+///
+/// Medium
+/// 
+/// You are given an integer array nums with length n.
+/// The cost of a subarray 
+/// nums[l..r], where 0 <= l <= r < n, is defined as:
+///
+/// cost(l, r) = nums[l] - nums[l + 1] + ... + nums[r] * (−1)r − l
+///
+/// Your task is to split nums into subarrays such that the total 
+/// cost of the subarrays is maximized, ensuring each element belongs 
+/// to exactly one subarray.
+/// Formally, if nums is split into k subarrays, where k > 1, at 
+/// indices i1, i2, ..., ik − 1, where 0 <= i1 < i2 < ... < 
+/// ik - 1 < n - 1, then the total cost will be:
+///
+/// cost(0, i1) + cost(i1 + 1, i2) + ... + cost(ik − 1 + 1, n − 1)
+///
+/// Return an integer denoting the maximum total cost of the subarrays 
+/// after splitting the array optimally.
+///
+/// Note: If nums is not split into subarrays, i.e. k = 1, the total 
+/// cost is simply cost(0, n - 1).
+///
+/// Example 1:
+/// Input: nums = [1,-2,3,4]
+/// Output: 10
+/// Explanation:
+/// One way to maximize the total cost is by splitting [1, -2, 3, 4] into 
+/// subarrays [1, -2, 3] and [4]. The total cost will be 
+/// (1 + 2 + 3) + 4 = 10.
+///
+/// Example 2:
+/// Input: nums = [1,-1,1,-1]
+/// Output: 4
+/// Explanation:
+/// One way to maximize the total cost is by splitting [1, -1, 1, -1] 
+/// into subarrays [1, -1] and [1, -1]. The total cost will be (1 + 1) 
+/// + (1 + 1) = 4.
+///
+/// Example 3:
+/// Input: nums = [0]
+/// Output: 0
+/// Explanation:
+/// We cannot split the array further, so the answer is 0.
+///
+/// Example 4:
+/// Input: nums = [1,-1]
+/// Output: 2
+/// Explanation:
+/// Selecting the whole array gives a total cost of 1 + 1 = 2, which is 
+/// the maximum.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. -10^9 <= nums[i] <= 10^9
+/// </summary>
+long long LeetCodeDP::maximumTotalCost(vector<int>& nums)
+{
+    int n = nums.size();
+    vector<vector<long long>> dp(n, vector<long long>(2));
+    for (int i = 0; i < n; i++)
+    {
+        if (i == 0)
+        {
+            dp[i][0] = nums[0];
+            dp[i][1] = nums[0];
+        }
+        else
+        {
+            dp[i][0] = dp[i - 1][1] + nums[i];
+            dp[i][1] = max(dp[i - 1][0] - nums[i], dp[i - 1][1] + nums[i]);
+        }
+    }
+    return dp[n-1][1];
+}
+
+/// <summary>
+/// LeetCode 3193. Count the Number of Inversions
+///
+/// Hard
+///
+/// You are given an integer n and a 2D array requirements, where 
+/// requirements[i] = [endi, cnti] represents the end index and the 
+/// inversion count of each requirement.
+///
+/// A pair of indices (i, j) from an integer array nums is called an 
+/// inversion if:
+///
+/// i < j and nums[i] > nums[j]
+/// Return the number of permutations perm of [0, 1, 2, ..., n - 1] such 
+/// that for all requirements[i], perm[0..endi] has exactly cnti 
+/// inversions.
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+/// 
+/// Example 1:
+/// Input: n = 3, requirements = [[2,2],[0,0]]
+/// Output: 2
+/// Explanation:
+/// The two permutations are: [2, 0, 1]
+/// Prefix [2, 0, 1] has inversions (0, 1) and (0, 2).
+/// Prefix [2] has 0 inversions. [1, 2, 0]
+/// Prefix [1, 2, 0] has inversions (0, 2) and (1, 2).
+/// Prefix [1] has 0 inversions.
+///
+/// Example 2:
+/// Input: n = 3, requirements = [[2,2],[1,1],[0,0]]
+/// Output: 1
+/// Explanation:
+/// The only satisfying permutation is [2, 0, 1]:
+/// Prefix [2, 0, 1] has inversions (0, 1) and (0, 2).
+/// Prefix [2, 0] has an inversion (0, 1).
+/// Prefix [2] has 0 inversions.
+///
+/// Example 3:
+/// Input: n = 2, requirements = [[0,0],[1,0]]
+/// Output: 1
+/// Explanation:
+/// The only satisfying permutation is [0, 1]:
+/// Prefix [0] has 0 inversions.
+/// Prefix [0, 1] has an inversion (0, 1).
+///
+/// Constraints:
+/// 1. 2 <= n <= 300
+/// 2. 1 <= requirements.length <= n
+/// 3. requirements[i] = [endi, cnti]
+/// 4. 0 <= endi <= n - 1
+/// 5. 0 <= cnti <= 400
+/// 6. The input is generated such that there is at least one i such that 
+///    endi == n - 1.
+/// 7. The input is generated such that all endi are unique.
+/// </summary>
+int LeetCodeDP::numberOfPermutations(int n, vector<vector<int>>& requirements)
+{
+    sort(begin(requirements), end(requirements));
+    int dp[2][401] = { 1 }, prev = 0, j = 0, mod = 1000000007;
+    for (int N = 1; N <= n; ++N) 
+    {
+        for (int K = prev; K <= requirements[j][1]; ++K) 
+        {
+            dp[N % 2][K] = (dp[(N - 1) % 2][K] + (K > 0 ? dp[N % 2][K - 1] : 0)) % mod;
+            if (K >= N)
+                dp[N % 2][K] = (mod + dp[N % 2][K] - dp[(N - 1) % 2][K - N]) % mod;
+        }
+        if (N - 1 == requirements[j][0]) 
+        {
+            fill_n(begin(dp[0]) + prev, requirements[j][1] - prev, 0);
+            fill_n(begin(dp[1]) + prev, requirements[j][1] - prev, 0);
+            prev = requirements[j++][1];
+        }
+    }
+    return dp[n % 2][requirements.back()[1]];
+}
+
+/// <summary>
+/// LeetCode 3201. Find the Maximum Length of Valid Subsequence I
+///
+/// Medium
+///
+/// You are given an integer array nums.
+/// A subsequence sub of nums with length x is called valid if it 
+/// satisfies:
+/// (sub[0] + sub[1]) % 2 == (sub[1] + sub[2]) % 2 == ... == 
+/// (sub[x - 2] + sub[x - 1]) % 2.
+/// Return the length of the longest valid subsequence of nums.
+///
+/// A subsequence is an array that can be derived from another array by 
+/// deleting some or no elements without changing the order of the 
+/// remaining elements.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,4]
+/// Output: 4
+///
+/// Explanation:
+/// The longest valid subsequence is [1, 2, 3, 4].
+///
+/// Example 2:
+/// Input: nums = [1,2,1,1,2,1,2]
+/// Output: 6
+/// Explanation:
+/// The longest valid subsequence is [1, 2, 1, 2, 1, 2].
+///
+/// Example 3:
+/// Input: nums = [1,3]
+/// Output: 2
+///
+/// Explanation:
+/// The longest valid subsequence is [1, 3].
+/// Constraints:
+/// 1. 2 <= nums.length <= 2 * 10^5
+/// 2. 1 <= nums[i] <= 10^7
+/// </summary>
+int LeetCodeDP::maximumLengthI(vector<int>& nums)
+{
+    vector<vector<int>>dp(2, vector<int>(2));
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int bit = nums[i] % 2;
+        dp[bit][0] = dp[bit][0] + 1;
+        dp[bit][1] = dp[1 - bit][1] + 1;
+        result = max(result, dp[bit][0]);
+        result = max(result, dp[bit][1]);
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3202. Find the Maximum Length of Valid Subsequence II
+///
+/// Medium
+///
+/// You are given an integer array nums and a positive integer k.
+/// A subsequence sub of nums with length x is called valid if it 
+/// satisfies:
+///
+/// (sub[0] + sub[1]) % k == (sub[1] + sub[2]) % k == ... == (sub[x - 2] + 
+/// sub[x - 1]) % k.
+/// Return the length of the longest valid subsequence of nums.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,4,5], k = 2
+/// Output: 5
+/// Explanation:
+/// The longest valid subsequence is [1, 2, 3, 4, 5].
+///
+/// Example 2:
+/// Input: nums = [1,4,2,3,1,4], k = 3
+/// Output: 4
+/// Explanation:
+/// The longest valid subsequence is [1, 4, 1, 4].
+///
+/// Constraints:
+/// 1. 2 <= nums.length <= 10^3
+/// 2. 1 <= nums[i] <= 10^7
+/// 3. 1 <= k <= 10^3
+/// </summary>
+int LeetCodeDP::maximumLengthModII(vector<int>& nums, int k)
+{
+    vector<int> exist(k);
+    vector<vector<int>> dp(k, vector<int>(k));
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int m = nums[i] % k;
+        for (int j = 0; j < k; j++)
+        {
+            if (exist[j] != 0)
+            {
+                int n = (j + m) % k;
+                if (dp[j][n] != 0)
+                {
+                    dp[m][n] = dp[j][n] + 1;
+                }
+                else
+                {
+                    dp[m][n] = 2;
+                }
+                result = max(dp[m][n], result);
+            }
+        }
+        exist[m] = 1;
     }
     return result;
 }

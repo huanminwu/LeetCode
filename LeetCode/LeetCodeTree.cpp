@@ -13129,4 +13129,127 @@ int LeetCodeTree::minimumSumLevel(TreeNode* root)
     }
     return result;
 }
+
+/// <summary>
+/// LeetCode 3203. Find Minimum Diameter After Merging Two Trees
+/// </summary>
+pair<int, int> LeetCodeTree::minimumDiameterAfterMerge(vector<vector<int>>& edges)
+{
+    unordered_map<int, unordered_set<int>> neighbors;
+    unordered_map<int, int> degree;
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        int a = edges[i][0];
+        int b = edges[i][1];
+        degree[a]++;
+        degree[b]++;
+        neighbors[a].insert(b);
+        neighbors[b].insert(a);
+    }
+    queue<int> q;
+    for (auto itr : degree)
+    {
+        if (itr.second == 1)
+        {
+            degree[itr.first]--;
+            q.push(itr.first);
+        }
+    }
+    int count = degree.size();
+    int radius = 0, diameter = 0;
+
+    while (!q.empty())
+    {
+        if (count == 1) break;
+        if (count == 2)
+        {
+            radius++;
+            diameter++;
+        }
+        else
+        {
+            radius++;
+            diameter += 2;
+        }
+        size_t size = q.size();
+        count -= size;
+        for (size_t i = 0; i < size; i++)
+        {
+            int a = q.front();
+            q.pop();
+            for (auto x : neighbors[a])
+            {
+                degree[x]--;
+                if (degree[x] == 1)
+                {
+                    degree[x]--;
+                    q.push(x);
+                }
+            }
+        }
+    }
+    return make_pair(radius, diameter);
+}
+
+/// <summary>
+/// LeetCode 3203. Find Minimum Diameter After Merging Two Trees
+///
+/// Hard
+///
+/// There exist two undirected trees with n and m nodes, numbered from 0 
+/// to n - 1 and from 0 to m - 1, respectively. You are given two 2D 
+/// integer arrays edges1 and edges2 of lengths n - 1 and m - 1, 
+/// respectively, where edges1[i] = [ai, bi] indicates that there is an 
+/// edge between nodes ai and bi in the first tree and 
+/// edges2[i] = [ui, vi] indicates that there is an edge between nodes 
+/// ui and vi in the second tree.
+///
+/// You must connect one node from the first tree with another node from 
+/// the second tree with an edge.
+///
+/// Return the minimum possible diameter of the resulting tree.
+///
+/// The diameter of a tree is the length of the longest path between any 
+/// two nodes in the tree.
+///
+/// Example 1:
+/// Input: edges1 = [[0,1],[0,2],[0,3]], edges2 = [[0,1]]
+/// Output: 3
+/// Explanation:
+/// We can obtain a tree of diameter 3 by connecting node 0 from the 
+/// first tree with any node from the second tree.
+///
+/// Example 2:
+/// Input: edges1 = [[0,1],[0,2],[0,3],[2,4],[2,5],[3,6],[2,7]], 
+/// edges2 = [[0,1],[0,2],[0,3],[2,4],[2,5],[3,6],[2,7]]
+///
+/// Output: 5
+/// Explanation:
+/// We can obtain a tree of diameter 5 by connecting node 0 from the 
+/// first tree with node 0 from the second tree.
+///
+///
+/// Constraints:
+/// 1. 1 <= n, m <= 10^5
+/// 2. edges1.length == n - 1
+/// 3. edges2.length == m - 1
+/// 4. edges1[i].length == edges2[i].length == 2
+/// 5. edges1[i] = [ai, bi]
+/// 6. 0 <= ai, bi < n
+/// 7. edges2[i] = [ui, vi]
+/// 8. 0 <= ui, vi < m
+/// 9. The input is generated such that edges1 and edges2 represent valid 
+///    trees.
+/// </summary>
+int LeetCodeTree::minimumDiameterAfterMerge(vector<vector<int>>& edges1, vector<vector<int>>& edges2)
+{
+    pair<int, int> tree1 = minimumDiameterAfterMerge(edges1);
+    pair<int, int> tree2 = minimumDiameterAfterMerge(edges2);
+
+    int result = tree1.first + tree2.first + 1;
+    result = max(result, tree1.second);
+    result = max(result, tree2.second);
+    return result;
+}
+
 #pragma endregion

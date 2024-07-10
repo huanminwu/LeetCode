@@ -6980,8 +6980,102 @@ void TestLeetCode3183(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3190(void)
+{
+    Logger::WriteMessage("Test Leet Code 3190");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 2, 3, 4 };
+    int result = leetCode.minimumOperationsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,6,9 };
+    result = leetCode.minimumOperationsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3195(void)
+{
+    Logger::WriteMessage("Test Leet Code 3195");
+    LeetCodeMath leetCode;
+    vector<vector<int>> grid = { {0, 1, 0},{1, 0, 1} };
+    int result = leetCode.minimumArea(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1, 0},{0, 0} };
+    result = leetCode.minimumArea(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3197(void)
+{
+    Logger::WriteMessage("Test Leet Code 3197");
+    LeetCodeMath leetCode;
+    vector<vector<int>> grid = { {1, 0, 1},{1, 1, 1} };
+    int result = leetCode.minimumSumArea(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1, 0, 1, 0},{0, 1, 0, 1} };
+    result = leetCode.minimumSumArea(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3200(void)
+{
+    Logger::WriteMessage("Test Leet Code 3200");
+    LeetCodeMath leetCode;
+    int red = 2, blue = 4;
+    int result = leetCode.maxHeightOfTriangle(red, blue);
+    Logger::WriteMessage("red = " + to_string(red) + "; blue = " + to_string(blue));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    red = 2, blue = 1;
+    result = leetCode.maxHeightOfTriangle(red, blue);
+    Logger::WriteMessage("red = " + to_string(red) + "; blue = " + to_string(blue));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    red = 1, blue = 1;
+    result = leetCode.maxHeightOfTriangle(red, blue);
+    Logger::WriteMessage("red = " + to_string(red) + "; blue = " + to_string(blue));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    red = 10, blue = 1;
+    result = leetCode.maxHeightOfTriangle(red, blue);
+    Logger::WriteMessage("red = " + to_string(red) + "; blue = " + to_string(blue));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3207(void)
+{
+    Logger::WriteMessage("Test Leet Code 3207");
+    LeetCodeMath leetCode;
+    vector<int> enemyEnergies = { 3, 2, 2 };
+    int currentEnergy = 2;
+    long long result = leetCode.maximumPoints(enemyEnergies, currentEnergy);
+    Logger::WriteMessage(enemyEnergies);
+    Logger::WriteMessage("currentEnergy = " + to_string(currentEnergy));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    enemyEnergies = { 2 };
+    currentEnergy = 10;
+    result = leetCode.maximumPoints(enemyEnergies, currentEnergy);
+    Logger::WriteMessage(enemyEnergies);
+    Logger::WriteMessage("currentEnergy = " + to_string(currentEnergy));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3207();
+    TestLeetCode3200();
+    TestLeetCode3197();
+    TestLeetCode3195();
+    TestLeetCode3190();
     TestLeetCode3183();
     TestLeetCode3178();
     TestLeetCode3162();

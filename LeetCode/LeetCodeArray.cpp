@@ -19,6 +19,36 @@
 #include "LeetCodeArray.h"
 #pragma region Array
 
+struct BinaryIndexTree
+{
+    vector<int> m_arr;
+    int m_count;
+    BinaryIndexTree(int n)
+    {
+        m_arr = vector<int>(n + 1, 0);
+        m_count = n + 1;
+    }
+    void add(int index, int val)
+    {
+        if (index == 0) return;
+        while (index < m_count)
+        {
+            m_arr[index] += val;
+            index += (index & -index);
+        }
+    }
+    int sum(int index)
+    {
+        int sum = 0;
+        while (index != 0)
+        {
+            sum += m_arr[index];
+            index -= index & -index;
+        }
+        return sum;
+    }
+};
+
 /// <summary>
 /// Leet code #16. 3Sum Closest 
 /// Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. 
@@ -14038,7 +14068,7 @@ int LeetCodeArray::minOperations(vector<int>& target, vector<int>& arr)
             else key = *itr;
             if (new_map.count(key) == 0) new_map[key] = pos_map[target[i]][j];
         }
-        for (auto itr : new_map)
+        for (auto& itr : new_map)
         {
             if (itr.first == INT_MAX) seq.insert(itr.second);
             else
@@ -32686,3 +32716,349 @@ int LeetCodeArray::minMoves(vector<vector<int>>& rooks)
     }
     return result;
 }
+
+/// <summary>
+/// LeetCode 3194. Minimum Average of Smallest and Largest Elements 
+///
+/// Easy
+/// 
+/// You have an array of floating point numbers averages which is 
+/// initially empty. You are given an array nums of n integers where n 
+/// is even.
+///
+/// You repeat the following procedure n / 2 times:
+///
+/// Remove the smallest element, minElement, and the largest element 
+/// maxElement, from nums.
+/// Add (minElement + maxElement) / 2 to averages.
+/// Return the minimum element in averages.
+///
+/// Example 1:
+/// Input: nums = [7,8,3,4,15,13,4,1]
+/// Output: 5.5
+/// Explanation:
+/// step	nums	averages
+/// 0	[7,8,3,4,15,13,4,1]	[]
+/// 1	[7,8,3,4,13,4]	[8]
+/// 2	[7,8,4,4]	[8,8]
+/// 3	[7,4]	[8,8,6]
+/// 4	[]	[8,8,6,5.5]
+/// The smallest element of averages, 5.5, is returned.
+///
+/// Example 2:
+/// Input: nums = [1,9,8,3,10,5]
+/// Output: 5.5
+/// Explanation:
+/// step	nums	averages
+/// 0	[1,9,8,3,10,5]	[]
+/// 1	[9,8,3,5]	[5.5]
+/// 2	[8,5]	[5.5,6]
+/// 3	[]	[5.5,6,6.5]
+///
+/// Example 3:
+/// Input: nums = [1,2,3,7,8,9]
+/// Output: 5.0
+/// Explanation:
+/// step	nums	averages
+/// 0	[1,2,3,7,8,9]	[]
+/// 1	[2,3,7,8]	[5]
+/// 2	[3,7]	[5,5]
+/// 3	[]	[5,5,5]
+/// 
+/// Constraints:
+/// 1. 2 <= n == nums.length <= 50
+/// 2. n is even.
+/// 3. 1 <= nums[i] <= 50
+/// </summary>
+double LeetCodeArray::minimumAverage(vector<int>& nums)
+{
+    double result = 100;
+    sort(nums.begin(), nums.end());
+    for (size_t i = 0; i < nums.size() / 2; i++)
+    {
+        result = min(result, ((double)nums[i] + (double)nums[nums.size() - 1 - i]) / 2);
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3191. Minimum Operations to Make Binary Array Elements Equal 
+///                to One I
+///
+/// Medium
+/// 
+/// You are given a binary array nums.
+///
+/// You can do the following operation on the array any number of times 
+/// (possibly zero):
+///
+/// Choose any 3 consecutive elements from the array and flip all of them.
+/// Flipping an element means changing its value from 0 to 1, and from 1 
+/// to 0.
+///
+/// Return the minimum number of operations required to make all elements 
+/// in nums equal to 1. If it is impossible, return -1.
+///
+/// Example 1:
+/// Input: nums = [0,1,1,1,0,0]
+/// Output: 3
+/// Explanation:
+/// We can do the following operations:
+/// Choose the elements at indices 0, 1 and 2. The resulting array is 
+/// nums = [1,0,0,1,0,0].
+/// Choose the elements at indices 1, 2 and 3. The resulting array is 
+/// nums = [1,1,1,0,0,0].
+/// Choose the elements at indices 3, 4 and 5. The resulting array is 
+/// nums = [1,1,1,1,1,1].
+///
+/// Example 2:
+/// Input: nums = [0,1,1,1]
+/// Output: -1
+/// Explanation:
+/// It is impossible to make all elements equal to 1.
+/// 
+/// Constraints:
+/// 1. 3 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 1
+/// </summary>
+int LeetCodeArray::minOperationsFlipI(vector<int>& nums)
+{
+    int result = 0;
+    vector<int> arr = nums;
+    for (size_t i = 0; i < arr.size() - 2; i++)
+    {
+        if (arr[i] == 0)
+        {
+            arr[i] = 1 - arr[i];
+            arr[i + 1] = 1 - arr[i + 1];
+            arr[i + 2] = 1 - arr[i + 2];
+            result++;
+        }
+    }
+    int n = arr.size();
+    if (arr[n - 1] == 0 || arr[n - 2] == 0) return -1;
+    else return result;
+}
+
+/// <summary>
+/// LeetCode 3192. Minimum Operations to Make Binary Array Elements Equal 
+///                to One II 
+///
+/// Medium
+/// 
+/// You are given a binary array nums.
+/// You can do the following operation on the array any number of times 
+/// (possibly zero):
+///
+/// Choose any index i from the array and flip all the elements from 
+/// index i to the end of the array.
+/// Flipping an element means changing its value from 0 to 1, and from 1 
+/// to 0.
+///
+/// Return the minimum number of operations required to make all elements 
+/// in nums equal to 1.
+/// 
+/// Example 1:
+/// Input: nums = [0,1,1,0,1]
+/// Output: 4
+/// Explanation:
+/// We can do the following operations:
+/// Choose the index i = 1. The resulting array will be nums = [0,0,0,1,0].
+/// Choose the index i = 0. The resulting array will be nums = [1,1,1,0,1].
+/// Choose the index i = 4. The resulting array will be nums = [1,1,1,0,0].
+/// Choose the index i = 3. The resulting array will be nums = [1,1,1,1,1].
+///
+/// Example 2:
+/// Input: nums = [1,0,0,0]
+/// Output: 1
+/// Explanation:
+/// We can do the following operation:
+/// Choose the index i = 1. The resulting array will be nums = [1,1,1,1].
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 1
+/// </summary>
+int LeetCodeArray::minOperationsFlipII(vector<int>& nums)
+{
+    int flip = 0;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] + flip == 1) continue;
+        result++;
+        flip = 1 - flip;
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3187. Peaks in Array
+/// </summary>
+int LeetCodeArray::IsPeak(vector<int>& nums, int i)
+{
+    if (i == 0 || i == nums.size() - 1) return false;
+    if (nums[i] > nums[i - 1] && nums[i] > nums[i + 1]) return 1;
+    else return 0;
+}
+
+
+/// <summary>
+/// LeetCode 3187. Peaks in Array
+///
+/// Hard
+///
+/// A peak in an array arr is an element that is greater than its previous 
+/// and next element in arr.
+///
+/// You are given an integer array nums and a 2D integer array queries.
+///
+/// You have to process queries of two types:
+/// queries[i] = [1, li, ri], determine the count of peak elements in the 
+/// subarray nums[li..ri]. queries[i] = [2, indexi, vali], change 
+/// nums[indexi] to vali.
+/// Return an array answer containing the results of the queries of the 
+/// first type in order.
+///
+/// Notes:
+/// The first and the last element of an array or a subarray cannot be a 
+/// peak.
+/// 
+/// Example 1:
+/// Input: nums = [3,1,4,2,5], queries = [[2,3,4],[1,0,4]]
+/// Output: [0]
+/// Explanation:
+/// First query: We change nums[3] to 4 and nums becomes [3,1,4,4,5].
+/// Second query: The number of peaks in the [3,1,4,4,5] is 0.
+///
+/// Example 2:
+/// Input: nums = [4,1,4,2,1,5], queries = [[2,2,4],[1,0,2],[1,0,4]]
+/// Output: [0,1]
+///
+/// Explanation:
+/// First query: nums[2] should become 4, but it is already set to 4.
+/// Second query: The number of peaks in the [4,1,4] is 0.
+///
+/// Third query: The second 4 is a peak in the [4,1,4,2,1].
+/// 
+/// Constraints:
+/// 1. 3 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// 3. 1 <= queries.length <= 10^5
+/// 4. queries[i][0] == 1 or queries[i][0] == 2
+/// 5. For all i that:
+///    queries[i][0] == 1: 0 <= queries[i][1] <= queries[i][2] <= 
+///    nums.length - 1
+///    queries[i][0] == 2: 0 <= queries[i][1] <= nums.length - 1, 
+///    1 <= queries[i][2] <= 10^5
+/// </summary>
+vector<int> LeetCodeArray::countOfPeaks(vector<int>& nums, vector<vector<int>>& queries)
+{
+    int n = nums.size();
+    vector<int> peaks(n);
+    BinaryIndexTree tree(n);
+    for (int i = 1; i < n - 1; i++)
+    {
+        if (IsPeak(nums, i))
+        {
+            peaks[i] = 1;
+            tree.add(i, 1);
+        }
+    }
+    vector<int> result;
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        if (queries[i][0] == 2)
+        {
+            int a = queries[i][1];
+            int b = queries[i][2];
+            nums[a] = b;
+            if (a > 0 && a < n - 1)
+            {
+                tree.add(a, IsPeak(nums, a) - peaks[a]);
+                peaks[a] = IsPeak(nums, a);
+            }
+            if (a > 1)
+            {
+                tree.add(a - 1, IsPeak(nums, a - 1) - peaks[a - 1]);
+                peaks[a - 1] = IsPeak(nums, a - 1);
+            }
+            if (a < n - 2)
+            {
+                tree.add(a + 1, IsPeak(nums, a + 1) - peaks[a + 1]);
+                peaks[a + 1] = IsPeak(nums, a + 1);
+            }
+        }
+        else if (queries[i][0] == 1)
+        {
+            int a = queries[i][1];
+            int b = queries[i][2];
+            if (a == b) result.push_back(0);
+            else
+            {
+                result.push_back(tree.sum(b - 1) - tree.sum(a));
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3212. Count Submatrices With Equal Frequency of X and Y
+///
+/// Medium
+///
+/// Given a 2D character matrix grid, where grid[i][j] is either 'X', 'Y', 
+/// or '.', return the number of submatrices that contains:
+/// grid[0][0] an equal frequency of 'X' and 'Y'. at least one 'X'.
+///  
+/// Example 1:
+/// Input: grid = [["X","Y","."],["Y",".","."]]
+/// Output: 3
+/// Explanation:
+/// 
+/// Example 2:
+/// Input: grid = [["X","X"],["X","Y"]]
+/// Output: 0
+/// Explanation:
+/// No submatrix has an equal frequency of 'X' and 'Y'.
+///
+/// Example 3:
+/// Input: grid = [[".","."],[".","."]]
+/// Output: 0
+/// Explanation:
+/// No submatrix has at least one 'X'.
+/// 
+/// Constraints:
+/// 1. 1 <= grid.length, grid[i].length <= 1000
+/// 2. grid[i][j] is either 'X', 'Y', or '.'.
+/// </summary>
+int LeetCodeArray::numberOfSubmatrices(vector<vector<char>>& grid)
+{
+    vector<pair<int, int>> cols(grid[0].size());
+    int result = 0;
+    for (size_t i = 0; i < grid.size(); i++)
+    {
+        int x = 0, y = 0;
+        for (size_t j = 0; j < grid[0].size(); j++)
+        {
+            if (grid[i][j] == 'X') x++;
+            else if (grid[i][j] == 'Y') y++;
+            if (i == 0)
+            {
+                if (x == y && x > 0) result++;
+            }
+            else
+            {
+                if (cols[j].first + x == cols[j].second + y && cols[j].first + x > 0)
+                {
+                    result++;
+                }
+            }
+            cols[j].first += x;
+            cols[j].second += y;
+        }
+    }
+    return result;
+}
+
