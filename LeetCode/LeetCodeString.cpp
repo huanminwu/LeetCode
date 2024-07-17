@@ -25370,4 +25370,178 @@ string LeetCodeString::getEncryptedString(string s, int k)
     }
     return result;
 }
+
+/// <summary>
+/// LeetCode 3213. Construct String with Minimum Cost
+///
+/// Hard
+///
+/// You are given a string target, an array of strings words, and an 
+/// integer array costs, both arrays of the same length.
+///
+/// Imagine an empty string s.
+/// You can perform the following operation any number of times (including 
+/// zero):
+///
+/// Choose an index i in the range [0, words.length - 1].
+/// Append words[i] to s.
+/// The cost of operation is costs[i].
+/// Return the minimum cost to make s equal to target. If it's not 
+/// possible, return -1.
+/// 
+/// Example 1:
+/// Input: target = "abcdef", words = ["abdef","abc","d","def","ef"], 
+/// costs = [100,1,1,10,5]
+/// Output: 7
+/// Explanation:
+/// The minimum cost can be achieved by performing the following 
+/// operations:
+/// Select index 1 and append "abc" to s at a cost of 1, resulting in 
+/// s = "abc".
+/// Select index 2 and append "d" to s at a cost of 1, resulting in 
+/// s = "abcd".
+/// Select index 4 and append "ef" to s at a cost of 5, resulting in 
+/// s = "abcdef".
+///
+/// Example 2:
+/// Input: target = "aaaa", words = ["z","zz","zzz"], costs = [1,10,100]
+/// Output: -1
+/// Explanation:
+/// It is impossible to make s equal to target, so we return -1.
+/// 
+/// Constraints:
+/// 1. 1 <= target.length <= 5 * 10^4
+/// 2. 1 <= words.length == costs.length <= 5 * 10^4
+/// 3. 1 <= words[i].length <= target.length
+/// 4. The total sum of words[i].length is less than or equal to 5 * 10^4.
+/// 5. target and words[i] consist only of lowercase English letters.
+/// 6. 1 <= costs[i] <= 10^4
+/// </summary>
+int LeetCodeString::minimumCost(string target, vector<string>& words, vector<int>& costs)
+{
+    struct Trie
+    {
+        vector<Trie*> children;
+        int cost = 0;
+        Trie()
+        {
+            children = vector<Trie*>(26);
+            cost = 0;
+        }
+        ~Trie()
+        {
+            for (auto& trie : children)
+            {
+                if (trie != nullptr) delete trie;
+            }
+        }
+        void add(string& w, int cost)
+        {
+            Trie* curr = this;
+            for (size_t i = 0; i < w.size(); i++)
+            {
+                int index = w[i] - 'a';
+                if (curr->children[index] == nullptr)
+                {
+                    curr->children[index] = new Trie();
+                }
+                curr = curr->children[index];
+            }
+            if (curr->cost > 0) curr->cost = min(curr->cost, cost);
+            else curr->cost = cost;
+        }
+
+        void search(string& w, int pos, int initial, vector<int>&dp)
+        {
+            Trie* curr = this;
+            for (size_t i = pos; i < w.size(); i++)
+            {
+                int index = w[i] - 'a';
+                if (curr->children[index] == nullptr)
+                {
+                    break;
+                }
+                curr = curr->children[index];
+                if (curr->cost > 0)
+                {
+                    dp[i] = min(dp[i], initial + curr->cost);
+                }
+            }
+        }
+    };
+    Trie trie;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        trie.add(words[i], costs[i]);
+    }
+    vector<int> dp(target.size(), INT_MAX);
+    for (size_t i = 0; i < target.size(); i++)
+    {
+        if (i == 0)
+        {
+            trie.search(target, 0, 0, dp);
+        }
+        else if (dp[i - 1] != INT_MAX)
+        {
+            trie.search(target, i, dp[i-1], dp);
+        }
+    }
+    if (dp[target.size() - 1] != INT_MAX)
+    {
+        return dp[target.size() - 1];
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+/// <summary>
+/// LeetCode 3216. Lexicographically Smallest String After a Swap
+///
+/// Easy
+///
+/// Given a string s containing only digits, return the lexicographically 
+/// smallest string that can be obtained after swapping adjacent digits in 
+/// s with the same parity at most once.
+///
+/// Digits have the same parity if both are odd or both are even. For 
+/// example, 5 and 9, as well as 2 and 4, have the same parity, while 
+/// 6 and 9 do not.
+///
+/// Example 1:
+/// Input: s = "45320"
+/// Output: "43520"
+///
+/// Explanation:
+/// s[1] == '5' and s[2] == '3' both have the same parity, and swapping 
+/// them results in the lexicographically smallest string.
+///
+/// Example 2:
+/// Input: s = "001"
+/// Output: "001"
+/// Explanation:
+/// There is no need to perform a swap because s is already the 
+/// lexicographically smallest.
+/// 
+/// Constraints:
+/// 1. 2 <= s.length <= 100
+/// 2. s consists only of digits.
+/// </summary>
+string LeetCodeString::getSmallestString(string s)
+{
+    string result = s;
+    for (size_t i = 1; i < s.size(); i++)
+    {
+        int a = s[i - 1] - '0';
+        int b = s[i] - '0';
+        if (a % 2 == b % 2 && a > b)
+        {
+            swap(result[i - 1], result[i]);
+            break;
+        }
+    }
+    return result;
+}
+
 #pragma endregion

@@ -7056,8 +7056,40 @@ void TestLeetCode3210(void)
     Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
 }
 
+void TestLeetCode3213(void)
+{
+    Logger::WriteMessage("Test Leet Code 3213");
+    LeetCodeString leetCode;
+    string target = "abcdef";
+    vector<string> words = { "abdef", "abc", "d", "def", "ef" };
+    vector<int> costs = { 100, 1, 1, 10, 5 };
+    int result = leetCode.minimumCost(target, words, costs);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+
+    target = "aaaa";
+    words = { "z","zz","zzz" };
+    costs = { 1,10,100 };
+    result = leetCode.minimumCost(target, words, costs);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+}
+
+void TestLeetCode3216(void)
+{
+    Logger::WriteMessage("Test Leet Code 3216");
+    LeetCodeString leetCode;
+    string  s = "45320";
+    string result = leetCode.getSmallestString(s);
+    Logger::WriteMessage("target = " + s + "; result = " + result);
+
+    s = "001";
+    result = leetCode.getSmallestString(s);
+    Logger::WriteMessage("target = " + s + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3216();
+    TestLeetCode3213();
     TestLeetCode3210();
     TestLeetCode3174();
     TestLeetCode3170();
