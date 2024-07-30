@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------
---- LeetCode LeetCode 3198. Find Cities in Each State
+--- LeetCode 3198. Find Cities in Each State
 --- 
 --- Easy
 ---

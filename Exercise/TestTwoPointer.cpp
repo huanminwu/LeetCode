@@ -835,8 +835,29 @@ void TestLeetCode3208(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3194(void)
+{
+    Logger::WriteMessage("Test Leet Code 3194");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 7, 8, 3, 4, 15, 13, 4, 1 };
+    double result = leetCode.minimumAverage(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,9,8,3,10,5 };
+    result = leetCode.minimumAverage(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,7,8,9 };
+    result = leetCode.minimumAverage(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode3194();
     TestLeetCode3208();
     TestLeetCode3206();
     TestLeetCode3090();

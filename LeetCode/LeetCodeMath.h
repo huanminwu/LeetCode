@@ -14464,5 +14464,270 @@ public:
     /// 3. 0 <= currentEnergy <= 10^9
     /// </summary>
     long long maximumPoints(vector<int>& enemyEnergies, int currentEnergy);
-};
+
+    /// <summary>
+    /// Leet Code 3218. Minimum Cost for Cutting Cake I
+    ///
+    /// Medium
+    ///
+    /// There is an m x n cake that needs to be cut into 1 x 1 pieces.
+    /// You are given integers m, n, and two arrays:
+    /// horizontalCut of size m - 1, where horizontalCut[i] represents the 
+    /// cost to cut along the horizontal line i.
+    /// verticalCut of size n - 1, where verticalCut[j] represents the cost 
+    /// to cut along the vertical line j.
+    /// In one operation, you can choose any piece of cake that is not yet 
+    /// a 1 x 1 square and perform one of the following cuts:
+    ///
+    /// Cut along a horizontal line i at a cost of horizontalCut[i].
+    /// Cut along a vertical line j at a cost of verticalCut[j].
+    /// After the cut, the piece of cake is divided into two distinct pieces.
+    ///
+    /// The cost of a cut depends only on the initial cost of the line and 
+    /// does not change.
+    /// Return the minimum total cost to cut the entire cake into 1 x 1 pieces.
+    ///
+    /// Example 1:
+    /// Input: m = 3, n = 2, horizontalCut = [1,3], verticalCut = [5]
+    /// Output: 13
+    ///
+    /// Explanation:
+    /// Perform a cut on the vertical line 0 with cost 5, current total cost 
+    /// is 5.
+    /// Perform a cut on the horizontal line 0 on 3 x 1 subgrid with cost 1.
+    /// Perform a cut on the horizontal line 0 on 3 x 1 subgrid with cost 1.
+    /// Perform a cut on the horizontal line 1 on 2 x 1 subgrid with cost 3.
+    /// Perform a cut on the horizontal line 1 on 2 x 1 subgrid with cost 3.
+    /// The total cost is 5 + 1 + 1 + 3 + 3 = 13.
+    ///
+    /// Example 2:
+    /// Input: m = 2, n = 2, horizontalCut = [7], verticalCut = [4]
+    /// Output: 15
+    ///
+    /// Explanation:
+    /// Perform a cut on the horizontal line 0 with cost 7.
+    /// Perform a cut on the vertical line 0 on 1 x 2 subgrid with cost 4.
+    /// Perform a cut on the vertical line 0 on 1 x 2 subgrid with cost 4.
+    /// The total cost is 7 + 4 + 4 = 15.
+    ///
+    /// Constraints:
+    /// 1. 1 <= m, n <= 20
+    /// 2. horizontalCut.length == m - 1
+    /// 3. verticalCut.length == n - 1
+    /// 4. 1 <= horizontalCut[i], verticalCut[i] <= 10^3
+    /// </summary>
+    int minimumCostI(int m, int n, vector<int>& horizontalCut, vector<int>& verticalCut);
+
+    /// <summary>
+    /// Leet Code 3219. Minimum Cost for Cutting Cake II
+    ///
+    /// Hard
+    ///
+    /// There is an m x n cake that needs to be cut into 1 x 1 pieces.
+    /// You are given integers m, n, and two arrays:
+    ///
+    /// horizontalCut of size m - 1, where horizontalCut[i] represents the 
+    /// cost to cut along the horizontal line i.
+    /// verticalCut of size n - 1, where verticalCut[j] represents the cost 
+    /// to cut along the vertical line j.
+    /// In one operation, you can choose any piece of cake that is not yet 
+    /// a 1 x 1 square and perform one of the following cuts:
+    ///
+    /// Cut along a horizontal line i at a cost of horizontalCut[i].
+    /// Cut along a vertical line j at a cost of verticalCut[j].
+    /// After the cut, the piece of cake is divided into two distinct pieces. 
+    ///
+    /// The cost of a cut depends only on the initial cost of the line and 
+    /// does not change.
+    ///
+    /// Return the minimum total cost to cut the entire cake into 1 x 1 pieces.
+    /// 
+    /// Example 1:
+    /// Input: m = 3, n = 2, horizontalCut = [1,3], verticalCut = [5]
+    /// Output: 13
+    ///
+    /// Explanation:
+    /// Perform a cut on the vertical line 0 with cost 5, current total cost 
+    /// is 5.
+    /// Perform a cut on the horizontal line 0 on 3 x 1 subgrid with cost 1.
+    /// Perform a cut on the horizontal line 0 on 3 x 1 subgrid with cost 1.
+    /// Perform a cut on the horizontal line 1 on 2 x 1 subgrid with cost 3.
+    /// Perform a cut on the horizontal line 1 on 2 x 1 subgrid with cost 3.
+    /// The total cost is 5 + 1 + 1 + 3 + 3 = 13.
+    ///
+    /// Example 2:
+    /// Input: m = 2, n = 2, horizontalCut = [7], verticalCut = [4]
+    /// Output: 15
+    ///
+    /// Explanation:
+    /// Perform a cut on the horizontal line 0 with cost 7.
+    /// Perform a cut on the vertical line 0 on 1 x 2 subgrid with cost 4.
+    /// Perform a cut on the vertical line 0 on 1 x 2 subgrid with cost 4.
+    /// The total cost is 7 + 4 + 4 = 15.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= m, n <= 10^5
+    /// 2. horizontalCut.length == m - 1
+    /// 3. verticalCut.length == n - 1
+    /// 4. 1 <= horizontalCut[i], verticalCut[i] <= 10^3
+    /// </summary>
+    long long minimumCostII(int m, int n, vector<int>& horizontalCut, vector<int>& verticalCut);
+
+    /// <summary>
+    /// Leet Code 3222. Find the Winning Player in Coin Game
+    ///
+    /// Easy
+    ///
+    /// You are given two positive integers x and y, denoting the number of 
+    /// coins with values 75 and 10 respectively.
+    /// 
+    /// Alice and Bob are playing a game. Each turn, starting with Alice, the 
+    /// player must pick up coins with a total value 115. If the player is 
+    /// unable to do so, they lose the game.
+    ///
+    /// Return the name of the player who wins the game if both players play 
+    /// optimally.
+    /// 
+    /// Example 1:
+    /// Input: x = 2, y = 7
+    /// Output: "Alice"
+    /// 
+    /// Explanation:
+    /// The game ends in a single turn:
+    /// 
+    /// Alice picks 1 coin with a value of 75 and 4 coins with a value of 10.
+    ///
+    /// Example 2:
+    /// Input: x = 4, y = 11
+    /// Output: "Bob"
+    /// Explanation:
+    /// 
+    /// The game ends in 2 turns:
+    /// Alice picks 1 coin with a value of 75 and 4 coins with a value of 10.
+    /// Bob picks 1 coin with a value of 75 and 4 coins with a value of 10.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= x, y <= 100
+    /// </summary>
+    string losingPlayer(int x, int y);
+
+    /// <summary>
+    /// Leet Code 3227. Vowels Game in a String
+    ///
+    /// Medium
+    ///
+    /// Alice and Bob are playing a game on a string.
+    /// You are given a string s, Alice and Bob will take turns playing the 
+    /// following game where Alice starts first:
+    ///
+    /// On Alice's turn, she has to remove any non-empty substring from s 
+    /// that contains an odd number of vowels.
+    /// On Bob's turn, he has to remove any non-empty substring from s that 
+    /// contains an even number of vowels.
+    /// The first player who cannot make a move on their turn loses the game. 
+    /// We assume that both Alice and Bob play optimally.
+    ///
+    /// Return true if Alice wins the game, and false otherwise.
+    /// The English vowels are: a, e, i, o, and u.
+    /// 
+    /// Example 1:
+    /// Input: s = "leetcoder"
+    /// Output: true
+    /// Explanation:
+    /// Alice can win the game as follows:
+    /// Alice plays first, she can delete the underlined substring in 
+    /// s = "leetcoder" which contains 3 vowels. The resulting string is 
+    /// s = "der".
+    /// Bob plays second, he can delete the underlined substring in 
+    /// s = "der" which contains 0 vowels. The resulting string is s = "er".
+    /// Alice plays third, she can delete the whole string s = "er" which 
+    /// contains 1 vowel.
+    /// Bob plays fourth, since the string is empty, there is no valid play 
+    /// for Bob. So Alice wins the game.
+    ///
+    /// Example 2:
+    /// Input: s = "bbcd"
+    /// Output: false
+    /// Explanation:
+    /// There is no valid play for Alice in her first turn, so Alice loses the 
+    /// game.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s consists only of lowercase English letters.
+    /// </summary>
+    bool doesAliceWin(string s);
+
+    /// <summary>
+    /// Leet Code 3232. Find if Digit Game Can Be Won
+    ///
+    /// Easy
+    ///
+    /// You are given an array of positive integers nums.
+    /// Alice and Bob are playing a game. In the game, Alice can choose either 
+    /// all single-digit numbers or all double-digit numbers from nums, and 
+    /// the rest of the numbers are given to Bob. Alice wins if the sum of her 
+    /// numbers is strictly greater than the sum of Bob's numbers.
+    ///
+    /// Return true if Alice can win this game, otherwise, return false.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,2,3,4,10]
+    /// Output: false
+    /// Explanation:
+    /// Alice cannot win by choosing either single-digit or double-digit 
+    /// numbers.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,3,4,5,14]
+    /// Output: true
+    /// Explanation:
+    /// Alice can win by choosing single-digit numbers which have a sum equal 
+    /// to 15.
+    ///
+    /// Example 3:
+    /// Input: nums = [5,5,5,25]
+    /// Output: true
+    /// Explanation:
+    /// Alice can win by choosing double-digit numbers which have a sum 
+    /// equal to 25.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 99
+    /// </summary>
+    bool canAliceWin(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3233. Find the Count of Numbers Which Are Not Special
+    ///
+    /// Medium
+    ///
+    /// You are given 2 positive integers l and r. For any number x, all 
+    /// positive divisors of x except x are called the proper divisors of x.
+    ///
+    /// A number is called special if it has exactly 2 proper divisors. For 
+    /// example:
+    ///
+    /// The number 4 is special because it has proper divisors 1 and 2.
+    /// The number 6 is not special because it has proper divisors 1, 2, and 3.
+    /// Return the count of numbers in the range [l, r] that are not special.
+    ///
+    /// Example 1:
+    /// Input: l = 5, r = 7
+    /// Output: 3
+    /// Explanation:
+    /// There are no special numbers in the range [5, 7].
+    ///
+    /// Example 2:
+    /// Input: l = 4, r = 16
+    /// Output: 11
+    /// Explanation:
+    /// The special numbers in the range [4, 16] are 4 and 9.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= l <= r <= 10^9
+    /// </summary>
+    int nonSpecialCount(int l, int r);
+ };
 #endif

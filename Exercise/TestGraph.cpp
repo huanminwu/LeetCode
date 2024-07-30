@@ -5888,8 +5888,33 @@ void TestLeetCode3123(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3235(void)
+{
+    Logger::WriteMessage("Test Leet Code 3235");
+    LeetCodeGraph leetCode;
+    int X = 3, Y = 4;
+    vector<vector<int>> circles = { {2, 1, 1} };
+    bool result = leetCode.canReachCorner(X, Y, circles);
+    Logger::WriteMessage(circles);
+    Logger::WriteMessage("X = " + to_string(X) + "; Y = " + to_string(Y) + "; result = " + (string)(result ? "true" : "false"));
+
+    X = 3, Y = 3;
+    circles = { {1, 1, 2} };
+    result = leetCode.canReachCorner(X, Y, circles);
+    Logger::WriteMessage(circles);
+    Logger::WriteMessage("X = " + to_string(X) + "; Y = " + to_string(Y) + "; result = " + (string)(result ? "true" : "false"));
+
+    X = 3, Y = 3;
+    circles = { {2, 1, 1} ,{1, 2, 1 } };
+
+    result = leetCode.canReachCorner(X, Y, circles);
+    Logger::WriteMessage(circles);
+    Logger::WriteMessage("X = " + to_string(X) + "; Y = " + to_string(Y) + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3235();
     TestLeetCode3123();
     TestLeetCode3108();
     TestLeetCode3112();

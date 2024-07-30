@@ -20167,4 +20167,97 @@ vector<bool> LeetCodeGraph::findAnswer(int n, vector<vector<int>>& edges)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3235. Check if the Rectangle Corner Is Reachable
+///
+/// Hard
+///
+/// You are given two positive integers X and Y, and a 2D array circles, 
+/// where circles[i] = [xi, yi, ri] denotes a circle with center at 
+/// (xi, yi) and radius ri.
+///
+/// There is a rectangle in the coordinate plane with its bottom left 
+/// corner at the origin and top right corner at the coordinate (X, Y). 
+/// You need to check whether there is a path from the bottom left corner 
+/// to the top right corner such that the entire path lies inside the 
+/// rectangle, does not touch or lie inside any circle, and touches the 
+/// rectangle only at the two corners.
+///
+/// Return true if such a path exists, and false otherwise.
+/// Example 1:
+/// Input: X = 3, Y = 4, circles = [[2,1,1]]
+/// Output: true
+/// 
+/// Explanation:
+/// The black curve shows a possible path between (0, 0) and (3, 4).
+///
+/// Example 2:
+/// Input: X = 3, Y = 3, circles = [[1,1,2]]
+/// Output: false
+/// 
+/// Explanation:
+/// No path exists from (0, 0) to (3, 3).
+///
+/// Example 3:
+/// Input: X = 3, Y = 3, circles = [[2,1,1],[1,2,1]]
+/// Output: false
+///
+/// Explanation:
+/// No path exists from (0, 0) to (3, 3).
+///
+/// Constraints:
+/// 1. 3 <= X, Y <= 10^9
+/// 2. 1 <= circles.length <= 1000
+/// 3. circles[i].length == 3
+/// 4. 1 <= xi, yi, ri <= 109
+/// </summary>
+bool LeetCodeGraph::canReachCorner(int X, int Y, vector<vector<int>>& circles)
+{
+    int n = circles.size();
+    vector<int> parents(n + 2);
+
+    for (int i = 0; i < n + 2; i++)
+    {
+        parents[i] = i;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        int x = circles[i][0];
+        int y = circles[i][1];
+        int r = circles[i][2];
+        if (x - r <= 0 || y + r >= Y)
+        {
+            pair<int, int> p = unionFind(parents, i, n);
+            parents[p.first] = parents[p.second];
+        }
+        if (x + r >=X || y - r <= 0)
+        {
+            pair<int, int> p = unionFind(parents, i, n + 1);
+            parents[p.first] = parents[p.second];
+        }
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            int x1 = circles[i][0];
+            int y1 = circles[i][1];
+            int r1 = circles[i][2];
+            int x2 = circles[j][0];
+            int y2 = circles[j][1];
+            int r2 = circles[j][2];
+            if ((long long)(x1 - x2) * (long long)(x1 - x2) + (long long)(y1 - y2) * (long long)(y1 - y2) <= (long long)(r1 + r2) * (long long)(r1 + r2))
+            {
+                pair<int, int> p = unionFind(parents, i, j);
+                parents[p.first] = parents[p.second];
+            }
+        }
+    }
+
+    pair<int, int> p = unionFind(parents, n, n + 1);
+    if (p.first == p.second) return false;
+    else return true;
+}
 #pragma endregion

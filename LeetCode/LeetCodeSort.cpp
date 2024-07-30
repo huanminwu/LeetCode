@@ -12812,4 +12812,114 @@ vector<long long> LeetCodeSort::unmarkedSumArray(vector<int>& nums, vector<vecto
     return result;
 }
 
+/// <summary>
+/// Leet Code 3224. Minimum Array Changes to Make Differences Equal
+///
+/// Medium
+///
+/// You are given an integer array nums of size n where n is even, and an 
+/// integer k.
+///
+/// You can perform some changes on the array, where in one change you can 
+/// replace any element in the array with any integer in the range from 0 
+/// to k.
+///
+/// You need to perform some changes (possibly none) such that the final 
+/// array satisfies the following condition:
+///
+/// There exists an integer X such that abs(a[i] - a[n - i - 1]) = X for 
+/// all (0 <= i < n).
+/// Return the minimum number of changes required to satisfy the above 
+/// condition.
+/// 
+/// Example 1:
+/// Input: nums = [1,0,1,2,4,3], k = 4
+/// Output: 2
+/// Explanation:
+/// We can perform the following changes:
+/// 
+/// Replace nums[1] by 2. The resulting array is nums = [1,2,1,2,4,3].
+/// Replace nums[3] by 3. The resulting array is nums = [1,2,1,3,4,3].
+/// The integer X will be 2.
+///
+/// Example 2:
+/// Input: nums = [0,1,2,3,3,6,5,4], k = 6
+/// Output: 2
+/// Explanation:
+/// We can perform the following operations:
+/// Replace nums[3] by 0. The resulting array is nums = [0,1,2,0,3,6,5,4].
+/// Replace nums[4] by 4. The resulting array is nums = [0,1,2,0,4,6,5,4].
+/// The integer X will be 4.
+/// 
+/// Constraints:
+/// 1. 2 <= n == nums.length <= 10^5
+/// 2. n is even.
+/// 3. 0 <= nums[i] <= k <= 10^5
+/// </summary>
+int LeetCodeSort::minChanges(vector<int>& nums, int k)
+{
+    vector<int> freq(k + 1);
+    int n = nums.size();
+    vector<int> diff;
+    for (int i = 0; i < n / 2; i++)
+    {
+        int d = std::abs(nums[i] - nums[n - 1 - i]);
+        freq[d]++;
+        int m = max(k - min(nums[i], nums[n - 1 - i]), max(nums[i], nums[n - 1 - i]));
+        diff.push_back(m);
+    }
+    sort(diff.begin(), diff.end());
+    int result = n;
+    for (int i = 0; i <= k; i++)
+    {
+        int p = lower_bound(diff.begin(), diff.end(), i) - diff.begin();
+        result = min(result, n/2 - freq[i] + p);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3231. Minimum Number of Increasing Subsequence to Be Removed
+///
+/// Hard
+///
+/// Given an array of integers nums, you are allowed to perform the 
+/// following operation any number of times:
+///
+/// Remove a strictly increasing subsequence from the array.
+/// Your task is to find the minimum number of operations required to make 
+/// the array empty.
+///
+/// Example 1:
+/// Input: nums = [5,3,1,4,2]
+/// Output: 3
+/// Explanation:
+/// We remove subsequences [1, 2], [3, 4], [5].
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4,5]
+/// Output: 1
+///
+/// Example 3:
+/// Input: nums = [5,4,3,2,1]
+/// Output: 5
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeSort::minOperations(vector<int>& nums)
+{
+    set<pair<int, int>> sorted_list;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        auto itr = sorted_list.lower_bound(make_pair(nums[i], 0));
+        if (itr != sorted_list.begin())
+        {
+            sorted_list.erase(prev(itr));
+        }
+        sorted_list.insert(make_pair(nums[i], i));
+    }
+    return sorted_list.size();
+}
 #pragma endregion

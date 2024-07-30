@@ -7069,8 +7069,117 @@ void TestLeetCode3207(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3218(void)
+{
+    Logger::WriteMessage("Test Leet Code 3218");
+    LeetCodeMath leetCode;
+    int m = 3, n = 2;
+    vector<int> horizontalCut = { 1, 3 };
+    vector<int> verticalCut = { 5 };
+    int result = leetCode.minimumCostI(m, n, horizontalCut, verticalCut);
+    Logger::WriteMessage(horizontalCut);
+    Logger::WriteMessage(verticalCut);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    m = 2, n = 2;
+    horizontalCut = { 7 };
+    verticalCut = { 4 };
+    result = leetCode.minimumCostI(m, n, horizontalCut, verticalCut);
+    Logger::WriteMessage(horizontalCut);
+    Logger::WriteMessage(verticalCut);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3219(void)
+{
+    Logger::WriteMessage("Test Leet Code 3219");
+    LeetCodeMath leetCode;
+    int m = 3, n = 2;
+    vector<int> horizontalCut = { 1, 3 };
+    vector<int> verticalCut = { 5 };
+    long long result = leetCode.minimumCostII(m, n, horizontalCut, verticalCut);
+    Logger::WriteMessage(horizontalCut);
+    Logger::WriteMessage(verticalCut);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    m = 2, n = 2;
+    horizontalCut = { 7 };
+    verticalCut = { 4 };
+    result = leetCode.minimumCostII(m, n, horizontalCut, verticalCut);
+    Logger::WriteMessage(horizontalCut);
+    Logger::WriteMessage(verticalCut);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3222(void)
+{
+    Logger::WriteMessage("Test Leet Code 3222");
+    LeetCodeMath leetCode;
+    int x = 2, y = 7;
+    string result = leetCode.losingPlayer(x, y);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; result = " + result);
+
+    x = 4, y = 11;
+    result = leetCode.losingPlayer(x, y);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; result = " + result);
+}
+
+void TestLeetCode3227(void)
+{
+    Logger::WriteMessage("Test Leet Code 3227");
+    LeetCodeMath leetCode;
+    string   s = "leetcoder";
+    bool result = leetCode.doesAliceWin(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "bbcd";
+    result = leetCode.doesAliceWin(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3232(void)
+{
+    Logger::WriteMessage("Test Leet Code 3232");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 10 };
+    bool result = leetCode.canAliceWin(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,2,3,4,5,14 };
+    result = leetCode.canAliceWin(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 5,5,5,25 };
+    result = leetCode.canAliceWin(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3233(void)
+{
+    Logger::WriteMessage("Test Leet Code 3233");
+    LeetCodeMath leetCode;
+    int l = 5, r = 7;
+    int result = leetCode.nonSpecialCount(l, r);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r) + "; result = " + to_string(result));
+
+    l = 4, r = 16;
+    result = leetCode.nonSpecialCount(l, r);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r) + "; result = " + to_string(result));
+
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3233();
+    TestLeetCode3232();
+    TestLeetCode3227();
+    TestLeetCode3222();
+    TestLeetCode3219();
+    TestLeetCode3218();
     TestLeetCode3207();
     TestLeetCode3200();
     TestLeetCode3197();

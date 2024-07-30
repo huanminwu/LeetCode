@@ -7086,8 +7086,36 @@ void TestLeetCode3216(void)
     Logger::WriteMessage("target = " + s + "; result = " + result);
 }
 
+void TestLeetCode3223(void)
+{
+    Logger::WriteMessage("Test Leet Code 3223");
+    LeetCodeString leetCode;
+    string  s = "abaacbcbb";
+    int result = leetCode.minimumLengthI(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "aa";
+    result = leetCode.minimumLengthI(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode3234(void)
+{
+    Logger::WriteMessage("Test Leet Code 3234");
+    LeetCodeString leetCode;
+    string s = "00011";
+    int result = leetCode.numberOfDominantSubstrings(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "101101";
+    result = leetCode.numberOfDominantSubstrings(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3234();
+    TestLeetCode3223();
     TestLeetCode3216();
     TestLeetCode3213();
     TestLeetCode3210();

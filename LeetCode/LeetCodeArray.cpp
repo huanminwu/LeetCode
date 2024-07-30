@@ -32718,70 +32718,6 @@ int LeetCodeArray::minMoves(vector<vector<int>>& rooks)
 }
 
 /// <summary>
-/// LeetCode 3194. Minimum Average of Smallest and Largest Elements 
-///
-/// Easy
-/// 
-/// You have an array of floating point numbers averages which is 
-/// initially empty. You are given an array nums of n integers where n 
-/// is even.
-///
-/// You repeat the following procedure n / 2 times:
-///
-/// Remove the smallest element, minElement, and the largest element 
-/// maxElement, from nums.
-/// Add (minElement + maxElement) / 2 to averages.
-/// Return the minimum element in averages.
-///
-/// Example 1:
-/// Input: nums = [7,8,3,4,15,13,4,1]
-/// Output: 5.5
-/// Explanation:
-/// step	nums	averages
-/// 0	[7,8,3,4,15,13,4,1]	[]
-/// 1	[7,8,3,4,13,4]	[8]
-/// 2	[7,8,4,4]	[8,8]
-/// 3	[7,4]	[8,8,6]
-/// 4	[]	[8,8,6,5.5]
-/// The smallest element of averages, 5.5, is returned.
-///
-/// Example 2:
-/// Input: nums = [1,9,8,3,10,5]
-/// Output: 5.5
-/// Explanation:
-/// step	nums	averages
-/// 0	[1,9,8,3,10,5]	[]
-/// 1	[9,8,3,5]	[5.5]
-/// 2	[8,5]	[5.5,6]
-/// 3	[]	[5.5,6,6.5]
-///
-/// Example 3:
-/// Input: nums = [1,2,3,7,8,9]
-/// Output: 5.0
-/// Explanation:
-/// step	nums	averages
-/// 0	[1,2,3,7,8,9]	[]
-/// 1	[2,3,7,8]	[5]
-/// 2	[3,7]	[5,5]
-/// 3	[]	[5,5,5]
-/// 
-/// Constraints:
-/// 1. 2 <= n == nums.length <= 50
-/// 2. n is even.
-/// 3. 1 <= nums[i] <= 50
-/// </summary>
-double LeetCodeArray::minimumAverage(vector<int>& nums)
-{
-    double result = 100;
-    sort(nums.begin(), nums.end());
-    for (size_t i = 0; i < nums.size() / 2; i++)
-    {
-        result = min(result, ((double)nums[i] + (double)nums[nums.size() - 1 - i]) / 2);
-    }
-    return result;
-}
-
-/// <summary>
 /// LeetCode 3191. Minimum Operations to Make Binary Array Elements Equal 
 ///                to One I
 ///
@@ -33062,3 +32998,108 @@ int LeetCodeArray::numberOfSubmatrices(vector<vector<char>>& grid)
     return result;
 }
 
+/// <summary>
+/// Leet Code 3228. Maximum Number of Operations to Move Ones to the End
+///
+/// Medium
+///
+/// You are given a binary string s.
+/// You can perform the following operation on the string any number of 
+/// times:
+/// 
+/// Choose any index i from the string where i + 1 < s.length such that 
+/// s[i] == '1' and s[i + 1] == '0'.
+/// Move the character s[i] to the right until it reaches the end of the 
+/// string or another '1'. For example, for s = "010010", if we choose 
+/// i = 1, the resulting string will be s = "000110".
+/// Return the maximum number of operations that you can perform.
+/// 
+/// Example 1:
+/// Input: s = "1001101"
+/// Output: 4
+/// Explanation:
+/// We can perform the following operations:
+/// Choose index i = 0. The resulting string is s = "0011101".
+/// Choose index i = 4. The resulting string is s = "0011011".
+/// Choose index i = 3. The resulting string is s = "0010111".
+/// Choose index i = 2. The resulting string is s = "0001111".
+///
+/// Example 2:
+/// Input: s = "00111"
+/// Output: 0
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s[i] is either '0' or '1'.
+/// </summary>
+int LeetCodeArray::maxOperations(string s)
+{
+    int one = 0;
+    int result = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '1') one++;
+        else if (i > 0 && s[i-1] == '1') result += one;
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3229. Minimum Operations to Make Array Equal to Target
+///
+/// Hard
+///
+/// You are given two positive integer arrays nums and target, of the same 
+/// length.
+/// In a single operation, you can select any subarray of nums and 
+/// increment or decrement each element within that subarray by 1.
+///
+/// Return the minimum number of operations required to make nums equal to 
+/// the array target.
+/// 
+/// Example 1:
+/// Input: nums = [3,5,1,2], target = [4,6,2,4]
+/// Output: 2
+/// Explanation:
+/// We will perform the following operations to make nums equal to target:
+/// - Increment nums[0..3] by 1, nums = [4,6,2,3].
+/// - Increment nums[3..3] by 1, nums = [4,6,2,4].
+/// 
+/// Example 2:
+/// Input: nums = [1,3,2], target = [2,1,4]
+/// Output: 5
+/// Explanation:
+/// We will perform the following operations to make nums equal to target:
+/// - Increment nums[0..0] by 1, nums = [2,3,2].
+/// - Decrement nums[1..1] by 1, nums = [2,2,2].
+/// - Decrement nums[1..1] by 1, nums = [2,1,2].
+/// - Increment nums[2..2] by 1, nums = [2,1,3].
+/// - Increment nums[2..2] by 1, nums = [2,1,4].
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length == target.length <= 10^5
+/// 2. 1 <= nums[i], target[i] <= 10^8
+/// </summary>
+long long LeetCodeArray::minimumOperations(vector<int>& nums, vector<int>& target)
+{
+    long long prev = 0;
+    long long result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        long long val = (long long)target[i] - (long long)nums[i];
+        if (val * prev <= 0)
+        {
+            result += abs(val);
+        }
+        else 
+        {
+            if (abs(val) > abs(prev))
+            {
+                result += abs(val) - abs(prev);
+            }
+        }
+        prev = val;
+    }
+    return result;
+}

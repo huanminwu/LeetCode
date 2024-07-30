@@ -10348,26 +10348,6 @@ void TestLeetCode3189(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode3194(void)
-{
-    Logger::WriteMessage("Test Leet Code 3194");
-    LeetCodeArray leetCode;
-    vector<int> nums = { 7, 8, 3, 4, 15, 13, 4, 1 };
-    double result = leetCode.minimumAverage(nums);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    nums = { 1,9,8,3,10,5 };
-    result = leetCode.minimumAverage(nums);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    nums = { 1,2,3,7,8,9 };
-    result = leetCode.minimumAverage(nums);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
 void TestLeetCode3191(void)
 {
     Logger::WriteMessage("Test Leet Code 3191");
@@ -10441,7 +10421,7 @@ void TestLeetCode3187(void)
 
 void TestLeetCode3212(void)
 {
-    Logger::WriteMessage("Test Leet Code 3211");
+    Logger::WriteMessage("Test Leet Code 3212");
     LeetCodeArray leetCode;
     vector<vector<char>> grid = 
     { 
@@ -10468,13 +10448,46 @@ void TestLeetCode3212(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3228(void)
+{
+    Logger::WriteMessage("Test Leet Code 3228");
+    LeetCodeArray leetCode;
+    string s = "1001101"; 
+    int result = leetCode.maxOperations(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "00111";
+    result = leetCode.maxOperations(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode3229(void)
+{
+    Logger::WriteMessage("Test Leet Code 3229");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 5, 1, 2 };
+    vector<int> target = { 4, 6, 2, 4 };
+    long long result = leetCode.minimumOperations(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,3,2 };
+    target = { 2,1,4 };
+    result = leetCode.minimumOperations(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3229();
+    TestLeetCode3228();
     TestLeetCode3212();
     TestLeetCode3187();
     TestLeetCode3192();
     TestLeetCode3191();
-    TestLeetCode3194();
     TestLeetCode3189();
     TestLeetCode3179();
     TestLeetCode3175();

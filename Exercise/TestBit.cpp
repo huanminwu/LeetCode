@@ -1534,8 +1534,29 @@ void TestLeetCode3215(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3226(void)
+{
+    Logger::WriteMessage("Test Leet Code 3226");
+    LeetCodeBit leetCode;
+    int n = 13, k = 4;
+    int result = leetCode.minChanges(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 21, k = 21;
+    result = leetCode.minChanges(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 14, k = 13;
+    result = leetCode.minChanges(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3226();
     TestLeetCode3215();
     TestLeetCode3209();
     TestLeetCode3199();

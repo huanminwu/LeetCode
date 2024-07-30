@@ -3543,12 +3543,12 @@ int LeetCodeDP::cherryPickup(vector<vector<int>>& grid)
     {
         vector<vector<int>> next(n, vector<int>(n, -1));
         // path one has i steps down
-        for (size_t i = 0; i <= k && i < n; i++)
+        for (size_t i = 0; i < k && i < n; i++)
         {
             // too few steps down on total k steps
             if (k - i >= n) continue;
             // path two has j steps down
-            for (size_t j = 0; j <= k && j < n; j++)
+            for (size_t j = 0; j < k && j < n; j++)
             {
                 // too few steps down on total k steps
                 if (k - j >= n) continue;

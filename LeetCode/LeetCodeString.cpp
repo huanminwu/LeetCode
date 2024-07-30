@@ -25544,4 +25544,137 @@ string LeetCodeString::getSmallestString(string s)
     return result;
 }
 
+/// <summary>
+/// Leet Code 3223. Minimum Length of String After Operations
+///
+/// Medium
+///
+/// You are given a string s.
+/// 
+/// You can perform the following process on s any number of times:
+///
+/// Choose an index i in the string such that there is at least one 
+/// character to the left of index i that is equal to s[i], and at least 
+/// one character to the right that is also equal to s[i].
+/// Delete the closest character to the left of index i that is equal 
+/// to s[i].
+/// Delete the closest character to the right of index i that is equal 
+/// to s[i].
+/// Return the minimum length of the final string s that you can achieve.
+///
+/// Example 1:
+/// Input: s = "abaacbcbb"
+/// Output: 5
+/// Explanation:
+/// We do the following operations:
+///
+/// Choose index 2, then remove the characters at indices 0 and 3. The 
+/// resulting string is s = "bacbcbb".
+/// Choose index 3, then remove the characters at indices 0 and 5. The 
+/// resulting string is s = "acbcb".
+///
+/// Example 2:
+/// Input: s = "aa"
+/// Output: 2
+/// Explanation:
+/// We cannot perform any operations, so we return the length of the 
+/// original string.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 2 * 10^5
+/// 2. s consists only of lowercase English letters.
+/// </summary>
+int LeetCodeString::minimumLengthI(string s)
+{
+    vector<int> char_count(26);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        char_count[s[i] - 'a']++;
+    }
+    int result = 0;
+    for (int i = 0; i < 26; i++)
+    {
+        if (char_count[i] == 0) continue;
+        if (char_count[i] % 2 == 0) result += 2;
+        else result += 1;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3234. Count the Number of Substrings With Dominant Ones
+///
+/// Medium
+///
+/// You are given a binary string s.
+/// Return the number of substrings with dominant ones.
+///
+/// A string has dominant ones if the number of ones in the string is 
+/// greater than or equal to the square of the number of zeros in the 
+/// string.
+/// 
+/// Example 1:
+/// Input: s = "00011"
+/// Output: 5
+/// Explanation:
+/// The substrings with dominant ones are shown in the table below.
+/// i   j   s[i..j] Number of Zeros Number of Ones
+/// 3   3   1   0   1
+/// 4   4   1   0   1
+/// 2   3   01  1   1
+/// 3   4   11  0   2
+/// 2   4   011 1   2
+///
+/// Example 2:
+/// Input: s = "101101"
+/// Output: 16
+/// Explanation:
+/// The substrings with non-dominant ones are shown in the table below.
+/// Since there are 21 substrings total and 5 of them have non-dominant 
+/// ones, it follows that there are 16 substrings with dominant ones.
+///
+/// i   j   s[i..j] Number of Zeros Number of Ones
+/// 1   1   0   1   0
+/// 4   4   0   1   0
+/// 1   4   0110    2   2
+/// 0   4   10110   2   3
+/// 1   5   01101   2   3
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 4 * 10^4
+/// 2. s consists only of characters '0' and '1'.
+/// </summary>
+int LeetCodeString::numberOfDominantSubstrings(string s)
+{
+    int n = s.size();
+    int result = 0;
+    vector<int> sum(n+1);
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i] == '1') sum[i + 1] = 1;
+        sum[i + 1] += sum[i];
+    }
+    for (int i = 0; i < n; i++)
+    {
+        int zero = 0, one = 0;
+        for (int j = i; j < n; j++)
+        {
+            one = sum[j + 1] - sum[i];
+            zero = j - i + 1 - one;
+            if (zero * zero > one)
+            {
+                j += zero * zero - one - 1;
+            }
+            else
+            {
+                result++;
+                int k = (int)sqrt(one);
+                int delta = min(k - zero, n - 1 - j);
+                result += delta;
+                j += delta;
+            }
+        }
+    }
+    return result;
+}
 #pragma endregion
