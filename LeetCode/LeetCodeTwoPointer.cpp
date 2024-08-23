@@ -2995,4 +2995,161 @@ double LeetCodeTwoPointer::minimumAverage(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3258. Count Substrings That Satisfy K-Constraint I
+/// 
+/// Easy
+///
+/// You are given a binary string s and an integer k.
+///
+/// A binary string satisfies the k-constraint if either of the following 
+/// conditions holds:
+///
+/// The number of 0's in the string is at most k.
+/// The number of 1's in the string is at most k.
+/// Return an integer denoting the number of substrings of s that satisfy 
+/// the k-constraint.
+///
+/// Example 1:
+/// Input: s = "10101", k = 1
+/// Output: 12
+/// Explanation:
+/// Every substring of s except the substrings "1010", "10101", and "0101" 
+/// satisfies the k-constraint.
+///
+/// Example 2:
+/// Input: s = "1010101", k = 2
+/// Output: 25
+/// Explanation:
+/// Every substring of s except the substrings with a length greater than 5 
+/// satisfies the k-constraint.
+/// 
+/// Example 3:
+/// Input: s = "11111", k = 1
+/// Output: 15
+/// Explanation:
+/// All substrings of s satisfy the k-constraint.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 50 
+/// 2. 1 <= k <= s.length
+/// 3. s[i] is either '0' or '1'.
+/// </summary>
+int LeetCodeTwoPointer::countKConstraintSubstringsI(string s, int k)
+{
+    vector<int> dp(2);
+    int left = -1;
+    int result = 0;
+    for (int right = 0; right < (int)s.size(); right++)
+    {
+        dp[s[right] - '0']++;
+        while (dp[0] > k && dp[1] > k)
+        {
+            left++;
+            dp[s[left] - '0']--;
+        }
+        result += right - left;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3261. Count Substrings That Satisfy K-Constraint II
+/// 
+/// Hard
+///
+/// You are given a binary string s and an integer k.
+/// You are also given a 2D integer array queries, where 
+/// queries[i] = [li, ri].
+///
+/// A binary string satisfies the k-constraint if either of the following 
+/// conditions holds:
+///
+/// The number of 0's in the string is at most k.
+/// The number of 1's in the string is at most k.
+/// Return an integer array answer, where answer[i] is the number of 
+/// substrings of s[li..ri] that satisfy the k-constraint.
+/// 
+/// Example 1:
+/// Input: s = "0001111", k = 2, queries = [[0,6]]
+/// Output: [26]
+/// Explanation:
+/// For the query [0, 6], all substrings of s[0..6] = "0001111" satisfy 
+/// the k-constraint except for the substrings s[0..5] = "000111" and 
+/// s[0..6] = "0001111".
+///
+/// Example 2:
+/// Input: s = "010101", k = 1, queries = [[0,5],[1,4],[2,3]]
+/// Output: [15,9,3]
+/// Explanation:
+/// The substrings of s with a length greater than 3 do not satisfy the 
+/// k-constraint.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s[i] is either '0' or '1'.
+/// 3. 1 <= k <= s.length
+/// 4. 1 <= queries.length <= 10^5
+/// 5. queries[i] == [li, ri]
+/// 6. 0 <= li <= ri < s.length
+/// 7. All queries are distinct.
+/// </summary>
+vector<long long> LeetCodeTwoPointer::countKConstraintSubstringsII(string s, int k, vector<vector<int>>& queries)
+{
+    int n = s.size();
+    vector<vector<int>> boundary(n, vector<int>(2));
+    vector<int> dp(2);
+    int left = -1;
+    for (int right = 0; right < n; right++)
+    {
+        dp[s[right] - '0']++;
+        while (dp[0] > k && dp[1] > k)
+        {
+            left++;
+            dp[s[left] - '0']--;
+        }
+        boundary[right][0] = left + 1;
+    }
+
+    dp[0] = dp[1] = 0;
+    int right = n;
+    for (int left = n - 1; left >= 0; left--)
+    {
+        dp[s[left] - '0']++;
+        while (dp[0] > k && dp[1] > k)
+        {
+            right--;
+            dp[s[right] - '0']--;
+        }
+        boundary[left][1] = right - 1;
+    }
+    vector<long long> pre_sum(n + 1);
+    for (int i = 1; i <= n; i++)
+    {
+        pre_sum[i] = pre_sum[i - 1] + (long long)i - boundary[i - 1][0];
+    }
+    vector<long long> result;
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        int left = queries[i][0];
+        int right = queries[i][1];
+        long long count = 0;
+        if (boundary[left][1] >= right)
+        {
+            long long len = right - left + 1;
+            count = len * (len + 1) / 2;
+        }
+        else
+        {
+            int middle = boundary[left][1];
+            long long len = middle - left + 1;
+            count = len * (len + 1) / 2;
+            count += pre_sum[right+1] - pre_sum[middle + 1];
+        }
+        result.push_back(count);
+    }
+    return result;
+}
+
 #pragma endregion

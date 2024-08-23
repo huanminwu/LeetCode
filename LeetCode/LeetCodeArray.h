@@ -21192,5 +21192,358 @@ public:
     /// </summary>
     long long minimumOperations(vector<int>& nums, vector<int>& target);
 
+    /// <summary>
+    /// Leet Code 3237. Alt and Tab Simulation
+    ///
+    /// Medium
+    ///
+    /// There are n windows open numbered from 1 to n, we want to simulate
+    /// using alt + tab to navigate between the windows.
+    ///
+    /// You are given an array windows which contains the initial order of the 
+    /// windows (the first element is at the top and the last one is at the 
+    /// bottom).
+    ///
+    /// You are also given an array queries where for each query, the window 
+    /// queries[i] is brought to the top.
+    ///
+    /// Return the final state of the array windows.
+    /// 
+    /// Example 1:
+    /// Input: windows = [1,2,3], queries = [3,3,2]
+    /// Output: [2,3,1]
+    /// Explanation:
+    /// Here is the window array after each query:
+    /// Initial order: [1,2,3]
+    /// After the first query: [3,2,1]
+    /// After the second query: [3,2,1]
+    /// After the last query: [2,3,1]
+    ///
+    /// Example 2:
+    /// Input: windows = [1,4,2,3], queries = [4,1,3]
+    /// Output: [3,1,4,2]
+    ///
+    /// Explanation:
+    /// Here is the window array after each query:
+    /// Initial order: [1,4,2,3]
+    /// After the first query: [4,1,2,3]
+    /// After the second query: [1,4,2,3]
+    /// After the last query: [3,1,4,2]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == windows.length <= 10^5
+    /// 2. windows is a permutation of [1, n].
+    /// 3. 1 <= queries.length <= 105
+    /// 4. 1 <= queries[i] <= n
+    /// </summary>
+    vector<int> simulationResult(vector<int>& windows, vector<int>& queries);
+
+    /// <summary>
+    /// Leet Code 3238. Find the Number of Winning Players
+    ///
+    /// Easy
+    ///
+    /// You are given an integer n representing the number of players in a 
+    /// game and a 2D array pick where pick[i] = [xi, yi] represents that 
+    /// the player xi picked a ball of color yi.
+    ///
+    /// Player i wins the game if they pick strictly more than i balls of 
+    /// the same color. In other words,
+    ///
+    /// Player 0 wins if they pick any ball.
+    /// Player 1 wins if they pick at least two balls of the same color.
+    /// ...
+    /// Player i wins if they pick at leasti + 1 balls of the same color.
+    /// Return the number of players who win the game.
+    ///
+    /// Note that multiple players can win the game.
+    /// 
+    /// Example 1:
+    /// Input: n = 4, pick = [[0,0],[1,0],[1,0],[2,1],[2,1],[2,0]]
+    /// Output: 2
+    /// Explanation:
+    /// Player 0 and player 1 win the game, while players 2 and 3 do not win.
+    ///
+    /// Example 2:
+    /// Input: n = 5, pick = [[1,1],[1,2],[1,3],[1,4]]
+    /// Output: 0
+    /// Explanation:
+    /// No player wins the game.
+    ///
+    /// Example 3:
+    /// Input: n = 5, pick = [[1,1],[2,4],[2,4],[2,4]]
+    /// Output: 1
+    /// Explanation:
+    /// Player 2 wins the game by picking 3 balls with color 4.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 10
+    /// 2. 1 <= pick.length <= 100
+    /// 3. pick[i].length == 2
+    /// 4. 0 <= xi <= n - 1 
+    /// 5. 0 <= yi <= 10
+    /// </summary>
+    int winningPlayerCount(int n, vector<vector<int>>& pick);
+
+    /// <summary>
+    /// Leet Code 3239. Minimum Number of Flips to Make Binary Grid 
+    ///                Palindromic I
+    ///
+    /// Medium
+    ///
+    /// You are given an m x n binary matrix grid.
+    ///
+    /// A row or column is considered palindromic if its values read the same 
+    /// forward and backward.
+    ///
+    /// You can flip any number of cells in grid from 0 to 1, or from 1 to 0.
+    ///
+    /// Return the minimum number of cells that need to be flipped to make 
+    /// either all rows palindromic or all columns palindromic.
+    ///
+    /// Example 1:
+    /// Input: grid = [[1,0,0],[0,0,0],[0,0,1]]
+    ///
+    /// Output: 2
+    ///
+    /// Explanation:
+    /// Flipping the highlighted cells makes all the rows palindromic.
+    ///
+    /// Example 2:
+    /// Input: grid = [[0,1],[0,1],[0,0]]
+    /// 
+    /// Output: 1
+    ///
+    /// Explanation:
+    /// Flipping the highlighted cell makes all the columns palindromic.
+    ///
+    /// Example 3:
+    /// Input: grid = [[1],[0]]
+    /// Output: 0
+    /// Explanation:
+    /// All rows are already palindromic.
+    /// 
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 1 <= m * n <= 2 * 10^5
+    /// 4. 0 <= grid[i][j] <= 1
+    /// </summary>
+    int minFlipsI(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 3240. Minimum Number of Flips to Make Binary Grid 
+    ///                 Palindromic II 
+    /// 
+    /// Medium
+    ///
+    /// You are given an m x n binary matrix grid.
+    /// A row or column is considered palindromic if its values read the same 
+    /// forward and backward.
+    ///
+    /// You can flip any number of cells in grid from 0 to 1, or from 1 to 0.
+    ///
+    /// Return the minimum number of cells that need to be flipped to make all 
+    /// rows and columns palindromic, and the total number of 1's in grid 
+    /// divisible by 4.
+    ///
+    /// Example 1:
+    /// Input: grid = [[1,0,0],[0,1,0],[0,0,1]]
+    /// Output: 3
+    ///
+    /// Explanation:
+    ///
+    /// Example 2:
+    /// Input: grid = [[0,1],[0,1],[0,0]]
+    /// Output: 2
+    /// 
+    /// Explanation:
+    ///
+    /// Example 3:
+    /// Input: grid = [[1],[1]]
+    /// Output: 2
+    /// Explanation:
+    /// 
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 1 <= m * n <= 2 * 10^5
+    /// 4. 0 <= grid[i][j] <= 1
+    /// </summary>
+    int minFlipsII(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 3254. Find the Power of K-Size Subarrays I
+    /// 
+    /// Medium
+    ///
+    /// You are given an array of integers nums of length n and a positive 
+    /// integer k.
+    ///
+    /// The power of an array is defined as:
+    /// 
+    /// Its maximum element if all of its elements are consecutive and sorted 
+    /// in ascending order.
+    /// -1 otherwise.
+    /// You need to find the power of all 
+    /// subarrays of nums of size k.
+    /// Return an integer array results of size n - k + 1, where results[i] 
+    /// is the power of nums[i..(i + k - 1)].
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,2,3,4,3,2,5], k = 3
+    /// Output: [3,4,-1,-1,-1]
+    /// Explanation:
+    /// There are 5 subarrays of nums of size 3:
+    /// [1, 2, 3] with the maximum element 3.
+    /// [2, 3, 4] with the maximum element 4.
+    /// [3, 4, 3] whose elements are not consecutive.
+    /// [4, 3, 2] whose elements are not sorted.
+    /// [3, 2, 5] whose elements are not consecutive.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,2,2,2,2], k = 4
+    /// Output: [-1,-1]
+    ///
+    /// Example 3:
+    /// Input: nums = [3,2,3,2,3,2], k = 2
+    /// Output: [-1,3,-1,3,-1]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 500
+    /// 2. 1 <= nums[i] <= 10^5
+    /// 3. 1 <= k <= n
+    /// </summary>
+    vector<int> resultsArrayI(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3255. Find the Power of K - Size Subarrays II
+    /// 
+    /// Medium
+    /// 
+    /// You are given an array of integers nums of length n and a positive 
+    /// integer k.
+    ///
+    /// The power of an array is defined as :
+    /// Its maximum element if all of its elements are consecutive and sorted 
+    /// in ascending order.
+    /// - 1 otherwise.
+    /// You need to find the power of all subarrays of nums of size k.
+    ///
+    /// Return an integer array results of size n - k + 1, where results[i] 
+    /// is the power of nums[i..(i + k - 1)].
+    /// 
+    /// Example 1:
+    /// Input: nums = [1, 2, 3, 4, 3, 2, 5], k = 3
+    /// Output : [3, 4, -1, -1, -1]
+    /// Explanation :
+    /// There are 5 subarrays of nums of size 3 :
+    /// [1, 2, 3] with the maximum element 3.
+    /// [2, 3, 4] with the maximum element 4.
+    /// [3, 4, 3] whose elements are not consecutive.
+    /// [4, 3, 2] whose elements are not sorted.
+    /// [3, 2, 5] whose elements are not consecutive.
+    ///
+    /// Example 2:
+    /// Input: nums = [2, 2, 2, 2, 2], k = 4
+    /// Output : [-1, -1]
+    ///
+    /// Example 3 :
+    /// Input : nums = [3, 2, 3, 2, 3, 2], k = 2
+    /// Output : [-1, 3, -1, 3, -1]
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^6
+    /// 3. 1 <= k <= n
+    /// </summary>
+    vector<int> resultsArrayII(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3256. Maximum Value Sum by Placing Three Rooks I
+    /// 
+    /// Hard
+    /// 
+    /// You are given a m x n 2D array board representing a chessboard, where 
+    /// board[i][j] represents the value of the cell (i, j).
+    ///
+    /// Rooks in the same row or column attack each other. You need to place 
+    /// three rooks on the chessboard such that the rooks do not attack each 
+    /// other.
+    ///
+    /// Return the maximum sum of the cell values on which the rooks are 
+    /// placed.
+    /// 
+    /// Example 1:
+    /// Input: board = [[-3,1,1,1],[-3,1,-3,1],[-3,2,1,1]]
+    /// 
+    /// Output: 4
+    /// Explanation:
+    /// We can place the rooks in the cells (0, 2), (1, 3), and (2, 1) for a 
+    /// sum of 1 + 1 + 2 = 4.
+    ///
+    /// Example 2:
+    /// Input: board = [[1,2,3],[4,5,6],[7,8,9]]
+    /// Output: 15
+    /// Explanation:
+    /// We can place the rooks in the cells (0, 0), (1, 1), and (2, 2) for a 
+    /// sum of 1 + 5 + 9 = 15.
+    ///
+    /// Example 3:
+    /// Input: board = [[1,1,1],[1,1,1],[1,1,1]]
+    /// Output: 3
+    /// Explanation:
+    /// We can place the rooks in the cells (0, 2), (1, 1), and (2, 0) for a 
+    /// sum of 1 + 1 + 1 = 3.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= m == board.length <= 100
+    /// 2. 3 <= n == board[i].length <= 100
+    /// 3. -10^9 <= board[i][j] <= 10^9
+    /// </summary>
+    long long maximumValueSumI(vector<vector<int>>& board); 
+
+    /// <summary>
+    /// Leet Code 3257. Maximum Value Sum by Placing Three Rooks II
+    /// 
+    /// Hard
+    ///
+    /// You are given a m x n 2D array board representing a chessboard, where 
+    /// board[i][j] represents the value of the cell (i, j).
+    ///
+    /// Rooks in the same row or column attack each other. You need to place 
+    /// three rooks on the chessboard such that the rooks do not attack each 
+    /// other.
+    ///
+    /// Return the maximum sum of the cell values on which the rooks are 
+    /// placed.
+    /// 
+    /// Example 1:
+    /// Input: board = [[-3,1,1,1],[-3,1,-3,1],[-3,2,1,1]]
+    /// Output: 4
+    /// Explanation:
+    /// We can place the rooks in the cells (0, 2), (1, 3), and (2, 1) for a 
+    /// sum of 1 + 1 + 2 = 4.
+    ///
+    /// Example 2:
+    /// Input: board = [[1,2,3],[4,5,6],[7,8,9]]
+    /// Output: 15
+    /// Explanation:
+    /// We can place the rooks in the cells (0, 0), (1, 1), and (2, 2) for a 
+    /// sum of 1 + 5 + 9 = 15.
+    ///
+    /// Example 3:
+    /// Input: board = [[1,1,1],[1,1,1],[1,1,1]]
+    /// Output: 3
+    /// Explanation:
+    /// We can place the rooks in the cells (0, 2), (1, 1), and (2, 0) for a 
+    /// sum of 1 + 1 + 1 = 3.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= m == board.length <= 500
+    /// 2. 3 <= n == board[i].length <= 500
+    /// 3. -10^9 <= board[i][j] <= 10^9
+    /// </summary>
+    long long maximumValueSumII(vector<vector<int>>& board);
 };
 #endif  // LeetCodeArray_H

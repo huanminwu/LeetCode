@@ -5327,11 +5327,62 @@ void TestLeetCode3202(void)
     result = leetCode.maximumLengthModII(nums, k);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
 
+void TestLeetCode3247(void)
+{
+    Logger::WriteMessage("Test Leet Code 3247");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1,1,1 };
+    int result = leetCode.subsequenceCount(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,2 };
+    result = leetCode.subsequenceCount(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3250(void)
+{
+    Logger::WriteMessage("Test Leet Code 3250");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 2,3,2 };
+    int result = leetCode.countOfPairsI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,5,5,5 };
+    result = leetCode.countOfPairsI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3259(void)
+{
+    Logger::WriteMessage("Test Leet Code 3259");
+    LeetCodeDP leetCode;
+    vector<int> energyDrinkA = { 1, 3, 1 };
+    vector<int> energyDrinkB = { 3, 1, 1 };
+    long long result = leetCode.maxEnergyBoost(energyDrinkA, energyDrinkB);
+    Logger::WriteMessage(energyDrinkA);
+    Logger::WriteMessage(energyDrinkB);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    energyDrinkA = { 4,1,1 };
+    energyDrinkB = { 1,1,3 };
+    result = leetCode.maxEnergyBoost(energyDrinkA, energyDrinkB);
+    Logger::WriteMessage(energyDrinkA);
+    Logger::WriteMessage(energyDrinkB);
+    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3259();
+    TestLeetCode3250();
+    TestLeetCode3247();
     TestLeetCode3202();
     TestLeetCode3201();
     TestLeetCode3193();

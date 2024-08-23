@@ -4053,8 +4053,55 @@ void TestLeetCode3203(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3241(void)
+{
+    Logger::WriteMessage("Test Leet Code 3241");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = { {0, 1},{0, 2} };
+    vector<int> result = leetCode.timeTaken(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+
+    edges = { {0,1} };
+    result = leetCode.timeTaken(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+
+    edges = { {2, 4},{0, 1},{2, 3},{0, 2} };
+    result = leetCode.timeTaken(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+
+    edges = { {1, 0},{2, 1},{3, 1},{4, 3} };
+    result = leetCode.timeTaken(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3249(void)
+{
+    Logger::WriteMessage("Test Leet Code 3249");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = { {0, 1},{0, 2},{1, 3},{1, 4},{2, 5},{2, 6} };
+    int result = leetCode.countGoodNodes(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {0, 1},{1, 2},{2, 3},{3, 4},{0, 5},{1, 6},{2, 7},{3, 8} };
+    result = leetCode.countGoodNodes(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {0, 1},{1, 2},{1, 3},{1, 4},{0, 5},{5, 6},{6, 7},{7, 8},{0, 9},{9, 10},{9, 12},{10, 11} };
+    result = leetCode.countGoodNodes(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3249();
+    TestLeetCode3241();
     TestLeetCode3203();
     TestLeetCode3157();
     TestLeetCode3068();

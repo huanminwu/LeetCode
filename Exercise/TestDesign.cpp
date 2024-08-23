@@ -5434,8 +5434,83 @@ void TestSalesOrg(void)
     }
 }
 
+void TestLeetCode3242(void)
+{
+    Logger::WriteMessage("Test Leet Code 3242");
+    vector<string> commands =
+    {
+        "NeighborSum","adjacentSum","adjacentSum","diagonalSum","diagonalSum"
+    };
+    vector<vector<vector<int>>> parameters =
+    {
+        {{0,1,2},{3,4,5},{6,7,8}},{{1}},{{4}},{{4}},{{8}}
+    };
+    vector<string> result;
+    NeighborSum* neighborSum = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "NeighborSum")
+        {
+            neighborSum = new NeighborSum(parameters[0]);
+        }
+        else if (commands[i] == "adjacentSum")
+        {
+            int ret = neighborSum->adjacentSum(parameters[i][0][0]);
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "diagonalSum")
+        {
+            int ret = neighborSum->diagonalSum(parameters[i][0][0]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete neighborSum;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+        "NeighborSum", "adjacentSum", "diagonalSum"
+    };
+    parameters =
+    {
+        {{1, 2, 0, 3},{4, 7, 15, 6},{8, 9, 10, 11},{12, 13, 14, 5}}, {{15}},{{9}}
+    };
+    result.clear();
+    neighborSum = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "NeighborSum")
+        {
+            neighborSum = new NeighborSum(parameters[0]);
+        }
+        else if (commands[i] == "adjacentSum")
+        {
+            int ret = neighborSum->adjacentSum(parameters[i][0][0]);
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "diagonalSum")
+        {
+            int ret = neighborSum->diagonalSum(parameters[i][0][0]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete neighborSum;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode3242();
     TestLeetCode2671();
     TestLeetCode2642();
     TestLeetCode2590();

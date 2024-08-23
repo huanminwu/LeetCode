@@ -10439,5 +10439,154 @@ public:
     /// 3. 1 <= k <= 10^3
     /// </summary>
     int maximumLengthModII(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3247. Number of Subsequences with Odd Sum
+    /// 
+    /// Medium
+    ///
+    /// Given an array nums, return the number of subsequences with an odd sum 
+    /// of elements.
+    /// Since the answer may be very large, return it modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,1,1]
+    /// Output: 4
+    ///
+    /// Explanation:
+    /// The odd-sum subsequences are: [1, 1, 1], [1, 1, 1], [1, 1, 1], 
+    /// [1, 1, 1].
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,2]
+    /// Output: 4
+    /// Explanation:
+    /// The odd-sum subsequences are: [1, 2, 2], [1, 2, 2], [1, 2, 2], 
+    /// [1, 2, 2].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.lnegth <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    int subsequenceCount(vector<int>& nums); 
+
+    /// <summary>
+    /// Leet Code 3250. Find the Count of Monotonic Pairs I
+    /// 
+    /// Hard
+    ///
+    /// You are given an array of positive integers nums of length n.
+    /// We call a pair of non-negative integer arrays (arr1, arr2) monotonic 
+    /// if: The lengths of both arrays are n.
+    /// arr1 is monotonically non-decreasing, in other words, arr1[0] <= 
+    /// arr1[1] <= ... <= arr1[n - 1].
+    /// arr2 is monotonically non-increasing, in other words, arr2[0] >= 
+    /// arr2[1] >= ... >= arr2[n - 1].
+    /// arr1[i] + arr2[i] == nums[i] for all 0 <= i <= n - 1.
+    /// Return the count of monotonic pairs.
+    /// 
+    /// Since the answer may be very large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,3,2]
+    /// Output: 4
+    /// Explanation:
+    /// The good pairs are:
+    /// ([0, 1, 1], [2, 2, 1])
+    /// ([0, 1, 2], [2, 2, 0])
+    /// ([0, 2, 2], [2, 1, 0])
+    /// ([1, 2, 2], [1, 1, 0])
+    ///
+    /// Example 2:
+    /// Input: nums = [5,5,5,5]
+    /// Output: 126
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 2000
+    /// 2. 1 <= nums[i] <= 50
+    /// </summary>
+    int countOfPairsI(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3251. Find the Count of Monotonic Pairs II
+    /// 
+    /// Hard
+    ///
+    /// You are given an array of positive integers nums of length n.
+    /// We call a pair of non-negative integer arrays (arr1, arr2) monotonic 
+    /// if:
+    /// The lengths of both arrays are n.
+    /// arr1 is monotonically non-decreasing, in other words, arr1[0] <= 
+    /// arr1[1] <= ... <= arr1[n - 1].
+    /// arr2 is monotonically non-increasing, in other words, arr2[0] >= 
+    /// arr2[1] >= ... >= arr2[n - 1].
+    /// arr1[i] + arr2[i] == nums[i] for all 0 <= i <= n - 1.
+    /// Return the count of monotonic pairs.
+    ///
+    /// Since the answer may be very large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,3,2]
+    /// Output: 4
+    /// Explanation:
+    /// The good pairs are:
+    /// ([0, 1, 1], [2, 2, 1])
+    /// ([0, 1, 2], [2, 2, 0])
+    /// ([0, 2, 2], [2, 1, 0])
+    /// ([1, 2, 2], [1, 1, 0])
+    ///
+    /// Example 2:
+    /// Input: nums = [5,5,5,5]
+    /// Output: 126
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 2000
+    /// 2. 1 <= nums[i] <= 1000
+    /// </summary>
+    int countOfPairsII(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3259. Maximum Energy Boost From Two Drinks
+    /// 
+    /// Medium
+    ///
+    /// You are given two integer arrays energyDrinkA and energyDrinkB of the 
+    /// same length n by a futuristic sports scientist. These arrays represent 
+    /// the energy boosts per hour provided by two different energy drinks, A 
+    /// and B, respectively.
+    ///
+    /// You want to maximize your total energy boost by drinking one energy 
+    /// drink per hour. However, if you want to switch from consuming one 
+    /// energy drink to the other, you need to wait for one hour to cleanse 
+    /// your system (meaning you won't get any energy boost in that hour).
+    ///
+    /// Return the maximum total energy boost you can gain in the next n 
+    /// hours.
+    /// 
+    /// Note that you can start consuming either of the two energy drinks.
+    /// 
+    /// Example 1:
+    /// Input: energyDrinkA = [1,3,1], energyDrinkB = [3,1,1]
+    /// Output: 5
+    /// Explanation:
+    /// To gain an energy boost of 5, drink only the energy drink A 
+    /// (or only B).
+    ///
+    /// Example 2:
+    /// Input: energyDrinkA = [4,1,1], energyDrinkB = [1,1,3]
+    /// Output: 7
+    /// Explanation:
+    /// To gain an energy boost of 7:
+    /// Drink the energy drink A for the first hour.
+    /// Switch to the energy drink B and we lose the energy boost of the 
+    /// second hour.
+    /// Gain the energy boost of the drink B in the third hour.
+    ///
+    /// Constraints:
+    /// 1. n == energyDrinkA.length == energyDrinkB.length
+    /// 2. 3 <= n <= 105
+    /// 3. 1 <= energyDrinkA[i], energyDrinkB[i] <= 105
+    /// </summary>
+    long long maxEnergyBoost(vector<int>& energyDrinkA, vector<int>& energyDrinkB);
 };
 #endif  // LeetCodeDP

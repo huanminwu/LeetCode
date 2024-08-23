@@ -1234,8 +1234,35 @@ void TestLeetCode3217(void)
     leetCode.freeListNodes(result);
 }
 
+void TestLeetCode3263(void)
+{
+    Logger::WriteMessage("Test Leet Code 3217");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 1,2,3,4,3,2,1 };
+    Logger::WriteMessage(data_list);
+    ListNode* head = leetCode.generateListNodes(data_list);
+    vector<int> result = leetCode.toArray(head);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(head);
+
+    data_list = { 2,2,2,2,2 };
+    Logger::WriteMessage(data_list);
+    head = leetCode.generateListNodes(data_list);
+    result = leetCode.toArray(head);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(head);
+
+    data_list = { 3,2,3,2,3,2 };
+    Logger::WriteMessage(data_list);
+    head = leetCode.generateListNodes(data_list);
+    result = leetCode.toArray(head);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(head);
+}
+
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode3263();
     TestLeetCode3217();
     TestLeetCode3063();
     TestLeetCode3062();

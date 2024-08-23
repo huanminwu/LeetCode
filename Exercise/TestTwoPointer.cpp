@@ -855,8 +855,54 @@ void TestLeetCode3194(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3258(void)
+{
+    Logger::WriteMessage("Test Leet Code 3258");
+    LeetCodeTwoPointer leetCode;
+    string s = "10101";
+    int k = 1;
+    int result = leetCode.countKConstraintSubstringsI(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "1010101";
+    k = 2;
+    result = leetCode.countKConstraintSubstringsI(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "11111";
+    k = 1;
+    result = leetCode.countKConstraintSubstringsI(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3261(void)
+{
+    Logger::WriteMessage("Test Leet Code 3261");
+    LeetCodeTwoPointer leetCode;
+    string s = "0001111";
+    int k = 2;
+    vector<vector<int>> queries = { {0,6} };
+    vector<long long> result = leetCode.countKConstraintSubstringsII(s, k, queries);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    s = "010101";
+    k = 1;
+    queries = { {0, 5},{1, 4},{2, 3} };
+    result = leetCode.countKConstraintSubstringsII(s, k, queries);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode3261();
+    TestLeetCode3258();
     TestLeetCode3194();
     TestLeetCode3208();
     TestLeetCode3206();
