@@ -2388,8 +2388,55 @@ void TestLeetCode3211(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3272(void)
+{
+    Logger::WriteMessage("Test Leet Code 3272");
+    LeetCodeDFS leetCode;
+    int n = 10, k = 5;
+    long long result = leetCode.countGoodIntegers(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 1, k = 4;
+    result = leetCode.countGoodIntegers(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 5, k = 6;
+    result = leetCode.countGoodIntegers(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3, k = 5;
+    result = leetCode.countGoodIntegers(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3276(void)
+{
+    Logger::WriteMessage("Test Leet Code 3276");
+    LeetCodeDFS leetCode;
+    vector<vector<int>> grid = { {1, 2, 3},{4, 3, 2},{1, 1, 1} };
+    int result = leetCode.maxScore(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {8, 7, 6},{8, 3, 2} };
+    result = leetCode.maxScore(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {12, 12}, {4, 4}, { 12, 12 } };
+    result = leetCode.maxScore(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3276();
+    TestLeetCode3272();
     TestLeetCode3211();
     TestLeetCode3149();
     TestLeetCode140();

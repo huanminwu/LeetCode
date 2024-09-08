@@ -2994,7 +2994,7 @@ double LeetCodeDP::knightProbability(int N, int K, int r, int c)
         map<pair<int, int>, double> next_set;
         double onboard_move = 0;
         double total_move = 0;
-        for (auto itr : current_set)
+        for (auto &itr : current_set)
         {
             pair<int, int> pos = itr.first;
             for (size_t j = 0; j < steps.size(); j++)
@@ -3454,7 +3454,7 @@ int LeetCodeDP::deleteAndEarn(vector<int>& nums)
     map<int, int> sum_map;
     vector<pair<int, int>> sum_nums;
     for (size_t i = 0; i < nums.size(); i++) sum_map[nums[i]] += nums[i];
-    for (auto itr : sum_map)
+    for (auto &itr : sum_map)
     {
         sum_nums.push_back(make_pair(itr.first, itr.second));
     }
@@ -5430,7 +5430,7 @@ int LeetCodeDP::tallestBillboard(vector<int>& rods)
         for (int j = -1; j < 2; j+=2)
         {
             int rod = j* rods[i];
-            for (auto itr : curr_map)
+            for (auto& itr : curr_map)
             {
                 int new_sum = itr.first + rod;
                 if (new_sum < -sum / 2 || new_sum > sum / 2) continue;
@@ -18797,5 +18797,155 @@ long long LeetCodeDP::maxEnergyBoost(vector<int>& energyDrinkA, vector<int>& ene
     return max(dp[n - 1][0], dp[n - 1][1]);
 }
 
+/// <summary>
+/// Leet Code 3269. Constructing Two Increasing Arrays
+/// 
+/// Hard
+/// 
+/// Given 2 integer arrays nums1 and nums2 consisting only of 0 and 1, 
+/// your task is to calculate the minimum possible largest number in 
+/// arrays nums1 and nums2, after doing the following.
+///
+/// Replace every 0 with an even positive integer and every 1 with an 
+/// odd positive integer. After replacement, both arrays should be 
+/// increasing and each integer should be used at most once.
+///
+/// Return the minimum possible largest number after applying the changes.
+///
+/// Example 1:
+/// Input: nums1 = [], nums2 = [1,0,1,1]
+/// Output: 5
+/// Explanation:
+/// After replacing, nums1 = [], and nums2 = [1, 2, 3, 5].
+///
+/// Example 2:
+/// Input: nums1 = [0,1,0,1], nums2 = [1,0,0,1]
+/// Output: 9
+/// Explanation:
+/// One way to replace, having 9 as the largest element is 
+/// nums1 = [2, 3, 8, 9], and nums2 = [1, 4, 6, 7].
+///
+/// Example 3:
+/// Input: nums1 = [0,1,0,0,1], nums2 = [0,0,0,1]
+/// Output: 13
+/// Explanation:
+/// One way to replace, having 13 as the largest element is 
+/// nums1 = [2, 3, 4, 6, 7], and nums2 = [8, 10, 12, 13].
+///
+/// Constraints:
+/// 1. 0 <= nums1.length <= 1000
+/// 2. 1 <= nums2.length <= 1000
+/// 3. nums1 and nums2 consist only of 0 and 1.
+/// </summary>
+int LeetCodeDP::minLargest(vector<int>& nums1, vector<int>& nums2)
+{
+    int n1 = nums1.size(), n2 = nums2.size();
+    vector<vector<int>> dp(n1+1, vector<int>(n2+1, INT_MAX));
+    dp[0][0] = 0;
+    for (int i = 0; i <= n1; i++)
+    {
+        for (int j = 0; j <= n2; j++)
+        {
+            if (i > 0)
+            {
+                dp[i][j] = min(dp[i][j], dp[i - 1][j] + 2 - (dp[i - 1][j] + nums1[i - 1]) % 2);
+            }
+            if (j > 0)
+            {
+                dp[i][j] = min(dp[i][j], dp[i][j - 1] + 2 - (dp[i][j - 1] + nums2[j - 1]) % 2);
+            }
+        }
+    }
+    return dp[n1][n2];
+}
+
+/// <summary>
+/// Leet Code 3277. Maximum XOR Score Subarray Queries
+/// 
+/// Hard
+///
+/// You are given an array nums of n integers, and a 2D integer array 
+/// queries of size q, where queries[i] = [li, ri].
+///
+/// For each query, you must find the maximum XOR score of any 
+/// subarray of nums[li..ri].
+/// The XOR score of an array a is found by repeatedly applying the 
+/// following operations on a so that only one element remains, that is 
+/// the score:
+///
+/// Simultaneously replace a[i] with a[i] XOR a[i + 1] for all 
+/// indices i except the last one.
+/// Remove the last element of a.
+/// Return an array answer of size q where answer[i] is the answer to 
+/// query i.
+/// 
+/// Example 1:
+/// Input: nums = [2,8,4,32,16,1], queries = [[0,2],[1,4],[0,5]]
+/// Output: [12,60,60]
+/// Explanation:
+/// In the first query, nums[0..2] has 6 subarrays [2], [8], [4], [2, 8], 
+/// [8, 4], and [2, 8, 4] each with a respective XOR score of 2, 8, 4, 
+/// 10, 12, and 6. The answer for the query is 12, the largest of all XOR 
+/// scores.
+///
+/// In the second query, the subarray of nums[1..4] with the largest XOR 
+/// score is nums[1..4] with a score of 60.
+/// In the third query, the subarray of nums[0..5] with the largest XOR 
+/// score is nums[1..4] with a score of 60.
+///
+/// Example 2:
+/// Input: nums = [0,7,3,2,8,5,1], queries = [[0,3],[1,5],[2,4],[2,6],
+/// [5,6]]
+/// Output: [7,14,11,14,5]
+/// Explanation:
+/// Index	nums[li..ri]	Maximum XOR Score Subarray	Maximum Subarray 
+/// XOR Score
+/// 0	[0, 7, 3, 2]	[7]	7
+/// 1	[7, 3, 2, 8, 5]	[7, 3, 2, 8]	14
+/// 2	[3, 2, 8]	[3, 2, 8]	11
+/// 3	[3, 2, 8, 5, 1]	[2, 8, 5, 1]	14
+/// 4	[5, 1]	[5]	5
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 2000
+/// 2. 0 <= nums[i] <= 2^31 - 1
+/// 3. 1 <= q == queries.length <= 10^5
+/// 4. queries[i].length == 2 
+/// 5. queries[i] = [li, ri]
+/// 6. 0 <= li <= ri <= n - 1
+/// </summary>
+vector<int> LeetCodeDP::maximumSubarrayXor(vector<int>& nums, vector<vector<int>>& queries)
+{
+    int n = nums.size();
+    vector<vector<int>> dp(n, vector<int>(n));
+    for (int k = 0; k < n; k++)
+    {
+        for (int i = 0; i + k < n; i++)
+        {
+            if (k == 0)
+            {
+                dp[i][i] = nums[i];
+            }
+            else
+            {
+                dp[i][i+k] = dp[i][i + k - 1] ^ dp[i + 1][i + k];
+            }
+        }
+    }
+
+    for (int k = 1; k < n; k++)
+    {
+        for (int i = 0; i + k < n; i++)
+        {
+            dp[i][i + k] = max(dp[i][i+k], max(dp[i][i+ k - 1], dp[i + 1][i + k]));
+        }
+    }
+    vector<int> result;
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        result.push_back(dp[queries[i][0]][queries[i][1]]);
+    }
+    return result;
+}
 #pragma endregion
 

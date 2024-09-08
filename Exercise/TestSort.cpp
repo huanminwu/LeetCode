@@ -3954,8 +3954,28 @@ void TestLeetCode3231(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3275(void)
+{
+    Logger::WriteMessage("Test Leet Code 3275");
+    LeetCodeSort leetCode;
+    vector<vector<int>> queries = { {1, 2},{3, 4},{2, 3},{-3, 0} };
+    int k = 2;
+    vector<int> result = leetCode.resultsArray(queries, k);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    queries = { {5, 5},{4, 4},{3, 3} };
+    k = 1;
+    result = leetCode.resultsArray(queries, k);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3275();
     TestLeetCode3231();
     TestLeetCode3224();
     TestLeetCode3080();

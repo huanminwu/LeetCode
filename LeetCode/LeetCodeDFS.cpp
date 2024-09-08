@@ -9749,6 +9749,230 @@ vector<string> LeetCodeDFS::validStrings(int n)
     return validStrings(0, n);
 }
 
+/// <summary>
+/// Leet Code 3272. Find the Count of Good Integers
+/// </summary>
+long long LeetCodeDFS::countGoodIntegersFactorial(int n)
+{
+    if (n == 0 || n == 1) return 1;
+    long long result = 1;
+    for (int i = 1; i <= n; i++)
+    {
+        result = result * (long long)i;
+    }
+    return result;
+}
+/// <summary>
+/// Leet Code 3272. Find the Count of Good Integers
+/// </summary>
+long long LeetCodeDFS::countGoodIntegersCalculate(long long n)
+{
+    int t = 0;
+    vector<int> digits(10);
+    while (n != 0)
+    {
+        digits[n % 10]++;
+        t++;
+        n /= 10;
+    }
+    long long result = countGoodIntegersFactorial(t);
+    for (int i = 0; i < 10; i++)
+    {
+        result  /= countGoodIntegersFactorial(digits[i]);
+    }
+    long long leading_zeros = 0;
+    if (digits[0] > 0)
+    {
+        leading_zeros = countGoodIntegersFactorial(t - 1) / countGoodIntegersFactorial(digits[0] - 1);
+        for (int i = 1; i < 10; i++)
+        {
+            leading_zeros /= countGoodIntegersFactorial(digits[i]);
+        }
+    }
+    return result - leading_zeros;
+}
+
+
+/// <summary>
+/// Leet Code 3272. Find the Count of Good Integers
+/// </summary>
+void LeetCodeDFS::countGoodIntegers(string digits, int n, int k, unordered_set<long long>& divisible)
+{
+    if (digits.size() == (n + 1) / 2)
+    {
+        string half = digits;
+        if (n % 2 == 1) half.pop_back();
+        reverse(half.begin(), half.end());
+        string str = digits + half;
+        long long long_val = atoll(str.c_str());
+        if (long_val % (long long)k == 0)
+        {
+            sort(str.begin(), str.end());
+            reverse(str.begin(), str.end());
+            long long val = atoll(str.c_str());
+            divisible.insert(val);
+        }
+    }
+    else
+    {
+        int start = 0;
+        if (digits.empty()) start = 1;
+        for (int i = start; i < 10; i++)
+        {
+            digits.push_back('0' + i);
+            countGoodIntegers(digits, n, k, divisible);
+            digits.pop_back();
+        }
+    }
+}
+
+
+/// <summary>
+/// Leet Code 3272. Find the Count of Good Integers
+/// 
+/// Hard
+/// 
+/// You are given two positive integers n and k.
+///
+/// An integer x is called k-palindromic if:
+/// x is a palindrome. x is divisible by k.
+/// An integer is called good if its digits can be rearranged to form a 
+/// k-palindromic integer. For example, for k = 2, 2020 can be rearranged 
+/// to form the k-palindromic integer 2002, whereas 1010 cannot be 
+/// rearranged to form a k-palindromic integer.
+///
+/// Return the count of good integers containing n digits.
+///
+/// Note that any integer must not have leading zeros, neither before nor 
+/// after rearrangement. For example, 1010 cannot be rearranged to form 
+/// 101.
+/// 
+/// Example 1:
+///
+/// Input: n = 3, k = 5
+/// Output: 27
+/// Explanation:
+/// Some of the good integers are:
+/// 551 because it can be rearranged to form 515.
+/// 525 because it is already k-palindromic.
+///
+/// Example 2:
+/// Input: n = 1, k = 4
+/// Output: 2
+/// Explanation:
+/// The two good integers are 4 and 8.
+///
+/// Example 3:
+/// Input: n = 5, k = 6
+/// Output: 2468
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 10
+/// 2. 1 <= k <= 9
+/// </summary>
+long long LeetCodeDFS::countGoodIntegers(int n, int k)
+{
+    unordered_set<long long> divisible;
+    string digits;
+    countGoodIntegers(digits, n, k, divisible);
+    long long result = 0;
+    for (auto x : divisible)
+    {
+        result += countGoodIntegersCalculate(x);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3276. Select Cells in Grid With Maximum Score
+/// </summary>
+int LeetCodeDFS::maxScoreDFS(vector<pair<int, int>>& nodes, vector<int>& path, int n, int bit_mask, vector<int>& cache)
+{
+    if (path.size() == n) return cache[bit_mask];
+    int start = 0;
+    if (!path.empty()) start = path.back() + 1;
+    int result = 0;
+    for (size_t i = start; i < nodes.size(); i++)
+    {
+        if (path.empty() && i > 0 && nodes[i].first < nodes[i - 1].first)
+        {
+            break;
+        }
+        if (!path.empty() && nodes[path.back()].first == nodes[i].first)
+        {
+            continue;
+        }
+        int bit = 1 << nodes[i].second;
+        if ((bit_mask & bit) != 0) continue;
+        int val = cache[bit_mask];
+        bit_mask ^= bit;
+        val += nodes[i].first;
+        if (val > cache[bit_mask])
+        {
+            cache[bit_mask] = val;
+            path.push_back(i);
+            result = max(result, maxScoreDFS(nodes, path, n, bit_mask, cache));
+            result = max(result, cache[bit_mask]);
+            path.pop_back();
+        }
+        bit_mask ^= bit;
+    }
+
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3276. Select Cells in Grid With Maximum Score
+/// 
+/// Hard
+///
+/// You are given a 2D matrix grid consisting of positive integers.
+///
+/// You have to select one or more cells from the matrix such that the 
+/// following conditions are satisfied:
+///
+/// No two selected cells are in the same row of the matrix.
+/// The values in the set of selected cells are unique.
+/// Your score will be the sum of the values of the selected cells.
+///
+/// Return the maximum score you can achieve.
+/// 
+/// Example 1:
+///
+/// Input: grid = [[1,2,3],[4,3,2],[1,1,1]]
+/// Output: 8
+/// Explanation:
+/// We can select the cells with values 1, 3, and 4 that are colored above.
+///
+/// Example 2:
+/// Input: grid = [[8,7,6],[8,3,2]]
+/// Output: 15
+/// Explanation:
+/// 
+/// We can select the cells with values 7 and 8 that are colored above.
+/// 
+/// Constraints:
+///
+/// 1. 1 <= grid.length, grid[i].length <= 10
+/// 2. 1 <= grid[i][j] <= 100
+/// </summary>
+int LeetCodeDFS::maxScore(vector<vector<int>>& grid)
+{
+    vector<pair<int, int>> node;
+    for (size_t i = 0; i < grid.size(); i++)
+    {
+        for (size_t j = 0; j < grid[0].size(); j++)
+        {
+            node.push_back(make_pair(grid[i][j], i));
+        }
+    }
+    sort(node.begin(), node.end());
+    reverse(node.begin(), node.end());
+    int n = grid.size();
+    vector<int> path;
+    vector<int> cache(1 << n);
+    return maxScoreDFS(node, path, n, 0, cache);
+}
 #pragma endregion
 
 

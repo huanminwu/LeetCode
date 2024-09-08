@@ -5378,8 +5378,55 @@ void TestLeetCode3259(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3269(void)
+{
+    Logger::WriteMessage("Test Leet Code 3269");
+    LeetCodeDP leetCode;
+    vector<int>  nums1 = {};
+    vector<int>  nums2 = { 1, 0, 1, 1 };
+    int result = leetCode.minLargest(nums1,nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 0,1,0,1 };
+    nums2 = { 1,0,0,1 };
+    result = leetCode.minLargest(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 0,1,0,0,1 };
+    nums2 = { 0,0,0,1 };
+    result = leetCode.minLargest(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3277(void)
+{
+    Logger::WriteMessage("Test Leet Code 3277");
+    LeetCodeDP leetCode;
+    vector<int>  nums = { 2, 8, 4, 32, 16, 1 };
+    vector<vector<int>> queries = { {0, 2},{1, 4},{0, 5} };
+    vector<int> result = leetCode.maximumSubarrayXor(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 0,7,3,2,8,5,1 };
+    queries = { {0,3} ,{1,5},{2,4},{2,6},{5,6} };
+    result = leetCode.maximumSubarrayXor(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3277();
+    TestLeetCode3269();
     TestLeetCode3259();
     TestLeetCode3250();
     TestLeetCode3247();

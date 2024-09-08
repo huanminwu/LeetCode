@@ -5219,6 +5219,107 @@ public:
     /// </summary>
     vector<string> validStrings(int n);
 
+    /// <summary>
+    /// Leet Code 3272. Find the Count of Good Integers
+    /// </summary>
+    long long countGoodIntegersFactorial(int n);
+
+    /// <summary>
+    /// Leet Code 3272. Find the Count of Good Integers
+    /// </summary>
+    long long countGoodIntegersCalculate(long long n);
+
+    /// <summary>
+    /// Leet Code 3272. Find the Count of Good Integers
+    /// </summary>
+    void countGoodIntegers(string digits, int n, int k, unordered_set<long long>& divisible);
+
+    /// <summary>
+    /// Leet Code 3272. Find the Count of Good Integers
+    /// 
+    /// Hard
+    /// 
+    /// You are given two positive integers n and k.
+    ///
+    /// An integer x is called k-palindromic if:
+    /// x is a palindrome. x is divisible by k.
+    /// An integer is called good if its digits can be rearranged to form a 
+    /// k-palindromic integer. For example, for k = 2, 2020 can be rearranged 
+    /// to form the k-palindromic integer 2002, whereas 1010 cannot be 
+    /// rearranged to form a k-palindromic integer.
+    ///
+    /// Return the count of good integers containing n digits.
+    ///
+    /// Note that any integer must not have leading zeros, neither before nor 
+    /// after rearrangement. For example, 1010 cannot be rearranged to form 
+    /// 101.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: n = 3, k = 5
+    /// Output: 27
+    /// Explanation:
+    /// Some of the good integers are:
+    /// 551 because it can be rearranged to form 515.
+    /// 525 because it is already k-palindromic.
+    ///
+    /// Example 2:
+    /// Input: n = 1, k = 4
+    /// Output: 2
+    /// Explanation:
+    /// The two good integers are 4 and 8.
+    ///
+    /// Example 3:
+    /// Input: n = 5, k = 6
+    /// Output: 2468
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 10
+    /// 2. 1 <= k <= 9
+    /// </summary>
+    long long countGoodIntegers(int n, int k);
+
+    /// <summary>
+    /// Leet Code 3276. Select Cells in Grid With Maximum Score
+    /// </summary>
+    int maxScoreDFS(vector<pair<int, int>> &nodes, vector<int> & path, int n, int bit_mask, vector<int>& cache);
+
+    /// <summary>
+    /// Leet Code 3276. Select Cells in Grid With Maximum Score
+    /// 
+    /// Hard
+    ///
+    /// You are given a 2D matrix grid consisting of positive integers.
+    ///
+    /// You have to select one or more cells from the matrix such that the 
+    /// following conditions are satisfied:
+    ///
+    /// No two selected cells are in the same row of the matrix.
+    /// The values in the set of selected cells are unique.
+    /// Your score will be the sum of the values of the selected cells.
+    ///
+    /// Return the maximum score you can achieve.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: grid = [[1,2,3],[4,3,2],[1,1,1]]
+    /// Output: 8
+    /// Explanation:
+    /// We can select the cells with values 1, 3, and 4 that are colored above.
+    ///
+    /// Example 2:
+    /// Input: grid = [[8,7,6],[8,3,2]]
+    /// Output: 15
+    /// Explanation:
+    /// 
+    /// We can select the cells with values 7 and 8 that are colored above.
+    /// 
+    /// Constraints:
+    ///
+    /// 1. 1 <= grid.length, grid[i].length <= 10
+    /// 2. 1 <= grid[i][j] <= 100
+    /// </summary>
+    int maxScore(vector<vector<int>>& grid);
 #pragma endregion
 };
 

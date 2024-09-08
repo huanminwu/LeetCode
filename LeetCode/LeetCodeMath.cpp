@@ -23438,5 +23438,425 @@ int LeetCodeMath::nonSpecialCount(int l, int r)
     return (r -l + 1) - result;
 }
 
+
+/// <summary>
+/// Leet Code 3264. Final Array State After K Multiplication Operations I
+/// 
+/// Easy
+///
+/// You are given an integer array nums, an integer k, and an integer 
+/// multiplier.
+///
+/// You need to perform k operations on nums. In each operation:
+/// Find the minimum value x in nums. If there are multiple occurrences 
+/// of the minimum value, select the one that appears first.
+/// Replace the selected minimum value x with x * multiplier.
+/// Return an integer array denoting the final state of nums after 
+/// performing all k operations.
+/// 
+/// Example 1:
+/// Input: nums = [2,1,3,5,6], k = 5, multiplier = 2
+/// Output: [8,4,6,5,6]
+/// Explanation:
+/// Operation	Result
+/// After operation 1	[2, 2, 3, 5, 6]
+/// After operation 2	[4, 2, 3, 5, 6]
+/// After operation 3	[4, 4, 3, 5, 6]
+/// After operation 4	[4, 4, 6, 5, 6]
+/// After operation 5	[8, 4, 6, 5, 6]
+///
+/// Example 2:
+/// Input: nums = [1,2], k = 3, multiplier = 4
+/// Output: [16,8]
+/// Explanation:
+/// Operation	Result
+/// After operation 1	[4, 2]
+/// After operation 2	[4, 8]
+/// After operation 3	[16, 8]
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 100
+/// 3. 1 <= k <= 10
+/// 4. 1 <= multiplier <= 5
+/// </summary>
+vector<int> LeetCodeMath::getFinalStateI(vector<int>& nums, int k, int multiplier)
+{
+    set<pair<int, int>> heap;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        heap.insert(make_pair(nums[i], i));
+    }
+    for (int i = 0; i < k; i++)
+    {
+        pair<int, int> item = *heap.begin();
+        heap.erase(heap.begin());
+        item.first *= multiplier;
+        heap.insert(item);
+    }
+    vector<int> result(nums.size());
+    while (!heap.empty())
+    {
+        pair<int, int> item = *heap.begin();
+        heap.erase(heap.begin());
+        result[item.second] = item.first;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3266. Final Array State After K Multiplication Operations II
+/// 
+/// Hard
+///
+/// You are given an integer array nums, an integer k, and an integer 
+/// multiplier.
+///
+/// You need to perform k operations on nums. In each operation:
+///
+/// Find the minimum value x in nums. If there are multiple occurrences 
+/// of the minimum value, select the one that appears first.
+/// Replace the selected minimum value x with x * multiplier.
+/// After the k operations, apply modulo 109 + 7 to every value in nums.
+///
+/// Return an integer array denoting the final state of nums after 
+/// performing all k operations and then applying the modulo.
+/// 
+/// Example 1:
+/// Input: nums = [2,1,3,5,6], k = 5, multiplier = 2
+/// Output: [8,4,6,5,6]
+/// Explanation:
+/// Operation	Result
+/// After operation 1	[2, 2, 3, 5, 6]
+/// After operation 2	[4, 2, 3, 5, 6]
+/// After operation 3	[4, 4, 3, 5, 6]
+/// After operation 4	[4, 4, 6, 5, 6]
+/// After operation 5	[8, 4, 6, 5, 6]
+/// After applying modulo	[8, 4, 6, 5, 6]
+///
+/// Example 2:
+/// Input: nums = [100000,2000], k = 2, multiplier = 1000000
+/// Output: [999999307,999999993]
+/// Explanation:
+/// Operation	Result
+/// After operation 1	[100000, 2000000000]
+/// After operation 2	[100000000000, 2000000000]
+/// After applying modulo	[999999307, 999999993]
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^4
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= k <= 10^9
+/// 4. 1 <= multiplier <= 10^6
+/// </summary>
+vector<int> LeetCodeMath::getFinalStateII(vector<int>& nums, int k, int multiplier)
+{
+    long long M = 1000000007;
+    vector<int> result(nums.size());
+    if (multiplier == 1)
+    {
+        for (size_t i = 0; i < nums.size(); i++)
+        {
+            result[i] = nums[i];
+        }
+        return result;
+    }
+    set<pair<long long, int>> heap;
+    long long max_val = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        heap.insert(make_pair(nums[i], i));
+        max_val = max(max_val, (long long)nums[i]);
+    }
+    while (k > 0)
+    {
+        pair<long long, int> item = *heap.begin();
+        if (item.first >= max_val) break;
+        heap.erase(heap.begin());
+        item.first *= multiplier;
+        k--;
+        heap.insert(item);
+    }
+    int p = k / nums.size();
+    int q = k % nums.size();
+    while (!heap.empty())
+    {
+        pair<long long, int> item = *heap.begin();
+        heap.erase(heap.begin());
+        item.first = (item.first % M * modPow(multiplier, p, M)) % M;
+        if (q > 0)
+        {
+            item.first = item.first * multiplier % M;
+            q--;
+        }
+        result[item.second] = (int)(item.first % M);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3265. Count Almost Equal Pairs I
+/// 
+/// Medium
+///
+/// You are given an array nums consisting of positive integers.
+///
+/// We call two integers x and y in this problem almost equal if both 
+/// integers can become equal after performing the following operation 
+/// at most once:
+/// 
+/// Choose either x or y and swap any two digits within the chosen number.
+/// Return the number of indices i and j in nums where i < j such that 
+/// nums[i] and nums[j] are almost equal.
+///
+/// Note that it is allowed for an integer to have leading zeros after 
+/// performing an operation.
+/// 
+/// 
+/// Example 1:
+/// Input: nums = [3,12,30,17,21]
+/// Output: 2
+/// Explanation:
+/// The almost equal pairs of elements are:
+/// 3 and 30. By swapping 3 and 0 in 30, you get 3.
+/// 12 and 21. By swapping 1 and 2 in 12, you get 21.
+///
+/// Example 2:
+/// Input: nums = [1,1,1,1,1]
+/// Output: 10
+/// Explanation:
+/// Every two elements in the array are almost equal.
+/// Example 3:
+/// Input: nums = [123,231]
+/// Output: 0
+///
+/// Explanation:
+/// We cannot swap any two digits of 123 or 231 to reach the other.
+///  
+/// Constraints:
+/// 1. 2 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 10^6
+/// </summary>
+int LeetCodeMath::countPairsI(vector<int>& nums)
+{
+    int result = 0;
+    map<int, int> num_count;
+    sort(nums.begin(), nums.end());
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (num_count.count(nums[i]) > 0) result += num_count[nums[i]];
+        string str = to_string(nums[i]);
+        for (size_t j = 0; j < str.size(); j++)
+        {
+            for (size_t k = j + 1; k < str.size(); k++)
+            {
+                if (str[j] == str[k]) continue;
+                string temp = str;
+                swap(temp[j], temp[k]);
+                int val = atoi(temp.c_str());
+                if (num_count.count(val) > 0) result += num_count[val];
+            }
+        }
+        num_count[nums[i]]++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3267. Count Almost Equal Pairs II
+/// 
+/// Hard
+///
+/// Attention: In this version, the number of operations that can be 
+/// performed, has been increased to twice.
+///
+/// You are given an array nums consisting of positive integers.
+/// We call two integers x and y almost equal if both integers can become 
+/// equal after performing the following operation at most twice:
+///
+/// Choose either x or y and swap any two digits within the chosen number.
+/// Return the number of indices i and j in nums where i < j such that 
+/// nums[i] and nums[j] are almost equal.
+///
+/// Note that it is allowed for an integer to have leading zeros after 
+/// performing an operation.
+/// 
+/// Example 1:
+/// Input: nums = [1023,2310,2130,213]
+/// Output: 4
+/// Explanation:
+/// The almost equal pairs of elements are:
+/// 1023 and 2310. By swapping the digits 1 and 2, and then the digits 0 
+/// and 3 in 1023, you get 2310.
+/// 1023 and 213. By swapping the digits 1 and 0, and then the digits 1 
+/// and 2 in 1023, you get 0213, which is 213.
+/// 2310 and 213. By swapping the digits 2 and 0, and then the digits 3 
+/// and 2 in 2310, you get 0213, which is 213.
+/// 2310 and 2130. By swapping the digits 3 and 1 in 2310, you get 2130.
+///
+/// Example 2:
+/// Input: nums = [1,10,100]
+/// Output: 3
+/// Explanation:
+/// The almost equal pairs of elements are:
+/// 1 and 10. By swapping the digits 1 and 0 in 10, you get 01 which is 1.
+/// 1 and 100. By swapping the second 0 with the digit 1 in 100, you get 
+/// 001, which is 1.
+/// 10 and 100. By swapping the first 0 with the digit 1 in 100, you 
+/// get 010, which is 10.
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length <= 5000
+/// 2. 1 <= nums[i] < 10^7
+/// </summary>
+int LeetCodeMath::countPairsII(vector<int>& nums)
+{
+    int result = 0;
+    map<int, int> num_count;
+    sort(nums.begin(), nums.end());
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        set<int> my_set;
+        if (num_count.count(nums[i]) > 0) result += num_count[nums[i]];
+        my_set.insert(nums[i]);
+        string str = to_string(nums[i]);
+        for (size_t p1 = 0; p1 < str.size(); p1++)
+        {
+            for (size_t p2 = p1 + 1; p2 < str.size(); p2++)
+            {
+                if (str[p1] == str[p2]) continue;
+                string temp1 = str;
+                swap(temp1[p1], temp1[p2]);
+                int val = atoi(temp1.c_str());
+                if (num_count.count(val) > 0 && my_set.count(val) == 0)
+                {
+                    result += num_count[val];
+                    my_set.insert(val);
+                }
+                for (size_t p3 = p1 + 1; p3 < str.size(); p3++)
+                {
+                    for (size_t p4 = p3 + 1; p4 < str.size(); p4++)
+                    {
+                        if (str[p3] == str[p4]) continue;
+                        {
+                            string temp2 = temp1;
+                            swap(temp2[p3], temp2[p4]);
+                            int val = atoi(temp2.c_str());
+                            if (num_count.count(val) > 0 && my_set.count(val) == 0)
+                            {
+                                result += num_count[val];
+                                my_set.insert(val);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        num_count[nums[i]]++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3270. Find the Key of the Numbers
+/// 
+/// Easy
+///
+/// You are given three positive integers num1, num2, and num3.
+///
+/// The key of num1, num2, and num3 is defined as a four-digit number 
+/// such that:
+///
+/// Initially, if any number has less than four digits, it is padded 
+/// with leading zeros.
+/// The ith digit (1 <= i <= 4) of the key is generated by taking the 
+/// smallest digit among the ith digits of num1, num2, and num3.
+/// Return the key of the three numbers without leading zeros (if any).
+///
+/// Example 1:
+/// Input: num1 = 1, num2 = 10, num3 = 1000
+/// Output: 0
+///
+/// Explanation:
+/// On padding, num1 becomes "0001", num2 becomes "0010", and num3 
+/// remains "1000".
+///
+/// The 1st digit of the key is min(0, 0, 1).
+/// The 2nd digit of the key is min(0, 0, 0).
+/// The 3rd digit of the key is min(0, 1, 0).
+/// The 4th digit of the key is min(1, 0, 0).
+/// Hence, the key is "0000", i.e. 0.
+///
+/// Example 2:
+/// Input: num1 = 987, num2 = 879, num3 = 798
+/// Output: 777
+///
+/// Example 3:
+/// Input: num1 = 1, num2 = 2, num3 = 3
+/// Output: 1
+/// 
+/// Constraints:
+/// 1. 1 <= num1, num2, num3 <= 9999
+/// </summary>
+int LeetCodeMath::generateKey(int num1, int num2, int num3)
+{
+    int result = 0;
+    int multiple = 1;
+    for (int i = 0; i < 4; i++)
+    {
+        result += min(min(num1 % 10, num2 % 10), num3 % 10) * multiple;
+        multiple *= 10;
+        num1 /= 10;
+        num2 /= 10;
+        num3 /= 10;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3274. Check if Two Chessboard Squares Have the Same Color
+/// 
+/// Easy
+///
+/// You are given two strings, coordinate1 and coordinate2, representing 
+/// the coordinates of a square on an 8 x 8 chessboard.
+///
+/// Below is the chessboard for reference.
+/// Return true if these two squares have the same color and false 
+/// otherwise.
+///
+/// The coordinate will always represent a valid chessboard square. The 
+/// coordinate will always have the letter first (indicating its column), 
+/// and the number second (indicating its row).
+///
+/// Example 1:
+/// Input: coordinate1 = "a1", coordinate2 = "c3"
+/// Output: true
+/// Explanation:
+/// Both squares are black.
+///
+/// Example 2:
+/// Input: coordinate1 = "a1", coordinate2 = "h3"
+/// Output: false
+/// Explanation:
+/// Square "a1" is black and "h3" is white.
+///
+/// Constraints:
+/// 1. coordinate1.length == coordinate2.length == 2
+/// 2. 'a' <= coordinate1[0], coordinate2[0] <= 'h'
+/// 3. '1' <= coordinate1[1], coordinate2[1] <= '8'
+/// </summary>
+bool LeetCodeMath::checkTwoChessboards(string coordinate1, string coordinate2)
+{
+    if ((coordinate1[0] - 'a' + coordinate1[1] - '1') % 2 ==
+        (coordinate2[0] - 'a' + coordinate2[1] - '1') % 2)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 #pragma endregion
 

@@ -7146,8 +7146,24 @@ void TestLeetCode3253(void)
     Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
 }
 
+void TestLeetCode3271(void)
+{
+    Logger::WriteMessage("Test Leet Code 3271");
+    LeetCodeString leetCode;
+    string s = "abcd";
+    int k = 2;
+    string result = leetCode.stringHash(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
+
+    s = "mxz";
+    k = 3;
+    result = leetCode.stringHash(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3271();
     TestLeetCode3213();
     TestLeetCode3248();
     TestLeetCode3234();
