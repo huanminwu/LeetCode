@@ -115,8 +115,8 @@ public:
     ///
     /// Note:
     /// In the case of multiple answers as shown in the second example below, you may return any one of them.
-    /// Assume length of target string = m, and dictionary size = n. You may assume that m ¡Ü 21, n ¡Ü 1000, 
-    /// and log2(n) + m ¡Ü 20.
+    /// Assume length of target string = m, and dictionary size = n. You may assume that m ï¿½ï¿½ 21, n ï¿½ï¿½ 1000, 
+    /// and log2(n) + m <= 20.
     /// 
     /// Examples:
     ///
@@ -231,7 +231,7 @@ public:
     /// Explanation: RBYYBBRRB -> RBYY[Y]BBRRB -> RBBBRRB -> RRRB -> B -> B[B] -> BB[B] -> empty 
     ///
     /// Note:
-    /// 1.You may assume that the initial row of balls on the table won¡¯t have any 3 or more 
+    /// 1.You may assume that the initial row of balls on the table won't have any 3 or more 
     ///   consecutive balls with the same color.
     /// 2.The number of balls on the table won't exceed 20, and the string represents these 
     ///   balls is called "board" in the input.
@@ -259,7 +259,7 @@ public:
     /// number of transactions required to settle the debt.
     ///
     /// Note: 
-    /// 1.A transaction will be given as a tuple (x, y, z). Note that x ¡Ù y and z > 0.
+    /// 1.A transaction will be given as a tuple (x, y, z). Note that x != y and z > 0.
     /// 2.Person's IDs may not be linear, e.g. we could have the persons 0, 1, 2 or we 
     ///   could also have the persons 0, 2, 6.
     /// Example 1: 
@@ -333,7 +333,7 @@ public:
     /// Leet code #351. Android Unlock Patterns
     ///
     /// Given an Android 3x3 key lock screen and two integers m and n, where 
-    /// 1 ¡Ü m ¡Ü n ¡Ü 9, count the total number of unlock patterns of the Android 
+    /// 1 <= m <= n <= 9, count the total number of unlock patterns of the Android 
     /// lock screen, which consist of minimum of m keys and maximum n keys.
     /// 
     /// Rules for a valid pattern:
@@ -907,10 +907,12 @@ public:
     /// <summary>
     /// Leet code # 51. N-Queens 
     /// 
-    /// The n-queens puzzle is the problem of placing n queens on an n¡Án chessboard such that no two queens attack each other. 
+    /// The n-queens puzzle is the problem of placing n queens on an nxn 
+    /// chessboard such that no two queens attack each other. 
     /// Given an integer n, return all distinct solutions to the n-queens puzzle.
     ///	
-    /// Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' 
+    /// Each solution contains a distinct board configuration of the n-queens' 
+    /// placement, where 'Q' and '.' 
     /// both indicate a queen and an empty space respectively. 
     /// For example,
     /// There exist two distinct solutions to the 4-queens puzzle:
@@ -1414,7 +1416,7 @@ public:
     /// Suppose you have N integers from 1 to N. We define a beautiful 
     /// arrangement as an array that is constructed by these N numbers 
     /// successfully if one of the following is true for the ith position 
-    /// (1 ¡Ü i ¡Ü N) in this array: 
+    /// (1 <= i <= N) in this array: 
     /// 1.The number at the ith position is divisible by i.
     /// 2.i is divisible by the number at the ith position.
     ///
@@ -1685,7 +1687,7 @@ public:
     /// Given a set of words (without duplicates), find all word squares you 
     /// can build from them.
     /// A sequence of words forms a valid word square if the kth row and column
-    /// read the exact same string, where 0 ¡Ü k < max(numRows, numColumns).
+    /// read the exact same string, where 0 <= k < max(numRows, numColumns).
     ///
     /// For example, the word sequence ["ball","area","lead","lady"] forms 
     /// a word square because each word reads the same both horizontally and 
@@ -4469,7 +4471,7 @@ public:
     int beautifulSubsets(vector<int>& nums, int k);
 
     /// <summary>
-    /// Leet Code 2664. The Knight¡¯s Tour
+    /// Leet Code 2664. The Knight's Tour
     /// </summary>
     bool tourOfKnight(int m, int n, int r, int c,
         vector<vector<int>>& board,
@@ -4477,7 +4479,7 @@ public:
         vector<vector<int>>& directions);
 
     /// <summary>
-    /// Leet Code 2664. The Knight¡¯s Tour
+    /// Leet Code 2664. The Knight's Tour
     /// 
     /// Medium
     ///	

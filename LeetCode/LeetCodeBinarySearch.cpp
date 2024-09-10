@@ -2168,7 +2168,7 @@ int LeetCodeBinarySearch::minSpeedOnTime(vector<int>& dist, double hour)
         for (size_t i = 0; i < dist.size(); i++)
         {
             if (i == dist.size() - 1) time += (double)dist[i] / speed;
-            else time += (dist[i] + speed - 1) / speed;
+            else time += ((double)dist[i] + speed - 1) / speed;
             if (time > hour) break;
         }
         if (time <= hour)
@@ -4423,7 +4423,7 @@ int LeetCodeBinarySearch::earliestSecondToMarkIndicesII(vector<int>& nums, vecto
         vector<int> time = nums;
         vector<int> changes;
         long long process_time = 0;
-        for (size_t i = 0; i < nums.size(); i++) process_time += nums[i] + 1;
+        for (size_t i = 0; i < nums.size(); i++) process_time += (long long)nums[i] + 1;
         // calculate the first time stamp when a element is set to zero.
         for (int i = 0; i < middle; i++)
         {
@@ -4564,4 +4564,81 @@ int LeetCodeBinarySearch::medianOfUniquenessArray(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3281. Maximize Score of Numbers in Ranges
+/// 
+/// Medium
+///
+/// You are given an array of integers start and an integer d, 
+/// representing n intervals [start[i], start[i] + d].
+///
+/// You are asked to choose n integers where the ith integer must belong 
+/// to the ith interval. The score of the chosen integers is defined as 
+/// the minimum absolute difference between any two integers that have 
+/// been chosen.
+///
+/// Return the maximum possible score of the chosen integers.
+/// 
+/// Example 1:
+/// Input: start = [6,0,3], d = 2
+/// Output: 4
+/// Explanation:
+/// The maximum possible score can be obtained by choosing integers: 8, 0, 
+/// and 4. The score of these chosen integers is min(|8 - 0|, |8 - 4|, 
+/// |0 - 4|) which equals 4.
+///
+/// Example 2:
+/// Input: start = [2,6,13,13], d = 5
+/// Output: 5
+/// Explanation:
+/// The maximum possible score can be obtained by choosing integers: 2, 7, 
+/// 13, and 18. The score of these chosen integers is min(|2 - 7|, 
+/// |2 - 13|, |2 - 18|, |7 - 13|, |7 - 18|, |13 - 18|) which equals 5.
+///
+/// Constraints:
+/// 1. 2 <= start.length <= 10^5
+/// 2. 0 <= start[i] <= 10^9
+/// 3. 0 <= d <= 10^9
+/// </summary>
+int LeetCodeBinarySearch::maxPossibleScore(vector<int>& start, int d)
+{
+    sort(start.begin(), start.end());
+    long long first = 0;
+    long long last = (long long)start.back() + (long long)d - (long long)start[0];
+    int result = 0;
+    while (first <= last)
+    {
+        long long mid = (first + last) / 2;
+        long long prev = 0;
+        for (size_t i = 0; i < start.size(); i++)
+        {
+            if (i == 0) prev = start[0];
+            else
+            {
+                prev += mid;
+                if (prev < (long long)start[i])
+                {
+                    prev = start[i];
+                }
+                else if (prev > (long long)start[i] + (long long)d)
+                {
+                    prev = -1;
+                    break;
+                }
+            }
+        }
+        if (prev == -1)
+        {
+            last = mid - 1;
+        }
+        else
+        {
+            result = (int)mid;
+            first = mid + 1;
+        }
+    }
+    return result;
+}
+
 #pragma endregion  

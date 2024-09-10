@@ -10654,8 +10654,30 @@ void TestLeetCode3257(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3279(void)
+{
+    Logger::WriteMessage("Test Leet Code 3279");
+    LeetCodeArray leetCode;
+    int height = 5;
+    vector<int> positions = { 2, 5 };
+    string directions = "UD";
+    long long result = leetCode.maxArea(height, positions, directions);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage(directions);
+    Logger::WriteMessage("height = " + to_string(height) + "; result = " + to_string(result));
+
+    height = 6;
+    positions = { 0,0,6,3 };
+    directions = "UUDU";
+    result = leetCode.maxArea(height, positions, directions);
+    Logger::WriteMessage(positions);
+    Logger::WriteMessage(directions);
+    Logger::WriteMessage("height = " + to_string(height) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3279();
     TestLeetCode3257();
     TestLeetCode3256();
     TestLeetCode3255();

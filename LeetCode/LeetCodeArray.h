@@ -23,9 +23,9 @@ using namespace std;
 /// <summary>
 /// The street class
 /// </summary>
-class Street 
+class Street
 {
-private: 
+private:
     vector<int> m_doors;
     int m_index = 0;
 public:
@@ -220,7 +220,7 @@ public:
     int threeSumSmaller(vector<int>& nums, int target);
 
     /// <summary>
-    /// Leet code #487. Max Consecutive Ones II       
+    /// Leet code #487. Max Consecutive Ones II
     /// 
     /// Given a binary array, find the maximum number of consecutive 1s in this 
     /// array if you can flip at most one 0.  
@@ -1145,7 +1145,7 @@ public:
     /// 
     /// Given a sequence of words, check whether it forms a valid word square. 
     /// A sequence of words forms a valid word square if the kth row and column 
-    /// read the exact same string, where 0 ¡Ü k < max(numRows, numColumns).
+    /// read the exact same string, where 0 â‰¤ k < max(numRows, numColumns).
     /// Note:
     /// 1.The number of words given is at least 1 and does not exceed 500.
     /// 2.Word length will be at least 1 and does not exceed 500.
@@ -1247,7 +1247,7 @@ public:
     int findMaxLength(vector<int>& nums);
 
     /// <summary>
-    /// Leet code #548. Split Array with Equal Sum       
+    /// Leet code #548. Split Array with Equal Sum
     /// 
     /// Given an array with n integers, you need to find if there are 
     /// triplets (i, j, k) which satisfies following conditions:
@@ -1358,7 +1358,7 @@ public:
     /// Leet code #1151. Minimum Swaps to Group All 1's Together
     /// 
     /// Given a binary array data, return the minimum number of swaps required 
-    /// to group all 1¡¯s present in the array together in any place in the array.
+    /// to group all 1ï¿½ï¿½s present in the array together in any place in the array.
     /// 
     /// Example 1:
     /// Input: [1,0,1,0,1]
@@ -3041,7 +3041,7 @@ public:
     /// <summary>
     /// Leet code #448. Find All Numbers Disappeared in an Array
     ///
-    /// Given an array of integers where 1 ¡Ü a[i] ¡Ü n (n = size of array), 
+    /// Given an array of integers where 1 ï¿½ï¿½ a[i] ï¿½ï¿½ n (n = size of array), 
     /// some elements appear twice and others appear once.
     /// Find all the elements of [1, n] inclusive that do not appear in this 
     /// array.
@@ -3267,17 +3267,17 @@ public:
     /// 1, 1, 2, 5, 7
     /// A zero-indexed array A consisting of N numbers is given. A 
     /// subsequence slice of that array is any sequence of integers 
-    /// (P0, P1, ..., Pk) such that 0 ¡Ü P0 < P1 < ... < Pk < N.
+    /// (P0, P1, ..., Pk) such that 0 ï¿½ï¿½ P0 < P1 < ... < Pk < N.
     ///
     /// A subsequence slice (P0, P1, ..., Pk) of array A is called 
     /// arithmetic if the sequence A[P0], A[P1], ..., A[Pk-1], A[Pk] 
-    /// is arithmetic. In particular, this means that k ¡Ý 2.
+    /// is arithmetic. In particular, this means that k ï¿½ï¿½ 2.
     /// 
     /// The function should return the number of arithmetic subsequence 
     /// slices in the array A. 
     ///
     /// The input contains N integers. Every integer is in the range of -2^31 
-    /// and 2^31-1 and 0 ¡Ü N ¡Ü 1000. The output is guaranteed to be less than 2^31-1.
+    /// and 2^31-1 and 0 ï¿½ï¿½ N ï¿½ï¿½ 1000. The output is guaranteed to be less than 2^31-1.
     ///
     /// Example: 
     /// Input: [2, 4, 6, 8, 10]
@@ -3405,7 +3405,7 @@ public:
     /// <summary>
     /// Leet code #442. Find All Duplicates in an Array
     ///
-    /// Given an array of integers, 1 ¡Ü a[i] ¡Ü n (n = size of array), some 
+    /// Given an array of integers, 1 ï¿½ï¿½ a[i] ï¿½ï¿½ n (n = size of array), some 
     /// elements appear twice and others appear once.
     /// Find all the elements that appear twice in this array.
     /// Could you do it without extra space and in O(n) runtime?
@@ -3527,7 +3527,7 @@ public:
     /// 5. veganFriendlyi and veganFriendly are 0 or 1.
     /// 6. All id[i] are distinct.
     /// </summary>
-    vector<int> filterRestaurants(vector<vector<int>>& restaurants, 
+    vector<int> filterRestaurants(vector<vector<int>>& restaurants,
         int veganFriendly, int maxPrice, int maxDistance);
 
     /// <summary>
@@ -4551,7 +4551,7 @@ public:
     vector<vector<int>> imageSmoother(vector<vector<int>>& M);
 
     /// <summary>
-    /// Leet code #566. Reshape the Matrix       
+    /// Leet code #566. Reshape the Matrixï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
     /// 
     /// In MATLAB, there is a very useful function called 'reshape', which 
     /// can reshape a matrix into a new one with different size but keep its 
@@ -6127,7 +6127,7 @@ public:
     /// Easy
     ///
     /// Given an array nums. We define a running sum of an array as 
-    /// runningSum[i] = sum(nums[0]…nums[i]).
+    /// runningSum[i] = sum(nums[0]ï¿½nums[i]).
     ///
     /// Return the running sum of nums.
     /// 
@@ -21501,7 +21501,7 @@ public:
     /// 2. 3 <= n == board[i].length <= 100
     /// 3. -10^9 <= board[i][j] <= 10^9
     /// </summary>
-    long long maximumValueSumI(vector<vector<int>>& board); 
+    long long maximumValueSumI(vector<vector<int>>& board);
 
     /// <summary>
     /// Leet Code 3257. Maximum Value Sum by Placing Three Rooks II
@@ -21545,5 +21545,49 @@ public:
     /// 3. -10^9 <= board[i][j] <= 10^9
     /// </summary>
     long long maximumValueSumII(vector<vector<int>>& board);
+
+    /// <summary>
+    /// Leet Code 3279. Maximum Total Area Occupied by Pistons
+    /// 
+    /// Hard
+    ///
+    /// There are several pistons in an old car engine, and we want to 
+    /// calculate the maximum possible area under the pistons.
+    ///
+    /// You are given:
+    /// An integer height, representing the maximum height a piston can reach.
+    /// An integer array positions, where positions[i] is the current position 
+    /// of piston i, which is equal to the current area under it.
+    /// A string directions, where directions[i] is the current moving 
+    /// direction of piston i, 'U' for up, and 'D' for down.
+    /// Each second:
+    /// 
+    /// Every piston moves in its current direction 1 unit. e.g., if the 
+    /// direction is up, positions[i] is incremented by 1.
+    /// If a piston has reached one of the ends, i.e., positions[i] == 0 
+    /// or positions[i] == height, its direction will change.
+    /// Return the maximum possible area under all the pistons.
+    ///
+    /// Example 1:
+    /// Input: height = 5, positions = [2,5], directions = "UD"
+    /// Output: 7
+    /// Explanation:
+    /// The current position of the pistons has the maximum possible area 
+    /// under it.
+    ///
+    /// Example 2:
+    /// Input: height = 6, positions = [0,0,6,3], directions = "UUDU"
+    /// Output: 15
+    /// Explanation:
+    /// After 3 seconds, the pistons will be in positions [3, 3, 3, 6], 
+    /// which has the maximum possible area under it.
+    ///
+    /// Constraints:
+    /// 1. 1 <= height <= 10^6
+    /// 2. 1 <= positions.length == directions.length <= 10^5
+    /// 3. 0 <= positions[i] <= height
+    /// 4. directions[i] is either 'U' or 'D'.
+    /// </summary>
+    long long maxArea(int height, vector<int>& positions, string directions);
 };
 #endif  // LeetCodeArray_H

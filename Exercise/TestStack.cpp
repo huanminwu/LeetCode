@@ -989,7 +989,7 @@ void TestLeetCode3205(void)
 
 void TestLeetCode3221(void)
 {
-    Logger::WriteMessage("Test Leet Code 3211");
+    Logger::WriteMessage("Test Leet Code 3221");
     LeetCodeStack leetCode;
     vector<int> nums = { 1, 5, 8 };
     long long result = leetCode.maxScoreII(nums);
@@ -1002,8 +1002,24 @@ void TestLeetCode3221(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3282(void)
+{
+    Logger::WriteMessage("Test Leet Code 3282");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 1, 3, 1, 5 };
+    long long result = leetCode.findMaximumScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,3,1,3,2 };
+    result = leetCode.findMaximumScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode3282();
     TestLeetCode3221();
     TestLeetCode3205();
     TestLeetCode3113();

@@ -5386,7 +5386,7 @@ string LeetCodeString::toGoatLatin(string S)
 ///
 /// 1. Email address:
 ///
-/// We define a name to be a string of length ≥ 2 consisting of only 
+/// We define a name to be a string of length >= 2 consisting of only 
 /// lowercase letters a-z or uppercase letters A-Z.
 ///
 /// An email address starts with a name, followed by the symbol '@', 
@@ -7264,9 +7264,9 @@ void LeetCodeString::braceExpansionIIUnion(string &expression, size_t& pos, unor
 ///
 /// For every lowercase letter x, we have R(x) = {x}
 /// For expressions e_1, e_2, ... , e_k with k >= 2, we have 
-/// R({e_1,e_2,...}) = R(e_1) ∪ R(e_2) ∪ ...
+/// R({e_1,e_2,...}) = R(e_1) U R(e_2) U ...
 /// For expressions e_1 and e_2, we have R(e_1 + e_2) = {a + b for (a, b) 
-/// in R(e_1) × R(e_2)}, where + denotes concatenation, and × denotes the 
+/// in R(e_1) x R(e_2)}, where + denotes concatenation, and x denotes the 
 /// cartesian product.
 /// Given an expression representing a set of words under the given 
 /// grammar, return the sorted list of words that the expression 
@@ -10368,7 +10368,7 @@ string LeetCodeString::encode(string s)
 /// connected strings s. For example, ["abc", 3] ="abcabcabc". 
 /// On the other hand, we define that string s1 can be obtained from string s2 
 /// if we can remove some characters from s2 such that it becomes s1. For 
-/// example, "abc" can be obtained from “abdbec” based on our definition, but 
+/// example, "abc" can be obtained from "abdbec" based on our definition, but 
 /// it can not be obtained from "acbbe".
 /// You are given two non-empty strings s1 and s2 (each at most 100 characters 
 /// long) and two integers 0 <= n1 <= 106 and 1 <= n2 <= 106. Now consider the 
@@ -25942,4 +25942,79 @@ string LeetCodeString::stringHash(string s, int k)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3280. Convert Date to Binary
+/// 
+/// Easy
+///
+/// You are given a string date representing a Gregorian calendar date in 
+/// the yyyy-mm-dd format.
+///
+/// date can be written in its binary representation obtained by 
+/// converting year, month, and day to their binary representations 
+/// without any leading zeroes and writing them down in 
+/// year-month-day format.
+///
+/// Return the binary representation of date.
+/// 
+/// Example 1:
+/// Input: date = "2080-02-29"
+/// Output: "100000100000-10-11101"
+/// Explanation:
+/// 0100000100000, 10, and 11101 are the binary representations of 
+/// 2080, 02, and 29 respectively.
+///
+/// Example 2:
+/// Input: date = "1900-01-01"
+/// Output: "11101101100-1-1"
+/// Explanation:
+/// 11101101100, 1, and 1 are the binary representations of 1900, 1, 
+/// and 1 respectively.
+/// 
+/// Constraints:
+/// 1. date.length == 10
+/// 2. date[4] == date[7] == '-', and all other date[i]'s are digits.
+/// 3. The input is generated such that date represents a valid Gregorian 
+///    calendar date between Jan 1st, 1900 and Dec 31st, 2100 (both 
+///   inclusive).
+/// </summary>
+string LeetCodeString::convertDateToBinary(string date)
+{
+    string result;
+    string s = date.substr(0, 4);
+    int v = atoi(s.c_str());
+    s.clear();
+    while (v != 0)
+    {
+        s.push_back('0' + (v % 2));
+        v /= 2;
+    }
+    reverse(s.begin(), s.end());
+    result.append(s); result.push_back('-');
+
+    s = date.substr(5, 2);
+    v = atoi(s.c_str());
+    s.clear();
+    while (v != 0)
+    {
+        s.push_back('0' + (v % 2));
+        v /= 2;
+    }
+    reverse(s.begin(), s.end());
+    result.append(s); result.push_back('-');
+
+    s = date.substr(8, 2);
+    v = atoi(s.c_str());
+    s.clear();
+    while (v != 0)
+    {
+        s.push_back('0' + (v % 2));
+        v /= 2;
+    }
+    reverse(s.begin(), s.end());
+    result.append(s);
+    return result;
+}
+
 #pragma endregion

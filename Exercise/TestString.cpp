@@ -7161,8 +7161,22 @@ void TestLeetCode3271(void)
     Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
 }
 
+void TestLeetCode3280(void)
+{
+    Logger::WriteMessage("Test Leet Code 3280");
+    LeetCodeString leetCode;
+    string date = "2080-02-29";
+    string result = leetCode.convertDateToBinary(date);
+    Logger::WriteMessage("s = " + date + "; result = " + result);
+
+    date = "1900-01-01";
+    result = leetCode.convertDateToBinary(date);
+    Logger::WriteMessage("s = " + date + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3280();
     TestLeetCode3271();
     TestLeetCode3213();
     TestLeetCode3248();

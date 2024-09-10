@@ -39,7 +39,7 @@ struct FolderNode
 {
     string foldername;
     bool is_deleted;
-    map<string, FolderNode *> children;
+    map<string, FolderNode*> children;
     FolderNode(string name)
     {
         is_deleted = false;
@@ -415,7 +415,7 @@ public:
     /// 4. folder[i] always starts with character '/'
     /// 5. Each folder name is unique.
     /// </summary>
-    vector<string> removeSubfolders(vector<string> & folder); 
+    vector<string> removeSubfolders(vector<string>& folder);
 
     /// <summary>
     /// Leet code #1234. Replace the Substring for Balanced String
@@ -1067,7 +1067,7 @@ public:
     /// return "blue is sky the".
     /// Could you do it in-place without allocating extra space? 
     /// </summary>
-    void reverseWordsII(string &s);
+    void reverseWordsII(string& s);
 
     /// <summary>
     /// Leet code #14. Longest Common Prefix 
@@ -1433,7 +1433,7 @@ public:
     /// <summary>
     /// Leet code #770. Basic Calculator IV   
     /// </summary>
-    vector<string> polyToString(map<vector<string>, int> &ploy_map);
+    vector<string> polyToString(map<vector<string>, int>& ploy_map);
 
     /// <summary>
     /// Leet code #770. Basic Calculator IV   
@@ -1631,22 +1631,22 @@ public:
     /// <summary>
     /// Leet code #1106. Parsing A Boolean Expression
     /// </summary>
-    bool parseBoolExprAnd(string expression, int &pos);
+    bool parseBoolExprAnd(string expression, int& pos);
 
     /// <summary>
     /// Leet code #1106. Parsing A Boolean Expression
     /// </summary>
-    bool parseBoolExprOr(string expression, int &pos);
+    bool parseBoolExprOr(string expression, int& pos);
 
     /// <summary>
     /// Leet code #1106. Parsing A Boolean Expression
     /// </summary>
-    bool parseBoolExprNot(string expression, int &pos);
+    bool parseBoolExprNot(string expression, int& pos);
 
     /// <summary>
     /// Leet code #1106. Parsing A Boolean Expression
     /// </summary>
-    bool parseBoolExpr(string expression, int &pos);
+    bool parseBoolExpr(string expression, int& pos);
 
     /// <summary>
     /// Leet code #1106. Parsing A Boolean Expression
@@ -1716,12 +1716,13 @@ public:
     /// <summary>
     /// Leet code #1096. Brace Expansion II
     /// </summary>
-    void braceExpansionIIProduct(string &expression, size_t& pos, unordered_set<string> &result);
+    void braceExpansionIIProduct(string& expression, size_t& pos, unordered_set<string>& result);
 
     /// <summary>
     /// Leet code #1096. Brace Expansion II
     /// </summary>
-    void braceExpansionIIUnion(string &expression, size_t& pos, unordered_set<string> &result);
+    void braceExpansionIIUnion(string& expression, size_t& pos, unordered_set<string>& result);
+
 
     /// <summary>
     /// Leet code #1096. Brace Expansion II
@@ -1751,9 +1752,9 @@ public:
     ///
     /// For every lowercase letter x, we have R(x) = {x}
     /// For expressions e_1, e_2, ... , e_k with k >= 2, we have 
-    /// R({e_1,e_2,...}) = R(e_1) ¡È R(e_2) ¡È ...
+    /// R({e_1,e_2,...}) = R(e_1) U R(e_2) U ...
     /// For expressions e_1 and e_2, we have R(e_1 + e_2) = {a + b for (a, b) 
-    /// in R(e_1) ¡Á R(e_2)}, where + denotes concatenation, and ¡Á denotes the 
+    /// in R(e_1) x R(e_2)}, where + denotes concatenation, and x denotes the 
     /// cartesian product.
     /// Given an expression representing a set of words under the given 
     /// grammar, return the sorted list of words that the expression 
@@ -1916,12 +1917,12 @@ public:
     /// <summary>
     /// Leet code #972. Equal Rational Numbers
     /// </summary>
-    string parseRationalInteger(string S, size_t &index);
+    string parseRationalInteger(string S, size_t& index);
 
     /// <summary>
     /// Leet code #972. Equal Rational Numbers
     /// </summary>
-    string parseRationalDecimal(string S, size_t &index);
+    string parseRationalDecimal(string S, size_t& index);
 
     /// <summary>
     /// Leet code #972. Equal Rational Numbers
@@ -2163,7 +2164,7 @@ public:
     /// 1. 1 <= palindrome.length <= 1000
     /// 2. palindrome consists of only lowercase English letters.
     /// </summary>
-    string breakPalindrome(string palindrome); 
+    string breakPalindrome(string palindrome);
 
     /// <summary>
     /// Leet code #1332. Remove Palindromic Subsequences
@@ -3018,7 +3019,7 @@ public:
     /// connected strings s. For example, ["abc", 3] ="abcabcabc". 
     /// On the other hand, we define that string s1 can be obtained from string s2 
     /// if we can remove some characters from s2 such that it becomes s1. For 
-    /// example, "abc" can be obtained from ¡°abdbec¡± based on our definition, but 
+    /// example, "abc" can be obtained from "abdbec" based on our definition, but 
     /// it can not be obtained from "acbbe".
     /// You are given two non-empty strings s1 and s2 (each at most 100 characters 
     /// long) and two integers 0 <= n1 <= 106 and 1 <= n2 <= 106. Now consider the 
@@ -3329,7 +3330,7 @@ public:
     /// A magical string S consists of only '1' and '2' and obeys the following rules:  
     /// The string S is magical because concatenating the number of contiguous occurrences of 
     /// characters '1' and '2' generates the string S itself.  
-    /// The first few elements of string S is the following: S = "1221121221221121122¡­¡­" 
+    /// The first few elements of string S is the following: S = "1221121221221121122ï¿½ï¿½ï¿½ï¿½" 
     /// If we group the consecutive '1's and '2's in S, it will be:  
     ///
     /// 1 22 11 2 1 22 1 22 11 2 11 22 ...... 
@@ -4782,7 +4783,7 @@ public:
     ///
     /// 1. Email address:
     ///
-    /// We define a name to be a string of length ¡Ý 2 consisting of only 
+    /// We define a name to be a string of length >= 2 consisting of only 
     /// lowercase letters a-z or uppercase letters A-Z.
     ///
     /// An email address starts with a name, followed by the symbol '@', 
@@ -7606,17 +7607,17 @@ public:
     /// <summary>
     /// Leet code 1896. Minimum Cost to Change the Final Value of Expression
     /// </summary>
-    void minOperationsToFlip_FreeTree(LogicOperation *tree);
+    void minOperationsToFlip_FreeTree(LogicOperation* tree);
 
     /// <summary>
     /// Leet code 1896. Minimum Cost to Change the Final Value of Expression
     /// </summary>
-    LogicOperation * minOperationsToFlip_BuildTree(string& expression, int &index);
-    
+    LogicOperation* minOperationsToFlip_BuildTree(string& expression, int& index);
+
     /// <summary>
     /// Leet code 1896. Minimum Cost to Change the Final Value of Expression
     /// </summary>
-    int minOperationsToFlip_FlipTree(LogicOperation * root);
+    int minOperationsToFlip_FlipTree(LogicOperation* root);
 
     /// <summary>
     /// Leet code 1896. Minimum Cost to Change the Final Value of Expression
@@ -8008,7 +8009,7 @@ public:
     /// <summary>
     /// Leet code 1948. Delete Duplicate Folders in System
     /// </summary>
-    void addDuplicateFolderPaths(FolderNode * root, vector<vector<string>>& paths);
+    void addDuplicateFolderPaths(FolderNode* root, vector<vector<string>>& paths);
 
     /// <summary>
     /// Leet code 1948. Delete Duplicate Folders in System
@@ -8583,7 +8584,7 @@ public:
     ///    '!', '.', and ','.
     /// 3. There will be at least 1 token.
     /// </summary>
-    int countValidWords(string sentence); 
+    int countValidWords(string sentence);
 
     /// <summary>
     /// Leet code 2000. Reverse Prefix of Word
@@ -8626,7 +8627,7 @@ public:
     /// 2. word consists of lowercase English letters.
     /// 3. ch is a lowercase English letter.
     /// </summary>
-    string reversePrefix(string word, char ch); 
+    string reversePrefix(string word, char ch);
 
     /// <summary>
     /// Leet code 2019. The Score of Students Solving Math Expression
@@ -11995,7 +11996,7 @@ public:
     vector<int> topStudents(
         vector<string>& positive_feedback,
         vector<string>& negative_feedback,
-        vector<string>& report, 
+        vector<string>& report,
         vector<int>& student_id, int k);
 
     /// <summary>
@@ -14582,7 +14583,7 @@ public:
     ///
     /// We say that word is k-periodic if there is some string s of length 
     /// k such that word can be obtained by concatenating s an arbitrary 
-    /// number of times. For example, if word == ¡°ababab¡±, then word is 
+    /// number of times. For example, if word == ï¿½ï¿½abababï¿½ï¿½, then word is 
     /// 2-periodic for s = "ab".
     ///
     /// Example 1:
@@ -15187,6 +15188,44 @@ public:
     /// 4. s consists only of lowercase English letters.
     /// </summary>
     string stringHash(string s, int k);
+
+    /// <summary>
+    /// Leet Code 3280. Convert Date to Binary
+    /// 
+    /// Easy
+    ///
+    /// You are given a string date representing a Gregorian calendar date in 
+    /// the yyyy-mm-dd format.
+    ///
+    /// date can be written in its binary representation obtained by 
+    /// converting year, month, and day to their binary representations 
+    /// without any leading zeroes and writing them down in 
+    /// year-month-day format.
+    ///
+    /// Return the binary representation of date.
+    /// 
+    /// Example 1:
+    /// Input: date = "2080-02-29"
+    /// Output: "100000100000-10-11101"
+    /// Explanation:
+    /// 0100000100000, 10, and 11101 are the binary representations of 
+    /// 2080, 02, and 29 respectively.
+    ///
+    /// Example 2:
+    /// Input: date = "1900-01-01"
+    /// Output: "11101101100-1-1"
+    /// Explanation:
+    /// 11101101100, 1, and 1 are the binary representations of 1900, 1, 
+    /// and 1 respectively.
+    /// 
+    /// Constraints:
+    /// 1. date.length == 10
+    /// 2. date[4] == date[7] == '-', and all other date[i]'s are digits.
+    /// 3. The input is generated such that date represents a valid Gregorian 
+    ///    calendar date between Jan 1st, 1900 and Dec 31st, 2100 (both 
+    ///   inclusive).
+    /// </summary>
+    string convertDateToBinary(string date);
 #pragma endregion
 };
 

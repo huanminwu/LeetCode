@@ -1425,8 +1425,26 @@ void TestLeetCode3134(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3181(void)
+{
+    Logger::WriteMessage("Test Leet Code 3181");
+    LeetCodeBinarySearch leetCode;
+    vector<int> start = { 6, 0, 3 };
+    int d = 2;
+    int result = leetCode.maxPossibleScore(start, d);
+    Logger::WriteMessage(start);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+
+    start = { 2,6,13,13 };
+    d = 5;
+    result = leetCode.maxPossibleScore(start, d);
+    Logger::WriteMessage(start);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode3181();
     TestLeetCode3134();
     TestLeetCode3048();
     TestLeetCode3049();
