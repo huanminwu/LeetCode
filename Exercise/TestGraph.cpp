@@ -5888,8 +5888,81 @@ void TestLeetCode3123(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3235(void)
+{
+    Logger::WriteMessage("Test Leet Code 3235");
+    LeetCodeGraph leetCode;
+    int X = 3, Y = 4;
+    vector<vector<int>> circles = { {2, 1, 1} };
+    bool result = leetCode.canReachCorner(X, Y, circles);
+    Logger::WriteMessage(circles);
+    Logger::WriteMessage("X = " + to_string(X) + "; Y = " + to_string(Y) + "; result = " + (string)(result ? "true" : "false"));
+
+    X = 3, Y = 3;
+    circles = { {1, 1, 2} };
+    result = leetCode.canReachCorner(X, Y, circles);
+    Logger::WriteMessage(circles);
+    Logger::WriteMessage("X = " + to_string(X) + "; Y = " + to_string(Y) + "; result = " + (string)(result ? "true" : "false"));
+
+    X = 3, Y = 3;
+    circles = { {2, 1, 1} ,{1, 2, 1 } };
+
+    result = leetCode.canReachCorner(X, Y, circles);
+    Logger::WriteMessage(circles);
+    Logger::WriteMessage("X = " + to_string(X) + "; Y = " + to_string(Y) + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3243(void)
+{
+    Logger::WriteMessage("Test Leet Code 3243");
+    LeetCodeGraph leetCode;
+    int n = 5;
+    vector<vector<int>>  queries = { {2, 4},{0, 2},{0, 4} };
+    vector<int> result = leetCode.shortestDistanceAfterQueriesI(n, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 4;
+    queries = { {0, 3} ,{0, 2} };
+    result = leetCode.shortestDistanceAfterQueriesI(n, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 7;
+    queries = { {4, 6},{0, 3} };
+    result = leetCode.shortestDistanceAfterQueriesI(n, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3244(void)
+{
+    Logger::WriteMessage("Test Leet Code 3244");
+    LeetCodeGraph leetCode;
+    int n = 5;
+    vector<vector<int>>  queries = { {2, 4},{0, 2},{0, 4} };
+    vector<int> result = leetCode.shortestDistanceAfterQueriesII(n, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 4;
+    queries = { {0, 3} ,{0, 2} };
+    result = leetCode.shortestDistanceAfterQueriesII(n, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3244();
+    TestLeetCode3243();
+    TestLeetCode3235();
     TestLeetCode3123();
     TestLeetCode3108();
     TestLeetCode3112();

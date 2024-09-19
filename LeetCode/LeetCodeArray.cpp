@@ -19,6 +19,36 @@
 #include "LeetCodeArray.h"
 #pragma region Array
 
+struct BinaryIndexTree
+{
+    vector<int> m_arr;
+    int m_count;
+    BinaryIndexTree(int n)
+    {
+        m_arr = vector<int>(n + 1, 0);
+        m_count = n + 1;
+    }
+    void add(int index, int val)
+    {
+        if (index == 0) return;
+        while (index < m_count)
+        {
+            m_arr[index] += val;
+            index += (index & -index);
+        }
+    }
+    int sum(int index)
+    {
+        int sum = 0;
+        while (index != 0)
+        {
+            sum += m_arr[index];
+            index -= index & -index;
+        }
+        return sum;
+    }
+};
+
 /// <summary>
 /// Leet code #16. 3Sum Closest 
 /// Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. 
@@ -14038,7 +14068,7 @@ int LeetCodeArray::minOperations(vector<int>& target, vector<int>& arr)
             else key = *itr;
             if (new_map.count(key) == 0) new_map[key] = pos_map[target[i]][j];
         }
-        for (auto itr : new_map)
+        for (auto& itr : new_map)
         {
             if (itr.first == INT_MAX) seq.insert(itr.second);
             else
@@ -32683,6 +32713,1000 @@ int LeetCodeArray::minMoves(vector<vector<int>>& rooks)
         result += abs(col_dup.front() - col_empty.front());
         col_dup.pop();
         col_empty.pop();
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3191. Minimum Operations to Make Binary Array Elements Equal 
+///                to One I
+///
+/// Medium
+/// 
+/// You are given a binary array nums.
+///
+/// You can do the following operation on the array any number of times 
+/// (possibly zero):
+///
+/// Choose any 3 consecutive elements from the array and flip all of them.
+/// Flipping an element means changing its value from 0 to 1, and from 1 
+/// to 0.
+///
+/// Return the minimum number of operations required to make all elements 
+/// in nums equal to 1. If it is impossible, return -1.
+///
+/// Example 1:
+/// Input: nums = [0,1,1,1,0,0]
+/// Output: 3
+/// Explanation:
+/// We can do the following operations:
+/// Choose the elements at indices 0, 1 and 2. The resulting array is 
+/// nums = [1,0,0,1,0,0].
+/// Choose the elements at indices 1, 2 and 3. The resulting array is 
+/// nums = [1,1,1,0,0,0].
+/// Choose the elements at indices 3, 4 and 5. The resulting array is 
+/// nums = [1,1,1,1,1,1].
+///
+/// Example 2:
+/// Input: nums = [0,1,1,1]
+/// Output: -1
+/// Explanation:
+/// It is impossible to make all elements equal to 1.
+/// 
+/// Constraints:
+/// 1. 3 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 1
+/// </summary>
+int LeetCodeArray::minOperationsFlipI(vector<int>& nums)
+{
+    int result = 0;
+    vector<int> arr = nums;
+    for (size_t i = 0; i < arr.size() - 2; i++)
+    {
+        if (arr[i] == 0)
+        {
+            arr[i] = 1 - arr[i];
+            arr[i + 1] = 1 - arr[i + 1];
+            arr[i + 2] = 1 - arr[i + 2];
+            result++;
+        }
+    }
+    int n = arr.size();
+    if (arr[n - 1] == 0 || arr[n - 2] == 0) return -1;
+    else return result;
+}
+
+/// <summary>
+/// LeetCode 3192. Minimum Operations to Make Binary Array Elements Equal 
+///                to One II 
+///
+/// Medium
+/// 
+/// You are given a binary array nums.
+/// You can do the following operation on the array any number of times 
+/// (possibly zero):
+///
+/// Choose any index i from the array and flip all the elements from 
+/// index i to the end of the array.
+/// Flipping an element means changing its value from 0 to 1, and from 1 
+/// to 0.
+///
+/// Return the minimum number of operations required to make all elements 
+/// in nums equal to 1.
+/// 
+/// Example 1:
+/// Input: nums = [0,1,1,0,1]
+/// Output: 4
+/// Explanation:
+/// We can do the following operations:
+/// Choose the index i = 1. The resulting array will be nums = [0,0,0,1,0].
+/// Choose the index i = 0. The resulting array will be nums = [1,1,1,0,1].
+/// Choose the index i = 4. The resulting array will be nums = [1,1,1,0,0].
+/// Choose the index i = 3. The resulting array will be nums = [1,1,1,1,1].
+///
+/// Example 2:
+/// Input: nums = [1,0,0,0]
+/// Output: 1
+/// Explanation:
+/// We can do the following operation:
+/// Choose the index i = 1. The resulting array will be nums = [1,1,1,1].
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 1
+/// </summary>
+int LeetCodeArray::minOperationsFlipII(vector<int>& nums)
+{
+    int flip = 0;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] + flip == 1) continue;
+        result++;
+        flip = 1 - flip;
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3187. Peaks in Array
+/// </summary>
+int LeetCodeArray::IsPeak(vector<int>& nums, int i)
+{
+    if (i == 0 || i == nums.size() - 1) return false;
+    if (nums[i] > nums[i - 1] && nums[i] > nums[i + 1]) return 1;
+    else return 0;
+}
+
+
+/// <summary>
+/// LeetCode 3187. Peaks in Array
+///
+/// Hard
+///
+/// A peak in an array arr is an element that is greater than its previous 
+/// and next element in arr.
+///
+/// You are given an integer array nums and a 2D integer array queries.
+///
+/// You have to process queries of two types:
+/// queries[i] = [1, li, ri], determine the count of peak elements in the 
+/// subarray nums[li..ri]. queries[i] = [2, indexi, vali], change 
+/// nums[indexi] to vali.
+/// Return an array answer containing the results of the queries of the 
+/// first type in order.
+///
+/// Notes:
+/// The first and the last element of an array or a subarray cannot be a 
+/// peak.
+/// 
+/// Example 1:
+/// Input: nums = [3,1,4,2,5], queries = [[2,3,4],[1,0,4]]
+/// Output: [0]
+/// Explanation:
+/// First query: We change nums[3] to 4 and nums becomes [3,1,4,4,5].
+/// Second query: The number of peaks in the [3,1,4,4,5] is 0.
+///
+/// Example 2:
+/// Input: nums = [4,1,4,2,1,5], queries = [[2,2,4],[1,0,2],[1,0,4]]
+/// Output: [0,1]
+///
+/// Explanation:
+/// First query: nums[2] should become 4, but it is already set to 4.
+/// Second query: The number of peaks in the [4,1,4] is 0.
+///
+/// Third query: The second 4 is a peak in the [4,1,4,2,1].
+/// 
+/// Constraints:
+/// 1. 3 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// 3. 1 <= queries.length <= 10^5
+/// 4. queries[i][0] == 1 or queries[i][0] == 2
+/// 5. For all i that:
+///    queries[i][0] == 1: 0 <= queries[i][1] <= queries[i][2] <= 
+///    nums.length - 1
+///    queries[i][0] == 2: 0 <= queries[i][1] <= nums.length - 1, 
+///    1 <= queries[i][2] <= 10^5
+/// </summary>
+vector<int> LeetCodeArray::countOfPeaks(vector<int>& nums, vector<vector<int>>& queries)
+{
+    int n = nums.size();
+    vector<int> peaks(n);
+    BinaryIndexTree tree(n);
+    for (int i = 1; i < n - 1; i++)
+    {
+        if (IsPeak(nums, i))
+        {
+            peaks[i] = 1;
+            tree.add(i, 1);
+        }
+    }
+    vector<int> result;
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        if (queries[i][0] == 2)
+        {
+            int a = queries[i][1];
+            int b = queries[i][2];
+            nums[a] = b;
+            if (a > 0 && a < n - 1)
+            {
+                tree.add(a, IsPeak(nums, a) - peaks[a]);
+                peaks[a] = IsPeak(nums, a);
+            }
+            if (a > 1)
+            {
+                tree.add(a - 1, IsPeak(nums, a - 1) - peaks[a - 1]);
+                peaks[a - 1] = IsPeak(nums, a - 1);
+            }
+            if (a < n - 2)
+            {
+                tree.add(a + 1, IsPeak(nums, a + 1) - peaks[a + 1]);
+                peaks[a + 1] = IsPeak(nums, a + 1);
+            }
+        }
+        else if (queries[i][0] == 1)
+        {
+            int a = queries[i][1];
+            int b = queries[i][2];
+            if (a == b) result.push_back(0);
+            else
+            {
+                result.push_back(tree.sum(b - 1) - tree.sum(a));
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3212. Count Submatrices With Equal Frequency of X and Y
+///
+/// Medium
+///
+/// Given a 2D character matrix grid, where grid[i][j] is either 'X', 'Y', 
+/// or '.', return the number of submatrices that contains:
+/// grid[0][0] an equal frequency of 'X' and 'Y'. at least one 'X'.
+///  
+/// Example 1:
+/// Input: grid = [["X","Y","."],["Y",".","."]]
+/// Output: 3
+/// Explanation:
+/// 
+/// Example 2:
+/// Input: grid = [["X","X"],["X","Y"]]
+/// Output: 0
+/// Explanation:
+/// No submatrix has an equal frequency of 'X' and 'Y'.
+///
+/// Example 3:
+/// Input: grid = [[".","."],[".","."]]
+/// Output: 0
+/// Explanation:
+/// No submatrix has at least one 'X'.
+/// 
+/// Constraints:
+/// 1. 1 <= grid.length, grid[i].length <= 1000
+/// 2. grid[i][j] is either 'X', 'Y', or '.'.
+/// </summary>
+int LeetCodeArray::numberOfSubmatrices(vector<vector<char>>& grid)
+{
+    vector<pair<int, int>> cols(grid[0].size());
+    int result = 0;
+    for (size_t i = 0; i < grid.size(); i++)
+    {
+        int x = 0, y = 0;
+        for (size_t j = 0; j < grid[0].size(); j++)
+        {
+            if (grid[i][j] == 'X') x++;
+            else if (grid[i][j] == 'Y') y++;
+            if (i == 0)
+            {
+                if (x == y && x > 0) result++;
+            }
+            else
+            {
+                if (cols[j].first + x == cols[j].second + y && cols[j].first + x > 0)
+                {
+                    result++;
+                }
+            }
+            cols[j].first += x;
+            cols[j].second += y;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3228. Maximum Number of Operations to Move Ones to the End
+///
+/// Medium
+///
+/// You are given a binary string s.
+/// You can perform the following operation on the string any number of 
+/// times:
+/// 
+/// Choose any index i from the string where i + 1 < s.length such that 
+/// s[i] == '1' and s[i + 1] == '0'.
+/// Move the character s[i] to the right until it reaches the end of the 
+/// string or another '1'. For example, for s = "010010", if we choose 
+/// i = 1, the resulting string will be s = "000110".
+/// Return the maximum number of operations that you can perform.
+/// 
+/// Example 1:
+/// Input: s = "1001101"
+/// Output: 4
+/// Explanation:
+/// We can perform the following operations:
+/// Choose index i = 0. The resulting string is s = "0011101".
+/// Choose index i = 4. The resulting string is s = "0011011".
+/// Choose index i = 3. The resulting string is s = "0010111".
+/// Choose index i = 2. The resulting string is s = "0001111".
+///
+/// Example 2:
+/// Input: s = "00111"
+/// Output: 0
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s[i] is either '0' or '1'.
+/// </summary>
+int LeetCodeArray::maxOperations(string s)
+{
+    int one = 0;
+    int result = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '1') one++;
+        else if (i > 0 && s[i-1] == '1') result += one;
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3229. Minimum Operations to Make Array Equal to Target
+///
+/// Hard
+///
+/// You are given two positive integer arrays nums and target, of the same 
+/// length.
+/// In a single operation, you can select any subarray of nums and 
+/// increment or decrement each element within that subarray by 1.
+///
+/// Return the minimum number of operations required to make nums equal to 
+/// the array target.
+/// 
+/// Example 1:
+/// Input: nums = [3,5,1,2], target = [4,6,2,4]
+/// Output: 2
+/// Explanation:
+/// We will perform the following operations to make nums equal to target:
+/// - Increment nums[0..3] by 1, nums = [4,6,2,3].
+/// - Increment nums[3..3] by 1, nums = [4,6,2,4].
+/// 
+/// Example 2:
+/// Input: nums = [1,3,2], target = [2,1,4]
+/// Output: 5
+/// Explanation:
+/// We will perform the following operations to make nums equal to target:
+/// - Increment nums[0..0] by 1, nums = [2,3,2].
+/// - Decrement nums[1..1] by 1, nums = [2,2,2].
+/// - Decrement nums[1..1] by 1, nums = [2,1,2].
+/// - Increment nums[2..2] by 1, nums = [2,1,3].
+/// - Increment nums[2..2] by 1, nums = [2,1,4].
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length == target.length <= 10^5
+/// 2. 1 <= nums[i], target[i] <= 10^8
+/// </summary>
+long long LeetCodeArray::minimumOperations(vector<int>& nums, vector<int>& target)
+{
+    long long prev = 0;
+    long long result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        long long val = (long long)target[i] - (long long)nums[i];
+        if (val * prev <= 0)
+        {
+            result += abs(val);
+        }
+        else 
+        {
+            if (abs(val) > abs(prev))
+            {
+                result += abs(val) - abs(prev);
+            }
+        }
+        prev = val;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3237. Alt and Tab Simulation
+///
+/// Medium
+///
+/// There are n windows open numbered from 1 to n, we want to simulate
+/// using alt + tab to navigate between the windows.
+///
+/// You are given an array windows which contains the initial order of the 
+/// windows (the first element is at the top and the last one is at the 
+/// bottom).
+///
+/// You are also given an array queries where for each query, the window 
+/// queries[i] is brought to the top.
+///
+/// Return the final state of the array windows.
+/// 
+/// Example 1:
+/// Input: windows = [1,2,3], queries = [3,3,2]
+/// Output: [2,3,1]
+/// Explanation:
+/// Here is the window array after each query:
+/// Initial order: [1,2,3]
+/// After the first query: [3,2,1]
+/// After the second query: [3,2,1]
+/// After the last query: [2,3,1]
+///
+/// Example 2:
+/// Input: windows = [1,4,2,3], queries = [4,1,3]
+/// Output: [3,1,4,2]
+///
+/// Explanation:
+/// Here is the window array after each query:
+/// Initial order: [1,4,2,3]
+/// After the first query: [4,1,2,3]
+/// After the second query: [1,4,2,3]
+/// After the last query: [3,1,4,2]
+/// 
+/// Constraints:
+/// 1. 1 <= n == windows.length <= 10^5
+/// 2. windows is a permutation of [1, n].
+/// 3. 1 <= queries.length <= 105
+/// 4. 1 <= queries[i] <= n
+/// </summary>
+vector<int> LeetCodeArray::simulationResult(vector<int>& windows, vector<int>& queries)
+{
+    int n = windows.size();
+    vector<int> visited(n + 1);
+    vector<int> result;
+    for (int i = queries.size() - 1; i >= 0; i--)
+    {
+        if (visited[queries[i]] == 0)
+        {
+            result.push_back(queries[i]);
+            visited[queries[i]] = 1;
+        }
+    }
+    for (int i = 0; i < n; i++)
+    {
+        if (visited[windows[i]] == 0)
+        {
+            result.push_back(windows[i]);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3238. Find the Number of Winning Players
+///
+/// Easy
+///
+/// You are given an integer n representing the number of players in a 
+/// game and a 2D array pick where pick[i] = [xi, yi] represents that 
+/// the player xi picked a ball of color yi.
+///
+/// Player i wins the game if they pick strictly more than i balls of 
+/// the same color. In other words,
+///
+/// Player 0 wins if they pick any ball.
+/// Player 1 wins if they pick at least two balls of the same color.
+/// ...
+/// Player i wins if they pick at leasti + 1 balls of the same color.
+/// Return the number of players who win the game.
+///
+/// Note that multiple players can win the game.
+/// 
+/// Example 1:
+/// Input: n = 4, pick = [[0,0],[1,0],[1,0],[2,1],[2,1],[2,0]]
+/// Output: 2
+/// Explanation:
+/// Player 0 and player 1 win the game, while players 2 and 3 do not win.
+///
+/// Example 2:
+/// Input: n = 5, pick = [[1,1],[1,2],[1,3],[1,4]]
+/// Output: 0
+/// Explanation:
+/// No player wins the game.
+///
+/// Example 3:
+/// Input: n = 5, pick = [[1,1],[2,4],[2,4],[2,4]]
+/// Output: 1
+/// Explanation:
+/// Player 2 wins the game by picking 3 balls with color 4.
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 10
+/// 2. 1 <= pick.length <= 100
+/// 3. pick[i].length == 2
+/// 4. 0 <= xi <= n - 1 
+/// 5. 0 <= yi <= 10
+/// </summary>
+int LeetCodeArray::winningPlayerCount(int n, vector<vector<int>>& pick)
+{
+    vector<vector<int>> picks(n, vector<int>(11));
+    for (size_t i = 0; i < pick.size(); i++)
+    {
+        picks[pick[i][0]][pick[i][1]]++;
+    }
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j <= 10; j++)
+        {
+            if (picks[i][j] > i)
+            {
+                result++;
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3239. Minimum Number of Flips to Make Binary Grid 
+///                Palindromic I
+///
+/// Medium
+///
+/// You are given an m x n binary matrix grid.
+///
+/// A row or column is considered palindromic if its values read the same 
+/// forward and backward.
+///
+/// You can flip any number of cells in grid from 0 to 1, or from 1 to 0.
+///
+/// Return the minimum number of cells that need to be flipped to make 
+/// either all rows palindromic or all columns palindromic.
+///
+/// Example 1:
+/// Input: grid = [[1,0,0],[0,0,0],[0,0,1]]
+///
+/// Output: 2
+///
+/// Explanation:
+/// Flipping the highlighted cells makes all the rows palindromic.
+///
+/// Example 2:
+/// Input: grid = [[0,1],[0,1],[0,0]]
+/// 
+/// Output: 1
+///
+/// Explanation:
+/// Flipping the highlighted cell makes all the columns palindromic.
+///
+/// Example 3:
+/// Input: grid = [[1],[0]]
+/// Output: 0
+/// Explanation:
+/// All rows are already palindromic.
+/// 
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 1 <= m * n <= 2 * 10^5
+/// 4. 0 <= grid[i][j] <= 1
+/// </summary>
+int LeetCodeArray::minFlipsI(vector<vector<int>>& grid)
+{
+    int h = 0, v = 0;
+    for (size_t i = 0; i < grid.size(); i++)
+    {
+        for (size_t j = 0; j < grid[0].size(); j++)
+        {
+            if (j < grid[0].size() / 2 && grid[i][j] != grid[i][grid[0].size() - 1 - j])
+            {
+                h++;
+            }
+            if (i < grid.size() / 2 && grid[i][j] != grid[grid.size() - 1 - i][j])
+            {
+                v++;
+            }
+        }
+    }
+    int result = min(h, v);
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3240. Minimum Number of Flips to Make Binary Grid 
+///                 Palindromic II 
+/// 
+/// Medium
+///
+/// You are given an m x n binary matrix grid.
+/// A row or column is considered palindromic if its values read the same 
+/// forward and backward.
+///
+/// You can flip any number of cells in grid from 0 to 1, or from 1 to 0.
+///
+/// Return the minimum number of cells that need to be flipped to make all 
+/// rows and columns palindromic, and the total number of 1's in grid 
+/// divisible by 4.
+///
+/// Example 1:
+/// Input: grid = [[1,0,0],[0,1,0],[0,0,1]]
+/// Output: 3
+///
+/// Explanation:
+///
+/// Example 2:
+/// Input: grid = [[0,1],[0,1],[0,0]]
+/// Output: 2
+/// 
+/// Explanation:
+///
+/// Example 3:
+/// Input: grid = [[1],[1]]
+/// Output: 2
+/// Explanation:
+/// 
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 1 <= m * n <= 2 * 10^5
+/// 4. 0 <= grid[i][j] <= 1
+/// </summary>
+int LeetCodeArray::minFlipsII(vector<vector<int>>& grid)
+{
+    int result = 0;
+    int m = grid.size();
+    int n = grid[0].size();
+    for (int i = 0; i < m / 2; i++)
+    {
+        for (int j = 0; j < n / 2; j++)
+        {
+            int count = grid[i][j] + grid[i][n - 1 - j] + grid[m - 1 - i][j] + grid[m - 1 - i][n - 1 - j];
+            result += min(count, 4 - count);
+        }
+    }
+    int ones = 0;
+    int flips = 0;
+    if (m % 2 == 1)
+    {
+        int i = m / 2;
+        for (int j = 0; j < n / 2; j++)
+        {
+            int count = grid[i][j] + grid[i][n - 1 - j];
+            flips += min(count, 2 - count);
+            ones += count;
+        }
+    }
+    if (n % 2 == 1)
+    {
+        int j = n / 2;
+        for (int i = 0; i < m / 2; i++)
+        {
+            int count = grid[i][j] + grid[m - 1 - i][j];
+            flips += min(count, 2 - count);
+            ones += count;
+        }
+    }
+    if (flips == 0 && ones % 4 == 2) flips += 2;
+    result += flips;
+    if (m % 2 == 1 && n % 2 == 1 && grid[m / 2][n / 2] == 1) result++;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3254. Find the Power of K-Size Subarrays I
+/// 
+/// Medium
+///
+/// You are given an array of integers nums of length n and a positive 
+/// integer k.
+///
+/// The power of an array is defined as:
+/// 
+/// Its maximum element if all of its elements are consecutive and sorted 
+/// in ascending order.
+/// -1 otherwise.
+/// You need to find the power of all 
+/// subarrays of nums of size k.
+/// Return an integer array results of size n - k + 1, where results[i] 
+/// is the power of nums[i..(i + k - 1)].
+/// 
+/// Example 1:
+/// Input: nums = [1,2,3,4,3,2,5], k = 3
+/// Output: [3,4,-1,-1,-1]
+/// Explanation:
+/// There are 5 subarrays of nums of size 3:
+/// [1, 2, 3] with the maximum element 3.
+/// [2, 3, 4] with the maximum element 4.
+/// [3, 4, 3] whose elements are not consecutive.
+/// [4, 3, 2] whose elements are not sorted.
+/// [3, 2, 5] whose elements are not consecutive.
+///
+/// Example 2:
+/// Input: nums = [2,2,2,2,2], k = 4
+/// Output: [-1,-1]
+///
+/// Example 3:
+/// Input: nums = [3,2,3,2,3,2], k = 2
+/// Output: [-1,3,-1,3,-1]
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 500
+/// 2. 1 <= nums[i] <= 10^5
+/// 3. 1 <= k <= n
+/// </summary>
+vector<int> LeetCodeArray::resultsArrayI(vector<int>& nums, int k)
+{
+    int count = 0;
+    vector<int> result;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (i == 0) count = 1;
+        else if (nums[i] == nums[i - 1] + 1)
+        {
+            count++;
+        }
+        else
+        {
+            count = 1;
+        }
+        if ((int)i >= k - 1)
+        {
+            if (count >= k)
+            {
+                result.push_back(nums[i]);
+            }
+            else
+            {
+                result.push_back(-1);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3255. Find the Power of K - Size Subarrays II
+/// 
+/// Medium
+/// 
+/// You are given an array of integers nums of length n and a positive 
+/// integer k.
+///
+/// The power of an array is defined as :
+/// Its maximum element if all of its elements are consecutive and sorted 
+/// in ascending order.
+/// - 1 otherwise.
+/// You need to find the power of all subarrays of nums of size k.
+///
+/// Return an integer array results of size n - k + 1, where results[i] 
+/// is the power of nums[i..(i + k - 1)].
+/// 
+/// Example 1:
+/// Input: nums = [1, 2, 3, 4, 3, 2, 5], k = 3
+/// Output : [3, 4, -1, -1, -1]
+/// Explanation :
+/// There are 5 subarrays of nums of size 3 :
+/// [1, 2, 3] with the maximum element 3.
+/// [2, 3, 4] with the maximum element 4.
+/// [3, 4, 3] whose elements are not consecutive.
+/// [4, 3, 2] whose elements are not sorted.
+/// [3, 2, 5] whose elements are not consecutive.
+///
+/// Example 2:
+/// Input: nums = [2, 2, 2, 2, 2], k = 4
+/// Output : [-1, -1]
+///
+/// Example 3 :
+/// Input : nums = [3, 2, 3, 2, 3, 2], k = 2
+/// Output : [-1, 3, -1, 3, -1]
+///
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^6
+/// 3. 1 <= k <= n
+/// </summary>
+vector<int> LeetCodeArray::resultsArrayII(vector<int>& nums, int k)
+{
+    int count = 0;
+    vector<int> result;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (i == 0) count = 1;
+        else if (nums[i] == nums[i - 1] + 1)
+        {
+            count++;
+        }
+        else
+        {
+            count = 1;
+        }
+        if ((int)i >= k - 1)
+        {
+            if (count >= k)
+            {
+                result.push_back(nums[i]);
+            }
+            else
+            {
+                result.push_back(-1);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3256. Maximum Value Sum by Placing Three Rooks I
+/// 
+/// Hard
+/// 
+/// You are given a m x n 2D array board representing a chessboard, where 
+/// board[i][j] represents the value of the cell (i, j).
+///
+/// Rooks in the same row or column attack each other. You need to place 
+/// three rooks on the chessboard such that the rooks do not attack each 
+/// other.
+///
+/// Return the maximum sum of the cell values on which the rooks are 
+/// placed.
+/// 
+/// Example 1:
+/// Input: board = [[-3,1,1,1],[-3,1,-3,1],[-3,2,1,1]]
+/// 
+/// Output: 4
+/// Explanation:
+/// We can place the rooks in the cells (0, 2), (1, 3), and (2, 1) for a 
+/// sum of 1 + 1 + 2 = 4.
+///
+/// Example 2:
+/// Input: board = [[1,2,3],[4,5,6],[7,8,9]]
+/// Output: 15
+/// Explanation:
+/// We can place the rooks in the cells (0, 0), (1, 1), and (2, 2) for a 
+/// sum of 1 + 5 + 9 = 15.
+///
+/// Example 3:
+/// Input: board = [[1,1,1],[1,1,1],[1,1,1]]
+/// Output: 3
+/// Explanation:
+/// We can place the rooks in the cells (0, 2), (1, 1), and (2, 0) for a 
+/// sum of 1 + 1 + 1 = 3.
+/// 
+/// Constraints:
+/// 1. 3 <= m == board.length <= 100
+/// 2. 3 <= n == board[i].length <= 100
+/// 3. -10^9 <= board[i][j] <= 10^9
+/// </summary>
+long long LeetCodeArray::maximumValueSumI(vector<vector<int>>& board)
+{
+    int n = board.size();
+    int m = board[0].size();
+    priority_queue<vector<int>> pq;
+    for (int i = 0; i < (int)board.size(); i++)
+    {
+        for (int j = 0; j < (int)board[i].size(); j++)
+        {
+            pq.push({ board[i][j], i, j });
+        }
+    }
+    vector<int> row_count(n), col_count(m);
+    vector<vector<int>> top_9;
+    while (!pq.empty())
+    {
+        vector<int> cell = pq.top();
+        pq.pop();
+        if (row_count[cell[1]] < 3 && col_count[cell[2]] < 3)
+        {
+            top_9.push_back(cell);
+            row_count[cell[1]]++; col_count[cell[2]]++;
+        }
+        if (top_9.size() == 9) break;
+    }
+    long long result = LLONG_MIN;
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = i + 1; j < 9; j++)
+        {
+            if (top_9[i][1] == top_9[j][1] || top_9[i][2] == top_9[j][2])
+            {
+                continue;
+            }
+            for (int k = j + 1; k < 9; k++)
+            {
+                if (top_9[i][1] == top_9[k][1] || top_9[i][2] == top_9[k][2])
+                {
+                    continue;
+                }
+                if (top_9[j][1] == top_9[k][1] || top_9[j][2] == top_9[k][2])
+                {
+                    continue;
+                }
+                result = max(result, (long long)top_9[i][0] + (long long)top_9[j][0] + (long long)top_9[k][0]);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3257. Maximum Value Sum by Placing Three Rooks II
+/// 
+/// Hard
+///
+/// You are given a m x n 2D array board representing a chessboard, where 
+/// board[i][j] represents the value of the cell (i, j).
+///
+/// Rooks in the same row or column attack each other. You need to place 
+/// three rooks on the chessboard such that the rooks do not attack each 
+/// other.
+///
+/// Return the maximum sum of the cell values on which the rooks are 
+/// placed.
+/// 
+/// Example 1:
+/// Input: board = [[-3,1,1,1],[-3,1,-3,1],[-3,2,1,1]]
+/// Output: 4
+/// Explanation:
+/// We can place the rooks in the cells (0, 2), (1, 3), and (2, 1) for a 
+/// sum of 1 + 1 + 2 = 4.
+///
+/// Example 2:
+/// Input: board = [[1,2,3],[4,5,6],[7,8,9]]
+/// Output: 15
+/// Explanation:
+/// We can place the rooks in the cells (0, 0), (1, 1), and (2, 2) for a 
+/// sum of 1 + 5 + 9 = 15.
+///
+/// Example 3:
+/// Input: board = [[1,1,1],[1,1,1],[1,1,1]]
+/// Output: 3
+/// Explanation:
+/// We can place the rooks in the cells (0, 2), (1, 1), and (2, 0) for a 
+/// sum of 1 + 1 + 1 = 3.
+/// 
+/// Constraints:
+/// 1. 3 <= m == board.length <= 500
+/// 2. 3 <= n == board[i].length <= 500
+/// 3. -10^9 <= board[i][j] <= 10^9
+/// </summary>
+long long LeetCodeArray::maximumValueSumII(vector<vector<int>>& board)
+{
+    int n = board.size();
+    int m = board[0].size();
+    priority_queue<vector<int>> pq;
+    for (int i = 0; i < (int)board.size(); i++)
+    {
+        for (int j = 0; j < (int)board[i].size(); j++)
+        {
+            pq.push({ board[i][j], i, j });
+        }
+    }
+    vector<int> row_count(n), col_count(m);
+    vector<vector<int>> top_9;
+    while (!pq.empty())
+    {
+        vector<int> cell = pq.top();
+        pq.pop();
+        if (row_count[cell[1]] < 3 && col_count[cell[2]] < 3)
+        {
+            top_9.push_back(cell);
+            row_count[cell[1]]++; col_count[cell[2]]++;
+        }
+        if (top_9.size() == 9) break;
+    }
+    long long result = LLONG_MIN;
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = i + 1; j < 9; j++)
+        {
+            if (top_9[i][1] == top_9[j][1] || top_9[i][2] == top_9[j][2])
+            {
+                continue;
+            }
+            for (int k = j + 1; k < 9; k++)
+            {
+                if (top_9[i][1] == top_9[k][1] || top_9[i][2] == top_9[k][2])
+                {
+                    continue;
+                }
+                if (top_9[j][1] == top_9[k][1] || top_9[j][2] == top_9[k][2])
+                {
+                    continue;
+                }
+                result = max(result, (long long)top_9[i][0] + (long long)top_9[j][0] + (long long)top_9[k][0]);
+            }
+        }
     }
     return result;
 }

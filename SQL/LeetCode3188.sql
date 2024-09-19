@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------
---- LeetCode LeetCode 3188. Find Top Scoring Students II
+--- LeetCode 3188. Find Top Scoring Students II
 --- 
 --- Hard
 ---

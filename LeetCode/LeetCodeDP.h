@@ -10248,5 +10248,444 @@ public:
     /// 2. 1 <= power[i] <= 10^9
     /// </summary>
     long long maximumTotalDamage(vector<int>& power);
+    /// <summary>
+    /// LeetCode 3196. Maximize Total Cost of Alternating Subarrays 
+    ///
+    /// Medium
+    /// 
+    /// You are given an integer array nums with length n.
+    /// The cost of a subarray 
+    /// nums[l..r], where 0 <= l <= r < n, is defined as:
+    ///
+    /// cost(l, r) = nums[l] - nums[l + 1] + ... + nums[r] * (-1)^(r - l)
+    ///
+    /// Your task is to split nums into subarrays such that the total 
+    /// cost of the subarrays is maximized, ensuring each element belongs 
+    /// to exactly one subarray.
+    /// Formally, if nums is split into k subarrays, where k > 1, at 
+    /// indices i1, i2, ..., ik - 1, where 0 <= i1 < i2 < ... < 
+    /// ik - 1 < n - 1, then the total cost will be:
+    ///
+    /// cost(0, i1) + cost(i1 + 1, i2) + ... + cost(ik - 1 + 1, n - 1)
+    ///
+    /// Return an integer denoting the maximum total cost of the subarrays 
+    /// after splitting the array optimally.
+    ///
+    /// Note: If nums is not split into subarrays, i.e. k = 1, the total 
+    /// cost is simply cost(0, n - 1).
+    ///
+    /// Example 1:
+    /// Input: nums = [1,-2,3,4]
+    /// Output: 10
+    /// Explanation:
+    /// One way to maximize the total cost is by splitting [1, -2, 3, 4] into 
+    /// subarrays [1, -2, 3] and [4]. The total cost will be 
+    /// (1 + 2 + 3) + 4 = 10.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,-1,1,-1]
+    /// Output: 4
+    /// Explanation:
+    /// One way to maximize the total cost is by splitting [1, -1, 1, -1] 
+    /// into subarrays [1, -1] and [1, -1]. The total cost will be (1 + 1) 
+    /// + (1 + 1) = 4.
+    ///
+    /// Example 3:
+    /// Input: nums = [0]
+    /// Output: 0
+    /// Explanation:
+    /// We cannot split the array further, so the answer is 0.
+    ///
+    /// Example 4:
+    /// Input: nums = [1,-1]
+    /// Output: 2
+    /// Explanation:
+    /// Selecting the whole array gives a total cost of 1 + 1 = 2, which is 
+    /// the maximum.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// </summary>
+    long long maximumTotalCost(vector<int>& nums);
+
+    /// <summary>
+    /// LeetCode 3193. Count the Number of Inversions
+    ///
+    /// Hard
+    ///
+    /// You are given an integer n and a 2D array requirements, where 
+    /// requirements[i] = [endi, cnti] represents the end index and the 
+    /// inversion count of each requirement.
+    ///
+    /// A pair of indices (i, j) from an integer array nums is called an 
+    /// inversion if:
+    ///
+    /// i < j and nums[i] > nums[j]
+    /// Return the number of permutations perm of [0, 1, 2, ..., n - 1] such 
+    /// that for all requirements[i], perm[0..endi] has exactly cnti 
+    /// inversions.
+    ///
+    /// Since the answer may be very large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: n = 3, requirements = [[2,2],[0,0]]
+    /// Output: 2
+    /// Explanation:
+    /// The two permutations are: [2, 0, 1]
+    /// Prefix [2, 0, 1] has inversions (0, 1) and (0, 2).
+    /// Prefix [2] has 0 inversions. [1, 2, 0]
+    /// Prefix [1, 2, 0] has inversions (0, 2) and (1, 2).
+    /// Prefix [1] has 0 inversions.
+    ///
+    /// Example 2:
+    /// Input: n = 3, requirements = [[2,2],[1,1],[0,0]]
+    /// Output: 1
+    /// Explanation:
+    /// The only satisfying permutation is [2, 0, 1]:
+    /// Prefix [2, 0, 1] has inversions (0, 1) and (0, 2).
+    /// Prefix [2, 0] has an inversion (0, 1).
+    /// Prefix [2] has 0 inversions.
+    ///
+    /// Example 3:
+    /// Input: n = 2, requirements = [[0,0],[1,0]]
+    /// Output: 1
+    /// Explanation:
+    /// The only satisfying permutation is [0, 1]:
+    /// Prefix [0] has 0 inversions.
+    /// Prefix [0, 1] has an inversion (0, 1).
+    ///
+    /// Constraints:
+    /// 1. 2 <= n <= 300
+    /// 2. 1 <= requirements.length <= n
+    /// 3. requirements[i] = [endi, cnti]
+    /// 4. 0 <= endi <= n - 1
+    /// 5. 0 <= cnti <= 400
+    /// 6. The input is generated such that there is at least one i such that 
+    ///    endi == n - 1.
+    /// 7. The input is generated such that all endi are unique.
+    /// </summary>
+    int numberOfPermutations(int n, vector<vector<int>>& requirements);
+
+    /// <summary>
+    /// LeetCode 3201. Find the Maximum Length of Valid Subsequence I
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    /// A subsequence sub of nums with length x is called valid if it 
+    /// satisfies:
+    /// (sub[0] + sub[1]) % 2 == (sub[1] + sub[2]) % 2 == ... == 
+    /// (sub[x - 2] + sub[x - 1]) % 2.
+    /// Return the length of the longest valid subsequence of nums.
+    ///
+    /// A subsequence is an array that can be derived from another array by 
+    /// deleting some or no elements without changing the order of the 
+    /// remaining elements.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2,3,4]
+    /// Output: 4
+    ///
+    /// Explanation:
+    /// The longest valid subsequence is [1, 2, 3, 4].
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,1,1,2,1,2]
+    /// Output: 6
+    /// Explanation:
+    /// The longest valid subsequence is [1, 2, 1, 2, 1, 2].
+    ///
+    /// Example 3:
+    /// Input: nums = [1,3]
+    /// Output: 2
+    ///
+    /// Explanation:
+    /// The longest valid subsequence is [1, 3].
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 2 * 10^5
+    /// 2. 1 <= nums[i] <= 10^7
+    /// </summary>
+    int maximumLengthI(vector<int>& nums);
+
+    /// <summary>
+    /// LeetCode 3202. Find the Maximum Length of Valid Subsequence II
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums and a positive integer k.
+    /// A subsequence sub of nums with length x is called valid if it 
+    /// satisfies:
+    ///
+    /// (sub[0] + sub[1]) % k == (sub[1] + sub[2]) % k == ... == (sub[x - 2] + 
+    /// sub[x - 1]) % k.
+    /// Return the length of the longest valid subsequence of nums.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2,3,4,5], k = 2
+    /// Output: 5
+    /// Explanation:
+    /// The longest valid subsequence is [1, 2, 3, 4, 5].
+    ///
+    /// Example 2:
+    /// Input: nums = [1,4,2,3,1,4], k = 3
+    /// Output: 4
+    /// Explanation:
+    /// The longest valid subsequence is [1, 4, 1, 4].
+    ///
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 10^3
+    /// 2. 1 <= nums[i] <= 10^7
+    /// 3. 1 <= k <= 10^3
+    /// </summary>
+    int maximumLengthModII(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3247. Number of Subsequences with Odd Sum
+    /// 
+    /// Medium
+    ///
+    /// Given an array nums, return the number of subsequences with an odd sum 
+    /// of elements.
+    /// Since the answer may be very large, return it modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,1,1]
+    /// Output: 4
+    ///
+    /// Explanation:
+    /// The odd-sum subsequences are: [1, 1, 1], [1, 1, 1], [1, 1, 1], 
+    /// [1, 1, 1].
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,2]
+    /// Output: 4
+    /// Explanation:
+    /// The odd-sum subsequences are: [1, 2, 2], [1, 2, 2], [1, 2, 2], 
+    /// [1, 2, 2].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.lnegth <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    int subsequenceCount(vector<int>& nums); 
+
+    /// <summary>
+    /// Leet Code 3250. Find the Count of Monotonic Pairs I
+    /// 
+    /// Hard
+    ///
+    /// You are given an array of positive integers nums of length n.
+    /// We call a pair of non-negative integer arrays (arr1, arr2) monotonic 
+    /// if: The lengths of both arrays are n.
+    /// arr1 is monotonically non-decreasing, in other words, arr1[0] <= 
+    /// arr1[1] <= ... <= arr1[n - 1].
+    /// arr2 is monotonically non-increasing, in other words, arr2[0] >= 
+    /// arr2[1] >= ... >= arr2[n - 1].
+    /// arr1[i] + arr2[i] == nums[i] for all 0 <= i <= n - 1.
+    /// Return the count of monotonic pairs.
+    /// 
+    /// Since the answer may be very large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,3,2]
+    /// Output: 4
+    /// Explanation:
+    /// The good pairs are:
+    /// ([0, 1, 1], [2, 2, 1])
+    /// ([0, 1, 2], [2, 2, 0])
+    /// ([0, 2, 2], [2, 1, 0])
+    /// ([1, 2, 2], [1, 1, 0])
+    ///
+    /// Example 2:
+    /// Input: nums = [5,5,5,5]
+    /// Output: 126
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 2000
+    /// 2. 1 <= nums[i] <= 50
+    /// </summary>
+    int countOfPairsI(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3251. Find the Count of Monotonic Pairs II
+    /// 
+    /// Hard
+    ///
+    /// You are given an array of positive integers nums of length n.
+    /// We call a pair of non-negative integer arrays (arr1, arr2) monotonic 
+    /// if:
+    /// The lengths of both arrays are n.
+    /// arr1 is monotonically non-decreasing, in other words, arr1[0] <= 
+    /// arr1[1] <= ... <= arr1[n - 1].
+    /// arr2 is monotonically non-increasing, in other words, arr2[0] >= 
+    /// arr2[1] >= ... >= arr2[n - 1].
+    /// arr1[i] + arr2[i] == nums[i] for all 0 <= i <= n - 1.
+    /// Return the count of monotonic pairs.
+    ///
+    /// Since the answer may be very large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,3,2]
+    /// Output: 4
+    /// Explanation:
+    /// The good pairs are:
+    /// ([0, 1, 1], [2, 2, 1])
+    /// ([0, 1, 2], [2, 2, 0])
+    /// ([0, 2, 2], [2, 1, 0])
+    /// ([1, 2, 2], [1, 1, 0])
+    ///
+    /// Example 2:
+    /// Input: nums = [5,5,5,5]
+    /// Output: 126
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 2000
+    /// 2. 1 <= nums[i] <= 1000
+    /// </summary>
+    int countOfPairsII(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3259. Maximum Energy Boost From Two Drinks
+    /// 
+    /// Medium
+    ///
+    /// You are given two integer arrays energyDrinkA and energyDrinkB of the 
+    /// same length n by a futuristic sports scientist. These arrays represent 
+    /// the energy boosts per hour provided by two different energy drinks, A 
+    /// and B, respectively.
+    ///
+    /// You want to maximize your total energy boost by drinking one energy 
+    /// drink per hour. However, if you want to switch from consuming one 
+    /// energy drink to the other, you need to wait for one hour to cleanse 
+    /// your system (meaning you won't get any energy boost in that hour).
+    ///
+    /// Return the maximum total energy boost you can gain in the next n 
+    /// hours.
+    /// 
+    /// Note that you can start consuming either of the two energy drinks.
+    /// 
+    /// Example 1:
+    /// Input: energyDrinkA = [1,3,1], energyDrinkB = [3,1,1]
+    /// Output: 5
+    /// Explanation:
+    /// To gain an energy boost of 5, drink only the energy drink A 
+    /// (or only B).
+    ///
+    /// Example 2:
+    /// Input: energyDrinkA = [4,1,1], energyDrinkB = [1,1,3]
+    /// Output: 7
+    /// Explanation:
+    /// To gain an energy boost of 7:
+    /// Drink the energy drink A for the first hour.
+    /// Switch to the energy drink B and we lose the energy boost of the 
+    /// second hour.
+    /// Gain the energy boost of the drink B in the third hour.
+    ///
+    /// Constraints:
+    /// 1. n == energyDrinkA.length == energyDrinkB.length
+    /// 2. 3 <= n <= 105
+    /// 3. 1 <= energyDrinkA[i], energyDrinkB[i] <= 105
+    /// </summary>
+    long long maxEnergyBoost(vector<int>& energyDrinkA, vector<int>& energyDrinkB);
+
+    /// <summary>
+    /// Leet Code 3269. Constructing Two Increasing Arrays
+    /// 
+    /// Hard
+    /// 
+    /// Given 2 integer arrays nums1 and nums2 consisting only of 0 and 1, 
+    /// your task is to calculate the minimum possible largest number in 
+    /// arrays nums1 and nums2, after doing the following.
+    ///
+    /// Replace every 0 with an even positive integer and every 1 with an 
+    /// odd positive integer. After replacement, both arrays should be 
+    /// increasing and each integer should be used at most once.
+    ///
+    /// Return the minimum possible largest number after applying the changes.
+    ///
+    /// Example 1:
+    /// Input: nums1 = [], nums2 = [1,0,1,1]
+    /// Output: 5
+    /// Explanation:
+    /// After replacing, nums1 = [], and nums2 = [1, 2, 3, 5].
+    ///
+    /// Example 2:
+    /// Input: nums1 = [0,1,0,1], nums2 = [1,0,0,1]
+    /// Output: 9
+    /// Explanation:
+    /// One way to replace, having 9 as the largest element is 
+    /// nums1 = [2, 3, 8, 9], and nums2 = [1, 4, 6, 7].
+    ///
+    /// Example 3:
+    /// Input: nums1 = [0,1,0,0,1], nums2 = [0,0,0,1]
+    /// Output: 13
+    /// Explanation:
+    /// One way to replace, having 13 as the largest element is 
+    /// nums1 = [2, 3, 4, 6, 7], and nums2 = [8, 10, 12, 13].
+    ///
+    /// Constraints:
+    /// 1. 0 <= nums1.length <= 1000
+    /// 2. 1 <= nums2.length <= 1000
+    /// 3. nums1 and nums2 consist only of 0 and 1.
+    /// </summary>
+    int minLargest(vector<int>& nums1, vector<int>& nums2);
+
+    /// <summary>
+    /// Leet Code 3277. Maximum XOR Score Subarray Queries
+    /// 
+    /// Hard
+    ///
+    /// You are given an array nums of n integers, and a 2D integer array 
+    /// queries of size q, where queries[i] = [li, ri].
+    ///
+    /// For each query, you must find the maximum XOR score of any 
+    /// subarray of nums[li..ri].
+    /// The XOR score of an array a is found by repeatedly applying the 
+    /// following operations on a so that only one element remains, that is 
+    /// the score:
+    ///
+    /// Simultaneously replace a[i] with a[i] XOR a[i + 1] for all 
+    /// indices i except the last one.
+    /// Remove the last element of a.
+    /// Return an array answer of size q where answer[i] is the answer to 
+    /// query i.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,8,4,32,16,1], queries = [[0,2],[1,4],[0,5]]
+    /// Output: [12,60,60]
+    /// Explanation:
+    /// In the first query, nums[0..2] has 6 subarrays [2], [8], [4], [2, 8], 
+    /// [8, 4], and [2, 8, 4] each with a respective XOR score of 2, 8, 4, 
+    /// 10, 12, and 6. The answer for the query is 12, the largest of all XOR 
+    /// scores.
+    ///
+    /// In the second query, the subarray of nums[1..4] with the largest XOR 
+    /// score is nums[1..4] with a score of 60.
+    /// In the third query, the subarray of nums[0..5] with the largest XOR 
+    /// score is nums[1..4] with a score of 60.
+    ///
+    /// Example 2:
+    /// Input: nums = [0,7,3,2,8,5,1], queries = [[0,3],[1,5],[2,4],[2,6],
+    /// [5,6]]
+    /// Output: [7,14,11,14,5]
+    /// Explanation:
+    /// Index	nums[li..ri]	Maximum XOR Score Subarray	Maximum Subarray 
+    /// XOR Score
+    /// 0	[0, 7, 3, 2]	[7]	7
+    /// 1	[7, 3, 2, 8, 5]	[7, 3, 2, 8]	14
+    /// 2	[3, 2, 8]	[3, 2, 8]	11
+    /// 3	[3, 2, 8, 5, 1]	[2, 8, 5, 1]	14
+    /// 4	[5, 1]	[5]	5
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 2000
+    /// 2. 0 <= nums[i] <= 2^31 - 1
+    /// 3. 1 <= q == queries.length <= 10^5
+    /// 4. queries[i].length == 2 
+    /// 5. queries[i] = [li, ri]
+    /// 6. 0 <= li <= ri <= n - 1
+    /// </summary>
+    vector<int> maximumSubarrayXor(vector<int>& nums, vector<vector<int>>& queries);
 };
 #endif  // LeetCodeDP

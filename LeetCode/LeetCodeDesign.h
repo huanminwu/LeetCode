@@ -13412,4 +13412,116 @@ public:
         }
     }
 };
+
+/// <summary>
+/// Leet Code 3242. Design Neighbor Sum Service
+///
+/// Easy
+///
+/// You are given a n x n 2D array grid containing distinct elements in 
+/// the range [0, n2 - 1].
+/// Implement the neighborSum class:
+/// neighborSum(int [][]grid) initializes the object.
+/// int adjacentSum(int value) returns the sum of elements which are 
+/// adjacent neighbors of value, that is either to the top, left, right, 
+/// or bottom of value in grid.
+/// int diagonalSum(int value) returns the sum of elements which are 
+/// diagonal neighbors of value, that is either to the top-left, 
+/// top-right, bottom-left, or bottom-right of value in grid.
+///
+/// Example 1:
+/// Input:
+/// ["neighborSum", "adjacentSum", "adjacentSum", "diagonalSum", 
+/// "diagonalSum"]
+/// 
+/// [[[[0, 1, 2], [3, 4, 5], [6, 7, 8]]], [1], [4], [4], [8]]
+///
+/// Output: [null, 6, 16, 16, 4]
+///
+/// Explanation:
+/// The adjacent neighbors of 1 are 0, 2, and 4.
+/// The adjacent neighbors of 4 are 1, 3, 5, and 7.
+/// The diagonal neighbors of 4 are 0, 2, 6, and 8.
+/// The diagonal neighbor of 8 is 4.
+///
+/// Example 2:
+/// Input:
+/// ["neighborSum", "adjacentSum", "diagonalSum"]
+/// [[[[1, 2, 0, 3], [4, 7, 15, 6], [8, 9, 10, 11], [12, 13, 14, 5]]], 
+/// [15], [9]]
+///
+/// Output: [null, 23, 45]
+///
+/// Explanation:
+/// The adjacent neighbors of 15 are 0, 10, 7, and 6.
+/// The diagonal neighbors of 9 are 4, 12, 14, and 15.
+///
+/// Constraints:
+/// 1. 3 <= n == grid.length == grid[0].length <= 10
+/// 2. 0 <= grid[i][j] <= n^2 - 1
+/// 3. All grid[i][j] are distinct.
+/// 4. value in adjacentSum and diagonalSum will be in the range 
+///   [0, n^2 - 1].
+/// 5. At most 2 * n^2 calls will be made to adjacentSum and diagonalSum.
+/// </summary>
+class NeighborSum 
+{
+private:
+    vector<pair<int, int>> m_coordinates;
+    vector<vector<int>> m_grid;
+public:
+    NeighborSum(vector<vector<int>>& grid) 
+    {
+        m_grid = grid;
+        m_coordinates = vector<pair<int, int>>(grid.size() * grid.size());
+        for (size_t i = 0; i < grid.size(); i++)
+        {
+            for (size_t j = 0; j < grid[i].size(); j++)
+            {
+                m_coordinates[grid[i][j]] = make_pair(i, j);
+            }
+        }
+    }
+
+    int adjacentSum(int value) 
+    {
+        int result = 0;
+        pair<int, int> pos = m_coordinates[value];
+        int r = pos.first - 1;
+        int c = pos.second;
+        if (r >= 0) result += m_grid[r][c];
+        r = pos.first;
+        c = pos.second - 1;
+        if (c >= 0) result += m_grid[r][c];
+        r = pos.first + 1;
+        c = pos.second;
+        if (r < (int)m_grid.size()) result += m_grid[r][c];
+        r = pos.first;
+        c = pos.second + 1;
+        if (c < (int)m_grid.size()) result += m_grid[r][c];
+        return result;
+    }
+
+    int diagonalSum(int value) 
+    {
+        int result = 0;
+        pair<int, int> pos = m_coordinates[value];
+        int r = pos.first - 1;
+        int c = pos.second - 1;
+        if (r >= 0 && c >= 0) result += m_grid[r][c];
+        r = pos.first - 1;
+        c = pos.second + 1;
+        if (r >= 0 && c < (int)m_grid.size()) result += m_grid[r][c];
+        r = pos.first + 1;
+        c = pos.second - 1;
+        if (r < (int)m_grid.size() && c >= 0) result += m_grid[r][c];
+        r = pos.first + 1;
+        c = pos.second + 1;
+        if (r < (int)m_grid.size() && c < (int)m_grid.size()) result += m_grid[r][c];
+        return result;
+
+    }
+};
+
+
 #endif // LeetcodeDesign_H

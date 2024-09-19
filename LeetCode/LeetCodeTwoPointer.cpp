@@ -2806,4 +2806,350 @@ int LeetCodeTwoPointer::maximumLengthSubstring(string s)
     return result;
 }
 
+/// <summary>
+/// LeetCode 3206. Alternating Groups I
+///
+/// Easy
+///
+/// There is a circle of red and blue tiles. You are given an array of 
+/// integers colors. The color of tile i is represented by colors[i]:
+///
+/// colors[i] == 0 means that tile i is red.
+/// colors[i] == 1 means that tile i is blue.
+/// Every 3 contiguous tiles in the circle with alternating colors (the 
+/// middle tile has a different color from its left and right tiles) is 
+/// called an alternating group.
+///
+/// Return the number of alternating groups.
+///
+/// Note that since colors represents a circle, the first and the last 
+/// tiles are considered to be next to each other.
+/// 
+/// Example 1:
+/// Input: colors = [1,1,1]
+/// Output: 0
+/// Explanation:
+///
+/// Example 2:
+/// Input: colors = [0,1,0,0,1]
+/// Output: 3
+/// Explanation:
+/// 
+/// Alternating groups:
+/// Constraints:
+/// 1. 3 <= colors.length <= 100
+/// 2. 0 <= colors[i] <= 1
+/// </summary>
+int LeetCodeTwoPointer::numberOfAlternatingGroupsI(vector<int>& colors)
+{
+    int k = 3;
+    int first = 0, last = 0, n = colors.size();
+    int result = 0;
+    while (first < n)
+    {
+        if (last - first + 1 < k)
+        {
+            int color = colors[last % n];
+            last++;
+            if (colors[last % n] == color)
+            {
+                first = last;
+            }
+        }
+        else
+        {
+            result++;
+            first++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3208. Alternating Groups II
+///
+/// Medium
+///
+/// There is a circle of red and blue tiles. You are given an array of 
+/// integers colors and an integer k. The color of tile i is represented 
+/// by colors[i]:
+///
+/// colors[i] == 0 means that tile i is red.
+/// colors[i] == 1 means that tile i is blue.
+/// An alternating group is every k contiguous tiles in the circle with 
+/// alternating colors (each tile in the group except the first and last 
+/// one has a different color from its left and right tiles).
+///
+/// Return the number of alternating groups.
+///
+/// Note that since colors represents a circle, the first and the last 
+/// tiles are considered to be next to each other.
+///
+/// Example 1:
+/// Input: colors = [0,1,0,1,0], k = 3
+/// Output: 3
+/// Explanation:
+/// 
+/// Alternating groups:
+/// Example 2:
+/// Input: colors = [0,1,0,0,1,0,1], k = 6
+/// Output: 2
+/// Explanation:
+/// Alternating groups:
+///
+/// Example 3:
+/// Input: colors = [1,1,0,1], k = 4
+/// Output: 0
+/// Explanation:
+/// 
+/// Constraints:
+/// 1. 3 <= colors.length <= 10^5
+/// 2. 0 <= colors[i] <= 1
+/// 3. 3 <= k <= colors.length
+/// </summary>
+int LeetCodeTwoPointer::numberOfAlternatingGroupsII(vector<int>& colors, int k)
+{
+    int first = 0, last = 0, n = colors.size();
+    int result = 0;
+    while (first < n)
+    {
+        if (last - first + 1 < k)
+        {
+            int color = colors[last % n];
+            last++;
+            if (colors[last % n] == color)
+            {
+                first = last;
+            }
+        }
+        else
+        {
+            result++;
+            first++;
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// LeetCode 3194. Minimum Average of Smallest and Largest Elements 
+///
+/// Easy
+/// 
+/// You have an array of floating point numbers averages which is 
+/// initially empty. You are given an array nums of n integers where n 
+/// is even.
+///
+/// You repeat the following procedure n / 2 times:
+///
+/// Remove the smallest element, minElement, and the largest element 
+/// maxElement, from nums.
+/// Add (minElement + maxElement) / 2 to averages.
+/// Return the minimum element in averages.
+///
+/// Example 1:
+/// Input: nums = [7,8,3,4,15,13,4,1]
+/// Output: 5.5
+/// Explanation:
+/// step	nums	averages
+/// 0	[7,8,3,4,15,13,4,1]	[]
+/// 1	[7,8,3,4,13,4]	[8]
+/// 2	[7,8,4,4]	[8,8]
+/// 3	[7,4]	[8,8,6]
+/// 4	[]	[8,8,6,5.5]
+/// The smallest element of averages, 5.5, is returned.
+///
+/// Example 2:
+/// Input: nums = [1,9,8,3,10,5]
+/// Output: 5.5
+/// Explanation:
+/// step	nums	averages
+/// 0	[1,9,8,3,10,5]	[]
+/// 1	[9,8,3,5]	[5.5]
+/// 2	[8,5]	[5.5,6]
+/// 3	[]	[5.5,6,6.5]
+///
+/// Example 3:
+/// Input: nums = [1,2,3,7,8,9]
+/// Output: 5.0
+/// Explanation:
+/// step	nums	averages
+/// 0	[1,2,3,7,8,9]	[]
+/// 1	[2,3,7,8]	[5]
+/// 2	[3,7]	[5,5]
+/// 3	[]	[5,5,5]
+/// 
+/// Constraints:
+/// 1. 2 <= n == nums.length <= 50
+/// 2. n is even.
+/// 3. 1 <= nums[i] <= 50
+/// </summary>
+double LeetCodeTwoPointer::minimumAverage(vector<int>& nums)
+{
+    double result = 100;
+    sort(nums.begin(), nums.end());
+    for (size_t i = 0; i < nums.size() / 2; i++)
+    {
+        result = min(result, ((double)nums[i] + (double)nums[nums.size() - 1 - i]) / 2);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3258. Count Substrings That Satisfy K-Constraint I
+/// 
+/// Easy
+///
+/// You are given a binary string s and an integer k.
+///
+/// A binary string satisfies the k-constraint if either of the following 
+/// conditions holds:
+///
+/// The number of 0's in the string is at most k.
+/// The number of 1's in the string is at most k.
+/// Return an integer denoting the number of substrings of s that satisfy 
+/// the k-constraint.
+///
+/// Example 1:
+/// Input: s = "10101", k = 1
+/// Output: 12
+/// Explanation:
+/// Every substring of s except the substrings "1010", "10101", and "0101" 
+/// satisfies the k-constraint.
+///
+/// Example 2:
+/// Input: s = "1010101", k = 2
+/// Output: 25
+/// Explanation:
+/// Every substring of s except the substrings with a length greater than 5 
+/// satisfies the k-constraint.
+/// 
+/// Example 3:
+/// Input: s = "11111", k = 1
+/// Output: 15
+/// Explanation:
+/// All substrings of s satisfy the k-constraint.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 50 
+/// 2. 1 <= k <= s.length
+/// 3. s[i] is either '0' or '1'.
+/// </summary>
+int LeetCodeTwoPointer::countKConstraintSubstringsI(string s, int k)
+{
+    vector<int> dp(2);
+    int left = -1;
+    int result = 0;
+    for (int right = 0; right < (int)s.size(); right++)
+    {
+        dp[s[right] - '0']++;
+        while (dp[0] > k && dp[1] > k)
+        {
+            left++;
+            dp[s[left] - '0']--;
+        }
+        result += right - left;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3261. Count Substrings That Satisfy K-Constraint II
+/// 
+/// Hard
+///
+/// You are given a binary string s and an integer k.
+/// You are also given a 2D integer array queries, where 
+/// queries[i] = [li, ri].
+///
+/// A binary string satisfies the k-constraint if either of the following 
+/// conditions holds:
+///
+/// The number of 0's in the string is at most k.
+/// The number of 1's in the string is at most k.
+/// Return an integer array answer, where answer[i] is the number of 
+/// substrings of s[li..ri] that satisfy the k-constraint.
+/// 
+/// Example 1:
+/// Input: s = "0001111", k = 2, queries = [[0,6]]
+/// Output: [26]
+/// Explanation:
+/// For the query [0, 6], all substrings of s[0..6] = "0001111" satisfy 
+/// the k-constraint except for the substrings s[0..5] = "000111" and 
+/// s[0..6] = "0001111".
+///
+/// Example 2:
+/// Input: s = "010101", k = 1, queries = [[0,5],[1,4],[2,3]]
+/// Output: [15,9,3]
+/// Explanation:
+/// The substrings of s with a length greater than 3 do not satisfy the 
+/// k-constraint.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s[i] is either '0' or '1'.
+/// 3. 1 <= k <= s.length
+/// 4. 1 <= queries.length <= 10^5
+/// 5. queries[i] == [li, ri]
+/// 6. 0 <= li <= ri < s.length
+/// 7. All queries are distinct.
+/// </summary>
+vector<long long> LeetCodeTwoPointer::countKConstraintSubstringsII(string s, int k, vector<vector<int>>& queries)
+{
+    int n = s.size();
+    vector<vector<int>> boundary(n, vector<int>(2));
+    vector<int> dp(2);
+    int left = -1;
+    for (int right = 0; right < n; right++)
+    {
+        dp[s[right] - '0']++;
+        while (dp[0] > k && dp[1] > k)
+        {
+            left++;
+            dp[s[left] - '0']--;
+        }
+        boundary[right][0] = left + 1;
+    }
+
+    dp[0] = dp[1] = 0;
+    int right = n;
+    for (int left = n - 1; left >= 0; left--)
+    {
+        dp[s[left] - '0']++;
+        while (dp[0] > k && dp[1] > k)
+        {
+            right--;
+            dp[s[right] - '0']--;
+        }
+        boundary[left][1] = right - 1;
+    }
+    vector<long long> pre_sum(n + 1);
+    for (int i = 1; i <= n; i++)
+    {
+        pre_sum[i] = pre_sum[i - 1] + (long long)i - boundary[i - 1][0];
+    }
+    vector<long long> result;
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        int left = queries[i][0];
+        int right = queries[i][1];
+        long long count = 0;
+        if (boundary[left][1] >= right)
+        {
+            long long len = right - left + 1;
+            count = len * (len + 1) / 2;
+        }
+        else
+        {
+            int middle = boundary[left][1];
+            long long len = middle - left + 1;
+            count = len * (len + 1) / 2;
+            count += pre_sum[right+1] - pre_sum[middle + 1];
+        }
+        result.push_back(count);
+    }
+    return result;
+}
+
 #pragma endregion

@@ -22671,5 +22671,1192 @@ int LeetCodeMath::numberOfWays(int n)
     }
     return result;
 }
+
+/// <summary>
+/// LeetCode 3190. Find Minimum Operations to Make All Elements Divisible 
+///                by Three
+///
+/// Easy
+/// 
+/// You are given an integer array nums. In one operation, you can add or 
+/// subtract 1 from any element of nums.
+///
+/// Return the minimum number of operations to make all elements of nums 
+/// divisible by 3.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,4]
+/// Output: 3
+/// Explanation:
+/// All array elements can be made divisible by 3 using 3 operations:
+///
+/// Subtract 1 from 1.
+/// Add 1 to 2.
+/// Subtract 1 from 4.
+///
+/// Example 2:
+/// Input: nums = [3,6,9]
+/// Output: 0
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 50
+/// 2. 1 <= nums[i] <= 50
+/// </summary>
+int LeetCodeMath::minimumOperationsII(vector<int>& nums)
+{
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] % 3 != 0) result++;
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3195. Find the Minimum Area to Cover All Ones I 
+///
+/// Medium
+/// 
+/// You are given a 2D binary array grid. Find a rectangle with horizontal 
+/// and vertical sides with the smallest area, such that all the 1's in 
+/// grid lie inside this rectangle.
+///
+/// Return the minimum possible area of the rectangle.
+/// 
+/// Example 1:
+/// Input: grid = [[0,1,0],[1,0,1]]
+/// Output: 6
+/// Explanation:
+/// The smallest rectangle has a height of 2 and a width of 3, so it has 
+/// an area of 2 * 3 = 6.
+///
+/// Example 2:
+/// Input: grid = [[1,0],[0,0]]
+/// Output: 1
+/// Explanation:
+/// The smallest rectangle has both height and width 1, so its area 
+/// is 1 * 1 = 1.
+/// 
+/// Constraints:
+/// 1. 1 <= grid.length, grid[i].length <= 1000
+/// 2. grid[i][j] is either 0 or 1.
+/// 3. The input is generated such that there is at least one 1 in grid.
+/// </summary>
+int LeetCodeMath::minimumArea(vector<vector<int>>& grid)
+{
+    int bottom = INT_MAX, up = INT_MIN, left = INT_MAX, right = INT_MIN;
+    for (int i = 0; i < (int)grid.size(); i++)
+    {
+        for (int j = 0; j < (int)grid[0].size(); j++)
+        {
+            if (grid[i][j] == 1)
+            {
+                bottom = min(bottom, i);
+                up = max(up, i);
+                left = min(left, j);
+                right = max(right, j);
+            }
+        }
+    }
+    if (right < left) return 0;
+    int result = (right - left + 1) * (up - bottom + 1);
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3197. Find the Minimum Area to Cover All Ones II
+/// </summary>
+int LeetCodeMath::minimumSumArea(vector<vector<int>>& grid, int y1, int y2, int x1, int x2)
+{
+    int bottom = INT_MAX, up = INT_MIN, left = INT_MAX, right = INT_MIN;
+    for (int i = y1; i < y2; i++)
+    {
+        for (int j = x1; j < x2; j++)
+        {
+            if (grid[i][j] == 1)
+            {
+                bottom = min(bottom, i);
+                up = max(up, i);
+                left = min(left, j);
+                right = max(right, j);
+            }
+        }
+    }
+    if (right < left) return 0;
+    int result = (right - left + 1) * (up - bottom + 1);
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3197. Find the Minimum Area to Cover All Ones II
+///
+/// Hard
+///
+/// You are given a 2D binary array grid. You need to find 3 
+/// non-overlapping rectangles having non-zero areas with horizontal and 
+/// vertical sides such that all the 1's in grid lie inside these 
+/// rectangles.
+///
+/// Return the minimum possible sum of the area of these rectangles.
+/// Note that the rectangles are allowed to touch.
+/// 
+/// Example 1:
+/// Input: grid = [[1,0,1],[1,1,1]]
+/// Output: 5
+/// Explanation:
+/// The 1's at (0, 0) and (1, 0) are covered by a rectangle of area 2.
+/// The 1's at (0, 2) and (1, 2) are covered by a rectangle of area 2.
+/// The 1 at (1, 1) is covered by a rectangle of area 1.
+///
+/// Example 2:
+/// Input: grid = [[1,0,1,0],[0,1,0,1]]
+/// Output: 5
+///
+/// Explanation:
+/// The 1's at (0, 0) and (0, 2) are covered by a rectangle of area 3.
+/// The 1 at (1, 1) is covered by a rectangle of area 1.
+/// The 1 at (1, 3) is covered by a rectangle of area 1.
+///
+/// Constraints:
+/// 1. 1 <= grid.length, grid[i].length <= 30
+/// 2. grid[i][j] is either 0 or 1.
+/// 3. The input is generated such that there are at least three 1's in 
+///    grid.
+/// </summary>
+int LeetCodeMath::minimumSumArea(vector<vector<int>>& grid)
+{
+    int result = INT_MAX;
+    int n = grid.size();
+    int m = grid[0].size();
+    /*
+        -------------
+        |    (1)    |
+        -------------
+        |    (2)    |
+        -------------
+        |    (3)    |
+        -------------
+    */
+    for (int i = 1; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            int one = minimumSumArea(grid, 0, i, 0, m);
+            int two = minimumSumArea(grid, i, j, 0, m);
+            int three = minimumSumArea(grid, j, n, 0, m);
+            result = min(result, one + two + three);
+        }
+    }
+    /*
+       -------------
+       |   |   |   |
+       |   |   |   |
+       |(1)|(2)|(3)|
+       |   |   |   |
+       |   |   |   |
+       -------------
+   */
+    for (int i = 1; i < m; i++)
+    {
+        for (int j = i + 1; j < m; j++)
+        {
+            int one = minimumSumArea(grid, 0, n, 0, i);
+            int two = minimumSumArea(grid, 0, n, i, j);
+            int three = minimumSumArea(grid, 0, n, j, m);
+            result = min(result, one + two + three);
+        }
+    }
+    for (int i = 1; i < n; i++)
+    {
+        for (int j = 1; j < m; j++)
+        {
+            /*
+            -------------
+            |    (1)    |
+            |           |
+            -------------
+            | (2) | (3) |
+            |     |     |
+            -------------
+            */
+            int one = minimumSumArea(grid, 0, i, 0, m);
+            int two = minimumSumArea(grid, i, n, 0, j);
+            int three = minimumSumArea(grid, i, n, j, m);
+            result = min(result, one + two + three);
+
+            /*
+            -------------
+            | (1) | (2) |
+            |     |     |
+            ------------
+            |           |
+            |    (3)    |
+            -------------
+            */
+            one = minimumSumArea(grid, 0, i, 0, j);
+            two = minimumSumArea(grid, 0, i, j, m);
+            three = minimumSumArea(grid, i, n, 0, m);
+            result = min(result, one + two + three);
+
+            /*
+            -------------
+            |     |     |
+            | (1) |     |
+            ------- (3) |
+            |     |     |
+            | (2) |     |
+            -------------
+            */
+            one = minimumSumArea(grid, 0, i, 0, j);
+            two = minimumSumArea(grid, i, n, 0, j);
+            three = minimumSumArea(grid, 0, n, j, m);
+            result = min(result, one + two + three);
+
+            /*
+            -------------
+            |     | (2) |
+            |     |     |
+              (1) -------
+            |     |     |
+            |     | (3) |
+            -------------
+            */
+            one = minimumSumArea(grid, 0, n, 0, j);
+            two = minimumSumArea(grid, 0, i, j, m);
+            three = minimumSumArea(grid, i, n, j, m);
+            result = min(result, one + two + three);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3200. Maximum Height of a Triangle
+///
+/// Easy
+///
+/// You are given two integers red and blue representing the count of 
+/// red and blue colored balls. You have to arrange these balls to form 
+/// a triangle such that the 1st row will have 1 ball, the 2nd row will 
+/// have 2 balls, the 3rd row will have 3 balls, and so on.
+///
+/// All the balls in a particular row should be the same color, and 
+/// adjacent rows should have different colors.
+///
+/// Return the maximum height of the triangle that can be achieved.
+/// 
+/// Example 1:
+/// Input: red = 2, blue = 4
+/// Output: 3
+/// Explanation:
+/// The only possible arrangement is shown above.
+///
+/// Example 2:
+/// Input: red = 2, blue = 1
+/// Output: 2
+/// Explanation:
+/// The only possible arrangement is shown above.
+///
+/// Example 3:
+/// Input: red = 1, blue = 1
+/// Output: 1
+///
+/// Example 4:
+/// Input: red = 10, blue = 1
+/// Output: 2
+/// Explanation:
+/// The only possible arrangement is shown above.
+///
+/// Constraints:
+/// 1. 1 <= red, blue <= 100
+/// </summary>
+int LeetCodeMath::maxHeightOfTriangle(int red, int blue)
+{
+    int odd = 0, even = 0;
+    int max_val = max(red, blue);
+    int min_val = min(red, blue);
+    int result = 0;
+    for (int i = 1; i < 100; i++)
+    {
+        if (i % 2 == 0) even += i;
+        else odd += i;
+        if (even > max_val || odd > max_val) break;
+        if (even > min_val && odd > min_val) break;
+        result++;
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3207. Maximum Points After Enemy Battles
+///
+/// Medium
+///
+/// You are given an integer array enemyEnergies denoting the energy 
+/// values of various enemies.
+///
+/// You are also given an integer currentEnergy denoting the amount of 
+/// energy you have initially.
+///
+/// You start with 0 points, and all the enemies are unmarked initially.
+///
+/// You can perform either of the following operations zero or multiple 
+/// times to gain points:
+///
+/// Choose an unmarked enemy, i, such that currentEnergy >= 
+/// enemyEnergies[i]. By choosing this option:
+/// You gain 1 point.
+/// Your energy is reduced by the enemy's energy, i.e. currentEnergy = 
+/// currentEnergy - enemyEnergies[i].
+/// If you have at least 1 point, you can choose an unmarked enemy, i. By 
+/// choosing this option:
+/// Your energy increases by the enemy's energy, i.e. currentEnergy = 
+/// currentEnergy + enemyEnergies[i].
+/// The enemy i is marked.
+/// Return an integer denoting the maximum points you can get in the end 
+/// by optimally performing operations.
+/// 
+/// Example 1:
+/// Input: enemyEnergies = [3,2,2], currentEnergy = 2
+/// Output: 3
+/// Explanation:
+/// The following operations can be performed to get 3 points, which is 
+/// the maximum:
+///
+/// First operation on enemy 1: points increases by 1, and currentEnergy 
+/// decreases by 2. So, points = 1, and currentEnergy = 0.
+/// Second operation on enemy 0: currentEnergy increases by 3, and enemy 0 
+/// is marked. So, points = 1, currentEnergy = 3, and marked enemies = [0].
+/// First operation on enemy 2: points increases by 1, and currentEnergy 
+/// decreases by 2. So, points = 2, currentEnergy = 1, and marked 
+/// enemies = [0].
+/// Second operation on enemy 2: currentEnergy increases by 2, and enemy 2 
+/// is marked. So, points = 2, currentEnergy = 3, and marked 
+/// enemies = [0, 2].
+/// First operation on enemy 1: points increases by 1, and currentEnergy 
+/// decreases by 2. So, points = 3, currentEnergy = 1, and marked 
+/// enemies = [0, 2].
+///
+/// Example 2:
+/// Input: enemyEnergies = [2], currentEnergy = 10
+/// Output: 5
+/// Explanation:
+/// Performing the first operation 5 times on enemy 0 results in the 
+/// maximum number of points.
+///
+/// Constraints:
+/// 1. 1 <= enemyEnergies.length <= 10^5
+/// 2. 1 <= enemyEnergies[i] <= 10^9
+/// 3. 0 <= currentEnergy <= 10^9
+/// </summary>
+long long LeetCodeMath::maximumPoints(vector<int>& enemyEnergies, int currentEnergy)
+{
+    sort(enemyEnergies.begin(), enemyEnergies.end());
+    long long result = 0;
+    if (currentEnergy < enemyEnergies[0]) return -0;
+    for (size_t i = 1; i < enemyEnergies.size(); i++)
+    {
+        result += enemyEnergies[i];
+    }
+    result += currentEnergy;
+    result /= enemyEnergies[0];
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3218. Minimum Cost for Cutting Cake I
+///
+/// Medium
+///
+/// There is an m x n cake that needs to be cut into 1 x 1 pieces.
+/// You are given integers m, n, and two arrays:
+/// horizontalCut of size m - 1, where horizontalCut[i] represents the 
+/// cost to cut along the horizontal line i.
+/// verticalCut of size n - 1, where verticalCut[j] represents the cost 
+/// to cut along the vertical line j.
+/// In one operation, you can choose any piece of cake that is not yet 
+/// a 1 x 1 square and perform one of the following cuts:
+///
+/// Cut along a horizontal line i at a cost of horizontalCut[i].
+/// Cut along a vertical line j at a cost of verticalCut[j].
+/// After the cut, the piece of cake is divided into two distinct pieces.
+///
+/// The cost of a cut depends only on the initial cost of the line and 
+/// does not change.
+/// Return the minimum total cost to cut the entire cake into 1 x 1 pieces.
+///
+/// Example 1:
+/// Input: m = 3, n = 2, horizontalCut = [1,3], verticalCut = [5]
+/// Output: 13
+///
+/// Explanation:
+/// Perform a cut on the vertical line 0 with cost 5, current total cost 
+/// is 5.
+/// Perform a cut on the horizontal line 0 on 3 x 1 subgrid with cost 1.
+/// Perform a cut on the horizontal line 0 on 3 x 1 subgrid with cost 1.
+/// Perform a cut on the horizontal line 1 on 2 x 1 subgrid with cost 3.
+/// Perform a cut on the horizontal line 1 on 2 x 1 subgrid with cost 3.
+/// The total cost is 5 + 1 + 1 + 3 + 3 = 13.
+///
+/// Example 2:
+/// Input: m = 2, n = 2, horizontalCut = [7], verticalCut = [4]
+/// Output: 15
+///
+/// Explanation:
+/// Perform a cut on the horizontal line 0 with cost 7.
+/// Perform a cut on the vertical line 0 on 1 x 2 subgrid with cost 4.
+/// Perform a cut on the vertical line 0 on 1 x 2 subgrid with cost 4.
+/// The total cost is 7 + 4 + 4 = 15.
+///
+/// Constraints:
+/// 1. 1 <= m, n <= 20
+/// 2. horizontalCut.length == m - 1
+/// 3. verticalCut.length == n - 1
+/// 4. 1 <= horizontalCut[i], verticalCut[i] <= 10^3
+/// </summary>
+int LeetCodeMath::minimumCostI(int m, int n, vector<int>& horizontalCut, vector<int>& verticalCut)
+{
+    priority_queue<pair<int, int>> pq;
+    for (size_t i = 0; i < horizontalCut.size(); i++)
+    {
+        pq.push(make_pair(horizontalCut[i], 0));
+    }
+    for (size_t i = 0; i < verticalCut.size(); i++)
+    {
+        pq.push(make_pair(verticalCut[i], 1));
+    }
+    int horizontal = 1;
+    int vertical = 1;
+    int result = 0;
+    while (!pq.empty())
+    {
+        pair<int, int> cost = pq.top();
+        pq.pop();
+        if (cost.second == 0)
+        {
+            result += cost.first * vertical;
+            horizontal++;
+        }
+        else
+        {
+            result += cost.first * horizontal;
+            vertical++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3219. Minimum Cost for Cutting Cake II
+///
+/// Hard
+///
+/// There is an m x n cake that needs to be cut into 1 x 1 pieces.
+/// You are given integers m, n, and two arrays:
+///
+/// horizontalCut of size m - 1, where horizontalCut[i] represents the 
+/// cost to cut along the horizontal line i.
+/// verticalCut of size n - 1, where verticalCut[j] represents the cost 
+/// to cut along the vertical line j.
+/// In one operation, you can choose any piece of cake that is not yet 
+/// a 1 x 1 square and perform one of the following cuts:
+///
+/// Cut along a horizontal line i at a cost of horizontalCut[i].
+/// Cut along a vertical line j at a cost of verticalCut[j].
+/// After the cut, the piece of cake is divided into two distinct pieces. 
+///
+/// The cost of a cut depends only on the initial cost of the line and 
+/// does not change.
+///
+/// Return the minimum total cost to cut the entire cake into 1 x 1 pieces.
+/// 
+/// Example 1:
+/// Input: m = 3, n = 2, horizontalCut = [1,3], verticalCut = [5]
+/// Output: 13
+///
+/// Explanation:
+/// Perform a cut on the vertical line 0 with cost 5, current total cost 
+/// is 5.
+/// Perform a cut on the horizontal line 0 on 3 x 1 subgrid with cost 1.
+/// Perform a cut on the horizontal line 0 on 3 x 1 subgrid with cost 1.
+/// Perform a cut on the horizontal line 1 on 2 x 1 subgrid with cost 3.
+/// Perform a cut on the horizontal line 1 on 2 x 1 subgrid with cost 3.
+/// The total cost is 5 + 1 + 1 + 3 + 3 = 13.
+///
+/// Example 2:
+/// Input: m = 2, n = 2, horizontalCut = [7], verticalCut = [4]
+/// Output: 15
+///
+/// Explanation:
+/// Perform a cut on the horizontal line 0 with cost 7.
+/// Perform a cut on the vertical line 0 on 1 x 2 subgrid with cost 4.
+/// Perform a cut on the vertical line 0 on 1 x 2 subgrid with cost 4.
+/// The total cost is 7 + 4 + 4 = 15.
+/// 
+/// Constraints:
+/// 1. 1 <= m, n <= 10^5
+/// 2. horizontalCut.length == m - 1
+/// 3. verticalCut.length == n - 1
+/// 4. 1 <= horizontalCut[i], verticalCut[i] <= 10^3
+/// </summary>
+long long LeetCodeMath::minimumCostII(int m, int n, vector<int>& horizontalCut, vector<int>& verticalCut)
+{
+    priority_queue<pair<int, int>> pq;
+    for (size_t i = 0; i < horizontalCut.size(); i++)
+    {
+        pq.push(make_pair(horizontalCut[i], 0));
+    }
+    for (size_t i = 0; i < verticalCut.size(); i++)
+    {
+        pq.push(make_pair(verticalCut[i], 1));
+    }
+    int horizontal = 1;
+    int vertical = 1;
+    long long result = 0;
+    while (!pq.empty())
+    {
+        pair<int, int> cost = pq.top();
+        pq.pop();
+        if (cost.second == 0)
+        {
+            result += (long long)cost.first * (long long)vertical;
+            horizontal++;
+        }
+        else
+        {
+            result += (long long)cost.first * (long long)horizontal;
+            vertical++;
+        }
+    }
+    return result;
+}
+/// <summary>
+/// Leet Code 3222. Find the Winning Player in Coin Game
+///
+/// Easy
+///
+/// You are given two positive integers x and y, denoting the number of 
+/// coins with values 75 and 10 respectively.
+/// 
+/// Alice and Bob are playing a game. Each turn, starting with Alice, the 
+/// player must pick up coins with a total value 115. If the player is 
+/// unable to do so, they lose the game.
+///
+/// Return the name of the player who wins the game if both players play 
+/// optimally.
+/// 
+/// Example 1:
+/// Input: x = 2, y = 7
+/// Output: "Alice"
+/// 
+/// Explanation:
+/// The game ends in a single turn:
+/// 
+/// Alice picks 1 coin with a value of 75 and 4 coins with a value of 10.
+///
+/// Example 2:
+/// Input: x = 4, y = 11
+/// Output: "Bob"
+/// Explanation:
+/// 
+/// The game ends in 2 turns:
+/// Alice picks 1 coin with a value of 75 and 4 coins with a value of 10.
+/// Bob picks 1 coin with a value of 75 and 4 coins with a value of 10.
+/// 
+/// Constraints:
+/// 1. 1 <= x, y <= 100
+/// </summary>
+string LeetCodeMath::losingPlayer(int x, int y)
+{
+    int n = min(x, y / 4);
+    if (n % 2 == 0) return "Bob";
+    return "Alice";
+}
+
+/// <summary>
+/// Leet Code 3227. Vowels Game in a String
+///
+/// Medium
+///
+/// Alice and Bob are playing a game on a string.
+/// You are given a string s, Alice and Bob will take turns playing the 
+/// following game where Alice starts first:
+///
+/// On Alice's turn, she has to remove any non-empty substring from s 
+/// that contains an odd number of vowels.
+/// On Bob's turn, he has to remove any non-empty substring from s that 
+/// contains an even number of vowels.
+/// The first player who cannot make a move on their turn loses the game. 
+/// We assume that both Alice and Bob play optimally.
+///
+/// Return true if Alice wins the game, and false otherwise.
+/// The English vowels are: a, e, i, o, and u.
+/// 
+/// Example 1:
+/// Input: s = "leetcoder"
+/// Output: true
+/// Explanation:
+/// Alice can win the game as follows:
+/// Alice plays first, she can delete the underlined substring in 
+/// s = "leetcoder" which contains 3 vowels. The resulting string is 
+/// s = "der".
+/// Bob plays second, he can delete the underlined substring in 
+/// s = "der" which contains 0 vowels. The resulting string is s = "er".
+/// Alice plays third, she can delete the whole string s = "er" which 
+/// contains 1 vowel.
+/// Bob plays fourth, since the string is empty, there is no valid play 
+/// for Bob. So Alice wins the game.
+///
+/// Example 2:
+/// Input: s = "bbcd"
+/// Output: false
+/// Explanation:
+/// There is no valid play for Alice in her first turn, so Alice loses the 
+/// game.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists only of lowercase English letters.
+/// </summary>
+bool LeetCodeMath::doesAliceWin(string s)
+{
+    unordered_set<char> vowels = { 'a', 'e', 'i', 'o', 'u' };
+    int count = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (vowels.count(s[i]) > 0) count++;
+    }
+    if ((count % 2 == 0 && count > 0) || (count % 2 == 1)) return true;
+    else return false;
+}
+
+/// <summary>
+/// Leet Code 3232. Find if Digit Game Can Be Won
+///
+/// Easy
+///
+/// You are given an array of positive integers nums.
+/// Alice and Bob are playing a game. In the game, Alice can choose either 
+/// all single-digit numbers or all double-digit numbers from nums, and 
+/// the rest of the numbers are given to Bob. Alice wins if the sum of her 
+/// numbers is strictly greater than the sum of Bob's numbers.
+///
+/// Return true if Alice can win this game, otherwise, return false.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,3,4,10]
+/// Output: false
+/// Explanation:
+/// Alice cannot win by choosing either single-digit or double-digit 
+/// numbers.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4,5,14]
+/// Output: true
+/// Explanation:
+/// Alice can win by choosing single-digit numbers which have a sum equal 
+/// to 15.
+///
+/// Example 3:
+/// Input: nums = [5,5,5,25]
+/// Output: true
+/// Explanation:
+/// Alice can win by choosing double-digit numbers which have a sum 
+/// equal to 25.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 99
+/// </summary>
+bool LeetCodeMath::canAliceWin(vector<int>& nums)
+{
+    int single_digit = 0, double_digit = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] < 10) single_digit += nums[i];
+        else double_digit += nums[i];
+    }
+    if (single_digit == double_digit)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+/// <summary>
+/// Leet Code 3233. Find the Count of Numbers Which Are Not Special
+///
+/// Medium
+///
+/// You are given 2 positive integers l and r. For any number x, all 
+/// positive divisors of x except x are called the proper divisors of x.
+///
+/// A number is called special if it has exactly 2 proper divisors. For 
+/// example:
+///
+/// The number 4 is special because it has proper divisors 1 and 2.
+/// The number 6 is not special because it has proper divisors 1, 2, and 3.
+/// Return the count of numbers in the range [l, r] that are not special.
+///
+/// Example 1:
+/// Input: l = 5, r = 7
+/// Output: 3
+/// Explanation:
+/// There are no special numbers in the range [5, 7].
+///
+/// Example 2:
+/// Input: l = 4, r = 16
+/// Output: 11
+/// Explanation:
+/// The special numbers in the range [4, 16] are 4 and 9.
+/// 
+/// Constraints:
+/// 1. 1 <= l <= r <= 10^9
+/// </summary>
+int LeetCodeMath::nonSpecialCount(int l, int r)
+{
+    int s_l = (int)sqrt(l);
+    int s_r = (int)sqrt(r);
+    int result = 0;
+    if (s_l * s_l < l || l == 1) s_l++;
+    for (int i = s_l; i <= s_r; i++)
+    {
+        bool isPrime = true;
+        for (int j = 2; j <= (int)sqrt(i); j++)
+        {
+            if (i % j == 0)
+            {
+                isPrime = false;
+                break;
+            }
+        }
+        if (isPrime) result++;
+    }
+    return (r -l + 1) - result;
+}
+
+
+/// <summary>
+/// Leet Code 3264. Final Array State After K Multiplication Operations I
+/// 
+/// Easy
+///
+/// You are given an integer array nums, an integer k, and an integer 
+/// multiplier.
+///
+/// You need to perform k operations on nums. In each operation:
+/// Find the minimum value x in nums. If there are multiple occurrences 
+/// of the minimum value, select the one that appears first.
+/// Replace the selected minimum value x with x * multiplier.
+/// Return an integer array denoting the final state of nums after 
+/// performing all k operations.
+/// 
+/// Example 1:
+/// Input: nums = [2,1,3,5,6], k = 5, multiplier = 2
+/// Output: [8,4,6,5,6]
+/// Explanation:
+/// Operation	Result
+/// After operation 1	[2, 2, 3, 5, 6]
+/// After operation 2	[4, 2, 3, 5, 6]
+/// After operation 3	[4, 4, 3, 5, 6]
+/// After operation 4	[4, 4, 6, 5, 6]
+/// After operation 5	[8, 4, 6, 5, 6]
+///
+/// Example 2:
+/// Input: nums = [1,2], k = 3, multiplier = 4
+/// Output: [16,8]
+/// Explanation:
+/// Operation	Result
+/// After operation 1	[4, 2]
+/// After operation 2	[4, 8]
+/// After operation 3	[16, 8]
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 100
+/// 3. 1 <= k <= 10
+/// 4. 1 <= multiplier <= 5
+/// </summary>
+vector<int> LeetCodeMath::getFinalStateI(vector<int>& nums, int k, int multiplier)
+{
+    set<pair<int, int>> heap;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        heap.insert(make_pair(nums[i], i));
+    }
+    for (int i = 0; i < k; i++)
+    {
+        pair<int, int> item = *heap.begin();
+        heap.erase(heap.begin());
+        item.first *= multiplier;
+        heap.insert(item);
+    }
+    vector<int> result(nums.size());
+    while (!heap.empty())
+    {
+        pair<int, int> item = *heap.begin();
+        heap.erase(heap.begin());
+        result[item.second] = item.first;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3266. Final Array State After K Multiplication Operations II
+/// 
+/// Hard
+///
+/// You are given an integer array nums, an integer k, and an integer 
+/// multiplier.
+///
+/// You need to perform k operations on nums. In each operation:
+///
+/// Find the minimum value x in nums. If there are multiple occurrences 
+/// of the minimum value, select the one that appears first.
+/// Replace the selected minimum value x with x * multiplier.
+/// After the k operations, apply modulo 109 + 7 to every value in nums.
+///
+/// Return an integer array denoting the final state of nums after 
+/// performing all k operations and then applying the modulo.
+/// 
+/// Example 1:
+/// Input: nums = [2,1,3,5,6], k = 5, multiplier = 2
+/// Output: [8,4,6,5,6]
+/// Explanation:
+/// Operation	Result
+/// After operation 1	[2, 2, 3, 5, 6]
+/// After operation 2	[4, 2, 3, 5, 6]
+/// After operation 3	[4, 4, 3, 5, 6]
+/// After operation 4	[4, 4, 6, 5, 6]
+/// After operation 5	[8, 4, 6, 5, 6]
+/// After applying modulo	[8, 4, 6, 5, 6]
+///
+/// Example 2:
+/// Input: nums = [100000,2000], k = 2, multiplier = 1000000
+/// Output: [999999307,999999993]
+/// Explanation:
+/// Operation	Result
+/// After operation 1	[100000, 2000000000]
+/// After operation 2	[100000000000, 2000000000]
+/// After applying modulo	[999999307, 999999993]
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^4
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= k <= 10^9
+/// 4. 1 <= multiplier <= 10^6
+/// </summary>
+vector<int> LeetCodeMath::getFinalStateII(vector<int>& nums, int k, int multiplier)
+{
+    long long M = 1000000007;
+    vector<int> result(nums.size());
+    if (multiplier == 1)
+    {
+        for (size_t i = 0; i < nums.size(); i++)
+        {
+            result[i] = nums[i];
+        }
+        return result;
+    }
+    set<pair<long long, int>> heap;
+    long long max_val = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        heap.insert(make_pair(nums[i], i));
+        max_val = max(max_val, (long long)nums[i]);
+    }
+    while (k > 0)
+    {
+        pair<long long, int> item = *heap.begin();
+        if (item.first >= max_val) break;
+        heap.erase(heap.begin());
+        item.first *= multiplier;
+        k--;
+        heap.insert(item);
+    }
+    int p = k / nums.size();
+    int q = k % nums.size();
+    while (!heap.empty())
+    {
+        pair<long long, int> item = *heap.begin();
+        heap.erase(heap.begin());
+        item.first = (item.first % M * modPow(multiplier, p, M)) % M;
+        if (q > 0)
+        {
+            item.first = item.first * multiplier % M;
+            q--;
+        }
+        result[item.second] = (int)(item.first % M);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3265. Count Almost Equal Pairs I
+/// 
+/// Medium
+///
+/// You are given an array nums consisting of positive integers.
+///
+/// We call two integers x and y in this problem almost equal if both 
+/// integers can become equal after performing the following operation 
+/// at most once:
+/// 
+/// Choose either x or y and swap any two digits within the chosen number.
+/// Return the number of indices i and j in nums where i < j such that 
+/// nums[i] and nums[j] are almost equal.
+///
+/// Note that it is allowed for an integer to have leading zeros after 
+/// performing an operation.
+/// 
+/// 
+/// Example 1:
+/// Input: nums = [3,12,30,17,21]
+/// Output: 2
+/// Explanation:
+/// The almost equal pairs of elements are:
+/// 3 and 30. By swapping 3 and 0 in 30, you get 3.
+/// 12 and 21. By swapping 1 and 2 in 12, you get 21.
+///
+/// Example 2:
+/// Input: nums = [1,1,1,1,1]
+/// Output: 10
+/// Explanation:
+/// Every two elements in the array are almost equal.
+/// Example 3:
+/// Input: nums = [123,231]
+/// Output: 0
+///
+/// Explanation:
+/// We cannot swap any two digits of 123 or 231 to reach the other.
+///  
+/// Constraints:
+/// 1. 2 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 10^6
+/// </summary>
+int LeetCodeMath::countPairsI(vector<int>& nums)
+{
+    int result = 0;
+    map<int, int> num_count;
+    sort(nums.begin(), nums.end());
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (num_count.count(nums[i]) > 0) result += num_count[nums[i]];
+        string str = to_string(nums[i]);
+        for (size_t j = 0; j < str.size(); j++)
+        {
+            for (size_t k = j + 1; k < str.size(); k++)
+            {
+                if (str[j] == str[k]) continue;
+                string temp = str;
+                swap(temp[j], temp[k]);
+                int val = atoi(temp.c_str());
+                if (num_count.count(val) > 0) result += num_count[val];
+            }
+        }
+        num_count[nums[i]]++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3267. Count Almost Equal Pairs II
+/// 
+/// Hard
+///
+/// Attention: In this version, the number of operations that can be 
+/// performed, has been increased to twice.
+///
+/// You are given an array nums consisting of positive integers.
+/// We call two integers x and y almost equal if both integers can become 
+/// equal after performing the following operation at most twice:
+///
+/// Choose either x or y and swap any two digits within the chosen number.
+/// Return the number of indices i and j in nums where i < j such that 
+/// nums[i] and nums[j] are almost equal.
+///
+/// Note that it is allowed for an integer to have leading zeros after 
+/// performing an operation.
+/// 
+/// Example 1:
+/// Input: nums = [1023,2310,2130,213]
+/// Output: 4
+/// Explanation:
+/// The almost equal pairs of elements are:
+/// 1023 and 2310. By swapping the digits 1 and 2, and then the digits 0 
+/// and 3 in 1023, you get 2310.
+/// 1023 and 213. By swapping the digits 1 and 0, and then the digits 1 
+/// and 2 in 1023, you get 0213, which is 213.
+/// 2310 and 213. By swapping the digits 2 and 0, and then the digits 3 
+/// and 2 in 2310, you get 0213, which is 213.
+/// 2310 and 2130. By swapping the digits 3 and 1 in 2310, you get 2130.
+///
+/// Example 2:
+/// Input: nums = [1,10,100]
+/// Output: 3
+/// Explanation:
+/// The almost equal pairs of elements are:
+/// 1 and 10. By swapping the digits 1 and 0 in 10, you get 01 which is 1.
+/// 1 and 100. By swapping the second 0 with the digit 1 in 100, you get 
+/// 001, which is 1.
+/// 10 and 100. By swapping the first 0 with the digit 1 in 100, you 
+/// get 010, which is 10.
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length <= 5000
+/// 2. 1 <= nums[i] < 10^7
+/// </summary>
+int LeetCodeMath::countPairsII(vector<int>& nums)
+{
+    int result = 0;
+    map<int, int> num_count;
+    sort(nums.begin(), nums.end());
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        set<int> my_set;
+        if (num_count.count(nums[i]) > 0) result += num_count[nums[i]];
+        my_set.insert(nums[i]);
+        string str = to_string(nums[i]);
+        for (size_t p1 = 0; p1 < str.size(); p1++)
+        {
+            for (size_t p2 = p1 + 1; p2 < str.size(); p2++)
+            {
+                if (str[p1] == str[p2]) continue;
+                string temp1 = str;
+                swap(temp1[p1], temp1[p2]);
+                int val = atoi(temp1.c_str());
+                if (num_count.count(val) > 0 && my_set.count(val) == 0)
+                {
+                    result += num_count[val];
+                    my_set.insert(val);
+                }
+                for (size_t p3 = p1 + 1; p3 < str.size(); p3++)
+                {
+                    for (size_t p4 = p3 + 1; p4 < str.size(); p4++)
+                    {
+                        if (str[p3] == str[p4]) continue;
+                        {
+                            string temp2 = temp1;
+                            swap(temp2[p3], temp2[p4]);
+                            int val = atoi(temp2.c_str());
+                            if (num_count.count(val) > 0 && my_set.count(val) == 0)
+                            {
+                                result += num_count[val];
+                                my_set.insert(val);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        num_count[nums[i]]++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3270. Find the Key of the Numbers
+/// 
+/// Easy
+///
+/// You are given three positive integers num1, num2, and num3.
+///
+/// The key of num1, num2, and num3 is defined as a four-digit number 
+/// such that:
+///
+/// Initially, if any number has less than four digits, it is padded 
+/// with leading zeros.
+/// The ith digit (1 <= i <= 4) of the key is generated by taking the 
+/// smallest digit among the ith digits of num1, num2, and num3.
+/// Return the key of the three numbers without leading zeros (if any).
+///
+/// Example 1:
+/// Input: num1 = 1, num2 = 10, num3 = 1000
+/// Output: 0
+///
+/// Explanation:
+/// On padding, num1 becomes "0001", num2 becomes "0010", and num3 
+/// remains "1000".
+///
+/// The 1st digit of the key is min(0, 0, 1).
+/// The 2nd digit of the key is min(0, 0, 0).
+/// The 3rd digit of the key is min(0, 1, 0).
+/// The 4th digit of the key is min(1, 0, 0).
+/// Hence, the key is "0000", i.e. 0.
+///
+/// Example 2:
+/// Input: num1 = 987, num2 = 879, num3 = 798
+/// Output: 777
+///
+/// Example 3:
+/// Input: num1 = 1, num2 = 2, num3 = 3
+/// Output: 1
+/// 
+/// Constraints:
+/// 1. 1 <= num1, num2, num3 <= 9999
+/// </summary>
+int LeetCodeMath::generateKey(int num1, int num2, int num3)
+{
+    int result = 0;
+    int multiple = 1;
+    for (int i = 0; i < 4; i++)
+    {
+        result += min(min(num1 % 10, num2 % 10), num3 % 10) * multiple;
+        multiple *= 10;
+        num1 /= 10;
+        num2 /= 10;
+        num3 /= 10;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3274. Check if Two Chessboard Squares Have the Same Color
+/// 
+/// Easy
+///
+/// You are given two strings, coordinate1 and coordinate2, representing 
+/// the coordinates of a square on an 8 x 8 chessboard.
+///
+/// Below is the chessboard for reference.
+/// Return true if these two squares have the same color and false 
+/// otherwise.
+///
+/// The coordinate will always represent a valid chessboard square. The 
+/// coordinate will always have the letter first (indicating its column), 
+/// and the number second (indicating its row).
+///
+/// Example 1:
+/// Input: coordinate1 = "a1", coordinate2 = "c3"
+/// Output: true
+/// Explanation:
+/// Both squares are black.
+///
+/// Example 2:
+/// Input: coordinate1 = "a1", coordinate2 = "h3"
+/// Output: false
+/// Explanation:
+/// Square "a1" is black and "h3" is white.
+///
+/// Constraints:
+/// 1. coordinate1.length == coordinate2.length == 2
+/// 2. 'a' <= coordinate1[0], coordinate2[0] <= 'h'
+/// 3. '1' <= coordinate1[1], coordinate2[1] <= '8'
+/// </summary>
+bool LeetCodeMath::checkTwoChessboards(string coordinate1, string coordinate2)
+{
+    if ((coordinate1[0] - 'a' + coordinate1[1] - '1') % 2 ==
+        (coordinate2[0] - 'a' + coordinate2[1] - '1') % 2)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 #pragma endregion
 

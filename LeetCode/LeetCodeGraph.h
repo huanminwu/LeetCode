@@ -10631,6 +10631,157 @@ public:
     /// 7. There are no repeated edges.
     /// </summary>
     vector<bool> findAnswer(int n, vector<vector<int>>& edges);
+
+    /// <summary>
+    /// Leet Code 3235. Check if the Rectangle Corner Is Reachable
+    ///
+    /// Hard
+    ///
+    /// You are given two positive integers X and Y, and a 2D array circles, 
+    /// where circles[i] = [xi, yi, ri] denotes a circle with center at 
+    /// (xi, yi) and radius ri.
+    ///
+    /// There is a rectangle in the coordinate plane with its bottom left 
+    /// corner at the origin and top right corner at the coordinate (X, Y). 
+    /// You need to check whether there is a path from the bottom left corner 
+    /// to the top right corner such that the entire path lies inside the 
+    /// rectangle, does not touch or lie inside any circle, and touches the 
+    /// rectangle only at the two corners.
+    ///
+    /// Return true if such a path exists, and false otherwise.
+    /// Example 1:
+    /// Input: X = 3, Y = 4, circles = [[2,1,1]]
+    /// Output: true
+    /// 
+    /// Explanation:
+    /// The black curve shows a possible path between (0, 0) and (3, 4).
+    ///
+    /// Example 2:
+    /// Input: X = 3, Y = 3, circles = [[1,1,2]]
+    /// Output: false
+    /// 
+    /// Explanation:
+    /// No path exists from (0, 0) to (3, 3).
+    ///
+    /// Example 3:
+    /// Input: X = 3, Y = 3, circles = [[2,1,1],[1,2,1]]
+    /// Output: false
+    ///
+    /// Explanation:
+    /// No path exists from (0, 0) to (3, 3).
+    ///
+    /// Constraints:
+    /// 1. 3 <= X, Y <= 10^9
+    /// 2. 1 <= circles.length <= 1000
+    /// 3. circles[i].length == 3
+    /// 4. 1 <= xi, yi, ri <= 109
+    /// </summary>
+    bool canReachCorner(int X, int Y, vector<vector<int>>& circles);
+
+    /// <summary>
+    /// Leet Code 3243. Shortest Distance After Road Addition Queries I
+    /// 
+    /// Medium
+    ///	
+    /// You are given an integer n and a 2D integer array queries.
+    /// There are n cities numbered from 0 to n - 1. Initially, there is a 
+    /// unidirectional road from city i to city i + 1 for all 0 <= i < n - 1.
+    ///
+    /// queries[i] = [ui, vi] represents the addition of a new unidirectional 
+    /// road from city ui to city vi. After each query, you need to find the 
+    /// length of the shortest path from city 0 to city n - 1.
+    ///
+    /// Return an array answer where for each i in the range 
+    /// [0, queries.length - 1], answer[i] is the length of the shortest path 
+    /// from city 0 to city n - 1 after processing the first i + 1 queries.
+    ///
+    /// Example 1:
+    /// Input: n = 5, queries = [[2,4],[0,2],[0,4]]
+    /// Output: [3,2,1]
+    /// Explanation:
+    /// After the addition of the road from 2 to 4, the length of the 
+    /// shortest path from 0 to 4 is 3.
+    /// 
+    /// After the addition of the road from 0 to 2, the length of the shortest 
+    /// path from 0 to 4 is 2.
+    ///
+    /// After the addition of the road from 0 to 4, the length of the shortest 
+    /// path from 0 to 4 is 1.
+    ///
+    /// Example 2:
+    /// Input: n = 4, queries = [[0,3],[0,2]]
+    /// Output: [1,1]
+    /// Explanation:
+    /// After the addition of the road from 0 to 3, the length of the shortest 
+    /// path from 0 to 3 is 1.
+    /// 
+    /// After the addition of the road from 0 to 2, the length of the shortest 
+    /// path remains 1.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= n <= 500
+    /// 2. 1 <= queries.length <= 500
+    /// 3. queries[i].length == 2
+    /// 4. 0 <= queries[i][0] < queries[i][1] < n
+    /// 5. 1 < queries[i][1] - queries[i][0]
+    /// 6. There are no repeated roads among the queries.
+    /// </summary>
+    vector<int> shortestDistanceAfterQueriesI(int n, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet Code 3244. Shortest Distance After Road Addition Queries II
+    /// 
+    /// Hard
+    /// 
+    /// You are given an integer n and a 2D integer array queries.
+    /// There are n cities numbered from 0 to n - 1. Initially, there is a 
+    /// unidirectional road from city i to city i + 1 for all 0 <= i < n - 1.
+    ///
+    /// queries[i] = [ui, vi] represents the addition of a new unidirectional 
+    /// road from city ui to city vi. After each query, you need to find the 
+    /// length of the shortest path from city 0 to city n - 1.
+    ///
+    /// There are no two queries such that queries[i][0] < queries[j][0] < 
+    /// queries[i][1] < queries[j][1].
+    ///
+    /// Return an array answer where for each i in the range [0, 
+    /// queries.length - 1], answer[i] is the length of the shortest path 
+    /// from city 0 to city n - 1 after processing the first i + 1 queries.
+    /// 
+    /// Example 1:
+    /// Input: n = 5, queries = [[2,4],[0,2],[0,4]]
+    /// Output: [3,2,1]
+    /// Explanation:
+    /// 
+    /// After the addition of the road from 2 to 4, the length of the 
+    /// shortest path from 0 to 4 is 3.
+    /// After the addition of the road from 0 to 2, the length of the 
+    /// shortest path from 0 to 4 is 2.
+    /// 
+    /// After the addition of the road from 0 to 4, the length of the shortest 
+    /// path from 0 to 4 is 1.
+    ///
+    /// Example 2:
+    /// Input: n = 4, queries = [[0,3],[0,2]]
+    /// Output: [1,1]
+    /// Explanation:
+    /// After the addition of the road from 0 to 3, the length of the shortest 
+    /// path from 0 to 3 is 1.
+    ///
+    /// After the addition of the road from 0 to 2, the length of the shortest 
+    /// path remains 1.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= n <= 10^5
+    /// 2. 1 <= queries.length <= 10^5
+    /// 3. queries[i].length == 2
+    /// 4. 0 <= queries[i][0] < queries[i][1] < n
+    /// 5. 1 < queries[i][1] - queries[i][0]
+    /// 6. There are no repeated roads among the queries.
+    /// 7. There are no two queries such that i != j and queries[i][0] < 
+    ///    queries[j][0] < queries[i][1] < queries[j][1].
+    /// </summary>
+    vector<int> shortestDistanceAfterQueriesII(int n, vector<vector<int>>& queries);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

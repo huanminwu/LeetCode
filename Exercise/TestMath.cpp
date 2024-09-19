@@ -6980,8 +6980,338 @@ void TestLeetCode3183(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3190(void)
+{
+    Logger::WriteMessage("Test Leet Code 3190");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 2, 3, 4 };
+    int result = leetCode.minimumOperationsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,6,9 };
+    result = leetCode.minimumOperationsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3195(void)
+{
+    Logger::WriteMessage("Test Leet Code 3195");
+    LeetCodeMath leetCode;
+    vector<vector<int>> grid = { {0, 1, 0},{1, 0, 1} };
+    int result = leetCode.minimumArea(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1, 0},{0, 0} };
+    result = leetCode.minimumArea(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3197(void)
+{
+    Logger::WriteMessage("Test Leet Code 3197");
+    LeetCodeMath leetCode;
+    vector<vector<int>> grid = { {1, 0, 1},{1, 1, 1} };
+    int result = leetCode.minimumSumArea(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1, 0, 1, 0},{0, 1, 0, 1} };
+    result = leetCode.minimumSumArea(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3200(void)
+{
+    Logger::WriteMessage("Test Leet Code 3200");
+    LeetCodeMath leetCode;
+    int red = 2, blue = 4;
+    int result = leetCode.maxHeightOfTriangle(red, blue);
+    Logger::WriteMessage("red = " + to_string(red) + "; blue = " + to_string(blue));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    red = 2, blue = 1;
+    result = leetCode.maxHeightOfTriangle(red, blue);
+    Logger::WriteMessage("red = " + to_string(red) + "; blue = " + to_string(blue));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    red = 1, blue = 1;
+    result = leetCode.maxHeightOfTriangle(red, blue);
+    Logger::WriteMessage("red = " + to_string(red) + "; blue = " + to_string(blue));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    red = 10, blue = 1;
+    result = leetCode.maxHeightOfTriangle(red, blue);
+    Logger::WriteMessage("red = " + to_string(red) + "; blue = " + to_string(blue));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3207(void)
+{
+    Logger::WriteMessage("Test Leet Code 3207");
+    LeetCodeMath leetCode;
+    vector<int> enemyEnergies = { 3, 2, 2 };
+    int currentEnergy = 2;
+    long long result = leetCode.maximumPoints(enemyEnergies, currentEnergy);
+    Logger::WriteMessage(enemyEnergies);
+    Logger::WriteMessage("currentEnergy = " + to_string(currentEnergy));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    enemyEnergies = { 2 };
+    currentEnergy = 10;
+    result = leetCode.maximumPoints(enemyEnergies, currentEnergy);
+    Logger::WriteMessage(enemyEnergies);
+    Logger::WriteMessage("currentEnergy = " + to_string(currentEnergy));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3218(void)
+{
+    Logger::WriteMessage("Test Leet Code 3218");
+    LeetCodeMath leetCode;
+    int m = 3, n = 2;
+    vector<int> horizontalCut = { 1, 3 };
+    vector<int> verticalCut = { 5 };
+    int result = leetCode.minimumCostI(m, n, horizontalCut, verticalCut);
+    Logger::WriteMessage(horizontalCut);
+    Logger::WriteMessage(verticalCut);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    m = 2, n = 2;
+    horizontalCut = { 7 };
+    verticalCut = { 4 };
+    result = leetCode.minimumCostI(m, n, horizontalCut, verticalCut);
+    Logger::WriteMessage(horizontalCut);
+    Logger::WriteMessage(verticalCut);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3219(void)
+{
+    Logger::WriteMessage("Test Leet Code 3219");
+    LeetCodeMath leetCode;
+    int m = 3, n = 2;
+    vector<int> horizontalCut = { 1, 3 };
+    vector<int> verticalCut = { 5 };
+    long long result = leetCode.minimumCostII(m, n, horizontalCut, verticalCut);
+    Logger::WriteMessage(horizontalCut);
+    Logger::WriteMessage(verticalCut);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    m = 2, n = 2;
+    horizontalCut = { 7 };
+    verticalCut = { 4 };
+    result = leetCode.minimumCostII(m, n, horizontalCut, verticalCut);
+    Logger::WriteMessage(horizontalCut);
+    Logger::WriteMessage(verticalCut);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3222(void)
+{
+    Logger::WriteMessage("Test Leet Code 3222");
+    LeetCodeMath leetCode;
+    int x = 2, y = 7;
+    string result = leetCode.losingPlayer(x, y);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; result = " + result);
+
+    x = 4, y = 11;
+    result = leetCode.losingPlayer(x, y);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; result = " + result);
+}
+
+void TestLeetCode3227(void)
+{
+    Logger::WriteMessage("Test Leet Code 3227");
+    LeetCodeMath leetCode;
+    string   s = "leetcoder";
+    bool result = leetCode.doesAliceWin(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "bbcd";
+    result = leetCode.doesAliceWin(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3232(void)
+{
+    Logger::WriteMessage("Test Leet Code 3232");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 10 };
+    bool result = leetCode.canAliceWin(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,2,3,4,5,14 };
+    result = leetCode.canAliceWin(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 5,5,5,25 };
+    result = leetCode.canAliceWin(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3233(void)
+{
+    Logger::WriteMessage("Test Leet Code 3233");
+    LeetCodeMath leetCode;
+    int l = 5, r = 7;
+    int result = leetCode.nonSpecialCount(l, r);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r) + "; result = " + to_string(result));
+
+    l = 4, r = 16;
+    result = leetCode.nonSpecialCount(l, r);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r) + "; result = " + to_string(result));
+
+}
+
+void TestLeetCode3264(void)
+{
+    Logger::WriteMessage("Test Leet Code 3264");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 2, 1, 3, 5, 6 };
+    int k = 5, multiplier = 2;
+    vector<int> result = leetCode.getFinalStateI(nums, k, multiplier);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; multiplier = " + to_string(multiplier));
+    Logger::WriteMessage(result);
+
+    nums = { 1,2 };
+    k = 3, multiplier = 4;
+    result = leetCode.getFinalStateI(nums, k, multiplier);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; multiplier = " + to_string(multiplier));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3266(void)
+{
+    Logger::WriteMessage("Test Leet Code 3266");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 2, 1, 3, 5, 6 };
+    int k = 5, multiplier = 2;
+    vector<int> result = leetCode.getFinalStateII(nums, k, multiplier);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; multiplier = " + to_string(multiplier));
+    Logger::WriteMessage(result);
+
+    nums = { 100000,2000 };
+    k = 2, multiplier = 1000000;
+    result = leetCode.getFinalStateII(nums, k, multiplier);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; multiplier = " + to_string(multiplier));
+    Logger::WriteMessage(result);
+
+    nums = { 66307295, 441787703 };
+    k = 2;
+    multiplier = 641725;
+    result = leetCode.getFinalStateII(nums, k, multiplier);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; multiplier = " + to_string(multiplier));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3265(void)
+{
+    Logger::WriteMessage("Test Leet Code 3265");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 3, 12, 30, 17, 21 };
+    int result = leetCode.countPairsI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1,1,1 };
+    result = leetCode.countPairsI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 123,231 };
+    result = leetCode.countPairsI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3270(void)
+{
+    Logger::WriteMessage("Test Leet Code 3270");
+    LeetCodeMath leetCode;
+    int num1 = 1, num2 = 10, num3 = 1000;
+    int result = leetCode.generateKey(num1, num2, num3);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 = " + to_string(num2) + "; num3 = " + to_string(num3));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    num1 = 987, num2 = 879, num3 = 798;
+    result = leetCode.generateKey(num1, num2, num3);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 = " + to_string(num2) + "; num3 = " + to_string(num3));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    num1 = 1, num2 = 2, num3 = 3;
+    result = leetCode.generateKey(num1, num2, num3);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 = " + to_string(num2) + "; num3 = " + to_string(num3));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3267(void)
+{
+    Logger::WriteMessage("Test Leet Code 3265");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1023,2310,2130,213 };
+    int result = leetCode.countPairsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,10,100 };
+    result = leetCode.countPairsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 123,231 };
+    result = leetCode.countPairsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3274(void)
+{
+    Logger::WriteMessage("Test Leet Code 3274");
+    LeetCodeMath leetCode;
+    string coordinate1 = "a1", coordinate2 = "c3";
+    bool result = leetCode.checkTwoChessboards(coordinate1, coordinate2);
+    Logger::WriteMessage("coordinate1 = " + coordinate1  + "; coordinate2 = " + coordinate2);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    coordinate1 = "a1", coordinate2 = "h3";
+    result = leetCode.checkTwoChessboards(coordinate1, coordinate2);
+    Logger::WriteMessage("coordinate1 = " + coordinate1 + "; coordinate2 = " + coordinate2);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3274();
+    TestLeetCode3267();
+    TestLeetCode3270();
+    TestLeetCode3265();
+    TestLeetCode3266();
+    TestLeetCode3264();
+    TestLeetCode3233();
+    TestLeetCode3232();
+    TestLeetCode3227();
+    TestLeetCode3222();
+    TestLeetCode3219();
+    TestLeetCode3218();
+    TestLeetCode3207();
+    TestLeetCode3200();
+    TestLeetCode3197();
+    TestLeetCode3195();
+    TestLeetCode3190();
     TestLeetCode3183();
     TestLeetCode3178();
     TestLeetCode3162();

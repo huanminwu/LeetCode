@@ -7341,6 +7341,174 @@ public:
     /// 2. 1 <= Node.val <= 10^9
     /// </summary>
     int minimumSumLevel(TreeNode* root);
+
+    /// <summary>
+    /// LeetCode 3203. Find Minimum Diameter After Merging Two Trees
+    /// </summary>
+    pair<int, int> minimumDiameterAfterMerge(vector<vector<int>>& edges);
+
+    /// <summary>
+    /// LeetCode 3203. Find Minimum Diameter After Merging Two Trees
+    ///
+    /// Hard
+    ///
+    /// There exist two undirected trees with n and m nodes, numbered from 0 
+    /// to n - 1 and from 0 to m - 1, respectively. You are given two 2D 
+    /// integer arrays edges1 and edges2 of lengths n - 1 and m - 1, 
+    /// respectively, where edges1[i] = [ai, bi] indicates that there is an 
+    /// edge between nodes ai and bi in the first tree and 
+    /// edges2[i] = [ui, vi] indicates that there is an edge between nodes 
+    /// ui and vi in the second tree.
+    ///
+    /// You must connect one node from the first tree with another node from 
+    /// the second tree with an edge.
+    ///
+    /// Return the minimum possible diameter of the resulting tree.
+    ///
+    /// The diameter of a tree is the length of the longest path between any 
+    /// two nodes in the tree.
+    ///
+    /// Example 1:
+    /// Input: edges1 = [[0,1],[0,2],[0,3]], edges2 = [[0,1]]
+    /// Output: 3
+    /// Explanation:
+    /// We can obtain a tree of diameter 3 by connecting node 0 from the 
+    /// first tree with any node from the second tree.
+    ///
+    /// Example 2:
+    /// Input: edges1 = [[0,1],[0,2],[0,3],[2,4],[2,5],[3,6],[2,7]], 
+    /// edges2 = [[0,1],[0,2],[0,3],[2,4],[2,5],[3,6],[2,7]]
+    ///
+    /// Output: 5
+    /// Explanation:
+    /// We can obtain a tree of diameter 5 by connecting node 0 from the 
+    /// first tree with node 0 from the second tree.
+    ///
+    ///
+    /// Constraints:
+    /// 1. 1 <= n, m <= 10^5
+    /// 2. edges1.length == n - 1
+    /// 3. edges2.length == m - 1
+    /// 4. edges1[i].length == edges2[i].length == 2
+    /// 5. edges1[i] = [ai, bi]
+    /// 6. 0 <= ai, bi < n
+    /// 7. edges2[i] = [ui, vi]
+    /// 8. 0 <= ui, vi < m
+    /// 9. The input is generated such that edges1 and edges2 represent valid 
+    ///    trees.
+    /// </summary>
+    int minimumDiameterAfterMerge(vector<vector<int>>& edges1, vector<vector<int>>& edges2);
+
+    /// <summary>
+    /// Leet Code 3241. Time Taken to Mark All Nodes
+    /// </summary>
+    int timeTakenDFS(int parent, int node, vector<vector<int>>& neighbors, vector<vector<int>>&treeNodes);
+
+    /// <summary>
+    /// Leet Code 3241. Time Taken to Mark All Nodes
+    /// 
+    /// Hard
+    /// 
+    /// There exists an undirected tree with n nodes numbered 0 to n - 1. You 
+    /// are given a 2D integer array edges of length n - 1, where 
+    /// edges[i] = [ui, vi] indicates that there is an edge between nodes ui 
+    /// and vi in the tree.
+    ///
+    /// Initially, all nodes are unmarked. For each node i:
+    /// If i is odd, the node will get marked at time x if there is at least 
+    /// one node adjacent to it which was marked at time x - 1.
+    /// If i is even, the node will get marked at time x if there is at least 
+    /// one node adjacent to it which was marked at time x - 2.
+    /// Return an array times where times[i] is the time when all nodes get 
+    /// marked in the tree, if you mark node i at time t = 0.
+    ///
+    /// Note that the answer for each times[i] is independent, i.e. when you 
+    /// mark node i all other nodes are unmarked.
+    ///
+    /// Example 1:
+    /// Input: edges = [[0,1],[0,2]]
+    /// Output: [2,4,3]
+    /// Explanation:
+    /// For i = 0:
+    /// Node 1 is marked at t = 1, and Node 2 at t = 2.
+    /// For i = 1:
+    /// Node 0 is marked at t = 2, and Node 2 at t = 4.
+    /// For i = 2:
+    /// Node 0 is marked at t = 2, and Node 1 at t = 3.
+    ///
+    /// Example 2:
+    /// Input: edges = [[0,1]]
+    /// Output: [1,2]
+    /// Explanation:
+    /// For i = 0:
+    /// Node 1 is marked at t = 1.
+    /// For i = 1:
+    /// Node 0 is marked at t = 2.
+    ///
+    /// Example 3:
+    /// Input: edges = [[2,4],[0,1],[2,3],[0,2]]
+    /// Output: [4,6,3,5,5]
+    /// Explanation:
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 10^5
+    /// 2. edges.length == n - 1
+    /// 3. edges[i].length == 2
+    /// 4. 0 <= edges[i][0], edges[i][1] <= n - 1
+    /// 5. The input is generated such that edges represents a valid tree.
+    /// </summary>
+    vector<int> timeTaken(vector<vector<int>>& edges);
+
+    /// <summary>
+    /// Leet Code 3249. Count the Number of Good Nodes
+    /// </summary>
+    int countGoodNodesDFS(int parent, int node, vector<vector<int>>& neighbors, int &result);
+
+    /// <summary>
+    /// Leet Code 3249. Count the Number of Good Nodes
+    /// 
+    /// Medium
+    ///
+    /// There is an undirected tree with n nodes labeled from 0 to n - 1, 
+    /// and rooted at node 0. You are given a 2D integer array edges of length 
+    /// n - 1, where edges[i] = [ai, bi] indicates that there is an edge 
+    /// between nodes ai and bi in the tree.
+    ///
+    /// A node is good if all the subtrees rooted at its children have the 
+    /// same size.
+    ///
+    /// Return the number of good nodes in the given tree.
+    /// A subtree of treeName is a tree consisting of a node in treeName and 
+    /// all of its descendants.
+    ///
+    /// Example 1:
+    /// Input: edges = [[0,1],[0,2],[1,3],[1,4],[2,5],[2,6]]
+    /// Output: 7
+    /// Explanation:
+    /// All of the nodes of the given tree are good.
+    ///
+    /// Example 2:
+    /// Input: edges = [[0,1],[1,2],[2,3],[3,4],[0,5],[1,6],[2,7],[3,8]]
+    /// Output: 6
+    /// Explanation:
+    /// There are 6 good nodes in the given tree. They are colored in the 
+    /// image above.
+    ///
+    /// Example 3:
+    /// Input: edges = [[0,1],[1,2],[1,3],[1,4],[0,5],[5,6],[6,7],[7,8],
+    /// [0,9],[9,10],[9,12],[10,11]]
+    /// Output: 12
+    /// Explanation:
+    /// All nodes except node 9 are good.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 10^5
+    /// 2. edges.length == n - 1
+    /// 3. edges[i].length == 2
+    /// 4. 0 <= ai, bi < n
+    /// 5. The input is generated such that edges represents a valid tree.
+    /// </summary>
+    int countGoodNodes(vector<vector<int>>& edges);
 #pragma endregion
 };
 

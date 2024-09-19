@@ -1205,8 +1205,65 @@ void TestLeetCode3063(void)
     leetCode.freeListNodes(result);
 }
 
+void TestLeetCode3217(void)
+{
+    Logger::WriteMessage("Test Leet Code 3217");
+    LeetCodeLinkedList leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    vector<int> data_list = { 1, 2, 3, 4, 5 };
+    ListNode* head = leetCode.generateListNodes(data_list);
+    ListNode* result = leetCode.modifiedList(nums, head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    nums = { 1 };
+    data_list = { 1,2,1,2,1,2 };
+    head = leetCode.generateListNodes(data_list);
+    result = leetCode.modifiedList(nums, head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+
+    nums = { 5 };
+    data_list = { 1,2,3,4 };
+    head = leetCode.generateListNodes(data_list);
+    result = leetCode.modifiedList(nums, head);
+    Logger::WriteMessage(data_list);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(result);
+}
+
+void TestLeetCode3263(void)
+{
+    Logger::WriteMessage("Test Leet Code 3217");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 1,2,3,4,3,2,1 };
+    Logger::WriteMessage(data_list);
+    ListNode* head = leetCode.generateListNodes(data_list);
+    vector<int> result = leetCode.toArray(head);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(head);
+
+    data_list = { 2,2,2,2,2 };
+    Logger::WriteMessage(data_list);
+    head = leetCode.generateListNodes(data_list);
+    result = leetCode.toArray(head);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(head);
+
+    data_list = { 3,2,3,2,3,2 };
+    Logger::WriteMessage(data_list);
+    head = leetCode.generateListNodes(data_list);
+    result = leetCode.toArray(head);
+    Logger::WriteMessage(result);
+    leetCode.freeListNodes(head);
+}
+
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode3263();
+    TestLeetCode3217();
     TestLeetCode3063();
     TestLeetCode3062();
     TestLeetCode206();

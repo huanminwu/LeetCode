@@ -2943,6 +2943,143 @@ public:
     /// 3. 1 <= k <= 10^9
     /// </summary>
     int minimumDifference(vector<int>& nums, int k);
+
+    /// <summary>
+    /// LeetCode 3199. Count Triplets with Even XOR Set Bits I 
+    ///
+    /// Easy
+    ///
+    /// Given three integer arrays a, b, and c, return the number of triplets 
+    /// (a[i], b[j], c[k]), such that the bitwise XOR of the elements of each 
+    /// triplet has an even number of set bits.
+    ///
+    /// Example 1:
+    /// Input: a = [1], b = [2], c = [3]
+    /// Output: 1
+    /// Explanation:
+    /// The only triplet is (a[0], b[0], c[0]) and their XOR is: 1 XOR 2 
+    /// XOR 3 = 002.
+    ///
+    /// Example 2:
+    /// Input: a = [1,1], b = [2,3], c = [1,5]
+    /// Output: 4
+    /// Explanation:
+    /// Consider these four triplets:
+    /// (a[0], b[1], c[0]): 1 XOR 3 XOR 1 = 0112
+    /// (a[1], b[1], c[0]): 1 XOR 3 XOR 1 = 0112
+    /// (a[0], b[0], c[1]): 1 XOR 2 XOR 5 = 1102
+    /// (a[1], b[0], c[1]): 1 XOR 2 XOR 5 = 1102
+    ///
+    /// Constraints:
+    /// 1. 1 <= a.length, b.length, c.length <= 100
+    /// 2. 0 <= a[i], b[i], c[i] <= 100
+    /// </summary>
+    int tripletCountI(vector<int>& a, vector<int>& b, vector<int>& c);
+
+    /// <summary>
+    /// LeetCode 3209. Number of Subarrays With AND Value of K
+    ///
+    /// Hard
+    ///
+    /// Given an array of integers nums and an integer k, return the number of
+    /// subarrays of nums where the bitwise AND of the elements of the 
+    /// subarray equals k.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,1,1], k = 1
+    /// Output: 6
+    /// Explanation:
+    /// All subarrays contain only 1's.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,1,2], k = 1
+    /// Output: 3
+    /// Explanation:
+    /// Subarrays having an AND value of 1 are: [1,1,2], [1,1,2], [1,1,2].
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,3], k = 2
+    /// Output: 2
+    /// Explanation:
+    /// Subarrays having an AND value of 2 are: [1,2,3], [1,2,3].
+    ///  
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i], k <= 10^9
+    /// </summary>
+    long long countSubarrays(vector<int>& nums, int k);
+
+    /// <summary>
+    /// LeetCode 3215. Count Triplets with Even XOR Set Bits II
+    ///
+    /// Easy
+    ///
+    /// Given three integer arrays a, b, and c, return the number of triplets 
+    /// (a[i], b[j], c[k]), such that the bitwise XOR between the elements of 
+    /// each triplet has an even number of set bits
+    /// 
+    /// Example 1:
+    /// Input: a = [1], b = [2], c = [3]
+    /// Output: 1
+    /// Explanation:
+    /// The only triplet is (a[0], b[0], c[0]) and their XOR is: 1 XOR 2 XOR 3 = 002.
+    ///
+    /// Example 2:
+    /// Input: a = [1,1], b = [2,3], c = [1,5]
+    /// Output: 4
+    ///
+    /// Explanation:
+    /// 
+    /// Consider these four triplets:
+    /// (a[0], b[1], c[0]): 1 XOR 3 XOR 1 = 0112
+    /// (a[1], b[1], c[0]): 1 XOR 3 XOR 1 = 0112
+    /// (a[0], b[0], c[1]): 1 XOR 2 XOR 5 = 1102
+    /// (a[1], b[0], c[1]): 1 XOR 2 XOR 5 = 1102
+    /// 
+    /// Constraints:
+    /// 1. 1 <= a.length, b.length, c.length <= 10^5
+    /// 2. 0 <= a[i], b[i], c[i] <= 10^9
+    /// </summary>
+    long long tripletCountII(vector<int>& a, vector<int>& b, vector<int>& c);
+
+    /// <summary>
+    /// Leet Code 3226. Number of Bit Changes to Make Two Integers Equal
+    ///
+    /// Easy
+    ///
+    /// You are given two positive integers n and k.
+    /// You can choose any bit in the binary representation of n that is equal 
+    /// to 1 and change it to 0.
+    ///
+    /// Return the number of changes needed to make n equal to k. If it is 
+    /// impossible, return -1.
+    /// 
+    /// Example 1:
+    /// Input: n = 13, k = 4
+    /// Output: 2
+    /// Explanation:
+    /// Initially, the binary representations of n and k are n = (1101)2 and 
+    /// k = (0100)2.
+    /// We can change the first and fourth bits of n. The resulting integer is 
+    /// n = (0100)2 = k.
+    ///
+    /// Example 2:
+    /// Input: n = 21, k = 21
+    /// Output: 0
+    /// Explanation:
+    /// n and k are already equal, so no changes are needed.
+    ///
+    /// Example 3:
+    /// Input: n = 14, k = 13
+    /// Output: -1
+    /// Explanation:
+    /// It is not possible to make n equal to k.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n, k <= 10^6
+    /// </summary>
+    int minChanges(int n, int k);
+
 #pragma endregion
 };
 #endif  // LeetCodeBit_H

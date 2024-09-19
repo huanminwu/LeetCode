@@ -1860,8 +1860,41 @@ void TestLeetCode3169(void)
     Logger::WriteMessage("days = " + to_string(days) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3273(void)
+{
+    Logger::WriteMessage("Test Leet Code 3273");
+    LeetCodeGreedy leetCode;
+    int power = 4;
+    vector<int> damage = { 1, 2, 3, 4 };
+    vector<int> health = { 4, 5, 6, 8 };
+    long long result = leetCode.minDamage(power, damage, health);
+    Logger::WriteMessage("power = " + to_string(power));
+    Logger::WriteMessage(damage);
+    Logger::WriteMessage(health);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    power = 1;
+    damage = { 1,1,1,1 };
+    health = { 1,2,3,4 };
+    result = leetCode.minDamage(power, damage, health);
+    Logger::WriteMessage("power = " + to_string(power));
+    Logger::WriteMessage(damage);
+    Logger::WriteMessage(health);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    power = 8;
+    damage = { 40 };
+    health = { 59 };
+    result = leetCode.minDamage(power, damage, health);
+    Logger::WriteMessage("power = " + to_string(power));
+    Logger::WriteMessage(damage);
+    Logger::WriteMessage(health);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode3273();
     TestLeetCode3169();
     TestLeetCode3168();
     TestLeetCode3088();

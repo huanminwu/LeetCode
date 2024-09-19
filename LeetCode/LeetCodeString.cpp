@@ -25327,4 +25327,619 @@ string LeetCodeString::clearDigits(string s)
     }
     return result;
 }
+
+/// <summary>
+/// LeetCode 3210. Find the Encrypted String
+///
+/// Easy
+///
+/// You are given a string s and an integer k. Encrypt the string using 
+/// the following algorithm:
+///
+/// For each character c in s, replace c with the kth character after c 
+/// in the string (in a cyclic manner).
+/// Return the encrypted string.
+///
+/// Example 1:
+/// Input: s = "dart", k = 3
+/// Output: "tdar"
+/// Explanation:
+/// For i = 0, the 3rd character after 'd' is 't'.
+/// For i = 1, the 3rd character after 'a' is 'd'.
+/// For i = 2, the 3rd character after 'r' is 'a'.
+/// For i = 3, the 3rd character after 't' is 'r'.
+///
+/// Example 2:
+/// Input: s = "aaa", k = 1
+/// Output: "aaa"
+/// Explanation:
+/// As all the characters are the same, the encrypted string will also be 
+/// the same.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 100
+/// 2. 1 <= k <= 10^4
+/// 3. s consists only of lowercase English letters.
+/// </summary>
+string LeetCodeString::getEncryptedString(string s, int k)
+{
+    string result;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        result.push_back(s[(i + k) % s.size()]);
+    }
+    return result;
+}
+
+/// <summary>
+/// LeetCode 3213. Construct String with Minimum Cost
+///
+/// Hard
+///
+/// You are given a string target, an array of strings words, and an 
+/// integer array costs, both arrays of the same length.
+///
+/// Imagine an empty string s.
+/// You can perform the following operation any number of times (including 
+/// zero):
+///
+/// Choose an index i in the range [0, words.length - 1].
+/// Append words[i] to s.
+/// The cost of operation is costs[i].
+/// Return the minimum cost to make s equal to target. If it's not 
+/// possible, return -1.
+/// 
+/// Example 1:
+/// Input: target = "abcdef", words = ["abdef","abc","d","def","ef"], 
+/// costs = [100,1,1,10,5]
+/// Output: 7
+/// Explanation:
+/// The minimum cost can be achieved by performing the following 
+/// operations:
+/// Select index 1 and append "abc" to s at a cost of 1, resulting in 
+/// s = "abc".
+/// Select index 2 and append "d" to s at a cost of 1, resulting in 
+/// s = "abcd".
+/// Select index 4 and append "ef" to s at a cost of 5, resulting in 
+/// s = "abcdef".
+///
+/// Example 2:
+/// Input: target = "aaaa", words = ["z","zz","zzz"], costs = [1,10,100]
+/// Output: -1
+/// Explanation:
+/// It is impossible to make s equal to target, so we return -1.
+/// 
+/// Constraints:
+/// 1. 1 <= target.length <= 5 * 10^4
+/// 2. 1 <= words.length == costs.length <= 5 * 10^4
+/// 3. 1 <= words[i].length <= target.length
+/// 4. The total sum of words[i].length is less than or equal to 5 * 10^4.
+/// 5. target and words[i] consist only of lowercase English letters.
+/// 6. 1 <= costs[i] <= 10^4
+/// </summary>
+int LeetCodeString::minimumCostII(string target, vector<string>& words, vector<int>& costs)
+{
+    struct Trie
+    {
+        vector<Trie*> children;
+        int cost = 0;
+        Trie()
+        {
+            children = vector<Trie*>(26);
+            cost = 0;
+        }
+        ~Trie()
+        {
+            for (auto& trie : children)
+            {
+                if (trie != nullptr) delete trie;
+            }
+        }
+        void add(string& w, int cost)
+        {
+            Trie* curr = this;
+            for (size_t i = 0; i < w.size(); i++)
+            {
+                int index = w[i] - 'a';
+                if (curr->children[index] == nullptr)
+                {
+                    curr->children[index] = new Trie();
+                }
+                curr = curr->children[index];
+            }
+            if (curr->cost > 0) curr->cost = min(curr->cost, cost);
+            else curr->cost = cost;
+        }
+
+        void search(string& w, int pos, int initial, vector<int>&dp)
+        {
+            Trie* curr = this;
+            for (size_t i = pos; i < w.size(); i++)
+            {
+                int index = w[i] - 'a';
+                if (curr->children[index] == nullptr)
+                {
+                    break;
+                }
+                curr = curr->children[index];
+                if (curr->cost > 0)
+                {
+                    dp[i] = min(dp[i], initial + curr->cost);
+                }
+            }
+        }
+    };
+    Trie trie;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        trie.add(words[i], costs[i]);
+    }
+    vector<int> dp(target.size(), INT_MAX);
+    for (size_t i = 0; i < target.size(); i++)
+    {
+        if (i == 0)
+        {
+            trie.search(target, 0, 0, dp);
+        }
+        else if (dp[i - 1] != INT_MAX)
+        {
+            trie.search(target, i, dp[i-1], dp);
+        }
+    }
+    if (dp[target.size() - 1] != INT_MAX)
+    {
+        return dp[target.size() - 1];
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+/// <summary>
+/// LeetCode 3216. Lexicographically Smallest String After a Swap
+///
+/// Easy
+///
+/// Given a string s containing only digits, return the lexicographically 
+/// smallest string that can be obtained after swapping adjacent digits in 
+/// s with the same parity at most once.
+///
+/// Digits have the same parity if both are odd or both are even. For 
+/// example, 5 and 9, as well as 2 and 4, have the same parity, while 
+/// 6 and 9 do not.
+///
+/// Example 1:
+/// Input: s = "45320"
+/// Output: "43520"
+///
+/// Explanation:
+/// s[1] == '5' and s[2] == '3' both have the same parity, and swapping 
+/// them results in the lexicographically smallest string.
+///
+/// Example 2:
+/// Input: s = "001"
+/// Output: "001"
+/// Explanation:
+/// There is no need to perform a swap because s is already the 
+/// lexicographically smallest.
+/// 
+/// Constraints:
+/// 1. 2 <= s.length <= 100
+/// 2. s consists only of digits.
+/// </summary>
+string LeetCodeString::getSmallestString(string s)
+{
+    string result = s;
+    for (size_t i = 1; i < s.size(); i++)
+    {
+        int a = s[i - 1] - '0';
+        int b = s[i] - '0';
+        if (a % 2 == b % 2 && a > b)
+        {
+            swap(result[i - 1], result[i]);
+            break;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3223. Minimum Length of String After Operations
+///
+/// Medium
+///
+/// You are given a string s.
+/// 
+/// You can perform the following process on s any number of times:
+///
+/// Choose an index i in the string such that there is at least one 
+/// character to the left of index i that is equal to s[i], and at least 
+/// one character to the right that is also equal to s[i].
+/// Delete the closest character to the left of index i that is equal 
+/// to s[i].
+/// Delete the closest character to the right of index i that is equal 
+/// to s[i].
+/// Return the minimum length of the final string s that you can achieve.
+///
+/// Example 1:
+/// Input: s = "abaacbcbb"
+/// Output: 5
+/// Explanation:
+/// We do the following operations:
+///
+/// Choose index 2, then remove the characters at indices 0 and 3. The 
+/// resulting string is s = "bacbcbb".
+/// Choose index 3, then remove the characters at indices 0 and 5. The 
+/// resulting string is s = "acbcb".
+///
+/// Example 2:
+/// Input: s = "aa"
+/// Output: 2
+/// Explanation:
+/// We cannot perform any operations, so we return the length of the 
+/// original string.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 2 * 10^5
+/// 2. s consists only of lowercase English letters.
+/// </summary>
+int LeetCodeString::minimumLengthI(string s)
+{
+    vector<int> char_count(26);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        char_count[s[i] - 'a']++;
+    }
+    int result = 0;
+    for (int i = 0; i < 26; i++)
+    {
+        if (char_count[i] == 0) continue;
+        if (char_count[i] % 2 == 0) result += 2;
+        else result += 1;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3234. Count the Number of Substrings With Dominant Ones
+///
+/// Medium
+///
+/// You are given a binary string s.
+/// Return the number of substrings with dominant ones.
+///
+/// A string has dominant ones if the number of ones in the string is 
+/// greater than or equal to the square of the number of zeros in the 
+/// string.
+/// 
+/// Example 1:
+/// Input: s = "00011"
+/// Output: 5
+/// Explanation:
+/// The substrings with dominant ones are shown in the table below.
+/// i   j   s[i..j] Number of Zeros Number of Ones
+/// 3   3   1   0   1
+/// 4   4   1   0   1
+/// 2   3   01  1   1
+/// 3   4   11  0   2
+/// 2   4   011 1   2
+///
+/// Example 2:
+/// Input: s = "101101"
+/// Output: 16
+/// Explanation:
+/// The substrings with non-dominant ones are shown in the table below.
+/// Since there are 21 substrings total and 5 of them have non-dominant 
+/// ones, it follows that there are 16 substrings with dominant ones.
+///
+/// i   j   s[i..j] Number of Zeros Number of Ones
+/// 1   1   0   1   0
+/// 4   4   0   1   0
+/// 1   4   0110    2   2
+/// 0   4   10110   2   3
+/// 1   5   01101   2   3
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 4 * 10^4
+/// 2. s consists only of characters '0' and '1'.
+/// </summary>
+int LeetCodeString::numberOfDominantSubstrings(string s)
+{
+    int n = s.size();
+    int result = 0;
+    vector<int> sum(n+1);
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i] == '1') sum[i + 1] = 1;
+        sum[i + 1] += sum[i];
+    }
+    for (int i = 0; i < n; i++)
+    {
+        int zero = 0, one = 0;
+        for (int j = i; j < n; j++)
+        {
+            one = sum[j + 1] - sum[i];
+            zero = j - i + 1 - one;
+            if (zero * zero > one)
+            {
+                j += zero * zero - one - 1;
+            }
+            else
+            {
+                result++;
+                int k = (int)sqrt(one);
+                int delta = min(k - zero, n - 1 - j);
+                result += delta;
+                j += delta;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3248. Snake in Matrix
+/// 
+/// Easy
+///
+/// There is a snake in an n x n matrix grid and can move in four possible 
+/// directions. Each cell in the grid is identified by the position: 
+/// grid[i][j] = (i * n) + j.
+/// The snake starts at cell 0 and follows a sequence of commands.
+/// You are given an integer n representing the size of the grid and an 
+/// array of strings commands where each command[i] is either "UP", "RIGHT", 
+/// "DOWN", and "LEFT". It's guaranteed that the snake will remain within 
+/// the grid boundaries throughout its movement.
+///
+/// Return the position of the final cell where the snake ends up after 
+/// executing commands.
+/// 
+/// Example 1:
+/// Input: n = 2, commands = ["RIGHT","DOWN"]
+/// Output: 3
+/// Explanation:
+/// 0	1
+/// 2	3
+/// 0	1
+/// 2	3
+/// 0	1
+/// 2	3
+///
+/// Example 2:
+/// Input: n = 3, commands = ["DOWN","RIGHT","UP"]
+/// Output: 1
+///
+/// Explanation:
+/// 0	1	2
+/// 3	4	5
+/// 6	7	8
+/// 0	1	2
+/// 3	4	5
+/// 6	7	8
+/// 0	1	2
+/// 3	4	5
+/// 6	7	8
+/// 0	1	2
+/// 3	4	5
+/// 6	7	8
+///
+/// Constraints:
+/// 1. 2 <= n <= 10
+/// 2. 1 <= commands.length <= 100
+/// 3. commands consists only of "UP", "RIGHT", "DOWN", and "LEFT".
+/// 4. The input is generated such the snake will not move outside of the 
+///    boundaries.
+/// </summary>
+int LeetCodeString::finalPositionOfSnake(int n, vector<string>& commands)
+{
+    int result = 0;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "UP")
+        {
+            result -= n;
+        }
+        else if (commands[i] == "DOWN")
+        {
+            result += n;
+        }
+        else if (commands[i] == "LEFT")
+        {
+            result -= 1;
+        }
+        else if (commands[i] == "RIGHT")
+        {
+            result += 1;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3253. Construct String with Minimum Cost (Easy)
+/// 
+/// Medium
+///
+/// You are given a string target, an array of strings words, and 
+/// an integer array costs, both arrays of the same length.
+///
+/// Imagine an empty string s.
+///
+/// You can perform the following operation any number of times (including 
+/// zero):
+///
+/// Choose an index i in the range [0, words.length - 1].
+/// Append words[i] to s.
+/// The cost of operation is costs[i].
+/// Return the minimum cost to make s equal to target. If it's not 
+/// possible, return -1.
+/// 
+/// Example 1:
+/// Input: target = "abcdef", words = ["abdef","abc","d","def","ef"], 
+/// costs = [100,1,1,10,5]
+/// Output: 7
+/// Explanation:
+/// The minimum cost can be achieved by performing the following 
+/// operations:
+///
+/// Select index 1 and append "abc" to s at a cost of 1, resulting 
+/// in s = "abc".
+/// Select index 2 and append "d" to s at a cost of 1, resulting 
+/// in s = "abcd".
+/// Select index 4 and append "ef" to s at a cost of 5, resulting 
+/// in s = "abcdef".
+///
+/// Example 2:
+/// Input: target = "aaaa", words = ["z","zz","zzz"], costs = [1,10,100]
+/// Output: -1
+/// Explanation:
+/// It is impossible to make s equal to target, so we return -1.
+/// 
+/// Constraints:
+/// 1. 1 <= target.length <= 2000
+/// 2. 1 <= words.length == costs.length <= 50
+/// 3. 1 <= words[i].length <= target.length
+/// 4. target and words[i] consist only of lowercase English letters.
+/// 5. 1 <= costs[i] <= 10^5
+/// </summary>
+int LeetCodeString::minimumCostI(string target, vector<string>& words, vector<int>& costs)
+{
+    struct Trie
+    {
+        vector<Trie*> children;
+        int cost = 0;
+        Trie()
+        {
+            children = vector<Trie*>(26);
+            cost = 0;
+        }
+        ~Trie()
+        {
+            for (auto& trie : children)
+            {
+                if (trie != nullptr) delete trie;
+            }
+        }
+        void add(string& w, int cost)
+        {
+            Trie* curr = this;
+            for (size_t i = 0; i < w.size(); i++)
+            {
+                int index = w[i] - 'a';
+                if (curr->children[index] == nullptr)
+                {
+                    curr->children[index] = new Trie();
+                }
+                curr = curr->children[index];
+            }
+            if (curr->cost > 0) curr->cost = min(curr->cost, cost);
+            else curr->cost = cost;
+        }
+
+        void search(string& w, int pos, int initial, vector<int>& dp)
+        {
+            Trie* curr = this;
+            for (size_t i = pos; i < w.size(); i++)
+            {
+                int index = w[i] - 'a';
+                if (curr->children[index] == nullptr)
+                {
+                    break;
+                }
+                curr = curr->children[index];
+                if (curr->cost > 0)
+                {
+                    dp[i] = min(dp[i], initial + curr->cost);
+                }
+            }
+        }
+    };
+    Trie trie;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        trie.add(words[i], costs[i]);
+    }
+    vector<int> dp(target.size(), INT_MAX);
+    for (size_t i = 0; i < target.size(); i++)
+    {
+        if (i == 0)
+        {
+            trie.search(target, 0, 0, dp);
+        }
+        else if (dp[i - 1] != INT_MAX)
+        {
+            trie.search(target, i, dp[i - 1], dp);
+        }
+    }
+    if (dp[target.size() - 1] != INT_MAX)
+    {
+        return dp[target.size() - 1];
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+/// <summary>
+/// Leet Code 3271. Hash Divided String
+/// 
+/// Medium
+///
+/// You are given a string s of length n and an integer k, where n is a 
+/// multiple of k. Your task is to hash the string s into a new string 
+/// called result, which has a length of n / k.
+///
+/// First, divide s into n / k substrings, each with a length of k. 
+/// Then, initialize result as an empty string.
+///
+/// For each substring in order from the beginning:
+///
+/// The hash value of a character is the index of that character in the 
+/// English alphabet (e.g., 'a' -> 0, 'b' -> 1, ..., 'z' -> 25).
+/// Calculate the sum of all the hash values of the characters in the 
+/// substring.
+/// Find the remainder of this sum when divided by 26, which is called 
+/// hashedChar.
+/// Identify the character in the English lowercase alphabet that 
+/// corresponds to hashedChar.
+/// Append that character to the end of result.
+/// Return result.
+/// 
+/// Example 1:
+/// Input: s = "abcd", k = 2
+/// Output: "bf"
+/// Explanation:
+/// First substring: "ab", 0 + 1 = 1, 1 % 26 = 1, result[0] = 'b'.
+/// Second substring: "cd", 2 + 3 = 5, 5 % 26 = 5, result[1] = 'f'.
+///
+/// Example 2:
+/// Input: s = "mxz", k = 3
+/// Output: "i"
+/// Explanation:
+/// The only substring: "mxz", 12 + 23 + 25 = 60, 60 % 26 = 8, 
+/// result[0] = 'i'.
+/// 
+/// Constraints:
+/// 1. 1 <= k <= 100
+/// 2. k <= s.length <= 1000
+/// 3. s.length is divisible by k.
+/// 4. s consists only of lowercase English letters.
+/// </summary>
+string LeetCodeString::stringHash(string s, int k)
+{
+    string result;
+    for (size_t i = 0; i < s.size() / k; i++)
+    {
+        int sum = 0;
+        for (int j = 0; j < k; j++)
+        {
+            sum += s[i * k + j] - 'a';
+        }
+        sum %= 26;
+        result.push_back('a' + sum);
+    }
+    return result;
+}
 #pragma endregion

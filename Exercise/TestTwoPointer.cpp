@@ -797,9 +797,115 @@ void TestLeetCode3090(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode3206(void)
+{
+    Logger::WriteMessage("Test Leet Code 3206");
+    LeetCodeTwoPointer leetCode;
+    vector<int> colors = { 1, 1, 1 };
+    int result = leetCode.numberOfAlternatingGroupsI(colors);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    colors = { 0,1,0,0,1 };
+    result = leetCode.numberOfAlternatingGroupsI(colors);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3208(void)
+{
+    Logger::WriteMessage("Test Leet Code 3208");
+    LeetCodeTwoPointer leetCode;
+    vector<int> colors = { 0, 1, 0, 1, 0 };
+    int k = 3;
+    int result = leetCode.numberOfAlternatingGroupsII(colors, k);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    colors = { 0,1,0,0,1,0,1 };
+    k = 6;
+    result = leetCode.numberOfAlternatingGroupsII(colors, k);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    colors = { 1,1,0,1 };
+    k = 4;
+    result = leetCode.numberOfAlternatingGroupsII(colors, k);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3194(void)
+{
+    Logger::WriteMessage("Test Leet Code 3194");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 7, 8, 3, 4, 15, 13, 4, 1 };
+    double result = leetCode.minimumAverage(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,9,8,3,10,5 };
+    result = leetCode.minimumAverage(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,7,8,9 };
+    result = leetCode.minimumAverage(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3258(void)
+{
+    Logger::WriteMessage("Test Leet Code 3258");
+    LeetCodeTwoPointer leetCode;
+    string s = "10101";
+    int k = 1;
+    int result = leetCode.countKConstraintSubstringsI(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "1010101";
+    k = 2;
+    result = leetCode.countKConstraintSubstringsI(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "11111";
+    k = 1;
+    result = leetCode.countKConstraintSubstringsI(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3261(void)
+{
+    Logger::WriteMessage("Test Leet Code 3261");
+    LeetCodeTwoPointer leetCode;
+    string s = "0001111";
+    int k = 2;
+    vector<vector<int>> queries = { {0,6} };
+    vector<long long> result = leetCode.countKConstraintSubstringsII(s, k, queries);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    s = "010101";
+    k = 1;
+    queries = { {0, 5},{1, 4},{2, 3} };
+    result = leetCode.countKConstraintSubstringsII(s, k, queries);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
 
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode3261();
+    TestLeetCode3258();
+    TestLeetCode3194();
+    TestLeetCode3208();
+    TestLeetCode3206();
     TestLeetCode3090();
     TestLeetCode3085();
     TestLeetCode2972();
