@@ -112,6 +112,20 @@ ListNode* LeetCodeLinkedList::findListNode(ListNode* head, int value)
 }
 
 /// <summary>
+/// Find a double list node with value
+/// </summary>
+DoublyLinkedNode* LeetCodeLinkedList::findListNode(DoublyLinkedNode* head, int value)
+{
+    DoublyLinkedNode* node = head;
+    while (node != nullptr)
+    {
+        if (node->val == value) return node;
+        node = node->next;
+    }
+    return nullptr;
+}
+
+/// <summary>
 /// Leet code #2. Add Two Numbers
 ///
 /// You are given two linked lists representing two non - negative numbers.
@@ -1730,6 +1744,27 @@ ListNode* LeetCodeLinkedList::generateListNodes(vector<int> integers)
         }
     }
     return start;
+}
+
+/// <summary>
+/// Helper function which generate a double linked list of a integers
+/// </summary>
+DoublyLinkedNode* LeetCodeLinkedList::generateDoublyLinkedNodes(vector<int> integers)
+{
+    DoublyLinkedNode* head = new DoublyLinkedNode(0);
+    DoublyLinkedNode* result = head;
+    for (size_t i = 0; i < integers.size(); i++)
+    {
+        DoublyLinkedNode* node = new DoublyLinkedNode(integers[i]);
+        head->next = node;
+        node->prev = head;
+        head = head->next;
+    }
+    head = result->next;
+    head->prev = nullptr;
+    delete result;
+    
+    return head;
 }
 
 /// <summary>
@@ -3563,10 +3598,49 @@ ListNode* LeetCodeLinkedList::modifiedList(vector<int>& nums, ListNode* head)
 /// 1. The number of nodes in the given list is in the range [1, 50].
 /// 2. 1 <= Node.val <= 50
 /// </summary>
-vector<int> LeetCodeLinkedList::toArray(ListNode* head)
+vector<int> LeetCodeLinkedList::toArrayI(ListNode* head)
 {
     vector<int> result;
     ListNode* node = head;
+    while (node != nullptr)
+    {
+        result.push_back(node->val);
+        node = node->next;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3294. Convert Doubly Linked List to Array II
+/// 
+/// Medium
+///
+/// You are given an arbitrary node from a doubly linked list, which 
+/// contains nodes that have a next pointer and a previous pointer.
+///
+/// Return an integer array which contains the elements of the linked 
+/// list in order.
+/// 
+/// Example 1:
+/// Input: head = [1,2,3,4,5], node = 5
+/// Output: [1,2,3,4,5]
+///
+/// Example 2:
+/// Input: head = [4,5,6,7,8], node = 8
+/// Output: [4,5,6,7,8]
+/// 
+/// Constraints:
+/// 1. The number of nodes in the given list is in the range [1, 500].
+/// 2. 1 <= Node.val <= 1000
+/// 3. All nodes have unique Node.val.
+/// </summary>
+vector<int> LeetCodeLinkedList::toArrayII(DoublyLinkedNode* node)
+{
+    while (node->prev != nullptr)
+    {
+        node = node->prev;
+    }
+    vector<int> result;
     while (node != nullptr)
     {
         result.push_back(node->val);

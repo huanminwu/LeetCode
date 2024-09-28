@@ -119,6 +119,12 @@ public:
     /// </summary>
     ListNode* generateListNodes(vector<int> integers);
 
+
+    /// <summary>
+    /// Helper function which generate a double linked list of a integers
+    /// </summary>
+    DoublyLinkedNode* generateDoublyLinkedNodes(vector<int> integers);
+
     /// <summary>
     /// Free list nodes
     /// </summary>
@@ -128,6 +134,11 @@ public:
     /// Find a list node with value
     /// </summary>
     ListNode* findListNode(ListNode* head, int value);
+
+    /// <summary>
+    /// Find a double list node with value
+    /// </summary>
+    DoublyLinkedNode* findListNode(DoublyLinkedNode* head, int value);
 
     /// <summary>
     /// Leet code #430. Flatten a Multilevel Doubly Linked List
@@ -1895,7 +1906,33 @@ public:
     /// 1. The number of nodes in the given list is in the range [1, 50].
     /// 2. 1 <= Node.val <= 50
     /// </summary>
-    vector<int> toArray(ListNode* head);
+    vector<int> toArrayI(ListNode* head);
+
+    /// <summary>
+    /// Leet Code 3294. Convert Doubly Linked List to Array II
+    /// 
+    /// Medium
+    ///
+    /// You are given an arbitrary node from a doubly linked list, which 
+    /// contains nodes that have a next pointer and a previous pointer.
+    ///
+    /// Return an integer array which contains the elements of the linked 
+    /// list in order.
+    /// 
+    /// Example 1:
+    /// Input: head = [1,2,3,4,5], node = 5
+    /// Output: [1,2,3,4,5]
+    ///
+    /// Example 2:
+    /// Input: head = [4,5,6,7,8], node = 8
+    /// Output: [4,5,6,7,8]
+    /// 
+    /// Constraints:
+    /// 1. The number of nodes in the given list is in the range [1, 500].
+    /// 2. 1 <= Node.val <= 1000
+    /// 3. All nodes have unique Node.val.
+    /// </summary>
+    vector<int> toArrayII(DoublyLinkedNode* node);
 #pragma endregion
 };
 #endif  // LeetCodeLinkedList

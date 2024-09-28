@@ -26017,4 +26017,194 @@ string LeetCodeString::convertDateToBinary(string date)
     return result;
 }
 
+/// <summary>
+/// Leet Code 3291. Minimum Number of Valid Strings to Form Target I
+/// 
+/// Medium
+///
+/// You are given an array of strings words and a string target.
+///
+/// A string x is called valid if x is a prefix of any string in words.
+///
+/// Return the minimum number of valid strings that can be concatenated 
+/// to form target. If it is not possible to form target, return -1.
+///
+/// Example 1:
+/// Input: words = ["abc","aaaaa","bcdef"], target = "aabcdabc"
+/// Output: 3
+/// Explanation:
+/// The target string can be formed by concatenating:
+/// Prefix of length 2 of words[1], i.e. "aa".
+/// Prefix of length 3 of words[2], i.e. "bcd".
+/// Prefix of length 3 of words[0], i.e. "abc".
+///
+/// Example 2:
+/// Input: words = ["abababab","ab"], target = "ababaababa"
+/// Output: 2
+/// Explanation:
+/// The target string can be formed by concatenating:
+/// Prefix of length 5 of words[0], i.e. "ababa".
+/// Prefix of length 5 of words[0], i.e. "ababa".
+///
+/// Example 3:
+/// Input: words = ["abcdef"], target = "xyz"
+/// Output: -1
+/// 
+/// Constraints:
+/// 1. 1 <= words.length <= 100
+/// 2. 1 <= words[i].length <= 5 * 10^3
+/// 3. The input is generated such that sum(words[i].length) <= 10^5.
+/// 4. words[i] consists only of lowercase English letters.
+/// 5. 1 <= target.length <= 5 * 10^3
+/// 6. target consists only of lowercase English letters.
+/// </summary>
+int LeetCodeString::minValidStringsI(vector<string>& words, string target)
+{
+    vector<int> dp(target.size());
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        string str = words[i] + '#' + target;
+        vector<int> arr = kmp(str);
+        for (size_t j = words[i].size() + 1; j < str.size(); j++)
+        {
+            dp[j - (words[i].size() + 1)] = max(dp[j - (words[i].size() + 1)], arr[j]);
+        }
+    }
+    int p = target.size() - 1;
+    int result = 0;
+    while (p >= 0)
+    {
+        if (dp[p] == 0) break;
+        p -= dp[p];
+        result++;
+    }
+    if (p >= 0) return -1;
+    else return result;
+}
+
+/// <summary>
+/// Leet Code 3292. Minimum Number of Valid Strings to Form Target II
+/// 
+/// Hard
+///
+/// You are given an array of strings words and a string target.
+/// A string x is called valid if x is a prefix of any string in words.
+///
+/// Return the minimum number of valid strings that can be concatenated 
+/// to form target. If it is not possible to form target, return -1.
+///
+/// Example 1:
+///
+/// Input: words = ["abc","aaaaa","bcdef"], target = "aabcdabc"
+/// Output: 3
+/// Explanation:
+/// The target string can be formed by concatenating:
+/// Prefix of length 2 of words[1], i.e. "aa".
+/// Prefix of length 3 of words[2], i.e. "bcd".
+/// Prefix of length 3 of words[0], i.e. "abc".
+///
+/// Example 2:
+///
+/// Input: words = ["abababab","ab"], target = "ababaababa"
+/// Output: 2
+/// Explanation:
+/// The target string can be formed by concatenating:
+/// Prefix of length 5 of words[0], i.e. "ababa".
+/// Prefix of length 5 of words[0], i.e. "ababa".
+///
+/// Example 3:
+/// Input: words = ["abcdef"], target = "xyz"
+/// Output: -1
+/// 
+/// Constraints:
+/// 1. 1 <= words.length <= 100
+/// 2. 1 <= words[i].length <= 5 * 10^4
+/// 3. The input is generated such that sum(words[i].length) <= 10^5.
+/// 4. words[i] consists only of lowercase English letters.
+/// 5. 1 <= target.length <= 5 * 10^4
+/// 6. target consists only of lowercase English letters.
+/// </summary>
+int LeetCodeString::minValidStringsII(vector<string>& words, string target)
+{
+    vector<int> dp(target.size());
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        string str = words[i] + '#' + target;
+        vector<int> arr = kmp(str);
+        for (size_t j = words[i].size() + 1; j < str.size(); j++)
+        {
+            dp[j - (words[i].size() + 1)] = max(dp[j - (words[i].size() + 1)], arr[j]);
+        }
+    }
+    int p = target.size() - 1;
+    int result = 0;
+    while (p >= 0)
+    {
+        if (dp[p] == 0) break;
+        p -= dp[p];
+        result++;
+    }
+    if (p >= 0) return -1;
+    else return result;
+}
+
+/// <summary>
+/// Leet Code 3295. Report Spam Message
+/// 
+/// Medium
+///
+/// You are given an array of strings message and an array of strings 
+/// bannedWords.
+///
+/// An array of words is considered spam if there are at least two words 
+/// in it that exactly match any word in bannedWords.
+///
+/// Return true if the array message is spam, and false otherwise.
+///
+/// Example 1:
+/// Input: message = ["hello","world","leetcode"], 
+/// bannedWords = ["world","hello"]
+///
+/// Output: true
+///
+/// Explanation:
+///
+/// The words "hello" and "world" from the message array both appear 
+/// in the bannedWords array.
+///
+/// Example 2:
+/// Input: message = ["hello","programming","fun"], 
+/// bannedWords = ["world","programming","leetcode"]
+///
+/// Output: false
+/// Explanation:
+/// Only one word from the message array ("programming") appears in 
+/// the bannedWords array.
+///
+/// Constraints:
+/// 1. 1 <= message.length, bannedWords.length <= 10^5
+/// 2. 1 <= message[i].length, bannedWords[i].length <= 15
+/// 3. message[i] and bannedWords[i] consist only of lowercase English 
+///    letters.
+/// </summary>
+bool LeetCodeString::reportSpam(vector<string>& message, vector<string>& bannedWords)
+{
+    unordered_set<string> banned_words;
+    for (string str : bannedWords)
+    {
+        banned_words.insert(str);
+    }
+    int count = 0;
+    unordered_set<string> banned_message;
+    for (string str : message)
+    {
+        if (banned_words.count(str))
+        {
+            count++;
+        }
+    }
+    if (count >= 2) return true;
+    else return false;
+}
+
 #pragma endregion

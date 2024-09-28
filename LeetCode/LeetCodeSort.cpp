@@ -12994,4 +12994,170 @@ vector<int> LeetCodeSort::resultsArray(vector<vector<int>>& queries, int k)
     return result;
 }
 
+/// <summary>
+/// Leet Code 3288. Length of the Longest Increasing Path
+/// 
+/// Hard
+///
+/// You are given a 2D array of integers coordinates of length n and an 
+/// integer k, where 0 <= k < n.
+/// coordinates[i] = [xi, yi] indicates the point (xi, yi) in a 2D plane.
+///
+/// An increasing path of length m is defined as a list of points (x1, 
+/// y1), (x2, y2), (x3, y3), ..., (xm, ym) such that:
+///
+/// xi < xi + 1 and yi < yi + 1 for all i where 1 <= i < m.
+/// (xi, yi) is in the given coordinates for all i where 1 <= i <= m.
+/// Return the maximum length of an increasing path that contains 
+/// coordinates[k].
+///
+/// Example 1:
+/// Input: coordinates = [[3,1],[2,2],[4,1],[0,0],[5,3]], k = 1
+///
+/// Output: 3
+///
+/// Explanation:
+/// (0, 0), (2, 2), (5, 3) is the longest increasing path that 
+/// contains (2, 2).
+///
+/// Example 2:
+/// 
+/// Input: coordinates = [[2,1],[7,0],[5,6]], k = 2
+/// Output: 2
+/// Explanation:
+/// (2, 1), (5, 6) is the longest increasing path that contains (5, 6).
+///
+/// Constraints:
+/// 1. 1 <= n == coordinates.length <= 10^5
+/// 2. coordinates[i].length == 2
+/// 3. 0 <= coordinates[i][0], coordinates[i][1] <= 10^9
+/// 4. All elements in coordinates are distinct.
+/// 5. 0 <= k <= n - 1
+/// </summary>
+int LeetCodeSort::maxPathLength(vector<vector<int>>& coordinates, int k)
+{
+    vector<pair<int, int>> sorted_coordinates;
+    for (size_t i = 0; i < coordinates.size(); i++)
+    {
+        sorted_coordinates.push_back(make_pair(coordinates[i][0], -coordinates[i][1]));
+    }
+    sort(sorted_coordinates.begin(), sorted_coordinates.end());
+    vector<int> dp;
+    for (size_t i = 0; i < sorted_coordinates.size(); i++)
+    {
+        int x = sorted_coordinates[i].first;
+        int y = -sorted_coordinates[i].second;
+        int index = lower_bound(dp.begin(), dp.end(), y) - dp.begin();
+        if (index == dp.size()) dp.push_back(y);
+        else
+        {
+            if (x == coordinates[k][0] && y == coordinates[k][1])
+            {
+                dp[index] = y;
+                dp.resize(index + 1);
+            }
+            else if (dp[index] == coordinates[k][1] && x >= coordinates[k][0])
+            {
+                continue;
+            }
+            else
+            {
+                dp[index] = y;
+            }
+        }
+    }
+    return dp.size();
+}
+
+/// <summary>
+/// Leet Code 3296. Minimum Number of Seconds to Make Mountain Height Zero
+/// 
+/// Medium
+/// 
+/// You are given an integer mountainHeight denoting the height of a 
+/// mountain.
+///
+/// You are also given an integer array workerTimes representing the 
+/// work time of workers in seconds.
+///
+/// The workers work simultaneously to reduce the height of the mountain. 
+/// For worker i:
+///
+/// To decrease the mountain's height by x, it takes workerTimes[i] + 
+/// workerTimes[i] * 2 + ... + workerTimes[i] * x seconds. For example:
+/// To reduce the height of the mountain by 1, it takes workerTimes[i] 
+/// seconds.
+/// To reduce the height of the mountain by 2, it takes workerTimes[i] + 
+/// workerTimes[i] * 2 seconds, and so on.
+/// Return an integer representing the minimum number of seconds 
+/// required for the workers to make the height of the mountain 0.
+///
+/// Example 1:
+/// Input: mountainHeight = 4, workerTimes = [2,1,1]
+/// Output: 3
+/// Explanation:
+///
+/// One way the height of the mountain can be reduced to 0 is:
+/// Worker 0 reduces the height by 1, taking workerTimes[0] = 2 seconds.
+/// Worker 1 reduces the height by 2, taking workerTimes[1] + 
+/// workerTimes[1] * 2 = 3 seconds.
+/// Worker 2 reduces the height by 1, taking workerTimes[2] = 1 second.
+/// Since they work simultaneously, the minimum time needed is 
+/// max(2, 3, 1) = 3 seconds.
+///
+/// Example 2:
+///
+/// Input: mountainHeight = 10, workerTimes = [3,2,2,4]
+///
+/// Output: 12
+/// Explanation:
+/// Worker 0 reduces the height by 2, taking workerTimes[0] + 
+/// workerTimes[0] * 2 = 9 seconds.
+/// Worker 1 reduces the height by 3, taking workerTimes[1] + 
+/// workerTimes[1] * 2 + workerTimes[1] * 3 = 12 seconds.
+/// Worker 2 reduces the height by 3, taking workerTimes[2] + 
+/// workerTimes[2] * 2 + workerTimes[2] * 3 = 12 seconds.
+/// Worker 3 reduces the height by 2, taking workerTimes[3] + 
+/// workerTimes[3] * 2 = 12 seconds.
+/// The number of seconds needed is max(9, 12, 12, 12) = 12 seconds.
+///
+/// Example 3:
+/// Input: mountainHeight = 5, workerTimes = [1]
+///
+/// Output: 15
+/// Explanation:
+/// There is only one worker in this example, so the answer is 
+/// workerTimes[0] + workerTimes[0] * 2 + workerTimes[0] * 3 + 
+/// workerTimes[0] * 4 + workerTimes[0] * 5 = 15.
+///
+/// Constraints:
+/// 1. 1 <= mountainHeight <= 10^5
+/// 2. 1 <= workerTimes.length <= 10^4
+/// 3. 1 <= workerTimes[i] <= 10^6
+/// </summary>
+long long LeetCodeSort::minNumberOfSeconds(int mountainHeight, vector<int>& workerTimes)
+{
+    vector<pair<long long, int>> count(workerTimes.size());
+    for (size_t i = 0; i < workerTimes.size(); i++)
+    {
+        count[i] = make_pair(workerTimes[i], 1);
+    }
+    set<pair<long long, int>> pq;
+    for (size_t i = 0; i < workerTimes.size(); i++)
+    {
+        pq.insert(make_pair((long long)workerTimes[i], i));
+    }
+    long long result = 0;
+    for (int i = 0; i < mountainHeight; i++)
+    {
+        pair<long long, int> p = *pq.begin();
+        pq.erase(pq.begin());
+        result = max(result, count[p.second].first);
+        count[p.second].second++;
+        count[p.second].first += (long long)workerTimes[p.second] * (long long)count[p.second].second;
+        p.first = count[p.second].first;
+        pq.insert(p);
+    }
+    return result;
+}
 #pragma endregion

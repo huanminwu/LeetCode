@@ -18947,5 +18947,160 @@ vector<int> LeetCodeDP::maximumSubarrayXor(vector<int>& nums, vector<vector<int>
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3287. Find the Maximum Sequence Value of Array
+/// 
+/// Hard
+///
+/// You are given an integer array nums and a positive integer k.
+/// The value of a sequence seq of size 2 * x is defined as:
+/// (seq[0] OR seq[1] OR ... OR seq[x - 1]) XOR (seq[x] OR seq[x + 1] 
+/// OR ... OR seq[2 * x - 1]).
+/// Return the maximum value of any subsequence of nums having size 2 * k.
+/// 
+/// Example 1:
+///
+/// Input: nums = [2,6,7], k = 1
+/// Output: 5
+/// Explanation:
+/// The subsequence [2, 7] has the maximum value of 2 XOR 7 = 5.
+///
+/// Example 2:
+///
+/// Input: nums = [4,2,5,6,7], k = 2
+/// Output: 2
+/// Explanation:
+///
+/// The subsequence [4, 5, 6, 7] has the maximum value of (4 OR 5) 
+/// XOR (6 OR 7) = 2.
+///
+/// Constraints:
+/// 1. 2 <= nums.length <= 400
+/// 2. 1 <= nums[i] < 27
+/// 3. 1 <= k <= nums.length / 2
+/// </summary>
+int LeetCodeDP::maxValue(vector<int>& nums, int k)
+{
+    vector<vector<vector<int>>> left(nums.size(), vector<vector<int>>(k, vector<int>(128)));
+    vector<vector<vector<int>>> right(nums.size(), vector<vector<int>>(k, vector<int>(128)));
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (int j = 0; j < min((int)i + 1, k); j++)
+        {
+            if (i > 0)
+            {
+                left[i][j] = left[i - 1][j];
+            }
+            if (j == 0)
+            {
+                left[i][j][nums[i]] = 1;
+            }
+            if (i > 0 && j > 0)
+            {
+                for (int p = 0; p < 128; p++)
+                {
+                    if (left[i - 1][j - 1][p] == 1)
+                    {
+                        left[i][j][nums[i] | p] = 1;
+                    }
+                }
+            }
+        }
+    }
+    for (int i = nums.size() - 1; i >= 0; i--)
+    {
+        for (int j = 0; j < min((int)nums.size() - (int)i, k); j++)
+        {
+            if (i < (int)nums.size() - 1)
+            {
+                right[i][j] = right[i + 1][j];
+            }
+            if (j == 0)
+            {
+                right[i][j][nums[i]] = 1;
+            }
+            if (i < (int)nums.size() - 1 && j > 0)
+            {
+                for (int p = 0; p < 128; p++)
+                {
+                    if (right[i + 1][j - 1][p] == 1)
+                    {
+                        right[i][j][nums[i] | p] = 1;
+                    }
+                }
+            }
+        }
+    }
+    int result = 0;
+    for (int i = k - 1; i < (int)nums.size() - k; i++)
+    {
+        for (int p = 0; p < 128; p++)
+        {
+            for (int q = 0; q < 128; q++)
+            {
+                if (left[i][k-1][p] == 1 && right[i+1][k - 1][q] == 1)
+                result = max(result, p ^ q);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3290. Maximum Multiplication Score
+/// 
+/// Medium
+///
+/// You are given an integer array a of size 4 and another integer array 
+/// b of size at least 4.
+///
+/// You need to choose 4 indices i0, i1, i2, and i3 from the array b such 
+/// that i0 < i1 < i2 < i3. Your score will be equal to the value a[0] * 
+/// b[i0] + a[1] * b[i1] + a[2] * b[i2] + a[3] * b[i3].
+///
+/// Return the maximum score you can achieve.
+///
+/// Example 1:
+/// Input: a = [3,2,5,6], b = [2,-6,4,-5,-3,2,-7]
+///
+/// Output: 26
+/// Explanation:
+/// We can choose the indices 0, 1, 2, and 5. The score will be 3 * 2 + 
+/// 2 * (-6) + 5 * 4 + 6 * 2 = 26.
+/// 
+/// Example 2:
+/// Input: a = [-1,4,5,-2], b = [-5,-1,-3,-2,-4]
+/// Output: -1
+/// Explanation:
+/// We can choose the indices 0, 1, 3, and 4. The score will be (-1) * 
+/// (-5) + 4 * (-1) + 5 * (-2) + (-2) * (-4) = -1.
+///
+/// Constraints:
+/// 1. a.length == 4
+/// 2. 4 <= b.length <= 10^5
+/// 3. -10^5 <= a[i], b[i] <= 10^5
+/// </summary>
+long long LeetCodeDP::maxScore(vector<int>& a, vector<int>& b)
+{
+    vector<vector<long long>> dp(b.size(), vector<long long>(4));
+    for (int i = 0; i < (int)b.size(); i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            if (j == 0)
+            {
+                if (i == 0) dp[i][j] = (long long)a[0] * (long long)b[0];
+                else dp[i][0] = max(dp[i - 1][0], (long long)a[0] * (long long)b[i]);
+            }
+            else 
+            {
+                if (i >= j) dp[i][j] = dp[i - 1][j - 1] + (long long)a[j] * (long long)b[i];
+                if (i > j) dp[i][j] = max(dp[i - 1][j], dp[i][j]);
+            }
+        }
+    }
+    return dp[b.size() - 1][3];
+}
 #pragma endregion
 

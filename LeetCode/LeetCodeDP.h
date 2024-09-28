@@ -356,7 +356,7 @@ public:
     ///
     /// 1. 1 is a super ugly number for any given primes.
     /// 2. The given numbers in primes are in ascending order.
-    /// 3. 0 < k ¡Ü 100, 0 < n ¡Ü 106, 0 < primes[i] < 1000.
+    /// 3. 0 < k ï¿½ï¿½ 100, 0 < n ï¿½ï¿½ 106, 0 < primes[i] < 1000.
     /// 4. The nth super ugly number is guaranteed to fit in a 32-bit signed 
     ///    integer.
     /// </summary>
@@ -380,7 +380,7 @@ public:
     ///
     /// Note:
     ///
-    /// The number of stones is ¡Ý 2 and is < 1,100.
+    /// The number of stones is ï¿½ï¿½ 2 and is < 1,100.
     /// Each stone's position will be a non-negative integer < 231.
     /// The first stone's position is always 0.
     ///
@@ -578,7 +578,7 @@ public:
     /// Third round:  You guess 9, I tell you that it's lower. You pay $9.
     /// Game over. 8 is the number I picked.
     /// You end up paying $5 + $7 + $9 = $21.
-    /// Given a particular n ¡Ý 1, find out how much money you need to have to 
+    /// Given a particular n ï¿½ï¿½ 1, find out how much money you need to have to 
     /// guarantee a win.
     /// </summary>
     int getMoneyAmount(int n);
@@ -1026,9 +1026,9 @@ public:
     /// Given an array A (index starts at 1) consisting of N integers: A1, A2,
     ///	..., AN and an integer B. The integer B denotes that from any place 
     /// (suppose the index is i) in the array A, you can jump to any one of 
-    /// the place in the array A indexed i+1, i+2, ¡­, i+B if this place can 
+    /// the place in the array A indexed i+1, i+2, ï¿½ï¿½, i+B if this place can 
     /// be jumped to. Also, if you step on the index i, you have to pay Ai 
-    /// coins. If Ai is -1, it means you can¡¯t jump to the place indexed i in 
+    /// coins. If Ai is -1, it means you canï¿½ï¿½t jump to the place indexed i in 
     /// the array.
     ///
     /// Now, you start from the place indexed 1 in the array A, and your aim 
@@ -4137,7 +4137,7 @@ public:
     /// Find the maximum coins you can collect by bursting the balloons wisely. 
     /// Note: 
     /// (1) You may imagine nums[-1] = nums[n] = 1. They are not real therefore you can not burst them.
-    /// (2) 0 ¡Ü n ¡Ü 500, 0 ¡Ü nums[i] ¡Ü 100 
+    /// (2) 0 ï¿½ï¿½ n ï¿½ï¿½ 500, 0 ï¿½ï¿½ nums[i] ï¿½ï¿½ 100 
     /// Example: 
     /// Given [3, 1, 5, 8] 
     /// Return 167 
@@ -10687,5 +10687,75 @@ public:
     /// 6. 0 <= li <= ri <= n - 1
     /// </summary>
     vector<int> maximumSubarrayXor(vector<int>& nums, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet Code 3287. Find the Maximum Sequence Value of Array
+    /// 
+    /// Hard
+    ///
+    /// You are given an integer array nums and a positive integer k.
+    /// The value of a sequence seq of size 2 * x is defined as:
+    /// (seq[0] OR seq[1] OR ... OR seq[x - 1]) XOR (seq[x] OR seq[x + 1] 
+    /// OR ... OR seq[2 * x - 1]).
+    /// Return the maximum value of any subsequence of nums having size 2 * k.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: nums = [2,6,7], k = 1
+    /// Output: 5
+    /// Explanation:
+    /// The subsequence [2, 7] has the maximum value of 2 XOR 7 = 5.
+    ///
+    /// Example 2:
+    ///
+    /// Input: nums = [4,2,5,6,7], k = 2
+    /// Output: 2
+    /// Explanation:
+    ///
+    /// The subsequence [4, 5, 6, 7] has the maximum value of (4 OR 5) 
+    /// XOR (6 OR 7) = 2.
+    ///
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 400
+    /// 2. 1 <= nums[i] < 27
+    /// 3. 1 <= k <= nums.length / 2
+    /// </summary>
+    int maxValue(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3290. Maximum Multiplication Score
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array a of size 4 and another integer array 
+    /// b of size at least 4.
+    ///
+    /// You need to choose 4 indices i0, i1, i2, and i3 from the array b such 
+    /// that i0 < i1 < i2 < i3. Your score will be equal to the value a[0] * 
+    /// b[i0] + a[1] * b[i1] + a[2] * b[i2] + a[3] * b[i3].
+    ///
+    /// Return the maximum score you can achieve.
+    ///
+    /// Example 1:
+    /// Input: a = [3,2,5,6], b = [2,-6,4,-5,-3,2,-7]
+    ///
+    /// Output: 26
+    /// Explanation:
+    /// We can choose the indices 0, 1, 2, and 5. The score will be 3 * 2 + 
+    /// 2 * (-6) + 5 * 4 + 6 * 2 = 26.
+    /// 
+    /// Example 2:
+    /// Input: a = [-1,4,5,-2], b = [-5,-1,-3,-2,-4]
+    /// Output: -1
+    /// Explanation:
+    /// We can choose the indices 0, 1, 3, and 4. The score will be (-1) * 
+    /// (-5) + 4 * (-1) + 5 * (-2) + (-2) * (-4) = -1.
+    ///
+    /// Constraints:
+    /// 1. a.length == 4
+    /// 2. 4 <= b.length <= 10^5
+    /// 3. -10^5 <= a[i], b[i] <= 10^5
+    /// </summary>
+    long long maxScore(vector<int>& a, vector<int>& b);
 };
 #endif  // LeetCodeDP

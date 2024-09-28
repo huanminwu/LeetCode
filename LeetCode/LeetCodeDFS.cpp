@@ -9973,6 +9973,7 @@ int LeetCodeDFS::maxScore(vector<vector<int>>& grid)
     vector<int> cache(1 << n);
     return maxScoreDFS(node, path, n, 0, cache);
 }
+
 #pragma endregion
 
 

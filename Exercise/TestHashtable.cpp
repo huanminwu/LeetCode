@@ -2034,7 +2034,6 @@ void TestLeetCode3184(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-
 void TestLeetCode3185(void)
 {
     Logger::WriteMessage("Test Leet Code 3185");
@@ -2050,8 +2049,24 @@ void TestLeetCode3185(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3289(void)
+{
+    Logger::WriteMessage("Test Leet Code 3289");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 0, 1, 1, 0 };
+    vector<int> result = leetCode.getSneakyNumbers(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 0,3,2,1,3,2 };
+    result = leetCode.getSneakyNumbers(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3289();
     TestLeetCode3185();
     TestLeetCode3184();
     TestLeetCode3160();

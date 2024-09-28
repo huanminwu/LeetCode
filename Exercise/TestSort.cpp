@@ -3973,8 +3973,56 @@ void TestLeetCode3275(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3288(void)
+{
+    Logger::WriteMessage("Test Leet Code 3288");
+    LeetCodeSort leetCode;
+    vector<vector<int>> coordinates = { {3, 1},{2, 2},{4, 1},{0, 0},{5, 3} };
+    int k = 1;
+    int result = leetCode.maxPathLength(coordinates, k);
+    Logger::WriteMessage(coordinates);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+    
+    coordinates = { {2, 1},{7, 0},{5, 6} };
+    k = 1;
+    result = leetCode.maxPathLength(coordinates, k);
+    Logger::WriteMessage(coordinates);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    coordinates = { {1, 8},{9, 8},{9, 9} };
+    k = 1;
+    result = leetCode.maxPathLength(coordinates, k);
+    Logger::WriteMessage(coordinates);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3296(void)
+{
+    Logger::WriteMessage("Test Leet Code 3296");
+    LeetCodeSort leetCode;
+    int mountainHeight = 4;
+    vector<int> workerTimes = { 2, 1, 1 };
+    long long result = leetCode.minNumberOfSeconds(mountainHeight, workerTimes);
+    Logger::WriteMessage(workerTimes);
+    Logger::WriteMessage("mountainHeight = " + to_string(mountainHeight) + "; result = " + to_string(result));
+
+    mountainHeight = 10;
+    workerTimes = { 3, 2, 2, 4 };
+    result = leetCode.minNumberOfSeconds(mountainHeight, workerTimes);
+    Logger::WriteMessage(workerTimes);
+    Logger::WriteMessage("mountainHeight = " + to_string(mountainHeight) + "; result = " + to_string(result));
+
+    mountainHeight = 5;
+    workerTimes = { 1 };
+    result = leetCode.minNumberOfSeconds(mountainHeight, workerTimes);
+    Logger::WriteMessage(workerTimes);
+    Logger::WriteMessage("mountainHeight = " + to_string(mountainHeight) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3296();
+    TestLeetCode3288();
     TestLeetCode3275();
     TestLeetCode3231();
     TestLeetCode3224();

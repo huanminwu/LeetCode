@@ -5957,9 +5957,32 @@ void TestLeetCode3244(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3286(void)
+{
+    Logger::WriteMessage("Test Leet Code 3286");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid = { {0, 1, 0, 0, 0},{0, 1, 0, 1, 0},{0, 0, 0, 1, 0} };
+    int health = 1;
+    bool result = leetCode.findSafeWalk(grid, health);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("health = " + to_string(health) + "; result = " + (result ? "true" : "false"));
+
+    grid = { {0, 1, 1, 0, 0, 0},{1, 0, 1, 0, 0, 0},{0, 1, 1, 1, 0, 1},{0, 0, 1, 0, 1, 0} };
+    health = 3;
+    result = leetCode.findSafeWalk(grid, health);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("health = " + to_string(health) + "; result = " + (result ? "true" : "false"));
+
+    grid = { {1, 1, 1},{1, 0, 1},{1, 1, 1} };
+    health = 5;
+    result = leetCode.findSafeWalk(grid, health);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("health = " + to_string(health) + "; result = " + (result ? "true" : "false"));
+}
 
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3286();
     TestLeetCode3244();
     TestLeetCode3243();
     TestLeetCode3235();

@@ -10675,8 +10675,56 @@ void TestLeetCode3279(void)
     Logger::WriteMessage("height = " + to_string(height) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3285(void)
+{
+    Logger::WriteMessage("Test Leet Code 3285");
+    LeetCodeArray leetCode;
+    vector<int> height = { 1, 2, 3, 4, 5 };
+    int threshold = 2;
+    vector<int> result = leetCode.stableMountains(height, threshold);
+    Logger::WriteMessage(height);
+    Logger::WriteMessage("threshold = " + to_string(threshold));
+    Logger::WriteMessage(result);
+
+    height = { 10,1,10,1,10 };
+    threshold = 3;
+    result = leetCode.stableMountains(height, threshold);
+    Logger::WriteMessage(height);
+    Logger::WriteMessage("threshold = " + to_string(threshold));
+    Logger::WriteMessage(result);
+
+    height = { 10,1,10,1,10 };
+    threshold = 10;
+    result = leetCode.stableMountains(height, threshold);
+    Logger::WriteMessage(height);
+    Logger::WriteMessage("threshold = " + to_string(threshold));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3284(void)
+{
+    Logger::WriteMessage("Test Leet Code 3284");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    int result = leetCode.getSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,3,5,7 };
+    result = leetCode.getSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7,6,1,2 };
+    result = leetCode.getSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3284();
+    TestLeetCode3285();
     TestLeetCode3279();
     TestLeetCode3257();
     TestLeetCode3256();

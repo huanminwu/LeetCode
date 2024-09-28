@@ -294,5 +294,8 @@ void TestLeetCode3248(void);
 void TestLeetCode3253(void);
 void TestLeetCode3271(void);
 void TestLeetCode3280(void);
+void TestLeetCode3291(void);
+void TestLeetCode3292(void);
+void TestLeetCode3295(void);
 void TestLeetCodeString(void);
 #endif  // TestArray

@@ -1241,27 +1241,47 @@ void TestLeetCode3263(void)
     vector<int> data_list = { 1,2,3,4,3,2,1 };
     Logger::WriteMessage(data_list);
     ListNode* head = leetCode.generateListNodes(data_list);
-    vector<int> result = leetCode.toArray(head);
+    vector<int> result = leetCode.toArrayI(head);
     Logger::WriteMessage(result);
     leetCode.freeListNodes(head);
 
     data_list = { 2,2,2,2,2 };
     Logger::WriteMessage(data_list);
     head = leetCode.generateListNodes(data_list);
-    result = leetCode.toArray(head);
+    result = leetCode.toArrayI(head);
     Logger::WriteMessage(result);
     leetCode.freeListNodes(head);
 
     data_list = { 3,2,3,2,3,2 };
     Logger::WriteMessage(data_list);
     head = leetCode.generateListNodes(data_list);
-    result = leetCode.toArray(head);
+    result = leetCode.toArrayI(head);
     Logger::WriteMessage(result);
     leetCode.freeListNodes(head);
 }
 
+void TestLeetCode3294(void)
+{
+    Logger::WriteMessage("Test Leet Code 3294");
+    LeetCodeLinkedList leetCode;
+    vector<int> data_list = { 1, 2, 3, 4, 5 };
+    Logger::WriteMessage(data_list);
+    DoublyLinkedNode* head = leetCode.generateDoublyLinkedNodes(data_list);
+    DoublyLinkedNode* node = leetCode.findListNode(head, 5);
+    vector<int> result = leetCode.toArrayII(node);
+    Logger::WriteMessage(result);
+
+    data_list = { 4,5,6,7,8 };
+    Logger::WriteMessage(data_list);
+    head = leetCode.generateDoublyLinkedNodes(data_list);
+    node = leetCode.findListNode(head, 8);
+    result = leetCode.toArrayII(node);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode3294();
     TestLeetCode3263();
     TestLeetCode3217();
     TestLeetCode3063();

@@ -33799,3 +33799,144 @@ long long LeetCodeArray::maxArea(int height, vector<int>& positions, string dire
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3285. Find Indices of Stable Mountains
+/// 
+/// Easy
+///
+/// There are n mountains in a row, and each mountain has a height. You 
+/// are given an integer array height where height[i] represents the 
+/// height of mountain i, and an integer threshold.
+///
+/// A mountain is called stable if the mountain just before it (if it 
+/// exists) has a height strictly greater than threshold. Note that 
+/// mountain 0 is not stable.
+///
+/// Return an array containing the indices of all stable mountains in 
+/// any order.
+///
+/// Example 1:
+/// Input: height = [1,2,3,4,5], threshold = 2
+/// Output: [3,4]
+/// Explanation:
+/// Mountain 3 is stable because height[2] == 3 is greater than 
+/// threshold == 2.
+/// Mountain 4 is stable because height[3] == 4 is greater than 
+/// threshold == 2.
+///
+/// Example 2:
+/// 
+/// Input: height = [10,1,10,1,10], threshold = 3
+/// Output: [1,3]
+/// Example 3:
+/// Input: height = [10,1,10,1,10], threshold = 10
+/// Output: []
+/// 
+/// Constraints:
+/// 1. 2 <= n == height.length <= 100
+/// 2. 1 <= height[i] <= 100
+/// 3. 1 <= threshold <= 100
+/// </summary>
+vector<int> LeetCodeArray::stableMountains(vector<int>& height, int threshold)
+{
+    vector<int> result;
+    for (size_t i = 1; i < height.size(); i++)
+    {
+        if (height[i - 1] > threshold)
+        {
+            result.push_back(i);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3284. Sum of Consecutive Subarrays
+/// 
+/// Medium
+///
+/// We call an array arr of length n consecutive if one of the following 
+/// holds:
+///
+/// arr[i] - arr[i - 1] == 1 for all 1 <= i < n.
+/// arr[i] - arr[i - 1] == -1 for all 1 <= i < n.
+/// The value of an array is the sum of its elements.
+///
+/// For example, [3, 4, 5] is a consecutive array of value 12 and [9, 8] 
+/// is another of value 17. While [3, 4, 3] and [8, 6] are not consecutive.
+///
+/// Given an array of integers nums, return the sum of the values of all 
+/// consecutive subarrays.
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+///
+/// Note that an array of length 1 is also considered consecutive.
+///
+/// Example 1:
+/// Input: nums = [1,2,3]
+/// Output: 20
+///
+/// Explanation:
+/// The consecutive subarrays are: [1], [2], [3], [1, 2], [2, 3], 
+/// [1, 2, 3].
+/// Sum of their values would be: 1 + 2 + 3 + 3 + 5 + 6 = 20.
+///
+/// Example 2:
+/// Input: nums = [1,3,5,7]
+/// Output: 16
+/// Explanation:
+/// The consecutive subarrays are: [1], [3], [5], [7].
+/// Sum of their values would be: 1 + 3 + 5 + 7 = 16.
+///
+/// Example 3:
+/// Input: nums = [7,6,1,2]
+/// Output: 32
+/// Explanation:
+/// The consecutive subarrays are: [7], [6], [1], [2], [7, 6], [1, 2].
+/// Sum of their values would be: 7 + 6 + 1 + 2 + 13 + 3 = 32.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeArray::getSum(vector<int>& nums)
+{
+    long long M = 1000000007;
+    long long result = 0;
+    long long sum = 0;
+    int count = 0;
+    int diff = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (i == 0)
+        {
+            sum = 0;
+            count = 1;
+        }
+        else
+        {
+            if (abs(nums[i] - nums[i - 1]) == 1)
+            {
+                if (nums[i] - nums[i - 1] == diff)
+                {
+                    count++;
+                }
+                else
+                {
+                    sum = nums[i - 1];
+                    count = 2;
+                }
+            }
+            else
+            {
+                sum = 0;
+                count = 1;
+            }
+            diff = nums[i] - nums[i - 1];
+        }
+        sum = sum + (long long)count * (long long)nums[i];
+        result = (result + sum) % M;
+    }
+    return (int)result;
+}

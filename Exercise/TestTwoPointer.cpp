@@ -899,8 +899,49 @@ void TestLeetCode3261(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3297(void)
+{
+    Logger::WriteMessage("Test Leet Code 3297");
+    LeetCodeTwoPointer leetCode;
+    string word1 = "bcca", word2 = "abc";
+    long long result = leetCode.validSubstringCountI(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word1 = "abcabc", word2 = "abc";
+    result = leetCode.validSubstringCountI(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word1 = "abcabc", word2 = "aaabc";
+    result = leetCode.validSubstringCountI(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3298(void)
+{
+    Logger::WriteMessage("Test Leet Code 3298");
+    LeetCodeTwoPointer leetCode;
+    string word1 = "bcca", word2 = "abc";
+    long long result = leetCode.validSubstringCountI(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word1 = "abcabc", word2 = "abc";
+    result = leetCode.validSubstringCountI(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word1 = "abcabc", word2 = "aaabc";
+    result = leetCode.validSubstringCountI(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode3297();
     TestLeetCode3261();
     TestLeetCode3258();
     TestLeetCode3194();

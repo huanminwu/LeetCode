@@ -7174,8 +7174,75 @@ void TestLeetCode3280(void)
     Logger::WriteMessage("s = " + date + "; result = " + result);
 }
 
+void TestLeetCode3291(void)
+{
+    Logger::WriteMessage("Test Leet Code 3291");
+    LeetCodeString leetCode;
+    vector<string> words = { "abc", "aaaaa", "bcdef" };
+    string target = "aabcdabc";
+    int result = leetCode.minValidStringsI(words, target);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+
+    words = { "abababab", "ab" };
+    target = "ababaababa";
+    result = leetCode.minValidStringsI(words, target);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+
+    words = { "abcdef" };
+    target = "xyz";
+    result = leetCode.minValidStringsI(words, target);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+}
+
+void TestLeetCode3292(void)
+{
+    Logger::WriteMessage("Test Leet Code 3292");
+    LeetCodeString leetCode;
+    vector<string> words = { "abc", "aaaaa", "bcdef" };
+    string target = "aabcdabc";
+    int result = leetCode.minValidStringsII(words, target);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+
+    words = { "abababab", "ab" };
+    target = "ababaababa";
+    result = leetCode.minValidStringsII(words, target);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+
+    words = { "abcdef" };
+    target = "xyz";
+    result = leetCode.minValidStringsII(words, target);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("target = " + target + "; result = " + to_string(result));
+}
+
+void TestLeetCode3295(void)
+{
+    Logger::WriteMessage("Test Leet Code 3295");
+    LeetCodeString leetCode;
+    vector<string> message = { "hello", "world", "leetcode" };
+    vector<string> bannedWords = { "world", "hello" };
+    bool result = leetCode.reportSpam(message, bannedWords);
+    Logger::WriteMessage(message);
+    Logger::WriteMessage(bannedWords);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    message = { "hello","programming","fun" };
+    bannedWords = { "world","programming","leetcode" };
+    result = leetCode.reportSpam(message, bannedWords);
+    Logger::WriteMessage(message);
+    Logger::WriteMessage(bannedWords);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3295();
+    TestLeetCode3291();
     TestLeetCode3280();
     TestLeetCode3271();
     TestLeetCode3213();
