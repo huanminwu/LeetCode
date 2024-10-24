@@ -23858,5 +23858,519 @@ bool LeetCodeMath::checkTwoChessboards(string coordinate1, string coordinate2)
         return false;
     }
 }
+
+/// <summary>
+/// Leet Code 3300. Minimum Element After Replacement With Digit Sum
+/// 
+/// Easy
+/// 
+/// You are given an integer array nums.
+/// You replace each element in nums with the sum of its digits.
+/// Return the minimum element in nums after all replacements.
+///
+/// Example 1:
+///  
+/// Input: nums = [10,12,13,14]
+/// Output: 1
+/// Explanation:
+/// nums becomes [1, 3, 4, 5] after all replacements, with minimum 
+/// element 1.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4]
+/// Output: 1
+/// Explanation:
+/// nums becomes [1, 2, 3, 4] after all replacements, with minimum 
+/// element 1.
+///
+/// Example 3:
+/// Input: nums = [999,19,199]
+/// Output: 10
+/// Explanation:
+/// nums becomes [27, 10, 19] after all replacements, with minimum 
+/// element 10.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 10^4
+/// </summary>
+int LeetCodeMath::minElement(vector<int>& nums)
+{
+    int result = INT_MAX;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int n = nums[i];
+        int sum = 0;
+        while (n > 0)
+        {
+            sum += n % 10;
+            n /= 10;
+        }
+        result = min(result, sum);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3309. Maximum Possible Number by Binary Concatenation 
+/// 
+/// Medium
+///
+/// You are given an array of integers nums of size 3.
+///
+/// Return the maximum possible number whose binary representation can be 
+/// formed by concatenating the binary representation of all elements in 
+/// nums in some order.
+/// Note that the binary representation of any number does not contain 
+/// leading zeros.
+///
+/// Example 1:
+/// Input: nums = [1,2,3]
+/// Output: 30
+/// Explanation:
+/// Concatenate the numbers in the order [3, 1, 2] to get the result "11110", 
+/// which is the binary representation of 30.
+///
+/// Example 2:
+/// Input: nums = [2,8,16]
+/// Output: 1296
+/// Explanation:
+/// Concatenate the numbers in the order [2, 8, 16] to get the 
+/// result "10100010000", which is the binary representation of 1296.
+///
+/// Constraints:
+/// 1. nums.length == 3
+/// 2. 1 <= nums[i] <= 127
+/// </summary>
+int LeetCodeMath::maxGoodNumber(vector<int>& nums)
+{
+    int result = 0;
+    vector<int> arr(nums.size());
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        arr[0] = nums[i];
+        for (size_t j = 0; j < nums.size(); j++)
+        {
+            if (i == j) continue;
+            arr[1] = nums[j];
+            for (size_t k = 0; k < nums.size(); k++)
+            {
+                if (i == k || j == k) continue;
+                arr[2] = nums[k];
+                int val = 0;
+                for (size_t p = 0; p < arr.size(); p++)
+                {
+                    int n = arr[p];
+                    string str;
+                    while (n > 0)
+                    {
+                        str.push_back('0' + n % 2);
+                        n /= 2;
+                    }
+                    std::reverse(str.begin(), str.end());
+                    for (size_t q = 0; q < str.size(); q++)
+                    {
+                        val = val * 2 + str[q] - '0';
+                    }
+                }
+                result = max(result, val);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3312. Sorted GCD Pair Queries
+/// 
+/// Hard
+/// 
+/// You are given an integer array nums of length n and an integer array 
+/// queries.
+/// 
+/// Let gcdPairs denote an array obtained by calculating the GCD of all 
+/// possible pairs (nums[i], nums[j]), where 0 <= i < j < n, and then 
+/// sorting these values in ascending order.
+///
+/// For each query queries[i], you need to find the element at index 
+/// queries[i] in gcdPairs.
+///
+/// Return an integer array answer, where answer[i] is the value at 
+/// gcdPairs[queries[i]] for each query.
+///
+/// The term gcd(a, b) denotes the greatest common divisor of a and b.
+/// 
+/// Example 1:
+/// Input: nums = [2,3,4], queries = [0,2,2]
+/// Output: [1,2,2]
+/// Explanation:
+/// gcdPairs = [gcd(nums[0], nums[1]), gcd(nums[0], nums[2]), 
+/// gcd(nums[1], nums[2])] = [1, 2, 1].
+///
+/// After sorting in ascending order, gcdPairs = [1, 1, 2].
+///
+/// So, the answer is [gcdPairs[queries[0]], gcdPairs[queries[1]], 
+/// gcdPairs[queries[2]]] = [1, 2, 2].
+///
+/// Example 2:
+/// Input: nums = [4,4,2,1], queries = [5,3,1,0]
+/// Output: [4,2,1,1]
+/// Explanation:
+/// gcdPairs sorted in ascending order is [1, 1, 1, 2, 2, 4].
+///
+/// Example 3:
+/// Input: nums = [2,2], queries = [0,0]
+/// Output: [2,2]
+/// Explanation:
+/// gcdPairs = [2].
+///  
+/// Constraints:
+/// 1. 2 <= n == nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 5 * 10^4
+/// 3. 1 <= queries.length <= 10^5
+/// 4. 0 <= queries[i] < n * (n - 1) / 2
+/// </summary>
+vector<int> LeetCodeMath::gcdValues(vector<int>& nums, vector<long long>& queries)
+{
+    int max_val = 0;
+    for (auto m : nums) max_val = max(max_val, m);
+    vector<long long> cnt(max_val + 1), gcd(max_val + 1);
+    for (auto m : nums) cnt[m]++;
+    for (int i = max_val; i > 0; i--)
+    {
+        for (int j = i; j <= max_val; j += i)
+        {
+            gcd[i] += cnt[j];
+        }
+        gcd[i] = gcd[i] * (gcd[i] - 1) / 2;
+        for (int j = 2 * i; j <= max_val; j += i)
+        {
+            gcd[i] -= gcd[j];
+        }
+    }
+    vector<pair<long long, long long>> arr;
+    for (int i = 1; i <= max_val; i++)
+    {
+        if (gcd[i] != 0)
+        {
+            arr.push_back(make_pair(i, gcd[i]));
+        }
+    }
+    sort(arr.begin(), arr.end());
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        swap(arr[i].first, arr[i].second);
+        if (i > 0) arr[i].first += arr[i - 1].first;
+    }
+    vector<int> result;
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        auto itr = upper_bound(arr.begin(), arr.end(), make_pair(queries[i], LLONG_MAX));
+        if (itr != arr.end())
+        {
+            result.push_back((int)(itr->second));
+        }
+        else
+        {
+            result.push_back(-1);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3314. Construct the Minimum Bitwise Array I
+/// 
+/// Easy
+/// 
+/// You are given an array nums consisting of n prime integers.
+///
+/// You need to construct an array ans of length n, such that, for each 
+/// index i, the bitwise OR of ans[i] and ans[i] + 1 is equal to nums[i], 
+/// i.e. ans[i] OR (ans[i] + 1) == nums[i].
+///
+/// Additionally, you must minimize each value of ans[i] in the resulting 
+/// array.
+///
+/// If it is not possible to find such a value for ans[i] that satisfies 
+/// the condition, then set ans[i] = -1.
+///
+/// Example 1:
+/// Input: nums = [2,3,5,7]
+/// Output: [-1,1,4,3]
+/// Explanation:
+/// For i = 0, as there is no value for ans[0] that satisfies ans[0] 
+/// OR (ans[0] + 1) = 2, so ans[0] = -1.
+/// For i = 1, the smallest ans[1] that satisfies ans[1] OR 
+/// (ans[1] + 1) = 3 is 1, because 1 OR (1 + 1) = 3.
+/// For i = 2, the smallest ans[2] that satisfies ans[2] OR 
+/// (ans[2] + 1) = 5 is 4, because 4 OR (4 + 1) = 5.
+/// For i = 3, the smallest ans[3] that satisfies ans[3] OR 
+/// (ans[3] + 1) = 7 is 3, because 3 OR (3 + 1) = 7.
+///
+/// Example 2:
+/// Input: nums = [11,13,31]
+/// Output: [9,12,15]
+/// Explanation:
+/// For i = 0, the smallest ans[0] that satisfies ans[0] OR 
+/// (ans[0] + 1) = 11 is 9, because 9 OR (9 + 1) = 11.
+/// For i = 1, the smallest ans[1] that satisfies ans[1] OR 
+/// (ans[1] + 1) = 13 is 12, because 12 OR (12 + 1) = 13.
+/// For i = 2, the smallest ans[2] that satisfies ans[2] 
+/// OR (ans[2] + 1) = 31 is 15, because 15 OR (15 + 1) = 31.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 2 <= nums[i] <= 1000
+/// 3. nums[i] is a prime number.
+/// </summary>
+vector<int> LeetCodeMath::minBitwiseArrayI(vector<int>& nums)
+{
+    vector<int> result;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int n = nums[i];
+        if (n % 2 == 0)
+        {
+            result.push_back(-1);
+            continue;
+        }
+        vector<int> bits;
+        while (n > 0)
+        {
+            bits.push_back(n % 2);
+            n /= 2;
+        }
+        for (int j = 0; j < (int)bits.size(); j++)
+        {
+            if (j == bits.size() - 1 || bits[j + 1] == 0)
+            {
+                for (int k = 0; k < j; k++) bits[k] = 0;
+                break;
+            }
+        }
+        n = 0;
+        for (int i = bits.size() - 1; i >= 0; i--)
+        {
+            n = n * 2 + bits[i];
+        }
+        n--;
+        result.push_back(n);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3315. Construct the Minimum Bitwise Array II
+/// 
+/// Medium
+/// 
+///
+/// You are given an array nums consisting of n prime integers.
+///
+/// You need to construct an array ans of length n, such that, for each 
+/// index i, the bitwise OR of ans[i] and ans[i] + 1 is equal to nums[i], 
+/// i.e. ans[i] OR (ans[i] + 1) == nums[i].
+///
+/// Additionally, you must minimize each value of ans[i] in the resulting 
+/// array.
+///
+/// If it is not possible to find such a value for ans[i] that satisfies 
+/// the condition, then set ans[i] = -1.
+///
+/// Example 1:
+///
+/// Input: nums = [2,3,5,7]
+/// Output: [-1,1,4,3]
+/// Explanation:
+/// For i = 0, as there is no value for ans[0] that satisfies ans[0] OR 
+/// (ans[0] + 1) = 2, so ans[0] = -1.
+/// For i = 1, the smallest ans[1] that satisfies ans[1] OR 
+/// (ans[1] + 1) = 3 is 1, because 1 OR (1 + 1) = 3.
+/// For i = 2, the smallest ans[2] that satisfies ans[2] OR 
+/// (ans[2] + 1) = 5 is 4, because 4 OR (4 + 1) = 5.
+/// For i = 3, the smallest ans[3] that satisfies ans[3] OR 
+/// (ans[3] + 1) = 7 is 3, because 3 OR (3 + 1) = 7.
+///
+/// Example 2:
+/// Input: nums = [11,13,31]
+/// Output: [9,12,15]
+/// Explanation:
+/// For i = 0, the smallest ans[0] that satisfies ans[0] OR 
+/// (ans[0] + 1) = 11 is 9, because 9 OR (9 + 1) = 11.
+/// For i = 1, the smallest ans[1] that satisfies ans[1] OR 
+/// (ans[1] + 1) = 13 is 12, because 12 OR (12 + 1) = 13.
+/// For i = 2, the smallest ans[2] that satisfies ans[2] OR 
+/// (ans[2] + 1) = 31 is 15, because 15 OR (15 + 1) = 31.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 2 <= nums[i] <= 10^9
+/// 3. nums[i] is a prime number.
+/// </summary>
+vector<int> LeetCodeMath::minBitwiseArrayII(vector<int>& nums)
+{
+    vector<int> result;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int n = nums[i];
+        if (n % 2 == 0)
+        {
+            result.push_back(-1);
+            continue;
+        }
+        vector<int> bits;
+        while (n > 0)
+        {
+            bits.push_back(n % 2);
+            n /= 2;
+        }
+        for (int j = 0; j < (int)bits.size(); j++)
+        {
+            if (j == bits.size() - 1 || bits[j + 1] == 0)
+            {
+                for (int k = 0; k < j; k++) bits[k] = 0;
+                break;
+            }
+        }
+        n = 0;
+        for (int i = bits.size() - 1; i >= 0; i--)
+        {
+            n = n * 2 + bits[i];
+        }
+        n--;
+        result.push_back(n);
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3317. Find the Number of Possible Ways for an Event
+/// 
+/// Hard
+/// 
+/// You are given three integers n, x, and y.
+///
+/// An event is being held for n performers. When a performer arrives, 
+/// they are assigned to one of the x stages. All performers assigned 
+/// to the same stage will perform together as a band, though some stages 
+/// might remain empty.
+///
+/// After all performances are completed, the jury will award each band 
+/// a score in the range [1, y].
+///
+/// Return the total number of possible ways the event can take place.
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+///
+/// Note that two events are considered to have been held differently if 
+/// either of the following conditions is satisfied:
+///
+/// Any performer is assigned a different stage.
+/// Any band is awarded a different score.
+///
+/// Example 1:
+/// Input: n = 1, x = 2, y = 3
+/// Output: 6
+/// Explanation:
+/// There are 2 ways to assign a stage to the performer.
+/// The jury can award a score of either 1, 2, or 3 to the only band.
+///
+/// Example 2:
+/// Input: n = 5, x = 2, y = 1
+/// Output: 32
+/// Explanation:
+/// Each performer will be assigned either stage 1 or stage 2.
+/// All bands will be awarded a score of 1.
+///
+/// Example 3:
+/// Input: n = 3, x = 3, y = 4
+/// Output: 684
+/// Constraints:
+/// 1. 1 <= n, x, y <= 1000
+/// </summary>
+int LeetCodeMath::numberOfWays(int n, int x, int y)
+{
+    long long M = 1000000007;
+    vector<vector<long long>> comb(1001, vector<long long>(1001)), dp(1001, vector<long long>(1001));
+    comb[0][0] = 1; dp[0][0] = 1;
+
+    for (int i = 1; i < 1001; i++) 
+    {
+        comb[i][0] = 1;
+        for (int j = 1; j <= i; j++)
+        {
+            comb[i][j] = (comb[i - 1][j - 1] + comb[i - 1][j]) % M;
+            dp[i][j] = j * (dp[i - 1][j - 1] + dp[i - 1][j]) % M;
+        }
+    }
+    long long result = 0;
+    for (int st = 1; st <= min(n, x); ++st)
+    {
+        result = (result + modPow(y, st, M) * comb[x][st] % M * dp[n][st] % M) % M;
+    }
+    return (int)result;
+}
+
+/// <summary>
+/// Leet Code 3326. Minimum Division Operations to Make Array Non 
+///                 Decreasing 
+/// Medium
+///
+/// You are given an integer array nums.
+///
+/// Any positive divisor of a natural number x that is strictly less than 
+/// x is called a proper divisor of x. For example, 2 is a proper divisor 
+/// of 4, while 6 is not a proper divisor of 6.
+///
+/// You are allowed to perform an operation any number of times on nums, 
+/// where in each operation you select any one element from nums and 
+/// divide it by its greatest proper divisor.
+///
+/// Return the minimum number of operations required to make the array 
+/// non-decreasing.
+///
+/// If it is not possible to make the array non-decreasing using any number 
+/// of operations, return -1.
+/// 
+/// Example 1:
+/// Input: nums = [25,7]
+/// Output: 1
+/// Explanation:
+/// Using a single operation, 25 gets divided by 5 and nums becomes [5, 7].
+///
+/// Example 2:
+/// Input: nums = [7,7,6]
+/// Output: -1
+///
+/// Example 3:
+/// Input: nums = [1,1,1,1]
+/// Output: 0
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^6
+/// </summary>
+int LeetCodeMath::minOperationsNonDecreasing(vector<int>& nums)
+{
+    int result = 0;
+    vector<int> arr = nums;
+    for (int i = arr.size() - 2; i >= 0; i--)
+    {
+        if (arr[i] <= arr[i + 1]) continue;
+        for (int j = 2; j * j <= arr[i]; j++)
+        {
+            if (arr[i] % j == 0)
+            {
+                result++;
+                arr[i] = j;
+                break;
+            }
+        }
+        if (arr[i] > arr[i + 1]) return -1;
+    }
+    return result;
+}
 #pragma endregion
 

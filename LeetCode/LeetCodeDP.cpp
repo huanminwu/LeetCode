@@ -19102,5 +19102,355 @@ long long LeetCodeDP::maxScore(vector<int>& a, vector<int>& b)
     }
     return dp[b.size() - 1][3];
 }
+
+/// <summary>
+/// Leet Code 3302. Find the Lexicographically Smallest Valid Sequence 
+///                
+/// Medium
+///
+/// Companies
+/// You are given two strings word1 and word2.
+/// A string x is called almost equal to y if you can change at most one 
+/// character in x to make it identical to y.
+///
+/// A sequence of indices seq is called valid if:
+/// The indices are sorted in ascending order.
+/// Concatenating the characters at these indices in word1 in the same 
+/// order results in a string that is almost equal to word2.
+/// Return an array of size word2.length representing the 
+/// lexicographically smallest valid sequence of indices. If no such 
+/// sequence of indices exists, return an empty array.
+///
+/// Note that the answer must represent the lexicographically smallest 
+/// array, not the corresponding string formed by those indices.
+///
+/// Example 1:
+/// Input: word1 = "vbcca", word2 = "abc"
+/// Output: [0,1,2]
+///
+/// Explanation:
+/// The lexicographically smallest valid sequence of indices is [0, 1, 2]:
+///
+/// Change word1[0] to 'a'.
+/// word1[1] is already 'b'.
+/// word1[2] is already 'c'.
+///
+/// Example 2:
+/// Input: word1 = "bacdc", word2 = "abc"
+/// Output: [1,2,4]
+///
+/// Explanation:
+/// The lexicographically smallest valid sequence of indices is [1, 2, 4]:
+/// word1[1] is already 'a'.
+/// Change word1[2] to 'b'.
+/// word1[4] is already 'c'.
+///
+/// Example 3:
+/// Input: word1 = "aaaaaa", word2 = "aaabc"
+/// Output: []
+///
+/// Explanation:
+/// There is no valid sequence of indices.
+/// Example 4:
+/// Input: word1 = "abc", word2 = "ab"
+/// Output: [0,1]
+/// 
+/// Constraints:
+/// 1. 1 <= word2.length < word1.length <= 3 * 10^5
+/// 2. word1 and word2 consist only of lowercase English letters.
+/// </summary>
+vector<int> LeetCodeDP::validSequence(string word1, string word2)
+{
+    vector<int> suffix(word1.size() + 1);
+    vector<int> result;
+    int prev = 0;
+    int n = word1.size();
+    int m = word2.size();
+    int i = 0, j = 0;
+    for (i = n - 1, j = m - 1; i >= 0; i--)
+    {
+        if (j >= 0 && word1[i] == word2[j])
+        {
+            prev++;
+            j--;
+        }
+        suffix[i] = prev;
+    }
+    prev = 0;
+    int point = -1;
+    for (i = 0, j = 0; i < n && j < m; i++)
+    {
+        if (word1[i] == word2[j])
+        {
+            prev++;
+            j++;
+        }
+        else if (prev + suffix[i + 1] >= m - 1)
+        {
+            point = i;
+            break;
+        }
+    }
+    if (point == -1 && j < m) return result;
+    for (i = 0, j = 0; i < n && j < m; i++)
+    {
+        if (i == point || word1[i] == word2[j])
+        {
+            result.push_back(i);
+            j++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3316. Find Maximum Removals From Source String 
+/// </summary>
+int LeetCodeDP::maxRemovals(string source, string pattern, int s, int p, vector<vector<int>>& dp, vector<int>& target)
+{
+    if (dp[s][p] != -1) return dp[s][p];
+    int n = source.size();
+    int m = pattern.size();
+    dp[s][p] = INT_MIN;
+    if (s < n && p < m)
+    {
+        if (source[s] == pattern[p])
+        {
+            dp[s][p] = max(dp[s][p], maxRemovals(source, pattern, s + 1, p + 1, dp, target));
+        }
+        int ret = maxRemovals(source, pattern, s + 1, p, dp, target);
+        if (ret >= 0)
+        {
+            ret += target[s];
+        }
+        dp[s][p] = max(dp[s][p], ret);
+    }
+    else if (p == m)
+    {
+        int ret = target[s] + maxRemovals(source, pattern, s + 1, p, dp, target);
+        dp[s][p] = max(dp[s][p], ret);
+    }
+    else if (s == n)
+    {
+        dp[s][p] = INT_MIN;
+    }
+    return dp[s][p];
+}
+
+/// <summary>
+/// Leet Code 3316. Find Maximum Removals From Source String 
+///                
+/// Medium
+///
+/// You are given a string source of size n, a string pattern that is a 
+/// subsequence of source, and a sorted integer array targetIndices that 
+/// contains distinct numbers in the range [0, n - 1].
+///
+/// We define an operation as removing a character at an index idx from 
+/// source such that:
+///
+/// idx is an element of targetIndices. pattern remains a subsequence
+/// of source after removing the character.
+/// Performing an operation does not change the indices of the other 
+/// characters in source. For example, if you remove 'c' from "acb", 
+/// the character at index 2 would still be 'b'.
+///
+/// Return the maximum number of operations that can be performed.
+/// 
+/// Example 1:
+/// Input: source = "abbaa", pattern = "aba", targetIndices = [0,1,2]
+/// Output: 1
+/// Explanation:
+/// We can't remove source[0] but we can do either of these two operations:
+/// Remove source[1], so that source becomes "a_baa".
+/// Remove source[2], so that source becomes "ab_aa".
+///
+/// Example 2:
+/// Input: source = "bcda", pattern = "d", targetIndices = [0,3]
+/// Output: 2
+/// Explanation:
+/// We can remove source[0] and source[3] in two operations.
+///
+/// Example 3:
+/// Input: source = "dda", pattern = "dda", targetIndices = [0,1,2]
+/// Output: 0
+/// Explanation:
+/// We can't remove any character from source.
+///
+/// Example 4:
+/// Input: source = "yeyeykyded", pattern = "yeyyd", targetIndices = [0,2,3,4]
+/// Output: 2
+/// Explanation:
+/// We can remove source[2] and source[3] in two operations.
+/// 
+/// Constraints:
+/// 1. 1 <= n == source.length <= 3 * 10^3
+/// 2. 1 <= pattern.length <= n
+/// 3. 1 <= targetIndices.length <= n
+/// 4. targetIndices is sorted in ascending order.
+/// 5. The input is generated such that targetIndices contains distinct elements 
+///    in the range [0, n - 1].
+/// 6. source and pattern consist only of lowercase English letters.
+/// 7. The input is generated such that pattern appears as a subsequence in source. 
+/// </summary>
+int LeetCodeDP::maxRemovals(string source, string pattern, vector<int>& targetIndices)
+{
+    int n = source.size(), m = pattern.size();
+    vector<int> target(n);
+    for (int t : targetIndices) target[t] = 1;
+
+    vector<int> dp(m + 1, INT_MIN);
+    dp[m] = 0;
+    for (int i = n - 1; i >= 0; i--) 
+    {
+        for (int j = 0; j <= m; j++) 
+        {
+            if (dp[j] >= 0) dp[j] += target[i];
+            if (j < m && source[i] == pattern[j])
+            {
+                if (dp[j + 1] >= 0) dp[j] = max(dp[j], dp[j + 1]);
+            }
+        }
+    }
+    return dp[0];
+}
+
+/// <summary>
+/// Leet Code 3320. Count The Number of Winning Sequences 
+///              
+/// Hard
+///
+/// Alice and Bob are playing a fantasy battle game consisting of n rounds 
+/// where they summon one of three magical creatures each round: a Fire 
+/// Dragon, a Water Serpent, or an Earth Golem. In each round, players 
+/// simultaneously summon their creature and are awarded points as follows:
+///
+/// If one player summons a Fire Dragon and the other summons an Earth 
+/// Golem, the player who summoned the Fire Dragon is awarded a point.
+/// If one player summons a Water Serpent and the other summons a Fire 
+/// Dragon, the player who summoned the Water Serpent is awarded a point.
+/// If one player summons an Earth Golem and the other summons a 
+/// Water Serpent, the player who summoned the Earth Golem is awarded a 
+/// point.
+/// If both players summon the same creature, no player is awarded a 
+/// point.
+/// You are given a string s consisting of n characters 'F', 'W', 
+/// and 'E', representing the sequence of creatures Alice will summon 
+/// in each round:
+///
+/// If s[i] == 'F', Alice summons a Fire Dragon.
+/// If s[i] == 'W', Alice summons a Water Serpent.
+/// If s[i] == 'E', Alice summons an Earth Golem.
+/// Bob's sequence of moves is unknown, but it is guaranteed that Bob will 
+/// never summon the same creature in two consecutive rounds. Bob beats 
+/// Alice if the total number of points awarded to Bob after n rounds is 
+/// strictly greater than the points awarded to Alice.
+///
+/// Return the number of distinct sequences Bob can use to beat Alice.
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+/// 
+/// Example 1:
+/// Input: s = "FFF"
+/// Output: 3
+/// Explanation:
+/// Bob can beat Alice by making one of the following sequences of 
+/// moves: "WFW", "FWF", or "WEW". Note that other winning sequences 
+/// like "WWE" or "EWW" are invalid since Bob cannot make the same 
+/// move twice in a row.
+///
+/// Example 2:
+/// Input: s = "FWEFW"
+/// Output: 18
+/// Explanation:
+/// Bob can beat Alice by making one of the following sequences of moves: 
+/// "FWFWF", "FWFWE", "FWEFE", "FWEWE", "FEFWF", "FEFWE", "FEFEW", "FEWFE", 
+/// "WFEFE", "WFEWE", "WEFWF", "WEFWE", "WEFEF", "WEFEW", "WEWFW", "WEWFE",
+/// "EWFWE", or "EWEWE".
+/// 
+/// Constraints:
+/// 1 <= s.length <= 1000
+/// s[i] is one of 'F', 'W', or 'E'.
+/// </summary>
+int LeetCodeDP::countWinningSequences(string s)
+{
+    vector<int> creatures = { 'F', 'W', 'E' };
+    long long M = 1000000007;
+    vector<vector<long long>> prev(3, vector<long long>(2001));
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        vector<vector<long long>> curr(3, vector<long long>(2001));
+        for (int j = 0; j < 3; j++)
+        {
+            if (creatures[j] == s[i])
+            {
+                if (i == 0)
+                {
+                    curr[j][1000] = 1;
+                }
+                else
+                {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        if (j == k) continue;
+                        for (int p = 0; p < 2001; p++)
+                        {
+                            curr[j][p] = (curr[j][p] + prev[k][p]) % M;
+                        }
+                    }
+                }
+            }
+            else if ((creatures[j] == 'E' && s[i] == 'F') ||
+                (creatures[j] == 'F' && s[i] == 'W') ||
+                (creatures[j] == 'W' && s[i] == 'E'))
+            {
+                if (i == 0)
+                {
+                    curr[j][999] = 1;
+                }
+                else
+                {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        if (j == k) continue;
+                        for (int p = 1; p < 2001; p++)
+                        {
+                            curr[j][p-1] = (curr[j][p-1] + prev[k][p]) % M;
+                        }
+                    }
+                }
+            }
+            else 
+            {
+                if (i == 0)
+                {
+                    curr[j][1001] = 1;
+                }
+                else
+                {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        if (j == k) continue;
+                        for (int p = 0; p < 2000; p++)
+                        {
+                            curr[j][p + 1] = (curr[j][p + 1] + prev[k][p]) % M;
+                        }
+                    }
+                }
+            }
+        }
+        prev = curr;
+    }
+    long long result = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 1001; j < 2001; j++)
+        {
+            result = (result + prev[i][j]) % M;
+        }
+    }
+    return (int)result;
+}
+
 #pragma endregion
 

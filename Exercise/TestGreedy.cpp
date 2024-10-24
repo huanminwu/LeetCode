@@ -1892,8 +1892,28 @@ void TestLeetCode3273(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3323(void)
+{
+    Logger::WriteMessage("Test Leet Code 3323");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> intervals = { {1, 3},{5, 6},{8, 10} };
+    int k = 3;
+    int result = leetCode.minConnectedGroups(intervals, k);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    intervals = { {5, 10},{1, 1},{3, 3} };
+    k = 1;
+    result = leetCode.minConnectedGroups(intervals, k);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode3323();
     TestLeetCode3273();
     TestLeetCode3169();
     TestLeetCode3168();

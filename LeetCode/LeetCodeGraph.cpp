@@ -20507,4 +20507,221 @@ bool LeetCodeGraph::findSafeWalk(vector<vector<int>>& grid, int health)
         return false;
     }
 }
+
+/// <summary>
+/// Leet Code 3310. Remove Methods From Project 
+/// 
+/// Medium
+///
+/// You are maintaining a project that has n methods numbered from 0 
+/// to n - 1.
+///
+/// You are given two integers n and k, and a 2D integer array 
+/// invocations, where invocations[i] = [ai, bi] indicates that 
+/// method ai invokes method bi.
+///
+/// There is a known bug in method k. Method k, along with any method 
+/// invoked by it, either directly or indirectly, are considered 
+/// suspicious and we aim to remove them.
+///
+/// A group of methods can only be removed if no method outside the 
+/// group invokes any methods within it.
+///
+/// Return an array containing all the remaining methods after removing 
+/// all the suspicious methods. You may return the answer in any order. 
+/// If it is not possible to remove all the suspicious methods, none 
+/// should be removed.
+///
+/// Example 1:
+/// Input: n = 4, k = 1, invocations = [[1,2],[0,1],[3,2]]
+/// Output: [0,1,2,3]
+///
+/// Explanation:
+/// Method 2 and method 1 are suspicious, but they are directly invoked 
+/// by methods 3 and 0, which are not suspicious. We return all elements 
+/// without removing anything.
+///
+/// Example 2:
+/// Input: n = 5, k = 0, invocations = [[1,2],[0,2],[0,1],[3,4]]
+/// Output: [3,4]
+/// Explanation:
+/// Methods 0, 1, and 2 are suspicious and they are not directly invoked 
+/// by any other method. We can remove them.
+///
+/// Example 3:
+/// Input: n = 3, k = 2, invocations = [[1,2],[0,1],[2,0]]
+/// Output: []
+/// Explanation:
+/// All methods are suspicious. We can remove them.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// 2. 0 <= k <= n - 1
+/// 3. 0 <= invocations.length <= 2 * 10^5
+/// 4. invocations[i] == [ai, bi]
+/// 5. 0 <= ai, bi <= n - 1
+/// 6. ai != bi
+/// 7. invocations[i] != invocations[j]
+/// </summary>
+vector<int> LeetCodeGraph::remainingMethods(int n, int k, vector<vector<int>>& invocations)
+{
+    vector<int> suspicious(n);
+    vector<vector<int>> followers(n, vector<int>());
+    for (size_t i = 0; i < invocations.size(); i++)
+    {
+        int a = invocations[i][0];
+        int b = invocations[i][1];
+        followers[a].push_back(b);
+    }
+    queue<int> q;
+    q.push(k);
+    suspicious[k] = 1;
+    while (!q.empty())
+    {
+        int t = q.front();
+        q.pop();
+        for (size_t i = 0; i < followers[t].size(); i++)
+        {
+            if (suspicious[followers[t][i]] == 0)
+            {
+                q.push(followers[t][i]);
+                suspicious[followers[t][i]] = 1;
+            }
+        }
+    }
+    vector<int> result;
+    for (size_t i = 0; i < invocations.size(); i++)
+    {
+        int a = invocations[i][0];
+        int b = invocations[i][1];
+        if (suspicious[b] == 1 && suspicious[a] == 0)
+        {
+            for (int i = 0; i < n; i++) result.push_back(i);
+            return result;
+        }
+    }
+    for (size_t i = 0; i < suspicious.size(); i++)
+    {
+        if (suspicious[i] == 0) result.push_back(i);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3311. Construct 2D Grid Matching Graph Layout
+/// 
+/// Hard
+/// 
+/// You are given a 2D integer array edges representing an undirected 
+/// graph having n nodes, where edges[i] = [ui, vi] denotes an edge 
+/// between nodes ui and vi.
+///
+/// Construct a 2D grid that satisfies these conditions:
+/// The grid contains all nodes from 0 to n - 1 in its cells, with each 
+/// node appearing exactly once.
+/// Two nodes should be in adjacent grid cells (horizontally or 
+/// vertically) if and only if there is an edge between them in edges.
+/// It is guaranteed that edges can form a 2D grid that satisfies the 
+/// conditions.
+///
+/// Return a 2D integer array satisfying the conditions above. If 
+/// there are multiple solutions, return any of them.
+///
+///
+/// Example 1:
+/// Input: n = 4, edges = [[0,1],[0,2],[1,3],[2,3]]
+/// Output: [[3,1],[2,0]]
+///
+/// Explanation:
+/// Example 2:
+/// Input: n = 5, edges = [[0,1],[1,3],[2,3],[2,4]]
+/// Output: [[4,2,3,1,0]]
+/// Explanation:
+/// 
+/// Example 3:
+/// Input: n = 9, edges = [[0,1],[0,4],[0,5],[1,7],[2,3],[2,4],[2,5],
+/// [3,6],[4,6],[4,7],[6,8],[7,8]]
+///
+/// Output: [[8,6,3],[7,4,2],[1,0,5]]
+///
+/// Explanation:
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 5 * 10^4
+/// 2. 1 <= edges.length <= 10^5
+/// 3. edges[i] = [ui, vi]
+/// 4. 0 <= ui < vi < n
+/// 5. All the edges are distinct.
+/// 6. The input is generated such that edges can form a 2D grid that 
+///    satisfies the conditions.
+/// </summary>
+vector<vector<int>> LeetCodeGraph::constructGridLayout(int n, vector<vector<int>>& edges)
+{
+    vector<unordered_set<int>> neighbors(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].insert(edges[i][1]);
+        neighbors[edges[i][1]].insert(edges[i][0]);
+    }
+    size_t degree = n;
+    int left = -1;
+    for (int i = 0; i < n; i++)
+    {
+        if (degree > neighbors[i].size())
+        {
+            degree = neighbors[i].size();
+            left = i;
+        }
+    }
+    vector<vector<int>> result;
+    int count = 0;
+    int index = 0;
+    vector<int> visited(n);
+    while (count < n)
+    {
+        result.push_back(vector<int>());
+        result[index].push_back(left);
+        visited[left] = 1;
+        int curr = left;
+        count++;
+        while (curr == left || neighbors[curr].size() > neighbors[left].size())
+        {
+            int degree = neighbors[left].size() + 2;
+            for (auto next : neighbors[curr])
+            {
+                if (visited[next] == 1) continue;
+                if (index == 0)
+                {
+                    if (neighbors[next].size() < degree)
+                    {
+                        degree = neighbors[next].size();
+                        curr = next;
+                    }
+                }
+                else
+                {
+                    int prev = result[index - 1][result[index].size()];
+                    if (neighbors[prev].count(next) == 0) continue;
+                    else
+                    {
+                        curr = next;
+                        break;
+                    }
+                }
+            }
+            result[index].push_back(curr);
+            visited[curr] = 1;
+            count++;
+        }
+        index++;
+        if (count == n) break;
+        for (auto next : neighbors[left])
+        {
+            if (visited[next] == 1) continue;
+            left = next;
+            break;
+        }
+    }
+    return result;
+}
 #pragma endregion

@@ -5980,8 +5980,75 @@ void TestLeetCode3286(void)
     Logger::WriteMessage("health = " + to_string(health) + "; result = " + (result ? "true" : "false"));
 }
 
+void TestLeetCode3310(void)
+{
+    Logger::WriteMessage("Test Leet Code 3310");
+    LeetCodeGraph leetCode;
+    int n = 4, k = 1;
+    vector<vector<int>> invocations = { {1, 2},{0, 1},{3, 2} };
+    vector<int> result = leetCode.remainingMethods(n, k, invocations);
+    Logger::WriteMessage(invocations);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    n = 5, k = 0;
+    invocations = { {1, 2},{0, 2},{0, 1},{3, 4} };
+    result = leetCode.remainingMethods(n, k, invocations);
+    Logger::WriteMessage(invocations);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    n = 3, k = 2;
+    invocations = { {1, 2},{0, 1},{2, 0} };
+    result = leetCode.remainingMethods(n, k, invocations);
+    Logger::WriteMessage(invocations);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3311(void)
+{
+    Logger::WriteMessage("Test Leet Code 3311");
+    LeetCodeGraph leetCode;
+    int n = 4;
+    vector<vector<int>> edges = { {0, 1},{0, 2},{1, 3},{2, 3} };
+    vector<vector<int>> result = leetCode.constructGridLayout(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 5;
+    edges = { {0, 1},{1, 3},{2, 3},{2, 4} };
+    result = leetCode.constructGridLayout(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 9;
+    edges =
+    {
+        {0, 1},{0, 4},{0, 5},{1, 7},{2, 3},{2, 4},{2, 5},{3, 6},{4, 6},{4, 7},{6, 8},{7, 8}
+    };
+    result = leetCode.constructGridLayout(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 6;
+    edges =
+    {
+        {0,1},{0,3},{1,5},{2,4},{2,5},{3,4},{3,5}
+    };
+    result = leetCode.constructGridLayout(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3311();
+    TestLeetCode3310();
     TestLeetCode3286();
     TestLeetCode3244();
     TestLeetCode3243();

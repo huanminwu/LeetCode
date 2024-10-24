@@ -4019,8 +4019,112 @@ void TestLeetCode3296(void)
     Logger::WriteMessage("mountainHeight = " + to_string(mountainHeight) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3301(void)
+{
+    Logger::WriteMessage("Test Leet Code 3301");
+    LeetCodeSort leetCode;
+    vector<int> maximumHeight = { 2, 3, 4, 3 };
+    long long result = leetCode.maximumTotalSum(maximumHeight);
+    Logger::WriteMessage(maximumHeight);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    maximumHeight = { 15,10 };
+    result = leetCode.maximumTotalSum(maximumHeight);
+    Logger::WriteMessage(maximumHeight);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    maximumHeight = { 2,2,1 };
+    result = leetCode.maximumTotalSum(maximumHeight);
+    Logger::WriteMessage(maximumHeight);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode3318(void)
+{
+    Logger::WriteMessage("Test Leet Code 3318");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 1, 2, 2, 3, 4, 2, 3 };
+    int k = 6, x = 2;
+    vector<int> result = leetCode.findXSumI(nums, k, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+
+    nums = { 3,8,7,8,7,5 };
+    k = 2, x = 2;
+    result = leetCode.findXSumI(nums, k, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+
+    nums = { 2, 1, 1, 4 };
+    k = 2, x = 2;
+    result = leetCode.findXSumI(nums, k, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+
+    nums = { 5, 1, 2, 6, 2, 1, 6, 5, 1, 5 };
+    k = 4, x = 2;
+    result = leetCode.findXSumI(nums, k, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+
+    nums = { 2, 5, 3, 5, 3, 5 };
+    k = 4, x = 4;
+    result = leetCode.findXSumI(nums, k, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3321(void)
+{
+    Logger::WriteMessage("Test Leet Code 3321");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 1, 2, 2, 3, 4, 2, 3 };
+    int k = 6, x = 2;
+    vector<long long> result = leetCode.findXSumII(nums, k, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+
+    nums = { 3,8,7,8,7,5 };
+    k = 2, x = 2;
+    result = leetCode.findXSumII(nums, k, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+
+    nums = { 2, 1, 1, 4 };
+    k = 2, x = 2;
+    result = leetCode.findXSumII(nums, k, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+
+    nums = { 5, 1, 2, 6, 2, 1, 6, 5, 1, 5 };
+    k = 4, x = 2;
+    result = leetCode.findXSumII(nums, k, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+
+    nums = { 2, 5, 3, 5, 3, 5 };
+    k = 4, x = 4;
+    result = leetCode.findXSumII(nums, k, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; x = " + to_string(x));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3321();
+    TestLeetCode3318();
+    TestLeetCode3301();
     TestLeetCode3296();
     TestLeetCode3288();
     TestLeetCode3275();

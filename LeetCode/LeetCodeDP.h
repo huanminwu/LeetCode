@@ -10757,5 +10757,185 @@ public:
     /// 3. -10^5 <= a[i], b[i] <= 10^5
     /// </summary>
     long long maxScore(vector<int>& a, vector<int>& b);
+
+    /// <summary>
+    /// Leet Code 3302. Find the Lexicographically Smallest Valid Sequence 
+    ///                
+    /// Medium
+    ////
+    /// Companies
+    /// You are given two strings word1 and word2.
+    /// A string x is called almost equal to y if you can change at most one 
+    /// character in x to make it identical to y.
+    ///
+    /// A sequence of indices seq is called valid if:
+    /// The indices are sorted in ascending order.
+    /// Concatenating the characters at these indices in word1 in the same 
+    /// order results in a string that is almost equal to word2.
+    /// Return an array of size word2.length representing the 
+    /// lexicographically smallest valid sequence of indices. If no such 
+    /// sequence of indices exists, return an empty array.
+    ///
+    /// Note that the answer must represent the lexicographically smallest 
+    /// array, not the corresponding string formed by those indices.
+    ///
+    /// Example 1:
+    /// Input: word1 = "vbcca", word2 = "abc"
+    /// Output: [0,1,2]
+    ///
+    /// Explanation:
+    /// The lexicographically smallest valid sequence of indices is [0, 1, 2]:
+    ///
+    /// Change word1[0] to 'a'.
+    /// word1[1] is already 'b'.
+    /// word1[2] is already 'c'.
+    ///
+    /// Example 2:
+    /// Input: word1 = "bacdc", word2 = "abc"
+    /// Output: [1,2,4]
+    ///
+    /// Explanation:
+    /// The lexicographically smallest valid sequence of indices is [1, 2, 4]:
+    /// word1[1] is already 'a'.
+    /// Change word1[2] to 'b'.
+    /// word1[4] is already 'c'.
+    ///
+    /// Example 3:
+    /// Input: word1 = "aaaaaa", word2 = "aaabc"
+    /// Output: []
+    ///
+    /// Explanation:
+    /// There is no valid sequence of indices.
+    /// Example 4:
+    /// Input: word1 = "abc", word2 = "ab"
+    /// Output: [0,1]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= word2.length < word1.length <= 3 * 10^5
+    /// 2. word1 and word2 consist only of lowercase English letters.
+    /// </summary>
+    vector<int> validSequence(string word1, string word2);
+
+    /// <summary>
+    /// Leet Code 3316. Find Maximum Removals From Source String 
+    /// </summary>
+    int maxRemovals(string source, string pattern, int s, int p, vector<vector<int>> &dp, vector<int>&target);
+
+    /// <summary>
+    /// Leet Code 3316. Find Maximum Removals From Source String 
+    ///                
+    /// Medium
+    ///
+    /// You are given a string source of size n, a string pattern that is a 
+    /// subsequence of source, and a sorted integer array targetIndices that 
+    /// contains distinct numbers in the range [0, n - 1].
+    ///
+    /// We define an operation as removing a character at an index idx from 
+    /// source such that:
+    ///
+    /// idx is an element of targetIndices. pattern remains a subsequence
+    /// of source after removing the character.
+    /// Performing an operation does not change the indices of the other 
+    /// characters in source. For example, if you remove 'c' from "acb", 
+    /// the character at index 2 would still be 'b'.
+    ///
+    /// Return the maximum number of operations that can be performed.
+    /// 
+    /// Example 1:
+    /// Input: source = "abbaa", pattern = "aba", targetIndices = [0,1,2]
+    /// Output: 1
+    /// Explanation:
+    /// We can't remove source[0] but we can do either of these two operations:
+    /// Remove source[1], so that source becomes "a_baa".
+    /// Remove source[2], so that source becomes "ab_aa".
+    ///
+    /// Example 2:
+    /// Input: source = "bcda", pattern = "d", targetIndices = [0,3]
+    /// Output: 2
+    /// Explanation:
+    /// We can remove source[0] and source[3] in two operations.
+    ///
+    /// Example 3:
+    /// Input: source = "dda", pattern = "dda", targetIndices = [0,1,2]
+    /// Output: 0
+    /// Explanation:
+    /// We can't remove any character from source.
+    ///
+    /// Example 4:
+    /// Input: source = "yeyeykyded", pattern = "yeyyd", targetIndices = [0,2,3,4]
+    /// Output: 2
+    /// Explanation:
+    /// We can remove source[2] and source[3] in two operations.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == source.length <= 3 * 10^3
+    /// 2. 1 <= pattern.length <= n
+    /// 3. 1 <= targetIndices.length <= n
+    /// 4. targetIndices is sorted in ascending order.
+    /// 5. The input is generated such that targetIndices contains distinct elements 
+    ///    in the range [0, n - 1].
+    /// 6. source and pattern consist only of lowercase English letters.
+    /// 7. The input is generated such that pattern appears as a subsequence in source. 
+    /// </summary>
+    int maxRemovals(string source, string pattern, vector<int>& targetIndices);
+
+    /// <summary>
+    /// Leet Code 3320. Count The Number of Winning Sequences 
+    ///              
+    /// Hard
+    ///
+    /// Alice and Bob are playing a fantasy battle game consisting of n rounds 
+    /// where they summon one of three magical creatures each round: a Fire 
+    /// Dragon, a Water Serpent, or an Earth Golem. In each round, players 
+    /// simultaneously summon their creature and are awarded points as follows:
+    ///
+    /// If one player summons a Fire Dragon and the other summons an Earth 
+    /// Golem, the player who summoned the Fire Dragon is awarded a point.
+    /// If one player summons a Water Serpent and the other summons a Fire 
+    /// Dragon, the player who summoned the Water Serpent is awarded a point.
+    /// If one player summons an Earth Golem and the other summons a 
+    /// Water Serpent, the player who summoned the Earth Golem is awarded a 
+    /// point.
+    /// If both players summon the same creature, no player is awarded a 
+    /// point.
+    /// You are given a string s consisting of n characters 'F', 'W', 
+    /// and 'E', representing the sequence of creatures Alice will summon 
+    /// in each round:
+    ///
+    /// If s[i] == 'F', Alice summons a Fire Dragon.
+    /// If s[i] == 'W', Alice summons a Water Serpent.
+    /// If s[i] == 'E', Alice summons an Earth Golem.
+    /// Bob's sequence of moves is unknown, but it is guaranteed that Bob will 
+    /// never summon the same creature in two consecutive rounds. Bob beats 
+    /// Alice if the total number of points awarded to Bob after n rounds is 
+    /// strictly greater than the points awarded to Alice.
+    ///
+    /// Return the number of distinct sequences Bob can use to beat Alice.
+    ///
+    /// Since the answer may be very large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: s = "FFF"
+    /// Output: 3
+    /// Explanation:
+    /// Bob can beat Alice by making one of the following sequences of 
+    /// moves: "WFW", "FWF", or "WEW". Note that other winning sequences 
+    /// like "WWE" or "EWW" are invalid since Bob cannot make the same 
+    /// move twice in a row.
+    ///
+    /// Example 2:
+    /// Input: s = "FWEFW"
+    /// Output: 18
+    /// Explanation:
+    /// Bob can beat Alice by making one of the following sequences of moves: 
+    /// "FWFWF", "FWFWE", "FWEFE", "FWEWE", "FEFWF", "FEFWE", "FEFEW", "FEWFE", 
+    /// "WFEFE", "WFEWE", "WEFWF", "WEFWE", "WEFEF", "WEFEW", "WEWFW", "WEWFE",
+    /// "EWFWE", or "EWEWE".
+    /// 
+    /// Constraints:
+    /// 1 <= s.length <= 1000
+    /// s[i] is one of 'F', 'W', or 'E'.
+    /// </summary>
+    int countWinningSequences(string s);
 };
 #endif  // LeetCodeDP

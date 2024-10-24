@@ -458,7 +458,7 @@ vector<int> LeetCodeGreedy::findRightInterval(vector<vector<int>>& intervals)
 ///
 /// An arrow can be shot up exactly vertically from different points along 
 /// the x-axis. A balloon with x.start and x.end bursts by an arrow shot at x 
-/// if x.start ≤ x ≤ x.end. There is no limit to the number of arrows that 
+/// if x.start <= x <= x.end. There is no limit to the number of arrows that 
 /// can be shot. An arrow once shot keeps traveling up infinitely.
 ///
 /// Given an array points where points[i] = [x.start, x.end], return the 
@@ -2502,7 +2502,7 @@ string LeetCodeGreedy::longestDiverseString(int a, int b, int c)
 ///
 /// Given the string croakOfFrogs, which represents a combination of 
 /// the string "croak" from different frogs, that is, multiple frogs 
-/// can croak at the same time, so multiple “croak” are mixed. Return 
+/// can croak at the same time, so multiple "croak" are mixed. Return 
 /// the minimum number of different frogs to finish all the croak in 
 /// the given string.
 ///
@@ -6597,5 +6597,88 @@ long long LeetCodeGreedy::minDamage(int power, vector<int>& damage, vector<int>&
         sum -= damage[enemy.second];
     }
     return result;
+}
+
+/// <summary>
+/// Leet Code 3323. Minimize Connected Groups by Inserting Interval 
+/// 
+/// Medium
+///
+/// You are given a 2D array intervals, where intervals[i] = [starti, 
+/// endi] represents the start and the end of interval i. You are also 
+/// given an integer k.
+///
+/// You must add exactly one new interval [startnew, endnew] to the array 
+/// such that:
+///
+/// The length of the new interval, endnew - startnew, is at most k.
+/// After adding, the number of connected groups in intervals is minimized.
+///
+/// A connected group of intervals is a maximal collection of intervals 
+/// that, when considered together, cover a continuous range from the 
+/// smallest point to the largest point with no gaps between them. Here 
+/// are some examples:
+///
+/// A group of intervals [[1, 2], [2, 5], [3, 3]] is connected because 
+/// together they cover the range from 1 to 5 without any gaps.
+/// However, a group of intervals [[1, 2], [3, 4]] is not connected 
+/// because the segment (2, 3) is not covered.
+/// Return the minimum number of connected groups after adding exactly 
+/// one new interval to the array.
+///
+/// Example 1:
+/// Input: intervals = [[1,3],[5,6],[8,10]], k = 3
+/// Output: 2
+/// Explanation:
+/// After adding the interval [3, 5], we have two connected groups: 
+/// [[1, 3], [3, 5], [5, 6]] and [[8, 10]].
+///
+/// Example 2:
+/// Input: intervals = [[5,10],[1,1],[3,3]], k = 1
+/// Output: 3
+/// Explanation:
+/// After adding the interval [1, 1], we have three connected groups: 
+/// [[1, 1], [1, 1]], [[3, 3]], and [[5, 10]].
+///
+/// Constraints:
+/// 1. 1 <= intervals.length <= 10^5
+/// 2. intervals[i] == [starti, endi]
+/// 3. 1 <= starti <= endi <= 10^9
+/// 4. 1 <= k <= 10^9
+/// </summary>
+int LeetCodeGreedy::minConnectedGroups(vector<vector<int>>& intervals, int k)
+{
+    sort(intervals.begin(), intervals.end());
+    deque<int> deque;
+    int result = 0;
+    int connections = 0;
+    for (size_t i = 0; i < intervals.size(); i++)
+    {
+        if (deque.empty())
+        {
+            deque.push_back(intervals[i][1]);
+            result++;
+        }
+        else
+        {
+            int end = deque.back();
+            if (end >= intervals[i][0])
+            {
+                deque.pop_back();
+                deque.push_back(max(end, intervals[i][1]));
+            }
+            else
+            {
+                while (!deque.empty() && deque.front() < intervals[i][0] - k)
+                {
+                    deque.pop_front();
+                }
+                connections = max(connections, (int)deque.size());
+                deque.push_back(intervals[i][1]);
+                result++;
+            }
+        }
+    }
+    return result - connections;
 }
 #pragma endregion

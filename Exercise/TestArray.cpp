@@ -10706,23 +10706,44 @@ void TestLeetCode3284(void)
     Logger::WriteMessage("Test Leet Code 3284");
     LeetCodeArray leetCode;
     vector<int> nums = { 1, 2, 3 };
-    int result = leetCode.getSum(nums);
+    int result = leetCode.getSumI(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 
     nums = { 1,3,5,7 };
-    result = leetCode.getSum(nums);
+    result = leetCode.getSumI(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 
     nums = { 7,6,1,2 };
-    result = leetCode.getSum(nums);
+    result = leetCode.getSumI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3299(void)
+{
+    Logger::WriteMessage("Test Leet Code 3299");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,2 };
+    int result = leetCode.getSumII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,4,2,3 };
+    result = leetCode.getSumII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,3,3 };
+    result = leetCode.getSumII(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3299();
     TestLeetCode3284();
     TestLeetCode3285();
     TestLeetCode3279();

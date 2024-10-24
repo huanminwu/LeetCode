@@ -61,6 +61,11 @@ public:
     vector<int> kmp(string& s);
 
     /// <summary>
+    /// generate z_function array
+    /// </summary>
+    vector<int>  z_function(const string& s);
+
+    /// <summary>
     /// Leet code #1446. Consecutive Characters
     ///
     /// Easy
@@ -15354,6 +15359,337 @@ public:
     ///    letters.
     /// </summary>
     bool reportSpam(vector<string>& message, vector<string>& bannedWords);
+
+    /// <summary>
+    /// Leet Code 3304. Find the K-th Character in String Game I
+    /// 
+    /// Easy
+    /// 
+    /// Alice and Bob are playing a game. Initially, Alice has a string 
+    /// word = "a".
+    ///
+    /// You are given a positive integer k.
+    /// Now Bob will ask Alice to perform the following operation forever:
+    /// Generate a new string by changing each character in word to its next 
+    /// character in the English alphabet, and append it to the original word.
+    /// For example, performing the operation on "c" generates "cd" and 
+    /// performing the operation on "zb" generates "zbac".
+    ///
+    /// Return the value of the kth character in word, after enough operations 
+    /// have been done for word to have at least k characters.
+    ///
+    /// Note that the character 'z' can be changed to 'a' in the operation.
+    /// Example 1:
+    /// Input: k = 5
+    /// Output: "b"
+    /// Explanation:
+    /// Initially, word = "a". We need to do the operation three times:
+    /// Generated string is "b", word becomes "ab". 
+    /// Generated string is "bc", word becomes "abbc".
+    /// Generated string is "bccd", word becomes "abbcbccd".
+    ///
+    /// Example 2:
+    /// Input: k = 10
+    /// Output: "c"
+    ///
+    /// Constraints:
+    /// 1. 1 <= k <= 500
+    /// </summary>
+    char kthCharacter(int k);
+
+    /// <summary>
+    /// Leet Code 3305. Count of Substrings Containing Every Vowel and K 
+    ///                 Consonants I
+    /// 
+    /// Medium
+    /// 
+    /// You are given a string word and a non-negative integer k.
+    /// Return the total number of substrings of word that contain every 
+    /// vowel ('a', 'e', 'i', 'o', and 'u') at least once and exactly k 
+    /// consonants.
+    ///
+    /// Example 1:
+    /// Input: word = "aeioqq", k = 1
+    /// Output: 0
+    /// Explanation:
+    /// There is no substring with every vowel.
+    ///
+    /// Example 2:
+    /// Input: word = "aeiou", k = 0
+    /// Output: 1
+    /// Explanation:
+    /// The only substring with every vowel and zero consonants is word[0..4], 
+    /// which is "aeiou".
+    ///
+    /// Example 3:
+    /// Input: word = "ieaouqqieaouqq", k = 1
+    /// Output: 3
+    /// Explanation:
+    /// The substrings with every vowel and one consonant are:
+    /// word[0..5], which is "ieaouq".
+    /// word[6..11], which is "qieaou".
+    /// word[7..12], which is "ieaouq".
+    ///
+    /// Constraints:
+    /// 1. 5 <= word.length <= 250
+    /// 2. word consists only of lowercase English letters.
+    /// 3. 0 <= k <= word.length - 5
+    /// </summary>
+    int countOfSubstringsI(string word, int k);
+
+    /// <summary>
+    /// Leet Code 3306. Count of Substrings Containing Every Vowel and K 
+    ///                Consonants II
+    /// 
+    /// Medium
+    /// 
+    /// You are given a string word and a non-negative integer k.
+    /// Return the total number of substrings of word that contain every 
+    /// vowel ('a', 'e', 'i', 'o', and 'u') at least once and exactly k 
+    /// consonants.
+    ///
+    /// Example 1:
+    /// Input: word = "aeioqq", k = 1
+    /// Output: 0
+    /// Explanation:
+    /// There is no substring with every vowel.
+    ///
+    /// Example 2:
+    /// Input: word = "aeiou", k = 0
+    /// Output: 1
+    /// Explanation:
+    /// The only substring with every vowel and zero consonants is word[0..4], 
+    /// which is "aeiou".
+    ///
+    /// Example 3:
+    /// Input: word = "ieaouqqieaouqq", k = 1
+    /// Output: 3
+    /// Explanation:
+    /// The substrings with every vowel and one consonant are:
+    /// word[0..5], which is "ieaouq".
+    /// word[6..11], which is "qieaou".
+    /// word[7..12], which is "ieaouq".
+    ///
+    /// Constraints:
+    /// 1. 5 <= word.length <= 2 * 10^5
+    /// 2. word consists only of lowercase English letters.
+    /// 3. 0 <= k <= word.length - 5
+    /// </summary>
+    long long countOfSubstringsII(string word, int k);
+
+    /// <summary>
+    /// Leet Code 3303. Find the Occurrence of First Almost Equal Substring 
+    /// 
+    /// Hard
+    ///
+    /// You are given two strings s and pattern.
+    /// A string x is called almost equal to y if you can change at most 
+    /// one character in x to make it identical to y.
+    /// 
+    /// Return the smallest starting index of a substring in s that is 
+    /// almost equal to pattern. If no such index exists, return -1.
+    ///
+    /// A substring is a contiguous non-empty sequence of characters within 
+    /// a string.
+    ///
+    /// Example 1:
+    /// Input: s = "abcdefg", pattern = "bcdffg"
+    /// Output: 1
+    /// Explanation:
+    /// The substring s[1..6] == "bcdefg" can be converted to "bcdffg" by 
+    /// changing s[4] to "f".
+    ///
+    /// Example 2:
+    /// Input: s = "ababbababa", pattern = "bacaba"
+    /// Output: 4
+    /// Explanation:
+    /// The substring s[4..9] == "bababa" can be converted to "bacaba" by 
+    /// changing s[6] to "c".
+    ///
+    /// Example 3:
+    /// Input: s = "abcd", pattern = "dba"
+    /// Output: -1
+    ///
+    /// Example 4:
+    /// Input: s = "dde", pattern = "d"
+    /// Output: 0
+    /// 
+    /// Constraints:
+    /// 1. 1 <= pattern.length < s.length <= 10^5
+    /// 2. s and pattern consist only of lowercase English letters.	
+    /// </summary>
+    int minStartingIndex(string s, string pattern);
+
+    /// <summary>
+    /// Leet Code 3307. Find the K-th Character in String Game II
+    /// 
+    /// Hard
+    /// 
+    /// Alice and Bob are playing a game. Initially, Alice has a string 
+    /// word = "a".
+    ///
+    /// You are given a positive integer k. You are also given an integer 
+    /// array operations, where operations[i] represents the type of the 
+    /// ith operation.
+    ///
+    /// Now Bob will ask Alice to perform all operations in sequence:
+    /// 
+    /// If operations[i] == 0, append a copy of word to itself.
+    /// If operations[i] == 1, generate a new string by changing each character 
+    /// in word to its next character in the English alphabet, and append it to 
+    /// the original word. For example, performing the operation on "c" 
+    /// generates "cd" and performing the operation on "zb" generates "zbac".
+    /// Return the value of the kth character in word after performing all the 
+    /// operations.
+    ///
+    /// Note that the character 'z' can be changed to 'a' in the second type 
+    /// of operation.
+    /// 
+    /// Example 1:
+    /// Input: k = 5, operations = [0,0,0]
+    /// Output: "a"
+    /// Explanation:
+    /// Initially, word == "a". Alice performs the three operations as follows:
+    /// Appends "a" to "a", word becomes "aa".
+    /// Appends "aa" to "aa", word becomes "aaaa".
+    /// Appends "aaaa" to "aaaa", word becomes "aaaaaaaa".
+    ///
+    /// Example 2:
+    /// Input: k = 10, operations = [0,1,0,1]
+    /// Output: "b"
+    /// Explanation:
+    /// Initially, word == "a". Alice performs the four operations as follows:
+    /// Appends "a" to "a", word becomes "aa".
+    /// Appends "bb" to "aa", word becomes "aabb".
+    /// Appends "aabb" to "aabb", word becomes "aabbaabb".
+    /// Appends "bbccbbcc" to "aabbaabb", word becomes "aabbaabbbbccbbcc".
+    ///
+    /// Constraints:
+    /// 1. 1 <= k <= 10^14
+    /// 2. 1 <= operations.length <= 100
+    /// 3. operations[i] is either 0 or 1.
+    /// 4. The input is generated such that word has at least k characters 
+    ///    after all operations.
+    /// </summary>
+    char kthCharacter(long long k, vector<int>& operations);
+
+    /// <summary>
+    /// Leet Code 3324. Find the Sequence of Strings Appeared on the Screen
+    /// 
+    /// Medium
+    ///
+    /// You are given a string target.
+    /// Alice is going to type target on her computer using a special keyboard 
+    /// that has only two keys:
+    ///
+    /// Key 1 appends the character "a" to the string on the screen.
+    /// Key 2 changes the last character of the string on the screen to its 
+    /// next character in the English alphabet. For example, "c" changes 
+    /// to "d" and "z" changes to "a".
+    /// Note that initially there is an empty string "" on the screen, so she 
+    /// can only press key 1.
+    ///
+    /// Return a list of all strings that appear on the screen as Alice types 
+    /// target, in the order they appear, using the minimum key presses.
+    ///
+    ///
+    /// Example 1:
+    /// Input: target = "abc"
+    /// Output: ["a","aa","ab","aba","abb","abc"]
+    /// Explanation:
+    /// The sequence of key presses done by Alice are:
+    /// 
+    /// Press key 1, and the string on the screen becomes "a".
+    /// Press key 1, and the string on the screen becomes "aa".
+    /// Press key 2, and the string on the screen becomes "ab".
+    /// Press key 1, and the string on the screen becomes "aba".
+    /// Press key 2, and the string on the screen becomes "abb".
+    /// Press key 2, and the string on the screen becomes "abc".
+    ///
+    /// Example 2:
+    /// Input: target = "he"
+    /// Output: ["a","b","c","d","e","f","g","h","ha","hb","hc","hd","he"]
+    /// 
+    /// Constraints:
+    /// 1. 1 <= target.length <= 400
+    /// 2. target consists only of lowercase English letters.
+    /// </summary>
+    vector<string> stringSequence(string target);
+
+    /// <summary>
+    /// Leet Code 3327. Check if DFS Strings Are Palindromes 
+    /// </summary>
+    pair<long long, int> findAnswerDFS(vector<long long>& hash, long long mod, vector<vector<int>>& children, 
+        int curr, string& s, vector<long long> &pow);
+
+    /// <summary>
+    /// Leet Code 3327. Check if DFS Strings Are Palindromes 
+    /// </summary>
+    pair<long long, int> findAnswerRevDFS(vector<long long>& hash, long long mod, vector<vector<int>>& children, 
+        int curr, string& s, vector<long long>& pow);
+
+    /// <summary>
+    /// Leet Code 3327. Check if DFS Strings Are Palindromes 
+    ///              
+    /// Hard
+    ///
+    /// You are given a tree rooted at node 0, consisting of n nodes numbered 
+    /// from 0 to n - 1. The tree is represented by an array parent of size n, 
+    /// where parent[i] is the parent of node i. Since node 0 is the root, 
+    /// parent[0] == -1.
+    ///
+    /// You are also given a string s of length n, where s[i] is the character 
+    /// assigned to node i.
+    ///
+    /// Consider an empty string dfsStr, and define a recursive function 
+    /// dfs(int x) that takes a node x as a parameter and performs the 
+    /// following steps in order:
+    ///
+    /// Iterate over each child y of x in increasing order of their numbers, 
+    /// and call dfs(y).
+    /// Add the character s[x] to the end of the string dfsStr.
+    /// Note that dfsStr is shared across all recursive calls of dfs.
+    ///
+    /// You need to find a boolean array answer of size n, where for each 
+    /// index i from 0 to n - 1, you do the following:
+    ///
+    /// Empty the string dfsStr and call dfs(i).
+    /// If the resulting string dfsStr is a palindrome, then set answer[i] to 
+    /// true. Otherwise, set answer[i] to false.
+    /// Return the array answer.
+    ///
+    /// Example 1:
+    /// Input: parent = [-1,0,0,1,1,2], s = "aababa"
+    /// Output: [true,true,false,true,true,true]
+    /// Explanation:
+    /// Calling dfs(0) results in the string dfsStr = "abaaba", which is a 
+    /// palindrome.
+    /// Calling dfs(1) results in the string dfsStr = "aba", which is a 
+    /// palindrome.
+    /// Calling dfs(2) results in the string dfsStr = "ab", which is not a 
+    /// palindrome.
+    /// Calling dfs(3) results in the string dfsStr = "a", which is a 
+    /// palindrome.
+    /// Calling dfs(4) results in the string dfsStr = "b", which is a 
+    /// palindrome.
+    /// Calling dfs(5) results in the string dfsStr = "a", which is a 
+    /// palindrome.
+    ///
+    /// Example 2:
+    /// Input: parent = [-1,0,0,0,0], s = "aabcb"
+    /// Output: [true,true,true,true,true]
+    /// Explanation:
+    /// Every call on dfs(x) results in a palindrome string.
+    ///
+    /// Constraints:
+    /// 1. n == parent.length == s.length
+    /// 2. 1 <= n <= 105
+    /// 3. 0 <= parent[i] <= n - 1 for all i >= 1.
+    /// 4. parent[0] == -1
+    /// 5. parent represents a valid tree.
+    /// 6. s consists only of lowercase English letters.
+    /// </summary>
+    vector<bool> findAnswer(vector<int>& parent, string s);
 #pragma endregion
 };
 

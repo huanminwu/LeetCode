@@ -4098,8 +4098,59 @@ void TestLeetCode3249(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3313(void)
+{
+    Logger::WriteMessage("Test Leet Code 3313");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = { {0,1} ,{0,2} };
+    vector<int> result = leetCode.lastMarkedNodes(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+
+    edges = { {0,1} };
+    result = leetCode.lastMarkedNodes(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+
+    edges = { {0, 1},{0, 2},{2, 3},{2, 4} };
+    result = leetCode.lastMarkedNodes(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3319(void)
+{
+    Logger::WriteMessage("Test Leet Code 3319");
+    LeetCodeTree leetCode;
+    string input = "[5,3,6,5,2,5,7,1,8,null,null,6,8]";
+    int k = 2;
+    TreeNode* root = leetCode.deserialize(input);
+    int result = leetCode.kthLargestPerfectSubtree(root, k);
+    Logger::WriteMessage(input);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[1,2,3,4,5,6,7]";
+    k = 1;
+    root = leetCode.deserialize(input);
+    result = leetCode.kthLargestPerfectSubtree(root, k);
+    Logger::WriteMessage(input);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+
+    input = "[1,2,3,null,4]";
+    k = 3;
+    root = leetCode.deserialize(input);
+    result = leetCode.kthLargestPerfectSubtree(root, k);
+    Logger::WriteMessage(input);
+    Logger::WriteMessage("result = " + to_string(result));
+    leetCode.freeTreeNodes(root);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3319();
+    TestLeetCode3313();
     TestLeetCode3249();
     TestLeetCode3241();
     TestLeetCode3203();

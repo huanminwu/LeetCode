@@ -5459,8 +5459,88 @@ void TestLeetCode3290(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3302(void)
+{
+    Logger::WriteMessage("Test Leet Code 3302");
+    LeetCodeDP leetCode;
+    string word1 = "vbcca", word2 = "abc";
+    vector<int> result = leetCode.validSequence(word1, word2);
+    Logger::WriteMessage(word1);
+    Logger::WriteMessage(word2);
+    Logger::WriteMessage(result);
+
+    word1 = "bacdc", word2 = "abc";
+    result = leetCode.validSequence(word1, word2);
+    Logger::WriteMessage(word1);
+    Logger::WriteMessage(word2);
+    Logger::WriteMessage(result);
+    
+    word1 = "aaaaaa", word2 = "aaabc";
+    result = leetCode.validSequence(word1, word2);
+    Logger::WriteMessage(word1);
+    Logger::WriteMessage(word2);
+    Logger::WriteMessage(result);
+
+    word1 = "abc", word2 = "ab";
+    result = leetCode.validSequence(word1, word2);
+    Logger::WriteMessage(word1);
+    Logger::WriteMessage(word2);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3316(void)
+{
+    Logger::WriteMessage("Test Leet Code 3316");
+    LeetCodeDP leetCode;
+    string source = "abbaa", pattern = "aba";
+    vector<int> targetIndices = { 0, 1, 2 };
+    int result = leetCode.maxRemovals(source, pattern, targetIndices);
+    Logger::WriteMessage("source = " + source + "; pattern = " + pattern);
+    Logger::WriteMessage(targetIndices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    source = "bcda", pattern = "d";
+    targetIndices = { 0, 3 };
+    result = leetCode.maxRemovals(source, pattern, targetIndices);
+    Logger::WriteMessage("source = " + source + "; pattern = " + pattern);
+    Logger::WriteMessage(targetIndices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    source = "dda", pattern = "dda";
+    targetIndices = { 0, 1, 2 };
+    result = leetCode.maxRemovals(source, pattern, targetIndices);
+    Logger::WriteMessage("source = " + source + "; pattern = " + pattern);
+    Logger::WriteMessage(targetIndices);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    source = "yeyeykyded", pattern = "yeyyd";
+    targetIndices = { 0, 2, 3, 4 };
+    result = leetCode.maxRemovals(source, pattern, targetIndices);
+    Logger::WriteMessage("source = " + source + "; pattern = " + pattern);
+    Logger::WriteMessage(targetIndices);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3320(void)
+{
+    Logger::WriteMessage("Test Leet Code 3320");
+    LeetCodeDP leetCode;
+    string s = "FFF";
+    int result = leetCode.countWinningSequences(s);
+    Logger::WriteMessage("source = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "FWEFW";
+    result = leetCode.countWinningSequences(s);
+    Logger::WriteMessage("source = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3320();
+    TestLeetCode3316();
+    TestLeetCode3302();
     TestLeetCode3290();
     TestLeetCode3287();
     TestLeetCode3277();

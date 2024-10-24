@@ -3300,4 +3300,120 @@ long long LeetCodeTwoPointer::validSubstringCountII(string word1, string word2)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3325. Count Substrings With K-Frequency Characters I
+/// 
+/// Medium
+///
+/// Given a string s and an integer k, return the total number of 
+/// substrings of s where at least one character appears at least k times.
+///
+/// Example 1:
+/// Input: s = "abacb", k = 2
+/// Output: 4
+///
+/// Explanation:
+/// The valid substrings are:
+/// 
+/// "aba" (character 'a' appears 2 times).
+/// "abac" (character 'a' appears 2 times).
+/// "abacb" (character 'a' appears 2 times).
+/// "bacb" (character 'b' appears 2 times).
+///
+/// Example 2:
+/// Input: s = "abcde", k = 1
+/// Output: 15
+/// Explanation:
+/// All substrings are valid because every character appears at least once.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 3000
+/// 2. 1 <= k <= s.length
+/// 3. s consists only of lowercase English letters.
+/// </summary>
+int LeetCodeTwoPointer::numberOfSubstringsI(string s, int k)
+{
+    vector<int> count(26);
+    int left = 0;
+    int n = s.size();
+    int result = 0;
+    for (int right = 0; right < n; right++)
+    {
+        int index = s[right] - 'a';
+        count[index]++;
+        if (count[index] == k)
+        {
+            while (left <= right)
+            {
+                result += n - right;
+                index = s[left] - 'a';
+                count[index]--;
+                left++;
+                if (count[index] == k - 1)
+                {
+                    break;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3329. Count Substrings With K-Frequency Characters II 
+///              
+/// Hard
+///
+/// Given a string s and an integer k, return the total number of 
+/// substrings of s where at least one character appears at least k times.
+///
+/// Example 1:
+/// Input: s = "abacb", k = 2
+/// Output: 4
+/// Explanation:
+/// The valid substrings are:
+/// "aba" (character 'a' appears 2 times).
+/// "abac" (character 'a' appears 2 times).
+/// "abacb" (character 'a' appears 2 times).
+/// "bacb" (character 'b' appears 2 times).
+///
+/// Example 2:
+/// Input: s = "abcde", k = 1
+/// Output: 15
+/// Explanation:
+/// All substrings are valid because every character appears at least once.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 3 * 10^5
+/// 2. 1 <= k <= s.length
+/// 3. s consists only of lowercase English letters.
+/// </summary>
+long long LeetCodeTwoPointer::numberOfSubstringsII(string s, int k)
+{
+    vector<int> count(26);
+    int left = 0;
+    int n = s.size();
+    long long result = 0;
+    for (int right = 0; right < n; right++)
+    {
+        int index = s[right] - 'a';
+        count[index]++;
+        if (count[index] == k)
+        {
+            while (left <= right)
+            {
+                result += (long long)n - (long long)right;
+                index = s[left] - 'a';
+                count[index]--;
+                left++;
+                if (count[index] == k - 1)
+                {
+                    break;
+                }
+            }
+        }
+    }
+    return result;
+}
 #pragma endregion

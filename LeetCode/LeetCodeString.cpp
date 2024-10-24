@@ -38,6 +38,32 @@ vector<int> LeetCodeString::kmp(string& s)
 }
 
 /// <summary>
+/// generate z_function array
+/// </summary>
+vector<int>  LeetCodeString::z_function (const string& s)
+{
+    int n = s.size(), l = 0, r = 0;
+    vector<int> z(n, 0);
+    for (int i = 1; i < n; ++i) 
+    {
+        if (i < r) 
+        {
+            z[i] = min(r - i, z[i - l]);
+        }
+        while (i + z[i] < n && s[z[i]] == s[i + z[i]]) 
+        {
+            ++z[i];
+        }
+        if (i + z[i] - 1 > r) 
+        {
+            l = i;
+            r = i + z[i] - 1;
+        }
+    }
+    return z;
+};
+
+/// <summary>
 /// Leet code #3. Longest Substring Without Repeating Characters
 /// Given a string, find the length of the longest substring without 
 /// repeating characters.
@@ -26207,4 +26233,578 @@ bool LeetCodeString::reportSpam(vector<string>& message, vector<string>& bannedW
     else return false;
 }
 
+/// <summary>
+/// Leet Code 3304. Find the K-th Character in String Game I
+/// 
+/// Easy
+/// 
+/// Alice and Bob are playing a game. Initially, Alice has a string 
+/// word = "a".
+///
+/// You are given a positive integer k.
+/// Now Bob will ask Alice to perform the following operation forever:
+/// Generate a new string by changing each character in word to its next 
+/// character in the English alphabet, and append it to the original word.
+/// For example, performing the operation on "c" generates "cd" and 
+/// performing the operation on "zb" generates "zbac".
+///
+/// Return the value of the kth character in word, after enough operations 
+/// have been done for word to have at least k characters.
+///
+/// Note that the character 'z' can be changed to 'a' in the operation.
+/// Example 1:
+/// Input: k = 5
+/// Output: "b"
+/// Explanation:
+/// Initially, word = "a". We need to do the operation three times:
+/// Generated string is "b", word becomes "ab". 
+/// Generated string is "bc", word becomes "abbc".
+/// Generated string is "bccd", word becomes "abbcbccd".
+///
+/// Example 2:
+/// Input: k = 10
+/// Output: "c"
+///
+/// Constraints:
+/// 1. 1 <= k <= 500
+/// </summary>
+char LeetCodeString::kthCharacter(int k)
+{
+    int count = 0;
+    string str;
+    while (count < k)
+    {
+        if (count == 0)
+        {
+            str.push_back('a');
+            count++;
+        }
+        else
+        {
+            int n = str.size();
+            for (int i = 0; i < n; i++)
+            {
+                str.push_back('a' + (str[i] - 'a' + 1) % 26);
+                count++;
+                if (count == k) return str.back();
+            }
+        }
+    }
+    return str.back();
+}
+
+/// <summary>
+/// Leet Code 3305. Count of Substrings Containing Every Vowel and K 
+///                 Consonants I
+/// 
+/// Medium
+/// 
+/// You are given a string word and a non-negative integer k.
+/// Return the total number of substrings of word that contain every 
+/// vowel ('a', 'e', 'i', 'o', and 'u') at least once and exactly k 
+/// consonants.
+///
+/// Example 1:
+/// Input: word = "aeioqq", k = 1
+/// Output: 0
+/// Explanation:
+/// There is no substring with every vowel.
+///
+/// Example 2:
+/// Input: word = "aeiou", k = 0
+/// Output: 1
+/// Explanation:
+/// The only substring with every vowel and zero consonants is word[0..4], 
+/// which is "aeiou".
+///
+/// Example 3:
+/// Input: word = "ieaouqqieaouqq", k = 1
+/// Output: 3
+/// Explanation:
+/// The substrings with every vowel and one consonant are:
+/// word[0..5], which is "ieaouq".
+/// word[6..11], which is "qieaou".
+/// word[7..12], which is "ieaouq".
+///
+/// Constraints:
+/// 1. 5 <= word.length <= 250
+/// 2. word consists only of lowercase English letters.
+/// 3. 0 <= k <= word.length - 5
+/// </summary>
+int LeetCodeString::countOfSubstringsI(string word, int k)
+{
+    unordered_map<char, int> vowels = { {'a', 0}, {'e', 0}, {'i', 0}, {'o', 0}, {'u', 0} };
+    unordered_map<char, int> temp;
+    int vowel_count = 0, consonant_count = 0;
+    int j = 0, p = -1;
+    int result = 0;
+    int n = word.size();
+    for (int i = 0; i < n; i++)
+    {
+        if (vowels.count(word[i]) > 0)
+        {
+            vowels[word[i]]++;
+            if (vowels[word[i]] == 1) vowel_count++;
+        }
+        else
+        {
+            consonant_count++;
+        }
+        while (consonant_count > k && j < i)
+        {
+            if (vowels.count(word[j]) > 0)
+            {
+                vowels[word[j]]--;
+                if (vowels[word[j]] == 0) vowel_count--;;
+            }
+            else
+            {
+                consonant_count--;
+            }
+            j++;
+        }
+        if (consonant_count == k && vowel_count == 5)
+        {
+            while (p < i)
+            {
+                if (p < j)
+                {
+                    p = j;
+                    temp = { {'a', 0}, {'e', 0}, {'i', 0}, {'o', 0}, {'u', 0} };
+                }
+                if (vowels.count(word[p]) == 0) break;
+                if (temp[word[p]] + 1 == vowels[word[p]]) break;
+                temp[word[p]]++;
+                p++;
+            }
+            result += p - j + 1;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3306. Count of Substrings Containing Every Vowel and K 
+///                Consonants II
+/// 
+/// Medium
+/// 
+/// You are given a string word and a non-negative integer k.
+/// Return the total number of substrings of word that contain every 
+/// vowel ('a', 'e', 'i', 'o', and 'u') at least once and exactly k 
+/// consonants.
+///
+/// Example 1:
+/// Input: word = "aeioqq", k = 1
+/// Output: 0
+/// Explanation:
+/// There is no substring with every vowel.
+///
+/// Example 2:
+/// Input: word = "aeiou", k = 0
+/// Output: 1
+/// Explanation:
+/// The only substring with every vowel and zero consonants is word[0..4], 
+/// which is "aeiou".
+///
+/// Example 3:
+/// Input: word = "ieaouqqieaouqq", k = 1
+/// Output: 3
+/// Explanation:
+/// The substrings with every vowel and one consonant are:
+/// word[0..5], which is "ieaouq".
+/// word[6..11], which is "qieaou".
+/// word[7..12], which is "ieaouq".
+///
+/// Constraints:
+/// 1. 5 <= word.length <= 2 * 10^5
+/// 2. word consists only of lowercase English letters.
+/// 3. 0 <= k <= word.length - 5
+/// </summary>
+long long LeetCodeString::countOfSubstringsII(string word, int k)
+{
+    unordered_map<char, int> vowels = { {'a', 0}, {'e', 0}, {'i', 0}, {'o', 0}, {'u', 0} };
+    unordered_map<char, int> temp;
+    int vowel_count = 0, consonant_count = 0;
+    int j = 0, p = -1;
+    long long result = 0;
+    int n = word.size();
+    for (int i = 0; i < n; i++)
+    {
+        if (vowels.count(word[i]) > 0)
+        {
+            vowels[word[i]]++;
+            if (vowels[word[i]] == 1) vowel_count++;
+        }
+        else
+        {
+            consonant_count++;
+        }
+        while (consonant_count > k && j < i)
+        {
+            if (vowels.count(word[j]) > 0)
+            {
+                vowels[word[j]]--;
+                if (vowels[word[j]] == 0) vowel_count--;;
+            }
+            else
+            {
+                consonant_count--;
+            }
+            j++;
+        }
+        if (consonant_count == k && vowel_count == 5)
+        {
+            while (p < i)
+            {
+                if (p < j)
+                {
+                    p = j;
+                    temp = { {'a', 0}, {'e', 0}, {'i', 0}, {'o', 0}, {'u', 0} };
+                }
+                if (vowels.count(word[p]) == 0) break;
+                if (temp[word[p]] + 1 == vowels[word[p]]) break;
+                temp[word[p]]++;
+                p++;
+            }
+            result += (long long)(p - j + 1);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3303. Find the Occurrence of First Almost Equal Substring 
+/// 
+/// Hard
+///
+/// You are given two strings s and pattern.
+/// A string x is called almost equal to y if you can change at most 
+/// one character in x to make it identical to y.
+/// 
+/// Return the smallest starting index of a substring in s that is 
+/// almost equal to pattern. If no such index exists, return -1.
+///
+/// A substring is a contiguous non-empty sequence of characters within 
+/// a string.
+///
+/// Example 1:
+/// Input: s = "abcdefg", pattern = "bcdffg"
+/// Output: 1
+/// Explanation:
+/// The substring s[1..6] == "bcdefg" can be converted to "bcdffg" by 
+/// changing s[4] to "f".
+///
+/// Example 2:
+/// Input: s = "ababbababa", pattern = "bacaba"
+/// Output: 4
+/// Explanation:
+/// The substring s[4..9] == "bababa" can be converted to "bacaba" by 
+/// changing s[6] to "c".
+///
+/// Example 3:
+/// Input: s = "abcd", pattern = "dba"
+/// Output: -1
+///
+/// Example 4:
+/// Input: s = "dde", pattern = "d"
+/// Output: 0
+/// 
+/// Constraints:
+/// 1. 1 <= pattern.length < s.length <= 10^5
+/// 2. s and pattern consist only of lowercase English letters.	
+/// </summary>
+int LeetCodeString::minStartingIndex(string s, string pattern)
+{
+    int n = s.size(), m = pattern.size();
+    string rev_pattern(pattern.rbegin(), pattern.rend());
+    string rev_s(s.rbegin(), s.rend());
+    vector<int> z1 = z_function(pattern + "#" + s);
+    vector<int> z2 = z_function(rev_pattern + "#"+ rev_s);
+    vector<int> prefix(z1.begin() + m + 1, z1.end());
+    vector<int> suffix(z2.rbegin(), z2.rend() - m - 1);
+    for (int i = 0; i <= n - m; ++i)
+    {
+        if (prefix[i] + 1 + suffix[i + m - 1] >= m)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+/// <summary>
+/// Leet Code 3307. Find the K-th Character in String Game II
+/// 
+/// Hard
+/// 
+/// Alice and Bob are playing a game. Initially, Alice has a string 
+/// word = "a".
+///
+/// You are given a positive integer k. You are also given an integer 
+/// array operations, where operations[i] represents the type of the 
+/// ith operation.
+///
+/// Now Bob will ask Alice to perform all operations in sequence:
+/// 
+/// If operations[i] == 0, append a copy of word to itself.
+/// If operations[i] == 1, generate a new string by changing each character 
+/// in word to its next character in the English alphabet, and append it to 
+/// the original word. For example, performing the operation on "c" 
+/// generates "cd" and performing the operation on "zb" generates "zbac".
+/// Return the value of the kth character in word after performing all the 
+/// operations.
+///
+/// Note that the character 'z' can be changed to 'a' in the second type 
+/// of operation.
+/// 
+/// Example 1:
+/// Input: k = 5, operations = [0,0,0]
+/// Output: "a"
+/// Explanation:
+/// Initially, word == "a". Alice performs the three operations as follows:
+/// Appends "a" to "a", word becomes "aa".
+/// Appends "aa" to "aa", word becomes "aaaa".
+/// Appends "aaaa" to "aaaa", word becomes "aaaaaaaa".
+///
+/// Example 2:
+/// Input: k = 10, operations = [0,1,0,1]
+/// Output: "b"
+/// Explanation:
+/// Initially, word == "a". Alice performs the four operations as follows:
+/// Appends "a" to "a", word becomes "aa".
+/// Appends "bb" to "aa", word becomes "aabb".
+/// Appends "aabb" to "aabb", word becomes "aabbaabb".
+/// Appends "bbccbbcc" to "aabbaabb", word becomes "aabbaabbbbccbbcc".
+///
+/// Constraints:
+/// 1. 1 <= k <= 10^14
+/// 2. 1 <= operations.length <= 100
+/// 3. operations[i] is either 0 or 1.
+/// 4. The input is generated such that word has at least k characters 
+///    after all operations.
+/// </summary>
+char LeetCodeString::kthCharacter(long long k, vector<int>& operations)
+{
+    long long size = 1;
+    int index = 0;
+    while (size < k)
+    {
+        index++;
+        size *= 2;
+    }
+    int offset = 0;
+    k--;
+    while (size > 1)
+    {
+        index--;
+        if (k >= size / 2)
+        {
+            offset += operations[index];
+        }
+        k = k % (size / 2); 
+        size /= 2;
+    }
+    char result = 'a' + offset % 26;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3324. Find the Sequence of Strings Appeared on the Screen
+/// 
+/// Medium
+///
+/// You are given a string target.
+/// Alice is going to type target on her computer using a special keyboard 
+/// that has only two keys:
+///
+/// Key 1 appends the character "a" to the string on the screen.
+/// Key 2 changes the last character of the string on the screen to its 
+/// next character in the English alphabet. For example, "c" changes 
+/// to "d" and "z" changes to "a".
+/// Note that initially there is an empty string "" on the screen, so she 
+/// can only press key 1.
+///
+/// Return a list of all strings that appear on the screen as Alice types 
+/// target, in the order they appear, using the minimum key presses.
+///
+///
+/// Example 1:
+/// Input: target = "abc"
+/// Output: ["a","aa","ab","aba","abb","abc"]
+/// Explanation:
+/// The sequence of key presses done by Alice are:
+/// 
+/// Press key 1, and the string on the screen becomes "a".
+/// Press key 1, and the string on the screen becomes "aa".
+/// Press key 2, and the string on the screen becomes "ab".
+/// Press key 1, and the string on the screen becomes "aba".
+/// Press key 2, and the string on the screen becomes "abb".
+/// Press key 2, and the string on the screen becomes "abc".
+///
+/// Example 2:
+/// Input: target = "he"
+/// Output: ["a","b","c","d","e","f","g","h","ha","hb","hc","hd","he"]
+/// 
+/// Constraints:
+/// 1. 1 <= target.length <= 400
+/// 2. target consists only of lowercase English letters.
+/// </summary>
+vector<string> LeetCodeString::stringSequence(string target)
+{
+    string str;
+    vector<string> result;
+    while (str != target)
+    {
+        if (str.empty())
+        {
+            str.push_back('a');
+        }
+        else if (str[str.size() - 1] != target[str.size() - 1])
+        {
+            str[str.size() - 1]++;
+        }
+        else
+        {
+            str.push_back('a');
+        }
+        result.push_back(str);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3327. Check if DFS Strings Are Palindromes 
+/// </summary>
+pair<long long, int> LeetCodeString::findAnswerDFS(vector<long long>& hash, long long mod, vector<vector<int>>& children, int curr,
+    string& s, vector<long long>& pow)
+{
+    int count = 0;
+    long long hash_code = 0;
+    for (int child : children[curr]) 
+    {
+        pair<long long, int> p = findAnswerDFS(hash, mod, children, child, s, pow);
+        hash_code = (hash_code + (p.first * pow[count]) % mod) % mod;
+        count += p.second;
+    }
+    hash_code = (hash_code + (pow[count] * (s[curr] - 'a')) % mod) % mod;
+    hash[curr] = hash_code;
+    count++;
+    return { hash_code,count };
+}
+
+/// <summary>
+/// Leet Code 3327. Check if DFS Strings Are Palindromes 
+/// </summary>
+pair<long long, int> LeetCodeString::findAnswerRevDFS(vector<long long>& hash, long long mod, vector<vector<int>>& children, int curr,
+    string& s, vector<long long>& pow)
+{
+    int count = 1;
+    long long hash_code = s[curr] - 'a';
+
+    for (int i = children[curr].size() - 1; i > -1; i--) 
+    {
+        int child = children[curr][i];
+        pair<long long, int> p = findAnswerRevDFS(hash, mod, children, child, s, pow);
+
+        hash_code = (hash_code + (p.first * pow[count]) % mod) % mod;
+        count += p.second;
+    }
+    hash[curr] = hash_code;
+    return { hash_code,count };
+}
+
+/// <summary>
+/// Leet Code 3327. Check if DFS Strings Are Palindromes 
+///              
+/// Hard
+///
+/// You are given a tree rooted at node 0, consisting of n nodes numbered 
+/// from 0 to n - 1. The tree is represented by an array parent of size n, 
+/// where parent[i] is the parent of node i. Since node 0 is the root, 
+/// parent[0] == -1.
+///
+/// You are also given a string s of length n, where s[i] is the character 
+/// assigned to node i.
+///
+/// Consider an empty string dfsStr, and define a recursive function 
+/// dfs(int x) that takes a node x as a parameter and performs the 
+/// following steps in order:
+///
+/// Iterate over each child y of x in increasing order of their numbers, 
+/// and call dfs(y).
+/// Add the character s[x] to the end of the string dfsStr.
+/// Note that dfsStr is shared across all recursive calls of dfs.
+///
+/// You need to find a boolean array answer of size n, where for each 
+/// index i from 0 to n - 1, you do the following:
+///
+/// Empty the string dfsStr and call dfs(i).
+/// If the resulting string dfsStr is a palindrome, then set answer[i] to 
+/// true. Otherwise, set answer[i] to false.
+/// Return the array answer.
+///
+/// Example 1:
+/// Input: parent = [-1,0,0,1,1,2], s = "aababa"
+/// Output: [true,true,false,true,true,true]
+/// Explanation:
+/// Calling dfs(0) results in the string dfsStr = "abaaba", which is a 
+/// palindrome.
+/// Calling dfs(1) results in the string dfsStr = "aba", which is a 
+/// palindrome.
+/// Calling dfs(2) results in the string dfsStr = "ab", which is not a 
+/// palindrome.
+/// Calling dfs(3) results in the string dfsStr = "a", which is a 
+/// palindrome.
+/// Calling dfs(4) results in the string dfsStr = "b", which is a 
+/// palindrome.
+/// Calling dfs(5) results in the string dfsStr = "a", which is a 
+/// palindrome.
+///
+/// Example 2:
+/// Input: parent = [-1,0,0,0,0], s = "aabcb"
+/// Output: [true,true,true,true,true]
+/// Explanation:
+/// Every call on dfs(x) results in a palindrome string.
+///
+/// Constraints:
+/// 1. n == parent.length == s.length
+/// 2. 1 <= n <= 105
+/// 3. 0 <= parent[i] <= n - 1 for all i >= 1.
+/// 4. parent[0] == -1
+/// 5. parent represents a valid tree.
+/// 6. s consists only of lowercase English letters.
+/// </summary>
+vector<bool> LeetCodeString::findAnswer(vector<int>& parent, string s)
+{
+    long long M = 1000000007;
+
+    int n = parent.size();
+    vector<long long > hash(n, -1), rev_hash(n, -1);
+    vector<vector<int>> children(n);
+    for (int i = 0; i < n; i++) 
+    {
+        if (parent[i] != -1) 
+        {
+            children[parent[i]].push_back(i);
+        }
+    }
+    for (int i = 0; i < n; i++)
+    {
+        sort(children[i].begin(), children[i].end());
+    }
+    vector<long long> pow(n + 1, 1);
+    for (int i = 1; i <= n; i++) 
+    {
+        pow[i] = (pow[i - 1] * 29) % M;
+    }
+    vector<bool> result(n, 0);
+    findAnswerDFS(hash, M, children, 0, s, pow);
+    findAnswerRevDFS(rev_hash, M, children, 0, s, pow);
+    for (int i = 0; i < n; i++) 
+    {
+        result[i] = (rev_hash[i] == hash[i]);
+    }
+    return result;
+}
 #pragma endregion

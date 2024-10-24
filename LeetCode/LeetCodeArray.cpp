@@ -33900,7 +33900,7 @@ vector<int> LeetCodeArray::stableMountains(vector<int>& height, int threshold)
 /// 1. 1 <= nums.length <= 10^5
 /// 2. 1 <= nums[i] <= 10^5
 /// </summary>
-int LeetCodeArray::getSum(vector<int>& nums)
+int LeetCodeArray::getSumI(vector<int>& nums)
 {
     long long M = 1000000007;
     long long result = 0;
@@ -33939,4 +33939,81 @@ int LeetCodeArray::getSum(vector<int>& nums)
         result = (result + sum) % M;
     }
     return (int)result;
+}
+
+/// <summary>
+/// Leet Code 3299. Sum of Consecutive Subsequences 
+/// 
+/// Hard
+/// 
+/// We call an array arr of length n consecutive if one of the following 
+/// holds:
+/// arr[i] - arr[i - 1] == 1 for all 1 <= i < n.
+/// arr[i] - arr[i - 1] == -1 for all 1 <= i < n.
+/// The value of an array is the sum of its elements.
+/// For example, [3, 4, 5] is a consecutive array of value 12 and [9, 8] 
+/// is another of value 17. While [3, 4, 3] and [8, 6] are not consecutive.
+///
+/// Given an array of integers nums, return the sum of the values of all 
+/// consecutive non-empty subsequences.
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+/// Note that an array of length 1 is also considered consecutive.
+/// 
+/// Example 1:
+/// Input: nums = [1,2]
+/// Output: 6
+/// Explanation:
+/// The consecutive subsequences are: [1], [2], [1, 2].
+///
+/// Example 2:
+/// Input: nums = [1,4,2,3]
+/// Output: 31
+/// Explanation:
+/// The consecutive subsequences are: [1], [4], [2], [3], [1, 2], [2, 3], 
+/// [4, 3], [1, 2, 3].
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeArray::getSumII(vector<int>& nums)
+{
+    long long M = 1000000007;
+    int result = 0;
+    unordered_map<int, pair<int, int>[2]> seq;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int n = nums[i];
+        if (seq.count(n - 1) > 0)
+        {
+            long long sum = (long long)seq[n - 1][0].first + (long long)(seq[n - 1][0].second + 1) * (long long)n;
+            long long count = (long long)seq[n - 1][0].second + 1;
+            seq[n][0].first = (int)(((long long)seq[n][0].first + sum) % M);
+            seq[n][0].second = (int)(((long long)seq[n][0].second + count) % M) ;
+            result = (int)(((long long)result + sum) % M);
+        }
+        else
+        {
+            seq[n][0].first = (seq[n][0].first + n) % M;
+            seq[n][0].second++;
+            result = (result + n) % M;
+        }
+        if (seq.count(n + 1) > 0)
+        {
+            long long sum = (long long)seq[n + 1][1].first + (long long)(seq[n + 1][1].second + 1) * (long long)n;
+            long long count = (long long)seq[n + 1][1].second + 1;
+            seq[n][1].first = (int)(((long long)seq[n][1].first + sum) % M);
+            seq[n][1].second = (int)(((long long)seq[n][1].second + count) % M);
+            result = (int)(((long long)result + sum) % M);
+        }
+        else
+        {
+            seq[n][1].first = (seq[n][1].first + n) % M;
+            seq[n][1].second++;
+            result = (result + n) % M;
+        }
+        result = (int)(((long long)result - (long long)n + M) % M);
+    }
+    return result;
 }

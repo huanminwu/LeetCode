@@ -939,8 +939,44 @@ void TestLeetCode3298(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3325(void)
+{
+    Logger::WriteMessage("Test Leet Code 3325");
+    LeetCodeTwoPointer leetCode;
+    string s = "abacb";
+    int k = 2;
+    int result = leetCode.numberOfSubstringsI(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "abcde";
+    k = 1;
+    result = leetCode.numberOfSubstringsI(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3329(void)
+{
+    Logger::WriteMessage("Test Leet Code 3329");
+    LeetCodeTwoPointer leetCode;
+    string s = "abacb";
+    int k = 2;
+    long long result = leetCode.numberOfSubstringsII(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "abcde";
+    k = 1;
+    result = leetCode.numberOfSubstringsII(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode3329();
+    TestLeetCode3325();
     TestLeetCode3297();
     TestLeetCode3261();
     TestLeetCode3258();

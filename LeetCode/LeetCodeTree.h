@@ -7509,6 +7509,123 @@ public:
     /// 5. The input is generated such that edges represents a valid tree.
     /// </summary>
     int countGoodNodes(vector<vector<int>>& edges);
+
+    /// <summary>
+    /// Leet Code 3313. Find the Last Marked Nodes in Tree
+    /// </summary>
+    int lastMarkedNodesBFS(queue<int>&queue, vector<vector<int>>& neighbors, vector<int> &dist);
+
+    /// <summary>
+    /// Leet Code 3313. Find the Last Marked Nodes in Tree
+    /// 
+    /// Hard
+    ///
+    /// There exists an undirected tree with n nodes numbered 0 to n - 1. 
+    /// You are given a 2D integer array edges of length n - 1, where 
+    /// edges[i] = [ui, vi] indicates that there is an edge between nodes 
+    /// ui and vi in the tree.
+    ///
+    /// Initially, all nodes are unmarked. After every second, you mark 
+    /// all unmarked nodes which have at least one marked node adjacent 
+    /// to them.
+    //
+    /// Return an array nodes where nodes[i] is the last node to get marked 
+    /// in the tree, if you mark node i at time t = 0. If nodes[i] has 
+    /// multiple answers for any node i, you can choose any one answer.
+    ///
+    /// Example 1:
+    /// Input: edges = [[0,1],[0,2]]
+    /// Output: [2,2,1]
+    /// Explanation:
+    /// 
+    /// For i = 0, the nodes are marked in the sequence: [0] -> [0,1,2]. 
+    /// Either 1 or 2 can be the answer.
+    /// For i = 1, the nodes are marked in the sequence: [1] -> [0,1] -> 
+    /// [0,1,2]. Node 2 is marked last.
+    /// For i = 2, the nodes are marked in the sequence: [2] -> [0,2] -> 
+    /// [0,1,2]. Node 1 is marked last.
+    ///
+    /// Example 2:
+    /// Input: edges = [[0,1]]
+    /// Output: [1,0]
+    /// Explanation:
+    /// For i = 0, the nodes are marked in the sequence: [0] -> [0,1].
+    /// For i = 1, the nodes are marked in the sequence: [1] -> [0,1].
+    ///
+    /// Example 3:
+    /// Input: edges = [[0,1],[0,2],[2,3],[2,4]]
+    /// Output: [3,3,1,1,1]
+    /// Explanation:
+    /// For i = 0, the nodes are marked in the sequence: [0] -> [0,1,2] ->
+    /// [0,1,2,3,4].
+    /// For i = 1, the nodes are marked in the sequence: [1] -> [0,1] -> 
+    /// [0,1,2] -> [0,1,2,3,4].
+    /// For i = 2, the nodes are marked in the sequence: [2] -> [0,2,3,4] -> 
+    /// [0,1,2,3,4].
+    /// For i = 3, the nodes are marked in the sequence: [3] -> [2,3] -> 
+    /// [0,2,3,4] -> [0,1,2,3,4].
+    /// For i = 4, the nodes are marked in the sequence: [4] -> [2,4] -> 
+    /// [0,2,3,4] -> [0,1,2,3,4].
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 10^5
+    /// 2. edges.length == n - 1
+    /// 3. edges[i].length == 2
+    /// 4. 0 <= edges[i][0], edges[i][1] <= n - 1
+    /// 5. The input is generated such that edges represents a valid tree.
+    /// </summary>
+    vector<int> lastMarkedNodes(vector<vector<int>>& edges);
+
+    /// <summary>
+    /// Leet Code 3319. K-th Largest Perfect Subtree Size in Binary Tree 
+    /// </summary>
+    pair<int,int> kthLargestPerfectSubtree(TreeNode* node, priority_queue<int>&pq, int k);
+
+    /// <summary>
+    /// Leet Code 3319. K-th Largest Perfect Subtree Size in Binary Tree 
+    /// 
+    /// Medium
+    /// You are given the root of a binary tree and an integer k.
+    /// Return an integer denoting the size of the kth largest perfect binary 
+    /// subtree, or -1 if it doesn't exist.
+    ///
+    /// A perfect binary tree is a tree where all leaves are on the same 
+    /// level, and every parent has two children.
+    ///
+    /// Example 1:
+    /// 
+    /// Input: root = [5,3,6,5,2,5,7,1,8,null,null,6,8], k = 2
+    /// Output: 3
+    /// 
+    /// Explanation:
+    /// The roots of the perfect binary subtrees are highlighted in black. 
+    /// Their sizes, in non-increasing order are [3, 3, 1, 1, 1, 1, 1, 1].
+    /// The 2nd largest size is 3.
+    ///
+    /// Example 2:
+    ///
+    /// Input: root = [1,2,3,4,5,6,7], k = 1
+    /// Output: 7
+    /// Explanation:
+    /// 
+    /// The sizes of the perfect binary subtrees in non-increasing order are 
+    /// [7, 3, 3, 1, 1, 1, 1]. The size of the largest perfect binary subtree 
+    /// is 7.
+    ///
+    /// Example 3:
+    /// Input: root = [1,2,3,null,4], k = 3
+    /// Output: -1
+    ///
+    /// Explanation:
+    /// The sizes of the perfect binary subtrees in non-increasing order 
+    /// are [1, 1]. There are fewer than 3 perfect binary subtrees.
+    ///
+    /// Constraints:
+    /// 1. The number of nodes in the tree is in the range [1, 2000].
+    /// 2. 1 <= Node.val <= 2000
+    /// 3. 1 <= k <= 1024
+    /// </summary>
+    int kthLargestPerfectSubtree(TreeNode* root, int k);
 #pragma endregion
 };
 
