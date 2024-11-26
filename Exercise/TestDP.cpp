@@ -5536,8 +5536,73 @@ void TestLeetCode3320(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3332(void)
+{
+    Logger::WriteMessage("Test Leet Code 3332");
+    LeetCodeDP leetCode;
+    int n = 2, k = 1;
+    vector<vector<int>> stayScore = { {2, 3} };
+    vector<vector<int>> travelScore = { {0, 2},{1, 0} };
+    int result = leetCode.maxScore(n, k, stayScore, travelScore);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(stayScore);
+    Logger::WriteMessage(travelScore);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3, k = 2;
+    stayScore = { {3, 4, 2},{2, 1, 2} };
+    travelScore = { {0, 2, 1},{2, 0, 4},{3, 2, 0} };
+    result = leetCode.maxScore(n, k, stayScore, travelScore);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(stayScore);
+    Logger::WriteMessage(travelScore);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3336(void)
+{
+    Logger::WriteMessage("Test Leet Code 3336");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 2, 3, 4 };
+    int result = leetCode.subsequencePairCount(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,20,30 };
+    result = leetCode.subsequencePairCount(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1,1 };
+    result = leetCode.subsequencePairCount(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3339(void)
+{
+    Logger::WriteMessage("Test Leet Code 3339");
+    LeetCodeDP leetCode;
+    int n = 3, m = 4, k = 2;
+    int result = leetCode.countOfArrays(n, m, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; result = " + to_string(result));
+
+    n = 7, m = 7, k = 5;
+    result = leetCode.countOfArrays(n, m, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; result = " + to_string(result));
+
+    n = 5, m = 1, k = 0;
+    result = leetCode.countOfArrays(n, m, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3339();
+    TestLeetCode3336();
+    TestLeetCode3332();
     TestLeetCode3320();
     TestLeetCode3316();
     TestLeetCode3302();

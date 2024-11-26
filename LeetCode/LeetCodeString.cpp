@@ -26807,4 +26807,183 @@ vector<bool> LeetCodeString::findAnswer(vector<int>& parent, string s)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3330. Find the Original Typed String I 
+/// 
+/// Easy
+///
+/// Alice is attempting to type a specific string on her computer. 
+/// However, she tends to be clumsy and may press a key for too long, 
+/// resulting in a character being typed multiple times.
+///
+/// Although Alice tried to focus on her typing, she is aware that she 
+/// may still have done this at most once.
+///
+/// You are given a string word, which represents the final output 
+/// displayed on Alice's screen.
+///
+/// Return the total number of possible original strings that Alice 
+/// might have intended to type.
+///
+/// Example 1:
+/// Input: word = "abbcccc"
+/// Output: 5
+/// Explanation:
+/// The possible strings are: "abbcccc", "abbccc", "abbcc", "abbc", and 
+/// "abcccc".
+///
+/// Example 2:
+/// Input: word = "abcd"
+/// Output: 1
+/// Explanation:
+/// The only possible string is "abcd".
+///
+/// Example 3:
+/// Input: word = "aaaa"
+/// Output: 4
+/// 
+/// Constraints:
+/// 1. 1 <= word.length <= 100
+/// 2. word consists only of lowercase English letters.
+/// </summary>
+int LeetCodeString::possibleStringCount(string word)
+{
+    int result = 1;
+    int count = 0;
+    for (size_t i = 1; i < word.size(); i++)
+    {
+        if (word[i] == word[i - 1]) result++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3335. Total Characters in String After Transformations I 
+/// 
+/// Medium
+///
+/// You are given a string s and an integer t, representing the number of 
+/// transformations to perform. In one transformation, every character in 
+/// s is replaced according to the following rules:
+///
+/// If the character is 'z', replace it with the string "ab".
+/// Otherwise, replace it with the next character in the alphabet. For 
+/// example, 'a' is replaced with 'b', 'b' is replaced with 'c', and so on.
+/// Return the length of the resulting string after exactly t 
+/// transformations.
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: s = "abcyy", t = 2
+/// Output: 7
+///
+/// Explanation:
+/// First Transformation (t = 1):
+/// 'a' becomes 'b'
+/// 'b' becomes 'c'
+/// 'c' becomes 'd'
+/// 'y' becomes 'z'
+/// 'y' becomes 'z'
+/// String after the first transformation: "bcdzz"
+/// Second Transformation (t = 2):
+/// 'b' becomes 'c'
+/// 'c' becomes 'd'
+/// 'd' becomes 'e'
+/// 'z' becomes "ab"
+/// 'z' becomes "ab"
+/// String after the second transformation: "cdeabab"
+/// Final Length of the string: The string is "cdeabab", which has 7 
+/// characters.
+///
+/// Example 2:
+/// Input: s = "azbk", t = 1
+/// Output: 5
+/// Explanation:
+/// First Transformation (t = 1):
+/// 'a' becomes 'b'
+/// 'z' becomes "ab"
+/// 'b' becomes 'c'
+/// 'k' becomes 'l'
+/// String after the first transformation: "babcl"
+/// Final Length of the string: The string is "babcl", which has 5 
+/// characters.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists only of lowercase English letters.
+/// 3. 1 <= t <= 10^5
+/// </summary>
+int LeetCodeString::lengthAfterTransformationsI(string s, int t)
+{
+    vector<int> curr(26);
+    int M = 1000000007;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        curr[s[i] - 'a']++;
+    }
+    for (int i = 0; i < t; i++)
+    {
+        vector<int> next(26);
+        for (int j = 0; j < 26; j++)
+        {
+            if (j < 25) next[j + 1] = curr[j];
+            else
+            {
+                next[0] = (next[0] + curr[25]) % M;
+                next[1] = (next[1] + curr[25]) % M;
+            }
+        }
+        curr = next;
+    }
+    int result = 0;
+    for (int i = 0; i < 26; i++)
+    {
+        result = (result + curr[i]) % M;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3340. Check Balanced String 
+/// 
+/// Easy
+///
+/// You are given a string num consisting of only digits. A string 
+/// of digits is called balanced if the sum of the digits at even 
+/// indices is equal to the sum of digits at odd indices.
+///
+/// Return true if num is balanced, otherwise return false.
+/// 
+/// Example 1:
+/// Input: num = "1234"
+/// Output: false
+/// Explanation:
+/// The sum of digits at even indices is 1 + 3 == 4, and the sum of digits 
+/// at odd indices is 2 + 4 == 6.
+/// Since 4 is not equal to 6, num is not balanced.
+///
+/// Example 2:
+///  Input: num = "24123"
+/// Output: true
+/// Explanation:
+/// The sum of digits at even indices is 2 + 1 + 3 == 6, and the sum of 
+/// digits at odd indices is 4 + 2 == 6.
+/// Since both are equal the num is balanced.
+/// 
+/// Constraints:
+/// 1. 2 <= num.length <= 100
+/// 2. num consists of digits only
+/// </summary>
+bool LeetCodeString::isBalanced(string num)
+{
+    int even = 0, odd = 0;
+    for (size_t i = 0; i < num.size(); i++)
+    {
+        if (i % 2 == 0) even += num[i] - '0';
+        else odd += num[i] - '0';
+    }
+    return even == odd;
+}
 #pragma endregion

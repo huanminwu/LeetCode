@@ -4125,5 +4125,109 @@ public:
     /// 4. 1 <= k <= 10^9
     /// </summary>
     int minConnectedGroups(vector<vector<int>>& intervals, int k);
+
+    /// <summary>
+    /// Leet Code 3355. Zero Array Transformation I
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array nums of length n and a 2D array 
+    /// queries, where queries[i] = [li, ri].
+    ///
+    /// For each queries[i]:
+    ///
+    /// Select a subset of indices within the range [li, ri] in nums.
+    /// Decrement the values at the selected indices by 1.
+    /// A Zero Array is an array where all elements are equal to 0.
+    ///
+    /// Return true if it is possible to transform nums into a Zero Array 
+    /// after processing all the queries sequentially, otherwise return false.
+    ///
+    /// A subset of an array is a selection of elements (possibly none) of the 
+    /// array.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,0,1], queries = [[0,2]]
+    /// Output: true
+    /// Explanation:
+    /// For i = 0:
+    /// Select the subset of indices as [0, 2] and decrement the values at 
+    /// these indices by 1.
+    /// The array will become [0, 0, 0], which is a Zero Array.
+    ///
+    /// Example 2:
+    /// Input: nums = [4,3,2,1], queries = [[1,3],[0,2]]
+    /// Output: false
+    /// Explanation:
+    /// For i = 0:
+    /// Select the subset of indices as [1, 2, 3] and decrement the values 
+    /// at these indices by 1.
+    /// The array will become [4, 2, 1, 0].
+    /// For i = 1:
+    /// Select the subset of indices as [0, 1, 2] and decrement the values 
+    /// at these indices by 1.
+    /// The array will become [3, 1, 0, 0], which is not a Zero Array.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 10^5
+    /// 3. 1 <= queries.length <= 10^5
+    /// 4. queries[i].length == 2
+    /// 5. 0 <= li <= ri < nums.length
+    /// </summary>
+    bool isZeroArrayI(vector<int>& nums, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet Code 3356. Zero Array Transformation II
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array nums of length n and a 2D array queries 
+    /// where queries[i] = [li, ri, vali].
+    ///
+    /// Each queries[i] represents the following action on nums:
+    ///
+    /// Decrement the value at each index in the range [li, ri] in nums by at 
+    /// most vali.
+    /// The amount by which each value is decremented can be chosen 
+    /// independently for each index.
+    /// A Zero Array is an array with all its elements equal to 0.
+    ///
+    /// Return the minimum possible non-negative value of k, such that after 
+    /// processing the first k queries in sequence, nums becomes a Zero Array. 
+    /// If no such k exists, return -1.
+    ///
+    /// Example 1:
+    /// Input: nums = [2,0,2], queries = [[0,2,1],[0,2,1],[1,1,3]]
+    /// Output: 2
+    /// Explanation:
+    /// For i = 0 (l = 0, r = 2, val = 1):
+    /// Decrement values at indices [0, 1, 2] by [1, 0, 1] respectively.
+    /// The array will become [1, 0, 1].
+    /// For i = 1 (l = 0, r = 2, val = 1):
+    /// Decrement values at indices [0, 1, 2] by [1, 0, 1] respectively.
+    /// The array will become [0, 0, 0], which is a Zero Array. Therefore, the 
+    /// minimum value of k is 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [4,3,2,1], queries = [[1,3,2],[0,2,1]]
+    /// Output: -1
+    /// Explanation:
+    /// For i = 0 (l = 1, r = 3, val = 2):
+    /// Decrement values at indices [1, 2, 3] by [2, 2, 1] respectively.
+    /// The array will become [4, 1, 0, 0].
+    /// For i = 1 (l = 0, r = 2, val = 1):
+    /// Decrement values at indices [0, 1, 2] by [1, 1, 0] respectively.
+    /// The array will become [3, 0, 0, 0], which is not a Zero Array.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 5 * 10^5
+    /// 3. 1 <= queries.length <= 10^5
+    /// 4. queries[i].length == 3
+    /// 5. 0 <= li <= ri < nums.length
+    /// 6. 1 <= vali <= 5
+    /// </summary>
+    int isZeroArrayII(vector<int>& nums, vector<vector<int>>& queries);
 };
 #endif  // LeetCodeGreedy_H

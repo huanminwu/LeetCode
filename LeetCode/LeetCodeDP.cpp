@@ -19452,5 +19452,325 @@ int LeetCodeDP::countWinningSequences(string s)
     return (int)result;
 }
 
+
+/// <summary>
+/// Leet Code 3332. Maximum Points Tourist Can Earn 
+/// 
+/// Medium
+///
+/// 	
+/// You are given two integers, n and k, along with two 2D integer 
+/// arrays, stayScore and travelScore.
+///
+/// A tourist is visiting a country with n cities, where each city is 
+/// directly connected to every other city. The tourist's journey 
+/// consists of exactly k 0-indexed days, and they can choose any 
+/// city as their starting point.
+///
+/// Each day, the tourist has two choices:
+/// Stay in the current city: If the tourist stays in their current 
+/// city curr during day i, they will earn stayScore[i][curr] points.
+/// Move to another city: If the tourist moves from their current 
+/// city curr to city dest, they will earn travelScore[curr][dest] 
+/// points.
+/// Return the maximum possible points the tourist can earn.
+/// 
+/// Example 1:
+/// Input: n = 2, k = 1, stayScore = [[2,3]], travelScore = [[0,2],[1,0]]
+/// Output: 3
+/// Explanation:
+/// The tourist earns the maximum number of points by starting in city 1 
+/// and staying in that city.
+///
+/// Example 2:
+/// Input: n = 3, k = 2, stayScore = [[3,4,2],[2,1,2]], 
+/// travelScore = [[0,2,1],[2,0,4],[3,2,0]]
+///
+/// Output: 8
+/// Explanation:
+/// The tourist earns the maximum number of points by starting in city 1, 
+/// staying in that city on day 0, and traveling to city 2 on day 1.
+///
+/// Constraints:
+/// 1. 1 <= n <= 200
+/// 2. 1 <= k <= 200
+/// 3. n == travelScore.length == travelScore[i].length == 
+///    stayScore[i].length
+/// 4. k == stayScore.length
+/// 5. 1 <= stayScore[i][j] <= 100
+/// 6. 0 <= travelScore[i][j] <= 100
+/// 7. travelScore[i][i] == 0
+/// </summary>
+int LeetCodeDP::maxScore(int n, int k, vector<vector<int>>& stayScore, vector<vector<int>>& travelScore)
+{
+    vector<vector<int>> dp(2, vector<int>(n));
+    int curr = 0, next = 1;
+    for (int i = 0; i < k; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            dp[next][j] = dp[curr][j] + stayScore[i][j];
+            for (int p = 0; p < n; p++)
+            {
+                dp[next][j] = max(dp[next][j], dp[curr][p] + travelScore[p][j]);
+            }
+        }
+        swap(curr, next);
+    }
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        result = max(result, dp[curr][i]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3333. Find the Original Typed String II 
+/// 
+/// Hard
+///
+/// 	
+/// Alice is attempting to type a specific string on her computer. 
+/// However, she tends to be clumsy and may press a key for too long, 
+/// resulting in a character being typed multiple times.
+///
+/// You are given a string word, which represents the final output 
+/// displayed on Alice's screen. You are also given a positive 
+/// integer k.
+///
+/// Return the total number of possible original strings that Alice 
+/// might have intended to type, if she was trying to type a string 
+/// of size at least k.
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: word = "aabbccdd", k = 7
+/// Output: 5
+/// Explanation:
+/// The possible strings are: "aabbccdd", "aabbccd", "aabbcdd", "aabccdd", 
+/// and "abbccdd".
+///
+/// Example 2:
+/// Input: word = "aabbccdd", k = 8
+/// Output: 1
+/// Explanation:
+/// The only possible string is "aabbccdd".
+///
+/// Example 3:
+/// Input: word = "aaabbb", k = 3
+/// Output: 8
+///
+/// Constraints:
+/// 1. 1 <= word.length <= 5 * 10^5
+/// 2. word consists only of lowercase English letters.
+/// 3. 1 <= k <= 2000
+/// </summary>
+int LeetCodeDP::possibleStringCount(string word, int k)
+{
+    long long M = 1000000007;
+    long long product = 1;
+    vector<int> groups;
+    int count = 0;
+    int n = word.size();
+    for (size_t i = 1; i <= word.size(); i++) 
+    {
+        if (i < word.size() && word[i] == word[i - 1])
+        {
+            count++;
+        }
+        else 
+        {
+            groups.push_back(count);
+            product = product * (count + 1) % M;
+            count = 0;
+        }
+    }
+    if (k <= (int)groups.size()) return (int)product;
+    vector<vector<int>> dp(2, vector<int>(k + 1));
+    dp[0][0] = 1;
+    vector<int> prefix_sum(k + 1);
+    prefix_sum[0] = 0;
+    int sz = groups.size();
+    for (int i = 0; i < sz; i++)
+    {
+        for (int p = 0; p < k - (int)groups.size(); p++)
+        {
+            prefix_sum[p + 1] = (prefix_sum[p] + dp[i%2][p]) % M;
+            dp[1- i%2][p] = (prefix_sum[p + 1] - prefix_sum[max(0, p - groups[i])]) % M;
+        }
+    }
+    long long result = product;
+    for (int i = 0; i < k; i++)
+    {
+        result = (result - dp[sz%2][i] + M) % M;
+    }
+    return (int)result;
+}
+
+/// <summary>
+/// Leet Code 3336. Find the Number of Subsequences With Equal GCD
+/// 
+/// Hard
+/// 
+/// You are given an integer array nums.
+/// Your task is to find the number of pairs of non-empty subsequences
+/// (seq1, seq2) of nums that satisfy the following conditions:
+///
+/// The subsequences seq1 and seq2 are disjoint, meaning no index of 
+/// nums is common between them.
+/// The GCD of the elements of seq1 is equal to the GCD of the elements 
+/// of seq2.
+/// Return the total number of such pairs.
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,3,4]
+/// Output: 10
+/// Explanation:
+/// The subsequence pairs which have the GCD of their elements equal to 1 
+/// are:
+///
+/// ([1, 2, 3, 4], [1, 2, 3, 4])
+/// ([1, 2, 3, 4], [1, 2, 3, 4])
+/// ([1, 2, 3, 4], [1, 2, 3, 4])
+/// ([1, 2, 3, 4], [1, 2, 3, 4])
+/// ([1, 2, 3, 4], [1, 2, 3, 4])
+/// ([1, 2, 3, 4], [1, 2, 3, 4])
+/// ([1, 2, 3, 4], [1, 2, 3, 4])
+/// ([1, 2, 3, 4], [1, 2, 3, 4])
+/// ([1, 2, 3, 4], [1, 2, 3, 4])
+/// ([1, 2, 3, 4], [1, 2, 3, 4])
+///
+/// Example 2:
+/// Input: nums = [10,20,30]
+/// Output: 2
+/// Explanation:
+/// The subsequence pairs which have the GCD of their elements equal to 10 
+/// are:
+/// ([10, 20, 30], [10, 20, 30])
+/// ([10, 20, 30], [10, 20, 30])
+///
+/// Example 3:
+/// Input: nums = [1,1,1,1]
+/// Output: 50
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 200
+/// 2. 1 <= nums[i] <= 200
+/// </summary>
+int LeetCodeDP::subsequencePairCount(vector<int>& nums)
+{
+    int M = 1000000007;
+    int max_val = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        max_val = max(max_val, nums[i]);
+    }
+    max_val++;
+    vector<vector<int>> curr(max_val, vector<int>(max_val));
+    curr[0][0] = 1;
+    for (size_t k = 0; k < nums.size(); k++)
+    {
+        vector<vector<int>> next(max_val, vector<int>(max_val));
+        for (int i = 0; i < max_val; i++)
+        {
+            for (int j = 0; j < max_val; j++)
+            {
+                int a = gcd(i, nums[k]);
+                int b = gcd(j, nums[k]);
+                next[i][j] = (next[i][j] + curr[i][j]) % M;
+                next[a][j] = (next[a][j] + curr[i][j]) % M;
+                next[i][b] = (next[i][b] + curr[i][j]) % M;
+            }
+        }
+        curr = next;
+    }
+    int result = 0;
+    for (int i = 1; i < max_val; i++)
+    {
+        result = (result + curr[i][i]) % M;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3339. Find the Number of K-Even Arrays
+/// 
+/// Medium
+///
+/// You are given three integers n, m, and k.
+/// An array arr is called k-even if there are exactly k indices such 
+/// that, for each of these indices i (0 <= i < n - 1):
+/// (arr[i] * arr[i + 1]) - arr[i] - arr[i + 1] is even.
+/// Return the number of possible k-even arrays of size n where all 
+/// elements are in the range [1, m].
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: n = 3, m = 4, k = 2
+/// Output: 8
+/// Explanation:
+/// The 8 possible 2-even arrays are:
+/// [2, 2, 2]
+/// [2, 2, 4]
+/// [2, 4, 2]
+/// [2, 4, 4]
+/// [4, 2, 2]
+/// [4, 2, 4]
+/// [4, 4, 2]
+/// [4, 4, 4]
+///
+/// Example 2:
+/// Input: n = 5, m = 1, k = 0
+/// Output: 1
+/// Explanation:
+/// The only 0-even array is [1, 1, 1, 1, 1].
+///
+/// Example 3:
+/// Input: n = 7, m = 7, k = 5
+/// Output: 5832
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 750
+/// 2. 0 <= k <= n - 1
+/// 3. 1 <= m <= 1000
+/// </summary>
+int LeetCodeDP::countOfArrays(int n, int m, int k)
+{
+    long long M = 1000000007;
+    vector<long long> curr_odd, curr_even;
+    long long evens = m / 2, odds = m - m / 2;
+    for (int i = 0; i < n; i++)
+    {
+        vector<long long> next_odd(k + 1), next_even(k + 1);
+        if (i == 0)
+        {
+            next_odd[0] = odds;
+            next_even[0] = evens;
+        }
+        else
+        {
+            for (int j = 0; j <= k; j++)
+            {
+                next_odd[j] = (next_odd[j] + curr_odd[j] * odds) % M;
+                next_odd[j] = (next_odd[j] + curr_even[j] * odds) % M;
+                next_even[j] = (next_even[j] + curr_odd[j] * evens) % M;
+                if (j < k)
+                {
+                    next_even[j + 1] = (next_even[j + 1] + curr_even[j] * evens) % M;
+                }
+            }
+        }
+        curr_odd = next_odd;
+        curr_even = next_even;
+    }
+    int result = (int)((curr_odd[k] + curr_even[k]) % M);
+    return result;
+}
+
 #pragma endregion
 

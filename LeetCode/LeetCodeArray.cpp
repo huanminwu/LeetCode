@@ -34017,3 +34017,505 @@ int LeetCodeArray::getSumII(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3337. Total Characters in String After Transformations II
+/// </summary>
+vector<vector<long long>> LeetCodeArray::matrixMultiply(vector<vector<long long>>& a, vector<vector<long long>>&b, long long mod)
+{
+    int x = a.size(), y = b[0].size();
+    vector<vector<long long>> result(x, vector<long long>(y));
+    for (size_t i = 0; i < a.size(); i++)
+    {
+        for (size_t j = 0; j < b[0].size(); j++)
+        {
+            for (size_t k = 0; k < b.size(); k++)
+            {
+                result[i][j] = (result[i][j] + a[i][k] * b[k][j] % mod) % mod;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3337. Total Characters in String After Transformations II
+/// </summary>
+vector<vector<long long>> LeetCodeArray::matrixExpo(vector<vector<long long>>& matrix, long long exp, long long mod)
+{
+    int n = matrix.size();
+    vector<vector<long long>> result(n, vector<long long>(n));
+    for (int i = 0; i < n; i++) result[i][i] = 1;
+    while (exp > 0)
+    {
+        if (exp % 2 == 1)
+        {
+            result = matrixMultiply(result, matrix, mod);
+        }
+        matrix = matrixMultiply(matrix, matrix, mod);
+        exp /= 2;
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3337. Total Characters in String After Transformations II
+/// 
+/// Hard
+/// 
+/// You are given a string s consisting of lowercase English letters, an 
+/// integer t representing the number of transformations to perform, and 
+/// an array nums of size 26. In one transformation, every character in s 
+/// is replaced according to the following rules:
+///
+/// Replace s[i] with the next nums[s[i] - 'a'] consecutive characters in 
+/// the alphabet. For example, if s[i] = 'a' and nums[0] = 3, the 
+/// character 'a' transforms into the next 3 consecutive characters ahead 
+/// of it, which results in "bcd".
+/// The transformation wraps around the alphabet if it exceeds 'z'. For 
+/// example, if s[i] = 'y' and nums[24] = 3, the character 'y' transforms 
+/// into the next 3 consecutive characters ahead of it, which results in 
+/// "zab".
+/// Return the length of the resulting string after exactly t 
+/// transformations.
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+/// 
+/// Example 1:
+/// Input: s = "abcyy", t = 2, 
+/// nums = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2]
+///
+/// Output: 7
+///
+/// Explanation:
+/// First Transformation (t = 1):
+/// 'a' becomes 'b' as nums[0] == 1
+/// 'b' becomes 'c' as nums[1] == 1
+/// 'c' becomes 'd' as nums[2] == 1
+/// 'y' becomes 'z' as nums[24] == 1
+/// 'y' becomes 'z' as nums[24] == 1
+/// String after the first transformation: "bcdzz"
+/// Second Transformation (t = 2):
+///
+/// 'b' becomes 'c' as nums[1] == 1
+/// 'c' becomes 'd' as nums[2] == 1
+/// 'd' becomes 'e' as nums[3] == 1
+/// 'z' becomes 'ab' as nums[25] == 2
+/// 'z' becomes 'ab' as nums[25] == 2
+/// String after the second transformation: "cdeabab"
+/// Final Length of the string: The string is "cdeabab", which has 7 
+/// characters.
+///
+/// Example 2:
+/// Input: s = "azbk", t = 1, 
+/// nums = [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+///
+/// Output: 8
+/// Explanation:
+/// First Transformation (t = 1):
+/// 'a' becomes 'bc' as nums[0] == 2
+/// 'z' becomes 'ab' as nums[25] == 2
+/// 'b' becomes 'cd' as nums[1] == 2
+/// 'k' becomes 'lm' as nums[10] == 2
+/// String after the first transformation: "bcabcdlm"
+/// Final Length of the string: The string is "bcabcdlm", which 
+/// has 8 characters.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists only of lowercase English letters.
+/// 3. 1 <= t <= 10^9
+/// 4. nums.length == 26
+/// 5. 1 <= nums[i] <= 25
+/// </summary>
+int LeetCodeArray::lengthAfterTransformations(string s, int t, vector<int>& nums)
+{
+    vector<vector<long long>> matrix(26, vector<long long>(26));
+    long long M = 1000000007;
+    for (int i = 0; i < 26; i++)
+    {
+        for (int j = 0; j < nums[i]; j++)
+        {
+            matrix[i][(i + j + 1) % 26] = 1;
+        }
+    }
+    matrix = matrixExpo(matrix, t, M);
+    vector<long long> origin(26);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        origin[s[i] - 'a']++;
+    }
+    long long result = 0;
+    for (int i = 0; i < 26; i++)
+    {
+        for (int j = 0; j < 26; j++)
+        {
+            result = (result + origin[i] * matrix[i][j]) % M;
+        }
+    }
+    return (int)result;
+}
+
+/// <summary>
+/// Leet Code 3349. Adjacent Increasing Subarrays Detection I
+/// 
+/// Easy
+///
+/// Given an array nums of n integers and an integer k, determine whether 
+/// there exist two adjacent subarrays of length k such that both 
+/// subarrays are strictly increasing. Specifically, check if there are 
+/// two subarrays starting at indices a and b (a < b), where:
+///
+/// Both subarrays nums[a..a + k - 1] and nums[b..b + k - 1] are strictly 
+/// increasing.
+/// The subarrays must be adjacent, meaning b = a + k.
+/// Return true if it is possible to find two such subarrays, and false 
+/// otherwise.
+///
+/// Example 1:
+/// Input: nums = [2,5,7,8,9,2,3,4,3,1], k = 3
+/// Output: true
+/// Explanation:
+/// The subarray starting at index 2 is [7, 8, 9], which is strictly 
+/// increasing.
+/// The subarray starting at index 5 is [2, 3, 4], which is also strictly 
+/// increasing.
+/// These two subarrays are adjacent, so the result is true.
+/// Example 2:
+/// Input: nums = [1,2,3,4,4,4,4,5,6,7], k = 5
+/// Output: false
+///
+/// Constraints:
+/// 1. 2 <= nums.length <= 100
+/// 2. 1 < 2 * k <= nums.length
+/// 3. -1000 <= nums[i] <= 1000
+/// </summary>
+bool LeetCodeArray::hasIncreasingSubarrays(vector<int>& nums, int k)
+{
+    vector<int> dp(nums.size());
+    for (int i = 0; i < (int)nums.size(); i++)
+    {
+        if (i == 0) dp[i] = 1;
+        else if (nums[i] > nums[i - 1]) dp[i] = dp[i - 1] + 1;
+        else dp[i] = 1;
+        if (dp[i] >= k && i - k >= 0 && dp[i - k] >= k)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+/// <summary>
+/// Leet Code 3351. Sum of Good Subsequences
+/// 
+/// Hard
+///
+/// You are given an integer array nums. A good subsequence is defined as 
+/// a subsequence of nums where the absolute difference between any two 
+/// consecutive elements in the subsequence is exactly 1.
+///
+/// Return the sum of all possible good subsequences of nums.
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+///
+/// Note that a subsequence of size 1 is considered good by definition.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,1]
+/// Output: 14
+/// Explanation:
+/// Good subsequences are: [1], [2], [1], [1,2], [2,1], [1,2,1].
+/// The sum of elements in these subsequences is 14.
+///
+/// Example 2:
+/// Input: nums = [3,4,5]
+/// Output: 40
+/// Explanation:
+/// Good subsequences are: [3], [4], [5], [3,4], [4,5], [3,4,5].
+/// The sum of elements in these subsequences is 40.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeArray::sumOfGoodSubsequences(vector<int>& nums)
+{
+    long long M = 1000000007;
+    int result = 0;
+    unordered_map<int, pair<int, int>> seq;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int n = nums[i];
+        if (seq.count(n - 1) > 0)
+        {
+            long long sum = (long long)seq[n - 1].first + (long long)(seq[n - 1].second) * (long long)n;
+            long long count = (long long)seq[n - 1].second;
+            seq[n].first = (int)(((long long)seq[n].first + sum) % M);
+            seq[n].second = (int)(((long long)seq[n].second + count) % M);
+            result = (int)(((long long)result + sum) % M);
+        }
+        if (seq.count(n + 1) > 0)
+        {
+            long long sum = (long long)seq[n + 1].first + (long long)(seq[n + 1].second) * (long long)n;
+            long long count = (long long)seq[n + 1].second;
+            seq[n].first = (int)(((long long)seq[n].first + sum) % M);
+            seq[n].second = (int)(((long long)seq[n].second + count) % M);
+            result = (int)(((long long)result + sum) % M);
+        }
+        seq[n].first = (seq[n].first + n) % M;
+        seq[n].second++;
+        result = ((long long)result + n) % M;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3346. Maximum Frequency of an Element After Performing 
+///                 Operations I
+/// 
+/// Medium
+///
+/// You are given an integer array nums and two integers k and 
+/// numOperations.
+///
+/// You must perform an operation numOperations times on nums, where in 
+/// each operation you:
+///
+/// Select an index i that was not selected in any previous operations.
+/// Add an integer in the range [-k, k] to nums[i].
+/// Return the maximum possible frequency of any element in nums after 
+/// performing the operations.
+/// 
+/// Example 1:
+/// Input: nums = [1,4,5], k = 1, numOperations = 2
+/// Output: 2
+/// Explanation:
+/// We can achieve a maximum frequency of two by:
+/// Adding 0 to nums[1]. nums becomes [1, 4, 5].
+/// Adding -1 to nums[2]. nums becomes [1, 4, 4].
+///
+/// Example 2:
+/// Input: nums = [5,11,20,20], k = 5, numOperations = 1
+/// Output: 2
+/// Explanation:
+/// We can achieve a maximum frequency of two by:
+/// Adding 0 to nums[1].
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// 3. 0 <= k <= 105
+/// 4. 0 <= numOperations <= nums.length
+/// </summary>
+int LeetCodeArray::maxFrequencyI(vector<int>& nums, int k, int numOperations)
+{
+    int n = nums.size();
+    sort(nums.begin(), nums.end());
+    unordered_map<int, int> num_count;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++) num_count[nums[i]]++;
+    for (int i = nums[0]; i <= nums[n-1]; i++)
+    {
+        int prev_index = lower_bound(nums.begin(), nums.end(), i - k) - nums.begin();
+        int next_index = upper_bound(nums.begin(), nums.end(), i + k) - nums.begin();
+        int frequency = num_count[i] + min(next_index - prev_index - num_count[i], numOperations);
+        result = max(result, frequency);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3347. Maximum Frequency of an Element After Performing 
+///                 Operations II 
+/// 
+/// Hard
+///
+/// You are given an integer array nums and two integers k and 
+/// numOperations.
+///
+/// You must perform an operation numOperations times on nums, where 
+/// in each operation you:
+///
+/// Select an index i that was not selected in any previous operations.
+/// Add an integer in the range [-k, k] to nums[i].
+/// Return the maximum possible frequency of any element in nums after 
+/// performing the operations.
+///
+/// Example 1:
+/// Input: nums = [1,4,5], k = 1, numOperations = 2
+/// Output: 2
+/// Explanation:
+/// We can achieve a maximum frequency of two by:
+/// Adding 0 to nums[1], after which nums becomes [1, 4, 5].
+/// Adding -1 to nums[2], after which nums becomes [1, 4, 4].
+///
+/// Example 2:
+/// Input: nums = [5,11,20,20], k = 5, numOperations = 1
+/// Output: 2
+/// Explanation:
+/// We can achieve a maximum frequency of two by:
+/// Adding 0 to nums[1].
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 0 <= k <= 109
+/// 4. 0 <= numOperations <= nums.length
+/// </summary>
+int LeetCodeArray::maxFrequencyII(vector<int>& nums, int k, int numOperations)
+{
+    int n = nums.size();
+    vector<long long> arr(n);
+    unordered_map<long long, int> num_count;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        arr[i] = nums[i];
+        num_count[arr[i]]++;
+    }
+    sort(arr.begin(), arr.end());
+    int result = 0;
+    for (int i = 0; i < (int)arr.size(); i++)
+    {
+        for (long long p = arr[i] - k; p <= arr[i] + k; p += k)
+        {
+            int prev_index = lower_bound(arr.begin(), arr.end(), p - k) - arr.begin();
+            int next_index = upper_bound(arr.begin(), arr.end(), p + k) - arr.begin();
+            int frequency = num_count[p] + min(next_index - prev_index - num_count[p], numOperations);
+            result = max(result, frequency);
+            if (k == 0) break;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3353. Minimum Total Operations
+/// 
+/// Easy
+/// 
+/// Given an array of integers nums, you can perform any number of 
+/// operations on this array.
+///
+/// In each operation, you can:
+/// Choose a prefix of the array.
+/// Choose an integer k (which can be negative) and add k to each element 
+/// in the chosen prefix.
+/// A prefix of an array is a subarray that starts from the beginning of 
+/// the array and extends to any point within it.
+///
+/// Return the minimum number of operations required to make all elements 
+/// in arr equal.
+/// 
+/// Example 1:
+/// Input: nums = [1,4,2]
+/// Output: 2
+/// Explanation:
+/// Operation 1: Choose the prefix [1, 4] of length 2 and add -2 to each 
+/// element of the prefix. The array becomes [-1, 2, 2].
+/// Operation 2: Choose the prefix [-1] of length 1 and add 3 to it. The 
+/// array becomes [2, 2, 2].
+/// Thus, the minimum number of required operations is 2.
+///
+/// Example 2:
+/// Input: nums = [10,10,10]
+/// Output: 0
+/// Explanation:
+/// All elements are already equal, so no operations are needed.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. -10^9 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeArray::minOperationsEqual(vector<int>& nums)
+{
+    int result = 0;
+    for (int i = nums.size() - 2; i >= 0; i--)
+    {
+        if (nums[i] != nums[i+1])
+        {
+            result++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3354. Make Array Elements Equal to Zero
+/// 
+/// Easy
+///
+/// You are given an integer array nums.
+/// Start by selecting a starting position curr such that nums[curr] == 0, 
+/// and choose a movement direction of either left or right.
+///
+/// After that, you repeat the following process:
+/// If curr is out of the range [0, n - 1], this process ends.
+/// If nums[curr] == 0, move in the current direction by incrementing curr 
+/// if you are moving right, or decrementing curr if you are moving left.
+/// Else if nums[curr] > 0:
+/// Decrement nums[curr] by 1.
+/// Reverse your movement direction (left becomes right and vice versa).
+/// Take a step in your new direction.
+/// A selection of the initial position curr and movement direction is 
+/// considered valid if every element in nums becomes 0 by the end of the 
+/// process.
+///
+/// Return the number of possible valid selections.
+/// Example 1:
+/// Input: nums = [1,0,2,0,3]
+/// Output: 2
+/// Explanation:
+/// The only possible valid selections are the following:
+/// Choose curr = 3, and a movement direction to the left.
+/// [1,0,2,0,3] -> [1,0,2,0,3] -> [1,0,1,0,3] -> [1,0,1,0,3] -> 
+/// [1,0,1,0,2] -> [1,0,1,0,2] -> [1,0,0,0,2] -> [1,0,0,0,2] -> 
+/// [1,0,0,0,1] -> [1,0,0,0,1] -> [1,0,0,0,1] -> [1,0,0,0,1] -> 
+/// [0,0,0,0,1] -> [0,0,0,0,1] -> [0,0,0,0,1] -> [0,0,0,0,1] -> 
+/// [0,0,0,0,0].
+/// Choose curr = 3, and a movement direction to the right.
+/// [1,0,2,0,3] -> [1,0,2,0,3] -> [1,0,2,0,2] -> [1,0,2,0,2] -> 
+/// [1,0,1,0,2] -> [1,0,1,0,2] -> [1,0,1,0,1] -> [1,0,1,0,1] -> 
+/// [1,0,0,0,1] -> [1,0,0,0,1] -> [1,0,0,0,0] -> [1,0,0,0,0] -> 
+/// [1,0,0,0,0] -> [1,0,0,0,0] -> [0,0,0,0,0].
+///
+/// Example 2:
+/// Input: nums = [2,3,4,0,4,1,0]
+/// Output: 0
+/// Explanation:
+/// There are no possible valid selections.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 0 <= nums[i] <= 100
+/// 3. There is at least one element i where nums[i] == 0.
+/// </summary>
+int LeetCodeArray::countValidSelections(vector<int>& nums)
+{
+    int n = nums.size();
+    vector<int> left(nums.size()), right(nums.size());
+    for (int i = 0; i < n; i++)
+    {
+        left[i] = nums[i];
+        if (i > 0) left[i] += left[i - 1];
+    }
+    for (int i = n - 1; i >= 0; i--)
+    {
+        right[i] = nums[i];
+        if (i < n - 1) right[i] += right[i + 1];
+    }
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (nums[i] != 0) continue;
+        if (left[i] == right[i])
+        {
+            result += 2;
+        }
+        else if (abs(left[i] - right[i]) == 1)
+        {
+            result += 1;
+        }
+    }
+    return result;
+}

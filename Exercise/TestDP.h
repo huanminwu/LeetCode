@@ -185,5 +185,8 @@ void TestLeetCode3290(void);
 void TestLeetCode3302(void);
 void TestLeetCode3316(void);
 void TestLeetCode3320(void);
+void TestLeetCode3332(void);
+void TestLeetCode3336(void);
+void TestLeetCode3339(void);
 void TestLeetCodeDP(void);
 #endif  // TestMath

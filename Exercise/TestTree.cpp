@@ -4147,8 +4147,28 @@ void TestLeetCode3319(void)
     leetCode.freeTreeNodes(root);
 }
 
+void TestLeetCode3331(void)
+{
+    Logger::WriteMessage("Test Leet Code 3331");
+    LeetCodeTree leetCode;
+    vector<int> parent = { -1, 0, 0, 1, 1, 1 };
+    string s = "abaabc";
+    vector<int> result = leetCode.findSubtreeSizes(parent, s);
+    Logger::WriteMessage(parent);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+
+    parent = { -1,0,4,0,1 };
+    s = "abbba";
+    result = leetCode.findSubtreeSizes(parent, s);
+    Logger::WriteMessage(parent);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3331();
     TestLeetCode3319();
     TestLeetCode3313();
     TestLeetCode3249();

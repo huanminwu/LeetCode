@@ -7411,8 +7411,57 @@ void TestLeetCode3327(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3330(void)
+{
+    Logger::WriteMessage("Test Leet Code 3330");
+    LeetCodeString leetCode;
+    string word = "abbcccc";
+    int result = leetCode.possibleStringCount(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "abcd";
+    result = leetCode.possibleStringCount(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+
+    word = "aaaa";
+    result = leetCode.possibleStringCount(word);
+    Logger::WriteMessage("word = " + word + "; result = " + to_string(result));
+}
+
+void TestLeetCode3335(void)
+{
+    Logger::WriteMessage("Test Leet Code 3335");
+    LeetCodeString leetCode;
+    string s = "abcyy";
+    int t = 2;
+    int result = leetCode.lengthAfterTransformationsI(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + to_string(t) + "; result = " + to_string(result));
+
+    s = "azbk";
+    t = 1;
+    result = leetCode.lengthAfterTransformationsI(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + to_string(t) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3340(void)
+{
+    Logger::WriteMessage("Test Leet Code 3340");
+    LeetCodeString leetCode;
+    string num = "1234";
+    bool result = leetCode.isBalanced(num);
+    Logger::WriteMessage("num = " + num + "; result = " + (string)(result? "true" : "false"));
+
+    num = "24123";
+    result = leetCode.isBalanced(num);
+    Logger::WriteMessage("num = " + num + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3340();
+    TestLeetCode3335();
+    TestLeetCode3330();
+    TestLeetCode3292();
     TestLeetCode3327();
     TestLeetCode3324();
     TestLeetCode3307();

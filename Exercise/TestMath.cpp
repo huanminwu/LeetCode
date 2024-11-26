@@ -7427,9 +7427,98 @@ void TestLeetCode3326(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3334(void)
+{
+    Logger::WriteMessage("Test Leet Code 3334");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 2, 4, 8, 16 };
+    long long result = leetCode.maxScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4,5 };
+    result = leetCode.maxScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3};
+    result = leetCode.maxScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 11, 4 };
+    result = leetCode.maxScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6, 20, 1, 18 };
+    result = leetCode.maxScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3345(void)
+{
+    Logger::WriteMessage("Test Leet Code 3345");
+    LeetCodeMath leetCode;
+    int n = 10;
+    int t = 2;
+    int result = leetCode.smallestNumber(n, t);
+    Logger::WriteMessage("n = " + to_string(n) + "; t = " + to_string(t) + "; result = " + to_string(result));
+
+    n = 15;
+    t = 3;
+    result = leetCode.smallestNumber(n, t);
+    Logger::WriteMessage("n = " + to_string(n) + "; t = " + to_string(t) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3343(void)
+{
+    Logger::WriteMessage("Test Leet Code 3343");
+    LeetCodeMath leetCode;
+    string num = "123";
+    int result = leetCode.countBalancedPermutations(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+
+    num = "112";
+    result = leetCode.countBalancedPermutations(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+
+    num = "12345";
+    result = leetCode.countBalancedPermutations(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+    
+    num = "5473318604131511942135351560539329580363565850284422442";
+    result = leetCode.countBalancedPermutations(num);
+    Logger::WriteMessage("num = " + num + "; result = " + to_string(result));
+}
+
+void TestLeetCode3352(void)
+{
+    Logger::WriteMessage("Test Leet Code 3352");
+    LeetCodeMath leetCode;
+    string s = "111";
+    int k = 1;
+    int result = leetCode.countKReducibleNumbers(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "1000";
+    k = 2;
+    result = leetCode.countKReducibleNumbers(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "1";
+    k = 3;
+    result = leetCode.countKReducibleNumbers(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
 
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3352();
+    TestLeetCode3343();
+    TestLeetCode3345();
+    TestLeetCode3334();
     TestLeetCode3326();
     TestLeetCode3317();
     TestLeetCode3315();

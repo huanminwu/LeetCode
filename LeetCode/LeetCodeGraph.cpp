@@ -20692,7 +20692,7 @@ vector<vector<int>> LeetCodeGraph::constructGridLayout(int n, vector<vector<int>
                 if (visited[next] == 1) continue;
                 if (index == 0)
                 {
-                    if (neighbors[next].size() < degree)
+                    if ((int)neighbors[next].size() < degree)
                     {
                         degree = neighbors[next].size();
                         curr = next;
@@ -20723,5 +20723,160 @@ vector<vector<int>> LeetCodeGraph::constructGridLayout(int n, vector<vector<int>
         }
     }
     return result;
+}
+
+/// <summary>
+/// Leet Code 3341. Find Minimum Time to Reach Last Room I
+/// 
+/// Medium
+///
+/// There is a dungeon with n x m rooms arranged as a grid.
+/// You are given a 2D array moveTime of size n x m, where moveTime[i][j] 
+/// represents the minimum time in seconds when you can start moving to 
+/// that room. You start from the room (0, 0) at time t = 0 and can move 
+/// to an adjacent room. Moving between adjacent rooms takes exactly one 
+/// second.
+///
+/// Return the minimum time to reach the room (n - 1, m - 1).
+/// Two rooms are adjacent if they share a common wall, either 
+/// horizontally or vertically.
+/// 
+/// Example 1:
+/// Input: moveTime = [[0,4],[4,4]]
+/// Output: 6
+/// Explanation:
+/// The minimum time required is 6 seconds.
+/// At time t == 4, move from room (0, 0) to room (1, 0) in one second.
+/// At time t == 5, move from room (1, 0) to room (1, 1) in one second.
+///
+/// Example 2:
+/// Input: moveTime = [[0,0,0],[0,0,0]]
+/// Output: 3
+/// Explanation:
+/// The minimum time required is 3 seconds.
+/// At time t == 0, move from room (0, 0) to room (1, 0) in one second.
+/// At time t == 1, move from room (1, 0) to room (1, 1) in one second.
+/// At time t == 2, move from room (1, 1) to room (1, 2) in one second.
+///
+/// Example 3:
+/// Input: moveTime = [[0,1],[1,2]]
+/// Output: 3
+/// 
+/// Constraints:
+/// 1. 2 <= n == moveTime.length <= 50
+/// 2. 2 <= m == moveTime[i].length <= 50
+/// 3. 0 <= moveTime[i][j] <= 10^9
+/// </summary>
+int LeetCodeGraph::minTimeToReachI(vector<vector<int>>& moveTime)
+{
+    int result = 0, n = moveTime.size(), m = moveTime[0].size();
+    vector<vector<int>> travel(n, vector<int>(m, INT_MIN));
+    vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    priority_queue<vector<int>> pq;
+    pq.push({ 0, 0, 0 });
+    travel[0][0] = 0;
+    while (!pq.empty())
+    {
+        vector<int> pos = pq.top();
+        pq.pop();
+        if (pos[1] == n - 1 && pos[2] == m - 1) break;
+        for (size_t i = 0; i < directions.size(); i++)
+        {
+            vector<int> next_pos = pos;
+            next_pos[1] += directions[i][0];
+            next_pos[2] += directions[i][1];
+            if (next_pos[1] < 0 || next_pos[1] >= n || next_pos[2] < 0 || next_pos[2] >= m)
+            {
+                continue;
+            }
+            int delta = 1;
+            next_pos[0] = min(pos[0] - delta, 0 - moveTime[next_pos[1]][next_pos[2]] - delta);
+            if (next_pos[0] > travel[next_pos[1]][next_pos[2]])
+            {
+                travel[next_pos[1]][next_pos[2]] = next_pos[0];
+                pq.push(next_pos);
+            }
+        }
+    }
+    return 0 - travel[n - 1][m - 1];
+}
+
+/// <summary>
+/// Leet Code 3342. Find Minimum Time to Reach Last Room II
+/// 
+/// Medium
+///
+/// There is a dungeon with n x m rooms arranged as a grid.
+/// You are given a 2D array moveTime of size n x m, where moveTime[i][j] 
+/// represents the minimum time in seconds when you can start moving to 
+/// that room. You start from the room (0, 0) at time t = 0 and can move 
+/// to an adjacent room. Moving between adjacent rooms takes one second 
+/// for one move and two seconds for the next, alternating between the two.
+///
+/// Return the minimum time to reach the room (n - 1, m - 1).
+///
+/// Two rooms are adjacent if they share a common wall, either 
+/// horizontally or vertically.
+/// 
+/// Example 1:
+///
+/// Input: moveTime = [[0,4],[4,4]]
+/// Output: 7
+/// Explanation:
+/// The minimum time required is 7 seconds.
+/// At time t == 4, move from room (0, 0) to room (1, 0) in one second.
+/// At time t == 5, move from room (1, 0) to room (1, 1) in two seconds.
+///
+/// Example 2:
+/// Input: moveTime = [[0,0,0,0],[0,0,0,0]]
+/// Output: 6
+/// Explanation:
+/// The minimum time required is 6 seconds.
+/// At time t == 0, move from room (0, 0) to room (1, 0) in one second.
+/// At time t == 1, move from room (1, 0) to room (1, 1) in two seconds.
+/// At time t == 3, move from room (1, 1) to room (1, 2) in one second.
+/// At time t == 4, move from room (1, 2) to room (1, 3) in two seconds.
+///
+/// Example 3:
+/// Input: moveTime = [[0,1],[1,2]]
+/// Output: 4
+/// 
+/// Constraints:
+/// 1. 2 <= n == moveTime.length <= 750
+/// 2. 2 <= m == moveTime[i].length <= 750
+/// 3. 0 <= moveTime[i][j] <= 10^9
+/// </summary>
+int LeetCodeGraph::minTimeToReachII(vector<vector<int>>& moveTime)
+{
+    int result = 0, n = moveTime.size(), m = moveTime[0].size();
+    vector<vector<int>> travel(n, vector<int>(m, INT_MIN));
+    vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    priority_queue<vector<int>> pq;
+    pq.push({ 0, 0, 0 });
+    travel[0][0] = 0;
+    while (!pq.empty())
+    {
+        vector<int> pos = pq.top();
+        pq.pop();
+        if (pos[1] == n - 1 && pos[2] == m - 1) break;
+        for (size_t i = 0; i < directions.size(); i++)
+        {
+            vector<int> next_pos = pos;
+            next_pos[1] += directions[i][0];
+            next_pos[2] += directions[i][1];
+            if (next_pos[1] < 0 || next_pos[1] >= n || next_pos[2] < 0 || next_pos[2] >= m)
+            {
+                continue;
+            }
+            int delta = 2 - (next_pos[1] + next_pos[2]) % 2;
+            next_pos[0] = min(pos[0] - delta, 0 - moveTime[next_pos[1]][next_pos[2]] - delta);
+            if (next_pos[0] > travel[next_pos[1]][next_pos[2]])
+            {
+                travel[next_pos[1]][next_pos[2]] = next_pos[0];
+                pq.push(next_pos);
+            }
+        }
+    }
+    return 0 - travel[n - 1][m - 1];
 }
 #pragma endregion

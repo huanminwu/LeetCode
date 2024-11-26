@@ -1911,8 +1911,62 @@ void TestLeetCode3323(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3355(void)
+{
+    Logger::WriteMessage("Test Leet Code 3355");
+    LeetCodeGreedy leetCode;
+    vector<int> nums = { 1, 0, 1 };
+    vector<vector<int>> queries = { {0, 2} };
+    bool result = leetCode.isZeroArrayI(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 4,3,2,1 };
+    queries = { {1,3} ,{0,2} };
+    result = leetCode.isZeroArrayI(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3356(void)
+{
+    Logger::WriteMessage("Test Leet Code 3356");
+    LeetCodeGreedy leetCode;
+    vector<int> nums = { 2, 0, 2 };
+    vector<vector<int>> queries = { {0, 2, 1} ,{0, 2, 1},{1, 1, 3} };
+    int result = leetCode.isZeroArrayII(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,3,2,1 };
+    queries = { {1,3,2} ,{0,2,1} };
+    result = leetCode.isZeroArrayII(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7, 6, 8 };
+    queries = { { 0,0,2 } ,{0,1,5},{2,2,5},{0,2,4} };
+    result = leetCode.isZeroArrayII(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 0, 6 };
+    queries = { {1,2,1} ,{0,0,4},{1,1,5},{0,0,5},{1,2,4},{0,2,2},{2,2,4},{1,2,2},{1,2,4},{0,1,3} };
+    result = leetCode.isZeroArrayII(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode3356();
+    TestLeetCode3355();
     TestLeetCode3323();
     TestLeetCode3273();
     TestLeetCode3169();

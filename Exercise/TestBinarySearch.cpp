@@ -1442,8 +1442,73 @@ void TestLeetCode3181(void)
     Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3350(void)
+{
+    Logger::WriteMessage("Test Leet Code 3350");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 2, 5, 7, 8, 9, 2, 3, 4, 3, 1 };
+    int result = leetCode.maxIncreasingSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4,4,4,4,5,6,7 };
+    result = leetCode.maxIncreasingSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3344(void)
+{
+    Logger::WriteMessage("Test Leet Code 3344");
+    LeetCodeBinarySearch leetCode;
+    long long s = 10;
+    int result = leetCode.maxSizedArray(s);
+    Logger::WriteMessage("s = " + to_string(s) + "; result = " + to_string(result));
+
+    s = 0;
+    result = leetCode.maxSizedArray(s);
+    Logger::WriteMessage("s = " + to_string(s) + "; result = " + to_string(result));
+
+    s = 1000000000000000;
+    result = leetCode.maxSizedArray(s);
+    Logger::WriteMessage("s = " + to_string(s) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3357(void)
+{
+    Logger::WriteMessage("Test Leet Code 3357");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 1, 2, -1, 10, 8 };
+    int result = leetCode.minDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -1,-1,-1 };
+    result = leetCode.minDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -1,10,-1,8 };
+    result = leetCode.minDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 12 };
+    result = leetCode.minDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2, -1, 4, -1, -1, 6 };
+    result = leetCode.minDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode3357();
+    TestLeetCode3344();
+    TestLeetCode3350();
     TestLeetCode3181();
     TestLeetCode3134();
     TestLeetCode3048();

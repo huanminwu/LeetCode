@@ -6045,8 +6045,49 @@ void TestLeetCode3311(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3341(void)
+{
+    Logger::WriteMessage("Test Leet Code 3341");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> moveTime = { {0, 4},{4, 4} };
+    int result = leetCode.minTimeToReachI(moveTime);
+    Logger::WriteMessage(moveTime);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    moveTime = { {0, 0, 0},{0, 0, 0} };
+    result = leetCode.minTimeToReachI(moveTime);
+    Logger::WriteMessage(moveTime);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    moveTime = { {0, 1},{1, 2} };
+    result = leetCode.minTimeToReachI(moveTime);
+    Logger::WriteMessage(moveTime);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3342(void)
+{
+    Logger::WriteMessage("Test Leet Code 3342");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> moveTime = { {0, 4},{4, 4} };
+    int result = leetCode.minTimeToReachII(moveTime);
+    Logger::WriteMessage(moveTime);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    moveTime = { {0, 0, 0, 0},{0, 0, 0, 0} };
+    result = leetCode.minTimeToReachII(moveTime);
+    Logger::WriteMessage(moveTime);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    moveTime = { {0, 1},{1, 2} };
+    result = leetCode.minTimeToReachII(moveTime);
+    Logger::WriteMessage(moveTime);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3342();
+    TestLeetCode3341();
     TestLeetCode3311();
     TestLeetCode3310();
     TestLeetCode3286();
