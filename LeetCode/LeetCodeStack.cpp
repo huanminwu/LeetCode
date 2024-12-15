@@ -3752,4 +3752,114 @@ long long LeetCodeStack::findMaximumScore(vector<int>& nums)
     return result;
 }
 
+/// <summary>
+/// Leet Code 3359. Find Sorted Submatrices With Maximum Element at Most K
+/// Hard
+/// </summary>
+long long LeetCodeStack::countSubmatrices(stack<pair<long long, int>>& stack, pair<long long, int> new_node)
+{
+    long long result = 0;
+    while (!stack.empty() && stack.top().first >= new_node.first)
+    {
+        pair<long long, int> node = stack.top();
+        stack.pop();
+        if (stack.empty() || stack.top().first < new_node.first)
+        {
+            long long delta = node.first - new_node.first;
+            int n = node.second;
+            result += delta * (n + 1) * n / 2;
+            new_node.second += n;
+            break;
+        }
+        else
+        {
+            long long delta = node.first - stack.top().first;
+            int n = node.second;
+            result += delta * (n + 1) * n / 2;
+            stack.top().second += n;
+        }
+    }
+    if (new_node.first > 0) stack.push(new_node);
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3359. Find Sorted Submatrices With Maximum Element at Most K
+/// 
+/// Hard
+///
+/// You are given a 2D matrix grid of size m x n. You are also given a 
+/// non-negative integer k.
+///
+/// Return the number of submatrices of grid that satisfy the following 
+/// conditions:
+///
+/// The maximum element in the submatrix less than or equal to k.
+/// Each row in the submatrix is sorted in non-increasing order.
+/// A submatrix (x1, y1, x2, y2) is a matrix that forms by choosing all 
+/// cells grid[x][y] where x1 <= x <= x2 and y1 <= y <= y2.
+///
+/// Example 1:
+/// Input: grid = [[4,3,2,1],[8,7,6,1]], k = 3
+/// Output: 8
+///
+/// Explanation:
+/// 
+/// The 8 submatrices are:
+/// [[1]]
+/// [[1]]
+/// [[2,1]]
+/// [[3,2,1]]
+/// [[1],[1]]
+/// [[2]]
+/// [[3]]
+/// [[3,2]]
+///
+/// Example 2: 
+/// Input: grid = [[1,1,1],[1,1,1],[1,1,1]], k = 1
+/// Output: 36
+/// Explanation:
+/// There are 36 submatrices of grid. All submatrices have their maximum 
+/// element equal to 1.
+///
+/// Example 3:
+/// Input: grid = [[1]], k = 1
+/// Output: 1
+/// 
+/// Constraints:
+/// 1. 1 <= m == grid.length <= 10^3
+/// 2. 1 <= n == grid[i].length <= 10^3
+/// 3. 1 <= grid[i][j] <= 10^9
+/// 4. 1 <= k <= 10^9
+/// </summary>
+long long LeetCodeStack::countSubmatrices(vector<vector<int>>& grid, int k)
+{
+    int n = grid.size();
+    int m = grid[0].size();
+    vector<vector<int>> dp(n, vector<int>(m));
+    stack<pair<long long, int>> stack;
+    long long result = 0;
+    for (int j = 0; j < m; j++)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            if (grid[i][j] > k) dp[i][j] = 0;
+            else if (j == 0) dp[i][j] = 1;
+            else if (grid[i][j] > grid[i][j - 1]) dp[i][j] = 1;
+            else dp[i][j] = dp[i][j - 1] + 1;
+            if (dp[i][j] > 0)
+            {
+                result += countSubmatrices(stack, make_pair(dp[i][j], 1));
+            }
+            else
+            {
+                result += countSubmatrices(stack, make_pair(0, 0));
+            }
+        }
+        result += countSubmatrices(stack, make_pair(0, 0));
+    }
+    return result;
+}
+
 #pragma endregion

@@ -6084,8 +6084,95 @@ void TestLeetCode3342(void)
     Logger::WriteMessage(moveTime);
     Logger::WriteMessage("result = " + to_string(result));
 }
+
+void TestLeetCode3377(void)
+{
+    Logger::WriteMessage("Test Leet Code 3377");
+    LeetCodeGraph leetCode;
+    int n = 10, m = 12;
+    int result = leetCode.minOperations(n, m);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; result = " + to_string(result));
+
+    n = 4, m = 8;
+    result = leetCode.minOperations(n, m);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; result = " + to_string(result));
+
+    n = 6, m = 2;
+    result = leetCode.minOperations(n, m);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; result = " + to_string(result));
+
+    n = 5637, m = 2034;
+    result = leetCode.minOperations(n, m);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3383(void)
+{
+    Logger::WriteMessage("Test Leet Code 3383");
+    LeetCodeGraph leetCode;
+    int n = 6;
+    vector<int> crystals = { 0 };
+    vector<int> flowFrom = { 0, 1, 2, 3 };
+    vector<int> flowTo = { 1, 2, 3, 0 };
+    int result = leetCode.minRunesToAdd(n, crystals, flowFrom, flowTo);
+    Logger::WriteMessage(crystals);
+    Logger::WriteMessage(flowFrom);
+    Logger::WriteMessage(flowTo);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 7; 
+    crystals = { 3, 5 };
+    flowFrom = { 0, 1, 2, 3, 5 };
+    flowTo = { 1, 2, 0, 4, 6 };
+    result = leetCode.minRunesToAdd(n, crystals, flowFrom, flowTo);
+    Logger::WriteMessage(crystals);
+    Logger::WriteMessage(flowFrom);
+    Logger::WriteMessage(flowTo);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 9;
+    crystals = { 4 };
+    flowFrom = { 6,4,8,8,0,4,6,7,5,2,2,6 };
+    flowTo = { 7,3,5,1,4,7,1,0,2,6,5,8 };
+    result = leetCode.minRunesToAdd(n, crystals, flowFrom, flowTo);
+    Logger::WriteMessage(crystals);
+    Logger::WriteMessage(flowFrom);
+    Logger::WriteMessage(flowTo);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 2;
+    crystals = { 0 };
+    flowFrom = { 0 };
+    flowTo = { 1 };
+    result = leetCode.minRunesToAdd(n, crystals, flowFrom, flowTo);
+    Logger::WriteMessage(crystals);
+    Logger::WriteMessage(flowFrom);
+    Logger::WriteMessage(flowTo);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3378(void)
+{
+    Logger::WriteMessage("Test Leet Code 3378");
+    LeetCodeGraph leetCode;
+    vector<int> nums = { 2, 4, 8, 3, 9 };
+    int threshold = 5;
+    int result = leetCode.countComponents(nums, threshold);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("threshold = " + to_string(threshold) + "; result = " + to_string(result));
+
+    nums = { 2,4,8,3,9,12 };
+    threshold = 10;
+    result = leetCode.countComponents(nums, threshold);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("threshold = " + to_string(threshold) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3378();
+    TestLeetCode3383();
+    TestLeetCode3377();
     TestLeetCode3342();
     TestLeetCode3341();
     TestLeetCode3311();

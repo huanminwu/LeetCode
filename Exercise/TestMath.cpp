@@ -7513,8 +7513,43 @@ void TestLeetCode3352(void)
     Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3360(void)
+{
+    Logger::WriteMessage("Test Leet Code 3360");
+    LeetCodeMath leetCode;
+    int n = 12;
+    bool result = leetCode.canAliceWin(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result? "true" : "false"));
+
+    n = 1;
+    result = leetCode.canAliceWin(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3380(void)
+{
+    Logger::WriteMessage("Test Leet Code 3380");
+    LeetCodeMath leetCode;
+    vector<vector<int>> points = { {1, 1},{1, 3},{3, 1},{3, 3} };
+    int result = leetCode.maxRectangleArea(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {1, 1},{1, 3},{3, 1},{3, 3},{2, 2} };
+    result = leetCode.maxRectangleArea(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {1, 1},{1, 3},{3, 1},{3, 3},{1, 2},{3, 2} };
+    result = leetCode.maxRectangleArea(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3380();
+    TestLeetCode3360();
     TestLeetCode3352();
     TestLeetCode3343();
     TestLeetCode3345();

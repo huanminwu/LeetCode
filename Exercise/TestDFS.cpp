@@ -2413,8 +2413,33 @@ void TestLeetCode3272(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3376(void)
+{
+    Logger::WriteMessage("Test Leet Code 3376");
+    LeetCodeDFS leetCode;
+    vector<int> strength = { 3, 4, 1 };
+    int K = 1;
+    int result = leetCode.findMinimumTime(strength, K);
+    Logger::WriteMessage(strength);
+    Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
+
+    strength = { 2,5,4 };
+    K = 2;
+    result = leetCode.findMinimumTime(strength, K);
+    Logger::WriteMessage(strength);
+    Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
+
+    strength = { 7, 3, 6, 18, 22, 50 };
+    K = 4;
+    result = leetCode.findMinimumTime(strength, K);
+    Logger::WriteMessage(strength);
+    Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
+}
+
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3376();
     TestLeetCode3272();
     TestLeetCode3211();
     TestLeetCode3149();

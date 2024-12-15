@@ -11130,5 +11130,113 @@ public:
     /// 3. 1 <= m <= 1000
     /// </summary>
     int countOfArrays(int n, int m, int k);
+
+    /// <summary>
+    /// Leet Code 3366. Minimum Array Sum 
+    /// 
+    /// Medium
+    /// 
+    /// You are given an integer array nums and three integers k, op1, and op2.
+    /// You can perform the following operations on nums:
+    /// Operation 1: Choose an index i and divide nums[i] by 2, rounding up to 
+    /// the nearest whole number. You can perform this operation at most op1 
+    /// times, and not more than once per index.
+    /// Operation 2: Choose an index i and subtract k from nums[i], but only 
+    /// if nums[i] is greater than or equal to k. You can perform this 
+    /// operation at most op2 times, and not more than once per index.
+    /// Note: Both operations can be applied to the same index, but at most 
+    /// once each.
+    ///
+    /// Return the minimum possible sum of all elements in nums after 
+    /// performing any number of operations.
+    ///
+    /// Example 1:
+    /// Input: nums = [2,8,3,19,3], k = 3, op1 = 1, op2 = 1
+    /// Output: 23
+    /// Explanation:
+    /// Apply Operation 2 to nums[1] = 8, making nums[1] = 5.
+    /// Apply Operation 1 to nums[3] = 19, making nums[3] = 10.
+    /// The resulting array becomes [2, 5, 3, 10, 3], which has the minimum 
+    /// possible sum of 23 after applying the operations.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,4,3], k = 3, op1 = 2, op2 = 1
+    /// Output: 3
+    /// Explanation:
+    /// Apply Operation 1 to nums[0] = 2, making nums[0] = 1.
+    /// Apply Operation 1 to nums[1] = 4, making nums[1] = 2.
+    /// Apply Operation 2 to nums[2] = 3, making nums[2] = 0.
+    /// The resulting array becomes [1, 2, 0], which has the minimum possible 
+    /// sum of 3 after applying the operations.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 0 <= nums[i] <= 10^5
+    /// 3. 0 <= k <= 10^5
+    /// 4. 0 <= op1, op2 <= nums.length
+    /// </summary>
+    int minArraySum(vector<int>& nums, int k, int op1, int op2);
+
+    /// <summary>
+    /// Leet Code 3363. Find the Maximum Number of Fruits Collected 
+    /// 
+    /// Hard
+    ///
+    /// There is a game dungeon comprised of n x n rooms arranged in a grid.
+    /// 
+    /// You are given a 2D array fruits of size n x n, where fruits[i][j] 
+    /// represents the number of fruits in the room (i, j). Three children 
+    /// will play in the game dungeon, with initial positions at the corner 
+    ///  rooms (0, 0), (0, n - 1), and (n - 1, 0).
+    ///
+    /// The children will make exactly n - 1 moves according to the following 
+    /// rules to reach the room (n - 1, n - 1):
+    ///
+    /// The child starting from (0, 0) must move from their current 
+    /// room (i, j) to one of the rooms (i + 1, j + 1), (i + 1, j), 
+    /// and (i, j + 1) if the target room exists.
+    /// The child starting from (0, n - 1) must move from their current 
+    /// room (i, j) to one of the rooms (i + 1, j - 1), (i + 1, j), 
+    /// and (i + 1, j + 1) if the target room exists.
+    /// The child starting from (n - 1, 0) must move from their current 
+    /// room (i, j) to one of the rooms (i - 1, j + 1), (i, j + 1), 
+    /// and (i + 1, j + 1) if the target room exists.
+    /// When a child enters a room, they will collect all the fruits there. 
+    /// If two or more children enter the same room, only one child will 
+    /// collect the fruits, and the room will be emptied after they leave.
+    ///
+    /// Return the maximum number of fruits the children can collect from 
+    /// the dungeon.
+    /// 
+    /// Example 1:
+    /// Input: fruits = [[1,2,3,4],[5,6,8,7],[9,10,11,12],[13,14,15,16]]
+    /// Output: 100
+    /// Explanation:
+    ///
+    /// In this example:
+    /// The 1st child (green) moves on the path (0,0) -> (1,1) -> (2,2) -> 
+    /// (3, 3).
+    /// The 2nd child (red) moves on the path (0,3) -> (1,2) -> (2,3) -> 
+    /// (3, 3).
+    /// The 3rd child (blue) moves on the path (3,0) -> (3,1) -> (3,2) -> 
+    /// (3, 3).
+    /// In total they collect 1 + 6 + 11 + 16 + 4 + 8 + 12 + 13 + 14 + 15 = 
+    /// 100 fruits.
+    ///
+    /// Example 2:
+    /// Input: fruits = [[1,1],[1,1]]
+    /// Output: 4
+    /// Explanation:
+    /// In this example:
+    /// The 1st child moves on the path (0,0) -> (1,1).
+    /// The 2nd child moves on the path (0,1) -> (1,1).
+    /// The 3rd child moves on the path (1,0) -> (1,1).
+    /// In total they collect 1 + 1 + 1 + 1 = 4 fruits.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n == fruits.length == fruits[i].length <= 1000
+    /// 2. 0 <= fruits[i][j] <= 1000
+    /// </summary>
+    int maxCollectedFruits(vector<vector<int>>& fruits);
 };
 #endif  // LeetCodeDP

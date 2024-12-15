@@ -7456,8 +7456,32 @@ void TestLeetCode3340(void)
     Logger::WriteMessage("num = " + num + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode3365(void)
+{
+    Logger::WriteMessage("Test Leet Code 3365");
+    LeetCodeString leetCode;
+    string s = "abcd", t = "cdab";
+    int k = 2;
+    bool result = leetCode.isPossibleToRearrange(s, t, k);
+    Logger::WriteMessage("s = " + s + "; t = " + t);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "aabbcc", t = "bbaacc"; 
+    k = 3;
+    result = leetCode.isPossibleToRearrange(s, t, k);
+    Logger::WriteMessage("s = " + s + "; t = " + t);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "aabbcc", t = "bbaacc";
+    k = 2;
+    result = leetCode.isPossibleToRearrange(s, t, k);
+    Logger::WriteMessage("s = " + s + "; t = " + t);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3365();
     TestLeetCode3340();
     TestLeetCode3335();
     TestLeetCode3330();

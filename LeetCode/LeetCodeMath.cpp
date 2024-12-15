@@ -24708,5 +24708,135 @@ int LeetCodeMath::countKReducibleNumbers(string s, int k)
     }
     return (int)(result % M);
 }
+
+/// <summary>
+/// Leet Code 3360. Stone Removal Game
+/// 
+/// Easy
+///
+/// Alice and Bob are playing a game where they take turns removing stones 
+/// from a pile, with Alice going first.
+///
+/// Alice starts by removing exactly 10 stones on her first turn.
+/// For each subsequent turn, each player removes exactly 1 fewer stone 
+/// than the previous opponent.
+/// The player who cannot make a move loses the game.
+///
+/// Given a positive integer n, return true if Alice wins the game and 
+/// false otherwise.
+/// 
+/// Example 1:
+/// Input: n = 12
+/// Output: true
+/// Explanation:
+/// Alice removes 10 stones on her first turn, leaving 2 stones for Bob.
+/// Bob cannot remove 9 stones, so Alice wins.
+///
+/// Example 2:
+/// Input: n = 1
+/// Output: false
+/// Explanation:
+/// Alice cannot remove 10 stones, so Alice loses.
+///
+/// Constraints:
+/// 1. 1 <= n <= 50
+/// </summary>
+bool LeetCodeMath::canAliceWin(int n)
+{
+    int result = 0;
+    int count = 10;
+    while (n > 0)
+    {
+        if (n < count) break;
+        n -= count;
+        count--;
+        result = 1 - result;
+    }
+    return result == 1;
+}
+
+/// <summary>
+/// Leet Code 3380. Maximum Area Rectangle With Point Constraints I
+/// 
+/// Medium
+///
+/// You are given an array points where points[i] = [xi, yi] represents 
+/// the coordinates of a point on an infinite plane.
+///
+/// Your task is to find the maximum area of a rectangle that:
+/// Can be formed using four of these points as its corners.
+/// Does not contain any other point inside or on its border.
+/// Has its edges parallel to the axes.
+/// Return the maximum area that you can obtain or -1 if no such rectangle 
+/// is possible.
+/// 
+/// Example 1:
+/// Input: points = [[1,1],[1,3],[3,1],[3,3]]
+/// Output: 4
+/// Explanation:
+/// Example 1 diagram
+/// We can make a rectangle with these 4 points as corners and there is 
+/// no other point that lies inside or on the border. Hence, the maximum 
+/// possible area would be 4.
+///
+/// Example 2:
+/// Input: points = [[1,1],[1,3],[3,1],[3,3],[2,2]]
+/// Output: -1
+/// Explanation:
+/// Example 2 diagram
+/// There is only one rectangle possible is with points [1,1], [1,3], 
+/// [3,1] and [3,3] but [2,2] will always lie inside it. Hence, 
+/// returning -1.
+///
+/// Example 3:
+/// Input: points = [[1,1],[1,3],[3,1],[3,3],[1,2],[3,2]]
+/// Output: 2
+/// Explanation:
+/// Example 3 diagram
+/// The maximum area rectangle is formed by the points [1,3], [1,2], 
+/// [3,2], [3,3], which has an area of 2. Additionally, the points [1,1], 
+/// [1,2], [3,1], [3,2] also form a valid rectangle with the same area.
+/// 
+/// Constraints:
+/// 1. 1 <= points.length <= 10
+/// 2. points[i].length == 2
+/// 3. 0 <= xi, yi <= 100
+/// 4. All the given points are unique.
+/// </summary>
+int LeetCodeMath::maxRectangleArea(vector<vector<int>>& points)
+{
+    sort(points.begin(), points.end());
+    int n = points.size();
+    int result = -1;
+    for (int i = 0; i < n-3; i++)
+    {
+        if (points[i][0] != points[i + 1][0]) continue;
+        for (int j = i + 2; j < n - 1; j++)
+        {
+            if (points[j][0] != points[j + 1][0] || points[j][0] == points[i][0])
+            {
+                continue;
+            }
+            if (points[i][1] != points[j][1] || points[i + 1][1] != points[j + 1][1])
+            {
+                continue;
+            }
+            bool valid = true;
+            for (int k = i + 2; k < j; k++)
+            {
+                if (points[i][1] <= points[k][1] && points[i+1][1] >= points[k][1])
+                {
+                    valid = false;
+                    break;
+                }
+            }
+            if (valid)
+            {
+                result = max(result, (points[i + 1][1] - points[i][1]) * (points[j][0] - points[i][0]));
+            }
+        }
+    }
+    return result;
+}
 #pragma endregion
 

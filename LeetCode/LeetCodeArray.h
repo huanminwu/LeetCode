@@ -22042,5 +22042,258 @@ public:
     /// 3. There is at least one element i where nums[i] == 0.
     /// </summary>
     int countValidSelections(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3364. Minimum Positive Sum Subarray 
+    /// 
+    /// Easy
+    /// 
+    /// You are given an integer array nums and two integers l and r. Your 
+    /// task is to find the minimum sum of a subarray whose size is between 
+    /// l and r (inclusive) and whose sum is greater than 0.
+    ///
+    /// Return the minimum sum of such a subarray. If no such subarray 
+    /// exists, return -1.
+    ///
+    /// A subarray is a contiguous non-empty sequence of elements within an 
+    /// array.
+    ///
+    /// Example 1:
+    /// 
+    /// Input: nums = [3, -2, 1, 4], l = 2, r = 3
+    /// Output: 1
+    /// Explanation:
+    /// The subarrays of length between l = 2 and r = 3 where the sum is 
+    /// greater than 0 are:
+    /// 
+    /// [3, -2] with a sum of 1
+    /// [1, 4] with a sum of 5
+    /// [3, -2, 1] with a sum of 2
+    /// [-2, 1, 4] with a sum of 3
+    /// Out of these, the subarray [3, -2] has a sum of 1, which is the smallest 
+    /// positive sum. Hence, the answer is 1.
+    ///
+    /// Example 2:
+    /// Input: nums = [-2, 2, -3, 1], l = 2, r = 3
+    /// Output: -1
+    /// Explanation:
+    /// There is no subarray of length between l and r that has a sum greater 
+    /// than 0. So, the answer is -1.
+    /// 
+    /// Example 3:
+    /// Input: nums = [1, 2, 3, 4], l = 2, r = 4
+    /// Output: 3
+    /// Explanation:
+    /// The subarray [1, 2] has a length of 2 and the minimum sum greater 
+    /// than 0. So, the answer is 3.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= l <= r <= nums.length
+    /// 3. -1000 <= nums[i] <= 1000
+    /// </summary>
+    int minimumSumSubarray(vector<int>& nums, int l, int r);
+
+    /// <summary>
+    /// Leet Code 3361. Shift Distance Between Two Strings 
+    /// 
+    /// Medium
+    /// 
+    /// You are given two strings s and t of the same length, and two integer 
+    /// arrays nextCost and previousCost.
+    ///
+    /// In one operation, you can pick any index i of s, and perform either 
+    /// one of the following actions:
+    ///
+    /// Shift s[i] to the next letter in the alphabet. If s[i] == 'z', you 
+    /// should replace it with 'a'. This operation costs nextCost[j] where j 
+    /// is the index of s[i] in the alphabet.
+    /// Shift s[i] to the previous letter in the alphabet. If s[i] == 'a', 
+    /// you should replace it with 'z'. This operation costs previousCost[j] 
+    /// where j is the index of s[i] in the alphabet.
+    /// The shift distance is the minimum total cost of operations required 
+    /// to transform s into t.
+    ///
+    /// Return the shift distance from s to t.
+    /// Example 1:
+    /// Input: s = "abab", t = "baba", 
+    /// nextCost = [100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], 
+    /// previousCost = [1,100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    /// Output: 2
+    /// Explanation:
+    /// We choose index i = 0 and shift s[0] 25 times to the previous 
+    /// character for a total cost of 1.
+    /// We choose index i = 1 and shift s[1] 25 times to the next character 
+    /// for a total cost of 0.
+    /// We choose index i = 2 and shift s[2] 25 times to the previous 
+    /// character for a total cost of 1.
+    /// We choose index i = 3 and shift s[3] 25 times to the next 
+    /// character for a total cost of 0.
+    ///
+    /// Example 2:
+    /// Input: s = "leet", t = "code", 
+    /// nextCost = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], 
+    /// previousCost = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ///
+    /// Output: 31
+    /// Explanation:
+    /// We choose index i = 0 and shift s[0] 9 times to the previous character 
+    /// for a total cost of 9.
+    /// We choose index i = 1 and shift s[1] 10 times to the next character 
+    /// for a total cost of 10.
+    /// We choose index i = 2 and shift s[2] 1 time to the previous character 
+    /// for a total cost of 1.
+    /// We choose index i = 3 and shift s[3] 11 times to the next character 
+    /// for a total cost of 11.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length == t.length <= 10^5
+    /// 2. s and t consist only of lowercase English letters.
+    /// 3. nextCost.length == previousCost.length == 26
+    /// 4. 0 <= nextCost[i], previousCost[i] <= 10^9
+    /// </summary>
+    long long shiftDistance(string s, string t, vector<int>& nextCost, vector<int>& previousCost);
+
+    /// <summary>
+    /// Leet Code 3371. Identify the Largest Outlier in an Array
+    /// 
+    /// Medium
+    /// 
+    /// You are given an integer array nums. This array contains n elements, 
+    /// where exactly n - 2 elements are special numbers. One of the 
+    /// remaining two elements is the sum of these special numbers, and the 
+    /// other is an outlier.
+    ///
+    /// An outlier is defined as a number that is neither one of the original 
+    /// special numbers nor the element representing the sum of those numbers.
+    ///
+    /// Note that special numbers, the sum element, and the outlier must have 
+    /// distinct indices, but may share the same value.
+    ///
+    /// Return the largest potential outlier in nums.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,3,5,10]
+    /// Output: 10
+    /// Explanation:
+    /// The special numbers could be 2 and 3, thus making their sum 5 and the 
+    /// outlier 10.
+    ///
+    /// Example 2:
+    /// Input: nums = [-2,-1,-3,-6,4]
+    /// Output: 4
+    /// Explanation:
+    /// The special numbers could be -2, -1, and -3, thus making their sum -6 
+    /// and the outlier 4.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,1,1,1,1,5,5]
+    /// Output: 5
+    /// Explanation:
+    /// The special numbers could be 1, 1, 1, 1, and 1, thus making their 
+    /// sum 5 and the other 5 as the outlier.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= nums.length <= 10^5
+    /// 2. -1000 <= nums[i] <= 1000
+    /// 3. The input is generated such that at least one potential outlier 
+    ///    exists in nums.
+    /// </summary>
+    int getLargestOutlier(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3379. Transformed Array 
+    /// 
+    /// Easy
+    ///
+    /// You are given an integer array nums that represents a circular array. 
+    /// Your task is to create a new array result of the same size, following 
+    /// these rules:
+    /// 
+    /// For each index i (where 0 <= i < nums.length), perform the following 
+    /// independent actions:
+    /// If nums[i] > 0: Start at index i and move nums[i] steps to the right 
+    /// in the circular array. Set result[i] to the value of the index where 
+    /// you land.
+    /// If nums[i] < 0: Start at index i and move abs(nums[i]) steps to the 
+    /// left in the circular array. Set result[i] to the value of the index 
+    /// where you land.
+    /// If nums[i] == 0: Set result[i] to nums[i].
+    /// Return the new array result.
+    ///
+    /// Note: Since nums is circular, moving past the last element wraps 
+    /// around to the beginning, and moving before the first element wraps 
+    /// back to the end.
+    /// 
+    /// Example 1:
+    /// Input: nums = [3,-2,1,1]
+    /// 
+    /// Output: [1,1,1,3]
+    ///
+    /// Explanation:
+    /// For nums[0] that is equal to 3, If we move 3 steps to right, we 
+    /// reach nums[3]. So result[0] should be 1.
+    /// For nums[1] that is equal to -2, If we move 2 steps to left, we 
+    /// reach nums[3]. So result[1] should be 1.
+    /// For nums[2] that is equal to 1, If we move 1 step to right, we 
+    /// reach nums[3]. So result[2] should be 1.
+    /// For nums[3] that is equal to 1, If we move 1 step to right, 
+    /// we reach nums[0]. So result[3] should be 3.
+    ///
+    /// Example 2:
+    /// Input: nums = [-1,4,-1]
+    /// Output: [-1,-1,4]
+    /// Explanation:
+    /// For nums[0] that is equal to -1, If we move 1 step to left, we 
+    /// reach nums[2]. So result[0] should be -1.
+    /// For nums[1] that is equal to 4, If we move 4 steps to right, we 
+    /// reach nums[2]. So result[1] should be -1.
+    /// For nums[2] that is equal to -1, If we move 1 step to left, we 
+    /// reach nums[1]. So result[2] should be 4.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. -100 <= nums[i] <= 100
+    /// </summary>
+    vector<int> constructTransformedArray(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3381. Maximum Subarray Sum With Length Divisible by K
+    /// 
+    /// Medium
+    ///
+    /// You are given an array of integers nums and an integer k.
+    /// Return the maximum sum of a non-empty subarray of nums, such that the 
+    /// size of the subarray is divisible by k.
+    ///
+    /// A subarray is a contiguous non-empty sequence of elements within an 
+    /// array.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,2], k = 1
+    /// Output: 3
+    /// Explanation:
+    /// The subarray [1, 2] with sum 3 has length equal to 2 which is 
+    /// divisible by 1.
+    ///
+    /// Example 2:
+    /// Input: nums = [-1,-2,-3,-4,-5], k = 4
+    /// Output: -10
+    /// Explanation:
+    /// The maximum sum subarray is [-1, -2, -3, -4] which has length equal 
+    /// to 4 which is divisible by 4.
+    ///
+    /// Example 3:
+    /// Input: nums = [-5,1,2,-3,4], k = 2
+    /// Output: 4
+    /// Explanation:
+    /// The maximum sum subarray is [1, 2, -3, 4] which has length equal to 4 
+    /// which is divisible by 2.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= k <= nums.length <= 2 * 10^5
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// </summary>
+    long long maxSubarraySum(vector<int>& nums, int k);
 };
 #endif  // LeetCodeArray_H

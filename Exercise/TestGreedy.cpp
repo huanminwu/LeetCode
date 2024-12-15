@@ -1963,8 +1963,34 @@ void TestLeetCode3356(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3362(void)
+{
+    Logger::WriteMessage("Test Leet Code 3362");
+    LeetCodeGreedy leetCode;
+    vector<int> nums = { 2, 0, 2 };
+    vector<vector<int>> queries = { {0, 2} ,{0, 2},{1, 1} };
+    int result = leetCode.maxRemoval(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1,1 };
+    queries = { {1, 3} ,{0, 2},{1, 3},{1, 2} };
+    result = leetCode.maxRemoval(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    queries = { { 0,3 } };
+    result = leetCode.maxRemoval(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode3362();
     TestLeetCode3356();
     TestLeetCode3355();
     TestLeetCode3323();

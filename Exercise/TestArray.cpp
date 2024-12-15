@@ -10868,8 +10868,126 @@ void TestLeetCode3354(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3364(void)
+{
+    Logger::WriteMessage("Test Leet Code 3364");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, -2, 1, 4 };
+    int l = 2, r = 3;
+    int result = leetCode.minimumSumSubarray(nums, l, r);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r) +  "; result = " + to_string(result));
+
+    nums = { -2, 2, -3, 1 };
+    l = 2, r = 3;
+    result = leetCode.minimumSumSubarray(nums, l, r);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r) + "; result = " + to_string(result));
+
+    nums = { 1, 2, 3, 4 };
+    l = 2, r = 4;
+    result = leetCode.minimumSumSubarray(nums, l, r);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3361(void)
+{
+    Logger::WriteMessage("Test Leet Code 3361");
+    LeetCodeArray leetCode;
+    string s = "abab";
+    string t = "baba";
+    vector<int> nextCost = { 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    vector<int> previousCost = { 1, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    long long result = leetCode.shiftDistance(s, t, nextCost, previousCost);
+    Logger::WriteMessage(nextCost);
+    Logger::WriteMessage(previousCost);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+
+    s = "leet", t = "code"; 
+    nextCost = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    previousCost = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    result = leetCode.shiftDistance(s, t, nextCost, previousCost);
+    Logger::WriteMessage(nextCost);
+    Logger::WriteMessage(previousCost);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + to_string(result));
+}
+
+void TestLeetCode3371(void)
+{
+    Logger::WriteMessage("Test Leet Code 3371");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 3, 5, 10 };
+    int result = leetCode.getLargestOutlier(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -2,-1,-3,-6,4 };
+    result = leetCode.getLargestOutlier(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1,1,1,5,5 };
+    result = leetCode.getLargestOutlier(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+    
+    nums = { 874, 159, -838, -375, 658 };
+    result = leetCode.getLargestOutlier(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6, -31, 50, -35, 41, 37, -42, 13 };
+    result = leetCode.getLargestOutlier(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3379(void)
+{
+    Logger::WriteMessage("Test Leet Code 3379");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3,-2,1,1 };
+    vector<int> result = leetCode.constructTransformedArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { -1,4,-1 };
+    result = leetCode.constructTransformedArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3381(void)
+{
+    Logger::WriteMessage("Test Leet Code 3381");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2 };
+    int k = 1;
+    long long result = leetCode.maxSubarraySum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { -1,-2,-3,-4,-5 };
+    k = 4;
+    result = leetCode.maxSubarraySum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { -5,1,2,-3,4 };
+    k = 2;
+    result = leetCode.maxSubarraySum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3381();
+    TestLeetCode3379();
+    TestLeetCode3371();
+    TestLeetCode3361();
+    TestLeetCode3364();
     TestLeetCode3354();
     TestLeetCode3353();
     TestLeetCode3347();

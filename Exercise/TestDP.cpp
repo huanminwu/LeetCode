@@ -5598,8 +5598,56 @@ void TestLeetCode3339(void)
     Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3366(void)
+{
+    Logger::WriteMessage("Test Leet Code 3366");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 2, 8, 3, 19, 3 };
+    int k = 3, op1 = 1, op2 = 1;
+    int result = leetCode.minArraySum(nums, k, op1, op2);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; op1 = " + to_string(op1));
+    Logger::WriteMessage("op2 = " + to_string(op2) + "; result = " + to_string(result));
+
+    nums = { 2,4,3 };
+    k = 3, op1 = 2, op2 = 1;
+    result = leetCode.minArraySum(nums, k, op1, op2);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; op1 = " + to_string(op1));
+    Logger::WriteMessage("op2 = " + to_string(op2) + "; result = " + to_string(result));
+
+    nums = { 3 };
+    k = 6, op1 = 1, op2 = 1;
+    result = leetCode.minArraySum(nums, k, op1, op2);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; op1 = " + to_string(op1));
+    Logger::WriteMessage("op2 = " + to_string(op2) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3363(void)
+{
+    Logger::WriteMessage("Test Leet Code 3363");
+    LeetCodeDP leetCode;
+    vector<vector<int>>fruits = { {1, 2, 3, 4},{5, 6, 8, 7},{9, 10, 11, 12},{13, 14, 15, 16} };
+    Logger::WriteMessage(fruits);
+    int result = leetCode.maxCollectedFruits(fruits);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    fruits = { {1, 1},{1, 1} };
+    Logger::WriteMessage(fruits);
+    result = leetCode.maxCollectedFruits(fruits);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    fruits = { {8, 5, 0, 17, 15},{6, 0, 15, 6, 0},{7, 19, 16, 8, 18},{11, 3, 2, 12, 13},{17, 15, 15, 4, 6} };
+    Logger::WriteMessage(fruits);
+    result = leetCode.maxCollectedFruits(fruits);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3363();
+    TestLeetCode3366();
     TestLeetCode3339();
     TestLeetCode3336();
     TestLeetCode3332();

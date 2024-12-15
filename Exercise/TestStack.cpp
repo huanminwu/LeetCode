@@ -1017,8 +1017,50 @@ void TestLeetCode3282(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3359(void)
+{
+    Logger::WriteMessage("Test Leet Code 3359");
+    LeetCodeStack leetCode;
+    vector<vector<int>> grid = { {4, 3, 2, 1},{8, 7, 6, 1} };
+    int k = 3;
+    long long result = leetCode.countSubmatrices(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {1, 1, 1},{1, 1, 1},{1, 1, 1} };
+    k = 1;
+    result = leetCode.countSubmatrices(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {1} };
+    k = 1;
+    result = leetCode.countSubmatrices(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {3, 4},{4, 4} };
+    k = 4;
+    result = leetCode.countSubmatrices(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {1, 6},{4, 5},{2, 2} };
+    k = 6;
+    result = leetCode.countSubmatrices(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {1, 5},{5, 3},{3, 1} };
+    k = 3;
+    result = leetCode.countSubmatrices(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode3359();
     TestLeetCode3282();
     TestLeetCode3221();
     TestLeetCode3205();

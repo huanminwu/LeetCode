@@ -4166,8 +4166,70 @@ void TestLeetCode3331(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3372(void)
+{
+    Logger::WriteMessage("Test Leet Code 3372");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges1 = { {0, 1},{0, 2},{2, 3},{2, 4} };
+    vector<vector<int>> edges2 = { {0, 1},{0, 2},{0, 3},{2, 7},{1, 4},{4, 5},{4, 6} };
+    int k = 2;
+    vector<int> result = leetCode.maxTargetNodesI(edges1, edges2, k);
+    Logger::WriteMessage(edges1);
+    Logger::WriteMessage(edges2);
+    Logger::WriteMessage("k = " + k);
+    Logger::WriteMessage(result);
+
+    edges1 = { {0, 1},{0, 2},{0, 3},{0, 4} }; 
+    edges2 = { {0, 1},{1, 2},{2, 3} };
+    k = 1;
+    result = leetCode.maxTargetNodesI(edges1, edges2, k);
+    Logger::WriteMessage(edges1);
+    Logger::WriteMessage(edges2);
+    Logger::WriteMessage("k = " + k);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3373(void)
+{
+    Logger::WriteMessage("Test Leet Code 3373");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges1 = { {0, 1},{0, 2},{2, 3},{2, 4} };
+    vector<vector<int>> edges2 = { {0, 1},{0, 2},{0, 3},{2, 7},{1, 4},{4, 5},{4, 6} };
+    vector<int> result = leetCode.maxTargetNodesII(edges1, edges2);
+    Logger::WriteMessage(edges1);
+    Logger::WriteMessage(edges2);
+    Logger::WriteMessage(result);
+
+    edges1 = { {0, 1},{0, 2},{0, 3},{0, 4} };
+    edges2 = { {0, 1},{1, 2},{2, 3} };
+    result = leetCode.maxTargetNodesII(edges1, edges2);
+    Logger::WriteMessage(edges1);
+    Logger::WriteMessage(edges2);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3367(void)
+{
+    Logger::WriteMessage("Test Leet Code 3367");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = { {0, 1, 4},{0, 2, 2},{2, 3, 12},{2, 4, 6} };
+    int k = 2;
+    long long result = leetCode.maximizeSumOfWeights(edges, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    edges = { {0, 1, 5},{1, 2, 10},{0, 3, 15},{3, 4, 20},{3, 5, 5},{0, 6, 10} };
+    k = 3;
+    result = leetCode.maximizeSumOfWeights(edges, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3367();
+    TestLeetCode3373();
+    TestLeetCode3372();
     TestLeetCode3331();
     TestLeetCode3319();
     TestLeetCode3313();

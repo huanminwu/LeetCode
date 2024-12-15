@@ -11035,6 +11035,162 @@ public:
     /// 3. 0 <= moveTime[i][j] <= 10^9
     /// </summary>
     int minTimeToReachII(vector<vector<int>>& moveTime);
+
+    /// <summary>
+    /// Leet Code 3377. Digit Operations to Make Two Integers Equal 
+    /// 
+    /// Medium
+    ///
+    /// You are given two integers n and m that consist of the same number of 
+    /// digits.
+    ///
+    /// You can perform the following operations any number of times:
+    ///
+    /// Choose any digit from n that is not 9 and increase it by 1.
+    /// Choose any digit from n that is not 0 and decrease it by 1.
+    /// The integer n must not be a prime number at any point, including its 
+    /// original value and after each operation.
+    ///
+    /// The cost of a transformation is the sum of all values that n takes 
+    /// throughout the operations performed.
+    ///
+    /// Return the minimum cost to transform n into m. If it is impossible, 
+    /// return -1.
+    ///
+    /// A prime number is a natural number greater than 1 with only two 
+    /// factors, 1 and itself.
+    ///
+    /// Example 1:
+    /// Input: n = 10, m = 12
+    /// Output: 85
+    /// Explanation:
+    /// We perform the following operations:
+    /// Increase the first digit, now n = 20.
+    /// Increase the second digit, now n = 21.
+    /// Increase the second digit, now n = 22.
+    /// Decrease the first digit, now n = 12.
+    ///
+    /// Example 2:
+    /// Input: n = 4, m = 8
+    /// Output: -1
+    /// Explanation:
+    /// It is impossible to make n equal to m.
+    ///
+    /// Example 3:
+    /// Input: n = 6, m = 2
+    /// Output: -1
+    /// Explanation: 
+    /// Since 2 is already a prime, we can't make n equal to m.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n, m < 10^4
+    /// 2. n and m consist of the same number of digits.
+    /// </summary>
+    int minOperations(int n, int m);
+
+    /// <summary>
+    /// Leet Code 3383. Minimum Runes to Add to Cast Spell 
+    /// </summary>
+    void minRunesToAdd(int node, vector<vector<int>>& neighbors, vector<int>& visited, vector<int>&path);
+
+    /// <summary>
+    /// Leet Code 3383. Minimum Runes to Add to Cast Spell 
+    /// </summary>
+    void minRunesToAdd(int node, vector<vector<int>>& neighbors, vector<int>& root, int root_id);
+
+
+    /// <summary>
+    /// Leet Code 3383. Minimum Runes to Add to Cast Spell 
+    /// 
+    /// Hard
+    ///
+    /// Alice has just graduated from wizard school, and wishes to cast a 
+    /// magic spell to celebrate. The magic spell contains certain focus 
+    /// points where magic needs to be concentrated, and some of these 
+    /// focus points contain magic crystals which serve as the spell's 
+    /// energy source. Focus points can be linked through directed runes, 
+    /// which channel magic flow from one focus point to another.
+    ///
+    /// You are given a integer n denoting the number of focus points and 
+    /// an array of integers crystals where crystals[i] indicates a focus 
+    /// point which holds a magic crystal. You are also given two integer 
+    /// arrays flowFrom and flowTo, which represent the existing directed 
+    /// runes. The ith rune allows magic to freely flow from focus point 
+    /// flowFrom[i] to focus point flowTo[i].
+    ///
+    /// You need to find the number of directed runes Alice must add to 
+    /// her spell, such that each focus point either:
+    ///
+    /// Contains a magic crystal.
+    /// Receives magic flow from another focus point.
+    /// Return the minimum number of directed runes that she should add.
+    ///  
+    /// Example 1:
+    /// Input: n = 6, crystals = [0], flowFrom = [0,1,2,3], flowTo = [1,2,3,0]
+    /// 
+    /// Output: 2
+    /// Explanation: 
+    /// Add two directed runes:
+    /// From focus point 0 to focus point 4.
+    /// From focus point 0 to focus point 5.
+    ///
+    /// Example 2:
+    /// Input: n = 7, crystals = [3,5], flowFrom = [0,1,2,3,5], 
+    /// flowTo = [1,2,0,4,6]
+    /// Output: 1
+    /// Explanation: 
+    /// Add a directed rune from focus point 4 to focus point 2.
+    /// Constraints:
+    /// 1. 2 <= n <= 10^5
+    /// 2. 1 <= crystals.length <= n
+    /// 3. 0 <= crystals[i] <= n - 1
+    /// 4. 1 <= flowFrom.length == flowTo.length <= min(2 * 10^5, 
+    ///    (n * (n - 1)) / 2)
+    /// 5. 0 <= flowFrom[i], flowTo[i] <= n - 1
+    /// 6. flowFrom[i] != flowTo[i]
+    /// 7. All pre-existing directed runes are distinct.
+    /// </summary>
+    int minRunesToAdd(int n, vector<int>& crystals, vector<int>& flowFrom, vector<int>& flowTo);
+
+    /// <summary>
+    /// Leet Code 3378. Count Connected Components in LCM Graph
+    /// 
+    /// Hard
+    ///
+    /// You are given an array of integers nums of size n and a positive 
+    /// integer threshold.
+    ///
+    /// There is a graph consisting of n nodes with the ith node having a 
+    /// value of nums[i]. Two nodes i and j in the graph are connected via 
+    /// an undirected edge if lcm(nums[i], nums[j]) <= threshold.
+    ///
+    /// Return the number of connected components in this graph.
+    ///
+    /// A connected component is a subgraph of a graph in which there exists 
+    /// a path between any two vertices, and no vertex of the subgraph shares 
+    /// an edge with a vertex outside of the subgraph.
+    ///
+    /// The term lcm(a, b) denotes the least common multiple of a and b.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,4,8,3,9], threshold = 5
+    /// Output: 4
+    /// Explanation: 
+    /// The four connected components are (2, 4), (3), (8), (9).
+    ///
+    /// Example 2:
+    /// Input: nums = [2,4,8,3,9,12], threshold = 10
+    /// Output: 2
+    /// Explanation: 
+    /// The two connected components are (2, 3, 4, 8, 9), and (12).
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. All elements of nums are unique.
+    /// 4. 1 <= threshold <= 2 * 10^5
+    /// </summary>
+    int countComponents(vector<int>& nums, int threshold);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

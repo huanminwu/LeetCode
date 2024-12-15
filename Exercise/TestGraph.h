@@ -196,5 +196,8 @@ void TestLeetCode3310(void);
 void TestLeetCode3311(void);
 void TestLeetCode3341(void);
 void TestLeetCode3342(void);
+void TestLeetCode3377(void);
+void TestLeetCode3378(void);
+void TestLeetCode3383(void);
 void TestLeetCodeGraph(void);
 #endif  // TestGraph

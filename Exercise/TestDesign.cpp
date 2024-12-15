@@ -5508,8 +5508,63 @@ void TestLeetCode3242(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3369(void)
+{
+    Logger::WriteMessage("Test Leet Code 3369");
+    vector<string> commands =
+    {
+        "StatisticsTracker","addNumber","addNumber","getMean","removeFirstAddedNumber",
+        "addNumber","addNumber","removeFirstAddedNumber","getMedian","addNumber","getMode"
+    };
+    vector<vector<int>> parameters =
+    {
+        {},{9},{5},{},{},{5},{6},{},{},{8},{}
+    };
+    vector<string> result;
+    StatisticsTracker* statisticsTracker = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "StatisticsTracker")
+        {
+            statisticsTracker = new StatisticsTracker();
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "addNumber")
+        {
+            statisticsTracker->addNumber(parameters[i][0]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "removeFirstAddedNumber")
+        {
+            statisticsTracker->removeFirstAddedNumber();
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "getMean")
+        {
+            int ret = statisticsTracker->getMean();
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "getMedian")
+        {
+            int ret = statisticsTracker->getMedian();
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "getMode")
+        {
+            int ret = statisticsTracker->getMode();
+            result.push_back(to_string(ret));
+        }
+    }
+    delete statisticsTracker;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode3369();
     TestLeetCode3242();
     TestLeetCode2671();
     TestLeetCode2642();

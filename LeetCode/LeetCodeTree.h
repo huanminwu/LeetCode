@@ -7683,6 +7683,204 @@ public:
     /// 6. s consists only of lowercase English letters.
     /// </summary>
     vector<int> findSubtreeSizes(vector<int>& parent, string s);
+
+    /// <summary>
+    /// Leet Code 3372. Maximize the Number of Target Nodes After Connecting 
+    ///                 Trees I
+    /// Medium
+    /// </summary>
+    int maxTargetNodesI(vector<vector<int>>& neighbors, int parent, int node, int k);
+
+    /// <summary>
+    /// Leet Code 3372. Maximize the Number of Target Nodes After Connecting 
+    ///                 Trees I
+    /// 
+    /// Medium
+    /// 
+    /// There exist two undirected trees with n and m nodes, with distinct 
+    /// labels in ranges [0, n - 1] and [0, m - 1], respectively.
+    ///
+    /// You are given two 2D integer arrays edges1 and edges2 of lengths n - 1 
+    /// and m - 1, respectively, where edges1[i] = [ai, bi] indicates that 
+    /// there is an edge between nodes ai and bi in the first tree and 
+    /// edges2[i] = [ui, vi] indicates that there is an edge between nodes ui 
+    /// and vi in the second tree. You are also given an integer k.
+    ///
+    /// Node u is target to node v if the number of edges on the path from u 
+    /// to v is less than or equal to k. Note that a node is always target 
+    /// to itself.
+    ///
+    /// Return an array of n integers answer, where answer[i] is the maximum 
+    /// possible number of nodes target to node i of the first tree if you 
+    /// have to connect one node from the first tree to another node in the 
+    /// second tree.
+    ///
+    /// Note that queries are independent from each other. That is, for every 
+    /// query you will remove the added edge before proceeding to the next 
+    /// query.
+    ///
+    /// Example 1:
+    /// Input: edges1 = [[0,1],[0,2],[2,3],[2,4]], edges2 = [[0,1],[0,2],[0,3],
+    /// [2,7],[1,4],[4,5],[4,6]], k = 2
+    /// Output: [9,7,9,8,8]
+    /// 
+    /// Explanation:
+    /// For i = 0, connect node 0 from the first tree to node 0 from the 
+    /// second tree.
+    /// For i = 1, connect node 1 from the first tree to node 0 from the 
+    /// second tree.
+    /// For i = 2, connect node 2 from the first tree to node 4 from the 
+    /// second tree.
+    /// For i = 3, connect node 3 from the first tree to node 4 from the 
+    /// second tree.
+    /// For i = 4, connect node 4 from the first tree to node 4 from the 
+    /// second tree.
+    ///
+    /// Example 2:
+    /// Input: edges1 = [[0,1],[0,2],[0,3],[0,4]], 
+    /// edges2 = [[0,1],[1,2],[2,3]], k = 1
+    /// Output: [6,3,3,3,3]
+    /// Explanation:
+    /// For every i, connect node i of the first tree with any node of the 
+    /// second tree.
+    /// Constraints:
+    /// 1. 2 <= n, m <= 1000
+    /// 2. edges1.length == n - 1
+    /// 3. edges2.length == m - 1
+    /// 4. edges1[i].length == edges2[i].length == 2
+    /// 5. edges1[i] = [ai, bi]
+    /// 6. 0 <= ai, bi < n
+    /// 7. edges2[i] = [ui, vi]
+    /// 8. 0 <= ui, vi < m
+    /// 9. The input is generated such that edges1 and edges2 represent valid 
+    ///    trees.
+    /// 10. 0 <= k <= 1000
+    /// </summary>
+    vector<int> maxTargetNodesI(vector<vector<int>>& edges1, vector<vector<int>>& edges2, int k);
+
+    /// <summary>
+    /// Leet Code 3373. Maximize the Number of Target Nodes After Connecting 
+    ///                 Trees II
+    /// </summary>
+    vector<int> maxTargetNodesII(vector<vector<int>>& neighbors, vector<int>& parity);
+
+
+
+    /// <summary>
+    /// Leet Code 3373. Maximize the Number of Target Nodes After Connecting 
+    ///                 Trees II
+    /// 
+    /// Hard
+    /// 
+    /// There exist two undirected trees with n and m nodes, labeled from 
+    /// [0, n - 1] and [0, m - 1], respectively.
+    ///
+    /// You are given two 2D integer arrays edges1 and edges2 of lengths 
+    /// n - 1 and m - 1, respectively, where edges1[i] = [ai, bi] indicates 
+    /// that there is an edge between nodes ai and bi in the first tree 
+    /// and edges2[i] = [ui, vi] indicates that there is an edge between 
+    /// nodes ui and vi in the second tree.
+    ///
+    /// Node u is target to node v if the number of edges on the path from u 
+    /// to v is even. Note that a node is always target to itself.
+    ///
+    /// Return an array of n integers answer, where answer[i] is the maximum 
+    /// possible number of nodes that are target to node i of the first tree 
+    /// if you had to connect one node from the first tree to another node in 
+    /// the second tree.
+    ///
+    /// Note that queries are independent from each other. That is, for every 
+    /// query you will remove the added edge before proceeding to the next 
+    /// query.
+    ///
+    /// Example 1:
+    /// Input: edges1 = [[0,1],[0,2],[2,3],[2,4]], 
+    /// edges2 = [[0,1],[0,2],[0,3],[2,7],[1,4],[4,5],[4,6]]
+    /// Output: [8,7,7,8,8]
+    /// Explanation:
+    /// For i = 0, connect node 0 from the first tree to node 0 from the 
+    /// second tree.
+    /// For i = 1, connect node 1 from the first tree to node 4 from the 
+    /// second tree.
+    /// For i = 2, connect node 2 from the first tree to node 7 from the 
+    /// second tree.
+    /// For i = 3, connect node 3 from the first tree to node 0 from the 
+    /// second tree.
+    /// For i = 4, connect node 4 from the first tree to node 4 from the 
+    /// second tree.
+    ///
+    /// Example 2:
+    /// Input: edges1 = [[0,1],[0,2],[0,3],[0,4]], 
+    /// edges2 = [[0,1],[1,2],[2,3]]
+    /// Output: [3,6,6,6,6]
+    /// Explanation:
+    /// For every i, connect node i of the first tree with any node of the 
+    /// second tree.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n, m <= 10^5
+    /// 2. edges1.length == n - 1
+    /// 3. edges2.length == m - 1
+    /// 4. edges1[i].length == edges2[i].length == 2
+    /// 5. edges1[i] = [ai, bi]
+    /// 6. 0 <= ai, bi < n
+    /// 7. edges2[i] = [ui, vi]
+    /// 8. 0 <= ui, vi < m
+    /// 9. The input is generated such that edges1 and edges2 represent valid 
+    ///    trees.
+    /// </summary>
+    vector<int> maxTargetNodesII(vector<vector<int>>& edges1, vector<vector<int>>& edges2);
+
+    /// <summary>
+    /// Leet Code 3367. Maximize Sum of Weights after Edge Removals
+    /// </summary>
+    pair<long long, long long> maximizeSumOfWeights(vector<vector<pair<int, int>>>& children, int parent, int node, int k);
+
+    /// <summary>
+    /// Leet Code 3367. Maximize Sum of Weights after Edge Removals
+    /// 
+    /// Hard
+    ///
+    /// There exists an undirected tree with n nodes numbered 0 to n - 1. 
+    /// You are given a 2D integer array edges of length n - 1, where 
+    /// edges[i] = [ui, vi, wi] indicates that there is an edge between 
+    /// nodes ui and vi with weight wi in the tree.
+    ///
+    /// Your task is to remove zero or more edges such that:
+    /// Each node has an edge with at most k other nodes, where k is given.
+    /// The sum of the weights of the remaining edges is maximized.
+    /// Return the maximum possible sum of weights for the remaining edges 
+    /// after making the necessary removals.
+    ///
+    /// Example 1:
+    /// Input: edges = [[0,1,4],[0,2,2],[2,3,12],[2,4,6]], k = 2
+    /// Output: 22
+    /// Explanation:
+    /// 
+    /// Node 2 has edges with 3 other nodes. We remove the edge [0, 2, 2], 
+    /// ensuring that no node has edges with more than k = 2 nodes.
+    /// The sum of weights is 22, and we can't achieve a greater sum. Thus, 
+    /// the answer is 22.
+    ///
+    /// Example 2:
+    /// Input: edges = [[0,1,5],[1,2,10],[0,3,15],[3,4,20],[3,5,5],[0,6,10]], 
+    /// k = 3
+    /// Output: 65
+    /// Explanation:
+    /// Since no node has edges connecting it to more than k = 3 nodes, we 
+    /// don't remove any edges.
+    /// The sum of weights is 65. Thus, the answer is 65.
+    /// Constraints:
+    /// 1. 2 <= n <= 10^5
+    /// 2. 1 <= k <= n - 1
+    /// 3. edges.length == n - 1
+    /// 4. edges[i].length == 3
+    /// 5. 0 <= edges[i][0] <= n - 1
+    /// 6. 0 <= edges[i][1] <= n - 1
+    /// 7. 1 <= edges[i][2] <= 10^6
+    /// 8. The input is generated such that edges form a valid tree.
+    /// </summary>
+    long long maximizeSumOfWeights(vector<vector<int>>& edges, int k);
 #pragma endregion
 };
 

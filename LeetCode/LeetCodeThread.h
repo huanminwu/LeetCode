@@ -60,7 +60,7 @@ using namespace std;
 /// ordering. The input format you see is mainly to ensure our tests' 
 /// comprehensiveness.
 /// </summary>
-class PrintInOrder 
+class PrintInOrder
 {
 private:
     int m_flag;
@@ -69,7 +69,7 @@ private:
 public:
     void printFirst(void)
     {
-        printf("first"); 
+        printf("first");
     }
 
     void printSecond(void)
@@ -82,12 +82,12 @@ public:
         printf("third");
     }
 
-    PrintInOrder() 
+    PrintInOrder()
     {
         m_flag = 1;
     }
 
-    void first() 
+    void first()
     {
         std::unique_lock<std::mutex> lock(m_mutex);
         m_var.wait(lock, [this]() {return m_flag == 1; });
@@ -98,7 +98,7 @@ public:
         m_var.notify_all();
     }
 
-    void second() 
+    void second()
     {
         std::unique_lock<std::mutex> lock(m_mutex);
         m_var.wait(lock, [this]() {return m_flag == 2; });
@@ -110,7 +110,7 @@ public:
         m_var.notify_one();
     }
 
-    void third() 
+    void third()
     {
         std::unique_lock<std::mutex> lock(m_mutex);
         m_var.wait(lock, [this]() {return m_flag == 3; });
@@ -158,7 +158,7 @@ public:
 /// Output: "foobarfoobar"
 /// Explanation: "foobar" is being output 2 times.
 /// </summary>
-class FooBar 
+class FooBar
 {
 private:
     int m_flag;
@@ -176,15 +176,15 @@ public:
         printf("bar");
     }
 
-    FooBar(int n) 
+    FooBar(int n)
     {
         this->n = n;
         m_flag = 1;
     }
 
-    void foo(function<void()> printFoo) 
+    void foo(function<void()> printFoo)
     {
-        for (int i = 0; i < n; i++) 
+        for (int i = 0; i < n; i++)
         {
             std::unique_lock<std::mutex> lock(m_mutex);
             m_var.wait(lock, [this]() {return m_flag == 1; });
@@ -196,9 +196,9 @@ public:
         }
     }
 
-    void bar(function<void()> printBar) 
+    void bar(function<void()> printBar)
     {
-        for (int i = 0; i < n; i++) 
+        for (int i = 0; i < n; i++)
         {
             std::unique_lock<std::mutex> lock(m_mutex);
             m_var.wait(lock, [this]() {return m_flag == 2; });
@@ -325,7 +325,7 @@ public:
 /// present, it has to wait for two hydrogen threads.
 /// If a hydrogen thread arrives at the barrier when no other threads are 
 /// present, it has to wait for an oxygen thread and another hydrogen thread.
-/// We don’t have to worry about matching the threads up explicitly; that is, 
+/// We don't have to worry about matching the threads up explicitly; that is, 
 /// the threads do not necessarily know which other threads they are paired 
 /// up with. The key is just that threads pass the barrier in complete sets; 
 /// thus, if we examine the sequence of threads that bond and divide them 

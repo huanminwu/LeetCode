@@ -19772,5 +19772,226 @@ int LeetCodeDP::countOfArrays(int n, int m, int k)
     return result;
 }
 
+/// <summary>
+/// Leet Code 3366. Minimum Array Sum 
+/// 
+/// Medium
+/// 
+/// You are given an integer array nums and three integers k, op1, and op2.
+/// You can perform the following operations on nums:
+/// Operation 1: Choose an index i and divide nums[i] by 2, rounding up to 
+/// the nearest whole number. You can perform this operation at most op1 
+/// times, and not more than once per index.
+/// Operation 2: Choose an index i and subtract k from nums[i], but only 
+/// if nums[i] is greater than or equal to k. You can perform this 
+/// operation at most op2 times, and not more than once per index.
+/// Note: Both operations can be applied to the same index, but at most 
+/// once each.
+///
+/// Return the minimum possible sum of all elements in nums after 
+/// performing any number of operations.
+///
+/// Example 1:
+/// Input: nums = [2,8,3,19,3], k = 3, op1 = 1, op2 = 1
+/// Output: 23
+/// Explanation:
+/// Apply Operation 2 to nums[1] = 8, making nums[1] = 5.
+/// Apply Operation 1 to nums[3] = 19, making nums[3] = 10.
+/// The resulting array becomes [2, 5, 3, 10, 3], which has the minimum 
+/// possible sum of 23 after applying the operations.
+///
+/// Example 2:
+/// Input: nums = [2,4,3], k = 3, op1 = 2, op2 = 1
+/// Output: 3
+/// Explanation:
+/// Apply Operation 1 to nums[0] = 2, making nums[0] = 1.
+/// Apply Operation 1 to nums[1] = 4, making nums[1] = 2.
+/// Apply Operation 2 to nums[2] = 3, making nums[2] = 0.
+/// The resulting array becomes [1, 2, 0], which has the minimum possible 
+/// sum of 3 after applying the operations.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 0 <= nums[i] <= 10^5
+/// 3. 0 <= k <= 10^5
+/// 4. 0 <= op1, op2 <= nums.length
+/// </summary>
+int LeetCodeDP::minArraySum(vector<int>& nums, int k, int op1, int op2)
+{
+    int n = nums.size();
+    vector<vector<vector<int>>> dp(n, vector<vector<int>>(op1 + 1, vector<int>(op2 + 1, INT_MAX)));
+    dp[0][0][0] = nums[0];
+    if (op1 > 0)
+    {
+        dp[0][1][0] = (nums[0] + 1) / 2;
+    }
+    if (op2 > 0 && nums[0] >= k)
+    {
+        dp[0][0][1] = nums[0] - k;
+    }
+    if (op1 > 0 && op2 > 0 && nums[0] >= k)
+    {
+        if ((nums[0] + 1) / 2 >= k)
+        {
+            dp[0][1][1] = (nums[0] + 1) / 2 - k;
+        }
+        else
+        {
+            dp[0][1][1] = (nums[0] - k + 1) / 2;
+        }
+    }
+
+    for (int i = 1; i < n; i++)
+    {
+        for (int j = 0; j <= op1; j++)
+        {
+            for (int p = 0; p <= op2; p++)
+            {
+                if (dp[i - 1][j][p] == INT_MAX) break;
+                dp[i][j][p] = min(dp[i][j][p], dp[i - 1][j][p] + nums[i]);
+                if (j < op1)
+                {
+                    dp[i][j + 1][p] = min(dp[i][j + 1][p], dp[i - 1][j][p] + (nums[i] + 1) / 2);
+                }
+                if (p < op2 && nums[i] >= k)
+                {
+                    dp[i][j][p + 1] = min(dp[i][j][p + 1], dp[i - 1][j][p] + nums[i] - k);
+                }
+                if (j < op1 && p < op2 && nums[i] >= k)
+                {
+                    if ((nums[i] + 1) / 2 >= k)
+                    {
+                        dp[i][j + 1][p + 1] = min(dp[i][j + 1][p + 1], dp[i - 1][j][p] + (nums[i] + 1) / 2 - k);
+                    }
+                    else
+                    {
+                        dp[i][j + 1][p + 1] = min(dp[i][j + 1][p + 1], dp[i - 1][j][p] + (nums[i] - k + 1) / 2);
+                    }
+                }
+            }
+        }
+    }
+    int result = INT_MAX;
+    for (int i = 0; i <= op1; i++)
+    {
+        for (int j = 0; j <= op2; j++)
+        {
+            result = min(result, dp[n - 1][i][j]);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3363. Find the Maximum Number of Fruits Collected 
+/// 
+/// Hard
+///
+/// There is a game dungeon comprised of n x n rooms arranged in a grid.
+/// 
+/// You are given a 2D array fruits of size n x n, where fruits[i][j] 
+/// represents the number of fruits in the room (i, j). Three children 
+/// will play in the game dungeon, with initial positions at the corner 
+///  rooms (0, 0), (0, n - 1), and (n - 1, 0).
+///
+/// The children will make exactly n - 1 moves according to the following 
+/// rules to reach the room (n - 1, n - 1):
+///
+/// The child starting from (0, 0) must move from their current 
+/// room (i, j) to one of the rooms (i + 1, j + 1), (i + 1, j), 
+/// and (i, j + 1) if the target room exists.
+/// The child starting from (0, n - 1) must move from their current 
+/// room (i, j) to one of the rooms (i + 1, j - 1), (i + 1, j), 
+/// and (i + 1, j + 1) if the target room exists.
+/// The child starting from (n - 1, 0) must move from their current 
+/// room (i, j) to one of the rooms (i - 1, j + 1), (i, j + 1), 
+/// and (i + 1, j + 1) if the target room exists.
+/// When a child enters a room, they will collect all the fruits there. 
+/// If two or more children enter the same room, only one child will 
+/// collect the fruits, and the room will be emptied after they leave.
+///
+/// Return the maximum number of fruits the children can collect from 
+/// the dungeon.
+/// 
+/// Example 1:
+/// Input: fruits = [[1,2,3,4],[5,6,8,7],[9,10,11,12],[13,14,15,16]]
+/// Output: 100
+/// Explanation:
+///
+/// In this example:
+/// The 1st child (green) moves on the path (0,0) -> (1,1) -> (2,2) -> 
+/// (3, 3).
+/// The 2nd child (red) moves on the path (0,3) -> (1,2) -> (2,3) -> 
+/// (3, 3).
+/// The 3rd child (blue) moves on the path (3,0) -> (3,1) -> (3,2) -> 
+/// (3, 3).
+/// In total they collect 1 + 6 + 11 + 16 + 4 + 8 + 12 + 13 + 14 + 15 = 
+/// 100 fruits.
+///
+/// Example 2:
+/// Input: fruits = [[1,1],[1,1]]
+/// Output: 4
+/// Explanation:
+/// In this example:
+/// The 1st child moves on the path (0,0) -> (1,1).
+/// The 2nd child moves on the path (0,1) -> (1,1).
+/// The 3rd child moves on the path (1,0) -> (1,1).
+/// In total they collect 1 + 1 + 1 + 1 = 4 fruits.
+/// 
+/// Constraints:
+/// 1. 2 <= n == fruits.length == fruits[i].length <= 1000
+/// 2. 0 <= fruits[i][j] <= 1000
+/// </summary>
+int LeetCodeDP::maxCollectedFruits(vector<vector<int>>& fruits)
+{
+    int n = fruits.size();
+    vector<vector<int>> dp(n, vector<int>(n));;
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        result += fruits[i][i];
+        fruits[i][i] = 0;
+    }
+    dp[0][n - 1] = fruits[0][n - 1];
+    fruits[0][n - 1] = 0;
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = n - 1; j >= 0; j--)
+        {
+            if (n - 1 - j > i || i == j) break;
+            dp[i + 1][j] = max(dp[i + 1][j], fruits[i + 1][j] + dp[i][j]);
+            dp[i + 1][j - 1] = max(dp[i + 1][j - 1], fruits[i + 1][j - 1] + dp[i][j]);
+            if (j < n - 1)
+            {
+                dp[i + 1][j + 1] = max(dp[i + 1][j + 1], fruits[i + 1][j + 1] + dp[i][j]);
+            }
+        }
+    }
+    result += dp[n - 1][n - 1];
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            dp[i][j] = 0;
+        }
+    }
+    dp[n - 1][0] = fruits[n - 1][0];
+    fruits[n - 1][0] = 0;
+    for (int j = 0; j < n - 1; j++)
+    {
+        for (int i = n - 1; i >= 0; i--)
+        {
+            if (n - 1 - i > j || i == j) break;
+            dp[i][j + 1] = max(dp[i][j + 1], fruits[i][j + 1] + dp[i][j]);
+            dp[i - 1][j + 1] = max(dp[i - 1][j + 1], fruits[i - 1][j + 1] + dp[i][j]);
+            if (i < n - 1)
+            {
+                dp[i + 1][j + 1] = max(dp[i + 1][j + 1], fruits[i + 1][j + 1] + dp[i][j]);
+            }
+        }
+    }
+    result += dp[n - 1][n - 1];
+    return result;
+}
 #pragma endregion
 

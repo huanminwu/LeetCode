@@ -2848,5 +2848,4 @@ string LeetCodeBFS::longestSubsequenceRepeatedK(string s, int k)
     }
     return result;
 }
-
 #pragma endregion
