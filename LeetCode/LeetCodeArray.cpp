@@ -34305,7 +34305,7 @@ int LeetCodeArray::sumOfGoodSubsequences(vector<int>& nums)
 /// Constraints:
 /// 1. 1 <= nums.length <= 10^5
 /// 2. 1 <= nums[i] <= 10^5
-/// 3. 0 <= k <= 105
+/// 3. 0 <= k <= 10^5
 /// 4. 0 <= numOperations <= nums.length
 /// </summary>
 int LeetCodeArray::maxFrequencyI(vector<int>& nums, int k, int numOperations)
@@ -34360,7 +34360,7 @@ int LeetCodeArray::maxFrequencyI(vector<int>& nums, int k, int numOperations)
 /// Constraints:
 /// 1. 1 <= nums.length <= 10^5
 /// 2. 1 <= nums[i] <= 10^9
-/// 3. 0 <= k <= 109
+/// 3. 0 <= k <= 10^9
 /// 4. 0 <= numOperations <= nums.length
 /// </summary>
 int LeetCodeArray::maxFrequencyII(vector<int>& nums, int k, int numOperations)
@@ -34893,4 +34893,349 @@ long long LeetCodeArray::maxSubarraySum(vector<int>& nums, int k)
         }
     }
     return result;
+}
+
+
+/// <summary>
+/// Leet Code 3386. Button with Longest Push Time
+/// 
+/// Easy
+///
+/// You are given a 2D array events which represents a sequence of events 
+/// where a child pushes a series of buttons on a keyboard.
+///
+/// Each events[i] = [indexi, timei] indicates that the button at index 
+/// indexi was pressed at time timei.
+///
+/// The array is sorted in increasing order of time.
+/// The time taken to press a button is the difference in time between 
+/// consecutive button presses. The time for the first button is 
+/// simply the time at which it was pressed.
+/// Return the index of the button that took the longest time to push. 
+/// If multiple buttons have the same longest time, return the button with 
+/// the smallest index.
+///
+/// Example 1:
+/// Input: events = [[1,2],[2,5],[3,9],[1,15]]
+/// Output: 1
+/// Explanation:
+/// Button with index 1 is pressed at time 2.
+/// Button with index 2 is pressed at time 5, so it took 5 - 2 = 3 
+/// units of time.
+/// Button with index 3 is pressed at time 9, so it took 9 - 5 = 4 
+/// units of time.
+/// Button with index 1 is pressed again at time 15, so it took 15 - 9 = 6 
+/// units of time.
+///
+/// Example 2:
+/// Input: events = [[10,5],[1,7]]
+/// Output: 10
+/// Explanation:
+/// Button with index 10 is pressed at time 5.
+/// Button with index 1 is pressed at time 7, so it took 7 - 5 = 2 units 
+/// of time.
+///
+/// Constraints:
+/// 1. 1 <= events.length <= 1000
+/// 2. events[i] == [indexi, timei]
+/// 3. 1 <= indexi, timei <= 10^5
+/// 4. The input is generated such that events is sorted in increasing 
+///    order of timei.
+/// </summary>
+int LeetCodeArray::buttonWithLongestTime(vector<vector<int>>& events)
+{
+    pair<int, int> result = { -1, -1 };
+    for (size_t i = 0; i < events.size(); i++)
+    {
+        int time = 0;
+        if (i == 0) time = events[i][1];
+        else time = events[i][1] - events[i - 1][1];
+        if (time > result.second)
+        {
+            result.first = events[i][0];
+            result.second = time;
+        }
+        else if (time == result.second)
+        {
+            result.first = min(events[i][0], result.first);
+        }
+    }
+    return result.first;
+}
+
+/// <summary>
+/// Leet Code 3392. Count Subarrays of Length Three With a Condition
+/// 
+/// Easy
+///
+/// Given an integer array nums, return the number of subarrays of length 
+/// 3 such that the sum of the first and third numbers equals exactly half 
+/// of the second number.
+///
+/// A subarray is a contiguous non-empty sequence of elements within an 
+/// array.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,1,4,1]
+/// Output: 1
+/// Explanation:
+/// Only the subarray [1,4,1] contains exactly 3 elements where the sum of 
+/// the first and third numbers equals half the middle number.
+///
+/// Example 2:
+/// Input: nums = [1,1,1]
+/// Output: 0
+/// Explanation:
+/// [1,1,1] is the only subarray of length 3. However, its first and third 
+/// numbers do not add to half the middle number.
+///
+/// Constraints:
+/// 1. 3 <= nums.length <= 100
+/// 2. -100 <= nums[i] <= 100
+/// </summary>
+int LeetCodeArray::countSubarraysII(vector<int>& nums)
+{
+    int result = 0;
+    for (size_t i = 2; i < nums.size(); i++)
+    {
+        if ((nums[i-2] + nums[i]) * 2 == nums[i-1])
+        {
+            result++;
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3396. Minimum Number of Operations to Make Elements in Array 
+///                 Distinct
+/// 
+/// Easy
+///
+/// You are given an integer array nums. You need to ensure that the 
+/// elements in the array are distinct. To achieve this, you can perform 
+/// the following operation any number of times:
+///
+/// Remove 3 elements from the beginning of the array. If the array has 
+/// fewer than 3 elements, remove all remaining elements.
+/// Note that an empty array is considered to have distinct elements. 
+/// Return the minimum number of operations needed to make the elements 
+/// in the array distinct.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,4,2,3,3,5,7]
+/// Output: 2
+/// Explanation:
+/// In the first operation, the first 3 elements are removed, resulting 
+/// in the array [4, 2, 3, 3, 5, 7].
+/// In the second operation, the next 3 elements are removed, resulting 
+/// in the array [3, 5, 7], which has distinct elements.
+/// Therefore, the answer is 2.
+///
+/// Example 2:
+/// Input: nums = [4,5,6,4,4]
+/// Output: 2
+/// Explanation:
+/// In the first operation, the first 3 elements are removed, resulting 
+/// in the array [4, 4].
+/// In the second operation, all remaining elements are removed, 
+/// resulting in an empty array.
+/// Therefore, the answer is 2.
+///
+/// Example 3:
+/// Input: nums = [6,7,8,9]
+/// Output: 0
+/// Explanation:
+/// The array already contains distinct elements. Therefore, the answer 
+/// is 0.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 100
+/// </summary>
+int LeetCodeArray::minimumOperationsII(vector<int>& nums)
+{
+    unordered_set<int> data_set;
+    int result = -1;
+    for (int i = nums.size() - 1; i >= 0; i--)
+    {
+        if (data_set.count(nums[i]) == 0)
+        {
+            data_set.insert(nums[i]);
+        }
+        else
+        {
+            result = i;
+            break;
+        }
+    }
+    return (result + 3) / 3;
+}
+
+/// <summary>
+/// Leet Code 3395. Subsequences with a Unique Middle Mode I
+/// </summary>
+long long LeetCodeArray::subsequencesWithMiddleMode(unordered_map<int, int>& left,
+        unordered_map<int, int>& right, int middle, long long left_sum,
+        long long right_sum, long long left_square_sum,
+        long long right_square_sum, int left_match_count,
+        int right_match_count)
+{
+    long long result = 0;
+    if (left_match_count == 2)
+    {
+        if (left.count(middle) == 0 || left[middle] < 2) return 0;
+        result = (long long)left[middle] * (long long)(left[middle] - 1) / 2;
+        if (right_match_count == 2)
+        {
+            if (right.count(middle) == 0 || right[middle] < 2) return 0;
+            result = result * (long long)right[middle] * (long long)(right[middle] - 1) / 2;
+        }
+        else
+        {
+            result = result * (long long)right_sum * (long long)(right_sum - 1) / 2;
+        }
+    }
+    else if (left_match_count == 1 && right_match_count == 1)
+    {
+        if (left.count(middle) == 0 || right.count(middle) == 0)
+        {
+            return 0;
+        }
+        result = (long long)left[middle] * (long long)(left_sum - left[middle]);
+        result = result * (long long)right[middle] * (long long)(right_sum - right[middle]);
+    }
+    else if (left_match_count == 1 && right_match_count == 0)
+    {
+        if (left.count(middle) == 0)
+        {
+            return 0;
+        }
+        if (right.count(middle) > 0)
+        {
+            right_sum -= right[middle];
+            right_square_sum = right_square_sum - right[middle] * right[middle];
+        }
+        for (auto itr : left)
+        {
+            if (itr.first == middle) continue;
+            long long left_count = (long long)left[middle] * (long long) itr.second;
+            long long temp_sum = right_sum;
+            long long temp_square_sum = right_square_sum;
+            if (right.count(itr.first) > 0)
+            {
+                temp_sum -= right[itr.first];
+                temp_square_sum = (temp_square_sum - right[itr.first] * right[itr.first]);
+            }
+            result += left_count * (temp_sum * temp_sum - temp_square_sum) / 2;
+        }
+    }
+
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3395. Subsequences with a Unique Middle Mode I
+///   
+/// Hard
+///
+/// Given an integer array nums, find the number of subsequences of size 
+/// 5 of nums with a unique middle mode.
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+/// A mode of a sequence of numbers is defined as the element that appears 
+/// the maximum number of times in the sequence.
+/// 
+/// A sequence of numbers contains a unique mode if it has only one mode.
+///
+/// A sequence of numbers seq of size 5 contains a unique middle mode if 
+/// the middle element (seq[2]) is a unique mode.
+///
+/// Example 1:
+/// Input: nums = [1,1,1,1,1,1]
+/// Output: 6
+/// Explanation:
+/// [1, 1, 1, 1, 1] is the only subsequence of size 5 that can be formed, 
+/// and it has a unique middle mode of 1. This subsequence can be formed 
+/// in 6 different ways, so the output is 6. 
+///
+/// Example 2:
+/// Input: nums = [1,2,2,3,3,4]
+/// Output: 4
+/// Explanation:
+/// [1, 2, 2, 3, 4] and [1, 2, 3, 3, 4] each have a unique middle mode 
+/// because the number at index 2 has the greatest frequency in the 
+/// subsequence. [1, 2, 2, 3, 3] does not have a unique middle mode 
+/// because 2 and 3 appear twice.
+///
+/// Example 3:
+/// 
+/// Input: nums = [0,1,2,3,4,5,6,7,8]
+/// Output: 0
+/// Explanation:
+/// There is no subsequence of length 5 with a unique middle mode.
+/// Constraints:
+/// 1. 5 <= nums.length <= 1000
+/// 2. -10^9 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeArray::subsequencesWithMiddleMode(vector<int>& nums)
+{
+    long long M = 1000000007;
+    unordered_map<int, int> left, right;
+    long long left_sum = 0, right_sum = 0;
+    long long left_square_sum = 0, right_square_sum = 0;
+    int n = nums.size();
+    for (int i = 0; i < n; i++)
+    {
+        if (i < 2)
+        {
+            left[nums[i]]++;
+        }
+        else if (i > 2)
+        {
+            right[nums[i]]++;
+        }
+    }
+    for (auto itr : left)
+    {
+        left_sum += itr.second;
+        left_square_sum += itr.second * itr.second;
+    }
+    for (auto itr : right)
+    {
+        right_sum += itr.second;
+        right_square_sum += itr.second * itr.second;
+    }
+
+    long long result = 0;
+    for (int i = 2; i < n - 2; i++)
+    {
+        result += subsequencesWithMiddleMode(left, right, nums[i],
+            left_sum, right_sum, left_square_sum, right_square_sum, 2, 0);
+        result += subsequencesWithMiddleMode(right, left, nums[i],
+            right_sum, left_sum, right_square_sum, left_square_sum, 2, 0);
+        result -= subsequencesWithMiddleMode(left, right, nums[i],
+            left_sum, right_sum, left_square_sum, right_square_sum, 2, 2);
+        result += subsequencesWithMiddleMode(left, right, nums[i],
+            left_sum, right_sum, left_square_sum, right_square_sum, 1, 1);
+        result += subsequencesWithMiddleMode(left, right, nums[i],
+            left_sum, right_sum, left_square_sum, right_square_sum, 1, 0);
+        result += subsequencesWithMiddleMode(right, left, nums[i],
+            right_sum, left_sum, right_square_sum, left_square_sum, 1, 0);
+        left_square_sum -= left[nums[i]] * left[nums[i]];
+        left[nums[i]]++;
+        left_sum ++;
+        left_square_sum += left[nums[i]] * left[nums[i]];
+        right_square_sum -= right[nums[i + 1]] * right[nums[i + 1]];
+        right[nums[i + 1]]--;
+        right_sum --;
+        right_square_sum += right[nums[i + 1]] * right[nums[i + 1]];
+        if (right[nums[i + 1]] == 0)
+        {
+            right.erase(nums[i + 1]);
+        }
+        result = result % M;
+    }
+    return (int)(result % M);
 }

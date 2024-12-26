@@ -19993,5 +19993,158 @@ int LeetCodeDP::maxCollectedFruits(vector<vector<int>>& fruits)
     result += dp[n - 1][n - 1];
     return result;
 }
+
+/// <summary>
+/// Leet Code 3388. Count Beautiful Splits in an Array
+/// 
+/// Medium
+///
+/// You are given an array nums.
+/// A split of an array nums is beautiful if:
+/// The array nums is split into three subarrays: nums1, nums2, and nums3, 
+/// such that nums can be formed by concatenating nums1, nums2, and nums3 
+/// in that order.
+/// The subarray nums1 is a prefix of nums2 OR nums2 is a prefix of nums3.
+///
+/// Return the number of ways you can make this split.
+/// 
+/// Example 1:
+/// Input: nums = [1,1,2,1]
+/// Output: 2
+/// Explanation:
+/// The beautiful splits are:
+/// A split with nums1 = [1], nums2 = [1,2], nums3 = [1].
+/// A split with nums1 = [1], nums2 = [1], nums3 = [2,1].
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4]
+/// Output: 0
+/// Explanation:
+/// There are 0 beautiful splits.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 5000
+/// 2. 0 <= nums[i] <= 50
+/// </summary>
+int LeetCodeDP::beautifulSplits(vector<int>& nums)
+{
+    int n = nums.size();
+    vector<vector<int>> dp(n, vector<int>(n));
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (nums[i] == nums[j])
+            {
+                dp[i][j] = 1;
+                if (i > 0)
+                {
+                    dp[i][j] += dp[i - 1][j - 1];
+                }
+            }
+        }
+    }
+    int result = 0;
+    for (int i = 0; i < n - 2; i++)
+    {
+        for (int j = i + 1; j < n - 1; j++)
+        {
+            int len1 = i + 1;
+            int len2 = j - i;
+            int len3 = n - 1 - j;
+            if ((len1 <= len2 && dp[i][i + len1] == len1) ||
+                (len2 <= len3 && dp[j][j + len2] >= len2))
+            {
+                result++;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3393. Count Paths With the Given XOR Value 
+///   
+/// Medium
+/// 
+/// You are given a 2D integer array grid with size m x n. You are also 
+/// given an integer k.
+///
+/// Your task is to calculate the number of paths you can take from 
+/// the top-left cell (0, 0) to the bottom-right cell (m - 1, n - 1) 
+/// satisfying the following constraints:
+///
+/// You can either move to the right or down. Formally, from the cell 
+/// (i, j) you may move to the cell (i, j + 1) or to the cell (i + 1, j) 
+/// if the target cell exists.
+/// The XOR of all the numbers on the path must be equal to k.
+/// Return the total number of such paths.
+///
+/// Since the answer can be very large, return the result modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: grid = [[2, 1, 5], [7, 10, 0], [12, 6, 4]], k = 11
+/// Output: 3
+/// Explanation: 
+/// The 3 paths are:
+/// (0, 0) -> (1, 0) -> (2, 0) -> (2, 1) -> (2, 2)
+/// (0, 0) -> (1, 0) -> (1, 1) -> (1, 2) -> (2, 2)
+/// (0, 0) -> (0, 1) -> (1, 1) -> (2, 1) -> (2, 2)
+///
+/// Example 2:
+/// Input: grid = [[1, 3, 3, 3], [0, 3, 3, 2], [3, 0, 1, 1]], k = 2
+/// Output: 5
+/// Explanation:
+/// The 5 paths are:
+/// (0, 0) -> (1, 0) -> (2, 0) -> (2, 1) -> (2, 2) -> (2, 3)
+/// (0, 0) -> (1, 0) -> (1, 1) -> (2, 1) -> (2, 2) -> (2, 3)
+/// (0, 0) -> (1, 0) -> (1, 1) -> (1, 2) -> (1, 3) -> (2, 3)
+/// (0, 0) -> (0, 1) -> (1, 1) -> (1, 2) -> (2, 2) -> (2, 3)
+/// (0, 0) -> (0, 1) -> (0, 2) -> (1, 2) -> (2, 2) -> (2, 3)
+////
+/// Example 3:
+/// Input: grid = [[1, 1, 1, 2], [3, 0, 3, 2], [3, 0, 2, 2]], k = 10
+/// Output: 0
+/// 
+/// Constraints:
+/// 1. 1 <= m == grid.length <= 300
+/// 2. 1 <= n == grid[r].length <= 300
+/// 4. 0 <= grid[r][c] < 16
+/// 5. 0 <= k < 16
+/// </summary>
+int LeetCodeDP::countPathsWithXorValue(vector<vector<int>>& grid, int k)
+{
+    int M = 1000000007;
+    int n = grid.size();
+    int m = grid[0].size();
+    vector<vector<vector<int>>> dp(n, vector<vector<int>>(m, vector<int>(16)));
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if ((i == 0) && (j == 0))
+            {
+                dp[i][j][grid[i][j]] = 1;
+            }
+            if (i > 0)
+            {
+                for (int k = 0; k < 16; k++)
+                {
+                    int val = k xor grid[i][j];
+                    dp[i][j][val] = (dp[i][j][val] + dp[i - 1][j][k]) % M;
+                }
+            }
+            if (j > 0)
+            {
+                for (int k = 0; k < 16; k++)
+                {
+                    int val = k xor grid[i][j];
+                    dp[i][j][val] = (dp[i][j][val] + dp[i][j-1][k]) % M;
+                }
+            }
+        }
+    }
+    return dp[n - 1][m - 1][k];
+}
 #pragma endregion
 

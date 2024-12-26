@@ -4027,7 +4027,7 @@ int LeetCodeBinarySearch::maxNumberOfAlloys(int n, int k, int budget,
     {
         middle = first + (last - first) / 2;
         long long sum = 0;
-        for (int i = 0; i < k; i++)
+        for (int i = 0; i < min(k, (int)composition[i].size()); i++)
         {
             vector<long long> needed(composition[i].size());
             sum = 0;
@@ -4914,6 +4914,179 @@ int LeetCodeBinarySearch::minDifference(vector<int>& nums)
         {
             result = mid;
             last = mid - 1;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3398. Smallest Substring With Identical Characters I
+///   
+/// Hard
+///
+/// You are given a binary string s of length n and an integer numOps.
+///
+/// You are allowed to perform the following operation on s at most 
+/// numOps times:
+///
+/// Select any index i (where 0 <= i < n) and flip s[i]. 
+/// If s[i] == '1', change s[i] to '0' and vice versa.
+/// You need to minimize the length of the longest 
+/// substring of s such that all the characters in the substring are 
+/// identical.
+///
+/// Return the minimum length after the operations.
+/// 
+/// Example 1:
+/// Input: s = "000001", numOps = 1
+/// Output: 2
+/// Explanation: 
+/// By changing s[2] to '1', s becomes "001001". The longest substrings 
+/// with identical characters are s[0..1] and s[3..4].
+///
+/// Example 2:
+/// Input: s = "0000", numOps = 2
+/// Output: 1
+/// Explanation: 
+/// By changing s[0] and s[2] to '1', s becomes "1010".
+///
+/// Example 3:
+/// Input: s = "0101", numOps = 0
+/// Output: 1
+///
+/// Constraints:
+/// 1. 1 <= n == s.length <= 1000
+/// 2. s consists only of '0' and '1'.
+/// 3. 0 <= numOps <= n
+/// </summary>
+int LeetCodeBinarySearch::minLengthI(string s, int numOps)
+{
+    int count1 = 0;
+    int count2 = 0;
+    int count3 = 0;
+    vector<int> arr;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if ((s[i] - '0') != i % 2) count1++;
+        else count2++;
+        if (i == 0) count3 = 1;
+        else if (s[i] == s[i - 1]) count3++;
+        else
+        {
+            arr.push_back(count3);
+            count3 = 1;
+        }
+    }
+    arr.push_back(count3);
+    if (count1 <= numOps || count2 <= numOps)
+    {
+        return 1;
+    }
+    int first = 2;
+    int last = s.size();
+    int result = last;
+    
+    while (first <= last)
+    {
+        int middle = first + (last - first) / 2;
+        int ops = 0;
+        for (size_t i = 0; i < arr.size(); i++)
+        {
+            ops += arr[i] / (middle + 1);
+        }
+        if (ops <= numOps)
+        {
+            result = middle;
+            last = middle - 1;
+        }
+        else
+        {
+            first = middle + 1;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3399. Smallest Substring With Identical Characters II
+///   
+/// Hard
+///
+/// You are given a binary string s of length n and an integer numOps.
+///
+/// You are allowed to perform the following operation on s at most 
+/// numOps times:
+///
+/// Select any index i (where 0 <= i < n) and flip s[i]. If s[i] == '1', 
+/// change s[i] to '0' and vice versa.
+/// You need to minimize the length of the longest substring of s such 
+/// that all the characters in the substring are identical.
+///
+/// Return the minimum length after the operations.
+/// Example 1:
+/// Input: s = "000001", numOps = 1
+/// Output: 2
+/// Explanation: 
+/// By changing s[2] to '1', s becomes "001001". The longest substrings 
+/// with identical characters are s[0..1] and s[3..4].
+///
+/// Example 2:
+/// Input: s = "0000", numOps = 2
+/// Output: 1
+/// Explanation: 
+/// By changing s[0] and s[2] to '1', s becomes "1010".
+///
+/// Example 3:
+/// Input: s = "0101", numOps = 0
+/// Output: 1
+/// Constraints:
+/// 1. 1 <= n == s.length <= 10^5
+/// 2. s consists only of '0' and '1'.
+/// 3. 0 <= numOps <= n
+/// </summary>
+int LeetCodeBinarySearch::minLengthII(string s, int numOps)
+{
+    int count1 = 0;
+    int count2 = 0;
+    int count3 = 0;
+    vector<int> arr;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if ((s[i] - '0') != i % 2) count1++;
+        else count2++;
+        if (i == 0) count3 = 1;
+        else if (s[i] == s[i - 1]) count3++;
+        else
+        {
+            arr.push_back(count3);
+            count3 = 1;
+        }
+    }
+    arr.push_back(count3);
+    if (count1 <= numOps || count2 <= numOps)
+    {
+        return 1;
+    }
+    int first = 2;
+    int last = s.size();
+    int result = last;
+
+    while (first <= last)
+    {
+        int middle = first + (last - first) / 2;
+        int ops = 0;
+        for (size_t i = 0; i < arr.size(); i++)
+        {
+            ops += arr[i] / (middle + 1);
+        }
+        if (ops <= numOps)
+        {
+            result = middle;
+            last = middle - 1;
+        }
+        else
+        {
+            first = middle + 1;
         }
     }
     return result;

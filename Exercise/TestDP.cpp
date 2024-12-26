@@ -5644,8 +5644,48 @@ void TestLeetCode3363(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3388(void)
+{
+    Logger::WriteMessage("Test Leet Code 3388");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 1, 2, 1 };
+    int result = leetCode.beautifulSplits(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    result = leetCode.beautifulSplits(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3393(void)
+{
+    Logger::WriteMessage("Test Leet Code 3393");
+    LeetCodeDP leetCode;
+    vector<vector<int>> grid = { {2, 1, 5},{7, 10, 0},{12, 6, 4} };
+    int k = 11;
+    int result = leetCode.countPathsWithXorValue(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {1, 3, 3, 3},{0, 3, 3, 2},{3, 0, 1, 1} };
+    k = 2;
+    result = leetCode.countPathsWithXorValue(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {1, 1, 1, 2},{3, 0, 3, 2},{3, 0, 2, 2} };
+    k = 10;
+    result = leetCode.countPathsWithXorValue(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3393();
+    TestLeetCode3388();
     TestLeetCode3363();
     TestLeetCode3366();
     TestLeetCode3339();

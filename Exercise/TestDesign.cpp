@@ -5511,14 +5511,15 @@ void TestLeetCode3242(void)
 void TestLeetCode3369(void)
 {
     Logger::WriteMessage("Test Leet Code 3369");
+
     vector<string> commands =
     {
-        "StatisticsTracker","addNumber","addNumber","getMean","removeFirstAddedNumber",
-        "addNumber","addNumber","removeFirstAddedNumber","getMedian","addNumber","getMode"
+        "StatisticsTracker", "addNumber", "addNumber", "addNumber", "addNumber", "getMean", 
+        "getMedian", "getMode", "removeFirstAddedNumber", "getMode"
     };
     vector<vector<int>> parameters =
     {
-        {},{9},{5},{},{},{5},{6},{},{},{8},{}
+        {},{4},{4},{2},{3},{},{},{},{},{}
     };
     vector<string> result;
     StatisticsTracker* statisticsTracker = nullptr;
@@ -5560,10 +5561,139 @@ void TestLeetCode3369(void)
     Logger::WriteMessage(parameters);
     Logger::WriteMessage(result);
 
+    commands =
+    {
+        "StatisticsTracker","addNumber","addNumber","getMean","removeFirstAddedNumber",
+        "addNumber","addNumber","removeFirstAddedNumber","getMedian","addNumber","getMode"
+    };
+    parameters =
+    {
+        {},{9},{5},{},{},{5},{6},{},{},{8},{}
+    };
+    result.clear();
+    statisticsTracker = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "StatisticsTracker")
+        {
+            statisticsTracker = new StatisticsTracker();
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "addNumber")
+        {
+            statisticsTracker->addNumber(parameters[i][0]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "removeFirstAddedNumber")
+        {
+            statisticsTracker->removeFirstAddedNumber();
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "getMean")
+        {
+            int ret = statisticsTracker->getMean();
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "getMedian")
+        {
+            int ret = statisticsTracker->getMedian();
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "getMode")
+        {
+            int ret = statisticsTracker->getMode();
+            result.push_back(to_string(ret));
+        }
+    }
+    delete statisticsTracker;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3391(void)
+{
+    Logger::WriteMessage("Test Leet Code 3391");
+    vector<string> commands =
+    {
+        "Matrix3D", "setCell", "largestMatrix", "setCell", "largestMatrix", "setCell", "largestMatrix"
+    };
+    vector<vector<int>> parameters =
+    {
+        {3},{0, 0, 0},{},{1, 1, 2},{},{0, 0, 1},{}
+    };
+    vector<string> result;
+    Matrix3D * matrix3D= nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Matrix3D")
+        {
+            matrix3D = new Matrix3D(parameters[i][0]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "setCell")
+        {
+            matrix3D->setCell(parameters[i][0], parameters[i][1], parameters[i][2]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "unsetCell")
+        {
+            matrix3D->unsetCell(parameters[i][0], parameters[i][1], parameters[i][2]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "largestMatrix")
+        {
+            int ret = matrix3D->largestMatrix();
+            result.push_back(to_string(ret));
+        }
+    }
+    delete matrix3D;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+        "Matrix3D", "setCell", "largestMatrix", "unsetCell", "largestMatrix"
+    };
+    parameters =
+    {
+        {4} ,{2, 1, 1},{},{2, 1, 1},{}
+    };
+    result.clear();
+    matrix3D = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Matrix3D")
+        {
+            matrix3D = new Matrix3D(parameters[i][0]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "setCell")
+        {
+            matrix3D->setCell(parameters[i][0], parameters[i][1], parameters[i][2]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "unsetCell")
+        {
+            matrix3D->unsetCell(parameters[i][0], parameters[i][1], parameters[i][2]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "largestMatrix")
+        {
+            int ret = matrix3D->largestMatrix();
+            result.push_back(to_string(ret));
+        }
+    }
+    delete matrix3D;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
 }
 
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode3391();
     TestLeetCode3369();
     TestLeetCode3242();
     TestLeetCode2671();

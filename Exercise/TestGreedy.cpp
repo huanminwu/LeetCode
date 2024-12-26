@@ -1988,8 +1988,42 @@ void TestLeetCode3362(void)
     Logger::WriteMessage(queries);
     Logger::WriteMessage("result = " + to_string(result));
 }
+
+void TestLeetCode3394(void)
+{
+    Logger::WriteMessage("Test Leet Code 3394");
+    LeetCodeGreedy leetCode;
+    int n = 5;
+    vector<vector<int>> rectangles =
+    {
+        {1, 0, 5, 2},{0, 2, 2, 4},{3, 2, 5, 3},{0, 4, 4, 5}
+    };
+    int result = leetCode.checkValidCuts(n, rectangles);
+    Logger::WriteMessage(rectangles);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+
+    n = 4;
+    rectangles =
+    {
+        {0,0,1,1},{2,0,3,4},{0,2,2,3},{3,0,4,3}
+    };
+    result = leetCode.checkValidCuts(n, rectangles);
+    Logger::WriteMessage(rectangles);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+
+    n = 4;
+    rectangles =
+    {
+        {0,2,2,4} ,{1,0,3,2},{2,2,3,4},{3,0,4,2},{3,2,4,4}
+    };
+    result = leetCode.checkValidCuts(n, rectangles);
+    Logger::WriteMessage(rectangles);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode3394();
     TestLeetCode3362();
     TestLeetCode3356();
     TestLeetCode3355();

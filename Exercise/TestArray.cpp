@@ -10981,8 +10981,82 @@ void TestLeetCode3381(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3386(void)
+{
+    Logger::WriteMessage("Test Leet Code 3386");
+    LeetCodeArray leetCode;
+    vector<vector<int>> events = { {1, 2},{2, 5},{3, 9},{1, 15} };
+    int result = leetCode.buttonWithLongestTime(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    events = { {10,5} ,{1,7} };
+    result = leetCode.buttonWithLongestTime(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3392(void)
+{
+    Logger::WriteMessage("Test Leet Code 3392");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 1, 4, 1 };
+    int result = leetCode.countSubarraysII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1 };
+    result = leetCode.countSubarraysII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3396(void)
+{
+    Logger::WriteMessage("Test Leet Code 3396");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 2, 3, 3, 5, 7 };
+    int result = leetCode.minimumOperationsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,5,6,4,4 };
+    result = leetCode.minimumOperationsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,7,8,9 };
+    result = leetCode.minimumOperationsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3395(void)
+{
+    Logger::WriteMessage("Test Leet Code 3395");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,1,1,1,1,1 };
+    int result = leetCode.subsequencesWithMiddleMode(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,2,3,3,4 };
+    result = leetCode.subsequencesWithMiddleMode(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,1,2,3,4,5,6,7,8 };
+    result = leetCode.subsequencesWithMiddleMode(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3395();
+    TestLeetCode3396();
+    TestLeetCode3392();
+    TestLeetCode3386();
     TestLeetCode3381();
     TestLeetCode3379();
     TestLeetCode3371();

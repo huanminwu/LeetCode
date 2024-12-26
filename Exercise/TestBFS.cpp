@@ -867,8 +867,53 @@ void TestLeetCode2014(void)
     Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
 }
 
+
+void TestLeetCode3387(void)
+{
+    Logger::WriteMessage("Test Leet Code 3387");
+    LeetCodeBFS leetCode;
+    
+    string initialCurrency = "EUR";
+    vector<vector<string>> pairs1 = { {"EUR", "USD"},{"USD", "JPY"} };
+    vector<double> rates1 = { 2.0, 3.0 };
+    vector<vector<string>> pairs2 = { {"JPY", "USD"},{"USD", "CHF"},{"CHF", "EUR"} };
+    vector<double> rates2 = { 4.0, 5.0, 6.0 };
+    double result = leetCode.maxAmount(initialCurrency, pairs1, rates1, pairs2, rates2);
+    Logger::WriteMessage(pairs1);
+    Logger::WriteMessage(rates1);
+    Logger::WriteMessage(pairs2);
+    Logger::WriteMessage(rates2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    initialCurrency = "NGN";
+    pairs1 = { {"NGN", "EUR"} };
+    rates1 = { 9.0 };
+    pairs2 = { {"NGN", "EUR"} };
+    rates2 = { 6.0 };
+    result = leetCode.maxAmount(initialCurrency, pairs1, rates1, pairs2, rates2);
+    Logger::WriteMessage(pairs1);
+    Logger::WriteMessage(rates1);
+    Logger::WriteMessage(pairs2);
+    Logger::WriteMessage(rates2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    initialCurrency = "USD";
+    pairs1 = { {"USD", "EUR"} };
+    rates1 = { 1.0 };
+    pairs2 = { {"EUR", "JPY"} };
+    rates2 = { 10.0 };
+    result = leetCode.maxAmount(initialCurrency, pairs1, rates1, pairs2, rates2);
+    Logger::WriteMessage(pairs1);
+    Logger::WriteMessage(rates1);
+    Logger::WriteMessage(pairs2);
+    Logger::WriteMessage(rates2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeBFS(void)
 {
+    TestLeetCode3387();
     TestLeetCode773();
     TestLeetCode2014();
     TestLeetCode1871();

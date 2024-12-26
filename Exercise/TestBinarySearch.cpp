@@ -1504,8 +1504,50 @@ void TestLeetCode3357(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3398(void)
+{
+    Logger::WriteMessage("Test Leet Code 3398");
+    LeetCodeBinarySearch leetCode;
+    string s = "000001";
+    int numOps = 1;
+    int result = leetCode.minLengthI(s, numOps);
+    Logger::WriteMessage("s = " + s + "; numOps = " + to_string(numOps) + "; result = " + to_string(result));
+
+    s = "0000";
+    numOps = 2;
+    result = leetCode.minLengthI(s, numOps);
+    Logger::WriteMessage("s = " + s + "; numOps = " + to_string(numOps) + "; result = " + to_string(result));
+
+    s = "0101";
+    numOps = 0;
+    result = leetCode.minLengthI(s, numOps);
+    Logger::WriteMessage("s = " + s + "; numOps = " + to_string(numOps) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3399(void)
+{
+    Logger::WriteMessage("Test Leet Code 3399");
+    LeetCodeBinarySearch leetCode;
+    string s = "000001";
+    int numOps = 1;
+    int result = leetCode.minLengthI(s, numOps);
+    Logger::WriteMessage("s = " + s + "; numOps = " + to_string(numOps) + "; result = " + to_string(result));
+
+    s = "0000";
+    numOps = 2;
+    result = leetCode.minLengthI(s, numOps);
+    Logger::WriteMessage("s = " + s + "; numOps = " + to_string(numOps) + "; result = " + to_string(result));
+
+    s = "0101";
+    numOps = 0;
+    result = leetCode.minLengthI(s, numOps);
+    Logger::WriteMessage("s = " + s + "; numOps = " + to_string(numOps) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode3399();
+    TestLeetCode3398();
     TestLeetCode3357();
     TestLeetCode3344();
     TestLeetCode3350();

@@ -27062,4 +27062,84 @@ bool LeetCodeString::isPossibleToRearrange(string s, string t, int k)
     return true;
 }
 
+/// <summary>
+/// Leet Code 3389. Minimum Operations to Make Character Frequencies Equal
+/// 
+/// Hard
+///
+/// You are given a string s.
+/// A string t is called good if all characters of t occur the same number 
+/// of times.
+///
+/// You can perform the following operations any number of times:
+/// Delete a character from s.
+/// Insert a character in s.
+/// Change a character in s to its next letter in the alphabet.
+/// Note that you cannot change 'z' to 'a' using the third operation.
+///
+/// Return the minimum number of operations required to make s good.
+/// 
+/// Example 1:
+/// Input: s = "acab"
+/// Output: 1
+/// Explanation:
+/// We can make s good by deleting one occurrence of character 'a'.
+///
+/// Example 2:
+/// Input: s = "wddw"
+/// Output: 0
+/// Explanation:
+/// We do not need to perform any operations since s is initially good.
+///
+/// Example 3:
+/// Input: s = "aaabc"
+/// Output: 2
+/// Explanation:
+/// We can make s good by applying these operations:
+/// Change one occurrence of 'a' to 'b'
+/// Insert one occurrence of 'c' into s
+///
+/// Constraints:
+/// 1. 3 <= s.length <= 2 * 104
+/// 2. s contains only lowercase English letters.
+/// </summary>
+int LeetCodeString::makeStringGood(string s)
+{
+    vector<int> count(26);
+    int result = INT_MAX;
+    int n = s.size();
+    for (int i = 0; i < n; i++) count[s[i] - 'a']++;
+    for (int target = 1; target <= n; target++)
+    {
+        vector<int> dp(27);
+        for (int j = 25; j >= 0; j--)
+        {
+            int deletion = 0;
+            if (count[j] >= target) deletion = count[j] - target;
+            else deletion = count[j];
+            int insertion = 0;
+            if (count[j] <= target) insertion = target - count[j];
+            else insertion = INT_MAX;
+            dp[j] = min(insertion, deletion) + dp[j + 1];
+            if (j < 25 &&  count[j + 1] < target)
+            {   
+                int move = 0;
+                int delta = 0;
+                if (count[j] >= target)
+                {
+                    move = min(count[j] - target, target - count[j + 1]);
+                    delta = max(count[j] - target, target - count[j + 1]) - move;
+                }
+                else
+                {
+                    move = min(count[j], target - count[j + 1]);
+                    delta = max(count[j], target - count[j + 1]) - move;
+                }
+                dp[j] = min(move + delta + dp[j + 2], dp[j]);
+            }
+        }
+        result = min(result, dp[0]);
+    }
+    return result;
+}
 #pragma endregion

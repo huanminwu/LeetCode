@@ -7479,8 +7479,29 @@ void TestLeetCode3365(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode3389(void)
+{
+    Logger::WriteMessage("Test Leet Code 3389");
+    LeetCodeString leetCode;
+    string s = "acab";
+    int result = leetCode.makeStringGood(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "wddw";
+    result = leetCode.makeStringGood(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "aaabc";
+    result = leetCode.makeStringGood(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3389();
     TestLeetCode3365();
     TestLeetCode3340();
     TestLeetCode3335();

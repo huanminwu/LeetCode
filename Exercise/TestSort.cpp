@@ -4143,8 +4143,26 @@ void TestLeetCode3375(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3397(void)
+{
+    Logger::WriteMessage("Test Leet Code 3397");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 2, 2, 3, 3, 4 };
+    int k = 2;
+    int result = leetCode.maxDistinctElements(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 4,4,4,4 };
+    k = 1;
+    result = leetCode.maxDistinctElements(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3397();
     TestLeetCode3375();
     TestLeetCode3321();
     TestLeetCode3318();
