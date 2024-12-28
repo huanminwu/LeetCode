@@ -11051,8 +11051,28 @@ void TestLeetCode3395(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3400(void)
+{
+    Logger::WriteMessage("Test Leet Code 3400");
+    LeetCodeArray leetCode;
+    vector<int> nums1 = { 3, 1, 2, 3, 1, 2 };
+    vector<int> nums2 = { 1, 2, 3, 1, 2, 3 };
+    int result = leetCode.maximumMatchingIndices(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,4,2,5,3,1 };
+    nums2 = { 2,3,1,2,4,6 };
+    result = leetCode.maximumMatchingIndices(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3400();
     TestLeetCode3395();
     TestLeetCode3396();
     TestLeetCode3392();
