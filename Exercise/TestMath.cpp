@@ -7546,8 +7546,29 @@ void TestLeetCode3380(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3405(void)
+{
+    Logger::WriteMessage("Test Leet Code 3405");
+    LeetCodeMath leetCode;
+    int n = 3, m = 2, k = 1;
+    int result = leetCode.countGoodArrays(n, m, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4, m = 2, k = 2;
+    result = leetCode.countGoodArrays(n, m, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 5, m = 2, k = 0;
+    result = leetCode.countGoodArrays(n, m, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3405();
     TestLeetCode3380();
     TestLeetCode3360();
     TestLeetCode3352();

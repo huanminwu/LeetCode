@@ -11070,8 +11070,24 @@ void TestLeetCode3400(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3404(void)
+{
+    Logger::WriteMessage("Test Leet Code 3404");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 3, 6, 1 };
+    long long result = leetCode.numberOfSubsequences(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,4,3,4,3,4,3,4 };
+    result = leetCode.numberOfSubsequences(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3404();
     TestLeetCode3400();
     TestLeetCode3395();
     TestLeetCode3396();
