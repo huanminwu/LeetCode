@@ -11070,8 +11070,42 @@ void TestLeetCode3400(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+void TestLeetCode3402(void)
+{
+    Logger::WriteMessage("Test Leet Code 3402");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {3, 2},{1, 3},{3, 4},{0, 1} };
+    int result = leetCode.minimumOperationsIncreasing(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {3, 2, 1},{2, 1, 0},{1, 2, 3} };
+    result = leetCode.minimumOperationsIncreasing(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3404(void)
+{
+    Logger::WriteMessage("Test Leet Code 3404");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 3, 6, 1 };
+    long long result = leetCode.numberOfSubsequences(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,4,3,4,3,4,3,4 };
+    result = leetCode.numberOfSubsequences(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3404();
+    TestLeetCode3402();
+    TestLeetCode3361();
     TestLeetCode3400();
     TestLeetCode3395();
     TestLeetCode3396();
@@ -11080,7 +11114,6 @@ void TestLeetCodeArray(void)
     TestLeetCode3381();
     TestLeetCode3379();
     TestLeetCode3371();
-    TestLeetCode3361();
     TestLeetCode3364();
     TestLeetCode3354();
     TestLeetCode3353();

@@ -34659,11 +34659,11 @@ int LeetCodeArray::minimumSumSubarray(vector<int>& nums, int l, int r)
 /// </summary>
 long long LeetCodeArray::shiftDistance(string s, string t, vector<int>& nextCost, vector<int>& previousCost)
 {
-    vector<long long> dp1(53), dp2(53);
-    for (int i = 1; i <= 52; i++)
+    vector<long long> dp1(52), dp2(52);
+    for (int i = 1; i < 52; i++)
     {
         dp1[i] = dp1[i-1] + nextCost[(i - 1) % 26];
-        dp2[i] = dp2[i-1] + previousCost[(25- (i - 1) %26) % 26];
+        dp2[51 - i] = dp2[52-i] + previousCost[(52 - i) %26];
     }
     long long result = 0;
     for (size_t i = 0; i < s.size(); i++)
@@ -34674,12 +34674,12 @@ long long LeetCodeArray::shiftDistance(string s, string t, vector<int>& nextCost
         if (a < b)
         {
             cost1 = dp1[b] - dp1[a];
-            cost2 = dp2[51 - b] - dp2[25 - a];
+            cost2 = dp2[b] - dp2[26 + a];
         }
         else if (a > b)
         {
             cost1 = dp1[b+26] - dp1[a];
-            cost2 = dp2[25 - b] - dp2[25 - a];
+            cost2 = dp2[b] - dp2[a];
         }
         result += min(cost1, cost2);
     }
@@ -35293,3 +35293,159 @@ int LeetCodeArray::maximumMatchingIndices(vector<int>& nums1, vector<int>& nums2
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3402. Minimum Operations to Make Columns Strictly Increasing
+///   
+/// Easy
+///
+/// You are given a m x n matrix grid consisting of non-negative integers.
+/// 
+/// In one operation, you can increment the value of any grid[i][j] by 1.
+/// 
+/// Return the minimum number of operations needed to make all columns of 
+/// grid strictly increasing.
+/// 
+///
+/// Example 1:
+/// Input: grid = [[3,2],[1,3],[3,4],[0,1]]
+/// Output: 15
+/// Explanation:
+/// To make the 0th column strictly increasing, we can apply 3 operations 
+/// on grid[1][0], 2 operations on grid[2][0], and 6 operations on 
+/// grid[3][0].
+/// To make the 1st column strictly increasing, we can apply 4 operations 
+/// on grid[3][1].
+///
+/// Example 2:
+/// Input: grid = [[3,2,1],[2,1,0],[1,2,3]]
+/// Output: 12
+/// Explanation:
+/// To make the 0th column strictly increasing, we can apply 2 operations 
+/// on grid[1][0], and 4 operations on grid[2][0].
+/// To make the 1st column strictly increasing, we can apply 2 operations 
+/// on grid[1][1], and 2 operations on grid[2][1].
+/// To make the 2nd column strictly increasing, we can apply 2 operations 
+/// on grid[1][2].
+///
+/// Constraints:
+/// 1. m == grid.length
+/// 2. n == grid[i].length
+/// 3. 1 <= m, n <= 50
+/// 4. 0 <= grid[i][j] < 2500
+/// </summary>
+int LeetCodeArray::minimumOperationsIncreasing(vector<vector<int>>& grid)
+{
+    int result = 0;
+    for (size_t j = 0; j < grid[0].size(); j++)
+    {
+        int prev = 0;
+        for (size_t i = 0; i < grid.size(); i++)
+        {
+            if (i == 0) prev = grid[i][j];
+            else
+            {
+                if (grid[i][j] <= prev)
+                {
+                    result += prev + 1 - grid[i][j];
+                    prev++;
+                }
+                else
+                {
+                    prev = grid[i][j];
+                }
+            }
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3404. Count Special Subsequences
+///   
+/// Medium
+///
+/// 
+/// You are given an array nums consisting of positive integers.
+/// A special subsequence is defined as a subsequence of length 4, 
+/// represented by indices (p, q, r, s), where p < q < r < s. This 
+/// subsequence must satisfy the following conditions:
+///
+/// nums[p] * nums[r] == nums[q] * nums[s]
+/// There must be at least one element between each pair of indices. 
+/// In other words, q - p > 1, r - q > 1 and s - r > 1.
+/// A subsequence is a sequence derived from the array by deleting zero 
+/// or more elements without changing the order of the remaining elements.
+///
+/// Return the number of different special subsequences in nums.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,3,4,3,6,1]
+/// Output: 1
+/// Explanation:
+/// There is one special subsequence in nums.
+/// (p, q, r, s) = (0, 2, 4, 6):
+/// This corresponds to elements (1, 3, 3, 1).
+/// nums[p] * nums[r] = nums[0] * nums[4] = 1 * 3 = 3
+/// nums[q] * nums[s] = nums[2] * nums[6] = 3 * 1 = 3
+///
+/// Example 2:
+/// Input: nums = [3,4,3,4,3,4,3,4]
+/// Output: 3
+/// Explanation:
+/// There are three special subsequences in nums.
+/// (p, q, r, s) = (0, 2, 4, 6):
+/// This corresponds to elements (3, 3, 3, 3).
+/// nums[p] * nums[r] = nums[0] * nums[4] = 3 * 3 = 9
+/// nums[q] * nums[s] = nums[2] * nums[6] = 3 * 3 = 9
+/// (p, q, r, s) = (1, 3, 5, 7):
+/// This corresponds to elements (4, 4, 4, 4).
+/// nums[p] * nums[r] = nums[1] * nums[5] = 4 * 4 = 16
+/// nums[q] * nums[s] = nums[3] * nums[7] = 4 * 4 = 16
+/// (p, q, r, s) = (0, 2, 5, 7):
+/// This corresponds to elements (3, 3, 4, 4).
+/// nums[p] * nums[r] = nums[0] * nums[5] = 3 * 4 = 12
+/// nums[q] * nums[s] = nums[2] * nums[7] = 3 * 4 = 12
+///
+/// Constraints:
+/// 1. 7 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 1000
+/// </summary>
+long long LeetCodeArray::numberOfSubsequences(vector<int>& nums)
+{
+    unordered_map<long long, map<int, int>> product_count;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (size_t j = i + 2; j < nums.size(); j++)
+        {
+            int product = nums[i] * nums[j];
+            product_count[product][i]++;
+        }
+    }
+    for (auto itr : product_count)
+    {
+        map<int, int>& map_count = itr.second;
+        int total = 0;
+        for (auto itr1 = map_count.rbegin(); itr1 != map_count.rend(); itr1++)
+        {
+            total += itr1->second;
+            map_count[itr1->first] = total;
+        }
+    }
+    long long result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (size_t j = i + 2; j < nums.size(); j++)
+        {
+            int product = nums[i] * nums[j];
+            auto itr = product_count[product].upper_bound(j + 1);
+            if (itr != product_count[product].end())
+            {
+                result += itr->second;
+            }
+        }
+    }
+    return result;
+}
+
