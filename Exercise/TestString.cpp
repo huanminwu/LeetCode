@@ -7505,12 +7505,27 @@ void TestLeetCode3403(void)
     LeetCodeString leetCode;
     string  word = "dbca";
     int numFriends = 2;
-    string result = leetCode.answerString(word, numFriends);
+    string result = leetCode.answerStringI(word, numFriends);
     Logger::WriteMessage("word = " + word + "; numFriends = " + to_string(numFriends) + "; result = " + result);
 
     word = "gggg";
     numFriends = 4;
-    result = leetCode.answerString(word, numFriends);
+    result = leetCode.answerStringI(word, numFriends);
+    Logger::WriteMessage("word = " + word + "; numFriends = " + to_string(numFriends) + "; result = " + result);
+}
+
+void TestLeetCode3406(void)
+{
+    Logger::WriteMessage("Test Leet Code 3406");
+    LeetCodeString leetCode;
+    string  word = "dbca";
+    int numFriends = 2;
+    string result = leetCode.answerStringII(word, numFriends);
+    Logger::WriteMessage("word = " + word + "; numFriends = " + to_string(numFriends) + "; result = " + result);
+
+    word = "gggg";
+    numFriends = 4;
+    result = leetCode.answerStringII(word, numFriends);
     Logger::WriteMessage("word = " + word + "; numFriends = " + to_string(numFriends) + "; result = " + result);
 }
 
