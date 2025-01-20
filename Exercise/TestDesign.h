@@ -99,6 +99,7 @@ void TestLeetCode362(void);
 void TestLeetCode3242(void);
 void TestLeetCode3369(void);
 void TestLeetCode3391(void);
+void TestLeetCode3408(void);
 void TestTouchScreen(void);
 void TestLeetCodeDesign(void);
 #endif  // TestArray

@@ -20146,5 +20146,265 @@ int LeetCodeDP::countPathsWithXorValue(vector<vector<int>>& grid, int k)
     }
     return dp[n - 1][m - 1][k];
 }
+
+/// <summary>
+/// Leet Code 3414. Maximum Score of Non-overlapping Intervals
+/// </summary>
+bool LeetCodeDP::maximumWeightSmaller(vector<int> arr1, vector<int> arr2)
+{
+    sort(arr1.begin(), arr1.end());
+    sort(arr2.begin(), arr2.end());
+    for (size_t i = 0; i < arr1.size() && i < arr2.size(); i++)
+    {
+        if (arr1[i] < arr2[i]) return true;
+        else if (arr1[i] > arr2[i]) return false;
+    }
+    if (arr1.size() < arr2.size()) return true;
+    else return false;
+}
+
+
+/// <summary>
+/// Leet Code 3414. Maximum Score of Non-overlapping Intervals
+///   
+/// Hard
+///
+/// You are given a 2D integer array intervals, where intervals[i] = 
+/// [li, ri, weighti]. Interval i starts at position li and ends at ri, 
+/// and has a weight of weighti. You can choose up to 4 non-overlapping 
+/// intervals. The score of the chosen intervals is defined as the total 
+/// sum of their weights.
+/// Return the lexicographically smallest array of at most 4 indices 
+/// from intervals with maximum score, representing your choice of non-
+/// overlapping intervals.
+///
+/// Two intervals are said to be non-overlapping if they do not share any 
+/// points. In particular, intervals sharing a left or right boundary are 
+/// considered overlapping.
+/// 
+/// Example 1:
+/// Input: intervals = [[1,3,2],[4,5,2],[1,5,5],[6,9,3],[6,7,1],[8,9,1]]
+/// Output: [2,3]
+/// Explanation:
+/// You can choose the intervals with indices 2, and 3 with respective 
+/// weights of 5, and 3.
+///
+/// Example 2:
+/// Input: intervals = [[5,8,1],[6,7,7],[4,7,3],[9,10,6],[7,8,2],
+/// [11,14,3],[3,5,5]]
+///
+/// Output: [1,3,5,6]
+/// Explanation:
+/// You can choose the intervals with indices 1, 3, 5, and 6 with 
+/// respective weights of 7, 6, 3, and 5.
+///
+/// Constraints:
+/// 1. 1 <= intevals.length <= 5 * 10^4
+/// 2. intervals[i].length == 3
+/// 3. intervals[i] = [li, ri, weighti]
+/// 4. 1 <= li <= ri <= 10^9
+/// 5. 1 <= weighti <= 10^9
+/// </summary>
+vector<int> LeetCodeDP::maximumWeight(vector<vector<int>>& intervals)
+{
+    map<int, vector<pair<long long, vector<int>>>> dp;
+    set<pair<int, int>> arr;
+    for (size_t i = 0; i < intervals.size(); i++)
+    {
+        arr.insert(make_pair(intervals[i][1], i));
+    }
+    for (auto& itr : arr)
+    {
+        int i = itr.second;
+        int left = intervals[i][0];
+        int right = intervals[i][1];
+        int weight = intervals[i][2];
+        if (dp[right].empty())
+        {
+            dp[right].push_back(make_pair(weight, vector<int>()));
+            dp[right][0].second.push_back(i);
+        }
+        else
+        {
+            if (weight > dp[right][0].first)
+            {
+                dp[right][0].first = weight;
+                dp[right][0].second = { i };
+            }
+        }
+        auto prev_itr = dp.lower_bound(left);
+        if (prev_itr != dp.begin())
+        {
+            prev_itr = prev(prev_itr);
+            vector<pair<long long, vector<int>>>& prev_arr = prev_itr->second;
+            for (int k = 0; k < 3 && k < (int)prev_arr.size(); k++)
+            {
+                if (k + 1 >= (int) dp[right].size())
+                {
+                    dp[right].push_back(make_pair(weight + prev_arr[k].first, prev_arr[k].second));
+                    dp[right][k + 1].second.push_back(i);
+                }
+                else if (weight + prev_arr[k].first > dp[right][k + 1].first)
+                {
+                    dp[right][k+1] = make_pair(weight + prev_arr[k].first, prev_arr[k].second);
+                    dp[right][k + 1].second.push_back(i);
+                }
+                else if (weight + prev_arr[k].first == dp[right][k + 1].first)
+                {
+                    vector<int> arr1 = prev_arr[k].second;
+                    arr1.push_back(i);
+                    vector<int> arr2 = dp[right][k + 1].second;
+                    if (maximumWeightSmaller(arr1, arr2))
+                    {
+                        dp[right][k + 1].second = arr1;
+                    }
+                }
+            }
+        }
+        prev_itr = dp.lower_bound(right);
+        if (prev_itr != dp.begin())
+        {
+            prev_itr = prev(prev_itr);
+            vector<pair<long long, vector<int>>>& prev_arr = prev_itr->second;
+            for (int k = 0; k < 4 && k < (int)prev_arr.size(); k++)
+            {
+                if (k >= (int)dp[right].size())
+                {
+                    dp[right].push_back(prev_arr[k]);
+                }
+                else if (prev_arr[k].first > dp[right][k].first)
+                {
+                    dp[right][k] = prev_arr[k];
+                }
+                else if (prev_arr[k].first == dp[right][k].first)
+                {
+                    if (maximumWeightSmaller(prev_arr[k].second, dp[right][k].second))
+                    {
+                        dp[right][k] = prev_arr[k];
+                    }
+                }
+            }
+        }
+    }
+    auto last = dp.rbegin()->second;
+    long long sum = 0;
+    vector<int> result;
+    for (size_t i = 0; i < last.size(); i++)
+    {
+        if (last[i].first > sum)
+        {
+            sum = last[i].first;
+            result = last[i].second;
+        }
+        else if (last[i].first == sum)
+        {
+            if (maximumWeightSmaller(last[i].second, result))
+            {
+                result = last[i].second;
+            }
+        }
+    }
+    sort(result.begin(), result.end());
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3418. Maximum Amount of Money Robot Can Earn
+///   
+/// Medium
+///
+/// You are given an m x n grid. A robot starts at the top-left corner of 
+/// the grid (0, 0) and wants to reach the bottom-right corner 
+/// (m - 1, n - 1). The robot can move either right or down at any point 
+/// in time.
+///
+/// The grid contains a value coins[i][j] in each cell:
+/// If coins[i][j] >= 0, the robot gains that many coins.
+/// If coins[i][j] < 0, the robot encounters a robber, and the robber 
+/// steals the absolute value of coins[i][j] coins.
+/// The robot has a special ability to neutralize robbers in at most 2 
+/// cells on its path, preventing them from stealing coins in those cells.
+///
+/// Note: The robot's total coins can be negative.
+/// Return the maximum profit the robot can gain on the route.
+///
+/// Example 1:
+/// Input: coins = [[0,1,-1],[1,-2,3],[2,-3,4]]
+/// Output: 8
+///
+/// Explanation:
+/// An optimal path for maximum coins is:
+/// Start at (0, 0) with 0 coins (total coins = 0).
+/// Move to (0, 1), gaining 1 coin (total coins = 0 + 1 = 1).
+/// Move to (1, 1), where there's a robber stealing 2 coins. The robot 
+/// uses one neutralization here, avoiding the robbery (total coins = 1).
+/// Move to (1, 2), gaining 3 coins (total coins = 1 + 3 = 4).
+/// Move to (2, 2), gaining 4 coins (total coins = 4 + 4 = 8).
+///
+/// Example 2:
+/// Input: coins = [[10,10,10],[10,10,10]]
+/// Output: 40
+/// Explanation:
+/// An optimal path for maximum coins is:
+/// Start at (0, 0) with 10 coins (total coins = 10).
+/// Move to (0, 1), gaining 10 coins (total coins = 10 + 10 = 20).
+/// Move to (0, 2), gaining another 10 coins (total coins = 20 + 10 = 30).
+/// Move to (1, 2), gaining the final 10 coins 
+/// (total coins = 30 + 10 = 40).
+///
+/// Constraints:
+/// 1. m == coins.length
+/// 2. n == coins[i].length
+/// 3. 1 <= m, n <= 500
+/// 4. -1000 <= coins[i][j] <= 1000
+/// </summary>
+int LeetCodeDP::maximumAmount(vector<vector<int>>& coins)
+{
+    int m = coins.size();
+    int n = coins[0].size();
+
+    vector<vector<vector<int>>> dp(m, vector<vector<int>>(n, vector<int>(3)));
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (i == 0 && j == 0)
+            {
+                dp[i][j][0] = coins[i][j];
+                dp[i][j][1] = max(dp[i][j][0], 0);
+                dp[i][j][2] = dp[i][j][1];
+            }
+            else if (i == 0)
+            {
+                dp[i][j][0] = dp[i][j - 1][0] + coins[i][j];
+                dp[i][j][1] = max(dp[i][j - 1][0], dp[i][j - 1][1] + coins[i][j]);
+                dp[i][j][1] = max(dp[i][j][0], dp[i][j][1]);
+                dp[i][j][2] = max(dp[i][j - 1][1], dp[i][j - 1][2] + coins[i][j]);
+                dp[i][j][2] = max(dp[i][j][1], dp[i][j][2]);
+            }
+            else if (j == 0)
+            {
+                dp[i][j][0] = dp[i - 1][j][0] + coins[i][j];
+                dp[i][j][1] = max(dp[i-1][j][0], dp[i-1][j][1] + coins[i][j]);
+                dp[i][j][1] = max(dp[i][j][0], dp[i][j][1]);
+                dp[i][j][2] = max(dp[i-1][j][1], dp[i-1][j][2] + coins[i][j]);
+                dp[i][j][2] = max(dp[i][j][1], dp[i][j][2]);
+            }
+            else
+            {
+                dp[i][j][0] = max(dp[i-1][j][0], dp[i][j-1][0]) + coins[i][j];
+                dp[i][j][1] = max(dp[i - 1][j][1], dp[i][j - 1][1]) + coins[i][j];
+                dp[i][j][2] = max(dp[i - 1][j][2], dp[i][j - 1][2]) + coins[i][j];
+                dp[i][j][1] = max(dp[i][j][1], dp[i][j - 1][0]);
+                dp[i][j][1] = max(dp[i][j][1], dp[i-1][j][0]);
+                dp[i][j][1] = max(dp[i][j][1], dp[i][j][0]);
+                dp[i][j][2] = max(dp[i][j][2], dp[i][j - 1][1]);
+                dp[i][j][2] = max(dp[i][j][2], dp[i - 1][j][1]);
+                dp[i][j][2] = max(dp[i][j][2], dp[i][j][1]);
+            }
+        }
+    }
+    return dp[m - 1][n - 1][2];
+}
 #pragma endregion
 

@@ -5691,8 +5691,107 @@ void TestLeetCode3391(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3408(void)
+{
+    Logger::WriteMessage("Test Leet Code 3408");
+    vector<string> commands =
+    {
+        "TaskManager", "add", "edit", "execTop", "rmv", "add", "execTop"
+    };
+
+    vector<vector<vector<int>>> parameters =
+    {
+        {{1, 101, 10},{2, 102, 20}, {3, 103, 15}},{{4, 104, 5}},{{102, 8}},{{}},{{101}},{{5, 105, 15}},{{}}
+    };
+    vector<string> result;
+    TaskManager* taskManager = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "TaskManager")
+        {
+            taskManager = new TaskManager(parameters[i]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "add")
+        {
+            taskManager->add(parameters[i][0][0], parameters[i][0][1], parameters[i][0][2]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "edit")
+        {
+            taskManager->edit(parameters[i][0][0], parameters[i][0][1]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "rmv")
+        {
+            taskManager->rmv(parameters[i][0][0]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "execTop")
+        {
+            int ret = taskManager->execTop();
+            result.push_back(to_string(ret));
+        }
+    }
+    delete taskManager;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+        "TaskManager","add","edit","execTop","rmv","add","execTop"
+    };
+
+    parameters =
+    {
+        {{1,101,8} ,{2,102,20},{3,103,5}},{{4, 104, 5}},{{102, 9}},{{}},{{101}},{{50, 101, 8}},{{}}
+    };
+    result.clear();
+    taskManager = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "TaskManager")
+        {
+            taskManager = new TaskManager(parameters[i]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "add")
+        {
+            taskManager->add(parameters[i][0][0], parameters[i][0][1], parameters[i][0][2]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "edit")
+        {
+            taskManager->edit(parameters[i][0][0], parameters[i][0][1]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "rmv")
+        {
+            taskManager->rmv(parameters[i][0][0]);
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "execTop")
+        {
+            int ret = taskManager->execTop();
+            result.push_back(to_string(ret));
+        }
+    }
+    delete taskManager;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode3408();
     TestLeetCode3391();
     TestLeetCode3369();
     TestLeetCode3242();

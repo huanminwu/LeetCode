@@ -16012,6 +16012,96 @@ public:
     /// 3. 1 <= numFriends <= word.length
     /// </summary>
     string answerStringII(string word, int numFriends);
+
+    /// <summary>
+    /// Leet Code 3407. Substring Matching Pattern 
+    ///   
+    /// Easy
+    /// 
+    /// You are given a string s and a pattern string p, where p contains 
+    /// exactly one '*' character.
+    ///
+    /// The '*' in p can be replaced with any sequence of zero or more 
+    /// characters.
+    ///
+    /// Return true if p can be made a substring of s, and false otherwise.
+    /// A substring is a contiguous non-empty sequence of characters within 
+    /// a string.
+    /// 
+    /// Example 1:
+    /// Input: s = "leetcode", p = "ee*e"
+    // Output: true
+    /// Explanation:
+    /// By replacing the '*' with "tcod", the substring "eetcode" matches the 
+    /// pattern.
+    ///
+    /// Example 2:
+    /// Input: s = "car", p = "c*v"
+    /// Output: false
+    /// Explanation:
+    /// There is no substring matching the pattern.
+    ///
+    /// Example 3:
+    /// Input: s = "luck", p = "u*"
+    /// Output: true
+    /// Explanation:
+    /// The substrings "u", "uc", and "uck" match the pattern.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 50
+    /// 2. 1 <= p.length <= 50 
+    /// 3. s contains only lowercase English letters.
+    /// 4. p contains only lowercase English letters and exactly one '*'
+    /// </summary>
+    bool hasMatch(string s, string p);
+
+    /// <summary>
+    /// Leet Code 3412. Find Mirror Score of a String
+    ///   
+    /// Medium
+    ///
+    /// You are given a string s.
+    ///  
+    /// We define the mirror of a letter in the English alphabet as its 
+    /// corresponding letter when the alphabet is reversed. For example, 
+    /// the mirror of 'a' is 'z', and the mirror of 'y' is 'b'.
+    /// 
+    /// Initially, all characters in the string s are unmarked.
+    ///
+    /// You start with a score of 0, and you perform the following process 
+    /// on the string s:
+    ///
+    /// Iterate through the string from left to right.
+    /// At each index i, find the closest unmarked index j such that j < i 
+    /// and s[j] is the mirror of s[i]. Then, mark both indices i and j, and 
+    /// add the value i - j to the total score.
+    /// If no such index j exists for the index i, move on to the next index 
+    /// without making any changes.
+    /// Return the total score at the end of the process.
+    /// 
+    /// Example 1:
+    /// Input: s = "aczzx"
+    /// Output: 5
+    /// Explanation:
+    /// i = 0. There is no index j that satisfies the conditions, so we skip.
+    /// i = 1. There is no index j that satisfies the conditions, so we skip.
+    /// i = 2. The closest index j that satisfies the conditions is j = 0, so 
+    /// we mark both indices 0 and 2, and then add 2 - 0 = 2 to the score.
+    /// i = 3. There is no index j that satisfies the conditions, so we skip.
+    /// i = 4. The closest index j that satisfies the conditions is j = 1, so 
+    /// we mark both indices 1 and 4, and then add 4 - 1 = 3 to the score.
+    ///
+    /// Example 2:
+    /// Input: s = "abcdef"
+    /// Output: 0
+    /// Explanation:
+    /// For each index i, there is no index j that satisfies the conditions.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s consists only of lowercase English letters.
+    /// </summary>
+    long long calculateScore(string s);
 #pragma endregion
 };
 

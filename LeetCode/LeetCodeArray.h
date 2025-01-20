@@ -22611,5 +22611,91 @@ public:
     /// 2. 1 <= nums[i] <= 1000
     /// </summary>
     long long numberOfSubsequences(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3410. Maximize Subarray Sum After Removing All Occurrences 
+    ///                 of One Element
+    ///   
+    /// Hard
+    ///
+    /// You are given an integer array nums.
+    /// You can do the following operation on the array at most once:
+    /// Choose any integer x such that nums remains non-empty on removing all 
+    /// occurrences of x.
+    /// Remove all occurrences of x from the array.
+    /// Return the maximum subarray sum across all possible resulting arrays.
+    ///
+    /// Example 1:
+    /// Input: nums = [-3,2,-2,-1,3,-2,3]
+    /// Output: 7
+    /// Explanation:
+    /// We can have the following arrays after at most one operation:
+    /// The original array is nums = [-3, 2, -2, -1, 3, -2, 3]. The maximum 
+    /// subarray sum is 3 + (-2) + 3 = 4.
+    /// Deleting all occurences of x = -3 results in nums = [2, -2, -1, 3, 
+    /// -2, 3]. The maximum subarray sum is 3 + (-2) + 3 = 4.
+    /// Deleting all occurences of x = -2 results in nums = [-3, 2, -1, 3, 3]. 
+    /// The maximum subarray sum is 2 + (-1) + 3 + 3 = 7.
+    /// Deleting all occurences of x = -1 results in nums = [-3, 2, -2, 3, 
+    /// -2, 3]. The maximum subarray sum is 3 + (-2) + 3 = 4.
+    /// Deleting all occurences of x = 3 results in nums = [-3, 2, -2, 
+    /// -1, -2]. The maximum subarray sum is 2.
+    /// The output is max(4, 4, 7, 4, 2) = 7.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,3,4]
+    /// Output: 10
+    /// Explanation:
+    /// It is optimal to not perform any operations.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^6 <= nums[i] <= 10^6
+    /// </summary>
+    long long maxSubarraySum(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3417. Zigzag Grid Traversal With Skip
+    ///   
+    /// Easy
+    ///
+    /// You are given an m x n 2D array grid of positive integers.
+    ///
+    /// Your task is to traverse grid in a zigzag pattern while skipping 
+    /// every alternate cell.
+    ///
+    /// Zigzag pattern traversal is defined as following the below actions:
+    /// Start at the top-left cell (0, 0).
+    /// Move right within a row until the end of the row is reached.
+    /// Drop down to the next row, then traverse left until the beginning of 
+    /// the row is reached.
+    /// Continue alternating between right and left traversal until every row 
+    /// has been traversed.
+    /// Note that you must skip every alternate cell during the traversal.
+    ///
+    /// Return an array of integers result containing, in order, the value of 
+    /// the cells visited during the zigzag traversal with skips.
+    /// 
+    /// Example 1:
+    /// Input: grid = [[1,2],[3,4]]
+    /// Output: [1,4]
+    /// Explanation:
+    /// 
+    /// Example 2:
+    /// Input: grid = [[2,1],[2,1],[2,1]]
+    /// Output: [2,1,2]
+    /// Explanation:
+    /// 
+    /// Example 3:
+    /// Input: grid = [[1,2,3],[4,5,6],[7,8,9]]
+    /// Output: [1,3,5,7,9]
+    ///
+    /// Explanation:
+    /// Constraints:
+    /// 1. 2 <= n == grid.length <= 50
+    /// 2. 2 <= m == grid[i].length <= 50
+    /// 3. 1 <= grid[i][j] <= 2500
+    /// </summary>
+    vector<int> zigzagTraversal(vector<vector<int>>& grid);
 };
 #endif  // LeetCodeArray_H

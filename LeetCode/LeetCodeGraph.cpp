@@ -21189,4 +21189,102 @@ int LeetCodeGraph::countComponents(vector<int>& nums, int threshold)
     return result;
 }
 
+/// <summary>
+/// Leet Code 3419. Minimize the Maximum Edge Weight of Graph
+///   
+/// Medium
+///
+/// You are given two integers, n and threshold, as well as a directed 
+/// weighted graph of n nodes numbered from 0 to n - 1. The graph is 
+/// represented by a 2D integer array edges, where edges[i] = [Ai, Bi, Wi] 
+/// indicates that there is an edge going from node Ai to node Bi with 
+/// weight Wi.
+///
+/// You have to remove some edges from this graph (possibly none), so that 
+/// it satisfies the following conditions:
+///
+/// Node 0 must be reachable from all other nodes.
+/// The maximum edge weight in the resulting graph is minimized.
+/// Each node has at most threshold outgoing edges.
+/// Return the minimum possible value of the maximum edge weight after 
+/// removing the necessary edges. If it is impossible for all conditions 
+/// to be satisfied, return -1.
+///
+///
+/// Example 1:
+/// Input: n = 5, edges = [[1,0,1],[2,0,2],[3,0,1],[4,3,1],[2,1,1]], 
+/// threshold = 2
+///
+/// Output: 1
+/// Explanation:
+/// Remove the edge 2 -> 0. The maximum weight among the remaining edges 
+/// is 1.
+///
+/// Example 2:
+/// Input: n = 5, edges = [[0,1,1],[0,2,2],[0,3,1],[0,4,1],[1,2,1],
+/// [1,4,1]], threshold = 1
+/// Output: -1
+/// Explanation: 
+/// It is impossible to reach node 0 from node 2.
+///
+/// Example 3:
+/// Input: n = 5, edges = [[1,2,1],[1,3,3],[1,4,5],[2,3,2],[3,4,2],
+/// [4,0,1]], threshold = 1
+///
+/// Output: 2
+///
+/// Explanation: 
+/// Remove the edges 1 -> 3 and 1 -> 4. The maximum weight among the 
+/// remaining edges is 2.
+///
+/// Example 4:
+/// Input: n = 5, edges = [[1,2,1],[1,3,3],[1,4,5],[2,3,2],[4,0,1]], 
+/// threshold = 1
+/// Output: -1
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 10^5
+/// 2. 1 <= threshold <= n - 1
+/// 3. 1 <= edges.length <= min(10^5, n * (n - 1) / 2).
+/// 4. edges[i].length == 3
+/// 5. 0 <= Ai, Bi < n
+/// 6. Ai != Bi
+/// 7. 1 <= Wi <= 10^6
+/// 8. There may be multiple edges between a pair of nodes, but they must 
+////   have unique weights.
+/// </summary>
+int LeetCodeGraph::minMaxWeight(int n, vector<vector<int>>& edges, int threshold)
+{
+    int count = 1;
+    vector<int> visited(n);
+    visited[0] = 1;
+    vector<vector<pair<int, int>>> neighbors(n);
+    set<vector<int>> pq;
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][1]].push_back(make_pair(edges[i][0], edges[i][2]));
+    }
+    for (size_t i = 0; i < neighbors[0].size(); i++)
+    {
+        pq.insert({ neighbors[0][i].second, 0, neighbors[0][i].first });
+    }
+    int result = 0;
+    while (!pq.empty())
+    {
+        vector<int> node = *pq.begin();
+        pq.erase(pq.begin());
+        if (visited[node[2]] == 1) continue;
+        visited[node[2]] = 1;
+        for (size_t i = 0; i < neighbors[node[2]].size(); i++)
+        {
+            pq.insert({ neighbors[node[2]][i].second, node[2], neighbors[node[2]][i].first });
+        }
+
+        result = max(result, node[0]);
+        count++;
+    }
+    if (count < n) return -1;
+    else return result;
+}
+
 #pragma endregion

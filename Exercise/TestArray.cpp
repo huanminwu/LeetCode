@@ -11099,8 +11099,45 @@ void TestLeetCode3404(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3410(void)
+{
+    Logger::WriteMessage("Test Leet Code 3410");
+    LeetCodeArray leetCode;
+    vector<int> nums = { -3, 2, -2, -1, 3, -2, 3 };
+    long long result = leetCode.maxSubarraySum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    result = leetCode.maxSubarraySum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3417(void)
+{
+    Logger::WriteMessage("Test Leet Code 3417");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {1, 2},{3, 4} };
+    vector<int> result = leetCode.zigzagTraversal(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid = { {2, 1},{2, 1},{2, 1} };
+    result = leetCode.zigzagTraversal(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid = { {1, 2, 3},{4, 5, 6},{7, 8, 9} };
+    result = leetCode.zigzagTraversal(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3417();
+    TestLeetCode3410();
     TestLeetCode3404();
     TestLeetCode3402();
     TestLeetCode3361();

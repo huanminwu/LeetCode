@@ -6168,8 +6168,54 @@ void TestLeetCode3378(void)
     Logger::WriteMessage("threshold = " + to_string(threshold) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3419(void)
+{
+    Logger::WriteMessage("Test Leet Code 3419");
+    LeetCodeGraph leetCode;
+    int n = 5;
+    vector<vector<int>> edges = { {1, 0, 1},{2, 0, 2},{3, 0, 1},{4, 3, 1},{2, 1, 1} };
+    int threshold = 2;
+    int result = leetCode.minMaxWeight(n, edges, threshold);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; threshold = " + to_string(threshold));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 5;
+    edges = { {0, 1, 1},{0, 2, 2},{0, 3, 1},{0, 4, 1},{1, 2, 1},{1, 4, 1} };
+    threshold = 1;
+    result = leetCode.minMaxWeight(n, edges, threshold);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; threshold = " + to_string(threshold));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 5;
+    edges = { {1, 2, 1},{1, 3, 3},{1, 4, 5},{2, 3, 2},{3, 4, 2},{4, 0, 1} };
+    threshold = 1;
+    result = leetCode.minMaxWeight(n, edges, threshold);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; threshold = " + to_string(threshold));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 5;
+    edges = { {1, 2, 1},{1, 3, 3},{1, 4, 5},{2, 3, 2},{4, 0, 1} };
+    threshold = 1;
+    result = leetCode.minMaxWeight(n, edges, threshold);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; threshold = " + to_string(threshold));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    edges = { {0, 1, 26},{1, 0, 35},{1, 2, 94} };
+    threshold = 2;
+    result = leetCode.minMaxWeight(n, edges, threshold);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; threshold = " + to_string(threshold));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3419();
     TestLeetCode3378();
     TestLeetCode3383();
     TestLeetCode3377();

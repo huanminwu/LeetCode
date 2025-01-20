@@ -5682,8 +5682,45 @@ void TestLeetCode3393(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3414(void)
+{
+    Logger::WriteMessage("Test Leet Code 3414");
+    LeetCodeDP leetCode;
+    vector<vector<int>> intervals = { {1, 3, 2},{4, 5, 2},{1, 5, 5},{6, 9, 3},{6, 7, 1},{8, 9, 1} };
+    vector<int> result = leetCode.maximumWeight(intervals);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage(result);
+
+    intervals = { {5, 8, 1},{6, 7, 7},{4, 7, 3},{9, 10, 6},{7, 8, 2},{11, 14, 3},{3, 5, 5} };
+    result = leetCode.maximumWeight(intervals);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage(result);
+
+    intervals = { {4, 4, 1},{2, 5, 3},{2, 3, 2} };
+    result = leetCode.maximumWeight(intervals);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage(result);    
+}
+
+void TestLeetCode3418(void)
+{
+    Logger::WriteMessage("Test Leet Code 3418");
+    LeetCodeDP leetCode;
+    vector<vector<int>>coins = { {0, 1, -1},{1, -2, 3},{2, -3, 4} };
+    int result = leetCode.maximumAmount(coins);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    coins = { {10, 10, 10},{10, 10, 10} };
+    result = leetCode.maximumAmount(coins);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3418();
+    TestLeetCode3414();
     TestLeetCode3393();
     TestLeetCode3388();
     TestLeetCode3363();

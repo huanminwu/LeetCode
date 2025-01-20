@@ -2021,8 +2021,28 @@ void TestLeetCode3394(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode3413(void)
+{
+    Logger::WriteMessage("Test Leet Code 3413");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> coins = { {8, 10, 1},{1, 3, 2},{5, 6, 4} };
+    int k = 4;
+    long long result = leetCode.maximumCoins(coins, k);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+
+    coins = { {1, 10, 3} };
+    k = 2;
+    result = leetCode.maximumCoins(coins, k);
+    Logger::WriteMessage(coins);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode3413();
     TestLeetCode3394();
     TestLeetCode3362();
     TestLeetCode3356();

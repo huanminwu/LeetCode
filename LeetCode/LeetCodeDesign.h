@@ -1660,7 +1660,6 @@ public:
         // take first item from m_ValueMap, and the first one in the queue
         auto itr = m_ValueMap.begin();
         int value = -itr->first;
-        auto list_itr = itr->second.top();
         m_List.erase(itr->second.top());
         itr->second.pop();
         if (itr->second.empty()) m_ValueMap.erase(itr->first);
@@ -11907,9 +11906,6 @@ typedef struct _TouchContext
 #define PACKET_SIZE 5
 #define BUFFER_SIZE 100
 #define CONTEXT_SIZE BUFFER_SIZE / PACKET_SIZE
-#define PACKET_SIZE 5
-#define BUFFER_SIZE 100
-#define CONTEXT_SIZE BUFFER_SIZE / PACKET_SIZE
 
 class TouchScreen
 {
@@ -13827,5 +13823,118 @@ private:
     }
 };
 
+/// <summary>
+/// Leet Code 3408. Design Task Manager
+///   
+/// Medium
+///
+/// There is a task management system that allows users to manage their 
+/// tasks, each associated with a priority. The system should efficiently 
+/// handle adding, modifying, executing, and removing tasks.
+///
+/// Implement the TaskManager class:
+/// 
+/// TaskManager(vector<vector<int>>& tasks) initializes the task manager 
+/// with a list of user-task-priority triples. Each element in the input 
+/// list is of the form [userId, taskId, priority], which adds a task to 
+/// the specified user with the given priority.
+///
+/// void add(int userId, int taskId, int priority) adds a task with the 
+/// specified taskId and priority to the user with userId. It is 
+/// guaranteed that taskId does not exist in the system.
+/// 
+/// void edit(int taskId, int newPriority) updates the priority of the 
+/// existing taskId to newPriority. It is guaranteed that taskId exists 
+/// in the system.
+///
+/// void rmv(int taskId) removes the task identified by taskId from the 
+/// system. It is guaranteed that taskId exists in the system.
+///
+/// int execTop() executes the task with the highest priority across 
+/// all users. If there are multiple tasks with the same highest priority, 
+/// execute the one with the highest taskId. After executing, the taskId 
+/// is removed from the system. Return the userId associated with the 
+/// executed task. If no tasks are available, return -1.
+///
+/// Note that a user may be assigned multiple tasks.
+/// 
+/// Example 1:
+/// Input:
+/// ["TaskManager", "add", "edit", "execTop", "rmv", "add", "execTop"]
+/// [[[[1, 101, 10], [2, 102, 20], [3, 103, 15]]], [4, 104, 5], [102, 8], 
+/// [], [101], [5, 105, 15], []]
+///
+/// Output:
+/// [null, null, null, 3, null, null, 5]
+/// 
+/// Explanation
+/// TaskManager taskManager = new TaskManager([[1, 101, 10], 
+/// [2, 102, 20], [3, 103, 15]]); // Initializes with three tasks for 
+/// Users 1, 2, and 3.
+/// taskManager.add(4, 104, 5); // Adds task 104 with priority 5 for 
+/// User 4.
+/// taskManager.edit(102, 8); // Updates priority of task 102 to 8.
+/// taskManager.execTop(); // return 3. Executes task 103 for User 3.
+/// taskManager.rmv(101); // Removes task 101 from the system.
+/// taskManager.add(5, 105, 15); 
+/// // Adds task 105 with priority 15 for User 5.
+/// taskManager.execTop(); // return 5. Executes task 105 for User 5.
+/// 
+/// Constraints:
+/// 1. 1 <= tasks.length <= 10^5
+/// 2. 0 <= userId <= 10^5
+/// 3. 0 <= taskId <= 10^5
+/// 4. 0 <= priority <= 10^9
+/// 5. 0 <= newPriority <= 10^9
+/// 6. At most 2 * 10^5 calls will be made in total to add, edit, rmv, 
+///    and execTop methods.
+/// </summary>
+class TaskManager {
+private:
+    unordered_map<int, pair<int, int>> m_tasks;
+    set<pair<int, int>> m_priorityqueue;
+public:
+    TaskManager(vector<vector<int>>& tasks) 
+    {
+        for (size_t i = 0; i < tasks.size(); i++)
+        {
+            m_tasks[tasks[i][1]] = make_pair(tasks[i][0], tasks[i][2]);
+            m_priorityqueue.insert(make_pair(tasks[i][2], tasks[i][1]));
+        }
+    }
+
+    void add(int userId, int taskId, int priority) 
+    {
+        m_tasks[taskId] = make_pair(userId, priority);
+        m_priorityqueue.insert(make_pair(priority, taskId));
+
+    }
+
+    void edit(int taskId, int newPriority) 
+    {
+        m_priorityqueue.erase(make_pair(m_tasks[taskId].second, taskId));
+        m_priorityqueue.insert(make_pair(newPriority, taskId));
+        m_tasks[taskId].second = newPriority;
+    }
+
+    void rmv(int taskId) 
+    {
+        m_priorityqueue.erase(make_pair(m_tasks[taskId].second, taskId));
+        m_tasks.erase(taskId);
+    }
+
+    int execTop() 
+    {
+        if (m_priorityqueue.empty())
+        {
+            return -1;
+        }
+        pair<int, int> task = *m_priorityqueue.rbegin();
+        int result = m_tasks[task.second].first;
+        m_priorityqueue.erase(task);
+        m_tasks.erase(task.second);
+        return result;
+    }
+};
 
 #endif // LeetcodeDesign_H

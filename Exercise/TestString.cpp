@@ -7529,8 +7529,46 @@ void TestLeetCode3406(void)
     Logger::WriteMessage("word = " + word + "; numFriends = " + to_string(numFriends) + "; result = " + result);
 }
 
+void TestLeetCode3407(void)
+{
+    Logger::WriteMessage("Test Leet Code 3407");
+    LeetCodeString leetCode;
+    string  s = "leetcode", p = "ee*e";
+    bool result = leetCode.hasMatch(s, p);
+    Logger::WriteMessage("s = " + s + "; p = " + p + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "car", p = "c*v";
+    result = leetCode.hasMatch(s, p);
+    Logger::WriteMessage("s = " + s + "; p = " + p + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "luck", p = "u*";
+    result = leetCode.hasMatch(s, p);
+    Logger::WriteMessage("s = " + s + "; p = " + p + "; result = " + (string)(result ? "true" : "false"));
+
+    s = "mlmww", p = "ml*wl";
+    result = leetCode.hasMatch(s, p);
+    Logger::WriteMessage("s = " + s + "; p = " + p + "; result = " + (string)(result ? "true" : "false"));
+}
+
+
+void TestLeetCode3412(void)
+{
+    Logger::WriteMessage("Test Leet Code 3412");
+    LeetCodeString leetCode;
+    string  s = "aczzx";
+    long long result = leetCode.calculateScore(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "abcdef";
+    result = leetCode.calculateScore(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3412();
+    TestLeetCode3407();
+    TestLeetCode3406();
     TestLeetCode3403();
     TestLeetCode3389();
     TestLeetCode3365();

@@ -4160,8 +4160,34 @@ void TestLeetCode3397(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3409(void)
+{
+    Logger::WriteMessage("Test Leet Code 3409");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 16, 6, 3 };
+    int result = leetCode.longestSubsequence(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,5,3,4,2,1 };
+    result = leetCode.longestSubsequence(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10, 20, 10, 19, 10, 20 };
+    result = leetCode.longestSubsequence(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10, 10, 10, 19, 10, 20 };
+    result = leetCode.longestSubsequence(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3409();
     TestLeetCode3397();
     TestLeetCode3375();
     TestLeetCode3321();
