@@ -1058,8 +1058,56 @@ void TestLeetCode3359(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3431(void)
+{
+    Logger::WriteMessage("Test Leet Code 3431");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 1, 2, 1, 2, 3, 2 }; 
+    vector<int> locked = { 1, 0, 1, 1, 0, 1 };
+    int result = leetCode.minUnlockedIndices(nums, locked);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(locked);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 2, 1, 1, 3, 2, 2 };
+    locked = { 1, 0, 1, 1, 0, 1, 0 };
+    result = leetCode.minUnlockedIndices(nums, locked);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(locked);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 2, 1, 2, 3, 2, 1 };
+    locked = { 0, 0, 0, 0, 0, 0, 0 };
+    result = leetCode.minUnlockedIndices(nums, locked);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(locked);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode3430(void)
+{
+    Logger::WriteMessage("Test Leet Code 3430");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    int k = 2;
+    long long result = leetCode.minMaxSubarraySum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1, -3, 1};
+    k = 2;
+    result = leetCode.minMaxSubarraySum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode3430();
+    TestLeetCode3431();
     TestLeetCode3359();
     TestLeetCode3282();
     TestLeetCode3221();

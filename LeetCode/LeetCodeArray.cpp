@@ -35565,3 +35565,285 @@ vector<int> LeetCodeArray::zigzagTraversal(vector<vector<int>>& grid)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3423. Maximum Difference Between Adjacent Elements in a 
+///                 Circular Array
+///   
+/// Easy
+///
+/// Given a circular array nums, find the maximum absolute difference 
+/// between adjacent elements.
+///
+/// Note: In a circular array, the first and last elements are adjacent.
+///
+/// Example 1:
+/// Input: nums = [1,2,4]
+/// Output: 3
+/// Explanation:
+/// Because nums is circular, nums[0] and nums[2] are adjacent. They have 
+/// the maximum absolute difference of |4 - 1| = 3.
+///
+/// Example 2:
+/// Input: nums = [-5,-10,-5]
+/// Output: 5
+/// Explanation:
+/// The adjacent elements nums[0] and nums[1] have the maximum absolute 
+/// difference of |-5 - (-10)| = 5.
+///
+/// Constraints:
+/// 1. 2 <= nums.length <= 100
+/// 2. -100 <= nums[i] <= 100
+/// </summary>
+int LeetCodeArray::maxAdjacentDistance(vector<int>& nums)
+{
+    int result = 0;
+    int n = nums.size();
+    for (int i = 0; i < n; i++)
+    {
+        result = max(result, std::abs(nums[i] - nums[(i + 1) % n]));
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3427. Sum of Variable Length Subarrays 
+///   
+/// Easy
+///
+/// You are given an integer array nums of size n. For each index i where 
+/// 0 <= i < n, define a subarray nums[start ... i] where 
+/// start = max(0, i - nums[i]).
+///
+/// Return the total sum of all elements from the subarray defined for 
+/// each index in the array.
+///
+/// Example 1:
+/// Input: nums = [2,3,1]
+/// Output: 11
+/// Explanation:
+/// i   Subarray    Sum
+/// 0   nums[0] = [2]   2
+/// 1   nums[0 ... 1] = [2, 3]  5
+/// 2   nums[1 ... 2] = [3, 1]  4
+/// Total Sum       11
+/// The total sum is 11. Hence, 11 is the output.
+///
+/// Example 2:
+/// Input: nums = [3,1,1,2]
+/// Output: 13
+/// Explanation:
+/// i   Subarray    Sum
+/// 0   nums[0] = [3]   3
+/// 1   nums[0 ... 1] = [3, 1]  4
+/// 2   nums[1 ... 2] = [1, 1]  2
+/// 3   nums[1 ... 3] = [1, 1, 2]   4
+/// Total Sum       13
+/// The total sum is 13. Hence, 13 is the output.
+///
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 100
+/// 2. 1 <= nums[i] <= 1000
+/// </summary>
+int LeetCodeArray::subarraySum(vector<int>& nums)
+{
+    int n = nums.size();
+    vector<int> sum(nums.size());
+    for (int i = 0; i < n; i++)
+    {
+        sum[i] = nums[i];
+        if (i > 0) sum[i] += sum[i - 1];
+    }
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        int prev_index = i - nums[i] - 1;
+        if (prev_index < 0)
+        {
+            result += sum[i];
+        }
+        else
+        {
+            result += sum[i] - sum[prev_index];
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3424. Minimum Cost to Make Arrays Identical
+///   
+/// Medium
+///
+/// You are given two integer arrays arr and brr of length n, and an 
+/// integer k. You can perform the following operations on arr any 
+/// number of times:
+///
+/// Split arr into any number of contiguous subarrays and rearrange 
+/// these subarrays in any order. This operation has a fixed cost of k.
+/// Choose any element in arr and add or subtract a positive integer x 
+/// to it. The cost of this operation is x.
+///
+/// Return the minimum total cost to make arr equal to brr.
+///
+/// Example 1:
+/// Input: arr = [-7,9,5], brr = [7,-2,-5], k = 2
+/// Output: 13
+/// Explanation:
+/// Split arr into two contiguous subarrays: [-7] and [9, 5] and rearrange 
+/// them as [9, 5, -7], with a cost of 2.
+/// Subtract 2 from element arr[0]. The array becomes [7, 5, -7]. The cost 
+/// of this operation is 2.
+/// Subtract 7 from element arr[1]. The array becomes [7, -2, -7]. The 
+/// cost of this operation is 7.
+/// Add 2 to element arr[2]. The array becomes [7, -2, -5]. The cost of 
+/// this operation is 2.
+/// The total cost to make the arrays equal is 2 + 2 + 7 + 2 = 13.
+///
+/// Example 2:
+/// Input: arr = [2,1], brr = [2,1], k = 0
+/// Output: 0
+/// Explanation:
+/// Since the arrays are already equal, no operations are needed, and the 
+/// total cost is 0.
+/// 
+/// Constraints:
+/// 1. 1 <= arr.length == brr.length <= 10^5
+/// 2. 0 <= k <= 2 * 10^10
+/// 3. -10^5 <= arr[i] <= 10^5
+/// 4. -10^5 <= brr[i] <= 10^5
+/// </summary>
+long long LeetCodeArray::minCost(vector<int>& arr, vector<int>& brr, long long k)
+{
+    long long cost1 = 0;
+    long long cost2 = k;
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        cost1 += abs(arr[i] - brr[i]);
+    }
+    sort(arr.begin(), arr.end());
+    sort(brr.begin(), brr.end());
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        cost2 += abs(arr[i] - brr[i]);
+    }
+    return min(cost1, cost2);
+}
+
+
+/// <summary>
+/// Leet Code 3432. Count Partitions with Even Sum Difference
+///   
+/// Easy
+///
+/// You are given an integer array nums of length n.
+///
+/// A partition is defined as an index i where 0 <= i < n - 1, splitting 
+/// the array into two non-empty subarrays such that:
+///
+/// Left subarray contains indices [0, i].
+/// Right subarray contains indices [i + 1, n - 1].
+/// Return the number of partitions where the difference between the sum 
+/// of the left and right subarrays is even.
+///
+/// Example 1:
+/// Input: nums = [10,10,3,7,6]
+/// Output: 4
+///
+/// Explanation:
+/// The 4 partitions are:
+/// [10], [10, 3, 7, 6] with a sum difference of 10 - 26 = -16, which is 
+/// even.
+/// [10, 10], [3, 7, 6] with a sum difference of 20 - 16 = 4, which is 
+/// even.
+/// [10, 10, 3], [7, 6] with a sum difference of 23 - 13 = 10, which is 
+/// even.
+/// [10, 10, 3, 7], [6] with a sum difference of 30 - 6 = 24, which is 
+/// even.
+///
+/// Example 2:
+/// Input: nums = [1,2,2]
+/// Output: 0
+/// Explanation:
+/// No partition results in an even sum difference.
+///
+/// Example 3:
+/// Input: nums = [2,4,6,8]
+/// Output: 3
+/// Explanation:
+/// All partitions result in an even sum difference.
+///   
+/// Constraints:
+/// 1. 2 <= n == nums.length <= 100
+/// 2. 1 <= nums[i] <= 100
+/// </summary>
+int LeetCodeArray::countPartitions(vector<int>& nums)
+{
+    int sum = 0, result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        sum += nums[i];
+    }
+    if (sum % 2 == 0) result = nums.size() - 1;
+    else result = 0;
+
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3434. Maximum Frequency After Subarray Operation
+///   
+/// Medium
+///
+/// You are given an array nums of length n. You are also given an 
+/// integer k.
+/// You perform the following operation on nums once:
+/// Select a subarray nums[i..j] where 0 <= i <= j <= n - 1.
+/// Select an integer x and add x to all the elements in nums[i..j].
+/// Find the maximum frequency of the value k after the operation.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,4,5,6], k = 1
+/// Output: 2
+/// Explanation:
+/// After adding -5 to nums[2..5], 1 has a frequency of 2 in 
+/// [1, 2, -2, -1, 0, 1].
+///
+/// Example 2:
+/// Input: nums = [10,2,3,4,5,5,4,3,2,2], k = 10
+/// Output: 4
+/// Explanation:
+/// After adding 8 to nums[1..9], 10 has a frequency of 4 in [10, 10, 11, 
+/// 12, 13, 13, 12, 11, 10, 10].
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 50
+/// 3. 1 <= k <= 50
+/// </summary>
+int LeetCodeArray::maxFrequencyIII(vector<int>& nums, int k)
+{
+    int freq_k = 0;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] == k) freq_k++;
+    }
+    for (int i = 1; i <= 50; i++)
+    {
+        int freq = 0;
+        if (i == k) continue;
+        for (size_t j = 0; j < nums.size(); j++)
+        {
+            if (nums[j] == i) freq++;
+            else if (nums[j] == k) freq--;
+            if (freq < 0)
+            {
+                freq = 0;
+            }
+            result = max(result, freq_k + freq);
+        }
+    }
+
+    return result;
+}

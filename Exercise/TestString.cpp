@@ -7564,8 +7564,55 @@ void TestLeetCode3412(void)
     Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
 }
 
+void TestLeetCode3433(void)
+{
+    Logger::WriteMessage("Test Leet Code 3433");
+    LeetCodeString leetCode;
+    int numberOfUsers = 2;
+    vector<vector<string>> events =
+    {
+        {"MESSAGE", "10", "id1 id0"},{"OFFLINE", "11", "0"},{"MESSAGE", "71", "HERE"}
+    };
+    vector<int> result = leetCode.countMentions(numberOfUsers, events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(numberOfUsers));
+    Logger::WriteMessage(result);
+
+    numberOfUsers = 2;
+    events =
+    {
+        {"MESSAGE","10","id1 id0"} ,{"OFFLINE","11","0"},{"MESSAGE","12","ALL"}
+    };
+    result = leetCode.countMentions(numberOfUsers, events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(numberOfUsers));
+    Logger::WriteMessage(result);
+
+
+    numberOfUsers = 2;
+    events =
+    {
+        {"OFFLINE","10","0"},{"MESSAGE","12","HERE"}
+    };
+    result = leetCode.countMentions(numberOfUsers, events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(numberOfUsers));
+    Logger::WriteMessage(result);
+
+    numberOfUsers = 3;
+    events =
+    {
+        {"MESSAGE", "2", "HERE"} ,{"OFFLINE", "2", "1"},{"OFFLINE", "1", "0"},{"MESSAGE", "61", "HERE"}
+    };
+    result = leetCode.countMentions(numberOfUsers, events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(numberOfUsers));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3433();
     TestLeetCode3412();
     TestLeetCode3407();
     TestLeetCode3406();

@@ -11134,8 +11134,101 @@ void TestLeetCode3417(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3423(void)
+{
+    Logger::WriteMessage("Test Leet Code 3423");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 4 };
+    int result = leetCode.maxAdjacentDistance(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -5,-10,-5 };
+    result = leetCode.maxAdjacentDistance(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3427(void)
+{
+    Logger::WriteMessage("Test Leet Code 3427");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 3, 1 };
+    int result = leetCode.subarraySum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,1,1,2 };
+    result = leetCode.subarraySum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3424(void)
+{
+    Logger::WriteMessage("Test Leet Code 3424");
+    LeetCodeArray leetCode;
+    vector<int> arr = { -7, 9, 5 };
+    vector<int> brr = { 7, -2, -5 };
+    long long k = 2;
+    long long result = leetCode.minCost(arr, brr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(brr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    arr = { 2, 1 };
+    brr = { 2, 1 };
+    k = 0;
+    result = leetCode.minCost(arr, brr, k);
+    Logger::WriteMessage(arr);
+    Logger::WriteMessage(brr);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3442(void)
+{
+    Logger::WriteMessage("Test Leet Code 3442");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 10, 10, 3, 7, 6 };
+    int result = leetCode.countPartitions(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 2, 2 };
+    result = leetCode.countPartitions(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,4,6,8 };
+    result = leetCode.countPartitions(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3434(void)
+{
+    Logger::WriteMessage("Test Leet Code 3434");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,2,3,4,5,6 };
+    int k = 1;
+    int result = leetCode.maxFrequencyIII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 10,2,3,4,5,5,4,3,2,2 };
+    k = 10;
+    result = leetCode.maxFrequencyIII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3434();
+    TestLeetCode3442();
+    TestLeetCode3424();
+    TestLeetCode3427();
+    TestLeetCode3423();
     TestLeetCode3417();
     TestLeetCode3410();
     TestLeetCode3404();

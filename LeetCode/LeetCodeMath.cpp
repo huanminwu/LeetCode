@@ -24951,5 +24951,146 @@ int LeetCodeMath::maxLength(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3428. Maximum and Minimum Sums of at Most Size K Subsequences
+///   
+/// Medium
+///
+/// You are given an integer array nums and a positive integer k. Return 
+/// the sum of the maximum and minimum elements of all subsequences of 
+/// nums with at most k elements.
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+///  
+/// Example 1:
+/// Input: nums = [1,2,3], k = 2
+/// Output: 24
+/// Explanation:
+/// The subsequences of nums with at most 2 elements are:
+/// Subsequence	Minimum	Maximum	Sum
+/// [1]	1	1	2
+/// [2]	2	2	4
+/// [3]	3	3	6
+/// [1, 2]	1	2	3
+/// [1, 3]	1	3	4
+/// [2, 3]	2	3	5
+/// Final Total	 	 	24
+/// The output would be 24.
+///
+/// Example 2:
+/// Input: nums = [5,0,6], k = 1
+/// Output: 22
+/// Explanation:
+/// For subsequences with exactly 1 element, the minimum and maximum 
+/// values are the element itself. Therefore, the total 
+/// is 5 + 5 + 0 + 0 + 6 + 6 = 22.
+///
+/// Example 3:
+/// Input: nums = [1,1,1], k = 2
+/// Output: 12
+/// Explanation:
+/// The subsequences [1, 1] and [1] each appear 3 times. For all of them, 
+/// the minimum and maximum are both 1. Thus, the total is 12.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^9
+/// 3. 1 <= k <= min(70, nums.length)
+/// </summary>
+int LeetCodeMath::minMaxSums(vector<int>& nums, int k)
+{
+    int M = 1000000007;
+    int n = nums.size();
+    vector<vector<int>> pascal(n, vector<int>(k));
+    vector<int> sum(n);
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < k && j <= i; j++)
+        {
+            if (j == 0) pascal[i][j] = 1;
+            else
+            {
+                pascal[i][j] = (pascal[i - 1][j] + pascal[i-1][j - 1]) % M;
+            }
+            sum[i] = (sum[i] + pascal[i][j]) % M;
+        }
+    }
+    sort(nums.begin(), nums.end());
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        result = (result + (long long)nums[i] * sum[n - 1 - i] % M) % M;
+        result = (result + (long long)nums[n-1-i] * sum[n - 1 - i] % M) % M;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3426. Manhattan Distances of All Arrangements of Pieces
+///   
+/// Hard
+///
+/// You are given three integers m, n, and k.
+///
+/// There is a rectangular grid of size m × n containing k identical 
+/// pieces. Return the sum of Manhattan distances between every pair 
+/// of pieces over all valid arrangements of pieces.
+///
+/// A valid arrangement is a placement of all k pieces on the grid 
+/// with at most one piece per cell.
+///
+/// Since the answer may be very large, return it modulo 109 + 7.
+///
+/// The Manhattan Distance between two cells (xi, yi) and (xj, yj) is 
+/// |xi - xj| + |yi - yj|.
+///
+/// Example 1:
+/// Input: m = 2, n = 2, k = 2
+/// Output: 8
+///
+/// Explanation:
+/// The valid arrangements of pieces on the board are:
+/// 
+/// In the first 4 arrangements, the Manhattan distance between the two 
+/// pieces is 1.
+/// In the last 2 arrangements, the Manhattan distance between the two 
+/// pieces is 2.
+/// Thus, the total Manhattan distance across all valid arrangements 
+/// is 1 + 1 + 1 + 1 + 2 + 2 = 8.
+///
+/// Example 2:
+/// Input: m = 1, n = 4, k = 3
+/// Output: 20
+///
+/// Explanation:
+/// The valid arrangements of pieces on the board are:
+/// The first and last arrangements have a total Manhattan distance of 
+/// 1 + 1 + 2 = 4.
+/// The middle two arrangements have a total Manhattan distance of 
+/// 1 + 2 + 3 = 6.
+/// The total Manhattan distance between all pairs of pieces across all 
+/// arrangements is 4 + 6 + 6 + 4 = 20.
+///
+/// Constraints:
+/// 1. 1 <= m, n <= 10^5
+/// 2. 2 <= m * n <= 10^5
+/// 3. 2 <= k <= m * n
+/// </summary>
+int LeetCodeMath::distanceSum(int m, int n, int k)
+{
+    long long M = 1000000007;
+    long long result = 0;
+    for (int d = 1; d < m; d++)
+    {
+        result = (result + (long long)d * (m - d) % M * n % M * n % M)%M;
+    }
+    for (int d = 1; d < n; d++)
+    {
+        result = (result + (long long)d * (n - d) % M * m % M * m % M)%M;
+    }
+    return (int)(result * combination(m * n - 2, k - 2, M) % M);
+}
+
 #pragma endregion
 

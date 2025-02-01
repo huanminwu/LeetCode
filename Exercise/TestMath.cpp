@@ -7591,8 +7591,54 @@ void TestLeetCode3411(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3428(void)
+{
+    Logger::WriteMessage("Test Leet Code 3428");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    int k = 2;
+    int result = leetCode.minMaxSums(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 5,0,6 };
+    k = 1;
+    result = leetCode.minMaxSums(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+    
+    nums = { 1, 1, 1 };
+    k = 2;
+    result = leetCode.minMaxSums(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1, 2, 3 };
+    k = 3;
+    result = leetCode.minMaxSums(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3426(void)
+{
+    Logger::WriteMessage("Test Leet Code 3426");
+    LeetCodeMath leetCode;
+    int m = 2, n = 2, k = 2;
+    int result = leetCode.distanceSum(m, n, k);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    m = 1, n = 4, k = 3;
+    result = leetCode.distanceSum(m, n, k);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3426();
+    TestLeetCode3428();
     TestLeetCode3405();
     TestLeetCode3380();
     TestLeetCode3360();

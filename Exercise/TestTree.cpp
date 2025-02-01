@@ -4225,8 +4225,35 @@ void TestLeetCode3367(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3425(void)
+{
+    Logger::WriteMessage("Test Leet Code 3425");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = { {0, 1, 2},{1, 2, 3},{1, 3, 5},{1, 4, 4},{2, 5, 6} };
+    vector<int> nums = { 2, 1, 2, 1, 3, 1 };
+    vector<int> result = leetCode.longestSpecialPath(edges, nums);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    edges = { {1, 0, 8} };
+    nums = { 2, 2 };
+    result = leetCode.longestSpecialPath(edges, nums);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    edges = { {1, 0, 5},{0, 2, 10} };
+    nums = { 3,3,5 };
+    result = leetCode.longestSpecialPath(edges, nums);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3425();
     TestLeetCode3367();
     TestLeetCode3373();
     TestLeetCode3372();

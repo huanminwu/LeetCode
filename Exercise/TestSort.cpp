@@ -4185,8 +4185,26 @@ void TestLeetCode3409(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3422(void)
+{
+    Logger::WriteMessage("Test Leet Code 3422");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 4, -3, 2, 1, -4, 6 };
+    int k = 3;
+    long long result = leetCode.minOperationsIV(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { -2,-2,3,1,4 };
+    k = 2;
+    result = leetCode.minOperationsIV(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3422();
     TestLeetCode3409();
     TestLeetCode3397();
     TestLeetCode3375();

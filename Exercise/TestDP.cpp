@@ -5717,8 +5717,28 @@ void TestLeetCode3418(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3429(void)
+{
+    Logger::WriteMessage("Test Leet Code 3429");
+    LeetCodeDP leetCode;
+    int n = 4;
+    vector<vector<int>> cost = { {3, 5, 7},{6, 2, 9},{4, 8, 1},{7, 3, 5} };
+    long long result = leetCode.minCostIV(n, cost);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 6; 
+    cost = { {2, 4, 6},{5, 3, 8},{7, 1, 9},{4, 6, 2},{3, 5, 7},{8, 2, 4} };
+    result = leetCode.minCostIV(n, cost);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3429();
     TestLeetCode3418();
     TestLeetCode3414();
     TestLeetCode3393();

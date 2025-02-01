@@ -3935,4 +3935,214 @@ long long LeetCodeStack::countNonDecreasingSubarrays(vector<int>& nums, int k)
     }
     return result;
 }
+
+
+/// <summary>
+/// Leet Code 3431. Minimum Unlocked Indices to Sort Nums
+///   
+/// Medium
+/// You are given an array nums consisting of integers between 1 and 3, 
+/// and a binary array locked of the same size.
+///
+/// We consider nums sortable if it can be sorted using adjacent swaps, 
+/// where a swap between two indices i and i + 1 is allowed if 
+/// nums[i] - nums[i + 1] == 1 and locked[i] == 0.
+///
+/// In one operation, you can unlock any index i by setting locked[i] to 0.
+///
+/// Return the minimum number of operations needed to make nums sortable. 
+/// If it is not possible to make nums sortable, return -1.
+///
+/// Example 1:
+/// Input: nums = [1,2,1,2,3,2], locked = [1,0,1,1,0,1]
+/// Output: 0
+/// Explanation:
+/// We can sort nums using the following swaps:
+/// swap indices 1 with 2
+/// swap indices 4 with 5
+/// So, there is no need to unlock any index.
+/// 
+/// Example 2:
+/// Input: nums = [1,2,1,1,3,2,2], locked = [1,0,1,1,0,1,0]
+/// Output: 2
+/// Explanation:
+/// If we unlock indices 2 and 5, we can sort nums using the following 
+/// swaps:
+///
+/// swap indices 1 with 2
+/// swap indices 2 with 3
+/// swap indices 4 with 5
+/// swap indices 5 with 6
+///
+/// Example 3:
+/// Input: nums = [1,2,1,2,3,2,1], locked = [0,0,0,0,0,0,0]
+/// Output: -1
+/// Explanation:
+/// Even if all indices are unlocked, it can be shown that nums is not 
+/// sortable.
+///  
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 3
+/// 3. locked.length == nums.length
+/// 4. 0 <= locked[i] <= 1
+/// </summary>
+int LeetCodeStack::minUnlockedIndices(vector<int>& nums, vector<int>& locked)
+{
+    stack<pair<int, int>> stack;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        pair<int, int> curr = make_pair(nums[i], locked[i]);
+        while (!stack.empty())
+        {
+            if (stack.top().first - curr.first == 2)
+            {
+                return -1;
+            }
+            else if (stack.top().first - curr.first == 1)
+            {
+                result += stack.top().second;
+                curr.first = stack.top().first;
+                stack.pop();
+            }
+            else if (stack.top().first - curr.first == 0)
+            {
+                curr.second += stack.top().second;
+                stack.pop();
+            }
+            else
+            {
+                break;
+            }
+        }
+        stack.push(curr);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3430. Maximum and Minimum Sums of at Most Size K Subarrays
+///   
+/// Hard
+///
+/// You are given an integer array nums and a positive integer k. Return 
+/// the sum of the maximum and minimum elements of all subarrays with at 
+/// most k elements.
+///
+/// Example 1:
+/// Input: nums = [1,2,3], k = 2
+/// Output: 20
+/// Explanation:
+/// The subarrays of nums with at most 2 elements are:
+/// Subarray    Minimum Maximum Sum
+/// [1] 1   1   2
+/// [2] 2   2   4
+/// [3] 3   3   6
+/// [1, 2]  1   2   3
+/// [2, 3]  2   3   5
+/// Final Total         20
+/// The output would be 20.
+///
+/// Example 2:
+/// Input: nums = [1,-3,1], k = 2
+/// Output: -6
+/// Explanation:
+/// The subarrays of nums with at most 2 elements are:
+/// Subarray    Minimum Maximum Sum
+/// [1] 1   1   2
+/// [-3]    -3  -3  -6
+/// [1] 1   1   2
+/// [1, -3] -3  1   -2
+/// [-3, 1] -3  1   -2
+/// Final Total         -6
+/// The output would be -6.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 80000
+/// 2. 1 <= k <= nums.length
+/// 3. -10^6 <= nums[i] <= 10^6
+/// </summary>
+long long LeetCodeStack::minMaxSubarraySum(vector<int>& nums, int k)
+{
+    long long result = 0, min_sum = 0, max_sum = 0;
+    deque<pair<int, int>> min_deque, max_deque;
+    for (int i = 0; i < (int)nums.size(); i++)
+    {
+        pair<int, int> curr = make_pair(nums[i], 1);
+        while (true)
+        {
+            if (min_deque.empty())
+            {
+                min_deque.push_back(curr);
+                break;
+            }
+            else if (min_deque.back().first < nums[i])
+            {
+                min_deque.push_back(curr);
+                break;
+            }
+            else if (min_deque.back().first == nums[i])
+            {
+                min_deque.back().second += curr.second;
+                break;
+            }
+            else
+            {
+                curr.second += min_deque.back().second;
+                min_sum -= (long long)min_deque.back().first * (long long)min_deque.back().second;
+                min_deque.pop_back();
+            }
+        }
+        if (i >= k)
+        {
+            min_sum -= min_deque.front().first;
+            min_deque.front().second--;
+            if (min_deque.front().second == 0)
+            {
+                min_deque.pop_front();
+            }
+        }
+        min_sum += (long long)curr.first * (long long)curr.second;
+
+        curr = make_pair(nums[i], 1);
+        while (true)
+        {
+            if (max_deque.empty())
+            {
+                max_deque.push_back(curr);
+                break;
+            }
+            else if (max_deque.back().first > nums[i])
+            {
+                max_deque.push_back(curr);
+                break;
+            }
+            else if (max_deque.back().first == nums[i])
+            {
+                max_deque.back().second += curr.second;
+                break;
+            }
+            else
+            {
+                curr.second += max_deque.back().second;
+                max_sum -= (long long)max_deque.back().first * (long long)max_deque.back().second;
+                max_deque.pop_back();
+            }
+        }
+        if (i >= k)
+        {
+            max_sum -= max_deque.front().first;
+            max_deque.front().second--;
+            if (max_deque.front().second == 0)
+            {
+                max_deque.pop_front();
+            }
+        }
+        max_sum += (long long)curr.first * (long long)curr.second;
+
+        result += min_sum + max_sum;
+    }
+    return result;
+}
 #pragma endregion
