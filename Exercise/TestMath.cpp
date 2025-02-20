@@ -7635,8 +7635,108 @@ void TestLeetCode3426(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3444(void)
+{
+    Logger::WriteMessage("Test Leet Code 3444");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    vector<int> target = { 4 };
+    int result = leetCode.minimumIncrements(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 8,4 };
+    target = { 10,5 };
+    result = leetCode.minimumIncrements(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7,9,10 };
+    target = { 7 };
+    result = leetCode.minimumIncrements(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5, 10, 7, 2 };
+    target = { 4,6,4,9 };
+    result = leetCode.minimumIncrements(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3448(void)
+{
+    Logger::WriteMessage("Test Leet Code 3448");
+    LeetCodeMath leetCode;
+    string s = "12936";
+    long long result = leetCode.countSubstrings(s);
+    Logger::WriteMessage("result = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+     s = "5701283";
+    result = leetCode.countSubstrings(s);
+    Logger::WriteMessage("result = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "1010101010";
+    result = leetCode.countSubstrings(s);
+    Logger::WriteMessage("result = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3447(void)
+{
+    Logger::WriteMessage("Test Leet Code 3447");
+    LeetCodeMath leetCode;
+    vector<int> groups = { 8, 4, 3, 2, 4 };
+    vector<int> elements = { 4, 2 };
+    vector<int> result = leetCode.assignElements(groups, elements);
+    Logger::WriteMessage(groups);
+    Logger::WriteMessage(elements);
+    Logger::WriteMessage(result);
+
+    groups = { 2,3,5,7 };
+    elements = { 5,3,3 };
+    result = leetCode.assignElements(groups, elements);
+    Logger::WriteMessage(groups);
+    Logger::WriteMessage(elements);
+    Logger::WriteMessage(result);
+
+    groups = { 10,21,30,41 };
+    elements = { 2,1 };
+    result = leetCode.assignElements(groups, elements);
+    Logger::WriteMessage(groups);
+    Logger::WriteMessage(elements);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3443(void)
+{
+    Logger::WriteMessage("Test Leet Code 3443");
+    LeetCodeMath leetCode;
+    string s = "NWSE";
+    int k = 1;
+    int result = leetCode.maxDistance(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "NSWWEW";
+    k = 3;
+    result = leetCode.maxDistance(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3443();
+    TestLeetCode3447();
+    TestLeetCode3448();
+    TestLeetCode3444();
     TestLeetCode3426();
     TestLeetCode3428();
     TestLeetCode3405();

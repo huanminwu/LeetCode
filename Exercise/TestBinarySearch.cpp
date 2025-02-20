@@ -1544,8 +1544,48 @@ void TestLeetCode3399(void)
     Logger::WriteMessage("s = " + s + "; numOps = " + to_string(numOps) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3453(void)
+{
+    Logger::WriteMessage("Test Leet Code 3453");
+    LeetCodeBinarySearch leetCode;
+    vector<vector<int>> squares = { {0, 0, 1},{2, 2, 1} };
+    double result = leetCode.separateSquares(squares);
+    Logger::WriteMessage(squares);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    squares = { {0, 0, 2},{1, 1, 1} };
+    result = leetCode.separateSquares(squares);
+    Logger::WriteMessage(squares);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3449(void)
+{
+    Logger::WriteMessage("Test Leet Code 3449");
+    LeetCodeBinarySearch leetCode;
+    vector<int> points = { 2, 4 };
+    int m = 3;
+    long long result = leetCode.maxScore(points, m);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
+
+    points = { 1,2,3 };
+    m = 5;
+    result = leetCode.maxScore(points, m);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
+
+    points = { 1, 24, 2 };
+    m = 25;
+    result = leetCode.maxScore(points, m);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode3449();
+    TestLeetCode3453();
     TestLeetCode3399();
     TestLeetCode3398();
     TestLeetCode3357();

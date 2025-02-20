@@ -2436,9 +2436,30 @@ void TestLeetCode3376(void)
     Logger::WriteMessage("K = " + to_string(K) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3437(void)
+{
+    Logger::WriteMessage("Test Leet Code 3437");
+    LeetCodeDFS leetCode;
+    int n = 4;
+    vector<vector<int>> result = leetCode.permuteIII(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 2;
+    result = leetCode.permuteIII(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 3;
+    result = leetCode.permuteIII(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
 
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3437();
     TestLeetCode3376();
     TestLeetCode3272();
     TestLeetCode3211();

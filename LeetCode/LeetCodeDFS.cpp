@@ -10069,6 +10069,67 @@ int LeetCodeDFS::findMinimumTime(vector<int>& strength, int K)
     return findMinimumTime(strength, factors, cache, 0, 0);
 }
 
+/// <summary>
+/// Leet Code 3437. Permutations III
+/// </summary>
+void LeetCodeDFS::permuteIII(int n, vector<int>& visited, vector<int>& path, vector<vector<int>>& result)
+{
+    if (path.size() == n)
+    {
+        result.push_back(path);
+        return;
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        if (visited[i] == 1) continue;
+        if (path.empty() || path.back() % 2 != i % 2)
+        {
+            visited[i] = 1;
+            path.push_back(i);
+            permuteIII(n, visited, path, result);
+            path.pop_back();
+            visited[i] = 0;
+        }
+    }
+}
+
+
+/// <summary>
+/// Leet Code 3437. Permutations III
+///   
+/// Medium
+/// 
+/// Given an integer n, an alternating permutation is a permutation of the 
+/// first n positive integers such that no two adjacent elements are both 
+/// odd or both even.
+///
+/// Return all such alternating permutations sorted in lexicographical 
+/// order.
+/// 
+/// Example 1:
+/// Input: n = 4
+/// Output: [[1,2,3,4],[1,4,3,2],[2,1,4,3],[2,3,4,1],[3,2,1,4],[3,4,1,2],
+/// [4,1,2,3],[4,3,2,1]]
+///
+/// Example 2:
+/// Input: n = 2
+/// Output: [[1,2],[2,1]]
+///
+/// Example 3:
+/// Input: n = 3
+/// Output: [[1,2,3],[3,2,1]]
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 10
+/// </summary>
+vector<vector<int>> LeetCodeDFS::permuteIII(int n)
+{
+    vector<vector<int>> result;
+    vector<int> visited(n + 1), path;
+    permuteIII(n, visited, path, result);
+    return result;
+}
+
 #pragma endregion
 
 

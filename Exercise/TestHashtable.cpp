@@ -2064,8 +2064,34 @@ void TestLeetCode3289(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3450(void)
+{
+    Logger::WriteMessage("Test Leet Code 3450");
+    LeetCodeHashtable leetCode;
+    vector<vector<int>> students = { {1, 2},{2, 2},{3, 3},{1, 3},{2, 3} };
+    int result = leetCode.maxStudentsOnBench(students);
+    Logger::WriteMessage(students);
+    Logger::WriteMessage("result = "  + to_string(result));
+
+    students = { {1, 1},{2, 1},{3, 1},{4, 2},{5, 2} };
+    result = leetCode.maxStudentsOnBench(students);
+    Logger::WriteMessage(students);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    students = { {1, 1},{1, 1} };
+    result = leetCode.maxStudentsOnBench(students);
+    Logger::WriteMessage(students);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    students = { };
+    result = leetCode.maxStudentsOnBench(students);
+    Logger::WriteMessage(students);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3450();
     TestLeetCode3289();
     TestLeetCode3185();
     TestLeetCode3184();

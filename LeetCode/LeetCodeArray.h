@@ -22895,5 +22895,193 @@ public:
     /// 3. 1 <= k <= 50
     /// </summary>
     int maxFrequencyIII(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3445. Maximum Difference Between Even and Odd Frequency II
+    ///   
+    /// Hard
+    /// 
+    /// You are given a string s and an integer k. Your task is to find the 
+    /// maximum difference between the frequency of two characters, 
+    /// freq[a] - freq[b], in a substring subs of s, such that:
+    /// subs has a size of at least k.
+    /// Character a has an odd frequency in subs.
+    /// Character b has an even frequency in subs.
+    /// Return the maximum difference.
+    ///
+    /// Note that subs can contain more than 2 distinct characters.
+    /// 
+    /// Example 1:
+    /// Input: s = "12233", k = 4
+    /// Output: -1
+    /// Explanation:
+    /// For the substring "12233", the frequency of '1' is 1 and the frequency 
+    /// of '3' is 2. The difference is 1 - 2 = -1.
+    ///
+    /// Example 2:
+    /// Input: s = "1122211", k = 3
+    /// Output: 1
+    /// Explanation:
+    /// For the substring "11222", the frequency of '2' is 3 and the frequency 
+    /// of '1' is 2. The difference is 3 - 2 = 1.
+    ///
+    /// Example 3:
+    /// Input: s = "110", k = 3
+    /// Output: -1
+    /// 
+    /// Constraints:
+    /// 1. 3 <= s.length <= 3 * 104
+    /// 2. s consists only of digits '0' to '4'.
+    /// 3. The input is generated that at least one substring has a character 
+    ///    with an even frequency and a character with an odd frequency.
+    /// 4. 1 <= k <= s.length
+    /// </summary>
+    int maxDifference(string s, int k);
+
+    /// <summary>
+    /// Leet Code 3452. Sum of Good Numbers
+    ///   
+    /// Easy
+    ///
+    /// Given an array of integers nums and an integer k, an element nums[i] is 
+    /// considered good if it is strictly greater than the elements at indices 
+    /// i - k and i + k (if those indices exist). If neither of these indices 
+    /// exists, nums[i] is still considered good.
+    ///
+    /// Return the sum of all the good elements in the array.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,3,2,1,5,4], k = 2
+    /// Output: 12
+    /// Explanation:
+    /// The good numbers are nums[1] = 3, nums[4] = 5, and nums[5] = 4 because 
+    /// they are strictly greater than the numbers at indices i - k and i + k.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,1], k = 1
+    /// Output: 2
+    /// Explanation:
+    /// The only good number is nums[0] = 2 because it is strictly greater than 
+    /// nums[1].
+    ///  
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 1000
+    /// 3. 1 <= k <= floor(nums.length / 2)
+    /// </summary>
+    int sumOfGoodNumbers(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3446. Sort Matrix by Diagonals
+    ///   
+    /// Medium
+    /// 
+    /// You are given an n x n square matrix of integers grid. Return the matrix 
+    /// such that:
+    ///
+    /// The diagonals in the bottom-left triangle (including the middle diagonal) 
+    /// are sorted in non-increasing order.
+    /// The diagonals in the top-right triangle are sorted in non-decreasing order.
+    /// 
+    /// Example 1:
+    /// Input: grid = [[1,7,3],[9,8,2],[4,5,6]]
+    /// Output: [[8,2,3],[9,6,7],[4,5,1]]
+    /// Explanation:
+    /// 
+    /// The diagonals with a black arrow (bottom-left triangle) should be sorted 
+    /// in non-increasing order:
+    ///
+    /// [1, 8, 6] becomes [8, 6, 1].
+    /// [9, 5] and [4] remain unchanged.
+    /// The diagonals with a blue arrow (top-right triangle) should be sorted in 
+    /// non-decreasing order:
+    /// [7, 2] becomes [2, 7].
+    /// [3] remains unchanged.
+    ///
+    /// Example 2:
+    /// Input: grid = [[0,1],[1,2]]
+    /// Output: [[2,1],[1,0]]
+    /// Explanation:
+    /// The diagonals with a black arrow must be non-increasing, so [0, 2] is 
+    /// changed to [2, 0]. The other diagonals are already in the correct order.
+    ///
+    /// Example 3:
+    /// Input: grid = [[1]]
+    /// Output: [[1]]
+    /// Explanation:
+    /// Diagonals with exactly one element are already in order, so no changes 
+    /// are needed.
+    ///
+    /// Constraints:
+    /// 1. grid.length == grid[i].length == n
+    /// 2. 1 <= n <= 10
+    /// 3. -10^5 <= grid[i][j] <= 10^5
+    /// </summary>
+    vector<vector<int>> sortMatrix(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 3459. Length of Longest V-Shaped Diagonal Segment
+    /// </summary>
+    void lenOfVDiagonal(vector<vector<int>>& grid, vector<vector<vector<int>>>&dimension, 
+        int direction, int row, int column);
+
+    /// <summary>
+    /// Leet Code 3459. Length of Longest V-Shaped Diagonal Segment
+    ///   
+    /// Hard
+    /// 
+    /// You are given a 2D integer matrix grid of size n x m, where each element 
+    /// is either 0, 1, or 2.
+    ///
+    /// A V-shaped diagonal segment is defined as:
+    /// The segment starts with 1.
+    /// The subsequent elements follow this infinite sequence: 2, 0, 2, 0, ....
+    /// The segment:
+    /// Starts along a diagonal direction (top-left to bottom-right, bottom-right 
+    /// to top-left, top-right to bottom-left, or bottom-left to top-right).
+    /// Continues the sequence in the same diagonal direction.
+    /// Makes at most one clockwise 90-degree turn to another diagonal direction 
+    /// while maintaining the sequence.
+    ///
+    /// Return the length of the longest V-shaped diagonal segment. If no valid 
+    /// segment exists, return 0.
+    ///
+    /// Example 1:
+    /// Input: grid = [[2,2,1,2,2],[2,0,2,2,0],[2,0,1,1,0],[1,0,2,2,2],[2,0,0,2,2]]
+    /// Output: 5
+    /// Explanation:
+    /// The longest V-shaped diagonal segment has a length of 5 and follows these 
+    /// coordinates: (0,2) → (1,3) → (2,4), takes a 90-degree clockwise turn at 
+    /// (2,4), and continues as (3,3) → (4,2).
+    ///
+    /// Example 2:
+    /// Input: grid = [[2,2,2,2,2],[2,0,2,2,0],[2,0,1,1,0],[1,0,2,2,2],[2,0,0,2,2]]
+    /// Output: 4
+    /// Explanation:
+    /// The longest V-shaped diagonal segment has a length of 4 and follows these 
+    /// coordinates: (2,3) → (3,2), takes a 90-degree clockwise turn at (3,2), and 
+    /// continues as (2,1) → (1,0).
+    ///
+    /// Example 3:
+    /// Input: grid = [[1,2,2,2,2],[2,2,2,2,0],[2,0,0,0,0],[0,0,2,2,2],[2,0,0,2,0]]
+    /// Output: 5
+    /// Explanation:
+    /// The longest V-shaped diagonal segment has a length of 5 and follows these 
+    /// coordinates: (0,0) → (1,1) → (2,2) → (3,3) → (4,4).
+    ///
+    /// Example 4:
+    /// Input: grid = [[1]]
+    /// Output: 1
+    /// Explanation:
+    /// The longest V-shaped diagonal segment has a length of 1 and follows these 
+    /// coordinates: (0,0).
+    /// 
+    /// Constraints:
+    /// 1. n == grid.length
+    /// 2. m == grid[i].length
+    /// 3. 1 <= n, m <= 500
+    /// 4. grid[i][j] is either 0, 1 or 2.
+    /// </summary>
+    int lenOfVDiagonal(vector<vector<int>>& grid);
 };
 #endif  // LeetCodeArray_H

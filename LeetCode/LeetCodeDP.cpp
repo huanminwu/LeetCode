@@ -20505,5 +20505,130 @@ long long LeetCodeDP::minCostIV(int n, vector<vector<int>>& cost)
     }
     return result;
 }
+
+
+/// <summary>
+/// Leet Code 3441. Minimum Cost Good Caption
+///   
+/// Hard
+/// 
+/// You are given a string caption of length n. A good caption is a string 
+/// where every character appears in groups of at least 3 consecutive 
+/// occurrences.
+///
+/// For example:
+/// "aaabbb" and "aaaaccc" are good captions.
+/// "aabbb" and "ccccd" are not good captions.
+/// You can perform the following operation any number of times:
+///
+/// Choose an index i (where 0 <= i < n) and change the character at that 
+/// index to either:
+///
+/// The character immediately before it in the alphabet 
+/// (if caption[i] != 'a').
+/// The character immediately after it in the alphabet 
+/// (if caption[i] != 'z').
+/// Your task is to convert the given caption into a good caption using 
+/// the minimum number of operations, and return it. If there are multiple 
+/// possible good captions, return the lexicographically smallest one 
+/// among them. If it is impossible to create a good caption, return an 
+/// empty string "".
+///
+/// Example 1:
+/// Input: caption = "cdcd"
+/// Output: "cccc"
+/// Explanation:
+/// It can be shown that the given caption cannot be transformed into a 
+/// good caption with fewer than 2 operations. The possible good captions 
+/// that can be created using exactly 2 operations are:
+///
+/// "dddd": Change caption[0] and caption[2] to their next character 'd'.
+/// "cccc": Change caption[1] and caption[3] to their previous character 
+/// 'c'.
+/// Since "cccc" is lexicographically smaller than "dddd", return "cccc".
+///
+/// Example 2:
+/// Input: caption = "aca"
+/// Output: "aaa"
+/// Explanation:
+/// It can be proven that the given caption requires at least 2 operations 
+/// to be transformed into a good caption. The only good caption that can 
+/// be obtained with exactly 2 operations is as follows:
+///
+/// Operation 1: Change caption[1] to 'b'. caption = "aba".
+/// Operation 2: Change caption[1] to 'a'. caption = "aaa".
+/// Thus, return "aaa".
+///
+/// Example 3:
+/// Input: caption = "bc"
+/// Output: ""
+/// Explanation:
+/// It can be shown that the given caption cannot be converted to a good 
+/// caption by using any number of operations.
+/// 
+/// Constraints:
+/// 1. 1 <= caption.length <= 5 * 10^4
+/// 2. caption consists only of lowercase English letters.
+/// </summary>
+string LeetCodeDP::minCostGoodCaption(string caption)
+{
+    int n = caption.size();
+    pair<int, char> dp[50001][26][4];
+    const pair<int, char> GOOD = { 0, '#' };
+    const pair<int, char> BAD = { -1, '#' };
+    if (n < 3) return "";
+    for (char last = 0; last < 26; last++) 
+    {
+        for (int cnt = 0; cnt <= 3; cnt++) 
+        {
+            // Base case
+            dp[n][last][cnt] = (cnt >= 3) ? GOOD : BAD;
+        }
+    }
+    for (int i = n - 1; i >= 0; i--) 
+    {
+        int captionChar = (caption[i] - 'a');
+        for (char last = 0; last < 26; last++) 
+        {
+            for (int cnt = 0; cnt <= 3; cnt++) 
+            {
+                char bestChar = '#';
+                int bestCost = -1;
+                for (int ch = 0; ch < 26; ch++) 
+                {
+                    int changeCost = abs(captionChar - ch);
+                    // if there was a previous char and its consecutive ends at cnt < 3, continue;
+                    if (1 <= cnt && cnt < 3 && ch != last) continue;
+                    int nextCnt = min(3, 1 + (ch == last) * cnt);
+
+                    pair<int, char> res = dp[i + 1][ch][nextCnt];
+                    if (res.first == -1) continue; // invalid
+                    // if haven't found any, or this is better
+                    if (bestCost == -1 || changeCost + res.first < bestCost) 
+                    {
+                        bestCost = changeCost + res.first;
+                        bestChar = ch;
+                    }
+                }
+                dp[i][last][cnt] = { bestCost, bestChar };
+            }
+        }
+    }
+    string result(n, '0');
+    pair<int, char> curr = dp[0][0][0];
+    int cnt = 0;
+    for (int i = 0; i < n; i++) 
+    {
+        result[i] = curr.second;
+        if (i != n - 1) 
+        {
+            int nextCnt = min(3, 1 + (i > 0 && result[i] == result[i - 1]) * cnt);
+            cnt = nextCnt;
+            curr = dp[i + 1][result[i]][nextCnt];
+        }
+    }
+    for (char& c : result) c += 'a';
+    return result;
+}
 #pragma endregion
 

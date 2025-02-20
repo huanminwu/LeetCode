@@ -15757,5 +15757,193 @@ public:
     /// 3. 2 <= k <= m * n
     /// </summary>
     int distanceSum(int m, int n, int k);
+
+
+    /// <summary>
+    /// Leet Code 3444. Minimum Increments for Target Multiples in an Array
+    ///   
+    /// Hard
+    /// 
+    /// You are given two arrays, nums and target.
+    /// 
+    /// In a single operation, you may increment any element of nums by 1.
+    ///
+    /// Return the minimum number of operations required so that each element 
+    /// in target has at least one multiple in nums.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,2,3], target = [4]
+    /// Output: 1
+    /// Explanation:
+    /// The minimum number of operations required to satisfy the condition is 1.
+    ///
+    /// Increment 3 to 4 with just one operation, making 4 a multiple of itself.
+    ///
+    /// Example 2:
+    /// Input: nums = [8,4], target = [10,5]
+    /// Output: 2
+    /// Explanation:
+    /// The minimum number of operations required to satisfy the condition is 2.
+    /// Increment 8 to 10 with 2 operations, making 10 a multiple of both 5 and
+    /// 10.
+    ///
+    /// Example 3:
+    /// Input: nums = [7,9,10], target = [7]
+    /// Explanation:
+    /// Target 7 already has a multiple in nums, so no additional operations are 
+    /// needed.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 5 * 10^4
+    /// 2. 1 <= target.length <= 4
+    /// 3. target.length <= nums.length
+    /// 4. 1 <= nums[i], target[i] <= 10^4
+    /// </summary>
+    int minimumIncrements(vector<int>& nums, vector<int>& target);
+
+    /// <summary>
+    /// Leet Code 3448. Count Substrings Divisible By Last Digit
+    ///   
+    /// Hard
+    ///
+    /// You are given a string s consisting of digits.
+    /// Return the number of substrings of s divisible by their non-zero last 
+    /// digit.
+    /// 
+    /// Note: A substring may contain leading zeros.
+    ///
+    /// Example 1:
+    /// Input: s = "12936"
+    /// Output: 11
+    /// Explanation:
+    /// Substrings "29", "129", "293" and "2936" are not divisible by their last 
+    /// digit. There are 15 substrings in total, so the answer is 15 - 4 = 11.
+    ///
+    /// Example 2:
+    /// Input: s = "5701283"
+    /// Output: 18
+    /// Explanation:
+    /// Substrings "01", "12", "701", "012", "128", "5701", "7012", "0128", 
+    /// "57012", "70128", "570128", and "701283" are all divisible by their last 
+    /// digit. Additionally, all substrings that are just 1 non-zero digit are 
+    /// divisible by themselves. Since there are 6 such digits, the answer is 
+    /// 12 + 6 = 18.
+    ///
+    /// Example 3:
+    /// Input: s = "1010101010"
+    /// Output: 25
+    /// Explanation:
+    /// Only substrings that end with digit '1' are divisible by their last digit. 
+    /// There are 25 such substrings.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s consists of digits only.
+    /// </summary>
+    long long countSubstrings(string s);
+
+    /// <summary>
+    /// Leet Code 3447. Assign Elements to Groups with Constraints
+    ///   
+    /// Medium
+    /// 
+    /// You are given an integer array groups, where groups[i] represents the size 
+    /// of the ith group. You are also given an integer array elements.
+    ///
+    /// Your task is to assign one element to each group based on the following 
+    /// rules:
+    ///
+    /// An element j can be assigned to a group i if groups[i] is divisible by 
+    /// elements[j].
+    /// If there are multiple elements that can be assigned, assign the element 
+    /// with the smallest index j.
+    /// If no element satisfies the condition for a group, assign -1 to that group.
+    /// Return an integer array assigned, where assigned[i] is the index of the 
+    /// element chosen for group i, or -1 if no suitable element exists.
+    ///
+    /// Note: An element may be assigned to more than one group.
+    /// 
+    /// Example 1:
+    /// Input: groups = [8,4,3,2,4], elements = [4,2]
+    /// Output: [0,0,-1,1,0]
+    /// Explanation:
+    /// elements[0] = 4 is assigned to groups 0, 1, and 4.
+    /// elements[1] = 2 is assigned to group 3.
+    /// Group 2 cannot be assigned any element.
+    ///
+    /// Example 2:
+    /// Input: groups = [2,3,5,7], elements = [5,3,3]
+    /// Output: [-1,1,0,-1]
+    /// Explanation:
+    /// elements[1] = 3 is assigned to group 1.
+    /// elements[0] = 5 is assigned to group 2.
+    /// Groups 0 and 3 cannot be assigned any element.
+    ///
+    /// Example 3:
+    /// Input: groups = [10,21,30,41], elements = [2,1]
+    /// Output: [0,1,0,1]
+    /// Explanation:
+    /// elements[0] = 2 is assigned to the groups with even values, and 
+    /// elements[1] = 1 is assigned to the groups with odd values.
+    ///
+    /// Constraints:
+    /// 1. 1 <= groups.length <= 10^5
+    /// 2. 1 <= elements.length <= 10^5
+    /// 3. 1 <= groups[i] <= 10^5
+    /// 4. 1 <= elements[i] <= 10^5
+    /// </summary>
+    vector<int> assignElements(vector<int>& groups, vector<int>& elements);
+
+    /// <summary>
+    /// Leet Code 3443. Maximum Manhattan Distance After K Changes
+    ///   
+    /// Medium
+    /// 
+    /// You are given a string s consisting of the characters 'N', 'S', 'E', and 
+    /// 'W', where s[i] indicates movements in an infinite grid:
+    ///
+    /// 'N' : Move north by 1 unit.
+    /// 'S' : Move south by 1 unit.
+    /// 'E' : Move east by 1 unit.
+    /// 'W' : Move west by 1 unit.
+    /// Initially, you are at the origin (0, 0). You can change at most k 
+    /// characters to any of the four directions.
+    ///
+    /// Find the maximum Manhattan distance from the origin that can be achieved 
+    /// at any time while performing the movements in order.
+    ///
+    /// The Manhattan Distance between two cells (xi, yi) and (xj, yj) is 
+    /// |xi - xj| + |yi - yj|.
+    /// 
+    /// Example 1:
+    /// Input: s = "NWSE", k = 1
+    /// Output: 3
+    /// Explanation:
+    /// Change s[2] from 'S' to 'N'. The string s becomes "NWNE".
+    ///
+    /// Movement    Position (x, y) Manhattan Distance  Maximum
+    /// s[0] == 'N' (0, 1)  0 + 1 = 1   1
+    /// s[1] == 'W' (-1, 1) 1 + 1 = 2   2
+    /// s[2] == 'N' (-1, 2) 1 + 2 = 3   3
+    /// s[3] == 'E' (0, 2)  0 + 2 = 2   3
+    /// The maximum Manhattan distance from the origin that can be achieved is 3. 
+    /// Hence, 3 is the output.
+    ///
+    /// Example 2:
+    /// Input: s = "NSWWEW", k = 3
+    /// Output: 6
+    /// Explanation:
+    /// Change s[1] from 'S' to 'N', and s[4] from 'E' to 'W'. The string s 
+    /// becomes "NNWWWW".
+    ///
+    /// The maximum Manhattan distance from the origin that can be achieved is 6. 
+    /// Hence, 6 is the output.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. 0 <= k <= s.length
+    /// 3. s consists of only 'N', 'S', 'E', and 'W'.
+    /// </summary>
+    int maxDistance(string s, int k);
 };
 #endif

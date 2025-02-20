@@ -25092,5 +25092,313 @@ int LeetCodeMath::distanceSum(int m, int n, int k)
     return (int)(result * combination(m * n - 2, k - 2, M) % M);
 }
 
+
+/// <summary>
+/// Leet Code 3444. Minimum Increments for Target Multiples in an Array
+///   
+/// Hard
+/// 
+/// You are given two arrays, nums and target.
+/// 
+/// In a single operation, you may increment any element of nums by 1.
+///
+/// Return the minimum number of operations required so that each element 
+/// in target has at least one multiple in nums.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,3], target = [4]
+/// Output: 1
+/// Explanation:
+/// The minimum number of operations required to satisfy the condition is 1.
+///
+/// Increment 3 to 4 with just one operation, making 4 a multiple of itself.
+///
+/// Example 2:
+/// Input: nums = [8,4], target = [10,5]
+/// Output: 2
+/// Explanation:
+/// The minimum number of operations required to satisfy the condition is 2.
+/// Increment 8 to 10 with 2 operations, making 10 a multiple of both 5 and
+/// 10.
+///
+/// Example 3:
+/// Input: nums = [7,9,10], target = [7]
+/// Explanation:
+/// Target 7 already has a multiple in nums, so no additional operations are 
+/// needed.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 5 * 10^4
+/// 2. 1 <= target.length <= 4
+/// 3. target.length <= nums.length
+/// 4. 1 <= nums[i], target[i] <= 10^4
+/// </summary>
+int LeetCodeMath::minimumIncrements(vector<int>& nums, vector<int>& target)
+{
+    int n = 1 << target.size();
+    vector<long long> lcm(n);
+    for (int i = 1; i < n; i++)
+    {
+        long long product = 0;
+        for (size_t j = 0; j < target.size(); j++)
+        {
+            if (((1 << j) & i) != 0)
+            {
+                if (product == 0)
+                {
+                    product = target[j];
+                }
+                else
+                {
+                    product  = product / gcd(product, target[j]) * target[j];
+                }
+            }
+        }
+        lcm[i] = product;
+    }
+    vector<long long> curr_dp(n, LLONG_MAX);
+    curr_dp[0] = 0;
+    int curr = 0, next = 1;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        vector<long long> cost(n);
+        vector<long long> next_dp = curr_dp;
+        for (int j = 1; j < n; j++)
+        {
+            long long c = lcm[j] - (long long)nums[i] % lcm[j];
+            if (c == lcm[j]) c = 0;
+            cost[j] = c;
+        }
+        for (int j = 0; j < n; j++)
+        {
+            if (curr_dp[j] == LLONG_MAX) continue;
+            for (int k = 1; k < n; k++)
+            {
+                next_dp[j | k] = min(next_dp[j | k], curr_dp[j] + cost[k]);
+            }
+        }
+        curr_dp = next_dp;
+    }
+    if (curr_dp[n - 1] >= LLONG_MAX) return -1;
+    else return (int)curr_dp[n - 1];
+}
+
+/// <summary>
+/// Leet Code 3448. Count Substrings Divisible By Last Digit
+///   
+/// Hard
+///
+/// You are given a string s consisting of digits.
+/// Return the number of substrings of s divisible by their non-zero last 
+/// digit.
+/// 
+/// Note: A substring may contain leading zeros.
+///
+/// Example 1:
+/// Input: s = "12936"
+/// Output: 11
+/// Explanation:
+/// Substrings "29", "129", "293" and "2936" are not divisible by their last 
+/// digit. There are 15 substrings in total, so the answer is 15 - 4 = 11.
+///
+/// Example 2:
+/// Input: s = "5701283"
+/// Output: 18
+/// Explanation:
+/// Substrings "01", "12", "701", "012", "128", "5701", "7012", "0128", 
+/// "57012", "70128", "570128", and "701283" are all divisible by their last 
+/// digit. Additionally, all substrings that are just 1 non-zero digit are 
+/// divisible by themselves. Since there are 6 such digits, the answer is 
+/// 12 + 6 = 18.
+///
+/// Example 3:
+/// Input: s = "1010101010"
+/// Output: 25
+/// Explanation:
+/// Only substrings that end with digit '1' are divisible by their last digit. 
+/// There are 25 such substrings.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists of digits only.
+/// </summary>
+long long LeetCodeMath::countSubstrings(string s)
+{
+    vector<vector<int>> curr;
+    long long result = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        vector<vector<int>> next(10, vector<int>(10));
+        for (int j = 1; j < 10; j++)
+        {
+            int r = (s[i] - '0')%j;
+            next[j][r]++;
+        }
+        if (i > 0)
+        {
+            for (int j = 1; j < 10; j++)
+            {
+                for (int k = 0; k < j; k++)
+                {
+                    int r = (k * 10 + (s[i] - '0')) % j;
+                    next[j][r] += curr[j][k];
+                }
+            }
+        }
+        curr = next;
+        result += curr[s[i] - '0'][0];
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3447. Assign Elements to Groups with Constraints
+///   
+/// Medium
+/// 
+/// You are given an integer array groups, where groups[i] represents the size 
+/// of the ith group. You are also given an integer array elements.
+///
+/// Your task is to assign one element to each group based on the following 
+/// rules:
+///
+/// An element j can be assigned to a group i if groups[i] is divisible by 
+/// elements[j].
+/// If there are multiple elements that can be assigned, assign the element 
+/// with the smallest index j.
+/// If no element satisfies the condition for a group, assign -1 to that group.
+/// Return an integer array assigned, where assigned[i] is the index of the 
+/// element chosen for group i, or -1 if no suitable element exists.
+///
+/// Note: An element may be assigned to more than one group.
+/// 
+/// Example 1:
+/// Input: groups = [8,4,3,2,4], elements = [4,2]
+/// Output: [0,0,-1,1,0]
+/// Explanation:
+/// elements[0] = 4 is assigned to groups 0, 1, and 4.
+/// elements[1] = 2 is assigned to group 3.
+/// Group 2 cannot be assigned any element.
+///
+/// Example 2:
+/// Input: groups = [2,3,5,7], elements = [5,3,3]
+/// Output: [-1,1,0,-1]
+/// Explanation:
+/// elements[1] = 3 is assigned to group 1.
+/// elements[0] = 5 is assigned to group 2.
+/// Groups 0 and 3 cannot be assigned any element.
+///
+/// Example 3:
+/// Input: groups = [10,21,30,41], elements = [2,1]
+/// Output: [0,1,0,1]
+/// Explanation:
+/// elements[0] = 2 is assigned to the groups with even values, and 
+/// elements[1] = 1 is assigned to the groups with odd values.
+///
+/// Constraints:
+/// 1. 1 <= groups.length <= 10^5
+/// 2. 1 <= elements.length <= 10^5
+/// 3. 1 <= groups[i] <= 10^5
+/// 4. 1 <= elements[i] <= 10^5
+/// </summary>
+vector<int> LeetCodeMath::assignElements(vector<int>& groups, vector<int>& elements)
+{
+    unordered_map<int, int> element_list;
+    unordered_map<int, vector<int>> group_list;
+    vector<int> result(groups.size(), -1);
+    int max_val = 0;
+    for (size_t i = 0; i < groups.size(); i++)
+    {
+        group_list[groups[i]].push_back(i);
+        max_val = max(max_val, groups[i]);
+    }
+
+    for (size_t i = 0; i < elements.size(); i++)
+    {
+        if (element_list.count(elements[i]) == 0)
+        {
+            element_list[elements[i]] = i;
+            for (int j = 1; j <= max_val / elements[i]; j++)
+            {
+                if (group_list.count(j * elements[i]) > 0)
+                {
+                    for (int index : group_list[j * elements[i]])
+                    {
+                        result[index] = i;
+                    }
+                    group_list.erase(j * elements[i]);
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3443. Maximum Manhattan Distance After K Changes
+///   
+/// Medium
+/// 
+/// You are given a string s consisting of the characters 'N', 'S', 'E', and 
+/// 'W', where s[i] indicates movements in an infinite grid:
+///
+/// 'N' : Move north by 1 unit.
+/// 'S' : Move south by 1 unit.
+/// 'E' : Move east by 1 unit.
+/// 'W' : Move west by 1 unit.
+/// Initially, you are at the origin (0, 0). You can change at most k 
+/// characters to any of the four directions.
+///
+/// Find the maximum Manhattan distance from the origin that can be achieved 
+/// at any time while performing the movements in order.
+///
+/// The Manhattan Distance between two cells (xi, yi) and (xj, yj) is 
+/// |xi - xj| + |yi - yj|.
+/// 
+/// Example 1:
+/// Input: s = "NWSE", k = 1
+/// Output: 3
+/// Explanation:
+/// Change s[2] from 'S' to 'N'. The string s becomes "NWNE".
+///
+/// Movement    Position (x, y) Manhattan Distance  Maximum
+/// s[0] == 'N' (0, 1)  0 + 1 = 1   1
+/// s[1] == 'W' (-1, 1) 1 + 1 = 2   2
+/// s[2] == 'N' (-1, 2) 1 + 2 = 3   3
+/// s[3] == 'E' (0, 2)  0 + 2 = 2   3
+/// The maximum Manhattan distance from the origin that can be achieved is 3. 
+/// Hence, 3 is the output.
+///
+/// Example 2:
+/// Input: s = "NSWWEW", k = 3
+/// Output: 6
+/// Explanation:
+/// Change s[1] from 'S' to 'N', and s[4] from 'E' to 'W'. The string s 
+/// becomes "NNWWWW".
+///
+/// The maximum Manhattan distance from the origin that can be achieved is 6. 
+/// Hence, 6 is the output.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. 0 <= k <= s.length
+/// 3. s consists of only 'N', 'S', 'E', and 'W'.
+/// </summary>
+int LeetCodeMath::maxDistance(string s, int k)
+{
+    int north = 0, south = 0, east = 0, west = 0;
+    int result = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == 'N') north++;
+        else if (s[i] == 'S') south++;
+        else if (s[i] == 'E') east++;
+        else if (s[i] == 'W') west++;
+        int delta = min(north, south) + min(east, west);
+        delta = min(delta, k);
+        result = max(result, abs(north - south) + abs(east - west) + 2 * delta);
+    }
+    return result;
+}
 #pragma endregion
 

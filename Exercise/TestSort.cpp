@@ -4202,8 +4202,24 @@ void TestLeetCode3422(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3457(void)
+{
+    Logger::WriteMessage("Test Leet Code 3457");
+    LeetCodeSort leetCode;
+    vector<int> pizzas = { 1, 2, 3, 4, 5, 6, 7, 8 };
+    long long result = leetCode.maxWeight(pizzas);
+    Logger::WriteMessage(pizzas);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    pizzas = { 2,1,1,1,1,1,1,1 };
+    result = leetCode.maxWeight(pizzas);
+    Logger::WriteMessage(pizzas);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3457();
     TestLeetCode3422();
     TestLeetCode3409();
     TestLeetCode3397();

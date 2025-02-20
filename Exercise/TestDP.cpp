@@ -5736,8 +5736,46 @@ void TestLeetCode3429(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3441(void)
+{
+    Logger::WriteMessage("Test Leet Code 3441");
+    LeetCodeDP leetCode;
+    string caption = "abc";
+    string result = leetCode.minCostGoodCaption(caption);
+    Logger::WriteMessage("caption = " + caption);
+    Logger::WriteMessage("result = " + result);
+
+
+    caption = "cdcd";
+    result = leetCode.minCostGoodCaption(caption);
+    Logger::WriteMessage("caption = " + caption);
+    Logger::WriteMessage("result = " + result);
+
+    caption = "aca";
+    result = leetCode.minCostGoodCaption(caption);
+    Logger::WriteMessage("caption = " + caption);
+    Logger::WriteMessage("result = " + result);
+
+    caption = "bc";
+    result = leetCode.minCostGoodCaption(caption);
+    Logger::WriteMessage("caption = " + caption);
+    Logger::WriteMessage("result = " + result);
+
+    caption = "owsjeo";
+    result = leetCode.minCostGoodCaption(caption);
+    Logger::WriteMessage("caption = " + caption);
+    Logger::WriteMessage("result = " + result);
+
+    caption = "antwfdps";
+    result = leetCode.minCostGoodCaption(caption);
+    Logger::WriteMessage("caption = " + caption);
+    Logger::WriteMessage("result = " + result);
+    
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3441();
     TestLeetCode3429();
     TestLeetCode3418();
     TestLeetCode3414();

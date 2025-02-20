@@ -2037,11 +2037,96 @@ void TestLeetCode3413(void)
     result = leetCode.maximumCoins(coins, k);
     Logger::WriteMessage(coins);
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
 
+void TestLeetCode3439(void)
+{
+    Logger::WriteMessage("Test Leet Code 3439");
+    LeetCodeGreedy leetCode;
+    int eventTime = 5, k = 1;
+    vector<int> startTime = { 1, 3 };
+    vector<int> endTime = { 2, 5 };
+    int result = leetCode.maxFreeTimeI(eventTime, k, startTime, endTime);
+    Logger::WriteMessage("eventTime = " + to_string(eventTime) + "; k = " + to_string(k));
+    Logger::WriteMessage(startTime);
+    Logger::WriteMessage(endTime);
+    Logger::WriteMessage("result = " + to_string(result));
+
+
+    eventTime = 10, k = 1;
+    startTime = { 0, 2, 9 };
+    endTime = { 1, 4, 10 };
+    result = leetCode.maxFreeTimeI(eventTime, k, startTime, endTime);
+    Logger::WriteMessage("eventTime = " + to_string(eventTime) + "; k = " + to_string(k));
+    Logger::WriteMessage(startTime);
+    Logger::WriteMessage(endTime);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    eventTime = 5, k = 2;
+    startTime = { 0,1,2,3,4 };
+    endTime = { 1,2,3,4,5 };
+    result = leetCode.maxFreeTimeI(eventTime, k, startTime, endTime);
+    Logger::WriteMessage("eventTime = " + to_string(eventTime) + "; k = " + to_string(k));
+    Logger::WriteMessage(startTime);
+    Logger::WriteMessage(endTime);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3440(void)
+{
+    Logger::WriteMessage("Test Leet Code 3440");
+    LeetCodeGreedy leetCode;
+    int eventTime = 5;
+    vector<int> startTime = { 1, 3 };
+    vector<int> endTime = { 2, 5 };
+    int result = leetCode.maxFreeTimeII(eventTime,startTime, endTime);
+    Logger::WriteMessage("eventTime = " + to_string(eventTime));
+    Logger::WriteMessage(startTime);
+    Logger::WriteMessage(endTime);
+    Logger::WriteMessage("result = " + to_string(result));
+
+
+    eventTime = 10;
+    startTime = { 0,7,9 };
+    endTime = { 1, 8, 10 };
+    result = leetCode.maxFreeTimeII(eventTime, startTime, endTime);
+    Logger::WriteMessage("eventTime = " + to_string(eventTime));
+    Logger::WriteMessage(startTime);
+    Logger::WriteMessage(endTime);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    eventTime = 10;
+    startTime = { 0,3,7,9 };
+    endTime = { 1,4,8,10 };
+    result = leetCode.maxFreeTimeII(eventTime, startTime, endTime);
+    Logger::WriteMessage("eventTime = " + to_string(eventTime));
+    Logger::WriteMessage(startTime);
+    Logger::WriteMessage(endTime);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    eventTime = 10;
+    startTime = { 0,3,7,9 };
+    endTime = { 1,4,8,10 };
+    result = leetCode.maxFreeTimeII(eventTime, startTime, endTime);
+    Logger::WriteMessage("eventTime = " + to_string(eventTime));
+    Logger::WriteMessage(startTime);
+    Logger::WriteMessage(endTime);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    eventTime = 5;
+    startTime = { 0, 1, 2, 3, 4 };
+    endTime = { 1, 2, 3, 4, 5 };
+    result = leetCode.maxFreeTimeII(eventTime, startTime, endTime);
+    Logger::WriteMessage("eventTime = " + to_string(eventTime));
+    Logger::WriteMessage(startTime);
+    Logger::WriteMessage(endTime);
+    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode3440();
+    TestLeetCode3439();
     TestLeetCode3413();
     TestLeetCode3394();
     TestLeetCode3362();

@@ -2860,6 +2860,108 @@ public:
     /// 3. 0 <= numOps <= n
     /// </summary>
     int minLengthII(string s, int numOps);
+
+    /// <summary>
+    /// Leet Code 3453. Separate Squares I
+    ///   
+    /// Medium
+    ///
+    /// You are given a 2D integer array squares. Each squares[i] = [xi, yi, li] 
+    /// represents the coordinates of the bottom-left point and the side length 
+    /// of a square parallel to the x-axis.
+    ///
+    /// Find the minimum y-coordinate value of a horizontal line such that the 
+    /// total area of the squares above the line equals the total area of the 
+    /// squares below the line.
+    ///
+    /// Answers within 10^-5 of the actual answer will be accepted.
+    ///
+    /// Note: Squares may overlap. Overlapping areas should be counted multiple 
+    /// times.
+    /// 
+    /// 
+    /// Example 1:
+    /// Input: squares = [[0,0,1],[2,2,1]]
+    /// Output: 1.00000
+    /// Explanation:
+    /// 
+    /// Any horizontal line between y = 1 and y = 2 will have 1 square unit above 
+    /// it and 1 square unit below it. The lowest option is 1.
+    /// 
+    /// Example 2:
+    /// Input: squares = [[0,0,2],[1,1,1]]
+    /// Output: 1.16667
+    /// Explanation:
+    /// 
+    /// The areas are:
+    /// Below the line: 7/6 * 2 (Red) + 1/6 (Blue) = 15/6 = 2.5.
+    /// Above the line: 5/6 * 2 (Red) + 5/6 (Blue) = 15/6 = 2.5.
+    /// Since the areas above and below the line are equal, the output is 
+    /// 7/6 = 1.16667.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= squares.length <= 5 * 10^4
+    /// 2. squares[i] = [xi, yi, li]
+    /// 3. squares[i].length == 3
+    /// 4. 0 <= xi, yi <= 10^9
+    /// 5. 1 <= li <= 10^9
+    /// </summary>
+    double separateSquares(vector<vector<int>>& squares);
+
+    /// <summary>
+    /// Leet Code 3449. Maximize the Minimum Game Score
+    ///   
+    /// Hard
+    ///
+    /// You are given an array points of size n and an integer m. There is another 
+    /// array gameScore of size n, where gameScore[i] represents the score 
+    /// achieved at the ith game. Initially, gameScore[i] == 0 for all i.
+    ///
+    /// You start at index -1, which is outside the array (before the first 
+    /// position at index 0). You can make at most m moves. In each move, you can 
+    /// either:
+    ///
+    /// Increase the index by 1 and add points[i] to gameScore[i].
+    /// Decrease the index by 1 and add points[i] to gameScore[i].
+    /// Note that the index must always remain within the bounds of the array 
+    /// after the first move.
+    ///
+    /// Return the maximum possible minimum value in gameScore after at most m 
+    /// moves.
+    /// 
+    /// Example 1:
+    /// Input: points = [2,4], m = 3
+    /// Output: 4
+    /// Explanation:
+    /// Initially, index i = -1 and gameScore = [0, 0].
+    /// Move    Index   gameScore
+    /// Increase i  0   [2, 0]
+    /// Increase i  1   [2, 4]
+    /// Decrease i  0   [4, 4]
+    /// The minimum value in gameScore is 4, and this is the maximum possible 
+    /// minimum among all configurations. Hence, 4 is the output.
+    ///
+    /// Example 2:
+    /// Input: points = [1,2,3], m = 5
+    /// Output: 2
+    /// Explanation:
+    /// Initially, index i = -1 and gameScore = [0, 0, 0].
+    ///
+    /// Move    Index   gameScore
+    /// Increase i  0   [1, 0, 0]
+    /// Increase i  1   [1, 2, 0]
+    /// Decrease i  0   [2, 2, 0]
+    /// Increase i  1   [2, 4, 0]
+    /// Increase i  2   [2, 4, 3]
+    /// The minimum value in gameScore is 2, and this is the maximum possible 
+    /// minimum among all configurations. Hence, 2 is the output.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n == points.length <= 5 * 10^4
+    /// 2. 1 <= points[i] <= 10^6
+    /// 3. 1 <= m <= 10^9
+    /// </summary>
+    long long maxScore(vector<int>& points, int m);
 #pragma endregion
 };
 #endif  // LeetCodeBinarySearch_H
