@@ -2456,9 +2456,57 @@ void TestLeetCode3437(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3470(void)
+{
+    Logger::WriteMessage("Test Leet Code 3470");
+    LeetCodeDFS leetCode;
+    int n = 4;
+    long long k = 6;
+    vector<int> result = leetCode.permuteIV(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    n = 3;
+    k = 2;
+    result = leetCode.permuteIV(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    n = 2;
+    k = 3;
+    result = leetCode.permuteIV(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3490(void)
+{
+    Logger::WriteMessage("Test Leet Code 3490");
+    LeetCodeDFS leetCode;
+    int l = 10;
+    int r = 20;
+    int result = leetCode.beautifulNumbers(l, r);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    l = 1;
+    r = 15;
+    result = leetCode.beautifulNumbers(l, r);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r));
+    Logger::WriteMessage("result = " + to_string(result));
+
+
+    l = 1;
+    r = 100;
+    result = leetCode.beautifulNumbers(l, r);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r));
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3490();
+    TestLeetCode3470();
     TestLeetCode3437();
     TestLeetCode3376();
     TestLeetCode3272();

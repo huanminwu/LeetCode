@@ -2089,8 +2089,53 @@ void TestLeetCode3450(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3471(void)
+{
+    Logger::WriteMessage("Test Leet Code 3471");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 3, 9, 2, 1, 7 };
+    int k = 3;
+    int result = leetCode.largestInteger(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3, 9, 7, 2, 1, 7 };
+    k = 4;
+    result = leetCode.largestInteger(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 0,0 };
+    k = 1;
+    result = leetCode.largestInteger(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3487(void)
+{
+    Logger::WriteMessage("Test Leet Code 3487");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1,2,3,4,5 };
+    int result = leetCode.maxSumII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,0,1,1 };
+    result = leetCode.maxSumII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,-1,-2,1,0,-1 };
+    result = leetCode.maxSumII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3487();
+    TestLeetCode3471();
     TestLeetCode3450();
     TestLeetCode3289();
     TestLeetCode3185();

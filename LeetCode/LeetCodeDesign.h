@@ -13937,4 +13937,242 @@ public:
     }
 };
 
+/// <summary>
+/// Leet Code 3484. Design Spreadsheet
+///
+/// Medium
+///
+/// A spreadsheet is a grid with 26 columns (labeled from 'A' to 'Z') and a 
+/// given number of rows. Each cell in the spreadsheet can hold an integer 
+/// value between 0 and 10^5.
+/// Implement the Spreadsheet class:
+///
+/// Spreadsheet(int rows) Initializes a spreadsheet with 26 columns 
+/// (labeled 'A' to 'Z') and the specified number of rows. All cells are 
+/// initially set to 0.
+/// void setCell(String cell, int value) Sets the value of the specified 
+/// cell. The cell reference is provided in the format "AX" (e.g., "A1", 
+/// "B10"), where the letter represents the column (from 'A' to 'Z') and 
+/// the number represents a 1-indexed row.
+/// void resetCell(String cell) Resets the specified cell to 0.
+/// int getValue(String formula) Evaluates a formula of the form "=X+Y", 
+/// where X and Y are either cell references or non-negative integers, and 
+/// returns the computed sum.
+/// Note: If getValue references a cell that has not been explicitly set 
+/// using setCell, its value is considered 0.
+///
+/// Example 1:
+/// Input:
+/// ["Spreadsheet", "getValue", "setCell", "getValue", "setCell", 
+/// "getValue", "resetCell", "getValue"]
+/// [[3], ["=5+7"], ["A1", 10], ["=A1+6"], ["B2", 15], ["=A1+B2"], ["A1"], 
+/// ["=A1+B2"]]
+///
+/// Output:
+/// [null, 12, null, 16, null, 25, null, 15]
+///
+/// Explanation
+/// Spreadsheet spreadsheet = new Spreadsheet(3); 
+/// // Initializes a spreadsheet with 3 rows and 26 columns
+/// spreadsheet.getValue("=5+7"); // returns 12 (5+7)
+/// spreadsheet.setCell("A1", 10); // sets A1 to 10
+/// spreadsheet.getValue("=A1+6"); // returns 16 (10+6)
+/// spreadsheet.setCell("B2", 15); // sets B2 to 15
+/// spreadsheet.getValue("=A1+B2"); // returns 25 (10+15)
+/// spreadsheet.resetCell("A1"); // resets A1 to 0
+/// spreadsheet.getValue("=A1+B2"); // returns 15 (0+15)
+/// 
+/// Constraints:
+/// 1. 1 <= rows <= 10^3
+/// 2. 0 <= value <= 10^5
+/// 3. The formula is always in the format "=X+Y", where X and Y are either 
+///    valid cell references or non-negative integers with values less than 
+///    or equal to 105.
+/// 4. Each cell reference consists of a capital letter from 'A' to 'Z' 
+///    followed by a row number between 1 and rows.
+/// 5. At most 104 calls will be made in total to setCell, resetCell, and 
+///    getValue.
+/// </summary>
+class Spreadsheet 
+{
+private:
+    unordered_map<string, int> m_cells;
+public:
+    Spreadsheet(int rows) 
+    {
+
+    }
+
+    void setCell(string cell, int value) 
+    {
+        m_cells[cell] = value;
+    }
+
+    void resetCell(string cell) 
+    {
+        m_cells.erase(cell);
+    }
+
+    int getValue(string formula) 
+    {
+        int pos = formula.find('+');
+        string left = formula.substr(1, pos - 1);
+        string right = formula.substr(pos + 1);
+        int left_val = 0, right_val = 0;
+        if (isalpha(left[0]))
+        {
+            left_val = m_cells[left];
+        }
+        else
+        {
+            left_val = atoi(left.c_str());
+        }
+        if (isalpha(right[0]))
+        {
+            right_val = m_cells[right];
+        }
+        else
+        {
+            right_val = atoi(right.c_str());
+        }
+        return left_val + right_val;
+    }
+};
+
+/// <summary>
+/// Leet Code 3508. Implement Router 
+///
+/// Medium
+/// 
+/// Design a data structure that can efficiently manage data packets in a 
+/// network router. Each data packet consists of the following attributes:
+///
+/// source: A unique identifier for the machine that generated the packet.
+/// destination: A unique identifier for the target machine.
+/// timestamp: The time at which the packet arrived at the router.
+/// Implement the Router class:
+///
+/// Router(int memoryLimit): Initializes the Router object with a fixed 
+/// memory limit.
+///
+/// memoryLimit is the maximum number of packets the router can store at 
+/// any given time.
+/// If adding a new packet would exceed this limit, the oldest packet must 
+/// be removed to free up space.
+/// bool addPacket(int source, int destination, int timestamp): Adds a 
+/// packet with the given attributes to the router.
+/// A packet is considered a duplicate if another packet with the 
+/// same source, destination, and timestamp already exists in the router.
+/// Return true if the packet is successfully added (i.e., it is not a 
+/// duplicate); otherwise return false.
+/// int[] forwardPacket(): Forwards the next packet in FIFO (First In 
+/// First Out) order.
+/// Remove the packet from storage.
+/// Return the packet as an array [source, destination, timestamp].
+/// If there are no packets to forward, return an empty array.
+/// int getCount(int destination, int startTime, int endTime):
+///
+/// Returns the number of packets currently stored in the router (i.e., 
+/// not yet forwarded) that have the specified destination and have 
+/// timestamps in the inclusive range [startTime, endTime].
+/// Note that queries for addPacket will be made in increasing order of 
+/// timestamp.
+/// 
+/// Example 1:
+/// Input:
+/// ["Router", "addPacket", "addPacket", "addPacket", "addPacket", 
+/// "addPacket", "forwardPacket", "addPacket", "getCount"]
+/// [[3], [1, 4, 90], [2, 5, 90], [1, 4, 90], [3, 5, 95], [4, 5, 105],
+///  [], [5, 2, 110], [5, 100, 110]]
+///
+/// Output:
+/// [null, true, true, false, true, true, [2, 5, 90], true, 1]
+///
+/// Explanation
+/// Router router = new Router(3); // Initialize Router with memoryLimit of 3.
+/// router.addPacket(1, 4, 90); // Packet is added. Return True.
+/// router.addPacket(2, 5, 90); // Packet is added. Return True.
+/// router.addPacket(1, 4, 90); // This is a duplicate packet. Return False.
+/// router.addPacket(3, 5, 95); // Packet is added. Return True
+/// router.addPacket(4, 5, 105); // Packet is added, [1, 4, 90] is removed as 
+/// // number of packets exceeds memoryLimit. Return True.
+/// router.forwardPacket(); // Return [2, 5, 90] and remove it from router.
+/// router.addPacket(5, 2, 110); // Packet is added. Return True.
+/// router.getCount(5, 100, 110); // The only packet with destination 5 and 
+/// /// timestamp in the inclusive range [100, 110] is [4, 5, 105]. Return 1.
+///
+/// Example 2:
+/// Input:
+/// ["Router", "addPacket", "forwardPacket", "forwardPacket"]
+/// [[2], [7, 4, 90], [], []]
+/// Output:
+/// [null, true, [7, 4, 90], []]
+/// Explanation
+/// Router router = new Router(2); // Initialize Router with memoryLimit of 2.
+/// router.addPacket(7, 4, 90); // Return True.
+/// router.forwardPacket(); // Return [7, 4, 90].
+/// router.forwardPacket(); // There are no packets left, return [].
+/// Constraints:
+/// 1. 2 <= memoryLimit <= 10^5
+/// 2. 1 <= source, destination <= 2 * 10^5
+/// 3. 1 <= timestamp <= 10^9
+/// 4. 1 <= startTime <= endTime <= 10^9
+/// 5. At most 105 calls will be made to addPacket, forwardPacket, and getCount 
+///    methods altogether.
+/// 6. queries for addPacket will be made in increasing order of timestamp.
+/// </summary>
+class Router 
+{
+private:
+    size_t m_limit;
+    deque<vector<int>> m_queue;
+    unordered_map<int, deque<int>> m_destination;
+    unordered_set<string> m_keys;
+public:
+    Router(int memoryLimit) 
+    {
+        m_limit = memoryLimit;
+    }
+
+    bool addPacket(int source, int destination, int timestamp) 
+    {
+        string key = to_string(source) + '_' + to_string(destination) + '_' + to_string(timestamp);
+        if (m_keys.count(key) > 0)
+        {
+            return false;
+        }
+        m_keys.insert(key);
+        m_queue.push_back({ source, destination, timestamp });
+        if (m_queue.size() > m_limit)
+        {
+            forwardPacket();
+        }
+        m_destination[destination].push_back(timestamp);
+
+        return true;
+    }
+
+    vector<int> forwardPacket() 
+    {
+        vector<int> result;
+        if (!m_queue.empty())
+        {
+            result = m_queue.front();
+            string key = to_string(result[0]) + '_' + to_string(result[1]) + '_' + to_string(result[2]);
+            m_keys.erase(key);
+            m_destination[result[1]].pop_front();
+            m_queue.pop_front();
+        }
+        return result;
+    }
+
+    int getCount(int destination, int startTime, int endTime) 
+    {
+        auto itr1 = lower_bound(m_destination[destination].begin(), m_destination[destination].end(), startTime);
+        auto itr2 = upper_bound(m_destination[destination].begin(), m_destination[destination].end(), endTime);
+        int result = itr2 - itr1;
+        return result;
+    }
+};
+
 #endif // LeetcodeDesign_H

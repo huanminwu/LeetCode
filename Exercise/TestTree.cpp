@@ -4251,8 +4251,42 @@ void TestLeetCode3425(void)
     Logger::WriteMessage(result);
 }
 
+
+void TestLeetCode3486(void)
+{
+    Logger::WriteMessage("Test Leet Code 3486");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = 
+    { 
+        {0, 1, 1},{1, 2, 3},{1, 3, 1},
+        {2, 4, 6},{4, 7, 2},{3, 5, 2},
+        {3, 6, 5},{6, 8, 3} 
+    };
+    vector<int> nums = { 1,1,0,3,1,2,1,1,0 };
+    vector<int> result = leetCode.longestSpecialPathII(edges, nums);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    edges = { {1, 0, 3},{0, 2, 4},{0, 3, 5} };
+    nums = { 1, 1, 0, 2 };
+    result = leetCode.longestSpecialPathII(edges, nums);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    edges = { {2, 0, 6},{0, 1, 3},{1, 3, 7} };
+    nums = { 4, 1, 4, 1 };
+    result = leetCode.longestSpecialPathII(edges, nums);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3486();
     TestLeetCode3425();
     TestLeetCode3367();
     TestLeetCode3373();

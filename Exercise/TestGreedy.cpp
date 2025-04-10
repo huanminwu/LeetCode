@@ -2123,8 +2123,35 @@ void TestLeetCode3440(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3468(void)
+{
+    Logger::WriteMessage("Test Leet Code 3468");
+    LeetCodeGreedy leetCode;
+    vector<int> original = { 1, 2, 3, 4 };
+    vector<vector<int>> bounds = { {1, 2},{2, 3},{3, 4},{4, 5} };
+    int result = leetCode.countArrays(original, bounds);
+    Logger::WriteMessage(original);
+    Logger::WriteMessage(bounds);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    original = { 1,2,3,4 };
+    bounds = { {1,10} ,{2,9},{3,8},{4,7} };
+    result = leetCode.countArrays(original, bounds);
+    Logger::WriteMessage(original);
+    Logger::WriteMessage(bounds);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    original = { 1,2,1,2 };
+    bounds = { {1,1} ,{2,3},{3,3},{2,3} };
+    result = leetCode.countArrays(original, bounds);
+    Logger::WriteMessage(original);
+    Logger::WriteMessage(bounds);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode3468();
     TestLeetCode3440();
     TestLeetCode3439();
     TestLeetCode3413();

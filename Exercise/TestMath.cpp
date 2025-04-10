@@ -7731,8 +7731,119 @@ void TestLeetCode3443(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3463(void)
+{
+    Logger::WriteMessage("Test Leet Code 3463");
+    LeetCodeMath leetCode;
+    string s = "3902";
+    bool result = leetCode.hasSameDigitsII(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + (string)(result?"true":"false"));
+
+    s = "34789";
+    result = leetCode.hasSameDigitsII(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3464(void)
+{
+    Logger::WriteMessage("Test Leet Code 3464");
+    LeetCodeMath leetCode;
+    int side = 2, k = 4;
+    vector<vector<int>> points = { {0, 2},{2, 0},{2, 2},{0, 0} };
+    int result = leetCode.maxDistance(side, points, k);
+    Logger::WriteMessage("side = " + to_string(side));
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    side = 2;
+    points = { {0, 0},{1, 2},{2, 0},{2, 2},{2, 1} };
+    k = 4;   
+    result = leetCode.maxDistance(side, points, k);
+    Logger::WriteMessage("side = " + to_string(side));
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    side = 2;
+    points = { {0, 0},{0, 1},{0, 2},{1, 2},{2, 0},{2, 2},{2, 1} };
+    k = 5;
+    result = leetCode.maxDistance(side, points, k);
+    Logger::WriteMessage("side = " + to_string(side));
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3483(void)
+{
+    Logger::WriteMessage("Test Leet Code 3483");
+    LeetCodeMath leetCode;
+    vector<int> digits = { 1, 2, 3, 4 };
+    int result = leetCode.totalNumbers(digits);
+    Logger::WriteMessage(digits);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    digits = { 0,2,2 };
+    result = leetCode.totalNumbers(digits);
+    Logger::WriteMessage(digits);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    digits = { 6,6,6 };
+    result = leetCode.totalNumbers(digits);
+    Logger::WriteMessage(digits);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    digits = { 1,3,5 };
+    result = leetCode.totalNumbers(digits);
+    Logger::WriteMessage(digits);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3492(void)
+{
+    Logger::WriteMessage("Test Leet Code 3492");
+    LeetCodeMath leetCode;
+    int n = 2, w = 3, maxWeight = 15;
+    int result = leetCode.maxContainers(n, w, maxWeight);
+    Logger::WriteMessage("n = " + to_string(n) + "; w = " + to_string(w) + "; maxWeight = " + to_string(maxWeight));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3, w = 5, maxWeight = 20;
+    result = leetCode.maxContainers(n, w, maxWeight);
+    Logger::WriteMessage("n = " + to_string(n) + "; w = " + to_string(w) + "; maxWeight = " + to_string(maxWeight));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3495(void)
+{
+    Logger::WriteMessage("Test Leet Code 3495");
+    LeetCodeMath leetCode;
+    vector<vector<int>> queries = { {1, 2},{2, 4} };
+    long long result = leetCode.minOperations(queries);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    queries = { {2,6} };
+    result = leetCode.minOperations(queries);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    queries = { {1000,2000} };
+    result = leetCode.minOperations(queries);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3495();
+    TestLeetCode3492();
+    TestLeetCode3483();
+    TestLeetCode3464();
+    TestLeetCode3463();
     TestLeetCode3443();
     TestLeetCode3447();
     TestLeetCode3448();

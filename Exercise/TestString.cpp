@@ -7738,8 +7738,158 @@ void TestLeetCode3460(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3481(void)
+{
+    Logger::WriteMessage("Test Leet Code 3481");
+    LeetCodeString leetCode;
+    vector<vector<string>> replacements =
+    {
+        {"A", "abc"},{"B", "def"}
+    };
+    string text = "%A%_%B%";
+    string result = leetCode.applySubstitutions(replacements, text);
+    Logger::WriteMessage(replacements);
+    Logger::WriteMessage("text = " + text + "; result = " + result);
+
+    replacements =
+    {
+        {"A","bce"},{"B","ace"},{"C","abc%B%"}
+    };
+    text = "%A%_%B%_%C%";
+    result = leetCode.applySubstitutions(replacements, text);
+    Logger::WriteMessage(replacements);
+    Logger::WriteMessage("text = " + text + "; result = " + result);
+}
+
+void TestLeetCode3491(void)
+{
+    Logger::WriteMessage("Test Leet Code 3491");
+    LeetCodeString leetCode;
+    vector<string> numbers = { "1", "2", "4", "3" };
+    bool result = leetCode.phonePrefix(numbers);
+    Logger::WriteMessage(numbers);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    numbers = { "001","007","15","00153" };
+    result = leetCode.phonePrefix(numbers);
+    Logger::WriteMessage(numbers);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    numbers = { "034", "329", "318", "31" };
+    result = leetCode.phonePrefix(numbers);
+    Logger::WriteMessage(numbers);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3474(void)
+{
+    Logger::WriteMessage("Test Leet Code 3474");
+    LeetCodeString leetCode;
+    string str1 = "TFTF", str2 = "ab";
+    string result = leetCode.generateString(str1, str2);
+    Logger::WriteMessage("str1 = " + str1);
+    Logger::WriteMessage("str2 = " + str2);
+    Logger::WriteMessage("result = " + result);
+
+    str1 = "TFTF", str2 = "abc";
+    result = leetCode.generateString(str1, str2);
+    Logger::WriteMessage("str1 = " + str1);
+    Logger::WriteMessage("str2 = " + str2);
+    Logger::WriteMessage("result = " + result);
+
+    str1 = "F", str2 = "d";
+    result = leetCode.generateString(str1, str2);
+    Logger::WriteMessage("str1 = " + str1);
+    Logger::WriteMessage("str2 = " + str2);
+    Logger::WriteMessage("result = " + result);
+    
+    str1 = "TF";
+    str2 = "a";
+    result = leetCode.generateString(str1, str2);
+    Logger::WriteMessage("str1 = " + str1);
+    Logger::WriteMessage("str2 = " + str2);
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode3485(void)
+{
+    Logger::WriteMessage("Test Leet Code 3485");
+    LeetCodeString leetCode;
+    vector<string> words = { "jump", "run", "run", "jump", "run", "jump" };
+    int k = 2;
+    vector<int> result = leetCode.longestCommonPrefix(words, k);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    words = { "dog","racer","car" };
+    k = 2;
+    result = leetCode.longestCommonPrefix(words, k);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    words = { "jump","run","run","jump","run" };
+    k = 2;
+    result = leetCode.longestCommonPrefix(words, k);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3498(void)
+{
+    Logger::WriteMessage("Test Leet Code 3498");
+    LeetCodeString leetCode;
+    string s = "abc";
+    int result = leetCode.reverseDegree(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "zaza";
+    result = leetCode.reverseDegree(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3503(void)
+{
+    Logger::WriteMessage("Test Leet Code 3503");
+    LeetCodeString leetCode;
+    string s = "a", t = "a";
+    int result = leetCode.longestPalindromeI(s, t);
+    Logger::WriteMessage("s = " + s + "t = " + t);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "abc", t = "def";
+    result = leetCode.longestPalindromeI(s, t);
+    Logger::WriteMessage("s = " + s + "t = " + t);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "b", t = "aaaa";
+    result = leetCode.longestPalindromeI(s, t);
+    Logger::WriteMessage("s = " + s + "t = " + t);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "abcde", t = "ecdba";
+    result = leetCode.longestPalindromeI(s, t);
+    Logger::WriteMessage("s = " + s + "t = " + t);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "fwwwn", t = "asbagyfw";
+    result = leetCode.longestPalindromeI(s, t);
+    Logger::WriteMessage("s = " + s + "t = " + t);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3503();
+    TestLeetCode3498();
+    TestLeetCode3485();
+    TestLeetCode3474();
+    TestLeetCode3491();
+    TestLeetCode3481();
     TestLeetCode3460();
     TestLeetCode3458();
     TestLeetCode3456();

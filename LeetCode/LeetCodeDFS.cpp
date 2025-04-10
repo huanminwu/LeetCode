@@ -10130,6 +10130,182 @@ vector<vector<int>> LeetCodeDFS::permuteIII(int n)
     return result;
 }
 
+/// <summary>
+/// Leet Code 3470. Permutations IV
+/// </summary>
+long long LeetCodeDFS::permuteIV(int n, long long k, long long index, vector<int>& path,
+    vector<int>& visited, vector<vector<long long>>& dp, 
+    vector<int> &result)
+{
+    if (path.size() == n)
+    {
+        return 1;
+    }
+    long long count = 0;
+    for (int i = 1; i <= n; i ++)
+    {
+        if (index >= k) break;
+        if (visited[i] == 1) continue;
+        if ((path.size() > 0) && (path.back() % 2 == i % 2))
+        {
+            continue;
+        }
+        if (dp[path.size()][i % 2] != LLONG_MAX && 
+            index + dp[path.size()][i%2] < k)
+        {
+            count += dp[path.size()][i % 2];
+            index += dp[path.size()][i % 2];
+        }
+        else
+        {
+            path.push_back(i);
+            visited[i] = 1;
+            dp[path.size() - 1][i % 2] = permuteIV(n, k, index, path, visited, dp, result);
+            count += dp[path.size()-1][i % 2];
+            index += dp[path.size() - 1][i % 2];
+            if (index == k && path.size() == n)
+            {
+                for (int i = 0; i < n; i++) result.push_back(path[i]);
+            }
+            visited[i] = 0;
+            path.pop_back();
+        }
+    }
+    return count;
+}
+
+/// <summary>
+/// Leet Code 3470. Permutations IV
+///
+/// Hard
+///
+/// Given two integers, n and k, an alternating permutation is a permutation 
+/// of the first n positive integers such that no two adjacent elements are 
+/// both odd or both even.
+///
+/// Return the k-th alternating permutation sorted in lexicographical order. 
+/// If there are fewer than k valid alternating permutations, return an empty 
+/// list.
+///
+/// Example 1:
+/// Input: n = 4, k = 6
+/// Output: [3,4,1,2]
+/// Explanation:
+/// The lexicographically-sorted alternating permutations of [1, 2, 3, 4] are:
+/// [1, 2, 3, 4]
+/// [1, 4, 3, 2]
+/// [2, 1, 4, 3]
+/// [2, 3, 4, 1]
+/// [3, 2, 1, 4]
+/// [3, 4, 1, 2] ← 6th permutation
+/// [4, 1, 2, 3]
+/// [4, 3, 2, 1]
+/// Since k = 6, we return [3, 4, 1, 2].
+///
+/// Example 2:
+/// Input: n = 3, k = 2
+/// Output: [3,2,1]
+/// Explanation:
+/// The lexicographically-sorted alternating permutations of [1, 2, 3] are:
+/// [1, 2, 3]
+/// [3, 2, 1] ← 2nd permutation
+/// Since k = 2, we return [3, 2, 1].
+///
+/// Example 3:
+/// Input: n = 2, k = 3
+/// Output: []
+/// Explanation:
+/// The lexicographically-sorted alternating permutations of [1, 2] are:
+/// [1, 2]
+/// [2, 1]
+/// There are only 2 alternating permutations, but k = 3, which is out of 
+/// range. Thus, we return an empty list [].
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 100
+/// 2. 1 <= k <= 10^15
+/// </summary>
+vector<int> LeetCodeDFS::permuteIV(int n, long long k)
+{
+    vector<int> path;
+    vector<int> visited(n + 1);
+    vector<vector<long long>> dp(n, vector<long long>(2, LLONG_MAX));
+    vector<int> result;
+    permuteIV(n, k, 0, path, visited, dp, result);
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3490. Count Beautiful Numbers
+/// </summary>
+int LeetCodeDFS::beautifulNumbers(string str, int index, int is_limit, long long product, long long sum,
+    unordered_map<string, int>& cache)
+{
+    if (sum == 0) product = 1;
+    if (index == str.size())
+    {
+        if (sum != 0 && product % sum == 0) return 1;
+        else return 0;
+    }
+    string key = to_string(index) + '#' + to_string(is_limit) + '#' + to_string(product) + '#' + to_string(sum);
+    if (cache.count(key) > 0)
+    {
+        return cache[key];
+    }
+    int result = 0;
+    if (is_limit)
+    {
+        for (int i = 0; i < str[index] - '0'; i++)
+        {
+            result += beautifulNumbers(str, index + 1, 0, product * i, sum + i, cache);
+        }
+        result += beautifulNumbers(str, index + 1, 1, product * (str[index] - '0'), sum + (str[index] - '0'), cache);
+    }
+    else
+    {
+        for (int i = 0; i <= 9; i++)
+        {
+            result += beautifulNumbers(str, index + 1, 0, product * i, sum + i, cache);
+        }
+    }
+    cache[key] = result;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3490. Count Beautiful Numbers
+///
+/// Hard
+///
+/// You are given two positive integers, l and r. A positive integer is called 
+/// beautiful if the product of its digits is divisible by the sum of its 
+/// digits.
+///
+/// Return the count of beautiful numbers between l and r, inclusive.
+///
+/// Example 1:
+/// Input: l = 10, r = 20
+/// Output: 2
+/// Explanation:
+/// The beautiful numbers in the range are 10 and 20.
+/// 
+/// Example 2:
+/// Input: l = 1, r = 15
+/// Output: 10
+/// Explanation:
+/// The beautiful numbers in the range are 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10.
+///
+/// Constraints:
+/// 1. 1 <= l <= r < 10^9
+/// </summary>
+int LeetCodeDFS::beautifulNumbers(int l, int r)
+{
+    unordered_map<string, int> cache;
+    int value1 = beautifulNumbers(to_string(l - 1), 0, 1, 1, 0, cache);
+    cache.clear();
+    int value2 = beautifulNumbers(to_string(r), 0, 1, 1, 0, cache);
+    return value2 - value1;
+}
 #pragma endregion
 
 

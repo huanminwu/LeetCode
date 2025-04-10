@@ -6213,4 +6213,164 @@ int LeetCodeHashtable::maxStudentsOnBench(vector<vector<int>>& students)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3471. Find the Largest Almost Missing Integer
+///
+/// Easy
+///
+/// You are given an integer array nums and an integer k.
+///
+/// An integer x is almost missing from nums if x appears in exactly one 
+/// subarray of size k within nums.
+///
+/// Return the largest almost missing integer from nums. If no such integer 
+/// exists, return -1.
+///
+/// A subarray is a contiguous sequence of elements within an array.
+///
+/// Example 1:
+/// Input: nums = [3,9,2,1,7], k = 3
+/// Output: 7
+/// Explanation:
+///
+/// 1 appears in 2 subarrays of size 3: [9, 2, 1] and [2, 1, 7].
+/// 2 appears in 3 subarrays of size 3: [3, 9, 2], [9, 2, 1], [2, 1, 7].
+/// 3 appears in 1 subarray of size 3: [3, 9, 2].
+/// 7 appears in 1 subarray of size 3: [2, 1, 7].
+/// 9 appears in 2 subarrays of size 3: [3, 9, 2], and [9, 2, 1].
+/// We return 7 since it is the largest integer that appears in exactly one 
+/// subarray of size k.
+///
+/// Example 2:
+/// Input: nums = [3,9,7,2,1,7], k = 4
+/// Output: 3
+/// Explanation:
+/// 1 appears in 2 subarrays of size 4: [9, 7, 2, 1], [7, 2, 1, 7].
+/// 2 appears in 3 subarrays of size 4: [3, 9, 7, 2], [9, 7, 2, 1], 
+///   [7, 2, 1, 7].
+/// 3 appears in 1 subarray of size 4: [3, 9, 7, 2].
+/// 7 appears in 3 subarrays of size 4: [3, 9, 7, 2], [9, 7, 2, 1], 
+///   [7, 2, 1, 7].
+/// 9 appears in 2 subarrays of size 4: [3, 9, 7, 2], [9, 7, 2, 1].
+/// We return 3 since it is the largest and only integer that appears in 
+/// exactly one subarray of size k.
+///
+/// Example 3:
+/// Input: nums = [0,0], k = 1
+/// Output: -1
+/// Explanation:
+/// There is no integer that appears in only one subarray of size 1.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 50
+/// 2. 0 <= nums[i] <= 50
+/// 3. 1 <= k <= nums.length
+/// </summary>
+int LeetCodeHashtable::largestInteger(vector<int>& nums, int k)
+{
+    unordered_map<int, int> num_count;
+    int n = nums.size();
+    for (int i = 0; i < n; i++)
+    {
+        num_count[nums[i]]++;
+    }
+    int result = -1;
+    if (k < n && k != 1)
+    {
+        int u = nums[0];
+        if (num_count[u] > 1) u = -1;
+        int v = nums[nums.size() - 1];
+        if (num_count[v] > 1) v = -1;
+        result = max(u, v);
+    }
+    else if (k == 1)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            if (num_count[nums[i]] == 1)
+            {
+                result = max(result, nums[i]);
+            }
+        }
+    }
+    else
+    {
+        for (int i = 0; i < n; i++)
+        {
+            result = max(result, nums[i]);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3487. Maximum Unique Subarray Sum After Deletion
+///
+/// Easy
+///
+/// You are given an integer array nums.
+/// You are allowed to delete any number of elements from nums without making 
+/// it empty. After performing the deletions, select a subarray of nums such 
+/// that:
+/// All elements in the subarray are unique.
+/// The sum of the elements in the subarray is maximized.
+/// Return the maximum sum of such a subarray.
+///
+/// A subarray is a contiguous non-empty sequence of elements within an array.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,3,4,5]
+/// Output: 15
+/// Explanation:
+/// Select the entire array without deleting any element to obtain the maximum 
+/// sum.
+///
+/// Example 2:
+/// Input: nums = [1,1,0,1,1]
+/// Output: 1
+/// Explanation:
+/// Delete the element nums[0] == 1, nums[1] == 1, nums[2] == 0, and 
+/// nums[3] == 1. Select the entire array [1] to obtain the maximum sum.
+///
+/// Example 3:
+/// Input: nums = [1,2,-1,-2,1,0,-1]
+/// Output: 3
+/// Explanation:
+/// Delete the elements nums[2] == -1 and nums[3] == -2, and select the 
+/// subarray [2, 1] from [1, 2, 1, 0, -1] to obtain the maximum sum.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. -100 <= nums[i] <= 100
+/// </summary>
+int LeetCodeHashtable::maxSumII(vector<int>& nums)
+{
+    unordered_set<int> num_set;
+    int max_negative = INT_MIN;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (num_set.count(nums[i]) > 0)
+        {
+            continue;
+        }
+        num_set.insert(nums[i]);
+        if (nums[i] > 0)
+        {
+            result += nums[i];
+            max_negative = 0;
+        }
+        else
+        {
+            max_negative = max(max_negative, nums[i]);
+        }
+    }
+    if (max_negative < 0)
+    {
+        result = max_negative;
+    }
+    return result;
+}
+
 #pragma endregion

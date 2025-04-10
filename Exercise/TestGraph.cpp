@@ -6213,8 +6213,42 @@ void TestLeetCode3419(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3493(void)
+{
+    Logger::WriteMessage("Test Leet Code 3493");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> properties = { {1, 2},{1, 1},{3, 4},{4, 5},{5, 6},{7, 7} };
+    int k = 1;
+    int result = leetCode.numberOfComponents(properties, k);
+    Logger::WriteMessage(properties);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    properties = { {1, 2, 3},{2, 3, 4},{4, 3, 5} };
+    k = 2;
+    result = leetCode.numberOfComponents(properties, k);
+    Logger::WriteMessage(properties);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    properties = { {1, 1},{1, 1} }; 
+    k = 2;
+    result = leetCode.numberOfComponents(properties, k);
+    Logger::WriteMessage(properties);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    properties = { {1, 1},{2, 3},{1, 3} };
+    k = 1;
+    result = leetCode.numberOfComponents(properties, k);
+    Logger::WriteMessage(properties);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3493();
     TestLeetCode3419();
     TestLeetCode3378();
     TestLeetCode3383();

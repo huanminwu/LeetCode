@@ -20573,7 +20573,7 @@ long long LeetCodeDP::minCostIV(int n, vector<vector<int>>& cost)
 string LeetCodeDP::minCostGoodCaption(string caption)
 {
     int n = caption.size();
-    pair<int, char> dp[50001][26][4];
+    pair<int, char> dp[5001][26][4];
     const pair<int, char> GOOD = { 0, '#' };
     const pair<int, char> BAD = { -1, '#' };
     if (n < 3) return "";
@@ -20629,6 +20629,521 @@ string LeetCodeDP::minCostGoodCaption(string caption)
     }
     for (char& c : result) c += 'a';
     return result;
+}
+
+/// <summary>
+/// Leet Code 3469. Find Minimum Cost to Remove Array Elements
+/// </summary>
+int LeetCodeDP::minCostRemoveElements(int last, int index, vector<int>& nums,
+    vector<vector<int>>& dp)
+{
+    if (index == nums.size()) return nums[last];
+
+    // 2 Elements left
+    if (index == nums.size() - 1) return max(nums[last], nums[index]);
+
+    if (dp[last][index] != -1) return dp[last][index];
+
+    // Trying all 3 cases of choosing 2 elements
+    int f = max(nums[index], nums[index + 1]) + minCostRemoveElements(last, index + 2, nums, dp);
+    int s = max(nums[last], nums[index + 1]) + minCostRemoveElements(index, index + 2, nums, dp);
+    int t = max(nums[last], nums[index]) + minCostRemoveElements(index + 1, index + 2, nums, dp);
+
+    //Returning min among the 3
+    return dp[last][index] = min({ f, s, t });
+}
+
+/// <summary>
+/// Leet Code 3469. Find Minimum Cost to Remove Array Elements
+///   
+/// Medium
+///
+/// You are given an integer array nums. Your task is to remove all elements 
+/// from the array by performing one of the following operations at each 
+/// step until nums is empty:
+///
+/// Choose any two elements from the first three elements of nums and remove 
+/// them. The cost of this operation is the maximum of the two elements 
+/// removed.
+/// If fewer than three elements remain in nums, remove all the remaining 
+/// elements in a single operation. The cost of this operation is the maximum 
+/// of the remaining elements.
+/// Return the minimum cost required to remove all the elements.
+/// 
+/// Example 1:
+/// Input: nums = [6,2,8,4]
+/// Output: 12
+/// Explanation:
+/// Initially, nums = [6, 2, 8, 4].
+/// In the first operation, remove nums[0] = 6 and nums[2] = 8 with a cost of 
+/// max(6, 8) = 8. Now, nums = [2, 4].
+/// In the second operation, remove the remaining elements with a cost of 
+/// max(2, 4) = 4.
+/// The cost to remove all elements is 8 + 4 = 12. This is the minimum cost 
+/// to remove all elements in nums. Hence, the output is 12.
+///
+/// Example 2:
+/// Input: nums = [2,1,3,3]
+/// Output: 5
+/// Explanation:
+/// Initially, nums = [2, 1, 3, 3].
+/// In the first operation, remove nums[0] = 2 and nums[1] = 1 with a cost 
+/// of max(2, 1) = 2. Now, nums = [3, 3].
+/// In the second operation remove the remaining elements with a cost of 
+/// max(3, 3) = 3.
+/// The cost to remove all elements is 2 + 3 = 5. This is the minimum cost
+/// to remove all elements in nums. Hence, the output is 5.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 10^6
+/// </summary>
+int LeetCodeDP::minCostRemoveElements(vector<int>& nums)
+{
+    int n = nums.size();
+
+    // Memoization Table
+    vector<vector<int>> dp(n + 1, vector<int>(n + 1, -1));
+    return minCostRemoveElements(0, 1, nums, dp);
+}
+
+
+/// <summary>
+/// Leet Code 3466. Maximum Coin Collection 
+///
+/// Medium
+///
+/// Mario drives on a two-lane freeway with coins every mile. You are given 
+/// two integer arrays, lane1 and lane2, where the value at the ith index 
+/// represents the number of coins he gains or loses in the ith mile in that 
+/// lane.
+///
+/// If Mario is in lane 1 at mile i and lane1[i] > 0, Mario gains lane1[i] 
+/// coins.
+/// If Mario is in lane 1 at mile i and lane1[i] < 0, Mario pays a toll 
+/// and loses abs(lane1[i]) coins.
+/// The same rules apply for lane2.
+/// Mario can enter the freeway anywhere and exit anytime after traveling 
+/// at least one mile. Mario always enters the freeway on lane 1 but can 
+/// switch lanes at most 2 times.
+///
+/// A lane switch is when Mario goes from lane 1 to lane 2 or vice versa.
+///
+/// Return the maximum number of coins Mario can earn after performing at 
+/// most 2 lane switches.
+///
+/// Note: Mario can switch lanes immediately upon entering or just before 
+/// exiting the freeway.
+///
+/// Example 1:
+/// Input: lane1 = [1,-2,-10,3], lane2 = [-5,10,0,1]
+/// Output: 14
+/// Explanation:
+/// Mario drives the first mile on lane 1.
+/// He then changes to lane 2 and drives for two miles.
+/// He changes back to lane 1 for the last mile.
+/// Mario collects 1 + 10 + 0 + 3 = 14 coins.
+///
+/// Example 2:
+/// Input: lane1 = [1,-1,-1,-1], lane2 = [0,3,4,-5]
+/// Output: 8
+/// Explanation:
+/// Mario starts at mile 0 in lane 1 and drives one mile.
+/// He then changes to lane 2 and drives for two more miles. He exits the 
+/// freeway before mile 3.
+/// He collects 1 + 3 + 4 = 8 coins.
+///
+/// Example 3:
+/// Input: lane1 = [-5,-4,-3], lane2 = [-1,2,3]
+/// Output: 5
+/// Explanation:
+/// Mario enters at mile 1 and immediately switches to lane 2. He stays here 
+/// the entire way.
+/// He collects a total of 2 + 3 = 5 coins.
+///
+/// Example 4:
+/// Input: lane1 = [-3,-3,-3], lane2 = [9,-2,4]
+/// Output: 11
+/// Explanation:
+/// Mario starts at the beginning of the freeway and immediately switches to 
+/// lane 2. He stays here the whole way.
+/// He collects a total of 9 + (-2) + 4 = 11 coins.
+///
+/// Example 5:
+///
+/// Input: lane1 = [-10], lane2 = [-2]
+/// Output: -2
+/// Explanation:
+/// Since Mario must ride on the freeway for at least one mile, he rides just 
+/// one mile in lane 2.
+/// He collects a total of -2 coins.
+/// 
+/// Constraints:
+/// 1. 1 <= lane1.length == lane2.length <= 10^5
+/// 2. -10^9 <= lane1[i], lane2[i] <= 10^9
+/// </summary>
+long long LeetCodeDP::maxCoins(vector<int>& lane1, vector<int>& lane2)
+{
+    int n = lane1.size();
+    vector<vector<int>> lanes(2, vector<int>(n));
+    lanes[0] = lane1;
+    lanes[1] = lane2;
+    vector<vector<vector<long long>>> dp(2, vector<vector<long long>>(n, vector<long long>(3)));
+    long long result = LLONG_MIN;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < 2; j++)
+        {
+            for (int k = 0; k < 3; k++)
+            {
+                if ((i == 0 && k > 0) || (i == 1 && k > 1)) continue;
+                if (j == 1 && k == 2) continue;
+                if (i == 0)
+                {
+                    dp[j][i][0] = lanes[j][i];
+                }
+                else
+                {
+                    dp[j][i][k] = max((long long)0, dp[j][i - 1][k]) + lanes[j][i];
+                    if (k > 0)
+                    {
+                        dp[j][i][k] = max(dp[j][i][k], dp[1 - j][i-1][k - 1] + lanes[j][i]);
+                    }
+                }
+                result = max(result, dp[j][i][k]);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3472. Longest Palindromic Subsequence After at Most K Operations
+///
+/// Medium
+///
+/// You are given a string s and an integer k.
+/// 
+/// In one operation, you can replace the character at any position with the 
+/// next or previous letter in the alphabet (wrapping around so that 'a' is 
+/// after 'z'). For example, replacing 'a' with the next letter results in 
+/// 'b', and replacing 'a' with the previous letter results in 'z'. Similarly, 
+/// replacing 'z' with the next letter results in 'a', and replacing 'z' with 
+/// the previous letter results in 'y'.
+///
+/// Return the length of the longest palindromic subsequence of s that can be 
+/// obtained after performing at most k operations.
+///
+/// Example 1:
+/// Input: s = "abced", k = 2
+/// Output: 3
+/// Explanation:
+/// Replace s[1] with the next letter, and s becomes "acced".
+/// Replace s[4] with the previous letter, and s becomes "accec".
+/// The subsequence "ccc" forms a palindrome of length 3, which is the maximum.
+///
+/// Example 2:
+/// Input: s = "aaazzz", k = 4
+/// Output: 6
+/// Explanation:
+/// Replace s[0] with the previous letter, and s becomes "zaazzz".
+/// Replace s[4] with the next letter, and s becomes "zaazaz".
+/// Replace s[3] with the next letter, and s becomes "zaaaaz".
+/// The entire string forms a palindrome of length 6.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 200
+/// 2. 1 <= k <= 200
+/// 3. s consists of only lowercase English letters.
+/// </summary>
+int LeetCodeDP::longestPalindromicSubsequence(string s, int k)
+{
+    int n = s.size();
+    vector<vector<vector<int>>> dp(n, vector<vector<int>>(n, vector<int>(n + 1, INT_MAX)));
+    int result = 1;
+    for (int j = 0; j < n; j++)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            int start = i;
+            int end = i + j;
+            if (end >= n) break;
+            dp[start][end][1] = 0;
+            if (j == 0)
+            {
+                continue;
+            }
+            int operation = min(26 - abs(s[start] - s[end]), abs(s[start] - s[end]));
+            if (operation <= k)
+            {
+                dp[start][end][2] = operation;
+                result = max(result, 2);
+            }
+            for (int p = 1; p <= j; p++)
+            {
+               dp[start][end][p] = min(dp[start][end][p], dp[start + 1][end][p]);
+               dp[start][end][p] = min(dp[start][end][p], dp[start][end - 1][p]);
+               dp[start][end][p] = min(dp[start][end][p], dp[start + 1][end - 1][p]);
+               if (dp[start + 1][end - 1][p] < INT_MAX && operation + dp[start + 1][end - 1][p] <= k)
+               {
+                   dp[start][end][p + 2] = min(dp[start][end][p + 2], operation + dp[start + 1][end - 1][p]);
+                   result = max(result, p + 2);
+               }
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3473. Sum of K Subarrays With Length at Least M
+///
+/// Medium
+///
+/// You are given an integer array nums and two integers, k and m.
+/// 
+/// Return the maximum sum of k non-overlapping subarrays of nums, where each 
+/// subarray has a length of at least m.
+///
+/// Example 1:
+/// Input: nums = [1,2,-1,3,3,4], k = 2, m = 2
+/// Output: 13
+/// Explanation:
+/// The optimal choice is:
+/// Subarray nums[3..5] with sum 3 + 3 + 4 = 10 (length is 3 >= m).
+/// Subarray nums[0..1] with sum 1 + 2 = 3 (length is 2 >= m).
+/// The total sum is 10 + 3 = 13.
+///
+/// Example 2:
+/// Input: nums = [-10,3,-1,-2], k = 4, m = 1
+/// Output: -10
+/// Explanation:
+/// The optimal choice is choosing each element as a subarray. The output is 
+/// (-10) + 3 + (-1) + (-2) = -10.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 2000
+/// 2. -10^4 <= nums[i] <= 10^4
+/// 3. 1 <= k <= floor(nums.length / m)
+/// 4. 1 <= m <= 3
+/// </summary>
+int LeetCodeDP::maxSum(vector<int>& nums, int k, int m)
+{
+    int n = nums.size();
+    vector<int> prefix(n + 1, 0);
+    for (int i = 1; i <= n; i++)
+    {
+        prefix[i] = nums[i - 1] + prefix[i - 1];
+    }
+    vector<vector<int>> dp(k + 1, vector<int>(n + 1, INT_MIN));
+    for (int j = 0; j <= n; j++) 
+    {
+        dp[0][j] = 0;
+    }
+
+    for (int i = 0; i <= k; i++) 
+    {
+        int best = INT_MIN;
+        for (int j = 0; j <= n; j++) 
+        {
+            if (i == 0)
+            {
+                dp[i][j] = 0;
+            }
+            else
+            {
+                if (j > 0)
+                {
+                    dp[i][j] = max(dp[i][j], dp[i][j - 1]);
+                }
+                if (j >= m * i)
+                {
+                    best = max(best, dp[i - 1][j - m] == INT_MIN ? INT_MIN : dp[i-1][j - m] - prefix[j - m]);
+                }
+                if (best != INT_MIN)
+                {
+                    dp[i][j] = max(dp[i][j], prefix[j] + best);
+                }
+            }
+        }
+    }
+    return dp[k][n];
+}
+
+/// <summary>
+/// Leet Code 3489. Zero Array Transformation IV
+///
+/// Medium
+///
+/// You are given an integer array nums of length n and a 2D array queries, 
+/// where queries[i] = [li, ri, vali].
+///
+/// Each queries[i] represents the following action on nums:
+/// 
+/// Select a subset of indices in the range [li, ri] from nums.
+/// Decrement the value at each selected index by exactly vali.
+/// A Zero Array is an array with all its elements equal to 0.
+///
+/// Return the minimum possible non-negative value of k, such that after 
+/// processing the first k queries in sequence, nums becomes a Zero Array. 
+/// If no such k exists, return -1.
+/// 
+/// Example 1:
+/// Input: nums = [2,0,2], queries = [[0,2,1],[0,2,1],[1,1,3]]
+/// Output: 2
+/// Explanation:
+/// For query 0 (l = 0, r = 2, val = 1):
+/// Decrement the values at indices [0, 2] by 1.
+/// The array will become [1, 0, 1].
+/// For query 1 (l = 0, r = 2, val = 1):
+/// Decrement the values at indices [0, 2] by 1.
+/// The array will become [0, 0, 0], which is a Zero Array. Therefore, the 
+/// minimum value of k is 2.
+///
+/// Example 2:
+/// Input: nums = [4,3,2,1], queries = [[1,3,2],[0,2,1]]
+/// Output: -1
+/// Explanation:
+/// It is impossible to make nums a Zero Array even after all the queries.
+///
+/// Example 3:
+/// Input: nums = [1,2,3,2,1], queries = [[0,1,1],[1,2,1],[2,3,2],[3,4,1],
+/// [4,4,1]]
+/// Output: 4
+/// Explanation:
+/// For query 0 (l = 0, r = 1, val = 1):
+/// Decrement the values at indices [0, 1] by 1.
+/// The array will become [0, 1, 3, 2, 1].
+/// For query 1 (l = 1, r = 2, val = 1):
+/// Decrement the values at indices [1, 2] by 1.
+/// The array will become [0, 0, 2, 2, 1].
+/// For query 2 (l = 2, r = 3, val = 2):
+/// Decrement the values at indices [2, 3] by 2.
+/// The array will become [0, 0, 0, 0, 1].
+/// For query 3 (l = 3, r = 4, val = 1):
+/// Decrement the value at index 4 by 1.
+/// The array will become [0, 0, 0, 0, 0]. Therefore, the minimum value of k 
+/// is 4.
+///
+/// Example 4:
+/// Input: nums = [1,2,3,2,6], queries = [[0,1,1],[0,2,1],[1,4,2],[4,4,4],
+/// [3,4,1],[4,4,5]]
+///
+/// Output: 4
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10
+/// 2. 0 <= nums[i] <= 1000
+/// 3. 1 <= queries.length <= 1000
+/// 4. queries[i] = [li, ri, vali]
+/// 5. 0 <= li <= ri < nums.length
+/// 6. 1 <= vali <= 10
+/// </summary>
+int LeetCodeDP::minZeroArrayIV(vector<int>& nums, vector<vector<int>>& queries)
+{
+    vector<vector<int>> dp(nums.size(), vector<int>());
+    int count = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        dp[i].resize(nums[i] + 1);
+        dp[i][0] = 1;
+        if (nums[i] == 0) count++;
+    }
+    if (count == nums.size()) return 0;
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        for (int j = queries[i][0]; j <= queries[i][1]; j++)
+        {
+            if (dp[j][nums[j]] != 0) continue;
+            for (int k = nums[j]; k >= queries[i][2]; k--)
+            {
+                if (dp[j][k - queries[i][2]] == 1)
+                {
+                    dp[j][k] = 1;
+                }
+            }
+            if (dp[j][nums[j]] != 0) count++;
+        }
+        if (count == nums.size()) return i + 1;
+    }
+    return -1;
+}
+
+/// <summary>
+/// Leet Code 3494. Find the Minimum Amount of Time to Brew Potions
+///
+/// Medium
+/// You are given two integer arrays, skill and mana, of length n and m, 
+/// respectively.
+///
+/// In a laboratory, n wizards must brew m potions in order. Each potion has 
+/// a mana capacity mana[j] and must pass through all the wizards sequentially 
+/// to be brewed properly. The time taken by the ith wizard on the jth potion 
+/// is timeij = skill[i] * mana[j].
+///
+/// Since the brewing process is delicate, a potion must be passed to the next 
+/// wizard immediately after the current wizard completes their work. This means 
+/// the timing must be synchronized so that each wizard begins working on a 
+/// potion exactly when it arrives. ​
+///
+/// Return the minimum amount of time required for the potions to be brewed 
+/// properly.
+///
+/// Example 1:
+/// Input: skill = [1,5,2,4], mana = [5,1,4,2]
+/// Output: 110
+/// Explanation:
+/// Potion Number	Start time	Wizard 0 done by	Wizard 1 done by	
+/// Wizard 2 done by	Wizard 3 done by
+/// 0	0	5	30	40	60
+/// 1	52	53	58	60	64
+/// 2	54	58	78	86	102
+/// 3	86	88	98	102	110
+/// As an example for why wizard 0 cannot start working on the 1st potion 
+/// before time t = 52, consider the case where the wizards started preparing 
+/// the 1st potion at time t = 50. At time t = 58, wizard 2 is done with the 
+/// 1st potion, but wizard 3 will still be working on the 0th potion till 
+/// time t = 60.
+///
+/// Example 2:
+/// Input: skill = [1,1,1], mana = [1,1,1]
+/// Output: 5
+/// Explanation:
+/// Preparation of the 0th potion begins at time t = 0, and is completed by 
+/// time t = 3.
+/// Preparation of the 1st potion begins at time t = 1, and is completed by 
+/// time t = 4.
+/// Preparation of the 2nd potion begins at time t = 2, and is completed by 
+/// time t = 5.
+///
+/// Example 3:
+/// Input: skill = [1,2,3,4], mana = [1,2]
+/// Output: 21
+/// 
+/// Constraints:
+/// 1. n == skill.length
+/// 2. m == mana.length
+/// 3. 1 <= n, m <= 5000
+/// 4. 1 <= mana[i], skill[i] <= 5000
+/// </summary>
+long long LeetCodeDP::minTime(vector<int>& skill, vector<int>& mana)
+{
+    int n = skill.size();
+    vector<long long> dp(n);
+    for (size_t i = 0; i < mana.size(); i++)
+    {
+        for (size_t j = 0; j < skill.size(); j++)
+        {
+            if (j == 0) dp[j] = dp[j] + skill[j] * mana[i];
+            else dp[j] = max(dp[j - 1], dp[j]) + skill[j] * mana[i];
+        }
+        for (int j = skill.size() - 2; j >= 0; j--)
+        {
+            dp[j] = dp[j + 1] - skill[j + 1] * mana[i];
+            
+        }
+    }
+    return dp[n - 1];
 }
 #pragma endregion
 

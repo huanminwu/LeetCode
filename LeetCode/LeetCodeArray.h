@@ -23083,5 +23083,520 @@ public:
     /// 4. grid[i][j] is either 0, 1 or 2.
     /// </summary>
     int lenOfVDiagonal(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 3461. Check If Digits Are Equal in String After Operations I
+    ///   
+    /// Easy
+    /// You are given a string s consisting of digits. Perform the following 
+    /// operation repeatedly until the string has exactly two digits:
+    ///
+    /// For each pair of consecutive digits in s, starting from the first digit, 
+    /// calculate a new digit as the sum of the two digits modulo 10.
+    /// Replace s with the sequence of newly calculated digits, maintaining the 
+    /// order in which they are computed.
+    /// Return true if the final two digits in s are the same; otherwise, return 
+    /// false.
+    ///
+    /// Example 1:
+    /// Input: s = "3902"
+    /// Output: true
+    /// Explanation:
+    /// Initially, s = "3902"
+    /// First operation:
+    /// (s[0] + s[1]) % 10 = (3 + 9) % 10 = 2
+    /// (s[1] + s[2]) % 10 = (9 + 0) % 10 = 9
+    /// (s[2] + s[3]) % 10 = (0 + 2) % 10 = 2
+    /// s becomes "292"
+    /// Second operation:
+    /// (s[0] + s[1]) % 10 = (2 + 9) % 10 = 1
+    /// (s[1] + s[2]) % 10 = (9 + 2) % 10 = 1
+    /// s becomes "11"
+    /// Since the digits in "11" are the same, the output is true.
+    ///
+    /// Example 2:
+    /// Input: s = "34789"
+    /// Output: false
+    /// Explanation:
+    /// Initially, s = "34789".
+    /// After the first operation, s = "7157".
+    /// After the second operation, s = "862".
+    /// After the third operation, s = "48".
+    /// Since '4' != '8', the output is false.
+    /// 
+    ///
+    /// Constraints:
+    /// 1. 3 <= s.length <= 100
+    /// 2. s consists of only digits.
+    /// </summary>
+    bool hasSameDigitsI(string s);
+
+    /// <summary>
+    /// Leet Code 3467. Transform Array by Parity
+    ///   
+    /// Easy
+    ///
+    /// You are given an integer array nums. Transform nums by performing the 
+    /// following operations in the exact order specified:
+    ///
+    /// Replace each even number with 0.
+    /// Replace each odd numbers with 1.
+    /// Sort the modified array in non-decreasing order.
+    /// Return the resulting array after performing these operations.
+    ///
+    /// Example 1:
+    /// Input: nums = [4,3,2,1]
+    /// Output: [0,0,1,1]
+    /// Explanation:
+    /// Replace the even numbers (4 and 2) with 0 and the odd numbers (3 and 1) 
+    /// with 1. Now, nums = [0, 1, 0, 1].
+    /// After sorting nums in non-descending order, nums = [0, 0, 1, 1].
+    ///
+    /// Example 2:
+    /// Input: nums = [1,5,1,4,2]
+    /// Output: [0,0,1,1,1]
+    /// Explanation:
+    /// Replace the even numbers (4 and 2) with 0 and the odd numbers (1, 5 and 1) 
+    /// with 1. Now, nums = [1, 1, 1, 0, 0].
+    /// After sorting nums in non-descending order, nums = [0, 0, 1, 1, 1].
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 1000
+    /// </summary>
+    vector<int> transformArrayII(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3477. Fruits Into Baskets II
+    ///
+    /// Easy
+    ///
+    /// You are given two arrays of integers, fruits and baskets, each of length 
+    /// n, where fruits[i] represents the quantity of the ith type of fruit, 
+    /// and baskets[j] represents the capacity of the jth basket.
+    ///
+    /// From left to right, place the fruits according to these rules:
+    /// Each fruit type must be placed in the leftmost available basket with a 
+    /// capacity greater than or equal to the quantity of that fruit type.
+    /// Each basket can hold only one type of fruit.
+    /// If a fruit type cannot be placed in any basket, it remains unplaced.
+    /// Return the number of fruit types that remain unplaced after all possible 
+    /// allocations are made.
+    ///
+    /// Example 1:
+    /// Input: fruits = [4,2,5], baskets = [3,5,4]
+    /// Output: 1
+    /// Explanation:
+    /// fruits[0] = 4 is placed in baskets[1] = 5.
+    /// fruits[1] = 2 is placed in baskets[0] = 3.
+    /// fruits[2] = 5 cannot be placed in baskets[2] = 4.
+    /// Since one fruit type remains unplaced, we return 1.
+    ///
+    /// Example 2:
+    /// Input: fruits = [3,6,1], baskets = [6,4,7]
+    /// Output: 0
+    /// Explanation:
+    /// fruits[0] = 3 is placed in baskets[0] = 6.
+    /// fruits[1] = 6 cannot be placed in baskets[1] = 4 (insufficient capacity) 
+    /// but can be placed in the next available basket, baskets[2] = 7.
+    /// fruits[2] = 1 is placed in baskets[1] = 4.
+    /// Since all fruits are successfully placed, we return 0.
+    ///
+    /// Constraints:
+    /// 1. n == fruits.length == baskets.length
+    /// 2. 1 <= n <= 100
+    /// 3. 1 <= fruits[i], baskets[i] <= 1000
+    /// </summary>
+    int numOfUnplacedFruitsII(vector<int>& fruits, vector<int>& baskets);
+
+    /// <summary>
+    /// Leet Code 3488. Closest Equal Element Queries
+    ///
+    /// Medium
+    ///
+    /// You are given a circular array nums and an array queries.
+    /// For each query i, you have to find the following:
+    /// 
+    /// The minimum distance between the element at index queries[i] and any 
+    /// other index j in the circular array, where nums[j] == nums[queries[i]]. 
+    /// If no such index exists, the answer for that query should be -1.
+    /// Return an array answer of the same size as queries, where answer[i] 
+    /// represents the result for query i.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,3,1,4,1,3,2], queries = [0,3,5]
+    /// Output: [2,-1,3]
+    /// Explanation:
+    /// Query 0: The element at queries[0] = 0 is nums[0] = 1. The nearest 
+    /// index with the same value is 2, and the distance between them is 2.
+    /// Query 1: The element at queries[1] = 3 is nums[3] = 4. No other index 
+    /// contains 4, so the result is -1.
+    /// Query 2: The element at queries[2] = 5 is nums[5] = 3. The nearest index 
+    /// with the same value is 1, and the distance between them is 3 (following 
+    /// the circular path: 5 -> 6 -> 0 -> 1).
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,3,4], queries = [0,1,2,3]
+    /// Output: [-1,-1,-1,-1]
+    /// Explanation:
+    /// Each value in nums is unique, so no index shares the same value as the 
+    /// queried element. This results in -1 for all queries.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= queries.length <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^6
+    /// 3. 0 <= queries[i] < nums.length
+    /// </summary>
+    vector<int> solveQueries(vector<int>& nums, vector<int>& queries);
+
+    /// <summary>
+    /// Leet Code 3479. Fruits Into Baskets III
+    ///
+    /// Medium
+    /// 
+    /// You are given two arrays of integers, fruits and baskets, each of length 
+    /// n, where fruits[i] represents the quantity of the ith type of fruit, and 
+    /// baskets[j] represents the capacity of the jth basket.
+    ///
+    /// From left to right, place the fruits according to these rules:
+    /// 
+    /// Each fruit type must be placed in the leftmost available basket with a 
+    /// capacity greater than or equal to the quantity of that fruit type.
+    /// Each basket can hold only one type of fruit.
+    /// If a fruit type cannot be placed in any basket, it remains unplaced.
+    /// Return the number of fruit types that remain unplaced after all possible 
+    /// allocations are made.
+    /// 
+    /// Example 1:
+    /// Input: fruits = [4,2,5], baskets = [3,5,4]
+    /// Output: 1
+    /// Explanation:
+    /// fruits[0] = 4 is placed in baskets[1] = 5.
+    /// fruits[1] = 2 is placed in baskets[0] = 3.
+    /// fruits[2] = 5 cannot be placed in baskets[2] = 4.
+    /// Since one fruit type remains unplaced, we return 1.
+    ///
+    /// Example 2:
+    /// Input: fruits = [3,6,1], baskets = [6,4,7]
+    /// Output: 0
+    /// Explanation:
+    /// fruits[0] = 3 is placed in baskets[0] = 6.
+    /// fruits[1] = 6 cannot be placed in baskets[1] = 4 (insufficient capacity) 
+    /// but can be placed in the next available basket, baskets[2] = 7.
+    /// fruits[2] = 1 is placed in baskets[1] = 4.
+    /// Since all fruits are successfully placed, we return 0.
+    /// 
+    /// Constraints:
+    /// 1. n == fruits.length == baskets.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 1 <= fruits[i], baskets[i] <= 10^9
+    /// </summary>
+    int numOfUnplacedFruits(vector<int>& fruits, vector<int>& baskets);
+
+    /// <summary>
+    /// Leet Code 3480. Maximize Subarrays After Removing One Conflicting Pair
+    ///
+    /// Hard
+    /// 
+    /// You are given an integer n which represents an array nums containing the 
+    /// numbers from 1 to n in order. Additionally, you are given a 2D array 
+    /// conflictingPairs, where conflictingPairs[i] = [a, b] indicates that a and 
+    /// b form a conflicting pair.
+    ///
+    /// Remove exactly one element from conflictingPairs. Afterward, count the 
+    /// number of non-empty subarrays of nums which do not contain both a and b 
+    /// for any remaining conflicting pair [a, b].
+    ///
+    /// Return the maximum number of subarrays possible after removing exactly one 
+    /// conflicting pair.
+    ///
+    /// Example 1:
+    /// Input: n = 4, conflictingPairs = [[2,3],[1,4]]
+    /// Output: 9
+    /// Explanation:
+    ///
+    /// Remove [2, 3] from conflictingPairs. Now, conflictingPairs = [[1, 4]].
+    /// There are 9 subarrays in nums where [1, 4] do not appear together. They 
+    /// are [1], [2], [3], [4], [1, 2], [2, 3], [3, 4], [1, 2, 3] and [2, 3, 4].
+    /// The maximum number of subarrays we can achieve after removing one element 
+    /// from conflictingPairs is 9.
+    ///
+    /// Example 2:
+    /// Input: n = 5, conflictingPairs = [[1,2],[2,5],[3,5]]
+    /// Output: 12
+    /// Explanation:
+    /// Remove [1, 2] from conflictingPairs. Now, conflictingPairs = [[2, 5], 
+    /// [3, 5]].
+    /// There are 12 subarrays in nums where [2, 5] and [3, 5] do not appear 
+    /// together.
+    /// The maximum number of subarrays we can achieve after removing one element 
+    /// from conflictingPairs is 12.
+    ///  
+    /// Constraints:
+    /// 1. 2 <= n <= 10^5
+    /// 2. 1 <= conflictingPairs.length <= 2 * n
+    /// 3. conflictingPairs[i].length == 2
+    /// 4. 1 <= conflictingPairs[i][j] <= n
+    /// 5. conflictingPairs[i][0] != conflictingPairs[i][1]
+    /// </summary>
+    long long maxSubarrays(int n, vector<vector<int>>& conflictingPairs);
+
+    /// <summary>
+    /// Leet Code 3496. Maximize Score After Pair Deletions
+    ///
+    /// Medium
+    ///
+    /// You are given an array of integers nums. You must repeatedly perform one 
+    /// of the following operations while the array has more than two elements:
+    /// Remove the first two elements.
+    /// Remove the last two elements.
+    /// Remove the first and last element.
+    /// For each operation, add the sum of the removed elements to your total 
+    /// score.
+    /// Return the maximum possible score you can achieve.
+    ///
+    /// Example 1:
+    /// Input: nums = [2,4,1]
+    /// Output: 6
+    /// Explanation:
+    /// The possible operations are:
+    /// Remove the first two elements (2 + 4) = 6. The remaining array is [1].
+    /// Remove the last two elements (4 + 1) = 5. The remaining array is [2].
+    /// Remove the first and last elements (2 + 1) = 3. The remaining array is [4].
+    /// The maximum score is obtained by removing the first two elements, 
+    /// resulting in a final score of 6.
+    ///
+    /// Example 2:
+    /// Input: nums = [5,-1,4,2]
+    /// Output: 7
+    /// Explanation:
+    /// The possible operations are:
+    /// Remove the first and last elements (5 + 2) = 7. The remaining array 
+    /// is [-1, 4].
+    /// Remove the first two elements (5 + -1) = 4. The remaining array is [4, 2].
+    /// Remove the last two elements (4 + 2) = 6. The remaining array is [5, -1].
+    /// The maximum score is obtained by removing the first and last elements, 
+    /// resulting in a total score of 7.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^4 <= nums[i] <= 10^4
+    /// </summary>
+    int maxScoreII(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3500. Minimum Cost to Divide Array Into Subarrays
+    ///
+    /// Hard
+    ///
+    /// You are given two integer arrays, nums and cost, of the same size, and 
+    /// an integer k.
+    ///
+    /// You can divide nums into subarrays. The cost of the ith subarray 
+    /// consisting of elements nums[l..r] is:
+    ///
+    /// (nums[0] + nums[1] + ... + nums[r] + k * i) * (cost[l] + cost[l + 1] 
+    /// + ... + cost[r]).
+    /// Note that i represents the order of the subarray: 1 for the first 
+    /// subarray, 2 for the second, and so on.
+    ///
+    /// Return the minimum total cost possible from any valid division.
+    ///
+    /// Example 1:
+    /// Input: nums = [3,1,4], cost = [4,6,6], k = 1
+    /// Output: 110
+    /// Explanation:
+    /// The minimum total cost possible can be achieved by dividing nums into 
+    /// subarrays [3, 1] and [4].
+    /// The cost of the first subarray [3,1] is (3 + 1 + 1 * 1) * (4 + 6) = 50.
+    /// The cost of the second subarray [4] is (3 + 1 + 4 + 1 * 2) * 6 = 60.
+    ///
+    /// Example 2:
+    /// Input: nums = [4,8,5,1,14,2,2,12,1], cost = [7,2,8,4,2,2,1,1,2], k = 7
+    /// Output: 985
+    /// Explanation:
+    ///
+    /// The minimum total cost possible can be achieved by dividing nums into 
+    /// subarrays [4, 8, 5, 1], [14, 2, 2], and [12, 1].
+    /// The cost of the first subarray [4, 8, 5, 1] is (4 + 8 + 5 + 1 + 7 * 1) 
+    /// * (7 + 2 + 8 + 4) = 525.
+    /// The cost of the second subarray [14, 2, 2] is (4 + 8 + 5 + 1 + 14 + 2 + 
+    /// 2 + 7 * 2) * (2 + 2 + 1) = 250.
+    /// The cost of the third subarray [12, 1] is (4 + 8 + 5 + 1 + 14 + 2 + 2 
+    /// + 12 + 1 + 7 * 3) * (1 + 2) = 210.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1000
+    /// 2. cost.length == nums.length
+    /// 3. 1 <= nums[i], cost[i] <= 1000
+    /// 4. 1 <= k <= 1000
+    /// </summary>
+    long long minimumCost(vector<int>& nums, vector<int>& cost, int k);
+
+    /// <summary>
+    /// Leet Code 3499. Maximize Active Section with Trade I
+    ///
+    /// Medium
+    ///
+    /// You are given a binary string s of length n, where:
+    /// '1' represents an active section.
+    /// '0' represents an inactive section.
+    /// You can perform at most one trade to maximize the number of active 
+    /// sections in s. In a trade, you:
+    ///
+    /// Convert a contiguous block of '1's that is surrounded by '0's to 
+    /// all '0's.
+    /// Afterward, convert a contiguous block of '0's that is surrounded 
+    /// by '1's to all '1's.
+    /// Return the maximum number of active sections in s after making the 
+    /// optimal trade.
+    ///
+    /// Note: Treat s as if it is augmented with a '1' at both ends, forming 
+    /// t = '1' + s + '1'. The augmented '1's do not contribute to the final 
+    /// count.
+    ///
+    /// Example 1:
+    /// Input: s = "01"
+    /// Output: 1
+    /// Explanation:
+    /// Because there is no block of '1's surrounded by '0's, no valid trade 
+    /// is possible. The maximum number of active sections is 1.
+    ///
+    /// Example 2:
+    /// Input: s = "0100"
+    /// Output: 4
+    /// Explanation:
+    /// String "0100" → Augmented to "101001".
+    /// Choose "0100", convert "101001" → "100001" → "111111".
+    /// The final string without augmentation is "1111". The maximum number of active 
+    /// sections is 4.
+    ///
+    /// Example 3:
+    /// Input: s = "1000100"
+    /// Output: 7
+    /// Explanation:
+    /// String "1000100" → Augmented to "110001001".
+    /// Choose "000100", convert "110001001" → "110000001" → "111111111".
+    /// The final string without augmentation is "1111111". The maximum number of 
+    /// active sections is 7.
+    ///
+    /// Example 4:
+    /// Input: s = "01010"
+    /// Output: 4
+    /// Explanation:
+    /// String "01010" → Augmented to "1010101".
+    /// Choose "010", convert "1010101" → "1000101" → "1111101".
+    /// The final string without augmentation is "11110". The maximum number of 
+    /// active sections is 4.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == s.length <= 105
+    /// 2. s[i] is either '0' or '1'
+    /// </summary>
+    int maxActiveSectionsAfterTradeI(string s);
+
+    /// <summary>
+    /// Leet Code 3501. Maximize Active Section with Trade II
+    ///
+    /// Hard
+    ///
+    /// You are given a binary string s of length n, where:
+    ///
+    /// '1' represents an active section.
+    /// '0' represents an inactive section.
+    /// You can perform at most one trade to maximize the number of active 
+    /// sections in s. In a trade, you:
+    ///
+    /// Convert a contiguous block of '1's that is surrounded by '0's to 
+    /// all '0's.
+    /// Afterward, convert a contiguous block of '0's that is surrounded by 
+    /// '1's to all '1's.
+    /// Additionally, you are given a 2D array queries, where 
+    /// queries[i] = [li, ri] represents a substring s[li...ri].
+    ///
+    /// For each query, determine the maximum possible number of active 
+    /// sections in s after making the optimal trade on the substring s[li...ri].
+    ///
+    /// Return an array answer, where answer[i] is the result for queries[i].
+    ///
+    /// Note
+    /// For each query, treat s[li...ri] as if it is augmented with a '1' at both 
+    /// ends, forming t = '1' + s[li...ri] + '1'. The augmented '1's do not 
+    /// contribute to the final count.
+    /// The queries are independent of each other.
+    ///
+    /// Example 1:
+    /// Input: s = "01", queries = [[0,1]]
+    /// Output: [1]
+    /// Explanation:
+    /// Because there is no block of '1's surrounded by '0's, no valid trade is 
+    /// possible. The maximum number of active sections is 1.
+    ///
+    /// Example 2:
+    /// Input: s = "0100", queries = [[0,3],[0,2],[1,3],[2,3]]
+    /// Output: [4,3,1,1]
+    /// Explanation:
+    /// m0Query [0, 3]bstring "0100" → Augmented to "101001"
+    /// Choose "0100", convert "0100" → "0000" → "1111".
+    /// The final string without augmentation is "1111". The maximum number of 
+    /// active sections is 4.
+    ///
+    /// Query [0, 2] → Substring "010" → Augmented to "10101"
+    /// Choose "010", convert "010" → "000" → "111".
+    /// The final string without augmentation is "1110". The maximum number of 
+    /// active sections is 3.
+    ///
+    /// Query [1, 3] → Substring "100" → Augmented to "11001"
+    /// Because there is no block of '1's surrounded by '0's, no valid trade is 
+    /// possible. The maximum number of active sections is 1.
+    ///
+    /// Query [2, 3] → Substring "00" → Augmented to "1001"
+    /// Because there is no block of '1's surrounded by '0's, no valid trade is 
+    /// possible. The maximum number of active sections is 1.
+    ///
+    /// Example 3:
+    /// Input: s = "1000100", queries = [[1,5],[0,6],[0,4]]
+    /// Output: [6,7,2]
+    /// Explanation:
+    /// Query [1, 5] → Substring "00010" → Augmented to "1000101"
+    /// Choose "00010", convert "00010" → "00000" → "11111".
+    /// The final string without augmentation is "1111110". The maximum 
+    /// number of active sections is 6.
+    /// 
+    /// Query [0, 6] → Substring "1000100" → Augmented to "110001001"
+    /// Choose "000100", convert "000100" → "000000" → "111111".
+    /// The final string without augmentation is "1111111". The maximum 
+    /// number of active sections is 7.
+    /// 
+    /// Query [0, 4] → Substring "10001" → Augmented to "1100011"
+    /// Because there is no block of '1's surrounded by '0's, no valid trade 
+    /// is possible. The maximum number of active sections is 2.
+    ///
+    /// Example 4:
+    /// Input: s = "01010", queries = [[0,3],[1,4],[1,3]]
+    /// Output: [4,4,2]
+    /// Explanation:
+    /// Query [0, 3] → Substring "0101" → Augmented to "101011"
+    /// Choose "010", convert "010" → "000" → "111".
+    /// The final string without augmentation is "11110". The maximum number of 
+    /// active sections is 4.
+    ///
+    /// Query [1, 4] → Substring "1010" → Augmented to "110101"
+    /// Choose "010", convert "010" → "000" → "111".
+    /// The final string without augmentation is "01111". The maximum number of 
+    /// active sections is 4.
+    ///
+    /// Query [1, 3] → Substring "101" → Augmented to "11011"
+    /// Because there is no block of '1's surrounded by '0's, no valid trade is 
+    /// possible. The maximum number of active sections is 2.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == s.length <= 10^5
+    /// 2. 1 <= queries.length <= 10^5
+    /// 3. s[i] is either '0' or '1'.
+    /// 4. queries[i] = [li, ri]
+    /// 5. 0 <= li <= ri < n
+    /// </summary>
+    vector<int> maxActiveSectionsAfterTradeII(string s, vector<vector<int>>& queries);
 };
 #endif  // LeetCodeArray_H

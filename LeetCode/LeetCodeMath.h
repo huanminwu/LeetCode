@@ -15945,5 +15945,270 @@ public:
     /// 3. s consists of only 'N', 'S', 'E', and 'W'.
     /// </summary>
     int maxDistance(string s, int k);
+
+    /// <summary>
+    /// Leet Code 3463. Check If Digits Are Equal in String After Operations II
+    /// </summary>
+    int binmod10(int n, int k);
+
+    /// <summary>
+    /// Leet Code 3463. Check If Digits Are Equal in String After Operations II
+    /// </summary>
+    int binmod5(int n, int k);
+
+    /// <summary>
+    /// Leet Code 3463. Check If Digits Are Equal in String After Operations II
+    /// </summary>
+    int binmod2(int n, int k);
+
+    /// <summary>
+    /// Leet Code 3463. Check If Digits Are Equal in String After Operations II
+    /// </summary>
+    int binsmall(int n, int k);
+
+    /// <summary>
+    /// Leet Code 3463. Check If Digits Are Equal in String After Operations II
+    ///   
+    /// Hard
+    ///
+    /// You are given a string s consisting of digits. Perform the following 
+    /// operation repeatedly until the string has exactly two digits:
+    ///
+    /// For each pair of consecutive digits in s, starting from the first digit, 
+    /// calculate a new digit as the sum of the two digits modulo 10.
+    /// Replace s with the sequence of newly calculated digits, maintaining the 
+    /// order in which they are computed.
+    /// Return true if the final two digits in s are the same; otherwise, return 
+    /// false.
+    /// 
+    /// Example 1:
+    /// Input: s = "3902"
+    /// Output: true
+    /// Explanation:
+    /// Initially, s = "3902"
+    /// First operation:
+    /// (s[0] + s[1]) % 10 = (3 + 9) % 10 = 2
+    /// (s[1] + s[2]) % 10 = (9 + 0) % 10 = 9
+    /// (s[2] + s[3]) % 10 = (0 + 2) % 10 = 2
+    /// s becomes "292"
+    /// Second operation:
+    /// (s[0] + s[1]) % 10 = (2 + 9) % 10 = 1
+    /// (s[1] + s[2]) % 10 = (9 + 2) % 10 = 1
+    /// s becomes "11"
+    /// Since the digits in "11" are the same, the output is true.
+    ///
+    /// Example 2:
+    /// Input: s = "34789"
+    /// Output: false
+    /// Explanation:
+    /// Initially, s = "34789".
+    /// After the first operation, s = "7157".
+    /// After the second operation, s = "862".
+    /// After the third operation, s = "48".
+    /// Since '4' != '8', the output is false.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= s.length <= 105
+    /// 2. s consists of only digits.
+    /// </summary>
+    bool hasSameDigitsII(string s);
+
+    /// <summary>
+    /// Leet Code 3464. Maximize the Distance Between Points on a Square
+    /// </summary>
+    long long maxDistance_mapPoint(int side, int x, int y);
+
+    /// <summary>
+    /// Leet Code 3464. Maximize the Distance Between Points on a Square
+    /// </summary>
+    bool maxDistance_canPlace(const vector<long long>& t, int k, int side, int d);
+
+    /// <summary>
+    /// Leet Code 3464. Maximize the Distance Between Points on a Square
+    ///   
+    /// Hard
+    ///
+    /// You are given an integer side, representing the edge length of a square 
+    /// with corners at (0, 0), (0, side), (side, 0), and (side, side) on a 
+    /// Cartesian plane.
+    ///
+    /// You are also given a positive integer k and a 2D integer array points, 
+    /// where points[i] = [xi, yi] represents the coordinate of a point lying on 
+    /// the boundary of the square.
+    ///
+    /// You need to select k elements among points such that the minimum Manhattan 
+    /// distance between any two points is maximized.
+    ///
+    /// Return the maximum possible minimum Manhattan distance between the 
+    /// selected k points.
+    ///
+    /// The Manhattan Distance between two cells (xi, yi) and (xj, yj) is 
+    /// |xi - xj| + |yi - yj|.
+    /// Example 1:
+    /// Input: side = 2, points = [[0,2],[2,0],[2,2],[0,0]], k = 4
+    /// Output: 2
+    /// Explanation:
+    /// 
+    /// Select all four points.
+    /// Example 2:
+    /// Input: side = 2, points = [[0,0],[1,2],[2,0],[2,2],[2,1]], k = 4
+    /// Output: 1
+    /// Explanation:
+    /// 
+    /// Select the points (0, 0), (2, 0), (2, 2), and (2, 1).
+    ///
+    /// Example 3:
+    /// Input: side = 2, points = [[0,0],[0,1],[0,2],[1,2],[2,0],[2,2],[2,1]], 
+    /// k = 5
+    /// Output: 1
+    /// Explanation:
+    /// Select the points (0, 0), (0, 1), (0, 2), (1, 2), and (2, 2).
+    ///
+    /// Constraints:
+    /// 1. 1 <= side <= 10^9
+    /// 2. 4 <= points.length <= min(4 * side, 15 * 10^3)
+    /// 3. points[i] == [xi, yi]
+    /// 4. The input is generated such that:
+    /// 5. points[i] lies on the boundary of the square.
+    /// 6. All points[i] are unique.
+    /// 7. 4 <= k <= min(25, points.length)
+    /// </summary>
+    int maxDistance(int side, vector<vector<int>>& points, int k);
+
+    /// <summary>
+    /// Leet Code 3483. Unique 3-Digit Even Numbers
+    ///
+    /// Easy
+    /// 
+    /// You are given an array of digits called digits. Your task is to determine 
+    /// the number of distinct three-digit even numbers that can be formed using 
+    /// these digits.
+    ///
+    /// Note: Each copy of a digit can only be used once per number, and there 
+    /// may not be leading zeros.
+    ///
+    /// Example 1:
+    /// Input: digits = [1,2,3,4]
+    /// Output: 12
+    /// Explanation: The 12 distinct 3-digit even numbers that can be formed 
+    /// are 124, 132, 134, 142, 214, 234, 312, 314, 324, 342, 412, and 432. Note 
+    /// that 222 cannot be formed because there is only 1 copy of the digit 2.
+    ///
+    /// Example 2:
+    /// Input: digits = [0,2,2]
+    /// Output: 2
+    /// Explanation: The only 3-digit even numbers that can be formed are 202 
+    /// and 220. Note that the digit 2 can be used twice because it appears twice 
+    /// in the array.
+    ///
+    /// Example 3:
+    /// Input: digits = [6,6,6]
+    /// Output: 1
+    /// Explanation: Only 666 can be formed.
+    /// Example 4:
+    /// Input: digits = [1,3,5]
+    /// Output: 0
+    /// Explanation: No even 3-digit numbers can be formed.
+    ///
+    /// Constraints:
+    /// 1. 3 <= digits.length <= 10
+    /// 2. 0 <= digits[i] <= 9
+    /// </summary>
+    int totalNumbers(vector<int>& digits);
+
+    /// <summary>
+    /// Leet Code 3492. Maximum Containers on a Ship
+    ///
+    /// Easy
+    ///
+    /// You are given a positive integer n representing an n x n cargo deck on a 
+    /// ship. Each cell on the deck can hold one container with a weight of 
+    /// exactly w.
+    ///
+    /// However, the total weight of all containers, if loaded onto the deck, must
+    ///  not exceed the ship's maximum weight capacity, maxWeight.
+    ///
+    /// Return the maximum number of containers that can be loaded onto the ship.
+    /// 
+    /// Example 1:
+    /// Input: n = 2, w = 3, maxWeight = 15
+    /// Output: 4
+    /// Explanation:
+    /// The deck has 4 cells, and each container weighs 3. The total weight of 
+    /// loading all containers is 12, which does not exceed maxWeight.
+    /// 
+    /// Example 2:
+    /// Input: n = 3, w = 5, maxWeight = 20
+    /// Output: 4
+    /// Explanation:
+    /// The deck has 9 cells, and each container weighs 5. The maximum number of 
+    /// containers that can be loaded without exceeding maxWeight is 4.
+    /// 
+    /// Constraints:
+    /// 1。 1 <= n <= 1000
+    /// 2. 1 <= w <= 1000
+    /// 3. 1 <= maxWeight <= 10^9
+    /// </summary>
+    int maxContainers(int n, int w, int maxWeight);
+
+    /// <summary>
+    /// Leet Code 3495. Minimum Operations to Make Array Elements Zero
+    ///
+    /// Hard
+    ///
+    /// You are given a 2D array queries, where queries[i] is of the form [l, r]. 
+    /// Each queries[i] defines an array of integers nums consisting of elements 
+    /// ranging from l to r, both inclusive.
+    ///
+    /// In one operation, you can:
+    /// Select two integers a and b from the array.
+    /// Replace them with floor(a / 4) and floor(b / 4).
+    /// Your task is to determine the minimum number of operations required to 
+    /// reduce all elements of the array to zero for each query. Return the 
+    /// sum of the results for all queries.
+    ///
+    /// Example 1:
+    /// Input: queries = [[1,2],[2,4]]
+    /// Output: 3
+    /// Explanation:
+    /// For queries[0]:
+    /// The initial array is nums = [1, 2].
+    /// In the first operation, select nums[0] and nums[1]. The array 
+    /// becomes [0, 0].
+    /// The minimum number of operations required is 1.
+    /// For queries[1]:
+    ///
+    /// The initial array is nums = [2, 3, 4].
+    /// In the first operation, select nums[0] and nums[2]. The array becomes 
+    /// [0, 3, 1].
+    /// In the second operation, select nums[1] and nums[2]. The array becomes 
+    /// [0, 0, 0].
+    /// The minimum number of operations required is 2.
+    /// The output is 1 + 2 = 3.
+    ///
+    /// Example 2:
+    /// Input: queries = [[2,6]]
+    /// Output: 4
+    /// Explanation:
+    /// For queries[0]:
+    /// The initial array is nums = [2, 3, 4, 5, 6].
+    /// In the first operation, select nums[0] and nums[3]. The array becomes 
+    /// [0, 3, 4, 1, 6].
+    /// In the second operation, select nums[2] and nums[4]. The array becomes 
+    /// [0, 3, 1, 1, 1].
+    /// In the third operation, select nums[1] and nums[2]. The array becomes 
+    /// [0, 0, 0, 1, 1].
+    /// In the fourth operation, select nums[3] and nums[4]. The array becomes 
+    /// [0, 0, 0, 0, 0].
+    /// The minimum number of operations required is 4.
+    /// The output is 4.
+    ///
+    /// Constraints:
+    /// 1. 1 <= queries.length <= 10^5
+    /// 2. queries[i].length == 2
+    /// 3. queries[i] == [l, r]
+    /// 4. 1 <= l < r <= 10^9
+    /// </summary>
+    long long minOperations(vector<vector<int>>& queries);
 };
 #endif

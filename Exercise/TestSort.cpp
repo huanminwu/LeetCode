@@ -4217,8 +4217,105 @@ void TestLeetCode3457(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3462(void)
+{
+    Logger::WriteMessage("Test Leet Code 3462");
+    LeetCodeSort leetCode;
+    vector<vector<int>> grid = { {1, 2},{3, 4} };
+    vector<int> limits = { 1, 2 };
+    int k = 2;
+    long long result = leetCode.maxSum(grid, limits, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(limits);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {5, 3, 7},{8, 2, 6} };
+    limits = { 2,2 };
+    k = 3;
+    result = leetCode.maxSum(grid, limits, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(limits);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {5, 8, 6, 1, 6, 4} };
+    limits = { 3 };
+    k = 3;
+    result = leetCode.maxSum(grid, limits, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(limits);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3476(void)
+{
+    Logger::WriteMessage("Test Leet Code 3476");
+    LeetCodeSort leetCode;
+    vector<int> workers = { 1, 2, 3, 4, 5 };
+    vector<vector<int>> tasks = { {1, 100},{2, 400},{3, 100},{3, 400} };
+    long long result = leetCode.maxProfitIII(workers, tasks);
+    Logger::WriteMessage(workers);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    workers = { 10,10000,100000000 };
+    tasks = { {1, 100} };
+    result = leetCode.maxProfitIII(workers, tasks);
+    Logger::WriteMessage(workers);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    workers = { 7 };
+    tasks = { {3, 3}, {3, 3} };
+    result = leetCode.maxProfitIII(workers, tasks);
+    Logger::WriteMessage(workers);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3478(void)
+{
+    Logger::WriteMessage("Test Leet Code 3478");
+    LeetCodeSort leetCode;
+    vector<int> nums1 = { 4, 2, 1, 5, 3 };
+    vector<int> nums2 = { 10, 20, 30, 40, 50 };
+    int k = 2;
+    vector<long long> result = leetCode.findMaxSum(nums1, nums2, k);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums1 = { 2, 2, 2, 2 };
+    nums2 = { 3, 1, 2, 3 };
+    k = 1;
+    result = leetCode.findMaxSum(nums1, nums2, k);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3502(void)
+{
+    Logger::WriteMessage("Test Leet Code 3502");
+    LeetCodeSort leetCode;
+    vector<int> cost = { 5, 3, 4, 1, 3, 2 };
+    vector<int> result = leetCode.minCosts(cost);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage(result);
+
+    cost = { 1,2,4,6,7 };
+    result = leetCode.minCosts(cost);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3502();
+    TestLeetCode3478();
+    TestLeetCode3476();
+    TestLeetCode3462();
     TestLeetCode3457();
     TestLeetCode3422();
     TestLeetCode3409();

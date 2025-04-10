@@ -59,50 +59,87 @@ using namespace std;
 class MedianFinder
 {
 private:
-    priority_queue<int, vector<int>, greater<int>> m_Large;
-    priority_queue<int> m_Small;
+    set<pair<int, int>> m_small, m_large;
+    long long m_small_sum, m_large_sum;
+private:
+    void adjust()
+    {
+        if (m_small.size() > m_large.size() + 1)
+        {
+            m_large_sum += m_small.rbegin()->first;
+            m_small_sum -= m_small.rbegin()->first;
+            m_large.insert(*m_small.rbegin());
+            m_small.erase(*m_small.rbegin());
+        }
+        if (m_large.size() > m_small.size())
+        {
+            m_small_sum += m_small.rbegin()->first;
+            m_large_sum -= m_small.rbegin()->first;
+            m_small.insert(*m_large.begin());
+            m_large.erase(*m_large.begin());
+        }
+    }
 public:
     // Default constructor.
     MedianFinder()
     {
+        m_small_sum = 0;
+        m_large_sum = 0;
     }
 
     // Adds a number into the data structure.
-    void addNum(int num)
+    void addNum(int num, int i = 0)
     {
-        if ((m_Small.size() == 0) || (m_Small.top() > num))
+        if ((m_small.empty()) || (m_small.rbegin()->first > num))
         {
-            m_Small.push(num);
+            m_small.insert(make_pair(num, i));
+            m_small_sum += num;
         }
         else
         {
-            m_Large.push(num);
+            m_large.insert(make_pair(num, i));
+            m_large_sum += num;
         }
-        if (m_Small.size() > m_Large.size() + 1)
+        adjust();
+    }
+
+    void eraseNum(int num, int i = 0)
+    {
+        pair<int, int> p = make_pair(num, i);
+        if (m_small.find(p) != m_small.end())
         {
-            m_Large.push(m_Small.top());
-            m_Small.pop();
+            m_small.erase(p);
+            m_small_sum -= p.first;
         }
-        if (m_Large.size() > m_Small.size())
+        else
         {
-            m_Small.push(m_Large.top());
-            m_Large.pop();
+            m_large.erase(p);
+            m_large_sum -= p.first;
         }
+        adjust();
     }
 
     // Returns the median of current data stream
     double findMedian()
     {
         double value;
-        if (m_Small.size() == m_Large.size() + 1)
+        if (m_small.size() == m_large.size() + 1)
         {
-            value = (double)m_Small.top();
+            value = (double)m_small.rbegin()->first;
         }
         else
         {
-            value = ((double)m_Small.top() + (double)m_Large.top()) / 2;
+            value = ((double)m_small.rbegin()->first + (double)m_large.begin()->first) / 2;
         }
         return value;
+    }
+
+    // Returns the median of current data stream
+    long long get_distance()
+    {
+        long long result = (long long)(m_small.rbegin()->first) * m_small.size() - m_small_sum;
+        result += m_large_sum - (long long)(m_small.rbegin()->first) * m_large.size();
+        return result;
     }
 };
 
@@ -8524,6 +8561,277 @@ public:
     /// 3. n is a multiple of 4.
     /// </summary>
     long long maxWeight(vector<int>& pizzas);
+
+    /// <summary>
+    /// Leet Code 3462. Maximum Sum With at Most K Elements
+    ///   
+    /// Medium
+    ///
+    /// You are given a 2D integer matrix grid of size n x m, an integer array 
+    /// limits of length n, and an integer k. The task is to find the maximum 
+    /// sum of at most k elements from the matrix grid such that:
+    ///
+    /// The number of elements taken from the ith row of grid does not exceed 
+    /// limits[i].
+    ///
+    /// Return the maximum sum.
+    /// Example 1:
+    ///
+    /// Input: grid = [[1,2],[3,4]], limits = [1,2], k = 2
+    /// Output: 7
+    /// Explanation:
+    /// From the second row, we can take at most 2 elements. The elements taken 
+    /// are 4 and 3.
+    /// The maximum possible sum of at most 2 selected elements is 4 + 3 = 7.
+    ///
+    /// Example 2:
+    /// Input: grid = [[5,3,7],[8,2,6]], limits = [2,2], k = 3
+    /// Output: 21
+    /// Explanation:
+    /// From the first row, we can take at most 2 elements. The element taken 
+    /// is 7.
+    /// From the second row, we can take at most 2 elements. The elements taken 
+    /// are 8 and 6.
+    /// The maximum possible sum of at most 3 selected elements is 7 + 8 + 6 = 21.
+    ///
+    /// Constraints:
+    /// 1. n == grid.length == limits.length
+    /// 2. m == grid[i].length
+    /// 3. 1 <= n, m <= 500
+    /// 4. 0 <= grid[i][j] <= 10^5
+    /// 5. 0 <= limits[i] <= m
+    /// 6. 0 <= k <= min(n * m, sum(limits))
+    /// </summary>
+    long long maxSum(vector<vector<int>>& grid, vector<int>& limits, int k);
+
+    /// <summary>
+    /// Leet Code 3476. Maximize Profit from Task Assignment
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array workers, where workers[i] represents the 
+    /// skill level of the ith worker. You are also given a 2D integer array 
+    /// tasks, where:
+    ///
+    /// tasks[i][0] represents the skill requirement needed to complete the task.
+    /// tasks[i][1] represents the profit earned from completing the task.
+    /// Each worker can complete at most one task, and they can only take a task 
+    /// if their skill level is equal to the task's skill requirement. An 
+    /// additional worker joins today who can take up any task, regardless of 
+    /// the skill requirement.
+    ///
+    /// Return the maximum total profit that can be earned by optimally assigning 
+    /// the tasks to the workers.
+    ///
+    /// 
+    /// Example 1:
+    /// Input: workers = [1,2,3,4,5], tasks = [[1,100],[2,400],[3,100],[3,400]]
+    /// Output: 1000
+    /// Explanation:
+    /// Worker 0 completes task 0.
+    /// Worker 1 completes task 1.
+    /// Worker 2 completes task 3.
+    /// The additional worker completes task 2.
+    ///
+    /// Example 2:
+    /// Input: workers = [10,10000,100000000], tasks = [[1,100]]
+    /// Output: 100
+    /// Explanation:
+    /// Since no worker matches the skill requirement, only the additional worker 
+    /// can complete task 0.
+    ///
+    /// Example 3:
+    /// Input: workers = [7], tasks = [[3,3],[3,3]]
+    /// Output: 3
+    /// Explanation:
+    /// The additional worker completes task 1. Worker 0 cannot work since no 
+    /// task has a skill requirement of 7.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= workers.length <= 10^5
+    /// 2. 1 <= workers[i] <= 10^9
+    /// 3. 1 <= tasks.length <= 10^5
+    /// 4. tasks[i].length == 2
+    /// 5. 1 <= tasks[i][0], tasks[i][1] <= 10^9
+    /// </summary>
+    long long maxProfitIII(vector<int>& workers, vector<vector<int>>& tasks);
+
+    /// <summary>
+    /// Leet Code 3478. Choose K Elements With Maximum Sum
+    ///
+    /// Medium
+    ///
+    // You are given two integer arrays, nums1 and nums2, both of length n, 
+    /// along with a positive integer k.
+    ///
+    /// For each index i from 0 to n - 1, perform the following:
+    ///
+    /// Find all indices j where nums1[j] is less than nums1[i].
+    /// Choose at most k values of nums2[j] at these indices to maximize the 
+    /// total sum.
+    /// Return an array answer of size n, where answer[i] represents the result 
+    /// for the corresponding index i.
+    ///
+    /// Example 1:
+    /// Input: nums1 = [4,2,1,5,3], nums2 = [10,20,30,40,50], k = 2
+    /// Output: [80,30,0,80,50]
+    /// Explanation:
+    ///
+    /// For i = 0: Select the 2 largest values from nums2 at indices [1, 2, 4] 
+    /// where nums1[j] < nums1[0], resulting in 50 + 30 = 80.
+    /// For i = 1: Select the 2 largest values from nums2 at index [2] where 
+    /// nums1[j] < nums1[1], resulting in 30.
+    /// For i = 2: No indices satisfy nums1[j] < nums1[2], resulting in 0.
+    /// For i = 3: Select the 2 largest values from nums2 at indices [0, 1, 2, 4] 
+    /// where nums1[j] < nums1[3], resulting in 50 + 30 = 80.
+    /// For i = 4: Select the 2 largest values from nums2 at indices [1, 2] 
+    /// where nums1[j] < nums1[4], resulting in 30 + 20 = 50.
+    ///
+    /// Example 2:
+    /// Input: nums1 = [2,2,2,2], nums2 = [3,1,2,3], k = 1
+    ///
+    /// Output: [0,0,0,0]
+    ///
+    /// Explanation:
+    /// Since all elements in nums1 are equal, no indices satisfy the condition 
+    //// nums1[j] < nums1[i] for any i, resulting in 0 for all positions.
+    ///
+    /// Constraints:
+    /// 1. n == nums1.length == nums2.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 1 <= nums1[i], nums2[i] <= 10^6
+    /// 4. 1 <= k <= n
+    /// </summary>
+    vector<long long> findMaxSum(vector<int>& nums1, vector<int>& nums2, int k);
+
+    /// <summary>
+    /// Leet Code 3502. Minimum Cost to Reach Every Position
+    ///
+    /// Easy
+    /// You are given an integer array cost of size n. You are currently at 
+    /// position n (at the end of the line) in a line of n + 1 people (numbered 
+    /// from 0 to n).
+    ///
+    /// You wish to move forward in the line, but each person in front of you 
+    /// charges a specific amount to swap places. The cost to swap with person 
+    /// i is given by cost[i].
+    ///
+    /// You are allowed to swap places with people as follows:
+    /// If they are in front of you, you must pay them cost[i] to swap with them.
+    /// If they are behind you, they can swap with you for free.
+    /// Return an array answer of size n, where answer[i] is the minimum total 
+    /// cost to reach each position i in the line.
+    ///
+    /// Example 1:
+    /// Input: cost = [5,3,4,1,3,2]
+    /// Output: [5,3,3,1,1,1]
+    /// Explanation:
+    /// We can get to each position in the following way:
+    /// 1. i = 0. We can swap with person 0 for a cost of 5.
+    /// 2. i = 1. We can swap with person 1 for a cost of 3.
+    /// 3. i = 2. We can swap with person 1 for a cost of 3, then swap with 
+    ///    person 2 for free.
+    /// 4. i = 3. We can swap with person 3 for a cost of 1.
+    /// 5. i = 4. We can swap with person 3 for a cost of 1, then swap with 
+    ///    person 4 for free.
+    /// 6. i = 5. We can swap with person 3 for a cost of 1, then swap with 
+    ///    person 5 for free.
+    ///
+    /// Example 2:
+    /// Input: cost = [1,2,4,6,7]
+    /// Output: [1,1,1,1,1]
+    /// Explanation:
+    /// We can swap with person 0 for a cost of 1, then we will be able to reach 
+    /// any position i for free.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == cost.length <= 100
+    /// 2. 1 <= cost[i] <= 100
+    /// </summary>
+    vector<int> minCosts(vector<int>& cost);
+
+    /// <summary>
+    /// Leet Code 3505. Minimum Operations to Make Elements Within K Subarrays 
+    ///                 Equal
+    ///
+    /// Hard
+    /// 
+    /// You are given an integer array nums and two integers, x and k. You can 
+    /// perform the following operation any number of times (including zero):
+    ///
+    /// Increase or decrease any element of nums by 1.
+    /// Return the minimum number of operations needed to have at least k non-
+    /// overlapping subarrays of size exactly x in nums, where all elements 
+    /// within each subarray are equal.
+    ///
+    /// 
+    /// Example 1:
+    /// Input: nums = [5,-2,1,3,7,3,6,4,-1], x = 3, k = 2
+    /// Output: 8
+    /// Explanation:
+    /// Use 3 operations to add 3 to nums[1] and use 2 operations to subtract 2 
+    /// from nums[3]. The resulting array is [5, 1, 1, 1, 7, 3, 6, 4, -1].
+    /// Use 1 operation to add 1 to nums[5] and use 2 operations to subtract 2 
+    /// from nums[6]. The resulting array is [5, 1, 1, 1, 7, 4, 4, 4, -1].
+    /// Now, all elements within each subarray [1, 1, 1] (from indices 1 to 3) 
+    /// and [4, 4, 4] (from indices 5 to 7) are equal. Since 8 total operations 
+    /// were used, 8 is the output.
+    ///
+    /// Example 2:
+    /// Input: nums = [9,-2,-2,-2,1,5], x = 2, k = 2
+    /// Output: 3
+    /// Explanation:
+    /// Use 3 operations to subtract 3 from nums[4]. The resulting array 
+    /// is [9, -2, -2, -2, -2, 5].
+    /// Now, all elements within each subarray [-2, -2] (from indices 1 to 2) 
+    /// and [-2, -2] (from indices 3 to 4) are equal. Since 3 operations were 
+    /// used, 3 is the output.
+    ///  
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 10^5
+    /// 2. -10^6 <= nums[i] <= 10^6
+    /// 3. 2 <= x <= nums.length
+    /// 4. 1 <= k <= 15
+    /// 5. 2 <= k * x <= nums.length
+    /// </summary>
+    long long minOperations(vector<int>& nums, int x, int k);
+
+    /// <summary>
+    /// Leet Code 3507. Minimum Pair Removal to Sort Array I 
+    ///
+    /// Easy
+    /// 
+    /// Given an array nums, you can perform the following operation any number of 
+    /// times:
+    ///
+    /// Select the adjacent pair with the minimum sum in nums. If multiple such 
+    /// pairs exist, choose the leftmost one.
+    /// Replace the pair with their sum.
+    /// Return the minimum number of operations needed to make the array non-
+    /// decreasing.
+    ///
+    /// An array is said to be non-decreasing if each element is greater than or 
+    /// equal to its previous element (if it exists).
+    ///
+    /// Example 1:
+    /// Input: nums = [5,2,3,1]
+    /// Output: 2
+    /// Explanation:
+    /// The pair (3,1) has the minimum sum of 4. After replacement, nums = [5,2,4].
+    /// The pair (2,4) has the minimum sum of 6. After replacement, nums = [5,6].
+    /// The array nums became non-decreasing in two operations.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,2]
+    /// Output: 0
+    /// Explanation:
+    /// The array nums is already sorted.
+    ///  
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 50
+    /// 2. -1000 <= nums[i] <= 1000
+    /// </summary>
+    int minimumPairRemovalI(vector<int>& nums);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

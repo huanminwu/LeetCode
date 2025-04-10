@@ -25400,5 +25400,467 @@ int LeetCodeMath::maxDistance(string s, int k)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3463. Check If Digits Are Equal in String After Operations II
+/// </summary>
+int LeetCodeMath::binmod10(int n, int k)
+{
+    int mod2 = binmod2(n, k);
+    int mod5 = binmod5(n, k);
+    for (int i = 0; i < 10; i++) 
+    {
+        if (i % 2 == mod2 && i % 5 == mod5)
+            return i;
+    }
+    return 0;
+}
+
+/// <summary>
+/// Leet Code 3463. Check If Digits Are Equal in String After Operations II
+/// </summary>
+int LeetCodeMath::binmod2(int n, int k)
+{
+    while (k > 0) 
+    {
+        if ((k & 1) > (n & 1))
+        { 
+            return 0;
+        }
+        n >>= 1;
+        k >>= 1;
+    }
+    return 1;
+}
+
+/// <summary>
+/// Leet Code 3463. Check If Digits Are Equal in String After Operations II
+/// </summary>
+int LeetCodeMath::binmod5(int n, int k)
+{
+    int res = 1;
+    while (n > 0 || k > 0) 
+    {
+        int nd = n % 5;
+        int kd = k % 5;
+        if (kd > nd)  return 0;
+        res = (res * binsmall(nd, kd)) % 5;
+        n /= 5;
+        k /= 5;
+    }
+    return res;
+}
+
+/// <summary>
+/// Leet Code 3463. Check If Digits Are Equal in String After Operations II
+/// </summary>
+int LeetCodeMath::binsmall(int n, int k)
+{
+    if (k > n)
+        return 0;
+    int fact[5] = { 1, 1, 2, 1, 4 };
+    int numerator = fact[n];
+    int denominator = (fact[k] * fact[n - k]) % 5;
+    int deninv = 0;
+    for (int i = 0; i < 5; i++) 
+    {
+        if ((denominator * i) % 5 == 1) 
+        {
+            deninv = i;
+            break;
+        }
+    }
+    return (numerator * deninv) % 5;
+}
+
+/// <summary>
+/// Leet Code 3463. Check If Digits Are Equal in String After Operations II
+///   
+/// Hard
+///
+/// You are given a string s consisting of digits. Perform the following 
+/// operation repeatedly until the string has exactly two digits:
+///
+/// For each pair of consecutive digits in s, starting from the first digit, 
+/// calculate a new digit as the sum of the two digits modulo 10.
+/// Replace s with the sequence of newly calculated digits, maintaining the 
+/// order in which they are computed.
+/// Return true if the final two digits in s are the same; otherwise, return 
+/// false.
+/// 
+/// Example 1:
+/// Input: s = "3902"
+/// Output: true
+/// Explanation:
+/// Initially, s = "3902"
+/// First operation:
+/// (s[0] + s[1]) % 10 = (3 + 9) % 10 = 2
+/// (s[1] + s[2]) % 10 = (9 + 0) % 10 = 9
+/// (s[2] + s[3]) % 10 = (0 + 2) % 10 = 2
+/// s becomes "292"
+/// Second operation:
+/// (s[0] + s[1]) % 10 = (2 + 9) % 10 = 1
+/// (s[1] + s[2]) % 10 = (9 + 2) % 10 = 1
+/// s becomes "11"
+/// Since the digits in "11" are the same, the output is true.
+///
+/// Example 2:
+/// Input: s = "34789"
+/// Output: false
+/// Explanation:
+/// Initially, s = "34789".
+/// After the first operation, s = "7157".
+/// After the second operation, s = "862".
+/// After the third operation, s = "48".
+/// Since '4' != '8', the output is false.
+/// 
+/// Constraints:
+/// 1. 3 <= s.length <= 105
+/// 2. s consists of only digits.
+/// </summary>
+bool LeetCodeMath::hasSameDigitsII(string s)
+{
+    int L = s.size();
+    int m = L - 2;
+    int s1 = 0, s2 = 0;
+    for (int i = 0; i <= m; i++) 
+    {
+        int val = binmod10(m, i);
+        int d1 = s[i] - '0';
+        int d2 = s[i + 1] - '0';
+        s1 = (s1 + val * d1) % 10;
+        s2 = (s2 + val * d2) % 10;
+    }
+    return s1 == s2;
+}
+
+/// <summary>
+/// Leet Code 3464. Maximize the Distance Between Points on a Square
+/// </summary>
+long long LeetCodeMath::maxDistance_mapPoint(int side, int x, int y)
+{
+    // Map a boundary point (x,y) to a coordinate in [0, 4*side)
+    // bottom: (x,0) -> t = x.
+    // right: (side,y) -> t = side + y.
+    // top: (x,side) -> t = 3*side - x.
+    // left: (0,y) -> t = 4*side - y.
+    if (y == 0) return x;
+    if (x == side) return side + y;
+    if (y == side) return 3LL * side - x;
+    return 4LL * side - y;
+}
+
+/// <summary>
+/// Leet Code 3464. Maximize the Distance Between Points on a Square
+/// </summary>
+bool LeetCodeMath::maxDistance_canPlace(const vector<long long>& t, int k, int side, int d)
+{
+    int n = t.size();
+    long long L = 4LL * side;
+    // Build an "extended" array: ext[i] = t[i] for i in [0, n) and ext[i+n] = t[i] + L.
+    vector<long long> ext(2 * n);
+    for (int i = 0; i < n; i++) 
+    {
+        ext[i] = t[i];
+        ext[i + n] = t[i] + L;
+    }
+
+    // For each possible starting index i (in the original sorted array)
+    for (int i = 0; i < n; i++) 
+    {
+        int count = 1;
+        long long pos = ext[i];
+        int idx = i;
+        // We only consider indices up to i+n (i.e. one full circle).
+        for (int cnt = 1; cnt < k; cnt++) 
+        {
+            long long target = pos + d;
+            // lower_bound in ext[idx+1, ext.begin()+i+n)
+            auto it = std::lower_bound(ext.begin() + idx + 1, ext.begin() + i + n, target);
+            if (it == ext.begin() + i + n) 
+            {
+                count = -1; // not enough points available from this start
+                break;
+            }
+            idx = it - ext.begin();
+            pos = ext[idx];
+            count++;
+        }
+        // After selecting k points, check the wrap–around gap:
+        // The gap from the last chosen point (at pos) to (first + L) must be at least d.
+        if (count == k && (ext[i] + L - pos) >= d) return true;
+    }
+    return false;
+}
+
+
+/// <summary>
+/// Leet Code 3464. Maximize the Distance Between Points on a Square
+///   
+/// Hard
+///
+/// You are given an integer side, representing the edge length of a square 
+/// with corners at (0, 0), (0, side), (side, 0), and (side, side) on a 
+/// Cartesian plane.
+///
+/// You are also given a positive integer k and a 2D integer array points, 
+/// where points[i] = [xi, yi] represents the coordinate of a point lying on 
+/// the boundary of the square.
+///
+/// You need to select k elements among points such that the minimum Manhattan 
+/// distance between any two points is maximized.
+///
+/// Return the maximum possible minimum Manhattan distance between the 
+/// selected k points.
+///
+/// The Manhattan Distance between two cells (xi, yi) and (xj, yj) is 
+/// |xi - xj| + |yi - yj|.
+/// Example 1:
+/// Input: side = 2, points = [[0,2],[2,0],[2,2],[0,0]], k = 4
+/// Output: 2
+/// Explanation:
+/// 
+/// Select all four points.
+/// Example 2:
+/// Input: side = 2, points = [[0,0],[1,2],[2,0],[2,2],[2,1]], k = 4
+/// Output: 1
+/// Explanation:
+/// 
+/// Select the points (0, 0), (2, 0), (2, 2), and (2, 1).
+///
+/// Example 3:
+/// Input: side = 2, points = [[0,0],[0,1],[0,2],[1,2],[2,0],[2,2],[2,1]], 
+/// k = 5
+/// Output: 1
+/// Explanation:
+/// Select the points (0, 0), (0, 1), (0, 2), (1, 2), and (2, 2).
+///
+/// Constraints:
+/// 1. 1 <= side <= 10^9
+/// 2. 4 <= points.length <= min(4 * side, 15 * 10^3)
+/// 3. points[i] == [xi, yi]
+/// 4. The input is generated such that:
+/// 5. points[i] lies on the boundary of the square.
+/// 6. All points[i] are unique.
+/// 7. 4 <= k <= min(25, points.length)
+/// </summary>
+int LeetCodeMath::maxDistance(int side, vector<vector<int>>& points, int k)
+{
+    vector<vector<int>> vintorquax = points;
+
+    int n = vintorquax.size();
+    vector<long long> t(n);
+    for (int i = 0; i < n; i++) 
+    {
+        int x = vintorquax[i][0], y = vintorquax[i][1];
+        t[i] = maxDistance_mapPoint(side, x, y);
+    }
+    sort(t.begin(), t.end());
+
+    // Binary search candidate d in [0, 2*side].
+    int lo = 0, hi = 2 * side, result = 0;
+    while (lo <= hi) 
+    {
+        int mid = lo + (hi - lo) / 2;
+        if (maxDistance_canPlace(t, k, side, mid))
+        {
+            result = mid;
+            lo = mid + 1;
+        }
+        else 
+        {
+            hi = mid - 1;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3483. Unique 3-Digit Even Numbers
+///
+/// Easy
+/// 
+/// You are given an array of digits called digits. Your task is to determine 
+/// the number of distinct three-digit even numbers that can be formed using 
+/// these digits.
+///
+/// Note: Each copy of a digit can only be used once per number, and there 
+/// may not be leading zeros.
+///
+/// Example 1:
+/// Input: digits = [1,2,3,4]
+/// Output: 12
+/// Explanation: The 12 distinct 3-digit even numbers that can be formed 
+/// are 124, 132, 134, 142, 214, 234, 312, 314, 324, 342, 412, and 432. Note 
+/// that 222 cannot be formed because there is only 1 copy of the digit 2.
+///
+/// Example 2:
+/// Input: digits = [0,2,2]
+/// Output: 2
+/// Explanation: The only 3-digit even numbers that can be formed are 202 
+/// and 220. Note that the digit 2 can be used twice because it appears twice 
+/// in the array.
+///
+/// Example 3:
+/// Input: digits = [6,6,6]
+/// Output: 1
+/// Explanation: Only 666 can be formed.
+/// Example 4:
+/// Input: digits = [1,3,5]
+/// Output: 0
+/// Explanation: No even 3-digit numbers can be formed.
+///
+/// Constraints:
+/// 1. 3 <= digits.length <= 10
+/// 2. 0 <= digits[i] <= 9
+/// </summary>
+int LeetCodeMath::totalNumbers(vector<int>& digits)
+{
+    int result = 0;
+    vector<int> digit_count(10);
+    for (size_t i = 0; i < digits.size(); i++)
+    {
+        digit_count[digits[i]]++;
+    }
+    for (int i = 0; i < 10; i += 2)
+    {
+        if (digit_count[i] == 0) continue;
+        digit_count[i]--;
+        for (int j = 1; j < 10; j++)
+        {
+            if (digit_count[j] == 0) continue;
+            digit_count[j]--;
+            for (int k = 0; k < 10; k++)
+            {
+                if (digit_count[k] == 0) continue;
+                result++;
+            }
+            digit_count[j]++;
+        }
+        digit_count[i]++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3492. Maximum Containers on a Ship
+///
+/// Easy
+///
+/// You are given a positive integer n representing an n x n cargo deck on a 
+/// ship. Each cell on the deck can hold one container with a weight of 
+/// exactly w.
+///
+/// However, the total weight of all containers, if loaded onto the deck, must
+///  not exceed the ship's maximum weight capacity, maxWeight.
+///
+/// Return the maximum number of containers that can be loaded onto the ship.
+/// 
+/// Example 1:
+/// Input: n = 2, w = 3, maxWeight = 15
+/// Output: 4
+/// Explanation:
+/// The deck has 4 cells, and each container weighs 3. The total weight of 
+/// loading all containers is 12, which does not exceed maxWeight.
+/// 
+/// Example 2:
+/// Input: n = 3, w = 5, maxWeight = 20
+/// Output: 4
+/// Explanation:
+/// The deck has 9 cells, and each container weighs 5. The maximum number of 
+/// containers that can be loaded without exceeding maxWeight is 4.
+/// 
+/// Constraints:
+/// 1。 1 <= n <= 1000
+/// 2. 1 <= w <= 1000
+/// 3. 1 <= maxWeight <= 10^9
+/// </summary>
+int LeetCodeMath::maxContainers(int n, int w, int maxWeight)
+{
+    int count = maxWeight / w;
+    return min(count, n * n);
+}
+
+/// <summary>
+/// Leet Code 3495. Minimum Operations to Make Array Elements Zero
+///
+/// Hard
+///
+/// You are given a 2D array queries, where queries[i] is of the form [l, r]. 
+/// Each queries[i] defines an array of integers nums consisting of elements 
+/// ranging from l to r, both inclusive.
+///
+/// In one operation, you can:
+/// Select two integers a and b from the array.
+/// Replace them with floor(a / 4) and floor(b / 4).
+/// Your task is to determine the minimum number of operations required to 
+/// reduce all elements of the array to zero for each query. Return the 
+/// sum of the results for all queries.
+///
+/// Example 1:
+/// Input: queries = [[1,2],[2,4]]
+/// Output: 3
+/// Explanation:
+/// For queries[0]:
+/// The initial array is nums = [1, 2].
+/// In the first operation, select nums[0] and nums[1]. The array 
+/// becomes [0, 0].
+/// The minimum number of operations required is 1.
+/// For queries[1]:
+///
+/// The initial array is nums = [2, 3, 4].
+/// In the first operation, select nums[0] and nums[2]. The array becomes 
+/// [0, 3, 1].
+/// In the second operation, select nums[1] and nums[2]. The array becomes 
+/// [0, 0, 0].
+/// The minimum number of operations required is 2.
+/// The output is 1 + 2 = 3.
+///
+/// Example 2:
+/// Input: queries = [[2,6]]
+/// Output: 4
+/// Explanation:
+/// For queries[0]:
+/// The initial array is nums = [2, 3, 4, 5, 6].
+/// In the first operation, select nums[0] and nums[3]. The array becomes 
+/// [0, 3, 4, 1, 6].
+/// In the second operation, select nums[2] and nums[4]. The array becomes 
+/// [0, 3, 1, 1, 1].
+/// In the third operation, select nums[1] and nums[2]. The array becomes 
+/// [0, 0, 0, 1, 1].
+/// In the fourth operation, select nums[3] and nums[4]. The array becomes 
+/// [0, 0, 0, 0, 0].
+/// The minimum number of operations required is 4.
+/// The output is 4.
+///
+/// Constraints:
+/// 1. 1 <= queries.length <= 10^5
+/// 2. queries[i].length == 2
+/// 3. queries[i] == [l, r]
+/// 4. 1 <= l < r <= 10^9
+/// </summary>
+long long LeetCodeMath::minOperations(vector<vector<int>>& queries)
+{
+    long long result = 0;
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        long long start = 1;
+        long long count = 1;
+        long long sum = 0;
+        while (start <= queries[i][1])
+        {
+            long long end = start * 4 - 1;
+            if (end >= queries[i][0])
+            {
+                sum = sum + count * (min(end, (long long)queries[i][1]) - max(start, (long long)queries[i][0]) + 1);
+            }
+            start *= 4;
+            count++;
+        }
+        result = result + (sum + 1) / 2;
+    }
+    return result;
+}
+
 #pragma endregion
 

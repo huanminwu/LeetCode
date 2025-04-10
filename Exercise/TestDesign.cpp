@@ -5789,8 +5789,147 @@ void TestLeetCode3408(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3484(void)
+{
+    Logger::WriteMessage("Test Leet Code 3484");
+    vector<string> commands =
+    {
+        "Spreadsheet", "getValue", "setCell", "getValue", "setCell", 
+        "getValue", "resetCell", "getValue"
+    };
+
+    vector<vector<string>> parameters =
+    {
+        {"3"},{"=5+7"}, {"A1", "10"},{"=A1+6"},{"B2", "15"},
+        {"=A1+B2"},{"A1"},{"=A1+B2"}
+    };
+    vector<string> result;
+    Spreadsheet* spreadsheet = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Spreadsheet")
+        {
+            spreadsheet = new Spreadsheet(atoi(parameters[i][0].c_str()));
+            result.push_back("null");
+        }
+        else if (commands[i] == "getValue")
+        {
+            int ret = spreadsheet->getValue(parameters[i][0]);
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "setCell")
+        {
+            spreadsheet->setCell(parameters[i][0], atoi(parameters[i][1].c_str()));
+            result.push_back("NULL");
+        }
+        else if (commands[i] == "resetCell")
+        {
+            spreadsheet->resetCell(parameters[i][0]);
+            result.push_back("NULL");
+        }
+    }
+    delete spreadsheet;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3508(void)
+{
+    Logger::WriteMessage("Test Leet Code 3508");
+    vector<string> commands =
+    {
+        "Router", "addPacket", "addPacket", "addPacket", "addPacket", "addPacket", 
+        "forwardPacket", "addPacket", "getCount"
+    };
+
+    vector<vector<int>> parameters =
+    {
+        {3},{1, 4, 90}, {2, 5, 90},{1, 4, 90},{3, 5, 95},
+        {4, 5, 105}, {}, { 5, 2, 110 },{5, 100, 110}
+    };
+    vector<string> result;
+    Router* router = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Router")
+        {
+            router = new Router(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "addPacket")
+        {
+            bool ret = router->addPacket(parameters[i][0], parameters[i][1], parameters[i][2]);
+            result.push_back((string)(ret? "true" : "false"));
+        }
+        else if (commands[i] == "forwardPacket")
+        {
+            vector<int> ret = router->forwardPacket();
+            result.push_back("[" + to_string(ret[0]) + "," + to_string(ret[1]) + "," + to_string(ret[2]) + "]");
+        }
+        else if (commands[i] == "getCount")
+        {
+            int ret = router->getCount(parameters[i][0], parameters[i][1], parameters[i][2]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete router;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+        "Router", "addPacket", "forwardPacket", "forwardPacket"
+    };
+
+    parameters =
+    {
+        {2},{7, 4, 90}, {},{}
+    };
+    result.clear();
+    router = nullptr;
+
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "Router")
+        {
+            router = new Router(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "addPacket")
+        {
+            bool ret = router->addPacket(parameters[i][0], parameters[i][1], parameters[i][2]);
+            result.push_back((string)(ret ? "true" : "false"));
+        }
+        else if (commands[i] == "forwardPacket")
+        {
+            vector<int> ret = router->forwardPacket();
+            if (ret.empty())
+            {
+                result.push_back("[]");
+            }
+            else
+            {
+                result.push_back("[" + to_string(ret[0]) + "," + to_string(ret[1]) + "," + to_string(ret[2]) + "]");
+            }
+        }
+        else if (commands[i] == "getCount")
+        {
+            int ret = router->getCount(parameters[i][0], parameters[i][1], parameters[i][2]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete router;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode3508();
+    TestLeetCode3484();
     TestLeetCode3408();
     TestLeetCode3391();
     TestLeetCode3369();

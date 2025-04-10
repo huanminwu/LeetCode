@@ -11329,8 +11329,196 @@ void TestLeetCode3459(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3461(void)
+{
+    Logger::WriteMessage("Test Leet Code 3461");
+    LeetCodeArray leetCode;
+    string s = "3902";
+    bool result = leetCode.hasSameDigitsI(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true":"false"));
+
+    s = "34789";
+    result = leetCode.hasSameDigitsI(s);
+    Logger::WriteMessage("s = " + s + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3467(void)
+{
+    Logger::WriteMessage("Test Leet Code 3467");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 4, 3, 2, 1 };
+    vector<int> result = leetCode.transformArrayII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,5,1,4,2 };
+    result = leetCode.transformArrayII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3477(void)
+{
+    Logger::WriteMessage("Test Leet Code 3477");
+    LeetCodeArray leetCode;
+    vector<int> fruits = { 4, 2, 5 };  
+    vector<int> baskets = { 3, 5, 4 };
+    int result = leetCode.numOfUnplacedFruitsII(fruits, baskets);
+    Logger::WriteMessage(fruits);
+    Logger::WriteMessage(baskets);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    fruits = { 3, 6, 1 };
+    baskets = { 6, 4, 7 };
+    result = leetCode.numOfUnplacedFruitsII(fruits, baskets);
+    Logger::WriteMessage(fruits);
+    Logger::WriteMessage(baskets);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3488(void)
+{
+    Logger::WriteMessage("Test Leet Code 3488");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 3, 1, 4, 1, 3, 2 };
+    vector<int> queries = { 0, 3, 5 };
+    vector<int> result = leetCode.solveQueries(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 1,2,3,4 };
+    queries = { 0,1,2,3 };
+    result = leetCode.solveQueries(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 13, 13, 10, 6, 5, 2, 6, 6, 1, 1, 18, 18, 6 };
+    queries = { 10,6,1,5,7 };
+    result = leetCode.solveQueries(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3479(void)
+{
+    Logger::WriteMessage("Test Leet Code 3479");
+    LeetCodeArray leetCode;
+    vector<int> fruits = { 4, 2, 5 };
+    vector<int> baskets = { 3, 5, 4 };
+    int result = leetCode.numOfUnplacedFruits(fruits, baskets);
+    Logger::WriteMessage(fruits);
+    Logger::WriteMessage(baskets);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    fruits = { 3,6,1 };
+    baskets = { 6,4,7 };
+    result = leetCode.numOfUnplacedFruits(fruits, baskets);
+    Logger::WriteMessage(fruits);
+    Logger::WriteMessage(baskets);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3480(void)
+{
+    Logger::WriteMessage("Test Leet Code 3480");
+    LeetCodeArray leetCode;
+    int n = 4;
+    vector<vector<int>> conflictingPairs = { {2, 3},{1, 4} };
+    long long result = leetCode.maxSubarrays(n, conflictingPairs);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(conflictingPairs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 5;
+    conflictingPairs = { {1, 2},{2, 5},{3, 5} };
+    result = leetCode.maxSubarrays(n, conflictingPairs);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(conflictingPairs);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3496(void)
+{
+    Logger::WriteMessage("Test Leet Code 3496");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 4, 1 };
+    int result = leetCode.maxScoreII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,-1,4,2 };
+    result = leetCode.maxScoreII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3500(void)
+{
+    Logger::WriteMessage("Test Leet Code 3500");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 1, 4 };
+    vector<int> cost = { 4, 6, 6 };
+    int k = 1;
+    long long result = leetCode.minimumCost(nums, cost, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 4,8,5,1,14,2,2,12,1 };
+    cost = { 7,2,8,4,2,2,1,1,2 };
+    k = 7;
+    result = leetCode.minimumCost(nums, cost, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3499(void)
+{
+    Logger::WriteMessage("Test Leet Code 3499");
+    LeetCodeArray leetCode;
+    string s = "01";
+    int result = leetCode.maxActiveSectionsAfterTradeI(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "0100";
+    result = leetCode.maxActiveSectionsAfterTradeI(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "1000100";
+    result = leetCode.maxActiveSectionsAfterTradeI(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "01010";
+    result = leetCode.maxActiveSectionsAfterTradeI(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode3501(void)
+{
+    Logger::WriteMessage("Test Leet Code 3499");
+    LeetCodeArray leetCode;
+    string s = "10110111";
+    vector<vector<int>> queries = { {3, 7},{4, 6},{0, 6} };
+    vector<int> result = leetCode.maxActiveSectionsAfterTradeII(s, queries);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3501();
+    TestLeetCode3499();
+    TestLeetCode3500();
+    TestLeetCode3496();
+    TestLeetCode3480();
+    TestLeetCode3479();
+    TestLeetCode3488();
+    TestLeetCode3477();
+    TestLeetCode3467();
+    TestLeetCode3461();
     TestLeetCode3459();
     TestLeetCode3446();
     TestLeetCode3452();

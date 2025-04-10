@@ -14193,4 +14193,135 @@ vector<int> LeetCodeTree::longestSpecialPath(vector<vector<int>>& edges, vector<
     longestSpecialPath(-1, 0, nums, neighbors, prefix_sum, 0, positions, result);
     return result;
 }
+
+
+/// <summary>
+/// Leet Code 3486. Longest Special Path
+/// </summary>
+void LeetCodeTree::longestSpecialPathII(int parent, int node,
+    vector<int>& nums,
+    vector<vector<pair<int, int>>>& neighbors,
+    vector<int>& prefix_sum,
+    int start_index,
+    int last_dup,
+    unordered_map<int, vector<int>>& positions,
+    vector<int>& result)
+{
+    for (size_t i = 0; i < neighbors[node].size(); i++)
+    {
+        int new_start = start_index;
+        int new_dup = last_dup;
+        pair<int, int> child = neighbors[node][i];
+        if (child.first == parent) continue;
+        prefix_sum.push_back(child.second);
+        prefix_sum[prefix_sum.size() - 1] += prefix_sum[prefix_sum.size() - 2];
+        int length = 0;
+        int count = 0;
+        if (positions.count(nums[child.first]) != 0)
+        {
+            new_start = positions[nums[child.first]].back() + 1;
+            if (new_start < start_index)
+            {
+                new_start = start_index;
+            }
+            else if (last_dup == -1)
+            {
+                new_dup = new_start;
+                new_start = start_index;
+            }
+            else 
+            {
+                int min_val = min(last_dup, new_start);
+                int max_val = max(last_dup, new_start);
+                new_start = min_val;
+                new_dup = max_val;
+            }
+        }
+        length = prefix_sum.back() - prefix_sum[new_start];
+        count = prefix_sum.size() - new_start;
+        if (length > result[0])
+        {
+            result[0] = length;
+            result[1] = count;
+        }
+        else if (length == result[0])
+        {
+            result[0] = length;
+            result[1] = min(result[1], count);
+        }
+        positions[nums[child.first]].push_back(prefix_sum.size() - 1);
+        longestSpecialPathII(node, child.first, nums, neighbors, prefix_sum, new_start, new_dup, positions, result);
+    }
+    positions[nums[node]].pop_back();
+    if (positions[nums[node]].empty())
+    {
+        positions.erase(nums[node]);
+    }
+    prefix_sum.pop_back();
+}
+
+/// <summary>
+/// Leet Code 3486. Longest Special Path II
+///
+/// Hard
+/// 
+/// You are given an undirected tree rooted at node 0, with n nodes numbered 
+/// from 0 to n - 1. This is represented by a 2D array edges of length n - 1, 
+/// where edges[i] = [ui, vi, lengthi] indicates an edge between nodes ui 
+/// and vi with length lengthi. You are also given an integer array nums, 
+/// where nums[i] represents the value at node i.
+///
+/// A special path is defined as a downward path from an ancestor node to a 
+/// descendant node in which all node values are distinct, except for at 
+/// most one value that may appear twice.
+///
+/// Return an array result of size 2, where result[0] is the length of the 
+/// longest special path, and result[1] is the minimum number of nodes in 
+/// all possible longest special paths.
+///
+/// Example 1:
+/// 
+/// Input: edges = [[0,1,1],[1,2,3],[1,3,1],[2,4,6],[4,7,2],[3,5,2],[3,6,5],
+/// [6,8,3]], nums = [1,1,0,3,1,2,1,1,0]
+/// Output: [9,3]
+/// Explanation:
+/// In the image below, nodes are colored by their corresponding values in 
+/// nums.
+/// 
+/// The longest special paths are 1 -> 2 -> 4 and 1 -> 3 -> 6 -> 8, both 
+/// having a length of 9. The minimum number of nodes across all longest 
+/// special paths is 3.
+///
+/// Example 2:
+/// Input: edges = [[1,0,3],[0,2,4],[0,3,5]], nums = [1,1,0,2]
+/// Output: [5,2]
+/// Explanation:
+/// The longest path is 0 -> 3 consisting of 2 nodes with a length of 5.
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 5 * 10^4
+/// 2. edges.length == n - 1
+/// 3. edges[i].length == 3
+/// 4. 0 <= ui, vi < n
+/// 5. 1 <= lengthi <= 10^3
+/// 6. nums.length == n
+/// 7. 0 <= nums[i] <= 5 * 10^4
+/// 8. The input is generated such that edges represents a valid tree.
+/// </summary>
+vector<int> LeetCodeTree::longestSpecialPathII(vector<vector<int>>& edges, vector<int>& nums)
+{
+    vector<int> result = { -1, INT_MAX };
+    vector<vector<pair<int, int>>> neighbors(nums.size());
+    vector<int> prefix_sum;
+    unordered_map<int, vector<int>> positions;
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(make_pair(edges[i][1], edges[i][2]));
+        neighbors[edges[i][1]].push_back(make_pair(edges[i][0], edges[i][2]));
+    }
+    positions[nums[0]].push_back(0);
+    prefix_sum.push_back(0);
+    longestSpecialPathII(-1, 0, nums, neighbors, prefix_sum, 0, -1, positions, result);
+    return result;
+}
 #pragma endregion
