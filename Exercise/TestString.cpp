@@ -7882,8 +7882,29 @@ void TestLeetCode3503(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3517(void)
+{
+    Logger::WriteMessage("Test Leet Code 3517");
+    LeetCodeString leetCode;
+    string s = "z";
+    string result = leetCode.smallestPalindromeI(s);
+    Logger::WriteMessage("s = " + s );
+    Logger::WriteMessage("result = " + result);
+
+    s = "babab";
+    result = leetCode.smallestPalindromeI(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+
+    s = "daccad";
+    result = leetCode.smallestPalindromeI(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3517();
     TestLeetCode3503();
     TestLeetCode3498();
     TestLeetCode3485();

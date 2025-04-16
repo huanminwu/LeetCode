@@ -3114,6 +3114,85 @@ public:
     /// 1. 1 <= n <= 1000
     /// </summary>
     int smallestNumber(int n);
+
+    /// <summary>
+    /// Leet Code 3513. Number of Unique XOR Triplets I
+    ///
+    /// Medium
+    /// 
+    /// You are given an integer array nums of length n, where nums is a 
+    /// permutation of the numbers in the range [1, n].
+    ///
+    /// A XOR triplet is defined as the XOR of three elements nums[i] XOR nums[j] 
+    /// XOR nums[k] where i <= j <= k.
+    ///
+    /// Return the number of unique XOR triplet values from all possible triplets 
+    /// (i, j, k).
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2]
+    /// Output: 2
+    /// Explanation:
+    /// The possible XOR triplet values are:
+    /// (0, 0, 0)  1 XOR 1 XOR 1 = 1
+    /// (0, 0, 1)  1 XOR 1 XOR 2 = 2
+    /// (0, 1, 1)  1 XOR 2 XOR 2 = 1
+    /// (1, 1, 1)  2 XOR 2 XOR 2 = 2
+    /// The unique XOR values are {1, 2}, so the output is 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [3,1,2]
+    /// Output: 4
+    /// Explanation:
+    /// The possible XOR triplet values include:
+    /// (0, 0, 0)  3 XOR 3 XOR 3 = 3
+    /// (0, 0, 1)  3 XOR 3 XOR 1 = 1
+    /// (0, 0, 2)  3 XOR 3 XOR 2 = 2
+    /// (0, 1, 2)  3 XOR 1 XOR 2 = 0
+    /// The unique XOR values are {0, 1, 2, 3}, so the output is 4.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= n
+    /// 3. nums is a permutation of integers from 1 to n.
+    /// </summary>
+    int uniqueXorTripletsI(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3514. Number of Unique XOR Triplets IIMedium
+    ///
+    /// Medium
+    /// 
+    /// You are given an integer array nums.
+    ///
+    /// A XOR triplet is defined as the XOR of three elements nums[i] XOR nums[j] 
+    /// XOR nums[k] where i <= j <= k.
+    ///
+    /// Return the number of unique XOR triplet values from all possible 
+    /// triplets (i, j, k).
+    ///
+    /// Example 1:
+    /// Input: nums = [1,3]
+    /// Output: 2
+    /// Explanation:
+    /// The possible XOR triplet values are:
+    /// (0, 0, 0)  1 XOR 1 XOR 1 = 1
+    /// (0, 0, 1)  1 XOR 1 XOR 3 = 3
+    /// (0, 1, 1)  1 XOR 3 XOR 3 = 1
+    /// (1, 1, 1)  3 XOR 3 XOR 3 = 3
+    /// The unique XOR values are {1, 3}. Thus, the output is 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [6,7,8,9]
+    /// Output: 4
+    /// Explanation:
+    /// The possible XOR triplet values are {6, 7, 8, 9}. Thus, the output is 4.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1500
+    /// 2. 1 <= nums[i] <= 1500
+    /// </summary>
+    int uniqueXorTripletsII(vector<int>& nums);
 #pragma endregion
 };
 #endif  // LeetCodeBit_H

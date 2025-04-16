@@ -1574,8 +1574,40 @@ void TestLeetCode3370(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3513(void)
+{
+    Logger::WriteMessage("Test Leet Code 3513");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1,2 };
+    int result = leetCode.uniqueXorTripletsI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,1,2 };
+    result = leetCode.uniqueXorTripletsI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3514(void)
+{
+    Logger::WriteMessage("Test Leet Code 3514");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 3 };
+    int result = leetCode.uniqueXorTripletsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,7,8,9 };
+    result = leetCode.uniqueXorTripletsII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3513();
+    TestLeetCode3514();
     TestLeetCode3370();
     TestLeetCode3226();
     TestLeetCode3215();

@@ -5935,8 +5935,75 @@ void TestLeetCode3494(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3509(void)
+{
+    Logger::WriteMessage("Test Leet Code 3509");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    int k = 2, limit = 10;
+    int result = leetCode.maxProduct(nums, k, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; limit = " + to_string(limit));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,2,3 };
+    k = -5, limit = 12;
+    result = leetCode.maxProduct(nums, k, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; limit = " + to_string(limit));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2, 2, 3, 3 };
+    k = 0, limit = 9;
+    result = leetCode.maxProduct(nums, k, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; limit = " + to_string(limit));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0 };
+    k = 0;
+    limit = 10;
+    result = leetCode.maxProduct(nums, k, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; limit = " + to_string(limit));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0, 8 };
+    k = -8;
+    limit = 20;
+    result = leetCode.maxProduct(nums, k, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; limit = " + to_string(limit));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,10,9,0 };
+    k = 1;
+    limit = 20;
+    result = leetCode.maxProduct(nums, k, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; limit = " + to_string(limit));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 12, 0, 9 };
+    k = 21;
+    limit = 20;
+    result = leetCode.maxProduct(nums, k, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; limit = " + to_string(limit));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,10,0,9 };
+    k = 1;
+    limit = 20;
+    result = leetCode.maxProduct(nums, k, limit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; limit = " + to_string(limit));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3509();
     TestLeetCode3494();
     TestLeetCode3489();
     TestLeetCode3473();

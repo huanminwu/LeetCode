@@ -7837,8 +7837,53 @@ void TestLeetCode3495(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3512(void)
+{
+    Logger::WriteMessage("Test Leet Code 3512");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 3, 9, 7 };
+    int k = 5;
+    int result = leetCode.minOperations(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 4,1,3 };
+    k = 4;
+    result = leetCode.minOperations(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3,2 };
+    k = 6;
+    result = leetCode.minOperations(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3516(void)
+{
+    Logger::WriteMessage("Test Leet Code 3516");
+    LeetCodeMath leetCode;
+    int x = 2, y = 7, z = 4;
+    int result = leetCode.findClosest(x,y, z);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; z = " + to_string(z));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    x = 2, y = 5, z = 6;
+    result = leetCode.findClosest(x, y, z);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; z = " + to_string(z));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    x = 1, y = 5, z = 3;
+    result = leetCode.findClosest(x, y, z);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; z = " + to_string(z));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3516();
+    TestLeetCode3512();
     TestLeetCode3495();
     TestLeetCode3492();
     TestLeetCode3483();

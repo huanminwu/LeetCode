@@ -14098,13 +14098,17 @@ long long LeetCodeSort::minOperations(vector<int>& nums, int x, int k)
         if (i >= x - 1)
         {
             cost[i] = medianFinder.get_distance();
-            medianFinder.addNum(nums[i - x + 1], i - x + 1);
+            medianFinder.eraseNum(nums[i - x + 1], i - x + 1);
         }
     }
     for (int i = 0; i < n; i++)
     {
-        if (i >= x - 1) dp[i][0] = cost[i];
-        else if (i >= x)
+        if (i >= x - 1)
+        {
+            dp[i][0] = cost[i];
+            dp[i][0] = min(dp[i][0], dp[i - 1][0]);
+        }
+        if (i >= x)
         {
             for (int j = 1; j < k; j++)
             {

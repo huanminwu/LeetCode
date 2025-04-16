@@ -28718,4 +28718,69 @@ int LeetCodeString::longestPalindromeII(string s, string t)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3517. Smallest Palindromic Rearrangement I
+///
+/// Medium
+/// 
+/// You are given a palindromic string s.
+/// 
+/// Return the lexicographically smallest palindromic permutation of s.
+/// 
+/// Example 1:
+/// Input: s = "z"
+/// Output: "z"
+/// Explanation:
+/// A string of only one character is already the lexicographically smallest 
+/// palindrome.
+///
+/// Example 2:
+/// Input: s = "babab"
+/// Output: "abbba"
+/// Explanation:
+/// Rearranging "babab" → "abbba" gives the smallest lexicographic palindrome.
+///
+/// Example 3:
+/// Input: s = "daccad"
+/// Output: "acddca"
+/// Explanation:
+/// Rearranging "daccad" → "acddca" gives the smallest lexicographic 
+/// palindrome.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists of lowercase English letters.
+/// 3. s is guaranteed to be palindromic.
+/// </summary>
+string LeetCodeString::smallestPalindromeI(string s)
+{
+    string result = s;
+    vector<int> char_count(26);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        char_count[s[i] - 'a']++;
+    }
+    int first = 0, last = s.size() - 1;
+    for (int i = 0; i < 26; i++)
+    {
+        while (char_count[i] > 1)
+        {
+            result[first] = 'a' + i;
+            result[last] = 'a' + i;
+            first++;
+            last--;
+            char_count[i] -= 2;
+        }
+    }
+    for (int i = 0; i < 26; i++)
+    {
+        if (char_count[i] > 0)
+        {
+            result[first] = 'a' + i;
+            break;
+        }
+    }
+    return result;
+}
 #pragma endregion

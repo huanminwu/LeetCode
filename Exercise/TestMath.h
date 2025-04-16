@@ -367,5 +367,7 @@ void TestLeetCode3464(void);
 void TestLeetCode3483(void);
 void TestLeetCode3492(void);
 void TestLeetCode3495(void);
+void TestLeetCode3512(void);
+void TestLeetCode3516(void);
 void TestLeetCodeMath(void);
 #endif  // TestMath

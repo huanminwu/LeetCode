@@ -11497,7 +11497,7 @@ void TestLeetCode3499(void)
 
 void TestLeetCode3501(void)
 {
-    Logger::WriteMessage("Test Leet Code 3499");
+    Logger::WriteMessage("Test Leet Code 3501");
     LeetCodeArray leetCode;
     string s = "10110111";
     vector<vector<int>> queries = { {3, 7},{4, 6},{0, 6} };
@@ -11507,8 +11507,29 @@ void TestLeetCode3501(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3511(void)
+{
+    Logger::WriteMessage("Test Leet Code 3511");
+    LeetCodeArray leetCode;
+    vector<int> nums = { -10, 15, -12 };
+    int  result = leetCode.makeArrayPositive(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -1,-2,3,-1,2,6 };
+    result = leetCode.makeArrayPositive(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 2, 3 };
+    result = leetCode.makeArrayPositive(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3511();
     TestLeetCode3501();
     TestLeetCode3499();
     TestLeetCode3500();
