@@ -4310,8 +4310,60 @@ void TestLeetCode3502(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3505(void)
+{
+    Logger::WriteMessage("Test Leet Code 3505");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 5, -2, 1, 3, 7, 3, 6, 4, -1 };
+    int x = 3, k = 2;
+    long long result = leetCode.minOperations(nums, x, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("x = " + to_string(x) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 9,-2,-2,-2,1,5 };
+    x = 2, k = 2;
+    result = leetCode.minOperations(nums, x, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("x = " + to_string(x) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3507(void)
+{
+    Logger::WriteMessage("Test Leet Code 3507");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 5, 2, 3, 1 };
+    int result = leetCode.minimumPairRemovalI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,2 };
+    result = leetCode.minimumPairRemovalI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3510(void)
+{
+    Logger::WriteMessage("Test Leet Code 3510");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 5, 2, 3, 1 };
+    int result = leetCode.minimumPairRemovalII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,2 };
+    result = leetCode.minimumPairRemovalII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3505();
+    TestLeetCode3510();
+    TestLeetCode3507();
     TestLeetCode3502();
     TestLeetCode3478();
     TestLeetCode3476();

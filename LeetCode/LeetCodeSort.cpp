@@ -14159,8 +14159,8 @@ long long LeetCodeSort::minOperations(vector<int>& nums, int x, int k)
 int LeetCodeSort::minimumPairRemovalI(vector<int>& nums)
 {
     vector<int> arr = nums;
-    map<int, int>ordered_list;
-    set<pair<int, int>> heap;
+    map<int, long long>ordered_list;
+    set<pair<long long, int>> heap;
     unordered_set<int> reverse_orders;
     for (size_t i = 0; i < nums.size(); i++)
     {
@@ -14177,23 +14177,23 @@ int LeetCodeSort::minimumPairRemovalI(vector<int>& nums)
         }
     }
     int result = 0;
-    while (!heap.empty())
+    while (!reverse_orders.empty())
     {
         auto first = heap.begin();
-        pair<int, int> sum = *first;
+        auto sum = *first;
         auto itr = ordered_list.find(first->second);
         heap.erase(sum);
         if (itr != ordered_list.begin())
         {
             auto prev_itr = prev(itr);
-            pair<int, int> prev_sum = make_pair(prev_itr->second + itr->second, prev_itr->first);
+            auto prev_sum = make_pair(prev_itr->second + itr->second, prev_itr->first);
             heap.erase(prev_sum);
         }
         auto next_itr = next(itr);
         auto next_next_itr = next(next_itr);
         if (next_next_itr != ordered_list.end())
         {
-            pair<int, int> next_sum = make_pair(next_itr->second + next_next_itr->second, next_itr->first);
+            auto next_sum = make_pair(next_itr->second + next_next_itr->second, next_itr->first);
             heap.erase(next_sum);
         }
         reverse_orders.erase(sum.second);
@@ -14206,23 +14206,147 @@ int LeetCodeSort::minimumPairRemovalI(vector<int>& nums)
         if (itr != ordered_list.begin())
         {
             auto prev_itr = prev(itr);
-            pair<int, int> prev_sum = make_pair(prev_itr->second + itr->second, prev_itr->first);
+            auto prev_sum = make_pair(prev_itr->second + itr->second, prev_itr->first);
             heap.insert(prev_sum);
             if (prev_itr->second > itr->second)
             {
                 reverse_orders.insert(itr->first);
             }
+            else
+            {
+                reverse_orders.erase(itr->first);
+            }
         }
         next_itr = next(itr);
         if (next_itr != ordered_list.end())
         {
+            auto next_sum = make_pair(itr->second + next_itr->second, itr->first);
+            heap.insert(next_sum);
             if (itr->second > next_itr->second)
             {
                 reverse_orders.insert(next_itr->first);
             }
+            else
+            {
+                reverse_orders.erase(next_itr->first);
+            }
         }
         result++;
-        if (reverse_orders.empty()) break;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3510. Minimum Pair Removal to Sort Array II
+///
+/// Hard
+///
+/// Given an array nums, you can perform the following operation any number of 
+/// times:
+///
+/// Select the adjacent pair with the minimum sum in nums. If multiple such 
+/// pairs exist, choose the leftmost one.
+/// Replace the pair with their sum.
+/// Return the minimum number of operations needed to make the array 
+/// non-decreasing.
+///
+/// An array is said to be non-decreasing if each element is greater than or 
+/// equal to its previous element (if it exists).
+///
+/// Example 1:
+/// Input: nums = [5,2,3,1]
+/// Output: 2
+/// Explanation:
+/// The pair (3,1) has the minimum sum of 4. After replacement, nums = [5,2,4].
+/// The pair (2,4) has the minimum sum of 6. After replacement, nums = [5,6].
+/// The array nums became non-decreasing in two operations.
+///
+/// Example 2:
+/// Input: nums = [1,2,2]
+/// Output: 0
+/// Explanation:
+/// The array nums is already sorted.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. -10^9 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeSort::minimumPairRemovalII(vector<int>& nums)
+{
+    vector<int> arr = nums;
+    map<int, long long>ordered_list;
+    set<pair<long long, int>> heap;
+    unordered_set<int> reverse_orders;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        ordered_list[i] = nums[i];
+        if (i > 0)
+        {
+            heap.insert(make_pair(nums[i - 1] + nums[i], i - 1));
+            auto itr = ordered_list.find(i);
+            auto prev_itr = prev(itr);
+            if (prev_itr->second > itr->second)
+            {
+                reverse_orders.insert(itr->first);
+            }
+        }
+    }
+    int result = 0;
+    while (!reverse_orders.empty())
+    {
+        auto first = heap.begin();
+        auto sum = *first;
+        auto itr = ordered_list.find(first->second);
+        heap.erase(sum);
+        if (itr != ordered_list.begin())
+        {
+            auto prev_itr = prev(itr);
+            auto prev_sum = make_pair(prev_itr->second + itr->second, prev_itr->first);
+            heap.erase(prev_sum);
+        }
+        auto next_itr = next(itr);
+        auto next_next_itr = next(next_itr);
+        if (next_next_itr != ordered_list.end())
+        {
+            auto next_sum = make_pair(next_itr->second + next_next_itr->second, next_itr->first);
+            heap.erase(next_sum);
+        }
+        reverse_orders.erase(sum.second);
+        reverse_orders.erase(next_itr->first);
+        ordered_list.erase(sum.second);
+        ordered_list.erase(next_itr);
+        ordered_list[sum.second] = sum.first;
+
+        itr = ordered_list.find(sum.second);
+        if (itr != ordered_list.begin())
+        {
+            auto prev_itr = prev(itr);
+            auto prev_sum = make_pair(prev_itr->second + itr->second, prev_itr->first);
+            heap.insert(prev_sum);
+            if (prev_itr->second > itr->second)
+            {
+                reverse_orders.insert(itr->first);
+            }
+            else
+            {
+                reverse_orders.erase(itr->first);
+            }
+        }
+        next_itr = next(itr);
+        if (next_itr != ordered_list.end())
+        {
+            auto next_sum = make_pair(itr->second + next_itr->second, itr->first);
+            heap.insert(next_sum);
+            if (itr->second > next_itr->second)
+            {
+                reverse_orders.insert(next_itr->first);
+            }
+            else
+            {
+                reverse_orders.erase(next_itr->first);
+            }
+        }
+        result++;
     }
     return result;
 }

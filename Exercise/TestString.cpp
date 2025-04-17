@@ -7882,6 +7882,36 @@ void TestLeetCode3503(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3504(void)
+{
+    Logger::WriteMessage("Test Leet Code 3504");
+    LeetCodeString leetCode;
+    string s = "a", t = "a";
+    int result = leetCode.longestPalindromeI(s, t);
+    Logger::WriteMessage("s = " + s + "t = " + t);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "abc", t = "def";
+    result = leetCode.longestPalindromeI(s, t);
+    Logger::WriteMessage("s = " + s + "t = " + t);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "b", t = "aaaa";
+    result = leetCode.longestPalindromeI(s, t);
+    Logger::WriteMessage("s = " + s + "t = " + t);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "abcde", t = "ecdba";
+    result = leetCode.longestPalindromeI(s, t);
+    Logger::WriteMessage("s = " + s + "t = " + t);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "fwwwn", t = "asbagyfw";
+    result = leetCode.longestPalindromeI(s, t);
+    Logger::WriteMessage("s = " + s + "t = " + t);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCode3517(void)
 {
     Logger::WriteMessage("Test Leet Code 3517");
@@ -7904,6 +7934,7 @@ void TestLeetCode3517(void)
 
 void TestLeetCodeString(void)
 {
+    TestLeetCode3504();
     TestLeetCode3517();
     TestLeetCode3503();
     TestLeetCode3498();

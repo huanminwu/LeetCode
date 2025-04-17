@@ -58,5 +58,6 @@ void TestLeetCode3398(void);
 void TestLeetCode3399(void);
 void TestLeetCode3449(void);
 void TestLeetCode3453(void);
+void TestLeetCode3506(void);
 void TestLeetCodeBinarySearch(void);
 #endif  // TestBinarySearch
