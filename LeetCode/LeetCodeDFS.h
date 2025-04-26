@@ -5519,6 +5519,118 @@ public:
     /// </summary>
     int beautifulNumbers(int l, int r);
 
+    /// <summary>
+    /// Leet Code 3519. Count Numbers with Non-Decreasing Digits 
+    /// </summary>
+    int countNumbersDigitDP(string num, int pos, int digit, int b, bool is_limit, vector<vector<int>> &cache);
+
+    /// <summary>
+    /// Leet Code 3519. Count Numbers with Non-Decreasing Digits 
+    /// </summary>
+    string countNumbersConvertBase(string num, int b);
+
+    /// <summary>
+    /// Leet Code 3519. Count Numbers with Non-Decreasing Digits 
+    ///
+    /// Hard
+    ///
+    /// You are given two integers, l and r, represented as strings, and an 
+    /// integer b. Return the count of integers in the inclusive range [l, r] 
+    /// whose digits are in non-decreasing order when represented in base b.
+    ///
+    /// An integer is considered to have non-decreasing digits if, when read 
+    /// from left to right (from the most significant digit to the least 
+    /// significant digit), each digit is greater than or equal to the 
+    /// previous one.
+    ///
+    /// Since the answer may be too large, return it modulo 10^9 + 7.
+    ///  
+    /// Example 1:
+    /// Input: l = "23", r = "28", b = 8
+    /// Output: 3
+    /// Explanation:
+    /// The numbers from 23 to 28 in base 8 are: 27, 30, 31, 32, 33, and 34.
+    /// Out of these, 27, 33, and 34 have non-decreasing digits. Hence, the 
+    /// output is 3.
+    ///
+    /// Example 2:
+    /// Input: l = "2", r = "7", b = 2
+    /// Output: 2
+    /// Explanation:
+    /// The numbers from 2 to 7 in base 2 are: 10, 11, 100, 101, 110, and 111.
+    /// Out of these, 11 and 111 have non-decreasing digits. Hence, the output 
+    /// is 2.
+    ///
+    /// Constraints:
+    /// 1. 1 <= l.length <= r.length <= 100
+    /// 2. 2 <= b <= 10
+    /// 3. l and r consist only of digits.
+    /// 4. The value represented by l is less than or equal to the value 
+    ///    represented by r.
+    /// 5. l and r do not contain leading zeros.
+    /// </summary>
+    int countNumbers(string l, string r, int b);
+
+    /// <summary>
+    /// Leet Code 3518. Smallest Palindromic Rearrangement II
+    /// Hard
+    /// </summary>
+    int smallestPalindromeCombination(vector<int>& remaining, int length, int k);
+
+    /// <summary>
+    /// Leet Code 3518. Smallest Palindromic Rearrangement II
+    /// Hard
+    /// </summary>
+    int smallestPalindrome(int k, int index, string &result, int length, vector<int>&remaining);
+
+    /// <summary>
+    /// Leet Code 3518. Smallest Palindromic Rearrangement II
+    ///
+    /// Hard
+    ///
+    /// You are given a palindromic string s and an integer k.
+    /// 
+    /// Return the k-th lexicographically smallest palindromic permutation of s. 
+    /// If there are fewer than k distinct palindromic permutations, return an 
+    /// empty string.
+    ///
+    /// Note: Different rearrangements that yield the same palindromic string 
+    /// are considered identical and are counted once.
+    ///
+    /// Example 1:
+    /// Input: s = "abba", k = 2
+    /// Output: "baab"
+    /// 
+    /// Explanation:
+    /// The two distinct palindromic rearrangements of "abba" are "abba" and 
+    /// "baab".
+    /// Lexicographically, "abba" comes before "baab". Since k = 2, the output 
+    /// is "baab".
+    ///
+    /// Example 2:
+    /// Input: s = "aa", k = 2
+    /// Output: ""
+    /// Explanation:
+    /// There is only one palindromic rearrangement: "aa".
+    /// The output is an empty string since k = 2 exceeds the number of possible 
+    /// rearrangements.
+    ///
+    /// Example 3:
+    /// Input: s = "bacab", k = 1
+    /// Output: "abcba"
+    /// Explanation:
+    /// The two distinct palindromic rearrangements of "bacab" are "abcba" and 
+    /// "bacab".
+    /// Lexicographically, "abcba" comes before "bacab". Since k = 1, the output 
+    /// is "abcba".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^4
+    /// 2. s consists of lowercase English letters.
+    /// 3. s is guaranteed to be palindromic.
+    /// 4. 1 <= k <= 10^6
+    /// </summary>
+    string smallestPalindrome(string s, int k);
 #pragma endregion
 };
 

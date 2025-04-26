@@ -6001,8 +6001,35 @@ void TestLeetCode3509(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3524(void)
+{
+    Logger::WriteMessage("Test Leet Code 3524");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5 };
+    int k = 3;
+    vector<long long> result = leetCode.resultArrayI(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) );
+    Logger::WriteMessage(result);
+
+    nums = { 1,2,4,8,16,32 };
+    k = 4;
+    result = leetCode.resultArrayI(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 1, 1, 2, 1, 1 };
+    k = 2;
+    result = leetCode.resultArrayI(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3524();
     TestLeetCode3509();
     TestLeetCode3494();
     TestLeetCode3489();

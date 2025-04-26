@@ -132,6 +132,183 @@ public:
 };
 
 #pragma region Design
+struct BinaryIndexTree
+{
+    vector<int> m_arr;
+    int m_count;
+    BinaryIndexTree(int n)
+    {
+        m_arr = vector<int>(n + 1, 0);
+        m_count = n + 1;
+    }
+    void add(int index, int val)
+    {
+        if (index == 0) return;
+        while (index < m_count)
+        {
+            m_arr[index] += val;
+            index += (index & -index);
+        }
+    }
+    int sum(int index)
+    {
+        int sum = 0;
+        while (index != 0)
+        {
+            sum += m_arr[index];
+            index -= index & -index;
+        }
+        return sum;
+    }
+};
+
+struct SegmentTreeMax
+{
+    vector<int> m_arr;
+    string m_type;
+    int m_count;
+    SegmentTreeMax(int n)
+    {
+        m_count = n;
+        m_arr = vector<int>(4 * n, INT_MIN);
+    }
+
+    void set(int index, int start, int end, int pos, int val)
+    {
+        if (start == end)
+        {
+            m_arr[index] = val;
+            return;
+        }
+        int mid = start + (end - start) / 2;
+        if (pos <= mid)
+        {
+            set(2 * index + 1, start, mid, pos, val);
+        }
+        else
+        {
+            set(2 * index + 2, mid + 1, end, pos, val);
+        }
+        m_arr[index] = max(m_arr[2 * index + 1], m_arr[2 * index + 2]);
+    }
+
+    int query(int index, int start, int end, int val)
+    {
+        if (m_arr[index] < val) return -1;
+        if (start == end)
+        {
+            return start;
+        }
+        int mid = start + (end - start) / 2;
+        if (m_arr[2 * index + 1] >= val)
+        {
+            return query(2 * index + 1, start, mid, val);
+        }
+        else
+        {
+            return query(2 * index + 2, mid + 1, end, val);
+        }
+    }
+};
+
+struct SegmentTreeModuloK
+{
+    struct Node
+    {
+        // record the all [left, right] prefix product.
+        // Example: (left), (left, left+1), ... (left,... right)
+    public:
+        Node()
+        {
+            // empty node
+            fill(remain, remain + 5, 0);
+            prod = 1;
+        }
+        int remain[5];
+        int prod;
+    };
+
+    int k, n;
+    vector<Node> nodes;
+    SegmentTreeModuloK(int n, int k)
+    {
+        this->k = k;
+        this->n = n;
+        nodes.resize(4 * n);
+    }
+    void merge(int cur) 
+    {
+        // merge the 2*cur+1 and 2*cur+2 node to cur
+        int left = 2 * cur + 1;
+        int right = 2 * cur + 2;
+        nodes[cur].prod = (nodes[left].prod * nodes[right].prod) % k;
+        // The part [left ~ mid]'s prefix still include in the [left, right] prefix.
+        for (int i = 0; i < k; ++i) nodes[cur].remain[i] = nodes[left].remain[i];
+        for (int i = 0; i < k; ++i) 
+        {
+            int newVal = (i * nodes[left].prod) % k;
+            nodes[cur].remain[newVal] += nodes[right].remain[i];
+        }
+    }
+    void build(vector<int>& nums, int cur, int left, int right)
+    {
+        if (left == right) 
+        {
+            if (nums[left] % k < 5)
+            {
+                nodes[cur].remain[nums[left] % k % 5] = 1;
+                nodes[cur].prod = nums[left] % k;
+            }
+            return;
+        }
+        int mid = (left + right) / 2;
+        build(nums, 2 * cur + 1, left, mid);
+        build(nums, 2 * cur + 2, mid + 1, right);
+        merge(cur);
+    }
+    void update(int cur, int left, int right, int target, int val) 
+    {
+        if (left == right) 
+        {
+            for (int i = 0; i < k; ++i) nodes[cur].remain[i] = 0;
+            if (val % k < 5)
+            {
+                nodes[cur].remain[val % k % 5] = 1;
+                nodes[cur].prod = val % k;
+            }
+            return;
+        }
+        int mid = (left + right) / 2;
+        if (target <= mid)
+            update(2 * cur + 1, left, mid, target, val);
+        else
+            update(2 * cur + 2, mid + 1, right, target, val);
+        merge(cur);
+    }
+
+    void merge(Node& n1, Node& n2) 
+    {
+        // merge the n1 and n2 node to n1
+        for (int i = 0; i < k; ++i) 
+        {
+            int newVal = (i * n1.prod) % k;
+            n1.remain[newVal] += n2.remain[i];
+        }
+        n1.prod = (n1.prod * n2.prod) % k;
+    }
+
+    Node query(int cur, int qL, int qR, int left, int right) 
+    {
+        if (qR < left || qL > right) return Node(); // empty
+        if (qL <= left && right <= qR) return nodes[cur];
+        int mid = (left + right) / 2;
+        Node nLeft = query(2 * cur + 1, qL, qR, left, mid);
+        Node nRight = query(2 * cur + 2, qL, qR, mid + 1, right);
+        merge(nLeft, nRight);
+        return nLeft;
+    }
+};
+
 
 #pragma endregion 
 

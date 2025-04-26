@@ -2495,7 +2495,6 @@ void TestLeetCode3490(void)
     Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r));
     Logger::WriteMessage("result = " + to_string(result));
 
-
     l = 1;
     r = 100;
     result = leetCode.beautifulNumbers(l, r);
@@ -2503,8 +2502,56 @@ void TestLeetCode3490(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3519(void)
+{
+    Logger::WriteMessage("Test Leet Code 3519");
+    LeetCodeDFS leetCode;
+    string l = "23", r = "28";
+    int b = 8;
+    int result = leetCode.countNumbers(l, r, b);
+    Logger::WriteMessage("l = " + l + "; r = " + r);
+    Logger::WriteMessage("b = " + to_string(b) + "; result = " + to_string(result));
+
+    l = "2", r = "7";
+    b = 2;
+    result = leetCode.countNumbers(l, r, b);
+    Logger::WriteMessage("l = " + l + "; r = " + r);
+    Logger::WriteMessage("b = " + to_string(b) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3518(void)
+{
+    Logger::WriteMessage("Test Leet Code 3518");
+    LeetCodeDFS leetCode;
+    string s = "abba";
+    int k = 2;
+    string result = leetCode.smallestPalindrome(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+
+    s = "aa";
+    k = 2;
+    result = leetCode.smallestPalindrome(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+
+    s = "bacab";
+    k = 1;
+    result = leetCode.smallestPalindrome(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+
+    s = "baaaaaab";
+    k = 3;
+    result = leetCode.smallestPalindrome(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3518();
+    TestLeetCode3519();
     TestLeetCode3490();
     TestLeetCode3470();
     TestLeetCode3437();

@@ -11527,8 +11527,93 @@ void TestLeetCode3511(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3522(void)
+{
+    Logger::WriteMessage("Test Leet Code 3522");
+    LeetCodeArray leetCode;
+    vector<string> instructions = { "jump", "add", "add", "jump", "add", "jump" };
+    vector<int> values = { 2,1,3,1,-2,-3 };
+    long long  result = leetCode.calculateScore(instructions, values);
+    Logger::WriteMessage(instructions);
+    Logger::WriteMessage(values);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    instructions = { "jump","add","add" };
+    values = { 3,1,1 };
+    result = leetCode.calculateScore(instructions, values);
+    Logger::WriteMessage(instructions);
+    Logger::WriteMessage(values);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    instructions = { "jump" };
+    values = { 0 };
+    result = leetCode.calculateScore(instructions, values);
+    Logger::WriteMessage(instructions);
+    Logger::WriteMessage(values);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3523(void)
+{
+    Logger::WriteMessage("Test Leet Code 3523");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 4,2,5,3,5 };
+    int  result = leetCode.maximumPossibleSize(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    result = leetCode.maximumPossibleSize(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3525(void)
+{
+    Logger::WriteMessage("Test Leet Code 3525");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5 };
+    int k = 3;
+    vector<vector<int>> queries = {{3, 3, 3, 0},{0, 1, 0, 1}, {2, 2, 0, 2} };
+    vector<int> result = leetCode.resultArrayII(nums, k, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 1,2,4,8,16,32 };
+    k = 4;
+    queries = { {0,2,0,2} ,{0,2,0,1} };
+    result = leetCode.resultArrayII(nums, k, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 1, 1, 2, 1, 1 };
+    k = 2;  
+    queries = { {2, 1, 0, 1} };
+    result = leetCode.resultArrayII(nums, k, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 1000000000, 1000000000 };
+    k = 1;
+    queries = { {0, 1000000000, 0, 0} };
+    result = leetCode.resultArrayII(nums, k, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3525();
+    TestLeetCode3523();
+    TestLeetCode3522();
     TestLeetCode3511();
     TestLeetCode3501();
     TestLeetCode3499();

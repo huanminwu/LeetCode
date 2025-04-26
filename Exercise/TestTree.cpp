@@ -4251,7 +4251,6 @@ void TestLeetCode3425(void)
     Logger::WriteMessage(result);
 }
 
-
 void TestLeetCode3486(void)
 {
     Logger::WriteMessage("Test Leet Code 3486");
@@ -4281,11 +4280,52 @@ void TestLeetCode3486(void)
     Logger::WriteMessage(edges);
     Logger::WriteMessage(nums);
     Logger::WriteMessage(result);
+}
 
+void TestLeetCode3515(void)
+{
+    Logger::WriteMessage("Test Leet Code 3515");
+    LeetCodeTree leetCode;
+    int n = 2;
+    vector<vector<int>> edges = { {1, 2, 7} };
+    vector<vector<int>> queries = { {2, 2},{1, 1, 2, 4},{2, 2} };
+    vector<int> result = leetCode.treeQueries(n, edges, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 3; 
+    edges = { {1, 2, 2},{1, 3, 4} };
+    queries = { {2, 1},{2, 3},{1, 1, 3, 7},{2, 2},{2, 3} };
+    result = leetCode.treeQueries(n, edges, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 4;
+    edges = { {1, 2, 2},{2, 3, 1},{3, 4, 5} };
+    queries = { {2, 4},{2, 3},{1, 2, 3, 3},{2, 2},{2, 3} };
+    result = leetCode.treeQueries(n, edges, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 4;
+    edges = { {1, 2, 2},{4, 2, 3},{1, 3, 4} };
+    queries = { {2, 2},{1, 3, 1, 1},{2, 3} };
+    result = leetCode.treeQueries(n, edges, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
 }
 
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3515();
     TestLeetCode3486();
     TestLeetCode3425();
     TestLeetCode3367();

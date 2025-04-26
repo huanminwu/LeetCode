@@ -1599,8 +1599,27 @@ void TestLeetCode3506(void)
     Logger::WriteMessage("splitTime = " + to_string(splitTime) + "; result = " + to_string(result));
 }
 
+
+void TestLeetCode3520(void)
+{
+    Logger::WriteMessage("Test Leet Code 3520");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 3, 2, 1 };
+    int  k = 7;
+    int  result = leetCode.minThreshold(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 10,9,9,9,1 };
+    k = 4;
+    result = leetCode.minThreshold(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode3520();
     TestLeetCode3506();
     TestLeetCode3449();
     TestLeetCode3453();

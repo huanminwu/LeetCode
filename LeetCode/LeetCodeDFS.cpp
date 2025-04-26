@@ -10306,7 +10306,296 @@ int LeetCodeDFS::beautifulNumbers(int l, int r)
     int value2 = beautifulNumbers(to_string(r), 0, 1, 1, 0, cache);
     return value2 - value1;
 }
+
+/// <summary>
+/// Leet Code 3519. Count Numbers with Non-Decreasing Digits 
+/// </summary>
+int LeetCodeDFS::countNumbersDigitDP(string num, int pos, int digit, int b, bool is_limit,
+    vector<vector<int>>& cache)
+{
+    int M = 1000000007;
+    if (pos == num.size()) return 1;
+    int result = 0;
+    int count = 0;
+    if (is_limit)
+    {
+        for (int i = 0; i < num[pos] - '0'; i++)
+        {
+            if (i < digit) continue;
+            count = countNumbersDigitDP(num, pos + 1, i, b, false, cache);
+            result = (result + count) % M;
+        }
+        if (num[pos] - '0' >= digit)
+        {
+            count = countNumbersDigitDP(num, pos + 1, num[pos] - '0', b, true, cache);
+            result = (result + count) % M;
+        }
+    }
+    else
+    {
+        if (cache[pos][digit] != -1)
+        {
+            return cache[pos][digit];
+        }
+        for (int i = 0; i < b; i++)
+        {
+            if (i < digit) continue;
+            count = countNumbersDigitDP(num, pos + 1, i, b, false, cache);
+            result = (result + count) % M;
+        }
+        cache[pos][digit] = result;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3519. Count Numbers with Non-Decreasing Digits 
+/// </summary>
+string LeetCodeDFS::countNumbersConvertBase(string num, int b)
+{
+    deque<int> base_10, base_b;
+    for (size_t i = 0; i < num.size(); i++)
+    {
+        base_10.push_back(num[i] - '0');
+    }
+    while (!base_10.empty() && base_10.front() == 0) base_10.pop_front();
+    while (!base_10.empty())
+    {
+        int r = 0;
+        for (size_t i = 0; i < base_10.size(); i++)
+        {
+            int q = (r * 10 + base_10[i]) / b;
+            r = (r * 10 + base_10[i]) % b;
+            base_10[i] = q;
+        }
+        base_b.push_front(r);
+        while (!base_10.empty() && base_10.front() == 0) base_10.pop_front();
+    }
+    string result;
+    for (size_t i = 0; i < base_b.size(); i++)
+    {
+        result.push_back(base_b[i] + '0');
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3519. Count Numbers with Non-Decreasing Digits 
+///
+/// Hard
+///
+/// You are given two integers, l and r, represented as strings, and an 
+/// integer b. Return the count of integers in the inclusive range [l, r] 
+/// whose digits are in non-decreasing order when represented in base b.
+///
+/// An integer is considered to have non-decreasing digits if, when read 
+/// from left to right (from the most significant digit to the least 
+/// significant digit), each digit is greater than or equal to the 
+/// previous one.
+///
+/// Since the answer may be too large, return it modulo 10^9 + 7.
+///  
+/// Example 1:
+/// Input: l = "23", r = "28", b = 8
+/// Output: 3
+/// Explanation:
+/// The numbers from 23 to 28 in base 8 are: 27, 30, 31, 32, 33, and 34.
+/// Out of these, 27, 33, and 34 have non-decreasing digits. Hence, the 
+/// output is 3.
+///
+/// Example 2:
+/// Input: l = "2", r = "7", b = 2
+/// Output: 2
+/// Explanation:
+/// The numbers from 2 to 7 in base 2 are: 10, 11, 100, 101, 110, and 111.
+/// Out of these, 11 and 111 have non-decreasing digits. Hence, the output 
+/// is 2.
+///
+/// Constraints:
+/// 1. 1 <= l.length <= r.length <= 100
+/// 2. 2 <= b <= 10
+/// 3. l and r consist only of digits.
+/// 4. The value represented by l is less than or equal to the value 
+///    represented by r.
+/// 5. l and r do not contain leading zeros.
+/// </summary>
+int LeetCodeDFS::countNumbers(string l, string r, int b)
+{
+    int M = 1000000007;
+    string left = countNumbersConvertBase(l, b);
+    string right = countNumbersConvertBase(r, b);
+    vector<vector<int>> cache = vector<vector<int>>(left.size(), vector<int>(b, -1));
+    int count1 = countNumbersDigitDP(left, 0, 0, b, true, cache);
+    cache = vector<vector<int>>(right.size(), vector<int>(b, -1));
+    int count2 = countNumbersDigitDP(right, 0, 0, b, true, cache);
+    int result = (count2 + M - count1) % M;
+    int inc = 1;
+    for (size_t i = 1; i < left.size(); i++)
+    {
+        if (left[i] < left[i - 1])
+        {
+            inc = 0;
+            break;
+        }
+    }
+    result = (result + inc) % M;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3518. Smallest Palindromic Rearrangement II
+/// Hard
+/// </summary>
+int LeetCodeDFS::smallestPalindromeCombination(vector<int>& remaining, int length, int k)
+{
+    long long result = 1;
+    for (int i = 0; i < 26; i++)
+    {
+        if (remaining[i] >= 2)
+        {
+            int r = remaining[i] / 2;
+            int n = length;
+            r = min(r, n - r);
+            for (int j = 1; j <= r; j++)
+            {
+                result = result * (n - j + 1) / j;
+                if (result > (long long)k)
+                {
+                    return k;
+                }
+            }
+            length -= remaining[i] / 2;
+        }
+    }
+    return (int)result;
+}
+
+
+/// <summary>
+/// Leet Code 3518. Smallest Palindromic Rearrangement II
+/// Hard
+/// </summary>
+int LeetCodeDFS::smallestPalindrome(int k, int index, string& result, int length, vector<int>& remaining)
+{
+    if (result.size() == length / 2)
+    {
+        return 1;
+    }
+    int count = 0;
+    for (int i = 0; i < 26; i++)
+    {
+        if (index >= k) break;
+        if (remaining[i] < 2) continue;
+        remaining[i] -= 2;
+        result.push_back('a' + i);
+        int next_count = smallestPalindromeCombination(remaining, length / 2 - result.size(), k);
+        if (index + next_count < k)
+        {
+            count += next_count;
+            index += next_count;
+        }
+        else
+        {
+            next_count = smallestPalindrome(k, index, result, length, remaining);
+            count += next_count;
+            index += next_count;
+            if (index == k && result.size() == length / 2)
+            {
+                return count;
+            }
+        }
+        remaining[i] += 2;
+        result.pop_back();
+    }
+    return count;
+}
+
+/// <summary>
+/// Leet Code 3518. Smallest Palindromic Rearrangement II
+///
+/// Hard
+///
+/// You are given a palindromic string s and an integer k.
+/// 
+/// Return the k-th lexicographically smallest palindromic permutation of s. 
+/// If there are fewer than k distinct palindromic permutations, return an 
+/// empty string.
+///
+/// Note: Different rearrangements that yield the same palindromic string 
+/// are considered identical and are counted once.
+///
+/// Example 1:
+/// Input: s = "abba", k = 2
+/// Output: "baab"
+/// 
+/// Explanation:
+/// The two distinct palindromic rearrangements of "abba" are "abba" and 
+/// "baab".
+/// Lexicographically, "abba" comes before "baab". Since k = 2, the output 
+/// is "baab".
+///
+/// Example 2:
+/// Input: s = "aa", k = 2
+/// Output: ""
+/// Explanation:
+/// There is only one palindromic rearrangement: "aa".
+/// The output is an empty string since k = 2 exceeds the number of possible 
+/// rearrangements.
+///
+/// Example 3:
+/// Input: s = "bacab", k = 1
+/// Output: "abcba"
+/// Explanation:
+/// The two distinct palindromic rearrangements of "bacab" are "abcba" and 
+/// "bacab".
+/// Lexicographically, "abcba" comes before "bacab". Since k = 1, the output 
+/// is "abcba".
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^4
+/// 2. s consists of lowercase English letters.
+/// 3. s is guaranteed to be palindromic.
+/// 4. 1 <= k <= 10^6
+/// </summary>
+string LeetCodeDFS::smallestPalindrome(string s, int k)
+{
+    vector<int> remaining(26);
+    string result;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        remaining[s[i] - 'a']++;
+    }
+    int count = smallestPalindromeCombination(remaining, s.size() / 2, k + 1);
+    if (count < k) return(result);
+
+    for (size_t i = 0; i < s.size() / 2; i++)
+    {
+        for (int i = 0; i < 26; i++)
+        {
+            if (remaining[i] < 2) continue;
+            result.push_back('a' + i);
+            remaining[i] -= 2;
+            count = smallestPalindromeCombination(remaining, s.size() / 2 - result.size(), k + 1);
+            if (count >= k) break;
+            k -= count;
+            remaining[i] += 2;
+            result.pop_back();
+        }
+    }
+    int pos = result.size() - 1;
+    for (int i = 0; i < 26; i++)
+    {
+        if (remaining[i] == 1)
+        {
+            result.push_back('a' + i);
+            break;
+        }
+    }
+    for (int i = pos; i >= 0; i--)
+    {
+        result.push_back(result[i]);
+    }
+    return result;
+}
 #pragma endregion
-
-
-
