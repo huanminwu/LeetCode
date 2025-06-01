@@ -6246,8 +6246,130 @@ void TestLeetCode3493(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3530(void)
+{
+    Logger::WriteMessage("Test Leet Code 3530");
+    LeetCodeGraph leetCode;
+    int n = 2;
+    vector<vector<int>> edges = { {0, 1} };
+    vector<int> score = { 2, 3 };
+    int result = leetCode.maxProfit(n, edges, score);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(score);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3; 
+    edges = { {0, 1},{0, 2} };
+    score = { 1, 6, 3 };
+    result = leetCode.maxProfit(n, edges, score);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(score);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 22;
+    edges =
+    { { 4, 9 }, { 3,13 }, { 5,10 }, { 8,9 }, { 5,19 }, { 8,18 }, { 11,14 }, { 1,15 }, { 13,17 }, { 6,11 }, { 7,10 }, { 12,18 }, { 2,4 }, { 11,16 }, { 1,17 }, { 7,21 }, { 3,8 }, { 12,20 }, { 14,17 }, { 3,17 }, { 1,10 }, { 1,19 }, { 0,2 }, { 5,16 }, { 4,18 }, { 14,19 }, { 10,15 }, { 13,14 }, { 7,16 }, { 12,15 }, { 4,11 }, { 14,21 }, { 5,18 }, { 9,16 }, { 19,20 }, { 13,16 }, { 20,21 }, { 5,11 }, { 1,7 }, { 10,19 }, { 11,18 }, { 2,15 }, { 6,15 }, { 4,15 }, { 17,18 }, { 10,12 }, { 0,20 }, { 11,20 }, { 2,17 }, { 5,6 }, { 12,21 }, { 14,18 }, { 4,17 }, { 0,4 }, { 17,20 }, { 8,17 }, { 0,13 }, { 11,13 }, { 1,20 }, { 6,10 }, { 6,19 }, { 7,18 }, { 4,19 }, { 8,10 }, { 1,4 }, { 10,16 }, { 11,15 }, { 2,12 }, { 0,15 }, { 3,4 }, { 18,20 }, { 4,12 }, { 4,21 }, { 8,12 }, { 9,11 }, { 2,5 }, { 10,18 }, { 13,20 }, { 6,14 }, { 5,15 }, { 8,14 }, { 9,13 }, { 2,7 }, { 0,19 }, { 2,16 }, { 15,19 }, { 6,16 }, { 7,15 }, { 4,7 }, { 5,8 }, { 14,20 }, { 5,17 }, { 8,16 }, { 10,13 }, { 17,19 }, { 0,3 }, { 2,9 }, { 9,15 }, { 2,18 }, { 13,15 } };
+    score = { 83091, 13671, 39133, 57344, 82891, 47882, 34029, 25527, 57679, 88535, 81636, 10474, 89422, 1856, 24544, 43762, 84492, 85885, 29344, 33895, 65039, 35586 };
+    result = leetCode.maxProfit(n, edges, score);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(score);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3547(void)
+{
+    Logger::WriteMessage("Test Leet Code 3547");
+    LeetCodeGraph leetCode;
+    int n = 4;
+    vector<vector<int>> edges = { {0, 1},{1, 2},{2, 3} };
+    long long result = leetCode.maxScore(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 6; 
+    edges = { {0, 3},{4, 5},{2, 0},{1, 3},{2, 4},{1, 5} };
+    result = leetCode.maxScore(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3552(void)
+{
+    Logger::WriteMessage("Test Leet Code 3552");
+    LeetCodeGraph leetCode;
+    vector<string> matrix = { "A..", ".A.", "..." };
+    int result = leetCode.minMoves(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    matrix = { ".#...",".#.#.",".#.#.","...#." };
+    result = leetCode.minMoves(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    matrix = { ".CC", ".CA", ".BB", "..." };
+    result = leetCode.minMoves(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    matrix = { "..#DDF", "#.H.F#", "D.#A#.", "#BF...", "BFD.#A", "CEEG.B", ".FA.FG", "F.E#.E" };
+    result = leetCode.minMoves(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3543(void)
+{
+    Logger::WriteMessage("Test Leet Code 3543");
+    LeetCodeGraph leetCode;
+    int n = 3;
+    vector<vector<int>> edges = { {0, 1, 1},{1, 2, 2} };
+    int k = 2, t = 4;
+    int result = leetCode.maxWeight(n, edges, k, t);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("k = " + to_string(k) + "; t = " + to_string(t));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    edges = { {0, 1, 2},{0, 2, 3} };
+    k = 1, t = 3;
+    result = leetCode.maxWeight(n, edges, k, t);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("k = " + to_string(k) + "; t = " + to_string(t));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    edges = { {0, 1, 6},{1, 2, 8} };
+    k = 1, t = 6;
+    result = leetCode.maxWeight(n, edges, k, t);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("k = " + to_string(k) + "; t = " + to_string(t));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    edges = { {1, 2, 9},{0, 2, 4},{0, 1, 7} };
+    k = 2, t = 331;
+    result = leetCode.maxWeight(n, edges, k, t);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("k = " + to_string(k) + "; t = " + to_string(t));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3543();
+    TestLeetCode3552();
+    TestLeetCode3547();
+    TestLeetCode3530();
     TestLeetCode3493();
     TestLeetCode3419();
     TestLeetCode3378();

@@ -37345,4 +37345,868 @@ vector<int> LeetCodeArray::resultArrayII(vector<int>& nums, int k, vector<vector
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3537. Fill a Special Grid 
+/// </summary>
+void LeetCodeArray::specialGrid(vector<vector<int>>& grid, int left, int right, int top, int bottom, int&index)
+{
+    if (left == right && top == bottom)
+    {
+        grid[top][left] = index;
+        index++;
+        return;
+    }
+    specialGrid(grid, left + (right - left + 1) / 2, right, top, top + (bottom - top + 1) / 2 - 1, index);
+    specialGrid(grid, left + (right - left + 1) / 2, right, top + (bottom - top + 1) / 2, bottom, index);
+    specialGrid(grid, left, left + (right - left + 1) / 2 - 1, top + (bottom - top + 1) / 2, bottom, index);
+    specialGrid(grid, left, left + (right - left + 1) / 2 - 1, top, top + (bottom - top + 1) / 2 - 1, index);
+}
+
+
+/// <summary>
+/// Leet Code 3537. Fill a Special Grid 
+///
+/// Medium
+///
+/// You are given a non-negative integer n representing a 2n x 2n grid. 
+/// You must fill the grid with integers from 0 to 22n - 1 to make it 
+/// special. A grid is special if it satisfies all the following conditions:
+///
+/// All numbers in the top-right quadrant are smaller than those in the bottom-
+/// right quadrant.
+/// All numbers in the bottom-right quadrant are smaller than those in the 
+/// bottom-left quadrant.
+/// All numbers in the bottom-left quadrant are smaller than those in the top-
+/// left quadrant.
+/// Each of its quadrants is also a special grid.
+/// Return the special 2n x 2n grid.
+///
+/// Note: Any 1x1 grid is special.
+/// 
+/// Example 1:
+/// Input: n = 0
+/// Output: [[0]]
+/// Explanation:
+/// The only number that can be placed is 0, and there is only one possible 
+/// position in the grid.
+///
+/// Example 2:
+/// Input: n = 1
+/// Output: [[3,0],[2,1]]
+/// Explanation:
+/// The numbers in each quadrant are:
+/// Top-right: 0
+/// Bottom-right: 1
+/// Bottom-left: 2
+/// Top-left: 3
+/// Since 0 < 1 < 2 < 3, this satisfies the given constraints.
+///
+/// Example 3:
+/// Input: n = 2
+/// Output: [[15,12,3,0],[14,13,2,1],[11,8,7,4],[10,9,6,5]]
+/// Explanation:
+/// The numbers in each quadrant are:
+/// Top-right: 3, 0, 2, 1
+/// Bottom-right: 7, 4, 6, 5
+/// Bottom-left: 11, 8, 10, 9
+/// Top-left: 15, 12, 14, 13
+/// max(3, 0, 2, 1) < min(7, 4, 6, 5)
+/// max(7, 4, 6, 5) < min(11, 8, 10, 9)
+/// max(11, 8, 10, 9) < min(15, 12, 14, 13)
+/// This satisfies the first three requirements. Additionally, each quadrant 
+/// is also a special grid. Thus, this is a special grid.
+///  
+/// Constraints:
+/// 1. 0 <= n <= 10
+/// </summary>
+vector<vector<int>> LeetCodeArray::specialGrid(int n)
+{
+    vector<vector<int>> grid(1 << n, vector<int>(1 << n));
+    int index = 0;
+    specialGrid(grid, 0, (1 << n) - 1, 0, (1 << n) - 1, index);
+    return grid;
+}
+
+/// <summary>
+/// Leet Code 3540. Minimum Time to Visit All Houses
+///
+/// Medium
+///
+/// You are given two integer arrays forward and backward, both of size n. 
+/// You are also given another integer array queries.
+///
+/// There are n houses arranged in a circle. The houses are connected via 
+/// roads in a special arrangement:
+///
+/// For all 0 <= i <= n - 2, house i is connected to house i + 1 via a 
+/// road with length forward[i] meters. Additionally, house n - 1 is 
+/// connected back to house 0 via a road with length forward[n - 1] meters, 
+/// completing the circle.
+/// For all 1 <= i <= n - 1, house i is connected to house i - 1 via a road 
+/// with length backward[i] meters. Additionally, house 0 is connected back 
+/// to house n - 1 via a road with length backward[0] meters, completing the 
+/// circle.
+/// You can walk at a pace of one meter per second. Starting from house 0, 
+/// find the minimum time taken to visit each house in the order specified 
+/// by queries.
+///
+/// Return the minimum total time taken to visit the houses.
+/// 
+/// Example 1:
+/// Input: forward = [1,4,4], backward = [4,1,2], queries = [1,2,0,2]
+/// Output: 12
+/// Explanation:
+/// The path followed is 0(0) -> 1(1) -> 2(5) -> 1(7) -> 0(8) -> 2(12).
+///
+/// Note: The notation used is node(total time), -> represents forward road, 
+/// and -> represents backward road.
+///
+/// Example 2:
+/// Input: forward = [1,1,1,1], backward = [2,2,2,2], queries = [1,2,3,0]
+/// Output: 4
+/// Explanation:
+/// The path travelled is 0 -> 1 ->2 -> 3 -> 0 Each step is in the forward 
+// direction and requires 1 second.
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 10^5
+/// 2. n == forward.length == backward.length
+/// 3. 1 <= forward[i], backward[i] <= 10^5
+/// 4. 1 <= queries.length <= 10^5
+/// 5. 0 <= queries[i] < n
+/// 6. queries[i] != queries[i + 1]
+/// 7. queries[0] is not 0.
+/// </summary>
+long long LeetCodeArray::minTotalTime(vector<int>& forward, vector<int>& backward, vector<int>& queries)
+{
+    int n = forward.size();
+    vector<long long> forward_accum(n + 1), backward_accum(n + 1);
+    long long forward_sum = 0, backward_sum = 0;
+    for (size_t i = 0; i < forward.size(); i++)
+    {
+        forward_accum[i + 1] = forward[i];
+        forward_accum[i + 1] += forward_accum[i];
+        forward_sum += forward[i];
+    }
+    for (int i = n-1; i >= 0; i--)
+    {
+        backward_accum[n - i] = backward[i];
+        backward_accum[n - i] += backward_accum[n - i - 1];
+        backward_sum += backward[i];
+    }
+    long long result = 0;
+    int prev = 0;
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        int a = prev;
+        int b = queries[i];
+        long long distance1 = 0;
+        if (a < b)
+        {
+            distance1 = forward_accum[b] - forward_accum[a];
+        }
+        else
+        {
+            distance1 = forward_sum - (forward_accum[a] - forward_accum[b]);
+        }
+        long long distance2 = 0;
+        a = n - 1 - prev;
+        b = n - 1 - queries[i];
+        if (a < b)
+        {
+            distance2 = backward_accum[b] - backward_accum[a];
+        }
+        else
+        {
+            distance2 = backward_sum - (backward_accum[a] - backward_accum[b]);
+        }
+        result += min(distance1, distance2);
+        prev = queries[i];
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3546. Equal Sum Grid Partition I
+///
+/// Medium
+/// 
+/// You are given an m x n matrix grid of positive integers. Your task is to 
+/// determine if it is possible to make either one horizontal or one vertical 
+/// cut on the grid such that:
+///
+/// Each of the two resulting sections formed by the cut is non-empty.
+/// The sum of the elements in both sections is equal.
+/// Return true if such a partition exists; otherwise return false.
+///
+/// Example 1:
+/// Input: grid = [[1,4],[2,3]]
+/// Output: true
+/// Explanation:
+/// A horizontal cut between row 0 and row 1 results in two non-empty sections,
+/// each with a sum of 5. Thus, the answer is true.
+///
+/// Example 2:
+/// Input: grid = [[1,3],[2,4]]
+/// Output: false
+/// Explanation:
+/// No horizontal or vertical cut results in two non-empty sections with equal 
+/// sums. Thus, the answer is false.
+/// 
+/// Constraints:
+/// 1. 1 <= m == grid.length <= 10^5
+/// 2. 1 <= n == grid[i].length <= 10^5
+/// 3. 2 <= m * n <= 10^5
+/// 4. 1 <= grid[i][j] <= 10^5
+/// </summary>
+bool LeetCodeArray::canPartitionGridI(vector<vector<int>>& grid)
+{
+    vector<int> rows(grid.size()), columns(grid[0].size());
+    int sum = 0;
+    for (size_t i = 0; i < grid.size(); i++)
+    {
+        for (size_t j = 0; j < grid[i].size(); j++)
+        {
+            rows[i] += grid[i][j];
+            columns[j] += grid[i][j];
+            sum += grid[i][j];
+        }
+    }
+    int prev_sum = 0;
+    for (size_t i = 0; i < grid.size(); i++)
+    {
+        prev_sum += rows[i];
+        if (prev_sum * 2 == sum) return true;
+    }
+    prev_sum = 0;
+    for (size_t i = 0; i < grid[0].size(); i++)
+    {
+        prev_sum += columns[i];
+        if (prev_sum * 2 == sum) return true;
+    }
+    return false;
+}
+
+
+/// <summary>
+/// Leet Code 3532. Path Existence Queries in a Graph I
+///
+/// Medium
+///
+/// You are given an integer n representing the number of nodes in a graph, 
+/// labeled from 0 to n - 1.
+///
+/// You are also given an integer array nums of length n sorted in 
+/// non-decreasing order, and an integer maxDiff.
+///
+/// An undirected edge exists between nodes i and j if the absolute difference 
+/// between nums[i] and nums[j] is at most maxDiff (i.e., 
+/// |nums[i] - nums[j]| <= maxDiff).
+///
+/// You are also given a 2D integer array queries. For each 
+/// queries[i] = [ui, vi], determine whether there exists a path between nodes 
+/// ui and vi.
+///
+/// Return a boolean array answer, where answer[i] is true if there exists a 
+/// path between ui and vi in the ith query and false otherwise.
+///
+/// Example 1:
+/// Input: n = 2, nums = [1,3], maxDiff = 1, queries = [[0,0],[0,1]]
+/// Output: [true,false]
+/// Explanation:
+/// Query [0,0]: Node 0 has a trivial path to itself.
+/// Query [0,1]: There is no edge between Node 0 and Node 1 because 
+/// |nums[0] - nums[1]| = |1 - 3| = 2, which is greater than maxDiff.
+/// Thus, the final answer after processing all the queries is [true, false].
+///
+/// Example 2:
+/// Input: n = 4, nums = [2,5,6,8], maxDiff = 2, 
+/// queries = [[0,1],[0,2],[1,3],[2,3]]
+/// Output: [false,false,true,true]
+/// Explanation:
+/// The resulting graph is:
+/// Query [0,1]: There is no edge between Node 0 and Node 1 because 
+/// |nums[0] - nums[1]| = |2 - 5| = 3, which is greater than maxDiff.
+/// Query [0,2]: There is no edge between Node 0 and Node 2 because 
+/// |nums[0] - nums[2]| = |2 - 6| = 4, which is greater than maxDiff.
+/// Query [1,3]: There is a path between Node 1 and Node 3 through 
+/// Node 2 since |nums[1] - nums[2]| = |5 - 6| = 1 and 
+/// |nums[2] - nums[3]| = |6 - 8| = 2, both of which are within maxDiff.
+/// Query [2,3]: There is an edge between Node 2 and Node 3 because 
+/// |nums[2] - nums[3]| = |6 - 8| = 2, which is equal to maxDiff.
+/// Thus, the final answer after processing all the queries is 
+/// [false, false, true, true].
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^5
+/// 3. nums is sorted in non-decreasing order.
+/// 4. 0 <= maxDiff <= 10^5
+/// 5. 1 <= queries.length <= 10^5
+/// 6. queries[i] == [ui, vi]
+/// 7. 0 <= ui, vi < n
+/// </summary>
+vector<bool> LeetCodeArray::pathExistenceQueriesI(int n, vector<int>& nums, int maxDiff,
+    vector<vector<int>>& queries)
+{
+    vector<int> sort_arr = nums;
+    sort(sort_arr.begin(), sort_arr.end());
+    set<pair<int, int>> intervals;
+    int first = -1, last = -1;
+    for (size_t i = 0; i < sort_arr.size(); i++)
+    {
+        if (last == -1)
+        {
+            first = sort_arr[i];
+            last = sort_arr[i];
+        }
+        else if (sort_arr[i] - maxDiff > last)
+        {
+            intervals.insert(make_pair(first, last));
+            first = sort_arr[i];
+            last = sort_arr[i];
+        }
+        else
+        {
+            last = sort_arr[i];
+        }
+    }
+    vector<bool> result(queries.size());
+    intervals.insert(make_pair(first, last));
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        int a = nums[queries[i][0]];
+        int b = nums[queries[i][1]];
+        if (a > b) swap(a, b);
+        auto itr = intervals.upper_bound(make_pair(a, b));
+        if (itr != intervals.begin() && (itr == intervals.end() || itr->first > a))
+        {
+            itr = prev(itr);
+        }
+        if (itr->first <= a && itr->second >= b)
+        {
+            result[i] = true;
+        }
+        else
+        {
+            result[i] = false;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3534. Path Existence Queries in a Graph II
+///
+/// Hard
+///
+/// You are given an integer n representing the number of nodes in a graph, 
+/// labeled from 0 to n - 1.
+/// You are also given an integer array nums of length n and an integer 
+/// maxDiff.
+///
+/// An undirected edge exists between nodes i and j if the absolute 
+/// difference between nums[i] and nums[j] is at most maxDiff (i.e., 
+/// |nums[i] - nums[j]| <= maxDiff).
+///
+/// You are also given a 2D integer array queries. For each 
+/// queries[i] = [ui, vi], find the minimum distance between nodes ui and vi. 
+/// If no path exists between the two nodes, return -1 for that query.
+///
+/// Return an array answer, where answer[i] is the result of the ith query.
+/// Note: The edges between the nodes are unweighted.
+/// 
+/// Example 1:
+/// Input: n = 5, nums = [1,8,3,4,2], maxDiff = 3, queries = [[0,3],[2,4]]
+/// Output: [1,1]
+/// Explanation:
+/// The resulting graph is:
+/// Query   Shortest Path   Minimum Distance
+/// [0, 3]  0 -> 3   1
+/// [2, 4]  2 -> 4   1
+/// Thus, the output is [1, 1].
+///
+/// Example 2:
+/// Input: n = 5, nums = [5,3,1,9,10], maxDiff = 2, 
+/// queries = [[0,1],[0,2],[2,3],[4,3]]
+/// Output: [1,2,-1,1]
+/// Explanation:
+/// The resulting graph is:
+/// Query	Shortest Path	Minimum Distance
+/// [0, 1]  0 -> 1  1
+/// [0, 2]  0 -> 1 -> 2 2
+/// [2, 3]  None    -1
+/// [4, 3]  3 -> 4  1
+/// Thus, the output is [1, 2, -1, 1].
+///
+/// Example 3:
+/// Input: n = 3, nums = [3,6,1], maxDiff = 1, queries = [[0,0],[0,1],[1,2]]
+/// Output: [0,-1,-1]
+/// Explanation:
+/// There are no edges between any two nodes because:
+/// Nodes 0 and 1: |nums[0] - nums[1]| = |3 - 6| = 3 > 1
+/// Nodes 0 and 2: |nums[0] - nums[2]| = |3 - 1| = 2 > 1
+/// Nodes 1 and 2: |nums[1] - nums[2]| = |6 - 1| = 5 > 1
+/// Thus, no node can reach any other node, and the output is [0, -1, -1].
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^5
+/// 3. 0 <= maxDiff <= 10^5
+/// 4. 1 <= queries.length <= 10^5
+/// 5. queries[i] == [ui, vi]
+/// 6. 0 <= ui, vi < n
+/// </summary>
+vector<int> LeetCodeArray::pathExistenceQueriesII(int n, vector<int>& nums, int maxDiff, vector<vector<int>>& queries)
+{
+    vector<pair<int, int>> nums_sorted(n);
+    vector<int> nums_map(n);
+    for (int i = 0; i < n; i++)
+    {
+        nums_sorted[i].first = nums[i];
+        nums_sorted[i].second = i;
+    }
+    sort(nums_sorted.begin(), nums_sorted.end());
+    for (int i = 0; i < n; i++)
+    {
+        nums_map[nums_sorted[i].second] = i;
+    }
+    int max_val = nums_sorted.back().first;
+    int k = 1; 
+    while ((1 << k) <= max_val) k++;
+    vector<vector<int>>dp(n, vector<int>(k+1));
+    for (size_t i = 0; i < nums_sorted.size(); i++)
+    {
+        int index = upper_bound(nums_sorted.begin(), nums_sorted.end(), make_pair(nums_sorted[i].first + maxDiff, n)) - nums_sorted.begin() - 1;
+        if (index != i)
+        {
+            dp[i][0] = index;
+        }
+    }
+    for (int i = 1; i <= k; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (dp[j][i - 1] == 0) continue;
+            dp[j][i] = dp[dp[j][i - 1]][i - 1];
+        }
+    }
+    vector<int> result(queries.size());
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        int a = nums_map[queries[i][0]];
+        int b = nums_map[queries[i][1]];
+        if (a > b) swap(a, b);
+        if (a == b)
+        {
+            result[i] = 0;
+            continue;
+        }
+        while (a < b)
+        {
+            for (int j = 0; j <= k; j++)
+            {
+                if (dp[a][j] == 0)
+                {
+                    if (j == 0)
+                    {
+                        a = b;
+                        result[i] = -1;
+                    }
+                    else
+                    {
+                        result[i] += 1 << (j - 1);
+                        a = dp[a][j - 1];
+                    }
+                    break;
+                }
+                else if (dp[a][j] == b)
+                {
+                    result[i] += 1 << j;
+                    a = b;
+                    break;
+                }
+                else if (dp[a][j] > b)
+                {
+                    if (j == 0)
+                    {
+                        a = b;
+                        result[i] += 1;
+                    }
+                    else
+                    {
+                        result[i] += 1 << (j - 1);
+                        a = dp[a][j - 1];
+                    }
+                    break;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3548. Equal Sum Grid Partition II
+///
+/// Hard
+///
+/// You are given an m x n matrix grid of positive integers. Your task is 
+/// to determine if it is possible to make either one horizontal or one 
+/// vertical cut on the grid such that:
+///
+/// Each of the two resulting sections formed by the cut is non-empty.
+/// The sum of elements in both sections is equal, or can be made equal by 
+/// discounting at most one single cell in total (from either section).
+/// If a cell is discounted, the rest of the section must remain connected.
+/// Return true if such a partition exists; otherwise, return false.
+///
+/// Note: A section is connected if every cell in it can be reached from 
+/// any other cell by moving up, down, left, or right through other cells in 
+/// the section.
+///
+/// Example 1:
+/// Input: grid = [[1,4],[2,3]]
+/// Output: true
+/// Explanation:
+/// A horizontal cut after the first row gives sums 1 + 4 = 5 and 2 + 3 = 5, 
+/// which are equal. Thus, the answer is true.
+///
+/// Example 2:
+/// Input: grid = [[1,2],[3,4]]
+/// Output: true
+/// Explanation:
+/// A vertical cut after the first column gives sums 1 + 3 = 4 and 2 + 4 = 6.
+/// By discounting 2 from the right section (6 - 2 = 4), both sections have 
+/// equal sums and remain connected. Thus, the answer is true.
+///
+/// Example 3:
+/// Input: grid = [[1,2,4],[2,3,5]]
+/// Output: false
+/// Explanation:
+/// A horizontal cut after the first row gives 1 + 2 + 4 = 7 and 
+/// 2 + 3 + 5 = 10.
+/// By discounting 3 from the bottom section (10 - 3 = 7), both sections 
+/// have equal sums, but they do not remain connected as it splits the bottom 
+/// section into two parts ([2] and [5]). Thus, the answer is false.
+///
+/// Example 4:
+/// Input: grid = [[4,1,8],[3,2,6]]
+/// Output: false
+/// Explanation:
+/// No valid cut exists, so the answer is false.
+/// 
+/// Constraints:
+/// 1. 1 <= m == grid.length <= 10^5
+/// 2. 1 <= n == grid[i].length <= 10^5
+/// 3. 2 <= m * n <= 10^5
+/// 4. 1 <= grid[i][j] <= 10^5
+/// </summary>
+bool LeetCodeArray::canPartitionGridII(vector<vector<int>>& grid)
+{
+    unordered_map<long long, int> num_count;
+    long long sum = 0;
+    for (size_t i = 0; i < grid.size(); i++)
+    {
+        for (size_t j = 0; j < grid[0].size(); j++)
+        {
+            sum += grid[i][j];
+            num_count[grid[i][j]]++;
+        }
+    }
+
+    unordered_map<long long, int> part1_count, part2_count;
+    long long part1_sum = 0, part2_sum = 0;
+    part2_count = num_count;
+    part2_sum = sum;
+    int m = grid.size();
+    int n = grid[0].size();
+    for (int i = 0; i < m - 1; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            part1_sum += grid[i][j];
+            part2_sum -= grid[i][j];
+            part1_count[grid[i][j]]++;
+            part2_count[grid[i][j]]--;
+            if (part2_count.count(grid[i][j]) == 0)
+            {
+                part2_count.erase(grid[i][j]);
+            }
+        }
+        if (part1_sum == part2_sum) return true;
+        if (part1_sum > part2_sum)
+        {
+            if (n == 1)
+            {
+                if ((part1_sum - grid[0][0] == part2_sum) ||
+                    (part1_sum - grid[i][0] == part2_sum))
+                {
+                    return true;
+                }
+            }
+            else if (i == 0)
+            {
+                if ((part1_sum - grid[0][0] == part2_sum) ||
+                    (part1_sum - grid[0][n - 1] == part2_sum))
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                long long diff = part1_sum - part2_sum;
+                if (part1_count.count(diff) > 0)
+                {
+                    return true;
+                }
+            }
+        }
+        else
+        {
+            if (n == 1)
+            {
+                if ((part2_sum - grid[i + 1][0] == part1_sum) ||
+                    (part2_sum - grid[m - 1][0] == part1_sum))
+                {
+                    return true;
+                }
+            }
+            else if (i == m - 2)
+            {
+                if ((part2_sum - grid[m - 1][0] == part1_sum) ||
+                    (part2_sum - grid[m - 1][n - 1] == part1_sum))
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                long long diff = part2_sum - part1_sum;
+                if (part2_count.count(diff) > 0)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+
+    part1_count = unordered_map<long long, int>();
+    part2_count = num_count;
+    part1_sum = 0;
+    part2_sum = sum;
+    for (int j = 0; j < n - 1; j++)
+    {
+        for (int i = 0; i < m; i++)
+        {
+            part1_sum += grid[i][j];
+            part2_sum -= grid[i][j];
+            part1_count[grid[i][j]]++;
+            part2_count[grid[i][j]]--;
+            if (part2_count.count(grid[i][j]) == 0)
+            {
+                part2_count.erase(grid[i][j]);
+            }
+        }
+        if (part1_sum == part2_sum) return true;
+        if (part1_sum > part2_sum)
+        {
+            if (m == 1)
+            {
+                if ((part1_sum - grid[0][0] == part2_sum) ||
+                    (part1_sum - grid[0][j] == part2_sum))
+                {
+                    return true;
+                }
+            }
+            else if (j == 0)
+            {
+                if ((part1_sum - grid[0][0] == part2_sum) ||
+                    (part1_sum - grid[m - 1][0] == part2_sum))
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                long long diff = part1_sum - part2_sum;
+                if (part1_count.count(diff) > 0)
+                {
+                    return true;
+                }
+            }
+        }
+        else
+        {
+            if (m == 1)
+            {
+                if ((part2_sum - grid[0][j + 1] == part1_sum) ||
+                    (part2_sum - grid[0][n - 1] == part1_sum))
+                {
+                    return true;
+                }
+            }
+            else if (j == n - 2)
+            {
+                if ((part2_sum - grid[0][n - 1] == part1_sum) ||
+                    (part2_sum - grid[m - 1][n - 1] == part1_sum))
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                long long diff = part2_sum - part1_sum;
+                if (part2_count.count(diff) > 0)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+/// <summary>
+/// Leet Code 3550. Smallest Index With Digit Sum Equal to Index
+///
+/// Easy
+///
+/// You are given an integer array nums.
+/// Return the smallest index i such that the sum of the digits of nums[i] is 
+/// equal to i.
+///
+/// If no such index exists, return -1.
+/// 
+/// Example 1:
+/// Input: nums = [1,3,2]
+/// Output: 2
+/// Explanation:
+/// For nums[2] = 2, the sum of digits is 2, which is equal to index i = 2. 
+/// Thus, the output is 2.
+///
+/// Example 2:
+/// Input: nums = [1,10,11]
+/// Output: 1
+/// Explanation:
+/// For nums[1] = 10, the sum of digits is 1 + 0 = 1, which is equal to 
+/// index i = 1.
+/// For nums[2] = 11, the sum of digits is 1 + 1 = 2, which is equal to 
+/// index i = 2.
+/// Since index 1 is the smallest, the output is 1.
+///
+/// Example 3:
+/// Input: nums = [1,2,3]
+/// Output: -1
+/// Explanation:
+/// Since no index satisfies the condition, the output is -1.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 0 <= nums[i] <= 1000
+/// </summary>
+int LeetCodeArray::smallestIndex(vector<int>& nums)
+{
+    int result = -1;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int sum = 0;
+        int n = nums[i];
+        while (n != 0)
+        {
+            sum += n % 10;
+            n /= 10;
+        }
+        if (sum == i)
+        {
+            result = sum;
+            break;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3551. Minimum Swaps to Sort by Digit Sum
+///
+/// Medium
+///
+/// You are given an array nums of distinct positive integers. You need to 
+/// sort the array in increasing order based on the sum of the digits of 
+/// each number. If two numbers have the same digit sum, the smaller number 
+/// appears first in the sorted order.
+///
+/// Return the minimum number of swaps required to rearrange nums into this 
+/// sorted order.
+///
+/// A swap is defined as exchanging the values at two distinct positions in 
+/// the array.
+///
+/// Example 1:
+/// Input: nums = [37,100]
+/// Output: 1
+/// Explanation:
+/// Compute the digit sum for each integer: 
+/// [3 + 7 = 10, 1 + 0 + 0 = 1] -> [10, 1]
+/// Sort the integers based on digit sum: [100, 37]. Swap 37 with 100 to 
+/// obtain the sorted order.
+/// Thus, the minimum number of swaps required to rearrange nums is 1.
+///
+/// Example 2:
+/// Input: nums = [22,14,33,7]
+/// Output: 0
+/// Explanation:
+/// Compute the digit sum for each integer: 
+/// [2 + 2 = 4, 1 + 4 = 5, 3 + 3 = 6, 7 = 7] -> [4, 5, 6, 7]
+/// Sort the integers based on digit sum: [22, 14, 33, 7]. The array 
+/// is already sorted.
+/// Thus, the minimum number of swaps required to rearrange nums is 0.
+///
+/// Example 3:
+/// Input: nums = [18,43,34,16]
+/// Output: 2
+/// Explanation:
+/// Compute the digit sum for each integer: [1 + 8 = 9, 4 + 3 = 7, 
+/// 3 + 4 = 7, 1 + 6 = 7] -> [9, 7, 7, 7]
+/// Sort the integers based on digit sum: [16, 34, 43, 18]. Swap 18 
+/// with 16, and swap 43 with 34 to obtain the sorted order.
+/// Thus, the minimum number of swaps required to rearrange nums is 2.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. nums consists of distinct positive integers.
+/// </summary>
+int LeetCodeArray::minSwapsIII(vector<int>& nums)
+{
+    vector<vector<int>> sorted_nums(nums.size(), vector<int>(3));
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int sum = 0;
+        int n = nums[i];
+        while (n != 0)
+        {
+            sum += n % 10;
+            n /= 10;
+        }
+        sorted_nums[i][0] = sum;
+        sorted_nums[i][1] = nums[i];
+        sorted_nums[i][2] = i;
+    }
+    sort(sorted_nums.begin(), sorted_nums.end());
+    int result = 0;
+    for (size_t i = 0; i < sorted_nums.size(); i++)
+    {
+        if (sorted_nums[i][2] == i) continue;
+        int index = i;
+        while (index != sorted_nums[index][2])
+        {
+            int pos = sorted_nums[index][2];
+            swap(sorted_nums[index], sorted_nums[pos]);
+            result++;
+        }
+    }
+    return result;
+}
 #pragma endregion

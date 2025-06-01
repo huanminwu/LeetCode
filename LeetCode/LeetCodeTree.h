@@ -8083,6 +8083,375 @@ public:
     /// 13. 1 <= w' <= 10^4
     /// </summary>
     vector<int> treeQueries(int n, vector<vector<int>>& edges, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet Code 3544. Subtree Inversion Sum
+    /// </summary>
+    long long subtreeInversionSum(vector<vector<int>>& neighbors, vector<int>& nums, int k, 
+        int parent, int node, int parity, int distance, vector<vector<vector<long long>>>& cache);
+
+    /// <summary>
+    /// Leet Code 3544. Subtree Inversion Sum
+    ///
+    /// Hard
+    ///
+    /// You are given an undirected tree rooted at node 0, with n nodes numbered 
+    /// from 0 to n - 1. The tree is represented by a 2D integer array edges of 
+    /// length n - 1, where edges[i] = [ui, vi] indicates an edge between nodes ui 
+    /// and vi.
+    ///
+    /// You are also given an integer array nums of length n, where nums[i] 
+    /// represents the value at node i, and an integer k.
+    ///
+    /// You may perform inversion operations on a subset of nodes subject to the 
+    /// following rules:
+    ///
+    /// Subtree Inversion Operation:
+    ///
+    /// When you invert a node, every value in the subtree rooted at that node is 
+    /// multiplied by -1.
+    ///
+    /// Distance Constraint on Inversions:
+    ///
+    /// You may only invert a node if it is "sufficiently far" from any other 
+    /// inverted node.
+    ///
+    /// Specifically, if you invert two nodes a and b such that one is an ancestor 
+    /// of the other (i.e., if LCA(a, b) = a or LCA(a, b) = b), then the distance 
+    /// (the number of edges on the unique path between them) must be at least k.
+    ///
+    /// Return the maximum possible sum of the tree's node values after applying 
+    /// inversion operations.
+    ///
+    /// Example 1:
+    /// Input: edges = [[0,1],[0,2],[1,3],[1,4],[2,5],[2,6]], 
+    /// nums = [4,-8,-6,3,7,-2,5], k = 2
+    /// Output: 27
+    /// Explanation:
+    /// Apply inversion operations at nodes 0, 3, 4 and 6.
+    /// The final nums array is [-4, 8, 6, 3, 7, 2, 5], and the total sum is 27.
+    ///
+    /// Example 2:
+    /// Input: edges = [[0,1],[1,2],[2,3],[3,4]], nums = [-1,3,-2,4,-5], k = 2
+    /// Output: 9
+    /// Explanation:
+    /// Apply the inversion operation at node 4.
+    /// The final nums array becomes [-1, 3, -2, 4, 5], and the total sum is 9.
+    ///
+    /// Example 3:
+    /// Input: edges = [[0,1],[0,2]], nums = [0,-1,-2], k = 3
+    /// Output: 3
+    /// Explanation:
+    /// Apply inversion operations at nodes 1 and 2.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n <= 5 * 10^4
+    /// 2. edges.length == n - 1
+    /// 3. edges[i] = [ui, vi]
+    /// 4. 0 <= ui, vi < n
+    /// 5. nums.length == n
+    /// 6. -5 * 10^4 <= nums[i] <= 5 * 10^4
+    /// 7. 1 <= k <= 50
+    /// 8. The input is generated such that edges represents a valid tree.
+    /// </summary>
+    long long subtreeInversionSum(vector<vector<int>>& edges, vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3553. Minimum Weighted Subgraph With the Required Paths II
+    /// </summary>
+    void minimumWeight_dfs(int node, int parent, vector<vector<pair<int, int>>>& neighbors, 
+        vector<int>& distances, vector<int>& levels, vector<vector<int>>& parents);
+
+    /// <summary>
+    /// Leet Code 3553. Minimum Weighted Subgraph With the Required Paths II
+    /// </summary>
+    void minimumWeight_skiplist(vector<vector<int>>& parents);
+
+    /// <summary>
+    /// Leet Code 3553. Minimum Weighted Subgraph With the Required Paths II
+    /// </summary>
+    int minimumWeight_lca(int a, int b, vector<int>& levels, vector<vector<int>>& parents);
+
+    /// <summary>
+    /// Leet Code 3553. Minimum Weighted Subgraph With the Required Paths II
+    ///
+    /// Hard
+    ///
+    /// You are given an undirected weighted tree with n nodes, numbered from 0 to 
+    /// n - 1. It is represented by a 2D integer array edges of length n - 1, 
+    /// where edges[i] = [ui, vi, wi] indicates that there is an edge between 
+    /// nodes ui and vi with weight wi.​
+    ///
+    /// Additionally, you are given a 2D integer array queries, where 
+    /// queries[j] = [src1j, src2j, destj].
+    ///
+    /// Return an array answer of length equal to queries.length, where answer[j] 
+    /// is the minimum total weight of a subtree such that it is possible to 
+    /// reach destj from both src1j and src2j using edges in this subtree.
+    ///
+    /// A subtree here is any connected subset of nodes and edges of the original 
+    /// tree forming a valid tree.
+    /// 
+    /// Example 1:
+    /// Input: edges = [[0,1,2],[1,2,3],[1,3,5],[1,4,4],[2,5,6]], 
+    /// queries = [[2,3,4],[0,2,5]]
+    /// Output: [12,11]
+    /// Explanation:
+    /// The blue edges represent one of the subtrees that yield the optimal answer.
+    /// answer[0]: The total weight of the selected subtree that ensures a path 
+    /// from src1 = 2 and src2 = 3 to dest = 4 is 3 + 5 + 4 = 12.
+    /// answer[1]: The total weight of the selected subtree that ensures a path 
+    /// from src1 = 0 and src2 = 2 to dest = 5 is 2 + 3 + 6 = 11.
+    ///
+    /// Example 2:
+    /// Input: edges = [[1,0,8],[0,2,7]], queries = [[0,1,2]]
+    /// Output: [15]
+    /// Explanation:
+    /// answer[0]: The total weight of the selected subtree that ensures a path 
+    /// from src1 = 0 and src2 = 1 to dest = 2 is 8 + 7 = 15.
+    ///
+    /// Constraints:
+    /// 1. 3 <= n <= 10^5
+    /// 2. edges.length == n - 1
+    /// 3. edges[i].length == 3
+    /// 4. 0 <= ui, vi < n
+    /// 5. 1 <= wi <= 10^4
+    /// 6. 1 <= queries.length <= 10^5
+    /// 7. queries[j].length == 3
+    /// 8. 0 <= src1j, src2j, destj < n
+    /// 9. src1j, src2j, and destj are pairwise distinct.
+    /// 10. The input is generated such that edges represents a valid tree.
+    /// </summary>
+    vector<int> minimumWeight(vector<vector<int>>& edges, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet Code 3558. Number of Ways to Assign Edge Weights I
+    ///
+    /// Medium
+    ///
+    /// There is an undirected tree with n nodes labeled from 1 to n, rooted at 
+    /// node 1. The tree is represented by a 2D integer array edges of length 
+    /// n - 1, where edges[i] = [ui, vi] indicates that there is an edge between 
+    /// nodes ui and vi.
+    ///
+    /// Initially, all edges have a weight of 0. You must assign each edge a 
+    /// weight of either 1 or 2.
+    ///
+    /// The cost of a path between any two nodes u and v is the total weight 
+    /// of all edges in the path connecting them.
+    ///
+    /// Select any one node x at the maximum depth. Return the number of ways to 
+    /// assign edge weights in the path from node 1 to x such that its total cost 
+    /// is odd.
+    ///
+    /// Since the answer may be large, return it modulo 10^9 + 7.
+    /// Note: Ignore all edges not in the path from node 1 to x.
+    ///
+    /// Example 1:
+    /// Input: edges = [[1,2]]
+    /// Output: 1
+    /// Explanation:
+    /// The path from Node 1 to Node 2 consists of one edge (1 → 2).
+    /// Assigning weight 1 makes the cost odd, while 2 makes it even. Thus, the 
+    /// number of valid assignments is 1.
+    ///
+    /// Example 2:
+    /// Input: edges = [[1,2],[1,3],[3,4],[3,5]]
+    /// Output: 2
+    /// Explanation:
+    /// The maximum depth is 2, with nodes 4 and 5 at the same depth. Either 
+    /// node can be selected for processing.
+    /// For example, the path from Node 1 to Node 4 consists of two edges 
+    /// (1 → 3 and 3 → 4).
+    /// Assigning weights (1,2) or (2,1) results in an odd cost. Thus, the 
+    /// number of valid assignments is 2.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 10^5
+    /// 2. edges.length == n - 1
+    /// 3. edges[i] == [ui, vi]
+    /// 4. 1 <= ui, vi <= n
+    /// 5. edges represents a valid tree.
+    /// </summary>
+    int assignEdgeWeightsI(vector<vector<int>>& edges);
+
+    /// <summary>
+    /// Leet Code 3553. Minimum Weighted Subgraph With the Required Paths II
+    /// </summary>
+    void assignEdgeWeightsII_dfs(int node, int parent, vector<vector<int>>& neighbors,
+        vector<int>& levels, vector<vector<int>>& parents);
+
+    /// <summary>
+    /// Leet Code 3553. Minimum Weighted Subgraph With the Required Paths II
+    /// </summary>
+    void assignEdgeWeightsII_skiplist(vector<vector<int>>& parents);
+
+    /// <summary>
+    /// Leet Code 3553. Minimum Weighted Subgraph With the Required Paths II
+    /// </summary>
+    int assignEdgeWeightsII_lca(int a, int b, vector<int>& levels, vector<vector<int>>& parents);
+
+    /// <summary>
+    /// Leet Code 3559. Number of Ways to Assign Edge Weights II
+    ///
+    /// Hard
+    ///
+    /// There is an undirected tree with n nodes labeled from 1 to n, rooted at 
+    /// node 1. The tree is represented by a 2D integer array edges of length 
+    /// n - 1, where edges[i] = [ui, vi] indicates that there is an edge between 
+    /// nodes ui and vi.
+    ///
+    /// Initially, all edges have a weight of 0. You must assign each edge a 
+    /// weight of either 1 or 2.
+    ///
+    /// The cost of a path between any two nodes u and v is the total weight of 
+    /// all edges in the path connecting them.
+    ///
+    /// You are given a 2D integer array queries. For each queries[i] = [ui, vi], 
+    /// determine the number of ways to assign weights to edges in the path such 
+    /// that the cost of the path between ui and vi is odd.
+    ///
+    /// Return an array answer, where answer[i] is the number of valid assignments 
+    /// for queries[i].
+    ///
+    /// Since the answer may be large, apply modulo 10^9 + 7 to each answer[i].
+    ///
+    /// Note: For each query, disregard all edges not in the path between node ui 
+    /// and vi.
+    /// 
+    /// Example 1:
+    /// Input: edges = [[1,2]], queries = [[1,1],[1,2]]
+    /// Output: [0,1]
+    /// Explanation:
+    /// Query [1,1]: The path from Node 1 to itself consists of no edges, so the 
+    /// cost is 0. Thus, the number of valid assignments is 0.
+    /// Query [1,2]: The path from Node 1 to Node 2 consists of one edge (1 -> 2). 
+    /// Assigning weight 1 makes the cost odd, while 2 makes it even. Thus, the 
+    /// number of valid assignments is 1.
+    ///
+    /// Example 2:
+    /// Input: edges = [[1,2],[1,3],[3,4],[3,5]], queries = [[1,4],[3,4],[2,5]]
+    /// Output: [2,1,4]
+    /// Explanation:
+    /// Query [1,4]: The path from Node 1 to Node 4 consists of two edges (1 -> 3 
+    /// and 3 -> 4). Assigning weights (1,2) or (2,1) results in an odd cost. 
+    /// Thus, the number of valid assignments is 2.
+    /// Query [3,4]: The path from Node 3 to Node 4 consists of one edge (3 -> 4). 
+    /// Assigning weight 1 makes the cost odd, while 2 makes it even. Thus, the 
+    /// number of valid assignments is 1.
+    /// Query [2,5]: The path from Node 2 to Node 5 consists of three edges 
+    /// (2 -> 1, 1 -> 3, and 3 -> 5). Assigning (1,2,2), (2,1,2), (2,2,1), or 
+    /// (1,1,1) makes the cost odd. Thus, the number of valid assignments is 4.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 10^5
+    /// 2. edges.length == n - 1
+    /// 3. edges[i] == [ui, vi]
+    /// 4. 1 <= queries.length <= 10^5
+    /// 5. queries[i] == [ui, vi]
+    /// 6. 1 <= ui, vi <= n
+    /// 7. edges represents a valid tree.
+    /// </summary>
+    vector<int> assignEdgeWeightsII(vector<vector<int>>& edges, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet Code 3562. Maximum Profit from Trading Stocks with Discounts
+    /// </summary>
+    void maxProfit_dfs(int node, int parent, vector<int>&present, vector<int>&future,
+        vector<vector<int>>& neighbors, int budget, vector<vector<vector<int>>> &dp);
+
+    /// <summary>
+    /// Leet Code 3562. Maximum Profit from Trading Stocks with Discounts
+    ///
+    /// Hard
+    ///
+    /// You are given an integer n, representing the number of employees in a 
+    /// company. Each employee is assigned a unique ID from 1 to n, and 
+    /// employee 1 is the CEO. You are given two 1-based integer arrays, present 
+    /// and future, each of length n, where:
+    ///
+    /// present[i] represents the current price at which the ith employee can 
+    /// buy a stock today.
+    /// future[i] represents the expected price at which the ith employee can 
+    /// sell the stock tomorrow.
+    /// The company's hierarchy is represented by a 2D integer array hierarchy, 
+    /// where hierarchy[i] = [ui, vi] means that employee ui is the direct boss 
+    /// of employee vi.
+    ///
+    /// Additionally, you have an integer budget representing the total funds 
+    /// available for investment.
+    ///
+    /// However, the company has a discount policy: if an employee's direct boss 
+    /// purchases their own stock, then the employee can buy their stock at half 
+    /// the original price (floor(present[v] / 2)).
+    ///
+    /// Return the maximum profit that can be achieved without exceeding the 
+    /// given budget.
+    /// 
+    /// Note:
+    /// You may buy each stock at most once.
+    /// You cannot use any profit earned from future stock prices to fund 
+    /// additional investments and must buy only from budget.
+    /// 
+    /// Example 1:
+    /// Input: n = 2, present = [1,2], future = [4,3], hierarchy = [[1,2]], 
+    /// budget = 3
+    /// Output: 5
+    /// Explanation:
+    /// Employee 1 buys the stock at price 1 and earns a profit of 4 - 1 = 3.
+    /// Since Employee 1 is the direct boss of Employee 2, Employee 2 gets a 
+    /// discounted price of floor(2 / 2) = 1.
+    /// Employee 2 buys the stock at price 1 and earns a profit of 3 - 1 = 2.
+    /// The total buying cost is 1 + 1 = 2 <= budget. Thus, the maximum total 
+    /// profit achieved is 3 + 2 = 5.
+    ///
+    /// Example 2:
+    /// Input: n = 2, present = [3,4], future = [5,8], hierarchy = [[1,2]], 
+    /// budget = 4
+    /// Output: 4
+    /// Explanation:
+    /// Employee 2 buys the stock at price 4 and earns a profit of 8 - 4 = 4.
+    /// Since both employees cannot buy together, the maximum profit is 4.
+    ///
+    /// Example 3:
+    /// Input: n = 3, present = [4,6,8], future = [7,9,11], 
+    /// hierarchy = [[1,2],[1,3]], budget = 10
+    /// Output: 10
+    /// Explanation:
+    /// Employee 1 buys the stock at price 4 and earns a profit of 7 - 4 = 3.
+    /// Employee 3 would get a discounted price of floor(8 / 2) = 4 and earns 
+    /// a profit of 11 - 4 = 7.
+    /// Employee 1 and Employee 3 buy their stocks at a total cost of 
+    /// 4 + 4 = 8 <= budget. Thus, the maximum total profit achieved is 3 + 7 = 10.
+    ///
+    /// Example 4:
+    /// Input: n = 3, present = [5,2,3], future = [8,5,6], 
+    /// hierarchy = [[1,2],[2,3]], budget = 7
+    /// Output: 12
+    /// Explanation:
+    /// Employee 1 buys the stock at price 5 and earns a profit of 8 - 5 = 3.
+    /// Employee 2 would get a discounted price of floor(2 / 2) = 1 and earns a 
+    /// profit of 5 - 1 = 4.
+    /// Employee 3 would get a discounted price of floor(3 / 2) = 1 and earns a 
+    /// profit of 6 - 1 = 5.
+    /// The total cost becomes 5 + 1 + 1 = 7 <= budget. Thus, the maximum total 
+    /// profit achieved is 3 + 4 + 5 = 12.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 160
+    /// 2. present.length, future.length == n
+    /// 3. 1 <= present[i], future[i] <= 50
+    /// 4. hierarchy.length == n - 1
+    /// 5. hierarchy[i] == [ui, vi]
+    /// 6. 1 <= ui, vi <= n
+    /// 7. ui != vi
+    /// 8. 1 <= budget <= 160
+    /// 9. There are no duplicate edges.
+    /// 10. Employee 1 is the direct or indirect boss of every employee.
+    /// 11. The input graph hierarchy is guaranteed to have no cycles.
+    /// </summary>
+    int maxProfit(int n, vector<int>& present, vector<int>& future, 
+        vector<vector<int>>& hierarchy, int budget);
 #pragma endregion
 };
 

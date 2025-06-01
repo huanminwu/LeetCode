@@ -23819,5 +23819,431 @@ public:
     /// 9. 0 <= xi <= k - 1
     /// </summary>
     vector<int> resultArrayII(vector<int>& nums, int k, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet Code 3537. Fill a Special Grid 
+    /// </summary>
+    void specialGrid(vector<vector<int>>&grid, int left, int right, int top, int bottom, int& index);
+
+
+    /// <summary>
+    /// Leet Code 3537. Fill a Special Grid 
+    ///
+    /// Medium
+    ///
+    /// You are given a non-negative integer n representing a 2n x 2n grid. 
+    /// You must fill the grid with integers from 0 to 22n - 1 to make it 
+    /// special. A grid is special if it satisfies all the following conditions:
+    ///
+    /// All numbers in the top-right quadrant are smaller than those in the bottom-
+    /// right quadrant.
+    /// All numbers in the bottom-right quadrant are smaller than those in the 
+    /// bottom-left quadrant.
+    /// All numbers in the bottom-left quadrant are smaller than those in the top-
+    /// left quadrant.
+    /// Each of its quadrants is also a special grid.
+    /// Return the special 2n x 2n grid.
+    ///
+    /// Note: Any 1x1 grid is special.
+    /// 
+    /// Example 1:
+    /// Input: n = 0
+    /// Output: [[0]]
+    /// Explanation:
+    /// The only number that can be placed is 0, and there is only one possible 
+    /// position in the grid.
+    ///
+    /// Example 2:
+    /// Input: n = 1
+    /// Output: [[3,0],[2,1]]
+    /// Explanation:
+    /// The numbers in each quadrant are:
+    /// Top-right: 0
+    /// Bottom-right: 1
+    /// Bottom-left: 2
+    /// Top-left: 3
+    /// Since 0 < 1 < 2 < 3, this satisfies the given constraints.
+    ///
+    /// Example 3:
+    /// Input: n = 2
+    /// Output: [[15,12,3,0],[14,13,2,1],[11,8,7,4],[10,9,6,5]]
+    /// Explanation:
+    /// The numbers in each quadrant are:
+    /// Top-right: 3, 0, 2, 1
+    /// Bottom-right: 7, 4, 6, 5
+    /// Bottom-left: 11, 8, 10, 9
+    /// Top-left: 15, 12, 14, 13
+    /// max(3, 0, 2, 1) < min(7, 4, 6, 5)
+    /// max(7, 4, 6, 5) < min(11, 8, 10, 9)
+    /// max(11, 8, 10, 9) < min(15, 12, 14, 13)
+    /// This satisfies the first three requirements. Additionally, each quadrant 
+    /// is also a special grid. Thus, this is a special grid.
+    ///  
+    /// Constraints:
+    /// 1. 0 <= n <= 10
+    /// </summary>
+    vector<vector<int>> specialGrid(int n);
+
+    /// <summary>
+    /// Leet Code 3540. Minimum Time to Visit All Houses
+    ///
+    /// Medium
+    ///
+    /// You are given two integer arrays forward and backward, both of size n. 
+    /// You are also given another integer array queries.
+    ///
+    /// There are n houses arranged in a circle. The houses are connected via 
+    /// roads in a special arrangement:
+    ///
+    /// For all 0 <= i <= n - 2, house i is connected to house i + 1 via a 
+    /// road with length forward[i] meters. Additionally, house n - 1 is 
+    /// connected back to house 0 via a road with length forward[n - 1] meters, 
+    /// completing the circle.
+    /// For all 1 <= i <= n - 1, house i is connected to house i - 1 via a road 
+    /// with length backward[i] meters. Additionally, house 0 is connected back 
+    /// to house n - 1 via a road with length backward[0] meters, completing the 
+    /// circle.
+    /// You can walk at a pace of one meter per second. Starting from house 0, 
+    /// find the minimum time taken to visit each house in the order specified 
+    /// by queries.
+    ///
+    /// Return the minimum total time taken to visit the houses.
+    /// 
+    /// Example 1:
+    /// Input: forward = [1,4,4], backward = [4,1,2], queries = [1,2,0,2]
+    /// Output: 12
+    /// Explanation:
+    /// The path followed is 0(0) -> 1(1) -> 2(5) -> 1(7) -> 0(8) -> 2(12).
+    ///
+    /// Note: The notation used is node(total time), -> represents forward road, 
+    /// and -> represents backward road.
+    ///
+    /// Example 2:
+    /// Input: forward = [1,1,1,1], backward = [2,2,2,2], queries = [1,2,3,0]
+    /// Output: 4
+    /// Explanation:
+    /// The path travelled is 0 -> 1 ->2 -> 3 -> 0 Each step is in the forward 
+    // direction and requires 1 second.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 10^5
+    /// 2. n == forward.length == backward.length
+    /// 3. 1 <= forward[i], backward[i] <= 10^5
+    /// 4. 1 <= queries.length <= 10^5
+    /// 5. 0 <= queries[i] < n
+    /// 6. queries[i] != queries[i + 1]
+    /// 7. queries[0] is not 0.
+    /// </summary>
+    long long minTotalTime(vector<int>& forward, vector<int>& backward, vector<int>& queries);
+
+    /// <summary>
+    /// Leet Code 3546. Equal Sum Grid Partition I
+    ///
+    /// Medium
+    /// 
+    /// You are given an m x n matrix grid of positive integers. Your task is to 
+    /// determine if it is possible to make either one horizontal or one vertical 
+    /// cut on the grid such that:
+    ///
+    /// Each of the two resulting sections formed by the cut is non-empty.
+    /// The sum of the elements in both sections is equal.
+    /// Return true if such a partition exists; otherwise return false.
+    ///
+    /// Example 1:
+    /// Input: grid = [[1,4],[2,3]]
+    /// Output: true
+    /// Explanation:
+    /// A horizontal cut between row 0 and row 1 results in two non-empty sections,
+    /// each with a sum of 5. Thus, the answer is true.
+    ///
+    /// Example 2:
+    /// Input: grid = [[1,3],[2,4]]
+    /// Output: false
+    /// Explanation:
+    /// No horizontal or vertical cut results in two non-empty sections with equal 
+    /// sums. Thus, the answer is false.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= m == grid.length <= 10^5
+    /// 2. 1 <= n == grid[i].length <= 10^5
+    /// 3. 2 <= m * n <= 10^5
+    /// 4. 1 <= grid[i][j] <= 10^5
+    /// </summary>
+    bool canPartitionGridI(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 3532. Path Existence Queries in a Graph I
+    ///
+    /// Medium
+    ///
+    /// You are given an integer n representing the number of nodes in a graph, 
+    /// labeled from 0 to n - 1.
+    ///
+    /// You are also given an integer array nums of length n sorted in 
+    /// non-decreasing order, and an integer maxDiff.
+    ///
+    /// An undirected edge exists between nodes i and j if the absolute difference 
+    /// between nums[i] and nums[j] is at most maxDiff (i.e., 
+    /// |nums[i] - nums[j]| <= maxDiff).
+    ///
+    /// You are also given a 2D integer array queries. For each 
+    /// queries[i] = [ui, vi], determine whether there exists a path between nodes 
+    /// ui and vi.
+    ///
+    /// Return a boolean array answer, where answer[i] is true if there exists a 
+    /// path between ui and vi in the ith query and false otherwise.
+    ///
+    /// Example 1:
+    /// Input: n = 2, nums = [1,3], maxDiff = 1, queries = [[0,0],[0,1]]
+    /// Output: [true,false]
+    /// Explanation:
+    /// Query [0,0]: Node 0 has a trivial path to itself.
+    /// Query [0,1]: There is no edge between Node 0 and Node 1 because 
+    /// |nums[0] - nums[1]| = |1 - 3| = 2, which is greater than maxDiff.
+    /// Thus, the final answer after processing all the queries is [true, false].
+    ///
+    /// Example 2:
+    /// Input: n = 4, nums = [2,5,6,8], maxDiff = 2, 
+    /// queries = [[0,1],[0,2],[1,3],[2,3]]
+    /// Output: [false,false,true,true]
+    /// Explanation:
+    /// The resulting graph is:
+    /// Query [0,1]: There is no edge between Node 0 and Node 1 because 
+    /// |nums[0] - nums[1]| = |2 - 5| = 3, which is greater than maxDiff.
+    /// Query [0,2]: There is no edge between Node 0 and Node 2 because 
+    /// |nums[0] - nums[2]| = |2 - 6| = 4, which is greater than maxDiff.
+    /// Query [1,3]: There is a path between Node 1 and Node 3 through 
+    /// Node 2 since |nums[1] - nums[2]| = |5 - 6| = 1 and 
+    /// |nums[2] - nums[3]| = |6 - 8| = 2, both of which are within maxDiff.
+    /// Query [2,3]: There is an edge between Node 2 and Node 3 because 
+    /// |nums[2] - nums[3]| = |6 - 8| = 2, which is equal to maxDiff.
+    /// Thus, the final answer after processing all the queries is 
+    /// [false, false, true, true].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 10^5
+    /// 3. nums is sorted in non-decreasing order.
+    /// 4. 0 <= maxDiff <= 10^5
+    /// 5. 1 <= queries.length <= 10^5
+    /// 6. queries[i] == [ui, vi]
+    /// 7. 0 <= ui, vi < n
+    /// </summary>
+    vector<bool> pathExistenceQueriesI(int n, vector<int>& nums, int maxDiff, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet Code 3534. Path Existence Queries in a Graph II
+    ///
+    /// Hard
+    ///
+    /// You are given an integer n representing the number of nodes in a graph, 
+    /// labeled from 0 to n - 1.
+    /// You are also given an integer array nums of length n and an integer 
+    /// maxDiff.
+    ///
+    /// An undirected edge exists between nodes i and j if the absolute 
+    /// difference between nums[i] and nums[j] is at most maxDiff (i.e., 
+    /// |nums[i] - nums[j]| <= maxDiff).
+    ///
+    /// You are also given a 2D integer array queries. For each 
+    /// queries[i] = [ui, vi], find the minimum distance between nodes ui and vi. 
+    /// If no path exists between the two nodes, return -1 for that query.
+    ///
+    /// Return an array answer, where answer[i] is the result of the ith query.
+    /// Note: The edges between the nodes are unweighted.
+    /// 
+    /// Example 1:
+    /// Input: n = 5, nums = [1,8,3,4,2], maxDiff = 3, queries = [[0,3],[2,4]]
+    /// Output: [1,1]
+    /// Explanation:
+    /// The resulting graph is:
+    /// Query   Shortest Path   Minimum Distance
+    /// [0, 3]  0 -> 3   1
+    /// [2, 4]  2 -> 4   1
+    /// Thus, the output is [1, 1].
+    ///
+    /// Example 2:
+    /// Input: n = 5, nums = [5,3,1,9,10], maxDiff = 2, 
+    /// queries = [[0,1],[0,2],[2,3],[4,3]]
+    /// Output: [1,2,-1,1]
+    /// Explanation:
+    /// The resulting graph is:
+    /// Query	Shortest Path	Minimum Distance
+    /// [0, 1]  0 -> 1  1
+    /// [0, 2]  0 -> 1 -> 2 2
+    /// [2, 3]  None    -1
+    /// [4, 3]  3 -> 4  1
+    /// Thus, the output is [1, 2, -1, 1].
+    ///
+    /// Example 3:
+    /// Input: n = 3, nums = [3,6,1], maxDiff = 1, queries = [[0,0],[0,1],[1,2]]
+    /// Output: [0,-1,-1]
+    /// Explanation:
+    /// There are no edges between any two nodes because:
+    /// Nodes 0 and 1: |nums[0] - nums[1]| = |3 - 6| = 3 > 1
+    /// Nodes 0 and 2: |nums[0] - nums[2]| = |3 - 1| = 2 > 1
+    /// Nodes 1 and 2: |nums[1] - nums[2]| = |6 - 1| = 5 > 1
+    /// Thus, no node can reach any other node, and the output is [0, -1, -1].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 10^5
+    /// 3. 0 <= maxDiff <= 10^5
+    /// 4. 1 <= queries.length <= 10^5
+    /// 5. queries[i] == [ui, vi]
+    /// 6. 0 <= ui, vi < n
+    /// </summary>
+    vector<int> pathExistenceQueriesII(int n, vector<int>& nums, int maxDiff, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet Code 3548. Equal Sum Grid Partition II
+    ///
+    /// Hard
+    ///
+    /// You are given an m x n matrix grid of positive integers. Your task is 
+    /// to determine if it is possible to make either one horizontal or one 
+    /// vertical cut on the grid such that:
+    ///
+    /// Each of the two resulting sections formed by the cut is non-empty.
+    /// The sum of elements in both sections is equal, or can be made equal by 
+    /// discounting at most one single cell in total (from either section).
+    /// If a cell is discounted, the rest of the section must remain connected.
+    /// Return true if such a partition exists; otherwise, return false.
+    ///
+    /// Note: A section is connected if every cell in it can be reached from 
+    /// any other cell by moving up, down, left, or right through other cells in 
+    /// the section.
+    ///
+    /// Example 1:
+    /// Input: grid = [[1,4],[2,3]]
+    /// Output: true
+    /// Explanation:
+    /// A horizontal cut after the first row gives sums 1 + 4 = 5 and 2 + 3 = 5, 
+    /// which are equal. Thus, the answer is true.
+    ///
+    /// Example 2:
+    /// Input: grid = [[1,2],[3,4]]
+    /// Output: true
+    /// Explanation:
+    /// A vertical cut after the first column gives sums 1 + 3 = 4 and 2 + 4 = 6.
+    /// By discounting 2 from the right section (6 - 2 = 4), both sections have 
+    /// equal sums and remain connected. Thus, the answer is true.
+    ///
+    /// Example 3:
+    /// Input: grid = [[1,2,4],[2,3,5]]
+    /// Output: false
+    /// Explanation:
+    /// A horizontal cut after the first row gives 1 + 2 + 4 = 7 and 
+    /// 2 + 3 + 5 = 10.
+    /// By discounting 3 from the bottom section (10 - 3 = 7), both sections 
+    /// have equal sums, but they do not remain connected as it splits the bottom 
+    /// section into two parts ([2] and [5]). Thus, the answer is false.
+    ///
+    /// Example 4:
+    /// Input: grid = [[4,1,8],[3,2,6]]
+    /// Output: false
+    /// Explanation:
+    /// No valid cut exists, so the answer is false.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= m == grid.length <= 10^5
+    /// 2. 1 <= n == grid[i].length <= 10^5
+    /// 3. 2 <= m * n <= 10^5
+    /// 4. 1 <= grid[i][j] <= 10^5
+    /// </summary>
+    bool canPartitionGridII(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 3550. Smallest Index With Digit Sum Equal to Index
+    ///
+    /// Easy
+    ///
+    /// You are given an integer array nums.
+    /// Return the smallest index i such that the sum of the digits of nums[i] is 
+    /// equal to i.
+    ///
+    /// If no such index exists, return -1.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,3,2]
+    /// Output: 2
+    /// Explanation:
+    /// For nums[2] = 2, the sum of digits is 2, which is equal to index i = 2. 
+    /// Thus, the output is 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,10,11]
+    /// Output: 1
+    /// Explanation:
+    /// For nums[1] = 10, the sum of digits is 1 + 0 = 1, which is equal to 
+    /// index i = 1.
+    /// For nums[2] = 11, the sum of digits is 1 + 1 = 2, which is equal to 
+    /// index i = 2.
+    /// Since index 1 is the smallest, the output is 1.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,3]
+    /// Output: -1
+    /// Explanation:
+    /// Since no index satisfies the condition, the output is -1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 0 <= nums[i] <= 1000
+    /// </summary>
+    int smallestIndex(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3551. Minimum Swaps to Sort by Digit Sum
+    ///
+    /// Medium
+    ///
+    /// You are given an array nums of distinct positive integers. You need to 
+    /// sort the array in increasing order based on the sum of the digits of 
+    /// each number. If two numbers have the same digit sum, the smaller number 
+    /// appears first in the sorted order.
+    ///
+    /// Return the minimum number of swaps required to rearrange nums into this 
+    /// sorted order.
+    ///
+    /// A swap is defined as exchanging the values at two distinct positions in 
+    /// the array.
+    ///
+    /// Example 1:
+    /// Input: nums = [37,100]
+    /// Output: 1
+    /// Explanation:
+    /// Compute the digit sum for each integer: 
+    /// [3 + 7 = 10, 1 + 0 + 0 = 1] -> [10, 1]
+    /// Sort the integers based on digit sum: [100, 37]. Swap 37 with 100 to 
+    /// obtain the sorted order.
+    /// Thus, the minimum number of swaps required to rearrange nums is 1.
+    ///
+    /// Example 2:
+    /// Input: nums = [22,14,33,7]
+    /// Output: 0
+    /// Explanation:
+    /// Compute the digit sum for each integer: 
+    /// [2 + 2 = 4, 1 + 4 = 5, 3 + 3 = 6, 7 = 7] -> [4, 5, 6, 7]
+    /// Sort the integers based on digit sum: [22, 14, 33, 7]. The array 
+    /// is already sorted.
+    /// Thus, the minimum number of swaps required to rearrange nums is 0.
+    ///
+    /// Example 3:
+    /// Input: nums = [18,43,34,16]
+    /// Output: 2
+    /// Explanation:
+    /// Compute the digit sum for each integer: [1 + 8 = 9, 4 + 3 = 7, 
+    /// 3 + 4 = 7, 1 + 6 = 7] -> [9, 7, 7, 7]
+    /// Sort the integers based on digit sum: [16, 34, 43, 18]. Swap 18 
+    /// with 16, and swap 43 with 34 to obtain the sorted order.
+    /// Thus, the minimum number of swaps required to rearrange nums is 2.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. nums consists of distinct positive integers.
+    /// </summary>
+    int minSwapsIII(vector<int>& nums);
 };
 #endif  // LeetCodeArray_H

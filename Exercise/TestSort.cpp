@@ -4359,8 +4359,70 @@ void TestLeetCode3510(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3531(void)
+{
+    Logger::WriteMessage("Test Leet Code 3531");
+    LeetCodeSort leetCode;
+    int n = 3;
+    vector<vector<int>> buildings = { {1, 2},{2, 2},{3, 2},{2, 1},{2, 3} };
+    int result = leetCode.countCoveredBuildings(n, buildings);
+    Logger::WriteMessage(buildings);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    buildings = { {1, 1},{1, 2},{2, 1},{2, 2} };
+    result = leetCode.countCoveredBuildings(n, buildings);
+    Logger::WriteMessage(buildings);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 5; 
+    buildings = { {1, 3},{3, 2},{3, 3},{3, 5},{5, 3} };
+    result = leetCode.countCoveredBuildings(n, buildings);
+    Logger::WriteMessage(buildings);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3536(void)
+{
+    Logger::WriteMessage("Test Leet Code 3536");
+    LeetCodeSort leetCode;
+    int  n = 31;
+    int result = leetCode.maxProduct(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 22;
+    result = leetCode.maxProduct(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 124;
+    result = leetCode.maxProduct(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3555(void)
+{
+    Logger::WriteMessage("Test Leet Code 3555");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 3, 2, 4, 5 };
+    int k = 3;
+    vector<int> result = leetCode.minSubarraySort(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 5,4,3,2,1 };
+    k = 4;
+    result = leetCode.minSubarraySort(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3555();
+    TestLeetCode3536();
+    TestLeetCode3531();
     TestLeetCode3505();
     TestLeetCode3510();
     TestLeetCode3507();

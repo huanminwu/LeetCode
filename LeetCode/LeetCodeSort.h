@@ -8869,6 +8869,135 @@ public:
     /// 2. -10^9 <= nums[i] <= 10^9
     /// </summary>
     int minimumPairRemovalII(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3531. Count Covered Buildings
+    ///
+    /// Medium
+    ///
+    /// You are given a positive integer n, representing an n x n city. You are 
+    /// also given a 2D grid buildings, where buildings[i] = [x, y] denotes a 
+    /// unique building located at coordinates [x, y].
+    ///
+    /// A building is covered if there is at least one building in all four 
+    /// directions: left, right, above, and below.
+    ///
+    /// Return the number of covered buildings.
+    /// 
+    /// Example 1:
+    /// Input: n = 3, buildings = [[1,2],[2,2],[3,2],[2,1],[2,3]]
+    /// Output: 1
+    /// Explanation:
+    /// Only building [2,2] is covered as it has at least one building:
+    /// above ([1,2])
+    /// below ([3,2])
+    /// left ([2,1])
+    /// right ([2,3])
+    /// Thus, the count of covered buildings is 1.
+    ///
+    /// Example 2:
+    /// Input: n = 3, buildings = [[1,1],[1,2],[2,1],[2,2]]
+    /// Output: 0
+    /// Explanation:
+    /// No building has at least one building in all four directions.
+    ///
+    /// Example 3:
+    /// Input: n = 5, buildings = [[1,3],[3,2],[3,3],[3,5],[5,3]]
+    /// Output: 1
+    /// Explanation:
+    /// Only building [3,3] is covered as it has at least one building:
+    /// above ([1,3])
+    /// below ([5,3])
+    /// left ([3,2])
+    /// right ([3,5])
+    /// Thus, the count of covered buildings is 1.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n <= 105
+    /// 2. 1 <= buildings.length <= 105 
+    /// 3. buildings[i] = [x, y]
+    /// 4. 1 <= x, y <= n
+    /// 5. All coordinates of buildings are unique.
+    /// </summary>
+    int countCoveredBuildings(int n, vector<vector<int>>& buildings);
+
+    /// <summary>
+    /// Leet Code 3536. Maximum Product of Two Digits 
+    ///
+    /// Easy
+    ///
+    /// You are given a positive integer n.
+    /// Return the maximum product of any two digits in n.
+    /// Note: You may use the same digit twice if it appears more than once in n.
+    ///
+    /// Example 1:
+    /// Input: n = 31
+    /// Output: 3
+    /// Explanation:
+    /// The digits of n are [3, 1].
+    /// The possible products of any two digits are: 3 * 1 = 3.
+    /// The maximum product is 3.
+    ///
+    /// Example 2:
+    /// Input: n = 22
+    /// Output: 4
+    /// Explanation:
+    /// The digits of n are [2, 2].
+    /// The possible products of any two digits are: 2 * 2 = 4.
+    /// The maximum product is 4.
+    ///
+    /// Example 3:
+    /// Input: n = 124
+    /// Output: 8
+    /// Explanation:
+    /// The digits of n are [1, 2, 4].
+    /// The possible products of any two digits are: 1 * 2 = 2, 1 * 4 = 4, 
+    /// 2 * 4 = 8.
+    /// The maximum product is 8.
+    ///
+    /// Constraints:
+    /// 1. 10 <= n <= 10^9
+    /// </summary>
+    int maxProduct(int n);
+
+    /// <summary>
+    /// Leet Code 3555. Smallest Subarray to Sort in Every Sliding Window
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums and an integer k.
+    ///
+    /// For each contiguous subarray of length k, determine the minimum length of 
+    /// a continuous segment that must be sorted so that the entire window becomes 
+    /// non‑decreasing; if the window is already sorted, its required length is 
+    /// zero.
+    ///
+    /// Return an array of length n − k + 1 where each element corresponds to the 
+    /// answer for its window.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,3,2,4,5], k = 3
+    /// Output: [2,2,0]
+    /// Explanation:
+    /// nums[0...2] = [1, 3, 2]. Sort [3, 2] to get [1, 2, 3], the answer is 2.
+    /// nums[1...3] = [3, 2, 4]. Sort [3, 2] to get [2, 3, 4], the answer is 2.
+    /// nums[2...4] = [2, 4, 5] is already sorted, so the answer is 0.
+    ///
+    /// Example 2:
+    /// Input: nums = [5,4,3,2,1], k = 4
+    /// Output: [4,4]
+    /// Explanation:
+    /// nums[0...3] = [5, 4, 3, 2]. The whole subarray must be sorted, so the 
+    /// answer is 4.
+    /// nums[1...4] = [4, 3, 2, 1]. The whole subarray must be sorted, so the 
+    /// answer is 4.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1000
+    /// 2. 1 <= k <= nums.length
+    /// 3. 1 <= nums[i] <= 10^6
+    /// </summary>
+    vector<int> minSubarraySort(vector<int>& nums, int k);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

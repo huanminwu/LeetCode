@@ -2132,8 +2132,30 @@ void TestLeetCode3487(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3527(void)
+{
+    Logger::WriteMessage("Test Leet Code 3527");
+    LeetCodeHashtable leetCode;
+    vector<vector<string>> responses =
+    { 
+        {"good", "ok", "good", "ok"},{"ok", "bad", "good", "ok", "ok"},{"good"},{"bad"} 
+    };
+    string result = leetCode.findCommonResponse(responses);
+    Logger::WriteMessage(responses);
+    Logger::WriteMessage("result = " + result);
+
+    responses =
+    {
+        {"good","ok","good"} ,{"ok","bad"},{"bad","notsure"},{"great","good"}
+    };
+    result = leetCode.findCommonResponse(responses);
+    Logger::WriteMessage(responses);
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3527();
     TestLeetCode3487();
     TestLeetCode3471();
     TestLeetCode3450();

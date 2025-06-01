@@ -2548,8 +2548,89 @@ void TestLeetCode3518(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode3533(void)
+{
+    Logger::WriteMessage("Test Leet Code 3533");
+    LeetCodeDFS leetCode;
+    vector<int> nums = { 3, 12, 45 };
+    int k = 5;
+    vector<int> result = leetCode.concatenatedDivisibility(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 10,5 };
+    k = 10;
+    result = leetCode.concatenatedDivisibility(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 1,2,3 };
+    k = 5;
+    result = leetCode.concatenatedDivisibility(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3538(void)
+{
+    Logger::WriteMessage("Test Leet Code 3538");
+    LeetCodeDFS leetCode;
+    int l = 10, n = 4, k = 1;
+    vector<int> position = { 0, 3, 8, 10 };
+    vector<int> time = { 5, 8, 3, 6 };
+    int result = leetCode.minTravelTime(l, n, k, position, time);
+    Logger::WriteMessage("l = " + to_string(l) + "; n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(position);
+    Logger::WriteMessage(time);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    l = 5, n = 5, k = 1;
+    position = { 0, 1, 2, 3, 5 };
+    time = { 8, 3, 9, 3, 3 };
+    result = leetCode.minTravelTime(l, n, k, position, time);
+    Logger::WriteMessage("l = " + to_string(l) + "; n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(position);
+    Logger::WriteMessage(time);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3565(void)
+{
+    Logger::WriteMessage("Test Leet Code 3565");
+    LeetCodeDFS leetCode;
+    vector<vector<int>> grid = { {0, 0, 0},{0, 1, 2} };
+    int k = 2;
+    vector<vector<int>> result = leetCode.findPath(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid = { { 1, 0, 4 }, { 3, 0, 2 } };
+    k = 4;
+    result = leetCode.findPath(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid = { {0, 1},{0, 2} };
+    k = 2;
+    result = leetCode.findPath(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+    
+    grid = { {0, 0, 4, 0},{0, 0, 3, 0},{0, 1, 0, 0},{5, 0, 0, 2} };
+    k = 5;
+    result = leetCode.findPath(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3565();
+    TestLeetCode3538();
+    TestLeetCode3533();
     TestLeetCode3518();
     TestLeetCode3519();
     TestLeetCode3490();

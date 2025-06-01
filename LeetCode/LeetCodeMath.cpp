@@ -3556,14 +3556,14 @@ int LeetCodeMath::mirrorReflection(int p, int q)
 /// <summary>
 /// Leet code #866. Prime Palindrome
 /// </summary>
-bool LeetCodeMath::isPrime(int N)
+bool LeetCodeMath::isPrime(long long N)
 {
     if (N == 1) return false;
     else if (N == 2) return true;
     else if (N % 2 == 0) return false;
     else
     {
-        for (int i = 3; i <= sqrt(N); i += 2)
+        for (long long i = 3; i <= sqrt(N); i += 2)
         {
             if (N%i == 0) return false;
         }
@@ -10623,16 +10623,6 @@ vector<int> LeetCodeMath::countPoints(vector<vector<int>>& points, vector<vector
     return result;
 }
 
-/// <summary>
-/// Leet code 1830. Minimum Number of Operations to Make String Sorted
-/// </summary>
-long long LeetCodeMath::modPow(long long x, long long y, long long M)
-{
-    if (y == 0) return 1;
-    long long p = modPow(x, y / 2, M) % M;
-    p = (p * p) % M;
-    return ((y % 2) ? (p * x % M) % M : p);
-}
 
 /// <summary>
 /// Leet code 1830. Minimum Number of Operations to Make String Sorted
@@ -25976,6 +25966,384 @@ int LeetCodeMath::findClosest(int x, int y, int z)
     {
         return 0;
     }
+}
+
+/// <summary>
+/// Leet Code 3539. Find Sum of Array Product of Magical Sequences
+///
+/// Hard
+///
+/// You are given two integers, m and k, and an integer array nums.
+///
+/// A sequence of integers seq is called magical if:
+/// seq has a size of m.
+/// 0 <= seq[i] < nums.length
+/// The binary representation of 2seq[0] + 2seq[1] + ... + 2seq[m - 1] has k 
+/// set bits.
+/// The array product of this sequence is defined as prod(seq) = 
+/// (nums[seq[0]] * nums[seq[1]] * ... * nums[seq[m - 1]]).
+///
+/// Return the sum of the array products for all valid magical sequences.
+///
+/// Since the answer may be large, return it modulo 109 + 7.
+///
+/// A set bit refers to a bit in the binary representation of a number that 
+/// has a value of 1.
+///
+/// Example 1:
+/// Input: m = 5, k = 5, nums = [1,10,100,10000,1000000]
+/// Output: 991600007
+/// Explanation:
+/// All permutations of [0, 1, 2, 3, 4] are magical sequences, each with an 
+/// array product of 1013.
+///
+/// Example 2:
+/// Input: m = 2, k = 2, nums = [5,4,3,2,1]
+/// Output: 170
+/// Explanation:
+/// The magical sequences are [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 2], 
+/// [1, 3], [1, 4], [2, 0], [2, 1], [2, 3], [2, 4], [3, 0], [3, 1], [3, 2], 
+/// [3, 4], [4, 0], [4, 1], [4, 2], and [4, 3].
+///
+/// Example 3:
+/// Input: m = 1, k = 1, nums = [28]
+/// Output: 28
+/// Explanation:
+/// The only magical sequence is [0].
+/// Constraints:
+/// 1. 1 <= k <= m <= 30
+/// 2. 1 <= nums.length <= 50
+/// 3. 1 <= nums[i] <= 10^8
+/// </summary>
+int LeetCodeMath::magicalSum(int m, int k, vector<int>& nums)
+{
+    long long MOD = 1000000007;
+    int n = nums.size();
+
+    vector<long long> f(m + 1), inverse_f(m + 1);
+    f[0] = 1;
+    for (int i = 1; i <= m; i++) 
+    {
+        f[i] = f[i - 1] * i % MOD;
+    }
+
+    inverse_f[m] = modPow(f[m], MOD - 2, MOD);
+    for (int i = m; i >= 1; i--) 
+    {
+        inverse_f[i - 1] = inverse_f[i] * i % MOD;
+    }
+
+    vector<vector<long long>> pow_nums(n, vector<long long>(m + 1, 1));
+    for (int i = 0; i < n; i++) 
+    {
+        for (int c = 1; c <= m; c++) 
+        {
+            pow_nums[i][c] = pow_nums[i][c - 1] * nums[i] % MOD;
+        }
+    }
+
+    vector dp(n + 1, vector(m + 1, vector(k + 1, vector<long long>(m + 1))));
+    dp[0][0][0][0] = 1;
+
+    for (int i = 0; i < n; i++) 
+    {
+        for (int m1 = 0; m1 <= m; m1++) 
+        {
+            for (int k1 = 0; k1 <= k; k1++) 
+            {
+                for (int m2 = 0; m2 <= m; m2++) 
+                {
+                    long long val = dp[i][m1][k1][m2];
+                    if (!val) continue;
+                    for (int c = 0; c <= m - m1; c++) 
+                    {
+                        int m12 = m1 + c;
+                        int s = c + m2;
+                        int bit = s & 1;
+                        int k2 = k1 + bit;
+                        if (k2 > k) continue;
+                        int m22 = s >> 1;
+                        dp[i + 1][m12][k2][m22] = (dp[i + 1][m12][k2][m22] + val * inverse_f[c] % MOD * pow_nums[i][c] % MOD) % MOD;
+                    }
+                }
+            }
+        }
+    }
+
+    long long ans = 0;
+    for (int k1 = 0; k1 <= k; k1++) 
+    {
+        for (int m2 = 0; m2 <= m; m2++) 
+        {
+            long long val = dp[n][m][k1][m2];
+            if (!val) continue;
+            int bits = 0;
+            int bit = 1;
+            while (bit <= m2)
+            {
+                if ((bit & m2) != 0) bits++;
+                bit = bit << 1;
+            }
+            if (k1 + bits == k) 
+            {
+                ans = (ans + val) % MOD;
+            }
+        }
+    }
+    ans = ans * f[m] % MOD;
+    return (int)ans;
+}
+
+/// <summary>
+/// Leet Code 3549. Multiply Two Polynomials
+/// </summary>
+void  LeetCodeMath::multiply_fft(vector<Complex>& a, int inv, int tot, vector<int>& rev)
+{
+    double PI = acos(-1);
+    // bit-reversal reorder
+    for (int i = 0; i < tot; i++)
+    {
+        if (i < rev[i])
+        {
+            Complex t = a[i];
+            a[i] = a[rev[i]];
+            a[rev[i]] = t;
+        }
+    }
+
+    // Cooley–Tukey
+    for (int len = 1; len < tot; len <<= 1)
+    {
+        double ang = PI / len * inv;
+        Complex wlen = Complex(cos(ang), sin(ang));
+        for (int i = 0; i < tot; i += len << 1)
+        {
+            Complex w = Complex(1, 0);
+            for (int j = 0; j < len; j++)
+            {
+                Complex u = a[i + j];
+                Complex v = a[i + j + len].multiply(w);
+                a[i + j] = u.plus(v);
+                a[i + j + len] = u.minus(v);
+                w = w.multiply(wlen);
+            }
+        }
+    }
+}
+
+/// <summary>
+/// Leet Code 3549. Multiply Two Polynomials
+///
+/// Hard
+///
+/// You are given two integer arrays poly1 and poly2, where the element at 
+/// index i in each array represents the coefficient of xi in a polynomial.
+///
+/// Let A(x) and B(x) be the polynomials represented by poly1 and poly2, 
+/// respectively.
+///
+/// Return an integer array result representing the coefficients of the 
+/// product polynomial R(x) = A(x) * B(x), where result[i] denotes the 
+/// coefficient of xi in R(x).
+///
+/// Example 1:
+/// Input: poly1 = [3,2,5], poly2 = [1,4]
+/// Output: [3,14,13,20]
+/// Explanation:
+/// A(x) = 3 + 2x + 5x2 and B(x) = 1 + 4x
+/// R(x) = (3 + 2x + 5x2) * (1 + 4x)
+/// R(x) = 3 * 1 + (3 * 4 + 2 * 1)x + (2 * 4 + 5 * 1)x2 + (5 * 4)x3
+/// R(x) = 3 + 14x + 13x2 + 20x3
+/// Thus, result = [3, 14, 13, 20].
+///
+/// Example 2:
+/// Input: poly1 = [1,0,-2], poly2 = [-1]
+/// Output: [-1,0,2]
+/// Explanation:
+/// A(x) = 1 + 0x - 2x2 and B(x) = -1
+/// R(x) = (1 + 0x - 2x2) * (-1)
+/// R(x) = -1 + 0x + 2x2
+/// Thus, result = [-1, 0, 2].
+///
+/// Example 3:
+/// Input: poly1 = [1,5,-3], poly2 = [-4,2,0]
+/// Output: [-4,-18,22,-6,0]
+/// Explanation:
+/// A(x) = 1 + 5x - 3x2 and B(x) = -4 + 2x + 0x2
+/// R(x) = (1 + 5x - 3x2) * (-4 + 2x + 0x2)
+/// R(x) = 1 * -4 + (1 * 2 + 5 * -4)x + (5 * 2 + -3 * -4)x2 + (-3 * 2)x3 + 0x4
+/// R(x) = -4 -18x + 22x2 -6x3 + 0x4
+/// Thus, result = [-4, -18, 22, -6, 0].
+///
+/// Constraints:
+/// 1. 1 <= poly1.length, poly2.length <= 5 * 10^4
+/// 2. -10^3 <= poly1[i], poly2[i] <= 10^3
+/// 3. poly1 and poly2 contain at least one non-zero coefficient.
+/// </summary>
+vector<long long> LeetCodeMath::multiply(vector<int>& poly1, vector<int>& poly2)
+{
+    int n = poly1.size();
+    int m = poly2.size();
+    int bit = 0, tot = 0;
+
+    // collect result and round
+    vector<long long>result(n + m - 1);
+
+    // find bit such that 2^bit >= n + m
+    while ((1 << bit) < n + m) bit++;
+    tot = 1 << bit;
+
+    // dynamically allocate arrays of length tot
+    vector<Complex> a(tot), b(tot);
+    vector<int> rev(tot);
+    for (int i = 0; i < tot; i++) 
+    {
+        a[i] = Complex(0, 0);
+        b[i] = Complex(0, 0);
+    }
+
+    // copy input coefficients
+    for (int i = 0; i < n; i++) a[i].x = poly1[i];
+    for (int j = 0; j < m; j++) b[j].x = poly2[j];
+
+    // build bit-reversal permutation
+    for (int i = 0; i < tot; i++) 
+    {
+        rev[i] = (rev[i >> 1] >> 1) | ((i & 1) << (bit - 1));
+    }
+
+    // forward FFT
+    multiply_fft(a, 1, tot, rev);
+    multiply_fft(b, 1, tot, rev);
+
+    // point-wise multiply
+    for (int i = 0; i < tot; i++) 
+    {
+        a[i] = a[i].multiply(b[i]);
+    }
+
+    // inverse FFT
+    multiply_fft(a, -1, tot, rev);
+
+
+    for (size_t i = 0; i < result.size(); i++) 
+    {
+        result[i] = (long long)round(a[i].x / tot);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3560. Find Minimum Log Transportation Cost
+///
+/// Easy
+///
+/// You are given integers n, m, and k.
+/// There are two logs of lengths n and m units, which need to be transported 
+/// in three trucks where each truck can carry one log with length at most k 
+/// units.
+///
+/// You may cut the logs into smaller pieces, where the cost of cutting a log 
+/// of length x into logs of length len1 and len2 is cost = len1 * len2 such 
+/// that len1 + len2 = x.
+///
+/// Return the minimum total cost to distribute the logs onto the trucks. If 
+/// the logs don't need to be cut, the total cost is 0.
+/// 
+/// Example 1:
+/// 
+/// Input: n = 6, m = 5, k = 5
+/// Output: 5
+/// Explanation:
+/// Cut the log with length 6 into logs with length 1 and 5, at a cost equal 
+/// to 1 * 5 == 5. Now the three logs of length 1, 5, and 5 can fit in one 
+/// truck each.
+///
+/// Example 2:
+/// Input: n = 4, m = 4, k = 6
+/// Output: 0
+/// Explanation:
+/// The two logs can fit in the trucks already, hence we don't need to cut the 
+/// logs.
+/// 
+/// Constraints:
+/// 1. 2 <= k <= 10^5
+/// 2. 1 <= n, m <= 2 * k
+/// 3. The input is generated such that it is always possible to transport the 
+///    logs.
+/// </summary>
+long long LeetCodeMath::minCuttingCost(int n, int m, int k)
+{
+    long long result = 0;
+    if (n > k && m > k)
+    {
+        result = (long long)(n - k) * (long long)k + (long long)(m-k) * (long long)k;
+    }
+    else if (n > k)
+    {
+        result = (long long)(n - k) * (long long)k;
+    }
+    else if (m > k)
+    {
+        result = (long long)(m - k) * (long long)k;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3556. Sum of Largest Prime Substrings
+///
+/// Medium
+///
+/// Given a string s, find the sum of the 3 largest unique prime numbers that 
+/// can be formed using any of its substrings.
+///
+/// Return the sum of the three largest unique prime numbers that can be 
+/// formed. If fewer than three exist, return the sum of all available primes. 
+/// If no prime numbers can be formed, return 0.
+///
+/// Note: Each prime number should be counted only once, even if it appears 
+/// in multiple substrings. Additionally, when converting a substring to an 
+/// integer, any leading zeros are ignored.
+///
+/// Example 1:
+/// Input: s = "12234"
+/// Output: 1469
+/// Explanation:
+/// The unique prime numbers formed from the substrings of "12234" are 2, 3, 
+/// 23, 223, and 1223.
+/// The 3 largest primes are 1223, 223, and 23. Their sum is 1469.
+///
+/// Example 2:
+/// Input: s = "111"
+/// Output: 11
+/// Explanation:
+/// The unique prime number formed from the substrings of "111" is 11.
+/// Since there is only one prime number, the sum is 11.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10
+/// 2. s consists of only digits.
+/// </summary>
+long long LeetCodeMath::sumOfLargestPrimes(string s)
+{
+    set<long long> pq;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        for (size_t j = i+1; j <= s.size(); j++)
+        {
+            long long val = atol(s.substr(i, j - i).c_str());
+            if (isPrime(val)) pq.insert(val);
+            if (pq.size() > 3) pq.erase(pq.begin());
+        }
+    }
+    long long result = 0;
+    while (!pq.empty())
+    {
+        result += *pq.begin();
+        pq.erase(pq.begin());
+    }
+    return result;
 }
 #pragma endregion
 

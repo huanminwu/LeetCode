@@ -16804,6 +16804,264 @@ public:
     /// 3. s is guaranteed to be palindromic.
     /// </summary>
     string smallestPalindromeI(string s);
+
+    /// <summary>
+    /// Leet Code 3529. Count Cells in Overlapping Horizontal and Vertical 
+    ///                 Substrings
+    ///
+    /// Medium
+    ///
+    /// You are given an m x n matrix grid consisting of characters and a string 
+    /// pattern.
+    ///
+    /// A horizontal substring is a contiguous sequence of characters read from 
+    /// left to right. If the end of a row is reached before the substring is 
+    /// complete, it wraps to the first column of the next row and continues as 
+    /// needed. You do not wrap from the bottom row back to the top.
+    ///
+    /// A vertical substring is a contiguous sequence of characters read from top 
+    /// to bottom. If the bottom of a column is reached before the substring is 
+    /// complete, it wraps to the first row of the next column and continues as 
+    /// needed. You do not wrap from the last column back to the first.
+    ///
+    /// Count the number of cells in the matrix that satisfy the following 
+    /// condition:
+    ///
+    /// The cell must be part of at least one horizontal substring and at least 
+    /// one vertical substring, where both substrings are equal to the given 
+    /// pattern.
+    /// Return the count of these cells.
+    /// 
+    /// Example 1:
+    /// Input: grid = [["a","a","c","c"],["b","b","b","c"],["a","a","b","a"],
+    /// ["c","a","a","c"],["a","a","c","c"]], pattern = "abaca"
+    ///
+    /// Output: 1
+    ///
+    /// Explanation:
+    /// The pattern "abaca" appears once as a horizontal substring (colored blue) 
+    /// and once as a vertical substring (colored red), intersecting at one cell 
+    /// (colored purple).
+    ///
+    /// Example 2:
+    /// Input: grid = [["c","a","a","a"],["a","a","b","a"],["b","b","a","a"],
+    /// ["a","a","b","a"]], pattern = "aba"
+    /// Output: 4
+    /// Explanation:
+    /// The cells colored above are all part of at least one horizontal and one 
+    /// vertical substring matching the pattern "aba".
+    ///
+    /// Example 3:
+    /// Input: grid = [["a"]], pattern = "a"
+    /// Output: 1
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 1 <= m, n <= 1000
+    /// 4. 1 <= m * n <= 10^5
+    /// 5. 1 <= pattern.length <= m * n
+    /// 6. grid and pattern consist of only lowercase English letters.
+    /// </summary>
+    int countCells(vector<vector<char>>& grid, string pattern);
+
+    /// <summary>
+    /// Leet Code 3541. Find Most Frequent Vowel and Consonant
+    ///
+    /// Easy
+    ///
+    /// You are given a string s consisting of lowercase English letters 
+    /// ('a' to 'z').
+    ///
+    /// Your task is to:
+    /// Find the vowel (one of 'a', 'e', 'i', 'o', or 'u') with the maximum 
+    /// frequency.
+    /// Find the consonant (all other letters excluding vowels) with the 
+    /// maximum frequency.
+    /// Return the sum of the two frequencies.
+    ///
+    /// Note: If multiple vowels or consonants have the same maximum frequency, 
+    /// you may choose any one of them. If there are no vowels or no consonants 
+    /// in the string, consider their frequency as 0.
+    ///
+    /// The frequency of a letter x is the number of times it occurs in the string.
+    /// 
+    /// Example 1:
+    /// Input: s = "successes"
+    /// Output: 6
+    /// Explanation:
+    /// 
+    /// The vowels are: 'u' (frequency 1), 'e' (frequency 2). The maximum 
+    /// frequency is 2.
+    /// The consonants are: 's' (frequency 4), 'c' (frequency 2). The maximum 
+    /// frequency is 4.
+    /// The output is 2 + 4 = 6.
+    ///
+    /// Example 2:
+    /// Input: s = "aeiaeia"
+    /// Output: 3
+    /// Explanation:
+    /// The vowels are: 'a' (frequency 3), 'e' ( frequency 2), 'i' (frequency 2). 
+    /// The maximum frequency is 3.
+    /// There are no consonants in s. Hence, maximum consonant frequency = 0.
+    /// The output is 3 + 0 = 3.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s consists of lowercase English letters only.
+    /// </summary>
+    int maxFreqSum(string s);
+
+    /// <summary>
+    /// Leet Code 3545. Minimum Deletions for At Most K Distinct Characters
+    ///
+    /// Easy
+    ///
+    /// You are given a string s consisting of lowercase English letters, and an 
+    /// integer k.
+    ///
+    /// Your task is to delete some (possibly none) of the characters in the 
+    /// string so that the number of distinct characters in the resulting string 
+    /// is at most k.
+    ///
+    /// Return the minimum number of deletions required to achieve this.
+    /// 
+    /// Example 1:
+    /// Input: s = "abc", k = 2
+    /// Output: 1
+    /// Explanation:
+    ///
+    /// s has three distinct characters: 'a', 'b' and 'c', each with a frequency 
+    /// of 1.
+    /// Since we can have at most k = 2 distinct characters, remove all 
+    /// occurrences of any one character from the string.
+    /// For example, removing all occurrences of 'c' results in at most k 
+    /// distinct characters. Thus, the answer is 1.
+    ///
+    /// Example 2:
+    /// Input: s = "aabb", k = 2
+    /// Output: 0
+    /// Explanation:
+    /// s has two distinct characters ('a' and 'b') with frequencies of 2 and 2, 
+    /// respectively.
+    /// Since we can have at most k = 2 distinct characters, no deletions are 
+    /// required. Thus, the answer is 0.
+    ///
+    /// Example 3:
+    /// Input: s = "yyyzz", k = 1
+    /// Output: 2
+    /// Explanation:
+    /// s has two distinct characters ('y' and 'z') with frequencies of 3 and 2, 
+    /// respectively.
+    /// Since we can have at most k = 1 distinct character, remove all occurrences 
+    /// of any one character from the string.
+    /// Removing all 'z' results in at most k distinct characters. Thus, the 
+    /// answer is 2.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 16
+    /// 2. 1 <= k <= 16
+    /// 3. s consists only of lowercase English letters.
+    /// </summary>
+    int minDeletion(string s, int k);
+
+    /// <summary>
+    /// Leet Code 3563. Lexicographically Smallest String After Adjacent Removals
+    ///
+    /// Hard
+    ///
+    /// You are given a string s consisting of lowercase English letters.
+    ///
+    /// You can perform the following operation any number of times (including 
+    /// zero):
+    ///
+    /// Remove any pair of adjacent characters in the string that are consecutive 
+    /// in the alphabet, in either order (e.g., 'a' and 'b', or 'b' and 'a').
+    /// Shift the remaining characters to the left to fill the gap.
+    /// Return the lexicographically smallest string that can be obtained after 
+    /// performing the operations optimally.
+    ///
+    /// Note: Consider the alphabet as circular, thus 'a' and 'z' are consecutive.
+    ///
+    /// Example 1:
+    /// Input: s = "abc"
+    /// Output: "a"
+    /// Explanation:
+    /// Remove "bc" from the string, leaving "a" as the remaining string.
+    /// No further operations are possible. Thus, the lexicographically smallest 
+    /// string after all possible removals is "a".
+    ///
+    /// Example 2:
+    /// Input: s = "bcda"
+    /// Output: ""
+    /// Explanation:
+    /// ​​​​​​​Remove "cd" from the string, leaving "ba" as the remaining string.
+    /// Remove "ba" from the string, leaving "" as the remaining string.
+    /// No further operations are possible. Thus, the lexicographically smallest 
+    /// string after all possible removals is "".
+    ///
+    /// Example 3:
+    /// Input: s = "zdce"
+    /// Output: "zdce"
+    /// Explanation:
+    /// Remove "dc" from the string, leaving "ze" as the remaining string.
+    /// No further operations are possible on "ze".
+    /// However, since "zdce" is lexicographically smaller than "ze", the smallest 
+    /// string after all possible removals is "zdce".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 250
+    /// 2. s consists only of lowercase English letters.
+    /// </summary>
+    string lexicographicallySmallestString(string s);
+
+    /// <summary>
+    /// Leet Code 3561. Resulting String After Adjacent Removals
+    ///
+    /// Medium
+    ///
+    /// You are given a string s consisting of lowercase English letters.
+    ///
+    /// You must repeatedly perform the following operation while the string s has 
+    /// at least two consecutive characters:
+    ///
+    /// Remove the leftmost pair of adjacent characters in the string that are 
+    /// consecutive in the alphabet, in either order (e.g., 'a' and 'b', or 
+    /// 'b' and 'a').
+    /// Shift the remaining characters to the left to fill the gap.
+    /// Return the resulting string after no more operations can be performed.
+    ///
+    /// Note: Consider the alphabet as circular, thus 'a' and 'z' are consecutive.
+    ///
+    /// Example 1:
+    /// Input: s = "abc"
+    /// Output: "c"
+    /// Explanation:
+    /// Remove "ab" from the string, leaving "c" as the remaining string.
+    /// No further operations are possible. Thus, the resulting string after all 
+    /// possible removals is "c".
+    ///
+    /// Example 2:
+    /// Input: s = "adcb"
+    /// Output: ""
+    /// Explanation:
+    /// Remove "dc" from the string, leaving "ab" as the remaining string.
+    /// Remove "ab" from the string, leaving "" as the remaining string.
+    /// No further operations are possible. Thus, the resulting string after all 
+    /// possible removals is "".
+    ///
+    /// Example 3:
+    /// Input: s = "zadb"
+    /// Output: "db"
+    /// Explanation:
+    /// Remove "za" from the string, leaving "db" as the remaining string.
+    /// No further operations are possible. Thus, the resulting string after all 
+    /// possible removals is "db".
+    ///  
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s consists only of lowercase English letters.
+    /// </summary>
+    string resultingString(string s);
 #pragma endregion
 };
 

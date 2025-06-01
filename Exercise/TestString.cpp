@@ -7932,8 +7932,129 @@ void TestLeetCode3517(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode3529(void)
+{
+    Logger::WriteMessage("Test Leet Code 3529");
+    LeetCodeString leetCode;
+    vector<vector<char>> grid =
+    { 
+        {'a', 'a', 'c', 'c'}, {'b', 'b', 'b', 'c'}, 
+        {'a', 'a', 'b', 'a'}, {'c', 'a', 'a', 'c'}, 
+        {'a', 'a', 'c', 'c'} 
+    };
+    string pattern = "abaca";
+    int result = leetCode.countCells(grid, pattern);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("pattern = " + pattern);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {'c','a','a','a'},{'a','a','b','a'},{'b','b','a','a'},
+        {'a','a','b','a'}
+    };
+    pattern = "aba";
+    result = leetCode.countCells(grid, pattern);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("pattern = " + pattern);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid =
+    {
+        {'a'}
+    };
+    pattern = "a";
+    result = leetCode.countCells(grid, pattern);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("pattern = " + pattern);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3541(void)
+{
+    Logger::WriteMessage("Test Leet Code 3541");
+    LeetCodeString leetCode;
+    string s = "successes";
+    int result = leetCode.maxFreqSum(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "aeiaeia";
+    result = leetCode.maxFreqSum(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3545(void)
+{
+    Logger::WriteMessage("Test Leet Code 3545");
+    LeetCodeString leetCode;
+    string s = "abc";
+    int k = 2;
+    int result = leetCode.minDeletion(s, k);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "aabb";
+    k = 2;
+    result = leetCode.minDeletion(s, k);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    s = "yyyzz"; 
+    k = 1;
+    result = leetCode.minDeletion(s, k);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3563(void)
+{
+    Logger::WriteMessage("Test Leet Code 3563");
+    LeetCodeString leetCode;
+    string s = "abc";
+    string result = leetCode.lexicographicallySmallestString(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+
+    s = "bcda";
+    result = leetCode.lexicographicallySmallestString(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+
+    s = "zdce";
+    result = leetCode.lexicographicallySmallestString(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode3561(void)
+{
+    Logger::WriteMessage("Test Leet Code 3561");
+    LeetCodeString leetCode;
+    string s = "abc";
+    string result = leetCode.resultingString(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+
+    s = "adcb";
+    result = leetCode.lexicographicallySmallestString(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+
+    s = "zadb";
+    result = leetCode.lexicographicallySmallestString(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3561();
+    TestLeetCode3563();
+    TestLeetCode3545();
+    TestLeetCode3541();
+    TestLeetCode3529();
     TestLeetCode3504();
     TestLeetCode3517();
     TestLeetCode3503();

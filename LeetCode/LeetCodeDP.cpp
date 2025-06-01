@@ -21365,5 +21365,52 @@ vector<long long> LeetCodeDP::resultArrayI(vector<int>& nums, int k)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3557. Find Maximum Number of Non Intersecting Substrings
+///
+/// Medium
+///
+/// You are given a string word.
+/// Return the maximum number of non-intersecting substrings of word that are 
+/// at least four characters long and start and end with the same letter.
+/// 
+/// Example 1:
+/// Input: word = "abcdeafdef"
+/// Output: 2
+/// Explanation:
+/// The two substrings are "abcdea" and "fdef".
+///
+/// Example 2:
+/// Input: word = "bcdaaaab"
+/// Output: 1
+/// Explanation:
+/// The only substring is "aaaa". Note that we cannot also choose "bcdaaaab" 
+/// since it intersects with the other substring.
+///
+/// Constraints:
+/// 1. 1 <= word.length <= 2 * 10^5
+/// 2. word consists only of lowercase English letters.
+/// </summary>
+int LeetCodeDP::maxSubstrings(string word)
+{
+    vector<vector<int>> char_pos(26);
+    vector<int> dp(word.size() + 1);
+    for (size_t i = 0; i < word.size(); i++)
+    {
+        int index = word[i] - 'a';
+        for (int j = (int)char_pos[index].size() - 1; j >= 0; j--)
+        {
+            if (i - char_pos[index][j] > 2)
+            {
+                dp[i + 1] = max(dp[i + 1], dp[char_pos[index][j]] + 1);
+                break;
+            }
+        }
+        char_pos[index].push_back(i);
+        dp[i + 1] = max(dp[i], dp[i + 1]);
+    }
+    return dp[word.size()];
+}
 #pragma endregion
 

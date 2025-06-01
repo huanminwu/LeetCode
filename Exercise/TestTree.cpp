@@ -4323,8 +4323,176 @@ void TestLeetCode3515(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3544(void)
+{
+    Logger::WriteMessage("Test Leet Code 3544");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = { {0, 1},{0, 2},{1, 3},{1, 4},{2, 5},{2, 6} };
+    vector<int> nums = { 4, -8, -6, 3, 7, -2, 5 };
+    int k = 2;
+    long long result = leetCode.subtreeInversionSum(edges, nums, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {0, 1},{1, 2},{2, 3},{3, 4} };
+    nums = { -1,3,-2,4,-5 };
+    k = 2;
+    result = leetCode.subtreeInversionSum(edges, nums, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {0, 1},{0, 2} };
+    nums = { 0,-1,-2 };
+    k = 3;
+    result = leetCode.subtreeInversionSum(edges, nums, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3553(void)
+{
+    Logger::WriteMessage("Test Leet Code 3553");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = { {0, 1, 2},{1, 2, 3},{1, 3, 5},{1, 4, 4},{2, 5, 6} };
+    vector<vector<int>> queries = { {2, 3, 4},{0, 2, 5} };
+    vector<int> result = leetCode.minimumWeight(edges, queries);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    edges = { {1, 0, 8},{0, 2, 7} };
+    queries = { {0, 1, 2} };
+    result = leetCode.minimumWeight(edges, queries);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3558(void)
+{
+    Logger::WriteMessage("Test Leet Code 3558");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = { {1, 2} };
+    int result = leetCode.assignEdgeWeightsI(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {1, 2},{1, 3},{3, 4},{3, 5} };
+    result = leetCode.assignEdgeWeightsI(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3559(void)
+{
+    Logger::WriteMessage("Test Leet Code 3559");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = { {1, 2} };
+    vector<vector<int>> queries = { {1, 1},{1, 2} };
+    vector<int> result = leetCode.assignEdgeWeightsII(edges, queries);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    edges = { {1, 2},{1, 3},{3, 4},{3, 5} };
+    queries = { {1, 4},{3, 4},{2, 5} };
+    result = leetCode.assignEdgeWeightsII(edges, queries);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3562(void)
+{
+    Logger::WriteMessage("Test Leet Code 3562");
+    LeetCodeTree leetCode;
+    int n = 2;
+    vector<int> present = { 1, 2 };
+    vector<int> future = { 4, 3 };
+    vector<vector<int>> hierarchy = { {1, 2} };
+    int budget = 3;
+    int result = leetCode.maxProfit(n, present, future, hierarchy, budget);
+    Logger::WriteMessage("n = " + to_string(n) + "; budget = " + to_string(budget));
+    Logger::WriteMessage(present);
+    Logger::WriteMessage(future);
+    Logger::WriteMessage(hierarchy);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 2;
+    present = { 3, 4 };
+    future = { 5, 8 };
+    hierarchy = { {1, 2} };
+    budget = 4;
+    result = leetCode.maxProfit(n, present, future, hierarchy, budget);
+    Logger::WriteMessage("n = " + to_string(n) + "; budget = " + to_string(budget));
+    Logger::WriteMessage(present);
+    Logger::WriteMessage(future);
+    Logger::WriteMessage(hierarchy);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    present = { 4, 6, 8 };
+    future = { 7, 9, 11 };
+    hierarchy = { {1, 2},{1, 3} };
+    budget = 10;
+    result = leetCode.maxProfit(n, present, future, hierarchy, budget);
+    Logger::WriteMessage("n = " + to_string(n) + "; budget = " + to_string(budget));
+    Logger::WriteMessage(present);
+    Logger::WriteMessage(future);
+    Logger::WriteMessage(hierarchy);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    present = { 5, 2, 3 };
+    future = { 8, 5, 6 };
+    hierarchy = { {1, 2},{2, 3} };
+    budget = 7;
+    result = leetCode.maxProfit(n, present, future, hierarchy, budget);
+    Logger::WriteMessage("n = " + to_string(n) + "; budget = " + to_string(budget));
+    Logger::WriteMessage(present);
+    Logger::WriteMessage(future);
+    Logger::WriteMessage(hierarchy);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    present = { 6,4,23 };
+    future = { 50,48,17 };
+    hierarchy = { {1, 3},{1, 2} };
+    budget = 28;
+    result = leetCode.maxProfit(n, present, future, hierarchy, budget);
+    Logger::WriteMessage("n = " + to_string(n) + "; budget = " + to_string(budget));
+    Logger::WriteMessage(present);
+    Logger::WriteMessage(future);
+    Logger::WriteMessage(hierarchy);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 7;
+    present = { 1, 17, 24, 21, 2, 10, 1 };
+    future = { 29,9,45,8,12,50,14 };
+    hierarchy = { {1, 3},{1, 7},{3, 4},{3, 2},{3, 6},{3, 5} };
+    budget = 11;
+    result = leetCode.maxProfit(n, present, future, hierarchy, budget);
+    Logger::WriteMessage("n = " + to_string(n) + "; budget = " + to_string(budget));
+    Logger::WriteMessage(present);
+    Logger::WriteMessage(future);
+    Logger::WriteMessage(hierarchy);
+    Logger::WriteMessage("result = " + to_string(result));
+
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3562();
+    TestLeetCode3559();
+    TestLeetCode3558();
+    TestLeetCode3553();
+    TestLeetCode3544();
     TestLeetCode3515();
     TestLeetCode3486();
     TestLeetCode3425();

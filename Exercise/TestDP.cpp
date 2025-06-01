@@ -6027,8 +6027,25 @@ void TestLeetCode3524(void)
     Logger::WriteMessage(result);
 }
 
+
+void TestLeetCode3557(void)
+{
+    Logger::WriteMessage("Test Leet Code 3557");
+    LeetCodeDP leetCode;
+    string word = "abcdeafdef";
+    int result = leetCode.maxSubstrings(word);
+    Logger::WriteMessage("word = " + word);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word = "bcdaaaab";
+    result = leetCode.maxSubstrings(word);
+    Logger::WriteMessage("word = " + word);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3557();
     TestLeetCode3524();
     TestLeetCode3509();
     TestLeetCode3494();

@@ -131,6 +131,18 @@ public:
     vector<int> subordinates;
 };
 
+/// <summary>
+/// Leet code 1830. Minimum Number of Operations to Make String Sorted
+/// </summary>
+static long long modPow(long long x, long long y, long long M)
+{
+    if (y == 0) return 1;
+    long long p = modPow(x, y / 2, M) % M;
+    p = (p * p) % M;
+    return ((y % 2) ? (p * x % M) % M : p);
+}
+
+
 #pragma region Design
 struct BinaryIndexTree
 {
@@ -311,21 +323,6 @@ struct SegmentTreeModuloK
 
 
 #pragma endregion 
-
-/// <summary>
-/// The class is to implement some string algorithm 
-/// </summary>
-class LeetCode
-{
-public:
-
-#pragma region BackTracking
-
-
-
-#pragma endregion
-};
-
 class Logger
 {
 public:

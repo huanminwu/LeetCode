@@ -18,6 +18,36 @@
 #include <vector> 
 #include <stack> 
 using namespace std;
+struct Complex
+{
+    double x, y;
+    Complex()
+    {
+        x = 0.0;
+        y = 0.0;
+    }
+
+    Complex(double x, double y)
+    {
+        this->x = x;
+        this->y = y;
+    }
+    Complex plus(Complex t)
+    {
+        return Complex(x + t.x, y + t.y);
+    }
+
+    Complex minus(Complex t)
+    {
+        return Complex(x - t.x, y - t.y);
+    }
+
+    Complex multiply(Complex t)
+    {
+        return Complex(x * t.x - y * t.y, x * t.y + y * t.x);
+    }
+};
+
 /// <summary>
 /// The class is to implement some math solution 
 /// </summary>
@@ -2104,7 +2134,7 @@ public:
     /// <summary>
     /// Leet code #866. Prime Palindrome
     /// </summary>
-    bool isPrime(int N);
+    bool isPrime(long long N);
 
     /// <summary>
     /// Leet code #866. Prime Palindrome
@@ -6219,11 +6249,6 @@ public:
     /// 8. All coordinates are integers.
     /// </summary>
     vector<int> countPoints(vector<vector<int>>& points, vector<vector<int>>& queries);
-    
-    /// <summary>
-    /// Leet code 1830. Minimum Number of Operations to Make String Sorted
-    /// </summary>
-    long long modPow(long long x, long long y, long long m);
     
     /// <summary>
     /// Leet code 1830. Minimum Number of Operations to Make String Sorted
@@ -16304,5 +16329,188 @@ public:
     /// 1. 1 <= x, y, z <= 100
     /// </summary>
     int findClosest(int x, int y, int z);
+
+    /// <summary>
+    /// Leet Code 3539. Find Sum of Array Product of Magical Sequences
+    ///
+    /// Hard
+    ///
+    /// You are given two integers, m and k, and an integer array nums.
+    ///
+    /// A sequence of integers seq is called magical if:
+    /// seq has a size of m.
+    /// 0 <= seq[i] < nums.length
+    /// The binary representation of 2seq[0] + 2seq[1] + ... + 2seq[m - 1] has k 
+    /// set bits.
+    /// The array product of this sequence is defined as prod(seq) = 
+    /// (nums[seq[0]] * nums[seq[1]] * ... * nums[seq[m - 1]]).
+    ///
+    /// Return the sum of the array products for all valid magical sequences.
+    ///
+    /// Since the answer may be large, return it modulo 109 + 7.
+    ///
+    /// A set bit refers to a bit in the binary representation of a number that 
+    /// has a value of 1.
+    ///
+    /// Example 1:
+    /// Input: m = 5, k = 5, nums = [1,10,100,10000,1000000]
+    /// Output: 991600007
+    /// Explanation:
+    /// All permutations of [0, 1, 2, 3, 4] are magical sequences, each with an 
+    /// array product of 1013.
+    ///
+    /// Example 2:
+    /// Input: m = 2, k = 2, nums = [5,4,3,2,1]
+    /// Output: 170
+    /// Explanation:
+    /// The magical sequences are [0, 1], [0, 2], [0, 3], [0, 4], [1, 0], [1, 2], 
+    /// [1, 3], [1, 4], [2, 0], [2, 1], [2, 3], [2, 4], [3, 0], [3, 1], [3, 2], 
+    /// [3, 4], [4, 0], [4, 1], [4, 2], and [4, 3].
+    ///
+    /// Example 3:
+    /// Input: m = 1, k = 1, nums = [28]
+    /// Output: 28
+    /// Explanation:
+    /// The only magical sequence is [0].
+    /// Constraints:
+    /// 1. 1 <= k <= m <= 30
+    /// 2. 1 <= nums.length <= 50
+    /// 3. 1 <= nums[i] <= 10^8
+    /// </summary>
+    int magicalSum(int m, int k, vector<int>& nums);
+    
+    /// <summary>
+    /// Leet Code 3549. Multiply Two Polynomials
+    /// </summary>
+    void multiply_fft(vector<Complex>& a, int inv, int tot, vector<int>&rev);
+
+    /// <summary>
+    /// Leet Code 3549. Multiply Two Polynomials
+    ///
+    /// Hard
+    ///
+    /// You are given two integer arrays poly1 and poly2, where the element at 
+    /// index i in each array represents the coefficient of xi in a polynomial.
+    ///
+    /// Let A(x) and B(x) be the polynomials represented by poly1 and poly2, 
+    /// respectively.
+    ///
+    /// Return an integer array result representing the coefficients of the 
+    /// product polynomial R(x) = A(x) * B(x), where result[i] denotes the 
+    /// coefficient of xi in R(x).
+    ///
+    /// Example 1:
+    /// Input: poly1 = [3,2,5], poly2 = [1,4]
+    /// Output: [3,14,13,20]
+    /// Explanation:
+    /// A(x) = 3 + 2x + 5x2 and B(x) = 1 + 4x
+    /// R(x) = (3 + 2x + 5x2) * (1 + 4x)
+    /// R(x) = 3 * 1 + (3 * 4 + 2 * 1)x + (2 * 4 + 5 * 1)x2 + (5 * 4)x3
+    /// R(x) = 3 + 14x + 13x2 + 20x3
+    /// Thus, result = [3, 14, 13, 20].
+    ///
+    /// Example 2:
+    /// Input: poly1 = [1,0,-2], poly2 = [-1]
+    /// Output: [-1,0,2]
+    /// Explanation:
+    /// A(x) = 1 + 0x - 2x2 and B(x) = -1
+    /// R(x) = (1 + 0x - 2x2) * (-1)
+    /// R(x) = -1 + 0x + 2x2
+    /// Thus, result = [-1, 0, 2].
+    ///
+    /// Example 3:
+    /// Input: poly1 = [1,5,-3], poly2 = [-4,2,0]
+    /// Output: [-4,-18,22,-6,0]
+    /// Explanation:
+    /// A(x) = 1 + 5x - 3x2 and B(x) = -4 + 2x + 0x2
+    /// R(x) = (1 + 5x - 3x2) * (-4 + 2x + 0x2)
+    /// R(x) = 1 * -4 + (1 * 2 + 5 * -4)x + (5 * 2 + -3 * -4)x2 + (-3 * 2)x3 + 0x4
+    /// R(x) = -4 -18x + 22x2 -6x3 + 0x4
+    /// Thus, result = [-4, -18, 22, -6, 0].
+    ///
+    /// Constraints:
+    /// 1. 1 <= poly1.length, poly2.length <= 5 * 10^4
+    /// 2. -10^3 <= poly1[i], poly2[i] <= 10^3
+    /// 3. poly1 and poly2 contain at least one non-zero coefficient.
+    /// </summary>
+    vector<long long> multiply(vector<int>& poly1, vector<int>& poly2);
+
+    /// <summary>
+    /// Leet Code 3560. Find Minimum Log Transportation Cost
+    ///
+    /// Easy
+    ///
+    /// You are given integers n, m, and k.
+    /// There are two logs of lengths n and m units, which need to be transported 
+    /// in three trucks where each truck can carry one log with length at most k 
+    /// units.
+    ///
+    /// You may cut the logs into smaller pieces, where the cost of cutting a log 
+    /// of length x into logs of length len1 and len2 is cost = len1 * len2 such 
+    /// that len1 + len2 = x.
+    ///
+    /// Return the minimum total cost to distribute the logs onto the trucks. If 
+    /// the logs don't need to be cut, the total cost is 0.
+    /// 
+    /// Example 1:
+    /// 
+    /// Input: n = 6, m = 5, k = 5
+    /// Output: 5
+    /// Explanation:
+    /// Cut the log with length 6 into logs with length 1 and 5, at a cost equal 
+    /// to 1 * 5 == 5. Now the three logs of length 1, 5, and 5 can fit in one 
+    /// truck each.
+    ///
+    /// Example 2:
+    /// Input: n = 4, m = 4, k = 6
+    /// Output: 0
+    /// Explanation:
+    /// The two logs can fit in the trucks already, hence we don't need to cut the 
+    /// logs.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= k <= 10^5
+    /// 2. 1 <= n, m <= 2 * k
+    /// 3. The input is generated such that it is always possible to transport the 
+    ///    logs.
+    /// </summary>
+    long long minCuttingCost(int n, int m, int k);
+
+    /// <summary>
+    /// Leet Code 3556. Sum of Largest Prime Substrings
+    ///
+    /// Medium
+    ///
+    /// Given a string s, find the sum of the 3 largest unique prime numbers that 
+    /// can be formed using any of its substrings.
+    ///
+    /// Return the sum of the three largest unique prime numbers that can be 
+    /// formed. If fewer than three exist, return the sum of all available primes. 
+    /// If no prime numbers can be formed, return 0.
+    ///
+    /// Note: Each prime number should be counted only once, even if it appears 
+    /// in multiple substrings. Additionally, when converting a substring to an 
+    /// integer, any leading zeros are ignored.
+    ///
+    /// Example 1:
+    /// Input: s = "12234"
+    /// Output: 1469
+    /// Explanation:
+    /// The unique prime numbers formed from the substrings of "12234" are 2, 3, 
+    /// 23, 223, and 1223.
+    /// The 3 largest primes are 1223, 223, and 23. Their sum is 1469.
+    ///
+    /// Example 2:
+    /// Input: s = "111"
+    /// Output: 11
+    /// Explanation:
+    /// The unique prime number formed from the substrings of "111" is 11.
+    /// Since there is only one prime number, the sum is 11.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10
+    /// 2. s consists of only digits.
+    /// </summary>
+    long long sumOfLargestPrimes(string s);
 };
 #endif

@@ -11609,8 +11609,211 @@ void TestLeetCode3525(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3537(void)
+{
+    Logger::WriteMessage("Test Leet Code 3537");
+    LeetCodeArray leetCode;
+    int n = 0;
+    vector<vector<int>> result = leetCode.specialGrid(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 1;
+    result = leetCode.specialGrid(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 2;
+    result = leetCode.specialGrid(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3540(void)
+{
+    Logger::WriteMessage("Test Leet Code 3540");
+    LeetCodeArray leetCode;
+    int n = 0;
+    vector<int> forward = { 1, 4, 4 };
+    vector<int> backward = { 4, 1, 2 };
+    vector<int> queries = { 1, 2, 0, 2 };
+    long long result = leetCode.minTotalTime(forward, backward, queries);
+    Logger::WriteMessage(forward);
+    Logger::WriteMessage(backward);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    forward = { 1, 1, 1, 1 };
+    backward = { 2, 2, 2, 2 };
+    queries = { 1, 2, 3, 0 };
+    result = leetCode.minTotalTime(forward, backward, queries);
+    Logger::WriteMessage(forward);
+    Logger::WriteMessage(backward);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3546(void)
+{
+    Logger::WriteMessage("Test Leet Code 3546");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {1, 4},{2, 3} };
+    bool result = leetCode.canPartitionGridI(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true":"false"));
+
+    grid = { {1, 3},{2, 4} };
+    result = leetCode.canPartitionGridI(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3532(void)
+{
+    Logger::WriteMessage("Test Leet Code 3532");
+    LeetCodeArray leetCode;
+    int n = 2;
+    vector<int> nums = { 1, 3 };
+    int maxDiff = 1;
+    vector<vector<int>> queries = { {0, 0},{0, 1} };
+    vector<bool> result = leetCode.pathExistenceQueriesI(n, nums, maxDiff, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxDiff = " + to_string(maxDiff));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 4;
+    nums = { 2, 5, 6, 8 };
+    maxDiff = 2;
+    queries = { {0, 1},{0, 2},{1, 3},{2, 3} };
+    result = leetCode.pathExistenceQueriesI(n, nums, maxDiff, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxDiff = " + to_string(maxDiff));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3534(void)
+{
+    Logger::WriteMessage("Test Leet Code 3534");
+    LeetCodeArray leetCode;
+    int n = 5;
+    vector<int> nums = { 1, 8, 3, 4, 2 };
+    int maxDiff = 3;
+    vector<vector<int>> queries = { {0, 3},{2, 4} };
+    vector<int> result = leetCode.pathExistenceQueriesII(n, nums, maxDiff, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxDiff = " + to_string(maxDiff));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 5;
+    nums = { 5, 3, 1, 9, 10 };
+    maxDiff = 2;
+    queries = { {0, 1},{0, 2},{2, 3},{4, 3} };
+    result = leetCode.pathExistenceQueriesII(n, nums, maxDiff, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxDiff = " + to_string(maxDiff));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 3;
+    nums = { 3, 6, 1 };
+    maxDiff = 1;
+    queries = { {0, 0},{0, 1},{1, 2} };
+    result = leetCode.pathExistenceQueriesII(n, nums, maxDiff, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxDiff = " + to_string(maxDiff));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 2;
+    nums = { 15, 15 };
+    maxDiff = 1;
+    queries = { {0, 1} };
+    result = leetCode.pathExistenceQueriesII(n, nums, maxDiff, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxDiff = " + to_string(maxDiff));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3548(void)
+{
+    Logger::WriteMessage("Test Leet Code 3548");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {1, 4},{2, 3} };
+    bool result = leetCode.canPartitionGridII(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    grid = { {1, 2},{3, 4} };
+    result = leetCode.canPartitionGridII(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    grid = { {1, 2, 4},{2, 3, 5} };
+    result = leetCode.canPartitionGridII(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3550(void)
+{
+    Logger::WriteMessage("Test Leet Code 3550");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 3, 2 };
+    int result = leetCode.smallestIndex(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,10,11 };
+    result = leetCode.smallestIndex(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    result = leetCode.smallestIndex(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3551(void)
+{
+    Logger::WriteMessage("Test Leet Code 3551");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 37, 100 };
+    int result = leetCode.minSwapsIII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 22,14,33,7 };
+    result = leetCode.minSwapsIII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 18,43,34,16 };
+    result = leetCode.minSwapsIII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3551();
+    TestLeetCode3550();
+    TestLeetCode3548();
+    TestLeetCode3534();
+    TestLeetCode3532();
+    TestLeetCode3546();
+    TestLeetCode3540();
+    TestLeetCode3537();
     TestLeetCode3525();
     TestLeetCode3523();
     TestLeetCode3522();

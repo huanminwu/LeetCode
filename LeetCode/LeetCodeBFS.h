@@ -1420,6 +1420,128 @@ public:
     double maxAmount(string initialCurrency,
         vector<vector<string>>& pairs1, vector<double>& rates1,
         vector<vector<string>>& pairs2, vector<double>& rates2);
+
+    /// <summary>
+    /// Leet Code 3528. Unit Conversion I
+    ///
+    /// Medium
+    ///
+    /// There are n types of units indexed from 0 to n - 1. You are given a 2D 
+    /// integer array conversions of length n - 1, where conversions[i] = 
+    /// [sourceUniti, targetUniti, conversionFactori]. This indicates that a 
+    /// single unit of type sourceUniti is equivalent to conversionFactori units 
+    /// of type targetUniti.
+    ///
+    /// Return an array baseUnitConversion of length n, where 
+    /// baseUnitConversion[i] is the number of units of type i equivalent to a 
+    /// single unit of type 0. Since the answer may be large, return each 
+    /// baseUnitConversion[i] modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: conversions = [[0,1,2],[1,2,3]]
+    /// Output: [1,2,6]
+    /// Explanation:
+    /// Convert a single unit of type 0 into 2 units of type 1 using 
+    /// conversions[0].
+    /// Convert a single unit of type 0 into 6 units of type 2 using 
+    /// conversions[0], then conversions[1].
+    ///
+    /// Example 2:
+    /// Input: conversions = [[0,1,2],[0,2,3],[1,3,4],[1,4,5],[2,5,2],[4,6,3],
+    /// [5,7,4]]
+    /// Output: [1,2,3,8,10,6,30,24]
+    /// Explanation:
+    /// Convert a single unit of type 0 into 2 units of type 1 using 
+    /// conversions[0].
+    /// Convert a single unit of type 0 into 3 units of type 2 using 
+    /// conversions[1].
+    /// Convert a single unit of type 0 into 8 units of type 3 using 
+    /// conversions[0], then conversions[2].
+    /// Convert a single unit of type 0 into 10 units of type 4 using 
+    /// conversions[0], then conversions[3].
+    /// Convert a single unit of type 0 into 6 units of type 5 using 
+    /// conversions[1], then conversions[4].
+    /// Convert a single unit of type 0 into 30 units of type 6 using 
+    /// conversions[0], conversions[3], then conversions[5].
+    /// Convert a single unit of type 0 into 24 units of type 7 using 
+    /// conversions[1], conversions[4], then conversions[6].
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 10^5
+    /// 2. conversions.length == n - 1
+    /// 3. 0 <= sourceUniti, targetUniti < n
+    /// 4. 1 <= conversionFactori <= 109
+    /// 5. It is guaranteed that unit 0 can be converted into any other 
+    ///    unit through a unique combination of conversions without using 
+    ///    any conversions in the opposite direction.
+    /// </summary>
+    vector<int> baseUnitConversions(vector<vector<int>>& conversions);
+
+    /// <summary>
+    /// Leet Code 3535. Unit Conversion II 
+    ///
+    /// Medium
+    ///
+    /// There are n types of units indexed from 0 to n - 1.
+    ///
+    /// You are given a 2D integer array conversions of length n - 1, where 
+    /// conversions[i] = [sourceUniti, targetUniti, conversionFactori]. This 
+    /// indicates that a single unit of type sourceUniti is equivalent to 
+    /// conversionFactori units of type targetUniti.
+    ///
+    /// You are also given a 2D integer array queries of length q, where 
+    /// queries[i] = [unitAi, unitBi].
+    ///
+    /// Return an array answer of length q where answer[i] is the number of 
+    /// units of type unitBi equivalent to 1 unit of type unitAi, and can be 
+    /// represented as p/q where p and q are coprime. Return each answer[i] 
+    /// as pq-1 modulo 109 + 7, where q-1 represents the multiplicative 
+    /// inverse of q modulo 109 + 7.
+    /// 
+    /// Example 1:
+    /// Input: conversions = [[0,1,2],[0,2,6]], queries = [[1,2],[1,0]]
+    /// 
+    /// Output: [3,500000004]
+    /// Explanation:
+    ///
+    /// In the first query, we can convert unit 1 into 3 units of type 2 using 
+    /// the inverse of conversions[0], then conversions[1].
+    /// In the second query, we can convert unit 1 into 1/2 units of type 0 using 
+    /// the inverse of conversions[0]. We return 500000004 since it is the 
+    /// multiplicative inverse of 2.
+    ///
+    /// Example 2:
+    /// Input: conversions = [[0,1,2],[0,2,6],[0,3,8],[2,4,2],[2,5,4],[3,6,3]], 
+    /// queries = [[1,2],[0,4],[6,5],[4,6],[6,1]]
+    /// Output: [3,12,1,2,83333334]
+    /// Explanation:
+    /// In the first query, we can convert unit 1 into 3 units of type 2 using 
+    /// the inverse of conversions[0], then conversions[1].
+    /// In the second query, we can convert unit 0 into 12 units of type 4 using 
+    /// conversions[1], then conversions[3].
+    /// In the third query, we can convert unit 6 into 1 unit of type 5 using the 
+    /// inverse of conversions[5], the inverse of conversions[2], 
+    /// conversions[1], then conversions[4].
+    /// In the fourth query, we can convert unit 4 into 2 units of type 6 using 
+    /// the inverse of conversions[3], the inverse of conversions[1], 
+    /// conversions[2], then conversions[5].
+    /// In the fifth query, we can convert unit 6 into 1/12 units of type 1 
+    /// using the inverse of conversions[5], the inverse of conversions[2], then 
+    /// conversions[0]. We return 83333334 since it is the multiplicative inverse 
+    /// of 12.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n <= 10^5
+    /// 2. conversions.length == n - 1
+    /// 3. 0 <= sourceUniti, targetUniti < n
+    /// 4. 1 <= conversionFactori <= 10^9
+    /// 5. 1 <= q <= 10^5
+    /// 6. queries.length == q
+    /// 7. 0 <= unitAi, unitBi < n
+    /// 8. It is guaranteed that unit 0 can be uniquely converted into any other 
+    ///    unit through a combination of forward or backward conversions.
+    /// </summary>
+    vector<int> queryConversions(vector<vector<int>>& conversions, vector<vector<int>>& queries);
 #pragma endregion
 };
 #endif  // LeetCodeBFS_H

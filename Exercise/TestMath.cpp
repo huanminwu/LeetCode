@@ -7880,8 +7880,94 @@ void TestLeetCode3516(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3539(void)
+{
+    Logger::WriteMessage("Test Leet Code 3539");
+    LeetCodeMath leetCode;
+    int m = 5, k = 5;
+    vector<int> nums = { 1, 10, 100, 10000, 1000000 };
+    int result = leetCode.magicalSum(m, k, nums);
+    Logger::WriteMessage("m = " + to_string(m) + "; k = " + to_string(k));
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    m = 2, k = 2;
+    nums = { 5, 4, 3, 2, 1 };
+    result = leetCode.magicalSum(m, k, nums);
+    Logger::WriteMessage("m = " + to_string(m) + "; k = " + to_string(k));
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    m = 1, k = 1;
+    nums = { 28 };
+    result = leetCode.magicalSum(m, k, nums);
+    Logger::WriteMessage("m = " + to_string(m) + "; k = " + to_string(k));
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3549(void)
+{
+    Logger::WriteMessage("Test Leet Code 3549");
+    LeetCodeMath leetCode;
+    vector<int> poly1 = { 3, 2, 5 };
+    vector<int> poly2 = { 1, 4 };
+    vector<long long> result = leetCode.multiply(poly1, poly2);
+    Logger::WriteMessage(poly1);
+    Logger::WriteMessage(poly2);
+    Logger::WriteMessage(result);
+
+    poly1 = { 1,0,-2 };
+    poly2 = { -1 };
+    result = leetCode.multiply(poly1, poly2);
+    Logger::WriteMessage(poly1);
+    Logger::WriteMessage(poly2);
+    Logger::WriteMessage(result);
+
+    poly1 = { 1,5,-3 };
+    poly2 = { -4,2,0 };
+    result = leetCode.multiply(poly1, poly2);
+    Logger::WriteMessage(poly1);
+    Logger::WriteMessage(poly2);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3560(void)
+{
+    Logger::WriteMessage("Test Leet Code 3560");
+    LeetCodeMath leetCode;
+    int n = 6, m = 5, k = 5;
+    long long result = leetCode.minCuttingCost(n, m, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4, m = 4, k = 6;
+    result = leetCode.minCuttingCost(n, m, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3556(void)
+{
+    Logger::WriteMessage("Test Leet Code 3556");
+    LeetCodeMath leetCode;
+    string s = "12234";
+    long long result = leetCode.sumOfLargestPrimes(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "111";
+    result = leetCode.sumOfLargestPrimes(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3556();
+    TestLeetCode3560();
+    TestLeetCode3549();
+    TestLeetCode3539();
     TestLeetCode3516();
     TestLeetCode3512();
     TestLeetCode3495();

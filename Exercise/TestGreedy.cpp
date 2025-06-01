@@ -2149,9 +2149,34 @@ void TestLeetCode3468(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3542(void)
+{
+    Logger::WriteMessage("Test Leet Code 3542");
+    LeetCodeGreedy leetCode;
+    vector<int> nums = { 0,2 };
+    int result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,1,2,1 };
+    result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+    
+    nums = { 1, 2, 1, 2, 1, 2 };
+    result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7, 1, 0, 1, 1 };
+    result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
-    TestLeetCode3468();
+    TestLeetCode3542();
     TestLeetCode3440();
     TestLeetCode3439();
     TestLeetCode3413();

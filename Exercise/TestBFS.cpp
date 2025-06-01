@@ -867,7 +867,6 @@ void TestLeetCode2014(void)
     Logger::WriteMessage("s = " + s + "; k = " + to_string(k) + "; result = " + result);
 }
 
-
 void TestLeetCode3387(void)
 {
     Logger::WriteMessage("Test Leet Code 3387");
@@ -910,9 +909,48 @@ void TestLeetCode3387(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3528(void)
+{
+    Logger::WriteMessage("Test Leet Code 3528");
+    LeetCodeBFS leetCode;
+
+    vector<vector<int>> conversions = { {0, 1, 2},{1, 2, 3} };
+    vector<int> result = leetCode.baseUnitConversions(conversions);
+    Logger::WriteMessage(conversions);
+    Logger::WriteMessage(result);
+
+    conversions = 
+    { 
+        {0, 1, 2},{0, 2, 3},{1, 3, 4},{1, 4, 5},{2, 5, 2},{4, 6, 3},{5, 7, 4} 
+    };
+    result = leetCode.baseUnitConversions(conversions);
+    Logger::WriteMessage(conversions);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3535(void)
+{
+    Logger::WriteMessage("Test Leet Code 3535");
+    LeetCodeBFS leetCode;
+    vector<vector<int>> conversions = { {0, 1, 2},{0, 2, 6} };
+    vector<vector<int>> queries = { {1, 2},{1, 0} };
+    vector<int> result = leetCode.queryConversions(conversions, queries);
+    Logger::WriteMessage(conversions);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    conversions = { {0, 1, 2},{0, 2, 6},{0, 3, 8},{2, 4, 2},{2, 5, 4},{3, 6, 3} };
+    queries = { {1, 2},{0, 4},{6, 5},{4, 6},{6, 1} };
+    result = leetCode.queryConversions(conversions, queries);
+    Logger::WriteMessage(conversions);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
 
 void TestLeetCodeBFS(void)
 {
+    TestLeetCode3535();
+    TestLeetCode3528();
     TestLeetCode3387();
     TestLeetCode773();
     TestLeetCode2014();

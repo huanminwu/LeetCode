@@ -4557,59 +4557,6 @@ public:
     /// </summary>
     int specialPerm(vector<int>& nums);
 
-    /// <summary>
-    /// Leet Code 2770. Maximum Number of Jumps to Reach the Last Index
-    /// 
-    /// Medium
-    ///
-    /// You are given a 0-indexed array nums of n integers and an integer 
-    /// target.
-    ///
-    /// You are initially positioned at index 0. In one step, you can jump 
-    /// from index i to any index j such that:
-    ///
-    /// 0 <= i < j < n
-    /// -target <= nums[j] - nums[i] <= target
-    /// Return the maximum number of jumps you can make to reach index n - 1.
-    ///
-    /// If there is no way to reach index n - 1, return -1.
-    /// 
-    /// Example 1:
-    /// Input: nums = [1,3,6,4,1,2], target = 2
-    /// Output: 3
-    /// Explanation: To go from index 0 to index n - 1 with the maximum number 
-    /// of jumps, you can perform the following jumping sequence:
-    /// - Jump from index 0 to index 1. 
-    /// - Jump from index 1 to index 3.
-    /// - Jump from index 3 to index 5.
-    /// It can be proven that there is no other jumping sequence that goes 
-    /// from 0 to n - 1 with more than 3 jumps. Hence, the answer is 3. 
-    ///
-    /// Example 2:
-    /// Input: nums = [1,3,6,4,1,2], target = 3
-    /// Output: 5
-    /// Explanation: To go from index 0 to index n - 1 with the maximum number 
-    /// of jumps, you can perform the following jumping sequence:
-    /// - Jump from index 0 to index 1.
-    /// - Jump from index 1 to index 2.
-    /// - Jump from index 2 to index 3.
-    /// - Jump from index 3 to index 4.
-    /// - Jump from index 4 to index 5.
-    /// It can be proven that there is no other jumping sequence that goes 
-    /// from 0 to n - 1 with more than 5 jumps. Hence, the answer is 5. 
-    ///
-    /// Example 3:
-    /// Input: nums = [1,3,6,4,1,2], target = 0
-    /// Output: -1
-    /// Explanation: It can be proven that there is no jumping sequence that 
-    /// goes from 0 to n - 1. Hence, the answer is -1. 
-    ///
-    /// Constraints:
-    /// 1. 2 <= nums.length == n <= 1000
-    /// 2. -10^9 <= nums[i] <= 10^9
-    /// 3. 0 <= target <= 2 * 10^9
-    /// </summary>
-    int maximumJumps(vector<int>& nums, int target);
 
     /// <summary>
     /// Leet Code 2787. Ways to Express an Integer as Sum of Powers
@@ -5631,6 +5578,187 @@ public:
     /// 4. 1 <= k <= 10^6
     /// </summary>
     string smallestPalindrome(string s, int k);
+
+    /// <summary>
+    /// Leet Code 3533. Concatenated Divisibility 
+    /// </summary>
+    vector<int> concatenatedDivisibility(vector<int>& nums, int k, int bit_mask, int remainder,
+        vector<vector<int>>&cache, vector<int>&path);
+
+    /// <summary>
+    /// Leet Code 3533. Concatenated Divisibility 
+    ///
+    /// Hard
+    ///
+    /// You are given an array of positive integers nums and a positive integer k.
+    ///
+    /// A permutation of nums is said to form a divisible concatenation if, when 
+    /// you concatenate the decimal representations of the numbers in the order 
+    /// specified by the permutation, the resulting number is divisible by k.
+    ///
+    /// Return the lexicographically smallest permutation (when considered as a 
+    /// list of integers) that forms a divisible concatenation. If no such 
+    /// permutation exists, return an empty list.
+    ///
+    /// Example 1:
+    /// Input: nums = [3,12,45], k = 5
+    /// Output: [3,12,45]
+    /// Explanation:
+    /// Permutation Concatenated Value  Divisible by 5
+    /// [3, 12, 45] 31245   Yes
+    /// [3, 45, 12] 34512   No
+    /// [12, 3, 45] 12345   Yes
+    /// [12, 45, 3] 12453   No
+    /// [45, 3, 12] 45312   No
+    /// [45, 12, 3] 45123   No
+    /// The lexicographically smallest permutation that forms a divisible 
+    /// concatenation is [3,12,45].
+    ///
+    /// Example 2:
+    /// Input: nums = [10,5], k = 10
+    /// Output: [5,10]
+    /// Explanation:
+    /// Permutation Concatenated Value  Divisible by 10
+    /// [5, 10] 510 Yes
+    /// [10, 5] 105 No
+    /// The lexicographically smallest permutation that forms a divisible 
+    /// concatenation is [5,10].
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,3], k = 5
+    /// Output: []
+    /// Explanation:
+    /// Since no permutation of nums forms a valid divisible concatenation, 
+    /// return an empty list.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 13
+    /// 2. 1 <= nums[i] <= 10^5
+    /// 3. 1 <= k <= 100
+    /// </summary>
+    vector<int> concatenatedDivisibility(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3538. Merge Operations for Minimum Travel Time
+    /// </summary>
+    int minTravelTime(int pre_pos, int accum_count, int curr_k, int curr_time, vector<int>& position, vector<int>& time,
+        vector<vector<vector<int>>> &cache);
+
+    /// <summary>
+    /// Leet Code 3538. Merge Operations for Minimum Travel Time
+    ///
+    /// Hard
+    ///
+    /// You are given a straight road of length l km, an integer n, an integer k, 
+    /// and two integer arrays, position and time, each of length n.
+    ///
+    /// The array position lists the positions (in km) of signs in strictly 
+    /// increasing order (with position[0] = 0 and position[n - 1] = l).
+    ///
+    /// Each time[i] represents the time (in minutes) required to travel 1 km 
+    /// between position[i] and position[i + 1].
+    ///
+    /// You must perform exactly k merge operations. In one merge, you can 
+    /// choose any two adjacent signs at indices i and i + 1 (with i > 0 and 
+    /// i + 1 < n) and:
+    ///
+    /// Update the sign at index i + 1 so that its time becomes time[i] + 
+    /// time[i + 1].
+    /// Remove the sign at index i.
+    /// Return the minimum total travel time (in minutes) to travel from 0 to l 
+    /// after exactly k merges.
+    /// 
+    /// Example 1:
+    /// Input: l = 10, n = 4, k = 1, position = [0,3,8,10], time = [5,8,3,6]
+    /// 
+    /// Output: 62
+    /// Explanation:
+    /// Merge the signs at indices 1 and 2. Remove the sign at index 1, and 
+    /// change the time at index 2 to 8 + 3 = 11.
+    /// After the merge:
+    /// position array: [0, 8, 10]
+    /// time array: [5, 11, 6]
+    /// Segment Distance (km) Time per km (min)	Segment Travel Time (min)
+    /// 0  8	8	5	8 × 5 = 40
+    /// 8  10	2	11	2 × 11 = 22
+    /// Total Travel Time: 40 + 22 = 62, which is the minimum possible time after 
+    /// exactly 1 merge.
+    ///
+    /// Example 2:
+    /// Input: l = 5, n = 5, k = 1, position = [0,1,2,3,5], time = [8,3,9,3,3]
+    ///
+    /// Output: 34
+    /// Explanation:
+    /// Merge the signs at indices 1 and 2. Remove the sign at index 1, and change 
+    /// the time at index 2 to 3 + 9 = 12.
+    /// After the merge:
+    /// position array: [0, 2, 3, 5]
+    /// time array: [8, 12, 3, 3]
+    /// Segment	Distance (km)	Time per km (min)	Segment Travel Time (min)
+    /// 0  2   2   8   2 × 8 = 16
+    /// 2  3   1   12  1 × 12 = 12
+    /// 3  5   2   3   2 × 3 = 6
+    /// Total Travel Time: 16 + 12 + 6 = 34, which is the minimum possible time 
+    /// after exactly 1 merge.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= l <= 10^5
+    /// 2. 2 <= n <= min(l + 1, 50)
+    /// 3. 0 <= k <= min(n - 2, 10)
+    /// 4. position.length == n
+    /// 5. position[0] = 0 and position[n - 1] = l
+    /// 6. position is sorted in strictly increasing order.
+    /// 7. time.length == n
+    /// 8. 1 <= time[i] <= 100​
+    /// 9. 1 <= sum(time) <= 100​​​​​​
+    /// </summary>
+    int minTravelTime(int l, int n, int k, vector<int>& position, vector<int>& time);
+
+    /// <summary>
+    /// Leet Code 3565. Sequential Grid Path Cover
+    /// </summary>
+    bool findPath(vector<vector<int>>& grid, vector<vector<int>>& visited, int k, int r, int c, int prev_max,
+        vector<vector<int>>& result);
+
+    /// <summary>
+    /// Leet Code 3565. Sequential Grid Path Cover
+    ///
+    /// Medium
+    ///
+    /// You are given a 2D array grid of size m x n, and an integer k. There are k 
+    /// cells in grid containing the values from 1 to k exactly once, and the rest 
+    /// of the cells have a value 0.
+    ///
+    /// You can start at any cell, and move from a cell to its neighbors (up, 
+    /// down, left, or right). You must find a path in grid which:
+    ///
+    /// Visits each cell in grid exactly once.
+    /// Visits the cells with values from 1 to k in order.
+    /// Return a 2D array result of size (m * n) x 2, where result[i] = [xi, yi] 
+    /// represents the ith cell visited in the path. If there are multiple such 
+    /// paths, you may return any one.
+    ///
+    /// If no such path exists, return an empty array.
+    /// 
+    /// Example 1:
+    /// Input: grid = [[0,0,0],[0,1,2]], k = 2
+    /// Output: [[0,0],[1,0],[1,1],[1,2],[0,2],[0,1]]
+    /// Explanation:
+    /// 
+    /// Example 2:
+    /// Input: grid = [[1,0,4],[3,0,2]], k = 4
+    /// Output: []
+    /// Explanation:
+    /// There is no possible path that satisfies the conditions.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= m == grid.length <= 6
+    /// 2. 1 <= n == grid[i].length <= 6
+    /// 3. 1 <= k <= m * n
+    /// 4. 0 <= grid[i][j] <= k
+    /// 5. grid contains all integers between 1 and k exactly once.
+    /// </summary>
+    vector<vector<int>> findPath(vector<vector<int>>& grid, int k);
 #pragma endregion
 };
 
