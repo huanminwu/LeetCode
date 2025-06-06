@@ -29195,4 +29195,65 @@ string LeetCodeString::resultingString(string s)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3571. Find the Shortest Superstring II
+///
+/// Easy
+/// 
+/// You are given two strings, s1 and s2. Return the shortest possible string 
+/// that contains both s1 and s2 as substrings. If there are multiple valid 
+/// answers, return any one of them.
+///
+/// A substring is a contiguous sequence of characters within a string.
+///
+/// Example 1:
+/// 
+/// Input: s1 = "aba", s2 = "bab"
+/// Output: "abab"
+/// 
+/// Explanation:
+/// "abab" is the shortest string that contains both "aba" and "bab" as 
+/// substrings.
+/// 
+/// Example 2:
+/// Input: s1 = "aa", s2 = "aaa"
+/// Output: "aaa"
+/// Explanation:
+/// "aa" is already contained within "aaa", so the shortest superstring is 
+/// "aaa".
+///
+/// Constraints:
+/// 1. 1 <= s1.length <= 100
+/// 2. 1 <= s2.length <= 100
+/// 3. s1 and s2 consist of lowercase English letters only.
+/// </summary>
+string LeetCodeString::shortestSuperstring(string s1, string s2)
+{
+    if (s1.size() < s2.size())
+    {
+        swap(s1, s2);
+    }
+    string result = s1 + s2;
+    if (s1.find(s2) != string::npos)
+    {
+        result = s1;
+    }
+    else
+    {
+        for (int i = s2.size(); i >= 1; i--)
+        {
+            if (s1.substr(0, i) == s2.substr(s2.size() - i, i))
+            {
+                result = s2.substr(0, s2.size() - i) + s1;
+                break;
+            }
+            else if (s1.substr(s1.size() - i, i) == s2.substr(0, i))
+            {
+                result = s1 + s2.substr(i, s2.size() - i);
+            }
+        }
+    }
+    return result;
+}
 #pragma endregion

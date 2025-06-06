@@ -6364,8 +6364,35 @@ void TestLeetCode3543(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3568(void)
+{
+    Logger::WriteMessage("Test Leet Code 3568");
+    LeetCodeGraph leetCode;
+    vector<string> classroom = { "S.", "XL" };
+    int energy = 2;
+    int result = leetCode.minMoves(classroom, energy);
+    Logger::WriteMessage(classroom);
+    Logger::WriteMessage("energy = " + to_string(energy));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    classroom = { "LS", "RL" };
+    energy = 4;
+    result = leetCode.minMoves(classroom, energy);
+    Logger::WriteMessage(classroom);
+    Logger::WriteMessage("energy = " + to_string(energy));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    classroom = { "L.S", "RXL" };
+    energy = 3;
+    result = leetCode.minMoves(classroom, energy);
+    Logger::WriteMessage(classroom);
+    Logger::WriteMessage("energy = " + to_string(energy));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3568();
     TestLeetCode3543();
     TestLeetCode3552();
     TestLeetCode3547();

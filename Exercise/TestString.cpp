@@ -8048,8 +8048,29 @@ void TestLeetCode3561(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode3571(void)
+{
+    Logger::WriteMessage("Test Leet Code 3571");
+    LeetCodeString leetCode;
+    string s1 = "aba", s2 = "bab";
+    string result = leetCode.shortestSuperstring(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2);
+    Logger::WriteMessage("result = " + result);
+
+    s1 = "aa", s2 = "aaa";
+    result = leetCode.shortestSuperstring(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2);
+    Logger::WriteMessage("result = " + result);
+
+    s1 = "abcde", s2 = "dez";
+    result = leetCode.shortestSuperstring(s1, s2);
+    Logger::WriteMessage("s1 = " + s1 + "; s2 = " + s2);
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3571();
     TestLeetCode3561();
     TestLeetCode3563();
     TestLeetCode3545();

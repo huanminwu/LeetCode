@@ -11804,8 +11804,53 @@ void TestLeetCode3551(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3566(void)
+{
+    Logger::WriteMessage("Test Leet Code 3566");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 1, 6, 8, 4 };
+    long long target = 24;
+    bool result = leetCode.checkEqualPartitions(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("terget = " + to_string(target) + " result = " + (string)(result? "true" : "false"));
+
+    nums = { 2,5,3,7 };
+    target = 15;
+    result = leetCode.checkEqualPartitions(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("terget = " + to_string(target) + " result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3567(void)
+{
+    Logger::WriteMessage("Test Leet Code 3567");
+    LeetCodeArray leetCode;
+    vector<vector<int>> grid = { {1, 8},{3, -2} };
+    int k = 2;
+    vector<vector<int>> result = leetCode.minAbsDiff(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    grid = { {3, -1} };
+    k = 1;
+    result = leetCode.minAbsDiff(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    grid = { {1, -2, 3},{2, 3, 5} };
+    k = 2;
+    result = leetCode.minAbsDiff(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3567();
+    TestLeetCode3566();
     TestLeetCode3551();
     TestLeetCode3550();
     TestLeetCode3548();

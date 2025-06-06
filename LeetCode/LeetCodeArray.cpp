@@ -38209,4 +38209,151 @@ int LeetCodeArray::minSwapsIII(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3566. Partition Array into Two Equal Product Subsets
+///
+/// Medium
+/// 
+/// You are given an integer array nums containing distinct positive integers 
+/// and an integer target.
+/// 
+/// Determine if you can partition nums into two non-empty disjoint subsets, 
+/// with each element belonging to exactly one subset, such that the product 
+/// of the elements in each subset is equal to target.
+///
+/// Return true if such a partition exists and false otherwise.
+/// 
+/// A subset of an array is a selection of elements of the array.
+/// 
+/// Example 1:
+/// Input: nums = [3,1,6,8,4], target = 24
+/// Output: true
+/// Explanation: The subsets [3, 8] and [1, 6, 4] each have a product of 24. 
+/// Hence, the output is true.
+///
+/// Example 2:
+/// Input: nums = [2,5,3,7], target = 15
+/// Output: false
+/// Explanation: There is no way to partition nums into two non-empty disjoint 
+/// subsets such that both subsets have a product of 15. Hence, the output is 
+/// false.
+/// 
+/// Constraints:
+/// 1. 3 <= nums.length <= 12
+/// 2. 1 <= target <= 1015
+/// 3. 1 <= nums[i] <= 100
+/// 4. All elements of nums are distinct.
+/// </summary>
+bool LeetCodeArray::checkEqualPartitions(vector<int>& nums, long long target)
+{
+    int n = 1 << nums.size();
+    for (int i = 1; i < n; i++)
+    {
+        long long left = 1;
+        long long right = 1;
+        for (size_t j = 0; j < nums.size(); j++)
+        {
+            if (left > target || right > target) continue;
+            if (i & (1 << j))
+            {
+                left = left * nums[j];
+            }
+            else
+            {
+                right = right * nums[j];
+            }
+        }
+        if (left == right && left == target)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+/// <summary>
+/// Leet Code 3567. Minimum Absolute Difference in Sliding Submatrix
+///
+/// Medium
+/// 
+/// You are given an m x n integer matrix grid and an integer k.
+/// For every contiguous k x k submatrix of grid, compute the minimum absolute 
+/// difference between any two distinct values within that submatrix.
+///
+/// Return a 2D array ans of size (m - k + 1) x (n - k + 1), where ans[i][j] 
+/// is the minimum absolute difference in the submatrix whose top-left corner 
+/// is (i, j) in grid.
+///
+/// Note: If all elements in the submatrix have the same value, the answer 
+/// will be 0.
+///
+/// A submatrix (x1, y1, x2, y2) is a matrix that is formed by choosing all 
+/// cells matrix[x][y] where x1 <= x <= x2 and y1 <= y <= y2.
+/// 
+/// Example 1:
+/// Input: grid = [[1,8],[3,-2]], k = 2
+/// Output: [[2]]
+/// Explanation:
+/// There is only one possible k x k submatrix: [[1, 8], [3, -2]].
+/// Distinct values in the submatrix are [1, 8, 3, -2].
+/// The minimum absolute difference in the submatrix is |1 - 3| = 2. Thus, 
+/// the answer is [[2]].
+///
+/// Example 2:
+/// Input: grid = [[3,-1]], k = 1
+/// Output: [[0,0]]
+/// Explanation:
+/// Both k x k submatrix has only one distinct element.
+/// Thus, the answer is [[0, 0]].
+///
+/// Example 3:
+/// Input: grid = [[1,-2,3],[2,3,5]], k = 2
+/// Output: [[1,2]]
+/// Explanation:
+/// There are two possible k × k submatrix:
+/// Starting at (0, 0): [[1, -2], [2, 3]].
+/// Distinct values in the submatrix are [1, -2, 2, 3].
+/// The minimum absolute difference in the submatrix is |1 - 2| = 1.
+/// Starting at (0, 1): [[-2, 3], [3, 5]].
+/// Distinct values in the submatrix are [-2, 3, 5].
+/// The minimum absolute difference in the submatrix is |3 - 5| = 2.
+/// Thus, the answer is [[1, 2]].
+///
+/// Constraints:
+/// 1. 1 <= m == grid.length <= 30
+/// 2. 1 <= n == grid[i].length <= 30
+/// 3. -10^5 <= grid[i][j] <= 10^5
+/// 4. 1 <= k <= min(m, n)
+/// </summary>
+vector<vector<int>> LeetCodeArray::minAbsDiff(vector<vector<int>>& grid, int k)
+{
+    int m = grid.size();
+    int n = grid[0].size();
+    vector<vector<int>> result(m - k + 1, vector<int>(n - k + 1));
+    for (int i = 0; i + k <= m; i++)
+    {
+        for (int j = 0; j + k <= n; j++)
+        {
+            vector<int> arr;
+            for (int p = i; p < i + k; p++)
+            {
+                for (int q = j; q < j + k; q++)
+                {
+                    arr.push_back(grid[p][q]);
+                }
+            }
+            sort(arr.begin(), arr.end());
+            int diff = INT_MAX;
+            for (size_t d = 1; d < arr.size(); d++)
+            {
+                if (arr[d] == arr[d - 1]) continue;
+                diff = min(diff, arr[d] - arr[d - 1]);
+            }
+            if (diff == INT_MAX) diff = 0;
+            result[i][j] = diff;
+        }
+    }
+    return result;
+}
 #pragma endregion

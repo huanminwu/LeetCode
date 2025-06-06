@@ -26345,5 +26345,176 @@ long long LeetCodeMath::sumOfLargestPrimes(string s)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3569. Maximize Count of Distinct Primes After Split
+///
+/// Hard
+/// 
+/// You are given an integer array nums having length n and a 2D integer array 
+/// queries where queries[i] = [idx, val].
+///
+/// For each query:
+/// Update nums[idx] = val.
+/// Choose an integer k with 1 <= k < n to split the array into the non-empty 
+/// prefix nums[0..k-1] and suffix nums[k..n-1] such that the sum of the counts
+/// of distinct prime values in each part is maximum.
+/// Note: The changes made to the array in one query persist into the next 
+/// query.
+///
+/// Return an array containing the result for each query, in the order they 
+/// are given.
+///
+/// Example 1:
+/// Input: nums = [2,1,3,1,2], queries = [[1,2],[3,3]]
+/// Output: [3,4]
+/// Explanation:
+/// Initially nums = [2, 1, 3, 1, 2].
+/// After 1st query, nums = [2, 2, 3, 1, 2]. Split nums into [2] and 
+/// [2, 3, 1, 2]. [2] consists of 1 distinct prime and [2, 3, 1, 2] consists 
+/// of 2 distinct primes. Hence, the answer for this query is 1 + 2 = 3.
+/// After 2nd query, nums = [2, 2, 3, 3, 2]. Split nums into [2, 2, 3] and 
+/// [3, 2] with an answer of 2 + 2 = 4.
+/// The output is [3, 4].
+///
+/// Example 2:
+/// Input: nums = [2,1,4], queries = [[0,1]]
+/// Output: [0]
+/// Explanation:
+/// Initially nums = [2, 1, 4].
+/// After 1st query, nums = [1, 1, 4]. There are no prime numbers in nums, 
+/// hence the answer for this query is 0.
+/// The output is [0].
+/// 
+/// Constraints:
+/// 1. 2 <= n == nums.length <= 5 * 10^4
+/// 2. 1 <= queries.length <= 5 * 10^4
+/// 3. 1 <= nums[i] <= 10^5
+/// 4. 0 <= queries[i][0] < nums.length
+/// 5. 1 <= queries[i][1] <= 10^5
+/// </summary>
+vector<int> LeetCodeMath::maximumCount(vector<int>& nums, vector<vector<int>>& queries)
+{
+
+    // Segment Tree
+    #define ls  (i<<1)
+    #define rs  (i<<1|1)
+    #define mid (L+R>>1)
+
+    class SegmentTree
+    {
+    private:
+        int lst, rst;
+        vector<int> st, bt;
+        vector<bool>  tag;
+    public:
+        SegmentTree()
+        {
+            lst = 0;
+            rst = 0;
+            st = vector<int>(4 * (10 + 50000));
+            bt = vector<int>(4 * (10 + 50000));
+            tag = vector<bool>(4 * (10 + 50000));
+        }
+        void pushdown(int i) 
+        {
+            if (!tag[i]) return;
+            st[ls] += bt[i], bt[ls] += bt[i], tag[ls] = true;
+            st[rs] += bt[i], bt[rs] += bt[i], tag[rs] = true;
+            bt[i] = tag[i] = 0;
+        }
+        void pushup(int i) 
+        {
+            st[i] = max(st[ls], st[rs]);
+        }
+        void build(int i, int L, int R) 
+        {
+            st[i] = bt[i] = tag[i] = 0;
+            if (L == R) return;
+            build(ls, L, ((L + R) >> 1));
+            build(rs, ((L + R) >> 1) + 1, R);
+            pushup(i);
+        }
+        void update(int i, int L, int R, int l, int r, int val) 
+        {
+            if (r < L || R < l) return;
+            if (l <= L && R <= r) { st[i] += val; bt[i] += val; tag[i] = true; return; }
+            pushdown(i);
+            update(ls, L, ((L + R) >> 1), l, r, val);
+            update(rs, ((L + R) >> 1) + 1, R, l, r, val);
+            pushup(i);
+        }
+
+        void build(int l, int r) 
+        { 
+            build(1, lst = l, rst = r); 
+        }
+        void update(int l, int r, int w) 
+        { 
+            update(1, lst, rst, l, r, w); 
+        }
+        int  ask() 
+        { 
+            return st[1]; 
+        }
+
+    };
+    const int M = 10 + 100000;
+    vector<bool> isPrime(M, true);
+    vector<int> prime(M);
+    const int T = 100000;
+    int tot = 0;
+    // initialize prime
+    isPrime[0] = isPrime[1] = false;
+    for (int i = 2; i <= T; i++)
+    {
+        for (int k = 2; k * i <= T; k++)
+        {
+            isPrime[i * k] = false;
+        }
+    }
+ 
+    SegmentTree tree;
+    int n = nums.size();
+    // Prework 0:    
+    vector<int> a(n + 10);
+    for (int i = 1; i <= n; i++) a[i] = nums[i - 1];
+
+    // Prework 1:   Record the positions where primes appear
+    unordered_map<int, set<int>> dict;
+    for (int i = 1; i <= n; i++) if (isPrime[a[i]]) dict[a[i]].insert(i);
+
+    // Prework 2:   Initialize the segment tree
+    tree.build(1, n);
+    for (auto& [_, st] : dict) if (st.size() >= 2) {
+        tree.update(*st.begin(), *st.rbegin(), 1);
+    }
+
+
+
+    // Problem solving
+    auto del = [&](int val, int i) -> void {
+        if (dict[val].size() >= 2) tree.update(*dict[val].begin(), *dict[val].rbegin(), -1);
+        dict[val].erase(i);
+        if (dict[val].empty()) dict.erase(val);
+        if (dict.count(val) && dict[val].size() >= 2) tree.update(*dict[val].begin(), *dict[val].rbegin(), 1);
+        };
+
+    auto add = [&](int val, int i) -> void {
+        if (dict[val].size() >= 2) tree.update(*dict[val].begin(), *dict[val].rbegin(), -1);
+        dict[val].insert(i);
+        if (dict[val].size() >= 2) tree.update(*dict[val].begin(), *dict[val].rbegin(), 1);
+        };
+
+    vector<int> ans;
+    for (auto& e : queries) {
+        int i = e[0] + 1, val = e[1];
+        if (isPrime[a[i]]) del(a[i], i);
+        a[i] = val;
+        if (isPrime[a[i]]) add(a[i], i);
+        ans.push_back(dict.size() + tree.ask());
+    }
+    return ans;
+}
 #pragma endregion
 

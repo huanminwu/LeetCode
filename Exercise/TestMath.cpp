@@ -7962,8 +7962,28 @@ void TestLeetCode3556(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3569(void)
+{
+    Logger::WriteMessage("Test Leet Code 3569");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 2, 1, 3, 1, 2 };
+    vector<vector<int>> queries = { {1, 2},{3, 3} };
+    vector<int> result = leetCode.maximumCount(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 2,1,4 };
+    queries = { {0, 1}};
+    result = leetCode.maximumCount(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3569();
     TestLeetCode3556();
     TestLeetCode3560();
     TestLeetCode3549();

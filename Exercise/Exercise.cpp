@@ -43,15 +43,15 @@
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeString();
+    TestLeetCodeGraph();
+    TestLeetCodeArray();
+    TestLeetCodeMath();
     TestLeetCodeTree();
     TestLeetCodeDP();
     TestLeetCodeGreedy();
-    TestLeetCodeMath();
     TestLeetCodeSort();
-    TestLeetCodeString();
     TestLeetCodeDFS();
-    TestLeetCodeGraph();
-    TestLeetCodeArray();
     TestLeetCodeBFS();
     TestLeetCodeHashtable();
     TestLeetCodeBinarySearch();
