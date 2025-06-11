@@ -11847,8 +11847,28 @@ void TestLeetCode3567(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3576(void)
+{
+    Logger::WriteMessage("Test Leet Code 3576");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, -1, 1, -1, 1 };
+    int k = 3;
+    bool result = leetCode.canMakeEqual(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { -1,-1,-1,1,1,1 };
+    k = 5;
+    result = leetCode.canMakeEqual(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3576();
     TestLeetCode3567();
     TestLeetCode3566();
     TestLeetCode3551();

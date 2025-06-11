@@ -6043,8 +6043,46 @@ void TestLeetCode3557(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+void TestLeetCode3578(void)
+{
+    Logger::WriteMessage("Test Leet Code 3578");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 9, 4, 1, 3, 7 };
+    int k = 4;
+    int result = leetCode.countPartitionsII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 3,3,4 };
+    k = 0;
+    result = leetCode.countPartitionsII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3573(void)
+{
+    Logger::WriteMessage("Test Leet Code 3573");
+    LeetCodeDP leetCode;
+    vector<int> prices = { 1, 7, 9, 8, 2 };
+    int k = 2;
+    int result = leetCode.maximumProfit(prices, k);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    prices = { 12,16,19,19,8,1,19,13,9 };
+    k = 3;
+    result = leetCode.maximumProfit(prices, k);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3573();
+    TestLeetCode3578();
     TestLeetCode3557();
     TestLeetCode3524();
     TestLeetCode3509();

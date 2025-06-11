@@ -462,5 +462,6 @@ void TestLeetCode3550(void);
 void TestLeetCode3551(void);
 void TestLeetCode3566(void);
 void TestLeetCode3567(void);
+void TestLeetCode3576(void);
 void TestLeetCodeArray(void);
 #endif  // TestArray

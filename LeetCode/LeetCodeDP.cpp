@@ -21412,5 +21412,153 @@ int LeetCodeDP::maxSubstrings(string word)
     }
     return dp[word.size()];
 }
+
+/// <summary>
+/// Leet Code 3578. Count Partitions With Max-Min Difference at Most K
+///
+/// Medium
+///
+/// You are given an integer array nums and an integer k. Your task is to 
+/// partition nums into one or more non-empty contiguous segments such that 
+/// in each segment, the difference between its maximum and minimum elements 
+/// is at most k.
+///
+/// Return the total number of ways to partition nums under this condition.
+///
+/// Since the answer may be too large, return it modulo 10^9 + 7.
+/// Example 1:
+/// Input: nums = [9,4,1,3,7], k = 4
+/// Output: 6
+/// 
+/// Explanation:
+/// There are 6 valid partitions where the difference between the maximum and 
+/// minimum elements in each segment is at most k = 4:
+///
+/// [[9], [4], [1], [3], [7]]
+/// [[9], [4], [1], [3, 7]]
+/// [[9], [4], [1, 3], [7]]
+/// [[9], [4, 1], [3], [7]]
+/// [[9], [4, 1], [3, 7]]
+/// [[9], [4, 1, 3], [7]]
+///
+/// Example 2:
+/// Input: nums = [3,3,4], k = 0
+/// Output: 2
+/// Explanation:
+/// There are 2 valid partitions that satisfy the given conditions:
+/// [[3], [3], [4]]
+/// [[3, 3], [4]]
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length <= 5 * 10^4
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 0 <= k <= 10^9
+/// </summary>
+int LeetCodeDP::countPartitionsII(vector<int>& nums, int k)
+{
+    int M = 1000000007;
+    int n = nums.size();
+    vector<int> dp(n + 1), sum(n + 1);
+    dp[0] = 1;
+    sum[0] = 0;
+    map<int, int> heap;
+    int left = 0;
+    for (int i = 0; i < n; i++)
+    {
+        heap[nums[i]]++;
+        while (heap.rbegin()->first - heap.begin()->first > k)
+        {
+            heap[nums[left]]--;
+            if (heap[nums[left]] == 0)
+            {
+                heap.erase(nums[left]);
+            }
+            left++;
+        }
+        dp[i + 1] = (sum[i] - sum[left] + dp[left] + M) % M;
+        sum[i + 1] = (sum[i] + dp[i + 1]) % M;
+    }
+    return dp[n];
+}
+
+/// <summary>
+/// Leet Code 3573. Best Time to Buy and Sell Stock V
+///
+/// Medium
+///
+/// You are given an integer array prices where prices[i] is the price of a 
+/// stock in dollars on the ith day, and an integer k.
+///
+/// You are allowed to make at most k transactions, where each transaction 
+/// can be either of the following:
+///
+/// Normal transaction: Buy on day i, then sell on a later day j where i < j. 
+/// You profit prices[j] - prices[i].
+///
+/// Short selling transaction: Sell on day i, then buy back on a later day j 
+/// where i < j. You profit prices[i] - prices[j].
+///
+/// Note that you must complete each transaction before starting another. 
+/// Additionally, you can't buy or sell on the same day you are selling or 
+/// buying back as part of a previous transaction.
+///
+/// Return the maximum total profit you can earn by making at most k 
+/// transactions.
+/// 
+/// Example 1:
+/// Input: prices = [1,7,9,8,2], k = 2
+/// Output: 14
+/// Explanation:
+/// We can make $14 of profit through 2 transactions:
+/// A normal transaction: buy the stock on day 0 for $1 then sell it on 
+/// day 2 for $9.
+/// A short selling transaction: sell the stock on day 3 for $8 then buy back 
+/// on day 4 for $2.
+///
+/// Example 2:
+/// Input: prices = [12,16,19,19,8,1,19,13,9], k = 3
+/// Output: 36
+/// Explanation:
+/// We can make $36 of profit through 3 transactions:
+/// A normal transaction: buy the stock on day 0 for $12 then sell it on day 2 
+/// for $19.
+/// A short selling transaction: sell the stock on day 3 for $19 then buy back 
+/// on day 4 for $8.
+/// A normal transaction: buy the stock on day 5 for $1 then sell it on day 6 
+/// for $19.
+/// 
+/// Constraints:
+/// 1. 2 <= prices.length <= 10^3
+/// 2. 1 <= prices[i] <= 10^9
+/// 3. 1 <= k <= prices.length / 2
+/// </summary>
+long long LeetCodeDP::maximumProfit(vector<int>& prices, int k)
+{
+    vector<long long>transaction(k + 1, LLONG_MIN), buy(k + 1, LLONG_MIN), sell(k + 1, LLONG_MIN);
+    transaction[0] = 0;
+    for (size_t i = 0; i < prices.size(); i++)
+    {
+        for (int j = k; j > 0; j--)
+        {
+            if (buy[j] != LLONG_MIN && sell[j] != LLONG_MIN)
+            {
+                transaction[j] = max(transaction[j], buy[j] + prices[i]);
+                transaction[j] = max(transaction[j], sell[j] - prices[i]);
+            }
+            if (transaction[j - 1] != LLONG_MIN)
+            {
+                buy[j] = max(buy[j], transaction[j - 1] - prices[i]);
+                sell[j] = max(sell[j], transaction[j - 1] + prices[i]);
+            }
+        }
+    }
+    long long result = LLONG_MIN;
+    for (size_t i = 0; i <= k; i++)
+    {
+        result = max(result, transaction[i]);
+    }
+    return result;
+}
+
 #pragma endregion
 

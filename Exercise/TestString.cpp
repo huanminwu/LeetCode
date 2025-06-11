@@ -8068,8 +8068,35 @@ void TestLeetCode3571(void)
     Logger::WriteMessage("result = " + result);
 }
 
+
+void TestLeetCode3579(void)
+{
+    Logger::WriteMessage("Test Leet Code 3579");
+    LeetCodeString leetCode;
+    string word1 = "abcdf", word2 = "dacbe";
+    int result = leetCode.minOperations(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word1 = "abceded", word2 = "baecfef";
+    result = leetCode.minOperations(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word1 = "abcdef", word2 = "fedabc";
+    result = leetCode.minOperations(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word1 = "abcdef", word2 = "fedcba";
+    result = leetCode.minOperations(word1, word2);
+    Logger::WriteMessage("word1 = " + word1 + "; word2 = " + word2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3579();
     TestLeetCode3571();
     TestLeetCode3561();
     TestLeetCode3563();

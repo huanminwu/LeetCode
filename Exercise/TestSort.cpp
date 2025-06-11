@@ -4418,8 +4418,29 @@ void TestLeetCode3555(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3572(void)
+{
+    Logger::WriteMessage("Test Leet Code 3572");
+    LeetCodeSort leetCode;
+    vector<int> x = { 1, 2, 1, 3, 2 }; 
+    vector<int> y = { 5, 3, 4, 6, 2 };
+    int result = leetCode.maxSumDistinctTriplet(x, y);
+    Logger::WriteMessage(x);
+    Logger::WriteMessage(y);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    x = { 1,2,1,2 };
+    y = { 4,5,6,7 };
+    result = leetCode.maxSumDistinctTriplet(x, y);
+    Logger::WriteMessage(x);
+    Logger::WriteMessage(y);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3572();
     TestLeetCode3555();
     TestLeetCode3536();
     TestLeetCode3531();

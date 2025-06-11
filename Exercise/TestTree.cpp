@@ -4483,11 +4483,44 @@ void TestLeetCode3562(void)
     Logger::WriteMessage(future);
     Logger::WriteMessage(hierarchy);
     Logger::WriteMessage("result = " + to_string(result));
+}
 
+void TestLeetCode3575(void)
+{
+    Logger::WriteMessage("Test Leet Code 3575");
+    LeetCodeTree leetCode;
+    vector<int> vals = { 2, 3 };
+    vector<int> par = { -1, 0 };
+    int result = leetCode.goodSubtreeSum(vals, par);
+    Logger::WriteMessage(vals);
+    Logger::WriteMessage(par);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    vals = { 1,5,2 };
+    par = { -1,0,0 };
+    result = leetCode.goodSubtreeSum(vals, par);
+    Logger::WriteMessage(vals);
+    Logger::WriteMessage(par);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    vals = { 34,1,2 };
+    par = { -1,0,1 };
+    result = leetCode.goodSubtreeSum(vals, par);
+    Logger::WriteMessage(vals);
+    Logger::WriteMessage(par);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    vals = { 3, 22, 5 };
+    par = { -1,0,1 };
+    result = leetCode.goodSubtreeSum(vals, par);
+    Logger::WriteMessage(vals);
+    Logger::WriteMessage(par);
+    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3575();
     TestLeetCode3562();
     TestLeetCode3559();
     TestLeetCode3558();

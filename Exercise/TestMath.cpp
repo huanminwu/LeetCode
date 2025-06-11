@@ -7981,8 +7981,50 @@ void TestLeetCode3569(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3574(void)
+{
+    Logger::WriteMessage("Test Leet Code 3574");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 2, 4 };
+    int k = 1;
+    long long result = leetCode.maxGCDScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,5,7 };
+    k = 2;
+    result = leetCode.maxGCDScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,5,5 };
+    k = 1;
+    result = leetCode.maxGCDScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3577(void)
+{
+    Logger::WriteMessage("Test Leet Code 3577");
+    LeetCodeMath leetCode;
+    vector<int> complexity = { 1, 2, 3 };
+    int result = leetCode.countPermutations(complexity);
+    Logger::WriteMessage(complexity);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    complexity = { 3,3,3,4,4,4 };
+    result = leetCode.countPermutations(complexity);
+    Logger::WriteMessage(complexity);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3574();
     TestLeetCode3569();
     TestLeetCode3556();
     TestLeetCode3560();
