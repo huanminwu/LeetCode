@@ -11866,8 +11866,53 @@ void TestLeetCode3576(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode3583(void)
+{
+    Logger::WriteMessage("Test Leet Code 3583");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 6,3,6 };
+    int result = leetCode.specialTriplets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,1,0,0 };
+    result = leetCode.specialTriplets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 8,4,2,8,4 };
+    result = leetCode.specialTriplets(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3584(void)
+{
+    Logger::WriteMessage("Test Leet Code 3584");
+    LeetCodeArray leetCode;
+    vector<int> nums = { -1, -9, 2, 3, -2, -3, 1 };
+    int m = 1;
+    long long result = leetCode.maximumProduct(nums, m);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
+
+    nums = { 1,3,-5,5,6,-4 };
+    m = 3;
+    result = leetCode.maximumProduct(nums, m);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
+
+    nums = { 2,-1,2,-6,5,2,-5,7 };
+    m = 2;
+    result = leetCode.maximumProduct(nums, m);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3584();
+    TestLeetCode3583();
     TestLeetCode3576();
     TestLeetCode3567();
     TestLeetCode3566();

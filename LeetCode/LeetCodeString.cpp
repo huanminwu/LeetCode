@@ -29375,4 +29375,134 @@ int LeetCodeString::minOperations(string word1, string word2)
     return minOperations_dp(word1, word2, 0, dp);
 }
 
+/// <summary>
+/// Leet Code 3581. Count Odd Letters from Number
+///
+/// Easy
+///
+/// You are given an integer n perform the following steps:
+/// 
+/// Convert each digit of n into its lowercase English word (e.g., 4 -> "four", 
+/// 1 -> "one").
+/// Concatenate those words in the original digit order to form a string s.
+/// Return the number of distinct characters in s that appear an odd number of 
+/// times.
+///
+/// Example 1:
+/// Input: n = 41
+/// Output: 5
+/// Explanation:
+/// 41 -> "fourone"
+/// Characters with odd frequencies: 'f', 'u', 'r', 'n', 'e'. Thus, the answer 
+/// is 5.
+///
+/// Example 2:
+/// Input: n = 20
+/// Output: 5
+/// Explanation:
+/// 20 -> "twozero"
+/// Characters with odd frequencies: 't', 'w', 'z', 'e', 'r'. Thus, the answer 
+/// is 5.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 10^9
+/// </summary>
+int LeetCodeString::countOddLetters(int n)
+{
+    vector<string> digit_str = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+    string n_str = to_string(n);
+    string num_str;
+    for (size_t i = 0; i < n_str.size(); i++)
+    {
+        num_str.append(digit_str[n_str[i] - '0']);
+    }
+    vector<int>count(26);
+    for (size_t i = 0; i < num_str.size(); i++)
+    {
+        count[num_str[i] - 'a']++;
+    }
+    int result = 0;
+    for (int i = 0; i < 26; i++)
+    {
+        if (count[i] % 2 == 1)
+        {
+            result++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3582. Generate Tag for Video Caption
+///
+/// Easy
+///
+/// You are given a string caption representing the caption for a video.
+///
+/// The following actions must be performed in order to generate a valid 
+/// tag for the video:
+///
+/// Combine all words in the string into a single camelCase string prefixed 
+/// with '#'. A camelCase string is one where the first letter of all words 
+/// except the first one is capitalized. All characters after the first 
+/// character in each word must be lowercase.
+///
+/// Remove all characters that are not an English letter, except the first '#'.
+/// Truncate the result to a maximum of 100 characters.
+/// Return the tag after performing the actions on caption.
+/// 
+/// Example 1:
+/// Input: caption = "Leetcode daily streak achieved"
+/// Output: "#leetcodeDailyStreakAchieved"
+/// Explanation:
+/// The first letter for all words except "leetcode" should be capitalized.
+///
+/// Example 2:
+/// Input: caption = "can I Go There"
+/// Output: "#canIGoThere"
+/// Explanation:
+/// The first letter for all words except "can" should be capitalized.
+///
+/// Example 3:
+/// Input: caption = "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+/// hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+///
+/// Output: "#hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+/// hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+///
+/// Explanation:
+/// Since the first word has length 101, we need to truncate the last two 
+/// letters from the word.
+/// 
+/// Constraints:
+/// 1. 1 <= caption.length <= 150
+/// 2. caption consists only of English letters and ' '.
+/// </summary>
+string LeetCodeString::generateTag(string caption)
+{
+    string result = "#";
+    string word;
+    for (size_t i = 0; i <= caption.size(); i++)
+    {
+        if (i == caption.size() || caption[i] == ' ')
+        {
+            if (result.size() > 1)
+            {
+                word[0] = toupper(word[0]);
+            }
+            result.append(word);
+            word.clear();
+        }
+        else
+        {
+            if (isalpha(caption[i]))
+            {
+                word.push_back(tolower(caption[i]));
+            }
+        }
+    }
+    result = result.substr(0, 100);
+    return result;
+}
+
 #pragma endregion

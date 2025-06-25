@@ -4518,8 +4518,69 @@ void TestLeetCode3575(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3585(void)
+{
+    Logger::WriteMessage("Test Leet Code 3585");
+    LeetCodeTree leetCode;
+    int n = 2;
+    vector<vector<int>> edges = { {0, 1, 7} };
+    vector<vector<int>> queries = { {1, 0},{0, 1} };
+    vector<int> result = leetCode.findMedian(n, edges, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 3; 
+    edges = { {0, 1, 2},{2, 0, 4} };
+    queries = { {0, 1},{2, 0},{1, 2} };
+    result = leetCode.findMedian(n, edges, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 5; 
+    edges = { {0, 1, 2},{0, 2, 5},{1, 3, 1},{2, 4, 3} };
+    queries = { {3, 4},{1, 2} };
+    result = leetCode.findMedian(n, edges, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 5;
+    edges = { {0, 1, 2},{0, 2, 2},{1, 3, 1},{2, 4, 5} };
+    queries = { {3, 4},{1, 2} };
+    result = leetCode.findMedian(n, edges, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 2;
+    edges = { {0, 1, 1} };
+    queries = { {0, 1} };
+    result = leetCode.findMedian(n, edges, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    n = 5;
+    edges = { {0, 1, 16},{0, 2, 17}, {1, 3, 1 },{3, 4, 2} };
+    queries = { {1, 0},{2, 4} };
+    result = leetCode.findMedian(n, edges, queries);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3585();
     TestLeetCode3575();
     TestLeetCode3562();
     TestLeetCode3559();

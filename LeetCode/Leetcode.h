@@ -142,6 +142,23 @@ static long long modPow(long long x, long long y, long long M)
     return ((y % 2) ? (p * x % M) % M : p);
 }
 
+/// <summary>
+/// Leet code 1830. Minimum Number of Operations to Make String Sorted
+/// </summary>
+static int bitCount(int bit_mask)
+{
+    int result = 0;
+    while (bit_mask != 0)
+    {
+        if (bit_mask % 2 == 1)
+        {
+            result++;
+        }
+        bit_mask /= 2;
+    }
+    return result;
+}
+
 
 #pragma region Design
 struct BinaryIndexTree

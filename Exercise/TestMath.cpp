@@ -8022,8 +8022,29 @@ void TestLeetCode3577(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3591(void)
+{
+    Logger::WriteMessage("Test Leet Code 3591");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5, 4 };
+    bool result = leetCode.checkPrimeFrequency(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,2,3,4,5 };
+    result = leetCode.checkPrimeFrequency(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 2,2,2,4,4 };
+    result = leetCode.checkPrimeFrequency(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3591();
     TestLeetCode3574();
     TestLeetCode3569();
     TestLeetCode3556();

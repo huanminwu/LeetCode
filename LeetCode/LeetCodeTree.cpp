@@ -14619,8 +14619,14 @@ int LeetCodeTree::minimumWeight_lca(int a, int b, vector<int>& levels, vector<ve
     }
     while (a != b)
     {
-        a = parents[a][0];
-        b = parents[b][0];
+        int step = 0;
+        while (parents[a][step] != parents[b][step])
+        {
+            step++;
+        }
+        if (step > 0) step--;
+        a = parents[a][step];
+        b = parents[b][step];
     }
     return a;
 }
@@ -14801,7 +14807,7 @@ int LeetCodeTree::assignEdgeWeightsI(vector<vector<int>>& edges)
 }
 
 /// <summary>
-/// Leet Code 3553. Minimum Weighted Subgraph With the Required Paths II
+/// Leet Code 3559. Number of Ways to Assign Edge Weights II
 /// </summary>
 void LeetCodeTree::assignEdgeWeightsII_dfs(int node, int parent, vector<vector<int>>& neighbors,
     vector<int>& levels, vector<vector<int>>& parents)
@@ -14817,7 +14823,7 @@ void LeetCodeTree::assignEdgeWeightsII_dfs(int node, int parent, vector<vector<i
 }
 
 /// <summary>
-/// Leet Code 3553. Minimum Weighted Subgraph With the Required Paths II
+/// Leet Code 3559. Number of Ways to Assign Edge Weights II
 /// </summary>
 void LeetCodeTree::assignEdgeWeightsII_skiplist(vector<vector<int>>& parents)
 {
@@ -14841,7 +14847,7 @@ void LeetCodeTree::assignEdgeWeightsII_skiplist(vector<vector<int>>& parents)
 }
 
 /// <summary>
-/// Leet Code 3553. Minimum Weighted Subgraph With the Required Paths II
+/// Leet Code 3559. Number of Ways to Assign Edge Weights II
 /// </summary>
 int LeetCodeTree::assignEdgeWeightsII_lca(int a, int b, vector<int>& levels, vector<vector<int>>& parents)
 {
@@ -14858,8 +14864,14 @@ int LeetCodeTree::assignEdgeWeightsII_lca(int a, int b, vector<int>& levels, vec
     }
     while (a != b)
     {
-        a = parents[a][0];
-        b = parents[b][0];
+        int step = 0;
+        while (parents[a][step] != parents[b][step])
+        {
+            step++;
+        }
+        if (step > 0) step--;
+        a = parents[a][step];
+        b = parents[b][step];
     }
     return a;
 }
@@ -15287,4 +15299,211 @@ int LeetCodeTree::goodSubtreeSum(vector<int>& vals, vector<int>& par)
     goodSubtreeSum_dfs(neighbors, vals, 0, -1, result);
     return result;
 }
+
+/// <summary>
+/// Leet Code 3585. Minimum Weighted Subgraph With the Required Paths II
+/// </summary>
+void LeetCodeTree::findMedian_dfs(int node, int parent, vector<vector<pair<int, int>>>& neighbors,
+    vector<long long>& distances, vector<int>& levels, vector<vector<int>>& parents)
+{
+    for (size_t i = 0; i < neighbors[node].size(); i++)
+    {
+        int child = neighbors[node][i].first;
+        if (child == parent) continue;
+        distances[child] = distances[node] + neighbors[node][i].second;
+        levels[child] = levels[node] + 1;
+        parents[child][0] = node;
+        findMedian_dfs(child, node, neighbors, distances, levels, parents);
+    }
+}
+
+/// <summary>
+/// Leet Code 3585. Find Weighted Median Node in Tree
+/// </summary>
+void LeetCodeTree::findMedian_skiplist(vector<vector<int>>& parents)
+{
+    bool valid = true;
+    int step = 0;
+    int n = parents.size();
+    while (valid)
+    {
+        valid = false;
+        for (int i = 0; i < n; i++)
+        {
+            int p = parents[i][step];
+            if (p != -1 && parents[p][step] != -1)
+            {
+                parents[i][step + 1] = parents[p][step];
+                valid = true;
+            }
+        }
+        step++;
+    }
+}
+
+/// <summary>
+/// Leet Code 3585. Find Weighted Median Node in Tree
+/// </summary>
+int LeetCodeTree::findMedian_lca(int a, int b, vector<int>& levels, vector<vector<int>>& parents)
+{
+    if (levels[a] < levels[b]) swap(a, b);
+    while (levels[a] > levels[b])
+    {
+        int step = 0;
+        while (levels[a] - (1 << step) >= levels[b])
+        {
+            step++;
+        }
+        step--;
+        a = parents[a][step];
+    }
+    while (a != b)
+    {
+        int step = 0;
+        while (parents[a][step] != parents[b][step])
+        {
+            step++;
+        }
+        if (step > 0) step--;
+        a = parents[a][step];
+        b = parents[b][step];
+    }
+    return a;
+}
+
+/// <summary>
+/// Leet Code 3585. Find Weighted Median Node in Tree
+/// </summary>
+int LeetCodeTree::findMedian_distance(int a, vector<vector<int>>& parents, vector<long long>& distances, double expected, bool is_greater)
+{
+    int prev = 0;
+    while (distances[a] > expected)
+    {
+        int step = 0;
+        while (parents[a][step] != -1 && distances[parents[a][step]] > expected)
+        {
+            step++;
+        }
+        if (step > 0) step--;
+        prev = a;
+        a = parents[a][step];
+    }
+    if (distances[a] == expected) return a;
+    else if (is_greater) return prev;
+    else return a;
+}
+
+
+/// <summary>
+/// Leet Code 3585. Find Weighted Median Node in Tree
+///
+/// Hard
+///
+/// You are given an integer n and an undirected, weighted tree rooted at 
+/// node 0 with n nodes numbered from 0 to n - 1. This is represented by a 
+/// 2D array edges of length n - 1, where edges[i] = [ui, vi, wi] indicates 
+/// an edge from node ui to vi with weight wi.
+///
+/// The weighted median node is defined as the first node x on the path from 
+/// ui to vi such that the sum of edge weights from ui to x is greater than 
+/// or equal to half of the total path weight.
+///
+/// You are given a 2D integer array queries. For each queries[j] = [uj, vj], 
+/// determine the weighted median node along the path from uj to vj.
+///
+/// Return an array ans, where ans[j] is the node index of the weighted median 
+/// for queries[j].
+/// 
+/// Example 1:
+/// Input: n = 2, edges = [[0,1,7]], queries = [[1,0],[0,1]]
+/// Output: [0,1]
+/// Explanation:
+/// 
+/// Query   Path    Edge
+/// Weights Total
+/// Path
+/// Weight  Half    Explanation Answer
+/// [1, 0]  1 -> 0   [7] 7   3.5 Sum from 1 -> 0 = 7 >= 3.5, median is node 0. 
+/// 
+/// [0, 1]  0 -> 1   [7] 7   3.5 Sum from 0 -> 1 = 7 >= 3.5, median is node 1. 
+///
+/// Example 2:
+/// Input: n = 3, edges = [[0,1,2],[2,0,4]], queries = [[0,1],[2,0],[1,2]]
+/// 
+/// Output: [1,0,2]
+/// Explanation:
+/// Query   Path    Edge
+/// Weights Total
+/// Path
+/// Weight  Half    Explanation Answer
+/// [0, 1]  0 -> 1   [2] 2   1   Sum from 0 -> 1 = 2 >= 1, median is node 1. 
+/// [2, 0]  2 -> 0   [4] 4   2   Sum from 2 -> 0 = 4 >= 2, median is node 0.
+/// [1, 2]  1 -> 0 -> 2   [2, 4]  6   3   Sum from 1 -> 0 = 2 < 3.
+/// Sum from 1 -> 2 = 2 + 4 = 6 >= 3, median is node 2.
+///
+/// Example 3:
+/// Input: n = 5, edges = [[0,1,2],[0,2,5],[1,3,1],[2,4,3]], 
+/// queries = [[3,4],[1,2]]
+/// Output: [2,2]
+/// Explanation:
+/// Query   Path    Edge
+/// Weights Total
+/// Path
+/// Weight  Half    Explanation Answer
+/// [3, 4]  3 -> 1 -> 0 -> 2 -> 4   [1, 2, 5, 3]    11  5.5 Sum 
+/// from 3 -> 1 = 1 < 5.5.
+/// Sum from 3 -> 0 = 1 + 2 = 3 < 5.5.
+/// Sum from 3 -> 2 = 1 + 2 + 5 = 8 >= 5.5, median is node 2. 
+/// [1, 2]  1 -> 0 -> 2   [2, 5]  7   3.5 
+/// Sum from 1 -> 0 = 2 < 3.5.
+/// Sum from 1 -> 2 = 2 + 5 = 7 >= 3.5, median is node 2.
+///
+/// Constraints:
+/// 1. 2 <= n <= 10^5
+/// 2. edges.length == n - 1
+/// 3. edges[i] == [ui, vi, wi]
+/// 4. 0 <= ui, vi < n
+/// 5. 1 <= wi <= 10^9
+/// 6. 1 <= queries.length <= 10^5
+/// 7. queries[j] == [uj, vj]
+/// 8. 0 <= uj, vj < n
+/// 9. The input is generated such that edges represents a valid tree.
+/// </summary>
+vector<int> LeetCodeTree::findMedian(int n, vector<vector<int>>& edges, vector<vector<int>>& queries)
+{
+    vector<vector<int>> parents(n, vector<int>(18, -1));
+    vector<int>levels(n);
+    vector<long long>distances(n);
+    vector<vector<pair<int, int>>>neighbors(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back({ edges[i][1], edges[i][2] });
+        neighbors[edges[i][1]].push_back({ edges[i][0], edges[i][2] });
+    }
+    findMedian_dfs(0, -1, neighbors, distances, levels, parents);
+    findMedian_skiplist(parents);
+    vector<int> result(queries.size());
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        int lca = findMedian_lca(queries[i][0], queries[i][1], levels, parents);
+        long long distance = distances[queries[i][0]] + distances[queries[i][1]] - distances[lca] * 2;
+        double half = (double)distance  / 2;
+        if (distances[queries[i][0]] - distances[lca] == half)
+        {
+            result[i] = lca;
+        }
+        else if (distances[queries[i][0]] - distances[lca] > half)
+        {
+            double expected = distances[queries[i][0]] - half;
+            result[i] = findMedian_distance(queries[i][0], parents, distances, expected, false);
+        }
+        else
+        {
+            double expected = distances[queries[i][1]] - half;
+            result[i] = findMedian_distance(queries[i][1], parents, distances, expected, true);
+        }
+    }
+    return result;
+}
+
 #pragma endregion

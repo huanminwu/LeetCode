@@ -2626,8 +2626,41 @@ void TestLeetCode3565(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3594(void)
+{
+    Logger::WriteMessage("Test Leet Code 3594");
+    LeetCodeDFS leetCode;
+    int n = 1, k = 1, m = 2;
+    vector<int> time = { 5 };
+    vector<double> mul = { 1.0, 1.3 };
+    double result = leetCode.minTime(n, k, m, time, mul);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; m = " + to_string(m));
+    Logger::WriteMessage(time);
+    Logger::WriteMessage(mul);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3, k = 2, m = 3;
+    time = { 2, 5, 8 };
+    mul = { 1.0, 1.5, 0.75 };
+    result = leetCode.minTime(n, k, m, time, mul);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; m = " + to_string(m));
+    Logger::WriteMessage(time);
+    Logger::WriteMessage(mul);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 2; k = 1, m = 2;
+    time = { 10, 10 };
+    mul = { 2.0, 2.0 };
+    result = leetCode.minTime(n, k, m, time, mul);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; m = " + to_string(m));
+    Logger::WriteMessage(time);
+    Logger::WriteMessage(mul);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3594();
     TestLeetCode3565();
     TestLeetCode3538();
     TestLeetCode3533();

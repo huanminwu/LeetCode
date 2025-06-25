@@ -8094,8 +8094,40 @@ void TestLeetCode3579(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3581(void)
+{
+    Logger::WriteMessage("Test Leet Code 3581");
+    LeetCodeString leetCode;
+    int n = 41;
+    int result = leetCode.countOddLetters(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 20;
+    result = leetCode.countOddLetters(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3582(void)
+{
+    Logger::WriteMessage("Test Leet Code 3582");
+    LeetCodeString leetCode;
+    string caption = "Leetcode daily streak achieved";
+    string result = leetCode.generateTag(caption);
+    Logger::WriteMessage("caption = " + caption + "; result = " + result);
+
+    caption = "can I Go There";
+    result = leetCode.generateTag(caption);
+    Logger::WriteMessage("caption = " + caption + "; result = " + result);
+
+    caption = "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh";
+    result = leetCode.generateTag(caption);
+    Logger::WriteMessage("caption = " + caption + "; result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3582();
+    TestLeetCode3581();
     TestLeetCode3579();
     TestLeetCode3571();
     TestLeetCode3561();

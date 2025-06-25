@@ -21553,7 +21553,7 @@ long long LeetCodeDP::maximumProfit(vector<int>& prices, int k)
         }
     }
     long long result = LLONG_MIN;
-    for (size_t i = 0; i <= k; i++)
+    for (int i = 0; i <= k; i++)
     {
         result = max(result, transaction[i]);
     }

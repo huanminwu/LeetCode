@@ -17170,6 +17170,141 @@ public:
     /// 2. word1 and word2 consist only of lowercase English letters.
     /// </summary>
     int minOperations(string word1, string word2);
+
+    /// <summary>
+    /// Leet Code 3581. Count Odd Letters from Number
+    ///
+    /// Easy
+    ///
+    /// You are given an integer n perform the following steps:
+    /// 
+    /// Convert each digit of n into its lowercase English word (e.g., 4 -> "four", 
+    /// 1 -> "one").
+    /// Concatenate those words in the original digit order to form a string s.
+    /// Return the number of distinct characters in s that appear an odd number of 
+    /// times.
+    ///
+    /// Example 1:
+    /// Input: n = 41
+    /// Output: 5
+    /// Explanation:
+    /// 41 -> "fourone"
+    /// Characters with odd frequencies: 'f', 'u', 'r', 'n', 'e'. Thus, the answer 
+    /// is 5.
+    ///
+    /// Example 2:
+    /// Input: n = 20
+    /// Output: 5
+    /// Explanation:
+    /// 20 -> "twozero"
+    /// Characters with odd frequencies: 't', 'w', 'z', 'e', 'r'. Thus, the answer 
+    /// is 5.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 10^9
+    /// </summary>
+    int countOddLetters(int n);
+
+    /// <summary>
+    /// Leet Code 3582. Generate Tag for Video Caption
+    ///
+    /// Easy
+    ///
+    /// You are given a string caption representing the caption for a video.
+    ///
+    /// The following actions must be performed in order to generate a valid 
+    /// tag for the video:
+    ///
+    /// Combine all words in the string into a single camelCase string prefixed 
+    /// with '#'. A camelCase string is one where the first letter of all words 
+    /// except the first one is capitalized. All characters after the first 
+    /// character in each word must be lowercase.
+    ///
+    /// Remove all characters that are not an English letter, except the first '#'.
+    /// Truncate the result to a maximum of 100 characters.
+    /// Return the tag after performing the actions on caption.
+    /// 
+    /// Example 1:
+    /// Input: caption = "Leetcode daily streak achieved"
+    /// Output: "#leetcodeDailyStreakAchieved"
+    /// Explanation:
+    /// The first letter for all words except "leetcode" should be capitalized.
+    ///
+    /// Example 2:
+    /// Input: caption = "can I Go There"
+    /// Output: "#canIGoThere"
+    /// Explanation:
+    /// The first letter for all words except "can" should be capitalized.
+    ///
+    /// Example 3:
+    /// Input: caption = "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+    /// hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+    ///
+    /// Output: "#hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+    /// hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+    ///
+    /// Explanation:
+    /// Since the first word has length 101, we need to truncate the last two 
+    /// letters from the word.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= caption.length <= 150
+    /// 2. caption consists only of English letters and ' '.
+    /// </summary>
+    string generateTag(string caption);
+
+    /// <summary>
+    /// Leet Code 3583. Count Special Triplets
+    ///
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    /// A special triplet is defined as a triplet of indices (i, j, k) such that:
+    /// 0 <= i < j < k < n, where n = nums.length
+    /// nums[i] == nums[j] * 2
+    /// nums[k] == nums[j] * 2
+    /// Return the total number of special triplets in the array.
+    /// 
+    /// Since the answer may be large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: nums = [6,3,6]
+    /// Output: 1
+    /// Explanation:
+    /// The only special triplet is (i, j, k) = (0, 1, 2), where:
+    /// nums[0] = 6, nums[1] = 3, nums[2] = 6
+    /// nums[0] = nums[1] * 2 = 3 * 2 = 6
+    /// nums[2] = nums[1] * 2 = 3 * 2 = 6
+    /// Example 2:
+    /// Input: nums = [0,1,0,0]
+    ///
+    /// Output: 1
+    /// Explanation:
+    /// The only special triplet is (i, j, k) = (0, 2, 3), where:
+    /// nums[0] = 0, nums[2] = 0, nums[3] = 0
+    /// nums[0] = nums[2] * 2 = 0 * 2 = 0
+    /// nums[3] = nums[2] * 2 = 0 * 2 = 0
+    ///
+    /// Example 3:
+    /// Input: nums = [8,4,2,8,4]
+    /// Output: 2
+    /// Explanation:
+    /// There are exactly two special triplets:
+    /// (i, j, k) = (0, 1, 3)
+    /// nums[0] = 8, nums[1] = 4, nums[3] = 8
+    /// nums[0] = nums[1] * 2 = 4 * 2 = 8
+    /// nums[3] = nums[1] * 2 = 4 * 2 = 8
+    /// (i, j, k) = (1, 2, 4)
+    /// nums[1] = 4, nums[2] = 2, nums[4] = 4
+    /// nums[1] = nums[2] * 2 = 2 * 2 = 4
+    /// nums[4] = nums[2] * 2 = 2 * 2 = 4
+    /// 
+    /// Constraints:
+    /// 1. 3 <= n == nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 10^5
+    /// </summary>
+    int specialTriplets(vector<int>& nums);
 #pragma endregion
 };
 

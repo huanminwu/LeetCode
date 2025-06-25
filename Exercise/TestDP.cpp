@@ -6067,7 +6067,7 @@ void TestLeetCode3573(void)
     LeetCodeDP leetCode;
     vector<int> prices = { 1, 7, 9, 8, 2 };
     int k = 2;
-    int result = leetCode.maximumProfit(prices, k);
+    long long result = leetCode.maximumProfit(prices, k);
     Logger::WriteMessage(prices);
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 
