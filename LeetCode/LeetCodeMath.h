@@ -270,11 +270,6 @@ public:
     /// <summary>
     /// Leet code #592. Fraction Addition and Subtraction
     /// </summary>
-    long long gcd(long long a, long long b);
-
-    /// <summary>
-    /// Leet code #592. Fraction Addition and Subtraction
-    /// </summary>
     void parseFraction(string& expression, int& index, int& numerator, int& denominator);
 
     /// <summary>
@@ -2130,11 +2125,6 @@ public:
     /// 2. 0 <= q <= p
     /// </summary>
     int mirrorReflection(int p, int q);
-
-    /// <summary>
-    /// Leet code #866. Prime Palindrome
-    /// </summary>
-    bool isPrime(long long N);
 
     /// <summary>
     /// Leet code #866. Prime Palindrome
@@ -16711,5 +16701,180 @@ public:
     /// </summary>
     bool checkPrimeFrequency(vector<int>& nums);
 
+    /// <summary>
+    /// Leet Code 3588. Find Maximum Area of a Triangle
+    ///
+    /// Medium
+    /// 
+    /// You are given a 2D array coords of size n x 2, representing the 
+    /// coordinates of n points in an infinite Cartesian plane.
+    ///
+    /// Find twice the maximum area of a triangle with its corners at any three 
+    /// elements from coords, such that at least one side of this triangle is 
+    /// parallel to the x-axis or y-axis. Formally, if the maximum area of 
+    /// such a triangle is A, return 2 * A.
+    ///
+    /// If no such triangle exists, return -1.
+    /// Note that a triangle cannot have zero area.
+    /// 
+    /// Example 1:
+    /// Input: coords = [[1,1],[1,2],[3,2],[3,3]]
+    /// Output: 2
+    /// Explanation:
+    /// 
+    /// The triangle shown in the image has a base 1 and height 2. Hence its 
+    /// area is 1/2 * base * height = 1.
+    ///
+    /// Example 2:
+    /// Input: coords = [[1,1],[2,2],[3,3]]
+    /// Output: -1
+    /// Explanation:
+    /// The only possible triangle has corners (1, 1), (2, 2), and (3, 3). None 
+    /// of its sides are parallel to the x-axis or the y-axis.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == coords.length <= 10^5
+    /// 2. 1 <= coords[i][0], coords[i][1] <= 10^6
+    /// 3. All coords[i] are unique.
+    /// </summary>
+    long long maxArea(vector<vector<int>>& coords);
+
+    /// <summary>
+    /// Leet Code 3596. Minimum Cost Path with Alternating Directions I
+    ///
+    /// Medium
+    /// 
+    /// You are given two integers m and n representing the number of rows and 
+    /// columns of a grid, respectively.
+    ///
+    /// The cost to enter cell (i, j) is defined as (i + 1) * (j + 1).
+    ///
+    /// You start at cell (0, 0) on move 1.
+    ///
+    /// At each step, you move to an adjacent cell, following an alternating 
+    /// pattern:
+    ///
+    /// On odd-numbered moves, you must move either right or down.
+    /// On even-numbered moves, you must move either left or up.
+    /// Return the minimum total cost required to reach (m - 1, n - 1). If it is 
+    /// impossible, return -1.
+    ///
+    /// Example 1:
+    /// Input: m = 1, n = 1
+    /// Output: 1
+    /// Explanation:
+    /// You start at cell (0, 0).
+    /// The cost to enter (0, 0) is (0 + 1) * (0 + 1) = 1.
+    /// Since you're at the destination, the total cost is 1.
+    ///
+    /// Example 2:
+    /// Input: m = 2, n = 1
+    /// Output: 3
+    /// Explanation:
+    /// You start at cell (0, 0) with cost (0 + 1) * (0 + 1) = 1.
+    /// Move 1 (odd): You can move down to (1, 0) with cost (1 + 1) * (0 + 1) = 2.
+    /// Thus, the total cost is 1 + 2 = 3.
+    ///
+    /// Constraints:
+    /// 1. 1 <= m, n <= 10^6
+    /// </summary>
+    int minCost(int m, int n);
+
+    /// <summary>
+    /// Leet Code 3602. Hexadecimal and Hexatrigesimal Conversion
+    ///
+    /// Easy
+    ///
+    /// You are given an integer n.
+    ///
+    /// Return the concatenation of the hexadecimal representation of n2 and the 
+    /// hexatrigesimal representation of n^3.
+    ///
+    /// A hexadecimal number is defined as a base-16 numeral system that uses the 
+    /// digits 0 – 9 and the uppercase letters A - F to represent values from 0 
+    /// to 15.
+    ///
+    /// A hexatrigesimal number is defined as a base-36 numeral system that uses 
+    /// the digits 0 – 9 and the uppercase letters A - Z to represent values 
+    /// from 0 to 35.
+    ///
+    /// Example 1:
+    /// Input: n = 13
+    /// Output: "A91P1"
+    /// Explanation:
+    /// n2 = 13 * 13 = 169. In hexadecimal, it converts to (10 * 16) + 9 = 169, 
+    /// which corresponds to "A9".
+    /// n3 = 13 * 13 * 13 = 2197. In hexatrigesimal, it converts to (1 * 362) + 
+    /// (25 * 36) + 1 = 2197, which corresponds to "1P1".
+    /// Concatenating both results gives "A9" + "1P1" = "A91P1".
+    ///
+    /// Example 2:
+    /// Input: n = 36
+    /// Output: "5101000"
+    /// Explanation:
+    /// n2 = 36 * 36 = 1296. In hexadecimal, it converts to (5 * 162) + (1 * 16) + 
+    /// 0 = 1296, which corresponds to "510".
+    /// n3 = 36 * 36 * 36 = 46656. In hexatrigesimal, it converts to (1 * 363) + 
+    /// (0 * 362) + (0 * 36) + 0 = 46656, which corresponds to "1000".
+    /// Concatenating both results gives "510" + "1000" = "5101000".
+    ///  
+    /// Constraints:
+    /// 1. 1 <= n <= 1000
+    /// </summary>
+    string concatHex36(int n);
+
+    /// <summary>
+    /// Leet Code 3609. Minimum Moves to Reach Target in Grid
+    ///
+    /// Hard
+    /// 
+    /// You are given four integers sx, sy, tx, and ty, representing two points 
+    /// (sx, sy) and (tx, ty) on an infinitely large 2D grid.
+    ///
+    /// You start at (sx, sy).
+    ///
+    /// At any point (x, y), define m = max(x, y). You can either:
+    ///
+    /// Move to (x + m, y), or
+    /// Move to (x, y + m).
+    /// Return the minimum number of moves required to reach (tx, ty). If it is 
+    /// impossible to reach the target, return -1.
+    ///
+    /// Example 1:
+    /// Input: sx = 1, sy = 2, tx = 5, ty = 4
+    /// Output: 2
+    /// Explanation:
+    /// The optimal path is:
+    /// Move 1: max(1, 2) = 2. Increase the y-coordinate by 2, moving from (1, 2) 
+    /// to (1, 2 + 2) = (1, 4).
+    /// Move 2: max(1, 4) = 4. Increase the x-coordinate by 4, moving from (1, 4) 
+    /// to (1 + 4, 4) = (5, 4).
+    /// Thus, the minimum number of moves to reach (5, 4) is 2.
+    ///
+    /// Example 2:
+    /// Input: sx = 0, sy = 1, tx = 2, ty = 3
+    /// Output: 3
+    /// Explanation:
+    /// The optimal path is:
+    /// Move 1: max(0, 1) = 1. Increase the x-coordinate by 1, moving from (0, 1) 
+    /// to (0 + 1, 1) = (1, 1).
+    /// Move 2: max(1, 1) = 1. Increase the x-coordinate by 1, moving from (1, 1) 
+    /// to (1 + 1, 1) = (2, 1).
+    /// Move 3: max(2, 1) = 2. Increase the y-coordinate by 2, moving from (2, 1) 
+    /// to (2, 1 + 2) = (2, 3).
+    /// Thus, the minimum number of moves to reach (2, 3) is 3.
+    ///
+    /// Example 3:
+    /// Input: sx = 1, sy = 1, tx = 2, ty = 2
+    /// Output: -1
+    /// Explanation:
+    /// It is impossible to reach (2, 2) from (1, 1) using the allowed moves. 
+    /// Thus, the answer is -1.
+    /// 
+    /// Constraints:
+    /// 1. 0 <= sx <= tx <= 10^9
+    /// 2. 0 <= sy <= ty <= 10^9
+    /// </summary>
+    int minMoves(int sx, int sy, int tx, int ty);
 };
 #endif

@@ -1604,8 +1604,24 @@ void TestLeetCode3514(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3595(void)
+{
+    Logger::WriteMessage("Test Leet Code 3595");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 2, 2, 3, 2, 5, 5, 5, 7, 7 };
+    vector<int> result = leetCode.onceTwice(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 4,4,6,4,9,9,9,6,8 };
+    result = leetCode.onceTwice(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3595();
     TestLeetCode3513();
     TestLeetCode3514();
     TestLeetCode3370();

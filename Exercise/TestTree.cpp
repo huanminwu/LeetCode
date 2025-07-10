@@ -4575,11 +4575,52 @@ void TestLeetCode3585(void)
     Logger::WriteMessage(edges);
     Logger::WriteMessage(queries);
     Logger::WriteMessage(result);
+}
 
+void TestLeetCode3593(void)
+{
+    Logger::WriteMessage("Test Leet Code 3593");
+    LeetCodeTree leetCode;
+    int n = 3;
+    vector<vector<int>> edges = { {0, 1},{0, 2} };
+    vector<int> cost = { 2, 1, 3 };
+    int result = leetCode.minIncrease(n, edges, cost);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    edges = { {0, 1},{1, 2} };
+    cost = { 5, 1, 4 };
+    result = leetCode.minIncrease(n, edges, cost);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 5;
+    edges = { {0, 4},{0, 1},{1, 2},{1, 3} };
+    cost = { 3, 4, 1, 1, 7 };
+    result = leetCode.minIncrease(n, edges, cost);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4;
+    edges = { {0, 1}, { 1, 2 }, { 1, 3 } };
+    cost = { 13,7,9,4 };
+    result = leetCode.minIncrease(n, edges, cost);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3593();
     TestLeetCode3585();
     TestLeetCode3575();
     TestLeetCode3562();

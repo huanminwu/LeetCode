@@ -8042,8 +8042,86 @@ void TestLeetCode3591(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode3588(void)
+{
+    Logger::WriteMessage("Test Leet Code 3588");
+    LeetCodeMath leetCode;
+    vector<vector<int>> coords = { {1, 1},{1, 2},{3, 2},{3, 3} };
+    long long result = leetCode.maxArea(coords);
+    Logger::WriteMessage(coords);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    coords = { {1, 1},{2, 2},{3, 3} };
+    result = leetCode.maxArea(coords);
+    Logger::WriteMessage(coords);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3596(void)
+{
+    Logger::WriteMessage("Test Leet Code 3596");
+    LeetCodeMath leetCode;
+    int m = 1, n = 1;
+    int result = leetCode.minCost(m, n);
+    Logger::WriteMessage("m = " + to_string(m) + "; n =" + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    m = 2, n = 1;
+    result = leetCode.minCost(m, n);
+    Logger::WriteMessage("m = " + to_string(m) + "; n =" + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3602(void)
+{
+    Logger::WriteMessage("Test Leet Code 3602");
+    LeetCodeMath leetCode;
+    int n = 13;
+    string result = leetCode.concatHex36(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + result);
+
+    n = 36;
+    result = leetCode.concatHex36(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode3609(void)
+{
+    Logger::WriteMessage("Test Leet Code 3609");
+    LeetCodeMath leetCode;
+    int sx = 1, sy = 2, tx = 5, ty = 4;
+    int result = leetCode.minMoves(sx, sy, tx, ty);
+    Logger::WriteMessage("sx = " + to_string(sx) + "; sy = " + to_string(sy));
+    Logger::WriteMessage("tx = " + to_string(tx) + "; ty = " + to_string(ty));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    sx = 0, sy = 1, tx = 2, ty = 3;
+    result = leetCode.minMoves(sx, sy, tx, ty);
+    Logger::WriteMessage("sx = " + to_string(sx) + "; sy = " + to_string(sy));
+    Logger::WriteMessage("tx = " + to_string(tx) + "; ty = " + to_string(ty));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    sx = 1, sy = 1, tx = 2, ty = 2;
+    result = leetCode.minMoves(sx, sy, tx, ty);
+    Logger::WriteMessage("sx = " + to_string(sx) + "; sy = " + to_string(sy));
+    Logger::WriteMessage("tx = " + to_string(tx) + "; ty = " + to_string(ty));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    sx = 1, sy = 0, tx = 2, ty = 2;
+    result = leetCode.minMoves(sx, sy, tx, ty);
+    Logger::WriteMessage("sx = " + to_string(sx) + "; sy = " + to_string(sy));
+    Logger::WriteMessage("tx = " + to_string(tx) + "; ty = " + to_string(ty));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3609();
+    TestLeetCode3602();
+    TestLeetCode3596();
+    TestLeetCode3588();
     TestLeetCode3591();
     TestLeetCode3574();
     TestLeetCode3569();

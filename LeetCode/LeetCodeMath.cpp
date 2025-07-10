@@ -3555,24 +3555,6 @@ int LeetCodeMath::mirrorReflection(int p, int q)
 
 /// <summary>
 /// Leet code #866. Prime Palindrome
-/// </summary>
-bool LeetCodeMath::isPrime(long long N)
-{
-    if (N == 1) return false;
-    else if (N == 2) return true;
-    else if (N % 2 == 0) return false;
-    else
-    {
-        for (long long i = 3; i <= sqrt(N); i += 2)
-        {
-            if (N%i == 0) return false;
-        }
-        return true;
-    }
-}
-
-/// <summary>
-/// Leet code #866. Prime Palindrome
 /// 
 /// Find the smallest prime palindrome greater than or equal to N.
 ///
@@ -5110,22 +5092,6 @@ vector<int> LeetCodeMath::distributeCandies(int candies, int num_people)
 
 #pragma endregion
 
-/// <summary>
-/// Leet code #592. Fraction Addition and Subtraction
-/// </summary>
-long long LeetCodeMath::gcd(long long a, long long b)
-{
-    a = abs(a);
-    b = abs(b);
-    if (a < b) swap(a, b);
-    if (b == 0) return a;
-    while (a % b != 0)
-    {
-        a = a % b;
-        swap(a, b);
-    }
-    return b;
-}
 
 /// <summary>
 /// Leet code #592. Fraction Addition and Subtraction
@@ -26684,7 +26650,7 @@ int LeetCodeMath::countPermutations(vector<int>& complexity)
             return 0;
         }
     }
-    return result;
+    return (int)result;
 }
 
 /// <summary>
@@ -26735,5 +26701,321 @@ bool LeetCodeMath::checkPrimeFrequency(vector<int>& nums)
     }
     return false;
 }
+
+/// <summary>
+/// Leet Code 3588. Find Maximum Area of a Triangle
+///
+/// Medium
+/// 
+/// You are given a 2D array coords of size n x 2, representing the 
+/// coordinates of n points in an infinite Cartesian plane.
+///
+/// Find twice the maximum area of a triangle with its corners at any three 
+/// elements from coords, such that at least one side of this triangle is 
+/// parallel to the x-axis or y-axis. Formally, if the maximum area of 
+/// such a triangle is A, return 2 * A.
+///
+/// If no such triangle exists, return -1.
+/// Note that a triangle cannot have zero area.
+/// 
+/// Example 1:
+/// Input: coords = [[1,1],[1,2],[3,2],[3,3]]
+/// Output: 2
+/// Explanation:
+/// 
+/// The triangle shown in the image has a base 1 and height 2. Hence its 
+/// area is 1/2 * base * height = 1.
+///
+/// Example 2:
+/// Input: coords = [[1,1],[2,2],[3,3]]
+/// Output: -1
+/// Explanation:
+/// The only possible triangle has corners (1, 1), (2, 2), and (3, 3). None 
+/// of its sides are parallel to the x-axis or the y-axis.
+/// 
+/// Constraints:
+/// 1. 1 <= n == coords.length <= 10^5
+/// 2. 1 <= coords[i][0], coords[i][1] <= 10^6
+/// 3. All coords[i] are unique.
+/// </summary>
+long long LeetCodeMath::maxArea(vector<vector<int>>& coords)
+{
+    unordered_map<int, pair<int, int>> x_points, y_points;
+    int min_x = INT_MAX, max_x = INT_MIN, min_y = INT_MAX, max_y = INT_MIN;
+    for (size_t i = 0; i < coords.size(); i++)
+    {
+        int x = coords[i][0];
+        int y = coords[i][1];
+        min_x = min(min_x, x);
+        max_x = max(max_x, x);
+        min_y = min(min_y, y);
+        max_y = max(max_y, y);
+        if (x_points.count(x) == 0)
+        {
+            x_points[x].first = y;
+            x_points[x].second = y;
+        }
+        else
+        {
+            x_points[x].first = min(x_points[x].first, y);
+            x_points[x].second = max(x_points[x].second, y);
+        }
+        if (y_points.count(y) == 0)
+        {
+            y_points[y].first = x;
+            y_points[y].second = x;
+        }
+        else
+        {
+            y_points[y].first = min(y_points[y].first, x);
+            y_points[y].second = max(y_points[y].second, x);
+        }
+    }
+    long long result = 0;
+    for (auto &itr : x_points)
+    {
+        int x1 = itr.first;
+        auto [y1, y2] = itr.second;
+        if (y1 == y2) continue;
+        result = max(result, (long long)(y2 - y1) * (long long)abs(min_x - x1));
+        result = max(result, (long long)(y2 - y1) * (long long)abs(max_x - x1));
+    }
+    for (auto &itr : y_points)
+    {
+        int y1 = itr.first;
+        auto [x1, x2] = itr.second;
+        if (x1 == x2) continue;
+        result = max(result, (long long)(x2 - x1) * (long long)abs(min_y - y1));
+        result = max(result, (long long)(x2 - x1) * (long long)abs(max_y - y1));
+    }
+    if (result == 0) return -1;
+    else return result;
+}
+
+/// <summary>
+/// Leet Code 3596. Minimum Cost Path with Alternating Directions I
+///
+/// Medium
+/// 
+/// You are given two integers m and n representing the number of rows and 
+/// columns of a grid, respectively.
+///
+/// The cost to enter cell (i, j) is defined as (i + 1) * (j + 1).
+///
+/// You start at cell (0, 0) on move 1.
+///
+/// At each step, you move to an adjacent cell, following an alternating 
+/// pattern:
+///
+/// On odd-numbered moves, you must move either right or down.
+/// On even-numbered moves, you must move either left or up.
+/// Return the minimum total cost required to reach (m - 1, n - 1). If it is 
+/// impossible, return -1.
+///
+/// Example 1:
+/// Input: m = 1, n = 1
+/// Output: 1
+/// Explanation:
+/// You start at cell (0, 0).
+/// The cost to enter (0, 0) is (0 + 1) * (0 + 1) = 1.
+/// Since you're at the destination, the total cost is 1.
+///
+/// Example 2:
+/// Input: m = 2, n = 1
+/// Output: 3
+/// Explanation:
+/// You start at cell (0, 0) with cost (0 + 1) * (0 + 1) = 1.
+/// Move 1 (odd): You can move down to (1, 0) with cost (1 + 1) * (0 + 1) = 2.
+/// Thus, the total cost is 1 + 2 = 3.
+///
+/// Constraints:
+/// 1. 1 <= m, n <= 10^6
+/// </summary>
+int LeetCodeMath::minCost(int m, int n)
+{
+    if (m + n > 3) return -1;
+    else if (m + n == 2) return 1;
+    else return 3;
+}
+
+/// <summary>
+/// Leet Code 3602. Hexadecimal and Hexatrigesimal Conversion
+///
+/// Easy
+///
+/// You are given an integer n.
+///
+/// Return the concatenation of the hexadecimal representation of n2 and the 
+/// hexatrigesimal representation of n^3.
+///
+/// A hexadecimal number is defined as a base-16 numeral system that uses the 
+/// digits 0 – 9 and the uppercase letters A - F to represent values from 0 
+/// to 15.
+///
+/// A hexatrigesimal number is defined as a base-36 numeral system that uses 
+/// the digits 0 – 9 and the uppercase letters A - Z to represent values 
+/// from 0 to 35.
+///
+/// Example 1:
+/// Input: n = 13
+/// Output: "A91P1"
+/// Explanation:
+/// n2 = 13 * 13 = 169. In hexadecimal, it converts to (10 * 16) + 9 = 169, 
+/// which corresponds to "A9".
+/// n3 = 13 * 13 * 13 = 2197. In hexatrigesimal, it converts to (1 * 362) + 
+/// (25 * 36) + 1 = 2197, which corresponds to "1P1".
+/// Concatenating both results gives "A9" + "1P1" = "A91P1".
+///
+/// Example 2:
+/// Input: n = 36
+/// Output: "5101000"
+/// Explanation:
+/// n2 = 36 * 36 = 1296. In hexadecimal, it converts to (5 * 162) + (1 * 16) + 
+/// 0 = 1296, which corresponds to "510".
+/// n3 = 36 * 36 * 36 = 46656. In hexatrigesimal, it converts to (1 * 363) + 
+/// (0 * 362) + (0 * 36) + 0 = 46656, which corresponds to "1000".
+/// Concatenating both results gives "510" + "1000" = "5101000".
+///  
+/// Constraints:
+/// 1. 1 <= n <= 1000
+/// </summary>
+string LeetCodeMath::concatHex36(int n)
+{
+    string result;
+    long long val = n * n;
+    string str;
+    while (val > 0)
+    {
+        int d = val % 16;
+        if (d >= 10) str.push_back('A' + d - 10);
+        else str.push_back('0' + d);
+        val /= 16;
+    }
+    std::reverse(str.begin(), str.end());
+    result.append(str);
+    
+    val = n * n * n;
+    str.clear();
+    while (val > 0)
+    {
+        int d = val % 36;
+        if (d >= 10) str.push_back('A' + d - 10);
+        else str.push_back('0' + d);
+        val /= 36;
+    }
+    std::reverse(str.begin(), str.end());
+    result.append(str);
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3609. Minimum Moves to Reach Target in Grid
+///
+/// Hard
+/// 
+/// You are given four integers sx, sy, tx, and ty, representing two points 
+/// (sx, sy) and (tx, ty) on an infinitely large 2D grid.
+///
+/// You start at (sx, sy).
+///
+/// At any point (x, y), define m = max(x, y). You can either:
+///
+/// Move to (x + m, y), or
+/// Move to (x, y + m).
+/// Return the minimum number of moves required to reach (tx, ty). If it is 
+/// impossible to reach the target, return -1.
+///
+/// Example 1:
+/// Input: sx = 1, sy = 2, tx = 5, ty = 4
+/// Output: 2
+/// Explanation:
+/// The optimal path is:
+/// Move 1: max(1, 2) = 2. Increase the y-coordinate by 2, moving from (1, 2) 
+/// to (1, 2 + 2) = (1, 4).
+/// Move 2: max(1, 4) = 4. Increase the x-coordinate by 4, moving from (1, 4) 
+/// to (1 + 4, 4) = (5, 4).
+/// Thus, the minimum number of moves to reach (5, 4) is 2.
+///
+/// Example 2:
+/// Input: sx = 0, sy = 1, tx = 2, ty = 3
+/// Output: 3
+/// Explanation:
+/// The optimal path is:
+/// Move 1: max(0, 1) = 1. Increase the x-coordinate by 1, moving from (0, 1) 
+/// to (0 + 1, 1) = (1, 1).
+/// Move 2: max(1, 1) = 1. Increase the x-coordinate by 1, moving from (1, 1) 
+/// to (1 + 1, 1) = (2, 1).
+/// Move 3: max(2, 1) = 2. Increase the y-coordinate by 2, moving from (2, 1) 
+/// to (2, 1 + 2) = (2, 3).
+/// Thus, the minimum number of moves to reach (2, 3) is 3.
+///
+/// Example 3:
+/// Input: sx = 1, sy = 1, tx = 2, ty = 2
+/// Output: -1
+/// Explanation:
+/// It is impossible to reach (2, 2) from (1, 1) using the allowed moves. 
+/// Thus, the answer is -1.
+/// 
+/// Constraints:
+/// 1. 0 <= sx <= tx <= 10^9
+/// 2. 0 <= sy <= ty <= 10^9
+/// </summary>
+int LeetCodeMath::minMoves(int sx, int sy, int tx, int ty)
+{
+    int result = 0;
+    queue<pair<int, int>> queue;
+    queue.push({ tx, ty });
+    while (!queue.empty())
+    {
+        size_t size = queue.size();
+        for (size_t i = 0; i < size; i++)
+        {
+            auto [tx, ty] = queue.front();
+            queue.pop();
+            if (sx == tx && sy == ty)
+            {
+                return result;
+            }
+            if (tx < sx || ty < sy) continue;
+            if (tx == ty)
+            {
+                if (tx >= sx && sy == 0) queue.push({ tx, 0 });
+                if (sx == 0 && ty >= sy) queue.push({ 0, ty });
+            }
+            else if (tx > ty)
+            {
+                if (tx >= 2 * ty)
+                {
+                    if (tx % 2 == 0)
+                    {
+                        tx = tx / 2;
+                    }
+                    else continue;
+                }
+                else
+                {
+                    tx = tx - ty;
+                }
+                if (tx >= sx && ty >= sy) queue.push({ tx, ty });
+            }
+            else
+            {
+                if (ty >= 2 * tx)
+                {
+                    if (ty % 2 == 0) ty = ty / 2;
+                    else continue;
+                }
+                else
+                {
+                    ty = ty - tx;
+                }
+                if (tx >= sx && ty >= sy) queue.push({ tx, ty });
+            }
+        }
+        result++;
+    }
+    return -1;
+}
+
 #pragma endregion
 

@@ -36494,18 +36494,18 @@ vector<int> LeetCodeArray::solveQueries(vector<int>& nums, vector<int>& queries)
 int LeetCodeArray::numOfUnplacedFruits(vector<int>& fruits, vector<int>& baskets)
 {
     int n = baskets.size();
-    SegmentTreeMax segmentTreeMax(n);
+    SegmentTreeMax segmentTreeGreater(n);
     for (size_t i = 0; i < baskets.size(); i++)
     {
-        segmentTreeMax.set(0, 0, n - 1, i, baskets[i]);
+        segmentTreeGreater.set(0, 0, n - 1, i, baskets[i]);
     }
     int result = 0;
     for (size_t i = 0; i < fruits.size(); i++)
     {
-        int pos = segmentTreeMax.query(0, 0, n - 1, fruits[i]);
+        int pos = segmentTreeGreater.query(0, 0, n - 1, fruits[i]);
         if (pos != -1)
         {
-            segmentTreeMax.set(0, 0, n - 1, pos, INT_MIN);
+            segmentTreeGreater.set(0, 0, n - 1, pos, INT_MIN);
         }
         else
         {
@@ -38567,6 +38567,98 @@ long long LeetCodeArray::maximumProduct(vector<int>& nums, int m)
         if (prev < 0) continue;
         result = max(result, (long long)arr[prev].first * (long long)nums[i]);
         result = max(result, (long long)arr[prev].second * (long long)nums[i]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3587. Minimum Adjacent Swaps to Alternate Parity
+///
+/// Medium
+///
+/// You are given an array nums of distinct integers.
+///
+/// In one operation, you can swap any two adjacent elements in the array.
+///
+/// An arrangement of the array is considered valid if the parity of adjacent 
+/// elements alternates, meaning every pair of neighboring elements consists 
+/// of one even and one odd number.
+///
+/// Return the minimum number of adjacent swaps required to transform nums 
+/// into any valid arrangement.
+///
+/// If it is impossible to rearrange nums such that no two adjacent elements 
+/// have the same parity, return -1.
+/// 
+/// Example 1:
+/// Input: nums = [2,4,6,5,7]
+/// Output: 3
+/// Explanation:
+/// Swapping 5 and 6, the array becomes [2,4,5,6,7]
+/// Swapping 5 and 4, the array becomes [2,5,4,6,7]
+/// Swapping 6 and 7, the array becomes [2,5,4,7,6]. The array is now a valid 
+/// arrangement. Thus, the answer is 3.
+///
+/// Example 2:
+/// Input: nums = [2,4,5,7]
+/// Output: 1
+/// Explanation:
+/// By swapping 4 and 5, the array becomes [2,5,4,7], which is a valid 
+/// arrangement. Thus, the answer is 1.
+///
+/// Example 3:
+/// Input: nums = [1,2,3]
+/// Output: 0
+/// Explanation:
+/// The array is already a valid arrangement. Thus, no operations are needed.
+///
+/// Example 4:
+/// Input: nums = [4,5,6,8]
+/// Output: -1
+/// Explanation:
+/// No valid arrangement is possible. Thus, the answer is -1.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. All elements in nums are distinct.
+/// </summary>
+int LeetCodeArray::minSwapsIV(vector<int>& nums)
+{
+    vector<vector<int>>dp(2);
+    int even = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] % 2 == 0) even++;
+        else even--;
+    }
+    if (abs(even) >  1) return -1;
+    int result = INT_MAX;
+    int count = 0;
+    for (int k = 0; k < 2; k++)
+    {
+        if (k == 0 && even == -1) continue;
+        if (k == 1 && even == 1) continue;
+        int s = k;
+        vector<int> arr = nums;
+        vector<int> p(2);
+        count = 0;
+        for (size_t i = 0; i < arr.size(); i++)
+        {
+            if (arr[i] % 2 != s)
+            {
+                while (arr[p[s]] % 2 != s) p[s]++;
+                count += p[s] - i;
+                swap(arr[i], arr[p[s]]);
+                p[s]++;
+            }
+            for (int j = 0; j < 2; j++)
+            {
+                while (p[j] <= (int)i) p[j]++;
+            }
+            s = 1 - s;
+        }
+        result = min(result, count);
     }
     return result;
 }

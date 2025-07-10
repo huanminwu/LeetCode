@@ -6087,7 +6087,6 @@ int LeetCodeDFS::maximumScore(vector<int>& nums, vector<int>& multipliers)
 /// </summary>
 int LeetCodeDFS::maxScore(vector<int>& nums, int bitmask, vector<int>& cache)
 {
-    LeetCodeMath lm;
     int bit = 1;
     int count = 0;
     for (size_t i = 0; i < nums.size(); i++)
@@ -6106,7 +6105,7 @@ int LeetCodeDFS::maxScore(vector<int>& nums, int bitmask, vector<int>& cache)
             if ((bitmask & (1 << j)) != 0) continue;
             bitmask |= (1 << j);
             cache[bitmask] = maxScore(nums, bitmask, cache);
-            result = max(result, cache[bitmask] + (count / 2 + 1) * (int)lm.gcd(nums[i], nums[j]));
+            result = max(result, cache[bitmask] + (count / 2 + 1) * (int)gcd(nums[i], nums[j]));
             bitmask ^= (1 << j);
         }
         bitmask ^= (1 << i);
@@ -6245,12 +6244,11 @@ vector<int> LeetCodeDFS::getCoprimes(vector<int>& nums, vector<vector<int>>& edg
     unordered_map<int, unordered_set<int>> tree;
     unordered_set<int> num_set(nums.begin(), nums.end());
     unordered_map<int, vector<int>> primes;
-    LeetCodeMath lm;
     for (int s1 : num_set)
     {
         for (int s2 : num_set)
         {
-            if (lm.gcd(s1, s2) == 1) primes[s1].push_back(s2);
+            if (gcd(s1, s2) == 1) primes[s1].push_back(s2);
         }
     }
     for (size_t i = 0; i < edges.size(); i++)

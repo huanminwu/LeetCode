@@ -17305,6 +17305,163 @@ public:
     /// 2. 0 <= nums[i] <= 10^5
     /// </summary>
     int specialTriplets(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3597. Partition String 
+    ///
+    /// Medium
+    /// 
+    /// Given a string s, partition it into unique segments according to the 
+    /// following procedure:
+    ///
+    /// Start building a segment beginning at index 0.
+    /// Continue extending the current segment character by character until the 
+    /// current segment has not been seen before.
+    /// Once the segment is unique, add it to your list of segments, mark it as 
+    /// seen, and begin a new segment from the next index.
+    /// Repeat until you reach the end of s.
+    /// Return an array of strings segments, where segments[i] is the ith segment 
+    /// created.
+    ///
+    /// Example 1:
+    /// Input: s = "abbccccd"
+    /// Output: ["a","b","bc","c","cc","d"]
+    /// Explanation:
+    /// Index   Segment After Adding    Seen Segments   Current Segment Seen 
+    /// Before? New Segment Updated Seen Segments
+    /// 0   "a" []  No  ""  ["a"]
+    /// 1   "b" ["a"]   No  ""  ["a", "b"]
+    /// 2   "b" ["a", "b"]  Yes "b" ["a", "b"]
+    /// 3   "bc"    ["a", "b"]  No  ""  ["a", "b", "bc"]
+    /// 4   "c" ["a", "b", "bc"]    No  ""  ["a", "b", "bc", "c"]
+    /// 5   "c" ["a", "b", "bc", "c"]   Yes "c" ["a", "b", "bc", "c"]
+    /// 6   "cc"    ["a", "b", "bc", "c"]   No  ""  ["a", "b", "bc", "c", "cc"]
+    /// 7   "d" ["a", "b", "bc", "c", "cc"] No  ""  ["a", "b", "bc", "c", "cc", 
+    ///          "d"]
+    /// Hence, the final output is ["a", "b", "bc", "c", "cc", "d"].
+    ///
+    /// Example 2:
+    /// Input: s = "aaaa"
+    /// Output: ["a","aa"]
+    /// Explanation:
+    /// Index   Segment After Adding    Seen Segments   Current Segment Seen 
+    /// Before?    New Segment Updated Seen Segments
+    /// 0   "a" []  No  ""  ["a"]
+    /// 1   "a" ["a"]   Yes "a" ["a"]
+    /// 2   "aa"    ["a"]   No  ""  ["a", "aa"]
+    /// 3   "a" ["a", "aa"] Yes "a" ["a", "aa"]
+    /// Hence, the final output is ["a", "aa"].
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s contains only lowercase English letters.
+    /// </summary>
+    vector<string> partitionStringII(string s);
+
+    /// <summary>
+    /// Leet Code 3598. Longest Common Prefix Between Adjacent Strings After 
+    ///                 Removals
+    /// Medium
+    ///
+    /// You are given an array of strings words. For each index i in the range 
+    /// [0, words.length - 1], perform the following steps:
+    ///
+    /// Remove the element at index i from the words array.
+    /// Compute the length of the longest common prefix among all adjacent pairs 
+    /// in the modified array.
+    /// Return an array answer, where answer[i] is the length of the longest 
+    /// common prefix between the adjacent pairs after removing the element at 
+    /// index i. If no adjacent pairs remain or if none share a common prefix, 
+    /// then answer[i] should be 0.
+    /// 
+    /// Example 1:
+    /// Input: words = ["jump","run","run","jump","run"]
+    /// Output: [3,0,0,3,3]
+    /// Explanation:
+    /// Removing index 0:
+    /// words becomes ["run", "run", "jump", "run"]
+    /// Longest adjacent pair is ["run", "run"] having a common prefix "run" 
+    /// (length 3)
+    /// Removing index 1:
+    /// words becomes ["jump", "run", "jump", "run"]
+    /// No adjacent pairs share a common prefix (length 0)
+    /// Removing index 2:
+    /// words becomes ["jump", "run", "jump", "run"]
+    /// No adjacent pairs share a common prefix (length 0)
+    /// Removing index 3:
+    /// words becomes ["jump", "run", "run", "run"]
+    /// Longest adjacent pair is ["run", "run"] having a common prefix "run" 
+    /// (length 3)
+    /// Removing index 4:
+    /// words becomes ["jump", "run", "run", "jump"]
+    /// Longest adjacent pair is ["run", "run"] having a common prefix "run" 
+    /// (length 3)
+    ///
+    /// Example 2:
+    /// Input: words = ["dog","racer","car"]
+    /// Output: [0,0,0]
+    /// Explanation:
+    /// Removing any index results in an answer of 0.
+    ///  
+    /// Constraints:
+    /// 1. 1 <= words.length <= 10^5
+    /// 2. 1 <= words[i].length <= 10^4
+    /// 3. words[i] consists of lowercase English letters.
+    /// 4. The sum of words[i].length is smaller than or equal 10^5.
+    /// </summary>
+    vector<int> longestCommonPrefixII(vector<string>& words);
+
+    /// <summary>
+    /// Leet Code 3606. Coupon Code Validator
+    ///
+    /// Easy
+    ///
+    /// You are given three arrays of length n that describe the properties of n 
+    /// coupons: code, businessLine, and isActive. The ith coupon has:
+    ///
+    /// code[i]: a string representing the coupon identifier.
+    /// businessLine[i]: a string denoting the business category of the coupon.
+    /// isActive[i]: a boolean indicating whether the coupon is currently active.
+    /// A coupon is considered valid if all of the following conditions hold:
+    ///
+    /// code[i] is non-empty and consists only of alphanumeric characters 
+    /// (a-z, A-Z, 0-9) and underscores (_).
+    /// businessLine[i] is one of the following four categories: "electronics", 
+    /// "grocery", "pharmacy", "restaurant".
+    /// isActive[i] is true.
+    /// Return an array of the codes of all valid coupons, sorted first by their 
+    /// businessLine in the order: "electronics", "grocery", "pharmacy", 
+    /// "restaurant", and then by code in lexicographical (ascending) order within 
+    /// each category.
+    /// 
+    /// Example 1:
+    /// Input: code = ["SAVE20","","PHARMA5","SAVE@20"], businessLine = 
+    /// ["restaurant","grocery","pharmacy","restaurant"], 
+    /// isActive = [true,true,true,true]
+    /// Output: ["PHARMA5","SAVE20"]
+    /// Explanation:
+    /// First coupon is valid.
+    /// Second coupon has empty code (invalid).
+    /// Third coupon is valid.
+    /// Fourth coupon has special character @ (invalid).
+    ///
+    /// Example 2:
+    /// Input: code = ["GROCERY15","ELECTRONICS_50","DISCOUNT10"], businessLine = 
+    /// ["grocery","electronics","invalid"], isActive = [false,true,true]
+    /// Output: ["ELECTRONICS_50"]
+    /// Explanation:
+    /// First coupon is inactive (invalid).
+    /// Second coupon is valid.
+    /// Third coupon has invalid business line (invalid).
+    /// 
+    /// Constraints:
+    /// 1. n == code.length == businessLine.length == isActive.length
+    /// 2. 1 <= n <= 100
+    /// 3. 0 <= code[i].length, businessLine[i].length <= 100
+    /// 4. code[i] and businessLine[i] consist of printable ASCII characters.
+    /// 5. isActive[i] is either true or false.
+    /// </summary>
+    vector<string> validateCoupons(vector<string>& code, vector<string>& businessLine, vector<bool>& isActive);
 #pragma endregion
 };
 

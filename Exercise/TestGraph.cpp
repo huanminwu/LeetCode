@@ -6390,8 +6390,47 @@ void TestLeetCode3568(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3600(void)
+{
+    Logger::WriteMessage("Test Leet Code 3600");
+    LeetCodeGraph leetCode;
+    int n = 3;
+    vector<vector<int>> edges = { {0, 1, 2, 1},{1, 2, 3, 0} };
+    int k = 1;
+    int result = leetCode.maxStability(n, edges, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    edges = { {0, 1, 4, 0},{1, 2, 3, 0},{0, 2, 1, 0} };
+    k = 2;
+    result = leetCode.maxStability(n, edges, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    edges = { {0, 1, 1, 1},{1, 2, 1, 1},{2, 0, 1, 1} };
+    k = 0;
+    result = leetCode.maxStability(n, edges, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4;
+    edges = { {1, 2, 34626, 0},{0, 3, 67317, 0},{2, 3, 29722, 0},{0, 2, 51038, 1},{1, 3, 24723, 0} };
+    k = 2;
+    result = leetCode.maxStability(n, edges, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3600();
     TestLeetCode3568();
     TestLeetCode3543();
     TestLeetCode3552();

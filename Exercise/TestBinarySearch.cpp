@@ -1617,8 +1617,39 @@ void TestLeetCode3520(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3605(void)
+{
+    Logger::WriteMessage("Test Leet Code 3605");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 3,5,10 };
+    int maxC = 1;
+    int  result = leetCode.minStable(nums, maxC);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxC = " + to_string(maxC) + "; result = " + to_string(result));
+
+    nums = { 2,6,8 };
+    maxC = 2;
+    result = leetCode.minStable(nums, maxC);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxC = " + to_string(maxC) + "; result = " + to_string(result));
+
+    nums = { 2, 4, 9, 6 };
+    maxC = 1;
+    result = leetCode.minStable(nums, maxC);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxC = " + to_string(maxC) + "; result = " + to_string(result));
+
+    nums = { 3, 3, 3, 3, 3, 3 };
+    maxC = 3;
+    result = leetCode.minStable(nums, maxC);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxC = " + to_string(maxC) + "; result = " + to_string(result));
+
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode3605();
     TestLeetCode3520();
     TestLeetCode3506();
     TestLeetCode3449();

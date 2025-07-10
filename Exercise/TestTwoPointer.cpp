@@ -973,8 +973,26 @@ void TestLeetCode3329(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3589(void)
+{
+    Logger::WriteMessage("Test Leet Code 3589");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    int k = 1;
+    int result = leetCode.primeSubarray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 2,3,5,7 };
+    k = 3;
+    result = leetCode.primeSubarray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode3589();
     TestLeetCode3329();
     TestLeetCode3325();
     TestLeetCode3297();

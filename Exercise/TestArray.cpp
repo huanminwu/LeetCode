@@ -11909,8 +11909,39 @@ void TestLeetCode3584(void)
     Logger::WriteMessage("m = " + to_string(m) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3587(void)
+{
+    Logger::WriteMessage("Test Leet Code 3587");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2,4,6,5,7 };
+    int result = leetCode.minSwapsIV(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,4,5,7 };
+    result = leetCode.minSwapsIV(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    result = leetCode.minSwapsIV(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+    
+    nums = { 4,5,6,8 };
+    result = leetCode.minSwapsIV(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 16, 540, 674, 760, 358, 463, 5, 445, 549 };
+    result = leetCode.minSwapsIV(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3587();
     TestLeetCode3584();
     TestLeetCode3583();
     TestLeetCode3576();

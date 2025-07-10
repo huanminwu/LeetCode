@@ -8124,8 +8124,69 @@ void TestLeetCode3582(void)
     Logger::WriteMessage("caption = " + caption + "; result = " + result);
 }
 
+void TestLeetCode3597(void)
+{
+    Logger::WriteMessage("Test Leet Code 3597");
+    LeetCodeString leetCode;
+    string s = "abbccccd";
+    vector<string> result = leetCode.partitionStringII(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+ 
+    s = "aaaa";
+    result = leetCode.partitionStringII(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3598(void)
+{
+    Logger::WriteMessage("Test Leet Code 3598");
+    LeetCodeString leetCode;
+    vector<string> words = { "jump", "run", "run", "jump", "run" };
+    vector<int> result = leetCode.longestCommonPrefixII(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+
+    words = { "dog","racer","car", "race"};
+    result = leetCode.longestCommonPrefixII(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+
+    words = { "cdbff" };
+    result = leetCode.longestCommonPrefixII(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3606(void)
+{
+    Logger::WriteMessage("Test Leet Code 3606");
+    LeetCodeString leetCode;
+    vector<string> code = { "SAVE20", "", "PHARMA5", "SAVE@20" };
+    vector<string> businessLine = { "restaurant", "grocery", "pharmacy", "restaurant" };
+    vector<bool> isActive = { true, true, true, true };
+    vector<string> result = leetCode.validateCoupons(code, businessLine, isActive);
+    Logger::WriteMessage(code);
+    Logger::WriteMessage(businessLine);
+    Logger::WriteMessage(isActive);
+    Logger::WriteMessage(result);
+
+    code = { "GROCERY15","ELECTRONICS_50","DISCOUNT10" };
+    businessLine = { "grocery","electronics","invalid" };
+    isActive = { false,true,true };
+    result = leetCode.validateCoupons(code, businessLine, isActive);
+    Logger::WriteMessage(code);
+    Logger::WriteMessage(businessLine);
+    Logger::WriteMessage(isActive);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3606();
+    TestLeetCode3598();
+    TestLeetCode3597();
     TestLeetCode3582();
     TestLeetCode3581();
     TestLeetCode3579();

@@ -21560,5 +21560,150 @@ long long LeetCodeDP::maximumProfit(vector<int>& prices, int k)
     return result;
 }
 
+/// <summary>
+/// Leet Code 3592. Inverse Coin Change 
+///
+/// Medium
+///
+/// You are given a 1-indexed integer array numWays, where numWays[i] 
+/// represents the number of ways to select a total amount i using an 
+/// infinite supply of some fixed coin denominations. Each denomination 
+/// is a positive integer with value at most numWays.length.
+///
+/// However, the exact coin denominations have been lost. Your task is 
+/// to recover the set of denominations that could have resulted in the 
+/// given numWays array.
+///
+/// Return a sorted array containing unique integers which represents 
+/// this set of denominations.
+///
+/// If no such set exists, return an empty array.
+/// 
+/// Example 1:
+/// Input: numWays = [0,1,0,2,0,3,0,4,0,5]
+/// Output: [2,4,6]
+///
+/// Explanation:
+/// Amount  Number of ways  Explanation
+/// 1   0   There is no way to select coins with total value 1.
+/// 2   1   The only way is [2].
+/// 3   0   There is no way to select coins with total value 3.
+/// 4   2   The ways are [2, 2] and [4].
+/// 5   0   There is no way to select coins with total value 5.
+/// 6   3   The ways are [2, 2, 2], [2, 4], and [6].
+/// 7   0   There is no way to select coins with total value 7.
+/// 8   4   The ways are [2, 2, 2, 2], [2, 2, 4], [2, 6], and [4, 4].
+/// 9   0   There is no way to select coins with total value 9.
+/// 10  5   The ways are [2, 2, 2, 2, 2], [2, 2, 2, 4], [2, 4, 4], [2, 2, 6], and [4, 6].
+///
+/// Example 2:
+/// Input: numWays = [1,2,2,3,4]
+/// Output: [1,2,5]
+/// Explanation:
+///
+/// Amount  Number of ways  Explanation
+/// 1   1   The only way is [1].
+/// 2   2   The ways are [1, 1] and [2].
+/// 3   2   The ways are [1, 1, 1] and [1, 2].
+/// 4   3   The ways are [1, 1, 1, 1], [1, 1, 2], and [2, 2].
+/// 5   4   The ways are [1, 1, 1, 1, 1], [1, 1, 1, 2], [1, 2, 2], and [5].
+///
+/// Example 3:
+/// Input: numWays = [1,2,3,4,15]
+/// Output: []
+/// Explanation:
+/// No set of denomination satisfies this array.
+/// 
+/// Constraints:
+/// 1. 1 <= numWays.length <= 100
+/// 2. 0 <= numWays[i] <= 2 * 10^8
+/// </summary>
+vector<int> LeetCodeDP::findCoins(vector<int>& numWays)
+{
+    vector<int> result;
+    vector<int> dp(numWays.size());
+    for (size_t i = 0; i < numWays.size(); i++)
+    {
+        if (numWays[i] != dp[i] &&  numWays[i] != dp[i] + 1)
+        {
+            return vector<int>();
+        }
+        if (numWays[i] == dp[i] + 1)
+        {
+            dp[i]++;
+            result.push_back(i + 1);
+            for (size_t j = 0; j + i + 1< numWays.size(); j++)
+            {
+                dp[j + i + 1] += dp[j];
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3599. Partition Array to Minimize XOR
+///
+/// Medium
+/// You are given an integer array nums and an integer k.
+///
+/// Your task is to partition nums into k non-empty subarrays. For each 
+/// subarray, compute the bitwise XOR of all its elements.
+///
+/// Return the minimum possible value of the maximum XOR among these k 
+/// subarrays.
+///
+/// Example 1:
+/// Input: nums = [1,2,3], k = 2
+/// Output: 1
+/// Explanation:
+/// The optimal partition is [1] and [2, 3].
+/// XOR of the first subarray is 1.
+/// XOR of the second subarray is 2 XOR 3 = 1.
+/// The maximum XOR among the subarrays is 1, which is the minimum possible.
+///
+/// Example 2:
+/// Input: nums = [2,3,3,2], k = 3
+/// Output: 2
+/// Explanation:
+/// The optimal partition is [2], [3, 3], and [2].
+/// XOR of the first subarray is 2.
+/// XOR of the second subarray is 3 XOR 3 = 0.
+/// XOR of the third subarray is 2.
+/// The maximum XOR among the subarrays is 2, which is the minimum possible.
+///
+/// Example 3:
+/// Input: nums = [1,1,2,3,1], k = 2
+/// Output: 0
+/// Explanation:
+/// The optimal partition is [1, 1] and [2, 3, 1].
+/// XOR of the first subarray is 1 XOR 1 = 0.
+/// XOR of the second subarray is 2 XOR 3 XOR 1 = 0.
+/// The maximum XOR among the subarrays is 0, which is the minimum possible.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 250
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= k <= n
+/// </summary>
+int LeetCodeDP::minXor(vector<int>& nums, int k)
+{
+    int n = nums.size();
+    vector<vector<int>> dp(n, vector<int>(k, INT_MAX));
+    for (int i = 0; i < n; i++)
+    {
+        if (i == 0) dp[i][0] = nums[i];
+        else dp[i][0] = dp[i - 1][0] ^ nums[i];
+        for (int j = 0; j < i; j++)
+        {
+            for (int p = 0; p <= j && p < k - 1; p++)
+            {
+                int val = max(dp[j][p], dp[i][0] ^ dp[j][0]);
+                dp[i][p + 1] = min(dp[i][p + 1], val);
+            }
+        }
+    }
+    return dp[n - 1][k - 1];
+}
 #pragma endregion
 

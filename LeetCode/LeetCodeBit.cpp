@@ -5160,4 +5160,109 @@ int LeetCodeBit::uniqueXorTripletsII(vector<int>& nums)
     return result.size();
 }
 
+/// <summary>
+/// Leet Code 3595. Once Twice
+///
+/// Medium
+///
+/// You are given an integer array nums. In this array:
+///
+/// Exactly one element appears once.
+///
+/// Exactly one element appears twice.
+///
+/// All other elements appear exactly three times.
+///
+/// Return an integer array of length 2, where the first element is the one 
+/// that appears once, and the second is the one that appears twice.
+///
+/// Your solution must run in O(n) time and O(1) space.
+/// 
+/// Example 1:
+/// Input: nums = [2,2,3,2,5,5,5,7,7]
+/// Output: [3,7]
+/// Explanation:
+/// The element 3 appears once, and the element 7 appears twice. The remaining 
+/// elements each appear three times.
+///
+/// Example 2:
+/// Input: nums = [4,4,6,4,9,9,9,6,8]
+/// Output: [8,6]
+/// Explanation:
+/// The element 8 appears once, and the element 6 appears twice. The remaining 
+/// elements each appear three times.
+///
+/// Constraints:
+/// 1. 3 <= nums.length <= 10^5
+/// 2. -231 <= nums[i] <= 231 - 1
+/// 3. nums.length is a multiple of 3.
+/// 4. Exactly one element appears once, one element appears twice, and all 
+///    other elements appear three times.
+/// </summary>
+vector<int> LeetCodeBit::onceTwice(vector<int>& nums)
+{
+    vector<int> dp(32);
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (int j = 0; j < 32; j++)
+        {
+            if (nums[i] & (1 << j))
+            {
+                dp[j]++;
+            }
+        }
+    }
+    int one = 0, two = 0;
+    for (size_t i = 0; i < 32; i++)
+    {
+        if (dp[i] % 3 == 1)
+        {
+            one |= (1 << i);
+        }
+        else if (dp[i] % 3 == 2)
+        {
+            two |= (1 << i);
+        }
+
+    }
+    dp = vector<int>(32);
+    int target_num = 0, target_count = 0;
+    if (one != 0)
+    {
+        target_num = one;
+        target_count = 1;
+    }
+    else
+    {
+        target_num = two;
+        target_count = 2;
+    }
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if ((target_num & nums[i]) != target_num) continue;
+        for (int j = 0; j < 32; j++)
+        {
+            if (nums[i] & (1 << j))
+            {
+                dp[j]++;
+            }
+        }
+    }
+    for (size_t i = 0; i < 32; i++)
+    {
+        if (dp[i] % 3 == target_count)
+        {
+            if ((target_num & (1 << i)) == 0)
+            {
+                one |= 1 << i;
+                two |= 1 << i;
+            }
+        }
+    }
+    vector<int> result(2);
+    result[0] = one;
+    result[1] = two;
+    return result;
+}
+
 #pragma endregion

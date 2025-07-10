@@ -159,6 +159,23 @@ static int bitCount(int bit_mask)
     return result;
 }
 
+/// <summary>
+/// Leet code #866. Prime Palindrome
+/// </summary>
+static bool isPrime(long long N)
+{
+    if (N == 1) return false;
+    else if (N == 2) return true;
+    else if (N % 2 == 0) return false;
+    else
+    {
+        for (long long i = 3; i <= sqrt(N); i += 2)
+        {
+            if (N % i == 0) return false;
+        }
+        return true;
+    }
+}
 
 #pragma region Design
 struct BinaryIndexTree

@@ -6076,11 +6076,55 @@ void TestLeetCode3573(void)
     result = leetCode.maximumProfit(prices, k);
     Logger::WriteMessage(prices);
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
 
+void TestLeetCode3592(void)
+{
+    Logger::WriteMessage("Test Leet Code 3592");
+    LeetCodeDP leetCode;
+    vector<int> numWays = { 0, 1, 0, 2, 0, 3, 0, 4, 0, 5 };
+    vector<int> result = leetCode.findCoins(numWays);
+    Logger::WriteMessage(numWays);
+    Logger::WriteMessage(result);
+
+    numWays = { 1,2,2,3,4 };
+    result = leetCode.findCoins(numWays);
+    Logger::WriteMessage(numWays);
+    Logger::WriteMessage(result);
+
+    numWays = { 1,2,3,4,15 };
+    result = leetCode.findCoins(numWays);
+    Logger::WriteMessage(numWays);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3599(void)
+{
+    Logger::WriteMessage("Test Leet Code 3599");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    int k = 2;
+    int result = leetCode.minXor(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 2,3,3,2 };
+    k = 3;
+    result = leetCode.minXor(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,1,2,3,1 };
+    k = 2;
+    result = leetCode.minXor(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3599();
+    TestLeetCode3592();
     TestLeetCode3573();
     TestLeetCode3578();
     TestLeetCode3557();
