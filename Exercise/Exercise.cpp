@@ -7,6 +7,7 @@
 #include <conio.h>
 #include <map>
 #include <iostream>
+#include <numeric>
 #include "..\LeetCode\LeetCode.h"
 #include "..\LeetCode\LeetCodeDesign.h"
 #include "..\LeetCode\LeetCodeDP.h"
@@ -43,14 +44,14 @@
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeBinarySearch();
     TestLeetCodeGraph();
-    TestLeetCodeMath();
     TestLeetCodeString();
+    TestLeetCodeArray();
     TestLeetCodeDP();
+    TestLeetCodeBinarySearch();
+    TestLeetCodeMath();
     TestLeetCodeTree();
     TestLeetCodeTwoPointer();
-    TestLeetCodeArray();
     TestLeetCodeBit();
     TestLeetCodeDFS();
     TestLeetCodeSort();

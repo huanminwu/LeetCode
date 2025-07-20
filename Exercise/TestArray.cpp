@@ -11939,8 +11939,24 @@ void TestLeetCode3587(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3616(void)
+{
+    Logger::WriteMessage("Test Leet Code 3616");
+    LeetCodeArray leetCode;
+    vector<int> ranks = { 4, 1, 2 };
+    int result = leetCode.totalReplacements(ranks);
+    Logger::WriteMessage(ranks);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    ranks = { 2,2,3 };
+    result = leetCode.totalReplacements(ranks);
+    Logger::WriteMessage(ranks);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3616();
     TestLeetCode3587();
     TestLeetCode3584();
     TestLeetCode3583();

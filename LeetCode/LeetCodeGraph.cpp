@@ -19,26 +19,12 @@
 
 #pragma region Graph
 
-/// <summary>
-/// </summary>
 pair<int, int> LeetCodeGraph::unionFind(vector<int>& parents, int a, int b)
 {
     int pa = a, pb = b;
-    while (parents[pa] != pa) pa = parents[pa];
-    while (parents[a] != pa)
-    {
-        int a1 = parents[a];
-        parents[a] = pa;
-        a = a1;
-    }
-    while (parents[pb] != pb) pb = parents[pb];
-    while (parents[b] != pb)
-    {
-        int b1 = parents[b];
-        parents[b] = pb;
-        b = b1;
-    }
-    return make_pair(pa, pb);
+    while (parents[pa] != parents[parents[pa]]) parents[pa] = parents[parents[pa]];
+    while (parents[pb] != parents[parents[pb]]) parents[pb] = parents[parents[pb]];
+    return make_pair(parents[pa], parents[pb]);
 }
 
 /// <summary>
@@ -22098,5 +22084,520 @@ int LeetCodeGraph::maxStability(int n, vector<vector<int>>& edges, int k)
         optional_weights.pop();
     }
     return result;
+}
+
+/// <summary>
+/// Leet Code 3604. Minimum Time to Reach Destination in Directed Graph
+///
+/// Medium
+/// 
+/// You are given an integer n and a directed graph with n nodes labeled 
+/// from 0 to n - 1. This is represented by a 2D array edges, where 
+/// edges[i] = [ui, vi, starti, endi] indicates an edge from node ui to vi 
+/// that can only be used at any integer time t such that 
+/// starti <= t <= endi.
+///
+/// You start at node 0 at time 0.
+///
+/// In one unit of time, you can either:
+/// Wait at your current node without moving, or
+/// Travel along an outgoing edge from your current node if the current 
+/// time t satisfies starti <= t <= endi.
+/// Return the minimum time required to reach node n - 1. If it is impossible, 
+/// return -1.
+///
+/// Example 1:
+/// Input: n = 3, edges = [[0,1,0,1],[1,2,2,5]]
+/// Output: 3
+/// Explanation:
+/// 
+/// The optimal path is:
+///
+/// At time t = 0, take the edge (0 → 1) which is available from 0 to 1. You 
+/// arrive at node 1 at time t = 1, then wait until t = 2.
+/// At time t = 2, take the edge (1 → 2) which is available from 2 to 5. You 
+/// arrive at node 2 at time 3.
+/// Hence, the minimum time to reach node 2 is 3.
+//
+/// Example 2:
+/// Input: n = 4, edges = [[0,1,0,3],[1,3,7,8],[0,2,1,5],[2,3,4,7]]
+/// Output: 5
+/// Explanation:
+/// 
+/// The optimal path is:
+/// Wait at node 0 until time t = 1, then take the edge (0 → 2) which is 
+/// available from 1 to 5. You arrive at node 2 at t = 2.
+/// Wait at node 2 until time t = 4, then take the edge (2 → 3) which is 
+/// available from 4 to 7. You arrive at node 3 at t = 5.
+/// Hence, the minimum time to reach node 3 is 5.
+///
+/// Example 3:
+/// Input: n = 3, edges = [[1,0,1,3],[1,2,3,5]]
+/// Output: -1
+///
+/// Explanation:
+/// Since there is no outgoing edge from node 0, it is impossible to reach 
+/// node 2. Hence, the output is -1.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// 2. 0 <= edges.length <= 10^5
+/// 3. edges[i] == [ui, vi, starti, endi]
+/// 4. 0 <= ui, vi <= n - 1
+/// 5. ui != vi
+/// 6. 0 <= starti <= endi <= 10^9
+/// </summary>
+int LeetCodeGraph::minTime(int n, vector<vector<int>>& edges)
+{
+    vector<int> node_time(n, INT_MAX);
+    set<tuple<int, int, int>> pq;
+    pq.insert({ -1, 0, 0 });
+    vector<vector<tuple<int, int, int>>> neighbors(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back({ edges[i][1], edges[i][2], edges[i][3] });
+    }
+    int time = 0;
+    while (!pq.empty())
+    {
+        auto [start, node, end] = *pq.begin();
+        pq.erase(pq.begin());
+        time = max(time, start + 1);
+        if (node_time[node] < start) continue;
+        if (node == n - 1) return time;
+        for (size_t i = 0; i < neighbors[node].size(); i++)
+        {
+            auto [next, start, end] = neighbors[node][i];
+            if (end < time) continue;
+            start = max(start, time);
+            if (node_time[next] > start && end >= start)
+            {
+                node_time[next] = start;
+                pq.insert({ start, next, end });
+            }
+        }
+    }
+    return -1;
+}
+
+/// <summary>
+/// Leet Code 3607. Power Grid Maintenance
+///
+/// Medium
+///
+/// You are given an integer c representing c power stations, each with a 
+/// unique identifier id from 1 to c (1‑based indexing).
+///
+/// These stations are interconnected via n bidirectional cables, represented 
+/// by a 2D array connections, where each element connections[i] = [ui, vi] 
+/// indicates a connection between station ui and station vi. Stations that 
+/// are directly or indirectly connected form a power grid.
+///
+/// Initially, all stations are online (operational).
+///
+/// You are also given a 2D array queries, where each query is one of the 
+/// following two types:
+///
+/// [1, x]: A maintenance check is requested for station x. If station x is 
+/// online, it resolves the check by itself. If station x is offline, the 
+/// check is resolved by the operational station with the smallest id in the 
+/// same power grid as x. If no operational station exists in that grid, 
+/// return -1.
+///
+/// [2, x]: Station x goes offline (i.e., it becomes non-operational).
+///
+/// Return an array of integers representing the results of each query of 
+/// type [1, x] in the order they appear.
+///
+/// Note: The power grid preserves its structure; an offline (non‑operational) 
+/// node remains part of its grid and taking it offline does not alter 
+/// connectivity.
+/// 
+/// Example 1:
+/// Input: c = 5, connections = [[1,2],[2,3],[3,4],[4,5]], 
+/// queries = [[1,3],[2,1],[1,1],[2,2],[1,2]]
+///
+/// Output: [3,2,3]
+/// Explanation:
+/// Initially, all stations {1, 2, 3, 4, 5} are online and form a single power 
+/// grid.
+/// Query [1,3]: Station 3 is online, so the maintenance check is resolved by 
+/// station 3.
+/// Query [2,1]: Station 1 goes offline. The remaining online stations are 
+/// {2, 3, 4, 5}.
+/// Query [1,1]: Station 1 is offline, so the check is resolved by the 
+/// operational station with the smallest id among {2, 3, 4, 5}, which is 
+/// station 2.
+/// Query [2,2]: Station 2 goes offline. The remaining online stations are 
+/// {3, 4, 5}.
+/// Query [1,2]: Station 2 is offline, so the check is resolved by the 
+/// operational station with the smallest id among {3, 4, 5}, which is 
+/// station 3.
+///
+/// Example 2:
+/// Input: c = 3, connections = [], queries = [[1,1],[2,1],[1,1]]
+/// Output: [1,-1]
+/// Explanation:
+/// There are no connections, so each station is its own isolated grid.
+/// Query [1,1]: Station 1 is online in its isolated grid, so the maintenance 
+/// check is resolved by station 1.
+/// Query [2,1]: Station 1 goes offline.
+/// Query [1,1]: Station 1 is offline and there are no other stations in its 
+/// grid, so the result is -1.
+/// 
+/// Constraints:
+/// 1. 1 <= c <= 10^5
+/// 2. 0 <= n == connections.length <= min(105, c * (c - 1) / 2)
+/// 3. connections[i].length == 2
+/// 4. 1 <= ui, vi <= c
+/// 5. ui != vi
+/// 6. 1 <= queries.length <= 2 * 10^5
+/// 7. queries[i].length == 2
+/// 8. queries[i][0] is either 1 or 2.
+/// 9. 1 <= queries[i][1] <= c
+/// </summary>
+vector<int> LeetCodeGraph::processQueries(int c, vector<vector<int>>& connections, vector<vector<int>>& queries)
+{
+    vector<int> parents(c + 1);
+    vector<vector<int>> neighbors(c + 1);
+    unordered_map<int, set<int>> groups;
+    queue<int> queue;
+    for (size_t i = 0; i < connections.size(); i++)
+    {
+        neighbors[connections[i][0]].push_back(connections[i][1]);
+        neighbors[connections[i][1]].push_back(connections[i][0]);
+    }
+    for (int i = 1; i <= c; i++)
+    {
+        if (parents[i] != 0) continue;
+        int g = i;
+        queue.push(i);
+        parents[i] = g;
+        while (!queue.empty())
+        {
+            int p = queue.front();
+            queue.pop();
+            groups[g].insert(p);
+            for (size_t j = 0; j < neighbors[p].size(); j++)
+            {
+                int q = neighbors[p][j];
+                if (parents[q] == 0)
+                {
+                    parents[q] = g;
+                    queue.push(q);
+                }
+            }
+        }
+    }
+    vector<int> result;
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        if (queries[i][0] == 1)
+        {
+            int p = parents[queries[i][1]];
+            if (groups[p].count(queries[i][1]) > 0)
+            {
+                result.push_back(queries[i][1]);
+            }
+            else if (groups[p].empty())
+            {
+                result.push_back(-1);
+            }
+            else
+            {
+                result.push_back(*groups[p].begin());
+            }
+        }
+        else
+        {
+            int p = parents[queries[i][1]];
+            groups[p].erase(queries[i][1]);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3615. Longest Palindromic Path in Graph
+///
+/// Hard
+///
+///
+/// You are given an integer n and an undirected graph with n nodes labeled 
+/// from 0 to n - 1 and a 2D array edges, where edges[i] = [ui, vi] indicates 
+/// an edge between nodes ui and vi.
+///
+/// You are also given a string label of length n, where label[i] is the 
+/// character associated with node i.
+///
+/// You may start at any node and move to any adjacent node, visiting each 
+/// node at most once.
+///
+/// Return the maximum possible length of a palindrome that can be formed by 
+/// visiting a set of unique nodes along a valid path.
+///
+/// Example 1:
+/// Input: n = 3, edges = [[0,1],[1,2]], label = "aba"
+/// Output: 3
+/// Explanation:
+/// 
+/// The longest palindromic path is from node 0 to node 2 via node 1, 
+/// following the path 0 → 1 → 2 forming string "aba".
+/// This is a valid palindrome of length 3.
+///
+/// Example 2:
+/// Input: n = 3, edges = [[0,1],[0,2]], label = "abc"
+/// Output: 1
+/// Explanation:
+/// No path with more than one node forms a palindrome.
+/// The best option is any single node, giving a palindrome 
+/// of length 1.
+///
+/// Example 3:
+/// Input: n = 4, edges = [[0,2],[0,3],[3,1]], label = "bbac"
+/// Output: 3
+/// Explanation:
+/// The longest palindromic path is from node 0 to node 1, 
+/// following the path 0 → 3 → 1, forming string "bcb".
+/// This is a valid palindrome of length 3.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 14
+/// 2. n - 1 <= edges.length <= n * (n - 1) / 2
+/// 3. edges[i] == [ui, vi]
+/// 4. 0 <= ui, vi <= n - 1
+/// 5. ui != vi
+/// 6. label.length == n
+/// 7. label consists of lowercase English letters.
+/// 8. There are no duplicate edges.
+/// </summary>
+int LeetCodeGraph::maxLen(int n, vector<vector<int>>& edges, string label)
+{
+    vector<vector<int>> neighbors(n);
+    vector<unordered_set<int>> visited(1 << n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(edges[i][1]);
+        neighbors[edges[i][1]].push_back(edges[i][0]);
+    }
+    queue<tuple<int, int, int, int>> queue;
+    int len = 0;
+    int start = 0;
+    int end = 0;
+    int mask = 0;
+    for (int i = 0; i < n; i++)
+    {
+        len = 1;
+        start = i;
+        end = i;
+        mask = 1 << i;
+        queue.push({ len, start, end, mask });
+        visited[mask].insert(start);
+    }
+    for (int i = 0; i < n; i++)
+    {
+        for (size_t j = 0; j < neighbors[i].size(); j++)
+        {
+            if (i > neighbors[i][j]) continue;
+            if (label[i] != label[neighbors[i][j]])
+            {
+                continue;
+            }
+            len = 2;
+            start = i;
+            end = neighbors[i][j];
+            mask = (1 << i) | (1 << neighbors[i][j]);
+            queue.push({ len, start, end, mask });
+            visited[mask].insert(start * n + end);
+        }
+    }
+
+
+    int result = 0;
+    while (!queue.empty())
+    {
+        auto [len, start, end, mask] = queue.front();
+        queue.pop();
+        result = max(result, len);
+        for (size_t i = 0; i < neighbors[start].size(); i++)
+        {
+            int new_start = neighbors[start][i];
+            if ((mask & (1 << new_start)) != 0) continue;
+            for (size_t j = 0; j < neighbors[end].size(); j++)
+            {
+                int new_end = neighbors[end][j];
+                if ((mask & (1 << new_end)) != 0) continue;
+                if (new_start == new_end) continue;
+                if (label[new_start] != label[new_end]) continue;
+                int new_mask = mask | (1 << new_start) | (1 << new_end);
+                if (visited[new_mask].count(new_start * n + new_end) == 0)
+                {
+                    visited[new_mask].insert(new_start * n + new_end);
+                    queue.push({ len + 2, new_start, new_end, new_mask });
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3608. Minimum Time for K Connected Components
+///
+/// Medium
+///
+/// You are given an integer n and an undirected graph with n nodes labeled 
+/// from 0 to n - 1. This is represented by a 2D array edges, where 
+/// edges[i] = [ui, vi, timei] indicates an undirected edge between nodes ui 
+/// and vi that can be removed at timei.
+///
+/// You are also given an integer k.
+///
+/// Initially, the graph may be connected or disconnected. Your task is to 
+/// find the minimum time t such that after removing all edges with time <= t, 
+/// the graph contains at least k connected components.
+///
+/// Return the minimum time t.
+///
+/// A connected component is a subgraph of a graph in which there exists a 
+/// path between any two vertices, and no vertex of the subgraph shares an 
+/// edge with a vertex outside of the subgraph.
+///
+/// Example 1:
+/// Input: n = 2, edges = [[0,1,3]], k = 2
+/// Output: 3
+/// Explanation:
+/// 
+/// Initially, there is one connected component {0, 1}.
+/// At time = 1 or 2, the graph remains unchanged.
+/// At time = 3, edge [0, 1] is removed, resulting in k = 2 connected 
+/// components {0}, {1}. Thus, the answer is 3.
+///
+/// Example 2:
+/// Input: n = 3, edges = [[0,1,2],[1,2,4]], k = 3
+/// Output: 4
+/// Explanation:
+/// Initially, there is one connected component {0, 1, 2}.
+/// At time = 2, edge [0, 1] is removed, resulting in two 
+/// connected components {0}, {1, 2}.
+/// At time = 4, edge [1, 2] is removed, resulting in k = 3 connected 
+/// components {0}, {1}, {2}. Thus, the answer is 4.
+///
+/// Example 3:
+/// Input: n = 3, edges = [[0,2,5]], k = 2
+/// Output: 0
+/// Explanation:
+/// Since there are already k = 2 disconnected components {1}, {0, 2}, 
+/// no edge removal is needed. Thus, the answer is 0.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// 2. 0 <= edges.length <= 10^5
+/// 3. edges[i] = [ui, vi, timei]
+/// 4. 0 <= ui, vi < n
+/// 5. ui != vi
+/// 6. 1 <= timei <= 10^9
+/// 7. 1 <= k <= n
+/// 8. There are no duplicate edges.
+/// </summary>
+int LeetCodeGraph::minTime(int n, vector<vector<int>>& edges, int k)
+{
+    vector<int> parents(n);
+    for (int i = 0; i < n; i++) parents[i] = i;
+    int count = n;
+    priority_queue<tuple<int, int, int>> pq;
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        pq.push({ edges[i][2], edges[i][1], edges[i][0] });
+    }
+    int result = INT_MAX;
+    while (!pq.empty())
+    {
+        auto [t, a, b] = pq.top();
+        pq.pop();
+        result = min(result, t);
+        pair<int, int> p  = unionFind(parents, a, b);
+        if (parents[p.first] != parents[p.second])
+        {
+            count--;
+            parents[p.first] = p.second;
+            if (count < k) return result;
+        }
+    }
+    return 0;
+}
+
+/// <summary>
+/// Leet Code 3613. Minimize Maximum Component Cost
+///
+/// Medium
+///
+/// You are given an undirected connected graph with n nodes labeled 
+/// from 0 to n - 1 and a 2D integer array edges where edges[i] = [ui, vi, wi] 
+/// denotes an undirected edge between node ui and node vi with weight wi, 
+/// and an integer k.
+///
+/// You are allowed to remove any number of edges from the graph such that the 
+/// resulting graph has at most k connected components.
+///
+/// The cost of a component is defined as the maximum edge weight in that 
+/// component. If a component has no edges, its cost is 0.
+///
+/// Return the minimum possible value of the maximum cost among all 
+/// components after such removals.
+/// 
+/// Example 1:
+/// Input: n = 5, edges = [[0,1,4],[1,2,3],[1,3,2],[3,4,6]], k = 2
+/// Output: 4
+/// Explanation:
+/// 
+/// Remove the edge between nodes 3 and 4 (weight 6).
+/// The resulting components have costs of 0 and 4, so the overall maximum 
+/// cost is 4.
+///
+/// Example 2:
+/// Input: n = 4, edges = [[0,1,5],[1,2,5],[2,3,5]], k = 1
+/// Output: 5
+/// Explanation:
+/// 
+/// No edge can be removed, since allowing only one component (k = 1) 
+/// requires the graph to stay fully connected.
+/// That single component’s cost equals its largest edge weight, which is 5.
+/// Constraints:
+///
+/// 1. 1 <= n <= 5 * 10^4
+/// 2. 0 <= edges.length <= 10^5
+/// 3. edges[i].length == 3
+/// 4. 0 <= ui, vi < n
+/// 5. 1 <= wi <= 10^6
+/// 6. 1 <= k <= n
+/// 7. The input graph is connected.
+/// </summary>
+int LeetCodeGraph::minCost(int n, vector<vector<int>>& edges, int k)
+{
+    vector<int> parents(n);
+    for (int i = 0; i < n; i++) parents[i] = i;
+    int count = n;
+    priority_queue<tuple<int, int, int>> pq;
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        pq.push({ -edges[i][2], edges[i][1], edges[i][0] });
+    }
+    int result = 0;
+    if (count <= k) return result;
+    while (!pq.empty())
+    {
+        auto [t, a, b] = pq.top();
+        pq.pop();
+        pair<int, int> p = unionFind(parents, a, b);
+        if (parents[p.first] != parents[p.second])
+        {
+            count--;
+            parents[p.first] = p.second;
+        }
+        result = max(result, -t);
+        if (count <= k) return result;
+    }
+    return -1;
 }
 #pragma endregion

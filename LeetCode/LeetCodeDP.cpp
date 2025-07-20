@@ -21705,5 +21705,169 @@ int LeetCodeDP::minXor(vector<int>& nums, int k)
     }
     return dp[n - 1][k - 1];
 }
+
+/// <summary>
+/// Leet Code 3610. Minimum Number of Primes to Sum to Target
+///
+/// Medium
+///
+/// You are given two integers n and m.
+/// 
+/// You have to select a multiset of prime numbers from the first m prime 
+/// numbers such that the sum of the selected primes is exactly n. You may 
+/// use each prime number multiple times.
+///
+/// Return the minimum number of prime numbers needed to sum up to n, or -1 
+/// if it is not possible.
+/// 
+/// Example 1:
+/// Input: n = 10, m = 2
+/// Output: 4
+/// Explanation:
+/// The first 2 primes are [2, 3]. The sum 10 can be formed as 2 + 2 + 3 + 3, 
+/// requiring 4 primes.
+///
+/// Example 2:
+/// Input: n = 15, m = 5
+/// Output: 3
+/// Explanation:
+/// The first 5 primes are [2, 3, 5, 7, 11]. The sum 15 can be formed 
+/// as 5 + 5 + 5, requiring 3 primes.
+///
+/// Example 3:
+/// Input: n = 7, m = 6
+/// Output: 1
+/// Explanation:
+/// The first 6 primes are [2, 3, 5, 7, 11, 13]. The sum 7 can be formed 
+/// directly by prime 7, requiring only 1 prime.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 1000
+/// 2. 1 <= m <= 1000
+/// </summary>
+int LeetCodeDP::minNumberOfPrimes(int n, int m)
+{
+    vector<int> dp(n + 1), primes;
+    for (int i = 2; i <= n; i++)
+    {
+        if (primes.size() == m) break;
+        if (isPrime(i)) primes.push_back(i);
+        if (i % 2 == 1) i++;
+    }
+    for (int i = 2; i <= n; i++)
+    {
+        for (size_t j = 0; j < primes.size(); j++)
+        {
+            if (primes[j] > i) break;
+            if ((i - primes[j] == 0) || (dp[i - primes[j]] > 0))
+            {
+                if (dp[i] == 0)
+                {
+                    dp[i] = dp[i - primes[j]] + 1;
+                }
+                else
+                {
+                    dp[i] = min(dp[i], dp[i - primes[j]] + 1);
+                }
+            }
+        }
+    }
+    if (dp[n] == 0) return -1;
+    else return dp[n];
+}
+
+
+/// <summary>
+/// Leet Code 3603. Minimum Cost Path with Alternating Directions II
+///
+/// Medium
+///
+/// You are given two integers m and n representing the number of rows and 
+/// columns of a grid, respectively.
+///
+/// The cost to enter cell (i, j) is defined as (i + 1) * (j + 1).
+///
+/// You are also given a 2D integer array waitCost where waitCost[i][j] 
+/// defines the cost to wait on that cell.
+///
+/// You start at cell (0, 0) at second 1.
+///
+/// At each step, you follow an alternating pattern:
+///
+/// On odd-numbered seconds, you must move right or down to an adjacent cell, 
+/// paying its entry cost.
+/// On even-numbered seconds, you must wait in place, paying waitCost[i][j].
+/// Return the minimum total cost required to reach (m - 1, n - 1).
+///
+/// Example 1:
+/// Input: m = 1, n = 2, waitCost = [[1,2]]
+/// Output: 3
+/// Explanation:
+/// The optimal path is:
+/// Start at cell (0, 0) at second 1 with entry cost (0 + 1) * (0 + 1) = 1.
+/// Second 1: Move right to cell (0, 1) with entry cost (0 + 1) * (1 + 1) = 2.
+/// Thus, the total cost is 1 + 2 = 3.
+///
+/// Example 2:
+/// Input: m = 2, n = 2, waitCost = [[3,5],[2,4]]
+/// Output: 9
+/// Explanation:
+/// The optimal path is:
+/// Start at cell (0, 0) at second 1 with entry cost (0 + 1) * (0 + 1) = 1.
+/// Second 1: Move down to cell (1, 0) with entry cost (1 + 1) * (0 + 1) = 2.
+/// Second 2: Wait at cell (1, 0), paying waitCost[1][0] = 2.
+/// Second 3: Move right to cell (1, 1) with entry cost (1 + 1) * (1 + 1) = 4.
+/// Thus, the total cost is 1 + 2 + 2 + 4 = 9.
+///
+/// Example 3:
+/// Input: m = 2, n = 3, waitCost = [[6,1,4],[3,2,5]]
+/// Output: 16
+/// Explanation:
+/// The optimal path is:
+/// Start at cell (0, 0) at second 1 with entry cost (0 + 1) * (0 + 1) = 1.
+/// Second 1: Move right to cell (0, 1) with entry cost (0 + 1) * (1 + 1) = 2.
+/// Second 2: Wait at cell (0, 1), paying waitCost[0][1] = 1.
+/// Second 3: Move down to cell (1, 1) with entry cost (1 + 1) * (1 + 1) = 4.
+/// Second 4: Wait at cell (1, 1), paying waitCost[1][1] = 2.
+/// Second 5: Move right to cell (1, 2) with entry cost (1 + 1) * (2 + 1) = 6.
+/// Thus, the total cost is 1 + 2 + 1 + 4 + 2 + 6 = 16.
+/// 
+/// Constraints:
+/// 1. 1 <= m, n <= 10^5
+/// 2. 2 <= m * n <= 10^5
+/// 3. waitCost.length == m
+/// 4. waitCost[0].length == n
+/// 5. 0 <= waitCost[i][j] <= 10^5
+/// </summary>
+long long LeetCodeDP::minCost(int m, int n, vector<vector<int>>& waitCost)
+{
+    vector<vector<long long>> dp(m, vector<long long>(n, LLONG_MAX));
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (i == 0 && j == 0)
+            {
+                dp[i][j] = (i + 1) * (j + 1);
+            }
+            else
+            {
+                if (i > 0)
+                {
+                    dp[i][j] = min(dp[i][j], dp[i - 1][j]);
+                }
+                if (j > 0)
+                {
+                    dp[i][j] = min(dp[i][j], dp[i][j - 1]);
+                }
+                dp[i][j] += (long long)(i + 1) * (long long)(j + 1);
+                if (i == m- 1 && j == n - 1) break;
+                dp[i][j] += waitCost[i][j];
+            }
+        }
+    }
+    return dp[m - 1][n - 1];
+}
+
 #pragma endregion
 

@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+#include <numeric>
 #include <algorithm> 
 #include <functional> 
 #include <bitset> 
@@ -208,12 +209,12 @@ struct BinaryIndexTree
     }
 };
 
-struct SegmentTreeMax
+struct SegmentTreeGreater
 {
     vector<int> m_arr;
     string m_type;
     int m_count;
-    SegmentTreeMax(int n)
+    SegmentTreeGreater(int n)
     {
         m_count = n;
         m_arr = vector<int>(4 * n, INT_MIN);
@@ -254,6 +255,67 @@ struct SegmentTreeMax
         {
             return query(2 * index + 2, mid + 1, end, val);
         }
+    }
+};
+
+/// <summary>
+/// Leet code #592. Fraction Addition and Subtraction
+/// </summary>
+static long long gcd(long long a, long long b)
+{
+    a = abs(a);
+    b = abs(b);
+    if (a < b) swap(a, b);
+    if (b == 0) return a;
+    while (a % b != 0)
+    {
+        a = a % b;
+        swap(a, b);
+    }
+    return b;
+}
+
+struct SegmentTreeGCD
+{
+    vector<int> m_arr;
+    string m_type;
+    int m_count;
+    SegmentTreeGCD(int n)
+    {
+        m_count = n;
+        m_arr = vector<int>(4 * n);
+    }
+
+    void set(int index, int start, int end, int pos, int val)
+    {
+        if (start == end)
+        {
+            m_arr[index] = val;
+            return;
+        }
+        int mid = start + (end - start) / 2;
+        if (pos <= mid)
+        {
+            set(2 * index + 1, start, mid, pos, val);
+        }
+        else
+        {
+            set(2 * index + 2, mid + 1, end, pos, val);
+        }
+        m_arr[index] = (int)gcd(m_arr[2 * index + 1], m_arr[2 * index + 2]);
+    }
+
+    int query(int index, int start, int end, int target_start, int target_end)
+    {
+        if (start > target_end || end < target_start) return 0;
+        if (start >= target_start &&  end <= target_end)
+        {
+            return m_arr[index];
+        }
+        int mid = start + (end - start) / 2;
+        int left = query(2 * index + 1, start, mid, target_start, target_end);
+        int right = query(2 * index + 2, mid + 1, end, target_start, target_end);
+        return (int)gcd(left, right);
     }
 };
 

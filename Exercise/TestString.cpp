@@ -8182,8 +8182,52 @@ void TestLeetCode3606(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3612(void)
+{
+    Logger::WriteMessage("Test Leet Code 3612");
+    LeetCodeString leetCode;
+    string s = "a#b%*";
+    string result = leetCode.processStrI(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "z*#";
+    result = leetCode.processStrI(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
+void TestLeetCode3614(void)
+{
+    Logger::WriteMessage("Test Leet Code 3614");
+    LeetCodeString leetCode;
+    string s = "a#b%*";
+    int k = 1;
+    char result = leetCode.processStrII(s, k);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + string(1, result));
+
+    s = "cd%#*#";
+    k = 3;
+    result = leetCode.processStrII(s, k);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + string(1, result));
+
+    s = "z*#";
+    k = 0;
+    result = leetCode.processStrII(s, k);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + string(1, result));
+
+    s = "%#*gm#xib";
+    k = 2;
+    result = leetCode.processStrII(s, k);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + string(1, result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3614();
+    TestLeetCode3612();
     TestLeetCode3606();
     TestLeetCode3598();
     TestLeetCode3597();

@@ -6121,8 +6121,56 @@ void TestLeetCode3599(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3610(void)
+{
+    Logger::WriteMessage("Test Leet Code 3610");
+    LeetCodeDP leetCode;
+    int n = 10, m = 2;
+    int result = leetCode.minNumberOfPrimes(n, m);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 15, m = 5;
+    result = leetCode.minNumberOfPrimes(n, m);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 7, m = 6;
+    result = leetCode.minNumberOfPrimes(n, m);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3603(void)
+{
+    Logger::WriteMessage("Test Leet Code 3603");
+    LeetCodeDP leetCode;
+    int m = 1, n = 2;
+    vector<vector<int>> waitCost = { {1, 2} };
+    long long result = leetCode.minCost(m, n, waitCost);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage(waitCost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    m = 2, n = 2;
+    waitCost = { {3, 5},{2, 4} };
+    result = leetCode.minCost(m, n, waitCost);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage(waitCost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    m = 2, n = 3;
+    waitCost = { {6, 1, 4},{3, 2, 5} };
+    result = leetCode.minCost(m, n, waitCost);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage(waitCost);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3603();
+    TestLeetCode3610();
     TestLeetCode3599();
     TestLeetCode3592();
     TestLeetCode3573();

@@ -29787,4 +29787,191 @@ vector<string> LeetCodeString::validateCoupons(vector<string>& code, vector<stri
     return result;
 }
 
+/// <summary>
+/// Leet Code 3612. Process String with Special Operations I
+///
+/// Medium
+/// You are given a string s consisting of lowercase English letters and 
+/// the special characters: *, #, and %.
+///
+/// Build a new string result by processing s according to the following 
+/// rules from left to right:
+///
+/// If the letter is a lowercase English letter append it to result.
+/// A '*' removes the last character from result, if it exists.
+/// A '#' duplicates the current result and appends it to itself.
+/// A '%' reverses the current result.
+/// Return the final string result after processing all characters in s.
+///
+/// Example 1:
+/// Input: s = "a#b%*"
+/// Output: "ba"
+/// Explanation:
+/// i   s[i]    Operation   Current result
+/// 0   'a' Append 'a'  "a"
+/// 1   '#' Duplicate result    "aa"
+/// 2   'b' Append 'b'  "aab"
+/// 3   '%' Reverse result  "baa"
+/// 4   '*' Remove the last character   "ba"
+/// Thus, the final result is "ba".
+///
+/// Example 2:
+/// Input: s = "z*#"
+/// Output: ""
+/// Explanation:
+/// i   s[i]    Operation   Current result
+/// 0   'z' Append 'z'  "z"
+/// 1   '*' Remove the last character   ""
+/// 2   '#' Duplicate the string    ""
+/// Thus, the final result is "".
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 20
+/// 2. s consists of only lowercase English letters and special 
+///    characters *, #, and %.
+/// </summary>
+string LeetCodeString::processStrI(string s)
+{
+    string result;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '#')
+        {
+            result.append(result);
+        }
+        else if (s[i] == '%')
+        {
+            std::reverse(result.begin(), result.end());
+        }
+        else if (s[i] == '*')
+        {
+            if (!result.empty()) result.pop_back();
+        }
+        else if (islower(s[i]))
+        {
+            result.push_back(s[i]);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3614. Process String with Special Operations II
+///
+/// Hard
+///
+/// You are given a string s consisting of lowercase English letters and the 
+/// special characters: '*', '#', and '%'.
+///
+/// You are also given an integer k.
+///
+/// Build a new string result by processing s according to the following rules 
+/// from left to right:
+///
+/// If the letter is a lowercase English letter append it to result.
+/// A '*' removes the last character from result, if it exists.
+/// A '#' duplicates the current result and appends it to itself.
+/// A '%' reverses the current result.
+/// Return the kth character of the final string result. If k is out of the 
+/// bounds of result, return '.'.
+/// 
+/// Example 1:
+///
+/// Input: s = "a#b%*", k = 1
+/// Output: "a"
+///
+/// Explanation:
+/// i   s[i]    Operation   Current result
+/// 0   'a' Append 'a'  "a"
+/// 1   '#' Duplicate result    "aa"
+/// 2   'b' Append 'b'  "aab"
+/// 3   '%' Reverse result  "baa"
+/// 4   '*' Remove the last character   "ba"
+/// The final result is "ba". The character at index k = 1 is 'a'.
+///
+/// Example 2:
+/// 
+/// Input: s = "cd%#*#", k = 3
+/// Output: "d"
+/// Explanation:
+/// i   s[i]    Operation   Current result
+/// 0   'c' Append 'c'  "c"
+/// 1   'd' Append 'd'  "cd"
+/// 2   '%' Reverse result  "dc"
+/// 3   '#' Duplicate result    "dcdc"
+/// 4   '*' Remove the last character   "dcd"
+/// 5   '#' Duplicate result    "dcddcd"
+/// The final result is "dcddcd". The character at index k = 3 is 'd'.
+///
+/// Example 3:
+/// Input: s = "z*#", k = 0
+/// Output: "."
+/// Explanation:
+/// i   s[i]    Operation   Current result
+/// 0   'z' Append 'z'  "z"
+/// 1   '*' Remove the last character   ""
+/// 2   '#' Duplicate the string    ""
+/// The final result is "". Since index k = 0 is out of bounds, the output 
+/// is '.'.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists of only lowercase English letters and special 
+///    characters '*', '#', and '%'.
+/// 3. 0 <= k <= 10^15
+/// 4. The length of result after processing s will not exceed 10^15.
+/// </summary>
+char LeetCodeString::processStrII(string s, long long k)
+{
+    long long len = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '*')
+        {
+            if (len > 0) len--;
+        }
+        else if (s[i] == '#')
+        {
+            len = len * 2;
+        }
+        else if (s[i] == '%')
+        {
+            continue;
+        }
+        else
+        {
+            len++;
+        }
+    }
+    if (len <= k) return '.';
+    for (int i = s.size() - 1; i >= 0; i--)
+    {
+        if (len <= k) return '.';
+        if (islower(s[i]))
+        {
+            if (len - 1 == k)
+            {
+                return s[i];
+            }
+            else
+            {
+                len--;
+            }
+        }
+        else if (s[i] == '*')
+        {
+            len++;
+        }
+        else if (s[i] == '#')
+        {
+            len = len / 2;
+            if (k >= len) k = k - len;
+        }
+        else if (s[i] == '%')
+        {
+            k = len - 1 - k;
+        }
+    }
+    return '.';
+}
 #pragma endregion

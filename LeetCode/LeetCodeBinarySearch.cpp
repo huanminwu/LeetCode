@@ -5521,20 +5521,23 @@ int LeetCodeBinarySearch::minStable(vector<int>& nums, int maxC)
     int last = n;
     int result = nums.size();
     int gcd_val = 0;
+    SegmentTreeGCD segmentTreeGCD(nums.size());
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        segmentTreeGCD.set(0, 0, n - 1, i, nums[i]);
+    }
+
     while (first <= last)
     {
         int middle = first + (last - first) / 2;
         int count = 0;
         for (int i = 0; i + middle < n;)
         {
-            gcd_val = nums[i];
-            for (int j = i + 1; j <= i + middle && gcd_val > 1; j++)
-            {
-                gcd_val = std::gcd(gcd_val, nums[j]);
-            }
+            gcd_val = segmentTreeGCD.query(0, 0, n - 1, i, i + middle);
             if (gcd_val > 1)
             {
                 count++;
+                if (count > maxC) break;
                 i += middle + 1;
             }
             else
