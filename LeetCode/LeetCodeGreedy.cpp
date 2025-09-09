@@ -2332,26 +2332,36 @@ int LeetCodeGreedy::minTaps(int n, vector<int>& ranges)
 /// </summary>
 int LeetCodeGreedy::maxEvents(vector<vector<int>>& events)
 {
-    priority_queue<pair<int, int>> pq;
+    set<pair<int, int>> pq_s, pq_e;
     for (size_t i = 0; i < events.size(); i++)
     {
-        pq.push({ -events[i][0], -events[i][1] });
+        pq_s.insert({ events[i][0], i });
     }
     int start_day = 0;
     int result = 0;
-    while (!pq.empty())
+    int day = 0;
+    while (!pq_s.empty() || !pq_e.empty())
     {
-        pair<int, int> e = pq.top();
-        pq.pop();
-        if (-e.first == start_day)
+        if (pq_e.empty())
         {
-            e.first--;
-            if (e.first >= e.second) pq.push(e);
+            day = pq_s.begin()->first;
         }
-        else
+        while (!pq_s.empty() && pq_s.begin()->first <= day)
         {
-            result++;
-            start_day = -e.first;
+            pair<int, int> start = *pq_s.begin();
+            pq_s.erase(pq_s.begin());
+            pq_e.insert(make_pair(events[start.second][1], start.second));
+        }
+        while (!pq_e.empty())
+        {
+            if (pq_e.begin()->first < day) pq_e.erase(pq_e.begin());
+            else
+            {
+                result++;
+                day++;
+                pq_e.erase(pq_e.begin());
+                break;
+            }
         }
     }
     return result;

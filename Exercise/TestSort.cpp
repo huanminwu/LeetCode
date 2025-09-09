@@ -4437,9 +4437,180 @@ void TestLeetCode3572(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3627(void)
+{
+    Logger::WriteMessage("Test Leet Code 3627");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 2, 1, 3, 2, 1, 3 };
+    Logger::WriteMessage(nums);
+    long long result = leetCode.maximumMedianSum(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,10,10,10,10 };
+    Logger::WriteMessage(nums);
+    result = leetCode.maximumMedianSum(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3631(void)
+{
+    Logger::WriteMessage("Test Leet Code 3631");
+    LeetCodeSort leetCode;
+    vector<vector<int>> threats = { {101, 2, 3},{102, 3, 2},{103, 3, 3} };
+    vector<vector<int>> result = leetCode.sortThreats(threats);
+    Logger::WriteMessage(threats);
+    Logger::WriteMessage(result);
+
+    threats = { {101, 4, 1},{103, 1, 5},{102, 1, 5} };
+    result = leetCode.sortThreats(threats);
+    Logger::WriteMessage(threats);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3634(void)
+{
+    Logger::WriteMessage("Test Leet Code 3634");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 2, 1, 5 };
+    int k = 2;
+    int result = leetCode.minRemoval(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = 2" + to_string(k) + "; result = "+ to_string(result));
+
+    nums = { 1,6,2,9 };
+    k = 3;
+    result = leetCode.minRemoval(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = 2" + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 4,6 };
+    k = 2;
+    result = leetCode.minRemoval(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = 2" + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3633(void)
+{
+    Logger::WriteMessage("Test Leet Code 3633");
+    LeetCodeSort leetCode;
+    vector<int> landStartTime = { 2, 8 };
+    vector<int> landDuration = { 4, 1 };
+    vector<int> waterStartTime = { 6 };
+    vector<int> waterDuration = { 3 };
+    int result = leetCode.earliestFinishTimeI(landStartTime, landDuration, waterStartTime, waterDuration);
+    Logger::WriteMessage(landStartTime);
+    Logger::WriteMessage(landDuration);
+    Logger::WriteMessage(waterStartTime);
+    Logger::WriteMessage(waterDuration);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    landStartTime = { 5 };
+    landDuration = { 3 };
+    waterStartTime = { 1 };
+    waterDuration = { 10 };
+    result = leetCode.earliestFinishTimeI(landStartTime, landDuration, waterStartTime, waterDuration);
+    Logger::WriteMessage(landStartTime);
+    Logger::WriteMessage(landDuration);
+    Logger::WriteMessage(waterStartTime);
+    Logger::WriteMessage(waterDuration);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3635(void)
+{
+    Logger::WriteMessage("Test Leet Code 3635");
+    LeetCodeSort leetCode;
+    vector<int> landStartTime = { 2, 8 };
+    vector<int> landDuration = { 4, 1 };
+    vector<int> waterStartTime = { 6 };
+    vector<int> waterDuration = { 3 };
+    int result = leetCode.earliestFinishTimeI(landStartTime, landDuration, waterStartTime, waterDuration);
+    Logger::WriteMessage(landStartTime);
+    Logger::WriteMessage(landDuration);
+    Logger::WriteMessage(waterStartTime);
+    Logger::WriteMessage(waterDuration);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    landStartTime = { 5 };
+    landDuration = { 3 };
+    waterStartTime = { 1 };
+    waterDuration = { 10 };
+    result = leetCode.earliestFinishTimeI(landStartTime, landDuration, waterStartTime, waterDuration);
+    Logger::WriteMessage(landStartTime);
+    Logger::WriteMessage(landDuration);
+    Logger::WriteMessage(waterStartTime);
+    Logger::WriteMessage(waterDuration);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3645(void)
+{
+    Logger::WriteMessage("Test Leet Code 3645");
+    LeetCodeSort leetCode;
+    vector<int> value = { 3, 5, 8 };
+    vector<int> limit = { 2, 1, 3 };
+    long long result = leetCode.maxTotal(value, limit);
+    Logger::WriteMessage(value);
+    Logger::WriteMessage(limit);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    value = { 4,2,6 };
+    limit = { 1,1,1 };
+    result = leetCode.maxTotal(value, limit);
+    Logger::WriteMessage(value);
+    Logger::WriteMessage(limit);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    value = { 4, 1, 5, 2 };
+    limit = { 3, 3, 2, 3 };
+    result = leetCode.maxTotal(value, limit);
+    Logger::WriteMessage(value);
+    Logger::WriteMessage(limit);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3660(void)
+{
+    Logger::WriteMessage("Test Leet Code 3660");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 2, 1, 3 };
+    vector<int> result = leetCode.maxValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 2,3,1 };
+    result = leetCode.maxValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3667(void)
+{
+    Logger::WriteMessage("Test Leet Code 3667");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 3, -1, -4, 1, 5 };
+    vector<int> result = leetCode.sortByAbsoluteValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { -100,100 };
+    result = leetCode.sortByAbsoluteValue(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3667();
+    TestLeetCode3660();
+    TestLeetCode3645();
+    TestLeetCode3635();
+    TestLeetCode3633();
+    TestLeetCode3634();
+    TestLeetCode3631();
+    TestLeetCode3627();
     TestLeetCode3572();
     TestLeetCode3555();
     TestLeetCode3536();

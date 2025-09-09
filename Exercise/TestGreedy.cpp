@@ -260,32 +260,6 @@ void TestLeetCode1326(void)
     Logger::WriteMessage(ranges);
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
-
-void TestLeetCode1353(void)
-{
-    Logger::WriteMessage("Test Leet Code 1353");
-    LeetCodeGreedy leetCode;
-    vector<vector<int>> events = { {1, 2},{2, 3},{3, 4} };
-    int result = leetCode.maxEvents(events);
-    Logger::WriteMessage(events);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    events = { {1,2},{2,3},{3,4},{1,2} };
-    result = leetCode.maxEvents(events);
-    Logger::WriteMessage(events);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    events = { {1, 100000} };
-    result = leetCode.maxEvents(events);
-    Logger::WriteMessage(events);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    events = { {1, 1},{1, 2},{1, 3},{1, 4},{1, 5},{1, 6},{1, 7} };
-    result = leetCode.maxEvents(events);
-    Logger::WriteMessage(events);
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
 void TestLeetCode1383(void)
 {
     Logger::WriteMessage("Test Leet Code 1383");
@@ -2174,8 +2148,35 @@ void TestLeetCode3542(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+void TestLeetCode1353(void)
+{
+    Logger::WriteMessage("Test Leet Code 1353");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> events = { {1, 2},{2, 3},{3, 4} };
+    int result = leetCode.maxEvents(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    events = { {1,2},{2,3},{3,4},{1,2} };
+    result = leetCode.maxEvents(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    events = { {1, 100000} };
+    result = leetCode.maxEvents(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    events = { {1, 1},{1, 2},{1, 3},{1, 4},{1, 5},{1, 6},{1, 7} };
+    result = leetCode.maxEvents(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    TestLeetCode1353();
     TestLeetCode3542();
     TestLeetCode3440();
     TestLeetCode3439();
@@ -2263,7 +2264,6 @@ void TestLeetCodeGreedy(void)
     TestLeetCode1419();
     TestLeetCode1405();
     TestLeetCode1383();
-    TestLeetCode1353();
     TestLeetCode1326();
     TestLeetCode1288();
     TestLeetCode1272();

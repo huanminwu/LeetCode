@@ -17575,6 +17575,145 @@ public:
     /// 4. The length of result after processing s will not exceed 10^15.
     /// </summary>
     char processStrII(string s, long long k);
+
+    /// <summary>
+    /// Leet Code 3662. Filter Characters by Frequency
+    ///
+    /// Easy
+    ///
+    /// You are given a string s consisting of lowercase English letters and an 
+    /// integer k.
+    ///
+    /// Your task is to construct a new string that contains only those characters 
+    /// from s which appear fewer than k times in the entire string. The order of 
+    /// characters in the new string must be the same as their order in s.
+    ///
+    /// Return the resulting string. If no characters qualify, return an empty 
+    /// string.
+    ///
+    /// Note: Every occurrence of a character that occurs fewer than k times is 
+    /// kept.
+    /// 
+    /// Example 1:
+    /// Input: s = "aadbbcccca", k = 3
+    /// Output: "dbb"
+    /// Explanation:
+    /// Character frequencies in s:
+    /// 'a' appears 3 times
+    /// 'd' appears 1 time
+    /// 'b' appears 2 times
+    /// 'c' appears 4 times
+    /// Only 'd' and 'b' appear fewer than 3 times. Preserving their order, the 
+    /// result is "dbb".
+    ///
+    /// Example 2:
+    /// Input: s = "xyz", k = 2
+    /// Output: "xyz"
+    /// Explanation:
+    /// All characters ('x', 'y', 'z') appear exactly once, which is fewer than 2. 
+    /// Thus the whole string is returned.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s consists of lowercase English letters.
+    /// 3. 1 <= k <= s.length
+    /// </summary>
+    string filterCharacters(string s, int k);
+
+    /// <summary>
+    /// Leet Code 3664. Two-Letter Card Game
+    /// </summary>
+    pair<int, int> score_match(vector<int>& match);
+
+    /// <summary>
+    /// Leet Code 3664. Two-Letter Card Game
+    ///
+    /// Medium
+    ///
+    /// You are given a deck of cards represented by a string array cards, and 
+    /// each card displays two lowercase letters.
+    ///
+    /// You are also given a letter x. You play a game with the following rules:
+    ///
+    /// Start with 0 points.
+    /// On each turn, you must find two compatible cards from the deck that both 
+    /// contain the letter x in any position.
+    /// Remove the pair of cards and earn 1 point.
+    /// The game ends when you can no longer find a pair of compatible cards.
+    /// Return the maximum number of points you can gain with optimal play.
+    ///
+    /// Two cards are compatible if the strings differ in exactly 1 position.
+    /// 
+    /// Example 1:
+    /// Input: cards = ["aa","ab","ba","ac"], x = "a"
+    /// Output: 2
+    /// Explanation:
+    /// On the first turn, select and remove cards "ab" and "ac", which are 
+    /// compatible because they differ at only index 1.
+    /// On the second turn, select and remove cards "aa" and "ba", which are 
+    /// compatible because they differ at only index 0.
+    /// Because there are no more compatible pairs, the total score is 2.
+    ///
+    /// Example 2:
+    /// Input: cards = ["aa","ab","ba"], x = "a"
+    /// Output: 1
+    /// Explanation:
+    /// On the first turn, select and remove cards "aa" and "ba".
+    /// Because there are no more compatible pairs, the total score is 1.
+    /// 
+    /// Example 3:
+    /// Input: cards = ["aa","ab","ba","ac"], x = "b"
+    /// Output: 0
+    /// Explanation:
+    /// The only cards that contain the character 'b' are "ab" and "ba". However, 
+    /// they differ in both indices, so they are not compatible. Thus, the output 
+    /// is 0.
+    ///
+    /// Constraints:
+    /// 1. 2 <= cards.length <= 10^5
+    /// 2. cards[i].length == 2
+    /// 3. Each cards[i] is composed of only lowercase English letters between 
+    ///    'a' and 'j'.
+    /// 4. x is a lowercase English letter between 'a' and 'j'.
+    /// </summary>
+    int score(vector<string>& cards, char x);
+
+    /// <summary>
+    /// Leet Code 3675. Minimum Operations to Transform String
+    ///
+    /// Medium
+    ///
+    /// You are given a string s consisting only of lowercase English letters.
+    ///
+    /// You can perform the following operation any number of times 
+    /// (including zero):
+    /// Choose any character c in the string and replace every occurrence of c 
+    /// with the next lowercase letter in the English alphabet.
+    ///
+    /// Return the minimum number of operations required to transform s into 
+    /// a string consisting of only 'a' characters.
+    ///
+    /// Note: Consider the alphabet as circular, thus 'a' comes after 'z'.
+    /// 
+    /// Example 1:
+    /// Input: s = "yz"
+    /// Output: 2
+    /// Explanation:
+    /// Change 'y' to 'z' to get "zz".
+    /// Change 'z' to 'a' to get "aa".
+    /// Thus, the answer is 2.
+    ///
+    /// Example 2:
+    /// Input: s = "a"
+    /// Output: 0
+    /// Explanation:
+    /// The string "a" only consists of 'a' characters. Thus, the answer is 0.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 5 * 10^5
+    /// 2. s consists only of lowercase English letters.
+    /// </summary>
+    int minOperationsEqualize(string s);
 #pragma endregion
 };
 

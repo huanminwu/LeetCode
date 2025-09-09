@@ -990,8 +990,62 @@ void TestLeetCode3589(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3641(void)
+{
+    Logger::WriteMessage("Test Leet Code 3641");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 1, 2, 3, 1, 2, 3, 4 };
+    int k = 2;
+    int result = leetCode.longestSubarray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,1,1,1,1 };
+    k = 4;
+    result = leetCode.longestSubarray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,1,1,1,1 };
+    k = 0;
+    result = leetCode.longestSubarray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3672(void)
+{
+    Logger::WriteMessage("Test Leet Code 3672");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 1, 2, 2, 3 };
+    int k = 3;
+    long long result = leetCode.modeWeight(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2,1,2 };
+    k = 2;
+    result = leetCode.modeWeight(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 4,3,4,3 };
+    k = 3;
+    result = leetCode.modeWeight(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+    
+    nums = { 8, 8, 9, 14 };
+    k = 2;
+    result = leetCode.modeWeight(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode3672();
+    TestLeetCode3641();
     TestLeetCode3589();
     TestLeetCode3329();
     TestLeetCode3325();

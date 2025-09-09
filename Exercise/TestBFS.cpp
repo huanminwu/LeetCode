@@ -947,8 +947,63 @@ void TestLeetCode3535(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3629(void)
+{
+    Logger::WriteMessage("Test Leet Code 3629");
+    LeetCodeBFS leetCode;
+    vector<int> nums = { 1, 2, 4, 6 };
+    int result = leetCode.minJumps(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3,4,7,9 };
+    result = leetCode.minJumps(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,6,5,8 };
+    result = leetCode.minJumps(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7, 5, 7 };
+    result = leetCode.minJumps(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2, 2, 13, 11 };
+    result = leetCode.minJumps(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3666(void)
+{
+    Logger::WriteMessage("Test Leet Code 3629");
+    LeetCodeBFS leetCode;
+    string s = "110";
+    int k = 1;
+    int result = leetCode.minOperations(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "0101";
+    k = 3;
+    result = leetCode.minOperations(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "101";
+    k = 2;
+    result = leetCode.minOperations(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBFS(void)
 {
+    TestLeetCode3666();
+    TestLeetCode3629();
     TestLeetCode3535();
     TestLeetCode3528();
     TestLeetCode3387();

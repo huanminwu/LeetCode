@@ -3162,4 +3162,215 @@ vector<int> LeetCodeBFS::queryConversions(vector<vector<int>>& conversions, vect
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3629. Minimum Jumps to Reach End via Prime Teleportation
+///
+/// Medium
+///
+/// You are given an integer array nums of length n.
+/// You start at index 0, and your goal is to reach index n - 1.
+/// From any index i, you may perform one of the following operations:
+/// Adjacent Step: Jump to index i + 1 or i - 1, if the index is within bounds.
+/// Prime Teleportation: If nums[i] is a prime number p, you may instantly 
+/// jump to any index j != i such that nums[j] % p == 0.
+/// Return the minimum number of jumps required to reach index n - 1.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,4,6]
+/// Output: 2
+/// Explanation:
+/// One optimal sequence of jumps is:
+/// Start at index i = 0. Take an adjacent step to index 1.
+/// At index i = 1, nums[1] = 2 is a prime number. Therefore, we teleport to 
+/// index i = 3 as nums[3] = 6 is divisible by 2.
+/// Thus, the answer is 2.
+///
+/// Example 2:
+/// Input: nums = [2,3,4,7,9]
+/// Output: 2
+/// Explanation:
+/// One optimal sequence of jumps is:
+/// Start at index i = 0. Take an adjacent step to index i = 1.
+/// At index i = 1, nums[1] = 3 is a prime number. Therefore, we teleport to 
+/// index i = 4 since nums[4] = 9 is divisible by 3.
+/// Thus, the answer is 2.
+///
+/// Example 3:
+/// Input: nums = [4,6,5,8]
+/// Output: 3
+/// Explanation:
+/// Since no teleportation is possible, we move through 0 → 1 → 2 → 3. Thus, 
+/// the answer is 3.
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^6
+/// </summary>
+int LeetCodeBFS::minJumps(vector<int>& nums)
+{
+    int n = nums.size();
+    vector<int> visited(n);
+    unordered_map<int, vector<int>> value_list;
+    unordered_set<int> visited_prime;
+    int max_val = 0;
+    for (int i = 0; i < n; i++)
+    {
+        max_val = max(max_val, nums[i]);
+        value_list[nums[i]].push_back(i);
+    }
+    queue<int> queue;
+    queue.push(0);
+    visited[0] = 1;
+    int result =0;
+    while (!queue.empty())
+    {
+        size_t size = queue.size();
+        for (size_t i = 0; i < size; i++)
+        {
+            int index = queue.front();
+            queue.pop();
+            if (index == n - 1) return result;
+            if (isPrime(nums[index]))
+            {
+                int prime = nums[index];
+                if (visited_prime.count(prime) == 0)
+                {
+                    visited_prime.insert(prime);
+                    for (int j = 1; j * prime <= max_val; j++)
+                    {
+                        if (value_list.count(j * prime) == 0) continue;
+                        for (int id : value_list[j * prime])
+                        {
+                            if (visited[id] == 0)
+                            {
+                                queue.push(id);
+                                visited[id] = 1;
+                            }
+                        }
+                        value_list.erase(j * prime);
+                    }
+                }
+            }
+            if (index > 0 && visited[index - 1] == 0)
+            {
+                queue.push(index - 1);
+                visited[index - 1] = 1;
+            }
+            if (index < n - 1 && visited[index + 1] == 0)
+            {
+                queue.push(index + 1);
+                visited[index + 1] = 1;
+            }
+        }
+        result++;
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3666. Minimum Operations to Equalize Binary String
+///
+/// 
+/// Hard
+///
+/// You are given a binary string s, and an integer k.
+///
+/// In one operation, you must choose exactly k different indices and flip 
+/// each '0' to '1' and each '1' to '0'.
+///
+/// Return the minimum number of operations required to make all characters 
+/// in the string equal to '1'. If it is not possible, return -1.
+///
+/// Example 1:
+/// Input: s = "110", k = 1
+/// Output: 1
+/// Explanation:
+/// There is one '0' in s.
+/// Since k = 1, we can flip it directly in one operation.
+///
+/// Example 2:
+/// Input: s = "0101", k = 3
+/// Output: 2
+/// Explanation:
+/// One optimal set of operations choosing k = 3 indices in each operation is:
+/// Operation 1: Flip indices [0, 1, 3]. s changes from "0101" to "1000".
+/// Operation 2: Flip indices [1, 2, 3]. s changes from "1000" to "1111".
+/// Thus, the minimum number of operations is 2.
+///
+/// Example 3:
+/// Input: s = "101", k = 2
+/// Output: -1
+/// Explanation:
+/// Since k = 2 and s has only one '0', it is impossible to flip exactly k 
+/// indices to make all '1'. Hence, the answer is -1.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s[i] is either '0' or '1'.
+/// 3. 1 <= k <= s.length
+/// </summary>
+int LeetCodeBFS::minOperations(string s, int k)
+{
+    int zero = 0;
+    int n = s.size();
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '0') zero++;
+    }
+    set<int> odd, even;
+    for (int i = 0; i <= n; i++)
+    {
+        if (i % 2 == 0) even.insert(i);
+        else odd.insert(i);
+    }
+    if (zero % 2 == 0) even.erase(zero);
+    else odd.erase(zero);
+    queue<int> queue;
+    queue.push(zero);
+    int result = 0;
+    while (!queue.empty())
+    {
+        size_t size = queue.size();
+        for (size_t i = 0; i < size; i++)
+        {
+            int zero = queue.front();
+            queue.pop();
+            if (zero == 0) return result;
+            int zero_flip = min(zero, k);
+            int min_zero = zero - zero_flip + k - zero_flip;
+            int one_flip = min(n - zero, k);
+            int max_zero = zero - (k - one_flip) + one_flip;
+            if (min_zero % 2 == 0)
+            {
+                auto first = even.lower_bound(min_zero);
+                auto last = even.upper_bound(max_zero);
+                for (auto itr = first; itr != last; )
+                {
+                    queue.push(*itr);
+                    auto temp = itr;
+                    queue.push(*itr);
+                    itr++;
+                    even.erase(temp);
+                }
+            }
+            else
+            {
+                auto first = odd.lower_bound(min_zero);
+                auto last = odd.upper_bound(max_zero);
+                for (auto itr = first; itr != last; )
+                {
+                    queue.push(*itr);
+                    auto temp = itr;
+                    queue.push(*itr);
+                    itr++;
+                    odd.erase(temp);
+                }
+            }
+        }
+        result++;
+    }
+    return -1;
+}
 #pragma endregion

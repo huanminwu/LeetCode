@@ -56,7 +56,7 @@ struct TrieBitNode
         }
     }
 
-    long long findMax(long long number) 
+    long long maxXorFind(long long number) 
     {
         TrieBitNode* cur = this;
         long long result = 0;
@@ -74,6 +74,32 @@ struct TrieBitNode
                 cur = cur->m_Child[bit];
             }
         }
+        return result;
+    }
+
+    long long countXorGreater(long long number, long long k)
+    {
+        TrieBitNode* cur = this;
+        long long result = 0;
+        for (int i = m_MaxBits; i >= 0; --i)
+        {
+            if (cur == nullptr) break;
+            int bit_number = (number >> i) & 1;
+            int bit_k = (k >> i) & 1;
+            if (bit_k == 0)
+            {
+                if (cur->m_Child[1 - bit_number] != nullptr)
+                {
+                    result += cur->m_Child[1 - bit_number]->m_Count;
+                }
+                cur = cur->m_Child[bit_number];
+            }
+            else
+            {
+                cur = cur->m_Child[1 - bit_number];
+            }
+        }
+        if (cur != nullptr) result += cur->m_Count;
         return result;
     }
 };
@@ -3234,6 +3260,186 @@ public:
     ///    other elements appear three times.
     /// </summary>
     vector<int> onceTwice(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3630. Partition Array for Maximum XOR and AND
+    ///
+    /// Hard
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// Partition the array into three (possibly empty) subsequences A, B, and C 
+    /// such that every element of nums belongs to exactly one subsequence.
+    ///
+    /// Your goal is to maximize the value of: XOR(A) + AND(B) + XOR(C)
+    ///
+    /// where:
+    /// XOR(arr) denotes the bitwise XOR of all elements in arr. If arr is empty, 
+    /// its value is defined as 0.
+    /// AND(arr) denotes the bitwise AND of all elements in arr. If arr is empty, 
+    /// its value is defined as 0.
+    /// Return the maximum value achievable.
+    ///
+    /// Note: If multiple partitions result in the same maximum sum, you can 
+    /// consider any one of them.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,3]
+    /// Output: 5
+    /// Explanation:
+    /// One optimal partition is:
+    /// A = [3], XOR(A) = 3
+    /// B = [2], AND(B) = 2
+    /// C = [], XOR(C) = 0
+    /// The maximum value of: XOR(A) + AND(B) + XOR(C) = 3 + 2 + 0 = 5. Thus, the 
+    /// answer is 5.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,3,2]
+    /// Output: 6
+    /// Explanation:
+    /// One optimal partition is:
+    /// A = [1], XOR(A) = 1
+    /// B = [2], AND(B) = 2
+    /// C = [3], XOR(C) = 3
+    /// The maximum value of: XOR(A) + AND(B) + XOR(C) = 1 + 2 + 3 = 6. Thus, the 
+    /// answer is 6.
+    ///
+    /// Example 3:
+    /// Input: nums = [2,3,6,7]
+    /// Output: 15
+    /// Explanation:
+    /// One optimal partition is:
+    /// A = [7], XOR(A) = 7
+    /// B = [2,3], AND(B) = 2
+    /// C = [6], XOR(C) = 6
+    /// The maximum value of: XOR(A) + AND(B) + XOR(C) = 7 + 2 + 6 = 15. Thus, 
+    /// the answer is 15.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 19
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    long long maximizeXorAndXor(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3632. Subarrays with XOR at Least K
+    ///
+    /// Hard
+    ///
+    /// Given an array of positive integers nums of length n and a non‑negative 
+    /// integer k.
+    ///
+    /// Return the number of contiguous subarrays whose bitwise XOR of all 
+    /// elements is greater than or equal to k.
+    ///
+    /// Example 1:
+    /// Input: nums = [3,1,2,3], k = 2
+    /// Output: 6
+    /// Explanation:
+    /// The valid subarrays with XOR >= 2 are [3] at index 0, [3, 1] at 
+    /// indices 0 - 1, [3, 1, 2, 3] at indices 0 - 3, [1, 2] at indices 1 - 2, 
+    /// [2] at index 2, and [3] at index 3; there are 6 in total.
+    ///
+    /// Example 2:
+    /// Input: nums = [0,0,0], k = 0
+    /// Output: 6
+    /// Explanation:
+    /// Every contiguous subarray yields XOR = 0, which meets k = 0. There 
+    /// are 6 such subarrays in total.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 10^9
+    /// 3. 0 <= k <= 10^9
+    /// </summary>
+    long long countXorSubarrays(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3644. Maximum K to Sort a Permutation
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums of length n, where nums is a 
+    /// permutation of the numbers in the range [0..n - 1].
+    ///
+    /// You may swap elements at indices i and j only if nums[i] AND 
+    /// nums[j] == k, where AND denotes the bitwise AND operation and k is a 
+    /// non-negative integer.
+    ///
+    /// Return the maximum value of k such that the array can be sorted in 
+    /// non-decreasing order using any number of such swaps. If nums is 
+    /// already sorted, return 0.
+    /// 
+    /// Example 1:
+    /// Input: nums = [0,3,2,1]
+    /// Output: 1
+    /// Explanation:
+    /// Choose k = 1. Swapping nums[1] = 3 and nums[3] = 1 is allowed since 
+    /// nums[1] AND nums[3] == 1, resulting in a sorted permutation: [0, 1, 2, 3].
+    ///
+    /// Example 2:
+    /// Input: nums = [0,1,3,2]
+    /// Output: 2
+    /// Explanation:
+    /// Choose k = 2. Swapping nums[2] = 3 and nums[3] = 2 is allowed since 
+    /// nums[2] AND nums[3] == 2, resulting in a sorted permutation: [0, 1, 2, 3].
+    ///
+    /// Example 3:
+    /// Input: nums = [3,2,1,0]
+    /// Output: 0
+    /// Explanation:
+    /// Only k = 0 allows sorting since no greater k allows the required swaps 
+    /// where nums[i] AND nums[j] == k.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= n - 1
+    /// 3. nums is a permutation of integers from 0 to n - 1.
+    /// 4. Seen this question in a real interview before?
+    /// </summary>
+    int sortPermutation(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3670. Maximum Product of Two Integers With No Common Bits
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// Your task is to find two distinct indices i and j such that the product 
+    /// nums[i] * nums[j] is maximized, and the binary representations of nums[i] 
+    /// and nums[j] do not share any common set bits.
+    ///
+    /// Return the maximum possible product of such a pair. If no such pair exists, 
+    /// return 0.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2,3,4,5,6,7]
+    /// Output: 12
+    /// Explanation:
+    /// The best pair is 3 (011) and 4 (100). They share no set bits and 
+    /// 3 * 4 = 12.
+    ///
+    /// Example 2:
+    /// Input: nums = [5,6,4]
+    /// Output: 0
+    /// Explanation:
+    /// Every pair of numbers has at least one common set bit. Hence, the answer 
+    /// is 0.
+    ///
+    /// Example 3:
+    /// Input: nums = [64,8,32]
+    /// Output: 2048
+    /// Explanation:
+    /// No pair of numbers share a common bit, so the answer is the product of 
+    /// the two maximum elements, 64 and 32 (64 * 32 = 2048).
+    /// 
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^6
+    /// </summary>
+    long long maxProduct(vector<int>& nums);
 #pragma endregion
 };
 #endif  // LeetCodeBit_H

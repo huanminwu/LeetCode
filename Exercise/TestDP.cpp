@@ -6167,8 +6167,114 @@ void TestLeetCode3603(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3621(void)
+{
+    Logger::WriteMessage("Test Leet Code 3621");
+    LeetCodeDP leetCode;
+    int n = 4, k = 1;
+    long long result = leetCode.popcountDepthI(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 7, k = 2;
+    result = leetCode.popcountDepthI(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3628(void)
+{
+    Logger::WriteMessage("Test Leet Code 3628");
+    LeetCodeDP leetCode;
+    string s = "LMCT";
+    long long result = leetCode.numOfSubsequences(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "LCCT";
+    result = leetCode.numOfSubsequences(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "L";
+    result = leetCode.numOfSubsequences(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
+void TestLeetCode3647(void)
+{
+    Logger::WriteMessage("Test Leet Code 3647");
+    LeetCodeDP leetCode;
+    vector<int> weights = { 1, 4, 3, 2 };
+    int w1 = 5, w2 = 4;
+    int result = leetCode.maxWeight(weights, w1, w2);
+    Logger::WriteMessage(weights);
+    Logger::WriteMessage("w1 = " + to_string(w1) + "; w2 = " + to_string(w2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    weights = { 3, 6, 4, 8 };
+    w1 = 9, w2 = 7;
+    result = leetCode.maxWeight(weights, w1, w2);
+    Logger::WriteMessage(weights);
+    Logger::WriteMessage("w1 = " + to_string(w1) + "; w2 = " + to_string(w2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    weights = { 5,7 };
+    w1 = 2, w2 = 3;
+    result = leetCode.maxWeight(weights, w1, w2);
+    Logger::WriteMessage(weights);
+    Logger::WriteMessage("w1 = " + to_string(w1) + "; w2 = " + to_string(w2));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3651(void)
+{
+    Logger::WriteMessage("Test Leet Code 3651");
+    LeetCodeDP leetCode;
+    vector<vector<int>> grid = { {1, 3, 3},{2, 5, 4},{4, 3, 5} };
+    int k = 2;
+    int result = leetCode.minCostTeleportations(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {1, 2} ,{2, 3},{3, 4} };
+    k = 1;
+    result = leetCode.minCostTeleportations(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {6, 7, 1, 20, 11},{4, 5, 18, 23, 28} };
+    k = 2;
+    result = leetCode.minCostTeleportations(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3665(void)
+{
+    Logger::WriteMessage("Test Leet Code 3665");
+    LeetCodeDP leetCode;
+    vector<vector<int>> grid = { {0, 1, 0},{0, 0, 1},{1, 0, 0} };
+    int result = leetCode.uniquePaths(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {0, 0},{0, 0} };
+    result = leetCode.uniquePaths(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {0, 1, 1},{1, 1, 0} };
+    result = leetCode.uniquePaths(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3665();
+    TestLeetCode3651();
+    TestLeetCode3647();
+    TestLeetCode3628();
+    TestLeetCode3621();
     TestLeetCode3603();
     TestLeetCode3610();
     TestLeetCode3599();

@@ -2193,7 +2193,7 @@ void LeetCodeBit::maxGeneticDifference(TrieBitNode* root, int node_id, vector<ve
     root->increase(node_id, 1);
     for (size_t i = 0; i < query_list[node_id].size(); i++)
     {
-        int val = (int)root->findMax(query_list[node_id][i].first);
+        int val = (int)root->maxXorFind(query_list[node_id][i].first);
         result[query_list[node_id][i].second] = val;
     }
     for (size_t i = 0; i < tree[node_id].size(); i++)
@@ -2799,7 +2799,7 @@ void LeetCodeBit::maxXorFind(int node, vector<vector<int>>& neighbors,
 {
     long long sum = sums[node];
     visited[node] = 1;
-    result = max(result, trie->findMax(sum));
+    result = max(result, trie->maxXorFind(sum));
     for (size_t i = 0; i < neighbors[node].size(); i++)
     {
         int child = neighbors[node][i];
@@ -3917,12 +3917,14 @@ int LeetCodeBit::maximumStrongPairXorII(vector<int>& nums)
             trieBitNode->decrease(nums[prev], 1);
             prev++;
         }
-        result = max(result, (int)trieBitNode->findMax(nums[i]));
+        result = max(result, (int)trieBitNode->maxXorFind(nums[i]));
         trieBitNode->increase(nums[i], 1);
     }
     return result;
     delete trieBitNode;
 }
+
+
 /// <summary>
 /// Leet Code 2939. Maximum Xor Product
 ///  
@@ -5265,4 +5267,297 @@ vector<int> LeetCodeBit::onceTwice(vector<int>& nums)
     return result;
 }
 
+/// <summary>
+/// Leet Code 3630. Partition Array for Maximum XOR and AND
+///
+/// Hard
+///
+/// You are given an integer array nums.
+///
+/// Partition the array into three (possibly empty) subsequences A, B, and C 
+/// such that every element of nums belongs to exactly one subsequence.
+///
+/// Your goal is to maximize the value of: XOR(A) + AND(B) + XOR(C)
+///
+/// where:
+/// XOR(arr) denotes the bitwise XOR of all elements in arr. If arr is empty, 
+/// its value is defined as 0.
+/// AND(arr) denotes the bitwise AND of all elements in arr. If arr is empty, 
+/// its value is defined as 0.
+/// Return the maximum value achievable.
+///
+/// Note: If multiple partitions result in the same maximum sum, you can 
+/// consider any one of them.
+/// 
+/// Example 1:
+/// Input: nums = [2,3]
+/// Output: 5
+/// Explanation:
+/// One optimal partition is:
+/// A = [3], XOR(A) = 3
+/// B = [2], AND(B) = 2
+/// C = [], XOR(C) = 0
+/// The maximum value of: XOR(A) + AND(B) + XOR(C) = 3 + 2 + 0 = 5. Thus, the 
+/// answer is 5.
+///
+/// Example 2:
+/// Input: nums = [1,3,2]
+/// Output: 6
+/// Explanation:
+/// One optimal partition is:
+/// A = [1], XOR(A) = 1
+/// B = [2], AND(B) = 2
+/// C = [3], XOR(C) = 3
+/// The maximum value of: XOR(A) + AND(B) + XOR(C) = 1 + 2 + 3 = 6. Thus, the 
+/// answer is 6.
+///
+/// Example 3:
+/// Input: nums = [2,3,6,7]
+/// Output: 15
+/// Explanation:
+/// One optimal partition is:
+/// A = [7], XOR(A) = 7
+/// B = [2,3], AND(B) = 2
+/// C = [6], XOR(C) = 6
+/// The maximum value of: XOR(A) + AND(B) + XOR(C) = 7 + 2 + 6 = 15. Thus, 
+/// the answer is 15.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 19
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+long long LeetCodeBit::maximizeXorAndXor(vector<int>& nums)
+{
+    long long result = 0;
+    int n = nums.size();
+    int sum_xor = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum_xor = sum_xor ^ nums[i];
+    }
+    for (int bit_mask = 0; bit_mask < (1 << n); bit_mask++)
+    {
+        int and_val = ~0;
+        int xor_val = 0;
+        for (int i = 0; i < n; ++i) 
+        {
+            if (bit_mask & (1 << i)) 
+            {
+                xor_val ^= nums[i];
+                and_val &= nums[i];
+            }
+        }
+        int xor_unselected = sum_xor ^ xor_val;
+        int inverted_mask = ~xor_unselected;
+        // Build linear basis from unselected elements after masking with ~M
+        vector<int> basis;
+        for (int i = 0; i < n; ++i) 
+        {
+            if (!(bit_mask & (1 << i))) 
+            {
+                int reduced = nums[i] & inverted_mask;
+                for (int b : basis) 
+                {
+                    reduced = min(reduced, reduced ^ b);
+                }
+                if (reduced) 
+                {
+                    basis.push_back(reduced);
+                    // Keep basis sorted descending
+                    int k = basis.size() - 1;
+                    while (k > 0 && basis[k] > basis[k - 1]) 
+                    {
+                        swap(basis[k], basis[k - 1]);
+                        --k;
+                    }
+                }
+            }
+        }
+
+        // Calculate max XOR using the basis
+        int max_xor = 0;
+        for (int b : basis) 
+        {
+            max_xor = max(max_xor, max_xor ^ b);
+        }
+
+        result = max(result, 1LL * and_val + 1LL * xor_unselected + 2LL * max_xor);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3632. Subarrays with XOR at Least K
+///
+/// Hard
+///
+/// Given an array of positive integers nums of length n and a non‑negative 
+/// integer k.
+///
+/// Return the number of contiguous subarrays whose bitwise XOR of all 
+/// elements is greater than or equal to k.
+///
+/// Example 1:
+/// Input: nums = [3,1,2,3], k = 2
+/// Output: 6
+/// Explanation:
+/// The valid subarrays with XOR >= 2 are [3] at index 0, [3, 1] at 
+/// indices 0 - 1, [3, 1, 2, 3] at indices 0 - 3, [1, 2] at indices 1 - 2, 
+/// [2] at index 2, and [3] at index 3; there are 6 in total.
+///
+/// Example 2:
+/// Input: nums = [0,0,0], k = 0
+/// Output: 6
+/// Explanation:
+/// Every contiguous subarray yields XOR = 0, which meets k = 0. There 
+/// are 6 such subarrays in total.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^9
+/// 3. 0 <= k <= 10^9
+/// </summary>
+long long LeetCodeBit::countXorSubarrays(vector<int>& nums, int k)
+{
+    TrieBitNode trieBitNode(31);
+    long long xor_val = 0;
+    long long result = 0;
+    trieBitNode.increase(0, 1);
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        xor_val = xor_val ^ nums[i];
+        result += trieBitNode.countXorGreater(xor_val, k);
+        trieBitNode.increase(xor_val, 1);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3644. Maximum K to Sort a Permutation
+///
+/// Medium
+///
+/// You are given an integer array nums of length n, where nums is a 
+/// permutation of the numbers in the range [0..n - 1].
+///
+/// You may swap elements at indices i and j only if nums[i] AND 
+/// nums[j] == k, where AND denotes the bitwise AND operation and k is a 
+/// non-negative integer.
+///
+/// Return the maximum value of k such that the array can be sorted in 
+/// non-decreasing order using any number of such swaps. If nums is 
+/// already sorted, return 0.
+/// 
+/// Example 1:
+/// Input: nums = [0,3,2,1]
+/// Output: 1
+/// Explanation:
+/// Choose k = 1. Swapping nums[1] = 3 and nums[3] = 1 is allowed since 
+/// nums[1] AND nums[3] == 1, resulting in a sorted permutation: [0, 1, 2, 3].
+///
+/// Example 2:
+/// Input: nums = [0,1,3,2]
+/// Output: 2
+/// Explanation:
+/// Choose k = 2. Swapping nums[2] = 3 and nums[3] = 2 is allowed since 
+/// nums[2] AND nums[3] == 2, resulting in a sorted permutation: [0, 1, 2, 3].
+///
+/// Example 3:
+/// Input: nums = [3,2,1,0]
+/// Output: 0
+/// Explanation:
+/// Only k = 0 allows sorting since no greater k allows the required swaps 
+/// where nums[i] AND nums[j] == k.
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 10^5
+/// 2. 0 <= nums[i] <= n - 1
+/// 3. nums is a permutation of integers from 0 to n - 1.
+/// 4. Seen this question in a real interview before?
+/// </summary>
+int LeetCodeBit::sortPermutation(vector<int>& nums)
+{
+    int result = ~0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (nums[i] != i)
+        {
+            result = result & nums[i];
+        }
+    }
+    if (result == ~0) result = 0;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3670. Maximum Product of Two Integers With No Common Bits
+///
+/// Medium
+///
+/// You are given an integer array nums.
+///
+/// Your task is to find two distinct indices i and j such that the product 
+/// nums[i] * nums[j] is maximized, and the binary representations of nums[i] 
+/// and nums[j] do not share any common set bits.
+///
+/// Return the maximum possible product of such a pair. If no such pair exists, 
+/// return 0.
+///
+/// Example 1:
+/// Input: nums = [1,2,3,4,5,6,7]
+/// Output: 12
+/// Explanation:
+/// The best pair is 3 (011) and 4 (100). They share no set bits and 
+/// 3 * 4 = 12.
+///
+/// Example 2:
+/// Input: nums = [5,6,4]
+/// Output: 0
+/// Explanation:
+/// Every pair of numbers has at least one common set bit. Hence, the answer 
+/// is 0.
+///
+/// Example 3:
+/// Input: nums = [64,8,32]
+/// Output: 2048
+/// Explanation:
+/// No pair of numbers share a common bit, so the answer is the product of 
+/// the two maximum elements, 64 and 32 (64 * 32 = 2048).
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^6
+/// </summary>
+long long LeetCodeBit::maxProduct(vector<int>& nums)
+{
+    int max_val = 0;
+    for (size_t i = 0; i < nums.size(); i++) max_val = max(max_val, nums[i]);
+    int mask = 1;
+    int count = 0;
+    while (mask <= max_val)
+    {
+        mask <<= 1;
+        count++;
+    }
+    vector<int> dp(mask);
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        dp[nums[i]] = nums[i];
+    }
+    for (int i = 0; i < mask; i++)
+    {
+        for (int j = 0; j < count; j++)
+        {
+            if ((i & (1 << j)) == 0) continue;
+            int k = i ^ (1 << j);
+            dp[i] = max(dp[i], dp[k]);
+        }
+    }
+    long long result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        result = max(result, 1LL * dp[nums[i]] * dp[(mask - 1) ^ nums[i]]);
+    }
+    return result;
+}
 #pragma endregion

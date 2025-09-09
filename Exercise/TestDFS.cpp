@@ -2658,8 +2658,24 @@ void TestLeetCode3594(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3669(void)
+{
+    Logger::WriteMessage("Test Leet Code 3669");
+    LeetCodeDFS leetCode;
+    int n = 100, k = 2;
+    vector<int> result = leetCode.minDifference(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    n = 44, k = 3;
+    result = leetCode.minDifference(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3669();
     TestLeetCode3594();
     TestLeetCode3565();
     TestLeetCode3538();

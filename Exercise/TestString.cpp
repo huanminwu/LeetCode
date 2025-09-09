@@ -8224,8 +8224,64 @@ void TestLeetCode3614(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + string(1, result));
 }
 
+void TestLeetCode3662(void)
+{
+    Logger::WriteMessage("Test Leet Code 3662");
+    LeetCodeString leetCode;
+    string s = "aadbbcccca";
+    int k = 3;
+    string result = leetCode.filterCharacters(s, k);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
+
+    s = "xyz"; 
+    k = 2;
+    result = leetCode.filterCharacters(s, k);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
+}
+
+void TestLeetCode3664(void)
+{
+    Logger::WriteMessage("Test Leet Code 3664");
+    LeetCodeString leetCode;
+    vector<string> cards = { "aa", "ab", "ba", "ac" };
+    char x = 'a';
+    int result = leetCode.score(cards, x);
+    Logger::WriteMessage(cards);
+    Logger::WriteMessage("x = " + string(1,x) + "; result = " + to_string(result));
+
+    cards = { "aa","ab","ba" };
+    x = 'a';
+    result = leetCode.score(cards, x);
+    Logger::WriteMessage(cards);
+    Logger::WriteMessage("x = " + string(1, x) + "; result = " + to_string(result));
+    
+    cards = { "aa", "ab", "ba", "ac" };
+    x = 'b';
+    result = leetCode.score(cards, x);
+    Logger::WriteMessage(cards);
+    Logger::WriteMessage("x = " + string(1, x) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3675(void)
+{
+    Logger::WriteMessage("Test Leet Code 3675");
+    LeetCodeString leetCode;
+    string s = "yz";
+    int result = leetCode.minOperationsEqualize(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+
+    s = "a";
+    result = leetCode.minOperationsEqualize(s);
+    Logger::WriteMessage("s = " + s + "; result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3675();
+    TestLeetCode3664();
+    TestLeetCode3662();
     TestLeetCode3614();
     TestLeetCode3612();
     TestLeetCode3606();

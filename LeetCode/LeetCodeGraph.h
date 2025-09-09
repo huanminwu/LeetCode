@@ -11975,6 +11975,205 @@ public:
     /// 7. The input graph is connected.
     /// </summary>
     int minCost(int n, vector<vector<int>>& edges, int k);
+
+    /// <summary>
+    /// Leet Code 3619. Count Islands With Total Value Divisible by K
+    ///
+    /// Medium
+    /// 
+    /// You are given an m x n matrix grid and a positive integer k. An island 
+    /// is a group of positive integers (representing land) that are 
+    /// 4 directionally connected (horizontally or vertically).
+    ///
+    /// The total value of an island is the sum of the values of all cells in 
+    /// the island.
+    ///
+    /// Return the number of islands with a total value divisible by k.
+    /// 
+    /// Example 1:
+    /// Input: grid = [[0,2,1,0,0],[0,5,0,0,5],[0,0,1,0,0],[0,1,4,7,0],
+    /// [0,2,0,0,8]], k = 5
+    ///
+    /// Output: 2
+    /// Explanation:
+    /// The grid contains four islands. The islands highlighted in blue have 
+    /// a total value that is divisible by 5, while the islands highlighted 
+    /// in red do not.
+    ///
+    /// Example 2:
+    /// Input: grid = [[3,0,3,0], [0,3,0,3], [3,0,3,0]], k = 3
+    /// Output: 6
+    /// Explanation:
+    /// The grid contains six islands, each with a total value that is 
+    /// divisible by 3.
+    ///  
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 1 <= m, n <= 1000
+    /// 4. 1 <= m * n <= 10^5
+    /// 5. 0 <= grid[i][j] <= 10^6
+    /// 6. 1 <= k <= 10^6
+    /// </summary>
+    int countIslands(vector<vector<int>>& grid, int k);
+
+    /// <summary>
+    /// Leet Code 3620. Network Recovery Pathways
+    ///
+    /// Hard
+    ///
+    /// You are given a directed acyclic graph of n nodes numbered from 0 to 
+    /// n − 1. This is represented by a 2D array edges of length m, where 
+    /// edges[i] = [ui, vi, costi] indicates a one‑way communication from 
+    /// node ui to node vi with a recovery cost of costi.
+    ///
+    /// Some nodes may be offline. You are given a boolean array online where 
+    /// online[i] = true means node i is online. Nodes 0 and n − 1 are always 
+    /// online.
+    ///
+    /// A path from 0 to n − 1 is valid if:
+    ///
+    /// All intermediate nodes on the path are online.
+    /// The total recovery cost of all edges on the path does not exceed k.
+    /// For each valid path, define its score as the minimum edge‑cost along 
+    /// that path.
+    ///
+    /// Return the maximum path score (i.e., the largest minimum-edge cost) 
+    /// among all valid paths. If no valid path exists, return -1.
+    /// 
+    /// Example 1:
+    /// Input: edges = [[0,1,5],[1,3,10],[0,2,3],[2,3,4]], 
+    /// online = [true,true,true,true], k = 10
+    /// Output: 3
+    /// Explanation:
+    /// The graph has two possible routes from node 0 to node 3:
+    /// Path 0 -> 1 -> 3
+    /// Total cost = 5 + 10 = 15, which exceeds k (15 > 10), so this path is 
+    /// invalid.
+    /// Path 0 -> 2 -> 3
+    /// Total cost = 3 + 4 = 7 <= k, so this path is valid.
+    /// The minimum edge‐cost along this path is min(3, 4) = 3.
+    /// There are no other valid paths. Hence, the maximum among all valid path‐
+    /// scores is 3.
+    ///
+    /// Example 2:
+    /// Input: edges = [[0,1,7],[1,4,5],[0,2,6],[2,3,6],[3,4,2],[2,4,6]], 
+    /// online = [true,true,true,false,true], k = 12
+    /// Output: 6
+    /// Explanation:
+    /// Node 3 is offline, so any path passing through 3 is invalid.
+    /// Consider the remaining routes from 0 to 4:
+    /// Path 0 -> 1 -> 4
+    /// Total cost = 7 + 5 = 12 <= k, so this path is valid.
+    /// The minimum edge‐cost along this path is min(7, 5) = 5.
+    /// Path 0 -> 2 -> 3 -> 4
+    /// Node 3 is offline, so this path is invalid regardless of cost.
+    /// Path 0 -> 2 -> 4
+    /// Total cost = 6 + 6 = 12 <= k, so this path is valid.
+    /// The minimum edge‐cost along this path is min(6, 6) = 6.
+    /// Among the two valid paths, their scores are 5 and 6. Therefore, the 
+    /// answer is 6.
+    /// 
+    /// Constraints:
+    /// 1. n == online.length
+    /// 2. 2 <= n <= 5 * 10^4
+    /// 3. 0 <= m == edges.length <= min(10^5, n * (n - 1) / 2)
+    /// 4. edges[i] = [ui, vi, costi]
+    /// 5. 0 <= ui, vi < n
+    /// 6. ui != vi
+    /// 7. 0 <= costi <= 109
+    /// 8. 0 <= k <= 5 * 10^13
+    /// 9. online[i] is either true or false, and both online[0] and online[n − 1] 
+    ///    are true.
+    /// 10. The given graph is a directed acyclic graph.
+    /// </summary>
+    int findMaxPathScore(vector<vector<int>>& edges, vector<bool>& online, long long k);
+
+    /// <summary>
+    /// Leet Code 3650. Minimum Cost Path with Edge Reversals
+    ///
+    /// Medium
+    ///
+    /// You are given a directed, weighted graph with n nodes labeled from 0 to 
+    /// n - 1, and an array edges where edges[i] = [ui, vi, wi] represents a 
+    /// directed edge from node ui to node vi with cost wi.
+    ///
+    /// Each node ui has a switch that can be used at most once: when you arrive 
+    /// at ui and have not yet used its switch, you may activate it on one of its 
+    /// incoming edges vi -> ui reverse that edge to ui -> vi and immediately 
+    /// traverse it.
+    ///
+    /// The reversal is only valid for that single move, and using a reversed 
+    /// edge costs 2 * wi.
+    ///
+    /// Return the minimum total cost to travel from node 0 to node n - 1. If it 
+    /// is not possible, return -1.
+    ///
+    /// Example 1:
+    /// Input: n = 4, edges = [[0,1,3],[3,1,1],[2,3,4],[0,2,2]]
+    /// Output: 5
+    /// Explanation:
+    /// Use the path 0 -> 1 (cost 3).
+    /// At node 1 reverse the original edge 3 -> 1 into 1 -> 3 and traverse it 
+    /// at cost 2 * 1 = 2.
+    /// Total cost is 3 + 2 = 5.
+    ///
+    /// Example 2:
+    /// Input: n = 4, edges = [[0,2,1],[2,1,1],[1,3,1],[2,3,3]]
+    /// Output: 3
+    /// Explanation:
+    /// No reversal is needed. Take the path 0 -> 2 (cost 1), then 2 -> 1 
+    /// (cost 1), then 1 -> 3 (cost 1).
+    /// Total cost is 1 + 1 + 1 = 3.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 5 * 10^4
+    /// 2. 1 <= edges.length <= 10^5
+    /// 3. edges[i] = [ui, vi, wi]
+    /// 4. 0 <= ui, vi <= n - 1
+    /// 5. 1 <= wi <= 1000
+    /// </summary>
+    int minCost(int n, vector<vector<int>>& edges);
+
+    /// <summary>
+    /// Leet Code 3656. Determine if a Simple Graph Exists
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array degrees, where degrees[i] represents the 
+    /// desired degree of the ith vertex.
+    ///
+    /// Your task is to determine if there exists an undirected simple graph with 
+    /// exactly these vertex degrees.
+    ///
+    /// A simple graph has no self-loops or parallel edges between the same pair 
+    /// of vertices.
+    ///
+    /// Return true if such a graph exists, otherwise return false.
+    /// 
+    /// Example 1:
+    /// Input: degrees = [3,1,2,2]
+    /// Output: true
+    /// Explanation:
+    /// One possible undirected simple graph is:
+    /// Edges: (0, 1), (0, 2), (0, 3), (2, 3)
+    /// Degrees: deg(0) = 3, deg(1) = 1, deg(2) = 2, deg(3) = 2.
+    ///
+    /// Example 2:
+    /// Input: degrees = [1,3,3,1]
+    /// Output: false
+    /// Explanation:​​​​​​​
+    /// degrees[1] = 3 and degrees[2] = 3 means they must be connected to all 
+    /// other vertices.
+    /// This requires degrees[0] and degrees[3] to be at least 2, but both are 
+    /// equal to 1, which contradicts the requirement.
+    /// Thus, the answer is false.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == degrees.length <= 10^​​​​​​​5
+    /// 2. 0 <= degrees[i] <= n - 1
+    /// </summary>
+    bool simpleGraphExists(vector<int>& degrees);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

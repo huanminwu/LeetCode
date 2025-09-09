@@ -6550,8 +6550,110 @@ void TestLeetCode3613(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3619(void)
+{
+    Logger::WriteMessage("Test Leet Code 3619");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid =
+    {
+        {0, 2, 1, 0, 0},{0, 5, 0, 0, 5},{0, 0, 1, 0, 0},{0, 1, 4, 7, 0},{0, 2, 0, 0, 8}
+    };
+    int k = 5;
+    int result = leetCode.countIslands(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid =
+    {
+        {3,0,3,0},{0,3,0,3},{3,0,3,0}
+    };
+    k = 3;
+    result = leetCode.countIslands(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3620(void)
+{
+    Logger::WriteMessage("Test Leet Code 3620");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> edges = 
+    {
+        {0, 1, 5},{1, 3, 10},{0, 2, 3},{2, 3, 4} 
+    };
+    vector<bool> online = { true, true, true, true };
+    long long k = 10;
+    int result = leetCode.findMaxPathScore(edges, online, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(online);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    edges =
+    {
+        {0,1,7},{1,4,5},{0,2,6},{2,3,6},{3,4,2},{2,4,6}
+    };
+    online = { true,true,true,false,true };
+    k = 12;
+    result = leetCode.findMaxPathScore(edges, online, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(online);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    edges = { {0, 1, 5},{0, 1, 0},{1, 2, 5} };
+    online = { true,true,true };
+    k = 10;
+    result = leetCode.findMaxPathScore(edges, online, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(online);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3650(void)
+{
+    Logger::WriteMessage("Test Leet Code 3650");
+    LeetCodeGraph leetCode;
+    int n = 4;
+    vector<vector<int>> edges =
+    {
+        {0, 1, 3},{3, 1, 1},{2, 3, 4},{0, 2, 2}
+    };
+    int result = leetCode.minCost(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    edges =
+    {
+        {0, 2, 1} ,{2, 1, 1},{1, 3, 1},{2, 3, 3}
+    };
+    result = leetCode.minCost(n, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+
+void TestLeetCode3656(void)
+{
+    Logger::WriteMessage("Test Leet Code 3656");
+    LeetCodeGraph leetCode;
+    vector<int> degrees = { 3, 1, 2, 2 };
+    bool result = leetCode.simpleGraphExists(degrees);
+    Logger::WriteMessage(degrees);
+    Logger::WriteMessage("result = " + (string)(result? "true" : "false"));
+
+    degrees = { 1,3,3,1 };
+    result = leetCode.simpleGraphExists(degrees);
+    Logger::WriteMessage(degrees);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3656();
+    TestLeetCode3650();
+    TestLeetCode3620();
+    TestLeetCode3619();
     TestLeetCode3613();
     TestLeetCode3608();
     TestLeetCode3615();

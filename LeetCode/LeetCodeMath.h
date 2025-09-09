@@ -16876,5 +16876,315 @@ public:
     /// 2. 0 <= sy <= ty <= 10^9
     /// </summary>
     int minMoves(int sx, int sy, int tx, int ty);
+
+    /// <summary>
+    /// Leet Code 3625. Count Number of Trapezoids II
+    ///
+    /// Hard
+    ///
+    /// You are given a 2D integer array points where points[i] = [xi, yi] 
+    /// represents the coordinates of the ith point on the Cartesian plane.
+    ///
+    /// Return the number of unique trapezoids that can be formed by choosing 
+    /// any four distinct points from points.
+    ///
+    /// A trapezoid is a convex quadrilateral with at least one pair of 
+    /// parallel sides. Two lines are parallel if and only if they have the 
+    /// same slope.
+    ///
+    /// 
+    /// Example 1:
+    /// Input: points = [[-3,2],[3,0],[2,3],[3,2],[2,-3]]
+    /// Output: 2
+    /// Explanation:
+    /// There are two distinct ways to pick four points that form a trapezoid:
+    /// The points [-3,2], [2,3], [3,2], [2,-3] form one trapezoid.
+    /// The points [2,3], [3,2], [3,0], [2,-3] form another trapezoid.
+    ///
+    /// Example 2:
+    /// Input: points = [[0,0],[1,0],[0,1],[2,1]]
+    /// Output: 1
+    /// Explanation:
+    /// There is only one trapezoid which can be formed.
+    /// Constraints:
+    /// 1. 4 <= points.length <= 500
+    /// 2. –1000 <= xi, yi <= 1000
+    /// 3. All points are pairwise distinct.
+    /// </summary>
+    int countTrapezoidsII(vector<vector<int>>& points);
+
+    /// <summary>
+    /// Leet Code 3623. Count Number of Trapezoids I
+    ///
+    /// Medium
+    ///
+    /// You are given a 2D integer array points, where points[i] = [xi, yi] 
+    /// represents the coordinates of the ith point on the Cartesian plane.
+    ///
+    /// A horizontal trapezoid is a convex quadrilateral with at least one 
+    /// pair of horizontal sides (i.e. parallel to the x-axis). Two lines 
+    /// are parallel if and only if they have the same slope.
+    ///
+    /// Return the number of unique horizontal trapezoids that can be formed 
+    /// by choosing any four distinct points from points.
+    ///
+    /// Since the answer may be very large, return it modulo 10^9 + 7.
+    /// 
+    /// Example 1:
+    /// Input: points = [[1,0],[2,0],[3,0],[2,2],[3,2]]
+    /// Output: 3
+    /// Explanation:
+    /// 
+    /// There are three distinct ways to pick four points that form a horizontal 
+    /// trapezoid:
+    ///
+    /// Using points [1,0], [2,0], [3,2], and [2,2].
+    /// Using points [2,0], [3,0], [3,2], and [2,2].
+    /// Using points [1,0], [3,0], [3,2], and [2,2].
+    ///
+    /// Example 2:
+    /// Input: points = [[0,0],[1,0],[0,1],[2,1]]
+    /// Output: 1
+    /// Explanation:
+    /// There is only one horizontal trapezoid that can be formed.
+    /// Constraints:
+    /// 1. 4 <= points.length <= 10^5
+    /// 2. –10^8 <= xi, yi <= 10^8
+    /// 3. All points are pairwise distinct.
+    /// </summary>
+    int countTrapezoidsI(vector<vector<int>>& points);
+
+    /// <summary>
+    /// Leet Code 3622. Check Divisibility by Digit Sum and Product
+    ///
+    /// Easy
+    /// 
+    /// You are given a positive integer n. Determine whether n is divisible by 
+    /// the sum of the following two values:
+    ///
+    /// The digit sum of n (the sum of its digits).
+    ///
+    /// The digit product of n (the product of its digits).
+    ///
+    /// Return true if n is divisible by this sum; otherwise, return false.
+    ///
+    /// Example 1:
+    /// Input: n = 99
+    /// Output: true
+    /// Explanation:
+    /// Since 99 is divisible by the sum (9 + 9 = 18) plus product (9 * 9 = 81) 
+    /// of its digits (total 99), the output is true.
+    ///
+    /// Example 2:
+    /// Input: n = 23
+    /// Output: false
+    /// Explanation:
+    /// Since 23 is not divisible by the sum (2 + 3 = 5) plus product (2 * 3 = 6) 
+    /// of its digits (total 11), the output is false.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^6
+    /// </summary>
+    bool checkDivisibility(int n);
+
+    /// <summary>
+    /// Leet Code 3618. Split Array by Prime Indices
+    ///
+    /// Medium
+    /// 
+    /// You are given an integer array nums.
+    /// Split nums into two arrays A and B using the following rule:
+    /// Elements at prime indices in nums must go into array A.
+    /// All other elements must go into array B.
+    /// Return the absolute difference between the sums of the two arrays: 
+    /// |sum(A) - sum(B)|.
+    ///
+    /// Note: An empty array has a sum of 0.
+    /// Example 1:
+    /// Input: nums = [2,3,4]
+    /// Output: 1
+    /// Explanation:
+    /// The only prime index in the array is 2, so nums[2] = 4 is placed in 
+    /// array A.
+    /// The remaining elements, nums[0] = 2 and nums[1] = 3 are placed in 
+    /// array B.
+    /// sum(A) = 4, sum(B) = 2 + 3 = 5.
+    /// The absolute difference is |4 - 5| = 1.
+    ///
+    /// Example 2:
+    /// Input: nums = [-1,5,7,0]
+    /// Output: 3
+    /// Explanation:
+    /// The prime indices in the array are 2 and 3, so nums[2] = 7 and nums[3] = 0 
+    /// are placed in array A.
+    /// The remaining elements, nums[0] = -1 and nums[1] = 5 are placed in array B.
+    /// sum(A) = 7 + 0 = 7, sum(B) = -1 + 5 = 4.
+    /// The absolute difference is |7 - 4| = 3.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// </summary>
+    long long splitArray(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3646. Next Special Palindrome Number
+    ///
+    /// Hard
+    ///
+    /// You are given an integer n.
+    /// A number is called special if:
+    /// 
+    /// It is a palindrome.
+    /// Every digit k in the number appears exactly k times.
+    /// Return the smallest special number strictly greater than n.
+    /// 
+    /// 
+    /// Example 1:
+    /// Input: n = 2
+    /// Output: 22
+    /// Explanation:
+    /// 22 is the smallest special number greater than 2, as it is a palindrome 
+    /// and the digit 2 appears exactly 2 times.
+    ///
+    /// Example 2:
+    /// Input: n = 33
+    /// Output: 212
+    /// Explanation:
+    /// 212 is the smallest special number greater than 33, as it is a palindrome 
+    /// and the digits 1 and 2 appear exactly 1 and 2 times respectively.
+    ///
+    /// Constraints:
+    /// 1. 0 <= n <= 10^15
+    /// </summary>
+    long long specialPalindrome(long long n);
+
+    /// <summary>
+    /// Leet Code 3648. Minimum Sensors to Cover Grid
+    ///
+    /// Medium
+    ///
+    /// You are given n × m grid and an integer k.
+    ///
+    /// A sensor placed on cell (r, c) covers all cells whose Chebyshev distance 
+    /// from (r, c) is at most k.
+    ///
+    /// The Chebyshev distance between two cells (r1, c1) and (r2, c2) is 
+    /// max(|r1 − r2|,|c1 − c2|).
+    ///
+    /// Your task is to return the minimum number of sensors required to cover 
+    /// every cell of the grid.
+    ///
+    /// Example 1:
+    /// Input: n = 5, m = 5, k = 1
+    /// Output: 4
+    /// Explanation:
+    /// Placing sensors at positions (0, 3), (1, 0), (3, 3), and (4, 1) ensures 
+    /// every cell in the grid is covered. Thus, the answer is 4.
+    ///
+    /// Example 2:
+    /// Input: n = 2, m = 2, k = 2
+    /// Output: 1
+    /// Explanation:
+    /// With k = 2, a single sensor can cover the entire 2 * 2 grid regardless of 
+    /// its position. Thus, the answer is 1.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^3
+    /// 2. 1 <= m <= 10^3
+    /// 3. 0 <= k <= 10^3
+    /// </summary>
+    int minSensors(int n, int m, int k);
+
+    /// <summary>
+    /// Leet Code 3649. Number of Perfect Pairs
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// A pair of indices (i, j) is called perfect if the following conditions 
+    /// are satisfied:
+    ///
+    /// i < j
+    /// Let a = nums[i], b = nums[j]. Then:
+    /// min(|a - b|, |a + b|) <= min(|a|, |b|)
+    /// max(|a - b|, |a + b|) >= max(|a|, |b|)
+    /// Return the number of distinct perfect pairs.
+    ///
+    /// Note: The absolute value |x| refers to the non-negative value of x.
+    /// 
+    /// Example 1:
+    /// Input: nums = [0,1,2,3]
+    /// Output: 2
+    /// Explanation:
+    /// There are 2 perfect pairs:
+    /// (i, j)  (a, b)  min(|a − b|, |a + b|)   min(|a|, |b|)   
+    /// max(|a − b|, |a + b|)   max(|a|, |b|)
+    /// (1, 2)  (1, 2)  min(|1 − 2|, |1 + 2|) = 1   1   
+    /// max(|1 − 2|, |1 + 2|) = 3   2
+    /// (2, 3)  (2, 3)  min(|2 − 3|, |2 + 3|) = 1   2   
+    /// max(|2 − 3|, |2 + 3|) = 5   3
+    ///
+    /// Example 2:
+    /// Input: nums = [-3,2,-1,4]
+    /// Output: 4
+    /// Explanation:
+    /// There are 4 perfect pairs:
+    /// (i, j)  (a, b)  min(|a − b|, |a + b|)   min(|a|, |b|)   
+    /// max(|a − b|, |a + b|)   max(|a|, |b|)
+    /// (0, 1)  (-3, 2) min(|-3 - 2|, |-3 + 2|) = 1 2   
+    /// max(|-3 - 2|, |-3 + 2|) = 5 3
+    /// (0, 3)  (-3, 4) min(|-3 - 4|, |-3 + 4|) = 1 3   
+    /// max(|-3 - 4|, |-3 + 4|) = 7 4
+    /// (1, 2)  (2, -1) min(|2 - (-1)|, |2 + (-1)|) = 1 1   
+    /// max(|2 - (-1)|, |2 + (-1)|) = 3 2
+    /// (1, 3)  (2, 4)  min(|2 - 4|, |2 + 4|) = 2   2   
+    /// max(|2 - 4|, |2 + 4|) = 6   4
+    ///
+    /// Example 3:
+    /// Input: nums = [1,10,100,1000]
+    /// Output: 0
+    /// Explanation:
+    /// There are no perfect pairs. Thus, the answer is 0.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 105
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// </summary>
+    long long perfectPairs(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3658. GCD of Odd and Even Sums
+    ///
+    /// Easy
+    //
+    /// You are given an integer n. Your task is to compute the GCD (greatest 
+    /// common divisor) of two values:
+    ///
+    /// sumOdd: the sum of the first n odd numbers.
+    /// sumEven: the sum of the first n even numbers.
+    /// Return the GCD of sumOdd and sumEven.
+    /// 
+    /// Example 1:
+    /// Input: n = 4
+    /// Output: 4
+    /// Explanation:
+    /// Sum of the first 4 odd numbers sumOdd = 1 + 3 + 5 + 7 = 16
+    /// Sum of the first 4 even numbers sumEven = 2 + 4 + 6 + 8 = 20
+    /// Hence, GCD(sumOdd, sumEven) = GCD(16, 20) = 4.
+    ///
+    /// Example 2:
+    /// Input: n = 5
+    /// Output: 5
+    /// Explanation:
+    /// Sum of the first 5 odd numbers sumOdd = 1 + 3 + 5 + 7 + 9 = 25
+    /// Sum of the first 5 even numbers sumEven = 2 + 4 + 6 + 8 + 10 = 30
+    /// Hence, GCD(sumOdd, sumEven) = GCD(25, 30) = 5.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 10​​​​​​​00
+    /// </summary>
+    int gcdOfOddEvenSums(int n);
 };
 #endif

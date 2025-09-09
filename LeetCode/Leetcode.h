@@ -143,10 +143,15 @@ static long long modPow(long long x, long long y, long long M)
     return ((y % 2) ? (p * x % M) % M : p);
 }
 
+static long long modPowInv(long long v, long long M)
+{
+    return modPow(v, M - 2, M) % M;
+}
+
 /// <summary>
 /// Leet code 1830. Minimum Number of Operations to Make String Sorted
 /// </summary>
-static int bitCount(int bit_mask)
+static int bitCount(long long bit_mask)
 {
     int result = 0;
     while (bit_mask != 0)
@@ -181,6 +186,7 @@ static bool isPrime(long long N)
 #pragma region Design
 struct BinaryIndexTree
 {
+    const int M = 1000000007;
     vector<int> m_arr;
     int m_count;
     BinaryIndexTree(int n)
@@ -193,7 +199,7 @@ struct BinaryIndexTree
         if (index == 0) return;
         while (index < m_count)
         {
-            m_arr[index] += val;
+            m_arr[index] = (m_arr[index] + val) % M;
             index += (index & -index);
         }
     }
@@ -202,7 +208,7 @@ struct BinaryIndexTree
         int sum = 0;
         while (index != 0)
         {
-            sum += m_arr[index];
+            sum = (sum + m_arr[index]) % M;
             index -= index & -index;
         }
         return sum;
@@ -417,6 +423,77 @@ struct SegmentTreeModuloK
     }
 };
 
+
+struct SegmentTreeSlotSum
+{
+    struct Node
+    {
+        // record the all [left, right] prefix product.
+        // Example: (left), (left, left+1), ... (left,... right)
+    public:
+        vector<int> sum;
+        Node()
+        {
+            sum = vector<int>(6);
+        }
+    };
+
+
+    int n;
+    vector<Node> nodes;
+    SegmentTreeSlotSum(int n)
+    {
+        this->n = n;
+        nodes.resize(4 * n);
+    }
+    void merge(int cur)
+    {
+        // merge the 2*cur+1 and 2*cur+2 node to cur
+        int left = 2 * cur + 1;
+        int right = 2 * cur + 2;
+        for (int i = 0; i < 6; i++)
+        {
+            nodes[cur].sum[i] = nodes[left].sum[i] + nodes[right].sum[i];
+        }
+    }
+
+    void update(int cur, int left, int right, int target, int val)
+    {
+        if (left == right)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                nodes[cur].sum[i] = 0;
+            }
+            nodes[cur].sum[val] = 1;
+            return;
+        }
+        int mid = (left + right) / 2;
+        if (target <= mid)
+        { 
+            update(2 * cur + 1, left, mid, target, val);
+        }
+        else
+        {
+            update(2 * cur + 2, mid + 1, right, target, val);
+        }
+        merge(cur);
+    }
+
+
+    int query(int cur, int qL, int qR, int left, int right, int k)
+    {
+        if (qR < left || qL > right) return 0; // empty
+        if (qL <= left && right <= qR)
+        {
+            return nodes[cur].sum[k];
+        }
+        int mid = (left + right) / 2;
+        int left_val = query(2 * cur + 1, qL, qR, left, mid, k);
+        int right_val = query(2 * cur + 2, qL, qR, mid + 1, right, k);
+        return left_val + right_val;
+    }
+};
 
 #pragma endregion 
 class Logger

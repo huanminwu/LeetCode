@@ -11076,4 +11076,81 @@ double LeetCodeDFS::minTime(int n, int k, int m, vector<int>& time, vector<doubl
     }
     return result == DBL_MAX ? -1 : result;
 }
+
+/// <summary>
+/// Leet Code 3669. Balanced K-Factor Decomposition
+/// </summary>
+void LeetCodeDFS::minDifference(vector<int>& path, vector<int>& factors, int index, int k, int product, vector<int>& result)
+{
+    if (path.size() == k - 1)
+    {
+        path.push_back(product);
+        if (result.empty() || result.back() - result[0] > path.back() - path[0])
+        {
+            result = path;
+        }
+        path.pop_back();
+        return;
+    }
+    for (size_t i = index; i < factors.size(); i++)
+    {
+        if (product / factors[i] < factors[i]) break;
+        if (product % factors[i] == 0)
+        {
+            product /= factors[i];
+            path.push_back(factors[i]);
+            minDifference(path, factors, i, k, product, result);
+            path.pop_back();
+            product *= factors[i];
+        }
+    }
+}
+
+
+/// <summary>
+/// Leet Code 3669. Balanced K-Factor Decomposition
+///
+/// Medium
+///
+/// Given two integers n and k, split the number n into exactly k positive 
+/// integers such that the product of these integers is equal to n.
+///
+/// Return any one split in which the maximum difference between any two 
+/// numbers is minimized. You may return the result in any order.
+///
+/// Example 1:
+/// Input: n = 100, k = 2
+/// Output: [10,10]
+///
+/// Explanation:
+/// The split [10, 10] yields 10 * 10 = 100 and a max-min difference of 0, 
+/// which is minimal.
+///
+/// Example 2:
+/// Input: n = 44, k = 3
+/// Output: [2,2,11]
+/// Explanation:
+/// Split [1, 1, 44] yields a difference of 43
+/// Split [1, 2, 22] yields a difference of 21
+/// Split [1, 4, 11] yields a difference of 10
+/// Split [2, 2, 11] yields a difference of 9
+/// Therefore, [2, 2, 11] is the optimal split with the smallest difference 9.
+///
+/// Constraints:
+/// 1. 4 <= n <= 10^5
+/// 2. 2 <= k <= 5
+/// 3. k is strictly less than the total number of positive divisors of n.
+/// </summary>
+vector<int> LeetCodeDFS::minDifference(int n, int k)
+{
+    vector<int> factors;
+    for (int i = 1; i <= n; i++)
+    {
+        if (n % i == 0) factors.push_back(i);
+    }
+    vector<int> path;
+    vector<int> result;
+    minDifference(path, factors, 0, k, n, result);
+    return result;
+}
 #pragma endregion

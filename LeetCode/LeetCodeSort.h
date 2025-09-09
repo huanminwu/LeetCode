@@ -9037,6 +9037,444 @@ public:
     /// 3. 1 <= x[i], y[i] <= 10^6
     /// </summary>
     int maxSumDistinctTriplet(vector<int>& x, vector<int>& y);
+
+    /// <summary>
+    /// Leet Code 3627. Maximum Median Sum of Subsequences of Size 3
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums with a length divisible by 3.
+    ///
+    /// You want to make the array empty in steps. In each step, you can select 
+    /// any three elements from the array, compute their median, and remove the 
+    /// selected elements from the array.
+    ///
+    /// The median of an odd-length sequence is defined as the middle element of 
+    /// the sequence when it is sorted in non-decreasing order.
+    ///
+    /// Return the maximum possible sum of the medians computed from the selected 
+    /// elements.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,1,3,2,1,3]
+    /// Output: 5
+    /// Explanation:
+    /// In the first step, select elements at indices 2, 4, and 5, which have a 
+    /// median 3. After removing these elements, nums becomes [2, 1, 2].
+    /// In the second step, select elements at indices 0, 1, and 2, which have 
+    /// a median 2. After removing these elements, nums becomes empty.
+    /// Hence, the sum of the medians is 3 + 2 = 5.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,1,10,10,10,10]
+    /// Output: 20
+    /// 
+    /// Explanation:
+    /// In the first step, select elements at indices 0, 2, and 3, which have a
+    /// median 10. After removing these elements, nums becomes [1, 10, 10].
+    /// In the second step, select elements at indices 0, 1, and 2, which have a 
+    /// median 10. After removing these elements, nums becomes empty.
+    /// Hence, the sum of the medians is 10 + 10 = 20.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 5 * 10^5
+    /// 2. nums.length % 3 == 0
+    /// 3. 1 <= nums[i] <= 10^9
+    /// </summary>
+    long long maximumMedianSum(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3631. Sort Threats by Severity and Exploitability
+    ///
+    /// Medium
+    ///
+    /// You are given a 2D integer array threats, where each 
+    /// threats[i] = [IDi, sevi​, expi]
+    ///
+    /// IDi: Unique identifier of the threat.
+    /// sevi: Indicates the severity of the threat.
+    /// expi: Indicates the exploitability of the threat.
+    /// The score of a threat i is defined as: score = 2 × sevi + expi
+    ///
+    /// Your task is to return threats sorted in descending order of score.
+    /// If multiple threats have the same score, sort them by ascending ID​​​​​​​.
+    /// 
+    /// Example 1:
+    /// Input: threats = [[101,2,3],[102,3,2],[103,3,3]]
+    /// Output: [[103,3,3],[102,3,2],[101,2,3]]
+    /// Explanation:
+    /// Threat  ID  sev exp Score = 2 × sev + exp
+    /// threats[0]  101 2   3   2 × 2 + 3 = 7
+    /// threats[1]  102 3   2   2 × 3 + 2 = 8
+    /// threats[2]  103 3   3   2 × 3 + 3 = 9
+    /// Sorted Order: [[103, 3, 3], [102, 3, 2], [101, 2, 3]]
+    ///
+    /// Example 2:
+    /// Input: threats = [[101,4,1],[103,1,5],[102,1,5]]
+    /// Output: [[101,4,1],[102,1,5],[103,1,5]]
+    /// Explanation:​​​​​​​
+    /// Threat  ID  sev exp Score = 2 × sev + exp
+    /// threats[0]  101 4   1   2 × 4 + 1 = 9
+    /// threats[1]  103 1   5   2 × 1 + 5 = 7
+    /// threats[2]  102 1   5   2 × 1 + 5 = 7
+    /// threats[1] and threats[2] have same score, thus sort them by ascending ID.
+    ///
+    /// Sorted Order: [[101, 4, 1], [102, 1, 5], [103, 1, 5]]
+    ///
+    /// Constraints:
+    /// 1. 1 <= threats.length <= 10^5
+    /// 2. threats[i] == [IDi, sevi, expi]
+    /// 3. 1 <= IDi <= 10^6
+    /// 4. 1 <= sevi <= 10^9
+    /// 5. 1 <= expi <= 10^9
+    /// 6. All IDi are unique
+    /// </summary>
+    vector<vector<int>> sortThreats(vector<vector<int>>& threats);
+
+    /// <summary>
+    /// Leet Code 3633. Earliest Finish Time for Land and Water Rides I
+    ///
+    /// Easy
+    ///
+    /// You are given two categories of theme park attractions: land rides and 
+    /// water rides.
+    ///
+    /// Land rides
+    /// landStartTime[i] – the earliest time the ith land ride can be boarded.
+    /// landDuration[i] – how long the ith land ride lasts.
+    /// Water rides
+    /// waterStartTime[j] – the earliest time the jth water ride can be boarded.
+    /// waterDuration[j] – how long the jth water ride lasts.
+    /// A tourist must experience exactly one ride from each category, in either 
+    /// order.
+    ///
+    /// A ride may be started at its opening time or any later moment.
+    /// If a ride is started at time t, it finishes at time t + duration.
+    /// Immediately after finishing one ride the tourist may board the other (if 
+    /// it is already open) or wait until it opens.
+    /// Return the earliest possible time at which the tourist can finish both 
+    /// rides.
+    /// 
+    /// Example 1:
+    /// Input: landStartTime = [2,8], landDuration = [4,1], waterStartTime = [6], 
+    /// waterDuration = [3]
+    /// Output: 9
+    /// Explanation:​​​​​​​
+    /// Plan A (land ride 0 → water ride 0):
+    /// Start land ride 0 at time landStartTime[0] = 2. 
+    /// Finish at 2 + landDuration[0] = 6.
+    /// Water ride 0 opens at time waterStartTime[0] = 6. Start immediately at 6, 
+    /// finish at 6 + waterDuration[0] = 9.
+    /// Plan B (water ride 0 → land ride 1):
+    /// Start water ride 0 at time waterStartTime[0] = 6. 
+    /// Finish at 6 + waterDuration[0] = 9.
+    /// Land ride 1 opens at landStartTime[1] = 8. Start at time 9, 
+    /// finish at 9 + landDuration[1] = 10.
+    /// Plan C (land ride 1 → water ride 0):
+    /// Start land ride 1 at time landStartTime[1] = 8. 
+    /// Finish at 8 + landDuration[1] = 9.
+    /// Water ride 0 opened at waterStartTime[0] = 6. Start at time 9, 
+    /// finish at 9 + waterDuration[0] = 12.
+    /// Plan D (water ride 0 → land ride 0):
+    /// Start water ride 0 at time waterStartTime[0] = 6. 
+    /// Finish at 6 + waterDuration[0] = 9.
+    /// Land ride 0 opened at landStartTime[0] = 2. Start at time 9, 
+    /// finish at 9 + landDuration[0] = 13.
+    /// Plan A gives the earliest finish time of 9.
+    ///
+    /// Example 2:
+    /// Input: landStartTime = [5], landDuration = [3], waterStartTime = [1], 
+    /// waterDuration = [10]
+    /// 
+    /// Output: 14
+    /// Explanation:​​​​​​​
+    /// Plan A (water ride 0 → land ride 0):
+    /// Start water ride 0 at time waterStartTime[0] = 1. 
+    /// Finish at 1 + waterDuration[0] = 11.
+    /// Land ride 0 opened at landStartTime[0] = 5. Start immediately at 11 and 
+    /// finish at 11 + landDuration[0] = 14.
+    /// Plan B (land ride 0 → water ride 0):
+    /// Start land ride 0 at time landStartTime[0] = 5. 
+    /// Finish at 5 + landDuration[0] = 8.
+    /// Water ride 0 opened at waterStartTime[0] = 1. Start immediately at 8 and 
+    /// finish at 8 + waterDuration[0] = 18.
+    /// Plan A provides the earliest finish time of 14.​​​​​​​
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n, m <= 100
+    /// 2. landStartTime.length == landDuration.length == n
+    /// 3. waterStartTime.length == waterDuration.length == m
+    /// 4. 1 <= landStartTime[i], landDuration[i], waterStartTime[j], 
+    ///    waterDuration[j] <= 1000
+    /// </summary>
+    int earliestFinishTimeI(vector<int>& landStartTime, vector<int>& landDuration,
+        vector<int>& waterStartTime, vector<int>& waterDuration);
+
+    /// <summary>
+    /// Leet Code 3634. Minimum Removals to Balance Array
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums and an integer k.
+    ///
+    /// An array is considered balanced if the value of its maximum element is at 
+    /// most k times the minimum element.
+    ///
+    /// You may remove any number of elements from nums​​​​​​​ without making it empty.
+    ///
+    /// Return the minimum number of elements to remove so that the remaining 
+    /// array is balanced.
+    /// Note: An array of size 1 is considered balanced as its maximum and minimum 
+    /// are equal, and the condition always holds true.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,1,5], k = 2
+    /// Output: 1
+    /// Explanation:
+    /// Remove nums[2] = 5 to get nums = [2, 1].
+    /// Now max = 2, min = 1 and max <= min * k as 2 <= 1 * 2. Thus, the answer is 1.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,6,2,9], k = 3
+    /// Output: 2
+    /// Explanation:
+    /// Remove nums[0] = 1 and nums[3] = 9 to get nums = [6, 2].
+    /// Now max = 6, min = 2 and max <= min * k as 6 <= 2 * 3. Thus, the answer is 2.
+    ///
+    /// Example 3:
+    /// Input: nums = [4,6], k = 2
+    /// Output: 0
+    /// Explanation:
+    /// Since nums is already balanced as 6 <= 4 * 2, no elements need to be removed.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. 1 <= k <= 10^5
+    /// </summary>
+    int minRemoval(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3635. Earliest Finish Time for Land and Water Rides II
+    ///
+    /// Medium
+    ///
+    /// You are given two categories of theme park attractions: land rides 
+    /// and water rides.
+    ///
+    /// Land rides
+    /// landStartTime[i] – the earliest time the ith land ride can be boarded.
+    /// landDuration[i] – how long the ith land ride lasts.
+    /// Water rides
+    /// waterStartTime[j] – the earliest time the jth water ride can be boarded.
+    /// waterDuration[j] – how long the jth water ride lasts.
+    /// A tourist must experience exactly one ride from each category, in either 
+    /// order.
+    ///
+    /// A ride may be started at its opening time or any later moment.
+    /// If a ride is started at time t, it finishes at time t + duration.
+    /// Immediately after finishing one ride the tourist may board the other (if 
+    /// it is already open) or wait until it opens.
+    /// Return the earliest possible time at which the tourist can finish both 
+    /// rides.
+    /// 
+    /// Example 1:
+    /// Input: landStartTime = [2,8], landDuration = [4,1], waterStartTime = [6], 
+    /// waterDuration = [3]
+    /// Output: 9
+    /// Explanation:​​​​​​​
+    /// Plan A (land ride 0 → water ride 0):
+    /// Start land ride 0 at time landStartTime[0] = 2. Finish at 
+    /// 2 + landDuration[0] = 6.
+    /// Water ride 0 opens at time waterStartTime[0] = 6. Start immediately at 6, 
+    /// finish at 6 + waterDuration[0] = 9.
+    /// Plan B (water ride 0 → land ride 1):
+    /// Start water ride 0 at time waterStartTime[0] = 6. Finish at 
+    /// 6 + waterDuration[0] = 9.
+    /// Land ride 1 opens at landStartTime[1] = 8. Start at time 9, finish at 
+    /// 9 + landDuration[1] = 10.
+    /// Plan C (land ride 1 → water ride 0):
+    /// Start land ride 1 at time landStartTime[1] = 8. Finish at 
+    /// 8 + landDuration[1] = 9.
+    /// Water ride 0 opened at waterStartTime[0] = 6. Start at time 9, finish 
+    /// at 9 + waterDuration[0] = 12.
+    /// Plan D (water ride 0 → land ride 0):
+    /// Start water ride 0 at time waterStartTime[0] = 6. Finish at 
+    /// 6 + waterDuration[0] = 9.
+    /// Land ride 0 opened at landStartTime[0] = 2. Start at time 9, 
+    /// finish at 9 + landDuration[0] = 13.
+    /// Plan A gives the earliest finish time of 9.
+    ///
+    /// Example 2:
+    /// Input: landStartTime = [5], landDuration = [3], waterStartTime = [1], 
+    /// waterDuration = [10]
+    /// Output: 14
+    /// Explanation:​​​​​​​
+    /// Plan A (water ride 0 → land ride 0):
+    /// Start water ride 0 at time waterStartTime[0] = 1. Finish at 
+    /// 1 + waterDuration[0] = 11.
+    /// Land ride 0 opened at landStartTime[0] = 5. Start immediately at 11 and 
+    /// finish at 11 + landDuration[0] = 14.
+    /// Plan B (land ride 0 → water ride 0):
+    /// Start land ride 0 at time landStartTime[0] = 5. Finish at 
+    /// 5 + landDuration[0] = 8.
+    /// Water ride 0 opened at waterStartTime[0] = 1. Start immediately at 8 and 
+    /// finish at 8 + waterDuration[0] = 18.
+    /// Plan A provides the earliest finish time of 14.​​​​​​​
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n, m <= 5 * 10^4
+    /// 2. landStartTime.length == landDuration.length == n
+    /// 3. waterStartTime.length == waterDuration.length == m
+    /// 4. 1 <= landStartTime[i], landDuration[i], waterStartTime[j], 
+    ///    waterDuration[j] <= 10^5
+    /// </summary>
+    int earliestFinishTimeII(vector<int>& landStartTime, vector<int>& landDuration,
+        vector<int>& waterStartTime, vector<int>& waterDuration);
+    /// <summary>
+    /// Leet Code 3645. Maximum Total from Optimal Activation Order
+    ///
+    /// Medium
+    ///
+    /// You are given two integer arrays value and limit, both of length n.
+    ///
+    /// Initially, all elements are inactive. You may activate them in any order.
+    ///
+    /// To activate an inactive element at index i, the number of currently active 
+    /// elements must be strictly less than limit[i].
+    /// When you activate the element at index i, it adds value[i] to the total 
+    /// activation value (i.e., the sum of value[i] for all elements that have 
+    /// undergone activation operations).
+    /// After each activation, if the number of currently active elements 
+    /// becomes x, then all elements j with limit[j] <= x become permanently 
+    /// inactive, even if they are already active.
+    /// Return the maximum total you can obtain by choosing the activation order 
+    /// optimally.
+    /// 
+    /// Example 1:
+    /// Input: value = [3,5,8], limit = [2,1,3]
+    /// Output: 16
+    /// Explanation:
+    /// One optimal activation order is:
+    /// Step    Activated i value[i]    Active Before i Active After i  Becomes 
+    /// Inactive j  Inactive Elements   Total
+    /// 1   1   5   0   1   j = 1 as limit[1] = 1   [1] 5
+    /// 2   0   3   0   1   -   [1] 8
+    /// 3   2   8   1   2   j = 0 as limit[0] = 2   [0, 1]  16
+    /// Thus, the maximum possible total is 16.
+    ///
+    /// Example 2:
+    /// Input: value = [4,2,6], limit = [1,1,1]
+    /// Output: 6
+    /// Explanation:
+    /// One optimal activation order is:
+    /// Step    Activated i value[i]    Active Before i Active After i  Becomes 
+    /// Inactive j  Inactive Elements   Total
+    /// 1   2   6   0   1   j = 0, 1, 2 as limit[j] = 1 [0, 1, 2]   6
+    /// Thus, the maximum possible total is 6.
+    ///
+    /// Example 3:
+    /// Input: value = [4,1,5,2], limit = [3,3,2,3]
+    /// Output: 12
+    /// Explanation:
+    /// One optimal activation order is:​​​​​​​​​​​​​​
+    /// Step    Activated i value[i]    Active Before i Active After i  
+    /// Becomes Inactive j  Inactive Elements   Total
+    /// 1   2   5   0   1   -   [ ] 5
+    /// 2   0   4   1   2   j = 2 as limit[2] = 2   [2] 9
+    /// 3   1   1   1   2   -   [2] 10
+    /// 4   3   2   2   3   j = 0, 1, 3 as limit[j] = 3 [0, 1, 2, 3]    12
+    /// Thus, the maximum possible total is 12.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == value.length == limit.length <= 10^5
+    /// 2. 1 <= value[i] <= 10^5​​​​​​​
+    /// 3. 1 <= limit[i] <= n
+    /// </summary>
+    long long maxTotal(vector<int>& value, vector<int>& limit);
+
+    /// <summary>
+    /// Leet Code 3660. Jump Game IX
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// From any index i, you can jump to another index j under the following 
+    /// rules:
+    ///
+    /// Jump to index j where j > i is allowed only if nums[j] < nums[i].
+    /// Jump to index j where j < i is allowed only if nums[j] > nums[i].
+    /// For each index i, find the maximum value in nums that can be reached by 
+    /// following any sequence of valid jumps starting at i.
+    ///
+    /// Return an array ans where ans[i] is the maximum value reachable starting 
+    /// from index i.
+    ///
+    ///
+    /// Example 1:
+    /// Input: nums = [2,1,3]
+    /// Output: [2,2,3]
+    /// Explanation:
+    /// For i = 0: No jump increases the value.
+    /// For i = 1: Jump to j = 0 as nums[j] = 2 is greater than nums[i].
+    /// For i = 2: Since nums[2] = 3 is the maximum value in nums, no jump 
+    /// increases the value.
+    /// Thus, ans = [2, 2, 3].
+    ///
+    /// Example 2:
+    /// Input: nums = [2,3,1]
+    /// Output: [3,3,3]
+    /// Explanation:
+    /// For i = 0: Jump forward to j = 2 as nums[j] = 1 is less than nums[i] = 2, 
+    /// then from i = 2 jump to j = 1 as nums[j] = 3 is greater than nums[2].
+    /// For i = 1: Since nums[1] = 3 is the maximum value in nums, no jump 
+    /// increases the value.
+    /// For i = 2: Jump to j = 1 as nums[j] = 3 is greater than nums[2] = 1.
+    /// Thus, ans = [3, 3, 3].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    vector<int> maxValue(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3667. Sort Array By Absolute Value
+    ///
+    /// Easy
+    ///
+    /// You are given an integer array nums.
+    /// Rearrange elements of nums in non-decreasing order of their absolute value.
+    ///
+    /// Return any rearranged array that satisfies this condition.
+    /// Note: The absolute value of an integer x is defined as:
+    /// x if x >= 0
+    /// -x if x < 0
+    /// 
+    /// Example 1:
+    /// Input: nums = [3,-1,-4,1,5]
+    /// Output: [-1,1,3,-4,5]
+    /// Explanation:
+    /// The absolute values of elements in nums are 3, 1, 4, 1, 5 respectively.
+    /// Rearranging them in increasing order, we get 1, 1, 3, 4, 5.
+    /// This corresponds to [-1, 1, 3, -4, 5]. Another possible rearrangement 
+    /// is [1, -1, 3, -4, 5].
+    ///
+    /// Example 2:
+    /// Input: nums = [-100,100]
+    /// Output: [-100,100]
+    /// Explanation:
+    /// The absolute values of elements in nums are 100, 100 respectively.
+    /// Rearranging them in increasing order, we get 100, 100.
+    /// This corresponds to [-100, 100]. Another possible rearrangement 
+    /// is [100, -100].
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. -100 <= nums[i] <= 100
+    /// </summary>
+    vector<int> sortByAbsoluteValue(vector<int>& nums);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

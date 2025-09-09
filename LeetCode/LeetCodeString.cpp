@@ -29974,4 +29974,240 @@ char LeetCodeString::processStrII(string s, long long k)
     }
     return '.';
 }
+
+/// <summary>
+/// Leet Code 3662. Filter Characters by Frequency
+///
+/// Easy
+///
+/// You are given a string s consisting of lowercase English letters and an 
+/// integer k.
+///
+/// Your task is to construct a new string that contains only those characters 
+/// from s which appear fewer than k times in the entire string. The order of 
+/// characters in the new string must be the same as their order in s.
+///
+/// Return the resulting string. If no characters qualify, return an empty 
+/// string.
+///
+/// Note: Every occurrence of a character that occurs fewer than k times is 
+/// kept.
+/// 
+/// Example 1:
+/// Input: s = "aadbbcccca", k = 3
+/// Output: "dbb"
+/// Explanation:
+/// Character frequencies in s:
+/// 'a' appears 3 times
+/// 'd' appears 1 time
+/// 'b' appears 2 times
+/// 'c' appears 4 times
+/// Only 'd' and 'b' appear fewer than 3 times. Preserving their order, the 
+/// result is "dbb".
+///
+/// Example 2:
+/// Input: s = "xyz", k = 2
+/// Output: "xyz"
+/// Explanation:
+/// All characters ('x', 'y', 'z') appear exactly once, which is fewer than 2. 
+/// Thus the whole string is returned.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 100
+/// 2. s consists of lowercase English letters.
+/// 3. 1 <= k <= s.length
+/// </summary>
+string LeetCodeString::filterCharacters(string s, int k)
+{
+    vector<int> dp(26);
+    for (char ch : s)
+    {
+        dp[ch - 'a']++;
+    }
+    string result;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (dp[s[i] - 'a'] < k)
+        {
+            result.push_back(s[i]);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3664. Two-Letter Card Game
+/// </summary>
+pair<int, int> LeetCodeString::score_match(vector<int>& match)
+{
+    int max_val = 0, sum = 0;
+    for (int i = 0; i < 26; i++)
+    {
+        max_val = max(max_val, match[i]);
+        sum = sum + match[i];
+    }
+    return { sum, max_val };
+}
+
+
+
+/// <summary>
+/// Leet Code 3664. Two-Letter Card Game
+///
+/// Medium
+///
+/// You are given a deck of cards represented by a string array cards, and 
+/// each card displays two lowercase letters.
+///
+/// You are also given a letter x. You play a game with the following rules:
+///
+/// Start with 0 points.
+/// On each turn, you must find two compatible cards from the deck that both 
+/// contain the letter x in any position.
+/// Remove the pair of cards and earn 1 point.
+/// The game ends when you can no longer find a pair of compatible cards.
+/// Return the maximum number of points you can gain with optimal play.
+///
+/// Two cards are compatible if the strings differ in exactly 1 position.
+/// 
+/// Example 1:
+/// Input: cards = ["aa","ab","ba","ac"], x = "a"
+/// Output: 2
+/// Explanation:
+/// On the first turn, select and remove cards "ab" and "ac", which are 
+/// compatible because they differ at only index 1.
+/// On the second turn, select and remove cards "aa" and "ba", which are 
+/// compatible because they differ at only index 0.
+/// Because there are no more compatible pairs, the total score is 2.
+///
+/// Example 2:
+/// Input: cards = ["aa","ab","ba"], x = "a"
+/// Output: 1
+/// Explanation:
+/// On the first turn, select and remove cards "aa" and "ba".
+/// Because there are no more compatible pairs, the total score is 1.
+/// 
+/// Example 3:
+/// Input: cards = ["aa","ab","ba","ac"], x = "b"
+/// Output: 0
+/// Explanation:
+/// The only cards that contain the character 'b' are "ab" and "ba". However, 
+/// they differ in both indices, so they are not compatible. Thus, the output 
+/// is 0.
+///
+/// Constraints:
+/// 1. 2 <= cards.length <= 10^5
+/// 2. cards[i].length == 2
+/// 3. Each cards[i] is composed of only lowercase English letters between 
+///    'a' and 'j'.
+/// 4. x is a lowercase English letter between 'a' and 'j'.
+/// </summary>
+int LeetCodeString::score(vector<string>& cards, char x)
+{
+    int both = 0;
+    vector<int> match1(26), match2(26);
+    for (size_t i = 0; i < cards.size(); i++)
+    {
+        if (cards[i][0] == x && cards[i][1] == x)
+        {
+            both++;
+        }
+        else if (cards[i][0] == x && cards[i][1] != x)
+        {
+            match1[cards[i][1]-'a']++;
+        }
+        else if (cards[i][0] != x && cards[i][1] == x)
+        {
+            match2[cards[i][0] - 'a']++;
+        }
+    }
+    auto [sum1, max_val1] = score_match(match1);
+    auto [sum2, max_val2] = score_match(match2);
+    int result = 0;
+    if (both >= (sum1 + sum2))
+    {
+        result = sum1 + sum2;
+    }
+    else
+    {
+        int gap1 = max(0, max_val1 - (sum1 - max_val1));
+        int gap2 = max(0, max_val2 - (sum2 - max_val2));
+        if (gap1 == 0)
+        {
+            result += sum1 / 2;
+            gap1 = sum1 % 2;
+        }
+        else
+        {
+            result += (sum1 - gap1) / 2;
+        }
+        if (gap2 == 0)
+        {
+            result += sum2 / 2;
+            gap2 = sum2 % 2;
+        }
+        else
+        {
+            result += (sum2 - gap2) / 2;
+        }
+        int saved = min(both, gap1 + gap2);
+        both -= saved;
+        result += both / 2 + saved;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3675. Minimum Operations to Transform String
+///
+/// Medium
+///
+/// You are given a string s consisting only of lowercase English letters.
+///
+/// You can perform the following operation any number of times 
+/// (including zero):
+/// Choose any character c in the string and replace every occurrence of c 
+/// with the next lowercase letter in the English alphabet.
+///
+/// Return the minimum number of operations required to transform s into 
+/// a string consisting of only 'a' characters.
+///
+/// Note: Consider the alphabet as circular, thus 'a' comes after 'z'.
+/// 
+/// Example 1:
+/// Input: s = "yz"
+/// Output: 2
+/// Explanation:
+/// Change 'y' to 'z' to get "zz".
+/// Change 'z' to 'a' to get "aa".
+/// Thus, the answer is 2.
+///
+/// Example 2:
+/// Input: s = "a"
+/// Output: 0
+/// Explanation:
+/// The string "a" only consists of 'a' characters. Thus, the answer is 0.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 5 * 10^5
+/// 2. s consists only of lowercase English letters.
+/// </summary>
+int LeetCodeString::minOperationsEqualize(string s)
+{
+    vector<int> dp(26);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        dp[s[i] - 'a']=1;
+    }
+    int result = 0;
+    for (int i = 1; i < 26; i++)
+    {
+        if (dp[i] != 0) result++;
+        if (i < 25)
+        {
+            dp[i + 1] += dp[i];
+        }
+    }
+    return result;
+}
 #pragma endregion

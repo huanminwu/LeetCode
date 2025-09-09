@@ -1619,8 +1619,89 @@ void TestLeetCode3595(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3630(void)
+{
+    Logger::WriteMessage("Test Leet Code 3630");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 2, 3 };
+    long long result = leetCode.maximizeXorAndXor(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,3,2 };
+    result = leetCode.maximizeXorAndXor(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3,6,7 };
+    result = leetCode.maximizeXorAndXor(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3632(void)
+{
+    Logger::WriteMessage("Test Leet Code 3632");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 3, 1, 2, 3 };
+    int k = 2;
+    long long result = leetCode.countXorSubarrays(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 0,0,0 };
+    k = 0;
+    result = leetCode.countXorSubarrays(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3644(void)
+{
+    Logger::WriteMessage("Test Leet Code 3644");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 0,3,2,1 };
+    int result = leetCode.sortPermutation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,1,3,2 };
+    result = leetCode.sortPermutation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,2,1,0 };
+    result = leetCode.sortPermutation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3670(void)
+{
+    Logger::WriteMessage("Test Leet Code 3670");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5, 6, 7 };
+    long long result = leetCode.maxProduct(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,6,4 };
+    result = leetCode.maxProduct(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 64,8,32 };
+    result = leetCode.maxProduct(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3670();
+    TestLeetCode3644();
+    TestLeetCode3632();
+    TestLeetCode3630();
     TestLeetCode3595();
     TestLeetCode3513();
     TestLeetCode3514();

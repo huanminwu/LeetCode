@@ -12349,5 +12349,266 @@ public:
     /// 5. 0 <= waitCost[i][j] <= 10^5
     /// </summary>
     long long minCost(int m, int n, vector<vector<int>>& waitCost);
+
+    /// <summary>
+    /// Leet Code 3621. Number of Integers With Popcount-Depth Equal to K I
+    ///
+    /// Hard
+    ///
+    /// You are given two integers n and k.
+    /// For any positive integer x, define the following sequence:
+    /// p0 = x
+    /// pi+1 = popcount(pi) for all i >= 0, where popcount(y) is the number 
+    /// of set bits (1's) in the binary representation of y.
+    /// This sequence will eventually reach the value 1.
+    ///
+    /// The popcount-depth of x is defined as the smallest integer d >= 0 such 
+    /// that pd = 1.
+    /// For example, if x = 7 (binary representation "111"). Then, the 
+    /// sequence is: 7 → 3 → 2 → 1, so the popcount-depth of 7 is 3.
+    ///
+    /// Your task is to determine the number of integers in the range [1, n] 
+    /// whose popcount-depth is exactly equal to k.
+    ///
+    /// Return the number of such integers.
+    /// 
+    /// Example 1:
+    /// Input: n = 4, k = 1
+    /// Output: 2
+    /// Explanation:
+    /// The following integers in the range [1, 4] have popcount-depth exactly 
+    /// equal to 1:
+    ///
+    /// x   Binary  Sequence
+    /// 2   "10"    2 → 1
+    /// 4   "100"   4 → 1
+    /// Thus, the answer is 2.
+    ///
+    /// Example 2:
+    ///
+    /// Input: n = 7, k = 2
+    /// 
+    /// Output: 3
+    /// 
+    /// Explanation:
+    ///
+    /// The following integers in the range [1, 7] have popcount-depth 
+    /// exactly equal to 2:
+    /// 
+    /// x   Binary  Sequence
+    /// 3   "11"    3 → 2 → 1
+    /// 5   "101"   5 → 2 → 1
+    /// 6   "110"   6 → 2 → 1
+    /// Thus, the answer is 3.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 10^15
+    /// 2. 0 <= k <= 5
+    /// </summary>
+    long long popcountDepthI(long long n, int k);
+
+    /// <summary>
+    /// Leet Code 3628. Maximum Number of Subsequences After One Inserting
+    ///
+    /// Medium
+    ///
+    /// You are given a string s consisting of uppercase English letters.
+    /// You are allowed to insert at most one uppercase English letter at any
+    /// position (including the beginning or end) of the string.
+    ///
+    /// Return the maximum number of "LCT" subsequences that can be formed in 
+    /// the resulting string after at most one insertion.
+    /// 
+    /// Example 1:
+    /// Input: s = "LMCT"
+    /// Output: 2
+    /// Explanation:
+    /// We can insert a "L" at the beginning of the string s to make "LLMCT", 
+    /// which has 2 subsequences, at indices [0, 3, 4] and [1, 3, 4].
+    ///
+    /// Example 2:
+    /// Input: s = "LCCT"
+    /// Output: 4
+    /// Explanation:
+    /// We can insert a "L" at the beginning of the string s to make "LLCCT", 
+    /// which has 4 subsequences, at indices [0, 2, 4], [0, 3, 4], [1, 2, 4] 
+    /// and [1, 3, 4].
+    ///
+    /// Example 3:
+    /// Input: s = "L"
+    /// Output: 0
+    /// Explanation:
+    /// Since it is not possible to obtain the subsequence "LCT" by inserting 
+    /// a single letter, the result is 0.
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s consists of uppercase English letters.
+    /// </summary>
+    long long numOfSubsequences(string s);
+
+    /// <summary>
+    /// Leet Code 3647. Maximum Weight in Two Bags
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array weights and two integers w1 and w2 
+    /// representing the maximum capacities of two bags.
+    ///
+    /// Each item may be placed in at most one bag such that:
+    ///
+    /// Bag 1 holds at most w1 total weight.
+    /// Bag 2 holds at most w2 total weight.
+    /// Return the maximum total weight that can be packed into the two bags.
+    ///
+    /// Example 1:
+    /// Input: weights = [1,4,3,2], w1 = 5, w2 = 4
+    /// Output: 9
+    /// Explanation:
+    /// Bag 1: Place weights[2] = 3 and weights[3] = 2 as 3 + 2 = 5 <= w1
+    /// Bag 2: Place weights[1] = 4 as 4 <= w2
+    /// Total weight: 5 + 4 = 9
+    ///
+    /// Example 2:
+    /// Input: weights = [3,6,4,8], w1 = 9, w2 = 7
+    /// 
+    /// Output: 15
+    /// Explanation:
+    /// Bag 1: Place weights[3] = 8 as 8 <= w1
+    /// Bag 2: Place weights[0] = 3 and weights[2] = 4 as 3 + 4 = 7 <= w2
+    /// Total weight: 8 + 7 = 15
+    ///
+    /// Example 3:
+    /// Input: weights = [5,7], w1 = 2, w2 = 3
+    /// Output: 0
+    /// Explanation:
+    /// No weight fits in either bag, thus the answer is 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= weights.length <= 100
+    /// 2. 1 <= weights[i] <= 100
+    /// 3. 1 <= w1, w2 <= 300
+    /// </summary>
+    int maxWeight(vector<int>& weights, int w1, int w2);
+
+    /// <summary>
+    /// Leet Code 3651. Minimum Cost Path with Teleportations
+    ///
+    /// Hard
+    ///
+    /// You are given a m x n 2D integer array grid and an integer k. You start at 
+    /// the top-left cell (0, 0) and your goal is to reach the bottom‐right cell 
+    /// (m - 1, n - 1).
+    ///
+    /// There are two types of moves available:
+    /// Normal move: You can move right or down from your current cell (i, j), 
+    /// i.e. you can move to (i, j + 1) (right) or (i + 1, j) (down). The cost is 
+    /// the value of the destination cell.
+    /// Teleportation: You can teleport from any cell (i, j), to any cell (x, y) 
+    /// such that grid[x][y] <= grid[i][j]; the cost of this move is 0. You may 
+    /// teleport at most k times.
+    ///
+    /// Return the minimum total cost to reach cell (m - 1, n - 1) from (0, 0).
+    /// 
+    /// Example 1:
+    /// Input: grid = [[1,3,3],[2,5,4],[4,3,5]], k = 2
+    /// Output: 7
+    /// Explanation:
+    /// Initially we are at (0, 0) and cost is 0.
+    /// Current Position    Move    New Position    Total Cost
+    /// (0, 0)  Move Down   (1, 0)  0 + 2 = 2
+    /// (1, 0)  Move Right  (1, 1)  2 + 5 = 7
+    /// (1, 1)  Teleport to (2, 2)  (2, 2)  7 + 0 = 7
+    /// The minimum cost to reach bottom-right cell is 7.
+    /// 
+    /// Example 2:
+    /// Input: grid = [[1,2],[2,3],[3,4]], k = 1
+    /// Output: 9
+    /// Explanation:
+    /// Initially we are at (0, 0) and cost is 0.
+    /// Current Position    Move    New Position    Total Cost
+    /// (0, 0)  Move Down   (1, 0)  0 + 2 = 2
+    /// (1, 0)  Move Right  (1, 1)  2 + 3 = 5
+    /// (1, 1)  Move Down   (2, 1)  5 + 4 = 9
+    /// The minimum cost to reach bottom-right cell is 9.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= m, n <= 80
+    /// 2. m == grid.length
+    /// 3. n == grid[i].length
+    /// 4. 0 <= grid[i][j] <= 10^4
+    /// 5. 0 <= k <= 10
+    /// </summary>
+    int minCostTeleportations(vector<vector<int>>& grid, int k);
+
+    /// <summary>
+    /// Leet Code 3665. Twisted Mirror Path Count
+    ///
+    /// Medium
+    ///
+    /// Given an m x n binary grid grid where:
+    /// grid[i][j] == 0 represents an empty cell, and
+    /// grid[i][j] == 1 represents a mirror.
+    /// A robot starts at the top-left corner of the grid (0, 0) and wants to 
+    /// reach the bottom-right corner (m - 1, n - 1). It can move only right 
+    /// or down. If the robot attempts to move into a mirror cell, it is 
+    /// reflected before entering that cell:
+    ///
+    /// If it tries to move right into a mirror, it is turned down and moved 
+    /// into the cell directly below the mirror.
+    /// If it tries to move down into a mirror, it is turned right and moved 
+    /// into the cell directly to the right of the mirror.
+    /// If this reflection would cause the robot to move outside the grid 
+    /// boundaries, the path is considered invalid and should not be counted.
+    ///
+    /// Return the number of unique valid paths from (0, 0) to (m - 1, n - 1).
+    ///
+    /// Since the answer may be very large, return it modulo 10^9 + 7.
+    ///
+    /// Note: If a reflection moves the robot into a mirror cell, the robot 
+    /// is immediately reflected again based on the direction it used to enter 
+    /// that mirror: if it entered while moving right, it will be turned down; 
+    /// if it entered while moving down, it will be turned right. This process 
+    /// will continue until either the last cell is reached, the robot moves 
+    /// out of bounds or the robot moves to a non-mirror cell.
+    ///
+    /// Example 1:
+    /// Input: grid = [[0,1,0],[0,0,1],[1,0,0]]
+    /// Output: 5
+    ///
+    /// Explanation:
+    /// Number  Full Path
+    /// 1   (0, 0) -> (0, 1) [M] -> (1, 1) -> (1, 2) [M] -> (2, 2)
+    /// 2   (0, 0) -> (0, 1) [M] -> (1, 1) -> (2, 1) -> (2, 2)
+    /// 3   (0, 0) -> (1, 0) -> (1, 1) -> (1, 2) [M] -> (2, 2)
+    /// 4   (0, 0) -> (1, 0) -> (1, 1) -> (2, 1) -> (2, 2)
+    /// 5   (0, 0) -> (1, 0) -> (2, 0) [M] -> (2, 1) -> (2, 2)
+    /// [M] indicates the robot attempted to enter a mirror cell and instead 
+    /// reflected.
+    ///
+    /// Example 2:
+    /// Input: grid = [[0,0],[0,0]]
+    /// Output: 2
+    /// Explanation:
+    /// Number	Full Path
+    /// 1   (0, 0) -> (0, 1) -> (1, 1)
+    /// 2   (0, 0) -> (1, 0) -> (1, 1)
+    ///
+    /// Example 3:
+    /// Input: grid = [[0,1,1],[1,1,0]]
+    /// Output: 1
+    /// Explanation:
+    /// Number  Full Path
+    /// 1   (0, 0) -> (0, 1) [M] -> (1, 1) [M] -> (1, 2)
+    /// (0, 0) -> (1, 0) [M] -> (1, 1) [M] -> (2, 1) goes out of bounds, so it is 
+    /// invalid.
+    ///
+    /// Constraints:
+    /// 1. m == grid.length
+    /// 2. n == grid[i].length
+    /// 3. 2 <= m, n <= 500
+    /// 4. grid[i][j] is either 0 or 1.
+    /// 5. grid[0][0] == grid[m - 1][n - 1] == 0
+    /// </summary>
+    int uniquePaths(vector<vector<int>>& grid);
 };
 #endif  // LeetCodeDP

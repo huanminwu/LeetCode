@@ -6442,4 +6442,172 @@ string LeetCodeHashtable::findCommonResponse(vector<vector<string>>& responses)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3659. Partition Array Into K-Distinct Groups
+///
+/// You are given an integer array nums and an integer k.
+///
+/// Your task is to determine whether it is possible to partition all elements 
+/// of nums into one or more groups such that:
+///
+/// Each group contains exactly k distinct elements.
+/// Each element in nums must be assigned to exactly one group.
+/// Return true if such a partition is possible, otherwise return false.
+///
+///  
+/// Example 1:
+/// Input: nums = [1,2,3,4], k = 2
+/// Output: true
+///
+/// Explanation:
+/// One possible partition is to have 2 groups:
+/// Group 1: [1, 2]
+/// Group 2: [3, 4]
+/// Each group contains k = 2 distinct elements, and all elements are used 
+/// exactly once.
+///
+/// Example 2:
+/// Input: nums = [3,5,2,2], k = 2
+/// Output: true
+/// Explanation:
+/// One possible partition is to have 2 groups:
+/// Group 1: [2, 3]
+/// Group 2: [2, 5]
+/// Each group contains k = 2 distinct elements, and all elements are used 
+/// exactly once.
+///
+/// Example 3:
+/// Input: nums = [1,5,2,3], k = 3
+/// Output: false
+/// Explanation:
+/// We cannot form groups of k = 3 distinct elements using all values exactly 
+/// once.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// 3. 1 <= k <= nums.length
+/// </summary>
+bool LeetCodeHashtable::partitionArray(vector<int>& nums, int k)
+{
+    if (nums.size() % k != 0) return false;
+    int group = nums.size() / k;
+    unordered_map<int, int> num_count;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        num_count[nums[i]]++;
+    }
+    for (auto itr : num_count)
+    {
+        if (itr.second > group) return false;
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet Code 3663. Find The Least Frequent Digit
+///
+/// Easy
+///
+/// Given an integer n, find the digit that occurs least frequently in its 
+/// decimal representation. If multiple digits have the same frequency, 
+/// choose the smallest digit.
+///
+/// Return the chosen digit as an integer.
+///
+/// The frequency of a digit x is the number of times it appears in the 
+/// decimal representation of n.
+///
+/// Example 1:
+/// Input: n = 1553322
+/// Output: 1
+/// Explanation:
+/// The least frequent digit in n is 1, which appears only once. All 
+/// other digits appear twice.
+///
+/// Example 2:
+/// Input: n = 723344511
+/// Output: 2
+/// Explanation:
+/// The least frequent digits in n are 7, 2, and 5; each appears only once.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 2^31 - 1
+/// </summary>
+int LeetCodeHashtable::getLeastFrequentDigit(int n)
+{
+    vector<int> digits(10);
+    string str = to_string(n);
+    for (size_t i = 0; i < str.size(); i++)
+    {
+        digits[str[i] - '0']++;
+    }
+    int count = INT_MAX;
+    int result = 0;
+    for (int i = 0; i < 10; i++)
+    {
+        if (digits[i] == 0) continue;
+        if (digits[i] < count)
+        {
+            count = digits[i];
+            result = i;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3668. Restore Finishing Order
+///
+/// Easy
+///
+/// You are given an integer array order of length n and an integer array 
+/// friends.
+///
+/// order contains every integer from 1 to n exactly once, representing 
+/// the IDs of the participants of a race in their finishing order.
+/// friends contains the IDs of your friends in the race sorted in strictly 
+/// increasing order. Each ID in friends is guaranteed to appear in the 
+/// order array.
+/// Return an array containing your friends' IDs in their finishing order.
+///
+/// Example 1:
+/// Input: order = [3,1,2,5,4], friends = [1,3,4]
+/// Output: [3,1,4]
+/// Explanation:
+/// The finishing order is [3, 1, 2, 5, 4]. Therefore, the finishing order 
+/// of your friends is [3, 1, 4].
+///
+/// Example 2:
+/// Input: order = [1,4,5,3,2], friends = [2,5]
+/// Output: [5,2]
+/// Explanation:
+/// The finishing order is [1, 4, 5, 3, 2]. Therefore, the finishing order 
+/// of your friends is [5, 2].
+/// 
+/// Constraints:
+/// 1. 1 <= n == order.length <= 100
+/// 2. order contains every integer from 1 to n exactly once
+/// 3. 1 <= friends.length <= min(8, n)
+/// 4. 1 <= friends[i] <= n
+/// 5. friends is strictly increasing
+/// </summary>
+vector<int> LeetCodeHashtable::recoverOrder(vector<int>& order, vector<int>& friends)
+{
+    unordered_set<int> friend_list;
+    for (int i : friends)
+    {
+        friend_list.insert(i);
+    }
+    vector<int> result;
+    for (size_t i = 0; i < order.size(); i++)
+    {
+        if (friend_list.count(order[i]) > 0)
+        {
+            result.push_back(order[i]);
+        }
+    }
+    return result;
+}
 #pragma endregion

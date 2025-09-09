@@ -2153,8 +2153,66 @@ void TestLeetCode3527(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode3659(void)
+{
+    Logger::WriteMessage("Test Leet Code 3659");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1, 2, 3, 4 };
+    int k = 2;
+    bool result = leetCode.partitionArray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    nums = { 3,5,2,2 };
+    k = 2;
+    result = leetCode.partitionArray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1,5,2,3 };
+    k = 3;
+    result = leetCode.partitionArray(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3663(void)
+{
+    Logger::WriteMessage("Test Leet Code 3663");
+    LeetCodeHashtable leetCode;
+    int n = 1553322;
+    int result = leetCode.getLeastFrequentDigit(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 723344511;
+    result = leetCode.getLeastFrequentDigit(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3668(void)
+{
+    Logger::WriteMessage("Test Leet Code 3668");
+    LeetCodeHashtable leetCode;
+    vector<int> order = { 3, 1, 2, 5, 4 };
+    vector<int> friends = { 1, 3, 4 };
+    vector<int> result = leetCode.recoverOrder(order, friends);
+    Logger::WriteMessage(order);
+    Logger::WriteMessage(friends);
+    Logger::WriteMessage(result);
+
+    order = { 1,4,5,3,2 };
+    friends = { 2,5 };
+    result = leetCode.recoverOrder(order, friends);
+    Logger::WriteMessage(order);
+    Logger::WriteMessage(friends);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3668();
+    TestLeetCode3663();
+    TestLeetCode3659();
     TestLeetCode3527();
     TestLeetCode3487();
     TestLeetCode3471();
