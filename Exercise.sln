@@ -292,6 +292,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{8497F651-D98
 		SQL\LeetCode3626.sql = SQL\LeetCode3626.sql
 		SQL\LeetCode3642.sql = SQL\LeetCode3642.sql
 		SQL\LeetCode3657.sql = SQL\LeetCode3657.sql
+		SQL\LeetCode3673.sql = SQL\LeetCode3673.sql
 		SQL\LeetCode511.sql = SQL\LeetCode511.sql
 		SQL\LeetCode512.sql = SQL\LeetCode512.sql
 		SQL\LeetCode534.sql = SQL\LeetCode534.sql

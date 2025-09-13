@@ -11106,7 +11106,6 @@ void LeetCodeDFS::minDifference(vector<int>& path, vector<int>& factors, int ind
     }
 }
 
-
 /// <summary>
 /// Leet Code 3669. Balanced K-Factor Decomposition
 ///
@@ -11151,6 +11150,142 @@ vector<int> LeetCodeDFS::minDifference(int n, int k)
     vector<int> path;
     vector<int> result;
     minDifference(path, factors, 0, k, n, result);
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3677. Count Binary Palindromic Numbers
+/// </summary>
+int LeetCodeDFS::countBinaryPalindromes(vector<int>& bits, int index, bool is_limit, vector<int>& origin)
+{
+    int result = 0;
+    int n = origin.size();
+    if (is_limit == false)
+    {
+        result = 1;
+        for (int i = index; i < (n + 1) / 2; i++)
+        {
+            result <<= 1;;
+        }
+        return result;
+    }
+    else
+    {
+        if (index == (n + 1) / 2)
+        {
+            result = 1;
+            for (int i = 0; i < n / 2; i++)
+            {
+                int a = bits[n / 2 - 1 - i];
+                int b = origin[(n + 1) / 2 + i];
+                if (a > b)
+                {
+                    result = 0;
+                    break;
+                }
+                else if (a < b)
+                {
+                    result = 1;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            if (index == 0)
+            {
+                bits.push_back(1);
+                result += countBinaryPalindromes(bits, index + 1, true, origin);
+                bits.pop_back();
+            }
+            else
+            {
+                for (int i = 0; i <= origin[index]; i++)
+                {
+                    bits.push_back(i);
+                    if (i < origin[index])
+                    {
+                        result += countBinaryPalindromes(bits, index + 1, false, origin);
+                    }
+                    else
+                    {
+                        result += countBinaryPalindromes(bits, index + 1, true, origin);
+                    }
+                    bits.pop_back();
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3677. Count Binary Palindromic Numbers
+///
+/// Hard
+///
+/// You are given a non-negative integer n.
+///
+/// A non-negative integer is called binary-palindromic if its binary 
+/// representation (written without leading zeros) reads the same forward and 
+/// backward.
+///
+/// Return the number of integers k such that 0 <= k <= n and the binary 
+/// representation of k is a palindrome.
+///
+/// Note: The number 0 is considered binary-palindromic, and its 
+/// representation is "0".
+///
+/// Example 1:
+/// Input: n = 9
+/// Output: 6
+/// Explanation:
+/// The integers k in the range [0, 9] whose binary representations are 
+/// palindromes are:
+///
+/// 0 -> "0"
+/// 1 -> "1"
+/// 3 -> "11"
+/// 5 -> "101"
+/// 7 -> "111"
+/// 9 -> "1001"
+/// All other values in [0, 9] have non-palindromic binary forms. Therefore, 
+/// the count is 6.
+///
+/// Example 2:
+/// Input: n = 0
+/// Output: 1
+/// Explanation:
+/// Since "0" is a palindrome, the count is 1.
+///
+/// Constraints:
+/// 1. 0 <= n <= 10^15
+/// </summary>
+int LeetCodeDFS::countBinaryPalindromes(long long n)
+{
+    if (n == 0) return 1;
+    else if (n == 1) return 2;
+    vector<int> origin_bits;
+    while (n > 0)
+    {
+        origin_bits.push_back(n % 2);
+        n = n / 2;
+    }
+    reverse(origin_bits.begin(), origin_bits.end());
+    int result = 0;
+    vector<int> bits;
+    result += countBinaryPalindromes(bits, 0, true, origin_bits);
+    for (size_t i = 1; i < origin_bits.size(); i++)
+    {
+        if (i == 1)
+        {
+            result += 2;
+        }
+        else
+        {
+            result += (1 << ((i - 2) + 1) / 2);
+        }
+    }
     return result;
 }
 #pragma endregion
