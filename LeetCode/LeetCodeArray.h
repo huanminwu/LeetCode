@@ -25274,5 +25274,450 @@ public:
     /// 2. 1 <= nums[i] <= 10^5
     /// </summary>
     int minOperationsEqualize(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3682. Minimum Index Sum of Common Elements
+    ///
+    /// Medium
+    ///
+    /// You are given two integer arrays nums1 and nums2 of equal length n.
+    ///
+    /// We define a pair of indices (i, j) as a good pair if nums1[i] == nums2[j].
+    ///
+    /// Return the minimum index sum i + j among all possible good pairs. If no 
+    /// such pairs exist, return -1.
+    ///
+    /// Example 1:
+    /// Input: nums1 = [3,2,1], nums2 = [1,3,1]
+    /// Output: 1
+    /// Explanation:
+    /// Common elements between nums1 and nums2 are 1 and 3.
+    /// For 3, [i, j] = [0, 1], giving an index sum of i + j = 1.
+    /// For 1, [i, j] = [2, 0], giving an index sum of i + j = 2.
+    /// The minimum index sum is 1.
+    ///
+    /// Example 2:
+    /// Input: nums1 = [5,1,2], nums2 = [2,1,3]
+    /// Output: 2
+    /// Explanation:
+    /// Common elements between nums1 and nums2 are 1 and 2.
+    /// For 1, [i, j] = [1, 1], giving an index sum of i + j = 2.
+    /// For 2, [i, j] = [2, 0], giving an index sum of i + j = 2.
+    /// The minimum index sum is 2.
+    ///
+    /// Example 3:
+    /// Input: nums1 = [6,4], nums2 = [7,8]
+    /// Output: -1
+    /// Explanation:
+    /// Since no common elements between nums1 and nums2, the output is -1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums1.length == nums2.length <= 10^5
+    /// 2. -10^5 <= nums1[i], nums2[i] <= 10^5
+    /// </summary>
+    int minimumSum(vector<int>& nums1, vector<int>& nums2);
+
+    /// <summary>
+    /// Leet Code 3689. Maximum Total Subarray Value I
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums of length n and an integer k.
+    ///
+    /// You need to choose exactly k non-empty subarrays nums[l..r] of nums. 
+    /// Subarrays may overlap, and the exact same subarray (same l and r) can be 
+    /// chosen more than once.
+    ///
+    /// The value of a subarray nums[l..r] is defined as: 
+    /// max(nums[l..r]) - min(nums[l..r]).
+    ///
+    /// The total value is the sum of the values of all chosen subarrays.
+    ///
+    /// Return the maximum possible total value you can achieve.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,3,2], k = 2
+    /// Output: 4
+    /// Explanation:
+    /// One optimal approach is:
+    /// Choose nums[0..1] = [1, 3]. The maximum is 3 and the minimum is 1, 
+    /// giving a value of 3 - 1 = 2.
+    /// Choose nums[0..2] = [1, 3, 2]. The maximum is still 3 and the minimum is 
+    /// still 1, so the value is also 3 - 1 = 2.
+    /// Adding these gives 2 + 2 = 4.
+    ///
+    /// Example 2:
+    /// Input: nums = [4,2,5,1], k = 3
+    /// Output: 12
+    /// Explanation:
+    /// One optimal approach is:
+    /// Choose nums[0..3] = [4, 2, 5, 1]. The maximum is 5 and the minimum is 1, 
+    /// giving a value of 5 - 1 = 4.
+    /// Choose nums[0..3] = [4, 2, 5, 1]. The maximum is 5 and the minimum is 1, 
+    /// so the value is also 4.
+    /// Choose nums[2..3] = [5, 1]. The maximum is 5 and the minimum is 1, 
+    /// so the value is again 4.
+    /// Adding these gives 4 + 4 + 4 = 12.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 5 * 10^​​​​​​​4
+    /// 2. 0 <= nums[i] <= 10^9
+    /// 3. 1 <= k <= 10^5
+    /// </summary>
+    long long maxTotalValueI(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3691. Maximum Total Subarray Value II
+    ///
+    /// Hard
+    ///
+    /// You are given an integer array nums of length n and an integer k.
+    ///
+    /// You must select exactly k distinct non-empty subarrays nums[l..r] 
+    /// of nums. Subarrays may overlap, but the exact same subarray 
+    /// (same l and r) cannot be chosen more than once.
+    ///
+    /// The value of a subarray nums[l..r] is defined as: 
+    /// max(nums[l..r]) - min(nums[l..r]).
+    ///
+    /// The total value is the sum of the values of all chosen subarrays.
+    ///
+    /// Return the maximum possible total value you can achieve.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,3,2], k = 2
+    /// Output: 4
+    /// Explanation:
+    /// One optimal approach is:
+    /// Choose nums[0..1] = [1, 3]. The maximum is 3 and the minimum is 1, 
+    /// giving a value of 3 - 1 = 2.
+    /// Choose nums[0..2] = [1, 3, 2]. The maximum is still 3 and the minimum 
+    /// is still 1, so the value is also 3 - 1 = 2.
+    /// Adding these gives 2 + 2 = 4.
+    ///
+    /// Example 2:
+    /// Input: nums = [4,2,5,1], k = 3
+    /// Output: 12
+    /// Explanation:
+    /// One optimal approach is:
+    /// Choose nums[0..3] = [4, 2, 5, 1]. The maximum is 5 and the minimum is 1, 
+    /// giving a value of 5 - 1 = 4.
+    /// Choose nums[1..3] = [2, 5, 1]. The maximum is 5 and the minimum is 1, 
+    /// so the value is also 4.
+    /// Choose nums[2..3] = [5, 1]. The maximum is 5 and the minimum is 1, 
+    /// so the value is again 4.
+    /// Adding these gives 4 + 4 + 4 = 12.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 5 * 10^​​​​​​​4
+    /// 2. 0 <= nums[i] <= 10^9
+    /// 3. 1 <= k <= min(10^5, n * (n + 1) / 2)
+    /// </summary>
+    long long maxTotalValueII(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3700. Number of ZigZag Arrays II
+    /// </summary>
+    void zigZagArraysII_matmul(vector<vector<long long>>& a, vector<vector<long long>> b);
+
+    /// <summary>
+    /// Leet Code 3700. Number of ZigZag Arrays II
+    /// </summary>
+    vector<vector<long long>> zigZagArraysII_powMod(vector<vector<long long>>& x, int y);
+
+    /// <summary>
+    /// Leet Code 3700. Number of ZigZag Arrays II
+    ///
+    /// Hard
+    ///
+    /// You are given three integers n, l, and r.
+    /// A ZigZag array of length n is defined as follows:
+    /// Each element lies in the range [l, r].
+    /// No two adjacent elements are equal.
+    /// No three consecutive elements form a strictly increasing or strictly 
+    /// decreasing sequence.
+    /// Return the total number of valid ZigZag arrays.
+    ///
+    /// Since the answer may be large, return it modulo 10^9 + 7.
+    ///
+    /// A sequence is said to be strictly increasing if each element is strictly 
+    /// greater than its previous one (if exists).
+    ///
+    /// A sequence is said to be strictly decreasing if each element is strictly 
+    /// smaller than its previous one (if exists).
+    ///
+    /// Example 1:
+    /// Input: n = 3, l = 4, r = 5
+    /// Output: 2
+    /// Explanation:
+    /// There are only 2 valid ZigZag arrays of length n = 3 using values in the 
+    /// range [4, 5]:
+    /// [4, 5, 4]
+    /// [5, 4, 5]
+    ///
+    /// Example 2:
+    /// Input: n = 3, l = 1, r = 3
+    /// Output: 10
+    /// Explanation:
+    /// ​​​​​​​There are 10 valid ZigZag arrays of length n = 3 using values in the 
+    /// range [1, 3]:
+    /// [1, 2, 1], [1, 3, 1], [1, 3, 2]
+    /// [2, 1, 2], [2, 1, 3], [2, 3, 1], [2, 3, 2]
+    /// [3, 1, 2], [3, 1, 3], [3, 2, 3]
+    /// All arrays meet the ZigZag conditions.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= n <= 10^9
+    /// 2. 1 <= l < r <= 75​​​​​​​
+    /// </summary>
+    int zigZagArraysII(int n, int l, int r);
+
+    /// <summary>
+    /// Leet Code 3701. Compute Alternating Sum
+    ///
+    /// Easy
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// The alternating sum of nums is the value obtained by adding elements at 
+    /// even indices and subtracting elements at odd indices. That is, 
+    /// nums[0] - nums[1] + nums[2] - nums[3]...
+    ///
+    /// Return an integer denoting the alternating sum of nums.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,3,5,7]
+    /// Output: -4
+    /// Explanation:
+    ///
+    /// Elements at even indices are nums[0] = 1 and nums[2] = 5 because 0 
+    /// and 2 are even numbers.
+    /// Elements at odd indices are nums[1] = 3 and nums[3] = 7 because 1 
+    /// and 3 are odd numbers.
+    /// The alternating sum is nums[0] - nums[1] + nums[2] - nums[3] = 
+    /// 1 - 3 + 5 - 7 = -4.
+    ///
+    /// Example 2:
+    /// Input: nums = [100]
+    /// Output: 100
+    /// Explanation:
+    /// The only element at even indices is nums[0] = 100 because 0 is 
+    /// an even number.
+    /// There are no elements on odd indices.
+    /// The alternating sum is nums[0] = 100.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 100
+    /// </summary>
+    int alternatingSum(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3694. Distinct Points Reachable After Substring Removal
+    ///
+    /// Medium
+    ///
+    /// You are given a string s consisting of characters 'U', 'D', 'L', and 'R', 
+    /// representing moves on an infinite 2D Cartesian grid.
+    ///
+    /// 'U': Move from (x, y) to (x, y + 1).
+    /// 'D': Move from (x, y) to (x, y - 1).
+    /// 'L': Move from (x, y) to (x - 1, y).
+    /// 'R': Move from (x, y) to (x + 1, y).
+    /// You are also given a positive integer k.
+    ///
+    /// You must choose and remove exactly one contiguous substring of length k 
+    /// from s. Then, start from coordinate (0, 0) and perform the remaining 
+    /// moves in order.
+    ///
+    /// Return an integer denoting the number of distinct final coordinates 
+    /// reachable.
+    /// 
+    /// Example 1:
+    /// Input: s = "LUL", k = 1
+    /// Output: 2
+    /// Explanation:
+    /// After removing a substring of length 1, s can be "UL", "LL" or "LU". 
+    /// Following these moves, the final coordinates will be (-1, 1), (-2, 0) 
+    /// and (-1, 1) respectively. There are two distinct points (-1, 1) and 
+    /// (-2, 0) so the answer is 2.
+    ///
+    /// Example 2:
+    /// Input: s = "UDLR", k = 4
+    /// Output: 1
+    /// Explanation:
+    /// After removing a substring of length 4, s can only be the empty string. 
+    /// The final coordinates will be (0, 0). There is only one distinct point 
+    /// (0, 0) so the answer is 1.
+    ///
+    /// Example 3:
+    /// Input: s = "UU", k = 1
+    /// Output: 1
+    /// Explanation:
+    /// After removing a substring of length 1, s becomes "U", which always ends 
+    /// at (0, 1), so there is only one distinct final coordinate.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s consists of only 'U', 'D', 'L', and 'R'.
+    /// 3. 1 <= k <= s.length
+    /// </summary>
+    int distinctPoints(string s, int k);
+
+    /// <summary>
+    /// Leet Code 3698. Split Array With Minimum Difference
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    /// Split the array into exactly two subarrays, left and right, such that 
+    /// left is strictly increasing and right is strictly decreasing.
+    ///
+    /// Return the minimum possible absolute difference between the sums of 
+    /// left and right. If no valid split exists, return -1.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,3,2]
+    /// Output: 2
+    /// Explanation:
+    /// i   left    right   Validity    left sum    right sum   Absolute difference
+    /// 0   [1] [3, 2]  Yes 1   5   |1 - 5| = 4
+    /// 1   [1, 3]  [2] Yes 4   2   |4 - 2| = 2
+    /// Thus, the minimum absolute difference is 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,4,3]
+    /// Output: 4
+    /// Explanation:
+    /// i   left    right   Validity    left sum    right sum   Absolute difference
+    /// 0   [1] [2, 4, 3]   No  1   9   -
+    /// 1   [1, 2]  [4, 3]  Yes 3   7   |3 - 7| = 4
+    /// 2   [1, 2, 4]   [3] Yes 7   3   |7 - 3| = 4
+    /// Thus, the minimum absolute difference is 4.
+    ///
+    /// Example 3:
+    /// Input: nums = [3,1,2]
+    /// Output: -1
+    /// Explanation:
+    /// No valid split exists, so the answer is -1.
+    ///  
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^5
+    /// </summary>
+    long long splitArrayII(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3702. Longest Subsequence With Non-Zero Bitwise XOR
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// Return the length of the longest subsequence in nums whose bitwise XOR is 
+    /// non-zero. If no such subsequence exists, return 0.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,2,3]
+    /// Output: 2
+    /// Explanation:
+    /// One longest subsequence is [2, 3]. The bitwise XOR is computed as 2 
+    /// XOR 3 = 1, which is non-zero.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,3,4]
+    /// Output: 3
+    /// Explanation:
+    /// The longest subsequence is [2, 3, 4]. The bitwise XOR is computed as 2 
+    /// XOR 3 XOR 4 = 5, which is non-zero.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 10^9
+    /// </summary>
+    int longestSubsequence(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3708. Longest Fibonacci Subarray
+    ///
+    /// Medium
+    ///
+    /// You are given an array of positive integers nums.
+    ///
+    /// A Fibonacci array is a contiguous sequence whose third and subsequent 
+    /// terms each equal the sum of the two preceding terms.
+    ///
+    /// Return the length of the longest Fibonacci subarray in nums.
+    /// Note: Subarrays of length 1 or 2 are always Fibonacci.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1,1,1,1,2,3,5,1]
+    /// Output: 5
+    /// Explanation:
+    /// The longest Fibonacci subarray is nums[2..6] = [1, 1, 2, 3, 5].
+    ///
+    /// [1, 1, 2, 3, 5] is Fibonacci because 1 + 1 = 2, 1 + 2 = 3, and 2 + 3 = 5.
+    ///
+    /// Example 2:
+    /// Input: nums = [5,2,7,9,16]
+    /// Output: 5
+    /// Explanation:
+    /// The longest Fibonacci subarray is nums[0..4] = [5, 2, 7, 9, 16].
+    /// [5, 2, 7, 9, 16] is Fibonacci because 5 + 2 = 7, 2 + 7 = 9, and 7 + 9 = 16.
+    ///
+    /// Example 3:
+    /// Input: nums = [1000000000,1000000000,1000000000]
+    /// Output: 2
+    /// Explanation:
+    /// The longest Fibonacci subarray is nums[1..2] = [1000000000, 1000000000].
+    /// [1000000000, 1000000000] is Fibonacci because its length is 2.
+    ///  
+    /// Constraints:
+    /// 1. 3 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    int longestSubarrayII(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3719. Longest Balanced Subarray I
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// A subarray is called balanced if the number of distinct even numbers in 
+    /// the subarray is equal to the number of distinct odd numbers.
+    ///
+    /// Return the length of the longest balanced subarray.
+    /// 
+    /// Example 1:
+    /// Input: nums = [2,5,4,3]
+    /// Output: 4
+    /// Explanation:
+    /// The longest balanced subarray is [2, 5, 4, 3].
+    /// It has 2 distinct even numbers [2, 4] and 2 distinct odd numbers [5, 3]. 
+    /// Thus, the answer is 4.
+    ///
+    /// Example 2:
+    /// Input: nums = [3,2,2,5,4]
+    /// Output: 5
+    /// Explanation:
+    /// The longest balanced subarray is [3, 2, 2, 5, 4].
+    /// It has 2 distinct even numbers [2, 4] and 2 distinct odd numbers [3, 5]. 
+    /// Thus, the answer is 5.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,2,3,2]
+    /// Output: 3
+    /// Explanation:
+    /// The longest balanced subarray is [2, 3, 2].
+    /// It has 1 distinct even number [2] and 1 distinct odd number [3]. Thus, 
+    /// the answer is 3.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 1500
+    /// 2. 1 <= nums[i] <= 10^5
+    /// </summary>
+    int longestBalanced(vector<int>& nums);
 };
 #endif  // LeetCodeArray_H

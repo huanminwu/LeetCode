@@ -17186,5 +17186,86 @@ public:
     /// 1. 1 <= n <= 10​​​​​​​00
     /// </summary>
     int gcdOfOddEvenSums(int n);
+
+    /// <summary>
+    /// Leet Code 3687. Library Late Fee Calculator
+    ///
+    /// Easy
+    ///
+    /// You are given an integer array daysLate where daysLate[i] indicates how 
+    /// many days late the ith book was returned.
+    ///
+    /// The penalty is calculated as follows:
+    ///
+    /// If daysLate[i] == 1, penalty is 1.
+    /// If 2 <= daysLate[i] <= 5, penalty is 2 * daysLate[i].
+    /// If daysLate[i] > 5, penalty is 3 * daysLate[i].
+    /// Return the total penalty for all books.
+    ///
+    /// Example 1:
+    /// Input: daysLate = [5,1,7]
+    /// Output: 32
+    /// Explanation:
+    /// daysLate[0] = 5: Penalty is 2 * daysLate[0] = 2 * 5 = 10.
+    /// daysLate[1] = 1: Penalty is 1.
+    /// daysLate[2] = 7: Penalty is 3 * daysLate[2] = 3 * 7 = 21.
+    /// Thus, the total penalty is 10 + 1 + 21 = 32.
+    ///
+    /// Example 2:
+    /// Input: daysLate = [1,1]
+    /// Output: 2
+    /// Explanation:
+    /// daysLate[0] = 1: Penalty is 1.
+    /// daysLate[1] = 1: Penalty is 1.
+    /// Thus, the total penalty is 1 + 1 = 2.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= daysLate.length <= 100
+    /// 2. 1 <= daysLate[i] <= 100
+    /// </summary>
+    int lateFee(vector<int>& daysLate);
+
+    /// <summary>
+    /// Leet Code 3697. Compute Decimal Representation
+    ///
+    /// Easy
+    ///
+    /// You are given a positive integer n.
+    /// A positive integer is a base-10 component if it is the product of a single 
+    /// digit from 1 to 9 and a non-negative power of 10. For example, 500, 30, 
+    /// and 7 are base-10 components, while 537, 102, and 11 are not.
+    ///
+    /// Express n as a sum of only base-10 components, using the fewest 
+    /// base-10 components possible.
+    /// 
+    /// Return an array containing these base-10 components in descending order.
+    /// 
+    /// Example 1:
+    /// Input: n = 537
+    /// Output: [500,30,7]
+    /// Explanation:
+    /// We can express 537 as 500 + 30 + 7. It is impossible to express 537 as a 
+    /// sum using fewer than 3 base-10 components.
+    ///
+    /// Example 2:
+    /// Input: n = 102
+    /// Output: [100,2]
+    /// Explanation:
+    /// We can express 102 as 100 + 2. 102 is not a base-10 component, which 
+    /// means 2 base-10 components are needed.
+    ///
+    /// Example 3:
+    /// 
+    /// Input: n = 6
+    /// 
+    /// Output: [6]
+    /// 
+    /// Explanation:
+    /// 6 is a base-10 component.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^9
+    /// </summary>
+    vector<int> decimalRepresentation(int n);
 };
 #endif

@@ -1042,8 +1042,28 @@ void TestLeetCode3672(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3679(void)
+{
+    Logger::WriteMessage("Test Leet Code 3679");
+    LeetCodeTwoPointer leetCode;
+    vector<int > arrivals = { 1, 2, 1, 3, 1 };
+    int w = 4, m = 2;
+    int result = leetCode.minArrivalsToDiscard(arrivals, w, m);
+    Logger::WriteMessage(arrivals);
+    Logger::WriteMessage("w = " + to_string(w) + "; m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    arrivals = { 1,2,3,3,3,4 };
+    w = 3, m = 2;
+    result = leetCode.minArrivalsToDiscard(arrivals, w, m);
+    Logger::WriteMessage(arrivals);
+    Logger::WriteMessage("w = " + to_string(w) + "; m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode3679();
     TestLeetCode3672();
     TestLeetCode3641();
     TestLeetCode3589();

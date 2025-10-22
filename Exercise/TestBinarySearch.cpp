@@ -1644,11 +1644,26 @@ void TestLeetCode3605(void)
     result = leetCode.minStable(nums, maxC);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("maxC = " + to_string(maxC) + "; result = " + to_string(result));
+}
 
+void TestLeetCode3710(void)
+{
+    Logger::WriteMessage("Test Leet Code 3710");
+    LeetCodeBinarySearch leetCode;
+    vector<vector<int>> points = { {0, 0},{0, 2},{2, 0},{2, 2} };
+    int  result = leetCode.maxPartitionFactor(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {0,0} ,{0,1},{10,0} };
+    result = leetCode.maxPartitionFactor(points);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode3710();
     TestLeetCode3605();
     TestLeetCode3520();
     TestLeetCode3506();

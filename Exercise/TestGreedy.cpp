@@ -2174,8 +2174,25 @@ void TestLeetCode1353(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3683(void)
+{
+    Logger::WriteMessage("Test Leet Code 3683");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> tasks = { {1, 6}, {2, 3} };
+    int result = leetCode.earliestTime(tasks);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    tasks = { {100,100},{100,100},{100,100} };
+    result = leetCode.earliestTime(tasks);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
+    Logger::WriteMessage("Test Leet Code Greedy");
+    TestLeetCode3683();
     TestLeetCode1353();
     TestLeetCode3542();
     TestLeetCode3440();

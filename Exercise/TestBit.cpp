@@ -1696,8 +1696,45 @@ void TestLeetCode3670(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3681(void)
+{
+    Logger::WriteMessage("Test Leet Code 3681");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    long long result = leetCode.maxXorSubsequences(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5, 2 };
+    result = leetCode.maxXorSubsequences(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}   
+
+void TestLeetCode3688(void)
+{
+    Logger::WriteMessage("Test Leet Code 3688");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1,2,3,4,5,6 };
+    long long result = leetCode.evenNumberBitwiseORs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7,9,11 };
+    result = leetCode.evenNumberBitwiseORs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,8,16 };
+    result = leetCode.evenNumberBitwiseORs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3688();
+    TestLeetCode3681();
     TestLeetCode3670();
     TestLeetCode3644();
     TestLeetCode3632();

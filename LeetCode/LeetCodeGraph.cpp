@@ -22958,4 +22958,118 @@ bool LeetCodeGraph::simpleGraphExists(vector<int>& degrees)
     return true;
 }
 
+/// <summary>
+/// Leet Code 3695. Maximize Alternating Sum Using Swaps
+///
+/// Hard
+///
+/// You are given an integer array nums.
+///
+/// You want to maximize the alternating sum of nums, which is defined as the 
+/// value obtained by adding elements at even indices and subtracting elements 
+/// at odd indices. That is, nums[0] - nums[1] + nums[2] - nums[3]...
+///
+/// You are also given a 2D integer array swaps where swaps[i] = [pi, qi]. For 
+/// each pair [pi, qi] in swaps, you are allowed to swap the elements at 
+/// indices pi and qi. These swaps can be performed any number of times and in 
+/// any order.
+///
+/// Return the maximum possible alternating sum of nums.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,3], swaps = [[0,2],[1,2]]
+/// Output: 4
+/// Explanation:
+/// The maximum alternating sum is achieved when nums is [2, 1, 3] or 
+/// [3, 1, 2]. As an example, you can obtain nums = [2, 1, 3] as follows.
+///
+/// Swap nums[0] and nums[2]. nums is now [3, 2, 1].
+/// Swap nums[1] and nums[2]. nums is now [3, 1, 2].
+/// Swap nums[0] and nums[2]. nums is now [2, 1, 3].
+///
+/// Example 2:
+/// Input: nums = [1,2,3], swaps = [[1,2]]
+/// Output: 2
+/// Explanation:
+/// The maximum alternating sum is achieved by not performing any swaps.
+/// Example 3:
+/// Input: nums = [1,1000000000,1,1000000000,1,1000000000], swaps = []
+/// Output: -2999999997
+/// Explanation:
+/// Since we cannot perform any swaps, the maximum alternating sum is achieved 
+/// by not performing any swaps.
+///
+/// Constraints:
+/// 1. 2 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 0 <= swaps.length <= 10^5
+/// 4. swaps[i] = [pi, qi]
+/// 5. 0 <= pi < qi <= nums.length - 1
+/// 6. [pi, qi] != [pj, qj]
+/// </summary>
+long long LeetCodeGraph::maxAlternatingSum(vector<int>& nums, vector<vector<int>>& swaps)
+{
+    int n = nums.size();
+    vector<vector<int>> neighbors(n);
+    vector<int> visited(n);
+    for (size_t i = 0; i < swaps.size(); i++)
+    {
+        neighbors[swaps[i][0]].push_back(swaps[i][1]);
+        neighbors[swaps[i][1]].push_back(swaps[i][0]);
+    }
+    unordered_map<int, vector<pair<int, int>>> groups;
+    for (int i = 0; i < n; i++)
+    {
+        if (visited[i] == 1) continue;
+        int p = i;
+        groups[p].push_back({ i, nums[i] });
+        visited[i] = 1;
+        queue<int> queue;
+        queue.push(i);
+        while (!queue.empty())
+        {
+            int q = queue.front();
+            queue.pop();
+            for (size_t j = 0; j < neighbors[q].size(); j++)
+            {
+                int r = neighbors[q][j];
+                if (visited[r] == 1) continue;
+                visited[r] = 1;
+                groups[p].push_back({ r, nums[r] });
+                queue.push(r);
+            }
+        }
+    }
+    long long result = 0;
+    for (auto itr : groups)
+    {
+        vector<pair<int, int>>& vec = itr.second;
+        set<pair<int, int>> even, odd;
+        for (size_t i = 0; i < vec.size(); i++)
+        {
+            if (vec[i].first % 2 == 0) even.insert({ vec[i].second, vec[i].first });
+            else odd.insert({ vec[i].second, vec[i].first });
+        }
+        while (!even.empty() && !odd.empty())
+        {
+            auto e = *even.begin();
+            auto o = *odd.rbegin();
+            if (e.first < o.first)
+            {
+                even.erase(e);
+                odd.erase(o);
+                swap(e.second, o.second);
+                even.insert({ o.first, o.second });
+                odd.insert({ e.first, e.second });
+            }
+            else
+            {
+                break;
+            }
+        }
+        for (auto e : even) result += e.first;
+        for (auto o : odd) result -= o.first;
+    }
+    return result;
+}
 #pragma endregion

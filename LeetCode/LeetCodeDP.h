@@ -12610,5 +12610,264 @@ public:
     /// 5. grid[0][0] == grid[m - 1][n - 1] == 0
     /// </summary>
     int uniquePaths(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 3686. Number of Stable Subsequences
+    ///
+    /// Hard
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// A subsequence is stable if it does not contain three consecutive elements 
+    /// with the same parity when the subsequence is read in order (i.e., 
+    /// consecutive inside the subsequence).
+    ///
+    /// Return the number of stable subsequences.
+    /// 
+    /// Since the answer may be too large, return it modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: nums = [1,3,5]
+    /// Output: 6
+    ///
+    /// Explanation:
+    /// Stable subsequences are [1], [3], [5], [1, 3], [1, 5], and [3, 5].
+    /// Subsequence [1, 3, 5] is not stable because it contains three consecutive 
+    /// odd numbers. Thus, the answer is 6.
+    ///
+    /// Example 2:
+    /// Input: nums = [2,3,4,2]
+    /// Output: 14
+    /// Explanation:
+    /// The only subsequence that is not stable is [2, 4, 2], which contains three 
+    /// consecutive even numbers.
+    /// All other subsequences are stable. Thus, the answer is 14.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10​​​​​​​^5
+    /// </summary>
+    int countStableSubsequences(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3685. Subsequence Sum After Capping Elements
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums of size n and a positive integer k.
+    ///
+    /// An array capped by value x is obtained by replacing every element nums[i] 
+    /// with min(nums[i], x).
+    ///
+    /// For each integer x from 1 to n, determine whether it is possible to choose 
+    /// a subsequence from the array capped by x such that the sum of the chosen 
+    /// elements is exactly k.
+    ///
+    /// Return a 0-indexed boolean array answer of size n, where answer[i] is true 
+    /// if it is possible when using x = i + 1, and false otherwise.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: nums = [4,3,2,4], k = 5
+    ///
+    /// Output: [false,false,true,true]
+    /// Explanation:
+    /// For x = 1, the capped array is [1, 1, 1, 1]. Possible sums are 1, 2, 3, 4, 
+    /// so it is impossible to form a sum of 5.
+    /// For x = 2, the capped array is [2, 2, 2, 2]. Possible sums are 2, 4, 6, 8, 
+    /// so it is impossible to form a sum of 5.
+    /// For x = 3, the capped array is [3, 3, 2, 3]. A subsequence [2, 3] sums 
+    /// to 5, so it is possible.
+    /// For x = 4, the capped array is [4, 3, 2, 4]. A subsequence [3, 2] sums 
+    /// to 5, so it is possible.
+    ///
+    /// Example 2:
+    /// Input: nums = [1,2,3,4,5], k = 3
+    /// Output: [true,true,true,true,true]
+    /// Explanation:
+    /// For every value of x, it is always possible to select a subsequence from 
+    /// the capped array that sums exactly to 3.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 4000
+    /// 2. 1 <= nums[i] <= n
+    /// 3. 1 <= k <= 4000
+    /// </summary>
+    vector<bool> subsequenceSumAfterCapping(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3699. Number of ZigZag Arrays I
+    ///
+    /// Hard
+    ///
+    /// You are given three integers n, l, and r.
+    /// A ZigZag array of length n is defined as follows:
+    /// Each element lies in the range [l, r].
+    /// No two adjacent elements are equal.
+    /// No three consecutive elements form a strictly increasing or strictly 
+    /// decreasing sequence.
+    /// Return the total number of valid ZigZag arrays.
+    /// Since the answer may be large, return it modulo 10^9 + 7.
+    ///
+    /// A sequence is said to be strictly increasing if each element is 
+    /// strictly greater than its previous one (if exists).
+    ///
+    /// A sequence is said to be strictly decreasing if each element is 
+    /// strictly smaller than its previous one (if exists).
+    /// 
+    /// Example 1:
+    /// Input: n = 3, l = 4, r = 5
+    /// Output: 2
+    /// Explanation:
+    /// There are only 2 valid ZigZag arrays of length n = 3 using values in the 
+    /// range [4, 5]:
+    /// [4, 5, 4]
+    /// [5, 4, 5]​​​​​​​
+    ///
+    /// Example 2:
+    /// Input: n = 3, l = 1, r = 3
+    /// Output: 10
+    /// Explanation:
+    /// There are 10 valid ZigZag arrays of length n = 3 using values in the 
+    /// range [1, 3]:
+    /// [1, 2, 1], [1, 3, 1], [1, 3, 2]
+    /// [2, 1, 2], [2, 1, 3], [2, 3, 1], [2, 3, 2]
+    /// [3, 1, 2], [3, 1, 3], [3, 2, 3]
+    /// All arrays meet the ZigZag conditions.
+    /// 
+    /// Constraints:
+    /// 1. 3 <= n <= 2000
+    /// 2. 1 <= l < r <= 2000
+    /// </summary>
+    int zigZagArraysI(int n, int l, int r);
+
+    /// <summary>
+    /// Leet Code 3693. Climbing Stairs II
+    ///
+    /// Medium
+    ///
+    /// You are climbing a staircase with n + 1 steps, numbered from 0 to n.
+    /// 
+    /// You are also given a 1-indexed integer array costs of length n, where 
+    /// costs[i] is the cost of step i.
+    ///
+    /// From step i, you can jump only to step i + 1, i + 2, or i + 3. The cost 
+    /// of jumping from step i to step j is defined as: costs[j] + (j - i)^2
+    ///
+    /// You start from step 0 with cost = 0.
+    ///
+    /// Return the minimum total cost to reach step n.
+    /// 
+    /// Example 1:
+    /// Input: n = 4, costs = [1,2,3,4]
+    /// Output: 13
+    /// Explanation:
+    /// One optimal path is 0 -> 1 -> 2 -> 4
+    /// Jump	Cost Calculation				Cost
+    /// 0 -> 1	costs[1] + (1 - 0)^2 = 1 + 1	2
+    /// 1 -> 2	costs[2] + (2 - 1)^2 = 2 + 1	3
+    /// 2 -> 4	costs[4] + (4 - 2)^2 = 4 + 4	8
+    /// Thus, the minimum total cost is 2 + 3 + 8 = 13
+    ///
+    /// Example 2:
+    /// Input: n = 4, costs = [5,1,6,2]
+    /// Output: 11
+    /// Explanation:
+    /// One optimal path is 0 -> 2 -> 4
+    /// 
+    ///	Jump	Cost Calculation				Cost
+    ///	0 -> 2	costs[2] + (2 - 0)^2 = 1 + 4	5
+    ///	2 -> 4	costs[4] + (4 - 2)^2 = 2 + 4	6
+    ///	Thus, the minimum total cost is 5 + 6 = 11
+    ///
+    /// Example 3:
+    /// Input: n = 3, costs = [9,8,3]
+    /// Output: 12
+    /// Explanation:
+    /// The optimal path is 0 -> 3 with total cost = costs[3] + 
+    /// (3 - 0)^2 = 3 + 9 = 12
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == costs.length <= 10^5​​​​​​​
+    /// 2. 1 <= costs[i] <= 10^4
+    /// </summary>
+    int climbStairs(int n, vector<int>& costs);
+
+    /// <summary>
+    /// Leet Code 3717. Minimum Operations to Make the Array Beautiful
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// An array is called beautiful if for every index i > 0, the value at 
+    /// nums[i] is divisible by nums[i - 1].
+    ///
+    /// In one operation, you may increment any element nums[i] (with i > 0) 
+    /// by 1.
+    ///
+    /// Return the minimum number of operations required to make the array 
+    /// beautiful.
+    /// 
+    /// Example 1:
+    /// Input: nums = [3,7,9]
+    /// Output: 2
+    /// Explanation:
+    /// Applying the operation twice on nums[1] makes the array beautiful: [3,9,9]
+    ///
+    /// Example 2:
+    /// Input: nums = [1,1,1]
+    /// Output: 0
+    /// Explanation:
+    /// The given array is already beautiful.
+    /// 
+    /// Example 3:
+    /// Input: nums = [4]
+    /// Output: 0
+    /// Explanation:
+    /// The array has only one element, so it's already beautiful.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 50​​​
+    /// </summary>
+    int minOperations_Beautiful(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3704. Count No-Zero Pairs That Sum to N
+    ///
+    /// Hard
+    ///
+    /// A no-zero integer is a positive integer that does not contain the 
+    /// digit 0 in its decimal representation.
+    ///
+    /// Given an integer n, count the number of pairs (a, b) where:
+    ///
+    /// a and b are no-zero integers.
+    /// a + b = n
+    /// Return an integer denoting the number of such pairs.
+    /// 
+    /// Example 1:
+    /// Input: n = 2
+    /// Output: 1
+    /// Explanation:
+    /// The only pair is (1, 1).
+    /// Example 2:
+    /// Input: n = 3
+    /// Output: 2
+    /// Explanation:
+    /// The pairs are (1, 2) and (2, 1).
+    /// Example 3:
+    /// Input: n = 11
+    /// Output: 8
+    /// Explanation:
+    /// The pairs are (2, 9), (3, 8), (4, 7), (5, 6), (6, 5), (7, 4), (8, 3), and 
+    /// (9, 2). Note that (1, 10) and (10, 1) do not satisfy the conditions 
+    /// because 10 contains 0 in its decimal representation.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 10^15
+    /// </summary>
+    long long countNoZeroPairs(long long n);
 };
 #endif  // LeetCodeDP

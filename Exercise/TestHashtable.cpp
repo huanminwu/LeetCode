@@ -2208,8 +2208,94 @@ void TestLeetCode3668(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3678(void)
+{
+    Logger::WriteMessage("Test Leet Code 3678");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 3, 5 };
+    int result = leetCode.smallestAbsent(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -1, 1, 2 };
+    result = leetCode.smallestAbsent(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4, -1 };
+    result = leetCode.smallestAbsent(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -84, 28, 12 };
+    result = leetCode.smallestAbsent(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3692(void)
+{
+    Logger::WriteMessage("Test Leet Code 3692");
+    LeetCodeHashtable leetCode;
+    string s = "aaabbbccdddde";
+    string result = leetCode.majorityFrequencyGroup(s);
+    Logger::WriteMessage("s = "+ s + "; result = " + result);
+
+    s = "abcd";
+    result = leetCode.majorityFrequencyGroup(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "pfpfgi";
+    result = leetCode.majorityFrequencyGroup(s);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
+
+void TestLeetCode3712(void)
+{
+    Logger::WriteMessage("Test Leet Code 3712");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1, 2, 2, 3, 3, 3, 3, 4 };
+    int k = 2;
+    int result = leetCode.sumDivisibleByK(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2,3,4,5 };
+    k = 2;
+    result = leetCode.sumDivisibleByK(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 4,4,4,1,2,3 };
+    k = 3;
+    result = leetCode.sumDivisibleByK(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3718(void)
+{
+    Logger::WriteMessage("Test Leet Code 3718");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 8,2,3,4,6 };
+    int k = 2;
+    int result = leetCode.missingMultiple(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,4,7,10,15 };
+    k = 5;
+    result = leetCode.missingMultiple(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3718();
+    TestLeetCode3712();
+    TestLeetCode3692();
+    TestLeetCode3678();
     TestLeetCode3668();
     TestLeetCode3663();
     TestLeetCode3659();

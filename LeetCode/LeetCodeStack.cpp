@@ -4215,4 +4215,91 @@ long long LeetCodeStack::bowlSubarrays(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3703. Remove K-Balanced Substrings
+///
+/// Medium
+///
+/// You are given a string s consisting of '(' and ')', and an integer k.
+/// A string is k-balanced if it is exactly k consecutive '(' followed by k 
+/// consecutive ')', i.e., '(' * k + ')' * k.
+///
+/// For example, if k = 3, k-balanced is "((()))".
+///
+/// You must repeatedly remove all non-overlapping k-balanced substrings 
+/// from s, and then join the remaining parts. Continue this process 
+/// until no k-balanced substring exists.
+///
+/// Return the final string after all possible removals.
+///
+/// ​​​​​​​Example 1:
+/// Input: s = "(())", k = 1
+/// Output: ""
+/// Explanation:
+/// k-balanced substring is "()"
+/// Step    Current s   k-balanced  Result s
+/// 1   (())    (())    ()
+/// 2   ()  ()  Empty
+/// Thus, the final string is "".
+///
+/// Example 2:
+/// Input: s = "(()(", k = 1
+/// Output: "(("
+/// Explanation:
+/// k-balanced substring is "()"
+/// Step    Current s   k-balanced  Result s
+/// 1   (()(    (()(    ((
+/// 2   ((  -   ((
+/// Thus, the final string is "((".
+///
+/// Example 3:
+/// Input: s = "((()))()()()", k = 3
+/// Output: "()()()"
+/// Explanation:
+/// k-balanced substring is "((()))"
+/// Step    Current s   k-balanced  Result s
+/// 1   ((()))()()()    ((()))()()()    ()()()
+/// 2   ()()()  -   ()()()
+/// Thus, the final string is "()()()".
+/// 
+/// Constraints:
+/// 1. 2 <= s.length <= 10^5
+/// 2. s consists only of '(' and ')'.
+/// 3. 1 <= k <= s.length / 2
+/// </summary>
+string LeetCodeStack::removeSubstring(string s, int k)
+{
+    vector<pair<char, int>> arr;
+    for (int i = 0; i < (int)s.length(); i++)
+    {
+        if (arr.empty())
+        {
+            arr.push_back({ s[i], 1 });
+        }
+        else if (arr.back().first != s[i])
+        {
+            arr.push_back({ s[i], 1 });
+        }
+        else
+        {
+            arr.push_back({ s[i], arr.back().second + 1 });
+        }
+        if (arr.back().first == ')' && arr.back().second == k && 
+            (int)arr.size() >= 2 * k && arr[arr.size() - 1 - k].second >= k)
+        {
+            for (int j = 0; j < 2 * k; j++)
+            {
+                arr.pop_back();
+            }
+        }
+    }
+    string result;
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        result.push_back(arr[i].first);
+    }
+    return result;
+}
+
 #pragma endregion

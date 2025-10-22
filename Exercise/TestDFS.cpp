@@ -2673,8 +2673,51 @@ void TestLeetCode3669(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3680(void)
+{
+    Logger::WriteMessage("Test Leet Code 3680");
+    LeetCodeDFS leetCode;
+    int n = 3;
+    vector<vector<int>> result = leetCode.generateSchedule(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 5;
+    result = leetCode.generateSchedule(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3690(void)
+{
+    Logger::WriteMessage("Test Leet Code 3690");
+    LeetCodeDFS leetCode;
+    vector<int> nums1 = { 3, 1, 2 };
+    vector<int> nums2 = { 1, 2, 3 };
+    int result = leetCode.minSplitMerge(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1, 1, 2, 3, 4, 5 };
+    nums2 = { 5, 4, 3, 2, 1, 1 };
+    result = leetCode.minSplitMerge(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 81, 47, 1, 89 };
+    nums2 = { 89, 1, 47, 81 };
+    result = leetCode.minSplitMerge(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3690();
+    TestLeetCode3680();
     TestLeetCode3669();
     TestLeetCode3594();
     TestLeetCode3565();

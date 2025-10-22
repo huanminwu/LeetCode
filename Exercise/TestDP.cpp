@@ -6268,8 +6268,142 @@ void TestLeetCode3665(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3686(void)
+{
+    Logger::WriteMessage("Test Leet Code 3686");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1,3,5 };
+    int result = leetCode.countStableSubsequences(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3,4,2 };
+    result = leetCode.countStableSubsequences(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3685(void)
+{
+    Logger::WriteMessage("Test Leet Code 3685");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 4,3,2,4 };
+    int k = 5;
+    vector<bool> result = leetCode.subsequenceSumAfterCapping(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 1,2,3,4,5 };
+    k = 3;
+    result = leetCode.subsequenceSumAfterCapping(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3699(void)
+{
+    Logger::WriteMessage("Test Leet Code 3699");
+    LeetCodeDP leetCode;
+    int n = 3, l = 4, r = 5;
+    int result = leetCode.zigZagArraysI(n, l, r);
+    Logger::WriteMessage("n = " + to_string(n) + "; l = " + to_string(l));
+    Logger::WriteMessage("r = " + to_string(r) + "; result = " + to_string(result));
+
+    n = 3, l = 1, r = 3;
+    result = leetCode.zigZagArraysI(n, l, r);
+    Logger::WriteMessage("n = " + to_string(n) + "; l = " + to_string(l));
+    Logger::WriteMessage("r = " + to_string(r) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3693(void)
+{
+    Logger::WriteMessage("Test Leet Code 3693");
+    LeetCodeDP leetCode;
+    int n = 4;
+    vector<int> costs = { 1, 2, 3, 4 }; 
+    int result = leetCode.climbStairs(n, costs);
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 4;
+    costs = { 5,1,6,2 };
+    result = leetCode.climbStairs(n, costs);
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    costs = { 9,8,3 };
+    result = leetCode.climbStairs(n, costs);
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3717(void)
+{
+    Logger::WriteMessage("Test Leet Code 3717");
+    LeetCodeDP leetCode;
+    vector<int>  nums = { 3,7,9 };
+    int result = leetCode.minOperations_Beautiful(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1 };
+    nums = { 4 };
+    result = leetCode.minOperations_Beautiful(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5, 13, 18 };
+    result = leetCode.minOperations_Beautiful(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4, 1, 6, 19 };
+    result = leetCode.minOperations_Beautiful(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 38, 28, 29, 35, 35, 47, 36, 40, 31, 36, 27, 46, 48, 48, 31, 42, 33 };
+    result = leetCode.minOperations_Beautiful(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3704(void)
+{
+    Logger::WriteMessage("Test Leet Code 3704");
+    LeetCodeDP leetCode;
+    long long n = 2;
+    long long result = leetCode.countNoZeroPairs(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    result = leetCode.countNoZeroPairs(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 11;
+    result = leetCode.countNoZeroPairs(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));\
+
+    n = 24;
+    result = leetCode.countNoZeroPairs(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 102;
+    result = leetCode.countNoZeroPairs(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3704();
+    TestLeetCode3717();
+    TestLeetCode3693();
+    TestLeetCode3699();
+    TestLeetCode3685();
+    TestLeetCode3686();
     TestLeetCode3665();
     TestLeetCode3651();
     TestLeetCode3647();

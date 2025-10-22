@@ -5560,4 +5560,166 @@ long long LeetCodeBit::maxProduct(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3681. Maximum XOR of Subsequences
+///
+/// Hard
+///
+/// You are given an integer array nums of length n where each element is a 
+/// non-negative integer.
+///
+/// Select two subsequences of nums (they may be empty and are allowed to 
+/// overlap), each preserving the original order of elements, and let:
+///
+/// X be the bitwise XOR of all elements in the first subsequence.
+/// Y be the bitwise XOR of all elements in the second subsequence.
+/// Return the maximum possible value of X XOR Y.
+///
+/// Note: The XOR of an empty subsequence is 0.
+///
+/// Example 1:
+/// Input: nums = [1,2,3]
+/// Output: 3
+/// Explanation:
+/// Choose subsequences:
+/// First subsequence [2], whose XOR is 2.
+/// Second subsequence [2,3], whose XOR is 1.
+/// Then, XOR of both subsequences = 2 XOR 1 = 3.
+/// This is the maximum XOR value achievable from any two subsequences.
+///
+/// Example 2:
+/// Input: nums = [5,2]
+/// Output: 7
+/// Explanation:
+/// Choose subsequences:
+/// First subsequence [5], whose XOR is 5.
+/// Second subsequence [2], whose XOR is 2.
+/// Then, XOR of both subsequences = 5 XOR 2 = 7.
+/// This is the maximum XOR value achievable from any two subsequences.
+///
+/// Constraints:
+/// 1. 2 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeBit::maxXorSubsequences(vector<int>& nums)
+{
+    vector<int> dp(32);
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int x = nums[i];
+        for (int j = 31; j >= 0; j--)
+        {
+            if ((x & (1 << j)) == 0) continue;
+            if (dp[j] == 0)
+            {
+                dp[j] = x;
+                break;
+            }
+            x ^= dp[j];
+        }
+    }
+    int result = 0;
+    for (int i = 31; i >=0; i--)
+    {
+        result = max(result, result ^ dp[i]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3688. Bitwise OR of Even Numbers in an Array
+///
+/// Easy
+///
+/// You are given an integer array nums.
+/// Return the bitwise OR of all even numbers in the array.
+/// If there are no even numbers in nums, return 0.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,3,4,5,6]
+/// Output: 6
+/// Explanation:
+/// The even numbers are 2, 4, and 6. Their bitwise OR equals 6.
+///
+/// Example 2:
+/// Input: nums = [7,9,11]
+/// Output: 0
+/// Explanation:
+/// There are no even numbers, so the result is 0.
+///
+/// Example 3:
+/// Input: nums = [1,8,16]
+/// Output: 24
+/// Explanation:
+/// The even numbers are 8 and 16. Their bitwise OR equals 24.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 100
+/// </summary>
+int LeetCodeBit::evenNumberBitwiseORs(vector<int>& nums)
+{
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if ((nums[i] & 1) == 0)
+        {
+            result = result | nums[i];
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3702. Longest Subsequence With Non-Zero Bitwise XOR
+///
+/// Medium
+///
+/// You are given an integer array nums.
+///
+/// Return the length of the longest subsequence in nums whose bitwise XOR is 
+/// non-zero. If no such subsequence exists, return 0.
+///
+/// Example 1:
+/// Input: nums = [1,2,3]
+/// Output: 2
+/// Explanation:
+/// One longest subsequence is [2, 3]. The bitwise XOR is computed as 2 
+/// XOR 3 = 1, which is non-zero.
+///
+/// Example 2:
+/// Input: nums = [2,3,4]
+/// Output: 3
+/// Explanation:
+/// The longest subsequence is [2, 3, 4]. The bitwise XOR is computed as 2 
+/// XOR 3 XOR 4 = 5, which is non-zero.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeBit::longestSubsequence(vector<int>& nums)
+{
+    int n = nums.size();
+    vector<int> dp(n+1);
+    unordered_map<int, int> bit_map;
+    bit_map[0] = 0;
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        dp[i + 1] = dp[i] ^ nums[i];
+        if (bit_map.find(dp[i + 1]) == bit_map.end())
+        {
+            result = max(result, i + 1);
+        }
+        else
+        {
+            result = max(result, i + 1 - bit_map[dp[i + 1]]);
+        }
+        bit_map[dp[i + 1]] = i + 1;
+    }
+    return result;
+}
+
 #pragma endregion

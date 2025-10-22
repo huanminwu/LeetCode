@@ -5926,8 +5926,48 @@ void TestLeetCode3508(void)
     Logger::WriteMessage(result);
 }
 
+
+void TestLeetCode3709(void)
+{
+    Logger::WriteMessage("Test Leet Code 3709");
+    vector<string> commands =
+    {
+        "ExamTracker", "record", "totalScore", "record", "totalScore", 
+        "totalScore", "totalScore", "totalScore"
+    };
+    vector<vector<int>> parameters =
+    {
+        {} ,{1, 98},{1, 1},{5, 99},{1, 3},{1, 5},{3, 4}, {2, 5}
+    };
+    vector<string> result;
+    ExamTracker* examTracker = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "ExamTracker")
+        {
+            examTracker = new ExamTracker();
+            result.push_back("null");
+        }
+        else if (commands[i] == "record")
+        {
+            examTracker->record(parameters[i][0], parameters[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "totalScore")
+        {
+            long long ret = examTracker->totalScore(parameters[i][0], parameters[i][1]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete examTracker;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode3709();
     TestLeetCode3508();
     TestLeetCode3484();
     TestLeetCode3408();

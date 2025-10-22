@@ -4600,9 +4600,56 @@ void TestLeetCode3667(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3684(void)
+{
+    Logger::WriteMessage("Test Leet Code 3684");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 84,93,100,77,90 };
+    int k = 3;
+    vector<int> result = leetCode.maxKDistinct(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 84,93,100,77,93 };
+    k = 3;
+    result = leetCode.maxKDistinct(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 1,1,1,2,2,2 };
+    k = 6;
+    result = leetCode.maxKDistinct(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3711(void)
+{
+    Logger::WriteMessage("Test Leet Code 3711");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 2,-5,3,-1,-2 };
+    int result = leetCode.maxTransactions(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -1,-2,-3 };
+    result = leetCode.maxTransactions(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,-2,3,-2,1,-1 };
+    result = leetCode.maxTransactions(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3711();
+    TestLeetCode3684();
     TestLeetCode3667();
     TestLeetCode3660();
     TestLeetCode3645();

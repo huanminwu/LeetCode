@@ -6647,9 +6647,36 @@ void TestLeetCode3656(void)
     Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 }
 
+void TestLeetCode3695(void)
+{
+    Logger::WriteMessage("Test Leet Code 3695");
+    LeetCodeGraph leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    vector<vector<int>> swaps = { {0, 2},{1, 2} };
+    long long result = leetCode.maxAlternatingSum(nums, swaps);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(swaps);
+    Logger::WriteMessage("result = " + to_string(result));
+    
+    nums = { 1, 2, 3 };
+    swaps = { {1, 2} };
+    result = leetCode.maxAlternatingSum(nums, swaps);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(swaps);
+    Logger::WriteMessage("result = " + to_string(result));
+    
+    nums = { 1, 1000000000, 1, 1000000000, 1, 1000000000 };
+    swaps = {};
+    result = leetCode.maxAlternatingSum(nums, swaps);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(swaps);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3695();
     TestLeetCode3656();
     TestLeetCode3650();
     TestLeetCode3620();

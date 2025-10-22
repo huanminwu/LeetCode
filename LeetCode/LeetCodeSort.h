@@ -9475,6 +9475,90 @@ public:
     /// 2. -100 <= nums[i] <= 100
     /// </summary>
     vector<int> sortByAbsoluteValue(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3684. Maximize Sum of At Most K Distinct Elements
+    ///
+    /// Easy
+    ///
+    /// You are given a positive integer array nums and an integer k.
+    ///
+    /// Choose at most k elements from nums so that their sum is maximized. 
+    /// However, the chosen numbers must be distinct.
+    ///
+    /// Return an array containing the chosen numbers in strictly descending order.
+    /// 
+    /// Example 1:
+    /// Input: nums = [84,93,100,77,90], k = 3
+    /// Output: [100,93,90]
+    /// Explanation:
+    /// The maximum sum is 283, which is attained by choosing 93, 100 and 90. We 
+    /// rearrange them in strictly descending order as [100, 93, 90].
+    ///
+    /// Example 2:
+    /// Input: nums = [84,93,100,77,93], k = 3
+    /// Output: [100,93,84]
+    /// Explanation:
+    /// The maximum sum is 277, which is attained by choosing 84, 93 and 100. We 
+    /// rearrange them in strictly descending order as [100, 93, 84]. We cannot 
+    /// choose 93, 100 and 93 because the chosen numbers must be distinct.
+    ///
+    /// Example 3:
+    /// Input: nums = [1,1,1,2,2,2], k = 6
+    /// Output: [2,1]
+    /// Explanation:
+    /// The maximum sum is 3, which is attained by choosing 1 and 2. We rearrange 
+    /// them in strictly descending order as [2, 1].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. 1 <= k <= nums.length
+    /// </summary>
+    vector<int> maxKDistinct(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3711. Maximum Transactions Without Negative Balance
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array transactions, where transactions[i] 
+    /// represents the amount of the ith transaction:
+    ///
+    /// A positive value means money is received.
+    /// A negative value means money is sent.
+    /// The account starts with a balance of 0, and the balance must never become 
+    /// negative. Transactions must be considered in the given order, but you are 
+    /// allowed to skip some transactions.
+    ///
+    /// Return an integer denoting the maximum number of transactions that can 
+    /// be performed without the balance ever going negative.
+    ///
+    /// Example 1:
+    /// Input: transactions = [2,-5,3,-1,-2]
+    /// Output: 4
+    /// Explanation:
+    /// One optimal sequence is [2, 3, -1, -2], balance: 0 -> 2 -> 5 -> 4 -> 2.
+    ///
+    /// Example 2:
+    /// Input: transactions = [-1,-2,-3]
+    /// Output: 0
+    /// Explanation:
+    /// All transactions are negative. Including any would make the balance 
+    /// negative.
+    ///
+    /// Example 3:
+    /// Input: transactions = [3,-2,3,-2,1,-1]
+    /// Output: 6
+    /// Explanation:
+    /// All transactions can be taken in order, balance: 
+    /// 0 -> 3 -> 1 -> 4 -> 2 -> 3 -> 2.
+    ///
+    /// Constraints:
+    /// 1. 1 <= transactions.length <= 10^5
+    /// 2. -10^9 <= transactions[i] <= 10^9
+    /// </summary>
+    int maxTransactions(vector<int>& transactions);
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

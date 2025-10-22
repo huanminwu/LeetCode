@@ -8245,8 +8245,50 @@ void TestLeetCode3658(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3687(void)
+{
+    Logger::WriteMessage("Test Leet Code 3687");
+    LeetCodeMath leetCode;
+    vector<int> daysLate = { 5, 1, 7 };
+    int result = leetCode.lateFee(daysLate);
+    Logger::WriteMessage(daysLate);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    daysLate = { 1, 1 };
+    result = leetCode.lateFee(daysLate);
+    Logger::WriteMessage(daysLate);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3697(void)
+{
+    Logger::WriteMessage("Test Leet Code 3697");
+    LeetCodeMath leetCode;
+    int n = 537;
+    vector<int> result = leetCode.decimalRepresentation(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 102;
+    result = leetCode.decimalRepresentation(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 6;
+    result = leetCode.decimalRepresentation(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 1000020202;
+    result = leetCode.decimalRepresentation(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3697();
+    TestLeetCode3687();
     TestLeetCode3658();
     TestLeetCode3649();
     TestLeetCode3648();

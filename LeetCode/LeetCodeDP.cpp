@@ -22364,5 +22364,462 @@ int LeetCodeDP::uniquePaths(vector<vector<int>>& grid)
     }
     return (dp[n - 1][m - 1].first + dp[n - 1][m - 1].second) % M;
 }
+
+/// <summary>
+/// Leet Code 3686. Number of Stable Subsequences
+///
+/// Hard
+///
+/// You are given an integer array nums.
+///
+/// A subsequence is stable if it does not contain three consecutive elements 
+/// with the same parity when the subsequence is read in order (i.e., 
+/// consecutive inside the subsequence).
+///
+/// Return the number of stable subsequences.
+/// 
+/// Since the answer may be too large, return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: nums = [1,3,5]
+/// Output: 6
+///
+/// Explanation:
+/// Stable subsequences are [1], [3], [5], [1, 3], [1, 5], and [3, 5].
+/// Subsequence [1, 3, 5] is not stable because it contains three consecutive 
+/// odd numbers. Thus, the answer is 6.
+///
+/// Example 2:
+/// Input: nums = [2,3,4,2]
+/// Output: 14
+/// Explanation:
+/// The only subsequence that is not stable is [2, 4, 2], which contains three 
+/// consecutive even numbers.
+/// All other subsequences are stable. Thus, the answer is 14.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10​​​​​​​^5
+/// </summary>
+int LeetCodeDP::countStableSubsequences(vector<int>& nums)
+{
+    vector<vector<int>> curr(3, vector<int>(2, 0));
+    vector<vector<int>> next(3, vector<int>(2, 0));
+    const int M = 1000000007;
+ 
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        next = curr;
+        int parity = nums[i] % 2;
+        next[0][parity] = (next[0][parity] + 1) % M;
+        if (parity == 0)
+        {
+            next[2][0] = (next[2][0] + curr[0][0]) % M;
+            next[2][0] = (next[2][0] + curr[2][1]) % M;
+            next[2][1] = (next[2][1] + curr[0][1]) % M;
+            next[2][1] = (next[2][1] + curr[1][0]) % M;
+            next[2][1] = (next[2][1] + curr[1][1]) % M;
+        }
+        else
+        {
+            next[1][0] = (next[1][0] + curr[0][0]) % M;
+            next[1][0] = (next[1][0] + curr[2][0]) % M;
+            next[1][0] = (next[1][0] + curr[2][1]) % M;
+            next[1][1] = (next[1][1] + curr[0][1]) % M;
+            next[1][1] = (next[1][1] + curr[1][0]) % M;
+        }
+        curr = next;
+    }
+    int result = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 2; j++)
+        {
+            result = (result + curr[i][j]) % M;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3685. Subsequence Sum After Capping Elements
+///
+/// Medium
+///
+/// You are given an integer array nums of size n and a positive integer k.
+///
+/// An array capped by value x is obtained by replacing every element nums[i] 
+/// with min(nums[i], x).
+///
+/// For each integer x from 1 to n, determine whether it is possible to choose 
+/// a subsequence from the array capped by x such that the sum of the chosen 
+/// elements is exactly k.
+///
+/// Return a 0-indexed boolean array answer of size n, where answer[i] is true 
+/// if it is possible when using x = i + 1, and false otherwise.
+/// 
+/// Example 1:
+///
+/// Input: nums = [4,3,2,4], k = 5
+///
+/// Output: [false,false,true,true]
+/// Explanation:
+/// For x = 1, the capped array is [1, 1, 1, 1]. Possible sums are 1, 2, 3, 4, 
+/// so it is impossible to form a sum of 5.
+/// For x = 2, the capped array is [2, 2, 2, 2]. Possible sums are 2, 4, 6, 8, 
+/// so it is impossible to form a sum of 5.
+/// For x = 3, the capped array is [3, 3, 2, 3]. A subsequence [2, 3] sums 
+/// to 5, so it is possible.
+/// For x = 4, the capped array is [4, 3, 2, 4]. A subsequence [3, 2] sums 
+/// to 5, so it is possible.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4,5], k = 3
+/// Output: [true,true,true,true,true]
+/// Explanation:
+/// For every value of x, it is always possible to select a subsequence from 
+/// the capped array that sums exactly to 3.
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 4000
+/// 2. 1 <= nums[i] <= n
+/// 3. 1 <= k <= 4000
+/// </summary>
+vector<bool> LeetCodeDP::subsequenceSumAfterCapping(vector<int>& nums, int k)
+{
+    int n = nums.size();
+    vector<bool> result(n, false);
+    vector<int> dp(k + 1);
+    sort(nums.begin(), nums.end());
+    deque<int> dq(nums.begin(), nums.end());
+    dp[0] = 1;
+    for (int x = 1; x <= n; x++)
+    {
+        while (!dq.empty() && dq.front() < x)
+        {
+            int p = dq.front();
+            dq.pop_front();
+            for (int j = k; j >= p; j--)
+            {
+                if (dp[j - p] == 1) dp[j] = 1;
+            }
+        }
+        for (int j = 0; j <= (int)dq.size(); j++)
+        {
+            if (j* x > k) break;
+            if (dp[k - j * x] == 1)
+            {
+                result[x - 1] = true;
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3699. Number of ZigZag Arrays I
+///
+/// Hard
+///
+/// You are given three integers n, l, and r.
+/// A ZigZag array of length n is defined as follows:
+/// Each element lies in the range [l, r].
+/// No two adjacent elements are equal.
+/// No three consecutive elements form a strictly increasing or strictly 
+/// decreasing sequence.
+/// Return the total number of valid ZigZag arrays.
+/// Since the answer may be large, return it modulo 10^9 + 7.
+///
+/// A sequence is said to be strictly increasing if each element is 
+/// strictly greater than its previous one (if exists).
+///
+/// A sequence is said to be strictly decreasing if each element is 
+/// strictly smaller than its previous one (if exists).
+/// 
+/// Example 1:
+/// Input: n = 3, l = 4, r = 5
+/// Output: 2
+/// Explanation:
+/// There are only 2 valid ZigZag arrays of length n = 3 using values in the 
+/// range [4, 5]:
+/// [4, 5, 4]
+/// [5, 4, 5]​​​​​​​
+///
+/// Example 2:
+/// Input: n = 3, l = 1, r = 3
+/// Output: 10
+/// Explanation:
+/// There are 10 valid ZigZag arrays of length n = 3 using values in the 
+/// range [1, 3]:
+/// [1, 2, 1], [1, 3, 1], [1, 3, 2]
+/// [2, 1, 2], [2, 1, 3], [2, 3, 1], [2, 3, 2]
+/// [3, 1, 2], [3, 1, 3], [3, 2, 3]
+/// All arrays meet the ZigZag conditions.
+/// 
+/// Constraints:
+/// 1. 3 <= n <= 2000
+/// 2. 1 <= l < r <= 2000
+/// </summary>
+int LeetCodeDP::zigZagArraysI(int n, int l, int r)
+{
+    vector<vector<vector<long long>>> dp(n, vector<vector<long long>>(2, vector<long long>(r - l + 2)));
+    const int M = 1000000007;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 1; j <= r - l + 1; j++)
+        {
+            if (i == 0)
+            {
+                dp[i][0][j] = 1;
+                dp[i][1][j] = 1;
+            }
+            else
+            {
+                dp[i][0][j] = (dp[i - 1][1][r - l + 1] - dp[i - 1][1][j] + M) % M;
+                dp[i][1][j] = dp[i - 1][0][j - 1] % M;
+            }
+            dp[i][0][j] = (dp[i][0][j] + dp[i][0][j - 1]) % M;
+            dp[i][1][j] = (dp[i][1][j] + dp[i][1][j - 1]) % M;
+        }
+    }
+    return (dp[n - 1][0][r - l + 1] + dp[n - 1][1][r - l + 1]) % M;
+}
+
+/// <summary>
+/// Leet Code 3693. Climbing Stairs II
+///
+/// Medium
+///
+/// You are climbing a staircase with n + 1 steps, numbered from 0 to n.
+/// 
+/// You are also given a 1-indexed integer array costs of length n, where 
+/// costs[i] is the cost of step i.
+///
+/// From step i, you can jump only to step i + 1, i + 2, or i + 3. The cost 
+/// of jumping from step i to step j is defined as: costs[j] + (j - i)^2
+///
+/// You start from step 0 with cost = 0.
+///
+/// Return the minimum total cost to reach step n.
+/// 
+/// Example 1:
+/// Input: n = 4, costs = [1,2,3,4]
+/// Output: 13
+/// Explanation:
+/// One optimal path is 0 -> 1 -> 2 -> 4
+/// Jump	Cost Calculation				Cost
+/// 0 -> 1	costs[1] + (1 - 0)^2 = 1 + 1	2
+/// 1 -> 2	costs[2] + (2 - 1)^2 = 2 + 1	3
+/// 2 -> 4	costs[4] + (4 - 2)^2 = 4 + 4	8
+/// Thus, the minimum total cost is 2 + 3 + 8 = 13
+///
+/// Example 2:
+/// Input: n = 4, costs = [5,1,6,2]
+/// Output: 11
+/// Explanation:
+/// One optimal path is 0 -> 2 -> 4
+/// 
+///	Jump	Cost Calculation				Cost
+///	0 -> 2	costs[2] + (2 - 0)^2 = 1 + 4	5
+///	2 -> 4	costs[4] + (4 - 2)^2 = 2 + 4	6
+///	Thus, the minimum total cost is 5 + 6 = 11
+///
+/// Example 3:
+/// Input: n = 3, costs = [9,8,3]
+/// Output: 12
+/// Explanation:
+/// The optimal path is 0 -> 3 with total cost = costs[3] + 
+/// (3 - 0)^2 = 3 + 9 = 12
+///
+/// Constraints:
+/// 1. 1 <= n == costs.length <= 10^5​​​​​​​
+/// 2. 1 <= costs[i] <= 10^4
+/// </summary>
+int LeetCodeDP::climbStairs(int n, vector<int>& costs)
+{
+    vector<long long> dp(n + 1, INT_MAX);
+    dp[0] = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= 3; j++)
+        {
+            if (i - j >= 0)
+            {
+                dp[i] = min(dp[i], dp[i - j] + costs[i - 1] + j * j);
+            }
+        }
+    }
+    return (int)dp[n];
+}
+
+/// <summary>
+/// Leet Code 3717. Minimum Operations to Make the Array Beautiful
+///
+/// Medium
+///
+/// You are given an integer array nums.
+///
+/// An array is called beautiful if for every index i > 0, the value at 
+/// nums[i] is divisible by nums[i - 1].
+///
+/// In one operation, you may increment any element nums[i] (with i > 0) 
+/// by 1.
+///
+/// Return the minimum number of operations required to make the array 
+/// beautiful.
+/// 
+/// Example 1:
+/// Input: nums = [3,7,9]
+/// Output: 2
+/// Explanation:
+/// Applying the operation twice on nums[1] makes the array beautiful: [3,9,9]
+///
+/// Example 2:
+/// Input: nums = [1,1,1]
+/// Output: 0
+/// Explanation:
+/// The given array is already beautiful.
+/// 
+/// Example 3:
+/// Input: nums = [4]
+/// Output: 0
+/// Explanation:
+/// The array has only one element, so it's already beautiful.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 50​​​
+/// </summary>
+int LeetCodeDP::minOperations_Beautiful(vector<int>& nums)
+{
+    int max_val = 0;
+    int first = nums[0];
+    int n = nums.size();
+    for (int i = 0; i < n; i++)
+    {
+        max_val = max(max_val, nums[i]);
+    }
+    max_val = (max_val + first - 1) / first * first;
+    max_val = 2 * max_val;
+    vector<vector<int>> dp(n, vector<int>(max_val + 1, INT_MAX));
+    dp[0][first] = 0;
+    for (int i = 1; i < n; i++)
+    {
+        for (int j = 0; j <= max_val; j++)
+        {
+            if (dp[i - 1][j] == INT_MAX) continue;
+            int curr = nums[i];
+            for (int k = j; k <= max_val; k += j)
+            {
+                if (k < curr) continue;
+                int add = k - curr;
+                dp[i][k] = min(dp[i][k], dp[i - 1][j] + add);
+            }
+        }
+    }
+    int result = INT_MAX;
+    for (int i = 0; i <= max_val; i++)
+    {
+        result = min(result, dp[n - 1][i]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3704. Count No-Zero Pairs That Sum to N
+///
+/// Hard
+///
+/// A no-zero integer is a positive integer that does not contain the 
+/// digit 0 in its decimal representation.
+///
+/// Given an integer n, count the number of pairs (a, b) where:
+///
+/// a and b are no-zero integers.
+/// a + b = n
+/// Return an integer denoting the number of such pairs.
+/// 
+/// Example 1:
+/// Input: n = 2
+/// Output: 1
+/// Explanation:
+/// The only pair is (1, 1).
+/// Example 2:
+/// Input: n = 3
+/// Output: 2
+/// Explanation:
+/// The pairs are (1, 2) and (2, 1).
+/// Example 3:
+/// Input: n = 11
+/// Output: 8
+/// Explanation:
+/// The pairs are (2, 9), (3, 8), (4, 7), (5, 6), (6, 5), (7, 4), (8, 3), and 
+/// (9, 2). Note that (1, 10) and (10, 1) do not satisfy the conditions 
+/// because 10 contains 0 in its decimal representation.
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 10^15
+/// </summary>
+long long LeetCodeDP::countNoZeroPairs(long long n)
+{
+    vector<vector<vector<vector<long long>>>> dp(16, 
+        vector<vector<vector<long long>>>(2, 
+            vector<vector<long long>>(2, vector<long long>(2, 0))));
+    int index = -1;
+    while (n > 0)
+    {
+        index++;
+        int digit = n % 10;
+        n = n / 10;
+        for (int a = 0; a <= 9; a++)
+        {
+            for (int prev_carry = 0; prev_carry <= 1; prev_carry++)
+            {
+                int carry = 0;
+                int b = (digit - prev_carry)- a;
+                if (b < 0)
+                {
+                    b += 10;
+                    carry = 1;
+                }
+                if (index == 0)
+                {
+                    if (prev_carry == 1) continue;
+                    if (a != 0 && b != 0)
+                    {
+                        dp[index][carry][0][0] += 1;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    int is_zero_a = (a == 0) ? 1 : 0;
+                    int is_zero_b = (b == 0) ? 1 : 0;
+                    // take care of no carry from previous digit
+                    for (int i = 0; i <= is_zero_a; i++)
+                    {
+                        for (int j = 0; j <= is_zero_b; j++)
+                        {
+                            dp[index][carry][is_zero_a][is_zero_b] += dp[index - 1][prev_carry][i][j];
+                        }
+                    }
+                }
+            }
+        }
+    }
+    long long result = 0;
+    for (size_t i = 0; i < 2; i++)
+    {
+        for (int j = 0; j < 2; j++)
+        {
+           result += dp[index][0][i][j];
+        }
+    }
+    return result;
+}
 #pragma endregion
 

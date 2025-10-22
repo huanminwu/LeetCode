@@ -1122,9 +1122,29 @@ void TestLeetCode3676(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3703(void)
+{
+    Logger::WriteMessage("Test Leet Code 3703");
+    LeetCodeStack leetCode;
+    string s = "(())";
+    int k = 1;
+    string result = leetCode.removeSubstring(s, k);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "(()(";
+    k = 1;
+    result = leetCode.removeSubstring(s, k);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+
+    s = "((()))()()()";
+    k = 3;
+    result = leetCode.removeSubstring(s, k);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
+}
 
 void TestLeetCodeStack(void)
 {
+    TestLeetCode3703();
     TestLeetCode3676();
     TestLeetCode3430();
     TestLeetCode3431();

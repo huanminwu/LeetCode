@@ -44,22 +44,22 @@
 
 void main(int argc, char* argv[])
 {
-    TestLeetCodeStack();
-    TestLeetCodeString();
-    TestLeetCodeArray();
-    TestLeetCodeTwoPointer();
-    TestLeetCodeBit();
-    TestLeetCodeBFS();
-    TestLeetCodeDFS();
+    TestLeetCodeBinarySearch();
     TestLeetCodeDP();
+    TestLeetCodeArray();
     TestLeetCodeHashtable();
     TestLeetCodeSort();
-    TestLeetCodeMath();
-    TestLeetCodeGraph();
-    TestLeetCodeGreedy();
-    TestLeetCodeBinarySearch();
-    TestLeetCodeTree();
     TestLeetCodeDesign();
+    TestLeetCodeGraph();
+    TestLeetCodeString();
+    TestLeetCodeMath();
+    TestLeetCodeDFS();
+    TestLeetCodeBit();
+    TestLeetCodeGreedy();
+    TestLeetCodeTwoPointer();
+    TestLeetCodeStack();
+    TestLeetCodeBFS();
+    TestLeetCodeTree();
     TestLeetCodeLinkedList();
     TestUSACO();
     printf("Please press a key to end");

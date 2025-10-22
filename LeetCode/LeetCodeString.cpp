@@ -30210,4 +30210,326 @@ int LeetCodeString::minOperationsEqualize(string s)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3707. Equal Score Substrings
+///
+/// Easy
+///
+/// You are given a string s consisting of lowercase English letters.
+///
+/// The score of a string is the sum of the positions of its characters 
+/// in the alphabet, where 'a' = 1, 'b' = 2, ..., 'z' = 26.
+///
+/// Determine whether there exists an index i such that the string can be 
+/// split into two non-empty substrings s[0..i] and s[(i + 1)..(n - 1)] 
+/// that have equal scores.
+///
+/// Return true if such a split exists, otherwise return false.
+///
+/// A substring is a contiguous non-empty sequence of characters within a 
+/// string.
+///
+/// Example 1:
+/// Input: s = "adcb"
+/// Output: true
+/// Explanation:
+/// Split at index i = 1:
+/// Left substring = s[0..1] = "ad" with score = 1 + 4 = 5
+/// Right substring = s[2..3] = "cb" with score = 3 + 2 = 5
+/// Both substrings have equal scores, so the output is true.
+///
+/// Example 2:
+/// Input: s = "bace"
+/// Output: false
+/// Explanation:​​​​​​
+/// ​​​​​​​No split produces equal scores, so the output is false.
+/// 
+/// Constraints:
+/// 1. 2 <= s.length <= 100
+/// 2. s consists of lowercase English letters.
+/// </summary>
+bool LeetCodeString::scoreBalance(string s)
+{
+    unordered_set<int> num_set;
+    int total = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        total += (s[i] - 'a' + 1);
+        num_set.insert(total);
+    }
+    if (total % 2 == 0 && num_set.count(total / 2) > 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+/// <summary>
+/// Leet Code 3696. Maximum Distance Between Unequal Words in Array I
+///
+/// Easy
+///
+/// You are given a string array words.
+///
+/// Find the maximum distance between two distinct indices i and j such that:
+///
+/// words[i] != words[j], and
+/// the distance is defined as j - i + 1.
+/// Return the maximum distance among all such pairs. If no valid pair exists, 
+/// return 0.
+/// 
+/// Example 1:
+/// Input: words = ["leetcode","leetcode","codeforces"]
+/// Output: 3
+/// Explanation:
+/// In this example, words[0] and words[2] are not equal, and they have the 
+/// maximum distance 2 - 0 + 1 = 3.
+///
+/// Example 2:
+/// Input: words = ["a","b","c","a","a"]
+/// Output: 4
+/// Explanation:
+/// In this example words[1] and words[4] have the largest distance 
+/// of 4 - 1 + 1 = 4.
+///
+/// Example 3:
+/// Input: words = ["z","z","z"]
+/// Output: 0
+/// Explanation:
+/// In this example all the words are equal, thus the answer is 0.
+///
+/// Constraints:
+/// 1. 1 <= words.length <= 100
+/// 2. 1 <= words[i].length <= 10
+/// 3. words[i] consists of lowercase English letters.
+/// </summary>
+int LeetCodeString::maxDistanceI(vector<string>& words)
+{
+    unordered_map<string, pair<int, int>> word_map;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        if (word_map.find(words[i]) == word_map.end())
+        {
+            word_map[words[i]] = { i, i };
+        }
+        else
+        {
+            word_map[words[i]].second = i;
+        }
+    }
+    int max_distance = 0;
+    for (auto itr1 = word_map.begin(); itr1 != word_map.end(); itr1++)
+    {
+        for (auto itr2 = next(itr1); itr2 != word_map.end(); itr2++)
+        {
+            int distance = max(itr1->second.second - itr2->second.first + 1,
+                itr2->second.second - itr1->second.first + 1);
+            max_distance = max(max_distance, distance);
+        }
+    }
+    return max_distance;
+}
+
+
+/// <summary>
+/// Leet Code 3706. Maximum Distance Between Unequal Words in Array II
+///
+/// Medium
+/// 
+/// You are given a string array words.
+///
+/// Find the maximum distance between two distinct indices i and j such that:
+///
+/// words[i] != words[j], and
+/// the distance is defined as j - i + 1.
+/// Return the maximum distance among all such pairs. If no valid pair exists, 
+/// return 0.
+///
+/// Example 1:
+/// Input: words = ["leetcode","leetcode","codeforces"]
+/// Output: 3
+/// Explanation:
+/// In this example, words[0] and words[2] are not equal, and they have the 
+/// maximum distance 2 - 0 + 1 = 3.
+///
+/// Example 2:
+/// Input: words = ["a","b","c","a","a"]
+/// Output: 4
+/// Explanation:
+/// In this example words[1] and words[4] have the largest distance 
+/// of 4 - 1 + 1 = 4.
+/// 
+/// Example 3:
+/// Input: words = ["z","z","z"]
+/// Output: 0
+/// Explanation:
+/// ​​​​​​​In this example all the words are equal, thus the answer is 0.
+/// 
+/// Constraints:
+/// 1. 1 <= words.length <= 10^5
+/// 2. 1 <= words[i].length <= 10
+/// 3. words[i] consists of lowercase English letters.
+/// </summary>
+int LeetCodeString::maxDistanceII(vector<string>& words)
+{
+    vector<pair<string, int>> min_index = { {"#", -1}, {"#", -1}};
+    vector<pair<string, int>> max_index = { {"#", -1}, {"#", -1}};
+    int n = words.size();
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        if (min_index[0].first == "#")
+        {
+            min_index[0] = { words[i], (int)i };
+        }
+        else if (min_index[0].first == words[i])
+        {
+            continue;
+        }
+        else if (min_index[1].first == "#")
+        {
+            min_index[1] = { words[i], (int)i };
+        }
+        else if (min_index[1].first == words[i])
+        {
+            continue;
+        }
+        else
+        {
+            break;
+        }
+    }
+    for (int i = n - 1; i >= 0; i--)
+    {
+        if (max_index[0].first == "#")
+        {
+            max_index[0] = { words[i], (int)i };
+        }
+        else if (max_index[0].first == words[i])
+        {
+            continue;
+        }
+        else if (max_index[1].first == "#")
+        {
+            max_index[1] = { words[i], (int)i };
+        }
+        else if (max_index[1].first == words[i])
+        {
+            continue;
+        }
+        else
+        {
+            break;
+        }
+    }
+    int result = 0;
+    if (min_index[0].first != max_index[0].first)
+    {
+        result = max(result, max_index[0].second - min_index[0].second + 1);
+    }
+    else
+    {
+        if (min_index[1].first != "#")
+        {
+            result = max(result, max_index[0].second - min_index[1].second + 1);
+        }
+        if (max_index[1].first != "#")
+        {
+            result = max(result, max_index[1].second - min_index[0].second + 1);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3720. Lexicographically Smallest Permutation Greater Than Target
+///
+/// Medium
+///
+/// You are given two strings s and target, both having length n, consisting 
+/// of lowercase English letters.
+///
+/// Return the lexicographically smallest permutation of s that is strictly 
+/// greater than target. If no permutation of s is lexicographically strictly 
+/// greater than target, return an empty string.
+///
+/// A string a is lexicographically strictly greater than a string b (of the 
+/// same length) if in the first position where a and b differ, string a has a 
+/// letter that appears later in the alphabet than the corresponding letter 
+/// in b.
+/// 
+/// Example 1:
+/// Input: s = "abc", target = "bba"
+/// Output: "bca"
+/// Explanation:
+/// The permutations of s (in lexicographical order) are "abc", "acb", 
+/// "bac", "bca", "cab", and "cba".
+/// The lexicographically smallest permutation that is strictly 
+/// greater than target is "bca".
+///
+/// Example 2:
+/// Input: s = "leet", target = "code"
+/// Output: "eelt"
+/// Explanation:
+/// The permutations of s (in lexicographical order) are "eelt", "eetl", 
+/// "elet", "elte", "etel", "etle", "leet", "lete", "ltee", "teel", 
+/// "tele", and "tlee".
+/// The lexicographically smallest permutation that is strictly greater 
+/// than target is "eelt".
+///
+/// Example 3:
+/// Input: s = "baba", target = "bbaa"
+/// Output: ""
+/// Explanation:
+/// The permutations of s (in lexicographical order) are "aabb", "abab", 
+/// "abba", "baab", "baba", and "bbaa".
+/// None of them is lexicographically strictly greater than target. 
+/// Therefore, the answer is "".
+/// 
+/// Constraints:
+/// 1. 1 <= s.length == target.length <= 300
+/// 2. s and target consist of only lowercase English letters.
+/// </summary>
+string LeetCodeString::lexGreaterPermutation(string s, string target)
+{
+    string result;
+    vector<int> char_count(26);
+    for (char c : s) char_count[c - 'a']++;
+    for (size_t i = 0; i < target.size(); i++)
+    {
+        int k = target[i] - 'a';
+        if (char_count[k] > 0)
+        {
+            char_count[k]--;
+            result.push_back(target[i]);
+        }
+        else
+        {
+            for (int j = k + 1; j < 26; j++)
+            {
+                if (char_count[j] > 0)
+                {
+                    result.push_back(j + 'a');
+                    char_count[j]--;
+                    for (char c = 'a'; c <= 'z'; c++)
+                    {
+                        result.append(string(char_count[c - 'a'], c));
+                    }
+                    return result;
+                }
+            }
+            for (char c = 'z'; c >= 'a'; c--)
+            {
+                result.append(string(char_count[c - 'a'], c));
+            }
+            std::next_permutation(result.begin(), result.end());
+            break;
+        }
+    }
+    if (result > target) return result;
+    else return "";
+}
 #pragma endregion

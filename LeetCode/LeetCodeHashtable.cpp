@@ -6610,4 +6610,258 @@ vector<int> LeetCodeHashtable::recoverOrder(vector<int>& order, vector<int>& fri
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3678. Smallest Absent Positive Greater Than Average
+///
+/// Easy
+///
+/// You are given an integer array nums.
+///
+/// Return the smallest absent positive integer in nums such that it is 
+/// strictly greater than the average of all elements in nums.
+///
+/// The average of an array is defined as the sum of all its elements 
+/// divided by the number of elements.
+///
+/// Example 1:
+/// Input: nums = [3,5]
+/// Output: 6
+/// Explanation:
+/// The average of nums is (3 + 5) / 2 = 8 / 2 = 4.
+/// The smallest absent positive integer greater than 4 is 6.
+///
+/// Example 2:
+/// Input: nums = [-1,1,2]
+///
+/// Output: 3
+/// Explanation:
+/// ​​​​​​​The average of nums is (-1 + 1 + 2) / 3 = 2 / 3 = 0.667.
+/// The smallest absent positive integer greater than 0.667 is 3.
+///
+/// Example 3:
+/// Input: nums = [4,-1]
+/// Output: 2
+/// Explanation:
+/// The average of nums is (4 + (-1)) / 2 = 3 / 2 = 1.50.
+/// The smallest absent positive integer greater than 1.50 is 2.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. -100 <= nums[i] <= 100​​​​​​​
+/// </summary>
+int LeetCodeHashtable::smallestAbsent(vector<int>& nums)
+{
+    unordered_set<int> num_set;
+    int sum = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        sum += nums[i];
+        if (nums[i] > 0)
+        {
+            num_set.insert(nums[i]);
+        }
+    }
+    double average = (double)sum / (double)nums.size();
+    int result = max((int)average + 1, 1);
+    while (true)
+    {
+        if (num_set.count(result) == 0) return result;
+        result++;
+    }
+    return 0;
+}
+
+/// <summary>
+/// Leet Code 3692. Majority Frequency Characters
+///
+/// Easy
+///
+/// You are given a string s consisting of lowercase English letters.
+///
+/// The frequency group for a value k is the set of characters that appear 
+/// exactly k times in s.
+///
+/// The majority frequency group is the frequency group that contains the 
+/// largest number of distinct characters.
+///
+/// Return a string containing all characters in the majority frequency 
+/// group, in any order. If two or more frequency groups tie for that 
+/// largest size, pick the group whose frequency k is larger.
+///
+/// Example 1:
+/// Input: s = "aaabbbccdddde"
+/// Output: "ab"
+/// Explanation:
+/// Frequency (k)   Distinct characters in group    Group size  Majority?
+///
+/// 4   {d} 1   No
+/// 3   {a, b}  2   Yes
+/// 2   {c} 1   No
+/// 1   {e} 1   No
+/// Both characters 'a' and 'b' share the same frequency 3, they are in the 
+/// majority frequency group. "ba" is also a valid answer.
+///
+/// Example 2:
+/// Input: s = "abcd"
+/// Output: "abcd"
+/// Explanation:
+/// Frequency (k)   Distinct characters in group    Group size  Majority?
+/// 1   {a, b, c, d}    4   Yes
+/// All characters share the same frequency 1, they are all in the majority 
+/// frequency group.
+///
+/// Example 3:
+/// Input: s = "pfpfgi"
+/// Output: "fp"
+/// Explanation:
+/// Frequency (k)   Distinct characters in group    Group size  Majority?
+/// 2   {p, f}  2   Yes
+/// 1   {g, i}  2   No (tied size, lower frequency)
+/// Both characters 'p' and 'f' share the same frequency 2, they are in the 
+/// majority frequency group. There is a tie in group size with frequency 1, 
+/// but we pick the higher frequency: 2.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 100
+/// 2. s consists only of lowercase English letters.
+/// </summary>
+string LeetCodeHashtable::majorityFrequencyGroup(string s)
+{
+    vector<int> freq(26);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        freq[s[i] - 'a']++;
+    }
+    map<int, string> freq_map;
+    for (int i = 0; i < 26; i++)
+    {
+        if (freq[i] > 0)
+        {
+            freq_map[freq[i]].push_back('a' + i);
+        }
+    }
+    string result;
+    int group_size = 0;
+    for (auto itr : freq_map)
+    {
+        if ((int)itr.second.size() >= group_size)
+        {
+            group_size = itr.second.size();
+            result = itr.second;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3712. Sum of Elements With Frequency Divisible by K
+///
+/// Easy
+///
+/// You are given an integer array nums and an integer k.
+///
+/// Return an integer denoting the sum of all elements in nums whose frequency 
+/// is divisible by k, or 0 if there are no such elements.
+///
+/// Note: An element is included in the sum exactly as many times as it 
+/// appears in the array if its total frequency is divisible by k.
+///
+/// Example 1:
+/// Input: nums = [1,2,2,3,3,3,3,4], k = 2
+/// Output: 16
+/// 
+/// Explanation:
+/// The number 1 appears once (odd frequency).
+/// The number 2 appears twice (even frequency).
+/// The number 3 appears four times (even frequency).
+/// The number 4 appears once (odd frequency).
+/// So, the total sum is 2 + 2 + 3 + 3 + 3 + 3 = 16.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,4,5], k = 2
+/// Output: 0
+/// Explanation:
+/// There are no elements that appear an even number of times, so the total 
+/// sum is 0.
+///
+/// Example 3:
+/// Input: nums = [4,4,4,1,2,3], k = 3
+/// Output: 12
+/// Explanation:
+/// The number 1 appears once.
+/// The number 2 appears once.
+/// The number 3 appears once.
+/// The number 4 appears three times.
+/// So, the total sum is 4 + 4 + 4 = 12.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 100
+/// 3. 1 <= k <= 100
+/// </summary>
+int LeetCodeHashtable::sumDivisibleByK(vector<int>& nums, int k)
+{
+    unordered_map<int, int> num_count;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        num_count[nums[i]]++;
+    }
+    int result = 0;
+    for (auto itr : num_count)
+    {
+        if (itr.second % k == 0)
+        {
+            result += itr.first * itr.second;
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3718. Smallest Missing Multiple of K
+///
+/// Easy
+///
+/// Given an integer array nums and an integer k, return the smallest 
+/// positive multiple of k that is missing from nums.
+///
+/// A multiple of k is any positive integer divisible by k.
+/// 
+/// Example 1:
+/// Input: nums = [8,2,3,4,6], k = 2
+/// Output: 10
+/// Explanation:
+/// The multiples of k = 2 are 2, 4, 6, 8, 10, 12... and the smallest 
+/// multiple missing from nums is 10.
+///
+/// Example 2:
+/// Input: nums = [1,4,7,10,15], k = 5
+/// Output: 5
+/// Explanation:
+/// The multiples of k = 5 are 5, 10, 15, 20... and the smallest multiple 
+/// missing from nums is 5.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 100
+/// 3. 1 <= k <= 100​
+/// </summary>
+int LeetCodeHashtable::missingMultiple(vector<int>& nums, int k)
+{
+    unordered_set<int> num_set;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        num_set.insert(nums[i]);
+    }
+    for (int multiple = k; multiple <= 10000; multiple += k)
+    {
+        if (num_set.find(multiple) == num_set.end())
+        {
+            return multiple;
+        }
+    }
+    return -1;
+}
 #pragma endregion
