@@ -30525,11 +30525,251 @@ string LeetCodeString::lexGreaterPermutation(string s, string target)
             {
                 result.append(string(char_count[c - 'a'], c));
             }
-            std::next_permutation(result.begin(), result.end());
             break;
         }
     }
+    std::next_permutation(result.begin(), result.end());
     if (result > target) return result;
     else return "";
+}
+
+/// <summary>
+/// Leet Code 3713. Longest Balanced Substring I
+///
+/// Medium
+///
+/// You are given a string s consisting of lowercase English letters.
+/// A substring of s is called balanced if all distinct characters in the 
+/// substring appear the same number of times.
+///
+/// Return the length of the longest balanced substring of s.
+///
+/// Example 1:
+/// Input: s = "abbac"
+/// Output: 4
+/// Explanation:
+/// The longest balanced substring is "abba" because both distinct characters 
+/// 'a' and 'b' each appear exactly 2 times.
+///
+/// Example 2:
+/// Input: s = "zzabccy"
+/// Output: 4
+/// Explanation:
+/// The longest balanced substring is "zabc" because the distinct characters 
+/// 'z', 'a', 'b', and 'c' each appear exactly 1 time.​​​​​​​
+///
+/// Example 3:
+/// Input: s = "aba"
+/// Output: 2
+/// Explanation:
+/// ​​​​​​​One of the longest balanced substrings is "ab" because both distinct
+/// characters 'a' and 'b' each appear exactly 1 time. Another longest 
+/// balanced substring is "ba".
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 1000
+/// 2. s consists of lowercase English letters.
+/// </summary>
+int LeetCodeString::longestBalancedI(string s)
+{
+    int n = s.size();
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        vector<int> char_count(26);
+        for (int j = i; j < n; j++)
+        {
+            char_count[s[j] - 'a']++;
+            int count = -1;
+            for (int k = 0; k < 26; k++)
+            {
+                if (char_count[k] == 0) continue;
+                if (count == -1)
+                {
+                    count = char_count[k];
+                }
+                else if (count != char_count[k])
+                {
+                    count = 0;
+                    break;
+                }
+            }
+            if (count != 0)
+            {
+                result = max(result, j - i + 1);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3714. Longest Balanced Substring II
+///
+/// Medium
+///
+/// You are given a string s consisting only of the characters 'a', 'b', 
+/// and 'c'.
+///
+/// A substring of s is called balanced if all distinct characters in the 
+/// substring appear the same number of times.
+///
+/// Return the length of the longest balanced substring of s.
+///
+/// 
+/// Example 1:
+///
+/// Input: s = "abbac"
+/// Output: 4
+/// Explanation:
+/// The longest balanced substring is "abba" because both distinct characters 
+/// 'a' and 'b' each appear exactly 2 times.
+///
+/// Example 2:
+/// Input: s = "aabcc"
+/// Output: 3
+/// Explanation:
+/// The longest balanced substring is "abc" because all distinct characters 
+/// 'a', 'b' and 'c' each appear exactly 1 time.
+///
+/// Example 3:
+/// Input: s = "aba"
+/// Output: 2
+/// Explanation:
+/// One of the longest balanced substrings is "ab" because both distinct 
+/// characters 'a' and 'b' each appear exactly 1 time. Another longest 
+/// balanced substring is "ba".
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s contains only the characters 'a', 'b', and 'c'.
+/// </summary>
+int LeetCodeString::longestBalancedII(string s)
+{
+    int n = s.size();
+    vector<int> char_count(3), one(3);
+    vector<map<int, int>> two(3);
+    for (int j = 0; j < 3; j++)
+    {
+        two[j][0] = -1;
+    }
+    map<tuple<int, int>, int> three;
+    three[{0, 0}] = -1;
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        int index = s[i] - 'a';
+        char_count[index]++;
+        for (int j = 0; j < 3; j++)
+        {
+            if (j == index)
+            {
+                one[j]++;
+                result = max(result, one[j]);
+            }
+            else
+            {
+                one[j] = 0;
+            }
+            for (int k = j + 1; k < 3; k++)
+            {
+                if (j != index && k != index)
+                {
+                    two[j + k - 1].clear();
+                    two[j + k - 1][char_count[k] - char_count[j]] = i;
+                    continue;
+                }
+                int diff = char_count[k] - char_count[j];
+                if (two[j + k - 1].count(diff) > 0)
+                {
+                    result = max(result, i - two[j + k - 1][diff]);
+                }
+                else
+                {
+                    two[j + k - 1][diff] = i;
+                }
+            }
+        }
+        int diff1 = char_count[0] - char_count[1];
+        int diff2 = char_count[0] - char_count[2];
+        if (three.count({ diff1, diff2 }) > 0)
+        {
+            result = max(result, i - three[{ diff1, diff2 }]);
+        }
+        else
+        {
+            three[{ diff1, diff2 }] = i;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3722. Lexicographically Smallest String After Reverse
+///
+/// Medium
+///
+/// You are given a string s of length n consisting of lowercase English 
+/// letters.
+///
+/// You must perform exactly one operation by choosing any integer k such 
+/// that 1 <= k <= n and either:
+///
+/// reverse the first k characters of s, or
+/// reverse the last k characters of s.
+/// Return the lexicographically smallest string that can be obtained after 
+/// exactly one such operation.
+///
+/// A string a is lexicographically smaller than a string b if, at the first 
+/// position where they differ, a has a letter that appears earlier in the 
+/// alphabet than the corresponding letter in b. If the first min(a.length, 
+/// b.length) characters are the same, then the shorter string is considered 
+/// lexicographically smaller.
+///
+/// Example 1:
+/// Input: s = "dcab"
+/// Output: "acdb"
+/// Explanation:
+/// Choose k = 3, reverse the first 3 characters.
+/// Reverse "dca" to "acd", resulting string s = "acdb", which is the 
+/// lexicographically smallest string achievable.
+///
+/// Example 2:
+/// Input: s = "abba"
+/// Output: "aabb"
+/// Explanation:
+/// Choose k = 3, reverse the last 3 characters.
+/// Reverse "bba" to "abb", so the resulting string is "aabb", which is the 
+/// lexicographically smallest string achievable.
+///
+/// Example 3:
+/// Input: s = "zxy"
+/// Output: "xzy"
+/// Explanation:
+/// Choose k = 2, reverse the first 2 characters.
+/// Reverse "zx" to "xz", so the resulting string is "xzy", which is the 
+/// lexicographically smallest string achievable.
+/// 
+/// Constraints:
+/// 1. 1 <= n == s.length <= 1000
+/// 2. s consists of lowercase English letters.
+/// </summary>
+string LeetCodeString::lexSmallest(string s)
+{
+    int n = s.size();
+    string result = s;
+    for (int i = 1; i < n; i++)
+    {
+        string front = s.substr(0, i);
+        std::reverse(front.begin(), front.end());
+        result = min(result, front + s.substr(i));
+        string back = s.substr(n - i, i);
+        std::reverse(back.begin(), back.end());
+        result = min(result, s.substr(0, n - i) + back);
+    }
+    string front = s;
+    std::reverse(front.begin(), front.end());
+    result = min(result, front);
+    return result;
 }
 #pragma endregion

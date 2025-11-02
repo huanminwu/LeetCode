@@ -40590,7 +40590,7 @@ int LeetCodeArray::longestSubarrayII(vector<int>& nums)
 /// 1. 1 <= nums.length <= 1500
 /// 2. 1 <= nums[i] <= 10^5
 /// </summary>
-int LeetCodeArray::longestBalanced(vector<int>& nums)
+int LeetCodeArray::longestBalancedI(vector<int>& nums)
 {
     int result = 0;
     for (size_t i = 0; i < nums.size(); i++)
@@ -40611,6 +40611,339 @@ int LeetCodeArray::longestBalanced(vector<int>& nums)
                 result = max(result, (int)(j - i + 1));
             }
         }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3721. Longest Balanced Subarray II
+///
+/// Hard
+///
+/// You are given an integer array nums.
+///
+/// A subarray is called balanced if the number of distinct even numbers in 
+/// the subarray is equal to the number of distinct odd numbers.
+///
+/// Return the length of the longest balanced subarray.
+/// 
+/// Example 1:
+/// Input: nums = [2,5,4,3]
+/// Output: 4
+/// Explanation:
+/// The longest balanced subarray is [2, 5, 4, 3].
+/// It has 2 distinct even numbers [2, 4] and 2 distinct odd numbers [5, 3]. 
+/// Thus, the answer is 4.
+///
+/// Example 2:
+/// Input: nums = [3,2,2,5,4]
+/// Output: 5
+/// Explanation:
+/// The longest balanced subarray is [3, 2, 2, 5, 4].
+/// It has 2 distinct even numbers [2, 4] and 2 distinct odd numbers [3, 5]. 
+/// Thus, the answer is 5.
+///
+/// Example 3:
+/// Input: nums = [1,2,3,2]
+/// Output: 3
+/// Explanation:
+/// The longest balanced subarray is [2, 3, 2].
+/// It has 1 distinct even number [2] and 1 distinct odd number [3]. Thus, 
+/// the answer is 3.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeArray::longestBalancedII(vector<int>& nums)
+{
+    int n = nums.size();
+    map<int, int> mp;
+    vector<int> nextPos(n, n);
+
+    for (int i = n - 1; i >= 0; i--) 
+    {
+        if (mp.count(nums[i])) 
+        {
+            nextPos[i] = mp[nums[i]];
+        }
+
+        mp[nums[i]] = i;
+    }
+
+    vector<int> prefixSum(n, 0);
+    unordered_set<int> seen;
+    for (int i = 0; i < n; i++) 
+    {
+        if (i > 0) 
+        {
+            prefixSum[i] = prefixSum[i - 1];
+        }
+
+        if (seen.count(nums[i])) 
+        {
+            continue;
+        }
+
+        if (nums[i] % 2 == 0) 
+        {
+            prefixSum[i]--;
+        }
+        else 
+        {
+            prefixSum[i]++;
+        }
+
+        seen.insert(nums[i]);
+    }
+
+    SegmentTreeLazy seg(prefixSum);
+    int result = seg.findRightMostZero(0, 0, n - 1) + 1;
+    for (int i = 1; i < n; i++) 
+    {
+        int r = nextPos[i - 1] - 1;
+        int val = ((nums[i - 1] % 2 == 0) ? 1 : -1);
+
+        seg.updateRangeQuery(i, r, 0, 0, n - 1, val);
+        int rightMostIdx = seg.findRightMostZero(0, 0, n - 1);
+        if (rightMostIdx != -1) 
+        {
+            result = max(result, rightMostIdx - i + 1);
+        }
+    }
+
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3724. Minimum Operations to Transform Array
+///
+/// Medium
+///
+/// You are given two integer arrays nums1 of length n and nums2 of length 
+/// n + 1.
+///
+/// You want to transform nums1 into nums2 using the minimum number of 
+/// operations.
+///
+/// You may perform the following operations any number of times, each time 
+/// choosing an index i:
+///
+/// Increase nums1[i] by 1.
+/// Decrease nums1[i] by 1.
+/// Append nums1[i] to the end of the array.
+/// Return the minimum number of operations required to transform nums1 into 
+/// nums2.
+/// 
+/// Example 1:
+/// Input: nums1 = [2,8], nums2 = [1,7,3]
+/// Output: 4
+/// Explanation:
+/// Step    i   Operation   nums1[i]    Updated nums1
+/// 1   0   Append  -   [2, 8, 2]
+/// 2   0   Decrement   Decreases to 1  [1, 8, 2]
+/// 3   1   Decrement   Decreases to 7  [1, 7, 2]
+/// 4   2   Increment   Increases to 3  [1, 7, 3]
+/// Thus, after 4 operations nums1 is transformed into nums2.
+///
+/// Example 2:
+/// Input: nums1 = [1,3,6], nums2 = [2,4,5,3]
+/// Output: 4
+/// Explanation:
+/// Step    i   Operation   nums1[i]    Updated nums1
+/// 1   1   Append  -   [1, 3, 6, 3]
+/// 2   0   Increment   Increases to 2  [2, 3, 6, 3]
+/// 3   1   Increment   Increases to 4  [2, 4, 6, 3]
+/// 4   2   Decrement   Decreases to 5  [2, 4, 5, 3]
+/// Thus, after 4 operations nums1 is transformed into nums2.
+///
+/// Example 3:
+/// Input: nums1 = [2], nums2 = [3,4]
+/// Output: 3
+/// Explanation:
+/// Step    i   Operation   nums1[i]    Updated nums1
+/// 1   0   Increment   Increases to 3  [3]
+/// 2   0   Append  -   [3, 3]
+/// 3   1   Increment   Increases to 4  [3, 4]
+/// Thus, after 3 operations nums1 is transformed into nums2.
+///
+/// Constraints:
+/// 1. 1 <= n == nums1.length <= 10^5
+/// 2. nums2.length == n + 1
+/// 3. 1 <= nums1[i], nums2[i] <= 10^5
+/// </summary>
+long long LeetCodeArray::minOperations_append(vector<int>& nums1, vector<int>& nums2)
+{
+    int last = nums2.back();
+    int n = nums1.size();
+    int adjust = INT_MAX;
+    long long result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        int a = min(nums1[i], nums2[i]);
+        int b = max(nums1[i], nums2[i]);
+        if (last >= a && last <= b)
+        {
+            adjust = 0;
+        }
+        else
+        {
+            adjust = min(adjust, min(abs(a - last), abs(b - last)));
+        }
+        result += abs(nums1[i] - nums2[i]);
+    }
+    result += 1 + adjust;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3728. Stable Subarrays With Equal Boundary and Interior Sum
+///
+/// Medium
+///
+/// You are given an integer array capacity.
+/// A subarray capacity[l..r] is considered stable if:
+/// Its length is at least 3.
+/// The first and last elements are each equal to the sum of all elements 
+/// strictly between them (i.e., capacity[l] = capacity[r] = capacity[l + 1] + 
+/// capacity[l + 2] + ... + capacity[r - 1]).
+/// Return an integer denoting the number of stable subarrays.
+///
+/// Example 1:
+/// Input: capacity = [9,3,3,3,9]
+/// Output: 2
+/// Explanation:
+/// [9,3,3,3,9] is stable because the first and last elements are both 9, 
+/// and the sum of the elements strictly between them is 3 + 3 + 3 = 9.
+/// [3,3,3] is stable because the first and last elements are both 3, and 
+/// the sum of the elements strictly between them is 3.
+///
+/// Example 2:
+/// Input: capacity = [1,2,3,4,5]
+/// Output: 0
+/// Explanation:
+/// No subarray of length at least 3 has equal first and last elements, 
+/// so the answer is 0.
+/// 
+/// Example 3:
+/// Input: capacity = [-4,4,0,0,-8,-4]
+/// Output: 1
+/// Explanation:
+/// [-4,4,0,0,-8,-4] is stable because the first and last elements are 
+/// both -4, and the sum of the elements strictly between them 
+/// is 4 + 0 + 0 + (-8) = -4
+/// 
+/// Constraints:
+/// 1. 3 <= capacity.length <= 10^5
+/// 2. -10^9 <= capacity[i] <= 10^9
+/// </summary>
+long long LeetCodeArray::countStableSubarrays(vector<int>& capacity)
+{
+    unordered_map<int, unordered_map<long long, int>> dp;
+    int n = capacity.size();
+    long long sum = 0, result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum += capacity[i];
+        if (dp.count(capacity[i]) > 0 && dp[capacity[i]].count(sum - 2 * capacity[i]) > 0)
+        {
+            result += dp[capacity[i]][sum - 2 * capacity[i]];
+            if (capacity[i] == 0 && capacity[i-1] == 0) result--;
+        }
+        dp[capacity[i]][sum]++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3729. Count Distinct Subarrays Divisible by K in Sorted Array
+///
+/// Hard
+///
+/// You are given an integer array nums sorted in non-descending order and 
+/// a positive integer k.
+///
+/// A subarray of nums is good if the sum of its elements is divisible by k.
+///
+/// Return an integer denoting the number of distinct good subarrays of nums.
+///
+/// Subarrays are distinct if their sequences of values are. For example, 
+/// there are 3 distinct subarrays in [1, 1, 1], namely [1], [1, 1], 
+/// and [1, 1, 1].
+///
+/// Example 1:
+/// Input: nums = [1,2,3], k = 3
+/// Output: 3
+/// Explanation:
+/// The good subarrays are [1, 2], [3], and [1, 2, 3]. For example, 
+/// [1, 2, 3] is good because the sum of its elements is 1 + 2 + 3 = 6, 
+/// and 6 % k = 6 % 3 = 0.
+///
+/// Example 2:
+/// Input: nums = [2,2,2,2,2,2], k = 6
+/// Output: 2
+/// Explanation:
+/// The good subarrays are [2, 2, 2] and [2, 2, 2, 2, 2, 2]. For example, 
+/// [2, 2, 2] is good because the sum of its elements is 2 + 2 + 2 = 6, 
+/// and 6 % k = 6 % 6 = 0.
+/// Note that [2, 2, 2] is counted only once.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. nums is sorted in non-descending order.
+/// 4. 1 <= k <= 10^9
+/// </summary>
+long long LeetCodeArray::numGoodSubarrays(vector<int>& nums, int k)
+{
+    unordered_map<int, int> prev, curr;
+    unordered_set<int> curr_count;
+    int curr_num = 0;
+    int n = nums.size();
+    int sum = 0;
+    long long result = 0;
+    for (size_t i = 0; i < n; i++)
+    {
+        if (i == 0)
+        {
+            curr[sum]++;
+            curr_num = nums[i];
+        }
+        else
+        {
+            if (curr_num != nums[i])
+            {
+                for (auto itr : curr)
+                {
+                    if (itr.first == sum)
+                    {
+                        prev[itr.first] += itr.second - 1;
+                    }
+                    else
+                    {
+                        prev[itr.first] += itr.second;
+                    }
+                }
+                curr_count.clear();
+                curr.clear();
+                curr[sum] = 1;
+                curr_num = nums[i];
+            }
+        }
+        sum = (sum + nums[i]) % k;
+        if (prev.count(sum) > 0)
+        {
+            result += prev[sum];
+        }
+        if (curr.count(sum) > 0)
+        {
+            if (curr_count.count(curr[sum]) == 0)
+            {
+                curr_count.insert(curr[sum]);
+                result++;
+            }
+        }
+        curr[sum]++;
     }
     return result;
 }

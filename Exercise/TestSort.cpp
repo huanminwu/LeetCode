@@ -4646,8 +4646,45 @@ void TestLeetCode3711(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3727(void)
+{
+    Logger::WriteMessage("Test Leet Code 3727");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    long long result = leetCode.maxAlternatingSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,-1,2,-2,3,-3 };
+    result = leetCode.maxAlternatingSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3730(void)
+{
+    Logger::WriteMessage("Test Leet Code 3730");
+    LeetCodeSort leetCode;
+    vector<int> heights = { 1, 7, 9 };
+    long long result = leetCode.maxCaloriesBurnt(heights);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    heights = { 5,2,4 };
+    result = leetCode.maxCaloriesBurnt(heights);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    heights = { 3, 3 };
+    result = leetCode.maxCaloriesBurnt(heights);
+    Logger::WriteMessage(heights);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3730();
+    TestLeetCode3727();
     TestLeetCode3711();
     TestLeetCode3684();
     TestLeetCode3667();

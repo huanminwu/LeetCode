@@ -12416,23 +12416,121 @@ void TestLeetCode3719(void)
     Logger::WriteMessage("Test Leet Code 3719");
     LeetCodeArray leetCode;
     vector<int>  nums = { 2,5,4,3 };
-    int result = leetCode.longestBalanced(nums);
+    int result = leetCode.longestBalancedI(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 
     nums = { 3,2,2,5,4 };
-    result = leetCode.longestBalanced(nums);
+    result = leetCode.longestBalancedI(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 
     nums = { 1,2,3,2 };
-    result = leetCode.longestBalanced(nums);
+    result = leetCode.longestBalancedI(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3721(void)
+{
+    Logger::WriteMessage("Test Leet Code 3721");
+    LeetCodeArray leetCode;
+    vector<int>  nums = { 2,5,4,3 };
+    int result = leetCode.longestBalancedII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,2,2,5,4 };
+    result = leetCode.longestBalancedII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,2 };
+    result = leetCode.longestBalancedII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3724(void)
+{
+    Logger::WriteMessage("Test Leet Code 3724");
+    LeetCodeArray leetCode;
+    vector<int> nums1 = { 2, 8 };
+    vector<int> nums2 = { 1, 7, 3 };
+    long long result = leetCode.minOperations_append(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 1,3,6 };
+    nums2 = { 2,4,5,3 };
+    result = leetCode.minOperations_append(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 2 };
+    nums2 = { 3,4 };
+    result = leetCode.minOperations_append(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3728(void)
+{
+    Logger::WriteMessage("Test Leet Code 3728");
+    LeetCodeArray leetCode;
+    vector<int> capacity = { 9, 3, 3, 3, 9 };
+    long long result = leetCode.countStableSubarrays(capacity);
+    Logger::WriteMessage(capacity);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    capacity = { 1,2,3,4,5 };
+    result = leetCode.countStableSubarrays(capacity);
+    Logger::WriteMessage(capacity);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    capacity = { -4,4,0,0,-8,-4 };
+    result = leetCode.countStableSubarrays(capacity);
+    Logger::WriteMessage(capacity);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3729(void)
+{
+    Logger::WriteMessage("Test Leet Code 3729");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    int k = 3;
+    long long result = leetCode.numGoodSubarrays(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 2,2,2,2,2,2 };
+    k = 6;
+    result = leetCode.numGoodSubarrays(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1, 2, 2, 3, 3 };
+    k = 3;
+    result = leetCode.numGoodSubarrays(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1, 2, 3, 3 };
+    k = 3;
+    result = leetCode.numGoodSubarrays(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3729();
+    TestLeetCode3728();
+    TestLeetCode3724();
     TestLeetCode3719();
     TestLeetCode3708();
     TestLeetCode3702();

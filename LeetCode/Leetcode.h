@@ -264,6 +264,113 @@ struct SegmentTreeGreater
     }
 };
 
+class LazyNode 
+{
+public:
+    int mn, mx, lazy;
+    LazyNode() : mn(INT_MAX), mx(INT_MIN), lazy(0) {}
+    LazyNode(int mn, int mx, int lazy) : mn(mn), mx(mx), lazy(lazy) {}
+};
+
+class SegmentTreeLazy
+{
+    public:
+        vector<LazyNode> segTree;
+        int n;
+
+        SegmentTreeLazy(vector<int>& v) 
+        {
+            n = v.size();
+            segTree.assign(4 * n, {INT_MAX, INT_MIN, 0});
+            buildTree(0, 0, n - 1, v);
+        }
+
+        void buildTree(int i, int l, int r, vector<int>& v) 
+        {
+            if (l == r) 
+            {
+                segTree[i].mn = segTree[i].mx = v[l];
+                return;
+            }
+
+            int mid = (l + r) / 2;
+            buildTree(2 * i + 1, l, mid, v);
+            buildTree(2 * i + 2, mid + 1, r, v);
+
+            segTree[i].mn = min(segTree[2 * i + 1].mn, segTree[2 * i + 2].mn);
+            segTree[i].mx = max(segTree[2 * i + 1].mx, segTree[2 * i + 2].mx);
+        }
+
+        void pushDown(int i, int l, int r) 
+        {
+            if (segTree[i].lazy == 0) return;
+            segTree[i].mn += segTree[i].lazy;
+            segTree[i].mx += segTree[i].lazy;
+            if (l != r) 
+            {
+                segTree[2 * i + 1].lazy += segTree[i].lazy;
+                segTree[2 * i + 2].lazy += segTree[i].lazy;
+            }
+            segTree[i].lazy = 0;
+        }
+
+        void updateRangeQuery(int start, int end, int i, int l, int r, int val) 
+        {
+            // Step 1:
+            pushDown(i, l, r);
+
+            // Step 2:
+            // Case 1: out of bound case
+            if (l > end || r < start || l > r) 
+            {
+                return;
+            }
+
+            // Step 3:
+            // Case 2: [l, r] are entirely in [start, end] range
+            if (l >= start && r <= end) 
+            {
+                segTree[i].lazy += val;
+                pushDown(i, l, r);
+                return;
+            }
+
+            // Step 4:
+            // Case 3: Overlapping case
+            int mid = (l + r) / 2;
+            updateRangeQuery(start, end, 2 * i + 1, l, mid, val);
+            updateRangeQuery(start, end, 2 * i + 2, mid + 1, r, val);
+
+            segTree[i].mn = min(segTree[2 * i + 1].mn, segTree[2 * i + 2].mn);
+            segTree[i].mx = max(segTree[2 * i + 1].mx, segTree[2 * i + 2].mx);
+        }
+
+        int findRightMostZero(int i, int l, int r) 
+        {
+            pushDown(i, l, r);
+            int minEle = segTree[i].mn, maxEle = segTree[i].mx;
+
+            if (minEle > 0 || maxEle < 0) 
+            {
+                return -1;
+            }
+
+            if (l == r) 
+            {
+                return l;
+            }
+
+            int mid = (l + r) / 2;
+            int rightNode = findRightMostZero(2 * i + 2, mid + 1, r);
+            if (rightNode != -1) {
+                return rightNode;
+            }
+
+            return findRightMostZero(2 * i + 1, l, mid);
+        }
+};
+
+
 /// <summary>
 /// Leet code #592. Fraction Addition and Subtraction
 /// </summary>

@@ -17887,6 +17887,140 @@ public:
     /// 2. s and target consist of only lowercase English letters.
     /// </summary>
     string lexGreaterPermutation(string s, string target);
+
+    /// <summary>
+    /// Leet Code 3713. Longest Balanced Substring I
+    ///
+    /// Medium
+    ///
+    /// You are given a string s consisting of lowercase English letters.
+    /// A substring of s is called balanced if all distinct characters in the 
+    /// substring appear the same number of times.
+    ///
+    /// Return the length of the longest balanced substring of s.
+    ///
+    /// Example 1:
+    /// Input: s = "abbac"
+    /// Output: 4
+    /// Explanation:
+    /// The longest balanced substring is "abba" because both distinct characters 
+    /// 'a' and 'b' each appear exactly 2 times.
+    ///
+    /// Example 2:
+    /// Input: s = "zzabccy"
+    /// Output: 4
+    /// Explanation:
+    /// The longest balanced substring is "zabc" because the distinct characters 
+    /// 'z', 'a', 'b', and 'c' each appear exactly 1 time.​​​​​​​
+    ///
+    /// Example 3:
+    /// Input: s = "aba"
+    /// Output: 2
+    /// Explanation:
+    /// ​​​​​​​One of the longest balanced substrings is "ab" because both distinct
+    /// characters 'a' and 'b' each appear exactly 1 time. Another longest 
+    /// balanced substring is "ba".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 1000
+    /// 2. s consists of lowercase English letters.
+    /// </summary>
+    int longestBalancedI(string s);
+
+    /// <summary>
+    /// Leet Code 3714. Longest Balanced Substring II
+    ///
+    /// Medium
+    ///
+    /// You are given a string s consisting only of the characters 'a', 'b', 
+    /// and 'c'.
+    ///
+    /// A substring of s is called balanced if all distinct characters in the 
+    /// substring appear the same number of times.
+    ///
+    /// Return the length of the longest balanced substring of s.
+    ///
+    /// 
+    /// Example 1:
+    ///
+    /// Input: s = "abbac"
+    /// Output: 4
+    /// Explanation:
+    /// The longest balanced substring is "abba" because both distinct characters 
+    /// 'a' and 'b' each appear exactly 2 times.
+    ///
+    /// Example 2:
+    /// Input: s = "aabcc"
+    /// Output: 3
+    /// Explanation:
+    /// The longest balanced substring is "abc" because all distinct characters 
+    /// 'a', 'b' and 'c' each appear exactly 1 time.
+    ///
+    /// Example 3:
+    /// Input: s = "aba"
+    /// Output: 2
+    /// Explanation:
+    /// One of the longest balanced substrings is "ab" because both distinct 
+    /// characters 'a' and 'b' each appear exactly 1 time. Another longest 
+    /// balanced substring is "ba".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s contains only the characters 'a', 'b', and 'c'.
+    /// </summary>
+    int longestBalancedII(string s);
+
+    /// <summary>
+    /// Leet Code 3722. Lexicographically Smallest String After Reverse
+    ///
+    /// Medium
+    ///
+    /// You are given a string s of length n consisting of lowercase English 
+    /// letters.
+    ///
+    /// You must perform exactly one operation by choosing any integer k such 
+    /// that 1 <= k <= n and either:
+    ///
+    /// reverse the first k characters of s, or
+    /// reverse the last k characters of s.
+    /// Return the lexicographically smallest string that can be obtained after 
+    /// exactly one such operation.
+    ///
+    /// A string a is lexicographically smaller than a string b if, at the first 
+    /// position where they differ, a has a letter that appears earlier in the 
+    /// alphabet than the corresponding letter in b. If the first min(a.length, 
+    /// b.length) characters are the same, then the shorter string is considered 
+    /// lexicographically smaller.
+    ///
+    /// Example 1:
+    /// Input: s = "dcab"
+    /// Output: "acdb"
+    /// Explanation:
+    /// Choose k = 3, reverse the first 3 characters.
+    /// Reverse "dca" to "acd", resulting string s = "acdb", which is the 
+    /// lexicographically smallest string achievable.
+    ///
+    /// Example 2:
+    /// Input: s = "abba"
+    /// Output: "aabb"
+    /// Explanation:
+    /// Choose k = 3, reverse the last 3 characters.
+    /// Reverse "bba" to "abb", so the resulting string is "aabb", which is the 
+    /// lexicographically smallest string achievable.
+    ///
+    /// Example 3:
+    /// Input: s = "zxy"
+    /// Output: "xzy"
+    /// Explanation:
+    /// Choose k = 2, reverse the first 2 characters.
+    /// Reverse "zx" to "xz", so the resulting string is "xzy", which is the 
+    /// lexicographically smallest string achievable.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == s.length <= 1000
+    /// 2. s consists of lowercase English letters.
+    /// </summary>
+    string lexSmallest(string s);
 #pragma endregion
 };
 

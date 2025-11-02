@@ -8285,8 +8285,92 @@ void TestLeetCode3697(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3715(void)
+{
+    Logger::WriteMessage("Test Leet Code 3715");
+    LeetCodeMath leetCode;
+    int n = 3;
+    vector<vector<int>> edges = { {0, 1},{1, 2} };
+    vector<int> nums = { 2, 8, 2 };
+    long long result = leetCode.sumOfAncestors(n, edges, nums);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    edges = { {0, 1},{0, 2} };
+    nums = { 1, 2, 4 };
+    result = leetCode.sumOfAncestors(n, edges, nums);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4;
+    edges = { {0, 1},{0, 2},{1, 3} };
+    nums = { 1, 2, 9, 4 };
+    result = leetCode.sumOfAncestors(n, edges, nums);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3723(void)
+{
+    Logger::WriteMessage("Test Leet Code 3723");
+    LeetCodeMath leetCode;
+    int num = 2, sum = 3;
+    string result = leetCode.maxSumOfSquares(num, sum);
+    Logger::WriteMessage("num = " + to_string(num) + "; sum = " + to_string(sum));
+    Logger::WriteMessage(result);
+
+    num = 2, sum = 17;
+    result = leetCode.maxSumOfSquares(num, sum);
+    Logger::WriteMessage("num = " + to_string(num) + "; sum = " + to_string(sum));
+    Logger::WriteMessage(result);
+
+    num = 1, sum = 10;
+    result = leetCode.maxSumOfSquares(num, sum);
+    Logger::WriteMessage("num = " + to_string(num) + "; sum = " + to_string(sum));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3726(void)
+{
+    Logger::WriteMessage("Test Leet Code 3726");
+    LeetCodeMath leetCode;
+    long long n = 1020030;
+    long long result = leetCode.removeZeros(n);
+    Logger::WriteMessage("num = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 1;
+    result = leetCode.removeZeros(n);
+    Logger::WriteMessage("num = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3725(void)
+{
+    Logger::WriteMessage("Test Leet Code 3725");
+    LeetCodeMath leetCode;
+    vector<vector<int>> mat = { {1, 2},{3, 4} };
+    int result = leetCode.countCoprime(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    mat = { {2, 2},{2, 2} };
+    result = leetCode.countCoprime(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3725();
+    TestLeetCode3726();
+    TestLeetCode3723();
+    TestLeetCode3715();
     TestLeetCode3697();
     TestLeetCode3687();
     TestLeetCode3658();

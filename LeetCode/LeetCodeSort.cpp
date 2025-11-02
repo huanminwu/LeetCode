@@ -15386,4 +15386,148 @@ int LeetCodeSort::maxTransactions(vector<int>& transactions)
     return result;
 }
 
+/// <summary>
+/// Leet Code 3727. Maximum Alternating Sum of Squares
+///
+/// Medium
+///
+/// You are given an integer array nums. You may rearrange the elements in any 
+/// order.
+///
+/// The alternating score of an array arr is defined as:
+///
+/// score = arr[0]2 - arr[1]2 + arr[2]2 - arr[3]2 + ...
+/// Return an integer denoting the maximum possible alternating score of nums 
+/// after rearranging its elements.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,3]
+/// Output: 12
+/// Explanation:
+///
+/// A possible rearrangement for nums is [2,1,3], which gives the maximum 
+/// alternating score among all possible rearrangements.
+/// The alternating score is calculated as:
+/// score = 2^2 - 1^2 + 3^2 = 4 - 1 + 9 = 12
+///
+/// Example 2:
+/// Input: nums = [1,-1,2,-2,3,-3]
+/// Output: 16
+/// Explanation:
+/// A possible rearrangement for nums is [-3,-1,-2,1,3,2], which gives the 
+/// maximum alternating score among all possible rearrangements.
+/// The alternating score is calculated as:
+///
+/// score = (-3)^2 - (-1)^2 + (-2)^2 - (1)^2 + (3)^2 - (2)^2 
+/// = 9 - 1 + 4 - 1 + 9 - 4 = 16
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. -4 * 10^4 <= nums[i] <= 4 * 10^4
+/// </summary>
+long long LeetCodeSort::maxAlternatingSum(vector<int>& nums)
+{
+    long long result = 0;
+    vector<pair<int, int>> arr;
+    int n = nums.size();
+    for (int i = 0; i < n; i++)
+    {
+        arr.push_back({ abs(nums[i]), i });
+    }
+    sort(arr.begin(), arr.end());
+    int first = 0, last = n - 1;
+    for (int i = 0; i < n; i++)
+    {
+        if (i % 2 == 0)
+        {
+            result = result + (long long)arr[last].first * arr[last].first;
+            last--;
+        }
+        else
+        {
+            result = result - (long long)arr[first].first * arr[first].first;
+            first++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3730. Maximum Calories Burnt from Jumps
+///
+/// Medium
+///
+/// You are given an integer array heights of size n, where heights[i] 
+/// represents the height of the ith block in an exercise routine.
+///
+/// You start on the ground (height 0) and must jump onto each block 
+/// exactly once in any order.
+///
+/// The calories burned for a jump from a block of height a to a 
+/// block of height b is (a - b)2.
+/// The calories burned for the first jump from the ground to the 
+/// chosen first block heights[i] is (0 - heights[i])^2.
+/// Return the maximum total calories you can burn by selecting an 
+/// optimal jumping sequence.
+/// Note: Once you jump onto the first block, you cannot return to 
+/// the ground.
+///
+/// Example 1:
+/// Input: heights = [1,7,9]
+/// Output: 181
+/// Explanation: he optimal sequence is [9, 1, 7].
+///
+/// Initial jump from the ground to heights[2] = 9: (0 - 9)^2 = 81.
+/// Next jump to heights[0] = 1: (9 - 1)^2 = 64.
+/// Final jump to heights[1] = 7: (1 - 7)^2 = 36.
+/// Total calories burned = 81 + 64 + 36 = 181.
+///
+/// Example 2:
+/// Input: heights = [5,2,4]
+/// Output: 38
+/// Explanation:
+/// The optimal sequence is [5, 2, 4].
+/// Initial jump from the ground to heights[0] = 5: (0 - 5)^2 = 25.
+/// Next jump to heights[1] = 2: (5 - 2)^2 = 9.
+/// Final jump to heights[2] = 4: (2 - 4)^2 = 4.
+/// Total calories burned = 25 + 9 + 4 = 38.
+///
+/// Example 3:
+/// Input: heights = [3,3]
+/// Output: 9
+/// Explanation:
+/// The optimal sequence is [3, 3].
+/// Initial jump from the ground to heights[0] = 3: (0 - 3)^2 = 9.
+/// Next jump to heights[1] = 3: (3 - 3)^2 = 0.
+/// Total calories burned = 9 + 0 = 9.
+/// 
+/// Constraints:
+/// 1. 1 <= n == heights.length <= 10^5
+/// 2. 1 <= heights[i] <= 10^5
+/// </summary>
+long long LeetCodeSort::maxCaloriesBurnt(vector<int>& heights)
+{
+    vector<int> arr = heights;
+    int n = heights.size();
+    sort(arr.begin(), arr.end());
+    int first = 0, last = n - 1;
+    long long result = 0;
+    int prev = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (i % 2 == 0)
+        {
+            result = result + (long long)(arr[last] - prev) * (long long)(arr[last] - prev);
+            prev = arr[last];
+            last--;
+        }
+        else
+        {
+            result = result + (long long)(arr[first] - prev) * (long long)(arr[first] - prev);
+            prev = arr[first];
+            first++;
+        }
+    }
+    return result;
+}
 #pragma endregion
