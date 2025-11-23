@@ -44,23 +44,23 @@
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeDFS();
     TestLeetCodeArray();
-    TestLeetCodeMath();
-    TestLeetCodeSort();
     TestLeetCodeString();
-    TestLeetCodeBinarySearch();
+    TestLeetCodeSort();
     TestLeetCodeDP();
+    TestLeetCodeBinarySearch();
+    TestLeetCodeMath();
     TestLeetCodeHashtable();
+    TestLeetCodeLinkedList();
     TestLeetCodeDesign();
     TestLeetCodeGraph();
-    TestLeetCodeDFS();
     TestLeetCodeBit();
     TestLeetCodeGreedy();
     TestLeetCodeTwoPointer();
     TestLeetCodeStack();
     TestLeetCodeBFS();
     TestLeetCodeTree();
-    TestLeetCodeLinkedList();
     TestUSACO();
     printf("Please press a key to end");
     int key = _getch();

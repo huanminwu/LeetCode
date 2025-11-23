@@ -8365,8 +8365,29 @@ void TestLeetCode3725(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3732(void)
+{
+    Logger::WriteMessage("Test Leet Code 3732");
+    LeetCodeMath leetCode;
+    vector<int> nums = { -5, 7, 0 };
+    long long result = leetCode.maxProductII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -4,-2,-1,-3 };
+    result = leetCode.maxProductII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,10,0 };
+    result = leetCode.maxProductII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3732();
     TestLeetCode3725();
     TestLeetCode3726();
     TestLeetCode3723();

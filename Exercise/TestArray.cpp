@@ -12526,8 +12526,152 @@ void TestLeetCode3729(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3736(void)
+{
+    Logger::WriteMessage("Test Leet Code 3736");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 1, 3 };
+    int result = leetCode.minMoves(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,4,5 };
+    result = leetCode.minMoves(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3737(void)
+{
+    Logger::WriteMessage("Test Leet Code 3737");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 2, 3 };
+    int target = 2;
+    int result = leetCode.countMajoritySubarraysI(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1,1 };
+    target = 1;
+    result = leetCode.countMajoritySubarraysI(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 2, 3 };
+    target = 4;
+    result = leetCode.countMajoritySubarraysI(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3740(void)
+{
+    Logger::WriteMessage("Test Leet Code 3740");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 1, 1, 3 };
+    int result = leetCode.minimumDistanceI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,2,3,2,1,2 };
+    result = leetCode.minimumDistanceI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1 };
+    result = leetCode.minimumDistanceI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3741(void)
+{
+    Logger::WriteMessage("Test Leet Code 3741");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 1, 1, 3 };
+    int result = leetCode.minimumDistanceII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,2,3,2,1,2 };
+    result = leetCode.minimumDistanceII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1 };
+    result = leetCode.minimumDistanceII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3739(void)
+{
+    Logger::WriteMessage("Test Leet Code 3739");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,2,2,3 };
+    int target = 2;
+    long long result = leetCode.countMajoritySubarraysII(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { 1,1,1,1 };
+    target = 1;
+    result = leetCode.countMajoritySubarraysII(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3738(void)
+{
+    Logger::WriteMessage("Test Leet Code 3738");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,2,3,1,2 };
+    int result = leetCode.longestSubarrayNonDecreasing(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,2,2,2,2 };
+    result = leetCode.longestSubarrayNonDecreasing(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 8, 9, 1, 2, 3, 4, 5 };
+    result = leetCode.longestSubarrayNonDecreasing(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3748(void)
+{
+    Logger::WriteMessage("Test Leet Code 3748");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 1, 2 };
+    vector<vector<int>> queries = { {0, 1},{1, 2},{0, 2} };
+    vector<long long> result = leetCode.countStableSubarrays(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 2, 2 };
+    queries = { {0, 1},{0, 0} };
+    result = leetCode.countStableSubarrays(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3748();
+    TestLeetCode3738();
+    TestLeetCode3739();
+    TestLeetCode3741();
+    TestLeetCode3740();
+    TestLeetCode3737();
+    TestLeetCode3736();
     TestLeetCode3729();
     TestLeetCode3728();
     TestLeetCode3724();

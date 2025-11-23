@@ -6396,8 +6396,56 @@ void TestLeetCode3704(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3743(void)
+{
+    Logger::WriteMessage("Test Leet Code 3743");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 1, 2, 3, 3 };
+    int k = 2;
+    long long result = leetCode.maximumScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2,3,3 };
+    k = 1;
+    result = leetCode.maximumScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums = { 1,2,3,3 };
+    k = 4;
+    result = leetCode.maximumScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3742(void)
+{
+    Logger::WriteMessage("Test Leet Code 3742");
+    LeetCodeDP leetCode;
+    vector<vector<int>> grid = { {0, 1},{2, 0} };
+    int k = 1;
+    int result = leetCode.maxPathScore(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {0, 1},{1, 2} };
+    k = 1;
+    result = leetCode.maxPathScore(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    grid = { {0, 1},{2, 0},{2, 1} };
+    k = 6;
+    result = leetCode.maxPathScore(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3742();
+    TestLeetCode3743();
     TestLeetCode3704();
     TestLeetCode3717();
     TestLeetCode3693();

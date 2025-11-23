@@ -1661,8 +1661,32 @@ void TestLeetCode3710(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3733(void)
+{
+    Logger::WriteMessage("Test Leet Code 3733");
+    LeetCodeBinarySearch leetCode;
+    vector<int> d = { 3, 1 }, r = { 2, 3 };
+    long long result = leetCode.minimumTimeII(d, r);
+    Logger::WriteMessage(d);
+    Logger::WriteMessage(r);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    d = { 1,3 }, r = { 2, 2 };
+    result = leetCode.minimumTimeII(d, r);
+    Logger::WriteMessage(d);
+    Logger::WriteMessage(r);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    d = { 2,1 }, r = { 3, 4 };
+    result = leetCode.minimumTimeII(d, r);
+    Logger::WriteMessage(d);
+    Logger::WriteMessage(r);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode3733();
     TestLeetCode3710();
     TestLeetCode3605();
     TestLeetCode3520();

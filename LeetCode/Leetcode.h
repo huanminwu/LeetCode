@@ -186,12 +186,13 @@ static bool isPrime(long long N)
 #pragma region Design
 struct BinaryIndexTree
 {
-    const int M = 1000000007;
-    vector<int> m_arr;
+    vector<long long> m_arr;
     int m_count;
-    BinaryIndexTree(int n)
+    long long m_M;
+    BinaryIndexTree(int n, long long M = 1000000007)
     {
-        m_arr = vector<int>(n + 1, 0);
+        m_M = M;
+        m_arr = vector<long long>(n + 1, 0);
         m_count = n + 1;
     }
     void add(int index, int val)
@@ -199,16 +200,16 @@ struct BinaryIndexTree
         if (index == 0) return;
         while (index < m_count)
         {
-            m_arr[index] = (m_arr[index] + val) % M;
+            m_arr[index] = (m_arr[index] + val) % m_M;
             index += (index & -index);
         }
     }
-    int sum(int index)
+    long long sum(int index)
     {
-        int sum = 0;
+        long long sum = 0;
         while (index != 0)
         {
-            sum = (sum + m_arr[index]) % M;
+            sum = (sum + m_arr[index]) % m_M;
             index -= index & -index;
         }
         return sum;

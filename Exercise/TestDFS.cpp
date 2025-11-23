@@ -2714,8 +2714,31 @@ void TestLeetCode3690(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+void TestLeetCode3747(void)
+{
+    Logger::WriteMessage("Test Leet Code 3747");
+    LeetCodeDFS leetCode;
+    int n = 10;
+    long long result = leetCode.countDistinct(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    result = leetCode.countDistinct(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 100;
+    result = leetCode.countDistinct(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3747();
     TestLeetCode3690();
     TestLeetCode3680();
     TestLeetCode3669();

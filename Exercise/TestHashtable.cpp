@@ -2290,8 +2290,30 @@ void TestLeetCode3718(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+
+void TestLeetCode3731(void)
+{
+    Logger::WriteMessage("Test Leet Code 3731");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1,4,2,5 };
+    vector<int> result = leetCode.findMissingElements(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 7,8,6,9 };
+    result = leetCode.findMissingElements(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 5,1 };
+    result = leetCode.findMissingElements(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3731();
     TestLeetCode3718();
     TestLeetCode3712();
     TestLeetCode3692();

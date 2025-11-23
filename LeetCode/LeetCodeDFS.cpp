@@ -11501,4 +11501,94 @@ int LeetCodeDFS::minSplitMerge(vector<int>& nums1, vector<int>& nums2)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3747. Count Distinct Integers After Removing Zeros
+/// </summary>
+long long LeetCodeDFS::countDistinct(string str_n, int pos, int is_leadingzero, 
+    int is_limit, vector<vector<long long>>& cache)
+{
+    long long result = 0;
+    if (pos == str_n.size()) return 1;
+    if (cache[pos][is_leadingzero * 2 + is_limit] != -1)
+    {
+        return cache[pos][is_leadingzero * 2 + is_limit];
+    }
+    int new_is_limit = 0;
+    int new_is_leadingzero = 0;
+    long long count = 0;
+    for (char i = '0'; i <= '9'; i++)
+    {
+        if (is_limit == 1)
+        {
+            if (i > str_n[pos]) continue;
+            else if (i == str_n[pos]) new_is_limit = 1;
+            else
+            {
+                new_is_limit = 0;
+            }
+        }
+        else
+        {
+            new_is_limit = 0;
+        }
+        if (is_leadingzero == 1)
+        {
+            if (i == '0')
+            {
+                new_is_leadingzero = 1;
+            }
+            else
+            {
+                new_is_leadingzero = 0;
+            }
+        }
+        else
+        {
+            if (i == '0') continue;
+            new_is_leadingzero = 0;
+        }
+        count += countDistinct(str_n, pos + 1, new_is_leadingzero,
+            new_is_limit, cache);
+    }
+    cache[pos][is_leadingzero * 2 + is_limit] = count;
+    return count;
+}
+
+
+/// <summary>
+/// Leet Code 3747. Count Distinct Integers After Removing Zeros
+///
+/// Medium
+///
+/// You are given a positive integer n.
+///
+/// For every integer x from 1 to n, we write down the integer obtained by 
+/// removing all zeros from the decimal representation of x.
+///
+/// Return an integer denoting the number of distinct integers written down.
+///
+/// Example 1:
+/// Input: n = 10
+/// Output: 9
+/// Explanation:
+/// The integers we wrote down are 1, 2, 3, 4, 5, 6, 7, 8, 9, 1. There 
+/// are 9 distinct integers (1, 2, 3, 4, 5, 6, 7, 8, 9).
+///
+/// Example 2:
+/// Input: n = 3
+/// Output: 3
+/// Explanation:
+/// The integers we wrote down are 1, 2, 3. There are 3 distinct 
+/// integers (1, 2, 3).
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^15
+/// </summary>
+long long LeetCodeDFS::countDistinct(long long n)
+{
+    string str_n = to_string(n);
+    vector<vector<long long>> cache(str_n.size(), vector<long long>(4, -1));
+    return countDistinct(str_n, 0, 1, 1, cache) - 1;
+}
 #pragma endregion

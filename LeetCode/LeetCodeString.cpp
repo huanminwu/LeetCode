@@ -30754,7 +30754,7 @@ int LeetCodeString::longestBalancedII(string s)
 /// 1. 1 <= n == s.length <= 1000
 /// 2. s consists of lowercase English letters.
 /// </summary>
-string LeetCodeString::lexSmallest(string s)
+string LeetCodeString::lexSmallestI(string s)
 {
     int n = s.size();
     string result = s;
@@ -30771,5 +30771,481 @@ string LeetCodeString::lexSmallest(string s)
     std::reverse(front.begin(), front.end());
     result = min(result, front);
     return result;
+}
+
+
+/// <summary>
+/// Leet Code 3734. Lexicographically Smallest Palindromic Permutation Greater 
+///                 Than Target
+///
+/// Hard
+///
+/// You are given two strings s and target, each of length n, consisting of 
+/// lowercase English letters.
+///
+/// Return the lexicographically smallest string that is both a palindromic 
+/// permutation of s and strictly greater than target. If no such permutation 
+/// exists, return an empty string.
+/// 
+/// Example 1:
+/// Input: s = "baba", target = "abba"
+/// Output: "baab"
+/// Explanation:
+/// The palindromic permutations of s (in lexicographical order) 
+/// are "abba" and "baab".
+/// The lexicographically smallest permutation that is strictly greater than 
+/// target is "baab".
+///
+/// Example 2:
+/// Input: s = "baba", target = "bbaa"
+/// Output: ""
+/// Explanation:
+/// The palindromic permutations of s (in lexicographical order) are "abba" 
+/// and "baab".
+/// None of them is lexicographically strictly greater than target. 
+/// Therefore, the answer is "".
+///
+/// Example 3:
+/// Input: s = "abc", target = "abb"
+/// Output: ""
+/// Explanation:
+/// s has no palindromic permutations. Therefore, the answer is "".
+/// Example 4:
+/// Input: s = "aac", target = "abb"
+/// Output: "aca"
+/// Explanation:
+/// The only palindromic permutation of s is "aca".
+/// "aca" is strictly greater than target. Therefore, the answer 
+/// is "aca".
+///  
+/// Constraints:
+/// 1. 1 <= n == s.length == target.length <= 300
+/// 2. s and target consist of only lowercase English letters.
+/// </summary>
+string LeetCodeString::lexPalindromicPermutation(string s, string target)
+{
+    // Count the frequency of each character in s
+    string left, result;
+    vector<int> char_count(26);
+    for (char c : s) char_count[c - 'a']++;
+
+    // Check if a palindromic permutation is possible
+    int odd_count = 0;
+    int odd_index = -1;
+    for (int i = 0; i < 26; i++)
+    {
+        if (char_count[i] % 2 == 1)
+        {
+            odd_count++;
+            odd_index = i;
+        }
+    }
+    if (odd_count > 1 || (odd_count == 1 && target.size() % 2 == 0) || 
+        (odd_count == 0 && target.size() % 2 == 1))
+    {
+        return "";  // No palindromic permutation possible
+    }
+    if (odd_index != -1)
+    {
+        char_count[odd_index]--;
+    }
+    for (size_t i = 0; i < target.size() / 2; i++)
+    {
+        int k = target[i] - 'a';
+        if (char_count[k] > 0)
+        {
+            char_count[k] -= 2;
+            left.push_back(target[i]);
+        }
+        else
+        {
+            for (int j = k + 1; j < 26; j++)
+            {
+                if (char_count[j] > 0)
+                {
+                    left.push_back(j + 'a');
+                    char_count[j] -= 2;
+                    for (char c = 'a'; c <= 'z'; c++)
+                    {
+                        left.append(string(char_count[c - 'a'] / 2, c));
+                    }
+                    string right = left;
+                    reverse(right.begin(), right.end());
+                    if (odd_index != -1)
+                    {
+                        left.push_back(odd_index + 'a');
+                    }
+                    result =  left + right;
+                    return result;
+                }
+            }
+            for (char c = 'z'; c >= 'a'; c--)
+            {
+               left.append(string(char_count[c - 'a'] / 2, c));
+            }
+            break;
+        }
+    }
+    string right = left;
+    reverse(right.begin(), right.end());
+    result = left + (odd_index != -1 ? string(1, odd_index + 'a') : "") + right;
+    if (result <= target)
+    {
+        std::next_permutation(left.begin(), left.end());
+        right = left;
+        reverse(right.begin(), right.end());
+        result = left + (odd_index != -1 ? string(1, odd_index + 'a') : "") + right;
+    }
+    if (result > target) return result;
+    else return "";
+}
+
+/// <summary>
+/// Leet Code 3735. Lexicographically Smallest String After Reverse II
+///
+/// Hard
+///
+/// You are given a string s of length n consisting of lowercase English 
+/// letters.
+///
+/// You must perform exactly one operation by choosing any integer k 
+/// such that 1 <= k <= n and either:
+///
+/// reverse the first k characters of s, or
+/// reverse the last k characters of s.
+/// Return the lexicographically smallest string that can be obtained after 
+/// exactly one such operation.
+///
+/// Example 1:
+/// Input: s = "dcab"
+/// Output: "acdb"
+/// Explanation:
+/// Choose k = 3, reverse the first 3 characters.
+/// Reverse "dca" to "acd", resulting string s = "acdb", which is the 
+/// lexicographically smallest string achievable.
+///
+/// Example 2:
+/// Input: s = "abba"
+/// Output: "aabb"
+/// Explanation:
+/// Choose k = 3, reverse the last 3 characters.
+/// Reverse "bba" to "abb", so the resulting string is "aabb", which is 
+/// the lexicographically smallest string achievable.
+///
+/// Example 3:
+/// Input: s = "zxy"
+/// Output: "xzy"
+/// Explanation:
+/// Choose k = 2, reverse the first 2 characters.
+/// Reverse "zx" to "xz", so the resulting string is "xzy", which is the 
+/// lexicographically smallest string achievable.
+/// 
+/// Constraints:
+/// 1. 1 <= n == s.length <= 10^5
+/// 2. s consists of lowercase English letters.
+/// </summary>
+string LeetCodeString::lexSmallestII(string s)
+{
+    int n = s.size();
+    int i = n - 1, j = i - 1, k = 0;
+    while (i >= 0 && j >= 0 && j - k >= 0)
+    {
+        if (s[i - k] == s[j - k])
+        {
+            k++;
+        }
+        else if (s[i - k] < s[j - k])
+        {
+            j = j - k - 1;
+            k = 0;
+        }
+        else
+        {
+            i = min(i - k - 1, j);
+            j = i - 1;
+            k = 0;
+        }
+    }
+
+    string result = s;
+    string t = s;
+    std::reverse(t.begin(), t.begin() + i + 1);
+    result = min(result, t);
+    if (j >= 0)
+    {
+        t = s;
+        std::reverse(t.begin(), t.begin() + j + 1);
+        result = min(result, t);
+    }
+    
+    string s1 = string(s.begin() + 1, s.end());
+    reverse(s1.begin(), s1.end());
+    vector<int> kmp_table = kmp(s1);
+    i = 1; j = 0;
+    while (i <= n - 1 - j)
+    {
+        if (s[i] > s[n - 1] && s[n - 1 - j] >= s[n - 1])
+        {
+            j = 0;
+            break;
+        }
+        if (s[i] == s[n - 1 - j])
+        {
+            i++;
+            j++;
+        }
+        else if (s[i] > s[n - 1 - j])
+        {
+            break;
+        }
+        else
+        {
+            if (j == 0)
+            {
+                i++;
+            }
+            else
+            {
+                j = kmp_table[j - 1];
+            }
+        }
+    }
+    if (i <= n - 1 - j)
+    {
+        i = i - j;
+        t = s;
+        std::reverse(t.begin() + i, t.end());
+        result = min(result, t);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3744. Find Kth Character in Expanded String
+///
+/// Medium
+///
+/// You are given a string s consisting of one or more words separated by 
+/// single spaces. Each word in s consists of lowercase English letters.
+///
+/// We obtain the expanded string t from s as follows:
+///
+/// For each word in s, repeat its first character once, then its second 
+/// character twice, and so on.
+/// For example, if s = "hello world", then 
+/// t = "heelllllllooooo woorrrllllddddd".
+///
+/// You are also given an integer k, representing a valid index of the 
+/// string t.
+///
+/// Return the kth character of the string t.
+/// 
+/// Example 1:
+/// Input: s = "hello world", k = 0
+/// Output: "h"
+/// Explanation:
+/// t = "heelllllllooooo woorrrllllddddd". Therefore, the answer is t[0] = "h".
+///
+/// Example 2:
+/// Input: s = "hello world", k = 15
+/// Output: " "
+/// Explanation:
+/// t = "heelllllllooooo woorrrllllddddd". Therefore, the answer is 
+/// t[15] = " ".
+///
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s contains only lowercase English letters and spaces ' '.
+/// 3. s does not contain any leading or trailing spaces.
+/// 4. All the words in s are separated by a single space.
+/// 5. 0 <= k < t.length. That is, k is a valid index of t.
+/// </summary>
+char LeetCodeString::kthCharacter(string s, long long k)
+{
+    int j = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == ' ')
+        {
+            k--;
+            j = 0;
+        }
+        else
+        {
+            j++;
+            k = k - (long long)j;
+        }
+        if (k < 0)
+        {
+            return s[i];
+        }
+    }
+    return ' ';
+}
+
+/// <summary>
+/// Leet Code 3746. Minimum String Length After Balanced Removals 
+///
+/// Medium
+/// 
+/// You are given a string s consisting only of the characters 'a' and 'b'.
+///
+/// You are allowed to repeatedly remove any substring where the number of 
+/// 'a' characters is equal to the number of 'b' characters. After each 
+/// removal, the remaining parts of the string are concatenated together 
+/// without gaps.
+///
+/// Return an integer denoting the minimum possible length of the string 
+/// after performing any number of such operations.
+///
+/// Example 1:
+/// Input: s = "aabbab"
+/// Output: 0
+/// Explanation:
+/// The substring "aabbab" has three 'a' and three 'b'. Since their counts 
+/// are equal, we can remove the entire string directly. The minimum length 
+/// is 0.
+///
+/// Example 2:
+/// Input: s = "aaaa"
+/// Output: 4
+/// Explanation:
+/// Every substring of "aaaa" contains only 'a' characters. No substring 
+/// can be removed as a result, so the minimum length remains 4.
+///
+/// Example 3:
+/// Input: s = "aaabb"
+/// Output: 1
+/// Explanation:
+/// First, remove the substring "ab", leaving "aab". Next, remove the new 
+/// substring "ab", leaving "a". No further removals are possible, so the 
+/// minimum length is 1.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s[i] is either 'a' or 'b'.
+/// </summary>
+int LeetCodeString::minLengthAfterRemovals(string s)
+{
+    int a = 0, b = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == 'a') a++;
+        else b++;
+    }
+    return std::abs(a - b);
+}
+
+/// <summary>
+/// Leet Code 3749. Evaluate Valid Expressions
+///
+/// Hard
+///
+/// You are given a string expression that represents a nested mathematical 
+/// expression in a simplified form.
+///
+/// A valid expression is either an integer literal or follows the format 
+/// op(a,b), where:
+///
+/// op is one of "add", "sub", "mul", or "div".
+/// a and b are each valid expressions.
+/// The operations are defined as follows:
+/// add(a,b) = a + b
+/// sub(a,b) = a - b
+/// mul(a,b) = a * b
+/// div(a,b) = a / b
+/// Return an integer representing the result after fully evaluating 
+/// the expression.
+///
+/// Example 1:
+/// Input: expression = "add(2,3)"
+/// Output: 5
+/// Explanation:
+/// The operation add(2,3) means 2 + 3 = 5.
+///
+/// Example 2:
+/// Input: expression = "-42"
+/// Output: -42
+/// Explanation:
+/// The expression is a single integer literal, so the result is -42.
+/// Example 3:
+/// Input: expression = "div(mul(4,sub(9,5)),add(1,1))"
+/// Output: 8
+/// Explanation:
+/// First, evaluate the inner expression: sub(9,5) = 9 - 5 = 4
+/// Next, multiply the results: mul(4,4) = 4 * 4 = 16
+/// Then, compute the addition on the right: add(1,1) = 1 + 1 = 2
+/// Finally, divide the two main results: div(16,2) = 16 / 2 = 8
+/// Therefore, the entire expression evaluates to 8.
+/// 
+/// Constraints:
+/// 1. 1 <= expression.length <= 10^5
+/// 2. expression is valid and consists of digits, commas, parentheses, 
+///    the minus sign '-', and the lowercase strings "add", "sub", 
+///    "mul", "div".
+/// 3. All intermediate results fit within the range of a long integer.
+/// 4. All divisions result in integer values.
+/// </summary>
+long long LeetCodeString::evaluateExpression(string expression)
+{
+    string delimiters = ",() ";
+    std::vector<std::string> tokens;
+    size_t start = expression.find_first_not_of(delimiters), end = 0;
+    vector<pair<string, int>> command;
+    command.push_back({ "result", 0 });
+    vector<long long> nums;
+    while ((end = expression.find_first_of(delimiters, start)) != std::string::npos)
+    {
+        tokens.push_back(expression.substr(start, end - start));
+        start = expression.find_first_not_of(delimiters, end);
+    }
+    if (start != std::string::npos)
+    {
+        tokens.push_back(expression.substr(start));
+    }
+    for (size_t i = 0; i < tokens.size(); i++)
+    {
+        if (isalpha(tokens[i][0]))
+        {
+            command.push_back({ tokens[i], 0 });
+        }
+        else if (isdigit(tokens[i][0]) || tokens[i][0] == '-')
+        {
+            nums.push_back(atol(tokens[i].c_str()));
+            command.back().second++;
+        }
+        while (command.back().second == 2)
+        {
+            string cmd = command.back().first;
+            command.pop_back();
+            int n = nums.size();
+            long long b = nums.back();
+            nums.pop_back();
+            long long a = nums.back();
+            nums.pop_back();
+            if (cmd == "add")
+            {
+                nums.push_back(a + b);
+                command.back().second++;
+            }
+            else if (cmd == "sub")
+            {
+                nums.push_back(a - b);
+                command.back().second++;
+            }
+            else if (cmd == "mul")
+            {
+                nums.push_back(a * b);
+                command.back().second++;
+            }
+            else if (cmd == "div")
+            {
+                nums.push_back(a / b);
+                command.back().second++;
+            }
+        }
+    }
+    return nums[0];
 }
 #pragma endregion

@@ -3548,27 +3548,22 @@ ListNode* LeetCodeLinkedList::modifiedList(vector<int>& nums, ListNode* head)
 {
     unordered_set<int> num_set;
     for (auto i : nums) num_set.insert(i);
-    ListNode* prev = new ListNode(0);
-    prev->next = head;
-    ListNode* next = head;
-    head = prev;
-    while (next != nullptr)
+    ListNode* result = new ListNode(0);
+    ListNode* next = result;
+    ListNode* ptr = head;
+    while (ptr != nullptr)
     {
-        if (num_set.count(next->val) > 0)
+        if (num_set.count(ptr->val) == 0)
         {
-            prev->next = next->next;
-            delete next;
+            next->next = new ListNode(ptr->val);
+            next = next->next;
         }
-        else
-        {
-            prev = prev->next;
-        }
-        next = prev->next;
+        ptr = ptr->next;
     }
-    prev = head;
-    head = prev->next;
-    delete prev;
-    return head;
+    ptr = result;
+    result = result->next;
+    delete ptr;
+    return result;
 }
 
 /// <summary>

@@ -1213,6 +1213,7 @@ void TestLeetCode3217(void)
     vector<int> data_list = { 1, 2, 3, 4, 5 };
     ListNode* head = leetCode.generateListNodes(data_list);
     ListNode* result = leetCode.modifiedList(nums, head);
+    Logger::WriteMessage(nums);
     Logger::WriteMessage(data_list);
     Logger::WriteMessage(result);
     leetCode.freeListNodes(result);
@@ -1221,6 +1222,7 @@ void TestLeetCode3217(void)
     data_list = { 1,2,1,2,1,2 };
     head = leetCode.generateListNodes(data_list);
     result = leetCode.modifiedList(nums, head);
+    Logger::WriteMessage(nums);
     Logger::WriteMessage(data_list);
     Logger::WriteMessage(result);
     leetCode.freeListNodes(result);
@@ -1229,6 +1231,7 @@ void TestLeetCode3217(void)
     data_list = { 1,2,3,4 };
     head = leetCode.generateListNodes(data_list);
     result = leetCode.modifiedList(nums, head);
+    Logger::WriteMessage(nums);
     Logger::WriteMessage(data_list);
     Logger::WriteMessage(result);
     leetCode.freeListNodes(result);
@@ -1281,9 +1284,9 @@ void TestLeetCode3294(void)
 
 void TestLeetCodeLinkedList(void)
 {
+    TestLeetCode3217();
     TestLeetCode3294();
     TestLeetCode3263();
-    TestLeetCode3217();
     TestLeetCode3063();
     TestLeetCode3062();
     TestLeetCode206();

@@ -5686,4 +5686,76 @@ int LeetCodeBinarySearch::maxPartitionFactor(vector<vector<int>>& points)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3733. Minimum Time to Complete All Deliveries
+///
+/// Medium
+///
+/// You are given two integer arrays of size 2: d = [d1, d2] and r = [r1, r2].
+///
+/// Two delivery drones are tasked with completing a specific number of 
+/// deliveries. Drone i must complete di deliveries.
+///
+/// Each delivery takes exactly one hour and only one drone can make a 
+/// delivery at any given hour.
+///
+/// Additionally, both drones require recharging at specific intervals during 
+/// which they cannot make deliveries. Drone i must recharge every ri hours 
+/// (i.e. at hours that are multiples of ri).
+///
+/// Return an integer denoting the minimum total time (in hours) required to 
+/// complete all deliveries.
+///
+/// Example 1:
+/// 
+/// Input: d = [3,1], r = [2,3]
+/// 
+/// Output: 5
+/// Explanation:
+/// The first drone delivers at hours 1, 3, 5 (recharges at hours 2, 4).
+/// The second drone delivers at hour 2 (recharges at hour 3).
+///
+/// Example 2:
+/// Input: d = [1,3], r = [2,2]
+/// Output: 7
+/// Explanation:
+/// The first drone delivers at hour 3 (recharges at hours 2, 4, 6).
+/// The second drone delivers at hours 1, 5, 7 (recharges at hours 2, 4, 6).
+///
+/// Example 3:
+/// Input: d = [2,1], r = [3,4]
+/// Output: 3
+/// Explanation:
+/// The first drone delivers at hours 1, 2 (recharges at hour 3).
+/// The second drone delivers at hour 3.
+///
+/// Constraints:
+/// 1. d = [d1, d2]
+/// 2. 1 <= di <= 109
+/// 3. r = [r1, r2]
+/// 4. 2 <= ri <= 3 * 104
+/// </summary>
+long long LeetCodeBinarySearch::minimumTimeII(vector<int>& d, vector<int>& r)
+{
+    long long first = 0, last = (long long)1e18;
+    long long result = last;
+    long long lcm = std::lcm((long long)r[0], (long long)r[1]);
+    while (first <= last)
+    {
+        long long middle = first + (last - first) / 2;
+        if ((middle - middle / r[0]) >= (long long)(d[0]) &&
+            (middle - middle / r[1]) >= (long long)(d[1]) && 
+             (middle - middle / lcm) >= (d[0] + d[1]))
+        {
+            last = middle - 1;
+            result = middle;
+        }
+        else
+        {
+            first = middle + 1;
+        }
+    }
+    return result;
+}
 #pragma endregion  

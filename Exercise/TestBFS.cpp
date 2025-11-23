@@ -979,7 +979,7 @@ void TestLeetCode3629(void)
 
 void TestLeetCode3666(void)
 {
-    Logger::WriteMessage("Test Leet Code 3629");
+    Logger::WriteMessage("Test Leet Code 3666");
     LeetCodeBFS leetCode;
     string s = "110";
     int k = 1;

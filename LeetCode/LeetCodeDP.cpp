@@ -22821,5 +22821,167 @@ long long LeetCodeDP::countNoZeroPairs(long long n)
     }
     return result;
 }
+/// <summary>
+/// Leet Code 3743. Maximize Cyclic Partition Score
+///
+/// Hard
+///
+/// You are given a cyclic array nums and an integer k.
+///
+/// Partition nums into at most k subarrays. As nums is cyclic, these 
+/// subarrays may wrap around from the end of the array back to the beginning.
+//
+/// The range of a subarray is the difference between its maximum and minimum 
+/// values. The score of a partition is the sum of subarray ranges.
+///
+/// Return the maximum possible score among all cyclic partitions.
+/// 
+/// Example 1:
+/// Input: nums = [1,2,3,3], k = 2
+/// Output: 3
+/// Explanation:
+/// Partition nums into [2, 3] and [3, 1] (wrapped around).
+/// The range of [2, 3] is max(2, 3) - min(2, 3) = 3 - 2 = 1.
+/// The range of [3, 1] is max(3, 1) - min(3, 1) = 3 - 1 = 2.
+/// The score is 1 + 2 = 3.
+///
+/// Example 2:
+/// Input: nums = [1,2,3,3], k = 1
+/// Output: 2
+/// Explanation:
+/// Partition nums into [1, 2, 3, 3].
+/// The range of [1, 2, 3, 3] is max(1, 2, 3, 3) - min(1, 2, 3, 3) = 3 - 1 = 2.
+/// The score is 2.
+///
+/// Example 3:
+/// Input: nums = [1,2,3,3], k = 4
+/// Output: 3
+/// Explanation:
+/// Identical to Example 1, we partition nums into [2, 3] and [3, 1]. Note 
+/// that nums may be partitioned into fewer than k subarrays.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= k <= nums.length
+/// </summary>
+long long LeetCodeDP::maximumScore(vector<int>& nums, int k)
+{
+    int max_val = 0;
+    int max_index = 0;
+    int n = nums.size();
+    for (int i = 0; i < n; i++)
+    {
+        if (nums[i] > max_val)
+        {
+            max_index = i;
+            max_val = nums[i];
+        }
+    }
+    long long result = 0;
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++)
+    {
+        arr[i] = nums[(max_index + i) % n];
+    }
+    result = max(result, maximumProfit(arr, k));
+    for (int i = 0; i < n; i++)
+    {
+        arr[i] = nums[(max_index+ 1+ i) % n];
+    }
+    result = max(result, maximumProfit(arr, k));
+    
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3742. Maximum Path Score in a Grid
+///
+/// Medium
+///
+/// You are given an m x n grid where each cell contains one of the 
+/// values 0, 1, or 2. You are also given an integer k.
+///
+/// You start from the top-left corner (0, 0) and want to reach the 
+/// bottom-right corner (m - 1, n - 1) by moving only right or down.
+///
+/// Each cell contributes a specific score and incurs an associated 
+/// cost, according to their cell values:
+///
+/// 0: adds 0 to your score and costs 0.
+/// 1: adds 1 to your score and costs 1.
+/// 2: adds 2 to your score and costs 1. 
+/// Return the maximum score achievable without exceeding a total 
+/// cost of k, or -1 if no valid path exists.
+///
+/// Note: If you reach the last cell but the total cost exceeds k, 
+/// the path is invalid.
+///
+/// Example 1:
+/// Input: grid = [[0, 1],[2, 0]], k = 1
+/// Output: 2
+/// Explanation:
+/// The optimal path is:
+/// Cell    grid[i][j]  Score   Total
+/// Score   Cost    Total
+/// Cost
+/// (0, 0)  0   0   0   0   0
+/// (1, 0)  2   2   2   1   1
+/// (1, 1)  0   0   2   0   1
+/// Thus, the maximum possible score is 2.
+///
+/// Example 2:
+/// Input: grid = [[0, 1],[1, 2]], k = 1
+/// Output: -1
+/// Explanation:
+/// There is no path that reaches cell (1, 1)​ without exceeding 
+/// cost k. Thus, the answer is -1.
+///
+/// Constraints:
+/// 1. 1 <= m, n <= 200
+/// 2. 0 <= k <= 10^3
+/// 3. grid[0][0] == 0
+/// 4. 0 <= grid[i][j] <= 2
+/// </summary>
+int LeetCodeDP::maxPathScore(vector<vector<int>>& grid, int k)
+{
+    int n = grid.size();
+    int m = grid[0].size();
+    vector<vector<vector<int>>> dp(n, vector<vector<int>>(m, vector<int>(k + 1, -1)));
+    dp[0][0][0] = 0;
+    int cost = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (i == 0 && j == 0) continue;
+            if (grid[i][j] == 0) cost = 0;
+            else cost = 1;
+            for (int p = 0; p <= k - cost; p++)
+            {
+                if (i > 0)
+                {
+                    if (dp[i - 1][j][p] != -1)
+                    {
+                        dp[i][j][p + cost] = max(dp[i][j][p + cost], dp[i - 1][j][p] + grid[i][j]);
+                    }
+                }
+                if (j > 0)
+                {
+                    if (dp[i][j - 1][p] != -1)
+                    {
+                        dp[i][j][p + cost] = max(dp[i][j][p + cost], dp[i][j - 1][p] + grid[i][j]);
+                    }
+                }
+            }
+        }
+    }
+    int result = -1;
+    for (int i = 0; i <= k; i++)
+    {
+        result = max(result, dp[n - 1][m - 1][i]);
+    }
+    return result;
+}
 #pragma endregion
 

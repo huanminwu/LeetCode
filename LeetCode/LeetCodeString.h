@@ -18020,7 +18020,242 @@ public:
     /// 1. 1 <= n == s.length <= 1000
     /// 2. s consists of lowercase English letters.
     /// </summary>
-    string lexSmallest(string s);
+    string lexSmallestI(string s);
+
+    /// <summary>
+    /// Leet Code 3735. Lexicographically Smallest String After Reverse II
+    ///
+    /// Hard
+    ///
+    /// You are given a string s of length n consisting of lowercase English 
+    /// letters.
+    ///
+    /// You must perform exactly one operation by choosing any integer k 
+    /// such that 1 <= k <= n and either:
+    ///
+    /// reverse the first k characters of s, or
+    /// reverse the last k characters of s.
+    /// Return the lexicographically smallest string that can be obtained after 
+    /// exactly one such operation.
+    ///
+    /// Example 1:
+    /// Input: s = "dcab"
+    /// Output: "acdb"
+    /// Explanation:
+    /// Choose k = 3, reverse the first 3 characters.
+    /// Reverse "dca" to "acd", resulting string s = "acdb", which is the 
+    /// lexicographically smallest string achievable.
+    ///
+    /// Example 2:
+    /// Input: s = "abba"
+    /// Output: "aabb"
+    /// Explanation:
+    /// Choose k = 3, reverse the last 3 characters.
+    /// Reverse "bba" to "abb", so the resulting string is "aabb", which is 
+    /// the lexicographically smallest string achievable.
+    ///
+    /// Example 3:
+    /// Input: s = "zxy"
+    /// Output: "xzy"
+    /// Explanation:
+    /// Choose k = 2, reverse the first 2 characters.
+    /// Reverse "zx" to "xz", so the resulting string is "xzy", which is the 
+    /// lexicographically smallest string achievable.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == s.length <= 10^5
+    /// 2. s consists of lowercase English letters.
+    /// </summary>
+    string lexSmallestII(string s);
+
+    /// <summary>
+    /// Leet Code 3734. Lexicographically Smallest Palindromic Permutation Greater 
+    ///                 Than Target
+    ///
+    /// Hard
+    ///
+    /// You are given two strings s and target, each of length n, consisting of 
+    /// lowercase English letters.
+    ///
+    /// Return the lexicographically smallest string that is both a palindromic 
+    /// permutation of s and strictly greater than target. If no such permutation 
+    /// exists, return an empty string.
+    /// 
+    /// Example 1:
+    /// Input: s = "baba", target = "abba"
+    /// Output: "baab"
+    /// Explanation:
+    /// The palindromic permutations of s (in lexicographical order) 
+    /// are "abba" and "baab".
+    /// The lexicographically smallest permutation that is strictly greater than 
+    /// target is "baab".
+    ///
+    /// Example 2:
+    /// Input: s = "baba", target = "bbaa"
+    /// Output: ""
+    /// Explanation:
+    /// The palindromic permutations of s (in lexicographical order) are "abba" 
+    /// and "baab".
+    /// None of them is lexicographically strictly greater than target. 
+    /// Therefore, the answer is "".
+    ///
+    /// Example 3:
+    /// Input: s = "abc", target = "abb"
+    /// Output: ""
+    /// Explanation:
+    /// s has no palindromic permutations. Therefore, the answer is "".
+    /// Example 4:
+    /// Input: s = "aac", target = "abb"
+    /// Output: "aca"
+    /// Explanation:
+    /// The only palindromic permutation of s is "aca".
+    /// "aca" is strictly greater than target. Therefore, the answer 
+    /// is "aca".
+    ///  
+    /// Constraints:
+    /// 1. 1 <= n == s.length == target.length <= 300
+    /// 2. s and target consist of only lowercase English letters.
+    /// </summary>
+    string lexPalindromicPermutation(string s, string target);
+
+    /// <summary>
+    /// Leet Code 3744. Find Kth Character in Expanded String
+    ///
+    /// Medium
+    ///
+    /// You are given a string s consisting of one or more words separated by 
+    /// single spaces. Each word in s consists of lowercase English letters.
+    ///
+    /// We obtain the expanded string t from s as follows:
+    ///
+    /// For each word in s, repeat its first character once, then its second 
+    /// character twice, and so on.
+    /// For example, if s = "hello world", then 
+    /// t = "heelllllllooooo woorrrllllddddd".
+    ///
+    /// You are also given an integer k, representing a valid index of the 
+    /// string t.
+    ///
+    /// Return the kth character of the string t.
+    /// 
+    /// Example 1:
+    /// Input: s = "hello world", k = 0
+    /// Output: "h"
+    /// Explanation:
+    /// t = "heelllllllooooo woorrrllllddddd". Therefore, the answer is t[0] = "h".
+    ///
+    /// Example 2:
+    /// Input: s = "hello world", k = 15
+    /// Output: " "
+    /// Explanation:
+    /// t = "heelllllllooooo woorrrllllddddd". Therefore, the answer is 
+    /// t[15] = " ".
+    ///
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s contains only lowercase English letters and spaces ' '.
+    /// 3. s does not contain any leading or trailing spaces.
+    /// 4. All the words in s are separated by a single space.
+    /// 5. 0 <= k < t.length. That is, k is a valid index of t.
+    /// </summary>
+    char kthCharacter(string s, long long k);
+
+    /// <summary>
+    /// Leet Code 3746. Minimum String Length After Balanced Removals 
+    ///
+    /// Medium
+    /// 
+    /// You are given a string s consisting only of the characters 'a' and 'b'.
+    ///
+    /// You are allowed to repeatedly remove any substring where the number of 
+    /// 'a' characters is equal to the number of 'b' characters. After each 
+    /// removal, the remaining parts of the string are concatenated together 
+    /// without gaps.
+    ///
+    /// Return an integer denoting the minimum possible length of the string 
+    /// after performing any number of such operations.
+    ///
+    /// Example 1:
+    /// Input: s = "aabbab"
+    /// Output: 0
+    /// Explanation:
+    /// The substring "aabbab" has three 'a' and three 'b'. Since their counts 
+    /// are equal, we can remove the entire string directly. The minimum length 
+    /// is 0.
+    ///
+    /// Example 2:
+    /// Input: s = "aaaa"
+    /// Output: 4
+    /// Explanation:
+    /// Every substring of "aaaa" contains only 'a' characters. No substring 
+    /// can be removed as a result, so the minimum length remains 4.
+    ///
+    /// Example 3:
+    /// Input: s = "aaabb"
+    /// Output: 1
+    /// Explanation:
+    /// First, remove the substring "ab", leaving "aab". Next, remove the new 
+    /// substring "ab", leaving "a". No further removals are possible, so the 
+    /// minimum length is 1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s[i] is either 'a' or 'b'.
+    /// </summary>
+    int minLengthAfterRemovals(string s);
+
+    /// <summary>
+    /// Leet Code 3749. Evaluate Valid Expressions
+    ///
+    /// Hard
+    ///
+    /// You are given a string expression that represents a nested mathematical 
+    /// expression in a simplified form.
+    ///
+    /// A valid expression is either an integer literal or follows the format 
+    /// op(a,b), where:
+    ///
+    /// op is one of "add", "sub", "mul", or "div".
+    /// a and b are each valid expressions.
+    /// The operations are defined as follows:
+    /// add(a,b) = a + b
+    /// sub(a,b) = a - b
+    /// mul(a,b) = a * b
+    /// div(a,b) = a / b
+    /// Return an integer representing the result after fully evaluating 
+    /// the expression.
+    ///
+    /// Example 1:
+    /// Input: expression = "add(2,3)"
+    /// Output: 5
+    /// Explanation:
+    /// The operation add(2,3) means 2 + 3 = 5.
+    ///
+    /// Example 2:
+    /// Input: expression = "-42"
+    /// Output: -42
+    /// Explanation:
+    /// The expression is a single integer literal, so the result is -42.
+    /// Example 3:
+    /// Input: expression = "div(mul(4,sub(9,5)),add(1,1))"
+    /// Output: 8
+    /// Explanation:
+    /// First, evaluate the inner expression: sub(9,5) = 9 - 5 = 4
+    /// Next, multiply the results: mul(4,4) = 4 * 4 = 16
+    /// Then, compute the addition on the right: add(1,1) = 1 + 1 = 2
+    /// Finally, divide the two main results: div(16,2) = 16 / 2 = 8
+    /// Therefore, the entire expression evaluates to 8.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= expression.length <= 10^5
+    /// 2. expression is valid and consists of digits, commas, parentheses, 
+    ///    the minus sign '-', and the lowercase strings "add", "sub", 
+    ///    "mul", "div".
+    /// 3. All intermediate results fit within the range of a long integer.
+    /// 4. All divisions result in integer values.
+    /// </summary>
+    long long evaluateExpression(string expression);
 #pragma endregion
 };
 

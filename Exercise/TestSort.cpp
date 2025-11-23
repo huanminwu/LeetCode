@@ -4681,8 +4681,24 @@ void TestLeetCode3730(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3745(void)
+{
+    Logger::WriteMessage("Test Leet Code 3745");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 4, 2, 5 };
+    int result = leetCode.maximizeExpressionOfThree(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -2,0,5,-2,4 };
+    result = leetCode.maximizeExpressionOfThree(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3745();
     TestLeetCode3730();
     TestLeetCode3727();
     TestLeetCode3711();

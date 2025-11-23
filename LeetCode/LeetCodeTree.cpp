@@ -14431,7 +14431,7 @@ vector<int> LeetCodeTree::treeQueries(int n, vector<vector<int>>& edges, vector<
     {
         if (queries[i][0] == 2)
         {
-            result.push_back(bit.sum(tin[queries[i][1]]));
+            result.push_back((int)bit.sum(tin[queries[i][1]]));
         }
         else
         {
