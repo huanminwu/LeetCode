@@ -11591,4 +11591,145 @@ long long LeetCodeDFS::countDistinct(long long n)
     vector<vector<long long>> cache(str_n.size(), vector<long long>(4, -1));
     return countDistinct(str_n, 0, 1, 1, cache) - 1;
 }
+
+/// <summary>
+/// Leet Code 3753. Total Waviness of Numbers in Range II
+/// </summary>
+long long LeetCodeDFS::totalWavinessII(string str_num, int pos, int digit, int is_leadingzero,
+    int is_limit, int prev_trend, vector<vector<vector<long long>>>& cache)
+{
+    int n = str_num.size();
+    if (pos == n)
+    {
+        return 0;
+    }
+    int checksum = is_leadingzero * 8 + is_limit * 4 + prev_trend + 1;
+    if (cache[pos][digit][checksum] != -1)
+    {
+        return cache[pos][digit][checksum];
+    }
+    long long count = 0;
+    for (int i = 0; i <= 9; i++)
+    {
+        if (is_limit && '0' + i > str_num[pos]) break;
+        int new_limit = 0;
+        if (is_limit == 1 && i == str_num[pos] - '0')
+        {
+            new_limit = 1;
+        }
+        int new_leadingzero = 0;
+        if (is_leadingzero == 1 && i == 0)
+        {
+            new_leadingzero = 1;
+        }
+        int trend = -1;
+        if (is_leadingzero == 1) trend = -1;
+        else if (pos > 0 && i < digit) trend = 0;
+        else if (pos > 0 && i > digit) trend = 1;
+        if (is_leadingzero == 0 && prev_trend != -1)
+        {
+            if (prev_trend == 0 && trend == 1 ||
+                prev_trend == 1 && trend == 0)
+            {
+                long long duplicate = 0;
+                string remaining = str_num.substr(pos + 1, n - pos - 1).c_str();
+                if (remaining == "") duplicate = 0;
+                else 
+                {
+                    if (new_limit == 0)
+                    {
+                        for (size_t j = 0; j < remaining.size(); j++)
+                        {
+                            remaining[j] = '9';
+                        }
+                    }
+                    duplicate = atol(remaining.c_str());
+                }
+                count += (duplicate + 1);
+            }
+        }
+        count += totalWavinessII(str_num, pos + 1, i, new_leadingzero,
+            new_limit, trend, cache);
+    }
+    cache[pos][digit][checksum] = count;
+    return count;
+}
+
+
+/// <summary>
+/// Leet Code 3753. Total Waviness of Numbers in Range II
+///
+/// Hard
+///
+/// You are given two integers num1 and num2 representing an inclusive 
+/// range[num1, num2].
+///
+/// The waviness of a number is defined as the total count of its peaks 
+/// and valleys:
+/// 
+/// A digit is a peak if it is strictly greater than both of its 
+/// immediate neighbors.
+/// A digit is a valley if it is strictly less than both of its immediate 
+/// neighbors.
+/// The first and last digits of a number cannot be peaks or valleys.
+/// Any number with fewer than 3 digits has a waviness of 0.
+/// Return the total sum of waviness for all numbers in the 
+/// range[num1, num2].
+///
+/// Example 1:
+/// Input: num1 = 120, num2 = 130
+/// Output : 3
+/// Explanation :
+/// In the range[120, 130] :
+/// 120 : middle digit 2 is a peak, waviness = 1.
+/// 121 : middle digit 2 is a peak, waviness = 1.
+/// 130 : middle digit 3 is a peak, waviness = 1.
+/// All other numbers in the range have a waviness of 0.
+/// Thus, total waviness is 1 + 1 + 1 = 3.
+///
+/// Example 2 :
+/// Input : num1 = 198, num2 = 202
+/// Output : 3
+/// Explanation :
+/// In the range[198, 202] :
+/// 198 : middle digit 9 is a peak, waviness = 1.
+/// 201 : middle digit 0 is a valley, waviness = 1.
+/// 202 : middle digit 0 is a valley, waviness = 1.
+/// All other numbers in the range have a waviness of 0.
+/// Thus, total waviness is 1 + 1 + 1 = 3.
+/// 
+/// Example 3 :
+/// Input : num1 = 4848, num2 = 4848
+/// Output : 2
+/// Explanation :
+/// Number 4848 : the second digit 8 is a peak, and the third 
+/// digit 4 is a valley, giving a waviness of 2.
+///
+/// Constraints:
+/// 1. 1 <= num1 <= num2 <= 10^15​​​​​​​
+/// </summary>
+long long LeetCodeDFS::totalWavinessII(long long num1, long long num2)
+{
+    string str_num = to_string(num1);
+    long long result = 0;
+    for (size_t i = 1; i < str_num.size() - 1; i++)
+    {
+        if (str_num[i] < str_num[i - 1] && str_num[i] < str_num[i + 1] || 
+            str_num[i] > str_num[i - 1] && str_num[i] > str_num[i + 1])
+        {
+            result++;
+        }
+    }
+
+    vector<vector<vector<long long>>> cache1(16, vector<vector<long long>>(10, vector<long long>(16, -1)));
+    long long count1 = 0;
+    count1 += totalWavinessII(str_num, 0, 0, 1, 1, -1, cache1);
+    vector<vector<vector<long long>>> cache2(16, vector<vector<long long>>(10, vector<long long>(16, -1)));
+    str_num = to_string(num2);
+    long long count2 = 0;
+    count2 += totalWavinessII(str_num, 0, 0, 1, 1, -1, cache2);
+    result += count2 - count1;
+    return result;
+}
+
 #pragma endregion

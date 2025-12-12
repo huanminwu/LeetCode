@@ -8385,8 +8385,140 @@ void TestLeetCode3732(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3752(void)
+{
+    Logger::WriteMessage("Test Leet Code 3752");
+    LeetCodeMath leetCode;
+    int n = 3, target = 0;
+    vector<int> result = leetCode.lexSmallestNegatedPerm(n, target);
+    Logger::WriteMessage("n = " + to_string(n) + "; target = " + to_string(target));
+    Logger::WriteMessage(result);
+
+    n = 1, target = 10000000;
+    result = leetCode.lexSmallestNegatedPerm(n, target);
+    Logger::WriteMessage("n = " + to_string(n) + "; target = " + to_string(target));
+    Logger::WriteMessage(result);
+
+    n = 4, target = -2;
+    result = leetCode.lexSmallestNegatedPerm(n, target);
+    Logger::WriteMessage("n = " + to_string(n) + "; target = " + to_string(target));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3756(void)
+{
+    Logger::WriteMessage("Test Leet Code 3756");
+    LeetCodeMath leetCode;
+    string s = "10203004";
+    vector<vector<int>> queries = { {0, 7},{1, 3},{4, 6} };
+    vector<int> result = leetCode.sumAndMultiplyII(s, queries);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    s = "1000";
+    queries = { {0, 3},{1, 1} };
+    result = leetCode.sumAndMultiplyII(s, queries);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    s = "9876543210";
+    queries = { {0, 9} };
+    result = leetCode.sumAndMultiplyII(s, queries);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    s = "2711785625";
+    queries = { {0, 0} };
+    result = leetCode.sumAndMultiplyII(s, queries);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3754(void)
+{
+    Logger::WriteMessage("Test Leet Code 3754");
+    LeetCodeMath leetCode;
+    int n = 10203004;
+    long long result = leetCode.sumAndMultiplyI(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 1000;
+    result = leetCode.sumAndMultiplyI(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3751(void)
+{
+    Logger::WriteMessage("Test Leet Code 3751");
+    LeetCodeMath leetCode;
+    int num1 = 120, num2 = 130;
+    int result = leetCode.totalWavinessI(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1));
+    Logger::WriteMessage("num2 = " + to_string(num2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    num1 = 198, num2 = 202;
+    result = leetCode.totalWavinessI(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1));
+    Logger::WriteMessage("num2 = " + to_string(num2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    num1 = 4848, num2 = 4848;
+    result = leetCode.totalWavinessI(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1));
+    Logger::WriteMessage("num2 = " + to_string(num2));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3765(void)
+{
+    Logger::WriteMessage("Test Leet Code 3765");
+    LeetCodeMath leetCode;
+    int num = 23;
+    bool result = leetCode.completePrime(num);
+    Logger::WriteMessage("num = " + to_string(num));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    num = 39;
+    result = leetCode.completePrime(num);
+    Logger::WriteMessage("num = " + to_string(num));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    num = 7;
+    result = leetCode.completePrime(num);
+    Logger::WriteMessage("num = " + to_string(num));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3770(void)
+{
+    Logger::WriteMessage("Test Leet Code 3770");
+    LeetCodeMath leetCode;
+    int n = 20;
+    int result = leetCode.largestPrime(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 2;
+    result = leetCode.largestPrime(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3770();
+    TestLeetCode3765();
+    TestLeetCode3751();
+    TestLeetCode3754();
+    TestLeetCode3756();
+    TestLeetCode3752();
     TestLeetCode3732();
     TestLeetCode3725();
     TestLeetCode3726();

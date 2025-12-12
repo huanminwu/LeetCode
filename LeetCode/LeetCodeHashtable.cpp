@@ -6927,4 +6927,69 @@ vector<int> LeetCodeHashtable::findMissingElements(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3761. Minimum Absolute Distance Between Mirror Pairs
+///
+/// Medium
+/// 
+/// You are given an integer array nums.
+///
+/// A mirror pair is a pair of indices(i, j) such that :
+/// 0 <= i < j < nums.length, and
+/// reverse(nums[i]) == nums[j], where reverse(x) denotes the integer 
+/// formed by reversing the digits of x.Leading zeros are omitted after 
+/// reversing, for example reverse(120) = 21.
+/// Return the minimum absolute distance between the indices of any 
+/// mirror pair.The absolute distance between indices i and j is 
+/// abs(i - j).
+///
+/// If no mirror pair exists, return -1.
+///
+/// Example 1:
+/// Input: nums = [12, 21, 45, 33, 54]
+/// Output : 1
+/// Explanation :
+/// The mirror pairs are :
+/// (0, 1) since reverse(nums[0]) = reverse(12) = 21 = nums[1], 
+/// giving an absolute distance abs(0 - 1) = 1.
+/// (2, 4) since reverse(nums[2]) = reverse(45) = 54 = nums[4], 
+/// giving an absolute distance abs(2 - 4) = 2.
+/// The minimum absolute distance among all pairs is 1.
+///
+/// Example 2:
+/// Input: nums = [120, 21]
+/// Output : 1
+/// Explanation :
+/// There is only one mirror pair(0, 1) since 
+/// reverse(nums[0]) = reverse(120) = 21 = nums[1].
+/// The minimum absolute distance is 1.
+/// 
+/// Example 3:
+/// Input: nums = [21, 120]
+/// Output : -1
+/// Explanation :
+/// There are no mirror pairs in the array.
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeHashtable::minMirrorPairDistance(vector<int>& nums)
+{
+    unordered_map<int, int> reverse_map;
+    int result = INT_MAX;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (reverse_map.count(nums[i]) > 0)
+        {
+            result = min(result, (int)i - reverse_map[nums[i]]);
+        }
+        string str_num = to_string(nums[i]);
+        reverse(str_num.begin(), str_num.end());
+        reverse_map[atoi(str_num.c_str())] = i;
+    }
+    if (result == INT_MAX) result = -1;
+    return result;
+}
+
 #pragma endregion

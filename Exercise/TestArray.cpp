@@ -12663,11 +12663,90 @@ void TestLeetCode3748(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3755(void)
+{
+    Logger::WriteMessage("Test Leet Code 3755");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 1, 3, 2, 0 };
+    int result = leetCode.maxBalancedSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,2,8,5,4,14,9,15 };
+    result = leetCode.maxBalancedSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0 };
+    result = leetCode.maxBalancedSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3762(void)
+{
+    Logger::WriteMessage("Test Leet Code 3762");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 4, 7 };
+    int k = 3;
+    vector<vector<int>> queries = { {0, 1},{0, 2} };
+    vector<long long> result = leetCode.minOperations(nums, k, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 1,2,4 };
+    k = 2;
+    queries = { {0, 2},{0, 0},{1, 2} };
+    result = leetCode.minOperations(nums, k, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3768(void)
+{
+    Logger::WriteMessage("Test Leet Code 3768");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3,1,2,5,4 };
+    int k = 3;
+    long long result = leetCode.minInversionCount(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,3,2,1 };
+    k = 4;
+    result = leetCode.minInversionCount(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,1 };
+    k = 1;
+    result = leetCode.minInversionCount(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 825904693, 307121370, 672666680, 106313916, 735606233 };
+    k = 4;
+    result = leetCode.minInversionCount(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3739();
+    TestLeetCode3768();
+    TestLeetCode3762();
+    TestLeetCode3755();
     TestLeetCode3748();
     TestLeetCode3738();
-    TestLeetCode3739();
     TestLeetCode3741();
     TestLeetCode3740();
     TestLeetCode3737();

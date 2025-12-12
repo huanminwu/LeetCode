@@ -9686,6 +9686,217 @@ public:
     /// 2. -100 <= nums[i] <= 100
     /// </summary>
     int maximizeExpressionOfThree(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3763. Maximum Total Sum with Threshold Constraints
+    /// 
+    /// Medium
+    /// 
+    /// You are given two integer arrays nums and threshold, both of length n.
+    /// Starting at step = 1, you perform the following repeatedly :
+    ///
+    /// Choose an unused index i such that threshold[i] <= step.
+    /// If no such index exists, the process ends.
+    /// Add nums[i] to your running total.
+    /// Mark index i as used and increment step by 1.
+    /// Return the maximum total sum you can obtain by choosing indices 
+    /// optimally.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 10, 4, 2, 1, 6], threshold = [5, 1, 5, 5, 2, 2]
+    ///
+    /// Output : 17
+    ///
+    /// Explanation :
+    /// At step = 1, choose i = 1 since threshold[1] <= step.The total sum 
+    /// becomes 10. Mark index 1.
+    /// At step = 2, choose i = 4 since threshold[4] <= step.The total sum 
+    /// becomes 11. Mark index 4.
+    /// At step = 3, choose i = 5 since threshold[5] <= step.The total sum 
+    /// becomes 17. Mark index 5.
+    /// At step = 4, we cannot choose indices 0, 2, or 3 because their 
+    /// thresholds are > 4, so we end the process.
+    ///
+    /// Example 2:
+    /// Input: nums = [4, 1, 5, 2, 3], threshold = [3, 3, 2, 3, 3]
+    /// Output : 0
+    /// Explanation :
+    /// At step = 1 there is no index i with threshold[i] <= 1, so the 
+    /// process ends immediately.Thus, the total sum is 0.
+    ///
+    /// Example 3 :
+    /// Input : nums = [2, 6, 10, 13], threshold = [2, 1, 1, 1]
+    /// Output : 31
+    /// Explanation :
+    /// At step = 1, choose i = 3 since threshold[3] <= step.The total sum 
+    /// becomes 13. Mark index 3.
+    /// At step = 2, choose i = 2 since threshold[2] <= step.The total sum
+    /// becomes 23. Mark index 2.
+    /// At step = 3, choose i = 1 since threshold[1] <= step.The total 
+    /// sum becomes 29. Mark index 1.
+    /// At step = 4, choose i = 0 since threshold[0] <= step.The total sum 
+    /// becomes 31. Mark index 0.
+    /// After step = 4 all indices have been chosen, so the process ends.
+    ///
+    /// Constraints:
+    /// 1. n == nums.length == threshold.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 1 <= nums[i] <= 10^9
+    /// 4. 1 <= threshold[i] <= n
+    /// </summary>
+    long long maxSum(vector<int>& nums, vector<int>& threshold);
+
+    /// <summary>
+    /// Leet Code 3759. Count Elements With at Least K Greater Values
+    /// 
+    /// Medium
+    /// 
+    /// You are given an integer array nums of length n and an integer k.
+    /// 
+    /// An element in nums is said to be qualified if there exist at least 
+    /// k elements in the array that are strictly greater than it.
+    ///
+    /// Return an integer denoting the total number of qualified elements 
+    /// in nums.
+    ///
+    /// Example 1:
+    /// Input: nums = [3, 1, 2], k = 1
+    /// Output: 2
+    /// Explanation:
+    /// The elements 1 and 2 each have at least k = 1 element greater 
+    /// than themselves.
+    /// No element is greater than 3. Therefore, the answer is 2.
+    ///
+    /// Example 2 :
+    /// Input : nums = [5, 5, 5], k = 2
+    /// Output : 0
+    /// Explanation :
+    /// Since all elements are equal to 5, no element is greater than the 
+    /// other.Therefore, the answer is 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. 0 <= k < n
+    /// </summary>
+    int countElements(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3767. Maximize Points After Choosing K Tasks
+    /// 
+    /// Medium
+    /// 
+    /// You are given two integer arrays, technique1 and technique2, each of 
+    /// length n, where n represents the number of tasks to complete.
+    ///
+    /// If the ith task is completed using technique 1, you earn technique1[i] 
+    /// points.
+    /// If it is completed using technique 2, you earn technique2[i] points.
+    /// You are also given an integer k, representing the minimum number of 
+    /// tasks that must be completed using technique 1.
+    /// You must complete at least k tasks using technique 1 (they do not need 
+    /// to be the first k tasks).
+    ///
+    /// The remaining tasks may be completed using either technique.
+    /// Return an integer denoting the maximum total points you can earn.
+    /// 
+    /// Example 1:
+    /// Input: technique1 = [5, 2, 10], technique2 = [10, 3, 8], k = 2
+    /// Output : 22
+    /// Explanation :
+    /// We must complete at least k = 2 tasks using technique1.
+    /// Choosing technique1[1] and technique1[2](completed using technique 1), 
+    /// and technique2[0](completed using technique 2), yields the maximum 
+    /// points : 2 + 10 + 10 = 22.
+    ///
+    /// Example 2 :
+    /// Input : technique1 = [10, 20, 30], technique2 = [5, 15, 25], k = 2
+    /// Output : 60
+    /// Explanation :
+    /// We must complete at least k = 2 tasks using technique1.
+    /// Choosing all tasks using technique 1 yields the maximum points : 
+    /// 10 + 20 + 30 = 60.
+    ///
+    /// Example 3 :
+    /// Input : technique1 = [1, 2, 3], technique2 = [4, 5, 6], k = 0
+    /// Output : 15
+    /// Explanation :
+    /// Since k = 0, we are not required to choose any task using technique1.
+    /// Choosing all tasks using technique 2 yields the maximum points : 
+    /// 4 + 5 + 6 = 15.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == technique1.length == technique2.length <= 10^5
+    /// 2. 1 <= technique1[i], technique2​​​​​​​[i] <= 10​​​​​​​^5
+    /// 3. 0 <= k <= n
+    /// </summary>
+    long long maxPoints(vector<int>& technique1, vector<int>& technique2, int k);
+
+    /// <summary>
+    /// Leet Code 3771. Total Score of Dungeon Runs
+    /// 
+    /// Medium
+    /// 
+    /// You are given a positive integer hp and two positive 1 - indexed 
+    /// integer arrays damage and requirement.
+    ///
+    /// There is a dungeon with n trap rooms numbered from 1 to n.
+    /// Entering room i reduces your health points by damage[i].After 
+    /// that reduction, if your remaining health points are at least 
+    /// requirement[i], you earn 1 point for that room.
+    /// 
+    /// Let score(j) be the number of points you get if you start with hp 
+    /// health points and enter the rooms j, j + 1, ..., n in this order.
+    ///
+    /// Return the integer score(1) + score(2) + ... + score(n), the 
+    /// sum of scores over all starting rooms.
+    ///
+    /// Note: You cannot skip rooms.You can finish your journey even if 
+    /// your health points become non - positive.
+    ///
+    /// Example 1 :
+    /// Input : hp = 11, damage = [3, 6, 7], requirement = [4, 2, 5]
+    /// Output : 3
+    /// Explanation :
+    /// score(1) = 2, score(2) = 1, score(3) = 0. The total score 
+    /// is 2 + 1 + 0 = 3.
+    /// As an example, score(1) = 2 because you get 2 points if you start 
+    /// from room 1.
+    ///
+    /// You start with 11 health points.
+    /// Enter room 1. Your health points are now 11 - 3 = 8. You get 1 
+    /// point because 8 >= 4.
+    /// Enter room 2. Your health points are now 8 - 6 = 2. You get 1 
+    /// point because 2 >= 2.
+    /// Enter room 3. Your health points are now 2 - 7 = -5. You do 
+    /// not get any points because - 5 < 5.
+    ///
+    /// Example 2:
+    /// Input: hp = 2, damage = [10000, 1], requirement = [1, 1]
+    /// Output : 1
+    /// Explanation :
+    /// score(1) = 0, score(2) = 1. The total score is 0 + 1 = 1.
+    /// score(1) = 0 because you do not get any points if you start from 
+    /// room 1.
+    ///
+    /// You start with 2 health points.
+    /// Enter room 1. Your health points are now 2 - 10000 = -9998. 
+    /// You do not get any points because - 9998 < 1.
+    /// Enter room 2. Your health points are now - 9998 - 1 = -9999. 
+    /// You do not get any points because - 9999 < 1.
+    /// score(2) = 1 because you get 1 point if you start from room 2.
+    /// 
+    /// You start with 2 health points.
+    /// Enter room 2. Your health points are now 2 - 1 = 1. You get 1 
+    /// point because 1 >= 1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= hp <= 10^9
+    /// 2. 1 <= n == damage.length == requirement.length <= 10^5
+    /// 3. 1 <= damage[i], requirement[i] <= 10^4
+    /// </summary>
+    long long totalScore(int hp, vector<int>& damage, vector<int>& requirement);
+
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

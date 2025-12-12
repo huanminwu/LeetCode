@@ -17502,5 +17502,297 @@ public:
     /// 2. -10^5 <= nums[i] <= 10^5
     /// </summary>
     long long maxProductII(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3752. Lexicographically Smallest Negated Permutation that 
+    ///                 Sums to Target
+    /// Medium
+    /// 
+    /// You are given a positive integer n and an integer target.
+    /// Return the lexicographically smallest array of integers of size n 
+    /// such that :
+    /// 
+    /// The sum of its elements equals target.
+    /// The absolute values of its elements form a permutation of size n.
+    /// If no such array exists, return an empty array.
+    ///
+    /// A permutation of size n is a rearrangement of integers 1, 2, ..., n.
+    ///
+    /// Example 1:
+    ///
+    /// Input: n = 3, target = 0
+    /// Output : [-3, 1, 2]
+    /// Explanation :
+    /// The arrays that sum to 0 and whose absolute values form a permutation 
+    /// of size 3 are : 
+    /// [-3, 1, 2]
+    /// [-3, 2, 1]
+    /// [-2, -1, 3]
+    /// [-2, 3, -1]
+    /// [-1, -2, 3]
+    /// [-1, 3, -2]
+    /// [1, -3, 2]
+    /// [1, 2, -3]
+    /// [2, -3, 1]
+    /// [2, 1, -3]
+    /// [3, -2, -1]
+    /// [3, -1, -2]
+    /// The lexicographically smallest one is[-3, 1, 2].
+    ///
+    /// Example 2:
+    ///
+    /// Input: n = 1, target = 10000000000
+    ///
+    /// Output : []
+    ///
+    /// Explanation :
+    /// There are no arrays that sum to 10000000000 and whose absolute 
+    /// values form a permutation of size 1. Therefore, the answer is[].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 10^5
+    /// 2. -10^10 <= target <= 10^10
+    /// </summary>
+    vector<int> lexSmallestNegatedPerm(int n, long long target);
+
+    /// <summary>
+    /// Leet Code 3754. Concatenate Non-Zero Digits and Multiply by Sum I
+    ///
+    /// Easy
+    /// 
+    /// You are given an integer n.
+    /// Form a new integer x by concatenating all the non - zero digits of n 
+    /// in their original order.If there are no non - zero digits, x = 0.
+    ///
+    /// Let sum be the sum of digits in x.
+    /// Return an integer representing the value of x * sum.
+    ///
+    /// Example 1:
+    /// Input: n = 10203004
+    /// Output : 12340
+    /// Explanation :
+    /// The non - zero digits are 1, 2, 3, and 4. Thus, x = 1234.
+    /// The sum of digits is sum = 1 + 2 + 3 + 4 = 10.
+    /// Therefore, the answer is x * sum = 1234 * 10 = 12340.
+    ///
+    /// Example 2 :
+    /// Input : n = 1000
+    /// Output : 1
+    /// Explanation :
+    /// The non - zero digit is 1, so x = 1 and sum = 1.
+    /// Therefore, the answer is x * sum = 1 * 1 = 1.
+    ///
+    /// Constraints :
+    /// 1. 0 <= n <= 10^9
+    /// </summary>
+    long long sumAndMultiplyI(int n);
+
+    /// <summary>
+    /// Leet Code 3756. Concatenate Non-Zero Digits and Multiply by Sum II
+    ///
+    /// Medium
+    /// 
+    /// You are given a string s of length m consisting of digits.You are 
+    /// also given a 2D integer array queries, where queries[i] = [li, ri].
+    ///
+    /// For each queries[i], extract the substring s[li..ri].Then, perform 
+    /// the following :
+    ///
+    /// Form a new integer x by concatenating all the non - zero digits 
+    /// from the substring in their original order.If there are no non - zero 
+    /// digits, x = 0.
+    /// Let sum be the sum of digits in x.The answer is x * sum.
+    /// Return an array of integers answer where answer[i] is the answer to the 
+    /// ith query.
+    ///
+    /// Since the answers may be very large, return them modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: s = "10203004", queries = [[0, 7], [1, 3], [4, 6]]
+    /// Output : [12340, 4, 9]
+    ///
+    /// Explanation :
+    /// s[0..7] = "10203004"
+    /// x = 1234
+    /// sum = 1 + 2 + 3 + 4 = 10
+    /// Therefore, answer is 1234 * 10 = 12340.
+    /// s[1..3] = "020"
+    /// x = 2
+    /// sum = 2
+    /// Therefore, the answer is 2 * 2 = 4.
+    /// s[4..6] = "300"
+    /// x = 3
+    /// sum = 3
+    /// Therefore, the answer is 3 * 3 = 9.
+    ///
+    /// Example 2:
+    /// Input: s = "1000", queries = [[0, 3], [1, 1]]
+    /// Output : [1, 0]
+    ///
+    /// Explanation :
+    /// s[0..3] = "1000"
+    /// x = 1
+    /// sum = 1
+    /// Therefore, the answer is 1 * 1 = 1.
+    /// s[1..1] = "0"
+    /// x = 0
+    /// sum = 0
+    /// Therefore, the answer is 0 * 0 = 0.
+    ///
+    /// Example 3:
+    /// Input: s = "9876543210", queries = [[0, 9]]
+    /// Output : [444444137]
+    ///
+    /// Explanation :
+    /// s[0..9] = "9876543210"
+    /// x = 987654321
+    /// sum = 9 + 8 + 7 + 6 + 5 + 4 + 3 + 2 + 1 = 45
+    /// Therefore, the answer is 987654321 * 45 = 44444444445.
+    /// We return 44444444445 modulo(109 + 7) = 444444137.
+    ///
+    /// Constraints:
+    /// 1. 1 <= m == s.length <= 10^5
+    /// 2. s consists of digits only.
+    /// 3. 1 <= queries.length <= 10^5
+    /// 4. queries[i] = [li, ri]
+    /// 5. 0 <= li <= ri < m
+    /// </summary>
+    vector<int> sumAndMultiplyII(string s, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet Code 3751. Total Waviness of Numbers in Range I
+    ///
+    /// Medium
+    ///
+    /// You are given two integers num1 and num2 representing an inclusive 
+    /// range[num1, num2].
+    ///
+    /// The waviness of a number is defined as the total count of its peaks and 
+    /// valleys:
+    ///
+    /// A digit is a peak if it is strictly greater than both of its immediate 
+    /// neighbors.
+    /// A digit is a valley if it is strictly less than both of its immediate 
+    /// neighbors.
+    /// The first and last digits of a number cannot be peaks or valleys.
+    /// Any number with fewer than 3 digits has a waviness of 0.
+    /// Return the total sum of waviness for all numbers in the 
+    /// range[num1, num2].
+    ///
+    /// Example 1:
+    /// Input: num1 = 120, num2 = 130
+    /// Output : 3
+    /// Explanation :
+    /// In the range[120, 130] :
+    /// 120 : middle digit 2 is a peak, waviness = 1.
+    /// 121 : middle digit 2 is a peak, waviness = 1.
+    /// 130 : middle digit 3 is a peak, waviness = 1.
+    /// All other numbers in the range have a waviness of 0.
+    /// Thus, total waviness is 1 + 1 + 1 = 3.
+    ///
+    /// Example 2 :
+    /// Input : num1 = 198, num2 = 202
+    /// Output : 3
+    /// Explanation :
+    /// In the range[198, 202] :
+    /// 198 : middle digit 9 is a peak, waviness = 1.
+    /// 201 : middle digit 0 is a valley, waviness = 1.
+    /// 202 : middle digit 0 is a valley, waviness = 1.
+    /// All other numbers in the range have a waviness of 0.
+    /// Thus, total waviness is 1 + 1 + 1 = 3.
+    ///
+    /// Example 3 :
+    /// Input : num1 = 4848, num2 = 4848
+    /// Output : 2
+    /// Explanation :
+    /// Number 4848 : the second digit 8 is a peak, and the third digit 4 is a 
+    /// valley, giving a waviness of 2.
+    ///
+    /// Constraints:
+    /// 1. 1 <= num1 <= num2 <= 10^5
+    /// </summary>
+    int totalWavinessI(int num1, int num2);
+
+    /// <summary>
+    /// Leet Code 3765. Complete Prime Number
+    ///
+    /// Medium
+    ///
+    /// You are given an integer num.
+    ///
+    /// A number num is called a Complete Prime Number if every prefix and 
+    /// every suffix of num is prime.
+    ///
+    /// Return true if num is a Complete Prime Number, otherwise return false.
+    ///
+    /// Note:
+    /// A prefix of a number is formed by the first k digits of the number.
+    /// A suffix of a number is formed by the last k digits of the number.
+    /// Single - digit numbers are considered Complete Prime Numbers only 
+    /// if they are prime.
+    ///
+    /// Example 1:
+    /// Input: num = 23
+    /// Output : true
+    /// Explanation :
+    /// ​​​​​​​Prefixes of num = 23 are 2 and 23, both are prime.
+    /// Suffixes of num = 23 are 3 and 23, both are prime.
+    /// All prefixes and suffixes are prime, so 23 is a Complete Prime 
+    /// Number and the answer is true.
+    ///
+    /// Example 2 :
+    /// Input : num = 39
+    /// Output : false
+    /// Explanation :
+    /// Prefixes of num = 39 are 3 and 39. 3 is prime, but 39 is not prime.
+    /// Suffixes of num = 39 are 9 and 39. Both 9 and 39 are not prime.
+    /// At least one prefix or suffix is not prime, so 39 is not a Complete 
+    /// Prime Number and the answer is false.
+    /// 
+    /// Example 3 :
+    /// Input : num = 7
+    /// Output : true
+    /// Explanation :
+    /// 7 is prime, so all its prefixes and suffixes are prime and the 
+    /// answer is true.
+    ///
+    /// Constraints :
+    /// 1. 1 <= num <= 10^9
+    /// </summary>
+    bool completePrime(int num);
+
+    /// <summary>
+    /// Leet Code 3770. Largest Prime from Consecutive Prime Sum
+    ///
+    /// Medium
+    ///
+    /// You are given an integer n.
+    /// 
+    /// Return the largest prime number less than or equal to n that 
+    /// can be expressed as the sum of one or more consecutive prime 
+    /// numbers starting from 2. If no such number exists, return 0.
+    ///
+    /// Example 1:
+    /// Input: n = 20
+    /// Output : 17
+    /// Explanation :
+    /// The prime numbers less than or equal to n = 20 which are 
+    /// consecutive prime sums are :
+    /// 
+    /// 1. 2 = 2
+    /// 2. 5 = 2 + 3
+    /// 3. 17 = 2 + 3 + 5 + 7
+    /// 4. The largest is 17, so it is the answer.
+    ///
+    /// Example 2:
+    /// Input: n = 2
+    /// Output : 2
+    /// Explanation :
+    /// The only consecutive prime sum less than or equal to 2 is 2 itself.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 5 * 10^5
+    /// </summary>
+    int largestPrime(int n);
 };
 #endif

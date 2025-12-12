@@ -1702,7 +1702,7 @@ public:
     /// Leet Code 2479. Maximum XOR of Two Non-Overlapping Subtrees
     /// 
     /// Hard
-    ///	
+    ///->
     /// There is an undirected tree with n nodes labeled from 0 to n - 1. 
     /// You are given the integer n and a 2D integer array edges of length 
     /// n - 1, where edges[i] = [ai, bi] indicates that there is an edge 
@@ -1753,7 +1753,7 @@ public:
     /// Leet Code 2505. Bitwise OR of All Subsequence Sums
     /// 
     /// Medium
-    ///	
+    ///->
     /// Given an integer array nums, return the value of the bitwise OR of 
     /// the sum of all possible subsequences in the array.
     ///
@@ -1785,7 +1785,7 @@ public:
     /// Leet Code 2527. Find Xor-Beauty of Array
     /// 
     /// Medium
-    ///	
+    ///->
     /// You are given a 0-indexed integer array nums.
     ///
     /// The effective value of three indices i, j, and k is defined as 
@@ -1831,7 +1831,7 @@ public:
     /// Leet Code 2546. Apply Bitwise Operations to Make Strings Equal
     /// 
     /// Medium
-    ///	
+    ///->
     /// You are given two 0-indexed binary strings s and target of the same 
     /// length n. You can do the following operation on s any number of times:
     ///
@@ -1870,7 +1870,7 @@ public:
     /// Leet Code 2564. Substring XOR Queries
     /// 
     /// Medium
-    ///	
+    ///->
     /// You are given a binary string s, and a 2D integer array queries where 
     /// queries[i] = [firsti, secondi].
     ///
@@ -1921,7 +1921,7 @@ public:
     /// Leet Code 2568. Minimum Impossible OR
     /// 
     /// Medium
-    ///	
+    ///->
     /// You are given a 0-indexed integer array nums.
     ///
     /// We say that an integer x is expressible from nums if there exist 
@@ -1956,7 +1956,7 @@ public:
     /// Leet Code 2571. Minimum Operations to Reduce an Integer to 0
     /// 
     /// Medium
-    ///	
+    ///->
     /// You are given a positive integer n, you can do the following operation 
     /// any number of times:
     ///
@@ -1993,7 +1993,7 @@ public:
     /// Leet Code 2569. Handling Sum Queries After Update
     /// 
     /// Hard
-    ///	
+    ///->
     /// You are given two 0-indexed arrays nums1 and nums2 and a 2D array 
     /// queries of queries. There are three types of queries:
     ///
@@ -2031,7 +2031,7 @@ public:
     /// Leet Code 2683. Neighboring Bitwise XOR
     /// 
     /// Medium
-    ///	
+    ///->
     /// A 0-indexed array derived with length n is derived by computing the 
     /// bitwise XOR (^) of adjacent values in a binary array original of 
     /// length n.
@@ -2078,7 +2078,7 @@ public:
     /// Leet Code 2680. Maximum OR
     /// 
     /// Medium
-    ///	
+    ///->
     /// You are given a 0-indexed integer array nums of length n and an 
     /// integer k. In an operation, you can choose an element and 
     /// multiply it by 2.
@@ -3546,6 +3546,213 @@ public:
     /// 2. 0 <= nums[i] <= 10^9
     /// </summary>
     int longestSubsequence(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3750. Minimum Number of Flips to Reverse Binary String
+    ///
+    /// Easy
+    /// 
+    /// You are given a positive integer n.
+    ///
+    /// Let s be the binary representation of n without leading zeros.
+    ///
+    /// The reverse of a binary string s is obtained by writing the characters 
+    /// of s in the opposite order.
+    ///
+    /// You may flip any bit in s(change 0 -> 1 or 1 -> 0).Each flip affects 
+    /// exactly one bit.
+    ///
+    /// Return the minimum number of flips required to make s equal to the 
+    /// reverse of its original form.
+    ///
+    /// Example 1:
+    /// Input: n = 7
+    /// Output : 0
+    /// Explanation :
+    /// The binary representation of 7 is "111".Its reverse is also "111", 
+    /// which is the same.Hence, no flips are needed.
+    ///
+    /// Example 2 :
+    /// Input : n = 10
+    /// Output : 4
+    /// Explanation :
+    /// The binary representation of 10 is "1010".Its reverse is "0101".
+    /// All four bits must be flipped to make them equal.Thus, the minimum 
+    /// number of flips required is 4.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^9
+    /// </summary>
+    int minimumFlips(int n);
+
+    /// <summary>
+    /// Leet Code 3769. Sort Integers by Binary Reflection
+    ///
+    /// Easy
+    /// 
+    /// You are given an integer array nums.
+    /// The binary reflection of a positive integer is defined as the number 
+    /// obtained by reversing the order of its binary digits(ignoring any 
+    /// leading zeros) and interpreting the resulting binary number as a 
+    /// decimal.
+    ///
+    /// Sort the array in ascending order based on the binary reflection of 
+    /// each element.If two different numbers have the same binary reflection, 
+    /// the smaller original number should appear first.
+    ///
+    /// Return the resulting sorted array.
+    ///
+    /// Example 1:
+    /// Input: nums = [4, 5, 4]
+    /// Output : [4, 4, 5]
+    /// Explanation :
+    /// Binary reflections are :
+    /// 4 -> (binary)100 -> (reversed)001 -> 1
+    /// 5 -> (binary)101 -> (reversed)101 -> 5
+    /// 4 -> (binary)100 -> (reversed)001 -> 1
+    /// Sorting by the reflected values gives[4, 4, 5].
+    /// 
+    /// Example 2:
+    /// Input: nums = [3, 6, 5, 8]
+    /// Output : [8, 3, 6, 5]
+    /// Explanation :
+    /// Binary reflections are :
+    /// 3 -> (binary)11 -> (reversed)11 -> 3
+    /// 6 -> (binary)110 -> (reversed)011 -> 3
+    /// 5 -> (binary)101 -> (reversed)101 -> 5
+    /// 8 -> (binary)1000 -> (reversed)0001 -> 1
+    /// Sorting by the reflected values gives[8, 3, 6, 5].
+    /// Note that 3 and 6 have the same reflection, so we arrange them in 
+    /// increasing order of original value.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    vector<int> sortByReflection(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3766. Minimum Operations to Make Binary Palindrome
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// For each element nums[i], you may perform the following operations 
+    /// any number of times(including zero) :
+    ///
+    /// Increase nums[i] by 1, or
+    /// Decrease nums[i] by 1.
+    /// A number is called a binary palindrome if its binary representation 
+    /// without leading zeros reads the same forward and backward.
+    ///
+    /// Your task is to return an integer array ans, where ans[i] represents 
+    /// the minimum number of operations required to convert nums[i] into 
+    /// a binary palindrome.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1, 2, 4]
+    /// Output : [0, 1, 1]
+    /// Explanation :
+    /// One optimal set of operations :
+    /// nums[i]->Binary(nums[i])->Nearest
+    /// Palindrome Binary
+    /// (Palindrome) Operations Required ans[i]
+    /// 1->1-> 1->1 Already palindrome 0
+    /// 2->10->3->11->Increase by 1->1
+    /// 4->100->3->11->Decrease by 1->1
+    /// Thus, ans = [0, 1, 1].
+    ///
+    /// Example 2:
+    /// Input: nums = [6, 7, 12]
+    /// Output : [1, 0, 3]
+    /// Explanation :
+    /// One optimal set of operations :
+    /// nums[i]->Binary(nums[i])->Nearest
+    /// Palindrome->Binary
+    /// (Palindrome)->Operations Required->ans[i]
+    /// 6->110->5->101->Decrease by 1->1
+    /// 7->111->7->111->Already palindrome->0
+    /// 12->1100->15->1111->Increase by 3->3
+    /// Thus, ans = [1, 0, 3].
+    ///
+    /// Constraints:
+    /// 
+    /// 1. 1 <= nums.length <= 5000
+    /// 2. 1 <= nums[i] <= 5000
+    /// </summary>
+    vector<int> minOperations(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3757. Number of Effective Subsequences
+    ///
+    /// Hard
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// The strength of the array is defined as the bitwise OR of all its 
+    /// elements.
+    ///
+    /// A subsequence is considered effective if removing that subsequence 
+    /// strictly decreases the strength of the remaining elements.
+    ///
+    /// Return the number of effective subsequences in nums.Since the answer 
+    /// may be large, return it modulo 10^9 + 7.
+    ///
+    /// The bitwise OR of an empty array is 0.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1, 2, 3]
+    /// Output : 3
+    /// Explanation :
+    /// The Bitwise OR of the array is 1 OR 2 OR 3 = 3.
+    /// Subsequences that are effective are :
+    /// [1, 3] : The remaining element[2] has a Bitwise OR of 2.
+    /// [2, 3] : The remaining element[1] has a Bitwise OR of 1.
+    /// [1, 2, 3] : The remaining elements[] have a Bitwise OR of 0.
+    /// Thus, the total number of effective subsequences is 3.
+    ///
+    /// Example 2 :
+    /// Input : nums = [7, 4, 6]
+    /// Output : 4
+    /// Explanation : ​​​​​​​
+    /// The Bitwise OR of the array is 7 OR 4 OR 6 = 7.
+    /// Subsequences that are effective are :
+    /// [7] : The remaining elements[4, 6] have a Bitwise OR of 6.
+    /// [7, 4] : The remaining element[6] has a Bitwise OR of 6.
+    /// [7, 6] : The remaining element[4] has a Bitwise OR of 4.
+    /// [7, 4, 6] : The remaining elements[] have a Bitwise OR of 0.
+    /// Thus, the total number of effective subsequences is 4.
+    ///
+    /// Example 3 :
+    /// Input : nums = [8, 8]
+    /// Output : 1
+    /// Explanation :
+    /// The Bitwise OR of the array is 8 OR 8 = 8.
+    /// Only the subsequence[8, 8] is effective since removing it leaves[] 
+    /// which has a Bitwise OR of 0.
+    /// Thus, the total number of effective subsequences is 1.
+    ///
+    /// Example 4 :
+    /// Input : nums = [2, 2, 1]
+    /// Output : 5
+    /// Explanation :
+    /// The Bitwise OR of the array is 2 OR 2 OR 1 = 3.
+    /// Subsequences that are effective are :
+    /// [1] : The remaining elements[2, 2] have a Bitwise OR of 2.
+    /// [2, 1](using nums[0], nums[2]) : The remaining element[2] has a 
+    /// Bitwise OR of 2.
+    /// [2, 1](using nums[1], nums[2]) : The remaining element[2] has a 
+    /// Bitwise OR of 2.
+    /// [2, 2] : The remaining element[1] has a Bitwise OR of 1.
+    /// [2, 2, 1] : The remaining elements[] have a Bitwise OR of 0.
+    /// Thus, the total number of effective subsequences is 5.
+    ///
+    /// Constraints :
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^6
+    /// </summary>
+    int countEffective(vector<int>& nums);
 #pragma endregion
 };
 #endif  // LeetCodeBit_H

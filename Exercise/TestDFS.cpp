@@ -2735,9 +2735,34 @@ void TestLeetCode3747(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3753(void)
+{
+    Logger::WriteMessage("Test Leet Code 3753");
+    LeetCodeDFS leetCode;
+    int num1 = 120, num2 = 130;
+    long long result = leetCode.totalWavinessII(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 = " + to_string(num2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    num1 = 198, num2 = 202;
+    result = leetCode.totalWavinessII(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 = " + to_string(num2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    num1 = 1020, num2 = 1020;
+    result = leetCode.totalWavinessII(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 = " + to_string(num2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    num1 = 4848, num2 = 4848;
+    result = leetCode.totalWavinessII(num1, num2);
+    Logger::WriteMessage("num1 = " + to_string(num1) + "; num2 = " + to_string(num2));
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3753();
     TestLeetCode3747();
     TestLeetCode3690();
     TestLeetCode3680();

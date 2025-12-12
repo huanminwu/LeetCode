@@ -2290,7 +2290,6 @@ void TestLeetCode3718(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
-
 void TestLeetCode3731(void)
 {
     Logger::WriteMessage("Test Leet Code 3731");
@@ -2311,8 +2310,29 @@ void TestLeetCode3731(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3761(void)
+{
+    Logger::WriteMessage("Test Leet Code 3761");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 12,21,45,33,54 };
+    int result = leetCode.minMirrorPairDistance(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 120,21 };
+    result = leetCode.minMirrorPairDistance(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 21,120 };
+    result = leetCode.minMirrorPairDistance(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3761();
     TestLeetCode3731();
     TestLeetCode3718();
     TestLeetCode3712();

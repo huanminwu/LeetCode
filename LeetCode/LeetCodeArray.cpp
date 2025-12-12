@@ -41452,4 +41452,248 @@ vector<long long> LeetCodeArray::countStableSubarrays(vector<int>& nums, vector<
     return result;
 }
 
+/// <summary>
+/// Leet Code 3755. Find Maximum Balanced XOR Subarray Length
+///
+/// Medium
+///
+/// Given an integer array nums, return the length of the longest 
+/// subarray that has a bitwise XOR of zero and contains an equal 
+/// number of even and odd numbers.If no such subarray exists, return 0.
+///
+/// Example 1:
+/// Input: nums = [3, 1, 3, 2, 0]
+/// Output : 4
+/// Explanation :
+/// The subarray[1, 3, 2, 0] has bitwise XOR 1 XOR 3 XOR 2 XOR 0 = 0 and 
+/// contains 2 even and 2 odd numbers.
+///
+/// Example 2 :
+/// Input : nums = [3, 2, 8, 5, 4, 14, 9, 15]
+/// Output : 8
+/// Explanation :
+/// The whole array has bitwise XOR 0 and contains 4 even and 4 odd 
+/// numbers.
+///
+/// Example 3 :
+/// Input : nums = [0]
+/// Output : 0
+/// Explanation :
+/// No non - empty subarray satisfies both conditions.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeArray::maxBalancedSubarray(vector<int>& nums)
+{
+    unordered_map<int, unordered_map<int, int>> cache;
+    int result = 0;
+    cache[0][0] = 0;
+    int n = nums.size();
+    int xor_val = 0, delta = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        xor_val = xor_val ^ nums[i];
+        if (nums[i] % 2 == 0) delta++;
+        else delta--;
+        if (cache.count(xor_val) > 0 && cache[xor_val].count(delta) > 0)
+        {
+            result = max(result, i + 1 - cache[xor_val][delta]);
+        }
+        else
+        {
+            cache[xor_val][delta] = i + 1;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3762. Minimum Operations to Equalize Subarrays
+///
+/// Hard
+///
+/// You are given an integer array nums and an integer k.
+/// 
+/// In one operation, you can increase or decrease any element of nums by 
+/// exactly k.
+/// 
+/// You are also given a 2D integer array queries, where each 
+/// queries[i] = [li, ri].
+/// 
+/// For each query, find the minimum number of operations required to make 
+/// all elements in the subarray nums[li..ri] equal.If it is impossible, 
+/// the answer for that query is - 1.
+/// 
+/// Return an array ans, where ans[i] is the answer for the ith query.
+///
+/// Example 1:
+/// Input: nums = [1, 4, 7], k = 3, queries = [[0, 1], [0, 2]]
+/// Output : [1, 2]
+/// Explanation :
+/// One optimal set of operations :
+/// i[li, ri]	nums[li..ri]	Possibility	Operations	Final
+/// nums[li..ri]	ans[i]
+/// 0. [0, 1][1, 4]	Yes	nums[0] + k = 1 + 3 = 4 = nums[1][4, 4]	1
+/// 1. [0, 2][1, 4, 7]	Yes	nums[0] + k = 1 + 3 = 4 = nums[1]
+/// nums[2] - k = 7 - 3 = 4 = nums[1][4, 4, 4]	2
+/// Thus, ans = [1, 2].
+///
+/// Example 2:
+/// Input: nums = [1, 2, 4], k = 2, queries = [[0, 2], [0, 0], [1, 2]]
+/// Output : [-1, 0, 1]
+/// Explanation :
+/// One optimal set of operations :
+/// i[li, ri]	nums[li..ri]	Possibility	Operations	Final
+/// nums[li..ri]	ans[i]
+/// 0[0, 2][1, 2, 4]	No - [1, 2, 4] - 1
+/// 1[0, 0][1]	Yes	Already equal[1]	0
+/// 2[1, 2][2, 4]	Yes	nums[1] + k = 2 + 2 = 4 = nums[2][4, 4]	1
+/// Thus, ans = [-1, 0, 1].
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 4 × 10^4
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= k <= 10^9
+/// 4. 1 <= queries.length <= 4 × 10^4
+/// 5. queries[i] = [li, ri]
+/// 6. 0 <= li <= ri <= n - 1
+/// </summary>
+vector<long long> LeetCodeArray::minOperations(vector<int>& nums, int k, vector<vector<int>>& queries)
+{
+    int n = nums.size();
+    vector<int> rem(n);
+    vector<long long> sc(n);
+    for (int i = 0; i < n; i++) {
+        rem[i] = nums[i] % k;
+        sc[i] = nums[i] / (long long)k;
+    }
+
+    SegmentMinMaxTree rt(rem);
+    SegmentMergeSortedTree mt(sc);
+
+    vector<long long> uniq = sc;
+    sort(uniq.begin(), uniq.end());
+    uniq.erase(unique(uniq.begin(), uniq.end()), uniq.end());
+
+    vector<long long> res;
+    res.reserve(queries.size());
+
+    for (auto& q : queries) {
+        int L = q[0], R = q[1];
+        auto g = rt.getVal(1, 0, n - 1, L, R);
+        if (g.first != g.second) {
+            res.push_back(-1);
+            continue;
+        }
+
+        int len = R - L + 1, need = (len + 1) / 2;
+        long long tot = mt.sum(1, 0, n - 1, L, R);
+
+        int lo = 0, hi = uniq.size() - 1, best = hi;
+        while (lo <= hi) {
+            int mid = (lo + hi) / 2;
+            auto t = mt.le(1, 0, n - 1, L, R, uniq[mid]);
+            if (t.first >= need) {
+                best = mid;
+                hi = mid - 1;
+            }
+            else lo = mid + 1;
+        }
+
+        long long med = uniq[best];
+        auto le = mt.le(1, 0, n - 1, L, R, med);
+        long long cL = le.first, sL = le.second;
+        long long cR = len - cL, sR = tot - sL;
+
+        res.push_back(med * cL - sL + sR - med * cR);
+    }
+    return res;
+}
+
+
+/// <summary>
+/// Leet Code 3768. Minimum Inversion Count in Subarrays of Fixed Length
+/// 
+/// Hard
+///
+/// You are given an integer array nums of length n and an integer k.
+///
+/// An inversion is a pair of indices(i, j) from nums such that 
+/// i < j and nums[i] > nums[j].
+///
+/// The inversion count of a subarray is the number of inversions 
+/// within it.
+///
+/// Return the minimum inversion count among all subarrays of nums with 
+/// length k.
+///
+/// Example 1:
+/// Input: nums = [3, 1, 2, 5, 4], k = 3
+/// Output : 0
+/// Explanation :
+/// We consider all subarrays of length k = 3 (indices below are relative 
+/// to each subarray) :
+/// [3, 1, 2] has 2 inversions : (0, 1) and (0, 2).
+/// [1, 2, 5] has 0 inversions.
+/// [2, 5, 4] has 1 inversion : (1, 2).
+/// The minimum inversion count among all subarrays of length 3 is 0, 
+/// achieved by subarray[1, 2, 5].
+///
+/// Example 2 :
+/// Input : nums = [5, 3, 2, 1], k = 4
+/// Output : 6
+/// Explanation :
+/// There is only one subarray of length k = 4 : [5, 3, 2, 1] .
+/// Within this subarray, the inversions are : (0, 1), (0, 2), (0, 3), 
+/// (1, 2), (1, 3), and (2, 3).
+/// Total inversions is 6, so the minimum inversion count is 6.
+///
+/// Example 3 :
+/// Input : nums = [2, 1], k = 1
+/// Output : 0
+/// Explanation :
+/// All subarrays of length k = 1 contain only one element, so no 
+/// inversions are possible.
+/// The minimum inversion count is therefore 0.
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= k <= n
+/// </summary>
+long long LeetCodeArray::minInversionCount(vector<int>& nums, int k)
+{
+    int n = nums.size();
+    map<int, int>sorted_num;
+    for (auto n : nums) sorted_num[n] = 0;
+    int index = 0;
+    for (auto itr : sorted_num)
+    {
+        index++;
+        sorted_num[itr.first] = index;
+    }
+    int max_index = index;
+    BinaryIndexTree tree(index);
+    long long result = LLONG_MAX;
+    long long inversionCount = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (i >= k)
+        {
+            inversionCount -= tree.sum(sorted_num[nums[i - k]] - 1);
+            tree.add(sorted_num[nums[i - k]], -1);
+        }
+        inversionCount += tree.sum(max_index) - tree.sum(sorted_num[nums[i]]);
+        tree.add(sorted_num[nums[i]], 1);
+        if (i >= k - 1)
+        {
+            result = min(result, inversionCount);
+        }
+    }
+    return result;
+}
+
 #pragma endregion

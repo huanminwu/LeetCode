@@ -31248,4 +31248,212 @@ long long LeetCodeString::evaluateExpression(string expression)
     }
     return nums[0];
 }
+
+/// <summary>
+/// Leet Code 3758. Convert Number Words to Digits
+///
+/// Medium
+/// 
+/// You are given a string s consisting of lowercase English letters.s may 
+/// contain valid concatenated English words representing the digits 0 
+/// to 9, without spaces.
+///
+/// Your task is to extract each valid number word in order and convert 
+/// it to its corresponding digit, producing a string of digits.
+///
+/// Parse s from left to right.At each position :
+/// If a valid number word starts at the current position, append its 
+/// corresponding digit to the result and advance by the length of that 
+/// word.
+/// 
+/// Otherwise, skip exactly one character and continue parsing.
+/// Return the resulting digit string.If no number words are found, return 
+/// an empty string.
+///
+/// Example 1:
+/// Input: s = "onefourthree"
+/// Output : "143"
+/// Explanation :
+/// Parsing from left to right, extract the valid number words "one", 
+/// "four", "three".
+/// 
+/// These map to digits 1, 4, 3. Thus, the final result is "143".
+/// 
+/// Example 2 :
+/// Input : s = "ninexsix"
+/// Output : "96"
+/// Explanation :
+/// The substring "nine" is a valid number word and maps to 9.
+/// The character "x" does not match any valid number word prefix and is 
+/// skipped.
+/// Then, the substring "six" is a valid number word and maps to 6, so 
+/// the final result is "96".
+/// 
+/// Example 3 :
+/// Input : s = "zeero"
+/// Output : ""
+/// Explanation :
+/// No substring forms a valid number word during left - to - right 
+/// parsing.
+/// All characters are skipped and incomplete fragments are ignored, 
+/// so the result is an empty string.
+/// 
+/// Example 4 :
+/// Input : s = "tw"
+/// Output : ""
+/// Explanation :
+/// No substring forms a valid number word during left - to - right 
+/// parsing.
+/// All characters are skipped and incomplete fragments are ignored, 
+/// so the result is an empty string.
+///
+/// Constraints :
+/// 1. 1 <= s.length <= 10^5
+/// 2. s contains only lowercase English letters.
+/// </summary>
+string LeetCodeString::convertNumber(string s)
+{
+    unordered_map<string, int> digits =
+    {
+        {"zero", 0}, {"one", 1}, {"two", 2}, {"three", 3},
+        {"four", 4}, {"five", 5}, {"six", 6}, {"seven", 7},
+        {"eight", 8}, {"nine", 9}
+    };
+    int pos = 0;
+    string result;
+    while (pos < (int)s.size())
+    {
+        int inc = 1;
+        for (int i = 3; i <= 5; i++)
+        {
+            string str = s.substr(pos, i);
+            if (digits.count(str) > 0)
+            {
+                inc = i;
+                result.push_back(digits[str] + '0');
+                break;
+            }
+        }
+        pos += inc;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3760. Maximum Substrings With Distinct Start
+///
+/// Medium
+/// 
+/// You are given a string s consisting of lowercase English letters.
+///
+/// Return an integer denoting the maximum number of substrings you 
+/// can split s into such that each substring starts with a distinct 
+/// character(i.e., no two substrings start with the same character).
+///
+/// Example 1:
+/// Input: s = "abab"
+/// Output : 2
+/// Explanation :
+/// Split "abab" into "a" and "bab".
+/// Each substring starts with a distinct character i.e 'a' and 'b'.
+/// Thus, the answer is 2.
+/// 
+/// Example 2 :
+///
+/// Input : s = "abcd"
+/// Output : 4 
+/// Explanation :
+/// Split "abcd" into "a", "b", "c", and "d".
+/// Each substring starts with a distinct character.Thus, the answer is 4.
+///
+/// Example 3 :
+/// Input : s = "aaaa"
+/// Output : 1
+/// Explanation :
+/// All characters in "aaaa" are 'a'.
+/// Only one substring can start with 'a'.Thus, the answer is 1.
+///
+/// Constraints :
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists of lowercase English letters.
+/// </summary>
+int LeetCodeString::maxDistinct(string s)
+{
+    vector<int> char_map(26);
+    int result = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (char_map[s[i] - 'a'] == 0)
+        {
+            char_map[s[i] - 'a'] = 1;
+            result++;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3773. Maximum Number of Equal Length Runs
+///
+/// Medium
+/// 
+/// You are given a string s consisting of lowercase English letters.
+/// 
+/// A run in s is a substring of equal letters that cannot be extended 
+/// further.For example, the runs in "hello" are "h", "e", "ll", and "o".
+/// 
+/// You can select runs that have the same length in s.
+/// 
+/// Return an integer denoting the maximum number of runs you can 
+/// select in s.
+/// 
+/// Example 1:
+/// Input: s = "hello"
+/// Output : 3
+/// Explanation :
+/// The runs in s are "h", "e", "ll", and "o".You can select "h", "e", 
+/// and "o" because they have the same length 1.
+///
+/// Example 2 :
+/// Input : s = "aaabaaa"
+/// Output : 2
+/// Explanation :
+/// The runs in s are "aaa", "b", and "aaa".You can select "aaa" and 
+/// "aaa" because they have the same length 3.
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists of lowercase English letters only.
+/// </summary>
+int LeetCodeString::maxSameLengthRuns(string s)
+{
+    int count = 0;
+    vector<int> run_count(s.size() + 1);
+    for (size_t i = 0; i <= s.size(); i++)
+    {
+        if (i == 0) count = 1;
+        else if (i == s.size())
+        {
+            run_count[count]++;
+        }
+        else
+        {
+            if (s[i] == s[i - 1])
+            {
+                count++;
+            }
+            else
+            {
+                run_count[count]++;
+                count = 1;
+            }
+        }
+    }
+    int result = 0;
+    for (auto n : run_count)
+    {
+        result = max(result, n);
+    }
+    return result;
+}
 #pragma endregion

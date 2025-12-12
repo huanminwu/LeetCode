@@ -4618,8 +4618,41 @@ void TestLeetCode3593(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3772(void)
+{
+    Logger::WriteMessage("Test Leet Code 3772");
+    LeetCodeTree leetCode;
+    int n = 3;
+    vector<vector<int>> edges = { {0, 1},{1, 2} };
+    vector<int> good = { 1, 0, 1 };
+    vector<int> result = leetCode.maxSubgraphScore(n, edges, good);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(good);
+    Logger::WriteMessage(result);
+
+    n = 5;
+    edges = { {1, 0},{1, 2},{1, 3},{3, 4} };
+    good = { 0, 1, 0, 1, 1 };
+    result = leetCode.maxSubgraphScore(n, edges, good);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(good);
+    Logger::WriteMessage(result);
+
+    n = 2; 
+    edges = { {0, 1} };
+    good = { 0, 0 };
+    result = leetCode.maxSubgraphScore(n, edges, good);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(good);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3772();
     TestLeetCode3593();
     TestLeetCode3585();
     TestLeetCode3575();

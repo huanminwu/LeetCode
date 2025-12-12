@@ -177,5 +177,9 @@ void TestLeetCode3711(void);
 void TestLeetCode3727(void);
 void TestLeetCode3730(void);
 void TestLeetCode3745(void);
+void TestLeetCode3763(void);
+void TestLeetCode3759(void);
+void TestLeetCode3767(void);
+void TestLeetCode3771(void);
 void TestLeetCodeSort(void);
 #endif  // TestTree

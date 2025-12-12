@@ -1731,8 +1731,87 @@ void TestLeetCode3688(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3750(void)
+{
+    Logger::WriteMessage("Test Leet Code 3750");
+    LeetCodeBit leetCode;
+    int n = 7;
+    int result = leetCode.minimumFlips(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 10;
+    result = leetCode.minimumFlips(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3769(void)
+{
+    Logger::WriteMessage("Test Leet Code 3769");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 4, 5, 4 };
+    vector<int> result = leetCode.sortByReflection(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 3,6,5,8 };
+    result = leetCode.sortByReflection(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3766(void)
+{
+    Logger::WriteMessage("Test Leet Code 3766");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1, 2, 4 };
+    vector<int> result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 6,7,12 };
+    result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 3521 };
+    result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 3521 };
+    result = leetCode.minOperations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3757(void)
+{
+    Logger::WriteMessage("Test Leet Code 3757");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1,2,3, 3 };
+    int result = leetCode.countEffective(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7,4,6 };
+    result = leetCode.countEffective(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 8, 8 };
+    result = leetCode.countEffective(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3757();
+    TestLeetCode3766();
+    TestLeetCode3769();
+    TestLeetCode3750();
     TestLeetCode3688();
     TestLeetCode3681();
     TestLeetCode3670();

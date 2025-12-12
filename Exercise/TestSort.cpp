@@ -4696,8 +4696,120 @@ void TestLeetCode3745(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3763(void)
+{
+    Logger::WriteMessage("Test Leet Code 3763");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 10, 4, 2, 1, 6 };
+    vector<int> threshold = { 5, 1, 5, 5, 2, 2 };
+    long long result = leetCode.maxSum(nums, threshold);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(threshold);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,1,5,2,3 };
+    threshold = { 3,3,2,3,3 };
+    result = leetCode.maxSum(nums, threshold);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(threshold);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    
+    nums = { 2, 6, 10, 13 };
+    threshold = { 2,1,1,1 };
+    result = leetCode.maxSum(nums, threshold);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(threshold);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3759(void)
+{
+    Logger::WriteMessage("Test Leet Code 3759");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 3, 1, 2 };
+    int k = 1;
+    int result = leetCode.countElements(nums,k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,5,5 };
+    k = 2;
+    result = leetCode.countElements(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,2,2,3,3,4,4 };
+    k = 3;
+    result = leetCode.countElements(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3767(void)
+{
+    Logger::WriteMessage("Test Leet Code 3767");
+    LeetCodeSort leetCode;
+    vector<int> technique1 = { 5, 2, 10 };
+    vector<int> technique2 = { 10, 3, 8 };
+    int k = 2;
+    long long result = leetCode.maxPoints(technique1, technique2, k);
+    Logger::WriteMessage(technique1);
+    Logger::WriteMessage(technique2);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    technique1 = { 10,20,30 };
+    technique2 = { 5,15,25 };
+    k = 2;
+    result = leetCode.maxPoints(technique1, technique2, k);
+    Logger::WriteMessage(technique1);
+    Logger::WriteMessage(technique2);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    technique1 = { 1,2,3 };
+    technique2 = { 4,5,6 };
+    k = 0;
+    result = leetCode.maxPoints(technique1, technique2, k);
+    Logger::WriteMessage(technique1);
+    Logger::WriteMessage(technique2);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3771(void)
+{
+    Logger::WriteMessage("Test Leet Code 3771");
+    LeetCodeSort leetCode;
+    int hp = 11;
+    vector<int> damage = { 3, 6, 7 };
+    vector<int> requirement = { 4, 2, 5 };
+    long long result = leetCode.totalScore(hp, damage, requirement);
+    Logger::WriteMessage(damage);
+    Logger::WriteMessage(requirement);
+    Logger::WriteMessage("hp = " + to_string(hp));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    hp = 2;
+    damage = { 10000, 1 };
+    requirement = { 1, 1 };
+    result = leetCode.totalScore(hp, damage, requirement);
+    Logger::WriteMessage(damage);
+    Logger::WriteMessage(requirement);
+    Logger::WriteMessage("hp = " + to_string(hp));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3771();
+    TestLeetCode3767();
+    TestLeetCode3759();
+    TestLeetCode3763();
     TestLeetCode3745();
     TestLeetCode3730();
     TestLeetCode3727();

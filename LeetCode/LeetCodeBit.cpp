@@ -5722,4 +5722,367 @@ int LeetCodeBit::longestSubsequence(vector<int>& nums)
     return result;
 }
 
+/// <summary>
+/// Leet Code 3750. Minimum Number of Flips to Reverse Binary String
+///
+/// Easy
+/// 
+/// You are given a positive integer n.
+///
+/// Let s be the binary representation of n without leading zeros.
+///
+/// The reverse of a binary string s is obtained by writing the characters 
+/// of s in the opposite order.
+///
+/// You may flip any bit in s(change 0 -> 1 or 1 -> 0).Each flip affects 
+/// exactly one bit.
+///
+/// Return the minimum number of flips required to make s equal to the 
+/// reverse of its original form.
+///
+/// Example 1:
+/// Input: n = 7
+/// Output : 0
+/// Explanation :
+/// The binary representation of 7 is "111".Its reverse is also "111", 
+/// which is the same.Hence, no flips are needed.
+///
+/// Example 2 :
+/// Input : n = 10
+/// Output : 4
+/// Explanation :
+/// The binary representation of 10 is "1010".Its reverse is "0101".
+/// All four bits must be flipped to make them equal.Thus, the minimum 
+/// number of flips required is 4.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^9
+/// </summary>
+int LeetCodeBit::minimumFlips(int n)
+{
+    string str;
+    while (n > 0)
+    {
+        if (n % 2 == 0) str.push_back('0');
+        else str.push_back('1');
+        
+        n /= 2;
+    }
+    int first = 0, last = str.size() - 1;
+    int result = 0;
+    while (first < last)
+    {
+        if (str[first] != str[last])
+        {
+            result += 2;
+        }
+        first++;
+        last--;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3769. Sort Integers by Binary Reflection
+///
+/// Easy
+/// 
+/// You are given an integer array nums.
+/// The binary reflection of a positive integer is defined as the number 
+/// obtained by reversing the order of its binary digits(ignoring any 
+/// leading zeros) and interpreting the resulting binary number as a 
+/// decimal.
+///
+/// Sort the array in ascending order based on the binary reflection of 
+/// each element.If two different numbers have the same binary reflection, 
+/// the smaller original number should appear first.
+///
+/// Return the resulting sorted array.
+///
+/// Example 1:
+/// Input: nums = [4, 5, 4]
+/// Output : [4, 4, 5]
+/// Explanation :
+/// Binary reflections are :
+/// 4 -> (binary)100 -> (reversed)001 -> 1
+/// 5 -> (binary)101 -> (reversed)101 -> 5
+/// 4 -> (binary)100 -> (reversed)001 -> 1
+/// Sorting by the reflected values gives[4, 4, 5].
+/// 
+/// Example 2:
+/// Input: nums = [3, 6, 5, 8]
+/// Output : [8, 3, 6, 5]
+/// Explanation :
+/// Binary reflections are :
+/// 3 -> (binary)11 -> (reversed)11 -> 3
+/// 6 -> (binary)110 -> (reversed)011 -> 3
+/// 5 -> (binary)101 -> (reversed)101 -> 5
+/// 8 -> (binary)1000 -> (reversed)0001 -> 1
+/// Sorting by the reflected values gives[8, 3, 6, 5].
+/// Note that 3 and 6 have the same reflection, so we arrange them in 
+/// increasing order of original value.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+vector<int> LeetCodeBit::sortByReflection(vector<int>& nums)
+{
+    vector<pair<int, int>> arr;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int n = nums[i];
+        string str;
+        while (n > 0)
+        {
+            if (n % 2 == 0) str.push_back('0');
+            else str.push_back('1');
+            n /= 2;
+        }
+        n = 0;
+        for (size_t j = 0; j < str.size(); j++)
+        {
+            if (str[j] == '0') n = n * 2 + 0;
+            else n = n * 2 + 1;
+        }
+        arr.push_back(make_pair(n, nums[i]));
+    }
+    sort(arr.begin(), arr.end());
+    vector<int> result;
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        result.push_back(arr[i].second);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3766. Minimum Operations to Make Binary Palindrome
+///
+/// Medium
+///
+/// You are given an integer array nums.
+///
+/// For each element nums[i], you may perform the following operations 
+/// any number of times(including zero) :
+///
+/// Increase nums[i] by 1, or
+/// Decrease nums[i] by 1.
+/// A number is called a binary palindrome if its binary representation 
+/// without leading zeros reads the same forward and backward.
+///
+/// Your task is to return an integer array ans, where ans[i] represents 
+/// the minimum number of operations required to convert nums[i] into 
+/// a binary palindrome.
+/// 
+/// Example 1:
+/// Input: nums = [1, 2, 4]
+/// Output : [0, 1, 1]
+/// Explanation :
+/// One optimal set of operations :
+/// nums[i]->Binary(nums[i])->Nearest
+/// Palindrome Binary
+/// (Palindrome) Operations Required ans[i]
+/// 1->1-> 1->1 Already palindrome 0
+/// 2->10->3->11->Increase by 1->1
+/// 4->100->3->11->Decrease by 1->1
+/// Thus, ans = [0, 1, 1].
+///
+/// Example 2:
+/// Input: nums = [6, 7, 12]
+/// Output : [1, 0, 3]
+/// Explanation :
+/// One optimal set of operations :
+/// nums[i]->Binary(nums[i])->Nearest
+/// Palindrome->Binary
+/// (Palindrome)->Operations Required->ans[i]
+/// 6->110->5->101->Decrease by 1->1
+/// 7->111->7->111->Already palindrome->0
+/// 12->1100->15->1111->Increase by 3->3
+/// Thus, ans = [1, 0, 3].
+///
+/// Constraints:
+/// 
+/// 1. 1 <= nums.length <= 5000
+/// 2. 1 <= nums[i] <= 5000
+/// </summary>
+vector<int> LeetCodeBit::minOperations(vector<int>& nums)
+{
+    vector<int> result;
+    vector<int> palindrome;
+    for (int i = 1; i <= 5000; i++)
+    {
+        string str_num;
+        int n = i;
+        while (n > 0)
+        {
+            if (n % 2 == 0) str_num.push_back('0');
+            else str_num.push_back('1');
+            n /= 2;
+        }
+        bool bOK = true;
+        int left = 0, right = str_num.size() - 1;
+        while (left < right)
+        {
+            if (str_num[left] != str_num[right])
+            {
+                bOK = false;
+                break;
+            }
+            left++;
+            right--;
+        }
+        if (bOK) palindrome.push_back(i);
+    }
+    int n = palindrome.size();
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int index = lower_bound(palindrome.begin(), palindrome.end(), nums[i]) - palindrome.begin();
+        if (index == n)
+        {
+            result.push_back(abs(palindrome[n - 1] - nums[i]));
+        }
+        else if (index == 0)
+        {
+            result.push_back(0);
+        }
+        else
+        {
+            result.push_back(min(abs(palindrome[index - 1] - nums[i]), abs(palindrome[index] - nums[i])));
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3757. Number of Effective Subsequences
+///
+/// Hard
+///
+/// You are given an integer array nums.
+///
+/// The strength of the array is defined as the bitwise OR of all its 
+/// elements.
+///
+/// A subsequence is considered effective if removing that subsequence 
+/// strictly decreases the strength of the remaining elements.
+///
+/// Return the number of effective subsequences in nums.Since the answer 
+/// may be large, return it modulo 10^9 + 7.
+///
+/// The bitwise OR of an empty array is 0.
+/// 
+/// Example 1:
+/// Input: nums = [1, 2, 3]
+/// Output : 3
+/// Explanation :
+/// The Bitwise OR of the array is 1 OR 2 OR 3 = 3.
+/// Subsequences that are effective are :
+/// [1, 3] : The remaining element[2] has a Bitwise OR of 2.
+/// [2, 3] : The remaining element[1] has a Bitwise OR of 1.
+/// [1, 2, 3] : The remaining elements[] have a Bitwise OR of 0.
+/// Thus, the total number of effective subsequences is 3.
+///
+/// Example 2 :
+/// Input : nums = [7, 4, 6]
+/// Output : 4
+/// Explanation : ​​​​​​​
+/// The Bitwise OR of the array is 7 OR 4 OR 6 = 7.
+/// Subsequences that are effective are :
+/// [7] : The remaining elements[4, 6] have a Bitwise OR of 6.
+/// [7, 4] : The remaining element[6] has a Bitwise OR of 6.
+/// [7, 6] : The remaining element[4] has a Bitwise OR of 4.
+/// [7, 4, 6] : The remaining elements[] have a Bitwise OR of 0.
+/// Thus, the total number of effective subsequences is 4.
+///
+/// Example 3 :
+/// Input : nums = [8, 8]
+/// Output : 1
+/// Explanation :
+/// The Bitwise OR of the array is 8 OR 8 = 8.
+/// Only the subsequence[8, 8] is effective since removing it leaves[] 
+/// which has a Bitwise OR of 0.
+/// Thus, the total number of effective subsequences is 1.
+///
+/// Example 4 :
+/// Input : nums = [2, 2, 1]
+/// Output : 5
+/// Explanation :
+/// The Bitwise OR of the array is 2 OR 2 OR 1 = 3.
+/// Subsequences that are effective are :
+/// [1] : The remaining elements[2, 2] have a Bitwise OR of 2.
+/// [2, 1](using nums[0], nums[2]) : The remaining element[2] has a 
+/// Bitwise OR of 2.
+/// [2, 1](using nums[1], nums[2]) : The remaining element[2] has a 
+/// Bitwise OR of 2.
+/// [2, 2] : The remaining element[1] has a Bitwise OR of 1.
+/// [2, 2, 1] : The remaining elements[] have a Bitwise OR of 0.
+/// Thus, the total number of effective subsequences is 5.
+///
+/// Constraints :
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^6
+/// </summary>
+int LeetCodeBit::countEffective(vector<int>& nums)
+{
+    const int M = 1000000007;
+    int n = nums.size();
+
+    // 1. Compute OR of all numbers
+    int fullOr = 0;
+    for (int x : nums) fullOr |= x;
+    if (fullOr == 0) return 0;
+
+    // 2. Number of bits needed
+    int totalMasks = 1;
+    while (totalMasks <= fullOr) totalMasks <<= 1;
+
+    // 3. dp[mask] = number of array elements exactly equal to mask
+    vector<int> dp(totalMasks, 0);
+    for (int x : nums) dp[x]++;
+
+
+    for (int bit = 1; bit < totalMasks; bit <<= 1)
+    {
+        for (int mask = 0; mask < totalMasks; mask++)
+        {
+            if (mask & bit)
+            {
+                dp[mask] += dp[mask ^ bit];
+            }
+        }
+    }
+ 
+    // 5. Precompute powers of 2
+    vector<int> pow2(n + 1, 1);
+    for (int i = 1; i <= n; i++)
+        pow2[i] = (pow2[i - 1] * 2LL) % M;
+
+    // 6. dp[mask]
+    for (int mask = 0; mask < totalMasks; mask++)
+    { 
+        dp[mask] = (modPow(2, dp[mask], M) - 1 + M) % M;
+    }
+
+
+    for (int bit = 1; bit < totalMasks; bit <<= 1)
+    {
+        for (int mask = 0; mask < totalMasks; mask++)
+        {
+            if (mask & bit)
+            {
+                dp[mask] = (dp[mask] - dp[mask ^ bit] + M) % M;
+            }
+        }
+    }
+ 
+
+    long long result = 1;
+    for (int mask = 0; mask < fullOr; mask++)
+    {
+        result = (result + dp[mask]) % M;
+    }
+
+    return (int)result;
+}
 #pragma endregion

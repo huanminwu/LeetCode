@@ -100,5 +100,6 @@ void TestLeetCode3669(void);
 void TestLeetCode3680(void);
 void TestLeetCode3690(void);
 void TestLeetCode3747(void);
+void TestLeetCode3753(void);
 void TestLeetCodeDFS(void);
 #endif  // TestTree
