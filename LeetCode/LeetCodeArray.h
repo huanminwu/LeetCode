@@ -138,7 +138,7 @@ public:
     /// Example:
     /// Given input array nums = [3,2,2,3], val = 3 
     /// Your function should return length = 2, with the first two elements 
-    /// of nums being 2.	
+    /// of nums being 2. 
     /// </summary> 
     int removeArrayElement(vector<int>& nums, int val);
 
@@ -231,7 +231,7 @@ public:
     /// Explanation: Flip the first zero will get the the maximum number of 
     /// consecutive 1s.
     /// After flipping, the maximum number of consecutive 1s is 4.
-    ///	Note:
+    /// Note:
     /// The input array will only contain 0 and 1.
     /// The length of input array is a positive integer and will not exceed 10,000
     /// Follow up:
@@ -2134,7 +2134,7 @@ public:
     /// Leet code # 531. Lonely Pixel I
     ///
     /// Given a picture consisting of black and white pixels,
-    ///	find the number of black lonely pixels.
+    /// find the number of black lonely pixels.
     ///
     /// The picture is represented by a 2D char array consisting
     /// of 'B' and 'W', which means black and white pixels respectively.
@@ -2198,7 +2198,7 @@ public:
     /// row 2. They are exactly the same as row R = 0.
     ///
     /// Note:
-    /// The range of width and height of the input 2D array is [1,200].	
+    /// The range of width and height of the input 2D array is [1,200]. 
     /// </summary>
     int findLonelyPixel(vector<vector<char>>& picture, int N);
 
@@ -2274,7 +2274,7 @@ public:
     /// live (1) or dead (0). 
     /// Each cell interacts with its eight neighbors (horizontal, vertical, 
     /// diagonal) using the 
-    /// following four rules (taken from the above Wikipedia article): 	
+    /// following four rules (taken from the above Wikipedia article):  
     /// 1.Any live cell with fewer than two live neighbors dies, as if caused 
     ///   by under-population.
     /// 2.Any live cell with two or three live neighbors lives on to the next 
@@ -2981,7 +2981,7 @@ public:
     /// <summary>
     /// Leetcode #1299. Replace Elements with Greatest Element on Right Side
     ///
-    /// Easy	
+    /// Easy 
     ///
     /// Given an array arr, replace every element in that array with the 
     /// greatest element among the elements to its right, and replace the 
@@ -3503,7 +3503,7 @@ public:
     /// After filter restaurants with veganFriendly = 1, maxPrice = 50 and 
     /// maxDistance = 10 we have restaurant 3, restaurant 1 and restaurant 5 
     /// (ordered by rating from highest to lowest).
-    ///	
+    /// 
     /// Example 2:
     /// Input: restaurants = [[1,4,1,40,10],[2,8,0,50,5],[3,8,1,30,4],
     /// [4,10,0,10,3],[5,1,1,15,1]], veganFriendly = 0, maxPrice = 50, 
@@ -6056,7 +6056,7 @@ public:
     /// 1. 1 <= n <= 500
     /// 2. nums.length == 2n
     /// 3. 1 <= nums[i] <= 10^3
-    /// </summary>	
+    /// </summary> 
     vector<int> shuffle(vector<int>& nums, int n);
 
     /// <summary>
@@ -6484,7 +6484,7 @@ public:
     /// Leet code #1508. Range Sum of Sorted Subarray Sums
     ///
     /// Medium
-    ///	
+    /// 
     /// Given the array nums consisting of n positive integers. You computed 
     /// the sum of all non-empty continous subarrays from the array and then 
     /// sort them in non-decreasing order, creating a new array of 
@@ -6524,7 +6524,7 @@ public:
     /// Leet code #1513. Number of Substrings With Only 1s
     ///
     /// Medium
-    ///	
+    /// 
     /// Given a binary string s (a string consisting only of '0' and '1's).
     ///
     /// Return the number of substrings with all characters 1's.
@@ -14917,7 +14917,7 @@ public:
     /// Leet Code 2459. Sort Array by Moving Items to Empty Space
     /// 
     /// Hard
-    ///	
+    /// 
     /// You are given an integer array nums of size n containing each element 
     /// from 0 to n - 1 (inclusive). Each of the elements from 1 to n - 1 
     /// represents an item, and the element 0 represents an empty space.
@@ -14969,7 +14969,7 @@ public:
     /// Leet Code 2475. Number of Unequal Triplets in Array
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a 0-indexed array of positive integers nums. Find the 
     /// number of triplets (i, j, k) that meet the following conditions:
     ///
@@ -15006,7 +15006,7 @@ public:
     /// Leet Code 2465. Number of Distinct Averages
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a 0-indexed integer array nums of even length.
     ///
     /// As long as nums is not empty, you must repetitively:
@@ -15053,7 +15053,7 @@ public:
     /// Leet Code 2482. Difference Between Ones and Zeros in Row and Column
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a 0-indexed m x n binary matrix grid.
     ///
     /// A 0-indexed m x n difference matrix diff is created with the following 
@@ -15120,7 +15120,7 @@ public:
     /// Leet Code 2483. Minimum Penalty for a Shop
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given the customer visit log of a shop represented by a 
     /// 0-indexed string customers consisting only of characters 'N' and 'Y':
     ///
@@ -15176,7 +15176,7 @@ public:
     /// Leet Code 2500. Delete Greatest Value in Each Row
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given an m x n matrix grid consisting of positive integers.
     ///
     /// Perform the following operation until grid becomes empty:
@@ -15221,7 +15221,7 @@ public:
     /// Leet Code 2470. Number of Subarrays With LCM Equal to K
     /// 
     /// Medium
-    ///	
+    /// 
     /// Given an integer array nums and an integer k, return the number of 
     /// subarrays of nums where the least common multiple of the subarray's 
     /// elements is k.
@@ -15259,7 +15259,7 @@ public:
     /// Leet Code 2489. Number of Substrings With Fixed Ratio
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a binary string s, and two integers num1 and num2. num1 
     /// and num2 are coprime numbers.
     ///
@@ -15306,7 +15306,7 @@ public:
     /// Leet Code 2498. Frog Jump II
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a 0-indexed integer array stones sorted in strictly 
     /// increasing order representing the positions of stones in a river.
     ///
@@ -15355,7 +15355,7 @@ public:
     /// Leet Code 2488. Count Subarrays With Median K
     /// 
     /// Hard
-    ///	
+    /// 
     /// You are given an array nums of size n consisting of distinct integers 
     /// from 1 to n and a positive integer k.
     ///
@@ -15393,7 +15393,7 @@ public:
     /// Leet Code 2499. Minimum Total Cost to Make Arrays Unequal
     /// 
     /// Hard
-    ///	
+    /// 
     /// You are given two 0-indexed integer arrays nums1 and nums2, of equal 
     /// length n.
     ///
@@ -15453,7 +15453,7 @@ public:
     /// Leet Code 2511. Maximum Enemy Forts That Can Be Captured
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a 0-indexed integer array forts of length n representing 
     /// the positions of several forts. forts[i] can be -1, 0, or 1 where:
     ///
@@ -15499,7 +15499,7 @@ public:
     /// Leet Code 2515. Shortest Distance to Target String in a Circular Array
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a 0-indexed circular string array words and a string 
     /// target. A circular array means that the array's end connects to the 
     /// array's beginning.
@@ -15585,7 +15585,7 @@ public:
     ///                 an Array
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a positive integer array nums.
     ///
     /// The element sum is the sum of all the elements in nums.
@@ -15625,7 +15625,7 @@ public:
     /// Leet Code 2536. Increment Submatrices by One
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a positive integer n, indicating that we initially have 
     /// an n x n 0-indexed integer matrix mat filled with zeroes.
     ///
@@ -15668,7 +15668,7 @@ public:
     /// Leet Code 2540. Minimum Common Value
     /// 
     /// Easy
-    ///	
+    /// 
     /// Given two integer arrays nums1 and nums2, sorted in non-decreasing 
     /// order, return the minimum integer common to both arrays. If there 
     /// is no common integer amongst nums1 and nums2, return -1.
@@ -15699,7 +15699,7 @@ public:
     /// Leet Code 2545. Sort the Students by Their Kth Score
     /// 
     /// Medium
-    ///	
+    /// 
     /// There is a class with m students and n exams. You are given a 
     /// 0-indexed m x n integer matrix score, where each row represents one 
     /// student and score[i][j] denotes the score the ith student got in the 
@@ -15747,7 +15747,7 @@ public:
     /// Leet Code 2541. Minimum Operations to Make Array Equal II
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given two integer arrays nums1 and nums2 of equal length n and 
     /// an integer k. You can perform the following operation on nums1:
     ///
@@ -15789,7 +15789,7 @@ public:
     /// Leet Code 2552. Count Increasing Quadruplets
     /// 
     /// Hard
-    ///	
+    /// 
     /// Given a 0-indexed integer array nums of size n containing all numbers 
     /// from 1 to n, return the number of increasing quadruplets.
     ///
@@ -15825,7 +15825,7 @@ public:
     /// Leet Code 2559. Count Vowel Strings in Ranges
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a 0-indexed array of strings words and a 2D array of 
     /// integers queries.
     ///
@@ -15868,7 +15868,7 @@ public:
     /// Leet Code 2562. Find the Array Concatenation Value
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a 0-indexed integer array nums.
     ///
     /// The concatenation of two numbers is the number formed by concatenating 
@@ -15935,7 +15935,7 @@ public:
     /// Leet Code 2570. Merge Two 2D Arrays by Summing Values
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given two 2D integer arrays nums1 and nums2.
     ///
     /// nums1[i] = [idi, vali] indicate that the number with the id idi 
@@ -15984,7 +15984,7 @@ public:
     /// Leet Code 2573. Find the String with LCP
     /// 
     /// Hard
-    ///	
+    /// 
     /// We define the lcp matrix of any 0-indexed string word of n lowercase 
     /// English letters as an n x n grid such that:
     ///
@@ -16029,7 +16029,7 @@ public:
     /// Leet Code 2574. Left and Right Sum Differences
     /// 
     /// Easy
-    ///	
+    /// 
     /// Given a 0-indexed integer array nums, find a 0-indexed integer 
     /// array answer where:
     ///
@@ -16067,7 +16067,7 @@ public:
     /// Leet Code 2587. Rearrange Array to Maximize Prefix Score
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a 0-indexed integer array nums. You can rearrange the 
     /// elements of nums to any order (including the given order).
     ///
@@ -16100,7 +16100,7 @@ public:
     /// Leet Code 2588. Count the Number of Beautiful Subarrays
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a 0-indexed integer array nums. In one operation, you 
     /// can:
     ///
@@ -16151,7 +16151,7 @@ public:
     /// Leet Code 2592. Maximize Greatness of an Array
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a 0-indexed integer array nums. You are allowed to 
     /// permute nums into a new array perm of your choosing.
     ///
@@ -16184,7 +16184,7 @@ public:
     /// Leet Code 2593. Find Score of an Array After Marking All Elements
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given an array nums consisting of positive integers.
     ///
     /// Starting with score = 0, apply the following algorithm:
@@ -16231,7 +16231,7 @@ public:
     /// Leet Code 2596. Check Knight Tour Configuration
     /// 
     /// Medium
-    ///	
+    /// 
     /// There is a knight on an n x n chessboard. In a valid configuration, 
     /// the knight starts at the top-left cell of the board and visits every 
     /// cell on the board exactly once.
@@ -16274,7 +16274,7 @@ public:
     /// Leet Code 2602. Minimum Operations to Make All Array Elements Equal
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given an array nums consisting of positive integers.
     ///
     /// You are also given an integer array queries of size m. For the ith 
@@ -16323,7 +16323,7 @@ public:
     /// Leet Code 2607. Make K-Subarray Sums Equal
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a 0-indexed integer array arr and an integer k. The 
     /// array arr is circular. In other words, the first element of the 
     /// array is the next element of the last element, and the last element 
@@ -16370,7 +16370,7 @@ public:
     /// Leet Code 2609. Find the Longest Balanced Substring of a Binary String
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a binary string s consisting only of zeroes and ones.
     /// A substring of s is considered balanced if all zeroes are before ones 
     /// and the number of zeroes is equal to the number of ones inside the 
@@ -16408,7 +16408,7 @@ public:
     /// Leet Code 2610. Convert an Array Into a 2D Array With Conditions
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given an integer array nums. You need to create a 2D array 
     /// from nums satisfying the following conditions:
     /// 
@@ -16453,7 +16453,7 @@ public:
     /// Leet Code 2612. Minimum Reverse Operations
     /// 
     /// Hard
-    ///	
+    /// 
     /// You are given an integer n and an integer p in the range [0, n - 1]. 
     /// Representing a 0-indexed array arr of length n where all positions 
     /// are set to 0's, except position p which is set to 1.
@@ -16522,7 +16522,7 @@ public:
     /// Leet Code 2615. Sum of Distances
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a 0-indexed integer array nums. There exists an array 
     /// arr of length nums.length, where arr[i] is the sum of |i - j| over 
     /// all j such that nums[j] == nums[i] and j != i. If there is no such j, 
@@ -16559,7 +16559,7 @@ public:
     /// Leet Code 2643. Row With Maximum Ones
     /// 
     /// Easy
-    ///	
+    /// 
     /// Given a m x n binary matrix mat, find the 0-indexed position of the 
     /// row that contains the maximum count of ones, and the number of ones 
     /// in that row.
@@ -16601,7 +16601,7 @@ public:
     /// Leet Code 2639. Find the Width of Columns of a Grid
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a 0-indexed m x n integer matrix grid. The width of a 
     /// column is the maximum length of its integers.
     ///
@@ -16638,7 +16638,7 @@ public:
     /// Leet Code 2640. Find the Score of All Prefixes of an Array
     /// 
     /// Medium
-    ///	
+    /// 
     /// We define the conversion array conver of an array arr as follows:
     ///
     /// conver[i] = arr[i] + max(arr[0..i]) where max(arr[0..i]) is the 
@@ -16689,7 +16689,7 @@ public:
     /// Leet Code 2660. Determine the Winner of a Bowling Game
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given two 0-indexed integer arrays player1 and player2, that 
     /// represent the number of pins that player 1 and player 2 hit in a 
     /// bowling game, respectively.
@@ -16745,7 +16745,7 @@ public:
     /// Leet Code 2661. First Completely Painted Row or Column
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a 0-indexed integer array arr, and an m x n integer 
     /// matrix mat. arr and mat both contain all the integers in the range 
     /// [1, m * n].
@@ -16785,7 +16785,7 @@ public:
     /// Leet Code 2684. Maximum Number of Moves in a Grid
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a 0-indexed m x n matrix grid consisting of positive 
     /// integers.
     ///
@@ -16828,7 +16828,7 @@ public:
     /// Leet Code 2681. Power of Heroes
     /// 
     /// Hard
-    ///	
+    /// 
     /// You are given a 0-indexed integer array nums representing the strength 
     /// of some heroes. The power of a group of heroes is defined as follows:
     ///
@@ -16866,7 +16866,7 @@ public:
     /// Leet Code 2711. Difference of Number of Distinct Values on Diagonals
     /// 
     /// Easy
-    ///	
+    /// 
     /// Given a 0-indexed 2D grid of size m x n, you should find the matrix 
     /// answer of size m x n.
     ///
@@ -17166,7 +17166,7 @@ public:
     int sumDistance(vector<int>& nums, string s, int d);
 
     /// <summary>
-    /// Leet Code 	2735. Collecting Chocolates
+    /// Leet Code  2735. Collecting Chocolates
     /// 
     /// Medium
     ///
@@ -20118,11 +20118,11 @@ public:
     /// return [-1, -1].
     ///
     /// Example 1:
-    /// 1	2	2
-    /// 2	2	3
-    /// 2	3	3
-    /// a	b
-    /// b	b
+    /// 1 2 2
+    /// 2 2 3
+    /// 2 3 3
+    /// a b
+    /// b b
     /// Input: board = [[1,2,2],[2,2,3],[2,3,3]], pattern = ["ab","bb"]
     ///
     /// Output: [0,0]
@@ -20135,11 +20135,11 @@ public:
     /// match but since it comes after the other one, we return [0,0].
     ///
     /// Example 2:
-    /// 1	1	2
-    /// 3	3	4
-    /// 6	6	6
-    /// a	b
-    /// 6	6
+    /// 1 1 2
+    /// 3 3 4
+    /// 6 6 6
+    /// a b
+    /// 6 6
     /// Input: board = [[1,1,2],[3,3,4],[6,6,6]], pattern = ["ab","66"]
     /// Output: [1,1]
     /// Explanation: If we consider this mapping: "a" -> 3 and "b" -> 4; 
@@ -20150,9 +20150,9 @@ public:
     /// match. Hence, we return [1,1].
     ///
     /// Example 3:
-    /// 1	2
-    /// 2	1
-    /// x	x
+    /// 1 2
+    /// 2 1
+    /// x x
     /// Input: board = [[1,2],[2,1]], pattern = ["xx"]
     ///
     /// Output: [-1,-1]
@@ -20492,9 +20492,9 @@ public:
     /// to each other.
     /// 
     /// Example 1:
-    /// 0	1	0
-    /// 0	1	1
-    /// 0	1	0
+    /// 0 1 0
+    /// 0 1 1
+    /// 0 1 0
     ///
     /// Input: grid = [[0,1,0],[0,1,1],[0,1,0]]
     /// Output: 2
@@ -20502,18 +20502,18 @@ public:
     /// There are two right triangles.
     ///
     /// Example 2:
-    /// 1	0	0	0
-    /// 0	1	0	1
-    /// 1	0	0	0
+    /// 1 0 0 0
+    /// 0 1 0 1
+    /// 1 0 0 0
     /// Input: grid = [[1,0,0,0],[0,1,0,1],[1,0,0,0]]
     /// Output: 0
     /// Explanation:
     /// There are no right triangles.
     ////
     /// Example 3:
-    /// 1	0	1
-    /// 1	0	0
-    /// 1	0	0
+    /// 1 0 1
+    /// 1 0 0
+    /// 1 0 0
     /// Input: grid = [[1,0,1],[1,0,0],[1,0,0]]
     /// Output: 2
     /// Explanation:
@@ -20889,23 +20889,23 @@ public:
     /// Input: n = 4, k = 5
     /// Output: 56
     /// Explanation:
-    /// Second	State After
-    /// 0	[1,1,1,1]
-    /// 1	[1,2,3,4]
-    /// 2	[1,3,6,10]
-    /// 3	[1,4,10,20]
-    /// 4	[1,5,15,35]
-    /// 5	[1,6,21,56]
+    /// Second State After
+    /// 0 [1,1,1,1]
+    /// 1 [1,2,3,4]
+    /// 2 [1,3,6,10]
+    /// 3 [1,4,10,20]
+    /// 4 [1,5,15,35]
+    /// 5 [1,6,21,56]
     ///
     /// Example 2:
     /// Input: n = 5, k = 3
     /// Output: 35
     /// Explanation:
-    /// Second	State After
-    /// 0	[1,1,1,1,1]
-    /// 1	[1,2,3,4,5]
-    /// 2	[1,3,6,10,15]
-    /// 3	[1,4,10,20,35]
+    /// Second State After
+    /// 0 [1,1,1,1,1]
+    /// 1 [1,2,3,4,5]
+    /// 2 [1,3,6,10,15]
+    /// 3 [1,4,10,20,35]
     ///
     /// Constraints:
     /// 1. 1 <= n, k <= 1000
@@ -24068,7 +24068,7 @@ public:
     /// Output: [1,2,-1,1]
     /// Explanation:
     /// The resulting graph is:
-    /// Query	Shortest Path	Minimum Distance
+    /// Query Shortest Path Minimum Distance
     /// [0, 1]  0 -> 1  1
     /// [0, 2]  0 -> 1 -> 2 2
     /// [2, 3]  None    -1
@@ -26281,11 +26281,11 @@ public:
     /// Output : [1, 2]
     /// Explanation :
     /// One optimal set of operations :
-    /// i[li, ri]	nums[li..ri]	Possibility	Operations	Final
-    /// nums[li..ri]	ans[i]
-    /// 0. [0, 1][1, 4]	Yes	nums[0] + k = 1 + 3 = 4 = nums[1][4, 4]	1
-    /// 1. [0, 2][1, 4, 7]	Yes	nums[0] + k = 1 + 3 = 4 = nums[1]
-    /// nums[2] - k = 7 - 3 = 4 = nums[1][4, 4, 4]	2
+    /// i[li, ri] nums[li..ri] Possibility Operations Final
+    /// nums[li..ri] ans[i]
+    /// 0. [0, 1][1, 4] Yes nums[0] + k = 1 + 3 = 4 = nums[1][4, 4] 1
+    /// 1. [0, 2][1, 4, 7] Yes nums[0] + k = 1 + 3 = 4 = nums[1]
+    /// nums[2] - k = 7 - 3 = 4 = nums[1][4, 4, 4] 2
     /// Thus, ans = [1, 2].
     ///
     /// Example 2:
@@ -26293,11 +26293,11 @@ public:
     /// Output : [-1, 0, 1]
     /// Explanation :
     /// One optimal set of operations :
-    /// i[li, ri]	nums[li..ri]	Possibility	Operations	Final
-    /// nums[li..ri]	ans[i]
-    /// 0[0, 2][1, 2, 4]	No - [1, 2, 4] - 1
-    /// 1[0, 0][1]	Yes	Already equal[1]	0
-    /// 2[1, 2][2, 4]	Yes	nums[1] + k = 2 + 2 = 4 = nums[2][4, 4]	1
+    /// i[li, ri] nums[li..ri] Possibility Operations Final
+    /// nums[li..ri] ans[i]
+    /// 0[0, 2][1, 2, 4] No - [1, 2, 4] - 1
+    /// 1[0, 0][1] Yes Already equal[1] 0
+    /// 2[1, 2][2, 4] Yes nums[1] + k = 2 + 2 = 4 = nums[2][4, 4] 1
     /// Thus, ans = [-1, 0, 1].
     /// 
     /// Constraints:
@@ -26361,5 +26361,125 @@ public:
     /// 3. 1 <= k <= n
     /// </summary>
     long long minInversionCount(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3776. Minimum Moves to Balance Circular Array
+    /// 
+    /// Medium
+    ///
+    /// You are given a circular array balance of length n, where balance[i] 
+    /// is the net balance of person i.
+    ///
+    /// In one move, a person can transfer exactly 1 unit of balance to either 
+    /// their left or right neighbor.
+    ///
+    /// Return the minimum number of moves required so that every person has a 
+    /// non - negative balance.If it is impossible, return -1.
+    ///
+    /// Note: You are guaranteed that at most 1 index has a negative balance 
+    /// initially.
+    ///
+    /// Example 1 :
+    /// Input : balance = [5, 1, -4]
+    /// Output : 4
+    /// Explanation :
+    /// One optimal sequence of moves is :
+    /// 
+    /// Move 1 unit from i = 1 to i = 2, resulting in balance = [5, 0, -3]
+    /// Move 1 unit from i = 0 to i = 2, resulting in balance = [4, 0, -2]
+    /// Move 1 unit from i = 0 to i = 2, resulting in balance = [3, 0, -1]
+    /// Move 1 unit from i = 0 to i = 2, resulting in balance = [2, 0, 0]
+    /// Thus, the minimum number of moves required is 4.
+    ///
+    /// Example 2:
+    /// Input: balance = [1, 2, -5, 2]
+    /// Output : 6
+    /// Explanation :
+    /// One optimal sequence of moves is :
+    /// Move 1 unit from i = 1 to i = 2, resulting in balance = [1, 1, -4, 2]
+    /// Move 1 unit from i = 1 to i = 2, resulting in balance = [1, 0, -3, 2]
+    /// Move 1 unit from i = 3 to i = 2, resulting in balance = [1, 0, -2, 1]
+    /// Move 1 unit from i = 3 to i = 2, resulting in balance = [1, 0, -1, 0]
+    /// Move 1 unit from i = 0 to i = 1, resulting in balance = [0, 1, -1, 0]
+    /// Move 1 unit from i = 1 to i = 2, resulting in balance = [0, 0, 0, 0]
+    /// Thus, the minimum number of moves required is 6.​​​
+    ///
+    /// Example 3:
+    /// Input: balance = [-3, 2]
+    /// Output : -1
+    /// Explanation :
+    /// ​​​​​​​It is impossible to make all balances non - negative for 
+    /// balance = [-3, 2], so the answer is - 1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == balance.length <= 10^5
+    /// 2. - 10^9 <= balance[i] <= 10^9
+    /// 3. There is at most one negative value in balance initially.
+    /// </summary>
+    long long minMovesBalance(vector<int>& balance);
+
+    /// <summary>
+    /// Leet Code 3777. Minimum Deletions to Make Alternating Substring
+    /// 
+    /// Hard
+    /// 
+    /// You are given a string s of length n consisting only of the 
+    /// characters 'A' and 'B'.
+    ///
+    /// You are also given a 2D integer array queries of length q, where 
+    /// each queries[i] is one of the following :
+    /// [1, j] : Flip the character at index j of s i.e. 'A' changes to 'B' 
+    /// (and vice versa).This operation mutates s and affects subsequent 
+    /// queries.
+    /// [2, l, r] : Compute the minimum number of character deletions 
+    /// required to make the substring s[l..r] alternating.This operation 
+    /// does not modify s; the length of s remains n.
+    /// A substring is alternating if no two adjacent characters are equal.
+    /// A substring of length 1 is always alternating.
+    ///
+    /// Return an integer array answer, where answer[i] is the result of 
+    /// the ith query of type[2, l, r].
+    ///
+    /// Example 1:
+    /// Input: s = "ABA", queries = [[2, 1, 2], [1, 1], [2, 0, 2]]
+    /// Output : [0, 2]
+    /// Explanation :
+    /// i ueries[i] j l r s before query s[l..r] Result Answer
+    /// 0[2, 1, 2] - 1 2 "ABA" "BA" Already alternating 0
+    /// 1[1, 1] 1 - -"ABA" - Flip s[1] from 'B' to 'A' -
+    /// 2[2, 0, 2] - 0 2 "AAA" "AAA" Delete any two 'A's to get "A" 2
+    /// Thus, the answer is[0, 2].
+    ///
+    /// Example 2:
+    /// Input: s = "ABB", queries = [[2, 0, 2], [1, 2], [2, 0, 2]]
+    /// Output : [1, 0]
+    /// Explanation :
+    /// i queries[i] j l r s before query s[l..r] Result Answer
+    /// 0[2, 0, 2] - 0 2 "ABB" "ABB" Delete one 'B' to get "AB" 1
+    /// 1[1, 2] 2 - -"ABB" - Flip s[2] from 'B' to 'A' -
+    /// 2[2, 0, 2] - 0 2 "ABA" "ABA" Already alternating 0
+    /// Thus, the answer is[1, 0].
+    ///
+    /// Example 3:
+    /// Input: s = "BABA", queries = [[2, 0, 3], [1, 1], [2, 1, 3]]
+    /// Output : [0, 1]
+    /// Explanation :
+    /// i queries[i] j l r s before query s[l..r] Result Answer
+    /// 0[2, 0, 3] - 0 3 "BABA" "BABA" Already alternating 0
+    /// 1[1, 1] 1 - -"BABA" - Flip s[1] from 'A' to 'B' -
+    /// 2[2, 1, 3] - 1 3 "BBBA" "BBA" Delete one 'B' to get "BA" 1
+    /// Thus, the answer is[0, 1].
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == s.length <= 10^5
+    /// 2. s[i] is either 'A' or 'B'.
+    /// 3. 1 <= q == queries.length <= 105
+    /// 4. queries[i].length == 2 or 3
+    /// 5. queries[i] == [1, j] or ,
+    /// 6. queries[i] == [2, l, r]
+    /// 7. 0 <= j <= n - 1
+    /// 8. 0 <= l <= r <= n - 1
+    /// </summary>
+    vector<int> minDeletions(string s, vector<vector<int>>& queries);
 };
 #endif  // LeetCodeArray_H

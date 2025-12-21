@@ -6673,9 +6673,28 @@ void TestLeetCode3695(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3778(void)
+{
+    Logger::WriteMessage("Test Leet Code 3778");
+    LeetCodeGraph leetCode;
+    int n = 5;
+    vector<vector<int>> edges = { {0, 1, 2},{1, 2, 7},{2, 3, 7},{3, 4, 4} };
+    long long result = leetCode.minCostExcludingMax(n, edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    edges = { {0, 1, 1},{1, 2, 1},{0, 2, 50000} };
+    result = leetCode.minCostExcludingMax(n, edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3778();
     TestLeetCode3695();
     TestLeetCode3656();
     TestLeetCode3650();

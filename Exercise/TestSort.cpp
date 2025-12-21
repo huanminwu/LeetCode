@@ -4804,8 +4804,29 @@ void TestLeetCode3771(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3774(void)
+{
+    Logger::WriteMessage("Test Leet Code 3774");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 5, 2, 2, 4 };
+    int k = 2;
+    int result = leetCode.absDifference(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 100 };
+    k = 1;
+    result = leetCode.absDifference(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3774();
     TestLeetCode3771();
     TestLeetCode3767();
     TestLeetCode3759();

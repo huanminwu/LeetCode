@@ -45,9 +45,10 @@
 void main(int argc, char* argv[])
 {
     TestLeetCodeArray();
-    TestLeetCodeMath();
+    TestLeetCodeGraph();
     TestLeetCodeSort();
     TestLeetCodeString();
+    TestLeetCodeMath();
     TestLeetCodeTree();
     TestLeetCodeBit();
     TestLeetCodeDFS();
@@ -56,7 +57,6 @@ void main(int argc, char* argv[])
     TestLeetCodeBinarySearch();
     TestLeetCodeLinkedList();
     TestLeetCodeDesign();
-    TestLeetCodeGraph();
     TestLeetCodeGreedy();
     TestLeetCodeTwoPointer();
     TestLeetCodeStack();

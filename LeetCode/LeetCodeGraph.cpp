@@ -23072,4 +23072,122 @@ long long LeetCodeGraph::maxAlternatingSum(vector<int>& nums, vector<vector<int>
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3778. Minimum Distance Excluding One Maximum Weighted Edge
+/// </summary>
+void LeetCodeGraph::minCostExcludingMax(int node, long long sum_edge, int max_edge, 
+    vector<vector<pair<int, int>>>& neighbors, vector<int>& visited, long long &result)
+{
+    
+    for (size_t i = 0; i < neighbors[node].size(); i++)
+    {
+        int child = neighbors[node][i].first;
+        if (visited[child] == 1) continue;
+        long long new_sum_edge = sum_edge + neighbors[node][i].second;
+        int new_max_edge = max(max_edge, neighbors[node][i].second);
+        visited[child] = 1;
+        if (child == visited.size() - 1)
+        {
+            result = min(result, new_sum_edge - new_max_edge);
+        }
+        minCostExcludingMax(child, new_sum_edge, new_max_edge, neighbors, visited, result);
+        visited[child] = 0;
+    }
+}
+
+/// <summary>
+/// Leet Code 3778. Minimum Distance Excluding One Maximum Weighted Edge
+///
+/// Medium
+///
+/// You are given a positive integer n and a 2D integer array edges, 
+/// where edges[i] = [ui, vi, wi].
+///
+/// There is a weighted connected simple undirected graph with n nodes 
+/// labeled from 0 to n - 1. Each[ui, vi, wi] in edges represents an edge 
+/// between node ui and node vi with positive weight wi.
+///
+/// The cost of a path is the sum of weights of the edges in the path, 
+/// excluding the edge with the maximum weight.If there are multiple edges 
+/// in the path with the maximum weight, only the first such edge is 
+/// excluded.
+///
+/// Return an integer representing the minimum cost of a path going from 
+/// node 0 to node n - 1.
+///
+/// Example 1:
+/// Input: n = 5, edges = [[0, 1, 2], [1, 2, 7], [2, 3, 7], [3, 4, 4]]
+/// Output : 13
+/// Explanation :
+/// There is only one path going from node 0 to node 4 : 
+/// 0 -> 1 -> 2 -> 3 -> 4.
+///
+/// The edge weights on this path are 2, 7, 7, and 4.
+/// Excluding the first edge with maximum weight, which is 1 -> 2, the 
+/// cost of this path is 2 + 7 + 4 = 13.
+///
+/// Example 2:
+/// Input: n = 3, edges = [[0, 1, 1], [1, 2, 1], [0, 2, 50000]]
+/// Output : 0
+/// Explanation :
+/// There are two paths going from node 0 to node 2 :
+/// 0 -> 1 -> 2
+/// The edge weights on this path are 1 and 1.
+/// Excluding the first edge with maximum weight, which is 0 -> 1, 
+/// the cost of this path is 1.
+/// 0 -> 2
+/// The only edge weight on this path is 1.
+/// Excluding the first edge with maximum weight, which is 0 -> 2, 
+/// the cost of this path is 0.
+/// The minimum cost is min(1, 0) = 0.
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 5 * 10^4
+/// 2. n - 1 <= edges.length <= 10^9
+/// 3. edges[i] = [ui, vi, wi]
+/// 4. 0 <= ui < vi < n
+/// 5. [ui, vi] != [uj, vj]
+/// 6. 1 <= wi <= 5 * 10^4
+/// 7. The graph is connected.
+/// </summary>
+long long LeetCodeGraph::minCostExcludingMax(int n, vector<vector<int>>& edges)
+{
+    vector<vector<pair<int, int>>> neighbors(n);
+    vector<vector<long long>> distance(2, vector<long long>(n, LLONG_MAX));
+    long long result = LLONG_MAX;
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(make_pair(edges[i][1], edges[i][2]));
+        neighbors[edges[i][1]].push_back(make_pair(edges[i][0], edges[i][2]));
+    }
+    set<tuple<long long, int, int>> pq;
+    distance[0][0] = distance[1][0] = 0;
+    pq.insert({ 0, 0, 0 });
+    while (!pq.empty())
+    {
+        auto [dist, node, state] = *pq.begin();
+        if (node == n - 1) return dist;
+        pq.erase(pq.begin());
+        if (distance[state][node] < dist) continue;
+        for (size_t i = 0; i < neighbors[node].size(); i++)
+        {
+            int next = neighbors[node][i].first;
+            if (state == 0)
+            {
+                if (distance[state + 1][next] > dist)
+                {
+                    distance[state + 1][next] = dist;
+                    pq.insert({ dist, next, state + 1 });
+                }
+            }
+            if (distance[state][next] > dist + neighbors[node][i].second)
+            {
+                distance[state][next] = dist + neighbors[node][i].second;
+                pq.insert({ dist + neighbors[node][i].second, next, state });
+            }
+        }
+    }
+    return -1;
+}
 #pragma endregion

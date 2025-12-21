@@ -12225,6 +12225,69 @@ public:
     /// 6. [pi, qi] != [pj, qj]
     /// </summary>
     long long maxAlternatingSum(vector<int>& nums, vector<vector<int>>& swaps);
+
+    /// <summary>
+    /// Leet Code 3778. Minimum Distance Excluding One Maximum Weighted Edge
+    /// </summary>
+    void minCostExcludingMax(int node, long long sum_edge, 
+        int max_edge, vector<vector<pair<int, int>>>& neighbors, vector<int> &visited, long long& result);
+
+    /// <summary>
+    /// Leet Code 3778. Minimum Distance Excluding One Maximum Weighted Edge
+    ///
+    /// Medium
+    ///
+    /// You are given a positive integer n and a 2D integer array edges, 
+    /// where edges[i] = [ui, vi, wi].
+    ///
+    /// There is a weighted connected simple undirected graph with n nodes 
+    /// labeled from 0 to n - 1. Each[ui, vi, wi] in edges represents an edge 
+    /// between node ui and node vi with positive weight wi.
+    ///
+    /// The cost of a path is the sum of weights of the edges in the path, 
+    /// excluding the edge with the maximum weight.If there are multiple edges 
+    /// in the path with the maximum weight, only the first such edge is 
+    /// excluded.
+    ///
+    /// Return an integer representing the minimum cost of a path going from 
+    /// node 0 to node n - 1.
+    ///
+    /// Example 1:
+    /// Input: n = 5, edges = [[0, 1, 2], [1, 2, 7], [2, 3, 7], [3, 4, 4]]
+    /// Output : 13
+    /// Explanation :
+    /// There is only one path going from node 0 to node 4 : 
+    /// 0 -> 1 -> 2 -> 3 -> 4.
+    ///
+    /// The edge weights on this path are 2, 7, 7, and 4.
+    /// Excluding the first edge with maximum weight, which is 1 -> 2, the 
+    /// cost of this path is 2 + 7 + 4 = 13.
+    ///
+    /// Example 2:
+    /// Input: n = 3, edges = [[0, 1, 1], [1, 2, 1], [0, 2, 50000]]
+    /// Output : 0
+    /// Explanation :
+    /// There are two paths going from node 0 to node 2 :
+    /// 0 -> 1 -> 2
+    /// The edge weights on this path are 1 and 1.
+    /// Excluding the first edge with maximum weight, which is 0 -> 1, 
+    /// the cost of this path is 1.
+    /// 0 -> 2
+    /// The only edge weight on this path is 1.
+    /// Excluding the first edge with maximum weight, which is 0 -> 2, 
+    /// the cost of this path is 0.
+    /// The minimum cost is min(1, 0) = 0.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 5 * 10^4
+    /// 2. n - 1 <= edges.length <= 10^9
+    /// 3. edges[i] = [ui, vi, wi]
+    /// 4. 0 <= ui < vi < n
+    /// 5. [ui, vi] != [uj, vj]
+    /// 6. 1 <= wi <= 5 * 10^4
+    /// 7. The graph is connected.
+    /// </summary>
+    long long minCostExcludingMax(int n, vector<vector<int>>& edges);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

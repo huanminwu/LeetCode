@@ -12739,8 +12739,56 @@ void TestLeetCode3768(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3776(void)
+{
+    Logger::WriteMessage("Test Leet Code 3776");
+    LeetCodeArray leetCode;
+    vector<int> balance = { 5, 1, -4 };
+    long long result = leetCode.minMovesBalance(balance);
+    Logger::WriteMessage(balance);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    balance = { 1,2,-5,2 };
+    result = leetCode.minMovesBalance(balance);
+    Logger::WriteMessage(balance);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    balance = { -5,2 };
+    result = leetCode.minMovesBalance(balance);
+    Logger::WriteMessage(balance);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3777(void)
+{
+    Logger::WriteMessage("Test Leet Code 3777");
+    LeetCodeArray leetCode;
+    string s = "ABA";
+    vector<vector<int>> queries = { {2, 1, 2},{1, 1},{2, 0, 2} };
+    vector<int> result = leetCode.minDeletions(s, queries);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    s = "ABB";
+    queries = { {2, 0, 2},{1, 2},{2, 0, 2} };
+    result = leetCode.minDeletions(s, queries);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    s = "BABA";
+    queries = { {2, 0, 3},{1, 1},{2, 1, 3} };
+    result = leetCode.minDeletions(s, queries);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3777();
+    TestLeetCode3776();
     TestLeetCode3739();
     TestLeetCode3768();
     TestLeetCode3762();

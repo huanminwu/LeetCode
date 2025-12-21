@@ -8620,8 +8620,29 @@ void TestLeetCode3773(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3775(void)
+{
+    Logger::WriteMessage("Test Leet Code 3775");
+    LeetCodeString leetCode;
+    string s = "cat and mice";
+    string result = leetCode.reverseWordsVowel(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+
+    s = "book is nice";
+    result = leetCode.reverseWordsVowel(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+
+    s = "banana healthy";
+    result = leetCode.reverseWordsVowel(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3775();
     TestLeetCode3773();
     TestLeetCode3760();
     TestLeetCode3758();
