@@ -28887,5 +28887,104 @@ long long LeetCodeMath::minimumCost(string s, string t, int flipCost, int swapCo
     return result;
 }
 
+
+/// <summary>
+/// Leet Code 3802. Number of Ways to Paint Sheets 
+///
+/// Hard
+/// 
+/// You are given an integer n representing the number of sheets.
+///
+/// You are also given an integer array limit of size m, where limit[i] 
+/// is the maximum number of sheets that can be painted using color i.
+///
+/// You must paint all n sheets under the following conditions :
+/// Exactly two distinct colors are used.
+/// Each color must cover a single contiguous segment of sheets.
+/// The number of sheets painted with color i cannot exceed limit[i].
+/// Return an integer denoting the number of distinct ways to paint all 
+/// sheets.Since the answer may be large, return it modulo 10^9 + 7.
+///
+/// Note : Two ways differ if at least one sheet is painted with a 
+/// different color.
+///
+/// Example 1 :
+/// nput : n = 4, limit = [3, 1, 2]
+/// Output : 6
+/// Explanation : ​​​​​​​
+/// For each ordered pair(i, j), where color i is used for the first 
+/// segment and color j for the second segment(i != j), a split of x 
+/// and 4 - x is valid if 1 <= x <= limit[i] and 1 <= 4 - x <= limit[j].
+/// Valid pairs and counts are :
+///
+/// (0, 1) : x = 3
+/// (0, 2) : x = 2, 3
+/// (1, 0) : x = 1
+/// (2, 0) : x = 1, 2
+/// Therefore, there are 6 valid ways in total.
+///
+/// Example 2 :
+/// Input : n = 3, limit = [1, 2]
+/// Output : 2
+/// Explanation :
+/// For each ordered pair(i, j), where color i is used for the first 
+/// segment and color j for the second segment(i != j), a split of x 
+/// and 3 - x is valid if 1 <= x <= limit[i] and 1 <= 3 - x <= limit[j].
+///
+/// Valid pairs and counts are :
+/// (0, 1) : x = 1
+/// (1, 0) : x = 2
+/// Hence, there are 2 valid ways in total.
+///
+/// Example 3 :
+/// Input : n = 3, limit = [2, 2]
+/// Output : 4
+/// Explanation :
+/// For each ordered pair(i, j), where color i is used for the first 
+/// segment and color j for the second segment(i != j), a split of x 
+/// and 3 - x is valid if 1 <= x <= limit[i] and 1 <= 3 - x <= limit[j].
+/// Valid pairs and counts are :
+/// (0, 1) : x = 1, 2
+/// (1, 0) : x = 1, 2
+/// Therefore, there are 4 valid ways in total.
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 10^9
+/// 2. 2 <= m == limit.length <= 10^5
+/// 3. 1 <= limit[i] <= 10^9
+/// </summary>
+int LeetCodeMath::numberOfWays(int n, vector<int>& limit)
+{
+    long long M = 1000000007;
+    sort(limit.begin(), limit.end());
+    vector<long long> dp(limit.size() + 1);
+    for (size_t i = 0; i < limit.size(); i++)
+    {
+        dp[i + 1] = limit[i];
+        dp[i + 1] += dp[i];
+    }
+
+    long long result = 0;
+    for (size_t i = 0; i < limit.size(); i++)
+    {
+        int color = limit[i];
+        int min_contribute = n - min(color, n-1);
+        int max_contribute = n - 1;
+        int low = lower_bound(limit.begin(), limit.end(), min_contribute) - limit.begin();
+        int high = lower_bound(limit.begin(), limit.end(), max_contribute) - limit.begin();
+        result += (long long)(limit.size() - high) * (max_contribute - min_contribute + 1);
+        result += (long long)(dp[high] - dp[low]) - (long long)(min_contribute - 1) * (high - low);
+        if (color >= max_contribute)
+        {
+            result -= (max_contribute - min_contribute + 1);
+        }
+        else if (color >= min_contribute)
+        {
+            result -= color - (min_contribute - 1);
+        }
+        result = result % M;
+    }
+    return result;
+}
 #pragma endregion
 
