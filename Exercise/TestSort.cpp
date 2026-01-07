@@ -4823,9 +4823,61 @@ void TestLeetCode3774(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3781(void)
+{
+    Logger::WriteMessage("Test Leet Code 3781");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 2, 1, 5, 2, 3 };
+    string s = "01010";
+    long long result = leetCode.maximumScore(nums, s);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,7,2,9 };
+    s = "0000";
+    result = leetCode.maximumScore(nums, s);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3796(void)
+{
+    Logger::WriteMessage("Test Leet Code 3796");
+    LeetCodeSort leetCode;
+    int n = 10;
+    vector<vector<int>> restrictions = { {3, 1},{8, 1} };
+    vector<int> diff = { 2, 2, 3, 1, 4, 5, 1, 1, 2 };
+    int result = leetCode.findMaxVal(n, restrictions, diff);
+    Logger::WriteMessage("n = " + n);
+    Logger::WriteMessage(restrictions);
+    Logger::WriteMessage(diff);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 8;
+    restrictions = { {3, 2} };
+    diff = { 3, 5, 2, 4, 2, 3, 1 };
+    result = leetCode.findMaxVal(n, restrictions, diff);
+    Logger::WriteMessage("n = " + n);
+    Logger::WriteMessage(restrictions);
+    Logger::WriteMessage(diff);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 2;
+    restrictions = { {1, 15} };
+    diff = { 2 };
+    result = leetCode.findMaxVal(n, restrictions, diff);
+    Logger::WriteMessage("n = " + n);
+    Logger::WriteMessage(restrictions);
+    Logger::WriteMessage(diff);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3796();
+    TestLeetCode3781();
     TestLeetCode3774();
     TestLeetCode3771();
     TestLeetCode3767();

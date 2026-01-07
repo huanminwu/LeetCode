@@ -15924,4 +15924,163 @@ int LeetCodeSort::absDifference(vector<int>& nums, int k)
     }
     return max_sum - min_sum;
 }
+
+/// <summary>
+/// Leet Code 3781. Maximum Score After Binary Swaps 
+/// 
+/// Medium
+///
+/// You are given an integer array nums of length n and a binary string 
+/// s of the same length.
+///
+/// Initially, your score is 0. Each index i where s[i] = '1' contributes 
+/// nums[i] to the score.
+///
+/// You may perform any number of operations(including zero).In one 
+/// operation, you may choose an index i such that 0 <= i < n - 1, where 
+/// s[i] = '0', and s[i + 1] = '1', and swap these two characters.
+///
+/// Return an integer denoting the maximum possible score you can achieve.
+///
+/// Example 1:
+/// Input: nums = [2, 1, 5, 2, 3], s = "01010"
+/// Output : 7
+/// Explanation :
+/// We can perform the following swaps :
+/// Swap at index i = 0 : "01010" changes to "10010"
+/// Swap at index i = 2 : "10010" changes to "10100"
+/// Positions 0 and 2 contain '1', contributing nums[0] + nums[2] = 
+/// 2 + 5 = 7. This is maximum score achievable.
+///
+/// Example 2 :
+/// Input : nums = [4, 7, 2, 9], s = "0000"
+/// Output : 0
+/// Explanation :
+/// There are no '1' characters in s, so no swaps can be performed.
+/// The score remains 0.
+/// 
+/// Constraints:
+/// 1. n == nums.length == s.length
+/// 2. 1 <= n <= 10^5
+/// 3. 1 <= nums[i] <= 10^9
+/// 4. s[i] is either '0' or '1'
+/// </summary>
+long long LeetCodeSort::maximumScore(vector<int>& nums, string s)
+{
+    long long result = 0;
+    priority_queue<int> pq;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (s[i] == '0') pq.push(nums[i]);
+        else
+        {
+            if (!pq.empty() && pq.top() > nums[i])
+            {
+                result += pq.top();
+                pq.pop();
+                pq.push(nums[i]);
+            }
+            else
+            {
+                result += nums[i];
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3796. Find Maximum Value in a Constrained Sequence 
+/// 
+/// Medium
+///
+/// You are given an integer n, a 2D integer array restrictions, and an 
+/// integer array diff of length n - 1. Your task is to construct a 
+/// sequence of length n, denoted by a[0], a[1], ..., a[n - 1], such that 
+/// it satisfies the following conditions :
+///
+/// a[0] is 0.
+/// All elements in the sequence are non - negative.
+/// For every index i(0 <= i <= n - 2), abs(a[i] - a[i + 1]) <= diff[i].
+/// For each restrictions[i] = [idx, maxVal], the value at position idx 
+/// in the sequence must not exceed maxVal(i.e., a[idx] <= maxVal).
+/// Your goal is to construct a valid sequence that maximizes the largest 
+/// value within the sequence while satisfying all the above conditions.
+///
+/// Return an integer denoting the largest value present in such an 
+/// optimal sequence.
+///
+/// Example 1:
+/// Input: n = 10, restrictions = [[3, 1], [8, 1]], 
+/// diff = [2, 2, 3, 1, 4, 5, 1, 1, 2]
+/// Output : 6
+/// Explanation :
+/// The sequence a = [0, 2, 4, 1, 2, 6, 2, 1, 1, 3] satisfies the given 
+/// constraints(a[3] <= 1 and a[8] <= 1).
+/// The maximum value in the sequence is 6.
+///
+/// Example 2 :
+/// Input : n = 8, restrictions = [[3, 2]], diff = [3, 5, 2, 4, 2, 3, 1]
+/// Output : 12
+/// Explanation :
+/// The sequence a = [0, 3, 3, 2, 6, 8, 11, 12] satisfies the given 
+/// constraints(a[3] <= 2).
+/// The maximum value in the sequence is 12.
+/// 
+/// Constraints :
+/// 1. 2 <= n <= 10^5
+/// 2. 1 <= restrictions.length <= n - 1
+/// 3. restrictions[i].length == 2
+/// 4. restrictions[i] = [idx, maxVal]
+/// 5. 1 <= idx < n
+/// 6. 1 <= maxVal <= 10^6
+/// 7. diff.length == n - 1
+/// 8. 1 <= diff[i] <= 10
+/// 9. The values of restrictions[i][0] are unique.
+/// </summary>
+int LeetCodeSort::findMaxVal(int n, vector<vector<int>>& restrictions, vector<int>& diff)
+{
+    vector<int> arr(n, INT_MAX);
+    arr[0] = 0;
+    set<pair<int, int>> pq;
+    pq.insert({ 0, 0 });
+    int result = 0;
+    for (size_t i = 0; i < restrictions.size(); i++)
+    {
+        arr[restrictions[i][0]] = restrictions[i][1];
+        pq.insert({ restrictions[i][1], restrictions[i][0] });
+    }
+    while (!pq.empty())
+    {
+        int val = pq.begin()->first;
+        int node = pq.begin()->second;
+        pq.erase(pq.begin());
+        arr[node] = val;
+        result = max(result, val);
+
+        int prev = node - 1;
+        if (prev > 0)
+        {
+            int prev_val = val + diff[prev];
+            if (arr[prev] > prev_val)
+            {
+                pq.erase({ arr[prev], prev });
+                arr[prev] = prev_val;
+                pq.insert({ arr[prev], prev });
+            }
+        }
+        int next = node + 1;
+        if (next < n)
+        {
+            int next_val = val + diff[node];
+            if (arr[next] > next_val)
+            {
+                pq.erase({ arr[next], next });
+                arr[next] = next_val;
+                pq.insert({ arr[next], next });
+            }
+        }
+    }
+    return result;
+}
 #pragma endregion

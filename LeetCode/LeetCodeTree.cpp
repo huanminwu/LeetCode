@@ -7387,8 +7387,8 @@ int LeetCodeTree::maxLevelSum(TreeNode* root)
             search.pop();
             if (node == nullptr) continue;
             sum += node->val;
-            search.push(node->left);
-            search.push(node->right);
+            if (node->left != nullptr) search.push(node->left);
+            if (node->right != nullptr) search.push(node->right);
         }
         if (sum > max_sum)
         {
@@ -15744,6 +15744,248 @@ vector<int> LeetCodeTree::maxSubgraphScore(int n, vector<vector<int>>& edges, ve
     for (int i = 0; i < n; i++)
     {
         result.push_back(inPathScores[i] + outPathScores[i]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3786. Total Sum of Interaction Cost in Tree Groups
+/// </summary>
+void LeetCodeTree::interactionCosts(int parent, int node, vector<vector<int>>& neighbors,
+    vector<vector<int>>& node_groups, vector<int>& group)
+{
+    for (size_t i = 0; i < neighbors[node].size(); i++)
+    {
+        int child = neighbors[node][i];
+        if (child == parent)
+        {
+            continue;
+        }
+        interactionCosts(node, child, neighbors, node_groups, group);
+        for (size_t j = 0; j < node_groups[node].size(); j++)
+        {
+            node_groups[node][j] += node_groups[child][j];
+        }
+    }
+    node_groups[node][group[node]-1]++;
+}
+
+/// <summary>
+/// Leet Code 3786. Total Sum of Interaction Cost in Tree Groups
+/// </summary>
+long long LeetCodeTree::interactionCosts(int parent, int node, vector<vector<int>>& neighbors,
+    vector<vector<int>>& node_groups)
+{
+    long long result = 0;
+    for (size_t i = 0; i < neighbors[node].size(); i++)
+    {
+        int child = neighbors[node][i];
+        if (child == parent)
+        {
+            continue;
+        }
+        result += interactionCosts(node, child, neighbors, node_groups);
+        for (size_t j = 0; j < node_groups[child].size(); j++)
+        {
+            result += (long long)node_groups[child][j] * (node_groups[0][j] - node_groups[child][j]);
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3786. Total Sum of Interaction Cost in Tree Groups
+///
+/// Hard
+/// 
+/// You are given an integer n and an undirected tree with n nodes numbered
+/// from 0 to n - 1. This is represented by a 2D array edges of length 
+/// n - 1, where edges[i] = [ui, vi] indicates an undirected edge between 
+/// nodes ui and vi.
+///
+/// You are also given an integer array group of length n, where group[i] 
+/// denotes the group label assigned to node i.
+///
+/// Two nodes u and v are considered part of the same group if 
+/// group[u] == group[v].
+/// The interaction cost between u and v is defined as the number of edges 
+/// on the unique path connecting them in the tree.
+/// 
+/// Return an integer denoting the sum of interaction costs over all 
+/// unordered pairs(u, v) with u != v such that group[u] == group[v].
+/// 
+/// Example 1:
+/// Input: n = 3, edges = [[0, 1], [1, 2]], group = [1, 1, 1]
+/// Output : 4
+/// Explanation :
+///
+/// All nodes belong to group 1. The interaction costs between the pairs 
+/// of nodes are :
+/// Nodes(0, 1) : 1
+/// Nodes(1, 2) : 1
+/// Nodes(0, 2) : 2
+/// Thus, the total interaction cost is 1 + 1 + 2 = 4.
+///
+/// Example 2 :
+/// Input : n = 3, edges = [[0, 1], [1, 2]], group = [3, 2, 3]
+/// Output : 2
+/// Explanation :
+/// Nodes 0 and 2 belong to group 3. The interaction cost between this 
+/// pair is 2.
+/// Node 1 belongs to a different group and forms no valid pair.Therefore, 
+/// the total interaction cost is 2.
+/// 
+/// Example 3 :
+/// Input : n = 4, edges = [[0, 1], [0, 2], [0, 3]], group = [1, 1, 4, 4]
+/// Output : 3
+/// Explanation :
+/// Nodes belonging to the same groups and their interaction costs are :
+/// Group 1 : Nodes(0, 1) : 1
+/// Group 4 : Nodes(2, 3) : 2
+/// Thus, the total interaction cost is 1 + 2 = 3.
+///
+/// Example 4 :
+/// Input : n = 2, edges = [[0, 1]], group = [9, 8]
+/// Output : 0
+/// Explanation :
+/// All nodes belong to different groups and there are no valid pairs.
+/// Therefore, the total interaction cost is 0.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// 2. edges.length == n - 1
+/// 3. edges[i] = [ui, vi]
+/// 4. 0 <= ui, vi <= n - 1
+/// 5. group.length == n
+/// 6. 1 <= group[i] <= 20
+/// 7. The input is generated such that edges represents a valid tree.
+/// </summary>
+long long LeetCodeTree::interactionCosts(int n, vector<vector<int>>& edges, vector<int>& group)
+{
+    vector<vector<int>> neighbors(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(edges[i][1]);
+        neighbors[edges[i][1]].push_back(edges[i][0]);
+    }
+    int group_size = 0;
+    for (size_t i = 0; i < group.size(); i++) group_size = max(group_size, group[i]);
+    vector<vector<int>> node_groups(n, vector<int>(group_size));
+    interactionCosts(-1, 0, neighbors, node_groups, group);
+    long long result = interactionCosts(-1, 0, neighbors, node_groups);
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3787. Find Diameter Endpoints of a Tree
+/// </summary>
+vector<int> LeetCodeTree::findSpecialNodes_BFS(int start_node, vector<vector<int>>& neighbors)
+{
+    vector<int> visited(neighbors.size());
+    queue<int> queue;
+    queue.push(start_node);
+    visited[start_node] = 1;
+    vector<int> result;
+    while (!queue.empty())
+    {
+        result.clear();
+        size_t size = queue.size();
+        for (size_t i = 0; i < size; i++)
+        {
+            int node = queue.front();
+            result.push_back(node);
+            queue.pop();
+            for (size_t j = 0; j < neighbors[node].size(); j++)
+            {
+                int next = neighbors[node][j];
+                if (visited[next] == 1) continue;
+                visited[next] = 1;
+                queue.push(next);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3787. Find Diameter Endpoints of a Tree
+///
+/// Medium
+/// 
+/// You are given an undirected tree with n nodes, numbered from 0 to 
+/// n - 1. It is represented by a 2D integer array edges​​​​​​​ of length n - 1, 
+/// where edges[i] = [ai, bi] indicates that there is an edge between 
+/// nodes ai and bi in the tree.
+///
+/// A node is called special if it is an endpoint of any diameter path of 
+/// the tree.
+///
+/// Return a binary string s of length n, where s[i] = '1' if node i is 
+/// special, and s[i] = '0' otherwise.
+///
+/// A diameter path of a tree is the longest simple path between any two 
+/// nodes.A tree may have multiple diameter paths.
+///
+/// An endpoint of a path is the first or last node on that path.
+/// 
+/// Example 1:
+///
+/// Input: n = 3, edges = [[0, 1], [1, 2]]
+///
+/// Output : "101"
+/// Explanation :
+///
+/// The diameter of this tree consists of 2 edges.
+/// The only diameter path is the path from node 0 to node 2
+/// The endpoints of this path are nodes 0 and 2, so they are special.
+///
+/// Example 2 :
+/// Input: n = 7, edges = [[0, 1], [1, 2], [2, 3], [3, 4], [3, 5], [1, 6]]
+/// Output : "1000111"
+/// Explanation :
+/// The diameter of this tree consists of 4 edges.There are 4 diameter paths :
+/// The path from node 0 to node 4
+/// The path from node 0 to node 5
+/// The path from node 6 to node 4
+/// The path from node 6 to node 5
+/// The special nodes are nodes 0, 4, 5, 6, as they are endpoints in at 
+/// least one diameter path.
+///
+/// Example 3:
+/// Input : n = 2, edges = [[0, 1]]
+/// Output : "11"
+/// Explanation :
+/// The diameter of this tree consists of 1 edge.
+/// The only diameter path is the path from node 0 to node 1
+/// The endpoints of this path are nodes 0 and 1, so they are special.
+///
+/// Constraints :
+/// 1. 2 <= n <= 10^5
+/// 2. edges.length == n - 1
+/// 3. edges[i] = [ai, bi]
+/// 4. 0 <= ai, bi < n
+/// 5. The input is generated such that edges represents a valid tree.
+/// </summary>
+string LeetCodeTree::findSpecialNodes(int n, vector<vector<int>>& edges)
+{
+    vector<vector<int>> neighbors(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(edges[i][1]);
+        neighbors[edges[i][1]].push_back(edges[i][0]);
+    }
+    string result = string(n, '0');
+    vector<int> special_nodes = findSpecialNodes_BFS(0, neighbors);
+    for (size_t i = 0; i < special_nodes.size(); i++)
+    {
+        int start_node = special_nodes[i];
+        result[start_node] = '1';
+        vector<int> next_nodes = findSpecialNodes_BFS(start_node, neighbors);
+        for (size_t j = 0; j < next_nodes.size(); j++)
+        {
+            result[next_nodes[j]] = '1';
+        }
     }
     return result;
 }

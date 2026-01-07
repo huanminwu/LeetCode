@@ -12785,8 +12785,85 @@ void TestLeetCode3777(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3779(void)
+{
+    Logger::WriteMessage("Test Leet Code 3779");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 3, 8, 3, 6, 5, 8 };
+    int result = leetCode.minOperations_Dedup(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,2 };
+    result = leetCode.minOperations_Dedup(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,3,5,1,2 };
+    result = leetCode.minOperations_Dedup(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3785(void)
+{
+    Logger::WriteMessage("Test Leet Code 3785");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    vector<int> forbidden = { 3, 2, 1 };
+    int result = leetCode.minSwaps(nums, forbidden);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(forbidden);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,6,6,5 };
+    forbidden = { 4,6,5,5 };
+    result = leetCode.minSwaps(nums, forbidden);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(forbidden);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7,7 };
+    forbidden = { 8,7 };
+    result = leetCode.minSwaps(nums, forbidden);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(forbidden);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2 };
+    forbidden = { 2,1 };
+    result = leetCode.minSwaps(nums, forbidden);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(forbidden);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3788(void)
+{
+    Logger::WriteMessage("Test Leet Code 3788");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 10, -1, 3, -4, -5 };
+    long long result = leetCode.maximumScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -7,-5,3 };
+    result = leetCode.maximumScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1 };
+    result = leetCode.maximumScore(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3788();
+    TestLeetCode2025();
+    TestLeetCode3785();
+    TestLeetCode3779();
     TestLeetCode3777();
     TestLeetCode3776();
     TestLeetCode3739();
@@ -13122,7 +13199,6 @@ void TestLeetCodeArray(void)
     TestLeetCode2088();
     TestLeetCode1788();
     TestLeetCode1937();
-    TestLeetCode2025();
     TestLeetCode1936();
     TestLeetCode2009();
     TestLeetCode1930();

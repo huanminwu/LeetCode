@@ -219,54 +219,98 @@ int LeetCodeDP::maxProfitManyTxns(vector<int>& prices)
 /// </summary>
 int LeetCodeDP::maxProfitTwoTxns(vector<int>& prices)
 {
-    vector<int> prev_buy(2), prev_sell(2);
-    vector<int> buy(2), sell(2);
+    vector<int> buy(2, INT_MIN), sell(2, INT_MIN);
     // This avoid us to special treat on first day buy
-    prev_buy[0] = prev_buy[1] = INT_MIN;
     int result = 0;
     for (size_t i = 0; i < prices.size(); i++)
     {
-        buy[0] = max(prev_buy[0], 0 - prices[i]);
-        sell[0] = max(prev_sell[0], prev_buy[0] + prices[i]);
-        buy[1] = max(prev_buy[1], prev_sell[0] - prices[i]);
-        sell[1] = max(prev_sell[1], prev_buy[1] + prices[i]);
-        result = max(result, max(sell[0], sell[1]));
-        prev_buy = buy;
-        prev_sell = sell;
+        for (int j = 1; j >= 0; j--)
+        {
+            if (buy[j] != INT_MIN)
+            {
+                sell[j] = max(sell[j], buy[j] + prices[i]);
+            }
+            if (j > 0)
+            {
+                if (sell[j - 1] != INT_MIN)
+                {
+                    buy[j] = max(buy[j], sell[j - 1] - prices[i]);
+                }
+            }
+            else
+            {
+                buy[j] = max(buy[j], 0 - prices[i]);
+            }
+        }
     }
+    result = max(result, max(sell[0], sell[1]));
     return result;
 }
 
 /// <summary>
 /// Leet code #188. Best Time to Buy and Sell Stock IV  
-/// Say you have an array for which the ith element is the price of a given stock on day i.
-/// Design an algorithm to find the maximum profit. You may complete at most k transactions.
-/// Note:
-/// You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+/// 
+/// Hard
+///
+/// You are given an integer array prices where prices[i] is the price of 
+/// a given stock on the ith day, and an integer k.
+///
+/// Find the maximum profit you can achieve.You may complete at most k 
+/// transactions : i.e.you may buy at most k times and sell at most k 
+/// times.
+///
+/// Note : You may not engage in multiple transactions simultaneously
+/// (i.e., you must sell the stock before you buy again).
+///
+/// Example 1 :
+/// Input : k = 2, prices = [2, 4, 1]
+/// Output : 2
+/// Explanation : Buy on day 1 (price = 2) and sell on day 2 (price = 4), 
+/// profit = 4 - 2 = 2.
+/// 
+/// Example 2 :
+/// Input : k = 2, prices = [3, 2, 6, 5, 0, 3]
+/// Output : 7
+/// Explanation : Buy on day 2 (price = 2) and sell on day 3 (price = 6), 
+/// profit = 6 - 2 = 4. Then buy on day 5 (price = 0) and sell on day 
+/// 6 (price = 3), profit = 3 - 0 = 3.
+///
+/// Constraints :
+/// 1. 1 <= k <= 100
+/// 2. 1 <= prices.length <= 1000
+/// 3. 0 <= prices[i] <= 1000
 /// </summary>
-int LeetCodeDP::maxProfitKTxns(int k, vector<int>& prices)
+int LeetCodeDP::maxProfit(int k, vector<int>& prices)
 {
-    if (prices.size() == 0)
+    vector<int> buy(k, INT_MIN), sell(k, INT_MIN);
+    // This avoid us to special treat on first day buy
+    int result = 0;
+    for (size_t i = 0; i < prices.size(); i++)
     {
-        return 0;
-    }
-    if (k > (int)(prices.size() / 2))
-    {
-        return maxProfitManyTxns(prices);
-    }
-    vector<int> balance(prices.size(), 0);
-    for (int s = 0; s < k; s++)
-    {
-        int best_buy = INT_MIN;
-        int best_profit = 0;
-        for (size_t i = 0; i < prices.size(); i++)
+        for (int j = k - 1; j >= 0; j--)
         {
-            best_buy = max(best_buy, balance[i] - prices[i]);
-            best_profit = max(best_profit, best_buy + prices[i]);
-            balance[i] = best_profit;
+            if (buy[j] != INT_MIN)
+            {
+                sell[j] = max(sell[j], buy[j] + prices[i]);
+            }
+            if (j > 0)
+            {
+                if (sell[j - 1] != INT_MIN)
+                {
+                    buy[j] = max(buy[j], sell[j - 1] - prices[i]);
+                }
+            }
+            else
+            {
+                buy[j] = max(buy[j], 0 - prices[i]);
+            }
         }
     }
-    return balance[balance.size() - 1];
+    for (int i = 0; i < k; i++)
+    {
+        result = max(result, sell[i]);
+    }
+    return result;
 }
 
 /// <summary>
@@ -21458,9 +21502,7 @@ int LeetCodeDP::countPartitionsII(vector<int>& nums, int k)
 {
     int M = 1000000007;
     int n = nums.size();
-    vector<int> dp(n + 1), sum(n + 1);
-    dp[0] = 1;
-    sum[0] = 0;
+    vector<int> dp(n), sum(n + 1);
     map<int, int> heap;
     int left = 0;
     for (int i = 0; i < n; i++)
@@ -21475,10 +21517,14 @@ int LeetCodeDP::countPartitionsII(vector<int>& nums, int k)
             }
             left++;
         }
-        dp[i + 1] = (sum[i] - sum[left] + dp[left] + M) % M;
-        sum[i + 1] = (sum[i] + dp[i + 1]) % M;
+        if (left == 0) (dp[i] = sum[i] + 1) % M;
+        else
+        {
+            dp[i] = (sum[i] - sum[left - 1] + M) % M;
+        }
+        sum[i + 1] = (sum[i] + dp[i]) % M;
     }
-    return dp[n];
+    return dp[n - 1];
 }
 
 /// <summary>
@@ -22982,6 +23028,257 @@ int LeetCodeDP::maxPathScore(vector<vector<int>>& grid, int k)
         result = max(result, dp[n - 1][m - 1][i]);
     }
     return result;
+}
+
+/// <summary>
+/// Leet Code 3797. Count Routes to Climb a Rectangular Grid
+/// 
+/// Hard
+/// 
+/// You are given a string array grid of size n, where each string grid[i] 
+/// has length m.The character grid[i][j] is one of the following symbols :
+/// '.' : The cell is available.
+/// '#' : The cell is blocked.
+/// You want to count the number of different routes to climb grid.Each 
+/// route must start from any cell in the bottom row(row n - 1) and end 
+/// in the top row(row 0).
+///
+/// However, there are some constraints on the route.
+///
+/// You can only move from one available cell to another available cell.
+/// The Euclidean distance of each move is at most d, where d is an 
+/// integer parameter given to you.The Euclidean distance between two 
+/// cells(r1, c1), (r2, c2) is sqrt((r1 - r2)^2 + (c1 - c2)^2).
+/// Each move either stays on the same row or moves to the row 
+/// directly above(from row r to r - 1).
+/// You cannot stay on the same row for two consecutive turns.If you 
+/// stay on the same row in a move(and this move is not the last move), 
+/// your next move must go to the row above.
+/// Return an integer denoting the number of such routes.Since the answer 
+/// may be very large, return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: grid = ["..", "#."], d = 1
+/// Output : 2
+/// Explanation :
+/// We label the cells we visit in the routes sequentially, starting 
+/// from 1. The two routes are :
+/// .2
+/// #1
+/// 32
+/// #1
+/// We can move from the cell(1, 1) to the cell(0, 1) because the Euclidean
+/// distance is sqrt((1 - 0)2 + (1 - 1)2) = sqrt(1) <= d.
+///
+/// However, we cannot move from the cell(1, 1) to the cell(0, 0) because 
+/// the Euclidean distance is sqrt((1 - 0)2 + (1 - 0)2) = sqrt(2) > d.
+///
+/// Example 2:
+/// Input: grid = ["..", "#."], d = 2
+/// Output : 4
+/// Explanation :
+/// Two of the routes are given in example 1. The other two routes are :
+/// 2.
+/// #1
+/// 23
+/// #1
+/// Note that we can move from(1, 1) to(0, 0) because the Euclidean 
+/// distance is sqrt(2) <= d.
+///
+/// Example 3:
+/// Input: grid = ["#"], d = 750
+/// Output : 0
+/// Explanation :
+/// We cannot choose any cell as the starting cell.Therefore, there are no 
+/// routes.
+///
+/// Example 4 :
+/// Input : grid = [".."], d = 1
+/// Output : 4
+/// Explanation :
+/// The possible routes are :
+/// .1
+/// 1.
+/// 12
+/// 21
+/// 
+/// Constraints :
+/// 1. 1 <= n == grid.length <= 750
+/// 2. 1 <= m == grid[i].length <= 750
+/// 3. grid[i][j] is '.' or '#'.
+/// 4. 1 <= d <= 750
+/// </summary>
+int LeetCodeDP::numberOfRoutes(vector<string>& grid, int d)
+{
+    int M = 1000000007;
+    int r = grid.size();
+    int c = grid[0].size();
+    vector<vector<int>> dp0(r, vector<int>(c));
+    vector<vector<int>> dp1(r, vector<int>(c));
+    for (int i = r - 1; i >= 0; i--)
+    {
+        if (i == r - 1)
+        {
+            for (int j = 0; j < c; j++)
+            {
+                if (grid[i][j] == '.')
+                {
+                    dp0[i][j] = 1;
+                }
+            }
+        }
+        else
+        {
+            long long sum = 0;
+            for (int j = 0; j < min(c, d); j++)
+            {
+                sum += dp1[i + 1][j];
+            }
+            if (grid[i][0] == '.') dp0[i][0] = (int)(sum % M);
+            for (int j = 1; j < c; j++)
+            {
+                if (j - d >= 0) sum -= dp1[i+1][j - d];
+                if (j + d - 1 < c) sum += dp1[i + 1][j + d - 1];
+                if (grid[i][j] == '.') dp0[i][j] = (int)(sum % M);
+            }
+        }
+        long long sum = 0;
+        for (int j = 0; j < min(c, d+1); j++)
+        {
+            sum += dp0[i][j];
+        }
+        if (grid[i][0] == '.') dp1[i][0] = (sum % M);
+        for (int j = 1; j < c; j++)
+        {
+            if (j - d - 1>= 0) sum -= dp0[i][j - d - 1];
+            if (j + d < c) sum += dp0[i][j + d];
+            if (grid[i][j] == '.') dp1[i][j] = (int)(sum % M);
+        }
+    }
+    int result = 0;
+    for (int i = 0; i < c; i++)
+    {
+        result = (result + dp1[0][i]) % M;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3801. Minimum Cost to Merge Sorted Lists
+/// 
+/// Hard
+/// 
+/// You are given a 2D integer array lists, where each lists[i] is a 
+/// non - empty array of integers sorted in non - decreasing order.
+///
+/// You may repeatedly choose two lists a = lists[i] and b = lists[j], 
+/// where i != j, and merge them.The cost to merge a and b is :
+/// len(a) + len(b) + abs(median(a) - median(b)), where len and median 
+/// denote the list length and median, respectively.
+///
+/// After merging a and b, remove both a and b from lists and insert the 
+/// new merged sorted list in any position.Repeat merges until only one 
+/// list remains.
+///
+/// Return an integer denoting the minimum total cost required to merge 
+/// all lists into one single sorted list.
+///
+/// The median of an array is the middle element after sorting it in 
+/// non - decreasing order.If the array has an even number of elements, 
+/// the median is the left middle element.
+///
+/// Example 1:
+/// Input: lists = [[1, 3, 5], [2, 4], [6, 7, 8]]
+/// Output : 18
+/// Explanation :
+/// Merge a = [1, 3, 5] and b = [2, 4] :
+/// len(a) = 3 and len(b) = 2
+/// median(a) = 3 and median(b) = 2
+/// cost = len(a) + len(b) + abs(median(a) - median(b)) = 
+/// 3 + 2 + abs(3 - 2) = 6
+/// So lists becomes [[1, 2, 3, 4, 5], [6, 7, 8]] .
+/// Merge a = [1, 2, 3, 4, 5] and b = [6, 7, 8]:
+/// len(a) = 5 and len(b) = 3
+/// median(a) = 3 and median(b) = 7
+/// cost = len(a) + len(b) + abs(median(a) - median(b)) = 
+/// 5 + 3 + abs(3 - 7) = 12
+/// So lists becomes [[1, 2, 3, 4, 5, 6, 7, 8]], and 
+/// total cost is 6 + 12 = 18.
+///
+/// Example 2:
+/// Input: lists = [[1, 1, 5], [1, 4, 7, 8]]
+/// Output : 10
+/// Explanation :
+/// Merge a = [1, 1, 5] and b = [1, 4, 7, 8] :
+/// len(a) = 3 and len(b) = 4
+/// median(a) = 1 and median(b) = 4
+/// cost = len(a) + len(b) + abs(median(a) - median(b)) = 
+/// 3 + 4 + abs(1 - 4) = 10
+/// So lists becomes [[1, 1, 1, 4, 5, 7, 8]], and total cost is 10.
+///
+/// Example 3:
+/// Input: lists = [[1], [3]]
+/// Output : 4
+/// Explanation :
+/// Merge a = [1] and b = [3] :
+/// len(a) = 1 and len(b) = 1
+/// median(a) = 1 and median(b) = 3
+/// cost = len(a) + len(b) + abs(median(a) - median(b)) = 
+/// 1 + 1 + abs(1 - 3) = 4
+/// So lists becomes [[1, 3]], and total cost is 4.
+///
+/// Example 4:
+/// Input: lists = [[1], [1]]
+/// Output : 2
+/// Explanation :
+/// The total cost is len(a) + len(b) + abs(median(a) - median(b)) = 
+/// 1 + 1 + abs(1 - 1) = 2.
+///
+/// Constraints:
+/// 1. 2 <= lists.length <= 12
+/// 2. 1 <= lists[i].length <= 500
+/// 3. - 10^9 <= lists[i][j] <= 10^9
+/// 4. lists[i] is sorted in non - decreasing order.
+/// 5. The sum of lists[i].length will not exceed 2000.
+/// </summary>
+long long LeetCodeDP::minMergeCost(vector<vector<int>>& lists)
+{
+    int n = lists.size();
+    int size = 1 << n;
+    vector<pair<int, int>> dp(size);
+    for (int i = 1; i < size; i++)
+    {
+        vector<int> list;
+        for (int j = 0; j < n; j++)
+        {
+            if ((i & (1 << j)) != 0)
+            {
+                list.insert(list.end(), lists[j].begin(), lists[j].end());
+            }
+        }
+        sort(list.begin(), list.end());
+        dp[i].first = list.size();
+        dp[i].second = list[(list.size() - 1) / 2];
+    }
+    vector<long long> cost(size, LLONG_MAX);
+    for (int i = 0; i < n; i++)
+    {
+        cost[1 << i] = 0;
+    }
+    for (int i = 1; i < size; i++)
+    {
+        for (int j = 1; j < i; j++)
+        {
+            if ((i & j) == j)
+            {
+                int a = j;
+                int b = i ^ j;
+                cost[i] = min(cost[i], cost[a] + cost[b] + 
+                    dp[a].first + dp[b].first + std::abs(dp[a].second - dp[b].second));
+            }
+        }
+    }
+    return cost[size - 1];
 }
 #pragma endregion
 

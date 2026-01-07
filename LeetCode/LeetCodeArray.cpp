@@ -13104,36 +13104,33 @@ bool LeetCodeArray::arrayStringsAreEqual(vector<string>& word1, vector<string>& 
 /// </summary>
 int LeetCodeArray::minOperations(vector<int>& nums, int x)
 {
+    unordered_map<int, int> left;
     int result = INT_MAX;
     int sum = 0;
-    int left = 0;
-    for (left = 0; left < (int)nums.size(); left++)
+    int n = nums.size();
+    for (int i = 0; i < n; i++)
     {
-        sum += nums[left];
-        if (sum == x) result = min(result, left + 1);
-        if (sum >= x) break;
+        sum += nums[i];
+        if (left.count(sum) == 0)
+        {
+            left[sum] = i;
+        }
+        if (sum == x)
+        {
+            result = min(result, i + 1);
+        }
     }
-    if (sum < x) return -1;
-
-    int right = nums.size();
-    while (left >= 0 || sum <= x)
+    sum = 0;
+    for (int i = n - 1; i >= 0; i--)
     {
-        if (left >= 0 && sum > x)
+        sum += nums[i];
+        if (sum == x)
         {
-            sum -= nums[left];
-            left--;
+            result = min(result, n - i);
         }
-        else if (right > 0 && sum < x)
+        if (left.count(x - sum) > 0 && left[x - sum] < i)
         {
-            right--;
-            sum += nums[right];
-        }
-        else
-        {
-            result = min(result, left + 1 + (int)nums.size() - right);
-            if (left < 0) break;
-            sum -= nums[left];
-            left--;
+            result = min(result, n - i + left[x - sum] + 1);
         }
     }
     if (result == INT_MAX) result = -1;
@@ -41901,6 +41898,211 @@ vector<int> LeetCodeArray::minDeletions(string s, vector<vector<int>>& queries)
             int r = queries[i][2];
             result.push_back((int)(tree.sum(r) - tree.sum(l)));
         }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3779. Minimum Number of Operations to Have Distinct Elements
+/// 
+/// Medium
+///
+/// You are given an integer array nums.
+///
+/// In one operation, you remove the first three elements of the current 
+/// array.If there are fewer than three elements remaining, all remaining 
+/// elements are removed.
+///
+/// Repeat this operation until the array is empty or contains no 
+/// duplicate values.
+///
+/// Return an integer denoting the number of operations required.
+/// 
+/// Example 1:
+/// Input: nums = [3, 8, 3, 6, 5, 8]
+/// Output : 1
+/// Explanation :
+/// In the first operation, we remove the first three elements.The 
+/// remaining elements[6, 5, 8] are all distinct, so we stop.
+/// Only one operation is needed.
+///
+/// Example 2 :
+/// Input : nums = [2, 2]
+/// Output : 1
+/// Explanation :
+/// After one operation, the array becomes empty, which meets the 
+/// stopping condition.
+///
+/// Example 3 :
+/// Input : nums = [4, 3, 5, 1, 2]
+/// Output : 0
+/// Explanation :
+/// All elements in the array are distinct, therefore no operations 
+/// are needed.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeArray::minOperations_Dedup(vector<int>& nums)
+{
+    int n = nums.size();
+    unordered_set<int> distinct_num;
+    int result = 0;
+    for (int i = n - 1; i >= 0; i--)
+    {
+        if (distinct_num.count(nums[i]) > 0)
+        {
+            result = i / 3 + 1;
+            return result;
+        }
+        else
+        {
+            distinct_num.insert(nums[i]);
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3785. Minimum Swaps to Avoid Forbidden Values 
+///
+/// Hard
+/// 
+/// You are given two integer arrays, nums and forbidden, each of length n.
+///
+/// You may perform the following operation any number of times
+/// (including zero) :
+///
+/// Choose two distinct indices i and j, and swap nums[i] with nums[j].
+/// Return the minimum number of swaps required such that, for every 
+/// index i, the value of nums[i] is not equal to forbidden[i].If no 
+/// amount of swaps can ensure that every index avoids its forbidden 
+/// value, return -1.
+///
+/// Example 1:
+/// Input: nums = [1, 2, 3], forbidden = [3, 2, 1]
+/// Output : 1
+/// Explanation :
+/// One optimal set of swaps :
+/// Select indices i = 0 and j = 1 in nums and swap them, resulting in 
+/// nums = [2, 1, 3].
+/// 
+/// After this swap, for every index i, nums[i] is not equal to 
+/// forbidden[i].
+/// 
+/// Example 2 :
+/// Input : nums = [4, 6, 6, 5], forbidden = [4, 6, 5, 5]
+/// Output : 2
+/// Explanation :
+/// One optimal set of swaps :
+/// Select indices i = 0 and j = 2 in nums and swap them, resulting in 
+/// nums = [6, 6, 4, 5].
+/// Select indices i = 1 and j = 3 in nums and swap them, resulting in 
+/// nums = [6, 5, 4, 6].
+/// After these swaps, for every index i, nums[i] is not equal to 
+/// forbidden[i].
+/// 
+/// Example 3 :
+/// Input : nums = [7, 7], forbidden = [8, 7]
+/// Output : -1
+/// Explanation :
+/// It is not possible to make nums[i] different from forbidden[i] for 
+/// all indices.
+/// 
+/// Example 4 :
+/// Input : nums = [1, 2], forbidden = [2, 1]
+/// Output : 0
+/// Explanation :
+/// No swaps are required because nums[i] is already different from 
+/// forbidden[i] for all indices, so the answer is 0.
+///
+/// Constraints:
+/// 1. 1 <= n == nums.length == forbidden.length <= 10^5
+/// 2. 1 <= nums[i], forbidden[i] <= 10^9
+/// </summary>
+int LeetCodeArray::minSwaps(vector<int>& nums, vector<int>& forbidden)
+{
+    unordered_map<int, int> forbidden_map, num_map;
+    int n = nums.size();
+    int max_freq = 0;
+    int max_forbidden = 0;
+    int sum_forbidden = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        num_map[nums[i]]++;
+        num_map[forbidden[i]]++;
+        if (nums[i] == forbidden[i])
+        {
+            forbidden_map[nums[i]]++;
+            max_forbidden = max(max_forbidden, forbidden_map[nums[i]]);
+            sum_forbidden++;
+        }
+        max_freq = max(max_freq, num_map[nums[i]]);
+        max_freq = max(max_freq, num_map[forbidden[i]]);
+    }
+    if (max_freq > n) return -1;
+    return max((sum_forbidden + 1)/2, max_forbidden);
+}
+
+/// <summary>
+/// Leet Code 3788. Maximum Score of a Split 
+///
+/// Medium
+/// 
+/// You are given an integer array nums of length n.
+/// Choose an index i such that 0 <= i < n - 1.
+/// For a chosen split index i : 
+/// Let prefixSum(i) be the sum of nums[0] + nums[1] + ... + nums[i].
+/// Let suffixMin(i) be the minimum value among nums[i + 1], 
+/// nums[i + 2], ..., nums[n - 1].
+/// The score of a split at index i is defined as :
+///
+/// score(i) = prefixSum(i) - suffixMin(i)
+///
+/// Return an integer denoting the maximum score over all valid split 
+/// indices.
+/// 
+/// Example 1:
+/// Input: nums = [10, -1, 3, -4, -5]
+/// Output : 17
+/// Explanation :
+/// The optimal split is at i = 2, score(2) = prefixSum(2) - suffixMin(2) 
+/// = (10 + (-1) + 3) - (-5) = 17.
+///
+/// Example 2 :
+/// Input : nums = [-7, -5, 3]
+/// Output : -2
+/// Explanation :
+/// The optimal split is at i = 0, score(0) = prefixSum(0) - suffixMin(0) 
+/// = (-7) - (-5) = -2.
+/// 
+/// Example 3 :
+/// Input : nums = [1, 1]
+/// Output : 0
+/// Explanation :
+/// The only valid split is at i = 0, score(0) = prefixSum(0) - suffixMin(0) 
+/// = 1 - 1 = 0.
+///
+/// Constraints:
+/// 1. 2 <= nums.length <= 10^5
+/// 2. -10^9​​​ <= nums[i] <= 10^9
+/// </summary>
+long long LeetCodeArray::maximumScore(vector<int>& nums)
+{
+    long long result = LLONG_MIN;
+    long long prefixSum = 0;
+    long long suffixMin = nums.back();
+    for (size_t i = 0; i < nums.size() - 1; i++)
+    {
+        prefixSum += nums[i];
+    }
+    for (int i = nums.size() - 2; i >= 0; i--)
+    {
+        result = max(result, prefixSum - suffixMin);
+        prefixSum -= nums[i];
+        suffixMin = min(suffixMin, (long long)nums[i]);
     }
     return result;
 }

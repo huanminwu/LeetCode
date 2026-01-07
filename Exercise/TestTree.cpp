@@ -4650,8 +4650,77 @@ void TestLeetCode3772(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3786(void)
+{
+    Logger::WriteMessage("Test Leet Code 3786");
+    LeetCodeTree leetCode;
+    int n = 3;
+    vector<vector<int>> edges = { {0, 1},{1, 2} };
+    vector<int> group = { 1, 1, 1 };
+    long long result = leetCode.interactionCosts(n, edges, group);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(group);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    edges = { {0, 1},{1, 2} };
+    group = { 3, 2, 3 };
+    result = leetCode.interactionCosts(n, edges, group);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(group);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4;
+    edges = { {0, 1},{0, 2},{0, 3} };
+    group = { 1, 1, 4, 4 };
+    result = leetCode.interactionCosts(n, edges, group);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(group);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 2;
+    edges = { {0, 1} };
+    group = { 9, 8 };
+    result = leetCode.interactionCosts(n, edges, group);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(group);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3787(void)
+{
+    Logger::WriteMessage("Test Leet Code 3787");
+    LeetCodeTree leetCode;
+    int n = 3;
+    vector<vector<int>> edges = { {0, 1},{1, 2} };
+    string result = leetCode.findSpecialNodes(n, edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + result);
+
+    n = 7;
+    edges = { {0, 1},{1, 2},{2, 3},{3, 4},{3, 5},{1, 6} };
+    result = leetCode.findSpecialNodes(n, edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + result);
+
+    n = 2; 
+    edges = { {0, 1} };
+    result = leetCode.findSpecialNodes(n, edges);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3787();
+    TestLeetCode3786();
     TestLeetCode3772();
     TestLeetCode3593();
     TestLeetCode3585();

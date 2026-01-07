@@ -28435,13 +28435,455 @@ int LeetCodeMath::largestPrime(int n)
     }
     int result = 0;
     int sum = 0;
-    for (int i = 0; i < primes.size(); i++)
+    for (size_t i = 0; i < primes.size(); i++)
     {
         sum += primes[i];
         if (sum > n) break;
         if (isPrime[sum] == 0) continue;
         result = max(result, sum);
     }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3783. Mirror Distance of an Integer
+///
+/// Easy
+///
+/// You are given an integer n.
+/// Define its mirror distance as : abs(n - reverse(n))​​​​​​​ where reverse(n) 
+/// is the integer formed by reversing the digits of n.
+///
+/// Return an integer denoting the mirror distance of n​​​​​​​.
+/// abs(x) denotes the absolute value of x.
+/// 
+/// Example 1:
+/// Input: n = 25
+/// Output : 27
+/// Explanation :
+/// reverse(25) = 52.
+/// Thus, the answer is abs(25 - 52) = 27.
+///
+/// Example 2 :
+/// Input : n = 10
+/// Output : 9
+/// Explanation :
+/// reverse(10) = 01 which is 1.
+/// Thus, the answer is abs(10 - 1) = 9.
+///
+/// Example 3 :
+/// Input : n = 7
+/// Output : 0
+/// Explanation :
+/// reverse(7) = 7.
+/// Thus, the answer is abs(7 - 7) = 0.
+///
+/// Constraints :
+/// 1. 1 <= n <= 10^9
+/// </summary>
+int LeetCodeMath::mirrorDistance(int n)
+{
+    string str_n = to_string(n);
+    std::reverse(str_n.begin(), str_n.end());
+    return abs(n - atoi(str_n.c_str()));
+}
+
+
+/// <summary>
+/// Leet Code 3780. Maximum Sum of Three Numbers Divisible by Three
+///
+/// Medium
+/// 
+/// You are given an integer array nums.
+/// Your task is to choose exactly three integers from nums such that 
+/// their sum is divisible by three.
+///
+/// Return the maximum possible sum of such a triplet.If no such triplet 
+/// exists, return 0.
+/// 
+/// Example 1:
+/// Input: nums = [4, 2, 3, 1]
+/// Output : 9
+/// Explanation :
+/// The valid triplets whose sum is divisible by 3 are :
+/// (4, 2, 3) with a sum of 4 + 2 + 3 = 9.
+/// (2, 3, 1) with a sum of 2 + 3 + 1 = 6.
+/// Thus, the answer is 9.
+///
+/// Example 2:
+/// Input: nums = [2, 1, 5]
+/// Output : 0
+/// Explanation :
+/// No triplet forms a sum divisible by 3, so the answer is 0.
+/// Constraints:
+/// 1. 3 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeMath::maximumSumThree(vector<int>& nums)
+{
+    vector<set<pair<int, int>>> pq(3);
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        pq[nums[i] % 3].insert(make_pair(nums[i], i));
+        if ((int)pq[nums[i] % 3].size() > 3)
+        {
+            pq[nums[i] % 3].erase(pq[nums[i] % 3].begin());
+        }
+    }
+    int result = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        if (pq[i].size() == 3)
+        {
+            int sum = 0;
+            for (auto itr : pq[i]) sum += itr.first;
+            result = max(result, sum);
+        }
+    }
+    if ((!pq[0].empty()) && (!pq[1].empty()) && (!pq[2].empty()))
+    {
+        result = max(result, pq[0].rbegin()->first + pq[1].rbegin()->first + pq[2].rbegin()->first);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3782. Last Remaining Integer After Alternating Deletion 
+///                 Operations
+///
+/// Hard
+/// 
+/// You are given an integer n.
+///
+/// We write the integers from 1 to n in a sequence from left to right.
+/// Then, alternately apply the following two operations until only one 
+/// integer remains, starting with operation 1:
+///
+/// Operation 1 : Starting from the left, delete every second number.
+/// Operation 2 : Starting from the right, delete every second number.
+/// Return the last remaining integer.
+///
+/// Example 1 :
+/// Input : n = 8
+/// Output : 3
+/// Explanation :
+/// Write[1, 2, 3, 4, 5, 6, 7, 8] in a sequence.
+/// Starting from the left, we delete every second number : 
+/// [1, 2, 3, 4, 5, 6, 7, 8] .The remaining integers are[1, 3, 5, 7].
+/// Starting from the right, we delete every second number : [1, 3, 5, 7].
+/// The remaining integers are[3, 7].
+/// Starting from the left, we delete every second number : [3, 7].
+/// The remaining integer is[3].
+///    
+/// Example 2 :
+/// Input : n = 5
+/// Output : 1
+/// Explanation :
+/// Write[1, 2, 3, 4, 5] in a sequence.
+/// Starting from the left, we delete every second number : 
+/// [1, 2, 3, 4, 5] .The remaining integers are[1, 3, 5].
+/// Starting from the right, we delete every second number : [1, 3, 5] .
+/// The remaining integers are[1, 5].
+/// Starting from the left, we delete every second number : [1, 5] .
+/// The remaining integer is[1].
+///    
+/// Example 3 :
+/// Input : n = 1
+/// Output : 1
+/// Explanation :
+/// Write[1] in a sequence.
+/// The last remaining integer is 1.
+///
+/// Constraints :
+/// 1. 1 <= n <= 10^15
+/// </summary>
+long long LeetCodeMath::lastInteger(long long n)
+{
+    string bits;
+    int round = 0;
+    while (n > 1)
+    {
+        if (round == 0)
+        {
+            bits.push_back('0');
+        }
+        else
+        {
+            if (n % 2 == 0)
+            {
+                bits.push_back('1');
+            }
+            else
+            {
+                bits.push_back('0');
+            }
+        }
+        n -= n / 2;
+        round = 1 - round;
+    }
+    if (bits.empty()) bits.push_back('0');
+    std::reverse(bits.begin(), bits.end());
+    long long result = 0;
+    for (size_t i = 0; i < bits.size(); i++)
+    {
+        result = result * 2;
+        if (bits[i] == '1') result += 1;
+    }
+    return result + 1;
+}
+
+/// <summary>
+/// Leet Code 3789. Minimum Cost to Acquire Required Items 
+///
+/// Medium
+/// 
+/// You are given five integers cost1, cost2, costBoth, need1, and need2.
+/// There are three types of items available :
+/// An item of type 1 costs cost1 and contributes 1 unit to the type 1 
+/// requirement only.
+/// An item of type 2 costs cost2 and contributes 1 unit to the type 2 
+/// requirement only.
+/// An item of type 3 costs costBoth and contributes 1 unit to both type 1 
+/// and type 2 requirements.
+/// You must collect enough items so that the total contribution toward 
+/// type 1 is at least need1 and the total contribution toward type 2 
+/// is at least need2.
+///
+/// Return an integer representing the minimum possible total cost to 
+/// achieve these requirements.
+/// 
+/// Example 1:
+/// Input: cost1 = 3, cost2 = 2, costBoth = 1, need1 = 3, need2 = 2
+/// Output : 3
+/// Explanation :
+/// After buying three type 3 items, which cost 3 * 1 = 3, the total 
+/// contribution to type 1 is 3 (>= need1 = 3) and to type 2 is 3 
+/// (>= need2 = 2).
+/// Any other valid combination would cost more, so the minimum total 
+/// cost is 3.
+///
+/// Example 2 :
+/// Input : cost1 = 5, cost2 = 4, costBoth = 15, need1 = 2, need2 = 3
+/// Output : 22
+/// Explanation :
+/// We buy need1 = 2 items of type 1 and need2 = 3 items of 
+/// type 2 : 2 * 5 + 3 * 4 = 10 + 12 = 22.
+/// Any other valid combination would cost more, so the minimum 
+/// total cost is 22.
+///
+/// Example 3 :
+/// Input : cost1 = 5, cost2 = 4, costBoth = 15, need1 = 0, need2 = 0
+/// Output : 0
+/// Explanation :
+/// Since no items are required(need1 = need2 = 0), we buy nothing 
+/// and pay 0.
+///
+/// Constraints:
+/// 1. 1 <= cost1, cost2, costBoth <= 10^6
+/// 2. 0 <= need1, need2 <= 10^9
+/// </summary>
+long long LeetCodeMath::minimumCost(int cost1, int cost2, int costBoth, int need1, int need2)
+{
+    long long result = 0;
+    if (cost1 + cost2 >= costBoth)
+    {
+        int min_need = min(need1, need2);
+        result += (long long)costBoth * min_need;
+        need1 -= min_need;
+        need2 -= min_need;
+    }
+    if (cost1 >= costBoth) result += (long long)costBoth * need1;
+    else result += (long long)cost1 * need1;
+    if (cost2 >= costBoth) result += (long long)costBoth * need2;
+    else result += (long long)cost2 * need2;
+
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3790. Smallest All - Ones Multiple 
+///
+/// Medium
+/// 
+/// You are given a positive integer k.
+/// Find the smallest integer n divisible by k that consists of only the 
+/// digit 1 in its decimal representation(e.g., 1, 11, 111, ...).
+///
+/// Return an integer denoting the number of digits in the decimal 
+/// representation of n.If no such n exists, return -1.
+///
+/// Example 1:
+/// Input: k = 3
+/// Output : 3
+/// Explanation :
+/// n = 111 because 111 is divisible by 3, but 1 and 11 are not.The length 
+/// of n = 111 is 3.
+///
+/// Example 2 :
+/// Input : k = 7
+/// Output : 6
+/// Explanation :
+/// n = 111111. The length of n = 111111 is 6.
+///
+/// Example 3 :
+/// Input : k = 2
+/// Output : -1
+/// Explanation :
+/// There does not exist a valid n that is a multiple of 2.
+/// 
+/// Constraints:
+/// 1. 2 <= k <= 10^5
+/// </summary>
+int LeetCodeMath::minAllOneMultiple(int k)
+{
+    unordered_set<int> remainders;
+    int result = 1;
+    int n = 1;
+
+    while (n != 0)
+    {
+        if (remainders.count(n) > 0) return -1;
+        remainders.insert(n);
+        n = (n * 10 + 1) % k;
+        result++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3792. Sum of Increasing Product Blocks 
+///
+/// Medium
+/// 
+/// You are given an integer n.
+/// A sequence is formed as follows :
+/// The 1st block contains 1.
+/// The 2nd block contains 2 * 3.
+/// The ith block is the product of the next i consecutive integers.
+/// Let F(n) be the sum of the first n blocks.
+/// Return an integer denoting F(n) modulo 109 + 7.
+/// 
+/// Example 1:
+/// Input: n = 3
+/// Output : 127
+/// Explanation : ​​​​​​​
+/// Block 1 : 1
+/// Block 2 : 2 * 3 = 6
+/// Block 3 : 4 * 5 * 6 = 120
+/// F(3) = 1 + 6 + 120 = 127
+///
+/// Example 2 :
+/// Input : n = 7
+/// Output : 6997165
+/// Explanation :
+/// Block 1 : 1
+/// Block 2 : 2 * 3 = 6
+/// Block 3 : 4 * 5 * 6 = 120
+/// Block 4 : 7 * 8 * 9 * 10 = 5040
+/// Block 5 : 11 * 12 * 13 * 14 * 15 = 360360
+/// Block 6 : 16 * 17 * 18 * 19 * 20 * 21 = 39070080
+/// Block 7 : 22 * 23 * 24 * 25 * 26 * 27 * 28 = 5967561600
+/// F(7) = 6006997207 % (10^9 + 7) = 6997165
+///
+/// Constraints:
+/// 1. 1 <= n <= 1000
+/// </summary>
+int LeetCodeMath::sumOfBlocks(int n)
+{
+    long long start = 1;
+    long long M = 1000000007;
+    long long result = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        long long product = 1;
+        for (int j = start; j < start + i; j++)
+        {
+            product = (product * j) % M;
+        }
+        start += i;
+        result = (result + product) % M;
+    }
+    return (int)result;
+}
+
+/// <summary>
+/// Leet Code 3800. Minimum Cost to Make Two Binary Strings Equal 
+///
+/// Medium
+/// 
+/// You are given two binary strings s and t, both of length n, and three 
+/// positive integers flipCost, swapCost, and crossCost.
+///
+/// You are allowed to apply the following operations any number of 
+/// times(in any order) to the strings s and t:
+///
+/// Choose any index i and flip s[i] or t[i](change '0' to '1' 
+/// or '1' to '0'). The cost of this operation is flipCost.
+/// Choose two distinct indices i and j, and swap either s[i] and 
+/// s[j] or t[i] and t[j].The cost of this operation is swapCost.
+/// Choose an index i and swap s[i] with t[i].The cost of this operation 
+/// is crossCost.
+/// Return an integer denoting the minimum total cost needed to make the 
+/// strings s and t equal.
+///
+/// Example 1:
+/// Input: s = "01000", t = "10111", flipCost = 10, swapCost = 2, 
+/// crossCost = 2
+/// Output : 16
+/// Explanation :
+/// We can perform the following operations :
+/// Swap s[0] and s[1](swapCost = 2).After this operation, 
+/// s = "10000" and t = "10111".
+/// Cross swap s[2] and t[2](crossCost = 2).After this operation, 
+/// s = "10100" and t = "10011".
+/// Swap s[2] and s[3](swapCost = 2).After this operation, 
+/// s = "10010" and t = "10011".
+/// Flip s[4](flipCost = 10).After this operation, s = t = "10011".
+/// The total cost is 2 + 2 + 2 + 10 = 16.
+///
+/// Example 2:
+/// Input: s = "001", t = "110", flipCost = 2, swapCost = 100, 
+/// crossCost = 100
+/// Output : 6
+/// Explanation :
+/// Flipping all the bits of s makes the strings equal, and the total 
+/// cost is 3 * flipCost = 3 * 2 = 6.
+///
+/// Example 3 :
+/// Input : s = "1010", t = "1010", flipCost = 5, swapCost = 5, 
+/// crossCost = 5
+/// Output : 0
+/// Explanation :
+/// The strings are already equal, so no operations are required.
+/// 
+/// Constraints:
+/// 1. n == s.length == t.length
+/// 2. 1 <= n <= 105​​​​​​​
+/// 3. 1 <= flipCost, swapCost, crossCost <= 10^9
+/// 4. s and t consist only of the characters '0' and '1'.
+/// </summary>
+long long LeetCodeMath::minimumCost(string s, string t, int flipCost, int swapCost, int crossCost)
+{
+    long long result = 0;
+    int count1 = 0, count2 = 0;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == '0' && t[i] == '1')
+        {
+            count1++;
+        }
+        else if (s[i] == '1' && t[i] == '0')
+        {
+            count2++;
+        }
+    }
+
+    int min_count = min(count1, count2);
+    result += min((long long)swapCost, (long long)2 * flipCost) * min_count;
+    min_count = (count1 + count2 - 2 * min_count);
+    result += min((long long)min_count / 2 * (crossCost + swapCost), (long long)min_count / 2 * 2 * flipCost);
+    result += (long long)min_count % 2 * flipCost;
+    
     return result;
 }
 

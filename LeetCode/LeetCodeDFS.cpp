@@ -11732,4 +11732,185 @@ long long LeetCodeDFS::totalWavinessII(long long num1, long long num2)
     return result;
 }
 
+
+/// <summary>
+/// Leet Code 3791. Number of Balanced Integers in a Range
+/// </summary>
+long long LeetCodeDFS::countBalanced(string number, int index, int diff, int is_leading_zero, int is_limit,
+    vector<vector<vector<long long>>>& cache)
+{
+    if (index == number.size())
+    {
+        if (diff == 100 && is_leading_zero == 0) return 1;
+        else return 0;
+    }
+    int offset = is_leading_zero * 2 + is_limit;
+    if (cache[index][diff][offset] == -1)
+    {
+        cache[index][diff][offset] = 0;
+        for (int digit = 0; digit < 10; digit++)
+        {
+            int new_is_limit = 0;
+            int new_is_leading_zero = 0;
+            int new_diff = 0;
+            if (is_limit == 1)
+            {
+                if (digit + '0' > number[index]) continue;
+                else if (digit + '0' == number[index])
+                {
+                    new_is_limit = 1;
+                }
+            }
+            if (is_leading_zero == 1 && digit == 0)
+            {
+                new_is_leading_zero = 1;
+            }
+            if (index % 2 == 0) new_diff = diff + digit;
+            else new_diff = diff - digit;
+            cache[index][diff][offset] += countBalanced(number, index + 1, new_diff, new_is_leading_zero, new_is_limit, cache);
+        }
+    }
+    return cache[index][diff][offset];
+}
+
+/// <summary>
+/// Leet Code 3791. Number of Balanced Integers in a Range
+///
+/// Hard
+///
+/// You are given two integers low and high.
+///
+/// An integer is called balanced if it satisfies both of the following 
+/// conditions :
+///
+/// It contains at least two digits.
+/// The sum of digits at even positions is equal to the sum of digits at 
+/// odd positions(the leftmost digit has position 1).
+/// Return an integer representing the number of balanced integers in the 
+/// range[low, high](both inclusive).
+///
+/// Example 1:
+/// Input: low = 1, high = 100
+/// Output : 9
+/// Explanation :
+/// The 9 balanced numbers between 1 and 100 are 11, 22, 33, 44, 55, 66, 
+/// 77, 88, and 99.
+///
+/// Example 2 :
+/// Input : low = 120, high = 129
+/// Output : 1
+/// Explanation :
+/// Only 121 is balanced because the sum of digits at even and odd 
+/// positions are both 2.
+///
+/// Example 3 :
+/// Input : low = 1234, high = 1234
+/// Output : 0
+/// Explanation :
+/// 1234 is not balanced because the sum of digits at odd 
+/// positions(1 + 3 = 4) does not equal the sum at even 
+/// positions(2 + 4 = 6).
+/// 
+/// Constraints:
+/// 1. 1 <= low <= high <= 10^15
+/// </summary>
+long long LeetCodeDFS::countBalanced(long long low, long long high)
+{
+    string number = to_string(high);
+    int n = number.size();
+    vector<vector<vector<long long>>> cache1(n, vector<vector<long long>>(200, vector<long long>(4, -1)));
+    long long result = countBalanced(number, 0, 100, 1, 1, cache1);
+    number = to_string(low-1);
+    vector<vector<vector<long long>>> cache2(n, vector<vector<long long>>(200, vector<long long>(4, -1)));
+    result -= countBalanced(number, 0, 100, 1, 1, cache2);
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3799. Word Squares II
+/// </summary>
+void LeetCodeDFS::wordSquaresII(vector<string>& words, int index, vector<string>& path,
+    vector<int>& visited, vector<vector<string>>& result)
+{
+    if (index == 4)
+    {
+        result.push_back(path);
+        return;
+    }
+    for (int i = 0; i < words.size(); i++)
+    {
+        if (visited[i] == 1) continue;
+        if (index == 1 && words[i][0] != path[0][0]) continue;
+        if (index == 2 && words[i][0] != path[0][3]) continue;
+        if (index == 3 && (words[i][0] != path[1][3] || words[i][3] != path[2][3])) continue;
+        visited[i] = 1;
+        path.push_back(words[i]);
+        wordSquaresII(words, index + 1, path, visited, result);
+        path.pop_back();
+        visited[i] = 0;
+    }
+}
+
+/// <summary>
+/// Leet Code 3799. Word Squares II
+///
+/// Medium
+///
+/// You are given a string array words, consisting of distinct 4 - letter 
+/// strings, each containing lowercase English letters.
+///
+/// A word square consists of 4 distinct words : top, left, right and 
+/// bottom, arranged as follows :
+///
+/// top forms the top row.
+/// bottom forms the bottom row.
+/// left forms the left column(top to bottom).
+/// right forms the right column(top to bottom).
+/// It must satisfy :
+/// top[0] == left[0], top[3] == right[0]
+/// bottom[0] == left[3], bottom[3] == right[3]
+/// Return all valid distinct word squares, sorted in ascending 
+/// lexicographic order by the 4 - tuple(top, left, right, bottom)​​​​​​​.
+///
+/// Example 1:
+/// Input: words = ["able", "area", "echo", "also"]
+/// Output : [["able", "area", "echo", "also"], 
+/// ["area", "able", "also", "echo"]]
+/// Explanation :
+/// 
+/// There are exactly two valid 4 - word squares that satisfy all corner 
+/// constraints :
+/// "able" (top), "area" (left), "echo" (right), "also" (bottom)
+/// top[0] == left[0] == 'a'
+/// top[3] == right[0] == 'e'
+/// bottom[0] == left[3] == 'a'
+/// bottom[3] == right[3] == 'o'
+/// "area" (top), "able" (left), "also" (right), "echo" (bottom)
+/// All corner constraints are satisfied.
+/// Thus, the answer is [["able", "area", "echo", "also"], 
+/// ["area", "able", "also", "echo"]] .
+///
+/// Example 2:
+/// Input: words = ["code", "cafe", "eden", "edge"]
+/// Output : []
+/// Explanation :
+/// No combination of four words satisfies all four corner constraints.
+/// Thus, the answer is empty array[].
+/// 
+/// Constraints:
+/// 1. 4 <= words.length <= 15
+/// 2. words[i].length == 4
+/// 3. words[i] consists of only lowercase English letters.
+/// 4. All words[i] are distinct.
+/// </summary>
+vector<vector<string>> LeetCodeDFS::wordSquaresII(vector<string>& words)
+{
+    sort(words.begin(), words.end());
+    vector<int> visited(words.size());
+    vector<string> path;
+    vector<vector<string>> result;
+    wordSquaresII(words, 0, path, visited, result);
+    return result;
+}
 #pragma endregion

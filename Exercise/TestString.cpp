@@ -8640,8 +8640,81 @@ void TestLeetCode3775(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode3784(void)
+{
+    Logger::WriteMessage("Test Leet Code 3784");
+    LeetCodeString leetCode;
+    string s = "aabaac";
+    vector<int> cost = { 1, 2, 3, 4, 1, 10 };
+    long long result = leetCode.minCost_Equal(s, cost);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "abc";
+    cost = { 10, 5, 8 };
+    result = leetCode.minCost_Equal(s, cost);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "zzzzz"; 
+    cost = { 67, 67, 67, 67, 67 };
+    result = leetCode.minCost_Equal(s, cost);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(cost);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3794(void)
+{
+    Logger::WriteMessage("Test Leet Code 3794");
+    LeetCodeString leetCode;
+    string s = "abcd";
+    int k = 2;
+    string result = leetCode.reversePrefix(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+
+    s = "xyz";
+    k = 3;
+    result = leetCode.reversePrefix(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+
+    s = "hey";
+    k = 1;
+    result = leetCode.reversePrefix(s, k);
+    Logger::WriteMessage("s = " + s + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode3798(void)
+{
+    Logger::WriteMessage("Test Leet Code 3798");
+    LeetCodeString leetCode;
+    string s = "1112";
+    string result = leetCode.largestEven(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+
+    s = "221";
+    result = leetCode.largestEven(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+
+    s = "1";
+    result = leetCode.largestEven(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+}
+
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3798();
+    TestLeetCode3794();
+    TestLeetCode3784();
     TestLeetCode3775();
     TestLeetCode3773();
     TestLeetCode3760();

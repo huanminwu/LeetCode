@@ -12966,5 +12966,167 @@ public:
     /// 4. 0 <= grid[i][j] <= 2
     /// </summary>
     int maxPathScore(vector<vector<int>>& grid, int k);
+
+    /// <summary>
+    /// Leet Code 3797. Count Routes to Climb a Rectangular Grid
+    /// 
+    /// Hard
+    /// 
+    /// You are given a string array grid of size n, where each string grid[i] 
+    /// has length m.The character grid[i][j] is one of the following symbols :
+    /// '.' : The cell is available.
+    /// '#' : The cell is blocked.
+    /// You want to count the number of different routes to climb grid.Each 
+    /// route must start from any cell in the bottom row(row n - 1) and end 
+    /// in the top row(row 0).
+    ///
+    /// However, there are some constraints on the route.
+    ///
+    /// You can only move from one available cell to another available cell.
+    /// The Euclidean distance of each move is at most d, where d is an 
+    /// integer parameter given to you.The Euclidean distance between two 
+    /// cells(r1, c1), (r2, c2) is sqrt((r1 - r2)2 + (c1 - c2)2).
+    /// Each move either stays on the same row or moves to the row 
+    /// directly above(from row r to r - 1).
+    /// You cannot stay on the same row for two consecutive turns.If you 
+    /// stay on the same row in a move(and this move is not the last move), 
+    /// your next move must go to the row above.
+    /// Return an integer denoting the number of such routes.Since the answer 
+    /// may be very large, return it modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: grid = ["..", "#."], d = 1
+    /// Output : 2
+    /// Explanation :
+    /// We label the cells we visit in the routes sequentially, starting 
+    /// from 1. The two routes are :
+    /// .2
+    /// #1
+    /// 32
+    /// #1
+    /// We can move from the cell(1, 1) to the cell(0, 1) because the Euclidean
+    /// distance is sqrt((1 - 0)2 + (1 - 1)2) = sqrt(1) <= d.
+    ///
+    /// However, we cannot move from the cell(1, 1) to the cell(0, 0) because 
+    /// the Euclidean distance is sqrt((1 - 0)2 + (1 - 0)2) = sqrt(2) > d.
+    ///
+    /// Example 2:
+    /// Input: grid = ["..", "#."], d = 2
+    /// Output : 4
+    /// Explanation :
+    /// Two of the routes are given in example 1. The other two routes are :
+    /// 2.
+    /// #1
+    /// 23
+    /// #1
+    /// Note that we can move from(1, 1) to(0, 0) because the Euclidean 
+    /// distance is sqrt(2) <= d.
+    ///
+    /// Example 3:
+    /// Input: grid = ["#"], d = 750
+    /// Output : 0
+    /// Explanation :
+    /// We cannot choose any cell as the starting cell.Therefore, there are no 
+    /// routes.
+    ///
+    /// Example 4 :
+    /// Input : grid = [".."], d = 1
+    /// Output : 4
+    /// Explanation :
+    /// The possible routes are :
+    /// .1
+    /// 1.
+    /// 12
+    /// 21
+    /// 
+    /// Constraints :
+    /// 1. 1 <= n == grid.length <= 750
+    /// 2. 1 <= m == grid[i].length <= 750
+    /// 3. grid[i][j] is '.' or '#'.
+    /// 4. 1 <= d <= 750
+    /// </summary>
+    int numberOfRoutes(vector<string>& grid, int d);
+
+    /// <summary>
+    /// Leet Code 3801. Minimum Cost to Merge Sorted Lists
+    /// 
+    /// Hard
+    /// 
+    /// You are given a 2D integer array lists, where each lists[i] is a 
+    /// non - empty array of integers sorted in non - decreasing order.
+    ///
+    /// You may repeatedly choose two lists a = lists[i] and b = lists[j], 
+    /// where i != j, and merge them.The cost to merge a and b is :
+    /// len(a) + len(b) + abs(median(a) - median(b)), where len and median 
+    /// denote the list length and median, respectively.
+    ///
+    /// After merging a and b, remove both a and b from lists and insert the 
+    /// new merged sorted list in any position.Repeat merges until only one 
+    /// list remains.
+    ///
+    /// Return an integer denoting the minimum total cost required to merge 
+    /// all lists into one single sorted list.
+    ///
+    /// The median of an array is the middle element after sorting it in 
+    /// non - decreasing order.If the array has an even number of elements, 
+    /// the median is the left middle element.
+    ///
+    /// Example 1:
+    /// Input: lists = [[1, 3, 5], [2, 4], [6, 7, 8]]
+    /// Output : 18
+    /// Explanation :
+    /// Merge a = [1, 3, 5] and b = [2, 4] :
+    /// len(a) = 3 and len(b) = 2
+    /// median(a) = 3 and median(b) = 2
+    /// cost = len(a) + len(b) + abs(median(a) - median(b)) = 
+    /// 3 + 2 + abs(3 - 2) = 6
+    /// So lists becomes [[1, 2, 3, 4, 5], [6, 7, 8]] .
+    /// Merge a = [1, 2, 3, 4, 5] and b = [6, 7, 8]:
+    /// len(a) = 5 and len(b) = 3
+    /// median(a) = 3 and median(b) = 7
+    /// cost = len(a) + len(b) + abs(median(a) - median(b)) = 
+    /// 5 + 3 + abs(3 - 7) = 12
+    /// So lists becomes [[1, 2, 3, 4, 5, 6, 7, 8]], and 
+    /// total cost is 6 + 12 = 18.
+    ///
+    /// Example 2:
+    /// Input: lists = [[1, 1, 5], [1, 4, 7, 8]]
+    /// Output : 10
+    /// Explanation :
+    /// Merge a = [1, 1, 5] and b = [1, 4, 7, 8] :
+    /// len(a) = 3 and len(b) = 4
+    /// median(a) = 1 and median(b) = 4
+    /// cost = len(a) + len(b) + abs(median(a) - median(b)) = 
+    /// 3 + 4 + abs(1 - 4) = 10
+    /// So lists becomes [[1, 1, 1, 4, 5, 7, 8]], and total cost is 10.
+    ///
+    /// Example 3:
+    /// Input: lists = [[1], [3]]
+    /// Output : 4
+    /// Explanation :
+    /// Merge a = [1] and b = [3] :
+    /// len(a) = 1 and len(b) = 1
+    /// median(a) = 1 and median(b) = 3
+    /// cost = len(a) + len(b) + abs(median(a) - median(b)) = 
+    /// 1 + 1 + abs(1 - 3) = 4
+    /// So lists becomes [[1, 3]], and total cost is 4.
+    ///
+    /// Example 4:
+    /// Input: lists = [[1], [1]]
+    /// Output : 2
+    /// Explanation :
+    /// The total cost is len(a) + len(b) + abs(median(a) - median(b)) = 
+    /// 1 + 1 + abs(1 - 1) = 2.
+    ///
+    /// Constraints:
+    /// 1. 2 <= lists.length <= 12
+    /// 2. 1 <= lists[i].length <= 500
+    /// 3. - 10^9 <= lists[i][j] <= 10^9
+    /// 4. lists[i] is sorted in non - decreasing order.
+    /// 5. The sum of lists[i].length will not exceed 2000.
+    /// </summary>
+    long long minMergeCost(vector<vector<int>>& lists);
+ 
+
 };
 #endif  // LeetCodeDP

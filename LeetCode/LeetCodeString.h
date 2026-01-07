@@ -18445,6 +18445,125 @@ public:
     /// </summary>
     string reverseWordsVowel(string s);
 
+    /// <summary>
+    /// Leet Code 3784. Minimum Deletion Cost to Make All Characters Equal
+    ///
+    /// Medium
+    ///
+    /// You are given a string s of length n and an integer array cost of 
+    /// the same length, where cost[i] is the cost to delete the ith 
+    /// character of s.
+    ///
+    /// You may delete any number of characters from s(possibly none), such 
+    /// that the resulting string is non - empty and consists of equal 
+    /// characters.
+    ///
+    /// Return an integer denoting the minimum total deletion cost required.
+    ///
+    /// Example 1:
+    /// Input: s = "aabaac", cost = [1, 2, 3, 4, 1, 10]
+    /// Output : 11
+    ///
+    /// Explanation :
+    /// Deleting the characters at indices 0, 1, 2, 3, 4 results in the string 
+    /// "c", which consists of equal characters, and the total cost is 
+    /// cost[0] + cost[1] + cost[2] + cost[3] + cost[4] = 1 + 2 + 3 + 4 + 1 = 11.
+    ///
+    /// Example 2 :
+    /// Input : s = "abc", cost = [10, 5, 8]
+    /// Output : 13
+    /// Explanation :
+    /// Deleting the characters at indices 1 and 2 results in the string "a", 
+    /// which consists of equal characters, and the total cost is 
+    /// cost[1] + cost[2] = 5 + 8 = 13.
+    ///
+    /// Example 3 :
+    /// Input : s = "zzzzz", cost = [67, 67, 67, 67, 67]
+    /// Output : 0
+    /// Explanation :
+    /// All characters in s are equal, so the deletion cost is 0.
+    ///
+    /// Constraints:
+    /// 1. n == s.length == cost.length
+    /// 2. 1 <= n <= 10^5
+    /// 3. 1 <= cost[i] <= 10^9
+    /// 4. s consists of lowercase English letters.
+    /// </summary>
+    long long minCost_Equal(string s, vector<int>& cost);
+
+    /// <summary>
+    /// Leet Code 3794. Reverse String Prefix
+    ///
+    /// Easy
+    /// 
+    /// You are given a string s and an integer k.
+    /// Reverse the first k characters of s and return the resulting string.
+    ///
+    /// Example 1:
+    /// Input: s = "abcd", k = 2
+    /// Output : "bacd"
+    /// Explanation : ​​​​​​​
+    /// The first k = 2 characters "ab" are reversed to "ba".The final 
+    /// resulting string is "bacd".
+    ///
+    /// Example 2 :
+    /// Input : s = "xyz", k = 3
+    /// Output : "zyx"
+    /// Explanation :
+    /// The first k = 3 characters "xyz" are reversed to "zyx".The final 
+    /// resulting string is "zyx".
+    ///
+    /// Example 3 :
+    /// Input : s = "hey", k = 1
+    /// Output : "hey"
+    /// Explanation :
+    /// The first k = 1 character "h" remains unchanged on reversal.The final 
+    /// resulting string is "hey".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s consists of lowercase English letters.
+    /// 3. 1 <= k <= s.length
+    /// </summary>
+    string reversePrefix(string s, int k);
+
+    /// <summary>
+    /// Leet Code 3798. Largest Even Number
+    ///
+    /// You are given a string s consisting only of the characters '1' and '2'.
+    ///
+    /// You may delete any number of characters from s without changing the 
+    /// order of the remaining characters.
+    ///
+    /// Return the largest possible resultant string that represents an even 
+    /// integer.If there is no such string, return the empty string "".
+    ///
+    /// Example 1:
+    /// Input: s = "1112"
+    /// Output : "1112"
+    /// Explanation :
+    /// The string already represents the largest possible even number, so no 
+    /// deletions are needed.
+    ///
+    /// Example 2 :
+    /// Input : s = "221"
+    /// Output : "22"
+    /// Explanation :
+    /// Deleting '1' results in the largest possible even number which is equal 
+    /// to 22.
+    ///
+    /// Example 3 :
+    /// Input : s = "1"
+    /// Output : ""
+    /// Explanation :
+    /// There is no way to get an even number.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s consists only of the characters '1' and '2'.
+    /// </summary>
+    string largestEven(string s);
+
 #pragma endregion
 };
 

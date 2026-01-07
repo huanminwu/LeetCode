@@ -6442,8 +6442,71 @@ void TestLeetCode3742(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3797(void)
+{
+    Logger::WriteMessage("Test Leet Code 3797");
+    LeetCodeDP leetCode;
+    vector<string> grid = { "..", "#." };
+    int d = 1;
+    int result = leetCode.numberOfRoutes(grid, d);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+
+    grid = { "..","#." };
+    d = 2;
+    result = leetCode.numberOfRoutes(grid, d);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+
+    grid = {"#"};
+    d = 750;
+    result = leetCode.numberOfRoutes(grid, d);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+
+    grid = { ".." };
+    d = 1;
+    result = leetCode.numberOfRoutes(grid, d);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+
+    grid = { "..." };
+    d = 1;
+    result = leetCode.numberOfRoutes(grid, d);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("d = " + to_string(d) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3801(void)
+{
+    Logger::WriteMessage("Test Leet Code 3801");
+    LeetCodeDP leetCode;
+    vector<vector<int>> lists = { {1, 3, 5},{2, 4},{6, 7, 8} };
+    long long result = leetCode.minMergeCost(lists);
+    Logger::WriteMessage(lists);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    lists = { {1, 1, 5},{1, 4, 7, 8} };
+    result = leetCode.minMergeCost(lists);
+    Logger::WriteMessage(lists);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    lists = { {1},{3} };
+    result = leetCode.minMergeCost(lists);
+    Logger::WriteMessage(lists);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    lists = { {1},{1} };
+    result = leetCode.minMergeCost(lists);
+    Logger::WriteMessage(lists);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3801();
+    TestLeetCode3797();
     TestLeetCode3742();
     TestLeetCode3743();
     TestLeetCode3704();

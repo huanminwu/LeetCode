@@ -2760,8 +2760,45 @@ void TestLeetCode3753(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3791(void)
+{
+    Logger::WriteMessage("Test Leet Code 3791");
+    LeetCodeDFS leetCode;
+    int low = 1, high = 100;
+    long long result = leetCode.countBalanced(low, high);
+    Logger::WriteMessage("low = " + to_string(low) + "; num2 = " + to_string(high));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    low = 120, high = 129;
+    result = leetCode.countBalanced(low, high);
+    Logger::WriteMessage("low = " + to_string(low) + "; num2 = " + to_string(high));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    low = 1234, high = 1234;
+    result = leetCode.countBalanced(low, high);
+    Logger::WriteMessage("low = " + to_string(low) + "; num2 = " + to_string(high));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3799(void)
+{
+    Logger::WriteMessage("Test Leet Code 3799");
+    LeetCodeDFS leetCode;
+    vector<string> words = { "able", "area", "echo", "also" };
+    vector<vector<string>> result = leetCode.wordSquaresII(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+
+    words = { "code", "cafe", "eden", "edge" };
+    result = leetCode.wordSquaresII(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3799();
+    TestLeetCode3791();
     TestLeetCode3753();
     TestLeetCode3747();
     TestLeetCode3690();

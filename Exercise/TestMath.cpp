@@ -8511,8 +8511,154 @@ void TestLeetCode3770(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3783(void)
+{
+    Logger::WriteMessage("Test Leet Code 3783");
+    LeetCodeMath leetCode;
+    int n = 25;
+    int result = leetCode.mirrorDistance(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 10;
+    result = leetCode.mirrorDistance(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 7;
+    result = leetCode.mirrorDistance(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3780(void)
+{
+    Logger::WriteMessage("Test Leet Code 3780");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 4, 2, 3, 1 };
+    int result = leetCode.maximumSumThree(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,1,5 };
+    result = leetCode.maximumSumThree(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3782(void)
+{
+    Logger::WriteMessage("Test Leet Code 3782");
+    LeetCodeMath leetCode;
+    int n = 8;
+    long long result = leetCode.lastInteger(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 5;
+    result = leetCode.lastInteger(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 1;
+    result = leetCode.lastInteger(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3789(void)
+{
+    Logger::WriteMessage("Test Leet Code 3789");
+    LeetCodeMath leetCode;
+    int cost1 = 3, cost2 = 2, costBoth = 1, need1 = 3, need2 = 2;
+    long long result = leetCode.minimumCost(cost1, cost2, costBoth, need1, need2);
+    Logger::WriteMessage("cost1 = " + to_string(cost1) + "; cost2 = " + to_string(cost2) +"; costBoth = " + to_string(costBoth));
+    Logger::WriteMessage("need1 = " + to_string(need1) + "; need2 = " + to_string(need2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    cost1 = 5, cost2 = 4, costBoth = 15, need1 = 2, need2 = 3;
+    result = leetCode.minimumCost(cost1, cost2, costBoth, need1, need2);
+    Logger::WriteMessage("cost1 = " + to_string(cost1) + "; cost2 = " + to_string(cost2) + "; costBoth = " + to_string(costBoth));
+    Logger::WriteMessage("need1 = " + to_string(need1) + "; need2 = " + to_string(need2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    cost1 = 5, cost2 = 4, costBoth = 15, need1 = 0, need2 = 0;
+    result = leetCode.minimumCost(cost1, cost2, costBoth, need1, need2);
+    Logger::WriteMessage("cost1 = " + to_string(cost1) + "; cost2 = " + to_string(cost2) + "; costBoth = " + to_string(costBoth));
+    Logger::WriteMessage("need1 = " + to_string(need1) + "; need2 = " + to_string(need2));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3790(void)
+{
+    Logger::WriteMessage("Test Leet Code 3790");
+    LeetCodeMath leetCode;
+    int k = 3;
+    int result = leetCode.minAllOneMultiple(k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    k = 7;
+    result = leetCode.minAllOneMultiple(k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    k = 2;
+    result = leetCode.minAllOneMultiple(k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3792(void)
+{
+    Logger::WriteMessage("Test Leet Code 3792");
+    LeetCodeMath leetCode;
+    int n = 3;
+    int result = leetCode.sumOfBlocks(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 7;
+    result = leetCode.sumOfBlocks(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3800(void)
+{
+    Logger::WriteMessage("Test Leet Code 3800");
+    LeetCodeMath leetCode;
+    string s = "01000", t = "10111";
+    int flipCost = 10, swapCost = 2, crossCost = 2;
+    long long result = leetCode.minimumCost(s, t, flipCost, swapCost, crossCost);
+    Logger::WriteMessage("s = " + s + "; t = " + t);
+    Logger::WriteMessage("flipCost = " + to_string(flipCost) + "; swapCost = " + to_string(swapCost) + "; crossCost = " + to_string(crossCost));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "001", t = "110"; 
+    flipCost = 2, swapCost = 100, crossCost = 100;
+    result = leetCode.minimumCost(s, t, flipCost, swapCost, crossCost);
+    Logger::WriteMessage("s = " + s + "; t = " + t);
+    Logger::WriteMessage("flipCost = " + to_string(flipCost) + "; swapCost = " + to_string(swapCost) + "; crossCost = " + to_string(crossCost));
+    Logger::WriteMessage("result = " + to_string(result));
+
+     s = "1010", t = "1010";
+    flipCost = 5, swapCost = 5, crossCost = 5;
+    result = leetCode.minimumCost(s, t, flipCost, swapCost, crossCost);
+    Logger::WriteMessage("s = " + s + "; t = " + t);
+    Logger::WriteMessage("flipCost = " + to_string(flipCost) + "; swapCost = " + to_string(swapCost) + "; crossCost = " + to_string(crossCost));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3800();
+    TestLeetCode3792();
+    TestLeetCode3790();
+    TestLeetCode3789();
+    TestLeetCode3782();
+    TestLeetCode3780();
+    TestLeetCode3783();
     TestLeetCode3770();
     TestLeetCode3765();
     TestLeetCode3751();
