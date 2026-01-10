@@ -8869,65 +8869,51 @@ int LeetCodeDFS::numberOfWays(int n, int x)
 /// <summary>
 /// Leet Code 2801. Count Stepping Numbers in Range
 /// </summary>
-int LeetCodeDFS::countSteppingNumbers(string& limit, int index, vector<vector<int>>& dp,
-    int prev, bool leadingzero, bool leadinglimit)
+int LeetCodeDFS::countSteppingNumbers(string& target, int index, int prev_digit,
+    vector<vector<int>>& cache, int is_leadingzero, int is_limit)
 {
     long long result = 0;
     long long M = 1000000007;
-    if (index == limit.size())
+    if (index == target.size())
     {
-        if (leadingzero) return 0;
+        if (is_leadingzero == 1) return 0;
         else return 1;
     }
-    if (leadinglimit == false && leadingzero == false && dp[index][prev] != -1)
+    if (is_limit == 0 && is_leadingzero == 0 && cache[index][prev_digit] != -1)
     {
-        return dp[index][prev];
+        return cache[index][prev_digit];
     }
 
-    int count = 0;
-    if (leadingzero)
+    for (int i = 0; i < 10; i++)
     {
-        for (int i = 0; i < 10; i++)
+        int new_is_leadingzero = 0;
+        int new_is_limit = 0;
+        if (is_leadingzero == 1)
         {
-            bool next_leadingzero = false;
-            bool next_leadinglimit = false;
-            if (i == 0)
+            if (i == 0) new_is_leadingzero = 1;
+        }
+        else
+        {
+            if (std::abs(i - prev_digit) != 1) continue;
+        }
+        if (is_limit == 1)
+        {
+            if (i > target[index] - '0') break;
+            else if (i == target[index] - '0')
             {
-                next_leadingzero = true;
+                new_is_limit = 1;
             }
             else
             {
-                next_leadingzero = false;
+                new_is_limit = 0;
             }
-            if (leadinglimit)
-            {
-                if (i > limit[index] - '0') break;
-                if (i == limit[index] - '0') next_leadinglimit = true;
-                else next_leadinglimit = false;
-            }
-            count = countSteppingNumbers(limit, index + 1, dp, i, next_leadingzero, next_leadinglimit);
-            result = (result + count) % M;
         }
+        result += countSteppingNumbers(target, index + 1, i, cache, new_is_leadingzero, new_is_limit);
+        result = result % M;
     }
-    else 
+    if (is_limit == 0 && is_leadingzero == 0)
     {
-        for (int i = prev - 1; i <= prev + 1; i += 2)
-        {
-            bool next_leadinglimit = false;
-            if (i < 0 || i > 9) continue;
-            if (leadinglimit)
-            {
-                if (i > limit[index] - '0') break;
-                if (i == limit[index] - '0') next_leadinglimit = true;
-                else next_leadinglimit = false;
-            }
-            count = countSteppingNumbers(limit, index + 1, dp, i, false, next_leadinglimit);
-            result = (result + count) % M;
-        }
-    }
-    if (leadinglimit == false && leadingzero == false)
-    {
-        dp[index][prev] = (int)result;
+        cache[index][prev_digit] = (int)result;;
     }
     return (int)result;
 }
@@ -8974,10 +8960,10 @@ int LeetCodeDFS::countSteppingNumbers(string& limit, int index, vector<vector<in
 int LeetCodeDFS::countSteppingNumbers(string low, string high)
 {
     int M = 1000000007;
-    vector<vector<int>> dp = vector<vector<int>>(low.size(), vector<int>(10, -1));
-    int low_count = countSteppingNumbers(low, 0, dp, 0, true, true);
-    dp = vector<vector<int>>(high.size(), vector<int>(10, -1));
-    int high_count = countSteppingNumbers(high, 0, dp, 0, true, true);
+    vector<vector<int>> cache = vector<vector<int>>(low.size(), vector<int>(10, -1));
+    int low_count = countSteppingNumbers(low, 0, 0, cache, 1, 1);
+    cache = vector<vector<int>>(high.size(), vector<int>(10, -1));
+    int high_count = countSteppingNumbers(high, 0, 0, cache, 1, 1);
     int result = ((high_count - low_count) % M + M) % M;
     int count = 1;
     for (size_t i = 1; i < low.size(); i++)
@@ -8995,44 +8981,44 @@ int LeetCodeDFS::countSteppingNumbers(string low, string high)
 /// <summary>
 /// Leet Code 2827. Number of Beautiful Integers in the Range
 /// </summary>
-int LeetCodeDFS::numberOfBeautifulIntegers(string limit, int k, int remainder, int parity, int index,
-    vector<vector<vector<int>>>& dp, bool is_leadingzero, bool is_leadinglimit)
+int LeetCodeDFS::numberOfBeautifulIntegers(string target, int k, int index,
+    int remainder, int parity,
+    vector<vector<vector<int>>>& cache, int is_leadingzero, int is_limit)
 {
-    int result = 0;
-    if (index == limit.size())
+    if (index == target.size())
     {
         if (parity != 10 || remainder != 0 || is_leadingzero) return 0;
         else return 1;
     }
-    if (is_leadinglimit == false && is_leadingzero == false && dp[index][remainder][parity] != -1)
+    if (is_limit == 0 && is_leadingzero == 0 && cache[index][remainder][parity] != -1)
     {
-        return dp[index][remainder][parity];
+        return cache[index][remainder][parity];
     }
 
-    int count = 0;
+    int result = 0;
     for (int i = 0; i < 10; i++)
     {
-        bool next_leadingzero = false;
-        bool next_leadinglimit = false;
-        if (i == 0 && is_leadingzero) next_leadingzero = true;
-        else next_leadingzero = false;
-        if (is_leadinglimit)
+        int new_is_leadingzero = 0;
+        int new_is_limit = 0;
+        if (i == 0 && is_leadingzero) new_is_leadingzero = 1;
+
+        if (is_limit)
         {
-            if (i > limit[index] - '0') break;
-            if (i == limit[index] - '0') next_leadinglimit = true;
-            else next_leadinglimit = false;
+            if (i > target[index] - '0') break;
+            else if (i == target[index] - '0') new_is_limit = 1;
+            else new_is_limit = 0;
         }
         int r = (remainder * 10 + i) % k;
-        int p = next_leadingzero ? 0 : ((i % 2 == 0) ? 1 : -1);
-        count = numberOfBeautifulIntegers(limit, k, r, parity + p, index + 1, dp, next_leadingzero, next_leadinglimit);
-        result = result + count;
+        int p = new_is_leadingzero ? 0 : ((i % 2 == 0) ? 1 : -1);
+        result += numberOfBeautifulIntegers(target, k, index + 1,
+            r, parity + p, cache, new_is_leadingzero, new_is_limit);
     }
 
-    if (is_leadinglimit == false && is_leadingzero == false)
+    if (is_limit == 0 && is_leadingzero == 0)
     {
-        dp[index][remainder][parity] = (int)result;
+        cache[index][remainder][parity] = (int)result;
     }
-    return (int)result;
+    return result;
 }
 
 /// <summary>
@@ -9091,13 +9077,13 @@ int LeetCodeDFS::numberOfBeautifulIntegers(int low, int high, int k)
     string str_low = to_string(low-1);
     string str_high = to_string(high);
 
-    vector<vector<vector<int>>> dp = vector<vector<vector<int>>>(str_low.size(), 
+    vector<vector<vector<int>>> cache = vector<vector<vector<int>>>(str_low.size(), 
         vector<vector<int>>(k, vector<int>(20, -1)));
 
-    int low_count = numberOfBeautifulIntegers(str_low, k, 0, 10, 0, dp, true, true);
-    dp = vector<vector<vector<int>>>(str_high.size(),
+    int low_count = numberOfBeautifulIntegers(str_low, k, 0, 0, 10, cache, 1, 1);
+    cache = vector<vector<vector<int>>>(str_high.size(),
         vector<vector<int>>(k, vector<int>(20, -1)));
-    int high_count = numberOfBeautifulIntegers(str_high, k, 0, 10, 0, dp, true, true);
+    int high_count = numberOfBeautifulIntegers(str_high, k, 0, 0, 10, cache, 1, 1);
     int result = high_count - low_count;
     return result;
 }
@@ -9415,7 +9401,7 @@ int LeetCodeDFS::selfDivisiblePermutationCount(int n)
 /// <summary>
 /// Leet Code 2999. Count the Number of Powerful Integers 
 /// </summary>
-long long LeetCodeDFS::numberOfPowerfulInt(string str_num, int index, int limit, bool leading_limit)
+long long LeetCodeDFS::numberOfPowerfulInt(string str_num, int index, int limit, bool is_limit)
 {
     if (str_num.empty()) return 0;
     if (index == str_num.size())
@@ -9423,13 +9409,10 @@ long long LeetCodeDFS::numberOfPowerfulInt(string str_num, int index, int limit,
         return 1;
     }
     long long result = 0;
-    if (leading_limit)
+    if (is_limit)
     {
-        if (str_num[index] > '0')
-        {
-            result += min((limit + 1), str_num[index] - '0') *
+        result += min((limit + 1), str_num[index] - '0') *
                 numberOfPowerfulInt(str_num, index + 1, limit, false);
-        }
         if (str_num[index] - '0' <= limit)
         {
             result += numberOfPowerfulInt(str_num, index + 1, limit, true);
@@ -10237,7 +10220,8 @@ vector<int> LeetCodeDFS::permuteIV(int n, long long k)
 int LeetCodeDFS::beautifulNumbers(string str, int index, int is_limit, long long product, long long sum,
     unordered_map<string, int>& cache)
 {
-    if (sum == 0) product = 1;
+    if (sum == 0) 
+      product = 1;
     if (index == str.size())
     {
         if (sum != 0 && product % sum == 0) return 1;
@@ -10248,24 +10232,19 @@ int LeetCodeDFS::beautifulNumbers(string str, int index, int is_limit, long long
     {
         return cache[key];
     }
-    int result = 0;
-    if (is_limit)
+    cache[key] = 0;
+    for (int i = 0; i <= 9; i++)
     {
-        for (int i = 0; i < str[index] - '0'; i++)
+        int new_is_limit = 0;
+        if (is_limit)
         {
-            result += beautifulNumbers(str, index + 1, 0, product * i, sum + i, cache);
+            if (i > str[index] - '0') continue;
+            else if (i == str[index] - '0') new_is_limit = 1;
+            else new_is_limit = 0;
         }
-        result += beautifulNumbers(str, index + 1, 1, product * (str[index] - '0'), sum + (str[index] - '0'), cache);
+        cache[key] += beautifulNumbers(str, index + 1, new_is_limit, product * i, sum + i, cache);
     }
-    else
-    {
-        for (int i = 0; i <= 9; i++)
-        {
-            result += beautifulNumbers(str, index + 1, 0, product * i, sum + i, cache);
-        }
-    }
-    cache[key] = result;
-    return result;
+    return cache[key];
 }
 
 /// <summary>
@@ -10306,42 +10285,36 @@ int LeetCodeDFS::beautifulNumbers(int l, int r)
 /// <summary>
 /// Leet Code 3519. Count Numbers with Non-Decreasing Digits 
 /// </summary>
-int LeetCodeDFS::countNumbersDigitDP(string num, int pos, int digit, int b, bool is_limit,
-    vector<vector<int>>& cache)
+int LeetCodeDFS::countNumbersDigitDP(string str_num, int pos, int prev_digit, int b, bool is_limit,
+    vector<vector<vector<int>>>& cache)
 {
     int M = 1000000007;
-    if (pos == num.size()) return 1;
-    int result = 0;
-    int count = 0;
-    if (is_limit)
+    if (pos == str_num.size()) return 1;
+    if (cache[pos][prev_digit][is_limit] != -1)
     {
-        for (int i = 0; i < num[pos] - '0'; i++)
-        {
-            if (i < digit) continue;
-            count = countNumbersDigitDP(num, pos + 1, i, b, false, cache);
-            result = (result + count) % M;
-        }
-        if (num[pos] - '0' >= digit)
-        {
-            count = countNumbersDigitDP(num, pos + 1, num[pos] - '0', b, true, cache);
-            result = (result + count) % M;
-        }
+        return cache[pos][prev_digit][is_limit];
     }
-    else
+
+    cache[pos][prev_digit][is_limit] = 0;
+    for (int i = 0; i < b; i++)
     {
-        if (cache[pos][digit] != -1)
+        if (i < prev_digit) continue;
+        bool new_is_limit = false;
+        if (is_limit)
         {
-            return cache[pos][digit];
+            if (i + '0' > str_num[pos]) continue;
+            else if (i + '0' == str_num[pos])
+            {
+                new_is_limit = true;
+            }
+            else
+            {
+                new_is_limit = false;
+            }
         }
-        for (int i = 0; i < b; i++)
-        {
-            if (i < digit) continue;
-            count = countNumbersDigitDP(num, pos + 1, i, b, false, cache);
-            result = (result + count) % M;
-        }
-        cache[pos][digit] = result;
+        cache[pos][prev_digit][is_limit] = (cache[pos][prev_digit][is_limit] + countNumbersDigitDP(str_num, pos + 1, i, b, new_is_limit, cache)) % M;
     }
-    return result;
+    return cache[pos][prev_digit][is_limit];
 }
 
 /// <summary>
@@ -10421,9 +10394,9 @@ int LeetCodeDFS::countNumbers(string l, string r, int b)
     int M = 1000000007;
     string left = countNumbersConvertBase(l, b);
     string right = countNumbersConvertBase(r, b);
-    vector<vector<int>> cache = vector<vector<int>>(left.size(), vector<int>(b, -1));
+    vector<vector<vector<int>>> cache = vector<vector<vector<int>>>(left.size(), vector<vector<int>>(b, vector<int>(2,  -1)));
     int count1 = countNumbersDigitDP(left, 0, 0, b, true, cache);
-    cache = vector<vector<int>>(right.size(), vector<int>(b, -1));
+    cache = vector<vector<vector<int>>>(right.size(), vector<vector<int>>(b, vector<int>(2, -1)));
     int count2 = countNumbersDigitDP(right, 0, 0, b, true, cache);
     int result = (count2 + M - count1) % M;
     int inc = 1;
@@ -11838,7 +11811,7 @@ void LeetCodeDFS::wordSquaresII(vector<string>& words, int index, vector<string>
         result.push_back(path);
         return;
     }
-    for (int i = 0; i < words.size(); i++)
+    for (size_t i = 0; i < words.size(); i++)
     {
         if (visited[i] == 1) continue;
         if (index == 1 && words[i][0] != path[0][0]) continue;
@@ -11913,4 +11886,550 @@ vector<vector<string>> LeetCodeDFS::wordSquaresII(vector<string>& words)
     wordSquaresII(words, 0, path, visited, result);
     return result;
 }
+
+/// <summary>
+/// Leet Code 3704. Count No-Zero Pairs That Sum to N
+///
+/// Hard
+///
+/// A no-zero integer is a positive integer that does not contain the 
+/// digit 0 in its decimal representation.
+///
+/// Given an integer n, count the number of pairs (a, b) where:
+///
+/// a and b are no-zero integers.
+/// a + b = n
+/// Return an integer denoting the number of such pairs.
+/// 
+/// Example 1:
+/// Input: n = 2
+/// Output: 1
+/// Explanation:
+/// The only pair is (1, 1).
+/// Example 2:
+/// Input: n = 3
+/// Output: 2
+/// Explanation:
+/// The pairs are (1, 2) and (2, 1).
+/// Example 3:
+/// Input: n = 11
+/// Output: 8
+/// Explanation:
+/// The pairs are (2, 9), (3, 8), (4, 7), (5, 6), (6, 5), (7, 4), (8, 3), and 
+/// (9, 2). Note that (1, 10) and (10, 1) do not satisfy the conditions 
+/// because 10 contains 0 in its decimal representation.
+/// 
+/// Constraints:
+/// 1. 2 <= n <= 10^15
+/// </summary>
+long long LeetCodeDFS::countNoZeroPairs(long long n)
+{
+    vector<vector<vector<vector<long long>>>> dp(16,
+        vector<vector<vector<long long>>>(2,
+            vector<vector<long long>>(2, vector<long long>(2, 0))));
+    int index = -1;
+    while (n > 0)
+    {
+        index++;
+        int digit = n % 10;
+        n = n / 10;
+        for (int a = 0; a <= 9; a++)
+        {
+            for (int prev_carry = 0; prev_carry <= 1; prev_carry++)
+            {
+                int carry = 0;
+                int b = (digit - prev_carry) - a;
+                if (b < 0)
+                {
+                    b += 10;
+                    carry = 1;
+                }
+                if (index == 0)
+                {
+                    if (prev_carry == 1) continue;
+                    if (a != 0 && b != 0)
+                    {
+                        dp[index][carry][0][0] += 1;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    int is_zero_a = (a == 0) ? 1 : 0;
+                    int is_zero_b = (b == 0) ? 1 : 0;
+                    // take care of no carry from previous digit
+                    for (int i = 0; i <= is_zero_a; i++)
+                    {
+                        for (int j = 0; j <= is_zero_b; j++)
+                        {
+                            dp[index][carry][is_zero_a][is_zero_b] += dp[index - 1][prev_carry][i][j];
+                        }
+                    }
+                }
+            }
+        }
+    }
+    long long result = 0;
+    for (size_t i = 0; i < 2; i++)
+    {
+        for (int j = 0; j < 2; j++)
+        {
+            result += dp[index][0][i][j];
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3621. Number of Integers With Popcount-Depth Equal to K I
+/// </summary>
+long long LeetCodeDFS::popcountDepthI(string str_num, int index, int is_limit, int bit_count, int k,
+    vector<int>& pop_count, vector<vector<vector<long long>>>& cache)
+{
+    if (index == str_num.size())
+    {
+        if (pop_count[bit_count] == k) return 1;
+        else return 0;
+    }
+    if (cache[index][bit_count][is_limit] != -1)
+    {
+        return cache[index][bit_count][is_limit];
+    }
+    cache[index][bit_count][is_limit] = 0;
+    for (int i = 0; i <= 1; i++)
+    {
+        int new_is_limit = 0;
+        if (is_limit == 1 && i + '0' > str_num[index])
+        {
+            continue;
+        }
+        else if (is_limit == 1 && i + '0' == str_num[index])
+        {
+            new_is_limit = 1;
+        }
+        else
+        {
+            new_is_limit = 0;
+        }
+        int new_bit_count = bit_count;
+        if (i == 1) new_bit_count++;
+        cache[index][bit_count][is_limit] += 
+            popcountDepthI(str_num, index + 1, new_is_limit, new_bit_count, k, pop_count, cache);
+    }
+    return cache[index][bit_count][is_limit];
+}
+
+/// <summary>
+/// Leet Code 3621. Number of Integers With Popcount-Depth Equal to K I
+///
+/// Hard
+///
+/// You are given two integers n and k.
+/// For any positive integer x, define the following sequence:
+/// p0 = x
+/// pi+1 = popcount(pi) for all i >= 0, where popcount(y) is the number 
+/// of set bits (1's) in the binary representation of y.
+/// This sequence will eventually reach the value 1.
+///
+/// The popcount-depth of x is defined as the smallest integer d >= 0 such 
+/// that pd = 1.
+/// For example, if x = 7 (binary representation "111"). Then, the 
+/// sequence is: 7 → 3 → 2 → 1, so the popcount-depth of 7 is 3.
+///
+/// Your task is to determine the number of integers in the range [1, n] 
+/// whose popcount-depth is exactly equal to k.
+///
+/// Return the number of such integers.
+/// 
+/// Example 1:
+/// Input: n = 4, k = 1
+/// Output: 2
+/// Explanation:
+/// The following integers in the range [1, 4] have popcount-depth exactly 
+/// equal to 1:
+///
+/// x   Binary  Sequence
+/// 2   "10"    2 → 1
+/// 4   "100"   4 → 1
+/// Thus, the answer is 2.
+///
+/// Example 2:
+///
+/// Input: n = 7, k = 2
+/// 
+/// Output: 3
+/// 
+/// Explanation:
+///
+/// The following integers in the range [1, 7] have popcount-depth 
+/// exactly equal to 2:
+/// 
+/// x   Binary  Sequence
+/// 3   "11"    3 → 2 → 1
+/// 5   "101"   5 → 2 → 1
+/// 6   "110"   6 → 2 → 1
+/// Thus, the answer is 3.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 10^15
+/// 2. 0 <= k <= 5
+/// </summary>
+long long LeetCodeDFS::popcountDepthI(long long n, int k)
+{
+    if (k == 0) return 1;
+    string str_num;
+    while (n > 0)
+    {
+        str_num.push_back('0' + n % 2);
+        n /= 2;
+    }
+    std::reverse(str_num.begin(), str_num.end());
+
+    vector<int> bit_count(64), pop_count(64);
+    for (int i = 0; i < 64; i++)
+    {
+        bit_count[i] = bitCount(i);
+    }
+    for (int i = 1; i < 64; i++)
+    {
+        int n = i;
+        int count = 0;
+        while (n != 1)
+        {
+            n = bit_count[n];
+            count++;
+        }
+        pop_count[i] = count + 1;
+    }
+    int size = str_num.size();
+    vector<vector<vector<long long>>> cache(size, vector<vector<long long>>(size + 1, vector<long long>(2, -1)));
+    long long result = popcountDepthI(str_num, 0, 1, 0, k, pop_count, cache);
+    if (k == 1) result--;
+    return result;
+}
+
+/// <summary>
+/// Leet code #1088. Confusing Number II
+/// </summary>
+int LeetCodeDFS::confusingNumberII(string& str_n, int index, int left_size, int is_limit, vector<vector<int>>& cache)
+{
+    if (index == (int)str_n.size()) return 1;
+    if (is_limit == 0 && cache[index][left_size] != -1)
+    {
+        return cache[index][left_size];
+    }
+    int result = 0;
+    for (int i = 0; i < 10; i++)
+    {
+        int new_is_limit = 0;
+        int new_left_size = 0;
+        if (is_limit == 1)
+        {
+            if (i > str_n[index] - '0') break;
+            else if (i == str_n[index] - '0')
+            {
+                new_is_limit = 1;
+            }
+            else
+            {
+                new_is_limit = 0;
+            }
+        }
+        if (i != 0 && i != 1 && i != 6 && i != 8 && i != 9) continue;
+        if (left_size == 0 && i == 0)
+        {
+            new_left_size = 0;
+        }
+        else
+        {
+            new_left_size = left_size + 1;
+        }
+        int right_size = str_n.size() - 1 - index;
+        result += confusingNumberII(str_n, index + 1, new_left_size, new_is_limit, cache);
+        if ((left_size == right_size) ||
+            ((left_size == right_size + 1) && (i == 0 || i == 1 || i == 8)))
+        {
+            if (new_is_limit == 0) result--;
+            else
+            {
+                int half_size = str_n.size() / 2;
+                string left_str = str_n.substr(0, half_size);
+                string right_str = str_n.substr(str_n.size() - half_size);
+                vector<int> mapping = { 0, 1, 0, 0, 0, 0, 9, 0, 8, 6 };
+                for (size_t i = 0; i < left_str.size(); i++)
+                {
+                    left_str[i] = '0' + mapping[left_str[i] - '0'];
+                }
+                std::reverse(left_str.begin(), left_str.end());
+                if (atoi(left_str.c_str()) < atoi(right_str.c_str()))
+                {
+                    result--;
+                }
+            }
+        }
+    }
+    if (is_limit == 0)
+    {
+        cache[index][left_size] = result;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1088. Confusing Number II
+/// 
+/// We can rotate digits by 180 degrees to form new digits. When 
+/// 0, 1, 6, 8, 9 are rotated 180 degrees, they become 0, 1, 9, 8, 6 
+/// respectively. When 2, 3, 4, 5 and 7 are rotated 180 degrees, they 
+/// become invalid.
+///
+/// A confusing number is a number that when rotated 180 degrees 
+/// becomes a different number with each digit valid.(Note that the 
+/// rotated number can be greater than the original number.)
+///
+/// Given a positive integer N, return the number of confusing numbers 
+/// between 1 and N inclusive.
+/// 
+/// Example 1:
+///
+/// Input: 20
+/// Output: 6
+/// Explanation: 
+/// The confusing numbers are [6,9,10,16,18,19].
+/// 6 converts to 9.
+/// 9 converts to 6.
+/// 10 converts to 01 which is just 1.
+/// 16 converts to 91.
+/// 18 converts to 81.
+/// 19 converts to 61.
+///
+/// Example 2:
+///
+/// Input: 100
+/// Output: 19
+/// Explanation: 
+/// The confusing numbers are [6,9,10,16,18,19,60,61,66,68,80,81,86,89,
+/// 90,91,98,99,100].
+///
+///
+/// Note:
+///
+///  1. 1 <= N <= 10^9
+/// </summary>
+int LeetCodeDFS::confusingNumberII(int N)
+{
+    string str_n = to_string(N);
+    vector<vector<int>> cache(str_n.size(), vector<int>(str_n.size(), -1));
+    return confusingNumberII(str_n, 0, 0, 1, cache);
+}
+
+
+/// <summary>
+/// Leet code #233. Number of Digit One 
+/// </summary>
+int LeetCodeDFS::countDigitOne(string& str_n, int index, int is_limit, vector<int>& cache)
+{
+    int result = 0;
+    if (index == str_n.size()) return 0;
+    if (is_limit == 0 && cache[index] != -1)
+    {
+        return cache[index];
+    }
+    for (int d = 0; d <= (is_limit ? str_n[index] - '0' : 9); d++)
+    {
+        int new_is_limit = (is_limit == 1 && d == str_n[index] - '0') ? 1 : 0;
+        result += countDigitOne(str_n, index + 1, new_is_limit,  cache);
+        if (d == 1)
+        {
+            if (index == str_n.size() - 1) result += 1;
+            else
+            {
+                if (new_is_limit == 1) result += atoi(str_n.substr(index + 1).c_str()) + 1;
+                else
+                {
+                    result += (int)pow(10, str_n.size() - index - 1);
+                }
+            }
+        }
+    }
+    if (is_limit == 0) cache[index] = result;
+    return result;
+}
+
+/// <summary>
+/// Leet code #233. Number of Digit One 
+/// Given an integer n, count the total number of digit 1 appearing in all 
+/// non-negative integers less than or equal to n.
+/// For example: 
+/// Given n = 13,
+/// Return 6, because digit 1 occurred in the following numbers: 1, 10, 
+/// 11, 12, 13. 
+/// Hint: 
+/// 1.Beware of overflow.
+/// </summary>
+int LeetCodeDFS::countDigitOne(int n)
+{
+    if (n <= 0) return 0;
+    string str_n = to_string(n);
+    vector<int> cache(str_n.size(), -1);
+    int result = countDigitOne(str_n, 0, 1, cache);
+    return result;
+}
+
+
+/// <summary>
+/// Leet code #1067. Digit Count in Range
+/// </summary>
+int LeetCodeDFS::digitsCount(string& str_n, int d, int index, int is_leadingzero, int is_limit, vector<int>& cache)
+{
+    int result = 0;
+    if (index == str_n.size()) return 0;
+    if (is_leadingzero == 0 && is_limit == 0 && cache[index] != -1)
+    {
+        return cache[index];
+    }
+    for (int i = 0; i <= (is_limit ? str_n[index] - '0' : 9); i++)
+    {
+        int new_is_leadingzero = (is_leadingzero == 1 && i == 0) ? 1 : 0;
+        int new_is_limit = (is_limit == 1 && i == str_n[index] - '0') ? 1 : 0;
+        result += digitsCount(str_n, d, index + 1, new_is_leadingzero, new_is_limit, cache);
+        if (d == 0 && new_is_leadingzero == 1) continue;
+        if (i == d)
+        {
+            if (index == str_n.size() - 1) result += 1;
+            else
+            {
+                if (new_is_limit == 1) result += atoi(str_n.substr(index + 1).c_str()) + 1;
+                else
+                {
+                    result += (int)pow(10, str_n.size() - index - 1);
+                }
+            }
+        }
+    }
+    if (is_leadingzero == 0 && is_limit == 0) cache[index] = result;
+    return result;
+}
+
+/// <summary>
+/// Leet code #1067. Digit Count in Range
+/// 
+/// Given an integer d between 0 and 9, and two positive integers low and 
+/// high as lower and upper bounds, respectively. Return the number of 
+/// times that d occurs as a digit in all integers between low and high, 
+/// including the bounds low and high.
+/// 
+/// Example 1:
+/// Input: d = 1, low = 1, high = 13
+/// Output: 6
+/// Explanation: 
+/// The digit d=1 occurs 6 times in 1,10,11,12,13. Note that the digit d=1 
+/// occurs twice in the number 11.
+///
+/// Example 2:
+///
+/// Input: d = 3, low = 100, high = 250
+/// Output: 35
+/// Explanation: 
+/// The digit d=3 occurs 35 times in 103,113,123,130,131,...,238,239,243.
+///
+///
+/// Note:
+///
+/// 0 <= d <= 9
+/// 1 <= low <= high <= 2×10^8
+/// </summary>
+int LeetCodeDFS::digitsCount(int d, int low, int high)
+{
+    string str_low = to_string(low - 1);
+    vector<int> cache(str_low.size(), -1);
+    int low_count = digitsCount(str_low, d, 0, 1, 1, cache);
+    string str_high = to_string(high);
+    cache = vector<int>(str_high.size(), -1);
+    int high_count = digitsCount(str_high, d, 0, 1, 1, cache);
+    return  high_count - low_count;
+}
+
+/// <summary>
+/// Leet code #1012. Numbers With Repeated Digits
+/// </summary>
+int LeetCodeDFS::numDupDigitsAtMostN(string& str_n, int index, int is_leadingzero, int is_limit,
+    int bit_mask, vector<vector<int>>& cache)
+{
+    if (index >= (int)str_n.size()) return 0;
+    if (is_limit == 0 && is_leadingzero == 0 && cache[index][bit_mask] != -1) return cache[index][bit_mask];
+    int result = 0;
+    for (int i = 0; i <= (is_limit == 1 ? str_n[index] - '0' : 9); i++)
+    {
+        int next_is_leadingzero = (is_leadingzero == 1 && i == 0) ? 1 : 0;
+        int next_is_limit = (is_limit == 1 && i == str_n[index] - '0') ? 1 : 0;
+        if (next_is_leadingzero == 1)
+        {
+            result += numDupDigitsAtMostN(str_n, index + 1, next_is_leadingzero, next_is_limit, bit_mask, cache);
+        }
+        else
+        {
+            int bit = 1 << i;
+            if ((bit & bit_mask) != 0)
+            {
+                if (next_is_limit == 1)
+                {
+                    result += atoi(str_n.substr(index + 1).c_str()) + 1;
+                }
+                else
+                {
+                    result += (int)pow(10, str_n.size() - 1 - index);
+                }
+            }
+            else
+            {
+                result += numDupDigitsAtMostN(str_n, index + 1, next_is_leadingzero, next_is_limit, (bit | bit_mask), cache);
+            }
+        }
+    }
+    if (is_limit == 0 && is_leadingzero == 0)
+    {
+        cache[index][bit_mask] = result;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #1012. Numbers With Repeated Digits
+/// 
+/// Given a positive integer N, return the number of positive integers less 
+/// than or equal to N that have at least 1 repeated digit.
+///
+/// Example 1:
+/// Input: 20
+/// Output: 1
+/// Explanation: The only positive number (<= 20) with at least 1 repeated 
+/// digit is 11.
+///
+/// Example 2:
+/// Input: 100
+/// Output: 10
+/// Explanation: The positive numbers (<= 100) with atleast 1 repeated digit 
+/// are 11, 22, 33, 44, 55, 66, 77, 88, 99, and 100.
+///
+/// Example 3:
+/// Input: 1000
+/// Output: 262
+/// 
+///
+/// Note:
+///
+/// 1 <= N <= 10^9
+/// </summary>
+int LeetCodeDFS::numDupDigitsAtMostN(int N)
+{
+    string str_n = to_string(N);
+    int index = 0;
+    vector<vector<int>> cache(str_n.size(), vector<int>(1<< 10, -1));
+    return numDupDigitsAtMostN(str_n, 0, 1, 1, 0, cache);
+}
+
 #pragma endregion

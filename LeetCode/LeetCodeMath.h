@@ -965,54 +965,6 @@ public:
     int sumOfDigits(vector<int>& A);
 
     /// <summary>
-    /// Leet code #1088. Confusing Number II
-    /// </summary>
-    int confusingNumberII(string& str_n, int index, int leading, int is_last, vector<vector<int>>& cache);
-
-    /// <summary>
-    /// Leet code #1088. Confusing Number II
-    /// 
-    /// We can rotate digits by 180 degrees to form new digits. When 
-    /// 0, 1, 6, 8, 9 are rotated 180 degrees, they become 0, 1, 9, 8, 6 
-    /// respectively. When 2, 3, 4, 5 and 7 are rotated 180 degrees, they 
-    /// become invalid.
-    ///
-    /// A confusing number is a number that when rotated 180 degrees 
-    /// becomes a different number with each digit valid.(Note that the 
-    /// rotated number can be greater than the original number.)
-    ///
-    /// Given a positive integer N, return the number of confusing numbers 
-    /// between 1 and N inclusive.
-    /// 
-    /// Example 1:
-    ///
-    /// Input: 20
-    /// Output: 6
-    /// Explanation: 
-    /// The confusing numbers are [6,9,10,16,18,19].
-    /// 6 converts to 9.
-    /// 9 converts to 6.
-    /// 10 converts to 01 which is just 1.
-    /// 16 converts to 91.
-    /// 18 converts to 81.
-    /// 19 converts to 61.
-    ///
-    /// Example 2:
-    ///
-    /// Input: 100
-    /// Output: 19
-    /// Explanation: 
-    /// The confusing numbers are [6,9,10,16,18,19,60,61,66,68,80,81,86,89,
-    /// 90,91,98,99,100].
-    ///
-    ///
-    /// Note:
-    ///
-    ///  1. 1 <= N <= 10^9
-    /// </summary>
-    int confusingNumberII(int N);
-
-    /// <summary>
     /// Leet code #1093. Statistics from a Large Sample
     /// 
     /// We sampled integers between 0 and 255, and stored the results in an 
@@ -4231,60 +4183,6 @@ public:
     vector<int> lexicalOrder(int n);
 
     /// <summary>
-    /// Leet code #233. Number of Digit One 
-    /// </summary>
-    int countDigitOne(string& str_n, int is_last, int index, vector<int> &cache);
-
-    /// <summary>
-    /// Leet code #233. Number of Digit One 
-    ///
-    /// Given an integer n, count the total number of digit 1 appearing 
-    /// in all non-negative integers less than or equal to n.
-    /// For example: 
-    /// Given n = 13,
-    /// Return 6, because digit 1 occurred in the following numbers: 
-    /// 1, 10, 11, 12, 13. 
-    /// Hint: 
-    /// 1.Beware of overflow.
-    /// </summary>
-    int countDigitOne(int n);
-
-    /// <summary>
-    /// Leet code #1067. Digit Count in Range
-    /// </summary>
-    int digitsCount(string& str_n, int d, int is_first, int is_last, int index, vector<int>& cache);
-
-    /// <summary>
-    /// Leet code #1067. Digit Count in Range
-    /// 
-    /// Given an integer d between 0 and 9, and two positive integers low and 
-    /// high as lower and upper bounds, respectively. Return the number of 
-    /// times that d occurs as a digit in all integers between low and high, 
-    /// including the bounds low and high.
-    /// 
-    /// Example 1:
-    /// Input: d = 1, low = 1, high = 13
-    /// Output: 6
-    /// Explanation: 
-    /// The digit d=1 occurs 6 times in 1,10,11,12,13. Note that the digit d=1 
-    /// occurs twice in the number 11.
-    ///
-    /// Example 2:
-    ///
-    /// Input: d = 3, low = 100, high = 250
-    /// Output: 35
-    /// Explanation: 
-    /// The digit d=3 occurs 35 times in 103,113,123,130,131,...,238,239,243.
-    ///
-    ///
-    /// Note:
-    ///
-    /// 0 <= d <= 9
-    /// 1 <= low <= high <= 2×10^8
-    /// </summary>
-    int digitsCount(int d, int low, int high);
-
-    /// <summary>
     /// Leet code #60. Permutation Sequence
     /// The set [1,2,3,...n] contains a total of n! unique permutations.
     /// By listing and labeling all of the permutations in order,
@@ -4391,41 +4289,6 @@ public:
     /// solution.pick(1);
     /// </summary>
     int pickRandom(vector<int>& nums, int target);
-
-    /// <summary>
-    /// Leet code #1012. Numbers With Repeated Digits
-    /// </summary>
-    int numDupDigitsAtMostN(string& str_n, int index, int leading, int is_last, int bit_mask, vector<vector<int>>& cache);
-
-    /// <summary>
-    /// Leet code #1012. Numbers With Repeated Digits
-    /// 
-    /// Given a positive integer N, return the number of positive integers less 
-    /// than or equal to N that have at least 1 repeated digit.
-    ///
-    /// Example 1:
-    /// Input: 20
-    /// Output: 1
-    /// Explanation: The only positive number (<= 20) with at least 1 repeated 
-    /// digit is 11.
-    ///
-    /// Example 2:
-    /// Input: 100
-    /// Output: 10
-    /// Explanation: The positive numbers (<= 100) with atleast 1 repeated digit 
-    /// are 11, 22, 33, 44, 55, 66, 77, 88, 99, and 100.
-    ///
-    /// Example 3:
-    /// Input: 1000
-    /// Output: 262
-    /// 
-    ///
-    /// Note:
-    ///
-    /// 1 <= N <= 10^9
-    /// </summary>
-    int numDupDigitsAtMostN(int N);
-
 
     /// <summary>
     /// Leet code #1000. Minimum Cost to Merge Stones

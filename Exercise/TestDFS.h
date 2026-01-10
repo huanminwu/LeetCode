@@ -103,5 +103,11 @@ void TestLeetCode3747(void);
 void TestLeetCode3753(void);
 void TestLeetCode3791(void);
 void TestLeetCode3799(void);
+void TestLeetCode3704(void);
+void TestLeetCode3621(void);
+void TestLeetCode1088(void);
+void TestLeetCode233(void);
+void TestLeetCode1067(void);
+void TestLeetCode1012(void);
 void TestLeetCodeDFS(void);
 #endif  // TestTree

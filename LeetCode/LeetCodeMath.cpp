@@ -1318,57 +1318,6 @@ int LeetCodeMath::integerBreak(int n)
     return product;
 }
 
-/// <summary>
-/// Leet code #233. Number of Digit One 
-/// </summary>
-int LeetCodeMath::countDigitOne(string& str_n, int is_last, int index, vector<int>& cache)
-{
-    int result = 0;
-    if (index == str_n.size()) return 0;
-    if (is_last == 0 && cache[index] != -1)
-    {
-        return cache[index];
-    }
-    for (int d = 0; d <= (is_last ? str_n[index] - '0' : 9); d++)
-    {
-         int next_last = (is_last == 1 && d == str_n[index] - '0') ? 1 : 0;
-        result += countDigitOne(str_n, next_last, index + 1, cache);
-        if (d == 1)
-        {
-            if (index == str_n.size() - 1) result += 1;
-            else
-            {
-                if (next_last == 1) result += atoi(str_n.substr(index + 1).c_str()) + 1;
-                else
-                {
-                    result += (int)pow(10, str_n.size() - index - 1);
-                }
-            }
-        }
-    }
-    if (is_last == 0) cache[index] = result;
-    return result;
-}
-
-/// <summary>
-/// Leet code #233. Number of Digit One 
-/// Given an integer n, count the total number of digit 1 appearing in all 
-/// non-negative integers less than or equal to n.
-/// For example: 
-/// Given n = 13,
-/// Return 6, because digit 1 occurred in the following numbers: 1, 10, 
-/// 11, 12, 13. 
-/// Hint: 
-/// 1.Beware of overflow.
-/// </summary>
-int LeetCodeMath::countDigitOne(int n)
-{
-    if (n <= 0) return 0;
-    string str_n = to_string(n);
-    vector<int> cache(str_n.size(), -1);
-    int result = countDigitOne(str_n, 1, 0, cache);
-    return result;
-}
 
 /// <summary>
 /// Leet code #357. Count Numbers with Unique Digits 
@@ -4821,95 +4770,6 @@ int LeetCodeMath::sumOfDigits(vector<int>& A)
 }
 
 
-/// <summary>
-/// Leet code #1088. Confusing Number II
-/// </summary>
-int LeetCodeMath::confusingNumberII(string& str_n, int index, int leading, int is_last, vector<vector<int>>& cache)
-{
-    if (index >= (int)str_n.size()) return 1;
-    if (is_last == 0 && cache[index][leading] != -1) return cache[index][leading];
-    int result = 0;
-    for (int i = 0; i <= (is_last == 1 ? str_n[index] - '0' : 9); i++)
-    {
-        if (i != 0 && i != 1 && i != 6 && i != 8 && i != 9) continue;
-        int next_leading = (leading == 0 && i == 0) ? 0 : leading + 1;
-        int next_last = (is_last == 1 && i == str_n[index] - '0') ? 1 : 0;
-        int remaining = str_n.size() - 1 - index;
-        result += confusingNumberII(str_n, index + 1, next_leading, next_last, cache);
-        if ((remaining == next_leading) ||
-            ((remaining == next_leading - 1) && (i == 0 || i == 1 || i == 8)))
-        {
-                if (next_last == 0) result--;
-                else
-                {
-                    int half_size = str_n.size() / 2;
-                    string left_str = str_n.substr(0, half_size);
-                    string right_str = str_n.substr(str_n.size() - half_size);
-                    vector<int> mapping = { 0, 1, 0, 0, 0, 0, 9, 0, 8, 6 };
-                    for (size_t i = 0; i < left_str.size(); i++)
-                    {
-                        left_str[i] = '0' + mapping[left_str[i] - '0'];
-                    }
-                    std::reverse(left_str.begin(), left_str.end());
-                    if (atoi(left_str.c_str()) < atoi(right_str.c_str())) result--;
-                }
-        }
-    }
-    if (is_last == 0)
-    {
-        cache[index][leading] = result;
-    }
-    return result;
-}
-
-/// <summary>
-/// Leet code #1088. Confusing Number II
-/// 
-/// We can rotate digits by 180 degrees to form new digits. When 
-/// 0, 1, 6, 8, 9 are rotated 180 degrees, they become 0, 1, 9, 8, 6 
-/// respectively. When 2, 3, 4, 5 and 7 are rotated 180 degrees, they 
-/// become invalid.
-///
-/// A confusing number is a number that when rotated 180 degrees 
-/// becomes a different number with each digit valid.(Note that the 
-/// rotated number can be greater than the original number.)
-///
-/// Given a positive integer N, return the number of confusing numbers 
-/// between 1 and N inclusive.
-/// 
-/// Example 1:
-///
-/// Input: 20
-/// Output: 6
-/// Explanation: 
-/// The confusing numbers are [6,9,10,16,18,19].
-/// 6 converts to 9.
-/// 9 converts to 6.
-/// 10 converts to 01 which is just 1.
-/// 16 converts to 91.
-/// 18 converts to 81.
-/// 19 converts to 61.
-///
-/// Example 2:
-///
-/// Input: 100
-/// Output: 19
-/// Explanation: 
-/// The confusing numbers are [6,9,10,16,18,19,60,61,66,68,80,81,86,89,
-/// 90,91,98,99,100].
-///
-///
-/// Note:
-///
-///  1. 1 <= N <= 10^9
-/// </summary>
-int LeetCodeMath::confusingNumberII(int N)
-{
-    string str_n = to_string(N);
-    vector<vector<int>> cache(str_n.size(), vector<int>(str_n.size(), -1));
-    return confusingNumberII(str_n, 0, 0, 1, cache);
-}
-
 
 /// <summary>
 /// Leet code #1093. Statistics from a Large Sample
@@ -7777,156 +7637,6 @@ int LeetCodeMath::pickRandom(vector<int>& nums, int target)
     return value;
 }
 
-/// <summary>
-/// Leet code #1067. Digit Count in Range
-/// </summary>
-int LeetCodeMath::digitsCount(string& str_n, int d, int is_first, int is_last, int index, vector<int>& cache)
-{
-    int result = 0;
-    if (index == str_n.size()) return 0;
-    if (is_first == 0 && is_last == 0 && cache[index] != -1)
-    {
-        return cache[index];
-    }
-    for (int i = 0; i <= (is_last ? str_n[index] - '0' : 9); i++)
-    {
-        int next_first = (is_first == 1 && i == 0) ? 1 : 0;
-        int next_last = (is_last == 1 && i == str_n[index] - '0') ? 1 : 0;
-        result += digitsCount(str_n, d, next_first, next_last, index + 1, cache);
-        if (d == 0 && is_first == 1) continue;
-        if (i == d)
-        {
-            if (index == str_n.size() - 1) result += 1;
-            else
-            {
-                if (next_last == 1) result += atoi(str_n.substr(index + 1).c_str()) + 1;
-                else
-                {
-                    result += (int)pow(10, str_n.size() - index - 1);
-                }
-            }
-        }
-    }
-    if (is_first == 0 && is_last == 0) cache[index] = result;
-    return result;
-}
-
-/// <summary>
-/// Leet code #1067. Digit Count in Range
-/// 
-/// Given an integer d between 0 and 9, and two positive integers low and 
-/// high as lower and upper bounds, respectively. Return the number of 
-/// times that d occurs as a digit in all integers between low and high, 
-/// including the bounds low and high.
-/// 
-/// Example 1:
-/// Input: d = 1, low = 1, high = 13
-/// Output: 6
-/// Explanation: 
-/// The digit d=1 occurs 6 times in 1,10,11,12,13. Note that the digit d=1 
-/// occurs twice in the number 11.
-///
-/// Example 2:
-///
-/// Input: d = 3, low = 100, high = 250
-/// Output: 35
-/// Explanation: 
-/// The digit d=3 occurs 35 times in 103,113,123,130,131,...,238,239,243.
-///
-///
-/// Note:
-///
-/// 0 <= d <= 9
-/// 1 <= low <= high <= 2×10^8
-/// </summary>
-int LeetCodeMath::digitsCount(int d, int low, int high)
-{
-    string str_low = to_string(low - 1);
-    vector<int> cache(str_low.size(), -1);
-    int low_count = digitsCount(str_low, d, 1, 1, 0, cache);
-    string str_high = to_string(high);
-    cache = vector<int>(str_high.size(), -1);
-    int high_count = digitsCount(str_high, d, 1, 1, 0, cache);
-    return  high_count - low_count;
-}
-
-/// <summary>
-/// Leet code #1012. Numbers With Repeated Digits
-/// </summary>
-int LeetCodeMath::numDupDigitsAtMostN(string& str_n, int index, int leading, int is_last, int bit_mask, vector<vector<int>>& cache)
-{
-    if (index >= (int)str_n.size()) return 0;
-    if (is_last == 0 && cache[index][leading] != -1) return cache[index][leading];
-    int result = 0;
-    for (int i = 0; i <= (is_last == 1 ? str_n[index] - '0' : 9); i++)
-    {
-        int next_leading = (leading == 0 && i == 0) ? 0 : leading + 1;
-        int next_last = (is_last == 1 && i == str_n[index] - '0') ? 1 : 0;
-        if (next_leading == 0)
-        {
-            result += numDupDigitsAtMostN(str_n, index + 1, next_leading, next_last, bit_mask, cache);
-        }
-        else
-        {
-            int bit = 1 << i;
-            if ((bit & bit_mask) != 0)
-            {
-                if (next_last == 1)
-                {
-                    result += atoi(str_n.substr(index + 1).c_str()) + 1;
-                }
-                else
-                {
-                    result += (int)pow(10, str_n.size() - 1 - index);
-                }
-            }
-            else
-            {
-                result += numDupDigitsAtMostN(str_n, index + 1, next_leading, next_last, (bit | bit_mask), cache);
-            }
-        }
-    }
-    if (is_last == 0)
-    {
-        cache[index][leading] = result;
-    }
-    return result;
-}
-
-/// <summary>
-/// Leet code #1012. Numbers With Repeated Digits
-/// 
-/// Given a positive integer N, return the number of positive integers less 
-/// than or equal to N that have at least 1 repeated digit.
-///
-/// Example 1:
-/// Input: 20
-/// Output: 1
-/// Explanation: The only positive number (<= 20) with at least 1 repeated 
-/// digit is 11.
-///
-/// Example 2:
-/// Input: 100
-/// Output: 10
-/// Explanation: The positive numbers (<= 100) with atleast 1 repeated digit 
-/// are 11, 22, 33, 44, 55, 66, 77, 88, 99, and 100.
-///
-/// Example 3:
-/// Input: 1000
-/// Output: 262
-/// 
-///
-/// Note:
-///
-/// 1 <= N <= 10^9
-/// </summary>
-int LeetCodeMath::numDupDigitsAtMostN(int N)
-{
-    string str_n = to_string(N);
-    int index = 0;
-    vector<vector<int>> cache(str_n.size(),vector<int>(str_n.size(), -1));
-    return numDupDigitsAtMostN(str_n, 0, 0, 1, 0, cache);
-}
 
 /// <summary>
 /// Leet code #1000. Minimum Cost to Merge Stones
@@ -28790,7 +28500,7 @@ int LeetCodeMath::minAllOneMultiple(int k)
 /// </summary>
 int LeetCodeMath::sumOfBlocks(int n)
 {
-    long long start = 1;
+    int start = 1;
     long long M = 1000000007;
     long long result = 0;
     for (int i = 1; i <= n; i++)
@@ -28984,7 +28694,7 @@ int LeetCodeMath::numberOfWays(int n, vector<int>& limit)
         }
         result = result % M;
     }
-    return result;
+    return (int)result;
 }
 #pragma endregion
 

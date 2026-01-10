@@ -2519,49 +2519,6 @@ void TestLeetCode400(void)
     Logger::WriteMessage("The " + to_string(n) + "th digit is " + to_string(digit));
 }
 
-void TestLeetCode233(void)
-{
-    Logger::WriteMessage("Test Leet Code 233");
-    LeetCodeMath leetCode;
-    int n = 824883294;
-    int count = leetCode.countDigitOne(n);
-    Logger::WriteMessage("Count digit one for " + to_string(n) + "; count = " + to_string(count));
-
-    n = 9;
-    count = leetCode.countDigitOne(n);
-    Logger::WriteMessage("Count digit one for " + to_string(n) + "; count = " + to_string(count));
-
-    n = 27;
-    count = leetCode.countDigitOne(n);
-    Logger::WriteMessage("Count digit one for " + to_string(n) + "; count = " + to_string(count));
-}
-
-void TestLeetCode1067(void)
-{
-    Logger::WriteMessage("Test Leet Code 1067");
-    LeetCodeMath leetCode;
-    int d = 0;
-    int low = 1;
-    int high = 100;
-    int result = leetCode.digitsCount(d, low, high);
-    Logger::WriteMessage("d = " + to_string(d) + "; low = " + to_string(low) +
-        "; high = " + to_string(high) + "; result = " + to_string(result));
-
-    d = 1;
-    low = 1;
-    high = 13;
-    result = leetCode.digitsCount(d, low, high);
-    Logger::WriteMessage("d = " + to_string(d) + "; low = " + to_string(low) +
-        "; high = " + to_string(high) + "; result = " + to_string(result));
-
-    d = 3;
-    low = 100;
-    high = 250;
-    result = leetCode.digitsCount(d, low, high);
-    Logger::WriteMessage("d = " + to_string(d) + "; low = " + to_string(low) +
-        "; high = " + to_string(high) + "; result = " + to_string(result));
-}
-
 void TestLeetCode908(void)
 {
     Logger::WriteMessage("Test Leet Code 908");
@@ -2649,32 +2606,6 @@ void TestLeetCode398(void)
     Logger::WriteMessage("The random pick " + to_string(target) + " is " + to_string(index));
 }
 
-
-void TestLeetCode1012(void)
-{
-    Logger::WriteMessage("Test Leet Code 1012");
-    LeetCodeMath leetCode;
-    int N = 210;
-    int result = leetCode.numDupDigitsAtMostN(N);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
-
-    N = 100;
-    result = leetCode.numDupDigitsAtMostN(N);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
-
-    N = 1000;
-    result = leetCode.numDupDigitsAtMostN(N);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
-
-    N = 1010;
-    result = leetCode.numDupDigitsAtMostN(N);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
-
-    N = 123456789;
-    result = leetCode.numDupDigitsAtMostN(N);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
-}
-
 void TestLeetCode1000(void)
 {
     Logger::WriteMessage("Test Leet Code 1000");
@@ -2722,39 +2653,6 @@ void TestLeetCode964(void)
     target = 125046;
     result = leetCode.leastOpsExpressTarget(x, target);
     Logger::WriteMessage("x = " + to_string(x) + "; target = " + to_string(target) + "; result = " + to_string(result));
-}
-
-void TestLeetCode1088(void)
-{
-    Logger::WriteMessage("Test Leet Code 1088");
-    LeetCodeMath leetCode;
-    int N = 20;
-    int result = leetCode.confusingNumberII(N);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
-
-    N = 10;
-    result = leetCode.confusingNumberII(N);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
-
-    N = 9;
-    result = leetCode.confusingNumberII(N);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
-
-    N = 99;
-    result = leetCode.confusingNumberII(N);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
-
-    N = 999;
-    result = leetCode.confusingNumberII(N);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
-
-    N = 9999;
-    result = leetCode.confusingNumberII(N);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
-
-    N = 1011;
-    result = leetCode.confusingNumberII(N);
-    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
 }
 
 void TestLeetCode517(void)
@@ -8954,17 +8852,13 @@ void TestLeetCodeMath(void)
     TestLeetCode1467();
     TestLeetCode384();
     TestLeetCode517();
-    TestLeetCode1088();
     TestLeetCode964();
     TestLeetCode1000();
-    TestLeetCode1012();
     TestLeetCode398();
     TestLeetCode357();
     TestLeetCode31();
     TestLeetCode60();
     TestLeetCode908();
-    TestLeetCode1067();
-    TestLeetCode233();
     TestLeetCode386();
     TestLeetCode400();
     TestLeetCode168();

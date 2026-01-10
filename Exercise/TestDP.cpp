@@ -6167,21 +6167,6 @@ void TestLeetCode3603(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode3621(void)
-{
-    Logger::WriteMessage("Test Leet Code 3621");
-    LeetCodeDP leetCode;
-    int n = 4, k = 1;
-    long long result = leetCode.popcountDepthI(n, k);
-    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
-    Logger::WriteMessage("result = " + to_string(result));
-
-    n = 7, k = 2;
-    result = leetCode.popcountDepthI(n, k);
-    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
 void TestLeetCode3628(void)
 {
     Logger::WriteMessage("Test Leet Code 3628");
@@ -6371,31 +6356,6 @@ void TestLeetCode3717(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode3704(void)
-{
-    Logger::WriteMessage("Test Leet Code 3704");
-    LeetCodeDP leetCode;
-    long long n = 2;
-    long long result = leetCode.countNoZeroPairs(n);
-    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
-
-    n = 3;
-    result = leetCode.countNoZeroPairs(n);
-    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
-
-    n = 11;
-    result = leetCode.countNoZeroPairs(n);
-    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));\
-
-    n = 24;
-    result = leetCode.countNoZeroPairs(n);
-    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
-
-    n = 102;
-    result = leetCode.countNoZeroPairs(n);
-    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
-}
-
 void TestLeetCode3743(void)
 {
     Logger::WriteMessage("Test Leet Code 3743");
@@ -6509,7 +6469,6 @@ void TestLeetCodeDP(void)
     TestLeetCode3797();
     TestLeetCode3742();
     TestLeetCode3743();
-    TestLeetCode3704();
     TestLeetCode3717();
     TestLeetCode3693();
     TestLeetCode3699();
@@ -6519,7 +6478,6 @@ void TestLeetCodeDP(void)
     TestLeetCode3651();
     TestLeetCode3647();
     TestLeetCode3628();
-    TestLeetCode3621();
     TestLeetCode3603();
     TestLeetCode3610();
     TestLeetCode3599();

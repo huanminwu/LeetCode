@@ -4694,8 +4694,8 @@ public:
     /// <summary>
     /// Leet Code 2801. Count Stepping Numbers in Range
     /// </summary>
-    int countSteppingNumbers(string& limit, int index, vector<vector<int>> &dp, 
-        int prev, bool leadingzero, bool leadinglimit);
+    int countSteppingNumbers(string& target, int index, int prev_digit, 
+        vector<vector<int>> &cache, int is_leadingzero, int is_limit);
 
 
     /// <summary>
@@ -4741,8 +4741,8 @@ public:
     /// <summary>
     /// Leet Code 2827. Number of Beautiful Integers in the Range
     /// </summary>
-    int numberOfBeautifulIntegers(string limit, int k, int remainder, int parity, int index, 
-        vector<vector<vector<int>>>& dp, bool is_leadingzero, bool is_leadinglimit);
+    int numberOfBeautifulIntegers(string target, int index, int k, int remainder, int parity,
+        vector<vector<vector<int>>>&cache, int is_leadingzero, int is_limit);
 
     /// <summary>
     /// Leet Code 2827. Number of Beautiful Integers in the Range
@@ -4987,7 +4987,7 @@ public:
     /// <summary>
     /// Leet Code 2999. Count the Number of Powerful Integers 
     /// </summary>
-    long long numberOfPowerfulInt(string str_num, int index, int limit, bool leading_limit);
+    long long numberOfPowerfulInt(string str_num, int index, int limit, bool is_limit);
 
     /// <summary>
     /// Leet Code 2999. Count the Number of Powerful Integers 
@@ -5469,7 +5469,7 @@ public:
     /// <summary>
     /// Leet Code 3519. Count Numbers with Non-Decreasing Digits 
     /// </summary>
-    int countNumbersDigitDP(string num, int pos, int digit, int b, bool is_limit, vector<vector<int>> &cache);
+    int countNumbersDigitDP(string str_num, int pos, int prev_digit, int b, bool is_limit, vector<vector<vector<int>>>&cache);
 
     /// <summary>
     /// Leet Code 3519. Count Numbers with Non-Decreasing Digits 
@@ -6232,6 +6232,244 @@ public:
     /// 4. All words[i] are distinct.
     /// </summary>
     vector<vector<string>> wordSquaresII(vector<string>& words);
+
+    /// <summary>
+    /// Leet Code 3704. Count No-Zero Pairs That Sum to N
+    ///
+    /// Hard
+    ///
+    /// A no-zero integer is a positive integer that does not contain the 
+    /// digit 0 in its decimal representation.
+    ///
+    /// Given an integer n, count the number of pairs (a, b) where:
+    ///
+    /// a and b are no-zero integers.
+    /// a + b = n
+    /// Return an integer denoting the number of such pairs.
+    /// 
+    /// Example 1:
+    /// Input: n = 2
+    /// Output: 1
+    /// Explanation:
+    /// The only pair is (1, 1).
+    /// Example 2:
+    /// Input: n = 3
+    /// Output: 2
+    /// Explanation:
+    /// The pairs are (1, 2) and (2, 1).
+    /// Example 3:
+    /// Input: n = 11
+    /// Output: 8
+    /// Explanation:
+    /// The pairs are (2, 9), (3, 8), (4, 7), (5, 6), (6, 5), (7, 4), (8, 3), and 
+    /// (9, 2). Note that (1, 10) and (10, 1) do not satisfy the conditions 
+    /// because 10 contains 0 in its decimal representation.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n <= 10^15
+    /// </summary>
+    long long countNoZeroPairs(long long n);
+
+
+    /// <summary>
+    /// Leet Code 3621. Number of Integers With Popcount-Depth Equal to K I
+    /// </summary>
+    long long popcountDepthI(string str_num, int index, int is_limit, int bit_count, int k,
+        vector<int>& pop_count, vector<vector<vector<long long>>>&cache);
+
+
+    /// <summary>
+    /// Leet Code 3621. Number of Integers With Popcount-Depth Equal to K I
+    ///
+    /// Hard
+    ///
+    /// You are given two integers n and k.
+    /// For any positive integer x, define the following sequence:
+    /// p0 = x
+    /// pi+1 = popcount(pi) for all i >= 0, where popcount(y) is the number 
+    /// of set bits (1's) in the binary representation of y.
+    /// This sequence will eventually reach the value 1.
+    ///
+    /// The popcount-depth of x is defined as the smallest integer d >= 0 such 
+    /// that pd = 1.
+    /// For example, if x = 7 (binary representation "111"). Then, the 
+    /// sequence is: 7 → 3 → 2 → 1, so the popcount-depth of 7 is 3.
+    ///
+    /// Your task is to determine the number of integers in the range [1, n] 
+    /// whose popcount-depth is exactly equal to k.
+    ///
+    /// Return the number of such integers.
+    /// 
+    /// Example 1:
+    /// Input: n = 4, k = 1
+    /// Output: 2
+    /// Explanation:
+    /// The following integers in the range [1, 4] have popcount-depth exactly 
+    /// equal to 1:
+    ///
+    /// x   Binary  Sequence
+    /// 2   "10"    2 → 1
+    /// 4   "100"   4 → 1
+    /// Thus, the answer is 2.
+    ///
+    /// Example 2:
+    ///
+    /// Input: n = 7, k = 2
+    /// 
+    /// Output: 3
+    /// 
+    /// Explanation:
+    ///
+    /// The following integers in the range [1, 7] have popcount-depth 
+    /// exactly equal to 2:
+    /// 
+    /// x   Binary  Sequence
+    /// 3   "11"    3 → 2 → 1
+    /// 5   "101"   5 → 2 → 1
+    /// 6   "110"   6 → 2 → 1
+    /// Thus, the answer is 3.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 10^15
+    /// 2. 0 <= k <= 5
+    /// </summary>
+    long long popcountDepthI(long long n, int k);
+
+    /// <summary>
+    /// Leet code #1088. Confusing Number II
+    /// </summary>
+    int confusingNumberII(string& str_n, int index, int left_size, int is_limit, vector<vector<int>>& cache);
+
+    /// <summary>
+    /// Leet code #1088. Confusing Number II
+    /// 
+    /// We can rotate digits by 180 degrees to form new digits. When 
+    /// 0, 1, 6, 8, 9 are rotated 180 degrees, they become 0, 1, 9, 8, 6 
+    /// respectively. When 2, 3, 4, 5 and 7 are rotated 180 degrees, they 
+    /// become invalid.
+    ///
+    /// A confusing number is a number that when rotated 180 degrees 
+    /// becomes a different number with each digit valid.(Note that the 
+    /// rotated number can be greater than the original number.)
+    ///
+    /// Given a positive integer N, return the number of confusing numbers 
+    /// between 1 and N inclusive.
+    /// 
+    /// Example 1:
+    ///
+    /// Input: 20
+    /// Output: 6
+    /// Explanation: 
+    /// The confusing numbers are [6,9,10,16,18,19].
+    /// 6 converts to 9.
+    /// 9 converts to 6.
+    /// 10 converts to 01 which is just 1.
+    /// 16 converts to 91.
+    /// 18 converts to 81.
+    /// 19 converts to 61.
+    ///
+    /// Example 2:
+    ///
+    /// Input: 100
+    /// Output: 19
+    /// Explanation: 
+    /// The confusing numbers are [6,9,10,16,18,19,60,61,66,68,80,81,86,89,
+    /// 90,91,98,99,100].
+    ///
+    ///
+    /// Note:
+    ///
+    ///  1. 1 <= N <= 10^9
+    /// </summary>
+    int confusingNumberII(int N);
+
+    /// <summary>
+    /// Leet code #233. Number of Digit One 
+    /// </summary>
+    int countDigitOne(string& str_n, int index, int is_limit, vector<int>& cache);
+
+    /// <summary>
+    /// Leet code #233. Number of Digit One 
+    ///
+    /// Given an integer n, count the total number of digit 1 appearing 
+    /// in all non-negative integers less than or equal to n.
+    /// For example: 
+    /// Given n = 13,
+    /// Return 6, because digit 1 occurred in the following numbers: 
+    /// 1, 10, 11, 12, 13. 
+    /// Hint: 
+    /// 1.Beware of overflow.
+    /// </summary>
+    int countDigitOne(int n);
+
+    /// <summary>
+    /// Leet code #1067. Digit Count in Range
+    /// </summary>
+    int digitsCount(string& str_n, int d, int index, int is_leadingzero, int is_limit, vector<int>& cache);
+
+    /// <summary>
+    /// Leet code #1067. Digit Count in Range
+    /// 
+    /// Given an integer d between 0 and 9, and two positive integers low and 
+    /// high as lower and upper bounds, respectively. Return the number of 
+    /// times that d occurs as a digit in all integers between low and high, 
+    /// including the bounds low and high.
+    /// 
+    /// Example 1:
+    /// Input: d = 1, low = 1, high = 13
+    /// Output: 6
+    /// Explanation: 
+    /// The digit d=1 occurs 6 times in 1,10,11,12,13. Note that the digit d=1 
+    /// occurs twice in the number 11.
+    ///
+    /// Example 2:
+    ///
+    /// Input: d = 3, low = 100, high = 250
+    /// Output: 35
+    /// Explanation: 
+    /// The digit d=3 occurs 35 times in 103,113,123,130,131,...,238,239,243.
+    ///
+    ///
+    /// Note:
+    ///
+    /// 0 <= d <= 9
+    /// 1 <= low <= high <= 2×10^8
+    /// </summary>
+    int digitsCount(int d, int low, int high);
+
+    /// <summary>
+    /// Leet code #1012. Numbers With Repeated Digits
+    /// </summary>
+    int numDupDigitsAtMostN(string& str_n, int index, int is_leadingzero, int is_limit, int bit_mask, vector<vector<int>>& cache);
+
+    /// <summary>
+    /// Leet code #1012. Numbers With Repeated Digits
+    /// 
+    /// Given a positive integer N, return the number of positive integers less 
+    /// than or equal to N that have at least 1 repeated digit.
+    ///
+    /// Example 1:
+    /// Input: 20
+    /// Output: 1
+    /// Explanation: The only positive number (<= 20) with at least 1 repeated 
+    /// digit is 11.
+    ///
+    /// Example 2:
+    /// Input: 100
+    /// Output: 10
+    /// Explanation: The positive numbers (<= 100) with atleast 1 repeated digit 
+    /// are 11, 22, 33, 44, 55, 66, 77, 88, 99, and 100.
+    ///
+    /// Example 3:
+    /// Input: 1000
+    /// Output: 262
+    /// 
+    ///
+    /// Note:
+    ///
+    /// 1 <= N <= 10^9
+    /// </summary>
+    int numDupDigitsAtMostN(int N);
 
 #pragma endregion
 };

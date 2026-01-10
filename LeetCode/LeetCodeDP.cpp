@@ -21517,7 +21517,7 @@ int LeetCodeDP::countPartitionsII(vector<int>& nums, int k)
             }
             left++;
         }
-        if (left == 0) (dp[i] = sum[i] + 1) % M;
+        if (left == 0) dp[i] = (sum[i] + 1) % M;
         else
         {
             dp[i] = (sum[i] - sum[left - 1] + M) % M;
@@ -22772,101 +22772,7 @@ int LeetCodeDP::minOperations_Beautiful(vector<int>& nums)
     return result;
 }
 
-/// <summary>
-/// Leet Code 3704. Count No-Zero Pairs That Sum to N
-///
-/// Hard
-///
-/// A no-zero integer is a positive integer that does not contain the 
-/// digit 0 in its decimal representation.
-///
-/// Given an integer n, count the number of pairs (a, b) where:
-///
-/// a and b are no-zero integers.
-/// a + b = n
-/// Return an integer denoting the number of such pairs.
-/// 
-/// Example 1:
-/// Input: n = 2
-/// Output: 1
-/// Explanation:
-/// The only pair is (1, 1).
-/// Example 2:
-/// Input: n = 3
-/// Output: 2
-/// Explanation:
-/// The pairs are (1, 2) and (2, 1).
-/// Example 3:
-/// Input: n = 11
-/// Output: 8
-/// Explanation:
-/// The pairs are (2, 9), (3, 8), (4, 7), (5, 6), (6, 5), (7, 4), (8, 3), and 
-/// (9, 2). Note that (1, 10) and (10, 1) do not satisfy the conditions 
-/// because 10 contains 0 in its decimal representation.
-/// 
-/// Constraints:
-/// 1. 2 <= n <= 10^15
-/// </summary>
-long long LeetCodeDP::countNoZeroPairs(long long n)
-{
-    vector<vector<vector<vector<long long>>>> dp(16, 
-        vector<vector<vector<long long>>>(2, 
-            vector<vector<long long>>(2, vector<long long>(2, 0))));
-    int index = -1;
-    while (n > 0)
-    {
-        index++;
-        int digit = n % 10;
-        n = n / 10;
-        for (int a = 0; a <= 9; a++)
-        {
-            for (int prev_carry = 0; prev_carry <= 1; prev_carry++)
-            {
-                int carry = 0;
-                int b = (digit - prev_carry)- a;
-                if (b < 0)
-                {
-                    b += 10;
-                    carry = 1;
-                }
-                if (index == 0)
-                {
-                    if (prev_carry == 1) continue;
-                    if (a != 0 && b != 0)
-                    {
-                        dp[index][carry][0][0] += 1;
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-                else
-                {
-                    int is_zero_a = (a == 0) ? 1 : 0;
-                    int is_zero_b = (b == 0) ? 1 : 0;
-                    // take care of no carry from previous digit
-                    for (int i = 0; i <= is_zero_a; i++)
-                    {
-                        for (int j = 0; j <= is_zero_b; j++)
-                        {
-                            dp[index][carry][is_zero_a][is_zero_b] += dp[index - 1][prev_carry][i][j];
-                        }
-                    }
-                }
-            }
-        }
-    }
-    long long result = 0;
-    for (size_t i = 0; i < 2; i++)
-    {
-        for (int j = 0; j < 2; j++)
-        {
-           result += dp[index][0][i][j];
-        }
-    }
-    return result;
-}
+
 /// <summary>
 /// Leet Code 3743. Maximize Cyclic Partition Score
 ///

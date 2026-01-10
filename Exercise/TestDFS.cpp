@@ -2517,6 +2517,12 @@ void TestLeetCode3519(void)
     result = leetCode.countNumbers(l, r, b);
     Logger::WriteMessage("l = " + l + "; r = " + r);
     Logger::WriteMessage("b = " + to_string(b) + "; result = " + to_string(result));
+
+    l = "1", r = "220";
+    b = 10;
+    result = leetCode.countNumbers(l, r, b);
+    Logger::WriteMessage("l = " + l + "; r = " + r);
+    Logger::WriteMessage("b = " + to_string(b) + "; result = " + to_string(result));
 }
 
 void TestLeetCode3518(void)
@@ -2795,8 +2801,164 @@ void TestLeetCode3799(void)
     Logger::WriteMessage(result);
 }
 
+
+void TestLeetCode3704(void)
+{
+    Logger::WriteMessage("Test Leet Code 3704");
+    LeetCodeDFS leetCode;
+    long long n = 2;
+    long long result = leetCode.countNoZeroPairs(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 3;
+    result = leetCode.countNoZeroPairs(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 11;
+    result = leetCode.countNoZeroPairs(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result)); \
+
+    n = 24;
+    result = leetCode.countNoZeroPairs(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+
+    n = 102;
+    result = leetCode.countNoZeroPairs(n);
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3621(void)
+{
+    Logger::WriteMessage("Test Leet Code 3621");
+    LeetCodeDFS leetCode;
+    int n = 4, k = 1;
+    long long result = leetCode.popcountDepthI(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 7, k = 2;
+    result = leetCode.popcountDepthI(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode1088(void)
+{
+    Logger::WriteMessage("Test Leet Code 1088");
+    LeetCodeDFS leetCode;
+    int N = 20;
+    int result = leetCode.confusingNumberII(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 10;
+    result = leetCode.confusingNumberII(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 9;
+    result = leetCode.confusingNumberII(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 99;
+    result = leetCode.confusingNumberII(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 999;
+    result = leetCode.confusingNumberII(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 9999;
+    result = leetCode.confusingNumberII(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 1011;
+    result = leetCode.confusingNumberII(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+}
+
+void TestLeetCode233(void)
+{
+    Logger::WriteMessage("Test Leet Code 233");
+    LeetCodeDFS leetCode;
+    int n = 824883294;
+    int count = leetCode.countDigitOne(n);
+    Logger::WriteMessage("Count digit one for " + to_string(n) + "; count = " + to_string(count));
+
+    n = 9;
+    count = leetCode.countDigitOne(n);
+    Logger::WriteMessage("Count digit one for " + to_string(n) + "; count = " + to_string(count));
+
+    n = 27;
+    count = leetCode.countDigitOne(n);
+    Logger::WriteMessage("Count digit one for " + to_string(n) + "; count = " + to_string(count));
+}
+
+void TestLeetCode1067(void)
+{
+    Logger::WriteMessage("Test Leet Code 1067");
+    LeetCodeDFS leetCode;
+    int d = 0;
+    int low = 1;
+    int high = 100;
+    int result = leetCode.digitsCount(d, low, high);
+    Logger::WriteMessage("d = " + to_string(d) + "; low = " + to_string(low) +
+        "; high = " + to_string(high) + "; result = " + to_string(result));
+
+    d = 1;
+    low = 1;
+    high = 13;
+    result = leetCode.digitsCount(d, low, high);
+    Logger::WriteMessage("d = " + to_string(d) + "; low = " + to_string(low) +
+        "; high = " + to_string(high) + "; result = " + to_string(result));
+
+    d = 3;
+    low = 100;
+    high = 250;
+    result = leetCode.digitsCount(d, low, high);
+    Logger::WriteMessage("d = " + to_string(d) + "; low = " + to_string(low) +
+        "; high = " + to_string(high) + "; result = " + to_string(result));
+}
+
+
+void TestLeetCode1012(void)
+{
+    Logger::WriteMessage("Test Leet Code 1012");
+    LeetCodeDFS leetCode;
+
+    int N = 20;
+    int result = leetCode.numDupDigitsAtMostN(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 210;
+    result = leetCode.numDupDigitsAtMostN(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 100;
+    result = leetCode.numDupDigitsAtMostN(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 1000;
+    result = leetCode.numDupDigitsAtMostN(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 1010;
+    result = leetCode.numDupDigitsAtMostN(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+
+    N = 123456789;
+    result = leetCode.numDupDigitsAtMostN(N);
+    Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode1012();
+    TestLeetCode1067();
+    TestLeetCode1088();
+    TestLeetCode2801();
+    TestLeetCode2827();
+    TestLeetCode3519();
+    TestLeetCode3621();
+    TestLeetCode3704();
     TestLeetCode3799();
     TestLeetCode3791();
     TestLeetCode3753();
@@ -2809,7 +2971,6 @@ void TestLeetCodeDFS(void)
     TestLeetCode3538();
     TestLeetCode3533();
     TestLeetCode3518();
-    TestLeetCode3519();
     TestLeetCode3490();
     TestLeetCode3470();
     TestLeetCode3437();
@@ -2826,8 +2987,6 @@ void TestLeetCodeDFS(void)
     TestLeetCode2992();
     TestLeetCode2868();
     TestLeetCode2850();
-    TestLeetCode2801();
-    TestLeetCode2827();
     TestLeetCode2787();
     TestLeetCode2741();
     TestLeetCode2664();
