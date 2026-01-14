@@ -8709,9 +8709,48 @@ void TestLeetCode3798(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode3803(void)
+{
+    Logger::WriteMessage("Test Leet Code 3803");
+    LeetCodeString leetCode;
+ 
+    string s = "abc";
+    int result = leetCode.residuePrefixes(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "dd";
+    result = leetCode.residuePrefixes(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "bob";
+    result = leetCode.residuePrefixes(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3805(void)
+{
+    Logger::WriteMessage("Test Leet Code 3805");
+    LeetCodeString leetCode;
+
+    vector<string> words = { "fusion", "layout" };
+    long long result = leetCode.countPairs(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words = { "ab","aa","za","aa" };
+    result = leetCode.countPairs(words);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 
 void TestLeetCodeString(void)
 {
+    TestLeetCode3805();
+    TestLeetCode3803();
     TestLeetCode3798();
     TestLeetCode3794();
     TestLeetCode3784();

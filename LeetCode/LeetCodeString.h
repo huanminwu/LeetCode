@@ -18564,6 +18564,106 @@ public:
     /// </summary>
     string largestEven(string s);
 
+    /// <summary>
+    /// Leet Code 3803. Count Residue Prefixes
+    ///
+    /// Easy
+    ///
+    /// You are given a string s consisting only of lowercase English 
+    /// letters.
+    ///
+    /// A prefix of s is called a residue if the number of distinct 
+    /// characters in the prefix is equal to len(prefix) % 3.
+    ///
+    /// Return the count of residue prefixes in s.
+    ///
+    /// A prefix of a string is a non - empty substring that starts from 
+    /// the beginning of the string and extends to any point within it.
+    ///
+    /// Example 1:
+    /// Input: s = "abc"
+    /// Output : 2
+    /// Explanation : ​​​​​​​
+    /// Prefix "a" has 1 distinct character and length modulo 3 is 1, so 
+    /// it is a residue.
+    /// Prefix "ab" has 2 distinct characters and length modulo 3 is 2, 
+    /// so it is a residue.
+    /// Prefix "abc" does not satisfy the condition.Thus, the answer is 2.
+    ///
+    /// Example 2 :
+    /// Input : s = "dd"
+    /// Output : 1
+    /// Explanation :
+    /// Prefix "d" has 1 distinct character and length modulo 3 is 1, so 
+    /// it is a residue.
+    /// Prefix "dd" has 1 distinct character but length modulo 3 is 2, so 
+    /// it is not a residue.Thus, the answer is 1.
+    ///
+    /// Example 3 :
+    /// Input : s = "bob"
+    /// Output : 2
+    /// Explanation :
+    /// Prefix "b" has 1 distinct character and length modulo 3 is 1, so 
+    /// it is a residue.
+    /// Prefix "bo" has 2 distinct characters and length mod 3 is 2, so it 
+    /// is a residue.Thus, the answer is 2.
+    ///
+    /// Constraints :
+    /// 1. 1 <= s.length <= 100
+    /// 2. s contains only lowercase English letters.
+    /// </summary>
+    int residuePrefixes(string s);
+
+    /// <summary>
+    /// Leet Code 3805. Count Caesar Cipher Pairs
+    ///
+    /// Medium
+    ///
+    /// You are given an array words of n strings.Each string has length m 
+    /// and contains only lowercase English letters.
+    ///
+    /// Two strings s and t are similar if we can apply the following 
+    /// operation any number of times(possibly zero times) so that s and t 
+    /// become equal.
+    ///
+    /// Choose either s or t.
+    /// Replace every letter in the chosen string with the next letter in 
+    /// the alphabet cyclically.The next letter after 'z' is 'a'.
+    /// Count the number of pairs of indices(i, j) such that :
+    /// i < j
+    /// words[i] and words[j] are similar.
+    /// Return an integer denoting the number of such pairs.
+    ///
+    /// Example 1:
+    /// Input: words = ["fusion", "layout"]
+    /// Output : 1
+    /// Explanation :
+    /// words[0] = "fusion" and words[1] = "layout" are similar because 
+    /// we can apply the operation to "fusion" 6 times.The string "fusion" 
+    /// changes as follows.
+    ///
+    /// "fusion"
+    /// "gvtjpo"
+    /// "hwukqp"
+    /// "ixvlrq"
+    /// "jywmsr"
+    /// "kzxnts"
+    /// "layout"
+    ///
+    /// Example 2:
+    /// Input: words = ["ab", "aa", "za", "aa"]
+    /// Output : 2
+    /// Explanation :
+    /// words[0] = "ab" and words[2] = "za" are similar.words[1] = "aa" and 
+    /// words[3] = "aa" are similar.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == words.length <= 10^5
+    /// 2. 1 <= m == words[i].length <= 10^5
+    /// 3. 1 <= n * m <= 10^5
+    /// 4. words[i] consists only of lowercase English letters.
+    /// </summary>
+    long long countPairs(vector<string>& words);
 #pragma endregion
 };
 

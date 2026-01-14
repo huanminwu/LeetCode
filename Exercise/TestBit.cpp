@@ -1806,8 +1806,38 @@ void TestLeetCode3757(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3806(void)
+{
+    Logger::WriteMessage("Test Leet Code 3806");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 3, 1, 2 };
+    int k = 8, m = 2;
+    int result = leetCode.maximumAND(nums, k, m);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; m = " + to_string(m) + "; result = " + to_string(result));
+
+    nums = { 1,2,8,4 };
+    k = 7, m = 3;
+    result = leetCode.maximumAND(nums, k, m);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; m = " + to_string(m) + "; result = " + to_string(result));
+
+    nums = { 1,1 };
+    k = 3, m = 2;
+    result = leetCode.maximumAND(nums, k, m);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; m = " + to_string(m) + "; result = " + to_string(result));
+
+    nums = { 8 };
+    k = 10, m = 1;
+    result = leetCode.maximumAND(nums, k, m);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; m = " + to_string(m) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3806();
     TestLeetCode3757();
     TestLeetCode3766();
     TestLeetCode3769();

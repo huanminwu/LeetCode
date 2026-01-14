@@ -12858,8 +12858,24 @@ void TestLeetCode3788(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3804(void)
+{
+    Logger::WriteMessage("Test Leet Code 3804");
+    LeetCodeArray leetCode;
+    vector<int> nums = { -1, 1, 0 };
+    int result = leetCode.centeredSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,-3 };
+    result = leetCode.centeredSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3804();
     TestLeetCode3788();
     TestLeetCode2025();
     TestLeetCode3785();

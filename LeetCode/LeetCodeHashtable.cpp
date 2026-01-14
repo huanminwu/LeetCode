@@ -2062,18 +2062,29 @@ int LeetCodeHashtable::fourSumCount(vector<int>& A, vector<int>& B,
 
 /// <summary>
 /// Leet code #18. 4Sum 
-/// Given an array S of n integers, are there elements a, b, c, and d in S 
-/// such that a + b + c + d = target? 
-/// Find all unique quadruplets in the array which gives the sum of target.
-/// Note: The solution set must not contain duplicate quadruplets. 
-/// For example, given array S = [1, 0, -1, 0, -2, 2], and target = 0.
+/// 
+/// Medium
+/// 
+/// Given an array nums of n integers, return an array of all the unique 
+/// quadruplets[nums[a], nums[b], nums[c], nums[d]] such that :
 ///
-/// A solution set is:
-/// [
-///  [-1,  0, 0, 1],
-///  [-2, -1, 1, 2],
-///  [-2,  0, 0, 2]
-/// ]
+/// 0 <= a, b, c, d < n
+/// a, b, c, and d are distinct.
+/// nums[a] + nums[b] + nums[c] + nums[d] == target
+/// You may return the answer in any order.
+///
+/// Example 1:
+/// Input: nums = [1, 0, -1, 0, -2, 2], target = 0
+/// Output : [[-2, -1, 1, 2], [-2, 0, 0, 2], [-1, 0, 0, 1]]
+///
+/// Example 2 :
+/// Input : nums = [2, 2, 2, 2, 2], target = 8
+/// Output : [[2, 2, 2, 2]]
+///
+/// Constraints :
+/// 1. 1 <= nums.length <= 200
+/// 2. -10^9 <= nums[i] <= 10^9
+/// 3. -10^9 <= target <= 10^9
 /// </summary>
 vector<vector<int>> LeetCodeHashtable::fourSum(vector<int>& nums, int target)
 {
@@ -2776,31 +2787,39 @@ int LeetCodeHashtable::countElements(vector<int>& arr)
 /// </summary>
 vector<int> LeetCodeHashtable::peopleIndexes(vector<vector<string>>& favoriteCompanies)
 {
-    unordered_map<string, bitset<100>> company_masks;
+    vector<unordered_set<string>> favoriteCompanies_hash(favoriteCompanies.size());
+    for (size_t i = 0; i < favoriteCompanies.size(); i++)
+    {
+        for (size_t j = 0; j < favoriteCompanies[i].size(); j++)
+        {
+            favoriteCompanies_hash[i].insert(favoriteCompanies[i][j]);
+        }
+    }
     vector<int> result;
     for (size_t i = 0; i < favoriteCompanies.size(); i++)
     {
-        for (size_t j = 0; j < favoriteCompanies[i].size(); j++)
+        bool is_subset = true;
+        for (size_t j = 0; j < favoriteCompanies.size(); j++)
         {
-            string company = favoriteCompanies[i][j];
-            company_masks[company].set(i);
+            if (i == j) continue;
+            is_subset = true; 
+            for (size_t k = 0; k < favoriteCompanies[i].size(); k++)
+            {
+                if (favoriteCompanies_hash[j].count(favoriteCompanies[i][k]) == 0)
+                {
+                    is_subset = false;
+                    break;
+                }
+            }
+            if (is_subset == true)
+            {
+                break;
+            }
         }
-    }
-
-    for (size_t i = 0; i < favoriteCompanies.size(); i++)
-    {
-        bitset<100> bit_mask;
-        bit_mask.set();
-        for (size_t j = 0; j < favoriteCompanies[i].size(); j++)
+        if (is_subset == false)
         {
-            string company = favoriteCompanies[i][j];
-            bitset<100> company_mask = company_masks[company];
-            // discard self bit
-            company_mask.reset(i);
-            bit_mask &= company_mask;
-            if (bit_mask.none()) break;
+            result.push_back(i);
         }
-        if (bit_mask.none()) result.push_back(i);
     }
     return result;
 }

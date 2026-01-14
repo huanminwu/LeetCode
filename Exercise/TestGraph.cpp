@@ -6692,8 +6692,42 @@ void TestLeetCode3778(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3807(void)
+{
+    Logger::WriteMessage("Test Leet Code 3807");
+    LeetCodeGraph leetCode;
+    int n = 3;
+    vector<vector<int>> edges = { {0, 1, 10},{1, 2, 10},{0, 2, 100} };
+    int k = 1;
+    int result = leetCode.minCostII(n, edges, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 6;
+    edges = 
+    { 
+        {0, 2, 5},{2, 3, 6},{3, 4, 7},{4, 5, 5},{0, 1, 10},{1, 5, 12},
+        {0, 3, 9},{1, 2, 8},{2, 4, 11} 
+    };
+    k = 2;
+    result = leetCode.minCostII(n, edges, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3; 
+    edges = { {0, 1, 1} };
+    k = 1;
+    result = leetCode.minCostII(n, edges, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3807();
     TestLeetCode3778();
     TestLeetCode3695();
     TestLeetCode3656();
