@@ -23398,43 +23398,29 @@ vector<int> LeetCodeArray::smallestSubarraysOr(vector<int>& nums)
 /// </summary>
 long long LeetCodeArray::numberOfPairs(vector<int>& nums1, vector<int>& nums2, int diff)
 {
-    struct BinaryIndexTree
+    int n = nums1.size();
+    vector<int> delta(n);
+    for (int i = 0; i < n; i++)
     {
-    private:
-        vector<long long> m_sum;
-    public:
-        BinaryIndexTree(int n)
-        {
-            m_sum = vector<long long>(n + 2);
-        }
-        long long sum(int i)
-        {
-            long long result = 0;
-            int index = i + 1;
-            while (index != 0)
-            {
-                result += m_sum[index];
-                index -= index & -index;
-            }
-            return result;
-        }
-        void add(int i, int value)
-        {
-            int index = i + 1;
-            while (index < (int)m_sum.size())
-            {
-                m_sum[index] += value;
-                index += (index & -index);
-            }
-        }
-    };
-    BinaryIndexTree tree(60000);
+        delta[i] = nums1[i] - nums2[i];
+        delta.push_back(delta[i] + diff);
+    }
+    sort(delta.begin(), delta.end());
+    unordered_map<int, int> index_map;
+    int index = 0;
+    for (size_t i = 0; i < delta.size(); i++)
+    {
+        if (i > 0 && delta[i] == delta[i - 1]) continue;
+        index_map[delta[i]] = ++index;
+    }
+    BinaryIndexTree tree(index);
     long long result = 0;
-    for (size_t i = 0; i < nums1.size(); i++)
+    for (size_t i = 0; i < n; i++)
     {
-        int delta = nums1[i] - nums2[i];
-        result += tree.sum(delta + 30000 + diff);
-        tree.add(delta + 30000, 1);
+        int target = index_map[nums1[i] - nums2[i] + diff];
+        result += tree.sum(target);
+        target = index_map[nums1[i] - nums2[i]];
+        tree.add(target, 1);
     }
     return result;
 }

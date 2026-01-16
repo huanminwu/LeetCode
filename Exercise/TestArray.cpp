@@ -12622,6 +12622,12 @@ void TestLeetCode3739(void)
     result = leetCode.countMajoritySubarraysII(nums, target);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    target = 4;
+    result = leetCode.countMajoritySubarraysII(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target) + "; result = " + to_string(result));
 }
 
 void TestLeetCode3738(void)
@@ -12875,6 +12881,7 @@ void TestLeetCode3804(void)
 
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3739();
     TestLeetCode3804();
     TestLeetCode3788();
     TestLeetCode2025();
@@ -12882,7 +12889,6 @@ void TestLeetCodeArray(void)
     TestLeetCode3779();
     TestLeetCode3777();
     TestLeetCode3776();
-    TestLeetCode3739();
     TestLeetCode3768();
     TestLeetCode3762();
     TestLeetCode3755();
