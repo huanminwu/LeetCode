@@ -2330,8 +2330,35 @@ void TestLeetCode3761(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3810(void)
+{
+    Logger::WriteMessage("Test Leet Code 3810");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    vector<int> target = { 2, 1, 3 };
+    int result = leetCode.minOperations(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,1,4 };
+    target = { 5,1,4 };
+    result = leetCode.minOperations(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7,3,7 };
+    target = { 5,5,9 };
+    result = leetCode.minOperations(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3810();
     TestLeetCode3761();
     TestLeetCode3731();
     TestLeetCode3718();

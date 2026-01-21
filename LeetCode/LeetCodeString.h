@@ -18664,6 +18664,146 @@ public:
     /// 4. words[i] consists only of lowercase English letters.
     /// </summary>
     long long countPairs(vector<string>& words);
+
+
+    /// <summary>
+    /// Leet Code 3813. Vowel - Consonant Score
+    ///
+    /// Easy
+    ///
+    /// You are given a string s consisting of lowercase English letters, 
+    /// spaces, and digits.
+    ///
+    /// Let v be the number of vowels in s and c be the number of consonants 
+    /// in s.
+    /// 
+    /// A vowel is one of the letters 'a', 'e', 'i', 'o', or 'u', while any 
+    /// other letter in the English alphabet is considered a consonant.
+    ///
+    /// The score of the string s is defined as follows :
+    ///
+    /// If c > 0, the score = floor(v / c) where floor denotes rounding 
+    /// down to the nearest integer.
+    /// Otherwise, the score = 0.
+    /// Return an integer denoting the score of the string.
+    /// 
+    /// Example 1:
+    /// Input: s = "cooear"
+    /// Output : 2
+    /// Explanation :
+    /// The string s = "cooear" contains v = 4 vowels('o', 'o', 'e', 'a') 
+    /// and c = 2 consonants('c', 'r').
+    /// The score is floor(v / c) = floor(4 / 2) = 2.
+    ///
+    /// Example 2:
+    /// Input: s = "axeyizou"
+    /// Output : 1
+    /// Explanation :
+    /// The string s = "axeyizou" contains v = 5 
+    /// vowels('a', 'e', 'i', 'o', 'u') and c = 3 consonants('x', 'y', 'z').
+    /// The score is floor(v / c) = floor(5 / 3) = 1.
+    ///
+    /// Example 3:
+    /// Input: s = "au 123"
+    /// Output : 0
+    /// Explanation :
+    /// The string s = "au 123" contains no consonants(c = 0), so the 
+    /// score is 0.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s consists of lowercase English letters, spaces and digits.
+    /// </summary>
+    int vowelConsonantScore(string s);
+
+    /// <summary>
+    /// Leet Code 3817. Good Indices in a Digit String
+    ///
+    /// Medium
+    ///
+    /// You are given a string s consisting of digits.
+    /// An index i is called good if there exists a substring of s that ends 
+    /// at index i and is equal to the decimal representation of i.
+    ///
+    /// Return an integer array of all good indices in increasing order.
+    ///
+    /// Example 1:
+    /// Input: s = "0234567890112"
+    /// Output : [0, 11, 12]
+    /// Explanation : ​​​​​​​
+    /// At index 0, the decimal representation of the index is "0".The 
+    /// substring s[0] is "0", which matches, so index 0 is good.
+    ///
+    /// At index 11, the decimal representation is "11".The substring 
+    /// s[10..11] is "11", which matches, so index 11 is good.
+    ///
+    /// At index 12, the decimal representation is "12".The substring 
+    /// s[11..12] is "12", which matches, so index 12 is good.
+    ///
+    /// No other index has a substring ending at it that equals its decimal 
+    /// representation.Therefore, the answer is[0, 11, 12].
+    ///
+    /// Example 2:
+    /// Input: s = "01234"
+    /// Output : [0, 1, 2, 3, 4]
+    /// Explanation :
+    /// For every index i from 0 to 4, the decimal representation of i is 
+    /// a single digit, and the substring s[i] matches that digit.
+    /// Therefore, a valid substring ending at each index exists, 
+    /// making all indices good.
+    ///
+    /// Example 3:
+    /// Input: s = "12345"
+    /// Output : []
+    /// Explanation :
+    /// No index has a substring ending at it that matches its decimal 
+    /// representation.
+    /// 
+    /// Therefore, there are no good indices and the result is an empty array.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s only consists of digits from '0' to '9'.
+    /// </summary>
+    vector<int> goodIndices(string s);
+
+    /// <summary>
+    /// Leet Code 3816. Lexicographically Smallest String After Deleting 
+    ///                 Duplicate Characters
+    /// Hard
+    ///
+    /// You are given a string s that consists of lowercase English letters.
+    ///
+    /// You can perform the following operation any number of times(possibly 
+    /// zero times) :
+    ///
+    /// Choose any letter that appears at least twice in the current string s 
+    /// and delete any one occurrence.
+    /// Return the lexicographically smallest resulting string that can be 
+    /// formed this way.
+    ///
+    /// Example 1:
+    /// Input: s = "aaccb"
+    /// Output : "aacb"
+    /// Explanation :
+    /// We can form the strings "acb", "aacb", "accb", and "aaccb". "aacb" 
+    /// is the lexicographically smallest one.
+    ///
+    /// For example, we can obtain "aacb" by choosing 'c' and deleting its 
+    /// first occurrence.
+    ///
+    /// Example 2:
+    /// Input: s = "z"
+    /// Output : "z"
+    /// Explanation :
+    /// We cannot perform any operations.The only string we can form is "z".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s contains lowercase English letters only.
+    /// </summary>
+    string lexSmallestAfterDeletion(string s);
+    
 #pragma endregion
 };
 

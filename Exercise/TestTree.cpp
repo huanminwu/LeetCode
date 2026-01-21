@@ -4717,8 +4717,44 @@ void TestLeetCode3787(void)
     Logger::WriteMessage("result = " + result);
 }
 
+
+void TestLeetCode3812(void)
+{
+    Logger::WriteMessage("Test Leet Code 3812");
+    LeetCodeTree leetCode;
+    int n = 3;
+    vector <vector<int>> edges = { {0, 1},{1, 2} };
+    string start = "010", target = "100";
+    vector<int> result = leetCode.minimumFlips(n, edges, start, target);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("start = " + start + "; end = " + target);
+    Logger::WriteMessage(result);
+
+
+    n = 7;
+    edges = { {0, 1},{1, 2},{2, 3},{3, 4},{3, 5},{1, 6} };
+    start = "0011000", target = "0010001";
+    result = leetCode.minimumFlips(n, edges, start, target);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("start = " + start + "; end = " + target);
+    Logger::WriteMessage(result);
+
+    n = 2;
+    edges = { {0, 1} };
+    start = "00", target = "01";
+    result = leetCode.minimumFlips(n, edges, start, target);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("start = " + start + "; end = " + target);
+    Logger::WriteMessage(result);
+}
+
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3812();
     TestLeetCode3787();
     TestLeetCode3786();
     TestLeetCode3772();

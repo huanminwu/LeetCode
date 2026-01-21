@@ -4850,7 +4850,7 @@ void TestLeetCode3796(void)
     vector<vector<int>> restrictions = { {3, 1},{8, 1} };
     vector<int> diff = { 2, 2, 3, 1, 4, 5, 1, 1, 2 };
     int result = leetCode.findMaxVal(n, restrictions, diff);
-    Logger::WriteMessage("n = " + n);
+    Logger::WriteMessage("n = " + to_string(n));
     Logger::WriteMessage(restrictions);
     Logger::WriteMessage(diff);
     Logger::WriteMessage("result = " + to_string(result));
@@ -4859,7 +4859,7 @@ void TestLeetCode3796(void)
     restrictions = { {3, 2} };
     diff = { 3, 5, 2, 4, 2, 3, 1 };
     result = leetCode.findMaxVal(n, restrictions, diff);
-    Logger::WriteMessage("n = " + n);
+    Logger::WriteMessage("n = " + to_string(n));
     Logger::WriteMessage(restrictions);
     Logger::WriteMessage(diff);
     Logger::WriteMessage("result = " + to_string(result));
@@ -4868,14 +4868,56 @@ void TestLeetCode3796(void)
     restrictions = { {1, 15} };
     diff = { 2 };
     result = leetCode.findMaxVal(n, restrictions, diff);
-    Logger::WriteMessage("n = " + n);
+    Logger::WriteMessage("n = " + to_string(n));
     Logger::WriteMessage(restrictions);
     Logger::WriteMessage(diff);
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3814(void)
+{
+    Logger::WriteMessage("Test Leet Code 3814");
+    LeetCodeSort leetCode;
+    vector<int> costs = { 4, 8, 5, 3 };
+    vector<int> capacity = { 1, 5, 2, 7 };
+    int budget = 8;
+    int result = leetCode.maxCapacity(costs, capacity, budget);
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage(capacity);
+    Logger::WriteMessage("budget = " + to_string(budget));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    costs = { 3,5,7,4 };
+    capacity = { 2,4,3,6 };
+    budget = 7;
+    result = leetCode.maxCapacity(costs, capacity, budget);
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage(capacity);
+    Logger::WriteMessage("budget = " + to_string(budget));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    costs = { 2,2,2 };
+    capacity = { 3,5,4 };
+    budget = 5;
+    result = leetCode.maxCapacity(costs, capacity, budget);
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage(capacity);
+    Logger::WriteMessage("budget = " + to_string(budget));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    costs = { 1, 7, 3 };
+    capacity = { 7, 3, 5 };
+    budget = 13;
+    result = leetCode.maxCapacity(costs, capacity, budget);
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage(capacity);
+    Logger::WriteMessage("budget = " + to_string(budget));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3814();
     TestLeetCode3796();
     TestLeetCode3781();
     TestLeetCode3774();

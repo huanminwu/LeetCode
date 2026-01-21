@@ -5965,8 +5965,57 @@ void TestLeetCode3709(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3815(void)
+{
+    Logger::WriteMessage("Test Leet Code 3815");
+    vector<string> commands =
+    {
+        "AuctionSystem", "addBid", "addBid", "getHighestBidder", "updateBid", 
+        "getHighestBidder", "removeBid", "getHighestBidder", "getHighestBidder"
+    };
+    vector<vector<int>> parameters =
+    {
+        {},{1, 7, 5},{2, 7, 6}, {7},{1, 7, 8},{7},{2, 7},{7},{3}
+    };
+    vector<string> result;
+    AuctionSystem* auctionSystem = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "AuctionSystem")
+        {
+            auctionSystem = new AuctionSystem();
+            result.push_back("null");
+        }
+        else if (commands[i] == "addBid")
+        {
+            auctionSystem->addBid(parameters[i][0], parameters[i][1], parameters[i][2]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "updateBid")
+        {
+            auctionSystem->updateBid(parameters[i][0], parameters[i][1], parameters[i][2]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "removeBid")
+        {
+            auctionSystem->removeBid(parameters[i][0], parameters[i][1]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "getHighestBidder")
+        {
+            int ret = auctionSystem->getHighestBidder(parameters[i][0]);
+            result.push_back(to_string(ret));
+        }
+    }
+    delete auctionSystem;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode3815();
     TestLeetCode3709();
     TestLeetCode3508();
     TestLeetCode3484();

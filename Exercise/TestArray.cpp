@@ -12879,8 +12879,38 @@ void TestLeetCode3804(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3811(void)
+{
+    Logger::WriteMessage("Test Leet Code 3811");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 3, 1, 4 };
+    int target1 = 1;
+    int target2 = 5;
+    int result = leetCode.alternatingXOR(nums, target1, target2);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target1 = " + to_string(target1) + "target2 = " + to_string(target2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,0,0 };
+    target1 = 1;
+    target2 = 0;
+    result = leetCode.alternatingXOR(nums, target1, target2);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target1 = " + to_string(target1) + "target2 = " + to_string(target2));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7 };
+    target1 = 1;
+    target2 = 7;
+    result = leetCode.alternatingXOR(nums, target1, target2);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target1 = " + to_string(target1) + "target2 = " + to_string(target2));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3811();
     TestLeetCode3739();
     TestLeetCode3804();
     TestLeetCode3788();

@@ -8746,9 +8746,74 @@ void TestLeetCode3805(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3813(void)
+{
+    Logger::WriteMessage("Test Leet Code 3813");
+    LeetCodeString leetCode;
+
+    string s = "cooear";
+    int result = leetCode.vowelConsonantScore(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "axeyizou";
+    result = leetCode.vowelConsonantScore(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "au 123";
+    result = leetCode.vowelConsonantScore(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3817(void)
+{
+    Logger::WriteMessage("Test Leet Code 3817");
+    LeetCodeString leetCode;
+
+    string s = "0234567890112";
+    vector<int> result = leetCode.goodIndices(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+
+    s = "01234";
+    result = leetCode.goodIndices(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+
+    s = "12345";
+    result = leetCode.goodIndices(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3816(void)
+{
+    Logger::WriteMessage("Test Leet Code 3817");
+    LeetCodeString leetCode;
+
+    string s = "aaccb";
+    string result = leetCode.lexSmallestAfterDeletion(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+
+    s = "z";
+    result = leetCode.lexSmallestAfterDeletion(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+
+    s = "aaa";
+    result = leetCode.lexSmallestAfterDeletion(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+}
 
 void TestLeetCodeString(void)
 {
+    TestLeetCode3816();
+    TestLeetCode3817();
+    TestLeetCode3813();
     TestLeetCode3805();
     TestLeetCode3803();
     TestLeetCode3798();

@@ -8548,8 +8548,42 @@ void TestLeetCode3800(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3809(void)
+{
+    Logger::WriteMessage("Test Leet Code 3809");
+    LeetCodeMath leetCode;
+    vector<vector<int>> towers = { {1, 2, 5},{2, 1, 7},{3, 1, 9} };
+    vector<int> center = { 1, 1 };
+    int radius = 2;
+    vector<int> result = leetCode.bestTower(towers, center, radius);
+    Logger::WriteMessage(towers);
+    Logger::WriteMessage(center);
+    Logger::WriteMessage("radius = " + to_string(radius));
+    Logger::WriteMessage(result);
+
+    towers = { {1, 3, 4},{2, 2, 4},{4, 4, 7} };
+    center = { 0,0 };
+    radius = 5;
+    result = leetCode.bestTower(towers, center, radius);
+    Logger::WriteMessage(towers);
+    Logger::WriteMessage(center);
+    Logger::WriteMessage("radius = " + to_string(radius));
+    Logger::WriteMessage(result);
+
+    towers = { {5, 6, 8},{0, 3, 5} };
+    center = { 1,2 };
+    radius = 1;
+    result = leetCode.bestTower(towers, center, radius);
+    Logger::WriteMessage(towers);
+    Logger::WriteMessage(center);
+    Logger::WriteMessage("radius = " + to_string(radius));
+    Logger::WriteMessage(result);
+
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3809();
     TestLeetCode3800();
     TestLeetCode3792();
     TestLeetCode3790();
