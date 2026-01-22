@@ -4783,26 +4783,6 @@ void TestLeetCode2375(void)
     Logger::WriteMessage("pattern = " + pattern + "; result = " + result);
 }
 
-void TestLeetCode2404(void)
-{
-    Logger::WriteMessage("Test Leet Code 2404");
-    LeetCodeMath leetCode;
-    vector<int> nums = { 0, 1, 2, 2, 4, 4, 1 };
-    int result = leetCode.mostFrequentEven(nums);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    nums = { 4,4,4,9,2,4 };
-    result = leetCode.mostFrequentEven(nums);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage("result = " + to_string(result));
-
-    nums = { 29,47,21,41,13,37,25,7 };
-    result = leetCode.mostFrequentEven(nums);
-    Logger::WriteMessage(nums);
-    Logger::WriteMessage("result = " + to_string(result));
-}
-
 void TestLeetCode2396(void)
 {
     Logger::WriteMessage("Test Leet Code 2396");
@@ -8783,7 +8763,6 @@ void TestLeetCodeMath(void)
     TestLeetCode2409();
     TestLeetCode2417();
     TestLeetCode2396();
-    TestLeetCode2404();
     TestLeetCode2375();
     TestLeetCode2384();
     TestLeetCode2376();

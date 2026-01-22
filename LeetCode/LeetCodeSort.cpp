@@ -3866,21 +3866,21 @@ int LeetCodeSort::findKthLargest(vector<int>& nums, int k)
 /// </summary>
 vector<int> LeetCodeSort::arrayRankTransform(vector<int>& arr)
 {
+    vector<pair<int, int>> sorted_arr;
     vector<int> result(arr.size());
-
-    map<int, vector<int>> sorted_arr;
     for (size_t i = 0; i < arr.size(); i++)
     {
-        sorted_arr[arr[i]].push_back(i);
+        sorted_arr.push_back(make_pair(arr[i], i));
     }
-    int order = 1;
-    for (auto itr : sorted_arr)
+    sort(sorted_arr.begin(), sorted_arr.end());
+    int seq = 1;
+    for (size_t i = 0; i < sorted_arr.size(); i++)
     {
-        for (auto k : itr.second)
+        if (i > 0 && sorted_arr[i].first > sorted_arr[i - 1].first)
         {
-            result[k] = order;
+            seq++;
         }
-        order++;
+        result[sorted_arr[i].second] = seq;
     }
     return result;
 }

@@ -2356,8 +2356,30 @@ void TestLeetCode3810(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode2404(void)
+{
+    Logger::WriteMessage("Test Leet Code 2404");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 0, 1, 2, 2, 4, 4, 1 };
+    int result = leetCode.mostFrequentEven(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,4,4,9,2,4 };
+    result = leetCode.mostFrequentEven(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 29,47,21,41,13,37,25,7 };
+    result = leetCode.mostFrequentEven(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode2404();
     TestLeetCode3810();
     TestLeetCode3761();
     TestLeetCode3731();
