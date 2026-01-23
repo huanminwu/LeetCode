@@ -15098,36 +15098,32 @@ int LeetCodeSort::earliestFinishTimeII(vector<int>& landStartTime, vector<int>& 
 long long LeetCodeSort::maxTotal(vector<int>& value, vector<int>& limit)
 {
     int n = value.size();
-    map<int, priority_queue<int>> sorted_list;
+    vector<pair<int, int>> sorted_list;
     for (int i = 0; i < n; i++)
     {
-        sorted_list[limit[i]].push(value[i]);
+        sorted_list.push_back(make_pair(limit[i], -value[i]));
     }
+    sort(sorted_list.begin(), sorted_list.end());
+
     long long result = 0;
     int count = 0;
-    map<int, int> active_count;
+    deque<pair<int, int>> actives;
     for (int i = 0; i < n; i++)
     {
-        if (sorted_list.empty()) break;
-        if (sorted_list.begin()->first <= count)
+        if (sorted_list[i].first <= count)
         {
-            sorted_list.erase(sorted_list.begin());
+            continue;
         }
-        if (!active_count.empty() && active_count.begin()->first <= count)
+        while (!actives.empty() && actives.begin()->first <= count)
         {
-            count -= active_count.begin()->second;
-            active_count.erase(active_count.begin());
+            actives.pop_front();
         }
-        if (!sorted_list.empty() && sorted_list.begin()->first > count)
+        count = actives.size();
+        if (sorted_list[i].first > count)
         {
-            result += sorted_list.begin()->second.top();
-            sorted_list.begin()->second.pop();
-            active_count[sorted_list.begin()->first]++;
+            result += -sorted_list[i].second;
+            actives.push_back(sorted_list[i]);
             count++;
-            if (sorted_list.begin()->second.empty())
-            {
-                sorted_list.erase(sorted_list.begin());
-            }
         }
     }
     return result;
@@ -16139,30 +16135,41 @@ int LeetCodeSort::maxCapacity(vector<int>& costs, vector<int>& capacity, int bud
         machines.push_back(make_pair(costs[i], capacity[i]));
     }
     sort(machines.begin(), machines.end());
-    vector<pair<int, int>> max_machines = machines;
-    int prev = 0;
-    for (int i = 0; i < n; i++)
-    {
-        max_machines[i].second = max(max_machines[i].second, prev);
-        prev = max_machines[i].second;
-    }
+    set<pair<int, int>> heap;
     int result = 0;
-    for (int i = 0; i < n; i++)
+    for (size_t i = 0; i < machines.size(); i++)
     {
-        int index = lower_bound(max_machines.begin(), max_machines.end(), 
-            make_pair(budget - max_machines[i].first, 0)) - 
-            max_machines.begin() - 1;
-        if (index == i) index--;
-        if (index > i) index = i - 1;
         if (machines[i].first >= budget) break;
-        if (index < 0)
+        // try one machine
+        result = max(result, machines[i].second);
+        // discard expensive pairs;
+        while (!heap.empty() && heap.rbegin()->first + machines[i].first >= budget)
         {
-            result = max(result, machines[i].second);
+            heap.erase(make_pair(heap.rbegin()->first, heap.rbegin()->second));
         }
-        else
+        if (!heap.empty()) result = max(result, heap.rbegin()->second + machines[i].second);
+        auto itr = heap.lower_bound(make_pair(machines[i].first, 0));
+        auto next_itr = itr;
+        while (next_itr != heap.end())
         {
-            result = max(result, machines[i].second + max_machines[index].second);
+            if (next_itr->second <= machines[i].second)
+            {
+                auto temp = next_itr;
+                next_itr = next(next_itr);
+                heap.erase(temp);
+            }
         }
+        itr = heap.lower_bound(make_pair(machines[i].first, 0));
+        if (itr != heap.begin())
+        {
+            auto prev_itr = prev(itr);
+            // discard current machine.
+            if (prev_itr->second >= machines[i].second)
+            {
+                continue;
+            }
+        }
+        heap.insert(machines[i]);
     }
     return result;
 }
