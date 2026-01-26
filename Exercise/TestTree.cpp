@@ -4717,7 +4717,6 @@ void TestLeetCode3787(void)
     Logger::WriteMessage("result = " + result);
 }
 
-
 void TestLeetCode3812(void)
 {
     Logger::WriteMessage("Test Leet Code 3812");
@@ -4751,9 +4750,40 @@ void TestLeetCode3812(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3820(void)
+{
+    Logger::WriteMessage("Test Leet Code 3820");
+    LeetCodeTree leetCode;
+    int n = 4;
+    vector <vector<int>> edges = { {0, 1},{0, 2},{0, 3} };
+    int x = 1, y = 2, z = 3;
+    int result = leetCode.specialNodes(n, edges, x, y, z);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; z = " + to_string(z));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4;
+    edges = { {0, 1},{1, 2},{2, 3} };
+    x = 0, y = 3, z = 2;
+    result = leetCode.specialNodes(n, edges, x, y, z);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; z = " + to_string(z));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {0, 1},{1, 2},{1, 3} };
+    x = 1, y = 3, z = 0;
+    result = leetCode.specialNodes(n, edges, x, y, z);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("x = " + to_string(x) + "; y = " + to_string(y) + "; z = " + to_string(z));
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3820();
     TestLeetCode3812();
     TestLeetCode3787();
     TestLeetCode3786();

@@ -5881,6 +5881,13 @@ void TestLeetCode3473(void)
     Logger::WriteMessage(nums);
     Logger::WriteMessage("k = " + to_string(k) + "; m = " + to_string(m));
     Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4,5, -1000, 6,7,8,9,10 };
+    k = 2, m = 3;
+    result = leetCode.maxSum(nums, k, m);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCode3489(void)
@@ -6465,6 +6472,7 @@ void TestLeetCode3801(void)
 
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3473();
     TestLeetCode3801();
     TestLeetCode3797();
     TestLeetCode3742();
@@ -6489,7 +6497,6 @@ void TestLeetCodeDP(void)
     TestLeetCode3509();
     TestLeetCode3494();
     TestLeetCode3489();
-    TestLeetCode3473();
     TestLeetCode3472();
     TestLeetCode3466();
     TestLeetCode3469();

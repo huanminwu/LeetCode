@@ -2655,31 +2655,6 @@ void TestLeetCode964(void)
     Logger::WriteMessage("x = " + to_string(x) + "; target = " + to_string(target) + "; result = " + to_string(result));
 }
 
-void TestLeetCode517(void)
-{
-    Logger::WriteMessage("Test Leet Code 517");
-    LeetCodeMath leetCode;
-    vector<int> nums = { 1,0,5 };
-    Logger::WriteMessage(nums);
-    int result = leetCode.findMinMoves(nums);
-    Logger::WriteMessage("Minimum Move =" + to_string(result));
-
-    nums = { 9, 1, 8, 8, 9 };
-    Logger::WriteMessage(nums);
-    result = leetCode.findMinMoves(nums);
-    Logger::WriteMessage("Minimum Move =" + to_string(result));
-
-    nums = { 0,3,0 };
-    Logger::WriteMessage(nums);
-    result = leetCode.findMinMoves(nums);
-    Logger::WriteMessage("Minimum Move =" + to_string(result));
-
-    nums = { 0,2,0 };
-    Logger::WriteMessage(nums);
-    result = leetCode.findMinMoves(nums);
-    Logger::WriteMessage("Minimum Move =" + to_string(result));
-}
-
 void TestLeetCode384(void)
 {
     Logger::WriteMessage("Test Leet Code 384");
@@ -8864,7 +8839,6 @@ void TestLeetCodeMath(void)
     TestLeetCode1464();
     TestLeetCode1467();
     TestLeetCode384();
-    TestLeetCode517();
     TestLeetCode964();
     TestLeetCode1000();
     TestLeetCode398();

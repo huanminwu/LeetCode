@@ -12908,8 +12908,82 @@ void TestLeetCode3811(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode517(void)
+{
+    Logger::WriteMessage("Test Leet Code 517");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,0,5 };
+    Logger::WriteMessage(nums);
+    int result = leetCode.findMinMoves(nums);
+    Logger::WriteMessage("Minimum Move = " + to_string(result));
+
+    nums = { 9, 1, 8, 8, 9 };
+    Logger::WriteMessage(nums);
+    result = leetCode.findMinMoves(nums);
+    Logger::WriteMessage("Minimum Move = " + to_string(result));
+
+    nums = { 0,3,0 };
+    Logger::WriteMessage(nums);
+    result = leetCode.findMinMoves(nums);
+    Logger::WriteMessage("Minimum Move = " + to_string(result));
+
+    nums = { 0,2,0 };
+    Logger::WriteMessage(nums);
+    result = leetCode.findMinMoves(nums);
+    Logger::WriteMessage("Minimum Move =" + to_string(result));
+}
+
+void TestLeetCode3818(void)
+{
+    Logger::WriteMessage("Test Leet Code 3818");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,-1,2,3,3,4,5 };
+    Logger::WriteMessage(nums);
+    int result = leetCode.minimumPrefixLength(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,3,-2,-5 };
+    Logger::WriteMessage(nums);
+    result = leetCode.minimumPrefixLength(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    Logger::WriteMessage(nums);
+    result = leetCode.minimumPrefixLength(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3819(void)
+{
+    Logger::WriteMessage("Test Leet Code 3819");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, -2, 3, -4 };
+    int k = 3;
+    vector<int> result = leetCode.rotateElements(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { -3,-2,7 };
+    k = 1;
+    result = leetCode.rotateElements(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 5,4,-9,6 };
+    k = 2;
+    result = leetCode.rotateElements(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3819();
+    TestLeetCode3818();
+    TestLeetCode517();;
     TestLeetCode3811();
     TestLeetCode3739();
     TestLeetCode3804();

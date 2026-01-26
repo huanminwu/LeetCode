@@ -26717,5 +26717,145 @@ public:
     /// </summary>
     int alternatingXOR(vector<int>& nums, int target1, int target2);
 
+    /// <summary>
+    /// Leet code # 517. Super Washing Machines 
+    ///
+    /// Hard
+    ///
+    /// You have n super washing machines on a line.Initially, each washing 
+    /// machine has some dresses or is empty.
+    ///
+    /// For each move, you could choose any m(1 <= m <= n) washing machines, 
+    /// and pass one dress of each washing machine to one of its adjacent 
+    /// washing machines at the same time.
+    ///
+    /// Given an integer array machines representing the number of dresses 
+    /// in each washing machine from left to right on the line, return the 
+    /// minimum number of moves to make all the washing machines have the 
+    /// same number of dresses.If it is not possible to do it, return -1.
+    ///
+    /// Example 1:
+    /// Input: machines = [1, 0, 5]
+    /// Output : 3
+    /// Explanation :
+    /// 1st move : 1     0 < -- 5 = > 1     1     4
+    /// 2nd move : 1 < -- 1 < -- 4 = > 2     1     3
+    /// 3rd move : 2     1 < -- 3 = > 2     2     2
+    ///
+    /// Example 2 :
+    /// Input : machines = [0, 3, 0]
+    /// Output : 2
+    /// Explanation :
+    /// 1st move : 0 < -- 3     0 = > 1     2     0
+    /// 2nd move : 1     2 -- > 0 = > 1     1     1
+    ///
+    /// Example 3:
+    /// Input: machines = [0, 2, 0]
+    /// Output : -1
+    /// Explanation :
+    /// It's impossible to make all three washing machines have the same 
+    /// number of dresses.
+    /// 
+    /// Constraints :
+    /// 1. n == machines.length
+    /// 2. 1 <= n <= 10^4
+    /// 3. 0 <= machines[i] <= 10^5
+    /// </summary>
+    int findMinMoves(vector<int>& machines);
+
+    /// <summary>
+    /// Leet code # 3818. Minimum Prefix Removal to Make Array Strictly 
+    ///                   Increasing 
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// You need to remove exactly one prefix(possibly empty) from nums.
+    ///
+    /// Return an integer denoting the minimum length of the removed prefix 
+    /// such that the remaining array is strictly increasing.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, -1, 2, 3, 3, 4, 5]
+    /// Output : 4
+    /// Explanation :
+    /// Removing the prefix = [1, -1, 2, 3] leaves the remaining 
+    /// array[3, 4, 5] which is strictly increasing.
+    ///
+    /// Example 2 :
+    /// Input : nums = [4, 3, -2, -5]
+    /// Output : 3
+    /// Explanation :
+    /// Removing the prefix = [4, 3, -2] leaves the remaining array[-5] which 
+    /// is strictly increasing.
+    ///
+    /// Example 3 :
+    /// Input : nums = [1, 2, 3, 4]
+    /// Output : 0
+    /// Explanation :
+    /// The array nums = [1, 2, 3, 4] is already strictly increasing so 
+    /// removing an empty prefix is sufficient.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// </summary>
+    int minimumPrefixLength(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code # 3819. Rotate Non Negative Elements 
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums and an integer k.
+    /// Rotate only the non - negative elements of the array to the left by k 
+    /// positions, in a cyclic manner.
+    ///
+    /// All negative elements must stay in their original positions and must 
+    /// not move.
+    ///
+    /// After rotation, place the non - negative elements back into the array 
+    /// in the new order, filling only the positions that originally 
+    /// contained non - negative values and skipping all negative positions.
+    ///
+    /// Return the resulting array.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1, -2, 3, -4], k = 3
+    /// Output : [3, -2, 1, -4]
+    /// Explanation : ​​​​​​​
+    /// The non - negative elements, in order, are[1, 3].
+    /// Left rotation with k = 3 results in :
+    /// [1, 3] ->[3, 1] ->[1, 3] ->[3, 1]
+    /// Placing them back into the non - negative indices results 
+    /// in[3, -2, 1, -4].
+    ///
+    /// Example 2 :
+    /// Input : nums = [-3, -2, 7], k = 1
+    /// Output : [-3, -2, 7]
+    /// Explanation :
+    /// The non - negative elements, in order, are[7].
+    /// Left rotation with k = 1 results in[7].
+    /// Placing them back into the non - negative indices results 
+    /// in[-3, -2, 7].
+    ///
+    /// Example 3 :
+    /// Input : nums = [5, 4, -9, 6], k = 2
+    /// Output : [6, 5, -9, 4]
+    /// Explanation :
+    /// The non - negative elements, in order, are[5, 4, 6].
+    /// Left rotation with k = 2 results in[6, 5, 4].
+    /// Placing them back into the non - negative indices results 
+    /// in[6, 5, -9, 4].
+    ///
+    /// Constraints :
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^5 <= nums[i] <= 10^5
+    /// 3. 0 <= k <= 10^5
+    /// </summary>
+    vector<int> rotateElements(vector<int>& nums, int k);
+    
+
 };
 #endif  // LeetCodeArray_H

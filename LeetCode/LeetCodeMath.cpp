@@ -7824,71 +7824,6 @@ int LeetCodeMath::leastOpsExpressTarget(int x, int target)
 }
 
 /// <summary>
-/// Leet code # 517. Super Washing Machines 
-///
-/// You have n super washing machines on a line. Initially, 
-/// each washing machine has some dresses or is empty.
-/// 
-/// For each move, you could choose any m (1 ≤ m ≤ n) washing machines, 
-/// and pass one dress of each washing machine to one of its adjacent 
-/// washing machines at the same time .
-///
-/// Given an integer array representing the number of dresses in each 
-/// washing machine from left to right on the line, you should find the 
-/// minimum number of moves to make all the washing machines have the 
-/// same number of dresses. If it is not possible to do it, return -1.
-/// 
-/// Example1
-/// Input: [1,0,5]
-/// Output: 3
-/// Explanation: 
-/// 1st move:    1     0 <-- 5    =>    1     1     4
-/// 2nd move:    1 <-- 1 <-- 4    =>    2     1     3    
-/// 3rd move:    2     1 <-- 3    =>    2     2     2   
-///
-/// Example2 
-/// Input: [0,3,0]
-/// Output: 2
-/// Explanation: 
-/// 1st move:    0 <-- 3     0    =>    1     2     0    
-/// 2nd move:    1     2 --> 0    =>    1     1     1     
-///
-/// Example3
-/// Input: [0,2,0]
-/// Output: -1
-/// 
-/// Explanation: 
-/// It's impossible to make all the three washing machines have the 
-/// same number of dresses. 
-/// Note:
-/// The range of n is [1, 10000].
-/// The range of dresses number in a super washing machine is [0, 1e5].
-/// </summary>
-int LeetCodeMath::findMinMoves(vector<int>& machines)
-{
-    int count = 0;
-    vector<int> balances(machines.size());
-    for (size_t i = 0; i < machines.size(); i++)
-    {
-        count += machines[i];
-    }
-    if (count % machines.size() != 0) return -1;
-    int average = count / machines.size();
-
-    int result = 0;
-    for (size_t i = 0; i < machines.size(); i++)
-    {
-        balances[i] = machines[i] - average;
-        if (i > 0)
-        {
-            balances[i] += balances[i - 1];
-        }
-        result = max(max(result, machines[i] - average), abs(balances[i]));
-    }
-    return result;
-}
-
-/// <summary>
 /// Leet code #384. Shuffle an Array      
 /// Shuffle a set of numbers without duplicates. 
 /// Example: 
@@ -14660,7 +14595,6 @@ string LeetCodeMath::smallestNumber(string pattern)
     }
     return result;
 }
-
 
 /// <summary>
 /// Leet Code 2396. Strictly Palindromic Number

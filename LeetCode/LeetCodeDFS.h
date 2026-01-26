@@ -6471,6 +6471,51 @@ public:
     /// </summary>
     int numDupDigitsAtMostN(int N);
 
+    /// <summary>
+    /// Leet code #3821. Find Nth Smallest Integer With K One Bits
+    /// </summary>
+    long long nthSmallest(string& str_n, int index, int num_of_bits, long long& n, int k, vector<vector<long long>>& cache, string& result);
+
+    /// <summary>
+    /// Leet code #3821. Find Nth Smallest Integer With K One Bits
+    /// 
+    /// Hard
+    /// 
+    /// You are given two positive integers n and k.
+    /// 
+    /// Return an integer denoting the nth smallest positive integer that 
+    /// has exactly k ones in its binary representation.It is guaranteed that 
+    /// the answer is strictly less than 2^50.
+    ///
+    /// Example 1:
+    /// Input: n = 4, k = 2
+    /// Output : 9
+    /// Explanation :
+    /// The 4 smallest positive integers that have exactly k = 2 ones in their 
+    /// binary representations are :
+    ///
+    /// 3 = 11
+    /// 5 = 101
+    /// 6 = 110
+    /// 9 = 1001
+    ///
+    /// Example 2:
+    /// Input: n = 3, k = 1
+    /// Output : 4
+    /// Explanation :
+    /// The 3 smallest positive integers that have exactly k = 1 one in their 
+    /// binary representations are :
+    /// 1 = 1
+    /// 2 = 10
+    /// 4 = 100
+    /// 
+    /// Constraints :
+    /// 1. 1 <= n <= 2^50
+    /// 2. 1 <= k <= 50
+    /// 3. The answer is strictly less than 2^50.
+    /// </summary>
+    long long nthSmallest(long long n, int k);
+
 #pragma endregion
 };
 

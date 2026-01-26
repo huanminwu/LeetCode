@@ -2948,9 +2948,25 @@ void TestLeetCode1012(void)
     result = leetCode.numDupDigitsAtMostN(N);
     Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
 }
+void TestLeetCode3821(void)
+{
+    Logger::WriteMessage("Test Leet Code 3821");
+    LeetCodeDFS leetCode;
+
+    int n = 4, k = 2;
+    long long result = leetCode.nthSmallest(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3, k = 1;
+    result = leetCode.nthSmallest(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3821();
     TestLeetCode1012();
     TestLeetCode1067();
     TestLeetCode1088();

@@ -12432,4 +12432,103 @@ int LeetCodeDFS::numDupDigitsAtMostN(int N)
     return numDupDigitsAtMostN(str_n, 0, 1, 1, 0, cache);
 }
 
+/// <summary>
+/// Leet code #3821. Find Nth Smallest Integer With K One Bits
+/// </summary>
+long long LeetCodeDFS::nthSmallest(string& str_n, int index, int num_of_bits, long long& n, int k, 
+    vector<vector<long long>>& cache, string& result)
+{
+    if (!result.empty()) return 0;
+    if (num_of_bits == k)
+    {
+        n--;
+        if (n == 0) result = str_n;
+        return 1;
+    }
+    if (index == str_n.size())
+    {
+        return 0;
+    }
+    // we must check < n not <= n, because we need to lock down every bit
+    if (cache[index][num_of_bits] != -1 && cache[index][num_of_bits] < n)
+    {
+        n -= cache[index][num_of_bits];
+        return cache[index][num_of_bits];
+    }
+    long long count = 0;
+    int new_num_of_bits = num_of_bits;
+    for (int bit = 0; bit <= 1; bit++)
+    {
+        if (bit == 1)
+        {
+            new_num_of_bits++;
+        }
+        str_n[index] = '0' + bit;
+        count += nthSmallest(str_n, index + 1, new_num_of_bits, n, k, cache, result);
+    }
+    str_n[index] = '0';
+    if (cache[index][num_of_bits] == -1)
+    {
+        cache[index][num_of_bits] = count;
+    }
+    return count;
+}
+
+
+/// <summary>
+/// Leet code #3821. Find Nth Smallest Integer With K One Bits
+/// 
+/// Hard
+/// 
+/// You are given two positive integers n and k.
+/// 
+/// Return an integer denoting the nth smallest positive integer that 
+/// has exactly k ones in its binary representation.It is guaranteed that 
+/// the answer is strictly less than 2^50.
+///
+/// Example 1:
+/// Input: n = 4, k = 2
+/// Output : 9
+/// Explanation :
+/// The 4 smallest positive integers that have exactly k = 2 ones in their 
+/// binary representations are :
+///
+/// 3 = 11
+/// 5 = 101
+/// 6 = 110
+/// 9 = 1001
+///
+/// Example 2:
+/// Input: n = 3, k = 1
+/// Output : 4
+/// Explanation :
+/// The 3 smallest positive integers that have exactly k = 1 one in their 
+/// binary representations are :
+/// 1 = 1
+/// 2 = 10
+/// 4 = 100
+/// 
+/// Constraints :
+/// 1. 1 <= n <= 2^50
+/// 2. 1 <= k <= 50
+/// 3. The answer is strictly less than 2^50.
+/// </summary>
+long long LeetCodeDFS::nthSmallest(long long n, int k)
+{
+    string str_n = string(59, '0');
+    string str_result;
+    vector<vector<long  long>>cache(59, vector<long long>(k + 1, -1));
+    nthSmallest(str_n, 0, 0, n, k, cache, str_result);
+    long long result = 0;
+    for (size_t i = 0; i < str_result.size(); i++)
+    {
+        result = result * 2 ;
+        if (str_result[i] == '1')
+        {
+            result++;
+        }
+    }
+    return result;
+}
+
 #pragma endregion
