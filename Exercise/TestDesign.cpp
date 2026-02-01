@@ -6013,8 +6013,68 @@ void TestLeetCode3815(void)
     Logger::WriteMessage(result);
 }
 
+
+void TestLeetCode3822(void)
+{
+    Logger::WriteMessage("Test Leet Code 3822");
+    vector<string> commands =
+    {
+        "OrderManagementSystem", "addOrder", "addOrder", "addOrder", "getOrdersAtPrice", 
+        "modifyOrder", "modifyOrder", "getOrdersAtPrice", "cancelOrder", "cancelOrder", 
+        "getOrdersAtPrice"
+    };
+    vector<vector<string>> parameters =
+    {
+        {},{"1", "buy", "1"},{"2", "buy", "1"},{"3", "sell", "2"},{"buy", "1"},{"1", "3"},
+        {"2", "1"},{"buy", "1"},{"3"},{"2"},{"buy", "1"}
+    };
+    vector<string> result;
+    OrderManagementSystem* orderManagementSystem = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "OrderManagementSystem")
+        {
+            orderManagementSystem = new OrderManagementSystem();
+            result.push_back("null");
+        }
+        else if (commands[i] == "addOrder")
+        {
+            orderManagementSystem->addOrder(atoi(parameters[i][0].c_str()), parameters[i][1], atoi(parameters[i][2].c_str()));
+            result.push_back("null");
+        }
+        else if (commands[i] == "modifyOrder")
+        {
+            orderManagementSystem->modifyOrder(atoi(parameters[i][0].c_str()), atoi(parameters[i][1].c_str()));
+            result.push_back("null");
+        }
+        else if (commands[i] == "cancelOrder")
+        {
+            orderManagementSystem->cancelOrder(atoi(parameters[i][0].c_str()));
+            result.push_back("null");
+        }
+        else if (commands[i] == "getOrdersAtPrice")
+        {
+            vector<int> ret = orderManagementSystem->getOrdersAtPrice(parameters[i][0], atoi(parameters[i][1].c_str()));
+            string orders = "";
+            for (size_t j = 0; j < ret.size(); j++)
+            {
+                if (j > 0)
+                {
+                    orders.append(",");
+                }
+                orders.append(to_string(ret[j]));
+            }
+            result.push_back("[" + orders + "]");
+        }
+    }
+    delete orderManagementSystem;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode3822();
     TestLeetCode3815();
     TestLeetCode3709();
     TestLeetCode3508();
