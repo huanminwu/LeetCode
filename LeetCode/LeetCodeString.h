@@ -16994,7 +16994,7 @@ public:
     /// Input: s = "bcda"
     /// Output: ""
     /// Explanation:
-    /// ​​​​​​​Remove "cd" from the string, leaving "ba" as the remaining string.
+    /// Remove "cd" from the string, leaving "ba" as the remaining string.
     /// Remove "ba" from the string, leaving "" as the remaining string.
     /// No further operations are possible. Thus, the lexicographically smallest 
     /// string after all possible removals is "".
@@ -17746,8 +17746,8 @@ public:
     /// Example 2:
     /// Input: s = "bace"
     /// Output: false
-    /// Explanation:​​​​​​
-    /// ​​​​​​​No split produces equal scores, so the output is false.
+    /// Explanation:
+    /// No split produces equal scores, so the output is false.
     /// 
     /// Constraints:
     /// 1. 2 <= s.length <= 100
@@ -17828,7 +17828,7 @@ public:
     /// Input: words = ["z","z","z"]
     /// Output: 0
     /// Explanation:
-    /// ​​​​​​​In this example all the words are equal, thus the answer is 0.
+    /// In this example all the words are equal, thus the answer is 0.
     /// 
     /// Constraints:
     /// 1. 1 <= words.length <= 10^5
@@ -17911,13 +17911,13 @@ public:
     /// Output: 4
     /// Explanation:
     /// The longest balanced substring is "zabc" because the distinct characters 
-    /// 'z', 'a', 'b', and 'c' each appear exactly 1 time.​​​​​​​
+    /// 'z', 'a', 'b', and 'c' each appear exactly 1 time.
     ///
     /// Example 3:
     /// Input: s = "aba"
     /// Output: 2
     /// Explanation:
-    /// ​​​​​​​One of the longest balanced substrings is "ab" because both distinct
+    /// One of the longest balanced substrings is "ab" because both distinct
     /// characters 'a' and 'b' each appear exactly 1 time. Another longest 
     /// balanced substring is "ba".
     /// 
@@ -18414,7 +18414,7 @@ public:
     /// Example 1:
     /// Input: s = "cat and mice"
     /// Output : "cat dna mice"
-    /// Explanation : ​​​​​​​
+    /// Explanation : 
     /// The first word "cat" has 1 vowel.
     /// "and" has 1 vowel, so it is reversed to form "dna".
     /// "mice" has 2 vowels, so it remains unchanged.
@@ -18502,7 +18502,7 @@ public:
     /// Example 1:
     /// Input: s = "abcd", k = 2
     /// Output : "bacd"
-    /// Explanation : ​​​​​​​
+    /// Explanation : 
     /// The first k = 2 characters "ab" are reversed to "ba".The final 
     /// resulting string is "bacd".
     ///
@@ -18583,7 +18583,7 @@ public:
     /// Example 1:
     /// Input: s = "abc"
     /// Output : 2
-    /// Explanation : ​​​​​​​
+    /// Explanation : 
     /// Prefix "a" has 1 distinct character and length modulo 3 is 1, so 
     /// it is a residue.
     /// Prefix "ab" has 2 distinct characters and length modulo 3 is 2, 
@@ -18730,7 +18730,7 @@ public:
     /// Example 1:
     /// Input: s = "0234567890112"
     /// Output : [0, 11, 12]
-    /// Explanation : ​​​​​​​
+    /// Explanation : 
     /// At index 0, the decimal representation of the index is "0".The 
     /// substring s[0] is "0", which matches, so index 0 is good.
     ///
@@ -18803,6 +18803,57 @@ public:
     /// 2. s contains lowercase English letters only.
     /// </summary>
     string lexSmallestAfterDeletion(string s);
+
+    /// <summary> 
+    /// Leet Code 3823. Reverse Letters Then Special Characters in a String
+    ///         
+    /// Easy
+    ///   
+    /// You are given a string s consisting of lowercase English letters 
+    /// and special characters.
+    ///
+    /// Your task is to perform these in order :
+    ///
+    /// Reverse the lowercase letters and place them back into the positions 
+    /// originally occupied by letters.
+    /// Reverse the special characters and place them back into the positions 
+    /// originally occupied by special characters.
+    /// Return the resulting string after performing the reversals.
+    ///
+    /// Example 1:
+    /// Input: s = ")ebc#da@f("
+    /// Output : "(fad@cb#e)"
+    /// Explanation :
+    ///
+    /// The letters in the string are['e', 'b', 'c', 'd', 'a', 'f'] :
+    /// Reversing them gives['f', 'a', 'd', 'c', 'b', 'e']
+    /// s becomes ")fad#cb@e("
+    /// The special characters in the string are[')', '#', '@', '('] :
+    /// Reversing them gives['(', '@', '#', ')']
+    /// s becomes "(fad@cb#e)"
+    ///
+    /// Example 2 :
+    /// Input : s = "z"
+    /// Output : "z"
+    /// Explanation :
+    /// The string contains only one letter, and reversing it does not 
+    /// change the string.There are no special characters.
+    ///
+    /// Example 3 :
+    /// Input : s = "!@#$%^&*()"
+    /// Output : ")(*&^%$#@!"
+    /// Explanation :
+    /// The string contains no letters.The string contains all special 
+    /// characters, so reversing the special characters reverses the 
+    /// whole string.
+    /// 
+    /// Constraints:
+    /// 1.1 <= s.length <= 100
+    /// 2. s consists only of lowercase English letters and the special 
+    ///    characters in "!@#$%^&*()".
+    /// </summary>
+    string reverseByType(string s);
+
     
 #pragma endregion
 };

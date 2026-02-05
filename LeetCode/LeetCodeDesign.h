@@ -3284,7 +3284,7 @@ public:
 /// seat() -> 4, the student sits at the last seat number 4.
 /// seat() -> 2, the student sits at the last seat number 2.
 /// leave(4) -> null
-/// seat()-> 5, the student​​​​​​​ sits at the last seat number 5.
+/// seat()-> 5, the student sits at the last seat number 5.
 /// Note:
 /// 1 <= N <= 10^9
 /// ExamRoom.seat() and ExamRoom.leave() will be called at most 10^4 times 
@@ -14274,7 +14274,7 @@ public:
 ///
 /// Each bid is associated with a userId, an itemId, and a bidAmount.
 ///
-/// Implement the AuctionSystem class :​​​​​​​
+/// Implement the AuctionSystem class :
 /// AuctionSystem() : Initializes the AuctionSystem object.
 /// void addBid(int userId, int itemId, int bidAmount) : Adds a new bid for 
 /// itemId by userId with bidAmount.If the same userId already has a bid on 
@@ -14484,6 +14484,133 @@ public:
         return result;
     }
 };
+
+
+/// <summary>
+/// Leet Code 3829. Design Ride Sharing System
+///
+/// Medium
+///
+/// A ride sharing system manages ride requests from riders and availability 
+/// from drivers.Riders request rides, and drivers become available over time.
+/// The system should match riders and drivers in the order they arrive.
+///
+/// Implement the RideSharingSystem class :
+///
+/// RideSharingSystem() Initializes the system.
+/// void addRider(int riderId) Adds a new rider with the given riderId.
+/// void addDriver(int driverId) Adds a new driver with the given driverId.
+/// int[] matchDriverWithRider() Matches the earliest available driver with 
+/// the earliest waiting rider and removes both of them from the system.
+/// Returns an integer array of size 2 where result = [driverId, riderId] 
+/// if a match is made.If no match is available, returns[-1, -1].
+/// void cancelRider(int riderId) Cancels the ride request of the rider with 
+/// the given riderId if the rider exists and has not yet been matched.
+///
+///
+/// Example 1:
+///
+/// Input:
+/// ["RideSharingSystem", "addRider", "addDriver", "addRider", 
+/// "matchDriverWithRider", "addDriver", "cancelRider", 
+/// "matchDriverWithRider", "matchDriverWithRider"]
+/// [[], [3], [2], [1], [], [5], [3], [], []]
+///
+/// Output :
+/// [null, null, null, null, [2, 3], null, null, [5, 1], [-1, -1]]
+///
+/// Explanation
+///
+/// RideSharingSystem rideSharingSystem = new RideSharingSystem();
+/// // Initializes the system
+/// rideSharingSystem.addRider(3); // rider 3 joins the queue
+/// rideSharingSystem.addDriver(2); // driver 2 joins the queue
+/// rideSharingSystem.addRider(1); // rider 1 joins the queue
+/// rideSharingSystem.matchDriverWithRider(); // returns [2, 3]
+/// rideSharingSystem.addDriver(5); // driver 5 becomes available
+/// rideSharingSystem.cancelRider(3); 
+/// // rider 3 is already matched, cancel has no effect
+/// rideSharingSystem.matchDriverWithRider(); // returns [5, 1]
+/// rideSharingSystem.matchDriverWithRider(); // returns [-1, -1]
+///
+/// Example 2:
+/// Input:
+/// ["RideSharingSystem", "addRider", "addDriver", "addDriver", 
+/// "matchDriverWithRider", "addRider", "cancelRider", 
+/// "matchDriverWithRider"]
+/// [[], [8], [8], [6], [], [2], [2], []]
+///
+/// Output :
+///   [null, null, null, null, [8, 8], null, null, [-1, -1]]
+/// Explanation
+///
+/// RideSharingSystem rideSharingSystem = new RideSharingSystem(); 
+/// // Initializes the system
+/// rideSharingSystem.addRider(8); // rider 8 joins the queue
+/// rideSharingSystem.addDriver(8); // driver 8 joins the queue
+/// rideSharingSystem.addDriver(6); // driver 6 joins the queue
+/// rideSharingSystem.matchDriverWithRider(); // returns [8, 8]
+/// rideSharingSystem.addRider(2); // rider 2 joins the queue
+/// rideSharingSystem.cancelRider(2); // rider 2 cancels
+/// rideSharingSystem.matchDriverWithRider(); // returns [-1, -1]
+///
+/// Constraints:
+/// 1. 1 <= riderId, driverId <= 1000
+/// 2. Each riderId is unique among riders and is added at most once.
+/// 3. Each driverId is unique among drivers and is added at most once.
+/// 4. At most 1000 calls will be made in total to addRider, addDriver, 
+///    matchDriverWithRider, and cancelRider.
+/// </summary>
+class RideSharingSystem 
+{
+private:
+    unordered_set<int> m_RiderSet;
+    queue<int> m_RiderList;
+    queue<int> m_DriverList;
+public:
+    RideSharingSystem() 
+    {
+
+    }
+
+    void addRider(int riderId) 
+    {
+        m_RiderSet.insert(riderId);
+        m_RiderList.push(riderId);
+    }
+
+    void addDriver(int driverId) 
+    {
+        m_DriverList.push(driverId);
+    }
+
+    vector<int> matchDriverWithRider() 
+    {
+        vector<int> result = { -1, -1 };
+        if (m_RiderList.empty() || m_DriverList.empty())
+        {
+            return result;
+        }
+        while (!m_RiderList.empty() && m_RiderSet.count(m_RiderList.front()) == 0)
+        {
+            m_RiderList.pop();
+        }
+        if (!m_RiderList.empty() && !m_DriverList.empty())
+        {
+            result = { m_DriverList.front(), m_RiderList.front() };
+            m_RiderList.pop();
+            m_DriverList.pop();
+        }
+        return result;
+    }
+
+    void cancelRider(int riderId) 
+    {
+        m_RiderSet.erase(riderId);
+    }
+};
+
+
 
 
 #endif // LeetcodeDesign_H

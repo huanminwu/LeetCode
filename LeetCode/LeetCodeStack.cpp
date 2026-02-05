@@ -3875,7 +3875,7 @@ long long LeetCodeStack::countSubmatrices(vector<vector<int>>& grid, int k)
 /// Note that each subarray is considered independently, meaning changes 
 /// made to one subarray do not persist to another.
 ///
-/// Return the number of subarrays that you can make non-decreasing ​​​​​
+/// Return the number of subarrays that you can make non-decreasing 
 /// after performing at most k operations.
 ///
 /// An array is said to be non-decreasing if each element is greater 
@@ -4233,7 +4233,7 @@ long long LeetCodeStack::bowlSubarrays(vector<int>& nums)
 ///
 /// Return the final string after all possible removals.
 ///
-/// ​​​​​​​Example 1:
+/// Example 1:
 /// Input: s = "(())", k = 1
 /// Output: ""
 /// Explanation:

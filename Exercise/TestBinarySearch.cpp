@@ -1684,8 +1684,24 @@ void TestLeetCode3733(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3824(void)
+{
+    Logger::WriteMessage("Test Leet Code 3824");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 3, 7, 5 };
+    int result = leetCode.minimumK(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1 };
+    result = leetCode.minimumK(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode3824();
     TestLeetCode3733();
     TestLeetCode3710();
     TestLeetCode3605();

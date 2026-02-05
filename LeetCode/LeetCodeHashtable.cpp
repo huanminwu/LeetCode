@@ -6655,7 +6655,7 @@ vector<int> LeetCodeHashtable::recoverOrder(vector<int>& order, vector<int>& fri
 ///
 /// Output: 3
 /// Explanation:
-/// ​​​​​​​The average of nums is (-1 + 1 + 2) / 3 = 2 / 3 = 0.667.
+/// The average of nums is (-1 + 1 + 2) / 3 = 2 / 3 = 0.667.
 /// The smallest absent positive integer greater than 0.667 is 3.
 ///
 /// Example 3:
@@ -6667,7 +6667,7 @@ vector<int> LeetCodeHashtable::recoverOrder(vector<int>& order, vector<int>& fri
 /// 
 /// Constraints:
 /// 1. 1 <= nums.length <= 100
-/// 2. -100 <= nums[i] <= 100​​​​​​​
+/// 2. -100 <= nums[i] <= 100
 /// </summary>
 int LeetCodeHashtable::smallestAbsent(vector<int>& nums)
 {
@@ -6865,7 +6865,7 @@ int LeetCodeHashtable::sumDivisibleByK(vector<int>& nums, int k)
 /// Constraints:
 /// 1. 1 <= nums.length <= 100
 /// 2. 1 <= nums[i] <= 100
-/// 3. 1 <= k <= 100​
+/// 3. 1 <= k <= 100
 /// </summary>
 int LeetCodeHashtable::missingMultiple(vector<int>& nums, int k)
 {
@@ -7036,11 +7036,11 @@ int LeetCodeHashtable::minMirrorPairDistance(vector<int>& nums)
 /// Example 1:
 /// Input: nums = [1, 2, 3], target = [2, 1, 3]
 /// Output : 2
-/// Explanation : ​​​​​​​
+/// Explanation : 
 /// Choose x = 1 : maximal segment[0, 0] updated->nums becomes[2, 2, 3]
 /// Choose x = 2 : maximal segment[0, 1] updated(nums[0] stays 2, nums[1] 
 /// becomes 1)->nums becomes[2, 1, 3]
-/// Thus, 2 operations are required to convert nums to target.​​​​​​​​​​​​​​
+/// Thus, 2 operations are required to convert nums to target.
 ///
 /// Example 2 :
 /// Input : nums = [4, 1, 4], target = [5, 1, 4]

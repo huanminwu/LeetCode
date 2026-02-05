@@ -8180,7 +8180,7 @@ public:
     /// You are given an undirected weighted tree with n nodes, numbered from 0 to 
     /// n - 1. It is represented by a 2D integer array edges of length n - 1, 
     /// where edges[i] = [ui, vi, wi] indicates that there is an edge between 
-    /// nodes ui and vi with weight wi.​
+    /// nodes ui and vi with weight wi.
     ///
     /// Additionally, you are given a 2D integer array queries, where 
     /// queries[j] = [src1j, src2j, destj].
@@ -8739,7 +8739,7 @@ public:
     /// Hard
     /// 
     /// You are given an undirected tree with n nodes, numbered from 0 
-    /// to n - 1. It is represented by a 2D integer array edges​​​​​​​ of 
+    /// to n - 1. It is represented by a 2D integer array edges of 
     /// length n - 1, where edges[i] = [ai, bi] indicates that there is an 
     /// edge between nodes ai and bi in the tree.
     ///
@@ -8897,7 +8897,7 @@ public:
     /// Medium
     /// 
     /// You are given an undirected tree with n nodes, numbered from 0 to 
-    /// n - 1. It is represented by a 2D integer array edges​​​​​​​ of length n - 1, 
+    /// n - 1. It is represented by a 2D integer array edges of length n - 1, 
     /// where edges[i] = [ai, bi] indicates that there is an edge between 
     /// nodes ai and bi in the tree.
     ///
@@ -8958,7 +8958,7 @@ public:
     /// Hard
     /// 
     /// You are given an undirected tree with n nodes, numbered from 0 to 
-    /// n - 1. It is represented by a 2D integer array edges​​​​​​​ of length n - 1, 
+    /// n - 1. It is represented by a 2D integer array edges of length n - 1, 
     /// where edges[i] = [ai, bi] indicates that there is an edge between 
     /// nodes ai and bi in the tree.
     ///
@@ -8972,7 +8972,7 @@ public:
     ///
     /// Return an array of edge indices whose operations transform start 
     /// into target.Among all valid sequences with minimum possible length, 
-    /// return the edge indices in increasing​​​​​​​ order.
+    /// return the edge indices in increasing order.
     ///
     /// If it is impossible to transform start into target, return an array 
     /// containing a single element equal to - 1.
@@ -8983,7 +8983,7 @@ public:
     /// Explanation :
     ///
     /// Toggle edge with index 0, which flips nodes 0 and 1.
-    /// ​The string changes from "010" to "100", matching the target.
+    /// The string changes from "010" to "100", matching the target.
     ///
     /// Example 2 :
     /// Input: n = 7, edges = [[0, 1], [1, 2], [2, 3], [3, 4], [3, 5],

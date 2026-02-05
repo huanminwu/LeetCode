@@ -5640,7 +5640,7 @@ int LeetCodeDFS::minimumIncompatibility(vector<int>& nums, int n, vector<int>& p
 /// 
 /// Hard
 /// 
-/// You are given an integer array nums​​​ and an integer k. You are asked 
+/// You are given an integer array nums and an integer k. You are asked 
 /// to distribute this array into k subsets of equal size such that there 
 /// are no two equal elements in the same subset.
 /// 
@@ -10769,8 +10769,8 @@ int LeetCodeDFS::minTravelTime(int pre_pos, int accum_count, int curr_k, int cur
 /// 5. position[0] = 0 and position[n - 1] = l
 /// 6. position is sorted in strictly increasing order.
 /// 7. time.length == n
-/// 8. 1 <= time[i] <= 100​
-/// 9. 1 <= sum(time) <= 100​​​​​​
+/// 8. 1 <= time[i] <= 100
+/// 9. 1 <= sum(time) <= 100
 /// </summary>
 int LeetCodeDFS::minTravelTime(int l, int n, int k, vector<int>& position, vector<int>& time)
 {
@@ -11328,7 +11328,7 @@ bool LeetCodeDFS::generateSchedule(int n, set<pair<int, int>>& team_last_play, v
 /// Input: n = 3
 /// Output: []
 /// Explanation:
-/// ​​​​​​​Since each team plays every other team exactly twice, a total of 6 
+/// Since each team plays every other team exactly twice, a total of 6 
 /// matches need to be played: [0,1],[0,2],[1,2],[1,0],[2,0],[2,1].
 ///
 /// It's not possible to create a schedule without at least one team playing 
@@ -11347,7 +11347,7 @@ bool LeetCodeDFS::generateSchedule(int n, set<pair<int, int>>& team_last_play, v
 /// plays on consecutive days.
 /// 
 /// Constraints:
-/// 1. 2 <= n <= 50​​​​​​​
+/// 1. 2 <= n <= 50
 /// </summary>
 vector<vector<int>> LeetCodeDFS::generateSchedule(int n)
 {
@@ -11679,7 +11679,7 @@ long long LeetCodeDFS::totalWavinessII(string str_num, int pos, int digit, int i
 /// digit 4 is a valley, giving a waviness of 2.
 ///
 /// Constraints:
-/// 1. 1 <= num1 <= num2 <= 10^15​​​​​​​
+/// 1. 1 <= num1 <= num2 <= 10^15
 /// </summary>
 long long LeetCodeDFS::totalWavinessII(long long num1, long long num2)
 {
@@ -11844,7 +11844,7 @@ void LeetCodeDFS::wordSquaresII(vector<string>& words, int index, vector<string>
 /// top[0] == left[0], top[3] == right[0]
 /// bottom[0] == left[3], bottom[3] == right[3]
 /// Return all valid distinct word squares, sorted in ascending 
-/// lexicographic order by the 4 - tuple(top, left, right, bottom)​​​​​​​.
+/// lexicographic order by the 4 - tuple(top, left, right, bottom).
 ///
 /// Example 1:
 /// Input: words = ["able", "area", "echo", "also"]

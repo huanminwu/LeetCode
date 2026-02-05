@@ -32,7 +32,7 @@
 --- decimal places.
 --- Have rated at least 50% of their orders.
 --- Return the result table ordered by average_rating in descending order, 
---- then by customer_id​​​​​​​ in descending order.
+--- then by customer_id in descending order.
 ---
 --- The result format is in the following example.
 ---

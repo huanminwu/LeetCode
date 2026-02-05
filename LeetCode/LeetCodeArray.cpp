@@ -12885,7 +12885,7 @@ int LeetCodeArray::maxWidthOfVerticalArea(vector<vector<int>>& points)
 /// nums[1] = 1
 /// nums[2 * i] = nums[i] when 2 <= 2 * i <= n
 /// nums[2 * i + 1] = nums[i] + nums[i + 1] when 2 <= 2 * i + 1 <= n
-/// Return the maximum integer in the array nums​​​.
+/// Return the maximum integer in the array nums.
 ///
 /// Example 1:
 /// Input: n = 7
@@ -23409,7 +23409,7 @@ long long LeetCodeArray::numberOfPairs(vector<int>& nums1, vector<int>& nums2, i
     }
     BinaryIndexTree tree(index);
     long long result = 0;
-    for (size_t i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         int target = index_map[nums1[i] - nums2[i] + diff];
         result += tree.sum(target);
@@ -38676,7 +38676,7 @@ int LeetCodeArray::minSwapsIV(vector<int>& nums)
 /// Thus, the number of replacements is 0.
 /// 
 /// Constraints:
-/// 1. 1 <= ranks.length <= 10^5​​​​​​​
+/// 1. 1 <= ranks.length <= 10^5
 /// 2. 1 <= ranks[i] <= 10^5
 /// </summary>
 int LeetCodeArray::totalReplacements(vector<int>& ranks)
@@ -39273,7 +39273,7 @@ vector<vector<int>> LeetCodeArray::reverseSubmatrix(vector<vector<int>>& grid, i
 /// by 3, tinransforming the array to [2, 9, 1, 15, 4].
 /// The second query [0, 2, 1, 2] multiplies the elements at indices 0, 1, 
 /// and 2 by 2, resulting in [4, 18, 2, 15, 4].
-/// Finally, the XOR of all elements is 4 ^ 18 ^ 2 ^ 15 ^ 4 = 31.​​​​​​​​​​​​​​
+/// Finally, the XOR of all elements is 4 ^ 18 ^ 2 ^ 15 ^ 4 = 31.
 ///  
 /// Constraints:
 /// 1. 1 <= n == nums.length <= 10^3
@@ -39339,12 +39339,12 @@ int LeetCodeArray::xorAfterQueriesI(vector<int>& nums, vector<vector<int>>& quer
 /// by 3, transforming the array to [2, 9, 1, 15, 4].
 /// The second query [0, 2, 1, 2] multiplies the elements at indices 0, 1, 
 /// and 2 by 2, resulting in [4, 18, 2, 15, 4].
-/// Finally, the XOR of all elements is 4 ^ 18 ^ 2 ^ 15 ^ 4 = 31.​​​​​​​​​​​​​​
+/// Finally, the XOR of all elements is 4 ^ 18 ^ 2 ^ 15 ^ 4 = 31.
 /// 
 /// Constraints:
 /// 1. 1 <= n == nums.length <= 10^5
 /// 2. 1 <= nums[i] <= 10^9
-/// 3. 1 <= q == queries.length <= 10^5​​​​​​​
+/// 3. 1 <= q == queries.length <= 10^5
 /// 4. queries[i] = [li, ri, ki, vi]
 /// 5. 0 <= li <= ri < n
 /// 6. 1 <= ki <= n
@@ -39444,7 +39444,7 @@ int LeetCodeArray::xorAfterQueriesII(vector<int>& nums, vector<vector<int>>& que
 /// Modify [0, 1]   [0, 1, 1]   (0 × 4) + (1 × 2) + (1 × 8) = 0 + 2 + 8 10
 /// Modify [1, 2]   [-1, 0, 1]  (-1 × 4) + (0 × 2) + (1 × 8) = -4 + 0 + 8   4
 /// Thus, the maximum possible profit is 10, which is achieved by modifying 
-/// the subarray [0, 1]​​​​​​​.
+/// the subarray [0, 1].
 ///
 /// Example 2:
 /// Input: prices = [5,4,3], strategy = [1,1,0], k = 2
@@ -39519,7 +39519,7 @@ long long LeetCodeArray::maxProfit(vector<int>& prices, vector<int>& strategy, i
 /// leaving [3, 5].
 /// Then, delete nums[0..0] = [3], whose sum is 3 (divisible by 3), 
 /// leaving [5].
-/// The remaining sum is 5.​​​​​​​
+/// The remaining sum is 5.
 /// 
 /// Constraints:
 /// 1. 1 <= nums.length <= 10^5
@@ -39975,7 +39975,7 @@ int LeetCodeArray::minimumSum(vector<int>& nums1, vector<int>& nums2)
 /// Adding these gives 4 + 4 + 4 = 12.
 /// 
 /// Constraints:
-/// 1. 1 <= n == nums.length <= 5 * 10^​​​​​​​4
+/// 1. 1 <= n == nums.length <= 5 * 10^4
 /// 2. 0 <= nums[i] <= 10^9
 /// 3. 1 <= k <= 10^5
 /// </summary>
@@ -40036,7 +40036,7 @@ long long LeetCodeArray::maxTotalValueI(vector<int>& nums, int k)
 /// Adding these gives 4 + 4 + 4 = 12.
 /// 
 /// Constraints:
-/// 1. 1 <= n == nums.length <= 5 * 10^​​​​​​​4
+/// 1. 1 <= n == nums.length <= 5 * 10^4
 /// 2. 0 <= nums[i] <= 10^9
 /// 3. 1 <= k <= min(10^5, n * (n + 1) / 2)
 /// </summary>
@@ -40139,7 +40139,7 @@ vector<vector<long long>> LeetCodeArray::zigZagArraysII_powMod(vector<vector<lon
 /// Input: n = 3, l = 1, r = 3
 /// Output: 10
 /// Explanation:
-/// ​​​​​​​There are 10 valid ZigZag arrays of length n = 3 using values in the 
+/// There are 10 valid ZigZag arrays of length n = 3 using values in the 
 /// range [1, 3]:
 /// [1, 2, 1], [1, 3, 1], [1, 3, 2]
 /// [2, 1, 2], [2, 1, 3], [2, 3, 1], [2, 3, 2]
@@ -40148,7 +40148,7 @@ vector<vector<long long>> LeetCodeArray::zigZagArraysII_powMod(vector<vector<lon
 /// 
 /// Constraints:
 /// 1. 3 <= n <= 10^9
-/// 2. 1 <= l < r <= 75​​​​​​​
+/// 2. 1 <= l < r <= 75
 /// </summary>
 int LeetCodeArray::zigZagArraysII(int n, int l, int r)
 {
@@ -41009,7 +41009,7 @@ int LeetCodeArray::minMoves(vector<int>& nums)
 /// Input: nums = [1,1,1,1], target = 1
 /// Output: 10
 /// Explanation:
-/// ​​​​​​​All 10 subarrays have 1 as the majority element.
+/// All 10 subarrays have 1 as the majority element.
 ///
 /// Example 3:
 /// Input: nums = [1,2,3], target = 4
@@ -41021,7 +41021,7 @@ int LeetCodeArray::minMoves(vector<int>& nums)
 /// 
 /// Constraints:
 /// 1. 1 <= nums.length <= 1000
-/// 2. 1 <= nums[i] <= 10​^​​​​​​9
+/// 2. 1 <= nums[i] <= 10^9
 /// 3. 1 <= target <= 10^9
 /// </summary>
 int LeetCodeArray::countMajoritySubarraysI(vector<int>& nums, int target)
@@ -41202,7 +41202,7 @@ int LeetCodeArray::minimumDistanceII(vector<int>& nums)
 /// Input: nums = [1,1,1,1], target = 1
 /// Output: 10
 /// Explanation:
-/// ​​​​​​​All 10 subarrays have 1 as the majority element.
+/// All 10 subarrays have 1 as the majority element.
 ///
 /// Example 3:
 /// Input: nums = [1,2,3], target = 4
@@ -41213,8 +41213,8 @@ int LeetCodeArray::minimumDistanceII(vector<int>& nums)
 ///
 /// 
 /// Constraints:
-/// 1. 1 <= nums.length <= 10^​​​​​​​5
-/// 2. 1 <= nums[i] <= 10^​​​​​​​9
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
 /// 3. 1 <= target <= 10^9
 /// </summary>
 long long LeetCodeArray::countMajoritySubarraysII(vector<int>& nums, int target)
@@ -41269,7 +41269,7 @@ long long LeetCodeArray::countMajoritySubarraysII(vector<int>& nums, int target)
 ///
 /// Constraints:
 /// 1. 1 <= nums.length <= 10^5
-/// 2. -10^9 <= nums[i] <= 10^9​​​​​​​
+/// 2. -10^9 <= nums[i] <= 10^9
 /// </summary>
 int LeetCodeArray::longestSubarrayNonDecreasing(vector<int>& nums)
 {
@@ -41335,7 +41335,7 @@ int LeetCodeArray::longestSubarrayNonDecreasing(vector<int>& nums)
 /// segment nums[li..ri].
 ///
 /// Return an integer array ans of length q, where ans[i] is the answer 
-/// to the ith query.​​​​​​​​​​​​​​
+/// to the ith query.
 ///
 /// Note:
 /// A single element subarray is considered stable.
@@ -41343,7 +41343,7 @@ int LeetCodeArray::longestSubarrayNonDecreasing(vector<int>& nums)
 /// Example 1:
 /// Input: nums = [3,1,2], queries = [[0,1],[1,2],[0,2]]
 /// Output: [2,3,4]
-/// Explanation:​​​​​
+/// Explanation:
 /// For queries[0] = [0, 1], the subarray is [nums[0], nums[1]] = [3, 1].
 /// The stable subarrays are [3] and [1]. The total number of stable 
 /// subarrays is 2.
@@ -41714,13 +41714,13 @@ long long LeetCodeArray::minInversionCount(vector<int>& nums, int k)
 /// Move 1 unit from i = 3 to i = 2, resulting in balance = [1, 0, -1, 0]
 /// Move 1 unit from i = 0 to i = 1, resulting in balance = [0, 1, -1, 0]
 /// Move 1 unit from i = 1 to i = 2, resulting in balance = [0, 0, 0, 0]
-/// Thus, the minimum number of moves required is 6.​​​
+/// Thus, the minimum number of moves required is 6.
 ///
 /// Example 3:
 /// Input: balance = [-3, 2]
 /// Output : -1
 /// Explanation :
-/// ​​​​​​​It is impossible to make all balances non - negative for 
+/// It is impossible to make all balances non - negative for 
 /// balance = [-3, 2], so the answer is - 1.
 /// 
 /// Constraints:
@@ -42067,7 +42067,7 @@ int LeetCodeArray::minSwaps(vector<int>& nums, vector<int>& forbidden)
 ///
 /// Constraints:
 /// 1. 2 <= nums.length <= 10^5
-/// 2. -10^9​​​ <= nums[i] <= 10^9
+/// 2. -10^9 <= nums[i] <= 10^9
 /// </summary>
 long long LeetCodeArray::maximumScore(vector<int>& nums)
 {
@@ -42121,11 +42121,11 @@ long long LeetCodeArray::maximumScore(vector<int>& nums)
 int LeetCodeArray::centeredSubarrays(vector<int>& nums)
 {
     int result = 0;
-    for (int i = 0; i < nums.size(); i++)
+    for (size_t i = 0; i < nums.size(); i++)
     {
         int sum = 0;
         unordered_set<int> num_set;
-        for (int j = i; j < nums.size(); j++)
+        for (size_t j = i; j < nums.size(); j++)
         {
             num_set.insert(nums[j]);
             sum += nums[j];
@@ -42164,7 +42164,7 @@ int LeetCodeArray::centeredSubarrays(vector<int>& nums)
 /// Example 1 :
 /// Input : nums = [2, 3, 1, 4], target1 = 1, target2 = 5
 /// Output : 1
-/// Explanation : ​​​​​​​
+/// Explanation : 
 /// The XOR of[2, 3] is 1, which matches target1.
 /// The XOR of the remaining block[1, 4] is 5, which matches target2.
 /// This is the only valid alternating partition, so the answer is 1.
@@ -42173,10 +42173,10 @@ int LeetCodeArray::centeredSubarrays(vector<int>& nums)
 /// Input : nums = [1, 0, 0], target1 = 1, target2 = 0
 /// Output : 3
 /// Explanation :
-/// ​​​​​​​The XOR of[1, 0, 0] is 1, which matches target1.
+/// The XOR of[1, 0, 0] is 1, which matches target1.
 /// The XOR of[1] and [0, 0] are 1 and 0, matching target1 and target2.
 /// The XOR of[1, 0] and [0] are 1 and 0, matching target1 and target2.
-/// Thus, the answer is 3.​​​​​​​
+/// Thus, the answer is 3.
 ///    
 /// Example 3:
 /// Input: nums = [7], target1 = 1, target2 = 7
@@ -42357,7 +42357,7 @@ int LeetCodeArray::minimumPrefixLength(vector<int>& nums)
 /// Example 1:
 /// Input: nums = [1, -2, 3, -4], k = 3
 /// Output : [3, -2, 1, -4]
-/// Explanation : ​​​​​​​
+/// Explanation : 
 /// The non - negative elements, in order, are[1, 3].
 /// Left rotation with k = 3 results in :
 /// [1, 3] ->[3, 1] ->[1, 3] ->[3, 1]
@@ -42409,5 +42409,62 @@ vector<int> LeetCodeArray::rotateElements(vector<int>& nums, int k)
         }
     }
     return result;
+}
+
+/// <summary>
+/// Leet code #3830. Longest Alternating Subarray After Removing At Most 
+///                  One Element
+///
+/// Hard
+///
+/// You are given an integer array nums.
+///
+/// A subarray nums[l..r] is alternating if one of the following holds :
+///
+/// nums[l] < nums[l + 1] > nums[l + 2] < nums[l + 3] > ...
+/// nums[l] > nums[l + 1] < nums[l + 2] > nums[l + 3] < ...
+/// In other words, if we compare adjacent elements in the subarray, then 
+/// the comparisons alternate between strictly greater and strictly 
+/// smaller.
+///
+/// You can remove at most one element from nums.Then, you select an 
+/// alternating subarray from nums.
+///
+/// Return an integer denoting the maximum length of the alternating 
+/// subarray you can select.
+///
+/// A subarray of length 1 is considered alternating.
+///
+/// Example 1:
+/// Input: nums = [2, 1, 3, 2]
+/// Output : 4
+/// Explanation :
+/// Choose not to remove elements.
+/// Select the entire array[2, 1, 3, 2], which is alternating 
+/// because 2 > 1 < 3 > 2.
+///
+/// Example 2:
+/// Input: nums = [3, 2, 1, 2, 3, 2, 1]
+/// Output : 4
+/// Explanation :
+/// Choose to remove nums[3] i.e., [3, 2, 1, 2, 3, 2, 1].The array 
+/// becomes[3, 2, 1, 3, 2, 1].
+/// Select the subarray[3, 2, 1, 3, 2, 1].
+///
+/// Example 3 :
+/// Input : nums = [100000, 100000]
+/// Output : 1
+/// Explanation :
+/// Choose not to remove elements.
+/// Select the subarray[100000, 100000].
+/// 
+/// Constraints :
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 2 <= nums.length <= 10^5
+/// 3. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeArray::longestAlternating(vector<int>& nums)
+{
+
 }
 #pragma endregion

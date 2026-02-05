@@ -11866,7 +11866,7 @@ public:
     /// Since the brewing process is delicate, a potion must be passed to the next 
     /// wizard immediately after the current wizard completes their work. This means 
     /// the timing must be synchronized so that each wizard begins working on a 
-    /// potion exactly when it arrives. ​
+    /// potion exactly when it arrives. 
     ///
     /// Return the minimum amount of time required for the potions to be brewed 
     /// properly.
@@ -12671,7 +12671,7 @@ public:
     /// 
     /// Constraints:
     /// 1. 1 <= nums.length <= 10^5
-    /// 2. 1 <= nums[i] <= 10​​​​​​​^5
+    /// 2. 1 <= nums[i] <= 10^5
     /// </summary>
     int countStableSubsequences(vector<int>& nums);
 
@@ -12748,7 +12748,7 @@ public:
     /// There are only 2 valid ZigZag arrays of length n = 3 using values in the 
     /// range [4, 5]:
     /// [4, 5, 4]
-    /// [5, 4, 5]​​​​​​​
+    /// [5, 4, 5]
     ///
     /// Example 2:
     /// Input: n = 3, l = 1, r = 3
@@ -12814,7 +12814,7 @@ public:
     /// (3 - 0)^2 = 3 + 9 = 12
     ///
     /// Constraints:
-    /// 1. 1 <= n == costs.length <= 10^5​​​​​​​
+    /// 1. 1 <= n == costs.length <= 10^5
     /// 2. 1 <= costs[i] <= 10^4
     /// </summary>
     int climbStairs(int n, vector<int>& costs);
@@ -12855,7 +12855,7 @@ public:
     ///
     /// Constraints:
     /// 1. 1 <= nums.length <= 100
-    /// 2. 1 <= nums[i] <= 50​​​
+    /// 2. 1 <= nums[i] <= 50
     /// </summary>
     int minOperations_Beautiful(vector<int>& nums);
 
@@ -12945,7 +12945,7 @@ public:
     /// Input: grid = [[0, 1],[1, 2]], k = 1
     /// Output: -1
     /// Explanation:
-    /// There is no path that reaches cell (1, 1)​ without exceeding 
+    /// There is no path that reaches cell (1, 1) without exceeding 
     /// cost k. Thus, the answer is -1.
     ///
     /// Constraints:

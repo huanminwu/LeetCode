@@ -4915,8 +4915,48 @@ void TestLeetCode3814(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+void TestLeetCode3825(void)
+{
+    Logger::WriteMessage("Test Leet Code 3825");
+    LeetCodeSort leetCode;
+    vector<int> nums = {5, 4, 7};
+    int result = leetCode.longestSubsequenceAndNonZero(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3,6 };
+    result = leetCode.longestSubsequenceAndNonZero(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+
+    nums = { 0, 1 };
+    result = leetCode.longestSubsequenceAndNonZero(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode3828(void)
+{
+    Logger::WriteMessage("Test Leet Code 3828");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1,5,2 };
+    int result = leetCode.finalElement(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3, 7 };
+    result = leetCode.finalElement(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3828();
+    TestLeetCode3825();
     TestLeetCode3814();
     TestLeetCode3796();
     TestLeetCode3781();

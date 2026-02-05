@@ -6072,8 +6072,67 @@ void TestLeetCode3822(void)
     Logger::WriteMessage(parameters);
     Logger::WriteMessage(result);
 }
+
+void TestLeetCode3829(void)
+{
+    Logger::WriteMessage("Test Leet Code 3829");
+    vector<string> commands =
+    {
+        "RideSharingSystem", "addRider", "addDriver", "addRider", "matchDriverWithRider", 
+        "addDriver", "cancelRider", "matchDriverWithRider", "matchDriverWithRider"
+    };
+    vector<vector<int>> parameters =
+    {
+        {} ,{3},{2},{1},{},{5},{3},{},{}
+    };
+    vector<string> result;
+    RideSharingSystem* rideSharingSystem = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "RideSharingSystem")
+        {
+            rideSharingSystem = new RideSharingSystem();
+            result.push_back("null");
+        }
+        else if (commands[i] == "addRider")
+        {
+            rideSharingSystem->addRider(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "addDriver")
+        {
+            rideSharingSystem->addDriver(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "cancelRider")
+        {
+            rideSharingSystem->cancelRider(parameters[i][0]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "matchDriverWithRider")
+        {
+            vector<int> ret = rideSharingSystem->matchDriverWithRider();
+            string str = "";
+            for (size_t j = 0; j < ret.size(); j++)
+            {
+                if (j > 0)
+                {
+                    str.append(",");
+                }
+                str.append(to_string(ret[j]));
+            }
+            result.push_back("[" + str + "]");
+        }
+    }
+    delete rideSharingSystem;
+    Logger::WriteMessage(commands);
+    Logger::WriteMessage(parameters);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode3829();
     TestLeetCode3822();
     TestLeetCode3815();
     TestLeetCode3709();

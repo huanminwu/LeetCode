@@ -5986,7 +5986,7 @@ vector<int> LeetCodeBit::minOperations(vector<int>& nums)
 /// Example 2 :
 /// Input : nums = [7, 4, 6]
 /// Output : 4
-/// Explanation : ​​​​​​​
+/// Explanation : 
 /// The Bitwise OR of the array is 7 OR 4 OR 6 = 7.
 /// Subsequences that are effective are :
 /// [7] : The remaining elements[4, 6] have a Bitwise OR of 6.
@@ -6120,7 +6120,7 @@ int LeetCodeBit::countEffective(vector<int>& nums)
 /// The total number of operations used is 5, which is not greater 
 /// than k = 7.
 /// The three chosen values become[4, 4, 4], and their bitwise AND is 4, 
-/// which is the maximum possible.​​​​​​​
+/// which is the maximum possible.
 ///
 /// Example 3:
 /// Input: nums = [1, 1], k = 3, m = 2

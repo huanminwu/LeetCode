@@ -5331,7 +5331,7 @@ public:
     /// Constraints:
     /// 1. destination.length == 2
     /// 2. 1 <= row, column <= 15
-    /// 3. 1 <= k <= nCr(row + column, row), where nCr(a, b) denotes a choose b​​​​​.
+    /// 3. 1 <= k <= nCr(row + column, row), where nCr(a, b) denotes a choose b.
     /// </summary>
     string kthSmallestPath(vector<int>& destination, int k);
 
@@ -6051,7 +6051,7 @@ public:
     /// Constraints:
     /// 1. 1 <= points.length <= 500
     /// 2. points[i].length == 2
-    /// 3. 0 <= x​​​​​​i, y​​​​​​i <= 500
+    /// 3. 0 <= xi, yi <= 500
     /// 4. 1 <= queries.length <= 500
     /// 5. queries[j].length == 3
     /// 6. 0 <= xj, yj <= 500
@@ -16966,7 +16966,7 @@ public:
     /// Hence, GCD(sumOdd, sumEven) = GCD(25, 30) = 5.
     /// 
     /// Constraints:
-    /// 1. 1 <= n <= 10​​​​​​​00
+    /// 1. 1 <= n <= 1000
     /// </summary>
     int gcdOfOddEvenSums(int n);
 
@@ -17518,7 +17518,7 @@ public:
     /// Input: num = 23
     /// Output : true
     /// Explanation :
-    /// ​​​​​​​Prefixes of num = 23 are 2 and 23, both are prime.
+    /// Prefixes of num = 23 are 2 and 23, both are prime.
     /// Suffixes of num = 23 are 3 and 23, both are prime.
     /// All prefixes and suffixes are prime, so 23 is a Complete Prime 
     /// Number and the answer is true.
@@ -17584,10 +17584,10 @@ public:
     /// Easy
     ///
     /// You are given an integer n.
-    /// Define its mirror distance as : abs(n - reverse(n))​​​​​​​ where reverse(n) 
+    /// Define its mirror distance as : abs(n - reverse(n)) where reverse(n) 
     /// is the integer formed by reversing the digits of n.
     ///
-    /// Return an integer denoting the mirror distance of n​​​​​​​.
+    /// Return an integer denoting the mirror distance of n.
     /// abs(x) denotes the absolute value of x.
     /// 
     /// Example 1:
@@ -17804,7 +17804,7 @@ public:
     /// Example 1:
     /// Input: n = 3
     /// Output : 127
-    /// Explanation : ​​​​​​​
+    /// Explanation : 
     /// Block 1 : 1
     /// Block 2 : 2 * 3 = 6
     /// Block 3 : 4 * 5 * 6 = 120
@@ -17880,7 +17880,7 @@ public:
     /// 
     /// Constraints:
     /// 1. n == s.length == t.length
-    /// 2. 1 <= n <= 105​​​​​​​
+    /// 2. 1 <= n <= 105
     /// 3. 1 <= flipCost, swapCost, crossCost <= 10^9
     /// 4. s and t consist only of the characters '0' and '1'.
     /// </summary>
@@ -17909,7 +17909,7 @@ public:
     /// Example 1 :
     /// nput : n = 4, limit = [3, 1, 2]
     /// Output : 6
-    /// Explanation : ​​​​​​​
+    /// Explanation : 
     /// For each ordered pair(i, j), where color i is used for the first 
     /// segment and color j for the second segment(i != j), a split of x 
     /// and 4 - x is valid if 1 <= x <= limit[i] and 1 <= 4 - x <= limit[j].
@@ -17962,7 +17962,7 @@ public:
     /// [xi, yi, qi] represents the coordinates(xi, yi) and quality 
     /// factor qi of the ith tower.
     ///
-    /// You are also given an integer array center = [cx, cy​​​​​​​] representing 
+    /// You are also given an integer array center = [cx, cy] representing 
     /// your location, and an integer radius.
     ///
     /// A tower is reachable if its Manhattan distance from center is 
@@ -18025,9 +18025,100 @@ public:
     /// 1. 1 <= towers.length <= 10^5
     /// 2. towers[i] = [xi, yi, qi]
     /// 3. center = [cx, cy]
-    /// 4. 0 <= xi, yi, qi, cx, cy <= 10^5​​​​​​​
+    /// 4. 0 <= xi, yi, qi, cx, cy <= 10^5
     /// 5. 0 <= radius <= 10^5
     /// </summary>
     vector<int> bestTower(vector<vector<int>>& towers, vector<int>& center, int radius);
+
+    /// <summary>
+    /// Leet Code 3826. Minimum Partition Score
+    /// </summary>
+    pair<long long, int> minPartitionScore_solveWithPenalty(int n, const vector<long long>& P, long long lambda);
+
+    /// <summary>
+    /// Leet Code 3826. Minimum Partition Score
+    ///
+    /// Hard
+    ///
+    /// You are given an integer array nums and an integer k.
+    ///
+    /// Your task is to partition nums into exactly k subarrays and return an 
+    /// integer denoting the minimum possible score among all valid partitions.
+    ///
+    /// The score of a partition is the sum of the values of all its subarrays.
+    ///
+    /// The value of a subarray is defined as sumArr * (sumArr + 1) / 2, where 
+    /// sumArr is the sum of its elements.
+    ///
+    /// Example 1:
+    /// Input: nums = [5, 1, 2, 1], k = 2
+    /// Output : 25
+    /// Explanation :
+    /// We must partition the array into k = 2 subarrays.One optimal partition 
+    /// is[5] and [1, 2, 1].
+    /// The first subarray has sumArr = 5 and value = 5 × 6 / 2 = 15.
+    /// The second subarray has sumArr = 1 + 2 + 1 = 4 and 
+    /// value = 4 × 5 / 2 = 10.
+    /// The score of this partition is 15 + 10 = 25, which is the minimum 
+    /// possible score.
+    ///
+    /// Example 2:
+    /// Input: nums = [1, 2, 3, 4], k = 1
+    /// Output : 55
+    /// Explanation :
+    /// Since we must partition the array into k = 1 subarray, all elements 
+    /// belong to the same subarray : [1, 2, 3, 4] .
+    /// This subarray has sumArr = 1 + 2 + 3 + 4 = 10 and 
+    /// value = 10 × 11 / 2 = 55.
+    /// The score of this partition is 55, which is the minimum possible score.
+    ///
+    /// Example 3 :
+    /// Input : nums = [1, 1, 1], k = 3
+    /// Output : 3
+    /// Explanation :
+    /// We must partition the array into k = 3 subarrays.The only valid 
+    /// partition is[1], [1], [1].
+    /// Each subarray has sumArr = 1 and value = 1 × 2 / 2 = 1.
+    /// The score of this partition is 1 + 1 + 1 = 3, which is the minimum 
+    /// possible score.
+    ///
+    /// Constraints :
+    /// 1. 1 <= nums.length <= 1000
+    /// 2. 1 <= nums[i] <= 10^4
+    /// 3. 1 <= k <= nums.length
+    /// </summary>
+    long long minPartitionScore(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3827. Count Monobit Integers
+    ///
+    /// Easy
+    ///
+    /// You are given an integer n.
+    ///
+    /// An integer is called Monobit if all bits in its binary representation 
+    /// are the same.
+    ///
+    /// Return the count of Monobit integers in the range[0, n](inclusive).
+    ///
+    /// Example 1:
+    /// Input: n = 1
+    /// Output : 2
+    /// Explanation :
+    /// The integers in the range[0, 1] have binary representations "0" and "1".
+    /// Each representation consists of identical bits.Thus, the answer is 2.
+    ///
+    /// Example 2 :
+    /// Input : n = 4
+    /// Output : 3
+    /// Explanation :
+    /// The integers in the range[0, 4] include binaries "0", "1", "10", "11", 
+    /// and "100".
+    /// Only 0, 1 and 3 satisfy the Monobit condition.Thus, the answer is 3.
+    ///
+    /// Constraints :
+    /// 1. 0 <= n <= 1000
+    /// </summary>
+    int countMonobit(int n);
 };
 #endif

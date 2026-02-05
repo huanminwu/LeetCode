@@ -2985,7 +2985,7 @@ int LeetCodeGreedy::maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& req
 ///
 /// Constraints:
 /// 1. 1 <= tasks.length <= 10^5
-/// 2. 1 <= actual​[i] <= minimum[i] <= 10^4
+/// 2. 1 <= actual[i] <= minimum[i] <= 10^4
 /// </summary>
 int LeetCodeGreedy::minimumEffort(vector<vector<int>>& tasks)
 {

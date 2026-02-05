@@ -8533,11 +8533,53 @@ void TestLeetCode3809(void)
     Logger::WriteMessage(center);
     Logger::WriteMessage("radius = " + to_string(radius));
     Logger::WriteMessage(result);
+}
 
+void TestLeetCode3826(void)
+{
+    Logger::WriteMessage("Test Leet Code 3826");
+    LeetCodeMath leetCode;
+    vector<int> nums = {5, 1, 2, 1};
+    int k = 2;
+    long long result = leetCode.minPartitionScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 2, 3, 4 };
+    k = 1;
+    result = leetCode.minPartitionScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 1, 1 };
+    k = 3;
+    result = leetCode.minPartitionScore(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3827(void)
+{
+    Logger::WriteMessage("Test Leet Code 3827");
+    LeetCodeMath leetCode;
+    int n = 1;
+    int result = leetCode.countMonobit(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4;
+    result = leetCode.countMonobit(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3827();
+    TestLeetCode3826();
     TestLeetCode3809();
     TestLeetCode3800();
     TestLeetCode3792();

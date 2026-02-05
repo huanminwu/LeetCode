@@ -12162,7 +12162,7 @@ public:
     /// Example 2:
     /// Input: degrees = [1,3,3,1]
     /// Output: false
-    /// Explanation:​​​​​​​
+    /// Explanation:
     /// degrees[1] = 3 and degrees[2] = 3 means they must be connected to all 
     /// other vertices.
     /// This requires degrees[0] and degrees[3] to be at least 2, but both are 
@@ -12170,7 +12170,7 @@ public:
     /// Thus, the answer is false.
     /// 
     /// Constraints:
-    /// 1. 1 <= n == degrees.length <= 10^​​​​​​​5
+    /// 1. 1 <= n == degrees.length <= 10^5
     /// 2. 0 <= degrees[i] <= n - 1
     /// </summary>
     bool simpleGraphExists(vector<int>& degrees);

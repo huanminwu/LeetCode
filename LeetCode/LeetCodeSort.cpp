@@ -5942,7 +5942,7 @@ bool LeetCodeSort::check(vector<int>& nums)
 /// arrays to any value between 1 and 6, inclusive.
 ///
 /// Return the minimum number of operations required to make the sum of 
-/// values in nums1 equal to the sum of values in nums2. Return -1​​​​​ if 
+/// values in nums1 equal to the sum of values in nums2. Return -1 if 
 /// it is not possible to make the sum of the two arrays equal.
 /// 
 /// Example 1:
@@ -14685,7 +14685,7 @@ long long LeetCodeSort::maximumMedianSum(vector<int>& nums)
 /// Medium
 ///
 /// You are given a 2D integer array threats, where each 
-/// threats[i] = [IDi, sevi​, expi]
+/// threats[i] = [IDi, sevi, expi]
 ///
 /// IDi: Unique identifier of the threat.
 /// sevi: Indicates the severity of the threat.
@@ -14693,7 +14693,7 @@ long long LeetCodeSort::maximumMedianSum(vector<int>& nums)
 /// The score of a threat i is defined as: score = 2 × sevi + expi
 ///
 /// Your task is to return threats sorted in descending order of score.
-/// If multiple threats have the same score, sort them by ascending ID​​​​​​​.
+/// If multiple threats have the same score, sort them by ascending ID.
 /// 
 /// Example 1:
 /// Input: threats = [[101,2,3],[102,3,2],[103,3,3]]
@@ -14708,7 +14708,7 @@ long long LeetCodeSort::maximumMedianSum(vector<int>& nums)
 /// Example 2:
 /// Input: threats = [[101,4,1],[103,1,5],[102,1,5]]
 /// Output: [[101,4,1],[102,1,5],[103,1,5]]
-/// Explanation:​​​​​​​
+/// Explanation:
 /// Threat  ID  sev exp Score = 2 × sev + exp
 /// threats[0]  101 4   1   2 × 4 + 1 = 9
 /// threats[1]  103 1   5   2 × 1 + 5 = 7
@@ -14752,7 +14752,7 @@ vector<vector<int>> LeetCodeSort::sortThreats(vector<vector<int>>& threats)
 /// An array is considered balanced if the value of its maximum element is at 
 /// most k times the minimum element.
 ///
-/// You may remove any number of elements from nums​​​​​​​ without making it empty.
+/// You may remove any number of elements from nums without making it empty.
 ///
 /// Return the minimum number of elements to remove so that the remaining 
 /// array is balanced.
@@ -14827,7 +14827,7 @@ int LeetCodeSort::minRemoval(vector<int>& nums, int k)
 /// Input: landStartTime = [2,8], landDuration = [4,1], waterStartTime = [6], 
 /// waterDuration = [3]
 /// Output: 9
-/// Explanation:​​​​​​​
+/// Explanation:
 /// Plan A (land ride 0 → water ride 0):
 /// Start land ride 0 at time landStartTime[0] = 2. 
 /// Finish at 2 + landDuration[0] = 6.
@@ -14855,7 +14855,7 @@ int LeetCodeSort::minRemoval(vector<int>& nums, int k)
 /// waterDuration = [10]
 /// 
 /// Output: 14
-/// Explanation:​​​​​​​
+/// Explanation:
 /// Plan A (water ride 0 → land ride 0):
 /// Start water ride 0 at time waterStartTime[0] = 1. 
 /// Finish at 1 + waterDuration[0] = 11.
@@ -14866,7 +14866,7 @@ int LeetCodeSort::minRemoval(vector<int>& nums, int k)
 /// Finish at 5 + landDuration[0] = 8.
 /// Water ride 0 opened at waterStartTime[0] = 1. Start immediately at 8 and 
 /// finish at 8 + waterDuration[0] = 18.
-/// Plan A provides the earliest finish time of 14.​​​​​​​
+/// Plan A provides the earliest finish time of 14.
 /// 
 /// Constraints:
 /// 1. 1 <= n, m <= 100
@@ -14944,7 +14944,7 @@ int LeetCodeSort::earliestFinishTimeI(vector<int>& landStartTime, vector<int>& l
 /// Input: landStartTime = [2,8], landDuration = [4,1], waterStartTime = [6], 
 /// waterDuration = [3]
 /// Output: 9
-/// Explanation:​​​​​​​
+/// Explanation:
 /// Plan A (land ride 0 → water ride 0):
 /// Start land ride 0 at time landStartTime[0] = 2. Finish at 
 /// 2 + landDuration[0] = 6.
@@ -14971,7 +14971,7 @@ int LeetCodeSort::earliestFinishTimeI(vector<int>& landStartTime, vector<int>& l
 /// Input: landStartTime = [5], landDuration = [3], waterStartTime = [1], 
 /// waterDuration = [10]
 /// Output: 14
-/// Explanation:​​​​​​​
+/// Explanation:
 /// Plan A (water ride 0 → land ride 0):
 /// Start water ride 0 at time waterStartTime[0] = 1. Finish at 
 /// 1 + waterDuration[0] = 11.
@@ -14982,7 +14982,7 @@ int LeetCodeSort::earliestFinishTimeI(vector<int>& landStartTime, vector<int>& l
 /// 5 + landDuration[0] = 8.
 /// Water ride 0 opened at waterStartTime[0] = 1. Start immediately at 8 and 
 /// finish at 8 + waterDuration[0] = 18.
-/// Plan A provides the earliest finish time of 14.​​​​​​​
+/// Plan A provides the earliest finish time of 14.
 /// 
 /// Constraints:
 /// 1. 1 <= n, m <= 5 * 10^4
@@ -15078,7 +15078,7 @@ int LeetCodeSort::earliestFinishTimeII(vector<int>& landStartTime, vector<int>& 
 /// Input: value = [4,1,5,2], limit = [3,3,2,3]
 /// Output: 12
 /// Explanation:
-/// One optimal activation order is:​​​​​​​​​​​​​​
+/// One optimal activation order is:
 /// Step    Activated i value[i]    Active Before i Active After i  
 /// Becomes Inactive j  Inactive Elements   Total
 /// 1   2   5   0   1   -   [ ] 5
@@ -15089,7 +15089,7 @@ int LeetCodeSort::earliestFinishTimeII(vector<int>& landStartTime, vector<int>& 
 ///
 /// Constraints:
 /// 1. 1 <= n == value.length == limit.length <= 10^5
-/// 2. 1 <= value[i] <= 10^5​​​​​​​
+/// 2. 1 <= value[i] <= 10^5
 /// 3. 1 <= limit[i] <= n
 /// </summary>
 long long LeetCodeSort::maxTotal(vector<int>& value, vector<int>& limit)
@@ -15753,7 +15753,7 @@ int LeetCodeSort::countElements(vector<int>& nums, int k)
 ///
 /// Constraints:
 /// 1. 1 <= n == technique1.length == technique2.length <= 10^5
-/// 2. 1 <= technique1[i], technique2​​​​​​​[i] <= 10​​​​​​​^5
+/// 2. 1 <= technique1[i], technique2[i] <= 10^5
 /// 3. 0 <= k <= n
 /// </summary>
 long long LeetCodeSort::maxPoints(vector<int>& technique1, vector<int>& technique2, int k)
@@ -16169,5 +16169,178 @@ int LeetCodeSort::maxCapacity(vector<int>& costs, vector<int>& capacity, int bud
         heap.insert(machines[i]);
     }
     return result;
+}
+
+/// <summary>
+/// Leet Code 3825. Longest Strictly Increasing Subsequence With 
+///                 Non - Zero Bitwise AND 
+/// 
+/// Medium
+///
+/// You are given an integer array nums.
+///
+/// Return the length of the longest strictly increasing subsequence in 
+/// nums whose bitwise AND is non - zero.If no such subsequence exists, 
+/// return 0.
+///
+/// Example 1:
+///
+/// Input: nums = [5, 4, 7]
+/// Output : 2
+/// Explanation :
+/// 
+/// One longest strictly increasing subsequence is[5, 7].The bitwise AND 
+/// is 5 AND 7 = 5, which is non - zero.
+///
+/// Example 2 :
+/// Input : nums = [2, 3, 6]
+/// Output : 3
+/// Explanation :
+/// The longest strictly increasing subsequence is[2, 3, 6].The bitwise 
+/// AND is 2 AND 3 AND 6 = 2, which is non - zero.
+///
+/// Example 3 :
+/// Input : nums = [0, 1]
+/// Output : 1
+/// Explanation :
+/// One longest strictly increasing subsequence is[1].The bitwise 
+/// AND is 1, which is non - zero.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 0 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeSort::longestSubsequenceAndNonZero(vector<int>& nums)
+{
+    vector<vector<int>> bit_sets(31);
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (int bit = 0; bit < 31; bit++)
+        {
+            if ((nums[i] & (1 << bit)) != 0)
+            {
+                if (bit_sets[bit].empty())
+                {
+                    bit_sets[bit].push_back(nums[i]);
+                }
+                else
+                {
+                    auto itr = lower_bound(bit_sets[bit].begin(), bit_sets[bit].end(), nums[i]);
+                    if (itr == bit_sets[bit].end())
+                    {
+                        bit_sets[bit].push_back(nums[i]);
+                    }
+                    else
+                    {
+                        *itr = nums[i];
+                    }
+                }
+            }
+            result = max(result, (int)bit_sets[bit].size());
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code 3828. Final Element After Subarray Deletions 
+/// 
+/// Medium
+///
+/// You are given an integer array nums.
+///
+/// Two players, Alice and Bob, play a game in turns, with Alice playing 
+/// first.
+///
+/// In each turn, the current player chooses any subarray nums[l..r] such 
+/// that r - l + 1 < m, where m is the current length of the array.
+/// The selected subarray is removed, and the remaining elements are 
+/// concatenated to form the new array.
+/// The game continues until only one element remains.
+/// Alice aims to maximize the final element, while Bob aims to minimize 
+/// it.Assuming both play optimally, return the value of the final 
+/// remaining element.
+///
+/// Example 1:
+/// Input: nums = [1, 5, 2]
+/// Output : 2
+/// Explanation :
+/// One valid optimal strategy :
+/// Alice removes[1], array becomes[5, 2].
+/// Bob removes[5], array becomes[2]. Thus, the answer is 2.
+///
+/// Example 2 :
+/// Input : nums = [3, 7]
+/// Output : 7
+/// Explanation :
+/// Alice removes[3], leaving the array[7].Since Bob cannot play a turn 
+/// now, the answer is 7.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeSort::finalElement(vector<int>& nums)
+{
+    int n = nums.size();
+    set<pair<int, int>> heap;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        heap.insert({ nums[i], i });
+    }
+    int first = 0, last = n - 1;
+    int round = 0, count = 0;
+    while (first < last)
+    {
+        count = 0;
+        if (round == 0)
+        {
+            // Alice's turn
+            if (nums[first] < nums[last])
+            {
+                while (nums[first] < heap.rbegin()->first || count == 0)
+                {
+                    heap.erase({ nums[first], first });
+                    first++;
+                    count++;
+                }
+            }
+            else
+            {
+                while (nums[last] < heap.rbegin()->first || count == 0)
+                {
+                    heap.erase({ nums[last], last });
+                    last--;
+                    count++;
+                }
+            }
+        }
+        else
+        {
+            // Bob's turn
+            if (nums[first] < nums[last])
+            {
+                while (nums[last] > heap.begin()->first || count == 0)
+                {
+                    heap.erase({ nums[last], last });
+                    last--;
+                    count++;
+                }
+            }
+            else
+            {
+                while (nums[first] > heap.begin()->first || count == 0)
+                {
+                    heap.erase({ nums[first], first });
+                    first++;
+                    count++;
+                }
+            }
+        }
+        round = 1 - round;
+    }
+    return nums[first];
 }
 #pragma endregion

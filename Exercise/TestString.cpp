@@ -8790,7 +8790,7 @@ void TestLeetCode3817(void)
 
 void TestLeetCode3816(void)
 {
-    Logger::WriteMessage("Test Leet Code 3817");
+    Logger::WriteMessage("Test Leet Code 3816");
     LeetCodeString leetCode;
 
     string s = "aaccb";
@@ -8809,8 +8809,30 @@ void TestLeetCode3816(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode3823(void)
+{
+    Logger::WriteMessage("Test Leet Code 3823");
+    LeetCodeString leetCode;
+
+    string s = ")ebc#da@f(";
+    string result = leetCode.reverseByType(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+
+    s = "z";
+    result = leetCode.reverseByType(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+
+    s = "!@#$%^&*()";
+    result = leetCode.lexSmallestAfterDeletion(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3823();
     TestLeetCode3816();
     TestLeetCode3817();
     TestLeetCode3813();
