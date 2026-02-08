@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <ctype.h>  /* is space */
 #include <stdio.h>     /* printf */
 #include <stdlib.h>  
@@ -205,9 +205,9 @@ vector<int> LeetCodeArray::twoSumII(vector<int>& numbers, int target)
 /// 
 /// Medium
 ///
-/// Given an array of n positive integers and a positive integer s, find 
-/// the minimal length of a contiguous subarray of which the sum ≥ s. If 
-/// there isn't one, return 0 instead.
+/// Given an array of positive integers nums and a positive integer target, 
+/// return the minimal length of a subarray whose sum is greater than or 
+/// equal to target. If there is no such subarray, return 0 instead.
 ///
 /// Example: 
 /// Input: s = 7, nums = [2,3,1,2,4,3]
@@ -282,7 +282,7 @@ int LeetCodeArray::threeSumSmaller(vector<int>& nums, int target)
 }
 
 /// <summary>
-/// Leet code #487. Max Consecutive Ones II       
+/// Leet code #487. Max Consecutive Ones II?????? 
 /// 
 /// Given a binary array, find the maximum number of consecutive 1s in this 
 /// array if you can flip at most one 0.  
@@ -328,7 +328,7 @@ int LeetCodeArray::findMaxConsecutiveOnesII(vector<int>& nums)
 }
 
 /// <summary>
-/// Leet code #544. Output Contest Matches       
+/// Leet code #544. Output Contest Matches?????? 
 /// 
 /// During the NBA playoffs, we always arrange the rather strong team to 
 /// play with the rather weak team, like make the rank 1 team play with 
@@ -1728,7 +1728,7 @@ int LeetCodeArray::countBattleships(vector<vector<char>>& board)
 /// <summary>
 /// Leet code #448. Find All Numbers Disappeared in an Array
 ///
-/// Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), 
+/// Given an array of integers where 1 ? a[i] ? n (n = size of array), 
 /// some elements appear twice and others appear once.
 /// Find all the elements of [1, n] inclusive that do not appear in this 
 /// array.
@@ -1760,7 +1760,7 @@ vector<int> LeetCodeArray::findDisappearedNumbers(vector<int>& nums)
 /// <summary>
 /// Leet code #442. Find All Duplicates in an Array
 ///
-/// Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some 
+/// Given an array of integers, 1 ? a[i] ? n (n = size of array), some 
 /// elements appear twice and others appear once.
 /// Find all the elements that appear twice in this array.
 /// Could you do it without extra space and in O(n) runtime?
@@ -2369,7 +2369,7 @@ int LeetCodeArray::maxSumSubmatrix(vector<vector<int>>& matrix, int k)
 }
 
 /// <summary>
-/// Leet code #548. Split Array with Equal Sum       
+/// Leet code #548. Split Array with Equal Sum?????? 
 /// 
 /// Given an array with n integers, you need to find if there are 
 /// triplets (i, j, k) which satisfies following conditions:
@@ -2426,7 +2426,7 @@ bool LeetCodeArray::splitArray(vector<int>& nums)
 }
 
 /// <summary>
-/// Leet code #566. Reshape the Matrix       
+/// Leet code #566. Reshape the Matrix?????? 
 /// 
 /// In MATLAB, there is a very useful function called 'reshape', which 
 /// can reshape a matrix into a new one with different size but keep its 
@@ -5424,7 +5424,7 @@ vector<int> LeetCodeArray::sumEvenAfterQueries(vector<int>& A, vector<vector<int
 /// Output: [1,0,0,0,0,0,0,0,0,0,0]
 /// Explanation: 9999999999 + 1 = 10000000000
 /// 
-/// Note：
+/// Note?
 /// 1. 1 <= A.length <= 10000
 /// 2. 0 <= A[i] <= 9
 /// 3. 0 <= K <= 10000
@@ -7284,7 +7284,7 @@ int LeetCodeArray::maxSubArrayLen(vector<int>& nums, int k)
 /// 
 /// Given a sequence of words, check whether it forms a valid word square. 
 /// A sequence of words forms a valid word square if the kth row and column 
-/// read the exact same string, where 0 ≤ k < max(numRows, numColumns).
+/// read the exact same string, where 0 ? k < max(numRows, numColumns).
 /// Note:
 /// 1.The number of words given is at least 1 and does not exceed 500.
 /// 2.Word length will be at least 1 and does not exceed 500.
@@ -8808,17 +8808,17 @@ int LeetCodeArray::findMaxConsecutiveOnes(vector<int>& nums)
 /// 1, 1, 2, 5, 7
 /// A zero-indexed array A consisting of N numbers is given. A 
 /// subsequence slice of that array is any sequence of integers 
-/// (P0, P1, ..., Pk) such that 0 ≤ P0 < P1 < ... < Pk < N.
+/// (P0, P1, ..., Pk) such that 0 ? P0 < P1 < ... < Pk < N.
 ///
 /// A subsequence slice (P0, P1, ..., Pk) of array A is called 
 /// arithmetic if the sequence A[P0], A[P1], ..., A[Pk-1], A[Pk] 
-/// is arithmetic. In particular, this means that k ≥ 2.
+/// is arithmetic. In particular, this means that k ? 2.
 /// 
 /// The function should return the number of arithmetic subsequence 
 /// slices in the array A. 
 ///
 /// The input contains N integers. Every integer is in the range of -2^31 
-/// and 2^31-1 and 0 ≤ N ≤ 1000. The output is guaranteed to be less than 
+/// and 2^31-1 and 0 ? N ? 1000. The output is guaranteed to be less than 
 /// 2^31-1.
 ///
 /// Example: 
@@ -9381,7 +9381,7 @@ bool LeetCodeArray::checkIfExist(vector<int>& arr)
 /// Leet code #1151. Minimum Swaps to Group All 1's Together
 /// 
 /// Given a binary array data, return the minimum number of swaps required 
-/// to group all 1’s present in the array together in any place in the array.
+/// to group all 1?s present in the array together in any place in the array.
 /// 
 /// Example 1:
 /// Input: [1,0,1,0,1]
@@ -10549,7 +10549,7 @@ int LeetCodeArray::minSumOfLengths(vector<int>& arr, int target)
 /// Easy
 ///
 /// Given an array nums. We define a running sum of an array as 
-/// runningSum[i] = sum(nums[0]…nums[i]).
+/// runningSum[i] = sum(nums[0]?nums[i]).
 ///
 /// Return the running sum of nums.
 /// 
@@ -36089,23 +36089,23 @@ void LeetCodeArray::lenOfVDiagonal(vector<vector<int>>& grid, vector<vector<vect
 /// Output: 5
 /// Explanation:
 /// The longest V-shaped diagonal segment has a length of 5 and follows these 
-/// coordinates: (0,2) → (1,3) → (2,4), takes a 90-degree clockwise turn at 
-/// (2,4), and continues as (3,3) → (4,2).
+/// coordinates: (0,2) ? (1,3) ? (2,4), takes a 90-degree clockwise turn at 
+/// (2,4), and continues as (3,3) ? (4,2).
 ///
 /// Example 2:
 /// Input: grid = [[2,2,2,2,2],[2,0,2,2,0],[2,0,1,1,0],[1,0,2,2,2],[2,0,0,2,2]]
 /// Output: 4
 /// Explanation:
 /// The longest V-shaped diagonal segment has a length of 4 and follows these 
-/// coordinates: (2,3) → (3,2), takes a 90-degree clockwise turn at (3,2), and 
-/// continues as (2,1) → (1,0).
+/// coordinates: (2,3) ? (3,2), takes a 90-degree clockwise turn at (3,2), and 
+/// continues as (2,1) ? (1,0).
 ///
 /// Example 3:
 /// Input: grid = [[1,2,2,2,2],[2,2,2,2,0],[2,0,0,0,0],[0,0,2,2,2],[2,0,0,2,0]]
 /// Output: 5
 /// Explanation:
 /// The longest V-shaped diagonal segment has a length of 5 and follows these 
-/// coordinates: (0,0) → (1,1) → (2,2) → (3,3) → (4,4).
+/// coordinates: (0,0) ? (1,1) ? (2,2) ? (3,3) ? (4,4).
 ///
 /// Example 4:
 /// Input: grid = [[1]]
@@ -36776,8 +36776,8 @@ long long LeetCodeArray::minimumCost(vector<int>& nums, vector<int>& cost, int k
 /// Input: s = "0100"
 /// Output: 4
 /// Explanation:
-/// String "0100" → Augmented to "101001".
-/// Choose "0100", convert "101001" → "100001" → "111111".
+/// String "0100" ? Augmented to "101001".
+/// Choose "0100", convert "101001" ? "100001" ? "111111".
 /// The final string without augmentation is "1111". The maximum number of active 
 /// sections is 4.
 ///
@@ -36785,8 +36785,8 @@ long long LeetCodeArray::minimumCost(vector<int>& nums, vector<int>& cost, int k
 /// Input: s = "1000100"
 /// Output: 7
 /// Explanation:
-/// String "1000100" → Augmented to "110001001".
-/// Choose "000100", convert "110001001" → "110000001" → "111111111".
+/// String "1000100" ? Augmented to "110001001".
+/// Choose "000100", convert "110001001" ? "110000001" ? "111111111".
 /// The final string without augmentation is "1111111". The maximum number of 
 /// active sections is 7.
 ///
@@ -36794,8 +36794,8 @@ long long LeetCodeArray::minimumCost(vector<int>& nums, vector<int>& cost, int k
 /// Input: s = "01010"
 /// Output: 4
 /// Explanation:
-/// String "01010" → Augmented to "1010101".
-/// Choose "010", convert "1010101" → "1000101" → "1111101".
+/// String "01010" ? Augmented to "1010101".
+/// Choose "010", convert "1010101" ? "1000101" ? "1111101".
 /// The final string without augmentation is "11110". The maximum number of 
 /// active sections is 4.
 /// 
@@ -36885,21 +36885,21 @@ int LeetCodeArray::maxActiveSectionsAfterTradeI(string s)
 /// Input: s = "0100", queries = [[0,3],[0,2],[1,3],[2,3]]
 /// Output: [4,3,1,1]
 /// Explanation:
-/// m0Query [0, 3]bstring "0100" → Augmented to "101001"
-/// Choose "0100", convert "0100" → "0000" → "1111".
+/// m0Query [0, 3]bstring "0100" ? Augmented to "101001"
+/// Choose "0100", convert "0100" ? "0000" ? "1111".
 /// The final string without augmentation is "1111". The maximum number of 
 /// active sections is 4.
 ///
-/// Query [0, 2] → Substring "010" → Augmented to "10101"
-/// Choose "010", convert "010" → "000" → "111".
+/// Query [0, 2] ? Substring "010" ? Augmented to "10101"
+/// Choose "010", convert "010" ? "000" ? "111".
 /// The final string without augmentation is "1110". The maximum number of 
 /// active sections is 3.
 ///
-/// Query [1, 3] → Substring "100" → Augmented to "11001"
+/// Query [1, 3] ? Substring "100" ? Augmented to "11001"
 /// Because there is no block of '1's surrounded by '0's, no valid trade is 
 /// possible. The maximum number of active sections is 1.
 ///
-/// Query [2, 3] → Substring "00" → Augmented to "1001"
+/// Query [2, 3] ? Substring "00" ? Augmented to "1001"
 /// Because there is no block of '1's surrounded by '0's, no valid trade is 
 /// possible. The maximum number of active sections is 1.
 ///
@@ -36907,17 +36907,17 @@ int LeetCodeArray::maxActiveSectionsAfterTradeI(string s)
 /// Input: s = "1000100", queries = [[1,5],[0,6],[0,4]]
 /// Output: [6,7,2]
 /// Explanation:
-/// Query [1, 5] → Substring "00010" → Augmented to "1000101"
-/// Choose "00010", convert "00010" → "00000" → "11111".
+/// Query [1, 5] ? Substring "00010" ? Augmented to "1000101"
+/// Choose "00010", convert "00010" ? "00000" ? "11111".
 /// The final string without augmentation is "1111110". The maximum 
 /// number of active sections is 6.
 /// 
-/// Query [0, 6] → Substring "1000100" → Augmented to "110001001"
-/// Choose "000100", convert "000100" → "000000" → "111111".
+/// Query [0, 6] ? Substring "1000100" ? Augmented to "110001001"
+/// Choose "000100", convert "000100" ? "000000" ? "111111".
 /// The final string without augmentation is "1111111". The maximum 
 /// number of active sections is 7.
 /// 
-/// Query [0, 4] → Substring "10001" → Augmented to "1100011"
+/// Query [0, 4] ? Substring "10001" ? Augmented to "1100011"
 /// Because there is no block of '1's surrounded by '0's, no valid trade 
 /// is possible. The maximum number of active sections is 2.
 ///
@@ -36925,17 +36925,17 @@ int LeetCodeArray::maxActiveSectionsAfterTradeI(string s)
 /// Input: s = "01010", queries = [[0,3],[1,4],[1,3]]
 /// Output: [4,4,2]
 /// Explanation:
-/// Query [0, 3] → Substring "0101" → Augmented to "101011"
-/// Choose "010", convert "010" → "000" → "111".
+/// Query [0, 3] ? Substring "0101" ? Augmented to "101011"
+/// Choose "010", convert "010" ? "000" ? "111".
 /// The final string without augmentation is "11110". The maximum number of 
 /// active sections is 4.
 ///
-/// Query [1, 4] → Substring "1010" → Augmented to "110101"
-/// Choose "010", convert "010" → "000" → "111".
+/// Query [1, 4] ? Substring "1010" ? Augmented to "110101"
+/// Choose "010", convert "010" ? "000" ? "111".
 /// The final string without augmentation is "01111". The maximum number of 
 /// active sections is 4.
 ///
-/// Query [1, 3] → Substring "101" → Augmented to "11011"
+/// Query [1, 3] ? Substring "101" ? Augmented to "11011"
 /// Because there is no block of '1's surrounded by '0's, no valid trade is 
 /// possible. The maximum number of active sections is 2.
 ///
@@ -37198,8 +37198,8 @@ long long LeetCodeArray::calculateScore(vector<string>& instructions, vector<int
 /// Output: 3
 /// Explanation:
 /// One way to achieve the maximum size is:
-/// Replace subarray nums[1..2] = [2, 5] with 5 → [4, 5, 3, 5].
-/// eplace subarray nums[2..3] = [3, 5] with 5 → [4, 5, 5].
+/// Replace subarray nums[1..2] = [2, 5] with 5 ? [4, 5, 3, 5].
+/// eplace subarray nums[2..3] = [3, 5] with 5 ? [4, 5, 5].
 /// The final array [4, 5, 5] is non-decreasing with size 3.
 /// 
 /// Example 2:
@@ -38288,7 +38288,7 @@ bool LeetCodeArray::checkEqualPartitions(vector<int>& nums, long long target)
 /// Input: grid = [[1,-2,3],[2,3,5]], k = 2
 /// Output: [[1,2]]
 /// Explanation:
-/// There are two possible k × k submatrix:
+/// There are two possible k ? k submatrix:
 /// Starting at (0, 0): [[1, -2], [2, 3]].
 /// Distinct values in the submatrix are [1, -2, 2, 3].
 /// The minimum absolute difference in the submatrix is |1 - 2| = 1.
@@ -38744,9 +38744,9 @@ int LeetCodeArray::popcountDepthII_popcount(long long n)
 /// depth   [l, r]  k   Valid
 /// nums[j] updated
 /// nums    Answer
-/// 0   [1,0,1,1]   [2,4]   [10, 100]   [1, 1]  [0, 1]  1   [0, 1]  —   2
-/// 1   [2,1,1] [2,4]   [10, 100]   [1, 1]  —   —   —   [2,1]   —
-/// 2   [1,0,1,0]   [2,1]   [10, 1] [1, 0]  [0, 1]  0   [1] —   1
+/// 0   [1,0,1,1]   [2,4]   [10, 100]   [1, 1]  [0, 1]  1   [0, 1]  ?   2
+/// 1   [2,1,1] [2,4]   [10, 100]   [1, 1]  ?   ?   ?   [2,1]   ?
+/// 2   [1,0,1,0]   [2,1]   [10, 1] [1, 0]  [0, 1]  0   [1] ?   1
 /// Thus, the final answer is [2, 1].
 ///
 /// Example 2:
@@ -38758,13 +38758,13 @@ int LeetCodeArray::popcountDepthII_popcount(long long n)
 /// nums[j] updated
 /// nums    Answer
 /// 0   [1,0,2,2]   [3, 5, 6]   [11, 101, 110]  [2, 2, 2]   [0, 2]  2   
-///     [0, 1, 2]   —   3
-/// 1   [2,1,4] [3, 5, 6]   [11, 101, 110]  [2, 2, 2]   —   —   —   
-///     [3, 4, 6]   —
+///     [0, 1, 2]   ?   3
+/// 1   [2,1,4] [3, 5, 6]   [11, 101, 110]  [2, 2, 2]   ?   ?   ?   
+///     [3, 4, 6]   ?
 /// 2   [1,1,2,1]   [3, 4, 6]   [11, 100, 110]  [2, 1, 2]   [1, 2]  1   
-///     [1] —   1
+///     [1] ?   1
 /// 3   [1,0,1,0]   [3, 4, 6]   [11, 100, 110]  [2, 1, 2]   [0, 1]  0   
-///     []  —   0
+///     []  ?   0
 /// Thus, the final answer is [3, 1, 0].
 ///
 /// Example 3:
@@ -38776,10 +38776,10 @@ int LeetCodeArray::popcountDepthII_popcount(long long n)
 /// depth   [l, r]  k   Valid
 /// nums[j] updated
 /// nums    Answer
-/// 0   [1,0,1,1]   [1, 2]  [1, 10] [0, 1]  [0, 1]  1   [1] —   1
-/// 1   [2,0,3] [1, 2]  [1, 10] [0, 1]  —   —   —   [3, 2]   
-/// 2   [1,0,0,1]   [3, 2]  [11, 10]    [2, 1]  [0, 0]  1   []  —   0
-/// 3   [1,0,0,2]   [3, 2]  [11, 10]    [2, 1]  [0, 0]  2   [0] —   1
+/// 0   [1,0,1,1]   [1, 2]  [1, 10] [0, 1]  [0, 1]  1   [1] ?   1
+/// 1   [2,0,3] [1, 2]  [1, 10] [0, 1]  ?   ?   ?   [3, 2]   
+/// 2   [1,0,0,1]   [3, 2]  [11, 10]    [2, 1]  [0, 0]  1   []  ?   0
+/// 3   [1,0,0,2]   [3, 2]  [11, 10]    [2, 1]  [0, 0]  2   [0] ?   1
 /// Thus, the final answer is [1, 0, 1].
 /// 
 /// Constraints:
@@ -38825,11 +38825,11 @@ vector<int> LeetCodeArray::popcountDepthII(vector<long long>& nums, vector<vecto
 ///
 /// You are given an integer array nums of length n.
 ///
-/// An array is trionic if there exist indices 0 < p < q < n − 1 such that:
+/// An array is trionic if there exist indices 0 < p < q < n ? 1 such that:
 ///
 /// nums[0...p] is strictly increasing,
 /// nums[p...q] is strictly decreasing,
-/// nums[q...n − 1] is strictly increasing.
+/// nums[q...n ? 1] is strictly increasing.
 /// Return true if nums is trionic, otherwise return false.
 /// 
 /// Example 1:
@@ -39440,9 +39440,9 @@ int LeetCodeArray::xorAfterQueriesII(vector<int>& nums, vector<vector<int>>& que
 /// Explanation:
 /// 
 /// Modification    Strategy    Profit Calculation  Profit
-/// Original    [-1, 0, 1]  (-1 × 4) + (0 × 2) + (1 × 8) = -4 + 0 + 8   4
-/// Modify [0, 1]   [0, 1, 1]   (0 × 4) + (1 × 2) + (1 × 8) = 0 + 2 + 8 10
-/// Modify [1, 2]   [-1, 0, 1]  (-1 × 4) + (0 × 2) + (1 × 8) = -4 + 0 + 8   4
+/// Original    [-1, 0, 1]  (-1 ? 4) + (0 ? 2) + (1 ? 8) = -4 + 0 + 8   4
+/// Modify [0, 1]   [0, 1, 1]   (0 ? 4) + (1 ? 2) + (1 ? 8) = 0 + 2 + 8 10
+/// Modify [1, 2]   [-1, 0, 1]  (-1 ? 4) + (0 ? 2) + (1 ? 8) = -4 + 0 + 8   4
 /// Thus, the maximum possible profit is 10, which is achieved by modifying 
 /// the subarray [0, 1].
 ///
@@ -39451,9 +39451,9 @@ int LeetCodeArray::xorAfterQueriesII(vector<int>& nums, vector<vector<int>>& que
 /// Output: 9
 /// Explanation:
 /// Modification    Strategy    Profit Calculation  Profit
-/// Original    [1, 1, 0]   (1 × 5) + (1 × 4) + (0 × 3) = 5 + 4 + 0 9
-/// Modify [0, 1]   [0, 1, 0]   (0 × 5) + (1 × 4) + (0 × 3) = 0 + 4 + 0 4
-/// Modify [1, 2]   [1, 0, 1]   (1 × 5) + (0 × 4) + (1 × 3) = 5 + 0 + 3 8
+/// Original    [1, 1, 0]   (1 ? 5) + (1 ? 4) + (0 ? 3) = 5 + 4 + 0 9
+/// Modify [0, 1]   [0, 1, 0]   (0 ? 5) + (1 ? 4) + (0 ? 3) = 0 + 4 + 0 4
+/// Modify [1, 2]   [1, 0, 1]   (1 ? 5) + (0 ? 4) + (1 ? 3) = 5 + 0 + 3 8
 /// Thus, the maximum possible profit is 9, which is achieved without any 
 /// modification.
 /// 
@@ -39693,10 +39693,10 @@ int LeetCodeArray::maxWalls(vector<int>& robots, vector<int>& distance, vector<i
 /// [1,2,3]->1
 /// Calculating beauty for each GCD:
 ///
-/// GCD->Count of subsequences->Beauty (GCD × Count)
-/// 1->5->1 × 5 = 5
-/// 2->1->2 × 1 = 2
-/// 3->1->3 × 1 = 3
+/// GCD->Count of subsequences->Beauty (GCD ? Count)
+/// 1->5->1 ? 5 = 5
+/// 2->1->2 ? 1 = 2
+/// 3->1->3 ? 1 = 3
 /// Total beauty is 5 + 2 + 3 = 10.
 ///
 /// Example 2:
@@ -39710,10 +39710,10 @@ int LeetCodeArray::maxWalls(vector<int>& robots, vector<int>& distance, vector<i
 /// [4,6]->2
 /// Calculating beauty for each GCD:
 ///
-/// GCD->Count of subsequences->Beauty (GCD × Count)
-/// 2->1->2 × 1 = 2
-/// 4->1->4 × 1 = 4
-/// 6->1->6 × 1 = 6
+/// GCD->Count of subsequences->Beauty (GCD ? Count)
+/// 2->1->2 ? 1 = 2
+/// 4->1->4 ? 1 = 4
+/// 6->1->6 ? 1 = 6
 /// Total beauty is 2 + 4 + 6 = 12.
 ///
 /// Constraints:
@@ -41531,10 +41531,10 @@ int LeetCodeArray::maxBalancedSubarray(vector<int>& nums)
 /// Thus, ans = [-1, 0, 1].
 /// 
 /// Constraints:
-/// 1. 1 <= n == nums.length <= 4 × 10^4
+/// 1. 1 <= n == nums.length <= 4 ? 10^4
 /// 2. 1 <= nums[i] <= 10^9
 /// 3. 1 <= k <= 10^9
-/// 4. 1 <= queries.length <= 4 × 10^4
+/// 4. 1 <= queries.length <= 4 ? 10^4
 /// 5. queries[i] = [li, ri]
 /// 6. 0 <= li <= ri <= n - 1
 /// </summary>
@@ -42152,7 +42152,7 @@ int LeetCodeArray::centeredSubarrays(vector<int>& nums)
 /// A partition is valid if the bitwise XOR of elements in its blocks 
 /// alternates between target1 and target2, starting with target1.
 ///
-/// Formally, for blocks b1, b2, …:
+/// Formally, for blocks b1, b2, ?:
 ///
 /// XOR(b1) = target1
 /// XOR(b2) = target2(if it exists)
@@ -42225,7 +42225,7 @@ int LeetCodeArray::alternatingXOR(vector<int>& nums, int target1, int target2)
 /// You have n super washing machines on a line. Initially, 
 /// each washing machine has some dresses or is empty.
 /// 
-/// For each move, you could choose any m (1 ≤ m ≤ n) washing machines, 
+/// For each move, you could choose any m (1 ? m ? n) washing machines, 
 /// and pass one dress of each washing machine to one of its adjacent 
 /// washing machines at the same time .
 ///
@@ -42465,6 +42465,78 @@ vector<int> LeetCodeArray::rotateElements(vector<int>& nums, int k)
 /// </summary>
 int LeetCodeArray::longestAlternating(vector<int>& nums)
 {
+    int n = nums.size();
+    vector<pair<int, int>> prefix(n), suffix(n);
+    for (int i = 0; i < n; i++)
+    {
+        if (i == 0)
+        {
+            prefix[i].first = 1;
+            prefix[i].second = 1;
+        }
+        else 
+        {
+            if (nums[i] > nums[i - 1])
+            {
+                prefix[i].first = prefix[i - 1].second + 1;
+                prefix[i].second = 1;
+            }
+            else if (nums[i] < nums[i - 1])
+            {
+                prefix[i].second = prefix[i - 1].first + 1;
+                prefix[i].first = 1;
+            }
+            else
+            {
+                prefix[i].first = 1;
+                prefix[i].second = 1;
+            }
+        }
+    }
+    for (int i = n - 1; i >= 0; i--)
+    {
+        if (i == n - 1)
+        {
+            suffix[i].first = 1;
+            suffix[i].second = 1;
+        }
+        else 
+        {
+            if (nums[i] > nums[i + 1])
+            {
+                suffix[i].first = suffix[i + 1].second + 1;
+                suffix[i].second = 1;
+            }
+            else if (nums[i] < nums[i + 1])
+            {
+                suffix[i].second = suffix[i + 1].first + 1;
+                suffix[i].first = 1;
+            }
+            else
+            {
+                suffix[i].first = 1;
+                suffix[i].second = 1;
+            }
+        }
+    }
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        result = max(result, prefix[i].first + suffix[i].first - 1);
+        result = max(result, prefix[i].second + suffix[i].second - 1);
 
+        if (i > 0 && i < n - 1)
+        {
+            if (nums[i - 1] < nums[i + 1])
+            {
+                result = max(result, prefix[i - 1].second + suffix[i + 1].first);
+            }
+            else if (nums[i - 1] > nums[i + 1])
+            {
+                result = max(result, prefix[i - 1].first + suffix[i + 1].second);
+            }
+        }
+    }
+    return result;
 }
 #pragma endregion

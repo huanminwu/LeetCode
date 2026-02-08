@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #ifndef LeetCodeTree_H
 #define LeetCodeTree_H
 #include <stdint.h>
@@ -1196,7 +1196,7 @@ public:
     /// 9   6 3   1
     /// Trivia:
     /// This problem was inspired by this original tweet by Max Howell: 
-    /// Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so fuck off.	
+    /// Google: 90% of our engineers use the software you wrote (Homebrew), but you can?t invert a binary tree on a whiteboard so fuck off.	
     /// </summary>
     TreeNode* invertTree(TreeNode* root);
 
@@ -2286,12 +2286,12 @@ public:
     TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p);
 
     /// <summary>
-    /// Leet code #501. Find Mode in Binary Search Tree         
+    /// Leet code #501. Find Mode in Binary Search Tree  ?????? 
     /// </summary>
     void findMode(TreeNode* root, unordered_map<int, int>& node_map, map<int, unordered_set<int>>& frequency);
 
     /// <summary>
-    /// Leet code #501. Find Mode in Binary Search Tree         
+    /// Leet code #501. Find Mode in Binary Search Tree  ?????? 
     /// 
     /// Given a binary search tree (BST) with duplicates, find all the mode(s) 
     /// (the most frequently occurred element) in the given BST.
@@ -2316,12 +2316,12 @@ public:
     vector<int> findMode(TreeNode* root);
 
     /// <summary>
-    /// Leet code #508. Most Frequent Subtree Sum          
+    /// Leet code #508. Most Frequent Subtree Sum   ?????? 
     /// </summary>
     int findFrequentTreeSum(TreeNode* root, unordered_map<int, int>& sum_map, map<int, unordered_set<int>>& frequency);
 
     /// <summary>
-    /// Leet code #508. Most Frequent Subtree Sum          
+    /// Leet code #508. Most Frequent Subtree Sum   ?????? 
     /// 
     /// Given the root of a tree, you are asked to find the most frequent subtree sum. 
     /// The subtree sum of a node is defined as the sum of all the node values formed 
@@ -2528,7 +2528,7 @@ public:
     /// Given a non-empty binary search tree and a target value, find k values in the BST that are closest to the target. 
     /// Note:
     /// Given target value is a floating point.
-    /// You may assume k is always valid, that is: k ≤ total nodes.
+    /// You may assume k is always valid, that is: k ? total nodes.
     /// You are guaranteed to have only one unique set of k values in the BST that are closest to the target.
     /// Follow up:
     /// Assume that the BST is balanced, could you solve it in less than O(n) runtime (where n = total nodes)? 
@@ -2543,22 +2543,22 @@ public:
     vector<int> closestKValues(TreeNode* root, double target, int k);
 
     /// <summary>
-    /// Leet code #545. Boundary of Binary Tree       
+    /// Leet code #545. Boundary of Binary Tree?????? 
     /// </summary>
     void findLeftBoundary(TreeNode* root, vector<int>& leftBoundary);
 
     /// <summary>
-    /// Leet code #545. Boundary of Binary Tree       
+    /// Leet code #545. Boundary of Binary Tree?????? 
     /// </summary>
     void findRightBoundary(TreeNode* root, vector<int>& rightBoundary);
 
     /// <summary>
-    /// Leet code #545. Boundary of Binary Tree       
+    /// Leet code #545. Boundary of Binary Tree?????? 
     /// </summary>
     void findLeaves(TreeNode* root, vector<int>& leaves);
 
     /// <summary>
-    /// Leet code #545. Boundary of Binary Tree       
+    /// Leet code #545. Boundary of Binary Tree?????? 
     /// 
     /// Given a binary tree, return the values of its boundary in 
     /// anti-clockwise direction starting from root. Boundary includes left 
@@ -2612,12 +2612,12 @@ public:
     vector<int> boundaryOfBinaryTree(TreeNode* root);
 
     // <summary>
-    /// Leet code #543. Diameter of Binary Tree       
+    /// Leet code #543. Diameter of Binary Tree?????? 
     /// </summary>
     void diameterOfBinaryTree(TreeNode* root, int& max_depth, int& diameter);
 
     // <summary>
-    /// Leet code #543. Diameter of Binary Tree       
+    /// Leet code #543. Diameter of Binary Tree?????? 
     /// 
     /// Given a binary tree, you need to compute the length of the diameter of 
     /// the tree. The diameter of a binary tree is the length of the longest 
@@ -2637,12 +2637,12 @@ public:
     int diameterOfBinaryTree(TreeNode* root);
 
     // <summary>
-    /// Leet code #538. Convert BST to Greater Tree       
+    /// Leet code #538. Convert BST to Greater Tree?????? 
     /// </summary>
     TreeNode* convertBST(TreeNode* root, int& sum);
 
     /// <summary>
-    /// Leet code #538. Convert BST to Greater Tree       
+    /// Leet code #538. Convert BST to Greater Tree?????? 
     /// 
     /// Given a Binary Search Tree (BST), convert it to a Greater Tree such 
     /// that every key of the original BST is changed to the original key plus
@@ -2693,12 +2693,12 @@ public:
     int longestConsecutiveII(TreeNode* root);
 
     /// <summary>
-    /// Leet code #563. Binary Tree Tilt      
+    /// Leet code #563. Binary Tree Tilt ???? 
     /// </summary>
     int findTilt(TreeNode* root, int& sum);
 
     /// <summary>
-    /// Leet code #563. Binary Tree Tilt      
+    /// Leet code #563. Binary Tree Tilt ???? 
     /// 
     /// Given a binary tree, return the tilt of the whole tree. 
     /// The tilt of a tree node is defined as the absolute difference 
@@ -2726,12 +2726,12 @@ public:
     int findTilt(TreeNode* root);
 
     /// <summary>
-    /// Leet code #572. Subtree of Another Tree       
+    /// Leet code #572. Subtree of Another Tree  ???? 
     /// </summary>
     void preOrderTraversal(TreeNode* root, string& result);
 
     /// <summary>
-    /// Leet code #572. Subtree of Another Tree       
+    /// Leet code #572. Subtree of Another Tree  ???? 
     /// 
     /// Given two non-empty binary trees s and t, check whether tree t has 
     /// exactly the same structure and node values with a subtree of s. 
@@ -8026,9 +8026,9 @@ public:
     /// an undirected edge from node ui to vi with weight wi.
     /// You are also given a 2D integer array queries of length q, 
     /// where each queries[i] is either:
-    /// [1, u, v, w'] – Update the weight of the edge between nodes u and v 
+    /// [1, u, v, w'] ? Update the weight of the edge between nodes u and v 
     /// to w', where (u, v) is guaranteed to be an edge present in edges.
-    /// [2, x] – Compute the shortest path distance from the root node 1 to 
+    /// [2, x] ? Compute the shortest path distance from the root node 1 to 
     /// node x.
     /// Return an integer array answer, where answer[i] is the shortest 
     /// path distance from node 1 to x for the ith query of [2, x].
@@ -8251,7 +8251,7 @@ public:
     /// Input: edges = [[1,2]]
     /// Output: 1
     /// Explanation:
-    /// The path from Node 1 to Node 2 consists of one edge (1 → 2).
+    /// The path from Node 1 to Node 2 consists of one edge (1 ? 2).
     /// Assigning weight 1 makes the cost odd, while 2 makes it even. Thus, the 
     /// number of valid assignments is 1.
     ///
@@ -8262,7 +8262,7 @@ public:
     /// The maximum depth is 2, with nodes 4 and 5 at the same depth. Either 
     /// node can be selected for processing.
     /// For example, the path from Node 1 to Node 4 consists of two edges 
-    /// (1 → 3 and 3 → 4).
+    /// (1 ? 3 and 3 ? 4).
     /// Assigning weights (1,2) or (2,1) results in an odd cost. Thus, the 
     /// number of valid assignments is 2.
     /// 
@@ -9107,6 +9107,52 @@ public:
     /// </summary>
     int specialNodes(int n, vector<vector<int>>& edges, int x, int y, int z);
 
+    /// <summary>
+    /// Leet Code 3831. Median of a Binary Search Tree Level
+    ///
+    /// Medium
+    ///
+    /// You are given the root of a Binary Search Tree(BST) and an integer 
+    /// level.
+    ///
+    /// The root node is at level 0. Each level represents the distance from 
+    /// the root.
+    ///
+    /// Return the median value of all node values present at the given level.
+    /// If the level does not exist or contains no nodes, return -1.
+    ///
+    /// The median is defined as the middle element after sorting the values 
+    /// at that level in non - decreasing order.If the number of values at 
+    /// that level is even, return the upper median(the larger of the two 
+    /// middle elements after sorting).
+    ///
+    /// Example 1:
+    /// Input: root = [4, null, 5, null, 7], level = 2
+    /// Output : 7
+    ///
+    /// Explanation :
+    /// The nodes at level = 2 are[7].The median value is 7.
+    ///
+    /// Example 2 :
+    /// Input: root = [6, 3, 8], level = 1
+    /// Output : 8
+    /// Explanation :
+    /// The nodes at level = 1 are[3, 8].There are two possible median 
+    /// values, so the larger one 8 is the answer.
+    ///
+    /// Example 3 :
+    /// Input : root = [2, 1], level = 2
+    /// Output : -1
+    /// Explanation :
+    /// There is no node present at level = 2, so the answer is - 1.
+    /// Constraints:
+    /// 1. The number of nodes in the tree is in the range[1, 2 * 10^5].
+    /// 2. 1 <= Node.val <= 10^6
+    /// 3. 0 <= level <= 2 * 10^5
+    /// </summary>
+    int levelMedian(TreeNode* root, int level);
+ 
+ 
 #pragma endregion
 };
 

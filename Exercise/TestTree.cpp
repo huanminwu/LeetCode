@@ -4781,8 +4781,38 @@ void TestLeetCode3820(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3831(void)
+{
+    Logger::WriteMessage("Test Leet Code 3831");
+    LeetCodeTree leetCode;
+    string input = "[4,null,5,null,7]";
+    int level = 2;
+    TreeNode* root = leetCode.deserialize(input);
+    int result = leetCode.levelMedian(root, level);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("level = " + to_string(level));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    input = "[6,3,8]";
+    level = 1;
+    root = leetCode.deserialize(input);
+    result = leetCode.levelMedian(root, level);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("level = " + to_string(level));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    input = "[2,1]";
+    level = 2;
+    root = leetCode.deserialize(input);
+    result = leetCode.levelMedian(root, level);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("level = " + to_string(level));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3831();
     TestLeetCode3820();
     TestLeetCode3812();
     TestLeetCode3787();

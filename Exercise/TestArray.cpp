@@ -12979,8 +12979,28 @@ void TestLeetCode3819(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3830(void)
+{
+    Logger::WriteMessage("Test Leet Code 3830");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 1, 3, 2 };
+    int result = leetCode.longestAlternating(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,2,1,2,3,2,1 };
+    result = leetCode.longestAlternating(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 100000,100000 };
+    result = leetCode.longestAlternating(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3830();
     TestLeetCode3819();
     TestLeetCode3818();
     TestLeetCode517();;

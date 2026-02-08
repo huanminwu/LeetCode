@@ -1,4 +1,4 @@
-﻿// Exercise.cpp : Defines the entry point for the console application.
+// Exercise.cpp : Defines the entry point for the console application.
 //
 #include <assert.h>
 #include <stdio.h>      /* printf, scanf, puts, NULL */
@@ -44,12 +44,12 @@
 
 void main(int argc, char* argv[])
 {
+    TestLeetCodeTree();
+    TestLeetCodeArray();
     TestLeetCodeDesign();
     TestLeetCodeMath();
     TestLeetCodeDP();
     TestLeetCodeDFS();
-    TestLeetCodeTree();
-    TestLeetCodeArray();
     TestLeetCodeString();
     TestLeetCodeSort();
     TestLeetCodeHashtable();
