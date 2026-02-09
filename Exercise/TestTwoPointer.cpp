@@ -1094,8 +1094,35 @@ void TestLeetCode3795(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3835(void)
+{
+    Logger::WriteMessage("Test Leet Code 3835");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 1, 3, 2 };
+    int k = 4;
+    long long result = leetCode.countSubarraysII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,5,5,5 };
+    k = 0;
+    result = leetCode.countSubarraysII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    k = 0;
+    result = leetCode.countSubarraysII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode3835();
     TestLeetCode3795();
     TestLeetCode3679();
     TestLeetCode3672();

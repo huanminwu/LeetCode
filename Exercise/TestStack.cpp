@@ -1142,8 +1142,30 @@ void TestLeetCode3703(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
+
+void TestLeetCode3834(void)
+{
+    Logger::WriteMessage("Test Leet Code 3834");
+    LeetCodeStack leetCode;
+    vector<int> nums = {3, 1, 1, 2};
+    vector<long long> result = leetCode.mergeAdjacent(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 2,2,4 };
+    result = leetCode.mergeAdjacent(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 3,7,5 };
+    result = leetCode.mergeAdjacent(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode3834();
     TestLeetCode3703();
     TestLeetCode3676();
     TestLeetCode3430();

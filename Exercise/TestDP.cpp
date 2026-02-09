@@ -6469,9 +6469,38 @@ void TestLeetCode3801(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3836(void)
+{
+    Logger::WriteMessage("Test Leet Code 3836");
+    LeetCodeDP leetCode;
+    vector<int> nums1 = { 1, 3, 2 };
+    vector<int> nums2 = { 4, 5, 1 };
+    int k = 2;
+    long long result = leetCode.maxScore(nums1, nums2, k);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums1 = { -2,0,5 };
+    nums2 = { -3,4,-1,2 };
+    k = 2;
+    result = leetCode.maxScore(nums1, nums2, k);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+
+    nums1 = { -3,-2 };
+    nums2 = { 1,2 };
+    k = 2;
+    result = leetCode.maxScore(nums1, nums2, k);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
 
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3836();
     TestLeetCode3473();
     TestLeetCode3801();
     TestLeetCode3797();

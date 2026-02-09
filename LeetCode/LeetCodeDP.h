@@ -382,7 +382,7 @@ public:
     ///
     /// 1. 1 is a super ugly number for any given primes.
     /// 2. The given numbers in primes are in ascending order.
-    /// 3. 0 < k �� 100, 0 < n �� 106, 0 < primes[i] < 1000.
+    /// 3. 0 < k ?? 100, 0 < n ?? 106, 0 < primes[i] < 1000.
     /// 4. The nth super ugly number is guaranteed to fit in a 32-bit signed 
     ///    integer.
     /// </summary>
@@ -406,7 +406,7 @@ public:
     ///
     /// Note:
     ///
-    /// The number of stones is �� 2 and is < 1,100.
+    /// The number of stones is >= 2 and is < 1,100.
     /// Each stone's position will be a non-negative integer < 231.
     /// The first stone's position is always 0.
     ///
@@ -604,7 +604,7 @@ public:
     /// Third round:  You guess 9, I tell you that it's lower. You pay $9.
     /// Game over. 8 is the number I picked.
     /// You end up paying $5 + $7 + $9 = $21.
-    /// Given a particular n �� 1, find out how much money you need to have to 
+    /// Given a particular n >= 1, find out how much money you need to have to 
     /// guarantee a win.
     /// </summary>
     int getMoneyAmount(int n);
@@ -1052,9 +1052,9 @@ public:
     /// Given an array A (index starts at 1) consisting of N integers: A1, A2,
     ///	..., AN and an integer B. The integer B denotes that from any place 
     /// (suppose the index is i) in the array A, you can jump to any one of 
-    /// the place in the array A indexed i+1, i+2, ��, i+B if this place can 
+    /// the place in the array A indexed i+1, i+2,  i+B if this place can 
     /// be jumped to. Also, if you step on the index i, you have to pay Ai 
-    /// coins. If Ai is -1, it means you can��t jump to the place indexed i in 
+    /// coins. If Ai is -1, it means you can't jump to the place indexed i in 
     /// the array.
     ///
     /// Now, you start from the place indexed 1 in the array A, and your aim 
@@ -4163,7 +4163,7 @@ public:
     /// Find the maximum coins you can collect by bursting the balloons wisely. 
     /// Note: 
     /// (1) You may imagine nums[-1] = nums[n] = 1. They are not real therefore you can not burst them.
-    /// (2) 0 �� n �� 500, 0 �� nums[i] �� 100 
+    /// (2) 0 ?? n ?? 500, 0 ?? nums[i] ?? 100 
     /// Example: 
     /// Given [3, 1, 5, 8] 
     /// Return 167 
@@ -12391,7 +12391,7 @@ public:
     /// The popcount-depth of x is defined as the smallest integer d >= 0 such 
     /// that pd = 1.
     /// For example, if x = 7 (binary representation "111"). Then, the 
-    /// sequence is: 7 → 3 → 2 → 1, so the popcount-depth of 7 is 3.
+    /// sequence is: 7 ? 3 ? 2 ? 1, so the popcount-depth of 7 is 3.
     ///
     /// Your task is to determine the number of integers in the range [1, n] 
     /// whose popcount-depth is exactly equal to k.
@@ -12406,8 +12406,8 @@ public:
     /// equal to 1:
     ///
     /// x   Binary  Sequence
-    /// 2   "10"    2 → 1
-    /// 4   "100"   4 → 1
+    /// 2   "10"    2 ? 1
+    /// 4   "100"   4 ? 1
     /// Thus, the answer is 2.
     ///
     /// Example 2:
@@ -12422,9 +12422,9 @@ public:
     /// exactly equal to 2:
     /// 
     /// x   Binary  Sequence
-    /// 3   "11"    3 → 2 → 1
-    /// 5   "101"   5 → 2 → 1
-    /// 6   "110"   6 → 2 → 1
+    /// 3   "11"    3 ? 2 ? 1
+    /// 5   "101"   5 ? 2 ? 1
+    /// 6   "110"   6 ? 2 ? 1
     /// Thus, the answer is 3.
     /// 
     /// Constraints:
@@ -12522,7 +12522,7 @@ public:
     /// Hard
     ///
     /// You are given a m x n 2D integer array grid and an integer k. You start at 
-    /// the top-left cell (0, 0) and your goal is to reach the bottom‐right cell 
+    /// the top-left cell (0, 0) and your goal is to reach the bottom?right cell 
     /// (m - 1, n - 1).
     ///
     /// There are two types of moves available:
@@ -13115,5 +13115,58 @@ public:
     /// 5. The sum of lists[i].length will not exceed 2000.
     /// </summary>
     long long minMergeCost(vector<vector<int>>& lists);
+
+    /// <summary>
+    /// Leet Code 3836. Maximum Score Using Exactly K Pairs
+    /// 
+    /// Hard
+    /// 
+    /// You are given two integer arrays nums1 and nums2 of lengths n and m 
+    /// respectively, and an integer k.
+    ///
+    /// You must choose exactly k pairs of indices(i1, j1), (i2, j2), ..., 
+    /// (ik, jk) such that :
+    ///
+    /// 0 <= i1 < i2 < ... < ik < n
+    /// 0 <= j1 < j2 < ... < jk < m
+    /// For each chosen pair(i, j), you gain a score of nums1[i] * nums2[j].
+    /// The total score is the sum of the products of all selected pairs.
+    /// Return an integer representing the maximum achievable total score.
+    ///
+    /// Example 1:
+    /// Input: nums1 = [1, 3, 2], nums2 = [4, 5, 1], k = 2
+    /// Output : 22
+    /// Explanation :
+    /// One optimal choice of index pairs is :
+    /// (i1, j1) = (1, 0) which scores 3 * 4 = 12
+    /// (i2, j2) = (2, 1) which scores 2 * 5 = 10
+    /// This gives a total score of 12 + 10 = 22.
+    ///
+    /// Example 2:
+    /// Input: nums1 = [-2, 0, 5], nums2 = [-3, 4, -1, 2], k = 2
+    /// Output : 26
+    /// Explanation :
+    /// One optimal choice of index pairs is :
+    /// (i1, j1) = (0, 0) which scores - 2 * -3 = 6
+    /// (i2, j2) = (2, 1) which scores 5 * 4 = 20
+    /// The total score is 6 + 20 = 26.
+    ///
+    /// Example 3:
+    /// Input: nums1 = [-3, -2], nums2 = [1, 2], k = 2
+    /// Output : -7
+    /// Explanation :
+    /// The optimal choice of index pairs is :
+    /// (i1, j1) = (0, 0) which scores - 3 * 1 = -3
+    /// (i2, j2) = (1, 1) which scores - 2 * 2 = -4
+    /// The total score is - 3 + (-4) = -7.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == nums1.length <= 100
+    /// 2. 1 <= m == nums2.length <= 100
+    /// 3. - 10^6 <= nums1[i], nums2[i] <= 10^6
+    /// 4. 1 <= k <= min(n, m)
+    /// </summary>
+    long long maxScore(vector<int>& nums1, vector<int>& nums2, int k);
+  
  };
 #endif  // LeetCodeDP

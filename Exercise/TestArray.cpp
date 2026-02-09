@@ -12998,8 +12998,25 @@ void TestLeetCode3830(void)
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 }
+
+void TestLeetCode3833(void)
+{
+    Logger::WriteMessage("Test Leet Code 3833");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 5,4,3 };
+    int result = leetCode.dominantIndices(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,1,2 };
+    result = leetCode.dominantIndices(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3833();
     TestLeetCode3830();
     TestLeetCode3819();
     TestLeetCode3818();

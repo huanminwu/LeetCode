@@ -54,5 +54,6 @@ void TestLeetCode3431(void);
 void TestLeetCode3430(void);
 void TestLeetCode3676(void);
 void TestLeetCode3703(void);
+void TestLeetCode3834(void);
 void TestLeetCodeStack(void);
 #endif  // TestStack_H

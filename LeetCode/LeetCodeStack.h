@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #ifndef LeetCodeStack_H
 #define LeetCodeStack_H
 #include <stdint.h>
@@ -92,7 +92,7 @@ public:
     /// the given expression is valid and only consists of digits 0-9, ?, :, 
     /// T and F (T and F represent True and False respectively). 
     /// Note: 
-    /// 1.The length of the given string is ≤ 10000.
+    /// 1.The length of the given string is ? 10000.
     /// 2.Each number will contain only one digit.
     /// 3.The conditional expressions group right-to-left (as usual in 
     ///   most languages).
@@ -110,33 +110,33 @@ public:
     /// Output: "4"
     /// Explanation: The conditional expressions group right-to-left. Using 
     /// parenthesis, it is read/evaluated as:
-    /// "(F ? 1 : (T ? 4 : 5))"                   "(F ? 1 : (T ? 4 : 5))"
-    /// -> "(F ? 1 : 4)"                 or       -> "(T ? 4 : 5)"
-    /// -> "4"                                    -> "4"
+    /// "(F ? 1 : (T ? 4 : 5))"?????????????????? "(F ? 1 : (T ? 4 : 5))"
+    /// -> "(F ? 1 : 4)"???????????????? or?????? -> "(T ? 4 : 5)"
+    /// -> "4"??????????????????????????????????? -> "4"
     /// Example 3: 
     /// Input: "T?T?F:5:3"
     /// Output: "F"
     /// Explanation: The conditional expressions group right-to-left. Using 
     /// parenthesis, it is read/evaluated as:
-    /// "(T ? (T ? F : 5) : 3)"                   "(T ? (T ? F : 5) : 3)"
-    /// -> "(T ? F : 3)"                 or       -> "(T ? F : 5)"
-    /// -> "F"                                    -> "F"
+    /// "(T ? (T ? F : 5) : 3)"?????????????????? "(T ? (T ? F : 5) : 3)"
+    /// -> "(T ? F : 3)"???????????????? or?????? -> "(T ? F : 5)"
+    /// -> "F"??????????????????????????????????? -> "F"
     /// </summary>
     string parseTernaryII(string expression);
 
     /// <summary>
-    /// Leet code #439. Ternary Expression Parser       
+    /// Leet code #439. Ternary Expression Parser?????? 
     /// </summary>
     string parseToken(string expression, int& index);
 
     /// <summary>
-    /// Leet code #439. Ternary Expression Parser       
+    /// Leet code #439. Ternary Expression Parser?????? 
     /// 
     /// Given a string representing arbitrarily nested ternary expressions, calculate the 
     /// result of the expression. You can always assume that the given expression is valid 
     /// and only consists of digits 0-9, ?, :, T and F (T and F represent True and False respectively). 
     /// Note: 
-    /// 1.The length of the given string is ≤ 10000.
+    /// 1.The length of the given string is ? 10000.
     /// 2.Each number will contain only one digit.
     /// 3.The conditional expressions group right-to-left (as usual in most languages).
     /// 4.The condition will always be either T or F. That is, the condition will never be a digit.
@@ -150,16 +150,16 @@ public:
     /// Input: "F?1:T?4:5"
     /// Output: "4"
     /// Explanation: The conditional expressions group right-to-left. Using parenthesis, it is read/evaluated as:
-    /// "(F ? 1 : (T ? 4 : 5))"                   "(F ? 1 : (T ? 4 : 5))"
-    /// -> "(F ? 1 : 4)"                 or       -> "(T ? 4 : 5)"
-    /// -> "4"                                    -> "4"
+    /// "(F ? 1 : (T ? 4 : 5))"?????????????????? "(F ? 1 : (T ? 4 : 5))"
+    /// -> "(F ? 1 : 4)"???????????????? or?????? -> "(T ? 4 : 5)"
+    /// -> "4"??????????????????????????????????? -> "4"
     /// Example 3: 
     /// Input: "T?T?F:5:3"
     /// Output: "F"
     /// Explanation: The conditional expressions group right-to-left. Using parenthesis, it is read/evaluated as:
-    /// "(T ? (T ? F : 5) : 3)"                   "(T ? (T ? F : 5) : 3)"
-    /// -> "(T ? F : 3)"                 or       -> "(T ? F : 5)"
-    /// -> "F"                                    -> "F"
+    /// "(T ? (T ? F : 5) : 3)"?????????????????? "(T ? (T ? F : 5) : 3)"
+    /// -> "(T ? F : 3)"???????????????? or?????? -> "(T ? F : 5)"
+    /// -> "F"??????????????????????????????????? -> "F"
     /// </summary>
     string parseTernary(string expression);
 
@@ -460,7 +460,7 @@ public:
     /// 
     /// Given a non-negative integer num represented as a string, remove k digits from the number so that the new number is the smallest possible. 
     /// Note:
-    /// The length of num is less than 10002 and will be ≥ k.
+    /// The length of num is less than 10002 and will be ? k.
     /// The given num does not contain any leading zero.
     /// Example 1: 
     /// Input: num = "1432219", k = 3
@@ -618,12 +618,12 @@ public:
     ///  1  3  -1  -3  5 [3  6  7]      7
     /// Therefore, return the max sliding window as [3,3,5,5,6,7].
     /// Note: 
-    /// You may assume k is always valid, ie: 1 ≤ k ≤ input array's size for non-empty array.
+    /// You may assume k is always valid, ie: 1 ? k ? input array's size for non-empty array.
     /// Follow up:
     /// Could you solve it in linear time?
     /// Hint:
     /// 1.How about using a data structure such as deque (double-ended queue)?
-    /// 2.The queue size need not be the same as the window’s size.
+    /// 2.The queue size need not be the same as the window?s size.
     /// 3.Remove redundant elements and the queue should store only elements that need to be considered.
     /// </summary> 
     vector<int> maxSlidingWindow(vector<int>& nums, int k);
@@ -672,7 +672,7 @@ public:
     /// <summary>
     /// Leet code #496. Next Greater Element I
     ///
-    /// You are given two arrays (without duplicates) nums1 and nums2 where nums1’s elements 
+    /// You are given two arrays (without duplicates) nums1 and nums2 where nums1?s elements 
     /// are subset of nums2. Find all the next greater numbers for nums1's elements in the 
     /// corresponding places of nums2. 
     /// 
@@ -2397,6 +2397,57 @@ public:
     /// 3. 1 <= k <= s.length / 2
     /// </summary>
     string removeSubstring(string s, int k);
+
+    /// <summary>
+    /// Leet Code 3834. Merge Adjacent Equal Elements
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    /// 
+    /// You must repeatedly apply the following merge operation until no 
+    /// more changes can be made :
+    ///
+    /// If any two adjacent elements are equal, choose the leftmost such 
+    /// adjacent pair in the current array and replace them with a single 
+    /// element equal to their sum.
+    /// After each merge operation, the array size decreases by 1. Repeat 
+    /// the process on the updated array until no more changes can be made.
+    ///
+    /// Return the final array after all possible merge operations.
+    /// 
+    /// Example 1:
+    /// Input: nums = [3, 1, 1, 2]
+    /// Output : [3, 4]
+    /// Explanation :
+    /// The middle two elements are equal and merged into 1 + 1 = 2, 
+    /// resulting in[3, 2, 2].
+    /// The last two elements are equal and merged into 2 + 2 = 4, 
+    /// resulting in[3, 4].
+    /// No adjacent equal elements remain.Thus, the answer is[3, 4].
+    ///
+    /// Example 2 :
+    /// Input : nums = [2, 2, 4]
+    /// Output : [8]
+    /// Explanation :
+    /// The first two elements are equal and merged into 2 + 2 = 4, 
+    /// resulting in[4, 4].
+    /// The first two elements are equal and merged into 4 + 4 = 8, 
+    /// resulting in[8].
+    ///
+    /// Example 3 :
+    /// Input : nums = [3, 7, 5]
+    /// Output : [3, 7, 5]
+    /// Explanation :
+    /// There are no adjacent equal elements in the array, so no operations 
+    /// are performed.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^5
+    /// </summary>
+    vector<long long> mergeAdjacent(vector<int>& nums);
+
 #pragma endregion
 };
 #endif  // LeetCodeStack
